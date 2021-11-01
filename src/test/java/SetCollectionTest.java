@@ -3,6 +3,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,4 +29,10 @@ class SetCollectionTest {
         assertThat(numbers.size()).isEqualTo(3);
     }
 
+    @DisplayName("Set의 contains() 메소드를 호출하면 값이 존재하는 지를 확인할 수 있다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void containsTest(int number) {
+        assertThat(numbers.contains(number)).isTrue();
+    }
 }
