@@ -37,4 +37,11 @@ public class SetTest {
         assertThat(numbers.contains(expected)).isTrue();
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"1:true","2:true","3:true","4:false","5:false"}, delimiter = ':')
+    @DisplayName("numbers 의 입력값 확인")
+    public void numbers_입력값_확인(int input, boolean expected) throws Exception{
+        assertThat(numbers.contains(input)).isEqualTo(expected);
+    }
+
 }
