@@ -4,12 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SetTest {
@@ -44,5 +46,13 @@ public class SetTest {
     @ValueSource(ints = {1, 2, 3})
     void set_contains_number(int number) {
         assertTrue(isContainsNumber(number));
+    }
+
+    @ParameterizedTest(name = "Set 숫자 범위 밖 포함 테스트 {0} : {1}")
+    @CsvSource(value = {"1,true", "2,true", "3,true", "4,false", "5,false"}, delimiter = ',')
+    void set_contains_number_include_out_of_range(String numberString, String expectFlagString) {
+        int number = Integer.parseInt(numberString);
+        boolean expect = Boolean.parseBoolean(expectFlagString);
+        assertEquals(isContainsNumber(number), expect);
     }
 }
