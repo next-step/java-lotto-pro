@@ -7,11 +7,21 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 public class StringTest {
 
-    @DisplayName("문자열 분리 검증")
+    @DisplayName("split 검증")
     @Test
     void split() {
         String[] result = "1,2".split(",");
         assertThat(result).contains("1");
         assertThat(result).containsExactly("1","2");
     }
+
+    @DisplayName("substring 검증")
+    @Test
+    void substring() {
+        String input = "(1,2)";
+        String result = input.substring(1,4);
+        assertThat(result).contains("1,2");
+    }
+
+
 }
