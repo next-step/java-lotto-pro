@@ -3,6 +3,7 @@ package study;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringTest {
@@ -32,5 +33,22 @@ public class StringTest {
         String when = given.substring(1, given.length()-1);
         // then
         assertThat(when).isEqualTo("1,2");
+    }
+
+    @Test
+    void charAt_in_range() {
+        String given = "abc";
+        char when = given.charAt(1);
+        // then
+        assertThat(when).isEqualTo('b');
+    }
+
+    @Test
+    void charAt_out_of_range() {
+        String given = "abc";
+        assertThatThrownBy(()-> {
+            char when = given.charAt(given.length());
+        }).isInstanceOf(StringIndexOutOfBoundsException.class)
+        .hasMessageContaining("out of range: " + given.length());
     }
 }
