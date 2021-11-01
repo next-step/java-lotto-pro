@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-@DisplayName("문장열")
+@DisplayName("문자열")
 class StringTest {
 
 	private static Stream<Arguments> split() {
@@ -38,9 +38,9 @@ class StringTest {
 	@Test
 	@DisplayName("문자 길이를 벗어난 문자 위치 검색")
 	void charAt_thrownIndexOutOfBoundsException() {
-		assertThatThrownBy(() -> "abc".charAt(Integer.MAX_VALUE))
-			.isInstanceOf(StringIndexOutOfBoundsException.class)
-			.hasMessageStartingWith("String index out of range");
+		assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+			.isThrownBy(() -> "abc".charAt(Integer.MAX_VALUE))
+			.withMessageStartingWith("String index out of range");
 	}
 
 }
