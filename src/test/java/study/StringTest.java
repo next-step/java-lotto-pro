@@ -43,7 +43,7 @@ public class StringTest {
 
 	@Test
 	@DisplayName("인덱스 범위를 벗어난 부분 문자열을 구할 때, StringIndexOutOfBoundsException 가 발생해야 한다")
-	public void substringTest() {
+	public void substringExceptionTest() {
 		// given
 		String input = "(1,2)";
 		int beginIdx = 1;
