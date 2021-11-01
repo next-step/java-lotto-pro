@@ -15,4 +15,12 @@ class StringTest {
     void splitTest2() {
         assertThat("1".split(",")).containsExactly("1");
     }
+
+    @DisplayName("\"(1,2)\" 값이 주어졌을 때, substring() 활용하면 ()을 제거하고 \"1,2\"가 반환된다")
+    @Test
+    void substringTest() {
+        int indexOfLeftParenthesis = 1;
+        int indexOfRightParenthesis = 4;
+        assertThat("(1,2)".substring(indexOfLeftParenthesis, indexOfRightParenthesis)).isEqualTo("1,2");
+    }
 }
