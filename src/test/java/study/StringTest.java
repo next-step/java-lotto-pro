@@ -22,4 +22,11 @@ public class StringTest {
         assertThat(split).contains("1");
     }
 
+    @Test
+    @DisplayName("substring 메소드를 이용한 특정 문자 제거 후 반환")
+    public void 특정_문자열_제거() throws Exception{
+        String replaceString = "(1,2)".substring(1, 4);
+        assertThat(replaceString).isEqualTo("1,2");
+    }
+
 }
