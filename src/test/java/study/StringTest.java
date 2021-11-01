@@ -32,4 +32,14 @@ public class StringTest {
 		assertThat("abc".charAt(1)).isEqualTo('b');
 		assertThat("abc".charAt(2)).isEqualTo('c');
 	}
+
+	@Test
+	void stringIndexOutOfBoundsException() {
+		final String strTest = "abc";
+		final int position = 4;
+		assertThatExceptionOfType(IndexOutOfBoundsException.class)
+			.isThrownBy(() -> {
+				strTest.charAt(position);
+			}).withMessageMatching("String index out of range: \\d+");
+	}
 }
