@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
@@ -42,5 +43,12 @@ public class SetTest {
 	@DisplayName("ParameterizedTest를 활용해서 중복 코드를 줄일 수 있다.")
 	void testContainsUsingParameterizedTest(int input) {
 		assertThat(numbers.contains(input)).isTrue();
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+	@DisplayName("ParameterizedTest와 CsvSource를 활용해서 다양한 케이스를 테스트 할 수 있다.")
+	void testContainsUsingCsvSource(int input, boolean expected) {
+		assertThat(numbers.contains(input)).isEqualTo(expected);
 	}
 }
