@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class StringTest {
 
-	@DisplayName("split 학습테스트")
+	@DisplayName("split: 구분자로 문자열 분리 메서드 테스트")
 	@Test
 	void split() {
 		String str = "1,2";
@@ -23,7 +23,7 @@ public class StringTest {
 		assertThat(splitedStr).containsExactly("1");
 	}
 
-	@DisplayName("substring 학습테스트")
+	@DisplayName("substring: index범위에 따른 부분 문자열 반환 메서드 학습테스트")
 	@Test
 	void substring() {
 		String str = "(1,2)";
@@ -31,7 +31,7 @@ public class StringTest {
 		assertThat(subStr).isEqualTo("1,2");
 	}
 
-	@DisplayName("charAt 학습테스트")
+	@DisplayName("charAt: 문자열의 특정 index의 char 반환 메서드 학습테스트")
 	@Test
 	void charAt() {
 		String str = "abc";
