@@ -3,6 +3,9 @@ package study;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -28,5 +31,28 @@ public class StringTest {
         String replaceString = "(1,2)".substring(1, 4);
         assertThat(replaceString).isEqualTo("1,2");
     }
+
+
+    @DisplayName("charAt 메소드를 이용한 특정 위치 문자 가져오기")
+    @ParameterizedTest
+    @CsvSource(value = {"0,a","1,b","2,c"})
+    public void 특정_문자_가져오기(int index, char expected) throws Exception{
+        String str = "abc";
+        char charAt = str.charAt(index);
+
+        assertThat(charAt).isEqualTo(expected);
+    }
+
+
+    @DisplayName("문자열 길이 초과시 예외 검증")
+    @ParameterizedTest
+    @ValueSource(ints = {3})
+    public void 문자열_길이_초과_검증(int index) throws Exception{
+        String str = "abc";
+        assertThatThrownBy(() -> str.charAt(index))
+                .isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: " + str.length());
+    }
+
 
 }
