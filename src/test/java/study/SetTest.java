@@ -28,10 +28,13 @@ public class SetTest {
 	@Test
 	@DisplayName("크기를 반환해야 한다")
 	public void sizeTest() {
+		// given
 		int expectedSize = 3;
 
+		// when
 		int resultSize = numbers.size();
 
+		// then
 		assertThat(resultSize).isEqualTo(expectedSize);
 	}
 
@@ -39,15 +42,17 @@ public class SetTest {
 	@DisplayName("저장된 요소이면 true를 반환해야 한다")
 	@ValueSource(strings = {"1", "2", "3"})
 	public void containsTest(int element) {
+		// given, when, then
 		assertThat(numbers.contains(element))
 			.as("%s는 Set에 저장되어 있어야 합니다", element)
 			.isTrue();
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
 	@DisplayName("저장된 요소면 true를 아니면 false를 반환해야 한다")
+	@CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
 	public void containsTest2(int element, boolean expected) {
+		// given, when, then
 		assertThat(numbers.contains(element))
 			.isEqualTo(expected);
 	}
