@@ -27,4 +27,14 @@ public class StringTest {
         // then
         assertThat(values).contains("1");
     }
+
+    @Test
+    @DisplayName("substring 메서드를 호출한다.")
+    void substring() {
+        // when
+        String result = "(1,2)".substring(1, 4);
+
+        // then
+        assertThat(result).isEqualTo("1,2");
+    }
 }
