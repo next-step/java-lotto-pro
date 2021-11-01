@@ -32,7 +32,14 @@ class SetCollectionTest {
     @DisplayName("Set의 contains() 메소드를 호출하면 값이 존재하는 지를 확인할 수 있다.")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
-    void containsTest(int number) {
+    void containsTest1(int number) {
         assertThat(numbers.contains(number)).isTrue();
+    }
+
+    @DisplayName("Set의 contains() 메소드를 호출하면 값이 존재하는 지를 확인할 수 있다. - 반환값이 거짓을 포함하는 케이스 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+    void containsTest2(int number, boolean expected) {
+        assertThat(numbers.contains(number)).isEqualTo(expected);
     }
 }
