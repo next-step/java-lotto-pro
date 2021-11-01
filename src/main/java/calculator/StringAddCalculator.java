@@ -1,14 +1,18 @@
 package calculator;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class StringAddCalculator {
 
     public static final String DEFAULT_SEPARATOR_REGEX = "[,:]";
     public static final Pattern CUSTOM_SEPARATOR = Pattern.compile("//(.)\n(.*)");
+    public static final String IS_NOT_DUAL_NUMBER_ERROR_MESSAGE = "입력 값이 음수이거나 숫자가 아닙니다.";
+    public static final String IS_NUMBER_REGEX = "[0-9]+";
+    public static final Pattern DUAL_NUMBER_PATTERN = Pattern.compile(IS_NUMBER_REGEX);
 
     private StringAddCalculator() {
     }
@@ -20,6 +24,8 @@ public class StringAddCalculator {
 
         String[] splitInputs = split(input);
         List<Integer> numbers = parsingNumber(splitInputs);
+
+        validateNumbers(splitInputs);
 
         return sum(numbers);
     }
@@ -48,13 +54,9 @@ public class StringAddCalculator {
     }
 
     private static List<Integer> parsingNumber(String[] splitInputs) {
-        List<Integer> numbers = new ArrayList<>();
-
-        for (String input : splitInputs) {
-            numbers.add(Integer.parseInt(input));
-        }
-
-        return numbers;
+        return Arrays.stream(splitInputs)
+                .map(input -> Integer.parseInt(input))
+                .collect(Collectors.toList());
     }
 
     private static int sum(List<Integer> numbers) {
@@ -65,6 +67,16 @@ public class StringAddCalculator {
         }
 
         return result;
+    }
+
+    private static void validateNumbers(String[] splitInputs) {
+        Arrays.stream(splitInputs).forEach(
+                number -> {
+                    if (!DUAL_NUMBER_PATTERN.matcher(number).matches()) {
+                        throw new RuntimeException(IS_NOT_DUAL_NUMBER_ERROR_MESSAGE);
+                    }
+                }
+        );
     }
 
 }
