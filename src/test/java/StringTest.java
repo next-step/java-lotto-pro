@@ -15,4 +15,17 @@ public class StringTest {
 
 		assertThat("1".split(delimiter)).containsExactly("1");
 	}
+
+	@Test
+	@DisplayName("substring 메소드로 부분 문자열을 가져올 수 있다.")
+	void testSubString() {
+		String example = "(1,2)";
+
+		int beginIndex = 1;
+		int endIndex = example.length() - 1;
+
+		String parenthesisRemoved = example.substring(beginIndex, endIndex);
+
+		assertThat(parenthesisRemoved).isEqualTo("1,2");
+	}
 }
