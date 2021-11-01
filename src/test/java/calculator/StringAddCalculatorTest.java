@@ -2,6 +2,7 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -25,6 +26,15 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(input);
 
         assertThat(result).isEqualTo(Integer.parseInt(input));
+    }
+
+    @DisplayName("숫자 두개를 컴마(,)을 구분자로 입력할 경우 두 숫자의 합을 반환")
+    @ParameterizedTest
+    @CsvSource(value = {"7,8,5$20", "5,5$10", "10,20$30"}, delimiter = '$')
+    void splitAndSum_쉼표구분자(String input, int output) {
+        int result = StringAddCalculator.splitAndSum(input);
+
+        assertThat(result).isEqualTo(output);
     }
 
 }
