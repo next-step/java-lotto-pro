@@ -1,6 +1,7 @@
 package calculator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -44,6 +45,13 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(input);
 
         assertThat(result).isEqualTo(output);
+    }
+
+    @DisplayName("\"//\"와 \"\\n\" 문자 사이에 커스텀 구분자를 지정하여 사용")
+    @Test
+    void splitAndSum_custom_구분자() {
+        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
     }
 
 }
