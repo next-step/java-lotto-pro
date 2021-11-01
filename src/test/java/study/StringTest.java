@@ -25,4 +25,12 @@ public class StringTest {
         assertThat(when).doesNotContain("2");
         assertEquals(when.length, 1);
     }
+
+    @Test
+    void substring() {
+        String given = "(1,2)";
+        String when = given.substring(1, given.length()-1);
+        // then
+        assertThat(when).isEqualTo("1,2");
+    }
 }
