@@ -27,25 +27,37 @@ class SetTest {
 	}
 
 	@Test
-	@DisplayName("크기")
+	@DisplayName("크기 확인")
 	void size() {
-		assertThat(numbers.size())
+		//when
+		int size = numbers.size();
+
+		//then
+		assertThat(size)
 			.isEqualTo(3);
 	}
 
-	@ParameterizedTest
-	@DisplayName("항상 포함되는 대상")
+	@ParameterizedTest(name = "{displayName}[{index}] {0} is contained in the set")
+	@DisplayName("항상 포함되는 대상 확인")
 	@ValueSource(ints = {1, 2, 3})
 	void contains_alwaysTrue(int containsTarget) {
-		assertThat(numbers.contains(containsTarget))
+		//when
+		boolean contains = numbers.contains(containsTarget);
+
+		//then
+		assertThat(contains)
 			.isTrue();
 	}
 
-	@ParameterizedTest
+	@ParameterizedTest(name = "{displayName}[{index}] it is {1} that {0} is contained in the set")
 	@DisplayName("포함 여부")
 	@CsvSource({"1,true", "2,true", "3,true", "4,false", "5,false"})
 	void contains(int containsTarget, boolean expected) {
-		assertThat(numbers.contains(containsTarget))
+		//when
+		boolean contains = numbers.contains(containsTarget);
+
+		//then
+		assertThat(contains)
 			.isEqualTo(expected);
 	}
 
