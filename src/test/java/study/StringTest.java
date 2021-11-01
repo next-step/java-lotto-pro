@@ -21,4 +21,13 @@ public class StringTest {
         assertThatThrownBy(() -> "(1,2)".substring(5, 6)).isInstanceOf(StringIndexOutOfBoundsException.class)
                 .hasMessageContaining("begin 5, end 6, length 5");
     }
+
+    @DisplayName("문자열에서 주어진 index의 캐릭터를 반환한다")
+    @Test
+    void testCharAt() {
+        assertThat("abc".charAt(0)).isEqualTo('a');
+        assertThat("abc".charAt(2)).isEqualTo('c');
+        assertThatThrownBy(() ->"abc".charAt(4)).isInstanceOf(StringIndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: 4");
+    }
 }
