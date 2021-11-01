@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetCollectionTest {
@@ -45,7 +46,15 @@ public class SetCollectionTest {
 	@DisplayName("contains 중복 제거 후 확인")
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3})
-	void containsParameterized(int number){
+	void containsParameterized(int number) {
 		assertThat(numbers.contains(number)).isTrue();
 	}
+
+	@DisplayName("CsvSorce를 이용한 결과 값이 다른 경우에 대한 테스트")
+	@ParameterizedTest
+	@CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+	void containsCsvSource(int number, boolean expected) {
+		assertThat(numbers.contains(number)).isEqualTo(expected);
+	}
+
 }
