@@ -27,4 +27,14 @@ public class StringTest {
         assertThat(splitInputArr).containsExactly(input);
 
     }
+
+    @DisplayName("String substring 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"(1,2)"}, delimiter = ':')
+    public void substringTest(String input) {
+
+        String substringInput = input.substring(1, input.length() - 1);
+        assertThat(substringInput).isEqualTo("1,2");
+
+    }
 }
