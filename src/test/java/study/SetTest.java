@@ -3,6 +3,8 @@ package study;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,5 +33,16 @@ public class SetTest {
 
         // then
         assertThat(size).isEqualTo(3);
+    }
+
+    @ParameterizedTest(name = "{displayName} - {arguments}")
+    @ValueSource(ints = {1, 2, 3})
+    @DisplayName("contains 메서드를 호출한다.")
+    void contains1(int input) {
+        // when
+        boolean result = numbers.contains(input);
+
+        // then
+        assertThat(result).isTrue();
     }
 }
