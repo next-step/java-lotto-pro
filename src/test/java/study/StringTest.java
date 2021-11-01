@@ -17,4 +17,10 @@ public class StringTest {
 		assertThat(result).containsExactly("1");
 	}
 
+	@Test
+	void subString(){
+		String data = "(1,2)";
+		String result = data.substring(data.indexOf("(") + 1, data.indexOf(")"));
+		assertThat(result).isEqualTo("1,2");
+	}
 }
