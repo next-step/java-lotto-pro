@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringTest {
 
@@ -36,5 +37,15 @@ public class StringTest {
         String substringInput = input.substring(1, input.length() - 1);
         assertThat(substringInput).isEqualTo("1,2");
 
+    }
+
+    @DisplayName("String charAt 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"abc"}, delimiter = ':')
+    public void charAtTest(String input) {
+
+        assertThat(input.charAt(0)).isEqualTo('a');
+        assertThat(input.charAt(1)).isEqualTo('b');
+        assertThatThrownBy(() -> input.charAt(5)).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining("String index out of range: 5");
     }
 }
