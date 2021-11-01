@@ -23,5 +23,14 @@ public class StringTest {
         assertThat(result).contains("1,2");
     }
 
+    @DisplayName("StringIndexOutOfBoundsException 검증")
+    @Test
+    void chatAt() {
+        String input = "abc";
+        assertThatThrownBy(() ->{
+            input.charAt(4);
+        }).isInstanceOf(StringIndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: 4");
+    }
 
 }
