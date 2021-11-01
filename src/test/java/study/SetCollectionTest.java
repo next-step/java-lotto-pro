@@ -46,7 +46,7 @@ public class SetCollectionTest {
 	@DisplayName("contains 중복 제거 후 확인")
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3})
-	void containsParameterized(int number) {
+	void containsValueSource(int number) {
 		assertThat(numbers.contains(number)).isTrue();
 	}
 
