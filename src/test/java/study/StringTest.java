@@ -37,4 +37,23 @@ public class StringTest {
         // then
         assertThat(result).isEqualTo("1,2");
     }
+
+    @Test
+    @DisplayName("charAt 메서드를 호출한다.")
+    void charAt() {
+        // when
+        char result = "abc".charAt(1);
+
+        // then
+        assertThat(result).isEqualTo('b');
+    }
+
+    @Test
+    @DisplayName("charAt 메서드를 범위를 벗어난 인덱스로 호출하면 예외가 발생한다.")
+    void charAt_exception() {
+        // when & then
+        assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+                .isThrownBy(() -> "abc".charAt(3))
+                .withMessageMatching("String index out of range: \\d+");
+    }
 }
