@@ -5,7 +5,7 @@ import java.util.List;
 
 public class StringAddCalculator {
 
-    public static final String DEFAULT_SEPARATOR_REGEX = ",";
+    public static final String DEFAULT_SEPARATOR_REGEX = "[,:]";
 
     private StringAddCalculator() {
     }
