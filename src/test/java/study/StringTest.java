@@ -54,5 +54,22 @@ public class StringTest {
                 .hasMessageContaining("String index out of range: " + str.length());
     }
 
+    @Test
+    @DisplayName("AssertJ 학습용")
+    public void 배열의_첫번째값_확인() throws Exception{
+        String[] split = "1,2".split(",");
+        assertThat(split).startsWith("1");
+    }
+
+    @Test
+    @DisplayName("AssertJ 학습용")
+    public void 체이닝() throws Exception{
+        String[] split = "A,B,C,D,E,F".split(",");
+        assertThat(split)
+                .isNotEmpty() // 비어있지 않고
+                .contains("E")
+                .doesNotContain("G") // G 를 포함하지 않고
+                .contains("B","D"); // B 와 D가 존재하는지
+    }
 
 }
