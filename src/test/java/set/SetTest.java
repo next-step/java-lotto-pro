@@ -36,4 +36,11 @@ public class SetTest {
     public void containsTest(int input) {
         assertThat(numbers.contains(input)).isTrue();
     }
+
+    @DisplayName("Set contains 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1:true","2:true","3:true", "4:false", "5:false"}, delimiter = ':')
+    public void containsTrueOrFalseTest(int input, boolean flag) {
+        assertThat(numbers.contains(input)).isEqualTo(flag);
+    }
 }
