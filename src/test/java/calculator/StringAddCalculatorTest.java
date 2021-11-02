@@ -41,4 +41,14 @@ public class StringAddCalculatorTest {
         // then
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("숫자를 컴마나 콜론으로 구분한 문자열로 더하면 숫자들의 합을 반환한다.")
+    public void splitAndSum4() {
+        // when
+        int result = StringAddCalculator.splitAndSum("1,2:3");
+
+        // then
+        assertThat(result).isEqualTo(6);
+    }
 }

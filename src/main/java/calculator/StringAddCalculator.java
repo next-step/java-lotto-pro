@@ -9,7 +9,7 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] numbers = input.split(",");
+        String[] numbers = input.split("[,:]");
         return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .sum();
