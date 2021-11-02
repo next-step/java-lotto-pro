@@ -1,5 +1,6 @@
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class StringTest {
@@ -21,5 +22,15 @@ public class StringTest {
 	void removeBracketTest(){
 		String string = "(1,2)".substring(1,4);
 		assertThat(string).isEqualTo("1,2");
+	}
+
+	@Test
+	@DisplayName("배열_인덱스_익셉션_테스트")
+	void stringIndexOutOfBoundsExceptionTest(){
+		assertThatThrownBy(() -> "abc".charAt(3))
+			.isInstanceOf(StringIndexOutOfBoundsException.class).hasMessageContaining("range: 3");
+
+		assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+			.isThrownBy(() -> "abc".charAt(3)).withMessageContaining("range: 3");
 	}
 }
