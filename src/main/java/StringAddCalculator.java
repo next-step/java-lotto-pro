@@ -15,7 +15,14 @@ public class StringAddCalculator {
         }
         return Arrays.stream(getToken(value))
                 .mapToInt(Integer::parseInt)
+                .peek(StringAddCalculator::checkNegative)
                 .reduce(ZERO, Integer::sum);
+    }
+
+    private static void checkNegative(int value) {
+        if (value < ZERO) {
+            throw new RuntimeException("음수는 사용할 수 없습니다.");
+        }
     }
 
     private static String[] getToken(String value) {
