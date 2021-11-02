@@ -67,7 +67,7 @@ public class StringAddCalculator {
 	}
 
 	private static Integer parseNumber(String numberString) {
-		return Integer.parseInt(numberString);
+		return Integer.parseUnsignedInt(numberString);
 	}
 
 	private static boolean validateInput(String stringFormula) {
