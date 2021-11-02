@@ -21,7 +21,7 @@ final class StringDelimiterFinder {
 	}
 
 	public boolean hasDelimiter() {
-		return foundResult();
+		return isFound();
 	}
 
 	public String delimiter() {
@@ -46,7 +46,7 @@ final class StringDelimiterFinder {
 			'}';
 	}
 
-	private boolean foundResult() {
+	private boolean isFound() {
 		if (cachedFoundResult == null) {
 			cachedFoundResult = find();
 		}
