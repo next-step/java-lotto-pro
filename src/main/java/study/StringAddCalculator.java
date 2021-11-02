@@ -71,9 +71,6 @@ public class StringAddCalculator {
 	}
 
 	private static boolean validateInput(String stringFormula) {
-		if (stringFormula == null || "".equals(stringFormula)) {
-			return false;
-		}
-		return true;
+		return stringFormula != null && !"".equals(stringFormula);
 	}
 }
