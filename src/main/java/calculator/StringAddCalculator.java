@@ -4,10 +4,10 @@ public class StringAddCalculator {
 	private static final String DEFAULT_SEPARATOR = ",|:";
 
 	public static int splitAndSum(String text) {
-		if (text == null || text.trim().isEmpty()) {
+		if (isEmpty(text)) {
 			return 0;
 		}
-		checkNumber(text);
+
 		return Integer.parseInt(text);
 	}
 
@@ -25,6 +25,13 @@ public class StringAddCalculator {
 		if (number < 0) {
 			throw new RuntimeException("음수입니다.");
 		}
+	}
+
+	public static boolean isEmpty(String text) {
+		if (text == null || text.trim().isEmpty()) {
+			return true;
+		}
+		return false;
 	}
 
 }
