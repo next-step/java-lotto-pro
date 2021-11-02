@@ -12,12 +12,12 @@ public class StringAddCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        return Arrays.stream(splitNumbers(input))
+        return Arrays.stream(splitTokens(input))
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
 
-    private static String[] splitNumbers(String input) {
+    private static String[] splitTokens(String input) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
