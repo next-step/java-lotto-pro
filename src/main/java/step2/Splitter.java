@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Splitter {
-	private static final String NUMBER_REGEX = "^[0-9]+$";
 	private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
 	private static final String DELIMITER_REGEX = ",|:";
 
@@ -13,7 +12,7 @@ public class Splitter {
 			return new String[] {"0"};
 		}
 
-		if (input.matches(NUMBER_REGEX)) {
+		if (input.matches(StringAddCalculator.NUMBER_REGEX)) {
 			return new String[] {input};
 		}
 

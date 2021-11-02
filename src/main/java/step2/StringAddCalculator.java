@@ -3,7 +3,7 @@ package step2;
 import java.util.Arrays;
 
 public class StringAddCalculator {
-	private static final String NUMBER_REGEX = "^[0-9]+$";
+	public static final String NUMBER_REGEX = "^[0-9]+$";
 
 	public static int splitAndSum(String input) {
 		String[] numbers = Splitter.split(input);
