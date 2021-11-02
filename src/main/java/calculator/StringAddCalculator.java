@@ -7,7 +7,8 @@ import static calculator.ErrorMessage.*;
 
 public class StringAddCalculator {
 
-    public static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final String NUMBER_REGEX = "[+-]?\\d*(\\.\\d+)?";
 
     public static int splitAndSum(String input) {
         if (input == null || input.isEmpty()) {
@@ -34,7 +35,7 @@ public class StringAddCalculator {
     }
 
     private static void validateToken(String token) {
-        if (!token.chars().allMatch(Character::isDigit)) {
+        if (!token.matches(NUMBER_REGEX)) {
             throw new RuntimeException(TOKEN_ERROR.getMessage());
         }
     }
