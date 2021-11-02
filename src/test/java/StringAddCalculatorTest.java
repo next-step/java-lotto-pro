@@ -16,4 +16,9 @@ public class StringAddCalculatorTest {
     void 숫자_하나() {
         assertThat(StringAddCalculator.splitAndSum("1")).isEqualTo(1);
     }
+
+    @Test
+    void 쉼표_구분자() {
+        assertThat(StringAddCalculator.splitAndSum("1,2")).isEqualTo(3);
+    }
 }
