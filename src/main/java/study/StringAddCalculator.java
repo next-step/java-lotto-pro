@@ -22,7 +22,7 @@ public class StringAddCalculator {
 
 	private static List<Integer> splitStringFormula(String stringFormula) {
 		List<Integer> result = new ArrayList<>();
-		for(String numberString : stringFormula.split(",")) {
+		for(String numberString : stringFormula.split(",|:")) {
 			result.add(parseNumber(numberString));
 		}
 		return result;
