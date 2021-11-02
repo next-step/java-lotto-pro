@@ -34,7 +34,12 @@ public class StringAddCalculator {
 		int[] numbers = new int[values.length];
 
 		for (int i = 0; i < values.length; i++) {
-			numbers[i] = Integer.parseInt(values[i]);
+			int number = Integer.parseInt(values[i]);
+
+			if (number < 0)
+				throw new RuntimeException();
+
+			numbers[i] = number;
 		}
 
 		return numbers;
