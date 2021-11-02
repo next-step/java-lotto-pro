@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
@@ -9,5 +10,10 @@ public class StringAddCalculatorTest {
     @NullAndEmptySource
     void null_또는_빈문자(String value) {
         assertThat(StringAddCalculator.splitAndSum(value)).isEqualTo(0);
+    }
+
+    @Test
+    void 숫자_하나() {
+        assertThat(StringAddCalculator.splitAndSum("1")).isEqualTo(1);
     }
 }
