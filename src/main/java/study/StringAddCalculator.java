@@ -20,6 +20,14 @@ public class StringAddCalculator {
         throw new UnsupportedOperationException();
     }
 
+    public static int splitAndSum(String input) {
+        List<String> tokenList = splitString(input);
+
+        validateStringList(tokenList);
+
+        return sumStringList(tokenList);
+    }
+
     protected static List<String> splitString(String input) {
         if (isNullOrEmpty(input)) {
             return Collections.emptyList();
