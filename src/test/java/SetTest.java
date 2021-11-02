@@ -31,7 +31,6 @@ public class SetTest {
 	@DisplayName("contains: Set에 element가 포함되어있는지 여부 반환 메서드 학습테스트. ParameterizedTest로 복수개 테스트")
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3})
-		// six numbers
 	void contains(int element) {
 		assertThat(numbers.contains(element)).isTrue();
 	}
