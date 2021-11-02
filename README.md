@@ -7,3 +7,13 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 문자열 덧셈 계산기
+### 기능 구현 목록
+- null/blank check
+- 숫자 하나로 이루어진 문자열(e.g. "1") check  
+- 문자열 분리 (,:)
+- 커스텀 구분자에 의한 문자열 분리
+- 분리된 문자열 sum
+- 예외 처리
+- 테스트 케이스
