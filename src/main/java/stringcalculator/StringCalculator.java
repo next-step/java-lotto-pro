@@ -33,13 +33,14 @@ public class StringCalculator {
         if (inputString == null || inputString.isEmpty()) {
             return 0;
         }
-
+        int result = 0;
         String[] separatedStrings = separator(inputString);
         for (String separatedString : separatedStrings) {
             int number = Integer.parseInt(separatedString);
             validateNumber(number);
+            result += number;
         }
-        return -1;
+        return result;
     }
 
     private static void validateNumber(int number) {

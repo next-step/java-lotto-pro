@@ -39,4 +39,9 @@ public class StringCalculatorTest {
     void null_0처리() {
         assertThat(StringCalculator.calculate(null)).isEqualTo(0);
     }
+
+    @Test
+    void 숫자_하나_처리() {
+        assertThat(StringCalculator.calculate("1")).isEqualTo(1);
+    }
 }
