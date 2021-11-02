@@ -42,6 +42,19 @@ class StringTest {
     }
 
     @Test
+    @DisplayName("문자열 중 한 글자 가져오기")
+    void charAtTest() {
+        //given
+        String input = "abc";
+
+        //when
+        char ch = input.charAt(0);
+
+        //then
+        assertThat(ch).isEqualTo('a');
+    }
+
+    @Test
     @DisplayName("문자열 길이보다 큰 인덱스나 음수 전달시 예외")
     void charAtIndexOutOfRangeTest() {
         //given
