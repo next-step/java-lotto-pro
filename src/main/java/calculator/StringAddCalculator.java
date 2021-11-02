@@ -12,31 +12,21 @@ public class StringAddCalculator {
         if (isBlank(text)) {
             return 0;
         }
-        return isCustomDelimiter(text);
-    }
-
-    private static int isCustomDelimiter(String text) {
-        Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(text);
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            String[] tokens = m.group(2).split(customDelimiter);
-            return sum(toInts(tokens));
-        }
         return sum(toInts(split(text)));
     }
 
     private static int sum(int[] values) {
         int sum = 0;
         for (int value : values) {
-            isNegative(value);
+            validateNegative(value);
             sum += value;
         }
         return sum;
     }
 
-    private static void isNegative(int value) {
+    private static void validateNegative(int value) {
         if (value < 0) {
-            throw new RuntimeException();
+            throw new RuntimeException("음수를 입력하였습니다.");
         }
     }
 
@@ -45,6 +35,11 @@ public class StringAddCalculator {
     }
 
     private static String[] split(String text) {
+        Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(text);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return m.group(2).split(customDelimiter);
+        }
         return text.split(DELIMITER);
     }
 
