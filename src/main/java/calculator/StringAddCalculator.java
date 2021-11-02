@@ -11,27 +11,34 @@ public class StringAddCalculator {
     private static final String NUMBER_REGEX = "[+-]?\\d*(\\.\\d+)?";
 
     public static int splitAndSum(String input) {
-        if (input == null || input.isEmpty()) {
+        if (isNullOrEmpty(input)) {
             return 0;
         }
-
-        int result = 0;
-        for (String token : splitTokens(input)) {
-            validateToken(token);
-            int number = Integer.parseInt(token);
-            validateNumber(number);
-            result += number;
-        }
-        return result;
+        return sum(split(input));
     }
 
-    private static String[] splitTokens(String input) {
+    private static boolean isNullOrEmpty(String input) {
+        return input == null || input.isEmpty();
+    }
+
+    private static String[] split(String input) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             return matcher.group(2).split(customDelimiter);
         }
         return input.split("[,:]");
+    }
+
+    private static int sum(String[] tokens) {
+        int result = 0;
+        for (String token : tokens) {
+            validateToken(token);
+            int number = Integer.parseInt(token);
+            validateNumber(number);
+            result += number;
+        }
+        return result;
     }
 
     private static void validateToken(String token) {
