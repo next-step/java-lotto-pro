@@ -2,7 +2,7 @@ package study;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringTest {
 
@@ -28,5 +28,24 @@ public class StringTest {
         assertThat(result).isEqualTo("1,2");
     }
 
+    @Test
+    void charAt() {
+        // given
+        final String text = "abc";
 
+        // then
+        assertThatThrownBy(() -> {
+            // when
+            text.charAt(text.length());
+        }).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: 3");
+
+        // then
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(
+                        // when
+                        () -> text.charAt(text.length())
+                )
+                .withMessageMatching("String index out of range: \\d+");
+    }
 }
