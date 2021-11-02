@@ -38,6 +38,14 @@ final class StringDelimiterFinder {
 		return matcher.group(2);
 	}
 
+	@Override
+	public String toString() {
+		return "StringDelimiterFinder{" +
+			"pattern=" + pattern +
+			", target='" + target +
+			'}';
+	}
+
 	private boolean foundResult() {
 		if (cachedFoundResult == null) {
 			cachedFoundResult = find();

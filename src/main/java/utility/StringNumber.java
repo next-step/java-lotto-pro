@@ -21,6 +21,13 @@ final class StringNumber {
 		return number;
 	}
 
+	@Override
+	public String toString() {
+		return "StringNumber{" +
+			"string='" + string + '\'' +
+			'}';
+	}
+
 	private boolean isEmptyString() {
 		return string == null || string.trim().isEmpty();
 	}
