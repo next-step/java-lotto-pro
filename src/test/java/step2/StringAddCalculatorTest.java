@@ -26,15 +26,38 @@ public class StringAddCalculatorTest {
     }
 
     @Test
+    @DisplayName("콤마로 구분된 숫자 문자 (1,2) 입력 결과 3 검증")
     public void splitAndSum_쉼표구분자() throws Exception {
         int result = StringAddCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
     }
 
     @Test
+    @DisplayName("콤마,콜론 혼용 문자 (1,2:3:3) 입력 결과 9 검증")
     public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
         int result = StringAddCalculator.splitAndSum("1,2:3:3");
         assertThat(result).isEqualTo(9);
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 (//A\n1A2A3A3) 입력 결과 9 검증")
+    public void splitAndSum_custom_구분자() throws Exception {
+        int result = StringAddCalculator.splitAndSum("//A\n1A2A3A3");
+        assertThat(result).isEqualTo(9);
+    }
+
+    @Test
+    @DisplayName("음수 입력 시 RuntimeException 발생")
+    public void splitAndSum_negative() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+            .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("계산에 문자 입력 시 RuntimeException 발생")
+    public void splitAndSum_string_sum_exception() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("a,2,3"))
+            .isInstanceOf(RuntimeException.class);
     }
 
 }
