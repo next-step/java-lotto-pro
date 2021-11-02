@@ -18,5 +18,15 @@ public class StringTest {
         assertThat(result).containsExactly("1", "2");
     }
 
-  
+    @Test
+    void substring() {
+        // given
+        final String text = "(1,2)";
+        // when
+        final String result = text.substring(1, text.length() - 1);
+        // then
+        assertThat(result).isEqualTo("1,2");
+    }
+
+
 }
