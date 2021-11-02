@@ -2,19 +2,11 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class AccumulatorTest {
-
-	Accumulator accumulator;
-
-	@BeforeEach
-	public void setup() {
-		accumulator = new Accumulator();
-	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"6:1:2:3", "3:1:1:1", "6:2:2:2"}, delimiter = ':')
@@ -27,7 +19,7 @@ class AccumulatorTest {
 		numbers.add(num3);
 
 		// when
-		int result = accumulator.accumulate(numbers);
+		int result = Accumulator.accumulate(numbers);
 
 		// then
 		assertThat(result).isEqualTo(expected);
