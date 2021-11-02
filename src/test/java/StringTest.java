@@ -1,10 +1,9 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
-public class StringTest {
+class StringTest {
 
     @Test
     void splitTest() {
@@ -15,9 +14,19 @@ public class StringTest {
         String[] inputSplit = input.split(",");
 
         //then
-        assertThat(inputSplit).contains("1");
-        assertThat(inputSplit).contains("2");
         assertThat(inputSplit).containsExactly("1","2");
+    }
+
+    @Test
+    void delimiterNotMatchInSplitTest() {
+        //given
+        String input = "1";
+
+        //when
+        String[] inputSplit = input.split(",");
+
+        //then
+        assertThat(inputSplit).contains("1");
     }
 
     @Test
@@ -30,6 +39,19 @@ public class StringTest {
 
         //then
         assertThat(inputSubstring).contains("1,2");
+    }
+
+    @Test
+    @DisplayName("문자열 중 한 글자 가져오기")
+    void charAtTest() {
+        //given
+        String input = "abc";
+
+        //when
+        char ch = input.charAt(0);
+
+        //then
+        assertThat(ch).isEqualTo('a');
     }
 
     @Test
