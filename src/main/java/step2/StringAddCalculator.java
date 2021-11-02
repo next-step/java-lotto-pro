@@ -13,7 +13,7 @@ public class StringAddCalculator {
     }
 
     private static String[] split(String text) {
-        return text.split(",");
+        return text.split(",|:");
     }
 
     private static int[] parseToIntArray(String[] textNumbers) {
