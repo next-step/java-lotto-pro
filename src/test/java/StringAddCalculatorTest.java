@@ -27,8 +27,16 @@ public class StringAddCalculatorTest {
 
     @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환")
     @ParameterizedTest
-    @CsvSource(value = {"1,2:3", "30,40:70", "500,600:1100", "7000,8000:15000"}, delimiter = ':')
+    @CsvSource(value = {"1,2=3", "30,40=70", "500,600=1100", "7000,8000=15000"}, delimiter = '=')
     public void splitAndSum_쉼표구분자(String inputText, int expectedResult) throws Exception {
+        int result = StringAddCalculator.splitAndSum(inputText);
+        assertThat(result).isEqualTo(expectedResult);
+    }
+
+    @DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3=6", "30,40:50=120", "500,600:700=1800"}, delimiter = '=')
+    public void splitAndSum_쉼표_또는_콜론_구분자(String inputText, int expectedResult) throws Exception {
         int result = StringAddCalculator.splitAndSum(inputText);
         assertThat(result).isEqualTo(expectedResult);
     }
