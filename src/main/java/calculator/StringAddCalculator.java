@@ -18,9 +18,18 @@ public class StringAddCalculator {
 
 		String[] splitValues = StringSplitter.split(text);
 		validateConsistOfPositiveNumber(splitValues);
-		List<Integer> numbers = StringToIntegerParser.parseNumbers(splitValues);
 
-		return SUM_INIT_VALUE;
+		return sum(StringToIntegerParser.parseNumbers(splitValues));
+	}
+
+	private static int sum(List<Integer> numbers) {
+		if (numbers.isEmpty()) {
+			return SUM_INIT_VALUE;
+		}
+
+		return numbers.stream()
+					  .mapToInt(Integer::intValue)
+					  .sum();
 	}
 
 	private static void validateConsistOfPositiveNumber(String[] splitValues) {
