@@ -8,7 +8,7 @@ public class StringTest {
 
     @DisplayName("구분자 ,로 String Split 테스트")
     @Test
-    public void StringSplitByRestTest() {
+    public void stringSplitByRestTest() {
         String[] result = "1,2".split(",");
         assertThat(result).containsExactly("1", "2");
     }
