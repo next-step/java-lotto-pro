@@ -1,10 +1,6 @@
 package calculator;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class StringAddCalculator {
 
@@ -15,47 +11,33 @@ public class StringAddCalculator {
     private StringAddCalculator() {
     }
 
-    public static int splitAndSum(String input) {
-        if (isNullOrEmpty(input)) {
+    public static int splitAndSum(String inputs) {
+        Input input = new Input(inputs);
+
+        if (input.isNullOrEmpty()) {
             return 0;
         }
 
-        String[] splitInputs = Separator.split(input);
-        List<Integer> numbers = parseNumber(splitInputs);
+        String[] splitInputs = input.split();
 
-        validateNumbers(splitInputs);
-
-        return sum(numbers);
+        return sum(splitInputs);
     }
 
-    private static boolean isNullOrEmpty(String input) {
-        return input == null || input.isEmpty();
-    }
-
-    private static List<Integer> parseNumber(String[] splitInputs) {
-        return Arrays.stream(splitInputs)
-                .map(input -> Integer.parseInt(input))
-                .collect(Collectors.toList());
-    }
-
-    private static int sum(List<Integer> numbers) {
+    private static int sum(String[] splitInputs) {
         int result = 0;
 
-        for (int number : numbers) {
-            result += number;
+        for (String number : splitInputs) {
+            result += convertStringToInteger(number);
         }
 
         return result;
     }
 
-    private static void validateNumbers(String[] splitInputs) {
-        Arrays.stream(splitInputs).forEach(
-                number -> {
-                    if (!DUAL_NUMBER_PATTERN.matcher(number).matches()) {
-                        throw new RuntimeException(IS_NOT_DUAL_NUMBER_ERROR_MESSAGE);
-                    }
-                }
-        );
+    private static int convertStringToInteger(String number) {
+        if (!DUAL_NUMBER_PATTERN.matcher(number).matches()) {
+            throw new RuntimeException(IS_NOT_DUAL_NUMBER_ERROR_MESSAGE);
+        }
+        return Integer.parseInt(number);
     }
 
 }
