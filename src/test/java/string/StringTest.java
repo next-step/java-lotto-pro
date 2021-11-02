@@ -30,4 +30,16 @@ class StringTest {
         // then
         assertThat(splitResult).containsExactly("1");
     }
+
+    @Test
+    void substring() {
+        // given
+        String input = "(1,2)";
+
+        // when
+        String result = input.substring(1, 4);
+
+        // then
+        assertThat(result).isEqualTo("1,2");
+    }
 }
