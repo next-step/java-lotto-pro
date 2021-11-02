@@ -45,7 +45,7 @@ public class SplitDelimiterTest {
 
         // when
         if (matcher.find()) {
-            result = SplitDelimiter.splitDelimiterOfCustom(matcher);
+            result = SplitDelimiter.splitDelimiterOfCustom(matcher.group(2), matcher.group(1));
         }
 
         // then
@@ -77,5 +77,5 @@ public class SplitDelimiterTest {
         // then
         assertThat(result).contains("1", "2", "3");
     }
-    
+
 }
