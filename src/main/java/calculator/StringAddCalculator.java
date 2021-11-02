@@ -26,7 +26,18 @@ public class StringAddCalculator {
     }
 
     private static int sum(int[] values) {
-        return Arrays.stream(values).sum();
+        int sum = 0;
+        for (int value : values) {
+            isNegative(value);
+            sum += value;
+        }
+        return sum;
+    }
+
+    private static void isNegative(int value) {
+        if (value < 0) {
+            throw new RuntimeException();
+        }
     }
 
     private static int[] toInts(String[] values) {

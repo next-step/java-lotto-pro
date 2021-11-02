@@ -2,14 +2,12 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.*;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     public static Stream<Arguments> args() {
@@ -54,5 +52,13 @@ public class StringAddCalculatorTest {
     @MethodSource("args")
     public void splitAndSum_custom_구분자(String input, int expected) throws Exception {
         assertThat(StringAddCalculator.splitAndSum(input)).isEqualTo(expected);
+    }
+
+    @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생테스트")
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,2,3"})
+    public void splitAndSum_negative(String input) throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
+                .isInstanceOf(RuntimeException.class);
     }
 }
