@@ -14,7 +14,7 @@ public class StringAddCalculator {
 			return Integer.parseInt(input);
 		}
 
-		String[] numbers = input.split(",");
+		String[] numbers = input.split(",|:");
 
 		return Arrays.stream(numbers)
 			.mapToInt(Integer::parseInt)
