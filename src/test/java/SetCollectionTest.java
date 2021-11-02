@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetCollectionTest {
@@ -32,6 +33,13 @@ public class SetCollectionTest {
 	@DisplayName("내부에_존재하는_값_확인")
 	void containsTest(int input) {
 		assertThat(numbers).contains(input);
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+	@DisplayName("값_존재여부에_따라_TRUE_OR_FALSE")
+	void containsTrueOrFalseTest(int input, boolean expected) {
+		assertThat(numbers.contains(input)).isEqualTo(expected);
 	}
 }
 
