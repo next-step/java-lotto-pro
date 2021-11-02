@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,9 +36,20 @@ class SetCollectionTest {
     }
 
     @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    @DisplayName("Set 의 값을 확인한다.")
+    void containsValues(int input) {
+        //given //when
+        boolean result = numbers.contains(input);
+
+        //then
+        assertThat(result).isTrue();
+    }
+
+    @ParameterizedTest
     @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
     @DisplayName("Set 의 값을 확인한다.")
-    void contains(int input, boolean excepted) {
+    void containsOrNot(int input, boolean excepted) {
         //given //when
         boolean result = numbers.contains(input);
 
