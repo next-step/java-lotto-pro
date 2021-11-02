@@ -51,4 +51,14 @@ public class StringAddCalculatorTest {
         // then
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("숫자를 커스텀 구분자로 구분한 문자열로 더하면 숫자들의 합을 반환한다.")
+    public void splitAndSum5() {
+        // when
+        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+
+        // then
+        assertThat(result).isEqualTo(6);
+    }
 }
