@@ -32,4 +32,17 @@ public class StringTest {
         //then
         assertThat(result).containsExactly("1");
     }
+
+    @Test
+    @DisplayName("'1,2'를 substring 메소드로 ()를 제거하고 '1,2'를 반환")
+    public void substring() {
+        //given
+        String input = "(1,2)";
+
+        //when
+        String result = input.substring(1, 4);
+
+        //then
+        assertThat(result).isEqualTo("1,2");
+    }
 }
