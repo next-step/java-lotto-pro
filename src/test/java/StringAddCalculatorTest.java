@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,5 +23,13 @@ public class StringAddCalculatorTest {
     public void splitAndSum_숫자하나(String inputText) throws Exception {
         int result = StringAddCalculator.splitAndSum(inputText);
         assertThat(result).isEqualTo(Integer.parseInt(inputText));
+    }
+
+    @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3", "30,40:70", "500,600:1100", "7000,8000:15000"}, delimiter = ':')
+    public void splitAndSum_쉼표구분자(String inputText, int expectedResult) throws Exception {
+        int result = StringAddCalculator.splitAndSum(inputText);
+        assertThat(result).isEqualTo(expectedResult);
     }
 }
