@@ -15,13 +15,15 @@ public class StringAddCalculator {
 
     public void stringCalculator(String inputString) {
         int sum = getNumberList(inputString);
-        System.out.println("합산 : " + sum);
     }
 
     public int getNumberList(String inputString) {
         String args = getCheckInputString(inputString);
         List<Integer> list = splitInputString(args);
-        return list.stream().mapToInt(Integer::intValue).sum();
+        return list
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     public String getCheckInputString(String inputString) {
@@ -65,7 +67,7 @@ public class StringAddCalculator {
         String joinString = String.join(",", strings);
         if (!isNumber(joinString)) {
             System.out.println("[ERROR] 잘못된 입력 값입니다.");
-            throw new RuntimeException("[ERROR] 잘못된 입력 값입니다.");
+            throw new IllegalArgumentException("[ERROR] 잘못된 입력 값입니다.");
         }
     }
 
