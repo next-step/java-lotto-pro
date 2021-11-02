@@ -1,5 +1,7 @@
 package step2;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
 	private static final String NUMBER_REGEX = "^[0-9]+$";
 
@@ -12,6 +14,10 @@ public class StringAddCalculator {
 			return Integer.parseInt(input);
 		}
 
-		return 0;
+		String[] numbers = input.split(",");
+
+		return Arrays.stream(numbers)
+			.mapToInt(Integer::parseInt)
+			.sum();
 	}
 }
