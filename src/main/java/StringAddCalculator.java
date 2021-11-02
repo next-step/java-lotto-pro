@@ -38,11 +38,11 @@ public class StringAddCalculator {
 	}
 
 	private static int parseNotNegativeNumber(String s) {
-		final int notNegativeInt = Integer.parseInt(s);
-		if (notNegativeInt < 0) {
+		final int notNegativeNumber = Integer.parseInt(s);
+		if (notNegativeNumber < 0) {
 			throw new RuntimeException();
 		}
-		return notNegativeInt;
+		return notNegativeNumber;
 	}
 
 	private static int sum(int[] numbers) {
