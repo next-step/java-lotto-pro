@@ -34,4 +34,12 @@ public class StringAddCalculatorTest {
 		int result = StringAddCalculator.splitAndSum(input);
 		assertThat(result).isEqualTo(expected);
 	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1,2:3|6", "4,5:6|15", "2,7:3|12"}, delimiter = '|')
+	@DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.")
+	public void splitAndSum_쉼표_또는_콜론_구분자(String input, int expected) throws Exception {
+		int result = StringAddCalculator.splitAndSum(input);
+		assertThat(result).isEqualTo(expected);
+	}
 }
