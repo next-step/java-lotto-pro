@@ -2,6 +2,7 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
@@ -12,6 +13,11 @@ public class StringAddCalculatorTest {
 	void splitAndSum_null_또는_빈문자(String text) {
 		int result = StringAddCalculator.splitAndSum(text);
 		assertThat(result).isEqualTo(0);
+	}
+
+	@Test
+	void splitAndSum_숫자_하나() {
+		assertThat(StringAddCalculator.splitAndSum("1")).isEqualTo(1);
 	}
 
 }
