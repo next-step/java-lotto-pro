@@ -11,7 +11,7 @@ import static lotto.constants.CalculatorConstants.*;
 
 public class StringAddCalculator {
 
-    private static Pattern pattern = Pattern.compile("//(.)\n(.*)");
+    private final static Pattern pattern = Pattern.compile("//(.)\n(.*)");
 
     public void stringCalculator(String inputString) {
         int sum = getNumberList(inputString);
@@ -33,7 +33,7 @@ public class StringAddCalculator {
         return inputString;
     }
 
-    public List<Integer> splitInputString(String inputString) {
+    private List<Integer> splitInputString(String inputString) {
         List<String> result = getSplitList(inputString);
         validateNumberFormat(result);
         return result
@@ -63,7 +63,7 @@ public class StringAddCalculator {
                 .asList(matcher.split(DEFAULT_SPLIT_REGEX));
     }
 
-    public void validateNumberFormat(List<String> strings) {
+    private void validateNumberFormat(List<String> strings) {
         String joinString = String.join(",", strings);
         if (!isNumber(joinString)) {
             System.out.println("[ERROR] 잘못된 입력 값입니다.");
@@ -71,7 +71,7 @@ public class StringAddCalculator {
         }
     }
 
-    public boolean isNumber(String checkValue) {
+    private boolean isNumber(String checkValue) {
         return checkValue.matches("^[0-9]+$");
     }
 
