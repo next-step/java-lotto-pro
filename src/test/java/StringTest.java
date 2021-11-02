@@ -36,4 +36,21 @@ public class StringTest {
 			.hasSize(1)
 			.containsExactly("1");
 	}
+
+	@DisplayName("문자열의 특정 시작위치부터 특정 종료위치까지 반환")
+	@Test
+	public void substringTest() {
+		// given
+		String input = "(1,2)";
+		int begin = 1;
+		int end = 4;
+
+		// when
+		String result = input.substring(begin, end);
+
+		// then
+		assertThat(result)
+			.hasSize(end - begin)
+			.isEqualTo("1,2");
+	}
 }
