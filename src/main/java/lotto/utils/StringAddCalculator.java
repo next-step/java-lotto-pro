@@ -64,7 +64,7 @@ public class StringAddCalculator {
     }
 
     private void validateNumberFormat(List<String> strings) {
-        String joinString = String.join(",", strings);
+        String joinString = String.join("", strings);
         if (!isNumber(joinString)) {
             System.out.println("[ERROR] 잘못된 입력 값입니다.");
             throw new IllegalArgumentException("[ERROR] 잘못된 입력 값입니다.");
