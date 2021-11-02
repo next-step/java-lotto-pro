@@ -17,4 +17,16 @@ public class StringTest {
         assertThat(inputSplit).contains("2");
         assertThat(inputSplit).containsExactly("1","2");
     }
+
+    @Test
+    void subStringTest() {
+        //given
+        String input = "(1,2)";
+
+        //when
+        String inputSubstring = input.substring(1,4);
+
+        //then
+        assertThat(inputSubstring).contains("1,2");
+    }
 }
