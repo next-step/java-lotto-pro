@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
@@ -36,4 +37,10 @@ public class SetTest {
         assertThat(numbers.contains(input)).isTrue();
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+    @DisplayName("ParameterizedTest, CsvSource 어노테이션을 활용한 입력 값에 따라 결과 값이 다른 경우 테스트")
+    public void isContains(int input, Boolean expected) {
+        assertThat(numbers.contains(input)).isEqualTo(expected);
+    }
 }
