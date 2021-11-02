@@ -1,5 +1,8 @@
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -56,7 +59,7 @@ public class StringAddCalculatorTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"-1,2f,3","##,-1,2,3"})
+	@ValueSource(strings = {"1,2f,3","##,1,2,3"})
 	public void splitAndSum_숫자자리에_문자포함_오류(String text) throws Exception {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum(text))
 			.isInstanceOf(RuntimeException.class);
@@ -64,8 +67,14 @@ public class StringAddCalculatorTest {
 
 	@Test
 	public void splitAndSum_커스텀구분자_두자리이상() throws Exception {
-		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("//#$\n-1,2f,3"))
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("//#$\n1,2,3"))
 			.isInstanceOf(RuntimeException.class);
 	}
 
+	@Test
+	public void splitAndSum_커스텀구분자_empty() throws Exception {
+		assertThatThrownBy(()->{
+			StringAddCalculator.splitAndSum("//\n1,2,3");
+		}).isInstanceOf(RuntimeException.class);
+	}
 }
