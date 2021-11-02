@@ -5,9 +5,14 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-	private static final String NUMBER_INPUT_NEGATIVE_VALUE_ERROR_MESSAGE = "[ERROR] 0이상의 숫자만 입력해주세요.";
+	private static final String CUSTOM_DELIMITER_NOT_SINGLE_ERROR_MESSAGE = "[ERROR] 커스텀 구분자는 한자리 문자여야 합니다.";
+	private static final String CUSTOM_DELIMITER_NUMBER_ERROR_MESSAGE = "[ERROR] 커스텀 구분자는 숫자여야 합니다.";
+	private static final String CUSTOM_DELIMITER_EMPTY_ERROR_MESSAGE = "[ERROR] 커스텀 구분자가 빈값입니다.";
 	private static final String NOT_DIGIT_ERROR_MESSAGE = "[ERROR] 구분자 사이에는 숫자만 입력해주세요.";
-	private static final String basicDelimiters = ":|,";
+	private static final String NUMBER_INPUT_NEGATIVE_VALUE_ERROR_MESSAGE = "[ERROR] 0이상의 숫자만 입력해주세요.";
+	private static final String BASIC_DELIMITERS = ":|,";
+	private static final String CUSTOM_DELIMIERS_PATTERN = "//(.*)\n(.*)";
+	private static final int SINGLE_LETTER_LENGTH = 1;
 	private static final int SPLIT_CUSTOM_DELIMITER_INDEX = 1;
 	private static final int SPLIT_NUMBER_TEXT_INDEX = 2;
 
@@ -28,12 +33,12 @@ public class StringAddCalculator {
 	}
 
 	private static String[] splitText(String text) {
-		Matcher m = Pattern.compile("//(.*)\n(.*)").matcher(text);
+		Matcher m = Pattern.compile(CUSTOM_DELIMIERS_PATTERN).matcher(text);
 		if (hasCustomDelimiter(m)) {
 			String customDelimiter = m.group(SPLIT_CUSTOM_DELIMITER_INDEX);
 			return splitWithDelimiters(m.group(SPLIT_NUMBER_TEXT_INDEX), getDelimitersWithCustom(customDelimiter));
 		}
-		return splitWithDelimiters(text, basicDelimiters);
+		return splitWithDelimiters(text, BASIC_DELIMITERS);
 	}
 
 	private static boolean hasCustomDelimiter(Matcher m) {
@@ -48,7 +53,26 @@ public class StringAddCalculator {
 	}
 
 	private static String getDelimitersWithCustom(String customDelimiter) {
-		return String.join("|", basicDelimiters, customDelimiter);
+		validateCustomDelimiter(customDelimiter);
+		return String.join("|", BASIC_DELIMITERS, customDelimiter);
+	}
+
+	private static void validateCustomDelimiter(String customDelimiter) {
+		validateIsEmptyDelimiter(customDelimiter);
+		validateSingleLetter(customDelimiter);
+		validateNotNumber(customDelimiter);
+	}
+
+	private static void validateIsEmptyDelimiter(String customDelimiter) {
+		if (customDelimiter.isEmpty()) {
+			throw new RuntimeException(CUSTOM_DELIMITER_EMPTY_ERROR_MESSAGE);
+		}
+	}
+
+	private static void validateSingleLetter(String customDelimiter) {
+		if (customDelimiter.length() > SINGLE_LETTER_LENGTH) {
+			throw new RuntimeException(CUSTOM_DELIMITER_NOT_SINGLE_ERROR_MESSAGE);
+		}
 	}
 
 	private static int[] convertToNumbers(String[] splitedText) {
@@ -67,6 +91,13 @@ public class StringAddCalculator {
 			return number;
 		} catch (NumberFormatException ex) {
 			throw new RuntimeException(NOT_DIGIT_ERROR_MESSAGE);
+		}
+	}
+
+	// validateSingleLetter에서 single letter인걸 검사한 후이지만 charAt(0)으로 명시적으로 써도 괜찮을까요?
+	private static void validateNotNumber(String customDelimiter) {
+		if (Character.isDigit(customDelimiter.charAt(0))) {
+			throw new RuntimeException(CUSTOM_DELIMITER_NUMBER_ERROR_MESSAGE);
 		}
 	}
 
