@@ -1,8 +1,7 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 class StringTest {
 
@@ -16,6 +15,18 @@ class StringTest {
 
         //then
         assertThat(inputSplit).containsExactly("1","2");
+    }
+
+    @Test
+    void delimiterNotMatchInSplitTest() {
+        //given
+        String input = "1";
+
+        //when
+        String[] inputSplit = input.split(",");
+
+        //then
+        assertThat(inputSplit).contains("1");
     }
 
     @Test
