@@ -1,6 +1,7 @@
 package step2;
 
 public class SplitNumber {
+    public static final String NOT_POSITIVE_NUMBER = "입력 값은 양수만 가능합니다.";
 
     public static int valueOf(String value) {
         valid(value);
@@ -8,8 +9,8 @@ public class SplitNumber {
     }
 
     private static void valid(String value) {
-        if (Integer.parseInt(value) < 0 || !isNumber(value)) {
-            throw new RuntimeException();
+        if (!isNumber(value) || Integer.parseInt(value) < 0) {
+            throw new RuntimeException(NOT_POSITIVE_NUMBER);
         }
     }
 
