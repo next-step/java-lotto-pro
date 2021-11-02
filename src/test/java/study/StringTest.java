@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class StringTest {
 
@@ -25,21 +27,18 @@ public class StringTest {
 		assertThat("(1,2)".substring(1, 4)).isEqualTo("1,2");
 	}
 
-	@Test
+	@ParameterizedTest
+	@CsvSource(value = {"0,a", "1,b", "2,c"})
 	@DisplayName("\"abc\" 값이 주어졌을 때 String의 charAt() 메소드 파라미터로 인덱스를 넘겨주면 char 반환")
-	void test_charAt_success() {
-		assertThat("abc".charAt(0)).isEqualTo('a');
-		assertThat("abc".charAt(1)).isEqualTo('b');
-		assertThat("abc".charAt(2)).isEqualTo('c');
+	void test_charAt_success(int idx, char result) {
+		assertThat("abc".charAt(idx)).isEqualTo(result);
 	}
 
-	@Test
-	@DisplayName("\"abc\" 값이 주어졌을 때 String의 charAt() 메소드 파라미터로 문자열 길이보다 길거나 같은 인덱스를 넘겨주면 예외 발생")
-	void test_charAt_throw() {
-		assertThatThrownBy(() -> "abc".charAt(3)).isInstanceOf(StringIndexOutOfBoundsException.class)
-			.hasMessageMatching("String index out of range: [0-9]+");
-
-		assertThatThrownBy(() -> "abc".charAt(4)).isInstanceOf(StringIndexOutOfBoundsException.class)
-			.hasMessageMatching("String index out of range: [0-9]+");
+	@ParameterizedTest
+	@CsvSource(value= {"3", "4"})
+	@DisplayName("\"abc\" 값이 주어졌을 때 String의 charAt() 메소드 파라미터로 문자열 길이보다 같거나 큰 인덱스를 넘겨주면 예외 발생")
+	void test_charAt_throw(int idx) {
+		assertThatThrownBy(() -> "abc".charAt(idx)).isInstanceOf(StringIndexOutOfBoundsException.class)
+			.hasMessageMatching(String.format("String index out of range: %d", idx));
 	}
 }
