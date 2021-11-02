@@ -24,6 +24,6 @@
     - [ ] 기본 값은 `,` 또는 `:`이다.
     - [ ] 커스텀 값을 지정할 수 있다.
 - `NaturalNumber`
-    - [ ] `0`과 같거나 큰 정수이다.
-    - [ ] 숫자 이외의 값 또는 음수가 주어진 경우 `RuntimeException` 예외를 던진다.
-    - [ ] `NaturalNumber`끼리 더할 수 있다.
+    - [x] `0`과 같거나 큰 정수이다.
+    - [x] 숫자 이외의 값 또는 음수가 주어진 경우 `RuntimeException` 예외를 던진다.
+    - [x] `NaturalNumber`끼리 더할 수 있다.
