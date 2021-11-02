@@ -2,9 +2,6 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,7 +21,7 @@ class AccumulatorTest {
 	@DisplayName("숫자들을 입력하면, 모두 합한 값을 반환해야 한다")
 	public void accumulate(int expected, int num1, int num2, int num3) {
 		// given
-		List<Integer> numbers = new ArrayList<>();
+		Numbers numbers = new Numbers();
 		numbers.add(num1);
 		numbers.add(num2);
 		numbers.add(num3);

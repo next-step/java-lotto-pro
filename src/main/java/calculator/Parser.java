@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,14 +7,14 @@ public class Parser {
 
 	public static final String defaultDelimiter = ",|:";
 
-	public List<Integer> parse(String input) {
+	public Numbers parse(String input) {
 		if (isCustomDelimiter(input)) {
 			return customSplit(input);
 		}
-		return defaultSplit(input);
+		return split(input, defaultDelimiter);
 	}
 
-	private List<Integer> customSplit(String input) {
+	private Numbers customSplit(String input) {
 		String numberStr = getCustomNumberStr(input);
 		String delimiter = getCustomDelimiter(input);
 		if (numberStr == null || delimiter == null) {
@@ -25,12 +23,8 @@ public class Parser {
 		return split(numberStr, delimiter);
 	}
 
-	private List<Integer> defaultSplit(String input) {
-		return split(input, defaultDelimiter);
-	}
-
-	private List<Integer> split(String input, String delimiter) {
-		List<Integer> numbers = new ArrayList<>();
+	private Numbers split(String input, String delimiter) {
+		Numbers numbers = new Numbers();
 		String[] splits = input.split(delimiter);
 		for (String s : splits) {
 			numbers.add(parseInteger(s));

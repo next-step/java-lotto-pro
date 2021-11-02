@@ -2,8 +2,6 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +25,7 @@ public class ParserTest {
 		Integer[] expected = {1, 2};
 
 		// when
-		List<Integer> numbers = parser.parse(input);
+		Numbers numbers = parser.parse(input);
 
 		// then
 		assertThat(numbers).containsExactly(expected);
@@ -41,7 +39,7 @@ public class ParserTest {
 		Integer[] expected = {1, 2, 3};
 
 		// when
-		List<Integer> numbers = parser.parse(input);
+		Numbers numbers = parser.parse(input);
 
 		// then
 		assertThat(numbers).containsExactly(expected);
@@ -55,7 +53,7 @@ public class ParserTest {
 		Integer[] expected = {1, 2, 3};
 
 		// when
-		List<Integer> numbers = parser.parse(input);
+		Numbers numbers = parser.parse(input);
 
 		// then
 		assertThat(numbers).containsExactly(expected);
@@ -79,7 +77,7 @@ public class ParserTest {
 		Integer[] expected = {1};
 
 		// when
-		List<Integer> numbers = parser.parse(input);
+		Numbers numbers = parser.parse(input);
 
 		// then
 		assertThat(numbers).containsExactly(expected);
