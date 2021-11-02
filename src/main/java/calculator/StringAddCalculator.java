@@ -5,7 +5,13 @@ public class StringAddCalculator {
 		if (isNullOrEmpty(text))
 			return 0;
 
-		return Integer.parseInt(text);
+		String[] values = text.split(",");
+		int sum = 0;
+		for (String value: values) {
+			sum += Integer.parseInt(value);
+		}
+
+		return sum;
 	}
 
 	private static boolean isNullOrEmpty(String text) {
