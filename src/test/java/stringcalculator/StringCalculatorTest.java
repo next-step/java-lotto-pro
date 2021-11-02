@@ -11,4 +11,10 @@ public class StringCalculatorTest {
     void 쉼표_콜론_구분자(String inputString) {
         Assertions.assertThat(StringCalculator.separator(inputString)).containsExactly("1", "2", "3");
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "//a\n1a2a3"})
+    void 커스텀_구분자(String inputString) {
+        Assertions.assertThat(StringCalculator.customSeparator(inputString)).containsExactly("1", "2", "3");
+    }
 }
