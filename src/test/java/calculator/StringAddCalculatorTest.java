@@ -28,4 +28,11 @@ public class StringAddCalculatorTest {
     public void splitAndSum_쉼표구분자(String input, int expected) throws Exception {
         assertThat(StringAddCalculator.splitAndSum(input)).isEqualTo(expected);
     }
+
+    @DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 경우 합을 반환테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3=6"}, delimiter = '=')
+    public void splitAndSum_쉼표_또는_콜론_구분자(String input, int expected) throws Exception {
+        assertThat(StringAddCalculator.splitAndSum(input)).isEqualTo(expected);
+    }
 }
