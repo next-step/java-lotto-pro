@@ -18,15 +18,9 @@ public class StringAddCalculator {
     private static int sumStringNumberArray(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            checkValidateNumber(number);
+            ValidationUtils.checkValidateNumber(number);
             sum += Integer.parseInt(number);
         }
         return sum;
-    }
-
-    private static void checkValidateNumber(String number) {
-        if (Integer.parseInt(number) < 0) {
-            throw new RuntimeException();
-        }
     }
 }
