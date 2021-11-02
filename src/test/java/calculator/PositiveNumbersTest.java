@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class PositiveNumbersTest {
     private static final String NON_POSITIVE_NUMBER_MESSAGE = "음수나 문자열은 사용할 수 없습니다.";
@@ -28,4 +30,12 @@ class PositiveNumbersTest {
             .hasMessage(NON_POSITIVE_NUMBER_MESSAGE);
     }
 
+    @DisplayName("숫자 더하기")
+    @ParameterizedTest
+    @CsvSource(value = {"1:2:3,5:20-31", "5,10:15-30"}, delimiter = '-')
+    void addTest(String text, int expected) {
+        PositiveNumbers positiveNumbers = new PositiveNumbers(TextSplit.split(text));
+        int sum = positiveNumbers.sum();
+        assertEquals(expected, sum);
+    }
 }
