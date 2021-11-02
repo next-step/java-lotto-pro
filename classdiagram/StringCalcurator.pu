@@ -1,0 +1,49 @@
+@startuml StringCalcurator
+class StringCalcurator {
+	- CALCURATOR_STRING_PATTERN : String
+	- stringParsor : StringCalcuratorParsor
+
+	+ calcuration(calcuratingString: String) : Integer
+	- isInvalidValue(calcuratingString: String) : Boolean
+}
+
+class StringCalcuratorParsor {
+	+ CUSTOM_SEPARATOR_PARSING_PATTERN : string
+	- separators : Separators
+
+	- setDefaultSeparator() : void
+	+ parse(calcuratingString: String) : CalcuratorNumbers
+}
+
+class CalcuratorNumbers {
+	- items : List<CalcuratorNumber>
+
+	+ sum() : Integer
+}
+
+class CalcuratorNumber {
+	- item : Integer
+
+	- isInvalid(number: String) : Boolean
+}
+
+class Separators {
+	- items : List<Separators>
+
+	+ getSeparators() : String
+	+ add(separator: Separator) : Boolean
+}
+
+class Separator {
+	- item : String
+}
+
+StringCalcurator <-- StringCalcuratorParsor
+
+StringCalcuratorParsor <-- CalcuratorNumbers
+StringCalcuratorParsor  <--  Separators
+
+CalcuratorNumbers "1" *-- "0..*" CalcuratorNumber
+
+Separators "1" *-- "1..*" Separator
+@enduml
