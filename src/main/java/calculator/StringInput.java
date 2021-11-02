@@ -9,16 +9,23 @@ public class StringInput {
 	private static final String CUSTOM_DELIMITER_BOUNDARY = "//(.*)\n(.*)";
 	private static final String EXCEPTION_MESSAGE = "양의 숫자만 입력 가능합니다.";
 
+	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_BOUNDARY);
+
 	private String input;
 
 	public StringInput(String input) {
+		setInput(input);
+	}
+
+	private void setInput(String input) {
+		if (isNull(input) || isEmpty(input)) {
+			this.input = "0";
+			return;
+		}
 		this.input = input;
 	}
 
 	public String[] separate() {
-		if (isNull(input) || isEmpty(input)) {
-			return new String[]{"0"};
-		}
 		if (input.length() == 1) {
 			return oneSeparate();
 		}
@@ -39,12 +46,8 @@ public class StringInput {
 		return false;
 	}
 
-	private Matcher patternMatcher(String regexp, String input) {
-		return Pattern.compile(regexp).matcher(input);
-	}
-
 	private String[] delimiterSeparate() {
-		Matcher m = patternMatcher(CUSTOM_DELIMITER_BOUNDARY, input);
+		Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(input);
 		 if (m.find()) {
 			return validSeparate(m.group(2).split(m.group(1)));
 		}
