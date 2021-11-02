@@ -1,8 +1,8 @@
 package stringcalculator;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,5 +43,11 @@ public class StringCalculatorTest {
     @Test
     void 숫자_하나_처리() {
         assertThat(StringCalculator.calculate("1")).isEqualTo(1);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"'1,2,3', 6", "'3:4,5', 12", "'//;\n1;2;3', 6", "'//;\n1,2;3;5:7', 18"})
+    void 문자열계산기(String inputString, int result) {
+        assertThat(StringCalculator.calculate(inputString)).isEqualTo(result);
     }
 }

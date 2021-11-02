@@ -21,9 +21,6 @@ public class StringCalculator {
         if (m.find()) {
             String customDelimiter = m.group(1);
             String[] tokens= m.group(2).split(customDelimiter);
-            for (String token : tokens) {
-                System.out.println("token = " + token);
-            }
             return tokens;
         }
         return new String[]{inputString};
@@ -33,9 +30,16 @@ public class StringCalculator {
         if (inputString == null || inputString.isEmpty()) {
             return 0;
         }
+
         int result = 0;
-        String[] separatedStrings = separator(inputString);
-        for (String separatedString : separatedStrings) {
+        List<String> separatedList = new ArrayList<>();
+        String[] customSeparatedStrings = customSeparator(inputString);
+
+        for (String customSeparatedString : customSeparatedStrings) {
+            separatedList.addAll(Arrays.asList(separator(customSeparatedString)));
+        }
+
+        for (String separatedString : separatedList) {
             int number = Integer.parseInt(separatedString);
             validateNumber(number);
             result += number;
