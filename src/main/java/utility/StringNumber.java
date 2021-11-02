@@ -2,6 +2,8 @@ package utility;
 
 final class StringNumber {
 
+	private static final int DEFAULT_EMPTY_INT = 0;
+
 	private final String string;
 
 	private StringNumber(String string) {
@@ -14,7 +16,7 @@ final class StringNumber {
 
 	public int parseInt() {
 		if (isEmptyString()) {
-			return 0;
+			return DEFAULT_EMPTY_INT;
 		}
 		int number = Integer.parseInt(string);
 		validate(number);
@@ -33,8 +35,12 @@ final class StringNumber {
 	}
 
 	private void validate(int number) {
-		if (number < 0) {
+		if (isNegative(number)) {
 			throw new RuntimeException(String.format("Number(%d) must not be negative", number));
 		}
+	}
+
+	private boolean isNegative(int number) {
+		return number < 0;
 	}
 }

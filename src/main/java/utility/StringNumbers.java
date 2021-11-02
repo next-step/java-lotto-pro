@@ -5,6 +5,7 @@ import java.util.Collections;
 
 final class StringNumbers {
 
+	private static final int DEFAULT_SUM_VALUE = 0;
 	private final Collection<StringNumber> collection;
 
 	private StringNumbers(Collection<StringNumber> collection) {
@@ -21,7 +22,7 @@ final class StringNumbers {
 	}
 
 	public int sum() {
-		int sum = 0;
+		int sum = DEFAULT_SUM_VALUE;
 		for (StringNumber number : collection) {
 			sum += number.parseInt();
 		}
