@@ -22,4 +22,11 @@ public class StringAddCalculatorTest {
 		int result = StringAddCalculator.splitAndSum(text);
 		assertThat(result).isEqualTo(1);
 	}
+
+	@Test
+	public void splitAndSum_쉼표구분자() throws Exception {
+		String text = "1,2";
+		int result = StringAddCalculator.splitAndSum(text);
+		assertThat(result).isEqualTo(3);
+	}
 }
