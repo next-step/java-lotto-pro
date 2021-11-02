@@ -50,4 +50,10 @@ public class StringAddCalculatorTest {
 		assertThat(StringAddCalculator.splitAndSum(text)).isEqualTo(expected);
 	}
 
+	@ParameterizedTest
+	@ValueSource(strings = { "//;\n1;2;3", "//-\n4-2" })
+	void splitAndSum_커스텀_구분자_합(String text) {
+		assertThat(StringAddCalculator.splitAndSum(text)).isEqualTo(6);
+	}
+
 }
