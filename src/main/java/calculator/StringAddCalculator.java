@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 public class StringAddCalculator {
 
-    public static final String DEFAULT_SEPARATOR_REGEX = "[,:]";
-    public static final Pattern CUSTOM_SEPARATOR = Pattern.compile("//(.)\n(.*)");
     public static final String IS_NOT_DUAL_NUMBER_ERROR_MESSAGE = "입력 값이 음수이거나 숫자가 아닙니다.";
     public static final String IS_NUMBER_REGEX = "[0-9]+";
     public static final Pattern DUAL_NUMBER_PATTERN = Pattern.compile(IS_NUMBER_REGEX);
@@ -22,8 +20,8 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] splitInputs = split(input);
-        List<Integer> numbers = parsingNumber(splitInputs);
+        String[] splitInputs = Separator.split(input);
+        List<Integer> numbers = parseNumber(splitInputs);
 
         validateNumbers(splitInputs);
 
@@ -34,26 +32,7 @@ public class StringAddCalculator {
         return input == null || input.isEmpty();
     }
 
-    private static String[] split(String input) {
-        Matcher matcher = CUSTOM_SEPARATOR.matcher(input);
-
-        if (matcher.find()) {
-            return splitByCustomSeparator(matcher);
-        }
-
-        return splitByDefaultSeparator(input);
-    }
-
-    private static String[] splitByCustomSeparator(Matcher matcher) {
-        String customDelimiter = matcher.group(1);
-        return matcher.group(2).split(customDelimiter);
-    }
-
-    private static String[] splitByDefaultSeparator(String input) {
-        return input.split(DEFAULT_SEPARATOR_REGEX);
-    }
-
-    private static List<Integer> parsingNumber(String[] splitInputs) {
+    private static List<Integer> parseNumber(String[] splitInputs) {
         return Arrays.stream(splitInputs)
                 .map(input -> Integer.parseInt(input))
                 .collect(Collectors.toList());
