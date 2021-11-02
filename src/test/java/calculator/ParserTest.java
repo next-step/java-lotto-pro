@@ -2,20 +2,12 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class ParserTest {
-
-	Parser parser;
-
-	@BeforeEach
-	public void setup() {
-		parser = new Parser();
-	}
 
 	@Test
 	@DisplayName("콤마 구분자로 입력하면, 파싱하여 숫자들을 반환해야 한다")
@@ -25,7 +17,7 @@ public class ParserTest {
 		Integer[] expected = {1, 2};
 
 		// when
-		Numbers numbers = parser.parse(input);
+		Numbers numbers = Parser.parse(input);
 
 		// then
 		assertThat(numbers).containsExactly(expected);
@@ -35,11 +27,11 @@ public class ParserTest {
 	@DisplayName("콜론 구분자로 입력하면, 파싱하여 숫자들을 반환해야 한다")
 	public void colonParseTest() {
 		// given
-		String input = "1:2:3";
-		Integer[] expected = {1, 2, 3};
+		String input = "1:2:33";
+		Integer[] expected = {1, 2, 33};
 
 		// when
-		Numbers numbers = parser.parse(input);
+		Numbers numbers = Parser.parse(input);
 
 		// then
 		assertThat(numbers).containsExactly(expected);
@@ -53,20 +45,20 @@ public class ParserTest {
 		Integer[] expected = {1, 2, 3};
 
 		// when
-		Numbers numbers = parser.parse(input);
+		Numbers numbers = Parser.parse(input);
 
 		// then
 		assertThat(numbers).containsExactly(expected);
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"1:a:3", "a:1:2", "a", "//;\n1;2;z", "z"})
+	@ValueSource(strings = {"1:a:3", "a:1:2", "a", "//;\n1;2;z", "z", "-1"})
 	@DisplayName("숫자가 아닌 문자를 입력하면, RuntimeException이 발생해야 한다")
 	public void exceptionTest(String input) {
 		// when, then
 		assertThatExceptionOfType(RuntimeException.class)
-			.isThrownBy(() -> parser.parse(input));
-
+			.isThrownBy(() -> Parser.parse(input))
+			.withMessageContaining("양수 또는 0이어야 합니다");
 	}
 
 	@Test
@@ -77,7 +69,7 @@ public class ParserTest {
 		Integer[] expected = {1};
 
 		// when
-		Numbers numbers = parser.parse(input);
+		Numbers numbers = Parser.parse(input);
 
 		// then
 		assertThat(numbers).containsExactly(expected);

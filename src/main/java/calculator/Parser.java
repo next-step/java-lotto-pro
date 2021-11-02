@@ -6,63 +6,50 @@ import java.util.regex.Pattern;
 public class Parser {
 
 	public static final String defaultDelimiter = ",|:";
+	public static final String customRegex = "//(.)\n(.*)";
+	public static final String numberFormatRegex = "^[0-9]";
 
-	public Numbers parse(String input) {
+	public static Numbers parse(String input) {
 		if (isCustomDelimiter(input)) {
 			return customSplit(input);
 		}
 		return split(input, defaultDelimiter);
 	}
 
-	private Numbers customSplit(String input) {
-		String numberStr = getCustomNumberStr(input);
-		String delimiter = getCustomDelimiter(input);
-		if (numberStr == null || delimiter == null) {
-			throw new RuntimeException("커스텀 구분 파싱에 실패했습니다");
+	private static Numbers customSplit(String input) {
+		Matcher m = getCustomMatcher(input);
+		if (m.find()) {
+			String delimiter = m.group(1);
+			String numberStr = m.group(2);
+			return split(numberStr, delimiter);
 		}
-		return split(numberStr, delimiter);
+		throw new RuntimeException(ErrorMessage.CUSTOM_SPLIT_ERROR.message());
 	}
 
-	private Numbers split(String input, String delimiter) {
+	private static Numbers split(String input, String delimiter) {
 		Numbers numbers = new Numbers();
 		String[] splits = input.split(delimiter);
 		for (String s : splits) {
-			numbers.add(parseInteger(s));
+			numbers.add(parseNumber(s));
 		}
 		return numbers;
 	}
 
-	private int parseInteger(String str) {
-		try {
+	private static int parseNumber(String str) {
+		Matcher matcher = Pattern.compile(numberFormatRegex).matcher(str);
+		if (matcher.find()) {
 			return Integer.parseInt(str);
-		} catch (NumberFormatException e) {
-			throw new RuntimeException("숫자가 아닙니다");
 		}
+		throw new RuntimeException(ErrorMessage.PARSE_NUMBER_ERROR.message());
 	}
 
-	private String getCustomDelimiter(String input) {
-		Matcher m = getCustomMatcher(input);
-		if (m.find()) {
-			return m.group(1);
-		}
-		return null;
-	}
-
-	private String getCustomNumberStr(String input) {
-		Matcher m = getCustomMatcher(input);
-		if (m.find()) {
-			return m.group(2);
-		}
-		return null;
-	}
-
-	private boolean isCustomDelimiter(String input) {
+	private static boolean isCustomDelimiter(String input) {
 		Matcher m = getCustomMatcher(input);
 		return m.find();
 	}
 
-	private Matcher getCustomMatcher(String input) {
-		return Pattern.compile("//(.)\n(.*)").matcher(input);
+	private static Matcher getCustomMatcher(String input) {
+		return Pattern.compile(customRegex).matcher(input);
 	}
 
 }
