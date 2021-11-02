@@ -5,6 +5,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환")
@@ -46,5 +47,13 @@ public class StringAddCalculatorTest {
     public void splitAndSum_custom_구분자() throws Exception {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @DisplayName("숫자 이외의 값 또는 음수를 전달할 경우 RuntimeException 예외가 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,2,3", "b,a,-2"})
+    public void splitAndSum_negative(String inputText) throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(inputText))
+                .isInstanceOf(RuntimeException.class);
     }
 }
