@@ -1,19 +1,14 @@
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class StringAddCalculator {
     public static int splitAndSum(String inputText) {
         if (inputText == null || inputText.isEmpty()) return 0;
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputText);
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            String[] numbers = m.group(2).split(customDelimiter);
+        if (inputText.matches("//(.)\n(.*)")) {
+            String[] numbers = SplitInputText.splitCustomDelimiter(inputText);
             return sumStringNumberArray(numbers);
         }
 
         if (inputText.contains(",") || inputText.contains(":")) {
-            String[] numbers = inputText.split(",|:");
+            String[] numbers = SplitInputText.splitCommaOrColon(inputText);
             return sumStringNumberArray(numbers);
         }
 
