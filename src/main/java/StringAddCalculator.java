@@ -8,6 +8,7 @@ public class StringAddCalculator {
 	private static final String basicDelimiters = ":|,";
 	private static final int SPLIT_CUSTOM_DELIMITER_INDEX = 1;
 	private static final int SPLIT_NUMBER_TEXT_INDEX = 2;
+	private static final String NUMBER_INPUT_NEGATIVE_VALUE_ERROR_MESSAGE = "0이상의 숫자만 입력해주세요.";
 
 	public static int splitAndSum(String text) {
 		if (isTextNullOrEmpty(text)) {
@@ -53,6 +54,7 @@ public class StringAddCalculator {
 		List<Integer> numbers = new ArrayList<>();
 		for (String letter : splitedText) {
 			int number = converToInteger(letter);
+			validateNotNegativeInteger(number);
 			numbers.add(number);
 		}
 		return numbers.stream().mapToInt(number -> number).toArray();
@@ -64,6 +66,12 @@ public class StringAddCalculator {
 			return number;
 		} catch (NumberFormatException ex) {
 			throw new RuntimeException();
+		}
+	}
+
+	private static void validateNotNegativeInteger(int number) {
+		if (number < 0) {
+			throw new RuntimeException(NUMBER_INPUT_NEGATIVE_VALUE_ERROR_MESSAGE);
 		}
 	}
 
