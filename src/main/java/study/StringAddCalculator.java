@@ -1,7 +1,9 @@
 package study;
 
+import study.utils.NumberUtils;
 import study.utils.StringUtils;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,15 +20,15 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String text) {
         if (StringUtils.isEmpty(text)) {
-            return 0;
+            return NumberUtils.ZERO;
         }
 
         if (StringUtils.isNumber(text)) {
             return Integer.parseInt(text);
         }
 
-        split(text);
-        return 0;
+        String[] strings = split(text);
+        return sum(strings);
     }
 
     private static String[] split(String text) {
@@ -36,5 +38,20 @@ public class StringAddCalculator {
             return matcher.group(2).split(customDelimiter);
         }
         return text.split(DEFAULT_DELIMITER);
+    }
+
+    private static int sum(String[] strings) {
+        return Arrays.stream(strings)
+                .peek(StringAddCalculator::validateString)
+                .map(StringUtils::toNumber)
+                .reduce(Integer::sum)
+                .orElse(0);
+    }
+
+    private static void validateString(String str) {
+        int number = StringUtils.toNumber(str);
+        if (NumberUtils.isNegative(number)) {
+            throw new RuntimeException(String.format("%s: %s", StringUtils.IS_STRING_NEGATIVE_NUMBER, number));
+        }
     }
 }

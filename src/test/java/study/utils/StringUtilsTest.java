@@ -3,8 +3,10 @@ package study.utils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class StringUtilsTest {
 
@@ -50,5 +52,26 @@ class StringUtilsTest {
 
         // then
         assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("toNumber 성공 테스트")
+    @ParameterizedTest(name = "{displayName} -> str: {0}")
+    @ValueSource(strings = {"-1", "0", "1"})
+    void toNumber_success(String str) {
+        // when
+        int number = StringUtils.toNumber(str);
+
+        // then
+        assertThat(number).isEqualTo(Integer.parseInt(str));
+    }
+
+    @DisplayName("toNumber 실패 테스트")
+    @ParameterizedTest(name = "{displayName} -> str: {0}")
+    @ValueSource(strings = {"a", "가"})
+    void toNumber_failure(String str) {
+        // when & then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> StringUtils.toNumber(str))
+                .withMessageStartingWith(StringUtils.IS_NOT_STRING_NUMBER);
     }
 }

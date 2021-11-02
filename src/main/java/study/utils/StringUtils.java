@@ -2,6 +2,9 @@ package study.utils;
 
 public class StringUtils {
 
+    public static final String IS_NOT_STRING_NUMBER = "문자열 숫자가 아닙니다.";
+    public static final String IS_STRING_NEGATIVE_NUMBER = "문자열 음수입니다.";
+
     private StringUtils() {
         throw new UnsupportedOperationException();
     }
@@ -38,5 +41,12 @@ public class StringUtils {
             return false;
         }
         return true;
+    }
+
+    public static int toNumber(String str) {
+        if (isNumber(str)) {
+            return Integer.parseInt(str);
+        }
+        throw new IllegalArgumentException(String.format("%s: %s", IS_NOT_STRING_NUMBER, str));
     }
 }
