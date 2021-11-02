@@ -7,3 +7,26 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 기능 목록
+- lotto number
+  - validate 1~45
+- lotto
+  - price = 1000 
+  - generate 6 lotto numbers
+- lotto factory
+  - auto-generate lotto
+- winning lotto (extends lotto)
+  - count matching
+- winning statistics
+  - count by matching-count (3,4,5,6)
+  - calculate earnings-rate
+- view
+  - input
+    - pay : should be bigger than price of lotto, otherwise retry
+    - winning numbers (','구분)
+  - output
+    - lotto
+    - winning statistics
+    - error
+- app
