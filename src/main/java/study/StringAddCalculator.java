@@ -19,7 +19,7 @@ public class StringAddCalculator {
 
         String customDelimiter = getCustomDelimiter(text);
         String[] numbers = splitWithCustomDelimiter(text, customDelimiter);
-        return getSumValue(numbers);
+        return getSumPositiveValue(numbers);
     }
 
     private static String[] splitWithCustomDelimiter(String text, String customDelimiter) {
@@ -47,15 +47,15 @@ public class StringAddCalculator {
         return result;
     }
 
-    private static int getSumValue(String[] numbers) {
+    private static int getSumPositiveValue(String[] numbers) {
         int result = 0;
         for (String number : numbers) {
-            result += parseInt(number);
+            result += parsePositiveInt(number);
         }
         return result;
     }
 
-    private static int parseInt(String number) {
+    private static int parsePositiveInt(String number) {
         int value = Integer.parseInt(number);
         if (Integer.signum(value) == -1) {
             throw new RuntimeException("양의 정수 값을 입력해 주세요");
