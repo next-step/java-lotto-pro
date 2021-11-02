@@ -4,6 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private static final Pattern CUSTOM_SEPARATOR_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final String COMMA_OR_COLON = ",|:";
+
     public static int splitAndSum(String text) {
         if (text == null || text.isEmpty()) {
             return 0;
@@ -16,12 +19,12 @@ public class StringAddCalculator {
     }
 
     private static String[] split(String text) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        Matcher m = CUSTOM_SEPARATOR_PATTERN.matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
-        return text.split(",|:");
+        return text.split(COMMA_OR_COLON);
     }
 
     private static int[] parseToIntArray(String[] textNumbers) {
