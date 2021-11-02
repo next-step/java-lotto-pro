@@ -7,6 +7,7 @@ public class StringAddCalculator {
 
     private static final String SEPARATOR = ",|:";
     private static final String CUSTOM_PATTERN_SEPARATOR = "//(.)\n(.*)";
+    private static final int NEGATIVE_CANNOT_INT = 0;
 
     public static int splitAndSum(String text) {
         if (isEmptyOrNull(text)) {
@@ -20,7 +21,6 @@ public class StringAddCalculator {
         int sum = 0;
         for (int i = 0; i < numbers.length; i++) {
             sum += mapToInt(numbers[i]);
-            ;
         }
         return sum;
     }
@@ -29,10 +29,17 @@ public class StringAddCalculator {
         int number;
         try {
             number = Integer.parseInt(text);
+            checkIfPositive(number);
         } catch (NumberFormatException e) {
             throw new RuntimeException("숫자형식이 아닙니다.");
         }
         return number;
+    }
+
+    private static void checkIfPositive(int number) {
+        if (number < NEGATIVE_CANNOT_INT) {
+            throw new RuntimeException("음수는 사용할 수 없습니다.");
+        }
     }
 
     private static boolean isEmptyOrNull(String text) {
