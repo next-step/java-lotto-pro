@@ -5,7 +5,7 @@ public class StringAddCalculator {
 		if (!validateInput(stringFormula)) {
 			return 0;
 		}
-		return 0;
+		return Integer.parseInt(stringFormula);
 	}
 
 	private static boolean validateInput(String stringFormula) {
