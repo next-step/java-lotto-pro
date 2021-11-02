@@ -10,15 +10,15 @@ public class StringAddCalculator {
 		if (isNullOrEmpty(s)) {
 			return 0;
 		}
-		final String[] delimiterAndRest = parseDelimiter(s);
-		return sum(parseInt(delimiterAndRest[0], delimiterAndRest[1]));
+		final String[] delimiterAndRest = parseDelimiterAndRest(s);
+		return sum(parseIntegers(delimiterAndRest[0], delimiterAndRest[1]));
 	}
 
 	private static boolean isNullOrEmpty(String s) {
 		return (null == s) || s.isEmpty();
 	}
 
-	private static String[] parseDelimiter(String s) {
+	private static String[] parseDelimiterAndRest(String s) {
 		final Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(s);
 		if (matcher.find()) {
 			final String customDelimiter = matcher.group(1);
@@ -28,16 +28,16 @@ public class StringAddCalculator {
 		return new String[]{ DEFAULT_DELIMITER, s };
 	}
 
-	private static int[] parseInt(String delimiter, String s) {
+	private static int[] parseIntegers(String delimiter, String s) {
 		final String[] tokens = s.split(delimiter);
 		final int[] parsedTokens = new int[tokens.length];
 		for (int i = 0; i < tokens.length; ++i) {
-			parsedTokens[i] = parseNotNegativeInt(tokens[i]);
+			parsedTokens[i] = parseNotNegativeInteger(tokens[i]);
 		}
 		return parsedTokens;
 	}
 
-	private static int parseNotNegativeInt(String s) {
+	private static int parseNotNegativeInteger(String s) {
 		final int notNegativeInt = Integer.parseInt(s);
 		if (notNegativeInt < 0) {
 			throw new RuntimeException();
