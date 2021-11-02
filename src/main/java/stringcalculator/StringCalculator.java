@@ -30,12 +30,16 @@ public class StringCalculator {
     }
 
     public static int calculate(String inputString) {
+        if (inputString == null || inputString.isEmpty()) {
+            return 0;
+        }
+
         String[] separatedStrings = separator(inputString);
         for (String separatedString : separatedStrings) {
             int number = Integer.parseInt(separatedString);
             validateNumber(number);
         }
-        return 0;
+        return -1;
     }
 
     private static void validateNumber(int number) {
