@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
 	private static final String DEFAULT_SEPARATOR = ",|:";
 
@@ -7,23 +9,25 @@ public class StringAddCalculator {
 		if (isEmpty(text)) {
 			return 0;
 		}
+		String[] numbers = splitText(text);
+		checkNumber(numbers);
 
-		return Integer.parseInt(text);
+		return sum(numbers);
 	}
 
 	public static String[] splitText(String text) {
 		return text.split(DEFAULT_SEPARATOR);
 	}
 
-	public static void checkNumber(String text) {
-		int number = -1;
-		try {
-			number = Integer.parseInt(text);
-		} catch (NumberFormatException e) {
-			throw new RuntimeException("숫자가 아닙니다.");
-		}
-		if (number < 0) {
-			throw new RuntimeException("음수입니다.");
+	public static void checkNumber(String[] numbers) {
+		for (String number : numbers) {
+			try {
+				if (Integer.parseInt(number) < 0) {
+					throw new RuntimeException("음수입니다.");
+				}
+			} catch (NumberFormatException e) {
+				throw new RuntimeException("숫자가 아닙니다.");
+			}
 		}
 	}
 
@@ -32,6 +36,10 @@ public class StringAddCalculator {
 			return true;
 		}
 		return false;
+	}
+
+	public static int sum(String[] numbers) {
+		return Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
 	}
 
 }

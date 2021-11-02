@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -41,6 +42,12 @@ public class StringAddCalculatorTest {
 	@ValueSource(strings = { "1,2:3", "1,2,3", "1:2:3" })
 	void splitText_문자분리(String text) {
 		assertThat(StringAddCalculator.splitText(text)).containsExactly("1", "2", "3");
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = { "1,2:3=6", "3,4,5=12", "6:7=13" }, delimiter = '=')
+	void splitAndSum_기본_구분자_합(String text, int expected) {
+		assertThat(StringAddCalculator.splitAndSum(text)).isEqualTo(expected);
 	}
 
 }
