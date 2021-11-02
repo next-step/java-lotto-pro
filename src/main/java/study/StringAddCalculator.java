@@ -72,4 +72,14 @@ public class StringAddCalculator {
             throw new IllegalArgumentException(INVALID_PARMA_ERROR_MESSAGE);
         }
     }
+
+    private static int sumStringList(List<String> tokenList) {
+        int sumResult = 0;
+
+        for (String token : tokenList) {
+            sumResult += Integer.parseInt(token);
+        }
+
+        return sumResult;
+    }
 }
