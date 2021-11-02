@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import static calculator.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class StringAddCalculatorTest {
@@ -68,7 +69,7 @@ public class StringAddCalculatorTest {
         // when & then
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .withMessageMatching("음수는 입력할 수 없습니다.");
+                .withMessageMatching(NUMBER_ERROR.getMessage());
     }
 
     @Test
@@ -77,6 +78,6 @@ public class StringAddCalculatorTest {
         // when & then
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> StringAddCalculator.splitAndSum("1,2,a"))
-                .withMessageMatching("숫자만 입력할 수 있습니다.");
+                .withMessageMatching(TOKEN_ERROR.getMessage());
     }
 }
