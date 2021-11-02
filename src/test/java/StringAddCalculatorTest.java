@@ -26,4 +26,9 @@ public class StringAddCalculatorTest {
     void 쉼표_구분자_또는_콜론_구분자() {
         assertThat(StringAddCalculator.splitAndSum("1,2:3")).isEqualTo(6);
     }
+
+    @Test
+    void 커스텀_구분자() {
+        assertThat(StringAddCalculator.splitAndSum("//;\n1;2;3")).isEqualTo(6);
+    }
 }
