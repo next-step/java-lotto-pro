@@ -1,39 +1,23 @@
 package step2;
 
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 	private static final String NUMBER_REGEX = "^[0-9]+$";
 
 	public static int splitAndSum(String input) {
-		if (input == null || input.isEmpty()) {
-			return 0;
-		}
-
-		if (input.matches(NUMBER_REGEX)) {
-			return Integer.parseInt(input);
-		}
-
-		String[] numbers = input.split(",|:");
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
-		if (m.find()) {
-			String customDelimiter = m.group(1);
-			numbers = m.group(2).split(customDelimiter);
-		}
-
-		validateNumber(numbers);
-		return add(numbers);
+		String[] numbers = Splitter.split(input);
+		validateNumbers(numbers);
+		return sum(numbers);
 	}
 
-	private static int add(String[] numbers) {
+	private static int sum(String[] numbers) {
 		return Arrays.stream(numbers)
 			.mapToInt(Integer::parseInt)
 			.sum();
 	}
 
-	private static void validateNumber(String[] numbers) {
+	private static void validateNumbers(String[] numbers) {
 		if (isNegativeNumberOrNotNumber(numbers)) {
 			throw new RuntimeException();
 		}
