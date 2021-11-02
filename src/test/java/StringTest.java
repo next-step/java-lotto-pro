@@ -8,4 +8,10 @@ public class StringTest {
 		assertThat("1,2".split(",")).contains("1", "2");
 		assertThat("1".split(",")).containsExactly("1");
 	}
+
+	@Test
+	void step2() {
+		final String s = "(1,2)";
+		assertThat(s.substring(1, s.length() - 1)).isEqualTo("1,2");
+	}
 }
