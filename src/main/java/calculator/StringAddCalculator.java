@@ -1,11 +1,14 @@
 package calculator;
 
 public class StringAddCalculator {
+
+	private static final String DEFAULT_DELIMITER = ",|:";
+
 	public static int splitAndSum(String text) {
 		if (isNullOrEmpty(text))
 			return 0;
 
-		String[] values = text.split(",|:");
+		String[] values = text.split(DEFAULT_DELIMITER);
 		int[] numbers = toInts(values);
 
 		return sum(numbers);
