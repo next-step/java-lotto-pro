@@ -23,11 +23,11 @@ public class LottoNumbers {
 
     public long compare(LottoNumbers winningNumbers) {
         return  lottoNumbers.stream()
-                        .filter(l -> winningNumbers.containNumber(l))
+                        .filter(l -> winningNumbers.isContainNumber(l))
                         .count();
     }
 
-    private boolean containNumber(Integer lottoNumber) {
+    private boolean isContainNumber(Integer lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 }
