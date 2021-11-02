@@ -11,12 +11,12 @@ import java.util.stream.Stream;
  * 주어진 문자열에대해 구분자문와 숫자문를 구분하며 
  * 구분된 항목을 통해 숫자들을 추출한다.
  */
-public class StringCalculatorParsor {
+public class StringCalculatorParser {
   private static final String CUSTOMER_SEPARATOR_PARSING_PATTERN = "^//(.)\n(.*)$";
 
   private final Separators defaultSeparators;
 
-  public StringCalculatorParsor() {
+  public StringCalculatorParser() {
     this.defaultSeparators = generateDefaultSeparators();
   }
   

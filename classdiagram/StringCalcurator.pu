@@ -1,13 +1,13 @@
 @startuml StringCalculator
 class StringCalculator {
 	- CALCURATOR_STRING_PATTERN : String
-	- stringParsor : StringCalculatorParsor
+	- stringParser : StringCalculatorParser
 
 	+ calcuration(calcuratingString: String) : Integer
 	- isInvalidValue(calcuratingString: String) : Boolean
 }
 
-class StringCalculatorParsor {
+class StringCalculatorParser {
 	+ CUSTOM_SEPARATOR_PARSING_PATTERN : string
 	- separators : Separators
 
@@ -38,10 +38,10 @@ class Separator {
 	- item : String
 }
 
-StringCalculator <-- StringCalculatorParsor
+StringCalculator <-- StringCalculatorParser
 
-StringCalculatorParsor <-- CalculatorNumbers
-StringCalculatorParsor  <--  Separators
+StringCalculatorParser <-- CalculatorNumbers
+StringCalculatorParser  <--  Separators
 
 CalculatorNumbers "1" *-- "0..*" CalculatorNumber
 

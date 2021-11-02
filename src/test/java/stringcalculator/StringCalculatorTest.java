@@ -38,7 +38,7 @@ public class StringCalculatorTest {
 
   @DisplayName("문자열계산기의 파서가 ")
   @Nested
-  class StringCalculatorParsorTest {
+  class StringCalculatorParserTest {
     @DisplayName("숫자와 기본 구분자로 구성된 문자열을 받을시 합계가 계산된다.")
     @CsvSource({"'1,2', 3",
                 "'4:5', 9",
@@ -48,10 +48,10 @@ public class StringCalculatorTest {
     @ParameterizedTest(name = "{index} => String Value [{0}] sumValue [{1}]")
     void getCalculatorNumber(String value, Integer expectedValue) {
       // given
-      StringCalculatorParsor stringParsor = new StringCalculatorParsor();
+      StringCalculatorParser stringParser = new StringCalculatorParser();
 
       // when
-      CalculatorNumbers realCalculatorNumbers = stringParsor.parse(value);
+      CalculatorNumbers realCalculatorNumbers = stringParser.parse(value);
 
       // then
       assertThat(realCalculatorNumbers.sum()).isEqualTo(expectedValue);
@@ -65,10 +65,10 @@ public class StringCalculatorTest {
     @ParameterizedTest(name = "{index} => String Value [{0}] sumValue [{1}]")
     void getCalculatorNumber_custrom(String value, Integer expectedValue) {
       // given
-      StringCalculatorParsor stringParsor = new StringCalculatorParsor();
+      StringCalculatorParser stringParser = new StringCalculatorParser();
 
       // when
-      CalculatorNumbers realCalculatorNumbers = stringParsor.parse(value);
+      CalculatorNumbers realCalculatorNumbers = stringParser.parse(value);
 
       // then
       assertThat(realCalculatorNumbers.sum()).isEqualTo(expectedValue);
