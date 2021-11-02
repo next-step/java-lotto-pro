@@ -15,6 +15,66 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.Nested;
 
 public class StringCalcuratorTest {
+  @DisplayName("주어진 문자열에대해 합계를 계산한다.")
+  @CsvSource({"'1,2', 3",
+              "'2:3', 5",
+              "'2,3:5', 10",
+              "'//!\n1!5', 6",
+              "'//!\n1!5!10', 16",
+              "'//!\n1!5,7', 13",
+              })
+  @ParameterizedTest(name = "{index} => String Value [{0}] sumValue [{1}]")
+  void calcurate(String value, Integer expectedValue) {
+    // given
+    StringCalcurator stringCalcurator = new StringCalcurator();
+
+    // when
+    Integer realValue = stringCalcurator.calcurate(value);
+    
+    // then
+    assertThat(realValue).isEqualTo(expectedValue);
+  }
+
+  @DisplayName("문자열계산기의 파서가 ")
+  @Nested
+  class StringCalcuratorParsorTest {
+
+    @DisplayName("숫자와 기본 구분자로 구성된 문자열을 받을시 합계가 계산된다.")
+    @CsvSource({"'1,2', 3",
+                "'4:5', 9",
+                "'4:5:1', 10",
+                "'3,4:5:1', 13"
+              })
+    @ParameterizedTest(name = "{index} => String Value [{0}] sumValue [{1}]")
+    void getCalcuratorNumber(String value, Integer expectedValue) {
+      // given
+      StringCalculatorParsor stringParsor = new StringCalculatorParsor();
+
+      // when
+      CalcuratorNumbers realCalcuratorNumbers = stringParsor.parse(value);
+
+      // then
+      assertThat(realCalcuratorNumbers.sum()).isEqualTo(expectedValue);
+    }
+
+    @DisplayName("숫자와 커스텀 구분자로 구성된 문자열을 받을시 합계가 계산된다.")
+    @CsvSource({"'//|\n1|2', 3",
+                "'//[\n4[5', 9",
+                "'//|\n4,5|1', 10"
+              })
+    @ParameterizedTest(name = "{index} => String Value [{0}] sumValue [{1}]")
+    void getCalcuratorNumber_custrom(String value, Integer expectedValue) {
+      // given
+      StringCalculatorParsor stringParsor = new StringCalculatorParsor();
+
+      // when
+      CalcuratorNumbers realCalcuratorNumbers = stringParsor.parse(value);
+
+      // then
+      assertThat(realCalcuratorNumbers.sum()).isEqualTo(expectedValue);
+    }
+  }
+
   @DisplayName("구분자들에대해")
   @Nested
   class SeperatorsTest {
