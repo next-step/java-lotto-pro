@@ -21,14 +21,26 @@ public class StringAddCalculator {
 		if (m.find()) {
 			String customDelimiter = m.group(1);
 			numbers = m.group(2).split(customDelimiter);
-
-			return Arrays.stream(numbers)
-				.mapToInt(Integer::parseInt)
-				.sum();
 		}
 
+		validateNumber(numbers);
+		return add(numbers);
+	}
+
+	private static int add(String[] numbers) {
 		return Arrays.stream(numbers)
 			.mapToInt(Integer::parseInt)
 			.sum();
+	}
+
+	private static void validateNumber(String[] numbers) {
+		if (isNegativeNumberOrNotNumber(numbers)) {
+			throw new RuntimeException();
+		}
+	}
+
+	private static boolean isNegativeNumberOrNotNumber(String[] numbers) {
+		return Arrays.stream(numbers)
+			.anyMatch(number -> !number.matches(NUMBER_REGEX));
 	}
 }
