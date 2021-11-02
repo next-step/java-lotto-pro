@@ -1,6 +1,7 @@
 package calculator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
@@ -17,5 +18,15 @@ public class StringAddCalculatorTest {
 
         // then
         assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("숫자 한개의 문자열로 더하면 해당 숫자를 반환한다.")
+    public void splitAndSum2() {
+        // when
+        int result = StringAddCalculator.splitAndSum("1");
+
+        // then
+        assertThat(result).isEqualTo(1);
     }
 }
