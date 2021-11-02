@@ -7,21 +7,21 @@ public class StringAddCalculator {
 			return 0;
 		}
 
-		String[] stringNumberArray = split(text);
+		String[] numbers = split(text);
 
-		return sum(stringNumberArray);
+		return sum(numbers);
 	}
 
-	private static int sum(String[] stringNumberArray) {
+	private static int sum(String[] numbers) {
 		int sum = 0;
-		for(String stringNumber : stringNumberArray){
-			sum += parseInt(stringNumber);
+		for(String number : numbers){
+			sum += parseInt(number);
 		}
 		return sum;
 	}
 
 	private static String[] split(String text) {
-		return text.split(",");
+		return text.split(",|:");
 	}
 
 	private static int parseInt(String text) {
