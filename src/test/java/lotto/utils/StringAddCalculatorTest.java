@@ -37,15 +37,20 @@ public class StringAddCalculatorTest {
     @ValueSource(strings = "//,\n1,2,3")
     @DisplayName("문자열을 커스텀 regex 를 이용하여 분리 후 숫자를 합산")
     public void getCustomRegexSumNumber(String inputString) {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(inputString);
+        // given
         String customRegex = ",|:";
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(inputString);
         if (matcher.find()) {
             customRegex = matcher.group(1);
             inputString = matcher.group(2);
         }
         String[] strings = inputString.split(customRegex);
+
+        // when
         int sum = Arrays.asList(strings).stream().mapToInt(Integer::parseInt).sum();
 
+
+        // then
         assertThat(sum).isEqualTo(6);
     }
 
@@ -70,7 +75,7 @@ public class StringAddCalculatorTest {
         String joinString = String.join("", strings);
         if (!isNumberTest(joinString)) {
             System.out.println("[ERROR] 잘못된 입력 값입니다.");
-            throw new RuntimeException("[ERROR] 잘못된 입력 값입니다.");
+            throw new IllegalArgumentException("[ERROR] 잘못된 입력 값입니다.");
         }
     }
 
@@ -79,67 +84,12 @@ public class StringAddCalculatorTest {
     }
 
 
-
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;2;3;4", "//;\n-1;2;3;4", "//;\n가;2;3;4" ,""})
+    @ValueSource(strings = {"//;\n1;2;3;4"})
     public void stringCalculator(String inputString) {
-        int sum = getNumberList(inputString);
-        System.out.println("합산 : " + sum);
-    }
-
-    public int getNumberList(String inputString) {
-        String args = getCheckInputString(inputString);
-        List<Integer> list = splitInputString(args);
-        return list.stream().mapToInt(Integer::intValue).sum();
-    }
-
-    public String getCheckInputString(String inputString) {
-        if (inputString == null || inputString.isEmpty()) {
-            return "0";
-        }
-        return inputString;
-    }
-
-    public List<Integer> splitInputString(String inputString) {
-        List<String> result = getSplitList(inputString);
-        validateNumberFormat(result);
-        return result
-                .stream()
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList());
-    }
-
-    private List<String> getSplitList(String inputString) {
-        Matcher matcher = pattern.matcher(inputString);
-        if (matcher.find()) {
-            return getCustomRegexSplitList(matcher);
-        }
-        return getDefaultRegexSlitList(inputString);
-    }
-
-    private List<String> getCustomRegexSplitList(Matcher matcher) {
-        String customRegex = matcher.group(1);
-        String remainderString = matcher.group(2);
-        return Arrays
-                .asList(remainderString.split(customRegex));
-    }
-
-    private List<String> getDefaultRegexSlitList(String matcher) {
-        return Arrays
-                .asList(matcher.split(DEFAULT_SPLIT_REGEX));
-    }
-
-    public void validateNumberFormat(List<String> strings) {
-        String joinString = String.join("", strings);
-        if (!isNumber(joinString)) {
-            System.out.println("[ERROR] 잘못된 입력 값입니다.");
-            throw new RuntimeException("[ERROR] 잘못된 입력 값입니다.");
-        }
-    }
-
-    public boolean isNumber(String checkValue) {
-        return checkValue.matches("^[0-9]+$");
+        StringAddCalculator stringAddCalculator = new StringAddCalculator();
+        int sum = stringAddCalculator.getNumberList(inputString);
+        assertThat(sum).isEqualTo(10);
     }
 
 }
