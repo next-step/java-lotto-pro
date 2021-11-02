@@ -1,8 +1,10 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.List;
 
 import calculator.constant.ErrorMessage;
+import calculator.utils.StringToIntegerParser;
 import calculator.utils.StringUtils;
 
 public class StringAddCalculator {
@@ -16,6 +18,7 @@ public class StringAddCalculator {
 
 		String[] splitValues = StringSplitter.split(text);
 		validateConsistOfPositiveNumber(splitValues);
+		List<Integer> numbers = StringToIntegerParser.parseNumbers(splitValues);
 
 		return SUM_INIT_VALUE;
 	}
