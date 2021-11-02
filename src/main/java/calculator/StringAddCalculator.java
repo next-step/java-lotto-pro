@@ -8,6 +8,7 @@ import static calculator.ErrorMessage.*;
 public class StringAddCalculator {
 
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
     private static final String NUMBER_REGEX = "[+-]?\\d*(\\.\\d+)?";
 
     public static int splitAndSum(String input) {
@@ -27,7 +28,7 @@ public class StringAddCalculator {
             String customDelimiter = matcher.group(1);
             return matcher.group(2).split(customDelimiter);
         }
-        return input.split("[,:]");
+        return input.split(DEFAULT_DELIMITER_REGEX);
     }
 
     private static int sum(String[] tokens) {
