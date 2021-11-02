@@ -36,19 +36,23 @@ public class StringAddCalculator {
 		for (int i = 0; i < values.length; i++) {
 			int number = Integer.parseInt(values[i]);
 
-			if (number < 0)
-				throw new RuntimeException();
-
-			numbers[i] = number;
+			numbers[i] = validatePositiveNumber(number);
 		}
 
 		return numbers;
 	}
 
+	private static int validatePositiveNumber(int number) {
+		if (number < 0)
+			throw new RuntimeException();
+
+		return number;
+	}
+
 	private static int sum(int[] numbers) {
 		int sum = 0;
 
-		for (int number: numbers) {
+		for (int number : numbers) {
 			sum += number;
 		}
 
