@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringAddCalculatorTest {
 
@@ -36,6 +37,15 @@ class StringAddCalculatorTest {
     @CsvSource(value = {"1:2;3", "1:5;6", "3:4;7", "8:7;15", "10:16;26"}, delimiter = ';')
     void givenTwoNumbersUsingColon(String input, int result) {
         assertThat(StringAddCalculator.splitAndSum(input)).isEqualTo(result);
+    }
+
+    @DisplayName("음수 입력시 예외 발생")
+    @ParameterizedTest
+    @CsvSource(value = {"-1:2;1", "1:-5;-4", "-3:-4;-7"}, delimiter = ';')
+    void givenNegativeNumber(String input, int result) {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("양수를 입력해야 합니다");
     }
 
 }
