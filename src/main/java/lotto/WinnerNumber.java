@@ -20,4 +20,8 @@ public class WinnerNumber {
 		return winnerNumber;
 	}
 
+	public int strikeCount(List<Integer> compareList) {
+		compareList.retainAll(this.winnerNumber.getInput());
+		return compareList.size();
+	}
 }
