@@ -12,18 +12,22 @@ public class StringAddCalculator {
 		if (isNullOrEmpty(text))
 			return 0;
 
-		Matcher m = CUSTOM_DELIMITER.matcher(text);
-		String[] values;
-		if (m.find()) {
-			String customDelimiter = m.group(1);
-			values = m.group(2).split(customDelimiter);
-		} else {
-			values = text.split(DEFAULT_DELIMITER);
-		}
+		String[] values = split(text);
 
 		int[] numbers = toInts(values);
 
 		return sum(numbers);
+	}
+
+	private static String[] split(String text) {
+		Matcher m = CUSTOM_DELIMITER.matcher(text);
+
+		if (m.find()) {
+			String customDelimiter = m.group(1);
+			return m.group(2).split(customDelimiter);
+		}
+
+		return text.split(DEFAULT_DELIMITER);
 	}
 
 	private static int[] toInts(String[] values) {
