@@ -24,11 +24,11 @@ class StringTest {
 		);
 	}
 
-	@DisplayName(" '1,'를 ,(콤마)로 split 했을 때, 1만을 포함하는 배열이 반환되는지 확인하는 테스트")
+	@DisplayName(" '1'를 ,(콤마)로 split 했을 때, 1만을 포함하는 배열이 반환되는지 확인하는 테스트")
 	@Test
 	void splitLastCommaTest() {
 		// given
-		String string = "1,";
+		String string = "1";
 		// when
 		String[] stringArray = string.split(",");
 		// then
