@@ -37,4 +37,10 @@ public class StringAddCalculatorTest {
 		});
 	}
 
+	@ParameterizedTest
+	@ValueSource(strings = { "1,2:3", "1,2,3", "1:2:3" })
+	void splitText_문자분리(String text) {
+		assertThat(StringAddCalculator.splitText(text)).containsExactly("1", "2", "3");
+	}
+
 }

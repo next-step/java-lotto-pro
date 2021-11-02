@@ -1,6 +1,7 @@
 package calculator;
 
 public class StringAddCalculator {
+	private static final String DEFAULT_SEPARATOR = ",|:";
 
 	public static int splitAndSum(String text) {
 		if (text == null || text.trim().isEmpty()) {
@@ -8,6 +9,10 @@ public class StringAddCalculator {
 		}
 		checkNumber(text);
 		return Integer.parseInt(text);
+	}
+
+	public static String[] splitText(String text) {
+		return text.split(DEFAULT_SEPARATOR);
 	}
 
 	public static void checkNumber(String text) {
