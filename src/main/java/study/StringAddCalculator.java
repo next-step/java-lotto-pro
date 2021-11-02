@@ -12,8 +12,7 @@ public class StringAddCalculator {
 		if (isCustomDelimiter(text)) {
 			return customDelimiterSum(text);
 		}
-		String[] numbers = split(text);
-		return sum(numbers);
+		return sum(split(text));
 	}
 
 	private static int customDelimiterSum(String text) {
@@ -33,9 +32,27 @@ public class StringAddCalculator {
 	private static int sum(String[] numbers) {
 		int sum = 0;
 		for (String number : numbers) {
+			numberValidate(number);
 			sum += parseInt(number);
 		}
 		return sum;
+	}
+
+	private static void numberValidate(String text) {
+		if(isText(text)){
+			throw new RuntimeException();
+		}
+		if(isNegative(text)){
+			throw new RuntimeException();
+		}
+	}
+
+	private static boolean isNegative(String text) {
+		return Integer.parseInt(text) < 0;
+	}
+
+	private static boolean isText(String text) {
+		return text.matches("\\D");
 	}
 
 	private static String[] split(String text) {
