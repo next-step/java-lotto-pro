@@ -20,7 +20,7 @@
 - `Parser`
     - [ ] 문자열을 분석해 `Delimiter`와 `Remainder`를 얻는다.
 - `Splitter`
-    - [ ] `Delimiter`를 기준으로 `Remainder`를 분리하여 `NaturalNumber`들을 반환한다.
+    - [x] `Delimiter`를 기준으로 `Remainder`를 분리하여 반환한다.
 - `Delimiter`
     - [x] 문자열을 분리할 때 쓰이는 값이다.
     - [x] 기본 값은 `,` 또는 `:`이다.
