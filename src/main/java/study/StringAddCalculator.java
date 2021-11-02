@@ -13,6 +13,9 @@ public class StringAddCalculator {
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
     private static final Pattern CUSTOM_PATTERN = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
 
+    private static final String VALID_INTEGER_STRING_REGEX = "\\d";
+    private static final String INVALID_PARMA_ERROR_MESSAGE = "조건에 맞지않는 값이 입력되었습니다.";
+
     private StringAddCalculator() {
         throw new UnsupportedOperationException();
     }
@@ -54,5 +57,19 @@ public class StringAddCalculator {
 
     private static ArrayList<String> stringArrayToList(String[] tokens) {
         return new ArrayList<>(Arrays.asList(tokens));
+    }
+
+    protected static void validateStringList(List<String> tokenList) throws IllegalArgumentException {
+        Pattern pattern = Pattern.compile(VALID_INTEGER_STRING_REGEX);
+
+        for (String token : tokenList) {
+            validateString(token, pattern);
+        }
+    }
+
+    private static void validateString(String target, Pattern pattern) throws IllegalArgumentException {
+        if (!pattern.matcher(target).matches()) {
+            throw new IllegalArgumentException(INVALID_PARMA_ERROR_MESSAGE);
+        }
     }
 }
