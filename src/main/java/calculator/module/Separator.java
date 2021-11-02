@@ -19,6 +19,9 @@ public class Separator {
     }
 
     public static Separator separate(String input) {
+        if(input == null || input.trim().isEmpty()){
+            input = "0";
+        }
 
         Matcher m = Pattern.compile(CUSTOM_REGEX).matcher(input);
 

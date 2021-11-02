@@ -12,7 +12,7 @@ public class NumberTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1,1", "0,0", "90,90", " ,0","' ',0"
+            "1,1", "0,0", "90,90"
     })
     @DisplayName("문자 검증 - 성공")
     public void numberValidationTest_ok(String input, int result){
