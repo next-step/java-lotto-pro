@@ -1,5 +1,8 @@
 package stringcalculator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,5 +27,20 @@ public class StringCalculator {
             return tokens;
         }
         return new String[]{inputString};
+    }
+
+    public static int calculate(String inputString) {
+        String[] separatedStrings = separator(inputString);
+        for (String separatedString : separatedStrings) {
+            int number = Integer.parseInt(separatedString);
+            validateNumber(number);
+        }
+        return 0;
+    }
+
+    private static void validateNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("음수를 입력하면 안됩니다.");
+        }
     }
 }
