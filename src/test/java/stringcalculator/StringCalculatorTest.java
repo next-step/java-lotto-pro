@@ -1,4 +1,4 @@
-package stringcalcurator;
+package stringcalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -12,9 +12,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
 import org.junit.jupiter.api.Nested;
 
-public class StringCalcuratorTest {
+public class StringCalculatorTest {
   @DisplayName("주어진 문자열에대해 합계를 계산한다.")
   @CsvSource({"'1,2', 3",
               "'2:3', 5",
@@ -24,21 +25,20 @@ public class StringCalcuratorTest {
               "'//!\n1!5,7', 13",
               })
   @ParameterizedTest(name = "{index} => String Value [{0}] sumValue [{1}]")
-  void calcurate(String value, Integer expectedValue) {
+  void calculate(String value, Integer expectedValue) {
     // given
-    StringCalcurator stringCalcurator = new StringCalcurator();
+    StringCalculator stringCalculator = new StringCalculator();
 
     // when
-    Integer realValue = stringCalcurator.calcurate(value);
-    
+    Integer realValue = stringCalculator.calculate(value);
+
     // then
     assertThat(realValue).isEqualTo(expectedValue);
   }
 
   @DisplayName("문자열계산기의 파서가 ")
   @Nested
-  class StringCalcuratorParsorTest {
-
+  class StringCalculatorParsorTest {
     @DisplayName("숫자와 기본 구분자로 구성된 문자열을 받을시 합계가 계산된다.")
     @CsvSource({"'1,2', 3",
                 "'4:5', 9",
@@ -46,15 +46,15 @@ public class StringCalcuratorTest {
                 "'3,4:5:1', 13"
               })
     @ParameterizedTest(name = "{index} => String Value [{0}] sumValue [{1}]")
-    void getCalcuratorNumber(String value, Integer expectedValue) {
+    void getCalculatorNumber(String value, Integer expectedValue) {
       // given
       StringCalculatorParsor stringParsor = new StringCalculatorParsor();
 
       // when
-      CalcuratorNumbers realCalcuratorNumbers = stringParsor.parse(value);
+      CalculatorNumbers realCalculatorNumbers = stringParsor.parse(value);
 
       // then
-      assertThat(realCalcuratorNumbers.sum()).isEqualTo(expectedValue);
+      assertThat(realCalculatorNumbers.sum()).isEqualTo(expectedValue);
     }
 
     @DisplayName("숫자와 커스텀 구분자로 구성된 문자열을 받을시 합계가 계산된다.")
@@ -63,15 +63,15 @@ public class StringCalcuratorTest {
                 "'//|\n4,5|1', 10"
               })
     @ParameterizedTest(name = "{index} => String Value [{0}] sumValue [{1}]")
-    void getCalcuratorNumber_custrom(String value, Integer expectedValue) {
+    void getCalculatorNumber_custrom(String value, Integer expectedValue) {
       // given
       StringCalculatorParsor stringParsor = new StringCalculatorParsor();
 
       // when
-      CalcuratorNumbers realCalcuratorNumbers = stringParsor.parse(value);
+      CalculatorNumbers realCalculatorNumbers = stringParsor.parse(value);
 
       // then
-      assertThat(realCalcuratorNumbers.sum()).isEqualTo(expectedValue);
+      assertThat(realCalculatorNumbers.sum()).isEqualTo(expectedValue);
     }
   }
 
@@ -85,12 +85,12 @@ public class StringCalcuratorTest {
       List<Separator> tempSeparators = new ArrayList<>();
       tempSeparators.add(new Separator(","));
       tempSeparators.add(new Separator(":"));
-  
+
       // when
       Separators separators = new Separators(tempSeparators);
 
       // then
-      assertThat(separators.getSeparators()).isEqualTo(",:");
+      assertThat(separators.value()).isEqualTo(",:");
     }
 
     @DisplayName("기본구분자가 있을 때 추가적으로 커스텀 구분자가 추가된다.")
@@ -100,13 +100,14 @@ public class StringCalcuratorTest {
       List<Separator> tempSeparators = new ArrayList<>();
       tempSeparators.add(new Separator(","));
       tempSeparators.add(new Separator(":"));
+
       Separators separators = new Separators(tempSeparators);
 
       // when
       separators.add(new Separator("@"));
 
       // then
-      assertThat(separators.getSeparators()).isEqualTo(",:@");
+      assertThat(separators.value()).isEqualTo(",:@");
     }
   }
 
@@ -117,35 +118,35 @@ public class StringCalcuratorTest {
     @Test
     void  sum_multiValue() {
       // given
-        List<CalcuratorNumber> tempCalculratorNumbers = new ArrayList<>();
-        tempCalculratorNumbers.add(new CalcuratorNumber("2"));
-        tempCalculratorNumbers.add(new CalcuratorNumber("1"));
+        List<CalculatorNumber> tempCalculratorNumbers = new ArrayList<>();
+        tempCalculratorNumbers.add(new CalculatorNumber("2"));
+        tempCalculratorNumbers.add(new CalculatorNumber("1"));
 
-        CalcuratorNumbers calcuratorNumbers = new CalcuratorNumbers(tempCalculratorNumbers);
+        CalculatorNumbers calculatorNumbers = new CalculatorNumbers(tempCalculratorNumbers);
 
       // when
-        Integer realValue = calcuratorNumbers.sum();
+        Integer realValue = calculatorNumbers.sum();
 
       // then
         assertThat(realValue).isEqualTo(3);
     }
-    
+
     @DisplayName("없을 경우 0을 반환하게된다.")
     @Test
     void sum_none() {
       // given
-        List<CalcuratorNumber> tempCalculratorNumbers = new ArrayList<>();
+        List<CalculatorNumber> tempCalculratorNumbers = new ArrayList<>();
 
-        CalcuratorNumbers calcuratorNumbers = new CalcuratorNumbers(tempCalculratorNumbers);
+        CalculatorNumbers calculatorNumbers = new CalculatorNumbers(tempCalculratorNumbers);
 
       // when
-        Integer realValue = calcuratorNumbers.sum();
+        Integer realValue = calculatorNumbers.sum();
 
       // then
         assertThat(realValue).isZero();
     }
   }
-  
+
   @DisplayName("계산할 숫자가")
   @Nested
   class CalculratorNumberTest {
@@ -154,13 +155,13 @@ public class StringCalcuratorTest {
     @ParameterizedTest(name = "{index} => String Value [{0}]")
     void numberInvalid(String value) {
       // given
+
       // when
-      ThrowingCallable exceptionContent = () -> new CalcuratorNumber(value);
-      
+      ThrowingCallable exceptionContent = () -> new CalculatorNumber(value);
+
       // then
       assertThatExceptionOfType(RuntimeException.class)
         .isThrownBy(exceptionContent);
-      
     }
   }
 }

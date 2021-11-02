@@ -1,9 +1,17 @@
-package stringcalcurator;
+package stringcalculator;
 
-public class CalcuratorNumber {
+/**
+ * 계산에 사용되는 숫자.
+ */
+public class CalculatorNumber {
   private final Integer item;
   
-  public CalcuratorNumber(String value) {
+  /**
+   * 계산에 사용되는 숫자에대해 유효성검사를 하여 통과시 해당값을 저장.
+   *
+   * @param value 문자형으로 표현된 숫자
+   */
+  public CalculatorNumber(String value) {
     if (isInvalid(value)) {
       throw new RuntimeException("유요하지 않은 계산 숫자입니다.");
     }
