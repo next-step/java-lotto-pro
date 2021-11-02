@@ -14,15 +14,19 @@
 ## TODOs
 
 - `StringAdditionCalculator`
-    - [ ] 문자열로부터 `Delimiter`와 `Remainder`를 추출한다.
+    - [ ] `Parser`가 문자열을 분석해 `Delimiter`와 `Remainder`를 얻는다.
     - [ ] `Splitter`를 사용해 `Remainder`를 `Delimiter` 기준으로 분리한다.
     - [ ] 분리된 `NaturalNumber`들을 더한다.
+- `Parser`
+    - [ ] 문자열을 분석해 `Delimiter`와 `Remainder`를 얻는다.
 - `Splitter`
-    - [ ] `Delimiter`를 기준으로 분리한 `NaturalNumber`들을 반환한다.
+    - [ ] `Delimiter`를 기준으로 `Remainder`를 분리하여 `NaturalNumber`들을 반환한다.
 - `Delimiter`
     - [x] 문자열을 분리할 때 쓰이는 값이다.
     - [x] 기본 값은 `,` 또는 `:`이다.
     - [x] 커스텀 값을 지정할 수 있다.
+- `Remainder`
+    - [x] 문자열에서 `Delimiter`를 제외한 값이다. 
 - `NaturalNumber`
     - [x] `0`과 같거나 큰 정수이다.
     - [x] 숫자 이외의 값 또는 음수가 주어진 경우 `RuntimeException` 예외를 던진다.
