@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
 
 final class StringDelimiterFinder {
 
+	private static final int DELIMITER_GROUP_INDEX = 1;
+	private static final int STRING_WITHOUT_DELIMITER_GROUP_INDEX = 2;
+
 	private final Pattern pattern;
 	private final String target;
 	private Matcher matcher;
@@ -28,14 +31,14 @@ final class StringDelimiterFinder {
 		if (hasNotDelimiter()) {
 			throw new IllegalStateException(String.format("%s has not delimiter pattern(%s)", target, pattern));
 		}
-		return matcher.group(1);
+		return matcher.group(DELIMITER_GROUP_INDEX);
 	}
 
 	public String targetWithoutDelimiterPattern() {
 		if (hasNotDelimiter()) {
 			return target;
 		}
-		return matcher.group(2);
+		return matcher.group(STRING_WITHOUT_DELIMITER_GROUP_INDEX);
 	}
 
 	@Override
