@@ -32,4 +32,10 @@ public class SetTest {
     void containsTest(Integer input) {
         assertThat(numbers.contains(input)).isTrue();
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+    void containsTest(Integer input, boolean result) {
+        assertThat(numbers.contains(input)).isEqualTo(result);
+    }
 }
