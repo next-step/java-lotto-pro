@@ -49,4 +49,11 @@ public class StringAddCalculatorTest {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
 			.isInstanceOf(RuntimeException.class);
 	}
+
+	@Test
+	public void splitAndSum_숫자_대신_문자() throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("@,D,3"))
+			.isInstanceOf(RuntimeException.class)
+			.hasMessageContaining("문자가 포함되어 있습니다.");
+	}
 }

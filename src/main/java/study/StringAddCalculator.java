@@ -40,7 +40,7 @@ public class StringAddCalculator {
 
 	private static void numberValidate(String text) {
 		if(isText(text)){
-			throw new RuntimeException();
+			throw new RuntimeException("문자가 포함되어 있습니다.");
 		}
 		if(isNegative(text)){
 			throw new RuntimeException();
