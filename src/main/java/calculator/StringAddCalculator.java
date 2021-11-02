@@ -4,8 +4,6 @@ import static java.util.Arrays.stream;
 
 public class StringAddCalculator {
 
-    private static final String STRING_DELIMITER = "[,:]";
-
     private StringAddCalculator() {
     }
 
@@ -14,15 +12,16 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return calculateStringAdd(input);
-    }
+        String[] numbers = StringParser.split(input);
 
-    private static int calculateStringAdd(String input) {
-        String[] numbers = input.split(STRING_DELIMITER);
-        return stream(numbers).mapToInt(Integer::parseInt).sum();
+        return sum(numbers);
     }
 
     private static boolean isNullOrEmpty(String input) {
         return input == null || input.trim().isEmpty();
+    }
+
+    private static int sum(String[] numbers) {
+        return stream(numbers).mapToInt(Integer::parseInt).sum();
     }
 }
