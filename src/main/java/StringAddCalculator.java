@@ -10,7 +10,7 @@ public class StringAddCalculator {
 		if (isNullOrEmpty(s)) {
 			return 0;
 		}
-		String[] delimiterAndRest = parseDelimiter(s);
+		final String[] delimiterAndRest = parseDelimiter(s);
 		return sum(parseInt(delimiterAndRest[0], delimiterAndRest[1]));
 	}
 
