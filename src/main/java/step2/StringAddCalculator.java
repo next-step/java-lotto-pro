@@ -28,10 +28,20 @@ public class StringAddCalculator {
         int[] numbers = new int[textNumbers.length];
 
         for (int i = 0; i < textNumbers.length; i++) {
-            numbers[i] = Integer.parseInt(textNumbers[i]);
+            numbers[i] = parseToInt(textNumbers[i]);
         }
 
         return numbers;
+    }
+
+    private static int parseToInt(String textNumber) {
+        int number = Integer.parseInt(textNumber);
+
+        if (number < 0) {
+            throw new IllegalArgumentException("음수 입력 불가능 number: " + number);
+        }
+
+        return number;
     }
 
     private static int sum(int[] numbers) {
