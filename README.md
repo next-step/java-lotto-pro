@@ -13,10 +13,10 @@
 
 ## TODOs
 
-- `StringAdditionCalculator`
-    - [ ] `Parser`가 문자열을 분석해 `Delimiter`와 `Remainder`를 얻는다.
-    - [ ] `Splitter`를 사용해 `Remainder`를 `Delimiter` 기준으로 분리한다.
-    - [ ] 분리된 `NaturalNumber`들을 더한다.
+- `StringAddCalculator`
+    - [x] `Parser`가 문자열을 분석해 `Delimiter`와 `Remainder`를 얻는다.
+    - [x] `Splitter`를 사용해 `Remainder`를 `Delimiter` 기준으로 분리한다.
+    - [x] 분리된 `NaturalNumber`들을 더한다.
 - `Parser`
     - [x] 문자열을 분석해 `Delimiter`와 `Remainder`를 얻는다.
 - `Splitter`

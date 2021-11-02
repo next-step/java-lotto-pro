@@ -14,11 +14,11 @@ class SplitterTest {
 	void split_with_delimiter() {
 		// given & when & then
 		assertAll(
-			() -> assertThat(Splitter.split(new Remainder("1,2"), new Delimiter()))
+			() -> assertThat(Splitter.split(new ParsedString(new Delimiter(), new Remainder("1,2"))))
 				.isEqualTo(new String[] {"1", "2"}),
-			() -> assertThat(Splitter.split(new Remainder("1,2,3"), new Delimiter()))
+			() -> assertThat(Splitter.split(new ParsedString(new Delimiter(), new Remainder("1,2,3"))))
 				.isEqualTo(new String[] {"1", "2", "3"}),
-			() -> assertThat(Splitter.split(new Remainder("1,2:3"), new Delimiter()))
+			() -> assertThat(Splitter.split(new ParsedString(new Delimiter(), new Remainder("1,2:3"))))
 				.isEqualTo(new String[] {"1", "2", "3"})
 		);
 	}
@@ -28,11 +28,11 @@ class SplitterTest {
 	void split_with_custom_delimiter() {
 		// given & when & then
 		assertAll(
-			() -> assertThat(Splitter.split(new Remainder("1!2"), new Delimiter("!")))
+			() -> assertThat(Splitter.split(new ParsedString(new Delimiter("!"), new Remainder("1!2"))))
 				.isEqualTo(new String[] {"1", "2"}),
-			() -> assertThat(Splitter.split(new Remainder("1!2!3"), new Delimiter("!")))
+			() -> assertThat(Splitter.split(new ParsedString(new Delimiter("!"), new Remainder("1!2!3"))))
 				.isEqualTo(new String[] {"1", "2", "3"}),
-			() -> assertThat(Splitter.split(new Remainder("1!2!3!4"), new Delimiter("!")))
+			() -> assertThat(Splitter.split(new ParsedString(new Delimiter("!"), new Remainder("1!2!3!4"))))
 				.isEqualTo(new String[] {"1", "2", "3", "4"})
 		);
 	}
