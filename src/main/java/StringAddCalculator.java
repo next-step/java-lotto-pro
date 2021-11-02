@@ -11,7 +11,7 @@ public class StringAddCalculator {
 			return 0;
 		}
 		final String[] delimiterAndRest = parseDelimiterAndRest(s);
-		return sum(parseIntegers(delimiterAndRest[0], delimiterAndRest[1]));
+		return sum(parseNumbers(delimiterAndRest[0], delimiterAndRest[1]));
 	}
 
 	private static boolean isNullOrEmpty(String s) {
@@ -28,16 +28,16 @@ public class StringAddCalculator {
 		return new String[]{ DEFAULT_DELIMITER, s };
 	}
 
-	private static int[] parseIntegers(String delimiter, String s) {
+	private static int[] parseNumbers(String delimiter, String s) {
 		final String[] tokens = s.split(delimiter);
 		final int[] parsedTokens = new int[tokens.length];
 		for (int i = 0; i < tokens.length; ++i) {
-			parsedTokens[i] = parseNotNegativeInteger(tokens[i]);
+			parsedTokens[i] = parseNotNegativeNumber(tokens[i]);
 		}
 		return parsedTokens;
 	}
 
-	private static int parseNotNegativeInteger(String s) {
+	private static int parseNotNegativeNumber(String s) {
 		final int notNegativeInt = Integer.parseInt(s);
 		if (notNegativeInt < 0) {
 			throw new RuntimeException();
