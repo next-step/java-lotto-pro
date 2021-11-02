@@ -5,17 +5,18 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+	private static final String NUMBER_INPUT_NEGATIVE_VALUE_ERROR_MESSAGE = "[ERROR] 0이상의 숫자만 입력해주세요.";
+	private static final String NOT_DIGIT_ERROR_MESSAGE = "[ERROR] 구분자 사이에는 숫자만 입력해주세요.";
 	private static final String basicDelimiters = ":|,";
 	private static final int SPLIT_CUSTOM_DELIMITER_INDEX = 1;
 	private static final int SPLIT_NUMBER_TEXT_INDEX = 2;
-	private static final String NUMBER_INPUT_NEGATIVE_VALUE_ERROR_MESSAGE = "0이상의 숫자만 입력해주세요.";
 
 	public static int splitAndSum(String text) {
 		if (isTextNullOrEmpty(text)) {
 			return 0;
 		}
 		String[] splitedText = splitText(text);
-		int[] numbers = converToNumbers(splitedText);
+		int[] numbers = convertToNumbers(splitedText);
 		return sumNumbers(numbers);
 	}
 
@@ -50,22 +51,22 @@ public class StringAddCalculator {
 		return String.join("|", basicDelimiters, customDelimiter);
 	}
 
-	private static int[] converToNumbers(String[] splitedText) {
+	private static int[] convertToNumbers(String[] splitedText) {
 		List<Integer> numbers = new ArrayList<>();
 		for (String letter : splitedText) {
-			int number = converToInteger(letter);
+			int number = convertToInteger(letter);
 			validateNotNegativeInteger(number);
 			numbers.add(number);
 		}
 		return numbers.stream().mapToInt(number -> number).toArray();
 	}
 
-	private static Integer converToInteger(String letter) {
+	private static Integer convertToInteger(String letter) {
 		try {
 			int number = Integer.parseInt(letter);
 			return number;
 		} catch (NumberFormatException ex) {
-			throw new RuntimeException();
+			throw new RuntimeException(NOT_DIGIT_ERROR_MESSAGE);
 		}
 	}
 
