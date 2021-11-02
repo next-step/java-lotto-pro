@@ -2,7 +2,6 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -30,5 +29,16 @@ class StringSplitterTest {
 
 		//then
 		assertThat(strings).hasSize(0);
+	}
+
+	@DisplayName("커스텀 구분자로 문자열을 분리한다.")
+	@ParameterizedTest
+	@ValueSource(strings = {"//;\n1;2;3", "//@\n1@2@3", "//a\n1a2a3", "//가\n1가2가3"})
+	void splitByCustomDelimiter(String text) {
+		// when
+		String[] strings = StringSplitter.split(text);
+
+		// then
+		assertThat(strings).containsExactly("1", "2", "3").hasSize(3);
 	}
 }
