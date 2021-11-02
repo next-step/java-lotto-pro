@@ -4,7 +4,7 @@ import java.util.Objects;
 public class StringAddCalculator {
 
     private static final int ZERO = 0;
-    private static final String SPLITTER = ",";
+    private static final String SPLITTER = ",|:";
 
     public static int splitAndSum(String value) {
         if (isNullOrEmpty(value)) {
