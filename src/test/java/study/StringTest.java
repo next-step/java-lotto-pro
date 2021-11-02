@@ -50,7 +50,7 @@ public class StringTest {
 
     @Test
     @DisplayName("charAt 메서드를 범위를 벗어난 인덱스로 호출하면 예외가 발생한다.")
-    void charAt_exception() {
+    void charAtThrowException() {
         // when & then
         assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
                 .isThrownBy(() -> "abc".charAt(3))
