@@ -32,4 +32,11 @@ class StringAddCalculatorTest {
         assertThat(StringAddCalculator.splitAndSum(input)).isEqualTo(result);
     }
 
+    @DisplayName("숫자 두개를 콜론으로 구분시 두 숫자의 합을 반환한다")
+    @ParameterizedTest
+    @CsvSource(value = {"1:2;3", "1:5;6", "3:4;7", "8:7;15", "10:16;26"}, delimiter = ';')
+    void givenTwoNumbersUsingColon(String input, int result) {
+        assertThat(StringAddCalculator.splitAndSum(input)).isEqualTo(result);
+    }
+
 }
