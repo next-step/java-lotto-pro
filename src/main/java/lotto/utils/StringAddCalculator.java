@@ -1,17 +1,15 @@
 package lotto.utils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static lotto.constants.CalculatorConstants.*;
-
 public class StringAddCalculator {
 
     private final static Pattern pattern = Pattern.compile("//(.)\n(.*)");
+    public final static String DEFAULT_SPLIT_REGEX = ",|:";
 
     public void stringCalculator(String inputString) {
         int sum = getNumberList(inputString);
