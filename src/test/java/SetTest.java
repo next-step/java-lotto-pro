@@ -36,4 +36,11 @@ public class SetTest {
 	public void containsTest(int number) {
 		assertThat(input.contains(number)).isTrue();
 	}
+
+	@DisplayName("Set에 특정 값들이 존재하지 않음 확인")
+	@ValueSource(ints = {4, 5})
+	@ParameterizedTest
+	public void notContainsTest(int number) {
+		assertThat(input.contains(number)).isFalse();
+	}
 }
