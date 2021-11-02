@@ -19,7 +19,7 @@ public class StringAddCalculator {
 			return 0;
 		}
 		if(numberString.length() == 1) {
-			return Integer.parseInt(numberString);
+			return getNumber(numberString);
 		}
 		return calculate(numberString);
 	}
@@ -39,14 +39,18 @@ public class StringAddCalculator {
 	 * @return 숫자를 모두 더한 값
 	 */
 	private static int calculate(String numberString) {
-		int[] numbers = getNumbers(numberString);
 		int sum = 0;
-		for(int number : numbers) {
+		for(int number : getNumbers(numberString)) {
 			sum += number;
 		}
 		return sum;
 	}
 
+	/**
+	 * 문자 배열에 담긴 값을 숫자 배열에 담아 가져오기
+	 * @param numberString
+	 * @return
+	 */
 	private static int[] getNumbers(String numberString) {
 		String[] numberStrings = getNumberStrings(numberString);
 		int[] numbers = new int[numberStrings.length];
@@ -56,9 +60,13 @@ public class StringAddCalculator {
 		return numbers;
 	}
 
+	/**
+	 * 문자열을 숫자로 변환하여 가져오기
+	 * @param number
+	 * @return
+	 */
 	private static int getNumber(String number) {
-		Matcher numericMatcher = Pattern.compile(NUMERIC_PATTERN).matcher(number);
-		if(numericMatcher.find() && Integer.parseInt(number) >= 0) {
+		if(Pattern.compile(NUMERIC_PATTERN).matcher(number).find() && Integer.parseInt(number) >= 0) {
 			return Integer.parseInt(number);
 		}
 		throw new RuntimeException();
