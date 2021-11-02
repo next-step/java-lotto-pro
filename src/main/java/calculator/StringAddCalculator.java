@@ -5,6 +5,8 @@ public class StringAddCalculator {
         if (text == null || text.isEmpty()) {
             return 0;
         }
-        return 1;
+        String[] numbers = TextSplit.split(text);
+        PositiveNumbers positiveNumbers = new PositiveNumbers(numbers);
+        return positiveNumbers.sum();
     }
 }
