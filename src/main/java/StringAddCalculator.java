@@ -17,9 +17,17 @@ public class StringAddCalculator {
 		final String[] tokens = s.split(delimiter);
 		final int[] parsedTokens = new int[tokens.length];
 		for (int i = 0; i < tokens.length; ++i) {
-			parsedTokens[i] = Integer.parseInt(tokens[i]);
+			parsedTokens[i] = parseNotNegativeInt(tokens[i]);
 		}
 		return parsedTokens;
+	}
+
+	private static int parseNotNegativeInt(String s) {
+		int notNegativeInt = Integer.parseInt(s);
+		if (notNegativeInt < 0) {
+			throw new RuntimeException();
+		}
+		return notNegativeInt;
 	}
 
 	private static int sum(int[] numbers) {
