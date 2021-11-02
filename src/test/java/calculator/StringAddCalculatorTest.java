@@ -3,6 +3,7 @@ package calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.*;
@@ -28,5 +29,16 @@ public class StringAddCalculatorTest {
 
         // then
         assertThat(result).isEqualTo(1);
+    }
+
+    @ParameterizedTest(name = "{displayName} - {arguments}")
+    @CsvSource(value = {"1,2:3", "1,2,3:6"}, delimiter = ':')
+    @DisplayName("숫자를 컴마로 구분한 문자열로 더하면 숫자들의 합을 반환한다.")
+    public void splitAndSum3(String input, int expected) {
+        // when
+        int result = StringAddCalculator.splitAndSum(input);
+
+        // then
+        assertThat(result).isEqualTo(expected);
     }
 }
