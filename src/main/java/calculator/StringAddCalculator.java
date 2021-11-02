@@ -14,6 +14,7 @@ public class StringAddCalculator {
 
         int result = 0;
         for (String token : splitTokens(input)) {
+            validateToken(token);
             int number = Integer.parseInt(token);
             validateNumber(number);
             result += number;
@@ -28,6 +29,12 @@ public class StringAddCalculator {
             return matcher.group(2).split(customDelimiter);
         }
         return input.split("[,:]");
+    }
+
+    private static void validateToken(String token) {
+        if (!token.chars().allMatch(Character::isDigit)) {
+            throw new RuntimeException("숫자만 입력할 수 있습니다.");
+        }
     }
 
     private static void validateNumber(int number) {

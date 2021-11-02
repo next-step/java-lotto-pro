@@ -64,10 +64,19 @@ public class StringAddCalculatorTest {
 
     @Test
     @DisplayName("음수가 포함된 문자열로 더하면 예외가 발생한다.")
-    public void splitAndSumThrowException() {
+    public void splitAndSumThrowException1() {
         // when & then
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .withMessageMatching("음수는 입력할 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 문자열로 더하면 예외가 발생한다.")
+    public void splitAndSumThrowException2() {
+        // when & then
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> StringAddCalculator.splitAndSum("1,2,a"))
+                .withMessageMatching("숫자만 입력할 수 있습니다.");
     }
 }
