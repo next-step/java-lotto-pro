@@ -18,6 +18,10 @@ final class StringNumber {
 		if (isEmptyString()) {
 			return DEFAULT_EMPTY_INT;
 		}
+		return parseValidInt();
+	}
+
+	private int parseValidInt() {
 		int number = Integer.parseInt(string);
 		validate(number);
 		return number;
