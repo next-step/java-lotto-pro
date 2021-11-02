@@ -23,6 +23,14 @@
 - [X] 커스텀 구분자로 분리된 숫자를 검증 테스트 한다.
 - [X] 문자 or 음수 RuntimeException 구현
 
+## 리팩토링 작업
+
+> 책임별로 객체화하기
+
+- [x] SplitDelimiter : 구분자 검증 책임
+- [x] SplitNumber : 허용 되는 값 검증 책임
+- [x] StringAddCalculator : 입력 값 합산
+
 ---
 ---
 
