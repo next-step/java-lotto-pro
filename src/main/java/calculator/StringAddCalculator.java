@@ -6,7 +6,20 @@ public class StringAddCalculator {
 		if (text == null || text.trim().isEmpty()) {
 			return 0;
 		}
+		checkNumber(text);
 		return Integer.parseInt(text);
+	}
+
+	public static void checkNumber(String text) {
+		int number = -1;
+		try {
+			number = Integer.parseInt(text);
+		} catch (NumberFormatException e) {
+			throw new RuntimeException("숫자가 아닙니다.");
+		}
+		if (number < 0) {
+			throw new RuntimeException("음수입니다.");
+		}
 	}
 
 }
