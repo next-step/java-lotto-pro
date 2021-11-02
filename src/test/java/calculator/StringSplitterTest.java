@@ -24,4 +24,10 @@ public class StringSplitterTest {
         assertThat(StringSplitter.split("7,8:9")).containsExactly("7","8","9");
     }
 
+    @DisplayName("커스텀 구분자로 문자열 분리")
+    @Test
+    void usingCustomDelimiter() {
+        assertThat(StringSplitter.split("//%\n1%2%3")).containsExactly("1","2","3");
+    }
+
 }
