@@ -12,7 +12,7 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] numbers = StringParser.split(input);
+        String[] numbers = StringAddParser.split(input);
 
         return sum(numbers);
     }
