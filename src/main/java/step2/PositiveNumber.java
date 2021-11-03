@@ -6,8 +6,9 @@ public class PositiveNumber {
 
 	private final int positiveNumber;
 
-	private PositiveNumber(int positiveNumber) {
-		this.positiveNumber = positiveNumber;
+	private PositiveNumber(int number) {
+		validate(number);
+		this.positiveNumber = number;
 	}
 
 	private PositiveNumber(String s) {
