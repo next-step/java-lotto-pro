@@ -6,6 +6,9 @@ public class Converter {
 
     private static final String NUMBER_REGEX = "[+-]?\\d*(\\.\\d+)?";
 
+    private Converter() {
+    }
+
     public static int[] convert(String[] tokens) {
         int[] result = new int[tokens.length];
         for (int i = 0; i < tokens.length; i++) {

@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
+    private StringAddCalculator() {
+    }
+
     public static int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
             return 0;

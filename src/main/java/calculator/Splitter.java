@@ -8,6 +8,9 @@ public class Splitter {
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
 
+    private Splitter() {
+    }
+
     public static String[] split(String input) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
         if (matcher.find()) {
