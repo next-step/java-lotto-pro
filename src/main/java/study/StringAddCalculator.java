@@ -1,13 +1,14 @@
 package study;
 
 public class StringAddCalculator {
+    private static final String DEFAULT_SEPARATOR = "[,:]";
 
     public static int splitAndSum(final String text) {
         if (isEmptyOrNull(text)) {
             return 0;
         }
-
-        final String[] splitText = text.split(",");
+        
+        final String[] splitText = text.split(DEFAULT_SEPARATOR);
         if (splitText.length > 1) {
             return sum(splitText);
         }
