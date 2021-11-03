@@ -6,11 +6,11 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public enum Rank {
-    FIRST(6,2000000000, count -> (count == 6)),
+    NONE(2, 0, count -> (count <= 2)),
+    FOURTH(3, 5000, count -> (count == 3)),
+    THIRD(4, 50000, count -> (count == 4)),
     SECOND(5, 1500000, count -> (count == 5)),
-    THIRD(4, 0, count -> (count == 4)),
-    FOURTH(3, 0, count -> (count == 3)),
-    NONE(2, 0, count -> (count <= 2));
+    FIRST(6,2000000000, count -> (count == 6));
 
     private int matchCount;
     private int prizeMoney;
