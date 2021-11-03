@@ -10,4 +10,8 @@ public class Money {
 	public static Money of(int money) {
 		return new Money(money);
 	}
+
+	public int getValue() {
+		return this.money;
+	}
 }
