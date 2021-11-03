@@ -2,9 +2,6 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import util.Split;
-import wrapper.Delimiter;
-
 public class StringCalculator {
 	private static final String DEFAULT_DELIMITER_PATTERN = ",|:";
 	private static final String CUSTOM_DELIMITER_PATTERN = "(//)(.*)(\\\\n)(.*)";
@@ -23,7 +20,7 @@ public class StringCalculator {
 
 	public int calculate() {
 		String delimiterPattern = getDelimiterPattern();
-		String[] chunkedList = Split.split(this.cleanedInput, delimiterPattern);
+		String[] chunkedList = this.cleanedInput.split(delimiterPattern);
 		return Arrays.stream(chunkedList).mapToInt(x -> x.isEmpty() ? 0 : Integer.parseInt(x)).sum();
 	}
 
