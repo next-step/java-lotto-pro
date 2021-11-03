@@ -41,10 +41,9 @@ class LottoNumbersTest {
 		LottoNumbers lottoNumbers = LottoNumbers.createBy(new TestNumberGenerator(Arrays.asList(n1, n2, n3, n4, n5, n6)));
 
 		// when
-		Set<Integer> numbers = lottoNumbers.getValues()
-										   .stream()
-										   .map(LottoNumber::getNumber)
-										   .collect(toSet());
+		Set<LottoNumber> numbers = lottoNumbers.getValues()
+											   .stream()
+											   .collect(toSet());
 		// then
 		assertThat(numbers.size()).isEqualTo(VALID_LOTTO_NUMBER_COUNT);
 	}

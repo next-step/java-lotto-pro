@@ -43,10 +43,9 @@ class WinningNumbersTest {
 		WinningNumbers winningNumbers = WinningNumbers.createBy(numberGenerator.generate());
 
 		// when
-		Set<Integer> numbers = winningNumbers.getValues()
-											 .stream()
-											 .map(LottoNumber::getNumber)
-											 .collect(toSet());
+		Set<LottoNumber> numbers = winningNumbers.getValues()
+												 .stream()
+												 .collect(toSet());
 		// then
 		assertThat(numbers.size()).isEqualTo(VALID_LOTTO_NUMBER_COUNT);
 	}
