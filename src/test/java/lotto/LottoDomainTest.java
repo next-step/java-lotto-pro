@@ -33,25 +33,24 @@ public class LottoDomainTest {
 
 	@ParameterizedTest
 	@ValueSource(ints = {3, 5, 10, 20})
-	@DisplayName("갯수에 맞게 로또번호들을 생성해야 한다")
+	@DisplayName("요청 갯수에 따라 로또번호(오름차순, 1~45, 6개 번호)들을 생성해야 한다")
 	public void generateLottoNumbersTest(int count) {
 		// when
-		List<List<Integer>> lottoNumbers = domain.getLottoNumbersByCount(count);
+		List<List<Integer>> lottoNumbersList = domain.getLottoNumbersByCount(count);
 
 		// then
-		assertThat(lottoNumbers.size()).isEqualTo(count);
+		assertThat(lottoNumbersList.size()).isEqualTo(count);
+		for (List<Integer> numbers : lottoNumbersList) {
+			lottoNumberTest(numbers);
+		}
 	}
 
-	@Test
-	@DisplayName("로또번호(오름차순, 1~45, 6개 번호)들을 생성해야 한다")
-	public void generateLottoNumberTest() {
-		// when
-		List<Integer> lottoNumbers = domain.generateLottoNumber();
-
+	@DisplayName("로또번호(오름차순, 1~45, 6개 번호)여야 한다")
+	private void lottoNumberTest(List<Integer> numbers) {
 		// then
-		assertThat(lottoNumbers).isSorted();
-		assertThat(lottoNumbers.size()).isEqualTo(6);
-		for (int number : lottoNumbers) {
+		assertThat(numbers).isSorted();
+		assertThat(numbers.size()).isEqualTo(6);
+		for (int number : numbers) {
 			assertThat(number)
 				.isGreaterThanOrEqualTo(1)
 				.isLessThanOrEqualTo(45);
@@ -62,7 +61,7 @@ public class LottoDomainTest {
 	@DisplayName("당첨번호와 로또번호들이 주어지면, 당첨내역들을 계산해야 한다")
 	public void calculateWinningPoints() {
 		// when
-
+		
 		// then
 	}
 
