@@ -28,4 +28,30 @@ class LottoTest {
 		// then
 		assertThat(lotto.getNumberSize()).isEqualTo(VALID_LOTTO_NUMBER_COUNT);
 	}
+
+	@DisplayName("당첨번호를 확인하여 로또가 당첨됐는지 확인한다.")
+	@ParameterizedTest
+	@CsvSource(value = {
+		"1:2:3:4:5:6:true",
+		"1:2:3:4:5:45:true",
+		"1:2:3:4:44:45:true",
+		"1:2:3:43:44:45:true",
+		"1:2:42:43:44:45:false",
+		"1:41:42:43:44:45:false",
+		"40:41:42:43:44:45:false"},
+		delimiter = ':')
+	void checkWinningNumbers(int n1, int n2, int n3, int n4, int n5, int n6, boolean isWinning) {
+		// given
+		TestNumberGenerator numberGenerator = new TestNumberGenerator(Arrays.asList(1, 2, 3, 4, 5, 6));
+		LottoNumbers lottoNumbers = LottoNumbers.createBy(new TestNumberGenerator(Arrays.asList(n1, n2, n3, n4, n5, n6)));
+
+		WinningNumbers lastWinningNumbers = WinningNumbers.createBy(numberGenerator.generate());
+		Lotto lotto = Lotto.of(lottoNumbers);
+
+		// when
+		lotto.checkWinningNumbers(lastWinningNumbers);
+
+		// then
+		assertThat(lotto.isWinning()).isEqualTo(isWinning);
+	}
 }
