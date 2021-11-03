@@ -2,14 +2,14 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Purchase {
+public class Money {
 
     private static final int ZERO = 0;
     private static final int LOTTO_PRICE = 1000;
 
     private final int price;
 
-    public Purchase(final int price) {
+    public Money(final int price) {
         check(price);
         this.price = price;
     }
@@ -28,7 +28,7 @@ public class Purchase {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Purchase purchase = (Purchase) o;
+        Money purchase = (Money) o;
         return price == purchase.price;
     }
 

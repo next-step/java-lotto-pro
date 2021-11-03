@@ -6,10 +6,10 @@
 * 모든 피드백을 완료하면 다음 단계를 도전하고 앞의 과정을 반복한다.
 
 ## 요구사항
-구입금액 (`Purchase`)
-`Purchase` 는 `price`를 가진다
-`Purchase`는 음수가 될 수 없다
-`Purchase` 는 생성할 수 있는 로또의 개수를 반환한다
+구입금액 (`Money`)
+`Money` 는 `price`를 가진다
+`Money`는 음수가 될 수 없다
+`Money` 는 생성할 수 있는 로또의 개수를 반환한다
 
 로또 (`Lotto`)
 `Lotto` 는 6개의 `LottoNumber`를 가진다
