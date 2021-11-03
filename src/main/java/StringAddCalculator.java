@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,6 +13,7 @@ public class StringAddCalculator {
 	private static final String NUMBER_INPUT_NEGATIVE_VALUE_ERROR_MESSAGE = "[ERROR] 0이상의 숫자만 입력해주세요.";
 	private static final String BASIC_DELIMITERS = ":|,";
 	private static final String CUSTOM_DELIMIERS_PATTERN = "//(.*)\n(.*)";
+	private static final String EMPTY_STRING_TO_ZERO = "0";
 	private static final int SINGLE_LETTER_LENGTH = 1;
 	private static final int SPLIT_CUSTOM_DELIMITER_INDEX = 1;
 	private static final int SPLIT_NUMBER_TEXT_INDEX = 2;
@@ -26,7 +28,26 @@ public class StringAddCalculator {
 	}
 
 	private static boolean isTextNullOrEmpty(String text) {
-		if (text == null || text.isEmpty()) {
+		if (isTextNull(text)) {
+			return true;
+		}
+
+		if (isTextEmpty(text)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	private static boolean isTextNull(String text) {
+		if (text == null) {
+			return true;
+		}
+		return false;
+	}
+
+	private static boolean isTextEmpty(String text) {
+		if (text.isEmpty()) {
 			return true;
 		}
 		return false;
@@ -49,6 +70,9 @@ public class StringAddCalculator {
 	}
 
 	private static String[] splitWithDelimiters(String text, String basicDelimiters) {
+		if (isTextNullOrEmpty(text)) {
+			return Arrays.asList(EMPTY_STRING_TO_ZERO).toArray(new String[0]);
+		}
 		return text.split(basicDelimiters);
 	}
 
@@ -77,6 +101,7 @@ public class StringAddCalculator {
 
 	private static int[] convertToNumbers(String[] splitedText) {
 		List<Integer> numbers = new ArrayList<>();
+
 		for (String letter : splitedText) {
 			int number = convertToInteger(letter);
 			validateNotNegativeInteger(number);
@@ -85,7 +110,7 @@ public class StringAddCalculator {
 		return numbers.stream().mapToInt(number -> number).toArray();
 	}
 
-	private static Integer convertToInteger(String letter) {
+	private static int convertToInteger(String letter) {
 		try {
 			int number = Integer.parseInt(letter);
 			return number;
