@@ -25,7 +25,7 @@ public class Number {
 
   private boolean isInvalid(String value) {
     try {
-      if (Integer.parseInt(value) < 0) {
+      if (isNegative(value)) {
         return true;
       }
     } catch (Exception exception) {
@@ -33,5 +33,9 @@ public class Number {
     }
     
     return false;
+  }
+
+  private boolean isNegative(String value) {
+    return Integer.parseInt(value) < 0;
   }
 }
