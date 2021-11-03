@@ -6,9 +6,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import static calculator.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.*;
 
+@DisplayName("StringAddCalculator 테스트")
 public class StringAddCalculatorTest {
 
     @ParameterizedTest(name = "{displayName} - {arguments}")
@@ -61,23 +61,5 @@ public class StringAddCalculatorTest {
 
         // then
         assertThat(result).isEqualTo(6);
-    }
-
-    @Test
-    @DisplayName("음수가 포함된 문자열로 더하면 예외가 발생한다.")
-    public void splitAndSumThrowException1() {
-        // when & then
-        assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .withMessageMatching(NUMBER_ERROR.getMessage());
-    }
-
-    @Test
-    @DisplayName("숫자가 아닌 문자열로 더하면 예외가 발생한다.")
-    public void splitAndSumThrowException2() {
-        // when & then
-        assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> StringAddCalculator.splitAndSum("1,2,a"))
-                .withMessageMatching(TOKEN_ERROR.getMessage());
     }
 }
