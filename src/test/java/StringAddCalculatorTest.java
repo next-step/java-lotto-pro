@@ -77,4 +77,10 @@ public class StringAddCalculatorTest {
 			StringAddCalculator.splitAndSum("//\n1,2,3");
 		}).isInstanceOf(RuntimeException.class);
 	}
+
+	@Test
+	public void splitAndSum_커스텀구분자_포함인경우_덧셈할_문자열은_empty(){
+		int result = StringAddCalculator.splitAndSum("//;\n");
+		assertThat(result).isEqualTo(0);
+	}
 }
