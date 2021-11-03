@@ -3,6 +3,8 @@ package study;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -13,12 +15,10 @@ public class StringAddCalculatorTest {
     class SplitAndSumTest {
 
         @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다")
-        @Test
-        public void givenEmptyStringOrNullThenReturnZero() {
-            int result = StringAddCalculator.splitAndSum(null);
-            assertThat(result).isZero();
-
-            result = StringAddCalculator.splitAndSum("");
+        @ParameterizedTest
+        @NullAndEmptySource
+        public void givenEmptyStringOrNullThenReturnZero(String text) {
+            int result = StringAddCalculator.splitAndSum(text);
             assertThat(result).isZero();
         }
 
