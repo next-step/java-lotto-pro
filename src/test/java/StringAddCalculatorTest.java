@@ -43,4 +43,12 @@ public class StringAddCalculatorTest {
     public void splitStringByPrimarySeparatorTest(String fixture, int result) {
         assertThat(calculator.calculate(fixture)).isEqualTo(result);
     }
+
+    @DisplayName("커스텀 구분자를 통해 문자열을 split 하여 각각을 합치는 기능 테스트")
+    @Test
+    public void splitStringByCustomSeparatorTest() {
+        String fixture = "//;\n1;2;4";
+        int result = 7;
+        assertThat(calculator.calculate(fixture)).isEqualTo(result);
+    }
 }
