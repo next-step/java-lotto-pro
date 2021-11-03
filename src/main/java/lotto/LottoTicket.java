@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoTicket {
+import view.Printable;
+
+public class LottoTicket implements Printable {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
@@ -33,7 +35,8 @@ public class LottoTicket {
         return numbers.size();
     }
 
-    public String makeMessage() {
+    @Override
+    public String makePrintableMessage() {
         return LEFT_BRACE
             + numbers.stream().map(String::valueOf).collect(Collectors.joining(COMMA_SPACE))
             + RIGHT_BRACE;

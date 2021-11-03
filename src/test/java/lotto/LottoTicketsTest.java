@@ -16,6 +16,7 @@ class LottoTicketsTest {
     @DisplayName("로또 티켓 묶음 메시지 생성 테스트")
     @Test
     void makeMessage_success() {
-
+        assertThat(new LottoTickets(2).makePrintableMessage()).contains("[", ", ", "]", "\n");
+        assertThat(new LottoTickets(2).makePrintableMessage()).contains("[", ", ", "]");
     }
 }

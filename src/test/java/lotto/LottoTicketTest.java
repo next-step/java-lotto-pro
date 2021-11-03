@@ -18,6 +18,6 @@ class LottoTicketTest {
     @Test
     void makeMessage_success() {
         LottoTicket lottoTicket = new LottoTicket();
-        assertThat(lottoTicket.makeMessage()).contains("[", ", ", "]");
+        assertThat(lottoTicket.makePrintableMessage()).contains("[", ", ", "]");
     }
 }

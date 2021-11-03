@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoTickets {
+import view.Printable;
+
+public class LottoTickets implements Printable {
     private List<LottoTicket> lottoTicketList;
 
     private static final String NEW_LINE = "\n";
@@ -21,7 +23,8 @@ public class LottoTickets {
         return lottoTicketList.size();
     }
 
-    public String makeMessage() {
-        return lottoTicketList.stream().map(LottoTicket::makeMessage).collect(Collectors.joining(NEW_LINE));
+    @Override
+    public String makePrintableMessage() {
+        return lottoTicketList.stream().map(LottoTicket::makePrintableMessage).collect(Collectors.joining(NEW_LINE));
     }
 }
