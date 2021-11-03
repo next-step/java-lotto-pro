@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -19,12 +20,12 @@ public final class Lottos {
         return lottos.size();
     }
 
-    public void findRank(final EnumMap<Rank, Integer> result, final Lotto winningLotto) {
+    public List<Integer> getMatchingCounts(final Lotto winningLotto) {
+        List<Integer> matchingCounts = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int matchingCount = winningLotto.countMatchingNumber(lotto);
-            Rank findedRank = Rank.findRank(matchingCount);
-            result.put(findedRank, result.getOrDefault(findedRank, 0) + 1);
+            matchingCounts.add(winningLotto.countMatchingNumber(lotto));
         }
+        return matchingCounts;
     }
 
     public List<Lotto> getLottos() {
