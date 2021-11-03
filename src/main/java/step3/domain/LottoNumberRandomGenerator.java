@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import step3.domain.constance.LottoConstant;
+
 public class LottoNumberRandomGenerator {
-    private static final int SUB_START_INDEX = 0;
-    private static final int RANGE_MAX_ADD_VALUE = 1;
 
     private LottoNumberRandomGenerator() {
     }
 
     public static int[] generate(int minNumber, int maxNumber, int toIndex) {
         List<Integer> lottoRangeNumbers =
-            IntStream.range(minNumber, maxNumber + RANGE_MAX_ADD_VALUE)
+            IntStream.range(minNumber, maxNumber + LottoConstant.RANGE_MAX_ADD_VALUE)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(lottoRangeNumbers);
@@ -22,7 +22,7 @@ public class LottoNumberRandomGenerator {
     }
 
     private static int[] subAndSortToList(int toIndex, List<Integer> randomRangeNumbers) {
-        List<Integer> result = randomRangeNumbers.subList(SUB_START_INDEX, toIndex);
+        List<Integer> result = randomRangeNumbers.subList(LottoConstant.SUB_START_INDEX, toIndex);
         Collections.sort(result);
         return result.stream().mapToInt(i -> i).toArray();
     }

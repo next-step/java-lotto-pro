@@ -1,9 +1,9 @@
 package step3.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import step3.domain.constance.LottoConstant;
 
 public class LottoTicketBundle {
     private final List<LottoTicket> lottoTicketBundle = new ArrayList<>();
@@ -13,8 +13,9 @@ public class LottoTicketBundle {
 
     public void addLottoTicket() {
         lottoTicketBundle.add(new LottoTicket(
-            LottoNumberRandomGenerator.generate(LottoNumber.RANGE_MIN_LOTTO_NUMBER, LottoNumber.RANGE_MAX_LOTTO_NUMBER,
-                LottoTicket.LOTTO_TICKET_SIZE)));
+            LottoNumberRandomGenerator.generate(LottoConstant.RANGE_MIN_LOTTO_NUMBER,
+                LottoConstant.RANGE_MAX_LOTTO_NUMBER,
+                LottoConstant.LOTTO_TICKET_SIZE)));
     }
 
     public LottoTicketVoucher toLottoTicketVoucher() {

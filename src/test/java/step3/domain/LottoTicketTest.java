@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import step3.domain.constance.LottoConstant;
+
 public class LottoTicketTest {
 
     @Test
@@ -32,7 +34,7 @@ public class LottoTicketTest {
                 new LottoTicket(numbers);
             })
             // then
-            .withMessageMatching(LottoTicket.LOTTO_TICKET_OVER_SIZE_EXCEPTION_MESSAGE);
+            .withMessageMatching(LottoConstant.LOTTO_TICKET_OVER_SIZE_EXCEPTION_MESSAGE);
     }
 
     @Test
@@ -46,6 +48,6 @@ public class LottoTicketTest {
                 new LottoTicket(numbers);
             })
             // then
-            .withMessageMatching(LottoTicket.LOTTO_TICKET_OVER_SIZE_EXCEPTION_MESSAGE);
+            .withMessageMatching(LottoConstant.LOTTO_TICKET_OVER_SIZE_EXCEPTION_MESSAGE);
     }
 }

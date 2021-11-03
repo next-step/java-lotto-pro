@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import step2.SplitNumber;
+import step3.domain.constance.LottoConstant;
 
 class LottoNumberTest {
 
@@ -26,6 +27,6 @@ class LottoNumberTest {
                 // when
                 new LottoNumber(inputLottoNumber);
             }) // then
-            .withMessageMatching(LottoNumber.RANGE_OVER_EXCEPTION);
+            .withMessageMatching(LottoConstant.RANGE_OVER_EXCEPTION);
     }
 }
