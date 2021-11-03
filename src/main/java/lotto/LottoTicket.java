@@ -1,9 +1,7 @@
 package lotto;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -16,7 +14,7 @@ public class LottoTicket {
     private static final String RIGHT_BRACE = "]";
     private static final String COMMA_SPACE = ", ";
 
-    private Set<Integer> numbers;
+    private List<Integer> numbers;
 
     public LottoTicket() {
         List<Integer> possibleNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
@@ -24,7 +22,11 @@ public class LottoTicket {
             .collect(Collectors.toList());
 
         Collections.shuffle(possibleNumbers);
-        this.numbers = new HashSet<>(possibleNumbers.subList(0, LOTTO_SIZE));
+
+        numbers = possibleNumbers.stream()
+            .limit(LOTTO_SIZE)
+            .sorted()
+            .collect(Collectors.toList());
     }
 
     public int getSize() {
