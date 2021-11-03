@@ -12,7 +12,7 @@ public class Constants {
 	public static final Pattern NUMBER_COMMA_PATTERN = Pattern.compile("^[0-9\\,]+$");
 	public static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]+$");
 	public static final String DELIMITER = ",";
-	public static final Map<Integer, Integer> WINNING_AMOUNT_MAP = new HashMap<Integer, Integer>(){
+	public static final Map<Integer, Integer> WINNING_AMOUNT_MAP = new HashMap<Integer, Integer>() {
 		{
 			put(3, 5000);
 			put(4, 50000);
@@ -20,7 +20,5 @@ public class Constants {
 			put(6, 2000000000);
 		}
 	};
-
-
 
 }

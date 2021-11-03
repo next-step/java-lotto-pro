@@ -17,7 +17,7 @@ public class Winning {
 		if (!validateKey(key)) {
 			return;
 		}
-		this.winningMap.put(key, this.winningMap.getOrDefault(key, 0)+1);
+		this.winningMap.put(key, this.winningMap.getOrDefault(key, 0) + 1);
 	}
 
 	private boolean validateKey(Integer key) {
@@ -27,7 +27,7 @@ public class Winning {
 
 	public String getYield(int investment) {
 		Double total = getTotalAmount();
-		return String.format("%.2f", total/investment);
+		return String.format("%.2f", total / investment);
 	}
 
 	public Integer getStrikeResult(Integer key) {

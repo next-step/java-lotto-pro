@@ -16,7 +16,7 @@ public class ResultView {
 
 	public static void purchaseResult(Lottos lottos) {
 		print(lottos.getLottoList().size() + Messages.BOUGHT_OF.getValues());
-		for (Lotto lotto: lottos.getLottoList()) {
+		for (Lotto lotto : lottos.getLottoList()) {
 			print(lotto.getNumbers().toString());
 		}
 		print("");

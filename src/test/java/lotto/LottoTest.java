@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 class LottoTest {
 
-
 	@Test
 	@DisplayName("로또 번호 6개 자동 생성 성공")
 	public void lotto_auto_generated() {

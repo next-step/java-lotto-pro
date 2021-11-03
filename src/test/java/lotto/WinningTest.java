@@ -10,7 +10,7 @@ class WinningTest {
 	@Test
 	@DisplayName("5000원 투자 3등 당첨 4개인 경우 수익률 4.00 return")
 	public void 수익률_계산() {
-	    //given
+		//given
 		int investment = 5000;
 		Winning winning = new Winning();
 		for (int i = 0; i < 4; i++) {

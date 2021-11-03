@@ -11,12 +11,14 @@ import java.util.stream.Collectors;
 import lotto.common.Messages;
 
 public class LottoInput {
-	private List<Integer> input;
+	private List<LottoNumber> input;
 
 	public LottoInput(String input) {
 		validate(input);
 		this.input =
-			Arrays.stream(input.split(DELIMITER)).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+			Arrays.stream(input.split(DELIMITER))
+				.mapToInt(Integer::parseInt).mapToObj(LottoNumber::new)
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -48,7 +50,7 @@ public class LottoInput {
 			int i = Integer.parseInt(number);
 			isPositiveNumber(i);
 			isRangeValid(i);
-		}catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(Messages.INPUT_NUMBER_COMMA_FORMAT_NOT_VALID.getValues());
 		}
 	}

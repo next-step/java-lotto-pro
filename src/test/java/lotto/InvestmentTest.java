@@ -13,13 +13,13 @@ class InvestmentTest {
 	@Test
 	@DisplayName("투자금액 3000원 입력한 경우 Investment 객체 생성하여 투자금 3000과 3개를 확인한다.")
 	public void Investment_입력() {
-	    //given
-	    String input = "3000";
-	    
-	    //when
+		//given
+		String input = "3000";
+
+		//when
 		Investment investment = new Investment(input);
-	    
-	    //then
+
+		//then
 		assertThat(investment.getInvestment()).isEqualTo(3000);
 		assertThat(investment.getCount()).isEqualTo(3);
 	}
@@ -27,7 +27,7 @@ class InvestmentTest {
 	@Test
 	@DisplayName("3000원 입력한 경우 숫자만 입력 가능하다는 메세지와 IllegalArgumentException 확인한다.")
 	public void Investment_한글입력_실패() {
-	    //given
+		//given
 		String input = "3000원";
 		//when
 		ThrowableAssert.ThrowingCallable throwingCallable = () -> new Investment(input);
