@@ -10,6 +10,9 @@ public class StringAddCalculator {
 
     public static final String FIXED_DELIMITER = "[,:]";
     public static final String USER_DELIMITER_PATTERN = "//(.)\n(.*)";
+    public static final int NULL_OR_EMPTY_VALUE = 0;
+    public static final int DELIMITER_INDEX = 1;
+    public static final int SPLIT_TARGET_INDEX = 2;
 
     public static void main(String[] args) {
         System.out.println("합을 구할 문자열을 입력해주세요");
@@ -20,7 +23,7 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String text) {
         if (text == null || text.isEmpty()) {
-            return 0;
+            return NULL_OR_EMPTY_VALUE;
         }
         Optional<String[]> tokens = getTokens(text);
         return getSum(tokens);
@@ -37,8 +40,8 @@ public class StringAddCalculator {
         Optional<String[]> tokens = Optional.of(text.split(FIXED_DELIMITER));
         Matcher m = Pattern.compile(USER_DELIMITER_PATTERN).matcher(text);
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            tokens = Optional.of(m.group(2).split(customDelimiter));
+            String customDelimiter = m.group(DELIMITER_INDEX);
+            tokens = Optional.of(m.group(SPLIT_TARGET_INDEX).split(customDelimiter));
         }
         return tokens;
     }
