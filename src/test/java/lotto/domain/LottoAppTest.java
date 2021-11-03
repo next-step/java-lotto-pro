@@ -56,25 +56,25 @@ public class LottoAppTest {
 		numbers.add(new LottoNumber(Arrays.asList(1, 2, 3, 7, 8, 9)));
 
 		// when
-		MatchPoint vo = lottoApp.calculatePoint(answers, numbers);
+		LottoPrize vo = lottoApp.calculatePoint(answers, numbers);
 
 		// then
-		assertThat(vo.getFourth()).isEqualTo(1);
-		assertThat(vo.getFirst()).isEqualTo(1);
-		assertThat(vo.getSecond()).isEqualTo(1);
-		assertThat(vo.getThird()).isEqualTo(1);
+		assertThat(vo.getCnt4St()).isEqualTo(1);
+		assertThat(vo.getCnt1St()).isEqualTo(1);
+		assertThat(vo.getCnt2St()).isEqualTo(1);
+		assertThat(vo.getCnt3St()).isEqualTo(1);
 	}
 
 	@Test
 	@DisplayName("당첨 내역과 구매 금액이 주어지면, 수익률을 계산해야 한다")
 	public void calculateProfit() {
 		// given
-		MatchPoint matchPoint = new MatchPoint(0, 0, 0, 1);
+		LottoPrize lottoPrize = new LottoPrize(0, 0, 0, 1);
 		int money = 14000;
 		double expected = 0.35;
 
 		// when
-		double result = lottoApp.getProfit(money, matchPoint);
+		double result = lottoApp.getProfit(money, lottoPrize);
 
 		// then
 		assertThat(result).isEqualTo(expected);

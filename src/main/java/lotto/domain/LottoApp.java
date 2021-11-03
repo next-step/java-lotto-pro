@@ -19,14 +19,14 @@ public class LottoApp {
 		return lottoList;
 	}
 
-	public double getProfit(int money, MatchPoint matchPoint) {
-		int prize = matchPoint.getPrize();
+	public double getProfit(int money, LottoPrize lottoPrize) {
+		int prize = lottoPrize.getPrize();
 		double profit = (double)prize / money;
 		return Math.floor(profit * 100) / 100D;
 	}
 
-	public MatchPoint calculatePoint(LottoNumber answerNumbers, List<LottoNumber> numbers) {
-		return new MatchPoint(answerNumbers, numbers);
+	public LottoPrize calculatePoint(LottoNumber answerNumbers, List<LottoNumber> numbers) {
+		return new LottoPrize(answerNumbers, numbers);
 	}
 
 }

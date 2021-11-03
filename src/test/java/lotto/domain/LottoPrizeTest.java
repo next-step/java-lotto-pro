@@ -9,16 +9,16 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class MatchPointTest {
+public class LottoPrizeTest {
 
 	@Test
-	@DisplayName("로또 번호 일치 횟수를 통해 총 당첨금을 계산해야 한다")
+	@DisplayName("로또당첨갯수를 통해 총 당첨금을 계산해야 한다")
 	public void getPrizeTest() {
 		// given
-		MatchPoint matchPoint = new MatchPoint(1, 0, 0, 0);
+		LottoPrize lottoPrize = new LottoPrize(1, 0, 0, 0);
 
 		// when
-		int result = matchPoint.getPrize();
+		int result = lottoPrize.getPrize();
 
 		// then
 		assertThat(result).isEqualTo(2000000000);
@@ -31,10 +31,10 @@ public class MatchPointTest {
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
 		lottoNumbers.add(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
 		LottoNumber answer = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-		MatchPoint matchPoint = new MatchPoint(answer, lottoNumbers);
+		LottoPrize lottoPrize = new LottoPrize(answer, lottoNumbers);
 
 		// when
-		int result = matchPoint.getPrize();
+		int result = lottoPrize.getPrize();
 
 		// then
 		assertThat(result).isEqualTo(2000000000);

@@ -4,9 +4,9 @@ import java.util.List;
 
 import lotto.domain.LottoApp;
 import lotto.domain.LottoNumber;
-import lotto.domain.MatchPoint;
+import lotto.domain.LottoPrize;
 import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.view.ResultView;
 
 public class LottoMainApp {
 
@@ -16,12 +16,12 @@ public class LottoMainApp {
 		int money = InputView.getMoney();
 		int lottoCount = lottoApp.getLottoCountByMoney(money);
 		List<LottoNumber> numbers = lottoApp.getLottoNumbersByCount(lottoCount);
-		OutputView.showLottoNumbers(lottoCount, numbers);
+		ResultView.showLottoNumbers(lottoCount, numbers);
 
 		LottoNumber answer = new LottoNumber(InputView.getLottoNumbers());
-		MatchPoint matchPoint = lottoApp.calculatePoint(answer, numbers);
-		double profit = lottoApp.getProfit(money, matchPoint);
-		OutputView.showPrize(matchPoint, profit);
+		LottoPrize lottoPrize = lottoApp.calculatePoint(answer, numbers);
+		double profit = lottoApp.getProfit(money, lottoPrize);
+		ResultView.showPrize(lottoPrize, profit);
 	}
 
 }
