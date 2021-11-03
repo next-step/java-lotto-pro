@@ -48,7 +48,7 @@ public class StringAddCalculator {
 
     private static int parsePositiveInteger(Integer integer) {
         if (integer < 0) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         return integer;
     }
