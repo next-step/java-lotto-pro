@@ -16,15 +16,15 @@ public class StringAddCalculatorTest {
         @Test
         public void givenEmptyStringOrNullThenReturnZero() {
             int result = StringAddCalculator.splitAndSum(null);
-            assertThat(result).isEqualTo(0);
+            assertThat(result).isZero();
 
             result = StringAddCalculator.splitAndSum("");
-            assertThat(result).isEqualTo(0);
+            assertThat(result).isZero();
         }
 
         @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다")
         @Test
-        public void givenOneDigitThenReturnMirror() throws Exception {
+        public void givenOneDigitThenReturnMirror() {
             int result = StringAddCalculator.splitAndSum("1");
             assertThat(result).isEqualTo(1);
         }
