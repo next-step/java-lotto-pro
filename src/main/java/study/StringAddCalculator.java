@@ -40,7 +40,7 @@ public class StringAddCalculator {
         return sum;
     }
 
-    private static int parsePositiveNumber(String text) {
+    private static int parsePositiveNumber(final String text) {
         final int number = Integer.parseInt(text);
         if (isNotPositiveNumber(number)) {
             throw new RuntimeException(String.format(NOT_POSITIVE_ERROR_MESSAGE_FORMAT, number));
@@ -48,11 +48,11 @@ public class StringAddCalculator {
         return number;
     }
 
-    private static boolean hasNotSplitText(String[] splitText) {
+    private static boolean hasNotSplitText(final String[] splitText) {
         return splitText.length <= 1;
     }
 
-    private static boolean isNotPositiveNumber(int number) {
+    private static boolean isNotPositiveNumber(final int number) {
         return number < 0;
     }
 
