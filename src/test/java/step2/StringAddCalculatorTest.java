@@ -22,6 +22,13 @@ public class StringAddCalculatorTest {
 	}
 
 	@Test
+	public void splitAndSum_숫자외의_문자하나() throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("우테캠"))
+			.isInstanceOf(RuntimeException.class)
+			.hasMessage("입력된 값은 숫자가 아닙니다.");
+	}
+
+	@Test
 	public void splitAndSum_쉼표구분자() throws Exception {
 		int result = StringAddCalculator.splitAndSum("1,2");
 		assertThat(result).isEqualTo(3);
