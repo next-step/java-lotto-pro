@@ -18,11 +18,25 @@ public class Lotto {
 	protected final List<LottoNumber> lottoNumbers;
 
 	protected Lotto(List<LottoNumber> lottoNumbers) {
+		validate(lottoNumbers);
 		this.lottoNumbers = lottoNumbers;
+	}
+
+	private void validate(List<LottoNumber> lottoNumbers) {
+		if (lottoNumbers.size() != NUM_OF_LOTTO_NUMBERS) {
+			throw new LottoFormatException();
+		}
+		if (lottoNumbers.size() != lottoNumbers.stream().distinct().count()) {
+			throw new LottoFormatException();
+		}
 	}
 
 	public int getNumOfLottoNumbers() {
 		return this.lottoNumbers.size();
+	}
+
+	public static Lotto from(String s) {
+		return new Lotto(LottoParser.parse(s));
 	}
 
 	public static Lotto of() {

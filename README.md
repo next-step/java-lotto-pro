@@ -13,7 +13,7 @@
   - validate 1~45
 - lotto
   - price = 1000 
-  - generate 6 lotto numbers
+  - generate distinct 6 lotto numbers
 - lotto store
   - sell lottos
 - lotto parser
