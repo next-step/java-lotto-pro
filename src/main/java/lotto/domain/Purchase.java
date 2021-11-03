@@ -4,10 +4,19 @@ import java.util.Objects;
 
 public class Purchase {
 
+    private static final int ZERO = 0;
+
     private final int price;
 
-    public Purchase(int price) {
+    public Purchase(final int price) {
+        check(price);
         this.price = price;
+    }
+
+    private void check(int price) {
+        if (price < ZERO) {
+            throw new IllegalArgumentException("음수가 될 수 없습니다.");
+        }
     }
 
     @Override
