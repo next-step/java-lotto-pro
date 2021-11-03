@@ -3,10 +3,7 @@ package lotto.domain;
 import lotto.exception.MyErrorCode;
 import lotto.exception.MyException;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -14,8 +11,7 @@ public class Lotto {
     private List<Ball> balls;
 
     public Lotto(List<Ball> balls) {
-        checkDuplicationBall(balls);
-        checkLengthOverThanSix(balls);
+        checkValidLotto(balls);
         this.balls = balls;
     }
 
@@ -23,7 +19,7 @@ public class Lotto {
         return this.balls;
     }
 
-    public List<Integer> extractNumber(){
+    public List<Integer> extractNumber() {
         List<Integer> numbers = new ArrayList<>();
         for (Ball ball : balls) {
             numbers.add(ball.number());
@@ -31,10 +27,19 @@ public class Lotto {
         return numbers;
     }
 
-    private List<Ball> makeBalls(List<Integer> ballNumbers) {
-        return ballNumbers.stream()
-                .map(number -> new Ball(number))
-                .collect(Collectors.toList());
+    public int match(Lotto compareLotto) {
+        return (int) this.balls().stream()
+                .filter(ball -> compareLotto.contains(ball))
+                .count();
+    }
+
+    public boolean contains(Ball ball) {
+        return this.balls().contains(ball);
+    }
+
+    private void checkValidLotto(List<Ball> balls) {
+        checkDuplicationBall(balls);
+        checkLengthOverThanSix(balls);
     }
 
     private void checkLengthOverThanSix(List<Ball> balls) {

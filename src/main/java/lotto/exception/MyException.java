@@ -1,6 +1,8 @@
 package lotto.exception;
 
-public class MyException extends RuntimeException {
+import java.util.function.Supplier;
+
+public class MyException extends RuntimeException{
     private MyErrorCode myErrorCode;
     private String errorMessage;
 

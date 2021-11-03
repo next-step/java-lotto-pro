@@ -1,21 +1,20 @@
 package lotto;
 
-import com.sun.tools.internal.ws.wsdl.document.Output;
 import lotto.domain.*;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class LottoMain {
     private static final LottoCreator lottoCreator = new LottoCreator();
     private static final LottoService lottoService = new LottoService();
 
     public static void main(String[] args) {
-        int money = InputView.printInputMoney();
-        int countOfLotto = Seller.returnLotto(money);
+        int purchaseMoney = InputView.printInputMoney();
+        int countOfLotto = Seller.returnLotto(purchaseMoney);
         OutputView.printLottoCount(countOfLotto);
 
         List<Lotto> lottoList = lottoService.createLotto(countOfLotto, lottoCreator);
@@ -26,9 +25,8 @@ public class LottoMain {
 
         lottoService.makeWinningLotto(winningLottoNumber);
 
-
-
-
+        Map<Rank, Integer> lottoResult = lottoService.result(lottos);
+        OutputView.printResult(lottoResult,purchaseMoney);
     }
 
 }

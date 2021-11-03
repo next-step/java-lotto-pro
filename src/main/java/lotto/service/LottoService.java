@@ -1,11 +1,8 @@
 package lotto.service;
 
-import lotto.domain.Ball;
-import lotto.domain.Lotto;
-import lotto.domain.LottoCreator;
+import lotto.domain.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoService {
@@ -20,14 +17,28 @@ public class LottoService {
         return lottoBasket;
     }
 
-    public void makeWinningLotto(List<Integer> winningLottoNumber){
+    public void makeWinningLotto(List<Integer> winningLottoNumber) {
         List<Ball> winningBalls = winningLottoNumber.stream()
                 .map(number -> new Ball(number))
                 .collect(Collectors.toList());
         this.winningLotto = new Lotto(winningBalls);
     }
 
-    public Lotto winningLotto(){
+    public Rank match(Lotto lotto) {
+        return Rank.rank(winningLotto.match(lotto));
+    }
+
+    public Map<Rank, Integer> result(Lottos lottos) {
+        Map<Rank, Integer> lottoResult = new HashMap<Rank,Integer>();
+        for (Lotto lotto : lottos) {
+            Rank findRank = this.match(lotto);
+            Integer rankCount = lottoResult.getOrDefault(findRank, 0);
+            lottoResult.put(findRank, rankCount + 1);
+        }
+        return lottoResult;
+    }
+
+    public Lotto winningLotto() {
         return this.winningLotto;
     }
 
