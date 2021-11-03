@@ -6,6 +6,9 @@ public class StringAddCalculator {
         if (isNullOrEmpty(inputText)) {
             return 0;
         }
+        if (isContainsComma(inputText)) {
+            return calculateContainsComma(inputText);
+        }
         return Integer.parseInt(inputText);
     }
 
@@ -17,5 +20,18 @@ public class StringAddCalculator {
             return true;
         }
         return false;
+    }
+
+    private static boolean isContainsComma(String inputText) {
+        return inputText.contains(",");
+    }
+
+    private static int calculateContainsComma(String inputText) {
+        String[] numbers = inputText.split(",");
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
     }
 }
