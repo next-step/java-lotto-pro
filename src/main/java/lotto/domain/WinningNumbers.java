@@ -18,4 +18,12 @@ public class WinningNumbers {
 
 		return new WinningNumbers(winningNumbers);
 	}
+
+	public int getSize() {
+		return this.winningNumbers.size();
+	}
+
+	public List<LottoNumber> getValues() {
+		return this.winningNumbers;
+	}
 }
