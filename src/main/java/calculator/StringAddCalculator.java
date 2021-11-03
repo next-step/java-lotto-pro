@@ -8,6 +8,8 @@ public class StringAddCalculator {
     private static final String SEPARATOR = ",|:";
     private static final String CUSTOM_PATTERN_SEPARATOR = "//(.)\n(.*)";
     private static final int NEGATIVE_CANNOT_INT = 0;
+    private static final int CUSTOM_PATTERN_DELIMITER = 1;
+    private static final int CUSTOM_SPLIT_BY_DELIMITER = 2;
 
     public static int splitAndSum(String text) {
         if (isEmptyOrNull(text)) {
@@ -49,8 +51,8 @@ public class StringAddCalculator {
     private static String[] splitString(String text) {
         Matcher matcher = Pattern.compile(CUSTOM_PATTERN_SEPARATOR).matcher(text);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
+            String customDelimiter = matcher.group(CUSTOM_PATTERN_DELIMITER);
+            return matcher.group(CUSTOM_SPLIT_BY_DELIMITER).split(customDelimiter);
         }
         return text.split(SEPARATOR);
     }
