@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTest {
 
@@ -41,6 +43,17 @@ class LottoTest {
         Lotto secondLotto = Lotto.from(secondInputs);
 
         assertThat(firstLotto.countMatchingNumber(secondLotto)).isEqualTo(matchCount);
+    }
+
+    @DisplayName("해당 로또 숫자를 포함하고 있는지 여부를 확인한다.")
+    @Test
+    void isContainLottoNumber() {
+        Lotto lotto = Lotto.from("2,4,6,8,10,12");
+
+        assertAll(
+                () -> Assertions.assertThat(lotto.isContainLottoNumber(LottoNumber.from(4))).isTrue(),
+                () -> Assertions.assertThat(lotto.isContainLottoNumber(LottoNumber.from(30))).isFalse()
+        );
     }
 
 }
