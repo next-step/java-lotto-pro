@@ -24,4 +24,5 @@ public enum LottoRank {
                 .findFirst()
                 .orElse(LottoRank.LOSE);
     }
+
 }
