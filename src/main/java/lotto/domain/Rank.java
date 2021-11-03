@@ -17,6 +17,10 @@ public enum Rank {
     }
 
     public static Rank rank(int matchCount) {
+        if (FOURTH.count > matchCount && NO_MATCH.count < matchCount) {
+            return NO_MATCH;
+        }
+
         return Arrays.stream(values())
                 .filter(rank -> rank.isMatch(matchCount))
                 .findFirst()
