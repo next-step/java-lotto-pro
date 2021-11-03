@@ -22,16 +22,30 @@ public class StringAddCalculatorTest {
 	}
 
 	@Test
-	public void splitAndSum_숫자외의_문자하나() throws Exception {
+	public void splitAndSum_문자하나() throws Exception {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("우테캠"))
 			.isInstanceOf(RuntimeException.class)
-			.hasMessage("입력된 값은 숫자가 아닙니다.");
+			.hasMessage("구분자 혹은 입력 값을 다시 한번 확인해주세요.");
 	}
 
 	@Test
 	public void splitAndSum_쉼표구분자() throws Exception {
 		int result = StringAddCalculator.splitAndSum("1,2");
 		assertThat(result).isEqualTo(3);
+	}
+
+	@Test
+	public void splitAndSum_쉼표구분자_문자2개_() throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("우테캠, 자바"))
+			.isInstanceOf(RuntimeException.class)
+			.hasMessage("구분자 혹은 입력 값을 다시 한번 확인해주세요.");
+	}
+
+	@Test
+	public void splitAndSum_쉼표구분자_숫자2개_() throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1 : 2"))
+			.isInstanceOf(RuntimeException.class)
+			.hasMessage("구분자 혹은 입력 값을 다시 한번 확인해주세요.");
 	}
 
 	@Test

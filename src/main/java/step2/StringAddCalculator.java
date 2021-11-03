@@ -1,14 +1,13 @@
 package step2;
 
-public class StringAddCalculator {
-	private static int number;
+import java.util.Arrays;
 
+public class StringAddCalculator {
 	public static int splitAndSum(String string) {
 		if (validateNullOrBlank(string)) {
 			return 0;
 		}
-		number = stringToInt(string);
-		return number;
+		return sum(splitStringToIntArray(string));
 	}
 
 	private static boolean validateNullOrBlank(String string) {
@@ -18,12 +17,17 @@ public class StringAddCalculator {
 		return false;
 	}
 
-	private static int stringToInt(String string) {
+	private static int[] splitStringToIntArray(String string) {
+		int[] intArray;
 		try {
-			 number = Integer.parseInt(string);
+			 intArray = Arrays.stream(string.split(",")).mapToInt(Integer::parseInt).toArray();
 		} catch (NumberFormatException e) {
-			throw new RuntimeException("입력된 값은 숫자가 아닙니다.");
+			throw new RuntimeException("구분자 혹은 입력 값을 다시 한번 확인해주세요.");
 		}
-		return number;
+		return intArray;
+	}
+
+	private static int sum(int[] intArray) {
+		return Arrays.stream(intArray).sum();
 	}
 }
