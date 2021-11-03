@@ -30,7 +30,7 @@ class ConverterTest {
         String[] tokens = Arrays.array("-1", "2", "3");
 
         // when & then
-        assertThatExceptionOfType(RuntimeException.class)
+        assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> Converter.convert(tokens))
                 .withMessageMatching(NUMBER_ERROR.getMessage());
     }
@@ -42,7 +42,7 @@ class ConverterTest {
         String[] tokens = Arrays.array("1", "2", "a");
 
         // when & then
-        assertThatExceptionOfType(RuntimeException.class)
+        assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> Converter.convert(tokens))
                 .withMessageMatching(TOKEN_ERROR.getMessage());
     }

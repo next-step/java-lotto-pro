@@ -19,13 +19,13 @@ public class Converter {
 
     private static void validateToken(String token) {
         if (!token.matches(NUMBER_REGEX)) {
-            throw new RuntimeException(TOKEN_ERROR.getMessage());
+            throw new IllegalArgumentException(TOKEN_ERROR.getMessage());
         }
     }
 
     private static void validateNumber(int number) {
         if (number < 0) {
-            throw new RuntimeException(NUMBER_ERROR.getMessage());
+            throw new IllegalArgumentException(NUMBER_ERROR.getMessage());
         }
     }
 }
