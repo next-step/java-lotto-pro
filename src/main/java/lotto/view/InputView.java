@@ -1,10 +1,13 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.Number;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -31,8 +34,14 @@ public class InputView {
     }
 
     private List<Number> parseInputStringToNumberList(String inputString) {
+        String[] strings = inputString.split(SPLIT_REGEX);
+        validateArrayLength(strings);
+        return getNumberList(strings);
+    }
+
+    private List<Number> getNumberList(String[] strings) {
         List<Number> result = new ArrayList<>();
-        for (String number : inputString.split(SPLIT_REGEX)) {
+        for (String number : strings) {
             validateNumberFormat(number);
             result.add(new Number(Integer.parseInt(number)));
         }
@@ -43,6 +52,12 @@ public class InputView {
         boolean matches = inputString.matches(NUMBER_FORMAT_REGEX);
         if (!matches) {
             throw new NumberFormatException("[ERROR] 숫자 형식이 아닙니다.");
+        }
+    }
+
+    private void validateArrayLength(String[] strings) {
+        if (strings.length > LottoNumber.LOTTO_SIZE) {
+            throw new NumberFormatException("[ERROR] 당첨번호의 길이가 초과하였습니다.");
         }
     }
 

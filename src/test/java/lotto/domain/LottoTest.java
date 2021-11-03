@@ -18,7 +18,7 @@ public class LottoTest {
     public void purchaseLotto(int purchaseAmount) {
         Lotto lotto = new Lotto(purchaseAmount);
         assertThat(lotto.getLottoNumbers().size()).isEqualTo(15);
-        outputView.purchaseLottoList(lotto);
+        outputView.printPurchaseLottoList(lotto);
     }
 
     @ParameterizedTest
