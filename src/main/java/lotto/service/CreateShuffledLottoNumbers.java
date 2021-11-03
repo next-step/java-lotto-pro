@@ -10,8 +10,9 @@ public class CreateShuffledLottoNumbers {
     private static final int LOTTO_NUMBER_MAX_COUNT = 6;
 
     public static List<String> createLottoNumbers() {
-        Collections.shuffle(LottoNumberRange.getLottoNumberRange());
-        return LottoNumberRange.getLottoNumberRange()
+        List<Integer> lottoNumberRange = LottoNumberRange.getLottoNumberRange();
+        Collections.shuffle(lottoNumberRange);
+        return lottoNumberRange
                 .stream()
                 .limit(LOTTO_NUMBER_MAX_COUNT)
                 .sorted()
