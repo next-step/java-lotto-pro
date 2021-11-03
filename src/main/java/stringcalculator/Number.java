@@ -3,7 +3,7 @@ package stringcalculator;
 /**
  * 계산에 사용되는 숫자.
  */
-public class CalculatorNumber {
+public class Number {
   private final Integer item;
   
   /**
@@ -11,7 +11,7 @@ public class CalculatorNumber {
    *
    * @param value 문자형으로 표현된 숫자
    */
-  public CalculatorNumber(String value) {
+  public Number(String value) {
     if (isInvalid(value)) {
       throw new RuntimeException("유요하지 않은 계산 숫자입니다.");
     }

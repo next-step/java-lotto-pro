@@ -4,10 +4,10 @@ package stringcalculator;
  * 문자열을 입력하면 숫자를 파싱하여 계산한다.
  */
 public class StringCalculator {
-  StringCalculatorParser stringCalculratorParser;
+  Parser stringCalculratorParser;
 
   public StringCalculator() {
-    this.stringCalculratorParser = new StringCalculatorParser();
+    this.stringCalculratorParser = new Parser();
   }
 
   /**
@@ -17,7 +17,7 @@ public class StringCalculator {
    * @return 계산을 한 결과값
    */
   public Integer calculate(String calcuratingString) {
-    CalculatorNumbers calculatorNumbers  = this.stringCalculratorParser.parse(calcuratingString);
+    Numbers calculatorNumbers  = this.stringCalculratorParser.parse(calcuratingString);
 
     return calculatorNumbers.sum();
   }

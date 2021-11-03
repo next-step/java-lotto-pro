@@ -48,10 +48,10 @@ public class StringCalculatorTest {
     @ParameterizedTest(name = "{index} => String Value [{0}] sumValue [{1}]")
     void getCalculatorNumber(String value, Integer expectedValue) {
       // given
-      StringCalculatorParser stringParser = new StringCalculatorParser();
+      Parser stringParser = new Parser();
 
       // when
-      CalculatorNumbers realCalculatorNumbers = stringParser.parse(value);
+      Numbers realCalculatorNumbers = stringParser.parse(value);
 
       // then
       assertThat(realCalculatorNumbers.sum()).isEqualTo(expectedValue);
@@ -65,10 +65,10 @@ public class StringCalculatorTest {
     @ParameterizedTest(name = "{index} => String Value [{0}] sumValue [{1}]")
     void getCalculatorNumber_custrom(String value, Integer expectedValue) {
       // given
-      StringCalculatorParser stringParser = new StringCalculatorParser();
+      Parser stringParser = new Parser();
 
       // when
-      CalculatorNumbers realCalculatorNumbers = stringParser.parse(value);
+      Numbers realCalculatorNumbers = stringParser.parse(value);
 
       // then
       assertThat(realCalculatorNumbers.sum()).isEqualTo(expectedValue);
@@ -118,11 +118,11 @@ public class StringCalculatorTest {
     @Test
     void  sum_multiValue() {
       // given
-        List<CalculatorNumber> tempCalculratorNumbers = new ArrayList<>();
-        tempCalculratorNumbers.add(new CalculatorNumber("2"));
-        tempCalculratorNumbers.add(new CalculatorNumber("1"));
+        List<Number> tempCalculratorNumbers = new ArrayList<>();
+        tempCalculratorNumbers.add(new Number("2"));
+        tempCalculratorNumbers.add(new Number("1"));
 
-        CalculatorNumbers calculatorNumbers = new CalculatorNumbers(tempCalculratorNumbers);
+        Numbers calculatorNumbers = new Numbers(tempCalculratorNumbers);
 
       // when
         Integer realValue = calculatorNumbers.sum();
@@ -135,9 +135,9 @@ public class StringCalculatorTest {
     @Test
     void sum_none() {
       // given
-        List<CalculatorNumber> tempCalculratorNumbers = new ArrayList<>();
+        List<Number> tempCalculratorNumbers = new ArrayList<>();
 
-        CalculatorNumbers calculatorNumbers = new CalculatorNumbers(tempCalculratorNumbers);
+        Numbers calculatorNumbers = new Numbers(tempCalculratorNumbers);
 
       // when
         Integer realValue = calculatorNumbers.sum();
@@ -157,7 +157,7 @@ public class StringCalculatorTest {
       // given
 
       // when
-      ThrowingCallable exceptionContent = () -> new CalculatorNumber(value);
+      ThrowingCallable exceptionContent = () -> new Number(value);
 
       // then
       assertThatExceptionOfType(RuntimeException.class)

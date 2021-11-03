@@ -6,10 +6,10 @@ import java.util.List;
 /**
  * 계산에서 사용되는 숫자에대한 일급컬렉션.
  */
-public class CalculatorNumbers {
-  private final List<CalculatorNumber> items;
+public class Numbers {
+  private final List<Number> items;
      
-  public CalculatorNumbers(List<CalculatorNumber> items) {
+  public Numbers(List<Number> items) {
     this.items = new ArrayList<>(items);
   }
 
@@ -19,7 +19,7 @@ public class CalculatorNumbers {
    * @return 계산된 합계
    */
   public Integer sum() {
-    return items.stream().map(CalculatorNumber::value)
+    return items.stream().map(Number::value)
                           .reduce((result, seed) -> result += seed)
                           .orElse(0);
   }
