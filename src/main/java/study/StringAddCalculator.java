@@ -6,19 +6,18 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final String DEFAULT_SEPARATORS = "[,:]";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
-
+    
     public static int splitAndSum(final String text) {
         if (isEmptyOrNull(text)) {
             return 0;
         }
 
         final String[] splitText = split(text);
-        if (splitText.length > 1) {
-            return sum(splitText);
+        if (hasNotSplitText(splitText)) {
+            return parsePositiveNumber(text);
         }
 
-        final int number = parsePositiveNumber(text);
-        return number;
+        return sumBySplitText(splitText);
     }
 
     private static String[] split(final String text) {
@@ -30,16 +29,12 @@ public class StringAddCalculator {
         return text.split(DEFAULT_SEPARATORS);
     }
 
-    private static int sum(final String[] splitText) {
+    private static int sumBySplitText(final String[] splitText) {
         int sum = 0;
         for (final String text : splitText) {
             sum += parsePositiveNumber(text);
         }
         return sum;
-    }
-
-    private static boolean isEmptyOrNull(final String text) {
-        return text == null || text.isEmpty();
     }
 
     private static int parsePositiveNumber(String text) {
@@ -50,8 +45,15 @@ public class StringAddCalculator {
         return number;
     }
 
+    private static boolean hasNotSplitText(String[] splitText) {
+        return splitText.length <= 1;
+    }
+
     private static boolean isNotPositiveNumber(int number) {
         return number < 0;
     }
 
+    private static boolean isEmptyOrNull(final String text) {
+        return text == null || text.isEmpty();
+    }
 }
