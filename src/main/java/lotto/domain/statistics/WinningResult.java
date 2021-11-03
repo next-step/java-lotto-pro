@@ -3,9 +3,8 @@ package lotto.domain.statistics;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class WinningResult {
     private static final int DEFAULT_MATCH_COUNT = 0;
@@ -42,5 +41,11 @@ public class WinningResult {
         return winningResult.keySet().stream()
                 .mapToInt(rank -> rank.getPrizeMoney() * findMatchCount(rank))
                 .sum();
+    }
+
+    public Set<LottoRank> getKeys() {
+        Set<LottoRank> lottoRanks = winningResult.keySet();
+        lottoRanks.remove(LottoRank.LOSE);
+        return lottoRanks;
     }
 }

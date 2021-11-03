@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,5 +29,11 @@ public class LottoTicket {
 
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public List<Integer> convertLottoNumbers() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList());
     }
 }
