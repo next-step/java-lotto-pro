@@ -19,4 +19,10 @@ public class LottoTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
     }
+
+    @Test
+    void 로또는_중복되지_않는다() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 6, 6)));
+    }
 }
