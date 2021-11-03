@@ -30,35 +30,37 @@ public class StringCalculatorParser {
   }
 
   /**
-   * 문자열을 통해 계산에 사용되는 숫자를 추출한다..
+   * 문자열을 통해 계산에 사용되는 숫자를 추출한다.
    *
-   * @param string 구분자와 숫자가 포함된 문자열
+   * @param calculatorText 구분자와 숫자가 포함된 문자열
    * @return 계산에 사용되는 숫자
    */
-  public CalculatorNumbers parse(String string) {
-    Separators calculatorSeparators = new Separators(this.defaultSeparators);
-    String number = string;
-
-    Matcher m = Pattern.compile(CUSTOMER_SEPARATOR_PARSING_PATTERN).matcher(string);
+  public CalculatorNumbers parse(String calculatorText) {    
+    Matcher m = Pattern.compile(CUSTOMER_SEPARATOR_PARSING_PATTERN).matcher(calculatorText);
     
     if (m.find()) {
+      Separators calculatorSeparators = new Separators(this.defaultSeparators);
       calculatorSeparators.add(new Separator(m.group(1)));
-      number = m.group(2);
+
+      String numberText = m.group(2);
+      ParsingElement parsingElement = new ParsingElement(numberText, calculatorSeparators);
+      return generateCalculatorNumbers(parsingElement);
     }
-
-    return new CalculatorNumbers(generateCalculatorNumbers(number, calculatorSeparators));
+    
+    ParsingElement parsingElement = new ParsingElement(calculatorText, this.defaultSeparators);
+    return generateCalculatorNumbers(parsingElement);
   }
 
-  private List<CalculatorNumber> generateCalculatorNumbers(String number, Separators calculatorSeparators) {
-    return Stream.of(getNumberBySeperators(number, calculatorSeparators))
-                  .map(CalculatorNumber::new)
-                  .collect(Collectors.toList());
+  private CalculatorNumbers generateCalculatorNumbers(ParsingElement parsingElement) {
+    return new CalculatorNumbers(Stream.of(getNumberBySeperators(parsingElement))
+                                        .map(CalculatorNumber::new)
+                                        .collect(Collectors.toList()));
   }
 
-  private String[] getNumberBySeperators(String number, Separators calculatorSeparators) {
-    String seperatorRegex = getSeperatorRegex(calculatorSeparators.value());
+  private String[] getNumberBySeperators(ParsingElement parsingElement) {
+    String seperatorRegex = getSeperatorRegex(parsingElement.getSeparators().value());
 
-    return number.split(seperatorRegex);
+    return parsingElement.getNumberText().split(seperatorRegex);
   }
 
   private String getSeperatorRegex(String separator) {
