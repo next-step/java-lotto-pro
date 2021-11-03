@@ -1,5 +1,7 @@
 package step2;
 
+import java.util.List;
+
 public class StringAddCalculator {
 
 	public static int splitAndSum(String s) {
@@ -13,8 +15,8 @@ public class StringAddCalculator {
 		return (null == s) || s.isEmpty();
 	}
 
-	private static int sum(StringAddParser.Result parsed) {
-		return parsed.getPositiveNumbers().stream()
+	private static int sum(List<PositiveNumber> positiveNumbers) {
+		return positiveNumbers.stream()
 			.reduce(PositiveNumber.from("0"), PositiveNumber::add)
 			.get();
 	}
