@@ -11,7 +11,7 @@
 ## 문자열 덧셈 계산기 기능 요구사항
 * CalculatorInputString 클래스
   * 빈 문자열, null을 입력하면 true 반환
-  * toIntegerList를 통해 List<Integer> 반환
+  * toCalculatorNumbers를 통해 CalculatorNumbers 반환
   * 숫자가 아닌 값이 포함되어있으면 예외 발생
 
   * CalculatorInputStringParser 클래스
