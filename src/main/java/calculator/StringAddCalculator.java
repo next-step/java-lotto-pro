@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    private static final String[] DELIMITER = {",", ":"};
+    private static final String DELIMITERS = ",|:";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     private StringAddCalculator() {
@@ -18,20 +18,18 @@ public class StringAddCalculator {
             return 0;
         }
 
-        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
-        String[] split = splitFrom(text, matcher);
-
+        String[] split = splitFrom(text);
         return calculateSum(split);
     }
 
-    private static String[] splitFrom(String text, Matcher m) {
+    private static String[] splitFrom(String text) {
+        Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
 
-        String delimiters = String.join("|", DELIMITER);
-        return text.split(delimiters);
+        return text.split(DELIMITERS);
     }
 
     private static int calculateSum(String[] split) {
