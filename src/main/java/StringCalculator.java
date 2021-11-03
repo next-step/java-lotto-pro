@@ -1,26 +1,18 @@
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import wrapper.CalculatorParser;
 
 public class StringCalculator {
-	private static final String DEFAULT_DELIMITER_PATTERN = ",|:";
-	private static final String CUSTOM_DELIMITER_PATTERN = "(//)(.*)(\\\\n)(.*)";
-	private String customDelimiter;
-	private String cleanedInput;
+	private String delimiter;
+	private String input;
 
 	public StringCalculator(String input) {
-		cleanedInput = input;
+		CalculatorParser parser = new CalculatorParser(input);
+		this.delimiter = parser.getDelimiter();
+		this.input = parser.getInput();
 
-		Matcher matcher = parse(input);
-		if (matcher != null) {
-			customDelimiter = matcher.group(2);
-			cleanedInput = matcher.group(4);
-		}
 	}
 
 	public int calculate() {
-		String delimiterPattern = getDelimiterPattern();
-		String[] chunkedList = this.cleanedInput.split(delimiterPattern);
+		String[] chunkedList = this.input.split(this.delimiter);
 		int sum = 0;
 		try {
 			sum = sum(chunkedList);
@@ -33,26 +25,12 @@ public class StringCalculator {
 	private int sum(String[] numbers) {
 		int sum = 0;
 		for (String num : numbers) {
-			int i = Integer.parseInt(num);
+			int i = num.isEmpty() ? 0 : Integer.parseInt(num);
 			if (i < 0) {
 				throw new RuntimeException();
 			}
 			sum += i;
 		}
 		return sum;
-	}
-
-	private Matcher parse(String input) {
-		Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
-		Matcher matcher = pattern.matcher(input);
-		return matcher.find() ? matcher : null;
-	}
-
-	private String getDelimiterPattern() {
-		String delimilterPattern = DEFAULT_DELIMITER_PATTERN;
-		if (this.customDelimiter != null) {
-			delimilterPattern += "|" + customDelimiter;
-		}
-		return delimilterPattern;
 	}
 }
