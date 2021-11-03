@@ -1,5 +1,6 @@
 package edu.lotto.automatic.controller;
 
+import edu.lotto.automatic.constants.MessageConstants;
 import edu.lotto.automatic.utils.NumberUtil;
 
 import java.util.Scanner;
@@ -24,7 +25,7 @@ public class AutomaticLotto {
 	 * @return
 	 */
 	public static String getPerchaseAmount() {
-		System.out.println("구매금액을 입력해 주세요.");
+		System.out.println(MessageConstants.INPUT_PERCHASE_AMOUNT_MESSAGE);
 		Scanner scan = new Scanner(System.in);
 		String amount = scan.next();
 		if(NumberUtil.checkPerchaseAmountValidation(amount)) {

@@ -1,5 +1,6 @@
 package edu.lotto.automatic.utils;
 
+import edu.lotto.automatic.constants.MessageConstants;
 import edu.lotto.automatic.constants.PatternConstants;
 
 import java.util.regex.Pattern;
@@ -40,11 +41,11 @@ public class NumberUtil {
 		boolean validPerchaseAmount = true;
 		if(NumberUtil.isNumber(amount)) {
 			validPerchaseAmount = false;
-			System.out.println("숫자만 입력 가능합니다.");
+			System.out.println(MessageConstants.ONLY_INPUT_NUMBER_MESSAGE);
 		}
 		if(!NumberUtil.isMoreThanThousand(Integer.parseInt(amount))) {
 			validPerchaseAmount = false;
-			System.out.println("로또 1장의 가격은 1000원입니다.");
+			System.out.println(MessageConstants.LOTTO_PRICE_INFORMATION_MESSAGE);
 		}
 		return validPerchaseAmount;
 	}
