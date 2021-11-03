@@ -17,7 +17,7 @@ public class StringAddCalculator {
             return sum(splitText);
         }
 
-        final int number = Integer.parseInt(text);
+        final int number = parsePositiveNumber(text);
         return number;
     }
 
@@ -33,7 +33,7 @@ public class StringAddCalculator {
     private static int sum(final String[] splitText) {
         int sum = 0;
         for (final String text : splitText) {
-            sum += Integer.parseInt(text);
+            sum += parsePositiveNumber(text);
         }
         return sum;
     }
@@ -41,4 +41,17 @@ public class StringAddCalculator {
     private static boolean isEmptyOrNull(final String text) {
         return text == null || text.isEmpty();
     }
+
+    private static int parsePositiveNumber(String text) {
+        final int number = Integer.parseInt(text);
+        if (isNotPositiveNumber(number)) {
+            throw new RuntimeException(String.format("문자열 계산기는 음수를 입력할 수 없습니다.  [%d]", number));
+        }
+        return number;
+    }
+
+    private static boolean isNotPositiveNumber(int number) {
+        return number < 0;
+    }
+
 }
