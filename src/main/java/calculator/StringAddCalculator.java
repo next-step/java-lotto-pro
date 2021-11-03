@@ -7,7 +7,7 @@ public class StringAddCalculator {
         if (text == null || text.isEmpty()) {
             return 0;
         }
-        return Arrays.stream(text.split(","))
+        return Arrays.stream(text.split("[,:]"))
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
