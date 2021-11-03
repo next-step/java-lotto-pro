@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.purchase;
 
 import java.util.Objects;
 
@@ -24,7 +24,7 @@ public class PurchaseMoney {
         }
     }
 
-    public int getTicketAmount() {
+    public int getPurchaseAmount() {
         return money / TICKET_PRICE;
     }
 

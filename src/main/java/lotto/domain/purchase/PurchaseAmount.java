@@ -1,10 +1,10 @@
-package lotto.domain;
+package lotto.domain.purchase;
 
-public class TicketAmount {
+public class PurchaseAmount {
 
     private final int autoTicketAmount;
 
-    public TicketAmount(int ticketAmount) {
+    public PurchaseAmount(int ticketAmount) {
         this.autoTicketAmount = ticketAmount;
     }
 
