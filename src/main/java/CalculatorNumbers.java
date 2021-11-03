@@ -18,4 +18,14 @@ public class CalculatorNumbers {
 	public boolean hasSingleNumber() {
 		return this.values.size() == 1;
 	}
+
+	public int getNumber(int idx) {
+		return this.values.get(idx).getValue();
+	}
+
+	public int sum() {
+		return this.values.stream()
+			.mapToInt(CalculatorNumber::getValue)
+			.sum();
+	}
 }

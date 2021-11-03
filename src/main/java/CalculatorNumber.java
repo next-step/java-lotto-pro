@@ -8,4 +8,8 @@ public class CalculatorNumber {
 	public boolean isExceptional() {
 		return this.value < 0;
 	}
+
+	public int getValue() {
+		return value;
+	}
 }
