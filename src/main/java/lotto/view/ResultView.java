@@ -13,6 +13,7 @@ public class ResultView {
 	private static final String LOTTO_COUNT_MESSAGE = "%s개를 구매했습니다.";
 	private static final String WINNING_STATISTICS_GUIDE_MESSAGE = "당첨 통계";
 	private static final String WINNING_RANK_RECODE_RESULT_MESSAGE = "%s개 일치 (%s원)- %s개";
+	private static final String TOTAL_PROFIT_RATE_MESSAGE = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 	private static final String DIVIDE_LINE = "---------";
 
 	public void printLottos(Lottos lottos) {
@@ -30,6 +31,7 @@ public class ResultView {
 		System.out.println(DIVIDE_LINE);
 
 		printWinningRecords(winningStatistics.getWinningRecords());
+		printTotalProfitRate(winningStatistics.getRoundedTotalProfitRate());
 	}
 
 	private void printWinningRecords(List<WinningRecord> winningRecords) {
@@ -40,6 +42,10 @@ public class ResultView {
 													winningRank.getPrizeMoney(),
 													record.getCount()));
 		}
+	}
+
+	private void printTotalProfitRate(double totalProfitRate) {
+		System.out.println(MessageBuilder.build(TOTAL_PROFIT_RATE_MESSAGE, totalProfitRate));
 	}
 
 	private void printLottoCount(Lottos lottos) {

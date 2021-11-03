@@ -29,8 +29,8 @@ public class LottoController {
 		Lottos lottos = purchaseLottos(money);
 		lottos.checkWinningNumbers(WinningNumbers.createBy(inputView.inputWinningNumbers()));
 
-		WinningStatistics winningStatistics = WinningStatistics.create();
-		winningStatistics.buildStatistics(lottos);
+		WinningStatistics winningStatistics = WinningStatistics.createBy(lottos, money);
+		winningStatistics.buildStatistics();
 
 		this.resultView.printWinningStatistics(winningStatistics);
 	}

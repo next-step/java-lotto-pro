@@ -13,6 +13,10 @@ public class WinningRecord {
 		return new WinningRecord(winningRank, count);
 	}
 
+	public long getTotalPrizeMoney() {
+		return (long) winningRank.getPrizeMoney() * count;
+	}
+
 	public WinningRank getWinningRank() {
 		return winningRank;
 	}
