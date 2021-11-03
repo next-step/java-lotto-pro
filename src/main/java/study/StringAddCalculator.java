@@ -9,21 +9,17 @@ public class StringAddCalculator {
     private static final int CUSTOM_DELIMITER_GROUP = 1;
     private static final int CUSTOM_INPUT_GROUP = 2;
     private static final String NOT_POSITIVE_ERROR_MESSAGE_FORMAT = "문자열 계산기는 음수를 입력할 수 없습니다. [%d]";
+    private static final int ZERO = 0;
 
     public static int splitAndSum(final String text) {
         if (isEmptyOrNull(text)) {
             return 0;
         }
-
-        final String[] splitText = split(text);
-        if (hasNotSplitText(splitText)) {
-            return parsePositiveNumber(text);
-        }
-
+        final String[] splitText = splitByDelimiter(text);
         return sumBySplitText(splitText);
     }
 
-    private static String[] split(final String text) {
+    private static String[] splitByDelimiter(final String text) {
         final Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
         if (matcher.find()) {
             final String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP);
@@ -48,12 +44,8 @@ public class StringAddCalculator {
         return number;
     }
 
-    private static boolean hasNotSplitText(final String[] splitText) {
-        return splitText.length <= 1;
-    }
-
     private static boolean isNotPositiveNumber(final int number) {
-        return number < 0;
+        return number < ZERO;
     }
 
     private static boolean isEmptyOrNull(final String text) {
