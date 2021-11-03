@@ -24,6 +24,10 @@ public class PurchaseMoney {
         }
     }
 
+    public int getTicketAmount() {
+        return money / TICKET_PRICE;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
