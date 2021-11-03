@@ -16,7 +16,8 @@ class LottoNumberTest {
     })
     @DisplayName("로또 번호 한개 생성 - 성공")
     public void lottoNumberTest_ok(int number) {
-        assertThat(new LottoNumber(number)).isInstanceOf(LottoNumber.class);
+        assertThat(new LottoNumber(number))
+                .isInstanceOf(LottoNumber.class);
     }
 
     @ParameterizedTest
@@ -25,7 +26,8 @@ class LottoNumberTest {
     })
     @DisplayName("로또 번호 한개 생성 - 실")
     public void lottoNumberTest_fail(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number)).isInstanceOf(LottoNumberRangeException.class);
+        assertThatThrownBy(() -> new LottoNumber(number))
+                .isInstanceOf(LottoNumberRangeException.class);
     }
 
 }

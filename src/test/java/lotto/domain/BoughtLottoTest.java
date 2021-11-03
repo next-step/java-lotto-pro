@@ -30,7 +30,8 @@ class BoughtLottoTest {
     })
     @DisplayName("구입한 로또 개수 - 실패")
     public void buyToLottoTest_fail(int money) {
-        assertThatThrownBy(() -> new BoughtLotto(money)).isInstanceOf(InvalidMoneyException.class);
+        assertThatThrownBy(() -> new BoughtLotto(money))
+                .isInstanceOf(InvalidMoneyException.class);
 
     }
 
