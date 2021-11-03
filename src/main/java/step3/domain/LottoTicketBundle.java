@@ -17,14 +17,8 @@ public class LottoTicketBundle {
                 LottoTicket.LOTTO_TICKET_SIZE)));
     }
 
-    public List<List<Integer>> getUnmodifiableListLottoTickets() {
-        return forBuyerLottoTicketBundle().stream()
-            .collect(Collectors.collectingAndThen(Collectors.toList(),
-                Collections::unmodifiableList));
-    }
-
-    private List<List<Integer>> forBuyerLottoTicketBundle() {
-        return lottoTicketBundle.stream().map(LottoTicket::toLottoNumbers).collect(Collectors.toList());
+    public LottoTicketVoucher toLottoTicketVoucher() {
+        return new LottoTicketVoucher(lottoTicketBundle);
     }
 
 }

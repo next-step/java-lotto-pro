@@ -1,7 +1,5 @@
 package step3.domain;
 
-import java.util.List;
-
 public class LottoProvider {
     private static final int PRICE = 1000;
 
@@ -11,12 +9,12 @@ public class LottoProvider {
         this.purchaseCost = purchaseCost;
     }
 
-    public List<List<Integer>> buyLotto() {
+    public LottoTicketVoucher buyLotto() {
         LottoTicketBundle lottoTicketBundle = new LottoTicketBundle();
         for (int i = 0; i < availableQuantity(); i++) {
             lottoTicketBundle.addLottoTicket();
         }
-        return lottoTicketBundle.getUnmodifiableListLottoTickets();
+        return lottoTicketBundle.toLottoTicketVoucher();
     }
 
     public int availableQuantity() {
