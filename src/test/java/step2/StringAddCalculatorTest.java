@@ -36,14 +36,14 @@ public class StringAddCalculatorTest {
 
 	@Test
 	public void splitAndSum_쉼표구분자_문자2개_() throws Exception {
-		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("우테캠, 자바"))
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("우테캠,자바"))
 			.isInstanceOf(RuntimeException.class)
 			.hasMessage("구분자 혹은 입력 값을 다시 한번 확인해주세요.");
 	}
 
 	@Test
-	public void splitAndSum_쉼표구분자_숫자2개_() throws Exception {
-		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1 : 2"))
+	public void splitAndSum_쉼표외의_구분자_숫자2개_() throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1;2"))
 			.isInstanceOf(RuntimeException.class)
 			.hasMessage("구분자 혹은 입력 값을 다시 한번 확인해주세요.");
 	}
@@ -72,6 +72,20 @@ public class StringAddCalculatorTest {
 	public void splitAndSum_custom_구분자() throws Exception {
 		int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
 		assertThat(result).isEqualTo(6);
+	}
+
+	@Test
+	public void splitAndSum_custom_구분자외_다른구분자_사용() throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("//;\n1-2-3"))
+			.isInstanceOf(RuntimeException.class)
+			.hasMessage("구분자 혹은 입력 값을 다시 한번 확인해주세요.");
+	}
+
+	@Test
+	public void splitAndSum_custom_구분자_문자입력() throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("//;\n자바;우테캠;코드리뷰"))
+			.isInstanceOf(RuntimeException.class)
+			.hasMessage("구분자 혹은 입력 값을 다시 한번 확인해주세요.");
 	}
 
 	@Test
