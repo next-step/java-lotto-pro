@@ -24,4 +24,12 @@ public class LottoProvider {
     public int totalPurchasePrice(int quantity) {
         return quantity * PRICE;
     }
+
+    public String winningVerification(LottoTicketVoucher lottoTicketVoucher,
+        LottoTicket winningLottoTicket) {
+        LottoWinningReport lottoWinningReport = new LottoWinningReport(lottoTicketVoucher.getLottoTicketBundle(),
+            winningLottoTicket,
+            totalPurchasePrice(availableQuantity()));
+        return lottoWinningReport.toString();
+    }
 }

@@ -1,9 +1,7 @@
 package step3.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoTicketVoucher {
@@ -14,6 +12,10 @@ public class LottoTicketVoucher {
         this.lottoTicketBundle = unmodifiableListLottoTicketsOf(lottoTicketBundle);
     }
 
+    public List<LottoTicket> getLottoTicketBundle() {
+        return lottoTicketBundle;
+    }
+
     private List<LottoTicket> unmodifiableListLottoTicketsOf(List<LottoTicket> lottoTicketBundle) {
         return lottoTicketBundle.stream()
             .collect(Collectors.collectingAndThen(Collectors.toList(),
@@ -22,7 +24,7 @@ public class LottoTicketVoucher {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (LottoTicket lottoTicket : lottoTicketBundle) {
             sb.append(lottoTicket.toLottoNumbers().toString()).append(LINE_CHANGE);
         }
