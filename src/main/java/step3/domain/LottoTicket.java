@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
-    private static final int LOTTO_TICKET_SIZE = 6;
+    public static final int LOTTO_TICKET_SIZE = 6;
     public static final String LOTTO_TICKET_OVER_SIZE_EXCEPTION_MESSAGE = String.format("로또 티켓은 %s 개의 숫자만 가능합니다.",
         LOTTO_TICKET_SIZE);
     private final Set<LottoNumber> lottoTicket = new HashSet<>();
