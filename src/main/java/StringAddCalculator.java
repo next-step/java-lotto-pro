@@ -4,15 +4,15 @@ public class StringAddCalculator {
 
     public int calculate(String input) {
         if(Objects.isNull(input) || input.isEmpty()) return 0;
-        validate(input);
-        return Integer.parseInt(input);
+        validateNotNumber(input);
+        int number = Integer.parseInt(input);
+        if(number < 0) throw new IllegalArgumentException();
+        return number;
     }
 
-    private void validate(String input) {
+    private void validateNotNumber(String input) {
         try {
-            if(Integer.parseInt(input) < 0) {
-                throw new IllegalArgumentException();
-            }
+            Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
