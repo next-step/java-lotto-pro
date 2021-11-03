@@ -25,4 +25,7 @@ public enum LottoRank {
                 .orElse(LottoRank.LOSE);
     }
 
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
 }

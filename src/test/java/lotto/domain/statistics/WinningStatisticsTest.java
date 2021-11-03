@@ -9,21 +9,24 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WinningResultTest {
+class WinningStatisticsTest {
 
     @Test
-    @DisplayName("당첨 순위별로 당첨된 로또 티켓 개수를 조회한다.")
-    void createWinningResult() {
+    @DisplayName("당첨 순위의 수익률을 계산한다")
+    void profit_rate() {
         //given
+        LottoTickets lottoTickets = lottoTickets();
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        //when
         WinningResult winningResult = new WinningResult(winningNumbers);
-        winningResult.aggregate(lottoTickets());
+        winningResult.aggregate(lottoTickets);
+
+        //when
+        WinningStatistics winningStatistics = new WinningStatistics(winningResult);
+        float profit = winningStatistics.profitRate(lottoTickets.getLottoTickets().size());
 
         //then
-        assertThat(winningResult.findMatchCount(LottoRank.FOURTH)).isEqualTo(2);
-        assertThat(winningResult.findMatchCount(LottoRank.LOSE)).isEqualTo(3);
+        assertThat(profit).isEqualTo(2.0f);
     }
 
     private static LottoTickets lottoTickets() {

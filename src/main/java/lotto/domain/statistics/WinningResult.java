@@ -34,7 +34,13 @@ public class WinningResult {
         winningResult.put(key, winningResult.get(key) + 1);
     }
 
-    public int getMatchCount(LottoRank lottoRank) {
+    public int findMatchCount(LottoRank lottoRank) {
         return winningResult.get(lottoRank);
+    }
+
+    public int totalPrize() {
+        return winningResult.keySet().stream()
+                .mapToInt(rank -> rank.getPrizeMoney() * findMatchCount(rank))
+                .sum();
     }
 }
