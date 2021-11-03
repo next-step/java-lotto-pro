@@ -25,4 +25,11 @@ public class LottoTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 6, 6)));
     }
+
+    @Test
+    void 당첨번호_개수를_반환한다() {
+        Lotto 구입한_로또 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto 당첨_로또 = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
+        assertThat(당첨_로또.match(구입한_로또)).isEqualTo(3);
+    }
 }

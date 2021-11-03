@@ -6,10 +6,12 @@ public class Lotto {
 
     private static final int MAX_SIZE = 6;
 
-    private final Set<LottoNumber> lotto;
+    private final Set<LottoNumber> lotto = new HashSet();
 
     public Lotto(final List<Integer> lotto) {
-        this.lotto = new HashSet(lotto);
+        for (Integer number : lotto) {
+            this.lotto.add(new LottoNumber(number));
+        }
         check();
     }
 
@@ -17,6 +19,16 @@ public class Lotto {
         if (lotto.size() != MAX_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다");
         }
+    }
+
+    public int match(final Lotto lotto) {
+        return (int) this.lotto.stream()
+                .filter(lotto::contain)
+                .count();
+    }
+
+    private boolean contain(LottoNumber number) {
+        return this.lotto.contains(number);
     }
 
     @Override
