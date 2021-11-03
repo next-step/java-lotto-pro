@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Purchase {
 
     private static final int ZERO = 0;
+    private static final int LOTTO_PRICE = 1000;
 
     private final int price;
 
@@ -17,6 +18,10 @@ public class Purchase {
         if (price < ZERO) {
             throw new IllegalArgumentException("음수가 될 수 없습니다.");
         }
+    }
+
+    public int buy() {
+        return price / LOTTO_PRICE;
     }
 
     @Override
