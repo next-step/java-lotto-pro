@@ -11,7 +11,7 @@ import static lotto.common.LottoConst.LOTTO_SIZE;
 public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(final List<Integer> numbers) {
         validation(numbers);
 
         this.lottoNumbers = numbers.stream()
@@ -21,12 +21,12 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    private void validation(List<Integer> numbers) {
+    private void validation(final List<Integer> numbers) {
         lottoSizeCheck(numbers);
         duplicatedCheck(numbers);
     }
 
-    private void duplicatedCheck(List<Integer> numbers) {
+    private void duplicatedCheck(final List<Integer> numbers) {
         List<Integer> distinctNumbers = numbers.stream()
                 .distinct()
                 .collect(Collectors.toList());
@@ -36,7 +36,7 @@ public class LottoNumbers {
         }
     }
 
-    private void lottoSizeCheck(List<Integer> numbers) {
+    private void lottoSizeCheck(final List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new LottoSizeException();
         }

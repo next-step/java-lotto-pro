@@ -7,22 +7,22 @@ public class BoughtLotto {
 
     private int boughtMoney;
 
-    public BoughtLotto(int money) {
+    public BoughtLotto(final int money) {
         validMoney(money);
         this.boughtMoney = money;
     }
 
-    private void validMoney(int money) {
+    private void validMoney(final int money) {
         if (!isThousandUnit(money) || !isPositiveInteger(money)) {
             throw new InvalidMoneyException();
         }
     }
 
-    private boolean isThousandUnit(int money) {
+    private boolean isThousandUnit(final int money) {
         return money % LOTTO_PRICE == 0;
     }
 
-    private boolean isPositiveInteger(int money) {
+    private boolean isPositiveInteger(final int money) {
         return money > 0;
     }
 
