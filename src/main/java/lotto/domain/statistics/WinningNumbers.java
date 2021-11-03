@@ -29,6 +29,10 @@ public class WinningNumbers {
         }
     }
 
+    public boolean matchNumber(LottoNumber lottoNumber) {
+        return winningNumbers.contains(lottoNumber);
+    }
+
     public Set<LottoNumber> getWinningNumbers() {
         return winningNumbers;
     }
