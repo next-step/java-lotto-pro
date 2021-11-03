@@ -19,7 +19,7 @@ class SellerTest {
 
     @Test
     @DisplayName("판매원에게 1000원 미만인 돈을 주었을 경우 테스트")
-    void LessThanOneThoundreturnLotto() {
+    void lessThanOneThoundreturnLotto() {
         int money = 100;
         assertThatExceptionOfType(MyException.class)
                 .isThrownBy(() -> {
