@@ -23,7 +23,7 @@ public class StringAddCalculator {
         if (isContainsCommaOrColon(inputText)) {
             return calculateContainsCommaOrColon(inputText);
         }
-        return Integer.parseInt(inputText);
+        return changeStringToInt(inputText);
     }
 
     private static Matcher getMatcher(String inputText) {
@@ -49,9 +49,17 @@ public class StringAddCalculator {
     private static int calculateSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            sum += changeStringToInt(number);
         }
         return sum;
+    }
+
+    private static int changeStringToInt(String stringNumber) {
+        int num = Integer.parseInt(stringNumber);
+        if (num < 0) {
+            throw new RuntimeException(ExceptionMessage.NEGATIVE_EXCEPTION_MESSAGE + "(입력값: " + num + ")");
+        }
+        return num;
     }
 
     private static boolean isNullOrEmpty(String inputText) {
