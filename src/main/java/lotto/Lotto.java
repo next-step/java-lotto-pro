@@ -12,5 +12,7 @@ public class Lotto {
         LottoMoney lottoMoney = new LottoMoney(InputView.readLine());
         int count = lottoMoney.calculateLottoCount();
         ResultView.print(count + PRINT_NUMBER_OF_PURCHASED_LOTTO);
+
+        LottoTickets lottoTickets = new LottoTickets(count);
     }
 }
