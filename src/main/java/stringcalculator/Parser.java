@@ -17,10 +17,15 @@ public class Parser {
   private static final Integer REGEX_GROUP_SEPARATOR_INDEX = 1;
   private static final Integer REGEX_GROUP_NUMBER_INDEX = 2;
 
+  private final Pattern customSeparatorParsingPattern;
   private final Separators defaultSeparators;
 
+  /**
+   * 계산할 문자열 파서 초기화.
+   */
   public Parser() {
     this.defaultSeparators = generateDefaultSeparators();
+    this.customSeparatorParsingPattern = Pattern.compile(CUSTOM_SEPARATOR_PARSING_PATTERN);
   }
 
   private Separators generateDefaultSeparators() {
@@ -35,18 +40,18 @@ public class Parser {
   /**
    * 문자열을 통해 계산에 사용되는 숫자를 추출한다.
    *
-   * @param calculatorText 구분자와 숫자가 포함된 문자열
+   * @param parsingText 구분자와 숫자가 포함된 문자열
    * @return 계산에 사용되는 숫자
    */
-  public Numbers parse(String calculatorText) {
-    ParsingElement parsingElement = generateParsingElementWithCustomSeparator(calculatorText)
-                                    .orElse(new ParsingElement(calculatorText, this.defaultSeparators));
+  public NaturalNumbers parse(String parsingText) {
+    ParsingElement parsingElement = generateParsingElementWithCustomSeparator(parsingText)
+                                    .orElse(new ParsingElement(parsingText, this.defaultSeparators));
 
-    return generateNumbers(parsingElement);
+    return generateNaturalNumbers(parsingElement);
   }
 
-  private Optional<ParsingElement> generateParsingElementWithCustomSeparator(String calculatorText) {
-    Matcher matcher = Pattern.compile(CUSTOM_SEPARATOR_PARSING_PATTERN).matcher(calculatorText);
+  private Optional<ParsingElement> generateParsingElementWithCustomSeparator(String parsingText) {
+    Matcher matcher = this.customSeparatorParsingPattern.matcher(parsingText);
 
     if (matcher.find()) {
       Separators separators = new Separators(this.defaultSeparators);
@@ -56,19 +61,19 @@ public class Parser {
       return Optional.of(new ParsingElement(numberText, separators));
     }
 
-    return Optional.ofNullable(null);
+    return Optional.empty();
   }
 
-  private Numbers generateNumbers(ParsingElement parsingElement) {
-    return new Numbers(Stream.of(getNumberBySeperators(parsingElement))
-                                        .map(Number::new)
-                                        .collect(Collectors.toList()));
+  private NaturalNumbers generateNaturalNumbers(ParsingElement parsingElement) {
+    return Stream.of(getNaturalNumberBySeperators(parsingElement))
+                  .map(NaturalNumber::new)
+                  .collect(Collectors.collectingAndThen(Collectors.toList(), NaturalNumbers::new));
   }
 
-  private String[] getNumberBySeperators(ParsingElement parsingElement) {
+  private String[] getNaturalNumberBySeperators(ParsingElement parsingElement) {
     String seperatorRegex = getSeperatorRegex(parsingElement.getSeparators().value());
 
-    return parsingElement.getNumberText().split(seperatorRegex);
+    return parsingElement.getNaturalNumberText().split(seperatorRegex);
   }
 
   private String getSeperatorRegex(String separator) {

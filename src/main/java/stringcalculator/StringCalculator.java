@@ -17,7 +17,7 @@ public class StringCalculator {
    * @return 계산을 한 결과값
    */
   public Integer calculate(String calcuratingString) {
-    Numbers calculatorNumbers  = this.parser.parse(calcuratingString);
+    NaturalNumbers calculatorNumbers  = this.parser.parse(calcuratingString);
 
     return calculatorNumbers.sum();
   }

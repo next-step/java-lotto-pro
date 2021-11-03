@@ -12,10 +12,10 @@ class Parser {
   - defaultSeparators : Separators
 
   - generateDefaultSeparators() : Separators
-  + parse(calculatorText : String) : Numbers
+  + parse(calculatorText : String) : NaturalNumbers
   - generateParsingElementWithCustomSeparator(calculatorText : String) : Optional<ParsingElement>
-  - generateNumbers(ParsingElement parsingElement) : Numbers
-  - getNumberBySeperators(ParsingElement parsingElement) : String[]
+  - generateNaturalNumbers(ParsingElement parsingElement) : NaturalNumbers
+  - getNaturalNumberBySeperators(ParsingElement parsingElement) : String[]
   - getSeperatorRegex(separator : String) : String
   - replaceSpecialCharacter(separator : String) : String
 }
@@ -24,17 +24,17 @@ class ParsingElement {
   - numberText : String
   - separators : Separators
 
-  + getNumber() : String
+  + getNaturalNumber() : String
   + getSeparators() : Separators
 }
 
-class Numbers {
-  - items : List<Number>
+class NaturalNumbers {
+  - items : List<NaturalNumber>
 
   + sum() : Integer
 }
 
-class Number {
+class NaturalNumber {
   - item : Integer
 
   + value() : Integer
@@ -56,15 +56,15 @@ class Separator {
 }
 
 StringCalculator *-- Parser
-StringCalculator <-- Numbers
+StringCalculator <-- NaturalNumbers
 
 ParsingElement *-- Separators
 
 Parser <-- ParsingElement
-Parser <-- Numbers
-Parser  *--  Separators
+Parser <-- NaturalNumbers
+Parser *--  Separators
 
-Numbers "1" *-- "0..*" Number
+NaturalNumbers "1" *-- "0..*" NaturalNumber
 
 Separators "1" *-- "1..*" Separator
 @enduml
