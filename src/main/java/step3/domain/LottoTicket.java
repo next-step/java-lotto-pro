@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int LOTTO_TICKET_SIZE = 6;
@@ -17,6 +18,15 @@ public class LottoTicket {
         validTicketSize();
     }
 
+    public List<Integer> toLottoNumbers() {
+        List<Integer> result = new ArrayList<>();
+        for (LottoNumber lottoNumber : lottoTicket) {
+            result.add(lottoNumber.toInt());
+        }
+        Collections.sort(result);
+        return Collections.unmodifiableList(result);
+    }
+
     private void validTicketSize() {
         if (lottoTicket.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException(LOTTO_TICKET_OVER_SIZE_EXCEPTION_MESSAGE);
@@ -27,13 +37,5 @@ public class LottoTicket {
         for (int number : numbers) {
             lottoTicket.add(new LottoNumber(number));
         }
-    }
-
-    public List<Integer> toLottoNumbers() {
-        List<Integer> result = new ArrayList<>();
-        for (LottoNumber lottoNumber : lottoTicket) {
-            result.add(lottoNumber.toInt());
-        }
-        return Collections.unmodifiableList(result);
     }
 }

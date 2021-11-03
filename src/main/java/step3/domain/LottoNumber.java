@@ -15,14 +15,14 @@ public class LottoNumber {
         this.lotteNumber = lotteNumber;
     }
 
+    public int toInt() {
+        return lotteNumber;
+    }
+
     private void rangeNumberValid(int lotteNumber) {
         if (lotteNumber < RANGE_MIN_LOTTO_NUMBER || lotteNumber > RANGE_MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(RANGE_OVER_EXCEPTION);
         }
-    }
-
-    public int toInt() {
-        return lotteNumber;
     }
 
     @Override
