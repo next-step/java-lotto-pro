@@ -31,4 +31,10 @@ public class LottoNumber {
     public List<Number> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    @Override
+    public String toString() {
+        return String.join(", ", lottoNumbers.toString());
+    }
+
 }
