@@ -41,4 +41,8 @@ public class LottoNumbers {
             throw new LottoSizeException();
         }
     }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }

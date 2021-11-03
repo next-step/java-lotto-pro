@@ -1,0 +1,32 @@
+package lotto.module;
+
+import lotto.domain.LottoNumbers;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static lotto.common.LottoConst.*;
+
+public class AutoGenerator implements NumberGeneratorStrategy {
+
+    public static final List<Integer> ALL_LOTTO_NUMBERS =
+            IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+                    .boxed()
+                    .collect(Collectors.toList());
+
+    @Override
+    public LottoNumbers createLotto() {
+        List<Integer> numbers = new ArrayList<>();
+        numbers.addAll(ALL_LOTTO_NUMBERS);
+        Collections.shuffle(numbers);
+
+        return new LottoNumbers(
+                numbers.stream()
+                        .limit(LOTTO_SIZE)
+                        .collect(Collectors.toList())
+        );
+    }
+}
