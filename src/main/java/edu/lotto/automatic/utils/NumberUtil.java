@@ -6,7 +6,7 @@ import edu.lotto.automatic.constants.PatternConstants;
 import java.util.regex.Pattern;
 
 /**
- * 숫자 검증 Util
+ * 숫자 검증 및 관련 Util
  * @since 2021.11.03
  * @author Inmook,Jeong
  */
