@@ -1,0 +1,70 @@
+@startuml StringCalculator
+class StringCalculator {
+  - parser : Parser
+
+  + calculate(calcuratingString: String) : Integer
+}
+
+class Parser {
+  - CUSTOM_SEPARATOR_PARSING_PATTERN : String
+  - REGEX_GROUP_SEPARATOR_INDEX : Integer
+  - REGEX_GROUP_NUMBER_INDEX : Integer
+  - defaultSeparators : Separators
+
+  - generateDefaultSeparators() : Separators
+  + parse(calculatorText : String) : NaturalNumbers
+  - generateParsingElementWithCustomSeparator(calculatorText : String) : Optional<ParsingElement>
+  - generateNaturalNumbers(ParsingElement parsingElement) : NaturalNumbers
+  - getNaturalNumberBySeperators(ParsingElement parsingElement) : String[]
+  - getSeperatorRegex(separator : String) : String
+  - replaceSpecialCharacter(separator : String) : String
+}
+
+class ParsingElement {
+  - numberText : String
+  - separators : Separators
+
+  + getNaturalNumber() : String
+  + getSeparators() : Separators
+}
+
+class NaturalNumbers {
+  - items : List<NaturalNumber>
+
+  + sum() : Integer
+}
+
+class NaturalNumber {
+  - item : Integer
+
+  + value() : Integer
+  - isInvalid(value: String) : boolean
+  - isNegative(value: String) : boolean
+}
+
+class Separators {
+  - items : List<Separators>
+
+  + value() : String
+  + add(separator: Separator) : Boolean
+}
+
+class Separator {
+  - item : String
+
+  + value() : String
+}
+
+StringCalculator *-- Parser
+StringCalculator <-- NaturalNumbers
+
+ParsingElement *-- Separators
+
+Parser <-- ParsingElement
+Parser <-- NaturalNumbers
+Parser *--  Separators
+
+NaturalNumbers "1" *-- "0..*" NaturalNumber
+
+Separators "1" *-- "1..*" Separator
+@enduml
