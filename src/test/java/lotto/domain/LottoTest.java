@@ -1,10 +1,12 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoTest {
 
@@ -22,6 +24,12 @@ class LottoTest {
     void validate_duplicate(String inputs) {
         assertThatThrownBy(() -> Lotto.from(inputs))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또숫자들이 같으면 equals 비교 시 true를 반환한다.")
+    @Test
+    void equals() {
+        assertThat(Lotto.from("1,2,3,4,5,6")).isEqualTo(Lotto.from("1,2,3,4,5,6"));
     }
 
 }
