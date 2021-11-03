@@ -27,6 +27,11 @@ public final class Lotto {
         return new Lotto(numbers);
     }
 
+    public static Lotto from(final List<Integer> numbers) {
+        validate(numbers);
+        return new Lotto(numbers);
+    }
+
     private static void validate(final List<Integer> numbers) {
         if (numbers.size() != NUMBER_LIMIT_SIZE) {
             throw new CountOfLottoNumberException();
