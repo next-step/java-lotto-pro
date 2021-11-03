@@ -12,6 +12,7 @@ public class StringAddCalculator {
         try {
             return Arrays.stream(text.split("[,:]"))
                     .mapToInt(Integer::parseInt)
+                    .map(StringAddCalculator::parsePositiveInteger)
                     .sum();
         } catch (NumberFormatException ignored) {
         }
@@ -21,8 +22,16 @@ public class StringAddCalculator {
             String[] tokens = m.group(2).split(customDelimiter);
             return Arrays.stream(tokens)
                     .mapToInt(Integer::parseInt)
+                    .map(StringAddCalculator::parsePositiveInteger)
                     .sum();
         }
         return 0;
+    }
+
+    private static int parsePositiveInteger(Integer integer) {
+        if (integer < 0) {
+            throw new RuntimeException();
+        }
+        return integer;
     }
 }
