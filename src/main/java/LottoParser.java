@@ -1,0 +1,34 @@
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class LottoParser {
+
+	private static final String DELIMITER = ",";
+
+	public static List<LottoNumber> parse(String s) {
+		final String[] tokens = s.split(DELIMITER);
+		validate(tokens.length);
+		return Arrays.stream(tokens)
+			.map(String::trim)
+			.mapToInt(LottoParser::parseInt)
+			.mapToObj(LottoNumber::from)
+			.sorted(Comparator.comparingInt(LottoNumber::get))
+			.collect(Collectors.toList());
+	}
+
+	private static void validate(int numOfLottoNumbers) {
+		if (numOfLottoNumbers != Lotto.NUM_OF_LOTTO_NUMBERS) {
+			throw new LottoFormatException();
+		}
+	}
+
+	private static int parseInt(String s) {
+		try {
+			return Integer.parseInt(s);
+		} catch (NumberFormatException e) {
+			throw new LottoNumberFormatException();
+		}
+	}
+}
