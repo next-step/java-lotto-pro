@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
     public static int splitAndSum(String text) {
         if (text == null || text.isEmpty()) {
@@ -9,6 +11,8 @@ public class StringAddCalculator {
             return Integer.parseInt(text);
         } catch (NumberFormatException ignored) {
         }
-        return 0;
+        return Arrays.stream(text.split(","))
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 }
