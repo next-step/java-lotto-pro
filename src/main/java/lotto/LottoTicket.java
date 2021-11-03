@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,9 +13,9 @@ public class LottoTicket implements Printable {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
 
+    private static final String COMMA_SPACE = ", ";
     private static final String LEFT_BRACE = "[";
     private static final String RIGHT_BRACE = "]";
-    private static final String COMMA_SPACE = ", ";
 
     private List<Integer> numbers;
 
@@ -27,6 +28,13 @@ public class LottoTicket implements Printable {
 
         numbers = possibleNumbers.stream()
             .limit(LOTTO_SIZE)
+            .sorted()
+            .collect(Collectors.toList());
+    }
+
+    public LottoTicket(String text) {
+        numbers = Arrays.stream(text.split(COMMA_SPACE))
+            .map(Integer::parseInt)
             .sorted()
             .collect(Collectors.toList());
     }

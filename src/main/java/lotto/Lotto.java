@@ -13,5 +13,7 @@ public class Lotto {
 
         LottoTickets lottoTickets = new LottoTickets(count);
         ResultView.print(lottoTickets);
+
+        LottoTicket winnerTicket = new LottoTicket(InputView.readLine());
     }
 }
