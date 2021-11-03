@@ -1,5 +1,7 @@
 package edu.lotto.automatic.controller;
 
+import edu.lotto.automatic.utils.NumberUtil;
+
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -13,7 +15,7 @@ public class AutomaticLotto {
 	private static Logger logger = Logger.getLogger(AutomaticLotto.class.getName());
 
 	public static void main(String[] args) {
-		int perchaseAmount = getPerchaseAmount();
+		int perchaseAmount = Integer.parseInt(getPerchaseAmount());
 		logger.info("사용자가 입력한 구매 금액 : " + perchaseAmount);
 	}
 
@@ -21,9 +23,13 @@ public class AutomaticLotto {
 	 * 사용자가 입력한 구매 금액 가져오기
 	 * @return
 	 */
-	public static int getPerchaseAmount() {
+	public static String getPerchaseAmount() {
 		System.out.println("구매금액을 입력해 주세요.");
 		Scanner scan = new Scanner(System.in);
-		return scan.nextInt();
+		String amount = scan.next();
+		if(NumberUtil.checkPerchaseAmountValidation(amount)) {
+			amount = getPerchaseAmount();
+		}
+		return amount;
 	}
 }
