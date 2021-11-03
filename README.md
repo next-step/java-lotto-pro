@@ -16,11 +16,11 @@
   - generate 6 lotto numbers
 - lotto store
   - sell lottos
+- lotto parser
 - winning lotto (extends lotto)
-  - parse
   - count matching
 - winning statistics
-  - count by matching-count (3,4,5,6)
+  - count lottos by matching-count (3,4,5,6)
   - calculate earnings-rate
 - view
   - input
