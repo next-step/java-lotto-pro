@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -30,6 +31,16 @@ class LottoTest {
     @Test
     void equals() {
         assertThat(Lotto.from("1,2,3,4,5,6")).isEqualTo(Lotto.from("1,2,3,4,5,6"));
+    }
+
+    @DisplayName("로또간에 로또숫자들을 비교해서 같은 로또숫자의 개수를 가져온다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:11,12,13,14,15,16:0", "11,12,13,14,15,16:11,12,13,20,21,22:3", "21,22,23,24,25,26:21,22,23,24,25,26:6"}, delimiter = ':')
+    void countMatchingNumber(String firstInputs, String secondInputs, int matchCount) {
+        Lotto firstLotto = Lotto.from(firstInputs);
+        Lotto secondLotto = Lotto.from(secondInputs);
+
+        assertThat(firstLotto.countMatchingNumber(secondLotto)).isEqualTo(matchCount);
     }
 
 }

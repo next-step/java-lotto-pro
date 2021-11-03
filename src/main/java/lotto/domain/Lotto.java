@@ -3,10 +3,7 @@ package lotto.domain;
 import lotto.domain.exception.CountOfLottoNumberException;
 import lotto.domain.exception.DuplicateOfLottoNumberException;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public final class Lotto {
@@ -52,4 +49,11 @@ public final class Lotto {
         return Objects.hash(lottoNumbers);
     }
 
+    public int countMatchingNumber(Lotto comparableLotto) {
+        int matchingCount = 0;
+        for (LottoNumber lottoNumber : comparableLotto.lottoNumbers) {
+            matchingCount += Collections.frequency(this.lottoNumbers, lottoNumber);
+        }
+        return matchingCount;
+    }
 }
