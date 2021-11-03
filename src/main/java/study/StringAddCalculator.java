@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final String[] DEFAULT_DELIMITER = {",", ":"};
     private static final int DEFAULT_FAILURE_VALUE = 0;
+    private static final int REGEX_FIRST_GROUP_INDEX = 1;
     private static final Pattern PATTERN_FIND_CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.+)");
     private static final Pattern PATTERN_FIND_BODY_TEXT = Pattern.compile("(?://.\n)?(.+)");
 
@@ -42,7 +43,7 @@ public class StringAddCalculator {
         String result = "";
         Matcher m = pattern.matcher(text);
         if (m.find()) {
-            result = m.group(1);
+            result = m.group(REGEX_FIRST_GROUP_INDEX);
         }
         return result;
     }
