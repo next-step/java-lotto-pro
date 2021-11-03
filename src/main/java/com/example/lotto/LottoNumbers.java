@@ -2,6 +2,7 @@ package com.example.lotto;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -17,6 +18,14 @@ public class LottoNumbers {
 			.sorted()
 			.map(LottoNumber::new)
 			.collect(Collectors.toList());
+	}
+
+	public static int match(LottoNumbers first, LottoNumbers second) {
+		Set<LottoNumber> intersection = first.values.stream()
+			.filter(second.values::contains)
+			.collect(Collectors.toSet());
+
+		return intersection.size();
 	}
 
 	private void throwOnInvalidLottoNumberCount(List<Integer> numbers) {

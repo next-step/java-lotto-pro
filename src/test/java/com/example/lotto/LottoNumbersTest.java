@@ -43,6 +43,18 @@ public class LottoNumbersTest {
 		);
 	}
 
+	private static Stream<Arguments> matchArguments() {
+		return Stream.of(
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), 6),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7), 5),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 7, 8), 4),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 7, 8, 9), 3),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 7, 8, 9, 10), 2),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 7, 8, 9, 10, 11), 1),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(7, 8, 9, 10, 11, 12), 0)
+		);
+	}
+
 	@DisplayName("로또 번호들을 생성한다. 로또 번호들은 중복되지 않으며 오름차순으로 6개이다.")
 	@ParameterizedTest
 	@MethodSource("validNumbers")
@@ -65,12 +77,20 @@ public class LottoNumbersTest {
 		);
 	}
 
-	@DisplayName("로또 게임을 생성할 수 없다.")
+	@DisplayName("로또 번호들을 생성할 수 없다.")
 	@ParameterizedTest
 	@MethodSource("invalidNumbers")
 	void constructor_fail(List<Integer> numbers) {
 		// given & when & then
 		assertThatThrownBy(() -> new LottoNumbers(numbers))
 			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("로또 번호들을 비교할 수 있다.")
+	@ParameterizedTest
+	@MethodSource("matchArguments")
+	void match(List<Integer> first, List<Integer> second, int countOfMatch) {
+		// given & when & then
+		assertThat(LottoNumbers.match(new LottoNumbers(first), new LottoNumbers(second))).isEqualTo(countOfMatch);
 	}
 }

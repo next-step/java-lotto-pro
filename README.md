@@ -47,4 +47,8 @@
 - [x] `LottoNumber`
     - [x] 1부터 45까지의 숫자 중 하나이다.
 - [x] `LottoNumbers`
-    -  [x] 중복되지 않는 오름차순의 6개 `LottoNumber`를 갖는다.
+    - [x] 중복되지 않는 오름차순의 6개 `LottoNumber`를 갖는다.
+    - [x] `LottoNumbers`끼리 비교해서 맞힌 갯수를 반환할 수 있다.
+- [x] `LottoRank`
+    - [x] 숫자를 맞힌 수와 우승 상금 금액을 갖는다.
+    - [x] 숫자를 맞힌 수로부터 순위를 알 수 있다.
