@@ -6,7 +6,8 @@ public class StringAddCalculator {
         if (isEmptyOrNull(text)) {
             return 0;
         }
-        return 0;
+        final int number = Integer.parseInt(text);
+        return number;
     }
 
     private static boolean isEmptyOrNull(final String text) {
