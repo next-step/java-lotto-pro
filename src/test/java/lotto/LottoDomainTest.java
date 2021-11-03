@@ -1,0 +1,75 @@
+package lotto;
+
+import static org.assertj.core.api.Assertions.*;
+
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+public class LottoDomainTest {
+
+	private static LottoDomain domain;
+
+	@BeforeAll
+	public static void setup() {
+		domain = new LottoDomain();
+	}
+
+	@ParameterizedTest
+	@CsvSource(delimiter = ',', value = {"12000,12", "12500,12", "0,0", "500,0"})
+	@DisplayName("구매 금액에 맞는 구매 갯수를 계산해야 한다.(가격: 1000원)")
+	public void lottoCountTest(int money, int expectedCount) {
+		// when
+		int count = domain.getLottoCountByMoney(money);
+
+		// then
+		assertThat(count).isEqualTo(expectedCount);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {3, 5, 10, 20})
+	@DisplayName("갯수에 맞게 로또번호들을 생성해야 한다")
+	public void generateLottoNumbersTest(int count) {
+		// when
+		List<List<Integer>> lottoNumbers = domain.getLottoNumbersByCount(count);
+
+		// then
+		assertThat(lottoNumbers.size()).isEqualTo(count);
+	}
+
+	@Test
+	@DisplayName("로또번호(오름차순, 1~45, 6개 번호)들을 생성해야 한다")
+	public void generateLottoNumberTest() {
+		// when
+		List<Integer> lottoNumbers = domain.generateLottoNumber();
+
+		// then
+		assertThat(lottoNumbers).isSorted();
+		assertThat(lottoNumbers.size()).isEqualTo(6);
+		for (int number : lottoNumbers) {
+			assertThat(number)
+				.isGreaterThanOrEqualTo(1)
+				.isLessThanOrEqualTo(45);
+		}
+	}
+
+	@Test
+	@DisplayName("당첨번호와 로또번호들이 주어지면, 당첨내역들을 계산해야 한다")
+	public void calculateWinningPoints() {
+		// when
+
+		// then
+	}
+
+	@Test
+	@DisplayName("당첨 내역과 구매 금액이 주어지면, 수익률을 계산해야 한다")
+	public void calculateProfit() {
+
+	}
+
+}
