@@ -38,4 +38,43 @@ public class LottoDomain {
 		return numbers;
 	}
 
+	public int getMatchCount(List<Integer> answerNumbers, List<Integer> numbers) {
+		int matchCount = 0;
+		for (Integer answerNumber : answerNumbers) {
+			matchCount += isContainNumber(answerNumber, numbers);
+		}
+		return matchCount;
+	}
+
+	private int isContainNumber(int a, List<Integer> numbers) {
+		if (numbers.contains(a)) {
+			return 1;
+		}
+		return 0;
+	}
+
+	public double getProfit(int money, List<Integer> matchCounts) {
+		int prize = 0;
+		for (int matchCount : matchCounts) {
+			prize += getPrizeByMatchCount(matchCount);
+		}
+		double profit = (double)prize / money;
+		return Math.floor(profit * 100) / 100D;
+	}
+
+	private int getPrizeByMatchCount(int matchCount) {
+		if (matchCount == 3) {
+			return 5000;
+		}
+		if (matchCount == 4) {
+			return 50000;
+		}
+		if (matchCount == 5) {
+			return 1500000;
+		}
+		if (matchCount == 6) {
+			return 2000000000;
+		}
+		return 0;
+	}
 }
