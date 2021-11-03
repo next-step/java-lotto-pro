@@ -5,6 +5,10 @@ public class StringAddCalculator {
         if (text == null || text.isEmpty()) {
             return 0;
         }
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException ignored) {
+        }
         return 0;
     }
 }
