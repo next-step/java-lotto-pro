@@ -2,6 +2,8 @@ package study;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -21,11 +23,11 @@ public class StringTest {
         assertThat(result).isEqualTo("1,2");
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"0, a", "1, b", "2, c"})
     @DisplayName("특정  위치의 문자를 가져오는 테스트")
-    void charAt() {
-        char result = "abc".charAt(2);
-        assertThat(result).isEqualTo('c');
+    void charAt(int index, char expected) {
+        assertThat("abc".charAt(index)).isEqualTo(expected);
     }
 
     @Test
