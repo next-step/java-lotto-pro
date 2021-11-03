@@ -19,7 +19,7 @@ class LottoNumberTest {
 	}
 
 	@Test
-	@DisplayName("-1 입력한 경우 양의숫자만 입력가능하다는 메세지와 I")
+	@DisplayName("-1 입력한 경우 양의숫자만 입력가능하다는 메세지와 IllegalArgumentException")
 	public void lottoNumber_음수_실패() {
 		int input = -1;
 		//when
@@ -32,7 +32,7 @@ class LottoNumberTest {
 	}
 
 	@Test
-	@DisplayName("48 입력한 경우 1~45까지의 숫자만 입력가능하다는 메세지와 I")
+	@DisplayName("48 입력한 경우 1~45까지의 숫자만 입력가능하다는 메세지와 IllegalArgumentException")
 	public void lottoNumber_로또범위_실패() {
 		int input = 48;
 		//when

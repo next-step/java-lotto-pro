@@ -17,7 +17,8 @@ public enum Messages {
 	INPUT_NUMBER_FORMAT_NOT_VALID("숫자만 입력가능 합니다."),
 	POSITIVE_NUMBER_FORMAT_NOT_VALID("양의 숫자만 입력가능 합니다."),
 	INPUT_INVESTMENT_MIN_VALID("1000원 이상 입력해야 합니다."),
-	INPUT_INVESTMENT_UNIT_VALID("1000원 단위로 입력해야 합니다.");
+	INPUT_INVESTMENT_UNIT_VALID("1000원 단위로 입력해야 합니다."),
+	INPUT_BONUS_BALL("보너스 볼을 입력해 주세요.");
 
 	private String values;
 
