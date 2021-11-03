@@ -11,12 +11,15 @@ import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.generator.LottoNumberGenerator;
 import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class LottoController {
 	private final InputView inputView;
+	private final ResultView resultView;
 
 	public LottoController() {
 		this.inputView = new InputView();
+		this.resultView = new ResultView();
 	}
 
 	public void play() {
@@ -27,6 +30,7 @@ public class LottoController {
 	public Lottos purchaseLottos(Money money) {
 		int purchasedCount = calculatePurchasedLottoCount(money);
 		Lottos lottos = Lottos.of(createLottos(purchasedCount));
+		this.resultView.printLottos(lottos);
 
 		return lottos;
 	}

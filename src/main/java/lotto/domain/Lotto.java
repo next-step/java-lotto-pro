@@ -27,6 +27,10 @@ public class Lotto {
 		return this.lottoNumbers.getSize();
 	}
 
+	public LottoNumbers getLottoNumbers() {
+		return this.lottoNumbers;
+	}
+
 	private void addWinningNumbers(WinningNumbers lastWinningNumbers, LottoNumber lottoNumber) {
 		if (lastWinningNumbers.isWinningNumber(lottoNumber)) {
 			this.winningNumbers.add(lottoNumber);

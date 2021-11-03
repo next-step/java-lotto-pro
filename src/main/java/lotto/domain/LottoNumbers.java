@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.List;
 
 import lotto.generator.NumberGenerator;
@@ -26,5 +28,13 @@ public class LottoNumbers {
 
 	public List<LottoNumber> getValues() {
 		return this.lottoNumbers;
+	}
+
+	@Override
+	public String toString() {
+		return this.lottoNumbers.stream()
+								.map(LottoNumber::getNumber)
+								.collect(toList())
+								.toString();
 	}
 }
