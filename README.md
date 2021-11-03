@@ -37,7 +37,7 @@
 # 3단계 - 로또(자동)
 ## 기능 요구사항
 * [ ] 로또
-  * [ ] 로또숫자
+  * [X] 로또숫자
     * [X] 생성할 숫자가 1~45 사이가 아니면 IllegalArgumentException이 발생한다.
   * [ ] 로또의 로또숫자가 6개가 아니면 IllegalArgumentException이 발생한다.
   * [ ] 로또의 로또숫자 중 중복된 숫자가 있으면 IllegalArgumentException이 발생한다.
