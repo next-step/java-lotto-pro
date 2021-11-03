@@ -30,7 +30,7 @@ public class StringTest {
 
     @DisplayName("문자열 위치 값을 벗어나면 예외 발생")
     @Test
-    void when_outOfBound_then_throwException() {
+    void whenOutOfBoundThenThrowException() {
         String str = "abc";
         assertThatThrownBy(() -> str.charAt(4)).isInstanceOf(StringIndexOutOfBoundsException.class);
     }

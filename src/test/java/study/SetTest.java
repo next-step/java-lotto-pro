@@ -33,15 +33,15 @@ public class SetTest {
     @DisplayName("Set에 값이 있으면 True")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
-    void contains_only_true(int input) {
+    void containsOnlyTrue(int input) {
         assertThat(numbers.contains(input)).isTrue();
     }
 
     @DisplayName("Set에 값이 있으면 True, 없으면 False")
     @ParameterizedTest
     @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
-    void contains_true_and_false(String input, String expected) {
-        assertThat(numbers.contains(Integer.parseInt(input)))
-                .isEqualTo(Boolean.parseBoolean(expected));
+    void containsTrueAndFalse(int input, boolean expected) {
+        assertThat(numbers.contains(input))
+                .isEqualTo(expected);
     }
 }
