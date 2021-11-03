@@ -10,14 +10,6 @@ public class LottoDomain {
 	private static final int LOTTO_NUMBER_MINIMUM = 1;
 	private static final int LOTTO_NUMBER_MAXIMUM = 45;
 	private static final int LOTTO_NUMBER_SIZE = 6;
-	private static final int LOTTO_4ST_MATCH_CNT = 3;
-	private static final int LOTTO_3ST_MATCH_CNT = 4;
-	private static final int LOTTO_2ST_MATCH_CNT = 5;
-	private static final int LOTTO_1ST_MATCH_CNT = 6;
-	private static final int LOTTO_4ST_PRIZE = 5000;
-	private static final int LOTTO_3ST_PRIZE = 50000;
-	private static final int LOTTO_2ST_PRIZE = 1500000;
-	private static final int LOTTO_1ST_PRIZE = 2000000000;
 
 	private final List<Integer> candidates;
 
