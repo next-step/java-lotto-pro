@@ -49,3 +49,6 @@ public class SetTest {
 - 커스텀 구분자는 기본구분자 이외의 값을 사용할 수 있으며 문자열 앞부분의 "//"와 "\n" 사이에 위치된다.
 - 문자열 덧셈 계산기는 구분자를 혼합하여 사용할 수 있으며 문자열이 구분자를 가질경우 구분자를 기준으로 분리한 각 숫자의 합이 반환된다.
 - 예외는 문자열 계산기에 숫자 이외의 값 또는 음수가 전달될 경우 RuntimeException를 발생된다.
+
+### Class Diagram
+![class-diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/LuneChaser/java-lotto-pro/step2/classdiagram/StringCalcurator.pu)
