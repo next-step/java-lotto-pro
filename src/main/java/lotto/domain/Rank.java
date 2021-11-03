@@ -6,11 +6,12 @@ import java.util.stream.Stream;
 
 public enum Rank {
 
-    MISS(0, 0, (matchingCount) -> matchingCount < 3),
-    FOURTH(5_000, 3, (matchingCount) -> matchingCount == 3),
-    THIRD(50_000, 4, (matchingCount) -> matchingCount == 4),
-    SECOND(1_500_000, 5, (matchingCount) -> matchingCount == 5),
-    FIRST(2_000_000_000, 6, (matchingCount) -> matchingCount == 6);
+    MISS(0, 3, (matchingCount, isBonus) -> matchingCount < 3),
+    FIFTH(5_000, 3, (matchingCount, isBonus) -> matchingCount == 3),
+    FOURTH(50_000, 4, (matchingCount, isBonus) -> matchingCount == 4),
+    THIRD(1_500_000, 5, (matchingCount, isBonus) -> matchingCount == 5 && !isBonus),
+    SECOND(30_000_000, 5, (matchingCount, isBonus) -> matchingCount == 5 && isBonus),
+    FIRST(2_000_000_000, 6, (matchingCount, isBonus) -> matchingCount == 6);
 
     private final int winningMoney;
     private final int countOfMatch;
@@ -22,9 +23,9 @@ public enum Rank {
         this.winningStrategy = winningStrategy;
     }
 
-    public static Rank findRank(final int matchingCount) {
+    public static Rank findRank(final int matchingCount, final boolean isBonus) {
         return Stream.of(Rank.values())
-                .filter(rank -> rank.winningStrategy.winnable(matchingCount))
+                .filter(rank -> rank.winningStrategy.winnable(matchingCount, isBonus))
                 .findFirst()
                 .orElse(MISS);
     }

@@ -14,20 +14,23 @@ class WinningsStatisticsTest {
     @Test
     void getRankHitsCount() {
         Lotto winningLotto = Lotto.from("1,2,3,4,5,6");
+        LottoNumber bonusBall = LottoNumber.from(7);
         Lottos lottos = Lottos.from(Arrays.asList(
                 Lotto.from("1,2,3,4,5,6"),
                 Lotto.from("1,2,3,4,5,7"),
+                Lotto.from("1,2,3,4,5,8"),
                 Lotto.from("1,2,3,11,12,13"),
                 Lotto.from("1,2,3,21,22,23"),
                 Lotto.from("11,12,13,4,5,6")
         ));
 
-        WinningsStatistics winningsStatistics = WinningsStatistics.statistics(winningLotto, lottos);
+        WinningsStatistics winningsStatistics = WinningsStatistics.statistics(winningLotto, bonusBall, lottos);
 
         assertAll(
                 () -> assertThat(winningsStatistics.getRankHitsCount(Rank.FIRST)).isEqualTo(1),
                 () -> assertThat(winningsStatistics.getRankHitsCount(Rank.SECOND)).isEqualTo(1),
-                () -> assertThat(winningsStatistics.getRankHitsCount(Rank.FOURTH)).isEqualTo(3)
+                () -> assertThat(winningsStatistics.getRankHitsCount(Rank.THIRD)).isEqualTo(1),
+                () -> assertThat(winningsStatistics.getRankHitsCount(Rank.FIFTH)).isEqualTo(3)
         );
     }
 

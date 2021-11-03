@@ -47,7 +47,10 @@ public final class ResultView {
     }
 
     private static void printRankInfo(final WinningsStatistics winningsStatistics, final Rank rank) {
-        if (rank != Rank.MISS) {
+        if (rank == Rank.SECOND) {
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개%n", rank.getCountOfMatch(), rank.getWinningMoney(), winningsStatistics.getRankHitsCount(rank));
+        }
+        if (rank != Rank.MISS && rank != Rank.SECOND) {
             System.out.printf("%d개 일치 (%d원) - %d개%n", rank.getCountOfMatch(), rank.getWinningMoney(), winningsStatistics.getRankHitsCount(rank));
         }
     }
