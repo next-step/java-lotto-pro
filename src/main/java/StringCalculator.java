@@ -12,7 +12,7 @@ public class StringCalculator {
 		cleanedInput = input;
 
 		Matcher matcher = parse(input);
-		if(matcher != null) {
+		if (matcher != null) {
 			customDelimiter = matcher.group(2);
 			cleanedInput = matcher.group(4);
 		}
@@ -21,7 +21,25 @@ public class StringCalculator {
 	public int calculate() {
 		String delimiterPattern = getDelimiterPattern();
 		String[] chunkedList = this.cleanedInput.split(delimiterPattern);
-		return Arrays.stream(chunkedList).mapToInt(x -> x.isEmpty() ? 0 : Integer.parseInt(x)).sum();
+		int sum = 0;
+		try {
+			sum = sum(chunkedList);
+		} catch (Exception e) {
+			throw new RuntimeException("The input is not valid");
+		}
+		return sum;
+	}
+
+	private int sum(String[] numbers) {
+		int sum = 0;
+		for (String num : numbers) {
+			int i = Integer.parseInt(num);
+			if (i < 0) {
+				throw new RuntimeException();
+			}
+			sum += i;
+		}
+		return sum;
 	}
 
 	private Matcher parse(String input) {

@@ -21,4 +21,26 @@ public class StringCalculatorTest {
 		assertThat(new StringCalculator(input).calculate())
 			.isEqualTo(expected);
 	}
+
+	@DisplayName("숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외")
+	// todo 가끔 IDE에서 @ParameterizedTest가 실행이 안되는 현상 있음 (확인필요)
+	// @ParameterizedTest
+	// @CsvSource(value = {
+	// 	"-1",
+	// 	"'1,a'",
+	// })
+	@Test
+	public void throwWhenSumNotValidInputTest() {
+		// given
+		String input1 = "-1";
+		String input2 = "1,a";
+
+		assertThatExceptionOfType(RuntimeException.class)
+			.isThrownBy(() -> new StringCalculator(input1).calculate())
+			.withMessage("The input is not valid");
+
+		assertThatExceptionOfType(RuntimeException.class)
+			.isThrownBy(() -> new StringCalculator(input2).calculate())
+			.withMessage("The input is not valid");
+	}
 }
