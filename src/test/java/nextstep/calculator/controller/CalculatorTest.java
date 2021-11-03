@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class CalculatorTest {
@@ -64,5 +65,14 @@ class CalculatorTest {
                 Arguments.of("//&\n4&5", 9),
                 Arguments.of("//#\n2#7", 9)
         );
+    }
+
+    @DisplayName("음수 값이 포함된 입력 값 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"-1,2:3"})
+    void splitAndSumNegative(final String inputText) {
+        Calculator calculator = new Calculator(inputText);
+        assertThatThrownBy(calculator::calculate)
+                .isInstanceOf(RuntimeException.class);
     }
 }
