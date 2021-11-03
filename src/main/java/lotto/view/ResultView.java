@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.LottoPaperList;
+import lotto.model.LottoResult;
 
 public class ResultView {
 
@@ -15,5 +16,7 @@ public class ResultView {
         return String.format("%s %s", GameMessage.ERR_MSG, msg);
     }
 
-
+    public static void printWinningStatistics(LottoResult lottoResult) {
+        System.out.println(lottoResult.getLottoResult());
+    }
 }
