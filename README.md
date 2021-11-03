@@ -22,10 +22,13 @@
     
   * CalculatorNumber 클래스
     * 음수일 경우 true 반환
+    * 가지고있는 값을 반환
     
   * CalculatorNumbers 클래스
     * 음수가 포함되어 있을 경우 true 반환
     * 숫자가 하나뿐일 경우 true 반환
+    * 인덱스를 지정해 해당 인덱스의 값을 반환
+    * 숫자들의 합을 반환
 
 * StringAddCalculator 클래스
   * 빈 문자열, null을 입력할 경우 0을 반환한다.
