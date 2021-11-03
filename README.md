@@ -11,14 +11,15 @@
 ## 문자열 덧셈 계산기 기능 요구사항
 * CalculatorInputString 클래스
   * 빈 문자열, null을 입력하면 true 반환
-  * toIntegerList를 통해 CalculatorNumbers 반환
+  * toIntegerList를 통해 List<Integer> 반환
+  * 숫자가 아닌 값이 포함되어있으면 예외 발생
 
   * CalculatorInputStringParser 클래스
     * 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.
     * 숫자 두개를 컴마 구분자로 입력할 경우 각 숫자를 구분하여 반환한다.
     * 콜론 구분자로 입력할 경우에도 각 숫자를 구분하여 반환한다.
     * "//"와 "\n" 문자 사이에 커스텀 구분자를 지정할 수 있으며, 해당 구분자를 사용할 경우 각 숫자를 구분하여 반환한다.
-  
+    
   * CalculatorNumber 클래스
     * 음수일 경우 true 반환
     
