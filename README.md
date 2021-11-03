@@ -38,11 +38,13 @@
 
 - [x] `LottoGame`
     - [x] `LottoGame`의 가격은 1000원이다.
-    - [x] `LottoGame`은 중복되지 않는 오름차순의 6개 `LottoNumber`들을 갖는다.
-    - [x] `LottoNumber`들은 `LottoNumbersGenerator`로 생성된다.
-- [x] `LottoNumbersGenerator`
-    - [x] `LottoNumber`들을 생성한다.
-- [x] `RandomLottoNumbersGenerator`
-    - [x] 랜덤으로 중복되지 않은 6개의 `LottoNumber`들을 생성한다.
+    - [x] `LottoGame`은 `LottoNumbers`를 갖는다.
+    - [x] `LottoNumbers`는 `NumbersGenerator`로 생성된다.
+- [x] `NumbersGenerator`
+    - [x] 번호들을 생성한다.
+- [x] `RandomNumbersGenerator`
+    - [x] 랜덤으로 중복되지 않은 6개의 번호들을 생성한다.
 - [x] `LottoNumber`
     - [x] 1부터 45까지의 숫자 중 하나이다.
+- [x] `LottoNumbers`
+    -  [x] 중복되지 않는 오름차순의 6개 `LottoNumber`를 갖는다.

@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
-	private static final List<LottoNumber> CANDIDATES;
+public class RandomNumbersGenerator implements NumbersGenerator {
+	private static final List<Integer> CANDIDATES;
 
 	static {
 		CANDIDATES = new ArrayList<>();
 
 		for (int number = LottoNumber.ONE; number <= LottoNumber.FORTY_FIVE; number++) {
-			CANDIDATES.add(new LottoNumber(number));
+			CANDIDATES.add(number);
 		}
 	}
 
 	@Override
-	public List<LottoNumber> generate() {
+	public List<Integer> generate() {
 		Collections.shuffle(CANDIDATES);
-		return CANDIDATES.subList(0, LottoGame.LOTTO_NUMBER_COUNT);
+		return CANDIDATES.subList(0, LottoNumbers.LOTTO_NUMBER_COUNT);
 	}
 }

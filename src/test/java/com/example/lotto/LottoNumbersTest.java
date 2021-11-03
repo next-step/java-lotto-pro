@@ -5,17 +5,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-@DisplayName("로또 게임")
-class LottoGameTest {
+@DisplayName("로또 번호들")
+public class LottoNumbersTest {
 
 	private static Stream<Arguments> validNumbers() {
 		return Stream.of(
@@ -41,24 +43,25 @@ class LottoGameTest {
 		);
 	}
 
-	@DisplayName("로또 게임의 가격은 1000원이다.")
-	@Test
-	void price() {
-		// given & when & then
-		assertThat(LottoGame.LOTTO_GAME_PRICE).isEqualTo(1000);
-	}
-
-	@DisplayName("로또 게임을 생성한다. 중복되지 않는 오름차순의 6개 로또 번호들을 갖는다.")
+	@DisplayName("로또 번호들을 생성한다. 로또 번호들은 중복되지 않으며 오름차순으로 6개이다.")
 	@ParameterizedTest
 	@MethodSource("validNumbers")
 	void constructor(List<Integer> numbers) {
 		// given & when
-		LottoGame lottoGame = new LottoGame(() -> numbers);
+		LottoNumbers lottoNumbers = new LottoNumbers(numbers);
 
 		// then
 		assertAll(
-			() -> assertThat(lottoGame).isNotNull(),
-			() -> assertThat(lottoGame.getLottoNumbers()).isNotNull()
+			() -> assertThat(lottoNumbers).isNotNull(),
+			() -> assertThat(new HashSet<>(lottoNumbers.getValues())).hasSize(6),
+			() -> assertThat(lottoNumbers.getValues()).isSortedAccordingTo(
+				Comparator.comparingInt(LottoNumber::getValue)),
+			() -> assertThat(lottoNumbers.getValues()).hasSize(6),
+			() -> assertThat(lottoNumbers.getValues()).isEqualTo(
+				numbers.stream()
+					.sorted()
+					.map(LottoNumber::new)
+					.collect(Collectors.toList()))
 		);
 	}
 
@@ -67,7 +70,7 @@ class LottoGameTest {
 	@MethodSource("invalidNumbers")
 	void constructor_fail(List<Integer> numbers) {
 		// given & when & then
-		assertThatThrownBy(() -> new LottoGame(() -> numbers))
+		assertThatThrownBy(() -> new LottoNumbers(numbers))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 }
