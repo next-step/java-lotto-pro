@@ -37,8 +37,8 @@
 ### 로또
 
 - [ ] `LottoGame` 
-    - [ ] 한 `LottoGame`의 `Price`는 1000원이다.
-    - [ ] 한 `LottoGame`은 중복되지 않는 오름차순의 6개 `LottoNumber`를 갖는다.
+    - [x] `LottoGame`의 가격은 1000원이다.
+    - [x] `LottoGame`은 중복되지 않는 오름차순의 6개 `LottoNumber`들을 갖는다.
     - [ ] `LottoNumber`들은 자동으로 생성된다.
-- [ ] `LottoNumber`
+- [x] `LottoNumber`
     - [x] 1부터 45까지의 숫자 중 하나이다.
