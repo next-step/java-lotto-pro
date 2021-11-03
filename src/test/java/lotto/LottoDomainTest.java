@@ -1,19 +1,16 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.params.provider.Arguments.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoDomainTest {
@@ -23,18 +20,6 @@ public class LottoDomainTest {
 	@BeforeAll
 	public static void setup() {
 		domain = new LottoDomain();
-	}
-
-	static List<Arguments> lottoNumbersAndMatchExpected() {
-		return Lists.list(
-			arguments(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
-			arguments(Arrays.asList(1, 2, 3, 4, 5, 7), 5),
-			arguments(Arrays.asList(1, 2, 3, 4, 7, 8), 4),
-			arguments(Arrays.asList(1, 2, 3, 7, 8, 9), 3),
-			arguments(Arrays.asList(1, 2, 7, 8, 9, 10), 2),
-			arguments(Arrays.asList(1, 7, 8, 9, 10, 11), 1),
-			arguments(Arrays.asList(7, 8, 9, 10, 11, 12), 0)
-		);
 	}
 
 	@ParameterizedTest
@@ -74,33 +59,44 @@ public class LottoDomainTest {
 		}
 	}
 
-	@ParameterizedTest
-	@MethodSource("lottoNumbersAndMatchExpected")
-	@DisplayName("당첨번호와 로또번호들이 주어지면, 당첨내역들을 계산해야 한다")
-	public void getMatchCountTest(List<Integer> numbers, int expected) {
-		// when
-		List<Integer> answerNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-
-		// then
-		int matchCount = domain.getMatchCount(answerNumbers, numbers);
-
-		// then
-		assertThat(matchCount).isEqualTo(expected);
-	}
-
 	@Test
 	@DisplayName("당첨 내역과 구매 금액이 주어지면, 수익률을 계산해야 한다")
 	public void calculateProfit() {
 		// given
-		List<Integer> matchCounts = Arrays.asList(3, 0, 0, 0, 0);
+		MatchPoint vo = new MatchPoint();
+		vo.addPoint(3);
+		vo.addPoint(0);
+		vo.addPoint(0);
+
 		int money = 14000;
 		double expected = 0.35;
 
 		// when
-		double result = domain.getProfit(money, matchCounts);
+		double result = domain.getProfit(money, vo);
 
 		// then
 		assertThat(result).isEqualTo(expected);
+	}
+
+	@Test
+	@DisplayName("일치갯수들이 주어지면, 총 포인트를 계산해야 한다")
+	public void calculatePointTest() {
+		// given
+		List<Integer> answers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		List<List<Integer>> numbers = new ArrayList<>();
+		numbers.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+		numbers.add(Arrays.asList(1, 2, 3, 4, 5, 9));
+		numbers.add(Arrays.asList(1, 2, 3, 4, 8, 9));
+		numbers.add(Arrays.asList(1, 2, 3, 7, 8, 9));
+
+		// when
+		MatchPoint vo = domain.calculatePoint(answers, numbers);
+
+		// then
+		assertThat(vo.getFourth()).isEqualTo(1);
+		assertThat(vo.getFirst()).isEqualTo(1);
+		assertThat(vo.getSecond()).isEqualTo(1);
+		assertThat(vo.getThird()).isEqualTo(1);
 	}
 
 }

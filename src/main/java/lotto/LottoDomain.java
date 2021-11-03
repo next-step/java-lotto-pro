@@ -40,14 +40,29 @@ public class LottoDomain {
 		return numberList;
 	}
 
-	private List<Integer> generateLottoNumber() {
-		Collections.shuffle(candidates);
-		List<Integer> numbers = candidates.subList(0, LOTTO_NUMBER_SIZE);
-		Collections.sort(numbers);
-		return numbers;
+	public double getProfit(int money, MatchPoint pointVo) {
+		int prize = pointVo.getPrize();
+		double profit = (double)prize / money;
+		return Math.floor(profit * 100) / 100D;
 	}
 
-	public int getMatchCount(List<Integer> answerNumbers, List<Integer> numbers) {
+	public MatchPoint calculatePoint(List<Integer> answerNumbers, List<List<Integer>> numbers) {
+		List<Integer> matchCounts = new ArrayList<>();
+		for (List<Integer> number : numbers) {
+			matchCounts.add(getMatchCount(answerNumbers, number));
+		}
+		return calculatePointByMatchCnt(matchCounts);
+	}
+
+	private MatchPoint calculatePointByMatchCnt(List<Integer> counts) {
+		MatchPoint vo = new MatchPoint();
+		for (int count : counts) {
+			vo.addPoint(count);
+		}
+		return vo;
+	}
+
+	private int getMatchCount(List<Integer> answerNumbers, List<Integer> numbers) {
 		int matchCount = 0;
 		for (Integer answerNumber : answerNumbers) {
 			matchCount += isContainNumber(answerNumber, numbers);
@@ -62,28 +77,10 @@ public class LottoDomain {
 		return 0;
 	}
 
-	public double getProfit(int money, List<Integer> matchCounts) {
-		int prize = 0;
-		for (int matchCount : matchCounts) {
-			prize += getPrizeByMatchCount(matchCount);
-		}
-		double profit = (double)prize / money;
-		return Math.floor(profit * 100) / 100D;
-	}
-
-	private int getPrizeByMatchCount(int matchCount) {
-		if (matchCount == LOTTO_4ST_MATCH_CNT) {
-			return LOTTO_4ST_PRIZE;
-		}
-		if (matchCount == LOTTO_3ST_MATCH_CNT) {
-			return LOTTO_3ST_PRIZE;
-		}
-		if (matchCount == LOTTO_2ST_MATCH_CNT) {
-			return LOTTO_2ST_PRIZE;
-		}
-		if (matchCount == LOTTO_1ST_MATCH_CNT) {
-			return LOTTO_1ST_PRIZE;
-		}
-		return 0;
+	private List<Integer> generateLottoNumber() {
+		Collections.shuffle(candidates);
+		List<Integer> numbers = new ArrayList<>(candidates.subList(0, LOTTO_NUMBER_SIZE));
+		Collections.sort(numbers);
+		return numbers;
 	}
 }
