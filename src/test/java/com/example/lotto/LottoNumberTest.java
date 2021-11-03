@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@DisplayName("로또 번호")
 class LottoNumberTest {
 	@DisplayName("로또 번호를 생성한다.")
 	@ParameterizedTest

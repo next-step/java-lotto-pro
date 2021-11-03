@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoGame {
-	public static final int PRICE = 1000;
-
-	private static final int LOTTO_NUMBER_COUNT = 6;
+	public static final int LOTTO_GAME_PRICE = 1000;
+	public static final int LOTTO_NUMBER_COUNT = 6;
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public LottoGame(List<LottoNumber> lottoNumbers) {
+	public LottoGame(LottoNumbersGenerator lottoNumbersGenerator) {
+		List<LottoNumber> lottoNumbers = lottoNumbersGenerator.generate();
+
 		throwOnInvalidLottoNumberCount(lottoNumbers);
 		throwOnDuplicatedLottoNumber(lottoNumbers);
 

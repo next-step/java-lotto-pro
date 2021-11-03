@@ -17,6 +17,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+@DisplayName("로또 게임")
 class LottoGameTest {
 	private static Stream<Arguments> validLottoNumbers() {
 		return Stream.of(
@@ -83,7 +84,7 @@ class LottoGameTest {
 	@Test
 	void price() {
 		// given & when & then
-		assertThat(LottoGame.PRICE).isEqualTo(1000);
+		assertThat(LottoGame.LOTTO_GAME_PRICE).isEqualTo(1000);
 	}
 
 	@DisplayName("로또 게임을 생성한다. 중복되지 않는 오름차순의 6개 로또 번호들을 갖는다.")
@@ -91,7 +92,7 @@ class LottoGameTest {
 	@MethodSource("validLottoNumbers")
 	void constructor(List<LottoNumber> lottoNumbers) {
 		// given & when
-		LottoGame lottoGame = new LottoGame(lottoNumbers);
+		LottoGame lottoGame = new LottoGame(() -> lottoNumbers);
 
 		// then
 		assertAll(
@@ -112,7 +113,7 @@ class LottoGameTest {
 	@MethodSource("invalidLottoNumbers")
 	void constructor_fail(List<LottoNumber> lottoNumbers) {
 		// given & when & then
-		assertThatThrownBy(() -> new LottoGame(lottoNumbers))
+		assertThatThrownBy(() -> new LottoGame(() -> lottoNumbers))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 }

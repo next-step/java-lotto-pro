@@ -3,8 +3,8 @@ package com.example.lotto;
 import java.util.Objects;
 
 public class LottoNumber {
-	private static final Integer ONE = 1;
-	private static final Integer FORTY_FIVE = 45;
+	public static final Integer ONE = 1;
+	public static final Integer FORTY_FIVE = 45;
 
 	private final int value;
 
