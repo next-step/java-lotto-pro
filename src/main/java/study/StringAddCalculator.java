@@ -20,6 +20,7 @@ public class StringAddCalculator {
     }
 
     private static String[] splitByDelimiter(final String text) {
+
         final Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
         if (matcher.find()) {
             final String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP);
