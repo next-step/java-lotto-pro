@@ -18,8 +18,8 @@ public class StringAddCalculator {
         }
 
         String customDelimiter = getCustomDelimiter(text);
-        String[] numbers = splitWithCustomDelimiter(text, customDelimiter);
-        return getSumPositiveValue(numbers);
+        String[] numberStrings = splitWithCustomDelimiter(text, customDelimiter);
+        return getSumPositiveValue(numberStrings);
     }
 
     private static String[] splitWithCustomDelimiter(String text, String customDelimiter) {
