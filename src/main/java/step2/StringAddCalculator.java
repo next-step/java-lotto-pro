@@ -3,6 +3,10 @@ package step2;
 import java.util.Arrays;
 
 public class StringAddCalculator {
+	private static final String ERROR_MESSAGE = "구분자 혹은 입력 값을 다시 한번 확인해주세요.";
+	private static final String BLANK = "";
+	private static final String SEPARATOR = ",|:";
+
 	public static int splitAndSum(String string) {
 		if (validateNullOrBlank(string)) {
 			return 0;
@@ -11,7 +15,7 @@ public class StringAddCalculator {
 	}
 
 	private static boolean validateNullOrBlank(String string) {
-		if (string == null || string.equals("")) {
+		if (string == null || string.equals(BLANK)) {
 			return true;
 		}
 		return false;
@@ -20,9 +24,9 @@ public class StringAddCalculator {
 	private static int[] splitStringToIntArray(String string) {
 		int[] intArray;
 		try {
-			 intArray = Arrays.stream(string.split(",")).mapToInt(Integer::parseInt).toArray();
+			intArray = Arrays.stream(string.split(SEPARATOR)).mapToInt(Integer::parseInt).toArray();
 		} catch (NumberFormatException e) {
-			throw new RuntimeException("구분자 혹은 입력 값을 다시 한번 확인해주세요.");
+			throw new RuntimeException(ERROR_MESSAGE);
 		}
 		return intArray;
 	}

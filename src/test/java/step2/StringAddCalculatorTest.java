@@ -55,6 +55,20 @@ public class StringAddCalculatorTest {
 	}
 
 	@Test
+	public void splitAndSum_쉼표_또는_콜론_외의_구분자() throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1.2-3"))
+			.isInstanceOf(RuntimeException.class)
+			.hasMessage("구분자 혹은 입력 값을 다시 한번 확인해주세요.");
+	}
+
+	@Test
+	public void splitAndSum_쉼표_또는_콜론_구분자_숫자가아닌_문자() throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("자바,우테캠:코드리뷰"))
+			.isInstanceOf(RuntimeException.class)
+			.hasMessage("구분자 혹은 입력 값을 다시 한번 확인해주세요.");
+	}
+
+	@Test
 	public void splitAndSum_custom_구분자() throws Exception {
 		int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
 		assertThat(result).isEqualTo(6);
