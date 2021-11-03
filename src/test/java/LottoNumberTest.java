@@ -7,15 +7,15 @@ public class LottoNumberTest {
 
 	@ParameterizedTest
 	@ValueSource(ints = {1, 23, 45})
-	public void of(int number) {
-		assertThat(LottoNumber.of(number).get()).isEqualTo(number);
+	public void from(int number) {
+		assertThat(LottoNumber.from(number).get()).isEqualTo(number);
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1, 0, 46})
-	public void of_LottoNumberFormatException(int number) {
+	public void from_LottoNumberFormatException(int number) {
 		assertThatExceptionOfType(LottoNumberFormatException.class)
-			.isThrownBy(() -> LottoNumber.of(number))
+			.isThrownBy(() -> LottoNumber.from(number))
 			.withMessage(LottoNumberFormatException.ERROR_MESSAGE);
 	}
 }

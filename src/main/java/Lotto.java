@@ -12,7 +12,7 @@ public class Lotto {
 	private final static List<LottoNumber> CANDIDATE_LOTTO_NUMBERS =
 		Stream.iterate(LottoNumber.MIN_INCLUSIVE_NUMBER, num -> num + 1)
 			.limit(LottoNumber.MAX_INCLUSIVE_NUMBER)
-			.map(LottoNumber::of)
+			.map(LottoNumber::from)
 			.collect(Collectors.toList());
 
 	protected final List<LottoNumber> lottoNumbers;

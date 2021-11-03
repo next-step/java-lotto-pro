@@ -18,7 +18,7 @@ public class LottoNumber {
 		}
 	}
 
-	public static LottoNumber of(int number) {
+	public static LottoNumber from(int number) {
 		return new LottoNumber(number);
 	}
 
