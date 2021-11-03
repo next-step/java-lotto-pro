@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class Lotto {
     private LottoNumbers lottoNumbers;
 
@@ -10,5 +12,9 @@ public class Lotto {
     public LottoPrize compareWinningNumbers(LottoNumbers winningNumbers) {
         long matchCount = lottoNumbers.compare(winningNumbers);
         return LottoPrize.findPrize(matchCount);
+    }
+
+    public List<String> getLottoNumbers() {
+        return lottoNumbers.getLottoNumbers();
     }
 }

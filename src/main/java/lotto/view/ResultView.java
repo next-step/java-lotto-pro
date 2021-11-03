@@ -1,8 +1,9 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.LottoPrize;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -12,8 +13,8 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printLottoNumbers(List<LottoNumbers> lottoNumbersList) {
-        lottoNumbersList.stream()
+    public static void printLottoNumbers(List<Lotto> lottoList) {
+        lottoList.stream()
                 .forEach(l -> {
                     StringBuffer sb = new StringBuffer();
                     sb.append("[");
@@ -28,13 +29,15 @@ public class ResultView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (LottoPrize lottoPrize : lottoWinningMap.keySet()) {
-            System.out.printf("%d개 일치 (%d원)- %d개", lottoPrize.getCount(), lottoPrize.getMoney(), lottoWinningMap.get(lottoPrize));
-            System.out.println();
-        }
+        Arrays.stream(LottoPrize.values())
+                .filter(l -> !l.equals(LottoPrize.NONE))
+                .forEach(l -> {
+                    System.out.printf("%d개 일치 (%d원)- %d개", l.getCount(), l.getMoney(), lottoWinningMap.getOrDefault(l, 0));
+                    System.out.println();
+                });
     }
 
     public static void printProfitRate(double profitRate) {
-        System.out.printf("총 수익률은 %f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", profitRate);
+        System.out.printf("총 수익률은 %.2f입니다.", profitRate);
     }
 }

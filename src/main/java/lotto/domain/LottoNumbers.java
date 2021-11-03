@@ -1,11 +1,11 @@
 package lotto.domain;
 
+import lotto.utils.LottoNumberRange;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbers {
-    private static final Integer LOTTO_START_NUMBER = 1;
-    private static final Integer LOTTO_END_NUMBER = 45;
     private List<String> lottoNumbers = new ArrayList<>();
 
     public LottoNumbers(List<String> lottoNumbers) {
@@ -15,7 +15,7 @@ public class LottoNumbers {
 
     private void validateNumbers(List<String> lottoNumbers) {
         lottoNumbers.stream()
-                .filter(l -> Integer.parseInt(l) < LOTTO_START_NUMBER || Integer.parseInt(l) > LOTTO_END_NUMBER)
+                .filter(l -> Integer.parseInt(l) < LottoNumberRange.LOTTO_START_NUMBER || Integer.parseInt(l) > LottoNumberRange.LOTTO_END_NUMBER)
                 .forEach(l -> {
                     throw new IllegalArgumentException("");
                 });
