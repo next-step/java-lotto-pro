@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exception.DuplicateOfBonusBallNumberException;
+
 import java.util.EnumMap;
 import java.util.List;
 
@@ -13,22 +15,32 @@ public final class WinningsStatistics {
         this.result = result;
     }
 
-    public static WinningsStatistics statistics(final Lotto winningLotto, final Lottos lottos)  {
+    public static WinningsStatistics statistics(final Lotto winningLotto, final LottoNumber bonusBall, final Lottos lottos)  {
+        validate(winningLotto, bonusBall);
+
         EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             result.put(rank, 0);
         }
-        putMatchCountByRank(result, winningLotto, lottos);
+        putMatchCountByRank(result, winningLotto, bonusBall, lottos);
 
         return new WinningsStatistics(result);
     }
 
-    private static void putMatchCountByRank(final EnumMap<Rank, Integer> result, final Lotto winningLotto, final Lottos lottos) {
-        List<Integer> matchingCounts = lottos.getMatchingCounts(winningLotto);
-        for(int matchingCount : matchingCounts) {
-            Rank findedRank = Rank.findRank(matchingCount);
+    private static void validate(final Lotto winningLotto, final LottoNumber bonusNumber) {
+        if (winningLotto.isContainLottoNumber(bonusNumber)) {
+            throw new DuplicateOfBonusBallNumberException();
+        }
+    }
+
+    private static void putMatchCountByRank(final EnumMap<Rank, Integer> result, final Lotto winningLotto, final LottoNumber bonusBall, final Lottos lottos) {
+        for(Lotto lotto : lottos.getLottos()) {
+            int matchingCount = winningLotto.countMatchingNumber(lotto);
+            boolean isBonus = lotto.isContainLottoNumber(bonusBall);
+            Rank findedRank = Rank.findRank(matchingCount, isBonus);
             result.put(findedRank, result.getOrDefault(findedRank, 0) + 1);
         }
+
     }
 
     public double calculatePrizeMoney() {
