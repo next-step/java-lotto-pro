@@ -13,7 +13,7 @@ public class Lotto {
 
 	private List<Integer> numbers;
 
-	private Lotto(List<Integer> numbers) {
+	Lotto(List<Integer> numbers) {
 		this.numbers = numbers;
 	}
 
@@ -28,6 +28,19 @@ public class Lotto {
 		Collections.sort(selectedNumbers);
 
 		return new Lotto(selectedNumbers);
+	}
+
+	public int matchCount(Lotto other) {
+		int count = 0;
+		for (int i = 0; i < NUMBER_COUNT; i++) {
+			count = this.getNumbers().contains(other.at(i)) ? ++count : count;
+		}
+
+		return count;
+	}
+
+	public Integer at(int index) {
+		return this.numbers.get(index);
 	}
 
 	public List<Integer> getNumbers() {
