@@ -38,7 +38,7 @@
 ## 기능 요구사항
 * [ ] 로또
   * [ ] 로또숫자
-    * [ ] 로또숫자는 1~45 사이이다.
+    * [X] 생성할 숫자가 1~45 사이가 아니면 IllegalArgumentException이 발생한다.
   * [ ] 로또의 로또숫자가 6개가 아니면 IllegalArgumentException이 발생한다.
   * [ ] 로또의 로또숫자 중 중복된 숫자가 있으면 IllegalArgumentException이 발생한다.
   * [ ] 로또 간의 같은 로또숫자의 갯수가 몇개인지 확인할 수 있다.
