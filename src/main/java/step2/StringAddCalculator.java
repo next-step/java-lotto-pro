@@ -30,27 +30,19 @@ public class StringAddCalculator {
 		return new String[]{ DEFAULT_DELIMITER, s };
 	}
 
-	private static int[] parseNumbers(String delimiter, String s) {
+	private static PositiveNumber[] parseNumbers(String delimiter, String s) {
 		final String[] tokens = s.split(delimiter);
-		final int[] parsedTokens = new int[tokens.length];
+		final PositiveNumber[] parsedTokens = new PositiveNumber[tokens.length];
 		for (int i = 0; i < tokens.length; ++i) {
-			parsedTokens[i] = parseNotNegativeNumber(tokens[i]);
+			parsedTokens[i] = PositiveNumber.from(tokens[i]);
 		}
 		return parsedTokens;
 	}
 
-	private static int parseNotNegativeNumber(String s) {
-		final int notNegativeNumber = Integer.parseInt(s);
-		if (notNegativeNumber < 0) {
-			throw new RuntimeException();
-		}
-		return notNegativeNumber;
-	}
-
-	private static int sum(int[] numbers) {
+	private static int sum(PositiveNumber[] numbers) {
 		int sum = 0;
-		for (int number : numbers) {
-			sum += number;
+		for (PositiveNumber number : numbers) {
+			sum += number.get();
 		}
 		return sum;
 	}
