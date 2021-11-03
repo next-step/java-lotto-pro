@@ -49,6 +49,10 @@ public final class Lotto {
         return matchingCount;
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,7 +66,4 @@ public final class Lotto {
         return Objects.hash(lottoNumbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
-    }
 }
