@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final String DEFAULT_SEPARATORS = "[,:]";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final int CUSTOM_DELIMITER_GROUP = 1;
+    private static final int CUSTOM_INPUT_GROUP = 2;
     private static final String NOT_POSITIVE_ERROR_MESSAGE_FORMAT = "문자열 계산기는 음수를 입력할 수 없습니다. [%d]";
 
     public static int splitAndSum(final String text) {
@@ -24,8 +26,8 @@ public class StringAddCalculator {
     private static String[] split(final String text) {
         final Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
         if (matcher.find()) {
-            final String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
+            final String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP);
+            return matcher.group(CUSTOM_INPUT_GROUP).split(customDelimiter);
         }
         return text.split(DEFAULT_SEPARATORS);
     }
