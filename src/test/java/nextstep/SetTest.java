@@ -35,7 +35,7 @@ public class SetTest {
         Assertions.assertThat(setSize).isEqualTo(3);
     }
 
-    @DisplayName("JUnit의 ParameterizedTest 어노테이션 테스트")
+    @DisplayName("contains 테스트")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     public void parameterizedTest(int given) {
