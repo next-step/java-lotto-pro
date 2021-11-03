@@ -49,4 +49,12 @@ public class NumberUtil {
 		}
 		return validPerchaseAmount;
 	}
+
+	/**
+	 * 1에서 45 사이의 숫자 가져오기
+	 * @return
+	 */
+	public static int getNumberBetweenOneAndFortyFive() {
+		return (int) ((Math.random() * 45) + 1);
+	}
 }
