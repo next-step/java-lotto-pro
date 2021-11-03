@@ -6,6 +6,10 @@ public class PositiveNumber {
 
 	private final int positiveNumber;
 
+	private PositiveNumber(int positiveNumber) {
+		this.positiveNumber = positiveNumber;
+	}
+
 	private PositiveNumber(String s) {
 		this.positiveNumber = parse(s);
 	}
@@ -14,7 +18,7 @@ public class PositiveNumber {
 		int number;
 		try {
 			number = Integer.parseInt(s);
-		} catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			throw new PositiveNumberFormatException();
 		}
 		validate(number);
@@ -29,6 +33,10 @@ public class PositiveNumber {
 
 	public static PositiveNumber from(String s) {
 		return new PositiveNumber(s);
+	}
+
+	public PositiveNumber add(PositiveNumber positiveNumber) {
+		return new PositiveNumber(this.positiveNumber + positiveNumber.get());
 	}
 
 	public int get() {
