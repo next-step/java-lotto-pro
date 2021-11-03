@@ -16,8 +16,7 @@ class WinnerNumberTest {
 	public void 당첨번호_리스트_생성() {
 		String input = "1,2,3,4,5,6";
 		WinnerNumber winnerNumber = new WinnerNumber(input);
-		assertThat(winnerNumber.getWinnerNumber().getInput().size()).isEqualTo(6);
-		assertThat(winnerNumber.getWinnerNumber().getInput()).containsExactly(1, 2, 3, 4, 5, 6);
+		assertThat(winnerNumber.getWinnerNumber().getLottoNumbers().size()).isEqualTo(6);
 	}
 
 	@Test

@@ -11,12 +11,11 @@ import lotto.common.Messages;
 class LottoInputTest {
 
 	@Test
-	@DisplayName("1,2,3,4,5,6 입력한 경우 [1,2,3,4,5,6] Integer 배열을 반환한다")
+	@DisplayName("1,2,3,4,5,6 입력한 경우 [1,2,3,4,5,6] LottoNumber 리스트를 반환한다")
 	public void 당첨번호_입력_성공() {
 		String input = "1,2,3,4,5,6";
 		LottoInput lottoInput = new LottoInput(input);
-		assertThat(lottoInput.getInput().size()).isEqualTo(6);
-		assertThat(lottoInput.getInput()).containsExactly(1, 2, 3, 4, 5, 6);
+		assertThat(lottoInput.getLottoNumbers().size()).isEqualTo(6);
 	}
 
 	@Test

@@ -2,6 +2,8 @@ package lotto;
 
 import static lotto.common.Constants.*;
 
+import java.util.Objects;
+
 import lotto.common.Messages;
 
 public class LottoNumber {
@@ -34,9 +36,19 @@ public class LottoNumber {
 	}
 
 	@Override
-	public String toString() {
-		return "LottoNumber{" +
-			"number=" + number +
-			'}';
+	public int hashCode() {
+		return Objects.hash(number);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof LottoNumber) {
+			LottoNumber other = (LottoNumber)obj;
+			return Objects.equals(this.number, other.number);
+		}
+		return false;
 	}
 }

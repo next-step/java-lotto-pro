@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 import lotto.common.Messages;
 
 public class LottoInput {
-	private List<LottoNumber> input;
+	private List<LottoNumber> lottoNumbers;
 
 	public LottoInput(String input) {
 		validate(input);
-		this.input =
+		this.lottoNumbers =
 			Arrays.stream(input.split(DELIMITER))
 				.mapToInt(Integer::parseInt).mapToObj(LottoNumber::new)
 				.collect(Collectors.toList());
@@ -47,29 +47,15 @@ public class LottoInput {
 
 	private void isNumber(String number) {
 		try {
-			int i = Integer.parseInt(number);
-			isPositiveNumber(i);
-			isRangeValid(i);
+			Integer.parseInt(number);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(Messages.INPUT_NUMBER_COMMA_FORMAT_NOT_VALID.getValues());
-		}
-	}
-
-	private void isPositiveNumber(int i) {
-		if (i < 0) {
-			throw new RuntimeException(Messages.INPUT_NUMBER_COMMA_FORMAT_NOT_VALID.getValues());
 		}
 	}
 
 	private void isLottoVolume(String[] splitInput) {
 		if (splitInput.length != VOLUME) {
 			throw new IllegalArgumentException(Messages.INPUT_NUMBER_LENGTH_NOT_VALID.getValues());
-		}
-	}
-
-	private void isRangeValid(int input) {
-		if (input < START_NUMBER || input > END_NUMBER) {
-			throw new IllegalArgumentException(Messages.INPUT_NUMBER_RANGE_NOT_VALID.getValues());
 		}
 	}
 
@@ -80,7 +66,8 @@ public class LottoInput {
 		}
 	}
 
-	public List<Integer> getInput() {
-		return input;
+	public List<LottoNumber> getLottoNumbers() {
+		return lottoNumbers;
 	}
+
 }
