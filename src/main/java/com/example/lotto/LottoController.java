@@ -2,11 +2,12 @@ package com.example.lotto;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class LottoController {
 
 	private final NumbersGenerator numbersGenerator;
+	private long purchaseAmount;
 	private List<LottoGame> lottoGames;
 
 	public LottoController(NumbersGenerator numbersGenerator) {
@@ -20,13 +21,13 @@ public class LottoController {
 
 	private void buy() {
 		OutputView.print("구입금액을 입력해 주세요.");
-		int lottoGameCount = InputView.inputPurchaseAmount() / LottoGame.LOTTO_GAME_PRICE;
-
-		lottoGames = IntStream.range(0, lottoGameCount)
+		purchaseAmount = InputView.inputPurchaseAmount();
+		long lottoGameCount = purchaseAmount / LottoGame.LOTTO_GAME_PRICE;
+		lottoGames = LongStream.range(0, lottoGameCount)
 			.boxed()
 			.map(i -> new LottoGame(numbersGenerator))
 			.collect(Collectors.toList());
-
+		
 		OutputView.print(String.format("%d개를 구매했습니다.", lottoGameCount));
 		lottoGames.forEach(lottoGame -> OutputView.print(lottoGame.toString()));
 	}
@@ -35,7 +36,7 @@ public class LottoController {
 		OutputView.print("지난 주 당첨 번호를 입력해 주세요.");
 		LottoNumbers winningLottoNumbers = new LottoNumbers(InputView.inputLastWeekWinningLottoNumbers());
 
-		OutputView.print("당첨 통계");
-		// TODO
+		LottoStatistic lottoStatistic = new LottoStatistic(purchaseAmount, lottoGames, winningLottoNumbers);
+		OutputView.print(lottoStatistic.toString());
 	}
 }

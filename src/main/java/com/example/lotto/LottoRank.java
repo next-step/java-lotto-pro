@@ -3,19 +3,32 @@ package com.example.lotto;
 import java.util.Arrays;
 
 public enum LottoRank {
-	FIRST(6, 2_000_000_000),
-	// SECOND(5, 30_000_000),
-	THIRD(5, 1_500_000),
-	FOURTH(4, 50_000),
-	FIFTH(3, 5_000),
-	MISS(0, 0);
+	FIRST(1, 6, 2_000_000_000),
+	// SECOND(2, 5, 30_000_000),
+	THIRD(3, 5, 1_500_000),
+	FOURTH(4, 4, 50_000),
+	FIFTH(5, 3, 5_000),
+	MISS(6, 0, 0);
 
+	private final int value;
 	private final int countOfMatch;
 	private final int winningMoney;
 
-	LottoRank(int countOfMatch, int winningMoney) {
+	LottoRank(int value, int countOfMatch, int winningMoney) {
+		this.value = value;
 		this.countOfMatch = countOfMatch;
 		this.winningMoney = winningMoney;
+	}
+
+	public static LottoRank valueOf(int countOfMatch) {
+		return Arrays.stream(values())
+			.filter(lottoRank -> lottoRank.countOfMatch == countOfMatch)
+			.findFirst()
+			.orElse(MISS);
+	}
+
+	public int getValue() {
+		return value;
 	}
 
 	public int getCountOfMatch() {
@@ -26,10 +39,7 @@ public enum LottoRank {
 		return winningMoney;
 	}
 
-	public static LottoRank valueOf(int countOfMatch) {
-		return Arrays.stream(values())
-			.filter(lottoRank -> lottoRank.countOfMatch == countOfMatch)
-			.findFirst()
-			.orElse(MISS);
+	public boolean isMiss() {
+		return this == MISS;
 	}
 }

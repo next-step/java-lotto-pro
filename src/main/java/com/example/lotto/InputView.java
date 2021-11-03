@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class InputView {
-	public static int inputPurchaseAmount() {
-		return Integer.parseInt(Console.readLine());
+	public static long inputPurchaseAmount() {
+		return Long.parseLong(Console.readLine());
 	}
 
 	public static List<Integer> inputLastWeekWinningLottoNumbers() {
