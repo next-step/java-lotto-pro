@@ -9,14 +9,14 @@ public class LottoTicket {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    private LottoTicket(Set<LottoNumber> lottoNumbers) {
+    public LottoTicket(Set<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoTicket from(int... lottoNumbers) {
         return new LottoTicket(Arrays.stream(lottoNumbers)
-                .mapToObj(LottoNumber::from)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toSet()));
     }
 

@@ -1,6 +1,7 @@
 package lotto.domain.statistics;
 
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
 
 import java.util.List;
 import java.util.Set;
@@ -19,7 +20,7 @@ public class WinningNumbers {
 
     public WinningNumbers(List<Integer> numbers) {
         this(numbers.stream()
-                .map(LottoNumber::from)
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
     }
 
@@ -27,6 +28,12 @@ public class WinningNumbers {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("당첨 번호는 6개의 중복되지 않는 숫자 입니다.");
         }
+    }
+
+    public int matchCount(LottoTicket lottoTicket) {
+        return (int) lottoTicket.getLottoNumbers().stream()
+                .filter(this::matchNumber)
+                .count();
     }
 
     public boolean matchNumber(LottoNumber lottoNumber) {
