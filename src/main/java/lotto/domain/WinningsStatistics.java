@@ -1,25 +1,32 @@
 package lotto.domain;
 
 import java.util.EnumMap;
+import java.util.List;
 
-public class Result {
+public class WinningsStatistics {
 
     private static final int LOTTO_PRICE = 1_000;
 
     private final EnumMap<Rank, Integer> result;
 
-    private Result(EnumMap<Rank, Integer> result) {
+    private WinningsStatistics(EnumMap<Rank, Integer> result) {
         this.result = result;
     }
 
-    public static Result from(final Lotto winningLotto, final Lottos lottos)  {
+    public static WinningsStatistics statistics(final Lotto winningLotto, final Lottos lottos)  {
         EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             result.put(rank, 0);
         }
-        lottos.findRank(result, winningLotto);
 
-        return new Result(result);
+        List<Integer> matchingCounts = lottos.getMatchingCounts(winningLotto);
+
+        for(int matchingCount : matchingCounts) {
+            Rank findedRank = Rank.findRank(matchingCount);
+            result.put(findedRank, result.getOrDefault(findedRank, 0) + 1);
+        }
+
+        return new WinningsStatistics(result);
     }
 
     public double calculatePrizeMoney() {
@@ -32,10 +39,6 @@ public class Result {
         }
 
         return (double) totalPrize / (lottoCount * LOTTO_PRICE);
-    }
-
-    public EnumMap<Rank, Integer> getResult() {
-        return this.result;
     }
 
     public int getRankHitsCount(final Rank rank) {

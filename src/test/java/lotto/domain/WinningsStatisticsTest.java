@@ -8,7 +8,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class ResultTest {
+class WinningsStatisticsTest {
 
     @DisplayName("당첨로또와 구입한 로또들을 비교해서 당첨결과를 통계낸다.")
     @Test
@@ -22,12 +22,12 @@ class ResultTest {
                 Lotto.from("11,12,13,4,5,6")
         ));
 
-        Result result = Result.from(winningLotto, lottos);
+        WinningsStatistics winningsStatistics = WinningsStatistics.statistics(winningLotto, lottos);
 
         assertAll(
-                () -> assertThat(result.getRankHitsCount(Rank.FIRST)).isEqualTo(1),
-                () -> assertThat(result.getRankHitsCount(Rank.SECOND)).isEqualTo(1),
-                () -> assertThat(result.getRankHitsCount(Rank.FOURTH)).isEqualTo(3)
+                () -> assertThat(winningsStatistics.getRankHitsCount(Rank.FIRST)).isEqualTo(1),
+                () -> assertThat(winningsStatistics.getRankHitsCount(Rank.SECOND)).isEqualTo(1),
+                () -> assertThat(winningsStatistics.getRankHitsCount(Rank.FOURTH)).isEqualTo(3)
         );
     }
 
