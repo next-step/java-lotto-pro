@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.Arrays;
 
 public class Lotto {
-    private int[] lottoNumbers ;
+    private int[] lottoNumbers;
 
     public Lotto(int[] ints) {
         lottoNumbers = ints;
@@ -12,5 +12,9 @@ public class Lotto {
     @Override
     public String toString() {
         return Arrays.toString(lottoNumbers);
+    }
+
+    public int size() {
+        return lottoNumbers.length;
     }
 }
