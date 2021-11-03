@@ -39,7 +39,8 @@
 * [ ] 로또
   * [X] 로또숫자
     * [X] 생성할 숫자가 1~45 사이가 아니면 IllegalArgumentException이 발생한다.
-  * [ ] 로또의 로또숫자가 6개가 아니면 IllegalArgumentException이 발생한다.
+  * [X] 입력받은 문자열을 구분자(,)를 기준으로 나눌 수 있다.
+  * [X] 로또의 로또숫자가 6개가 아니면 IllegalArgumentException이 발생한다.
   * [ ] 로또의 로또숫자 중 중복된 숫자가 있으면 IllegalArgumentException이 발생한다.
   * [ ] 로또 간의 같은 로또숫자의 갯수가 몇개인지 확인할 수 있다.
   * [ ] 등수

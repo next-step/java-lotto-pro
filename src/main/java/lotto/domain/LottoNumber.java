@@ -11,7 +11,7 @@ public final class LottoNumber {
 
     private final int lottoNumber;
 
-    private LottoNumber (final int lottoNumber) {
+    private LottoNumber(final int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
