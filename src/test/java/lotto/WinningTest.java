@@ -1,7 +1,6 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,9 +16,9 @@ class WinningTest {
 		for (int i = 0; i < 4; i++) {
 			winning.addWinningMap(3);
 		}
-
 		//when
 		String yield = winning.getYield(investment);
+		//then
 		assertThat(yield).isEqualTo("4.00");
 	}
 

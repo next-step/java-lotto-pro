@@ -1,9 +1,6 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,8 +8,6 @@ import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
-import org.mockito.MockedStatic;
 
 class WinnerNumberTest {
 

@@ -15,7 +15,8 @@ public class LottoInput {
 
 	public LottoInput(String input) {
 		validate(input);
-		this.input = Arrays.stream(input.split(DELIMITER)).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+		this.input =
+			Arrays.stream(input.split(DELIMITER)).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
 	}
 
 	/**
@@ -29,7 +30,7 @@ public class LottoInput {
 	 */
 	private void validate(String input) {
 		if (!NUMBER_COMMA_PATTERN.matcher(input).matches()) {
-			throw new IllegalArgumentException(Messages.INPUT_NUMBER_FORMAT_NOT_VALID.getValues());
+			throw new IllegalArgumentException(Messages.INPUT_NUMBER_COMMA_FORMAT_NOT_VALID.getValues());
 		}
 		validString(input.split(DELIMITER));
 	}
@@ -48,13 +49,13 @@ public class LottoInput {
 			isPositiveNumber(i);
 			isRangeValid(i);
 		}catch (NumberFormatException e) {
-			throw new IllegalArgumentException(Messages.INPUT_NUMBER_FORMAT_NOT_VALID.getValues());
+			throw new IllegalArgumentException(Messages.INPUT_NUMBER_COMMA_FORMAT_NOT_VALID.getValues());
 		}
 	}
 
 	private void isPositiveNumber(int i) {
 		if (i < 0) {
-			throw new RuntimeException(Messages.INPUT_NUMBER_FORMAT_NOT_VALID.getValues());
+			throw new RuntimeException(Messages.INPUT_NUMBER_COMMA_FORMAT_NOT_VALID.getValues());
 		}
 	}
 

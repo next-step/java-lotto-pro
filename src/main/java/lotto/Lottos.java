@@ -16,4 +16,15 @@ public class Lottos {
 	public List<Lotto> getLottoList() {
 		return lottoList;
 	}
+
+	public Winning getWinningResult(WinnerNumber winnerNumber) {
+		Winning winning = new Winning();
+
+		for (Lotto lotto : lottoList) {
+			int strikeCount = winnerNumber.strikeCount(lotto.getNumbers());
+			winning.addWinningMap(strikeCount);
+		}
+
+		return winning;
+	}
 }

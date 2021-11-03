@@ -31,12 +31,12 @@ class LottoInputTest {
 	    //then
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(throwingCallable)
-			.withMessage(Messages.INPUT_NUMBER_FORMAT_NOT_VALID.getValues());
+			.withMessage(Messages.INPUT_NUMBER_COMMA_FORMAT_NOT_VALID.getValues());
 	}
 
 	@Test
 	@DisplayName("1,2,3,4,5 입력한 경우 6개 숫자 입력해야 한다는 IllegalArgumentException 발생한다.")
-	public void 당첨번호_5개입력_실패() throws Exception {
+	public void 당첨번호_5개입력_실패() {
 	    //given
 	    String input = "1,2,3,4,5";
 		//when
@@ -50,7 +50,7 @@ class LottoInputTest {
 
 	@Test
 	@DisplayName("1,2,3,4,5,48 입력한 경우1~45까지의 숫자만 입력해야 한다는 IllegalArgumentException 발생한다.")
-	public void 당첨번호_중_48입력_실패() throws Exception {
+	public void 당첨번호_중_48입력_실패() {
 		//given
 		String input = "1,2,3,4,5,48";
 		//when
@@ -64,7 +64,7 @@ class LottoInputTest {
 
 	@Test
 	@DisplayName("1,2,3,4,5,5 입력한 경우 중복입력은 불가하다는 IllegalArgumentException 발생한다.")
-	public void 당첨번호_중복입력_실패() throws Exception {
+	public void 당첨번호_중복입력_실패() {
 		//given
 		String input = "1,2,3,4,5,5";
 		//when

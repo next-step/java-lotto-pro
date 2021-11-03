@@ -2,7 +2,6 @@ package lotto;
 
 import static lotto.common.Constants.*;
 
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +15,8 @@ public class Lotto {
 	}
 
 	private List<Integer> generate() {
-		List<Integer> allNumbers = IntStream.range(START_NUMBER, END_NUMBER).boxed().collect(Collectors.toList());
+		List<Integer> allNumbers =
+			IntStream.range(START_NUMBER, END_NUMBER).boxed().collect(Collectors.toList());
 		Collections.shuffle(allNumbers);
 		return allNumbers.subList(0, VOLUME);
 	}

@@ -1,24 +1,20 @@
 package view;
 
-import java.util.Scanner;
-
 import lotto.common.Console;
 import lotto.common.Messages;
 
 public class InputView {
-	public InputView() {
-	}
 
-	private String readLine(String message) {
+	private static String readLine(String message) {
 		System.out.println(message);
 		return Console.readLine();
 	}
 
-	public String inputAmount() {
+	public static String inputInvestment() {
 		return readLine(Messages.INPUT_AMOUNT.getValues());
 	}
 
-	public String inputWinningNumber() {
+	public static String inputWinningNumber() {
 		return readLine(Messages.INPUT_WINNING_NUMBER.getValues());
 	}
 
