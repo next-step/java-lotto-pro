@@ -26,9 +26,9 @@ public class LottoNumberValidator {
 		List<Integer> numbers = lottoNumbers.stream()
 											.map(LottoNumber::getNumber)
 											.collect(toList());
-		Set<Integer> numberSet = new LinkedHashSet<>(numbers);
+		Set<LottoNumber> lottoNumbersSet = new LinkedHashSet<>(lottoNumbers);
 
-		if (numberSet.size() != VALID_LOTTO_NUMBER_COUNT) {
+		if (lottoNumbersSet.size() != VALID_LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException(MessageBuilder.build(DUPLICATED_LOTTO_NUMBER, numbers));
 		}
 	}
