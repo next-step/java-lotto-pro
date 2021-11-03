@@ -23,4 +23,8 @@ public final class Payment {
         }
     }
 
+    public int getTryCount() {
+        return payment / LOTTO_PRICE;
+    }
+
 }
