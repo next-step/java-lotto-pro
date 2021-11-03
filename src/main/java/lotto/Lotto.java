@@ -1,5 +1,6 @@
 package lotto;
 
+import view.InputView;
 import view.ResultView;
 
 public class Lotto {
@@ -7,5 +8,6 @@ public class Lotto {
 
     public void start() {
         ResultView.print(ASK_PURCHASE_AMOUNT);
+        LottoMoney lottoMoney = new LottoMoney(InputView.readLine());
     }
 }
