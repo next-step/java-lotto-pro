@@ -15,8 +15,9 @@ public class LottoApp {
         ResultView.printLottos(lottos);
 
         Lotto winningLotto = Lotto.from(InputView.inputWinningNumbers());
+        LottoNumber bonusBall = LottoNumber.from(InputView.inputBonusBall());
 
-        WinningsStatistics winningsStatistics = WinningsStatistics.statistics(winningLotto, lottos);
+        WinningsStatistics winningsStatistics = WinningsStatistics.statistics(winningLotto, bonusBall, lottos);
         ResultView.printStatistics(winningsStatistics);
         ResultView.printEarningsRate(winningsStatistics);
     }

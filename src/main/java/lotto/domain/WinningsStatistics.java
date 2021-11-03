@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.domain.exception.DuplicateOfBonusBallNumberException;
 
 import java.util.EnumMap;
-import java.util.List;
 
 public final class WinningsStatistics {
 
@@ -15,7 +14,7 @@ public final class WinningsStatistics {
         this.result = result;
     }
 
-    public static WinningsStatistics statistics(final Lotto winningLotto, final LottoNumber bonusBall, final Lottos lottos)  {
+    public static WinningsStatistics statistics(final Lotto winningLotto, final LottoNumber bonusBall, final Lottos lottos) {
         validate(winningLotto, bonusBall);
 
         EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
@@ -34,7 +33,7 @@ public final class WinningsStatistics {
     }
 
     private static void putMatchCountByRank(final EnumMap<Rank, Integer> result, final Lotto winningLotto, final LottoNumber bonusBall, final Lottos lottos) {
-        for(Lotto lotto : lottos.getLottos()) {
+        for (Lotto lotto : lottos.getLottos()) {
             int matchingCount = winningLotto.countMatchingNumber(lotto);
             boolean isBonus = lotto.isContainLottoNumber(bonusBall);
             Rank findedRank = Rank.findRank(matchingCount, isBonus);

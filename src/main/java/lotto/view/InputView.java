@@ -23,6 +23,11 @@ public final class InputView {
         return splitNumbers(scanner.next());
     }
 
+    public static int inputBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(scanner.next());
+    }
+
     private static List<Integer> splitNumbers(final String input) {
         String[] dividedNumbers = input.trim().split(SEPARATOR);
         return Arrays.stream(dividedNumbers)
