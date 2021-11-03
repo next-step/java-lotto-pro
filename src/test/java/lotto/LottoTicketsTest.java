@@ -12,4 +12,10 @@ class LottoTicketsTest {
     void LottoTickets_success() {
         assertThat(new LottoTickets(1).getSize()).isEqualTo(1);
     }
+
+    @DisplayName("로또 티켓 묶음 메시지 생성 테스트")
+    @Test
+    void makeMessage_success() {
+
+    }
 }

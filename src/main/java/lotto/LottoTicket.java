@@ -12,6 +12,10 @@ public class LottoTicket {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
 
+    private static final String LEFT_BRACE = "[";
+    private static final String RIGHT_BRACE = "]";
+    private static final String COMMA_SPACE = ", ";
+
     private Set<Integer> numbers;
 
     public LottoTicket() {
@@ -25,5 +29,11 @@ public class LottoTicket {
 
     public int getSize() {
         return numbers.size();
+    }
+
+    public String makeMessage() {
+        return LEFT_BRACE
+            + numbers.stream().map(String::valueOf).collect(Collectors.joining(COMMA_SPACE))
+            + RIGHT_BRACE;
     }
 }

@@ -14,5 +14,6 @@ public class Lotto {
         ResultView.print(count + PRINT_NUMBER_OF_PURCHASED_LOTTO);
 
         LottoTickets lottoTickets = new LottoTickets(count);
+        ResultView.print(lottoTickets.makeMessage());
     }
 }
