@@ -1,6 +1,6 @@
 package calculator;
 
-import static java.util.Arrays.stream;
+import java.util.List;
 
 public class StringAddCalculator {
 
@@ -12,7 +12,7 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] numbers = StringAddParser.split(input);
+        List<Integer> numbers = StringAddParser.split(input);
 
         return sum(numbers);
     }
@@ -21,7 +21,7 @@ public class StringAddCalculator {
         return input == null || input.trim().isEmpty();
     }
 
-    private static int sum(String[] numbers) {
-        return stream(numbers).mapToInt(Integer::parseInt).sum();
+    private static int sum(List<Integer> numbers) {
+        return numbers.stream().mapToInt(i -> i).sum();
     }
 }
