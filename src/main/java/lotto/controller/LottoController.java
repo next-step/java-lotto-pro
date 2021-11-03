@@ -9,6 +9,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.WinningNumbers;
 import lotto.generator.LottoNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -25,6 +26,7 @@ public class LottoController {
 	public void play() {
 		Money money = inputView.inputMoney();
 		Lottos lottos = purchaseLottos(money);
+		WinningNumbers lastWinningNumbers = WinningNumbers.createBy(inputView.inputWinningNumbers());
 	}
 
 	public Lottos purchaseLottos(Money money) {

@@ -15,11 +15,15 @@ public class LottoNumberValidator {
 	private LottoNumberValidator() {}
 
 	public static void validateLottoNumber(int number) {
-		if (LOTTO_NUMBER_MIN <= number && number <= LOTTO_NUMBER_MAX) {
+		if (isValidLottoNumber(number)) {
 			return;
 		}
 
 		throw new IllegalArgumentException(MessageBuilder.build(INVALID_LOTTO_NUMBER, number));
+	}
+
+	public static boolean isValidLottoNumber(int number) {
+		return LOTTO_NUMBER_MIN <= number && number <= LOTTO_NUMBER_MAX;
 	}
 
 	public static void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
