@@ -41,6 +41,14 @@ public final class Lotto {
         }
     }
 
+    public int countMatchingNumber(Lotto comparableLotto) {
+        int matchingCount = 0;
+        for (LottoNumber lottoNumber : comparableLotto.lottoNumbers) {
+            matchingCount += Collections.frequency(this.lottoNumbers, lottoNumber);
+        }
+        return matchingCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,11 +62,4 @@ public final class Lotto {
         return Objects.hash(lottoNumbers);
     }
 
-    public int countMatchingNumber(Lotto comparableLotto) {
-        int matchingCount = 0;
-        for (LottoNumber lottoNumber : comparableLotto.lottoNumbers) {
-            matchingCount += Collections.frequency(this.lottoNumbers, lottoNumber);
-        }
-        return matchingCount;
-    }
 }

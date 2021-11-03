@@ -29,4 +29,16 @@ public enum Rank {
                 .orElse(MISS);
     }
 
+    public int totalWinningMoney(final int hitCount) {
+        return this.winningMoney * hitCount;
+    }
+
+    public int getWinningMoney() {
+        return this.winningMoney;
+    }
+
+    public int getCountOfMatch() {
+        return this.countOfMatch;
+    }
+
 }
