@@ -43,4 +43,14 @@ public class LottoNumbers {
 	public List<LottoNumber> getValues() {
 		return values;
 	}
+
+	@Override
+	public String toString() {
+		List<String> elements = values.stream()
+			.map(LottoNumber::getValue)
+			.map(String::valueOf)
+			.collect(Collectors.toList());
+
+		return String.join(", ", elements);
+	}
 }

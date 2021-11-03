@@ -19,4 +19,9 @@ public class LottoGame {
 	public LottoNumbers getLottoNumbers() {
 		return lottoNumbers;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("[%s]", lottoNumbers.toString());
+	}
 }
