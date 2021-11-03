@@ -13,11 +13,9 @@ public class StringAddCalculator {
 		return (null == s) || s.isEmpty();
 	}
 
-	private static int sum(StringAddParser.Result result) {
-		int sum = 0;
-		for (PositiveNumber number : result.getPositiveNumbers()) {
-			sum += number.get();
-		}
-		return sum;
+	private static int sum(StringAddParser.Result parsed) {
+		return parsed.getPositiveNumbers().stream()
+			.reduce(PositiveNumber.from("0"), PositiveNumber::add)
+			.get();
 	}
 }
