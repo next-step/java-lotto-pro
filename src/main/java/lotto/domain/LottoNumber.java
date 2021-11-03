@@ -26,6 +26,10 @@ public final class LottoNumber {
         }
     }
 
+    public int getValue() {
+        return lottoNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,7 +43,4 @@ public final class LottoNumber {
         return Objects.hash(lottoNumber);
     }
 
-    public int getValue() {
-        return lottoNumber;
-    }
 }

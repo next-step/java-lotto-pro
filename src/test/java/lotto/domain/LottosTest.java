@@ -16,7 +16,7 @@ class LottosTest {
 
     @BeforeEach
     void setup() {
-        lottos =  Arrays.asList(
+        lottos = Arrays.asList(
                 Lotto.from("1,2,3,4,5,6"),
                 Lotto.from("1,2,3,4,5,10"),
                 Lotto.from("1,2,3,4,5,10"),
@@ -41,7 +41,7 @@ class LottosTest {
     @Test
     void getMatchingCounts() {
         Lotto lotto = Lotto.from("1,2,3,4,5,6");
-        List<Integer> matchingCounts = new ArrayList<>(Arrays.asList(6,5,5,4,4,3,3,1,1,0));
+        List<Integer> matchingCounts = new ArrayList<>(Arrays.asList(6, 5, 5, 4, 4, 3, 3, 1, 1, 0));
 
         assertThat(Lottos.from(lottos).getMatchingCounts(lotto)).isEqualTo(matchingCounts);
     }

@@ -41,7 +41,7 @@ public final class Lotto {
         }
     }
 
-    public int countMatchingNumber(Lotto comparableLotto) {
+    public int countMatchingNumber(final Lotto comparableLotto) {
         int matchingCount = 0;
         for (LottoNumber lottoNumber : comparableLotto.lottoNumbers) {
             matchingCount += Collections.frequency(this.lottoNumbers, lottoNumber);

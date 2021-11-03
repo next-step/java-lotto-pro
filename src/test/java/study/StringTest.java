@@ -35,7 +35,7 @@ public class StringTest {
         int beginIndex = str.indexOf("(") + 1;
         int endIndex = str.indexOf(")");
 
-        str = str.substring(beginIndex,endIndex);
+        str = str.substring(beginIndex, endIndex);
 
         assertEquals(str, "1,2");
     }
