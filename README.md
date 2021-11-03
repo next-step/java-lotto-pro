@@ -14,9 +14,10 @@
 - lotto
   - price = 1000 
   - generate 6 lotto numbers
-- lotto factory
-  - auto-generate lotto
+- lotto store
+  - sell lottos
 - winning lotto (extends lotto)
+  - parse
   - count matching
 - winning statistics
   - count by matching-count (3,4,5,6)
