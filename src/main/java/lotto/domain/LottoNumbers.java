@@ -30,4 +30,8 @@ public class LottoNumbers {
     private boolean isContainNumber(String lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
+
+    public List<String> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }

@@ -27,4 +27,12 @@ public enum LottoPrize {
     private boolean isMatchCount(long matchCount) {
         return count == matchCount;
     }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int getMoney() {
+        return money;
+    }
 }
