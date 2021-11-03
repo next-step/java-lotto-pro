@@ -57,7 +57,7 @@ public class StringAddCalculator {
 
     private static int parsePositiveInt(String number) {
         int value = Integer.parseInt(number);
-        if (Integer.signum(value) == -1) {
+        if (value < 0) {
             throw new RuntimeException("양의 정수 값을 입력해 주세요");
         }
         return value;
