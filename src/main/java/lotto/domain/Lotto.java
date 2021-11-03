@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import lotto.domain.exception.CountOfLottoNumberException;
+import lotto.domain.exception.DuplicateOfLottoNumberException;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -31,6 +33,9 @@ public final class Lotto {
     private static void validate(final List<Integer> numbers) {
         if (numbers.size() != NUMBER_LIMIT_SIZE) {
             throw new CountOfLottoNumberException();
+        }
+        if (new HashSet<>(numbers).size() != NUMBER_LIMIT_SIZE) {
+            throw new DuplicateOfLottoNumberException();
         }
     }
 
