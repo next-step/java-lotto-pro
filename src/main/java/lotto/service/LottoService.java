@@ -6,16 +6,29 @@ import lotto.domain.LottoCreator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoService {
+    private Lotto winningLotto;
 
     public List<Lotto> createLotto(int countOfLotto, LottoCreator lottoCreator) {
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> lottoBasket = new ArrayList<>();
         for (int i = 0; i < countOfLotto; i++) {
             List<Ball> balls = makeBall(lottoCreator.makeLotto());
-            lottos.add(new Lotto(balls));
+            lottoBasket.add(new Lotto(balls));
         }
-        return lottos;
+        return lottoBasket;
+    }
+
+    public void makeWinningLotto(List<Integer> winningLottoNumber){
+        List<Ball> winningBalls = winningLottoNumber.stream()
+                .map(number -> new Ball(number))
+                .collect(Collectors.toList());
+        this.winningLotto = new Lotto(winningBalls);
+    }
+
+    public Lotto winningLotto(){
+        return this.winningLotto;
     }
 
     private List<Ball> makeBall(List<Integer> lottoNumbers) {

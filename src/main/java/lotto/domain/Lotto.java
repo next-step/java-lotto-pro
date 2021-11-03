@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_COUNT_VALID_SIZE = 6;
@@ -28,6 +29,12 @@ public class Lotto {
             numbers.add(ball.number());
         }
         return numbers;
+    }
+
+    private List<Ball> makeBalls(List<Integer> ballNumbers) {
+        return ballNumbers.stream()
+                .map(number -> new Ball(number))
+                .collect(Collectors.toList());
     }
 
     private void checkLengthOverThanSix(List<Ball> balls) {
