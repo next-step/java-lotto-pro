@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.view.OutputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -9,12 +10,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
+    OutputView outputView = new OutputView();
+
     @ParameterizedTest
     @ValueSource(ints = 15000)
     @DisplayName("금액에 따라 로또 구입개수 확인")
     public void purchaseLotto(int purchaseAmount) {
         Lotto lotto = new Lotto(purchaseAmount);
         assertThat(lotto.getLottoNumbers().size()).isEqualTo(15);
+        outputView.purchaseLottoList(lotto);
     }
 
     @ParameterizedTest
