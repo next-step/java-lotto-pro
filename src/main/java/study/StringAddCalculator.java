@@ -6,7 +6,8 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final String DEFAULT_SEPARATORS = "[,:]";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
-    
+    private static final String NOT_POSITIVE_ERROR_MESSAGE_FORMAT = "문자열 계산기는 음수를 입력할 수 없습니다. [%d]";
+
     public static int splitAndSum(final String text) {
         if (isEmptyOrNull(text)) {
             return 0;
@@ -40,7 +41,7 @@ public class StringAddCalculator {
     private static int parsePositiveNumber(String text) {
         final int number = Integer.parseInt(text);
         if (isNotPositiveNumber(number)) {
-            throw new RuntimeException(String.format("문자열 계산기는 음수를 입력할 수 없습니다.  [%d]", number));
+            throw new RuntimeException(String.format(NOT_POSITIVE_ERROR_MESSAGE_FORMAT, number));
         }
         return number;
     }
