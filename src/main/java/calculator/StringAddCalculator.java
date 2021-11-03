@@ -9,7 +9,8 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
     public static final String FIXED_DELIMITER = "[,:]";
-    public static final String USER_DELIMITER_PATTERN = "//(.)\n(.*)";
+    public static final String USER_DELIMITER_REGEX = "//(.)\n(.*)";
+    public static final Pattern USER_DELIMITER_PATTERN = Pattern.compile(USER_DELIMITER_REGEX);
     public static final int NULL_OR_EMPTY_VALUE = 0;
     public static final int DELIMITER_INDEX = 1;
     public static final int SPLIT_TARGET_INDEX = 2;
@@ -38,7 +39,7 @@ public class StringAddCalculator {
 
     private static Optional<String[]> getTokens(String text) {
         Optional<String[]> tokens = Optional.of(text.split(FIXED_DELIMITER));
-        Matcher m = Pattern.compile(USER_DELIMITER_PATTERN).matcher(text);
+        Matcher m = USER_DELIMITER_PATTERN.matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(DELIMITER_INDEX);
             tokens = Optional.of(m.group(SPLIT_TARGET_INDEX).split(customDelimiter));
