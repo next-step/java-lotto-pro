@@ -26,11 +26,11 @@ public class CalculatorInputStringTest {
 	}
 
 	@Test
-	@DisplayName("주어진 문자열을 이용해 List<Integer> 반환")
+	@DisplayName("주어진 문자열을 이용해 CalculatorNumbers 반환")
 	public void test_toCalculatorNumbers1() {
 		CalculatorInputString inputString = new CalculatorInputString("1,2:3");
 
-		assertThat(inputString.toIntegerList()).containsExactly(1, 2, 3);
+		assertThat(inputString.toCalculateNumbers()).isInstanceOf(CalculatorNumbers.class);
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class CalculatorInputStringTest {
 	public void test_toCalculatorNumbers2() {
 		CalculatorInputString inputString = new CalculatorInputString("A,2:3");
 
-		assertThatThrownBy(() -> inputString.toIntegerList())
+		assertThatThrownBy(() -> inputString.toCalculateNumbers())
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(CalculatorInputString.MESSAGE_VALUE_IS_NOT_NUMBER_FORMAT);
 	}

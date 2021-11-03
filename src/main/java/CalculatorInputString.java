@@ -12,9 +12,9 @@ public class CalculatorInputString {
 		return value == null || value.isEmpty();
 	}
 
-	public List<Integer> toIntegerList() {
+	public CalculatorNumbers toCalculateNumbers() {
 		try {
-			return CalculatorInputStringParser.parse(value);
+			return new CalculatorNumbers(CalculatorInputStringParser.parse(value));
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(MESSAGE_VALUE_IS_NOT_NUMBER_FORMAT);
 		}
