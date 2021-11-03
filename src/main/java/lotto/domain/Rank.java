@@ -24,7 +24,7 @@ public enum Rank {
         return Arrays.stream(values())
                 .filter(rank -> rank.isMatch(matchCount))
                 .findFirst()
-                .orElse(NO_MATCH);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     private boolean isMatch(int matchCount) {
