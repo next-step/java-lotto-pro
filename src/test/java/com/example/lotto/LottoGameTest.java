@@ -53,7 +53,7 @@ class LottoGameTest {
 	@MethodSource("validNumbers")
 	void constructor(List<Integer> numbers) {
 		// given & when
-		LottoGame lottoGame = new LottoGame(() -> numbers);
+		LottoGame lottoGame = new LottoGame((from, to, size) -> numbers);
 
 		// then
 		assertAll(
@@ -67,7 +67,7 @@ class LottoGameTest {
 	@MethodSource("invalidNumbers")
 	void constructor_fail(List<Integer> numbers) {
 		// given & when & then
-		assertThatThrownBy(() -> new LottoGame(() -> numbers))
+		assertThatThrownBy(() -> new LottoGame((from, to, size) -> numbers))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 }

@@ -5,19 +5,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class RandomNumbersGenerator implements NumbersGenerator {
-	private static final List<Integer> CANDIDATES;
-
-	static {
-		CANDIDATES = new ArrayList<>();
-
-		for (int number = LottoNumber.ONE; number <= LottoNumber.FORTY_FIVE; number++) {
-			CANDIDATES.add(number);
-		}
-	}
 
 	@Override
-	public List<Integer> generate() {
-		Collections.shuffle(CANDIDATES);
-		return CANDIDATES.subList(0, LottoNumbers.LOTTO_NUMBER_COUNT);
+	public List<Integer> generate(int from, int to, int size) {
+		List<Integer> candidates = new ArrayList<>();
+		for (int number = from; number <= to; number++) {
+			candidates.add(number);
+		}
+
+		Collections.shuffle(candidates);
+		return candidates.subList(0, size);
 	}
 }

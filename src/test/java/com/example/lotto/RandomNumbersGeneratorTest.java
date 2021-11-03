@@ -19,13 +19,16 @@ class RandomNumbersGeneratorTest {
 		RandomNumbersGenerator generator = new RandomNumbersGenerator();
 
 		// when
-		List<Integer> numbers = generator.generate();
+		List<Integer> numbers = generator.generate(
+			LottoNumber.ONE,
+			LottoNumber.FORTY_FIVE,
+			LottoNumbers.LOTTO_NUMBER_COUNT);
 
 		// then
 		assertAll(
 			() -> assertThat(numbers).isNotNull(),
-			() -> assertThat(new HashSet<>(numbers)).hasSize(6),
-			() -> assertThat(numbers).hasSize(6)
+			() -> assertThat(new HashSet<>(numbers)).hasSize(LottoNumbers.LOTTO_NUMBER_COUNT),
+			() -> assertThat(numbers).hasSize(LottoNumbers.LOTTO_NUMBER_COUNT)
 		);
 	}
 }
