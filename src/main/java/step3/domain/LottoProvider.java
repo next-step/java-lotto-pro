@@ -1,16 +1,29 @@
 package step3.domain;
 
+import java.util.List;
+
 public class LottoProvider {
-    private static final int price = 1000;
+    private static final int PRICE = 1000;
 
-    private LottoProvider() {
+    private final int purchaseCost;
+
+    public LottoProvider(int purchaseCost) {
+        this.purchaseCost = purchaseCost;
     }
 
-    public static int availableQuantity(int buyAmount) {
-        return buyAmount / price;
+    public List<List<Integer>> buyLotto() {
+        LottoTicketBundle lottoTicketBundle = new LottoTicketBundle();
+        for (int i = 0; i < availableQuantity(); i++) {
+            lottoTicketBundle.addLottoTicket();
+        }
+        return lottoTicketBundle.getUnmodifiableListLottoTickets();
     }
 
-    public static int totalPurchasePrice(int quantity) {
-        return quantity * price;
+    public int availableQuantity() {
+        return purchaseCost / PRICE;
+    }
+
+    public int totalPurchasePrice(int quantity) {
+        return quantity * PRICE;
     }
 }

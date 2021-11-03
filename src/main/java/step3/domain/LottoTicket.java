@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +34,6 @@ public class LottoTicket {
         for (LottoNumber lottoNumber : lottoTicket) {
             result.add(lottoNumber.toInt());
         }
-        return result;
+        return Collections.unmodifiableList(result);
     }
 }
