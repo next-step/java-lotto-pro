@@ -9,7 +9,7 @@ public class StringAddCalculator {
     private static final int CUSTOM_DELIMITER_GROUP = 1;
     private static final int CUSTOM_INPUT_GROUP = 2;
     private static final String NOT_POSITIVE_ERROR_MESSAGE_FORMAT = "문자열 계산기는 음수를 입력할 수 없습니다. [%d]";
-    private static final int ZERO = 0;
+    private static final int MIN_POSITIVE_NUMBER = 0;
 
     public static int splitAndSum(final String text) {
         if (isEmptyOrNull(text)) {
@@ -45,7 +45,7 @@ public class StringAddCalculator {
     }
 
     private static boolean isNotPositiveNumber(final int number) {
-        return number < ZERO;
+        return number < MIN_POSITIVE_NUMBER;
     }
 
     private static boolean isEmptyOrNull(final String text) {
