@@ -1,49 +1,70 @@
 @startuml StringCalculator
 class StringCalculator {
-	- CALCURATOR_STRING_PATTERN : String
-	- stringParser : StringCalculatorParser
+  - parser : Parser
 
-	+ calcuration(calcuratingString: String) : Integer
-	- isInvalidValue(calcuratingString: String) : Boolean
+  + calculate(calcuratingString: String) : Integer
 }
 
-class StringCalculatorParser {
-	+ CUSTOM_SEPARATOR_PARSING_PATTERN : string
-	- separators : Separators
+class Parser {
+  - CUSTOM_SEPARATOR_PARSING_PATTERN : String
+  - REGEX_GROUP_SEPARATOR_INDEX : Integer
+  - REGEX_GROUP_NUMBER_INDEX : Integer
+  - defaultSeparators : Separators
 
-	- setDefaultSeparator() : void
-	+ parse(calcuratingString: String) : CalculatorNumbers
+  - generateDefaultSeparators() : Separators
+  + parse(calculatorText : String) : Numbers
+  - generateParsingElementWithCustomSeparator(calculatorText : String) : Optional<ParsingElement>
+  - generateNumbers(ParsingElement parsingElement) : Numbers
+  - getNumberBySeperators(ParsingElement parsingElement) : String[]
+  - getSeperatorRegex(separator : String) : String
+  - replaceSpecialCharacter(separator : String) : String
 }
 
-class CalculatorNumbers {
-	- items : List<CalculatorNumber>
+class ParsingElement {
+  - numberText : String
+  - separators : Separators
 
-	+ sum() : Integer
+  + getNumber() : String
+  + getSeparators() : Separators
 }
 
-class CalculatorNumber {
-	- item : Integer
+class Numbers {
+  - items : List<Number>
 
-	- isInvalid(number: String) : Boolean
+  + sum() : Integer
+}
+
+class Number {
+  - item : Integer
+
+  + value() : Integer
+  - isInvalid(value: String) : boolean
+  - isNegative(value: String) : boolean
 }
 
 class Separators {
-	- items : List<Separators>
+  - items : List<Separators>
 
-	+ getSeparators() : String
-	+ add(separator: Separator) : Boolean
+  + value() : String
+  + add(separator: Separator) : Boolean
 }
 
 class Separator {
-	- item : String
+  - item : String
+
+  + value() : String
 }
 
-StringCalculator <-- StringCalculatorParser
+StringCalculator *-- Parser
+StringCalculator <-- Numbers
 
-StringCalculatorParser <-- CalculatorNumbers
-StringCalculatorParser  <--  Separators
+ParsingElement *-- Separators
 
-CalculatorNumbers "1" *-- "0..*" CalculatorNumber
+Parser <-- ParsingElement
+Parser <-- Numbers
+Parser  *--  Separators
+
+Numbers "1" *-- "0..*" Number
 
 Separators "1" *-- "1..*" Separator
 @enduml
