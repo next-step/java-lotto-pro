@@ -13,6 +13,12 @@ public class Lottos {
 		return new Lottos(lottos);
 	}
 
+	public void checkWinningNumbers(WinningNumbers lastWinningNumbers) {
+		for (Lotto lotto : this.lottos) {
+			lotto.checkWinningNumbers(lastWinningNumbers);
+		}
+	}
+
 	public int getSize() {
 		return this.lottos.size();
 	}

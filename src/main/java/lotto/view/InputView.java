@@ -18,8 +18,7 @@ import lotto.utils.MessageBuilder;
 public class InputView {
 	private static final String MONEY_INPUT_GUIDE_MESSAGE = "구입금액을 입력해 주세요.";
 	private static final String LAST_WINNING_NUMBERS_INPUT_GUIDE_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-	private static final String MONEY_REG_EXP = "^[0-9]+$";
-	private static final String NUMBER_FROM_1_to_9_REG_EXP = "^[1-9]+$";
+	private static final String NUMBER_FROM_0_to_9_REG_EXP = "^[0-9]+$";
 
 	private static final Scanner scanner = new Scanner(System.in);
 
@@ -56,12 +55,12 @@ public class InputView {
 
 	private boolean isValidNumbers(List<String> winningNumbers) {
 		return winningNumbers.stream()
-							 .allMatch(input -> input.matches(NUMBER_FROM_1_to_9_REG_EXP));
+							 .allMatch(input -> input.matches(NUMBER_FROM_0_to_9_REG_EXP));
 	}
 
 	private boolean isValidLottoNumbers(List<String> winningNumbers) {
 		return winningNumbers.stream()
-							 .filter(s -> !StringUtils.isEmpty(s) && s.matches(NUMBER_FROM_1_to_9_REG_EXP))
+							 .filter(s -> !StringUtils.isEmpty(s) && s.matches(NUMBER_FROM_0_to_9_REG_EXP))
 							 .map(LottoStringToIntegerParser::parse)
 							 .allMatch(LottoNumberValidator::isValidLottoNumber);
 	}
@@ -71,7 +70,7 @@ public class InputView {
 			return false;
 		}
 
-		return money.matches(MONEY_REG_EXP);
+		return money.matches(NUMBER_FROM_0_to_9_REG_EXP);
 	}
 
 	private Money convertToMoney(String money) {

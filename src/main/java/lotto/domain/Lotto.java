@@ -31,6 +31,10 @@ public class Lotto {
 		return this.lottoNumbers;
 	}
 
+	public WinningNumbers getWinningNumbers() {
+		return this.winningNumbers;
+	}
+
 	private void addWinningNumbers(WinningNumbers lastWinningNumbers, LottoNumber lottoNumber) {
 		if (lastWinningNumbers.isWinningNumber(lottoNumber)) {
 			this.winningNumbers.add(lottoNumber);
