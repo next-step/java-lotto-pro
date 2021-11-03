@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class CalculatorInputString {
 	public static final String MESSAGE_VALUE_IS_NOT_NUMBER_FORMAT = "VALUE_IS_NOT_NUMBER_FORMAT";
 	private final String value;
