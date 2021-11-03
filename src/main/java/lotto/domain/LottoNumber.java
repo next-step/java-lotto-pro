@@ -39,4 +39,7 @@ public final class LottoNumber {
         return Objects.hash(lottoNumber);
     }
 
+    public int getValue() {
+        return lottoNumber;
+    }
 }

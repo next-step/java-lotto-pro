@@ -62,4 +62,7 @@ public final class Lotto {
         return Objects.hash(lottoNumbers);
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
