@@ -2,7 +2,7 @@ package lotto.domain;
 
 import static java.util.stream.Collectors.*;
 import static lotto.constant.ErrorMessage.*;
-import static lotto.constant.LottoNumberConstant.*;
+import static lotto.constant.LottoConstant.*;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 

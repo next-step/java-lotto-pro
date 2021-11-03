@@ -2,7 +2,7 @@ package lotto.utils;
 
 import static java.util.stream.Collectors.*;
 import static lotto.constant.ErrorMessage.*;
-import static lotto.constant.LottoNumberConstant.*;
+import static lotto.constant.LottoConstant.*;
 
 import java.util.LinkedHashSet;
 import java.util.List;

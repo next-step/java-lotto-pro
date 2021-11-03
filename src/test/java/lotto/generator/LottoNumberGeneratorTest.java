@@ -1,6 +1,6 @@
 package lotto.generator;
 
-import static lotto.constant.LottoNumberConstant.*;
+import static lotto.constant.LottoConstant.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Collections;

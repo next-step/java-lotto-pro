@@ -1,6 +1,6 @@
 package lotto.generator;
 
-import static lotto.constant.LottoNumberConstant.*;
+import static lotto.constant.LottoConstant.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
