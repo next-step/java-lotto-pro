@@ -4,16 +4,18 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import lottogame.exception.DuplicateLottoNumberException;
-import lottogame.exception.NotCorrectSizeOfLotto;
+import lottogame.exception.NotCorrectSizeOfLottoException;
 
 public class LottoWinningNumbersTest {
+
+	private static int SIZE_OF_LOTTERY_NUMBERS = 6;
 
 	@Test
 	public void 당첨번호_리스트_입력() {
@@ -40,7 +42,7 @@ public class LottoWinningNumbersTest {
 		List<Integer> numbers = Arrays.asList(34,3,17,26,7);
 		assertThatThrownBy(()->{
 			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(numbers);
-		}).isInstanceOf(NotCorrectSizeOfLotto.class);
+		}).isInstanceOf(NotCorrectSizeOfLottoException.class);
 	}
 
 	@Test
@@ -48,12 +50,25 @@ public class LottoWinningNumbersTest {
 		List<Integer> numbers = Arrays.asList(34,3,17,26,7,10,32);
 		assertThatThrownBy(()->{
 			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(numbers);
-		}).isInstanceOf(NotCorrectSizeOfLotto.class);
+		}).isInstanceOf(NotCorrectSizeOfLottoException.class);
 	}
 
 	// LottoNumber를 Set으로 담은 자료구조를 primitive 타입 int로 찾기 어려우므로 LottoNumber로 래핑
 	private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers){
 		return numbers.stream().map(number -> new LottoNumber(number)).collect(Collectors.toList());
+	}
+
+	@Test
+	public void 당첨번호_문자열_입력() {
+		String lottoNumberText="1, 31, 22, 15, 4, 7";
+		List<Integer> numbers = Arrays.asList(1,31,22,15,4,7);
+		LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(lottoNumberText);
+		assertThat(lottoWinningNumbers.getWinningNumbers().size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
+
+		List<LottoNumber> lottoNumbers=convertToLottoNumbers(numbers);
+		for(LottoNumber lottoNumber : lottoNumbers){
+			assertThat(lottoWinningNumbers.getWinningNumbers().contains(lottoNumber)).isTrue();
+		}
 	}
 
 

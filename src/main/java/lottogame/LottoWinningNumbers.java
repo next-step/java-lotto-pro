@@ -63,4 +63,19 @@ public class LottoWinningNumbers {
 		return winningNumbers;
 	}
 
+	public static LottoWinningNumbers makeLottoWinningNumbers(String lottoNumberText) {
+		String[] splitedTexts= lottoNumberText.split(", ");
+		List<Integer> numbers =parseTextToNumbers(splitedTexts);
+		return makeLottoWinningNumbers(numbers);
+	}
+
+	private static List<Integer> parseTextToNumbers(String[] splitedTexts) {
+		try {
+			return Arrays.stream(splitedTexts)
+				.map(splitedNumber -> Integer.parseInt(splitedNumber))
+				.collect(Collectors.toList());
+		}catch (NumberFormatException ex){
+			throw new NotDigitLottoNumberException("로또 번호를 숫자로 입력해주세요.");
+		}
+	}
 }
