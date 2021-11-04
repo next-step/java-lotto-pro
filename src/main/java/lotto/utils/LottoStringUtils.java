@@ -1,8 +1,8 @@
-package calculator.utils;
+package lotto.utils;
 
-public class StringUtils {
+public class LottoStringUtils {
 
-	private StringUtils() {}
+	private LottoStringUtils() {}
 
 	public static boolean isEmpty(String value) {
 		return value == null || value.isEmpty();
