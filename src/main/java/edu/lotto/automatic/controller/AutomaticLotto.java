@@ -26,6 +26,7 @@ public class AutomaticLotto {
 		Lottos lottos = new Lottos(perchaseAmount);
 		List<Integer> winningNumbers = getLatestWinningNumbers();
 		logger.info("지난주 정답 : " + winningNumbers.toString());
+		lottos.setWinningNumberMatchesCount(winningNumbers);
 	}
 
 	/**
@@ -64,7 +65,7 @@ public class AutomaticLotto {
 		Scanner scan = new Scanner(System.in);
 		String winningNumbers = scan.next().trim();
 		if (!NumberUtil.checkInputWinningNumbersValidation(winningNumbers)) {
-			System.out.println("지난 주 당첨 번호는 1~45 사이의 숫자 6자리입니다.");
+			System.out.println(MessageConstants.LATEST_WINNING_NUMBERS_ERROR_MESSAGE);
 			winningNumbers = getLatestWinningNumbersByUserInput();
 		}
 		return winningNumbers;

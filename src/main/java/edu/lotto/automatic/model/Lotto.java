@@ -5,6 +5,7 @@ import edu.lotto.automatic.utils.NumberUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * 로또 번호를 저장하는 Model
@@ -13,7 +14,10 @@ import java.util.List;
  */
 public class Lotto {
 
+	private static Logger logger = Logger.getLogger(Lotto.class.getName());
+
 	private List<Integer> lottoNumbers;
+	private long winningNumberMatchesCount;
 
 	public Lotto() {
 		this.lottoNumbers = setLottoNumber();
@@ -42,5 +46,14 @@ public class Lotto {
 		if(!lottoNumberList.contains(randomNumber)) {
 			lottoNumberList.add(randomNumber);
 		}
+	}
+
+	/**
+	 * 지난주 정답과 로또 번호가 몇개 일치하는지 확인
+	 * @param winningNumbers
+	 */
+	public void setWinningNumberMatchesCount(List<Integer> winningNumbers) {
+		this.winningNumberMatchesCount = this.lottoNumbers.stream().filter(number -> winningNumbers.contains(number)).count();
+		logger.info("winningNumberMatchesCount : " + this.winningNumberMatchesCount);
 	}
 }

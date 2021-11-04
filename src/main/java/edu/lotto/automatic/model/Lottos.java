@@ -4,8 +4,16 @@ import edu.lotto.automatic.utils.NumberUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+/**
+ * Lottos - Lotto의 일급컬렉션
+ * @since 2021.11.04
+ * @author Inmook,Jeong
+ */
 public class Lottos {
+
+	private static Logger logger = Logger.getLogger(Lottos.class.getName());
 
 	private int perchaseAmount;
 	private int threeMatches;
@@ -32,5 +40,15 @@ public class Lottos {
 			lottos.add(new Lotto());
 		}
 		return lottos;
+	}
+
+	/**
+	 * 지난주 정답이 로또 리스트의 로또 번호와 일치하는 숫자가 몇개인지 설정
+	 * @param winningNumbers
+	 */
+	public void setWinningNumberMatchesCount(List<Integer> winningNumbers) {
+		for(Lotto lotto : this.lottos) {
+			lotto.setWinningNumberMatchesCount(winningNumbers);
+		}
 	}
 }
