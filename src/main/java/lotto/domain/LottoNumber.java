@@ -19,10 +19,9 @@ public class LottoNumber {
         lottoNumbers = sortAsc(autoLottoNumbers);
     }
 
-    public LottoNumber(List<Integer> activeNumbers) {
-        List<Number> activeLottoNumbers = getActiveLottoNumbers(activeNumbers);
-        validateLottoNumbersSize(activeLottoNumbers);
-        lottoNumbers = sortAsc(activeLottoNumbers);
+    public LottoNumber(List<Number> activeNumbers) {
+        validateLottoNumbersSize(activeNumbers);
+        lottoNumbers = sortAsc(activeNumbers);
     }
 
     private List<Number> getAutoLottoNumbers() {
@@ -31,12 +30,6 @@ public class LottoNumber {
             numbers.add(getRandomNumber());
         }
         return new ArrayList<>(numbers);
-    }
-
-    private List<Number> getActiveLottoNumbers(List<Integer> activeNumbers) {
-        return activeNumbers.stream()
-                .map(Number::new)
-                .collect(Collectors.toList());
     }
 
     private Number getRandomNumber() {
