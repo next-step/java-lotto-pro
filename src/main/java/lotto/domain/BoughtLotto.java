@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.exception.InvalidMoneyException;
 
 public class BoughtLotto {
-    private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1_000;
 
     private int boughtMoney;
 
