@@ -4,6 +4,7 @@ import lotto.exception.DuplicateNumberException;
 import lotto.exception.LottoSizeException;
 
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 import static lotto.common.LottoConst.LOTTO_SIZE;
@@ -44,5 +45,12 @@ public class LottoNumbers {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner joiner = new StringJoiner(",", "[", "]");
+        lottoNumbers.stream().forEach(lottoNumber -> joiner.add(String.valueOf(lottoNumber.getNumber())));
+        return joiner.toString();
     }
 }

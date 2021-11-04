@@ -9,7 +9,7 @@ public class AutoGeneratorTest {
 
     @Test
     public void createTest() {
-        assertThat(new AutoGenerator().createLotto())
+        assertThat(AutoGenerator.getInstance().createLotto())
                 .isInstanceOf(LottoNumbers.class);
     }
 }

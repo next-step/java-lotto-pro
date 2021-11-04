@@ -12,10 +12,20 @@ import static lotto.common.LottoConst.*;
 
 public class AutoGenerator implements NumberGeneratorStrategy {
 
-    public static final List<Integer> ALL_LOTTO_NUMBERS =
-            IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
-                    .boxed()
-                    .collect(Collectors.toList());
+    public static final List<Integer> ALL_LOTTO_NUMBERS = createNumbers();
+
+    private AutoGenerator() {
+    }
+
+    public static AutoGenerator getInstance() {
+        return AutoGenerator.LazyHolder.INSTANCE;
+    }
+
+    private static List<Integer> createNumbers() {
+        return IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
+    }
 
     @Override
     public LottoNumbers createLotto() {
@@ -28,5 +38,9 @@ public class AutoGenerator implements NumberGeneratorStrategy {
                         .limit(LOTTO_SIZE)
                         .collect(Collectors.toList())
         );
+    }
+
+    private static class LazyHolder {
+        public static final AutoGenerator INSTANCE = new AutoGenerator();
     }
 }

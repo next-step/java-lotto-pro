@@ -18,4 +18,8 @@ public class LottoNumber {
             throw new LottoNumberRangeException();
         }
     }
+
+    public int getNumber() {
+        return number;
+    }
 }

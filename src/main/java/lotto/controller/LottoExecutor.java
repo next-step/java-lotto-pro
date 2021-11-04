@@ -1,8 +1,10 @@
 package lotto.controller;
 
 import lotto.domain.BoughtLotto;
+import lotto.domain.LottoTicket;
 
 import static lotto.view.ConsoleView.outputBoughtLotto;
+import static lotto.view.ConsoleView.outputLottoTicket;
 
 public class LottoExecutor {
 
@@ -15,5 +17,7 @@ public class LottoExecutor {
     public void run() {
         BoughtLotto boughtLotto = lottoController.buyLotto();
         outputBoughtLotto(boughtLotto.getBoughtCount());
+        LottoTicket lottoTicket = lottoController.generateLottoTicket(boughtLotto);
+        outputLottoTicket(lottoTicket);
     }
 }
