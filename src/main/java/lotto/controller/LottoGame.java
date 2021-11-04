@@ -16,25 +16,16 @@ public class LottoGame {
     }
 
     public void start() {
-        Money money = LottoView.getMoney();
+        final Money money = LottoView.getMoney();
+        final Lottos lottos = new Lottos(money, randomNumbers);
 
-        int count = money.buy();
-        List<Lotto> lottos = IntStream.range(0, count)
-                .mapToObj(number -> new Lotto(this.randomNumbers.random()))
-                .collect(Collectors.toList());
-
-        LottoView.displayCount(count);
+        LottoView.displayCount(money);
         LottoView.displayLottos(lottos);
 
-        Lotto winningLotto = LottoView.getWinningLotto();
+        final Lotto winningLotto = LottoView.getWinningLotto();
+        final List<Rank> ranks = lottos.match(winningLotto);
 
-        final List<Rank> ranks = lottos.stream()
-                .map(lotto -> Rank.rank(winningLotto.match(lotto)))
-                .collect(Collectors.toList());
-
-        final Result result = new Result(ranks, money);
-
-        LottoView.displayStatic(result);
+        LottoView.displayStatic(new Result(ranks, money));
     }
 
     public static void main(String[] args) {

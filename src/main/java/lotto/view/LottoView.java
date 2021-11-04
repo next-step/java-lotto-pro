@@ -1,11 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Money;
-import lotto.domain.Rank;
-import lotto.domain.Result;
+import lotto.domain.*;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -22,8 +18,12 @@ public class LottoView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void displayLottos(List<Lotto> lottos) {
-        lottos.stream()
+    public static void displayCount(Money money) {
+        displayCount(money.buy());
+    }
+
+    public static void displayLottos(Lottos lottos) {
+        lottos.getLottos()
                 .forEach(LottoView::displayLotto);
     }
 

@@ -16,6 +16,10 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    public Lottos(Money money, Numbers numbers) {
+        this(money.buy(), numbers);
+    }
+
     public List<Lotto> getLottos() {
         return this.lottos;
     }
