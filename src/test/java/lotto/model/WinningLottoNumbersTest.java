@@ -88,8 +88,8 @@ class WinningLottoNumbersTest {
 	@ParameterizedTest(name = "index {0} ===> input {1}")
 	@ValueSource(strings = {
 		"1, 2,3, 4,5,6",
-		"5 ,6, 12, 34, 33, 23",
-		"2,10,11,12,13,41"
+		"1 ,6, 12, 34, 33, 23",
+		"1,10,11,12,13,41"
 	})
 	void 입력된_문자열로_당첨번호_생성테스트(String input) {
 		// given // when
@@ -97,8 +97,8 @@ class WinningLottoNumbersTest {
 
 		// then
 		assertAll(
-			() -> assertThat(winningLottoNumbers.getWinninglottoNumberList()).isInstanceOf(List.class),
-			() -> assertThat(winningLottoNumbers.getWinninglottoNumberList()).isNotEmpty()
+			() -> assertThat(winningLottoNumbers.size()).isEqualTo(6),
+			() -> assertThat(winningLottoNumbers.containsLottoNumber(new LottoNumber(1))).isTrue()
 		);
 	}
 }

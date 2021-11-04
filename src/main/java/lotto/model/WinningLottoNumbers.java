@@ -21,10 +21,6 @@ public class WinningLottoNumbers {
 		this.winninglottoNumberList = generateWinningLottoNumbers(input);
 	}
 
-	public List<LottoNumber> getWinninglottoNumberList() {
-		return winninglottoNumberList;
-	}
-
 	private String[] splitInputNumbers(String input) {
 		return input.replaceAll(REPLACE_REGEX, EMPTY_STRING).split(SEPARATOR);
 	}
@@ -52,5 +48,13 @@ public class WinningLottoNumbers {
 			lottoNumberList.add(new LottoNumber(Integer.parseInt(number)));
 		}
 		return lottoNumberList;
+	}
+
+	public int size() {
+		return winninglottoNumberList.size();
+	}
+
+	public boolean containsLottoNumber(LottoNumber lottoNumber) {
+		return winninglottoNumberList.contains(lottoNumber);
 	}
 }
