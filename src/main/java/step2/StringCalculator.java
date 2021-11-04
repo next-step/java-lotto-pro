@@ -17,7 +17,7 @@ public class StringCalculator {
         }
 
         if (inputValue.length() > 1) {
-            String[] split = inputValue.split(",");
+            String[] split = inputValue.split(",|:");
             return sum(split);
         }
 

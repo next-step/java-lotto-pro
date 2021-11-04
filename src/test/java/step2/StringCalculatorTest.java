@@ -29,4 +29,12 @@ public class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator("3,4");
         assertThat(calculator.result()).isEqualTo(7);
     }
+
+    @Test
+    @DisplayName("컴마(,) 외에 콜론(:)을 사용하여 합을 수할 수 있다.")
+    void colonAndCommaSplitSum() {
+        StringCalculator calculator = new StringCalculator("1,2:3");
+        assertThat(calculator.result()).isEqualTo(6);
+    }
+
 }
