@@ -16,6 +16,14 @@ class StringDelimitersTest {
 	}
 
 	@Test
+	@DisplayName("구분자가 비어있는 상태로 객체화하면 IllegalArgumentException")
+	void instance_emptyDelimiter_thrownIllegalArgumentException() {
+		assertThatIllegalArgumentException()
+			.isThrownBy(() -> StringDelimiters.of())
+			.withMessage("'delimiters' must not be empty");
+	}
+
+	@Test
 	@DisplayName("null 구분자가 포함되어 객체화하면 IllegalArgumentException")
 	void instance_containsNull_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()

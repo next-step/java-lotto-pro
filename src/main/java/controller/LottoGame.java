@@ -4,12 +4,12 @@ import model.Income;
 import model.LottoRule;
 import model.LottoStore;
 import model.Lottos;
+import model.Money;
 import model.RandomLottoMachine;
 import model.Score;
 import model.Seller;
-import model.WinnerLottoGenerator;
-import model.Money;
 import model.StringSeparator;
+import model.WinnerLottoGenerator;
 import view.IncomeView;
 import view.InputView;
 import view.LottosView;
@@ -24,7 +24,8 @@ public final class LottoGame {
 	private final Money lottoPrice;
 	private final LottoRule rule;
 
-	public LottoGame(int lottoPrice, LottoRule rule) {
+	private LottoGame(int lottoPrice, LottoRule rule) {
+		validate(rule);
 		this.lottoPrice = Money.from(lottoPrice);
 		this.rule = rule;
 	}
@@ -47,5 +48,11 @@ public final class LottoGame {
 
 		SCORE_VIEW.view(score);
 		INCOME_VIEW.view(Income.of(lottoPrice, lottos.size(), score.prizeMoney()));
+	}
+
+	private void validate(LottoRule rule) {
+		if (rule == null) {
+			throw new IllegalArgumentException("'rule' must not be null");
+		}
 	}
 }

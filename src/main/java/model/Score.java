@@ -16,7 +16,7 @@ public final class Score {
 		this.lottoRanks = lottoRanks;
 	}
 
-	public static Score from(Collection<LottoRank> lottoRanks) {
+	static Score from(Collection<LottoRank> lottoRanks) {
 		return new Score(lottoRanks);
 	}
 

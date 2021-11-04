@@ -5,7 +5,7 @@ public final class Seller {
 	private final Money price;
 	private final LottoGenerator generator;
 
-	public Seller(Money price, LottoGenerator generator) {
+	private Seller(Money price, LottoGenerator generator) {
 		validate(price);
 		validate(generator);
 		this.price = price;

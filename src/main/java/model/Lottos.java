@@ -13,7 +13,7 @@ public final class Lottos {
 		this.collection = collection;
 	}
 
-	public static Lottos from(Collection<Lotto> collection) {
+	static Lottos from(Collection<Lotto> collection) {
 		return new Lottos(collection);
 	}
 
