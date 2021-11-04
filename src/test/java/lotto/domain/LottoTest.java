@@ -32,4 +32,10 @@ public class LottoTest {
         Lotto 당첨_로또 = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
         assertThat(당첨_로또.match(구입한_로또)).isEqualTo(3);
     }
+
+    @Test
+    void 숫자_문자열로_생성한다() {
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    }
 }

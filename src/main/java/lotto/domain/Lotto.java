@@ -1,10 +1,12 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     private static final int MAX_SIZE = 6;
+    private static final String DELIMITER = ",";
 
     private final Set<LottoNumber> lotto = new HashSet();
 
@@ -13,6 +15,13 @@ public class Lotto {
             this.lotto.add(new LottoNumber(number));
         }
         check();
+    }
+
+    public Lotto(final String numbers) {
+        this(Arrays.stream(numbers.split(DELIMITER))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
     }
 
     private void check() {

@@ -15,6 +15,7 @@
 `Lotto`는 6개의 `LottoNumber`를 가진다
 `Lotto`는 `LottoNumber`는 중복되지 않는다
 `Lotto`는 `Lotto` 와 비교하여 당첨번호 개수를 반환한다
+`Lotto`는 6자리의 숫자 문자열을 받아 생성한다
 
 로또 번호 (`LottoNumber`)
 `LottoNumber`는 `number`를 가진다
