@@ -14,7 +14,6 @@ public class WinningResult {
     private static final int DEFAULT_MATCH_COUNT = 0;
 
     private final WinningNumbers winningNumbers;
-    private final BonusNumber bonusNumber;
     private final Map<LottoRank, Integer> winningResult;
 
     private Map<LottoRank, Integer> generate() {
@@ -24,9 +23,8 @@ public class WinningResult {
         return map;
     }
 
-    public WinningResult(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+    public WinningResult(WinningNumbers winningNumbers) {
         this.winningNumbers = winningNumbers;
-        this.bonusNumber = bonusNumber;
         this.winningResult = generate();
     }
 
@@ -36,7 +34,7 @@ public class WinningResult {
 
     private void addWinningCount(LottoTicket lottoTicket) {
         Set<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
-        LottoRank key = LottoRank.findBy(winningNumbers.matchCount(lottoNumbers), bonusNumber.isMatch(lottoNumbers));
+        LottoRank key = LottoRank.findBy(winningNumbers.matchCount(lottoNumbers), winningNumbers.isMatchBonus(lottoNumbers));
         winningResult.put(key, winningResult.get(key) + 1);
     }
 

@@ -16,11 +16,10 @@ class WinningResultTest {
     @DisplayName("당첨 순위별로 당첨된 로또 티켓 개수를 조회한다.")
     void createWinningResult() {
         //given
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        BonusNumber bonusNumber = new BonusNumber(winningNumbers, 7);
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         //when
-        WinningResult winningResult = new WinningResult(winningNumbers, bonusNumber);
+        WinningResult winningResult = new WinningResult(winningNumbers);
         winningResult.aggregate(lottoTickets());
 
         //then

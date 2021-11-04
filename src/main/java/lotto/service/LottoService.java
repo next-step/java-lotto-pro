@@ -4,7 +4,6 @@ import lotto.domain.lotto.LottoTicketVendingMachine;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.purchase.PurchaseAmount;
 import lotto.domain.purchase.PurchaseMoney;
-import lotto.domain.winning.BonusNumber;
 import lotto.domain.winning.WinningNumbers;
 import lotto.domain.winning.WinningResult;
 import lotto.domain.winning.WinningStatistics;
@@ -30,10 +29,8 @@ public class LottoService {
     }
 
     public WinningResult getWinningResult(String inputWinningNumbers, String inputBonusNumber) {
-        WinningNumbers winningNumbers = new WinningNumbers(StringUtil.splitParseInt(inputWinningNumbers));
-        BonusNumber bonusNumber = new BonusNumber(winningNumbers, StringUtil.parseIntFrom(inputBonusNumber));
-
-        WinningResult winningResult = new WinningResult(winningNumbers, bonusNumber);
+        WinningNumbers winningNumbers = new WinningNumbers(StringUtil.splitParseInt(inputWinningNumbers), StringUtil.parseIntFrom(inputBonusNumber));
+        WinningResult winningResult = new WinningResult(winningNumbers);
         winningResult.aggregate(lottoTickets);
 
         return winningResult;

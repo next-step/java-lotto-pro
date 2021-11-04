@@ -17,10 +17,9 @@ class WinningStatisticsTest {
     void profit_rate() {
         //given
         PurchaseMoney purchaseMoney = new PurchaseMoney(5000);
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        BonusNumber bonusNumber = new BonusNumber(winningNumbers, 7);
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
-        WinningResult winningResult = new WinningResult(winningNumbers, bonusNumber);
+        WinningResult winningResult = new WinningResult(winningNumbers);
         winningResult.aggregate(lottoTickets());
 
         //when

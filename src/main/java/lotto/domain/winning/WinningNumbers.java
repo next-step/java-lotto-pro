@@ -11,30 +11,35 @@ import java.util.stream.Collectors;
 public class WinningNumbers {
 
     private final LottoTicket winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumbers(Set<LottoNumber> winningNumbers) {
+    public WinningNumbers(Set<LottoNumber> winningNumbers, int bonusNumber) {
+        validateDuplication(winningNumbers, new LottoNumber(bonusNumber));
         this.winningNumbers = new LottoTicket(winningNumbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public WinningNumbers(List<Integer> numbers) {
-        this(numbers.stream()
+    public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
+        this(winningNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet()), bonusNumber);
+    }
+
+    private void validateDuplication(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호가 당첨 번호와 중복됩니다.");
+        }
     }
 
     public int matchCount(Set<LottoNumber> lottoNumbers) {
         return (int) lottoNumbers.stream()
-                .filter(this::matchNumber)
+                .filter(winningNumbers::isContains)
                 .count();
     }
 
-    public boolean matchNumber(LottoNumber lottoNumber) {
-        return winningNumbers.isContains(lottoNumber);
-    }
-
-    public boolean isContains(int bonusNumber) {
-        return winningNumbers.getLottoNumbers().stream()
-                .anyMatch(winningNumber -> winningNumber.getLottoNumber() == bonusNumber);
+    public boolean isMatchBonus(Set<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.getLottoNumber() == bonusNumber.getLottoNumber());
     }
 
     public Set<LottoNumber> getWinningNumbers() {
