@@ -17,8 +17,8 @@ public class LottoTest {
     @DisplayName("금액에 따라 로또 구입개수 확인")
     public void purchaseLotto(int purchaseAmount) {
         Lotto lotto = new Lotto(purchaseAmount);
+
         assertThat(lotto.getLottoNumbers().size()).isEqualTo(15);
-        outputView.printPurchaseLottoList(lotto);
     }
 
     @ParameterizedTest
