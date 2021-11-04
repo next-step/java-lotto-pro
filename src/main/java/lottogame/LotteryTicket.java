@@ -1,21 +1,22 @@
 package lottogame;
 
-import java.util.Collection;
-import java.util.List;
-
 public class LotteryTicket {
 
-	private List<Integer> lotteryNumbers;
+	private LotteryNumberGroup lotteryNumberGroup;
 
-	private LotteryTicket(List<Integer> lotteryNumber) {
-		this.lotteryNumbers = lotteryNumber;
+	private LotteryTicket(LotteryNumberGroup lotteryNumber) {
+		this.lotteryNumberGroup = lotteryNumber;
 	}
 
 	public static LotteryTicket makeLotteryTicket() {
 		return new LotteryTicket(LotteryNumberMaker.makelotteryNumbers());
 	}
 
-	public List<Integer> getLotteryNumbers() {
-		return lotteryNumbers;
+	public LotteryNumberGroup getLotteryNumberGroup() {
+		return lotteryNumberGroup;
+	}
+
+	public int numOfNumbersInGroup(){
+		return lotteryNumberGroup.getLotteryNumbers().size();
 	}
 }
