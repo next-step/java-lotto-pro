@@ -1,4 +1,4 @@
-package study;
+package calculator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,10 +8,13 @@ public class StringAddCalculator {
 	public static final String REGEX_DEFAULT_DELIMITER = ",|:";
 	public static final String REGEX_CUSTOM_DELIMITER = "//(.)\\n(.*)";
 	public static final String REGEX_TEXT = "\\D";
+	public static final int ZERO = 0;
+
+	private static Pattern compile = Pattern.compile(REGEX_CUSTOM_DELIMITER);
 
 	public static int splitAndSum(String text) {
 		if (isEmpty(text)) {
-			return 0;
+			return ZERO;
 		}
 		if (isCustomDelimiter(text)) {
 			return customDelimiterSum(text);
@@ -20,13 +23,13 @@ public class StringAddCalculator {
 	}
 
 	private static int customDelimiterSum(String text) {
-		Matcher matcher = Pattern.compile(REGEX_CUSTOM_DELIMITER).matcher(text);
+		Matcher matcher = compile.matcher(text);
 		if (matcher.find()) {
 			String customDelimiter = matcher.group(1);
 			String[] tokens = split(matcher.group(2), customDelimiter);
 			return sum(tokens);
 		}
-		return 0;
+		return ZERO;
 	}
 
 	private static boolean isCustomDelimiter(String text) {
