@@ -7,6 +7,8 @@ import java.util.Set;
 import lotto.util.SplitUtil;
 
 public class WinningLottoNumbers {
+	private static final int COUNT_VALUE = 1;
+	private static final int NOT_COUNT_VALUE = 0;
 
 	private LottoNumbers winninglottoNumbers;
 
@@ -44,5 +46,12 @@ public class WinningLottoNumbers {
 
 	public boolean containsLottoNumber(LottoNumber lottoNumber) {
 		return winninglottoNumbers.containsLottoNumber(lottoNumber);
+	}
+
+	public int containsCountLottoNumber(LottoNumber lottoNumber) {
+		if (containsLottoNumber(lottoNumber)) {
+			return COUNT_VALUE;
+		}
+		return NOT_COUNT_VALUE;
 	}
 }
