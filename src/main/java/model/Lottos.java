@@ -18,4 +18,20 @@ public class Lottos {
 
 		return new Lottos(values);
 	}
+
+	public MatchResult matchResult(LastWeekWinningNumber lastWeekWinningNumber) {
+		MatchResult matchResult = new MatchResult();
+
+		values.stream()
+			.forEach(lotto -> {
+				int matchCount = lotto.matchCount(lastWeekWinningNumber.getValue());
+				matchResult.increaseByMatchCount(matchCount);
+			});
+
+		return matchResult;
+	}
+
+	public List<Lotto> getValues() {
+		return values;
+	}
 }
