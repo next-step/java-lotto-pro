@@ -55,6 +55,13 @@ public class LottoNumbersTest {
 		);
 	}
 
+	private static Stream<Arguments> containsArguments() {
+		return Stream.of(
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 1, true),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7, false)
+		);
+	}
+
 	@DisplayName("로또 번호들을 생성한다. 로또 번호들은 중복되지 않으며 오름차순으로 6개이다.")
 	@ParameterizedTest
 	@MethodSource("validNumbers")
@@ -92,5 +99,20 @@ public class LottoNumbersTest {
 	void match(List<Integer> first, List<Integer> second, int countOfMatch) {
 		// given & when & then
 		assertThat(LottoNumbers.match(new LottoNumbers(first), new LottoNumbers(second))).isEqualTo(countOfMatch);
+	}
+
+	@DisplayName("로또 번호들이 로또 번호를 포함하는지 확인한다.")
+	@ParameterizedTest
+	@MethodSource("containsArguments")
+	void contains(List<Integer> numbers, int number, boolean expected) {
+		// given
+		LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+		LottoNumber lottoNumber = new LottoNumber(number);
+
+		// when
+		boolean actual = lottoNumbers.contains(lottoNumber);
+
+		// then
+		assertThat(actual).isEqualTo(expected);
 	}
 }

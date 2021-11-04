@@ -14,21 +14,22 @@ class LottoRankTest {
 
 	private static Stream<Arguments> valueOfArguments() {
 		return Stream.of(
-			Arguments.of(6, LottoRank.FIRST),
-			Arguments.of(5, LottoRank.THIRD),
-			Arguments.of(4, LottoRank.FOURTH),
-			Arguments.of(3, LottoRank.FIFTH),
-			Arguments.of(2, LottoRank.MISS),
-			Arguments.of(1, LottoRank.MISS),
-			Arguments.of(0, LottoRank.MISS)
+			Arguments.of(6, false, LottoRank.FIRST),
+			Arguments.of(5, true, LottoRank.SECOND),
+			Arguments.of(5, false, LottoRank.THIRD),
+			Arguments.of(4, false, LottoRank.FOURTH),
+			Arguments.of(3, false, LottoRank.FIFTH),
+			Arguments.of(2, false, LottoRank.MISS),
+			Arguments.of(1, false, LottoRank.MISS),
+			Arguments.of(0, false, LottoRank.MISS)
 		);
 	}
 
 	@DisplayName("숫자를 맞힌 수로부터 순위를 알 수 있다.")
 	@ParameterizedTest
 	@MethodSource(value = "valueOfArguments")
-	void valueOf(int countOfMatch, LottoRank lottoRank) {
+	void valueOf(int countOfMatch, boolean matchBonus, LottoRank lottoRank) {
 		// given & when & then
-		assertThat(LottoRank.valueOf(countOfMatch)).isEqualTo(lottoRank);
+		assertThat(LottoRank.valueOf(countOfMatch, matchBonus)).isEqualTo(lottoRank);
 	}
 }

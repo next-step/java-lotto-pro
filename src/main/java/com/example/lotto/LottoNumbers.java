@@ -53,4 +53,8 @@ public class LottoNumbers {
 
 		return String.join(", ", elements);
 	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return values.contains(lottoNumber);
+	}
 }

@@ -12,16 +12,10 @@ public class LottoStatistic {
 	private final long purchaseAmount;
 	private final Map<LottoRank, Long> lottoRankToCount;
 
-	public LottoStatistic(long purchaseAmount, LottoGames lottoGames, LottoNumbers winningLottoNumbers) {
+	public LottoStatistic(long purchaseAmount, LottoGames lottoGames, WinningLottoNumbers winningLottoNumbers) {
 		this.purchaseAmount = purchaseAmount;
 		this.lottoRankToCount = defaultLottoRankToCount();
-		this.lottoRankToCount.putAll(lottoGames.getValues().stream()
-			.map(lottoGame -> LottoNumbers.match(lottoGame.getLottoNumbers(), winningLottoNumbers))
-			.map(LottoRank::valueOf)
-			.filter(lottoRank -> !lottoRank.isMiss())
-			.collect(Collectors.groupingBy(
-				Function.identity(),
-				Collectors.counting())));
+		addResultsToLottoRankToCount(lottoGames, winningLottoNumbers);
 	}
 
 	private Map<LottoRank, Long> defaultLottoRankToCount() {
@@ -35,6 +29,17 @@ public class LottoStatistic {
 		}
 
 		return map;
+	}
+
+	private void addResultsToLottoRankToCount(LottoGames lottoGames, WinningLottoNumbers winningLottoNumbers) {
+		this.lottoRankToCount.putAll(lottoGames.getValues().stream()
+			.map(lottoGame -> {
+				int countOfMatch = LottoNumbers.match(lottoGame.getLottoNumbers(), winningLottoNumbers.getBaseNumbers());
+				boolean matchBonus = lottoGame.getLottoNumbers().contains(winningLottoNumbers.getBonusNumber());
+				return LottoRank.valueOf(countOfMatch, matchBonus);
+			})
+			.filter(lottoRank -> !lottoRank.isMiss())
+			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
 	}
 
 	private long getTotalWinningMoney() {

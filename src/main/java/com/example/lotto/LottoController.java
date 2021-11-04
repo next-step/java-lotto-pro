@@ -27,8 +27,11 @@ public class LottoController {
 
 	private void check() {
 		OutputView.print("지난 주 당첨 번호를 입력해 주세요.");
-		LottoNumbers winningLottoNumbers = new LottoNumbers(InputView.inputLastWeekWinningLottoNumbers());
+		LottoNumbers baseNumbers = new LottoNumbers(InputView.InputBaseWinningLottoNumbers());
+		OutputView.print("보너스 볼을 입력해 주세요.");
+		LottoNumber bonusNumber = new LottoNumber(InputView.InputBonusWinningLottoNumber());
 
+		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(baseNumbers, bonusNumber);
 		LottoStatistic lottoStatistic = new LottoStatistic(purchaseAmount, lottoGames, winningLottoNumbers);
 		OutputView.print(lottoStatistic.toString());
 	}
