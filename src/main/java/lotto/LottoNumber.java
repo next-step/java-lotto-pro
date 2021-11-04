@@ -16,7 +16,7 @@ public class LottoNumber {
 
     private void validate(int number) {
         if (!isValidNumber(number)) {
-            throw new IllegalArgumentException("로또 숫자는 1~45 사이의 숫자여야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR.getMessage());
         }
     }
 

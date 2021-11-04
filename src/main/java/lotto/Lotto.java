@@ -18,7 +18,7 @@ public class Lotto {
 
     private void validate(List<Integer> numbers) {
         if (isDuplicated(numbers)) {
-            throw new IllegalArgumentException("로또 숫자는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
         }
     }
 
