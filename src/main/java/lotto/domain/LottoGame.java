@@ -6,9 +6,8 @@ import static lotto.view.OutputView.*;
 public class LottoGame {
 
     public void run() {
-        int purchaseAmount = getPurchaseAmount();
         // 로또를 구매한다. (금액, 구입수량)
-        LottoPurchase lottoPurchase = new LottoPurchase(purchaseAmount);
+        LottoPurchase lottoPurchase = getPurchaseAmount();
         // 로또 구매 개수를 출력한다.
         printPurchaseQuantity(lottoPurchase.getPurchaseQuantity());
         // 로또를 발급한다. (구입수량)
@@ -19,8 +18,8 @@ public class LottoGame {
         // 당첨번호를 확인한다.
     }
 
-    private int getPurchaseAmount() {
+    private LottoPurchase getPurchaseAmount() {
         printPurchaseAmount();
-        return inputPurchaseAmount();
+        return new LottoPurchase(inputPurchaseAmount());
     }
 }
