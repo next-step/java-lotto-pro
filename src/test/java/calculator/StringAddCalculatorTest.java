@@ -2,6 +2,8 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -56,5 +58,22 @@ public class StringAddCalculatorTest {
 	public void splitAndSum_negative() {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
 			.isInstanceOf(RuntimeException.class);
+	}
+
+	@Test
+	@DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생한다. (given-when-then 구조 분리 연습)")
+	public void splitAndSum_negative_given_when_then() {
+		// when then
+		Assertions.assertThatExceptionOfType(RuntimeException.class)
+			.isThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+			.withMessage(StringAddCalculator.OUT_OF_MINIMUM_NUMBER_RANGE_ERROR_MSG);
+
+		// when
+		ThrowableAssert.ThrowingCallable throwingCallable = () -> StringAddCalculator.splitAndSum("-1,2,3");
+
+		// then
+		Assertions.assertThatExceptionOfType(RuntimeException.class)
+			.isThrownBy(throwingCallable)
+			.withMessageMatching(StringAddCalculator.OUT_OF_MINIMUM_NUMBER_RANGE_ERROR_MSG);
 	}
 }
