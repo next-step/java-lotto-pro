@@ -3,6 +3,7 @@ package edu.lotto.automatic.model;
 import edu.lotto.automatic.utils.NumberUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ public class Lotto {
 		while(lottoNumberList.size() < 6) {
 			addNotDuplicatedNumber(lottoNumberList);
 		}
+		Collections.sort(lottoNumberList);
 		return lottoNumberList;
 	}
 
