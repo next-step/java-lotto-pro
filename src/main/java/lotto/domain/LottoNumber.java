@@ -44,7 +44,7 @@ public class LottoNumber {
     }
 
     private void validateActiveLottoSize(List<Integer> activeNumbers) {
-        if (activeNumbers.size() != LOTTO_SIZE) {
+        if (activeNumbers == null || activeNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("[ERROR] 숫자 입력 필수 자리수 : " + LOTTO_SIZE);
         }
     }

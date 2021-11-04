@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,6 +56,18 @@ public class LottoNumberTest {
 
         assertThatThrownBy(() -> {
             List<Number> numbers = lottoNumber.getLottoNumber(activeNumbers);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+
+    }
+
+    @Test
+    @DisplayName("로또 번호 null 검증")
+    public void activeLottoNull() {
+        LottoNumber lottoNumber = new LottoNumber();
+
+        assertThatThrownBy(() -> {
+            List<Number> numbers = lottoNumber.getLottoNumber(null);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
 
