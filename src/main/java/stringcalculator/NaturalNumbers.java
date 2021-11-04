@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class NaturalNumbers {
   private final List<NaturalNumber> items;
-     
+
   public NaturalNumbers(List<NaturalNumber> items) {
     this.items = new ArrayList<>(items);
   }

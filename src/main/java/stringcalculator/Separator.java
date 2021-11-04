@@ -5,7 +5,7 @@ package stringcalculator;
  */
 public class Separator {
   private final String item;
-  
+
   public Separator(String item) {
     this.item = item;
   }

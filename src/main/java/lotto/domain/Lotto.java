@@ -7,6 +7,10 @@ public class Lotto {
     this.value = value;
   }
 
+  public static Lotto valueOf(String ... values) {
+    return new Lotto(LottoNumbers.valueOf(values));
+  }
+
   public String toString() {
     return value.toString();
   }

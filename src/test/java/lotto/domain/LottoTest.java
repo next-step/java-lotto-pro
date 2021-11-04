@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
-  
+
 
   @DisplayName("로또 번호들을 출력한다..")
   @Test

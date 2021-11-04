@@ -14,15 +14,15 @@ public class RandomLottoNumber {
 
   static {
     cachedNumbers = new ArrayList<>();
-    
+
     for (Integer i = 1; i <= 45; i++) {
       cachedNumbers.add(LottoNumber.valueOf(i));
-    }        
+    }
   }
 
   public static List<LottoNumber> generate() {
     Collections.shuffle(cachedNumbers);
-  
+
     return new ArrayList<>(cachedNumbers.subList(0, 6));
   }
 }

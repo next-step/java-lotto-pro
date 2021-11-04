@@ -6,7 +6,7 @@ package stringcalculator;
 public class ParsingElement {
   private final String naturalNumberText;
   private final Separators separators;
-  
+
   public ParsingElement(String numberText, Separators separators) {
     this.naturalNumberText = numberText;
     this.separators = new Separators(separators);
