@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import lottogame.exception.InvalidAmountUnitException;
+import lottogame.exception.InvalidMoneyException;
+import lottogame.exception.NotDivisibleMoneyUnitException;
 import lottogame.exception.NotEnoughtMoneyException;
+import lottogame.exception.NotNumberFormatMoneyException;
 
 public class LotteryTicketIssuer {
 
@@ -29,12 +31,12 @@ public class LotteryTicketIssuer {
 		if (isMoneyTooLittle(money)) {
 			throw new NotEnoughtMoneyException("금액을 " + TICKET_PER_PRICE + "원 이상 입력해주세요.");
 		}
-		if (isNotDividableAmountByPerPrice(money)) {
-			throw new InvalidAmountUnitException("금액은 " + TICKET_PER_PRICE + "원 단위로 입력해주세요.");
+		if (isNotDivisibleMoneyByPerPrice(money)) {
+			throw new NotDivisibleMoneyUnitException("금액은 " + TICKET_PER_PRICE + "원 단위로 입력해주세요.");
 		}
 	}
 
-	private static boolean isNotDividableAmountByPerPrice(int money) {
+	private static boolean isNotDivisibleMoneyByPerPrice(int money) {
 		if ((money % TICKET_PER_PRICE) > 0) {
 			return true;
 		}
@@ -46,5 +48,18 @@ public class LotteryTicketIssuer {
 			return true;
 		}
 		return false;
+	}
+
+	public static List<LotteryTicket> buyTickets(String money) {
+		int convertedMoney = convertMoneyFormatToNumber(money);
+		return buyTickets(convertedMoney);
+	}
+
+	private static int convertMoneyFormatToNumber(String money) {
+		try {
+			return Integer.parseInt(money);
+		}catch(NumberFormatException ex){
+			throw new NotNumberFormatMoneyException("금액을 숫자로 입력해주세요.");
+		}
 	}
 }
