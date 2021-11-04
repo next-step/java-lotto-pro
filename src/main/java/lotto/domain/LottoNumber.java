@@ -10,7 +10,7 @@ public final class LottoNumber {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
-    private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
     private final int number;
 
