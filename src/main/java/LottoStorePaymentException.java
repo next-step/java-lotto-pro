@@ -1,4 +1,4 @@
-public class LottoStorePaymentException extends RuntimeException {
+public class LottoStorePaymentException extends IllegalArgumentException {
 
 	public static final String ERROR_NOT_ENOUGH_KRW = String.format(
 		"지불 금액이 부족해요.(로또 장당 %d%s)"
