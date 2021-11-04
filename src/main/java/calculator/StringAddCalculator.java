@@ -9,8 +9,9 @@ public class StringAddCalculator {
 	private static final Pattern CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
 
 	public static int splitAndSum(String text) {
-		if (isNullOrEmpty(text))
+		if (isNullOrEmpty(text)) {
 			return 0;
+		}
 
 		String[] values = split(text);
 
@@ -43,8 +44,9 @@ public class StringAddCalculator {
 	}
 
 	private static int validatePositiveNumber(int number) {
-		if (number < 0)
+		if (number < 0) {
 			throw new RuntimeException();
+		}
 
 		return number;
 	}
