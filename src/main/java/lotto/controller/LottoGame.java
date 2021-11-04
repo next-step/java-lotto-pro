@@ -3,9 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.LottoView;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.List;
 
 public class LottoGame {
 
@@ -26,10 +24,5 @@ public class LottoGame {
         final List<Rank> ranks = lottos.match(winningLotto);
 
         LottoView.displayStatic(new Result(ranks, money));
-    }
-
-    public static void main(String[] args) {
-        LottoGame game = new LottoGame(new RandomNumbers(new RandomNumber()));
-        game.start();
     }
 }
