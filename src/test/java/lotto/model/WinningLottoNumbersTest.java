@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -51,37 +49,20 @@ class WinningLottoNumbersTest {
 	}
 
 	@Test
-	void 입력된_당첨번호를_자르는_메소드_테스트() throws Exception {
-		// given
-		String input = "1, 2, 3, 4, 5, 6";
-
-		// when
-		Method method = privateMethod("splitInputNumbers");
-		String[] inputArray = (String[])method.invoke(new WinningLottoNumbers(), input);
-
-		// then
-		assertThat(inputArray).hasSize(6);
-	}
-
-	@Test
 	void 입력된_당첨번호를_로또번호_일급_콜렉션으로_만드는_기능테스트() throws Exception {
 		// given
 		String input = "1, 2, 3, 4, 5, 6";
-		List<LottoNumber> lottoNumberList = new ArrayList<>();
-
-		for (int i = 1; i <= LottoNumbers.LOTTO_NUMBERS_SIZE; i++) {
-			lottoNumberList.add(new LottoNumber(i));
-		}
+		LottoNumbers lottoNumbers = new LottoNumbers(input);
 
 		// when
 		Method method = privateMethod("generateWinningLottoNumbers");
-		List<LottoNumber> winningLottoNumbers = (List<LottoNumber>)method.invoke(new WinningLottoNumbers(), input);
+		LottoNumbers winningLottoNumbers = (LottoNumbers)method.invoke(new WinningLottoNumbers(), input);
 
 		// then
 		assertAll(
-			() -> assertThat(winningLottoNumbers).isNotEmpty(),
-			() -> assertThat(winningLottoNumbers).hasSize(LottoNumbers.LOTTO_NUMBERS_SIZE),
-			() -> assertThat(winningLottoNumbers).isEqualTo(lottoNumberList)
+			() -> assertThat(winningLottoNumbers).isNotNull(),
+			() -> assertThat(winningLottoNumbers.size()).isEqualTo(LottoNumbers.LOTTO_NUMBERS_SIZE),
+			() -> assertThat(lottoNumbers.equals(winningLottoNumbers)).isTrue()
 		);
 	}
 
