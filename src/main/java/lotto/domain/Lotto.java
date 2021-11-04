@@ -2,25 +2,17 @@ package lotto.domain;
 
 public class Lotto {
 	private final LottoNumbers lottoNumbers;
-	private final WinningNumbers winningNumbers;
 
 	private Lotto(LottoNumbers lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
-		this.winningNumbers = WinningNumbers.createDefault();
 	}
 
 	public static Lotto of(LottoNumbers lottoNumbers) {
 		return new Lotto(lottoNumbers);
 	}
 
-	public void checkWinningNumbers(WinningNumbers lastWinningNumbers) {
-		for (LottoNumber lottoNumber : this.lottoNumbers.getValues()) {
-			addWinningNumbers(lastWinningNumbers, lottoNumber);
-		}
-	}
-
-	public boolean isWinning() {
-		return this.winningNumbers.isWinning();
+	public int countWinningNumbers(LottoNumbers lastWinningNumbers) {
+		return this.lottoNumbers.countWinningNumbers(lastWinningNumbers);
 	}
 
 	public int getNumberSize() {
@@ -29,15 +21,5 @@ public class Lotto {
 
 	public LottoNumbers getLottoNumbers() {
 		return this.lottoNumbers;
-	}
-
-	public WinningNumbers getWinningNumbers() {
-		return this.winningNumbers;
-	}
-
-	private void addWinningNumbers(WinningNumbers lastWinningNumbers, LottoNumber lottoNumber) {
-		if (lastWinningNumbers.isWinningNumber(lottoNumber)) {
-			this.winningNumbers.add(lottoNumber);
-		}
 	}
 }

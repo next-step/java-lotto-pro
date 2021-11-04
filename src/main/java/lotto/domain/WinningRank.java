@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public enum WinningRank {
-	FIRST_PLACE(6, 2000000000),
-	SECOND_PLACE(5, 1500000),
-	THIRD_PLACE(4, 50000),
-	FOURTH_PLACE(3, 5000),
+	FIRST_PLACE(6, 2_000_000_000),
+	SECOND_PLACE(5, 1_500_000),
+	THIRD_PLACE(4, 50_000),
+	FOURTH_PLACE(3, 5_000),
 	NO_PLACE(0, 0);
 
 	private final int winningNumberCount;
@@ -29,9 +29,13 @@ public enum WinningRank {
 					 .orElse(NO_PLACE);
 	}
 
+	public boolean isWinning(int countWinningNumbers) {
+		return getWinningNumberCount() == countWinningNumbers;
+	}
+
 	public static List<WinningRank> getPlaceRanks() {
 		return Stream.of(FIRST_PLACE, SECOND_PLACE, THIRD_PLACE, FOURTH_PLACE)
-					 .sorted(Comparator.comparing(WinningRank::getWinningNumberCount))
+					 .sorted(Comparator.comparing(WinningRank::getPrizeMoney))
 					 .collect(toList());
 	}
 

@@ -7,26 +7,33 @@ import java.util.List;
 
 public class WinningStatistics {
 	private final Lottos lottos;
+	private final LottoNumbers lastWinningNumbers;
 	private final Money money;
 	private final List<WinningRecord> winningRecords;
 
-	private WinningStatistics(Lottos lottos, Money money) {
+	private WinningStatistics(Lottos lottos, LottoNumbers lastWinningNumbers, Money money) {
 		this.lottos = lottos;
+		this.lastWinningNumbers = lastWinningNumbers;
 		this.money = money;
 		this.winningRecords = new ArrayList<>();
 	}
 
-	public static WinningStatistics createBy(Lottos lottos, Money money) {
-		return new WinningStatistics(lottos, money);
+	public static WinningStatistics createBy(Lottos lottos, LottoNumbers lastWinningNumbers, Money money) {
+		return new WinningStatistics(lottos, lastWinningNumbers, money);
 	}
 
 	public void buildStatistics() {
-		List<Lotto> winningLottos = extractWinningLottos(this.lottos);
-
 		for (WinningRank winningRank : WinningRank.getPlaceRanks()) {
-			int count = countNumberOfWinningRank(winningLottos, winningRank);
+			int count = countNumberOfWinningRank(winningRank);
 			this.winningRecords.add(WinningRecord.of(winningRank, count));
 		}
+	}
+
+	private int countNumberOfWinningRank(WinningRank winningRank) {
+		return (int) this.lottos.getValues()
+								.stream()
+								.filter(lotto -> winningRank.isWinning(lotto.countWinningNumbers(lastWinningNumbers)))
+								.count();
 	}
 
 	public double getRoundedTotalProfitRate() {
@@ -52,19 +59,5 @@ public class WinningStatistics {
 
 	public List<WinningRecord> getWinningRecords() {
 		return winningRecords;
-	}
-
-	private int countNumberOfWinningRank(List<Lotto> winningLottos, WinningRank winningRank) {
-		return (int)winningLottos.stream()
-								 .map(Lotto::getWinningNumbers)
-								 .filter(numbers -> numbers.getSize() == winningRank.getWinningNumberCount())
-								 .count();
-	}
-
-	private List<Lotto> extractWinningLottos(Lottos lottos) {
-		return lottos.getValues()
-					 .stream()
-					 .filter(Lotto::isWinning)
-					 .collect(toList());
 	}
 }

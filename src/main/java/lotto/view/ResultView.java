@@ -49,7 +49,7 @@ public class ResultView {
 	}
 
 	private void printLottoCount(Lottos lottos) {
-		System.out.println(MessageBuilder.build(LOTTO_COUNT_MESSAGE, lottos.getSize()));
+		System.out.println(MessageBuilder.build(LOTTO_COUNT_MESSAGE, lottos.size()));
 	}
 
 	private void newLine() {

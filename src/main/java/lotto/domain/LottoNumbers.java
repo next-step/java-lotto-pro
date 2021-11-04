@@ -16,10 +16,29 @@ public class LottoNumbers {
 	}
 
 	public static LottoNumbers createBy(NumberGenerator numberGenerator) {
-		List<LottoNumber> lottoNumbers = LottoNumberMapper.mapToLottoNumbers(numberGenerator.generate());
+		List<LottoNumber> lottoNumbers = mapToLottoNumbers(numberGenerator.generate());
+		return new LottoNumbers(lottoNumbers);
+	}
+
+	public static LottoNumbers of(List<Integer> numbers) {
+		return new LottoNumbers(mapToLottoNumbers(numbers));
+	}
+
+	private static List<LottoNumber> mapToLottoNumbers(List<Integer> numbers) {
+		List<LottoNumber> lottoNumbers = LottoNumberMapper.mapToLottoNumbers(numbers);
 		LottoNumberValidator.validateLottoNumbers(lottoNumbers);
 
-		return new LottoNumbers(lottoNumbers);
+		return lottoNumbers;
+	}
+
+	public int countWinningNumbers(LottoNumbers lastWinningNumbers) {
+		return (int) this.lottoNumbers.stream()
+									  .filter(lastWinningNumbers::contains)
+									  .count();
+	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return this.lottoNumbers.contains(lottoNumber);
 	}
 
 	public int getSize() {
