@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Lottery {
-    private static final int LOTTO_NUMBER_COUNT = 6;
+    protected static final int LOTTO_NUMBER_COUNT = 6;
     private static final String ILLEGAL_LOTTERY_SIZE_ERROR_MESSAGE =
             "로또는 6개의 서로 다른 로또번호를 가지고 있어야 합니다.";
 
@@ -15,7 +15,7 @@ public class Lottery {
         this.lottoNumbers.addAll(lottoNumbers);
     }
 
-    public static Lottery valueOf(final HashSet<LottoNumber> lottoNumbers) {
+    public static Lottery valueOf(final Set<LottoNumber> lottoNumbers) {
         return new Lottery(lottoNumbers);
     }
 
