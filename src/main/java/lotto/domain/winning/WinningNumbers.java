@@ -3,6 +3,7 @@ package lotto.domain.winning;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,6 +38,6 @@ public class WinningNumbers {
     }
 
     public Set<LottoNumber> getWinningNumbers() {
-        return winningNumbers.getLottoNumbers();
+        return Collections.unmodifiableSet(winningNumbers.getLottoNumbers());
     }
 }
