@@ -29,6 +29,10 @@ public enum Rank {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     private boolean isMatch(int matchCount) {
         return this.count == matchCount;
     }

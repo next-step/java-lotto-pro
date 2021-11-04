@@ -24,6 +24,10 @@ public class Money {
         return price / LOTTO_PRICE;
     }
 
+    public double profitRate(int sum) {
+        return (double) sum / price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
