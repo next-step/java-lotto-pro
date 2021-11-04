@@ -21,12 +21,10 @@ public class AutomaticLotto {
 
 	public static void main(String[] args) {
 		int perchaseAmount = Integer.parseInt(getPerchaseAmount());
-		logger.info("사용자가 입력한 구매 금액 : " + perchaseAmount);
-		logger.info("구매한 로또 갯수 : " + NumberUtil.getLottoCount(perchaseAmount));
 		Lottos lottos = new Lottos(perchaseAmount);
 		List<Integer> winningNumbers = getLatestWinningNumbers();
-		logger.info("지난주 정답 : " + winningNumbers.toString());
 		lottos.setWinningNumberMatchesCount(winningNumbers);
+		lottos.printLottoMatchesCountStatistics();
 	}
 
 	/**

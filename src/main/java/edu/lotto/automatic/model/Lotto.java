@@ -54,6 +54,14 @@ public class Lotto {
 	 */
 	public void setWinningNumberMatchesCount(List<Integer> winningNumbers) {
 		this.winningNumberMatchesCount = this.lottoNumbers.stream().filter(number -> winningNumbers.contains(number)).count();
-		logger.info("winningNumberMatchesCount : " + this.winningNumberMatchesCount);
+		System.out.println("this.winningNumberMatchesCount : " + this.winningNumberMatchesCount);
+	}
+
+	/**
+	 * WinningNumberMatchesCount 가져오기
+	 * @return
+	 */
+	public long getWinningNumberMatchesCount() {
+		return this.winningNumberMatchesCount;
 	}
 }

@@ -1,5 +1,6 @@
 package edu.lotto.automatic.model;
 
+import edu.lotto.automatic.constants.MessageConstants;
 import edu.lotto.automatic.utils.NumberUtil;
 
 import java.util.ArrayList;
@@ -15,11 +16,11 @@ public class Lottos {
 
 	private static Logger logger = Logger.getLogger(Lottos.class.getName());
 
-	private int perchaseAmount;
-	private int threeMatches;
-	private int fourMatches;
-	private int fiveMatches;
-	private int sixMatches;
+	private long perchaseAmount;
+	private long threeMatches;
+	private long fourMatches;
+	private long fiveMatches;
+	private long sixMatches;
 	private List<Lotto> lottos;
 
 	public Lottos(int perchaseAmount) {
@@ -35,7 +36,7 @@ public class Lottos {
 	private List<Lotto> getLottos(int perchaseAmount) {
 		List<Lotto> lottos = new ArrayList<Lotto>();
 		int lottoCount = NumberUtil.getLottoCount(perchaseAmount);
-		System.out.println(lottoCount+"개를 구매했습니다.");
+		System.out.println(lottoCount + MessageConstants.LOTTO_PERCHASE_MESSAGE);
 		for(int i=0; i<lottoCount; i++) {
 			lottos.add(new Lotto());
 		}
@@ -50,5 +51,33 @@ public class Lottos {
 		for(Lotto lotto : this.lottos) {
 			lotto.setWinningNumberMatchesCount(winningNumbers);
 		}
+	}
+
+	public void printLottoMatchesCountStatistics() {
+		System.out.println("\n"+MessageConstants.LOTTO_STATISTICS_MESSAGE);
+		System.out.println("---------");
+		System.out.println(MessageConstants.THREE_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(3) +"개");
+		System.out.println(MessageConstants.FOUR_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(4) +"개");
+		System.out.println(MessageConstants.FIVE_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(5) +"개");
+		System.out.println(MessageConstants.SIX_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(6) +"개");
+		printLottoProfitRatio();
+	}
+
+	private void printLottoProfitRatio() {
+		long profit = (5000 * this.threeMatches)
+				+ (50000 * this.fourMatches)
+				+ (1500000 * this.fiveMatches)
+				+ (2000000000 * this.sixMatches);
+		long profitRatio = Math.round(((new Double(profit)/ new Double(this.perchaseAmount)) * 100) / 100.0);
+		System.out.println("총 수익률은 "+profitRatio+"입니다.");
+	}
+
+	public long getLottoMatchesCountByMatchNumber(long number) {
+		long matchesCount = this.lottos.stream().filter(lotto -> lotto.getWinningNumberMatchesCount() == number).count();
+		if(number == 3) this.threeMatches = matchesCount;
+		if(number == 4) this.fourMatches = matchesCount;
+		if(number == 5) this.fiveMatches = matchesCount;
+		if(number == 6) this.sixMatches = matchesCount;
+		return matchesCount;
 	}
 }
