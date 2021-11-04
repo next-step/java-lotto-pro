@@ -1,17 +1,16 @@
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.Test;
 
 public class CalculatorNumberTest {
 
-	@ParameterizedTest
-	@DisplayName("음수일 경우 true 반환")
-	@CsvSource(value = {"1,false", "0,false", "-1,true"})
-	public void test_isExceptional1(int source, boolean expected) {
-		CalculatorNumber calculatorNumber = new CalculatorNumber(source);
-
-		assertThat(calculatorNumber.isExceptional()).isEqualTo(expected);
+	@Test
+	@DisplayName("음수일 경우 생성시 예외 발생")
+	public void test_constructor1() {
+		assertThatThrownBy(() -> {
+			new CalculatorNumber(-1);
+		}).isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(CalculatorNumber.MESSAGE_ILLEGAL_NEGATIVE_NUMBER);
 	}
 }

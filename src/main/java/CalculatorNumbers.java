@@ -11,10 +11,6 @@ public class CalculatorNumbers {
 		}
 	}
 
-	public boolean containExceptional() {
-		return this.values.stream().anyMatch(CalculatorNumber::isExceptional);
-	}
-
 	public int sum() {
 		return this.values.stream()
 			.mapToInt(CalculatorNumber::getValue)

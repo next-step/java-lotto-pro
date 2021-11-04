@@ -62,7 +62,7 @@ public class StringAddCalculatorTest {
 		assertThatThrownBy(() -> {
 			stringAddCalculator.splitAndSum("-1,2");
 		}).isInstanceOf(IllegalArgumentException.class)
-			.hasMessage(StringAddCalculator.MESSAGE_HAS_NEGATIVE_NUMBER);
+			.hasMessage(CalculatorNumber.MESSAGE_ILLEGAL_NEGATIVE_NUMBER);
 	}
 
 	@Test
