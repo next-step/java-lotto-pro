@@ -36,12 +36,11 @@ class LottoNumbersTest {
 
 		// when
 		LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
-		List<LottoNumber> expectLottoNumberList = lottoNumbers.getLottoNumberList();
 
 		// then
 		assertAll(
-			() -> assertThat(expectLottoNumberList).isEqualTo(lottoNumberList),
-			() -> assertThat(expectLottoNumberList).contains(new LottoNumber(lottoNumber))
+			() -> assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class),
+			() -> assertThat(lottoNumbers.containsLottoNumber(new LottoNumber(lottoNumber)))
 		);
 	}
 
@@ -51,6 +50,6 @@ class LottoNumbersTest {
 		LottoNumbers lottoNumbers = new LottoNumbers();
 
 		// then
-		assertThat(lottoNumbers.lottoNumberList.size()).isEqualTo(LottoNumbers.LOTTO_NUMBERS_SIZE);
+		assertThat(lottoNumbers.size()).isEqualTo(LottoNumbers.LOTTO_NUMBERS_SIZE);
 	}
 }

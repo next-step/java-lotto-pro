@@ -3,12 +3,15 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+
+import lotto.util.RandomUtil;
 
 public class LottoNumbers {
 	public final static int LOTTO_NUMBERS_SIZE = 6;
 
-	public List<LottoNumber> lottoNumberList;
+	public final List<LottoNumber> lottoNumberList;
 
 	public LottoNumbers() {
 		lottoNumberList = generateLottoNumberList();
@@ -22,14 +25,34 @@ public class LottoNumbers {
 		Set<LottoNumber> lottoNumberSet = new HashSet<>();
 
 		do {
-			lottoNumberSet.add(new LottoNumber());
+			lottoNumberSet.add(
+				new LottoNumber(RandomUtil.pickNumber(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)));
 		} while (lottoNumberSet.size() < LOTTO_NUMBERS_SIZE);
 
 		return new ArrayList<>(lottoNumberSet);
 	}
 
-	public List<LottoNumber> getLottoNumberList() {
-		return lottoNumberList;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		LottoNumbers that = (LottoNumbers)o;
+		return Objects.equals(lottoNumberList, that.lottoNumberList);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoNumberList);
+	}
+
+	public boolean containsLottoNumber(LottoNumber lottoNumber) {
+		return lottoNumberList.contains(lottoNumber);
+	}
+
+	public int size() {
+		return lottoNumberList.size();
 	}
 }
 
