@@ -39,7 +39,7 @@ public class NumberUtil {
 	 */
 	public static boolean checkPerchaseAmountValidation(String amount) {
 		boolean validPerchaseAmount = true;
-		if(NumberUtil.isNumber(amount)) {
+		if(!NumberUtil.isNumber(amount)) {
 			validPerchaseAmount = false;
 			System.out.println(MessageConstants.ONLY_INPUT_NUMBER_MESSAGE);
 		}
@@ -48,6 +48,15 @@ public class NumberUtil {
 			System.out.println(MessageConstants.LOTTO_PRICE_INFORMATION_MESSAGE);
 		}
 		return validPerchaseAmount;
+	}
+
+	/**
+	 * 구매 금액을 통해 구매된 로또 갯수 가져오기
+	 * @param perchaseAmount
+	 * @return
+	 */
+	public static int getLottoCount(int perchaseAmount) {
+		return (perchaseAmount / 1000);
 	}
 
 	/**

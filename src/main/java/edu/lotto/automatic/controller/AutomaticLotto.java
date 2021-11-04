@@ -20,6 +20,7 @@ public class AutomaticLotto {
 	public static void main(String[] args) {
 		int perchaseAmount = Integer.parseInt(getPerchaseAmount());
 		logger.info("사용자가 입력한 구매 금액 : " + perchaseAmount);
+		logger.info("구매한 로또 갯수 : " + NumberUtil.getLottoCount(perchaseAmount));
 		logger.info("1~45 사이의 숫자 6개 : " + getSixRandomNumber().toString());
 	}
 
