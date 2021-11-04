@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import calculator.StringCalculator;
+
 public class StringCalculatorTest {
 
 	@DisplayName("구분자를 기준으로 분리한 각 숫자의 합을 반환")

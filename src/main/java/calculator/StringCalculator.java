@@ -1,4 +1,6 @@
-import wrapper.CalculatorParser;
+package calculator;
+
+import calculator.wrapper.CalculatorParser;
 
 public class StringCalculator {
 	private String delimiter;
