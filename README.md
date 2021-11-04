@@ -30,5 +30,8 @@
 `Result`는 `Purchase`를 가진다
 `Result`는 수익률((당첨번호 금액 * 당첨된 로또 개수)의 합 / 구입금액 )을 계산할 수 있다
 
+랜덤 숫자(`RandomNumber`)
+`RandomNumber`는 1에서 45까지 랜덤한 숫자들을 생성한다
+
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
