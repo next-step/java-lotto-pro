@@ -17,9 +17,13 @@ public class Lotto {
 
 	public Lotto() {
 		this.lottoNumbers = setLottoNumber();
-		System.out.println("lottoNumbers : " + lottoNumbers.toString());
+		System.out.println(lottoNumbers.toString());
 	}
 
+	/**
+	 * 로또 번호 6자리 세팅하기
+	 * @return
+	 */
 	private List<Integer> setLottoNumber() {
 		List<Integer> lottoNumberList = new ArrayList<Integer>();
 		while(lottoNumberList.size() < 6) {
@@ -29,6 +33,10 @@ public class Lotto {
 		return lottoNumberList;
 	}
 
+	/**
+	 * 임의의 숫자를 가져와서 숫자 리스트에 중복된 값이 없는 경우 리스트에 추가
+	 * @param lottoNumberList
+	 */
 	private void addNotDuplicatedNumber(List<Integer> lottoNumberList) {
 		int randomNumber = NumberUtil.getNumberBetweenOneAndFortyFive();
 		if(!lottoNumberList.contains(randomNumber)) {
