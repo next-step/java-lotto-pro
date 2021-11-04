@@ -34,7 +34,7 @@ public class LottoMain {
 			//투자금
 			String inputInvestment = InputView.inputInvestment();
 			investment = new Investment(inputInvestment);
-		}catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			ResultView.print(e.getMessage());
 			setInvestment();
 		}
