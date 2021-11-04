@@ -1,8 +1,5 @@
 package step3.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import step3.domain.constance.LottoConstant;
 
 public class LottoWinningReport {
@@ -18,7 +15,7 @@ public class LottoWinningReport {
     public void winningVerificationReport(LottoTicketBundle lottoTicketBundle,
         LottoTicket winningLottoTicket) {
         for (LottoTicket lottoTicket : lottoTicketBundle.getLottoTicketToList()) {
-            lottoRanks.matchOfMatchCount(lottoTicket.containCounting(winningLottoTicket));
+            lottoRanks.matchOfMatchCount(lottoTicket.containCount(winningLottoTicket));
         }
     }
 

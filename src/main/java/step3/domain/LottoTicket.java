@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import step3.common.exception.InvalidParamException;
 import step3.domain.constance.LottoConstant;
@@ -22,13 +21,13 @@ public class LottoTicket {
     public List<Integer> toLottoNumbers() {
         List<Integer> result = new ArrayList<>();
         for (LottoNumber lottoNumber : lottoTicket) {
-            result.add(lottoNumber.toInt());
+            result.add(lottoNumber.value());
         }
         Collections.sort(result);
         return Collections.unmodifiableList(result);
     }
 
-    public int containCounting(LottoTicket winningLottoTicket) {
+    public int containCount(LottoTicket winningLottoTicket) {
         List<Integer> lottoNumbers = toLottoNumbers();
         int count = 0;
         for (Integer winNumber : winningLottoTicket.toLottoNumbers()) {

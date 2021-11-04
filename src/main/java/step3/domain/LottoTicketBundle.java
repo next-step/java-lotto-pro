@@ -14,10 +14,7 @@ public class LottoTicketBundle {
     }
 
     public void addLottoTicket() {
-        lottoTicketBundle.add(new LottoTicket(
-            LottoNumberRandomGenerator.generate(LottoConstant.RANGE_MIN_LOTTO_NUMBER,
-                LottoConstant.RANGE_MAX_LOTTO_NUMBER,
-                LottoConstant.LOTTO_TICKET_SIZE)));
+        lottoTicketBundle.add(new LottoTicket(getRangeRandomNumbers()));
     }
 
     public void addLottoTicket(int... numbers) {
@@ -32,5 +29,11 @@ public class LottoTicketBundle {
         return lottoTicketBundle.stream()
             .collect(Collectors.collectingAndThen(Collectors.toList(),
                 Collections::unmodifiableList));
+    }
+
+    private int[] getRangeRandomNumbers() {
+        return LottoNumberRandomGenerator.generate(LottoConstant.RANGE_MIN_LOTTO_NUMBER,
+            LottoConstant.RANGE_MAX_LOTTO_NUMBER,
+            LottoConstant.LOTTO_TICKET_SIZE);
     }
 }

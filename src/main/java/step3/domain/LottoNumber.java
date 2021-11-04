@@ -14,7 +14,7 @@ public class LottoNumber {
         this.lotteNumber = lotteNumber;
     }
 
-    public int toInt() {
+    public int value() {
         return lotteNumber;
     }
 
