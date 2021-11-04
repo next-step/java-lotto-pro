@@ -15,7 +15,7 @@ public class LottoMatchTest {
     @Test
     @DisplayName("로또 1줄 당첨 등수 테스트")
     public void LottoMatch() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Number> numbers = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
 
         LottoNumber matchLotto = new LottoNumber(numbers);
         LottoNumber lotto = new LottoNumber(numbers);
@@ -26,9 +26,12 @@ public class LottoMatchTest {
     @Test
     @DisplayName("로또 당첨 등수 테스트")
     public void test() {
-        LottoNumber matchNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoNumber1 = new LottoNumber(Arrays.asList(1, 2, 3, 14, 5, 16));
-        LottoNumber lottoNumber2 = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber matchNumber = new LottoNumber(Arrays.asList(new Number(1), new Number(2), new Number(3),
+                new Number(4), new Number(5), new Number(6)));
+        LottoNumber lottoNumber1 = new LottoNumber(Arrays.asList(new Number(1), new Number(2), new Number(3),
+                new Number(14), new Number(5), new Number(16)));
+        LottoNumber lottoNumber2 = new LottoNumber(Arrays.asList(new Number(1), new Number(2), new Number(3),
+                new Number(4), new Number(5), new Number(6)));
 
         LottoMatch matchLotto1 = new LottoMatch(matchNumber, lottoNumber1);
         LottoMatch matchLotto2 = new LottoMatch(matchNumber, lottoNumber2);

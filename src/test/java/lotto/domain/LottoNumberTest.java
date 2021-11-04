@@ -25,45 +25,40 @@ public class LottoNumberTest {
     }
 
     static Stream<Arguments> listProvide() {
-        List<Integer> number = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Number> number = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
         return Stream.of(arguments(number));
     }
 
     @ParameterizedTest
     @MethodSource("listProvide")
     @DisplayName("로또 번호 수동 생성 확인")
-    public void activeLottoTest(List<Integer> activeNumbers) {
+    public void activeLottoTest(List<Number> activeNumbers) {
         LottoNumber lottoNumber = new LottoNumber(activeNumbers);
 
         assertThat(lottoNumber.getLottoNumber()).containsExactly(new Number(1), new Number(2), new Number(3),
                 new Number(4), new Number(5), new Number(6));
     }
 
-    static Stream<Arguments> listProvide2() {
-        List<Integer> number = Arrays.asList(99, 2, 3, 4, 5, 6);
-        return Stream.of(arguments(number));
-    }
-
-    @ParameterizedTest
-    @MethodSource("listProvide2")
+    @Test
     @DisplayName("로또 번호 범위 검증")
-    public void activeLottoRange(List<Integer> activeNumbers) {
+    public void activeLottoRange() {
         assertThatThrownBy(() -> {
-            LottoNumber lottoNumber = new LottoNumber(activeNumbers);
+            List<Number> activeNumbers = Arrays.asList(new Number(99), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
 
 
     static Stream<Arguments> listProvide3() {
-        List<Integer> number = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        List<Number> number = Arrays.asList(new Number(1), new Number(2), new Number(3),
+                new Number(4), new Number(5), new Number(6), new Number(7));
         return Stream.of(arguments(number));
     }
 
     @ParameterizedTest
     @MethodSource("listProvide3")
     @DisplayName("로또 번호 길이 검증")
-    public void activeLottoNumberSize(List<Integer> activeNumbers) {
+    public void activeLottoNumberSize(List<Number> activeNumbers) {
         assertThatThrownBy(() -> {
             LottoNumber lottoNumber = new LottoNumber(activeNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
