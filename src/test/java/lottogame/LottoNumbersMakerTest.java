@@ -2,6 +2,8 @@ package lottogame;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 public class LottoNumbersMakerTest {
@@ -12,11 +14,11 @@ public class LottoNumbersMakerTest {
 
 	@Test
 	public void makeLottoNumbers_1에서45사이_6개의_숫자생성() {
-		LottoNumberGroup lottoNumbers = LottoNumbersMaker.makelottoNumbers();
+		List<LottoNumber> lottoNumbers = LottoNumbersMaker.makelottoNumbers();
 
-		assertThat(lottoNumbers.getLottoNumbers().size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
+		assertThat(lottoNumbers.size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
 
-		lottoNumbers.getLottoNumbers()
+		lottoNumbers
 			.forEach(lottoNumber -> assertThat(lottoNumber.getNumber())
 				.isBetween(START_INCLUSIVE_NUMBER, END_EXCLUSIVE_NUMBER));
 	}

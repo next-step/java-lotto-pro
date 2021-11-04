@@ -11,10 +11,9 @@ public class LottoNumbersMaker {
 	protected static final int END_EXCLUSIVE_NUMBER=45;	/* 로또 번호 최대값 */
 	private static final List<Integer> lottoNumberCandidates = getLottoNumberCandidates();
 
-	public static LottoNumberGroup makelottoNumbers() {
+	public static List<LottoNumber> makelottoNumbers() {
 		Collections.shuffle(lottoNumberCandidates);
-		LottoNumberGroup lottoNumberGroup =new LottoNumberGroup(lottoNumberCandidates.stream().limit(6).map(number->new LottoNumber(number)).collect(Collectors.toList()));
-		return lottoNumberGroup;
+		return lottoNumberCandidates.stream().limit(6).map(number->new LottoNumber(number)).collect(Collectors.toList());
 	}
 
 	private static List<Integer> getLottoNumberCandidates(){
