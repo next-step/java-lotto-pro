@@ -6,18 +6,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LotteryNumberMaker {
+public class LottoNumbersMaker {
 	private static final int START_INCLUSIVE_NUMBER=1;	/* 로또 번호 최소값 */
 	private static final int END_EXCLUSIVE_NUMBER=45;	/* 로또 번호 최대값 */
-	private static final List<Integer> lotteryNumberCandidates = getLotteryNumberCandidates();
+	private static final List<Integer> lottoNumberCandidates = getLottoNumberCandidates();
 
-	public static LotteryNumberGroup makelotteryNumbers() {
-		Collections.shuffle(lotteryNumberCandidates);
-		LotteryNumberGroup lotteryNumberGroup =new LotteryNumberGroup(lotteryNumberCandidates.stream().limit(6).map(number->new LotterNumber(number)).collect(Collectors.toList()));
-		return lotteryNumberGroup;
+	public static LottoNumberGroup makelottoNumbers() {
+		Collections.shuffle(lottoNumberCandidates);
+		LottoNumberGroup lottoNumberGroup =new LottoNumberGroup(lottoNumberCandidates.stream().limit(6).map(number->new LottoNumber(number)).collect(Collectors.toList()));
+		return lottoNumberGroup;
 	}
 
-	private static List<Integer> getLotteryNumberCandidates(){
+	private static List<Integer> getLottoNumberCandidates(){
 		return IntStream.range(START_INCLUSIVE_NUMBER, END_EXCLUSIVE_NUMBER+1)
 			.collect(ArrayList::new,
 				(pickedNumbers, number) -> pickedNumbers.add(number)

@@ -1,22 +1,22 @@
 package lottogame;
 
-public class LotteryTicket {
+public class LottoTicket {
 
-	private LotteryNumberGroup lotteryNumberGroup;
+	private LottoNumberGroup lottoNumberGroup;
 
-	private LotteryTicket(LotteryNumberGroup lotteryNumber) {
-		this.lotteryNumberGroup = lotteryNumber;
+	private LottoTicket(LottoNumberGroup lottoNumber) {
+		this.lottoNumberGroup = lottoNumber;
 	}
 
-	public static LotteryTicket makeLotteryTicket() {
-		return new LotteryTicket(LotteryNumberMaker.makelotteryNumbers());
+	public static LottoTicket makeLottoTicket() {
+		return new LottoTicket(LottoNumbersMaker.makelottoNumbers());
 	}
 
-	public LotteryNumberGroup getLotteryNumberGroup() {
-		return lotteryNumberGroup;
+	public LottoNumberGroup getLottoNumberGroup() {
+		return lottoNumberGroup;
 	}
 
-	public int numOfNumbersInGroup(){
-		return lotteryNumberGroup.getLotteryNumbers().size();
+	public int numOfNumbersInGroup() {
+		return lottoNumberGroup.getLottoNumbers().size();
 	}
 }

@@ -1,9 +1,9 @@
 package lottogame;
 
-class LotterNumber {
+class LottoNumber {
 	private int number;
 
-	public LotterNumber(int number) {
+	public LottoNumber(int number) {
 		this.number = number;
 	}
 

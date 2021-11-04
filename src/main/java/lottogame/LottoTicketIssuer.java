@@ -9,7 +9,7 @@ import lottogame.exception.NotDivisibleMoneyUnitException;
 import lottogame.exception.NotEnoughtMoneyException;
 import lottogame.exception.NotNumberFormatMoneyException;
 
-public class LotteryTicketIssuer {
+public class LottoTicketIssuer {
 
 	private static final int TICKET_PER_PRICE = 1000;
 
@@ -17,12 +17,12 @@ public class LotteryTicketIssuer {
 		return money / 1000;
 	}
 
-	public static List<LotteryTicket> buyTickets(int money) {
+	public static List<LottoTicket> buyTickets(int money) {
 		validatePay(money);
 		int numOfTickets = getNumOfTicketsToBuy(money);
 
 		return IntStream.range(0, numOfTickets).collect(ArrayList::new,
-			(tickets, i) -> tickets.add(LotteryTicket.makeLotteryTicket()),
+			(tickets, i) -> tickets.add(LottoTicket.makeLottoTicket()),
 			(tickets1, tickets2) -> tickets1.addAll(tickets2));
 
 	}
@@ -50,7 +50,7 @@ public class LotteryTicketIssuer {
 		return false;
 	}
 
-	public static List<LotteryTicket> buyTickets(String money) {
+	public static List<LottoTicket> buyTickets(String money) {
 		int convertedMoney = convertMoneyFormatToNumber(money);
 		return buyTickets(convertedMoney);
 	}

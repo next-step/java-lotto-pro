@@ -2,14 +2,14 @@ package lottogame;
 
 import java.util.List;
 
-public class LotteryNumberGroup {
-	private List<LotterNumber> lotteryNumbers;
+public class LottoNumberGroup {
+	private List<LottoNumber> lottoNumbers;
 
-	public LotteryNumberGroup(List<LotterNumber> lotteryNumbers) {
-		this.lotteryNumbers = lotteryNumbers;
+	public LottoNumberGroup(List<LottoNumber> lottoNumbers) {
+		this.lottoNumbers = lottoNumbers;
 	}
 
-	public List<LotterNumber> getLotteryNumbers() {
-		return lotteryNumbers;
+	public List<LottoNumber> getLottoNumbers() {
+		return lottoNumbers;
 	}
 }
