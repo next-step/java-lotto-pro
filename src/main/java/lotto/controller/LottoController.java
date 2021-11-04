@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -27,6 +28,7 @@ public class LottoController {
 		Money money = inputView.inputMoney();
 		Lottos lottos = purchaseLottos(money);
 		LottoNumbers lastWinningNumbers = LottoNumbers.of(inputView.inputWinningNumbers());
+		LottoNumber bonusNumber = inputView.inputBonusNumber(lastWinningNumbers);
 
 		WinningStatistics winningStatistics = WinningStatistics.createBy(lottos, lastWinningNumbers, money);
 		winningStatistics.buildStatistics();
