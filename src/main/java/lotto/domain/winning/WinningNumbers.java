@@ -1,31 +1,24 @@
 package lotto.domain.winning;
 
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningNumbers {
-    private static final int WINNING_NUMBER_SIZE = 6;
 
-    private final Set<LottoNumber> winningNumbers;
+    private final LottoTicket winningNumbers;
 
     public WinningNumbers(Set<LottoNumber> winningNumbers) {
-        validateSize(winningNumbers);
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = new LottoTicket(winningNumbers);
     }
 
     public WinningNumbers(List<Integer> numbers) {
         this(numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
-    }
-
-    private void validateSize(Set<LottoNumber> numbers) {
-        if (numbers.size() != WINNING_NUMBER_SIZE) {
-            throw new IllegalArgumentException("당첨 번호는 6개의 중복되지 않는 숫자 입니다.");
-        }
     }
 
     public int matchCount(Set<LottoNumber> lottoNumbers) {
@@ -35,15 +28,15 @@ public class WinningNumbers {
     }
 
     public boolean matchNumber(LottoNumber lottoNumber) {
-        return winningNumbers.contains(lottoNumber);
+        return winningNumbers.isContains(lottoNumber);
     }
 
     public boolean isContains(int bonusNumber) {
-        return winningNumbers.stream()
+        return winningNumbers.getLottoNumbers().stream()
                 .anyMatch(winningNumber -> winningNumber.getLottoNumber() == bonusNumber);
     }
 
     public Set<LottoNumber> getWinningNumbers() {
-        return winningNumbers;
+        return winningNumbers.getLottoNumbers();
     }
 }
