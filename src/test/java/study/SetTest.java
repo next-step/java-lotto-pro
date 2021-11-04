@@ -50,9 +50,7 @@ public class SetTest {
 
     @ParameterizedTest(name = "Set 숫자 범위 밖 포함 테스트 {0} : {1}")
     @CsvSource(value = {"1,true", "2,true", "3,true", "4,false", "5,false"}, delimiter = ',')
-    void setContainsNumberIncludeOutOfRange(String numberString, String expectFlagString) {
-        int number = Integer.parseInt(numberString);
-        boolean expect = Boolean.parseBoolean(expectFlagString);
+    void setContainsNumberIncludeOutOfRange(int number, boolean expect) {
         assertEquals(isContainsNumber(number), expect);
     }
 }
