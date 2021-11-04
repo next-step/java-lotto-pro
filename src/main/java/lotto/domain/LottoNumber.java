@@ -1,35 +1,57 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
+import static lotto.domain.Number.MAX_NUMBER;
+import static lotto.domain.Number.MIN_NUMBER;
 import static lotto.utils.RandomNumberUtils.*;
 
 public class LottoNumber {
 
     public static final int LOTTO_SIZE = 6;
 
-    private List<Number> lottoNumbers;
+    private final List<Number> lottoNumbers = new ArrayList<>();
 
-    public LottoNumber() {
-        this.lottoNumbers = generateNumbers();
+    public List<Number> getLottoNumber() {
+        setLottoNumbers(generateAutoLottoNumbers());
+        return lottoNumbers;
     }
 
-    private List<Number> generateNumbers() {
+    public List<Number> getLottoNumber(List<Integer> activeNumbers) {
+        setLottoNumbers(generateActiveLottoNumbers(activeNumbers));
+        return lottoNumbers;
+    }
+
+    private List<Number> generateAutoLottoNumbers() {
         Set<Number> numbers = new HashSet<>();
         while (numbers.size() < LOTTO_SIZE) {
-            numbers.add(new Number(generateRandomNumbers(MIN_NUMBER, MAX_NUMBER)));
+            numbers.add(getRandomNumber());
         }
-
-        return sortAsc(new ArrayList<>(numbers));
+        return new ArrayList<>(numbers);
     }
 
-    private ArrayList<Number> sortAsc(ArrayList<Number> numbers) {
-        Collections.sort(numbers);
-        return numbers;
+    private List<Number> generateActiveLottoNumbers(List<Integer> activeNumbers) {
+        validateActiveLottoSize(activeNumbers);
+        return activeNumbers.stream()
+                .map(Number::new)
+                .collect(Collectors.toList());
     }
 
-    public List<Number> getLottoNumbers() {
-        return lottoNumbers;
+    private Number getRandomNumber() {
+        int randomNumber = generateRandomNumbers(MIN_NUMBER, MAX_NUMBER);
+        return new Number(randomNumber);
+    }
+
+    private void validateActiveLottoSize(List<Integer> activeNumbers) {
+        if (activeNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("[ERROR] 숫자 입력 필수 자리수 : " + LOTTO_SIZE);
+        }
+    }
+
+    private void setLottoNumbers(List<Number> lottoNumbers) {
+        Collections.sort(lottoNumbers);
+        this.lottoNumbers.addAll(lottoNumbers);
     }
 
     @Override
