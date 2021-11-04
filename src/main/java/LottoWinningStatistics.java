@@ -4,6 +4,8 @@ import java.util.stream.Collectors;
 
 public class LottoWinningStatistics {
 
+	public final static float EARNING_RATE_BASE = 1.0f;
+
 	private final Map<Integer, Long> numOfLottosByMatching;
 
 	private LottoWinningStatistics(WinningLotto winningLotto, List<Lotto> lottos) {
@@ -15,7 +17,8 @@ public class LottoWinningStatistics {
 		return new LottoWinningStatistics(winningLotto, lottos);
 	}
 
-	public Long countLottos(int matchingCount) {
+	public Long countLottos(LottoWinningRank rank) {
+		final int matchingCount = rank.getMatchingCount();
 		if (numOfLottosByMatching.containsKey(matchingCount)) {
 			return numOfLottosByMatching.get(matchingCount);
 		}
@@ -35,7 +38,7 @@ public class LottoWinningStatistics {
 	}
 
 	private int calculatePrizeKRW(int matchingCount, Long numOfLottos) {
-		return numOfLottos.intValue() * LottoWinningCriteria.valueOf(matchingCount).getPrizeKRW();
+		return numOfLottos.intValue() * LottoWinningRank.valueOf(matchingCount).getPrizeKRW();
 	}
 }
 

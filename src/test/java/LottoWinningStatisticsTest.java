@@ -16,10 +16,10 @@ public class LottoWinningStatisticsTest {
 		);
 		final LottoWinningStatistics statistics = LottoWinningStatistics.of(winningLotto, lottos);
 
-		assertThat(statistics.countLottos(3)).isEqualTo(1);
-		assertThat(statistics.countLottos(0)).isEqualTo(1);
+		assertThat(statistics.countLottos(LottoWinningRank.FOURTH)).isEqualTo(1);
+		assertThat(statistics.countLottos(LottoWinningRank.OTHER)).isEqualTo(1);
 		assertThat(statistics.earningRate()).isEqualTo(
-			(float)LottoWinningCriteria.FOURTH_CLASS.getPrizeKRW() / (Lotto.PRICE_KRW * lottos.size())
+			(float)LottoWinningRank.FOURTH.getPrizeKRW() / (Lotto.PRICE_KRW * lottos.size())
 		);
 	}
 }

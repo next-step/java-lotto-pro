@@ -19,9 +19,9 @@
 - lotto parser
 - winning lotto (extends lotto)
   - count matching
-- lotto winning criteria
+- lotto winning rank
 - lotto winning statistics
-  - count lottos by matching-count (3,4,5,6)
+  - count lottos by rank
   - calculate earnings-rate
 - view
   - input
