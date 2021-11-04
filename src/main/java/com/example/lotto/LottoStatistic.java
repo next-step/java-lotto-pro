@@ -12,10 +12,10 @@ public class LottoStatistic {
 	private final long purchaseAmount;
 	private final Map<LottoRank, Long> lottoRankToCount;
 
-	public LottoStatistic(long purchaseAmount, List<LottoGame> lottoGames, LottoNumbers winningLottoNumbers) {
+	public LottoStatistic(long purchaseAmount, LottoGames lottoGames, LottoNumbers winningLottoNumbers) {
 		this.purchaseAmount = purchaseAmount;
 		this.lottoRankToCount = defaultLottoRankToCount();
-		this.lottoRankToCount.putAll(lottoGames.stream()
+		this.lottoRankToCount.putAll(lottoGames.getValues().stream()
 			.map(lottoGame -> LottoNumbers.match(lottoGame.getLottoNumbers(), winningLottoNumbers))
 			.map(LottoRank::valueOf)
 			.filter(lottoRank -> !lottoRank.isMiss())
