@@ -3,7 +3,7 @@ package lotto.domain.purchase;
 import java.util.Objects;
 
 public class PurchaseMoney {
-    public static final int TICKET_PRICE = 1000;
+    private static final int TICKET_PRICE = 1000;
 
     private final int money;
 
@@ -12,6 +12,7 @@ public class PurchaseMoney {
         validateDivisible(money);
         this.money = money;
     }
+
     private void validateNegative(int money) {
         if (money < TICKET_PRICE) {
             throw new IllegalArgumentException("구입 금액은 " + TICKET_PRICE + "원 이상이여야 합니다.");
@@ -24,14 +25,22 @@ public class PurchaseMoney {
         }
     }
 
-    public int getPurchaseAmount() {
-        return money / TICKET_PRICE;
+    public PurchaseAmount getPurchaseAmount() {
+        return new PurchaseAmount(money / TICKET_PRICE);
+    }
+
+    public int getMoney() {
+        return money;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         PurchaseMoney that = (PurchaseMoney) o;
         return money == that.money;
     }

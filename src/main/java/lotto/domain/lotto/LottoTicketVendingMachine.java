@@ -16,8 +16,7 @@ public class LottoTicketVendingMachine {
 
     private static List<LottoNumber> generate() {
         return IntStream.rangeClosed(MIN_LOTTO_BOUND, MAX_LOTTO_BOUND)
-                .boxed()
-                .map(LottoNumber::new)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 

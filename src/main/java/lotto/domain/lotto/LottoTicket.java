@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,13 +28,17 @@ public class LottoTicket {
         }
     }
 
+    public boolean isContains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     public List<Integer> convertLottoNumbers() {
-        return lottoNumbers.stream()
+        return Collections.unmodifiableList(lottoNumbers.stream()
                 .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 }

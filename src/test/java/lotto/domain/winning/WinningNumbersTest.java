@@ -1,10 +1,11 @@
-package lotto.domain.statistics;
+package lotto.domain.winning;
 
 import lotto.domain.lotto.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -24,7 +25,7 @@ class WinningNumbersTest {
     void createWinningNumbers() {
         //given //when
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        WinningNumbers winningNumbers = new WinningNumbers(numbers);
+        WinningNumbers winningNumbers = new WinningNumbers(numbers, 7);
 
         //then
         assertThat(winningNumbers.getWinningNumbers()).hasSize(6);
@@ -41,7 +42,7 @@ class WinningNumbersTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningNumbers(numbers));
+                .isThrownBy(() -> new WinningNumbers(numbers, 7));
     }
 
     @Test
@@ -52,21 +53,21 @@ class WinningNumbersTest {
 
         //when //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningNumbers(numbers));
+                .isThrownBy(() -> new WinningNumbers(numbers, 7));
     }
 
     @ParameterizedTest(name = "당첨 번호와 일치하는 개수: [{index}] {1}")
     @MethodSource("lottoTickets")
     @DisplayName("당첨 번호와 일치하는 로또 번호 개수를 반환한다.")
-    void matchWinningNumbers(LottoTicket lottoTicket, int excepted) {
+    void matchCount(LottoTicket lottoTicket, int excepted) {
         //given
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         //when
-        int matchCount = winningNumbers.matchCount(lottoTicket);
+        int winningCount = winningNumbers.matchCount(lottoTicket.getLottoNumbers());
 
         //then
-        assertThat(matchCount).isEqualTo(excepted);
+        assertThat(winningCount).isEqualTo(excepted);
     }
 
     private static Stream<Arguments> lottoTickets() {
@@ -79,5 +80,44 @@ class WinningNumbersTest {
                 Arguments.of(LottoTicket.from(6, 7, 8, 9, 10, 11), 1),
                 Arguments.of(LottoTicket.from(7, 8, 9, 10, 11, 12), 0)
         );
+    }
+
+    @ParameterizedTest(name = "보너스 번호 일치 여부 확인: [{index}] {1}")
+    @CsvSource(value = {"1, true", "7, false"})
+    @DisplayName("보너스 번호와 일치하는지 확인한다.")
+    void isMatchBonus(int bonusNumber, boolean excepted) {
+        //given
+        LottoTicket lottoTicket = LottoTicket.from(1, 2, 3, 4, 5, 6);
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(10, 11, 12, 13, 15, 16), bonusNumber);
+
+        //when
+        boolean isMatchBonus = winningNumbers.isMatchBonus(lottoTicket.getLottoNumbers());
+
+        //then
+        assertThat(isMatchBonus).isEqualTo(excepted);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    @DisplayName("보너스 번호가 1 ~ 45 사이의 값이 아닐 경우 예외가 발생한다.")
+    void validateRange(int invalidBonusNumber) {
+        //given
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        //when //then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new WinningNumbers(winningNumbers, invalidBonusNumber));
+    }
+
+    @Test
+    @DisplayName("보너스 번호가 당첨 번호와 중복될 경우 예외가 발생한다.")
+    void validateDuplicationBonus() {
+        //given
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int invalidBonusNumber = 5;
+
+        //when //then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new WinningNumbers(winningNumbers, invalidBonusNumber));
     }
 }

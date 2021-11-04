@@ -2,10 +2,12 @@ package lotto.service;
 
 import lotto.domain.lotto.LottoTicketVendingMachine;
 import lotto.domain.lotto.LottoTickets;
+import lotto.domain.purchase.PurchaseAmount;
 import lotto.domain.purchase.PurchaseMoney;
-import lotto.domain.statistics.WinningNumbers;
-import lotto.domain.statistics.WinningResult;
-import lotto.domain.statistics.WinningStatistics;
+import lotto.domain.winning.WinningNumbers;
+import lotto.domain.winning.WinningResult;
+import lotto.domain.winning.WinningStatistics;
+import lotto.util.StringUtil;
 
 import java.util.List;
 
@@ -17,24 +19,30 @@ public class LottoService {
         this.vendingMachine = new LottoTicketVendingMachine();
     }
 
-    public int getTicketAmount(int money) {
-        PurchaseMoney purchaseMoney = new PurchaseMoney(money);
-        return purchaseMoney.getPurchaseAmount();
+    public PurchaseMoney getPurchaseMoney(String input) {
+        int money = StringUtil.parseIntFrom(input);
+        return new PurchaseMoney(money);
     }
 
-    public LottoTickets issueTickets(int purchaseAmount) {
-        return vendingMachine.issueTickets(purchaseAmount);
+    public LottoTickets issueTickets(PurchaseAmount purchaseAmount) {
+        return vendingMachine.issueTickets(purchaseAmount.getAutoTicketAmount());
     }
 
-    public WinningResult getWinningResult(List<Integer> numbers, LottoTickets lottoTickets) {
-        WinningNumbers winningNumbers = new WinningNumbers(numbers);
+    public WinningNumbers getWinningNumbers(String inputWinningNumbers, String inputBonusNumber) {
+        List<Integer> winningNumbers = StringUtil.splitParseInt(inputWinningNumbers);
+        int bonusNumber = StringUtil.parseIntFrom(inputBonusNumber);
+        return new WinningNumbers(winningNumbers, bonusNumber);
+    }
+
+    public WinningResult getWinningResult(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
         WinningResult winningResult = new WinningResult(winningNumbers);
         winningResult.aggregate(lottoTickets);
+
         return winningResult;
     }
 
-    public float profitRate(WinningResult winningResult, int purchaseAmount) {
+    public float profitRate(WinningResult winningResult, PurchaseMoney purchaseMoney) {
         WinningStatistics winningStatistics = new WinningStatistics(winningResult);
-        return winningStatistics.profitRate(purchaseAmount);
+        return winningStatistics.profitRate(purchaseMoney);
     }
 }
