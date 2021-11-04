@@ -12,7 +12,7 @@ public final class ResultView {
     private static final String LEFT_SQUARE_BRACKET = "]";
 
     public static void printLottoCount(final Lottos lottos, final int manualLottoCount) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottoCount, lottos.count() - manualLottoCount);
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottoCount, lottos.count() - manualLottoCount);
     }
 
     public static void printLottos(final Lottos lottos) {
