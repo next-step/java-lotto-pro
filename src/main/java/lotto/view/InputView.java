@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 import calculator.utils.StringUtils;
 import lotto.domain.Money;
-import lotto.utils.LottoNumberValidator;
 import lotto.utils.LottoStringSplitter;
 import lotto.utils.LottoStringToIntegerParser;
 import lotto.utils.MessageBuilder;
@@ -62,7 +61,11 @@ public class InputView {
 		return winningNumbers.stream()
 							 .filter(s -> !StringUtils.isEmpty(s) && s.matches(NUMBER_FROM_0_to_9_REG_EXP))
 							 .map(LottoStringToIntegerParser::parse)
-							 .allMatch(LottoNumberValidator::isValidLottoNumber);
+							 .allMatch(this::isValidLottoNumber);
+	}
+
+	private boolean isValidLottoNumber(int number) {
+		return LOTTO_NUMBER_MIN <= number && number <= LOTTO_NUMBER_MAX;
 	}
 
 	private boolean isValidMoney(String money) {
