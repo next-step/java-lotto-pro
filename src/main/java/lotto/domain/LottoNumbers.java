@@ -43,14 +43,33 @@ public class LottoNumbers {
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<Integer> getList() {
+        return lottoNumbers.stream()
+                .mapToInt(LottoNumber::getNumber)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    public int match(LottoNumbers winningNumbers) {
+        List<Integer> winnings = winningNumbers.getList();
+        return winnings.stream()
+                .reduce(
+                        0
+                        , (countOfMatch, number) -> countOfMatch + matchNumber(number)
+                );
+    }
+
+    private int matchNumber(int number) {
+        if (this.getList().contains(number)) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override
     public String toString() {
         StringJoiner joiner = new StringJoiner(",", "[", "]");
-        lottoNumbers.stream().forEach(lottoNumber -> joiner.add(String.valueOf(lottoNumber.getNumber())));
+        lottoNumbers.stream().forEach(lottoNumber -> joiner.add(lottoNumber.toString()));
         return joiner.toString();
     }
 }

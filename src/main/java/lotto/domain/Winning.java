@@ -8,7 +8,7 @@ public class Winning {
 
     private final LottoNumbers winningNumbers;
 
-    public Winning(String input) {
+    public Winning(final String input) {
         this.winningNumbers = new LottoNumbers(
                 Arrays.stream(input.split(WINNING_NUMBER_REGEX))
                         .mapToInt(Integer::valueOf)

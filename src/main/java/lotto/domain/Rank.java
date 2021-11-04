@@ -1,12 +1,14 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
     FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    FIRST(6, 2_000_000_000),
     MISS(0, 0);
 
     private int countOfMatch;
@@ -22,6 +24,14 @@ public enum Rank {
                 .filter(rank -> rank.countOfMatch == countOfMatch)
                 .findFirst()
                 .orElse(Rank.MISS);
+    }
+
+    public static List<Rank> excludedMissList() {
+        return Arrays.stream(values()).filter(Rank::isNotMiss).collect(Collectors.toList());
+    }
+
+    public boolean isNotMiss() {
+        return !this.equals(Rank.MISS);
     }
 
     public int getCountOfMatch() {

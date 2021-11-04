@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.BoughtLotto;
 import lotto.domain.LottoTicket;
 import lotto.domain.Winning;
+import lotto.domain.WinningMap;
 
 import static lotto.view.ConsoleView.*;
 
@@ -22,5 +23,7 @@ public class LottoExecutor {
         printLine();
         Winning winningLottoNumbers = lottoController.enterWinningLottoNumbers();
         printLine();
+        WinningMap winningMap = WinningMap.winningOf(lottoTicket, winningLottoNumbers);
+        printWinning(winningMap);
     }
 }

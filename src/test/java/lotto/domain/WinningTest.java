@@ -24,14 +24,7 @@ class WinningTest {
     @MethodSource
     @DisplayName("당첨 번호 입력(순서 정렬)")
     public void inputWinningTest(String input, Integer[] result) {
-        LottoNumbers winningNumbers = new Winning(input).getWinningNumbers();
-
-        int[] numbers = winningNumbers.getLottoNumbers()
-                .stream()
-                .mapToInt(LottoNumber::getNumber)
-                .toArray();
-
-        assertThat(numbers).containsExactly(result);
+        assertThat(new Winning(input)).isInstanceOf(Winning.class);
     }
 
     @ParameterizedTest

@@ -11,11 +11,11 @@ public class LottoTicket {
 
     private final List<LottoNumbers> ticket;
 
-    private LottoTicket(List<LottoNumbers> ticket) {
+    public LottoTicket(final List<LottoNumbers> ticket) {
         this.ticket = ticket;
     }
 
-    public static LottoTicket generate(final int boughtCount, NumberGeneratorStrategy strategy) {
+    public static LottoTicket generate(final int boughtCount, final NumberGeneratorStrategy strategy) {
         return new LottoTicket(
                 IntStream.range(0, boughtCount)
                         .mapToObj(i -> strategy.createLotto())
