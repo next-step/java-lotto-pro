@@ -9,6 +9,7 @@ import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("우승 로또 번호 생성기")
 class WinnerLottoGeneratorTest {
 
 	@Test
