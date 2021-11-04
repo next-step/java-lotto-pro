@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.exception.MyErrorCode;
-import lotto.exception.MyException;
+import lotto.exception.InputDataErrorCode;
+import lotto.exception.InputDataException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +39,7 @@ public enum Rank {
         return Arrays.stream(values())
                 .filter(rank -> isMatch(count, rank))
                 .findFirst()
-                .orElseThrow(() -> new MyException(MyErrorCode.INVALID_LOTTO_WIN_COUNT));
+                .orElseThrow(() -> new InputDataException(InputDataErrorCode.INVALID_LOTTO_WIN_COUNT));
     }
 
     public static List<Rank> getLottoResultRank() {

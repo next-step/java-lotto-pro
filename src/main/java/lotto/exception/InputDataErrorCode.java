@@ -1,6 +1,6 @@
 package lotto.exception;
 
-public enum MyErrorCode {
+public enum InputDataErrorCode {
     LESS_THAN_LOTTO_MONEY_AMOUNT("[ERROR]최소 로또 금액(1000원)보다 작게 입력하였습니다."),
     WRONG_INPUT_NUMBER("[ERROR] 잘못된 문자입니다. 숫자만 입력할 수 있습니다."),
     INVALID_RANGE_LOTTO_NUMBER("[ERROR] 잘못된 숫자를 입력하였습니다. 로또 숫자는 1~45 사이의 숫자입니다."),
@@ -10,7 +10,7 @@ public enum MyErrorCode {
 
     private String errorMessage;
 
-    MyErrorCode(String errorMessage) {
+    InputDataErrorCode(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

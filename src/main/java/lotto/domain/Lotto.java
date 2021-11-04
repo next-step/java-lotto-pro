@@ -1,10 +1,9 @@
 package lotto.domain;
 
-import lotto.exception.MyErrorCode;
-import lotto.exception.MyException;
+import lotto.exception.InputDataErrorCode;
+import lotto.exception.InputDataException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_COUNT_VALID_SIZE = 6;
@@ -29,13 +28,15 @@ public class Lotto {
 
     public int match(Lotto compareLotto) {
         return (int) this.balls().stream()
-                .filter(ball -> compareLotto.contains(ball))
+                .filter(ball -> compareLotto.isContain(ball))
                 .count();
     }
 
-    public boolean contains(Ball ball) {
-        return this.balls().contains(ball);
+    private boolean isContain(Ball ball) {
+        return this.balls.stream()
+                .anyMatch(compareNumber -> ball.number() == compareNumber.number());
     }
+
 
     private void checkValidLotto(List<Ball> balls) {
         checkDuplicationBall(balls);
@@ -45,7 +46,7 @@ public class Lotto {
     private void checkLengthOverThanSix(List<Ball> balls) {
         int ballsSize = balls.size();
         if (!isValidInputLottoRange(ballsSize)) {
-            throw new MyException(MyErrorCode.VALID_LOTTO_SIZE_SIX);
+            throw new InputDataException(InputDataErrorCode.VALID_LOTTO_SIZE_SIX);
         }
     }
 
@@ -54,12 +55,17 @@ public class Lotto {
     }
 
     private void checkDuplicationBall(List<Ball> balls) {
-        Set<Ball> notDuplicationBalls = new HashSet<>();
+        Set<Integer> notDuplicationBalls = new HashSet<>();
         for (Ball ball : balls) {
-            notDuplicationBalls.add(ball);
+            notDuplicationBalls.add(ball.number());
         }
         if (balls.size() != notDuplicationBalls.size()) {
-            throw new MyException(MyErrorCode.EXIST_DUPLICATION_NUMBER);
+            throw new InputDataException(InputDataErrorCode.EXIST_DUPLICATION_NUMBER);
         }
+    }
+
+    @Override
+    public String toString() {
+        return balls + "\n";
     }
 }

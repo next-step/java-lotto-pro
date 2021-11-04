@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.exception.MyErrorCode;
-import lotto.exception.MyException;
+import lotto.exception.InputDataErrorCode;
+import lotto.exception.InputDataException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +35,7 @@ public class InputView {
 
     private static void validInputMoney(String inputMoney) {
         if (!isOnlyNumber(inputMoney)) {
-            throw new MyException(MyErrorCode.WRONG_INPUT_NUMBER);
+            throw new InputDataException(InputDataErrorCode.WRONG_INPUT_NUMBER);
         }
     }
 

@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos implements Iterable<Lotto> {
 
@@ -30,4 +31,9 @@ public class Lottos implements Iterable<Lotto> {
         return lottos.iterator();
     }
 
+    @Override
+    public String toString() {
+        return lottos.stream()
+                .map(lotto-> lotto.toString()).collect(Collectors.joining());
+    }
 }

@@ -1,10 +1,8 @@
 package lotto.domain;
 
 
-import lotto.exception.MyErrorCode;
-import lotto.exception.MyException;
-
-import java.util.Objects;
+import lotto.exception.InputDataErrorCode;
+import lotto.exception.InputDataException;
 
 public class Ball {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -20,26 +18,18 @@ public class Ball {
         return this.number;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ball ball = (Ball) o;
-        return this.number() == ball.number();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
-    }
-
     private void checkValidNumber(int number) {
         if (!isRangeBetweenOneAndFortyFive(number)) {
-            throw new MyException(MyErrorCode.INVALID_RANGE_LOTTO_NUMBER);
+            throw new InputDataException(InputDataErrorCode.INVALID_RANGE_LOTTO_NUMBER);
         }
     }
 
     private boolean isRangeBetweenOneAndFortyFive(int number) {
         return MIN_LOTTO_NUMBER <= number && number <= MAX_LOTTO_NUMBER;
+    }
+
+    @Override
+    public String toString() {
+        return String.join(",", String.valueOf(number));
     }
 }

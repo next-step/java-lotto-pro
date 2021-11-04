@@ -6,11 +6,9 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.domain.Rank.*;
-
 public class OutputView {
 
-    private static final DecimalFormat amountFormatter = new DecimalFormat("###,###");
+    private static final DecimalFormat AMOUNT_FORMATTER = new DecimalFormat("###,###");
     private OutputView() {
 
     }
@@ -31,6 +29,10 @@ public class OutputView {
         System.out.println(output);
     }
 
+    public static void printLotto(String lottoInfo) {
+        System.out.println(lottoInfo);
+    }
+
     public static void printResult(Map<Rank, Integer> result, int purchaseAmount) {
         System.out.println("\n당첨 통계");
         System.out.println("--------------");
@@ -39,7 +41,7 @@ public class OutputView {
             int lottoResultCount = calculateLottoResultCount(result, findRank);
             int winMoney = findRank.winMoney();
             totalPrizeMoney += winMoney * lottoResultCount;
-            System.out.println(findRank.count() + "개 일치 (" + amountFormatter.format(winMoney) + "원)- " + lottoResultCount + "개");
+            System.out.println(findRank.count() + "개 일치 (" + AMOUNT_FORMATTER.format(winMoney) + "원)- " + lottoResultCount + "개");
         }
         float earningRate = calculateEarnningRate(totalPrizeMoney, purchaseAmount);
         System.out.printf("총 수익률은 %.2f 입니다.", earningRate);

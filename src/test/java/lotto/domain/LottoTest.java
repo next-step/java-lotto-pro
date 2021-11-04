@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.exception.MyErrorCode;
-import lotto.exception.MyException;
+import lotto.exception.InputDataErrorCode;
+import lotto.exception.InputDataException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,10 +34,10 @@ class LottoTest {
         Ball five = new Ball(5);
         Ball six = new Ball(6);
 
-        assertThatExceptionOfType(MyException.class)
+        assertThatExceptionOfType(InputDataException.class)
                 .isThrownBy(() -> {
                     new Lotto(Arrays.asList(one, duplicationNumberOne, three, four, five, six));
-                }).withMessageContaining(MyErrorCode.EXIST_DUPLICATION_NUMBER.errorMessage());
+                }).withMessageContaining(InputDataErrorCode.EXIST_DUPLICATION_NUMBER.errorMessage());
     }
 
     @Test
@@ -48,10 +48,10 @@ class LottoTest {
         Ball four = new Ball(4);
         Ball five = new Ball(5);
 
-        assertThatExceptionOfType(MyException.class)
+        assertThatExceptionOfType(InputDataException.class)
                 .isThrownBy(() -> {
                     new Lotto(Arrays.asList(one, three, four, five));
-                }).withMessageContaining(MyErrorCode.VALID_LOTTO_SIZE_SIX.errorMessage());
+                }).withMessageContaining(InputDataErrorCode.VALID_LOTTO_SIZE_SIX.errorMessage());
     }
 
     @Test

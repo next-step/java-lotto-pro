@@ -1,8 +1,7 @@
 package lotto.domain;
 
-import lotto.exception.MyErrorCode;
-import lotto.exception.MyException;
-import org.assertj.core.api.Assertions;
+import lotto.exception.InputDataErrorCode;
+import lotto.exception.InputDataException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -56,8 +55,8 @@ class RankTest {
     void rank_wrong_mach_count() {
         assertThatThrownBy(
                 () -> Rank.rank(-1)
-        ).isInstanceOf(MyException.class)
-                .hasMessageContaining(MyErrorCode.INVALID_LOTTO_WIN_COUNT.errorMessage());
+        ).isInstanceOf(InputDataException.class)
+                .hasMessageContaining(InputDataErrorCode.INVALID_LOTTO_WIN_COUNT.errorMessage());
     }
 
 

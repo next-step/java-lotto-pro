@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 public class LottoService {
     private Lotto winningLotto;
 
-    public List<Lotto> createLotto(int countOfLotto, LottoCreator lottoCreator) {
+    public Lottos createLotto(int countOfLotto) {
         List<Lotto> lottoBasket = new ArrayList<>();
         for (int i = 0; i < countOfLotto; i++) {
-            List<Ball> balls = makeBall(lottoCreator.makeLotto());
+            List<Ball> balls = makeBall(LottoCreator.makeLotto());
             lottoBasket.add(new Lotto(balls));
         }
-        return lottoBasket;
+        return new Lottos(lottoBasket);
     }
 
     public void makeWinningLotto(List<Integer> winningLottoNumber) {
@@ -29,7 +29,7 @@ public class LottoService {
     }
 
     public Map<Rank, Integer> result(Lottos lottos) {
-        Map<Rank, Integer> lottoResult = new HashMap<Rank,Integer>();
+        Map<Rank, Integer> lottoResult = new HashMap<Rank, Integer>();
         for (Lotto lotto : lottos) {
             Rank findRank = this.match(lotto);
             Integer rankCount = lottoResult.getOrDefault(findRank, 0);

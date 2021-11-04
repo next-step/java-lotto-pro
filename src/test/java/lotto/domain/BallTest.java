@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.exception.MyErrorCode;
-import lotto.exception.MyException;
+import lotto.exception.InputDataErrorCode;
+import lotto.exception.InputDataException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,10 +19,10 @@ class BallTest {
     @Test
     @DisplayName("1~45 범위 밖의 로또 볼을 생성한다.")
     void createOverRangeLottoBallTest() {
-        assertThatExceptionOfType(MyException.class)
+        assertThatExceptionOfType(InputDataException.class)
                 .isThrownBy(() -> {
                     new Ball(0);
-                }).withMessageContaining(MyErrorCode.INVALID_RANGE_LOTTO_NUMBER.errorMessage());
+                }).withMessageContaining(InputDataErrorCode.INVALID_RANGE_LOTTO_NUMBER.errorMessage());
     }
 
 }

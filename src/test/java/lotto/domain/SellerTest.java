@@ -1,12 +1,10 @@
 package lotto.domain;
 
-import lotto.exception.MyException;
-import org.assertj.core.api.Assertions;
+import lotto.exception.InputDataException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class SellerTest {
 
@@ -21,7 +19,7 @@ class SellerTest {
     @DisplayName("판매원에게 1000원 미만인 돈을 주었을 경우 테스트")
     void lessThanOneThoundreturnLotto() {
         int money = 100;
-        assertThatExceptionOfType(MyException.class)
+        assertThatExceptionOfType(InputDataException.class)
                 .isThrownBy(() -> {
                         Seller.returnLotto(money);
                 }).withMessageContaining("[ERROR]최소 로또 금액(1000원)보다 작게 입력하였습니다.");
