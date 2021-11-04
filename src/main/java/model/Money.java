@@ -48,9 +48,7 @@ public final class Money {
 	}
 
 	public BigDecimal ratio(Money money) {
-		if (money.isZero()) {
-			throw new IllegalArgumentException("can not divided by zero");
-		}
+		validateZero(money);
 		return BigDecimal.valueOf(value)
 			.divide(BigDecimal.valueOf(money.value), DEFAULT_DIVIDE_SCALE, DEFAULT_DIVIDE_ROUND);
 	}
@@ -75,6 +73,17 @@ public final class Money {
 		return "Money{" +
 			"value=" + value +
 			'}';
+	}
+
+	public int divide(Money target) {
+		validateZero(target);
+		return value / target.value;
+	}
+
+	private void validateZero(Money money) {
+		if (money.isZero()) {
+			throw new IllegalArgumentException("can not divided by zero");
+		}
 	}
 
 	private boolean isZero() {

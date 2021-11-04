@@ -24,13 +24,9 @@ public final class LottoStore {
 
 	public Lottos lottos() {
 		Customer customer = Customer.from(initialMoney);
-
-		Collection<Lotto> lottoCollection = new ArrayList<>();
-		while (customer.hasMoreThan(price)) {
-			customer.subtractMoney(price);
-			lottoCollection.add(lottoGenerator.lotto());
-		}
-		return Lottos.from(lottoCollection);
+		int purchaseCount = customer.availablePurchaseCount(price);
+		customer.subtractMoney(price.multiply(purchaseCount));
+		return Lottos.from(lottoCollection(purchaseCount));
 	}
 
 	@Override
@@ -40,6 +36,14 @@ public final class LottoStore {
 			", price=" + price +
 			", lottoGenerator=" + lottoGenerator +
 			'}';
+	}
+
+	private Collection<Lotto> lottoCollection(int purchaseCount) {
+		Collection<Lotto> lottoCollection = new ArrayList<>();
+		for (int i = 0; i < purchaseCount; i++) {
+			lottoCollection.add(lottoGenerator.lotto());
+		}
+		return lottoCollection;
 	}
 
 	private void validateNonNull(Object object, String message) {

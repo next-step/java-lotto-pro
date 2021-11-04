@@ -1,59 +1,44 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 final class Customer {
 
-	private final List<Money> moneyHistory;
+	private Money money;
 
-	private Customer(List<Money> moneyHistory) {
-		this.moneyHistory = moneyHistory;
+	private Customer(Money money) {
+		validate(money);
+		this.money = money;
 	}
 
 	static Customer from(Money initialMoney) {
-		validate(initialMoney);
-		List<Money> moneyList = new ArrayList<>();
-		moneyList.add(initialMoney);
-		return new Customer(moneyList);
+		return new Customer(initialMoney);
 	}
 
-	private static void validate(Money initialMoney) {
-		if (initialMoney == null) {
-			throw new IllegalArgumentException("'money' must not be empty");
-		}
+	int availablePurchaseCount(Money price) {
+		return money.divide(price);
 	}
 
-	public boolean hasMoreThan(Money price) {
-		return currentMoney()
-			.moreThan(price);
-	}
-
-	public void subtractMoney(Money money) {
+	void subtractMoney(Money money) {
 		if (hasLessThan(money)) {
 			throw new IllegalStateException(
-				String.format("too much subtract money(%s), not enough money(%s)", money, currentMoney()));
+				String.format("too much subtract money(%s), not enough money(%s)", money, this.money));
 		}
-		changeCurrentMoney(currentMoney()
-			.subtract(money));
+		this.money = this.money.subtract(money);
 	}
 
 	@Override
 	public String toString() {
 		return "Customer{" +
-			"moneyHistory=" + moneyHistory +
+			"money=" + money +
 			'}';
 	}
 
-	private Money currentMoney() {
-		return moneyHistory.get(moneyHistory.size() - 1);
+	private void validate(Money initialMoney) {
+		if (initialMoney == null) {
+			throw new IllegalArgumentException("'money' must not be empty");
+		}
 	}
 
 	private boolean hasLessThan(Money money) {
-		return !hasMoreThan(money);
-	}
-
-	private void changeCurrentMoney(Money money) {
-		moneyHistory.add(money);
+		return !this.money.moreThan(money);
 	}
 }

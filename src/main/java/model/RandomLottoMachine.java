@@ -1,8 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 public final class RandomLottoMachine implements LottoGenerator {
@@ -21,13 +21,7 @@ public final class RandomLottoMachine implements LottoGenerator {
 
 	@Override
 	public Lotto lotto() {
-		List<LottoNumber> shuffledNumbers = shuffledNumbers();
-		List<LottoNumber> numbers = new ArrayList<>();
-		for (int index = 0; index < rule.count(); index++) {
-			numbers.add(shuffledNumbers.get(index));
-		}
-		Collections.sort(numbers);
-		return Lotto.from(new LinkedHashSet<>(numbers));
+		return Lotto.from(sortedNumbers(pickNumbers(shuffledNumbers())));
 	}
 
 	@Override
@@ -36,6 +30,20 @@ public final class RandomLottoMachine implements LottoGenerator {
 			"rule=" + rule +
 			", numberList=" + numberList +
 			'}';
+	}
+
+	private Collection<LottoNumber> sortedNumbers(List<LottoNumber> numbers) {
+		List<LottoNumber> newNumbers = new ArrayList<>(numbers);
+		Collections.sort(newNumbers);
+		return newNumbers;
+	}
+
+	private List<LottoNumber> pickNumbers(List<LottoNumber> lottoNumbers) {
+		List<LottoNumber> numbers = new ArrayList<>();
+		for (int index = 0; index < rule.count(); index++) {
+			numbers.add(lottoNumbers.get(index));
+		}
+		return numbers;
 	}
 
 	private List<LottoNumber> shuffledNumbers() {

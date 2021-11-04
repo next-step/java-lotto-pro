@@ -1,18 +1,18 @@
 package model;
 
-import java.util.Set;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 public final class Lotto {
 
-	private final Set<LottoNumber> numberCollection;
+	private final Collection<LottoNumber> numberCollection;
 
-	public Lotto(Set<LottoNumber> numberCollection) {
+	public Lotto(Collection<LottoNumber> numberCollection) {
 		validate(numberCollection);
 		this.numberCollection = numberCollection;
 	}
 
-	static Lotto from(Set<LottoNumber> numberList) {
+	static Lotto from(Collection<LottoNumber> numberList) {
 		return new Lotto(numberList);
 	}
 
@@ -42,13 +42,13 @@ public final class Lotto {
 		return 0;
 	}
 
-	private void validate(Set<LottoNumber> numberCollection) {
+	private void validate(Collection<LottoNumber> numberCollection) {
 		if (isEmpty(numberCollection)) {
 			throw new IllegalArgumentException("'numberCollection' must not be empty");
 		}
 	}
 
-	private boolean isEmpty(Set<LottoNumber> numberCollection) {
+	private boolean isEmpty(Collection<LottoNumber> numberCollection) {
 		return numberCollection == null || numberCollection.isEmpty();
 	}
 

@@ -27,20 +27,20 @@ class CustomerTest {
 
 	@ParameterizedTest(name = "{displayName}[{index}] it is {1} that customer has more than {0}")
 	@DisplayName("현재 소유하고 있는 100원이 비교 대상보다 큰지 판단")
-	@CsvSource({"0,true", "10,true", "100,true", "200,false"})
-	void hasMoreThan_alwaysTrue(int money, boolean expected) {
+	@CsvSource({"1,100", "100,1", "101,0"})
+	void availablePurchaseCount(int money, int expected) {
 		//when
-		boolean hasMoreThan = Customer.from(oneHundredMoney())
-			.hasMoreThan(Money.from(money));
+		int purchaseCount = Customer.from(oneHundredMoney())
+			.availablePurchaseCount(Money.from(money));
 
 		//then
-		assertThat(hasMoreThan)
+		assertThat(purchaseCount)
 			.isEqualTo(expected);
 	}
 
 	@Test
 	@DisplayName("현재 소유하고 있는 금액에서 빼기")
-	void minusMoney() {
+	void subtractMoney() {
 		//given
 		Customer customerWith100 = Customer.from(oneHundredMoney());
 
@@ -48,13 +48,13 @@ class CustomerTest {
 		customerWith100.subtractMoney(Money.from(10));
 
 		//then
-		assertThat(customerWith100.hasMoreThan(oneHundredMoney()))
-			.isFalse();
+		assertThat(customerWith100.availablePurchaseCount(Money.from(10)))
+			.isEqualTo(9);
 	}
 
 	@Test
 	@DisplayName("현재 소유하고 있는 금액보다 큰 돈을 뺄 경우 IllegalStateException")
-	void minusMoney_lessThan_thrownIllegalStateException() {
+	void subtractMoney_lessThan_thrownIllegalStateException() {
 		//given
 		Customer customerWith100 = Customer.from(oneHundredMoney());
 
