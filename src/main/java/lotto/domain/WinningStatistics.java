@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import static java.util.stream.Collectors.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class WinningStatistics {
+	private static final int PERCENT_COEFFICIENT = 100;
+
 	private final Lottos lottos;
 	private final LottoNumbers lastWinningNumbers;
 	private final Money money;
@@ -38,7 +38,7 @@ public class WinningStatistics {
 
 	public double getRoundedTotalProfitRate() {
 		double totalProfitRate = calculateTotalProfitRate();
-		return Math.round(totalProfitRate * 100) / 100.0;
+		return Math.round(totalProfitRate * PERCENT_COEFFICIENT) / (double) PERCENT_COEFFICIENT;
 	}
 
 	private double calculateTotalProfitRate() {
