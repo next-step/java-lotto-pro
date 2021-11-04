@@ -29,10 +29,10 @@ public class WinningMap {
         return winningMap;
     }
 
-    public int revenue(BoughtLotto boughtLotto) {
+    public double revenue(BoughtLotto boughtLotto) {
         return winningMap.keySet()
                 .stream()
                 .mapToInt(rank -> rank.calculateRevenue(winningMap.get(rank)))
-                .sum() / boughtLotto.getBoughtMoney();
+                .sum() / (double) boughtLotto.getBoughtMoney();
     }
 }

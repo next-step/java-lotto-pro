@@ -83,7 +83,7 @@ class WinningMapTest {
 
         WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
 
-        int revenue = winningMap.revenue(boughtLotto);
+        double revenue = winningMap.revenue(boughtLotto);
 
         assertThat(revenue).isEqualTo(revenuePercent);
     }

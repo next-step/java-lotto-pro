@@ -52,8 +52,8 @@ public class ConsoleView {
         }
     }
 
-    public static void printRevenue() {
-
+    public static void printRevenue(double revenue) {
+        System.out.printf(REVENUE_PERCENT, revenue);
     }
 
     public static void printLine() {

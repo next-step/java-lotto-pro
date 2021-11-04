@@ -25,5 +25,7 @@ public class LottoExecutor {
         printLine();
         WinningMap winningMap = WinningMap.winningOf(lottoTicket, winningLottoNumbers);
         printWinning(winningMap);
+        double revenue = winningMap.revenue(boughtLotto);
+        printRevenue(revenue);
     }
 }
