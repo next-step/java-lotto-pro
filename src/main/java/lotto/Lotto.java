@@ -8,20 +8,21 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-	private List<Integer> numbers;
+	private List<LottoNumber> numbers;
+
+	private final List<LottoNumber> allNumbers =
+		IntStream.range(START_NUMBER, END_NUMBER).mapToObj(LottoNumber::new).collect(Collectors.toList());
 
 	public Lotto() {
 		this.numbers = generate();
 	}
 
-	private List<Integer> generate() {
-		List<Integer> allNumbers =
-			IntStream.range(START_NUMBER, END_NUMBER).boxed().collect(Collectors.toList());
+	private List<LottoNumber> generate() {
 		Collections.shuffle(allNumbers);
 		return allNumbers.subList(0, VOLUME);
 	}
 
-	public List<Integer> getNumbers() {
+	public List<LottoNumber> getNumbers() {
 		return numbers;
 	}
 }

@@ -24,11 +24,11 @@ public class SetTest {
 		numbers.add(2);
 		numbers.add(3);
 	}
-	
+
 	@Test
 	@DisplayName("set의 size 메서드를 활용한 test")
 	public void setSize() {
-	    assertThat(numbers.size()).isEqualTo(3);
+		assertThat(numbers.size()).isEqualTo(3);
 	}
 
 	@DisplayName("parametrizedTest 를 활용한 1,2,3 케이스 true 확인 성공")
@@ -44,5 +44,5 @@ public class SetTest {
 	public void parameterizedWithExpectedValueSuccessOrFail(int value, Boolean expected) {
 		assertThat(numbers.contains(value)).isEqualTo(expected);
 	}
-	
+
 }

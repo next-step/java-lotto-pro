@@ -48,13 +48,14 @@ public class StringInput {
 
 	private String[] delimiterSeparate() {
 		Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(input);
-		 if (m.find()) {
+		if (m.find()) {
 			return validSeparate(m.group(2).split(m.group(1)));
 		}
 		return validSeparate(input.split(DELIMITERS));
 	}
 
-	private String[] validSeparate(String[] splits) {;
+	private String[] validSeparate(String[] splits) {
+		;
 		validString(splits);
 		return splits;
 	}
@@ -74,7 +75,7 @@ public class StringInput {
 		try {
 			int i = Integer.parseInt(number);
 			isPositiveNumber(i);
-		}catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			throw new RuntimeException(EXCEPTION_MESSAGE);
 		}
 	}

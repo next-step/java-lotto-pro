@@ -13,16 +13,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 class StringAddCalculatorTest {
 	private static final String EXCEPTION_MESSAGE = "양의 숫자만 입력 가능합니다.";
 
-	@Test
-	@DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환한다.")
-	public void splitAndSum_null_또는_빈문자() {
-		int result = StringAddCalculator.splitAndSum(null);
-		assertThat(result).isEqualTo(0);
-
-		result = StringAddCalculator.splitAndSum("");
-		assertThat(result).isEqualTo(0);
-	}
-
 	@ParameterizedTest
 	@NullAndEmptySource
 	@DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환한다.")

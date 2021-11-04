@@ -13,8 +13,8 @@ public class WinnerNumber {
 		return winnerNumber;
 	}
 
-	public int strikeCount(List<Integer> compareList) {
-		compareList.retainAll(this.winnerNumber.getInput());
+	public int strikeCount(List<LottoNumber> compareList) {
+		compareList.retainAll(this.winnerNumber.getLottoNumbers());
 		return compareList.size();
 	}
 }

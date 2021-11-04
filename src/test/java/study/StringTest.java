@@ -13,8 +13,8 @@ public class StringTest {
 
 	@Test
 	public void split1Comma2Success() {
-	    String[] result = "1,2".split(",");
-	    assertThat(result).containsExactly("1","2");
+		String[] result = "1,2".split(",");
+		assertThat(result).containsExactly("1", "2");
 	}
 
 	@Test
@@ -22,18 +22,18 @@ public class StringTest {
 		String[] result = "1".split(",");
 		assertThat(result).containsExactly("1");
 	}
-	
+
 	@Test
 	public void substringBracketSuccess() {
-	    String str = "(1,2)";
+		String str = "(1,2)";
 		String result = str.substring(1, str.length() - 1);
 		assertThat(result).isEqualTo("1,2");
 	}
-	
+
 	@Test
 	@DisplayName("'abc'의  첫번째 character인 'a'를 반환한다.")
 	public void charAtAbcGetASuccess() {
-	    assertThat(CHARAT_TEST_STR.charAt(0)).isEqualTo('a');
+		assertThat(CHARAT_TEST_STR.charAt(0)).isEqualTo('a');
 	}
 
 	@Test
@@ -50,15 +50,15 @@ public class StringTest {
 
 	@DisplayName("parameterizedTest를 활용한 'abc' character 반환 성공.")
 	@ParameterizedTest
-	@CsvSource(value = {"0:a","1:b","2:c"}, delimiter = ':')
+	@CsvSource(value = {"0:a", "1:b", "2:c"}, delimiter = ':')
 	public void charAtAbcGetSuccess(int index, char c) {
 		assertThat(CHARAT_TEST_STR.charAt(index)).isEqualTo(c);
 	}
-	
+
 	@Test
 	@DisplayName("'abc'의 네번재 인덱스 선택 시 StringIndexOutOfBoundsException을 반환한다.")
 	public void charAtAbcGet4IndexOutOfBoundExceptionFail() {
-	    assertThatThrownBy(() -> CHARAT_TEST_STR.charAt(4))
+		assertThatThrownBy(() -> CHARAT_TEST_STR.charAt(4))
 			.isInstanceOf(StringIndexOutOfBoundsException.class);
 	}
 

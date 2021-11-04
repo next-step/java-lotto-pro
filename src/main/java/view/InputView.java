@@ -18,4 +18,7 @@ public class InputView {
 		return readLine(Messages.INPUT_WINNING_NUMBER.getValues());
 	}
 
+	public static String inputBonusBall() {
+		return readLine(Messages.INPUT_BONUS_BALL.getValues());
+	}
 }
