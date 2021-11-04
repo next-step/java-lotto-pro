@@ -48,12 +48,12 @@ public class LottoAppTest {
 	@DisplayName("일치갯수들이 주어지면, 총 포인트를 계산해야 한다")
 	public void calculatePointTest() {
 		// given
-		LottoNumber answers = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+		LottoNumber answers = LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 		List<LottoNumber> numbers = new ArrayList<>();
-		numbers.add(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		numbers.add(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 9)));
-		numbers.add(new LottoNumber(Arrays.asList(1, 2, 3, 4, 8, 9)));
-		numbers.add(new LottoNumber(Arrays.asList(1, 2, 3, 7, 8, 9)));
+		numbers.add(LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		numbers.add(LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 9)));
+		numbers.add(LottoNumber.of(Arrays.asList(1, 2, 3, 4, 8, 9)));
+		numbers.add(LottoNumber.of(Arrays.asList(1, 2, 3, 7, 8, 9)));
 
 		// when
 		LottoPrize vo = lottoApp.calculatePoint(answers, numbers);

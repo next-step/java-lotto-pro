@@ -29,8 +29,8 @@ public class LottoPrizeTest {
 	public void getPrizeTestByLottoNumbers() {
 		// given
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
-		lottoNumbers.add(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		LottoNumber answer = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+		lottoNumbers.add(LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		LottoNumber answer = LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 		LottoPrize lottoPrize = new LottoPrize(answer, lottoNumbers);
 
 		// when

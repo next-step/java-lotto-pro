@@ -18,7 +18,7 @@ public class LottoMainApp {
 		List<LottoNumber> numbers = lottoApp.getLottoNumbersByCount(lottoCount);
 		ResultView.showLottoNumbers(lottoCount, numbers);
 
-		LottoNumber answer = new LottoNumber(InputView.getLottoNumbers());
+		LottoNumber answer = LottoNumber.of(InputView.getLottoNumbers());
 		LottoPrize lottoPrize = lottoApp.calculatePoint(answer, numbers);
 		double profit = lottoApp.getProfit(money, lottoPrize);
 		ResultView.showPrize(lottoPrize, profit);
