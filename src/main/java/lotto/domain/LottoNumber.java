@@ -3,13 +3,19 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
+    protected static final int MIN_NUMBER = 1;
+    protected static final int MAX_NUMBER = 45;
     private final int number;
 
     public LottoNumber(int number) {
-        if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("1에서 45 사이의 숫자를 입력하세요");
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+            throw new IllegalArgumentException(String.format("%d에서 %d 사이의 숫자를 입력하세요", MIN_NUMBER, MAX_NUMBER));
         }
         this.number = number;
+    }
+
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number));
     }
 
     public int value() {
