@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 
-public class RandomNumbers {
+public class RandomNumbers implements Numbers{
 
     private static final int MAX_SIZE = 6;
 
@@ -12,6 +12,7 @@ public class RandomNumbers {
         this.number = number;
     }
 
+    @Override
     public List<Integer> random() {
         final List list = new ArrayList(getRandomNumbers());
         Collections.shuffle(list);

@@ -17,6 +17,10 @@
 `Lotto`는 `Lotto` 와 비교하여 당첨번호 개수를 반환한다
 `Lotto`는 6자리의 숫자 문자열을 받아 생성한다
 
+로또들 (`Lottos`)
+`Lottos`는 `RandomNumbers`를 가진다
+`Lottos`는 로또 개수(`count`)를 받아 로또들을 반환한다
+
 로또 번호 (`LottoNumber`)
 `LottoNumber`는 `number`를 가진다
 `LottoNumber`는 1부터 45까지의 숫자를 가진다

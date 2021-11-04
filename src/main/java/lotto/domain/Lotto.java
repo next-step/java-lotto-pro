@@ -22,6 +22,10 @@ public class Lotto {
         this(Splitter.split(numbers));
     }
 
+    public Lotto(final Numbers numbers) {
+        this(numbers.random());
+    }
+
     private void check() {
         if (lotto.size() != MAX_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다");
