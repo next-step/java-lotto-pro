@@ -15,7 +15,7 @@ public class LotteryNumberMakerTest {
 
 	@Test
 	public void makeLotteryNumbers_1에서45사이_6개의_숫자생성(){
-		List<Integer> lotteryNumbers=LotteryNumberMaker.makeLotteryTicket();
+		List<Integer> lotteryNumbers=LotteryNumberMaker.makelotteryNumbers();
 
 		assertThat(lotteryNumbers.size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
 		lotteryNumbers.forEach(lotteryNumber-> assertThat(lotteryNumber).isBetween(START_INCLUSIVE_NUMBER,END_EXCLUSIVE_NUMBER));

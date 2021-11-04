@@ -13,7 +13,7 @@ public class LotteryNumberMaker {
 	private static final int END_EXCLUSIVE_NUMBER=45;	/* 로또 번호 최대값 */
 	private static final List<Integer> lotteryNumberCandidates = getLotteryNumberCandidates();
 
-	public static List<Integer> makeLotteryTicket() {
+	public static List<Integer> makelotteryNumbers() {
 		Collections.shuffle(lotteryNumberCandidates);
 		List<Integer> lotteryNumbers=lotteryNumberCandidates.stream().limit(6).collect(Collectors.toList());
 		return lotteryNumbers;
