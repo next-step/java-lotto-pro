@@ -9,13 +9,13 @@ public class WinningStatistics {
 	private final Lottos lottos;
 	private final LottoNumbers lastWinningNumbers;
 	private final Money money;
-	private final List<WinningRecord> winningRecords;
+	private final WinningRecords winningRecords;
 
 	private WinningStatistics(Lottos lottos, LottoNumbers lastWinningNumbers, Money money) {
 		this.lottos = lottos;
 		this.lastWinningNumbers = lastWinningNumbers;
 		this.money = money;
-		this.winningRecords = new ArrayList<>();
+		this.winningRecords = WinningRecords.createDefault();
 	}
 
 	public static WinningStatistics createBy(Lottos lottos, LottoNumbers lastWinningNumbers, Money money) {
@@ -50,14 +50,14 @@ public class WinningStatistics {
 
 	private long calculateTotalPrizeMoney() {
 		long totalProfile = 0L;
-		for (WinningRecord winningRecord : this.winningRecords) {
+		for (WinningRecord winningRecord : this.winningRecords.getValues()) {
 			totalProfile += winningRecord.getTotalPrizeMoney();
 		}
 
 		return totalProfile;
 	}
 
-	public List<WinningRecord> getWinningRecords() {
+	public WinningRecords getWinningRecords() {
 		return winningRecords;
 	}
 }

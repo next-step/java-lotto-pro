@@ -6,6 +6,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.WinningRank;
 import lotto.domain.WinningRecord;
+import lotto.domain.WinningRecords;
 import lotto.domain.WinningStatistics;
 import lotto.utils.MessageBuilder;
 
@@ -34,8 +35,8 @@ public class ResultView {
 		printTotalProfitRate(winningStatistics.getRoundedTotalProfitRate());
 	}
 
-	private void printWinningRecords(List<WinningRecord> winningRecords) {
-		for (WinningRecord record : winningRecords) {
+	private void printWinningRecords(WinningRecords winningRecords) {
+		for (WinningRecord record : winningRecords.getValues()) {
 			WinningRank winningRank = record.getWinningRank();
 			System.out.println(MessageBuilder.build(WINNING_RANK_RECODE_RESULT_MESSAGE,
 													winningRank.getWinningNumberCount(),
