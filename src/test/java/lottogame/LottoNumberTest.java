@@ -1,14 +1,12 @@
 package lottogame;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lottogame.exception.InvalidLottoNumber;
+import lottogame.exception.InvalidLottoNumberException;
+import lottogame.exception.InvalidScopeOfLottoNumberException;
 
 class LottoNumberTest {
 
@@ -24,7 +22,7 @@ class LottoNumberTest {
 	public void 로또_번호_생성_유효하지않은_숫자_예외(int number){
 		assertThatThrownBy(()->{
 			LottoNumber lottoNumber = new LottoNumber(number);
-		}).isInstanceOf(InvalidLottoNumber.class);
+		}).isInstanceOf(InvalidScopeOfLottoNumberException.class);
 	}
 
 }
