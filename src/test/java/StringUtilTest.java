@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,6 +15,11 @@ public class StringUtilTest {
     public void splitStringTestOnlyOneString(){
         //assertThat(StringUtil.splitString("1")).containsOnly("1");
         assertThat(StringUtil.splitString("1")).containsExactly("1");
+    }
+
+    @Test
+    public void splitStringTestWithDelimiter(){
+        assertThat(StringUtil.splitString("1,2:3", ",|:")).containsExactly("1","2","3");
     }
 
     @Test
