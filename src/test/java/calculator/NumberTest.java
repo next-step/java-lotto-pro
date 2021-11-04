@@ -1,5 +1,6 @@
 package calculator;
 
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -20,7 +21,9 @@ class NumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"-1", "-2", "-5"})
     void givenNegativeNumber(String input) {
-        assertThatThrownBy(() -> new Number(input))
+        ThrowableAssert.ThrowingCallable throwingCallable = () -> new Number(input);
+
+        assertThatThrownBy(throwingCallable)
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("양수를 입력해야 합니다");
     }
