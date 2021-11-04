@@ -66,4 +66,4 @@
 * [X] 통계
     * [X] 당첨로또의 숫자가 보너스볼과 중복될 경우 IllegalArgumentException이 발생한다.
     * [X] 당첨로또, 보너스볼과 구입한 로또들을 비교해서 당첨결과를 통계낸다.
-* [ ] Controller와 View단을 구현한다.
+* [X] Controller와 View단을 구현한다.
