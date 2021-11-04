@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 public class ConsoleView {
     private static final String ENTER_MONEY_TEXT = "구입금액을 입력해 주세요.";
-    private static final String BUY_LOTTO_TEXT = "%d개를 구매했습니다.";
+    private static final String BUY_LOTTO_TEXT = "%d개를 구매했습니다." + System.lineSeparator();
+    private static final String ENTER_WINNING_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
     private static Scanner scanner = new Scanner(System.in);
 
     public static int enterMoney() {
@@ -23,5 +24,17 @@ public class ConsoleView {
     public static void outputLottoTicket(LottoTicket lottoTicket) {
         List<LottoNumbers> ticket = lottoTicket.getTicket();
         ticket.stream().forEach(System.out::println);
+        outputLine();
     }
+
+    public static String enterWinning() {
+        scanner.nextLine();
+        System.out.println(ENTER_WINNING_TEXT);
+        return scanner.nextLine();
+    }
+
+    public static void outputLine() {
+        System.out.println();
+    }
+
 }

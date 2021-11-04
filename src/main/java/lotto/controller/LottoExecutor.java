@@ -2,9 +2,9 @@ package lotto.controller;
 
 import lotto.domain.BoughtLotto;
 import lotto.domain.LottoTicket;
+import lotto.domain.Winning;
 
-import static lotto.view.ConsoleView.outputBoughtLotto;
-import static lotto.view.ConsoleView.outputLottoTicket;
+import static lotto.view.ConsoleView.*;
 
 public class LottoExecutor {
 
@@ -19,5 +19,7 @@ public class LottoExecutor {
         outputBoughtLotto(boughtLotto.getBoughtCount());
         LottoTicket lottoTicket = lottoController.generateLottoTicket(boughtLotto);
         outputLottoTicket(lottoTicket);
+        Winning winningLottoNumbers = lottoController.enterWinningLottoNumbers();
+        outputLine();
     }
 }
