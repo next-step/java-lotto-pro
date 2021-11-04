@@ -30,7 +30,7 @@ public class LottoController {
 		LottoNumbers lastWinningNumbers = LottoNumbers.of(inputView.inputWinningNumbers());
 		LottoNumber bonusNumber = inputView.inputBonusNumber(lastWinningNumbers);
 
-		WinningStatistics winningStatistics = WinningStatistics.createBy(lottos, lastWinningNumbers, money);
+		WinningStatistics winningStatistics = WinningStatistics.createBy(lottos, lastWinningNumbers, bonusNumber, money);
 		winningStatistics.buildStatistics();
 
 		this.resultView.printWinningStatistics(winningStatistics);

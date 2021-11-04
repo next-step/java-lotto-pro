@@ -8,18 +8,23 @@ public class WinningStatistics {
 
 	private final Lottos lottos;
 	private final LottoNumbers lastWinningNumbers;
+	private final LottoNumber bonusNumber;
 	private final Money money;
 	private final WinningRecords winningRecords;
 
-	private WinningStatistics(Lottos lottos, LottoNumbers lastWinningNumbers, Money money) {
+	private WinningStatistics(Lottos lottos, LottoNumbers lastWinningNumbers, LottoNumber bonusNumber, Money money) {
 		this.lottos = lottos;
 		this.lastWinningNumbers = lastWinningNumbers;
+		this.bonusNumber = bonusNumber;
 		this.money = money;
 		this.winningRecords = WinningRecords.createDefault();
 	}
 
-	public static WinningStatistics createBy(Lottos lottos, LottoNumbers lastWinningNumbers, Money money) {
-		return new WinningStatistics(lottos, lastWinningNumbers, money);
+	public static WinningStatistics createBy(Lottos lottos,
+											 LottoNumbers lastWinningNumbers,
+											 LottoNumber bonusNumber,
+											 Money money) {
+		return new WinningStatistics(lottos, lastWinningNumbers, bonusNumber, money);
 	}
 
 	public void buildStatistics() {
@@ -29,16 +34,21 @@ public class WinningStatistics {
 		}
 	}
 
-	private int countNumberOfWinningRank(WinningRank winningRank) {
-		return (int) this.lottos.getValues()
-								.stream()
-								.filter(lotto -> winningRank.isWinning(lotto.countWinningNumbers(lastWinningNumbers)))
-								.count();
-	}
-
 	public double getRoundedTotalProfitRate() {
 		double totalProfitRate = calculateTotalProfitRate();
 		return Math.round(totalProfitRate * PERCENT_COEFFICIENT) / (double) PERCENT_COEFFICIENT;
+	}
+
+	private int countNumberOfWinningRank(WinningRank winningRank) {
+		return (int) this.lottos.getValues()
+								.stream()
+								.filter(lotto -> isSameWinningRank(lotto, winningRank))
+								.count();
+	}
+
+	private boolean isSameWinningRank(Lotto lotto, WinningRank winningRank) {
+		return winningRank.equals(WinningRank.valueOf(lotto.countWinningNumbers(lastWinningNumbers),
+													  lotto.hasBonusNumber(bonusNumber)));
 	}
 
 	private double calculateTotalProfitRate() {
