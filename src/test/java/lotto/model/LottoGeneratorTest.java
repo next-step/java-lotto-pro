@@ -79,7 +79,7 @@ class LottoGeneratorTest {
 		// then
 		assertAll(
 			() -> assertThat(lottoGenerator).isInstanceOf(LottoGenerator.class),
-			() -> assertThat(lottoGenerator.getLottoNumbersList()).hasSize(lottoNumbersListSize)
+			() -> assertThat(lottoGenerator.size()).isEqualTo(lottoNumbersListSize)
 		);
 	}
 }

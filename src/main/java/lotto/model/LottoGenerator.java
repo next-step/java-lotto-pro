@@ -15,10 +15,6 @@ public class LottoGenerator {
 		this.lottoNumbersList = generateLottoNumbers(inputMoney);
 	}
 
-	public List<LottoNumbers> getLottoNumbersList() {
-		return lottoNumbersList;
-	}
-
 	private void validNullOrEmpty(String input) {
 		if (isNullOrEmpty(input)) {
 			throw new IllegalArgumentException();
@@ -53,5 +49,9 @@ public class LottoGenerator {
 		} while (lottoNumbersList.size() < calculateLottoAmount(inputMoney));
 
 		return lottoNumbersList;
+	}
+
+	public int size() {
+		return lottoNumbersList.size();
 	}
 }
