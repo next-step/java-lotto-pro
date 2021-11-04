@@ -28,23 +28,7 @@ class LottoNumberTest {
 		LottoNumber lottoNumber = new LottoNumber();
 
 		// then
-		assertThat(lottoNumber.getNumber()).isBetween(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER);
-	}
-
-	@DisplayName("로또번호 생성시 number 값을 받아오는 테스트")
-	@Test
-	void 로또번호_생성시_getNumber_테스트() {
-		// given
-		int number = 4;
-
-		// when
-		LottoNumber lottoNumber = new LottoNumber(number);
-
-		// then
-		assertAll(
-			() -> assertThat(lottoNumber).isInstanceOf(LottoNumber.class),
-			() -> assertThat(lottoNumber.getNumber()).isEqualTo(number)
-		);
+		assertThat(lottoNumber).isInstanceOf(LottoNumber.class);
 	}
 
 	@DisplayName("로또번호 비교 테스트")
