@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import step3.common.exception.InvalidParamException;
 import step3.domain.constance.LottoConstant;
 
 public class LottoTicket {
@@ -40,7 +41,7 @@ public class LottoTicket {
 
     private void validTicketSize() {
         if (lottoTicket.size() != LottoConstant.LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException(LottoConstant.LOTTO_TICKET_OVER_SIZE_EXCEPTION_MESSAGE);
+            throw new InvalidParamException(LottoConstant.LOTTO_TICKET_OVER_SIZE_EXCEPTION_MESSAGE);
         }
     }
 

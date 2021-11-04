@@ -1,7 +1,9 @@
 package step3.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import step3.domain.constance.LottoConstant;
 
@@ -18,8 +20,17 @@ public class LottoTicketBundle {
                 LottoConstant.LOTTO_TICKET_SIZE)));
     }
 
-    public LottoTicketVoucher toLottoTicketVoucher() {
-        return new LottoTicketVoucher(lottoTicketBundle);
+    public void addLottoTicket(int... numbers) {
+        lottoTicketBundle.add(new LottoTicket(numbers));
     }
 
+    public LottoTicketVoucher toLottoTicketVoucher() {
+        return new LottoTicketVoucher(this);
+    }
+
+    public List<LottoTicket> getLottoTicketToList() {
+        return lottoTicketBundle.stream()
+            .collect(Collectors.collectingAndThen(Collectors.toList(),
+                Collections::unmodifiableList));
+    }
 }

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import step3.common.exception.InvalidParamException;
 import step3.domain.constance.LottoConstant;
 
 public class LottoTicketTest {
@@ -27,7 +28,7 @@ public class LottoTicketTest {
         // given
         int[] numbers = {1, 2, 3, 4, 5};
 
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
                 new LottoTicket(numbers);
@@ -41,7 +42,7 @@ public class LottoTicketTest {
         // given
         int[] numbers = {1, 2, 3, 4, 5, 6, 7};
 
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
                 new LottoTicket(numbers);

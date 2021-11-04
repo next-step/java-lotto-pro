@@ -2,6 +2,7 @@ package step3.domain;
 
 import java.util.Objects;
 
+import step3.common.exception.InvalidParamException;
 import step3.domain.constance.LottoConstant;
 
 public class LottoNumber {
@@ -19,7 +20,7 @@ public class LottoNumber {
 
     private void rangeNumberValid(int lotteNumber) {
         if (lotteNumber < LottoConstant.RANGE_MIN_LOTTO_NUMBER || lotteNumber > LottoConstant.RANGE_MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(LottoConstant.RANGE_OVER_EXCEPTION);
+            throw new InvalidParamException(LottoConstant.RANGE_OVER_EXCEPTION);
         }
     }
 
