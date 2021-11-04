@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
@@ -105,6 +106,26 @@ public class LottoNumbersTest {
         @ValueSource(strings = {"1,2,3,4,5,5", "1, 3, 45, 6, 1, 4"})
         void testNotDuplicate(String text) {
             assertThatThrownBy(() -> LottoNumbers.of(text)).isInstanceOf(IllegalArgumentException.class);
+        }
+    }
+
+    @DisplayName("당첨 번호 비교")
+    @Nested
+    class CompareTest {
+        @DisplayName("LottoNumber가 포함되어 있는지 여부를 반환한다")
+        @ParameterizedTest
+        @CsvSource(value = {"1:true", "6:true", "7:false"}, delimiter = ':')
+        void testContains(int value, boolean result) {
+            LottoNumbers lottoNumbers = LottoNumbers.of("1,2,3,4,5,6");
+            assertThat(lottoNumbers.contains(new LottoNumber(value))).isEqualTo(result);
+        }
+
+        @DisplayName("당첨 번호와 비교하여 일치하는 숫자를 반환한다")
+        @Test
+        public void testCompare() {
+            LottoNumbers lottoNumbers = LottoNumbers.of("1,2,3,4,5,6");
+            int matchedCount = lottoNumbers.getMatchedCount(LottoNumbers.of("1,2,3,11,12,13"));
+            assertThat(matchedCount).isEqualTo(3);
         }
     }
 }

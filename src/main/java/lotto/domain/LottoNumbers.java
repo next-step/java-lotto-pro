@@ -49,4 +49,23 @@ public class LottoNumbers {
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
+
+    public int getMatchedCount(LottoNumbers winningNumbers) {
+        int result = 0;
+        for (LottoNumber number : numbers) {
+            result = getIncreasedNumberIfContains(winningNumbers, number, result);
+        }
+        return result;
+    }
+
+    private int getIncreasedNumberIfContains(LottoNumbers winningNumbers, LottoNumber number, int result) {
+        if (winningNumbers.contains(number)) {
+            return result + 1;
+        }
+        return result;
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
 }
