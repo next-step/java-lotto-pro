@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbersMaker {
-	private static final int START_INCLUSIVE_NUMBER=1;	/* 로또 번호 최소값 */
-	private static final int END_EXCLUSIVE_NUMBER=45;	/* 로또 번호 최대값 */
+	protected static final int START_INCLUSIVE_NUMBER=1;	/* 로또 번호 최소값 */
+	protected static final int END_EXCLUSIVE_NUMBER=45;	/* 로또 번호 최대값 */
 	private static final List<Integer> lottoNumberCandidates = getLottoNumberCandidates();
 
 	public static LottoNumberGroup makelottoNumbers() {
