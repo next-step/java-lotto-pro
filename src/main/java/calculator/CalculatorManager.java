@@ -11,23 +11,25 @@ public class CalculatorManager {
 
     private Delimiters delimiters;
     private NumbersText numbersText;
-    private final Numbers numbers;
+    private Numbers numbers;
 
     public CalculatorManager(String text) {
+        delimiters = new Delimiters();
+        numbersText = new NumbersText(text);
         parseString(text);
         numbers = new Numbers(getNumbersText());
     }
 
     private void parseString(String text) {
+        if (numbersText.isNullOrEmptyString()) {
+            return;
+        }
+
         Matcher matcher = pattern.matcher(text);
         if (matcher.find()) {
             delimiters = new Delimiters(matcher.group(MATCH_GROUP_DELIMITER));
             numbersText = new NumbersText(matcher.group(MATCH_GROUP_NUMBER));
-            return;
         }
-
-        delimiters = new Delimiters();
-        numbersText = new NumbersText(text);
     }
 
     public String[] getNumbersText() {
