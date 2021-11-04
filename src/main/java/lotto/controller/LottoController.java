@@ -3,7 +3,7 @@ package lotto.controller;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.purchase.PurchaseAmount;
 import lotto.domain.purchase.PurchaseMoney;
-import lotto.domain.statistics.WinningResult;
+import lotto.domain.winning.WinningResult;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -30,6 +30,5 @@ public class LottoController {
         } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
         }
-
     }
 }

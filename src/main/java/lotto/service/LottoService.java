@@ -4,9 +4,9 @@ import lotto.domain.lotto.LottoTicketVendingMachine;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.purchase.PurchaseAmount;
 import lotto.domain.purchase.PurchaseMoney;
-import lotto.domain.statistics.WinningNumbers;
-import lotto.domain.statistics.WinningResult;
-import lotto.domain.statistics.WinningStatistics;
+import lotto.domain.winning.WinningNumbers;
+import lotto.domain.winning.WinningResult;
+import lotto.domain.winning.WinningStatistics;
 import lotto.util.StringUtil;
 
 import java.util.List;

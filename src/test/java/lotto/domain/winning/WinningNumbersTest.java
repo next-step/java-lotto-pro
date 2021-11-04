@@ -1,4 +1,4 @@
-package lotto.domain.statistics;
+package lotto.domain.winning;
 
 import lotto.domain.lotto.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
