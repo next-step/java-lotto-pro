@@ -21,9 +21,9 @@ public class LottoNumberTest {
     public void autoLottoTest() {
         LottoNumber lottoNumber = new LottoNumber();
 
-        List<Number> numbers = lottoNumber.getLottoNumber();
+        lottoNumber.generateLottoNumber();
 
-        assertThat(numbers.size()).isEqualTo(6);
+        assertThat(lottoNumber.getLottoNumber().size()).isEqualTo(6);
     }
 
     static Stream<Arguments> listProvide() {
@@ -37,9 +37,9 @@ public class LottoNumberTest {
     public void activeLottoTest(List<Integer> activeNumbers) {
         LottoNumber lottoNumber = new LottoNumber();
 
-        List<Number> numbers = lottoNumber.getLottoNumber(activeNumbers);
+        lottoNumber.generateLottoNumber(activeNumbers);
 
-        assertThat(numbers).containsExactly(new Number(1), new Number(2), new Number(3),
+        assertThat(lottoNumber.getLottoNumber()).containsExactly(new Number(1), new Number(2), new Number(3),
                 new Number(4), new Number(5), new Number(6));
     }
 
@@ -55,7 +55,7 @@ public class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber();
 
         assertThatThrownBy(() -> {
-            List<Number> numbers = lottoNumber.getLottoNumber(activeNumbers);
+            lottoNumber.generateLottoNumber(activeNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
 
@@ -74,7 +74,8 @@ public class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber();
 
         assertThatThrownBy(() -> {
-            List<Number> numbers = lottoNumber.getLottoNumber(activeNumbers);
+            lottoNumber.generateLottoNumber(activeNumbers);
+
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
 

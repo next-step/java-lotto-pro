@@ -13,17 +13,15 @@ public class LottoNumber {
 
     private final List<Number> lottoNumbers = new ArrayList<>();
 
-    public List<Number> getLottoNumber() {
-        setLottoNumbers(generateAutoLottoNumbers());
-        return lottoNumbers;
+    public void generateLottoNumber() {
+        addAllLottoNumbers(getAutoLottoNumbers());
     }
 
-    public List<Number> getLottoNumber(List<Integer> activeNumbers) {
-        setLottoNumbers(generateActiveLottoNumbers(activeNumbers));
-        return lottoNumbers;
+    public void generateLottoNumber(List<Integer> activeNumbers) {
+        addAllLottoNumbers(getActiveLottoNumbers(activeNumbers));
     }
 
-    private List<Number> generateAutoLottoNumbers() {
+    private List<Number> getAutoLottoNumbers() {
         Set<Number> numbers = new HashSet<>();
         while (numbers.size() < LOTTO_SIZE) {
             numbers.add(getRandomNumber());
@@ -31,7 +29,7 @@ public class LottoNumber {
         return new ArrayList<>(numbers);
     }
 
-    private List<Number> generateActiveLottoNumbers(List<Integer> activeNumbers) {
+    private List<Number> getActiveLottoNumbers(List<Integer> activeNumbers) {
         return activeNumbers.stream()
                 .map(Number::new)
                 .collect(Collectors.toList());
@@ -48,7 +46,11 @@ public class LottoNumber {
         }
     }
 
-    private void setLottoNumbers(List<Number> lottoNumbers) {
+    public List<Number> getLottoNumber() {
+        return lottoNumbers;
+    }
+
+    private void addAllLottoNumbers(List<Number> lottoNumbers) {
         validateLottoNumbersSize(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers.addAll(lottoNumbers);
