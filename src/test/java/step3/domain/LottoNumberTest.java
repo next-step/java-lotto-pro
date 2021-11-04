@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import step2.SplitNumber;
+import step3.common.exception.InvalidParamException;
 import step3.domain.constance.LottoConstant;
 
 class LottoNumberTest {
@@ -22,7 +22,7 @@ class LottoNumberTest {
     @ValueSource(ints = {-1, 46})
     @DisplayName("1 부터 45 이외 입력 값 LottoNumber 인스턴스 생성 실패")
     void 로또_넘버_생성_실패(int inputLottoNumber) {
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
                 new LottoNumber(inputLottoNumber);
