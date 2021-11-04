@@ -17,7 +17,6 @@ public class LottoMain {
         OutputView.printLottoCount(countOfLotto);
 
         Lottos lottos = lottoService.createLotto(countOfLotto);
-//        OutputView.printLotto(lottos.extractLottoNumbers());
         OutputView.printLotto(lottos.toString());
         List<Integer> winningLottoNumber = InputView.printInputWinningLotto();
 
