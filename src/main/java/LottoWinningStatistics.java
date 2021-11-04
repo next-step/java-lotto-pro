@@ -32,7 +32,7 @@ public class LottoWinningStatistics {
 				, Integer::sum);
 
 		final int paidKRW = Lotto.PRICE_KRW * (numOfLottosByMatching.values().stream()
-			.reduce(0, (acc, lottoCount) -> acc + lottoCount.intValue(), Integer::sum));
+			.reduce(0, (acc, numOfLottos) -> acc + numOfLottos.intValue(), Integer::sum));
 
 		return (float)prizeKRW / paidKRW;
 	}
