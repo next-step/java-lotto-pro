@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.model.Lotto;
+import lotto.model.Lottos;
 
 import java.util.ArrayList;
 import java.util.Arrays;

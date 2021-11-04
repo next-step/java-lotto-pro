@@ -18,4 +18,7 @@ public class WinningLotto {
         return Arrays.toString(lottoNumbers);
     }
 
+    public int matchNumber(Lotto lotto) {
+        return 3;
+    }
 }

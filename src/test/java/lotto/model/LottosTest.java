@@ -1,7 +1,6 @@
 package lotto.model;
 
 import lotto.service.LottoAutoCreateFactory;
-import lotto.service.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

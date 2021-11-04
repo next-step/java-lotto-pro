@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.model;
 
 import lotto.model.Lotto;
 
