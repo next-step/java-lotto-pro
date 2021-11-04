@@ -11,6 +11,11 @@ public class StringCalculator {
         if (inputValue == null || inputValue.isEmpty()) {
             return 0;
         }
+
+        if (inputValue.length() >= 1) {
+            return Integer.parseInt(inputValue);
+        }
+
         throw new RuntimeException();
     }
 

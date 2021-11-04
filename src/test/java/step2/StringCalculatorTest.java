@@ -15,4 +15,11 @@ public class StringCalculatorTest {
         calculator = new StringCalculator(null);
         assertThat(calculator.result()).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("숫자 하나를 입력하는경우 바로 반환")
+    void ifNumberIsOne() {
+        StringCalculator calculator = new StringCalculator("3");
+        assertThat(calculator.result()).isEqualTo(3);
+    }
 }
