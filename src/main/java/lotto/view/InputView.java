@@ -3,6 +3,7 @@ package lotto.view;
 import static java.util.stream.Collectors.*;
 import static lotto.constant.ErrorMessage.*;
 import static lotto.constant.LottoConstant.*;
+import static lotto.constant.ViewMessage.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,9 +18,6 @@ import lotto.utils.LottoStringToIntegerParser;
 import lotto.utils.MessageBuilder;
 
 public class InputView {
-	private static final String MONEY_INPUT_GUIDE_MESSAGE = "구입금액을 입력해 주세요.";
-	private static final String LAST_WINNING_NUMBERS_INPUT_GUIDE_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-	private static final String BONUS_NUMBER_INPUT_GUIDE_MESSAGE = "보너스 볼을 입력해 주세요.";
 	private static final String NUMBER_FROM_0_to_9_REG_EXP = "^[0-9]+$";
 
 	private static final Scanner scanner = new Scanner(System.in);
