@@ -13,6 +13,8 @@
 
 ## TODOs
 
+### 문자열 덧셈 계산기
+
 - `StringAddCalculator`
     - [x] `Parser`가 문자열을 분석해 `Delimiter`와 `Remainder`를 얻는다.
     - [x] `Splitter`를 사용해 `Remainder`를 `Delimiter` 기준으로 분리한다.
@@ -26,8 +28,27 @@
     - [x] 기본 값은 `,` 또는 `:`이다.
     - [x] 커스텀 값을 지정할 수 있다.
 - `Remainder`
-    - [x] 문자열에서 `Delimiter`를 제외한 값이다. 
+    - [x] 문자열에서 `Delimiter`를 제외한 값이다.
 - `NaturalNumber`
     - [x] `0`과 같거나 큰 정수이다.
     - [x] 숫자 이외의 값 또는 음수가 주어진 경우 `RuntimeException` 예외를 던진다.
     - [x] `NaturalNumber`끼리 더할 수 있다.
+
+### 로또
+
+- [x] `LottoGame`
+    - [x] `LottoGame`의 가격은 1000원이다.
+    - [x] `LottoGame`은 `LottoNumbers`를 갖는다.
+    - [x] `LottoNumbers`는 `NumbersGenerator`로 생성된다.
+- [x] `NumbersGenerator`
+    - [x] 번호들을 생성한다.
+- [x] `RandomNumbersGenerator`
+    - [x] 랜덤으로 중복되지 않은 6개의 번호들을 생성한다.
+- [x] `LottoNumber`
+    - [x] 1부터 45까지의 숫자 중 하나이다.
+- [x] `LottoNumbers`
+    - [x] 중복되지 않는 오름차순의 6개 `LottoNumber`를 갖는다.
+    - [x] `LottoNumbers`끼리 비교해서 맞힌 갯수를 반환할 수 있다.
+- [x] `LottoRank`
+    - [x] 숫자를 맞힌 수와 우승 상금 금액을 갖는다.
+    - [x] 숫자를 맞힌 수로부터 순위를 알 수 있다.
