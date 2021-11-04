@@ -5,18 +5,19 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
     private final String inputValue;
+    private final StringValidation stringValidation;
 
     public StringCalculator(String inputValue) {
         this.inputValue = inputValue;
+        stringValidation = new StringValidation(inputValue);
     }
 
     public int result() {
-        if (inputValue == null || inputValue.isEmpty()) {
-            return 0;
-        }
+        try {
+            stringValidation.isNullOrEmptyThrow();
 
-        if (inputValue.length() == 1) {
-            return Integer.parseInt(inputValue);
+        } catch (IllegalArgumentException e) {
+            return 0;
         }
 
         Matcher matcher = Pattern.compile("//(.)\\n(.*)").matcher(inputValue);
@@ -25,14 +26,11 @@ public class StringCalculator {
             String[] split = matcher.group(2).split(delimiter);
             return sum(split);
         }
+        return sum(split(",|:"));
+    }
 
-        if (inputValue.length() > 1) {
-            String[] split = inputValue.split(",|:");
-            return sum(split);
-        }
-
-
-        throw new RuntimeException();
+    private String[] split(String delimiter) {
+        return inputValue.split(delimiter);
     }
 
     private int sum(String[] split) {
