@@ -1,8 +1,8 @@
 package lotto.view;
 
+import lotto.domain.lotto.LottoRank;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
-import lotto.domain.lotto.LottoRank;
 import lotto.domain.winning.WinningResult;
 
 import java.util.List;
@@ -38,12 +38,13 @@ public class OutputView {
         System.out.println("\n당첨 통계\n---------");
 
         for (LottoRank rank : winningResult.getKeys()) {
-            String printFormat = "%d개 일치 (%d원) - %d개%n";
+            String printFormat = (rank == LottoRank.SECOND) ? "%d개 일치, 보너스 볼 일치 (%d원) - %d개%n"
+                    : "%d개 일치 (%d원) - %d개%n";
             System.out.printf(printFormat, rank.getMatchCount(), rank.getPrizeMoney(), winningResult.findMatchCount(rank));
         }
     }
 
     public static void printErrorMessage(String message) {
-        System.out.println("Error : " + message);
+        System.out.println("====> Error : " + message);
     }
 }

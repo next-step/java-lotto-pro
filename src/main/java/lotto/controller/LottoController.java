@@ -21,7 +21,9 @@ public class LottoController {
             LottoTickets lottoTickets = service.issueTickets(purchaseAmount);
             OutputView.printLottoTickets(lottoTickets);
 
-            WinningResult winningResult = service.getWinningResult(InputView.getWinningNumber(), lottoTickets);
+            String winningNumber = InputView.getWinningNumber();
+            String bonusNumber = InputView.getBonusNumber();
+            WinningResult winningResult = service.getWinningResult(winningNumber, bonusNumber);
             OutputView.printWinningResult(winningResult);
 
             float profitRate = service.profitRate(winningResult, purchaseMoney);
