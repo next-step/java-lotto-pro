@@ -7,7 +7,6 @@ import model.Lottos;
 import model.Money;
 import model.RandomLottoMachine;
 import model.Score;
-import model.Seller;
 import model.StringSeparator;
 import model.WinnerLottoGenerator;
 import view.IncomeView;
@@ -17,42 +16,36 @@ import view.ScoreView;
 
 public final class LottoGame {
 
-	private static final IncomeView INCOME_VIEW = IncomeView.from(System.out);
-	private static final LottosView LOTTO_VIEW = LottosView.from(System.out);
-	private static final ScoreView SCORE_VIEW = ScoreView.from(System.out);
+	private static final LottoGame LOTTO_GAME = new LottoGame();
 
-	private final Money lottoPrice;
-	private final LottoRule rule;
+	private static final Money LOTTO_PRICE = Money.from(1_000);
+	private static final LottoRule LOTTO_RULE = LottoRule.of(1, 45, 6);
 
-	private LottoGame(int lottoPrice, LottoRule rule) {
-		validate(rule);
-		this.lottoPrice = Money.from(lottoPrice);
-		this.rule = rule;
+	private static final IncomeView incomeView = IncomeView.from(System.out);
+	private static final LottosView lottoView = LottosView.from(System.out);
+	private static final ScoreView scoreView = ScoreView.from(System.out);
+
+	private LottoGame() {
 	}
 
-	public static LottoGame from(int lottoPrice, LottoRule rule) {
-		return new LottoGame(lottoPrice, rule);
+	public static LottoGame instance() {
+		return LOTTO_GAME;
 	}
 
 	public void play() {
 		Lottos lottos = LottoStore.of(
 			Money.from(InputView.inputPurchaseAmount()),
-			Seller.of(lottoPrice, RandomLottoMachine.from(rule))
+			LOTTO_PRICE,
+			RandomLottoMachine.from(LOTTO_RULE)
 		).lottos();
 
-		LOTTO_VIEW.view(lottos);
+		lottoView.view(lottos);
 
 		Score score = lottos.score(
 			WinnerLottoGenerator.of(
-				StringSeparator.of(InputView.inputWinningNumber(), ","), rule));
+				StringSeparator.of(InputView.inputWinningNumber(), ","), LOTTO_RULE));
 
-		SCORE_VIEW.view(score);
-		INCOME_VIEW.view(Income.of(lottoPrice, lottos.size(), score.prizeMoney()));
-	}
-
-	private void validate(LottoRule rule) {
-		if (rule == null) {
-			throw new IllegalArgumentException("'rule' must not be null");
-		}
+		scoreView.view(score);
+		incomeView.view(Income.of(LOTTO_PRICE, lottos.size(), score.prizeMoney()));
 	}
 }

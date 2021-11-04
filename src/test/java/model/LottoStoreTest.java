@@ -16,23 +16,31 @@ class LottoStoreTest {
 	void instance() {
 		assertThatNoException()
 			.isThrownBy(
-				() -> LottoStore.of(oneHundredMoney(), Seller.of(oneHundredMoney(), mock(LottoGenerator.class))));
+				() -> LottoStore.of(oneHundredMoney(), oneHundredMoney(), mock(LottoGenerator.class)));
 	}
 
 	@Test
 	@DisplayName("초기 돈 없이 객체화하면 IllegalArgumentException")
 	void instance_nullInitialMoney_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> LottoStore.of(null, Seller.of(oneHundredMoney(), mock(LottoGenerator.class))))
+			.isThrownBy(() -> LottoStore.of(null, oneHundredMoney(), mock(LottoGenerator.class)))
 			.withMessage("'initialMoney' must not be null");
 	}
 
 	@Test
-	@DisplayName("판매자 없이 객체화하면 IllegalArgumentException")
-	void instance_nullSeller_thrownIllegalArgumentException() {
+	@DisplayName("가격 없이 객체화하면 IllegalArgumentException")
+	void instance_nullPrice_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> LottoStore.of(oneHundredMoney(), null))
-			.withMessage("'seller' must not be null");
+			.isThrownBy(() -> LottoStore.of(oneHundredMoney(), null, mock(LottoGenerator.class)))
+			.withMessage("'price' must not be null");
+	}
+
+	@Test
+	@DisplayName("로또 생성기 없이 객체화하면 IllegalArgumentException")
+	void instance_nullLottoGenerator_thrownIllegalArgumentException() {
+		assertThatIllegalArgumentException()
+			.isThrownBy(() -> LottoStore.of(oneHundredMoney(), oneHundredMoney(), null))
+			.withMessage("'lottoGenerator' must not be null");
 	}
 
 	@ParameterizedTest(name = "{displayName}[{index}] if the initialized money is {0}, you can buy {1} lotto worth 100 won")
@@ -46,7 +54,7 @@ class LottoStoreTest {
 
 		//when
 		Lottos lottos = LottoStore.of(Money.from(initialMoney),
-			Seller.of(oneHundredMoney(), mock(LottoGenerator.class)))
+			oneHundredMoney(), mock(LottoGenerator.class))
 			.lottos();
 
 		//then

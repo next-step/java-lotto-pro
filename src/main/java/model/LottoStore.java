@@ -6,27 +6,29 @@ import java.util.Collection;
 public final class LottoStore {
 
 	private final Money initialMoney;
-	private final Seller seller;
+	private final Money price;
+	private final LottoGenerator lottoGenerator;
 
-	private LottoStore(Money initialMoney, Seller seller) {
-		validate(initialMoney);
-		validate(seller);
+	private LottoStore(Money initialMoney, Money price, LottoGenerator lottoGenerator) {
+		validateNonNull(initialMoney, "'initialMoney' must not be null");
+		validateNonNull(price, "'price' must not be null");
+		validateNonNull(lottoGenerator, "'lottoGenerator' must not be null");
 		this.initialMoney = initialMoney;
-		this.seller = seller;
+		this.price = price;
+		this.lottoGenerator = lottoGenerator;
 	}
 
-	public static LottoStore of(Money initialMoney, Seller seller) {
-		return new LottoStore(initialMoney, seller);
+	public static LottoStore of(Money initialMoney, Money price, LottoGenerator lottoGenerator) {
+		return new LottoStore(initialMoney, price, lottoGenerator);
 	}
 
 	public Lottos lottos() {
 		Customer customer = Customer.from(initialMoney);
-		Money lottoPrice = seller.price();
 
 		Collection<Lotto> lottoCollection = new ArrayList<>();
-		while (customer.hasMoreThan(lottoPrice)) {
-			customer.subtractMoney(lottoPrice);
-			lottoCollection.add(seller.lotto());
+		while (customer.hasMoreThan(price)) {
+			customer.subtractMoney(price);
+			lottoCollection.add(lottoGenerator.lotto());
 		}
 		return Lottos.from(lottoCollection);
 	}
@@ -35,19 +37,14 @@ public final class LottoStore {
 	public String toString() {
 		return "LottoStore{" +
 			"initialMoney=" + initialMoney +
-			", seller=" + seller +
+			", price=" + price +
+			", lottoGenerator=" + lottoGenerator +
 			'}';
 	}
 
-	private void validate(Seller seller) {
-		if (seller == null) {
-			throw new IllegalArgumentException("'seller' must not be null");
-		}
-	}
-
-	private void validate(Money initialMoney) {
-		if (initialMoney == null) {
-			throw new IllegalArgumentException("'initialMoney' must not be null");
+	private void validateNonNull(Object object, String message) {
+		if (object == null) {
+			throw new IllegalArgumentException(message);
 		}
 	}
 }
