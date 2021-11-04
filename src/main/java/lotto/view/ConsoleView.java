@@ -15,6 +15,7 @@ public class ConsoleView {
     private static final String ENTER_WINNING_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ERROR_TEXT = "[ERROR] %s";
     private static final String WINNING_COUNT_TEXT = "%d개 일치 (%d원)- %d개";
+    private static final String REVENUE_PERCENT = "총 수익률은 %.2f입니다.";
     private static Scanner scanner = new Scanner(System.in);
 
     public static String enterMoney() {
@@ -49,6 +50,10 @@ public class ConsoleView {
             System.out.printf(WINNING_COUNT_TEXT, rank.getCountOfMatch(), rank.getWinningMoney(), map.getOrDefault(rank, 0));
             printLine();
         }
+    }
+
+    public static void printRevenue() {
+
     }
 
     public static void printLine() {

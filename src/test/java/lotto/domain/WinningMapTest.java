@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -63,7 +64,28 @@ class WinningMapTest {
 
         WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
 
-        assertThat(winningMap.getWinningMap().keySet().size()).isEqualTo(0);
+        assertThat(winningMap.getWinningMap()
+                .keySet()
+                .size()).isEqualTo(0);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1,2,7,30,40,41|5",
+            "1,2,30,34,40,41|50",
+            "1,2,30,37,42,45|1500",
+            "1,2,30,34,37,42|2000000"
+    }, delimiter = '|')
+    @DisplayName("맞춘 번호가 2개 이하일 경우")
+    public void lottoMatchNothing(String input, int revenuePercent) {
+        Winning winning = new Winning(input);
+        BoughtLotto boughtLotto = new BoughtLotto(1000);
+
+        WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
+
+        int revenue = winningMap.revenue(boughtLotto);
+
+        assertThat(revenue).isEqualTo(revenuePercent);
     }
 
 }

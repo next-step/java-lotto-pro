@@ -27,11 +27,17 @@ public enum Rank {
     }
 
     public static List<Rank> excludedMissList() {
-        return Arrays.stream(values()).filter(Rank::isNotMiss).collect(Collectors.toList());
+        return Arrays.stream(values())
+                .filter(Rank::isNotMiss)
+                .collect(Collectors.toList());
     }
 
     public boolean isNotMiss() {
         return !this.equals(Rank.MISS);
+    }
+
+    public int calculateRevenue(int count) {
+        return winningMoney * count;
     }
 
     public int getCountOfMatch() {

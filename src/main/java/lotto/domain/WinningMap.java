@@ -28,4 +28,11 @@ public class WinningMap {
     public Map<Rank, Integer> getWinningMap() {
         return winningMap;
     }
+
+    public int revenue(BoughtLotto boughtLotto) {
+        return winningMap.keySet()
+                .stream()
+                .mapToInt(rank -> rank.calculateRevenue(winningMap.get(rank)))
+                .sum() / boughtLotto.getBoughtMoney();
+    }
 }

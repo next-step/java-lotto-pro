@@ -29,4 +29,8 @@ public class BoughtLotto {
     public int getBoughtCount() {
         return this.boughtMoney / LOTTO_PRICE;
     }
+
+    public int getBoughtMoney() {
+        return boughtMoney;
+    }
 }
