@@ -52,3 +52,20 @@ public class SetTest {
 
 ### Class Diagram
 ![class-diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/LuneChaser/java-lotto-pro/step2/classdiagram/StringCalcurator.pu)
+
+## 3단계-로또(자동)
+### 요구사항
+- 로또 구입 금액을 입력시 구입에 해당하는 로또가 발급된다.
+- 로또 1장의 금액은 1000원이다.
+
+### 기능목록
+- [] 구입금액은 View를통해 입력된다.
+- [] 구입된 로또는 View를통해 출력된다.
+- [] 로또는 로또번호 6개로 구성된다.
+- [] 로또번호는 1 ~ 45의 자연수로 생성된다.
+- [] 지난 주 당첨 로또는 View를통해 입력된다.
+- [] 구입된 로또에대한 당첨 통계는 view에 출력된다.
+- [] 당첨통계는 3개, 4개, 5개, 6개 일치별 개수와 당첨금, 수익률로 구성된다.
+
+### Class Diagram
+![class-diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/LuneChaser/java-lotto-pro/step3/classdiagram/Lotto_3step.pu)

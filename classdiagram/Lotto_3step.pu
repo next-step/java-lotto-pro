@@ -1,0 +1,159 @@
+@startuml Lotto_3step
+skinparam groupInheritance 2
+
+package Domain {
+  class Lottos {
+    - values : List<Lotto>
+  }
+
+  class Lotto {
+    - value : LottoNumbers
+
+    + add(lottoNumbers : LottoNumbers)
+  }
+
+  class WinStatistics {
+    - lottos : Lottos
+    - winMatchs : List<WinMatch> 
+    - revenueRatio : RevenueRatio
+
+  }
+
+  class RevenueRatio {
+    - value : Float
+
+    + value() : Float
+  }
+
+  class LottoNumbers {
+    - values : List<LottoNumber>
+  }
+
+  class LottoNumber {
+    - value : Integer
+
+    + gererate() : void
+  }
+
+  abstract WinMatch {
+    - prizeMoney : Integer
+
+    + setNextWinMatch(WinMatch) : void
+    + match(lotto Lotto) : void
+  }
+
+  class ThirdMatch {
+    - prizeMoney : Integer
+    
+    + setNextWinMatch(WinMatch) : void
+    + match(lotto Lotto) : void
+  }
+
+  class FourMatch {
+    - prizeMoney : Integer
+    
+    + setNextWinMatch(WinMatch) : void
+    + match(lotto Lotto) : void
+  }
+
+  class FiveMatch {
+    - prizeMoney : Integer
+    
+    + setNextWinMatch(WinMatch) : void
+    + match(lotto Lotto) : void
+  }
+
+  class SixMatch {
+    - prizeMoney : Integer
+    
+    + setNextWinMatch(WinMatch) : void
+    + match(lotto Lotto) : void
+  }
+}
+
+package Presentaion {
+  interface Screen {
+    + initialize() : void
+    + render() : void
+  }
+
+  class BuyLotto {
+    - buyinglottoPrice : TextEdit 
+    - resultBuyingLottoCount : Label
+    - resultLottoNumber : List<Label>
+
+    + initialize() : void
+    + render() : void
+  }
+
+  class SettingLastestWinLotto {
+    - pastLotto : TextEdit
+    
+    + initialize() : void
+    + render() : void
+  }
+
+  class ReportWinStatistics {
+    - title : Label
+    - division : Label
+    - matchingResults : List<Label>
+    - revenueRatio : Label
+
+    + initialize() : void
+    + render() : void
+  }
+
+  class SharedData {
+    - buylottos : Lottos
+    - lastestWinLotto : Lotto
+  }
+}
+
+package Component {
+  interface UIComponent {
+    + render() : void
+  }
+
+  class Label {
+    - printText : String
+    
+    + render() : void
+  }
+
+  class TextEdit {
+    - printText : String
+    - value : String
+
+    + render() : void
+    + getText() : String
+  }
+}
+
+UIComponent <|-- Label
+UIComponent <|-- TextEdit
+
+Screen <|-- BuyLotto
+Screen <|-- SettingLastestWinLotto
+Screen <|-- ReportWinStatistics
+ReportWinStatistics <-- WinStatistics
+
+SharedData <-- BuyLotto
+SharedData <-- SettingLastestWinLotto
+SharedData <-- ReportWinStatistics
+SharedData *-- Lottos
+SharedData *-- Lotto
+
+WinStatistics  <-- Lottos
+WinStatistics <-- WinMatch
+WinStatistics <-- RevenueRatio
+
+WinMatch <|-- ThirdMatch
+WinMatch <|-- FourMatch
+WinMatch <|-- FiveMatch
+WinMatch <|-- SixMatch
+
+Lottos "1" *-- "0..*" Lotto
+Lotto "1" *-- "1" LottoNumbers
+
+LottoNumbers "1" *-- "6" LottoNumber
+@enduml
