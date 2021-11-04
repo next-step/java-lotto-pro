@@ -18,8 +18,9 @@ class WinningStatisticsTest {
         //given
         PurchaseMoney purchaseMoney = new PurchaseMoney(5000);
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        BonusNumber bonusNumber = new BonusNumber(winningNumbers, 7);
 
-        WinningResult winningResult = new WinningResult(winningNumbers);
+        WinningResult winningResult = new WinningResult(winningNumbers, bonusNumber);
         winningResult.aggregate(lottoTickets());
 
         //when
@@ -33,8 +34,8 @@ class WinningStatisticsTest {
     private static LottoTickets lottoTickets() {
         return LottoTickets.from(
                 Arrays.asList(
-                        (LottoTicket.from(4, 5, 6, 7, 8, 9)),   //3개 일치-FOURTH
-                        (LottoTicket.from(4, 5, 6, 7, 8, 9)),   //3개 일치-FOURTH
+                        (LottoTicket.from(4, 5, 6, 7, 8, 9)),   //3개 일치-FIFTH
+                        (LottoTicket.from(4, 5, 6, 7, 8, 9)),   //3개 일치-FIFTH
                         (LottoTicket.from(5, 6, 7, 8, 9, 10)),  //2개 일치-LOSE
                         (LottoTicket.from(6, 7, 8, 9, 10, 11)), //1개 일치-LOSE
                         (LottoTicket.from(6, 7, 8, 9, 10, 11))  //1개 일치-LOSE

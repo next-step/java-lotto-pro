@@ -38,6 +38,11 @@ public class WinningNumbers {
         return winningNumbers.contains(lottoNumber);
     }
 
+    public boolean isContains(int bonusNumber) {
+        return winningNumbers.stream()
+                .anyMatch(winningNumber -> winningNumber.getLottoNumber() == bonusNumber);
+    }
+
     public Set<LottoNumber> getWinningNumbers() {
         return winningNumbers;
     }
