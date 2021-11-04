@@ -110,7 +110,7 @@ package Presentaion {
 }
 
 package Component {
-  interface UIComponent {
+  interface CuiComponent {
     + render() : void
   }
 
@@ -125,12 +125,12 @@ package Component {
     - value : String
 
     + render() : void
-    + getText() : String
+    + getValue() : String
   }
 }
 
-UIComponent <|-- Label
-UIComponent <|-- TextEdit
+CuiComponent <|-- Label
+CuiComponent <|-- TextEdit
 
 Screen <|-- BuyLotto
 Screen <|-- SettingLastestWinLotto
