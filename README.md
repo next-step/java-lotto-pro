@@ -33,5 +33,10 @@
 랜덤 숫자(`RandomNumber`)
 `RandomNumber`는 1에서 45까지 랜덤한 숫자들을 생성한다
 
+랜덤 숫자들(`RandomNumbers`)
+`RandomNumbers`는 1에서 45까지 랜덤한 숫자들을 생성한다
+`RandomNumbers`는 6자리의 숫자를 생성한다
+`RandomNumbers`는 숫자들은 중복되지 않는다
+
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
