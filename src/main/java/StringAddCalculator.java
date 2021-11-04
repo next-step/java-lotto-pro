@@ -8,9 +8,6 @@ public class StringAddCalculator {
 		}
 
 		CalculatorNumbers calculatorNumbers = calculatorInputString.toCalculateNumbers();
-		if (calculatorNumbers.hasSingleNumber()) {
-			return calculatorNumbers.getNumber(0);
-		}
 		if (calculatorNumbers.containExceptional()) {
 			throw new IllegalArgumentException(MESSAGE_HAS_NEGATIVE_NUMBER);
 		}

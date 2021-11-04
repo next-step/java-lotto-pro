@@ -1,8 +1,6 @@
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -26,23 +24,6 @@ public class CalculatorNumbersTest {
 		return Stream.of(
 			Arguments.of(false, Arrays.asList(0, 1, 2)),
 			Arguments.of(true, Arrays.asList(-1, 0, 1))
-		);
-	}
-
-	@ParameterizedTest
-	@DisplayName("숫자가 하나뿐일 경우 true 반환")
-	@MethodSource("test_hasSingleNumberParameter")
-	public void test_hasSingleNumber(boolean expected, List<Integer> integerList) {
-		CalculatorNumbers calculatorNumbers = new CalculatorNumbers(integerList);
-
-		assertThat(calculatorNumbers.hasSingleNumber()).isEqualTo(expected);
-	}
-
-	private static Stream<Arguments> test_hasSingleNumberParameter() {
-		return Stream.of(
-			Arguments.of(false, Arrays.asList(0, 1, 2)),
-			Arguments.of(false, new ArrayList<>()),
-			Arguments.of(true, Collections.singletonList(1))
 		);
 	}
 }
