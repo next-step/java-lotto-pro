@@ -37,7 +37,7 @@ public class StringUtilTest {
 
 	@Test
 	@DisplayName("'(1,2)' -> '1,2' substring 테스트")
-	void substring() {
+	void substringTest() {
 		// given
 		String testString = "(1,2)";
 
@@ -46,5 +46,36 @@ public class StringUtilTest {
 
 		// then
 		assertThat(result).isEqualTo("1,2");
+	}
+
+	@Test
+	@DisplayName("'abc' 에서 특정 위치의 문자 가져오기 - 정상")
+	void charAtTest1() {
+		// given
+		String testString = "abc";
+
+		// when
+		char resultA = testString.charAt(0);
+		char resultB = testString.charAt(1);
+		char resultC = testString.charAt(2);
+
+		// then
+		assertThat(resultA).isEqualTo('a');
+		assertThat(resultB).isEqualTo('b');
+		assertThat(resultC).isEqualTo('c');
+	}
+
+	@Test
+	@DisplayName("'abc' 에서 특정 위치의 문자 가져오기 - StringIndexOutOfBoundsException 발생")
+	void charAtTest2() {
+		// given
+		String testString = "abc";
+
+		// then
+		assertThatThrownBy( () -> {
+			// when
+			testString.charAt(3);
+		}).isInstanceOf(StringIndexOutOfBoundsException.class)
+		.hasMessageContaining("String index out of range");
 	}
 }
