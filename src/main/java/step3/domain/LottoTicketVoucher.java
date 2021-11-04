@@ -1,5 +1,6 @@
 package step3.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,19 @@ public class LottoTicketVoucher {
         return lottoTicketBundle.stream()
             .collect(Collectors.collectingAndThen(Collectors.toList(),
                 Collections::unmodifiableList));
+    }
+
+    public List<String> toVouchers() {
+        List<String> lottoTickerNumbers = new ArrayList<>();
+        for (LottoTicket lottoTicket : lottoTicketBundle) {
+            lottoTickerNumbers.add(lottoTicket.toLottoNumbers().toString());
+        }
+        return lottoTickerNumbers;
+    }
+
+    public String winningResultToString(int[] winNumbers, int totalPurchasePrice) {
+        return new LottoWinningReport(lottoTicketBundle, new LottoTicket(winNumbers), totalPurchasePrice)
+            .toString();
     }
 
     @Override

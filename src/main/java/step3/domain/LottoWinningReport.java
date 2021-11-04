@@ -29,6 +29,7 @@ public class LottoWinningReport {
         }
     }
 
+    @Override
     public String toString() {
         double totalWinningAmount = totalAmountCalculate();
 
@@ -37,13 +38,30 @@ public class LottoWinningReport {
             format += LOSS_MESSAGE;
         }
 
-        return String.format(format, fourthCount, thirdCount, secondCount, firstCount,
-            String.format("%.2f", totalWinningAmount));
+        return String.format(
+            format,
+            fourthCount, thirdCount, secondCount, firstCount,
+            parseAmount(totalWinningAmount)
+        );
+    }
+
+    private String parseAmount(double totalWinningAmount) {
+        return String.format("%.2f", totalWinningAmount);
     }
 
     private double totalAmountCalculate() {
         return (double)(FIRST_PRIZE * firstCount + SECOND_PRIZE * secondCount + THIRD_PRIZE * thirdCount
             + FOURTH_PRIZE * fourthCount) / totalAmount;
+    }
+
+    private static String getReportFormat() {
+        return "당첨 통계\n"
+            + "---------\n"
+            + "3개 일치 (5000원)- %s개\n"
+            + "4개 일치 (50000원)- %s개\n"
+            + "5개 일치 (1500000원)- %s개\n"
+            + "6개 일치 (2000000000원)- %s개\n"
+            + "총 수익률은 %s 입니다.";
     }
 
     private void incrementRankCount(int containCount) {
@@ -63,13 +81,4 @@ public class LottoWinningReport {
         }
     }
 
-    private static String getReportFormat() {
-        return "당첨 통계\n"
-            + "---------\n"
-            + "3개 일치 (5000원)- %s개\n"
-            + "4개 일치 (50000원)- %s개\n"
-            + "5개 일치 (1500000원)- %s개\n"
-            + "6개 일치 (2000000000원)- %s개\n"
-            + "총 수익률은 %s입니다.";
-    }
 }
