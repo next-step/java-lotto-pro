@@ -9,6 +9,10 @@ public class LottoGame {
         int purchaseAmount = getPurchaseAmount();
         // 로또를 구매한다. (금액, 구입수량)
         LottoPurchase lottoPurchase = new LottoPurchase(purchaseAmount);
+        // 로또를 발급한다. (구입수량)
+        Lottos lottos = new Lottos(LottoIssue.ofAuto(lottoPurchase.getPurchaseQuantity()));
+        // 당첨번호를 입력받는다.
+        // 당첨번호를 확인한다.
     }
 
     private int getPurchaseAmount() {
