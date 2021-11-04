@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Result {
 
@@ -23,7 +21,7 @@ public class Result {
     }
 
     public Map<Rank, Integer> getResult() {
-        final HashMap<Rank, Integer> map = new HashMap<>();
+        final Map<Rank, Integer> map = new TreeMap();
         map.put(Rank.FIRST, 0);
         map.put(Rank.SECOND, 0);
         map.put(Rank.THIRD, 0);
@@ -36,7 +34,7 @@ public class Result {
         return map;
     }
 
-    private void increase(HashMap<Rank, Integer> map, Rank rank) {
+    private void increase(Map<Rank, Integer> map, Rank rank) {
         final int count = map.get(rank);
         map.put(rank, count + 1);
     }
