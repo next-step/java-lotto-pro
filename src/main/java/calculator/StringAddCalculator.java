@@ -38,13 +38,13 @@ public class StringAddCalculator {
 		for (int i = 0; i < values.length; i++) {
 			int number = Integer.parseInt(values[i]);
 
-			numbers[i] = validatePositiveNumber(number);
+			numbers[i] = validateNumberRangeMinimum(number);
 		}
 
 		return numbers;
 	}
 
-	private static int validatePositiveNumber(int number) {
+	private static int validateNumberRangeMinimum(int number) {
 		if (number < NUMBER_RANGE_MINIMUM) {
 			throw new RuntimeException();
 		}
