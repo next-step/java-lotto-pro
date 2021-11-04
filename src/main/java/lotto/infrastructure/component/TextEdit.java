@@ -1,4 +1,4 @@
-package lotto.component;
+package lotto.infrastructure.component;
 
 import java.util.Scanner;
 

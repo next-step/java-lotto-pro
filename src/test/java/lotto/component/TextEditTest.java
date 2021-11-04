@@ -13,6 +13,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import lotto.infrastructure.component.TextEdit;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TextEditTest {
   private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();

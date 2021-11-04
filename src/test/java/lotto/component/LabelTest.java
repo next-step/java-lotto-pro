@@ -11,6 +11,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import lotto.infrastructure.component.Label;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class LabelTest {
   private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -37,5 +39,19 @@ public class LabelTest {
 
     // then
     assertThat(outContent.toString().trim()).contains("Label 테스트입니다.");
+  }
+
+  @DisplayName("문구를 변견하여 화면에 출력된다.")
+  @Test
+  void render_changePrintText() {
+    // given
+    Label label = new Label("Label 테스트입니다.");
+
+    // when
+    label.setPrintText("Label이 변경되었습니다.");
+    label.render();
+
+    // then
+    assertThat(outContent.toString().trim()).contains("Label이 변경되었습니다.");
   }
 }

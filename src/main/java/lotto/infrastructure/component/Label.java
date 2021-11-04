@@ -1,4 +1,4 @@
-package lotto.component;
+package lotto.infrastructure.component;
 
 /**
  * 설정된 문자열을 화면에 출력하는 역활.
@@ -15,4 +15,7 @@ public class Label implements CuiComponent {
     System.out.println(this.printText);
   }
 
+  public void setPrintText(String printText) {
+    this.printText = printText;
+  }
 }
