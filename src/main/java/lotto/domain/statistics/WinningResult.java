@@ -3,8 +3,10 @@ package lotto.domain.statistics;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class WinningResult {
     private static final int DEFAULT_MATCH_COUNT = 0;
@@ -12,7 +14,7 @@ public class WinningResult {
     private final WinningNumbers winningNumbers;
     private final Map<LottoRank, Integer> winningResult;
 
-    private static Map<LottoRank, Integer> generate() {
+    private Map<LottoRank, Integer> generate() {
         Map<LottoRank, Integer> map = new LinkedHashMap<>();
         Arrays.stream(LottoRank.values())
                 .forEach(rank -> map.put(rank, DEFAULT_MATCH_COUNT));

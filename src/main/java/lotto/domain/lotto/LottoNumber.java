@@ -14,7 +14,7 @@ public class LottoNumber {
     }
 
     private static void validateRange(int number) {
-        if (number < 1 || number > 45) {
+        if (number < MIN_LOTTO_BOUND || number > MAX_LOTTO_BOUND) {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45 까지 입니다.");
         }
     }
@@ -25,8 +25,12 @@ public class LottoNumber {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoNumber that = (LottoNumber) o;
         return lottoNumber == that.lottoNumber;
     }

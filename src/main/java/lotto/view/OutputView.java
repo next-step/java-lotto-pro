@@ -42,4 +42,8 @@ public class OutputView {
             System.out.printf(printFormat, rank.getMatchCount(), rank.getPrizeMoney(), winningResult.findMatchCount(rank));
         }
     }
+
+    public static void printErrorMessage(String message) {
+        System.out.println("Error : " + message);
+    }
 }

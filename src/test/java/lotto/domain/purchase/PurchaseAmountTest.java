@@ -16,7 +16,7 @@ class PurchaseAmountTest {
         PurchaseMoney purchaseMoney = new PurchaseMoney(money);
 
         //when
-        PurchaseAmount purchaseAmount = new PurchaseAmount(purchaseMoney.getPurchaseAmount());
+        PurchaseAmount purchaseAmount = purchaseMoney.getPurchaseAmount();
 
         //then
         assertThat(purchaseAmount.getAutoTicketAmount()).isEqualTo(excepted);

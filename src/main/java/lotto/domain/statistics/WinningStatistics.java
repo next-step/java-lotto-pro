@@ -1,6 +1,6 @@
 package lotto.domain.statistics;
 
-import static lotto.domain.purchase.PurchaseMoney.TICKET_PRICE;
+import lotto.domain.purchase.PurchaseMoney;
 
 public class WinningStatistics {
 
@@ -10,9 +10,9 @@ public class WinningStatistics {
         this.winningResult = winningResult;
     }
 
-    public float profitRate(int ticketAmount) {
+    public float profitRate(PurchaseMoney purchaseMoney) {
         int totalPrize = totalPrize();
-        return (float) totalPrize / (ticketAmount * TICKET_PRICE);
+        return (float) totalPrize / purchaseMoney.getMoney();
     }
 
     private int totalPrize() {
