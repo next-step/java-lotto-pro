@@ -44,7 +44,7 @@ class LottoGeneratorTest {
 		}).isInstanceOf(InvocationTargetException.class);
 	}
 
-	@ParameterizedTest(name = "index {0} ==> inputMoney {1}, lottoAmount {2}")
+	@ParameterizedTest(name = "index {index} ==> inputMoney {0}, lottoAmount {1}")
 	@CsvSource(value = {"10000:10", "1111:1", "20000:20", "13200:13"}, delimiter = ':')
 	void 입력된_구입금액만큼_로또갯수를_구해주는_기능테스트(String inputMoney, int lottoAmount) throws Exception {
 		// given // when
@@ -55,7 +55,7 @@ class LottoGeneratorTest {
 		assertThat(lottoAmount).isEqualTo(resultAmount);
 	}
 
-	@ParameterizedTest(name = "index {0} ==> inputMoney {1}, lottoNumbersListSize {2}")
+	@ParameterizedTest(name = "index {index} ==> inputMoney {0}, lottoNumbersListSize {1}")
 	@CsvSource(value = {"10000:10", "1111:1", "20000:20", "13200:13"}, delimiter = ':')
 	void 입력된_구입금액만큼_로또를_생성하는_기능테스트(String inputMoney, int lottoNumbersListSize) throws Exception {
 		// given // when
@@ -70,7 +70,7 @@ class LottoGeneratorTest {
 		);
 	}
 
-	@ParameterizedTest(name = "index {0} ==> inputMoney {1}, lottoNumbersListSize {2}")
+	@ParameterizedTest(name = "index {index} ==> inputMoney {0}, lottoNumbersListSize {1}")
 	@CsvSource(value = {"10000:10", "1111:1", "20000:20", "13200:13"}, delimiter = ':')
 	void 입력된_구입금액만큼_로또생성기로_로또를_생성하는_테스트(String inputMoney, int lottoNumbersListSize) {
 		// given // when
@@ -83,7 +83,7 @@ class LottoGeneratorTest {
 		);
 	}
 
-	@ParameterizedTest(name = "index {0} ==> inputMoney {1}, inputNumber {2}, lottoNumbersListSize {3}")
+	@ParameterizedTest(name = "index {index} ==> inputMoney {0}, inputNumber {1}, lottoNumbersListSize {2}")
 	@CsvSource(value = {
 		"10000:1,2,3,4,5,6:10",
 		"1111:1,2,3,4,5,6:1",

@@ -19,7 +19,7 @@ class WinningLottoNumbersTest {
 		return method;
 	}
 
-	@ParameterizedTest(name = "index {0} ===> input {1}")
+	@ParameterizedTest(name = "index {index} ===> input {0}")
 	@ValueSource(strings = {
 		"1, 2, 3, 4, 5, 6, 7",
 		"1, 2, 3, 4,",
