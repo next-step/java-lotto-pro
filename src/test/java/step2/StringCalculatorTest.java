@@ -37,4 +37,11 @@ public class StringCalculatorTest {
         assertThat(calculator.result()).isEqualTo(6);
     }
 
+    @Test
+    @DisplayName("컴스텀 구분자로 합을 구할 수 있다.")
+    void customSplitSum() {
+        StringCalculator calculator = new StringCalculator("//;\n1;2;3");
+        assertThat(calculator.result()).isEqualTo(6);
+    }
+
 }
