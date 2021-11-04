@@ -9,9 +9,9 @@ import java.util.stream.Stream;
 public enum Rank {
     NONE(2, 0, count -> (count <= 2)),
     FOURTH(3, 5000, count -> (count == 3)),
-    THIRD(4, 50000, count -> (count == 4)),
-    SECOND(5, 1500000, count -> (count == 5)),
-    FIRST(6, 2000000000, count -> (count == 6));
+    THIRD(4, 50_000, count -> (count == 4)),
+    SECOND(5, 1_500_000, count -> (count == 5)),
+    FIRST(6, 2_000_000_000, count -> (count == 6));
 
     private int matchCount;
     private int prizeMoney;
