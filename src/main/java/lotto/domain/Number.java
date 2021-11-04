@@ -23,16 +23,12 @@ public class Number implements Comparable<Number> {
         }
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     @Override
     public int compareTo(Number o) {
-        if (this.number > o.getNumber()) {
+        if (this.number > o.number) {
             return 1;
         }
-        if (this.number < o.getNumber()) {
+        if (this.number < o.number) {
             return -1;
         }
         return 0;
