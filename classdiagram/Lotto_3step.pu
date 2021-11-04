@@ -9,7 +9,8 @@ package Domain {
   class Lotto {
     - value : LottoNumbers
 
-    + add(lottoNumbers : LottoNumbers)
+    + add(lottoNumbers : LottoNumbers) : void
+    + toString() : String;
   }
 
   class WinStatistics {
@@ -118,6 +119,7 @@ package Component {
     - printText : String
     
     + render() : void
+    + setPrintLabel() : void
   }
 
   class TextEdit {
