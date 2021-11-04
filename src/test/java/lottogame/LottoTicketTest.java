@@ -15,10 +15,10 @@ public class LottoTicketTest {
 	public void makeLottoTicket_로또_티켓_한장_발급() {
 		LottoTicket lottoTicket = LottoTicket.makeLottoTicket();
 
-		Assertions.assertThat(lottoTicket.numOfNumbersInGroup())
+		Assertions.assertThat(lottoTicket.getNumOfNumbersInGroup())
 			.isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
 
-		lottoTicket.getLottoNumberGroup().getLottoNumbers()
+		lottoTicket.getLottoNumbers()
 			.forEach(lottoNumber -> assertThat(lottoNumber.getNumber())
 				.isBetween(START_INCLUSIVE_NUMBER, END_EXCLUSIVE_NUMBER));
 	}
