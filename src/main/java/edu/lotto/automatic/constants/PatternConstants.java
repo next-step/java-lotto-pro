@@ -8,4 +8,5 @@ package edu.lotto.automatic.constants;
 public class PatternConstants {
 
 	public static final String NUMBER_PATTERN = "[0-9]+$";
+	public static final String DEFAULT_SEPARATOR_PATTERN = ",";
 }
