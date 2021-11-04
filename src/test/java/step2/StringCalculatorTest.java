@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringCalculatorTest {
 
+
     @Test
     @DisplayName("null 또는 비어있다면 0이어야한다.")
     void ifNullOrEmptyResultZero() {
@@ -43,5 +44,6 @@ public class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator("//;\n1;2;3");
         assertThat(calculator.result()).isEqualTo(6);
     }
+
 
 }
