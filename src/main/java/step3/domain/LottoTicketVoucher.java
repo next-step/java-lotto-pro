@@ -13,10 +13,6 @@ public class LottoTicketVoucher {
         this.lottoTicketBundle = unmodifiableListLottoTicketsOf(lottoTicketBundle);
     }
 
-    public List<LottoTicket> getLottoTicketBundle() {
-        return lottoTicketBundle;
-    }
-
     private List<LottoTicket> unmodifiableListLottoTicketsOf(List<LottoTicket> lottoTicketBundle) {
         return lottoTicketBundle.stream()
             .collect(Collectors.collectingAndThen(Collectors.toList(),
