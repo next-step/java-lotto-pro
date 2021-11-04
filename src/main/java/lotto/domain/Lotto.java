@@ -54,4 +54,15 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lotto);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (LottoNumber number : lotto) {
+            builder.append(", ");
+            builder.append(number.toString());
+        }
+        builder.delete(0, 2);
+        return builder.toString();
+    }
 }

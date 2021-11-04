@@ -28,7 +28,7 @@ public class LottoView {
     }
 
     private static void displayLotto(Lotto lotto) {
-        System.out.println(lotto.toString());
+        System.out.printf("[ %s ]\n", lotto.toString());
     }
 
     public static Lotto getWinningLotto() {
@@ -44,6 +44,6 @@ public class LottoView {
             System.out.println(entry.getKey().getCount() + "개 일치 (" + entry.getKey().getPrice() + "원)- " + entry.getValue() +"개");
         }
 
-        System.out.println("총 수익률은 " + result.getProfitRate() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n");
+        System.out.println("총 수익률은 " + result.getProfitRate() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }
