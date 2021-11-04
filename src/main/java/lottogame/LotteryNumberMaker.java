@@ -21,7 +21,7 @@ public class LotteryNumberMaker {
 
 	private static List<Integer> getLotteryNumberCandidates(){
 		return IntStream.range(START_INCLUSIVE_NUMBER, END_EXCLUSIVE_NUMBER+1)
-			.collect(() -> new ArrayList<>(),
+			.collect(ArrayList::new,
 				(pickedNumbers, number) -> pickedNumbers.add(number)
 				, (pickedNumbers1, pickedNumbers2) -> pickedNumbers1.addAll(pickedNumbers2));
 	}

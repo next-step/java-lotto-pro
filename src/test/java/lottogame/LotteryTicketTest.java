@@ -13,7 +13,7 @@ public class LotteryTicketTest {
 
 	@Test
 	public void makeLotteryTicket_로또_티켓_한장_발급(){
-		LotteryTicket lotteryTicket = new LotteryTicket(LotteryNumberMaker.makelotteryNumbers());
+		LotteryTicket lotteryTicket = LotteryTicket.makeLotteryTicket();
 
 		Assertions.assertThat(lotteryTicket.getLotteryNumbers().size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
 		lotteryTicket.getLotteryNumbers().forEach(lotteryNumber-> assertThat(lotteryNumber).isBetween(START_INCLUSIVE_NUMBER,END_EXCLUSIVE_NUMBER));
