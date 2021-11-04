@@ -6,23 +6,28 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import lotto.common.Rank;
+
 public class Winning {
-	private Map<Integer, Integer> winningMap;
+	private Map<Rank, Integer> winningMap;
 
 	public Winning() {
 		this.winningMap = new HashMap<>();
 	}
 
-	public void addWinningMap(Integer key) {
-		if (!validateKey(key)) {
+	public void addWinningMap(Integer countOfMatch, boolean matchBonus) {
+		if (validateKey(countOfMatch)) {
 			return;
 		}
+		Rank key = Rank.valueOf(countOfMatch, matchBonus);
 		this.winningMap.put(key, this.winningMap.getOrDefault(key, 0) + 1);
 	}
 
 	private boolean validateKey(Integer key) {
-		Set<Integer> keySet = WINNING_AMOUNT_MAP.keySet();
-		return keySet.contains(key);
+		if (2 < key && key > 7) {
+			return true;
+		}
+		return false;
 	}
 
 	public String getYield(int investment) {
@@ -30,14 +35,14 @@ public class Winning {
 		return String.format("%.2f", total / investment);
 	}
 
-	public Integer getStrikeResult(Integer key) {
+	public Integer getStrikeResult(Rank key) {
 		return this.winningMap.getOrDefault(key, 0);
 	}
 
 	private Double getTotalAmount() {
 		int total = 0;
-		for (Map.Entry<Integer, Integer> entry : this.winningMap.entrySet()) {
-			total = total + (WINNING_AMOUNT_MAP.get(entry.getKey()) * entry.getValue());
+		for (Map.Entry<Rank, Integer> entry : this.winningMap.entrySet()) {
+			total = total + (entry.getKey().getWinningMoney() * entry.getValue());
 		}
 		return Double.valueOf(total);
 	}

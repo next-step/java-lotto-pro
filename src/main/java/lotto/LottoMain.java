@@ -4,26 +4,61 @@ import view.InputView;
 import view.ResultView;
 
 public class LottoMain {
-	public static void main(String[] args) {
-		LottoMain.play();
+	private Investment investment;
+	private Lottos lottos;
+	private WinnerNumber winnerNumber;
+	private BonusBall bonusBall;
+
+	public LottoMain() {
 	}
 
-	public static void play() {
-		//투자금
-		String inputInvestment = InputView.inputInvestment();
-		Investment investment = new Investment(inputInvestment);
+	public static void main(String[] args) {
+		LottoMain lottoMain = new LottoMain();
+		lottoMain.play();
+	}
+
+	public void play() {
+		setInvestment();
 		//로또생성
-		Lottos lottos = new Lottos(investment.getCount());
+		lottos = new Lottos(investment.getCount());
 		ResultView.purchaseResult(lottos);
-
-		//당첨번호
-		String inputWinningNumber = InputView.inputWinningNumber();
-		WinnerNumber winnerNumber = new WinnerNumber(inputWinningNumber);
-		//보너스 번호
-		String inputBonusBall = InputView.inputBonusBall();
-
+		setWinnerNumber();
+		setBonusBall();
 		//결과 확인
-		Winning winning = lottos.getWinningResult(winnerNumber);
+		Winning winning = lottos.getWinningResult(winnerNumber, bonusBall);
 		ResultView.totalResult(winning, investment.getInvestment());
+	}
+
+	private void setInvestment() {
+		try {
+			//투자금
+			String inputInvestment = InputView.inputInvestment();
+			investment = new Investment(inputInvestment);
+		}catch (IllegalArgumentException e) {
+			ResultView.print(e.getMessage());
+			setInvestment();
+		}
+	}
+
+	private void setWinnerNumber() {
+		try {
+			//당첨번호
+			String inputWinningNumber = InputView.inputWinningNumber();
+			winnerNumber = new WinnerNumber(inputWinningNumber);
+		} catch (IllegalArgumentException e) {
+			ResultView.print(e.getMessage());
+			setWinnerNumber();
+		}
+	}
+
+	private void setBonusBall() {
+		try {
+			//보너스 번호
+			String inputBonusBall = InputView.inputBonusBall();
+			bonusBall = new BonusBall(inputBonusBall, winnerNumber);
+		} catch (IllegalArgumentException e) {
+			ResultView.print(e.getMessage());
+			setBonusBall();
+		}
 	}
 }

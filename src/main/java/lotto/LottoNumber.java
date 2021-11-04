@@ -51,4 +51,9 @@ public class LottoNumber {
 		}
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return number.toString();
+	}
 }

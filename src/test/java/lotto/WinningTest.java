@@ -14,7 +14,7 @@ class WinningTest {
 		int investment = 5000;
 		Winning winning = new Winning();
 		for (int i = 0; i < 4; i++) {
-			winning.addWinningMap(3);
+			winning.addWinningMap(3, false);
 		}
 		//when
 		String yield = winning.getYield(investment);

@@ -17,12 +17,13 @@ public class Lottos {
 		return lottoList;
 	}
 
-	public Winning getWinningResult(WinnerNumber winnerNumber) {
+	public Winning getWinningResult(WinnerNumber winnerNumber, BonusBall bonusBall) {
 		Winning winning = new Winning();
 
 		for (Lotto lotto : lottoList) {
 			int strikeCount = winnerNumber.strikeCount(lotto.getNumbers());
-			winning.addWinningMap(strikeCount);
+			boolean matchBonus = bonusBall.match(lotto.getNumbers());
+			winning.addWinningMap(strikeCount, matchBonus);
 		}
 
 		return winning;
