@@ -26,7 +26,7 @@ public class CalculatorManager {
             return;
         }
 
-        delimiters = null;
+        delimiters = new Delimiters();
         numbersText = new NumbersText(text);
     }
 
