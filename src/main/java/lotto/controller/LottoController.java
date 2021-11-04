@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.purchase.PurchaseAmount;
 import lotto.domain.purchase.PurchaseMoney;
+import lotto.domain.winning.WinningNumbers;
 import lotto.domain.winning.WinningResult;
 import lotto.service.LottoService;
 import lotto.view.InputView;
@@ -21,9 +22,8 @@ public class LottoController {
             LottoTickets lottoTickets = service.issueTickets(purchaseAmount);
             OutputView.printLottoTickets(lottoTickets);
 
-            String winningNumber = InputView.getWinningNumber();
-            String bonusNumber = InputView.getBonusNumber();
-            WinningResult winningResult = service.getWinningResult(winningNumber, bonusNumber);
+            WinningNumbers winningNumbers = service.getWinningNumbers(InputView.getWinningNumber(), InputView.getBonusNumber());
+            WinningResult winningResult = service.getWinningResult(winningNumbers, lottoTickets);
             OutputView.printWinningResult(winningResult);
 
             float profitRate = service.profitRate(winningResult, purchaseMoney);

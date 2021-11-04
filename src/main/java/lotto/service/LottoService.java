@@ -9,10 +9,11 @@ import lotto.domain.winning.WinningResult;
 import lotto.domain.winning.WinningStatistics;
 import lotto.util.StringUtil;
 
+import java.util.List;
+
 public class LottoService {
 
     private final LottoTicketVendingMachine vendingMachine;
-    private LottoTickets lottoTickets;
 
     public LottoService() {
         this.vendingMachine = new LottoTicketVendingMachine();
@@ -24,12 +25,16 @@ public class LottoService {
     }
 
     public LottoTickets issueTickets(PurchaseAmount purchaseAmount) {
-        this.lottoTickets = vendingMachine.issueTickets(purchaseAmount.getAutoTicketAmount());
-        return lottoTickets;
+        return vendingMachine.issueTickets(purchaseAmount.getAutoTicketAmount());
     }
 
-    public WinningResult getWinningResult(String inputWinningNumbers, String inputBonusNumber) {
-        WinningNumbers winningNumbers = new WinningNumbers(StringUtil.splitParseInt(inputWinningNumbers), StringUtil.parseIntFrom(inputBonusNumber));
+    public WinningNumbers getWinningNumbers(String inputWinningNumbers, String inputBonusNumber) {
+        List<Integer> winningNumbers = StringUtil.splitParseInt(inputWinningNumbers);
+        int bonusNumber = StringUtil.parseIntFrom(inputBonusNumber);
+        return new WinningNumbers(winningNumbers, bonusNumber);
+    }
+
+    public WinningResult getWinningResult(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
         WinningResult winningResult = new WinningResult(winningNumbers);
         winningResult.aggregate(lottoTickets);
 
