@@ -10,30 +10,34 @@ public class ConsoleView {
     private static final String ENTER_MONEY_TEXT = "구입금액을 입력해 주세요.";
     private static final String BUY_LOTTO_TEXT = "%d개를 구매했습니다." + System.lineSeparator();
     private static final String ENTER_WINNING_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String ERROR_TEXT = "[ERROR] %s";
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int enterMoney() {
+    public static String enterMoney() {
         System.out.println(ENTER_MONEY_TEXT);
-        return scanner.nextInt();
+        return scanner.nextLine();
     }
 
-    public static void outputBoughtLotto(int boughtCount) {
+    public static void printBoughtLotto(int boughtCount) {
         System.out.printf(BUY_LOTTO_TEXT, boughtCount);
     }
 
-    public static void outputLottoTicket(LottoTicket lottoTicket) {
+    public static void printLottoTicket(LottoTicket lottoTicket) {
         List<LottoNumbers> ticket = lottoTicket.getTicket();
         ticket.stream().forEach(System.out::println);
-        outputLine();
     }
 
     public static String enterWinning() {
-        scanner.nextLine();
         System.out.println(ENTER_WINNING_TEXT);
         return scanner.nextLine();
     }
 
-    public static void outputLine() {
+    public static void printError(String errorMessage) {
+        System.out.printf(ERROR_TEXT, errorMessage);
+        printLine();
+    }
+
+    public static void printLine() {
         System.out.println();
     }
 

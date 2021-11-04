@@ -16,10 +16,11 @@ public class LottoExecutor {
 
     public void run() {
         BoughtLotto boughtLotto = lottoController.buyLotto();
-        outputBoughtLotto(boughtLotto.getBoughtCount());
+        printBoughtLotto(boughtLotto.getBoughtCount());
         LottoTicket lottoTicket = lottoController.generateLottoTicket(boughtLotto);
-        outputLottoTicket(lottoTicket);
+        printLottoTicket(lottoTicket);
+        printLine();
         Winning winningLottoNumbers = lottoController.enterWinningLottoNumbers();
-        outputLine();
+        printLine();
     }
 }
