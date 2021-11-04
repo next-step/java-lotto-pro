@@ -23,7 +23,7 @@ class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("lotto.domain.LottoNumbersArgs#lottoNumberSizeTest")
-    @DisplayName("로또 사이즈 실패 테스트")
+    @DisplayName("로또 넘버는 6개의 숫자로 구성한다.")
     public void lottoNumberSizeTest(List<Integer> input) {
         assertThatThrownBy(() -> new LottoNumbers(input))
                 .isInstanceOf(LottoSizeException.class);
@@ -31,7 +31,7 @@ class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("lotto.domain.LottoNumbersArgs#lottoNumberDuplicateTest")
-    @DisplayName("로또 넘버 중복 입력 테스트")
+    @DisplayName("중복된 숫자는 입력할 수 없다.")
     public void lottoNumberDuplicateTest(List<Integer> input) {
         assertThatThrownBy(() -> new LottoNumbers(input))
                 .isInstanceOf(DuplicateNumberException.class);

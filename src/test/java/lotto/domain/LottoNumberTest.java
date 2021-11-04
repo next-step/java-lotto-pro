@@ -24,7 +24,7 @@ class LottoNumberTest {
     @ValueSource(ints = {
             0, -1, 46
     })
-    @DisplayName("로또 번호 한개 생성 - 실")
+    @DisplayName("로또 번호는 1부터 45까지의 숫자여야한다.")
     public void lottoNumberTest_fail(int number) {
         assertThatThrownBy(() -> new LottoNumber(number))
                 .isInstanceOf(LottoNumberRangeException.class);

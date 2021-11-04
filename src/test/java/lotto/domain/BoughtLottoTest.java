@@ -28,7 +28,7 @@ class BoughtLottoTest {
     @ValueSource(ints = {
             0, 999, 1001, -1
     })
-    @DisplayName("구입한 로또 개수 - 실패")
+    @DisplayName("1000원단위로 입력할 수 있으며 1000보다 작은수는 입력할 수 없다.")
     public void buyToLottoTest_fail(int money) {
         assertThatThrownBy(() -> new BoughtLotto(money))
                 .isInstanceOf(InvalidMoneyException.class);
