@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoPrize;
+import lotto.domain.LottoRanks;
 
 public class ResultView {
 
@@ -20,13 +20,13 @@ public class ResultView {
 		System.out.println(result);
 	}
 
-	public static void showPrize(LottoPrize lottoPrize, double profit) {
+	public static void showPrize(LottoRanks ranks, double profit) {
 		String result = "\n당첨통계\n";
 		result += "---------\n";
-		result += "3개 일치 (5000원)- " + lottoPrize.getCnt4St() + "개\n";
-		result += "4개 일치 (50000원)- " + lottoPrize.getCnt3St() + "개\n";
-		result += "5개 일치 (1500000원)- " + lottoPrize.getCnt2St() + "개\n";
-		result += "6개 일치 (2000000000원)- " + lottoPrize.getCnt1St() + "개\n";
+		result += "3개 일치 (5000원)- " + ranks.getFourthCnt() + "개\n";
+		result += "4개 일치 (50000원)- " + ranks.getThirdCnt() + "개\n";
+		result += "5개 일치 (1500000원)- " + ranks.getSecondCnt() + "개\n";
+		result += "6개 일치 (2000000000원)- " + ranks.getFirstCnt() + "개\n";
 		System.out.println(result);
 		System.out.printf("총 수익률은 %.2f입니다\n", profit);
 	}
