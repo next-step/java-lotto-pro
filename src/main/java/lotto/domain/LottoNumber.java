@@ -2,32 +2,43 @@ package lotto.domain;
 
 import lotto.domain.exception.RangeOutOfLottoNumberException;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public final class LottoNumber {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
+    private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
-    private final int lottoNumber;
+    private final int number;
 
-    private LottoNumber(final int lottoNumber) {
-        this.lottoNumber = lottoNumber;
+    static {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
     }
 
-    public static LottoNumber from(final int lottoNumber) {
+    private LottoNumber(final int number) {
+        this.number = number;
+    }
+
+    public static LottoNumber from(final int number) {
+        LottoNumber lottoNumber = lottoNumbers.get(number);
         validate(lottoNumber);
-        return new LottoNumber(lottoNumber);
+
+        return lottoNumber;
     }
 
-    private static void validate(final int lottoNumber) {
-        if (lottoNumber < MIN_NUMBER || lottoNumber > MAX_NUMBER) {
+    private static void validate(final LottoNumber lottoNumber) {
+        if (lottoNumber == null) {
             throw new RangeOutOfLottoNumberException();
         }
     }
 
     public int getValue() {
-        return lottoNumber;
+        return number;
     }
 
     @Override
@@ -35,12 +46,12 @@ public final class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return lottoNumber == that.lottoNumber;
+        return number == that.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(number);
     }
 
 }
