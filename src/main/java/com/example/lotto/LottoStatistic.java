@@ -34,9 +34,9 @@ public class LottoStatistic {
 	private void addResultsToLottoRankToCount(LottoGames lottoGames, WinningLottoNumbers winningLottoNumbers) {
 		this.lottoRankToCount.putAll(lottoGames.getValues().stream()
 			.map(lottoGame -> {
-				int countOfMatch = LottoNumbers.match(lottoGame.getLottoNumbers(), winningLottoNumbers.getBaseNumbers());
+				int matchCount = LottoNumbers.match(lottoGame.getLottoNumbers(), winningLottoNumbers.getBaseNumbers());
 				boolean matchBonus = lottoGame.getLottoNumbers().contains(winningLottoNumbers.getBonusNumber());
-				return LottoRank.valueOf(countOfMatch, matchBonus);
+				return LottoRank.valueOf(matchCount, matchBonus);
 			})
 			.filter(lottoRank -> !lottoRank.isMiss())
 			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
@@ -53,10 +53,8 @@ public class LottoStatistic {
 	public String toString() {
 		StringBuilder sb = new StringBuilder("당첨 통계\n---------\n");
 		for (LottoRank lottoRank : lottoRankToCount.keySet()) {
-			int countOfMatch = lottoRank.getCountOfMatch();
-			int winningMoney = lottoRank.getWinningMoney();
 			Long count = lottoRankToCount.get(lottoRank);
-			sb.append(String.format("%d개 일치 (%d원)- %d개\n", countOfMatch, winningMoney, count));
+			sb.append(String.format("%s- %d개\n", lottoRank, count));
 		}
 
 		sb.append(String.format("총 수익률은 %f입니다.", ((double)getTotalWinningMoney() / purchaseAmount)));

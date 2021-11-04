@@ -51,4 +51,17 @@ public enum LottoRank {
 	public boolean isMiss() {
 		return this == MISS;
 	}
+
+	@Override
+	public String toString() {
+		if (isMiss()) {
+			return "낙첨";
+		}
+
+		if (isSecond()) {
+			return String.format("%d개 일치, 보너스 볼 일치(%d원)", countOfMatch, winningMoney);
+		}
+
+		return String.format("%d개 일치 (%d원)", countOfMatch, winningMoney);
+	}
 }
