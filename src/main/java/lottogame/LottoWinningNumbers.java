@@ -8,14 +8,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import lottogame.exception.DuplicateLottoNumberException;
-import lottogame.exception.NotCorrectSizeOfLotto;
+import lottogame.exception.NotCorrectSizeOfLottoException;
+import lottogame.exception.NotDigitLottoNumberException;
 
 public class LottoWinningNumbers {
 
+	private static int SIZE_OF_LOTTERY_NUMBERS = 6;
 	private Set<LottoNumber> winningNumbers;
 
 	private LottoWinningNumbers(List<LottoNumber> numbers) {
-		winningNumbers=getDistinctLottoNumbers(numbers);
+		winningNumbers = getDistinctLottoNumbers(numbers);
 	}
 
 	private Set<LottoNumber> getDistinctLottoNumbers(List<LottoNumber> numbers) {
@@ -26,7 +28,7 @@ public class LottoWinningNumbers {
 	}
 
 	private void validateHasNotDuplicateLottoNumber(Set<LottoNumber> lottoNumbers) {
-		if(lottoNumbers.size()<6){
+		if (lottoNumbers.size() < SIZE_OF_LOTTERY_NUMBERS) {
 			throw new DuplicateLottoNumberException("중복된 당첨번호를 입력하였습니다.");
 		}
 	}
@@ -37,13 +39,13 @@ public class LottoWinningNumbers {
 	}
 
 	private static void validateSizeOfLotto(List<Integer> numbers) {
-		if(!isCorrectSizeOfLotto(numbers)){
-			throw new NotCorrectSizeOfLotto("당첨 번호는 6개 입력하셔야 합니다.");
+		if (!isCorrectSizeOfLotto(numbers)) {
+			throw new NotCorrectSizeOfLottoException("당첨 번호는 6개 입력하셔야 합니다.");
 		}
 	}
 
 	private static boolean isCorrectSizeOfLotto(List<Integer> numbers) {
-		if(numbers.size()==6){
+		if (numbers.size() == SIZE_OF_LOTTERY_NUMBERS) {
 			return true;
 		}
 		return false;
@@ -60,4 +62,5 @@ public class LottoWinningNumbers {
 	public Set<LottoNumber> getWinningNumbers() {
 		return winningNumbers;
 	}
+
 }
