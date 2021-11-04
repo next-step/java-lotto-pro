@@ -61,13 +61,20 @@ public class LottoNumberTest {
 
     }
 
-    @Test
-    @DisplayName("로또 번호 null 검증")
-    public void activeLottoNull() {
+
+    static Stream<Arguments> listProvide3() {
+        List<Integer> number = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        return Stream.of(arguments(number));
+    }
+
+    @ParameterizedTest
+    @MethodSource("listProvide3")
+    @DisplayName("로또 번호 길이 검증")
+    public void activeLottoNumberSize(List<Integer> activeNumbers) {
         LottoNumber lottoNumber = new LottoNumber();
 
         assertThatThrownBy(() -> {
-            List<Number> numbers = lottoNumber.getLottoNumber(null);
+            List<Number> numbers = lottoNumber.getLottoNumber(activeNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
 

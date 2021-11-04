@@ -32,7 +32,6 @@ public class LottoNumber {
     }
 
     private List<Number> generateActiveLottoNumbers(List<Integer> activeNumbers) {
-        validateActiveLottoSize(activeNumbers);
         return activeNumbers.stream()
                 .map(Number::new)
                 .collect(Collectors.toList());
@@ -43,13 +42,14 @@ public class LottoNumber {
         return new Number(randomNumber);
     }
 
-    private void validateActiveLottoSize(List<Integer> activeNumbers) {
-        if (activeNumbers == null || activeNumbers.size() != LOTTO_SIZE) {
+    private void validateLottoNumbersSize(List<Number> activeNumbers) {
+        if (activeNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("[ERROR] 숫자 입력 필수 자리수 : " + LOTTO_SIZE);
         }
     }
 
     private void setLottoNumbers(List<Number> lottoNumbers) {
+        validateLottoNumbersSize(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers.addAll(lottoNumbers);
     }
