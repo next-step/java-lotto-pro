@@ -1,6 +1,7 @@
 package edu.lotto.automatic.controller;
 
 import edu.lotto.automatic.constants.MessageConstants;
+import edu.lotto.automatic.model.Lotto;
 import edu.lotto.automatic.utils.NumberUtil;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class AutomaticLotto {
 		int perchaseAmount = Integer.parseInt(getPerchaseAmount());
 		logger.info("사용자가 입력한 구매 금액 : " + perchaseAmount);
 		logger.info("구매한 로또 갯수 : " + NumberUtil.getLottoCount(perchaseAmount));
-		logger.info("1~45 사이의 숫자 6개 : " + NumberUtil.getSixRandomNumber().toString());
+		new Lotto();
 	}
 
 	/**
