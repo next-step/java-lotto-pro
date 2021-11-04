@@ -5,7 +5,6 @@ import java.util.List;
 public class LottoTicket {
 
 	private List<LottoNumber> lottoNumbers;
-	// private LottoNumberGroup lottoNumberGroup;
 
 	private LottoTicket(List<LottoNumber> lottoNumber) {
 		this.lottoNumbers = lottoNumber;
@@ -14,7 +13,6 @@ public class LottoTicket {
 	public static LottoTicket makeLottoTicket() {
 		return new LottoTicket(LottoNumbersMaker.makelottoNumbers());
 	}
-
 
 	public List<LottoNumber> getLottoNumbers() {
 		return lottoNumbers;
