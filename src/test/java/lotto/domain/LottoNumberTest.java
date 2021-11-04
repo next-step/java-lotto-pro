@@ -21,8 +21,6 @@ public class LottoNumberTest {
     public void autoLottoTest() {
         LottoNumber lottoNumber = new LottoNumber();
 
-        lottoNumber.generateLottoNumber();
-
         assertThat(lottoNumber.getLottoNumber().size()).isEqualTo(6);
     }
 
@@ -35,9 +33,7 @@ public class LottoNumberTest {
     @MethodSource("listProvide")
     @DisplayName("로또 번호 수동 생성 확인")
     public void activeLottoTest(List<Integer> activeNumbers) {
-        LottoNumber lottoNumber = new LottoNumber();
-
-        lottoNumber.generateLottoNumber(activeNumbers);
+        LottoNumber lottoNumber = new LottoNumber(activeNumbers);
 
         assertThat(lottoNumber.getLottoNumber()).containsExactly(new Number(1), new Number(2), new Number(3),
                 new Number(4), new Number(5), new Number(6));
@@ -52,13 +48,10 @@ public class LottoNumberTest {
     @MethodSource("listProvide2")
     @DisplayName("로또 번호 범위 검증")
     public void activeLottoRange(List<Integer> activeNumbers) {
-        LottoNumber lottoNumber = new LottoNumber();
-
         assertThatThrownBy(() -> {
-            lottoNumber.generateLottoNumber(activeNumbers);
+            LottoNumber lottoNumber = new LottoNumber(activeNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
-
     }
 
 
@@ -71,14 +64,10 @@ public class LottoNumberTest {
     @MethodSource("listProvide3")
     @DisplayName("로또 번호 길이 검증")
     public void activeLottoNumberSize(List<Integer> activeNumbers) {
-        LottoNumber lottoNumber = new LottoNumber();
-
         assertThatThrownBy(() -> {
-            lottoNumber.generateLottoNumber(activeNumbers);
-
+            LottoNumber lottoNumber = new LottoNumber(activeNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
-
     }
 
 }

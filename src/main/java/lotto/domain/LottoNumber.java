@@ -11,14 +11,18 @@ public class LottoNumber {
 
     public static final int LOTTO_SIZE = 6;
 
-    private final List<Number> lottoNumbers = new ArrayList<>();
+    private final List<Number> lottoNumbers;
 
-    public void generateLottoNumber() {
-        addAllLottoNumbers(getAutoLottoNumbers());
+    public LottoNumber() {
+        List<Number> autoLottoNumbers = getAutoLottoNumbers();
+        validateLottoNumbersSize(autoLottoNumbers);
+        lottoNumbers = sortAsc(autoLottoNumbers);
     }
 
-    public void generateLottoNumber(List<Integer> activeNumbers) {
-        addAllLottoNumbers(getActiveLottoNumbers(activeNumbers));
+    public LottoNumber(List<Integer> activeNumbers) {
+        List<Number> activeLottoNumbers = getActiveLottoNumbers(activeNumbers);
+        validateLottoNumbersSize(activeLottoNumbers);
+        lottoNumbers = sortAsc(activeLottoNumbers);
     }
 
     private List<Number> getAutoLottoNumbers() {
@@ -50,10 +54,9 @@ public class LottoNumber {
         return lottoNumbers;
     }
 
-    private void addAllLottoNumbers(List<Number> lottoNumbers) {
-        validateLottoNumbersSize(lottoNumbers);
+    private List<Number> sortAsc(List<Number> lottoNumbers) {
         Collections.sort(lottoNumbers);
-        this.lottoNumbers.addAll(lottoNumbers);
+        return lottoNumbers;
     }
 
     @Override
