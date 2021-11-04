@@ -19,13 +19,6 @@ public class LottoRankTest {
     }
 
     @Test
-    void name() {
-        Arrays.stream(LottoRank.listOf()).forEach(lottoRank -> {
-            assertThat(lottoRank.toString().contains("개 일치")).isTrue();
-        });
-    }
-
-    @Test
     void incrementCountHasMatchNumber() {
         int matchCount = 5;
         Arrays.stream(LottoRank.listOf()).forEach(lottoRank -> {
