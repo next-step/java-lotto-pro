@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import static lotto.domain.Number.MAX_NUMBER;
 import static lotto.domain.Number.MIN_NUMBER;
-import static lotto.utils.RandomNumberUtils.*;
+import static lotto.utils.RandomNumberUtils.generateRandomNumbers;
 
 public class LottoNumber {
 
@@ -50,12 +50,12 @@ public class LottoNumber {
         }
     }
 
-    public List<Number> getLottoNumber() {
+    private List<Number> sortAsc(List<Number> lottoNumbers) {
+        Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
 
-    private List<Number> sortAsc(List<Number> lottoNumbers) {
-        Collections.sort(lottoNumbers);
+    public List<Number> getLottoNumber() {
         return lottoNumbers;
     }
 
@@ -64,4 +64,16 @@ public class LottoNumber {
         return String.join(", ", lottoNumbers.toString());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
 }

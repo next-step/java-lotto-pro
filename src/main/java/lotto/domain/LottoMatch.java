@@ -1,49 +1,30 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.Objects;
 
 public class LottoMatch {
 
-    private List<Number> matchNumbers;
-    private List<LottoNumber> lottoNumbers;
-    private HashMap<Rank, Integer> matchResult;
+    private final Rank lottoRank;
 
-    public LottoMatch(List<Number> matchNumbers, Lotto lotto) {
-        this.lottoNumbers = lotto.getLottoNumbers();
-        this.matchResult = initializeMatchResult();
-        this.matchNumbers = matchNumbers;
-        matchLotto();
+    public LottoMatch(LottoNumber matchLotto, LottoNumber lotto) {
+        this.lottoRank = Rank.of(matchLotto.getLottoNumber(), lotto.getLottoNumber());
     }
 
-    private void matchLotto() {
-        initializeMatchResult();
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            int matchCount = getMatchCount(matchNumbers, lottoNumber.getLottoNumbers());
-            Rank rank = Rank.of(matchCount);
-            matchResult.put(rank, matchResult.getOrDefault(rank, 0) + 1);
-        }
+    public boolean isMatch(Rank rank) {
+        return this.lottoRank.equals(rank);
     }
 
-    private HashMap<Rank, Integer> initializeMatchResult() {
-        HashMap<Rank, Integer> result = new LinkedHashMap<>();
-        for (Rank rank : Rank.values()) {
-            result.put(rank, 0);
-        }
-        return result;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoMatch that = (LottoMatch) o;
+        return lottoRank == that.lottoRank;
     }
 
-    private int getMatchCount(List<Number> matchNumbers, List<Number> lottoNumber) {
-        int matchCount = 0;
-        for (Number number : lottoNumber) {
-            matchCount += Collections.frequency(matchNumbers, number);
-        }
-        return matchCount;
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoRank);
     }
 
-    public HashMap<Rank, Integer> getMatchResult() {
-        return matchResult;
-    }
 }
