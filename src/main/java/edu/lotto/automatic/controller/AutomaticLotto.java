@@ -33,7 +33,7 @@ public class AutomaticLotto {
 		System.out.println(MessageConstants.INPUT_PERCHASE_AMOUNT_MESSAGE);
 		Scanner scan = new Scanner(System.in);
 		String amount = scan.next();
-		if (NumberUtil.checkPerchaseAmountValidation(amount)) {
+		if (!NumberUtil.checkPerchaseAmountValidation(amount)) {
 			amount = getPerchaseAmount();
 		}
 		return amount;
