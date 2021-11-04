@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class StringAddCalculatorTest {
@@ -18,6 +19,14 @@ public class StringAddCalculatorTest {
 		assertThat(result).isEqualTo(0);
 
 		result = StringAddCalculator.splitAndSum("");
+		assertThat(result).isEqualTo(0);
+	}
+
+	@ParameterizedTest
+	@NullAndEmptySource
+	@DisplayName("입력이 null 또는 빈문자인 경우 0을 반환한다. (@NullAndEmptySource 연습)")
+	public void splitAndSum_null_and_empty_source(String input) {
+		int result = StringAddCalculator.splitAndSum(input);
 		assertThat(result).isEqualTo(0);
 	}
 
