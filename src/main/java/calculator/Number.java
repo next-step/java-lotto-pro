@@ -7,12 +7,12 @@ public class Number {
 
 	public Number(String text) {
 		if (isText(text)) {
-			throw new RuntimeException();
+			throw new RuntimeException("문자는 입력 할 수 없습니다.");
 		}
 
 		this.number = Integer.parseInt(text);
 		if (isNegative(this.number)) {
-			throw new RuntimeException();
+			throw new RuntimeException("음수는 입력 할 수 없습니다.");
 		}
 	}
 
