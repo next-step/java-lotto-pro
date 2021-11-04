@@ -7,6 +7,7 @@ public class StringAddCalculator {
 
 	private static final String DEFAULT_DELIMITER = ",|:";
 	private static final Pattern CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
+	private static final int NUMBER_RANGE_MINIMUM = 0;
 
 	public static int splitAndSum(String text) {
 		if (isNullOrEmpty(text)) {
@@ -44,7 +45,7 @@ public class StringAddCalculator {
 	}
 
 	private static int validatePositiveNumber(int number) {
-		if (number < 0) {
+		if (number < NUMBER_RANGE_MINIMUM) {
 			throw new RuntimeException();
 		}
 
