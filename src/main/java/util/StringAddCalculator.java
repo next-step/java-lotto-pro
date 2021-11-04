@@ -5,16 +5,30 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    public static final String COMMA = ",";
+    private static final Pattern PATTERN_DELIMITERS = Pattern.compile("[,:]");
+    private static final Pattern PATTERN_CUSTOM = Pattern.compile("//(.)\n(.*)");
+    private static final int ZERO = 0;
+    private static final String MESSAGE_INVALID_CHARACTER_FORMAT = "Invalid character format.";
+    private static final String MESSAGE_NOT_POSITIVE_INT = "For input only positive integers.";
 
     public static int splitAndSum(String str) {
-        int result = 0;
-        if( str == null || str.isEmpty() ) return result;
-        if( str.length() == 1 ) return checkOneNumber(str);
-        if( str.contains(COMMA) && !str.contains(":")) return checkComma(str);
-        if(str.contains(COMMA) && str.contains(":") ) return checkCommaAndDelimiter(str);
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(str);
-        if(m.find()) return checkCustomDelimiter(m);
+        if( str == null || str.isEmpty() ) {
+            return ZERO;
+        }
+        int result = ZERO;
+        if( str.length() == 1 ) {
+            result = checkOneNumber(str);
+        }
+        if( PATTERN_DELIMITERS.matcher(str).find() ) {
+            result = checkSeparatorAndDelimiter(str);
+        }
+        Matcher matcher = PATTERN_CUSTOM.matcher(str);
+        if( matcher.find() ) {
+            result = checkCustomDelimiter(matcher);
+        }
+        if( result == ZERO ) {
+            throw new IllegalArgumentException(MESSAGE_INVALID_CHARACTER_FORMAT);
+        }
         return result;
     }
 
@@ -22,24 +36,19 @@ public class StringAddCalculator {
         return Integer.parseInt(str);
     }
 
-    private static int checkComma(String str) {
-        String[] token = str.split(COMMA);
+    private static int checkSeparatorAndDelimiter(String str) {
+        String[] token = PATTERN_DELIMITERS.split(str);
         return addStringArray(token);
     }
 
-    private static int checkCommaAndDelimiter(String str) {
-        String[] token = str.split(",|:");
-        return addStringArray(token);
-    }
-
-    private static int checkCustomDelimiter(Matcher m) {
-        String customDelimiter = m.group(1);
-        String[] tokens= m.group(2).split(customDelimiter);
+    private static int checkCustomDelimiter(Matcher matcher) {
+        String customDelimiter = matcher.group(1);
+        String[] tokens = matcher.group(2).split(customDelimiter);
         return addStringArray(tokens);
     }
 
     private static int addStringArray(String[] strs) {
-        int result = 0;
+        int result = ZERO;
         for(String str : strs) {
             result += checkInt(Integer.parseInt(str));
         }
@@ -47,7 +56,9 @@ public class StringAddCalculator {
     }
 
     private static int checkInt(int number) {
-        if( number < 0 ) throw new RuntimeException("For input only positive integers");
+        if( number < ZERO ) {
+            throw new RuntimeException(MESSAGE_NOT_POSITIVE_INT);
+        }
         return number;
     }
 
