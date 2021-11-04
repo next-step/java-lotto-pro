@@ -1,3 +1,5 @@
+package model;
+
 public class MatchResult {
 	private int threeMatchCount;
 	private int fourMatchCount;

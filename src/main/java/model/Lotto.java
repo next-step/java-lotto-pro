@@ -1,3 +1,5 @@
+package model;
+
 import static java.util.stream.Collectors.*;
 
 import java.util.Collections;
