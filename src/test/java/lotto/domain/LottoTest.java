@@ -10,8 +10,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
-    OutputView outputView = new OutputView();
-
     @ParameterizedTest
     @ValueSource(ints = 15000)
     @DisplayName("금액에 따라 로또 구입개수 확인")
@@ -27,8 +25,6 @@ public class LottoTest {
     public void validateRemainderAmount(int purchaseAmount) {
         assertThatThrownBy(() -> {
             Lotto lotto = new Lotto(purchaseAmount);
-
-            assertThat(lotto.getLottoNumbers().size() > 0).isTrue();
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
@@ -39,8 +35,6 @@ public class LottoTest {
     public void validateZeroAmount(int purchaseAmount) {
         assertThatThrownBy(() -> {
             Lotto lotto = new Lotto(purchaseAmount);
-
-            assertThat(lotto.getLottoNumbers().size() > 0).isTrue();
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
