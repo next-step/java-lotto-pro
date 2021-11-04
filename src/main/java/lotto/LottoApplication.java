@@ -1,10 +1,10 @@
 package lotto;
 
-import lotto.service.LottoMachineService;
+import lotto.controller.LottoMachineController;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        LottoMachineService machine = new LottoMachineService();
+        LottoMachineController machine = new LottoMachineController();
         machine.run();
     }
 }

@@ -26,14 +26,13 @@ public class InputView {
     }
 
     private int parseInputStringToInteger(String inputString) {
-        if (inputString == null || inputString.isEmpty()) {
-            return 0;
-        }
+        validateEmpty(inputString);
         validateNumberFormat(inputString);
         return Integer.parseInt(inputString);
     }
 
     private List<Number> parseInputStringToNumberList(String inputString) {
+        validateEmpty(inputString);
         String[] strings = inputString.split(SPLIT_REGEX);
         validateArrayLength(strings);
         return getNumberList(strings);
@@ -61,4 +60,9 @@ public class InputView {
         }
     }
 
+    private void validateEmpty(String inputString) {
+        if (inputString == null || inputString.isEmpty()) {
+            throw new IllegalArgumentException("[ERROR] 입력값이 없습니다.");
+        }
+    }
 }

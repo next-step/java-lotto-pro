@@ -39,6 +39,10 @@ public enum Rank {
         return matchCount;
     }
 
+    public boolean isType(Rank rank) {
+        return this == rank;
+    }
+
     public int getPrizeMoney() {
         return this.prizeMoney;
     }

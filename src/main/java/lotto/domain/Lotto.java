@@ -5,22 +5,29 @@ import java.util.List;
 
 public class Lotto {
 
-    private final int GAME_PRICE = 1000;
+    public final static int GAME_PRICE = 1000;
 
-    private List<LottoNumber> lottoNumbers;
+    private final int purchaseCount;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(int purchaseAmount) {
-        this.lottoNumbers = purchaseLotto(purchaseAmount);
+        this.purchaseCount = getPurchaseCount(purchaseAmount);
+        this.lottoNumbers = purchaseLotto();
     }
 
-    private List<LottoNumber> purchaseLotto(int purchaseAmount) {
-        int purchaseCount = getPurchaseCount(purchaseAmount);
-
-        List<LottoNumber> lottoNumbers = getLottoList(purchaseCount);
-        return lottoNumbers;
+    public MatchResult getMatchResult(LottoNumber matchLotto) {
+        List<LottoMatch> matchList = new ArrayList<>();
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            matchList.add(new LottoMatch(matchLotto, lottoNumber));
+        }
+        return new MatchResult(matchList);
     }
 
-    private List<LottoNumber> getLottoList(int purchaseAmount) {
+    private List<LottoNumber> purchaseLotto() {
+        return generateLotto(purchaseCount);
+    }
+
+    private List<LottoNumber> generateLotto(int purchaseAmount) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < purchaseAmount; i++) {
             lottoNumbers.add(new LottoNumber());
@@ -55,4 +62,5 @@ public class Lotto {
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
+
 }
