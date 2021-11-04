@@ -7,7 +7,7 @@ import java.util.List;
 
 public class OutputView {
     private static final String INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
-    private static final String PRINT_PURCHASE_QUANTITY = "%s개를 구매했습니다.";
+    private static final String PRINT_PURCHASE_QUANTITY = "%s개를 구매했습니다.\n";
 
     private OutputView() {
     }
@@ -18,7 +18,6 @@ public class OutputView {
 
     public static void printPurchaseQuantity(int purchaseQuantity) {
         System.out.printf(PRINT_PURCHASE_QUANTITY, purchaseQuantity);
-        System.out.println();
     }
 
     public static void printLottoNumber(Lottos lottos) {
