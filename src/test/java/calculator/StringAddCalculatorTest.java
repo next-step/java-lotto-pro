@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-@
 public class StringAddCalculatorTest {
   @DisplayName("null 또는 공백 문자열이 오면 0을 반환한다.")
   @ParameterizedTest
