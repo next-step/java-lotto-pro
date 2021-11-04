@@ -20,6 +20,7 @@
 로또들 (`Lottos`)
 `Lottos`는 `RandomNumbers`를 가진다
 `Lottos`는 로또 개수(`count`)를 받아 로또들을 반환한다
+`Lottos`는 당첨 로또와 비교하여 `Rank`들을 반환한다
 
 로또 번호 (`LottoNumber`)
 `LottoNumber`는 `number`를 가진다

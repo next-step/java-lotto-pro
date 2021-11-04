@@ -29,6 +29,10 @@ public enum Rank {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
+    public static Rank rank(Lotto winningLotto, Lotto lotto) {
+        return rank(winningLotto.match(lotto));
+    }
+
     public int getPrice() {
         return price;
     }

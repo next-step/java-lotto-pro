@@ -19,4 +19,10 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return this.lottos;
     }
+
+    public List<Rank> match(Lotto winningLotto) {
+        return lottos.stream()
+                .map(lotto -> Rank.rank(winningLotto, lotto))
+                .collect(Collectors.toList());
+    }
 }

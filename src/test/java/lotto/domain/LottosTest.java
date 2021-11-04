@@ -20,4 +20,11 @@ class LottosTest {
                 () -> assertThat(expected.get(1)).isEqualTo(new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16)))
         );
     }
+
+    @Test
+    void 당첨로또와_비교한다() {
+        Lottos lottos = new Lottos(2, new FakeNumbers());
+        List<Rank> ranks = lottos.match(new Lotto(Arrays.asList(1, 2, 11, 12, 13, 14)));
+        assertThat(ranks).contains(Rank.THIRD);
+    }
 }
