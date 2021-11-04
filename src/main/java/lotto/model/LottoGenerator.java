@@ -72,4 +72,8 @@ public class LottoGenerator {
 	public boolean contains(LottoNumbers lottoNumbers) {
 		return this.lottoNumbersList.contains(lottoNumbers);
 	}
+
+	public List<LottoNumbers> getLottoNumbersList() {
+		return lottoNumbersList;
+	}
 }
