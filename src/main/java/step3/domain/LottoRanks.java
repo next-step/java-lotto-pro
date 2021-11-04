@@ -3,6 +3,7 @@ package step3.domain;
 import java.util.Arrays;
 
 public class LottoRanks {
+    private static final int MIN_RANK_NUMBER = 3;
     private final LottoRank[] lottoRanks = LottoRank.listOf();
 
     public void matchOfMatchCount(int matchCount) {
@@ -23,7 +24,9 @@ public class LottoRanks {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (LottoRank lottoRank : lottoRanks) {
-            sb.append(lottoRank.toString()).append("\n");
+            if (lottoRank.matchNumber >= MIN_RANK_NUMBER) {
+                sb.append(lottoRank.toString()).append("\n");
+            }
         }
         return sb.toString();
     }

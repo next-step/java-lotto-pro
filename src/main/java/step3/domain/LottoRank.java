@@ -50,7 +50,7 @@ public enum LottoRank {
     private static LottoRank[] getSortedValues() {
         return Stream.of(values()).sorted((o1, o2) ->
             {
-                return o2.toString().compareTo(o1.toString());
+                return o1.toString().compareTo(o2.toString());
             }).
             toArray(LottoRank[]::new);
     }
