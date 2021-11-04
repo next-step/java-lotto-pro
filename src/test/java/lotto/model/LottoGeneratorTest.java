@@ -82,4 +82,22 @@ class LottoGeneratorTest {
 			() -> assertThat(lottoGenerator.size()).isEqualTo(lottoNumbersListSize)
 		);
 	}
+
+	@ParameterizedTest(name = "index {0} ==> inputMoney {1}, inputNumber {2}, lottoNumbersListSize {3}")
+	@CsvSource(value = {
+		"10000:1,2,3,4,5,6:10",
+		"1111:1,2,3,4,5,6:1",
+		"20000:1,2,3,4,5,6:20",
+		"13200:1,2,3,4,5,6:13"}, delimiter = ':')
+	void 입력된_구입금액과_입력된숫자로_로또를_생성하는_테스트(String inputMoney, String inputNumber, int lottoNumbersListSize) {
+		// given // when
+		LottoGenerator lottoGenerator = new LottoGenerator(inputMoney, inputNumber);
+
+		// then
+		assertAll(
+			() -> assertThat(lottoGenerator).isInstanceOf(LottoGenerator.class),
+			() -> assertThat(lottoGenerator.size()).isEqualTo(lottoNumbersListSize),
+			() -> assertThat(lottoGenerator.contains(new LottoNumbers("1,2,3,4,5,6")))
+		);
+	}
 }
