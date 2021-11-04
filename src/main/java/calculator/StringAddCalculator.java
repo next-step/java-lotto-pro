@@ -8,6 +8,7 @@ public class StringAddCalculator {
 	private static final String DEFAULT_DELIMITER = ",|:";
 	private static final Pattern CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
 	private static final int NUMBER_RANGE_MINIMUM = 0;
+	private static final String OUT_OF_MINIMUM_NUMBER_RANGE_ERROR_MSG = "0보다 작은 수는 사용 할 수 없습니다.";
 
 	public static int splitAndSum(String text) {
 		if (isNullOrEmpty(text)) {
@@ -46,7 +47,7 @@ public class StringAddCalculator {
 
 	private static int validateNumberRangeMinimum(int number) {
 		if (number < NUMBER_RANGE_MINIMUM) {
-			throw new RuntimeException();
+			throw new RuntimeException(OUT_OF_MINIMUM_NUMBER_RANGE_ERROR_MSG);
 		}
 
 		return number;
