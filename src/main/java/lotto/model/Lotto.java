@@ -9,12 +9,12 @@ public class Lotto {
         lottoNumbers = ints;
     }
 
+    public int size() {
+        return lottoNumbers.length;
+    }
+
     @Override
     public String toString() {
         return Arrays.toString(lottoNumbers);
-    }
-
-    public int size() {
-        return lottoNumbers.length;
     }
 }
