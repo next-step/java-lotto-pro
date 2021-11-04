@@ -3,6 +3,7 @@ package lotto.util;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import lotto.model.LottoNumber;
@@ -20,7 +21,7 @@ class RandomUtilTest {
 	}
 
 	@DisplayName("로또번호 랜덤 생성 테스트")
-	@Test
+	@RepeatedTest(value = 100)
 	void 로또번호_랜덤_생성_테스트() {
 		// given
 		int min = LottoNumber.MIN_LOTTO_NUMBER;

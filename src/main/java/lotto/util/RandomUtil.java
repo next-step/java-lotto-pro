@@ -9,7 +9,7 @@ public class RandomUtil {
 
 	public static int pickNumber(final int min, final int max) {
 		validMinMaxRange(min, max);
-		return RANDOM.nextInt(max - min + 1);
+		return min + RANDOM.nextInt(max - min + 1);
 	}
 
 	private static void validMinMaxRange(final int min, final int max) {
