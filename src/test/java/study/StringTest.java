@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StringTest {
     @Test
     @DisplayName("문자열 split 복수개")
-    void split_multiple() {
+    void splitMultiple() {
         String given = "1,2";
         String[] when = given.split(",");
         // then
@@ -21,7 +21,7 @@ public class StringTest {
 
     @Test
     @DisplayName("문자열 split 1개")
-    void split_single() {
+    void splitSingle() {
         String given = "1";
         String[] when = given.split(",");
         // then
@@ -41,7 +41,7 @@ public class StringTest {
 
     @Test
     @DisplayName("문자열 charAt 범위 안")
-    void charAt_in_range() {
+    void charAtInRange() {
         String given = "abc";
         char when = given.charAt(1);
         // then
@@ -50,7 +50,7 @@ public class StringTest {
 
     @Test
     @DisplayName("문자열 charAt 범위 밖 오류")
-    void charAt_out_of_range() {
+    void charAtOutOfRange() {
         String given = "abc";
         assertThatThrownBy(()-> {
             char when = given.charAt(given.length());
