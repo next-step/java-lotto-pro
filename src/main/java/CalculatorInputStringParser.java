@@ -11,17 +11,17 @@ public class CalculatorInputStringParser {
 	public static List<Integer> parse(String inputString) {
 		Matcher matcher = PATTERN_FOR_CAPTURE_CUSTOM_DELIMITER_AND_NUMBERS.matcher(inputString);
 		if (matcher.find()) {
-			return getIntegersWhenHasCustomDelimiter(matcher);
+			return extractNumbersWhenHasCustomDelimiter(matcher);
 		}
-		return getIntegers(inputString);
+		return extractNumbers(inputString);
 	}
 
-	private static List<Integer> getIntegers(String inputString) {
+	private static List<Integer> extractNumbers(String inputString) {
 		String[] tokens = PATTERN_DEFAULT_DELIMITERS.split(inputString);
 		return Arrays.stream(tokens).map(Integer::parseInt).collect(Collectors.toList());
 	}
 
-	private static List<Integer> getIntegersWhenHasCustomDelimiter(Matcher matcher) {
+	private static List<Integer> extractNumbersWhenHasCustomDelimiter(Matcher matcher) {
 		String customDelimiter = matcher.group(1);
 		String[] tokens = matcher.group(2).split(customDelimiter);
 		return Arrays.stream(tokens).map(Integer::parseInt).collect(Collectors.toList());
