@@ -21,7 +21,7 @@ public class AutomaticLotto {
 		int perchaseAmount = Integer.parseInt(getPerchaseAmount());
 		logger.info("사용자가 입력한 구매 금액 : " + perchaseAmount);
 		logger.info("구매한 로또 갯수 : " + NumberUtil.getLottoCount(perchaseAmount));
-		logger.info("1~45 사이의 숫자 6개 : " + getSixRandomNumber().toString());
+		logger.info("1~45 사이의 숫자 6개 : " + NumberUtil.getSixRandomNumber().toString());
 	}
 
 	/**
@@ -37,19 +37,6 @@ public class AutomaticLotto {
 			amount = getPerchaseAmount();
 		}
 		return amount;
-	}
-
-	/**
-	 * 1~45 사이의 임의의 숫자 6개 가져오기
-	 *
-	 * @return
-	 */
-	public static List<Integer> getSixRandomNumber() {
-		List<Integer> sixRandomNumbers = new ArrayList<Integer>();
-		while (sixRandomNumbers.size() < 6) {
-			sixRandomNumbers.add(NumberUtil.getNumberBetweenOneAndFortyFive());
-		}
-		return sixRandomNumbers;
 	}
 
 }

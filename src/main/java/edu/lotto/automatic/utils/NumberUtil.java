@@ -3,6 +3,8 @@ package edu.lotto.automatic.utils;
 import edu.lotto.automatic.constants.MessageConstants;
 import edu.lotto.automatic.constants.PatternConstants;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -65,5 +67,18 @@ public class NumberUtil {
 	 */
 	public static int getNumberBetweenOneAndFortyFive() {
 		return (int) ((Math.random() * 45) + 1);
+	}
+
+	/**
+	 * 1~45 사이의 임의의 숫자 6개 가져오기
+	 *
+	 * @return
+	 */
+	public static List<Integer> getSixRandomNumber() {
+		List<Integer> sixRandomNumbers = new ArrayList<Integer>();
+		while (sixRandomNumbers.size() < 6) {
+			sixRandomNumbers.add(getNumberBetweenOneAndFortyFive());
+		}
+		return sixRandomNumbers;
 	}
 }
