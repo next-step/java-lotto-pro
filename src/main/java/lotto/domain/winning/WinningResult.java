@@ -1,5 +1,6 @@
 package lotto.domain.winning;
 
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoRank;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
@@ -32,7 +33,8 @@ public class WinningResult {
     }
 
     private void addWinningCount(LottoTicket lottoTicket) {
-        LottoRank key = LottoRank.findBy(winningNumbers.matchCount(lottoTicket));
+        Set<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+        LottoRank key = LottoRank.findBy(winningNumbers.matchCount(lottoNumbers));
         winningResult.put(key, winningResult.get(key) + 1);
     }
 

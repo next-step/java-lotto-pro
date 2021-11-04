@@ -63,7 +63,7 @@ class WinningNumbersTest {
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when
-        int matchCount = winningNumbers.matchCount(lottoTicket);
+        int matchCount = winningNumbers.matchCount(lottoTicket.getLottoNumbers());
 
         //then
         assertThat(matchCount).isEqualTo(excepted);

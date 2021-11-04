@@ -1,15 +1,13 @@
 package lotto.domain.winning;
 
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoTicket;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static lotto.domain.lotto.LottoTicket.LOTTO_NUMBER_SIZE;
-
 public class WinningNumbers {
+    private static final int WINNING_NUMBER_SIZE = 6;
 
     private final Set<LottoNumber> winningNumbers;
 
@@ -25,13 +23,13 @@ public class WinningNumbers {
     }
 
     private void validateSize(Set<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_SIZE) {
+        if (numbers.size() != WINNING_NUMBER_SIZE) {
             throw new IllegalArgumentException("당첨 번호는 6개의 중복되지 않는 숫자 입니다.");
         }
     }
 
-    public int matchCount(LottoTicket lottoTicket) {
-        return (int) lottoTicket.getLottoNumbers().stream()
+    public int matchCount(Set<LottoNumber> lottoNumbers) {
+        return (int) lottoNumbers.stream()
                 .filter(this::matchNumber)
                 .count();
     }
