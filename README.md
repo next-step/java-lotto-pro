@@ -25,6 +25,13 @@
 4.“//”와 “\n” 문자 사이에 커스텀 구분자를 지정할 수 있다. (예 : “//;\n1;2;3” => 6)
 5.음수를 전달할 경우 RuntimeException 예외가 발생해야 한다. (예 : “-1,2,3”)
 
-7. StringValidation
-   + 빈 문자열 또는 null 값을 입력할 경우 0을 반환
-   + 음수 입력시 `RuntimeExceptin`
+
+### 클래스 명세서
+| 클래스명 | 용도 | 
+|:---:|:---:| 
+|StringValidation | 빈 문자열 또는 null 값을 입력할 경우 0을 반환, 음수 입력시 `RuntimeException`|
+|SpliterManager| Spliter를 구현한 클래스를 리턴|
+|PatternSpliter| 정규식을 통한 split|
+|PatternSpliter| 콤마(,) 또는 콜론(:)으로 split|
+|StringCalculator| 분리된 문자열을 합을구하는 클래스|
+   
