@@ -20,7 +20,6 @@ public class StringTest {
         String[] splitted = parameter.split(",");
 
         // then
-        Assertions.assertThat(splitted).contains(expected);
         Assertions.assertThat(splitted).containsExactly(expected);
     }
 
@@ -80,11 +79,5 @@ public class StringTest {
                 Arguments.of("abc", 3, "String index out of range: 3"),
                 Arguments.of("abc", 4, "String index out of range: 4")
         );
-    }
-
-    @Test
-    public void tes() {
-        String[] re = "123".split("");
-        System.out.println(re);
     }
 }
