@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringCalculatorTest {
 
@@ -43,6 +44,17 @@ public class StringCalculatorTest {
     void customSplitSum() {
         StringCalculator calculator = new StringCalculator("//;\n1;2;3");
         assertThat(calculator.result()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("음수를 입력 RuntimeException")
+    void isNegativeThrow() {
+        assertThatThrownBy(() -> {
+            StringCalculator calculator = new StringCalculator("-1,2,3");
+            calculator.result();
+        }).isInstanceOf(RuntimeException.class);
+
+
     }
 
 

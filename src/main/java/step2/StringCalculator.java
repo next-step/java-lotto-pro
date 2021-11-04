@@ -14,7 +14,8 @@ public class StringCalculator {
 
     public int result() {
         try {
-            stringValidation.isNullOrEmptyThrow();
+            stringValidation.isNullOrEmptyByThrow();
+            stringValidation.isNegativeByThrow();
             Spliter spliter = stringSplit.findSpliter(inputValue);
             return sum(spliter.split());
         } catch (IllegalArgumentException e) {
