@@ -25,6 +25,15 @@ public final class Income {
 		return prizeMoney.ratio(lottoPrice.multiply(purchaseCount));
 	}
 
+	@Override
+	public String toString() {
+		return "Income{" +
+			"lottoPrice=" + lottoPrice +
+			", purchaseCount=" + purchaseCount +
+			", prizeMoney=" + prizeMoney +
+			'}';
+	}
+
 	private void validatePrizeMoney(Money prizeMoney) {
 		if (prizeMoney == null) {
 			throw new IllegalArgumentException("'prizeMoney' must not be null");

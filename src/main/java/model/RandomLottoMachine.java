@@ -30,6 +30,14 @@ public final class RandomLottoMachine implements LottoGenerator {
 		return Lotto.from(new LinkedHashSet<>(numbers));
 	}
 
+	@Override
+	public String toString() {
+		return "RandomLottoMachine{" +
+			"rule=" + rule +
+			", numberList=" + numberList +
+			'}';
+	}
+
 	private List<LottoNumber> shuffledNumbers() {
 		List<LottoNumber> lottoNumbers = numbers();
 		Collections.shuffle(lottoNumbers);

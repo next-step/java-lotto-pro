@@ -24,6 +24,15 @@ public final class WinnerLottoGenerator implements LottoGenerator {
 		return cachedLotto();
 	}
 
+	@Override
+	public String toString() {
+		return "WinnerLottoGenerator{" +
+			"provider=" + provider +
+			", rule=" + rule +
+			", cachedLotto=" + cachedLotto +
+			'}';
+	}
+
 	private Lotto cachedLotto() {
 		if (cachedLotto == null) {
 			cachedLotto = newLotto();

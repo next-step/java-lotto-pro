@@ -48,6 +48,15 @@ public class LottoRule {
 		return lessThanMinValue(target) || moreThanMaxValue(target);
 	}
 
+	@Override
+	public String toString() {
+		return "LottoRule{" +
+			"minNumber=" + minNumber +
+			", maxNumber=" + maxNumber +
+			", count=" + count +
+			'}';
+	}
+
 	private boolean moreThanMaxValue(int target) {
 		return maxNumber < target;
 	}
@@ -94,5 +103,4 @@ public class LottoRule {
 				String.format("count(%d) must be greater than %d", count, MINIMUM_LIMIT));
 		}
 	}
-
 }

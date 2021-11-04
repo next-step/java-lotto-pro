@@ -38,6 +38,13 @@ final class Customer {
 			.subtract(money));
 	}
 
+	@Override
+	public String toString() {
+		return "Customer{" +
+			"moneyHistory=" + moneyHistory +
+			'}';
+	}
+
 	private Money currentMoney() {
 		return moneyHistory.get(moneyHistory.size() - 1);
 	}

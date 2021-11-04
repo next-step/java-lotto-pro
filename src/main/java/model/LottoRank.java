@@ -29,6 +29,14 @@ public enum LottoRank {
 		return matchCount;
 	}
 
+	@Override
+	public String toString() {
+		return "LottoRank{" +
+			"matchCount=" + matchCount +
+			", prizeMoney=" + prizeMoney +
+			'}';
+	}
+
 	public int prizeMoney() {
 		return prizeMoney;
 	}

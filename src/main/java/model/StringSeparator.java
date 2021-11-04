@@ -25,6 +25,14 @@ public final class StringSeparator implements StringsProvider {
 		return Collections.unmodifiableList(Arrays.asList(target.split(this.delimiter)));
 	}
 
+	@Override
+	public String toString() {
+		return "StringSeparator{" +
+			"target='" + target + '\'' +
+			", delimiter='" + delimiter + '\'' +
+			'}';
+	}
+
 	private void validateDelimiter(String delimiter) {
 		if (delimiter == null) {
 			throw new IllegalArgumentException("'delimiter' must not be null");

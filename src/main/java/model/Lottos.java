@@ -34,6 +34,13 @@ public final class Lottos {
 		return Collections.unmodifiableCollection(collection);
 	}
 
+	@Override
+	public String toString() {
+		return "Lottos{" +
+			"collection=" + collection +
+			'}';
+	}
+
 	private void validate(Collection<Lotto> collection) {
 		if (collection == null) {
 			throw new IllegalArgumentException("lotto collection must not be null");

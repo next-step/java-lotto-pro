@@ -31,6 +31,14 @@ public final class LottoStore {
 		return Lottos.from(lottoCollection);
 	}
 
+	@Override
+	public String toString() {
+		return "LottoStore{" +
+			"initialMoney=" + initialMoney +
+			", seller=" + seller +
+			'}';
+	}
+
 	private void validate(Seller seller) {
 		if (seller == null) {
 			throw new IllegalArgumentException("'seller' must not be null");

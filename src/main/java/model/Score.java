@@ -34,6 +34,14 @@ public final class Score {
 		return Money.from(sum);
 	}
 
+	@Override
+	public String toString() {
+		return "Score{" +
+			"lottoRanks=" + lottoRanks +
+			", rankCount=" + rankCount +
+			'}';
+	}
+
 	private void validate(Collection<LottoRank> lottoRanks) {
 		if (isEmpty(lottoRanks)) {
 			throw new IllegalArgumentException("'lottoRanks' must not be empty");

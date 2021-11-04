@@ -24,6 +24,14 @@ public final class Seller {
 		return generator.lotto();
 	}
 
+	@Override
+	public String toString() {
+		return "Seller{" +
+			"price=" + price +
+			", generator=" + generator +
+			'}';
+	}
+
 	private void validate(LottoGenerator generator) {
 		if (generator == null) {
 			throw new IllegalArgumentException("'generator' must not be null");
