@@ -1,8 +1,10 @@
+package textcalculation;
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import exception.InvalidDelimiterFormat;
+import textcalculation.exception.InvalidDelimiterFormat;
 
 public class StringDelimiterParser {
 

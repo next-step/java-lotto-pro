@@ -1,7 +1,9 @@
+package textcalculation;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import exception.NegativeIntegerValueException;
+import textcalculation.exception.NegativeIntegerValueException;
 
 public class StringAddCalculator {
 
