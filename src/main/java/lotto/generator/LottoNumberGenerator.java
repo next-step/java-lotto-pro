@@ -7,6 +7,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoNumberGenerator implements NumberGenerator {
+	private final List<Integer> seedNumbers;
+
+	public LottoNumberGenerator() {
+		this.seedNumbers = createSeedNumbers();
+	}
 
 	@Override
 	public List<Integer> generate() {
@@ -27,10 +32,8 @@ public class LottoNumberGenerator implements NumberGenerator {
 	}
 
 	private List<Integer> createRandomNumbers() {
-		List<Integer> numbers = createSeedNumbers();
-		Collections.shuffle(numbers);
-
-		return numbers;
+		Collections.shuffle(this.seedNumbers);
+		return this.seedNumbers;
 	}
 
 	private List<Integer> createSeedNumbers() {
