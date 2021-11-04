@@ -34,4 +34,17 @@ public class StringUtilTest {
 		assertThat(result).contains("1");
 		assertThat(result).containsExactly("1");
 	}
+
+	@Test
+	@DisplayName("'(1,2)' -> '1,2' substring 테스트")
+	void substring() {
+		// given
+		String testString = "(1,2)";
+
+		// when
+		String result = testString.substring(1, 4);
+
+		// then
+		assertThat(result).isEqualTo("1,2");
+	}
 }
