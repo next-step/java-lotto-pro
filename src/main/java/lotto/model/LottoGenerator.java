@@ -1,0 +1,57 @@
+package lotto.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LottoGenerator {
+	public static final int LOTTO_PRICE = 1000;
+
+	private List<LottoNumbers> lottoNumbersList;
+
+	public LottoGenerator() {
+	}
+
+	public LottoGenerator(String inputMoney) {
+		this.lottoNumbersList = generateLottoNumbers(inputMoney);
+	}
+
+	public List<LottoNumbers> getLottoNumbersList() {
+		return lottoNumbersList;
+	}
+
+	private void validNullOrEmpty(String input) {
+		if (isNullOrEmpty(input)) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	private boolean isNullOrEmpty(String input) {
+		return input == null || input.isEmpty();
+	}
+
+	private void validUnderLottoPrice(String input) {
+		if (isUnderLottoPrice(input)) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	private boolean isUnderLottoPrice(String input) {
+		return Integer.parseInt(input) < LOTTO_PRICE;
+	}
+
+	private int calculateLottoAmount(String inputMoney) {
+		return Integer.parseInt(inputMoney) / LOTTO_PRICE;
+	}
+
+	private List<LottoNumbers> generateLottoNumbers(String inputMoney) {
+		validNullOrEmpty(inputMoney);
+		validUnderLottoPrice(inputMoney);
+		List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+
+		do {
+			lottoNumbersList.add(new LottoNumbers());
+		} while (lottoNumbersList.size() < calculateLottoAmount(inputMoney));
+
+		return lottoNumbersList;
+	}
+}
