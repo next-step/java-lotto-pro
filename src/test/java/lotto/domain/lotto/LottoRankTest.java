@@ -14,9 +14,9 @@ class LottoRankTest {
     @ParameterizedTest(name = "당첨 개수에 따른 당첨 순위: [{index}] {0}")
     @MethodSource("lottoRank")
     @DisplayName("로또 당첨 개수 따라 로또 당첨 순위를 조회한다.")
-    void findBy(int matchCount, boolean isMatchBonus, LottoRank excepted) {
+    void findBy(int winningCount, boolean isMatchBonus, LottoRank excepted) {
         //given //when
-        LottoRank lottoRank = LottoRank.findBy(matchCount, isMatchBonus);
+        LottoRank lottoRank = LottoRank.findBy(winningCount, isMatchBonus);
 
         //then
         assertThat(lottoRank).isEqualTo(excepted);
