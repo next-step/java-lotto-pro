@@ -52,9 +52,10 @@ LottoMain 클래스의 main 메서드를 활용한다.
 - [x] 보너스 볼 입력 받기
   - [x] InputView 클래스에 보너스 볼 입력 받기 추가
   - [x] 보너스볼 input 클래스 생성
-- [ ] Rank enum 클래스 활용
-  - [ ] 기존 상수로 사용했던 WINNING_AMOUNT_MAP 을 enum 클래스로 변경
-- [ ] Winning, ResultView 클래스에 2등에 대한 통계 추가
+- [x] Rank enum 클래스 활용
+  - [x] 기존 상수로 사용했던 WINNING_AMOUNT_MAP 을 enum 클래스로 변경
+- [x] Winning, ResultView 클래스에 2등에 대한 통계 추가
+- [x] 사용자 입력 오류 시 다시 입력 받도록 수정
 
 
 
