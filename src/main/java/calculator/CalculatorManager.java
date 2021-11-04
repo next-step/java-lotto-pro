@@ -17,7 +17,7 @@ public class CalculatorManager {
         delimiters = new Delimiters();
         numbersText = new NumbersText(text);
         parseString(text);
-        numbers = new Numbers(getNumbersText());
+        numbers = new Numbers(getSplitNumbersText());
     }
 
     private void parseString(String text) {
@@ -32,7 +32,7 @@ public class CalculatorManager {
         }
     }
 
-    public String[] getNumbersText() {
+    public String[] getSplitNumbersText() {
         return numbersText.splitNumbersText(delimiters);
     }
 
