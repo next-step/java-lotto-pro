@@ -22,4 +22,11 @@ public class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator("3");
         assertThat(calculator.result()).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환")
+    void commaSplitSum() {
+        StringCalculator calculator = new StringCalculator("3,4");
+        assertThat(calculator.result()).isEqualTo(7);
+    }
 }
