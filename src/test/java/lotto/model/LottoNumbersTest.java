@@ -52,4 +52,17 @@ class LottoNumbersTest {
 		// then
 		assertThat(lottoNumbers.size()).isEqualTo(LottoNumbers.LOTTO_NUMBERS_SIZE);
 	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {1, 2, 3, 4, 5, 6})
+	void 로또번호_입력값으로_일급_콜렉션_생성_테스트(int lottoNumber) {
+		//given
+		String inputNumber = "1,2,3,4,5,6";
+
+		//when
+		LottoNumbers lottoNumbers = new LottoNumbers(inputNumber);
+
+		//then
+		assertThat(lottoNumbers.containsLottoNumber(new LottoNumber(lottoNumber))).isTrue();
+	}
 }

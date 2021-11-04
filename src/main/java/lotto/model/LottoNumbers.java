@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import lotto.util.RandomUtil;
+import lotto.util.SplitUtil;
 
 public class LottoNumbers {
 	public final static int LOTTO_NUMBERS_SIZE = 6;
@@ -19,6 +20,20 @@ public class LottoNumbers {
 
 	public LottoNumbers(List<LottoNumber> lottoNumberList) {
 		this.lottoNumberList = lottoNumberList;
+	}
+
+	public LottoNumbers(String inputNumber) {
+		this.lottoNumberList = generateLottoNumberList(inputNumber);
+	}
+
+	private List<LottoNumber> generateLottoNumberList(String inputNumber) {
+		List<LottoNumber> lottoNumberList = new ArrayList<>();
+
+		for (String number : SplitUtil.splitInputNumbers(inputNumber)) {
+			lottoNumberList.add(new LottoNumber(Integer.parseInt(number)));
+		}
+
+		return lottoNumberList;
 	}
 
 	private List<LottoNumber> generateLottoNumberList() {
