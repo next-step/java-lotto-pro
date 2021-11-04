@@ -18,7 +18,7 @@ public class OutputView {
 
     public static void printPurchaseQuantity(int purchaseQuantity) {
         System.out.printf(PRINT_PURCHASE_QUANTITY, purchaseQuantity);
-        System.out.println("");
+        System.out.println();
     }
 
     public static void printLottoNumber(Lottos lottos) {

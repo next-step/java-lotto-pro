@@ -23,7 +23,7 @@ public class LottoNumbers {
                 .distinct()
                 .count() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(INVALID_NUMBER);
-        };
+        }
     }
 
     private void validateSize(List<Integer> lottoNumbers) {
