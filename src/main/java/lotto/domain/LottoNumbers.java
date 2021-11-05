@@ -13,6 +13,7 @@ public class LottoNumbers {
     private final List<LottoNumber> numbers;
 
     private LottoNumbers(List<LottoNumber> numbers) {
+        validateDuplication(numbers);
         this.numbers = numbers;
     }
 
@@ -29,7 +30,6 @@ public class LottoNumbers {
         for (String number : numberStrings) {
             numbers.add(new LottoNumber(number));
         }
-        validateDuplication(numbers);
         return new LottoNumbers(numbers);
     }
 
