@@ -1,17 +1,23 @@
 package model;
 
+import java.math.BigDecimal;
+
 public class Money {
 	private static final String NUMBER_REGEX = "^[0-9]+$";
 
-	private int value;
+	private BigDecimal value;
 
 	private Money(int value) {
-		this.value = value;
+		this.value = BigDecimal.valueOf(value);
 	}
 
 	public static boolean validate(String moneyString) {
 		return moneyString.matches(NUMBER_REGEX)
 			&& Integer.parseInt(moneyString) >= Lotto.COST;
+	}
+
+	public static Money of(Integer money) {
+		return new Money(money);
 	}
 
 	public static Money of(String moneyString) {
@@ -22,11 +28,11 @@ public class Money {
 		}
 	}
 
-	public PurchaseCount purchaseCount() {
-		return new PurchaseCount(this.value / Lotto.COST);
+	public PurchaseCount purchaseableCount(Money price) {
+		return new PurchaseCount(this.value.intValue() / price.getValue().intValue());
 	}
 
-	public int getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
 }

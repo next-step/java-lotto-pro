@@ -11,7 +11,7 @@ public class Lottos {
 	}
 
 	public static PurchaseCount purchaseCountFrom(Money money) {
-		return money.purchaseCount();
+		return money.purchaseableCount(Money.of(Lotto.COST));
 	}
 
 	public static Lottos purchase(PurchaseCount purchaseCount) {

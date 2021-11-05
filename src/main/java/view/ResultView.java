@@ -10,6 +10,7 @@ import model.LottoStatistics;
 import model.Lottos;
 import model.MatchResult;
 import model.MatchingNumberCount;
+import model.Money;
 import model.PurchaseCount;
 
 public class ResultView {
@@ -22,16 +23,16 @@ public class ResultView {
 		System.out.println(String.format(PURCHASE_MESSAGE, purchaseCount));
 	}
 
-	public void printWinningStatisticsMessage(MatchResult matchResult, int purchaseAmount) {
+	public void printWinningStatisticsMessage(MatchResult matchResult, Money purchaseMoney) {
 		nextLine();
 		System.out.println(WINNING_STATISTICS_MESSAGE);
 		System.out.println(LINE);
 		printMatchResult(matchResult);
-		printEarningsRate(matchResult, purchaseAmount);
+		printEarningsRate(matchResult, purchaseMoney);
 	}
 
-	private void printEarningsRate(MatchResult matchResult, int purchaseAmount) {
-		BigDecimal earningsRate = LottoStatistics.calculateForEarningsRate(matchResult, purchaseAmount);
+	private void printEarningsRate(MatchResult matchResult, Money purchaseMoney) {
+		BigDecimal earningsRate = LottoStatistics.calculateForEarningsRate(matchResult, purchaseMoney);
 		System.out.print(String.format(EARNINGS_RATE_MESSAGE, earningsRate));
 		if (isEarningsRateLessThanOne(earningsRate)) {
 			System.out.println(EARNINGS_RATE_LOSS_MESSAGE);

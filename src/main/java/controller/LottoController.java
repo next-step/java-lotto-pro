@@ -31,7 +31,7 @@ public class LottoController {
 		inputView.printLastWeekWinningNumberMessage();
 		LastWeekWinningNumber lastWeekWinningNumber = inputForLastWeekWinningNumberUntilValid(sc.nextLine());
 
-		resultView.printWinningStatisticsMessage(lottos.matchResult(lastWeekWinningNumber), money.getValue());
+		resultView.printWinningStatisticsMessage(lottos.matchResult(lastWeekWinningNumber), money);
 	}
 
 	public Money inputForPurchaseAmountUntilValid(String money) {
