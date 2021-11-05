@@ -54,4 +54,8 @@ public class PurchaseInformation {
 	public long getActualPurchaseMoney() {
 		return purchaseMoney - change;
 	}
+
+	public String toMessage() {
+		return String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoPurchaseCount, autoLottoPurchaseCount);
+	}
 }

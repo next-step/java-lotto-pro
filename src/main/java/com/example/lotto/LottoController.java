@@ -35,7 +35,7 @@ public class LottoController {
 		LottoGames autoLottoGames = LottoGames.auto(purchaseInformation.getAutoLottoPurchaseCount(), numbersGenerator);
 		lottoGames = LottoGames.merge(manualLottoGames, autoLottoGames);
 
-		OutputView.print(String.format("%d개를 구매했습니다.", lottoGames.size()));
+		OutputView.print(purchaseInformation.toMessage());
 		OutputView.print(lottoGames.toString());
 	}
 
