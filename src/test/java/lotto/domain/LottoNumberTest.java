@@ -61,7 +61,7 @@ public class LottoNumberTest {
     @MethodSource("listProvide4")
     @DisplayName("로또 번호 보너스 매칭 확인")
     public void activeLottoBonusTest(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
-        assertThat(new LottoNumber(lottoNumber).getMatchRank(matchNumber, bonusNumber)).isEqualTo(Rank.SECOND_BONUS);
+        assertThat(new LottoNumber(lottoNumber).getMatchRank(matchNumber, bonusNumber)).isEqualTo(Rank.SECOND);
     }
 
 }
