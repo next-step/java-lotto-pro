@@ -3,6 +3,7 @@ package edu.lotto.automatic.model;
 import edu.lotto.automatic.constants.MessageConstants;
 import edu.lotto.automatic.utils.NumberUtil;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -68,7 +69,7 @@ public class Lottos {
 				+ (50000 * this.fourMatches)
 				+ (1500000 * this.fiveMatches)
 				+ (2000000000 * this.sixMatches);
-		long profitRatio = Math.round(((new Double(profit)/ new Double(this.perchaseAmount)) * 100) / 100.0);
+		String profitRatio = new DecimalFormat("#.##").format((float) profit / (float) this.perchaseAmount);
 		System.out.println("총 수익률은 "+profitRatio+"입니다.");
 	}
 

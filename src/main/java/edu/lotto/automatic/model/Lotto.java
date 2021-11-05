@@ -54,7 +54,6 @@ public class Lotto {
 	 */
 	public void setWinningNumberMatchesCount(List<Integer> winningNumbers) {
 		this.winningNumberMatchesCount = this.lottoNumbers.stream().filter(number -> winningNumbers.contains(number)).count();
-		System.out.println("this.winningNumberMatchesCount : " + this.winningNumberMatchesCount);
 	}
 
 	/**
