@@ -19,7 +19,7 @@ public class LottoRanksDtoTest {
 
     @Test
     @DisplayName("'3개 일치 (5000원)- 1개' 메시지 출력 테스트")
-    void LottoRanksDtoTest() {
+    void lottoRanksDtoTest() {
         // given
         int[] winNumbers = {10, 20, 30, 1, 2, 3};
         Amount amount = new Amount(10000); // 주문가격

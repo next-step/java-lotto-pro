@@ -5,8 +5,8 @@ import step3.domain.constance.LottoConstant;
 public class LottoRankDto {
     public static final String LOTTO_RANK_FORMAT = "%s개 일치 (%d원)- %d개";
 
-    private int matchCount;
-    private int matchNumber;
+    private final int matchCount;
+    private final int matchNumber;
     private Long prize;
 
     public LottoRankDto(int matchCount, int matchNumber, Long prize) {

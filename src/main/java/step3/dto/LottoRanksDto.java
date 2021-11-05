@@ -1,13 +1,11 @@
 package step3.dto;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.List;
 
 import step3.domain.Amount;
 import step3.domain.LottoRank;
 import step3.domain.LottoRanks;
-import step3.domain.constance.LottoConstant;
 
 public class LottoRanksDto {
     public static final String TITLE = "당첨 통계\n";
@@ -48,11 +46,15 @@ public class LottoRanksDto {
         double yield = (double)totalPrize / amount;
 
         append(sb, String.format(YIELD_MESSAGE_FORMAT, String.format("%.2f", yield)));
+        addLossMessageIsLoss(sb, yield);
+
+        return sb.toString();
+    }
+
+    private void addLossMessageIsLoss(StringBuilder sb, double yield) {
         if (yield < LOSS_VALUE) {
             appendln(sb, LOTTO_LOSS_MESSAGE);
         }
-
-        return sb.toString();
     }
 
     private void appendln(StringBuilder sb, String message) {
