@@ -6,19 +6,22 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoNumberTest {
 
     @Test
     void 로또번호는_1에서_45_까지의_숫자로_구성되어_있다() {
-        for (int number = 1; number <= 45; number++) {
-            // given
-            final LottoNumber lottoNumber = LottoNumber.valueOf(number);
-            // when
-            final boolean result = lottoNumber.getValue() == number;
-            // then
-            assertThat(result).isTrue();
-        }
+        assertAll(() -> {
+            for (int number = 1; number <= 45; number++) {
+                // given
+                final LottoNumber lottoNumber = LottoNumber.valueOf(number);
+                // when
+                final boolean result = lottoNumber.getValue() == number;
+                // then
+                assertThat(result).isTrue();
+            }
+        });
     }
 
     @ParameterizedTest
