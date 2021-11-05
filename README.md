@@ -40,6 +40,7 @@
     - [x] `LottoGame`의 가격은 1000원이다.
     - [x] `LottoGame`은 `LottoNumbers`를 갖는다.
     - [x] `LottoNumbers`는 `NumbersGenerator`로 생성된다.
+    - [x] `WinningLottoNumbers`와 비교하여 `LottoRank`를 알 수 있다.
 - [x] `NumbersGenerator`
     - [x] 번호들을 생성한다.
 - [x] `RandomNumbersGenerator`
@@ -62,3 +63,7 @@
 - [x] `WinningLottoNumbers`
     - [x] 기본 당첨 번호들 `LottoNumbers`와 보너스 당첨 번호 `LottoNumber`를 갖는다.
     - [x] 기본 당첨 번호들 `LottoNumbers`와 보너스 당첨 번호 `LottoNumber`는 모두 중복되지 않는다.
+- [x] `PurchaseInformation`
+    - [x] 구매 금액, 구매할 수동 로또 수, 자동 로또 수, 잔돈을 알 수 있다.
+    - [x] 수동으로 구매하고 남은 잔액은 모두 자동으로 구매한다.
+    - [x] 구입 금액보다 더 많은 로또를 구매할 수 없다.
