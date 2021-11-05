@@ -39,6 +39,7 @@ public class LottoTicket {
     public List<Integer> convertLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers.stream()
                 .map(LottoNumber::getLottoNumber)
+                .sorted()
                 .collect(Collectors.toList()));
     }
 }

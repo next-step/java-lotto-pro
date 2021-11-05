@@ -34,6 +34,6 @@ class PurchaseAmountTest {
 
         //when //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() ->purchaseMoney.getPurchaseAmount(invalidManualAmount));
+                .isThrownBy(() -> purchaseMoney.getPurchaseAmount(invalidManualAmount));
     }
 }

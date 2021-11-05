@@ -20,9 +20,11 @@ public class LottoTicketVendingMachine {
                 .collect(Collectors.toList());
     }
 
-    public LottoTickets issueTickets(int autoTicketAmount) {
-        List<LottoTicket> lottoTickets = autoIssueTickets(autoTicketAmount);
-        return LottoTickets.from(lottoTickets);
+    public LottoTickets issueTickets(int autoTicketAmount, List<List<Integer>> manualLottoNumbers) {
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(manualLottoTickets(manualLottoNumbers));
+        lottoTickets.add(autoIssueTickets(autoTicketAmount));
+        return lottoTickets;
     }
 
     private List<LottoTicket> autoIssueTickets(int autoTicketAmount) {
@@ -37,5 +39,14 @@ public class LottoTicketVendingMachine {
         return LOTTO_NUMBER_BOX.stream()
                 .limit(LOTTO_NUMBER_SIZE)
                 .collect(Collectors.toSet());
+    }
+
+    private List<LottoTicket> manualLottoTickets(List<List<Integer>> manualLottoNumbers) {
+        return manualLottoNumbers.stream()
+                .map(manualNumbers -> manualNumbers.stream()
+                        .map(LottoNumber::from)
+                        .collect(Collectors.toSet()))
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
     }
 }

@@ -10,6 +10,7 @@ import lotto.domain.winning.WinningStatistics;
 import lotto.util.StringUtil;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoService {
 
@@ -29,8 +30,11 @@ public class LottoService {
         return purchaseMoney.getPurchaseAmount(manualAmount);
     }
 
-    public LottoTickets issueTickets(PurchaseAmount purchaseAmount) {
-        return vendingMachine.issueTickets(purchaseAmount.getAutoTicketAmount());
+    public LottoTickets issueTickets(PurchaseAmount purchaseAmount, List<String> inputManualLottoNumbers) {
+        List<List<Integer>> manualNumbers = inputManualLottoNumbers.stream()
+                .map(StringUtil::splitParseInt)
+                .collect(Collectors.toList());
+        return vendingMachine.issueTickets(purchaseAmount.getAutoTicketAmount(), manualNumbers);
     }
 
     public WinningNumbers getWinningNumbers(String inputWinningNumbers, String inputBonusNumber) {
