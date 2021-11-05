@@ -25,6 +25,13 @@ public class WinResults {
         return new WinResults(Arrays.asList(winResults));
     }
 
+    public int getCount(int matchedCount) {
+        WinResult findWinResult = WinResult.fromCount(matchedCount);
+        return (int) winResults.stream()
+                .filter(winResult -> winResult == findWinResult)
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
