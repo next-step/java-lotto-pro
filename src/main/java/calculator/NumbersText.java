@@ -7,15 +7,7 @@ public class NumbersText {
         this.numbersText = numbersText;
     }
 
-    public boolean isNullOrEmptyString() {
-        return numbersText == null || numbersText.length() == 0;
-    }
-
     public String[] splitNumbersText(Delimiters delimiters) {
-        if (isNullOrEmptyString()) {
-            return null;
-        }
-
         return delimiters.splitTextByDelimiter(numbersText);
     }
 }

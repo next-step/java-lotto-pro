@@ -1,11 +1,17 @@
 package calculator;
 
 public class StringAddCalculator {
-    private static CalculatorManager calculatorManager;
+    private static final int EMPTY_TEXT_RESULT = 0;
 
     public static int splitAndSum(String text) {
-        calculatorManager = new CalculatorManager(text);
+        if (isNullOrEmptyString(text)) {
+            return EMPTY_TEXT_RESULT;
+        }
 
-        return calculatorManager.getSum();
+        return new CalculatorManager(text).getSum();
+    }
+
+    public static boolean isNullOrEmptyString(String text) {
+        return text == null || text.isEmpty();
     }
 }
