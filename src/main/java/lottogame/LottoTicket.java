@@ -6,12 +6,12 @@ public class LottoTicket {
 
 	private List<LottoNumber> lottoNumbers;
 
-	private LottoTicket(List<LottoNumber> lottoNumber) {
+	public LottoTicket(List<LottoNumber> lottoNumber) {
 		this.lottoNumbers = lottoNumber;
 	}
 
-	public static LottoTicket makeLottoTicket() {
-		return new LottoTicket(LottoNumbersMaker.makelottoNumbers());
+	public LottoTicket() {
+		this(LottoNumbersMaker.makelottoNumbers());
 	}
 
 	public List<LottoNumber> getLottoNumbers() {

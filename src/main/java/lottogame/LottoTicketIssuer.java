@@ -27,7 +27,7 @@ public class LottoTicketIssuer {
 	private static List<LottoTicket> issuTickets(int numOfTickets) {
 		return IntStream.range(0, numOfTickets)
 			.collect(ArrayList::new,
-				(tickets, i) -> tickets.add(LottoTicket.makeLottoTicket()),
+				(tickets, i) -> tickets.add(new LottoTicket()),
 				(tickets1, tickets2) -> tickets1.addAll(tickets2));
 	}
 
