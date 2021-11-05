@@ -1,5 +1,6 @@
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -11,5 +12,12 @@ public class LottoTest {
 		assertThatExceptionOfType(LottoFormatException.class)
 			.isThrownBy(() -> Lotto.from(input))
 			.withMessage(LottoFormatException.ERROR_MESSAGE);
+	}
+
+	@Test
+	void hasBonus() {
+		final LottoNumber bonus = LottoNumber.from(45);
+		assertThat(Lotto.from("1,2,3,4,5,6").hasBonus(bonus)).isFalse();
+		assertThat(Lotto.from("1,2,3,4,5,45").hasBonus(bonus)).isTrue();
 	}
 }

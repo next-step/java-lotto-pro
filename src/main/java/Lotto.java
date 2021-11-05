@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,6 +29,10 @@ public class Lotto {
 		if (lottoNumbers.size() != lottoNumbers.stream().distinct().count()) {
 			throw new LottoFormatException();
 		}
+	}
+
+	public boolean hasBonus(LottoNumber bonus) {
+		return this.lottoNumbers.contains(bonus);
 	}
 
 	public static Lotto from(String s) {
