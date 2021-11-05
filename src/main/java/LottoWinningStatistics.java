@@ -25,20 +25,20 @@ public class LottoWinningStatistics {
 		return 0L;
 	}
 
-	public float earningRate() {
-		final int prizeKRW = numOfLottosByMatching.entrySet().stream()
-			.reduce(0
+	public double earningRate() {
+		final long prizeKRW = numOfLottosByMatching.entrySet().stream()
+			.reduce(0L
 				, (acc, entry) -> acc + calculatePrizeKRW(entry.getKey(), entry.getValue())
-				, Integer::sum);
+				, Long::sum);
 
 		final int paidKRW = Lotto.PRICE_KRW * (numOfLottosByMatching.values().stream()
 			.reduce(0, (acc, numOfLottos) -> acc + numOfLottos.intValue(), Integer::sum));
 
-		return (float)prizeKRW / paidKRW;
+		return (double)prizeKRW / paidKRW;
 	}
 
-	private int calculatePrizeKRW(int matchingCount, Long numOfLottos) {
-		return numOfLottos.intValue() * LottoWinningRank.valueOf(matchingCount).getPrizeKRW();
+	private long calculatePrizeKRW(int matchingCount, Long numOfLottos) {
+		return numOfLottos * LottoWinningRank.valueOf(matchingCount).getPrizeKRW();
 	}
 }
 

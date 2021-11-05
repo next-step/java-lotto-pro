@@ -42,7 +42,7 @@ public class View {
 			, matchingCount, prizeKRW, LottoStore.KRW_UNIT, numOfLottos));
 	}
 
-	private void outLottoEarningRate(float earningRate) {
+	private void outLottoEarningRate(double earningRate) {
 		print(String.format(Message.EARNING_RATE.getContent(), earningRate));
 		if (earningRate < LottoWinningStatistics.EARNING_RATE_BASE) {
 			print(Message.EARNING_RATE_NOTE.getContent());
