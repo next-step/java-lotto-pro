@@ -62,4 +62,9 @@ public class LottoTicket {
         int countOfMatch = lottoNumbers.size() + winningNumbers.size() - nonDuplicateNumbers.size();
         return Rank.valueOf(countOfMatch);
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
