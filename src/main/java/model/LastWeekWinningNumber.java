@@ -19,9 +19,9 @@ public class LastWeekWinningNumber {
 
 	public static boolean validate(String value) {
 		String[] strings = value.replaceAll(SPACE_REGEX, EMPTY_STRING)
-			.split(",");
+			.split(COMMA);
 
-		if (strings.length != 6) {
+		if (strings.length != Lotto.NUMBER_COUNT) {
 			return false;
 		}
 
