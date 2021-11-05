@@ -75,7 +75,7 @@ public class StringAddCalculatorTest {
 		// when then
 		Assertions.assertThatExceptionOfType(RuntimeException.class)
 			.isThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-			.withMessage(StringAddCalculator.OUT_OF_MINIMUM_NUMBER_RANGE_ERROR_MSG);
+			.withMessage(Messages.OUT_OF_MINIMUM_NUMBER_RANGE_ERROR_MSG);
 
 		// when
 		ThrowableAssert.ThrowingCallable throwingCallable = () -> StringAddCalculator.splitAndSum("-1,2,3");
@@ -83,6 +83,6 @@ public class StringAddCalculatorTest {
 		// then
 		Assertions.assertThatExceptionOfType(RuntimeException.class)
 			.isThrownBy(throwingCallable)
-			.withMessageMatching(StringAddCalculator.OUT_OF_MINIMUM_NUMBER_RANGE_ERROR_MSG);
+			.withMessageMatching(Messages.OUT_OF_MINIMUM_NUMBER_RANGE_ERROR_MSG);
 	}
 }
