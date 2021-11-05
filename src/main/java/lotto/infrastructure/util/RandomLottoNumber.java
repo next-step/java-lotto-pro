@@ -3,8 +3,7 @@ package lotto.infrastructure.util;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import lotto.domain.LottoNumber;
+import lotto.domain.lotto.LottoNumber;
 
 public class RandomLottoNumber {
   private static final List<LottoNumber> cachedNumbers;

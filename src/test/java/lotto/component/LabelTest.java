@@ -6,7 +6,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -18,14 +20,15 @@ public class LabelTest {
   private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
   private static final PrintStream originalOut = System.out;
 
-  @BeforeAll
+  @BeforeEach
   public void setUpStreams() {
     System.setOut(new PrintStream(outContent));
   }
 
-  @AfterAll
+  @AfterEach
   public void restoreStreams() {
     System.setOut(originalOut);
+    System.out.println(outContent.toString().trim());
   }
 
   @DisplayName("설정된 문구가 화면에 출력된다.")

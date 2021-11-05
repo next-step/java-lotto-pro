@@ -6,6 +6,10 @@ package lotto.infrastructure.component;
 public class Label implements CuiComponent {
   private String printText;
 
+  public Label() {
+    this.printText = "";
+  }
+
   public Label(String printText) {
     this.printText = printText;
   }
