@@ -10,4 +10,8 @@ public class Money {
     public int getMoney() {
         return money;
     }
+    
+    public int buyableQuantity() {
+        return money/1000;
+    }
 }
