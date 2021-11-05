@@ -10,22 +10,18 @@ public class LottoPaper {
     public LottoPaper(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
+
     public List<LottoNumber> getLottoNumber() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public boolean isContainsOf(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
-    }
-
     public void matchLottoPaper(LottoPaper winningLottoPaper, LottoResult lottoResult) {
         lottoNumbers.forEach(lottoNumber -> winningLottoPaper.checkContainsLottoNumber(lottoNumber, lottoResult));
-        lottoResult.addMatchCountMap(lottoResult.getMatchCount());
+        lottoResult.addMatchCounts(lottoResult.getMatchCount());
         lottoResult.clearMatchCount();
     }
 
     public void checkContainsLottoNumber(LottoNumber lottoNumber,  LottoResult lottoResult) {
-
         if(lottoNumbers.contains(lottoNumber)){
             lottoResult.addMatchCount();
         }
