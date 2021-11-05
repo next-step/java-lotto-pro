@@ -42,8 +42,9 @@ public class LottoTest {
     @Test
     @DisplayName("로또 번호는 null값을 가질 수 없다.")
     public void T02_invalidLotto2() {
+        String given = null;
         //THEN
-        assertThatThrownBy(() -> new Lotto(null)).isInstanceOf(NullPointerException.class)
+        assertThatThrownBy(() -> new Lotto(given)).isInstanceOf(NullPointerException.class)
                 .hasMessageContaining("null값이 올 수 없습니다.");
     }
 

@@ -1,6 +1,8 @@
 package lotto.ui;
 
 import lotto.common.Constants;
+import lotto.domain.Lotto;
+import lotto.domain.PurchasePrice;
 
 import java.util.Scanner;
 
@@ -18,8 +20,17 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public static String readLine(InputType type) {
+    public static Object readLine(InputType type) {
         System.out.println(type.isPurchase() ? Constants.MSG_INPUT_PURCHASE_PRICE : type.isNumber() ? Constants.MSG_INPUT_LAST_WINNING_NUMBERS : "");
-        return scanner.next();
+        try {
+            String input = scanner.next();
+            return type.isPurchase() ? new PurchasePrice(input) : new Lotto(input);
+        } catch(NumberFormatException nfe) {
+            System.out.println("숫자만 입력가능합니다.");
+            return readLine(type);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return readLine(type);
+        }
     }
 }

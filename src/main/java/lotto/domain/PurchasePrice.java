@@ -11,9 +11,21 @@ import java.util.Objects;
  */
 public class PurchasePrice {
     public static final int LOTTO_PRICE = 1000;
+    private static final String REG_EXP_NUMBER = "[0-9]"; //숫자 정규식
+
     private final int purchaseQuantity;
 
     public PurchasePrice(int price) {
+        if (price < LOTTO_PRICE) throw new IllegalArgumentException("로또를 구입할 금액이 부족합니다.");
+        this.purchaseQuantity = this.calculateQuantity(price);
+    }
+
+    /**
+     *
+     * @Throws java.lang.NumberFormatException 예외가 발생할 수 있다.
+     */
+    public PurchasePrice(String strPrice) {
+        int price = Integer.parseInt(strPrice);
         if (price < LOTTO_PRICE) throw new IllegalArgumentException("로또를 구입할 금액이 부족합니다.");
         this.purchaseQuantity = this.calculateQuantity(price);
     }

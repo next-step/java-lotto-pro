@@ -23,4 +23,6 @@ public class Constants {
     public static final String MSG_OUTPUT_2ND_PREFIX = "5개 일치 (" + REWARD_2ND + "원)- ";
     public static final String MSG_OUTPUT_1ST_PREFIX = "6개 일치 (" + REWARD_1ST + "원)- ";
 
+    public static final String NUMBER_SEPARATOR = ",";
+
 }
