@@ -44,4 +44,12 @@ public class WinResults {
     public int hashCode() {
         return Objects.hash(winResults);
     }
+
+    public long getProceeds() {
+        long proceeds = 0;
+        for (WinResult winResult : winResults) {
+            proceeds += winResult.getPrize();
+        }
+        return proceeds;
+    }
 }

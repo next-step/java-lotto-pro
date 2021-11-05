@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public enum WinResult {
 
-    THREE_MATCHED(3, 5000),
-    FOUR_MATCHED(4, 50000),
-    FIVE_MATCHED(5, 1500000),
-    SIX_MATCHED(6, 2000000000),
+    THREE_MATCHED(3, 5_000),
+    FOUR_MATCHED(4, 50_000),
+    FIVE_MATCHED(5, 1_500_000),
+    SIX_MATCHED(6, 2_000_000_000),
     DEFEAT(-1, 0);
 
     private final int count;
@@ -23,5 +23,9 @@ public enum WinResult {
                 .filter(it -> it.count == count)
                 .findFirst()
                 .orElse(DEFEAT);
+    }
+
+    public int getPrize() {
+        return prize;
     }
 }
