@@ -15,17 +15,27 @@ public class Input {
     }
 
     public Numbers split() {
-        String delimiter = getDelimiterAndSanitizeValue();
+        String delimiter = getDelimiter();
+        sanitizeValue();
         return new Numbers(value.split(delimiter));
     }
 
-    private String getDelimiterAndSanitizeValue() {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(value);
+    private String getDelimiter() {
+        Matcher m = getCustomDelimiterMatcher();
         if (m.find()) {
-            value = m.group(2);
             return m.group(1);
         }
         return DEFAULT_DELIMITER;
     }
 
+    private void sanitizeValue() {
+        Matcher m = getCustomDelimiterMatcher();
+        if (m.find()) {
+            value = m.group(2);
+        }
+    }
+
+    private Matcher getCustomDelimiterMatcher() {
+        return Pattern.compile("//(.)\n(.*)").matcher(value);
+    }
 }
