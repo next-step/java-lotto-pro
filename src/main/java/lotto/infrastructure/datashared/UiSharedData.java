@@ -19,9 +19,10 @@ public class UiSharedData {
   }
 
   public static Lottos getBuyLottos() {
-    if(UiSharedData.buyLottos == null ) {
+    if (UiSharedData.buyLottos == null) {
       return new Lottos();
     }
+
     return UiSharedData.buyLottos;
   }
 
@@ -29,6 +30,7 @@ public class UiSharedData {
     if (UiSharedData.latestWinLotto == null) {
       return new Lotto();
     }
+
     return UiSharedData.latestWinLotto;
   }
 }

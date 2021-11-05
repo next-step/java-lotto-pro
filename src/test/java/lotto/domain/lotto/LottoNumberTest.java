@@ -28,7 +28,7 @@ public class LottoNumberTest {
     // given
 
     // when
-		ThrowingCallable exceptionContent = () -> {LottoNumber lottoNumber = LottoNumber.valueOf("50");};
+		ThrowingCallable exceptionContent = () -> {LottoNumber.valueOf("50");};
 
     // then
 		assertThatExceptionOfType(IllegalArgumentException.class)

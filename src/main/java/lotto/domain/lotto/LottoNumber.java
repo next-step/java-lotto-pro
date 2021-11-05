@@ -6,6 +6,7 @@ public class LottoNumber {
   private final String value;
   private static final Integer LOTTO_START_NUMBER = 1;
   private static final Integer LOTTO_END_NUMBER = 45;
+  
   private LottoNumber(String value) {
     chekInvalidArgument(value.trim());
 

@@ -18,19 +18,6 @@ public class LottoTest {
     assertThat(lotto.toString()).isEqualTo("1, 3, 5, 7, 9, 20");
   }
 
-  @DisplayName("로또 가격을 조회하다.")
-  @Test
-  void get_lottoPrice() {
-    // given
-    Lotto lotto = Lotto.valueOf("1", "3", "5", "7", "9", "20");
-
-    // when
-    Integer realLottoPrice = lotto.getPrice();
-
-    // then
-    assertThat(realLottoPrice).isEqualTo(1000);
-  }
-
   @DisplayName("로또가 지난 당첨번호와 몇개가 맞는지 확인.")
   @Test
   void check_lottoNumberWithLatestWinNumbers() {

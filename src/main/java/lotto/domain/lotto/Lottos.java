@@ -28,6 +28,6 @@ public class Lottos {
   }
 
   public Integer getPrice() {
-    return Lotto.getPrice() * values.size();
+    return Lotto.PRICE * values.size();
   }
 }

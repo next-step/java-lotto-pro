@@ -1,7 +1,7 @@
 package lotto.domain.lotto;
 
 public class Lotto {
-  private static final Integer PRICE = 1000;
+  public static final Integer PRICE = 1000;
   private final LottoNumbers value;
 
   public Lotto(LottoNumbers value) {
@@ -26,10 +26,6 @@ public class Lotto {
 
   public String toString() {
     return value.toString();
-  }
-
-  public static Integer getPrice() {
-    return Lotto.PRICE;
   }
 
   public Integer matchCount(Lotto latestWinLotto) {
