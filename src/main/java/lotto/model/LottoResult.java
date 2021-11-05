@@ -54,12 +54,11 @@ public class LottoResult {
 	}
 
 	public Map<RankCode, Integer> getRankCodeMapUsingContainsMap() {
-		Map<Integer, Integer> containsMap = containsWinningLottoGenerator();
-		Map<RankCode, Integer> rankMap = new HashMap<>();
+		Map<RankCode, Integer> rankMap = RankCode.generateRankCodeMap();
 
-		for (Map.Entry<Integer, Integer> containsEntry : containsMap.entrySet()) {
+		for (Map.Entry<Integer, Integer> containsEntry : containsWinningLottoGenerator().entrySet()) {
 			RankCode key = getRankCodeUsingContainsCount(containsEntry.getKey());
-			rankMap.put(key, rankMap.getOrDefault(key, DEFAULT_VALUE) + containsEntry.getValue());
+			rankMap.put(key, rankMap.get(key) + containsEntry.getValue());
 		}
 
 		return rankMap;

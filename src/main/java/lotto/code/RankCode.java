@@ -1,6 +1,8 @@
 package lotto.code;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum RankCode {
 	FIRST(6, 2000_000_000),
@@ -26,5 +28,13 @@ public enum RankCode {
 
 	public static int getRankMoney(RankCode rankCode, int count) {
 		return rankCode.money * count;
+	}
+
+	public static Map<RankCode, Integer> generateRankCodeMap() {
+		Map<RankCode, Integer> rankCodeMap = new HashMap<>();
+		for (RankCode rankCode : RankCode.values()) {
+			rankCodeMap.put(rankCode, NOTHING.containsCount);
+		}
+		return rankCodeMap;
 	}
 }
