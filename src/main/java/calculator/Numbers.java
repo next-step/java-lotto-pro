@@ -8,7 +8,7 @@ public class Numbers {
 
 	private final List<Number> numbers;
 
-	public Numbers(List<String> inputNumbers) {
+	public Numbers(String[] inputNumbers) {
 		this.numbers = new ArrayList<>();
 		for (String inputNumber : inputNumbers) {
 			numbers.add(new Number(inputNumber));

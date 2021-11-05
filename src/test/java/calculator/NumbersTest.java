@@ -11,7 +11,7 @@ public class NumbersTest {
 
 	@Test
 	public void sum() {
-		Numbers numbers = new Numbers(new ArrayList<String>(Arrays.asList("1", "2", "3")));
+		Numbers numbers = new Numbers(new String[] {"1", "2", "3"});
 
 		int result = numbers.sum();
 
