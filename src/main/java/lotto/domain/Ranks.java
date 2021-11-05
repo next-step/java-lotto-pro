@@ -13,7 +13,6 @@ import static lotto.common.MathUtil.calculateYield;
  * author : haedoang
  * date : 2021-11-05
  * description : 랭크 리스트 클래스
- *
  */
 public class Ranks {
     private final List<Rank> rankList;
@@ -25,7 +24,7 @@ public class Ranks {
     }
 
     public long countPlace(Rank findRank) {
-        return  this.rankList.stream().filter(rank -> rank.equals(findRank)).count();
+        return this.rankList.stream().filter(rank -> rank.equals(findRank)).count();
     }
 
     public long totalRewards() {
@@ -34,6 +33,7 @@ public class Ranks {
                 countPlace(new Rank(Rank.THIRD_PLACE_MATCH_COUNT)) * Constants.REWARD_3RD +
                 countPlace(new Rank(Rank.FOURTH_PLACE_MATCH_COUNT)) * Constants.REWARD_4TH;
     }
+
     public double earningRatio() {
         return calculateYield(this.totalRewards(), rankList.size() * PurchasePrice.LOTTO_PRICE);
     }
