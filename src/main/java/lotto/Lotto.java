@@ -27,9 +27,16 @@ public class Lotto {
 
 
     private void validate(List<Integer> numbers) {
+        if (isIncorrectSize(numbers)) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_SIZE_ERROR.getMessage());
+        }
         if (isDuplicated(numbers)) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
         }
+    }
+
+    private boolean isIncorrectSize(List<Integer> numbers) {
+        return numbers.size() != LOTTO_NUMBERS_SIZE;
     }
 
     private boolean isDuplicated(List<Integer> numbers) {

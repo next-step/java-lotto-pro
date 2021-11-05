@@ -27,8 +27,20 @@ class LottoTest {
     }
 
     @Test
+    @DisplayName("로또 숫자의 개수가 올바르지 않으면 예외가 발생한다.")
+    void createThrowException1() {
+        // given
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        // when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Lotto(lottoNumbers))
+                .withMessageMatching(ErrorMessage.LOTTO_NUMBER_SIZE_ERROR.getMessage());
+    }
+
+    @Test
     @DisplayName("중복된 숫자로 로또를 생성하면 예외가 발생한다.")
-    void createThrowException() {
+    void createThrowException2() {
         // given
         List<Integer> lottoNumbers = Arrays.asList(1, 1, 3, 4, 5, 6);
 
