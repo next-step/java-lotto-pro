@@ -1,35 +1,21 @@
 package lotto;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import view.Printable;
 
 public class LottoTicket implements Printable {
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
-    private static final int LOTTO_SIZE = 6;
-
     private static final String COMMA_SPACE = ", ";
     private static final String LEFT_BRACE = "[";
     private static final String RIGHT_BRACE = "]";
 
     private List<Integer> numbers;
 
-    public LottoTicket() {
-        List<Integer> possibleNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-            .boxed()
-            .collect(Collectors.toList());
-
-        Collections.shuffle(possibleNumbers);
-
-        numbers = possibleNumbers.stream()
-            .limit(LOTTO_SIZE)
-            .sorted()
-            .collect(Collectors.toList());
+    public LottoTicket(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     public LottoTicket(String text) {
@@ -39,8 +25,21 @@ public class LottoTicket implements Printable {
             .collect(Collectors.toList());
     }
 
-    public int getSize() {
-        return numbers.size();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoTicket)) {
+            return false;
+        }
+        LottoTicket that = (LottoTicket)o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 
     @Override

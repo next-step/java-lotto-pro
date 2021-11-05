@@ -12,7 +12,7 @@ public class Lotto {
         ResultView.print(() ->
             lottoCount.makePrintableMessage() + OutputMessage.PRINT_NUMBER_OF_PURCHASED_LOTTO.getMessage());
 
-        LottoTickets lottoTickets = new LottoTickets(lottoCount);
+        LottoTickets lottoTickets = LottoTicketFactory.createRandomLottoTickets(lottoCount);
         ResultView.print(lottoTickets);
 
         LottoTicket winnerTicket = new LottoTicket(InputView.readLine());

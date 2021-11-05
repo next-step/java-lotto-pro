@@ -11,8 +11,8 @@ public class LottoCount implements Printable {
         this.count = count;
     }
 
-    public int getCount() {
-        return count;
+    public boolean isBiggerThan(int count) {
+        return count < this.count;
     }
 
     @Override
