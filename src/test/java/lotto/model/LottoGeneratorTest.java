@@ -44,6 +44,18 @@ class LottoGeneratorTest {
 		}).isInstanceOf(InvocationTargetException.class);
 	}
 
+	@Test
+	void 구입금액이_숫자가아닐때_예외처리_테스트() throws Exception {
+		// given // when
+		String inputMoney = "2we,";
+		Method method = privateMethod("validNumber");
+
+		// then
+		assertThatThrownBy(() -> {
+			method.invoke(new LottoGenerator(), inputMoney);
+		}).isInstanceOf(InvocationTargetException.class);
+	}
+
 	@ParameterizedTest(name = "index {index} ==> inputMoney {0}, lottoAmount {1}")
 	@CsvSource(value = {"10000:10", "1111:1", "20000:20", "13200:13"}, delimiter = ':')
 	void 입력된_구입금액만큼_로또갯수를_구해주는_기능테스트(String inputMoney, int lottoAmount) throws Exception {

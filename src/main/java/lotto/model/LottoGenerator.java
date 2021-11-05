@@ -5,6 +5,7 @@ import java.util.List;
 
 public class LottoGenerator {
 	public static final int LOTTO_PRICE = 1000;
+	private static final String NUMBER_REGEX = "[0-9]+";
 	private String inputMoney;
 	private List<LottoNumbers> lottoNumbersList;
 
@@ -27,6 +28,16 @@ public class LottoGenerator {
 		}
 	}
 
+	private void validNumber(String input) {
+		if (isNumber(input)) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	private boolean isNumber(String input) {
+		return !input.matches(NUMBER_REGEX);
+	}
+
 	private boolean isNullOrEmpty(String input) {
 		return input == null || input.isEmpty();
 	}
@@ -47,6 +58,7 @@ public class LottoGenerator {
 
 	private List<LottoNumbers> generateLottoNumbers(String inputMoney) {
 		validNullOrEmpty(inputMoney);
+		validNumber(inputMoney);
 		validUnderLottoPrice(inputMoney);
 		List<LottoNumbers> lottoNumbersList = new ArrayList<>();
 
