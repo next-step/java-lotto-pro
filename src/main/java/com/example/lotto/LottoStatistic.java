@@ -12,16 +12,10 @@ public class LottoStatistic {
 	private final long purchaseAmount;
 	private final Map<LottoRank, Long> lottoRankToCount;
 
-	public LottoStatistic(long purchaseAmount, List<LottoGame> lottoGames, LottoNumbers winningLottoNumbers) {
+	public LottoStatistic(long purchaseAmount, LottoGames lottoGames, WinningLottoNumbers winningLottoNumbers) {
 		this.purchaseAmount = purchaseAmount;
 		this.lottoRankToCount = defaultLottoRankToCount();
-		this.lottoRankToCount.putAll(lottoGames.stream()
-			.map(lottoGame -> LottoNumbers.match(lottoGame.getLottoNumbers(), winningLottoNumbers))
-			.map(LottoRank::valueOf)
-			.filter(lottoRank -> !lottoRank.isMiss())
-			.collect(Collectors.groupingBy(
-				Function.identity(),
-				Collectors.counting())));
+		addResultsToLottoRankToCount(lottoGames, winningLottoNumbers);
 	}
 
 	private Map<LottoRank, Long> defaultLottoRankToCount() {
@@ -37,6 +31,17 @@ public class LottoStatistic {
 		return map;
 	}
 
+	private void addResultsToLottoRankToCount(LottoGames lottoGames, WinningLottoNumbers winningLottoNumbers) {
+		this.lottoRankToCount.putAll(lottoGames.getValues().stream()
+			.map(lottoGame -> {
+				int matchCount = LottoNumbers.match(lottoGame.getLottoNumbers(), winningLottoNumbers.getBaseNumbers());
+				boolean matchBonus = lottoGame.getLottoNumbers().contains(winningLottoNumbers.getBonusNumber());
+				return LottoRank.valueOf(matchCount, matchBonus);
+			})
+			.filter(lottoRank -> !lottoRank.isMiss())
+			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
+	}
+
 	private long getTotalWinningMoney() {
 		return lottoRankToCount.entrySet().stream()
 			.map(entry -> entry.getKey().getWinningMoney() * entry.getValue())
@@ -48,10 +53,8 @@ public class LottoStatistic {
 	public String toString() {
 		StringBuilder sb = new StringBuilder("당첨 통계\n---------\n");
 		for (LottoRank lottoRank : lottoRankToCount.keySet()) {
-			int countOfMatch = lottoRank.getCountOfMatch();
-			int winningMoney = lottoRank.getWinningMoney();
 			Long count = lottoRankToCount.get(lottoRank);
-			sb.append(String.format("%d개 일치 (%d원)- %d개\n", countOfMatch, winningMoney, count));
+			sb.append(String.format("%s- %d개\n", lottoRank, count));
 		}
 
 		sb.append(String.format("총 수익률은 %f입니다.", ((double)getTotalWinningMoney() / purchaseAmount)));
