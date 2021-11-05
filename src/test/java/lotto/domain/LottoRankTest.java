@@ -25,12 +25,12 @@ public class LottoRankTest {
 
 	@ParameterizedTest
 	@MethodSource("winningNumberAndLottoNumberAndRank")
-	@DisplayName("로또번호가 주어지면, 순위가 반환되어야 한다")
+	@DisplayName("로또번호와 당첨번호가 주어지면, 순위가 반환되어야 한다")
 	public void rankTest(List<Integer> winNumberList, List<Integer> numberList, int rank) {
 		LottoNumber winningNumber = LottoNumber.of(winNumberList);
-		LottoNumber number1st = LottoNumber.of(numberList);
+		LottoNumber lottoNumber = LottoNumber.of(numberList);
 
-		LottoRank lottoRank = new LottoRank(winningNumber, number1st);
+		LottoRank lottoRank = new LottoRank(winningNumber, lottoNumber);
 
 		assertThat(lottoRank.getRank()).isEqualTo(rank);
 	}
