@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
 import lottoservice.exception.DuplicateLottoNumberException;
 import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.lottonumber.LottoNumber;
+import lottoservice.lottonumber.LottoNumbersMaker;
 
 public class LottoWinningNumbers {
 
-	private static int SIZE_OF_LOTTERY_NUMBERS = 6;
 	private Set<LottoNumber> winningNumbers;
 
 	private LottoWinningNumbers(List<LottoNumber> numbers) {
@@ -28,7 +28,7 @@ public class LottoWinningNumbers {
 	}
 
 	private void validateHasNotDuplicateLottoNumber(Set<LottoNumber> lottoNumbers) {
-		if (lottoNumbers.size() < SIZE_OF_LOTTERY_NUMBERS) {
+		if (lottoNumbers.size() < LottoNumbersMaker.SIZE_OF_LOTTERY_NUMBERS) {
 			throw new DuplicateLottoNumberException("중복된 당첨번호를 입력하였습니다.");
 		}
 	}
@@ -45,7 +45,7 @@ public class LottoWinningNumbers {
 	}
 
 	private static boolean isCorrectSizeOfLotto(List<Integer> numbers) {
-		if (numbers.size() == SIZE_OF_LOTTERY_NUMBERS) {
+		if (numbers.size() == LottoNumbersMaker.SIZE_OF_LOTTERY_NUMBERS) {
 			return true;
 		}
 		return false;
