@@ -36,5 +36,4 @@ public class LottosTest {
         assertThat(ranks.countPlace(new Rank(2))).isEqualTo(0);
     }
 
-
 }

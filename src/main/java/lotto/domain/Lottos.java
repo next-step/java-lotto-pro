@@ -20,6 +20,13 @@ public class Lottos {
         this.lottoList = new ArrayList<>(lottoList);
     }
 
+    public Lottos(List<Lotto> lottoList, PurchasePrice price) {
+        if (lottoList == null) throw new NullPointerException("null값이 올 수 없습니다.");
+        if (lottoList.isEmpty()) throw new IllegalArgumentException("빈 값이 올 수 없습니다.");
+        if (!price.equals(new PurchasePrice(lottoList.size() * PurchasePrice.LOTTO_PRICE))) throw new IllegalArgumentException("구매수량이 일치하지 않습니다.");
+        this.lottoList = new ArrayList<>(lottoList);
+    }
+
     public Ranks getResults(Lotto winning) {
         return new Ranks(lottoList.stream().map(lotto -> lotto.getRank(winning)).collect(Collectors.toList()));
     }
