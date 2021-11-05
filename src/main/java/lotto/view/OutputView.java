@@ -2,13 +2,9 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.Number;
 import lotto.domain.Rank;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
 
@@ -30,7 +26,7 @@ public class OutputView {
     }
 
     private void printMatchResult(Rank rank, int matchRankCount) {
-        if (!rank.isMatch(Rank.NONE)) {
+        if (!rank.isRankMatch(Rank.NONE)) {
             System.out.println(rank.toString() + matchRankCount + "개");
         }
     }

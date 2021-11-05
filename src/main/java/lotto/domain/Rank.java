@@ -32,16 +32,8 @@ public enum Rank {
                 .orElse(NONE);
     }
 
-    public boolean isMatch(Rank rank) {
+    public boolean isRankMatch(Rank rank) {
         return this.equals(rank);
-    }
-
-    public int getPrizeMoney() {
-        return this.prizeMoney;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
     }
 
     @Override
