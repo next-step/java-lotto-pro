@@ -1,6 +1,7 @@
 package step3;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,29 +10,32 @@ import java.util.Set;
 import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 
 class LottoNumbersTest {
 
 	@Test
 	@DisplayName("로또번호가 중복되어서 출력되지 않는지 확인 ")
 	void createLotto() {
-		LottoNumbers lottoNumbers = new LottoNumbers(Sets.newHashSet(createNumbers()));
-
-		Set<LottoNumber> resultLotto = lottoNumbers.createLottoNumbers();
-		assertThat(resultLotto).containsOnly(
-			new LottoNumber(1),
-			new LottoNumber(3),
-			new LottoNumber(5),
-			new LottoNumber(6),
-			new LottoNumber(4),
-			new LottoNumber(2));
-		assertThat(resultLotto.size()).isEqualTo(6);
+		LottoNumbers lottoNumbers = new LottoNumbers();
+		try (MockedStatic<RandomUtils> randomMock = mockStatic(RandomUtils.class)) {
+			randomMock
+				.when(() -> RandomUtils.pick())
+				.thenReturn(1, 4, 5, 6, 7, 9);
+			Set<LottoNumber> createLotto = lottoNumbers.createLottoNumbers();
+			assertThat(createLotto).containsOnly(new LottoNumber(1),
+				new LottoNumber(4),
+				new LottoNumber(5),
+				new LottoNumber(6),
+				new LottoNumber(7),
+				new LottoNumber(9));
+		}
 	}
 
 	@Test
 	@DisplayName("로또 번호가 6개 이상 뽑히면 Exception 발생")
 	void createOverFlowThrow() {
-		assertThatThrownBy(() ->{
+		assertThatThrownBy(() -> {
 			LottoNumbers lottoNumbers = new LottoNumbers(Sets.newHashSet(createOverMax()));
 			Set<LottoNumber> resultLotto = lottoNumbers.createLottoNumbers();
 		}).isInstanceOf(ArrayIndexOutOfBoundsException.class);

@@ -1,6 +1,7 @@
 package step3;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,16 +13,28 @@ public class LottoNumbers {
 		this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
 	}
 
+	public LottoNumbers() {
+		this.lottoNumbers = new HashSet<>();
+	}
+
 	public Set<LottoNumber> createLottoNumbers() {
+		for (int i = 0; i < LOTTO_NUMBER_MAX; i++) {
+			validation();
+			lottoNumbers.add(new LottoNumber(RandomUtils.pick()));
+		}
+		return this.lottoNumbers;
+	}
+
+	private void validation() {
 		if (isOverFlow()) {
 			throw new ArrayIndexOutOfBoundsException("로또 번호가 6개 이상 뽑혔습니다.");
 		}
-		return this.lottoNumbers;
 	}
 
 	private boolean isOverFlow() {
 		return this.lottoNumbers.size() > LOTTO_NUMBER_MAX;
 	}
+	
 
 	@Override
 	public boolean equals(Object o) {
