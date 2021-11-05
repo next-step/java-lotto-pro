@@ -23,7 +23,7 @@ public class LottoMatcher {
 	private void setMatchResult(LottoMatchResult lottoMatchResult, LottoTicket lottoTicket) {
 		int matchCount = matchCountWinningAndTicket(lottoTicket);
 		if(hasMatch(matchCount)){
-			lottoMatchResult.addCount(MatchRank.valueOf(matchCount));
+			lottoMatchResult.addCount(LottoMatchRank.valueOf(matchCount));
 		}
 	}
 

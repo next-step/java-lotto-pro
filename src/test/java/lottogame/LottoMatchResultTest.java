@@ -35,4 +35,4 @@ class LottoMatchResultTest {
 
 		Assertions.assertThat(lottoMatchResult.calculateProfitPercentage()).isEqualTo(0.35);
 	}
-}
+} 
