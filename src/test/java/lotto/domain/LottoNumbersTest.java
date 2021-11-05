@@ -17,7 +17,7 @@ class LottoNumbersTest {
     @MethodSource("lotto.domain.LottoNumbersArgs#lottoNumbersTest_ok")
     @DisplayName("로또 넘버 리스트 생성 - 성공")
     public void lottoNumbersTest_ok(List<Integer> input) {
-        assertThat(new LottoNumbers(input))
+        assertThat(LottoNumbers.fromList(input))
                 .isInstanceOf(LottoNumbers.class);
     }
 
@@ -25,7 +25,7 @@ class LottoNumbersTest {
     @MethodSource("lotto.domain.LottoNumbersArgs#lottoNumberSizeTest")
     @DisplayName("로또 넘버는 6개의 숫자로 구성한다.")
     public void lottoNumberSizeTest(List<Integer> input) {
-        assertThatThrownBy(() -> new LottoNumbers(input))
+        assertThatThrownBy(() -> LottoNumbers.fromList(input))
                 .isInstanceOf(LottoSizeException.class);
     }
 
@@ -33,7 +33,7 @@ class LottoNumbersTest {
     @MethodSource("lotto.domain.LottoNumbersArgs#lottoNumberDuplicateTest")
     @DisplayName("중복된 숫자는 입력할 수 없다.")
     public void lottoNumberDuplicateTest(List<Integer> input) {
-        assertThatThrownBy(() -> new LottoNumbers(input))
+        assertThatThrownBy(() -> LottoNumbers.fromList(input))
                 .isInstanceOf(DuplicateNumberException.class);
     }
 

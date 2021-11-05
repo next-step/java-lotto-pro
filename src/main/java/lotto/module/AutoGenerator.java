@@ -33,11 +33,9 @@ public class AutoGenerator implements NumberGeneratorStrategy {
         numbers.addAll(ALL_LOTTO_NUMBERS);
         Collections.shuffle(numbers);
 
-        return new LottoNumbers(
-                numbers.stream()
-                        .limit(LOTTO_SIZE)
-                        .collect(Collectors.toList())
-        );
+        return LottoNumbers.fromList(numbers.stream()
+                .limit(LOTTO_SIZE)
+                .collect(Collectors.toList()));
     }
 
     private static class LazyHolder {

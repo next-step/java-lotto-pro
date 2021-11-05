@@ -3,16 +3,18 @@ package lotto.domain;
 import lotto.exception.DuplicateNumberException;
 import lotto.exception.LottoSizeException;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 import static lotto.common.LottoConst.LOTTO_SIZE;
+import static lotto.common.LottoConst.WINNING_NUMBER_REGEX;
 
 public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(final List<Integer> numbers) {
+    private LottoNumbers(final List<Integer> numbers) {
         validation(numbers);
 
         this.lottoNumbers = numbers.stream()
@@ -20,6 +22,19 @@ public class LottoNumbers {
                 .sorted()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+    }
+
+    public static LottoNumbers fromString(final String input) {
+        return new LottoNumbers(
+                Arrays.stream(input.split(WINNING_NUMBER_REGEX))
+                        .mapToInt(Integer::valueOf)
+                        .boxed()
+                        .collect(Collectors.toList())
+        );
+    }
+
+    public static LottoNumbers fromList(final List<Integer> numbers) {
+        return new LottoNumbers(numbers);
     }
 
     private void validation(final List<Integer> numbers) {

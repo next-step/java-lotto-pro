@@ -22,7 +22,7 @@ class WinningMapTest {
     @BeforeAll
     public static void beforeEach() {
         lottoTicket = new LottoTicket(Arrays.asList(
-                new LottoNumbers(Arrays.asList(1, 2, 30, 34, 37, 42))
+                LottoNumbers.fromString("1, 2, 30, 34, 37, 42")
         ));
     }
 
