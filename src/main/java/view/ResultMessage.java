@@ -8,6 +8,6 @@ public class ResultMessage {
 	public static final String FOUR_MATCH_MESSAGE = "4개 일치 (%d원)- %s개";
 	public static final String FIVE_MATCH_MESSAGE = "5개 일치 (%d원)- %s개";
 	public static final String SIX_MATCH_MESSAGE = "6개 일치 (%d원)- %s개";
-	public static final String EARNINGS_RATE_MESSAGE = "총 수익률은 %f입니다.";
+	public static final String EARNINGS_RATE_MESSAGE = "총 수익률은 %s입니다.";
 	public static final String EARNINGS_RATE_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 }

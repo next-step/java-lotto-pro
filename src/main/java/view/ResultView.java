@@ -3,10 +3,8 @@ package view;
 import static java.util.stream.Collectors.*;
 import static view.ResultMessage.*;
 
-import java.math.BigDecimal;
-
+import model.EarningsRate;
 import model.Lotto;
-import model.LottoStatistics;
 import model.Lottos;
 import model.MatchResult;
 import model.MatchingNumberCount;
@@ -32,15 +30,11 @@ public class ResultView {
 	}
 
 	private void printEarningsRate(MatchResult matchResult, Money purchaseMoney) {
-		BigDecimal earningsRate = LottoStatistics.calculateForEarningsRate(matchResult, purchaseMoney);
+		EarningsRate earningsRate = EarningsRate.calculateOf(matchResult, purchaseMoney);
 		System.out.print(String.format(EARNINGS_RATE_MESSAGE, earningsRate));
-		if (isEarningsRateLessThanOne(earningsRate)) {
+		if (earningsRate.isLessThanOne()) {
 			System.out.println(EARNINGS_RATE_LOSS_MESSAGE);
 		}
-	}
-
-	private boolean isEarningsRateLessThanOne(BigDecimal earningsRate) {
-		return BigDecimal.ONE.compareTo(earningsRate) > 0;
 	}
 
 	private void printMatchResult(MatchResult matchResult) {
