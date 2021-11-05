@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.model.LottoNumber;
-import lotto.model.LottoPaper;
-import lotto.model.LottoPapers;
-import lotto.model.LottoResult;
+import lotto.model.*;
 import lotto.util.GameRule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -44,7 +41,7 @@ public class LottoGameTest {
         // when
         LottoResult lottoResult = lottoGame.getLottoResult(new LottoPapers(lottoPapers), winningLottoPaper);
         // then
-        assertThat(lottoResult.getMatchCountMap().get(3)).isEqualTo(1);
-        assertThat(lottoResult.getMatchCountMap().get(4)).isEqualTo(1);
+        assertThat(lottoResult.getMatchCounts().get(LottoWinningPrice.THREE)).isEqualTo(1);
+        assertThat(lottoResult.getMatchCounts().get(LottoWinningPrice.FOUR)).isEqualTo(1);
     }
 }

@@ -17,10 +17,10 @@ public class LottoResultTest {
     void 로또상금_계산_테스트_정상(int match3, int match4, int match5, int match6) {
         // given
         LottoResult lottoResult = new LottoResult();
-        lottoResult.getMatchCountMap().put(3, match3);
-        lottoResult.getMatchCountMap().put(4, match4);
-        lottoResult.getMatchCountMap().put(5, match5);
-        lottoResult.getMatchCountMap().put(6, match6);
+        lottoResult.getMatchCounts().put(LottoWinningPrice.THREE, match3);
+        lottoResult.getMatchCounts().put(LottoWinningPrice.FOUR, match4);
+        lottoResult.getMatchCounts().put(LottoWinningPrice.FIVE, match5);
+        lottoResult.getMatchCounts().put(LottoWinningPrice.SIX, match6);
 
         BigDecimal comReward = new BigDecimal(
                 GameRule.MATCH_PRICE_3 * match3
@@ -30,7 +30,7 @@ public class LottoResultTest {
         // when
         BigDecimal lottoReward = lottoResult.calculateWinningReward();
         // then
-        assertThat(lottoReward.equals(comReward)).isEqualTo(true);
+        assertThat(lottoReward).isEqualTo(comReward);
     }
 
     @DisplayName("[정상]로또수익률 계산 테스트")
@@ -39,10 +39,10 @@ public class LottoResultTest {
     void 로또수익률_계산_테스트_정상(int match3, int match4, int match5, int match6, long buyPrice) {
         // given
         LottoResult lottoResult = new LottoResult();
-        lottoResult.getMatchCountMap().put(3, match3);
-        lottoResult.getMatchCountMap().put(4, match4);
-        lottoResult.getMatchCountMap().put(5, match5);
-        lottoResult.getMatchCountMap().put(6, match6);
+        lottoResult.getMatchCounts().put(LottoWinningPrice.THREE, match3);
+        lottoResult.getMatchCounts().put(LottoWinningPrice.FOUR, match4);
+        lottoResult.getMatchCounts().put(LottoWinningPrice.FIVE, match5);
+        lottoResult.getMatchCounts().put(LottoWinningPrice.SIX, match6);
         // when
         lottoResult.calculateYield(buyPrice);
         // then

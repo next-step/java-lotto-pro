@@ -39,16 +39,4 @@ public class LottoNumberGeneratorTest {
         assertThrows(IllegalArgumentException.class, () -> lottoNumberGenerator.createWinningNumber(input));
     }
 
-    @DisplayName("[정상] 로또번호_생성_테스트")
-    @ParameterizedTest
-    @CsvSource(value = {"46:-800:0"}, delimiter = ':')
-    void 로또번호_생성_테스트(int lottoNumber) {
-        // given
-        LottoNumberGenerator lottoNumberRandomGenerator = new LottoNumberGenerator();
-        // when
-        LottoPaper lottoPaper = lottoNumberRandomGenerator.getLottoNumbers();
-        // then
-        Assertions.assertFalse(lottoPaper.isContainsOf(new LottoNumber(lottoNumber)));
-
-    }
 }

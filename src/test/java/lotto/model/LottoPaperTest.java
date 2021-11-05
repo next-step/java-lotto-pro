@@ -66,7 +66,7 @@ public class LottoPaperTest {
         // when
         lottoPaper.matchLottoPaper(winningLottoPaper, lottoResult);
         // then
-        assertThat(lottoResult.getMatchCountMap().get(3)).isEqualTo(1);
+        assertThat(lottoResult.getMatchCounts().get(LottoWinningPrice.THREE)).isEqualTo(1);
         assertThat(lottoResult.getMatchCount()).isEqualTo(0);
     }
 }
