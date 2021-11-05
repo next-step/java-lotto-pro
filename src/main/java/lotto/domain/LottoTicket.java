@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.domain.LottoNumbersFactory.*;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class LottoTicket {
             validateRange(lottoNumber);
         }
         validateSorted(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
     private void validateSize(List<Integer> lottoNumbers) {
@@ -53,5 +54,12 @@ public class LottoTicket {
         if (!isSorted) {
             throw new IllegalArgumentException(NON_SORTED_NUMBERS_MESSAGE);
         }
+    }
+
+    public Rank winningRank(List<Integer> winningNumbers) {
+        Set<Integer> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
+        nonDuplicateNumbers.addAll(winningNumbers);
+        int countOfMatch = lottoNumbers.size() + winningNumbers.size() - nonDuplicateNumbers.size();
+        return Rank.valueOf(countOfMatch);
     }
 }

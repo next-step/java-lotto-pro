@@ -11,7 +11,7 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 
-public class LottoNumbersFactoryTest {
+class LottoNumbersFactoryTest {
     @DisplayName("로또 번호 생성 테스트 - 중복되지 않고 정렬된 1~45 사이의 6개의 숫자")
     @RepeatedTest(10)
     void lottoNumbersTest() {
