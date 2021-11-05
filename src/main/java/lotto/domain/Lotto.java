@@ -17,9 +17,9 @@ public class Lotto {
     private final List<LottoNumber> lottoNumberList;
 
     public Lotto(List<LottoNumber> lottoNumberList) {
-        if(lottoNumberList == null) throw new NullPointerException("null값이 올 수 없습니다.");
-        if(lottoNumberList.size() != BALL_CNT) throw new IllegalArgumentException("볼 개수가 일치하지 않습니다.");
-        if(isDuplicate(lottoNumberList)) throw new IllegalArgumentException("중복된 볼을 가질 수 없습니다.");
+        if (lottoNumberList == null) throw new NullPointerException("null값이 올 수 없습니다.");
+        if (lottoNumberList.size() != BALL_CNT) throw new IllegalArgumentException("볼 개수가 일치하지 않습니다.");
+        if (isDuplicate(lottoNumberList)) throw new IllegalArgumentException("중복된 볼을 가질 수 없습니다.");
         this.lottoNumberList = new ArrayList<>(lottoNumberList);
     }
 
@@ -31,7 +31,11 @@ public class Lotto {
         return this.lottoNumberList.contains(number);
     }
 
-    public int match(Lotto winning) {
-        return (int) winning.lottoNumberList.stream().filter(lottoNumber -> this.lottoNumberList.contains(lottoNumber)).count();
+    private int match(Lotto winning) {
+        return (int) winning.lottoNumberList.stream().filter(this.lottoNumberList::contains).count();
+    }
+
+    public Rank getRank(Lotto winning) {
+        return new Rank(match(winning));
     }
 }
