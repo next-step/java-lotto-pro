@@ -1,24 +1,28 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
-    private int[] lottoNumbers;
+    private List<Integer> winNumbers;
 
-    public WinningLotto(String splitedInts) {
-        lottoNumbers = Arrays.stream(splitedInts.split(", ")).mapToInt(Integer::parseInt).toArray();
+    public WinningLotto(int[] numbers) {
+        winNumbers = Arrays.stream(numbers)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     public int size() {
-        return lottoNumbers.length;
+        return winNumbers.size();
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(lottoNumbers);
+        return winNumbers.toString();
     }
 
     public int matchNumber(Lotto lotto) {
-        return 3;
+        return lotto.matchNumber(winNumbers);
     }
 }
