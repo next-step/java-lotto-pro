@@ -20,4 +20,12 @@ public class LottoNumberGenerator {
 		return LottoNumber.of(numbers);
 	}
 
+	public static LottoNumbers generateByCount(int count) {
+		LottoNumbers numbers = new LottoNumbers();
+		for (int i = 0; i < count; i++) {
+			numbers.add(generate());
+		}
+		return numbers;
+	}
+
 }

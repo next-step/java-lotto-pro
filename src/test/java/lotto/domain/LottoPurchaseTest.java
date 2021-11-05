@@ -10,7 +10,7 @@ public class LottoPurchaseTest {
 
 	@ParameterizedTest
 	@CsvSource(delimiter = ',', value = {"5000, 5", "10000, 10"})
-	@DisplayName("주어진 돈으로 살 수 있는 로또 갯수를 반환한다")
+	@DisplayName("주어진 돈으로 살 수 있는 로또 갯수를 반환한다(로또 개당 1000원)")
 	public void purchaseTest(int money, int count) {
 		int result = LottoPurchase.getLottoCount(money);
 		assertThat(result).isEqualTo(count);

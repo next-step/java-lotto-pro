@@ -15,6 +15,9 @@ public class LottoNumber {
 
 	private List<Integer> lottoNumbers = new ArrayList<>();
 
+	private LottoNumber() {
+	}
+
 	public static LottoNumber of(List<Integer> numbers) {
 		LottoNumber lottoNumber = new LottoNumber();
 		validateNumber(numbers);

@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRanks;
 
 public class ResultView {
 
-	public static void showLottoNumbers(int count, List<LottoNumber> numbersList) {
+	public static void showLottoNumbers(int count, LottoNumbers lottoNumbers) {
 		System.out.println(count + "개를 구매했습니다.");
 		StringBuilder result = new StringBuilder();
 
-		for (LottoNumber lottoNumber : numbersList) {
+		for (LottoNumber lottoNumber : lottoNumbers.getNumbers()) {
 			result.append("[ ");
 			result.append(showLottoNumber(lottoNumber));
 			result.append(" ]\n");

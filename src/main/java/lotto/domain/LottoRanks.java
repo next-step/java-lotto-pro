@@ -15,8 +15,8 @@ public class LottoRanks {
 		}
 	}
 
-	public LottoRanks(LottoNumber winningNumber, List<LottoNumber> numbers) {
-		for (LottoNumber number : numbers) {
+	public LottoRanks(LottoNumber winningNumber, LottoNumbers numbers) {
+		for (LottoNumber number : numbers.getNumbers()) {
 			LottoRank rank = new LottoRank(winningNumber, number);
 			setCount(rank);
 		}
