@@ -19,7 +19,7 @@ public class LottoFactory {
         }
 
         Collections.shuffle(lottoNumberList);
-        List<LottoNumber> shuffledNumberList = lottoNumberList.subList(START_LOTTO_NUMBER_INDEX, LOTTO_SIZE);
+        List<LottoNumber> shuffledNumberList = new ArrayList<>(lottoNumberList.subList(START_LOTTO_NUMBER_INDEX, LOTTO_SIZE));
         Collections.sort(shuffledNumberList);
 
         return new LottoNumbers(shuffledNumberList);

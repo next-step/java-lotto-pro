@@ -14,4 +14,12 @@ public class LottoController {
     public LottoNumbers createLottoNumbers() {
         return lottoService.createLottoNumbers();
     }
+
+    public int countWinningNumber(LottoNumbers winningLottoNumbers, LottoNumbers myLottoNumbers) {
+        return lottoService.countWinningNumber(winningLottoNumbers, myLottoNumbers);
+    }
+
+    public double getRateOfReturn(int purchaseCount, int winningAmount) {
+        return lottoService.getRateOfReturn(purchaseCount, winningAmount);
+    }
 }
