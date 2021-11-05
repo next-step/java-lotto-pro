@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoTicketTest {
 
     private static Stream<Arguments> autoStrategyGenerate() {
-        NumberGeneratorStrategy strategy = AutoGenerator.getInstance();
+        NumberGeneratorStrategy strategy = new AutoGenerator();
         return Stream.of(
                 Arguments.of(1, strategy),
                 Arguments.of(5, strategy)

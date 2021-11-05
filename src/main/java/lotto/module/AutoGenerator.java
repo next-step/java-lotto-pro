@@ -14,11 +14,7 @@ public class AutoGenerator implements NumberGeneratorStrategy {
 
     public static final List<Integer> ALL_LOTTO_NUMBERS = createNumbers();
 
-    private AutoGenerator() {
-    }
-
-    public static AutoGenerator getInstance() {
-        return AutoGenerator.LazyHolder.INSTANCE;
+    public AutoGenerator() {
     }
 
     private static List<Integer> createNumbers() {
@@ -36,9 +32,5 @@ public class AutoGenerator implements NumberGeneratorStrategy {
         return LottoNumbers.fromList(numbers.stream()
                 .limit(LOTTO_SIZE)
                 .collect(Collectors.toList()));
-    }
-
-    private static class LazyHolder {
-        public static final AutoGenerator INSTANCE = new AutoGenerator();
     }
 }

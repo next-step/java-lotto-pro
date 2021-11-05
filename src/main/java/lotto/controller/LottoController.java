@@ -22,7 +22,7 @@ public final class LottoController {
     }
 
     public LottoTicket generateLottoTicket(BoughtLotto boughtLotto) {
-        return LottoTicket.generate(boughtLotto.getBoughtCount(), AutoGenerator.getInstance());
+        return LottoTicket.generate(boughtLotto.getBoughtCount(), new AutoGenerator());
     }
 
     public Winning enterWinningLottoNumbers() {

@@ -11,7 +11,7 @@ public class AutoGeneratorTest {
     @Test
     @DisplayName("자동 번호 생성으로 로또 번호 생성")
     public void createTest() {
-        assertThat(AutoGenerator.getInstance().createLotto())
+        assertThat(new AutoGenerator().createLotto())
                 .isInstanceOf(LottoNumbers.class);
     }
 }
