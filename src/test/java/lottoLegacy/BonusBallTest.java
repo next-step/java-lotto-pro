@@ -1,13 +1,12 @@
-package lotto;
+package lottoLegacy;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.common.Messages;
+import lottoLegacy.common.Messages;
 
 class BonusBallTest {
 

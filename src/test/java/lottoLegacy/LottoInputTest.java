@@ -1,4 +1,4 @@
-package lotto;
+package lottoLegacy;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -6,7 +6,7 @@ import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.common.Messages;
+import lottoLegacy.common.Messages;
 
 class LottoInputTest {
 

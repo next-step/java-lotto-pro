@@ -1,8 +1,8 @@
-package lotto;
+package lottoLegacy;
 
-import static lotto.common.Constants.*;
+import static lottoLegacy.common.Constants.*;
 
-import lotto.common.Messages;
+import lottoLegacy.common.Messages;
 
 public class Investment {
 	private Integer investment;

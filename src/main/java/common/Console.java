@@ -1,4 +1,4 @@
-package lotto.common;
+package common;
 
 import java.lang.reflect.Field;
 import java.util.NoSuchElementException;

@@ -1,12 +1,9 @@
-package lotto;
-
-import static lotto.common.Constants.*;
+package lottoLegacy;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
-import lotto.common.Rank;
+import lottoLegacy.common.Rank;
 
 public class Winning {
 	private Map<Rank, Integer> winningMap;

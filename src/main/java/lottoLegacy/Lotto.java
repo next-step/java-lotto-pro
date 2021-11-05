@@ -1,6 +1,6 @@
-package lotto;
+package lottoLegacy;
 
-import static lotto.common.Constants.*;
+import static lottoLegacy.common.Constants.*;
 
 import java.util.Collections;
 import java.util.List;

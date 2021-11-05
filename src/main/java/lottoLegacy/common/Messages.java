@@ -1,4 +1,4 @@
-package lotto.common;
+package lottoLegacy.common;
 
 public enum Messages {
 

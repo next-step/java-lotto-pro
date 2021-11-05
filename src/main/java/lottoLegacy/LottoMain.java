@@ -1,4 +1,4 @@
-package lotto;
+package lottoLegacy;
 
 import view.InputView;
 import view.ResultView;

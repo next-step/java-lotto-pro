@@ -1,4 +1,4 @@
-package lotto.common;
+package lottoLegacy.common;
 
 import java.util.Arrays;
 import java.util.Collections;

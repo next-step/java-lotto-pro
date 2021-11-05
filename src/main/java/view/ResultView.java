@@ -1,18 +1,15 @@
 package view;
 
-import static lotto.common.Constants.*;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-
-import lotto.Lotto;
-import lotto.Lottos;
-import lotto.Winning;
-import lotto.common.Messages;
-import lotto.common.Rank;
+import lottoLegacy.Lotto;
+import lottoLegacy.Lottos;
+import lottoLegacy.Winning;
+import lottoLegacy.common.Messages;
+import lottoLegacy.common.Rank;
 
 public class ResultView {
+	private ResultView() {
+	}
+
 	public static void print(String message) {
 		System.out.println(message);
 	}

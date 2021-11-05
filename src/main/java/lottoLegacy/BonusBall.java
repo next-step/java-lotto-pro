@@ -1,8 +1,8 @@
-package lotto;
+package lottoLegacy;
 
 import java.util.List;
 
-import lotto.common.Messages;
+import lottoLegacy.common.Messages;
 
 public class BonusBall {
 	private LottoNumber bonusBall;

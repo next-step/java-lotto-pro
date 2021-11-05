@@ -1,6 +1,6 @@
-package lotto;
+package lottoLegacy;
 
-import static lotto.common.Constants.*;
+import static lottoLegacy.common.Constants.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import lotto.common.Messages;
+import lottoLegacy.common.Messages;
 
 public class LottoInput {
 	private List<LottoNumber> lottoNumbers;

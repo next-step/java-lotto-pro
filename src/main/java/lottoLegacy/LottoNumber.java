@@ -1,10 +1,10 @@
-package lotto;
+package lottoLegacy;
 
-import static lotto.common.Constants.*;
+import static lottoLegacy.common.Constants.*;
 
 import java.util.Objects;
 
-import lotto.common.Messages;
+import lottoLegacy.common.Messages;
 
 public class LottoNumber {
 	private Integer number;
