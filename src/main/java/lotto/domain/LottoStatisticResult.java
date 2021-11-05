@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StatisticResult {
+public class LottoStatisticResult {
 
     private Map<Integer, Integer> store;
 
-    public StatisticResult() {
+    public LottoStatisticResult() {
         store = new HashMap<>();
     }
 

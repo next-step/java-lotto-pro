@@ -10,8 +10,8 @@ public class LottoWinReader {
         this.winLotto = new Lotto(numbers);
     }
 
-    public StatisticResult win(Lottos lottos) {
-        StatisticResult statistic = new StatisticResult();
+    public LottoStatisticResult win(Lottos lottos) {
+        LottoStatisticResult statistic = new LottoStatisticResult();
         for(Lotto lotto : lottos)
         {
             statistic.report(lotto.correspondCount(winLotto));

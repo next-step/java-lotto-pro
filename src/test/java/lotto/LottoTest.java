@@ -81,7 +81,7 @@ public class LottoTest {
         Lotto eight = new Lotto(Arrays.asList(10, 13, 5, 9, 11, 44));
 
         Lottos lottos = new Lottos(Arrays.asList(one, two, three, four, five, six, seven, eight));
-        StatisticResult result = reader.win(lottos);
+        LottoStatisticResult result = reader.win(lottos);
 
         assertThat(result.get(correspond)).isEqualTo(win);
     }
