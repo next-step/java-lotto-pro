@@ -19,10 +19,15 @@ public class LottoService {
         return winningCount;
     }
 
+    public double getRateOfReturn(int purchaseCount, int winningAmount) {
+        return (double) winningAmount / (purchaseCount * LOTTO_PER_PRICE);
+    }
+
     private int checkContainsNumber(LottoNumbers myLottoNumbers, int winningCount, LottoNumber winningNumber) {
         if (myLottoNumbers.containsNumber(winningNumber)) {
             return 1;
         }
         return 0;
     }
+
 }

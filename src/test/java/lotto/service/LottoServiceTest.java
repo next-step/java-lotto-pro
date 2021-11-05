@@ -38,6 +38,19 @@ class LottoServiceTest {
         assertThat(result).isEqualTo(5);
     }
 
+    @Test
+    void 수익률_계산() {
+        // given
+        int purchaseCount = 14;
+        int winningAmount = 5000;
+
+        // when
+        double result = lottoService.getRateOfReturn(purchaseCount, winningAmount);
+
+        // then
+        assertThat(result).isGreaterThanOrEqualTo(0.35);
+    }
+
     private LottoNumbers createWinningLottoNumbers() {
         List<LottoNumber> list = new ArrayList<>();
         for (int i = 1; i < 7; i++) {
