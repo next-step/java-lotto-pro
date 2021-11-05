@@ -12,8 +12,8 @@ public class LottoTest {
     @Test
     @DisplayName("로또 매치 개수 확인")
     public void lottoTest() {
-
-        Lotto lotto = new Lotto(Arrays.asList(Rank.FIRST, Rank.FIRST, Rank.FIRST));
+        Lotto lotto = new Lotto(Arrays.asList(Rank.of(6, false),
+                Rank.of(6, false), Rank.of(6, false)));
 
         assertThat(lotto.getMatchRankCount(Rank.FIRST)).isEqualTo(3);
     }
