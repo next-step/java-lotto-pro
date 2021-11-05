@@ -31,24 +31,40 @@ public class LottoController {
 		LottoCount purchasedCount = calculatePurchasedLottoCount(money);
 		LottoCount customLottoCount = inputView.inputCustomLottoCount(purchasedCount);
 
-		Lottos lottos = purchaseLottos(purchasedCount);
+		Lottos lottos = purchaseLottos(purchasedCount, customLottoCount);
 		LottoNumbers lastWinningNumbers = LottoNumbers.of(inputLastWinningNumbers());
 		LottoNumber bonusNumber = inputView.inputBonusNumber(lastWinningNumbers);
 
 		WinningStatistics winningStatistics = WinningStatistics.createBy(lottos, lastWinningNumbers, bonusNumber, money);
 		winningStatistics.buildStatistics();
 
-		this.resultView.printWinningStatistics(winningStatistics);
+		resultView.printWinningStatistics(winningStatistics);
 	}
 
-	public Lottos purchaseLottos(LottoCount purchasedCount) {
-		List<Lotto> lottos = new ArrayList<>();
-		lottos.addAll(createAutoLottos(purchasedCount));
-
-		Lottos totalLottos = Lottos.of(lottos);
-		this.resultView.printLottos(totalLottos);
+	public Lottos purchaseLottos(LottoCount purchasedCount, LottoCount customLottoCount) {
+		Lottos totalLottos = Lottos.of(createCustomAndAutoLottos(purchasedCount, customLottoCount));
+		resultView.printLottos(totalLottos);
 
 		return totalLottos;
+	}
+
+	private List<Lotto> createCustomAndAutoLottos(LottoCount purchasedCount, LottoCount customLottoCount) {
+		List<Lotto> lottos = new ArrayList<>();
+		lottos.addAll(createCustomLottos(customLottoCount));
+		lottos.addAll(createAutoLottos(LottoCount.minus(purchasedCount, customLottoCount)));
+
+		return lottos;
+	}
+
+	private List<Lotto> createCustomLottos(LottoCount customLottoCount) {
+		System.out.println(CUSTOM_LOTTO_INPUT_GUIDE_MESSAGE);
+		List<Lotto> lottos = new ArrayList<>();
+		for (int i = 0; i < customLottoCount.getValue(); i++) {
+			LottoNumbers lottoNumbers = LottoNumbers.of(inputView.inputLottoNumbers(CUSTOM_LOTTO_INPUT_GUIDE_MESSAGE));
+			lottos.add(Lotto.of(lottoNumbers));
+		}
+
+		return lottos;
 	}
 
 	private LottoCount calculatePurchasedLottoCount(Money money) {
