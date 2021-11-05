@@ -1,11 +1,12 @@
 package study.lotto.model;
 
+import java.util.HashMap;
+
 public class LottoNumber {
 
-    // TODO 캐시 적용
     private static final String MAL_FORMED_LOTTO_NUMBER_MESSAGE = "로또번호는 1부터 45까지의 숫자로 구성되어야 합니다.";
-    protected static final int MIN_NUMBER = 1;
-    protected static final int MAX_NUMBER = 45;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
 
     private final int lottoNumber;
 
@@ -15,7 +16,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber valueOf(final int lottoNumber) {
-        return new LottoNumber(lottoNumber);
+        return LottoNumberCache.cache.get(lottoNumber);
     }
 
     public int getValue() {
@@ -25,6 +26,18 @@ public class LottoNumber {
     private void validate(final int lottoNumber) {
         if (MIN_NUMBER > lottoNumber || lottoNumber > MAX_NUMBER) {
             throw new MalFormedLottoNumberException(MAL_FORMED_LOTTO_NUMBER_MESSAGE);
+        }
+    }
+
+    private static class LottoNumberCache {
+        static final HashMap<Integer, LottoNumber> cache;
+
+        static {
+            final HashMap<Integer, LottoNumber> _cache = new HashMap<>();
+            for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+                _cache.put(i, new LottoNumber(i));
+            }
+            cache = _cache;
         }
     }
 
