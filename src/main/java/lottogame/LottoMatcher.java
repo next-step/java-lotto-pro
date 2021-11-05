@@ -2,14 +2,35 @@ package lottogame;
 
 public class LottoMatcher {
 
-	private LottoMatcher(){
+	private LottoWinningNumbers lottoWinningNumbers;
+
+	public LottoMatcher(LottoWinningNumbers lottoWinningNumbers){
+		this.lottoWinningNumbers=lottoWinningNumbers;
 	}
 
-	public static LottoMatcher setWinningNumbersAndTickets() {
-		return new LottoMatcher();
-	}
-
-	public static int matchCountWinningAndTicket(LottoWinningNumbers lottoWinningNumbers, LottoTicket lottoTicket) {
+	public int matchCountWinningAndTicket(LottoTicket lottoTicket) {
 		return lottoWinningNumbers.compareWithNumbers(lottoTicket.getLottoNumbers());
+	}
+
+	public LottoMatchResult matchWinningAndTickets(LottoTickets lottoTickets) {
+		LottoMatchResult lottoMatchResult = new LottoMatchResult();
+		for(LottoTicket lottoTicket : lottoTickets.getLottoTickets()){
+			setMatchResult(lottoMatchResult,lottoTicket);
+		}
+		return lottoMatchResult;
+	}
+
+	private void setMatchResult(LottoMatchResult lottoMatchResult, LottoTicket lottoTicket) {
+		int matchCount = matchCountWinningAndTicket(lottoTicket);
+		if(hasMatch(matchCount)){
+			lottoMatchResult.addCount(MatchRank.valueOf(matchCount));
+		}
+	}
+
+	private boolean hasMatch(int matchCount){
+		if(matchCount>0){
+			return true;
+		}
+		return false;
 	}
 }
