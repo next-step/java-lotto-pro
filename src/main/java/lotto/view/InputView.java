@@ -2,6 +2,9 @@ package lotto.view;
 
 public class InputView {
 
+    private InputView() {
+
+    }
     public static void printBuyPriceInput() {
         System.out.println(GameMessage.BUY_PRICE_INPUT);
     }
