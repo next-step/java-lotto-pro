@@ -21,6 +21,7 @@ public class LottoNumberTest {
         assertThat(lottoNumber).isEqualTo(new LottoNumber(inNumber));
     }
 
+
     @DisplayName("[ERROR]로또번호 생성 범위 테스트")
     @ParameterizedTest
     @CsvSource(value = {"-1:0:100"}, delimiter = ':')
