@@ -19,10 +19,11 @@ public class LottoController {
         try {
             PurchaseMoney purchaseMoney = service.getPurchaseMoney(InputView.getPurchaseMoney());
             PurchaseAmount purchaseAmount = service.getPurchaseAmount(purchaseMoney, InputView.getManualLottoCount());
-            OutputView.printTicketAmount(purchaseAmount.getManualTicketAmount(), purchaseAmount.getAutoTicketAmount());
 
             List<String> manualLottoNumbers = InputView.getManualLottoNumbers(purchaseAmount.getManualTicketAmount());
             LottoTickets lottoTickets = service.issueTickets(purchaseAmount, manualLottoNumbers);
+
+            OutputView.printTicketAmount(purchaseAmount.getManualTicketAmount(), purchaseAmount.getAutoTicketAmount());
             OutputView.printLottoTickets(lottoTickets);
 
             WinningNumbers winningNumbers = service.getWinningNumbers(InputView.getWinningNumber(), InputView.getBonusNumber());
