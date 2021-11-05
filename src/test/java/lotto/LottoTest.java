@@ -46,5 +46,11 @@ public class LottoTest {
                 new LottoNumber(6), new LottoNumber(15), new LottoNumber(42));
     }
 
+    @DisplayName("로또의 숫자를 다음과 같은 형식으로 출력한다. [숫자, 숫자, 숫자, 숫자, 숫자, 숫자]")
+    @Test
+    public void printLottoNumbersTest() {
+        Lotto lotto = new Lotto(Arrays.asList(6, 5, 2, 1, 15, 42));
+        assertThat(lotto.toString()).isEqualTo("[1, 2, 5, 6, 15, 42]");
+    }
 
 }
