@@ -8,8 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import lottogame.exception.DuplicateLottoNumberException;
-import lottogame.exception.NotCorrectSizeOfLottoException;
-import lottogame.exception.NotDigitLottoNumberException;
+import lottogame.exception.InvalidLottoFormatException;
 
 public class LottoWinningNumbers {
 
@@ -40,7 +39,7 @@ public class LottoWinningNumbers {
 
 	private static void validateSizeOfLotto(List<Integer> numbers) {
 		if (!isCorrectSizeOfLotto(numbers)) {
-			throw new NotCorrectSizeOfLottoException("당첨 번호는 6개 입력하셔야 합니다.");
+			throw new InvalidLottoFormatException("당첨 번호는 6개 입력하셔야 합니다.");
 		}
 	}
 
@@ -75,7 +74,7 @@ public class LottoWinningNumbers {
 				.map(splitedNumber -> Integer.parseInt(splitedNumber))
 				.collect(Collectors.toList());
 		}catch (NumberFormatException ex){
-			throw new NotDigitLottoNumberException("입력형식이 올바르지 않습니다. 로또번호 숫자와 구분자(, )를 형식에 맞게 입력해주세요.");
+			throw new InvalidLottoFormatException("입력형식이 올바르지 않습니다. 로또번호 숫자와 구분자(, )를 형식에 맞게 입력해주세요.");
 		}
 	}
 

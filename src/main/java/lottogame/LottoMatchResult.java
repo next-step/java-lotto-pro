@@ -2,19 +2,21 @@ package lottogame;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoMatchResult {
+
 	private Map<LottoMatchRank, Integer> result;
 
 	public LottoMatchResult() {
 		this.result = initResultSet();
 	}
 
+	/* LinkedHashMap으로 순서 보장 */
 	private Map<LottoMatchRank, Integer> initResultSet() {
-		return Arrays.stream(LottoMatchRank.values()).collect(() -> new HashMap<LottoMatchRank, Integer>(),
+		return Arrays.stream(LottoMatchRank.values()).collect(() -> new LinkedHashMap<LottoMatchRank, Integer>(),
 			(matches, rank) -> matches.put(rank, 0),
 			(matches1, matches2) -> matches1.putAll(matches2));
 	}
@@ -25,10 +27,6 @@ public class LottoMatchResult {
 
 	public Map<LottoMatchRank, Integer> getResult() {
 		return result;
-	}
-
-	public String getResultToString() {
-		return "";
 	}
 
 	public long calculateProfit() {
@@ -51,5 +49,15 @@ public class LottoMatchResult {
 			.map(matchResult -> matchResult.getValue())
 			.mapToInt(numOfResults -> numOfResults)
 			.sum();
+	}
+
+	@Override
+	public String toString() {
+		return result.entrySet().stream()
+			.filter(matchResult -> matchResult.getKey().getWinningMoney() > 0)
+			.map(matchResult -> matchResult.getKey().getCountOfMatch() + "개 일치 ("
+				+ matchResult.getKey().getWinningMoney() + "원)- "
+				+ matchResult.getValue() + "개")
+			.collect(Collectors.joining("\n"));
 	}
 }

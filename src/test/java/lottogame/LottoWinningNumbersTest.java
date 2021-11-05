@@ -11,8 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lottogame.exception.DuplicateLottoNumberException;
-import lottogame.exception.NotCorrectSizeOfLottoException;
-import lottogame.exception.NotDigitLottoNumberException;
+import lottogame.exception.InvalidLottoFormatException;
 
 public class LottoWinningNumbersTest {
 
@@ -46,7 +45,7 @@ public class LottoWinningNumbersTest {
 		List<Integer> numbers = convertArgumentsToInteger(argumentsAccessor);
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(numbers);
-		}).isInstanceOf(NotCorrectSizeOfLottoException.class);
+		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
 	@ParameterizedTest
@@ -55,7 +54,7 @@ public class LottoWinningNumbersTest {
 		List<Integer> numbers = convertArgumentsToInteger(argumentsAccessor);
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(numbers);
-		}).isInstanceOf(NotCorrectSizeOfLottoException.class);
+		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
 	@ParameterizedTest
@@ -70,7 +69,7 @@ public class LottoWinningNumbersTest {
 	public void 당첨번호_문자열_입력_로또갯수_예외(String lottoNumberText) {
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(lottoNumberText);
-		}).isInstanceOf(NotCorrectSizeOfLottoException.class);
+		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
 	@ParameterizedTest
@@ -78,7 +77,7 @@ public class LottoWinningNumbersTest {
 	public void 당첨번호_문자열_입력_포맷_예외(String lottoNumberText) {
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(lottoNumberText);
-		}).isInstanceOf(NotDigitLottoNumberException.class);
+		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
 	// ArgumentsAccessor 타입을 Integer List로 변환

@@ -2,8 +2,7 @@ package lottogame;
 
 import java.util.Objects;
 
-import lottogame.exception.InvalidLottoNumberException;
-import lottogame.exception.InvalidScopeOfLottoNumberException;
+import lottogame.exception.InvalidLottoFormatException;
 
 class LottoNumber {
 
@@ -16,7 +15,7 @@ class LottoNumber {
 
 	public void validateNumberInLottoRule(int number) {
 		if (number < LottoNumbersMaker.START_INCLUSIVE_NUMBER || number > LottoNumbersMaker.END_EXCLUSIVE_NUMBER) {
-			throw new InvalidScopeOfLottoNumberException(
+			throw new InvalidLottoFormatException(
 				"로또 번호는 " + LottoNumbersMaker.START_INCLUSIVE_NUMBER + "~" + LottoNumbersMaker.END_EXCLUSIVE_NUMBER
 					+ "사이 숫자만 가능합니다.");
 		}
