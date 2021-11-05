@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Iterator;
 import java.util.List;
@@ -35,4 +35,16 @@ public class Lotto implements Iterable<LottoNumber> {
     public String toString() {
         return lottoNumbers.toString();
     }
+
+    public int correspondCount(Lotto winLotto) {
+        return this.lottoNumbers.stream()
+                .filter(winLotto::contains)
+                .collect(toList())
+                .size();
+    }
+
+    private boolean contains(LottoNumber number) {
+        return this.lottoNumbers.contains(number);
+    }
+
 }

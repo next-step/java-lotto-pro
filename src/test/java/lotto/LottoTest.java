@@ -1,10 +1,12 @@
 package lotto;
 
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -46,7 +48,7 @@ public class LottoTest {
                 new LottoNumber(6), new LottoNumber(15), new LottoNumber(42));
     }
 
-    @DisplayName("로또의 숫자를 다음과 같은 형식으로 출력한다. [숫자, 숫자, 숫자, 숫자, 숫자, 숫자]")
+    @DisplayName("로또의 숫자를 다음과 같은 형식으로 출력 테스트 [숫자, 숫자, 숫자, 숫자, 숫자, 숫자]")
     @Test
     public void printLottoNumbersTest() {
         Lotto lotto = new Lotto(Arrays.asList(6, 5, 2, 1, 15, 42));
@@ -58,6 +60,30 @@ public class LottoTest {
     public void lottoCount_InAmountTest() {
         Lottos lottos = LottoMachine.issue(14_000);
         assertThat(lottos.count()).isEqualTo(14);
+    }
+
+    @DisplayName("주어진 로또 리스트에서 당첨된 로또 개수 구하기 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"3:1", "4:4", "5:2", "6:1"}, delimiter = ':')
+    public void winLotto_StatisticResultTest(int correspond, int win) {
+        LottoWinReader reader = new LottoWinReader(Arrays.asList(1, 3, 5, 6, 11, 44));
+
+        Lotto one = new Lotto(Arrays.asList(1, 3, 5, 6, 11, 44));
+
+        Lotto two = new Lotto(Arrays.asList(1, 3, 5, 6, 11, 43));
+        Lotto three = new Lotto(Arrays.asList(1, 3, 5, 6, 11, 42));
+
+        Lotto four = new Lotto(Arrays.asList(1, 3, 5, 6, 17, 42));
+        Lotto five = new Lotto(Arrays.asList(1, 3, 5, 6, 19, 42));
+        Lotto six = new Lotto(Arrays.asList(1, 3, 5, 7, 11, 42));
+        Lotto seven = new Lotto(Arrays.asList(1, 3, 4, 6, 19, 44));
+
+        Lotto eight = new Lotto(Arrays.asList(10, 13, 5, 9, 11, 44));
+
+        Lottos lottos = new Lottos(Arrays.asList(one, two, three, four, five, six, seven, eight));
+        StatisticResult result = reader.win(lottos);
+
+        assertThat(result.get(correspond)).isEqualTo(win);
     }
 
 }
