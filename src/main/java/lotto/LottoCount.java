@@ -5,13 +5,13 @@ import java.util.Objects;
 import view.Printable;
 
 public class LottoCount implements Printable {
-    private final int count;
+    private final long count;
 
-    public LottoCount(int count) {
+    public LottoCount(long count) {
         this.count = count;
     }
 
-    public boolean isBiggerThan(int count) {
+    public boolean isBiggerThan(long count) {
         return count < this.count;
     }
 

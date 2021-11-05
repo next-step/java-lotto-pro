@@ -15,10 +15,10 @@ class LottoResultTest {
         assertThat(LottoResult.findResult(cnt)).isEqualTo(LottoResult.valueOf(resultName));
     }
 
-    @DisplayName("로또 결과 확인")
+    @DisplayName("로또 금액 계산")
     @ParameterizedTest
     @CsvSource(value = {"THREE,10000", "FOUR, 100000", "FIVE,3000000", "SIX,4000000000", "NONE,0"})
-    void calculatePrize_success(String resultName, long prize) {
-        assertThat(LottoResult.valueOf(resultName).calculateMultiplePrize(2)).isEqualTo(new LottoPrize(prize));
+    void calculateMultipleMoney_success(String resultName, long money) {
+        assertThat(LottoResult.valueOf(resultName).calculateMultipleMoney(2)).isEqualTo(new LottoMoney(money));
     }
 }
