@@ -1,5 +1,7 @@
 package com.example.lotto;
 
+import java.util.List;
+
 public class LottoController {
 
 	private final NumbersGenerator numbersGenerator;
@@ -29,9 +31,7 @@ public class LottoController {
 	}
 
 	private void issue() {
-		OutputView.print("수동으로 구매할 번호를 입력해 주세요.");
-		LottoGames manualLottoGames = LottoGames.manual(
-			InputView.inputManualLottoNumbersList(purchaseInformation.getManualLottoPurchaseCount()));
+		LottoGames manualLottoGames = getManualLottoGames();
 		LottoGames autoLottoGames = LottoGames.auto(purchaseInformation.getAutoLottoPurchaseCount(), numbersGenerator);
 		lottoGames = LottoGames.merge(manualLottoGames, autoLottoGames);
 
@@ -48,5 +48,12 @@ public class LottoController {
 		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(baseNumbers, bonusNumber);
 		LottoStatistic lottoStatistic = new LottoStatistic(purchaseInformation, lottoGames, winningLottoNumbers);
 		OutputView.print(lottoStatistic.toString());
+	}
+
+	private LottoGames getManualLottoGames() {
+		OutputView.print("수동으로 구매할 번호를 입력해 주세요.");
+		long manualLottoPurchaseCount = purchaseInformation.getManualLottoPurchaseCount();
+		List<List<Integer>> numbersList = InputView.inputManualLottoNumbersList(manualLottoPurchaseCount);
+		return LottoGames.manual(numbersList);
 	}
 }
