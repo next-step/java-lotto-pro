@@ -1,8 +1,7 @@
 package lotto.domain.winning;
 
-@FunctionalInterface
-public interface WinningStrategy {
+public interface WinningStrategy<T, U> {
 
-    boolean matching(int winningCount, boolean isMatchBonus);
+    boolean matching(T winningCount, U isMatchBonus);
 
 }
