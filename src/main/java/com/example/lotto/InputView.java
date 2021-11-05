@@ -9,13 +9,13 @@ public class InputView {
 		return Long.parseLong(Console.readLine());
 	}
 
-	public static List<Integer> InputBaseWinningLottoNumbers() {
+	public static List<Integer> inputBaseWinningLottoNumbers() {
 		return Arrays.stream(Console.readLine().split(", "))
 			.map(Integer::valueOf)
 			.collect(Collectors.toList());
 	}
 
-	public static int InputBonusWinningLottoNumber() {
+	public static int inputBonusWinningLottoNumber() {
 		return Integer.parseInt(Console.readLine());
 	}
 }
