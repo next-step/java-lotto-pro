@@ -5,17 +5,17 @@ import java.util.Map;
 
 public class LottoStatisticResult {
 
-    private Map<Integer, Integer> store;
+    private Map<Integer, Integer> statistic;
 
     public LottoStatisticResult() {
-        store = new HashMap<>();
+        statistic = new HashMap<>();
     }
 
     public void report(int correspondCount) {
-        store.merge(correspondCount, 1, (oldValue, newValue) -> oldValue + 1);
+        statistic.merge(correspondCount, 1, (oldValue, newValue) -> oldValue + 1);
     }
 
     public int get(int key) {
-        return store.getOrDefault(key, 0);
+        return statistic.getOrDefault(key, 0);
     }
 }

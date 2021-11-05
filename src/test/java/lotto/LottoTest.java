@@ -7,9 +7,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.InstanceOfAssertFactories.STREAM;
 
 public class LottoTest {
 
@@ -84,6 +87,20 @@ public class LottoTest {
         LottoStatisticResult result = reader.win(lottos);
 
         assertThat(result.get(correspond)).isEqualTo(win);
+    }
+
+    @DisplayName("구입한 금액 대비 당첨 수익률 구하기 테스트")
+    @Test
+    public void getRevenueTest() {
+        Map<Integer, Integer> statistic = new HashMap<>();
+        statistic.put(1, 10);
+        statistic.put(2, 3);
+        statistic.put(3, 1);
+        statistic.put(4, 0);
+        statistic.put(5, 0);
+        statistic.put(6, 0);
+        Revenue revenue = new Revenue(14_000, statistic);
+        assertThat(revenue.percentage()).isEqualTo(0.35);
     }
 
 }
