@@ -19,6 +19,27 @@ public class LottoNumbers {
     public LottoNumbers() {
     }
 
+    public LottoNumbers(int[] numbers) {
+        map(numbers);
+    }
+
+    public LottoNumbers(NumbersStrategy numbersStrategy) {
+        map(numbersStrategy.getNumbers());
+    }
+
+    private void map(int[] numbers) {
+        this.lottoNumbers = mapOf(numbers);
+        validSize();
+    }
+
+    private Set<LottoNumber> mapOf(int[] numbers) {
+        Set<LottoNumber> result = new HashSet<>();
+        for (int number : numbers) {
+            result.add(new LottoNumber(number));
+        }
+        return result;
+    }
+
     public String toString() {
         List<Integer> result = new ArrayList<>();
         for (LottoNumber lottoNumber : lottoNumbers) {
@@ -26,11 +47,6 @@ public class LottoNumbers {
         }
         Collections.sort(result);
         return Collections.unmodifiableList(result).toString();
-    }
-
-    public LottoNumbers(NumbersStrategy numbersStrategy) {
-        this.lottoNumbers = mapOf(numbersStrategy.getNumbers());
-        validSize(numbersStrategy);
     }
 
     public int containCount(LottoNumbers winLottoNumbers) {
@@ -43,18 +59,10 @@ public class LottoNumbers {
         return count;
     }
 
-    private void validSize(NumbersStrategy numbersStrategy) {
+    private void validSize() {
         if (this.lottoNumbers.size() != MAX_LOTTO_NUMBERS_SIZE) {
             throw new InvalidParamException(RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
         }
-    }
-
-    private Set<LottoNumber> mapOf(int[] numbers) {
-        Set<LottoNumber> result = new HashSet<>();
-        for (int number : numbers) {
-            result.add(new LottoNumber(number));
-        }
-        return result;
     }
 
     @Override

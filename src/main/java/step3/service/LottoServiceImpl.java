@@ -4,6 +4,7 @@ import step3.domain.Amount;
 import step3.domain.LottoProvider;
 import step3.domain.LottoService;
 import step3.domain.strategy.lotto.LottoProviderStrategy;
+import step3.dto.LottoListDto;
 import step3.dto.LottoRanksDto;
 import step3.dto.WinnerLottoNumbersDto;
 
@@ -14,6 +15,11 @@ public class LottoServiceImpl implements LottoService {
     public void buyLotto(Amount amount) {
         int quantity = lottoProvider.availableQuantity(amount.getAmount());
         lottoProvider.buyLotto(quantity);
+    }
+
+    @Override
+    public LottoListDto lottoList() {
+        return new LottoListDto(lottoProvider.getLottoNumbersBundle().toList());
     }
 
     @Override
