@@ -4,6 +4,8 @@ package lotto.domain;
 import lotto.exception.InputDataErrorCode;
 import lotto.exception.InputDataException;
 
+import java.util.Objects;
+
 public class Ball {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
@@ -31,5 +33,18 @@ public class Ball {
     @Override
     public String toString() {
         return String.join(",", String.valueOf(number));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ball)) return false;
+        Ball ball = (Ball) o;
+        return this.number() == ball.number();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
