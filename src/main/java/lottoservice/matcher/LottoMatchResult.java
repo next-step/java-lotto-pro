@@ -47,7 +47,7 @@ public class LottoMatchResult {
 	}
 
 	/* HashMap의 size() 메서드를 사용하면 key의 갯수를 구하기 때문에 map을 탐색하여 각각의 비교 결과 합을 구해야 함*/
-	public int getNumOfMatchResults() {
+	private int getNumOfMatchResults() {
 		return result.entrySet()
 			.stream()
 			.map(matchResult -> matchResult.getValue())
