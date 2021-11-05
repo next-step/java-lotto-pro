@@ -7,7 +7,4 @@ public class ResultView {
         System.out.println(count+BOUGHT);
     }
 
-    public static void printMessage(String lottoMessage) {
-        System.out.println(lottoMessage);
-    }
 }
