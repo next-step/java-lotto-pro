@@ -16,5 +16,6 @@ public class Lotto {
         ResultView.print(lottoTickets);
 
         LottoTicket winnerTicket = new LottoTicket(InputView.readLine());
+        LottoResults lottoResults = lottoTickets.calculateResult(winnerTicket);
     }
 }

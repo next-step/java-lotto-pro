@@ -15,6 +15,12 @@ public class LottoTickets implements Printable {
         this.lottoTicketList = lottoTickets;
     }
 
+    public LottoResults calculateResult(LottoTicket winnerTicket) {
+        return new LottoResults(lottoTicketList.stream()
+            .map(lottoTicket -> lottoTicket.calculateResult(winnerTicket))
+            .collect(Collectors.toList()));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

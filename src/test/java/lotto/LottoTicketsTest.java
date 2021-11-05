@@ -25,6 +25,15 @@ class LottoTicketsTest {
                 new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)))));
     }
 
+    @DisplayName("로또티켓들 결과 계산")
+    @Test
+    public void calculateResult() {
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            new LottoTicket(Arrays.asList(7, 8, 9, 10, 5, 6))));
+        assertThat(lottoTickets.calculateResult(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6))))
+            .isEqualTo(new LottoResults(Arrays.asList(LottoResult.SIX, LottoResult.NONE)));
+    }
+
     @DisplayName("로또 티켓 묶음 메시지 생성 테스트")
     @Test
     void makeMessage_success() {

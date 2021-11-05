@@ -25,6 +25,14 @@ public class LottoTicket implements Printable {
             .collect(Collectors.toList());
     }
 
+    public LottoResult calculateResult(LottoTicket winnerTicket) {
+        int correctCount = (int)this.numbers.stream()
+            .filter(number -> winnerTicket.numbers.contains(number))
+            .count();
+
+        return LottoResult.findResult(correctCount);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
