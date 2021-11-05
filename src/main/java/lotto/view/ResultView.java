@@ -2,6 +2,9 @@ package lotto.view;
 
 import lotto.model.LottoPapers;
 import lotto.model.LottoResult;
+import lotto.model.LottoWinningPrice;
+
+import java.util.Arrays;
 
 public class ResultView {
 
@@ -17,6 +20,18 @@ public class ResultView {
     }
 
     public static void printWinningStatistics(LottoResult lottoResult) {
-        System.out.println(lottoResult.getLottoResult());
+        StringBuilder resultMsg = new StringBuilder();
+        resultMsg.append("당첨 통계\n");
+        resultMsg.append("---------\n");
+
+        Arrays.stream(LottoWinningPrice.values()).forEach(
+                lottoWinningPrice
+                        -> resultMsg.append(String.format("%d개 일치 (%d원) - %d개\n",
+                        lottoWinningPrice.getWinningCount(),
+                        lottoWinningPrice.getReward(),
+                        lottoResult.getMatchCounts().get(lottoWinningPrice) )) );
+
+        resultMsg.append(String.format("총 수익률은 %f 입니다.", lottoResult.getYield()));
+        System.out.println(resultMsg.toString());
     }
 }
