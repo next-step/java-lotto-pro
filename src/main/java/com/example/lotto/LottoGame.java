@@ -7,13 +7,17 @@ public class LottoGame {
 
 	private final LottoNumbers lottoNumbers;
 
-	public LottoGame(NumbersGenerator numbersGenerator) {
+	private LottoGame(LottoNumbers lottoNumbers) {
+		this.lottoNumbers = lottoNumbers;
+	}
+
+	static LottoGame of(NumbersGenerator numbersGenerator) {
 		List<Integer> numbers = numbersGenerator.generate(
 			LottoNumber.ONE,
 			LottoNumber.FORTY_FIVE,
 			LottoNumbers.LOTTO_NUMBER_COUNT);
 
-		this.lottoNumbers = LottoNumbers.of(numbers);
+		return new LottoGame(LottoNumbers.of(numbers));
 	}
 
 	public LottoNumbers getLottoNumbers() {

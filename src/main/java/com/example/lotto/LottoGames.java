@@ -10,7 +10,7 @@ public class LottoGames {
 	public LottoGames(long count, NumbersGenerator numbersGenerator) {
 		this.values = LongStream.range(0, count)
 			.boxed()
-			.map(i -> new LottoGame(numbersGenerator))
+			.map(i -> LottoGame.of(numbersGenerator))
 			.collect(Collectors.toList());
 	}
 
