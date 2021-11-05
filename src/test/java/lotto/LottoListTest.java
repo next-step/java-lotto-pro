@@ -14,4 +14,11 @@ class LottoListTest {
 		System.out.println(lottoList);
 	}
 
+	@Test
+	public void 수동로또_리스트_생성() {
+		LottoList lottoList = new LottoList(3, new String[] {"1,2,3,4,5,6", "1,2,3,4,5,6", "1,2,3,4,5,6"});
+		assertThat(lottoList.size()).isEqualTo(3);
+		System.out.println(lottoList);
+	}
+
 }

@@ -62,4 +62,12 @@ public class LottoTest {
 			.isThrownBy(throwingCallable)
 			.withMessage(ErrorMessages.INPUT_NUMBER_LENGTH_NOT_VALID.getValues());
 	}
+
+	@Test
+	public void 두로또_비교_3개_숫자_당첨() {
+		Lotto manualLotto = new Lotto("1,2,3,4,5,6");
+		Lotto winner = new Lotto("1,3,4,7,8,9");
+		assertThat(winner.compareCount(manualLotto)).isEqualTo(3);
+	}
+
 }

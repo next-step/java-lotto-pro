@@ -13,6 +13,13 @@ public class LottoList {
 		}
 	}
 
+	public LottoList(Integer count, String[] input) {
+		this.lottoList = new ArrayList<>();
+		for (int i = 0; i < count; i++) {
+			this.lottoList.add(new Lotto(input[i]));
+		}
+	}
+
 	public int size() {
 		return lottoList.size();
 	}

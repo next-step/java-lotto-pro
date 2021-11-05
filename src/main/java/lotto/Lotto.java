@@ -74,6 +74,11 @@ public class Lotto {
 		return lotto.size();
 	}
 
+	public int compareCount(Lotto compare) {
+		compare.lotto.retainAll(lotto);
+		return compare.size();
+	}
+
 	@Override
 	public String toString() {
 		return lotto.toString();
