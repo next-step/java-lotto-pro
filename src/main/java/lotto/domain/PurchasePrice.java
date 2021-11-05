@@ -11,7 +11,6 @@ import java.util.Objects;
  */
 public class PurchasePrice {
     public static final int LOTTO_PRICE = 1000;
-    private static final String REG_EXP_NUMBER = "[0-9]"; //숫자 정규식
 
     private final int purchaseQuantity;
 
@@ -30,7 +29,7 @@ public class PurchasePrice {
         this.purchaseQuantity = this.calculateQuantity(price);
     }
 
-    private int calculateQuantity(int price) {
+    public int calculateQuantity(int price) {
         return price / LOTTO_PRICE;
     }
 
@@ -45,5 +44,10 @@ public class PurchasePrice {
     @Override
     public int hashCode() {
         return Objects.hash(purchaseQuantity);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(purchaseQuantity);
     }
 }
