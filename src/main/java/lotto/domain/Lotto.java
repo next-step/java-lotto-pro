@@ -24,7 +24,7 @@ public class Lotto {
         Collections.shuffle(numberRange);
         List<Integer> lottoNumber = new ArrayList<Integer>();
         for (int i = 0; i < 6; i++) {
-            lottoNumber.add(i);
+            lottoNumber.add(numberRange.get(i));
         }
         Collections.sort(lottoNumber);
         return lottoNumber;
