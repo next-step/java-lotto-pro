@@ -26,7 +26,17 @@ public class LastWeekWinningNumber {
 		}
 
 		return Arrays.stream(strings)
-			.allMatch(string -> string.matches(NUMBER_REGEX));
+			.allMatch(string -> string.matches(NUMBER_REGEX))
+			&& isNotDuplicatedNumber(strings);
+	}
+
+	private static boolean isNotDuplicatedNumber(String[] strings) {
+		int numbersCount = Arrays.stream(strings)
+			.map(Integer::parseInt)
+			.collect(toSet())
+			.size();
+
+		return numbersCount == Lotto.NUMBER_COUNT;
 	}
 
 	public static LastWeekWinningNumber of(String lastWeekWinningNumber) {
