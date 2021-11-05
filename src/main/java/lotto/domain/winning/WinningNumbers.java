@@ -14,14 +14,14 @@ public class WinningNumbers {
     private final LottoNumber bonusNumber;
 
     public WinningNumbers(Set<LottoNumber> winningNumbers, int bonusNumber) {
-        validateDuplication(winningNumbers, new LottoNumber(bonusNumber));
+        validateDuplication(winningNumbers, LottoNumber.from(bonusNumber));
         this.winningNumbers = new LottoTicket(winningNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.from(bonusNumber);
     }
 
     public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
         this(winningNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toSet()), bonusNumber);
     }
 
