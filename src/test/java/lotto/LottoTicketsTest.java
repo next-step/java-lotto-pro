@@ -10,13 +10,13 @@ class LottoTicketsTest {
     @DisplayName("로또 티켓 묶음 생성 테스트")
     @Test
     void LottoTickets_success() {
-        assertThat(new LottoTickets(1).getSize()).isEqualTo(1);
+        assertThat(new LottoTickets(new LottoCount(1)).getSize()).isEqualTo(1);
     }
 
     @DisplayName("로또 티켓 묶음 메시지 생성 테스트")
     @Test
     void makeMessage_success() {
-        assertThat(new LottoTickets(2).makePrintableMessage()).contains("[", ", ", "]", "\n");
-        assertThat(new LottoTickets(2).makePrintableMessage()).contains("[", ", ", "]");
+        assertThat(new LottoTickets(new LottoCount(2)).makePrintableMessage()).contains("[", ", ", "]", "\n");
+        assertThat(new LottoTickets(new LottoCount(2)).makePrintableMessage()).contains("[", ", ", "]");
     }
 }

@@ -8,7 +8,7 @@ public class LottoMoney {
         money = Integer.parseInt(moneyText);
     }
 
-    public int calculateLottoCount() {
-        return money / LOTTO_PRICE;
+    public LottoCount calculateLottoCount() {
+        return new LottoCount(money / LOTTO_PRICE);
     }
 }

@@ -11,10 +11,10 @@ public class LottoTickets implements Printable {
 
     private static final String NEW_LINE = "\n";
 
-    public LottoTickets(int count) {
+    public LottoTickets(LottoCount lottoCount) {
         lottoTicketList = new ArrayList<>();
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < lottoCount.getCount(); i++) {
             lottoTicketList.add(new LottoTicket());
         }
     }

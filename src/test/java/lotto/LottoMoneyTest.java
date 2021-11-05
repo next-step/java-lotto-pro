@@ -10,6 +10,6 @@ class LottoMoneyTest {
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "0,0", "999,0", "1001,1"})
     void calculateLottoCount_success(String moneyText, int lottoCount) {
-        assertThat(new LottoMoney(moneyText).calculateLottoCount()).isEqualTo(lottoCount);
+        assertThat(new LottoMoney(moneyText).calculateLottoCount()).isEqualTo(new LottoCount(lottoCount));
     }
 }
