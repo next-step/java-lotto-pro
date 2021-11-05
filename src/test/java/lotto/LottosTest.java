@@ -31,7 +31,7 @@ class LottosTest {
         Lottos lottos = Lottos.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)));
 
         // when
-        WinResults winResults = lottos.getWinResults(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinResults winResults = lottos.getWinResults(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         // then
         assertThat(winResults).isEqualTo(WinResults.from(WinResult.SIX_MATCHED, WinResult.THREE_MATCHED));

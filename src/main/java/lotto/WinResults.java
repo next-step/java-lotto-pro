@@ -13,10 +13,9 @@ public class WinResults {
         this.winResults = winResults;
     }
 
-    public static WinResults of(List<Lotto> lottos, List<Integer> winNumbers) {
+    public static WinResults of(List<Lotto> lottos, Lotto winNumbers) {
         List<WinResult> winResults = lottos.stream()
                 .map(lotto -> lotto.getWinResult(winNumbers))
-                .filter(winResult -> winResult != WinResult.DEFEAT)
                 .collect(Collectors.toList());
         return new WinResults(winResults);
     }

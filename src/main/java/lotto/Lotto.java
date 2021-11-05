@@ -16,13 +16,15 @@ public class Lotto {
         this.lottoNumbers = mapToLottoNumbers(numbers);
     }
 
-    public WinResult getWinResult(List<Integer> winNumbers) {
-        int matchedCount = (int) winNumbers.stream()
-                .map(winNumber -> lottoNumbers.contains(new LottoNumber(winNumber)))
+    public WinResult getWinResult(Lotto winNumbers) {
+        int matchedCount = (int) winNumbers.lottoNumbers
+                .stream()
+                .map(lottoNumbers::contains)
                 .filter(isContained -> isContained)
                 .count();
         return WinResult.fromCount(matchedCount);
     }
+
 
     private void validate(List<Integer> numbers) {
         if (isDuplicated(numbers)) {
@@ -51,5 +53,12 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 }
