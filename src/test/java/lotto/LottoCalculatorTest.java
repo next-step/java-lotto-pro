@@ -15,7 +15,7 @@ public class LottoCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        lottoCalculator = new LottoCalculator(10_000);
+        lottoCalculator = new LottoCalculator(new PurchaseAmount(10_000));
     }
 
     @Test

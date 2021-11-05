@@ -10,8 +10,8 @@ public class LottoCalculator {
     private final Lottos lottos;
     private WinResults winResults;
 
-    public LottoCalculator(int amount) {
-        this.lottos = Lottos.fromQuantity(amount / LOTTO_PRICE);
+    public LottoCalculator(PurchaseAmount purchaseAmount) {
+        this.lottos = Lottos.fromQuantity(purchaseAmount.getQuantity());
     }
 
     public void calculate(List<Integer> winNumbers) {
