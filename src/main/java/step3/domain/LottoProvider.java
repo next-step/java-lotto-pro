@@ -1,7 +1,5 @@
-package step3;
+package step3.domain;
 
-import step3.domain.LottoNumbers;
-import step3.domain.LottoNumbersBundle;
 import step3.domain.constance.LottoConstant;
 import step3.domain.numbers.RandomNumbers;
 

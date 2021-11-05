@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import step3.domain.Amount;
 import step3.domain.LottoNumbers;
+import step3.domain.LottoProvider;
 import step3.domain.constance.LottoConstant;
 import step3.domain.numbers.NumbersStrategy;
 import step3.domain.numbers.RandomNumbers;
