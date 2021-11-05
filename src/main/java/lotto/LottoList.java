@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class LottoList {
 	private List<Lotto> lottoList;
 
@@ -22,6 +23,18 @@ public class LottoList {
 
 	public int size() {
 		return lottoList.size();
+	}
+
+	public Winning getWinningResult(Lotto winnerNumber, BonusBall bonusBall) {
+		Winning winning = new Winning();
+
+		for (Lotto lotto : lottoList) {
+			int strikeCount = winnerNumber.compareCount(lotto);
+			boolean matchBonus = bonusBall.matched(lotto);
+			winning.addWinningMap(strikeCount, matchBonus);
+		}
+
+		return winning;
 	}
 
 	@Override

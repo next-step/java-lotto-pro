@@ -22,6 +22,11 @@ public enum Rank {
 		this.winningMoney = winningMoney;
 	}
 
+	public static boolean contains(Integer test) {
+		return Arrays.stream(values())
+			.anyMatch(rank -> rank.countOfMatch == test);
+	}
+
 	public int getCountOfMatch() {
 		return countOfMatch;
 	}
@@ -31,12 +36,14 @@ public enum Rank {
 	}
 
 	public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-		if (countOfMatch == SECOND.getCountOfMatch() && matchBonus) {
+		System.out.println(countOfMatch +" : " +matchBonus);
+		if (countOfMatch == 5 && matchBonus) {
+			System.out.println("??");
 			return SECOND;
 		}
 
 		Rank[] ranks = values();
-		return Arrays.stream(ranks)
+		return Arrays.stream(ranks).filter(rank -> rank != SECOND)
 			.filter(rank -> rank.countOfMatch == countOfMatch)
 			.findFirst().orElse(Rank.MISS);
 	}

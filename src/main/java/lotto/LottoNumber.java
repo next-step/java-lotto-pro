@@ -1,5 +1,6 @@
 package lotto;
 
+import static common.CommonUtils.*;
 import static common.Constants.*;
 
 import java.util.Objects;
@@ -18,12 +19,6 @@ public class LottoNumber {
 	private void validate(Integer lottoNumber) {
 		isPositiveNumber(lottoNumber);
 		isRangeValid(lottoNumber);
-	}
-
-	private void isPositiveNumber(Integer number) {
-		if (number < ZERO) {
-			throw new BusinessException(ErrorMessages.POSITIVE_NUMBER_FORMAT_NOT_VALID);
-		}
 	}
 
 	private void isRangeValid(Integer number) {

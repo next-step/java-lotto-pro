@@ -1,23 +1,14 @@
 package lotto;
 
-import java.util.Objects;
+import static common.CommonUtils.*;
 
-import exception.BusinessException;
-import exception.ErrorMessages;
+import java.util.Objects;
 
 public class BonusBall {
 	private LottoNumber bonusBall;
 
 	public BonusBall(String input) {
 		this.bonusBall = new LottoNumber(parseInt(input));
-	}
-
-	private Integer parseInt(String input) {
-		try {
-			return Integer.parseInt(input);
-		}catch (NumberFormatException e) {
-			throw new BusinessException(ErrorMessages.INPUT_NUMBER_FORMAT_NOT_VALID);
-		}
 	}
 
 	@Override
@@ -33,6 +24,10 @@ public class BonusBall {
 	@Override
 	public int hashCode() {
 		return Objects.hash(bonusBall);
+	}
+
+	public boolean matched(Lotto lotto) {
+		return lotto.contains(bonusBall);
 	}
 
 }
