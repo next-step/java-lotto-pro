@@ -10,7 +10,8 @@ public class Money {
 	}
 
 	public static boolean validate(String moneyString) {
-		return moneyString.matches(NUMBER_REGEX);
+		return moneyString.matches(NUMBER_REGEX)
+			&& Integer.parseInt(moneyString) >= Lotto.COST;
 	}
 
 	public static Money of(String moneyString) {
