@@ -1,10 +1,13 @@
 import java.util.Arrays;
 import java.util.List;
 
-public class OutputView {
+import nextstep.utils.Console;
 
-	public void payKRW() {
+public class View {
+
+	public int inputPayKRW() {
 		println(Message.INPUT_PAY_KRW.getContent());
+		return Console.readInt();
 	}
 
 	public void boughtLotto(List<Lotto> lottos) {
@@ -12,8 +15,9 @@ public class OutputView {
 		lottos.stream().map(Lotto::toString).forEach(this::println);
 	}
 
-	public void winningLotto() {
+	public String inputWinningLotto() {
 		println(Message.INPUT_WINNING_LOTTO.getContent());
+		return Console.readLine();
 	}
 
 	public void lottoWinningStatistics(LottoWinningStatistics statistics) {

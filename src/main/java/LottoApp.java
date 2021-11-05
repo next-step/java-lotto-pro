@@ -3,57 +3,55 @@ import java.util.List;
 public class LottoApp {
 
 	private final LottoStore store;
-	private final OutputView outputView;
-	private final InputView inputView;
+	private final View view;
 
 	public LottoApp() {
 		this.store = new LottoStore();
-		this.outputView = new OutputView();
-		this.inputView = new InputView(outputView);
+		this.view = new View();
 	}
 
 	public void run() {
-		final List<Lotto> lottos = wrapBuyLottoAt(store);
-		outputView.boughtLotto(lottos);
-		outputView.space();
+		final List<Lotto> lottos = tryBuyLottos();
+		view.boughtLotto(lottos);
+		view.space();
 
-		final WinningLotto winningLotto = wrapMakeWinningLotto();
-		outputView.space();
+		final WinningLotto winningLotto = tryMakeWinningLotto();
+		view.space();
 
 		final LottoWinningStatistics statistics = LottoWinningStatistics.of(winningLotto, lottos);
-		outputView.lottoWinningStatistics(statistics);
+		view.lottoWinningStatistics(statistics);
 	}
 
-	private List<Lotto> wrapBuyLottoAt(LottoStore store) {
+	private List<Lotto> tryBuyLottos() {
 		List<Lotto> lotto;
 		do {
-			lotto = buyLottoAt(store);
+			lotto = buyLottos(view.inputPayKRW());
 		} while (null == lotto);
 		return lotto;
 	}
 
-	private List<Lotto> buyLottoAt(LottoStore store) {
+	private List<Lotto> buyLottos(int paidKRW) {
 		try {
-			return store.sell(inputView.payKRW());
+			return store.sell(paidKRW);
 		} catch (LottoStorePaymentException e) {
-			outputView.error(e.getMessage());
+			view.error(e.getMessage());
 			return null;
 		}
 	}
 
-	private WinningLotto wrapMakeWinningLotto() {
+	private WinningLotto tryMakeWinningLotto() {
 		WinningLotto winningLotto;
 		do {
-			winningLotto = makeWinningLotto();
+			winningLotto = makeWinningLotto(view.inputWinningLotto());
 		} while (null == winningLotto);
 		return winningLotto;
 	}
 
-	private WinningLotto makeWinningLotto() {
+	private WinningLotto makeWinningLotto(String s) {
 		try {
-			return WinningLotto.from(inputView.winningLotto());
+			return WinningLotto.from(s);
 		} catch (IllegalArgumentException e) {
-			outputView.error(e.getMessage());
+			view.error(e.getMessage());
 			return null;
 		}
 	}
