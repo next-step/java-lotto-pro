@@ -1,5 +1,6 @@
 package edu.lotto.automatic.utils;
 
+import edu.lotto.automatic.constants.PatternConstants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,10 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class NumberUtilTest {
 
 	@ParameterizedTest
-	@CsvSource(value = {"1:true", "1000:true", "100won:false", "qwerty:false"}, delimiter = ':')
+	@CsvSource(value = {"1:true", "1000:true", "100won:false", "qwerty:false", "6000/:false"}, delimiter = ':')
 	@DisplayName("값이 숫자 형태의 문자열인지 검증")
 	void isNumber(String value, boolean expected) {
-		assertThat(Pattern.matches("[0-9]+$", value)).isEqualTo(expected);
+		assertThat(Pattern.matches(PatternConstants.NUMBER_PATTERN, value)).isEqualTo(expected);
 	}
 
 	@ParameterizedTest

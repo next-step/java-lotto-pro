@@ -39,11 +39,11 @@ public class NumberUtil {
 	 */
 	public static boolean checkPerchaseAmountValidation(String amount) {
 		boolean validPerchaseAmount = true;
-		if(!NumberUtil.isNumber(amount)) {
+		if(!isNumber(amount)) {
 			validPerchaseAmount = false;
 			System.out.println(MessageConstants.ONLY_INPUT_NUMBER_MESSAGE);
 		}
-		if(!NumberUtil.isMoreThanThousand(Integer.parseInt(amount))) {
+		if(validPerchaseAmount && !isMoreThanThousand(Integer.parseInt(amount))) {
 			validPerchaseAmount = false;
 			System.out.println(MessageConstants.LOTTO_PRICE_INFORMATION_MESSAGE);
 		}
