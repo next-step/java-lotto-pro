@@ -15,10 +15,11 @@ public class LottoNumbersMaker {
 	private static final List<LottoNumber> lottoNumberCandidates = getLottoNumberCandidates();    /* 1~45사이의 수를 로또 번호로 포장하여 저장 */
 
 	/* Collections.shuffle 메서드를 이용하여 collection을 섞은 후 앞에서 부터 SIZE_OF_LOTTERY_NUMBERS 갯수만큼 subList  */
-	public static List<LottoNumber> makelottoNumbers() {
+	public static List<LottoNumber> makeLottoNumbers() {
 		Collections.shuffle(lottoNumberCandidates);
-		return new ArrayList<>(lottoNumberCandidates.subList(0,
-			SIZE_OF_LOTTERY_NUMBERS));    /*List의 subList는 deepCopy가 아니므로 새로 인스턴스를 생성하여 전달 */
+		List<LottoNumber> lottoNumbers =new ArrayList<>(lottoNumberCandidates.subList(0,SIZE_OF_LOTTERY_NUMBERS));  /*List의 subList는 deepCopy가 아니므로 새로 인스턴스를 생성하여 전달 */
+		Collections.sort(lottoNumbers, (lottoNumberPre, lottoNumberPost)->lottoNumberPre.getNumber()- lottoNumberPost.getNumber());
+		return lottoNumbers;
 	}
 
 	private static List<LottoNumber> getLottoNumberCandidates() {
