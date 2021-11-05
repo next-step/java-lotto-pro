@@ -1,6 +1,6 @@
 package exception;
 
-public class BusinessException extends RuntimeException{
+public class BusinessException extends RuntimeException {
 	private ErrorMessages errorMessages;
 
 	public BusinessException(ErrorMessages errorMessages) {

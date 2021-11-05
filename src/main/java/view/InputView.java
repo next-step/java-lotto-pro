@@ -31,6 +31,7 @@ public class InputView {
 	public static String inputManualNumber() {
 		return readLine(Messages.INPUT_MANUAL_NUMBER);
 	}
+
 	public static String inputManualNumberNoMessage() {
 		return Console.readLine();
 	}

@@ -9,7 +9,7 @@ class RankTest {
 
 	@Test
 	public void 순위_1등() throws Exception {
-	    assertThat(Rank.valueOf(6, false)).isEqualTo(Rank.FIRST);
+		assertThat(Rank.valueOf(6, false)).isEqualTo(Rank.FIRST);
 		assertThat(Rank.valueOf(6, true)).isEqualTo(Rank.FIRST);
 	}
 

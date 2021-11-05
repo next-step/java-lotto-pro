@@ -8,7 +8,7 @@ public class InvestmentTest {
 
 	@Test
 	public void 금액_2000원_입력_수량_2() {
-	    String input = "2000";
+		String input = "2000";
 		Investment investment = new Investment(input);
 
 		assertThat(investment.getPrice()).isEqualTo(new Price(input));

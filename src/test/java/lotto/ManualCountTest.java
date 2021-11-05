@@ -23,7 +23,7 @@ class ManualCountTest {
 	@DisplayName("한글, 영어, 특수문자 입력시 BusinessException")
 	@ParameterizedTest
 	@ValueSource(strings = {"한글", "english", "-"})
-	public void 수동_로또_갯수_여러_실패(String input){
+	public void 수동_로또_갯수_여러_실패(String input) {
 
 		//when
 		ThrowableAssert.ThrowingCallable throwingCallable = () -> new ManualCount(input);

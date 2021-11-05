@@ -16,7 +16,7 @@ public class ResultView {
 	}
 
 	public static void purchaseResult(Integer manualCount, Integer autoCount, LottoList lottoList) {
-		print(Messages.BOUGHT_OF_FORMAT.getValues(new Integer[]{manualCount, autoCount}));
+		print(Messages.BOUGHT_OF_FORMAT.getValues(new Integer[] {manualCount, autoCount}));
 		print(lottoList.toString());
 		print("");
 	}
@@ -28,7 +28,7 @@ public class ResultView {
 		for (Rank rank : ranks) {
 			print(createWinningResult(rank, winning.getStrikeResult(rank)));
 		}
-		print(Messages.RESULT_FORMAT.getValues(new String[]{winning.getYield(investment)}));
+		print(Messages.RESULT_FORMAT.getValues(new String[] {winning.getYield(investment)}));
 	}
 
 	private static String createWinningResult(Rank rank, Integer result) {

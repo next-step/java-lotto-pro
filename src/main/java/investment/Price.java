@@ -1,6 +1,6 @@
 package investment;
 
-import static lottoLegacy.common.Constants.*;
+import static common.Constants.*;
 
 import java.util.Objects;
 
@@ -31,7 +31,7 @@ public class Price {
 	private Integer parseInt(String input) {
 		try {
 			return Integer.parseInt(input);
-		}catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			throw new BusinessException(ErrorMessages.INPUT_NUMBER_FORMAT_NOT_VALID);
 		}
 	}

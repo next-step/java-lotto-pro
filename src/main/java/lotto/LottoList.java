@@ -3,7 +3,6 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class LottoList {
 	private List<Lotto> lottoList;
 

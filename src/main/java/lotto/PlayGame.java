@@ -43,7 +43,7 @@ public class PlayGame {
 		try {
 			String inputManualCount = InputView.inputManualCount();
 			return new ManualCount(inputManualCount);
-		}catch (BusinessException e) {
+		} catch (BusinessException e) {
 			ResultView.print(e.getMessage());
 			return getManualCount();
 		}
@@ -65,7 +65,7 @@ public class PlayGame {
 		try {
 			String inputManualNumber = InputView.inputManualNumber();
 			return new Lotto(inputManualNumber);
-		}catch (BusinessException e) {
+		} catch (BusinessException e) {
 			ResultView.print(e.getMessage());
 			return getManualLotto();
 		}

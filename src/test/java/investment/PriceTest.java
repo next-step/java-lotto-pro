@@ -12,15 +12,15 @@ import exception.ErrorMessages;
 class PriceTest {
 
 	@Test
-	public void 금액입력() throws Exception {
-	    String input = "3000";
+	public void 금액입력() {
+		String input = "3000";
 		Price price = new Price(input);
 		assertThat(price).isEqualTo(new Price("3000"));
 	}
 
 	@Test
 	public void 한글입력한_경우_BusinessException() {
-	    String input = "한글입력";
+		String input = "한글입력";
 		//when
 		ThrowableAssert.ThrowingCallable throwingCallable = () -> new Price(input);
 
@@ -55,13 +55,12 @@ class PriceTest {
 	}
 
 	@Test
-	public void 금액_3000_입력한_경우_1000단위로_나눈_값_3_반환() throws Exception {
-	    //given
-	    String input = "3000";
+	public void 금액_3000_입력한_경우_1000단위로_나눈_값_3_반환() {
+		//given
+		String input = "3000";
 		Price price = new Price(input);
 		assertThat(price).isEqualTo(new Price("3000"));
 		assertThat(price.floorDiv(PER_PRICE)).isEqualTo(3);
 	}
-
 
 }

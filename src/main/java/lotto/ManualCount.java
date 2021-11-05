@@ -16,6 +16,7 @@ public class ManualCount {
 		isPositiveNumber(count);
 		return count;
 	}
+
 	public int size() {
 		return manualCount;
 	}

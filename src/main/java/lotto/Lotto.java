@@ -29,7 +29,7 @@ public class Lotto {
 	public Lotto(String input) {
 		String[] splitInputs = splitAfterValidate(input);
 		this.lotto = new ArrayList<>();
-		for (String split: splitInputs) {
+		for (String split : splitInputs) {
 			this.lotto.add(new LottoNumber(Integer.parseInt(split)));
 		}
 	}

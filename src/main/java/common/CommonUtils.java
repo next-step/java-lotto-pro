@@ -10,7 +10,7 @@ public class CommonUtils {
 	public static Integer parseInt(String input) {
 		try {
 			return Integer.parseInt(input);
-		}catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			throw new BusinessException(ErrorMessages.INPUT_NUMBER_FORMAT_NOT_VALID);
 		}
 	}

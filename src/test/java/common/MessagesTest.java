@@ -11,7 +11,8 @@ class MessagesTest {
 	@Test
 	@DisplayName("{arg} 있는 메시지 파라미터로 formatting하여 반환한다.")
 	public void messages_replace_format_value() {
-		assertThat(Messages.BOUGHT_OF_FORMAT.getValues(new String[]{"3", "11"})).isEqualTo("수동으로 3장, 자동으로 11개를 구매했습니다.");
-		assertThat(Messages.RESULT_FORMAT.getValues(new String[]{"2.11"})).isEqualTo("총 수익률은 2.11입니다.");
+		assertThat(Messages.BOUGHT_OF_FORMAT.getValues(new String[] {"3", "11"}))
+			.isEqualTo("수동으로 3장, 자동으로 11개를 구매했습니다.");
+		assertThat(Messages.RESULT_FORMAT.getValues(new String[] {"2.11"})).isEqualTo("총 수익률은 2.11입니다.");
 	}
 }
