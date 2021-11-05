@@ -1,16 +1,33 @@
 package lotto.model;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoPaper {
 
-    private List<LottoNumber> lottoPaper = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoPaper(List<LottoNumber> lottoPaper) {
-        this.lottoPaper = lottoPaper;
+    public LottoPaper(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
     public List<LottoNumber> getLottoNumber() {
-        return lottoPaper;
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public boolean isContainsOf(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public void matchLottoPaper(LottoPaper winningLottoPaper, LottoResult lottoResult) {
+        lottoNumbers.forEach(lottoNumber -> winningLottoPaper.checkContainsLottoNumber(lottoNumber, lottoResult));
+        lottoResult.addMatchCountMap(lottoResult.getMatchCount());
+        lottoResult.clearMatchCount();
+    }
+
+    public void checkContainsLottoNumber(LottoNumber lottoNumber,  LottoResult lottoResult) {
+
+        if(lottoNumbers.contains(lottoNumber)){
+            lottoResult.addMatchCount();
+        }
     }
 }
