@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +13,7 @@ public class LottoParser {
 			.map(String::trim)
 			.mapToInt(LottoParser::parseInt)
 			.mapToObj(LottoNumber::from)
-			.sorted(Comparator.comparingInt(LottoNumber::get))
+			.sorted()
 			.collect(Collectors.toList());
 	}
 

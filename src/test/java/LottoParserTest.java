@@ -1,21 +1,31 @@
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoParserTest {
 
 	@Test
 	void parse() {
-		final List<LottoNumber> lotto = LottoParser.parse("1, 2, 3, 4, 5, 6");
-		assertThat(lotto.size()).isEqualTo(Lotto.NUM_OF_LOTTO_NUMBERS);
+		final List<LottoNumber> lotto = LottoParser.parse("1, 2, 3, 6, 5, 4");
+		assertThat(lotto).containsExactlyElementsOf(
+			Stream.iterate(LottoNumber.MIN_INCLUSIVE_NUMBER, num -> num + 1)
+				.limit(Lotto.NUM_OF_LOTTO_NUMBERS)
+				.map(LottoNumber::from)
+				.collect(Collectors.toList())
+		);
 	}
 
-	@Test
-	void parse_tooShort() {
+	@ParameterizedTest
+	@ValueSource(strings = {"1,2", "1,2,3,4,5,6,7"})
+	void parse_invalidLength(String s) {
 		assertThatExceptionOfType(LottoFormatException.class)
-			.isThrownBy(() -> LottoParser.parse("1, 2"))
+			.isThrownBy(() -> LottoParser.parse(s))
 			.withMessage(LottoFormatException.ERROR_MESSAGE);
 	}
 
