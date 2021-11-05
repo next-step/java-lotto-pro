@@ -16,8 +16,9 @@ class LottoListTest {
 
 	@Test
 	public void 수동로또_리스트_생성() {
-		LottoList lottoList = new LottoList(3, new String[] {"1,2,3,4,5,6", "1,2,3,4,5,6", "1,2,3,4,5,6"});
-		assertThat(lottoList.size()).isEqualTo(3);
+		LottoList lottoList = new LottoList();
+		lottoList.addLottoList(new Lotto("1,2,3,34,5,6"));
+		assertThat(lottoList.size()).isEqualTo(1);
 		System.out.println(lottoList);
 	}
 

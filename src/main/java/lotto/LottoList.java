@@ -14,11 +14,8 @@ public class LottoList {
 		}
 	}
 
-	public LottoList(Integer count, String[] input) {
+	public LottoList() {
 		this.lottoList = new ArrayList<>();
-		for (int i = 0; i < count; i++) {
-			this.lottoList.add(new Lotto(input[i]));
-		}
 	}
 
 	public int size() {
@@ -37,8 +34,16 @@ public class LottoList {
 		return winning;
 	}
 
+	public void addAll(LottoList addList) {
+		this.lottoList.addAll(addList.lottoList);
+	}
+
 	@Override
 	public String toString() {
 		return lottoList.toString();
+	}
+
+	public void addLottoList(Lotto lotto) {
+		lottoList.add(lotto);
 	}
 }

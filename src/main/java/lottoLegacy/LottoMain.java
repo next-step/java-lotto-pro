@@ -21,12 +21,12 @@ public class LottoMain {
 		setInvestment();
 		//로또생성
 		lottos = new Lottos(investment.getCount());
-		ResultView.purchaseResult(lottos);
+		// ResultView.purchaseResult(lottos);
 		setWinnerNumber();
 		setBonusBall();
 		//결과 확인
 		Winning winning = lottos.getWinningResult(winnerNumber, bonusBall);
-		ResultView.totalResult(winning, investment.getInvestment());
+		// ResultView.totalResult(winning, investment.getInvestment());
 	}
 
 	private void setInvestment() {

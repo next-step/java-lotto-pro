@@ -13,7 +13,12 @@ public class Investment {
 		return price;
 	}
 
+	public Integer getPriceSize() {
+		return price.size();
+	}
+
 	public Integer getCount() {
 		return price.floorDiv(PER_PRICE);
 	}
+
 }

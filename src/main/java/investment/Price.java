@@ -52,6 +52,10 @@ public class Price {
 		return Math.floorDiv(price, number);
 	}
 
+	public Integer size() {
+		return price;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

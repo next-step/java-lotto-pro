@@ -36,9 +36,7 @@ public enum Rank {
 	}
 
 	public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-		System.out.println(countOfMatch +" : " +matchBonus);
 		if (countOfMatch == 5 && matchBonus) {
-			System.out.println("??");
 			return SECOND;
 		}
 

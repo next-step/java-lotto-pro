@@ -7,61 +7,99 @@ import view.ResultView;
 
 public class PlayGame {
 
-	private Investment investment;
-	private Lotto winnerNumber;
-	private BonusBall bonusBall;
-
 	public void play() {
-		setInvestment();
-		//로또생성
+		//구입금액 입력
+		Investment investment = getInvestment();
 
-		// ResultView.purchaseResult(lottos);
-		// setWinnerNumber();
-		// setBonusBall();
-		// //결과 확인
-		// Winning winning = lottos.getWinningResult(winnerNumber, bonusBall);
-		// ResultView.totalResult(winning, investment.getInvestment());
+		//수동 로또 갯수 입력
+		ManualCount manualCount = getManualCount();
+		LottoList lottoList = getManualLottoList(manualCount);
+
+		//수동 제외한 로또생성
+		int autoCount = investment.getCount() - manualCount.size();
+		lottoList.addAll(new LottoList(autoCount));
+
+		ResultView.purchaseResult(manualCount.size(), autoCount, lottoList);
+		Lotto winnerNumber = getWinnerNumber();
+		BonusBall bonusBall = getBonusBall();
+
+		//결과 확인
+		Winning winning = lottoList.getWinningResult(winnerNumber, bonusBall);
+		ResultView.totalResult(winning, investment);
 	}
 
-	private void setInvestment() {
+	private Investment getInvestment() {
 		try {
 			//투자금
 			String inputInvestment = InputView.inputInvestment();
-			investment = new Investment(inputInvestment);
+			return new Investment(inputInvestment);
 		} catch (BusinessException e) {
 			ResultView.print(e.getMessage());
-			setInvestment();
+			return getInvestment();
 		}
 	}
 
-	private void setManualCount() {
+	private ManualCount getManualCount() {
 		try {
 			String inputManualCount = InputView.inputManualCount();
+			return new ManualCount(inputManualCount);
 		}catch (BusinessException e) {
 			ResultView.print(e.getMessage());
-			setManualCount();
+			return getManualCount();
 		}
 	}
 
-	private void setWinnerNumber() {
+	private LottoList getManualLottoList(ManualCount manualCount) {
+		LottoList manualLottoList = new LottoList();
+		if (manualCount.size() == 0) {
+			return manualLottoList;
+		}
+		manualLottoList.addLottoList(getManualLotto());
+		for (int i = 1; i < manualCount.size(); i++) {
+			manualLottoList.addLottoList(getManualLottoNoMessage());
+		}
+		return manualLottoList;
+	}
+
+	private Lotto getManualLotto() {
+		try {
+			String inputManualNumber = InputView.inputManualNumber();
+			return new Lotto(inputManualNumber);
+		}catch (BusinessException e) {
+			ResultView.print(e.getMessage());
+			return getManualLotto();
+		}
+	}
+
+	private Lotto getManualLottoNoMessage() {
+		try {
+			String inputManualNumberNoMessage = InputView.inputManualNumberNoMessage();
+			return new Lotto(inputManualNumberNoMessage);
+		} catch (BusinessException e) {
+			ResultView.print(e.getMessage());
+			return getManualLottoNoMessage();
+		}
+	}
+
+	private Lotto getWinnerNumber() {
 		try {
 			//당첨번호
 			String inputWinningNumber = InputView.inputWinningNumber();
-			winnerNumber = new Lotto(inputWinningNumber);
+			return new Lotto(inputWinningNumber);
 		} catch (BusinessException e) {
 			ResultView.print(e.getMessage());
-			setWinnerNumber();
+			return getWinnerNumber();
 		}
 	}
 
-	private void setBonusBall() {
+	private BonusBall getBonusBall() {
 		try {
 			//보너스 번호
 			String inputBonusBall = InputView.inputBonusBall();
-			bonusBall = new BonusBall(inputBonusBall);
+			return new BonusBall(inputBonusBall);
 		} catch (BusinessException e) {
 			ResultView.print(e.getMessage());
-			setBonusBall();
+			return getBonusBall();
 		}
 	}
 }

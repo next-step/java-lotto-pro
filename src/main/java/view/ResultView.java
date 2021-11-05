@@ -1,10 +1,11 @@
 package view;
 
-import lottoLegacy.Lotto;
-import lottoLegacy.Lottos;
-import lottoLegacy.Winning;
-import lottoLegacy.common.Messages;
-import lottoLegacy.common.Rank;
+import common.Messages;
+import investment.Investment;
+import lotto.Lotto;
+import lotto.LottoList;
+import lotto.Rank;
+import lotto.Winning;
 
 public class ResultView {
 	private ResultView() {
@@ -14,22 +15,20 @@ public class ResultView {
 		System.out.println(message);
 	}
 
-	public static void purchaseResult(Lottos lottos) {
-		print(lottos.getLottoList().size() + Messages.BOUGHT_OF.getValues());
-		for (Lotto lotto : lottos.getLottoList()) {
-			print(lotto.getNumbers().toString());
-		}
+	public static void purchaseResult(Integer manualCount, Integer autoCount, LottoList lottoList) {
+		print(Messages.BOUGHT_OF_FORMAT.getValues(new Integer[]{manualCount, autoCount}));
+		print(lottoList.toString());
 		print("");
 	}
 
-	public static void totalResult(Winning winning, int investment) {
+	public static void totalResult(Winning winning, Investment investment) {
 		print(Messages.WINNING_STATS.getValues());
 		print("--------");
 		Rank[] ranks = Rank.valuesForResult();
 		for (Rank rank : ranks) {
 			print(createWinningResult(rank, winning.getStrikeResult(rank)));
 		}
-		print(Messages.RESULT_FORMAT.getValues().replace("{0}", winning.getYield(investment)));
+		print(Messages.RESULT_FORMAT.getValues(new String[]{winning.getYield(investment)}));
 	}
 
 	private static String createWinningResult(Rank rank, Integer result) {

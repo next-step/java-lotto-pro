@@ -3,6 +3,8 @@ package lotto;
 import java.util.HashMap;
 import java.util.Map;
 
+import investment.Investment;
+
 public class Winning {
 	private Map<Rank, Integer> winningMap;
 
@@ -18,9 +20,9 @@ public class Winning {
 		this.winningMap.put(key, this.winningMap.getOrDefault(key, 0) + 1);
 	}
 
-	public String getYield(int investment) {
+	public String getYield(Investment investment) {
 		Double total = getTotalAmount();
-		return String.format("%.2f", total / investment);
+		return String.format("%.2f", total / investment.getPriceSize());
 	}
 
 	public Integer getStrikeResult(Rank key) {

@@ -16,6 +16,9 @@ public class ManualCount {
 		isPositiveNumber(count);
 		return count;
 	}
+	public int size() {
+		return manualCount;
+	}
 
 	@Override
 	public boolean equals(Object o) {
