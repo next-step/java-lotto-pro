@@ -32,10 +32,6 @@ public class Lotto {
 		}
 	}
 
-	public int getNumOfLottoNumbers() {
-		return this.lottoNumbers.size();
-	}
-
 	public static Lotto from(String s) {
 		return new Lotto(LottoParser.parse(s));
 	}
