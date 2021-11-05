@@ -78,4 +78,19 @@ public class LottoWinningNumbers {
 			throw new NotDigitLottoNumberException("입력형식이 올바르지 않습니다. 로또번호 숫자와 구분자(, )를 형식에 맞게 입력해주세요.");
 		}
 	}
+
+	public int compareWithNumbers(List<LottoNumber> ticketLottoNumbers) {
+		int matchCount=0;
+		for(LottoNumber number : ticketLottoNumbers){
+			matchCount+=isMatchNumber(number) ? 1 : 0;
+		}
+		return matchCount;
+	}
+
+	private boolean isMatchNumber(LottoNumber number) {
+		if(winningNumbers.contains(number)){
+			return true;
+		}
+		return false;
+	}
 }
