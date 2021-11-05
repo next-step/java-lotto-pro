@@ -4,24 +4,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public final class Lottos {
+public final class LottoPapers {
 
-	private final Collection<Lotto> collection;
+	private final Collection<LottoPaper> collection;
 
-	private Lottos(Collection<Lotto> collection) {
+	private LottoPapers(Collection<LottoPaper> collection) {
 		validate(collection);
 		this.collection = collection;
 	}
 
-	static Lottos from(Collection<Lotto> collection) {
-		return new Lottos(collection);
+	static LottoPapers from(Collection<LottoPaper> collection) {
+		return new LottoPapers(collection);
 	}
 
-	public Score score(LottoGenerator lottoGenerator) {
-		Lotto target = lottoGenerator.lotto();
+	public Score score(WinnerLotto winnerLotto) {
 		Collection<LottoRank> lottoRanks = new ArrayList<>();
-		for (Lotto lotto : collection) {
-			lottoRanks.add(lotto.rank(target));
+		for (LottoPaper lotto : collection) {
+			lottoRanks.add(lotto.rank(winnerLotto));
 		}
 		return Score.from(lottoRanks);
 	}
@@ -30,7 +29,7 @@ public final class Lottos {
 		return collection.size();
 	}
 
-	public Collection<Lotto> collection() {
+	public Collection<LottoPaper> collection() {
 		return Collections.unmodifiableCollection(collection);
 	}
 
@@ -41,7 +40,7 @@ public final class Lottos {
 			'}';
 	}
 
-	private void validate(Collection<Lotto> collection) {
+	private void validate(Collection<LottoPaper> collection) {
 		if (collection == null) {
 			throw new IllegalArgumentException("lotto collection must not be null");
 		}
