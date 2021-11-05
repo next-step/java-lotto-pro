@@ -1,20 +1,17 @@
 package lotto.view;
 
-import java.util.List;
+import static lotto.constant.ViewMessage.*;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.WinningRank;
 import lotto.domain.WinningRecord;
+import lotto.domain.WinningRecords;
 import lotto.domain.WinningStatistics;
 import lotto.utils.MessageBuilder;
 
 public class ResultView {
-	private static final String LOTTO_COUNT_MESSAGE = "%s개를 구매했습니다.";
-	private static final String WINNING_STATISTICS_GUIDE_MESSAGE = "당첨 통계";
-	private static final String WINNING_RANK_RECODE_RESULT_MESSAGE = "%s개 일치 (%s원)- %s개";
-	private static final String TOTAL_PROFIT_RATE_MESSAGE = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-	private static final String DIVIDE_LINE = "---------";
+	private static final double PROFIT_CRITERIA = 1.0;
 
 	public void printLottos(Lottos lottos) {
 		printLottoCount(lottos);
@@ -34,22 +31,41 @@ public class ResultView {
 		printTotalProfitRate(winningStatistics.getRoundedTotalProfitRate());
 	}
 
-	private void printWinningRecords(List<WinningRecord> winningRecords) {
-		for (WinningRecord record : winningRecords) {
+	private void printWinningRecords(WinningRecords winningRecords) {
+		for (WinningRecord record : winningRecords.getValues()) {
 			WinningRank winningRank = record.getWinningRank();
 			System.out.println(MessageBuilder.build(WINNING_RANK_RECODE_RESULT_MESSAGE,
 													winningRank.getWinningNumberCount(),
+													decideWinningRecordBonusBallMessage(winningRank),
 													winningRank.getPrizeMoney(),
 													record.getCount()));
 		}
 	}
 
 	private void printTotalProfitRate(double totalProfitRate) {
-		System.out.println(MessageBuilder.build(TOTAL_PROFIT_RATE_MESSAGE, totalProfitRate));
+		System.out.println(MessageBuilder.build(TOTAL_PROFIT_RATE_MESSAGE,
+												totalProfitRate,
+												decideProfitOrLossStateMessage(totalProfitRate)));
+	}
+
+	private String decideWinningRecordBonusBallMessage(WinningRank winningRank) {
+		if (winningRank.isSecondPlace()) {
+			return WINNING_RANK_RECODE_RESULT_BONUS_BALL_MESSAGE;
+		}
+
+		return EMPTY_SPACE_MESSAGE;
+	}
+
+	private String decideProfitOrLossStateMessage(double totalProfitRate) {
+		if (Double.compare(totalProfitRate, PROFIT_CRITERIA) == 0) {
+			return NO_CHANGE_MESSAGE;
+		}
+
+		return Double.compare(totalProfitRate, PROFIT_CRITERIA) > 0 ? PROFIT_MESSAGE : LOSS_MESSAGE;
 	}
 
 	private void printLottoCount(Lottos lottos) {
-		System.out.println(MessageBuilder.build(LOTTO_COUNT_MESSAGE, lottos.getSize()));
+		System.out.println(MessageBuilder.build(LOTTO_COUNT_MESSAGE, lottos.size()));
 	}
 
 	private void newLine() {

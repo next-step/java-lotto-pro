@@ -1,37 +1,54 @@
 package lotto.domain;
 
-import static java.util.stream.Collectors.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class WinningStatistics {
-	private final Lottos lottos;
-	private final Money money;
-	private final List<WinningRecord> winningRecords;
+	private static final int PERCENT_COEFFICIENT = 100;
 
-	private WinningStatistics(Lottos lottos, Money money) {
+	private final Lottos lottos;
+	private final LottoNumbers lastWinningNumbers;
+	private final LottoNumber bonusNumber;
+	private final Money money;
+	private final WinningRecords winningRecords;
+
+	private WinningStatistics(Lottos lottos, LottoNumbers lastWinningNumbers, LottoNumber bonusNumber, Money money) {
 		this.lottos = lottos;
+		this.lastWinningNumbers = lastWinningNumbers;
+		this.bonusNumber = bonusNumber;
 		this.money = money;
-		this.winningRecords = new ArrayList<>();
+		this.winningRecords = WinningRecords.createDefault();
 	}
 
-	public static WinningStatistics createBy(Lottos lottos, Money money) {
-		return new WinningStatistics(lottos, money);
+	public static WinningStatistics createBy(Lottos lottos,
+											 LottoNumbers lastWinningNumbers,
+											 LottoNumber bonusNumber,
+											 Money money) {
+		return new WinningStatistics(lottos, lastWinningNumbers, bonusNumber, money);
 	}
 
 	public void buildStatistics() {
-		List<Lotto> winningLottos = extractWinningLottos(this.lottos);
-
 		for (WinningRank winningRank : WinningRank.getPlaceRanks()) {
-			int count = countNumberOfWinningRank(winningLottos, winningRank);
+			int count = countNumberOfWinningRank(winningRank);
 			this.winningRecords.add(WinningRecord.of(winningRank, count));
 		}
 	}
 
 	public double getRoundedTotalProfitRate() {
 		double totalProfitRate = calculateTotalProfitRate();
-		return Math.round(totalProfitRate * 100) / 100.0;
+		return Math.round(totalProfitRate * PERCENT_COEFFICIENT) / (double) PERCENT_COEFFICIENT;
+	}
+
+	private int countNumberOfWinningRank(WinningRank winningRank) {
+		return (int) this.lottos.getValues()
+								.stream()
+								.filter(lotto -> isSameWinningRank(lotto, winningRank))
+								.count();
+	}
+
+	private boolean isSameWinningRank(Lotto lotto, WinningRank winningRank) {
+		return winningRank.equals(WinningRank.valueOf(lotto.countWinningNumbers(lastWinningNumbers),
+													  lotto.hasBonusNumber(bonusNumber)));
 	}
 
 	private double calculateTotalProfitRate() {
@@ -43,28 +60,14 @@ public class WinningStatistics {
 
 	private long calculateTotalPrizeMoney() {
 		long totalProfile = 0L;
-		for (WinningRecord winningRecord : this.winningRecords) {
+		for (WinningRecord winningRecord : this.winningRecords.getValues()) {
 			totalProfile += winningRecord.getTotalPrizeMoney();
 		}
 
 		return totalProfile;
 	}
 
-	public List<WinningRecord> getWinningRecords() {
+	public WinningRecords getWinningRecords() {
 		return winningRecords;
-	}
-
-	private int countNumberOfWinningRank(List<Lotto> winningLottos, WinningRank winningRank) {
-		return (int)winningLottos.stream()
-								 .map(Lotto::getWinningNumbers)
-								 .filter(numbers -> numbers.getSize() == winningRank.getWinningNumberCount())
-								 .count();
-	}
-
-	private List<Lotto> extractWinningLottos(Lottos lottos) {
-		return lottos.getValues()
-					 .stream()
-					 .filter(Lotto::isWinning)
-					 .collect(toList());
 	}
 }
