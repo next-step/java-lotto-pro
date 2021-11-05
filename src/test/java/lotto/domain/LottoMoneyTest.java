@@ -1,9 +1,12 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoMoneyTest {
     @DisplayName("로또 구매 금액 - 숫자가 아니거나 음수 입력")
@@ -24,5 +27,13 @@ class LottoMoneyTest {
 
         assertThatThrownBy(() -> new LottoMoney("123456"))
             .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 구매 가능 갯수")
+    @ParameterizedTest
+    @CsvSource(value = {"1000,1", "2000,2", "12000, 12", "15000,15", "50000,50"})
+    void countOfPossibleLotto(String amount, int expected) {
+        LottoMoney lottoMoney = new LottoMoney(amount);
+        assertEquals(expected, lottoMoney.countOfPossibleLotto());
     }
 }

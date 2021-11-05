@@ -27,4 +27,8 @@ public class LottoMoney {
             throw new IllegalArgumentException(WRONG_LOTTO_AMOUNT_UNIT);
         }
     }
+
+    public int countOfPossibleLotto() {
+        return amount / LOTTO_AMOUNT_UNIT;
+    }
 }
