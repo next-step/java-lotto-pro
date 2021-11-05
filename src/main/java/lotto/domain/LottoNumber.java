@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static lotto.domain.Number.MAX_NUMBER;
 import static lotto.domain.Number.MIN_NUMBER;
@@ -24,17 +23,26 @@ public class LottoNumber {
         lottoNumbers = sortAsc(activeNumbers);
     }
 
+    public Rank getMatchRank(List<Number> matchNumbers, Number bonusNumber) {
+        int matchCount = 0;
+        boolean matchBonus = Collections.frequency(lottoNumbers, bonusNumber) > 0 ? true : false;
+        for (Number number : lottoNumbers) {
+            matchCount += Collections.frequency(matchNumbers, number);
+        }
+
+        return Rank.of(matchCount, matchBonus);
+    }
+
     private List<Number> getAutoLottoNumbers() {
         Set<Number> numbers = new HashSet<>();
         while (numbers.size() < LOTTO_SIZE) {
-            numbers.add(getRandomNumber());
+            numbers.add(new Number(getRandomNumber()));
         }
         return new ArrayList<>(numbers);
     }
 
-    private Number getRandomNumber() {
-        int randomNumber = generateRandomNumbers(MIN_NUMBER, MAX_NUMBER);
-        return new Number(randomNumber);
+    private int getRandomNumber() {
+        return generateRandomNumbers(MIN_NUMBER, MAX_NUMBER);
     }
 
     private void validateLottoNumbersSize(List<Number> activeNumbers) {
@@ -45,10 +53,6 @@ public class LottoNumber {
 
     private List<Number> sortAsc(List<Number> lottoNumbers) {
         Collections.sort(lottoNumbers);
-        return lottoNumbers;
-    }
-
-    public List<Number> getLottoNumber() {
         return lottoNumbers;
     }
 
