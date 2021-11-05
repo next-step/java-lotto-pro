@@ -44,4 +44,9 @@ class LottoNumber {
 	public int hashCode() {
 		return Objects.hash(getNumber());
 	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(number);
+	}
 }

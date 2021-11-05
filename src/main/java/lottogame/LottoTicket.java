@@ -1,6 +1,7 @@
 package lottogame;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -20,5 +21,16 @@ public class LottoTicket {
 
 	public int getNumOfNumbersInGroup() {
 		return lottoNumbers.size();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder lottoTicketToStrMaker = new StringBuilder();
+		lottoTicketToStrMaker.append('[');
+		lottoTicketToStrMaker.append(lottoNumbers.stream()
+			.map(lottoNumber -> lottoNumber.toString())
+			.collect(Collectors.joining(", ")));
+		lottoTicketToStrMaker.append(']');
+		return lottoTicketToStrMaker.toString();
 	}
 }

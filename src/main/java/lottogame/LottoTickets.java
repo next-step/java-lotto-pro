@@ -1,6 +1,7 @@
 package lottogame;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -14,7 +15,14 @@ public class LottoTickets {
 		return lottoTickets;
 	}
 
-	public int getNumOfTickets(){
+	public int getNumOfTickets() {
 		return lottoTickets.size();
+	}
+
+	@Override
+	public String toString() {
+		return lottoTickets.stream()
+			.map(lottoTicket -> lottoTicket.toString())
+			.collect(Collectors.joining("\n"));
 	}
 }
