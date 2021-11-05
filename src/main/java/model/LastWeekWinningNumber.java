@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class LastWeekWinningNumber {
 	private static final String NUMBER_REGEX = "^[0-9]+$";
@@ -27,16 +28,26 @@ public class LastWeekWinningNumber {
 
 		return Arrays.stream(strings)
 			.allMatch(string -> string.matches(NUMBER_REGEX))
-			&& isNotDuplicatedNumber(strings);
+			&& isValidNumber(strings);
 	}
 
-	private static boolean isNotDuplicatedNumber(String[] strings) {
-		int numbersCount = Arrays.stream(strings)
+	private static boolean isValidNumber(String[] strings) {
+		Set<Integer> numbers = Arrays.stream(strings)
 			.map(Integer::parseInt)
-			.collect(toSet())
-			.size();
+			.collect(toSet());
 
-		return numbersCount == Lotto.NUMBER_COUNT;
+		return isNotDuplicatedNumber(numbers) && isValidLottoNumber(numbers);
+	}
+
+	private static boolean isNotDuplicatedNumber(Set<Integer> numbers) {
+		return numbers.size() == Lotto.NUMBER_COUNT;
+	}
+
+	private static boolean isValidLottoNumber(Set<Integer> numbers) {
+		return
+			numbers.stream().allMatch(
+				number -> number.compareTo(Lotto.MIN_NUMBER) >= 0 && number.compareTo(Lotto.MAX_NUMBER) <= 0
+			);
 	}
 
 	public static LastWeekWinningNumber of(String lastWeekWinningNumber) {
