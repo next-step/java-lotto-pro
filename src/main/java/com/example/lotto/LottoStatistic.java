@@ -33,11 +33,7 @@ public class LottoStatistic {
 
 	private void addResultsToLottoRankToCount(LottoGames lottoGames, WinningLottoNumbers winningLottoNumbers) {
 		this.lottoRankToCount.putAll(lottoGames.getValues().stream()
-			.map(lottoGame -> {
-				int matchCount = LottoNumbers.match(lottoGame.getLottoNumbers(), winningLottoNumbers.getBaseNumbers());
-				boolean matchBonus = lottoGame.getLottoNumbers().contains(winningLottoNumbers.getBonusNumber());
-				return LottoRank.valueOf(matchCount, matchBonus);
-			})
+			.map(lottoGame -> lottoGame.rank(winningLottoNumbers))
 			.filter(lottoRank -> !lottoRank.isMiss())
 			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
 	}

@@ -31,7 +31,7 @@ public class LottoController {
 		OutputView.print("보너스 볼을 입력해 주세요.");
 		LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusWinningLottoNumber());
 
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(baseNumbers, bonusNumber);
+		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(baseNumbers, bonusNumber);
 		LottoStatistic lottoStatistic = new LottoStatistic(purchaseAmount, lottoGames, winningLottoNumbers);
 		OutputView.print(lottoStatistic.toString());
 	}

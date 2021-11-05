@@ -20,6 +20,13 @@ public class LottoGame {
 		return new LottoGame(LottoNumbers.of(numbers));
 	}
 
+	public LottoRank rank(WinningLottoNumbers winningLottoNumbers) {
+		int countOfMatch = LottoNumbers.match(lottoNumbers, winningLottoNumbers.getBaseNumbers());
+		boolean matchBonus = lottoNumbers.contains(winningLottoNumbers.getBonusNumber());
+
+		return LottoRank.valueOf(countOfMatch, matchBonus);
+	}
+
 	public LottoNumbers getLottoNumbers() {
 		return lottoNumbers;
 	}

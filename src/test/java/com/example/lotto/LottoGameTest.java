@@ -41,6 +41,37 @@ class LottoGameTest {
 		);
 	}
 
+	private static Stream<Arguments> rankArguments() {
+		NumbersGenerator dummyNumbersGenerator = (from, to, size) -> Arrays.asList(1, 2, 3, 4, 5, 6);
+
+		return Stream.of(
+			Arguments.of(
+				LottoGame.of(dummyNumbersGenerator),
+				WinningLottoNumbers.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(45)),
+				LottoRank.FIRST),
+			Arguments.of(
+				LottoGame.of(dummyNumbersGenerator),
+				WinningLottoNumbers.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoNumber.of(6)),
+				LottoRank.SECOND),
+			Arguments.of(
+				LottoGame.of(dummyNumbersGenerator),
+				WinningLottoNumbers.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoNumber.of(45)),
+				LottoRank.THIRD),
+			Arguments.of(
+				LottoGame.of(dummyNumbersGenerator),
+				WinningLottoNumbers.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 7, 8)), LottoNumber.of(45)),
+				LottoRank.FOURTH),
+			Arguments.of(
+				LottoGame.of(dummyNumbersGenerator),
+				WinningLottoNumbers.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 7, 8, 9)), LottoNumber.of(45)),
+				LottoRank.FIFTH),
+			Arguments.of(
+				LottoGame.of(dummyNumbersGenerator),
+				WinningLottoNumbers.of(LottoNumbers.of(Arrays.asList(1, 2, 7, 8, 9, 10)), LottoNumber.of(45)),
+				LottoRank.MISS)
+		);
+	}
+
 	@DisplayName("로또 게임의 가격은 1000원이다.")
 	@Test
 	void price() {
@@ -69,5 +100,13 @@ class LottoGameTest {
 		// given & when & then
 		assertThatThrownBy(() -> LottoGame.of((from, to, size) -> numbers))
 			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("로또 순위를 구한다.")
+	@ParameterizedTest
+	@MethodSource("rankArguments")
+	void rank(LottoGame lottoGame, WinningLottoNumbers winningLottoNumbers, LottoRank lottoRank) {
+		// given & when & then
+		assertThat(lottoGame.rank(winningLottoNumbers)).isEqualTo(lottoRank);
 	}
 }
