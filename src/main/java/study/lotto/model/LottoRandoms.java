@@ -17,10 +17,7 @@ public class LottoRandoms {
 
     public static Set<LottoNumber> getLottoRandomNumbers() {
         Collections.shuffle(lottoNumbers);
-        final Set<LottoNumber> l = new HashSet<>();
-        for (int i = 0; i < Lottery.LOTTO_NUMBER_COUNT; i++) {
-            l.add(lottoNumbers.get(i));
-        }
-        return Collections.unmodifiableSet(l);
+        final List<LottoNumber> lottoNumbers = LottoRandoms.lottoNumbers.subList(0, Lottery.LOTTO_NUMBER_COUNT);
+        return Collections.unmodifiableSet(new HashSet<>(lottoNumbers));
     }
 }

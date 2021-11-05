@@ -38,9 +38,9 @@ public enum Rank {
 
     }
 
-    public static List<Rank> getRanksOrderByWinningMoneyDesc() {
+    public static List<Rank> getRanksOrderByWinningMoney() {
         return Arrays.stream(Rank.values())
-                .sorted(Comparator.comparing(Rank::getWinningMoney).reversed())
+                .sorted(Comparator.comparing(Rank::getWinningMoney))
                 .collect(Collectors.toList());
     }
 //    private static void validateCountOfMatch(final int countOfMatch) {
