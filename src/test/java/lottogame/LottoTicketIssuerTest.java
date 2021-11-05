@@ -17,7 +17,7 @@ public class LottoTicketIssuerTest {
 	@CsvSource(value = {"1000:1", "10000:10"}, delimiter = ':')
 	public void buyTickets_금액에_따라_티켓발급(int money, int numOfTickets) {
 		LottoTickets lottoTickets = LottoTicketIssuer.buyTickets(money);
-		Assertions.assertThat(lottoTickets.getNumOftickets()).isEqualTo(numOfTickets);
+		Assertions.assertThat(lottoTickets.getNumOfTickets()).isEqualTo(numOfTickets);
 	}
 
 	@ParameterizedTest
@@ -40,7 +40,7 @@ public class LottoTicketIssuerTest {
 	@CsvSource(value = {"1000:1", "10000:10","00011000:11"}, delimiter = ':')
 	public void buyTickets_금액을_문자열로_입력받은경우_처리(String money, int numOfTickets) {
 		LottoTickets lottoTickets = LottoTicketIssuer.buyTickets(money);
-		Assertions.assertThat(lottoTickets.getNumOftickets()).isEqualTo(numOfTickets);
+		Assertions.assertThat(lottoTickets.getNumOfTickets()).isEqualTo(numOfTickets);
 	}
 
 	@ParameterizedTest
