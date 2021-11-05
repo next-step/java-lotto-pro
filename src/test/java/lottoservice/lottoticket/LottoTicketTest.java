@@ -3,6 +3,7 @@ package lottoservice.lottoticket;
 import static org.assertj.core.api.Assertions.*;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import lottoservice.lottoticket.LottoTicket;
@@ -14,6 +15,7 @@ public class LottoTicketTest {
 	private static final int SIZE_OF_LOTTERY_NUMBERS = 6;
 
 	@Test
+	@RepeatedTest(10)
 	public void makeLottoTicket_로또_티켓_한장_발급() {
 		LottoTicket lottoTicket = new LottoTicket();
 
