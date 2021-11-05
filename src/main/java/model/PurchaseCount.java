@@ -5,7 +5,7 @@ import java.util.Objects;
 public class PurchaseCount {
 	private int value;
 
-	public PurchaseCount(int value) {
+	PurchaseCount(int value) {
 		this.value = value;
 	}
 
