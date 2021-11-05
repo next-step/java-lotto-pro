@@ -108,7 +108,7 @@ class LottoResultTest {
 		LottoResult lottoResult = new LottoResult();
 
 		// when
-		double yield = lottoResult.calcularateYield(winningLottoNumbers, lottoGenerator);
+		double yield = lottoResult.calculateYield(winningLottoNumbers, lottoGenerator);
 
 		// then
 		assertThat(yield).isEqualTo(yieldResult);

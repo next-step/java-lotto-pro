@@ -54,7 +54,7 @@ public class LottoResult {
 		return rankMap;
 	}
 
-	public double calcularateYield(WinningLottoNumbers winningLottoNumbers, LottoGenerator lottoGenerator) {
+	public double calculateYield(WinningLottoNumbers winningLottoNumbers, LottoGenerator lottoGenerator) {
 		int sum = DEFAULT_VALUE;
 		Map<RankCode, Integer> rankMap = getRankCodeMapUsingContainsMap(winningLottoNumbers, lottoGenerator);
 
