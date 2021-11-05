@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 //로또 발급 개수와 관련된 역할을 가진 클래스
@@ -15,6 +17,15 @@ public class LottoIssuanceCount {
         purchaseAmountOneThousandWonUnitValid(purchaseAmount);
         int issuanceCount = purchaseAmount / LottoProperty.LOTTO_PRICE;
         return new LottoIssuanceCount(issuanceCount);
+    }
+
+    //TODO : 질문1
+    public List<Lotto> createLotto() {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i=0; i<this.issuanceCount; i++) {
+            lottos.add(new Lotto(LottoNumber.generator()));
+        }
+        return lottos;
     }
 
     private static void purchaseAmountOneThousandWonUnitValid(int purchaseAmount) {
