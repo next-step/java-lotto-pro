@@ -29,8 +29,14 @@ public class Lottos {
         return lottos.size();
     }
 
-    public WinResults getWinResults(List<Integer> winNumbers) {
-        return WinResults.of(lottos, winNumbers);
+    public WinResults getWinResults(Lotto winNumber) {
+        return WinResults.of(lottos, winNumber);
+    }
+
+    public void print() {
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto);
+        }
     }
 
     @Override

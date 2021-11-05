@@ -24,6 +24,10 @@ public enum WinResult {
                 .orElse(null);
     }
 
+    public int getCount() {
+        return count;
+    }
+
     public int getPrize() {
         return prize;
     }

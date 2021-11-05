@@ -16,8 +16,8 @@ public class Lotto {
         this.lottoNumbers = mapToLottoNumbers(numbers);
     }
 
-    public WinResult getWinResult(Lotto winNumbers) {
-        int matchedCount = (int) winNumbers.lottoNumbers
+    public WinResult getWinResult(Lotto winNumber) {
+        int matchedCount = (int) winNumber.lottoNumbers
                 .stream()
                 .map(lottoNumbers::contains)
                 .filter(isContained -> isContained)
