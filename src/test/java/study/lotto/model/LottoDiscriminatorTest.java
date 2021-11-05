@@ -1,0 +1,44 @@
+package study.lotto.model;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.Arrays;
+import java.util.HashSet;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class LottoDiscriminatorTest {
+
+    WinningLottery winningLottery;
+
+    @BeforeEach
+    void setUp() {
+        final HashSet<LottoNumber> winningLottoNumber =
+                new HashSet<>(Arrays.asList(
+                        LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))
+                );
+        winningLottery = WinningLottery.valueOf(winningLottoNumber);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:2:3:4:5:6:6", "7:2:3:4:5:6:5", "7:8:3:4:5:6:4", "7:8:9:4:5:6:3", "7:9:10:22:32:45:0"}, delimiterString = ":")
+    void 당첨_로또복권_와_당첨번호_와_비교하여_당첨등수_를_확인할_수_있다(
+            final int ticketLottoNumber1, final int ticketLottoNumber2, final int ticketLottoNumber3,
+            final int ticketLottoNumber4, final int ticketLottoNumber5, final int ticketLottoNumber6,
+            final int countOfMatch) {
+
+        final HashSet<LottoNumber> ticketLottoNumbers =
+                new HashSet<>(Arrays.asList(
+                        LottoNumber.valueOf(ticketLottoNumber1), LottoNumber.valueOf(ticketLottoNumber2), LottoNumber.valueOf(ticketLottoNumber3),
+                        LottoNumber.valueOf(ticketLottoNumber4), LottoNumber.valueOf(ticketLottoNumber5), LottoNumber.valueOf(ticketLottoNumber6))
+                );
+
+        final TicketLottery ticketLottery = TicketLottery.valueOf(ticketLottoNumbers);
+
+        final Rank rank = LottoDiscriminator.referee(winningLottery, ticketLottery);
+        assertThat(rank).isEqualTo(Rank.valueOf(countOfMatch));
+    }
+}
