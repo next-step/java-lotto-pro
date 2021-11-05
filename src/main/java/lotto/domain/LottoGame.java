@@ -9,11 +9,11 @@ public class LottoGame {
         LottoPurchase lottoPurchase = getPurchaseAmount();
         Lottos lottos = new Lottos(LottoIssue.ofAuto(lottoPurchase.getPurchaseQuantity()));
         printLottoNumber(lottos);
-        LottoWinningNumbers lottoWinningNumbers = getWinningNumbers();
+        LottoNumbers lottoWinningNumbers = getWinningNumbers();
     }
 
-    private LottoWinningNumbers getWinningNumbers() {
-        return new LottoWinningNumbers(inputWinningNumbers());
+    private LottoNumbers getWinningNumbers() {
+        return new LottoNumbers(inputWinningNumbers());
     }
 
     private LottoPurchase getPurchaseAmount() {
