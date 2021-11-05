@@ -16,14 +16,14 @@ class WinnerLottoGeneratorTest {
 	@DisplayName("객체화")
 	void instance() {
 		assertThatNoException()
-			.isThrownBy(() -> WinnerLottoGenerator.of(mock(StringsProvider.class), defaultLottoRule()));
+			.isThrownBy(() -> WinnerLottoGenerator.of(mock(StringsProvider.class), "10", defaultLottoRule()));
 	}
 
 	@Test
 	@DisplayName("문자열 제공자 없이 객체화하면 IllegalArgumentException")
 	void instance_nullProvider_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> WinnerLottoGenerator.of(null, defaultLottoRule()))
+			.isThrownBy(() -> WinnerLottoGenerator.of(null, "10", defaultLottoRule()))
 			.withMessage("'stringsProvider' must not be null");
 	}
 
@@ -31,7 +31,7 @@ class WinnerLottoGeneratorTest {
 	@DisplayName("규칙 없이 객체화하면 IllegalArgumentException")
 	void instance_nullRule_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> WinnerLottoGenerator.of(mock(StringsProvider.class), null))
+			.isThrownBy(() -> WinnerLottoGenerator.of(mock(StringsProvider.class), "10", null))
 			.withMessage("'rule' must not be null");
 	}
 
@@ -39,29 +39,48 @@ class WinnerLottoGeneratorTest {
 	@DisplayName("정상적인 로또 생성")
 	void lotto() {
 		//given
-		StringsProvider mockProvider = mock(StringsProvider.class);
-		when(mockProvider.provide())
+		StringsProvider mockStringsProvider = mock(StringsProvider.class);
+		when(mockStringsProvider.provide())
 			.thenReturn(Arrays.asList("1", "2", "3", "4", "5", "6"));
 
 		//when
-		Lotto lotto = WinnerLottoGenerator.of(mockProvider, defaultLottoRule())
+		WinnerLotto lotto = WinnerLottoGenerator.of(mockStringsProvider, "10", defaultLottoRule())
 			.lotto();
 
 		//then
-		assertThat(lotto.toString())
+		assertThat(lotto.numbers())
 			.hasToString("1, 2, 3, 4, 5, 6");
 	}
 
 	@Test
-	@DisplayName("숫자형태의 문자가 아닌 로또를 생성할 경우 IllegalArgumentException")
+	@DisplayName("주어지는 문자가 숫자 형태가 아닌 로또를 생성할 경우 IllegalArgumentException")
 	void lotto_notNumberString_thrownIllegalArgumentException() {
 		//given
-		StringsProvider mockProvider = mock(StringsProvider.class);
-		when(mockProvider.provide())
+		StringsProvider mockStringsProvider = mock(StringsProvider.class);
+		when(mockStringsProvider.provide())
 			.thenReturn(Arrays.asList("", "a", "b"));
 
 		//when
-		ThrowingCallable lottoCall = () -> WinnerLottoGenerator.of(mockProvider, defaultLottoRule()).lotto();
+		ThrowingCallable lottoCall = () -> WinnerLottoGenerator.of(mockStringsProvider, "10",
+			defaultLottoRule()).lotto();
+
+		//then
+		assertThatIllegalArgumentException()
+			.isThrownBy(lottoCall)
+			.withMessageContaining("can not be changed to number");
+	}
+
+	@Test
+	@DisplayName("보너스 문자가 숫자가 아닌 로또를 생성할 경우 IllegalArgumentException")
+	void lotto_bonusNotNumberString_thrownIllegalArgumentException() {
+		//given
+		StringsProvider mockStringsProvider = mock(StringsProvider.class);
+		when(mockStringsProvider.provide())
+			.thenReturn(Arrays.asList("1", "2", "3", "4", "5", "6"));
+
+		//when
+		ThrowingCallable lottoCall = () -> WinnerLottoGenerator.of(mockStringsProvider, "a",
+			defaultLottoRule()).lotto();
 
 		//then
 		assertThatIllegalArgumentException()
@@ -78,7 +97,7 @@ class WinnerLottoGeneratorTest {
 			.thenReturn(Arrays.asList("1", "2", "3", "4"));
 
 		//when
-		ThrowingCallable lottoCall = () -> WinnerLottoGenerator.of(mockProvider, defaultLottoRule()).lotto();
+		ThrowingCallable lottoCall = () -> WinnerLottoGenerator.of(mockProvider, "10", defaultLottoRule()).lotto();
 
 		//then
 		assertThatIllegalArgumentException()

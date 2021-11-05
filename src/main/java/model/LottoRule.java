@@ -44,7 +44,7 @@ public class LottoRule {
 		return ints;
 	}
 
-	public boolean invalidNumber(int target) {
+	public boolean outOfRange(int target) {
 		return lessThanMinValue(target) || moreThanMaxValue(target);
 	}
 

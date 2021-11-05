@@ -2,6 +2,7 @@ package model;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +34,13 @@ class RandomLottoMachineTest {
 			.lotto();
 
 		//then
-		assertThat(lotto.size())
-			.isEqualTo(lottoRule.count());
+		assertThat(lotto)
+			.isInstanceOf(LottoPaper.class)
+			.extracting("lottoNumbers")
+			.isInstanceOf(LottoNumbers.class)
+			.extracting("collection", InstanceOfAssertFactories.LIST)
+			.hasSize(6)
+			.doesNotHaveDuplicates();
 	}
 
 	private LottoRule defaultLottoRule() {

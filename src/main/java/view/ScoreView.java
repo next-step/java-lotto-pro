@@ -7,7 +7,7 @@ import model.Score;
 
 public final class ScoreView {
 
-	private static final String RANK_COUNT_FORMAT = "%d개 일치 (%d원)- %d개";
+	private static final String RANK_COUNT_FORMAT = "%s- %d개";
 
 	private final PrintStream printer;
 
@@ -20,6 +20,7 @@ public final class ScoreView {
 	}
 
 	public void view(Score score) {
+		printRank(score, LottoRank.FIFTH);
 		printRank(score, LottoRank.FOURTH);
 		printRank(score, LottoRank.THIRD);
 		printRank(score, LottoRank.SECOND);
@@ -27,7 +28,7 @@ public final class ScoreView {
 	}
 
 	private void printRank(Score score, LottoRank rank) {
-		printer.printf(RANK_COUNT_FORMAT, rank.matchCount(), rank.prizeMoney(), score.count(rank));
+		printer.printf(RANK_COUNT_FORMAT, rank, score.count(rank));
 		printer.println();
 	}
 }

@@ -50,7 +50,7 @@ class ScoreTest {
 
 		//then
 		assertThat(money)
-			.isEqualTo(Money.from(2003170000));
+			.isEqualTo(Money.from(2064700000));
 	}
 
 	private List<LottoRank> ranks() {

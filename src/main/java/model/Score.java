@@ -29,7 +29,7 @@ public final class Score {
 		calculateCount();
 		int sum = 0;
 		for (Map.Entry<LottoRank, Integer> entry : rankCount.entrySet()) {
-			sum += entry.getKey().prizeMoney() * entry.getValue();
+			sum += entry.getKey().multipliedPrizeMoney(entry.getValue());
 		}
 		return Money.from(sum);
 	}

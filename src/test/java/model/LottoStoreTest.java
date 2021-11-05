@@ -53,12 +53,12 @@ class LottoStoreTest {
 			.thenReturn(mock(Lotto.class));
 
 		//when
-		Lottos lottos = LottoStore.of(Money.from(initialMoney),
+		LottoPapers lottoPapers = LottoStore.of(Money.from(initialMoney),
 			oneHundredMoney(), mock(LottoGenerator.class))
-			.lottos();
+			.lottoPapers();
 
 		//then
-		assertThat(lottos.size())
+		assertThat(lottoPapers.size())
 			.isEqualTo(expectedSize);
 	}
 

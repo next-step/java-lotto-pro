@@ -1,6 +1,6 @@
 package model;
 
-interface LottoGenerator {
+interface LottoGenerator<T extends Lotto> {
 
-	Lotto lotto();
+	T lotto();
 }

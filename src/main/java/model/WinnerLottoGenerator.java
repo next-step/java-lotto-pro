@@ -2,25 +2,28 @@ package model;
 
 import java.util.HashSet;
 
-public final class WinnerLottoGenerator implements LottoGenerator {
+public final class WinnerLottoGenerator implements LottoGenerator<WinnerLotto> {
 
 	private final StringsProvider provider;
+	private final String bonus;
 	private final LottoRule rule;
 
-	private Lotto cachedLotto;
+	private WinnerLotto cachedLotto;
 
-	private WinnerLottoGenerator(StringsProvider provider, LottoRule rule) {
-		validate(provider);
-		validate(rule);
+	private WinnerLottoGenerator(StringsProvider provider, String bonus, LottoRule rule) {
+		validateNonNull(provider, "'stringsProvider' must not be null");
+		validateNonNull(bonus, "'bonus' must not be null");
+		validateNonNull(rule, "'rule' must not be null");
 		this.provider = provider;
+		this.bonus = bonus;
 		this.rule = rule;
 	}
 
-	public static WinnerLottoGenerator of(StringsProvider provider, LottoRule rule) {
-		return new WinnerLottoGenerator(provider, rule);
+	public static WinnerLottoGenerator of(StringsProvider numbersProvider, String bonusString, LottoRule rule) {
+		return new WinnerLottoGenerator(numbersProvider, bonusString, rule);
 	}
 
-	public Lotto lotto() {
+	public WinnerLotto lotto() {
 		return cachedLotto();
 	}
 
@@ -33,20 +36,24 @@ public final class WinnerLottoGenerator implements LottoGenerator {
 			'}';
 	}
 
-	private Lotto cachedLotto() {
+	private WinnerLotto cachedLotto() {
 		if (cachedLotto == null) {
 			cachedLotto = newLotto();
 		}
 		return cachedLotto;
 	}
 
-	private Lotto newLotto() {
+	private WinnerLotto newLotto() {
 		HashSet<LottoNumber> lottoNumbers = new HashSet<>();
 		for (String stringNumber : provider.provide()) {
-			lottoNumbers.add(LottoNumber.from(parseValidInt(stringNumber)));
+			lottoNumbers.add(lottoNumber(stringNumber));
 		}
 		validateSize(lottoNumbers);
-		return Lotto.from(lottoNumbers);
+		return WinnerLotto.from(LottoNumbers.from(lottoNumbers), lottoNumber(bonus));
+	}
+
+	private LottoNumber lottoNumber(String stringNumber) {
+		return LottoNumber.from(parseValidInt(stringNumber));
 	}
 
 	private void validateSize(HashSet<LottoNumber> numbers) {
@@ -58,7 +65,7 @@ public final class WinnerLottoGenerator implements LottoGenerator {
 
 	private int parseValidInt(String stringNumber) {
 		int number = parseInt(stringNumber);
-		if (rule.invalidNumber(number)) {
+		if (rule.outOfRange(number)) {
 			throw new IllegalArgumentException(
 				String.format("number(%s) must be between min(%d) and max(%d)", stringNumber, rule.minNumber(),
 					rule.maxNumber()));
@@ -74,15 +81,9 @@ public final class WinnerLottoGenerator implements LottoGenerator {
 		}
 	}
 
-	private void validate(StringsProvider provider) {
-		if (provider == null) {
-			throw new IllegalArgumentException("'stringsProvider' must not be null");
-		}
-	}
-
-	private void validate(LottoRule rule) {
-		if (rule == null) {
-			throw new IllegalArgumentException("'rule' must not be null");
+	private void validateNonNull(Object target, String message) {
+		if (target == null) {
+			throw new IllegalArgumentException(message);
 		}
 	}
 }

@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public final class RandomLottoMachine implements LottoGenerator {
+public final class RandomLottoMachine implements LottoGenerator<LottoPaper> {
 
 	private final LottoRule rule;
 	private List<LottoNumber> numberList;
@@ -20,8 +20,8 @@ public final class RandomLottoMachine implements LottoGenerator {
 	}
 
 	@Override
-	public Lotto lotto() {
-		return Lotto.from(sortedNumbers(pickNumbers(shuffledNumbers())));
+	public LottoPaper lotto() {
+		return LottoPaper.from(sortedNumbers(pickNumbers(shuffledNumbers())));
 	}
 
 	@Override

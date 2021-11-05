@@ -75,7 +75,7 @@ class LottoRuleTest {
 	void invalidNumber(int target, boolean expected) {
 		//when
 		boolean invalid = LottoRule.of(1, 45, 10)
-			.invalidNumber(target);
+			.outOfRange(target);
 
 		//then
 		assertThat(invalid)
