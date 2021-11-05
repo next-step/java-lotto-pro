@@ -18,4 +18,8 @@ public class Money {
 	private boolean isDefaultMoneyLessThen(int money) {
 		return money < DEFAULT_MONEY;
 	}
+
+	public int buyCount() {
+		return Math.floorDiv(money, DEFAULT_MONEY);
+	}
 }
