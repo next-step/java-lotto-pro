@@ -19,6 +19,8 @@ public class LottoGame {
     private void play(LottoPurchase lottoPurchase, Lottos lottos, LottoNumbers lottoWinningNumbers) {
         lottos.compareWinningNumbers(lottoWinningNumbers);
         double rateOfReturn = lottos.getRateOfReturn(lottoPurchase);
+        printWinningStatistics(lottos);
+        printRateOfReturn(rateOfReturn);
     }
 
     private LottoNumbers getWinningNumbers() {
