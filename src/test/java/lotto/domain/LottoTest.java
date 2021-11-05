@@ -35,7 +35,7 @@ class LottoTest {
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
-                .withMessageMatching(ErrorMessage.LOTTO_NUMBER_SIZE_ERROR.getMessage());
+                .withMessageMatching(Message.LOTTO_NUMBER_SIZE_ERROR.getMessage());
     }
 
     @Test
@@ -47,7 +47,7 @@ class LottoTest {
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
-                .withMessageMatching(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
+                .withMessageMatching(Message.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
     }
 
     @ParameterizedTest(name = "{displayName} - {arguments}")

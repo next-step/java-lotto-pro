@@ -16,7 +16,7 @@ public class LottoNumber {
 
     private void validate(int number) {
         if (!isValidNumber(number)) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR.getMessage());
+            throw new IllegalArgumentException(Message.LOTTO_NUMBER_BOUND_ERROR.getMessage());
         }
     }
 

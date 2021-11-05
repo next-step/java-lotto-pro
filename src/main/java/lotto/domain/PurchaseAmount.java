@@ -16,7 +16,7 @@ public class PurchaseAmount {
     private void validate(int amount) {
         if (amount < LottoCalculator.LOTTO_PRICE) {
             throw new IllegalArgumentException(
-                    String.format("로또 구매 금액은 %d원 이상이어야 합니다.", LottoCalculator.LOTTO_PRICE));
+                    String.format(Message.PURCHASE_AMOUNT_MIN_ERROR.getMessage(), LottoCalculator.LOTTO_PRICE));
         }
     }
 }

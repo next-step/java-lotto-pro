@@ -22,7 +22,7 @@ public class LottoCalculator {
 
     public Prints getLottosPrints() {
         Prints prints = new Prints();
-        prints.append(String.format("%d개를 구매했습니다.", getLottosSize()));
+        prints.append(String.format(Message.LOTTOS_PRINT.getMessage(), getLottosSize()));
         prints.append(lottos.getLottosPrints());
         return prints;
     }
@@ -36,7 +36,7 @@ public class LottoCalculator {
 
     private void appendWinResults(Prints prints) {
         for (WinResult winResult : WinResult.values()) {
-            prints.append(String.format("%d개 일치 (%d원) - %d개",
+            prints.append(String.format(Message.WIN_RESULTS_PRINT.getMessage(),
                     winResult.getCount(), winResult.getPrize(), winResults.getCount(winResult.getCount())));
         }
     }
@@ -44,13 +44,13 @@ public class LottoCalculator {
     private void appendProceeds(Prints prints) {
         float proceedsRate = (float) winResults.getProceeds() / ((float) getLottosSize() * LOTTO_PRICE);
         String comment = getComment(proceedsRate);
-        prints.append(String.format("총 수익률은 %.2f입니다.%s", proceedsRate, comment));
+        prints.append(String.format(Message.PROCEEDS_PRINT.getMessage(), proceedsRate, comment));
     }
 
     private String getComment(float proceedsRate) {
         String comment = "";
         if (proceedsRate < PROFIT_RATE) {
-            comment = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+            comment = Message.PROCEEDS_COMMENT.getMessage();
         }
         return comment;
     }

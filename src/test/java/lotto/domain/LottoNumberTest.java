@@ -36,6 +36,6 @@ class LottoNumberTest {
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoNumber(input))
-                .withMessageMatching(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR.getMessage());
+                .withMessageMatching(Message.LOTTO_NUMBER_BOUND_ERROR.getMessage());
     }
 }
