@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class LottoNumbers {
 	private final Set<LottoNumber> lottoNumbers;
-	private final int LOTTO_NUMBER_MAX = 6;
+	public static final int LOTTO_NUMBER_MAX = 6;
 
 	public LottoNumbers(Set<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
@@ -17,12 +17,12 @@ public class LottoNumbers {
 		this.lottoNumbers = new HashSet<>();
 	}
 
-	public Set<LottoNumber> createLottoNumbers() {
+	public LottoNumbers createLottoNumbers() {
 		for (int i = 0; i < LOTTO_NUMBER_MAX; i++) {
 			validation();
 			lottoNumbers.add(new LottoNumber(RandomUtils.pick()));
 		}
-		return this.lottoNumbers;
+		return new LottoNumbers(this.lottoNumbers);
 	}
 
 	private void validation() {
