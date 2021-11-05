@@ -36,6 +36,10 @@ public enum Rank {
         return this.equals(rank);
     }
 
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
+
     @Override
     public String toString() {
         return matchCount + "개 일치 " + (this.equals(Rank.SECOND_BONUS) ? ", 보너스 볼 일치" : "")
