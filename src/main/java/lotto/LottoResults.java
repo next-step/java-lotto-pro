@@ -1,13 +1,18 @@
 package lotto;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 
 public class LottoResults {
-    private final List<LottoResult> lottoResults;
+    private final Map<LottoResult, Integer> resultCounts;
 
     public LottoResults(List<LottoResult> lottoResults) {
-        this.lottoResults = lottoResults;
+        this.resultCounts = lottoResults.stream()
+            .collect(groupingBy(Function.identity(), reducing(0, e -> 1, Integer::sum)));
     }
 
     @Override
@@ -19,11 +24,11 @@ public class LottoResults {
             return false;
         }
         LottoResults that = (LottoResults)o;
-        return Objects.equals(lottoResults, that.lottoResults);
+        return Objects.equals(resultCounts, that.resultCounts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoResults);
+        return Objects.hash(resultCounts);
     }
 }
