@@ -1,10 +1,13 @@
+package calculator.domain;
+
+import calculator.exception.NotPermittedPatternException;
+
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PositiveNumber {
     private static final Pattern POSITIVE_NUMBER_PATTERN = Pattern.compile("^\\d+");
-    private static final String NOT_PERMITTED_PATTERN_EXCEPTION_STATEMENT = "허용되는 패턴이 아닙니다.(음수, 문자열)";
 
     private final int positiveNumber;
 
@@ -15,7 +18,7 @@ public class PositiveNumber {
 
     private PositiveNumber(String positiveNumber) {
         validate(positiveNumber);
-        this.positiveNumber = Integer.valueOf(positiveNumber);
+        this.positiveNumber = Integer.parseInt(positiveNumber);
     }
 
     public static PositiveNumber from(String positiveNumber) {
@@ -25,7 +28,7 @@ public class PositiveNumber {
     private void validate(String number) {
         Matcher matcher = POSITIVE_NUMBER_PATTERN.matcher(number);
         if (!matcher.find()) {
-            throw new RuntimeException(NOT_PERMITTED_PATTERN_EXCEPTION_STATEMENT);
+            throw new NotPermittedPatternException(number);
         }
     }
 
