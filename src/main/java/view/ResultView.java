@@ -1,6 +1,7 @@
 package view;
 
 import static java.util.stream.Collectors.*;
+import static view.ResultMessage.*;
 
 import java.math.BigDecimal;
 
@@ -12,15 +13,9 @@ import model.PurchaseCount;
 
 public class ResultView {
 
-	public static final String PURCHASE_MESSAGE = "%s개를 구매했습니다.";
-	public static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
-	public static final String LINE = "---------";
-	public static final String THREE_MATCH_MESSAGE = "3개 일치 (%d원)- %d개";
-	public static final String FOUR_MATCH_MESSAGE = "4개 일치 (%d원)- %d개";
-	public static final String FIVE_MATCH_MESSAGE = "5개 일치 (%d원)- %d개";
-	public static final String SIX_MATCH_MESSAGE = "6개 일치 (%d원)- %d개";
-	public static final String EARNINGS_RATE_MESSAGE = "총 수익률은 %f입니다.";
-	public static final String EARNINGS_RATE_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+	public static final String COMMA_AND_SPACE_DELIMITER = ", ";
+	public static final String OPEN_SQUARE_BRACKET = "[";
+	public static final String CLOSE_SQUARE_BRACKET = "]";
 
 	public void printPurchaseVolumeMessage(PurchaseCount purchaseVolume) {
 		System.out.println(String.format(PURCHASE_MESSAGE, purchaseVolume.toString()));
@@ -68,7 +63,7 @@ public class ResultView {
 		return lotto.getNumbers()
 			.stream()
 			.map(String::valueOf)
-			.collect(joining(", ", "[", "]"));
+			.collect(joining(COMMA_AND_SPACE_DELIMITER, OPEN_SQUARE_BRACKET, CLOSE_SQUARE_BRACKET));
 	}
 
 	private void nextLine() {
