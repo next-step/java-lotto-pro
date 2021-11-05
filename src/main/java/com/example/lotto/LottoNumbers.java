@@ -10,14 +10,20 @@ public class LottoNumbers {
 
 	private final List<LottoNumber> values;
 
-	public LottoNumbers(List<Integer> numbers) {
+	private LottoNumbers(List<LottoNumber> numbers) {
+		this.values = numbers;
+	}
+
+	static LottoNumbers of(List<Integer> numbers) {
 		throwOnInvalidLottoNumberCount(numbers);
 		throwOnDuplicatedLottoNumber(numbers);
 
-		this.values = numbers.stream()
-			.sorted()
-			.map(LottoNumber::of)
-			.collect(Collectors.toList());
+		return new LottoNumbers(
+			numbers.stream()
+				.sorted()
+				.map(LottoNumber::of)
+				.collect(Collectors.toList())
+		);
 	}
 
 	public static int match(LottoNumbers first, LottoNumbers second) {
@@ -28,13 +34,13 @@ public class LottoNumbers {
 		return intersection.size();
 	}
 
-	private void throwOnInvalidLottoNumberCount(List<Integer> numbers) {
+	private static void throwOnInvalidLottoNumberCount(List<Integer> numbers) {
 		if (numbers == null || numbers.size() != LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException("로또 숫자의 갯수는 6개여야 합니다.");
 		}
 	}
 
-	private void throwOnDuplicatedLottoNumber(List<Integer> numbers) {
+	private static void throwOnDuplicatedLottoNumber(List<Integer> numbers) {
 		if (new HashSet<>(numbers).size() != LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException("로또 숫자는 중복되지 않아야 합니다.");
 		}

@@ -13,7 +13,7 @@ public class LottoGame {
 			LottoNumber.FORTY_FIVE,
 			LottoNumbers.LOTTO_NUMBER_COUNT);
 
-		this.lottoNumbers = new LottoNumbers(numbers);
+		this.lottoNumbers = LottoNumbers.of(numbers);
 	}
 
 	public LottoNumbers getLottoNumbers() {

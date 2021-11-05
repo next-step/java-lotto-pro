@@ -19,14 +19,14 @@ public class LottoNumber {
 
 	private final int value;
 
-	private LottoNumber(int value) {
-		this.value = value;
+	private LottoNumber(int number) {
+		this.value = number;
 	}
 
-	static LottoNumber of(int value) {
-		String exceptionMessage = String.format("로또 숫자는 1과 45 사이의 숫자이어야 합니다. 입력된 숫자는 %d입니다.", value);
+	static LottoNumber of(int number) {
+		String exceptionMessage = String.format("로또 숫자는 1과 45 사이의 숫자이어야 합니다. 입력된 숫자는 %d입니다.", number);
 
-		return Optional.ofNullable(candidateNumbers.get(value))
+		return Optional.ofNullable(candidateNumbers.get(number))
 			.orElseThrow(() -> new IllegalArgumentException(exceptionMessage));
 	}
 
