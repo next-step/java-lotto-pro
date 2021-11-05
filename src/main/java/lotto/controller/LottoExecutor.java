@@ -11,8 +11,8 @@ public class LottoExecutor {
 
     private final LottoController lottoController;
 
-    public LottoExecutor() {
-        this.lottoController = LottoController.getInstance();
+    public LottoExecutor(LottoController lottoController) {
+        this.lottoController = lottoController;
     }
 
     public void run() {
@@ -28,4 +28,6 @@ public class LottoExecutor {
         double revenue = winningMap.revenue(boughtLotto);
         printRevenue(revenue);
     }
+
+
 }

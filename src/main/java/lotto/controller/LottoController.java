@@ -9,11 +9,7 @@ import static lotto.view.ConsoleView.*;
 
 public final class LottoController {
 
-    private LottoController() {
-    }
-
-    public static LottoController getInstance() {
-        return LazyHolder.INSTANCE;
+    public LottoController() {
     }
 
     public BoughtLotto buyLotto() {
@@ -38,7 +34,4 @@ public final class LottoController {
         }
     }
 
-    private static class LazyHolder {
-        public static final LottoController INSTANCE = new LottoController();
-    }
 }
