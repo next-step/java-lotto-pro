@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.List;
-
 public class LottoCalculator {
 
     public static final int LOTTO_PRICE = 1_000;
@@ -14,12 +12,16 @@ public class LottoCalculator {
         this.lottos = Lottos.fromQuantity(purchaseAmount.getQuantity());
     }
 
-    public void calculate(List<Integer> winNumbers) {
-        this.winResults = lottos.getWinResults(new Lotto(winNumbers));
+    public void calculate(Lotto winNumber) {
+        this.winResults = lottos.getWinResults(winNumber);
     }
 
     public int getLottosSize() {
         return lottos.size();
+    }
+
+    public void printLottosSize() {
+        System.out.printf("%d개를 구매했습니다.%n", getLottosSize());
     }
 
     public void printLottos() {

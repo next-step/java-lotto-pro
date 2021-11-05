@@ -38,7 +38,7 @@ public class LottoCalculatorTest {
     @DisplayName("당첨 통계를 출력한다.")
     void printStats() {
         // given
-        lottoCalculator.calculate(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoCalculator.calculate(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         // when
         lottoCalculator.printStats();
