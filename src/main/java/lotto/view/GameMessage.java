@@ -5,8 +5,8 @@ import lotto.util.GameRule;
 public class GameMessage {
 
     private GameMessage() {
-
     }
+
     public final static String ERR_MSG = "[ERROR]";
     public static final String BUY_PRICE_INPUT = "구입금액을 입력해 주세요";
     public static final String BUY_COUNT_OUTPUT = "개를 구매했습니다.";

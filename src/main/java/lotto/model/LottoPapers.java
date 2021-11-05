@@ -17,6 +17,7 @@ public class LottoPapers {
     public List<LottoPaper> getLottoPapers() {
         return Collections.unmodifiableList(lottoPapers);
     }
+
     public long lottoPaperSize() {
         return lottoPapers.size();
     }

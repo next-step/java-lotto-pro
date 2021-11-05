@@ -14,44 +14,37 @@ import lotto.view.ResultView;
 public class LottoApplication {
 
     public static void main(String[] args) {
-
         LottoGame lottoGame = new LottoGame();
-        LottoMoney lottoMoney = new LottoMoney();
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
-        LottoApplication lottoApplication = new LottoApplication();
+        String buyPrice = LottoApplication.getBuyPrice();
+        LottoMoney lottoMoney = new LottoMoney(buyPrice);
+        LottoPapers lottoPapers = LottoApplication.getRandomLottoPapers(lottoMoney);
 
-        String buyPrice = lottoApplication.getBuyPrice();
-        LottoPapers lottoPapers = lottoApplication.getRandomLottoPapers(buyPrice, lottoMoney);
-
-        LottoPaper winningLottoPaper = lottoApplication.getWinningLottoPaper(lottoNumberGenerator);
-        lottoApplication.printLottoResult(lottoGame, lottoPapers, winningLottoPaper);
+        LottoPaper winningLottoPaper = LottoApplication.getWinningLottoPaper(lottoNumberGenerator);
+        LottoApplication.printLottoResult(lottoGame, lottoPapers, winningLottoPaper);
     }
 
-    private String getBuyPrice() {
+    private static String getBuyPrice() {
         InputView.printBuyPriceInput();
         return Client.getLineConsole();
     }
 
-    private LottoPaper getWinningLottoPaper(LottoNumberGenerator lottoNumberGenerator) {
-
+    private static LottoPaper getWinningLottoPaper(LottoNumberGenerator lottoNumberGenerator) {
         InputView.printWinningNumberInput();
         String winningNumber = Client.getLineConsole();
         return lottoNumberGenerator.createWinningNumber(winningNumber);
     }
 
-    private LottoPapers getRandomLottoPapers(String buyPrice, LottoMoney lottoMoney) {
-
-        long lottoPaperCount = lottoMoney.getLottoPaperCount(lottoMoney.parseIntBuyPrice(buyPrice));
+    private static LottoPapers getRandomLottoPapers(LottoMoney lottoMoney) {
+        long lottoPaperCount = lottoMoney.getLottoPaperCount();
         ResultView.printBuyCountOutput(lottoPaperCount);
         LottoPapers lottoPapers = LottoPapers.createLottoPapers(lottoPaperCount);
         ResultView.printLottoPapers(lottoPapers);
-
         return lottoPapers;
     }
 
-    private void printLottoResult(LottoGame lottoGame, LottoPapers lottoPapers, LottoPaper winningLottoPaper) {
-
+    private static void printLottoResult(LottoGame lottoGame, LottoPapers lottoPapers, LottoPaper winningLottoPaper) {
         LottoResult lottoResult = lottoGame.getLottoResult(lottoPapers, winningLottoPaper);
         lottoResult.calculateYield(lottoPapers.lottoPaperSize() * GameRule.LOTTO_PAPER_PRICE);
         ResultView.printWinningStatistics(lottoResult);
