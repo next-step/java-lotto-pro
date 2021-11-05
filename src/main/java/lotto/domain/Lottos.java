@@ -29,7 +29,7 @@ public final class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(this.lottos);
+        return Collections.unmodifiableList(lottos);
     }
 
 }

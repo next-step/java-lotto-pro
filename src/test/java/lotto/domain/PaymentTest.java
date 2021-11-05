@@ -25,4 +25,11 @@ class PaymentTest {
         assertThat(Payment.from(payment).getTryCount()).isEqualTo(tryCount);
     }
 
+    @DisplayName("구입 시 차감된 구입금액을 반환한다")
+    @ParameterizedTest
+    @CsvSource(value = {"5000,2,3000", "2000,1,1000", "2700,1,1700"})
+    void spend(int payment, int spendCount, int change) {
+        assertThat(Payment.from(payment).spend(spendCount)).isEqualTo(Payment.from(change));
+    }
+
 }

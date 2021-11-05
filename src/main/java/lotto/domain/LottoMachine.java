@@ -10,12 +10,23 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static Lottos buy(final Payment payment, final NumberGenerationStrategy strategy) {
-        return generateLottos(payment, strategy);
+    public static Lottos buy(final Payment payment, final NumberGenerationStrategy strategy, final List<String> manualLottos) {
+        return generateLottos(payment, strategy, manualLottos);
     }
 
-    private static Lottos generateLottos(final Payment payment, final NumberGenerationStrategy strategy) {
-        return Lottos.from(generateAutoLottos(payment, strategy));
+    private static Lottos generateLottos(final Payment payment, final NumberGenerationStrategy strategy, final List<String> manualLottos) {
+        List<Lotto> lottos = generateManualLottos(manualLottos);
+        lottos.addAll(generateAutoLottos(payment.spend(manualLottos.size()), strategy));
+
+        return Lottos.from(lottos);
+    }
+
+    private static List<Lotto> generateManualLottos(final List<String> manualLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (String manualLotto : manualLottos) {
+            lottos.add(Lotto.from(manualLotto));
+        }
+        return lottos;
     }
 
     private static List<Lotto> generateAutoLottos(final Payment payment, final NumberGenerationStrategy strategy) {
