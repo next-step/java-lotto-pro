@@ -11,10 +11,11 @@ public class WinningLotto extends Lotto {
 	}
 
 	public int countMatching(Lotto lotto) {
-		int count = 0;
-		for (LottoNumber lottoNumber : lotto.lottoNumbers) {
-			count += (this.lottoNumbers.contains(lottoNumber) ? 1 : 0);
-		}
-		return count;
+		return lotto.lottoNumbers.stream()
+			.reduce(0, (acc, lottoNumber) -> acc + countIfContains(lottoNumber), Integer::sum);
+	}
+
+	private int countIfContains(LottoNumber lottoNumber) {
+		return this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
 	}
 }
