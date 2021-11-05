@@ -21,7 +21,7 @@ public class Lotto implements Iterable<LottoNumber> {
     }
 
     private void validate(List<Integer> numbers) {
-        if(numbers.isEmpty() || numbers.size() > LIMIT_COUNT) {
+        if(numbers.size() != LIMIT_COUNT) {
             throw new IllegalArgumentException(LOTTO_COUNT_OVER_ERROR_MESSAGE);
         }
     }
