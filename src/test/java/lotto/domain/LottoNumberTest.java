@@ -20,34 +20,21 @@ public class LottoNumberTest {
     @DisplayName("로또 번호 자동 생성 확인")
     public void autoLottoTest() {
         LottoNumber lottoNumber = new LottoNumber();
-
-        assertThat(lottoNumber.getLottoNumber().size()).isEqualTo(6);
+        assertThat(lottoNumber).isNotNull();
     }
 
     static Stream<Arguments> listProvide() {
         List<Number> number = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
-        return Stream.of(arguments(number));
+        List<Number> number2 = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
+        return Stream.of(arguments(number, number2));
     }
 
     @ParameterizedTest
     @MethodSource("listProvide")
-    @DisplayName("로또 번호 수동 생성 확인")
-    public void activeLottoTest(List<Number> activeNumbers) {
-        LottoNumber lottoNumber = new LottoNumber(activeNumbers);
-
-        assertThat(lottoNumber.getLottoNumber()).containsExactly(new Number(1), new Number(2), new Number(3),
-                new Number(4), new Number(5), new Number(6));
+    @DisplayName("로또 번호 매칭 확인")
+    public void activeLottoTest(List<Number> lottoNumber, List<Number> matchNumber) {
+        assertThat(new LottoNumber(lottoNumber).getMatchRank(matchNumber)).isEqualTo(Rank.FIRST);
     }
-
-    @Test
-    @DisplayName("로또 번호 범위 검증")
-    public void activeLottoRange() {
-        assertThatThrownBy(() -> {
-            List<Number> activeNumbers = Arrays.asList(new Number(99), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR]");
-    }
-
 
     static Stream<Arguments> listProvide3() {
         List<Number> number = Arrays.asList(new Number(1), new Number(2), new Number(3),
@@ -60,7 +47,7 @@ public class LottoNumberTest {
     @DisplayName("로또 번호 길이 검증")
     public void activeLottoNumberSize(List<Number> activeNumbers) {
         assertThatThrownBy(() -> {
-            LottoNumber lottoNumber = new LottoNumber(activeNumbers);
+            new LottoNumber(activeNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
