@@ -10,6 +10,8 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 
+import lotto.domain.LottoNumbersFactory;
+
 public class LottoNumbersFactoryTest {
     @DisplayName("로또 번호 생성 테스트 - 중복되지 않고 정렬된 6개의 숫자")
     @RepeatedTest(10)
