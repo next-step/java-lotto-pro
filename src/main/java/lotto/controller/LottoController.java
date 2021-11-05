@@ -5,6 +5,7 @@ import static lotto.constant.LottoConstant.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.domain.CustomLottoCount;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
@@ -26,7 +27,10 @@ public class LottoController {
 
 	public void play() {
 		Money money = inputView.inputMoney();
-		Lottos lottos = purchaseLottos(money);
+		int purchasedCount = calculatePurchasedLottoCount(money);
+		CustomLottoCount customLottoCount = inputView.inputCustomLottoCount(purchasedCount);
+
+		Lottos lottos = purchaseLottos(purchasedCount);
 		LottoNumbers lastWinningNumbers = LottoNumbers.of(inputView.inputWinningNumbers());
 		LottoNumber bonusNumber = inputView.inputBonusNumber(lastWinningNumbers);
 
@@ -36,8 +40,7 @@ public class LottoController {
 		this.resultView.printWinningStatistics(winningStatistics);
 	}
 
-	public Lottos purchaseLottos(Money money) {
-		int purchasedCount = calculatePurchasedLottoCount(money);
+	public Lottos purchaseLottos(int purchasedCount) {
 		Lottos lottos = Lottos.of(createLottos(purchasedCount));
 		this.resultView.printLottos(lottos);
 

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import calculator.utils.StringUtils;
+import lotto.domain.CustomLottoCount;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
@@ -34,6 +35,18 @@ public class InputView {
 		return inputMoney();
 	}
 
+	public CustomLottoCount inputCustomLottoCount(int purchasedCount) {
+		System.out.println(CUSTOM_LOTTO_COUNT_INPUT_GUIDE_MESSAGE);
+		String customLottoCount = readLine();
+
+		if (isValidCustomLottoCount(customLottoCount, purchasedCount)) {
+			return CustomLottoCount.of(LottoStringToIntegerParser.parse(customLottoCount));
+		}
+
+		System.out.println(MessageBuilder.build(INVALID_INPUT_CUSTOM_LOTTO_COUNT, customLottoCount));
+		return inputCustomLottoCount(purchasedCount);
+	}
+
 	public List<Integer> inputWinningNumbers() {
 		System.out.println(LAST_WINNING_NUMBERS_INPUT_GUIDE_MESSAGE);
 		String[] splitWinningNumbers = LottoStringSplitter.split(readLine());
@@ -56,6 +69,10 @@ public class InputView {
 
 		System.out.println(MessageBuilder.build(INVALID_INPUT_BONUS_NUMBER, bonusNumber));
 		return inputBonusNumber(lastWinningNumbers);
+	}
+
+	private boolean isValidCustomLottoCount(String customLottoCount, int purchasedCount) {
+		return isValidNumber(customLottoCount) && LottoStringToIntegerParser.parse(customLottoCount) <= purchasedCount;
 	}
 
 	private boolean isValidBonusNumber(String bonusNumber) {
