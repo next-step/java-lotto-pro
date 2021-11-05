@@ -26,7 +26,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch) {
-        if (countOfMatch == 0) {
+        if (countOfMatch == Rank.MISS.countOfMatch) {
             return Rank.MISS;
         }
 

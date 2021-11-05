@@ -27,7 +27,7 @@ public class LottoTicket {
     }
 
     private void validateSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(WRONG_NUMBERS_SIZE_MESSAGE);
         }
     }
