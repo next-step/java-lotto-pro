@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step3.common.exception.InvalidParamException;
 import step3.domain.LottoNumbers;
 import step3.domain.constance.LottoConstant;
-import step3.domain.numbers.ManualNumbers;
 import step3.domain.numbers.NumbersStrategy;
 import step3.domain.numbers.RandomNumbers;
 
@@ -63,7 +62,12 @@ public class LottoNumbersTest {
     void lottoNumbersCheckIsDuplicate() {
         // given
         int[] numbers = {1, 2, 3, 4, 6, 6};
-        NumbersStrategy numbersStrategy = new ManualNumbers(numbers);
+        NumbersStrategy numbersStrategy = new NumbersStrategy() {
+            @Override
+            public int[] getNumbers() {
+                return numbers;
+            }
+        };
 
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
