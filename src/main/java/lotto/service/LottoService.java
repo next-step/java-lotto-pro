@@ -19,9 +19,14 @@ public class LottoService {
         this.vendingMachine = new LottoTicketVendingMachine();
     }
 
-    public PurchaseMoney getPurchaseMoney(String input) {
-        int money = StringUtil.parseIntFrom(input);
+    public PurchaseMoney getPurchaseMoney(String inputMoney) {
+        int money = StringUtil.parseIntFrom(inputMoney);
         return new PurchaseMoney(money);
+    }
+
+    public PurchaseAmount getPurchaseAmount(PurchaseMoney purchaseMoney, String inputManualAmount) {
+        int manualAmount = StringUtil.parseIntFrom(inputManualAmount);
+        return purchaseMoney.getPurchaseAmount(manualAmount);
     }
 
     public LottoTickets issueTickets(PurchaseAmount purchaseAmount) {

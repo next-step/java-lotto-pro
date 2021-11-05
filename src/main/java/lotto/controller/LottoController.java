@@ -16,8 +16,8 @@ public class LottoController {
     public void run() {
         try {
             PurchaseMoney purchaseMoney = service.getPurchaseMoney(InputView.getPurchaseMoney());
-            PurchaseAmount purchaseAmount = purchaseMoney.getPurchaseAmount();
-            OutputView.printTicketAmount(purchaseAmount.getAutoTicketAmount());
+            PurchaseAmount purchaseAmount = service.getPurchaseAmount(purchaseMoney, InputView.getManualLottoCount());
+            OutputView.printTicketAmount(purchaseAmount.getManualTicketAmount(), purchaseAmount.getAutoTicketAmount());
 
             LottoTickets lottoTickets = service.issueTickets(purchaseAmount);
             OutputView.printLottoTickets(lottoTickets);

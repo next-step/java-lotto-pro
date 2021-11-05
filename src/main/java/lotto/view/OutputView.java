@@ -22,8 +22,8 @@ public class OutputView {
         }
     }
 
-    public static void printTicketAmount(int purchaseAmount) {
-        System.out.printf("%n%d개를 구매했습니다.%n", purchaseAmount);
+    public static void printTicketAmount(int manualTicketAmount, int autoTicketAmount) {
+        System.out.printf("%n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualTicketAmount, autoTicketAmount);
     }
 
     public static void printProfitRate(float profitRate) {
