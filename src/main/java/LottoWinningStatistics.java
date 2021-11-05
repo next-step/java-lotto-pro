@@ -31,14 +31,17 @@ public class LottoWinningStatistics {
 				, (acc, entry) -> acc + calculatePrizeKRW(entry.getKey(), entry.getValue())
 				, Long::sum);
 
-		final int paidKRW = Lotto.PRICE_KRW * (numOfLottosByMatching.values().stream()
-			.reduce(0, (acc, numOfLottos) -> acc + numOfLottos.intValue(), Integer::sum));
+		final long paidKRW = Lotto.PRICE_KRW * countLottos();
 
 		return (double)prizeKRW / paidKRW;
 	}
 
 	private long calculatePrizeKRW(int matchingCount, Long numOfLottos) {
 		return numOfLottos * LottoWinningRank.valueOf(matchingCount).getPrizeKRW();
+	}
+
+	private long countLottos() {
+		return numOfLottosByMatching.values().stream().reduce(0L, Long::sum);
 	}
 }
 
