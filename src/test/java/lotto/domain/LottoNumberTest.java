@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -23,5 +24,12 @@ public class LottoNumberTest {
     void testOutOfLengthLottoNumber(int number) {
         assertThatThrownBy(() -> new LottoNumber(number)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1에서 45 사이의 숫자를 입력하세요");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1 ", " 2 ", " 41"})
+    void testStringConstructor(String text) {
+        LottoNumber lottoNumber = new LottoNumber(text);
+        assertThat(lottoNumber.value()).isEqualTo(Integer.parseInt(text.trim()));
     }
 }

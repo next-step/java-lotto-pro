@@ -15,7 +15,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(String number) {
-        this(Integer.parseInt(number));
+        this(Integer.parseInt(number.trim()));
     }
 
     public int value() {

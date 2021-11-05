@@ -15,19 +15,12 @@ public class AutoLottoApplication {
         Scanner scanner = new Scanner(System.in);
 
         while (!state.isFinish()) {
-            state.printQuestion(System.out);
-            processResult(scanner);
+            state.process(this, scanner);
         }
     }
 
-    private void processResult(Scanner scanner) {
-        try {
-            String input = scanner.nextLine();
-            state.printResult(input, System.out);
-            state = state.next();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public void setState(State state) {
+        this.state = state;
     }
 
     public static void main(String[] args) {
