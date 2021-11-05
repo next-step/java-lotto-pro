@@ -12,20 +12,20 @@ public class LottoApp {
 
 	public void run() {
 		final List<Lotto> lottos = tryBuyLottos();
-		view.boughtLotto(lottos);
+		view.outBoughtLotto(lottos);
 		view.space();
 
 		final WinningLotto winningLotto = tryMakeWinningLotto();
 		view.space();
 
 		final LottoWinningStatistics statistics = LottoWinningStatistics.of(winningLotto, lottos);
-		view.lottoWinningStatistics(statistics);
+		view.outLottoWinningStatistics(statistics);
 	}
 
 	private List<Lotto> tryBuyLottos() {
 		List<Lotto> lotto;
 		do {
-			lotto = buyLottos(view.inputPayKRW());
+			lotto = buyLottos(view.inPayKRW());
 		} while (null == lotto);
 		return lotto;
 	}
@@ -42,7 +42,7 @@ public class LottoApp {
 	private WinningLotto tryMakeWinningLotto() {
 		WinningLotto winningLotto;
 		do {
-			winningLotto = makeWinningLotto(view.inputWinningLotto());
+			winningLotto = makeWinningLotto(view.inWinningLotto());
 		} while (null == winningLotto);
 		return winningLotto;
 	}

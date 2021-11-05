@@ -5,22 +5,22 @@ import nextstep.utils.Console;
 
 public class View {
 
-	public int inputPayKRW() {
+	public int inPayKRW() {
 		println(Message.INPUT_PAY_KRW.getContent());
 		return Console.readInt();
 	}
 
-	public void boughtLotto(List<Lotto> lottos) {
-		println(String.format(Message.BOUGHT_LOTTO.getContent(), lottos.size()));
-		lottos.stream().map(Lotto::toString).forEach(this::println);
-	}
-
-	public String inputWinningLotto() {
+	public String inWinningLotto() {
 		println(Message.INPUT_WINNING_LOTTO.getContent());
 		return Console.readLine();
 	}
 
-	public void lottoWinningStatistics(LottoWinningStatistics statistics) {
+	public void outBoughtLotto(List<Lotto> lottos) {
+		println(String.format(Message.BOUGHT_LOTTO.getContent(), lottos.size()));
+		lottos.stream().map(Lotto::toString).forEach(this::println);
+	}
+
+	public void outLottoWinningStatistics(LottoWinningStatistics statistics) {
 		println(Message.WINNING_STATISTICS.getContent());
 		println(Message.SEPARATOR.getContent());
 
@@ -29,12 +29,12 @@ public class View {
 			LottoWinningRank.THIRD,
 			LottoWinningRank.SECOND,
 			LottoWinningRank.FIRST
-		).forEach(rank -> lottoMatchingCount(rank, statistics));
+		).forEach(rank -> outLottoMatchingCount(rank, statistics));
 
-		lottoEarningRate(statistics.earningRate());
+		outLottoEarningRate(statistics.earningRate());
 	}
 
-	private void lottoMatchingCount(LottoWinningRank rank, LottoWinningStatistics statistics) {
+	private void outLottoMatchingCount(LottoWinningRank rank, LottoWinningStatistics statistics) {
 		final int matchingCount = rank.getMatchingCount();
 		final int prizeKRW = rank.getPrizeKRW();
 		final Long numOfLottos = statistics.countLottos(rank);
@@ -42,7 +42,7 @@ public class View {
 			, matchingCount, prizeKRW, LottoStore.KRW_UNIT, numOfLottos));
 	}
 
-	private void lottoEarningRate(float earningRate) {
+	private void outLottoEarningRate(float earningRate) {
 		print(String.format(Message.EARNING_RATE.getContent(), earningRate));
 		if (earningRate < LottoWinningStatistics.EARNING_RATE_BASE) {
 			print(Message.EARNING_RATE_NOTE.getContent());
