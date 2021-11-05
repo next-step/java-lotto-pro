@@ -28,7 +28,7 @@ public class SetTest {
 
     @Test
     @DisplayName("Set 크기 테스트")
-    void set_size() {
+    void setSize() {
         assertThat(numbers.size()).isEqualTo(3);
 
         numbers.add(3);
@@ -44,15 +44,13 @@ public class SetTest {
 
     @ParameterizedTest(name = "Set 숫자 포함 테스트 {0}")
     @ValueSource(ints = {1, 2, 3})
-    void set_contains_number(int number) {
+    void setContainsNumber(int number) {
         assertTrue(isContainsNumber(number));
     }
 
     @ParameterizedTest(name = "Set 숫자 범위 밖 포함 테스트 {0} : {1}")
     @CsvSource(value = {"1,true", "2,true", "3,true", "4,false", "5,false"}, delimiter = ',')
-    void set_contains_number_include_out_of_range(String numberString, String expectFlagString) {
-        int number = Integer.parseInt(numberString);
-        boolean expect = Boolean.parseBoolean(expectFlagString);
+    void setContainsNumberIncludeOutOfRange(int number, boolean expect) {
         assertEquals(isContainsNumber(number), expect);
     }
 }
