@@ -18,6 +18,10 @@ import lottoservice.lottonumber.LottoNumbersMaker;
 
 public class LottoWinningNumbers {
 
+	private static String ERROR_MESSAGE_INCORRECT_SIZE_OF_WINNING_NUMBERS = "당첨 번호는 6개 입력하셔야 합니다.";
+	private static String ERROR_MESSAGE_DUPLICATE_WINNING_NUMBERS = "중복된 번호가 존재합니다.";
+	private static String ERROR_MESSAGE_INVALID_INPUT_FORMAT = "입력형식이 올바르지 않습니다. 로또번호 숫자와 구분자(, )를 형식에 맞게 입력해주세요.";
+
 	private Set<LottoNumber> winningNumbers;
 
 	private LottoWinningNumbers(List<LottoNumber> numbers) {
@@ -33,7 +37,7 @@ public class LottoWinningNumbers {
 
 	private void validateHasNotDuplicateLottoNumber(Set<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() < LottoNumbersMaker.SIZE_OF_LOTTERY_NUMBERS) {
-			throw new DuplicateLottoNumberException("중복된 당첨번호를 입력하였습니다.");
+			throw new DuplicateLottoNumberException(ERROR_MESSAGE_DUPLICATE_WINNING_NUMBERS);
 		}
 	}
 
@@ -44,7 +48,7 @@ public class LottoWinningNumbers {
 
 	private static void validateSizeOfLotto(List<Integer> numbers) {
 		if (!isCorrectSizeOfLotto(numbers)) {
-			throw new InvalidLottoFormatException("당첨 번호는 6개 입력하셔야 합니다.");
+			throw new InvalidLottoFormatException(ERROR_MESSAGE_INCORRECT_SIZE_OF_WINNING_NUMBERS);
 		}
 	}
 
@@ -68,8 +72,8 @@ public class LottoWinningNumbers {
 	}
 
 	public static LottoWinningNumbers makeLottoWinningNumbers(String lottoNumberText) {
-		String[] splitedTexts= lottoNumberText.split(", ");
-		List<Integer> numbers =parseTextToNumbers(splitedTexts);
+		String[] splitedTexts = lottoNumberText.split(", ");
+		List<Integer> numbers = parseTextToNumbers(splitedTexts);
 		return makeLottoWinningNumbers(numbers);
 	}
 
@@ -78,21 +82,21 @@ public class LottoWinningNumbers {
 			return Arrays.stream(splitedTexts)
 				.map(splitedNumber -> Integer.parseInt(splitedNumber))
 				.collect(Collectors.toList());
-		}catch (NumberFormatException ex){
-			throw new InvalidLottoFormatException("입력형식이 올바르지 않습니다. 로또번호 숫자와 구분자(, )를 형식에 맞게 입력해주세요.");
+		} catch (NumberFormatException ex) {
+			throw new InvalidLottoFormatException(ERROR_MESSAGE_INVALID_INPUT_FORMAT);
 		}
 	}
 
 	public int compareWithNumbers(List<LottoNumber> ticketLottoNumbers) {
-		int matchCount=0;
-		for(LottoNumber number : ticketLottoNumbers){
-			matchCount+=isMatchNumber(number) ? 1 : 0;
+		int matchCount = 0;
+		for (LottoNumber number : ticketLottoNumbers) {
+			matchCount += isMatchNumber(number) ? 1 : 0;
 		}
 		return matchCount;
 	}
 
 	private boolean isMatchNumber(LottoNumber number) {
-		if(winningNumbers.contains(number)){
+		if (winningNumbers.contains(number)) {
 			return true;
 		}
 		return false;

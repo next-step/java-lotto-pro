@@ -9,7 +9,7 @@ import lottoservice.lottoticket.LottoTicketIssuer;
 
 public class LottoMatchResult {
 
-	private static int TWO_DECIMAL_FORMAT=100;
+	private static int TWO_DECIMAL_FORMAT = 100;
 	private Map<LottoMatchRank, Integer> result;
 
 	public LottoMatchResult() {

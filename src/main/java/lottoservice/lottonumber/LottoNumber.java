@@ -9,6 +9,9 @@ import lottoservice.exception.InvalidLottoFormatException;
  */
 public class LottoNumber {
 
+	private static String ERROR_MESSAGE_OUTBOUND_OF_LOTTO_NUMBER =
+		"로또 번호는 " + LottoNumbersMaker.START_INCLUSIVE_NUMBER + "~" + LottoNumbersMaker.END_EXCLUSIVE_NUMBER
+			+ "사이 숫자만 가능합니다.";
 	private int number;
 
 	public LottoNumber(int number) {
@@ -18,9 +21,7 @@ public class LottoNumber {
 
 	public void validateNumberInLottoRule(int number) {
 		if (number < LottoNumbersMaker.START_INCLUSIVE_NUMBER || number > LottoNumbersMaker.END_EXCLUSIVE_NUMBER) {
-			throw new InvalidLottoFormatException(
-				"로또 번호는 " + LottoNumbersMaker.START_INCLUSIVE_NUMBER + "~" + LottoNumbersMaker.END_EXCLUSIVE_NUMBER
-					+ "사이 숫자만 가능합니다.");
+			throw new InvalidLottoFormatException(ERROR_MESSAGE_OUTBOUND_OF_LOTTO_NUMBER);
 		}
 	}
 

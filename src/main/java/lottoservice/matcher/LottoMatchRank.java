@@ -19,6 +19,7 @@ public enum LottoMatchRank {
 
 	private int countOfMatch;    /* 맞춘 갯수 */
 	private int winningMoney;    /* 상금 */
+	private static String ERROR_MESSAGE_UNEXPECTED_COUNTOFMATCH = "유효하지 않는 당첨 갯수가 발생하였습니다.";
 
 	LottoMatchRank(int countOfMatch, int winningMoney) {
 		this.countOfMatch = countOfMatch;
@@ -37,6 +38,6 @@ public enum LottoMatchRank {
 		LottoMatchRank[] ranks = LottoMatchRank.values();
 		Optional<LottoMatchRank> foundRank = Arrays.stream(ranks)
 			.filter(rank -> rank.getCountOfMatch() == countOfMatch).findFirst();
-		return foundRank.orElseThrow(() -> new UnexpectedMatchException("당첨 비교 중 에상치 못한 오류가 발생하였습니다."));
+		return foundRank.orElseThrow(() -> new UnexpectedMatchException(ERROR_MESSAGE_UNEXPECTED_COUNTOFMATCH));
 	}
 }

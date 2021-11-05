@@ -14,6 +14,9 @@ import lottoservice.exception.InvalidNumberFormatMoneyException;
 public class LottoTicketIssuer {
 
 	public static final int TICKET_PER_PRICE = 1000;
+	private static String ERROR_MESSAGE_INPUT_AMOUNT_TOO_LITTLE = "금액을 " + TICKET_PER_PRICE + "원 이상 입력해주세요.";
+	private static String ERROR_MESSAGE_INPUT_AMOUNT_NOT_DIVISIBLE = "금액은 " + TICKET_PER_PRICE + "원 단위로 입력해주세요.";
+	private static String ERROR_MESSAGE_INPUT_AMOUNT_NOT_NUMBER = "금액을 숫자로 입력해주세요.";
 
 	private static int getNumOfTicketsToBuy(int inputAmount) {
 		return inputAmount / TICKET_PER_PRICE;
@@ -40,11 +43,11 @@ public class LottoTicketIssuer {
 
 	private static void validatePay(int inputAmount) {
 		if (isMoneyTooLittle(inputAmount)) {
-			throw new NotEnoughtMoneyException("금액을 " + TICKET_PER_PRICE + "원 이상 입력해주세요.");
+			throw new NotEnoughtMoneyException(ERROR_MESSAGE_INPUT_AMOUNT_TOO_LITTLE);
 		}
 
 		if (isNotDivisibleMoneyByPerPrice(inputAmount)) {
-			throw new NotDivisibleMoneyUnitException("금액은 " + TICKET_PER_PRICE + "원 단위로 입력해주세요.");
+			throw new NotDivisibleMoneyUnitException(ERROR_MESSAGE_INPUT_AMOUNT_NOT_DIVISIBLE);
 		}
 	}
 
@@ -73,7 +76,7 @@ public class LottoTicketIssuer {
 		try {
 			return Integer.parseInt(inputAmount);
 		} catch (NumberFormatException ex) {
-			throw new InvalidNumberFormatMoneyException("금액을 숫자로 입력해주세요.");
+			throw new InvalidNumberFormatMoneyException(ERROR_MESSAGE_INPUT_AMOUNT_NOT_NUMBER);
 		}
 	}
 } 
