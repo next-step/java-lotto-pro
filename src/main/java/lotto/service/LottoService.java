@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.LottoFactory;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 
@@ -19,6 +20,9 @@ public class LottoService {
         return winningCount;
     }
 
+    /**
+     * 수익률 계산
+     */
     public double getRateOfReturn(int purchaseCount, int winningAmount) {
         return (double) winningAmount / (purchaseCount * LOTTO_PER_PRICE);
     }
@@ -30,4 +34,7 @@ public class LottoService {
         return 0;
     }
 
+    public LottoNumbers createLottoNumbers() {
+        return LottoFactory.createLottoNumbers();
+    }
 }
