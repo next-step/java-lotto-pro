@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.LottoCalculator;
+import lotto.domain.Prints;
 
 public class LottoController {
 
@@ -17,8 +18,7 @@ public class LottoController {
     }
 
     private void printLottos() {
-        lottoCalculator.printLottosSize();
-        lottoCalculator.printLottos();
+        printAll(lottoCalculator.getLottosPrints());
         ConsoleOut.newLine();
     }
 
@@ -26,6 +26,12 @@ public class LottoController {
         ConsoleOut.newLine();
         ConsoleOut.printMessage("당첨 통계");
         ConsoleOut.printMessage("---------");
-        lottoCalculator.printStats();
+        printAll(lottoCalculator.getStatsPrints());
+    }
+
+    private void printAll(Prints prints) {
+        for (String print : prints.getPrints()) {
+            ConsoleOut.printMessage(print);
+        }
     }
 }

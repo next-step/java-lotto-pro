@@ -33,10 +33,12 @@ public class Lottos {
         return WinResults.of(lottos, winNumber);
     }
 
-    public void print() {
+    public Prints getLottosPrints() {
+        Prints prints = new Prints();
         for (Lotto lotto : lottos) {
-            System.out.println(lotto);
+            prints.append(lotto.toString());
         }
+        return prints;
     }
 
     @Override

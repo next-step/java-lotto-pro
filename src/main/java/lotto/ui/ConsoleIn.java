@@ -59,7 +59,7 @@ public class ConsoleIn {
         return null;
     }
 
-    public static String input(String message) {
+    private static String input(String message) {
         ConsoleOut.printMessage(message);
         return new Scanner(System.in).nextLine();
     }

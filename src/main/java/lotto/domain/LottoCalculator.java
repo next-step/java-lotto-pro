@@ -20,30 +20,31 @@ public class LottoCalculator {
         return lottos.size();
     }
 
-    public void printLottosSize() {
-        System.out.printf("%d개를 구매했습니다.%n", getLottosSize());
+    public Prints getLottosPrints() {
+        Prints prints = new Prints();
+        prints.append(String.format("%d개를 구매했습니다.", getLottosSize()));
+        prints.append(lottos.getLottosPrints());
+        return prints;
     }
 
-    public void printLottos() {
-        lottos.print();
+    public Prints getStatsPrints() {
+        Prints prints = new Prints();
+        appendWinResults(prints);
+        appendProceeds(prints);
+        return prints;
     }
 
-    public void printStats() {
-        printWinResults();
-        printProceeds();
-    }
-
-    private void printWinResults() {
+    private void appendWinResults(Prints prints) {
         for (WinResult winResult : WinResult.values()) {
-            System.out.printf("%d개 일치 (%d원) - %d개%n",
-                    winResult.getCount(), winResult.getPrize(), winResults.getCount(winResult.getCount()));
+            prints.append(String.format("%d개 일치 (%d원) - %d개",
+                    winResult.getCount(), winResult.getPrize(), winResults.getCount(winResult.getCount())));
         }
     }
 
-    private void printProceeds() {
+    private void appendProceeds(Prints prints) {
         float proceedsRate = (float) winResults.getProceeds() / ((float) getLottosSize() * LOTTO_PRICE);
         String comment = getComment(proceedsRate);
-        System.out.printf("총 수익률은 %.2f입니다.%s%n", proceedsRate, comment);
+        prints.append(String.format("총 수익률은 %.2f입니다.%s", proceedsRate, comment));
     }
 
     private String getComment(float proceedsRate) {
