@@ -42,9 +42,9 @@ class LottoResultTest {
 		LottoGenerator lottoGenerator = new LottoGenerator("1000", inputNumber);
 
 		//when
-		LottoResult lottoResult = new LottoResult();
+		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottoGenerator);
 		Map<Integer, Integer> containsMap =
-			lottoResult.containsWinningLottoGenerator(winningLottoNumbers, lottoGenerator);
+			lottoResult.containsWinningLottoGenerator();
 
 		//then
 		assertThat(containsMap.get(resultCount)).isEqualTo(1);
@@ -79,11 +79,10 @@ class LottoResultTest {
 		// given
 		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningLottoNumber);
 		LottoGenerator lottoGenerator = new LottoGenerator(inputMoney);
-		LottoResult lottoResult = new LottoResult();
+		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottoGenerator);
 
 		// when
-		Map<RankCode, Integer> rankMap = lottoResult.getRankCodeMapUsingContainsMap(winningLottoNumbers,
-			lottoGenerator);
+		Map<RankCode, Integer> rankMap = lottoResult.getRankCodeMapUsingContainsMap();
 
 		// then
 		assertThat(rankMap
@@ -105,10 +104,10 @@ class LottoResultTest {
 		// given
 		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningLottoNumber);
 		LottoGenerator lottoGenerator = new LottoGenerator("1000", lottoNumber);
-		LottoResult lottoResult = new LottoResult();
+		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottoGenerator);
 
 		// when
-		double yield = lottoResult.calculateYield(winningLottoNumbers, lottoGenerator);
+		double yield = lottoResult.calculateYield();
 
 		// then
 		assertThat(yield).isEqualTo(yieldResult);

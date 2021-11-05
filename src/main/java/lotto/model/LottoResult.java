@@ -10,6 +10,19 @@ public class LottoResult {
 	private static final int DEFAULT_VALUE = 0;
 	private static final int COUNT_VALUE = 1;
 
+	private final WinningLottoNumbers winningLottoNumbers;
+	private final LottoGenerator lottoGenerator;
+
+	public LottoResult() {
+		this.winningLottoNumbers = new WinningLottoNumbers();
+		this.lottoGenerator = new LottoGenerator();
+	}
+
+	public LottoResult(WinningLottoNumbers winningLottoNumbers, LottoGenerator lottoGenerator) {
+		this.winningLottoNumbers = winningLottoNumbers;
+		this.lottoGenerator = lottoGenerator;
+	}
+
 	public int containsWinningLottoNumbers(WinningLottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
 		int containsCount = 0;
 
@@ -20,12 +33,11 @@ public class LottoResult {
 		return containsCount;
 	}
 
-	public Map<Integer, Integer> containsWinningLottoGenerator(WinningLottoNumbers winningLottoNumbers,
-		LottoGenerator lottoGenerator) {
+	public Map<Integer, Integer> containsWinningLottoGenerator() {
 		Map<Integer, Integer> containsMap = new HashMap<>();
 
-		for (LottoNumbers lottoNumbers : lottoGenerator.getLottoNumbersList()) {
-			int containsCount = containsWinningLottoNumbers(winningLottoNumbers, lottoNumbers);
+		for (LottoNumbers lottoNumbers : this.lottoGenerator.getLottoNumbersList()) {
+			int containsCount = containsWinningLottoNumbers(this.winningLottoNumbers, lottoNumbers);
 			containsMap.put(containsCount, containsMap.getOrDefault(containsCount, DEFAULT_VALUE) + COUNT_VALUE);
 		}
 
@@ -41,9 +53,8 @@ public class LottoResult {
 		return RankCode.getRankCode(contains);
 	}
 
-	public Map<RankCode, Integer> getRankCodeMapUsingContainsMap(WinningLottoNumbers winningLottoNumbers,
-		LottoGenerator lottoGenerator) {
-		Map<Integer, Integer> containsMap = containsWinningLottoGenerator(winningLottoNumbers, lottoGenerator);
+	public Map<RankCode, Integer> getRankCodeMapUsingContainsMap() {
+		Map<Integer, Integer> containsMap = containsWinningLottoGenerator();
 		Map<RankCode, Integer> rankMap = new HashMap<>();
 
 		for (Map.Entry<Integer, Integer> containsEntry : containsMap.entrySet()) {
@@ -54,9 +65,9 @@ public class LottoResult {
 		return rankMap;
 	}
 
-	public double calculateYield(WinningLottoNumbers winningLottoNumbers, LottoGenerator lottoGenerator) {
+	public double calculateYield() {
 		int sum = DEFAULT_VALUE;
-		Map<RankCode, Integer> rankMap = getRankCodeMapUsingContainsMap(winningLottoNumbers, lottoGenerator);
+		Map<RankCode, Integer> rankMap = getRankCodeMapUsingContainsMap();
 
 		for (Map.Entry<RankCode, Integer> rankCodeEntry : rankMap.entrySet()) {
 			sum += RankCode.getRankMoney(rankCodeEntry.getKey(), rankCodeEntry.getValue());
