@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoAutoCreateFactory {
-    private final static List<Integer> numbers = new ArrayList<>();
+    public static final int LOTTO_SIZE = 6;
     public static Lotto createLotto() {
         int[] randomNumbers = createRandomNumbers();
         Lotto lotto = new Lotto(randomNumbers);
@@ -20,8 +20,8 @@ public class LottoAutoCreateFactory {
     private static int[] createRandomNumbers() {
         List<Integer> numbers = makeNumbers();
         Collections.shuffle(numbers);
-        int[] result = new int[LottoNumber.SIZE];
-        for (int i = 0; i < LottoNumber.SIZE; i++) {
+        int[] result = new int[LOTTO_SIZE];
+        for (int i = 0; i < LOTTO_SIZE; i++) {
             result[i] = numbers.get(i);
         }
         Arrays.sort(result);
@@ -29,6 +29,7 @@ public class LottoAutoCreateFactory {
     }
 
     private static List<Integer> makeNumbers() {
+        List<Integer> numbers = new ArrayList<>();
         for (int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
             numbers.add(i);
         }
