@@ -14,4 +14,10 @@ public class LottosTest {
         Lottos lottos = LottoAutoCreateFactory.createLottos(20);
         assertThat(lottos.size()).isEqualTo(20);
     }
+
+    @DisplayName("로또 ")
+    @Test
+    void rankReport() {
+
+    }
 }

@@ -28,12 +28,12 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public int matchNumber(Lotto winLotto) {
+    public Rank matchNumber(Lotto winLotto) {
         int result = 0;
         for (int i = 0; i < size(); i++) {
             result += winLotto.compare(lottoNumbers.get(i)) ? 1 : 0;
         }
-        return result;
+        return Rank.valueOf(result);
     }
 
     @Override

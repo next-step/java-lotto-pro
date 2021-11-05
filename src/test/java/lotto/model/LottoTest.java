@@ -21,10 +21,11 @@ public class LottoTest {
     void matchNumber() {
         Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
         Lotto winLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-        assertThat(lotto.matchNumber(winLotto)).isEqualTo(6);
+        assertThat(lotto.matchNumber(winLotto)).isEqualTo(Rank.valueOf(6));
 
         lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
         winLotto = new Lotto(new int[]{4, 5, 6, 7, 8, 9});
-        assertThat(lotto.matchNumber(winLotto)).isEqualTo(3);
+        assertThat(lotto.matchNumber(winLotto)).isEqualTo(Rank.valueOf(3));
+        assertThat(lotto.matchNumber(winLotto)).isEqualTo(Rank.FOURTH);
     }
 }
