@@ -56,10 +56,11 @@ public class LottoTicket {
         }
     }
 
-    public Rank winningRank(List<Integer> winningNumbers) {
+    public Rank winningRank(LottoTicket winningTicket) {
         Set<Integer> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
+        List<Integer> winningNumbers = winningTicket.lottoNumbers;
         nonDuplicateNumbers.addAll(winningNumbers);
-        int countOfMatch = lottoNumbers.size() + winningNumbers.size() - nonDuplicateNumbers.size();
+        int countOfMatch = this.lottoNumbers.size() + winningNumbers.size() - nonDuplicateNumbers.size();
         return Rank.valueOf(countOfMatch);
     }
 

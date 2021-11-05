@@ -76,25 +76,25 @@ class LottoTicketTest {
     @DisplayName("로또 결과 확인")
     @Test
     void winningRank() {
-        Rank first = lottoTicket.winningRank(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Rank first = lottoTicket.winningRank(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertEquals(Rank.FIRST, first);
 
-        Rank second = lottoTicket.winningRank(Arrays.asList(1, 2, 3, 4, 5, 7));
+        Rank second = lottoTicket.winningRank(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7)));
         assertEquals(Rank.SECOND, second);
 
-        Rank third = lottoTicket.winningRank(Arrays.asList(1, 2, 3, 4, 7, 8));
+        Rank third = lottoTicket.winningRank(new LottoTicket(Arrays.asList(1, 2, 3, 4, 7, 8)));
         assertEquals(Rank.THIRD, third);
 
-        Rank fifth = lottoTicket.winningRank(Arrays.asList(1, 2, 3, 7, 8, 9));
+        Rank fifth = lottoTicket.winningRank(new LottoTicket(Arrays.asList(1, 2, 3, 7, 8, 9)));
         assertEquals(Rank.FIFTH, fifth);
 
-        Rank missByTwo = lottoTicket.winningRank(Arrays.asList(1, 2, 7, 8, 9, 10));
+        Rank missByTwo = lottoTicket.winningRank(new LottoTicket(Arrays.asList(1, 2, 7, 8, 9, 10)));
         assertEquals(Rank.MISS, missByTwo);
 
-        Rank missByOne = lottoTicket.winningRank(Arrays.asList(1, 7, 8, 9, 10, 11));
+        Rank missByOne = lottoTicket.winningRank(new LottoTicket(Arrays.asList(1, 7, 8, 9, 10, 11)));
         assertEquals(Rank.MISS, missByOne);
 
-        Rank missByZero = lottoTicket.winningRank(Arrays.asList(7, 8, 9, 10, 11, 12));
+        Rank missByZero = lottoTicket.winningRank(new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)));
         assertEquals(Rank.MISS, missByZero);
     }
 }
