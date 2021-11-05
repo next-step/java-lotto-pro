@@ -5,7 +5,7 @@ import java.util.Scanner;
 import static java.util.Arrays.stream;
 
 public class InputView {
-    private static final String INVALID_PRIZE_NUMBER = "당첨 번호를 정확하게 입력해주세요.";
+    private static final String INVALID_WINNING_NUMBER = "당첨 번호를 정확하게 입력해주세요.";
     private static final Scanner SCAN = new Scanner(System.in);
 
     private InputView() {
@@ -15,20 +15,20 @@ public class InputView {
         return Integer.parseInt(SCAN.nextLine());
     }
 
-    public static String[] inputPrizeNumbers() {
-        return splitPrizeNumbers(SCAN.nextLine());
+    public static String[] inputWinningNumbers() {
+        return splitWinningNumbers(SCAN.nextLine());
     }
 
-    private static String[] splitPrizeNumbers(String inputPrizeNumbers) {
-        validateNullOrEmpty(inputPrizeNumbers);
-        return stream(inputPrizeNumbers.split(","))
+    private static String[] splitWinningNumbers(String inputWinningNumbers) {
+        validateNullOrEmpty(inputWinningNumbers);
+        return stream(inputWinningNumbers.split(","))
                 .map(String::trim)
                 .toArray(String[]::new);
     }
 
-    private static void validateNullOrEmpty(String inputPrizeNumbers) {
-        if (inputPrizeNumbers == null || inputPrizeNumbers.trim().isEmpty()) {
-            throw new IllegalArgumentException(INVALID_PRIZE_NUMBER);
+    private static void validateNullOrEmpty(String inputWinningNumbers) {
+        if (inputWinningNumbers == null || inputWinningNumbers.trim().isEmpty()) {
+            throw new IllegalArgumentException(INVALID_WINNING_NUMBER);
         }
     }
 

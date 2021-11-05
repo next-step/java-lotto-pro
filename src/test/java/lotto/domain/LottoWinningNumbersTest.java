@@ -6,27 +6,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 
-public class LottoPrizeNumbersTest {
+public class LottoWinningNumbersTest {
 
     @Test
     public void 당첨번호가_6자리가_맞다() {
         //given
-        String[] inputPrizeNumbers = {"1", "2", "3", "4", "5", "6"};
+        String[] inputWinningNumbers = {"1", "2", "3", "4", "5", "6"};
 
         //when
-        LottoPrizeNumbers lottoPrizeNumbers = new LottoPrizeNumbers(inputPrizeNumbers);
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(inputWinningNumbers);
 
         //then
-        assertThat(lottoPrizeNumbers.getPrizeNumbers().size()).isEqualTo(6);
+        assertThat(lottoWinningNumbers.getWinningNumbers().size()).isEqualTo(6);
     }
 
     @Test
     public void 당첨번호가_6자리가_아니다() {
         //given
-        String[] inputPrizeNumbers = {"1", "2", "3", "4", "5"};
+        String[] inputWinningNumbers = {"1", "2", "3", "4", "5"};
 
         //when
-        ThrowingCallable throwingCallable = () -> new LottoPrizeNumbers(inputPrizeNumbers);
+        ThrowingCallable throwingCallable = () -> new LottoWinningNumbers(inputWinningNumbers);
 
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -36,10 +36,10 @@ public class LottoPrizeNumbersTest {
     @Test
     public void 당첨번호가_중복이다() {
         //given
-        String[] inputPrizeNumbers = {"1", "1", "3", "4", "5", "6"};
+        String[] inputWinningNumbers = {"1", "1", "3", "4", "5", "6"};
 
         //when
-        ThrowingCallable throwingCallable = () -> new LottoPrizeNumbers(inputPrizeNumbers);
+        ThrowingCallable throwingCallable = () -> new LottoWinningNumbers(inputWinningNumbers);
 
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -49,22 +49,22 @@ public class LottoPrizeNumbersTest {
     @Test
     public void 당첨번호가_1과_45_사이이다() {
         //given
-        String[] inputPrizeNumbers = {"1", "2", "3", "4", "5", "45"};
+        String[] inputWinningNumbers = {"1", "2", "3", "4", "5", "45"};
 
         //when
-        LottoPrizeNumbers lottoPrizeNumbers = new LottoPrizeNumbers(inputPrizeNumbers);
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(inputWinningNumbers);
 
         //then
-        assertThat(lottoPrizeNumbers.getPrizeNumbers().size()).isEqualTo(6);
+        assertThat(lottoWinningNumbers.getWinningNumbers().size()).isEqualTo(6);
     }
 
     @Test
     public void 당첨번호가_1과_45_사이가_아니다() {
         //given
-        String[] inputPrizeNumbers = {"0", "2", "3", "4", "5", "46"};
+        String[] inputWinningNumbers = {"0", "2", "3", "4", "5", "46"};
 
         //when
-        ThrowingCallable throwingCallable = () -> new LottoPrizeNumbers(inputPrizeNumbers);
+        ThrowingCallable throwingCallable = () -> new LottoWinningNumbers(inputWinningNumbers);
 
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)

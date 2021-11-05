@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoIssueTest {
 
     @Test
-    public void 로또번호를_5장_발급한다() {
+    public void 로또를_5장_발급한다() {
         //given
         int purchaseQuantity = 5;
 

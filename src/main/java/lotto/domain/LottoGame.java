@@ -8,16 +8,12 @@ public class LottoGame {
     public void run() {
         LottoPurchase lottoPurchase = getPurchaseAmount();
         Lottos lottos = new Lottos(LottoIssue.ofAuto(lottoPurchase.getPurchaseQuantity()));
-        // 로또번호를 출력한다.
         printLottoNumber(lottos);
-
-        // 당첨번호를 입력받는다.
-        LottoPrizeNumbers lottoPrizeNumbers = getPrizeNumbers();
-        // 당첨번호를 확인한다.
+        LottoWinningNumbers lottoWinningNumbers = getWinningNumbers();
     }
 
-    private LottoPrizeNumbers getPrizeNumbers() {
-        return new LottoPrizeNumbers(inputPrizeNumbers());
+    private LottoWinningNumbers getWinningNumbers() {
+        return new LottoWinningNumbers(inputWinningNumbers());
     }
 
     private LottoPurchase getPurchaseAmount() {
