@@ -1,17 +1,15 @@
 package step3.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import step3.common.exception.InvalidParamException;
-import step3.domain.numbers.NumbersStrategy;
+import step3.domain.strategy.numbers.NumbersStrategy;
 
 public class LottoNumbers {
     public static final int MAX_LOTTO_NUMBERS_SIZE = 6;
-    public static final String RANGE_OUTBOUNT_SIZE_EXCEPTION_MESSAGE = String.format("로또 티켓은 %s 개의 숫자만 가능합니다.",
+    public static final String RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE = String.format("로또 티켓은 %s 개의 숫자만 가능합니다.",
         MAX_LOTTO_NUMBERS_SIZE);
     private Set<LottoNumber> lottoNumbers;
 
@@ -23,9 +21,19 @@ public class LottoNumbers {
         validSize(numbersStrategy);
     }
 
+    public int containCount(LottoNumbers winLottoNumbers) {
+        int count = 0;
+        for (LottoNumber winLottoNumber : winLottoNumbers.lottoNumbers) {
+            if (lottoNumbers.contains(winLottoNumber)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     private void validSize(NumbersStrategy numbersStrategy) {
         if (this.lottoNumbers.size() != MAX_LOTTO_NUMBERS_SIZE) {
-            throw new InvalidParamException(RANGE_OUTBOUNT_SIZE_EXCEPTION_MESSAGE);
+            throw new InvalidParamException(RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
         }
     }
 
@@ -39,9 +47,7 @@ public class LottoNumbers {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
+        if (!(o instanceof LottoNumbers))
             return false;
         LottoNumbers that = (LottoNumbers)o;
         return Objects.equals(lottoNumbers, that.lottoNumbers);

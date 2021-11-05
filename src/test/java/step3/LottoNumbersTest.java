@@ -10,8 +10,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step3.common.exception.InvalidParamException;
 import step3.domain.LottoNumbers;
 import step3.domain.constance.LottoConstant;
-import step3.domain.numbers.NumbersStrategy;
-import step3.domain.numbers.RandomNumbers;
+import step3.domain.strategy.numbers.NumbersStrategy;
+import step3.domain.strategy.numbers.RandomNumbers;
 
 public class LottoNumbersTest {
 
@@ -54,7 +54,7 @@ public class LottoNumbersTest {
                 // when
                 LottoNumbers lottoNumbers = new LottoNumbers(numbersStrategy);
             }) // then
-            .withMessageMatching(LottoNumbers.RANGE_OUTBOUNT_SIZE_EXCEPTION_MESSAGE);
+            .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
     }
 
     @Test
@@ -74,6 +74,6 @@ public class LottoNumbersTest {
                 // when
                 LottoNumbers lottoNumbers = new LottoNumbers(numbersStrategy);
             }) // then
-            .withMessageMatching(LottoNumbers.RANGE_OUTBOUNT_SIZE_EXCEPTION_MESSAGE);
+            .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
     }
 }

@@ -1,4 +1,4 @@
-package step3.domain.numbers;
+package step3.domain.strategy.numbers;
 
 import java.util.Collections;
 import java.util.List;

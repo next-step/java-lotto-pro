@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import step3.domain.numbers.NumbersStrategy;
-import step3.domain.numbers.RandomNumbers;
+import step3.domain.strategy.numbers.NumbersStrategy;
+import step3.domain.strategy.numbers.RandomNumbers;
 
 public class RandomNumbersTest {
 

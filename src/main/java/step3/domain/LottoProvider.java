@@ -1,37 +1,39 @@
 package step3.domain;
 
 import step3.domain.constance.LottoConstant;
-import step3.domain.numbers.RandomNumbers;
+import step3.domain.strategy.lotto.LottoProviderStrategy;
+import step3.domain.strategy.numbers.NumbersStrategy;
+import step3.domain.strategy.numbers.RandomNumbers;
 
-public class LottoProvider {
+public class LottoProvider implements LottoProviderStrategy {
     private static final int PRICE = 1000;
     private final LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
 
     public void buyLotto(int count) {
-        addLottoNumbers(count);
-    }
-
-    public void buyLotto(Amount amount) {
-        addLottoNumbers(availableQuantity(amount.value()));
-    }
-
-    private void addLottoNumbers(int count) {
         for (int i = 0; i < count; i++) {
-            LottoNumbers lottoNumbers = new LottoNumbers(getNumberStrategy());
-            lottoNumbersBundle.addLottoNumbers(lottoNumbers);
+            lottoNumbersBundle.addLottoNumbers(getRandomNumberStrategy());
         }
     }
 
-    private RandomNumbers getNumberStrategy() {
-        return new RandomNumbers(LottoConstant.MIN_NUMBER_RANGE,
-            LottoConstant.MAX_NUMBER_RANGE, LottoNumbers.MAX_LOTTO_NUMBERS_SIZE);
+    public void buyLottoOfNumbersStrategy(NumbersStrategy numbersStrategy) {
+        lottoNumbersBundle.addLottoNumbers(numbersStrategy);
     }
 
-    private static int availableQuantity(int amount) {
+    public int availableQuantity(int amount) {
         return amount / PRICE;
     }
 
     public int lottoNumbersBundleSize() {
         return lottoNumbersBundle.size();
     }
+
+    public LottoNumbersBundle getLottoNumbersBundle() {
+        return lottoNumbersBundle;
+    }
+
+    private NumbersStrategy getRandomNumberStrategy() {
+        return new RandomNumbers(LottoConstant.MIN_NUMBER_RANGE,
+            LottoConstant.MAX_NUMBER_RANGE, LottoConstant.MAX_LOTTO_NUMBERS_SIZE);
+    }
+
 }
