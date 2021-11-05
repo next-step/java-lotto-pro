@@ -11,6 +11,11 @@ import lotto.util.SplitUtil;
 
 public class LottoNumbers {
 	public final static int LOTTO_NUMBERS_SIZE = 6;
+	private final static String STARTING_BRACKET = "[";
+	private final static String END_BRACKET = "]";
+	private final static String SEPARATOR_BRACKET = " ,";
+	private final static int START_INDEX_CALCULATE_NUMBER = 0;
+	private final static int LAST_INDEX_CALCULATE_NUMBER = 1;
 
 	public final List<LottoNumber> lottoNumberList;
 
@@ -68,6 +73,23 @@ public class LottoNumbers {
 
 	public int size() {
 		return lottoNumberList.size();
+	}
+
+	public String listToString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(STARTING_BRACKET);
+		for (int i = START_INDEX_CALCULATE_NUMBER; i < this.lottoNumberList.size(); i++) {
+			sb.append(lottoNumberList.get(i).toInt());
+			addSeparatorInBracket(sb, i);
+		}
+		sb.append(END_BRACKET);
+		return sb.toString();
+	}
+
+	private void addSeparatorInBracket(StringBuilder sb, int i) {
+		if (i < this.lottoNumberList.size() - LAST_INDEX_CALCULATE_NUMBER) {
+			sb.append(SEPARATOR_BRACKET);
+		}
 	}
 }
 
