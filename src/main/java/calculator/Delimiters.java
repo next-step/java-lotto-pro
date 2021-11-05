@@ -4,10 +4,10 @@ import java.util.Objects;
 
 public class Delimiters {
     private static final String DELIMITER_OF_DELIMITERS = "|";
-    private String delimiters;
+    private final StringBuilder delimiters;
 
     public Delimiters(String delimiters) {
-        this.delimiters = "";
+        this.delimiters = new StringBuilder();
         addCustomDelimiters(delimiters);
     }
 
@@ -18,15 +18,15 @@ public class Delimiters {
     }
 
     private void addDelimiter(String delimiter) {
-        if (this.delimiters.length() != 0) {
-            this.delimiters += DELIMITER_OF_DELIMITERS;
+        if (!this.delimiters.isEmpty()) {
+            this.delimiters.append(DELIMITER_OF_DELIMITERS);
         }
 
-        this.delimiters += delimiter;
+        this.delimiters.append(delimiter);
     }
 
     public String[] splitTextByDelimiter(String text) {
-        return text.split(delimiters);
+        return text.split(delimiters.toString());
     }
 
     @Override
