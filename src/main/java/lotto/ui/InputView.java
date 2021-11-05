@@ -23,12 +23,9 @@ public class InputView {
     public static Object readLine(InputType type) {
         System.out.println(type.isPurchase() ? Constants.MSG_INPUT_PURCHASE_PRICE : type.isNumber() ? Constants.MSG_INPUT_LAST_WINNING_NUMBERS : "");
         try {
-            String input = scanner.next();
+            String input = scanner.nextLine();
             return type.isPurchase() ? new PurchasePrice(input) : new Lotto(input);
-        } catch(NumberFormatException nfe) {
-            System.out.println("숫자만 입력가능합니다.");
-            return readLine(type);
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return readLine(type);
         }

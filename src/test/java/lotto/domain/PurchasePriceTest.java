@@ -59,7 +59,4 @@ public class PurchasePriceTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("구매수량이 일치하지 않습니다.");
     }
-
-
-
 }

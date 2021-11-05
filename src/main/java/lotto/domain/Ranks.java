@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import com.sun.tools.internal.jxc.ap.Const;
+import javafx.scene.control.TableView;
 import lotto.common.Constants;
+import lotto.ui.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,5 +39,15 @@ public class Ranks {
 
     public double earningRatio() {
         return calculateYield(this.totalRewards(), rankList.size() * PurchasePrice.LOTTO_PRICE);
+    }
+
+    public void print() {
+        ResultView.print(Constants.MSG_OUTPUT_LOTTO_RESULT);
+        ResultView.print(Constants.MSG_OUTPUT_LINE_SEPARATOR);
+        ResultView.print(Constants.MSG_OUTPUT_4TH_PREFIX + this.countPlace(new Rank(Rank.FOURTH_PLACE_MATCH_COUNT)) + Constants.MSG_OUTPUT_SUFFIX);
+        ResultView.print(Constants.MSG_OUTPUT_3RD_PREFIX + this.countPlace(new Rank(Rank.THIRD_PLACE_MATCH_COUNT)) + Constants.MSG_OUTPUT_SUFFIX);
+        ResultView.print(Constants.MSG_OUTPUT_2ND_PREFIX + this.countPlace(new Rank(Rank.SECOND_PLACE_MATCH_COUNT)) + Constants.MSG_OUTPUT_SUFFIX);
+        ResultView.print(Constants.MSG_OUTPUT_1ST_PREFIX + this.countPlace(new Rank(Rank.FIRST_PLACE_MATCH_COUNT)) + Constants.MSG_OUTPUT_SUFFIX);
+        ResultView.print(Constants.MSG_OUTPUT_YIELD_PREFIX + this.earningRatio() + Constants.MSG_OUTPUT_YIELD_SUFFIX);
     }
 }

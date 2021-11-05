@@ -20,8 +20,7 @@ public class LottoMakerTest {
     @Test
     @DisplayName("랜덤로또 생성기 테스트")
     public void T01_create() {
-        LottoMaker lottoMaker = new LottoMaker();
-        assertThat(lottoMaker.createLotto()).isInstanceOf(Lotto.class);
+        assertThat(LottoMaker.createLotto()).isInstanceOf(Lotto.class);
     }
 
 }

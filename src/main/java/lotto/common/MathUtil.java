@@ -5,7 +5,7 @@ package lotto.common;
  * fileName : MathUtil
  * author : haedoang
  * date : 2021-11-05
- * description :
+ * description : 공통 계산식 함수 클래스
  */
 public class MathUtil {
 

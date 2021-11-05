@@ -1,6 +1,12 @@
 package lotto.domain;
 
+import lotto.common.Constants;
+import lotto.ui.ResultView;
+
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * packageName : lotto.domain
@@ -19,14 +25,20 @@ public class PurchasePrice {
         this.purchaseQuantity = this.calculateQuantity(price);
     }
 
-    /**
-     *
-     * @Throws java.lang.NumberFormatException 예외가 발생할 수 있다.
-     */
     public PurchasePrice(String strPrice) {
+        if(!isNumber(strPrice)) throw new NumberFormatException("숫자만 입력 가능합니다.");
         int price = Integer.parseInt(strPrice);
         if (price < LOTTO_PRICE) throw new IllegalArgumentException("로또를 구입할 금액이 부족합니다.");
         this.purchaseQuantity = this.calculateQuantity(price);
+    }
+
+    private boolean isNumber(String strPrice) {
+        try {
+             Integer.parseInt(strPrice);
+        } catch(NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
     public int calculateQuantity(int price) {
@@ -49,5 +61,13 @@ public class PurchasePrice {
     @Override
     public String toString() {
         return String.valueOf(purchaseQuantity);
+    }
+
+    public void print() {
+        ResultView.print(this.purchaseQuantity + Constants.MSG_OUTPUT_PURCHASE_RESULT_SUFFIX);
+    }
+
+    public Lottos buyLottery() {
+        return new Lottos(IntStream.range(0, purchaseQuantity).mapToObj(i -> LottoMaker.createLotto()).collect(Collectors.toList()));
     }
 }

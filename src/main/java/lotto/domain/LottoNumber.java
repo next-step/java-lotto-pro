@@ -16,7 +16,7 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        if(number < MIN_NUMBER || number > MAX_NUMBER ) throw new IllegalArgumentException("1부터 45 사이의 숫자만 가능합니다.");
+        if (number < MIN_NUMBER || number > MAX_NUMBER) throw new IllegalArgumentException("1부터 45 사이의 숫자만 가능합니다.");
         this.number = number;
     }
 
@@ -31,5 +31,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.number);
     }
 }

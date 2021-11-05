@@ -43,8 +43,8 @@ public class Rank {
     private int getRank(int matchCount) {
         return matchCount == FIRST_PLACE_MATCH_COUNT ? FIRST_PLACE :
                 matchCount == SECOND_PLACE_MATCH_COUNT ? SECOND_PLACE :
-                matchCount == THIRD_PLACE_MATCH_COUNT ? THIRD_PLACE :
-                matchCount == FOURTH_PLACE_MATCH_COUNT ? FOURTH_PLACE : OTHERS_PLACE;
+                        matchCount == THIRD_PLACE_MATCH_COUNT ? THIRD_PLACE :
+                                matchCount == FOURTH_PLACE_MATCH_COUNT ? FOURTH_PLACE : OTHERS_PLACE;
     }
 
 

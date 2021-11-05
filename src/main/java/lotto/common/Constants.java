@@ -5,7 +5,7 @@ package lotto.common;
  * fileName : Constants
  * author : haedoang
  * date : 2021-11-05
- * description :
+ * description : 공통 상수 정의 클래스
  */
 public class Constants {
     public static final long REWARD_4TH = 5000;
@@ -22,6 +22,9 @@ public class Constants {
     public static final String MSG_OUTPUT_3RD_PREFIX = "4개 일치 (" + REWARD_3RD + "원)- ";
     public static final String MSG_OUTPUT_2ND_PREFIX = "5개 일치 (" + REWARD_2ND + "원)- ";
     public static final String MSG_OUTPUT_1ST_PREFIX = "6개 일치 (" + REWARD_1ST + "원)- ";
+    public static final String MSG_OUTPUT_SUFFIX = "개";
+    public static final String MSG_OUTPUT_YIELD_PREFIX = "총 수익률은 ";
+    public static final String MSG_OUTPUT_YIELD_SUFFIX = "입니다.";
 
     public static final String NUMBER_SEPARATOR = ",";
 
