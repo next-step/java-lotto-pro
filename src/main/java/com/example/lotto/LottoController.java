@@ -46,7 +46,7 @@ public class LottoController {
 		LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusWinningLottoNumber());
 
 		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(baseNumbers, bonusNumber);
-		LottoStatistic lottoStatistic = new LottoStatistic(purchaseInformation, lottoGames, winningLottoNumbers);
+		LottoStatistic lottoStatistic = LottoStatistic.of(purchaseInformation, lottoGames, winningLottoNumbers);
 		OutputView.print(lottoStatistic.toString());
 	}
 

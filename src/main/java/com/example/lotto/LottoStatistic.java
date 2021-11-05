@@ -12,17 +12,23 @@ public class LottoStatistic {
 	private final PurchaseInformation purchaseInformation;
 	private final Map<LottoRank, Long> lottoRankToCount;
 
-	public LottoStatistic(
+	private LottoStatistic(PurchaseInformation purchaseInformation, Map<LottoRank, Long> lottoRankToCount) {
+		this.purchaseInformation = purchaseInformation;
+		this.lottoRankToCount = lottoRankToCount;
+	}
+
+	static LottoStatistic of(
 		PurchaseInformation purchaseInformation,
 		LottoGames lottoGames,
 		WinningLottoNumbers winningLottoNumbers
 	) {
-		this.purchaseInformation = purchaseInformation;
-		this.lottoRankToCount = defaultLottoRankToCount();
-		addResultsToLottoRankToCount(lottoGames, winningLottoNumbers);
+		Map<LottoRank, Long> lottoRankToCount = defaultStatistic();
+		lottoRankToCount.putAll(getStatistic(lottoGames, winningLottoNumbers));
+
+		return new LottoStatistic(purchaseInformation, lottoRankToCount);
 	}
 
-	private Map<LottoRank, Long> defaultLottoRankToCount() {
+	private static Map<LottoRank, Long> defaultStatistic() {
 		Map<LottoRank, Long> map = new TreeMap<>(Comparator.comparingInt(LottoRank::getValue).reversed());
 		List<LottoRank> lottoRanksExceptMiss = Arrays.stream(LottoRank.values())
 			.filter(lottoRank -> !lottoRank.isMiss())
@@ -35,11 +41,14 @@ public class LottoStatistic {
 		return map;
 	}
 
-	private void addResultsToLottoRankToCount(LottoGames lottoGames, WinningLottoNumbers winningLottoNumbers) {
-		this.lottoRankToCount.putAll(lottoGames.getValues().stream()
+	private static Map<LottoRank, Long> getStatistic(
+		LottoGames lottoGames,
+		WinningLottoNumbers winningLottoNumbers
+	) {
+		return lottoGames.getValues().stream()
 			.map(lottoGame -> lottoGame.rank(winningLottoNumbers))
 			.filter(lottoRank -> !lottoRank.isMiss())
-			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
+			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 	}
 
 	private long getTotalWinningMoney() {
@@ -49,7 +58,7 @@ public class LottoStatistic {
 			.get();
 	}
 
-	private double getEarningsRate() {
+	double getEarningsRate() {
 		return (double)getTotalWinningMoney() / purchaseInformation.getActualPurchaseMoney();
 	}
 
