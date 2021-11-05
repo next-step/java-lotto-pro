@@ -56,21 +56,4 @@ public class LottoNumber {
         return lottoNumbers;
     }
 
-    @Override
-    public String toString() {
-        return String.join(", ", lottoNumbers.toString());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumbers);
-    }
 }
