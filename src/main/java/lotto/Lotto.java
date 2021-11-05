@@ -26,10 +26,6 @@ public class Lotto implements Iterable<LottoNumber> {
         }
     }
 
-    public int numberCount() {
-        return lottoNumbers.size();
-    }
-
     @Override
     public Iterator<LottoNumber> iterator() {
         return lottoNumbers.iterator();
