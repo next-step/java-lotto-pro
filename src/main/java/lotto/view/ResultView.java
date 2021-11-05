@@ -3,6 +3,7 @@ package lotto.view;
 import static lotto.constant.ViewMessage.*;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.WinningRank;
 import lotto.domain.WinningRecord;
@@ -13,8 +14,8 @@ import lotto.utils.MessageBuilder;
 public class ResultView {
 	private static final double PROFIT_CRITERIA = 1.0;
 
-	public void printLottos(Lottos lottos) {
-		printLottoCount(lottos);
+	public void printLottos(Lottos lottos, LottoCount customLottoCount, LottoCount autoLottoCount) {
+		printLottoCount(customLottoCount, autoLottoCount);
 
 		for (Lotto lotto : lottos.getValues()) {
 			System.out.println(lotto.getLottoNumbers());
@@ -64,8 +65,11 @@ public class ResultView {
 		return Double.compare(totalProfitRate, PROFIT_CRITERIA) > 0 ? PROFIT_MESSAGE : LOSS_MESSAGE;
 	}
 
-	private void printLottoCount(Lottos lottos) {
-		System.out.println(MessageBuilder.build(LOTTO_COUNT_MESSAGE, lottos.size()));
+	private void printLottoCount(LottoCount customLottoCount, LottoCount autoLottoCount) {
+		newLine();
+		System.out.println(MessageBuilder.build(LOTTO_COUNT_MESSAGE,
+												customLottoCount.getValue(),
+												autoLottoCount.getValue()));
 	}
 
 	private void newLine() {

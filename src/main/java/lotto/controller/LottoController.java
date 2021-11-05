@@ -43,7 +43,7 @@ public class LottoController {
 
 	public Lottos purchaseLottos(LottoCount purchasedCount, LottoCount customLottoCount) {
 		Lottos totalLottos = Lottos.of(createCustomAndAutoLottos(purchasedCount, customLottoCount));
-		resultView.printLottos(totalLottos);
+		resultView.printLottos(totalLottos, customLottoCount, LottoCount.minus(purchasedCount, customLottoCount));
 
 		return totalLottos;
 	}
