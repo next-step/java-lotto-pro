@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import lottoservice.exception.UnexpectedMatchException;
 
+/**
+ * 당첨번호와 비교하여 발생할 수 있는 결과 케이스를 enum으로 정의
+ */
 public enum LottoMatchRank {
 	SIX_POINT(6, 2_000_000_000),
 	FIVE_POINT(5, 1_500_000),
@@ -14,11 +17,10 @@ public enum LottoMatchRank {
 	ONE_POINT(1, 0),
 	ZERO_POINT(0, 0);
 
+	private int countOfMatch;    /* 맞춘 갯수 */
+	private int winningMoney;    /* 상금 */
 
-	private int countOfMatch;
-	private int winningMoney;
-
-	private LottoMatchRank(int countOfMatch, int winningMoney) {
+	LottoMatchRank(int countOfMatch, int winningMoney) {
 		this.countOfMatch = countOfMatch;
 		this.winningMoney = winningMoney;
 	}
@@ -33,7 +35,8 @@ public enum LottoMatchRank {
 
 	public static LottoMatchRank valueOf(int countOfMatch) {
 		LottoMatchRank[] ranks = LottoMatchRank.values();
-		Optional<LottoMatchRank> foundRank =Arrays.stream(ranks).filter(rank-> rank.getCountOfMatch()==countOfMatch).findFirst();
-		return foundRank.orElseThrow(()->new UnexpectedMatchException("당첨 비교 중 에상치 못한 오류가 발생하였습니다."));
+		Optional<LottoMatchRank> foundRank = Arrays.stream(ranks)
+			.filter(rank -> rank.getCountOfMatch() == countOfMatch).findFirst();
+		return foundRank.orElseThrow(() -> new UnexpectedMatchException("당첨 비교 중 에상치 못한 오류가 발생하였습니다."));
 	}
 }

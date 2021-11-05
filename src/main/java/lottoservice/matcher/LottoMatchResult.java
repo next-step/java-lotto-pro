@@ -5,8 +5,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import lottoservice.lottoticket.LottoTicketIssuer;
+
 public class LottoMatchResult {
 
+	private static int TWO_DECIMAL_FORMAT=100;
 	private Map<LottoMatchRank, Integer> result;
 
 	public LottoMatchResult() {
@@ -20,7 +23,7 @@ public class LottoMatchResult {
 			(matches1, matches2) -> matches1.putAll(matches2));
 	}
 
-	public void addCount(LottoMatchRank lottoMatchRank) {
+	public void addMatchCount(LottoMatchRank lottoMatchRank) {
 		result.put(lottoMatchRank, result.getOrDefault(lottoMatchRank, 0) + 1);
 	}
 
@@ -28,6 +31,7 @@ public class LottoMatchResult {
 		return result;
 	}
 
+	/* 상금 합계 */
 	public long calculateProfit() {
 		return result.entrySet().stream()
 			.map(rank -> rank.getKey().getWinningMoney() * rank.getValue())
@@ -35,10 +39,11 @@ public class LottoMatchResult {
 			.sum();
 	}
 
+	/* 비용 대비 상금으로 수익률 계산 = 상금 합계 / (구매한 티켓 갯수 * 티켓 단위 금액) */
 	public double calculateProfitPercentage() {
-		long profit = calculateProfit() * 100; // 소수점 세번째 자리에서 반올림 하는 포맷팅을 위해
-		long dividedProfit = profit / (getNumOfMatchResults() * 1000);
-		return (double)dividedProfit / 100;
+		long profit = calculateProfit() * TWO_DECIMAL_FORMAT;
+		long dividedProfit = profit / (getNumOfMatchResults() * LottoTicketIssuer.TICKET_PER_PRICE);
+		return (double)dividedProfit / TWO_DECIMAL_FORMAT;
 	}
 
 	/* HashMap의 size() 메서드를 사용하면 key의 갯수를 구하기 때문에 map을 탐색하여 각각의 비교 결과 합을 구해야 함*/

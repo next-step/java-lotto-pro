@@ -8,14 +8,22 @@ import lottoservice.exception.NotDivisibleMoneyUnitException;
 import lottoservice.exception.NotEnoughtMoneyException;
 import lottoservice.exception.InvalidNumberFormatMoneyException;
 
+/**
+ * 로또 티켓 발급 클래스
+ */
 public class LottoTicketIssuer {
 
-	private static final int TICKET_PER_PRICE = 1000;
+	public static final int TICKET_PER_PRICE = 1000;
 
 	private static int getNumOfTicketsToBuy(int money) {
 		return money / TICKET_PER_PRICE;
 	}
 
+	/**
+	 * 사용자가 입력한 금액만큼 자동으로 로또 티켓을 생성하여 리턴
+	 * @param money :  1000 < money < 2147483000 and money % 1000 = 0 이어야 함
+	 * @return LottoTickets : LottoTicket을 리스트형태로 가지고 있는 일급컬렉션
+	 */
 	public static LottoTickets buyTickets(int money) {
 		validatePay(money);
 		int numOfTickets = getNumOfTicketsToBuy(money);
@@ -54,6 +62,7 @@ public class LottoTicketIssuer {
 		return false;
 	}
 
+	/* 사용자 입력값을 문자열로 받아 숫자형으로 변환 후  buyTickets(int money) 호출 */
 	public static LottoTickets buyTickets(String money) {
 		int convertedMoney = convertMoneyFormatToNumber(money);
 		return buyTickets(convertedMoney);

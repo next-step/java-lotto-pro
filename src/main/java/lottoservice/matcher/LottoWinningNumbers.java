@@ -12,6 +12,10 @@ import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.lottonumber.LottoNumber;
 import lottoservice.lottonumber.LottoNumbersMaker;
 
+/**
+ * 로또 당첨번호 클래스
+ */
+
 public class LottoWinningNumbers {
 
 	private Set<LottoNumber> winningNumbers;

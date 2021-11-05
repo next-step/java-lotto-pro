@@ -26,8 +26,14 @@ public class LottoMain {
 		showMatchLottoWinningResult(lottoWinningNumbers,lottoTickets);
 	}
 
-	private void showTickets(LottoTickets lottoTickets) {
-		ResultView.printResultMessage(lottoTickets);
+	private LottoTickets buyLottoTickets() {
+		try {
+			String inputAmount = inputAmountForBuyLotto();
+			return LottoTicketIssuer.buyTickets(inputAmount);
+		}catch (InvalidMoneyException ex){
+			ResultView.printErrorMessage(ex.getMessage());
+			return buyLottoTickets();	/* 사용자가 잘못된 입력을 했을 경우 재입력 */
+		}
 	}
 
 	private String inputAmountForBuyLotto() {
@@ -35,14 +41,8 @@ public class LottoMain {
 		return InputView.readLine();
 	}
 
-	private LottoTickets buyLottoTickets() {
-		try {
-			String inputAmount = inputAmountForBuyLotto();
-			return LottoTicketIssuer.buyTickets(inputAmount);
-		}catch (InvalidMoneyException ex){
-			ResultView.printErrorMessage(ex.getMessage());
-			return buyLottoTickets();
-		}
+	private void showTickets(LottoTickets lottoTickets) {
+		ResultView.printResultMessage(lottoTickets);
 	}
 
 	private LottoWinningNumbers getLastWeekWinningNumbers() {
@@ -51,7 +51,7 @@ public class LottoMain {
 			return LottoWinningNumbers.makeLottoWinningNumbers(lastWeekWinningNumbers);
 		}catch (InvalidLottoFormatException ex){
 			ResultView.printErrorMessage(ex.getMessage());
-			return getLastWeekWinningNumbers();
+			return getLastWeekWinningNumbers();	/* 사용자가 잘못된 입력을 했을 경우 재입력*/
 		}
 	}
 
