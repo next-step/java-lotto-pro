@@ -28,10 +28,7 @@ public class LottoController {
 
 	public void play() {
 		Money money = inputView.inputMoney();
-		LottoCount purchasedCount = calculatePurchasedLottoCount(money);
-		LottoCount customLottoCount = inputView.inputCustomLottoCount(purchasedCount);
-
-		Lottos lottos = purchaseLottos(purchasedCount, customLottoCount);
+		Lottos lottos = purchaseLottos(money);
 		LottoNumbers lastWinningNumbers = LottoNumbers.of(inputLastWinningNumbers());
 		LottoNumber bonusNumber = inputView.inputBonusNumber(lastWinningNumbers);
 
@@ -41,7 +38,9 @@ public class LottoController {
 		resultView.printWinningStatistics(winningStatistics);
 	}
 
-	public Lottos purchaseLottos(LottoCount purchasedCount, LottoCount customLottoCount) {
+	public Lottos purchaseLottos(Money money) {
+		LottoCount purchasedCount = calculatePurchasedLottoCount(money);
+		LottoCount customLottoCount = inputView.inputCustomLottoCount(purchasedCount);
 		Lottos totalLottos = Lottos.of(createCustomAndAutoLottos(purchasedCount, customLottoCount));
 		resultView.printLottos(totalLottos, customLottoCount, LottoCount.minus(purchasedCount, customLottoCount));
 
