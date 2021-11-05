@@ -13,7 +13,7 @@ public class LottoCashierTest {
     @ParameterizedTest
     @ValueSource(ints = {100, 1001, 0, 12340})
     void testGivenWrongCashThrowException(int cash) {
-        assertThatThrownBy(() -> LottoCashier.buy(cash)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> LottoCashier.buy(Money.of(cash))).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1000원 단위로 구매하실 수 있습니다");
     }
 
@@ -21,6 +21,6 @@ public class LottoCashierTest {
     @ParameterizedTest
     @ValueSource(ints = {1000, 2000, 33000, 44000, 576000})
     void testReturnLottoCount(int cash) {
-        assertThat(LottoCashier.buy(cash)).isEqualTo(cash / 1000);
+        assertThat(LottoCashier.buy(Money.of(cash))).isEqualTo(cash / 1000);
     }
 }

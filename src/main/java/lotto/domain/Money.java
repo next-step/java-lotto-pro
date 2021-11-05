@@ -31,6 +31,26 @@ public class Money {
         return Money.of(amount.divide(money.amount, 2, RoundingMode.HALF_DOWN));
     }
 
+    public Money minus(Money money) {
+        return Money.of(amount.subtract(money.amount));
+    }
+
+    public double doubleValue() {
+        return amount.doubleValue();
+    }
+
+    public int intValue() {
+        return amount.intValue();
+    }
+
+    public boolean isLessThan(Money money) {
+        return this.amount.compareTo(money.amount) < 0;
+    }
+
+    public boolean isModResultZero(Money money) {
+        return amount.remainder(money.amount).compareTo(BigDecimal.ZERO) == 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,9 +62,5 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
-    }
-
-    public double doubleValue() {
-        return amount.doubleValue();
     }
 }
