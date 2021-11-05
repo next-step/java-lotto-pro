@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,8 +21,16 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public static Lottos of(Lotto... lottos) {
+        return new Lottos(Arrays.asList(lottos));
+    }
+
     public int size() {
         return lottos.size();
+    }
+
+    public WinResults getWinResults(List<Integer> winNumbers) {
+        return WinResults.of(lottos, winNumbers);
     }
 
     @Override

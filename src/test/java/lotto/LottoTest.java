@@ -2,6 +2,8 @@ package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,5 +36,25 @@ class LottoTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
                 .withMessageMatching(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
+    }
+
+    @ParameterizedTest(name = "{displayName} - {arguments}")
+    @CsvSource(value = {
+            "1:2:3:4:5:6:SIX_MATCHED",
+            "1:2:3:4:5:10:FIVE_MATCHED",
+            "1:2:3:4:9:10:FOUR_MATCHED",
+            "1:2:3:8:9:10:THREE_MATCHED",
+            "1:2:7:8:9:10:DEFEAT",
+    }, delimiter = ':')
+    @DisplayName("당첨 결과를 반환한다.")
+    void getWinResult(int number1, int number2, int number3, int number4, int number5, int number6, WinResult expected) {
+        // given
+        Lotto lotto = new Lotto(Arrays.asList(number1, number2, number3, number4, number5, number6));
+
+        // when
+        WinResult winResult = lotto.getWinResult(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        // then
+        assertThat(winResult).isEqualTo(expected);
     }
 }

@@ -16,6 +16,14 @@ public class Lotto {
         this.lottoNumbers = mapToLottoNumbers(numbers);
     }
 
+    public WinResult getWinResult(List<Integer> winNumbers) {
+        int matchedCount = (int) winNumbers.stream()
+                .map(winNumber -> lottoNumbers.contains(new LottoNumber(winNumber)))
+                .filter(isContained -> isContained)
+                .count();
+        return WinResult.fromCount(matchedCount);
+    }
+
     private void validate(List<Integer> numbers) {
         if (isDuplicated(numbers)) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
