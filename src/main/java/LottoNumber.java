@@ -22,6 +22,20 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return new LottoNumber(number);
 	}
 
+	public static LottoNumber from(String s) {
+		final String trimmed = s.trim();
+		validate(trimmed);
+		return from(Integer.parseInt(trimmed));
+	}
+
+	private static void validate(String s) {
+		try {
+			Integer.parseInt(s);
+		} catch (NumberFormatException e) {
+			throw new LottoNumberFormatException();
+		}
+	}
+
 	public int get() {
 		return number;
 	}
