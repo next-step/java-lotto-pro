@@ -13,5 +13,6 @@ public class FirstStateView {
         for (String lottoNumbers : result) {
             out.println(lottoNumbers);
         }
+        out.println();
     }
 }

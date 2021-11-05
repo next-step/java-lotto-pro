@@ -5,19 +5,26 @@ import lotto.domain.CollectionsShuffler;
 import java.util.Scanner;
 
 public class AutoLottoApplication {
-    FirstState state;
+    private State state;
 
-    public AutoLottoApplication(FirstState state) {
+    public AutoLottoApplication(State state) {
         this.state = state;
     }
 
     public void play() {
         Scanner scanner = new Scanner(System.in);
 
-        state.printQuestion(System.out);
+        while (!state.isFinish()) {
+            state.printQuestion(System.out);
+            processResult(scanner);
+        }
+    }
+
+    private void processResult(Scanner scanner) {
         try {
-            String input = scanner.next();
+            String input = scanner.nextLine();
             state.printResult(input, System.out);
+            state = state.next();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

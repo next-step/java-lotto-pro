@@ -43,7 +43,7 @@ public class Record {
     }
 
     public int get(int matchedCount) {
-        return record.get(matchedCount);
+        return record.getOrDefault(matchedCount, DEFAULT_COUNT_ZERO);
     }
 
     public Money getWinningMoney(Rank rank) {
