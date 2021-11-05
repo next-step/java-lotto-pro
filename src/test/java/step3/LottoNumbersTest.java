@@ -14,13 +14,13 @@ import org.mockito.MockedStatic;
 class LottoNumbersTest {
 
 	@Test
-	@DisplayName("여섯개의 랜덤한 숫자에 따른 로또번호가 생성되는지 확인")
+	@DisplayName("로또번호가 중복되어서 출력되지 않는지 확인 ")
 	void createLotto() {
 		LottoNumbers lottoNumbers = new LottoNumbers();
 		try (MockedStatic<RandomUtils> randomMock = mockStatic(RandomUtils.class)) {
 			randomMock
 				.when(() -> RandomUtils.pick())
-				.thenReturn(1, 4, 5, 6, 7, 9);
+				.thenReturn(1, 4, 4, 5, 6, 7, 9, 9);
 			LottoNumbers createLotto = lottoNumbers.createLottoNumbers();
 			assertThat(createLotto).isEqualTo(createNumbers());
 		}

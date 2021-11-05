@@ -18,11 +18,15 @@ public class LottoNumbers {
 	}
 
 	public LottoNumbers createLottoNumbers() {
-		for (int i = 0; i < LOTTO_NUMBER_MAX; i++) {
+		while (isNotMaxNumber()) {
 			validation();
 			lottoNumbers.add(new LottoNumber(RandomUtils.pick()));
 		}
 		return new LottoNumbers(this.lottoNumbers);
+	}
+
+	private boolean isNotMaxNumber() {
+		return LOTTO_NUMBER_MAX != lottoNumbers.size();
 	}
 
 	private void validation() {
@@ -34,7 +38,6 @@ public class LottoNumbers {
 	private boolean isOverFlow() {
 		return this.lottoNumbers.size() > LOTTO_NUMBER_MAX;
 	}
-	
 
 	@Override
 	public boolean equals(Object o) {
