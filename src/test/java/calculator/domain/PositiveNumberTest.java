@@ -1,4 +1,6 @@
-import calculator.domain.PositiveNumber;
+package calculator.domain;
+
+import calculator.exception.NotPermittedPatternException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,12 +23,12 @@ class PositiveNumberTest {
     @DisplayName("정적팩토리 메서드의 인자에 허용되지 않는 음수값을 받으면 예외를 던진다.")
     @Test
     void exceptionTest1() {
-        assertThatThrownBy(() -> PositiveNumber.from("-1")).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> PositiveNumber.from("-1")).isInstanceOf(NotPermittedPatternException.class);
     }
 
     @DisplayName("정적팩토리 메서드의 인자에 허용되지 않는 숫자가 아닌 문자열을 받으면 예외를 던진다.")
     @Test
     void exceptionTest2() {
-        assertThatThrownBy(() -> PositiveNumber.from("chang")).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> PositiveNumber.from("chang")).isInstanceOf(NotPermittedPatternException.class);
     }
 }
