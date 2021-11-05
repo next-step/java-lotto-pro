@@ -39,13 +39,13 @@ public class ResultView {
 
 	private void printMatchResult(MatchResult matchResult) {
 		System.out.println(
-			String.format(THREE_MATCH_MESSAGE, MatchingNumberCount.THREE.getPrizeMoney().intValue(), matchResult.getThreeMatchCount()));
+			String.format(THREE_MATCH_MESSAGE, MatchingNumberCount.THREE.getPrizeMoney(), matchResult.getThreeMatchCount()));
 		System.out.println(
-			String.format(FOUR_MATCH_MESSAGE, MatchingNumberCount.FOUR.getPrizeMoney().intValue(), matchResult.getFourMatchCount()));
+			String.format(FOUR_MATCH_MESSAGE, MatchingNumberCount.FOUR.getPrizeMoney(), matchResult.getFourMatchCount()));
 		System.out.println(
-			String.format(FIVE_MATCH_MESSAGE, MatchingNumberCount.FIVE.getPrizeMoney().intValue(), matchResult.getFiveMatchCount()));
+			String.format(FIVE_MATCH_MESSAGE, MatchingNumberCount.FIVE.getPrizeMoney(), matchResult.getFiveMatchCount()));
 		System.out.println(
-			String.format(SIX_MATCH_MESSAGE, MatchingNumberCount.SIX.getPrizeMoney().intValue(), matchResult.getSixMatchCount()));
+			String.format(SIX_MATCH_MESSAGE, MatchingNumberCount.SIX.getPrizeMoney(), matchResult.getSixMatchCount()));
 	}
 
 	public void printLottoNumbers(Lottos lottos) {
