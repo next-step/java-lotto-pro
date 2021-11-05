@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -26,7 +25,7 @@ public class LottoNumber {
 		return lottoNumber;
 	}
 
-	private static void validateNumber(Collection<Integer> numbers) {
+	private static void validateNumber(List<Integer> numbers) {
 		if (numbers.size() != LOTTO_NUMBER_SIZE) {
 			throw new IllegalArgumentException("6개의 숫자로 되어야 합니다");
 		}
@@ -45,9 +44,8 @@ public class LottoNumber {
 		}
 	}
 
-	private void addAll(Collection<Integer> numbers) {
-		this.lottoNumbers.addAll(numbers);
-		this.lottoNumbers = Collections.unmodifiableList(this.lottoNumbers);
+	private void addAll(List<Integer> numbers) {
+		this.lottoNumbers = Collections.unmodifiableList(numbers);
 	}
 
 	public List<Integer> getNumbers() {
