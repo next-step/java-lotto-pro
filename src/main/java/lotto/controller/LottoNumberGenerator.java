@@ -24,7 +24,6 @@ public class LottoNumberGenerator {
     }
 
     public static LottoPaper getLottoNumbers() {
-
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> randomLottoNumbers = lottoNumbers.subList(GameRule.LOTTO_START_INDEX, GameRule.LOTTO_END_INDEX);
         Collections.sort(randomLottoNumbers);
@@ -32,7 +31,6 @@ public class LottoNumberGenerator {
     }
 
     public LottoPaper createWinningNumber(String input) {
-
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         Arrays.asList(input.split(GameRule.LOTTO_NUMBER_DELIMITER))
                 .forEach(number -> lottoNumbers.add(new LottoNumber(parseLottoNumber(number))) );
@@ -44,7 +42,6 @@ public class LottoNumberGenerator {
     }
 
     private int parseLottoNumber(String number) {
-
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
