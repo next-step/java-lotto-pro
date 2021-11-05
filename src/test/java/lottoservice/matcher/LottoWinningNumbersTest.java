@@ -21,7 +21,7 @@ public class LottoWinningNumbersTest {
 
 	@ParameterizedTest
 	@CsvSource({"3,34,22,17,26,7"})
-	public void 당첨번호_리스트_입력(ArgumentsAccessor argumentsAccessor) {
+	public void makeLottoWinningNumbers_당첨번호_리스트_입력(ArgumentsAccessor argumentsAccessor) {
 		List<Integer> numbers = convertArgumentsToInteger(argumentsAccessor);
 		LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(numbers);
 		assertThat(lottoWinningNumbers.getWinningNumbers().size()).isEqualTo(numbers.size());
@@ -34,7 +34,7 @@ public class LottoWinningNumbersTest {
 
 	@ParameterizedTest
 	@CsvSource({"34,3,17,26,7,3"})
-	public void 당첨번호_리스트_중복숫자_입력_예외(ArgumentsAccessor argumentsAccessor) {
+	public void validateHasNotDuplicateLottoNumber_당첨번호_리스트_중복숫자_입력_예외(ArgumentsAccessor argumentsAccessor) {
 		List<Integer> numbers = convertArgumentsToInteger(argumentsAccessor);
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(numbers);
@@ -43,7 +43,7 @@ public class LottoWinningNumbersTest {
 
 	@ParameterizedTest
 	@CsvSource({"34,3,17,26,7"})
-	public void 당첨번호_리스트_갯수가_작은경우_예외(ArgumentsAccessor argumentsAccessor) {
+	public void validateSizeOfLotto_당첨번호_리스트_갯수가_작은경우_예외(ArgumentsAccessor argumentsAccessor) {
 		List<Integer> numbers = convertArgumentsToInteger(argumentsAccessor);
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(numbers);
@@ -52,7 +52,7 @@ public class LottoWinningNumbersTest {
 
 	@ParameterizedTest
 	@CsvSource({"34,3,17,26,7,10,32"})
-	public void 당첨번호_리스트_갯수가_큰경우_예외(ArgumentsAccessor argumentsAccessor) {
+	public void validateSizeOfLotto_당첨번호_리스트_갯수가_큰경우_예외(ArgumentsAccessor argumentsAccessor) {
 		List<Integer> numbers = convertArgumentsToInteger(argumentsAccessor);
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(numbers);
@@ -61,14 +61,14 @@ public class LottoWinningNumbersTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {"1, 31, 22, 15, 4, 7", "2, 43, 33, 25, 6, 7"})
-	public void 당첨번호_문자열_입력(String lottoNumberText) {
+	public void makeLottoWinningNumbers_당첨번호_문자열_입력(String lottoNumberText) {
 		LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(lottoNumberText);
 		assertThat(lottoWinningNumbers.getWinningNumbers().size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {"1, 31, 22, 15, 4, 7, 5", "2, 43, 33, 25, 6"})
-	public void 당첨번호_문자열_입력_로또갯수_예외(String lottoNumberText) {
+	public void makeLottoWinningNumbers_당첨번호_문자열_입력_로또갯수_예외(String lottoNumberText) {
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(lottoNumberText);
 		}).isInstanceOf(InvalidLottoFormatException.class);
@@ -76,7 +76,7 @@ public class LottoWinningNumbersTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {"1,31,22,15,4,7", " 2, 43, 33, 25, 6, 10","2, 43, 33, 25, 6, 10 ","2 43 33 25 6 10"})
-	public void 당첨번호_문자열_입력_포맷_예외(String lottoNumberText) {
+	public void makeLottoWinningNumbers_당첨번호_문자열_입력_포맷_예외(String lottoNumberText) {
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(lottoNumberText);
 		}).isInstanceOf(InvalidLottoFormatException.class);

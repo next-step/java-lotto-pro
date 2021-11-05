@@ -11,15 +11,11 @@ import org.junit.jupiter.api.Test;
 import lottoservice.lottonumber.LottoNumber;
 import lottoservice.lottoticket.LottoTicket;
 import lottoservice.lottoticket.LottoTickets;
-import lottoservice.matcher.LottoMatchRank;
-import lottoservice.matcher.LottoMatchResult;
-import lottoservice.matcher.LottoMatcher;
-import lottoservice.matcher.LottoWinningNumbers;
 
 public class LottoMatcherTest {
 
 	@Test
-	public void 정답과_로또티켓들_비교결과() {
+	public void matchWinningAndTickets_정답과_로또티켓들_비교결과() {
 		LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers("1, 5, 20, 34, 3, 40");
 
 		List<LottoTicket> tickets = new ArrayList<>();
@@ -36,7 +32,7 @@ public class LottoMatcherTest {
 	}
 
 	@Test
-	public void 수익률계산() {
+	public void matchWinningAndTickets_당첨_수익률_계산() {
 		LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers("1, 5, 20, 34, 3, 40");
 
 		List<LottoTicket> tickets = new ArrayList<>();
