@@ -25,9 +25,9 @@ public class InputView {
     }
 
     /**
-     * 로또 우승번호를 입력합니다.
+     * 로또 당첨번호를 입력합니다.
      *
-     * @return 로또 우승번호
+     * @return 로또 당첨번호
      */
     public static WinningNumbers inputWinningNumbers() {
         try {
