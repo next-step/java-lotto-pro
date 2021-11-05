@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
 public class ResultView {
@@ -10,7 +11,9 @@ public class ResultView {
     }
     
     public void printLottoList(Lottos lottos) {
-        
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.getNumbers());
+        }
     }
 
 }
