@@ -2,8 +2,10 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
 import java.util.Map;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -111,5 +113,37 @@ class LottoResultTest {
 
 		// then
 		assertThat(yield).isEqualTo(yieldResult);
+	}
+
+	@Test
+	void 로또등수를_문자열_리스트로_변환하는_기능테스트() {
+		// given
+		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,6");
+		LottoGenerator lottoGenerator = new LottoGenerator("1000", "1,2,3,4,5,6");
+		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottoGenerator);
+
+		// when
+		List<String> resultList = lottoResult.convertRankMapToStringList();
+
+		// then
+		assertThat(resultList.contains("6개 일치 (2000000000원)- 1개")).isTrue();
+	}
+
+	@ParameterizedTest(name = "index {index} ==> winningLottoNumber {0}, inputNumber {1}, yield {2}")
+	@CsvSource(value = {
+		"1,2,3,4,5,6 : 1,2,3,4,5,6 : 2000000.0",
+		"1,2,3,4,5,6 : 1,2,3,4,5,7 : 1500.0"
+	}, delimiter = ':')
+	void 로또결과_총수익률을_문자열로_변환하는_기능테스트(String winningLottoNumber, String inputNumber, String yield) {
+		// given
+		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningLottoNumber);
+		LottoGenerator lottoGenerator = new LottoGenerator("1000", inputNumber);
+		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottoGenerator);
+
+		// when
+		String result = lottoResult.convertYieldToString();
+
+		// then
+		assertThat(result).isEqualTo("총 수익률은 " + yield + "입니다.");
 	}
 }
