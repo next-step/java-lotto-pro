@@ -39,7 +39,8 @@
 - [x] `LottoGame`
     - [x] `LottoGame`의 가격은 1000원이다.
     - [x] `LottoGame`은 `LottoNumbers`를 갖는다.
-    - [x] `LottoNumbers`는 `NumbersGenerator`로 생성된다.
+    - [x] 자동 로또인 경우 `NumbersGenerator`로 생성된다.
+    - [x] 수동 로또인 경우 입력값으로 생성된다.
     - [x] `WinningLottoNumbers`와 비교하여 `LottoRank`를 알 수 있다.
 - [x] `NumbersGenerator`
     - [x] 번호들을 생성한다.

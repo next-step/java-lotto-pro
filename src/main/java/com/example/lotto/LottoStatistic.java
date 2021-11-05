@@ -9,11 +9,15 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoStatistic {
-	private final long purchaseAmount;
+	private final PurchaseInformation purchaseInformation;
 	private final Map<LottoRank, Long> lottoRankToCount;
 
-	public LottoStatistic(long purchaseAmount, LottoGames lottoGames, WinningLottoNumbers winningLottoNumbers) {
-		this.purchaseAmount = purchaseAmount;
+	public LottoStatistic(
+		PurchaseInformation purchaseInformation,
+		LottoGames lottoGames,
+		WinningLottoNumbers winningLottoNumbers
+	) {
+		this.purchaseInformation = purchaseInformation;
 		this.lottoRankToCount = defaultLottoRankToCount();
 		addResultsToLottoRankToCount(lottoGames, winningLottoNumbers);
 	}
@@ -45,6 +49,10 @@ public class LottoStatistic {
 			.get();
 	}
 
+	private double getEarningsRate() {
+		return (double)getTotalWinningMoney() / purchaseInformation.getActualPurchaseMoney();
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("당첨 통계\n---------\n");
@@ -53,7 +61,7 @@ public class LottoStatistic {
 			sb.append(String.format("%s- %d개\n", lottoRank, count));
 		}
 
-		sb.append(String.format("총 수익률은 %f입니다.", ((double)getTotalWinningMoney() / purchaseAmount)));
+		sb.append(String.format("총 수익률은 %f입니다.", getEarningsRate()));
 		return sb.toString();
 	}
 }

@@ -13,17 +13,18 @@ class PurchaseInformationTest {
 	@DisplayName("구매 정보로부터 구매 금액, 구매할 수동 로또 수, 자동 로또 수, 잔돈을 알 수 있다.")
 	@ParameterizedTest
 	@CsvSource(value = {
-		"10000,10,0,0",
-		"14000,3,11,0",
-		"10000,3,7,0",
-		"11000,2,9,0",
-		"11100,2,9,100",
+		"10000,10,0,0,10000",
+		"14000,3,11,0,14000",
+		"10000,3,7,0,10000",
+		"11000,2,9,0,11000",
+		"11100,2,9,100,11000",
 	})
 	void constructor(
 		long purchaseMoney,
 		long manualLottoPurchaseCount,
 		long expectedAutoLottoPurchaseCount,
-		long expectedChange
+		long expectedChange,
+		long actualPurchaseMoney
 	) {
 		// given & when
 		PurchaseInformation purchaseInformation = PurchaseInformation.of(
@@ -37,7 +38,8 @@ class PurchaseInformationTest {
 			() -> assertThat(purchaseInformation.getPurchaseMoney()).isEqualTo(purchaseMoney),
 			() -> assertThat(purchaseInformation.getManualLottoPurchaseCount()).isEqualTo(manualLottoPurchaseCount),
 			() -> assertThat(purchaseInformation.getAutoLottoPurchaseCount()).isEqualTo(expectedAutoLottoPurchaseCount),
-			() -> assertThat(purchaseInformation.getChange()).isEqualTo(expectedChange)
+			() -> assertThat(purchaseInformation.getChange()).isEqualTo(expectedChange),
+			() -> assertThat(purchaseInformation.getActualPurchaseMoney()).isEqualTo(actualPurchaseMoney)
 		);
 	}
 

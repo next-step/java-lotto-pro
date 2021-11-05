@@ -3,7 +3,7 @@ package com.example.lotto;
 public class LottoController {
 
 	private final NumbersGenerator numbersGenerator;
-	private long purchaseAmount;
+	private PurchaseInformation purchaseInformation;
 	private LottoGames lottoGames;
 
 	public LottoController(NumbersGenerator numbersGenerator) {
@@ -11,17 +11,31 @@ public class LottoController {
 	}
 
 	public void run() {
-		buy();
+		pay();
+		issue();
 		check();
 	}
 
-	private void buy() {
+	private void pay() {
 		OutputView.print("구입금액을 입력해 주세요.");
-		purchaseAmount = InputView.inputPurchaseAmount();
-		long lottoGameCount = purchaseAmount / LottoGame.LOTTO_GAME_PRICE;
-		lottoGames = LottoGames.of(lottoGameCount, numbersGenerator);
+		long purchaseAmount = InputView.inputPurchaseAmount();
+		OutputView.print("수동으로 구매할 로또 수를 입력해 주세요.");
+		long manualLottoPurchaseCount = InputView.inputManualLottoPurchaseCount();
 
-		OutputView.print(String.format("%d개를 구매했습니다.", lottoGameCount));
+		this.purchaseInformation = PurchaseInformation.of(
+			LottoGame.LOTTO_GAME_PRICE,
+			purchaseAmount,
+			manualLottoPurchaseCount);
+	}
+
+	private void issue() {
+		OutputView.print("수동으로 구매할 번호를 입력해 주세요.");
+		LottoGames manualLottoGames = LottoGames.manual(
+			InputView.inputManualLottoNumbersList(purchaseInformation.getManualLottoPurchaseCount()));
+		LottoGames autoLottoGames = LottoGames.auto(purchaseInformation.getAutoLottoPurchaseCount(), numbersGenerator);
+		lottoGames = LottoGames.merge(manualLottoGames, autoLottoGames);
+
+		OutputView.print(String.format("%d개를 구매했습니다.", lottoGames.size()));
 		OutputView.print(lottoGames.toString());
 	}
 
@@ -32,7 +46,7 @@ public class LottoController {
 		LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusWinningLottoNumber());
 
 		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(baseNumbers, bonusNumber);
-		LottoStatistic lottoStatistic = new LottoStatistic(purchaseAmount, lottoGames, winningLottoNumbers);
+		LottoStatistic lottoStatistic = new LottoStatistic(purchaseInformation, lottoGames, winningLottoNumbers);
 		OutputView.print(lottoStatistic.toString());
 	}
 }

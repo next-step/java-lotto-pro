@@ -6,7 +6,7 @@ public class PurchaseInformation {
 	private final long autoLottoPurchaseCount;
 	private final long change;
 
-	public PurchaseInformation(
+	private PurchaseInformation(
 		long purchaseMoney,
 		long manualLottoPurchaseCount,
 		long autoLottoPurchaseCount,
@@ -49,5 +49,9 @@ public class PurchaseInformation {
 
 	public long getChange() {
 		return change;
+	}
+
+	public long getActualPurchaseMoney() {
+		return purchaseMoney - change;
 	}
 }

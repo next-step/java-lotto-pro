@@ -17,7 +17,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 @DisplayName("로또 게임")
 class LottoGameTest {
 
-	private static Stream<Arguments> validNumbers() {
+	private static Stream<Arguments> validNumbersArguments() {
 		return Stream.of(
 			// valid lotto numbers
 			Arguments.of(Arrays.asList(8, 21, 23, 41, 42, 43)),
@@ -26,7 +26,7 @@ class LottoGameTest {
 		);
 	}
 
-	private static Stream<Arguments> invalidNumbers() {
+	private static Stream<Arguments> invalidNumbersArguments() {
 		return Stream.of(
 			// null
 			null,
@@ -46,27 +46,27 @@ class LottoGameTest {
 
 		return Stream.of(
 			Arguments.of(
-				LottoGame.of(dummyNumbersGenerator),
+				LottoGame.auto(dummyNumbersGenerator),
 				WinningLottoNumbers.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(45)),
 				LottoRank.FIRST),
 			Arguments.of(
-				LottoGame.of(dummyNumbersGenerator),
+				LottoGame.auto(dummyNumbersGenerator),
 				WinningLottoNumbers.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoNumber.of(6)),
 				LottoRank.SECOND),
 			Arguments.of(
-				LottoGame.of(dummyNumbersGenerator),
+				LottoGame.auto(dummyNumbersGenerator),
 				WinningLottoNumbers.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoNumber.of(45)),
 				LottoRank.THIRD),
 			Arguments.of(
-				LottoGame.of(dummyNumbersGenerator),
+				LottoGame.auto(dummyNumbersGenerator),
 				WinningLottoNumbers.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 7, 8)), LottoNumber.of(45)),
 				LottoRank.FOURTH),
 			Arguments.of(
-				LottoGame.of(dummyNumbersGenerator),
+				LottoGame.auto(dummyNumbersGenerator),
 				WinningLottoNumbers.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 7, 8, 9)), LottoNumber.of(45)),
 				LottoRank.FIFTH),
 			Arguments.of(
-				LottoGame.of(dummyNumbersGenerator),
+				LottoGame.auto(dummyNumbersGenerator),
 				WinningLottoNumbers.of(LottoNumbers.of(Arrays.asList(1, 2, 7, 8, 9, 10)), LottoNumber.of(45)),
 				LottoRank.MISS)
 		);
@@ -79,12 +79,12 @@ class LottoGameTest {
 		assertThat(LottoGame.LOTTO_GAME_PRICE).isEqualTo(1000);
 	}
 
-	@DisplayName("로또 게임을 생성한다. 중복되지 않는 오름차순의 6개 로또 번호들을 갖는다.")
+	@DisplayName("로또 게임을 수동으로 생성한다. 중복되지 않는 오름차순의 6개 로또 번호들을 갖는다.")
 	@ParameterizedTest
-	@MethodSource("validNumbers")
-	void constructor(List<Integer> numbers) {
+	@MethodSource("validNumbersArguments")
+	void manual(List<Integer> numbers) {
 		// given & when
-		LottoGame lottoGame = LottoGame.of((from, to, size) -> numbers);
+		LottoGame lottoGame = LottoGame.manual(numbers);
 
 		// then
 		assertAll(
@@ -93,12 +93,35 @@ class LottoGameTest {
 		);
 	}
 
-	@DisplayName("로또 게임을 생성할 수 없다.")
+	@DisplayName("로또 게임을 수동으로 생성할 수 없다.")
 	@ParameterizedTest
-	@MethodSource("invalidNumbers")
-	void constructor_fail(List<Integer> numbers) {
+	@MethodSource("invalidNumbersArguments")
+	void manual_fail(List<Integer> numbers) {
 		// given & when & then
-		assertThatThrownBy(() -> LottoGame.of((from, to, size) -> numbers))
+		assertThatThrownBy(() -> LottoGame.manual(numbers))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("로또 게임을 자동으로 생성한다. 중복되지 않는 오름차순의 6개 로또 번호들을 갖는다.")
+	@ParameterizedTest
+	@MethodSource("validNumbersArguments")
+	void auto(List<Integer> numbers) {
+		// given & when
+		LottoGame lottoGame = LottoGame.auto((from, to, size) -> numbers);
+
+		// then
+		assertAll(
+			() -> assertThat(lottoGame).isNotNull(),
+			() -> assertThat(lottoGame.getLottoNumbers()).isNotNull()
+		);
+	}
+
+	@DisplayName("로또 게임을 자동으로 생성할 수 없다.")
+	@ParameterizedTest
+	@MethodSource("invalidNumbersArguments")
+	void auto_fail(List<Integer> numbers) {
+		// given & when & then
+		assertThatThrownBy(() -> LottoGame.auto((from, to, size) -> numbers))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 

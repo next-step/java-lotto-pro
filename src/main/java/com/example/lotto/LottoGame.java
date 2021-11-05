@@ -11,7 +11,11 @@ public class LottoGame {
 		this.lottoNumbers = lottoNumbers;
 	}
 
-	static LottoGame of(NumbersGenerator numbersGenerator) {
+	static LottoGame manual(List<Integer> numbers) {
+		return new LottoGame(LottoNumbers.of(numbers));
+	}
+
+	static LottoGame auto(NumbersGenerator numbersGenerator) {
 		List<Integer> numbers = numbersGenerator.generate(
 			LottoNumber.ONE,
 			LottoNumber.FORTY_FIVE,
