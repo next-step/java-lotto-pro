@@ -2,136 +2,222 @@
 skinparam groupInheritance 2
 
 package Domain {
-  class Lottos {
-    - values : List<Lotto>
+  package Lotto {
+    class Lottos {
+      - values : List<Lotto>
+      
+      + size() : Integer
+      + get(Integer index) : Lotto
+      + getPrice() : Integer
+    }
+
+    class Lotto {
+      - {static} price : Integer
+      - value : LottoNumbers
+      
+      - checkLottoNumberCount(values: String[]) :void
+      + toString() : String
+      + getPrice() : Integer
+      + matchCount(latestWinLotto : Lotto) : Integer
+    }
+
+    class LottoNumbers {
+      - values : List<LottoNumber>
+
+      + gererate() : void
+      + contains(lottoNumber : LottoNumber) : boolean
+      + size() : Integer
+      + get(Integer index) : LottoNumber
+      + toString()
+    }
+
+    class LottoNumber {
+      - value : String
+
+      + toString() : String
+    }
   }
 
-  class Lotto {
-    - value : LottoNumbers
+  package winpolicy {
+    enum Winpolicy {
+      + NONE_MATCH
+      + THREE_MATCH
+      + FOUR_MATCH
+      + FIVE_MATCH
+      + SIX_MATCH
+    }
 
-    + add(lottoNumbers : LottoNumbers) : void
-    + toString() : String;
+    abstract policy {
+      - winPrice : Integer
+
+      + {abstrct} isMatch(latestWinLoot : Lotto, lotto Lotto) : Boolean
+      + getMatchCount(latestWinLotto Lotto, Lottos lottos) : Integer
+      + getWinPrice() : Integer
+    }
+
+    class NoneMatch {      
+      + isMatch(latestWinLoot : Lotto, lotto Lotto) : Boolean
+    }
+
+    class ThirdMatch {
+      + isMatch(latestWinLoot : Lotto, lotto Lotto) : Boolean
+    }
+
+    class FourMatch {
+      + isMatch(latestWinLoot : Lotto, lotto Lotto) : Boolean
+    }
+
+    class FiveMatch {
+      + isMatch(latestWinLoot : Lotto, lotto Lotto) : Boolean
+    }
+
+    class SixMatch {
+      + isMatch(latestWinLoot : Lotto, lotto Lotto) : Boolean
+    }
   }
 
-  class WinStatistics {
-    - lottos : Lottos
-    - winMatchs : List<WinMatch> 
-    - revenueRatio : RevenueRatio
+  package winstatistics {    
+    class WinStatistics {
+      - winStatisticsInfos : WinStatisticsInfos
+      - revenueRatio : RevenueRatio
 
-  }
+      + find(winPolicy : WinPolicy) : WinStatisticsInfo
+      + getRevenueRatioValue() : String
+      + analysis(latestWinLotto : Lotto, buyLottos : Lottos) : void
+    }
 
-  class RevenueRatio {
-    - value : Float
+    class RevenueRatio {
+      - value : String
 
-    + value() : Float
-  }
+      + getValue() : String
+    }
 
-  class LottoNumbers {
-    - values : List<LottoNumber>
-  }
+    class WinStatisticsInfo {
+      - winPolicy : WinPolicy
+      - count : Integer
 
-  class LottoNumber {
-    - value : Integer
+      + getCount() : Integer
+      + getWinPrice() : Integer
+      + getPolicy() : Policy
+    }
 
-    + gererate() : void
-  }
+    class WinStatisticsInfos {
+      - values : List<WinStatisticsInfo>
 
-  abstract WinMatch {
-    - prizeMoney : Integer
-
-    + setNextWinMatch(WinMatch) : void
-    + match(lotto Lotto) : void
-  }
-
-  class ThirdMatch {
-    - prizeMoney : Integer
-    
-    + setNextWinMatch(WinMatch) : void
-    + match(lotto Lotto) : void
-  }
-
-  class FourMatch {
-    - prizeMoney : Integer
-    
-    + setNextWinMatch(WinMatch) : void
-    + match(lotto Lotto) : void
-  }
-
-  class FiveMatch {
-    - prizeMoney : Integer
-    
-    + setNextWinMatch(WinMatch) : void
-    + match(lotto Lotto) : void
-  }
-
-  class SixMatch {
-    - prizeMoney : Integer
-    
-    + setNextWinMatch(WinMatch) : void
-    + match(lotto Lotto) : void
+      + size() : Integer
+      + get(index : Integer) : WinStatisticsInfo
+      + add(winStatisticsInfo : WinStatisticsInfo) : boolean
+      + getWinPolicy(index : Integer) : Policy
+      + findBy(winPolicy : WinPolicy) : WinStatisticsInfo
+      + clear() : void
+    }
   }
 }
 
 package Presentaion {
-  interface Screen {
-    + initialize() : void
+  abstract Screen {
+    - topMargin : MarginLabel
+
+    # initialize() : void
+    # {abstract} upldate() : void
     + render() : void
+    + setTopMargin(marginCount : Integer) : void
   }
 
   class BuyLotto {
     - buyinglottoPrice : TextEdit 
     - resultBuyingLottoCount : Label
-    - resultLottoNumber : List<Label>
 
     + initialize() : void
     + render() : void
+    + update() : void
+  }
+  
+  class AutoGenerateLottoNumber {
+    - lottoLabel : Label
+
+    + initialize() : void
+    + render() : void
+    + update() : void
   }
 
   class SettingLastestWinLotto {
-    - pastLotto : TextEdit
-    
+    - latestWinLotto : TextEdit
+
     + initialize() : void
     + render() : void
+    + update() : void
   }
 
   class ReportWinStatistics {
     - title : Label
     - division : Label
-    - matchingResults : List<Label>
+    - threeMatchWin : Label
+    - fourMatchWin : Label
+    - fiveMatchWin : Label
+    - sixMatchWin : Label
     - revenueRatio : Label
+    - winStatistics : WinStatistics
 
     + initialize() : void
     + render() : void
-  }
-
-  class SharedData {
-    - buylottos : Lottos
-    - lastestWinLotto : Lotto
+    + update() : void
+    - getRevenueRatioValueText() : String
+    - getStatisticsText() : String
   }
 }
 
-package Component {
-  interface CuiComponent {
-    + render() : void
+package infrastructure {
+  package component {
+    interface CuiComponent {
+      + render() : void
+    }
+
+    class Label {
+      - printText : String
+      
+      + render() : void
+      + setPrintLabel(printText : String) : void
+    }
+
+    class MarginLabel {
+      - marginCount : Integer
+      
+      + render() : void
+      + setMarginCount(marginCount : Integer) : void
+    }
+
+    class TextEdit {
+      - printText : String
+      - value : String
+      - scanner : Scanner
+
+      + render() : void
+      + getValue() : String
+    }
   }
+  package util {
+    class RandomLottoNumber {
+      - {static} cachedNumbers : List<LottoNumber>
 
-  class Label {
-    - printText : String
-    
-    + render() : void
-    + setPrintLabel() : void
+      + {static} generate() : List<LottoNumber>
+    }
   }
+  
+  package datashared {
+    class UiSharedData {
+      - {static} buyLottos Lottos
+      - {static} latestWinLotto Lotto
 
-  class TextEdit {
-    - printText : String
-    - value : String
-
-    + render() : void
-    + getValue() : String
+      + {static} setBuyLottos(buyLottos : Lottos) : void
+      + {static} setLatestWinLotto(latestWinLotto : Lotto) : void
+      + {static} getBuyLottos() : Lottos
+      + {static} getLatestWinLotto() : Lotto
   }
 }
 
 CuiComponent <|-- Label
+CuiComponent <|-- MarginLabel
 CuiComponent <|-- TextEdit
 
 Screen <|-- BuyLotto
@@ -139,20 +225,29 @@ Screen <|-- SettingLastestWinLotto
 Screen <|-- ReportWinStatistics
 ReportWinStatistics <-- WinStatistics
 
-SharedData <-- BuyLotto
-SharedData <-- SettingLastestWinLotto
-SharedData <-- ReportWinStatistics
-SharedData *-- Lottos
-SharedData *-- Lotto
+UiSharedData *-- Lottos
+UiSharedData *-- Lotto
+
+LottoNumbers <- RandomLottoNumber
+
+AutoGenerateLottoNumber <-- UiSharedData
+BuyLotto <-- UiSharedData
+ReportWinStatistics <-- UiSharedData
+SettingLastestWinLotto <-- UiSharedData
+AutoGenerateLottoNumber <-- UiSharedData
 
 WinStatistics  <-- Lottos
-WinStatistics <-- WinMatch
-WinStatistics <-- RevenueRatio
+WinStatistics <-- policy
+WinStatistics *-- RevenueRatio
 
-WinMatch <|-- ThirdMatch
-WinMatch <|-- FourMatch
-WinMatch <|-- FiveMatch
-WinMatch <|-- SixMatch
+policy <|-- ThirdMatch
+policy <|-- FourMatch
+policy <|-- FiveMatch
+policy <|-- SixMatch
+policy <|-- NoneMatch
+
+WinStatisticsInfos *-- WinStatisticsInfo
+WinStatistics *-- WinStatisticsInfos
 
 Lottos "1" *-- "0..*" Lotto
 Lotto "1" *-- "1" LottoNumbers
