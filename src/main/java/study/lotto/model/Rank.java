@@ -15,7 +15,7 @@ public enum Rank {
     private final int countOfMatch;
     private final int winningMoney;
 
-    private Rank(int countOfMatch, int winningMoney) {
+    Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }
@@ -29,7 +29,6 @@ public enum Rank {
     }
 
     public static Rank valueOf(final int countOfMatch) {
-//        validateCountOfMatch(countOfMatch);
         final Rank[] values = values();
         return Arrays.stream(values)
                 .filter(rank -> rank.countOfMatch == countOfMatch)
@@ -43,7 +42,4 @@ public enum Rank {
                 .sorted(Comparator.comparing(Rank::getWinningMoney))
                 .collect(Collectors.toList());
     }
-//    private static void validateCountOfMatch(final int countOfMatch) {
-//        throw new IllegalRankCountOfMatchException("매치된 수와 맞는 랭크를 찾을 수 없습니다.");
-//    }
 }
