@@ -28,8 +28,8 @@ public class Lottos {
 
 		values.stream()
 			.forEach(lotto -> {
-				int matchCount = lotto.matchCount(lastWeekWinningNumber.getValue());
-				matchResult.increaseByMatchCount(matchCount);
+				Count count = lotto.matchCount(lastWeekWinningNumber.getValue());
+				matchResult.increaseByMatchCount(MatchingNumberCount.getByCount(count));
 			});
 
 		return matchResult;

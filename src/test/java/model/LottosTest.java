@@ -1,6 +1,7 @@
 package model;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
@@ -42,7 +43,12 @@ public class LottosTest {
 		LastWeekWinningNumber winningNumber = LastWeekWinningNumber.of("3, 4, 5, 6, 10, 11");
 		MatchResult matchResult = lottos.matchResult(winningNumber);
 
-		assertThat(matchResult).isEqualTo(new MatchResult(1, 1, 0, 0));
+		assertAll(
+			() -> assertThat(matchResult.getThreeMatchCount()).isEqualTo(Count.from(1)),
+			() -> assertThat(matchResult.getFourMatchCount()).isEqualTo(Count.from(1)),
+			() -> assertThat(matchResult.getFiveMatchCount()).isEqualTo(Count.from(0)),
+			() -> assertThat(matchResult.getSixMatchCount()).isEqualTo(Count.from(0))
+		);
 	}
 
 	@Test
@@ -57,6 +63,11 @@ public class LottosTest {
 		LastWeekWinningNumber winningNumber = LastWeekWinningNumber.of("3, 4, 5, 6, 10, 11");
 		MatchResult matchResult = lottos.matchResult(winningNumber);
 
-		assertThat(matchResult).isEqualTo(new MatchResult(2, 1, 0, 0));
+		assertAll(
+			() -> assertThat(matchResult.getThreeMatchCount()).isEqualTo(Count.from(2)),
+			() -> assertThat(matchResult.getFourMatchCount()).isEqualTo(Count.from(1)),
+			() -> assertThat(matchResult.getFiveMatchCount()).isEqualTo(Count.from(0)),
+			() -> assertThat(matchResult.getSixMatchCount()).isEqualTo(Count.from(0))
+		);
 	}
 }

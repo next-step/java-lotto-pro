@@ -10,8 +10,8 @@ public class Lotto {
 	public static final Integer COST = 1000;
 	public static final int MIN_NUMBER = 1;
 	public static final int MAX_NUMBER = 45;
-	public static final int INDEX_OF_START = 0;
 	private static final Integer NUMBER_COUNT = 6;
+	public static final int INDEX_OF_START = 0;
 
 	private List<Integer> numbers;
 
@@ -32,10 +32,10 @@ public class Lotto {
 		return new Lotto(selectedNumbers);
 	}
 
-	public int matchCount(Lotto other) {
-		int count = 0;
+	public Count matchCount(Lotto other) {
+		Count count = Count.zero();
 		for (int i = 0; i < NUMBER_COUNT; i++) {
-			count = this.getNumbers().contains(other.at(i)) ? ++count : count;
+			count = numbers.contains(other.at(i)) ? Count.sum(count, Count.one()) : count;
 		}
 
 		return count;

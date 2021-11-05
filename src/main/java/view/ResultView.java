@@ -9,6 +9,7 @@ import model.Lotto;
 import model.LottoStatistics;
 import model.Lottos;
 import model.MatchResult;
+import model.MatchingNumberCount;
 import model.PurchaseCount;
 
 public class ResultView {
@@ -17,8 +18,8 @@ public class ResultView {
 	public static final String OPEN_SQUARE_BRACKET = "[";
 	public static final String CLOSE_SQUARE_BRACKET = "]";
 
-	public void printPurchaseVolumeMessage(PurchaseCount purchaseVolume) {
-		System.out.println(String.format(PURCHASE_MESSAGE, purchaseVolume.toString()));
+	public void printPurchaseVolumeMessage(PurchaseCount purchaseCount) {
+		System.out.println(String.format(PURCHASE_MESSAGE, purchaseCount));
 	}
 
 	public void printWinningStatisticsMessage(MatchResult matchResult, int purchaseAmount) {
@@ -43,13 +44,13 @@ public class ResultView {
 
 	private void printMatchResult(MatchResult matchResult) {
 		System.out.println(
-			String.format(THREE_MATCH_MESSAGE, LottoStatistics.THREE_MATCH_PAYOUT.intValue(), matchResult.getThreeMatchCount()));
+			String.format(THREE_MATCH_MESSAGE, MatchingNumberCount.THREE.getPrizeMoney().intValue(), matchResult.getThreeMatchCount()));
 		System.out.println(
-			String.format(FOUR_MATCH_MESSAGE, LottoStatistics.FOUR_MATCH_PAYOUT.intValue(), matchResult.getFourMatchCount()));
+			String.format(FOUR_MATCH_MESSAGE, MatchingNumberCount.FOUR.getPrizeMoney().intValue(), matchResult.getFourMatchCount()));
 		System.out.println(
-			String.format(FIVE_MATCH_MESSAGE, LottoStatistics.FIVE_MATCH_PAYOUT.intValue(), matchResult.getFiveMatchCount()));
+			String.format(FIVE_MATCH_MESSAGE, MatchingNumberCount.FIVE.getPrizeMoney().intValue(), matchResult.getFiveMatchCount()));
 		System.out.println(
-			String.format(SIX_MATCH_MESSAGE, LottoStatistics.SIX_MATCH_PAYOUT.intValue(), matchResult.getSixMatchCount()));
+			String.format(SIX_MATCH_MESSAGE, MatchingNumberCount.SIX.getPrizeMoney().intValue(), matchResult.getSixMatchCount()));
 	}
 
 	public void printLottoNumbers(Lottos lottos) {

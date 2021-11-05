@@ -26,9 +26,9 @@ public class LottoTest {
 		Lotto winningNumber = new Lotto(Lists.newArrayList(1, 2, 3, 4, 5, 6));
 		Lotto lotto = new Lotto(Lists.newArrayList(1, 3, 5, 7, 9, 44));
 
-		int result = winningNumber.matchCount(lotto);
+		Count result = winningNumber.matchCount(lotto);
 
-		assertThat(result).isEqualTo(3);
+		assertThat(result).isEqualTo(Count.from(3));
 	}
 
 	@Test
@@ -37,9 +37,9 @@ public class LottoTest {
 		Lotto winningNumber = new Lotto(Lists.newArrayList(1, 2, 3, 4, 5, 6));
 		Lotto lotto = new Lotto(Lists.newArrayList(1, 2, 3, 4, 5, 6));
 
-		int result = winningNumber.matchCount(lotto);
+		Count result = winningNumber.matchCount(lotto);
 
-		assertThat(result).isEqualTo(6);
+		assertThat(result).isEqualTo(Count.from(6));
 	}
 
 	@Test
@@ -48,9 +48,9 @@ public class LottoTest {
 		Lotto winningNumber = new Lotto(Lists.newArrayList(1, 2, 3, 4, 5, 6));
 		Lotto lotto = new Lotto(Lists.newArrayList(7, 8, 9, 10, 11, 12));
 
-		int result = winningNumber.matchCount(lotto);
+		Count result = winningNumber.matchCount(lotto);
 
-		assertThat(result).isEqualTo(0);
+		assertThat(result).isEqualTo(Count.from(0));
 	}
 
 	@RepeatedTest(value = ENOUGH_TEST_COUNT, name = "중복되는 수는 없어야 한다 {currentRepetition} / {totalRepetitions}")

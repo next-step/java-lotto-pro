@@ -1,56 +1,40 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class MatchResult {
-	private int threeMatchCount;
-	private int fourMatchCount;
-	private int fiveMatchCount;
-	private int sixMatchCount;
+	private final Map<MatchingNumberCount, Count> countByMatchingNumberCount = new HashMap<>();
 
 	public MatchResult() {
 	}
 
-	MatchResult(int threeMatchCount, int fourMatchCount, int fiveMatchCount, int sixMatchCount) {
-		this.threeMatchCount = threeMatchCount;
-		this.fourMatchCount = fourMatchCount;
-		this.fiveMatchCount = fiveMatchCount;
-		this.sixMatchCount = sixMatchCount;
+	MatchResult(Count threeMatchCount, Count fourMatchCount, Count fiveMatchCount, Count sixMatchCount) {
+		countByMatchingNumberCount.put(MatchingNumberCount.THREE, threeMatchCount);
+		countByMatchingNumberCount.put(MatchingNumberCount.FOUR, fourMatchCount);
+		countByMatchingNumberCount.put(MatchingNumberCount.FIVE, fiveMatchCount);
+		countByMatchingNumberCount.put(MatchingNumberCount.SIX, sixMatchCount);
 	}
 
-	public void increaseByMatchCount(int matchCount) {
-		if (matchCount == 3) {
-			threeMatchCount++;
-			return;
-		}
-		if (matchCount == 4) {
-			fourMatchCount++;
-			return;
-		}
-		if (matchCount == 5) {
-			fiveMatchCount++;
-			return;
-		}
-		if (matchCount == 6) {
-			sixMatchCount++;
-			return;
-		}
+	public void increaseByMatchCount(MatchingNumberCount matchingNumberCount) {
+		countByMatchingNumberCount.merge(matchingNumberCount, Count.one(), Count::sum);
 	}
 
-	public int getThreeMatchCount() {
-		return threeMatchCount;
+	public Count getThreeMatchCount() {
+		return countByMatchingNumberCount.getOrDefault(MatchingNumberCount.THREE, Count.zero());
 	}
 
-	public int getFourMatchCount() {
-		return fourMatchCount;
+	public Count getFourMatchCount() {
+		return countByMatchingNumberCount.getOrDefault(MatchingNumberCount.FOUR, Count.zero());
 	}
 
-	public int getFiveMatchCount() {
-		return fiveMatchCount;
+	public Count getFiveMatchCount() {
+		return countByMatchingNumberCount.getOrDefault(MatchingNumberCount.FIVE, Count.zero());
 	}
 
-	public int getSixMatchCount() {
-		return sixMatchCount;
+	public Count getSixMatchCount() {
+		return countByMatchingNumberCount.getOrDefault(MatchingNumberCount.SIX, Count.zero());
 	}
 
 	@Override
@@ -60,12 +44,11 @@ public class MatchResult {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		MatchResult that = (MatchResult)o;
-		return threeMatchCount == that.threeMatchCount && fourMatchCount == that.fourMatchCount
-			&& fiveMatchCount == that.fiveMatchCount && sixMatchCount == that.sixMatchCount;
+		return Objects.equals(countByMatchingNumberCount, that.countByMatchingNumberCount);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(threeMatchCount, fourMatchCount, fiveMatchCount, sixMatchCount);
+		return Objects.hash(countByMatchingNumberCount);
 	}
 }
