@@ -12,9 +12,10 @@ public class Lottery {
     private final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     protected Lottery(final Set<LottoNumber> lottoNumbers) {
-        validateSize(lottoNumbers);
+        validate(lottoNumbers);
         this.lottoNumbers.addAll(lottoNumbers);
     }
+
 
     public static Lottery valueOf(final Set<LottoNumber> lottoNumbers) {
         return new Lottery(lottoNumbers);
@@ -41,6 +42,17 @@ public class Lottery {
     @Override
     public int hashCode() {
         return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
+    }
+
+    private void validate(final Set<LottoNumber> lottoNumbers) {
+        validateNotNull(lottoNumbers);
+        validateSize(lottoNumbers);
+    }
+
+    private void validateNotNull(final Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers == null) {
+            throw new IllegalLotterySizeException(ILLEGAL_LOTTERY_SIZE_ERROR_MESSAGE);
+        }
     }
 
     private void validateSize(final Set<LottoNumber> lottoNumbers) {

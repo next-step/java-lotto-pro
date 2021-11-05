@@ -1,5 +1,8 @@
 package study.lotto.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class LottoDiscriminator {
@@ -13,6 +16,15 @@ public class LottoDiscriminator {
     public static Rank referee(final WinningLottery winningLottery, final TicketLottery ticketLottery) {
         final int matchCount = getMatchCount(winningLottery, ticketLottery);
         return Rank.valueOf(matchCount);
+    }
+
+    public static List<Rank> referee(final WinningLottery winningLottery, final TicketLotteryBundle ticketLotteryBundle) {
+        final List<Rank> ranks = new ArrayList<>();
+        final List<TicketLottery> ticketLotteries = ticketLotteryBundle.getTicketLotteries();
+        for (final TicketLottery ticketLottery : ticketLotteries) {
+            ranks.add(referee(winningLottery, ticketLottery));
+        }
+        return Collections.unmodifiableList(ranks);
     }
 
     private static int getMatchCount(final WinningLottery winningLottery, final TicketLottery ticketLottery) {

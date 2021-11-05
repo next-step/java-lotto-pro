@@ -1,6 +1,9 @@
 package study.lotto.model;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -35,6 +38,11 @@ public enum Rank {
 
     }
 
+    public static List<Rank> getRanksOrderByWinningMoneyDesc() {
+        return Arrays.stream(Rank.values())
+                .sorted(Comparator.comparing(Rank::getWinningMoney).reversed())
+                .collect(Collectors.toList());
+    }
 //    private static void validateCountOfMatch(final int countOfMatch) {
 //        throw new IllegalRankCountOfMatchException("매치된 수와 맞는 랭크를 찾을 수 없습니다.");
 //    }
