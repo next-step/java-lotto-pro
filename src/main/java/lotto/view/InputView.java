@@ -1,8 +1,11 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoNumbersFactory;
+import lotto.domain.LottoTicket;
 
 public class InputView {
     private static final Scanner scanner = getScanner();
@@ -18,6 +21,18 @@ public class InputView {
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
             return inputLottoAmount();
+        }
+    }
+
+    public static LottoTicket winningNumbersOfLastWeek() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String numbers = scanner.nextLine();
+        List<Integer> winningNumbers = LottoNumbersFactory.convertInputNumbersToNumbers(numbers);
+        try {
+            return new LottoTicket(winningNumbers);
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            return winningNumbersOfLastWeek();
         }
     }
 
