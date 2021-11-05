@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step3.common.exception.InvalidParamException;
 import step3.domain.LottoNumbers;
 import step3.domain.constance.LottoConstant;
+import step3.domain.numbers.ManualNumbers;
 import step3.domain.numbers.NumbersStrategy;
 import step3.domain.numbers.RandomNumbers;
 
@@ -48,6 +49,21 @@ public class LottoNumbersTest {
         // given
         NumbersStrategy numbersStrategy = new RandomNumbers(LottoConstant.MIN_NUMBER_RANGE,
             LottoConstant.MAX_NUMBER_RANGE, outBoundSize);
+
+        assertThatExceptionOfType(InvalidParamException.class)
+            .isThrownBy(() -> {
+                // when
+                LottoNumbers lottoNumbers = new LottoNumbers(numbersStrategy);
+            }) // then
+            .withMessageMatching(LottoNumbers.RANGE_OUTBOUNT_SIZE_EXCEPTION_MESSAGE);
+    }
+
+    @Test
+    @DisplayName("중복숫자 생성시 예외 발생한다.")
+    void lottoNumbersCheckIsDuplicate() {
+        // given
+        int[] numbers = {1, 2, 3, 4, 6, 6};
+        NumbersStrategy numbersStrategy = new ManualNumbers(numbers);
 
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
