@@ -47,7 +47,7 @@ public class Lotto {
 	private static List<LottoNumber> generate() {
 		Collections.shuffle(CANDIDATE_LOTTO_NUMBERS);
 		final List<LottoNumber> numbers = new ArrayList<>(CANDIDATE_LOTTO_NUMBERS.subList(0, NUM_OF_LOTTO_NUMBERS));
-		numbers.sort(Comparator.comparingInt(LottoNumber::get));
+		Collections.sort(numbers);
 		return numbers;
 	}
 

@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
 	public final static int MIN_INCLUSIVE_NUMBER = 1;
 	public final static int MAX_INCLUSIVE_NUMBER = 45;
@@ -44,5 +44,10 @@ public class LottoNumber {
 	@Override
 	public String toString() {
 		return String.valueOf(number);
+	}
+
+	@Override
+	public int compareTo(LottoNumber other) {
+		return number - other.number;
 	}
 }
