@@ -79,7 +79,7 @@ public class LottoNumbersTest {
 			() -> assertThat(lottoNumbers.getValues()).isEqualTo(
 				numbers.stream()
 					.sorted()
-					.map(LottoNumber::new)
+					.map(LottoNumber::of)
 					.collect(Collectors.toList()))
 		);
 	}
@@ -107,7 +107,7 @@ public class LottoNumbersTest {
 	void contains(List<Integer> numbers, int number, boolean expected) {
 		// given
 		LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-		LottoNumber lottoNumber = new LottoNumber(number);
+		LottoNumber lottoNumber = LottoNumber.of(number);
 
 		// when
 		boolean actual = lottoNumbers.contains(lottoNumber);

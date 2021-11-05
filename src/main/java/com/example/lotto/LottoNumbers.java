@@ -16,7 +16,7 @@ public class LottoNumbers {
 
 		this.values = numbers.stream()
 			.sorted()
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.collect(Collectors.toList());
 	}
 
