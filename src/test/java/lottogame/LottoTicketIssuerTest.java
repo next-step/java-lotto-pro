@@ -1,7 +1,5 @@
 package lottogame;
 
-import java.util.List;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -9,9 +7,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lottogame.exception.NotDivisibleMoneyUnitException;
 import lottogame.exception.NotEnoughtMoneyException;
-import lottogame.exception.NotNumberFormatMoneyException;
+import lottogame.exception.InvalidNumberFormatMoneyException;
 
 public class LottoTicketIssuerTest {
+
+	private static final int MAX_INPUT_MONEY = 2_147_483_000;	/* int형 양의 정수 최대값 보다 작은 값 중 구매가능한 최대값 */
 
 	@ParameterizedTest
 	@CsvSource(value = {"1000:1", "10000:10"}, delimiter = ':')
@@ -44,10 +44,18 @@ public class LottoTicketIssuerTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {":1", "1000f:10"}, delimiter = ':')
-	public void buyTickets_금액을_문자열로_입력받은경우_숫자가아닌경우_예외처리(String money, int numOfTickets) {
+	@ValueSource(strings = {"", "1000f"})
+	public void buyTickets_금액을_문자열로_입력받은경우_숫자가아닌경우_예외처리(String money) {
 		Assertions.assertThatThrownBy(() -> {
 			LottoTickets lottoTickets = LottoTicketIssuer.buyTickets(money);
-		}).isInstanceOf(NotNumberFormatMoneyException.class);
+		}).isInstanceOf(InvalidNumberFormatMoneyException.class);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"21474830000", "2147484000"})
+	public void buyTickets_입력받은_금액이_최대_금액을_초과한경우_예외처리(String money){
+		Assertions.assertThatThrownBy(() -> {
+			LottoTickets lottoTickets = LottoTicketIssuer.buyTickets(money);
+		}).isInstanceOf(InvalidNumberFormatMoneyException.class);
 	}
 }
