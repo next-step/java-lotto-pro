@@ -17,9 +17,9 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public static LottoNumbers create() {
+    public static LottoNumbers create(Shuffleable shuffler) {
         List<LottoNumber> numbers = new ArrayList<>(DEFAULT_LOTTO_NUMBERS);
-        Collections.shuffle(numbers);
+        shuffler.shuffle(numbers);
         return new LottoNumbers(numbers.subList(0, MAX_SIZE));
     }
 

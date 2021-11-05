@@ -17,20 +17,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumbersTest {
+
     @DisplayName("자동 번호 생성")
     @Nested
     class AutoNumberCreateTest {
+
         private LottoNumbers lottoNumbers;
+        private CollectionsShuffler shuffler;
 
         @BeforeEach
         void setUp() {
-            lottoNumbers =  LottoNumbers.create();
+            shuffler = new CollectionsShuffler();
+            lottoNumbers =  LottoNumbers.create(shuffler);
         }
 
         @DisplayName("6개의 로또 번호를 생성한다")
         @Test
         void testCreateLottoNumbers() {
-            LottoNumbers lottoNumbers =  LottoNumbers.create();
             assertThat(lottoNumbers.getNumbers()).hasSize(6);
         }
 
@@ -56,7 +59,7 @@ public class LottoNumbersTest {
             Map<LottoNumber, Integer> countMap = new HashMap<>();
             int loopCount = 100000;
             for (int i = 0; i < loopCount; i++) {
-                LottoNumbers lottoNumbers = LottoNumbers.create();
+                LottoNumbers lottoNumbers = LottoNumbers.create(shuffler);
                 List<LottoNumber> numbers = lottoNumbers.getNumbers();
                 putNumberAndIncreaseCount(countMap, numbers);
             }
