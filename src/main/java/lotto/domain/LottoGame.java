@@ -7,9 +7,18 @@ public class LottoGame {
 
     public void run() {
         LottoPurchase lottoPurchase = getPurchaseAmount();
+
         Lottos lottos = new Lottos(LottoIssue.ofAuto(lottoPurchase.getPurchaseQuantity()));
         printLottoNumber(lottos);
+
         LottoNumbers lottoWinningNumbers = getWinningNumbers();
+
+        play(lottoPurchase, lottos, lottoWinningNumbers);
+    }
+
+    private void play(LottoPurchase lottoPurchase, Lottos lottos, LottoNumbers lottoWinningNumbers) {
+        lottos.compareWinningNumbers(lottoWinningNumbers);
+        double rateOfReturn = lottos.getRateOfReturn(lottoPurchase);
     }
 
     private LottoNumbers getWinningNumbers() {

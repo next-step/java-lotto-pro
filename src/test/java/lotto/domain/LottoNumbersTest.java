@@ -29,7 +29,7 @@ class LottoNumbersTest {
         List<Integer> input = Arrays.asList(1, 2, 3, 4, 5);
 
         //when
-        ThrowingCallable throwingCallable = () ->  new LottoNumbers(input);
+        ThrowingCallable throwingCallable = () -> new LottoNumbers(input);
 
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -42,7 +42,7 @@ class LottoNumbersTest {
         List<Integer> input = Arrays.asList(1, 1, 2, 3, 4, 5);
 
         //when
-        ThrowingCallable throwingCallable = () ->  new LottoNumbers(input);
+        ThrowingCallable throwingCallable = () -> new LottoNumbers(input);
 
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
