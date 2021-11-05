@@ -1,7 +1,13 @@
 package lotto.service;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,5 +23,34 @@ class LottoServiceTest {
 
         // then
         assertThat(count).isEqualTo(expectedCount);
+    }
+
+    @Test
+    void 로또_일치_갯수_조회() {
+        // given
+        LottoNumbers winningLottoNumbers = createWinningLottoNumbers();
+        LottoNumbers myLottoNumbers = createFiveWinningLottoNumbers();
+
+        // when
+        int result = lottoService.countWinningNumber(winningLottoNumbers, myLottoNumbers);
+
+        // then
+        assertThat(result).isEqualTo(5);
+    }
+
+    private LottoNumbers createWinningLottoNumbers() {
+        List<LottoNumber> list = new ArrayList<>();
+        for (int i = 1; i < 7; i++) {
+            list.add(new LottoNumber(i));
+        }
+        return new LottoNumbers(list);
+    }
+
+    private LottoNumbers createFiveWinningLottoNumbers() {
+        List<LottoNumber> list = new ArrayList<>();
+        for (int i = 2; i < 8; i++) {
+            list.add(new LottoNumber(i));
+        }
+        return new LottoNumbers(list);
     }
 }
