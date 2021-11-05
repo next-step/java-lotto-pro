@@ -79,6 +79,10 @@ public class Lotto {
 		return compare.size();
 	}
 
+	public boolean contains(LottoNumber lottoNumber) {
+		return lotto.contains(lottoNumber);
+	}
+
 	@Override
 	public String toString() {
 		return lotto.toString();

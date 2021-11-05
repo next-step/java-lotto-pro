@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import exception.BusinessException;
@@ -68,6 +69,13 @@ public class LottoTest {
 		Lotto manualLotto = new Lotto("1,2,3,4,5,6");
 		Lotto winner = new Lotto("1,3,4,7,8,9");
 		assertThat(winner.compareCount(manualLotto)).isEqualTo(3);
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"3:true", "8:false"}, delimiter = ':')
+	public void 숫자_포함_성공_또는_실패(int number, boolean expected) {
+		Lotto manualLotto = new Lotto("1,2,3,4,5,6");
+		assertThat(manualLotto.contains(new LottoNumber(number))).isEqualTo(expected);
 	}
 
 }
