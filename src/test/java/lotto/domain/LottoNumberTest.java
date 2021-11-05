@@ -11,17 +11,17 @@ import org.junit.jupiter.api.Test;
 public class LottoNumberTest {
 
 	@Test
-	@DisplayName("주어진 로또 숫자들로 로또번호를 생성해야 한다")
+	@DisplayName("주어진 로또 숫자들로 정렬된 로또번호를 생성해야 한다")
 	public void addTest() {
 		// given
-		List<Integer> numbers1 = Arrays.asList(1, 2, 3, 4, 5, 6);
+		List<Integer> numberList = Arrays.asList(3, 2, 1, 4, 5, 6);
 
 		// when
-		LottoNumber lottoNumber = LottoNumber.of(numbers1);
+		LottoNumber lottoNumber = LottoNumber.of(numberList);
 
 		// then
 		List<Integer> integers = lottoNumber.getNumbers();
-		assertThat(integers).containsAll(numbers1);
+		assertThat(integers).containsExactly(1, 2, 3, 4, 5, 6);
 	}
 
 	@Test
