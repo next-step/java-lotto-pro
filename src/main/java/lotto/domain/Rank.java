@@ -6,8 +6,8 @@ import java.util.stream.Stream;
 
 public enum Rank {
     NONE(2, 0, (count, match) -> count <= 2),
-    SIX(3, 50_000, (count, match) -> count == 4),
-    FIVE(4, 1_500_000, (count, match) -> count == 4),
+    FIVE(3, 5_000, (count, match) -> count == 3),
+    FOUR(4, 50_000, (count, match) -> count == 4),
     THIRD(5, 1_500_000, (count, match) -> (count == 5 && !match)),
     SECOND(5, 30_000_000, (count, match) -> (count == 5 && match)),
     FIRST(6, 2_000_000_000, (count, match) -> count == 6);
