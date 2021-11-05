@@ -11,7 +11,7 @@ public class CalculatorManager {
 
     private Delimiters delimiters;
     private NumbersText numbersText;
-    private Numbers numbers;
+    private final Numbers numbers;
 
     public CalculatorManager(String text) {
         delimiters = new Delimiters();
