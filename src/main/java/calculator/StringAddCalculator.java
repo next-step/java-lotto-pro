@@ -2,8 +2,6 @@ package calculator;
 
 public class StringAddCalculator {
 
-	private static final int NUMBER_RANGE_MINIMUM = 0;
-
 	private StringAddCalculator() {
 	}
 
@@ -16,29 +14,9 @@ public class StringAddCalculator {
 
 		String[] values = input.split();
 
-		int[] numbers = toInts(values);
+		int[] numbers = IntArrayConverter.toInts(values);
 
 		return sum(numbers);
-	}
-
-	private static int[] toInts(String[] values) {
-		int[] numbers = new int[values.length];
-
-		for (int i = 0; i < values.length; i++) {
-			int number = Integer.parseInt(values[i]);
-
-			numbers[i] = validateNumberRangeMinimum(number);
-		}
-
-		return numbers;
-	}
-
-	private static int validateNumberRangeMinimum(int number) {
-		if (number < NUMBER_RANGE_MINIMUM) {
-			throw new RuntimeException(Messages.OUT_OF_MINIMUM_NUMBER_RANGE_ERROR_MSG);
-		}
-
-		return number;
 	}
 
 	private static int sum(int[] numbers) {
@@ -50,5 +28,4 @@ public class StringAddCalculator {
 
 		return sum;
 	}
-
 }
