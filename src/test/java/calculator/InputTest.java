@@ -23,8 +23,8 @@ class InputTest {
 	public void testSplitOneNumber(String text) {
 		Input input = new Input(text);
 
-		assertThat(input.split().length).isEqualTo(1);
-		assertThat(input.split()).containsExactly(text);
+		assertThat(input.values().length).isEqualTo(1);
+		assertThat(input.values()).containsExactly(text);
 	}
 
 	@ParameterizedTest
@@ -33,8 +33,8 @@ class InputTest {
 	void testSplitUsingDefaultDelimiter(String text) {
 		Input input = new Input(text);
 
-		assertThat(input.split().length).isEqualTo(3);
-		assertThat(input.split()).containsExactly("1", "2", "3");
+		assertThat(input.values().length).isEqualTo(3);
+		assertThat(input.values()).containsExactly("1", "2", "3");
 	}
 
 	@ParameterizedTest
@@ -43,7 +43,7 @@ class InputTest {
 	public void testSplitUsingCustomDelimiter(String text) {
 		Input input = new Input(text);
 
-		assertThat(input.split().length).isEqualTo(3);
-		assertThat(input.split()).containsExactly("1", "2", "3");
+		assertThat(input.values().length).isEqualTo(3);
+		assertThat(input.values()).containsExactly("1", "2", "3");
 	}
 }

@@ -12,7 +12,7 @@ public class StringAddCalculator {
 			return 0;
 		}
 
-		String[] values = input.split();
+		String[] values = input.values();
 
 		int[] numbers = IntArrayConverter.toInts(values);
 
