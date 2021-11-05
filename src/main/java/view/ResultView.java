@@ -8,10 +8,11 @@ import model.Lotto;
 import model.LottoStatistics;
 import model.Lottos;
 import model.MatchResult;
+import model.PurchaseCount;
 
 public class ResultView {
 
-	public static final String PURCHASE_MESSAGE = "%d개를 구매했습니다.";
+	public static final String PURCHASE_MESSAGE = "%s개를 구매했습니다.";
 	public static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
 	public static final String LINE = "---------";
 	public static final String THREE_MATCH_MESSAGE = "3개 일치 (%d원)- %d개";
@@ -21,8 +22,8 @@ public class ResultView {
 	public static final String EARNINGS_RATE_MESSAGE = "총 수익률은 %f입니다.";
 	public static final String EARNINGS_RATE_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-	public void printPurchaseVolumeMessage(int purchaseVolume) {
-		System.out.println(String.format(PURCHASE_MESSAGE, purchaseVolume));
+	public void printPurchaseVolumeMessage(PurchaseCount purchaseVolume) {
+		System.out.println(String.format(PURCHASE_MESSAGE, purchaseVolume.toString()));
 	}
 
 	public void printWinningStatisticsMessage(MatchResult matchResult, int purchaseAmount) {

@@ -10,13 +10,13 @@ public class Lottos {
 		this.values = values;
 	}
 
-	public static int purchaseVolumeFrom(int amount) {
-		return amount / Lotto.COST;
+	public static PurchaseCount purchaseCountFrom(Money money) {
+		return money.purchaseCount();
 	}
 
-	public static Lottos purchase(int volume) {
+	public static Lottos purchase(PurchaseCount purchaseCount) {
 		List<Lotto> values = new ArrayList<>();
-		for (int i = 0; i < volume; i++) {
+		for (int i = 0; i < purchaseCount.getValue(); i++) {
 			values.add(Lotto.create());
 		}
 

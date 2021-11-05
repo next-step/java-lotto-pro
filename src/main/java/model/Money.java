@@ -21,8 +21,11 @@ public class Money {
 		}
 	}
 
+	public PurchaseCount purchaseCount() {
+		return new PurchaseCount(this.value / Lotto.COST);
+	}
+
 	public int getValue() {
 		return value;
 	}
-
 }
