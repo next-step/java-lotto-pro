@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.util.LottoNumber;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +7,16 @@ public class Lotto {
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(int[] numbers) {
+        valid(numbers.length);
         lottoNumbers = new ArrayList<>();
         for (int i = 0; i < numbers.length; i++) {
             lottoNumbers.add(new LottoNumber(numbers[i]));
+        }
+    }
+
+    private void valid(int length) {
+        if (length > LottoNumber.SIZE){
+            throw new IndexOutOfBoundsException("숫자 갯수가 "+LottoNumber.SIZE+"보다 큽니다.");
         }
     }
 
@@ -19,7 +24,7 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    public boolean compare(LottoNumber lottoNumber){
+    public boolean compare(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

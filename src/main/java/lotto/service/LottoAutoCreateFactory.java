@@ -2,7 +2,7 @@ package lotto.service;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
-import lotto.util.LottoNumber;
+import lotto.model.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
