@@ -1,120 +1,45 @@
 package calculator;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
-
-    @Nested
-    @DisplayName("만든 테스트 케이스")
-    class SelfTestCase {
-        @DisplayName("빈 문자 or null 입력 테스트")
-        @Test
-        void splitAndSumNullOrEmptyText() {
-            // given
-            String text = "";
-            // when
-            int result = StringAddCalculator.splitAndSum(text);
-            // then
-            assertThat(result).isEqualTo(0);
-        }
-
-        @DisplayName("커스텀 구분자 없이 입력 후 합계 확인")
-        @Test
-        void splitAndSumNullWithoutCustomDelimiter() {
-            // given
-            String text = "1,2,3";
-            // when
-            int result = StringAddCalculator.splitAndSum(text);
-            // then
-            assertThat(result).isEqualTo(6);
-        }
-
-        @DisplayName("커스텀 구분자가 있는 입력 후 합계 확인")
-        @Test
-        void splitAndSumNullWithCustomDelimiter() {
-            // given
-            String text = "//b\n1b2b3";
-            // when
-            int result = StringAddCalculator.splitAndSum(text);
-            // then
-            assertThat(result).isEqualTo(6);
-        }
-
-        @DisplayName("값 하나 합계 테스트")
-        @Test
-        void splitAndSumNullSingle() {
-            // given
-            String text = "//b\n1";
-            // when
-            int result = StringAddCalculator.splitAndSum(text);
-            // then
-            assertThat(result).isEqualTo(1);
-        }
-
-        @DisplayName("값 여러개 합계 테스트")
-        @Test
-        void splitAndSumNullMultiple() {
-            // given
-            String text = "//b\n1,2b3";
-            // when
-            int result = StringAddCalculator.splitAndSum(text);
-            // then
-            assertThat(result).isEqualTo(6);
-        }
+    @ParameterizedTest(name = "{index}. {0} 테스트")
+    @MethodSource("provideStringsForUnitTest")
+    void calculateSumTest(String testTitle, String text, int expect) {
+        // when
+        int result = StringAddCalculator.splitAndSum(text);
+        // then
+        assertThat(result).isEqualTo(expect);
     }
 
-    @Nested
-    @DisplayName("넥스트 스탭에서 다운로드 받은 테스트 케이스")
-    class NextStepTestCase {
-        // 넥스트 스탭 소스 코드
-        @DisplayName("빈문자 또는 null 테스트")
-        @Test
-        public void splitAndSumNullOrEmptyString() {
-            int result = StringAddCalculator.splitAndSum(null);
-            assertThat(result).isEqualTo(0);
+    private static Stream<Arguments> provideStringsForUnitTest() {
+        return Stream.of(
+                Arguments.of("null 입력", null, 0),
+                Arguments.of("빈문자 입력", "", 0),
+                Arguments.of("기본 구분자 합계", "1,2,3", 6),
+                Arguments.of("커스텀 구분자 합계", "//b\n1b2b3", 6),
+                Arguments.of("단일 숫자 합계", "//b\n1", 1),
+                Arguments.of("여러개 숫자, 여러 구분자 합계(커스텀 구분자)", "//b\n1,2b3", 6),
+                Arguments.of("여러개 숫자, 여러 구분자 합계", "1,2", 3),
+                Arguments.of("숫자 여러개 테스트 (구분자 개수 2개)", "1,2:3", 6),
+                Arguments.of("숫자 여러개 테스트 (커스텀 구분자)", "//;\n1;2;3", 6)
+        );
+    }
 
-            result = StringAddCalculator.splitAndSum("");
-            assertThat(result).isEqualTo(0);
-        }
-
-        @DisplayName("숫자 하나 테스트")
-        @Test
-        public void splitAndSumSingleNumber() throws Exception {
-            int result = StringAddCalculator.splitAndSum("1");
-            assertThat(result).isEqualTo(1);
-        }
-
-        @DisplayName("숫자 여러개 테스트 (구분자 하나)")
-        @Test
-        public void splitAndSumMultipleNumber() throws Exception {
-            int result = StringAddCalculator.splitAndSum("1,2");
-            assertThat(result).isEqualTo(3);
-        }
-
-        @DisplayName("숫자 여러개 테스트 (구분자 개수 2개)")
-        @Test
-        public void splitAndSumMultipleNumberMultipleDelimiter() throws Exception {
-            int result = StringAddCalculator.splitAndSum("1,2:3");
-            assertThat(result).isEqualTo(6);
-        }
-
-        @DisplayName("숫자 여러개 테스트 (커스텀 구분자)")
-        @Test
-        public void splitAndSumCustomDelimiter() throws Exception {
-            int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
-            assertThat(result).isEqualTo(6);
-        }
-
-        @DisplayName("음수 예외 검사 테스트")
-        @Test
-        public void splitAndSumNegative() throws Exception {
-            assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                    .isInstanceOf(RuntimeException.class);
-        }
+    @ParameterizedTest(name = "{index}. {0} 예외 테스트")
+    @CsvSource(value = {"-1,2,3 4", "-1,-2,-3 -6", "-4,-2,-3 -9", "a,b:c 1"}, delimiterString = " ")
+    void exceptionTest(String text, int expect) {
+        assertThatThrownBy(() -> {
+            // when
+            int result = StringAddCalculator.splitAndSum(text);
+        }).isInstanceOf(RuntimeException.class);
     }
 }
