@@ -16,6 +16,10 @@ public class LottoNumber {
 
     }
 
+    public Integer value() {
+        return number;
+    }
+
     private void validRange(int number) {
         if (number < LottoConstant.MIN_NUMBER_RANGE || number > LottoConstant.MAX_NUMBER_RANGE) {
             throw new InvalidParamException(LottoConstant.LOTTO_RANGE_OVER_EXCEPTION);

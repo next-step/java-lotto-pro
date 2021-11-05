@@ -37,4 +37,20 @@ public class LottoRanks {
     public int hashCode() {
         return Arrays.hashCode(lottoRanks);
     }
+
+    public Long totalPrize() {
+        long totalPrize = 0L;
+        for (LottoRank lottoRank : lottoRanks) {
+            totalPrize += lottoRank.totalPrize();
+        }
+        return totalPrize;
+    }
+
+    public double getYield(Amount amount) {
+        return (double)(totalPrize() / amount.getAmount());
+    }
+
+    public LottoRank[] values() {
+        return lottoRanks;
+    }
 }

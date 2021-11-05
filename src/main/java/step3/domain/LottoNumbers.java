@@ -1,6 +1,9 @@
 package step3.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,6 +17,15 @@ public class LottoNumbers {
     private Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
+    }
+
+    public String toString() {
+        List<Integer> result = new ArrayList<>();
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            result.add(lottoNumber.value());
+        }
+        Collections.sort(result);
+        return Collections.unmodifiableList(result).toString();
     }
 
     public LottoNumbers(NumbersStrategy numbersStrategy) {
