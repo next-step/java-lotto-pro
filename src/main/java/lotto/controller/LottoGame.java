@@ -8,7 +8,8 @@ public class LottoGame {
 
     public LottoResult getLottoResult(LottoPapers lottoPapers, LottoPaper winningLottoPaper) {
         LottoResult lottoResult = new LottoResult();
-        lottoPapers.getLottoPapers().forEach(lottoPaper -> lottoPaper.matchLottoPaper(winningLottoPaper, lottoResult));
+        lottoPapers.getLottoPapers()
+                .forEach(lottoPaper -> lottoPaper.matchLottoPaper(winningLottoPaper, lottoResult));
         return  lottoResult;
     }
 
