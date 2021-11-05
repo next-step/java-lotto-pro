@@ -16,10 +16,10 @@ public class WinningMap {
         return new WinningMap(lottoTicket.getTicket()
                 .stream()
                 .filter(lottoNumbers -> Rank.valueOf(lottoNumbers
-                        .match(winningNumbers))
+                        .matchReduce(winningNumbers))
                         .isNotMiss())
                 .collect(Collectors.toMap(
-                        lottoNumbers -> Rank.valueOf(lottoNumbers.match(winningNumbers)),
+                        lottoNumbers -> Rank.valueOf(lottoNumbers.matchReduce(winningNumbers)),
                         lottoNumbers -> 1,
                         (oldValue, newValue) -> oldValue + newValue)
                 ));

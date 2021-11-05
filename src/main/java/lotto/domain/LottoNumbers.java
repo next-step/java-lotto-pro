@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.exception.DuplicateNumberException;
 import lotto.exception.LottoSizeException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
@@ -58,27 +59,24 @@ public class LottoNumbers {
         }
     }
 
-    public List<Integer> getList() {
-        return lottoNumbers.stream()
-                .mapToInt(LottoNumber::getNumber)
-                .boxed()
-                .collect(Collectors.toList());
+    public int matchReduce(LottoNumbers winningNumbers) {
+        List<LottoNumber> winningLottoNumbers = winningNumbers.getLottoNumbers();
+        int matchCounting = 0;
+        for (LottoNumber winningLottoNumber : winningLottoNumbers) {
+            matchCounting += matchNumber(winningLottoNumber);
+        }
+        return matchCounting;
     }
 
-    public int match(LottoNumbers winningNumbers) {
-        List<Integer> winnings = winningNumbers.getList();
-        return winnings.stream()
-                .reduce(
-                        0
-                        , (countOfMatch, number) -> countOfMatch + matchNumber(number)
-                );
-    }
-
-    private int matchNumber(int number) {
-        if (this.getList().contains(number)) {
+    private int matchNumber(LottoNumber number) {
+        if (this.lottoNumbers.contains(number)) {
             return 1;
         }
         return 0;
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return new ArrayList<>(lottoNumbers);
     }
 
     @Override

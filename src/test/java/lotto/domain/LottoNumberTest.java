@@ -17,7 +17,7 @@ class LottoNumberTest {
     @DisplayName("로또 번호 한개 생성 - 성공")
     public void lottoNumberTest_ok(int number) {
         assertThat(new LottoNumber(number))
-                .isInstanceOf(LottoNumber.class);
+                .isEqualTo(new LottoNumber(number));
     }
 
     @ParameterizedTest

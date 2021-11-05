@@ -2,6 +2,8 @@ package lotto.domain;
 
 import lotto.exception.LottoNumberRangeException;
 
+import java.util.Objects;
+
 import static lotto.common.LottoConst.MAX_NUMBER;
 import static lotto.common.LottoConst.MIN_NUMBER;
 
@@ -19,8 +21,17 @@ public class LottoNumber {
         }
     }
 
-    public int getNumber() {
-        return number;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 
     @Override
