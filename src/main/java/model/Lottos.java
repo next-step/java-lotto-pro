@@ -6,8 +6,12 @@ import java.util.List;
 public class Lottos {
 	private List<Lotto> values;
 
-	public static int buyCountFor(int money) {
-		return money / Lotto.COST;
+	Lottos(List<Lotto> values) {
+		this.values = values;
+	}
+
+	public static int purchaseVolumeFrom(int amount) {
+		return amount / Lotto.COST;
 	}
 
 	public static Lottos purchase(int volume) {

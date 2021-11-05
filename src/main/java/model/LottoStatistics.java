@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class LottoStatistics {
-	private static final BigDecimal THREE_MATCH_PAYOUT = BigDecimal.valueOf(5_000);
-	private static final BigDecimal FOUR_MATCH_PAYOUT = BigDecimal.valueOf(50_000);
-	private static final BigDecimal FIVE_MATCH_PAYOUT = BigDecimal.valueOf(1_500_000);
-	private static final BigDecimal SIX_MATCH_PAYOUT = BigDecimal.valueOf(2_000_000_000);
+ 	public static final BigDecimal THREE_MATCH_PAYOUT = BigDecimal.valueOf(5_000);
+	public static final BigDecimal FOUR_MATCH_PAYOUT = BigDecimal.valueOf(50_000);
+	public static final BigDecimal FIVE_MATCH_PAYOUT = BigDecimal.valueOf(1_500_000);
+	public static final BigDecimal SIX_MATCH_PAYOUT = BigDecimal.valueOf(2_000_000_000);
 
 	private LottoStatistics() {}
 
