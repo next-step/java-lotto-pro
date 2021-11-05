@@ -1,4 +1,5 @@
-import calculator.domain.StringAddCalculator;
+package calculator.domain;
+
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
