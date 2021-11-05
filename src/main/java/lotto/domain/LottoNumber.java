@@ -31,13 +31,17 @@ public class LottoNumber {
 			throw new IllegalArgumentException("6개의 숫자로 되어야 합니다");
 		}
 		for (int number : numbers) {
-			if (number < LOTTO_NUMBER_MINIMUM || number > LOTTO_NUMBER_MAXIMUM) {
-				throw new IllegalArgumentException("1이상 45이하인 숫자여야 합니다");
-			}
+			validateNumberRange(number);
 		}
 		Set<Integer> set = new HashSet<>(numbers);
 		if (set.size() != numbers.size()) {
 			throw new IllegalArgumentException("중복이 있으면 안됩니다");
+		}
+	}
+
+	private static void validateNumberRange(int number) {
+		if (number < LOTTO_NUMBER_MINIMUM || number > LOTTO_NUMBER_MAXIMUM) {
+			throw new IllegalArgumentException("1이상 45이하인 숫자여야 합니다");
 		}
 	}
 
