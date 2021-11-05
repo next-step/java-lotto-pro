@@ -3,6 +3,7 @@ package study.lotto.controller;
 import study.lotto.controller.dto.LottoOrderCountRequestDto;
 import study.lotto.controller.dto.LottoWinningNumberRequestDto;
 import study.lotto.controller.dto.TicketLotteryBundleResponseDto;
+import study.lotto.controller.dto.WinningStatisticsResponseDto;
 import study.lotto.model.LottoStore;
 import study.lotto.model.WinningStatistics;
 
@@ -12,8 +13,9 @@ public class LottoGameController {
         return new TicketLotteryBundleResponseDto(LottoStore.purchase(orderCount));
     }
 
-    public WinningStatistics referee(final LottoWinningNumberRequestDto winningNumberRequestDto,
+    public WinningStatisticsResponseDto referee(final LottoWinningNumberRequestDto winningNumberRequestDto,
                                      final TicketLotteryBundleResponseDto ticketLotteryBundleResponseDto) {
-        return WinningStatistics.valueOf(ticketLotteryBundleResponseDto.toEntity(), winningNumberRequestDto.toEntity());
+        final WinningStatistics winningStatistics = WinningStatistics.valueOf(ticketLotteryBundleResponseDto.toEntity(), winningNumberRequestDto.toEntity());
+        return new WinningStatisticsResponseDto(winningStatistics);
     }
 }

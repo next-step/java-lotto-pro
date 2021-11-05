@@ -4,6 +4,7 @@ import study.lotto.controller.LottoGameController;
 import study.lotto.controller.dto.LottoOrderCountRequestDto;
 import study.lotto.controller.dto.LottoWinningNumberRequestDto;
 import study.lotto.controller.dto.TicketLotteryBundleResponseDto;
+import study.lotto.controller.dto.WinningStatisticsResponseDto;
 import study.lotto.model.WinningStatistics;
 import study.lotto.view.LottoOrderCountInputView;
 import study.lotto.view.LottoOrderResultView;
@@ -39,7 +40,7 @@ public class Application {
 
     private static void refereeTicketLottery(final TicketLotteryBundleResponseDto ticketLotteryBundle) {
         final LottoWinningNumberRequestDto lottoNumbers = winningNumberInputView.submit();
-        final WinningStatistics winningStatistics = controller.referee(lottoNumbers, ticketLotteryBundle);
+        final WinningStatisticsResponseDto winningStatistics = controller.referee(lottoNumbers, ticketLotteryBundle);
         winningStatisticsView.resolve(winningStatistics);
     }
 }

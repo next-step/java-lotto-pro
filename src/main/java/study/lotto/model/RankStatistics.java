@@ -4,7 +4,7 @@ import java.util.EnumMap;
 
 public class RankStatistics {
 
-    private static final int DEFAULT_COUNT = 0;
+    public static final int DEFAULT_COUNT = 0;
     private static final int INIT_COUNT = 1;
 
     private final EnumMap<Rank, Integer> rankStatistics;
@@ -36,5 +36,9 @@ public class RankStatistics {
 
     public static RankStatistics valueOf(EnumMap<Rank, Integer> rankStatistics) {
         return new RankStatistics(rankStatistics);
+    }
+
+    public EnumMap<Rank, Integer> getRankStatistics() {
+        return rankStatistics;
     }
 }

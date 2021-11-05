@@ -1,6 +1,7 @@
 package study.lotto.model;
 
 import java.math.BigDecimal;
+import java.util.EnumMap;
 import java.util.List;
 
 public class WinningStatistics {
@@ -33,7 +34,11 @@ public class WinningStatistics {
         return incomeRate.getIncomeRate();
     }
 
-    public RankStatistics getRankStatistics() {
-        return rankStatistics;
+    public EnumMap<Rank, Integer> getRankStatistics() {
+        return rankStatistics.getRankStatistics();
+    }
+
+    public int countByRank(final Rank rank) {
+        return rankStatistics.countByRank(rank);
     }
 }

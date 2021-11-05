@@ -55,13 +55,12 @@ class WinningStatisticsTest {
     @Test
     void 로또복권묶음과_당첨번호를_비교하여_당첨등수별_개수를_확인_할_수_있다() {
         final WinningStatistics winningStatistics = WinningStatistics.valueOf(ticketLotteryBundle, winningLottery);
-        final RankStatistics rankStatistics = winningStatistics.getRankStatistics();
         assertAll(() -> {
-            assertThat(rankStatistics.countByRank(Rank.FIRST)).isEqualTo(4);
-            assertThat(rankStatistics.countByRank(Rank.THIRD)).isEqualTo(0);
-            assertThat(rankStatistics.countByRank(Rank.FOURTH)).isEqualTo(0);
-            assertThat(rankStatistics.countByRank(Rank.FIFTH)).isEqualTo(0);
-            assertThat(rankStatistics.countByRank(Rank.MISS)).isEqualTo(0);
+            assertThat(winningStatistics.countByRank(Rank.FIRST)).isEqualTo(4);
+            assertThat(winningStatistics.countByRank(Rank.THIRD)).isEqualTo(0);
+            assertThat(winningStatistics.countByRank(Rank.FOURTH)).isEqualTo(0);
+            assertThat(winningStatistics.countByRank(Rank.FIFTH)).isEqualTo(0);
+            assertThat(winningStatistics.countByRank(Rank.MISS)).isEqualTo(0);
         });
     }
 }
