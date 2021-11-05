@@ -37,12 +37,18 @@ public class LottoList {
 		this.lottoList.addAll(addList.lottoList);
 	}
 
-	@Override
-	public String toString() {
-		return lottoList.toString();
-	}
-
 	public void addLottoList(Lotto lotto) {
 		lottoList.add(lotto);
+	}
+
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (Lotto lotto: lottoList) {
+			sb.append(lotto);
+			sb.append("\n");
+		}
+		return sb.toString();
 	}
 }
