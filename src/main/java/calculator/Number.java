@@ -23,4 +23,8 @@ public class Number {
 	private boolean isText(String text) {
 		return text.matches(REGEX_TEXT);
 	}
+
+	public int getNumber() {
+		return this.number;
+	}
 }
