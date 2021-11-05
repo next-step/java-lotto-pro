@@ -14,7 +14,7 @@ class LottoGamesTest {
 	@Test
 	void constructor() {
 		// given & when
-		LottoGames lottoGames = new LottoGames(5, (from, to, size) -> Arrays.asList(1, 2, 3, 4, 5, 6));
+		LottoGames lottoGames = LottoGames.of(5, (from, to, size) -> Arrays.asList(1, 2, 3, 4, 5, 6));
 
 		// then
 		assertThat(lottoGames).isNotNull();

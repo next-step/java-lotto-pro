@@ -19,7 +19,7 @@ public class LottoController {
 		OutputView.print("구입금액을 입력해 주세요.");
 		purchaseAmount = InputView.inputPurchaseAmount();
 		long lottoGameCount = purchaseAmount / LottoGame.LOTTO_GAME_PRICE;
-		lottoGames = new LottoGames(lottoGameCount, numbersGenerator);
+		lottoGames = LottoGames.of(lottoGameCount, numbersGenerator);
 
 		OutputView.print(String.format("%d개를 구매했습니다.", lottoGameCount));
 		OutputView.print(lottoGames.toString());

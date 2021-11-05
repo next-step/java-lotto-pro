@@ -7,11 +7,15 @@ import java.util.stream.LongStream;
 public class LottoGames {
 	private final List<LottoGame> values;
 
-	public LottoGames(long count, NumbersGenerator numbersGenerator) {
-		this.values = LongStream.range(0, count)
+	private LottoGames(List<LottoGame> lottoGames) {
+		this.values = lottoGames;
+	}
+
+	static LottoGames of(long count, NumbersGenerator numbersGenerator) {
+		return new LottoGames(LongStream.range(0, count)
 			.boxed()
 			.map(i -> LottoGame.of(numbersGenerator))
-			.collect(Collectors.toList());
+			.collect(Collectors.toList()));
 	}
 
 	public List<LottoGame> getValues() {
