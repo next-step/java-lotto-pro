@@ -37,8 +37,9 @@ public class InputString {
     }
 
     public boolean isValidNumber(){
-        if(Arrays.stream(numbers).anyMatch(i -> i < 0))
-            throw new RuntimeException("[ERROR]");
+        if(Arrays.stream(numbers).anyMatch(i -> i < 0)) {
+            throw new RuntimeException("[ERROR] 양의 정수를 입력하세요.");
+        }
         return true;
     }
 
@@ -48,7 +49,9 @@ public class InputString {
 
     private Matcher hasCustomDelimiter(){
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(this.str);
-        if(m.find()) return m;
+        if(m.find()) {
+            return m;
+        }
         return null;
     }
 
