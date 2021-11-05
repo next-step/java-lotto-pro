@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.auto.AutoLottoPrinter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -13,7 +14,7 @@ public class LottoCashierTest {
     @ParameterizedTest
     @ValueSource(ints = {100, 1001, 0, 12340})
     void testGivenWrongCashThrowException(int cash) {
-        assertThatThrownBy(() -> LottoCashier.buy(Money.of(cash))).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> new LottoCashier(new AutoLottoPrinter(new CollectionsShuffler())).buy(Money.of(cash))).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1000원 단위로 구매하실 수 있습니다");
     }
 
@@ -21,6 +22,6 @@ public class LottoCashierTest {
     @ParameterizedTest
     @ValueSource(ints = {1000, 2000, 33000, 44000, 576000})
     void testReturnLottoCount(int cash) {
-        assertThat(LottoCashier.buy(Money.of(cash))).isEqualTo(cash / 1000);
+        assertThat(new LottoCashier(new AutoLottoPrinter(new CollectionsShuffler())).buy(Money.of(cash)).size()).isEqualTo(cash / 1000);
     }
 }

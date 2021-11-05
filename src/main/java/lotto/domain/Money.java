@@ -23,6 +23,10 @@ public class Money {
         return new Money(amount);
     }
 
+    public static Money of(String text) {
+        return new Money(new BigDecimal(text));
+    }
+
     public long longValue() {
         return this.amount.longValue();
     }

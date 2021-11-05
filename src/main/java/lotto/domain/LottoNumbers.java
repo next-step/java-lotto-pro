@@ -68,4 +68,12 @@ public class LottoNumbers {
     public boolean contains(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
     }
+
+    @Override
+    public String toString() {
+        return numbers.stream()
+                .map(LottoNumber::value)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"));
+    }
 }

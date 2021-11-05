@@ -1,5 +1,6 @@
 package lotto.auto;
 
+import lotto.domain.CollectionsShuffler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,7 +13,7 @@ public class AutoLottoPrinterTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 100, 1000})
     void testPrintLottos(int count) {
-        AutoLottoPrinter printer = new AutoLottoPrinter();
+        AutoLottoPrinter printer = new AutoLottoPrinter(new CollectionsShuffler());
         assertThat(printer.print(count)).hasSize(count);
     }
 }
