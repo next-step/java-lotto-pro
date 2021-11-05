@@ -5,8 +5,13 @@ import lotto.view.GameMessage;
 
 public class LottoMoney {
 
-    public int parseIntBuyPrice(String buyPrice){
+    private final int money;
 
+    public LottoMoney(String money) {
+        this.money = parseIntBuyPrice(money);
+    }
+
+    private int parseIntBuyPrice(String buyPrice){
         try {
             int parseBuyPrice = Integer.parseInt(buyPrice);
             if(parseBuyPrice < GameRule.LOTTO_PAPER_PRICE){
@@ -16,10 +21,9 @@ public class LottoMoney {
         } catch (NumberFormatException e){
             throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_BUY_PRICE_INPUT));
         }
-
     }
-    public int getLottoPaperCount(int buyPrice) {
 
-        return buyPrice / GameRule.LOTTO_PAPER_PRICE;
+    public int getLottoPaperCount() {
+        return this.money / GameRule.LOTTO_PAPER_PRICE;
     }
 }
