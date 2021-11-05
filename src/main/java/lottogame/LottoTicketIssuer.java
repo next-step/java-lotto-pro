@@ -17,14 +17,18 @@ public class LottoTicketIssuer {
 		return money / 1000;
 	}
 
-	public static List<LottoTicket> buyTickets(int money) {
+	public static LottoTickets buyTickets(int money) {
 		validatePay(money);
 		int numOfTickets = getNumOfTicketsToBuy(money);
+		List<LottoTicket> lottoTickets = issuTickets(numOfTickets);
+		return new LottoTickets(lottoTickets);
+	}
 
-		return IntStream.range(0, numOfTickets).collect(ArrayList::new,
-			(tickets, i) -> tickets.add(LottoTicket.makeLottoTicket()),
-			(tickets1, tickets2) -> tickets1.addAll(tickets2));
-
+	private static List<LottoTicket> issuTickets(int numOfTickets) {
+		return IntStream.range(0, numOfTickets)
+			.collect(ArrayList::new,
+				(tickets, i) -> tickets.add(LottoTicket.makeLottoTicket()),
+				(tickets1, tickets2) -> tickets1.addAll(tickets2));
 	}
 
 	private static void validatePay(int money) {
@@ -50,7 +54,7 @@ public class LottoTicketIssuer {
 		return false;
 	}
 
-	public static List<LottoTicket> buyTickets(String money) {
+	public static LottoTickets buyTickets(String money) {
 		int convertedMoney = convertMoneyFormatToNumber(money);
 		return buyTickets(convertedMoney);
 	}
@@ -58,7 +62,7 @@ public class LottoTicketIssuer {
 	private static int convertMoneyFormatToNumber(String money) {
 		try {
 			return Integer.parseInt(money);
-		}catch(NumberFormatException ex){
+		} catch (NumberFormatException ex) {
 			throw new NotNumberFormatMoneyException("금액을 숫자로 입력해주세요.");
 		}
 	}
