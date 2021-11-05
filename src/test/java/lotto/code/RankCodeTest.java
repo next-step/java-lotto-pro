@@ -24,7 +24,7 @@ class RankCodeTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {
-		"FIRST : 2 : 4000000000",
+		"FIRST : 1 : 2000000000",
 		"SECOND : 1 : 1500000",
 		"THIRD : 5 : 250000",
 		"FORTH : 4 : 20000",
