@@ -37,4 +37,12 @@ public enum RankCode {
 		}
 		return rankCodeMap;
 	}
+
+	public static int getMoney(RankCode rankCode) {
+		return RankCode.valueOf(rankCode.name()).money;
+	}
+
+	public static int containsCount(RankCode rankCode) {
+		return RankCode.valueOf(rankCode.name()).containsCount;
+	}
 }
