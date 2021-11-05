@@ -24,6 +24,10 @@ public class LottoRank {
 		this.rank = rankNumber;
 	}
 
+	public int getRank() {
+		return this.rank;
+	}
+
 	private void setRank(int matchCount) {
 		if (matchCount == LOTTO_4ST_MATCH_CNT) {
 			this.rank = RANK_4ST;
