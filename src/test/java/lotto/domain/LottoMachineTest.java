@@ -16,7 +16,9 @@ public class LottoMachineTest {
         LottoMachine machine = new LottoMachine();
         Money money = new Money(5000);
 
-        assertThat(machine.generateLotto(money.getPurchaseCount()).size()).isEqualTo(money.getPurchaseCount());
+        List<LottoNumber> lottoList = machine.getLottoList(money);
+
+        assertThat(lottoList.size()).isEqualTo(money.getPurchaseCount());
     }
 
     @Test
