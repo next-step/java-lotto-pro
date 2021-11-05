@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import static lotto.constant.LottoConstant.*;
+import static lotto.constant.ViewMessage.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class LottoController {
 		LottoCount customLottoCount = inputView.inputCustomLottoCount(purchasedCount);
 
 		Lottos lottos = purchaseLottos(purchasedCount);
-		LottoNumbers lastWinningNumbers = LottoNumbers.of(inputView.inputWinningNumbers());
+		LottoNumbers lastWinningNumbers = LottoNumbers.of(inputLastWinningNumbers());
 		LottoNumber bonusNumber = inputView.inputBonusNumber(lastWinningNumbers);
 
 		WinningStatistics winningStatistics = WinningStatistics.createBy(lottos, lastWinningNumbers, bonusNumber, money);
@@ -62,5 +63,10 @@ public class LottoController {
 		}
 
 		return lottos;
+	}
+
+	private List<Integer> inputLastWinningNumbers() {
+		System.out.println(LAST_WINNING_NUMBERS_INPUT_GUIDE_MESSAGE);
+		return inputView.inputLottoNumbers(LAST_WINNING_NUMBERS_INPUT_GUIDE_MESSAGE);
 	}
 }

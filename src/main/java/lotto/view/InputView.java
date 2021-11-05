@@ -47,16 +47,16 @@ public class InputView {
 		return inputCustomLottoCount(purchasedCount);
 	}
 
-	public List<Integer> inputWinningNumbers() {
-		System.out.println(LAST_WINNING_NUMBERS_INPUT_GUIDE_MESSAGE);
-		String[] splitWinningNumbers = LottoStringSplitter.split(readLine());
+	public List<Integer> inputLottoNumbers(String inputGuideMessage) {
+		String[] splitNumbers = LottoStringSplitter.split(readLine());
 
-		if (isValidWinningNumbers(splitWinningNumbers)) {
-			return LottoStringToIntegerParser.parseNumbers(splitWinningNumbers);
+		if (isValidSplitNumbers(splitNumbers)) {
+			return LottoStringToIntegerParser.parseNumbers(splitNumbers);
 		}
 
-		System.out.println(MessageBuilder.build(INVALID_INPUT_WINNING_NUMBERS, Arrays.asList(splitWinningNumbers)));
-		return inputWinningNumbers();
+		System.out.println(MessageBuilder.build(INVALID_INPUT_LOTTO_NUMBERS, Arrays.asList(splitNumbers)));
+		System.out.println(inputGuideMessage);
+		return inputLottoNumbers(inputGuideMessage);
 	}
 
 	public LottoNumber inputBonusNumber(LottoNumbers lastWinningNumbers) {
@@ -85,7 +85,7 @@ public class InputView {
 		return lastWinningNumbers.contains(lottoBonusNumber);
 	}
 
-	private boolean isValidWinningNumbers(String[] splitWinningNumbers) {
+	private boolean isValidSplitNumbers(String[] splitWinningNumbers) {
 		List<String> winningNumbers = Arrays.stream(splitWinningNumbers).map(String::trim).collect(toList());
 		return isValidNumbers(winningNumbers)
 			   && isValidLottoNumbers(winningNumbers)
