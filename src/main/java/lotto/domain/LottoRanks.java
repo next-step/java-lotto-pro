@@ -8,6 +8,7 @@ public class LottoRanks {
 	private int secondCnt = 0;
 	private int thirdCnt = 0;
 	private int fourthCnt = 0;
+	private int fifthCnt = 0;
 
 	public LottoRanks(List<LottoRank> list) {
 		for (LottoRank lottoRank : list) {
@@ -38,6 +39,9 @@ public class LottoRanks {
 		if (lottoRank.isFourth()) {
 			fourthCnt += 1;
 		}
+		if (lottoRank.isFifth()) {
+			fifthCnt += 1;
+		}
 	}
 
 	public int getFirstCnt() {
@@ -54,5 +58,9 @@ public class LottoRanks {
 
 	public int getFourthCnt() {
 		return fourthCnt;
+	}
+
+	public int getFifthCnt() {
+		return fifthCnt;
 	}
 }
