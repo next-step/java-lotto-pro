@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class LottoNumberTest {
 
 	@Test
-	@DisplayName("로또 번호를 추가하거나 에러 발생")
+	@DisplayName("주어진 로또 숫자들로 로또번호를 생성해야 한다")
 	public void addTest() {
 		// given
 		List<Integer> numbers1 = Arrays.asList(1, 2, 3, 4, 5, 6);
