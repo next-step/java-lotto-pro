@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public enum Rank {
-    NONE(2, 0, count -> (count <= 2)),
-    FOURTH(3, 5000, count -> (count == 3)),
-    THIRD(4, 50_000, count -> (count == 4)),
-    SECOND(5, 1_500_000, count -> (count == 5)),
-    FIRST(6, 2_000_000_000, count -> (count == 6));
+    NONE(2, 0, (count, match) -> count <= 2),
+    FIVE(3, 5000, (count, match) -> count == 3),
+    FOURTH(3, 5000, (count, match) -> count == 3),
+    THIRD(4, 50_000, (count, match) -> count == 4),
+    SECOND(5, 1_500_000, (count, match) -> (count == 5 && !match)),
+    SECOND_BONUS(5, 30_000_000, (count, match) -> (count == 5 && match)),
+    FIRST(6, 2_000_000_000, (count, match) -> count == 6);
 
     private int matchCount;
     private int prizeMoney;
@@ -23,24 +25,15 @@ public enum Rank {
         this.expression = expression;
     }
 
-    public static Rank of(List<Number> matchNumbers, List<Number> lottoNumber) {
-        int matchCount = getMatchCount(matchNumbers, lottoNumber);
+    public static Rank of(int matchCount, boolean matchBonus) {
         return Stream.of(Rank.values())
-                .filter(rank -> rank.expression.isMatch(matchCount))
+                .filter(rank -> rank.expression.isMatch(matchCount, matchBonus))
                 .findFirst()
                 .orElse(NONE);
     }
 
-    private static int getMatchCount(List<Number> matchNumbers, List<Number> lottoNumber) {
-        int matchCount = 0;
-        for (Number number : lottoNumber) {
-            matchCount += Collections.frequency(matchNumbers, number);
-        }
-        return matchCount;
-    }
-
-    public boolean isType(Rank rank) {
-        return this == rank;
+    public boolean isMatch(Rank rank) {
+        return this.equals(rank);
     }
 
     public int getPrizeMoney() {
@@ -51,4 +44,9 @@ public enum Rank {
         return matchCount;
     }
 
+    @Override
+    public String toString() {
+        return matchCount + "개 일치 " + (this.equals(Rank.SECOND_BONUS) ? ", 보너스 볼 일치" : "")
+                + "(" + prizeMoney + "원) - ";
+    }
 }
