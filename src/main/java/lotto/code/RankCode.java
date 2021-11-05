@@ -3,10 +3,10 @@ package lotto.code;
 import java.util.Arrays;
 
 public enum RankCode {
-	FIRST(6, 2000000000),
-	SECOND(5, 1500000),
-	THIRD(4, 50000),
-	FORTH(3, 5000),
+	FIRST(6, 2000_000_000),
+	SECOND(5, 1_500_000),
+	THIRD(4, 50_000),
+	FORTH(3, 5_000),
 	NOTHING(0, 0);
 
 	private int containsCount;
@@ -22,5 +22,9 @@ public enum RankCode {
 			.filter(rankCode -> rankCode.containsCount == containsCount)
 			.findAny()
 			.orElse(NOTHING);
+	}
+
+	public static int getRankMoney(RankCode rankCode, int count) {
+		return rankCode.money * count;
 	}
 }

@@ -5,17 +5,19 @@ import java.util.List;
 
 public class LottoGenerator {
 	public static final int LOTTO_PRICE = 1000;
-
+	private String inputMoney;
 	private List<LottoNumbers> lottoNumbersList;
 
 	public LottoGenerator() {
 	}
 
 	public LottoGenerator(String inputMoney) {
+		this.inputMoney = inputMoney;
 		this.lottoNumbersList = generateLottoNumbers(inputMoney);
 	}
 
 	public LottoGenerator(String inputMoney, String inputNumber) {
+		this.inputMoney = inputMoney;
 		this.lottoNumbersList = generateLottoNumbers(inputMoney, inputNumber);
 	}
 
@@ -75,5 +77,9 @@ public class LottoGenerator {
 
 	public List<LottoNumbers> getLottoNumbersList() {
 		return lottoNumbersList;
+	}
+
+	public int getInputMoney() {
+		return Integer.parseInt(this.inputMoney);
 	}
 }

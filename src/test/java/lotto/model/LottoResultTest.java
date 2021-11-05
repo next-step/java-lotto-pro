@@ -61,12 +61,56 @@ class LottoResultTest {
 		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningLottoNumber);
 		LottoNumbers lottoNumbers = new LottoNumbers(LottoNumber);
 		LottoResult lottoResult = new LottoResult();
-		int contains = lottoResult.containsWinningLottoNumbers(winningLottoNumbers, lottoNumbers);
 
 		// when
-		RankCode rankCode = lottoResult.getRankCodeUsingContainsCount(contains);
+		RankCode rankCode = lottoResult.getRankCodeUsingContainsCount(winningLottoNumbers, lottoNumbers);
 
 		// then
 		assertThat(rankCode).isEqualTo(RankCode.getRankCode(resultCount));
+	}
+
+	@ParameterizedTest(name = "index {index} ==> winningNumber {0} , lottoNumber {1}, mapSize {2}")
+	@CsvSource(value = {
+		"1,2,3,4,5,6 : 13000 : 13",
+		"1,2,3,4,5,6 : 12000 : 12",
+		"1,2,3,4,5,6 : 20000 : 20"
+	}, delimiter = ':')
+	void 일치결과를_통해_로또등수Map을_반환해주는_기능테스트(String winningLottoNumber, String inputMoney, int mapSize) {
+		// given
+		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningLottoNumber);
+		LottoGenerator lottoGenerator = new LottoGenerator(inputMoney);
+		LottoResult lottoResult = new LottoResult();
+
+		// when
+		Map<RankCode, Integer> rankMap = lottoResult.getRankCodeMapUsingContainsMap(winningLottoNumbers,
+			lottoGenerator);
+
+		// then
+		assertThat(rankMap
+			.values()
+			.stream()
+			.mapToInt(Integer::intValue)
+			.sum()).isEqualTo(mapSize);
+	}
+
+	@ParameterizedTest(name = "index {index} ==> winningNumber {0} , lottoNumber {1}, mapSize {2}")
+	@CsvSource(value = {
+		"1,2,3,4,5,6 : 1,2,3,4,5,6 : 2000000",
+		"1,2,3,4,5,6 : 1,2,3,4,5,7 : 1500",
+		"1,2,3,4,5,6 : 1,2,3,4,7,8 : 50",
+		"1,2,3,4,5,6 : 1,2,3,7,8,9 : 5",
+		"1,2,3,4,5,6 : 7,8,9,10,11,12 : 0"
+	}, delimiter = ':')
+	void 로또등수Map을_통해_총_수익률을_반환해주는_기능테스트(String winningLottoNumber, String lottoNumber, double yieldResult) {
+		// given
+		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningLottoNumber);
+		LottoGenerator lottoGenerator = new LottoGenerator("1000", lottoNumber);
+		LottoResult lottoResult = new LottoResult();
+
+		// when
+		double yield = lottoResult.calcularateYield(winningLottoNumbers, lottoGenerator);
+
+		// then
+		assertThat(yield).isEqualTo(yieldResult);
 	}
 }

@@ -21,4 +21,20 @@ class RankCodeTest {
 		// given // when // then
 		assertThat(RankCode.getRankCode(containCount)).isEqualTo(RankCode.valueOf(rankCodeName));
 	}
+
+	@ParameterizedTest
+	@CsvSource(value = {
+		"FIRST : 2 : 4000000000",
+		"SECOND : 1 : 1500000",
+		"THIRD : 5 : 250000",
+		"FORTH : 4 : 20000",
+		"NOTHING : 10 : 0",
+	}, delimiter = ':')
+	void 랭크갯수에따라_당첨금액을_반환하는_기능테스트(String rank, int count, int sumMoney) {
+		// given // when
+		int sum = RankCode.getRankMoney(RankCode.valueOf(rank), count);
+
+		// then
+		assertThat(sum).isEqualTo(sumMoney);
+	}
 }
