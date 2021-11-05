@@ -24,26 +24,26 @@ class InputTest {
 		Input input = new Input(text);
 
 		assertThat(input.values().length).isEqualTo(1);
-		assertThat(input.values()).containsExactly(text);
+		assertThat(input.values()).containsExactly(Integer.parseInt(text));
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
-	@DisplayName("입력 값을 컴마(,)나 콜론(:)으로 분할해서 배열로 가져올 수 있다.")
+	@DisplayName("입력 값을 컴마(,)나 콜론(:)으로 분할해서 int 배열로 가져올 수 있다.")
 	void testSplitUsingDefaultDelimiter(String text) {
 		Input input = new Input(text);
 
 		assertThat(input.values().length).isEqualTo(3);
-		assertThat(input.values()).containsExactly("1", "2", "3");
+		assertThat(input.values()).containsExactly(1, 2, 3);
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {"//;\n1;2;3", "//#\n1#2#3", "//@\n1@2@3"})
-	@DisplayName("입력값을 지정된 커스텀 구분자로 분할해서 배열로 가져올 수 있다.")
+	@DisplayName("입력값을 지정된 커스텀 구분자로 분할해서 int 배열로 가져올 수 있다.")
 	public void testSplitUsingCustomDelimiter(String text) {
 		Input input = new Input(text);
 
 		assertThat(input.values().length).isEqualTo(3);
-		assertThat(input.values()).containsExactly("1", "2", "3");
+		assertThat(input.values()).containsExactly(1, 2, 3);
 	}
 }

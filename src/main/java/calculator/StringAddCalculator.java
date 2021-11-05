@@ -12,9 +12,7 @@ public class StringAddCalculator {
 			return 0;
 		}
 
-		String[] values = input.values();
-
-		int[] numbers = IntArrayConverter.toInts(values);
+		int[] numbers = input.values();
 
 		return sum(numbers);
 	}

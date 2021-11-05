@@ -12,7 +12,7 @@ public class Input {
 		return input == null || input.isEmpty();
 	}
 
-	public String[] values() {
-		return Separator.split(input);
+	public int[] values() {
+		return IntArrayConverter.toInts(Separator.split(input));
 	}
 }
