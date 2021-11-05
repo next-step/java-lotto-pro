@@ -4,6 +4,9 @@ import java.util.Objects;
 
 import lottoservice.exception.InvalidLottoFormatException;
 
+/**
+ * 원시 타입을 포장한 로또 번호 클래스
+ */
 public class LottoNumber {
 
 	private int number;
