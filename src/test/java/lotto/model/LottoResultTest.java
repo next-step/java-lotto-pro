@@ -7,6 +7,8 @@ import java.util.Map;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import lotto.code.RankCode;
+
 class LottoResultTest {
 
 	@ParameterizedTest(name = "index {index} ==> winningNumber {0} , lottoNumber {1}, resultCount {2}")
@@ -28,7 +30,7 @@ class LottoResultTest {
 		assertThat(contains).isEqualTo(resultCount);
 	}
 
-	@ParameterizedTest
+	@ParameterizedTest(name = "index {index} ==> winningNumber {0} , lottoNumber {1}, resultCount {2}")
 	@CsvSource(value = {
 		"1,2,3,4,5,6 : 1,2,3,4,5,6 : 6",
 		"1,2,3,4,5,6 : 1,2,3,4,7,8 : 4",
@@ -46,5 +48,25 @@ class LottoResultTest {
 
 		//then
 		assertThat(containsMap.get(resultCount)).isEqualTo(1);
+	}
+
+	@ParameterizedTest(name = "index {index} ==> winningNumber {0} , lottoNumber {1}, resultCount {2}")
+	@CsvSource(value = {
+		"1,2,3,4,5,6 : 1,2,3,4,5,6 : 6",
+		"1,2,3,4,5,6 : 1,2,3,4,7,8 : 4",
+		"1,2,3,4,5,6 : 7,8,9,10,11,12 : 0"
+	}, delimiter = ':')
+	void 일치결과를_통해_로또등수를_구하는_기능테스트(String winningLottoNumber, String LottoNumber, int resultCount) {
+		// given
+		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningLottoNumber);
+		LottoNumbers lottoNumbers = new LottoNumbers(LottoNumber);
+		LottoResult lottoResult = new LottoResult();
+		int contains = lottoResult.containsWinningLottoNumbers(winningLottoNumbers, lottoNumbers);
+
+		// when
+		RankCode rankCode = lottoResult.getRankCodeUsingContainsCount(contains);
+
+		// then
+		assertThat(rankCode).isEqualTo(RankCode.getRankCode(resultCount));
 	}
 }

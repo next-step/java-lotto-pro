@@ -3,6 +3,8 @@ package lotto.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import lotto.code.RankCode;
+
 public class LottoResult {
 
 	public int containsWinningLottoNumbers(WinningLottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
@@ -25,5 +27,9 @@ public class LottoResult {
 		}
 
 		return containsMap;
+	}
+
+	public RankCode getRankCodeUsingContainsCount(int contains) {
+		return RankCode.getRankCode(contains);
 	}
 }
