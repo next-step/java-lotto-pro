@@ -17,6 +17,9 @@ public class StringAddCalculatorTest {
     public void splitAndSum_숫자하나() throws Exception {
         int result = StringAddCalculator.splitAndSum("1");
         assertThat(result).isEqualTo(1);
+
+        result = StringAddCalculator.splitAndSum("2");
+        assertThat(result).isEqualTo(2);
     }
 
     @Test
