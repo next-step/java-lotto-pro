@@ -2,17 +2,14 @@ package lotto.domain;
 
 import lotto.startegy.MatchStrategy;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Stream;
 
 public enum Rank {
     NONE(2, 0, (count, match) -> count <= 2),
-    FIVE(3, 5000, (count, match) -> count == 3),
-    FOURTH(3, 5000, (count, match) -> count == 3),
-    THIRD(4, 50_000, (count, match) -> count == 4),
-    SECOND(5, 1_500_000, (count, match) -> (count == 5 && !match)),
-    SECOND_BONUS(5, 30_000_000, (count, match) -> (count == 5 && match)),
+    SIX(3, 50_000, (count, match) -> count == 4),
+    FIVE(4, 1_500_000, (count, match) -> count == 4),
+    THIRD(5, 1_500_000, (count, match) -> (count == 5 && !match)),
+    SECOND(5, 30_000_000, (count, match) -> (count == 5 && match)),
     FIRST(6, 2_000_000_000, (count, match) -> count == 6);
 
     private int matchCount;
@@ -42,7 +39,7 @@ public enum Rank {
 
     @Override
     public String toString() {
-        return matchCount + "개 일치 " + (this.equals(Rank.SECOND_BONUS) ? ", 보너스 볼 일치" : "")
+        return matchCount + "개 일치 " + (this.equals(Rank.SECOND) ? ", 보너스 볼 일치" : "")
                 + "(" + prizeMoney + "원) - ";
     }
 }
