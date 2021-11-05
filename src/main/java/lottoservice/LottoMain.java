@@ -61,7 +61,7 @@ public class LottoMain {
 	}
 
 	private void showMatchLottoWinningResult(LottoWinningNumbers lottoWinningNumbers, LottoTickets lottoTickets) {
-		ResultView.printResultMessage("당첨통계\n---------\n");
+		ResultView.printResultMessage("당첨통계\n---------");
 		LottoMatcher lottoMatcher = new LottoMatcher(lottoWinningNumbers);
 		LottoMatchResult matchResult = lottoMatcher.matchWinningAndTickets(lottoTickets);
 		ResultView.printResultMessage(matchResult);
