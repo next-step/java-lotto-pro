@@ -20,24 +20,15 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean isBonusMatch) {
-        Rank matchingRank = Arrays.stream(values())
-                .filter(rank -> rank.countOfMatch == countOfMatch)
-                .findFirst()
-                .orElse(Rank.MISS);
-
-        if (matchBonus(matchingRank, isBonusMatch)) {
+    public static Rank valueOf(int countOfMatch, boolean bonusMatch) {
+        if (countOfMatch == 5 && bonusMatch) {
             return Rank.SECOND;
         }
 
-        return matchingRank;
-    }
-
-    private static boolean matchBonus(Rank rank, boolean isBonusMatch) {
-        if (rank.equals(Rank.THIRD) && isBonusMatch) {
-            return true;
-        }
-        return false;
+        return Arrays.stream(values())
+                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .findFirst()
+                .orElse(Rank.MISS);
     }
 
 
