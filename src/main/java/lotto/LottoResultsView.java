@@ -12,7 +12,7 @@ public class LottoResultsView {
     }
 
     public void showResults() {
-        System.out.println(lottoResults.toString());
+        System.out.println(lottoResults);
     }
 
     public void showTotalReward() {
