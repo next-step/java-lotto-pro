@@ -13,6 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import model.common.LottoNumber;
+import model.common.LottoNumbers;
+import model.common.Score;
+
 @DisplayName("로또들")
 class LottoPapersTest {
 

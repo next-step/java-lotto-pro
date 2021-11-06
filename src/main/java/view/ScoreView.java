@@ -3,7 +3,7 @@ package view;
 import java.io.PrintStream;
 
 import model.LottoRank;
-import model.Score;
+import model.common.Score;
 
 public final class ScoreView {
 

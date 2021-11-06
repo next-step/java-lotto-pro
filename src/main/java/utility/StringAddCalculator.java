@@ -2,6 +2,11 @@ package utility;
 
 import java.util.regex.Pattern;
 
+import model.common.string.StringDelimiterFinder;
+import model.common.string.StringDelimiters;
+import model.common.string.number.StringNumberSeparator;
+import model.common.string.number.StringNumbers;
+
 public final class StringAddCalculator {
 
 	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");

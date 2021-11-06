@@ -13,6 +13,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import model.common.LottoNumber;
+import model.common.LottoNumbers;
+
 @DisplayName("로또 종이")
 class LottoPaperTest {
 

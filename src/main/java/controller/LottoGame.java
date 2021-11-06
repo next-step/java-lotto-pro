@@ -1,14 +1,14 @@
 package controller;
 
-import model.Income;
+import model.common.Income;
 import model.LottoPapers;
-import model.LottoRule;
-import model.LottoStore;
-import model.Money;
-import model.RandomLottoMachine;
-import model.Score;
-import model.StringSeparator;
-import model.WinnerLottoGenerator;
+import model.common.LottoRule;
+import model.store.LottoStore;
+import model.common.Money;
+import model.generator.RandomLottoMachine;
+import model.common.Score;
+import model.common.string.StringSeparator;
+import model.generator.WinnerLottoGenerator;
 import view.IncomeView;
 import view.InputView;
 import view.LottoPapersView;

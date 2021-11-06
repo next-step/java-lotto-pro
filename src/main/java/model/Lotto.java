@@ -1,5 +1,4 @@
 package model;
 
-interface Lotto {
-
+public interface Lotto {
 }

@@ -8,6 +8,9 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import model.common.LottoNumber;
+import model.common.LottoNumbers;
+
 @DisplayName("로또")
 class WinnerLottoTest {
 

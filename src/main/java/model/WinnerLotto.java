@@ -1,5 +1,7 @@
 package model;
 
+import model.common.LottoNumber;
+import model.common.LottoNumbers;
 import utility.Assert;
 
 public final class WinnerLotto implements Lotto {
@@ -17,7 +19,7 @@ public final class WinnerLotto implements Lotto {
 		this.bonusNumber = bonusNumber;
 	}
 
-	static WinnerLotto from(LottoNumbers numbers, LottoNumber bonusNumber) {
+	public static WinnerLotto from(LottoNumbers numbers, LottoNumber bonusNumber) {
 		return new WinnerLotto(numbers, bonusNumber);
 	}
 

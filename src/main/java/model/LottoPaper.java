@@ -2,6 +2,8 @@ package model;
 
 import java.util.Collection;
 
+import model.common.LottoNumber;
+import model.common.LottoNumbers;
 import utility.Assert;
 
 public final class LottoPaper implements Lotto {
@@ -13,7 +15,7 @@ public final class LottoPaper implements Lotto {
 		this.lottoNumbers = lottoNumbers;
 	}
 
-	static LottoPaper from(LottoNumbers lottoNumbers) {
+	public static LottoPaper from(LottoNumbers lottoNumbers) {
 		return new LottoPaper(lottoNumbers);
 	}
 

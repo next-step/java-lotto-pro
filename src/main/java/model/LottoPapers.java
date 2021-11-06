@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import model.common.Score;
 import utility.Assert;
 
 public final class LottoPapers {
@@ -15,7 +16,7 @@ public final class LottoPapers {
 		this.collection = collection;
 	}
 
-	static LottoPapers from(Collection<LottoPaper> collection) {
+	public static LottoPapers from(Collection<LottoPaper> collection) {
 		return new LottoPapers(collection);
 	}
 
