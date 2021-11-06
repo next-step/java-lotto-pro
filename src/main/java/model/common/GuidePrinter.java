@@ -1,4 +1,4 @@
-package view;
+package model.common;
 
 import java.io.PrintStream;
 

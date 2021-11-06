@@ -1,6 +1,8 @@
-package view;
+package model.common;
 
 import java.util.Scanner;
+
+import utility.Assert;
 
 public final class UserInputSystem {
 
@@ -8,13 +10,13 @@ public final class UserInputSystem {
 	private final Scanner scanner;
 
 	private UserInputSystem(GuidePrinter guidePrinter, Scanner scanner) {
+		Assert.notNull(scanner, "'scanner' must not be null");
 		validate(guidePrinter);
-		validate(scanner);
 		this.guidePrinter = guidePrinter;
 		this.scanner = scanner;
 	}
 
-	public static UserInputSystem from(GuidePrinter guidePrinter, Scanner scanner) {
+	public static UserInputSystem of(GuidePrinter guidePrinter, Scanner scanner) {
 		return new UserInputSystem(guidePrinter, scanner);
 	}
 
@@ -31,7 +33,7 @@ public final class UserInputSystem {
 
 	private void validate(Scanner scanner) {
 		if (scanner == null) {
-			throw new IllegalArgumentException("'scanner' must not be null");
+			throw new IllegalArgumentException();
 		}
 	}
 }
