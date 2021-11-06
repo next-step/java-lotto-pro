@@ -38,4 +38,12 @@ class LottoTicketTest {
         assertThatThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 46)))
                 .isInstanceOf(IllegalLottoNumberException.class);
     }
+
+    @Test
+    void getSameNumberCountTest() {
+        LottoTicket lottoTicket1 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket2 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
+
+        assertThat(lottoTicket1.getSameNumberCount(lottoTicket2)).isEqualTo(5);
+    }
 }
