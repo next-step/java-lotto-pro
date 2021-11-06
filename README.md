@@ -31,6 +31,6 @@
 - [X] 당첨금 계산
 - [X] 수익률 계산
 - [X] 당첨 통계 출력
-- [ ] 로또 시작
-- [ ] 금액 입력 validation
-- [ ] 당첨 번호 입력 validation
+- [X] 로또 시작
+- [X] 금액 입력 validation
+- [X] 당첨 번호 입력 validation
