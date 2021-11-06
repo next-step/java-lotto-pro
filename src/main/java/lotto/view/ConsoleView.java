@@ -52,6 +52,11 @@ public class ConsoleView {
         }
     }
 
+    public static int enterBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine());
+    }
+
     public static void printRevenue(double revenue) {
         System.out.printf(REVENUE_PERCENT, revenue);
     }
