@@ -8,7 +8,9 @@ public class LottoNumbers {
     private static final int MAX_SIZE = 6;
     private static final String DEFAULT_DELIMITER = ",";
     private static final List<LottoNumber> DEFAULT_LOTTO_NUMBERS =
-            IntStream.range(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER + 1).mapToObj(LottoNumber::new).collect(Collectors.toList());
+            IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+                    .mapToObj(LottoNumber::new)
+                    .collect(Collectors.toList());
 
     private final List<LottoNumber> numbers;
 
