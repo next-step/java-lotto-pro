@@ -1,5 +1,6 @@
 package step3;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class Winner {
 	private static Map<Integer, Integer> winnings;
 	private final Map<Integer, Integer> winningAmount;
 	private int sumAmount;
-	private int yield;
+	private BigDecimal yield;
 
 	public Winner() {
 		winnings = new HashMap<>();
@@ -31,7 +32,7 @@ public class Winner {
 	}
 
 	public Map<Integer, Integer> statistics(String userInputWinnerNumber) {
-		assert userInputWinnerNumber == null : "입력값이 null일 수 없습니다.";
+		assert userInputWinnerNumber != null;
 		List<LottoNumbers> papers = LottoPapers.PAPERS;
 		List<Integer> inputNumbers = getIntegers(userInputWinnerNumber);
 		for (LottoNumbers paper : papers) {
@@ -44,7 +45,7 @@ public class Winner {
 		return winningAmount;
 	}
 
-	public int yield(Money money) {
+	public BigDecimal yield(Money money) {
 		yield = money.yield(sumAmount);
 		return yield;
 	}
@@ -68,11 +69,11 @@ public class Winner {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("3개 일치 (5000원)-").append(getWinner(THREE)).append("\n");
-		sb.append("4개 일치 (50000원)-").append(getWinner(FOUR)).append("\n");
-		sb.append("5개 일치 (1500000원)-").append(getWinner(FIVE)).append("\n");
-		sb.append("6개 일치 (2000000000원)-").append(getWinner(SIX)).append("\n");
-		sb.append("총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)-").append(yield);
+		sb.append("3개 일치 (5000원)-").append(getWinner(THREE)).append("개").append("\n");
+		sb.append("4개 일치 (50000원)-").append(getWinner(FOUR)).append("개").append("\n");
+		sb.append("5개 일치 (1500000원)-").append(getWinner(FIVE)).append("개").append("\n");
+		sb.append("6개 일치 (2000000000원)-").append(getWinner(SIX)).append("개").append("\n");
+		sb.append("총 수익률은 ").append(yield).append("입니다.");
 		return sb.toString();
 	}
 

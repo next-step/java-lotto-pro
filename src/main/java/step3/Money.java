@@ -1,5 +1,8 @@
 package step3;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Money {
 	private final int money;
 	private final int DEFAULT_MONEY = 1000;
@@ -23,8 +26,8 @@ public class Money {
 		return Math.floorDiv(money, DEFAULT_MONEY);
 	}
 
-	public int yield(int sumAmount) {
-		return Math.floorDiv(sumAmount, this.money);
+	public BigDecimal yield(int sumAmount) {
+		return new BigDecimal(sumAmount).divide(new BigDecimal(this.money), 2, RoundingMode.FLOOR);
 	}
 
 	@Override
