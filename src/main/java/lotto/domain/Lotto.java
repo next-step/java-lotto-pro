@@ -15,7 +15,7 @@ public class Lotto {
 		this.lottoNumbers = new HashSet<>();
 
 		for (Integer number : numbers) {
-			lottoNumbers.add(new LottoNumber(number));
+			this.lottoNumbers.add(new LottoNumber(number));
 		}
 
 		if (isLottoSize(this.lottoNumbers.size())) {
