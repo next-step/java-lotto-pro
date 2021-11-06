@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     private Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = Collections.unmodifiableList(lottos);
     }
 
     public static Lottos fromQuantity(int quantity) {

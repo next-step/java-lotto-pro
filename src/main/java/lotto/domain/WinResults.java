@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -10,7 +11,7 @@ public class WinResults {
     private final List<WinResult> winResults;
 
     private WinResults(List<WinResult> winResults) {
-        this.winResults = winResults;
+        this.winResults = Collections.unmodifiableList(winResults);
     }
 
     public static WinResults of(List<Lotto> lottos, Lotto winNumber) {

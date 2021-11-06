@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +14,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.lottoNumbers = mapToLottoNumbers(numbers);
+        this.lottoNumbers = Collections.unmodifiableList(mapToLottoNumbers(numbers));
     }
 
     public WinResult getWinResult(Lotto winNumber) {
