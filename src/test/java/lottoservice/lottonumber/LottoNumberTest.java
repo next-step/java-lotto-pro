@@ -24,5 +24,4 @@ class LottoNumberTest {
 			LottoNumber lottoNumber = new LottoNumber(number);
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
-
 }

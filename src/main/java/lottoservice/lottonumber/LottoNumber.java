@@ -12,9 +12,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	private static String ERROR_MESSAGE_OUTBOUND_OF_LOTTO_NUMBER =
 		"로또 번호는 " + LottoNumbersMaker.START_INCLUSIVE_NUMBER + "~" + LottoNumbersMaker.END_EXCLUSIVE_NUMBER
 			+ "사이 숫자만 가능합니다.";
-	private int number;
+	private final int number;
 
-	public LottoNumber(int number) {
+	public LottoNumber(final int number) {
 		validateNumberInLottoRule(number);
 		this.number = number;
 	}
