@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumbersTest {
     private LottoNumbers prizeLottoNumbers;
+    private LottoNumbers expectLottoNumbers;
 
     @BeforeEach
     void setup() {
@@ -21,6 +23,26 @@ public class LottoNumbersTest {
                 Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
                         .collect(Collectors.toSet()));
+        expectLottoNumbers = new LottoNumbers(
+                Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
+                        .collect(Collectors.toSet()));
+    }
+
+    @DisplayName("당첨 로또 입력 테스트 커스텀 구분자")
+    @Test
+    void generateManualWithSeparatorNumbers() {
+        String prizeLottoNumbersString = "1:2:3:4:5:6";
+        String separator = ":";
+        prizeLottoNumbers = new LottoNumbers(prizeLottoNumbersString, separator);
+        assertThat(prizeLottoNumbers).isEqualTo(expectLottoNumbers);
+    }
+
+    @ParameterizedTest(name="당첨 로또 입력 정렬 테스트")
+    @CsvSource(value={"1,2,3,4,5,6:[1, 2, 3, 4, 5, 6]", "42,22,13,1,6,5:[1, 5, 6, 13, 22, 42]"}, delimiterString = ":")
+    void showLottoNumbersDescriptionTest(String prizeLottoNumbersString, String expect) {
+        prizeLottoNumbers = new LottoNumbers(prizeLottoNumbersString);
+        assertThat(prizeLottoNumbers.toString()).isEqualTo(expect);
     }
 
     @DisplayName("내 숫자가 정답 숫자를 포함하는 지 테스트")
