@@ -13,7 +13,7 @@ public class InputView {
 
     public Money enterMoney() {
         System.out.println(INSERT_MONEY);
-        return new Money(scanner.nextInt());
+        return new Money(Integer.parseInt(scanner.nextLine()));
     }
 
     public Lotto enterWinningLotto() {
