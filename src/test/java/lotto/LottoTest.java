@@ -35,9 +35,9 @@ public class LottoTest {
 		Lotto lotto = new Lotto(lottoNumbers);
 
 		//when
-		int count = lotto.countMatchNumber(winningNumbers);
+		MatchedNumber matchedNumber = lotto.countMatchNumber(winningNumbers);
 
 		//then
-		assertThat(count).isEqualTo(expectedValue);
+		assertThat(matchedNumber.value()).isEqualTo(expectedValue);
 	}
 }

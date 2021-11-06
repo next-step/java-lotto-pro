@@ -11,11 +11,11 @@ public class Lotto {
 		this.lottoNumbers = new LottoNumbers(lottoNumbers);
 	}
 
-	public int countMatchNumber(int[] winningNumbers) {
+	public MatchedNumber countMatchNumber(int[] winningNumbers) {
 		int count = 0;
 		for (Integer winningNumber : winningNumbers) {
 			count += lottoNumbers.isMatch(winningNumber);
 		}
-		return count;
+		return new MatchedNumber(count);
 	}
 }
