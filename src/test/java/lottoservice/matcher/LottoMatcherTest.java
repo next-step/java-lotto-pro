@@ -9,6 +9,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import lottoservice.lottonumber.LottoNumber;
+import lottoservice.lottonumber.LottoNumbersMaker;
 import lottoservice.lottoticket.LottoTicket;
 import lottoservice.lottoticket.LottoTickets;
 
@@ -16,7 +17,7 @@ public class LottoMatcherTest {
 
 	@Test
 	public void matchWinningAndTickets_정답과_로또티켓들_비교결과() {
-		LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers("1, 5, 20, 34, 3, 40");
+		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
 
 		List<LottoTicket> tickets = new ArrayList<>();
 		tickets.add(new LottoTicket(getLottoNumbers(Arrays.asList(1,5,12,26,30,40))));
@@ -33,7 +34,7 @@ public class LottoMatcherTest {
 
 	@Test
 	public void matchWinningAndTickets_당첨_수익률_계산() {
-		LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers("1, 5, 20, 34, 3, 40");
+		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
 
 		List<LottoTicket> tickets = new ArrayList<>();
 		for(int i=0; i<20; i++){

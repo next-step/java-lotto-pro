@@ -1,11 +1,10 @@
 package lottoservice.lottoticket;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
+import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.lottonumber.LottoNumber;
-import lottoservice.lottonumber.LottoNumbersMaker;
 
 /**
  * 자동으로 생성된 로또 번호 리스트를 가지는 로또 티켓 클래스
@@ -13,13 +12,26 @@ import lottoservice.lottonumber.LottoNumbersMaker;
  */
 public class LottoTicket {
 
+	private static String ERROR_MESSAGE_INVALID_LOTTO_FORMAT = "로또는 6개의 중복없는 숫자여야 합니다.";
+
 	private List<LottoNumber> lottoNumbers;
 
+	private LottoTicket() {
+	}
+
 	public LottoTicket(List<LottoNumber> lottoNumber) {
+		validateNotDuplicate(lottoNumber);
 		this.lottoNumbers = lottoNumber;
 	}
 
-	private LottoTicket() {
+	private void validateNotDuplicate(List<LottoNumber> lottoNumber) {
+		if (!isCorrectSize(lottoNumber)) {
+			throw new InvalidLottoFormatException(ERROR_MESSAGE_INVALID_LOTTO_FORMAT);
+		}
+	}
+
+	private boolean isCorrectSize(List<LottoNumber> lottoNumber) {
+		return lottoNumber.stream().distinct().count() == 6;
 	}
 
 	public List<LottoNumber> getLottoNumbers() {

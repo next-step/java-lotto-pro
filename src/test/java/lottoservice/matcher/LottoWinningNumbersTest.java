@@ -10,10 +10,9 @@ import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lottoservice.exception.DuplicateLottoNumberException;
 import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.lottonumber.LottoNumber;
-import lottoservice.matcher.LottoWinningNumbers;
+import lottoservice.lottonumber.LottoNumbersMaker;
 
 public class LottoWinningNumbersTest {
 
@@ -23,7 +22,7 @@ public class LottoWinningNumbersTest {
 	@CsvSource({"3,34,22,17,26,7"})
 	public void makeLottoWinningNumbers_당첨번호_리스트_입력(ArgumentsAccessor argumentsAccessor) {
 		List<Integer> numbers = convertArgumentsToInteger(argumentsAccessor);
-		LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(numbers);
+		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers(numbers));
 		assertThat(lottoWinningNumbers.getWinningNumbers().size()).isEqualTo(numbers.size());
 
 		List<LottoNumber> lottoNumbers = convertToLottoNumbers(numbers);
@@ -37,8 +36,8 @@ public class LottoWinningNumbersTest {
 	public void validateHasNotDuplicateLottoNumber_당첨번호_리스트_중복숫자_입력_예외(ArgumentsAccessor argumentsAccessor) {
 		List<Integer> numbers = convertArgumentsToInteger(argumentsAccessor);
 		assertThatThrownBy(() -> {
-			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(numbers);
-		}).isInstanceOf(DuplicateLottoNumberException.class);
+			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers(numbers));
+		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
 	@ParameterizedTest
@@ -46,7 +45,7 @@ public class LottoWinningNumbersTest {
 	public void validateSizeOfLotto_당첨번호_리스트_갯수가_작은경우_예외(ArgumentsAccessor argumentsAccessor) {
 		List<Integer> numbers = convertArgumentsToInteger(argumentsAccessor);
 		assertThatThrownBy(() -> {
-			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(numbers);
+			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers(numbers));
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
@@ -55,14 +54,14 @@ public class LottoWinningNumbersTest {
 	public void validateSizeOfLotto_당첨번호_리스트_갯수가_큰경우_예외(ArgumentsAccessor argumentsAccessor) {
 		List<Integer> numbers = convertArgumentsToInteger(argumentsAccessor);
 		assertThatThrownBy(() -> {
-			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(numbers);
+			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers(numbers));
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {"1, 31, 22, 15, 4, 7", "2, 43, 33, 25, 6, 7"})
 	public void makeLottoWinningNumbers_당첨번호_문자열_입력(String lottoNumberText) {
-		LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(lottoNumberText);
+		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers(lottoNumberText));
 		assertThat(lottoWinningNumbers.getWinningNumbers().size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
 	}
 
@@ -70,7 +69,7 @@ public class LottoWinningNumbersTest {
 	@ValueSource(strings = {"1, 31, 22, 15, 4, 7, 5", "2, 43, 33, 25, 6"})
 	public void makeLottoWinningNumbers_당첨번호_문자열_입력_로또갯수_예외(String lottoNumberText) {
 		assertThatThrownBy(() -> {
-			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(lottoNumberText);
+			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers(lottoNumberText));
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
@@ -78,7 +77,7 @@ public class LottoWinningNumbersTest {
 	@ValueSource(strings = {"1,31,22,15,4,7", " 2, 43, 33, 25, 6, 10","2, 43, 33, 25, 6, 10 ","2 43 33 25 6 10"})
 	public void makeLottoWinningNumbers_당첨번호_문자열_입력_포맷_예외(String lottoNumberText) {
 		assertThatThrownBy(() -> {
-			LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.makeLottoWinningNumbers(lottoNumberText);
+			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers(lottoNumberText));
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
