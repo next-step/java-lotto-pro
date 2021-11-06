@@ -9,9 +9,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoAutoCreateFactory {
+public class LottoCreateFactory {
     public static final int LOTTO_SIZE = 6;
-    public static Lotto createLotto() {
+
+    public static Lotto createRandomLotto() {
         int[] randomNumbers = createRandomNumbers();
         Lotto lotto = new Lotto(randomNumbers);
         return lotto;
@@ -39,8 +40,22 @@ public class LottoAutoCreateFactory {
     public static Lottos createLottos(int size) {
         Lotto[] lottoArray = new Lotto[size];
         for (int i = 0; i < size; i++) {
-            lottoArray[i] = createLotto();
+            lottoArray[i] = createRandomLotto();
         }
         return new Lottos(lottoArray);
+    }
+
+    public static Lotto createLotto(String numbersText) {
+        String[] splitedNumbers = numbersText.split(", ");
+        int[] numbers = mapToInts(splitedNumbers);
+        return new Lotto(numbers);
+    }
+
+    private static int[] mapToInts(String[] splitedNumbers) {
+        int[] result = new int[splitedNumbers.length];
+        for (int i = 0; i < splitedNumbers.length; i++) {
+            result[i] = Integer.parseInt(splitedNumbers[i]);
+        }
+        return result;
     }
 }
