@@ -9,11 +9,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoBallFactoryTest {
 
-    @DisplayName("6개의 공을 생성한다")
+    @DisplayName("중복없는 6개의 공을 생성한다")
     @Test
     void createSixBalls() {
         List<LottoBall> draw = LottoBallFactory.draw();
         assertThat(draw.size()).isEqualTo(6);
+        assertThat(draw).doesNotHaveDuplicates();
     }
 
 }
