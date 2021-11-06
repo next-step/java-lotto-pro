@@ -30,7 +30,7 @@ public class LottoController {
         LottoWinNumbersRequestDto lottoWinNumbersRequestDto = InputView.readLottoWinnerRequestDto(
             lottoRequestDto.getAmountValue());
 
-        // 당첨통계를출한다.(로또 당첨 갯수와 수익률)
+        // 당첨통계를출력한다.(로또 당첨 갯수와 수익률)
         ResultView.statisticsPrint(lottoService.getResultStatistics(lottoWinNumbersRequestDto));
     }
 }

@@ -15,7 +15,7 @@ public class LottoNumbers {
         MAX_LOTTO_NUMBERS_SIZE);
     private Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers() {
+    private LottoNumbers() {
     }
 
     public LottoNumbers(int[] numbers) {

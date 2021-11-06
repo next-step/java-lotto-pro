@@ -10,8 +10,6 @@ public class LottoResult {
 
     public LottoResult(LottoRanks lottoRanks, Amount amount) {
         this.lottoRanks = lottoRanks;
-        System.out.println(lottoRanks.totalPrize());
-        System.out.println(amount.getAmount());
 
         this.yield = BigDecimal.valueOf(lottoRanks.totalPrize())
             .divide(BigDecimal.valueOf(amount.getAmount()))

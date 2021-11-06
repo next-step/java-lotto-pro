@@ -51,10 +51,6 @@ public enum LottoRank {
         return this.matchNumber == matchNumber;
     }
 
-    private String totalPrizeWon() {
-        return totalPrize() + LottoConstant.WON;
-    }
-
     private static LottoRank[] getSortedValues() {
         return Stream.of(values()).sorted((o1, o2) ->
             {
