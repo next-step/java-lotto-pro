@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApplicationController {
-	private static final int LOTTO_SALES_PRICE = 1000;
 	private PurchaseAmount purchaseAmount;
 	private WinningNumbers winningNumbers;
 	private LottoStatistics lottoStatistics = new LottoStatistics();
@@ -24,15 +23,22 @@ public class LottoApplicationController {
 	}
 
 	public void printPurchaseQuantity() {
-		int purchaseQuantity = purchaseAmount.value() / LOTTO_SALES_PRICE;
+		int purchaseQuantity = purchaseAmount.value() / CommonConstant.LOTTO_SALES_PRICE;
 		OutputView.printPurchaseQuantity(purchaseQuantity);
 
-		while (purchaseQuantity > 0) {
+		while (continuePurchase(purchaseQuantity)) {
 			lottos.add(new Lotto());
 			purchaseQuantity--;
 		}
 
 		OutputView.newLine();
+	}
+
+	private boolean continuePurchase(int purchaseQuantity) {
+		if (purchaseQuantity > CommonConstant.PURCHASE_FINISH) {
+			return true;
+		}
+		return false;
 	}
 
 	public void printPurchasedLottoNumbers() {

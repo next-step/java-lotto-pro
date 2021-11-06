@@ -20,12 +20,5 @@ public class LottoApplication {
 		}
 
 		lottoApplicationController.printLottoStatistics();
-
-
-
-
-
-
-
 	}
 }

@@ -20,9 +20,9 @@ public class LottoNumbers {
 
 	public int isMatch(int winningNumber) {
 		if (lottoNumbers.contains(winningNumber)) {
-			return 1;
+			return CommonConstant.MATCHED_NUMBER_PLUS;
 		}
-		return 0;
+		return CommonConstant.NON_MATCHED_NUMBER;
 	}
 
 	public String StringValues() {
