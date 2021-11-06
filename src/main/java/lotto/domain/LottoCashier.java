@@ -11,7 +11,7 @@ public class LottoCashier {
 
     public LotteryTicket buy(Money cash) {
         validateDefaultPrice(cash);
-        int count = cash.divide(DEFAULT_PRICE).intValue();
+        int count = cash.getDividedIntValue(DEFAULT_PRICE);
         return new LotteryTicket(lottoPrinter.print(count));
     }
 

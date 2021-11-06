@@ -51,4 +51,9 @@ public class MoneyTest {
     void isModResultZeroFalse() {
         assertThat(Money.of(5000).isModResultZero(Money.of(11))).isFalse();
     }
+
+    @Test
+    void testGetDividedIntValue() {
+        assertThat(Money.of(100).getDividedIntValue(Money.of(10))).isEqualTo(10);
+    }
 }

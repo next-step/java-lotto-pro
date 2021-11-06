@@ -35,6 +35,10 @@ public class Money {
         return Money.of(amount.divide(money.amount, 2, RoundingMode.HALF_DOWN));
     }
 
+    public int getDividedIntValue(Money money) {
+        return divide(money).intValue();
+    }
+
     public Money minus(Money money) {
         return Money.of(amount.subtract(money.amount));
     }
