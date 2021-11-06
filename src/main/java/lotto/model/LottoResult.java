@@ -9,7 +9,6 @@ public class LottoResult {
 
     private final Map<LottoWinningPrice, Integer> matchCounts = new LinkedHashMap<>();
     private double yield;
-    private int matchCount;
     private BigDecimal winningReward = new BigDecimal("0");
 
     public LottoResult() {
@@ -39,20 +38,8 @@ public class LottoResult {
         winningReward = winningReward.add(BigDecimal.valueOf(reward));
     }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
-
     public Map<LottoWinningPrice, Integer> getMatchCounts() {
         return matchCounts;
-    }
-
-    public void addMatchCount() {
-        matchCount++;
-    }
-
-    public void clearMatchCount() {
-        matchCount = 0;
     }
 
     public double getYield() {

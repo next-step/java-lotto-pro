@@ -15,15 +15,15 @@ public class LottoPaper {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public void matchLottoPaper(LottoPaper winningLottoPaper, LottoResult lottoResult) {
-        lottoNumbers.forEach(lottoNumber -> winningLottoPaper.checkContainsLottoNumber(lottoNumber, lottoResult));
-        lottoResult.addMatchCounts(lottoResult.getMatchCount());
-        lottoResult.clearMatchCount();
+    public boolean isContainsLottoNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
-    public void checkContainsLottoNumber(LottoNumber lottoNumber,  LottoResult lottoResult) {
-        if(lottoNumbers.contains(lottoNumber)){
-            lottoResult.addMatchCount();
-        }
+    public int matchLottoPaper(LottoPaper winningLottoPaper) {
+        return (int) this.lottoNumbers.stream()
+                .filter(winningLottoPaper::isContainsLottoNumber)
+                .count();
+
     }
+
 }
