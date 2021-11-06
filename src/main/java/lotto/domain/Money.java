@@ -16,4 +16,8 @@ public class Money {
             throw new NegativeMoneyException();
         }
     }
+
+    public int get() {
+        return this.money;
+    }
 }

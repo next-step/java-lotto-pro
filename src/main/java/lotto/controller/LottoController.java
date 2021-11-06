@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.service.LottoService;
 import lotto.view.InputView;
@@ -11,13 +12,14 @@ public class LottoController {
     LottoService lottoService;
 
     public LottoController(InputView inputView, ResultView resultView) {
+        this.lottoService = new LottoService();
         this.inputView = inputView;
         this.resultView = resultView;
-        this.lottoService = new LottoService();
     }
 
     public void run() {
         Money money = new Money(inputView.inputMoney());
-        lottoService.buyLotto(money);
+        LottoTickets lottoTickets = lottoService.buyLottoTickets(money);
+        ResultView.printBuyResult(lottoTickets.count(), lottoTickets.toResultString());
     }
 }
