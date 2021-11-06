@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -32,6 +33,12 @@ public class Lottos {
 
     public int purchaseNumber() {
         return this.lottos.size();
+    }
+
+    public List<Lotto> purchaseList() {
+        return this.lottos
+                .stream()
+                .collect(Collectors.toList());
     }
 
     @Override
