@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import calculator.utils.StringUtils;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
@@ -34,16 +35,28 @@ public class InputView {
 		return inputMoney();
 	}
 
-	public List<Integer> inputWinningNumbers() {
-		System.out.println(LAST_WINNING_NUMBERS_INPUT_GUIDE_MESSAGE);
-		String[] splitWinningNumbers = LottoStringSplitter.split(readLine());
+	public LottoCount inputCustomLottoCount(LottoCount purchasedCount) {
+		System.out.println(CUSTOM_LOTTO_COUNT_INPUT_GUIDE_MESSAGE);
+		String customLottoCount = readLine();
 
-		if (isValidWinningNumbers(splitWinningNumbers)) {
-			return LottoStringToIntegerParser.parseNumbers(splitWinningNumbers);
+		if (isValidCustomLottoCount(customLottoCount, purchasedCount)) {
+			return LottoCount.of(LottoStringToIntegerParser.parse(customLottoCount));
 		}
 
-		System.out.println(MessageBuilder.build(INVALID_INPUT_WINNING_NUMBERS, Arrays.asList(splitWinningNumbers)));
-		return inputWinningNumbers();
+		System.out.println(MessageBuilder.build(INVALID_INPUT_CUSTOM_LOTTO_COUNT, customLottoCount));
+		return inputCustomLottoCount(purchasedCount);
+	}
+
+	public List<Integer> inputLottoNumbers(String inputGuideMessage) {
+		String[] splitNumbers = LottoStringSplitter.split(readLine());
+
+		if (isValidSplitNumbers(splitNumbers)) {
+			return LottoStringToIntegerParser.parseNumbers(splitNumbers);
+		}
+
+		System.out.println(MessageBuilder.build(INVALID_INPUT_LOTTO_NUMBERS, Arrays.asList(splitNumbers)));
+		System.out.println(inputGuideMessage);
+		return inputLottoNumbers(inputGuideMessage);
 	}
 
 	public LottoNumber inputBonusNumber(LottoNumbers lastWinningNumbers) {
@@ -58,6 +71,11 @@ public class InputView {
 		return inputBonusNumber(lastWinningNumbers);
 	}
 
+	private boolean isValidCustomLottoCount(String customLottoCount, LottoCount purchasedCount) {
+		return isValidNumber(customLottoCount)
+			&& LottoStringToIntegerParser.parse(customLottoCount) <= purchasedCount.getValue();
+	}
+
 	private boolean isValidBonusNumber(String bonusNumber) {
 		return isValidNumber(bonusNumber) && isValidLottoNumber(LottoStringToIntegerParser.parse(bonusNumber));
 	}
@@ -67,7 +85,7 @@ public class InputView {
 		return lastWinningNumbers.contains(lottoBonusNumber);
 	}
 
-	private boolean isValidWinningNumbers(String[] splitWinningNumbers) {
+	private boolean isValidSplitNumbers(String[] splitWinningNumbers) {
 		List<String> winningNumbers = Arrays.stream(splitWinningNumbers).map(String::trim).collect(toList());
 		return isValidNumbers(winningNumbers)
 			   && isValidLottoNumbers(winningNumbers)

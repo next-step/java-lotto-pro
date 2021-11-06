@@ -1,10 +1,12 @@
 package lotto.controller;
 
 import static lotto.constant.LottoConstant.*;
+import static lotto.constant.ViewMessage.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.domain.LottoCount;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
@@ -27,34 +29,59 @@ public class LottoController {
 	public void play() {
 		Money money = inputView.inputMoney();
 		Lottos lottos = purchaseLottos(money);
-		LottoNumbers lastWinningNumbers = LottoNumbers.of(inputView.inputWinningNumbers());
+		LottoNumbers lastWinningNumbers = LottoNumbers.of(inputLastWinningNumbers());
 		LottoNumber bonusNumber = inputView.inputBonusNumber(lastWinningNumbers);
 
 		WinningStatistics winningStatistics = WinningStatistics.createBy(lottos, lastWinningNumbers, bonusNumber, money);
 		winningStatistics.buildStatistics();
 
-		this.resultView.printWinningStatistics(winningStatistics);
+		resultView.printWinningStatistics(winningStatistics);
 	}
 
 	public Lottos purchaseLottos(Money money) {
-		int purchasedCount = calculatePurchasedLottoCount(money);
-		Lottos lottos = Lottos.of(createLottos(purchasedCount));
-		this.resultView.printLottos(lottos);
+		LottoCount purchasedCount = calculatePurchasedLottoCount(money);
+		LottoCount customLottoCount = inputView.inputCustomLottoCount(purchasedCount);
+		Lottos totalLottos = Lottos.of(createCustomAndAutoLottos(purchasedCount, customLottoCount));
+		resultView.printLottos(totalLottos, customLottoCount, LottoCount.minus(purchasedCount, customLottoCount));
+
+		return totalLottos;
+	}
+
+	private List<Lotto> createCustomAndAutoLottos(LottoCount purchasedCount, LottoCount customLottoCount) {
+		List<Lotto> lottos = new ArrayList<>();
+		lottos.addAll(createCustomLottos(customLottoCount));
+		lottos.addAll(createAutoLottos(LottoCount.minus(purchasedCount, customLottoCount)));
 
 		return lottos;
 	}
 
-	private int calculatePurchasedLottoCount(Money money) {
-		return money.getValue() / LOTTO_PRICE;
+	private List<Lotto> createCustomLottos(LottoCount customLottoCount) {
+		System.out.println(CUSTOM_LOTTO_INPUT_GUIDE_MESSAGE);
+		List<Lotto> lottos = new ArrayList<>();
+		for (int i = 0; i < customLottoCount.getValue(); i++) {
+			LottoNumbers lottoNumbers = LottoNumbers.of(inputView.inputLottoNumbers(CUSTOM_LOTTO_INPUT_GUIDE_MESSAGE));
+			lottos.add(Lotto.of(lottoNumbers));
+		}
+
+		return lottos;
 	}
 
-	private List<Lotto> createLottos(int purchasedCount) {
+	private LottoCount calculatePurchasedLottoCount(Money money) {
+		return LottoCount.of(money.getValue() / LOTTO_PRICE);
+	}
+
+	private List<Lotto> createAutoLottos(LottoCount purchasedCount) {
 		List<Lotto> lottos = new ArrayList<>();
-		for (int i = 0; i < purchasedCount; i++) {
+		for (int i = 0; i < purchasedCount.getValue(); i++) {
 			LottoNumbers lottoNumbers = LottoNumbers.createBy(new LottoNumberGenerator());
 			lottos.add(Lotto.of(lottoNumbers));
 		}
 
 		return lottos;
+	}
+
+	private List<Integer> inputLastWinningNumbers() {
+		System.out.println(LAST_WINNING_NUMBERS_INPUT_GUIDE_MESSAGE);
+		return inputView.inputLottoNumbers(LAST_WINNING_NUMBERS_INPUT_GUIDE_MESSAGE);
 	}
 }
