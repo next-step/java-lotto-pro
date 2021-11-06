@@ -19,7 +19,8 @@ public class LottoNumberTest {
     @DisplayName("로또 번호 자동 생성 확인")
     public void autoLottoTest() {
         LottoNumber lottoNumber = new LottoNumber();
-        assertThat(lottoNumber).isNotNull();
+
+        assertThat(lottoNumber.getLottoNumbers().size()).isEqualTo(6);
     }
 
     static Stream<Arguments> listProvide3() {
