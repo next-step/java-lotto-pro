@@ -1,25 +1,23 @@
 package lotto.controller;
 
-import lotto.domain.number.Payment;
-import lotto.domain.result.Result;
-import lotto.domain.ticket.LottoNumbers;
-import lotto.domain.ticket.Ticket;
-import lotto.domain.ticket.TicketGenerator;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+import java.util.*;
 
-import java.util.List;
+import lotto.domain.number.*;
+import lotto.domain.result.*;
+import lotto.domain.ticket.*;
+import lotto.view.*;
 
 public class LottoController {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
 
-        Payment payment = inputView.inputPayment();
+        Payment payment = Payment.from(inputView.inputPayment());
         List<Ticket> tickets = TicketGenerator.generateTickets(payment.numberOfAvailableTickets());
         resultView.outputTickets(TicketGenerator.lottoNumbersDtos(tickets));
 
-        LottoNumbers winningNumbers = inputView.inputLottoNumbers();
+        LottoNumbers lottoNumbers = LottoNumbers.from(inputView.inputLottoNumbers());
+        WinningNumbers winningNumbers = WinningNumbers.of(lottoNumbers, inputView.inputBonusNumber());
         Result result = Result.of(tickets, winningNumbers);
         resultView.outputStatistics(result, payment);
     }
