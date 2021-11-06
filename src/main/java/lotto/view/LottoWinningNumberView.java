@@ -42,6 +42,7 @@ public class LottoWinningNumberView {
         }
     }
 
+    //TODO : 질문4
     private static void winnerNumberSizeValid(List<String> winnerNumbers) {
         if (winnerNumbers.size() != LottoProperty.LOTTO_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_WINNING_NUMBER_COUNT.getMessage());

@@ -30,6 +30,7 @@ public class Lottos {
         return new WinningResult(winningResult);
     }
 
+    //TODO : 질문4
     private void winningNumberSizeValid(List<Integer> winningNumbers) {
         if (winningNumbers.size() != LottoProperty.LOTTO_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_WINNING_NUMBER_COUNT.getMessage());
