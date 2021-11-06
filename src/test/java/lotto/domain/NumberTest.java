@@ -12,7 +12,11 @@ public class NumberTest {
     @Test
     @DisplayName("로또 번호 정상 검증")
     public void numberTest() {
-        assertThat(new Number(1)).isEqualTo(new Number(1));
+        Number number = new Number(1);
+
+        Number expected = new Number(1);
+
+        assertThat(number).isEqualTo(expected);
     }
 
     @Test
