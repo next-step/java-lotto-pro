@@ -2,10 +2,13 @@ package lottoservice.lottoticket;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
+import lottoservice.lottonumber.LottoNumber;
 import lottoservice.lottonumber.LottoNumbersMaker;
 import lottoservice.lottoticket.LottoTicket;
 
@@ -16,15 +19,13 @@ public class LottoTicketTest {
 	private static final int SIZE_OF_LOTTERY_NUMBERS = 6;
 
 	@Test
-	@RepeatedTest(10)
-	public void makeLottoTicket_로또_티켓_한장_발급() {
-		LottoTicket lottoTicket = new LottoTicket(LottoNumbersMaker.makeLottoNumbers());
+	public void makeLottoTicket_로또_티켓_발급() {
+		List<LottoNumber> lottoNumbers = LottoNumbersMaker.makeLottoNumbers();
+		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
 		Assertions.assertThat(lottoTicket.getNumOfNumbersInGroup())
 			.isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
 
-		lottoTicket.getLottoNumbers()
-			.forEach(lottoNumber -> assertThat(lottoNumber.getNumber())
-				.isBetween(START_INCLUSIVE_NUMBER, END_EXCLUSIVE_NUMBER));
+		lottoNumbers.forEach((it)->assertThat(lottoTicket.hasLottoNumber(it)));
 	}
 }

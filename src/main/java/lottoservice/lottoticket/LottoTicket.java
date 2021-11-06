@@ -42,6 +42,10 @@ public class LottoTicket {
 		return lottoNumbers.size();
 	}
 
+	public boolean hasLottoNumber(LottoNumber lottoNumber){
+		return lottoNumbers.contains(lottoNumber);
+	}
+
 	@Override
 	public String toString() {
 		return lottoNumbers.stream()
