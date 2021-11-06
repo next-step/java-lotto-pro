@@ -5,9 +5,9 @@ import nextstep.utils.Console;
 
 public class View {
 
-	public int inPayKRW() {
+	public String inPayKRW() {
 		println(Message.INPUT_PAY_KRW.getContent());
-		return Console.readInt();
+		return Console.readLine();
 	}
 
 	public String inWinningLotto() {

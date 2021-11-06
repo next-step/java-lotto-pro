@@ -20,11 +20,6 @@ public class Console {
 	private Console() {
 	}
 
-	public static int readInt() {
-		makeNewScannerIfScannerIsClosed();
-		return scanner.nextInt();
-	}
-
 	/**
 	 * {@link Scanner#nextLine()} 결과를 반환하는 메소드.
 	 * <p>

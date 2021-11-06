@@ -30,9 +30,9 @@ public class LottoApp {
 		return lotto;
 	}
 
-	private List<Lotto> buyLottos(int paidKRW) {
+	private List<Lotto> buyLottos(String pay) {
 		try {
-			return store.sell(paidKRW);
+			return store.sell(pay);
 		} catch (LottoStorePaymentException e) {
 			view.error(e.getMessage());
 			return null;
