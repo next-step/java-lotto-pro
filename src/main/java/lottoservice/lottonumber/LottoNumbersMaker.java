@@ -3,6 +3,7 @@ package lottoservice.lottonumber;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -25,8 +26,6 @@ public class LottoNumbersMaker {
 
 	private static List<LottoNumber> getLottoNumberCandidates() {
 		return IntStream.range(START_INCLUSIVE_NUMBER, END_EXCLUSIVE_NUMBER + 1)
-			.collect(ArrayList::new,
-				(pickedNumbers, number) -> pickedNumbers.add(new LottoNumber(number))
-				, (pickedNumbers1, pickedNumbers2) -> pickedNumbers1.addAll(pickedNumbers2));
+			.mapToObj(LottoNumber::new).collect(Collectors.toList());
 	}
 }
