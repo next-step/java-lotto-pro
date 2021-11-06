@@ -10,7 +10,7 @@ class RankTest {
 
 	@DisplayName("순위 1,2,3,4,5,miss 검증")
 	@Test
-	public void rankAllSuccess() throws Exception {
+	public void rankAllSuccess() {
 	    assertAll(() -> {
 			assertThat(Rank.valueOf(6, false)).isEqualTo(Rank.FIRST);
 			assertThat(Rank.valueOf(6, true)).isEqualTo(Rank.FIRST);

@@ -10,7 +10,7 @@ class GeneratedLottoTest {
 
 	@Test
 	@DisplayName("자동생성 로또")
-	public void GeneratedLottoSuccess() throws Exception {
+	public void GeneratedLottoSuccess() {
 	    assertThat(new GeneratedLotto().getGeneratedLotto()).isInstanceOf(Lotto.class);
 	}
 
