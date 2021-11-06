@@ -24,13 +24,12 @@ public class LottoNumber {
         lottoNumbers = sortAsc(activeNumbers);
     }
 
-    public Rank getMatchRank(List<Number> matchNumbers, Number bonusNumber) {
+    public Rank getMatchRank(WinningLotto winningLotto) {
         int matchCount = 0;
-        boolean matchBonus = Collections.frequency(lottoNumbers, bonusNumber) > 0 ? true : false;
+        boolean matchBonus = winningLotto.isExistBonusNumber(lottoNumbers);
         for (Number number : lottoNumbers) {
-            matchCount += Collections.frequency(matchNumbers, number);
+            matchCount += winningLotto.isMatchNumber(number) ? 1 : 0;
         }
-
         return Rank.of(matchCount, matchBonus);
     }
 
