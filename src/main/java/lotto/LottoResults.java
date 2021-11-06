@@ -15,11 +15,11 @@ public class LottoResults {
     }
 
     private void generateLottoRankingMap(List<LottoResult> lottoResults) {
-        for (LottoRankingStatus lottoRankingStatus: LottoRankingStatus.values()) {
+        for (LottoRankingStatus lottoRankingStatus : LottoRankingStatus.values()) {
             lottoRankingAmountMap.put(lottoRankingStatus, 0);
         }
 
-        for (LottoResult lottoResult: lottoResults) {
+        for (LottoResult lottoResult : lottoResults) {
             LottoRankingStatus lottoRankingStatus = lottoResult.getResultRanking();
             lottoRankingAmountMap.put(lottoRankingStatus, lottoRankingAmountMap.getOrDefault(lottoRankingStatus, 0) + 1);
         }

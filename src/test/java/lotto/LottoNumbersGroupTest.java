@@ -39,9 +39,9 @@ public class LottoNumbersGroupTest {
 
         LottoNumbersGroup lottoNumbersGroup2 = new LottoNumbersGroup(
                 Arrays.asList(new LottoNumbers(
-                Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
-                        .collect(Collectors.toSet()))));
+                        Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
+                                .collect(Collectors.toSet()))));
         assertThat(lottoNumbersGroup.toString()).isEqualTo(lottoNumbersGroup2.toString());
     }
 

@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("로또 결과 테스트")
 public class LottoResultTest {
-    @ParameterizedTest(name="{index}. {0} 결과 테스트")
+    @ParameterizedTest(name = "{index}. {0} 결과 테스트")
     @MethodSource("provideNumbersForLottoResultTest")
     void lottoNumbersTest(String testTitle, LottoNumbers prizeLottoNumbers, LottoNumbers myLottoNumbers, LottoRankingStatus expect) {
         int matchAmount = myLottoNumbers.getMatchCount(prizeLottoNumbers);

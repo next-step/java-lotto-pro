@@ -39,8 +39,8 @@ public class LottoNumbersTest {
         assertThat(prizeLottoNumbers).isEqualTo(expectLottoNumbers);
     }
 
-    @ParameterizedTest(name="당첨 로또 입력 정렬 테스트")
-    @CsvSource(value={"1,2,3,4,5,6:[1, 2, 3, 4, 5, 6]", "42,22,13,1,6,5:[1, 5, 6, 13, 22, 42]"}, delimiterString = ":")
+    @ParameterizedTest(name = "당첨 로또 입력 정렬 테스트")
+    @CsvSource(value = {"1,2,3,4,5,6:[1, 2, 3, 4, 5, 6]", "42,22,13,1,6,5:[1, 5, 6, 13, 22, 42]"}, delimiterString = ":")
     void showLottoNumbersDescriptionTest(String prizeLottoNumbersString, String expect) {
         prizeLottoNumbers = new LottoNumbers(prizeLottoNumbersString);
         assertThat(prizeLottoNumbers.toString()).isEqualTo(expect);
@@ -53,7 +53,7 @@ public class LottoNumbersTest {
         assertThat(prizeLottoNumbers.containsNumber(myLottoNumber)).isTrue();
     }
 
-    @ParameterizedTest(name="{index}. {0} 숫자들 테스트")
+    @ParameterizedTest(name = "{index}. {0} 숫자들 테스트")
     @MethodSource("provideNumbersForLottoNumbersTest")
     void lottoNumbersTest(String testTitle, LottoNumbers prizeLottoNumbers, LottoNumbers myLottoNumbers, int expect) {
         assertThat(myLottoNumbers.getMatchCount(prizeLottoNumbers)).isEqualTo(expect);
