@@ -41,4 +41,19 @@ public class LottoResults {
         int totalReward = getTotalReward();
         return PROFIT_BASE + buyAmount.getProfitRate(totalReward);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (LottoRankingStatus lottoRankingStatus : lottoRankingAmountMap.keySet()) {
+            if (lottoRankingStatus == LottoRankingStatus.NONE) {
+                continue;
+            }
+
+            int matchCount = lottoRankingAmountMap.get(lottoRankingStatus);
+            result.append(lottoRankingStatus.getMatchDescription(matchCount))
+                    .append(System.lineSeparator());
+        }
+        return result.toString();
+    }
 }
