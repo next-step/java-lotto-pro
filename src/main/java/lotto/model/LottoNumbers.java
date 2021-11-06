@@ -3,21 +3,26 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoNumbers {
 	private static final int LOTTO_NUMBER_COUNT = 6;
 	private static final int MIN_LOTTO_NUMBER = 1;
 	private static final int MAX_LOTTO_NUMBER = 45;
+	private static final List<LottoNumber> LOTTO_NUMBER_CANDIDATE;
 
 	private final List<LottoNumber> numbers;
+
+	static {
+		LOTTO_NUMBER_CANDIDATE = new ArrayList<>();
+		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+			LOTTO_NUMBER_CANDIDATE.add(new LottoNumber(i));
+		}
+	}
 
 	public LottoNumbers() {
 		this(makeNonDuplicateLottoNumbers());
@@ -42,8 +47,7 @@ public class LottoNumbers {
 		if (numbers == null || numbers.size() != LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException("로또 번호가 없거나 크기가 다릅니다 : "+numbers);
 		}
-		Set<LottoNumber> duplicationCheck = new HashSet<>();
-		duplicationCheck.addAll(numbers);
+		Set<LottoNumber> duplicationCheck = new HashSet<>(numbers);
 		if (duplicationCheck.size() != LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException("중복된 로또 번호가 존재합니다. : "+numbers);
 		}
@@ -55,20 +59,9 @@ public class LottoNumbers {
 	}
 
 	public static List<LottoNumber> makeNonDuplicateLottoNumbers() {
-		Set<LottoNumber> generatedLottoNumberSet = new HashSet<>();
-		while(generatedLottoNumberSet.size() != LOTTO_NUMBER_COUNT) {
-			LottoNumber no = makeLottoNumber();
-			generatedLottoNumberSet.add(no);
-		}
-		return new ArrayList<>(generatedLottoNumberSet);
-	}
-
-	/**
-	 * 로또 번호 생성
-	 * @return 최소값(1) ~ 최대값(45) 사이의 정수
-	 */
-	public static LottoNumber makeLottoNumber() {
-		return new LottoNumber((int)(Math.random() * MAX_LOTTO_NUMBER + MIN_LOTTO_NUMBER));
+		List<LottoNumber> suffledLottoNumbers = new ArrayList<>(LOTTO_NUMBER_CANDIDATE);
+		Collections.shuffle(suffledLottoNumbers);
+		return suffledLottoNumbers.subList(0, LOTTO_NUMBER_COUNT);
 	}
 
 	@Override
