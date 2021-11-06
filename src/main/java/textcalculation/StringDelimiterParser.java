@@ -30,10 +30,7 @@ public class StringDelimiterParser {
 	}
 
 	private static boolean hasCustomDelimiter(Matcher m) {
-		if (m.find()) {
-			return true;
-		}
-		return false;
+		return m.find();
 	}
 
 	private static String[] splitWithDelimiters(String text, String basicDelimiters) {
