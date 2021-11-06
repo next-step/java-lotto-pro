@@ -24,6 +24,7 @@ public class Result {
         final Map<Rank, Integer> map = new EnumMap(Rank.class);
         map.put(Rank.FIRST, 0);
         map.put(Rank.SECOND, 0);
+        map.put(Rank.SECOND_BONUS, 0);
         map.put(Rank.THIRD, 0);
         map.put(Rank.FOURTH, 0);
 
