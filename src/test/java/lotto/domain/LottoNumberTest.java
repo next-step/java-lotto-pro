@@ -22,19 +22,6 @@ public class LottoNumberTest {
         assertThat(lottoNumber).isNotNull();
     }
 
-    static Stream<Arguments> listProvide() {
-        List<Number> lottoNumber = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
-        List<Number> matchNumber = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
-        return Stream.of(arguments(lottoNumber, matchNumber, new Number(7)));
-    }
-
-    @ParameterizedTest
-    @MethodSource("listProvide")
-    @DisplayName("로또 번호 매칭 확인")
-    public void activeLottoTest(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
-        assertThat(new LottoNumber(lottoNumber).getMatchRank(matchNumber, bonusNumber)).isEqualTo(Rank.FIRST);
-    }
-
     static Stream<Arguments> listProvide3() {
         List<Number> number = Arrays.asList(new Number(1), new Number(2), new Number(3),
                 new Number(4), new Number(5), new Number(6), new Number(7));
@@ -51,17 +38,28 @@ public class LottoNumberTest {
                 .hasMessageContaining("[ERROR]");
     }
 
-    static Stream<Arguments> listProvide4() {
-        List<Number> lottoNumber = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(7));
-        List<Number> matchNumber = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
-        return Stream.of(arguments(lottoNumber, matchNumber, new Number(7)));
+    static Stream<Arguments> listProvide() {
+        List<Number> MatchNumber = Arrays.asList(new Number(1), new Number(2), new Number(3),
+                new Number(4), new Number(5), new Number(6));
+        List<Number> LottoNumber = Arrays.asList(new Number(11), new Number(12), new Number(13),
+                new Number(4), new Number(5), new Number(6));
+        return Stream.of(arguments(
+                MatchNumber
+                , new Number(7)
+                ,LottoNumber
+        ));
     }
 
     @ParameterizedTest
-    @MethodSource("listProvide4")
-    @DisplayName("로또 번호 보너스 매칭 확인")
-    public void activeLottoBonusTest(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
-        assertThat(new LottoNumber(lottoNumber).getMatchRank(matchNumber, bonusNumber)).isEqualTo(Rank.SECOND);
+    @MethodSource("listProvide")
+    @DisplayName("로또 번호 매칭 검증")
+    public void lottoRank(List<Number> MatchNumbers, Number bonusNumber, List<Number> activeNumbers) {
+        LottoNumber lottoNumber = new LottoNumber(activeNumbers);
+
+        boolean rankMatch =
+                lottoNumber.getMatchRank(new WinningLotto(MatchNumbers, bonusNumber)).isRankMatch(Rank.FIVE);
+
+        assertThat(rankMatch).isTrue();
     }
 
 }
