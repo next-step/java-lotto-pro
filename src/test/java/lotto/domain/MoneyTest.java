@@ -28,18 +28,18 @@ class MoneyTest {
                 .hasMessage(Money.PRICE_IS_MINUS_ERROR_MESSAGE);
     }
 
-    @DisplayName("구입 가능한 로또 갯수 확인")
+    @DisplayName("구입한 로또 갯수 확인")
     @ParameterizedTest(name = "{displayName} ({index}) -> param = [{arguments}]")
     @CsvSource(value = {"14500:14", "1300:1", "9800:9"}, delimiter = ':')
-    void 구입_가능한_로또_갯수_확인(int testValue, int expectedResult) {
+    void 구입한_로또_갯수_확인(int testValue, int expectedResult) {
         // given
         Money money = new Money(testValue);
 
         // when
-        int numberOfLottoCanBuy = money.getNumberOfLottoCanBuy();
+        LottoBundle lottoBundle = money.buyAllRandomLotto();
 
         //then
-        assertThat(numberOfLottoCanBuy)
+        assertThat(lottoBundle.getLottoCount())
                 .isEqualTo(expectedResult);
 
     }

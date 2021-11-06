@@ -8,7 +8,7 @@ public class Money {
     public static final int LOTTO_PRICE = 1000;
     public static final String PRICE_IS_MINUS_ERROR_MESSAGE = "금액은 0보다 작을 수 없습니다.";
 
-    private final int price;
+    private int price;
 
     public Money(int price) {
         validatePrice(price);
@@ -21,8 +21,11 @@ public class Money {
         }
     }
 
-    public int getNumberOfLottoCanBuy() {
-        return price / LOTTO_PRICE;
+    public LottoBundle buyAllRandomLotto() {
+        int buyingLottoCount = price / LOTTO_PRICE;
+        this.price = 0;
+
+        return LottoBundleFactory.generateRandomLotto(buyingLottoCount);
     }
 
     @Override
