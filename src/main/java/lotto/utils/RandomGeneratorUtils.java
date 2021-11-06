@@ -9,6 +9,9 @@ public class RandomGeneratorUtils {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_PICK_QUANTITY = 6;
 
+    private RandomGeneratorUtils() {
+    }
+
     public static List<Integer> makeRandomNumbers() {
         List<Integer> numberRange = new ArrayList<Integer>();
         for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
