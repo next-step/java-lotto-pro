@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lottoservice.exception.InvalidLottoFormatException;
-import lottoservice.lottonumber.LottoNumber;
 
 class LottoNumberTest {
 

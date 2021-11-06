@@ -5,12 +5,10 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import lottoservice.lottonumber.LottoNumber;
 import lottoservice.lottonumber.LottoNumbersMaker;
-import lottoservice.lottoticket.LottoTicket;
 
 public class LottoTicketTest {
 
