@@ -11,19 +11,6 @@ import study.lotto.view.LottoWinningNumberInputView;
 import study.lotto.view.LottoWinningStatisticsView;
 
 public class Application {
-    private static final LottoController controller; // 로또 게임 컨트롤러
-    private static final LottoOrderCountInputView orderInputView; // 구매 입력 뷰
-    private static final LottoWinningNumberInputView winningNumberInputView; // 당첨 번호 입력 뷰
-    private static final LottoOrderResultView orderResultView; // 구매 내역 뷰
-    private static final LottoWinningStatisticsView winningStatisticsView;// 당첨 통계 뷰
-
-    static {
-        controller = new LottoController();
-        orderInputView = new LottoOrderCountInputView();
-        orderResultView = new LottoOrderResultView();
-        winningNumberInputView = new LottoWinningNumberInputView();
-        winningStatisticsView = new LottoWinningStatisticsView();
-    }
 
     public static void main(String[] args) {
         final TicketLotteryBundleResponseDto ticketLotteryBundle = orderTicketLotteryBundle();
@@ -31,15 +18,15 @@ public class Application {
     }
 
     private static TicketLotteryBundleResponseDto orderTicketLotteryBundle() {
-        final LottoOrderMoneyRequestDto money = orderInputView.submit();
-        final TicketLotteryBundleResponseDto ticketLotteryBundle = controller.orderTicketLotteryBundleByMoney(money);
-        orderResultView.resolve(ticketLotteryBundle);
+        final LottoOrderMoneyRequestDto money = LottoOrderCountInputView.submit();
+        final TicketLotteryBundleResponseDto ticketLotteryBundle = LottoController.orderTicketLotteryBundleByMoney(money);
+        LottoOrderResultView.resolve(ticketLotteryBundle);
         return ticketLotteryBundle;
     }
 
     private static void refereeTicketLottery(final TicketLotteryBundleResponseDto ticketLotteryBundle) {
-        final LottoWinningNumberRequestDto lottoNumbers = winningNumberInputView.submit();
-        final WinningStatisticsResponseDto winningStatistics = controller.referee(lottoNumbers, ticketLotteryBundle);
-        winningStatisticsView.resolve(winningStatistics);
+        final LottoWinningNumberRequestDto lottoNumbers = LottoWinningNumberInputView.submit();
+        final WinningStatisticsResponseDto winningStatistics = LottoController.referee(lottoNumbers, ticketLotteryBundle);
+        LottoWinningStatisticsView.resolve(winningStatistics);
     }
 }

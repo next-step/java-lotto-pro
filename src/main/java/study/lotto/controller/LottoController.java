@@ -9,13 +9,13 @@ import study.lotto.model.WinningStatistics;
 
 public class LottoController {
 
-    public TicketLotteryBundleResponseDto orderTicketLotteryBundleByMoney(final LottoOrderMoneyRequestDto orderCountRequestDto) {
+    public static TicketLotteryBundleResponseDto orderTicketLotteryBundleByMoney(final LottoOrderMoneyRequestDto orderCountRequestDto) {
         final int orderCount = orderCountRequestDto.getOrderCount();
         return new TicketLotteryBundleResponseDto(LottoStore.orderTicketLotteryBundleByMoney(orderCount));
     }
 
-    public WinningStatisticsResponseDto referee(final LottoWinningNumberRequestDto winningNumberRequestDto,
-                                                final TicketLotteryBundleResponseDto ticketLotteryBundleResponseDto) {
+    public static WinningStatisticsResponseDto referee(final LottoWinningNumberRequestDto winningNumberRequestDto,
+                                                       final TicketLotteryBundleResponseDto ticketLotteryBundleResponseDto) {
         final WinningStatistics winningStatistics = WinningStatistics.valueOf(ticketLotteryBundleResponseDto.toEntity(), winningNumberRequestDto.toEntity());
         return new WinningStatisticsResponseDto(winningStatistics);
     }

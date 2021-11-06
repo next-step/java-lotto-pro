@@ -14,13 +14,16 @@ public class LottoWinningStatisticsView {
     public static final String RANK_STATISTICS_GUIDE_MESSAGE = "%d 일치 (%d원)- %d개\n";
     public static final String TITLE_MESSAGE = "당첨 통계\n---------";
 
-    public void resolve(final WinningStatisticsResponseDto winningStatistics) {
+    private LottoWinningStatisticsView() {
+    }
+
+    public static void resolve(final WinningStatisticsResponseDto winningStatistics) {
         printTitle();
         printRankStatistics(winningStatistics);
         printIncomeRate(winningStatistics);
     }
 
-    private void printIncomeRate(final WinningStatisticsResponseDto winningStatistics) {
+    private static void printIncomeRate(final WinningStatisticsResponseDto winningStatistics) {
         final double incomeRate = winningStatistics.getIncomeRate();
         System.out.printf(INCOME_RATE_GUIDE_TEMPLATE_MESSAGE, incomeRate);
         if (incomeRate < STANDARD_VALUE) {
@@ -28,14 +31,14 @@ public class LottoWinningStatisticsView {
         }
     }
 
-    private void printRankStatistics(final WinningStatisticsResponseDto winningStatistics) {
+    private static void printRankStatistics(final WinningStatisticsResponseDto winningStatistics) {
         for (Rank rank : Rank.getRanksOrderByWinningMoney()) {
             final EnumMap<Rank, Integer> rankStatistics = winningStatistics.getRankStatistics();
             System.out.printf(RANK_STATISTICS_GUIDE_MESSAGE, rank.getCountOfMatch(), rank.getWinningMoney(), rankStatistics.getOrDefault(rank, RankStatistics.DEFAULT_COUNT));
         }
     }
 
-    private void printTitle() {
+    private static void printTitle() {
         System.out.println(TITLE_MESSAGE);
     }
 }
