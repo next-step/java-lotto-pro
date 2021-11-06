@@ -1,13 +1,19 @@
 package study.lotto.controller.dto;
 
-public class LottoOrderMoneyRequestDto {
-    private final int orderCount;
+import study.lotto.model.Money;
 
-    public LottoOrderMoneyRequestDto(int orderCount) {
-        this.orderCount = orderCount;
+public class LottoOrderMoneyRequestDto {
+    private final int money;
+
+    public LottoOrderMoneyRequestDto(final int money) {
+        this.money = money;
     }
 
-    public int getOrderCount() {
-        return orderCount;
+    public int getMoney() {
+        return money;
+    }
+
+    public Money toEntity() {
+        return null;
     }
 }
