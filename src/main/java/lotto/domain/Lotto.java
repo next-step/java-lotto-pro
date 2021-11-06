@@ -32,7 +32,7 @@ public class Lotto {
         }
     }
 
-    public int match(final Lotto lotto) {
+    public int matchCount(final Lotto lotto) {
         return (int) this.lotto.stream()
                 .filter(lotto::contain)
                 .count();

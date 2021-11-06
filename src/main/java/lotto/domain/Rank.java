@@ -37,12 +37,6 @@ public enum Rank {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public static Rank rank(Lotto winningLotto, Lotto lotto, Bonus bonus) {
-        return rank(
-                winningLotto.match(lotto),
-                lotto.containBonus(bonus));
-    }
-
     public int getPrice() {
         return price;
     }
