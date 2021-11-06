@@ -8,4 +8,11 @@ public class Money {
 	public Money(String strMoney) {
 		money = Integer.parseUnsignedInt(strMoney);
 	}
+
+	public int getNumberOfPurchaseAvailable() {
+		return money / LOTTO_PRICE;
+	}
+
+	public static void main(String[] args) {
+	}
 }
