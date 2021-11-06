@@ -3,8 +3,6 @@ package lottoservice.matcher;
 import java.util.Arrays;
 import java.util.Optional;
 
-import lottoservice.exception.UnexpectedMatchException;
-
 /**
  * 당첨번호와 비교하여 발생할 수 있는 결과 케이스를 enum으로 정의
  */
@@ -38,6 +36,6 @@ public enum LottoMatchRank {
 		LottoMatchRank[] ranks = LottoMatchRank.values();
 		Optional<LottoMatchRank> foundRank = Arrays.stream(ranks)
 			.filter(rank -> rank.getCountOfMatch() == countOfMatch).findFirst();
-		return foundRank.orElseThrow(() -> new UnexpectedMatchException(ERROR_MESSAGE_UNEXPECTED_COUNTOFMATCH));
+		return foundRank.orElseThrow(() -> new IllegalStateException(ERROR_MESSAGE_UNEXPECTED_COUNTOFMATCH));
 	}
 }
