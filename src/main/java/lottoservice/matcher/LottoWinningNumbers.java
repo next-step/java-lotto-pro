@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.lottonumber.LottoNumber;
+import lottoservice.lottonumber.LottoNumbersMaker;
 import lottoservice.lottoticket.LottoTicket;
 import lottoservice.lottoticket.LottoTickets;
 
@@ -35,12 +36,14 @@ public class LottoWinningNumbers {
 	}
 
 	private boolean isCorrectSize(List<LottoNumber> lottoNumber){
-		return lottoNumber.stream().distinct().count() == 6;
+		return lottoNumber.stream().distinct().count() == LottoNumbersMaker.SIZE_OF_LOTTERY_NUMBERS;
 	}
 
 	public Set<LottoNumber> getWinningNumbers() {
 		return winningNumbers;
 	}
+
+
 
 	/* 인자로 넘어온 티켓들을 정답과 비교하여 결과를 리턴 */
 	public LottoMatchResult matchWinningAndTickets(LottoTickets lottoTickets) {
@@ -66,7 +69,7 @@ public class LottoWinningNumbers {
 		return compareWithNumbers(lottoTicket.getLottoNumbers());
 	}
 
-	public int compareWithNumbers(List<LottoNumber> ticketLottoNumbers) {
+	private int compareWithNumbers(List<LottoNumber> ticketLottoNumbers) {
 		return (int)ticketLottoNumbers.stream()
 			.filter(it-> hasMatchNumber(it))
 			.count();
@@ -74,5 +77,9 @@ public class LottoWinningNumbers {
 
 	public boolean hasMatchNumber(LottoNumber number){
 		return winningNumbers.contains(number);
+	}
+
+	public int sizeOfWinningNumbers(){
+		return winningNumbers.size();
 	}
 }

@@ -29,7 +29,7 @@ public class LottoWinningNumbersTest {
 	public void makeLottoWinningNumbers_당첨번호_리스트_입력(ArgumentsAccessor argumentsAccessor) {
 		List<Integer> numbers = convertArgumentsToInteger(argumentsAccessor);
 		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers(numbers));
-		assertThat(lottoWinningNumbers.getWinningNumbers().size()).isEqualTo(numbers.size());
+		assertThat(lottoWinningNumbers.sizeOfWinningNumbers()).isEqualTo(numbers.size());
 
 		List<LottoNumber> lottoNumbers = convertToLottoNumbers(numbers);
 		for (LottoNumber lottoNumber : lottoNumbers) {
@@ -68,7 +68,7 @@ public class LottoWinningNumbersTest {
 	@ValueSource(strings = {"1, 31, 22, 15, 4, 7", "2, 43, 33, 25, 6, 7"})
 	public void makeLottoWinningNumbers_당첨번호_문자열_입력(String lottoNumberText) {
 		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers(lottoNumberText));
-		assertThat(lottoWinningNumbers.getWinningNumbers().size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
+		assertThat(lottoWinningNumbers.sizeOfWinningNumbers()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
 	}
 
 	@ParameterizedTest
