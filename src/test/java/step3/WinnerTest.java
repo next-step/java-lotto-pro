@@ -18,21 +18,30 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class WinnerTest {
 
+	private LottoNumberService lottoNumberService;
 	private Map<Integer, Integer> winnerAmounts;
 	private Winner winner;
+
 
 	@BeforeEach
 	void setUp() {
 		LottoPapers.getInstance();
 		LottoPapers.PAPERS = getLottoNumbers();
+		lottoNumberService = new LottoNumberService();
 	}
 
 	@Test
 	@DisplayName("각 로또종이별 매칭되는 수에따른 금액 확인")
 	void eachWinAmount() {
+		//given
 		String userInputWinnerNumber = "1, 2, 3, 4, 5, 6";
+		lottoNumberService = new LottoNumberService();
+
+		//when
 		winner = new Winner();
-		winnerAmounts = winner.statistics(userInputWinnerNumber);
+		winnerAmounts = winner.statistics(lottoNumberService.convertLottoNumber(userInputWinnerNumber));
+
+		//then
 		assertThat(winnerAmounts.get(3)).isEqualTo(5_000);
 		assertThat(winnerAmounts.get(4)).isEqualTo(50_000);
 	}
@@ -42,12 +51,11 @@ public class WinnerTest {
 	@CsvSource(value = {"1, 2, 3, 4, 5, 6:14000:3.92", "36,42,45,21,30,20:14000:3.92","6,42,45,1,9,8:14000:0.00"}, delimiter = ':')
 	void yield(String userInputNumber, int inputMoney, String inputYield) {
 		// given
-		String userInputWinnerNumber = userInputNumber;
 		Money money = new Money(inputMoney);
 
 		// when
 		winner = new Winner();
-		winnerAmounts = winner.statistics(userInputWinnerNumber);
+		winnerAmounts = winner.statistics(lottoNumberService.convertLottoNumber(userInputNumber));
 		Integer reduce = winnerAmounts.entrySet().stream().map(s -> s.getValue()).reduce(0, Integer::sum);
 
 		// then

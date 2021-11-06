@@ -4,8 +4,15 @@ public class LottoMachineFacade {
 
 	public static LottoPapers PAPER;
 	private Money money;
+	private LottoNumberService lottoNumberService;
+
+	public LottoMachineFacade(LottoNumberService lottoNumberService) {
+		PAPER = LottoPapers.getInstance();
+		this.lottoNumberService = lottoNumberService;
+	}
 
 	public LottoMachineFacade() {
+		this(new LottoNumberService());
 		PAPER = LottoPapers.getInstance();
 	}
 
@@ -17,8 +24,9 @@ public class LottoMachineFacade {
 
 	public void result(String userInputWinnerNumber) {
 		Winner winner = new Winner();
-		winner.statistics(userInputWinnerNumber);
+		winner.statistics(lottoNumberService.convertLottoNumber(userInputWinnerNumber));
 		winner.yield(money);
 		ResultView.statisticsPrintAndYield(winner);
 	}
+
 }

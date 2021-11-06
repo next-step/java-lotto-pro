@@ -1,13 +1,11 @@
 package step3;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class Winner {
 
@@ -31,11 +29,9 @@ public class Winner {
 		winnings = Collections.unmodifiableMap(winnings);
 	}
 
-	public Map<Integer, Integer> statistics(String userInputWinnerNumber) {
-
-		assert userInputWinnerNumber != null;
+	public Map<Integer, Integer> statistics(List<LottoNumber> lottoNumbers) {
+		assert lottoNumbers != null;
 		List<LottoNumbers> papers = LottoPapers.PAPERS;
-		List<LottoNumber> lottoNumbers = getLottoNumber(userInputWinnerNumber);
 		for (LottoNumbers lottoPapers : papers) {
 			Integer winningCount = findMatchLottoNumber(lottoNumbers, lottoPapers);
 			Integer winningAmount = findWinningAmount(winningCount);
@@ -65,12 +61,6 @@ public class Winner {
 
 	private void addWinnerList(Integer matchNumber, Integer winningAmount) {
 		this.winningAmount.put(matchNumber, winningAmount);
-	}
-
-	private List<LottoNumber> getLottoNumber(String userInputWinnerNumber) {
-		final String inputNumber = userInputWinnerNumber.replaceAll("\\s+", "");
-		return Arrays.stream(inputNumber.split(","))
-			.map(s -> new LottoNumber(Integer.parseInt(s))).collect(Collectors.toList());
 	}
 
 	public BigDecimal yield(Money money) {
