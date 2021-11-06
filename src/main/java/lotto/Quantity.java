@@ -1,6 +1,6 @@
 package lotto;
 
-public class TotalLottoQuantity {
+public class Quantity {
 	private int totalLottoQuantity;
 
 	public void plus() {

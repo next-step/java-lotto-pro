@@ -5,7 +5,7 @@ import java.util.List;
 public class LottoStatistics {
 	private static final double LOTTO_SALES_PRICE = 1000;
 	private final WinningRecord winningRecord = new WinningRecord();
-	private final TotalLottoQuantity totalLottoQuantity = new TotalLottoQuantity();
+	private final Quantity totalLottoQuantity = new Quantity();
 
 	public void record(MatchedNumber matchedNumber) {
 		if (matchedNumber.isWinner()) {
