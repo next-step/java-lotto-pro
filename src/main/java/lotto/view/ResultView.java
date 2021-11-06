@@ -28,12 +28,20 @@ public class ResultView {
                 .filter(LottoWinningPrice::isView)
                 .forEach(
                 lottoWinningPrice
-                        -> resultMsg.append(String.format("%d개 일치 (%d원) - %d개\n",
+                        -> resultMsg.append(String.format(printWinningMessage(lottoWinningPrice),
                         lottoWinningPrice.getWinningCount(),
                         lottoWinningPrice.getReward(),
                         lottoResult.getMatchCounts().get(lottoWinningPrice) )) );
 
         resultMsg.append(String.format("총 수익률은 %.2f 입니다.", lottoResult.getYield()));
         System.out.println(resultMsg.toString());
+    }
+
+    private static String printWinningMessage(LottoWinningPrice lottoWinningPrice) {
+
+        if (lottoWinningPrice == LottoWinningPrice.BONUS) {
+            return "%d개 일치, 보너스 볼 일치 (%d원) - %d개\n";
+        }
+        return "%d개 일치 (%d원) - %d개\n";
     }
 }
