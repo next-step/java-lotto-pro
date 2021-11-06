@@ -2,6 +2,7 @@ package lottoservice.lottoticket;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lottoservice.exception.NotDivisibleMoneyUnitException;
@@ -36,9 +37,8 @@ public class LottoTicketIssuer {
 
 	private static List<LottoTicket> issuTickets(int numOfTickets) {
 		return IntStream.range(0, numOfTickets)
-			.collect(ArrayList::new,
-				(tickets, i) -> tickets.add(new LottoTicket()),
-				(tickets1, tickets2) -> tickets1.addAll(tickets2));
+			.mapToObj((it)->new LottoTicket())
+			.collect(Collectors.toList());
 	}
 
 	private static void validatePay(int inputAmount) {

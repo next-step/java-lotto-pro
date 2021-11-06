@@ -1,6 +1,7 @@
 package lottoservice.lottoticket;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import lottoservice.lottonumber.LottoNumber;
@@ -32,12 +33,8 @@ public class LottoTicket {
 
 	@Override
 	public String toString() {
-		StringBuilder lottoTicketToStrMaker = new StringBuilder();
-		lottoTicketToStrMaker.append('[');
-		lottoTicketToStrMaker.append(lottoNumbers.stream()
+		return lottoNumbers.stream()
 			.map(lottoNumber -> lottoNumber.toString())
-			.collect(Collectors.joining(", ")));
-		lottoTicketToStrMaker.append(']');
-		return lottoTicketToStrMaker.toString();
+			.collect(Collectors.joining(", ", "[", "]"));
 	}
 }
