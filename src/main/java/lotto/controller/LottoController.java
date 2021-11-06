@@ -14,6 +14,7 @@ public class LottoController {
         resultView.printBuyMessage(money.buyableQuantity());
         Lottos lottos = new Lottos(money.buyableQuantity());
         resultView.printLottoList(lottos);
+        lottos.countWinningRank(inputView.enterWinningLotto());
 
     }
 

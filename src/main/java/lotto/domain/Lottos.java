@@ -22,6 +22,12 @@ public class Lottos implements Iterable<Lotto> {
     public int getSize() {
         return this.lottos.size();
     }
+    
+    public void countWinningRank(Lotto winningLotto) {
+        for (Lotto lotto : lottos) {
+            lotto.resultLotto(winningLotto);
+        }
+    }
 
     @Override
     public Iterator<Lotto> iterator() {
