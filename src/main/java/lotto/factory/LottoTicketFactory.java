@@ -1,12 +1,16 @@
-package lotto;
+package lotto.factory;
 
-import static lotto.LottoTicket.*;
+import static lotto.domain.LottoTicket.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import lotto.domain.LottoCount;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 public class LottoTicketFactory {
 

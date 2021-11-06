@@ -1,9 +1,11 @@
-package lotto;
+package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
+import lotto.exception.LottoErrorCode;
+import lotto.exception.LottoException;
 import view.Printable;
 
 public class LottoMoney implements Printable {

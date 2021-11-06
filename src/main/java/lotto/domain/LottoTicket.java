@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import lotto.exception.LottoErrorCode;
+import lotto.exception.LottoException;
 import view.Printable;
 
 public class LottoTicket implements Printable {
