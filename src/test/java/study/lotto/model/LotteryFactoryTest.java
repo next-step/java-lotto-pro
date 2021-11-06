@@ -12,10 +12,4 @@ public class LotteryFactoryTest {
         assertThat(ticketLottery).isNotNull();
     }
 
-    @Test
-    void 로또생성기_를_통해서_당첨번호_를_생성할_수_있다() {
-        final LotteryFactory lotteryFactory = LotteryFactory.getInstance();
-        final WinningLottery winningLottery = lotteryFactory.generateWinningLottery();
-        assertThat(winningLottery).isNotNull();
-    }
 }

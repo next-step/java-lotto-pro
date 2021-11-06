@@ -5,7 +5,7 @@ import study.lotto.controller.dto.LottoOrderMoneyRequestDto;
 import study.lotto.controller.dto.LottoWinningNumberRequestDto;
 import study.lotto.controller.dto.TicketLotteryBundleResponseDto;
 import study.lotto.controller.dto.WinningStatisticsResponseDto;
-import study.lotto.view.LottoOrderCountInputView;
+import study.lotto.view.LottoOrderMoneyInputView;
 import study.lotto.view.LottoOrderResultView;
 import study.lotto.view.LottoWinningNumberInputView;
 import study.lotto.view.LottoWinningStatisticsView;
@@ -18,7 +18,7 @@ public class Application {
     }
 
     private static TicketLotteryBundleResponseDto orderTicketLotteryBundle() {
-        final LottoOrderMoneyRequestDto money = LottoOrderCountInputView.submit();
+        final LottoOrderMoneyRequestDto money = LottoOrderMoneyInputView.submit();
         final TicketLotteryBundleResponseDto ticketLotteryBundle = LottoController.orderTicketLotteryBundleByMoney(money);
         LottoOrderResultView.resolve(ticketLotteryBundle);
         return ticketLotteryBundle;

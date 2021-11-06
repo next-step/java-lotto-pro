@@ -15,7 +15,8 @@ public class LottoDiscriminator {
      */
     public static Rank referee(final WinningLottery winningLottery, final TicketLottery ticketLottery) {
         final int matchCount = getMatchCount(winningLottery, ticketLottery);
-        return Rank.valueOf(matchCount);
+        final boolean resultOfBonusNumberMatch = isMatchBonusNumber(winningLottery, ticketLottery);
+        return Rank.valueOf(matchCount, resultOfBonusNumberMatch);
     }
 
     public static List<Rank> referee(final WinningLottery winningLottery, final TicketLotteryBundle ticketLotteryBundle) {
@@ -42,5 +43,10 @@ public class LottoDiscriminator {
             matchCount++;
         }
         return matchCount;
+    }
+
+    private static boolean isMatchBonusNumber(final WinningLottery winningLottery, final TicketLottery ticketLottery) {
+        return ticketLottery.getLottoNumbers().contains(winningLottery.getBonusLottoNumber());
+//        return winningLottery.isMatchBonusNumber(ticketLottery);
     }
 }

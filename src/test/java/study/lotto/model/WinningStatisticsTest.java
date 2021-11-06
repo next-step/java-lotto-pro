@@ -42,7 +42,7 @@ class WinningStatisticsTest {
                 new HashSet<>(Arrays.asList(
                         LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                         LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))
-                ));
+                ), LottoNumber.valueOf(9));
     }
 
     @Test
