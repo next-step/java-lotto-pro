@@ -25,6 +25,18 @@ public class Lottery {
         return this.lottoNumbers.containsAll(lottoNumbers);
     }
 
+    private void validateNotNull(final Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers == null) {
+            throw new IllegalLotterySizeException(ILLEGAL_LOTTERY_SIZE_ERROR_MESSAGE);
+        }
+    }
+
+    private void validateSize(final Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalLotterySizeException(ILLEGAL_LOTTERY_SIZE_ERROR_MESSAGE);
+        }
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
     }
@@ -47,17 +59,5 @@ public class Lottery {
     private void validate(final Set<LottoNumber> lottoNumbers) {
         validateNotNull(lottoNumbers);
         validateSize(lottoNumbers);
-    }
-
-    private void validateNotNull(final Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers == null) {
-            throw new IllegalLotterySizeException(ILLEGAL_LOTTERY_SIZE_ERROR_MESSAGE);
-        }
-    }
-
-    private void validateSize(final Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalLotterySizeException(ILLEGAL_LOTTERY_SIZE_ERROR_MESSAGE);
-        }
     }
 }
