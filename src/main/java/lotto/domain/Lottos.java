@@ -28,6 +28,10 @@ public class Lottos implements Iterable<Lotto> {
             lotto.resultLotto(winningLotto);
         }
     }
+    
+    public List<Lotto> getLottos() {
+        return this.lottos;
+    }
 
     @Override
     public Iterator<Lotto> iterator() {
