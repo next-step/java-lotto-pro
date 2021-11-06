@@ -14,12 +14,12 @@ public class LottoTicket {
     public static final int FROM_INDEX = 0;
     public static final int START_INCLUSIVE = 1;
     public static final int END_EXCLUSIVE = 46;
-    List<Integer> lottoNumbers;
+    LottoNumbers lottoNumbers;
 
     public LottoTicket(List<Integer> lottoNumbers) {
         checkLottoNumberSize(lottoNumbers);
         checkNumberDuplication(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = LottoNumbers.from(lottoNumbers);
     }
 
     public static LottoTicket generateRandomLottoTicket() {
@@ -41,6 +41,11 @@ public class LottoTicket {
     }
 
     public String toResultString() {
+        return lottoNumbers.toString();
+    }
+
+    @Override
+    public String toString() {
         return lottoNumbers.toString();
     }
 }

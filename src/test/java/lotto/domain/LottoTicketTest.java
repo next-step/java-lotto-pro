@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.IllegalLottoNumberException;
 import lotto.exception.IllegalLottoNumberSizeException;
 import lotto.exception.NumberDuplicationException;
 import org.junit.jupiter.api.Test;
@@ -30,5 +31,11 @@ class LottoTicketTest {
     void numberDuplicationTest() {
         assertThatThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 5)))
                 .isInstanceOf(NumberDuplicationException.class);
+    }
+
+    @Test
+    void illegalLottoNumberTest() {
+        assertThatThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 46)))
+                .isInstanceOf(IllegalLottoNumberException.class);
     }
 }
