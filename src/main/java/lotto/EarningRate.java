@@ -8,10 +8,12 @@ import view.Printable;
 
 public class EarningRate implements Printable {
     public static final EarningRate ZERO = new EarningRate(BigDecimal.ZERO);
+
+    private static final int DECIMAL_SCALE = 2;
     private final BigDecimal rate;
 
     public EarningRate(BigDecimal rate) {
-        this.rate = rate.setScale(2, RoundingMode.HALF_UP);
+        this.rate = rate.setScale(DECIMAL_SCALE, RoundingMode.HALF_UP);
     }
 
     @Override

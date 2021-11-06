@@ -10,6 +10,7 @@ public class LottoMoney implements Printable {
     private static final int LOTTO_PRICE = 1000;
     private static final String WON = "원";
     private static final int ZERO_SIZE = 0;
+    private static final int MIN_MONEY = 0;
     private long money;
 
     public LottoMoney(String moneyText) {
@@ -34,7 +35,7 @@ public class LottoMoney implements Printable {
     }
 
     private boolean isNegativeNumber(long number) {
-        return number < 0;
+        return number < MIN_MONEY;
     }
 
     public LottoMoney(long money) {
