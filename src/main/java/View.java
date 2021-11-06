@@ -15,6 +15,11 @@ public class View {
 		return Console.readLine();
 	}
 
+	public String inBonus() {
+		println(Message.INPUT_BONUS.getContent());
+		return Console.readLine();
+	}
+
 	public void outBoughtLotto(List<Lotto> lottos) {
 		println(String.format(Message.BOUGHT_LOTTO.getContent(), lottos.size()));
 		lottos.stream().map(Lotto::toString).forEach(this::println);
