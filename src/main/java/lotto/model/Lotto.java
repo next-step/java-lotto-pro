@@ -18,7 +18,7 @@ public class Lotto {
 
     private void valid(int length) {
         if (length > LottoNumber.SIZE) {
-            throw new IndexOutOfBoundsException(ErrorMessage.LOTTO_SIZE_OVER);
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_SIZE_UNMATCHED);
         }
     }
 

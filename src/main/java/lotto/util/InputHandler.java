@@ -1,5 +1,6 @@
 package lotto.util;
 
+import lotto.model.LottoNumber;
 import lotto.view.ErrorMessage;
 
 public class InputHandler {
@@ -22,15 +23,33 @@ public class InputHandler {
     }
 
     public static int[] splitTextToInts(String numbersText) {
-        String[] splitedNumbers = numbersText.split(ConstantString.SEPARATOR);
-         return mapToInts(splitedNumbers);
+        try {
+            String[] splitedNumbers = numbersText.split(ConstantString.SEPARATOR);
+            return mapToInts(splitedNumbers);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(ErrorMessage.SPLITED_ERROR);
+        }
     }
 
     private static int[] mapToInts(String[] splitedNumbers) {
-        int[] result = new int[splitedNumbers.length];
-        for (int i = 0; i < splitedNumbers.length; i++) {
-            result[i] = Integer.parseInt(splitedNumbers[i]);
+        int[] result = new int[LottoNumber.SIZE];
+        for (int i = 0; i < LottoNumber.SIZE; i++) {
+            int lottoNumber = checkLottoNumber(splitedNumbers[i]);
+            result[i] = lottoNumber;
         }
         return result;
+    }
+
+    private static int checkLottoNumber(String textNumber) {
+        try {
+            int number = Integer.parseInt(textNumber);
+            if (LottoNumber.MAX_NUMBER < number || LottoNumber.MIN_NUMBER > number) {
+                throw new IllegalArgumentException();
+            }
+            return number;
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+
     }
 }
