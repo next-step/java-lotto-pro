@@ -3,6 +3,7 @@ package lottoservice.lottonumber;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lottoservice.exception.InvalidLottoFormatException;
@@ -23,5 +24,12 @@ class LottoNumberTest {
 		assertThatThrownBy(()->{
 			LottoNumber lottoNumber = new LottoNumber(number);
 		}).isInstanceOf(InvalidLottoFormatException.class);
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1,2,-1","5,5,0","10,7,1"})
+	public void compareTo_로또번호_비교(int number, int compareNumber,int expected){
+		LottoNumber lottoNumber= new LottoNumber(number);
+		assertThat(lottoNumber.compareTo(new LottoNumber(compareNumber))).isEqualTo(expected);
 	}
 }
