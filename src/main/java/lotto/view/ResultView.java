@@ -19,7 +19,7 @@ public class ResultView {
 
     public void printLottoList(Lottos lottos) {
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.getNumbers());
+            System.out.println(lotto.getLottoNumbers().toString());
         }
     }
 

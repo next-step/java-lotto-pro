@@ -1,9 +1,10 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Scanner;
 
-import lotto.domain.Lotto;
 import lotto.domain.Money;
+import lotto.utils.ConsoleUtils;
 
 public class InputView {
     private static final String INSERT_MONEY = "구입금액을 입력해 주세요.";
@@ -13,12 +14,12 @@ public class InputView {
 
     public Money enterMoney() {
         System.out.println(INSERT_MONEY);
-        return new Money(Integer.parseInt(scanner.nextLine().replaceAll(" ", "")));
+        return new Money(ConsoleUtils.consoleInt());
     }
 
-    public Lotto enterWinningLotto() {
+    public List<Integer> enterWinningLotto() {
         System.out.println(INSERT_WINNING_NUMBER);
-        return new Lotto(scanner.nextLine().replaceAll(" ", ""));
+        return ConsoleUtils.consoleIntegerList();
     }
 
 }
