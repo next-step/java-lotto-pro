@@ -1,16 +1,16 @@
 package lotto.domain.result;
 
-import lotto.domain.number.Money;
+import java.util.*;
+import java.util.stream.*;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import lotto.domain.number.*;
 
 public enum Rank {
     FIRST(6, Money.from(2_000_000_000)),
-    SECOND(5, Money.from(1_500_000)),
-    THIRD(4, Money.from(50_000)),
-    FOURTH(3, Money.from(5_000)),
+    SECOND(5, Money.from(30_000_000)),
+    THIRD(5, Money.from(1_500_000)),
+    FOURTH(4, Money.from(50_000)),
+    FIFTH(3, Money.from(5_000)),
     MISS(0, Money.from(0));
 
     private final int matchCount;
@@ -27,18 +27,23 @@ public enum Rank {
             .collect(Collectors.toList());
     }
 
-    public static Rank rankByCountOfMatch(int countOfMatch) {
-        return Arrays.stream(Rank.values())
-            .filter(rank -> countOfMatch == rank.matchCount())
+    public static Rank rankByMatchedCountAndBonusNumber(MatchedCount matchedCount, boolean containedBonusNumber) {
+        Rank rank = Arrays.stream(Rank.values())
+            .filter(e -> matchedCount.number() == e.matchCount())
             .findFirst()
             .orElse(MISS);
+
+        if (matchedCount.isFive() && !containedBonusNumber) {
+            return THIRD;
+        }
+        return rank;
     }
 
     public static long calculateTotalPrizeByGrade(Rank rank, int ticketCount) {
         return rank.money.multiply(ticketCount);
     }
 
-    private static boolean isNotEqualToMiss(Rank rank) {
+    public static boolean isNotEqualToMiss(Rank rank) {
         return rank != MISS;
     }
 
