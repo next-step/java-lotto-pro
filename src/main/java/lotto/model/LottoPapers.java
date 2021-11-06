@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.controller.LottoNumberGenerator;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
