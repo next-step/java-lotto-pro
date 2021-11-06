@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Collections;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -19,6 +20,25 @@ public class LottoNumbers {
         if (numbers.size() != NUMBER_SIZE) {
             throw new IllegalArgumentException(NUMBER_SIZE_ERR_MSG);
         }
+    }
+
+    public MatchCount getMatchCount(LottoNumbers other) {
+        return other.getMatchCount(this.numbers);
+    }
+
+    private MatchCount getMatchCount(Set<Number> numbers) {
+        int matchCount = 0;
+        for (Number number : numbers) {
+            matchCount += getMatchCount(number);
+        }
+        return new MatchCount(matchCount);
+    }
+
+    private int getMatchCount(Number other) {
+        if (this.numbers.contains(other)) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override
