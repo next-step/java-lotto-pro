@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class RankTest {
@@ -49,7 +50,9 @@ public class RankTest {
 			Arguments.of(LottoNumber.of(
 				Arrays.asList(1, 2, 3, 4, 10, 11)), Rank.FOURTH),
 			Arguments.of(LottoNumber.of(
-				Arrays.asList(1, 2, 3, 10, 11, 12)), Rank.FIFTH)
+				Arrays.asList(1, 2, 3, 10, 11, 12)), Rank.FIFTH),
+			Arguments.of(LottoNumber.of(
+				Arrays.asList(1, 2, 10, 11, 12, 13)), Rank.MISS)
 		);
 	}
 
@@ -62,6 +65,16 @@ public class RankTest {
 
 		// then
 		assertThat(rank).isEqualTo(expected);
+
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"7, true", "-1,false"}, delimiter = ',')
+	@DisplayName("잘못된 일치갯수가 주어지면, Exception이 발생해야 한다")
+	public void valueOfTest(int matchCnt, boolean isMatchBonus) {
+		// when, then
+		assertThatThrownBy(() -> Rank.valueOf(matchCnt, isMatchBonus))
+			.isInstanceOf(IllegalArgumentException.class);
 
 	}
 

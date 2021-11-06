@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.Arrays;
 
 public enum Rank {
 
@@ -26,27 +26,27 @@ public enum Rank {
 	}
 
 	public static Rank valueOf(int matchCnt, boolean isMatchBonus) {
-		Rank[] ranks = values();
-		for (Rank rank : ranks) {
-			Rank matchedRank = getMatchedRank(rank, matchCnt, isMatchBonus);
-			if (Objects.nonNull(matchedRank)) {
-				return matchedRank;
-			}
-		}
-		return MISS;
+		validateMatchCnt(matchCnt);
+		return Arrays.stream(values())
+			.filter(rank -> rank.isMatch(matchCnt, isMatchBonus))
+			.findFirst()
+			.orElse(MISS);
 	}
 
-	private static Rank getMatchedRank(Rank rank, int matchCnt, boolean isMatchBonus) {
-		if (matchCnt == SECOND.getMatchCnt() && isMatchBonus) {
-			return SECOND;
+	private static void validateMatchCnt(int matchCnt) {
+		if (matchCnt > 6 || matchCnt < 0) {
+			throw new IllegalArgumentException("일치하는 개숫는 0~6이어야 합니다.");
 		}
-		if (matchCnt == THIRD.getMatchCnt() && !isMatchBonus) {
-			return THIRD;
+	}
+
+	private boolean isMatch(int matchCnt, boolean isMatchBonus) {
+		if (this.matchCnt != matchCnt) {
+			return false;
 		}
-		if (rank.matchCnt == matchCnt) {
-			return rank;
+		if (this.equals(Rank.SECOND)) {
+			return isMatchBonus;
 		}
-		return null;
+		return true;
 	}
 
 	public int getMatchCnt() {
