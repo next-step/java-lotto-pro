@@ -90,15 +90,12 @@ public class LottoWinningNumbers {
 	public int compareWithNumbers(List<LottoNumber> ticketLottoNumbers) {
 		int matchCount = 0;
 		for (LottoNumber number : ticketLottoNumbers) {
-			matchCount += isMatchNumber(number) ? 1 : 0;
+			matchCount += hasMatchNumber(number) ? 1 : 0;
 		}
 		return matchCount;
 	}
 
-	private boolean isMatchNumber(LottoNumber number) {
-		if (winningNumbers.contains(number)) {
-			return true;
-		}
-		return false;
+	public boolean hasMatchNumber(LottoNumber number){
+		return winningNumbers.contains(number);
 	}
 }

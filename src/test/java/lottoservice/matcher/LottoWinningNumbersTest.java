@@ -28,7 +28,7 @@ public class LottoWinningNumbersTest {
 
 		List<LottoNumber> lottoNumbers = convertToLottoNumbers(numbers);
 		for (LottoNumber lottoNumber : lottoNumbers) {
-			assertThat(lottoWinningNumbers.getWinningNumbers().contains(lottoNumber)).isTrue();
+			assertThat(lottoWinningNumbers.hasMatchNumber(lottoNumber)).isTrue();
 		}
 	}
 
