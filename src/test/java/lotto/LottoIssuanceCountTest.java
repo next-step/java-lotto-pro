@@ -22,7 +22,7 @@ class LottoIssuanceCountTest {
     @ValueSource(ints = {1230, 3500, 5700, 13400})
     void purchaseAmountNotOneThousandWonUnitExceptionTest(int invalidPurchaseAmount) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-                    LottoIssuanceCount.issuanceNumberCalculation(invalidPurchaseAmount);
-                }).withMessage(ErrorMessage.PURCHASE_AMOUNT_NOT_ONE_THOUSAND_WON.getMessage());
+            LottoIssuanceCount.issuanceNumberCalculation(invalidPurchaseAmount);
+        }).withMessage(ErrorMessage.PURCHASE_AMOUNT_NOT_ONE_THOUSAND_WON.getMessage());
     }
 }

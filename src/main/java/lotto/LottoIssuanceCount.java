@@ -19,19 +19,19 @@ public class LottoIssuanceCount {
         return new LottoIssuanceCount(issuanceCount);
     }
 
-    //TODO : 질문1
-    public List<Lotto> createLotto() {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i=0; i<this.issuanceCount; i++) {
-            lottos.add(new Lotto(LottoNumber.generator()));
-        }
-        return lottos;
-    }
-
     private static void purchaseAmountOneThousandWonUnitValid(int purchaseAmount) {
         if (purchaseAmount % LottoProperty.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_AMOUNT_NOT_ONE_THOUSAND_WON.getMessage());
         }
+    }
+
+    //TODO : 질문1
+    public List<Lotto> createLotto() {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < this.issuanceCount; i++) {
+            lottos.add(new Lotto(LottoNumber.generator()));
+        }
+        return lottos;
     }
 
     @Override

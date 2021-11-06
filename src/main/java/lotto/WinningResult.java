@@ -5,11 +5,11 @@ import java.util.Set;
 
 public class WinningResult {
 
-    private Map<Integer, Integer> result;
     private static final int THREE_MATCH_PRIZE_MONEY = 5000;
     private static final int FOUR_MATCH_PRIZE_MONEY = 50000;
     private static final int FIVE_MATCH_PRIZE_MONEY = 1500000;
     private static final int SIX_MATCH_PRIZE_MONEY = 2000000000;
+    private Map<Integer, Integer> result;
 
     public WinningResult(Map<Integer, Integer> result) {
         winningRankValid(result);

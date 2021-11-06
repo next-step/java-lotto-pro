@@ -16,6 +16,15 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WinningTest {
 
+    static Stream<Arguments> matchCalculationParametersProvider() {
+        return Stream.of(
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 6, 5, 4)),
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 6, 5)),
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7)),
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6))
+        );
+    }
+
     @DisplayName("당첨 번호 일치 계산")
     @ParameterizedTest
     @MethodSource("matchCalculationParametersProvider")
@@ -82,14 +91,5 @@ class WinningTest {
 
         //then
         assertThat(profitRateResult).isEqualTo(profitRate);
-    }
-
-    static Stream<Arguments> matchCalculationParametersProvider() {
-        return Stream.of(
-                arguments(Arrays.asList(1,2,3,4,5,6), Arrays.asList(1,2,3,6,5,4)),
-                arguments(Arrays.asList(1,2,3,4,5,6), Arrays.asList(1,2,3,4,6,5)),
-                arguments(Arrays.asList(1,2,3,4,5,6), Arrays.asList(1,2,3,4,5,7)),
-                arguments(Arrays.asList(1,2,3,4,5,6), Arrays.asList(1,2,3,4,5,6))
-        );
     }
 }
