@@ -12,7 +12,28 @@ public class LottoMoney implements Printable {
     private long money;
 
     public LottoMoney(String moneyText) {
-        money = Integer.parseInt(moneyText);
+        money = parseToValidMoney(moneyText);
+    }
+
+    private long parseToValidMoney(String moneyText) {
+        long number = parseToNumber(moneyText);
+        if (isNegativeNumber(number)) {
+            throw new LottoException(LottoErrorCode.INVALID_MONEY);
+        }
+
+        return number;
+    }
+
+    private long parseToNumber(String moneyText) {
+        try {
+            return Long.parseLong(moneyText);
+        } catch (NumberFormatException e) {
+            throw new LottoException(LottoErrorCode.INVALID_MONEY);
+        }
+    }
+
+    private boolean isNegativeNumber(long number) {
+        return number < 0;
     }
 
     public LottoMoney(long money) {

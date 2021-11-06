@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoMoneyTest {
     @DisplayName("로또 생성")
@@ -16,6 +17,22 @@ class LottoMoneyTest {
     void constructLottoMoney() {
         LottoMoney lottoMoney = new LottoMoney(5000);
         assertThat(lottoMoney).isEqualTo(new LottoMoney(5000));
+    }
+
+    @DisplayName("텍스트 금액 입력 성공")
+    @ParameterizedTest
+    @ValueSource(strings = {"0", "1", "14000"})
+    void constructLottoMoney_success(String moneyText) {
+        assertThat(new LottoMoney(moneyText)).isEqualTo(new LottoMoney(Integer.parseInt(moneyText)));
+    }
+
+    @DisplayName("잘못된 값으로 금액 입력시 에러")
+    @ParameterizedTest
+    @ValueSource(strings = {"test", "-1", ""})
+    void throwsError_whenInvalidMoney(String invalidMoney) {
+        assertThatExceptionOfType(LottoException.class)
+            .isThrownBy(() -> new LottoMoney(invalidMoney))
+            .withMessage("0 이상의 숫자를 입력해주세요.");
     }
 
     @DisplayName("구입 가능한 로또 개수 계산")

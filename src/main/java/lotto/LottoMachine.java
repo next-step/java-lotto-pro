@@ -19,7 +19,12 @@ public class LottoMachine {
 
     private LottoMoney getLottoMoney() {
         ResultView.print(OutputMessage.ASK_PURCHASE_AMOUNT);
-        return new LottoMoney(InputView.readLine());
+        try {
+            return new LottoMoney(InputView.readLine());
+        } catch (LottoException lottoException) {
+            ResultView.print(lottoException::getMessage);
+            return getLottoMoney();
+        }
     }
 
     private LottoTicket getWinnerTicket() {
