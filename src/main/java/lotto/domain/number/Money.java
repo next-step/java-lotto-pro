@@ -1,6 +1,6 @@
 package lotto.domain.number;
 
-import lotto.exception.OutOfBoundException;
+import lotto.exception.*;
 
 public class Money extends Number {
     public static final int ZERO = 0;
@@ -22,6 +22,6 @@ public class Money extends Number {
     }
 
     public long multiply(int count) {
-        return number() * ((long) count);
+        return number() * ((long)count);
     }
 }

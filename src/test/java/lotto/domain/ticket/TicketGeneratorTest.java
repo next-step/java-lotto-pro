@@ -1,14 +1,10 @@
 package lotto.domain.ticket;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TicketGeneratorTest {
@@ -16,7 +12,8 @@ class TicketGeneratorTest {
 
     @BeforeAll
     void setUp() {
-        tickets = Arrays.asList(Ticket.from(Arrays.asList(1, 2, 3, 4, 5, 6)), Ticket.from(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        tickets = Arrays.asList(Ticket.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            Ticket.from(Arrays.asList(1, 2, 3, 4, 5, 7)));
     }
 
     @DisplayName("티켓을 여러 개 생성하는 메서드에 원하는 개수를 인자로 받으면, 리스트 콜렉션 객체를 반환한다.")

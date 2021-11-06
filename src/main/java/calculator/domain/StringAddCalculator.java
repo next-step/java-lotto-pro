@@ -1,9 +1,7 @@
 package calculator.domain;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.regex.*;
 
 public class StringAddCalculator {
 

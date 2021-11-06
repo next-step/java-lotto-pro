@@ -1,10 +1,8 @@
 package lotto.domain.number;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
 
 public class LottoNumber extends Number {
     private static final String LOTTO_NUMBER_IS_NULL_OR_EMPTY_EXCEPTION_STATEMENT = "번호의 값이 null이거나 빈 값입니다.";
