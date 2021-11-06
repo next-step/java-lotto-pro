@@ -23,11 +23,9 @@ public class LottoPaperTest {
         Arrays.asList(inWinningNumber.split(GameRule.LOTTO_NUMBER_DELIMITER)).
                 forEach(winningNumber -> lottoNumbers.add(new LottoNumber(Integer.parseInt(winningNumber))));
         LottoPaper winningLottoPaper = new LottoPaper(lottoNumbers);
-        LottoResult lottoResult = new LottoResult();
         // when
-        winningLottoPaper.checkContainsLottoNumber(lottoNumber, lottoResult);
         // then
-        assertThat(lottoResult.getMatchCount()).isEqualTo(1);
+        assertThat(winningLottoPaper.isContainsLottoNumber(lottoNumber)).isEqualTo(true);
     }
 
     @DisplayName("[정상]로또번호 비매칭 테스트")
@@ -40,11 +38,9 @@ public class LottoPaperTest {
         Arrays.asList(inWinningNumber.split(GameRule.LOTTO_NUMBER_DELIMITER)).
                 forEach(winningNumber -> lottoNumbers.add(new LottoNumber(Integer.parseInt(winningNumber))));
         LottoPaper winningLottoPaper = new LottoPaper(lottoNumbers);
-        LottoResult lottoResult = new LottoResult();
         // when
-        winningLottoPaper.checkContainsLottoNumber(lottoNumber, lottoResult);
         // then
-        assertThat(lottoResult.getMatchCount()).isEqualTo(0);
+        assertThat(winningLottoPaper.isContainsLottoNumber(lottoNumber)).isEqualTo(false);
     }
 
     @DisplayName("[정상]로또게임 매칭 테스트")
@@ -62,11 +58,9 @@ public class LottoPaperTest {
                 forEach(winningNumber -> winningLottoNumbers.add(new LottoNumber(Integer.parseInt(winningNumber))));
         LottoPaper winningLottoPaper = new LottoPaper(winningLottoNumbers);
 
-        LottoResult lottoResult = new LottoResult();
         // when
-        lottoPaper.matchLottoPaper(winningLottoPaper, lottoResult);
+        int matchCount = lottoPaper.matchLottoPaper(winningLottoPaper);
         // then
-        assertThat(lottoResult.getMatchCounts().get(LottoWinningPrice.THREE)).isEqualTo(1);
-        assertThat(lottoResult.getMatchCount()).isEqualTo(0);
+        assertThat(matchCount).isEqualTo(LottoWinningPrice.THREE.getWinningCount());
     }
 }
