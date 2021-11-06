@@ -11,4 +11,9 @@ public class EarningRateTest {
     void constructEarningRate_success() {
         assertThat(new EarningRate(0.5)).isEqualTo(new EarningRate(0.5));
     }
+
+    @Test
+    void makePrintableMessage() {
+        assertThat(new EarningRate(0.5).makePrintableMessage()).isEqualTo("0.5");
+    }
 }

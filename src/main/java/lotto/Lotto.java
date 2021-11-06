@@ -17,5 +17,8 @@ public class Lotto {
 
         LottoTicket winnerTicket = new LottoTicket(InputView.readLine());
         LottoResults lottoResults = lottoTickets.calculateResult(winnerTicket);
+        ResultView.print(OutputMessage.PRINT_STATISTICS_INTRO::getMessage);
+        ResultView.print(lottoResults);
+        ResultView.print(() -> String.format(OutputMessage.PRINT_TOTAL_EARNING_RATE.getMessage(), lottoResults.calculateEarningRate().makePrintableMessage()));
     }
 }

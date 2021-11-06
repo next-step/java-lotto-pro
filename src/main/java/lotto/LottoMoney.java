@@ -3,8 +3,11 @@ package lotto;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoMoney {
+import view.Printable;
+
+public class LottoMoney implements Printable {
     private static final int LOTTO_PRICE = 1000;
+    private static final String WON = "원";
     private long money;
 
     public LottoMoney(String moneyText) {
@@ -46,5 +49,10 @@ public class LottoMoney {
     @Override
     public int hashCode() {
         return Objects.hash(money);
+    }
+
+    @Override
+    public String makePrintableMessage() {
+        return money + WON;
     }
 }

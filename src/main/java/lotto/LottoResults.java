@@ -2,12 +2,20 @@ package lotto;
 
 import static java.util.stream.Collectors.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
-public class LottoResults {
+import view.Printable;
+
+public class LottoResults implements Printable {
+    private static final String DASH_SPACE = "- ";
+    private static final String COUNTING_UNIT = "개";
+    private static final String NEW_LINE = "\n";
+
     private final Map<LottoResult, Integer> resultCounts;
 
     public LottoResults(List<LottoResult> lottoResults) {
@@ -36,5 +44,14 @@ public class LottoResults {
         return LottoMoney.calculateEarningRate(resultCounts.entrySet().stream()
             .map(entry -> entry.getKey().calculateMultipleMoney(entry.getValue()))
             .collect(toList()));
+    }
+
+    @Override
+    public String makePrintableMessage() {
+        return Arrays.stream(LottoResult.values())
+            .filter(lottoResult -> lottoResult != LottoResult.NONE)
+            .map(lottoResult -> lottoResult.makePrintableMessage() + DASH_SPACE
+                + resultCounts.getOrDefault(lottoResult, 0) + COUNTING_UNIT)
+            .collect(Collectors.joining(NEW_LINE));
     }
 }

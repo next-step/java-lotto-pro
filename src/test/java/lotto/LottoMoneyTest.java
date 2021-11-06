@@ -38,4 +38,10 @@ class LottoMoneyTest {
         assertThat(LottoMoney.calculateEarningRate(Arrays.asList(new LottoMoney(5000), new LottoMoney(150000))))
             .isEqualTo(new EarningRate(77.5));
     }
+
+    @DisplayName("로또 돈 메시지 출력 테스트")
+    @Test
+    void makePrintableMessage() {
+        assertThat(new LottoMoney(5000).makePrintableMessage()).isEqualTo("5000원");
+    }
 }

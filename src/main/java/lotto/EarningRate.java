@@ -2,7 +2,9 @@ package lotto;
 
 import java.util.Objects;
 
-public class EarningRate {
+import view.Printable;
+
+public class EarningRate implements Printable {
     private final double rate;
 
     public EarningRate(double rate) {
@@ -24,5 +26,10 @@ public class EarningRate {
     @Override
     public int hashCode() {
         return Objects.hash(rate);
+    }
+
+    @Override
+    public String makePrintableMessage() {
+        return String.valueOf(rate);
     }
 }
