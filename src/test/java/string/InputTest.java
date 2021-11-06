@@ -1,4 +1,8 @@
+package string;
+
 import org.junit.jupiter.api.Test;
+import string.Input;
+import string.Numbers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
