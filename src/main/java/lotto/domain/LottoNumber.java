@@ -56,4 +56,7 @@ public class LottoNumber {
         return lottoNumbers;
     }
 
+    public List<Number> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
