@@ -16,17 +16,40 @@ public class LottoExecutor {
     }
 
     public void run() {
+        BoughtLotto boughtLotto = enterPayment();
+        LottoTicket lottoTicket = generateLotto(boughtLotto);
+        Winning winning = enterWinningNumber();
+        WinningMap winningMap = winningResult(lottoTicket, winning);
+        printRevenue(calculateRevenue(winningMap, boughtLotto));
+    }
+
+    private BoughtLotto enterPayment() {
         BoughtLotto boughtLotto = lottoController.buyLotto();
         printBoughtLotto(boughtLotto.getBoughtCount());
+        return boughtLotto;
+    }
+
+    private LottoTicket generateLotto(BoughtLotto boughtLotto) {
         LottoTicket lottoTicket = lottoController.generateLottoTicket(boughtLotto);
         printLottoTicket(lottoTicket);
         printLine();
-        Winning winningLottoNumbers = lottoController.enterWinningLottoNumbers();
+        return lottoTicket;
+    }
+
+    private Winning enterWinningNumber() {
+        Winning winning = lottoController.enterWinningLottoNumbers();
         printLine();
-        WinningMap winningMap = WinningMap.winningOf(lottoTicket, winningLottoNumbers);
+        return winning;
+    }
+
+    private WinningMap winningResult(LottoTicket lottoTicket, Winning winning) {
+        WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
         printWinning(winningMap);
-        double revenue = winningMap.revenue(boughtLotto);
-        printRevenue(revenue);
+        return winningMap;
+    }
+
+    private double calculateRevenue(WinningMap winningMap, BoughtLotto boughtLotto) {
+        return winningMap.revenue(boughtLotto);
     }
 
 
