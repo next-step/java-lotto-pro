@@ -6,6 +6,8 @@ import exception.BusinessException;
 import exception.ErrorMessages;
 
 public class CommonUtils {
+	private CommonUtils() {
+	}
 
 	public static Integer parseInt(String input) {
 		try {

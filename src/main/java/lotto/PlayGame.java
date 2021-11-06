@@ -16,7 +16,7 @@ public class PlayGame {
 		LottoList lottoList = getManualLottoList(manualCount);
 
 		//수동 제외한 로또생성
-		int autoCount = investment.getCount() - manualCount.size();
+		int autoCount = investment.getAutoCount(manualCount);
 		lottoList.addAll(new LottoList(autoCount));
 
 		ResultView.purchaseResult(manualCount.size(), autoCount, lottoList);

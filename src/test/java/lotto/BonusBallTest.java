@@ -13,7 +13,7 @@ public class BonusBallTest {
 
 	@Test
 	@DisplayName("7 입력한 경우 BonusBall 생성")
-	public void bonusBall_7_생성() {
+	public void BonusBall7생성() {
 		String input = "7";
 		BonusBall bonusBall = new BonusBall(input);
 		assertThat(bonusBall).isEqualTo(new BonusBall("7"));
@@ -21,7 +21,7 @@ public class BonusBallTest {
 
 	@Test
 	@DisplayName("-1 입력한 경우 양의숫자만 입력가능하다는 메세지와 BusinessException")
-	public void bonusBall_음수_실패() {
+	public void BonusBall음수실패() {
 		String input = "-1";
 		//when
 		ThrowableAssert.ThrowingCallable throwingCallable = () -> new BonusBall(input);
@@ -34,7 +34,7 @@ public class BonusBallTest {
 
 	@Test
 	@DisplayName("48 입력한 경우 1~45까지의 숫자만 입력가능하다는 메세지와 BusinessException")
-	public void bonusBall_로또범위_실패() {
+	public void BonusBall로또범위실패() {
 		String input = "48";
 		//when
 		ThrowableAssert.ThrowingCallable throwingCallable = () -> new BonusBall(input);
@@ -47,7 +47,7 @@ public class BonusBallTest {
 
 	@Test
 	@DisplayName("일 입력한 경우  숫자만 입력가능하다는 메세지와 BusinessException")
-	public void bonusBall_한글_실패() {
+	public void BonusBall한글실패() {
 		String input = "일";
 		//when
 		ThrowableAssert.ThrowingCallable throwingCallable = () -> new BonusBall(input);

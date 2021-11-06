@@ -6,15 +6,15 @@ import java.util.List;
 public class LottoList {
 	private List<Lotto> lottoList;
 
+	public LottoList() {
+		this.lottoList = new ArrayList<>();
+	}
+
 	public LottoList(Integer count) {
 		this.lottoList = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			this.lottoList.add(new Lotto());
+			this.lottoList.add(new GeneratedLotto().getGeneratedLotto());
 		}
-	}
-
-	public LottoList() {
-		this.lottoList = new ArrayList<>();
 	}
 
 	public int size() {

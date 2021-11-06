@@ -14,7 +14,8 @@ import exception.ErrorMessages;
 class ManualCountTest {
 
 	@Test
-	public void 수동_로또_갯수_입력() {
+	@DisplayName("수동로또 갯수 3입력 성공")
+	public void manualCountSuccess() {
 		String input = "3";
 		ManualCount manualCount = new ManualCount(input);
 		assertThat(manualCount).isEqualTo(new ManualCount("3"));
@@ -23,7 +24,7 @@ class ManualCountTest {
 	@DisplayName("한글, 영어, 특수문자 입력시 BusinessException")
 	@ParameterizedTest
 	@ValueSource(strings = {"한글", "english", "-"})
-	public void 수동_로또_갯수_여러_실패(String input) {
+	public void manualCountMultipleCases(String input) {
 
 		//when
 		ThrowableAssert.ThrowingCallable throwingCallable = () -> new ManualCount(input);
@@ -35,7 +36,8 @@ class ManualCountTest {
 	}
 
 	@Test
-	public void 음수_입력_실패() {
+	@DisplayName("음수_입력_실패")
+	public void negativeFail() {
 		//given when
 		ThrowableAssert.ThrowingCallable throwingCallable = () -> new ManualCount("-1");
 

@@ -11,6 +11,10 @@ public class BonusBall {
 		this.bonusBall = new LottoNumber(parseInt(input));
 	}
 
+	public boolean matched(Lotto lotto) {
+		return lotto.contains(bonusBall);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -24,10 +28,6 @@ public class BonusBall {
 	@Override
 	public int hashCode() {
 		return Objects.hash(bonusBall);
-	}
-
-	public boolean matched(Lotto lotto) {
-		return lotto.contains(bonusBall);
 	}
 
 }
