@@ -42,7 +42,7 @@ public class Lotto {
         return this.lotto.contains(number);
     }
 
-    public boolean checkBonus(Bonus bonus) {
+    public boolean containBonus(Bonus bonus) {
         return lotto.contains(new LottoNumber(bonus));
     }
 

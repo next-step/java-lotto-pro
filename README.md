@@ -18,7 +18,8 @@
 `Lotto`는 보너스 숫자를 가지는지 확인한다
 
 당첨로또 (`WinningLotto`)
-`WinningLotto`는 6개의 `LottoNumber`를 가진다
+`WinningLotto`는 6개의 `LottoNumber`와 `Bonus`를 가진다
+`WinningLotto`는 `Lotto` 와 비교하여 당첨번호 개수를 반환한다
 
 로또들 (`Lottos`)
 `Lottos`는 `RandomNumbers`를 가진다
