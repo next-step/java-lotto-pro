@@ -1,12 +1,12 @@
 package model;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class MatchResult {
-	private final Map<MatchingNumberCount, Count> countByMatchingNumberCount = new HashMap<>();
+	private final Map<MatchingNumberCount, Count> countByMatchingNumberCount = new EnumMap<>(MatchingNumberCount.class);
 
 	public MatchResult() {
 	}
