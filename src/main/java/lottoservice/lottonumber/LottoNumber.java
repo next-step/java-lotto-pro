@@ -19,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		this.number = number;
 	}
 
-	public void validateNumberInLottoRule(int number) {
+	private void validateNumberInLottoRule(int number) {
 		if (number < LottoNumbersMaker.START_INCLUSIVE_NUMBER || number > LottoNumbersMaker.END_EXCLUSIVE_NUMBER) {
 			throw new InvalidLottoFormatException(ERROR_MESSAGE_OUTBOUND_OF_LOTTO_NUMBER);
 		}
