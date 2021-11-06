@@ -18,6 +18,10 @@ public class LottoNumber {
         this.number = Integer.parseInt(lottoNumber);
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     private void validateLottoNumber(String lottoNumber) {
         int integerNumber = validateNumeric(lottoNumber);
         validateNumberBound(integerNumber);
@@ -48,5 +52,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }
