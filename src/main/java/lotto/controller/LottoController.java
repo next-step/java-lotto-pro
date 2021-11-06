@@ -5,8 +5,8 @@ import java.util.List;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.WinningStatistic;
-import lotto.domain.WinningStatistics;
+import lotto.domain.WinningResult;
+import lotto.domain.WinningResults;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,18 +19,18 @@ public class LottoController {
         resultView.printBuyMessage(money.buyableQuantity());
         Lottos lottos = new Lottos(money.buyableQuantity());
         resultView.printLottoList(lottos);
-        lottos.countWinningRank(LottoNumbers.valueOf(inputView.enterWinningLotto()));
-        WinningStatistics statistics = new WinningStatistics(lottos);
-        resultView.printWinningStatistics(statistics);
-        resultView.printWinningRewardPercent(this.calculateRewardPercent(statistics, money));
+        lottos.execute(LottoNumbers.valueOf(inputView.enterWinningLotto()));
+        WinningResults results = new WinningResults(lottos);
+        resultView.printWinningResults(results);
+        resultView.printWinningRewardPercent(this.calculateRewardPercent(results, money));
 
     }
 
-    private double calculateRewardPercent(WinningStatistics statistics, Money money) {
-        List<WinningStatistic> statisticList = statistics.getWinningStatistic();
+    private double calculateRewardPercent(WinningResults results, Money money) {
+        List<WinningResult> resultList = results.getWinningResult();
         int totalReward = 0;
-        for (WinningStatistic statistic : statisticList) {
-            totalReward += statistic.getCount() * statistic.getWinningRank().getReward();
+        for (WinningResult result : resultList) {
+            totalReward += result.getCount() * result.getWinningRank().getReward();
         }
 
         return totalReward / (double) money.getMoney();

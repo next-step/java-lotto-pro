@@ -12,7 +12,7 @@ public class WinningRankTest {
     @ParameterizedTest
     @CsvSource(value = { "0:0", "1:0", "3:5000", "4:50000", "5:1500000", "6:2000000000" }, delimiter = ':')
     void 당첨금_확인(int matchCount, int expected) {
-        assertThat(WinningRank.result(matchCount).getReward()).isEqualTo(expected);
+        assertThat(WinningRank.resultRank(matchCount).getReward()).isEqualTo(expected);
     }
 
 }

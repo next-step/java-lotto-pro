@@ -4,8 +4,8 @@ import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.WinningStatistic;
-import lotto.domain.WinningStatistics;
+import lotto.domain.WinningResult;
+import lotto.domain.WinningResults;
 
 public class ResultView {
     private static final String NOTICE_BUY_QUANTITY = "개를 구매했습니다.";
@@ -23,11 +23,11 @@ public class ResultView {
         }
     }
 
-    public void printWinningStatistics(WinningStatistics statistics) {
+    public void printWinningResults(WinningResults statistics) {
         System.out.println(NOTICE_WINNING_STATISTICS);
-        List<WinningStatistic> statisticList = statistics.getWinningStatistic();
-        for (WinningStatistic winningStatistic : statisticList) {
-            System.out.println(String.format(NOTICE_WINNING_STATISTICS_RESULT, winningStatistic.getWinningRank().getMatchCount(), winningStatistic.getWinningRank().getReward(), winningStatistic.getCount()));
+        List<WinningResult> statisticList = statistics.getWinningResult();
+        for (WinningResult winningResult : statisticList) {
+            System.out.println(String.format(NOTICE_WINNING_STATISTICS_RESULT, winningResult.getWinningRank().getMatchCount(), winningResult.getWinningRank().getReward(), winningResult.getCount()));
         }
     }
     

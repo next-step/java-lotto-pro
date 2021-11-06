@@ -21,18 +21,14 @@ public class Lottos implements Iterable<Lotto> {
         return lottos;
     }
 
-    public int getSize() {
-        return this.lottos.size();
-    }
-
-    public void countWinningRank(LottoNumbers winningLotto) {
-        for (Lotto lotto : lottos) {
-            lotto.resultLotto(winningLotto);
-        }
-    }
-
     public List<Lotto> getLottos() {
         return this.lottos;
+    }
+
+    public void execute(LottoNumbers winningLotto) {
+        for (Lotto lotto : lottos) {
+            lotto.judgeRank(winningLotto);
+        }
     }
 
     @Override

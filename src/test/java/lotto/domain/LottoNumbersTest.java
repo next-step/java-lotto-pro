@@ -21,7 +21,7 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("로또 숫자 개수 확인")
     void 로또_개수_확인() {
-        assertThat(lottoNumbers.getSize()).isEqualTo(6);
+        assertThat(lottoNumbers.getNumbers().size()).isEqualTo(6);
     }
 
     @Test

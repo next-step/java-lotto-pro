@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum WinningRank {
-    SIX(6, 2000000000), 
-    FIVE(5, 1500000), 
-    FOUR(4, 50000), 
-    THREE(3, 5000), 
-    ZERO(0, 0);
+    FIRST_RANK(6, 2000000000), 
+    SECOND_RANK(5, 1500000), 
+    THIRD_RANK(4, 50000), 
+    FOURTH_RANK(3, 5000), 
+    FAIL(0, 0);
 
     private final int matchCount;
     private final int reward;
@@ -21,8 +21,11 @@ public enum WinningRank {
         this.reward = reward;
     }
 
-    public static WinningRank result(int matchCount) {
-        return Arrays.stream(values()).filter(winningRank -> winningRank.matchCount == matchCount).findFirst().orElse(ZERO);
+    public static WinningRank resultRank(int matchCount) {
+        return Arrays.stream(values())
+                .filter(winningRank -> winningRank.equals(matchCount))
+                .findFirst()
+                .orElse(FAIL);
     }
 
     public int getMatchCount() {
@@ -34,9 +37,12 @@ public enum WinningRank {
     }
     
     public static List<WinningRank> createWinningRanks() {
-        return Stream.of(SIX, FIVE, FOUR, THREE)
+        return Stream.of(FIRST_RANK, SECOND_RANK, THIRD_RANK, FOURTH_RANK)
                 .sorted(Comparator.comparing(WinningRank::getMatchCount))
                 .collect(Collectors.toList());
     }
-
+    
+    private boolean equals(int count) {
+        return this.matchCount == count;
+    }
 }

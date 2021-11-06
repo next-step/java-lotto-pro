@@ -12,7 +12,7 @@ public class LottosTest {
     @ParameterizedTest
     @ValueSource(ints = { 1, 2, 3 })
     public void 로또구매_확인(int quantity) {
-        assertThat(new Lottos(quantity).getSize()).isEqualTo(quantity);
+        assertThat(new Lottos(quantity).getLottos().size()).isEqualTo(quantity);
     }
 
 }

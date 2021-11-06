@@ -1,10 +1,10 @@
 package lotto.domain;
 
-public class WinningStatistic {
+public class WinningResult {
     private final WinningRank winningRank;
     private final int count;
 
-    public WinningStatistic(WinningRank winningRank, int count) {
+    public WinningResult(WinningRank winningRank, int count) {
         this.winningRank = winningRank;
         this.count = count;
     }

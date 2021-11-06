@@ -18,10 +18,6 @@ public class LottoNumbers {
         return numbers;
     }
 
-    public int getSize() {
-        return numbers.size();
-    }
-
     public int countMatchNumber(LottoNumbers winningNumbers) {
         return (int) numbers.stream()
                         .filter(number -> winningNumbers.getNumbers()
