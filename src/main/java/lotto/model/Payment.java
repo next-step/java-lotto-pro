@@ -27,6 +27,10 @@ public class Payment {
         return money / LOTTO_PRICE;
     }
 
+    public double getRateOfReturn(int prizeMoney) {
+        return ((double)prizeMoney) / money;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
