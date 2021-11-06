@@ -6,33 +6,32 @@ import java.util.List;
 
 public class LottoFactory {
 
-    private static List<LottoNumber> lottoNumberList = new ArrayList<>();
+    public static final int LOTTO_SIZE = 6;
 
+    private static List<LottoNumber> lottoNumbers = new ArrayList<>();
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 45;
     private static final int START_LOTTO_NUMBER_INDEX = 0;
-    private static final int LOTTO_SIZE = 6;
 
     public static LottoNumbers createLottoNumbers() {
-        if (isEmptyLottoNumberList()) {
-            initLottoNumberList();
+        if (isEmptyLottoNumbers()) {
+            initLottoNumbers();
         }
 
-        Collections.shuffle(lottoNumberList);
-        List<LottoNumber> shuffledNumberList = new ArrayList<>(lottoNumberList.subList(START_LOTTO_NUMBER_INDEX, LOTTO_SIZE));
-        Collections.sort(shuffledNumberList);
+        Collections.shuffle(lottoNumbers);
+        List<LottoNumber> shuffledNumbers = new ArrayList<>(lottoNumbers.subList(START_LOTTO_NUMBER_INDEX, LOTTO_SIZE));
+        Collections.sort(shuffledNumbers);
 
-        return new LottoNumbers(shuffledNumberList);
+        return new LottoNumbers(shuffledNumbers);
     }
 
-    private static boolean isEmptyLottoNumberList() {
-        return lottoNumberList.isEmpty();
+    private static boolean isEmptyLottoNumbers() {
+        return lottoNumbers.isEmpty();
     }
 
-    private static void initLottoNumberList() {
-        lottoNumberList = new ArrayList<>();
+    private static void initLottoNumbers() {
         for (int i = START_NUMBER; i <= END_NUMBER; i++) {
-            lottoNumberList.add(new LottoNumber(i));
+            lottoNumbers.add(new LottoNumber(i));
         }
     }
 }

@@ -1,6 +1,5 @@
 package lotto.utils;
 
-import java.lang.reflect.Field;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
@@ -15,7 +14,7 @@ public class Console {
     /**
      * 자바 표준 입력(콘솔 입력)을 받아주는 java api
      */
-    private static Scanner scanner = getScanner();
+    private static Scanner scanner = new Scanner(System.in);
 
     private Console() {
     }
@@ -36,23 +35,8 @@ public class Console {
     }
 
     private static void makeNewScannerIfScannerIsClosed() {
-        if (Objects.isNull(scanner) || scannerIsClosed()) {
-            scanner = getScanner();
+        if (Objects.isNull(scanner)) {
+            scanner = new Scanner(System.in);
         }
-    }
-
-    private static boolean scannerIsClosed() {
-        try {
-            Field sourceClosedField = Scanner.class.getDeclaredField("sourceClosed");
-            sourceClosedField.setAccessible(true);
-            return sourceClosedField.getBoolean(scanner);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            System.out.println("리플렉션 중 에러 발생");
-        }
-        return true;
-    }
-
-    private static Scanner getScanner() {
-        return new Scanner(System.in);
     }
 }
