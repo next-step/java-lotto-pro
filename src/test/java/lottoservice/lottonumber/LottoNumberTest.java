@@ -14,7 +14,7 @@ class LottoNumberTest {
 	@ParameterizedTest
 	@ValueSource(ints = {1, 45})
 	public void 로또_번호_생성(int number){
-		LottoNumber lottoNumber = new LottoNumber(number);
+		LottoNumber lottoNumber = LottoNumber.valueOf(number);
 		assertThat(lottoNumber.getNumber()).isEqualTo(number);
 	}
 
