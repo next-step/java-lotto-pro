@@ -9,6 +9,7 @@ import view.Printable;
 public class LottoMoney implements Printable {
     private static final int LOTTO_PRICE = 1000;
     private static final String WON = "원";
+    private static final int ZERO_SIZE = 0;
     private long money;
 
     public LottoMoney(String moneyText) {
@@ -41,6 +42,10 @@ public class LottoMoney implements Printable {
     }
 
     public static EarningRate calculateEarningRate(List<LottoMoney> lottoMoneyList) {
+        if(lottoMoneyList.size() == ZERO_SIZE) {
+            return EarningRate.ZERO;
+        }
+
         long sum = lottoMoneyList.stream()
             .mapToLong(lottoMoney -> lottoMoney.money)
             .sum();

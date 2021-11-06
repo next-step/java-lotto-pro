@@ -7,6 +7,7 @@ import java.util.Objects;
 import view.Printable;
 
 public class EarningRate implements Printable {
+    public static final EarningRate ZERO = new EarningRate(BigDecimal.ZERO);
     private final BigDecimal rate;
 
     public EarningRate(BigDecimal rate) {

@@ -3,6 +3,7 @@ package lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.DisplayName;
@@ -47,6 +48,8 @@ class LottoMoneyTest {
     void calculateEarningRate() {
         assertThat(LottoMoney.calculateEarningRate(Arrays.asList(new LottoMoney(5000), new LottoMoney(150000))))
             .isEqualTo(new EarningRate(BigDecimal.valueOf(77.5)));
+        assertThat(LottoMoney.calculateEarningRate(new ArrayList<>()))
+            .isEqualTo(EarningRate.ZERO);
     }
 
     @DisplayName("로또 돈 메시지 생성")
