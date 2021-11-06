@@ -57,3 +57,34 @@
 - ResultView
     - [X] 로또 번호 목록 출력
     - [X] 당첨 통계 출력
+
+# 4단계 - 로또(2등)
+
+## 추가된 요구 사항 정리
+
+- 2등을 위해 추가 번호를 하나 더 추첨한다.
+- 당첨 통계에 2등도 추가해야 한다.
+- java enum을 적용해 프로그래밍을 구현한다.
+- 규칙 8: 일급 콜렉션을 쓴다.
+
+## 힌트 정리
+
+- 일급 콜렉션을 쓴다.
+    - 6개의 숫자 값을 가지는 java collection 을 감싸는 객체를 추가해 구현해 본다.
+        - LottoNumbers 로 정의
+- 하드 코딩을 하지 않기 위해 상수 값을 사용하면 많은 상수 값이 발생한다. 자바의 enum 을 활용해 상수 값을 제거한다. 즉, enum 을 활용해 일치하는 수를 로또 등수로 변경해 본다.
+    - LottoRank 를 개선하기
+
+## 4 단계 기능 목록
+
+- [ ] 보너스 숫자한개 입력받기
+- [ ] LottoRank 보너스 숫자 추가
+- [ ] LottoRank 2등은 5개 일치 + 보너스볼 일치로 변경된 부분으로 로직 변경하기
+- [ ] View static 메소드로 변경하여 인스턴스 변수를 줄여보기,
+  `Utility Class`로 `pricate` 생성자하여 불필요한 인스턴스화 막기
+- [ ] Amount 에 대해 검증로직 추가하기
+- [X] 불필요한 코드 제거하기 (LottoProviderStrategy)
+- [ ] RandomNumbers.java 초기화 블럭
+  적용하기 [참고 링크](https://velog.io/@tomato2532/%EC%B4%88%EA%B8%B0%ED%99%94-%EB%B8%94%EB%9F%AD%EA%B3%BC-%EC%83%9D%EC%84%B1%EC%9E%90)
+- [ ] LottoRanksDto.java 를 역할 분리 -> View 레이어로 분리하기
+- [ ] lottoRanksOf() 테스트 추가
