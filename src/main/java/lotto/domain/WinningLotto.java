@@ -5,16 +5,16 @@ import java.util.Objects;
 public class WinningLotto {
 
     private final Lotto winningLotto;
-    private final int bonus;
+    private final Bonus bonus;
 
     public WinningLotto(String numbers, int bonus) {
         this.winningLotto = new Lotto(numbers);
-        this.bonus = bonus;
+        this.bonus = new Bonus(bonus);
     }
 
     public Rank match(Lotto lotto) {
         final int matchCount = winningLotto.match(lotto);
-        final boolean hasBonus = lotto.containBonus(new Bonus(bonus));
+        final boolean hasBonus = lotto.containBonus(bonus);
         return Rank.rank(matchCount, hasBonus);
     }
 
