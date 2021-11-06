@@ -35,7 +35,7 @@ class LottosTest {
         );
 
         // when
-        WinResults winResults = lottos.getWinResults(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        WinResults winResults = lottos.getWinResults(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(45));
 
         // then
         assertThat(winResults).isEqualTo(WinResults.from(WinResult.FIRST, WinResult.FIFTH));

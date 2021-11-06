@@ -14,9 +14,9 @@ public class WinResults {
         this.winResults = Collections.unmodifiableList(winResults);
     }
 
-    public static WinResults of(List<Lotto> lottos, Lotto winNumber) {
+    public static WinResults of(List<Lotto> lottos, Lotto winNumber, LottoNumber bonusNumber) {
         List<WinResult> winResults = lottos.stream()
-                .map(lotto -> lotto.getWinResult(winNumber))
+                .map(lotto -> lotto.getWinResult(winNumber, bonusNumber))
                 .filter(winResult -> winResult != WinResult.NOT_MATCHED)
                 .collect(Collectors.toList());
         return new WinResults(winResults);
@@ -26,10 +26,9 @@ public class WinResults {
         return new WinResults(Arrays.asList(winResults));
     }
 
-    public int getCount(int matchedCount) {
-        WinResult findWinResult = WinResult.fromCount(matchedCount);
+    public int getCount(WinResult findingWinResult) {
         return (int) winResults.stream()
-                .filter(winResult -> winResult == findWinResult)
+                .filter(winResult -> winResult == findingWinResult)
                 .count();
     }
 

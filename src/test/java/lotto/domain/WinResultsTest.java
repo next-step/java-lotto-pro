@@ -21,11 +21,11 @@ class WinResultsTest {
     }
 
     @ParameterizedTest(name = "{displayName} - {arguments}")
-    @CsvSource(value = {"6:3", "5:2", "4:1", "3:1"}, delimiter = ':')
+    @CsvSource(value = {"FIRST:3", "THIRD:2", "FOURTH:1", "FIFTH:1"}, delimiter = ':')
     @DisplayName("요청 당첨에 해당되는 개수를 반환한다.")
-    void getCount(int matchedCount, int expected) {
+    void getCount(WinResult winResult, int expected) {
         // when
-        int count = winResults.getCount(matchedCount);
+        int count = winResults.getCount(winResult);
 
         // then
         assertThat(count).isEqualTo(expected);

@@ -52,19 +52,23 @@ class LottoTest {
 
     @ParameterizedTest(name = "{displayName} - {arguments}")
     @CsvSource(value = {
-            "1:2:3:4:5:6:FIRST",
-            "1:2:3:4:5:10:THIRD",
-            "1:2:3:4:9:10:FOURTH",
-            "1:2:3:8:9:10:FIFTH",
-            "1:2:7:8:9:10:NOT_MATCHED"
+            "1:2:3:4:5:6:45:FIRST",
+            "1:2:3:4:5:10:6:SECOND",
+            "1:2:3:4:5:10:45:THIRD",
+            "1:2:3:4:9:10:45:FOURTH",
+            "1:2:3:8:9:10:45:FIFTH",
+            "1:2:7:8:9:10:45:NOT_MATCHED"
     }, delimiter = ':')
     @DisplayName("당첨 결과를 반환한다.")
-    void getWinResult(int number1, int number2, int number3, int number4, int number5, int number6, WinResult expected) {
+    void getWinResult(int number1, int number2, int number3, int number4, int number5, int number6, int bonusNumber,
+                      WinResult expected) {
         // given
-        Lotto lotto = new Lotto(Arrays.asList(number1, number2, number3, number4, number5, number6));
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when
-        WinResult winResult = lotto.getWinResult(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        WinResult winResult = lotto.getWinResult(
+                new Lotto(Arrays.asList(number1, number2, number3, number4, number5, number6)),
+                new LottoNumber(bonusNumber));
 
         // then
         assertThat(winResult).isEqualTo(expected);

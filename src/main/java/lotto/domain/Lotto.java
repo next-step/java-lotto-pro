@@ -17,15 +17,11 @@ public class Lotto {
         this.lottoNumbers = Collections.unmodifiableList(mapToLottoNumbers(numbers));
     }
 
-    public WinResult getWinResult(Lotto winNumber) {
-        int matchedCount = (int) winNumber.lottoNumbers
-                .stream()
-                .map(lottoNumbers::contains)
-                .filter(isContained -> isContained)
-                .count();
-        return WinResult.fromCount(matchedCount);
+    public WinResult getWinResult(Lotto winNumber, LottoNumber bonusNumber) {
+        int matchedCount = getMatchedCount(winNumber);
+        boolean bonusNumberMatched = this.lottoNumbers.contains(bonusNumber);
+        return WinResult.fromCount(matchedCount, bonusNumberMatched);
     }
-
 
     private void validate(List<Integer> numbers) {
         if (isIncorrectSize(numbers)) {
@@ -49,6 +45,14 @@ public class Lotto {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+    }
+
+    private int getMatchedCount(Lotto winNumber) {
+        return (int) winNumber.lottoNumbers
+                .stream()
+                .map(this.lottoNumbers::contains)
+                .filter(isContained -> isContained)
+                .count();
     }
 
     @Override

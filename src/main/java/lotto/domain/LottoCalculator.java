@@ -20,8 +20,8 @@ public class LottoCalculator {
         return winResults;
     }
 
-    public void calculate(Lotto winNumber) {
-        this.winResults = lottos.getWinResults(winNumber);
+    public void calculate(Lotto winNumber, LottoNumber bonusNumber) {
+        this.winResults = lottos.getWinResults(winNumber, bonusNumber);
     }
 
     public int getLottosSize() {
