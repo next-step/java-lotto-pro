@@ -9,6 +9,7 @@ public class LottoNumber {
     public static final int MAX_BOUND = 45;
     private static final String WRONG_NUMBER_FORMAT_MESSAGE = "입력된 숫자를 확인해 주세요.";
     private static final String WRONG_NUMBER_BOUND_MESSAGE = "입력된 숫자의 범위를 확인해 주세요.";
+
     private final int number;
 
     public LottoNumber(int number) {
