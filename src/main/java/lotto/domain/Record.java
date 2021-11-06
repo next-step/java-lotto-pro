@@ -1,33 +1,33 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Record {
-    public static final int DEFAULT_COUNT_ZERO = 0;
-    public static final int DEFAULT_PRICE = 5000;
+    private static final int DEFAULT_COUNT_ZERO = 0;
+    private static final int DEFAULT_PRICE = 5000;
 
     private final Map<Integer, Integer> record = new HashMap<>();
     private final Money totalPayment;
     private final Money totalWinningMoney;
 
-    public Record(List<LottoNumbers> lottoNumbersList, LottoNumbers winningNumber) {
-        initRecord(lottoNumbersList, winningNumber);
-        this.totalPayment = Money.of(calcTotalPayment(lottoNumbersList));
+    public Record(LotteryTicket lotteryTicket, LottoNumbers winningNumber) {
+        initRecord(lotteryTicket, winningNumber);
+        this.totalPayment = Money.of(calcTotalPayment(lotteryTicket));
         this.totalWinningMoney = Money.of(calcTotalWinningMoney());
     }
 
-    private void initRecord(List<LottoNumbers> lottoNumbersList, LottoNumbers winningNumber) {
-        for (LottoNumbers numbers : lottoNumbersList) {
-            int matchedCount = numbers.getMatchedCount(winningNumber);
-            Integer count = record.getOrDefault(matchedCount, DEFAULT_COUNT_ZERO);
-            record.put(matchedCount, count + 1);
-        }
+    private void initRecord(LotteryTicket lotteryTicket, LottoNumbers winningNumber) {
+        lotteryTicket.writeRecord(this, winningNumber);
     }
 
-    private int calcTotalPayment(List<LottoNumbers> lottoNumbersList) {
-        return lottoNumbersList.size() * DEFAULT_PRICE;
+    public void increaseMatchedCount(int matchedCount) {
+        Integer count = record.getOrDefault(matchedCount, DEFAULT_COUNT_ZERO);
+        record.put(matchedCount, count + 1);
+    }
+
+    private int calcTotalPayment(LotteryTicket lotteryTicket) {
+        return lotteryTicket.size() * DEFAULT_PRICE;
     }
 
     private long calcTotalWinningMoney() {

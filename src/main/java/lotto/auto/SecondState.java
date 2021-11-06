@@ -1,18 +1,18 @@
 package lotto.auto;
 
+import lotto.domain.LotteryTicket;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Record;
 
 import java.io.PrintStream;
-import java.util.List;
 
 public class SecondState implements State {
     private final SecondStateView secondStateView;
-    private final List<LottoNumbers> lottoNumbersList;
+    private final LotteryTicket lotteryTicket;
 
-    public SecondState(SecondStateView secondStateView, List<LottoNumbers> record) {
+    public SecondState(SecondStateView secondStateView, LotteryTicket lotteryTicket) {
         this.secondStateView = secondStateView;
-        this.lottoNumbersList = record;
+        this.lotteryTicket = lotteryTicket;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class SecondState implements State {
 
     @Override
     public void printResult(String text, PrintStream out) {
-        secondStateView.printResult(out, new Record(lottoNumbersList, LottoNumbers.of(text)));
+        secondStateView.printResult(out, new Record(lotteryTicket, LottoNumbers.of(text)));
     }
 
     @Override

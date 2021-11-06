@@ -1,5 +1,7 @@
 package lotto.auto;
 
+import lotto.domain.LotteryTicket;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Shuffleable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,7 +44,9 @@ public class FirstStateTest {
     @DisplayName("구입금액을 입력 받고 결과를 출력한다")
     @Test
     void testAnswer() {
-        assertThat(firstState.getResult("2000")).containsExactly("[1, 2, 3, 4, 5, 6]", "[1, 2, 3, 4, 5, 6]");
+        assertThat(firstState.getLotteryTicket("2000")).isEqualTo(new LotteryTicket(Arrays.asList(
+                LottoNumbers.of("1,2,3,4,5,6"), LottoNumbers.of("1,2,3,4,5,6")
+        )));
     }
 
     static class NothingShuffler implements Shuffleable {

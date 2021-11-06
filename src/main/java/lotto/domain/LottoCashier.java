@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class LottoCashier {
     private static final Money DEFAULT_PRICE = Money.of(1000);
 
@@ -11,10 +9,10 @@ public class LottoCashier {
         this.lottoPrinter = lottoPrinter;
     }
 
-    public List<LottoNumbers> buy(Money cash) {
+    public LotteryTicket buy(Money cash) {
         validateDefaultPrice(cash);
         int count = cash.divide(DEFAULT_PRICE).intValue();
-        return lottoPrinter.print(count);
+        return new LotteryTicket(lottoPrinter.print(count));
     }
 
     private static void validateDefaultPrice(Money cash) {

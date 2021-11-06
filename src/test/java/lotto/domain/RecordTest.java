@@ -13,21 +13,19 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RecordTest {
-    private List<LottoNumbers> lottoNumbersList;
-    private LottoNumbers winningNumber;
     private Record record;
 
     @BeforeEach
     void setUp() {
-        lottoNumbersList = Arrays.asList(
+        List<LottoNumbers> lottoNumbersList = Arrays.asList(
                 LottoNumbers.of("1,2,3,7,8,9"),
                 LottoNumbers.of("1,2,3,4,7,8"),
                 LottoNumbers.of("9,8,3,4,5,6"),
                 LottoNumbers.of("1,2,3,4,5,45"),
                 LottoNumbers.of("1,2,3,4,5,6")
         );
-        winningNumber = LottoNumbers.of("1,2,3,4,5,6");
-        record = new Record(lottoNumbersList, winningNumber);
+        LottoNumbers winningNumber = LottoNumbers.of("1,2,3,4,5,6");
+        record = new Record(new LotteryTicket(lottoNumbersList), winningNumber);
     }
 
     @DisplayName("각 등수와 일치하는 갯수를 반환한다")

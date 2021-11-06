@@ -1,7 +1,7 @@
 package lotto.auto;
 
+import lotto.domain.LotteryTicket;
 import lotto.domain.LottoNumbers;
-import lotto.domain.Record;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,7 +29,7 @@ public class SecondStateTest {
                 LottoNumbers.of("1,2,3,4,5,45"),
                 LottoNumbers.of("1,2,3,4,5,6")
         );
-        secondState = new SecondState(new SecondStateView(), lottoNumbersList);
+        secondState = new SecondState(new SecondStateView(), new LotteryTicket(lottoNumbersList));
         standardOut = System.out;
         captor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(captor));
