@@ -29,7 +29,7 @@ public class WinningResult {
         return profitAmount() / (double) purchaseAmount;
     }
 
-    public long profitAmount() {
+    private long profitAmount() {
         Set<Map.Entry<Rank, Integer>> resultEntrySet = this.result.entrySet();
         long profitAmount = 0L;
 
