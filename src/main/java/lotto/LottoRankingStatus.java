@@ -23,6 +23,14 @@ public enum LottoRankingStatus {
         return matchAmount;
     }
 
+    public String getMatchDescription(int matchCount) {
+        return String.format(MATCH_DESCRIPTION, matchAmount, prizeAmount, matchCount);
+    }
+
+    public int getPrizeReward(int matchCount) {
+        return prizeAmount * matchCount;
+    }
+
     public boolean isSameMatchAmount(int matchAmount) {
         return this.matchAmount == matchAmount;
     }
