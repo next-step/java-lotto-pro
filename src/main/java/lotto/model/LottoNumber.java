@@ -10,6 +10,15 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int lottoNumber;
 
+    public LottoNumber(String lottoNumber, LottoPaper winningLottoPaper) {
+        int parsedLottoNumber = parseLottoNumber(lottoNumber);
+        lottoNumberRangeCheck(parsedLottoNumber);
+        if (winningLottoPaper.isContainsLottoNumber(new LottoNumber(parsedLottoNumber))) {
+            throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_BONUS_NUMBER_INPUT));
+        }
+        this.lottoNumber = parsedLottoNumber;
+    }
+
     public LottoNumber(String lottoNumber) {
         int parsedLottoNumber = parseLottoNumber(lottoNumber);
         lottoNumberRangeCheck(parsedLottoNumber);
