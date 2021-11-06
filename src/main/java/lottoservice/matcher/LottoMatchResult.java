@@ -34,8 +34,7 @@ public class LottoMatchResult {
 	/* 상금 합계 */
 	public long calculateProfit() {
 		return result.entrySet().stream()
-			.map(rank -> rank.getKey().getWinningMoney() * rank.getValue())
-			.mapToLong(profit -> profit)
+			.mapToLong(entry -> entry.getKey().getWinningMoney() * entry.getValue())
 			.sum();
 	}
 
@@ -50,8 +49,7 @@ public class LottoMatchResult {
 	private int getNumOfMatchResults() {
 		return result.entrySet()
 			.stream()
-			.map(matchResult -> matchResult.getValue())
-			.mapToInt(numOfResults -> numOfResults)
+			.mapToInt(matchResult -> matchResult.getValue())
 			.sum();
 	}
 
