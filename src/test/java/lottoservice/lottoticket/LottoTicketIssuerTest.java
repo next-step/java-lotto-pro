@@ -8,12 +8,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import lottoservice.exception.NotDivisibleMoneyUnitException;
 import lottoservice.exception.NotEnoughtMoneyException;
 import lottoservice.exception.InvalidNumberFormatMoneyException;
-import lottoservice.lottoticket.LottoTicketIssuer;
-import lottoservice.lottoticket.LottoTickets;
 
 public class LottoTicketIssuerTest {
-
-	private static final int MAX_INPUT_MONEY = 2_147_483_000;	/* int형 양의 정수 최대값 보다 작은 값 중 구매가능한 최대값 */
 
 	@ParameterizedTest
 	@CsvSource(value = {"1000:1", "10000:10"}, delimiter = ':')
