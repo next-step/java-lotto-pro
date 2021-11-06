@@ -13,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumbersGroupTest {
     private LottoNumbers prizeLottoNumbers;
+
     @BeforeEach
     void setup() {
         prizeLottoNumbers = new LottoNumbers(
@@ -25,7 +26,7 @@ public class LottoNumbersGroupTest {
     @Test
     void generateRandomLottoNumberGroupTest() {
         BuyAmount buyAmount = new BuyAmount(14000);
-        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(buyAmount, prizeLottoNumbers);
+        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(buyAmount);
         System.out.println(lottoNumbersGroup);
     }
 
@@ -33,9 +34,9 @@ public class LottoNumbersGroupTest {
     @Test
     void generateManualLottoNumberGroupTest() {
         String[] myLottoNumbers = new String[]{"1,2,3,4,5,6", "2,3,4,13,12,14", "42,12,24,32,11,15"};
-        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(myLottoNumbers, prizeLottoNumbers);
+        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(myLottoNumbers);
         List<LottoNumbers> expectLottoNumbersList = getExampleLottoNumbersList();
-        assertThat(lottoNumbersGroup).isEqualTo(new LottoNumbersGroup(expectLottoNumbersList, prizeLottoNumbers));
+        assertThat(lottoNumbersGroup).isEqualTo(new LottoNumbersGroup(expectLottoNumbersList));
     }
 
     private List<LottoNumbers> getExampleLottoNumbersList() {
@@ -60,9 +61,9 @@ public class LottoNumbersGroupTest {
     @Test
     void getLottoResultFromLottoNumberGroupTest() {
         String[] myLottoNumbers = new String[]{"1,2,3,4,5,6", "2,3,4,13,12,14", "27,13,25,35,9,15"};
-        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(myLottoNumbers, prizeLottoNumbers);
+        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(myLottoNumbers);
         // when
-        LottoResults lottoResults = lottoNumbersGroup.getLottoResults();
+        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers);
         // then
         assertThat(lottoResults.getMatchAmount(3)).isEqualTo(1);
         assertThat(lottoResults.getMatchAmount(6)).isEqualTo(1);
