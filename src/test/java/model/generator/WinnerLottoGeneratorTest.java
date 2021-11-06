@@ -10,8 +10,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import model.WinnerLotto;
-import model.generator.WinnerLottoGenerator;
 import model.common.LottoRule;
+import model.common.Range;
 import model.common.string.StringsProvider;
 
 @DisplayName("우승 로또 번호 생성기")
@@ -111,7 +111,7 @@ class WinnerLottoGeneratorTest {
 	}
 
 	private LottoRule defaultLottoRule() {
-		return LottoRule.of(1, 45, 6);
+		return LottoRule.of(Range.of(1, 45), 6);
 	}
 
 }

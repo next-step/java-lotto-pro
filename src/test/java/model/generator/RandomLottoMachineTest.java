@@ -10,6 +10,7 @@ import model.Lotto;
 import model.LottoPaper;
 import model.common.LottoNumbers;
 import model.common.LottoRule;
+import model.common.Range;
 
 @DisplayName("랜덤 로또 생성기")
 class RandomLottoMachineTest {
@@ -49,6 +50,6 @@ class RandomLottoMachineTest {
 	}
 
 	private LottoRule defaultLottoRule() {
-		return LottoRule.of(1, 45, 6);
+		return LottoRule.of(Range.of(1, 45), 6);
 	}
 }

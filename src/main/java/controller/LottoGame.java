@@ -4,6 +4,7 @@ import model.LottoPapers;
 import model.common.Income;
 import model.common.LottoRule;
 import model.common.Money;
+import model.common.Range;
 import model.common.Score;
 import model.common.string.StringDelimiters;
 import model.common.string.StringSeparator;
@@ -20,7 +21,7 @@ public final class LottoGame {
 	private static final LottoGame LOTTO_GAME = new LottoGame();
 
 	private static final Money LOTTO_PRICE = Money.from(1_000);
-	private static final LottoRule LOTTO_RULE = LottoRule.of(1, 45, 6);
+	private static final LottoRule LOTTO_RULE = LottoRule.of(Range.of(1, 45), 6);
 
 	private static final IncomeView incomeView = IncomeView.from(System.out);
 	private static final LottoPapersView lottoView = LottoPapersView.from(System.out);
