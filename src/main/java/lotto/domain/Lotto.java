@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -49,5 +50,16 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lineOfLottoNumber);
+    }
+
+    public String getStatus() {
+        List<String> lottoStatus = new ArrayList<>();
+
+        for (LottoNumber lottoNumber : lineOfLottoNumber) {
+            lottoStatus.add(lottoNumber.getNumberString());
+        }
+
+        return "[" + String.join(",", lottoStatus) + "]";
+
     }
 }
