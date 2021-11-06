@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import lotto.infrastructure.util.RandomLottoNumber;
 
 public class LottoNumbers {
+  private static final int VALID_LOTTONUMBER_HAS_COUNT = 6;
   private List<LottoNumber> values;
 
   public LottoNumbers() {
@@ -14,6 +15,8 @@ public class LottoNumbers {
   }
 
   public LottoNumbers(List<LottoNumber> values) {
+    checkLottoNumberCount(values);
+
     this.values = new ArrayList<>(values);
   }
 
@@ -21,6 +24,13 @@ public class LottoNumbers {
     return Stream.of(values)
                   .map(LottoNumber::valueOf)
                   .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
+  }
+
+
+  private static void checkLottoNumberCount(List<LottoNumber> values) {
+    if (values.size() != VALID_LOTTONUMBER_HAS_COUNT) {
+      throw new IllegalArgumentException("로또 번호의 갯수가 6개가 아닙니다.");
+    }
   }
 
   public void generate() {

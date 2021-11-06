@@ -31,7 +31,7 @@ public class BuyLotto extends Screen {
 
     String buyPrice = buyingLottoPrice.getValue();
 
-    int lottoCount = Integer.valueOf(buyPrice) / 1000;
+    int lottoCount = Integer.valueOf(buyPrice) / Lotto.PRICE;
 
     resultBuyingLottoCount.setPrintText(String.format("%d개를 구매했습니다.", lottoCount));
     resultBuyingLottoCount.render();

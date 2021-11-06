@@ -14,7 +14,7 @@ public class RandomLottoNumber {
   static {
     cachedNumbers = new ArrayList<>();
 
-    for (Integer i = 1; i <= 45; i++) {
+    for (Integer i = LottoNumber.LOTTO_START_NUMBER; i <= LottoNumber.LOTTO_END_NUMBER; i++) {
       cachedNumbers.add(LottoNumber.valueOf(i));
     }
   }

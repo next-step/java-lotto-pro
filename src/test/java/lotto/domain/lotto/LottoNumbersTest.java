@@ -69,7 +69,7 @@ public class LottoNumbersTest {
   void check_illegalLottoNumberCount() {
     // given
     // when
-		ThrowingCallable exceptionContent = () -> {Lotto lotto = Lotto.valueOf("1", "3", "7", "9", "13");};
+		ThrowingCallable exceptionContent = () -> {Lotto.valueOf("1", "3", "7", "9", "13");};
 
     // then
 		assertThatExceptionOfType(IllegalArgumentException.class)

@@ -14,10 +14,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import lotto.infrastructure.datashared.UiSharedData;
 import lotto.presentation.Screen;
 import lotto.presentation.SettingLatestWinLotto;
-
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SettingLatestWinLottoTest {

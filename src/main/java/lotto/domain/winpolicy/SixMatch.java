@@ -2,7 +2,7 @@ package lotto.domain.winpolicy;
 
 import lotto.domain.lotto.Lotto;
 
-public class SixMatch extends Policy{
+public class SixMatch extends Policy {
   public SixMatch() {
     super(2000000000);
   }

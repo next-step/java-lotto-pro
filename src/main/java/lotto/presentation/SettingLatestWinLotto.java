@@ -5,6 +5,7 @@ import lotto.infrastructure.component.TextEdit;
 import lotto.infrastructure.datashared.UiSharedData;
 
 public class SettingLatestWinLotto extends Screen {
+  private static final String LOTTO_SPARATOR = ",";
   TextEdit latestWinLotto = new TextEdit();
 
   public SettingLatestWinLotto() {
@@ -25,7 +26,7 @@ public class SettingLatestWinLotto extends Screen {
     latestWinLotto.render();
 
     String tempLatestWinLotto = latestWinLotto.getValue();
-    Lotto latestWinLotto = Lotto.valueOf(tempLatestWinLotto.split(","));
+    Lotto latestWinLotto = Lotto.valueOf(tempLatestWinLotto.split(LOTTO_SPARATOR));
 
 
     UiSharedData.setLatestWinLotto(latestWinLotto);

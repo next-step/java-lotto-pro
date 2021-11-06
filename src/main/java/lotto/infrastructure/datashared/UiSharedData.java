@@ -4,8 +4,8 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 
 public class UiSharedData {
-  private static Lottos buyLottos = new Lottos();
-  private static Lotto latestWinLotto = new Lotto();
+  private static Lottos buyLottos;
+  private static Lotto latestWinLotto;
 
   public UiSharedData() {
   }
@@ -20,7 +20,7 @@ public class UiSharedData {
 
   public static Lottos getBuyLottos() {
     if (UiSharedData.buyLottos == null) {
-      return new Lottos();
+      throw new IllegalStateException("로또들이 설정되지 않았습니다.");
     }
 
     return UiSharedData.buyLottos;
@@ -28,7 +28,7 @@ public class UiSharedData {
 
   public static Lotto getLatestWinLotto() {
     if (UiSharedData.latestWinLotto == null) {
-      return new Lotto();
+      throw new IllegalStateException("당첨 로또번호가 설정되지 않았습니다.");
     }
 
     return UiSharedData.latestWinLotto;

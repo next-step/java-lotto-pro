@@ -13,15 +13,7 @@ public class Lotto {
   }
 
   public static Lotto valueOf(String ... values) {
-    checkLottoNumberCount(values);
-
     return new Lotto(LottoNumbers.valueOf(values));
-  }
-
-  private static void checkLottoNumberCount(String... values) {
-    if (values.length != 6) {
-      throw new IllegalArgumentException("로또 번호의 갯수가 6개가 아닙니다.");
-    }
   }
 
   public String toString() {
