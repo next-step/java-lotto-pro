@@ -60,11 +60,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 			: 0;
 	}
 
-	public boolean isBiggerThan(LottoNumber o){
+	public boolean isBiggerThan(LottoNumber o) {
 		return getNumber() > o.getNumber();
 	}
 
-	public boolean isLessThan(LottoNumber o){
+	public boolean isLessThan(LottoNumber o) {
 		return getNumber() < o.getNumber();
 	}
 }

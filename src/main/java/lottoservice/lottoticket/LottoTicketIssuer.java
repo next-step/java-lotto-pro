@@ -38,7 +38,7 @@ public class LottoTicketIssuer {
 
 	private static List<LottoTicket> issuTickets(int numOfTickets) {
 		return IntStream.range(0, numOfTickets)
-			.mapToObj((it)->new LottoTicket(LottoNumbersMaker.makeLottoNumbers()))
+			.mapToObj((it) -> new LottoTicket(LottoNumbersMaker.makeLottoNumbers()))
 			.collect(Collectors.toList());
 	}
 

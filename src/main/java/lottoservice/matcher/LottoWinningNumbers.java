@@ -42,7 +42,7 @@ public class LottoWinningNumbers {
 		return winningNumbers;
 	}
 
-	/* 당첨번호와 비교할 티켓정보 전달 */
+	/* 인자로 넘어온 티켓들을 정답과 비교하여 결과를 리턴 */
 	public LottoMatchResult matchWinningAndTickets(LottoTickets lottoTickets) {
 		LottoMatchResult lottoMatchResult = new LottoMatchResult();
 		for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
