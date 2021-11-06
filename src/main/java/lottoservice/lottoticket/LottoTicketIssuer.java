@@ -19,10 +19,6 @@ public class LottoTicketIssuer {
 	private static String ERROR_MESSAGE_INPUT_AMOUNT_NOT_DIVISIBLE = "금액은 " + TICKET_PER_PRICE + "원 단위로 입력해주세요.";
 	private static String ERROR_MESSAGE_INPUT_AMOUNT_NOT_NUMBER = "금액을 숫자로 입력해주세요.";
 
-	private static int getNumOfTicketsToBuy(int inputAmount) {
-		return inputAmount / TICKET_PER_PRICE;
-	}
-
 	/**
 	 * 사용자가 입력한 금액만큼 자동으로 로또 티켓을 생성하여 리턴
 	 * @param inputAmount :  티켓 단위 금액(TICKET_PER_PRICE) < inputAmount < int형 최대값 and inputAmount % 1000 = 0 이어야 함
@@ -33,6 +29,10 @@ public class LottoTicketIssuer {
 		int numOfTickets = getNumOfTicketsToBuy(inputAmount);
 		List<LottoTicket> lottoTickets = issuTickets(numOfTickets);
 		return new LottoTickets(lottoTickets);
+	}
+
+	private static int getNumOfTicketsToBuy(int inputAmount) {
+		return inputAmount / TICKET_PER_PRICE;
 	}
 
 	private static List<LottoTicket> issuTickets(int numOfTickets) {
