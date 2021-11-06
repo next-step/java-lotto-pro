@@ -1,11 +1,9 @@
 package lotto.domain.ticket;
 
-import lotto.domain.number.LottoNumber;
+import java.util.*;
+import java.util.stream.*;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+import lotto.domain.number.*;
 
 public class LottoNumbers {
     private static final String LOTTO_NUMBERS_SIZE_IS_NOT_EQUAL_SIX_EXCEPTION_STATEMENT = "로또번호의 개수 6개가 아닙니다.";
@@ -13,6 +11,11 @@ public class LottoNumbers {
     private static final String LOTTO_NUMBERS_IS_NULL_EXCEPTION_STATEMENT = "입력값이 null입니다.";
 
     protected final Set<LottoNumber> lottoNumbers;
+
+    protected LottoNumbers(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers.lottoNumbers();
+        validate();
+    }
 
     protected LottoNumbers(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers.stream()
