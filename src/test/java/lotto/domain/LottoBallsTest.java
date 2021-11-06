@@ -29,4 +29,17 @@ class LottoBallsTest {
 
     }
 
+    @DisplayName("문자열 변환")
+    @Test
+    void convertString() {
+        LottoBalls balls = new LottoBalls(Arrays.asList(
+                new LottoBall(1), new LottoBall(2), new LottoBall(3),
+                new LottoBall(4), new LottoBall(5), new LottoBall(6)
+        ));
+
+        String result = balls.toString();
+
+        assertThat(result).isEqualTo("1,2,3,4,5,6");
+    }
+
 }

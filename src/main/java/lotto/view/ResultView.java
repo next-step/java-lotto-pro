@@ -11,4 +11,7 @@ public class ResultView {
         System.out.println(builder.toString());
     }
 
+    public void printLottoBalls(LottoGame lottoGame) {
+        System.out.println(lottoGame.toString());
+    }
 }

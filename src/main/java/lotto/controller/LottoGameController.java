@@ -15,5 +15,6 @@ public class LottoGameController {
         LottoGame lottoGame = LottoStore.sell(money);
 
         resultView.printLottoTryCount(lottoGame);
+        resultView.printLottoBalls(lottoGame);
     }
 }
