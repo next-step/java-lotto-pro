@@ -7,7 +7,7 @@ public class LottoStore {
     private LottoStore() {
     }
 
-    public static TicketLotteryBundle purchase(final int money) {
+    public static TicketLotteryBundle orderTicketLotteryBundleByMoney(final int money) {
         final LotteryFactory lotteryFactory = LotteryFactory.getInstance();
         final int orderCount = getOrderCountByMoney(money);
         return lotteryFactory.generateTicketLotteryByCount(orderCount);
