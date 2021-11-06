@@ -27,8 +27,12 @@ public class LottoApplicationController {
 			purchaseQuantity--;
 		}
 
+		OutputView.newLine();
+	}
 
-
-
+	public void printPurchasedLottoNumbers() {
+		for (Lotto lotto : lottos) {
+			OutputView.printMessage(lotto.getLottoNumbers());
+		}
 	}
 }

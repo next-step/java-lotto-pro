@@ -24,4 +24,8 @@ public class LottoNumbers {
 		}
 		return 0;
 	}
+
+	public String Values() {
+		return lottoNumbers.toString();
+	}
 }

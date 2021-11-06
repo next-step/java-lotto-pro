@@ -13,4 +13,8 @@ public class OutputView {
 	public static void printPurchaseQuantity(int purchaseQuantity) {
 		System.out.printf(PRINT_PURCHASE_QUANTITY, purchaseQuantity);
 	}
+
+	public static void newLine() {
+		System.out.println();
+	}
 }

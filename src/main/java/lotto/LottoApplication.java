@@ -12,6 +12,8 @@ public class LottoApplication {
 
 		lottoApplicationController.printPurchaseQuantity();
 
+		lottoApplicationController.printPurchasedLottoNumbers();
+
 
 
 	}

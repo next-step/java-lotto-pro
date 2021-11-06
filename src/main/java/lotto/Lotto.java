@@ -18,4 +18,8 @@ public class Lotto {
 		}
 		return new MatchedNumber(count);
 	}
+
+	public String getLottoNumbers() {
+		return lottoNumbers.Values();
+	}
 }
