@@ -45,4 +45,19 @@ class LottoTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers));
     }
+
+    @Test
+    @DisplayName("상태 출력 확인")
+    void 상태_출력_확인() {
+        // given
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(6), new LottoNumber(5), new LottoNumber(4)
+                , new LottoNumber(3), new LottoNumber(2), new LottoNumber(1));
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        // when
+        String lottoStatus = lotto.getStatus();
+
+        assertThat(lottoStatus)
+                .isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
 }
