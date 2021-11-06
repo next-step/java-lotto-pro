@@ -28,7 +28,7 @@ public class LottoPaper {
                 .count();
     }
 
-    public void lottoPaPerCorrectCheck() {
+    private void lottoPaPerCorrectCheck() {
         Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
         if(lottoNumberSet.size() != lottoNumbers.size()){
             throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_LOTTO_NUMBER_DUPLICATION_INPUT));
