@@ -24,7 +24,7 @@ public class LottoRanksDtoTest {
         Amount amount = new Amount(10000); // 주문가격
         NumbersStrategy winnerLottoNumbers = generateNumberStrategy(winNumbers);
         LottoNumbersBundle lottoNumbersBundle = getLottoNumbersBundle(); // 3개 일치 - 로또티켓 일치 갯수 1개 생성
-        LottoNumbers winLottoNumbers = new LottoNumbers(winnerLottoNumbers); // 지난주 우승 로또 번호
+        LottoNumbers winLottoNumbers = new LottoNumbers(winnerLottoNumbers.getNumbers()); // 지난주 우승 로또 번호
         LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winLottoNumbers); // 랭킹 비교
 
         // then

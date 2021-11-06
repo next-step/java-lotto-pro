@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import step3.common.exception.InvalidParamException;
-import step3.domain.strategy.numbers.NumbersStrategy;
 
 public class LottoNumbers {
     public static final int MAX_LOTTO_NUMBERS_SIZE = 6;
@@ -21,10 +20,6 @@ public class LottoNumbers {
 
     public LottoNumbers(int[] numbers) {
         map(numbers);
-    }
-
-    public LottoNumbers(NumbersStrategy numbersStrategy) {
-        map(numbersStrategy.getNumbers());
     }
 
     private void map(int[] numbers) {

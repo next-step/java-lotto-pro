@@ -31,7 +31,7 @@ public class LottoNumbersTest {
         NumbersStrategy numbersStrategy = new RandomLottoNumbers();
 
         //when
-        LottoNumbers lottoNumbers = new LottoNumbers(numbersStrategy);
+        LottoNumbers lottoNumbers = new LottoNumbers(numbersStrategy.getNumbers());
 
         // then
         assertThat(lottoNumbers.size()).isEqualTo(LottoNumbers.MAX_LOTTO_NUMBERS_SIZE);
@@ -46,7 +46,7 @@ public class LottoNumbersTest {
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
-                new LottoNumbers(getNumbersStrategy(overSizeNumbers));
+                new LottoNumbers(overSizeNumbers);
             }) // then
             .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
     }
@@ -60,7 +60,7 @@ public class LottoNumbersTest {
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
-                new LottoNumbers(getNumbersStrategy(numbers));
+                new LottoNumbers(numbers);
             }) // then
             .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
     }

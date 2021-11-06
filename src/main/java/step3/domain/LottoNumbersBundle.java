@@ -13,7 +13,9 @@ public class LottoNumbersBundle {
     }
 
     public void addLottoNumbers(NumbersStrategy numbersStrategy) {
-        lottoNumbersBundle.add(new LottoNumbers(numbersStrategy));
+        int[] numbers = numbersStrategy.getNumbers();
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        lottoNumbersBundle.add(lottoNumbers);
     }
 
     public int size() {
