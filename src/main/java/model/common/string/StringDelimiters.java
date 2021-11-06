@@ -2,7 +2,8 @@ package model.common.string;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
+
+import utility.Assert;
 
 public final class StringDelimiters {
 
@@ -11,14 +12,13 @@ public final class StringDelimiters {
 	private final Collection<String> delimiters;
 
 	StringDelimiters(Collection<String> delimiters) {
-		validate(delimiters);
+		Assert.notEmpty(delimiters, "'delimiters' must not be null");
+		validateContainsNull(delimiters);
 		this.delimiters = delimiters;
 	}
 
-	public static StringDelimiters of(String delimiter, String... delimiters) {
-		HashSet<String> delimiterSet = new HashSet<>(Arrays.asList(delimiters));
-		delimiterSet.add(delimiter);
-		return new StringDelimiters(delimiterSet);
+	public static StringDelimiters of(String... delimiters) {
+		return new StringDelimiters(Arrays.asList(delimiters));
 	}
 
 	public String regex() {
@@ -32,7 +32,7 @@ public final class StringDelimiters {
 			'}';
 	}
 
-	private void validate(Collection<String> delimiters) {
+	private void validateContainsNull(Collection<String> delimiters) {
 		for (String delimiter : delimiters) {
 			checkNull(delimiter);
 		}

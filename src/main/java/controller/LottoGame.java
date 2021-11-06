@@ -1,14 +1,15 @@
 package controller;
 
-import model.common.Income;
 import model.LottoPapers;
+import model.common.Income;
 import model.common.LottoRule;
-import model.store.LottoStore;
 import model.common.Money;
-import model.generator.RandomLottoMachine;
 import model.common.Score;
+import model.common.string.StringDelimiters;
 import model.common.string.StringSeparator;
+import model.generator.RandomLottoMachine;
 import model.generator.WinnerLottoGenerator;
+import model.store.LottoStore;
 import view.IncomeView;
 import view.InputView;
 import view.LottoPapersView;
@@ -43,7 +44,7 @@ public final class LottoGame {
 
 		Score score = lottoPapers.score(
 			WinnerLottoGenerator.of(
-				StringSeparator.of(InputView.inputWinningNumber(), ","),
+				StringSeparator.of(InputView.inputWinningNumber(), StringDelimiters.of(",")),
 				InputView.inputBonusBall(),
 				LOTTO_RULE
 			).lotto()

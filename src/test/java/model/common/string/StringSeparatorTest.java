@@ -7,8 +7,6 @@ import java.util.Collection;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import model.common.string.StringSeparator;
-
 @DisplayName("문자열 구분기")
 class StringSeparatorTest {
 
@@ -16,14 +14,14 @@ class StringSeparatorTest {
 	@DisplayName("객체화")
 	void instance() {
 		assertThatNoException()
-			.isThrownBy(() -> StringSeparator.of("test", ""));
+			.isThrownBy(() -> StringSeparator.of("test", StringDelimiters.of("")));
 	}
 
 	@Test
 	@DisplayName("나눠질 대상 없이 객체화하면 IllegalArgumentException")
 	void instance_nullTarget_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> StringSeparator.of(null, ""))
+			.isThrownBy(() -> StringSeparator.of(null, StringDelimiters.of("")))
 			.withMessage("'target' to be split must not be null");
 	}
 
@@ -32,14 +30,14 @@ class StringSeparatorTest {
 	void instance_nullDelimiter_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
 			.isThrownBy(() -> StringSeparator.of("", null))
-			.withMessage("'delimiter' must not be null");
+			.withMessage("'delimiters' must not be null");
 	}
 
 	@Test
 	@DisplayName("문자열 나누기")
 	void provide() {
 		//given, when
-		Collection<String> splitString = StringSeparator.of("1,2,3,4", ",").provide();
+		Collection<String> splitString = StringSeparator.of("1,2,3,4", StringDelimiters.of(",")).provide();
 
 		//then
 		assertThat(splitString)
