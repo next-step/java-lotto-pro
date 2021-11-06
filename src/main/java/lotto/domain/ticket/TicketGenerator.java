@@ -1,13 +1,10 @@
 package lotto.domain.ticket;
 
-import lotto.domain.number.LottoNumber;
-import lotto.dto.LottoNumbersDto;
+import java.util.*;
+import java.util.stream.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import lotto.domain.number.*;
+import lotto.dto.*;
 
 public class TicketGenerator {
     private static final int SUBLIST_START_INDEX = 0;
@@ -30,9 +27,9 @@ public class TicketGenerator {
     }
 
     public static List<Ticket> generateTickets(int numberOfTickets) {
-        return IntStream.range(0, numberOfTickets)
-            .mapToObj(e -> TicketGenerator.generate())
+        return Stream.generate(TicketGenerator::generate)
             .map(Ticket::from)
+            .limit(numberOfTickets)
             .collect(Collectors.toList());
     }
 
