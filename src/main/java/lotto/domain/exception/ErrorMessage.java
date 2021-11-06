@@ -1,4 +1,6 @@
-package lotto;
+package lotto.domain.exception;
+
+import lotto.domain.LottoProperty;
 
 public enum ErrorMessage {
 
