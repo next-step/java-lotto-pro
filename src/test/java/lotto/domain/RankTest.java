@@ -13,20 +13,21 @@ class RankTest {
 
     private static Stream<Arguments> rankingTest() {
         return Stream.of(
-                Arguments.of(0, Rank.MISS),
-                Arguments.of(1, Rank.MISS),
-                Arguments.of(2, Rank.MISS),
-                Arguments.of(3, Rank.FIFTH),
-                Arguments.of(4, Rank.FOURTH),
-                Arguments.of(5, Rank.THIRD),
-                Arguments.of(6, Rank.FIRST)
+                Arguments.of(0, false, Rank.MISS),
+                Arguments.of(1, false, Rank.MISS),
+                Arguments.of(2, false, Rank.MISS),
+                Arguments.of(3, false, Rank.FIFTH),
+                Arguments.of(4, false, Rank.FOURTH),
+                Arguments.of(5, false, Rank.THIRD),
+                Arguments.of(5, true, Rank.SECOND),
+                Arguments.of(6, false, Rank.FIRST)
         );
     }
 
     @ParameterizedTest
     @MethodSource
     @DisplayName("등수 체크 검증")
-    public void rankingTest(int countOfMatch, Rank rank) {
-        assertThat(Rank.valueOf(countOfMatch)).isEqualTo(rank);
+    public void rankingTest(int countOfMatch, boolean isBonusMatch, Rank rank) {
+        assertThat(Rank.valueOf(countOfMatch, isBonusMatch)).isEqualTo(rank);
     }
 }

@@ -36,7 +36,6 @@ public class LottoExecutor {
 
     private LottoNumbers enterWinningNumber() {
         LottoNumbers winningNumbers = lottoController.enterWinningLottoNumbers();
-        printLine();
         return winningNumbers;
     }
 

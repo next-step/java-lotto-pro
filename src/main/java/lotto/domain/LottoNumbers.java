@@ -68,6 +68,13 @@ public class LottoNumbers {
         return matchCounting;
     }
 
+    public boolean matchBonusNumber(LottoNumber bonusNumber) {
+        if (this.lottoNumbers.contains(bonusNumber)) {
+            return true;
+        }
+        return false;
+    }
+
     private int matchNumber(LottoNumber number) {
         if (this.lottoNumbers.contains(number)) {
             return 1;

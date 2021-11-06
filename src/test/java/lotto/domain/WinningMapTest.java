@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -51,6 +52,18 @@ class WinningMapTest {
         WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
 
         assertThat(winningMap.getWinningMap().equals(resultMap)).isTrue();
+    }
+
+    @Test
+    @DisplayName("2등 당첨 테스트")
+    public void secondRankTest() {
+        Winning winning = Winning.of(LottoNumbers.fromString("1,2,30,34,37,40"), 42);
+        WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
+        HashMap<Rank, Integer> resultRankMap = new HashMap<Rank, Integer>() {{
+            put(Rank.SECOND, 1);
+        }};
+
+        assertThat(winningMap.getWinningMap().equals(resultRankMap)).isTrue();
     }
 
     @ParameterizedTest

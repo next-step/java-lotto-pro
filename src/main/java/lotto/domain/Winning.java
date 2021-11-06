@@ -26,4 +26,8 @@ public class Winning {
     public LottoNumbers getWinningNumbers() {
         return winningNumbers;
     }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 }

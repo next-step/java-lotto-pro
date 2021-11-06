@@ -20,12 +20,26 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch) {
-        return Arrays.stream(values())
+    public static Rank valueOf(int countOfMatch, boolean isBonusMatch) {
+        Rank matchingRank = Arrays.stream(values())
                 .filter(rank -> rank.countOfMatch == countOfMatch)
                 .findFirst()
                 .orElse(Rank.MISS);
+
+        if (matchBonus(matchingRank, isBonusMatch)) {
+            return Rank.SECOND;
+        }
+
+        return matchingRank;
     }
+
+    private static boolean matchBonus(Rank rank, boolean isBonusMatch) {
+        if (rank.equals(Rank.THIRD) && isBonusMatch) {
+            return true;
+        }
+        return false;
+    }
+
 
     public static List<Rank> excludedMissList() {
         return Arrays.stream(values())
