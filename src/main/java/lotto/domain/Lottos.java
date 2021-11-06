@@ -29,7 +29,7 @@ public class Lottos {
 
     private void winningNumberSizeValid(List<Integer> winningNumbers) {
         if (winningNumbers.size() != LottoProperty.LOTTO_COUNT) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_WINNER_NUMBER_COUNT.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_WINNING_NUMBER_COUNT.getMessage());
         }
     }
 
