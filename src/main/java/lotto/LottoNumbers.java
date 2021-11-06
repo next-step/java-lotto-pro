@@ -17,6 +17,8 @@ public class LottoNumbers {
     public static final String LOTTO_NUMBERS_DESCRIPTION_CLOSE_BRACKET = "]";
     public static final String LOTTO_NUMBERS_DESCRIPTION_SPACE = " ";
     public static final int LOTTO_SIZE = 6;
+    private static final List<LottoNumber> randomLottoNumberPocket = generateRandomLottoNumberPocket();
+
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
@@ -37,14 +39,19 @@ public class LottoNumbers {
         generateLottoNumbersFromString(lottoNumbersString, separator);
     }
 
-    private void generateRandomLottoNumbers() {
-        List<LottoNumber> RandomLottoNumberPocket = new ArrayList<>();
+    private static List<LottoNumber> generateRandomLottoNumberPocket() {
+        List<LottoNumber> resultPocket = new ArrayList<>();
         for (int number = LottoNumber.MIN_BOUND; number <= LottoNumber.MAX_BOUND; number++) {
-            RandomLottoNumberPocket.add(new LottoNumber(number));
+            resultPocket.add(new LottoNumber(number));
         }
-        Collections.shuffle(RandomLottoNumberPocket);
+
+        return resultPocket;
+    }
+
+    private void generateRandomLottoNumbers() {
+        Collections.shuffle(randomLottoNumberPocket);
         for (int index = 0; index < LOTTO_SIZE; index++) {
-            LottoNumber randomNumber = RandomLottoNumberPocket.get(index);
+            LottoNumber randomNumber = randomLottoNumberPocket.get(index);
             lottoNumbers.add(randomNumber);
         }
     }
@@ -71,23 +78,6 @@ public class LottoNumbers {
         return new LottoResult(getMatchCount(prizeLottoNumbers));
     }
 
-    private void addElementForMakingString(StringBuilder result, Set<LottoNumber> lottoNumbers) {
-        List<LottoNumber> sortedLottoNumbers = lottoNumbers.stream()
-                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
-                .collect(Collectors.toList());
-        int index = 0;
-        int lastIndex = sortedLottoNumbers.size() - 1;
-        for (LottoNumber lottoNumber : sortedLottoNumbers) {
-            result.append(lottoNumber.toString());
-            if (index == lastIndex) {
-                break;
-            }
-            result.append(LOTTO_NUMBERS_BASE_SEPARATOR)
-                    .append(LOTTO_NUMBERS_DESCRIPTION_SPACE);
-            index++;
-        }
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,5 +98,26 @@ public class LottoNumbers {
         addElementForMakingString(result, lottoNumbers);
         result.append(LOTTO_NUMBERS_DESCRIPTION_CLOSE_BRACKET);
         return result.toString();
+    }
+
+    private void addElementForMakingString(StringBuilder result, Set<LottoNumber> lottoNumbers) {
+        List<LottoNumber> sortedLottoNumbers = convertSetToSortedLottoNumbersList(lottoNumbers);
+        int index = 0;
+        int lastIndex = sortedLottoNumbers.size() - 1;
+        for (LottoNumber lottoNumber : sortedLottoNumbers) {
+            result.append(lottoNumber.toString());
+            if (index == lastIndex) {
+                break;
+            }
+            result.append(LOTTO_NUMBERS_BASE_SEPARATOR)
+                    .append(LOTTO_NUMBERS_DESCRIPTION_SPACE);
+            index++;
+        }
+    }
+
+    private List<LottoNumber> convertSetToSortedLottoNumbersList(Set<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
+                .collect(Collectors.toList());
     }
 }
