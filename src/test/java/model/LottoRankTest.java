@@ -11,10 +11,10 @@ class LottoRankTest {
 
 	@ParameterizedTest(name = "{displayName}[{index}] when the match count is {0}, rank is {1}")
 	@DisplayName("일치 갯수에 따른 순위")
-	@CsvSource({"0,NONE", "1,NONE", "2,NONE", "3,FOURTH", "4,THIRD", "5,SECOND", "6,FIRST"})
-	void valueOfMatchCount(int matchCount, LottoRank expected) {
+	@CsvSource({"0,NONE", "1,NONE", "2,NONE", "3,FIFTH", "4,FOURTH", "5,THIRD", "6,FIRST"})
+	void byMatchCountAndBonus(int matchCount, LottoRank expected) {
 		//when, then
-		assertThat(LottoRank.valueOfMatchCount(matchCount))
+		assertThat(LottoRank.byMatchCountAndBonus(matchCount, false))
 			.isEqualTo(expected);
 	}
 }

@@ -2,7 +2,7 @@ package view;
 
 import java.io.PrintStream;
 
-import model.Income;
+import model.common.Income;
 
 public final class IncomeView {
 

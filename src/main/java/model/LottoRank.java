@@ -1,47 +1,44 @@
 package model;
 
 import java.util.Arrays;
+import java.util.function.BiPredicate;
 
 public enum LottoRank {
 
-	FIRST(6, 2_000_000_000),
-	SECOND(5, 1_500_000),
-	THIRD(4, 50_000),
-	FOURTH(3, 5_000),
-	NONE(0, 0);
+	FIRST(6, 2_000_000_000, (count, isMatchedBonus) -> count == 6),
+	SECOND(5, 30_000_000, (count, isMatchedBonus) -> count == 5 && isMatchedBonus),
+	THIRD(5, 1_500_000, (count, isMatchedBonus) -> count == 5 && !isMatchedBonus),
+	FOURTH(4, 50_000, (count, isMatchedBonus) -> count == 4),
+	FIFTH(3, 5_000, (count, isMatchedBonus) -> count == 3),
+	NONE(0, 0, (count, isMatchedBonus) -> count <= 2);
 
 	private final int matchCount;
 	private final int prizeMoney;
+	private final BiPredicate<Integer, Boolean> condition;
 
-	LottoRank(int matchCount, int prizeMoney) {
+	LottoRank(int matchCount, int prizeMoney, BiPredicate<Integer, Boolean> condition) {
 		this.matchCount = matchCount;
 		this.prizeMoney = prizeMoney;
+		this.condition = condition;
 	}
 
-	static LottoRank valueOfMatchCount(int matchCount) {
+	public static LottoRank byMatchCountAndBonus(int matchCount, boolean isMatchedBonus) {
 		return Arrays.stream(LottoRank.values())
-			.filter(lottoRank -> lottoRank.equalsMatchCount(matchCount))
+			.filter(lottoRank -> lottoRank.condition.test(matchCount, isMatchedBonus))
 			.findFirst()
 			.orElse(NONE);
 	}
 
-	public int matchCount() {
-		return matchCount;
-	}
-
 	@Override
 	public String toString() {
-		return "LottoRank{" +
-			"matchCount=" + matchCount +
-			", prizeMoney=" + prizeMoney +
-			'}';
+		String bonusMatchString = "";
+		if (this == SECOND) {
+			bonusMatchString = ", 보너스 볼 일치";
+		}
+		return String.format("%d개 일치%s(%d원)", this.matchCount, bonusMatchString, this.prizeMoney);
 	}
 
-	public int prizeMoney() {
-		return prizeMoney;
-	}
-
-	private boolean equalsMatchCount(int matchCount) {
-		return this.matchCount == matchCount;
+	public int multipliedPrizeMoney(int count) {
+		return prizeMoney * count;
 	}
 }

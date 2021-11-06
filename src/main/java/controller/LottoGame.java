@@ -1,17 +1,18 @@
 package controller;
 
-import model.Income;
-import model.LottoRule;
-import model.LottoStore;
-import model.Lottos;
-import model.Money;
-import model.RandomLottoMachine;
-import model.Score;
-import model.StringSeparator;
-import model.WinnerLottoGenerator;
+import model.LottoPapers;
+import model.common.Income;
+import model.common.LottoRule;
+import model.common.Money;
+import model.common.Score;
+import model.common.string.StringDelimiters;
+import model.common.string.StringSeparator;
+import model.generator.RandomLottoMachine;
+import model.generator.WinnerLottoGenerator;
+import model.store.LottoStore;
 import view.IncomeView;
 import view.InputView;
-import view.LottosView;
+import view.LottoPapersView;
 import view.ScoreView;
 
 public final class LottoGame {
@@ -22,7 +23,7 @@ public final class LottoGame {
 	private static final LottoRule LOTTO_RULE = LottoRule.of(1, 45, 6);
 
 	private static final IncomeView incomeView = IncomeView.from(System.out);
-	private static final LottosView lottoView = LottosView.from(System.out);
+	private static final LottoPapersView lottoView = LottoPapersView.from(System.out);
 	private static final ScoreView scoreView = ScoreView.from(System.out);
 
 	private LottoGame() {
@@ -33,19 +34,23 @@ public final class LottoGame {
 	}
 
 	public void play() {
-		Lottos lottos = LottoStore.of(
+		LottoPapers lottoPapers = LottoStore.of(
 			Money.from(InputView.inputPurchaseAmount()),
 			LOTTO_PRICE,
 			RandomLottoMachine.from(LOTTO_RULE)
-		).lottos();
+		).lottoPapers();
 
-		lottoView.view(lottos);
+		lottoView.view(lottoPapers);
 
-		Score score = lottos.score(
+		Score score = lottoPapers.score(
 			WinnerLottoGenerator.of(
-				StringSeparator.of(InputView.inputWinningNumber(), ","), LOTTO_RULE));
+				StringSeparator.of(InputView.inputWinningNumber(), StringDelimiters.of(",")),
+				InputView.inputBonusBall(),
+				LOTTO_RULE
+			).lotto()
+		);
 
 		scoreView.view(score);
-		incomeView.view(Income.of(LOTTO_PRICE, lottos.size(), score.prizeMoney()));
+		incomeView.view(Income.of(LOTTO_PRICE, lottoPapers.size(), score.prizeMoney()));
 	}
 }
