@@ -10,6 +10,10 @@ public class Bonus {
         this.bonus = Integer.parseInt(number);
     }
 
+    public Bonus(int bonus) {
+        this.bonus = bonus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

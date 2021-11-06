@@ -21,7 +21,8 @@ public class LottoGame {
         LottoView.displayLottos(lottos);
 
         final Lotto winningLotto = LottoView.getWinningLotto();
-        final List<Rank> ranks = lottos.match(winningLotto, new Bonus("6"));
+        final Bonus bonus = LottoView.getBonusBall();
+        final List<Rank> ranks = lottos.match(winningLotto, bonus);
 
         LottoView.displayStatic(new Result(ranks, money));
     }

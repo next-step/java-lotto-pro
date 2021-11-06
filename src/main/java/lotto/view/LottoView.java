@@ -51,4 +51,9 @@ public class LottoView {
             System.out.printf("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }
+
+    public static Bonus getBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return new Bonus(scanner.nextInt());
+    }
 }
