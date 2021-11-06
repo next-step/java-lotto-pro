@@ -26,20 +26,16 @@ public class Lottos {
         return new Lottos(Arrays.asList(lottos));
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     public int size() {
         return lottos.size();
     }
 
     public WinResults getWinResults(Lotto winNumber) {
         return WinResults.of(lottos, winNumber);
-    }
-
-    public Prints getLottosPrints() {
-        Prints prints = new Prints();
-        for (Lotto lotto : lottos) {
-            prints.append(lotto.toString());
-        }
-        return prints;
     }
 
     @Override

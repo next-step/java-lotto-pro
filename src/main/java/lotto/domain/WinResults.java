@@ -33,6 +33,14 @@ public class WinResults {
                 .count();
     }
 
+    public long getProceeds() {
+        long proceeds = 0;
+        for (WinResult winResult : winResults) {
+            proceeds += winResult.getPrize();
+        }
+        return proceeds;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,13 +52,5 @@ public class WinResults {
     @Override
     public int hashCode() {
         return Objects.hash(winResults);
-    }
-
-    public long getProceeds() {
-        long proceeds = 0;
-        for (WinResult winResult : winResults) {
-            proceeds += winResult.getPrize();
-        }
-        return proceeds;
     }
 }

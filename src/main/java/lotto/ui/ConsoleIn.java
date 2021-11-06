@@ -32,7 +32,7 @@ public class ConsoleIn {
 
     private static PurchaseAmount getPurchaseAmount() {
         try {
-            String input = input("구입 금액을 입력해 주세요.");
+            String input = input(Message.PURCHASE_AMOUNT_INPUT.getMessage());
             checkDigit(input);
             return new PurchaseAmount(Integer.parseInt(input));
         } catch (IllegalArgumentException e) {
@@ -43,7 +43,7 @@ public class ConsoleIn {
 
     private static Lotto getWinNumber() {
         try {
-            String input = input("지난 주 당첨 번호를 입력해 주세요.");
+            String input = input(Message.WIN_NUMBER_INPUT.getMessage());
             List<String> tokens = Arrays.stream(input.split(","))
                     .map(String::trim)
                     .collect(Collectors.toList());
@@ -72,7 +72,7 @@ public class ConsoleIn {
 
     private static void checkDigit(String input) {
         if (!isDigit(input)) {
-            throw new IllegalArgumentException("숫자만 입력해주세요.");
+            throw new IllegalArgumentException(Message.NOT_DIGIT_ERROR.getMessage());
         }
     }
 

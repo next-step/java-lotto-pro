@@ -30,10 +30,10 @@ public class Lotto {
     private void validate(List<Integer> numbers) {
         if (isIncorrectSize(numbers)) {
             throw new IllegalArgumentException(
-                    String.format(Message.LOTTO_NUMBER_SIZE_ERROR.getMessage(), LOTTO_NUMBERS_SIZE));
+                    String.format(ErrorMessage.LOTTO_NUMBER_SIZE_ERROR.getMessage(), LOTTO_NUMBERS_SIZE));
         }
         if (isDuplicated(numbers)) {
-            throw new IllegalArgumentException(Message.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
         }
     }
 

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
-
 public class LottoCalculator {
 
     public static final int LOTTO_PRICE = 1_000;
@@ -14,6 +12,14 @@ public class LottoCalculator {
         this.lottos = Lottos.fromQuantity(purchaseAmount.getQuantity());
     }
 
+    public Lottos getLottos() {
+        return lottos;
+    }
+
+    public WinResults getWinResults() {
+        return winResults;
+    }
+
     public void calculate(Lotto winNumber) {
         this.winResults = lottos.getWinResults(winNumber);
     }
@@ -22,42 +28,7 @@ public class LottoCalculator {
         return lottos.size();
     }
 
-    public Prints getLottosPrints() {
-        Prints prints = new Prints();
-        prints.append(String.format(Message.LOTTOS_PRINT.getMessage(), getLottosSize()));
-        prints.append(lottos.getLottosPrints());
-        return prints;
-    }
-
-    public Prints getStatsPrints() {
-        Prints prints = new Prints();
-        appendWinResults(prints);
-        appendProceeds(prints);
-        return prints;
-    }
-
-    private void appendWinResults(Prints prints) {
-        Arrays.stream(WinResult.values())
-                .filter(winResult -> winResult != WinResult.NOT_MATCHED)
-                .forEach(winResult -> getWinResultsMessage(prints, winResult));
-    }
-
-    private void getWinResultsMessage(Prints prints, WinResult winResult) {
-        prints.append(String.format(Message.WIN_RESULTS_PRINT.getMessage(),
-                winResult.getCount(), winResult.getPrize(), winResults.getCount(winResult.getCount())));
-    }
-
-    private void appendProceeds(Prints prints) {
-        float proceedsRate = (float) winResults.getProceeds() / ((float) getLottosSize() * LOTTO_PRICE);
-        String comment = getComment(proceedsRate);
-        prints.append(String.format(Message.PROCEEDS_PRINT.getMessage(), proceedsRate, comment));
-    }
-
-    private String getComment(float proceedsRate) {
-        String comment = "";
-        if (proceedsRate < PROFIT_RATE) {
-            comment = Message.PROCEEDS_COMMENT.getMessage();
-        }
-        return comment;
+    public float getProceedsRate() {
+        return (float) winResults.getProceeds() / ((float) getLottosSize() * LOTTO_PRICE);
     }
 }

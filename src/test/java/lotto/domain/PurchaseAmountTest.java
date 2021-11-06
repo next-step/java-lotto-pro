@@ -30,6 +30,6 @@ class PurchaseAmountTest {
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new PurchaseAmount(amount))
-                .withMessageMatching(Message.PURCHASE_AMOUNT_MIN_ERROR.getMessageForTest());
+                .withMessageMatching(ErrorMessage.PURCHASE_AMOUNT_MIN_ERROR.getMessageForTest());
     }
 }

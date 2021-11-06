@@ -18,7 +18,7 @@ public class PurchaseAmount {
     private void validate(int amount) {
         if (amount < LottoCalculator.LOTTO_PRICE) {
             throw new IllegalArgumentException(
-                    String.format(Message.PURCHASE_AMOUNT_MIN_ERROR.getMessage(), LottoCalculator.LOTTO_PRICE));
+                    String.format(ErrorMessage.PURCHASE_AMOUNT_MIN_ERROR.getMessage(), LottoCalculator.LOTTO_PRICE));
         }
     }
 
