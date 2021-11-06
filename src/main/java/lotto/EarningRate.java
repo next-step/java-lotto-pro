@@ -1,14 +1,16 @@
 package lotto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 import view.Printable;
 
 public class EarningRate implements Printable {
-    private final double rate;
+    private final BigDecimal rate;
 
-    public EarningRate(double rate) {
-        this.rate = rate;
+    public EarningRate(BigDecimal rate) {
+        this.rate = rate.setScale(2, RoundingMode.HALF_UP);
     }
 
     @Override
@@ -20,7 +22,7 @@ public class EarningRate implements Printable {
             return false;
         }
         EarningRate that = (EarningRate)o;
-        return Double.compare(that.rate, rate) == 0;
+        return Objects.equals(rate, that.rate);
     }
 
     @Override

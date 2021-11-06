@@ -1,5 +1,6 @@
 package lotto;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,11 +20,11 @@ public class LottoMoney implements Printable {
     }
 
     public static EarningRate calculateEarningRate(List<LottoMoney> lottoMoneyList) {
-        Long sum = lottoMoneyList.stream()
+        long sum = lottoMoneyList.stream()
             .mapToLong(lottoMoney -> lottoMoney.money)
-            .reduce(0L, (Long::sum));
+            .sum();
 
-        return new EarningRate((double)sum / lottoMoneyList.size() / LOTTO_PRICE);
+        return new EarningRate(BigDecimal.valueOf((double)sum / lottoMoneyList.size() / LOTTO_PRICE));
     }
 
     public LottoCount calculateLottoCount() {

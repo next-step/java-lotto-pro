@@ -2,6 +2,7 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.DisplayName;
@@ -36,7 +37,7 @@ class LottoMoneyTest {
     @Test
     void calculateEarningRate_success() {
         assertThat(LottoMoney.calculateEarningRate(Arrays.asList(new LottoMoney(5000), new LottoMoney(150000))))
-            .isEqualTo(new EarningRate(77.5));
+            .isEqualTo(new EarningRate(BigDecimal.valueOf(77.5)));
     }
 
     @DisplayName("로또 돈 메시지 출력 테스트")
