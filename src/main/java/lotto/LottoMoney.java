@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoMoney {
@@ -12,6 +13,14 @@ public class LottoMoney {
 
     public LottoMoney(long money) {
         this.money = money;
+    }
+
+    public static EarningRate calculateEarningRate(List<LottoMoney> lottoMoneyList) {
+        Long sum = lottoMoneyList.stream()
+            .mapToLong(lottoMoney -> lottoMoney.money)
+            .reduce(0L, (Long::sum));
+
+        return new EarningRate((double)sum / lottoMoneyList.size() / LOTTO_PRICE);
     }
 
     public LottoCount calculateLottoCount() {

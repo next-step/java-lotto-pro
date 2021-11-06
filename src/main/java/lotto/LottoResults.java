@@ -31,4 +31,10 @@ public class LottoResults {
     public int hashCode() {
         return Objects.hash(resultCounts);
     }
+
+    public EarningRate calculateEarningRate() {
+        return LottoMoney.calculateEarningRate(resultCounts.entrySet().stream()
+            .map(entry -> entry.getKey().calculateMultipleMoney(entry.getValue()))
+            .collect(toList()));
+    }
 }

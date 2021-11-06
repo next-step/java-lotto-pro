@@ -2,6 +2,8 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,5 +30,12 @@ class LottoMoneyTest {
     @ValueSource(ints = {1, 2, 3})
     void calculateMultiple_success(int multiple) {
         assertThat(new LottoMoney(5000).calculateMultiple(multiple)).isEqualTo(new LottoMoney(5000 * multiple));
+    }
+
+    @DisplayName("수익률 계산 테스트")
+    @Test
+    void calculateEarningRate_success() {
+        assertThat(LottoMoney.calculateEarningRate(Arrays.asList(new LottoMoney(5000), new LottoMoney(150000))))
+            .isEqualTo(new EarningRate(77.5));
     }
 }
