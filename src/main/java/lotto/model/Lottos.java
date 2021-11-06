@@ -1,10 +1,6 @@
 package lotto.model;
 
-import lotto.model.Lotto;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Lottos {
 
@@ -22,16 +18,27 @@ public class Lottos {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < lottoList.size(); i++) {
-            stringBuilder.append(lottoList.get(i).toString()+"\n");
+            stringBuilder.append(lottoList.get(i).toString() + "\n");
         }
         return stringBuilder.toString();
     }
 
-    public List<Rank> matchResult(Lotto winLotto) {
-        List<Rank> result = new ArrayList<>();
+    public Map<Rank, Integer> matchResult(Lotto winLotto) {
+        Map<Rank, Integer> result = createResultMap();
         for (int i = 0; i < size(); i++) {
-            result.add(winLotto.matchNumber(lottoList.get(i)));
+            Rank rank = winLotto.matchNumber(lottoList.get(i));
+            result.put(rank, result.get(rank) + 1);
         }
         return result;
     }
+
+    private Map<Rank, Integer> createResultMap() {
+        Map<Rank, Integer> result = new LinkedHashMap<>();
+        Rank[] ranks = Rank.values();
+        for (int i = 0; i < ranks.length; i++) {
+            result.put(ranks[i], 0);
+        }
+        return result;
+    }
+
 }
