@@ -19,8 +19,7 @@ public class LottoTicket {
 		this.lottoNumbers = lottoNumber;
 	}
 
-	public LottoTicket() {
-		this(LottoNumbersMaker.makeLottoNumbers());
+	private LottoTicket() {
 	}
 
 	public List<LottoNumber> getLottoNumbers() {

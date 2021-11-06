@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 import lottoservice.exception.NotDivisibleMoneyUnitException;
 import lottoservice.exception.NotEnoughtMoneyException;
 import lottoservice.exception.InvalidNumberFormatMoneyException;
+import lottoservice.lottonumber.LottoNumbersMaker;
 
 /**
  * 로또 티켓 발급 클래스
@@ -37,7 +38,7 @@ public class LottoTicketIssuer {
 
 	private static List<LottoTicket> issuTickets(int numOfTickets) {
 		return IntStream.range(0, numOfTickets)
-			.mapToObj((it)->new LottoTicket())
+			.mapToObj((it)->new LottoTicket(LottoNumbersMaker.makeLottoNumbers()))
 			.collect(Collectors.toList());
 	}
 

@@ -6,6 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
+import lottoservice.lottonumber.LottoNumbersMaker;
 import lottoservice.lottoticket.LottoTicket;
 
 public class LottoTicketTest {
@@ -17,7 +18,7 @@ public class LottoTicketTest {
 	@Test
 	@RepeatedTest(10)
 	public void makeLottoTicket_로또_티켓_한장_발급() {
-		LottoTicket lottoTicket = new LottoTicket();
+		LottoTicket lottoTicket = new LottoTicket(LottoNumbersMaker.makeLottoNumbers());
 
 		Assertions.assertThat(lottoTicket.getNumOfNumbersInGroup())
 			.isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
