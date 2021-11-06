@@ -16,6 +16,7 @@ public class GameMessage {
     public static final String ERROR_BUY_PRICE_INPUT = String.format("로또금액은 최소 %d원 이상이어야 합니다.", GameRule.LOTTO_PAPER_PRICE);
     public static final String ERROR_LOTTO_NUMBER_INPUT = String.format("로또는 %d 개의 숫자로 입력이 필요합니다.", GameRule.LOTTO_END_INDEX);
 
+    public static final String ERROR_LOTTO_NUMBER_DUPLICATION_INPUT = "로또 번호가 중복되었습니다.";
     public static String invalidInputMsg(String msg) {
         return String.format("%s %s", GameMessage.ERR_MSG, msg);
     }
