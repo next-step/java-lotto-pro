@@ -16,9 +16,9 @@ public class LottoRanksTest {
 
 	public static Stream<Arguments> givenGetTotalPrizeTest() {
 		return Stream.of(
-			Arguments.of(Arrays.asList(Rank.SECOND, Rank.FIFTH), 30005000),
-			Arguments.of(Arrays.asList(Rank.FIFTH, Rank.FIFTH), 10000),
-			Arguments.of(Arrays.asList(Rank.FIRST, Rank.SECOND), 2030000000)
+			Arguments.of(Arrays.asList(Rank.SECOND, Rank.FIFTH), 30_005_000),
+			Arguments.of(Arrays.asList(Rank.FIFTH, Rank.FIFTH), 10_000),
+			Arguments.of(Arrays.asList(Rank.FIRST, Rank.SECOND), 2_030_000_000)
 		);
 	}
 
