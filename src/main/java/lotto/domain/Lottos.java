@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.ErrorMessage;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -12,6 +14,8 @@ public class Lottos {
     }
 
     public WinningResult winningResult(List<Integer> winningNumbers) {
+        winningNumberSizeValid(winningNumbers);
+
         Map<Rank, Integer> winningResult = new EnumMap<>(Rank.class);
 
         for (Lotto lotto : lottos) {
@@ -21,6 +25,12 @@ public class Lottos {
             }
         }
         return new WinningResult(winningResult);
+    }
+
+    private void winningNumberSizeValid(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != LottoProperty.LOTTO_COUNT) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_WINNER_NUMBER_COUNT.getMessage());
+        }
     }
 
     private void winningResultAccumulate(Map<Rank, Integer> winningResult, int winningNumberMatchCount) {
