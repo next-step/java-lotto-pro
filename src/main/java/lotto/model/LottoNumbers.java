@@ -13,13 +13,13 @@ public class LottoNumbers {
 
     private final SortedSet<Number> numbers;
 
+    public LottoNumbers(int... numbers) {
+        this(() -> Arrays.stream(numbers).mapToObj(Number::new).collect(Collectors.toSet()));
+    }
+
     public LottoNumbers(NumberSupplier numberSupplier) {
         this.numbers = Collections.unmodifiableSortedSet(new TreeSet<>(numberSupplier.getNumbers()));
         validate();
-    }
-
-    public LottoNumbers(int... numbers) {
-        this(() -> Arrays.stream(numbers).mapToObj(Number::new).collect(Collectors.toSet()));
     }
 
     private void validate() {

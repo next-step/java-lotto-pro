@@ -5,8 +5,12 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class LottoNumberGeneratorTest {
+    private static final int PAYMENT = 14000;
+
     @Test
     void getLottoNumbersCollection() {
-        assertThat(new LottoNumberGenerator(14000).getLottoNumbersCollection()).hasSize(14000 / Payment.LOTTO_PRICE);
+        assertThat(
+            new LottoNumberGenerator(PAYMENT).getLottoNumbersCollection()
+        ).hasSize(PAYMENT / Payment.LOTTO_PRICE);
     }
 }

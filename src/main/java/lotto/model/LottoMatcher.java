@@ -8,8 +8,8 @@ public class LottoMatcher {
     private final Payment payment;
     private final LottoNumbers winningNumbers;
 
-    public LottoMatcher(int money, int... winningNumbers) {
-        this.payment = new Payment(money);
+    public LottoMatcher(int payment, int... winningNumbers) {
+        this.payment = new Payment(payment);
         this.winningNumbers = new LottoNumbers(winningNumbers);
     }
 

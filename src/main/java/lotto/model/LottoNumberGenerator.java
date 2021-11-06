@@ -13,8 +13,8 @@ public class LottoNumberGenerator {
 
     private final Payment payment;
 
-    public LottoNumberGenerator(int money) {
-        this.payment = new Payment(money);
+    public LottoNumberGenerator(int payment) {
+        this.payment = new Payment(payment);
     }
 
     public Collection<LottoNumbers> getLottoNumbersCollection() {
