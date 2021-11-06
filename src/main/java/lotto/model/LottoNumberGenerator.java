@@ -1,10 +1,7 @@
 package lotto.model;
 
-import lotto.model.LottoNumber;
-import lotto.model.LottoPaper;
-import lotto.util.GameRule;
-import lotto.view.GameMessage;
 
+import lotto.util.GameRule;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,18 +31,9 @@ public class LottoNumberGenerator {
     public LottoPaper createWinningNumber(String input) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         Arrays.asList(input.split(GameRule.LOTTO_NUMBER_DELIMITER))
-                .forEach(number -> lottoNumbers.add(new LottoNumber(parseLottoNumber(number))) );
+                .forEach(number -> lottoNumbers.add(new LottoNumber(number)) );
 
         return new LottoPaper(lottoNumbers);
     }
-
-    private int parseLottoNumber(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_WINNING_NUMBER_INPUT));
-        }
-    }
-
 
 }
