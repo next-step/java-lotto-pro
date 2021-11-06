@@ -56,7 +56,8 @@ public class LottoController {
 
     private void inputWinLotto() {
         String winLottoText = Console.readLine();
-        winLotto = LottoCreateFactory.createLotto(winLottoText);
+        int[] winLottoNumbers = InputHandler.splitTextToInts(winLottoText);
+        winLotto = LottoCreateFactory.createLotto(winLottoNumbers);
         printStatsMessage();
     }
 

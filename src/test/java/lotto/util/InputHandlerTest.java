@@ -33,4 +33,12 @@ public class InputHandlerTest {
         }).isInstanceOf(NumberFormatException.class)
                 .hasMessageContaining(ErrorMessage.NUMBER_FORMAT_ERROR);
     }
+
+    @DisplayName("문자열을 나눠서 로또 int배열로 만드는 기능")
+    @Test
+    void splitTextToInts() {
+        int [] numbers = InputHandler.splitTextToInts("1, 2, 3, 4, 5, 6");
+
+        assertThat(numbers.length).isEqualTo(6);
+    }
 }

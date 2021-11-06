@@ -20,4 +20,17 @@ public class InputHandler {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_MAX_BUY_ERROR);
         }
     }
+
+    public static int[] splitTextToInts(String numbersText) {
+        String[] splitedNumbers = numbersText.split(ConstantString.SEPARATOR);
+         return mapToInts(splitedNumbers);
+    }
+
+    private static int[] mapToInts(String[] splitedNumbers) {
+        int[] result = new int[splitedNumbers.length];
+        for (int i = 0; i < splitedNumbers.length; i++) {
+            result[i] = Integer.parseInt(splitedNumbers[i]);
+        }
+        return result;
+    }
 }

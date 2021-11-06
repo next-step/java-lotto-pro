@@ -2,6 +2,7 @@ package lotto.service;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
+import lotto.util.InputHandler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +29,7 @@ public class LottoCreateFactoryTest {
     @Test
     void createWinLottos() {
         String text = "1, 2, 3, 4, 5, 6";
-        Lotto lotto = LottoCreateFactory.createLotto(text);
+        Lotto lotto = LottoCreateFactory.createLotto(InputHandler.splitTextToInts(text));
         assertThat(lotto.size()).isEqualTo(LOTTO_SIZE);
         assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
 

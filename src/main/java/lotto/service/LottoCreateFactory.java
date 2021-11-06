@@ -46,17 +46,8 @@ public class LottoCreateFactory {
         return new Lottos(lottoArray);
     }
 
-    public static Lotto createLotto(String numbersText) {
-        String[] splitedNumbers = numbersText.split(ConstantString.SEPARATOR);
-        int[] numbers = mapToInts(splitedNumbers);
+    public static Lotto createLotto(int[] numbers) {
         return new Lotto(numbers);
     }
 
-    private static int[] mapToInts(String[] splitedNumbers) {
-        int[] result = new int[splitedNumbers.length];
-        for (int i = 0; i < splitedNumbers.length; i++) {
-            result[i] = Integer.parseInt(splitedNumbers[i]);
-        }
-        return result;
-    }
 }
