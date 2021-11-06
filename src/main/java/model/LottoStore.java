@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import utility.Assert;
+
 public final class LottoStore {
 
 	private final Money initialMoney;
@@ -10,9 +12,9 @@ public final class LottoStore {
 	private final LottoGenerator<LottoPaper> lottoGenerator;
 
 	private LottoStore(Money initialMoney, Money price, LottoGenerator<LottoPaper> lottoGenerator) {
-		validateNonNull(initialMoney, "'initialMoney' must not be null");
-		validateNonNull(price, "'price' must not be null");
-		validateNonNull(lottoGenerator, "'lottoGenerator' must not be null");
+		Assert.notNull(initialMoney, "'initialMoney' must not be null");
+		Assert.notNull(price, "'price' must not be null");
+		Assert.notNull(lottoGenerator, "'lottoGenerator' must not be null");
 		this.initialMoney = initialMoney;
 		this.price = price;
 		this.lottoGenerator = lottoGenerator;
@@ -44,11 +46,5 @@ public final class LottoStore {
 			lottoCollection.add(lottoGenerator.lotto());
 		}
 		return lottoCollection;
-	}
-
-	private void validateNonNull(Object object, String message) {
-		if (object == null) {
-			throw new IllegalArgumentException(message);
-		}
 	}
 }

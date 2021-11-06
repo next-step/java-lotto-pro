@@ -2,6 +2,8 @@ package model;
 
 import java.math.BigDecimal;
 
+import utility.Assert;
+
 public final class Income {
 
 	private final Money lottoPrice;
@@ -9,9 +11,9 @@ public final class Income {
 	private final Money prizeMoney;
 
 	private Income(Money lottoPrice, int purchaseCount, Money prizeMoney) {
-		validateLottoPrice(lottoPrice);
-		validatePurchaseCount(purchaseCount);
-		validatePrizeMoney(prizeMoney);
+		Assert.notNull(lottoPrice, "'lottoPrice' must not be null");
+		Assert.notNull(prizeMoney, "'prizeMoney' must not be null");
+		Assert.isTrue(positive(purchaseCount), "'purchaseCount' must be positive");
 		this.lottoPrice = lottoPrice;
 		this.purchaseCount = purchaseCount;
 		this.prizeMoney = prizeMoney;
@@ -34,25 +36,7 @@ public final class Income {
 			'}';
 	}
 
-	private void validatePrizeMoney(Money prizeMoney) {
-		if (prizeMoney == null) {
-			throw new IllegalArgumentException("'prizeMoney' must not be null");
-		}
-	}
-
-	private void validatePurchaseCount(int purchaseCount) {
-		if (negative(purchaseCount)) {
-			throw new IllegalArgumentException("'purchaseCount' must be positive");
-		}
-	}
-
-	private boolean negative(int purchaseCount) {
-		return purchaseCount < 0;
-	}
-
-	private void validateLottoPrice(Money lottoPrice) {
-		if (lottoPrice == null) {
-			throw new IllegalArgumentException("'lottoPrice' must not be null");
-		}
+	private boolean positive(int purchaseCount) {
+		return purchaseCount > 0;
 	}
 }

@@ -2,6 +2,8 @@ package model;
 
 import java.util.HashSet;
 
+import utility.Assert;
+
 public final class WinnerLottoGenerator implements LottoGenerator<WinnerLotto> {
 
 	private final StringsProvider provider;
@@ -11,9 +13,9 @@ public final class WinnerLottoGenerator implements LottoGenerator<WinnerLotto> {
 	private WinnerLotto cachedLotto;
 
 	private WinnerLottoGenerator(StringsProvider provider, String bonus, LottoRule rule) {
-		validateNonNull(provider, "'stringsProvider' must not be null");
-		validateNonNull(bonus, "'bonus' must not be null");
-		validateNonNull(rule, "'rule' must not be null");
+		Assert.notNull(provider, "'stringsProvider' must not be null");
+		Assert.notNull(bonus, "'bonus' must not be null");
+		Assert.notNull(rule, "'rule' must not be null");
 		this.provider = provider;
 		this.bonus = bonus;
 		this.rule = rule;
@@ -78,12 +80,6 @@ public final class WinnerLottoGenerator implements LottoGenerator<WinnerLotto> {
 			return Integer.parseInt(stringNumber);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(String.format("'%s' can not be changed to number", stringNumber), e);
-		}
-	}
-
-	private void validateNonNull(Object target, String message) {
-		if (target == null) {
-			throw new IllegalArgumentException(message);
 		}
 	}
 }

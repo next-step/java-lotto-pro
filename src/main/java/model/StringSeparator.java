@@ -4,14 +4,16 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
+import utility.Assert;
+
 public final class StringSeparator implements StringsProvider {
 
 	private final String target;
 	private final String delimiter;
 
 	private StringSeparator(String target, String delimiter) {
-		validateTarget(target);
-		validateDelimiter(delimiter);
+		Assert.notNull(target, "'target' to be split must not be null");
+		Assert.notNull(delimiter, "'delimiter' must not be null");
 		this.target = target;
 		this.delimiter = delimiter;
 	}
@@ -31,17 +33,5 @@ public final class StringSeparator implements StringsProvider {
 			"target='" + target + '\'' +
 			", delimiter='" + delimiter + '\'' +
 			'}';
-	}
-
-	private void validateDelimiter(String delimiter) {
-		if (delimiter == null) {
-			throw new IllegalArgumentException("'delimiter' must not be null");
-		}
-	}
-
-	private void validateTarget(String target) {
-		if (target == null) {
-			throw new IllegalArgumentException("'target' to be split must not be null");
-		}
 	}
 }

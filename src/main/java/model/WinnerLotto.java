@@ -1,5 +1,7 @@
 package model;
 
+import utility.Assert;
+
 public final class WinnerLotto implements Lotto {
 
 	private final LottoNumbers lottoNumbers;
@@ -7,9 +9,10 @@ public final class WinnerLotto implements Lotto {
 	private final LottoNumber bonusNumber;
 
 	private WinnerLotto(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
-		validateNull(lottoNumbers, "'lottoNumbers' must not be null");
-		validateNull(bonusNumber, "'bonusNumber' must not be null");
-		validateDuplication(lottoNumbers, bonusNumber);
+		Assert.notNull(lottoNumbers, "'lottoNumbers' must not be null");
+		Assert.notNull(bonusNumber, "'bonusNumber' must not be null");
+		Assert.isTrue(lottoNumbers.notContains(bonusNumber),
+			String.format("lottoNumbers(%s) must not have bonusNumber(%s)", lottoNumbers, bonusNumber));
 		this.lottoNumbers = lottoNumbers;
 		this.bonusNumber = bonusNumber;
 	}
@@ -32,18 +35,5 @@ public final class WinnerLotto implements Lotto {
 			"lottoNumbers=" + lottoNumbers +
 			", bonusNumber=" + bonusNumber +
 			'}';
-	}
-
-	private void validateDuplication(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
-		if (lottoNumbers.contains(bonusNumber)) {
-			throw new IllegalArgumentException(
-				String.format("lottoNumbers(%s) must not have bonusNumber(%s)", lottoNumbers, bonusNumber));
-		}
-	}
-
-	private void validateNull(Object target, String message) {
-		if (target == null) {
-			throw new IllegalArgumentException(message);
-		}
 	}
 }

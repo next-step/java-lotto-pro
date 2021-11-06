@@ -6,12 +6,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import utility.Assert;
+
 public final class LottoNumbers {
 
 	private final Collection<LottoNumber> collection;
 
 	private LottoNumbers(Collection<LottoNumber> collection) {
-		validate(collection);
+		Assert.notEmpty(collection, "'collection' must not be empty");
 		this.collection = collection;
 	}
 
@@ -29,6 +31,10 @@ public final class LottoNumbers {
 
 	boolean contains(LottoNumber number) {
 		return collection.contains(number);
+	}
+
+	boolean notContains(LottoNumber number) {
+		return !contains(number);
 	}
 
 	@Override
@@ -87,15 +93,4 @@ public final class LottoNumbers {
 		}
 		return 0;
 	}
-
-	private void validate(Collection<LottoNumber> numberCollection) {
-		if (isEmpty(numberCollection)) {
-			throw new IllegalArgumentException("'collection' must not be empty");
-		}
-	}
-
-	private boolean isEmpty(Collection<LottoNumber> numberCollection) {
-		return numberCollection == null || numberCollection.isEmpty();
-	}
-
 }

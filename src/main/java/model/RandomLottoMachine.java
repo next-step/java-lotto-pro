@@ -3,13 +3,15 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import utility.Assert;
+
 public final class RandomLottoMachine implements LottoGenerator<LottoPaper> {
 
 	private final LottoRule rule;
 	private LottoNumbers lottoNumbers;
 
 	private RandomLottoMachine(LottoRule rule) {
-		validate(rule);
+		Assert.notNull(rule, "'rule' must not be null");
 		this.rule = rule;
 	}
 
@@ -37,12 +39,6 @@ public final class RandomLottoMachine implements LottoGenerator<LottoPaper> {
 			lottoNumbers = newNumbers();
 		}
 		return lottoNumbers;
-	}
-
-	private void validate(LottoRule rule) {
-		if (rule == null) {
-			throw new IllegalArgumentException("'rule' must not be null");
-		}
 	}
 
 	private LottoNumbers newNumbers() {

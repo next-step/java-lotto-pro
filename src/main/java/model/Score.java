@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.EnumMap;
 import java.util.Map;
 
+import utility.Assert;
+
 public final class Score {
 
 	private static final int PLUS_COUNT_SIZE = 1;
@@ -11,7 +13,7 @@ public final class Score {
 	private final EnumMap<LottoRank, Integer> rankCount;
 
 	private Score(Collection<LottoRank> lottoRanks) {
-		validate(lottoRanks);
+		Assert.notEmpty(lottoRanks, "'lottoRanks' must not be empty");
 		this.rankCount = calculateCount(lottoRanks);
 	}
 
@@ -29,16 +31,6 @@ public final class Score {
 			sum += entry.getKey().multipliedPrizeMoney(entry.getValue());
 		}
 		return Money.from(sum);
-	}
-
-	private void validate(Collection<LottoRank> lottoRanks) {
-		if (isEmpty(lottoRanks)) {
-			throw new IllegalArgumentException("'lottoRanks' must not be empty");
-		}
-	}
-
-	private boolean isEmpty(Collection<LottoRank> lottoRanks) {
-		return lottoRanks == null || lottoRanks.isEmpty();
 	}
 
 	private EnumMap<LottoRank, Integer> calculateCount(Collection<LottoRank> lottoRanks) {

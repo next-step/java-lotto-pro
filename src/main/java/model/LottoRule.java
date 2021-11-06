@@ -1,5 +1,7 @@
 package model;
 
+import utility.Assert;
+
 public class LottoRule {
 
 	private static final int MINIMUM_LIMIT = 1;
@@ -66,41 +68,27 @@ public class LottoRule {
 	}
 
 	private void validate(int minNumber, int maxNumber, int count) {
-		validateMinNumber(minNumber);
-		validateCount(count);
-		validateGap(minNumber, maxNumber, count);
+		Assert.isTrue(positive(minNumber), "'minNumber' must be positive");
+		Assert.isTrue(moreThanMinLimit(count),
+			String.format("count(%d) must be greater than %d", count, MINIMUM_LIMIT));
+		Assert.isTrue(moreThan(gap(maxNumber, minNumber), count),
+			String.format("gap between minValue(%d) and maxValue(%d) must be more than count(%d)", minNumber, maxNumber,
+				count));
 	}
 
-	private void validateGap(int minNumber, int maxNumber, int count) {
-		if (lessThan(availableNumbersCount(maxNumber, minNumber), count)) {
-			throw new IllegalArgumentException(
-				String.format("gap between minValue(%d) and maxValue(%d) must be more than count(%d)", minNumber,
-					maxNumber, count));
-		}
+	private boolean moreThanMinLimit(int count) {
+		return moreThan(count, MINIMUM_LIMIT);
 	}
 
-	private int availableNumbersCount(int maxNumber, int minNumber) {
+	private int gap(int maxNumber, int minNumber) {
 		return maxNumber - minNumber + 1;
 	}
 
-	private void validateMinNumber(int value) {
-		if (negative(value)) {
-			throw new IllegalArgumentException("'minNumber' must be positive");
-		}
+	private boolean positive(int value) {
+		return moreThan(value, 0);
 	}
 
-	private boolean negative(int value) {
-		return lessThan(value, 0);
-	}
-
-	private boolean lessThan(int value, int target) {
-		return value < target;
-	}
-
-	private void validateCount(int count) {
-		if (count < MINIMUM_LIMIT) {
-			throw new IllegalArgumentException(
-				String.format("count(%d) must be greater than %d", count, MINIMUM_LIMIT));
-		}
+	private boolean moreThan(int value, int target) {
+		return value >= target;
 	}
 }

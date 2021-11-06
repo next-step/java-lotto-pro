@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import utility.Assert;
+
 public final class LottoPapers {
 
 	private final Collection<LottoPaper> collection;
 
 	private LottoPapers(Collection<LottoPaper> collection) {
-		validate(collection);
+		Assert.notNull(collection, "lotto collection must not be null");
 		this.collection = collection;
 	}
 
@@ -38,11 +40,5 @@ public final class LottoPapers {
 		return "Lottos{" +
 			"collection=" + collection +
 			'}';
-	}
-
-	private void validate(Collection<LottoPaper> collection) {
-		if (collection == null) {
-			throw new IllegalArgumentException("lotto collection must not be null");
-		}
 	}
 }

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
+import utility.Assert;
+
 public final class Money {
 
 	private static final int DEFAULT_DIVIDE_SCALE = 2;
@@ -12,7 +14,7 @@ public final class Money {
 	private final int value;
 
 	private Money(int value) {
-		validate(value);
+		Assert.isTrue(positive(value), "'value' must be positive");
 		this.value = value;
 	}
 
@@ -90,13 +92,7 @@ public final class Money {
 		return value == 0;
 	}
 
-	private void validate(int value) {
-		if (negative(value)) {
-			throw new IllegalArgumentException("'value' must be positive");
-		}
-	}
-
-	private boolean negative(int value) {
-		return value < 0;
+	private boolean positive(int value) {
+		return value >= 0;
 	}
 }

@@ -1,11 +1,13 @@
 package model;
 
+import utility.Assert;
+
 final class Customer {
 
 	private Money money;
 
 	private Customer(Money money) {
-		validate(money);
+		Assert.notNull(money, "'money' must not be empty");
 		this.money = money;
 	}
 
@@ -30,12 +32,6 @@ final class Customer {
 		return "Customer{" +
 			"money=" + money +
 			'}';
-	}
-
-	private void validate(Money initialMoney) {
-		if (initialMoney == null) {
-			throw new IllegalArgumentException("'money' must not be empty");
-		}
 	}
 
 	private boolean hasLessThan(Money money) {
