@@ -5,50 +5,58 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    public static final String COMMA = ",";
+    private static final Pattern PATTERN_DELIMITERS = Pattern.compile("[,:]");
+    private static final Pattern PATTERN_CUSTOM = Pattern.compile("//(.)\n(.*)");
+    private static final int ZERO = 0;
+    private static final String MESSAGE_INVALID_CHARACTER_FORMAT = "Invalid character format.";
 
     public static int splitAndSum(String str) {
-        int result = 0;
-        if( str == null || str.isEmpty() ) return result;
-        if( str.length() == 1 ) return checkOneNumber(str);
-        if( str.contains(COMMA) && !str.contains(":")) return checkComma(str);
-        if(str.contains(COMMA) && str.contains(":") ) return checkCommaAndDelimiter(str);
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(str);
-        if(m.find()) return checkCustomDelimiter(m);
-        return result;
+        if( str == null || str.isEmpty() ) {
+            return ZERO;
+        }
+
+        if( str.length() == 1 ) {
+            return checkOneNumber(str);
+        }
+
+        Matcher matcher = PATTERN_CUSTOM.matcher(str);
+        if( matcher.find() ) {
+            return checkCustomDelimiter(matcher);
+        }
+
+        return checkSeparatorAndDelimiter(str);
     }
 
     private static int checkOneNumber(String str) {
         return Integer.parseInt(str);
     }
 
-    private static int checkComma(String str) {
-        String[] token = str.split(COMMA);
+    private static int checkSeparatorAndDelimiter(String str) {
+        String[] token = PATTERN_DELIMITERS.split(str);
         return addStringArray(token);
     }
 
-    private static int checkCommaAndDelimiter(String str) {
-        String[] token = str.split(",|:");
-        return addStringArray(token);
-    }
-
-    private static int checkCustomDelimiter(Matcher m) {
-        String customDelimiter = m.group(1);
-        String[] tokens= m.group(2).split(customDelimiter);
+    private static int checkCustomDelimiter(Matcher matcher) {
+        String customDelimiter = matcher.group(1);
+        String[] tokens = matcher.group(2).split(customDelimiter);
         return addStringArray(tokens);
     }
 
     private static int addStringArray(String[] strs) {
-        int result = 0;
+        int result = ZERO;
         for(String str : strs) {
-            result += checkInt(Integer.parseInt(str));
+            checkNumberFormat(str);
+            result += Integer.parseInt(str);
         }
         return result;
     }
 
-    private static int checkInt(int number) {
-        if( number < 0 ) throw new RuntimeException("For input only positive integers");
-        return number;
+    private static void checkNumberFormat(String str) {
+        for( int i = 0; i < str.length(); i++) {
+            if( !Character.isDigit(str.charAt(i)) ) {
+                throw new NumberFormatException(MESSAGE_INVALID_CHARACTER_FORMAT);
+            }
+        }
     }
 
     private StringAddCalculator(){}
