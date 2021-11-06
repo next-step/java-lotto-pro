@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.view.Message;
 import lotto.view.ResultView;
 
 import java.math.BigInteger;
@@ -40,7 +41,7 @@ public class Result {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         matchResult.forEach((rank, count) -> {
-            sb.append(String.format(ResultView.STATS, rank.getCountOfMatch(), rank.getWinningMoney(), count));
+            sb.append(String.format(Message.STATS, rank.getCountOfMatch(), rank.getWinningMoney(), count));
         });
         return sb.toString();
     }
