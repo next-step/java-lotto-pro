@@ -12,7 +12,11 @@ public class WinningResult {
     }
 
     public int winnerPerRank(Rank winningRank) {
-        return result.get(winningRank);
+        Integer winnerPerRank = result.get(winningRank);
+        if (winnerPerRank == null) {
+            return 0;
+        }
+        return winnerPerRank;
     }
 
     //TODO 질문3
