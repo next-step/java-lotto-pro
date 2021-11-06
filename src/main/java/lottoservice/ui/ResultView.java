@@ -19,7 +19,7 @@ public class ResultView {
 		System.out.printf(messageFormat,arguments);
 	}
 
-	public static void pringNewLine() {
+	public static void printNewLine() {
 		System.out.println();
 	}
 

@@ -25,9 +25,9 @@ public class LottoMain {
 	public void startLottoMain() {
 		LottoTickets lottoTickets = buyLottoTickets();
 		showTickets(lottoTickets);
-		ResultView.pringNewLine();
+		ResultView.printNewLine();
 		LottoWinningNumbers lottoWinningNumbers = getLastWeekWinningNumbers();
-		ResultView.pringNewLine();
+		ResultView.printNewLine();
 		showMatchLottoWinningResult(lottoWinningNumbers, lottoTickets);
 	}
 
