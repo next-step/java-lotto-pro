@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import step3.domain.Amount;
 import step3.domain.LottoProvider;
 import step3.domain.strategy.numbers.RandomLottoNumbers;
 
@@ -34,7 +35,7 @@ public class LottoProviderTest {
 
         // when
         LottoProvider lottoProvider = new LottoProvider();
-        lottoProvider.buyLotto(lottoProvider.availableQuantity(amount), new RandomLottoNumbers());
+        lottoProvider.buyLotto(lottoProvider.availableQuantity(new Amount(amount)), new RandomLottoNumbers());
 
         // then
         assertThat(lottoProvider.lottoNumbersBundleSize()).isEqualTo(expected);

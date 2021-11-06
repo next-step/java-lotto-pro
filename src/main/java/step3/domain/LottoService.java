@@ -1,13 +1,12 @@
 package step3.domain;
 
-import step3.dto.LottoListDto;
-import step3.dto.LottoRanksDto;
-import step3.dto.WinnerLottoNumbersDto;
+import step3.dto.LottoBuyRequestDto;
+import step3.dto.LottoBuyResponseDto;
+import step3.dto.LottoStatisticsResponseDto;
+import step3.dto.LottoWinNumbersRequestDto;
 
 public interface LottoService {
-    void buyLotto(Amount amount);
+    LottoBuyResponseDto buyLotto(LottoBuyRequestDto lottoBuyRequestDto);
 
-    LottoListDto lottoList();
-
-    LottoRanksDto lottoPurchaseDetails(Amount amount, WinnerLottoNumbersDto winLottoNumbers);
+    LottoStatisticsResponseDto getResultStatistics(LottoWinNumbersRequestDto lottoWinNumbersRequestDto);
 }

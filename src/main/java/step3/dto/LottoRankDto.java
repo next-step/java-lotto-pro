@@ -3,7 +3,6 @@ package step3.dto;
 import step3.domain.constance.LottoConstant;
 
 public class LottoRankDto {
-    public static final String LOTTO_RANK_FORMAT = "%s개 일치 (%d원)- %d개";
 
     private final int matchCount;
     private final int matchNumber;

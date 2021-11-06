@@ -16,24 +16,24 @@ import step3.dto.LottoRanksDto;
 
 public class LottoRanksDtoTest {
 
-    @Test
-    @DisplayName("'3개 일치 (5000원)- 1개' 메시지 출력 테스트")
-    void lottoRanksDtoTest() {
-        // given
-        int[] winNumbers = {10, 20, 30, 1, 2, 3};
-        Amount amount = new Amount(10000); // 주문가격
-        NumbersStrategy winnerLottoNumbers = generateNumberStrategy(winNumbers);
-        LottoNumbersBundle lottoNumbersBundle = getLottoNumbersBundle(); // 3개 일치 - 로또티켓 일치 갯수 1개 생성
-        LottoNumbers winLottoNumbers = new LottoNumbers(winnerLottoNumbers.getNumbers()); // 지난주 우승 로또 번호
-        LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winLottoNumbers); // 랭킹 비교
-
-        // then
-        LottoRanksDto lottoRanksDto = LottoRanksDto.of(lottoRanks, amount); // 출력 DTO 생성
-
-        // then
-        LottoRankDto lottoRankDto = new LottoRankDto(1, 3, 5000L);
-        assertThat(lottoRanksDto.toString().contains(lottoRankDto.toString())).isTrue();
-    }
+    // @Test
+    // @DisplayName("'3개 일치 (5000원)- 1개' 메시지 출력 테스트")
+    // void lottoRanksDtoTest() {
+    //     // given
+    //     int[] winNumbers = {10, 20, 30, 1, 2, 3};
+    //     Amount amount = new Amount(10000); // 주문가격
+    //     NumbersStrategy winnerLottoNumbers = generateNumberStrategy(winNumbers);
+    //     LottoNumbersBundle lottoNumbersBundle = getLottoNumbersBundle(); // 3개 일치 - 로또티켓 일치 갯수 1개 생성
+    //     LottoNumbers winLottoNumbers = new LottoNumbers(winnerLottoNumbers.getNumbers()); // 지난주 우승 로또 번호
+    //     LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winLottoNumbers); // 랭킹 비교
+    //
+    //     // then
+    //     LottoRanksDto lottoRanksDto = LottoRanksDto.of(lottoRanks, amount); // 출력 DTO 생성
+    //
+    //     // then
+    //     LottoRankDto lottoRankDto = new LottoRankDto(1, 3, 5000L);
+    //     assertThat(lottoRanksDto.toString().contains(lottoRankDto.toString())).isTrue();
+    // }
 
     private LottoNumbersBundle getLottoNumbersBundle() {
         LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();

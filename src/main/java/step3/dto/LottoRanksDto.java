@@ -27,7 +27,7 @@ public class LottoRanksDto {
 
     public static LottoRanksDto of(LottoRanks lottoRanks, Amount amount) {
         List<LottoRankDto> lottoRanksDto = new ArrayList<>();
-        for (LottoRank lottoRank : lottoRanks.values()) {
+        for (LottoRank lottoRank : lottoRanks.getLottoRanks()) {
             if (lottoRank.matchNumber >= MIN_PRINT_RANK) {
                 // 당첨된 로또 갯수    일치하는 로또번호 갯수  상금
                 lottoRanksDto.add(new LottoRankDto(lottoRank.matchCount, lottoRank.matchNumber, lottoRank.prize));

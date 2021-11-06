@@ -1,10 +1,9 @@
 package step3.controller;
 
-import step3.common.exception.InvalidParamException;
-import step3.domain.Amount;
 import step3.domain.LottoService;
-import step3.dto.LottoRanksDto;
-import step3.dto.WinnerLottoNumbersDto;
+import step3.dto.LottoBuyRequestDto;
+import step3.dto.LottoBuyResponseDto;
+import step3.dto.LottoWinNumbersRequestDto;
 import step3.service.LottoServiceImpl;
 import step3.view.InputView;
 import step3.view.ResultView;
@@ -17,45 +16,21 @@ public class LottoController {
     }
 
     public void play() {
-        // 금액을 입력하세요.
-        Amount amount = readMoney();
+        // 사용자에게 구매할 돈을입금 받는다.
+        LottoBuyRequestDto lottoRequestDto = InputView.readLottoRequestDto();
 
-        // 로또 구매 진행
-        lottoBuyProcess(amount);
+        // 로또를 구매한다.
+        LottoBuyResponseDto lottoBuyResponseDto = lottoService.buyLotto(lottoRequestDto);
 
-        // 지난 주 우승 번호 입력해주세요.
-        WinnerLottoNumbersDto winnerLottoNumbersDto = readWinNumbers();
+        // 총몇개를 구입했는지 출력한다.
+        // 구매한 로또를 출력한다.
+        ResultView.lottoBuyListPrint(lottoBuyResponseDto);
 
-        // 당첨 통계 출력
-        printResult(winnerLottoNumbersDto, amount);
-    }
+        // 지난 주 당첨번호 받기
+        LottoWinNumbersRequestDto lottoWinNumbersRequestDto = InputView.readLottoWinnerRequestDto(
+            lottoRequestDto.getAmountValue());
 
-    private Amount readMoney() {
-        try {
-            ResultView.amountRequestPrintln();
-            int money = InputView.readOnlyNumber();
-            return new Amount(money);
-        } catch (InvalidParamException invalidParamException) {
-            ResultView.println(invalidParamException.getMessage());
-            return readMoney();
-        }
-
-    }
-
-    private void lottoBuyProcess(Amount amount) {
-        lottoService.buyLotto(amount);
-
-        // 구입된 로또 번호 목록 출력
-        ResultView.printLottoList(lottoService.lottoList());
-    }
-
-    private WinnerLottoNumbersDto readWinNumbers() {
-        ResultView.winnerRequestPrintln();
-        return InputView.getWinnerLottoNumberDto();
-    }
-
-    private void printResult(WinnerLottoNumbersDto winnerLottoNumbersDto, Amount amount) {
-        LottoRanksDto lottoRanksDto = lottoService.lottoPurchaseDetails(amount, winnerLottoNumbersDto);
-        ResultView.lottoResultPrint(lottoRanksDto);
+        // 당첨통계를출한다.(로또 당첨 갯수와 수익률)
+        ResultView.statisticsPrint(lottoService.getResultStatistics(lottoWinNumbersRequestDto));
     }
 }

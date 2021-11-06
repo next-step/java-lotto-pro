@@ -30,11 +30,7 @@ public class LottoNumbersBundle {
         return lottoNumbersBundle.size();
     }
 
-    public List<String> toList() {
-        List<String> result = new ArrayList<>();
-        for (LottoNumbers lottoNumbers : lottoNumbersBundle) {
-            result.add(lottoNumbers.toString());
-        }
-        return Collections.unmodifiableList(result);
+    public List<LottoNumbers> getLottoNumbersBundle() {
+        return lottoNumbersBundle;
     }
 }
