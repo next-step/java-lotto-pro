@@ -1,10 +1,6 @@
 package lotto;
 
-import lotto.model.LottoMoney;
-import lotto.model.LottoNumberGenerator;
-import lotto.model.LottoPaper;
-import lotto.model.LottoPapers;
-import lotto.model.LottoResult;
+import lotto.model.*;
 import lotto.util.Client;
 import lotto.util.GameRule;
 import lotto.view.InputView;
@@ -20,7 +16,8 @@ public class LottoApplication {
         LottoPapers lottoPapers = LottoApplication.getRandomLottoPapers(lottoMoney);
 
         LottoPaper winningLottoPaper = LottoApplication.getWinningLottoPaper(lottoNumberGenerator);
-        LottoApplication.printLottoResult(lottoPapers, winningLottoPaper);
+        LottoNumber bonusNumber = LottoApplication.getBonusNumber(winningLottoPaper);
+        LottoApplication.printLottoResult(lottoPapers, winningLottoPaper, bonusNumber);
     }
 
     private static String getBuyPrice() {
@@ -42,9 +39,15 @@ public class LottoApplication {
         return lottoPapers;
     }
 
-    private static void printLottoResult(LottoPapers lottoPapers, LottoPaper winningLottoPaper) {
-        LottoResult lottoResult = lottoPapers.calculateLottoResult(winningLottoPaper);
+    private static void printLottoResult(LottoPapers lottoPapers, LottoPaper winningLottoPaper, LottoNumber bonusNumber) {
+        LottoResult lottoResult = lottoPapers.calculateLottoResult(winningLottoPaper, bonusNumber);
         lottoResult.calculateYield(lottoPapers.lottoPaperSize() * GameRule.LOTTO_PAPER_PRICE);
         ResultView.printWinningStatistics(lottoResult);
+    }
+
+    private static LottoNumber getBonusNumber(LottoPaper winningLottoPaper) {
+        InputView.printBonusNumberInput();
+        String bonusNumber = Client.getLineConsole();
+        return new LottoNumber(bonusNumber, winningLottoPaper);
     }
 }
