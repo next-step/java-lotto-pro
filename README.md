@@ -20,6 +20,7 @@
 당첨로또 (`WinningLotto`)
 `WinningLotto`는 6개의 `LottoNumber`와 `Bonus`를 가진다
 `WinningLotto`는 `Lotto` 와 비교하여 당첨번호 개수를 반환한다
+`WinningLotto`는 `Bonus` 와 중복될 수 없다
 
 로또들 (`Lottos`)
 `Lottos`는 `RandomNumbers`를 가진다
