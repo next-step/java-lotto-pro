@@ -22,7 +22,7 @@ public class LottoIssuanceCount {
     }
 
     private static void purchaseAmountOneThousandWonUnitValid(int purchaseAmount) {
-        if (purchaseAmount % LottoProperty.LOTTO_PRICE != 0) {
+        if (purchaseAmount < LottoProperty.LOTTO_PRICE ||purchaseAmount % LottoProperty.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_AMOUNT_NOT_ONE_THOUSAND_WON.getMessage());
         }
     }

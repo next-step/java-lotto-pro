@@ -20,7 +20,7 @@ class LottoIssuanceCountTest {
 
     @DisplayName("구매금액이 1000원 단위가 아닐 시 예외")
     @ParameterizedTest
-    @ValueSource(ints = {1230, 3500, 5700, 13400})
+    @ValueSource(ints = {0, 1230, 3500, 5700, 13400})
     void purchaseAmountNotOneThousandWonUnitExceptionTest(int invalidPurchaseAmount) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             LottoIssuanceCount.issuanceNumberCalculation(invalidPurchaseAmount);
