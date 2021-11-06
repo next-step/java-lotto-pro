@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import step3.domain.LottoNumbers;
 import step3.domain.LottoProvider;
 import step3.domain.constance.LottoConstant;
-import step3.domain.strategy.lotto.LottoProviderStrategy;
 import step3.domain.strategy.numbers.NumbersStrategy;
 import step3.domain.strategy.numbers.RandomNumbers;
 
@@ -23,7 +22,7 @@ public class LottoProviderTest {
         int expected = 5;
 
         // when
-        LottoProviderStrategy lottoProvider = new LottoProvider();
+        LottoProvider lottoProvider = new LottoProvider();
         lottoProvider.buyLotto(expected);
 
         // then
@@ -37,7 +36,7 @@ public class LottoProviderTest {
         // given
 
         // when
-        LottoProviderStrategy lottoProvider = new LottoProvider();
+        LottoProvider lottoProvider = new LottoProvider();
         lottoProvider.buyLotto(lottoProvider.availableQuantity(amount));
 
         // then

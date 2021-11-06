@@ -1,11 +1,10 @@
 package step3.domain;
 
 import step3.domain.constance.LottoConstant;
-import step3.domain.strategy.lotto.LottoProviderStrategy;
 import step3.domain.strategy.numbers.NumbersStrategy;
 import step3.domain.strategy.numbers.RandomNumbers;
 
-public class LottoProvider implements LottoProviderStrategy {
+public class LottoProvider {
     private static final int PRICE = 1000;
     private final LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
 
