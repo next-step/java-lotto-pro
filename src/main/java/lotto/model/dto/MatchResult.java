@@ -1,10 +1,12 @@
-package lotto.model;
+package lotto.model.dto;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import lotto.model.dto.enums.MatchCount;
 
 public class MatchResult {
     private final Map<MatchCount, Integer> matchCountToCount = new HashMap<>();

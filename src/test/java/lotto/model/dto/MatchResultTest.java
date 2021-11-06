@@ -1,9 +1,13 @@
-package lotto.model;
+package lotto.model.dto;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import lotto.model.dto.MatchResult;
+import lotto.model.dto.Payment;
+import lotto.model.dto.enums.MatchCount;
 
 public class MatchResultTest {
     private static final int PAYMENT = 14000;

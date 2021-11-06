@@ -1,11 +1,14 @@
 package lotto.model;
 
-import static lotto.model.MatchCount.*;
+import static lotto.model.dto.enums.MatchCount.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
+
+import lotto.model.dto.MatchResult;
+import lotto.model.dto.Payment;
 
 public class LottoMatcherTest {
     private static final int PAYMENT = 14000;

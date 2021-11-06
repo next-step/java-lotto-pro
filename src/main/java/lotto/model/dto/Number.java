@@ -1,10 +1,10 @@
-package lotto.model;
+package lotto.model.dto;
 
 import java.util.Objects;
 
 public class Number implements Comparable<Number> {
-    static final int MIN_NUMBER = 1;
-    static final int MAX_NUMBER = 45;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
     static final String NUMBER_RANGE_ERR_MSG = "로또는 " + MIN_NUMBER + "과 " + MAX_NUMBER + " 사이의 수만 가능합니다.";
 
     private final int number;

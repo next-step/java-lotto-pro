@@ -1,6 +1,6 @@
-package lotto.model;
+package lotto.model.dto;
 
-import static lotto.model.Number.*;
+import static lotto.model.dto.Number.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;

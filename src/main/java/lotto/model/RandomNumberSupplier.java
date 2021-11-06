@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import lotto.model.dto.Number;
+
 public class RandomNumberSupplier implements NumberSupplier {
     private static final int MIN_SIZE = 1;
     private static final String SIZE_ERR_MSG = "size 는 최소 " + MIN_SIZE + " 이상이어야 합니다.";

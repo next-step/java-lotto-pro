@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import lotto.model.dto.MatchResult;
+import lotto.model.dto.Payment;
+import lotto.model.dto.enums.MatchCount;
+
 public class LottoMatcher {
     private final Payment payment;
     private final LottoNumbers winningNumbers;
