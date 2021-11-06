@@ -34,7 +34,7 @@ public class WinStatisticsInfo {
   }
 
   public Policy getPolicy() {
-    return this.winPolicy.getValue();
+    return this.winPolicy.getPolicy();
   }
 
   public WinPolicy getWinPolicy() {

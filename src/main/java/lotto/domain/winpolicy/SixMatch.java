@@ -4,7 +4,7 @@ import lotto.domain.lotto.Lotto;
 
 public class SixMatch extends Policy {
   public SixMatch() {
-    super(2000000000);
+    super(2_000_000_000);
   }
 
   @Override

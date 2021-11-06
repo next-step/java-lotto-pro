@@ -14,15 +14,9 @@ public abstract class Policy {
   public abstract Boolean isMatch(Lotto latestWinLotto, Lotto lotto);
 
   public Integer getMatchCount(Lotto latestWinLotto, Lottos lottos) {
-    Integer count = 0;
-
-    for (Integer i = 0; i < lottos.size(); i++) {
-      if (isMatch(latestWinLotto, lottos.get(i))) {
-        count++;
-      }
-    }
-
-    return count;
+    return (int) lottos.getStream()
+                        .filter(lotto -> isMatch(latestWinLotto, lotto))
+                        .count();
   }
 
   public Integer getWinPrice() {

@@ -6,18 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
-  @DisplayName("로또 번호들을 출력한다.")
-  @Test
-  void print_lottonumbers() {
-    // given
-    Lotto lotto = Lotto.valueOf("1", "3", "5", "7", "9", "20");
-
-    // when
-
-    // then
-    assertThat(lotto.toString()).isEqualTo("1, 3, 5, 7, 9, 20");
-  }
-
   @DisplayName("로또가 지난 당첨번호와 몇개가 맞는지 확인.")
   @Test
   void check_lottoNumberWithLatestWinNumbers() {

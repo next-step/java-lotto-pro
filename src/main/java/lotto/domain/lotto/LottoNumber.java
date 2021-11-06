@@ -3,14 +3,23 @@ package lotto.domain.lotto;
 import java.util.Objects;
 
 public class LottoNumber {
-  private final String value;
   public static final Integer LOTTO_START_NUMBER = 1;
   public static final Integer LOTTO_END_NUMBER = 45;
   
+  private final String value;
+
   private LottoNumber(String value) {
     chekInvalidArgument(value.trim());
 
     this.value = value.trim();
+  }
+
+  public static LottoNumber valueOf(String value) {
+    return new LottoNumber(value);
+  }
+
+  public static LottoNumber valueOf(Integer value) {
+    return new LottoNumber(String.valueOf(value));
   }
 
   private void chekInvalidArgument(String value) {
@@ -21,14 +30,6 @@ public class LottoNumber {
 
   private boolean isInvalidLottoNumberRange(String value) {
     return Integer.valueOf(value) < LOTTO_START_NUMBER || Integer.valueOf(value) > LOTTO_END_NUMBER;
-  }
-
-  public static LottoNumber valueOf(String value) {
-    return new LottoNumber(value);
-  }
-
-  public static LottoNumber valueOf(Integer value) {
-    return new LottoNumber(String.valueOf(value));
   }
 
   public String toString() {
@@ -54,5 +55,4 @@ public class LottoNumber {
   public int hashCode() {
     return Objects.hashCode(value);
   }
-
 }

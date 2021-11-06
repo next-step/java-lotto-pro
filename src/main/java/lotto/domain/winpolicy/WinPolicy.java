@@ -7,18 +7,18 @@ public enum WinPolicy {
   FIVE_MATCH(new FiveMatch()),
   SIX_MATCH(new SixMatch());
 
-  private final Policy value;
+  private final Policy policy;
 
-  WinPolicy(Policy value) {
-    this.value = value;
+  WinPolicy(Policy policy) {
+    this.policy = policy;
   }
 
-  public Policy getValue() {
-    return value;
+  public Policy getPolicy() {
+    return policy;
   }
 
   public Integer getWinPrice() {
-    return value.getWinPrice();
+    return policy.getWinPrice();
   }
 
 }

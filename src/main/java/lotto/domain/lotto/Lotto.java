@@ -2,26 +2,26 @@ package lotto.domain.lotto;
 
 public class Lotto {
   public static final Integer PRICE = 1000;
-  private final LottoNumbers value;
+  private final LottoNumbers numbers;
 
-  public Lotto(LottoNumbers value) {
-    this.value = value;
+  private Lotto(LottoNumbers numbers) {
+    this.numbers = numbers;
   }
 
-  public Lotto() {
-    this.value = LottoNumbers.valueOf();
+  public static Lotto valueOf(String ... numbers) {
+    return new Lotto(LottoNumbers.valueOf(numbers));
+  }
+  
+  public static Lotto valueOf(LottoNumbers numbers) {
+    return new Lotto(numbers);
   }
 
-  public static Lotto valueOf(String ... values) {
-    return new Lotto(LottoNumbers.valueOf(values));
-  }
-
-  public String toString() {
-    return value.toString();
+  public LottoNumbers getNumbers() {
+    return this.numbers;
   }
 
   public Integer matchCount(Lotto latestWinLotto) {
-    return latestWinLotto.value.countOf(this.value)
-                                .intValue();
+    return latestWinLotto.numbers.countOf(this.numbers)
+                                  .intValue();
   }
 }

@@ -46,7 +46,7 @@ public class LottoNumbersTest {
     lottoNumbers.generate();
 
     // then
-    assertThat(lottoNumbers.toString()).isEqualTo("1, 3, 5, 6, 14, 17");
+    assertThat(lottoNumbers).isEqualTo(LottoNumbers.valueOf("1", "3", "5", "6", "14", "17"));
   }
 
   @DisplayName("로또 번호들중 일치하는 로또번호 일치 여부 판단")
@@ -63,7 +63,6 @@ public class LottoNumbersTest {
     assertThat(realValue).isTrue();
   }
 
-
   @DisplayName("로또 번호들을 생성시 기번 로또 번호의 개수가 6개가 아닐시 에러 발생.")
   @Test
   void check_illegalLottoNumberCount() {
@@ -75,6 +74,18 @@ public class LottoNumbersTest {
 		assertThatExceptionOfType(IllegalArgumentException.class)
     .isThrownBy(exceptionContent)
     .withMessageMatching("로또 번호의 갯수가 6개가 아닙니다.");
+  }
 
+  @DisplayName("로또 번호들을 생성시 기번 로또 번호에 중복이 있을 경우 에러 발생.")
+  @Test
+  void check_DuplicatedNumber() {
+    // given
+    // when
+		ThrowingCallable exceptionContent = () -> {Lotto.valueOf("1", "3", "7", "8", "9", "9");};
+
+    // then
+		assertThatExceptionOfType(IllegalArgumentException.class)
+    .isThrownBy(exceptionContent)
+    .withMessageMatching("로또 번호가 중복된 값이 존재합니다.");
   }
 }

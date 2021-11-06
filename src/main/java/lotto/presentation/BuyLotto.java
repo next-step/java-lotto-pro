@@ -10,8 +10,8 @@ import lotto.infrastructure.component.TextEdit;
 import lotto.infrastructure.datashared.UiSharedData;
 
 public class BuyLotto extends Screen {
-  TextEdit buyingLottoPrice;
-  Label resultBuyingLottoCount;
+  private TextEdit buyingLottoPrice;
+  private Label resultBuyingLottoCount;
 
   public BuyLotto() {
     initialize();
@@ -42,10 +42,10 @@ public class BuyLotto extends Screen {
       LottoNumbers lottoNumbers = new LottoNumbers();
       lottoNumbers.generate();
 
-      lottos.add(new Lotto(lottoNumbers));
+      lottos.add(Lotto.valueOf(lottoNumbers));
     }
 
-    UiSharedData.setBuyLottos(new Lottos(lottos));
+    UiSharedData.setBuyLottos(Lottos.valueOf(lottos));
   }
 
   @Override

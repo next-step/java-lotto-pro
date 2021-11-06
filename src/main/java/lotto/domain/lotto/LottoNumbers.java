@@ -1,63 +1,86 @@
 package lotto.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.infrastructure.util.RandomLottoNumber;
 
 public class LottoNumbers {
   private static final int VALID_LOTTONUMBER_HAS_COUNT = 6;
-  private List<LottoNumber> values;
+  private List<LottoNumber> numbers;
 
   public LottoNumbers() {
-    this.values = new ArrayList<>();
+    this.numbers = new ArrayList<>();
   }
 
-  public LottoNumbers(List<LottoNumber> values) {
-    checkLottoNumberCount(values);
+  private LottoNumbers(List<LottoNumber> numbers) {
+    checkLottoNumberInvalid(numbers);
 
-    this.values = new ArrayList<>(values);
+    this.numbers = new ArrayList<>(numbers);
   }
-
-  public static LottoNumbers valueOf(String ... values) {
-    return Stream.of(values)
+  
+  public static LottoNumbers valueOf(String ... numbers) {
+    return Stream.of(numbers)
                   .map(LottoNumber::valueOf)
-                  .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
+                  .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::valueOf));
+  }
+ 
+  public static LottoNumbers valueOf(List<LottoNumber> numbers) {
+    return new LottoNumbers(numbers);
   }
 
+  private void checkLottoNumberInvalid(List<LottoNumber> numbers) {
+    checkLottoNumberCount(numbers);
+    checkDuplicateLottoNumber(numbers);
+  }
 
-  private static void checkLottoNumberCount(List<LottoNumber> values) {
-    if (values.size() != VALID_LOTTONUMBER_HAS_COUNT) {
+  private static void checkLottoNumberCount(List<LottoNumber> numbers) {
+    if (numbers.size() != VALID_LOTTONUMBER_HAS_COUNT) {
       throw new IllegalArgumentException("로또 번호의 갯수가 6개가 아닙니다.");
     }
   }
 
+  private void checkDuplicateLottoNumber(List<LottoNumber> numbers) {
+    if (numbers.size() != new HashSet<>(numbers).size()) {
+      throw new IllegalArgumentException("로또 번호가 중복된 값이 존재합니다.");
+    }
+  }
+
   public void generate() {
-    this.values = RandomLottoNumber.generate();
+    this.numbers = RandomLottoNumber.generate();
+  }
+
+  public Stream<LottoNumber> getStream() {
+    return this.numbers.stream();
   }
 
   public boolean contains(LottoNumber lottoNumber) {
-    return values.contains(lottoNumber);
-  }
-
-  public Integer size() {
-    return values.size();
-  }
-
-  public LottoNumber get(Integer index) {
-    return values.get(index);
-  }
-
-  public String toString() {
-    return values.stream().map(LottoNumber::toString)
-                          .reduce((result, seed) -> result += ", " + seed)
-                          .orElse("");
+    return numbers.contains(lottoNumber);
   }
 
   public Long countOf(LottoNumbers lottoNumbers) {
-    return lottoNumbers.values.stream()
-                              .filter(item -> this.values.contains(item))
-                              .count();
+    return lottoNumbers.getStream()
+                        .filter(number -> this.numbers.contains(number))
+                        .count();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this)
+        return true;
+    if (!(o instanceof LottoNumbers)) {
+        return false;
+    }
+    LottoNumbers lottoNumbers = (LottoNumbers) o;
+
+    return Objects.equals(numbers, lottoNumbers.numbers);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(numbers);
   }
 }

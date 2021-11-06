@@ -4,7 +4,7 @@ import lotto.domain.lotto.Lotto;
 
 public class FourMatch extends Policy {
   public FourMatch() {
-    super(50000);
+    super(50_000);
   }
 
   @Override

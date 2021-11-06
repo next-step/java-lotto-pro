@@ -27,7 +27,7 @@ public class WinStatistics {
     this.winStatisticsInfos.clear();
 
     for (WinPolicy winPolicy : WinPolicy.values()) {
-      Policy policy = winPolicy.getValue();
+      Policy policy = winPolicy.getPolicy();
       Integer matchCount = policy.getMatchCount(latestWinLotto, buyLottos);
 
       this.winStatisticsInfos.add(WinStatisticsInfo.of(winPolicy, matchCount));
