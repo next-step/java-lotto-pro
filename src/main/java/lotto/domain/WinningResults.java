@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class WinningResults {
     private final List<WinningResult> winningResult;
@@ -15,11 +13,9 @@ public class WinningResults {
     private List<WinningResult> mapWinningRank(Lottos lottos) {
         List<WinningResult> winningRanks = new ArrayList<WinningResult>();
         List<WinningRank> ranks = WinningRank.createWinningRanks();
-        Map<WinningRank, Integer> rankMap = new HashMap<WinningRank, Integer>();
-        for (Lotto lotto : lottos.getLottos()) {
-            rankMap.put(lotto.getWinningRank(), rankMap.getOrDefault(lotto.getWinningRank(), 0) + 1);
+        for (WinningRank winningRank : ranks) {
+            winningRanks.add(new WinningResult(winningRank, countWinningRank(winningRank, lottos)));
         }
-        ranks.forEach((rank) -> winningRanks.add(new WinningResult(rank, rankMap.getOrDefault(rank,0))));
         return winningRanks;
     }
 
@@ -32,6 +28,13 @@ public class WinningResults {
                 .mapToInt(wr -> wr.getCount() * wr.getWinningRank().getReward())
                 .sum();
         return totalReward / (double) money.getMoney();
+    }
+    
+    private int countWinningRank(WinningRank winningRank, Lottos lottos) {
+        return (int) lottos.getLottos()
+                    .stream()
+                    .filter(wr -> wr.getWinningRank().equals(winningRank))
+                    .count();
     }
 
 }

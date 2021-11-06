@@ -24,10 +24,10 @@ public class ResultView {
         }
     }
 
-    public void printWinningResults(WinningResults statistics) {
+    public void printWinningResults(WinningResults results) {
         System.out.println(NOTICE_WINNING_STATISTICS);
-        List<WinningResult> statisticList = statistics.getWinningResult();
-        for (WinningResult winningResult : statisticList) {
+        List<WinningResult> resultList = results.getWinningResult();
+        for (WinningResult winningResult : resultList) {
             System.out.println(String.format(NOTICE_WINNING_STATISTICS_RESULT, winningResult.getWinningRank().getMatchCount(), winningResult.getWinningRank().getReward(), winningResult.getCount()));
         }
     }
