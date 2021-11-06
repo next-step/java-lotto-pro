@@ -16,7 +16,8 @@ public class LottoNumber {
 
     private void validate(int number) {
         if (!isValidNumber(number)) {
-            throw new IllegalArgumentException(Message.LOTTO_NUMBER_BOUND_ERROR.getMessage());
+            throw new IllegalArgumentException(
+                    String.format(Message.LOTTO_NUMBER_BOUND_ERROR.getMessage(), MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
         }
     }
 
