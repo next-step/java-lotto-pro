@@ -19,8 +19,8 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public void judgeRank(LottoNumbers winningLotto) {
-        this.winningRank = WinningRank.resultRank(lottoNumbers.countMatchNumber(winningLotto));
+    public void judgeRank(LottoNumbers winningNumbers) {
+        this.winningRank = WinningRank.resultRank(lottoNumbers.countMatchNumber(winningNumbers));
     }
 
 }

@@ -15,7 +15,7 @@ public class InputView {
         return new Money(ConsoleUtils.consoleInt());
     }
 
-    public List<Integer> enterWinningLotto() {
+    public List<Integer> enterWinningNumbers() {
         System.out.println(INSERT_WINNING_NUMBER);
         return ConsoleUtils.consoleIntegerList();
     }
