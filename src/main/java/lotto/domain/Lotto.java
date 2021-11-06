@@ -26,7 +26,7 @@ public class Lotto {
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
 
 		for (Integer number : numbers) {
-			LottoNumber lottoNumber = new LottoNumber(number);
+			LottoNumber lottoNumber = LottoNumber.from(number);
 			lottoNumbers.add(lottoNumber);
 		}
 
