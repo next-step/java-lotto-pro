@@ -16,22 +16,24 @@ public class Input {
 
     public Numbers split() {
         String delimiter = getDelimiter();
-        sanitizeValue();
+        removeCustomDelimiter();
         return new Numbers(value.split(delimiter));
     }
 
     private String getDelimiter() {
+        final int DELIMITER_GROUP_NO = 1;
         Matcher m = getCustomDelimiterMatcher();
         if (m.find()) {
-            return m.group(1);
+            return m.group(DELIMITER_GROUP_NO);
         }
         return DEFAULT_DELIMITER;
     }
 
-    private void sanitizeValue() {
+    private void removeCustomDelimiter() {
+        final int VALUE_GROUP_NO = 2;
         Matcher m = getCustomDelimiterMatcher();
         if (m.find()) {
-            value = m.group(2);
+            value = m.group(VALUE_GROUP_NO);
         }
     }
 

@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 public class Number {
-    final int value;
+    private final int value;
 
     public Number(String value) {
         this.value = Integer.parseInt(value);
