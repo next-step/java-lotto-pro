@@ -9,6 +9,10 @@ public class PurchaseAmount {
 		this.purchaseAmount = Integer.parseInt(purchaseAmount);
 	}
 
+	public int value() {
+		return purchaseAmount;
+	}
+
 	private void validatePurchaseAmountType(String purchaseAmount) {
 		try {
 			Integer.parseInt(purchaseAmount);

@@ -17,6 +17,8 @@ public class LottoNumberFactory {
 
 	public static List<Integer> create() {
 		Collections.shuffle(allLottoNumbers);
-		return allLottoNumbers.subList(0, 6);
+		List<Integer> lottoNumbers = allLottoNumbers.subList(0, 6);
+		Collections.sort(lottoNumbers);
+		return lottoNumbers;
 	}
 }

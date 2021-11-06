@@ -10,5 +10,9 @@ public class LottoApplication {
 			Repeater.set(lottoApplicationController.enterPurchaseAmount());
 		}
 
+		lottoApplicationController.printPurchaseQuantity();
+
+
+
 	}
 }
