@@ -11,11 +11,11 @@ public class Lotto {
 
 	private final Set<LottoNumber> lottoNumbers;
 
-	public Lotto(List<Integer> numbers) {
+	public Lotto(List<LottoNumber> numbers) {
 		this.lottoNumbers = new HashSet<>();
 
-		for (Integer number : numbers) {
-			this.lottoNumbers.add(new LottoNumber(number));
+		for (LottoNumber number : numbers) {
+			this.lottoNumbers.add(number);
 		}
 
 		if (isLottoSize(this.lottoNumbers.size())) {
