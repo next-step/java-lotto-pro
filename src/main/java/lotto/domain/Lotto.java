@@ -13,16 +13,26 @@ public class Lotto {
     private final List<LottoNumber> lineOfLottoNumber;
 
     public Lotto() {
-        this.lineOfLottoNumber = LottoRandomFactory.generateLineOfLottoNumber();
-    }
+        List<LottoNumber> lottoNumbers = LottoRandomFactory.generateLineOfLottoNumber();
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        validateLottoNumberCount(lottoNumbers.size());
-        validateNoDuplicatedNumber(lottoNumbers);
+        validateLottoNumbers(lottoNumbers);
 
         Collections.sort(lottoNumbers);
 
         this.lineOfLottoNumber = lottoNumbers;
+    }
+
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validateLottoNumbers(lottoNumbers);
+
+        Collections.sort(lottoNumbers);
+
+        this.lineOfLottoNumber = lottoNumbers;
+    }
+
+    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
+        validateLottoNumberCount(lottoNumbers.size());
+        validateNoDuplicatedNumber(lottoNumbers);
     }
 
     private void validateLottoNumberCount(int size) {
