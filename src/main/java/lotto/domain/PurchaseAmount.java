@@ -28,4 +28,8 @@ public class PurchaseAmount {
     public int hashCode() {
         return Objects.hash(amount);
     }
+
+    public int buyLotto() {
+        return amount / Lotto.PRICE;
+    }
 }

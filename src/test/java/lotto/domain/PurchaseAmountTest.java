@@ -5,6 +5,9 @@ import lotto.exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -48,5 +51,25 @@ class PurchaseAmountTest {
         // then
         assertThat(purchaseAmount1).isEqualTo(purchaseAmount2);
         assertThat(purchaseAmount1.hashCode()).hasSameHashCodeAs(purchaseAmount2.hashCode());
+    }
+
+    @DisplayName("buyLotto 테스트")
+    @Test
+    void buyLotto() {
+        // given
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>() {{
+            put(Lotto.PRICE, 1);
+            put(Lotto.PRICE + 100, 1);
+            put(Lotto.PRICE * 10, 10);
+        }};
+
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            // when
+            PurchaseAmount purchaseAmount = new PurchaseAmount(entry.getKey());
+            int count = purchaseAmount.buyLotto();
+
+            // then
+            assertThat(count).isEqualTo(entry.getValue());
+        }
     }
 }
