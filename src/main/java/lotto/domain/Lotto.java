@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.LottoRank;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -71,5 +73,13 @@ public class Lotto {
 
         return "[" + String.join(", ", lottoStatus) + "]";
 
+    }
+
+    public LottoRank checkMatchRank(Lotto lotto) {
+        int matchingNumberCount = (int) lineOfLottoNumber.stream()
+                .filter(lotto.lineOfLottoNumber::contains)
+                .count();
+
+        return LottoRank.findRank(matchingNumberCount);
     }
 }

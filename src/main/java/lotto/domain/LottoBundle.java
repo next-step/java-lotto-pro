@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.LottoRank;
+
 import java.util.List;
 
 public class LottoBundle {
@@ -22,5 +24,15 @@ public class LottoBundle {
         }
 
         return sb.toString();
+    }
+
+    public LottoResult getLottoResult(Lotto winningLotto) {
+        LottoResult lottoResult = new LottoResult();
+        for (Lotto purchasedLotto : purchasedLottos) {
+            LottoRank lottoRank = winningLotto.checkMatchRank(purchasedLotto);
+            lottoResult.addResult(lottoRank);
+        }
+
+        return lottoResult;
     }
 }
