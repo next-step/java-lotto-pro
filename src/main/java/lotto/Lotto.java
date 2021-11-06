@@ -1,29 +1,48 @@
 package lotto;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.*;
 
 public class Lotto {
-    private static final int START_NUMBER = 1;
-    private static final int END_NUMBER = 45;
-    public static final int LOTTO_MAX_SIZE = 6;
-    List<Integer> lotto;
+    public static final int LOTTO_SIZE = 6;
+    private final List<LottoNumber> lotto = new ArrayList<>();
 
-    public Lotto() {
-        this.lotto = createLotto();
+    public Lotto(List<Integer> lotto) {
+        if (validateSize(lotto)) {
+            throw new IllegalArgumentException("숫자의 갯수는 6개입니다.");
+        }
+        if (validateDuplicate(lotto)) {
+            throw new IllegalArgumentException("중복된 값을 입력하였습니다.");
+        }
+        for (Integer number : lotto) {
+            this.lotto.add(new LottoNumber(number));
+        }
     }
 
-    private List<Integer> createLotto() {
-        List<Integer> allNumbers = IntStream.range(START_NUMBER, END_NUMBER).boxed().collect(Collectors.toList());
-        Collections.shuffle(allNumbers);
-        List<Integer> lottoNumbers = allNumbers.stream().limit(LOTTO_MAX_SIZE).collect(Collectors.toList());
-        Collections.sort(lottoNumbers);
-        return lottoNumbers;
+    private boolean validateSize(List<Integer> lotto) {
+        if(lotto.size() != LOTTO_SIZE) {
+            return  true;
+        }
+        return false;
     }
 
-    public List<Integer> getLotto() {
-        return this.lotto;
+    private boolean validateDuplicate(List<Integer> lotto) {
+        Set<Integer> lottoSet = new HashSet<>(lotto);
+        if (lottoSet.size() != LOTTO_SIZE) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(lotto, lotto1.lotto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
     }
 }
