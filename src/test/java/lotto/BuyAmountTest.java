@@ -25,6 +25,7 @@ public class BuyAmountTest {
         // when
         assertThatThrownBy(() -> {
             BuyAmount buyAmount = new BuyAmount(buyPrice);
-        }).isInstanceOf(MinimumTicketPriceException.class);
+        }).isInstanceOf(MinimumTicketPriceException.class)
+        .hasMessageContaining("구입 금액을 확인해 주세요.");
     }
 }
