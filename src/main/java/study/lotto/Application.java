@@ -1,11 +1,10 @@
 package study.lotto;
 
 import study.lotto.controller.LottoGameController;
-import study.lotto.controller.dto.LottoOrderCountRequestDto;
+import study.lotto.controller.dto.LottoOrderMoneyRequestDto;
 import study.lotto.controller.dto.LottoWinningNumberRequestDto;
 import study.lotto.controller.dto.TicketLotteryBundleResponseDto;
 import study.lotto.controller.dto.WinningStatisticsResponseDto;
-import study.lotto.model.WinningStatistics;
 import study.lotto.view.LottoOrderCountInputView;
 import study.lotto.view.LottoOrderResultView;
 import study.lotto.view.LottoWinningNumberInputView;
@@ -27,13 +26,13 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        final TicketLotteryBundleResponseDto ticketLotteryBundle = orderTicketLottery();
+        final TicketLotteryBundleResponseDto ticketLotteryBundle = orderTicketLotteryBundle();
         refereeTicketLottery(ticketLotteryBundle);
     }
 
-    private static TicketLotteryBundleResponseDto orderTicketLottery() {
-        final LottoOrderCountRequestDto money = orderInputView.submit();
-        final TicketLotteryBundleResponseDto ticketLotteryBundle = controller.generateTicketLottery(money);
+    private static TicketLotteryBundleResponseDto orderTicketLotteryBundle() {
+        final LottoOrderMoneyRequestDto money = orderInputView.submit();
+        final TicketLotteryBundleResponseDto ticketLotteryBundle = controller.orderTicketLotteryBundleByMoney(money);
         orderResultView.resolve(ticketLotteryBundle);
         return ticketLotteryBundle;
     }

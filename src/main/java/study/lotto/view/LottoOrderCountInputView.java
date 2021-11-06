@@ -1,6 +1,6 @@
 package study.lotto.view;
 
-import study.lotto.controller.dto.LottoOrderCountRequestDto;
+import study.lotto.controller.dto.LottoOrderMoneyRequestDto;
 import study.utils.Console;
 
 public class LottoOrderCountInputView {
@@ -11,9 +11,9 @@ public class LottoOrderCountInputView {
             "[ERROR] 시도할 횟수는 0 에서 " + Integer.MAX_VALUE + " 까지의 숫자만 입력 가능합니다.";
     private static final String ORDER_COUNT_NOT_EMPTY_ERROR_MESSAGE = "공백을 대신 구매금액을 입력해주세요";
 
-    public LottoOrderCountRequestDto submit() {
+    public LottoOrderMoneyRequestDto submit() {
         try {
-            return new LottoOrderCountRequestDto(getInputOrderCount());
+            return new LottoOrderMoneyRequestDto(getInputOrderCount());
         } catch (InvalidLottoInputViewException exception) {
             System.out.println(exception.getMessage());
         }

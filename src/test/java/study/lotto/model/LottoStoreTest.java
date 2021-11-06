@@ -10,7 +10,7 @@ class LottoStoreTest {
     @ParameterizedTest
     @CsvSource(value = {"14000:14", "13200:13", "900:0", "1000:1"}, delimiterString = ":")
     void 천원당_로또_한개를_구매할_수_있다(final int money, final int expectedCountOfTicket) {
-        final TicketLotteryBundle ticketLotteryBundle = LottoStore.purchase(money);
+        final TicketLotteryBundle ticketLotteryBundle = LottoStore.orderTicketLotteryBundleByMoney(money);
         assertThat(ticketLotteryBundle.size()).isEqualTo(expectedCountOfTicket);
     }
 }
