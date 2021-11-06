@@ -14,7 +14,7 @@ public class LottoNumberGenerator {
 		}
 	}
 
-	public static LottoNumber generate() {
+	private static LottoNumber generate() {
 		Collections.shuffle(candidates);
 		List<Integer> numbers = new ArrayList<>(candidates.subList(0, LottoNumber.LOTTO_NUMBER_SIZE));
 		return LottoNumber.of(numbers);
