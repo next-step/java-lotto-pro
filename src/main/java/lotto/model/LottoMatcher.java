@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -11,6 +12,10 @@ import lotto.model.dto.enums.MatchCount;
 public class LottoMatcher {
     private final Payment payment;
     private final LottoNumbers winningNumbers;
+
+    public LottoMatcher(int payment, String[] winningNumbers) {
+        this(payment, Arrays.stream(winningNumbers).mapToInt(Integer::parseInt).toArray());
+    }
 
     public LottoMatcher(int payment, int... winningNumbers) {
         this.payment = new Payment(payment);
