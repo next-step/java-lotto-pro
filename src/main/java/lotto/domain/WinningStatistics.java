@@ -1,26 +1,30 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WinningStatistics {
-    private final List<WinningRank> winningRanks;
+    private final List<WinningStatistic> winningStatistic;
 
     public WinningStatistics(Lottos lottos) {
-        this.winningRanks = mapWinningRank(lottos);
+        this.winningStatistic = mapWinningRank(lottos);
     }
 
-    private List<WinningRank> mapWinningRank(Lottos lottos) {
-        List<WinningRank> winningRanks = new ArrayList<WinningRank>();
+    private List<WinningStatistic> mapWinningRank(Lottos lottos) {
+        List<WinningStatistic> winningRanks = new ArrayList<WinningStatistic>();
         List<Lotto> lottoList = lottos.getLottos();
+        Map<WinningRank, Integer> rankMap = new HashMap<WinningRank, Integer>();
         for (Lotto lotto : lottoList) {
-            winningRanks.add(lotto.getResult());
+            rankMap.put(lotto.getWinningRank(), rankMap.getOrDefault(lotto.getWinningRank(), 0) + 1);
         }
+        rankMap.forEach((rank, count) -> winningRanks.add(new WinningStatistic(rank, count)));
         return winningRanks;
     }
 
-    public List<WinningRank> getWinningRanks() {
-        return this.winningRanks;
+    public List<WinningStatistic> getWinningStatistic() {
+        return this.winningStatistic;
     }
 
 }

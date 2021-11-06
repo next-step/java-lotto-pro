@@ -27,6 +27,11 @@ public class Lotto {
     public int getSize() {
         return this.lottoNumbers.size();
     }
+    
+
+    public WinningRank getWinningRank() {
+        return winningRank;
+    }
 
     public List<Integer> makeLottoNumber() {
         List<Integer> numberRange = new ArrayList<Integer>();
