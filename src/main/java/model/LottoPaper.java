@@ -53,4 +53,12 @@ public final class LottoPaper implements Lotto {
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
 	}
+
+	boolean isAuto() {
+		return this.type.isAuto();
+	}
+
+	boolean isManual() {
+		return this.type.isManual();
+	}
 }

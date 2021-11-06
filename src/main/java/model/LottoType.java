@@ -1,5 +1,14 @@
 package model;
 
-public enum LottoType {
+enum LottoType {
+
 	MANUAL, AUTO;
+
+	boolean isAuto() {
+		return this == AUTO;
+	}
+
+	boolean isManual() {
+		return this == MANUAL;
+	}
 }
