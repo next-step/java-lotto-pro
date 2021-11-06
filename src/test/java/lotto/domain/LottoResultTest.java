@@ -28,12 +28,11 @@ public class LottoResultTest {
     public void lottoTest(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
         LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(new LottoNumber(lottoNumber)));
-        int money = Rank.SECOND.getPrizeMoney();
-        int purchaseMoney = 1 * GAME_PRICE;
+        int expected = Rank.SECOND.getPrizeMoney() / (1 * GAME_PRICE);
 
-        double expected = lottoMatchResult.getLottoYield();
+        double actual = lottoMatchResult.getLottoYield();
 
-        assertThat(expected).isEqualTo(money / purchaseMoney);
+        assertThat(actual).isEqualTo(expected);
     }
 
     static Stream<Arguments> listProvide2() {
@@ -50,9 +49,9 @@ public class LottoResultTest {
         LottoNumber lotto = new LottoNumber(lottoNumber);
         LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(lotto));
 
-        int expectedCount = lottoMatchResult.getMatchRankCount(Rank.SECOND);
+        int actualCount = lottoMatchResult.getMatchRankCount(Rank.SECOND);
 
-        assertThat(expectedCount).isEqualTo(1);
+        assertThat(actualCount).isEqualTo(1);
     }
 
 

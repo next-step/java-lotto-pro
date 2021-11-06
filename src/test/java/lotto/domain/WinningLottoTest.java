@@ -31,9 +31,9 @@ class WinningLottoTest {
     public void isExistBonusNumberTest(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
 
-        boolean excepted = winningLotto.isExistBonusNumber(lottoNumber);
+        boolean actual = winningLotto.isExistBonusNumber(lottoNumber);
 
-        assertThat(excepted).isTrue();
+        assertThat(actual).isTrue();
     }
 
     static Stream<Arguments> listProvide2() {
@@ -50,9 +50,9 @@ class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
         Number number = new Number(3);
 
-        boolean excepted = winningLotto.isMatchNumber(number);
+        boolean actual = winningLotto.isMatchNumber(number);
 
-        assertThat(excepted).isTrue();
+        assertThat(actual).isTrue();
     }
 
     static Stream<Arguments> listProvide3() {
@@ -66,12 +66,11 @@ class WinningLottoTest {
     @DisplayName("로또 매칭 결과 확인")
     public void getLottoMatchResult(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
-        LottoNumber lotto = new LottoNumber(lottoNumber);
+        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(new LottoNumber(lottoNumber)));
 
-        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(lotto));
-        int matchRankCount = lottoMatchResult.getMatchRankCount(Rank.SECOND);
+        int actualMatchRankCount = lottoMatchResult.getMatchRankCount(Rank.SECOND);
 
-        assertThat(matchRankCount).isEqualTo(1);
+        assertThat(actualMatchRankCount).isEqualTo(1);
     }
 
 }

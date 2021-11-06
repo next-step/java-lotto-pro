@@ -17,9 +17,9 @@ public class InputViewTest {
 
         validateNumberFormat(inputString);
 
-        int result = Integer.parseInt(inputString);
+        int actual = Integer.parseInt(inputString);
 
-        assertThat(result).isEqualTo(15000);
+        assertThat(actual).isEqualTo(15000);
     }
 
     @ParameterizedTest

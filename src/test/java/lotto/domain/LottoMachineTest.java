@@ -3,10 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
 
@@ -16,9 +13,9 @@ public class LottoMachineTest {
         LottoMachine machine = new LottoMachine();
         Money money = new Money(5000);
 
-        List<LottoNumber> lottoList = machine.getLottoList(money);
+        int actualSize = machine.getLottoList(money).size();
 
-        assertThat(lottoList.size()).isEqualTo(money.getPurchaseCount());
+        assertThat(actualSize).isEqualTo(5);
     }
 
 }

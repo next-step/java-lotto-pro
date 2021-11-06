@@ -20,9 +20,9 @@ public class LottoNumberTest {
     public void autoLottoTest() {
         LottoNumber lottoNumber = new LottoNumber();
 
-        int excepted = lottoNumber.getLottoNumbers().size();
+        int size = lottoNumber.getLottoNumbers().size();
 
-        assertThat(excepted).isEqualTo(6);
+        assertThat(size).isEqualTo(6);
     }
 
     static Stream<Arguments> listProvide3() {

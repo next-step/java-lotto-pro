@@ -11,7 +11,11 @@ public class MoneyTest {
     @Test
     @DisplayName("입력 금액 생성 테스트")
     public void money() {
-        Assertions.assertThat(new Money(1000)).isEqualTo(new Money(1000));
+        Money money = new Money(1000);
+
+        Money expected = new Money(1000);
+
+        Assertions.assertThat(money).isEqualTo(expected);
     }
 
     @Test
