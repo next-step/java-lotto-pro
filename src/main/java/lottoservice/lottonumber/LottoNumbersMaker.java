@@ -35,8 +35,7 @@ public class LottoNumbersMaker {
 	}
 
 	public static List<LottoNumber> makeLottoNumbers(String numbersTxt) {
-		String[] splitedTexts = numbersTxt.split(", ");
-		List<Integer> numbers = parseTextToNumbers(splitedTexts);
+		List<Integer> numbers = parseTextToNumbers(numbersTxt);
 		return makeLottoNumbers(numbers);
 	}
 
@@ -45,10 +44,10 @@ public class LottoNumbersMaker {
 			.mapToObj(LottoNumber::new).collect(Collectors.toList());
 	}
 
-	private static List<Integer> parseTextToNumbers(String[] splitedTexts) {
+	private static List<Integer> parseTextToNumbers(String numbersTxt) {
 		try {
-			return Arrays.stream(splitedTexts)
-				.map(splitedNumber -> Integer.parseInt(splitedNumber))
+			return Arrays.stream(numbersTxt.split(", "))
+				.map(it -> Integer.parseInt(it))
 				.collect(Collectors.toList());
 		} catch (NumberFormatException ex) {
 			throw new InvalidLottoFormatException(ERROR_MESSAGE_INVALID_INPUT_FORMAT);
