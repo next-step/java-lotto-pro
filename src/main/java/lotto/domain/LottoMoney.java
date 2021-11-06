@@ -34,8 +34,8 @@ public class LottoMoney {
         return amount / LOTTO_AMOUNT_UNIT;
     }
 
-    public double profitRatio(int profitAmount) {
-        double profitRatio = (double)profitAmount / amount;
+    public double profitRatio(long winningAmount) {
+        double profitRatio = (double)winningAmount / amount;
         return Math.floor(profitRatio * PROFIT_RATIO_SCALE) / PROFIT_RATIO_SCALE;
     }
 }

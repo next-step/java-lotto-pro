@@ -13,7 +13,7 @@ public class LottoNumbersFactory {
     public static final int LOTTO_NUMBERS_SIZE = 6;
     public static final int LOTTO_NUMBER_MIN_RANGE = 1;
     public static final int LOTTO_NUMBER_MAX_RANGE = 45;
-    public static final String COMMA = ",";
+    public static final String COMMA = ", ";
     private static final Pattern ONLY_POSITIVE_NUMBER = Pattern.compile("[0-9]+");
 
     private LottoNumbersFactory() {
