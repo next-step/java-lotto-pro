@@ -3,9 +3,6 @@ package lotto.domain;
 import java.util.regex.Pattern;
 
 public class LottoMoney {
-    public static final int LOTTO_AMOUNT_UNIT = 1000;
-    public static final int PROFIT_RATIO_SCALE = 100;
-    public static final int LOTTO_AMOUNT_UNIT_MODULO = 0;
     private static final Pattern ONLY_POSITIVE_NUMBER = Pattern.compile("[0-9]+");
 
     private final int amount;
@@ -23,17 +20,20 @@ public class LottoMoney {
     }
 
     private void validateAmountUnit() {
-        if (this.amount < LOTTO_AMOUNT_UNIT || this.amount % LOTTO_AMOUNT_UNIT != LOTTO_AMOUNT_UNIT_MODULO) {
+        int lottoAmountUnit = LottoAmountUnit.LOTTO_AMOUNT_UNIT.getUnit();
+        if (amount < lottoAmountUnit
+            || amount % lottoAmountUnit != LottoAmountUnit.LOTTO_AMOUNT_UNIT_MODULO.getUnit()) {
             throw new IllegalArgumentException(Message.WRONG_LOTTO_AMOUNT_UNIT.getMessage());
         }
     }
 
     public int countOfPossibleLotto() {
-        return amount / LOTTO_AMOUNT_UNIT;
+        return amount / LottoAmountUnit.LOTTO_AMOUNT_UNIT.getUnit();
     }
 
     public double profitRatio(long winningAmount) {
+        int profitRatioScale = LottoAmountUnit.PROFIT_RATIO_SCALE.getUnit();
         double profitRatio = (double)winningAmount / amount;
-        return Math.floor(profitRatio * PROFIT_RATIO_SCALE) / PROFIT_RATIO_SCALE;
+        return Math.floor(profitRatio * profitRatioScale) / profitRatioScale;
     }
 }
