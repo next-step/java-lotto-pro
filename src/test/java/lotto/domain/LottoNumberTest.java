@@ -32,7 +32,7 @@ public class LottoNumberTest {
 		int bonusNumber = 9;
 
 		// when
-		LottoNumber winningNumber = LottoNumber.of(numberList, bonusNumber);
+		LottoNumber winningNumber = LottoNumber.ofWinning(numberList, bonusNumber);
 
 		// then
 		List<Integer> integers = winningNumber.getNumbers();
@@ -70,10 +70,10 @@ public class LottoNumberTest {
 
 		// when, then
 		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> LottoNumber.of(numberList, duplicateBonusNumber))
+			.isThrownBy(() -> LottoNumber.ofWinning(numberList, duplicateBonusNumber))
 			.withMessageContaining("보너스번호는 다른 번호들과 중복이 되면 안됩니다");
 		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> LottoNumber.of(numberList, outRangeBonusNumber))
+			.isThrownBy(() -> LottoNumber.ofWinning(numberList, outRangeBonusNumber))
 			.withMessageContaining("1이상 45이하인 숫자여야 합니다");
 
 	}
@@ -96,7 +96,7 @@ public class LottoNumberTest {
 	@DisplayName("보너스 번호가 포함되어있는지 확인할 수 있어야 한다")
 	public void isEqualBonusNumberTest() {
 		// given
-		LottoNumber winningNumber = LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+		LottoNumber winningNumber = LottoNumber.ofWinning(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		LottoNumber lottoNumber = LottoNumber.of(Arrays.asList(1, 2, 3, 9, 10, 7));
 		LottoNumber diffLottoNumber = LottoNumber.of(Arrays.asList(1, 2, 3, 9, 10, 11));
 

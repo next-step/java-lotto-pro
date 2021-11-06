@@ -92,7 +92,7 @@ public class RankTest {
 	@DisplayName("로또번호와 당첨번호가 주어지면, 순위가 반환되어야 한다")
 	public void getMatchRankTest(LottoNumber lottoNumber, Rank expected) {
 		// given
-		LottoNumber winningNumber = LottoNumber.of(
+		LottoNumber winningNumber = LottoNumber.ofWinning(
 			Arrays.asList(1, 2, 3, 4, 5, 6), 45);
 
 		// when

@@ -26,7 +26,7 @@ public class LottoNumber {
 		return lottoNumber;
 	}
 
-	public static LottoNumber of(List<Integer> numbers, int bonusNumber) {
+	public static LottoNumber ofWinning(List<Integer> numbers, int bonusNumber) {
 		LottoNumber lottoNumber = new LottoNumber();
 		validateNumber(numbers);
 		Collections.sort(numbers);

@@ -31,7 +31,7 @@ public class LottoController {
 	private void checkProfit() {
 		List<Integer> numbers = InputView.getLottoNumbers();
 		int bonusNumber = InputView.getBonusNumber();
-		LottoNumber winingNumber = LottoNumber.of(numbers, bonusNumber);
+		LottoNumber winingNumber = LottoNumber.ofWinning(numbers, bonusNumber);
 
 		LottoRanks ranks = LottoRanks.of(winingNumber, this.lottoNumbers);
 		double profit = LottoProfit.calculate(ranks.getTotalPrizeMoney(), this.money);
