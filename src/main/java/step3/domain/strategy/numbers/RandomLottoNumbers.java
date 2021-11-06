@@ -12,15 +12,13 @@ public class RandomLottoNumbers implements NumbersStrategy {
 
     private static final int SUB_START_INDEX = 0;
     private static final int RANGE_MAX_ADD_VALUE = 1;
-
-    private static final int[] numbers;
+    private static final List<Integer> lottoRangeNumbers;
 
     static {
-        List<Integer> lottoRangeNumbers =
+        lottoRangeNumbers =
             IntStream.range(LottoNumber.MIN_NUMBER_RANGE, LottoNumber.MAX_NUMBER_RANGE + RANGE_MAX_ADD_VALUE)
                 .boxed()
                 .collect(Collectors.toList());
-        numbers = getLottoNumbers(lottoRangeNumbers);
     }
 
     public RandomLottoNumbers() {
@@ -28,12 +26,12 @@ public class RandomLottoNumbers implements NumbersStrategy {
 
     @Override
     public int[] getNumbers() {
-        return numbers;
+        return getLottoNumbers();
     }
 
-    private static int[] getLottoNumbers(List<Integer> randomRangeNumbers) {
-        Collections.shuffle(randomRangeNumbers);
-        List<Integer> result = randomRangeNumbers.subList(SUB_START_INDEX, LottoNumbers.MAX_LOTTO_NUMBERS_SIZE);
+    private static int[] getLottoNumbers() {
+        Collections.shuffle(lottoRangeNumbers);
+        List<Integer> result = lottoRangeNumbers.subList(SUB_START_INDEX, LottoNumbers.MAX_LOTTO_NUMBERS_SIZE);
         Collections.sort(result);
         return result.stream().mapToInt(i -> i).toArray();
     }
