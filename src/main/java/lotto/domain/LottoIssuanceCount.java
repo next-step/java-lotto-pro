@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.exception.ErrorMessage;
+import lotto.exception.ErrorMessage;
 
 import java.util.ArrayList;
 import java.util.List;
