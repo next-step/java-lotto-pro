@@ -1,5 +1,7 @@
 package study.lotto.model;
 
+import study.lotto.model.exception.MalFormedLottoNumberException;
+
 import java.util.HashMap;
 
 public class LottoNumber {

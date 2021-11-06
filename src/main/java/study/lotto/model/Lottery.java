@@ -1,5 +1,7 @@
 package study.lotto.model;
 
+import study.lotto.model.exception.IllegalLotterySizeException;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;

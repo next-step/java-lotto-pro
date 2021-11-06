@@ -1,6 +1,7 @@
 package study.lotto.model;
 
 import org.junit.jupiter.api.Test;
+import study.lotto.model.exception.IllegalLotterySizeException;
 
 import java.util.Arrays;
 import java.util.HashSet;

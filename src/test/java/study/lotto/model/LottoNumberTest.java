@@ -3,6 +3,7 @@ package study.lotto.model;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import study.lotto.model.exception.MalFormedLottoNumberException;
 
 import java.util.stream.IntStream;
 

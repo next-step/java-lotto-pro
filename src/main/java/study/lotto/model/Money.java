@@ -1,5 +1,7 @@
 package study.lotto.model;
 
+import study.lotto.model.exception.NotEnoughMoneyException;
+
 public class Money {
 
     private static final String ORDER_MONEY_NOT_ENOUGH_ERROR_MESSAGE = "최소 1000 이상의 값이어야 합니다.";

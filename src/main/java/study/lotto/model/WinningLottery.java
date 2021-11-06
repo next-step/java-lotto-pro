@@ -1,5 +1,8 @@
 package study.lotto.model;
 
+import study.lotto.model.exception.DuplicatedBonusLottoNumberException;
+import study.lotto.model.exception.EmptyBonusLottoNumberException;
+
 import java.util.Set;
 
 public class WinningLottery extends Lottery {

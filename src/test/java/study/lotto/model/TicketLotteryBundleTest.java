@@ -1,6 +1,7 @@
 package study.lotto.model;
 
 import org.junit.jupiter.api.Test;
+import study.lotto.model.exception.TicketLotteryBundleMustBeNotEmptyException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
