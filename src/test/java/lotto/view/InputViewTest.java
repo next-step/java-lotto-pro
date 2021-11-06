@@ -45,7 +45,7 @@ public class InputViewTest {
 
     @ParameterizedTest
     @DisplayName("당첨번호 입력값 검증_오류")
-    @ValueSource(strings = "1,2,3,4,5,6")
+    @ValueSource(strings = "1,2,3,4,5,6,가")
     public void parseInputStringToNumberListError(String inputString) {
         assertThatThrownBy(() -> {
             for (String number : inputString.split(",")) {
