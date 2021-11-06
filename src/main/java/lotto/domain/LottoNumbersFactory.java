@@ -33,7 +33,7 @@ public class LottoNumbersFactory {
             .collect(Collectors.toList());
     }
 
-    public static List<Integer> convertInputNumbersToNumbers(String inputNumbers) {
+    public static List<Integer> createManualLottoNumbers(String inputNumbers) {
         List<Integer> numbers = new ArrayList<>();
         String[] inputNumbersBySplit = inputNumbers.split(COMMA);
         for (String number : inputNumbersBySplit) {
