@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,9 +27,22 @@ public class LottoNumbersGroupTest {
     @DisplayName("랜덤 로또 숫자 그룹 생성 테스트")
     @Test
     void generateRandomLottoNumberGroupTest() {
-        BuyAmount buyAmount = new BuyAmount(14000);
-        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(buyAmount);
-        System.out.println(lottoNumbersGroup);
+        BuyAmount buyAmount = new BuyAmount(1000);
+        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(buyAmount) {
+            @Override
+            public List<LottoNumbers> generateRandomLottoNumbers(int amount) {
+                List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+                lottoNumbersList.add(new LottoNumbers("1,2,3,4,5,6"));
+                return lottoNumbersList;
+            }
+        };
+
+        LottoNumbersGroup lottoNumbersGroup2 = new LottoNumbersGroup(
+                Arrays.asList(new LottoNumbers(
+                Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
+                        .collect(Collectors.toSet()))));
+        assertThat(lottoNumbersGroup.toString()).isEqualTo(lottoNumbersGroup2.toString());
     }
 
     @DisplayName("로또 숫자 수동 그룹 생성 테스트")
