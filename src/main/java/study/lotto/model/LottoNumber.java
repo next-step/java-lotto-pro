@@ -16,7 +16,12 @@ public class LottoNumber {
     }
 
     public static LottoNumber valueOf(final int lottoNumber) {
-        return LottoNumberCache.cache.get(lottoNumber);
+
+        if (LottoNumberCache.low <= lottoNumber && lottoNumber <= LottoNumberCache.high) {
+            LottoNumberCache.cache.get(lottoNumber);
+        }
+
+        return new LottoNumber(lottoNumber);
     }
 
     public int getValue() {
@@ -31,10 +36,12 @@ public class LottoNumber {
 
     private static class LottoNumberCache {
         static final HashMap<Integer, LottoNumber> cache;
+        static int low = MIN_NUMBER;
+        static int high = MAX_NUMBER;
 
         static {
             final HashMap<Integer, LottoNumber> _cache = new HashMap<>();
-            for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            for (int i = low; i <= high; i++) {
                 _cache.put(i, new LottoNumber(i));
             }
             cache = _cache;
