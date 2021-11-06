@@ -13,6 +13,9 @@ public enum WinResult {
     FIFTH(3, 5_000),
     NOT_MATCHED(-1, 0);
 
+    private static final int ONLY_ONE_MATCHED = 1;
+    private static final int FIRST_ELEMENT = 0;
+
     private final int count;
     private final int prize;
     private boolean bonusNumberMatched;
@@ -33,8 +36,8 @@ public enum WinResult {
                 .filter(winResult -> winResult.count == count)
                 .collect(Collectors.toList());
 
-        if (winResults.size() == 1) {
-            return winResults.get(0);
+        if (winResults.size() == ONLY_ONE_MATCHED) {
+            return winResults.get(FIRST_ELEMENT);
         }
 
         return winResults.stream()
