@@ -4,7 +4,7 @@ import view.InputView;
 import view.OutputMessage;
 import view.ResultView;
 
-public class Lotto {
+public class LottoMachine {
     public void start() {
         ResultView.print(OutputMessage.ASK_PURCHASE_AMOUNT::getMessage);
         LottoMoney lottoMoney = new LottoMoney(InputView.readLine());
@@ -14,6 +14,7 @@ public class Lotto {
 
         LottoTickets lottoTickets = LottoTicketFactory.createRandomLottoTickets(lottoCount);
         ResultView.print(lottoTickets);
+        ResultView.print(OutputMessage.ASK_WINNER_TICKET::getMessage);
 
         LottoTicket winnerTicket = new LottoTicket(InputView.readLine());
         LottoResults lottoResults = lottoTickets.calculateResult(winnerTicket);
