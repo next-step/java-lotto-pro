@@ -31,8 +31,8 @@ public class Lotto {
 		}
 	}
 
-	public boolean hasBonus(LottoNumber bonus) {
-		return this.lottoNumbers.contains(bonus);
+	public boolean hasBonus(WinningLotto winningLotto) {
+		return this.lottoNumbers.contains(winningLotto.getBonus());
 	}
 
 	public static Lotto from(String s) {

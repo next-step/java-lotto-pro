@@ -4,13 +4,16 @@ public class WinningLotto extends Lotto {
 
 	private final LottoNumber bonus;
 
-	private WinningLotto(LottoNumber bonus, List<LottoNumber> lottoNumbers) {
+	WinningLotto(List<LottoNumber> lottoNumbers, LottoNumber bonus) {
 		super(lottoNumbers);
+		validate(bonus);
 		this.bonus = bonus;
 	}
 
-	public static WinningLotto from(String bonus, String lottoNumbers) {
-		return new WinningLotto(LottoNumber.from(bonus), LottoParser.parse(lottoNumbers));
+	private void validate(LottoNumber bonus) {
+		if (lottoNumbers.contains(bonus)) {
+			throw new WinningLottoFormatException();
+		}
 	}
 
 	public int countMatching(Lotto lotto) {

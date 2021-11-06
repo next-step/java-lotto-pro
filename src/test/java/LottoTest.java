@@ -16,8 +16,11 @@ public class LottoTest {
 
 	@Test
 	void hasBonus() {
-		final LottoNumber bonus = LottoNumber.from(45);
-		assertThat(Lotto.from("1,2,3,4,5,6").hasBonus(bonus)).isFalse();
-		assertThat(Lotto.from("1,2,3,4,5,45").hasBonus(bonus)).isTrue();
+		final WinningLotto winningLotto = WinningLottoBuilder.aWinningLotto()
+			.withLottoNumbers("1,2,3,4,5,6")
+			.withBonus("45")
+			.build();
+		assertThat(Lotto.from("1,2,3,4,5,6").hasBonus(winningLotto)).isFalse();
+		assertThat(Lotto.from("1,2,3,4,5,45").hasBonus(winningLotto)).isTrue();
 	}
 }
