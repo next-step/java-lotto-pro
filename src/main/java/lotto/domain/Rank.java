@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
     FOURTH(3, 5_000),
     THIRD(4, 50_000),
@@ -14,8 +16,15 @@ public enum Rank {
         this.winningMoney = Money.of(winningMoney);
     }
 
+    public static Rank of(int matchedCount) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.matchedCount == matchedCount)
+                .findFirst()
+                .orElse(null);
+    }
+
     public int getCount(Record record) {
-        return record.get(matchedCount);
+        return record.get(this);
     }
 
     public Money getWinningMoney(Record record) {

@@ -52,12 +52,12 @@ public class LottoNumbers {
         return Collections.unmodifiableList(numbers);
     }
 
-    public int getMatchedCount(LottoNumbers winningNumbers) {
+    public Rank getRank(LottoNumbers winningNumbers) {
         int result = 0;
         for (LottoNumber number : numbers) {
             result = getIncreasedNumberIfContains(winningNumbers, number, result);
         }
-        return result;
+        return Rank.of(result);
     }
 
     private int getIncreasedNumberIfContains(LottoNumbers winningNumbers, LottoNumber number, int result) {

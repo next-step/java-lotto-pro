@@ -16,8 +16,8 @@ public class LotteryTicket {
 
     public void writeRecord(Record record, LottoNumbers winningNumber) {
         for (LottoNumbers numbers : lottoNumbersList) {
-            int matchedCount = numbers.getMatchedCount(winningNumber);
-            record.increaseMatchedCount(matchedCount);
+            Rank rank = numbers.getRank(winningNumber);
+            record.increaseMatchedCount(rank);
         }
     }
 

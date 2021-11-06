@@ -7,7 +7,7 @@ public class Record {
     private static final int DEFAULT_COUNT_ZERO = 0;
     private static final int DEFAULT_PRICE = 5000;
 
-    private final Map<Integer, Integer> record = new HashMap<>();
+    private final Map<Rank, Integer> record = new HashMap<>();
     private final Money totalPayment;
     private final Money totalWinningMoney;
 
@@ -21,7 +21,7 @@ public class Record {
         lotteryTicket.writeRecord(this, winningNumber);
     }
 
-    public void increaseMatchedCount(int matchedCount) {
+    public void increaseMatchedCount(Rank matchedCount) {
         Integer count = record.getOrDefault(matchedCount, DEFAULT_COUNT_ZERO);
         record.put(matchedCount, count + 1);
     }
@@ -42,8 +42,8 @@ public class Record {
         return rank.getCount(this);
     }
 
-    public int get(int matchedCount) {
-        return record.getOrDefault(matchedCount, DEFAULT_COUNT_ZERO);
+    public int get(Rank rank) {
+        return record.getOrDefault(rank, DEFAULT_COUNT_ZERO);
     }
 
     public Money getWinningMoney(Rank rank) {

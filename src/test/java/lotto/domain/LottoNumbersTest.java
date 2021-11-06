@@ -127,8 +127,8 @@ public class LottoNumbersTest {
         @Test
         public void testCompare() {
             LottoNumbers lottoNumbers = LottoNumbers.of("1,2,3,4,5,6");
-            int matchedCount = lottoNumbers.getMatchedCount(LottoNumbers.of("1,2,3,11,12,13"));
-            assertThat(matchedCount).isEqualTo(3);
+            Rank rank = lottoNumbers.getRank(LottoNumbers.of("1,2,3,11,12,13"));
+            assertThat(rank).isEqualTo(Rank.FOURTH);
         }
     }
 }
