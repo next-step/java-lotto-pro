@@ -1,11 +1,10 @@
 package lotto.domain.number;
 
-import lotto.exception.OutOfBoundException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.*;
+
+import lotto.exception.*;
 
 class MoneyTest {
     @DisplayName("정적팩토리 메서드를 이용하여 메서드를 생성하면 객체가 만들어진다.")

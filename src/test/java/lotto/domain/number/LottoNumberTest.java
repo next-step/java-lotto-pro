@@ -1,10 +1,8 @@
 package lotto.domain.number;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.*;
 
 class LottoNumberTest {
     @DisplayName("정적팩토리 메서드를 이용하여 숫자로 된 문자열을 받으면 객체를 생성한다.")
