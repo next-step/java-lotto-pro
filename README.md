@@ -14,11 +14,13 @@
 - lotto
   - price = 1000 
   - generate distinct 6 lotto numbers
+  - has bonus
 - lotto store
   - sell lottos
 - lotto parser
 - winning lotto (extends lotto)
   - count matching
+  - bonus
 - lotto winning rank
 - lotto winning statistics
   - count lottos by rank
@@ -27,6 +29,7 @@
   - input
     - pay : should be bigger than price of lotto, otherwise retry
     - winning numbers (','구분)
+    - bonus
   - output
     - lotto
     - winning statistics
