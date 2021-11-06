@@ -88,11 +88,9 @@ public class LottoWinningNumbers {
 	}
 
 	public int compareWithNumbers(List<LottoNumber> ticketLottoNumbers) {
-		int matchCount = 0;
-		for (LottoNumber number : ticketLottoNumbers) {
-			matchCount += hasMatchNumber(number) ? 1 : 0;
-		}
-		return matchCount;
+		return (int)ticketLottoNumbers.stream()
+			.filter(it-> hasMatchNumber(it))
+			.count();
 	}
 
 	public boolean hasMatchNumber(LottoNumber number){
