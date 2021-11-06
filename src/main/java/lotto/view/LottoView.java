@@ -34,9 +34,9 @@ public class LottoView {
         System.out.printf("[ %s ]\n", lotto.toString());
     }
 
-    public static Lotto getWinningLotto() {
+    public static String getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new Lotto(scanner.next());
+        return scanner.next();
     }
 
     public static void displayStatic(final Result result) {
@@ -63,8 +63,8 @@ public class LottoView {
         return MATCH_RESULT;
     }
 
-    public static Bonus getBonusBall() {
+    public static Integer getBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new Bonus(scanner.nextInt());
+        return scanner.nextInt();
     }
 }
