@@ -25,6 +25,6 @@ public class LottoGenerator {
 		List<Integer> lottoNumbers = LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_COUNT);
 		Collections.sort(lottoNumbers);
 
-		return new Lotto(lottoNumbers);
+		return Lotto.from(lottoNumbers);
 	}
 }

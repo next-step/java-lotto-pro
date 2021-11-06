@@ -15,31 +15,37 @@ public class Lotto {
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public Lotto(List<Integer> numbers) {
+	private Lotto(final List<LottoNumber> numbers) {
 		validateNumberCount(numbers);
 		validateNonDuplicated(numbers);
 
-		lottoNumbers = new ArrayList<>();
+		this.lottoNumbers = numbers;
+	}
+
+	public static Lotto from(final List<Integer> numbers) {
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
 
 		for (Integer number : numbers) {
 			LottoNumber lottoNumber = new LottoNumber(number);
 			lottoNumbers.add(lottoNumber);
 		}
+
+		return new Lotto(lottoNumbers);
 	}
 
 	public List<LottoNumber> numbers() {
 		return Collections.unmodifiableList(lottoNumbers);
 	}
 
-	private void validateNonDuplicated(List<Integer> numbers) {
-		Set<Integer> numberSet = new HashSet<>(numbers);
+	private void validateNonDuplicated(final List<LottoNumber> numbers) {
+		Set<LottoNumber> numberSet = new HashSet<>(numbers);
 
 		if (numberSet.size() != LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
 		}
 	}
 
-	private void validateNumberCount(List<Integer> numbers) {
+	private void validateNumberCount(final List<LottoNumber> numbers) {
 		if (numbers.size() != LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException(NUMBER_COUNT_ERROR);
 		}
