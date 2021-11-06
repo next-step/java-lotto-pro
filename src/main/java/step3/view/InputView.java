@@ -29,10 +29,16 @@ public class InputView {
     }
 
     public static LottoBuyRequestDto readLottoRequestDto() {
-        ResultView.amountRequestPrintln();
-        LottoBuyRequestDto lottoRequestDto = new LottoBuyRequestDto();
-        lottoRequestDto.mapAmount(readOnlyNumber());
-        return lottoRequestDto;
+        try {
+            ResultView.amountRequestPrintln();
+            LottoBuyRequestDto lottoRequestDto = new LottoBuyRequestDto();
+            lottoRequestDto.mapAmount(readOnlyNumber());
+            return lottoRequestDto;
+        } catch (InvalidParamException invalidParamException) {
+            ResultView.println(invalidParamException.getMessage());
+            return readLottoRequestDto();
+        }
+
     }
 
     public static LottoWinNumbersRequestDto readLottoWinnerRequestDto(int amount) {
