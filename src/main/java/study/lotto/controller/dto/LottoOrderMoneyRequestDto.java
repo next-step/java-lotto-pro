@@ -9,11 +9,7 @@ public class LottoOrderMoneyRequestDto {
         this.money = money;
     }
 
-    public int getMoney() {
-        return money;
-    }
-
     public Money toEntity() {
-        return null;
+        return Money.valueOf(money);
     }
 }
