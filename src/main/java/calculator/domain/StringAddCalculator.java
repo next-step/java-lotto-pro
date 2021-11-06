@@ -1,3 +1,5 @@
+package calculator.domain;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -7,13 +9,14 @@ public class StringAddCalculator {
 
     private static final Pattern CUSTOM_SEPARATOR_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final String DEFAULT_SEPARATOR = ",|:";
+    private static final int SUM_IF_INPUT_IS_NULL_OR_EMPTY = 0;
 
     private static final int SEPARATOR_GROUP_INDEX = 1;
     private static final int EXPRESSION_GROUP_INDEX = 2;
 
     public static int splitAndSum(String input) {
         if (Objects.isNull(input) || input.isEmpty()) {
-            return 0;
+            return SUM_IF_INPUT_IS_NULL_OR_EMPTY;
         }
         Matcher matcher = CUSTOM_SEPARATOR_PATTERN.matcher(input);
         if (matcher.find()) {
