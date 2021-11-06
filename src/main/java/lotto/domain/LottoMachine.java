@@ -18,10 +18,4 @@ public class LottoMachine {
         return lottoNumbers;
     }
 
-    public List<Rank> matchLotto(List<Number> matchNumber, Number bonusNumber, List<LottoNumber> lottoList) {
-        return lottoList.stream()
-                .map(m -> m.getMatchRank(matchNumber, bonusNumber))
-                .collect(Collectors.toList());
-    }
-
 }
