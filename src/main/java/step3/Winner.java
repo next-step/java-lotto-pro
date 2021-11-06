@@ -18,7 +18,7 @@ public class Winner {
 
 	private static Map<Integer, Integer> winnings;
 	private final Map<Integer, Integer> winningAmount;
-	private int sumAmount;
+	private int sumWinningAmount;
 	private BigDecimal yield;
 
 	public Winner() {
@@ -32,38 +32,50 @@ public class Winner {
 	}
 
 	public Map<Integer, Integer> statistics(String userInputWinnerNumber) {
+
 		assert userInputWinnerNumber != null;
 		List<LottoNumbers> papers = LottoPapers.PAPERS;
-		List<Integer> inputNumbers = getIntegers(userInputWinnerNumber);
-		for (LottoNumbers paper : papers) {
-			Integer matchNumber = findMatchLottoNumber(inputNumbers, paper);
-			Optional<Integer> optAmount = Optional.ofNullable(winnings.get(matchNumber));
-			Integer amount = optAmount.orElse(0);
-			winningAmount.put(matchNumber, amount);
-			sumAmount += amount;
+		List<LottoNumber> lottoNumbers = getLottoNumber(userInputWinnerNumber);
+		for (LottoNumbers lottoPapers : papers) {
+			Integer winningCount = findMatchLottoNumber(lottoNumbers, lottoPapers);
+			Integer winningAmount = findWinningAmount(winningCount);
+			addWinnerList(winningCount, winningAmount);
+			sumWinningAmount(winningAmount);
 		}
 		return winningAmount;
 	}
 
-	public BigDecimal yield(Money money) {
-		yield = money.yield(sumAmount);
-		return yield;
-	}
-
-	private Integer findMatchLottoNumber(List<Integer> collect, LottoNumbers paper) {
-		Integer match = 0;
-		for (Integer integer : collect) {
-			match += paper.match(new LottoNumber(integer));
+	private Integer findMatchLottoNumber(List<LottoNumber> lottoNumbers, LottoNumbers lottoPapers) {
+		int matchCount = 0;
+		for (LottoNumber lottoNumber : lottoNumbers) {
+			matchCount += lottoPapers.match(lottoNumber);
 		}
-		return match;
+		return matchCount;
 	}
 
-	private List<Integer> getIntegers(String userInputWinnerNumber) {
+	private Integer findWinningAmount(Integer matchNumber) {
+		Integer winningAmount = Optional.ofNullable(winnings.get(matchNumber)).orElse(0);
+		sumWinningAmount(winningAmount);
+		return winningAmount;
+	}
+
+	private void sumWinningAmount(Integer winningAmount) {
+		sumWinningAmount += winningAmount;
+	}
+
+	private void addWinnerList(Integer matchNumber, Integer winningAmount) {
+		this.winningAmount.put(matchNumber, winningAmount);
+	}
+
+	private List<LottoNumber> getLottoNumber(String userInputWinnerNumber) {
 		final String inputNumber = userInputWinnerNumber.replaceAll("\\s+", "");
 		return Arrays.stream(inputNumber.split(","))
-			.mapToInt(Integer::parseInt)
-			.boxed()
-			.collect(Collectors.toList());
+			.map(s -> new LottoNumber(Integer.parseInt(s))).collect(Collectors.toList());
+	}
+
+	public BigDecimal yield(Money money) {
+		yield = money.yield(sumWinningAmount);
+		return yield;
 	}
 
 	@Override
