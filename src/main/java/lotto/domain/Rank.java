@@ -40,7 +40,7 @@ public enum Rank {
     public static Rank rank(Lotto winningLotto, Lotto lotto, Bonus bonus) {
         return rank(
                 winningLotto.match(lotto),
-                lotto.checkBonus(bonus));
+                lotto.containBonus(bonus));
     }
 
     public int getPrice() {

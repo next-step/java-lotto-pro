@@ -37,7 +37,7 @@ class RankTest {
     @Test
     void SECOND_BONUS를_반환한다() {
         Lotto winningLotto = new Lotto("1,2,3,4,5,7");
-        Bonus bonus = new Bonus(7);
+        Bonus bonus = new Bonus(6);
         assertThat(Rank.rank(winningLotto, LottoTest.로또, bonus)).isEqualTo(Rank.SECOND_BONUS);
     }
 }
