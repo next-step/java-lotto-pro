@@ -16,4 +16,20 @@ public class LottoResultsTest {
         LottoResults lottoResults = new LottoResults(lottoResultArr);
         assertThat(lottoResults.getMatchAmount(6)).isEqualTo(1);
     }
+
+    @DisplayName("로또 결과들 중 match3 1개, match6 1개 맞췄을 경우 합계 테스트")
+    @Test
+    void getTotalRewardTest() {
+        List<LottoResult> lottoResultArr = Arrays.asList(new LottoResult(3), new LottoResult(6));
+        LottoResults lottoResults = new LottoResults(lottoResultArr);
+        assertThat(lottoResults.getTotalReward()).isEqualTo(2000005000);
+    }
+
+    @DisplayName("로또 결과들 중 match3 1개 맞췄을 경우 수익률 테스트")
+    @Test
+    void getProfitRateTest() {
+        List<LottoResult> lottoResultArr = Arrays.asList(new LottoResult(3), new LottoResult(0));
+        LottoResults lottoResults = new LottoResults(lottoResultArr);
+        assertThat(lottoResults.getProfitRate(new BuyAmount(14000))).isEqualTo(0.35);
+    }
 }
