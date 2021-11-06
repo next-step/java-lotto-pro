@@ -8,12 +8,31 @@ import java.util.Objects;
 public class Lotto {
 
     private List<Integer> numbers;
+    private int winningNumberMatchCount;
 
     public Lotto(List<Integer> lottoNumbers) {
         numberCountValid(lottoNumbers);
         numberDuplicateValid(lottoNumbers);
         numberRangeValid(lottoNumbers);
         this.numbers = lottoNumbers;
+    }
+
+    public Lotto(List<Integer> numbers, int winningNumberMatchCount) {
+        this(numbers);
+        this.winningNumberMatchCount = winningNumberMatchCount;
+    }
+
+    public int winningNumberMatchCount(List<Integer> winningNumbers) {
+        for (Integer winningNumber : winningNumbers) {
+            winningNumberMatchCheck(winningNumber);
+        }
+        return winningNumberMatchCount;
+    }
+
+    private void winningNumberMatchCheck(Integer winningNumber) {
+        if (numbers.contains(winningNumber)) {
+            winningNumberMatchCount++;
+        }
     }
 
     private void numberCountValid(List<Integer> lottoNumbers) {
