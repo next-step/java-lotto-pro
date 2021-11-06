@@ -35,11 +35,11 @@ public class LottoValidator {
 
     public void validateGetRateOfReturn(int purchaseCount, int winningAmount) {
         if (purchaseCount <= 0) {
-            new IllegalArgumentException("구입한 로또 갯수는 0보다 커야합니다. (입력값: " + purchaseCount);
+            throw new IllegalArgumentException("구입한 로또 갯수는 0보다 커야합니다. (입력값: " + purchaseCount);
         }
 
         if (winningAmount < 0) {
-            new IllegalArgumentException("당첨 금액은 음수일 수 없습니다. (입력값: " + winningAmount);
+            throw new IllegalArgumentException("당첨 금액은 음수일 수 없습니다. (입력값: " + winningAmount);
         }
     }
 }
