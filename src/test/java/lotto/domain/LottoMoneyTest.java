@@ -36,4 +36,13 @@ class LottoMoneyTest {
         LottoMoney lottoMoney = new LottoMoney(amount);
         assertEquals(expected, lottoMoney.countOfPossibleLotto());
     }
+
+    @DisplayName("로또 수익률")
+    @ParameterizedTest
+    @CsvSource(value = {"14000,5000,0.35", "10000,20000,2", "1000000,5000,0"})
+    void profitRatio(String lottoAmount, int profitAmount, double expected) {
+        LottoMoney lottoMoney = new LottoMoney(lottoAmount);
+        double profitRatio = lottoMoney.profitRatio(profitAmount);
+        assertEquals(expected, profitRatio);
+    }
 }
