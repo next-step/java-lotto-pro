@@ -27,14 +27,13 @@ public class LottoResultTest {
     @DisplayName("로또 수익률 확인")
     public void lottoTest(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
-        LottoNumber lotto = new LottoNumber(lottoNumber);
-        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(lotto));
-
-        double expected = lottoMatchResult.getLottoYield();
-        int exceptedMoney = Rank.SECOND.getPrizeMoney();
+        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(new LottoNumber(lottoNumber)));
+        int money = Rank.SECOND.getPrizeMoney();
         int purchaseMoney = 1 * GAME_PRICE;
 
-        assertThat(expected).isEqualTo(exceptedMoney / purchaseMoney);
+        double expected = lottoMatchResult.getLottoYield();
+
+        assertThat(expected).isEqualTo(money / purchaseMoney);
     }
 
     static Stream<Arguments> listProvide2() {
