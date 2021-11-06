@@ -6,8 +6,8 @@ public class ResultView {
 		LottoPapers.PAPERS.forEach(System.out::println);
 	}
 
-	public static void purchasedCount(Money money) {
-		System.out.println(String.format("{0}를 구매했습니다.", money.buyCount()));
+	public static void purchasedCount(int size) {
+		System.out.println(String.format("{0}를 구매했습니다.", size));
 	}
 
 	public static void statisticsPrintAndYield(Winner winner) {

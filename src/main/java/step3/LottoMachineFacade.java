@@ -2,24 +2,26 @@ package step3;
 
 public class LottoMachineFacade {
 
-	public static LottoPapers PAPER;
+	public static LottoPapers PAPERS;
 	private Money money;
 	private LottoNumberService lottoNumberService;
 
 	public LottoMachineFacade(LottoNumberService lottoNumberService) {
-		PAPER = LottoPapers.getInstance();
+		PAPERS = LottoPapers.getInstance();
 		this.lottoNumberService = lottoNumberService;
 	}
 
 	public LottoMachineFacade() {
 		this(new LottoNumberService());
-		PAPER = LottoPapers.getInstance();
+		PAPERS = LottoPapers.getInstance();
 	}
 
 	public void pick(int insertMoney) {
 		money = new Money(insertMoney);
 		Machine machine = new Machine(money);
 		machine.createLotto();
+		ResultView.purchasedLottoPrint();
+		ResultView.purchasedCount(LottoPapers.PAPERS.size());
 	}
 
 	public void result(String userInputWinnerNumber) {
