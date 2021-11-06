@@ -42,4 +42,10 @@ public final class LottoPapers {
 			"collection=" + collection +
 			'}';
 	}
+
+	public LottoPapers addAll(LottoPapers papers) {
+		Collection<LottoPaper> newCollection = new ArrayList<>(collection);
+		newCollection.addAll(papers.collection);
+		return from(newCollection);
+	}
 }
