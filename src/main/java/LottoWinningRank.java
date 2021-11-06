@@ -4,7 +4,7 @@ import java.util.Map;
 public enum LottoWinningRank {
 
 	FIRST(6, 2_000_000_000),
-	SECOND(5, 30_000_000),
+	SECOND(5, 30_000_000, ", 보너스 볼 일치"),
 	THIRD(5, 1_500_000),
 	FOURTH(4, 50_000),
 	FIFTH(3, 5_000),
@@ -38,12 +38,18 @@ public enum LottoWinningRank {
 	}
 
 	LottoWinningRank(int matchingCount, int prizeKRW) {
+		this(matchingCount, prizeKRW, "");
+	}
+
+	LottoWinningRank(int matchingCount, int prizeKRW, String extraMessage) {
 		this.matchingCount = matchingCount;
 		this.prizeKRW = prizeKRW;
+		this.extraMessage = extraMessage;
 	}
 
 	private final int matchingCount;
 	private final int prizeKRW;
+	private final String extraMessage;
 
 	public int getMatchingCount() {
 		return matchingCount;
@@ -51,5 +57,9 @@ public enum LottoWinningRank {
 
 	public int getPrizeKRW() {
 		return prizeKRW;
+	}
+
+	public String getExtraMessage() {
+		return extraMessage;
 	}
 }

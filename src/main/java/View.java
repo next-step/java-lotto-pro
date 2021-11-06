@@ -30,6 +30,7 @@ public class View {
 		println(Message.SEPARATOR.getContent());
 
 		Arrays.asList(
+			LottoWinningRank.FIFTH,
 			LottoWinningRank.FOURTH,
 			LottoWinningRank.THIRD,
 			LottoWinningRank.SECOND,
@@ -42,9 +43,10 @@ public class View {
 	private void outLottoMatchingCount(LottoWinningRank rank, LottoWinningStatistics statistics) {
 		final int matchingCount = rank.getMatchingCount();
 		final int prizeKRW = rank.getPrizeKRW();
+		final String message = rank.getExtraMessage();
 		final Long numOfLottos = statistics.countLottos(rank);
 		println(String.format(Message.COUNT_MATCHING.getContent()
-			, matchingCount, prizeKRW, LottoStore.KRW_UNIT, numOfLottos));
+			, matchingCount, message, prizeKRW, LottoStore.KRW_UNIT, numOfLottos));
 	}
 
 	private void outLottoEarningRate(double earningRate) {
