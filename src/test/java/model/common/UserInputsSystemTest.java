@@ -45,10 +45,10 @@ class UserInputsSystemTest {
 	}
 
 	@Test
-	@DisplayName("입력 갯수가 0 이하로 객체화 하면 IllegalArgumentException")
-	void instance_zeroCount_thrownIllegalArgumentException() {
+	@DisplayName("입력 갯수를 음수로 객체화 하면 IllegalArgumentException")
+	void instance_negativeCount_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> UserInputsSystem.of(mock(GuidePrinter.class), mock(Scanner.class), "0"))
+			.isThrownBy(() -> UserInputsSystem.of(mock(GuidePrinter.class), mock(Scanner.class), "-1"))
 			.withMessage("'count' must be more than zero");
 	}
 

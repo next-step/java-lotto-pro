@@ -11,7 +11,7 @@ public final class UserInputSystem {
 
 	private UserInputSystem(GuidePrinter guidePrinter, Scanner scanner) {
 		Assert.notNull(scanner, "'scanner' must not be null");
-		validate(guidePrinter);
+		Assert.notNull(guidePrinter, "'guidePrinter' must not be null");
 		this.guidePrinter = guidePrinter;
 		this.scanner = scanner;
 	}
@@ -23,17 +23,5 @@ public final class UserInputSystem {
 	public String input() {
 		guidePrinter.print();
 		return scanner.nextLine();
-	}
-
-	private void validate(GuidePrinter guidePrinter) {
-		if (guidePrinter == null) {
-			throw new IllegalArgumentException("'guidePrinter' must not be null");
-		}
-	}
-
-	private void validate(Scanner scanner) {
-		if (scanner == null) {
-			throw new IllegalArgumentException();
-		}
 	}
 }
