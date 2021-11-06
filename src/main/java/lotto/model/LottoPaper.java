@@ -1,7 +1,9 @@
 package lotto.model;
 
-import java.util.Collections;
-import java.util.List;
+import lotto.util.GameRule;
+import lotto.view.GameMessage;
+
+import java.util.*;
 
 public class LottoPaper {
 
@@ -9,6 +11,7 @@ public class LottoPaper {
 
     public LottoPaper(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+        lottoPaPerCorrectCheck();
     }
 
     public List<LottoNumber> getLottoNumber() {
@@ -23,7 +26,15 @@ public class LottoPaper {
         return (int) this.lottoNumbers.stream()
                 .filter(winningLottoPaper::isContainsLottoNumber)
                 .count();
-
     }
 
+    public void lottoPaPerCorrectCheck() {
+        Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
+        if(lottoNumberSet.size() != lottoNumbers.size()){
+            throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_LOTTO_NUMBER_DUPLICATION_INPUT));
+        }
+        if (lottoNumbers.size() != GameRule.LOTTO_END_INDEX){
+            throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_LOTTO_NUMBER_INPUT));
+        }
+    }
 }

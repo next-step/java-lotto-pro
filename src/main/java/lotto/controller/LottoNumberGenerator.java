@@ -35,9 +35,6 @@ public class LottoNumberGenerator {
         Arrays.asList(input.split(GameRule.LOTTO_NUMBER_DELIMITER))
                 .forEach(number -> lottoNumbers.add(new LottoNumber(parseLottoNumber(number))) );
 
-        if (lottoNumbers.size() != GameRule.LOTTO_END_INDEX) {
-            throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_LOTTO_NUMBER_INPUT));
-        }
         return new LottoPaper(lottoNumbers);
     }
 
