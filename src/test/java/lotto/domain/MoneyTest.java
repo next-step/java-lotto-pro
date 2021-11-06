@@ -10,10 +10,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class MoneyTest {
 
     @Test
-    @DisplayName("돈이 입력됐는지 확인")
+    @DisplayName("로또 구입금액이 얼마인지 확인")
     void 돈_입력() {
-        Money money = new Money(500000);
-        assertThat(money.getMoney()).isEqualTo(500000);
+        Money money = new Money(55700);
+        assertThat(money.getMoney()).isEqualTo(55000);
     }
 
     @DisplayName("로또를 얼마나 살수있는지 확인")
