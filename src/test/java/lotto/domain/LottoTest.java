@@ -38,4 +38,9 @@ public class LottoTest {
     void 숫자_문자열로_생성한다() {
         assertThat(new Lotto("1, 2, 3, 4, 5, 6")).isEqualTo(로또);
     }
+
+    @Test
+    void 보너스_숫자를_확인한다() {
+        assertThat(로또.checkBonus(new Bonus("1"))).isTrue();
+    }
 }

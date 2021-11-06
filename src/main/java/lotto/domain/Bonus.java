@@ -22,4 +22,8 @@ public class Bonus {
     public int hashCode() {
         return Objects.hash(bonus);
     }
+
+    public int getBonus() {
+        return bonus;
+    }
 }

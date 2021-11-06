@@ -16,6 +16,7 @@
 `Lotto`는 `LottoNumber`는 중복되지 않는다
 `Lotto`는 `Lotto` 와 비교하여 당첨번호 개수를 반환한다
 `Lotto`는 6자리의 숫자 문자열을 받아 생성한다
+`Lotto`는 보너스 숫자를 가지는지 확인한다
 
 로또들 (`Lottos`)
 `Lottos`는 `RandomNumbers`를 가진다

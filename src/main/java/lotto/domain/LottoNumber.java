@@ -13,6 +13,10 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public LottoNumber(Bonus bonus) {
+        this(bonus.getBonus());
+    }
+
     private void check(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("1이상 45이하의 숫자만 가능합니다");

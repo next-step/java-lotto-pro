@@ -42,6 +42,10 @@ public class Lotto {
         return this.lotto.contains(number);
     }
 
+    public boolean checkBonus(Bonus bonus) {
+        return lotto.contains(new LottoNumber(bonus));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
