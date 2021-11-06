@@ -20,7 +20,7 @@ public class LottoMatchResult {
 	/* LinkedHashMap으로 순서 보장 */
 	private Map<LottoMatchRank, Integer> initResultSet() {
 		return Stream.of(LottoMatchRank.values())
-			.collect(Collectors.toMap(entry-> entry ,entry->0,(o1,o2)->o1, LinkedHashMap::new));
+			.collect(Collectors.toMap(entry -> entry, entry -> 0, (o1, o2) -> o1, LinkedHashMap::new));
 	}
 
 	public void addMatchCount(LottoMatchRank lottoMatchRank) {
@@ -29,6 +29,10 @@ public class LottoMatchResult {
 
 	public Map<LottoMatchRank, Integer> getResult() {
 		return result;
+	}
+
+	public int getRankMatchCount(LottoMatchRank lottoMatchRank){
+		return result.get(lottoMatchRank);
 	}
 
 	/* 상금 합계 */

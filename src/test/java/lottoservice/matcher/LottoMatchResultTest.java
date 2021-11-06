@@ -13,8 +13,8 @@ class LottoMatchResultTest {
 		LottoMatchResult lottoMatchResult = new LottoMatchResult();
 		lottoMatchResult.addMatchCount(LottoMatchRank.ONE_POINT);
 
-		Assertions.assertThat(lottoMatchResult.getResult().get(LottoMatchRank.SIX_POINT)).isEqualTo(0);
-		Assertions.assertThat(lottoMatchResult.getResult().get(LottoMatchRank.ONE_POINT)).isEqualTo(1);
+		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.SIX_POINT)).isEqualTo(0);
+		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.ONE_POINT)).isEqualTo(1);
 	}
 
 	@Test
