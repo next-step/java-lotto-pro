@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.exception.WrongLottoNumberSizeException;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Collections;
@@ -17,6 +19,7 @@ public class LottoNumbers {
     public static final String LOTTO_NUMBERS_DESCRIPTION_CLOSE_BRACKET = "]";
     public static final String LOTTO_NUMBERS_DESCRIPTION_SPACE = " ";
     public static final int LOTTO_SIZE = 6;
+    private static final String WRONG_LOTTO_NUMBER_SIZE_MESSAGE = "입력하신 로또의 개수를 확인 해 주세요.";
     private static final List<LottoNumber> randomLottoNumberPocket = generateRandomLottoNumberPocket();
 
     private final Set<LottoNumber> lottoNumbers;
@@ -59,8 +62,15 @@ public class LottoNumbers {
     private void generateLottoNumbersFromString(String lottoNumbersString, String separator) {
         lottoNumbersString = lottoNumbersString.replaceAll(FIND_ALL_SPACES, REMOVE_SPACES);
         String[] splitLottoNumbersString = lottoNumbersString.split(separator);
+        validateLottoNumbersString(splitLottoNumbersString);
         for (String lottoNumberString : splitLottoNumbersString) {
             lottoNumbers.add(new LottoNumber(lottoNumberString));
+        }
+    }
+
+    private void validateLottoNumbersString(String[] splitLottoNumbersString) {
+        if (splitLottoNumbersString.length != LOTTO_SIZE) {
+            throw new WrongLottoNumberSizeException(WRONG_LOTTO_NUMBER_SIZE_MESSAGE);
         }
     }
 
