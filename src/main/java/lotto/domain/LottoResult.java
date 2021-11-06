@@ -13,7 +13,7 @@ public class LottoResult {
     }
 
     public int getMatchRankCount(Rank rank) {
-        return lottoMatchResult.get(rank);
+        return lottoMatchResult.getOrDefault(rank, 0);
     }
 
     public double getLottoYield() {

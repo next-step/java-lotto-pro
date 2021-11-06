@@ -1,28 +1,40 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoNumber;
+import lotto.domain.Number;
 import lotto.domain.Rank;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
 
     public void printPurchaseLottoList(List<LottoNumber> lotto) {
         System.out.println(lotto.size() + "개를 구매했습니다.");
         for (LottoNumber lottoNumber : lotto) {
-            System.out.println(lottoNumber.toString());
+            printLottoNumbers(lottoNumber);
         }
     }
 
-    public void printPrizeLotto(Lotto matchLottoList) {
+    public void printLottoNumbers(LottoNumber lottoNumber) {
+        System.out.println("[" +
+                String.join(",", lottoNumber.getLottoNumbers()
+                        .stream()
+                        .map(Number::getNumber)
+                        .map(String::valueOf)
+                        .collect(Collectors.toList()))
+                + "]");
+    }
+
+    public void printPrizeLotto(LottoResult matchLottoResultList) {
         System.out.println("당첨 통계");
         System.out.println("--------");
         for (Rank rank : Rank.values()) {
-            int matchRankCount = matchLottoList.getMatchRankCount(rank);
+            int matchRankCount = matchLottoResultList.getMatchRankCount(rank);
             printMatchResult(rank, matchRankCount);
         }
-        printLottoYield(matchLottoList.getLottoYield());
+        printLottoYield(matchLottoResultList.getLottoYield());
     }
 
     private void printLottoYield(double lottoYield) {
@@ -34,7 +46,11 @@ public class OutputView {
 
     private void printMatchResult(Rank rank, int matchRankCount) {
         if (!rank.isRankMatch(Rank.NONE)) {
-            System.out.println(rank.toString() + matchRankCount + "개");
+            System.out.println(
+                    rank.getMatchCount() + "개 일치 "
+                            + "(" + rank.getPrizeMoney() + ")"
+                            + "- " + matchRankCount + "개"
+            );
         }
     }
 

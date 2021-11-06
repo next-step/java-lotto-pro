@@ -21,16 +21,16 @@ public class LottoMachineController {
     }
 
     public void run() {
-
         List<LottoNumber> lottoList = lottoMachine.getLottoList(new Money(getUserInputPurchaseAmount()));
         printPurchaseLottoList(lottoList);
 
         List<Number> matchNumber = getUserInputMatchNumber();
         Number bonusNumber = new Number(inputView.getUserInputBonusNumber());
 
-        Lotto matchLottoResult = new Lotto(lottoMachine.matchLotto(matchNumber, bonusNumber, lottoList));
+        WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
+        LottoResult matchLottoResultResult = winningLotto.getLottoMatchResult(lottoList);
 
-        printMatchResult(matchLottoResult);
+        printMatchResult(matchLottoResultResult);
     }
 
     private int getUserInputPurchaseAmount() {
@@ -48,8 +48,8 @@ public class LottoMachineController {
                 .collect(Collectors.toList());
     }
 
-    private void printMatchResult(Lotto matchLottoList) {
-        outputView.printPrizeLotto(matchLottoList);
+    private void printMatchResult(LottoResult matchLottoResultList) {
+        outputView.printPrizeLotto(matchLottoResultList);
     }
 
 
