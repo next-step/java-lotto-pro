@@ -22,14 +22,14 @@ class LottoNumberTest {
 	@ValueSource(ints = {-1, 46})
 	public void 로또_번호_생성_유효하지않은_숫자_예외(int number){
 		assertThatThrownBy(()->{
-			LottoNumber lottoNumber = new LottoNumber(number);
+			LottoNumber lottoNumber = LottoNumber.valueOf(number);
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"1,2,-1","5,5,0","10,7,1"})
 	public void compareTo_로또번호_비교(int number, int compareNumber,int expected){
-		LottoNumber lottoNumber= new LottoNumber(number);
-		assertThat(lottoNumber.compareTo(new LottoNumber(compareNumber))).isEqualTo(expected);
+		LottoNumber lottoNumber= LottoNumber.valueOf(number);
+		assertThat(lottoNumber.compareTo(LottoNumber.valueOf(compareNumber))).isEqualTo(expected);
 	}
 }

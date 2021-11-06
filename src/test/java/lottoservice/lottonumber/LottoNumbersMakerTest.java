@@ -31,7 +31,7 @@ public class LottoNumbersMakerTest {
 		List<LottoNumber> lottoNumbers = LottoNumbersMaker.makeLottoNumbers(numbers);
 		assertThat(lottoNumbers.size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
 		for(int number : numbers){
-			assertThat(lottoNumbers.contains(new LottoNumber(number)));
+			assertThat(lottoNumbers.contains(LottoNumber.valueOf(number)));
 		}
 	}
 
@@ -42,7 +42,7 @@ public class LottoNumbersMakerTest {
 		List<LottoNumber> lottoNumbers = LottoNumbersMaker.makeLottoNumbers(numbertext);
 		assertThat(lottoNumbers.size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
 		for(int number : numbers){
-			assertThat(lottoNumbers.contains(new LottoNumber(number)));
+			assertThat(lottoNumbers.contains(LottoNumber.valueOf(number)));
 		}
 	}
 }
