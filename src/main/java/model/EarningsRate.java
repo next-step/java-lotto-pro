@@ -12,11 +12,7 @@ public class EarningsRate {
 	}
 
 	public static EarningsRate calculateOf(MatchResult matchResult, Money purchaseMoney) {
-		BigDecimal totalPayout =
-			MatchingNumberCount.THREE.getPrizeMoney().getValue().multiply(matchResult.getThreeMatchCount().toBigDecimal())
-			.add(MatchingNumberCount.FOUR.getPrizeMoney().getValue().multiply(matchResult.getFourMatchCount().toBigDecimal()))
-			.add(MatchingNumberCount.FIVE.getPrizeMoney().getValue().multiply(matchResult.getFiveMatchCount().toBigDecimal()))
-			.add(MatchingNumberCount.SIX.getPrizeMoney().getValue().multiply(matchResult.getSixMatchCount().toBigDecimal()));
+		BigDecimal totalPayout = matchResult.calculateTotalPayout();
 
 		return new EarningsRate(totalPayout.divide(purchaseMoney.getValue(), 2, RoundingMode.FLOOR));
 	}

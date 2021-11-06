@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -15,6 +16,13 @@ public class MatchResult {
 		countByMatchingNumberCount.put(MatchingNumberCount.FOUR, fourMatchCount);
 		countByMatchingNumberCount.put(MatchingNumberCount.FIVE, fiveMatchCount);
 		countByMatchingNumberCount.put(MatchingNumberCount.SIX, sixMatchCount);
+	}
+
+	public BigDecimal calculateTotalPayout() {
+		return MatchingNumberCount.THREE.getPrizeMoney().getValue().multiply(getThreeMatchCount().toBigDecimal())
+		.add(MatchingNumberCount.FOUR.getPrizeMoney().getValue().multiply(getFourMatchCount().toBigDecimal()))
+		.add(MatchingNumberCount.FIVE.getPrizeMoney().getValue().multiply(getFiveMatchCount().toBigDecimal()))
+		.add(MatchingNumberCount.SIX.getPrizeMoney().getValue().multiply(getSixMatchCount().toBigDecimal()));
 	}
 
 	public void increaseByMatchCount(MatchingNumberCount matchingNumberCount) {
