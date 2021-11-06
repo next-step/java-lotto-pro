@@ -45,7 +45,7 @@ public final class LottoNumbers {
 	}
 
 	LottoNumbers random(int count) {
-		validateSize(count);
+		validateCount(count);
 		List<LottoNumber> shuffledList = shuffledList();
 		List<LottoNumber> numbers = new ArrayList<>();
 		for (int index = 0; index < count; index++) {
@@ -54,11 +54,20 @@ public final class LottoNumbers {
 		return new LottoNumbers(numbers);
 	}
 
-	private void validateSize(int count) {
-		int size = collection.size();
-		if (size < count) {
-			throw new IllegalArgumentException(
-				String.format("can not choose %d because the size is %d", count, size));
+	private void validateCount(int count) {
+		validateNegative(count, String.format("random Count(%d) must be positive", count));
+		validateSize(count, String.format("can not choose %d because the size is %d", count, collection.size()));
+	}
+
+	private void validateNegative(int count, String message) {
+		if (count < 0) {
+			throw new IllegalArgumentException(message);
+		}
+	}
+
+	private void validateSize(int count, String message) {
+		if (collection.size() < count) {
+			throw new IllegalArgumentException(message);
 		}
 	}
 

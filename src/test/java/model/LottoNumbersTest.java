@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -54,6 +55,60 @@ class LottoNumbersTest {
 		//then
 		assertThat(count)
 			.isEqualTo(3);
+	}
+
+	@Test
+	@DisplayName("랜덤한 숫자 뽑기")
+	void random() {
+		//given
+		LottoNumbers numbers = LottoNumbers.from(lottoNumbers(1, 2, 3, 4, 5, 6));
+
+		//when
+		LottoNumbers random = numbers.random(3);
+
+		//then
+		assertThat(random)
+			.extracting("collection", InstanceOfAssertFactories.LIST)
+			.hasSize(3)
+			.doesNotHaveDuplicates();
+	}
+
+	@Test
+	@DisplayName("숫자의 갯수가 랜덤하게 뽑는 갯수보다 작을 경우 IllegalArgumentException")
+	void random_lessThanCount_thrownIllegalArgumentException() {
+		//given
+		LottoNumbers numbers = LottoNumbers.from(lottoNumbers(1, 2, 3));
+
+		//when, then
+		assertThatIllegalArgumentException()
+			.isThrownBy(() -> numbers.random(Integer.MAX_VALUE))
+			.withMessageMatching("can not choose \\d+ because the size is \\d+");
+	}
+
+	@Test
+	@DisplayName("랜덤하게 뽑는 갯수가 음수일 경우 IllegalArgumentException")
+	void random_negativeCount_thrownIllegalArgumentException() {
+		//given
+		LottoNumbers numbers = LottoNumbers.from(lottoNumbers(1, 2, 3));
+
+		//when, then
+		assertThatIllegalArgumentException()
+			.isThrownBy(() -> numbers.random(Integer.MIN_VALUE))
+			.withMessageContaining("must be positive");
+	}
+
+	@Test
+	@DisplayName("랜덤한 숫자 뽑기")
+	void sort() {
+		//given
+		LottoNumbers numbers = LottoNumbers.from(lottoNumbers(6, 4, 3, 1, 5, 2));
+
+		//when
+		LottoNumbers random = numbers.sort();
+
+		//then
+		assertThat(random.toString())
+			.isEqualTo("1, 2, 3, 4, 5, 6");
 	}
 
 	private Collection<LottoNumber> lottoNumbers(int... numbers) {
