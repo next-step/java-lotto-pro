@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
 
-    private static final Lotto 로또 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    public static final Lotto 로또 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
     @Test
     void 로또를_생성한다() {
