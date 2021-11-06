@@ -2,10 +2,10 @@ package lottoservice;
 
 import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.exception.InvalidMoneyException;
+import lottoservice.lottonumber.LottoNumbersMaker;
 import lottoservice.lottoticket.LottoTicketIssuer;
 import lottoservice.lottoticket.LottoTickets;
 import lottoservice.matcher.LottoMatchResult;
-import lottoservice.matcher.LottoMatcher;
 import lottoservice.matcher.LottoWinningNumbers;
 import lottoservice.ui.ConsoleInputView;
 import lottoservice.ui.ConsoleResultView;
@@ -64,7 +64,7 @@ public class LottoMain {
 	private LottoWinningNumbers getLastWeekWinningNumbers() {
 		try {
 			String lastWeekWinningNumbers = inputLastWeekWinningNumbers();
-			return LottoWinningNumbers.makeLottoWinningNumbers(lastWeekWinningNumbers);
+			return new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers(lastWeekWinningNumbers));
 		} catch (InvalidLottoFormatException ex) {
 			resultView.outputError(ex.getMessage());
 			return getLastWeekWinningNumbers();    /* 사용자가 잘못된 입력을 했을 경우 재입력*/
@@ -77,8 +77,7 @@ public class LottoMain {
 	}
 
 	private LottoMatchResult matchLottoWinning(LottoWinningNumbers lottoWinningNumbers, LottoTickets lottoTickets) {
-		LottoMatcher lottoMatcher = new LottoMatcher(lottoWinningNumbers);
-		return lottoMatcher.matchWinningAndTickets(lottoTickets);
+		return lottoWinningNumbers.matchWinningAndTickets(lottoTickets);
 	}
 
 	private void outputLottoMatchResults(LottoMatchResult matchResult) {

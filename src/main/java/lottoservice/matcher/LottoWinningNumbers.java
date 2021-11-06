@@ -1,15 +1,13 @@
 package lottoservice.matcher;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.lottonumber.LottoNumber;
-import lottoservice.lottonumber.LottoNumbersMaker;
+import lottoservice.lottoticket.LottoTicket;
+import lottoservice.lottoticket.LottoTickets;
 
 /**
  * 로또 당첨번호 클래스
@@ -42,6 +40,30 @@ public class LottoWinningNumbers {
 
 	public Set<LottoNumber> getWinningNumbers() {
 		return winningNumbers;
+	}
+
+	/* 당첨번호와 비교할 티켓정보 전달 */
+	public LottoMatchResult matchWinningAndTickets(LottoTickets lottoTickets) {
+		LottoMatchResult lottoMatchResult = new LottoMatchResult();
+		for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+			setMatchResult(lottoMatchResult, lottoTicket);
+		}
+		return lottoMatchResult;
+	}
+
+	private void setMatchResult(LottoMatchResult lottoMatchResult, LottoTicket lottoTicket) {
+		int matchCount = matchCountWinningAndTicket(lottoTicket);
+		if (hasMatch(matchCount)) {
+			lottoMatchResult.addMatchCount(LottoMatchRank.valueOf(matchCount));
+		}
+	}
+
+	private boolean hasMatch(int matchCount) {
+		return matchCount > 0;
+	}
+
+	private int matchCountWinningAndTicket(LottoTicket lottoTicket) {
+		return compareWithNumbers(lottoTicket.getLottoNumbers());
 	}
 
 	public int compareWithNumbers(List<LottoNumber> ticketLottoNumbers) {

@@ -25,8 +25,7 @@ public class LottoMatcherTest {
 
 
 		LottoTickets lottoTickets = new LottoTickets(tickets);
-		LottoMatcher lottoMatcher = new LottoMatcher(lottoWinningNumbers);
-		LottoMatchResult lottoMatchResult = lottoMatcher.matchWinningAndTickets(lottoTickets);
+		LottoMatchResult lottoMatchResult = lottoWinningNumbers.matchWinningAndTickets(lottoTickets);
 
 		Assertions.assertThat(lottoMatchResult.getResult().get(LottoMatchRank.SIX_POINT)).isEqualTo(1);
 		Assertions.assertThat(lottoMatchResult.getResult().get(LottoMatchRank.THREE_POINT)).isEqualTo(1);
@@ -45,8 +44,7 @@ public class LottoMatcherTest {
 
 
 		LottoTickets lottoTickets = new LottoTickets(tickets);
-		LottoMatcher lottoMatcher = new LottoMatcher(lottoWinningNumbers);
-		LottoMatchResult lottoMatchResult = lottoMatcher.matchWinningAndTickets(lottoTickets);
+		LottoMatchResult lottoMatchResult = lottoWinningNumbers.matchWinningAndTickets(lottoTickets);
 
 		Assertions.assertThat(lottoMatchResult.calculateProfitPercentage()).isEqualTo(2.27);
 	}
