@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.LottoNumber;
+import lotto.util.ConstantString;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +47,7 @@ public class LottoCreateFactory {
     }
 
     public static Lotto createLotto(String numbersText) {
-        String[] splitedNumbers = numbersText.split(", ");
+        String[] splitedNumbers = numbersText.split(ConstantString.SEPARATOR);
         int[] numbers = mapToInts(splitedNumbers);
         return new Lotto(numbers);
     }
