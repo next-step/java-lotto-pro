@@ -12,11 +12,15 @@ public class LottoTicket {
     public LottoTicket(List<Integer> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
+        validateRangeOfNumbers(lottoNumbers);
+        validateSorted(lottoNumbers);
+        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    }
+
+    private void validateRangeOfNumbers(List<Integer> lottoNumbers) {
         for (Integer lottoNumber : lottoNumbers) {
             validateRange(lottoNumber);
         }
-        validateSorted(lottoNumbers);
-        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
     private void validateSize(List<Integer> lottoNumbers) {

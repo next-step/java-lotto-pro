@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbersFactory {
-    public static final String COMMA = ", ";
+    private static final String COMMA = ", ";
 
     private LottoNumbersFactory() {
     }

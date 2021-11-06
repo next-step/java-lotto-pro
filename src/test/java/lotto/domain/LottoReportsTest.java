@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoReportsTest {
@@ -19,12 +20,20 @@ class LottoReportsTest {
         lottoRank.add(Rank.FIFTH);
     }
 
+    @DisplayName("당첨 등수에 대한 테스트")
     @Test
-    void test() {
+    void getRankCount() {
         LottoReports lottoReports = new LottoReports(lottoRank, new LottoMoney("10000"));
-        assertEquals(1, lottoReports.countOfFirst());
-        assertEquals(1, lottoReports.countOfSecond());
-        assertEquals(1, lottoReports.countOfThird());
-        assertEquals(1, lottoReports.countOfFifty());
+        assertEquals(1, lottoReports.getCountOfFirst());
+        assertEquals(1, lottoReports.getCountOfSecond());
+        assertEquals(1, lottoReports.getCountOfThird());
+        assertEquals(1, lottoReports.getCountOfFifty());
+    }
+
+    @DisplayName("수익률 테스트")
+    @Test
+    void getProfitRatio() {
+        LottoReports lottoReports = new LottoReports(lottoRank, new LottoMoney("10000"));
+        assertEquals(200155.5, lottoReports.getProfitRatio());
     }
 }

@@ -14,7 +14,7 @@ import lotto.view.OutputView;
 public class Lotto {
     public void start() {
         LottoMoney lottoMoney = InputView.inputLottoAmount();
-        List<LottoTicket> lottoTickets = buyLottoTicket(lottoMoney.countOfPossibleLotto());
+        List<LottoTicket> lottoTickets = buyLottoTicket(lottoMoney.getCountOfPossibleLotto());
         OutputView.printLottoTickets(lottoTickets);
         LottoTicket winningLottoTicket = InputView.winningNumbersOfLastWeek();
         LottoReports lottoReports = new LottoReports(createRanks(lottoTickets, winningLottoTicket), lottoMoney);

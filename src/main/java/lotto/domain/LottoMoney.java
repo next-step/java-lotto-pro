@@ -25,13 +25,29 @@ public class LottoMoney {
         }
     }
 
-    public int countOfPossibleLotto() {
+    public int getCountOfPossibleLotto() {
         return amount / LottoAmountUnit.LOTTO_AMOUNT_UNIT.getUnit();
     }
 
-    public double profitRatio(long winningAmount) {
+    public double calculateProfitRatio(long winningAmount) {
         int profitRatioScale = LottoAmountUnit.PROFIT_RATIO_SCALE.getUnit();
         double profitRatio = (double)winningAmount / amount;
         return Math.floor(profitRatio * profitRatioScale) / profitRatioScale;
+    }
+
+    private enum LottoAmountUnit {
+        LOTTO_AMOUNT_UNIT(1000),
+        LOTTO_AMOUNT_UNIT_MODULO(0),
+        PROFIT_RATIO_SCALE(100);
+
+        private final int unit;
+
+        LottoAmountUnit(int unit) {
+            this.unit = unit;
+        }
+
+        public int getUnit() {
+            return unit;
+        }
     }
 }
