@@ -6,6 +6,7 @@ import java.util.List;
 public class LottoApplicationController {
 	private static final int LOTTO_SALES_PRICE = 1000;
 	private PurchaseAmount purchaseAmount;
+	private WinningNumbers winningNumbers;
 	private List<Lotto> lottos = new ArrayList<>();
 
 	public boolean enterPurchaseAmount() {
@@ -34,5 +35,18 @@ public class LottoApplicationController {
 		for (Lotto lotto : lottos) {
 			OutputView.printMessage(lotto.getLottoNumbers());
 		}
+
+		OutputView.newLine();
+	}
+
+	public boolean enterWinningNumbers() {
+		try {
+			winningNumbers = new WinningNumbers(InputView.enterWinningNumbers());
+		} catch (IllegalArgumentException exception) {
+			OutputView.printMessage(exception.getMessage());
+			return true;
+		}
+		OutputView.newLine();
+		return false;
 	}
 }

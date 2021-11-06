@@ -14,6 +14,15 @@ public class LottoApplication {
 
 		lottoApplicationController.printPurchasedLottoNumbers();
 
+		Repeater.init();
+		while (Repeater.isContinue()) {
+			Repeater.set(lottoApplicationController.enterWinningNumbers());
+		}
+
+
+
+
+
 
 
 	}

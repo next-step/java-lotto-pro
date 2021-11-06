@@ -5,17 +5,16 @@ public class PurchaseAmount {
 	private final int purchaseAmount;
 
 	public PurchaseAmount(String purchaseAmount) {
-		validatePurchaseAmountType(purchaseAmount);
-		this.purchaseAmount = Integer.parseInt(purchaseAmount);
+		this.purchaseAmount = stringValueToIntValue(purchaseAmount);
 	}
 
 	public int value() {
 		return purchaseAmount;
 	}
 
-	private void validatePurchaseAmountType(String purchaseAmount) {
+	private int stringValueToIntValue(String purchaseAmount) {
 		try {
-			Integer.parseInt(purchaseAmount);
+			return Integer.parseInt(purchaseAmount);
 		} catch (NumberFormatException exception) {
 			throw new IllegalArgumentException(ERROR_PURCHASE_AMOUNT_TYPE);
 		}
