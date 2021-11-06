@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("로또 결과들 테스트")
 public class LottoResultsTest {
     @DisplayName("로또 결과들 중 6개 다 맞춘 순위의 개수 테스트")
     @Test

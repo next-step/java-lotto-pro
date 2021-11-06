@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("로또 숫자들 테스트")
 public class LottoNumbersTest {
     private LottoNumbers prizeLottoNumbers;
     private LottoNumbers expectLottoNumbers;

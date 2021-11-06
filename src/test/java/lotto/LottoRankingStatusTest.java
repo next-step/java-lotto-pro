@@ -1,10 +1,12 @@
 package lotto;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@DisplayName("로또 등수 상태 테스트")
 public class LottoRankingStatusTest {
 
     @ParameterizedTest(name = "LottoRankingStatus 범위 확인")

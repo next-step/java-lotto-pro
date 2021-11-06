@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("로또 숫자들 그룹 테스트")
 public class LottoNumbersGroupTest {
     private LottoNumbers prizeLottoNumbers;
 
