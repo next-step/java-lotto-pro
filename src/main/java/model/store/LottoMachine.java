@@ -11,7 +11,7 @@ import model.generator.LottoGenerator;
 import model.generator.ManualLottoGenerator;
 import utility.Assert;
 
-public class LottoMachine {
+public final class LottoMachine {
 
 	private final StringNumberConverter converter;
 	private final LottoGenerator<LottoPaper> randomGenerator;
