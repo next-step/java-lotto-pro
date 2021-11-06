@@ -22,11 +22,11 @@ public class LottoTicket {
 	}
 
 	public LottoTicket(List<LottoNumber> lottoNumber) {
-		validateTicketRule(lottoNumber);
+		validateLottoNumberGroupRule(lottoNumber);
 		this.lottoNumbers = lottoNumber;
 	}
 
-	private void validateTicketRule(List<LottoNumber> lottoNumber) {
+	private void validateLottoNumberGroupRule(List<LottoNumber> lottoNumber) {
 		if (!isCorrectSize(lottoNumber)) {
 			throw new InvalidLottoFormatException(ERROR_MESSAGE_INVALID_LOTTO_FORMAT);
 		}

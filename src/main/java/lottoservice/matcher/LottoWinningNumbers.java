@@ -25,11 +25,11 @@ public class LottoWinningNumbers {
 
 	}
 	public LottoWinningNumbers(List<LottoNumber> lottoNumbers) {
-		validateNotDuplicate(lottoNumbers);
+		validateLottoNumberGroupRule(lottoNumbers);
 		winningNumbers = lottoNumbers.stream().collect(Collectors.toSet());
 	}
 
-	private void validateNotDuplicate(List<LottoNumber> lottoNumber) {
+	private void validateLottoNumberGroupRule(List<LottoNumber> lottoNumber) {
 		if(!isCorrectSize(lottoNumber)){
 			throw new InvalidLottoFormatException(ERROR_MESSAGE_INVALID_LOTTO_FORMAT);
 		}
@@ -38,12 +38,6 @@ public class LottoWinningNumbers {
 	private boolean isCorrectSize(List<LottoNumber> lottoNumber){
 		return lottoNumber.stream().distinct().count() == LottoNumbersMaker.SIZE_OF_LOTTERY_NUMBERS;
 	}
-
-	public Set<LottoNumber> getWinningNumbers() {
-		return winningNumbers;
-	}
-
-
 
 	/* 인자로 넘어온 티켓들을 정답과 비교하여 결과를 리턴 */
 	public LottoMatchResult matchWinningAndTickets(LottoTickets lottoTickets) {
