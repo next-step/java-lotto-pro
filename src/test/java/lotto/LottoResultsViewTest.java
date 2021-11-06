@@ -24,11 +24,13 @@ public class LottoResultsViewTest {
         lottoResultsView.showResults();
     }
 
+    @DisplayName("결과 총 수익 테스트")
     @Test
     void getLottoResultsRewardTotal() {
         lottoResultsView.showTotalReward();
     }
 
+    @DisplayName("결과 수익률 테스트")
     @Test
     void getLottoResultsProfitRate() {
         lottoResultsView.showProfitRate();
