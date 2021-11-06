@@ -30,7 +30,7 @@
 랭크(`Rank`)
 `Rank`는 당첨번호 개수 `count`를 가진다
 `Rank`는 당첨번호 금액 `price`를 가진다
-`Rank`는 당첨번호 개수를 받아 `Rank`를 반환한다
+`Rank`는 당첨번호 개수와 보너스 번호를 받아 `Rank`를 반환한다
 
 결과(`Result`)
 `Result`는 `Rank`들을 가진다
