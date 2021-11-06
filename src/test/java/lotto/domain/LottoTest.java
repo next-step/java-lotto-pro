@@ -44,8 +44,8 @@ public class LottoTest {
     public void T02_invalidLotto2() {
         String given = null;
         //THEN
-        assertThatThrownBy(() -> new Lotto(given)).isInstanceOf(NullPointerException.class)
-                .hasMessageContaining("null값이 올 수 없습니다.");
+        assertThatThrownBy(() -> new Lotto(given)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("빈값이나 null은 허용되지 않습니다.");
     }
 
     @Test
@@ -53,6 +53,6 @@ public class LottoTest {
     public void T03_invalidLotto3() {
         //THEN
         assertThatThrownBy(() -> new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1)))).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("중복된 볼을 가질 수 없습니다.");
+                .hasMessageContaining("중복된 볼은 올 수 없습니다.");
     }
 }

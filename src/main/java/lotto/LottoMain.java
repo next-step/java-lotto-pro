@@ -1,7 +1,9 @@
 package lotto;
 
-import lotto.service.LottoServiceImpl;
-
+/**
+ *
+ * */
+import lotto.service.LottoService;
 
 /**
  * packageName : lotto
@@ -12,7 +14,7 @@ import lotto.service.LottoServiceImpl;
  */
 public class LottoMain {
     public static void main(String[] args) {
-        LottoServiceImpl lottoService = new LottoServiceImpl();
+        LottoService lottoService = new LottoService();
         lottoService.start();
     }
 }
