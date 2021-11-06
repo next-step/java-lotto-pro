@@ -31,10 +31,6 @@ public class LottoMoney implements Printable {
         return new LottoCount(money / LOTTO_PRICE);
     }
 
-    public LottoMoney calculateMultiple(int multiple) {
-        return new LottoMoney(money * multiple);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

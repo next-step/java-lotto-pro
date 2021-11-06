@@ -10,22 +10,22 @@ import org.junit.jupiter.api.Test;
 
 public class LottoResultsTest {
 
-    @DisplayName("로또 결과들 생성 테스트")
+    @DisplayName("로또 결과물 생성")
     @Test
-    void constructLottoResults_success() {
+    void constructLottoResults() {
         LottoResults lottoResults = new LottoResults(Arrays.asList(LottoResult.THREE, LottoResult.NONE));
         assertThat(lottoResults).isEqualTo(new LottoResults(Arrays.asList(LottoResult.THREE, LottoResult.NONE)));
     }
 
-    @DisplayName("수익률 계산 테스트")
+    @DisplayName("수익률 계산")
     @Test
-    void calculateEarningRate_success() {
+    void calculateEarningRate() {
         LottoResults lottoResults = new LottoResults(
             Arrays.asList(LottoResult.THREE, LottoResult.THREE, LottoResult.NONE, LottoResult.NONE));
         assertThat(lottoResults.calculateEarningRate()).isEqualTo(new EarningRate(BigDecimal.valueOf(2.5)));
     }
 
-    @DisplayName("로또 결과물 메시지 생성 테스트")
+    @DisplayName("로또 결과물 메시지 생성")
     @Test
     void makePrintableMessage() {
         LottoResults lottoResults = new LottoResults(

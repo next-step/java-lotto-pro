@@ -11,25 +11,18 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoTicketTest {
 
-    @DisplayName("로또티켓 생성 테스트")
+    @DisplayName("로또티켓 생성")
     @Test
-    void constructLottoTicket_success() {
+    void constructLottoTicket() {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottoTicket).isEqualTo(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
-    @DisplayName("입력받은 로또티켓 생성 테스트")
+    @DisplayName("입력받은 로또티켓 생성")
     @Test
-    void constructLottoTicketFromText_success() {
+    void constructLottoTicketFromText() {
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         assertThat(lottoTicket).isEqualTo(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
-    }
-
-    @DisplayName("로또티켓 메시지 생성 테스트")
-    @Test
-    void makeMessage_success() {
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lottoTicket.makePrintableMessage()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
     @DisplayName("로또티켓 결과 계산")
@@ -40,5 +33,12 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(text);
         assertThat(lottoTicket.calculateResult(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6))))
             .isEqualTo(LottoResult.valueOf(resultName));
+    }
+
+    @DisplayName("로또티켓 메시지 생성")
+    @Test
+    void makeMessage() {
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lottoTicket.makePrintableMessage()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 }

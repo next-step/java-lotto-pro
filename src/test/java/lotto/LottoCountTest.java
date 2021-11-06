@@ -11,7 +11,7 @@ public class LottoCountTest {
 
     @DisplayName("로또 개수 생성")
     @Test
-    void constructLottoCount_success() {
+    void constructLottoCount() {
         LottoCount lottoCount = new LottoCount(2);
         assertThat(lottoCount).isEqualTo(new LottoCount(2));
     }

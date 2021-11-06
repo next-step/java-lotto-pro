@@ -12,13 +12,13 @@ class LottoResultTest {
     @DisplayName("로또 결과 확인")
     @ParameterizedTest
     @CsvSource(value = {"3,THREE", "4,FOUR", "5,FIVE", "6,SIX", "0,NONE", "2,NONE"})
-    void findResult_success(int cnt, String resultName) {
+    void findResult(int cnt, String resultName) {
         assertThat(LottoResult.findResult(cnt)).isEqualTo(LottoResult.valueOf(resultName));
     }
 
     @DisplayName("로또 결과 출력")
     @Test
-    void makePrintableMessage_success() {
+    void makePrintableMessage() {
         assertThat(LottoResult.THREE.makePrintableMessage()).isEqualTo("3개 일치 (5000원)");
     }
 }
