@@ -38,19 +38,19 @@ public class InputView {
 	}
 
 	private static void validationInputWinningNumber(String input) {
-		if (PattenUtils.findString(LAST_COMMA, input)) {
+		if (PattenUtils.match(LAST_COMMA, input)) {
 			throw new IllegalArgumentException("[ERROR] ,를 마지막에 입력하면 안됩니다.");
 		}
 
-		if (PattenUtils.findString(COMMA, input)) {
+		if (PattenUtils.match(COMMA, input)) {
 			throw new IllegalArgumentException("[ERROR] 숫자는 ,구분해서 입력해야합니다.");
 		}
 
-		if (!PattenUtils.findString(ONLY_NUMBER,input)) {
+		if (!PattenUtils.match(ONLY_NUMBER,input)) {
 			throw new IllegalArgumentException("[ERROR] 정수만을 입력해야합니다.");
 		}
 
-		if (!PattenUtils.findString(NUMBER_SIZE_SIX,input)) {
+		if (!PattenUtils.match(NUMBER_SIZE_SIX,input)) {
 			throw new IllegalArgumentException("[ERROR] 숫자는 6개를 입력해야합니다.");
 		}
 	}
