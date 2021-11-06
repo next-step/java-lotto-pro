@@ -21,8 +21,9 @@ public enum LottoWinningRank {
 	public static LottoWinningRank valueOf(int matchingCount, boolean hasBonus) {
 		if (isSecondRank(matchingCount, hasBonus)) {
 			return LottoWinningRank.SECOND;
-		}
-		else if (BY_MATCHING_COUNT.containsKey(matchingCount)) {
+		} else if (isThirdRank(matchingCount, hasBonus)) {
+			return LottoWinningRank.THIRD;
+		} else if (BY_MATCHING_COUNT.containsKey(matchingCount)) {
 			return BY_MATCHING_COUNT.get(matchingCount);
 		}
 		return LottoWinningRank.OTHER;
@@ -30,6 +31,10 @@ public enum LottoWinningRank {
 
 	private static boolean isSecondRank(int matchingCount, boolean hasBonus) {
 		return hasBonus && (LottoWinningRank.SECOND.getMatchingCount() == matchingCount);
+	}
+
+	private static boolean isThirdRank(int matchingCount, boolean hasBonus) {
+		return !hasBonus && (LottoWinningRank.THIRD.getMatchingCount() == matchingCount);
 	}
 
 	LottoWinningRank(int matchingCount, int prizeKRW) {
