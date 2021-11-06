@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.LottoTicket.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,15 +29,15 @@ class LottoTicketTest {
     void createLottoTicketSizeException() {
         assertThatThrownBy(() -> new LottoTicket(Collections.emptyList()))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(WRONG_NUMBERS_SIZE_MESSAGE);
+            .hasMessage(Message.WRONG_NUMBERS_SIZE_MESSAGE.getMessage());
 
         assertThatThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5)))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(WRONG_NUMBERS_SIZE_MESSAGE);
+            .hasMessage(Message.WRONG_NUMBERS_SIZE_MESSAGE.getMessage());
 
         assertThatThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(WRONG_NUMBERS_SIZE_MESSAGE);
+            .hasMessage(Message.WRONG_NUMBERS_SIZE_MESSAGE.getMessage());
     }
 
     @DisplayName("로또 티켓 생성 - 중복된 숫자")
@@ -46,11 +45,11 @@ class LottoTicketTest {
     void createLottoTicketDuplicateException() {
         assertThatThrownBy(() -> new LottoTicket(Arrays.asList(1, 1, 2, 3, 4, 5)))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(EXIST_DUPLICATE_NUMBER_MESSAGE);
+            .hasMessage(Message.EXIST_DUPLICATE_NUMBER_MESSAGE.getMessage());
 
         assertThatThrownBy(() -> new LottoTicket(Arrays.asList(1, 1, 1, 1, 1, 1)))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(EXIST_DUPLICATE_NUMBER_MESSAGE);
+            .hasMessage(Message.EXIST_DUPLICATE_NUMBER_MESSAGE.getMessage());
     }
 
     @DisplayName("로또 티켓 생성 - 범위를 벗어난 숫자")
@@ -58,11 +57,11 @@ class LottoTicketTest {
     void createLottoTicketRangeException() {
         assertThatThrownBy(() -> new LottoTicket(Arrays.asList(0, 1, 2, 3, 4, 5)))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(OUT_OF_RANGE_NUMBER_MESSAGE);
+            .hasMessage(Message.OUT_OF_RANGE_NUMBER_MESSAGE.getMessage());
 
         assertThatThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 46)))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(OUT_OF_RANGE_NUMBER_MESSAGE);
+            .hasMessage(Message.OUT_OF_RANGE_NUMBER_MESSAGE.getMessage());
     }
 
     @DisplayName("로또 티켓 생성 - 정렬되지 않은 숫자")
@@ -70,7 +69,7 @@ class LottoTicketTest {
     void createLottoTicketSortedException() {
         assertThatThrownBy(() -> new LottoTicket(Arrays.asList(2, 1, 3, 5, 9, 7)))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(NON_SORTED_NUMBERS_MESSAGE);
+            .hasMessage(Message.NON_SORTED_NUMBERS_MESSAGE.getMessage());
     }
 
     @DisplayName("로또 결과 확인")

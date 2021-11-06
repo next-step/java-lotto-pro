@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbersFactory {
-    public static final String NON_POSITIVE_LOTTO_NUMBER_MESSAGE = "로또 번호는 문자열이나 음수가 될 수 없습니다.";
     public static final int LOTTO_NUMBERS_ZERO_SIZE = 0;
     public static final int LOTTO_NUMBERS_SIZE = 6;
     public static final int LOTTO_NUMBER_MIN_RANGE = 1;
@@ -45,7 +44,7 @@ public class LottoNumbersFactory {
 
     private static void validatePositiveNumber(String number) {
         if (!ONLY_POSITIVE_NUMBER.matcher(number).matches()) {
-            throw new IllegalArgumentException(NON_POSITIVE_LOTTO_NUMBER_MESSAGE);
+            throw new IllegalArgumentException(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
         }
     }
 }

@@ -41,10 +41,10 @@ class LottoNumbersFactoryTest {
     void convertInputNumbersToNumbersException() {
         assertThatThrownBy(() -> LottoNumbersFactory.createManualLottoNumbers("a,b,c,d,e,f"))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(NON_POSITIVE_LOTTO_NUMBER_MESSAGE);
+            .hasMessage(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
 
         assertThatThrownBy(() -> LottoNumbersFactory.createManualLottoNumbers("-1,-2,-3,-4,-5,-6"))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(NON_POSITIVE_LOTTO_NUMBER_MESSAGE);
+            .hasMessage(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
     }
 }
