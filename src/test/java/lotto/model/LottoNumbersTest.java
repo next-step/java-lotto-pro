@@ -25,7 +25,7 @@ public class LottoNumbersTest {
     void getMatchCount(NumberSupplier numberSupplier, int expectedMatchCount) {
         LottoNumbers winningNumbers = new LottoNumbers(new ManualNumberSupplier(1, 2, 3, 4, 5, 6));
         LottoNumbers lottoNumbers = new LottoNumbers(numberSupplier);
-        assertThat(winningNumbers.getMatchCount(lottoNumbers)).isEqualTo(new MatchCount(expectedMatchCount));
+        assertThat(winningNumbers.getMatchCount(lottoNumbers)).isEqualTo(MatchCount.ofValue(expectedMatchCount));
     }
 
     private static Stream<NumberSupplier> provideIllegalNumbers() {

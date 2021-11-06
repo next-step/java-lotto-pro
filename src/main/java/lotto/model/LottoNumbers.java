@@ -31,7 +31,7 @@ public class LottoNumbers {
         for (Number number : numbers) {
             matchCount += getMatchCount(number);
         }
-        return new MatchCount(matchCount);
+        return MatchCount.ofValue(matchCount);
     }
 
     private int getMatchCount(Number other) {

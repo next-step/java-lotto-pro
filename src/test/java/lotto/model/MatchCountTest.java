@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class MatchCountTest {
     @Test
-    void equals() {
-        assertThat(new MatchCount(6)).isEqualTo(new MatchCount(6));
+    void ofValue() {
+        assertThat(MatchCount.SIX).isEqualTo(MatchCount.ofValue(6));
     }
 }
