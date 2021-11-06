@@ -69,7 +69,7 @@ public class Lotto {
             lottoStatus.add(lottoNumber.getNumberString());
         }
 
-        return "[" + String.join(",", lottoStatus) + "]";
+        return "[" + String.join(", ", lottoStatus) + "]";
 
     }
 }
