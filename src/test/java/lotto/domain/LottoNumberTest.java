@@ -92,18 +92,18 @@ public class LottoNumberTest {
 		assertThat(result).isEqualTo(3);
 	}
 
-	// @Test
-	// @DisplayName("보너스 번호가 포함되어있는지 확인할 수 있어야 한다")
-	// public void isEqualBonusNumberTest() {
-	// 	// given
-	// 	LottoNumber winningNumber = LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-	// 	LottoNumber lottoNumber = LottoNumber.of(Arrays.asList(1, 2, 3, 9, 10, 11));
-	// 	LottoNumber diffLottoNumber = LottoNumber.of(Arrays.asList(1, 2, 3, 9, 10, 11));
-	//
-	// 	// when, then
-	// 	assertThat(winningNumber.isMatchBonusNumber(lottoNumber)).isTrue();
-	// 	assertThat(winningNumber.isMatchBonusNumber(diffLottoNumber)).isFalse();
-	//
-	// }
+	@Test
+	@DisplayName("보너스 번호가 포함되어있는지 확인할 수 있어야 한다")
+	public void isEqualBonusNumberTest() {
+		// given
+		LottoNumber winningNumber = LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+		LottoNumber lottoNumber = LottoNumber.of(Arrays.asList(1, 2, 3, 9, 10, 7));
+		LottoNumber diffLottoNumber = LottoNumber.of(Arrays.asList(1, 2, 3, 9, 10, 11));
+
+		// when, then
+		assertThat(LottoNumber.isContainBonusNumber(winningNumber, lottoNumber)).isTrue();
+		assertThat(LottoNumber.isContainBonusNumber(winningNumber, diffLottoNumber)).isFalse();
+
+	}
 
 }
