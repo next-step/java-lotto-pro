@@ -36,4 +36,20 @@ public enum Rank {
             .findFirst()
             .orElse(Rank.MISS);
     }
+
+    public boolean isFirst() {
+        return this == FIRST;
+    }
+
+    public boolean isSecond() {
+        return this == SECOND;
+    }
+
+    public boolean isThird() {
+        return this == THIRD;
+    }
+
+    public boolean isFifth() {
+        return this == FIFTH;
+    }
 }

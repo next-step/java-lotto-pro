@@ -17,4 +17,18 @@ class RankTest {
         assertEquals(Rank.MISS, Rank.valueOf(1));
         assertEquals(Rank.MISS, Rank.valueOf(0));
     }
+
+    @DisplayName("Rank is 메서드 테스트")
+    @Test
+    void is() {
+        assertTrue(Rank.FIRST.isFirst());
+        assertTrue(Rank.SECOND.isSecond());
+        assertTrue(Rank.THIRD.isThird());
+        assertTrue(Rank.FIFTH.isFifth());
+
+        assertFalse(Rank.FIRST.isSecond());
+        assertFalse(Rank.SECOND.isFirst());
+        assertFalse(Rank.THIRD.isFifth());
+        assertFalse(Rank.FIFTH.isThird());
+    }
 }
