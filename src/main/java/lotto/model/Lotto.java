@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Lotto {
 	private static final List<LottoNumber> LOTTO_NUMBER_CANDIDATE;
 
-	private final LottoNumbers numbers;
+	protected final LottoNumbers numbers;
 
 	static {
 		LOTTO_NUMBER_CANDIDATE = new ArrayList<>();
@@ -32,6 +32,10 @@ public class Lotto {
 		List<LottoNumber> suffledLottoNumbers = new ArrayList<>(LOTTO_NUMBER_CANDIDATE);
 		Collections.shuffle(suffledLottoNumbers);
 		return new LottoNumbers(suffledLottoNumbers.subList(0, LottoNumbers.LOTTO_NUMBER_COUNT));
+	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return numbers.contains(lottoNumber);
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
 	public static final int LOTTO_NUMBER_COUNT = 6;
 
-	private final List<LottoNumber> numbers;
+	protected final List<LottoNumber> numbers;
 
 	public LottoNumbers(int...arrayIntNumbers) {
 		this(convertIntegerArrayToLottoNumberList(arrayIntNumbers));
@@ -24,6 +24,11 @@ public class LottoNumbers {
 		this.numbers = sorted;
 	}
 
+	/**
+	 * int 배열을 LottoNumber리스트로 변환
+	 * @param intNumbers int 배열
+	 * @return LottoNumber 리스트
+	 */
 	public static List<LottoNumber> convertIntegerArrayToLottoNumberList(int[] intNumbers) {
 		return Arrays.stream(intNumbers).mapToObj(LottoNumber::new).collect(Collectors.toList());
 	}
@@ -40,7 +45,15 @@ public class LottoNumbers {
 		if (duplicationCheck.size() != LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException("중복된 로또 번호가 존재합니다. : "+numbers);
 		}
+	}
 
+	/**
+	 * 로또 번호가 포함되어있는지 여부
+	 * @param lottoNumber 로또 번호
+	 * @return 포함되어있는지 여부
+	 */
+	public boolean contains(LottoNumber lottoNumber) {
+		return numbers.contains((lottoNumber));
 	}
 
 	@Override
