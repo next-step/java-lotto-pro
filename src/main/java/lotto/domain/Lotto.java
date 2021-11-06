@@ -19,7 +19,7 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public void resultLotto(List<Integer> winningLotto) {
+    public void resultLotto(LottoNumbers winningLotto) {
         this.winningRank = WinningRank.result(lottoNumbers.countMatchNumber(winningLotto));
     }
 

@@ -13,13 +13,20 @@ public class LottoNumbers {
     public static LottoNumbers valueOf(List<Integer> numbers) {
         return new LottoNumbers(numbers);
     }
+    
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 
     public int getSize() {
         return numbers.size();
     }
 
-    public int countMatchNumber(List<Integer> winningNumbers) {
-        return (int) numbers.stream().filter(number -> winningNumbers.contains(number)).count();
+    public int countMatchNumber(LottoNumbers winningNumbers) {
+        return (int) numbers.stream()
+                        .filter(number -> winningNumbers.getNumbers()
+                        .contains(number))
+                        .count();
     }
 
     @Override

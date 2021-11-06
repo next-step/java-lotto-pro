@@ -27,7 +27,7 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("로또 당첨 숫자 확인")
     void 로또_당첨_숫자_확인() {
-        List<Integer> winningNumbers = Arrays.asList(3, 4, 5, 6, 7, 8);
+        LottoNumbers winningNumbers = LottoNumbers.valueOf(Arrays.asList(3, 4, 5, 6, 7, 8));
         assertThat(lottoNumbers.countMatchNumber(winningNumbers)).isEqualTo(4);
     }
 }
