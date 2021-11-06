@@ -1,36 +1,42 @@
 package lotto.domain;
 
-import lotto.exception.InvalidMoneyException;
+import lotto.exception.ManualCountException;
+
+import static lotto.common.LottoConst.LOTTO_PRICE;
 
 public class BoughtLotto {
-    private static final int LOTTO_PRICE = 1_000;
+    private final BoughtMoney boughtMoney;
+    private final ManualCount manualCount;
 
-    private int boughtMoney;
-
-    public BoughtLotto(final int money) {
-        validMoney(money);
-        this.boughtMoney = money;
+    private BoughtLotto(final String boughtMoney, final String manualCount) {
+        this.boughtMoney = new BoughtMoney(Integer.parseInt(boughtMoney));
+        this.manualCount = new ManualCount(Integer.parseInt(manualCount));
+        validation();
     }
 
-    private void validMoney(final int money) {
-        if (!isThousandUnit(money) || !isPositiveInteger(money)) {
-            throw new InvalidMoneyException();
+    public static BoughtLotto of(final String boughtMoney, final String manualCount) {
+        return new BoughtLotto(boughtMoney, manualCount);
+    }
+
+    private void validation() {
+        if (manualCount.isHigherThanBoughtCount(getBoughtCount())) {
+            throw new ManualCountException();
         }
     }
 
-    private boolean isThousandUnit(final int money) {
-        return money % LOTTO_PRICE == 0;
-    }
-
-    private boolean isPositiveInteger(final int money) {
-        return money > 0;
-    }
-
-    public int getBoughtCount() {
-        return this.boughtMoney / LOTTO_PRICE;
+    private int getBoughtCount() {
+        return this.boughtMoney.getMoney() / LOTTO_PRICE;
     }
 
     public int getBoughtMoney() {
-        return boughtMoney;
+        return boughtMoney.getMoney();
+    }
+
+    public int getManualCount() {
+        return manualCount.getManualCount();
+    }
+
+    public int getAutoCount() {
+        return getBoughtCount() - getManualCount();
     }
 }

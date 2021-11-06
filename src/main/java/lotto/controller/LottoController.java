@@ -15,7 +15,7 @@ public final class LottoController {
 
     public BoughtLotto buyLotto() {
         try {
-            return new BoughtLotto(Integer.parseInt(enterMoney()));
+            return BoughtLotto.of(enterMoney(), enterManualCount());
         } catch (IllegalArgumentException e) {
             printError(e.getMessage());
             return buyLotto();
@@ -23,7 +23,7 @@ public final class LottoController {
     }
 
     public LottoTicket generateLottoTicket(BoughtLotto boughtLotto) {
-        return LottoTicket.generate(boughtLotto.getBoughtCount(), new AutoGenerator());
+        return LottoTicket.generate(boughtLotto.getAutoCount(), new AutoGenerator());
     }
 
     public LottoNumbers enterWinningLottoNumbers() {

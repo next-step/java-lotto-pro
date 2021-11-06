@@ -13,7 +13,7 @@ public class LottoExecutor {
     }
 
     public void run() {
-        BoughtLotto boughtLotto = enterPayment();
+        BoughtLotto boughtLotto = paymentLotto();
         LottoTicket lottoTicket = generateLotto(boughtLotto);
         LottoNumbers winningNumbers = enterWinningNumber();
         Winning winning = enterWinningBonusNumber(winningNumbers);
@@ -21,9 +21,9 @@ public class LottoExecutor {
         printRevenue(calculateRevenue(winningMap, boughtLotto));
     }
 
-    private BoughtLotto enterPayment() {
+    private BoughtLotto paymentLotto() {
         BoughtLotto boughtLotto = lottoController.buyLotto();
-        printBoughtLotto(boughtLotto.getBoughtCount());
+        printLine();
         return boughtLotto;
     }
 
