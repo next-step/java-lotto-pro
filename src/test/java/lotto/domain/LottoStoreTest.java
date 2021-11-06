@@ -1,14 +1,12 @@
 package lotto.domain;
 
-import lotto.domain.LottoStore;
-import lotto.domain.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoStoreTest {
 
-    //TODO : 질문 2
+    //TODO : 질문2
     @DisplayName("로또 구매")
     @ParameterizedTest
     @ValueSource(ints = {1000, 10000, 50000})

@@ -1,10 +1,11 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.LottoStore;
+import lotto.domain.Lottos;
 import lotto.view.LottoPurchaseListView;
 import lotto.view.LottoPurchaseView;
-import lotto.view.LottoWinningNumberView;
 import lotto.view.LottoWinnerStatisticView;
+import lotto.view.LottoWinningNumberView;
 
 import java.util.List;
 

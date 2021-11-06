@@ -2,7 +2,10 @@ package lotto.domain;
 
 import lotto.exception.ErrorMessage;
 
-import java.util.*;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lottos {

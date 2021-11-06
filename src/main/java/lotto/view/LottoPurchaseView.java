@@ -24,13 +24,13 @@ public class LottoPurchaseView {
     private static int numberValid(String purchaseAmount) {
         try {
             return Integer.parseInt(purchaseAmount);
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구입금액은 숫자만 입력이 가능합니다.");
         }
     }
 
     private static void purchaseAmountRangeValid(int purchaseAmount) {
-        if (purchaseAmount < LottoProperty.LOTTO_PRICE ||purchaseAmount % LottoProperty.LOTTO_PRICE != 0) {
+        if (purchaseAmount < LottoProperty.LOTTO_PRICE || purchaseAmount % LottoProperty.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_AMOUNT_NOT_ONE_THOUSAND_WON.getMessage());
         }
     }
