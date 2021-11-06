@@ -10,13 +10,9 @@ import step3.view.ResultView;
 
 public class LottoController {
     LottoService lottoService;
-    InputView inputView;
-    ResultView resultView;
 
     public LottoController() {
         lottoService = new LottoServiceImpl();
-        inputView = new InputView();
-        resultView = new ResultView();
     }
 
     public void play() {
@@ -34,8 +30,8 @@ public class LottoController {
     }
 
     private Amount readMoney() {
-        resultView.amountRequestPrintln();
-        int money = inputView.readOnlyNumber();
+        ResultView.amountRequestPrintln();
+        int money = InputView.readOnlyNumber();
         return new Amount(money);
     }
 
@@ -43,16 +39,16 @@ public class LottoController {
         lottoService.buyLotto(amount);
 
         // 구입된 로또 번호 목록 출력
-        resultView.printLottoList(lottoService.lottoList());
+        ResultView.printLottoList(lottoService.lottoList());
     }
 
     private WinnerLottoNumbersDto readWinNumbers() {
-        resultView.winnerRequestPrintln();
-        return inputView.getWinnerLottoNumberDto();
+        ResultView.winnerRequestPrintln();
+        return InputView.getWinnerLottoNumberDto();
     }
 
     private void printResult(WinnerLottoNumbersDto winnerLottoNumbersDto, Amount amount) {
         LottoRanksDto lottoRanksDto = lottoService.lottoPurchaseDetails(amount, winnerLottoNumbersDto);
-        resultView.lottoResultPrint(lottoRanksDto);
+        ResultView.lottoResultPrint(lottoRanksDto);
     }
 }

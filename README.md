@@ -80,7 +80,7 @@
 - [ ] 보너스 숫자한개 입력받기
 - [ ] LottoRank 보너스 숫자 추가
 - [ ] LottoRank 2등은 5개 일치 + 보너스볼 일치로 변경된 부분으로 로직 변경하기
-- [ ] View static 메소드로 변경하여 인스턴스 변수를 줄여보기,
+- [X] View static 메소드로 변경하여 인스턴스 변수를 줄여보기,
   `Utility Class`로 `pricate` 생성자하여 불필요한 인스턴스화 막기
 - [ ] Amount 에 대해 검증로직 추가하기
 - [X] 불필요한 코드 제거하기 (LottoProviderStrategy)

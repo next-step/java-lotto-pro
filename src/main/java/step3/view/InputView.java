@@ -1,6 +1,5 @@
 package step3.view;
 
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -11,26 +10,28 @@ public class InputView {
     private static final String ONLY_NUMBER = "숫자만 입력 해주세요.";
 
     private static final Scanner sc = new Scanner(System.in);
-    private final ResultView resultView = new ResultView();
 
-    public int[] readLineToArray() {
+    private InputView() {
+    }
+
+    public static int[] readLineToArray() {
         return Stream.of(sc.next().split(",")).mapToInt(Integer::parseInt).toArray();
     }
 
-    public int readOnlyNumber() {
+    public static int readOnlyNumber() {
         try {
             return sc.nextInt();
         } catch (InvalidParamException invalidParamException) {
-            resultView.println(ONLY_NUMBER);
+            ResultView.println(ONLY_NUMBER);
             return readOnlyNumber();
         }
     }
 
-    public WinnerLottoNumbersDto getWinnerLottoNumberDto() {
+    public static WinnerLottoNumbersDto getWinnerLottoNumberDto() {
         try {
             return new WinnerLottoNumbersDto(readLineToArray());
         } catch (InvalidParamException invalidParamException) {
-            resultView.println(invalidParamException.getMessage());
+            ResultView.println(invalidParamException.getMessage());
             return getWinnerLottoNumberDto();
         }
     }
