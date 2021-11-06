@@ -8,8 +8,8 @@ public class Console {
     public static String readLine() {
         return scanner.nextLine();
     }
+
     private static Scanner getScanner() {
         return new Scanner(System.in);
     }
-
 }

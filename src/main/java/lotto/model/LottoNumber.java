@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.view.ErrorMessage;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -15,12 +17,8 @@ public class LottoNumber {
 
     private void valid(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new IllegalArgumentException("로또 숫자 범위가 아닙니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_RANGE_OVER);
         }
-    }
-
-    public int getNumber() {
-        return number;
     }
 
     @Override

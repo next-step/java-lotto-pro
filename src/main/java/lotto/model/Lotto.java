@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.view.ErrorMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +17,8 @@ public class Lotto {
     }
 
     private void valid(int length) {
-        if (length > LottoNumber.SIZE){
-            throw new IndexOutOfBoundsException("숫자 갯수가 "+LottoNumber.SIZE+"보다 큽니다.");
+        if (length > LottoNumber.SIZE) {
+            throw new IndexOutOfBoundsException(ErrorMessage.LOTTO_SIZE_OVER);
         }
     }
 
