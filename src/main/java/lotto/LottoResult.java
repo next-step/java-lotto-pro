@@ -31,8 +31,8 @@ public enum LottoResult implements Printable {
         return countToLottoResultMap.getOrDefault(correctCount, NONE);
     }
 
-    public LottoMoney calculateMultipleMoney(int multiple) {
-        return lottoMoney.calculateMultiple(multiple);
+    public LottoMoney getLottoMoney() {
+        return lottoMoney;
     }
 
     @Override

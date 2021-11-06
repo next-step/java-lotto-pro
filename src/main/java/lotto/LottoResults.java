@@ -16,11 +16,10 @@ public class LottoResults implements Printable {
     private static final String COUNTING_UNIT = "개";
     private static final String NEW_LINE = "\n";
 
-    private final Map<LottoResult, Integer> resultCounts;
+    private final List<LottoResult> lottoResults;
 
     public LottoResults(List<LottoResult> lottoResults) {
-        this.resultCounts = lottoResults.stream()
-            .collect(groupingBy(Function.identity(), reducing(0, e -> 1, Integer::sum)));
+        this.lottoResults = lottoResults;
     }
 
     @Override
@@ -32,22 +31,23 @@ public class LottoResults implements Printable {
             return false;
         }
         LottoResults that = (LottoResults)o;
-        return Objects.equals(resultCounts, that.resultCounts);
+        return Objects.equals(lottoResults, that.lottoResults);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resultCounts);
+        return Objects.hash(lottoResults);
     }
 
     public EarningRate calculateEarningRate() {
-        return LottoMoney.calculateEarningRate(resultCounts.entrySet().stream()
-            .map(entry -> entry.getKey().calculateMultipleMoney(entry.getValue()))
-            .collect(toList()));
+        return LottoMoney.calculateEarningRate(lottoResults.stream().map(LottoResult::getLottoMoney).collect(toList()));
     }
 
     @Override
     public String makePrintableMessage() {
+        Map<LottoResult, Integer> resultCounts = lottoResults.stream()
+            .collect(groupingBy(Function.identity(), reducing(0, e -> 1, Integer::sum)));
+
         return Arrays.stream(LottoResult.values())
             .filter(lottoResult -> lottoResult != LottoResult.NONE)
             .map(lottoResult -> lottoResult.makePrintableMessage() + DASH_SPACE
