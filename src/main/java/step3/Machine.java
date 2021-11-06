@@ -1,10 +1,11 @@
 package step3;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Machine {
-	private Set<LottoNumbers> lottoPapers;
+
 	private final int buyCount;
 
 	public Machine(Money money) {
@@ -12,12 +13,12 @@ public class Machine {
 		this.buyCount = money.buyCount();
 	}
 
-	public Set<LottoNumbers> createLotto() {
-		lottoPapers = new HashSet<>();
+	public void createLotto() {
+		Set<LottoNumbers> lottoPapers = new HashSet<>();
 		for (int i = 0; i < buyCount; i++) {
 			LottoNumbers lottoNumbers = new LottoNumbers();
 			lottoPapers.add(lottoNumbers.createLottoNumbers());
 		}
-		return lottoPapers;
+		LottoPapers.createPapers(new ArrayList<>(lottoPapers));
 	}
 }
