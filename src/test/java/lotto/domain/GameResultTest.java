@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class GameResultTest {
 
     @Test
+    @DisplayName("상금을 계산한다")
     void getPrize() {
         // given
         ArrayList<LottoTicket> lottoTicketsSource = new ArrayList<>();

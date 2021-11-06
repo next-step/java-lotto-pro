@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ class LottoTicketsTest {
     }
 
     @Test
+    @DisplayName("게임 결과를 출력한다")
     void getGameResultTest() {
         // given
         ArrayList<LottoTicket> lottoTicketsSource = new ArrayList<>();
