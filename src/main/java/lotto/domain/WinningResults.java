@@ -26,5 +26,12 @@ public class WinningResults {
     public List<WinningResult> getWinningResult() {
         return this.winningResult;
     }
+    
+    public double calculateRewardPercent(Money money) {
+        int totalReward = winningResult.stream()
+                .mapToInt(wr -> wr.getCount() * wr.getWinningRank().getReward())
+                .sum();
+        return totalReward / (double) money.getMoney();
+    }
 
 }
