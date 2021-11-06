@@ -7,7 +7,7 @@ import lottoservice.exception.InvalidLottoFormatException;
 /**
  * 원시 타입을 포장한 로또 번호 클래스
  */
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
 	private static String ERROR_MESSAGE_OUTBOUND_OF_LOTTO_NUMBER =
 		"로또 번호는 " + LottoNumbersMaker.START_INCLUSIVE_NUMBER + "~" + LottoNumbersMaker.END_EXCLUSIVE_NUMBER
@@ -51,5 +51,20 @@ public class LottoNumber {
 	@Override
 	public String toString() {
 		return String.valueOf(number);
+	}
+
+	@Override
+	public int compareTo(LottoNumber o) {
+		return isBiggerThan(o) ? 1
+			: isLessThan(o) ? -1
+			: 0;
+	}
+
+	public boolean isBiggerThan(LottoNumber o){
+		return getNumber() > o.getNumber();
+	}
+
+	public boolean isLessThan(LottoNumber o){
+		return getNumber() < o.getNumber();
 	}
 }

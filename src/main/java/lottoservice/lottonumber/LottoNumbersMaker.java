@@ -19,8 +19,7 @@ public class LottoNumbersMaker {
 		Collections.shuffle(lottoNumberCandidates);
 		List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberCandidates.subList(0,
 			SIZE_OF_LOTTERY_NUMBERS));  /*List의 subList는 deepCopy가 아니므로 새로 인스턴스를 생성하여 전달 */
-		Collections.sort(lottoNumbers,
-			(lottoNumberPre, lottoNumberPost) -> lottoNumberPre.getNumber() - lottoNumberPost.getNumber());
+		Collections.sort(lottoNumbers);
 		return lottoNumbers;
 	}
 
