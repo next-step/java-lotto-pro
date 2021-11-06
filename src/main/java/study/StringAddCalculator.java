@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final String[] DEFAULT_DELIMITER = {",", ":"};
     private static final int DEFAULT_FAILURE_VALUE = 0;
+    private static final int REGEX_FIRST_GROUP_INDEX = 1;
     private static final Pattern PATTERN_FIND_CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.+)");
     private static final Pattern PATTERN_FIND_BODY_TEXT = Pattern.compile("(?://.\n)?(.+)");
 
@@ -18,8 +19,8 @@ public class StringAddCalculator {
         }
 
         String customDelimiter = getCustomDelimiter(text);
-        String[] numbers = splitWithCustomDelimiter(text, customDelimiter);
-        return getSumPositiveValue(numbers);
+        String[] numberStrings = splitWithCustomDelimiter(text, customDelimiter);
+        return getSumPositiveValue(numberStrings);
     }
 
     private static String[] splitWithCustomDelimiter(String text, String customDelimiter) {
@@ -42,7 +43,7 @@ public class StringAddCalculator {
         String result = "";
         Matcher m = pattern.matcher(text);
         if (m.find()) {
-            result = m.group(1);
+            result = m.group(REGEX_FIRST_GROUP_INDEX);
         }
         return result;
     }
@@ -57,8 +58,8 @@ public class StringAddCalculator {
 
     private static int parsePositiveInt(String number) {
         int value = Integer.parseInt(number);
-        if (Integer.signum(value) == -1) {
-            throw new RuntimeException("양의 정수 값을 입력해 주세요");
+        if (value < 0) {
+            throw new IllegalArgumentException("양의 정수 값을 입력해 주세요");
         }
         return value;
     }
