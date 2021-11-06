@@ -1,9 +1,10 @@
 package lottoservice.matcher;
 
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lottoservice.lottoticket.LottoTicketIssuer;
 
@@ -18,9 +19,8 @@ public class LottoMatchResult {
 
 	/* LinkedHashMap으로 순서 보장 */
 	private Map<LottoMatchRank, Integer> initResultSet() {
-		return Arrays.stream(LottoMatchRank.values()).collect(() -> new LinkedHashMap<LottoMatchRank, Integer>(),
-			(matches, rank) -> matches.put(rank, 0),
-			(matches1, matches2) -> matches1.putAll(matches2));
+		return Stream.of(LottoMatchRank.values())
+			.collect(Collectors.toMap(entry-> entry ,entry->0,(o1,o2)->o1, LinkedHashMap::new));
 	}
 
 	public void addMatchCount(LottoMatchRank lottoMatchRank) {
