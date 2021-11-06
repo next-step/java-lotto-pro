@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 public class ConsoleIn {
 
+    private static final Scanner SCANNER = new Scanner(System.in);
+
     private ConsoleIn() {
     }
 
@@ -61,7 +63,7 @@ public class ConsoleIn {
 
     private static String input(String message) {
         ConsoleOut.printMessage(message);
-        return new Scanner(System.in).nextLine();
+        return SCANNER.nextLine();
     }
 
     private static void checkWinNumber(List<String> tokens) {
