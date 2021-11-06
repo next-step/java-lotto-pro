@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class Number implements Comparable<Number> {
 
@@ -8,13 +11,23 @@ public class Number implements Comparable<Number> {
     public static final int MAX_NUMBER = 45;
 
     private final int number;
+    private static final Map<Integer, Number> lottoNumbers = new HashMap<>();
 
-    public Number(int number) {
-        validateNumberRange(number);
+    static {
+        IntStream.rangeClosed(MIN_NUMBER,MAX_NUMBER)
+                .forEach(i -> lottoNumbers.put(i, new Number(i)));
+    }
+
+    private Number(int number) {
         this.number = number;
     }
 
-    private void validateNumberRange(int randomNumber) {
+    public static Number of(int number) {
+        validateNumberRange(number);
+        return lottoNumbers.get(number);
+    }
+
+    private static void validateNumberRange(int randomNumber) {
         if (randomNumber > MAX_NUMBER) {
             throw new IllegalArgumentException("[ERROR] 로또 번호의 최대 크기 : " + MAX_NUMBER);
         }

@@ -17,9 +17,9 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 public class LottoResultTest {
 
     static Stream<Arguments> listProvide() {
-        List<Number> lottoNumber = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(7));
-        List<Number> matchNumber = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
-        return Stream.of(arguments(lottoNumber, matchNumber, new Number(7)));
+        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
+        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
+        return Stream.of(arguments(lottoNumber, matchNumber, Number.of(7)));
     }
 
     @ParameterizedTest
@@ -36,9 +36,9 @@ public class LottoResultTest {
     }
 
     static Stream<Arguments> listProvide2() {
-        List<Number> lottoNumber = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(7));
-        List<Number> matchNumber = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
-        return Stream.of(arguments(lottoNumber, matchNumber, new Number(7)));
+        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
+        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
+        return Stream.of(arguments(lottoNumber, matchNumber, Number.of(7)));
     }
 
     @ParameterizedTest

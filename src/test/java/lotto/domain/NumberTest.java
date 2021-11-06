@@ -12,9 +12,9 @@ public class NumberTest {
     @Test
     @DisplayName("로또 번호 정상 검증")
     public void numberTest() {
-        Number number = new Number(1);
+        Number number = Number.of(1);
 
-        Number expected = new Number(1);
+        Number expected = Number.of(1);
 
         assertThat(number).isEqualTo(expected);
     }
@@ -23,7 +23,7 @@ public class NumberTest {
     @DisplayName("로또 번호 범위 오류 검증")
     public void NumberRange() {
         assertThatThrownBy(() -> {
-            new Number(99);
+            Number.of(99);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }

@@ -26,8 +26,8 @@ public class LottoNumberTest {
     }
 
     static Stream<Arguments> listProvide3() {
-        List<Number> number = Arrays.asList(new Number(1), new Number(2), new Number(3),
-                new Number(4), new Number(5), new Number(6), new Number(7));
+        List<Number> number = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
+                Number.of(4), Number.of(5), Number.of(6), Number.of(7));
         return Stream.of(arguments(number));
     }
 
@@ -42,13 +42,13 @@ public class LottoNumberTest {
     }
 
     static Stream<Arguments> listProvide() {
-        List<Number> MatchNumber = Arrays.asList(new Number(1), new Number(2), new Number(3),
-                new Number(4), new Number(5), new Number(6));
-        List<Number> LottoNumber = Arrays.asList(new Number(11), new Number(12), new Number(13),
-                new Number(4), new Number(5), new Number(6));
+        List<Number> MatchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
+                Number.of(4), Number.of(5), Number.of(6));
+        List<Number> LottoNumber = Arrays.asList(Number.of(11), Number.of(12), Number.of(13),
+                Number.of(4), Number.of(5), Number.of(6));
         return Stream.of(arguments(
                 MatchNumber
-                , new Number(7)
+                , Number.of(7)
                 ,LottoNumber
         ));
     }

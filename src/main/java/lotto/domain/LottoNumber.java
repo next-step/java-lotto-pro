@@ -36,7 +36,7 @@ public class LottoNumber {
     private List<Number> getAutoLottoNumbers() {
         Set<Number> numbers = new HashSet<>();
         while (numbers.size() < LOTTO_SIZE) {
-            numbers.add(new Number(getRandomNumber()));
+            numbers.add(Number.of(getRandomNumber()));
         }
         return new ArrayList<>(numbers);
     }

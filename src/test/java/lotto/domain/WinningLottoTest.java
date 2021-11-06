@@ -15,12 +15,12 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class WinningLottoTest {
 
     static Stream<Arguments> listProvide() {
-        List<Number> matchNumber = Arrays.asList(new Number(1), new Number(2), new Number(3),
-                new Number(4), new Number(5), new Number(6));
-        Number bonusNumber = new Number(7);
+        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
+                Number.of(4), Number.of(5), Number.of(6));
+        Number bonusNumber = Number.of(7);
 
-        List<Number> lottoNumber = Arrays.asList(new Number(1), new Number(2), new Number(3),
-                new Number(4), new Number(5), new Number(7));
+        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
+                Number.of(4), Number.of(5), Number.of(7));
 
         return Stream.of(arguments(lottoNumber, matchNumber, bonusNumber));
     }
@@ -37,9 +37,9 @@ class WinningLottoTest {
     }
 
     static Stream<Arguments> listProvide2() {
-        List<Number> matchNumber = Arrays.asList(new Number(1), new Number(2), new Number(3),
-                new Number(4), new Number(5), new Number(6));
-        Number bonusNumber = new Number(7);
+        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
+                Number.of(4), Number.of(5), Number.of(6));
+        Number bonusNumber = Number.of(7);
         return Stream.of(arguments(matchNumber, bonusNumber));
     }
 
@@ -48,7 +48,7 @@ class WinningLottoTest {
     @DisplayName("로또 번호 매칭 확인")
     public void isNumberTest(List<Number> matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
-        Number number = new Number(3);
+        Number number = Number.of(3);
 
         boolean actual = winningLotto.isMatchNumber(number);
 
@@ -56,9 +56,9 @@ class WinningLottoTest {
     }
 
     static Stream<Arguments> listProvide3() {
-        List<Number> lottoNumber = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(7));
-        List<Number> matchNumber = Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
-        return Stream.of(arguments(lottoNumber, matchNumber, new Number(7)));
+        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
+        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
+        return Stream.of(arguments(lottoNumber, matchNumber, Number.of(7)));
     }
 
     @ParameterizedTest
