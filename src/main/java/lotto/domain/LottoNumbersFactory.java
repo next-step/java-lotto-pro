@@ -8,10 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbersFactory {
-    public static final int LOTTO_NUMBERS_ZERO_SIZE = 0;
-    public static final int LOTTO_NUMBERS_SIZE = 6;
-    public static final int LOTTO_NUMBER_MIN_RANGE = 1;
-    public static final int LOTTO_NUMBER_MAX_RANGE = 45;
     public static final String COMMA = ", ";
     private static final Pattern ONLY_POSITIVE_NUMBER = Pattern.compile("[0-9]+");
 
@@ -21,13 +17,15 @@ public class LottoNumbersFactory {
     public static List<Integer> createLottoNumbers() {
         List<Integer> allLottoNumbers = createAllLottoNumbers();
         Collections.shuffle(allLottoNumbers);
-        List<Integer> lottoNumbers = allLottoNumbers.subList(LOTTO_NUMBERS_ZERO_SIZE, LOTTO_NUMBERS_SIZE);
+        List<Integer> lottoNumbers = allLottoNumbers.subList(
+            LottoNumbersSize.LOTTO_NUMBERS_ZERO_SIZE.getSize(), LottoNumbersSize.LOTTO_NUMBERS_SIZE.getSize());
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
 
     private static List<Integer> createAllLottoNumbers() {
-        return IntStream.range(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE)
+        return IntStream.range(LottoNumberRange.LOTTO_NUMBER_MIN_RANGE.getRange(),
+                LottoNumberRange.LOTTO_NUMBER_MAX_RANGE.getRange())
             .boxed()
             .collect(Collectors.toList());
     }

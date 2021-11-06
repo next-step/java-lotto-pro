@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.LottoNumbersFactory.*;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +20,7 @@ public class LottoTicket {
     }
 
     private void validateSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+        if (lottoNumbers.size() != LottoNumbersSize.LOTTO_NUMBERS_SIZE.getSize()) {
             throw new IllegalArgumentException(Message.WRONG_NUMBERS_SIZE_MESSAGE.getMessage());
         }
     }
@@ -35,7 +33,8 @@ public class LottoTicket {
     }
 
     private void validateRange(Integer lottoNumber) {
-        if (lottoNumber < LOTTO_NUMBER_MIN_RANGE || lottoNumber > LOTTO_NUMBER_MAX_RANGE) {
+        if (lottoNumber < LottoNumberRange.LOTTO_NUMBER_MIN_RANGE.getRange()
+            || lottoNumber > LottoNumberRange.LOTTO_NUMBER_MAX_RANGE.getRange()) {
             throw new IllegalArgumentException(Message.OUT_OF_RANGE_NUMBER_MESSAGE.getMessage());
         }
     }

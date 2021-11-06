@@ -22,18 +22,19 @@ class LottoNumbersFactoryTest {
         Set<Integer> duplicateNumbers = new HashSet<>(lottoNumbers);
 
         // then
-        assertThat(lottoNumberSize).isEqualTo(LOTTO_NUMBERS_SIZE);
+        assertThat(lottoNumberSize).isEqualTo(LottoNumbersSize.LOTTO_NUMBERS_SIZE.getSize());
         assertEquals(lottoNumberSize, duplicateNumbers.size());
         assertThat(lottoNumbers).isSorted();
         for (Integer lottoNumber : lottoNumbers) {
-            assertTrue(lottoNumber >= LOTTO_NUMBER_MIN_RANGE && lottoNumber <= LOTTO_NUMBER_MAX_RANGE);
+            assertTrue(lottoNumber >= LottoNumberRange.LOTTO_NUMBER_MIN_RANGE.getRange()
+                && lottoNumber <= LottoNumberRange.LOTTO_NUMBER_MAX_RANGE.getRange());
         }
     }
 
     @DisplayName("문자열 번호 숫자로 변환 테스트")
     @Test
     void convertInputNumbersToNumbers() {
-        LottoNumbersFactory.createManualLottoNumbers("1,10,15,20,25,30");
+        LottoNumbersFactory.createManualLottoNumbers("1, 10, 15, 20, 25, 30");
     }
 
     @DisplayName("문자열 번호 숫자로 변환 테스트 - 문자나 음수")
