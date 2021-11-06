@@ -17,7 +17,7 @@ public class LottoController {
     }
 
     public void run() {
-        lottoCalculator.calculate(ConsoleIn.inputWinNumber());
+        lottoCalculator.calculate(ConsoleIn.inputWinNumber(), ConsoleIn.inputBonusNumber());
         WinResults winResults = lottoCalculator.getWinResults();
 
         printHeader();
@@ -42,7 +42,7 @@ public class LottoController {
     private void printWinResults(WinResults winResults) {
         Arrays.stream(WinResult.values())
                 .filter(winResult -> winResult != WinResult.NOT_MATCHED)
-                .forEach(winResult -> printWinResult(winResult, winResults.getCount(winResult.getCount())));
+                .forEach(winResult -> printWinResult(winResult, winResults.getCount(winResult)));
     }
 
     private void printProceedsRate(WinResults winResults) {

@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseAmount;
 
 import java.util.Arrays;
@@ -32,6 +33,14 @@ public class ConsoleIn {
         return winNumber;
     }
 
+    public static LottoNumber inputBonusNumber() {
+        LottoNumber bonusNumber = null;
+        while (Objects.isNull(bonusNumber)) {
+            bonusNumber = getBonusNumber();
+        }
+        return bonusNumber;
+    }
+
     private static PurchaseAmount getPurchaseAmount() {
         try {
             String input = input(Message.PURCHASE_AMOUNT_INPUT.getMessage());
@@ -55,6 +64,17 @@ public class ConsoleIn {
                     .mapToInt(Integer::parseInt)
                     .boxed()
                     .collect(Collectors.toList()));
+        } catch (IllegalArgumentException e) {
+            ConsoleOut.printErrorMessage(e);
+        }
+        return null;
+    }
+
+    private static LottoNumber getBonusNumber() {
+        try {
+            String input = input(Message.BONUS_NUMBER_INPUT.getMessage());
+            checkDigit(input);
+            return new LottoNumber(Integer.parseInt(input));
         } catch (IllegalArgumentException e) {
             ConsoleOut.printErrorMessage(e);
         }
