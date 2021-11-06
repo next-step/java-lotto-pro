@@ -1,9 +1,6 @@
 package lotto;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Lottos {
 
@@ -14,18 +11,22 @@ public class Lottos {
     }
 
     public WinningResult winningResult(List<Integer> winningNumbers) {
-        Map<Integer, Integer> winningResult = new HashMap<>();
+        Map<Rank, Integer> winningResult = new EnumMap<>(Rank.class);
 
         for (Lotto lotto : lottos) {
             int winningNumberMatchCount = lotto.winningNumberMatchCount(winningNumbers);
-            winningResultAccumulate(winningResult, winningNumberMatchCount);
+            if (Rank.isPrize(winningNumberMatchCount)) {
+                winningResultAccumulate(winningResult, winningNumberMatchCount);
+            }
         }
         return new WinningResult(winningResult);
     }
 
-    private void winningResultAccumulate(Map<Integer, Integer> winningResult, int winningNumberMatchCount) {
-        if (winningResult.putIfAbsent(winningNumberMatchCount, 0) == null) {
-            winningResult.put(winningNumberMatchCount, winningResult.get(winningNumberMatchCount) + 1);
+    private void winningResultAccumulate(Map<Rank, Integer> winningResult, int winningNumberMatchCount) {
+        Rank rank = Rank.of(winningNumberMatchCount);
+
+        if (winningResult.putIfAbsent(rank, 0) == null) {
+            winningResult.put(rank, winningResult.get(rank) + 1);
         }
     }
 

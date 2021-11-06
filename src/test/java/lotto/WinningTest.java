@@ -7,11 +7,13 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WinningTest {
@@ -61,21 +63,17 @@ class WinningTest {
         WinningResult winningResult = lottos.winningResult(winningNumber);
 
         //then
-        assertThat(winningResult.winnerPerWinningRank(3)).isEqualTo(1);
-        assertThat(winningResult.winnerPerWinningRank(4)).isEqualTo(1);
-        assertThat(winningResult.winnerPerWinningRank(5)).isEqualTo(1);
-        assertThat(winningResult.winnerPerWinningRank(6)).isEqualTo(1);
+        assertThat(winningResult.winnerPerRank(Rank.FOURTH_PLACE)).isEqualTo(1);
+        assertThat(winningResult.winnerPerRank(Rank.THIRD_PLACE)).isEqualTo(1);
+        assertThat(winningResult.winnerPerRank(Rank.SECOND_PLACE)).isEqualTo(1);
+        assertThat(winningResult.winnerPerRank(Rank.FIRST_PLACE)).isEqualTo(1);
     }
 
-    @DisplayName("당첨 등수별 당첨자 인원 조회시 잘못된 당첨 등수를 넘겨줬을 시 예외")
-    @Test
-    void winnerPerWinningRankExceptionTest() {
-        Lottos lottos = new Lottos(new ArrayList<>());
-        WinningResult winningResult = lottos.winningResult(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            winningResult.winnerPerWinningRank(0);
-        }).withMessage(ErrorMessage.WINNING_RANK_OUT_BOUND.getMessage());
+    @DisplayName("번호가 3개 이상 일치해야 당첨")
+    @ParameterizedTest
+    @CsvSource(value = {"1:false", "2:false", "3:true", "4:true", "5:true", "6:true"}, delimiter = ':')
+    void isPrizeTest(int winningNumberMatchCount, boolean isPrize) {
+        assertThat(Rank.isPrize(winningNumberMatchCount)).isEqualTo(isPrize);
     }
 
     @DisplayName("수익률 계산")
