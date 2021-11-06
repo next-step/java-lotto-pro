@@ -1,11 +1,9 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lotto {
 	private static final List<LottoNumber> LOTTO_NUMBER_CANDIDATE;
@@ -20,17 +18,20 @@ public class Lotto {
 	}
 
 	public Lotto() {
-		numbers = new LottoNumbers(makeNonDuplicateLottoNumbers());
+		numbers = makeNonDuplicateLottoNumbers();
 	}
 	public Lotto(LottoNumbers numbers) {
 		this.numbers = numbers;
 	}
 
-
-	public static List<LottoNumber> makeNonDuplicateLottoNumbers() {
+	/**
+	 * 중복되지 않은 LottoNumber를 가진 LottoNumbers 객체
+	 * @return LottoNumbers
+	 */
+	public static LottoNumbers makeNonDuplicateLottoNumbers() {
 		List<LottoNumber> suffledLottoNumbers = new ArrayList<>(LOTTO_NUMBER_CANDIDATE);
 		Collections.shuffle(suffledLottoNumbers);
-		return suffledLottoNumbers.subList(0, LottoNumbers.LOTTO_NUMBER_COUNT);
+		return new LottoNumbers(suffledLottoNumbers.subList(0, LottoNumbers.LOTTO_NUMBER_COUNT));
 	}
 
 	@Override
