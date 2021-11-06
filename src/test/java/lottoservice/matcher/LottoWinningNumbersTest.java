@@ -2,9 +2,13 @@ package lottoservice.matcher;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -13,6 +17,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.lottonumber.LottoNumber;
 import lottoservice.lottonumber.LottoNumbersMaker;
+import lottoservice.lottoticket.LottoTicket;
+import lottoservice.lottoticket.LottoTickets;
 
 public class LottoWinningNumbersTest {
 
@@ -91,6 +97,44 @@ public class LottoWinningNumbersTest {
 
 	// LottoNumber를 Set으로 담은 자료구조를 primitive 타입 int로 찾기 어려우므로 LottoNumber로 래핑
 	private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+		return numbers.stream().map(number -> new LottoNumber(number)).collect(Collectors.toList());
+	}
+
+	@Test
+	public void matchWinningAndTickets_정답과_로또티켓들_비교결과() {
+		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
+
+		List<LottoTicket> tickets = new ArrayList<>();
+		tickets.add(new LottoTicket(getLottoNumbers(Arrays.asList(1,5,12,26,30,40))));
+		tickets.add(new LottoTicket(getLottoNumbers(Arrays.asList(1,5,3,34,20,40))));
+
+
+		LottoTickets lottoTickets = new LottoTickets(tickets);
+		LottoMatchResult lottoMatchResult = lottoWinningNumbers.matchWinningAndTickets(lottoTickets);
+
+		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.SIX_POINT)).isEqualTo(1);
+		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.THREE_POINT)).isEqualTo(1);
+	}
+
+	@Test
+	public void matchWinningAndTickets_당첨_수익률_계산() {
+		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
+
+		List<LottoTicket> tickets = new ArrayList<>();
+		for(int i=0; i<20; i++){
+			tickets.add(new LottoTicket(getLottoNumbers(Arrays.asList(1,6,11,25,32,44))));
+		}
+		tickets.add(new LottoTicket(getLottoNumbers(Arrays.asList(1,4,12,26,30,40))));
+		tickets.add(new LottoTicket(getLottoNumbers(Arrays.asList(1,2,31,34,20,40))));
+
+
+		LottoTickets lottoTickets = new LottoTickets(tickets);
+		LottoMatchResult lottoMatchResult = lottoWinningNumbers.matchWinningAndTickets(lottoTickets);
+
+		Assertions.assertThat(lottoMatchResult.calculateProfitPercentage()).isEqualTo(2.27);
+	}
+
+	private List<LottoNumber> getLottoNumbers(List<Integer> numbers) {
 		return numbers.stream().map(number -> new LottoNumber(number)).collect(Collectors.toList());
 	}
 
