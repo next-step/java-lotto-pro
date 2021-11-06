@@ -29,7 +29,7 @@ public final class InputView {
 		return inputSystem(WINNING_NUMBER_INPUT_GUIDE).input();
 	}
 
-	public static Collection<String> inputManualPurchaseNumber() {
+	public static Collection<String> inputManualPurchaseNumbers() {
 		return UserInputsSystem.of(
 			GuidePrinter.of(System.out, MANUAL_PURCHASE_NUMBER_INPUT_GUIDE), SCANNER, inputManualPurchaseCount())
 			.inputs();

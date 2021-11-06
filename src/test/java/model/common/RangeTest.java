@@ -53,16 +53,16 @@ class RangeTest {
 			.hasSize(45);
 	}
 
-	@ParameterizedTest(name = "{displayName}[{index}] it is {1} that {0} is greater than size between 1 and 5")
+	@ParameterizedTest(name = "{displayName}[{index}] it is {1} that {0} is less than size between 1 and 5")
 	@DisplayName("크기가 주어진 수보다 더 큰지 판별")
-	@CsvSource({"1,false", "4,false", "5,false", "10,true"})
+	@CsvSource({"1,true", "4,true", "5,false", "10,false"})
 	void greaterThanSize(int count, boolean expected) {
 		//when
-		boolean greaterThanSize = Range.of(1, 5)
-			.greaterThanSize(count);
+		boolean lessThanSize = Range.of(1, 5)
+			.lessThanSize(count);
 
 		//then
-		assertThat(greaterThanSize)
+		assertThat(lessThanSize)
 			.isEqualTo(expected);
 	}
 }

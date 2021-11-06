@@ -56,7 +56,7 @@ public final class LottoRule {
 		Assert.isTrue(count >= MINIMUM_LIMIT,
 			String.format("count(%d) must be greater than %d", count, MINIMUM_LIMIT));
 
-		Assert.isTrue(range.greaterThanSize(count),
+		Assert.isTrue(range.lessThanSize(count),
 			String.format("gap between minValue(%d) and maxValue(%d) must be more than count(%d)",
 				range.min(), range.max(), count));
 	}

@@ -39,8 +39,8 @@ public final class Range {
 		return ints;
 	}
 
-	boolean greaterThanSize(int count) {
-		return size() < count;
+	boolean lessThanSize(int count) {
+		return count < size();
 	}
 
 	private int size() {
