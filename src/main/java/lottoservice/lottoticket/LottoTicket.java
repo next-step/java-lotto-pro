@@ -1,10 +1,12 @@
 package lottoservice.lottoticket;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.lottonumber.LottoNumber;
+import lottoservice.lottonumber.LottoNumbersMaker;
 
 /**
  * 자동으로 생성된 로또 번호 리스트를 가지는 로또 티켓 클래스
@@ -20,18 +22,18 @@ public class LottoTicket {
 	}
 
 	public LottoTicket(List<LottoNumber> lottoNumber) {
-		validateNotDuplicate(lottoNumber);
+		validateTicketRule(lottoNumber);
 		this.lottoNumbers = lottoNumber;
 	}
 
-	private void validateNotDuplicate(List<LottoNumber> lottoNumber) {
+	private void validateTicketRule(List<LottoNumber> lottoNumber) {
 		if (!isCorrectSize(lottoNumber)) {
 			throw new InvalidLottoFormatException(ERROR_MESSAGE_INVALID_LOTTO_FORMAT);
 		}
 	}
 
 	private boolean isCorrectSize(List<LottoNumber> lottoNumber) {
-		return lottoNumber.stream().distinct().count() == 6;
+		return lottoNumber.stream().distinct().count() == LottoNumbersMaker.SIZE_OF_LOTTERY_NUMBERS;
 	}
 
 	public List<LottoNumber> getLottoNumbers() {
@@ -51,5 +53,25 @@ public class LottoTicket {
 		return lottoNumbers.stream()
 			.map(lottoNumber -> lottoNumber.toString())
 			.collect(Collectors.joining(", ", "[", "]"));
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		return hasAllSameNumbers((LottoTicket)o);
+	}
+
+	private boolean hasAllSameNumbers(LottoTicket that) {
+		return that.getLottoNumbers().stream()
+			.filter(it->this.hasLottoNumber(it))
+			.count() == LottoNumbersMaker.SIZE_OF_LOTTERY_NUMBERS;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getLottoNumbers());
 	}
 }

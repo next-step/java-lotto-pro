@@ -1,5 +1,7 @@
 package lottoservice.lottoticket;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,9 +13,13 @@ import lottoservice.lottonumber.LottoNumbersMaker;
 class LottoTicketsTest {
 
 	@Test
-	public void getNumOfTickets_로또_티켓_갯수(){
-		List<LottoTicket> tickets = Arrays.asList(new LottoTicket(LottoNumbersMaker.makeLottoNumbers()), new LottoTicket(LottoNumbersMaker.makeLottoNumbers()));
+	public void getNumOfTickets_로또_티켓_생성(){
+		List<LottoTicket> tickets = Arrays.asList(
+			new LottoTicket(LottoNumbersMaker.makeLottoNumbers()),
+			new LottoTicket(LottoNumbersMaker.makeLottoNumbers()));
 		LottoTickets lottoTickets = new LottoTickets(tickets);
-		Assertions.assertThat(lottoTickets.getNumOfTickets()).isEqualTo(tickets.size());
+
+		assertThat(lottoTickets.getNumOfTickets()).isEqualTo(tickets.size());
+		tickets.stream().forEach(it-> assertThat(lottoTickets.hasTicket(it)).isTrue());
 	}
 }
