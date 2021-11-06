@@ -69,5 +69,21 @@
 * Class2: 게임 진행 시, 사용자 입력을 받기 위해 사용자에게 안내메세지 출력
 * Class3: 게임 진행 시, 처리 결과메세지 출력
 
+## 로또(2등)
+### 요구사항
+* 2등을 위해 추가 번호를 하나 더 추첨한다.(당첨번호 이후에 사용자로부터 입력받는다)
+* 당첨번호와 마찬가지로, 유효한 로또번호가 아니면 IllegalArgumentException 예외를 발생시킨다.
+* 당첨 통계에 2등도 추가해야 한다.
 
+### 클래스 설계
+#### model
+* LottoNumber: String input 생성자를 추가한다. (사용자 입력) 
+* LottoResult: addMatchCounts 메서드의 파라미터 시그니처에 LottoNumber bonusNumber를 추가하여, 보너스 번호 당첨을 판단한다.
+* LottoWinningPrice: boolean bonus 속성을 추가하고, 값으로 BONUS를 추가한다.
 
+#### util
+* GameRule: 보너스 금액을 추가한다.
+
+#### view
+* GameMessage, InputView: 보너스 금액 입력 메세지를 추가한다.
+* ResultView: 보너스 추가에 따른 출력메세지를 변경한다.
