@@ -23,11 +23,13 @@ public class LottoMachine {
     }
 
     private LottoTicket getWinnerTicket() {
+        ResultView.print(OutputMessage.PRINT_NEW_LINE);
         ResultView.print(OutputMessage.ASK_WINNER_TICKET);
         return new LottoTicket(InputView.readLine());
     }
 
     private void printWinningStatistics(LottoResults lottoResults) {
+        ResultView.print(OutputMessage.PRINT_NEW_LINE);
         ResultView.print(OutputMessage.PRINT_STATISTICS_INTRO);
         ResultView.print(lottoResults);
         ResultView.print(() -> String.format(OutputMessage.PRINT_TOTAL_EARNING_RATE.makePrintableMessage(),
