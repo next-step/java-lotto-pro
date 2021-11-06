@@ -5,7 +5,6 @@ import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoPrizes;
 import lotto.domain.LottoProfit;
 import lotto.domain.LottoPurchase;
 import lotto.domain.LottoRanks;
@@ -33,9 +32,9 @@ public class LottoController {
 		List<Integer> numbers = InputView.getLottoNumbers();
 		int bonusNumber = InputView.getBonusNumber();
 		LottoNumber winingNumber = LottoNumber.of(numbers, bonusNumber);
-		LottoRanks ranks = new LottoRanks(winingNumber, this.lottoNumbers);
-		LottoPrizes prizes = new LottoPrizes(ranks);
-		double profit = LottoProfit.calculate(prizes.getTotalPrizeMoney(), this.money);
+
+		LottoRanks ranks = LottoRanks.of(winingNumber, this.lottoNumbers);
+		double profit = LottoProfit.calculate(ranks.getTotalPrizeMoney(), this.money);
 		ResultView.showPrize(ranks, profit);
 	}
 
