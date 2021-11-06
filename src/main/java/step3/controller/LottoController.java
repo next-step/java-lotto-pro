@@ -1,5 +1,6 @@
 package step3.controller;
 
+import step3.common.exception.InvalidParamException;
 import step3.domain.Amount;
 import step3.domain.LottoService;
 import step3.dto.LottoRanksDto;
@@ -30,9 +31,15 @@ public class LottoController {
     }
 
     private Amount readMoney() {
-        ResultView.amountRequestPrintln();
-        int money = InputView.readOnlyNumber();
-        return new Amount(money);
+        try {
+            ResultView.amountRequestPrintln();
+            int money = InputView.readOnlyNumber();
+            return new Amount(money);
+        } catch (InvalidParamException invalidParamException) {
+            ResultView.println(invalidParamException.getMessage());
+            return readMoney();
+        }
+
     }
 
     private void lottoBuyProcess(Amount amount) {

@@ -13,17 +13,6 @@ public class LottoRanks {
     }
 
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (LottoRank lottoRank : lottoRanks) {
-            if (lottoRank.matchNumber >= MIN_RANK_NUMBER) {
-                sb.append(lottoRank.toString()).append("\n");
-            }
-        }
-        return sb.toString();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
