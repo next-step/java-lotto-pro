@@ -2,9 +2,9 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Money {
+import static lotto.domain.LottoNumber.GAME_PRICE;
 
-    public final static int GAME_PRICE = 1000;
+public class Money {
 
     private final int money;
 

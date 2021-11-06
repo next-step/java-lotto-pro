@@ -9,6 +9,7 @@ import static lotto.utils.RandomNumberUtils.generateRandomNumbers;
 public class LottoNumber {
 
     public static final int LOTTO_SIZE = 6;
+    public final static int GAME_PRICE = 1000;
 
     private final List<Number> lottoNumbers;
 
