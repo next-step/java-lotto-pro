@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.BoughtLotto;
-import lotto.domain.LottoTicket;
-import lotto.domain.Winning;
-import lotto.domain.WinningMap;
+import lotto.domain.*;
 
 import static lotto.view.ConsoleView.*;
 
@@ -18,7 +15,8 @@ public class LottoExecutor {
     public void run() {
         BoughtLotto boughtLotto = enterPayment();
         LottoTicket lottoTicket = generateLotto(boughtLotto);
-        Winning winning = enterWinningNumber();
+        LottoNumbers winningNumbers = enterWinningNumber();
+        Winning winning = enterWinningBonusNumber(winningNumbers);
         WinningMap winningMap = winningResult(lottoTicket, winning);
         printRevenue(calculateRevenue(winningMap, boughtLotto));
     }
@@ -36,14 +34,20 @@ public class LottoExecutor {
         return lottoTicket;
     }
 
-    private Winning enterWinningNumber() {
-        Winning winning = lottoController.enterWinningLottoNumbers();
+    private LottoNumbers enterWinningNumber() {
+        LottoNumbers winningNumbers = lottoController.enterWinningLottoNumbers();
         printLine();
-        return winning;
+        return winningNumbers;
     }
 
-    private WinningMap winningResult(LottoTicket lottoTicket, Winning winning) {
-        WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
+    private Winning enterWinningBonusNumber(LottoNumbers winningNumbers) {
+        Winning bonusNumber = lottoController.enterWinningBonusNumber(winningNumbers);
+        printLine();
+        return bonusNumber;
+    }
+
+    private WinningMap winningResult(LottoTicket lottoTicket, Winning winningNumbers) {
+        WinningMap winningMap = WinningMap.winningOf(lottoTicket, winningNumbers);
         printWinning(winningMap);
         return winningMap;
     }
