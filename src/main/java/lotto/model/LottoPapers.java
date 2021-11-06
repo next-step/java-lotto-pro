@@ -29,4 +29,11 @@ public class LottoPapers {
         }
         return new LottoPapers(lottoPapers);
     }
+
+    public LottoResult calculateLottoResult(LottoPapers lottoPapers, LottoPaper winningLottoPaper) {
+        LottoResult lottoResult = new LottoResult();
+        lottoPapers.getLottoPapers()
+                .forEach(lottoPaper -> lottoResult.addMatchCounts(lottoPaper.matchLottoPaper(winningLottoPaper)));
+        return  lottoResult;
+    }
 }

@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.controller.LottoGame;
 import lotto.controller.LottoMoney;
 import lotto.controller.LottoNumberGenerator;
 import lotto.model.LottoPaper;
@@ -14,7 +13,6 @@ import lotto.view.ResultView;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame();
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
         String buyPrice = LottoApplication.getBuyPrice();
@@ -22,7 +20,7 @@ public class LottoApplication {
         LottoPapers lottoPapers = LottoApplication.getRandomLottoPapers(lottoMoney);
 
         LottoPaper winningLottoPaper = LottoApplication.getWinningLottoPaper(lottoNumberGenerator);
-        LottoApplication.printLottoResult(lottoGame, lottoPapers, winningLottoPaper);
+        LottoApplication.printLottoResult(lottoPapers, winningLottoPaper);
     }
 
     private static String getBuyPrice() {
@@ -44,8 +42,8 @@ public class LottoApplication {
         return lottoPapers;
     }
 
-    private static void printLottoResult(LottoGame lottoGame, LottoPapers lottoPapers, LottoPaper winningLottoPaper) {
-        LottoResult lottoResult = lottoGame.getLottoResult(lottoPapers, winningLottoPaper);
+    private static void printLottoResult(LottoPapers lottoPapers, LottoPaper winningLottoPaper) {
+        LottoResult lottoResult = lottoPapers.calculateLottoResult(lottoPapers, winningLottoPaper);
         lottoResult.calculateYield(lottoPapers.lottoPaperSize() * GameRule.LOTTO_PAPER_PRICE);
         ResultView.printWinningStatistics(lottoResult);
     }
