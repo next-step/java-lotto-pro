@@ -82,9 +82,10 @@
 - [ ] LottoRank 2등은 5개 일치 + 보너스볼 일치로 변경된 부분으로 로직 변경하기
 - [X] View static 메소드로 변경하여 인스턴스 변수를 줄여보기,
   `Utility Class`로 `pricate` 생성자하여 불필요한 인스턴스화 막기
-- [ ] Amount 에 대해 검증로직 추가하기
+- [X] Amount 에 대해 검증로직 추가하기
 - [X] 불필요한 코드 제거하기 (LottoProviderStrategy)
 - [X] RandomNumbers.java 초기화 블럭
   적용하기 [참고 링크](https://velog.io/@tomato2532/%EC%B4%88%EA%B8%B0%ED%99%94-%EB%B8%94%EB%9F%AD%EA%B3%BC-%EC%83%9D%EC%84%B1%EC%9E%90)
 - [ ] LottoRanksDto.java 를 역할 분리 -> View 레이어로 분리하기
 - [ ] lottoRanksOf() 테스트 추가
+- [X] LottoNumbers 에서 불필요한 NumbersStrategy 사용 제거
