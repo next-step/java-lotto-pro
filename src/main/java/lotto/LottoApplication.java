@@ -19,6 +19,8 @@ public class LottoApplication {
 			Repeater.set(lottoApplicationController.enterWinningNumbers());
 		}
 
+		lottoApplicationController.printLottoStatistics();
+
 
 
 

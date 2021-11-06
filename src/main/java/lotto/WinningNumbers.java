@@ -29,5 +29,9 @@ public class WinningNumbers {
 			throw new IllegalArgumentException(ERROR_WINNING_NUMBER_TYPE);
 		}
 	}
+
+	public List<Integer> value() {
+		return winningNumbers;
+	}
 }
 

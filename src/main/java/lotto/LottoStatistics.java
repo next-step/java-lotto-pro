@@ -20,7 +20,6 @@ public class LottoStatistics {
 
 	public double getProfitRate() {
 		double totalProfit = 0;
-		double profitRate = 0;
 		for (WinningInformation information : getWinningRecord()) {
 			totalProfit += information.getWinningAmount() * information.getWinnerCount();
 		}

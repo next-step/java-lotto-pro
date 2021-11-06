@@ -6,7 +6,7 @@ import java.util.List;
 public class LottoNumbers {
 	private final List<Integer> lottoNumbers = new ArrayList<>();
 
-	public LottoNumbers(int[] lottoNumbers) {
+	public LottoNumbers(int... lottoNumbers) {
 		for (int lottoNumber : lottoNumbers) {
 			this.lottoNumbers.add(lottoNumber);
 		}
@@ -25,7 +25,7 @@ public class LottoNumbers {
 		return 0;
 	}
 
-	public String Values() {
+	public String StringValues() {
 		return lottoNumbers.toString();
 	}
 }

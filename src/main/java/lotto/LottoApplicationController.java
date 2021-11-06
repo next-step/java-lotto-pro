@@ -7,12 +7,16 @@ public class LottoApplicationController {
 	private static final int LOTTO_SALES_PRICE = 1000;
 	private PurchaseAmount purchaseAmount;
 	private WinningNumbers winningNumbers;
+	private LottoStatistics lottoStatistics = new LottoStatistics();
 	private List<Lotto> lottos = new ArrayList<>();
 
 	public boolean enterPurchaseAmount() {
 		try {
 			purchaseAmount = new PurchaseAmount(InputView.enterPurchaseAmount());
 		} catch (IllegalArgumentException exception) {
+			OutputView.printMessage(exception.getMessage());
+			return true;
+		} catch (IllegalStateException exception) {
 			OutputView.printMessage(exception.getMessage());
 			return true;
 		}
@@ -33,7 +37,7 @@ public class LottoApplicationController {
 
 	public void printPurchasedLottoNumbers() {
 		for (Lotto lotto : lottos) {
-			OutputView.printMessage(lotto.getLottoNumbers());
+			OutputView.printMessage(lotto.getLottoNumbersStringValues());
 		}
 
 		OutputView.newLine();
@@ -48,5 +52,14 @@ public class LottoApplicationController {
 		}
 		OutputView.newLine();
 		return false;
+	}
+
+	public void printLottoStatistics() {
+		OutputView.printLottoStatisticsHeader();
+
+		for (Lotto lotto : lottos) {
+			lottoStatistics.record(lotto.countMatchNumber(winningNumbers));
+		}
+		OutputView.printLottoStatisticsBody(lottoStatistics.getWinningRecord(), lottoStatistics.getProfitRate());
 	}
 }
