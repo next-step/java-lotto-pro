@@ -5,32 +5,40 @@ import java.util.Scanner;
 public class InputView {
 
 	private static final String COMMA = "([\\w\\d].+)+([^\\w,]).+";
-	private static final String LAST_NOT_COMMA = ",$";
+	private static final String LAST_COMMA = "([0-9],){1,}";
 	private static final String ONLY_NUMBER = "((?:^|,)([0-9]+))+";
 	private static final String NUMBER_SIZE_SIX = "((?:^|,)([0-9]{1,2})){6}";
 
+	private LottoMachineFacade lottoMachineFacade;
 
-	public static int insertMoney() {
+	public InputView(LottoMachineFacade lottoMachineFacade) {
+		this.lottoMachineFacade = lottoMachineFacade;
+	}
+
+	public void insertMoney() {
 		try {
-			return Integer.parseInt(input());
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("숫자를 입력해야합니다.");
+			System.out.println("구입금액을 입력해 주세요.");
+			lottoMachineFacade.pick(Integer.parseInt(input()));
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			insertMoney();
 		}
 	}
 
-	public static String insertWinningNumber() {
-		try{
-			String input = input();
-			validationInputWinningNumber(input);
-			return input;
-		} catch (RuntimeException e) {
-			System.out.println(e.getMessage());
+	public void insertLottoNumber() {
+		try {
+			System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+			String inputLottoNumber = input();
+			validationInputWinningNumber(inputLottoNumber);
+			lottoMachineFacade.result(inputLottoNumber);
+		} catch (IllegalArgumentException ex) {
+			System.out.println(ex.getMessage());
+			insertLottoNumber();
 		}
-		throw new IllegalArgumentException("[ERROR] 잘못된 값을 입력했습니다.");
 	}
 
 	private static void validationInputWinningNumber(String input) {
-		if (PattenUtils.findString(LAST_NOT_COMMA, input)) {
+		if (PattenUtils.findString(LAST_COMMA, input)) {
 			throw new IllegalArgumentException("[ERROR] ,를 마지막에 입력하면 안됩니다.");
 		}
 
