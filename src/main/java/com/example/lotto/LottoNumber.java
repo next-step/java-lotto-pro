@@ -1,28 +1,33 @@
 package com.example.lotto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 public class LottoNumber {
 	public static final int ONE = 1;
 	public static final int FORTY_FIVE = 45;
 
-	private final int value;
+	private static final Map<Integer, LottoNumber> candidateNumbers = new HashMap<>();
 
-	public LottoNumber(int value) {
-		throwOnInvalidValue(value);
-
-		this.value = value;
-	}
-
-	private void throwOnInvalidValue(int value) {
-		if (!isBetweenOneAndFortyFive(value)) {
-			String message = String.format("로또 숫자는 1과 45 사이의 숫자이어야 합니다. 입력된 숫자는 %d입니다.", value);
-			throw new IllegalArgumentException(message);
+	static {
+		for (int i = ONE; i <= FORTY_FIVE; i++) {
+			candidateNumbers.put(i, new LottoNumber(i));
 		}
 	}
 
-	private boolean isBetweenOneAndFortyFive(int value) {
-		return LottoNumber.ONE <= value && value <= LottoNumber.FORTY_FIVE;
+	private final int value;
+
+	private LottoNumber(int number) {
+		this.value = number;
+	}
+
+	static LottoNumber of(int number) {
+		String exceptionMessage = String.format("로또 숫자는 1과 45 사이의 숫자이어야 합니다. 입력된 숫자는 %d입니다.", number);
+
+		return Optional.ofNullable(candidateNumbers.get(number))
+			.orElseThrow(() -> new IllegalArgumentException(exceptionMessage));
 	}
 
 	public int getValue() {

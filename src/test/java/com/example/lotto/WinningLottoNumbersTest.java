@@ -33,8 +33,9 @@ class WinningLottoNumbersTest {
 	@MethodSource(value = "validArguments")
 	void constructor(List<Integer> numbers, int number) {
 		// given & when
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(
-			new LottoNumbers(numbers), new LottoNumber(number));
+		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(
+			LottoNumbers.of(numbers),
+			LottoNumber.of(number));
 
 		// then
 		assertThat(winningLottoNumbers).isNotNull();
@@ -45,7 +46,7 @@ class WinningLottoNumbersTest {
 	@MethodSource(value = "invalidArguments")
 	void constructor_fail(List<Integer> numbers, int number) {
 		// given & when & then
-		assertThatThrownBy(() -> new WinningLottoNumbers(new LottoNumbers(numbers), new LottoNumber(number)))
+		assertThatThrownBy(() -> WinningLottoNumbers.of(LottoNumbers.of(numbers), LottoNumber.of(number)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 }

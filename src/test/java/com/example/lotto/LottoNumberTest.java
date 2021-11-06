@@ -14,7 +14,7 @@ class LottoNumberTest {
 	@ValueSource(strings = {"1", "2", "3", "44", "45"})
 	void constructor(int value) {
 		// given & when
-		LottoNumber lottoNumber = new LottoNumber(value);
+		LottoNumber lottoNumber = LottoNumber.of(value);
 
 		// then
 		assertAll(
@@ -28,7 +28,7 @@ class LottoNumberTest {
 	@ValueSource(strings = {"-1", "0", "46"})
 	void constructor_fail(int value) {
 		// given & when & then
-		assertThatThrownBy(() -> new LottoNumber(value))
+		assertThatThrownBy(() -> LottoNumber.of(value))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -37,6 +37,6 @@ class LottoNumberTest {
 	@ValueSource(strings = {"1", "2", "3", "44", "45"})
 	void equals(int value) {
 		// given & when & then
-		assertThat(new LottoNumber(value)).isEqualTo(new LottoNumber(value));
+		assertThat(LottoNumber.of(value)).isEqualTo(LottoNumber.of(value));
 	}
 }

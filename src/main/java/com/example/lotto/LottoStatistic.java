@@ -9,16 +9,26 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoStatistic {
-	private final long purchaseAmount;
+	private final PurchaseInformation purchaseInformation;
 	private final Map<LottoRank, Long> lottoRankToCount;
 
-	public LottoStatistic(long purchaseAmount, LottoGames lottoGames, WinningLottoNumbers winningLottoNumbers) {
-		this.purchaseAmount = purchaseAmount;
-		this.lottoRankToCount = defaultLottoRankToCount();
-		addResultsToLottoRankToCount(lottoGames, winningLottoNumbers);
+	private LottoStatistic(PurchaseInformation purchaseInformation, Map<LottoRank, Long> lottoRankToCount) {
+		this.purchaseInformation = purchaseInformation;
+		this.lottoRankToCount = lottoRankToCount;
 	}
 
-	private Map<LottoRank, Long> defaultLottoRankToCount() {
+	static LottoStatistic of(
+		PurchaseInformation purchaseInformation,
+		LottoGames lottoGames,
+		WinningLottoNumbers winningLottoNumbers
+	) {
+		Map<LottoRank, Long> lottoRankToCount = defaultStatistic();
+		lottoRankToCount.putAll(getStatistic(lottoGames, winningLottoNumbers));
+
+		return new LottoStatistic(purchaseInformation, lottoRankToCount);
+	}
+
+	private static Map<LottoRank, Long> defaultStatistic() {
 		Map<LottoRank, Long> map = new TreeMap<>(Comparator.comparingInt(LottoRank::getValue).reversed());
 		List<LottoRank> lottoRanksExceptMiss = Arrays.stream(LottoRank.values())
 			.filter(lottoRank -> !lottoRank.isMiss())
@@ -31,15 +41,14 @@ public class LottoStatistic {
 		return map;
 	}
 
-	private void addResultsToLottoRankToCount(LottoGames lottoGames, WinningLottoNumbers winningLottoNumbers) {
-		this.lottoRankToCount.putAll(lottoGames.getValues().stream()
-			.map(lottoGame -> {
-				int matchCount = LottoNumbers.match(lottoGame.getLottoNumbers(), winningLottoNumbers.getBaseNumbers());
-				boolean matchBonus = lottoGame.getLottoNumbers().contains(winningLottoNumbers.getBonusNumber());
-				return LottoRank.valueOf(matchCount, matchBonus);
-			})
+	private static Map<LottoRank, Long> getStatistic(
+		LottoGames lottoGames,
+		WinningLottoNumbers winningLottoNumbers
+	) {
+		return lottoGames.getValues().stream()
+			.map(lottoGame -> lottoGame.rank(winningLottoNumbers))
 			.filter(lottoRank -> !lottoRank.isMiss())
-			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
+			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 	}
 
 	private long getTotalWinningMoney() {
@@ -47,6 +56,10 @@ public class LottoStatistic {
 			.map(entry -> entry.getKey().getWinningMoney() * entry.getValue())
 			.reduce(Long::sum)
 			.get();
+	}
+
+	double getEarningsRate() {
+		return (double)getTotalWinningMoney() / purchaseInformation.getActualPurchaseMoney();
 	}
 
 	@Override
@@ -57,7 +70,7 @@ public class LottoStatistic {
 			sb.append(String.format("%s- %d개\n", lottoRank, count));
 		}
 
-		sb.append(String.format("총 수익률은 %f입니다.", ((double)getTotalWinningMoney() / purchaseAmount)));
+		sb.append(String.format("총 수익률은 %f입니다.", getEarningsRate()));
 		return sb.toString();
 	}
 }
