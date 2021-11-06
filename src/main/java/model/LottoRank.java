@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Arrays;
+import java.util.function.BiPredicate;
 
 public enum LottoRank {
 
@@ -13,9 +14,9 @@ public enum LottoRank {
 
 	private final int matchCount;
 	private final int prizeMoney;
-	private final MatchCondition condition;
+	private final BiPredicate<Integer, Boolean> condition;
 
-	LottoRank(int matchCount, int prizeMoney, MatchCondition condition) {
+	LottoRank(int matchCount, int prizeMoney, BiPredicate<Integer, Boolean> condition) {
 		this.matchCount = matchCount;
 		this.prizeMoney = prizeMoney;
 		this.condition = condition;
@@ -23,7 +24,7 @@ public enum LottoRank {
 
 	public static LottoRank byMatchCountAndBonus(int matchCount, boolean isMatchedBonus) {
 		return Arrays.stream(LottoRank.values())
-			.filter(lottoRank -> lottoRank.condition.match(matchCount, isMatchedBonus))
+			.filter(lottoRank -> lottoRank.condition.test(matchCount, isMatchedBonus))
 			.findFirst()
 			.orElse(NONE);
 	}
