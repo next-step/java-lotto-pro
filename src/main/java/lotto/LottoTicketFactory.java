@@ -1,5 +1,7 @@
 package lotto;
 
+import static lotto.LottoTicket.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,9 +9,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTicketFactory {
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
-    private static final int LOTTO_SIZE = 6;
 
     public static LottoTickets createRandomLottoTickets(LottoCount lottoCount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();

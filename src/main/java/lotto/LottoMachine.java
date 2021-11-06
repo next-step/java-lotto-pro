@@ -30,7 +30,12 @@ public class LottoMachine {
     private LottoTicket getWinnerTicket() {
         ResultView.print(OutputMessage.PRINT_NEW_LINE);
         ResultView.print(OutputMessage.ASK_WINNER_TICKET);
-        return new LottoTicket(InputView.readLine());
+        try {
+            return new LottoTicket(InputView.readLine());
+        } catch (LottoException lottoException) {
+            ResultView.print(lottoException::getMessage);
+            return getWinnerTicket();
+        }
     }
 
     private void printWinningStatistics(LottoResults lottoResults) {
