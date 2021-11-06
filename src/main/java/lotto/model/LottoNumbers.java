@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoNumbers {
 	private static final int LOTTO_NUMBER_COUNT = 6;
@@ -18,6 +21,10 @@ public class LottoNumbers {
 
 	public LottoNumbers() {
 		this(makeNonDuplicateLottoNumbers());
+	}
+
+	public LottoNumbers(int...arrayIntNumbers) {
+		this(convertIntegerArrayToLottoNumberList(arrayIntNumbers));
 	}
 
 	public LottoNumbers(List<LottoNumber> numbers) {
@@ -35,12 +42,16 @@ public class LottoNumbers {
 		if (numbers == null || numbers.size() != LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException("로또 번호가 없거나 크기가 다릅니다 : "+numbers);
 		}
-		Map<String, Boolean> duplicationCheck = new HashMap<>();
-		numbers.forEach(no -> duplicationCheck.put(no.toString(), true));
+		Set<LottoNumber> duplicationCheck = new HashSet<>();
+		duplicationCheck.addAll(numbers);
 		if (duplicationCheck.size() != LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException("중복된 로또 번호가 존재합니다. : "+numbers);
 		}
 
+	}
+
+	public static List<LottoNumber> convertIntegerArrayToLottoNumberList(int[] intNumbers) {
+		return Arrays.stream(intNumbers).mapToObj(LottoNumber::new).collect(Collectors.toList());
 	}
 
 	public static List<LottoNumber> makeNonDuplicateLottoNumbers() {
