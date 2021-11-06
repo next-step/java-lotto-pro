@@ -17,11 +17,11 @@ public class ResultView {
 	public static final String OPEN_SQUARE_BRACKET = "[";
 	public static final String CLOSE_SQUARE_BRACKET = "]";
 
-	public void printPurchaseVolumeMessage(PurchaseCount purchaseCount) {
+	public static void printPurchaseVolumeMessage(PurchaseCount purchaseCount) {
 		System.out.println(String.format(PURCHASE_MESSAGE, purchaseCount));
 	}
 
-	public void printWinningStatisticsMessage(MatchResult matchResult, Money purchaseMoney) {
+	public static void printWinningStatisticsMessage(MatchResult matchResult, Money purchaseMoney) {
 		nextLine();
 		System.out.println(WINNING_STATISTICS_MESSAGE);
 		System.out.println(LINE);
@@ -29,7 +29,7 @@ public class ResultView {
 		printEarningsRate(matchResult, purchaseMoney);
 	}
 
-	private void printEarningsRate(MatchResult matchResult, Money purchaseMoney) {
+	private static void printEarningsRate(MatchResult matchResult, Money purchaseMoney) {
 		EarningsRate earningsRate = EarningsRate.calculateOf(matchResult, purchaseMoney);
 		System.out.print(String.format(EARNINGS_RATE_MESSAGE, earningsRate));
 		if (earningsRate.isLessThanOne()) {
@@ -37,7 +37,7 @@ public class ResultView {
 		}
 	}
 
-	private void printMatchResult(MatchResult matchResult) {
+	private static void printMatchResult(MatchResult matchResult) {
 		System.out.println(
 			String.format(THREE_MATCH_MESSAGE, MatchingNumberCount.THREE.getPrizeMoney(), matchResult.getThreeMatchCount()));
 		System.out.println(
@@ -48,21 +48,21 @@ public class ResultView {
 			String.format(SIX_MATCH_MESSAGE, MatchingNumberCount.SIX.getPrizeMoney(), matchResult.getSixMatchCount()));
 	}
 
-	public void printLottoNumbers(Lottos lottos) {
+	public static void printLottoNumbers(Lottos lottos) {
 		lottos.getValues()
 			.stream()
-			.map(this::lottoNumberToStringForPrint)
+			.map(ResultView::lottoNumberToStringForPrint)
 			.forEach(System.out::println);
 	}
 
-	private String lottoNumberToStringForPrint(Lotto lotto) {
+	private static String lottoNumberToStringForPrint(Lotto lotto) {
 		return lotto.getNumbers()
 			.stream()
 			.map(String::valueOf)
 			.collect(joining(COMMA_AND_SPACE_DELIMITER, OPEN_SQUARE_BRACKET, CLOSE_SQUARE_BRACKET));
 	}
 
-	private void nextLine() {
+	private static void nextLine() {
 		System.out.println();
 	}
 }

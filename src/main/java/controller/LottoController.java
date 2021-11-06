@@ -12,31 +12,23 @@ import view.ResultView;
 public class LottoController {
 	private static Scanner sc = new Scanner(System.in);
 
-	private final InputView inputView;
-	private final ResultView resultView;
-
-	public LottoController(InputView inputView, ResultView resultView) {
-		this.inputView = inputView;
-		this.resultView = resultView;
-	}
-
 	public void start() {
-		inputView.printPurchaseAmountMessage();
+		InputView.printPurchaseAmountMessage();
 		Money money = inputForPurchaseAmountUntilValid(sc.nextLine());
 		PurchaseCount purchaseCount = Lottos.purchaseCountFrom(money);
-		resultView.printPurchaseVolumeMessage(purchaseCount);
+		ResultView.printPurchaseVolumeMessage(purchaseCount);
 		Lottos lottos = Lottos.purchase(purchaseCount);
-		resultView.printLottoNumbers(lottos);
+		ResultView.printLottoNumbers(lottos);
 
-		inputView.printLastWeekWinningNumberMessage();
+		InputView.printLastWeekWinningNumberMessage();
 		LastWeekWinningNumber lastWeekWinningNumber = inputForLastWeekWinningNumberUntilValid(sc.nextLine());
 
-		resultView.printWinningStatisticsMessage(lottos.matchResult(lastWeekWinningNumber), money);
+		ResultView.printWinningStatisticsMessage(lottos.matchResult(lastWeekWinningNumber), money);
 	}
 
 	public Money inputForPurchaseAmountUntilValid(String money) {
 		while (!Money.validate(money)) {
-			inputView.printErrorPurchaseAmountInvalidation();
+			InputView.printErrorPurchaseAmountInvalidation();
 			money = sc.nextLine();
 		}
 
@@ -45,7 +37,7 @@ public class LottoController {
 
 	private LastWeekWinningNumber inputForLastWeekWinningNumberUntilValid(String lastWeekNumber) {
 		while (!LastWeekWinningNumber.validate(lastWeekNumber)) {
-			inputView.printErrorLastWeekWinningNumberInvalidation();
+			InputView.printErrorLastWeekWinningNumberInvalidation();
 			lastWeekNumber = sc.nextLine();
 		}
 
