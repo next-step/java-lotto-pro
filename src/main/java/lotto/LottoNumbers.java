@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    public static final String FIND_ALL_SPACES = "\\s+";
+    public static final String REMOVE_SPACES = "";
     public static final String LOTTO_NUMBERS_BASE_SEPARATOR = ",";
     public static final String LOTTO_NUMBERS_DESCRIPTION_OPEN_BRACKET = "[";
     public static final String LOTTO_NUMBERS_DESCRIPTION_CLOSE_BRACKET = "]";
@@ -48,6 +50,7 @@ public class LottoNumbers {
     }
 
     private void generateLottoNumbersFromString(String lottoNumbersString, String separator) {
+        lottoNumbersString = lottoNumbersString.replaceAll(FIND_ALL_SPACES, REMOVE_SPACES);
         String[] splitLottoNumbersString = lottoNumbersString.split(separator);
         for (String lottoNumberString : splitLottoNumbersString) {
             lottoNumbers.add(new LottoNumber(lottoNumberString));
