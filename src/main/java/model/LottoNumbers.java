@@ -1,6 +1,9 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public final class LottoNumbers {
@@ -33,6 +36,40 @@ public final class LottoNumbers {
 		return collection.stream()
 			.map(LottoNumber::toString)
 			.collect(Collectors.joining(", "));
+	}
+
+	LottoNumbers sort() {
+		List<LottoNumber> list = list();
+		Collections.sort(list);
+		return new LottoNumbers(list);
+	}
+
+	LottoNumbers random(int count) {
+		validateSize(count);
+		List<LottoNumber> shuffledList = shuffledList();
+		List<LottoNumber> numbers = new ArrayList<>();
+		for (int index = 0; index < count; index++) {
+			numbers.add(shuffledList.get(index));
+		}
+		return new LottoNumbers(numbers);
+	}
+
+	private void validateSize(int count) {
+		int size = collection.size();
+		if (size < count) {
+			throw new IllegalArgumentException(
+				String.format("can not choose %d because the size is %d", count, size));
+		}
+	}
+
+	private List<LottoNumber> shuffledList() {
+		List<LottoNumber> list = list();
+		Collections.shuffle(list);
+		return list;
+	}
+
+	private List<LottoNumber> list() {
+		return new ArrayList<>(collection);
 	}
 
 	private int containsCount(LottoNumber number) {
