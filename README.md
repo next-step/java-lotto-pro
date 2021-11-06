@@ -86,6 +86,9 @@
 - [X] 불필요한 코드 제거하기 (LottoProviderStrategy)
 - [X] RandomNumbers.java 초기화 블럭
   적용하기 [참고 링크](https://velog.io/@tomato2532/%EC%B4%88%EA%B8%B0%ED%99%94-%EB%B8%94%EB%9F%AD%EA%B3%BC-%EC%83%9D%EC%84%B1%EC%9E%90)
-- [ ] LottoRanksDto.java 를 역할 분리 -> View 레이어로 분리하기
-- [ ] lottoRanksOf() 테스트 추가
+- [X] DTO 개선하기
+- [ ] `lottoRanksOf`() 테스트 추가
 - [X] LottoNumbers 에서 불필요한 NumbersStrategy 사용 제거
+
+- 리팩토링
+    - [X] Dto 정리 하면서 Controller, Service, View 통합 리팩토링 진행
