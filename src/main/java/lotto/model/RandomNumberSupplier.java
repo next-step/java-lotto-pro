@@ -42,7 +42,7 @@ public class RandomNumberSupplier implements NumberSupplier {
     public Set<Number> getNumbers() {
         List<Number> numbers = new ArrayList<>();
         for (int i = startInclusive; i <= endInclusive; i++) {
-            numbers.add(new Number(i));
+            numbers.add(Number.ofValue(i));
         }
         Collections.shuffle(numbers);
         Set<Number> chosenNumbers = new HashSet<>(numbers.subList(0, size));

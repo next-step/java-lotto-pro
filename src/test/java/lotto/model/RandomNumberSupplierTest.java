@@ -22,7 +22,7 @@ public class RandomNumberSupplierTest {
         RandomNumberSupplier numberSupplier = new RandomNumberSupplierBuilder().withSize(6).withRange(1, 45).build();
         assertThat(numberSupplier.getNumbers())
             .hasSize(6)
-            .allMatch(number -> number.compareTo(new Number(1)) >= 0)
-            .allMatch(number -> number.compareTo(new Number(45)) <= 0);
+            .allMatch(number -> number.compareTo(Number.ofValue(1)) >= 0)
+            .allMatch(number -> number.compareTo(Number.ofValue(45)) <= 0);
     }
 }

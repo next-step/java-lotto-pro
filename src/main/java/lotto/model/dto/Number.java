@@ -1,5 +1,8 @@
 package lotto.model.dto;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Number implements Comparable<Number> {
@@ -7,14 +10,28 @@ public class Number implements Comparable<Number> {
     public static final int MAX_NUMBER = 45;
     static final String NUMBER_RANGE_ERR_MSG = "로또는 " + MIN_NUMBER + "과 " + MAX_NUMBER + " 사이의 수만 가능합니다.";
 
-    private final int number;
+    private static final Map<Integer, Number> VALUE_TO_NUMBER;
 
-    public Number(int number) {
-        this.number = number;
-        validate();
+    static {
+        Map<Integer, Number> map = new HashMap<>();
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            map.put(i, new Number(i));
+        }
+        VALUE_TO_NUMBER = Collections.unmodifiableMap(map);
     }
 
-    private void validate() {
+    private final int number;
+
+    private Number(int number) {
+        this.number = number;
+    }
+
+    public static Number ofValue(int number) {
+        validate(number);
+        return VALUE_TO_NUMBER.get(number);
+    }
+
+    private static void validate(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERR_MSG);
         }
