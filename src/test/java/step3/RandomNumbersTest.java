@@ -11,13 +11,6 @@ import step3.domain.strategy.numbers.RandomLottoNumbers;
 public class RandomNumbersTest {
 
     @Test
-    void create() {
-        NumbersStrategy numbersStrategy = new RandomLottoNumbers();
-
-        assertThat(numbersStrategy).isInstanceOf(NumbersStrategy.class);
-    }
-
-    @Test
     void createRandomNumberCountTest() {
         NumbersStrategy numbersStrategy = new RandomLottoNumbers();
 

@@ -13,18 +13,6 @@ import step3.domain.strategy.numbers.RandomLottoNumbers;
 public class LottoNumbersTest {
 
     @Test
-    void create() {
-        // given
-        int lottoBuyCount = 5;
-
-        // when
-        LottoNumbers lottoNumbers = new LottoNumbers();
-
-        // then
-        assertThat(lottoNumbers).isEqualTo(new LottoNumbers());
-    }
-
-    @Test
     @DisplayName("LottoNumbers 를 생성한다. size 는 LottoNumbers.MAX_LOTTO_NUMBERS_SIZE 이다.")
     void createLottoNumbers() {
         // given
@@ -65,12 +53,4 @@ public class LottoNumbersTest {
             .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
     }
 
-    private NumbersStrategy getNumbersStrategy(int[] overSizeNumbers) {
-        return new NumbersStrategy() {
-            @Override
-            public int[] getNumbers() {
-                return overSizeNumbers;
-            }
-        };
-    }
 }

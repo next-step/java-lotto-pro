@@ -11,11 +11,6 @@ import step3.domain.strategy.numbers.RandomLottoNumbers;
 public class LottoNumbersBundleTest {
 
     @Test
-    void addLottoNumbers() {
-        new LottoNumbersBundle().addLottoNumbers(new RandomLottoNumbers());
-    }
-
-    @Test
     @DisplayName("출력된 로또번호는 불변성객체로 수정불가 테스트")
     void toArrayUnmodifiableTest() {
         // given
