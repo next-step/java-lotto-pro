@@ -6,27 +6,32 @@ public class LottoWinningStatistics {
 
 	public final static float EARNING_RATE_BASE = 1.0f;
 
-	private final Map<Integer, Long> numOfLottosByMatching;
+	private final Map<LottoWinningRank, Long> numOfLottosByRank;
 
 	private LottoWinningStatistics(WinningLotto winningLotto, List<Lotto> lottos) {
-		this.numOfLottosByMatching = lottos.stream()
-			.collect(Collectors.groupingBy(winningLotto::countMatching, Collectors.counting()));
+		this.numOfLottosByRank = lottos.stream()
+			.collect(Collectors.groupingBy((lotto) -> rank(winningLotto, lotto), Collectors.counting()));
+	}
+
+	private LottoWinningRank rank(WinningLotto winningLotto, Lotto lotto) {
+		final int matchingCount = winningLotto.countMatching(lotto);
+		final boolean hasBonus = lotto.hasBonus(winningLotto);
+		return LottoWinningRank.valueOf(matchingCount, hasBonus);
 	}
 
 	public static LottoWinningStatistics of(WinningLotto winningLotto, List<Lotto> lottos) {
 		return new LottoWinningStatistics(winningLotto, lottos);
 	}
 
-	public Long countLottos(LottoWinningRank rank) {
-		final int matchingCount = rank.getMatchingCount();
-		if (numOfLottosByMatching.containsKey(matchingCount)) {
-			return numOfLottosByMatching.get(matchingCount);
+	public long countLottos(LottoWinningRank rank) {
+		if (numOfLottosByRank.containsKey(rank)) {
+			return numOfLottosByRank.get(rank);
 		}
 		return 0L;
 	}
 
 	public double earningRate() {
-		final long prizeKRW = numOfLottosByMatching.entrySet().stream()
+		final long prizeKRW = numOfLottosByRank.entrySet().stream()
 			.reduce(0L
 				, (acc, entry) -> acc + calculatePrizeKRW(entry.getKey(), entry.getValue())
 				, Long::sum);
@@ -36,12 +41,12 @@ public class LottoWinningStatistics {
 		return (double)prizeKRW / paidKRW;
 	}
 
-	private long calculatePrizeKRW(int matchingCount, Long numOfLottos) {
-		return numOfLottos * LottoWinningRank.valueOf(matchingCount).getPrizeKRW();
+	private long calculatePrizeKRW(LottoWinningRank rank, Long numOfLottos) {
+		return numOfLottos * rank.getPrizeKRW();
 	}
 
 	private long countLottos() {
-		return numOfLottosByMatching.values().stream().reduce(0L, Long::sum);
+		return numOfLottosByRank.values().stream().reduce(0L, Long::sum);
 	}
 }
 

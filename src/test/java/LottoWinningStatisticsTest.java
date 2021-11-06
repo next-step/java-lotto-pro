@@ -9,9 +9,14 @@ import org.junit.jupiter.params.provider.EnumSource;
 
 public class LottoWinningStatisticsTest {
 
-	private final WinningLotto winningLotto = WinningLotto.from("1,2,3,4,5,6");
+	private final String bonus = "45";
+	private final WinningLotto winningLotto = WinningLottoBuilder.aWinningLotto()
+		.withLottoNumbers("1,2,3,4,5,6")
+		.withBonus(bonus)
+		.build();
 	private final List<Lotto> lottos = Arrays.asList(
 		Lotto.from("1,2,3,4,5,6"),
+		Lotto.from(String.format("1,2,3,4,5,%s", bonus)),
 		Lotto.from("1,2,3,4,5,10"),
 		Lotto.from("1,2,3,4,10,11"),
 		Lotto.from("1,2,3,10,11,12"),
@@ -22,7 +27,7 @@ public class LottoWinningStatisticsTest {
 	@ParameterizedTest
 	@EnumSource(LottoWinningRank.class)
 	void countLottos(LottoWinningRank rank) {
-		assertThat(statistics.countLottos(rank)).isEqualTo(1);
+		assertThat(statistics.countLottos(rank)).isEqualTo(1L);
 	}
 
 	@Test
