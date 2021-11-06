@@ -22,6 +22,6 @@ public class LottoTicketTest {
 		Assertions.assertThat(lottoTicket.getNumOfNumbersInGroup())
 			.isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
 
-		lottoNumbers.forEach((it)->assertThat(lottoTicket.hasLottoNumber(it)));
+		lottoNumbers.forEach((it) -> assertThat(lottoTicket.hasLottoNumber(it)));
 	}
 }

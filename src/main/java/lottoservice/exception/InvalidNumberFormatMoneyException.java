@@ -5,7 +5,9 @@ package lottoservice.exception;
  */
 
 public class InvalidNumberFormatMoneyException extends InvalidMoneyException {
+
 	public InvalidNumberFormatMoneyException(String message) {
 		super(message);
 	}
+
 }

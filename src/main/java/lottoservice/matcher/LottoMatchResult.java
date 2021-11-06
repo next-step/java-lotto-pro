@@ -30,7 +30,7 @@ public class LottoMatchResult {
 		return result;
 	}
 
-	public int getRankMatchCount(LottoMatchRank lottoMatchRank){
+	public int getRankMatchCount(LottoMatchRank lottoMatchRank) {
 		return result.get(lottoMatchRank);
 	}
 

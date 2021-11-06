@@ -17,13 +17,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	static {
 		/* 스태틱 블록에서 LottoNumber 배열을 생성하여 number에 해당되는 index에 LottoNumber 객체를 캐싱 */
-		cachedLottoNumbers = new LottoNumber[LottoNumbersMaker.END_EXCLUSIVE_NUMBER+1];	/*	편의를 위해 END_EXCLUSIVE_NUMBER +1개의 배열 생성 */
-		for(int i=1; i<=LottoNumbersMaker.END_EXCLUSIVE_NUMBER; i++){
-			cachedLottoNumbers[i]=new LottoNumber(i);
+		cachedLottoNumbers = new LottoNumber[LottoNumbersMaker.END_EXCLUSIVE_NUMBER + 1];    /*	편의를 위해 END_EXCLUSIVE_NUMBER +1개의 배열 생성 */
+		for (int i = 1; i <= LottoNumbersMaker.END_EXCLUSIVE_NUMBER; i++) {
+			cachedLottoNumbers[i] = new LottoNumber(i);
 		}
 	}
 
-	public static LottoNumber valueOf(int number){
+	public static LottoNumber valueOf(int number) {
 		validateNumberInLottoRule(number);
 		return cachedLottoNumbers[number];
 	}

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class LottoMatchResultTest {
 
 	@Test
-	public void addMatchCount_로또_비교_결과_추가(){
+	public void addMatchCount_로또_비교_결과_추가() {
 		LottoMatchResult lottoMatchResult = new LottoMatchResult();
 		lottoMatchResult.addMatchCount(LottoMatchRank.ONE_POINT);
 
@@ -15,9 +15,9 @@ class LottoMatchResultTest {
 	}
 
 	@Test
-	public void calculateProfit_수익금_계산(){
+	public void calculateProfit_수익금_계산() {
 		LottoMatchResult lottoMatchResult = new LottoMatchResult();
-		for(int i=1; i<=9; i++){
+		for (int i = 1; i <= 9; i++) {
 			lottoMatchResult.addMatchCount(LottoMatchRank.ONE_POINT);
 		}
 		lottoMatchResult.addMatchCount(LottoMatchRank.THREE_POINT);
@@ -26,9 +26,9 @@ class LottoMatchResultTest {
 	}
 
 	@Test
-	public void calculateProfitPercentage_수익률_계산(){
+	public void calculateProfitPercentage_수익률_계산() {
 		LottoMatchResult lottoMatchResult = new LottoMatchResult();
-		for(int i=1; i<=13; i++){
+		for (int i = 1; i <= 13; i++) {
 			lottoMatchResult.addMatchCount(LottoMatchRank.ONE_POINT);
 		}
 		lottoMatchResult.addMatchCount(LottoMatchRank.THREE_POINT);

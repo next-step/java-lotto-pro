@@ -44,7 +44,7 @@ public class LottoTicket {
 		return lottoNumbers.size();
 	}
 
-	public boolean hasLottoNumber(LottoNumber lottoNumber){
+	public boolean hasLottoNumber(LottoNumber lottoNumber) {
 		return lottoNumbers.contains(lottoNumber);
 	}
 
@@ -66,7 +66,7 @@ public class LottoTicket {
 
 	private boolean hasAllSameNumbers(LottoTicket that) {
 		return that.getLottoNumbers().stream()
-			.filter(it->this.hasLottoNumber(it))
+			.filter(it -> this.hasLottoNumber(it))
 			.count() == LottoNumbersMaker.SIZE_OF_LOTTERY_NUMBERS;
 	}
 

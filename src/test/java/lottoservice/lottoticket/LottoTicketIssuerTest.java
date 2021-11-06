@@ -35,7 +35,7 @@ public class LottoTicketIssuerTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"1000:1", "10000:10","00011000:11"}, delimiter = ':')
+	@CsvSource(value = {"1000:1", "10000:10", "00011000:11"}, delimiter = ':')
 	public void buyTickets_금액을_문자열로_입력받은경우_처리(String inputAmount, int numOfTickets) {
 		LottoTickets lottoTickets = LottoTicketIssuer.buyTickets(inputAmount);
 		Assertions.assertThat(lottoTickets.getNumOfTickets()).isEqualTo(numOfTickets);
@@ -51,7 +51,7 @@ public class LottoTicketIssuerTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {"21474830000", "2147484000"})
-	public void buyTickets_입력받은_금액이_최대_금액을_초과한경우_예외처리(String inputAmount){
+	public void buyTickets_입력받은_금액이_최대_금액을_초과한경우_예외처리(String inputAmount) {
 		Assertions.assertThatThrownBy(() -> {
 			LottoTickets lottoTickets = LottoTicketIssuer.buyTickets(inputAmount);
 		}).isInstanceOf(InvalidNumberFormatMoneyException.class);

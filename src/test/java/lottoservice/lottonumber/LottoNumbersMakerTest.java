@@ -26,22 +26,22 @@ public class LottoNumbersMakerTest {
 	}
 
 	@Test
-	public void makeLottoNumbers_정수리스트_인자전달(){
-		List<Integer> numbers=Arrays.asList(1,10,20,30,40,45);
+	public void makeLottoNumbers_정수리스트_인자전달() {
+		List<Integer> numbers = Arrays.asList(1, 10, 20, 30, 40, 45);
 		List<LottoNumber> lottoNumbers = LottoNumbersMaker.makeLottoNumbers(numbers);
 		assertThat(lottoNumbers.size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
-		for(int number : numbers){
+		for (int number : numbers) {
 			assertThat(lottoNumbers.contains(LottoNumber.valueOf(number)));
 		}
 	}
 
 	@Test
-	public void makeLottoNumbers_문자열_인자전달(){
-		String numbertext ="1, 15, 20, 25, 30, 45";
-		List<Integer> numbers=Arrays.asList(1,15,20,25,30,45);
+	public void makeLottoNumbers_문자열_인자전달() {
+		String numbertext = "1, 15, 20, 25, 30, 45";
+		List<Integer> numbers = Arrays.asList(1, 15, 20, 25, 30, 45);
 		List<LottoNumber> lottoNumbers = LottoNumbersMaker.makeLottoNumbers(numbertext);
 		assertThat(lottoNumbers.size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
-		for(int number : numbers){
+		for (int number : numbers) {
 			assertThat(lottoNumbers.contains(LottoNumber.valueOf(number)));
 		}
 	}
