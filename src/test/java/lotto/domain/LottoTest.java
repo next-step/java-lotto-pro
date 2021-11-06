@@ -13,13 +13,13 @@ public class LottoTest {
 	@Test
 	public void init() {
 		Lotto lotto = new Lotto(
-			Arrays.asList(1, 2, 3, 5, 6)
+			Arrays.asList(1, 2, 3, 4, 5, 6)
 				.stream()
 				.map(LottoNumber::new)
 				.collect(Collectors.toList())
 		);
 
-		assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 5, 6)
+		assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
 			.stream()
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()))

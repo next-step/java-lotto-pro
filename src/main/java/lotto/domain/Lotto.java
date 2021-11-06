@@ -23,6 +23,10 @@ public class Lotto {
 		}
 	}
 
+	public boolean isContains(LottoNumber number) {
+		return lottoNumbers.contains(number);
+	}
+
 	private boolean isLottoSize(int size) {
 		return size != LOTTO_SIZE;
 	}
