@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.*;
@@ -66,6 +67,21 @@ class WinningTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             winningResult.winnerPerWinningRank(0);
         }).withMessage(ErrorMessage.WINNING_RANK_OUT_BOUND.getMessage());
+    }
+
+    @DisplayName("수익률 계산")
+    @ParameterizedTest
+    @CsvSource(value = {"1000:5000:5", "1000:0:0", "2000:15000:7.5", "5000:5000:1", "10000:5000:0.5"}, delimiter = ':')
+    void profitRateTest(int purchaseAmount, int profitAmount, double profitRate) {
+        //given
+        Lottos lottos = new Lottos(new ArrayList<>());
+        WinningResult winningResult = lottos.winningResult(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        //when
+        double profitRateResult = winningResult.profitRate(purchaseAmount, profitAmount);
+
+        //then
+        assertThat(profitRateResult).isEqualTo(profitRate);
     }
 
     static Stream<Arguments> matchCalculationParametersProvider() {
