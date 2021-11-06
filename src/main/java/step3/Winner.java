@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class Winner {
 
 	private static Map<Integer, Integer> winnerAmount;
+	private int sumAmount;
 
 	public Winner() {
 		winnerAmount = new HashMap<>();
@@ -20,15 +21,23 @@ public class Winner {
 		winnerAmount.put(6, 2_000_000_000);
 		winnerAmount = Collections.unmodifiableMap(winnerAmount);
 	}
+
 	public List<Integer> statistics(String userInputWinnerNumber) {
 		List<LottoNumbers> papers = LottoPapers.PAPERS;
 		List<Integer> inputNumbers = getIntegers(userInputWinnerNumber);
 		List<Integer> result = new ArrayList<>();
+
 		for (LottoNumbers paper : papers) {
 			Integer matchNumber = findMatchLottoNumber(inputNumbers, paper);
-			result.add(winnerAmount.get(matchNumber));
+			Integer amount = winnerAmount.get(matchNumber);
+			result.add(amount);
+			sumAmount += amount;
 		}
 		return result;
+	}
+
+	public int yield(Money money) {
+		return money.yield(sumAmount);
 	}
 
 	private Integer findMatchLottoNumber(List<Integer> collect, LottoNumbers paper) {

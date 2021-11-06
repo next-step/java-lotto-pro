@@ -22,4 +22,14 @@ public class Money {
 	public int buyCount() {
 		return Math.floorDiv(money, DEFAULT_MONEY);
 	}
+
+	public int yield(int sumAmount) {
+		return Math.floorDiv(sumAmount, this.money);
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(money);
+	}
+
 }
