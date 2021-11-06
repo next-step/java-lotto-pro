@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.exception.ExceedNumberBoundException;
+
 import java.util.Objects;
 
 public class LottoNumber {
