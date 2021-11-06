@@ -32,7 +32,7 @@ public class Lotto {
                 .count();
     }
 
-    private boolean contains(Ball ball) {
+    public boolean contains(Ball ball) {
         return this.balls().contains(ball);
     }
 

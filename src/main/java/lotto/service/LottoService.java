@@ -1,12 +1,14 @@
 package lotto.service;
 
 import lotto.domain.*;
+import lotto.exception.InputDataErrorCode;
+import lotto.exception.InputDataException;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoService {
-    private Lotto winningLotto;
+    private WinningLotto winningLotto;
 
     public Lottos createLotto(int countOfLotto) {
         List<Lotto> lottoBasket = new ArrayList<>();
@@ -15,17 +17,6 @@ public class LottoService {
             lottoBasket.add(new Lotto(balls));
         }
         return new Lottos(lottoBasket);
-    }
-
-    public void makeWinningLotto(List<Integer> winningLottoNumber) {
-        List<Ball> winningBalls = winningLottoNumber.stream()
-                .map(number -> new Ball(number))
-                .collect(Collectors.toList());
-        this.winningLotto = new Lotto(winningBalls);
-    }
-
-    public Rank match(Lotto lotto) {
-        return Rank.rank(winningLotto.match(lotto));
     }
 
     public Map<Rank, Integer> result(Lottos lottos) {
@@ -38,7 +29,20 @@ public class LottoService {
         return lottoResult;
     }
 
-    public Lotto winningLotto() {
+    public Rank match(Lotto lotto) {
+        return Rank.rank(winningLotto.match(lotto), winningLotto.isMatchBonusBall(lotto));
+    }
+
+    public void makeWinningLotto(List<Integer> winningLottoNumbers, int bonusBallNumber) {
+        List<Ball> winningBalls = winningLottoNumbers.stream()
+                .map(number -> new Ball(number))
+                .collect(Collectors.toList());
+        Lotto changedLotto = new Lotto(winningBalls);
+        Ball bonusBall = new Ball(bonusBallNumber);
+        this.winningLotto = new WinningLotto(changedLotto, bonusBall);
+    }
+
+    public WinningLotto winningLotto() {
         return this.winningLotto;
     }
 
@@ -49,5 +53,4 @@ public class LottoService {
         }
         return balls;
     }
-
 }

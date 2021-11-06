@@ -32,6 +32,11 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
+    public static int printInputBonusNumber(){
+        System.out.println("보너스 볼을 입력해주세요");
+        return Integer.parseInt(scanner.nextLine());
+    }
+
 
     private static void validInputMoney(String inputMoney) {
         if (!isOnlyNumber(inputMoney)) {

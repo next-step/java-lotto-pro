@@ -3,12 +3,13 @@ package lotto.domain;
 import lotto.exception.InputDataErrorCode;
 import lotto.exception.InputDataException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
@@ -16,11 +17,8 @@ public enum Rank {
     NOT_WIN_MONEY_MATCH_COUNT_ONE(1, 0),
     NOT_MATCH(0, 0);
 
-    private static final int START_VALID_LOTTO_MATCH_COUNT = 3;
-    private static final int END_VALID_LOTTO_MATCH_COUNT = 6;
     private int count;
     private int winMoney;
-
 
     Rank(int count, int winMoney) {
         this.count = count;
@@ -35,7 +33,26 @@ public enum Rank {
         return this.winMoney;
     }
 
-    public static Rank rank(int count) {
+    public static Rank rank(int count, boolean isMatchBonusBall) {
+        Rank findRank = findRank(count);
+        if (isMatchCountFive(findRank)) {
+            return chooseSecondRank(isMatchBonusBall);
+        }
+        return findRank;
+    }
+
+    private static Rank chooseSecondRank(boolean isMatchBonusBall) {
+        if (isMatchBonusBall) {
+            return Rank.SECOND;
+        }
+        return Rank.THIRD;
+    }
+
+    private static boolean isMatchCountFive(Rank findRank) {
+        return findRank.count() == 5;
+    }
+
+    private static Rank findRank(int count) {
         return Arrays.stream(values())
                 .filter(rank -> isMatch(count, rank))
                 .findFirst()
@@ -43,11 +60,9 @@ public enum Rank {
     }
 
     public static List<Rank> getLottoResultRank() {
-        List<Rank> lottoResultRanks = new ArrayList<>();
-        for (int i = START_VALID_LOTTO_MATCH_COUNT; i <= END_VALID_LOTTO_MATCH_COUNT; i++) {
-            lottoResultRanks.add(Rank.rank(i));
-        }
-        return lottoResultRanks;
+        return Arrays.stream(values())
+                .filter(rank -> rank.count > 2)
+                .collect(Collectors.toList());
     }
 
     private static boolean isMatch(int count, Rank rank) {
