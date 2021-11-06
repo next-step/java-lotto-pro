@@ -6,10 +6,6 @@ public class Bonus {
 
     private final int bonus;
 
-    public Bonus(String number) {
-        this.bonus = Integer.parseInt(number);
-    }
-
     public Bonus(int bonus) {
         this.bonus = bonus;
     }

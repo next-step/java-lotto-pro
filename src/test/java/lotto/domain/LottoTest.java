@@ -41,6 +41,6 @@ public class LottoTest {
 
     @Test
     void 보너스_숫자를_확인한다() {
-        assertThat(로또.checkBonus(new Bonus("1"))).isTrue();
+        assertThat(로또.checkBonus(new Bonus(1))).isTrue();
     }
 }

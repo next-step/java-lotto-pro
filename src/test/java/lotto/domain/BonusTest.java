@@ -8,6 +8,6 @@ class BonusTest {
 
     @Test
     void 보너스_숫자를_생성한다() {
-        assertThat(new Bonus("1")).isEqualTo(new Bonus("1"));
+        assertThat(new Bonus(1)).isEqualTo(new Bonus(1));
     }
 }
