@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class LottoView {
 
+    private static final int MIN_PROFIT_RATE = 1;
     private static final Scanner scanner = new Scanner(System.in);
 
     public static Money getMoney() {
@@ -44,6 +45,10 @@ public class LottoView {
             System.out.printf("%d개 일치 (%d원)- %d개\n", entry.getKey().getCount(), entry.getKey().getPrice(), entry.getValue());
         }
 
-        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result.getProfitRate());
+        final double rate = result.getProfitRate();
+        System.out.printf("총 수익률은 %.2f입니다.", rate);
+        if (rate < MIN_PROFIT_RATE) {
+            System.out.printf("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
     }
 }
