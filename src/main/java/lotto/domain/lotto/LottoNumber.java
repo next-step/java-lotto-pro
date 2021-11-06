@@ -1,7 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.Map;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,8 +18,11 @@ public class LottoNumber {
     }
 
     public static LottoNumber from(int number) {
-        Optional<LottoNumber> lottoNumber = Optional.ofNullable(LOTTO_NUMBER_BOX.get(number));
-        return lottoNumber.orElseThrow(() -> new IllegalArgumentException("로또 번호는 1 ~ 45 까지 입니다."));
+        LottoNumber lottoNumber = LOTTO_NUMBER_BOX.get(number);
+        if (Objects.isNull(lottoNumber)) {
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45 까지 입니다.");
+        }
+        return lottoNumber;
     }
 
     private static Map<Integer, LottoNumber> generate() {
