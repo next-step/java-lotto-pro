@@ -1,8 +1,12 @@
 package model.common;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public final class LottoNumber implements Comparable<LottoNumber> {
+
+	private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
 	private final int value;
 
@@ -11,7 +15,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static LottoNumber from(int value) {
-		return new LottoNumber(value);
+		return CACHE.computeIfAbsent(value, LottoNumber::new);
 	}
 
 	@Override
