@@ -3,6 +3,7 @@ package step3;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 public class LottoNumbers {
@@ -37,6 +38,15 @@ public class LottoNumbers {
 
 	private boolean isOverFlow() {
 		return this.lottoNumbers.size() > LOTTO_NUMBER_MAX;
+	}
+
+	public Integer match(LottoNumber lottoNumber) {
+		int count = 0;
+		Optional<LottoNumber> any = this.lottoNumbers.stream().filter(s -> s.equals(lottoNumber)).findAny();
+		if (any.isPresent()) {
+			count++;
+		}
+		return new Integer(count);
 	}
 
 	@Override
