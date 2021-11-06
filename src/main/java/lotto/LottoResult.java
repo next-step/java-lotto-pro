@@ -14,6 +14,8 @@ public enum LottoResult implements Printable {
     SIX(6, new LottoMoney(2000000000)),
     NONE(0, new LottoMoney(0));
 
+    private static final String LOTTO_RESULT_MESSAGE_FORMAT = "%d개 일치 (%s)";
+
     private final int correctCount;
     private final LottoMoney lottoMoney;
 
@@ -37,6 +39,6 @@ public enum LottoResult implements Printable {
 
     @Override
     public String makePrintableMessage() {
-        return correctCount + "개 일치 (" + lottoMoney.makePrintableMessage() + ")";
+        return String.format(LOTTO_RESULT_MESSAGE_FORMAT, correctCount, lottoMoney.makePrintableMessage());
     }
 }

@@ -12,9 +12,8 @@ import java.util.stream.Collectors;
 import view.Printable;
 
 public class LottoResults implements Printable {
-    private static final String DASH_SPACE = "- ";
-    private static final String COUNTING_UNIT = "개";
     private static final String NEW_LINE = "\n";
+    private static final String LOTTO_RESULTS_MESSAGE_FORMAT = "%s- %d개";
 
     private final List<LottoResult> lottoResults;
 
@@ -50,8 +49,8 @@ public class LottoResults implements Printable {
 
         return Arrays.stream(LottoResult.values())
             .filter(lottoResult -> lottoResult != LottoResult.NONE)
-            .map(lottoResult -> lottoResult.makePrintableMessage() + DASH_SPACE
-                + resultCounts.getOrDefault(lottoResult, 0) + COUNTING_UNIT)
+            .map(lottoResult -> String.format(LOTTO_RESULTS_MESSAGE_FORMAT, lottoResult.makePrintableMessage(),
+                resultCounts.getOrDefault(lottoResult, 0)))
             .collect(Collectors.joining(NEW_LINE));
     }
 }

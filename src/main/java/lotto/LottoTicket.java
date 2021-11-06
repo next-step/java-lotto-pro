@@ -8,9 +8,8 @@ import java.util.stream.Collectors;
 import view.Printable;
 
 public class LottoTicket implements Printable {
+    private static final String LOTTO_TICKET_MESSAGE_FORMAT = "[%s]";
     private static final String COMMA_SPACE = ", ";
-    private static final String LEFT_BRACE = "[";
-    private static final String RIGHT_BRACE = "]";
 
     private List<Integer> numbers;
 
@@ -52,8 +51,7 @@ public class LottoTicket implements Printable {
 
     @Override
     public String makePrintableMessage() {
-        return LEFT_BRACE
-            + numbers.stream().map(String::valueOf).collect(Collectors.joining(COMMA_SPACE))
-            + RIGHT_BRACE;
+        return String.format(LOTTO_TICKET_MESSAGE_FORMAT,
+            numbers.stream().map(String::valueOf).collect(Collectors.joining(COMMA_SPACE)));
     }
 }
