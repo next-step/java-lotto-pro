@@ -24,9 +24,9 @@ public class Lottos {
         return this.lottos;
     }
 
-    public List<Rank> match(Lotto winningLotto) {
+    public List<Rank> match(Lotto winningLotto, Bonus bonus) {
         return lottos.stream()
-                .map(lotto -> Rank.rank(winningLotto, lotto, new Bonus("6")))
+                .map(lotto -> Rank.rank(winningLotto, lotto, bonus))
                 .collect(Collectors.toList());
     }
 }
