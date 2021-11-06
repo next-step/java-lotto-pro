@@ -14,8 +14,6 @@ import lottoservice.lottoticket.LottoTicket;
 
 public class LottoTicketTest {
 
-	private static final int START_INCLUSIVE_NUMBER = 1;    /* 로또 번호 최소값 */
-	private static final int END_EXCLUSIVE_NUMBER = 45;    /* 로또 번호 최대값 */
 	private static final int SIZE_OF_LOTTERY_NUMBERS = 6;
 
 	@Test
