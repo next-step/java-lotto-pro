@@ -7,7 +7,7 @@ public class ResultView {
 	}
 
 	public static void purchasedCount(int size) {
-		System.out.println(String.format("{0}를 구매했습니다.", size));
+		System.out.println(String.format("%s개를 구매했습니다.", size));
 	}
 
 	public static void statisticsPrintAndYield(Winner winner) {

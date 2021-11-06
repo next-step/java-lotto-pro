@@ -20,8 +20,8 @@ public class LottoMachineFacade {
 		money = new Money(insertMoney);
 		Machine machine = new Machine(money);
 		machine.createLotto();
-		ResultView.purchasedLottoPrint();
 		ResultView.purchasedCount(LottoPapers.PAPERS.size());
+		ResultView.purchasedLottoPrint();
 	}
 
 	public void result(String userInputWinnerNumber) {
