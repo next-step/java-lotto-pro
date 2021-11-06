@@ -53,18 +53,20 @@ public class LottoNumbers {
     this.numbers = RandomLottoNumber.generate();
   }
 
-  public Stream<LottoNumber> getStream() {
-    return this.numbers.stream();
-  }
-
   public boolean contains(LottoNumber lottoNumber) {
     return numbers.contains(lottoNumber);
   }
 
   public Long countOf(LottoNumbers lottoNumbers) {
-    return lottoNumbers.getStream()
-                        .filter(number -> this.numbers.contains(number))
+    return this.numbers.stream()
+                        .filter(lottoNumbers::contains)
                         .count();
+  }
+
+  public List<String> getNumbersToString() {
+    return this.numbers.stream()
+                        .map(LottoNumber::toString)
+                        .collect(Collectors.toList());
   }
 
   @Override

@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import java.util.List;
+
 public class Lotto {
   public static final Integer PRICE = 1000;
   private final LottoNumbers numbers;
@@ -16,12 +18,12 @@ public class Lotto {
     return new Lotto(numbers);
   }
 
-  public LottoNumbers getNumbers() {
-    return this.numbers;
+  public List<String> getNumbersToString() {
+    return this.numbers.getNumbersToString();
   }
 
-  public Integer matchCount(Lotto latestWinLotto) {
-    return latestWinLotto.numbers.countOf(this.numbers)
-                                  .intValue();
+  public Integer matchCountOf(Lotto buyLotto) {
+    return this.numbers.countOf(buyLotto.numbers)
+                       .intValue();
   }
 }

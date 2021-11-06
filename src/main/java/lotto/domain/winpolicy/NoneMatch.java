@@ -9,7 +9,7 @@ public class NoneMatch extends Policy {
 
   @Override
   public Boolean isMatch(Lotto latestWinLotto, Lotto lotto) {
-    if (lotto.matchCount(latestWinLotto) < 3) {
+    if (latestWinLotto.matchCountOf(lotto) < 3) {
       return true;
     }
 

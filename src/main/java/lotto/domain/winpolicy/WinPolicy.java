@@ -1,24 +1,36 @@
 package lotto.domain.winpolicy;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+
 public enum WinPolicy {
-  NONE_MATCH(new NoneMatch()),
-  THREE_MATCH(new ThreeMatch()),
-  FOUR_MATCH(new FourMatch()),
-  FIVE_MATCH(new FiveMatch()),
-  SIX_MATCH(new SixMatch());
+  NONE_MATCH(new NoneMatch(), -1),
+  THREE_MATCH(new ThreeMatch(), 3),
+  FOUR_MATCH(new FourMatch(), 4),
+  FIVE_MATCH(new FiveMatch(), 5),
+  SIX_MATCH(new SixMatch(), 6);
 
   private final Policy policy;
+  private final Integer matchCount;
 
-  WinPolicy(Policy policy) {
+  WinPolicy(Policy policy, Integer matchCount) {
     this.policy = policy;
+    this.matchCount = matchCount;
   }
 
   public Policy getPolicy() {
-    return policy;
+    return this.policy;
+  }
+
+  public Integer getMatchCount() {
+    return this.matchCount;
   }
 
   public Integer getWinPrice() {
     return policy.getWinPrice();
   }
 
+  public Integer getMatchCount(Lotto latestWinLotto, Lottos buyLottos) {
+    return this.policy.getMatchCount(latestWinLotto, buyLottos);
+  }
 }

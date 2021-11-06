@@ -9,7 +9,7 @@ public class FourMatch extends Policy {
 
   @Override
   public Boolean isMatch(Lotto latestWinLotto, Lotto lotto) {
-    if (lotto.matchCount(latestWinLotto).equals(4)) {
+    if (latestWinLotto.matchCountOf(lotto).equals(4)) {
       return true;
     }
 

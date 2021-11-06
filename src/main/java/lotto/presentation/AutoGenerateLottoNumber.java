@@ -34,23 +34,22 @@ public class AutoGenerateLottoNumber extends Screen {
   @Override
   public void update() {
     Lottos lottos = UiSharedData.getBuyLottos();
+    List<String> printText = new ArrayList<>();
 
-    List<String> printText = lottos.getStream().map(Lotto::getNumbers)
-                                                .map(this::changeNumbersToText)
-                                                .map(this::changeNumbersTextToPrintExpression)
-                                                .collect(Collectors.toList());
+    for (Integer index = 0; index < lottos.size(); index++) {
+      String joinedNumberText = lottos.get(index)
+                                      .getNumbersToString()
+                                      .stream()
+                                      .reduce((result, number) -> result += ", " + number)
+                                      .orElse("");
+
+      printText.add(changejoinedNumberTextToPrintExpression(joinedNumberText));
+    }
 
     lottoLabel.setPrintText(String.join("\n", printText));
   }
 
-  private String changeNumbersTextToPrintExpression(String numbersString) {
+  private String changejoinedNumberTextToPrintExpression(String numbersString) {
     return "[" + numbersString + "]";
-  }
-
-  private String changeNumbersToText(LottoNumbers numbers) {
-    return numbers.getStream()
-                  .map(LottoNumber::toString)
-                  .reduce((result, number) -> result += ", " + number)
-                  .orElse("");
   }
 }

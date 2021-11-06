@@ -14,7 +14,7 @@ public class LottoTest {
     Lotto buyLotto = Lotto.valueOf("1", "3", "5", "17", "19", "30");
 
     // when
-    Integer matchCount = buyLotto.matchCount(latestWinLotto);
+    Integer matchCount = latestWinLotto.matchCountOf(buyLotto);
 
     // then
     assertThat(matchCount).isEqualTo(3);

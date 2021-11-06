@@ -14,9 +14,7 @@ public abstract class Policy {
   public abstract Boolean isMatch(Lotto latestWinLotto, Lotto lotto);
 
   public Integer getMatchCount(Lotto latestWinLotto, Lottos lottos) {
-    return (int) lottos.getStream()
-                        .filter(lotto -> isMatch(latestWinLotto, lotto))
-                        .count();
+    return lottos.matchCount(this, latestWinLotto);
   }
 
   public Integer getWinPrice() {
@@ -41,5 +39,4 @@ public abstract class Policy {
   public int hashCode() {
     return Objects.hashCode(winPrice);
   }
-
 }

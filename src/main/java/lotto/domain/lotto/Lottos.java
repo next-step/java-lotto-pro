@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import lotto.domain.winpolicy.Policy;
+
 public class Lottos {
   private final List<Lotto> lottos;
 
@@ -20,19 +22,21 @@ public class Lottos {
     return new Lottos(Arrays.asList(lottos));
   }
 
-  public Integer size() {
-    return this.lottos.size();
+  public Lotto get(Integer index) {
+    return lottos.get(index);
   }
 
-  public Lotto get(Integer index) {
-    return this.lottos.get(index);
+  public Integer size() {
+    return lottos.size();
   }
 
   public Integer getPrice() {
     return Lotto.PRICE * this.lottos.size();
   }
-  
-  public Stream<Lotto> getStream() {
-    return this.lottos.stream();
+
+  public Integer matchCount(Policy policy, Lotto latestWinLotto) {
+    return (int) lottos.stream()
+                        .filter(lotto -> policy.isMatch(latestWinLotto, lotto))
+                        .count();
   }
 }

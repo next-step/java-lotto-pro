@@ -67,10 +67,10 @@ public class ReportWinStatistics extends Screen {
 
     winStatistics.analysis(latestWinLotto, buyLottos);
 
-    threeMatchWin.setPrintText(getStatisticsText("3개", winStatistics.find(WinPolicy.THREE_MATCH)));
-    fourMatchWin.setPrintText(getStatisticsText("4개", winStatistics.find(WinPolicy.FOUR_MATCH)));
-    fiveMatchWin.setPrintText(getStatisticsText("5개", winStatistics.find(WinPolicy.FIVE_MATCH)));
-    sixMatchWin.setPrintText(getStatisticsText("6개", winStatistics.find(WinPolicy.SIX_MATCH)));
+    threeMatchWin.setPrintText(getStatisticsText(WinPolicy.THREE_MATCH.getMatchCount() + "개", winStatistics.find(WinPolicy.THREE_MATCH)));
+    fourMatchWin.setPrintText(getStatisticsText(WinPolicy.FOUR_MATCH.getMatchCount() + "개", winStatistics.find(WinPolicy.FOUR_MATCH)));
+    fiveMatchWin.setPrintText(getStatisticsText(WinPolicy.FIVE_MATCH.getMatchCount() + "개", winStatistics.find(WinPolicy.FIVE_MATCH)));
+    sixMatchWin.setPrintText(getStatisticsText(WinPolicy.SIX_MATCH.getMatchCount() + "개", winStatistics.find(WinPolicy.SIX_MATCH)));
 
     revenueRatio.setPrintText(getRevenueRatioValueText());
   }
