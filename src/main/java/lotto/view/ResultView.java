@@ -24,14 +24,16 @@ public class ResultView {
         resultMsg.append("당첨 통계\n");
         resultMsg.append("---------\n");
 
-        Arrays.stream(LottoWinningPrice.values()).forEach(
+        Arrays.stream(LottoWinningPrice.values())
+                .filter(LottoWinningPrice::isView)
+                .forEach(
                 lottoWinningPrice
                         -> resultMsg.append(String.format("%d개 일치 (%d원) - %d개\n",
                         lottoWinningPrice.getWinningCount(),
                         lottoWinningPrice.getReward(),
                         lottoResult.getMatchCounts().get(lottoWinningPrice) )) );
 
-        resultMsg.append(String.format("총 수익률은 %f 입니다.", lottoResult.getYield()));
+        resultMsg.append(String.format("총 수익률은 %.2f 입니다.", lottoResult.getYield()));
         System.out.println(resultMsg.toString());
     }
 }

@@ -30,9 +30,9 @@ public class LottoPapers {
         return new LottoPapers(lottoPapers);
     }
 
-    public LottoResult calculateLottoResult(LottoPapers lottoPapers, LottoPaper winningLottoPaper) {
+    public LottoResult calculateLottoResult(LottoPaper winningLottoPaper) {
         LottoResult lottoResult = new LottoResult();
-        lottoPapers.getLottoPapers()
+        getLottoPapers()
                 .forEach(lottoPaper -> lottoResult.addMatchCounts(lottoPaper.matchLottoPaper(winningLottoPaper)));
         return  lottoResult;
     }

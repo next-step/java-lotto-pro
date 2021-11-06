@@ -46,7 +46,7 @@ public class LottoPapersTest {
                 forEach(winningNumber -> winningLottoNumbers.add(new LottoNumber(Integer.parseInt(winningNumber))));
         LottoPaper winningLottoPaper = new LottoPaper(winningLottoNumbers);
         // when
-        LottoResult lottoResult = lottoPapers.calculateLottoResult(lottoPapers, winningLottoPaper);
+        LottoResult lottoResult = lottoPapers.calculateLottoResult(winningLottoPaper);
         // then
         assertThat(lottoResult.getMatchCounts().get(LottoWinningPrice.THREE)).isEqualTo(1);
         assertThat(lottoResult.getMatchCounts().get(LottoWinningPrice.FOUR)).isEqualTo(1);

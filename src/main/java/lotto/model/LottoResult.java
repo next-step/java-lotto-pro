@@ -20,7 +20,8 @@ public class LottoResult {
 
     public void addMatchCounts(int matchCount){
         LottoWinningPrice lottoWinningPrice = LottoWinningPrice.getLottoWinningPrice(matchCount);
-        matchCounts.put(lottoWinningPrice, matchCounts.get(lottoWinningPrice) + 1);
+        if(lottoWinningPrice.isView())
+            matchCounts.put(lottoWinningPrice, matchCounts.get(lottoWinningPrice) + 1);
     }
 
     public void calculateYield(long buyPrice) {
@@ -34,8 +35,10 @@ public class LottoResult {
     }
 
     public void addWinningReward(LottoWinningPrice lottoWinningPrice, int matchCount) {
-        long reward = (long) lottoWinningPrice.getReward() * matchCount;
-        winningReward = winningReward.add(BigDecimal.valueOf(reward));
+        if(lottoWinningPrice.isView()){
+            long reward = (long) lottoWinningPrice.getReward() * matchCount;
+            winningReward = winningReward.add(BigDecimal.valueOf(reward));
+        }
     }
 
     public Map<LottoWinningPrice, Integer> getMatchCounts() {

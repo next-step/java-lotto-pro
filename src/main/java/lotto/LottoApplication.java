@@ -43,7 +43,7 @@ public class LottoApplication {
     }
 
     private static void printLottoResult(LottoPapers lottoPapers, LottoPaper winningLottoPaper) {
-        LottoResult lottoResult = lottoPapers.calculateLottoResult(lottoPapers, winningLottoPaper);
+        LottoResult lottoResult = lottoPapers.calculateLottoResult(winningLottoPaper);
         lottoResult.calculateYield(lottoPapers.lottoPaperSize() * GameRule.LOTTO_PAPER_PRICE);
         ResultView.printWinningStatistics(lottoResult);
     }

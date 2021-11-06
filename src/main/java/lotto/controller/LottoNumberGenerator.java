@@ -15,6 +15,7 @@ public class LottoNumberGenerator {
 
     private static final List<LottoNumber> lottoNumbers;
 
+
     static {
         lottoNumbers = new ArrayList<>();
         IntStream.rangeClosed(GameRule.LOTTO_START_NUMBER, GameRule.LOTTO_END_NUMBER)
@@ -25,7 +26,7 @@ public class LottoNumberGenerator {
 
     public static LottoPaper getLottoNumbers() {
         Collections.shuffle(lottoNumbers);
-        List<LottoNumber> randomLottoNumbers = lottoNumbers.subList(GameRule.LOTTO_START_INDEX, GameRule.LOTTO_END_INDEX);
+        List<LottoNumber> randomLottoNumbers = new ArrayList<>(lottoNumbers.subList(GameRule.LOTTO_START_INDEX, GameRule.LOTTO_END_INDEX));
         Collections.sort(randomLottoNumbers);
         return new LottoPaper(randomLottoNumbers);
     }
