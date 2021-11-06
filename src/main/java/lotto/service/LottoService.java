@@ -10,6 +10,7 @@ import lotto.domain.winning.WinningStatistics;
 import lotto.util.StringUtil;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoService {
 
@@ -19,13 +20,21 @@ public class LottoService {
         this.vendingMachine = new LottoTicketVendingMachine();
     }
 
-    public PurchaseMoney getPurchaseMoney(String input) {
-        int money = StringUtil.parseIntFrom(input);
+    public PurchaseMoney getPurchaseMoney(String inputMoney) {
+        int money = StringUtil.parseIntFrom(inputMoney);
         return new PurchaseMoney(money);
     }
 
-    public LottoTickets issueTickets(PurchaseAmount purchaseAmount) {
-        return vendingMachine.issueTickets(purchaseAmount.getAutoTicketAmount());
+    public PurchaseAmount getPurchaseAmount(PurchaseMoney purchaseMoney, String inputManualAmount) {
+        int manualAmount = StringUtil.parseIntFrom(inputManualAmount);
+        return purchaseMoney.getPurchaseAmount(manualAmount);
+    }
+
+    public LottoTickets issueTickets(PurchaseAmount purchaseAmount, List<String> inputManualLottoNumbers) {
+        List<List<Integer>> manualNumbers = inputManualLottoNumbers.stream()
+                .map(StringUtil::splitParseInt)
+                .collect(Collectors.toList());
+        return vendingMachine.issueTickets(purchaseAmount.getAutoTicketAmount(), manualNumbers);
     }
 
     public WinningNumbers getWinningNumbers(String inputWinningNumbers, String inputBonusNumber) {

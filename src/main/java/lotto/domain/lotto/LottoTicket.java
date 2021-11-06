@@ -18,7 +18,7 @@ public class LottoTicket {
 
     public static LottoTicket from(int... lottoNumbers) {
         return new LottoTicket(Arrays.stream(lottoNumbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::from)
                 .collect(Collectors.toSet()));
     }
 
@@ -39,6 +39,7 @@ public class LottoTicket {
     public List<Integer> convertLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers.stream()
                 .map(LottoNumber::getLottoNumber)
+                .sorted()
                 .collect(Collectors.toList()));
     }
 }

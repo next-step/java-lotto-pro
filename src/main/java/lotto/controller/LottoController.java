@@ -9,6 +9,8 @@ import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoController {
 
     private final LottoService service = new LottoService();
@@ -16,10 +18,12 @@ public class LottoController {
     public void run() {
         try {
             PurchaseMoney purchaseMoney = service.getPurchaseMoney(InputView.getPurchaseMoney());
-            PurchaseAmount purchaseAmount = purchaseMoney.getPurchaseAmount();
-            OutputView.printTicketAmount(purchaseAmount.getAutoTicketAmount());
+            PurchaseAmount purchaseAmount = service.getPurchaseAmount(purchaseMoney, InputView.getManualLottoCount());
 
-            LottoTickets lottoTickets = service.issueTickets(purchaseAmount);
+            List<String> manualLottoNumbers = InputView.getManualLottoNumbers(purchaseAmount.getManualTicketAmount());
+            LottoTickets lottoTickets = service.issueTickets(purchaseAmount, manualLottoNumbers);
+
+            OutputView.printTicketAmount(purchaseAmount.getManualTicketAmount(), purchaseAmount.getAutoTicketAmount());
             OutputView.printLottoTickets(lottoTickets);
 
             WinningNumbers winningNumbers = service.getWinningNumbers(InputView.getWinningNumber(), InputView.getBonusNumber());

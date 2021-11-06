@@ -25,8 +25,8 @@ public class PurchaseMoney {
         }
     }
 
-    public PurchaseAmount getPurchaseAmount() {
-        return new PurchaseAmount(money / TICKET_PRICE);
+    public PurchaseAmount getPurchaseAmount(int manualAmount) {
+        return new PurchaseAmount(money / TICKET_PRICE, manualAmount);
     }
 
     public int getMoney() {
