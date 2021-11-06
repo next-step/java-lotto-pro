@@ -8,13 +8,15 @@ import java.util.List;
 
 public class LottoMachine implements Machine {
 
-    private static final String NUMBER_DELIMITER = ",";
+    protected static final String NUMBER_DELIMITER = ",";
 
     @Override
     public void start() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        sell(purchaseAmount);
+        List<Lotto> lottoList = sell(purchaseAmount);
         Lotto lastWeekWinningLotto = getLastWeekWinningLotto();
+        LottoResult lottoResult = new LottoResult(lastWeekWinningLotto, lottoList);
+        System.out.println(lottoResult);
     }
 
     private PurchaseAmount getPurchaseAmount() {
@@ -23,9 +25,9 @@ public class LottoMachine implements Machine {
         return new PurchaseAmount(amount);
     }
 
-    private void sell(PurchaseAmount purchaseAmount) {
+    private List<Lotto> sell(PurchaseAmount purchaseAmount) {
         int purchasedLottoCount = getPurchasedLottoCount(purchaseAmount);
-        List<Lotto> lottoList = getLottoList(purchasedLottoCount);
+        return getLottoList(purchasedLottoCount);
     }
 
     private Lotto getLastWeekWinningLotto() {

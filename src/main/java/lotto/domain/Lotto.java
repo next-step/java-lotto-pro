@@ -17,6 +17,12 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
+    public Lotto(LottoNumber... lottoNumbers) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            addLottoNumber(lottoNumber);
+        }
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         Collections.sort(lottoNumbers);
         return lottoNumbers;
@@ -30,6 +36,21 @@ public class Lotto {
             throw new LottoException(LOTTO_NUMBER_COUNT_ERROR);
         }
         lottoNumbers.add(lottoNumber);
+    }
+
+    public int match(Lotto lotto) {
+        int count = 0;
+        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
+            count += matchCount(lottoNumber);
+        }
+        return count;
+    }
+
+    private int matchCount(LottoNumber lottoNumber) {
+        if (lottoNumbers.contains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override
