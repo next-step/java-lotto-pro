@@ -18,16 +18,16 @@ public class LottoNumbersBundle {
         lottoNumbersBundle.add(lottoNumbers);
     }
 
-    public int size() {
-        return lottoNumbersBundle.size();
-    }
-
     public LottoRanks lottoRanksOf(LottoNumbers winLottoNumbers) {
         LottoRanks lottoRanks = new LottoRanks();
         for (LottoNumbers lottoNumbers : lottoNumbersBundle) {
             lottoRanks.matchOfMatchCount(lottoNumbers.containCount(winLottoNumbers));
         }
         return lottoRanks;
+    }
+
+    public int size() {
+        return lottoNumbersBundle.size();
     }
 
     public List<String> toList() {

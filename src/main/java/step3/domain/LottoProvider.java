@@ -1,10 +1,10 @@
 package step3.domain;
 
+import step3.domain.constance.LottoConstant;
 import step3.domain.strategy.numbers.NumbersStrategy;
 import step3.domain.strategy.numbers.RandomLottoNumbers;
 
 public class LottoProvider {
-    private static final int PRICE = 1000;
     private final LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
 
     public void buyLotto(int count, NumbersStrategy numbersStrategy) {
@@ -18,7 +18,7 @@ public class LottoProvider {
     }
 
     public int availableQuantity(int amount) {
-        return amount / PRICE;
+        return amount / LottoConstant.LOTTO_MINIMUM_PRICE;
     }
 
     public int lottoNumbersBundleSize() {
