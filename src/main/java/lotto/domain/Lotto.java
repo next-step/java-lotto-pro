@@ -1,6 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -15,11 +14,11 @@ public class Lotto {
 	public Lotto(List<Integer> numbers) {
 		this.lottoNumbers = new HashSet<>();
 
-		for(Integer number : numbers){
+		for (Integer number : numbers) {
 			lottoNumbers.add(new LottoNumber(number));
 		}
 
-		if(isLottoSize(this.lottoNumbers.size())){
+		if (isLottoSize(this.lottoNumbers.size())) {
 			throw new IllegalArgumentException();
 		}
 	}
