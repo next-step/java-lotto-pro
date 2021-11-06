@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class LotteryGame {
     public static void main(String[] args) {
@@ -11,5 +12,6 @@ public class LotteryGame {
             purchaseList.get(i).printLottoNumber();
         }
         String[] winningNumber = InputView.enterWinningNumber();
+        ResultView.printWinningStatistics(numberOfTicket, purchaseList, winningNumber);
     }
 }
