@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 public enum MatchingNumberCount {
+	ZERO(Count.from(0), Money.of(0)),
 	ONE(Count.from(1), Money.of(0)),
 	TWO(Count.from(2), Money.of(0)),
 	THREE(Count.from(3), Money.of(5_000)),
