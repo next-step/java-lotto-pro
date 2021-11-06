@@ -20,8 +20,6 @@ public class LottoResultsView {
     }
 
     public void showProfitRate() {
-        double profitRate = Math.floor(lottoResults.getProfitRate(buyAmount) * PROFIT_RATE_DECIMAL_POINT)
-                / PROFIT_RATE_DECIMAL_POINT;
-        System.out.printf(PROFIT_RATE_MESSAGE, profitRate);
+        System.out.printf(PROFIT_RATE_MESSAGE, buyAmount.getProfitRate(lottoResults.getTotalReward()));
     }
 }

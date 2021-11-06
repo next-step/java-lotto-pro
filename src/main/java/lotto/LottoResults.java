@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResults {
+    public static final double PROFIT_RATE_DECIMAL_POINT = 100.0;
     public static final int PROFIT_BASE = 1;
     private final Map<LottoRankingStatus, Integer> lottoRankingAmountMap;
 
@@ -39,7 +40,9 @@ public class LottoResults {
 
     public double getProfitRate(BuyAmount buyAmount) {
         int totalReward = getTotalReward();
-        return PROFIT_BASE + buyAmount.getProfitRate(totalReward);
+
+        return Math.floor((PROFIT_BASE + buyAmount.getProfitRate(totalReward)) * PROFIT_RATE_DECIMAL_POINT)
+                / PROFIT_RATE_DECIMAL_POINT;
     }
 
     @Override
