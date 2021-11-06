@@ -3,9 +3,15 @@ package lotto.model;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber>  {
+	public static final int MIN_LOTTO_NUMBER = 1;
+	public static final int MAX_LOTTO_NUMBER = 45;
+
 	private final int no;
 
 	public LottoNumber(int no) {
+		if (no < MIN_LOTTO_NUMBER || no > MAX_LOTTO_NUMBER) {
+			throw new IllegalArgumentException("범위를 벗어난 로또번호 입니다 : "+no);
+		}
 		this.no = no;
 	}
 

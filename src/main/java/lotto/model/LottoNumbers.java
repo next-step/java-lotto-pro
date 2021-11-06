@@ -10,33 +10,22 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-	private static final int LOTTO_NUMBER_COUNT = 6;
-	private static final int MIN_LOTTO_NUMBER = 1;
-	private static final int MAX_LOTTO_NUMBER = 45;
-	private static final List<LottoNumber> LOTTO_NUMBER_CANDIDATE;
+	public static final int LOTTO_NUMBER_COUNT = 6;
 
 	private final List<LottoNumber> numbers;
-
-	static {
-		LOTTO_NUMBER_CANDIDATE = new ArrayList<>();
-		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-			LOTTO_NUMBER_CANDIDATE.add(new LottoNumber(i));
-		}
-	}
-
-	public LottoNumbers() {
-		this(makeNonDuplicateLottoNumbers());
-	}
 
 	public LottoNumbers(int...arrayIntNumbers) {
 		this(convertIntegerArrayToLottoNumberList(arrayIntNumbers));
 	}
-
 	public LottoNumbers(List<LottoNumber> numbers) {
 		validateNumbers(numbers);
 		List<LottoNumber> sorted = new ArrayList<>(numbers);
 		Collections.sort(sorted);
 		this.numbers = sorted;
+	}
+
+	public static List<LottoNumber> convertIntegerArrayToLottoNumberList(int[] intNumbers) {
+		return Arrays.stream(intNumbers).mapToObj(LottoNumber::new).collect(Collectors.toList());
 	}
 
 	/**
@@ -52,16 +41,6 @@ public class LottoNumbers {
 			throw new IllegalArgumentException("중복된 로또 번호가 존재합니다. : "+numbers);
 		}
 
-	}
-
-	public static List<LottoNumber> convertIntegerArrayToLottoNumberList(int[] intNumbers) {
-		return Arrays.stream(intNumbers).mapToObj(LottoNumber::new).collect(Collectors.toList());
-	}
-
-	public static List<LottoNumber> makeNonDuplicateLottoNumbers() {
-		List<LottoNumber> suffledLottoNumbers = new ArrayList<>(LOTTO_NUMBER_CANDIDATE);
-		Collections.shuffle(suffledLottoNumbers);
-		return suffledLottoNumbers.subList(0, LOTTO_NUMBER_COUNT);
 	}
 
 	@Override
