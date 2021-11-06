@@ -14,4 +14,11 @@ public class LotteryCalculatorTest {
         int numberOfLottoTicket = LotteryCalculator.calculateTicket(money);
         assertThat(numberOfLottoTicket).isEqualTo(result);
     }
+
+    @DisplayName("구입금액과 상금으로 수익률을 계산")
+    @ParameterizedTest
+    @CsvSource(value = {"5000:14000:0.35", "50000:50000:1.0", "100000:50000:2.0"}, delimiter = ':')
+    void calculateRevenue(int totalWinningMoney, int paidMoney, double result) {
+        assertThat(LotteryCalculator.calculateRevenue(totalWinningMoney, paidMoney)).isEqualTo(result);
+    }
 }
