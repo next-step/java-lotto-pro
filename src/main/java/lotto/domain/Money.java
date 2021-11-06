@@ -39,8 +39,16 @@ public class Money {
         return divide(money).intValue();
     }
 
+    public Money plus(Money money) {
+        return Money.of(amount.add(money.amount));
+    }
+
     public Money minus(Money money) {
         return Money.of(amount.subtract(money.amount));
+    }
+
+    public Money multiply(int value) {
+        return Money.of(amount.multiply(new BigDecimal(value)));
     }
 
     public double doubleValue() {
@@ -57,6 +65,11 @@ public class Money {
 
     public boolean isModResultZero(Money money) {
         return amount.remainder(money.amount).compareTo(BigDecimal.ZERO) == 0;
+    }
+
+    @Override
+    public String toString() {
+        return amount.toString();
     }
 
     @Override

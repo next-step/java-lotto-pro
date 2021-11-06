@@ -14,7 +14,7 @@ public class Record {
     public Record(LotteryTicket lotteryTicket, LottoNumbers winningNumber) {
         initRecord(lotteryTicket, winningNumber);
         this.totalPayment = Money.of(calcTotalPayment(lotteryTicket));
-        this.totalWinningMoney = Money.of(calcTotalWinningMoney());
+        this.totalWinningMoney = calcTotalWinningMoney();
     }
 
     private void initRecord(LotteryTicket lotteryTicket, LottoNumbers winningNumber) {
@@ -30,10 +30,10 @@ public class Record {
         return lotteryTicket.size() * DEFAULT_PRICE;
     }
 
-    private long calcTotalWinningMoney() {
-        long total = 0;
+    private Money calcTotalWinningMoney() {
+        Money total = Money.of(0);
         for (Rank rank : Rank.values()) {
-            total += rank.getWinningMoney(this);
+            total = total.plus(rank.getWinningMoney(this));
         }
         return total;
     }
@@ -47,7 +47,7 @@ public class Record {
     }
 
     public Money getWinningMoney(Rank rank) {
-        return Money.of(rank.getWinningMoney(this));
+        return rank.getWinningMoney(this);
     }
 
     public Money getTotalWinningMoney() {

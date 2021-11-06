@@ -7,26 +7,26 @@ public enum Rank {
     FIRST(6, 2_000_000_000);
 
     private final int matchedCount;
-    private final long winningMoney;
+    private final Money winningMoney;
 
     Rank(int matchedCount, long winningMoney) {
         this.matchedCount = matchedCount;
-        this.winningMoney = winningMoney;
+        this.winningMoney = Money.of(winningMoney);
     }
 
     public int getCount(Record record) {
         return record.get(matchedCount);
     }
 
-    public long getWinningMoney(Record record) {
-        return getCount(record) * winningMoney;
+    public Money getWinningMoney(Record record) {
+        return winningMoney.multiply(getCount(record));
     }
 
     public int getMatchedCount() {
         return matchedCount;
     }
 
-    public long getWinningMoney() {
+    public Money getWinningMoney() {
         return winningMoney;
     }
 }
