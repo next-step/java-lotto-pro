@@ -36,18 +36,8 @@ public class LastWeekWinningNumber {
 			.map(Integer::parseInt)
 			.collect(toSet());
 
-		return isNotDuplicatedNumber(numbers) && isValidLottoNumber(numbers);
-	}
-
-	private static boolean isNotDuplicatedNumber(Set<Integer> numbers) {
-		return numbers.size() == Lotto.NUMBER_COUNT;
-	}
-
-	private static boolean isValidLottoNumber(Set<Integer> numbers) {
-		return
-			numbers.stream().allMatch(
-				number -> number.compareTo(Lotto.MIN_NUMBER) >= 0 && number.compareTo(Lotto.MAX_NUMBER) <= 0
-			);
+		return Lotto.isNotDuplicatedNumber(numbers)
+			&& Lotto.isValidLottoNumber(numbers);
 	}
 
 	public static LastWeekWinningNumber of(String lastWeekWinningNumber) {

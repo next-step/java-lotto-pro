@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 public class Lotto {
@@ -30,6 +31,17 @@ public class Lotto {
 		Collections.sort(selectedNumbers);
 
 		return new Lotto(selectedNumbers);
+	}
+
+	public static boolean isNotDuplicatedNumber(Set<Integer> numbers) {
+		return numbers.size() == NUMBER_COUNT;
+	}
+
+	public static boolean isValidLottoNumber(Set<Integer> numbers) {
+		return
+			numbers.stream().allMatch(
+				number -> number.compareTo(MIN_NUMBER) >= 0 && number.compareTo(MAX_NUMBER) <= 0
+			);
 	}
 
 	public Count matchCount(Lotto other) {
