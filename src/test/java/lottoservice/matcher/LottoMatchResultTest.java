@@ -3,9 +3,6 @@ package lottoservice.matcher;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import lottoservice.matcher.LottoMatchRank;
-import lottoservice.matcher.LottoMatchResult;
-
 class LottoMatchResultTest {
 
 	@Test
