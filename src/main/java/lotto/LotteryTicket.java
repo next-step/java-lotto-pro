@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.view.InputView;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -28,5 +30,9 @@ public class LotteryTicket {
             cnt++;
         }
         return cnt;
+    }
+
+    public void printLottoNumber() {
+        InputView.printLottoTicketNumber(lottoTicket);
     }
 }
