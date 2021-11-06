@@ -15,11 +15,12 @@ public class WinningStatistics {
     private List<WinningStatistic> mapWinningRank(Lottos lottos) {
         List<WinningStatistic> winningRanks = new ArrayList<WinningStatistic>();
         List<Lotto> lottoList = lottos.getLottos();
+        List<WinningRank> ranks = WinningRank.createWinningRanks();
         Map<WinningRank, Integer> rankMap = new HashMap<WinningRank, Integer>();
         for (Lotto lotto : lottoList) {
             rankMap.put(lotto.getWinningRank(), rankMap.getOrDefault(lotto.getWinningRank(), 0) + 1);
         }
-        rankMap.forEach((rank, count) -> winningRanks.add(new WinningStatistic(rank, count)));
+        ranks.forEach((rank) -> winningRanks.add(new WinningStatistic(rank, rankMap.getOrDefault(rank,0))));
         return winningRanks;
     }
 

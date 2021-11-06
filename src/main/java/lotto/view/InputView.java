@@ -13,12 +13,12 @@ public class InputView {
 
     public Money enterMoney() {
         System.out.println(INSERT_MONEY);
-        return new Money(Integer.parseInt(scanner.nextLine()));
+        return new Money(Integer.parseInt(scanner.nextLine().replaceAll(" ", "")));
     }
 
     public Lotto enterWinningLotto() {
         System.out.println(INSERT_WINNING_NUMBER);
-        return new Lotto(scanner.nextLine());
+        return new Lotto(scanner.nextLine().replaceAll(" ", ""));
     }
 
 }

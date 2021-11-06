@@ -1,6 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum WinningRank {
     SIX(6, 2000000000), 
@@ -27,6 +31,12 @@ public enum WinningRank {
 
     public int getReward() {
         return this.reward;
+    }
+    
+    public static List<WinningRank> createWinningRanks() {
+        return Stream.of(SIX, FIVE, FOUR, THREE)
+                .sorted(Comparator.comparing(WinningRank::getMatchCount))
+                .collect(Collectors.toList());
     }
 
 }
