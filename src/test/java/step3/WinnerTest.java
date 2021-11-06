@@ -1,7 +1,10 @@
 package step3;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 public class WinnerTest {
 
-	private List<Integer> statistics;
+	private Map<Integer,Integer> winnerAmounts;
 	private Winner winner;
 
 	@BeforeEach
@@ -22,13 +25,15 @@ public class WinnerTest {
 		LottoPapers.PAPERS = getLottoNumbers();
 		String userInputWinnerNumber = "1, 2, 3, 4, 5, 6";
 		winner = new Winner();
-		statistics = winner.statistics(userInputWinnerNumber);
+		winnerAmounts = winner.statistics(userInputWinnerNumber);
 	}
 
 	@Test
-	@DisplayName("각 로또번호가 맞는 수만큼 금액 산정")
+	@DisplayName("각 로또종이별 매칭되는 수에따른 금액 확인")
 	void eachWinAmount() {
-		Assertions.assertThat(statistics).containsExactly(5_000, 50_000);
+		assertThat(winnerAmounts.get(3)).isEqualTo(5_000);
+		assertThat(winnerAmounts.get(4)).isEqualTo(50_000);
+		assertThat(winnerAmounts.size()).isEqualTo(2);
 	}
 
 	@Test
