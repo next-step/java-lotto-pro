@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public class LottoCalculator {
 
     public static final int LOTTO_PRICE = 1_000;
@@ -35,10 +37,14 @@ public class LottoCalculator {
     }
 
     private void appendWinResults(Prints prints) {
-        for (WinResult winResult : WinResult.values()) {
-            prints.append(String.format(Message.WIN_RESULTS_PRINT.getMessage(),
-                    winResult.getCount(), winResult.getPrize(), winResults.getCount(winResult.getCount())));
-        }
+        Arrays.stream(WinResult.values())
+                .filter(winResult -> winResult != WinResult.NOT_MATCHED)
+                .forEach(winResult -> getWinResultsMessage(prints, winResult));
+    }
+
+    private void getWinResultsMessage(Prints prints, WinResult winResult) {
+        prints.append(String.format(Message.WIN_RESULTS_PRINT.getMessage(),
+                winResult.getCount(), winResult.getPrize(), winResults.getCount(winResult.getCount())));
     }
 
     private void appendProceeds(Prints prints) {

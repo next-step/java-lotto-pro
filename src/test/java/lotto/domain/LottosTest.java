@@ -28,7 +28,11 @@ class LottosTest {
     @DisplayName("당첨 결과 리스트를 반환한다.")
     void getWinResults() {
         // given
-        Lottos lottos = Lottos.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)));
+        Lottos lottos = Lottos.of(
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)),
+                new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12))
+        );
 
         // when
         WinResults winResults = lottos.getWinResults(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));

@@ -16,7 +16,7 @@ public class WinResults {
     public static WinResults of(List<Lotto> lottos, Lotto winNumber) {
         List<WinResult> winResults = lottos.stream()
                 .map(lotto -> lotto.getWinResult(winNumber))
-                .filter(Objects::nonNull)
+                .filter(winResult -> winResult != WinResult.NOT_MATCHED)
                 .collect(Collectors.toList());
         return new WinResults(winResults);
     }
