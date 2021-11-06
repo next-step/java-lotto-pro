@@ -1,10 +1,8 @@
 package lotto.domain;
 
-import java.util.regex.Pattern;
+import static lotto.domain.LottoPattern.*;
 
 public class LottoMoney {
-    private static final Pattern ONLY_POSITIVE_NUMBER = Pattern.compile("[0-9]+");
-
     private final int amount;
 
     public LottoMoney(String amount) {

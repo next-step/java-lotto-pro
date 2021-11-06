@@ -1,15 +1,15 @@
 package lotto.domain;
 
+import static lotto.domain.LottoPattern.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbersFactory {
     public static final String COMMA = ", ";
-    private static final Pattern ONLY_POSITIVE_NUMBER = Pattern.compile("[0-9]+");
 
     private LottoNumbersFactory() {
     }
