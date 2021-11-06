@@ -12,7 +12,7 @@ import static lotto.common.LottoConst.*;
 
 public class AutoGenerator implements NumberGeneratorStrategy {
 
-    public static final List<Integer> ALL_LOTTO_NUMBERS = createNumbers();
+    private static final List<Integer> ALL_LOTTO_NUMBERS = createNumbers();
 
     public AutoGenerator() {
     }
