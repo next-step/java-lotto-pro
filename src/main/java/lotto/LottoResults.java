@@ -14,6 +14,7 @@ import view.Printable;
 public class LottoResults implements Printable {
     private static final String NEW_LINE = "\n";
     private static final String LOTTO_RESULTS_MESSAGE_FORMAT = "%s- %d개";
+    private static final long ZERO_COUNT = 0L;
 
     private final List<LottoResult> lottoResults;
 
@@ -44,13 +45,13 @@ public class LottoResults implements Printable {
 
     @Override
     public String makePrintableMessage() {
-        Map<LottoResult, Integer> resultCounts = lottoResults.stream()
-            .collect(groupingBy(Function.identity(), reducing(0, e -> 1, Integer::sum)));
+        Map<LottoResult, Long> resultCounts = lottoResults.stream()
+            .collect(groupingBy(Function.identity(), counting()));
 
         return Arrays.stream(LottoResult.values())
             .filter(lottoResult -> lottoResult != LottoResult.NONE)
             .map(lottoResult -> String.format(LOTTO_RESULTS_MESSAGE_FORMAT, lottoResult.makePrintableMessage(),
-                resultCounts.getOrDefault(lottoResult, 0)))
+                resultCounts.getOrDefault(lottoResult, ZERO_COUNT)))
             .collect(Collectors.joining(NEW_LINE));
     }
 }
