@@ -11,7 +11,6 @@ public class PriceUtil {
 
     public static BigInteger getPurchase(int count) {
         BigInteger price = new BigInteger(String.valueOf(lottoPrice));
-        price.multiply(new BigInteger(String.valueOf(count)));
-        return price;
+        return price.multiply(new BigInteger(String.valueOf(count)));
     }
 }

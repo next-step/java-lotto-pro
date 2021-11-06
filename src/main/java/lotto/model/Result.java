@@ -26,13 +26,13 @@ public class Result {
         return String.format("%.2f",lottoYield);
     }
 
-    private BigInteger makeRevenueAmount() {
+    public BigInteger makeRevenueAmount() {
         BigInteger amount = BigInteger.ZERO;
-        matchResult.forEach((rank, count) -> {
+        for(Rank rank : matchResult.keySet()){
             BigInteger rankAmount = new BigInteger(String.valueOf(rank.getWinningMoney()));
-            rankAmount.multiply(new BigInteger(String.valueOf(count)));
-            amount.add(rankAmount);
-        });
+            rankAmount = rankAmount.multiply(new BigInteger(String.valueOf(matchResult.get(rank))));
+            amount = amount.add(rankAmount);
+        }
         return amount;
     }
 

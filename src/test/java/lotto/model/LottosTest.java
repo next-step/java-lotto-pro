@@ -54,14 +54,16 @@ public class LottosTest {
                 "4개 일치 (50000원)- 0개\n" +
                 "5개 일치 (1500000원)- 0개\n" +
                 "6개 일치 (2000000000원)- 1개\n");
-
     }
 
     @DisplayName("수익률 결과")
     @Test
     void name() {
-        //TODO
         BigInteger purchase = PriceUtil.getPurchase(lottos.size());
-        assertThat(result.yield(purchase)).isEqualTo("0.00");
+
+        assertThat(lottos.size()).isEqualTo(2);
+        assertThat(purchase.toString()).isEqualTo("2000");
+        assertThat(result.makeRevenueAmount()).isEqualTo("2000005000");
+        assertThat(result.yield(purchase)).isEqualTo("1000002.50");
     }
 }
