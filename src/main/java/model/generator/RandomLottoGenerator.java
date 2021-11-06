@@ -4,28 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.LottoPaper;
-import model.common.LottoRule;
 import model.common.LottoNumber;
 import model.common.LottoNumbers;
+import model.common.LottoRule;
 import utility.Assert;
 
-public final class RandomLottoMachine implements LottoGenerator<LottoPaper> {
+public final class RandomLottoGenerator implements LottoGenerator<LottoPaper> {
 
 	private final LottoRule rule;
 	private LottoNumbers lottoNumbers;
 
-	private RandomLottoMachine(LottoRule rule) {
+	private RandomLottoGenerator(LottoRule rule) {
 		Assert.notNull(rule, "'rule' must not be null");
 		this.rule = rule;
 	}
 
-	public static RandomLottoMachine from(LottoRule lottoRule) {
-		return new RandomLottoMachine(lottoRule);
+	public static RandomLottoGenerator from(LottoRule lottoRule) {
+		return new RandomLottoGenerator(lottoRule);
 	}
 
 	@Override
 	public LottoPaper lotto() {
-		return LottoPaper.from(numbers()
+		return LottoPaper.auto(numbers()
 			.random(rule.count())
 			.sort());
 	}
