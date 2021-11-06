@@ -26,8 +26,7 @@ public class Lottos {
 	public MatchResult matchResult(LastWeekWinningNumber lastWeekWinningNumber) {
 		MatchResult matchResult = new MatchResult();
 
-		values.stream()
-			.forEach(lotto -> {
+		values.forEach(lotto -> {
 				Count count = lotto.matchCount(lastWeekWinningNumber.getValue());
 				matchResult.increaseByMatchCount(MatchingNumberCount.getByCount(count));
 			});
