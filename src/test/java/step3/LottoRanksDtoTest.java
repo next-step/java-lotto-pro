@@ -9,9 +9,8 @@ import step3.domain.Amount;
 import step3.domain.LottoNumbers;
 import step3.domain.LottoNumbersBundle;
 import step3.domain.LottoRanks;
-import step3.domain.constance.LottoConstant;
 import step3.domain.strategy.numbers.NumbersStrategy;
-import step3.domain.strategy.numbers.RandomNumbers;
+import step3.domain.strategy.numbers.RandomLottoNumbers;
 import step3.dto.LottoRankDto;
 import step3.dto.LottoRanksDto;
 
@@ -39,8 +38,8 @@ public class LottoRanksDtoTest {
     private LottoNumbersBundle getLottoNumbersBundle() {
         LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
         lottoNumbersBundle.addLottoNumbers(generateNumberStrategy(new int[] {1, 2, 3, 4, 5, 6}));
-        lottoNumbersBundle.addLottoNumbers(randomNumberStrategy());
-        lottoNumbersBundle.addLottoNumbers(randomNumberStrategy());
+        lottoNumbersBundle.addLottoNumbers(new RandomLottoNumbers());
+        lottoNumbersBundle.addLottoNumbers(new RandomLottoNumbers());
         return lottoNumbersBundle;
     }
 
@@ -51,11 +50,6 @@ public class LottoRanksDtoTest {
                 return numbers;
             }
         };
-    }
-
-    private NumbersStrategy randomNumberStrategy() {
-        return new RandomNumbers(LottoConstant.MIN_NUMBER_RANGE, LottoConstant.MAX_NUMBER_RANGE,
-            LottoNumbers.MAX_LOTTO_NUMBERS_SIZE);
     }
 
 }

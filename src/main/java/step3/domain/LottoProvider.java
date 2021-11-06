@@ -1,16 +1,15 @@
 package step3.domain;
 
-import step3.domain.constance.LottoConstant;
 import step3.domain.strategy.numbers.NumbersStrategy;
-import step3.domain.strategy.numbers.RandomNumbers;
+import step3.domain.strategy.numbers.RandomLottoNumbers;
 
 public class LottoProvider {
     private static final int PRICE = 1000;
     private final LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
 
-    public void buyLotto(int count) {
+    public void buyLotto(int count, NumbersStrategy numbersStrategy) {
         for (int i = 0; i < count; i++) {
-            lottoNumbersBundle.addLottoNumbers(getRandomNumberStrategy());
+            lottoNumbersBundle.addLottoNumbers(numbersStrategy);
         }
     }
 
@@ -28,11 +27,6 @@ public class LottoProvider {
 
     public LottoNumbersBundle getLottoNumbersBundle() {
         return lottoNumbersBundle;
-    }
-
-    private NumbersStrategy getRandomNumberStrategy() {
-        return new RandomNumbers(LottoConstant.MIN_NUMBER_RANGE,
-            LottoConstant.MAX_NUMBER_RANGE, LottoConstant.MAX_LOTTO_NUMBERS_SIZE);
     }
 
 }

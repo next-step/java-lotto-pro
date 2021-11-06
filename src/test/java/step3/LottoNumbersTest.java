@@ -4,14 +4,11 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import step3.common.exception.InvalidParamException;
 import step3.domain.LottoNumbers;
-import step3.domain.constance.LottoConstant;
 import step3.domain.strategy.numbers.NumbersStrategy;
-import step3.domain.strategy.numbers.RandomNumbers;
+import step3.domain.strategy.numbers.RandomLottoNumbers;
 
 public class LottoNumbersTest {
 
@@ -31,8 +28,7 @@ public class LottoNumbersTest {
     @DisplayName("LottoNumbers 를 생성한다. size 는 LottoNumbers.MAX_LOTTO_NUMBERS_SIZE 이다.")
     void createLottoNumbers() {
         // given
-        NumbersStrategy numbersStrategy = new RandomNumbers(LottoConstant.MIN_NUMBER_RANGE,
-            LottoConstant.MAX_NUMBER_RANGE, LottoNumbers.MAX_LOTTO_NUMBERS_SIZE);
+        NumbersStrategy numbersStrategy = new RandomLottoNumbers();
 
         //when
         LottoNumbers lottoNumbers = new LottoNumbers(numbersStrategy);
@@ -41,18 +37,16 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers.size()).isEqualTo(LottoNumbers.MAX_LOTTO_NUMBERS_SIZE);
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 7})
+    @Test
     @DisplayName("LottoNumbers.MAX_LOTTO_NUMBERS_SIZE 와 일치 하지 않는경우 예외 발생한다.")
-    void createLottoNumbersByBuyCount(int outBoundSize) {
+    void createLottoNumbersByBuyCount() {
         // given
-        NumbersStrategy numbersStrategy = new RandomNumbers(LottoConstant.MIN_NUMBER_RANGE,
-            LottoConstant.MAX_NUMBER_RANGE, outBoundSize);
+        int[] overSizeNumbers = new int[] {1, 2, 3, 4, 5, 6, 7};
 
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
-                LottoNumbers lottoNumbers = new LottoNumbers(numbersStrategy);
+                new LottoNumbers(getNumbersStrategy(overSizeNumbers));
             }) // then
             .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
     }
@@ -62,18 +56,21 @@ public class LottoNumbersTest {
     void lottoNumbersCheckIsDuplicate() {
         // given
         int[] numbers = {1, 2, 3, 4, 6, 6};
-        NumbersStrategy numbersStrategy = new NumbersStrategy() {
-            @Override
-            public int[] getNumbers() {
-                return numbers;
-            }
-        };
 
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
-                LottoNumbers lottoNumbers = new LottoNumbers(numbersStrategy);
+                new LottoNumbers(getNumbersStrategy(numbers));
             }) // then
             .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
+    }
+
+    private NumbersStrategy getNumbersStrategy(int[] overSizeNumbers) {
+        return new NumbersStrategy() {
+            @Override
+            public int[] getNumbers() {
+                return overSizeNumbers;
+            }
+        };
     }
 }

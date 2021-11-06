@@ -4,22 +4,23 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import step3.domain.LottoNumbers;
 import step3.domain.strategy.numbers.NumbersStrategy;
-import step3.domain.strategy.numbers.RandomNumbers;
+import step3.domain.strategy.numbers.RandomLottoNumbers;
 
 public class RandomNumbersTest {
 
     @Test
     void create() {
-        NumbersStrategy numbersStrategy = new RandomNumbers(1, 45, 6);
+        NumbersStrategy numbersStrategy = new RandomLottoNumbers();
 
         assertThat(numbersStrategy).isInstanceOf(NumbersStrategy.class);
     }
 
     @Test
     void createRandomNumberCountTest() {
-        NumbersStrategy numbersStrategy = new RandomNumbers(1, 45, 6);
+        NumbersStrategy numbersStrategy = new RandomLottoNumbers();
 
-        assertThat(numbersStrategy.getNumbers().length).isEqualTo(6);
+        assertThat(numbersStrategy.getNumbers().length).isEqualTo(LottoNumbers.MAX_LOTTO_NUMBERS_SIZE);
     }
 }

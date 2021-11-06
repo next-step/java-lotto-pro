@@ -84,7 +84,7 @@
   `Utility Class`로 `pricate` 생성자하여 불필요한 인스턴스화 막기
 - [ ] Amount 에 대해 검증로직 추가하기
 - [X] 불필요한 코드 제거하기 (LottoProviderStrategy)
-- [ ] RandomNumbers.java 초기화 블럭
+- [X] RandomNumbers.java 초기화 블럭
   적용하기 [참고 링크](https://velog.io/@tomato2532/%EC%B4%88%EA%B8%B0%ED%99%94-%EB%B8%94%EB%9F%AD%EA%B3%BC-%EC%83%9D%EC%84%B1%EC%9E%90)
 - [ ] LottoRanksDto.java 를 역할 분리 -> View 레이어로 분리하기
 - [ ] lottoRanksOf() 테스트 추가

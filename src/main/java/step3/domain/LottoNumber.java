@@ -6,8 +6,8 @@ import step3.common.exception.InvalidParamException;
 import step3.domain.constance.LottoConstant;
 
 public class LottoNumber {
-    private static final int MIN_NUMBER_RANGE = 1;
-    private static final int MAX_NUMBER_RANGE = 45;
+    public static final int MIN_NUMBER_RANGE = 1;
+    public static final int MAX_NUMBER_RANGE = 45;
     private final int number;
 
     public LottoNumber(int number) {
