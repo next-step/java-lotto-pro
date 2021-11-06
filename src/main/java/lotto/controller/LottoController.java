@@ -5,6 +5,7 @@ import lotto.model.Lottos;
 import lotto.model.Result;
 import lotto.service.LottoCreateFactory;
 import lotto.util.Console;
+import lotto.util.InputHandler;
 import lotto.util.PriceUtil;
 import lotto.view.Message;
 import lotto.view.ResultView;
@@ -28,11 +29,11 @@ public class LottoController {
 
     private void inputPurchase() {
         String priceText = Console.readLine();
-        printLottoCount(priceText);
+        int lottoCount = InputHandler.price(priceText);
+        printLottoCount(lottoCount);
     }
 
-    private void printLottoCount(String priceText) {
-        int lottoCount = PriceUtil.getCount(Integer.parseInt(priceText));
+    private void printLottoCount(int lottoCount) {
         ResultView.printBought(lottoCount);
         buyLottos(lottoCount);
     }
