@@ -52,10 +52,11 @@ class LottoTest {
 
     @ParameterizedTest(name = "{displayName} - {arguments}")
     @CsvSource(value = {
-            "1:2:3:4:5:6:SIX_MATCHED",
-            "1:2:3:4:5:10:FIVE_MATCHED",
-            "1:2:3:4:9:10:FOUR_MATCHED",
-            "1:2:3:8:9:10:THREE_MATCHED"
+            "1:2:3:4:5:6:FIRST",
+            "1:2:3:4:5:10:THIRD",
+            "1:2:3:4:9:10:FOURTH",
+            "1:2:3:8:9:10:FIFTH",
+            "1:2:7:8:9:10:NOT_MATCHED"
     }, delimiter = ':')
     @DisplayName("당첨 결과를 반환한다.")
     void getWinResult(int number1, int number2, int number3, int number4, int number5, int number6, WinResult expected) {

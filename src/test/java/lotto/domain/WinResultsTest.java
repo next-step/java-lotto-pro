@@ -16,8 +16,8 @@ class WinResultsTest {
     @BeforeEach
     void setUp() {
         winResults = WinResults.from(
-                WinResult.SIX_MATCHED, WinResult.SIX_MATCHED, WinResult.SIX_MATCHED, WinResult.FIVE_MATCHED,
-                WinResult.FIVE_MATCHED, WinResult.FOUR_MATCHED, WinResult.THREE_MATCHED);
+                WinResult.FIRST, WinResult.FIRST, WinResult.FIRST, WinResult.THIRD,
+                WinResult.THIRD, WinResult.FOURTH, WinResult.FIFTH);
     }
 
     @ParameterizedTest(name = "{displayName} - {arguments}")
