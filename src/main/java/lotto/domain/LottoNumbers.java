@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +19,7 @@ public class LottoNumbers {
 	}
 
 	public LottoNumbers(List<Integer> lottoNumbers) {
-		this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+		this.lottoNumbers = Collections.unmodifiableList(new ArrayList<>(lottoNumbers));
 	}
 
 	public int isMatch(int winningNumber) {

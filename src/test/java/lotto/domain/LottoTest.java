@@ -6,11 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.MatchedNumber;
-import lotto.domain.WinningNumbers;
-
 public class LottoTest {
 
 	@ParameterizedTest
@@ -36,9 +31,9 @@ public class LottoTest {
 		Lotto lotto = new Lotto(1, 13, 26, 38, 41, 8);
 
 		//when
-		MatchedNumber matchedNumber = lotto.countMatchNumber(winningNumbers);
+		int matchedNumber = lotto.countMatchNumber(winningNumbers);
 
 		//then
-		assertThat(matchedNumber.value()).isEqualTo(expectedValue);
+		assertThat(matchedNumber).isEqualTo(expectedValue);
 	}
 }

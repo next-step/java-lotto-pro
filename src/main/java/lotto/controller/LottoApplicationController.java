@@ -68,6 +68,6 @@ public class LottoApplicationController {
 		for (Lotto lotto : lottos) {
 			lottoStatistics.record(lotto.countMatchNumber(winningNumbers));
 		}
-		OutputView.printLottoStatisticsBody(lottoStatistics.getWinningRecord(), lottoStatistics.getProfitRate());
+		OutputView.printLottoStatisticsBody(lottoStatistics);
 	}
 }
