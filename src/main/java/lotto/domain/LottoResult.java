@@ -6,6 +6,8 @@ import static lotto.domain.LottoNumber.GAME_PRICE;
 
 public class LottoResult {
 
+    private final static int DECIMAL_POINT = 3;
+
     private final Map<Rank, Integer> lottoMatchResult;
 
     public LottoResult(Map<Rank, Integer> lottoMatchResult) {
@@ -19,7 +21,7 @@ public class LottoResult {
     public double getLottoYield() {
         double purchaseAmount = getPurchaseAmount();
         double sum = getPrizeMoneySum() / purchaseAmount;
-        double yield = getMatchAround(sum, 3);
+        double yield = getMatchAround(sum, DECIMAL_POINT);
         return yield;
     }
 
