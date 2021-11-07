@@ -9,6 +9,7 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## 기능 목록
+* 로또 번호 1 ~ 45 범위만 입력 가능
 * 입력한 금액으로 구입할 수 있는 로또 갯수 조회
 * 요청한 갯수만큼 로또(자동) 발급
 * 당첨 통계 조회
