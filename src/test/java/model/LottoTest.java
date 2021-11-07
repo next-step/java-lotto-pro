@@ -76,7 +76,7 @@ public class LottoTest {
 	@RepeatedTest(value = ENOUGH_TEST_COUNT, name = "중복되는 수는 없어야 한다 {currentRepetition} / {totalRepetitions}")
 	void 중복되는_숫자는_없어야_한다() {
 		Lotto lotto = Lotto.create();
-		Set<Integer> numberSet = Sets.newHashSet(lotto.getNumbers());
+		Set<LottoNumber> numberSet = Sets.newHashSet(lotto.getNumbers());
 
 		assertThat(numberSet.size()).isEqualTo(6);
 	}

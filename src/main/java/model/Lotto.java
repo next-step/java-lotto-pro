@@ -9,19 +9,19 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 	public static final Integer COST = 1000;
-	public static final int MIN_NUMBER = 1;
-	public static final int MAX_NUMBER = 45;
 	public static final Integer NUMBER_COUNT = 6;
 	public static final int INDEX_OF_START = 0;
 
-	private List<Integer> numbers;
+	private List<LottoNumber> numbers;
 
-	Lotto(List<Integer> numbers) {
-		this.numbers = numbers;
+	public Lotto(List<Integer> numbers) {
+		this.numbers = numbers.stream()
+			.map(LottoNumber::of)
+			.collect(toList());
 	}
 
 	public static Lotto create() {
-		List<Integer> numbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+		List<Integer> numbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
 			.boxed()
 			.collect(toList());
 
@@ -38,10 +38,8 @@ public class Lotto {
 	}
 
 	public static boolean isValidLottoNumber(Set<Integer> numbers) {
-		return
-			numbers.stream().allMatch(
-				number -> number.compareTo(MIN_NUMBER) >= 0 && number.compareTo(MAX_NUMBER) <= 0
-			);
+		return numbers.stream()
+				.allMatch(LottoNumber::isValidNumber);
 	}
 
 	public Count matchCount(Lotto other) {
@@ -61,11 +59,11 @@ public class Lotto {
 		return !numbers.contains(bonusBall.getNumber());
 	}
 
-	public Integer at(int index) {
+	public LottoNumber at(int index) {
 		return this.numbers.get(index);
 	}
 
-	public List<Integer> getNumbers() {
+	public List<LottoNumber> getNumbers() {
 		return numbers;
 	}
 }
