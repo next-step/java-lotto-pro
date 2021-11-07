@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoStore {
-    private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1_000;
 
     private LottoStore() {
         throw new CreateLottoStoreException("LottoStore 생성자는 호출되면 안됩니다.");

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoBallFactoryTest {
 
@@ -13,8 +14,10 @@ class LottoBallFactoryTest {
     @Test
     void createSixBalls() {
         List<LottoBall> draw = LottoBallFactory.draw();
-        assertThat(draw.size()).isEqualTo(6);
-        assertThat(draw).doesNotHaveDuplicates();
+        assertAll(
+                () -> assertThat(draw.size()).isEqualTo(6),
+                () -> assertThat(draw).doesNotHaveDuplicates()
+        );
     }
 
 }

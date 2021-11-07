@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoGameTest {
 
@@ -24,10 +25,13 @@ class LottoGameTest {
         LottoBalls winBalls = new LottoBalls("1,2,3,4,5,6");
 
         Statistics statistics = lottoGame.calculateLottoResult(winBalls);
-        assertThat(statistics.getCount(Ranking.FIRST)).isEqualTo(1);
-        assertThat(statistics.getCount(Ranking.SECOND)).isEqualTo(1);
-        assertThat(statistics.getCount(Ranking.THIRD)).isEqualTo(2);
-        assertThat(statistics.getCount(Ranking.FOURTH)).isEqualTo(0);
+        assertAll(
+                () -> assertThat(statistics.getCount(Ranking.FIRST)).isEqualTo(1),
+                () -> assertThat(statistics.getCount(Ranking.SECOND)).isEqualTo(1),
+                () -> assertThat(statistics.getCount(Ranking.THIRD)).isEqualTo(2),
+                () -> assertThat(statistics.getCount(Ranking.FOURTH)).isEqualTo(0)
+        );
+
     }
 
 }
