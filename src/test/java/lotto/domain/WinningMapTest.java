@@ -29,27 +29,22 @@ class WinningMapTest {
 
     private static Stream<Arguments> inputWinningTest() {
         return Stream.of(
-                Arguments.of(lottoTicket, LottoNumbers.fromString("1,2,37,41,43,44"), new HashMap<Rank, Integer>() {{
-                    put(Rank.FIFTH, 1);
-                }}, Rank.FIFTH),
-                Arguments.of(lottoTicket, LottoNumbers.fromString("2,30,34,37,40,41"), new HashMap<Rank, Integer>() {{
-                    put(Rank.FOURTH, 1);
-                }}, Rank.FOURTH),
-                Arguments.of(lottoTicket, LottoNumbers.fromString("1,2,8,30,37,42"), new HashMap<Rank, Integer>() {{
-                    put(Rank.THIRD, 1);
-                }}, Rank.THIRD),
-                Arguments.of(lottoTicket, LottoNumbers.fromString("1,2,30,34,37,42"), new HashMap<Rank, Integer>() {{
-                    put(Rank.FIRST, 1);
-                }}, Rank.FIRST)
+                Arguments.of(LottoNumbers.fromString("1,2,37,41,43,44"), Rank.FIFTH),
+                Arguments.of(LottoNumbers.fromString("2,30,34,37,40,41"), Rank.FOURTH),
+                Arguments.of(LottoNumbers.fromString("1,2,8,30,37,42"), Rank.THIRD),
+                Arguments.of(LottoNumbers.fromString("1,2,30,34,37,42"), Rank.FIRST)
         );
     }
 
     @ParameterizedTest
     @MethodSource
     @DisplayName("각 등수별로 맞췄을 경우")
-    public void inputWinningTest(LottoTicket lottoTicket, LottoNumbers winningNumbers, Map<Rank, Integer> resultMap) {
+    public void inputWinningTest(LottoNumbers winningNumbers, Rank rank) {
         Winning winning = Winning.of(winningNumbers, 10);
         WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
+
+        Map<Rank, Integer> resultMap = new HashMap<>();
+        resultMap.put(rank, 1);
 
         assertThat(winningMap.getWinningMap().equals(resultMap)).isTrue();
     }
@@ -59,9 +54,8 @@ class WinningMapTest {
     public void secondRankTest() {
         Winning winning = Winning.of(LottoNumbers.fromString("1,2,30,34,37,40"), 42);
         WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
-        HashMap<Rank, Integer> resultRankMap = new HashMap<Rank, Integer>() {{
-            put(Rank.SECOND, 1);
-        }};
+        HashMap<Rank, Integer> resultRankMap = new HashMap<>();
+        resultRankMap.put(Rank.SECOND, 1);
 
         assertThat(winningMap.getWinningMap().equals(resultRankMap)).isTrue();
     }
