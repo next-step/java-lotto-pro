@@ -7,7 +7,7 @@ public class LottoResult {
         this.matchAmount = matchAmount;
     }
 
-    public LottoRankingStatus getResultRanking() {
+    public LottoRankingStatus getResultRankingStatus() {
         return LottoRankingStatus.getLottoRankingFromMatchAmount(matchAmount);
     }
 }

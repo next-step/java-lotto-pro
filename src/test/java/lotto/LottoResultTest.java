@@ -17,7 +17,7 @@ public class LottoResultTest {
     void lottoNumbersTest(String testTitle, LottoNumbers prizeLottoNumbers, LottoNumbers myLottoNumbers, LottoRankingStatus expect) {
         int matchAmount = myLottoNumbers.getMatchCount(prizeLottoNumbers);
         LottoResult lottoResult = new LottoResult(matchAmount);
-        LottoRankingStatus lottoRankingStatus = lottoResult.getResultRanking();
+        LottoRankingStatus lottoRankingStatus = lottoResult.getResultRankingStatus();
 
         assertThat(lottoRankingStatus).isEqualTo(expect);
     }

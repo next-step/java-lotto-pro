@@ -7,21 +7,21 @@ import java.util.Map;
 public class LottoResults {
     public static final double PROFIT_RATE_DECIMAL_POINT = 100.0;
     public static final int PROFIT_BASE = 1;
-    private final Map<LottoRankingStatus, Integer> lottoRankingAmountMap;
+    private final Map<LottoRankingStatus, Integer> lottoRankingAmounts;
 
     public LottoResults(List<LottoResult> lottoResults) {
-        this.lottoRankingAmountMap = new LinkedHashMap<>();
+        this.lottoRankingAmounts = new LinkedHashMap<>();
         generateLottoRankingMap(lottoResults);
     }
 
     private void generateLottoRankingMap(List<LottoResult> lottoResults) {
         for (LottoRankingStatus lottoRankingStatus : LottoRankingStatus.values()) {
-            lottoRankingAmountMap.put(lottoRankingStatus, 0);
+            lottoRankingAmounts.put(lottoRankingStatus, 0);
         }
 
         for (LottoResult lottoResult : lottoResults) {
-            LottoRankingStatus lottoRankingStatus = lottoResult.getResultRanking();
-            lottoRankingAmountMap.put(lottoRankingStatus, lottoRankingAmountMap.getOrDefault(lottoRankingStatus, 0) + 1);
+            LottoRankingStatus lottoRankingStatus = lottoResult.getResultRankingStatus();
+            lottoRankingAmounts.put(lottoRankingStatus, lottoRankingAmounts.getOrDefault(lottoRankingStatus, 0) + 1);
         }
     }
 
@@ -30,15 +30,15 @@ public class LottoResults {
     }
 
     public int getMatchAmount(int matchAmount) {
-        return lottoRankingAmountMap.get(
+        return lottoRankingAmounts.get(
                 LottoRankingStatus.getLottoRankingFromMatchAmount(matchAmount)
         );
     }
 
-    public int getTotalReward() {
-        return lottoRankingAmountMap.keySet()
+    public long getTotalReward() {
+        return lottoRankingAmounts.keySet()
                 .stream()
-                .mapToInt(lrs -> lrs.getPrizeReward(lottoRankingAmountMap.get(lrs)))
+                .mapToLong(lottoRankingStatus -> lottoRankingStatus.getPrizeReward(lottoRankingAmounts.get(lottoRankingStatus)))
                 .sum();
     }
 

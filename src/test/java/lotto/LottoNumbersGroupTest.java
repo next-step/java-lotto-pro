@@ -30,10 +30,10 @@ public class LottoNumbersGroupTest {
         BuyAmount buyAmount = new BuyAmount(1000);
         LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(buyAmount) {
             @Override
-            public List<LottoNumbers> generateRandomLottoNumbers(int amount) {
-                List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-                lottoNumbersList.add(new LottoNumbers("1,2,3,4,5,6"));
-                return lottoNumbersList;
+            protected List<LottoNumbers> generateRandomLottoNumbers(int amount) {
+                List<LottoNumbers> lottoNumbers = new ArrayList<>();
+                lottoNumbers.add(new LottoNumbers("1,2,3,4,5,6"));
+                return lottoNumbers;
             }
         };
 
@@ -42,7 +42,8 @@ public class LottoNumbersGroupTest {
                         Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
                                 .collect(Collectors.toSet()))));
-        assertThat(lottoNumbersGroup.toString()).isEqualTo(lottoNumbersGroup2.toString());
+
+        assertThat(lottoNumbersGroup).isEqualTo(lottoNumbersGroup2);
     }
 
     @DisplayName("로또 숫자 수동 그룹 생성 테스트")
@@ -50,11 +51,11 @@ public class LottoNumbersGroupTest {
     void generateManualLottoNumberGroupTest() {
         String[] myLottoNumbers = new String[]{"1,2,3,4,5,6", "2,3,4,13,12,14", "42,12,24,32,11,15"};
         LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(myLottoNumbers);
-        List<LottoNumbers> expectLottoNumbersList = getExampleLottoNumbersList();
-        assertThat(lottoNumbersGroup).isEqualTo(new LottoNumbersGroup(expectLottoNumbersList));
+        List<LottoNumbers> expectLottoNumbers = getExampleLottoNumbers();
+        assertThat(lottoNumbersGroup).isEqualTo(new LottoNumbersGroup(expectLottoNumbers));
     }
 
-    private List<LottoNumbers> getExampleLottoNumbersList() {
+    private List<LottoNumbers> getExampleLottoNumbers() {
         return Arrays.asList(
                 new LottoNumbers(
                         Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),

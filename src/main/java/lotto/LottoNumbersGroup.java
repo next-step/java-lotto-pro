@@ -11,45 +11,50 @@ public class LottoNumbersGroup {
         this.lottoNumbersGroup = generateRandomLottoNumbers(buyAmount.getAmount());
     }
 
-    public LottoNumbersGroup(String[] myLottoNumbersList) {
-        this.lottoNumbersGroup = generateManualLottoNumbers(myLottoNumbersList);
+    public LottoNumbersGroup(String[] myLottoNumbers) {
+        this.lottoNumbersGroup = generateManualLottoNumbers(myLottoNumbers);
     }
 
-    public LottoNumbersGroup(List<LottoNumbers> myLottoNumbersList) {
-        this.lottoNumbersGroup = myLottoNumbersList;
+    public LottoNumbersGroup(List<LottoNumbers> myLottoNumbers) {
+        this.lottoNumbersGroup = myLottoNumbers;
     }
 
-    public List<LottoNumbers> generateRandomLottoNumbers(int amount) {
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+    protected List<LottoNumbers> generateRandomLottoNumbers(int amount) {
+        List<LottoNumbers> resultLottoNumbers = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
-            lottoNumbersList.add(new LottoNumbers());
+            resultLottoNumbers.add(new LottoNumbers());
         }
-        return lottoNumbersList;
+
+        return resultLottoNumbers;
     }
 
-    private List<LottoNumbers> generateManualLottoNumbers(String[] myLottoNumbersList) {
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for (String myLottoNumbers : myLottoNumbersList) {
-            lottoNumbersList.add(new LottoNumbers(myLottoNumbers));
+    private List<LottoNumbers> generateManualLottoNumbers(String[] myLottoNumbers) {
+        List<LottoNumbers> resultLottoNumbers = new ArrayList<>();
+        for (String lottoNumbers : myLottoNumbers) {
+            resultLottoNumbers.add(new LottoNumbers(lottoNumbers));
         }
 
-        return lottoNumbersList;
+        return resultLottoNumbers;
+    }
+
+    public List<LottoNumbers> getLottoNumbersGroup() {
+        return lottoNumbersGroup;
     }
 
     public LottoResults getLottoResults(LottoNumbers prizeLottoNumbers) {
-        List<LottoResult> lottoResultsList = new ArrayList<>();
+        List<LottoResult> lottoResults = new ArrayList<>();
         for (LottoNumbers lottoNumbers : lottoNumbersGroup) {
             LottoResult lottoResult = lottoNumbers.getLottoResult(prizeLottoNumbers);
-            lottoResultsList.add(lottoResult);
+            lottoResults.add(lottoResult);
         }
 
-        return new LottoResults(lottoResultsList);
+        return new LottoResults(lottoResults);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof LottoNumbersGroup)) return false;
         LottoNumbersGroup that = (LottoNumbersGroup) o;
         return Objects.equals(lottoNumbersGroup, that.lottoNumbersGroup);
     }

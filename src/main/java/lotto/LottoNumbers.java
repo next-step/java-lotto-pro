@@ -3,15 +3,15 @@ package lotto;
 import lotto.exception.WrongLottoNumberSizeException;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Collections;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    private static final String WRONG_LOTTO_NUMBER_SIZE_MESSAGE = "입력하신 로또의 개수를 확인 해 주세요.";
+    public static final String LOTTO_NUMBERS_BASE_SEPARATOR = ",";
     public static final String FIND_ALL_SPACES = "\\s+";
     public static final String REMOVE_SPACES = "";
     public static final int LOTTO_SIZE = 6;
@@ -32,9 +32,9 @@ public class LottoNumbers {
         this(lottoNumbersString, LOTTO_NUMBERS_BASE_SEPARATOR);
     }
 
-    public LottoNumbers(String lottoNumbersString, String separator) {
+    public LottoNumbers(String lottoNumbers, String separator) {
         this.lottoNumbers = new HashSet<>();
-        generateLottoNumbersFromString(lottoNumbersString, separator);
+        generateLottoNumbersFromString(lottoNumbers, separator);
     }
 
     private static List<LottoNumber> generateRandomLottoNumberPocket() {
@@ -54,17 +54,17 @@ public class LottoNumbers {
         }
     }
 
-    private void generateLottoNumbersFromString(String lottoNumbersString, String separator) {
-        lottoNumbersString = lottoNumbersString.replaceAll(FIND_ALL_SPACES, REMOVE_SPACES);
-        String[] splitLottoNumbersString = lottoNumbersString.split(separator);
-        validateLottoNumbersString(splitLottoNumbersString);
-        for (String lottoNumberString : splitLottoNumbersString) {
-            lottoNumbers.add(new LottoNumber(lottoNumberString));
+    private void generateLottoNumbersFromString(String lottoNumbers, String separator) {
+        lottoNumbers = lottoNumbers.replaceAll(FIND_ALL_SPACES, REMOVE_SPACES);
+        String[] splitLottoNumbers = lottoNumbers.split(separator);
+        validateLottoNumbers(splitLottoNumbers);
+        for (String lottoNumberString : splitLottoNumbers) {
+            this.lottoNumbers.add(new LottoNumber(lottoNumberString));
         }
     }
 
-    private void validateLottoNumbersString(String[] splitLottoNumbersString) {
-        if (splitLottoNumbersString.length != LOTTO_SIZE) {
+    private void validateLottoNumbers(String[] splitLottoNumbers) {
+        if (splitLottoNumbers.length != LOTTO_SIZE) {
             throw new WrongLottoNumberSizeException(WRONG_LOTTO_NUMBER_SIZE_MESSAGE);
         }
     }
