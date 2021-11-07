@@ -9,7 +9,8 @@ import java.util.Scanner;
 public class ConsoleView {
     private static final String ENTER_MONEY_TEXT = "구입금액을 입력해 주세요.";
     private static final String ENTER_MANUAL_COUNT_TEXT = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String BUY_LOTTO_TEXT = "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
+    private static final String ENTER_MANUAL_LOTTO_NUMBER_TEXT = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String BUY_LOTTO_TEXT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String ENTER_WINNING_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ERROR_TEXT = "[ERROR] %s";
     private static final String WINNING_COUNT_TEXT = "%d개 일치%s(%d원)- %d개";
@@ -26,8 +27,17 @@ public class ConsoleView {
         return scanner.nextLine();
     }
 
+    public static void printManualLottoNumber() {
+        System.out.println(ENTER_MANUAL_LOTTO_NUMBER_TEXT);
+    }
+
+    public static String enterManualLottoNumber() {
+        return scanner.nextLine();
+    }
+
     public static void printBoughtLottoCount(BoughtLotto boughtLotto) {
         System.out.printf(BUY_LOTTO_TEXT, boughtLotto.getManualCount(), boughtLotto.getAutoCount());
+        printLine();
     }
 
     public static void printLottoTicket(LottoTicket lottoTicket) {

@@ -14,7 +14,10 @@ public class LottoExecutor {
 
     public void run() {
         BoughtLotto boughtLotto = paymentLotto();
+
         LottoTicket lottoTicket = generateLotto(boughtLotto);
+
+
         LottoNumbers winningNumbers = enterWinningNumber();
         Winning winning = enterWinningBonusNumber(winningNumbers);
         WinningMap winningMap = winningResult(lottoTicket, winning);
@@ -29,6 +32,7 @@ public class LottoExecutor {
 
     private LottoTicket generateLotto(BoughtLotto boughtLotto) {
         LottoTicket lottoTicket = lottoController.generateLottoTicket(boughtLotto);
+        printBoughtLottoCount(boughtLotto);
         printLottoTicket(lottoTicket);
         printLine();
         return lottoTicket;
