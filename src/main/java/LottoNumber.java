@@ -7,6 +7,10 @@ public class LottoNumber {
 		this.number = number;
 	}
 
+	public int getComparatorOther(LottoNumber other) {
+		return this.number < other.number ? -1 : 1;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

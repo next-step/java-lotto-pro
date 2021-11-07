@@ -1,34 +1,18 @@
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoNumbers {
-	public static final String MESSAGE_NOT_ALLOW_LENGTH = "LOTTO_NUMBERS_LENGTH_MUST_BE_6";
-	public static final String MESSAGE_NOT_ALLOW_DUPLICATION = "LOTTO_NUMBERS_ELEMENT_MUST_BE_INDEPENDENT";
-	public static final int LOTTO_NUMBERS_LENGTH = 6;
+	private final List<LottoNumber> lottoNumbers;
 
-	private final LottoNumber[] lottoNumbers;
-
-	public LottoNumbers(LottoNumber[] lottoNumbers) {
-		if (lottoNumbers.length != LOTTO_NUMBERS_LENGTH) {
-			throw new IllegalArgumentException(MESSAGE_NOT_ALLOW_LENGTH);
-		}
-
-		this.lottoNumbers = new LottoNumber[lottoNumbers.length];
-		for (int i = 0; i < lottoNumbers.length; ++i) {
-			validateDuplication(lottoNumbers, i);
-			this.lottoNumbers[i] = lottoNumbers[i];
-		}
+	public LottoNumbers(List<LottoNumber> lottoNumbers) {
+		this.lottoNumbers = new ArrayList<>();
+		sortLottoNumbers(lottoNumbers);
+		this.lottoNumbers.addAll(lottoNumbers);
 	}
 
-	private void validateDuplication(LottoNumber[] lottoNumbers, int i) {
-		for (int j = i + 1; j < lottoNumbers.length; ++j) {
-			validateDuplication(lottoNumbers, i, j);
-		}
-	}
-
-	private void validateDuplication(LottoNumber[] lottoNumbers, int i, int j) {
-		if (lottoNumbers[i].equals(lottoNumbers[j])) {
-			throw new IllegalArgumentException(MESSAGE_NOT_ALLOW_DUPLICATION);
-		}
+	private void sortLottoNumbers(List<LottoNumber> lottoNumbers) {
+		lottoNumbers.sort(LottoNumber::getComparatorOther);
 	}
 
 	@Override
@@ -38,11 +22,11 @@ public class LottoNumbers {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		LottoNumbers that = (LottoNumbers)o;
-		return Arrays.equals(lottoNumbers, that.lottoNumbers);
+		return Objects.equals(lottoNumbers, that.lottoNumbers);
 	}
 
 	@Override
 	public int hashCode() {
-		return Arrays.hashCode(lottoNumbers);
+		return Objects.hash(lottoNumbers);
 	}
 }
