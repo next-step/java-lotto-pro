@@ -19,7 +19,7 @@ public class Lotto {
         return money.divideBy(SELLING_PRICE);
     }
 
-    public static Lotto generate(int... numbers) {
+    public static Lotto generate(List<Integer> numbers) {
         List<LottoNumber> list = new ArrayList<>();
         for (int number : numbers) {
             list.add(new LottoNumber(number));
