@@ -57,7 +57,7 @@ public class LottoView {
     }
 
     private static String getResultMessage(Rank rank) {
-        if (rank.equals(Rank.SECOND_BONUS)) {
+        if (rank.equals(Rank.SECOND)) {
             return MATCH_RESULT_BONUS;
         }
         return MATCH_RESULT;

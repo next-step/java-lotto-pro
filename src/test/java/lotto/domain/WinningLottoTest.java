@@ -17,7 +17,7 @@ class WinningLottoTest {
 
     @Test
     void 당첨번호_개수를_반환한다() {
-        assertThat(당첨_로또.match(로또)).isEqualTo(Rank.SECOND_BONUS);
+        assertThat(당첨_로또.match(로또)).isEqualTo(Rank.SECOND);
     }
 
     @Test

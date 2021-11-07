@@ -31,6 +31,6 @@ class RankTest {
 
     @Test
     void 당첨번호_개수가_5개이고_보너스_숫자가_있으면_SECOND_BONUS를_반환한다() {
-        assertThat(Rank.rank(5, true)).isEqualTo(Rank.SECOND_BONUS);
+        assertThat(Rank.rank(5, true)).isEqualTo(Rank.SECOND);
     }
 }
