@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Number;
 import lotto.domain.*;
+import lotto.exception.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -20,20 +21,35 @@ public class LottoMachineController {
     }
 
     public void run() {
-        Money money = new Money(getUserInputPurchaseAmount());
-        List<List<Number>> activeNumber = getUserInputActiveNumber();
+        try {
+            Money money = new Money(getUserInputPurchaseAmount());
+            List<List<Number>> activeNumber = getUserInputActiveNumber();
 
-        LottoMachine lottoMachine = new LottoMachine(money, activeNumber);
+            LottoMachine lottoMachine = new LottoMachine(money, activeNumber);
 
-        List<LottoNumber> lottoList = lottoMachine.getLottoList();
-        printPurchaseLottoList(lottoList, activeNumber.size());
+            List<LottoNumber> lottoList = lottoMachine.getLottoList();
+            printPurchaseLottoList(lottoList, activeNumber.size());
 
-        List<Number> matchNumber = getUserInputMatchNumber();
-        Number bonusNumber = Number.of(inputView.getUserInputBonusNumber());
+            List<Number> matchNumber = getUserInputMatchNumber();
+            Number bonusNumber = Number.of(inputView.getUserInputBonusNumber());
 
-        LottoResult matchLottoResultResult = new WinningLotto(matchNumber, bonusNumber).getLottoMatchResult(lottoList);
+            LottoResult matchLottoResultResult = new WinningLotto(matchNumber, bonusNumber).getLottoMatchResult(lottoList);
 
-        printMatchResult(matchLottoResultResult);
+            printMatchResult(matchLottoResultResult);
+        } catch (LottoPurchaseAmountException lpae) {
+            System.out.println(lpae.getMessage());
+        } catch (LottoMatchNumberException lmne) {
+            System.out.println(lmne.getMessage());
+        } catch (LottoBonusNumberException lbne) {
+            System.out.println(lbne.getMessage());
+        } catch (LottoActiveNumberException lane) {
+            System.out.println(lane.getMessage());
+        } catch (LottoNumberOutOfRangeException lnofre) {
+            System.out.println(lnofre.getMessage());
+        } catch (LottoNumberSizeException lnse) {
+            System.out.println(lnse.getMessage());
+        }
+
     }
 
     private BigDecimal getUserInputPurchaseAmount() {
