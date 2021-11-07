@@ -22,7 +22,6 @@ public class LottoResult {
 
 		for (LottoNumbers lottoNumbers : lottos.getLottoNumbersList()) {
 			int containsCount = containsWinningLottoNumbers(winningLottoNumbers, lottoNumbers);
-			System.out.println(containsCount);
 			containsMap.put(containsCount, containsMap.getOrDefault(containsCount, DEFAULT_VALUE) + COUNT_VALUE);
 		}
 

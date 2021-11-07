@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.exception.LottoException;
+
 class LottoNumbersTest {
 
 	private List<LottoNumber> lottoNumberList;
@@ -64,5 +66,29 @@ class LottoNumbersTest {
 
 		//then
 		assertThat(lottoNumbers.containsLottoNumber(new LottoNumber(lottoNumber))).isTrue();
+	}
+
+	@ParameterizedTest(name = "index {index} ===> input {0}")
+	@ValueSource(strings = {
+		"1, 2, 3, 4, 5, 6, 7",
+		"1, 2, 3, 4,",
+		""
+	})
+	void 입력된_당첨번호가_6자리가_아닐때_예외처리_테스트(String input) {
+		// given // when // then
+		assertThatThrownBy(() -> {
+			new LottoNumbers(input);
+		}).isInstanceOf(LottoException.class);
+	}
+
+	@Test
+	void 입력된_당첨번호에_중복값이_존재할시_예외처리_테스트() throws Exception {
+		// given
+		String input = "1, 1, 2, 3, 4, 5";
+
+		// when // then
+		assertThatThrownBy(() -> {
+			new LottoNumbers(input);
+		}).isInstanceOf(LottoException.class);
 	}
 }
