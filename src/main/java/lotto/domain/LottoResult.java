@@ -7,7 +7,6 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResult {
-    public static final String FORMAT_LOTTO_RANK_STATUS = "%d개 일치 (%d원)- %d개%n";
 
     private final EnumMap<LottoRank, Integer> lottoRankResult;
 
@@ -57,17 +56,10 @@ public class LottoResult {
         lottoRankResult.put(lottoRank, lottoRankResult.get(lottoRank) + 1);
     }
 
-    public String getRankStatus() {
-        StringBuilder sb = new StringBuilder();
+    public Map<LottoRank, Integer> getRankStatus() {
+        EnumMap<LottoRank, Integer> rankStatus = new EnumMap<>(LottoRank.class);
+        rankStatus.putAll(lottoRankResult);
 
-        for (Map.Entry<LottoRank, Integer> entry : lottoRankResult.entrySet()) {
-            String currentStatus = String.format(FORMAT_LOTTO_RANK_STATUS
-                    , entry.getKey().getMatchingCount()
-                    , entry.getKey().getPrice()
-                    , entry.getValue());
-            sb.append(currentStatus);
-        }
-
-        return sb.toString();
+        return rankStatus;
     }
 }
