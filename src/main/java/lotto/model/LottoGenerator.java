@@ -4,52 +4,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import lotto.code.ErrorCode;
-import lotto.exception.LottoException;
-
 public class LottoGenerator {
 	public static final int LOTTO_PRICE = 1000;
-	private static final String NUMBER_REGEX = "[0-9]+";
-	private final String inputMoney;
+	private final Money money;
 	private String inputNumber;
 
 	public LottoGenerator(String inputMoney) {
-		this.inputMoney = inputMoney;
+		this.money = new Money(inputMoney);
 	}
 
 	public LottoGenerator(String inputMoney, String inputNumber) {
-		this.inputMoney = inputMoney;
+		this.money = new Money(inputMoney);
 		this.inputNumber = inputNumber;
-	}
-
-	private void validNullOrEmpty(String input) {
-		if (isNullOrEmpty(input)) {
-			throw new LottoException(ErrorCode.INVALID_INPUT_NULL_VALUE_ERROR);
-		}
-	}
-
-	private void validNumber(String input) {
-		if (isNumber(input)) {
-			throw new LottoException(ErrorCode.INVALID_INPUT_NUMBER_ERROR);
-		}
-	}
-
-	private boolean isNumber(String input) {
-		return !input.matches(NUMBER_REGEX);
-	}
-
-	private boolean isNullOrEmpty(String input) {
-		return input == null || input.isEmpty();
-	}
-
-	private void validUnderLottoPrice(String input) {
-		if (isUnderLottoPrice(input)) {
-			throw new LottoException(ErrorCode.UNDER_LOTTO_PRICE_ERROR);
-		}
-	}
-
-	private boolean isUnderLottoPrice(String input) {
-		return Integer.parseInt(input) < LOTTO_PRICE;
 	}
 
 	private int calculateLottoAmount(String inputMoney) {
@@ -57,20 +23,16 @@ public class LottoGenerator {
 	}
 
 	public List<LottoNumbers> generateLottoNumbers() {
-		validNullOrEmpty(inputMoney);
-		validNumber(inputMoney);
-		validUnderLottoPrice(inputMoney);
-
 		return Stream.generate(LottoNumbers::new)
-			.limit(calculateLottoAmount(inputMoney)).collect(Collectors.toList());
+			.limit(calculateLottoAmount(money.money())).collect(Collectors.toList());
 	}
 
 	public List<LottoNumbers> generateLottoInputNumbers() {
 		return Stream.generate(() -> new LottoNumbers(inputNumber))
-			.limit(calculateLottoAmount(inputMoney)).collect(Collectors.toList());
+			.limit(calculateLottoAmount(money.money())).collect(Collectors.toList());
 	}
 
 	public String getInputMoney() {
-		return inputMoney;
+		return money.money();
 	}
 }
