@@ -1,9 +1,14 @@
-package lotto.domain;
+package lotto.controller;
+
+import lotto.domain.LottoIssue;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoPurchase;
+import lotto.domain.Lottos;
 
 import static lotto.view.InputView.*;
 import static lotto.view.OutputView.*;
 
-public class LottoGame {
+public class LottoController {
 
     public void run() {
         LottoPurchase lottoPurchase = getPurchaseAmount();
