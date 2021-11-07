@@ -2,30 +2,19 @@ package lotto.domain;
 
 import lotto.exception.LottoNumberSizeException;
 
-import java.math.BigDecimal;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
-import static lotto.domain.Number.MAX_NUMBER;
-import static lotto.domain.Number.MIN_NUMBER;
-import static lotto.utils.RandomNumberUtils.generateRandomNumbers;
+import static lotto.domain.LottoMachine.LOTTO_SIZE;
 import static lotto.utils.ValidationUtils.*;
 
 public class LottoNumber {
 
-    public static final int LOTTO_SIZE = 6;
-    public final static Money GAME_PRICE = new Money(BigDecimal.valueOf(1000));
-
     private final List<Number> lottoNumbers;
 
-    public LottoNumber() {
-        List<Number> autoLottoNumbers = getAutoLottoNumbers();
-        validateLottoNumbersSize(autoLottoNumbers);
-        lottoNumbers = sortAsc(autoLottoNumbers);
-    }
-
-    public LottoNumber(List<Number> activeNumbers) {
-        validateLottoNumbersSize(activeNumbers);
-        lottoNumbers = sortAsc(activeNumbers);
+    public LottoNumber(List<Number> lottoNumbers) {
+        validateActiveLotto(lottoNumbers);
+        this.lottoNumbers = sortAsc(lottoNumbers);
     }
 
     public Rank getMatchRank(WinningLotto winningLotto) {
@@ -37,19 +26,11 @@ public class LottoNumber {
         return Rank.of(matchCount, matchBonus);
     }
 
-    private List<Number> getAutoLottoNumbers() {
-        Set<Number> numbers = new HashSet<>();
-        while (numbers.size() < LOTTO_SIZE) {
-            numbers.add(Number.of(getRandomNumber()));
-        }
-        return new ArrayList<>(numbers);
+    public boolean isContains(Number number) {
+        return lottoNumbers.contains(number);
     }
 
-    private int getRandomNumber() {
-        return generateRandomNumbers(MIN_NUMBER, MAX_NUMBER);
-    }
-
-    private void validateLottoNumbersSize(List<Number> activeNumbers) {
+    private void validateActiveLotto(List<Number> activeNumbers) {
         if (isArrayEmpty(activeNumbers)) {
             throw new LottoNumberSizeException("[ERROR] 로또의 값이 없습니다.");
         }
