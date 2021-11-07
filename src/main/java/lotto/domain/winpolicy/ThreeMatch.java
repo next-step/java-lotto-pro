@@ -1,6 +1,7 @@
 package lotto.domain.winpolicy;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 
 public class ThreeMatch extends Policy {
   public ThreeMatch() {
@@ -8,7 +9,7 @@ public class ThreeMatch extends Policy {
   }
 
   @Override
-  public Boolean isMatch(Lotto latestWinLotto, Lotto lotto) {
+  public Boolean isMatch(Lotto latestWinLotto, Lotto lotto, LottoNumber bonusNumber) {
     if (latestWinLotto.matchCountOf(lotto).equals(3)) {
       return true;
     }

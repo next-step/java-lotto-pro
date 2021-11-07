@@ -2,6 +2,7 @@ package lotto.domain.winpolicy;
 
 import java.util.Objects;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 
 public abstract class Policy {
@@ -11,10 +12,10 @@ public abstract class Policy {
     this.winPrice = winPrice;
   }
 
-  public abstract Boolean isMatch(Lotto latestWinLotto, Lotto lotto);
+  public abstract Boolean isMatch(Lotto latestWinLotto, Lotto lotto, LottoNumber bonusNumber);
 
-  public Integer getMatchCount(Lotto latestWinLotto, Lottos lottos) {
-    return lottos.matchCount(this, latestWinLotto);
+  public Integer getMatchCount(Lotto latestWinLotto, Lottos lottos, LottoNumber bonusNumber) {
+    return lottos.matchCount(this, latestWinLotto, bonusNumber);
   }
 
   public Integer getWinPrice() {
