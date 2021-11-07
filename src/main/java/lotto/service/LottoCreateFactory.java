@@ -44,7 +44,7 @@ public class LottoCreateFactory {
     }
 
     public static Lotto createLotto(int[] numbers) {
-        if(validDuplicate(numbers)){
+        if (validDuplicate(numbers)) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_ERROR);
         }
         return new Lotto(numbers);

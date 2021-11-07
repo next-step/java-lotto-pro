@@ -40,11 +40,9 @@ public class LottoCreateFactoryTest {
     @DisplayName("입력 받은 숫자 배열이 중복이면 에러가 나오게 하는 기능 검증")
     @Test
     void duplicateError() {
-        assertThatThrownBy(() ->{
+        assertThatThrownBy(() -> {
             Lotto lotto = LottoCreateFactory.createLotto(new int[]{1, 2, 3, 1, 2, 3});
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.DUPLICATE_ERROR);
-
-
     }
 }
