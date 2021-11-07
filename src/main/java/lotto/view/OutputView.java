@@ -11,6 +11,11 @@ import lotto.model.LottoResult;
 import lotto.model.RankCode;
 
 public class OutputView {
+	private final static String STARTING_BRACKET = "[";
+	private final static String END_BRACKET = "]";
+	private final static String SEPARATOR_BRACKET = " ,";
+	private final static int START_INDEX_CALCULATE_NUMBER = 0;
+	private final static int LAST_INDEX_CALCULATE_NUMBER = 1;
 
 	public static void printCompletePurchaseLotto(LottoGenerator lottoGenerator) {
 		System.out.println(lottoGenerator.size() + "개를 구입했습니다.");
@@ -18,7 +23,7 @@ public class OutputView {
 
 	public static void printLottoNumbers(LottoGenerator lottoGenerator) {
 		for (LottoNumbers lottoNumbers : lottoGenerator.getLottoNumbersList()) {
-			System.out.println(lottoNumbers.listToString());
+			System.out.println(lottoNumbersToString(lottoNumbers));
 		}
 	}
 
@@ -78,5 +83,23 @@ public class OutputView {
 			.append("원)- ")
 			.append(rankEntry.getValue())
 			.append("개").toString();
+	}
+
+	public static String lottoNumbersToString(LottoNumbers lottoNumbers) {
+		StringBuilder sb = new StringBuilder();
+		int size = lottoNumbers.lottoNumberList.size();
+		sb.append(STARTING_BRACKET);
+		for (int i = START_INDEX_CALCULATE_NUMBER; i < size; i++) {
+			sb.append(lottoNumbers.lottoNumberList.get(i).toInt());
+			addSeparatorInBracket(sb, i, size);
+		}
+		sb.append(END_BRACKET);
+		return sb.toString();
+	}
+
+	private static void addSeparatorInBracket(StringBuilder sb, int i, int size) {
+		if (i < size - LAST_INDEX_CALCULATE_NUMBER) {
+			sb.append(SEPARATOR_BRACKET);
+		}
 	}
 }

@@ -65,17 +65,4 @@ class LottoNumbersTest {
 		//then
 		assertThat(lottoNumbers.containsLottoNumber(new LottoNumber(lottoNumber))).isTrue();
 	}
-
-	@Test
-	void 로또번호를_문자열로_반환하는_기능테스트() {
-		// given
-		String inputNumber = "1,2,3,4,5,6";
-		LottoNumbers lottoNumbers = new LottoNumbers(inputNumber);
-
-		// when
-		String lottoNumbersString = lottoNumbers.listToString();
-
-		// then
-		assertThat(lottoNumbersString).isEqualTo("[1 ,2 ,3 ,4 ,5 ,6]");
-	}
 }
