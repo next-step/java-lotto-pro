@@ -1,11 +1,17 @@
 package lotto.domain;
 
+import lotto.exception.CreateLottoStoreException;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoStore {
     private static final int LOTTO_PRICE = 1000;
+
+    private LottoStore() {
+        throw new CreateLottoStoreException("LottoStore 생성자는 호출되면 안됩니다.");
+    }
 
     public static LottoGame sell(Money money) {
         int tryCount = money.calculateTryLottoCount(money, LOTTO_PRICE);
@@ -14,7 +20,7 @@ public class LottoStore {
     }
 
     private static List<LottoBalls> createLottoBalls(int tryCount) {
-        return Stream.generate( () -> new LottoBalls(LottoBallFactory.draw()))
+        return Stream.generate(() -> new LottoBalls(LottoBallFactory.draw()))
                 .limit(tryCount)
                 .collect(Collectors.toList());
     }
