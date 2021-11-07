@@ -10,24 +10,21 @@ import java.util.Scanner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import view.model.GuidePrinter;
-import view.model.UserInputsSystem;
-
 @DisplayName("사용자 입력들")
-class UserInputsSystemTest {
+class MultipleInputSystemTest {
 
 	@Test
 	@DisplayName("객체화")
 	void instance() {
 		assertThatNoException()
-			.isThrownBy(() -> UserInputsSystem.of(mock(GuidePrinter.class), mock(Scanner.class), "3"));
+			.isThrownBy(() -> MultipleInputSystem.of(mock(GuidePrinter.class), mock(Scanner.class), "3"));
 	}
 
 	@Test
 	@DisplayName("안내 프린터 없이 객체화하면 IllegalArgumentException")
 	void instance_nullGuidePrinter_illegalArgumentExceptionThrown() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> UserInputsSystem.of(null, mock(Scanner.class), "3"))
+			.isThrownBy(() -> MultipleInputSystem.of(null, mock(Scanner.class), "3"))
 			.withMessage("'guidePrinter' must not be null");
 	}
 
@@ -35,7 +32,7 @@ class UserInputsSystemTest {
 	@DisplayName("스캐너 없이 객체화하면 IllegalArgumentException")
 	void instance_nullScanner_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> UserInputsSystem.of(mock(GuidePrinter.class), null, "4"))
+			.isThrownBy(() -> MultipleInputSystem.of(mock(GuidePrinter.class), null, "4"))
 			.withMessage("'scanner' must not be null");
 	}
 
@@ -43,7 +40,7 @@ class UserInputsSystemTest {
 	@DisplayName("숫자 형태가 아닌 입력 갯수로 객체화 하면 IllegalArgumentException")
 	void instance_invalidCount_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> UserInputsSystem.of(mock(GuidePrinter.class), mock(Scanner.class), ""))
+			.isThrownBy(() -> MultipleInputSystem.of(mock(GuidePrinter.class), mock(Scanner.class), ""))
 			.withMessageContaining("must be number format");
 	}
 
@@ -51,7 +48,7 @@ class UserInputsSystemTest {
 	@DisplayName("입력 갯수를 음수로 객체화 하면 IllegalArgumentException")
 	void instance_negativeCount_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> UserInputsSystem.of(mock(GuidePrinter.class), mock(Scanner.class), "-1"))
+			.isThrownBy(() -> MultipleInputSystem.of(mock(GuidePrinter.class), mock(Scanner.class), "-1"))
 			.withMessage("'count' must be more than zero");
 	}
 
@@ -67,7 +64,7 @@ class UserInputsSystemTest {
 			.thenReturn(anyString);
 
 		//when
-		Collection<String> inputs = UserInputsSystem.of(mockPrinter, mockScanner, "3").inputs();
+		Collection<String> inputs = MultipleInputSystem.of(mockPrinter, mockScanner, "3").input();
 
 		//then
 		assertAll(

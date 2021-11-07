@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Scanner;
 
 import view.model.GuidePrinter;
-import view.model.UserInputSystem;
-import view.model.UserInputsSystem;
+import view.model.InputSystem;
+import view.model.MultipleInputSystem;
 
 public final class InputView {
 
@@ -30,9 +30,9 @@ public final class InputView {
 	}
 
 	public static Collection<String> inputManualPurchaseNumbers() {
-		return UserInputsSystem.of(
+		return MultipleInputSystem.of(
 			GuidePrinter.of(System.out, MANUAL_PURCHASE_NUMBER_INPUT_GUIDE), SCANNER, inputManualPurchaseCount())
-			.inputs();
+			.input();
 	}
 
 	private static String inputManualPurchaseCount() {
@@ -43,7 +43,7 @@ public final class InputView {
 		return inputSystem(BONUS_BALL_INPUT_GUIDE).input();
 	}
 
-	private static UserInputSystem inputSystem(String guide) {
-		return UserInputSystem.of(GuidePrinter.of(System.out, guide), SCANNER);
+	private static InputSystem inputSystem(String guide) {
+		return InputSystem.of(GuidePrinter.of(System.out, guide), SCANNER);
 	}
 }

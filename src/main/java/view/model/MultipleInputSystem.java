@@ -7,13 +7,13 @@ import java.util.Scanner;
 
 import utility.Assert;
 
-public final class UserInputsSystem {
+public final class MultipleInputSystem {
 
 	private final GuidePrinter guidePrinter;
 	private final Scanner scanner;
 	private final int count;
 
-	private UserInputsSystem(GuidePrinter guidePrinter, Scanner scanner, int count) {
+	private MultipleInputSystem(GuidePrinter guidePrinter, Scanner scanner, int count) {
 		Assert.notNull(guidePrinter, "'guidePrinter' must not be null");
 		Assert.notNull(scanner, "'scanner' must not be null");
 		Assert.isTrue(positive(count), "'count' must be more than zero");
@@ -22,8 +22,8 @@ public final class UserInputsSystem {
 		this.count = count;
 	}
 
-	public static UserInputsSystem of(GuidePrinter guidePrinter, Scanner scanner, String count) {
-		return new UserInputsSystem(guidePrinter, scanner, parseInt(count));
+	public static MultipleInputSystem of(GuidePrinter guidePrinter, Scanner scanner, String count) {
+		return new MultipleInputSystem(guidePrinter, scanner, parseInt(count));
 	}
 
 	private static int parseInt(String count) {
@@ -34,7 +34,7 @@ public final class UserInputsSystem {
 		}
 	}
 
-	public Collection<String> inputs() {
+	public Collection<String> input() {
 		if (isZeroCount()) {
 			return Collections.emptyList();
 		}
