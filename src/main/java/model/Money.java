@@ -19,6 +19,10 @@ public class Money {
 		return new Money(money);
 	}
 
+	public static Money of(Integer money, Count count) {
+		return Money.of(money * count.getValue());
+	}
+
 	public static Money of(String moneyString) {
 		try {
 			return new Money(Integer.parseInt(moneyString));
@@ -29,6 +33,10 @@ public class Money {
 
 	public PurchaseCount purchaseableCount(Money price) {
 		return new PurchaseCount(this.value.intValue() / price.getValue().intValue());
+	}
+
+	public boolean isPurchaseable(Money price) {
+		return this.value.compareTo(price.value) >= 0;
 	}
 
 	public BigDecimal getValue() {

@@ -5,8 +5,11 @@ import static view.InputMessage.*;
 import java.util.Scanner;
 
 import model.BonusBall;
+import model.Count;
 import model.LastWeekWinningNumber;
+import model.Lotto;
 import model.Money;
+import model.PurchaseCount;
 
 public class InputView {
 
@@ -17,6 +20,11 @@ public class InputView {
 		return inputForPurchaseAmountUntilValid(sc.nextLine());
 	}
 
+	public static PurchaseCount printManualPurchaseCountMessageAndInput(Money money) {
+		printManualPurchaseCountMessage();
+		return inputForManualCountUntilValid(sc.nextLine(), money);
+	}
+
 	public static LastWeekWinningNumber printLastWeekWinningNumberAndInput() {
 		printLastWeekWinningNumberMessage();
 		return inputForLastWeekWinningNumberUntilValid(sc.nextLine());
@@ -25,6 +33,14 @@ public class InputView {
 	public static BonusBall printBonusBallAndInput(LastWeekWinningNumber lastWeekWinningNumber) {
 		printBonusBallMessage();
 		return inputForBonusBallUntilValid(sc.nextLine(), lastWeekWinningNumber);
+	}
+
+	private static void printManualPurchaseCountMessage() {
+		System.out.println(MANUAL_PURCHASE_COUNT_MESSAGE);
+	}
+
+	private static void printManualLottoNumberMessage() {
+		System.out.println(MANUAL_LOTTO_NUMBER_MESSAGE);
 	}
 
 	private static void printPurchaseAmountMessage() {
@@ -75,8 +91,23 @@ public class InputView {
 		return BonusBall.from(bonusBall);
 	}
 
+	private static PurchaseCount inputForManualCountUntilValid(String manualCount, Money money) {
+		while (!(PurchaseCount.validate(manualCount)
+			&& money.isPurchaseable(Money.of(Lotto.COST, Count.from(manualCount))))) {
+
+			InputView.printErrorManualCountInvalidation();
+			manualCount = sc.nextLine();
+		}
+
+		return PurchaseCount.from(manualCount);
+	}
+
 	private static void printErrorBonusBallInvalidation() {
 		System.out.println(ERROR_BONUS_BALL_MESSAGE);
+	}
+
+	private static void printErrorManualCountInvalidation() {
+		System.out.println(ERROR_MANUAL_COUNT_MESSAGE);
 	}
 
 	private static void nextLine() {

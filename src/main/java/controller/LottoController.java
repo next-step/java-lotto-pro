@@ -12,6 +12,7 @@ public class LottoController {
 
 	public void start() {
 		Money money = InputView.printPurchaseAmountMessageAndInput();
+		PurchaseCount manualPurchaseCount = InputView.printManualPurchaseCountMessageAndInput(money);
 		PurchaseCount purchaseCount = Lottos.purchaseCountFrom(money);
 		ResultView.printPurchaseVolumeMessage(purchaseCount);
 		Lottos lottos = Lottos.purchase(purchaseCount);

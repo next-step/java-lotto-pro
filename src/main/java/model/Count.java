@@ -22,6 +22,10 @@ public class Count {
 		return new Count(value);
 	}
 
+	public static Count from(String value) {
+		return new Count(Integer.parseInt(value));
+	}
+
 	public static Count sum(Count count1, Count count2) {
 		return new Count(count1.value + count2.value);
 	}
@@ -32,6 +36,10 @@ public class Count {
 
 	public boolean is(int value) {
 		return this.value == value;
+	}
+
+	public int getValue() {
+		return value;
 	}
 
 	@Override
