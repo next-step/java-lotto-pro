@@ -12,7 +12,6 @@ public class Lotto {
 
     public static final int LOTTO_COUNT = 6;
     private final List<LottoNumber> numbers;
-    private int winningNumberMatchCount;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         numberCountValid(lottoNumbers);
@@ -20,22 +19,24 @@ public class Lotto {
         this.numbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public Lotto(List<LottoNumber> numbers, int winningNumberMatchCount) {
-        this(numbers);
-        this.winningNumberMatchCount = winningNumberMatchCount;
-    }
-
     public int winningNumberMatchCount(List<Integer> winningNumbers) {
+        int winningNumberMatchCount = 0;
+
         for (Integer winningNumber : winningNumbers) {
-            winningNumberMatchCheck(winningNumber);
+            winningNumberMatchCount += winningNumberMatchCount(winningNumber);
         }
         return winningNumberMatchCount;
     }
 
-    private void winningNumberMatchCheck(Integer winningNumber) {
-        if (this.numbers.contains(new LottoNumber(winningNumber))) {
-            winningNumberMatchCount++;
+    private int winningNumberMatchCount(Integer winningNumber) {
+        if (isWinningNumberMatch(winningNumber)) {
+            return 1;
         }
+        return 0;
+    }
+
+    private boolean isWinningNumberMatch(Integer winningNumber) {
+        return this.numbers.contains(new LottoNumber(winningNumber));
     }
 
     private void numberCountValid(List<LottoNumber> lottoNumbers) {

@@ -22,17 +22,17 @@ class WinningTest {
                 .collect(Collectors.toList());
 
         return Stream.of(
-                arguments(lottoNumbers, Arrays.asList(1, 2, 3, 6, 5, 4)),
-                arguments(lottoNumbers, Arrays.asList(1, 2, 3, 4, 6, 5)),
-                arguments(lottoNumbers, Arrays.asList(1, 2, 3, 4, 5, 7)),
-                arguments(lottoNumbers, Arrays.asList(1, 2, 3, 4, 5, 6))
+                arguments(lottoNumbers, Arrays.asList(1, 2, 3, 11, 22, 33), 3),
+                arguments(lottoNumbers, Arrays.asList(1, 2, 3, 4, 11, 22), 4),
+                arguments(lottoNumbers, Arrays.asList(1, 2, 3, 4, 5, 11), 5),
+                arguments(lottoNumbers, Arrays.asList(1, 2, 3, 4, 5, 6), 6)
         );
     }
 
     @DisplayName("당첨 번호 일치 계산")
     @ParameterizedTest
     @MethodSource("matchCalculationParametersProvider")
-    void matchCalculation(List<LottoNumber> lottoNumber, List<Integer> winningNumber) {
+    void matchCalculation(List<LottoNumber> lottoNumber, List<Integer> winningNumber, int winningNumberMatchCount) {
         //given
         Lotto lotto = new Lotto(lottoNumber);
 
@@ -40,7 +40,7 @@ class WinningTest {
         int winningNumberMatchResult = lotto.winningNumberMatchCount(winningNumber);
 
         //then
-        assertThat(lotto).isEqualTo(new Lotto(lottoNumber, winningNumberMatchResult));
+        assertThat(winningNumberMatchResult).isEqualTo(winningNumberMatchCount);
     }
 
     @DisplayName("당첨 결과 통계")
