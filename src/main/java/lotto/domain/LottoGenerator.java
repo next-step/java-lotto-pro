@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumberGenerator {
+public class LottoGenerator {
 
     private static final List<Integer> numbers;
 
@@ -14,11 +14,11 @@ public class LottoNumberGenerator {
         numbers = generateCandidateNumbers();
     }
 
-    private LottoNumberGenerator() {
+    private LottoGenerator() {
     }
 
-    public static List<Integer> generate() {
-        return getSortedLottoNumbers();
+    public static Lotto generate() {
+        return new Lotto(getSortedLottoNumbers());
     }
 
     private static List<Integer> generateCandidateNumbers() {

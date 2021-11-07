@@ -14,6 +14,10 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     private void validate(int number) {
         if (!isValidNumber(number)) {
             throw new IllegalArgumentException(

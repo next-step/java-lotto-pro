@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoCalculator {
 
     public static final int LOTTO_PRICE = 1_000;
@@ -9,7 +12,11 @@ public class LottoCalculator {
     private WinResults winResults;
 
     public LottoCalculator(PurchaseAmount purchaseAmount) {
-        this.lottos = Lottos.fromQuantity(purchaseAmount.getQuantity());
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < purchaseAmount.getQuantity(); i++) {
+            lottos.add(LottoGenerator.generate());
+        }
+        this.lottos = new Lottos(lottos);
     }
 
     public Lottos getLottos() {

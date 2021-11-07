@@ -17,6 +17,10 @@ public class Lotto {
         this.lottoNumbers = Collections.unmodifiableList(mapToLottoNumbers(numbers));
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     public WinResult getWinResult(Lotto winNumber, LottoNumber bonusNumber) {
         int matchedCount = getMatchedCount(winNumber);
         boolean bonusNumberMatched = this.lottoNumbers.contains(bonusNumber);

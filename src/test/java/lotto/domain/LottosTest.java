@@ -14,14 +14,13 @@ class LottosTest {
     @DisplayName("로또의 개수를 반환한다.")
     void size() {
         // given
-        int quantity = 5;
-        Lottos lottos = Lottos.fromQuantity(quantity);
+        Lottos lottos = new Lottos(Arrays.asList(LottoGenerator.generate(), LottoGenerator.generate()));
 
         // when
         int size = lottos.size();
 
         // then
-        assertThat(size).isEqualTo(quantity);
+        assertThat(size).isEqualTo(2);
     }
 
     @Test
