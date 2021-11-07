@@ -5,16 +5,14 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lottoservice.exception.InvalidLottoFormatException;
+import lottoservice.lottonumber.LottoArrangeManipulator;
 import lottoservice.lottonumber.LottoNumber;
 import lottoservice.lottonumber.LottoNumbersMaker;
 import lottoservice.lottoticket.LottoTicket;
@@ -24,9 +22,11 @@ public class LottoWinningNumbersTest {
 
 	private static int SIZE_OF_LOTTERY_NUMBERS = 6;
 
+	LottoNumbersMaker lottoNumbersMaker = new LottoNumbersMaker(new LottoArrangeManipulator());
+
 	@Test
 	public void makeLottoWinningNumbers_당첨번호_생성() {
-		List<LottoNumber> lottoNumbers = LottoNumbersMaker.makeLottoNumbers(Arrays.asList(3, 34, 22, 17, 26, 7));
+		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(Arrays.asList(3, 34, 22, 17, 26, 7));
 		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
 
 		assertThat(lottoWinningNumbers.sizeOfWinningNumbers()).isEqualTo(lottoNumbers.size());
@@ -36,7 +36,7 @@ public class LottoWinningNumbersTest {
 
 	@Test
 	public void validateLottoNumberGroupRule_당첨번호_리스트_중복숫자_입력_예외() {
-		List<LottoNumber> lottoNumbers = LottoNumbersMaker.makeLottoNumbers(Arrays.asList(3, 34, 22, 17, 3, 7));
+		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(Arrays.asList(3, 34, 22, 17, 3, 7));
 
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
@@ -45,7 +45,7 @@ public class LottoWinningNumbersTest {
 
 	@Test
 	public void validateLottoNumberGroupRule_당첨번호_리스트_갯수가_작은경우_예외() {
-		List<LottoNumber> lottoNumbers = LottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 22, 17, 3, 7));
+		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 22, 17, 3, 7));
 
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
@@ -54,7 +54,7 @@ public class LottoWinningNumbersTest {
 
 	@Test
 	public void validateLottoNumberGroupRule_당첨번호_리스트_갯수가_큰_경우_예외() {
-		List<LottoNumber> lottoNumbers = LottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 22, 17, 3, 7, 30, 45));
+		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 22, 17, 3, 7, 30, 45));
 
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
@@ -64,7 +64,7 @@ public class LottoWinningNumbersTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"1, 31, 22, 15, 4, 7", "2, 43, 33, 25, 6, 7"})
 	public void makeLottoWinningNumbers_당첨번호_문자열_입력(String lottoNumberText) {
-		List<LottoNumber> lottoNumbers = LottoNumbersMaker.makeLottoNumbers(lottoNumberText);
+		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(lottoNumberText);
 		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
 
 		assertThat(lottoWinningNumbers.sizeOfWinningNumbers()).isEqualTo(lottoNumbers.size());
@@ -77,7 +77,7 @@ public class LottoWinningNumbersTest {
 	public void makeLottoWinningNumbers_당첨번호_문자열_입력_로또갯수_예외(String lottoNumberText) {
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
-				LottoNumbersMaker.makeLottoNumbers(lottoNumberText));
+				lottoNumbersMaker.makeLottoNumbers(lottoNumberText));
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
@@ -86,18 +86,18 @@ public class LottoWinningNumbersTest {
 	public void makeLottoWinningNumbers_당첨번호_문자열_입력_포맷_예외(String lottoNumberText) {
 		assertThatThrownBy(() -> {
 			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
-				LottoNumbersMaker.makeLottoNumbers(lottoNumberText));
+				lottoNumbersMaker.makeLottoNumbers(lottoNumberText));
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
 	@Test
 	public void matchWinningAndTickets_정답과_로또티켓들_비교결과() {
 		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
-			LottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
+			lottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
 
 		List<LottoTicket> tickets = new ArrayList<>();
-		tickets.add(new LottoTicket(LottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 5, 12, 26, 30, 40))));
-		tickets.add(new LottoTicket(LottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 5, 3, 34, 20, 40))));
+		tickets.add(new LottoTicket(lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 5, 12, 26, 30, 40))));
+		tickets.add(new LottoTicket(lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 5, 3, 34, 20, 40))));
 
 		LottoMatchResult lottoMatchResult = lottoWinningNumbers.matchWinningAndTickets(new LottoTickets(tickets));
 
@@ -109,14 +109,14 @@ public class LottoWinningNumbersTest {
 	@Test
 	public void matchWinningAndTickets_당첨_수익률_계산() {
 		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
-			LottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
+			lottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
 
 		List<LottoTicket> tickets = new ArrayList<>();
 		for (int i = 0; i < 20; i++) {
-			tickets.add(new LottoTicket(LottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 6, 11, 25, 32, 44))));
+			tickets.add(new LottoTicket(lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 6, 11, 25, 32, 44))));
 		}
-		tickets.add(new LottoTicket(LottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 4, 12, 26, 30, 40))));
-		tickets.add(new LottoTicket(LottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 2, 31, 34, 20, 40))));
+		tickets.add(new LottoTicket(lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 4, 12, 26, 30, 40))));
+		tickets.add(new LottoTicket(lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 2, 31, 34, 20, 40))));
 
 		LottoTickets lottoTickets = new LottoTickets(tickets);
 		LottoMatchResult lottoMatchResult = lottoWinningNumbers.matchWinningAndTickets(lottoTickets);

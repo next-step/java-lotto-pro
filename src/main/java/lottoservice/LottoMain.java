@@ -2,6 +2,7 @@ package lottoservice;
 
 import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.exception.InvalidMoneyException;
+import lottoservice.lottonumber.LottoArrangeManipulator;
 import lottoservice.lottonumber.LottoNumbersMaker;
 import lottoservice.lottoticket.LottoTicketIssuer;
 import lottoservice.lottoticket.LottoTickets;
@@ -35,20 +36,23 @@ public class LottoMain {
 	}
 
 	public void startLottoMain() {
-		LottoTickets lottoTickets = buyLottoTickets();
+		LottoNumbersMaker lottoNumbersMaker = new LottoNumbersMaker(new LottoArrangeManipulator());
+		LottoTicketIssuer lottoTicketIssuer = new LottoTicketIssuer(lottoNumbersMaker);
+		LottoTickets lottoTickets = buyLottoTickets(lottoTicketIssuer);
 		outputBoughtLottoTickets(lottoTickets);
-		LottoWinningNumbers lottoWinningNumbers = getLastWeekWinningNumbers();
+
+		LottoWinningNumbers lottoWinningNumbers = getLastWeekWinningNumbers(lottoNumbersMaker);
 		LottoMatchResult lottoMatchResult = matchLottoWinning(lottoWinningNumbers, lottoTickets);
 		outputLottoMatchResults(lottoMatchResult);
 	}
 
-	private LottoTickets buyLottoTickets() {
+	private LottoTickets buyLottoTickets(LottoTicketIssuer lottoTicketIssuer) {
 		try {
 			String inputAmount = inputAmountForBuyLotto();
-			return LottoTicketIssuer.buyTickets(inputAmount);
+			return lottoTicketIssuer.buyTickets(inputAmount);
 		} catch (InvalidMoneyException ex) {
 			resultView.outputError(ex.getMessage());
-			return buyLottoTickets();    /* 사용자가 잘못된 입력을 했을 경우 재입력 */
+			return buyLottoTickets(lottoTicketIssuer);    /* 사용자가 잘못된 입력을 했을 경우 재입력 */
 		}
 	}
 
@@ -61,13 +65,13 @@ public class LottoMain {
 		resultView.outputResult(lottoTickets);
 	}
 
-	private LottoWinningNumbers getLastWeekWinningNumbers() {
+	private LottoWinningNumbers getLastWeekWinningNumbers(LottoNumbersMaker lottoNumbersMaker) {
 		try {
 			String lastWeekWinningNumbers = inputLastWeekWinningNumbers();
-			return new LottoWinningNumbers(LottoNumbersMaker.makeLottoNumbers(lastWeekWinningNumbers));
+			return new LottoWinningNumbers(lottoNumbersMaker.makeLottoNumbers(lastWeekWinningNumbers));
 		} catch (InvalidLottoFormatException ex) {
 			resultView.outputError(ex.getMessage());
-			return getLastWeekWinningNumbers();    /* 사용자가 잘못된 입력을 했을 경우 재입력*/
+			return getLastWeekWinningNumbers(lottoNumbersMaker);    /* 사용자가 잘못된 입력을 했을 경우 재입력*/
 		}
 	}
 
