@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.LottoNumberFactory;
-
 class LottoNumberFactoryTest {
 
 	@Test
@@ -21,14 +19,16 @@ class LottoNumberFactoryTest {
 		//then
 		assertThat(numbers).hasSize(6);
 	}
-	
+
 	@Test
 	@DisplayName("로또번호 중복 여부 확인 테스트")
 	public void validateDuplicateLottoNumberTest() {
 		//given
 		List<Integer> numbers = LottoNumberFactory.create();
 		//when
-		List<Integer> distinctNumbers = numbers.stream().distinct().collect(Collectors.toList());
+		List<Integer> distinctNumbers = numbers.stream()
+			.distinct()
+			.collect(Collectors.toList());
 		//then
 		assertThat(distinctNumbers).hasSize(6);
 	}
