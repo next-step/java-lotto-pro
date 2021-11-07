@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import lotto.exception.BadRequestException;
-
 public class RandomNumberSupplier implements NumberSupplier {
     private static final int MIN_SIZE = 1;
     private static final String SIZE_ERR_MSG = "size 는 최소 " + MIN_SIZE + " 이상이어야 합니다.";
@@ -28,13 +26,13 @@ public class RandomNumberSupplier implements NumberSupplier {
 
     private void validate() {
         if (size < MIN_SIZE) {
-            throw new BadRequestException(SIZE_ERR_MSG);
+            throw new IllegalArgumentException(SIZE_ERR_MSG);
         }
         if (startInclusive > endInclusive) {
-            throw new BadRequestException(NUMBER_RANGE_ERR_MSG);
+            throw new IllegalArgumentException(NUMBER_RANGE_ERR_MSG);
         }
         if (endInclusive - startInclusive + MIN_SIZE < size) {
-            throw new BadRequestException(INVALID_ARGUMENTS_ERR_MSG);
+            throw new IllegalArgumentException(INVALID_ARGUMENTS_ERR_MSG);
         }
     }
 

@@ -7,7 +7,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import lotto.exception.BadRequestException;
 import lotto.model.enums.MatchCount;
 
 public class LottoNumbers {
@@ -27,7 +26,7 @@ public class LottoNumbers {
 
     private void validate() {
         if (numbers.size() != NUMBER_SIZE) {
-            throw new BadRequestException(NUMBER_SIZE_ERR_MSG);
+            throw new IllegalArgumentException(NUMBER_SIZE_ERR_MSG);
         }
     }
 
