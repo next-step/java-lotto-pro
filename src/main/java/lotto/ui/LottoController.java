@@ -9,6 +9,7 @@ import lotto.domain.WinningResults;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoController {
 
@@ -28,9 +29,16 @@ public class LottoController {
     private void printLottos(LottoCalculator lottoCalculator) {
         ConsoleOut.printMessage(Message.LOTTOS_PRINT.getMessage(), lottoCalculator.getLottosSize());
         for (Lotto lotto : lottoCalculator.getLottos().getLottos()) {
-            ConsoleOut.printMessage(lotto.toString());
+            ConsoleOut.printMessage(getLottoMessage(lotto));
         }
         ConsoleOut.newLine();
+    }
+
+    private String getLottoMessage(Lotto lotto) {
+        return lotto.getLottoNumbers()
+                .stream()
+                .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 
     private void printHeader() {

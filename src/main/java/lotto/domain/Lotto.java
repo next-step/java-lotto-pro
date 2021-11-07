@@ -68,11 +68,4 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
-
-    @Override
-    public String toString() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::toString)
-                .collect(Collectors.joining(", ", "[", "]"));
-    }
 }
