@@ -1,30 +1,39 @@
 package step3;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoPapers {
+public class LottoPapers extends AbstractList<LottoNumbers> {
 
-	private static LottoPapers INSTANCE;
-	public static List<LottoNumbers> PAPERS;
+	public List<LottoNumbers> papers;
 
-	private LottoPapers() {
+	private LottoPapers(List<LottoNumbers> lottoNumbers) {
+		this.papers = new ArrayList<>(lottoNumbers);
 	}
 
-	private LottoPapers(List<LottoNumbers> lottoPapers) {
-		PAPERS = lottoPapers;
+	public static LottoPapers createPapers(List<LottoNumbers> lottoNumbers) {
+		return new LottoPapers(lottoNumbers);
 	}
 
-	public static LottoPapers getInstance() {
-		synchronized (LottoPapers.class) {
-			if (INSTANCE != null) {
-				INSTANCE = new LottoPapers(new ArrayList<>());
-			}
+	@Override
+	public int size() {
+		return papers.size();
+	}
+
+	@Override
+	public LottoNumbers get(int index) {
+		return papers.get(index);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (LottoNumbers paper : papers) {
+			sb.append(paper).append("\n");
 		}
-		return INSTANCE;
+		return sb.toString();
 	}
 
-	public static void createPapers(List<LottoNumbers> lottoNumbers) {
-		PAPERS = lottoNumbers;
-	}
+
 }

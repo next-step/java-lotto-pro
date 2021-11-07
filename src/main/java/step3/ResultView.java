@@ -2,8 +2,8 @@ package step3;
 
 public class ResultView {
 
-	public static void purchasedLottoPrint() {
-		LottoPapers.PAPERS.forEach(System.out::println);
+	public static void purchasedLottoPrint(LottoPapers lottoPapers) {
+		System.out.println(lottoPapers);
 	}
 
 	public static void purchasedCount(int size) {

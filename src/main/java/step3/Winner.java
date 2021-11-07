@@ -16,10 +16,12 @@ public class Winner {
 
 	private static Map<Integer, Integer> winnings;
 	private final Map<Integer, Integer> winningAmount;
+	private final LottoPapers lottoPapers;
 	private int sumWinningAmount;
 	private BigDecimal yield;
 
-	public Winner() {
+	public Winner(LottoPapers lottoPapers) {
+		this.lottoPapers = lottoPapers;
 		winnings = new HashMap<>();
 		winningAmount = new HashMap<>();
 		winnings.put(3, 5_000);
@@ -31,8 +33,7 @@ public class Winner {
 
 	public Map<Integer, Integer> statistics(List<LottoNumber> lottoNumbers) {
 		assert lottoNumbers != null;
-		List<LottoNumbers> papers = LottoPapers.PAPERS;
-		for (LottoNumbers lottoPapers : papers) {
+		for (LottoNumbers lottoPapers : lottoPapers) {
 			Integer winningCount = findMatchLottoNumber(lottoNumbers, lottoPapers);
 			Integer winningAmount = findWinningAmount(winningCount);
 			addWinnerList(winningCount, winningAmount);

@@ -6,28 +6,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoPapersTest {
 
 	@Test
-	@DisplayName("하나의 객체만 생성되는지")
-	void singleton() {
-		LottoPapers lottoPapers1 = LottoPapers.getInstance();
-		LottoPapers lottoPapers2 = LottoPapers.getInstance();
-		Assertions.assertThat(lottoPapers1).isEqualTo(lottoPapers2);
-	}
-
-	@Test
 	@DisplayName("인스턴스를 두번 생성했을 때 데이터를 담는 순간 정보가 바뀌지 않는지 확인")
 	void createPapers() {
-		LottoPapers.getInstance();
 		List<LottoNumbers> lottoPapers = getLottoNumbers();
-		LottoPapers.getInstance();
 		LottoPapers.createPapers(getLottoNumbers());
-		Assertions.assertThat(LottoPapers.PAPERS).isEqualTo(lottoPapers);
 	}
 
 	private List<LottoNumbers> getLottoNumbers() {
