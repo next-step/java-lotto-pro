@@ -4,20 +4,27 @@ import lotto.exception.LottoPurchaseAmountException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static lotto.domain.LottoNumber.GAME_PRICE;
+import static lotto.domain.Number.MAX_NUMBER;
+import static lotto.domain.Number.MIN_NUMBER;
+import static lotto.utils.RandomNumberUtils.generateRandomNumbers;
 
 public class LottoMachine {
+
+    public static final int LOTTO_SIZE = 6;
+    public final static Money GAME_PRICE = new Money(BigDecimal.valueOf(1000));
 
     private final Money money;
     private final List<List<Number>> activeNumberList;
 
     public LottoMachine(Money money) {
-        validation(money);
+        validationMoney(money);
         this.money = money;
         this.activeNumberList = new ArrayList<>();
     }
@@ -40,7 +47,7 @@ public class LottoMachine {
     private List<LottoNumber> generateAutoLotto(int count) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         IntStream.range(0, count)
-                .forEach(f -> lottoNumbers.add(new LottoNumber()));
+                .forEach(f -> lottoNumbers.add(getAutoLottoNumbers()));
         return lottoNumbers;
     }
 
@@ -50,7 +57,19 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    private void validation(Money money) {
+    private LottoNumber getAutoLottoNumbers() {
+        Set<Number> numbers = new HashSet<>();
+        while (numbers.size() < LOTTO_SIZE) {
+            numbers.add(Number.of(getRandomNumber()));
+        }
+        return new LottoNumber(new ArrayList<>(numbers));
+    }
+
+    private int getRandomNumber() {
+        return generateRandomNumbers(MIN_NUMBER, MAX_NUMBER);
+    }
+
+    private void validationMoney(Money money) {
         validateZeroAmount(money);
         validateRemainderAmount(money);
     }
