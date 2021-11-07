@@ -37,7 +37,7 @@ public class ResultView {
 
     private static String createCountingMessage(int count, Statistics statistics) {
         StringBuilder builder = new StringBuilder();
-        Ranking ranking = Ranking.find(count);
+        Ranking ranking = Ranking.find(count, false);
         builder.append(count)
                 .append("개 일치 (")
                 .append(ranking.getPrize())

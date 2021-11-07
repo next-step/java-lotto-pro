@@ -49,4 +49,7 @@ public class LottoBalls {
         return count;
     }
 
+    public boolean hasBonusBall(LottoBall bonusBall) {
+        return lottoBalls.contains(bonusBall);
+    }
 }

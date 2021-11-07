@@ -46,4 +46,16 @@ class LottoBallsTest {
         assertThat(result).isEqualTo(3);
     }
 
+    @DisplayName("보너스볼을 가지고 있으면 true 반환")
+    @Test
+    void hasBonusBall() {
+        LottoBalls balls = new LottoBalls(Arrays.asList(
+                new LottoBall(1), new LottoBall(2), new LottoBall(3),
+                new LottoBall(4), new LottoBall(5), new LottoBall(6)
+        ));
+        LottoBall bonusBall = new LottoBall(5);
+
+        assertThat(balls.hasBonusBall(bonusBall)).isTrue();
+    }
+
 }
