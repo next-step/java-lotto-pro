@@ -6,6 +6,7 @@ import java.math.RoundingMode;
 public class Money {
 	private final int money;
 	private final int DEFAULT_MONEY = 1000;
+	private int size;
 
 	public Money(int money) {
 		validation(money);
@@ -23,7 +24,12 @@ public class Money {
 	}
 
 	public int buyCount() {
-		return Math.floorDiv(money, DEFAULT_MONEY);
+		size = Math.floorDiv(money, DEFAULT_MONEY);
+		return size;
+	}
+
+	public int findPunchCount() {
+		return size;
 	}
 
 	public BigDecimal yield(int sumAmount) {
@@ -34,5 +40,4 @@ public class Money {
 	public String toString() {
 		return String.valueOf(money);
 	}
-
 }
