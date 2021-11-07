@@ -11,6 +11,13 @@ public class Lotto {
 	public static final Integer COST = 1000;
 	public static final Integer NUMBER_COUNT = 6;
 	public static final int INDEX_OF_START = 0;
+	private static List<Integer> numberCandidate;
+
+	static {
+		numberCandidate = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+			.boxed()
+			.collect(toList());
+	}
 
 	private List<LottoNumber> numbers;
 
@@ -21,13 +28,9 @@ public class Lotto {
 	}
 
 	public static Lotto create() {
-		List<Integer> numbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
-			.boxed()
-			.collect(toList());
+		Collections.shuffle(numberCandidate);
 
-		Collections.shuffle(numbers);
-
-		List<Integer> selectedNumbers = numbers.subList(INDEX_OF_START, INDEX_OF_START + NUMBER_COUNT);
+		List<Integer> selectedNumbers = numberCandidate.subList(INDEX_OF_START, INDEX_OF_START + NUMBER_COUNT);
 		Collections.sort(selectedNumbers);
 
 		return new Lotto(selectedNumbers);
