@@ -11,6 +11,7 @@ public class LottoController {
     private static Scanner scanner;
 
     public void startGame() {
+        scanner = new Scanner(System.in);
         int buyPrice = inputBuyPrice();
         BuyAmount buyAmount = new BuyAmount(buyPrice);
         LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(buyAmount);
@@ -25,8 +26,7 @@ public class LottoController {
 
     private int inputBuyPrice() {
         LottoMessage.showAskBuyPriceMessage();
-        scanner = getScanner();
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     private void showBuyStats(BuyAmount buyAmount, LottoNumbersGroup lottoNumbersGroup) {
@@ -36,7 +36,6 @@ public class LottoController {
 
     private String inputPrizeLottoNumbers() {
         LottoMessage.showAskPrizeLottoNumbersMessage();
-        scanner = getScanner();
         return scanner.nextLine();
     }
 
@@ -45,10 +44,6 @@ public class LottoController {
         LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers);
         LottoResultsView lottoResultsView = new LottoResultsView(buyAmount, lottoResults);
         lottoResultsView.showResults();
-    }
-
-    private static Scanner getScanner() {
-        return new Scanner(System.in);
     }
 
 
