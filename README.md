@@ -16,7 +16,7 @@
   - generate distinct 6 lotto numbers
   - has bonus
 - lotto store
-  - sell lottos (pay, manually lottos)
+  - sell lottos (pay, manual lottos)
 - lotto parser
 - winning lotto (extends lotto)
   - count matching

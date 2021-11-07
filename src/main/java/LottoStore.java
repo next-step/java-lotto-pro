@@ -7,12 +7,12 @@ public class LottoStore {
 
 	public static final String KRW_UNIT = "원";
 
-	public List<Lotto> sell(String pay, List<String> manuallyLottos) {
+	public List<Lotto> sell(String pay, List<String> manualLottos) {
 		final int paidKRW = parsePaidKRW(pay);
-		validatePayment(paidKRW, manuallyLottos);
+		validatePayment(paidKRW, manualLottos);
 
-		final List<Lotto> lottosManually = sellLottosManually(manuallyLottos);
-		final List<Lotto> lottosAuto = sellLottosAuto(paidKRW, lottosManually);
+		final List<Lotto> lottosManually = sellManually(manualLottos);
+		final List<Lotto> lottosAuto = sellAuto(paidKRW, lottosManually);
 
 		return Stream.of(lottosManually, lottosAuto)
 			.flatMap(Collection::stream)
@@ -37,14 +37,14 @@ public class LottoStore {
 		}
 	}
 
-	private List<Lotto> sellLottosManually(List<String> lottos) {
+	private List<Lotto> sellManually(List<String> lottos) {
 		return lottos.stream()
 			.limit(lottos.size())
 			.map(LottoFactory::from)
 			.collect(Collectors.toList());
 	}
 
-	private List<Lotto> sellLottosAuto(int paidKRW, List<Lotto> lottosManually) {
+	private List<Lotto> sellAuto(int paidKRW, List<Lotto> lottosManually) {
 		final int numOfLottosCanBeSold = paidKRW / Lotto.PRICE_KRW;
 		final int numOfLottosAuto = numOfLottosCanBeSold - lottosManually.size();
 		return Stream.iterate(1, num -> num + 1)
