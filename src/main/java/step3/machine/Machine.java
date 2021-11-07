@@ -1,7 +1,9 @@
 package step3.machine;
 
 import step3.LottoPapers;
+import step3.Money;
 
 public interface Machine {
-	public LottoPapers createLottoPapers();
+	void insertMoney(Money money);
+	LottoPapers createLottoPapers();
 }

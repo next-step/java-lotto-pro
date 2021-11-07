@@ -16,8 +16,12 @@ public class AutoLottoMachine implements Machine {
 	private Money money;
 	private MachineValidation machineValidation;
 
-	public AutoLottoMachine(Money money, MachineValidation machineValidation) {
+	public AutoLottoMachine(MachineValidation machineValidation) {
 		this.machineValidation = machineValidation;
+	}
+
+	@Override
+	public void insertMoney(Money money) {
 		this.money = money;
 	}
 
