@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,36 +9,24 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    private Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
-    }
-
-    public static Lottos fromQuantity(int quantity) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            lottos.add(new Lotto(LottoNumberGenerator.generate()));
-        }
-        return new Lottos(lottos);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = Collections.unmodifiableList(lottos);
     }
 
     public static Lottos of(Lotto... lottos) {
         return new Lottos(Arrays.asList(lottos));
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     public int size() {
         return lottos.size();
     }
 
-    public WinResults getWinResults(Lotto winNumber) {
-        return WinResults.of(lottos, winNumber);
-    }
-
-    public Prints getLottosPrints() {
-        Prints prints = new Prints();
-        for (Lotto lotto : lottos) {
-            prints.append(lotto.toString());
-        }
-        return prints;
+    public WinningResults getWinningResults(WinningLotto winningLotto) {
+        return WinningResults.of(lottos, winningLotto);
     }
 
     @Override

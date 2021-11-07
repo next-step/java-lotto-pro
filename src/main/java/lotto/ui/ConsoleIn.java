@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseAmount;
 
 import java.util.Arrays;
@@ -10,6 +11,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class ConsoleIn {
+
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     private ConsoleIn() {
     }
@@ -30,9 +33,17 @@ public class ConsoleIn {
         return winNumber;
     }
 
+    public static LottoNumber inputBonusNumber() {
+        LottoNumber bonusNumber = null;
+        while (Objects.isNull(bonusNumber)) {
+            bonusNumber = getBonusNumber();
+        }
+        return bonusNumber;
+    }
+
     private static PurchaseAmount getPurchaseAmount() {
         try {
-            String input = input("구입 금액을 입력해 주세요.");
+            String input = input(Message.PURCHASE_AMOUNT_INPUT.getMessage());
             checkDigit(input);
             return new PurchaseAmount(Integer.parseInt(input));
         } catch (IllegalArgumentException e) {
@@ -43,7 +54,7 @@ public class ConsoleIn {
 
     private static Lotto getWinNumber() {
         try {
-            String input = input("지난 주 당첨 번호를 입력해 주세요.");
+            String input = input(Message.WIN_NUMBER_INPUT.getMessage());
             List<String> tokens = Arrays.stream(input.split(","))
                     .map(String::trim)
                     .collect(Collectors.toList());
@@ -59,9 +70,20 @@ public class ConsoleIn {
         return null;
     }
 
+    private static LottoNumber getBonusNumber() {
+        try {
+            String input = input(Message.BONUS_NUMBER_INPUT.getMessage());
+            checkDigit(input);
+            return new LottoNumber(Integer.parseInt(input));
+        } catch (IllegalArgumentException e) {
+            ConsoleOut.printErrorMessage(e);
+        }
+        return null;
+    }
+
     private static String input(String message) {
         ConsoleOut.printMessage(message);
-        return new Scanner(System.in).nextLine();
+        return SCANNER.nextLine();
     }
 
     private static void checkWinNumber(List<String> tokens) {
@@ -72,7 +94,7 @@ public class ConsoleIn {
 
     private static void checkDigit(String input) {
         if (!isDigit(input)) {
-            throw new IllegalArgumentException("숫자만 입력해주세요.");
+            throw new IllegalArgumentException(Message.NOT_DIGIT_ERROR.getMessage());
         }
     }
 

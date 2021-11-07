@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -13,25 +14,31 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.lottoNumbers = mapToLottoNumbers(numbers);
+        this.lottoNumbers = Collections.unmodifiableList(mapToLottoNumbers(numbers));
     }
 
-    public WinResult getWinResult(Lotto winNumber) {
-        int matchedCount = (int) winNumber.lottoNumbers
-                .stream()
-                .map(lottoNumbers::contains)
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    public int getMatchedCount(Lotto lotto) {
+        return (int) lottoNumbers.stream()
+                .map(lotto::isContained)
                 .filter(isContained -> isContained)
                 .count();
-        return WinResult.fromCount(matchedCount);
     }
 
+    public boolean isContained(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 
     private void validate(List<Integer> numbers) {
         if (isIncorrectSize(numbers)) {
-            throw new IllegalArgumentException(Message.LOTTO_NUMBER_SIZE_ERROR.getMessage());
+            throw new IllegalArgumentException(
+                    String.format(ErrorMessage.LOTTO_NUMBER_SIZE_ERROR.getMessage(), LOTTO_NUMBERS_SIZE));
         }
         if (isDuplicated(numbers)) {
-            throw new IllegalArgumentException(Message.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
         }
     }
 
@@ -60,12 +67,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    @Override
-    public String toString() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::toString)
-                .collect(Collectors.joining(", ", "[", "]"));
     }
 }

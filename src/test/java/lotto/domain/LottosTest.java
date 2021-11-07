@@ -14,26 +14,30 @@ class LottosTest {
     @DisplayName("로또의 개수를 반환한다.")
     void size() {
         // given
-        int quantity = 5;
-        Lottos lottos = Lottos.fromQuantity(quantity);
+        Lottos lottos = new Lottos(Arrays.asList(LottoGenerator.generate(), LottoGenerator.generate()));
 
         // when
         int size = lottos.size();
 
         // then
-        assertThat(size).isEqualTo(quantity);
+        assertThat(size).isEqualTo(2);
     }
 
     @Test
     @DisplayName("당첨 결과 리스트를 반환한다.")
-    void getWinResults() {
+    void getWinningResults() {
         // given
-        Lottos lottos = Lottos.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)));
+        Lottos lottos = Lottos.of(
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)),
+                new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12))
+        );
+        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(45));
 
         // when
-        WinResults winResults = lottos.getWinResults(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        WinningResults winningResults = lottos.getWinningResults(winningLotto);
 
         // then
-        assertThat(winResults).isEqualTo(WinResults.from(WinResult.SIX_MATCHED, WinResult.THREE_MATCHED));
+        assertThat(winningResults).isEqualTo(WinningResults.from(WinningResult.FIRST, WinningResult.FIFTH));
     }
 }

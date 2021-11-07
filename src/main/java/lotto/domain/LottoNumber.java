@@ -14,9 +14,14 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     private void validate(int number) {
         if (!isValidNumber(number)) {
-            throw new IllegalArgumentException(Message.LOTTO_NUMBER_BOUND_ERROR.getMessage());
+            throw new IllegalArgumentException(
+                    String.format(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR.getMessage(), MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
         }
     }
 
@@ -35,10 +40,5 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(number);
     }
 }

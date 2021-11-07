@@ -35,7 +35,7 @@ class LottoTest {
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
-                .withMessageMatching(Message.LOTTO_NUMBER_SIZE_ERROR.getMessage());
+                .withMessageMatching(ErrorMessage.LOTTO_NUMBER_SIZE_ERROR.getMessage().replace("%d", "\\d+"));
     }
 
     @Test
@@ -47,25 +47,34 @@ class LottoTest {
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
-                .withMessageMatching(Message.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
+                .withMessageMatching(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
+    }
+
+    @Test
+    @DisplayName("입력받은 로또 번호와 로또 숫자의 일치 개수를 반환한다.")
+    void getWinningResult() {
+        // given
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
+
+        // when
+        int matchedCount = lotto.getMatchedCount(winningLotto);
+
+        // then
+        assertThat(matchedCount).isEqualTo(3);
     }
 
     @ParameterizedTest(name = "{displayName} - {arguments}")
-    @CsvSource(value = {
-            "1:2:3:4:5:6:SIX_MATCHED",
-            "1:2:3:4:5:10:FIVE_MATCHED",
-            "1:2:3:4:9:10:FOUR_MATCHED",
-            "1:2:3:8:9:10:THREE_MATCHED"
-    }, delimiter = ':')
-    @DisplayName("당첨 결과를 반환한다.")
-    void getWinResult(int number1, int number2, int number3, int number4, int number5, int number6, WinResult expected) {
+    @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
+    @DisplayName("로또 숫자의 포함 여부를 반환한다.")
+    void isContained(int number, boolean expected) {
         // given
-        Lotto lotto = new Lotto(Arrays.asList(number1, number2, number3, number4, number5, number6));
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when
-        WinResult winResult = lotto.getWinResult(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        boolean contained = lotto.isContained(new LottoNumber(number));
 
         // then
-        assertThat(winResult).isEqualTo(expected);
+        assertThat(contained).isEqualTo(expected);
     }
 }
