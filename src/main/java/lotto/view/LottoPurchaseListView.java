@@ -11,6 +11,7 @@ public class LottoPurchaseListView {
         System.out.print(lottos.purchaseNumber() + "개를 구매했습니다.");
         System.out.println();
 
-        lottos.purchaseList().stream().forEach(System.out::println);
+        lottos.purchaseList()
+                .forEach(System.out::println);
     }
 }
