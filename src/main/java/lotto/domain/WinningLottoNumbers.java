@@ -11,8 +11,15 @@ public class WinningLottoNumbers {
     }
 
     public WinningLottoNumbers(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        validateDuplicateBonusNumber(winningNumbers, bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validateDuplicateBonusNumber(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("당첨번호와 보너스번호가 중복됩니다");
+        }
     }
 
     public Rank getRank(LottoNumbers lottoNumbers) {

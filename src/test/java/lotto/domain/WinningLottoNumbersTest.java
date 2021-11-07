@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningLottoNumbersTest {
     @DisplayName("객체 동등성 비교")
@@ -15,6 +16,14 @@ public class WinningLottoNumbersTest {
         LottoNumber bonusNumber = new LottoNumber(7);
         assertThat(new WinningLottoNumbers(winningNumbers, bonusNumber)).isEqualTo(new WinningLottoNumbers(winningNumbers, bonusNumber));
         assertThat(new WinningLottoNumbers(winningNumbers)).isEqualTo(new WinningLottoNumbers(winningNumbers));
+    }
+
+    @DisplayName("당첨번호 6개와 중복되는 보너스 번호를 입력하면 오류가 발생한다")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,4,5,6:1"}, delimiter = ':')
+    void testNotDuplicate(String text, String bonusNumber) {
+        assertThatThrownBy(() -> new WinningLottoNumbers(LottoNumbers.of(text), new LottoNumber(bonusNumber)))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("주어진 번호와 당첨번호가 일치하는 자리수에 따라 당첨순위를 반환한다")
