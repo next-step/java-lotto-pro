@@ -56,7 +56,7 @@ class LottoNumbersTest {
         LottoNumbers winningLottoNumbers = LottoNumbers.fromString(input);
 
         //when
-        int matchCount = userLottoNumbers.matchReduce(winningLottoNumbers);
+        int matchCount = userLottoNumbers.matchWinning(winningLottoNumbers);
 
         //then
         assertThat(matchCount).isEqualTo(resultCount);

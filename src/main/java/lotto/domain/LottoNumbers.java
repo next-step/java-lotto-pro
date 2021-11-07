@@ -35,6 +35,10 @@ public class LottoNumbers {
         return new LottoNumbers(numbers);
     }
 
+    public Rank hit(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        return Rank.valueOf(matchWinning(winningNumbers), matchBonusNumber(bonusNumber));
+    }
+
     private void validation(final List<Integer> numbers) {
         lottoSizeCheck(numbers);
         duplicatedCheck(numbers);
@@ -56,7 +60,7 @@ public class LottoNumbers {
         }
     }
 
-    public int matchReduce(LottoNumbers winningNumbers) {
+    public int matchWinning(LottoNumbers winningNumbers) {
         List<LottoNumber> winningLottoNumbers = winningNumbers.getLottoNumbers();
         int matchCounting = 0;
         for (LottoNumber winningLottoNumber : winningLottoNumbers) {
@@ -81,6 +85,10 @@ public class LottoNumbers {
 
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
+    }
+
+    public boolean hasNumber(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
     }
 
     @Override

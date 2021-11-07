@@ -7,18 +7,18 @@ public class Winning {
     private final LottoNumbers winningNumbers;
     private final LottoNumber bonusNumber;
 
-    private Winning(final LottoNumbers lottoNumbers, final int bonusNumber) {
+    private Winning(final LottoNumbers lottoNumbers, final LottoNumber bonusNumber) {
         this.winningNumbers = lottoNumbers;
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = bonusNumber;
         validationBonusNumber();
     }
 
     public static Winning of(final LottoNumbers lottoNumbers, final int bonusNumber) {
-        return new Winning(lottoNumbers, bonusNumber);
+        return new Winning(lottoNumbers, new LottoNumber(bonusNumber));
     }
 
     private void validationBonusNumber() {
-        if (winningNumbers.getLottoNumbers().contains(bonusNumber)) {
+        if (winningNumbers.hasNumber(bonusNumber)) {
             throw new DuplicateWinningNumberException();
         }
     }
