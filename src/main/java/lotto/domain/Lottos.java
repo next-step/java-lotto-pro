@@ -16,7 +16,7 @@ public class Lottos implements Iterable<Lotto> {
     public static List<Lotto> buyLotto(Money money) {
         List<Lotto> lottos = new ArrayList<Lotto>();
         for (int i = 0; i < money.buyableQuantity(); i++) {
-            lottos.add(new Lotto(RandomGeneratorUtils.makeRandomNumbers()));
+            lottos.add(Lotto.buyAuto());
         }
         return lottos;
     }
