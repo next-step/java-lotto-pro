@@ -30,6 +30,7 @@ public class Checker {
         return (int) game.getNumbers().stream()
             .filter(number -> winningNumbers.getValues()
                     .stream()
+                    .map(winningNumber -> winningNumber.getValue())
                     .anyMatch(Predicate.isEqual(number)))
             .count();
     }

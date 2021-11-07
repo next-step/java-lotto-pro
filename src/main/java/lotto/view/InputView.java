@@ -38,7 +38,7 @@ public class InputView {
             Input input = new InputWinNumbers();
             String value = input.getValue();
             return new WinningNumbers(value);
-        } catch (InvalidInputException e) {
+        } catch (InvalidInputException | NumberFormatException e) {
             System.out.println(e.getMessage());
             return inputWinningNumbers();
         }

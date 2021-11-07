@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.exception.InvalidInputException;
+import lotto.model.WinningNumber;
 import lotto.model.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,8 +27,8 @@ public class WinningNumberTests {
                 () -> assertThat(winningNumbers.getValues()).isInstanceOf(List.class),
                 () -> assertThat(winningNumbers.getValues().size()).isEqualTo(GET_NUMBER_COUNT),
                 () -> {
-                    for (Integer value : winningNumbers.getValues()) {
-                        assertThat(value)
+                    for (WinningNumber winningNumber : winningNumbers.getValues()) {
+                        assertThat(winningNumber.getValue())
                                 .isInstanceOf(Integer.class)
                                 .isPositive()
                                 .isGreaterThanOrEqualTo(MIN_RANGE_VALUE)
