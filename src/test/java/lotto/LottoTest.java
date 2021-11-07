@@ -155,5 +155,16 @@ public class LottoTest {
         assertThat(lottos.count()).isEqualTo(3);
     }
 
+    @DisplayName("수동으로 발행한 로또와 자동으로 발행한 로또를 합치는 기능 테스트")
+    @Test
+    public void addLottosTest() {
+
+        LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerator());
+        List<String> numbers = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
+        Lottos manualLottos = lottoMachine.issueManual(numbers);
+        Lottos autoLottos = lottoMachine.issueAuto(new PurchaseAmount(11_000));
+        manualLottos.addLottos(autoLottos);
+        assertThat(manualLottos.count()).isEqualTo(14);
+    }
 
 }
