@@ -3,6 +3,7 @@ package lotto.auto;
 import lotto.domain.LotteryTicket;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Record;
+import lotto.domain.WinningLottoNumbers;
 
 import java.io.PrintStream;
 
@@ -22,7 +23,7 @@ public class SecondState implements State {
 
     @Override
     public void printResult(String text, PrintStream out) {
-        secondStateView.printResult(out, new Record(lotteryTicket, LottoNumbers.of(text)));
+        secondStateView.printResult(out, new Record(lotteryTicket, new WinningLottoNumbers(LottoNumbers.of(text))));
     }
 
     @Override

@@ -14,9 +14,9 @@ public class LotteryTicket {
         return lottoNumbersList.size();
     }
 
-    public void writeRecord(Record record, LottoNumbers winningNumber) {
+    public void writeRecord(Record record, WinningLottoNumbers winningNumber) {
         for (LottoNumbers numbers : lottoNumbersList) {
-            Rank rank = numbers.getRank(winningNumber);
+            Rank rank = winningNumber.getRank(numbers);
             record.increaseMatchedCount(rank);
         }
     }

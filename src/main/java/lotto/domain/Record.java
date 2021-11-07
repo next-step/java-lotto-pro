@@ -11,13 +11,13 @@ public class Record {
     private final Money totalPayment;
     private final Money totalWinningMoney;
 
-    public Record(LotteryTicket lotteryTicket, LottoNumbers winningNumber) {
+    public Record(LotteryTicket lotteryTicket, WinningLottoNumbers winningNumber) {
         initRecord(lotteryTicket, winningNumber);
         this.totalPayment = Money.of(calcTotalPayment(lotteryTicket));
         this.totalWinningMoney = calcTotalWinningMoney();
     }
 
-    private void initRecord(LotteryTicket lotteryTicket, LottoNumbers winningNumber) {
+    private void initRecord(LotteryTicket lotteryTicket, WinningLottoNumbers winningNumber) {
         lotteryTicket.writeRecord(this, winningNumber);
     }
 
