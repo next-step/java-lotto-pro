@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import lotto.exception.LottoException;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoResult;
 import lotto.model.Lottos;
@@ -41,6 +42,10 @@ public class OutputView {
 
 	public static void printYieldResult(LottoResult lottoResult) {
 		System.out.println(convertYieldToString(lottoResult));
+	}
+
+	public static void printErrorMessage(LottoException lottoException) {
+		System.out.println(lottoException.getMessage());
 	}
 
 	public static List<String> convertRankMapToStringList(LottoResult lottoResult) {

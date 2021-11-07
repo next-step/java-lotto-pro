@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import lotto.code.ErrorCode;
+import lotto.exception.LottoException;
 import lotto.util.SplitUtil;
 
 public class WinningLottoNumbers {
@@ -21,7 +23,7 @@ public class WinningLottoNumbers {
 
 	private void isNotLottoNumberSize(String input) {
 		if (SplitUtil.splitInputNumbers(input).length != LottoNumbers.LOTTO_NUMBERS_SIZE) {
-			throw new IllegalArgumentException();
+			throw new LottoException(ErrorCode.IS_NOT_LOTTO_NUMBER_SIZE_ERROR);
 		}
 	}
 
@@ -29,7 +31,7 @@ public class WinningLottoNumbers {
 		Set<String> lottoNumberSet = new HashSet<>(Arrays.asList(SplitUtil.splitInputNumbers(input)));
 
 		if (lottoNumberSet.size() != LottoNumbers.LOTTO_NUMBERS_SIZE) {
-			throw new IllegalArgumentException();
+			throw new LottoException(ErrorCode.LOTTO_NUMBER_DUPLICATE_ERROR);
 		}
 	}
 

@@ -99,5 +99,4 @@ class WinningLottoNumbersTest {
 		//then
 		assertThat(resultCount).isEqualTo(containsCount);
 	}
-
 }

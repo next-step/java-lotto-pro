@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.code.ErrorCode;
+import lotto.exception.LottoException;
+
 @DisplayName("로또 번호 테스트")
 class LottoNumberTest {
 
@@ -18,7 +21,8 @@ class LottoNumberTest {
 		// given // when // then
 		assertThatThrownBy(() -> {
 			new LottoNumber(outNumber);
-		}).isInstanceOf(IllegalArgumentException.class);
+		}).isInstanceOf(LottoException.class)
+			.hasMessageContaining(ErrorCode.OUT_OF_LOTTO_NUMBER_RANGE_ERROR.getErrorMessage());
 	}
 
 	@DisplayName("로또번호 생성시 랜덤 값으로 생성하는 테스트")

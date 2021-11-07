@@ -2,6 +2,8 @@ package lotto.model;
 
 import java.util.Objects;
 
+import lotto.code.ErrorCode;
+import lotto.exception.LottoException;
 import lotto.util.RandomUtil;
 
 public class LottoNumber {
@@ -25,7 +27,7 @@ public class LottoNumber {
 
 	private int isNumberInLottoNumberRange(int number) {
 		if (validLottoNumber(number)) {
-			throw new IllegalArgumentException();
+			throw new LottoException(ErrorCode.OUT_OF_LOTTO_NUMBER_RANGE_ERROR);
 		}
 		return number;
 	}

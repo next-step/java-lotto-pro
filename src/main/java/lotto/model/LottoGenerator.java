@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import lotto.code.ErrorCode;
+import lotto.exception.LottoException;
+
 public class LottoGenerator {
 	public static final int LOTTO_PRICE = 1000;
 	private static final String NUMBER_REGEX = "[0-9]+";
@@ -21,13 +24,13 @@ public class LottoGenerator {
 
 	private void validNullOrEmpty(String input) {
 		if (isNullOrEmpty(input)) {
-			throw new IllegalArgumentException();
+			throw new LottoException(ErrorCode.INVALID_INPUT_NULL_VALUE_ERROR);
 		}
 	}
 
 	private void validNumber(String input) {
 		if (isNumber(input)) {
-			throw new IllegalArgumentException();
+			throw new LottoException(ErrorCode.INVALID_INPUT_NUMBER_ERROR);
 		}
 	}
 
@@ -41,7 +44,7 @@ public class LottoGenerator {
 
 	private void validUnderLottoPrice(String input) {
 		if (isUnderLottoPrice(input)) {
-			throw new IllegalArgumentException();
+			throw new LottoException(ErrorCode.UNDER_LOTTO_PRICE_ERROR);
 		}
 	}
 
