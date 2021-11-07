@@ -11,7 +11,7 @@ public class OutputView {
 	private static final String PRINT_WINNING_INFORMATION = "%d개 일치 (%d원)- %d개";
 	private static final String PRINT_PROFIT_RATE = "총 수익률은 %.2f입니다.";
 
-	private static Scanner scanner = new Scanner(System.in);
+	private static final Scanner scanner = new Scanner(System.in);
 
 	public static void printMessage(String message) {
 		System.out.println(message);
