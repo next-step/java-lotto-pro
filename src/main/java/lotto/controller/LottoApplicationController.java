@@ -1,7 +1,14 @@
-package lotto;
+package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import lotto.domain.Lotto;
+import lotto.domain.LottoStatistics;
+import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningNumbers;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoApplicationController {
 	private static final int PURCHASE_FINISH = 0;

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public class MatchedNumber {
 	private static final int WINNER_MIN_BOUNDARY_VALUE = 3;

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public class PurchaseAmount {
 	private static final String ERROR_PURCHASE_AMOUNT_TYPE = "[ERROR] 구매금액은 숫자만 입력가능합니다.";

@@ -1,7 +1,9 @@
-package lotto;
+package lotto.view;
 
 import java.util.List;
 import java.util.Scanner;
+
+import lotto.domain.WinningInformation;
 
 public class OutputView {
 	private static final String PRINT_PURCHASE_QUANTITY = "%d개를 구매했습니다.";
