@@ -19,7 +19,7 @@ public class LottoTest {
 
     @DisplayName("로또 발행 테스트")
     @Test
-    public void lottoIssueTest() {
+    public void lottoIssueAutoTest() {
         PurchaseAmount amount = new PurchaseAmount(1_000);
         LottoMachine lottoMachine = new LottoMachine(digit -> Arrays.asList(1, 2, 6, 10, 17, 42));
         Lottos lottos = lottoMachine.issueAuto(amount);
@@ -148,11 +148,12 @@ public class LottoTest {
 
     @DisplayName("수동으로 로또 발행 기능 테스트")
     @Test
-    public void manualByLotto() {
+    public void lottoIssueManualTest() {
         LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerator());
         List<String> numbers = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
         Lottos lottos = lottoMachine.issueManual(numbers);
         assertThat(lottos.count()).isEqualTo(3);
     }
+
 
 }
