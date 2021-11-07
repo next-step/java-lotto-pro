@@ -2,11 +2,9 @@ package lottoservice.matcher;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -15,10 +13,8 @@ import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.lottonumber.LottoArrangeManipulator;
 import lottoservice.lottonumber.LottoNumber;
 import lottoservice.lottonumber.LottoNumbersMaker;
-import lottoservice.lottoticket.LottoTicket;
-import lottoservice.lottoticket.LottoTickets;
 
-public class LottoWinningNumbersTest {
+public class WinningNumbersTest {
 
 	private static int SIZE_OF_LOTTERY_NUMBERS = 6;
 
@@ -27,11 +23,11 @@ public class LottoWinningNumbersTest {
 	@Test
 	public void makeLottoWinningNumbers_당첨번호_생성() {
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(Arrays.asList(3, 34, 22, 17, 26, 7));
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
+		WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
 
-		assertThat(lottoWinningNumbers.sizeOfWinningNumbers()).isEqualTo(lottoNumbers.size());
+		assertThat(winningNumbers.sizeOfWinningNumbers()).isEqualTo(lottoNumbers.size());
 
-		lottoNumbers.stream().forEach(it -> assertThat(lottoWinningNumbers.hasMatchNumber(it)).isTrue());
+		lottoNumbers.stream().forEach(it -> assertThat(winningNumbers.hasMatchNumber(it)).isTrue());
 	}
 
 	@Test
@@ -39,7 +35,7 @@ public class LottoWinningNumbersTest {
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(Arrays.asList(3, 34, 22, 17, 3, 7));
 
 		assertThatThrownBy(() -> {
-			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
+			WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
@@ -48,7 +44,7 @@ public class LottoWinningNumbersTest {
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 22, 17, 3, 7));
 
 		assertThatThrownBy(() -> {
-			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
+			WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
@@ -57,7 +53,7 @@ public class LottoWinningNumbersTest {
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 22, 17, 3, 7, 30, 45));
 
 		assertThatThrownBy(() -> {
-			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
+			WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
@@ -65,18 +61,18 @@ public class LottoWinningNumbersTest {
 	@ValueSource(strings = {"1, 31, 22, 15, 4, 7", "2, 43, 33, 25, 6, 7"})
 	public void makeLottoWinningNumbers_당첨번호_문자열_입력(String lottoNumberText) {
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(lottoNumberText);
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
+		WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
 
-		assertThat(lottoWinningNumbers.sizeOfWinningNumbers()).isEqualTo(lottoNumbers.size());
+		assertThat(winningNumbers.sizeOfWinningNumbers()).isEqualTo(lottoNumbers.size());
 
-		lottoNumbers.stream().forEach(it -> assertThat(lottoWinningNumbers.hasMatchNumber(it)).isTrue());
+		lottoNumbers.stream().forEach(it -> assertThat(winningNumbers.hasMatchNumber(it)).isTrue());
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {"1, 31, 22, 15, 4, 7, 5", "2, 43, 33, 25, 6"})
 	public void makeLottoWinningNumbers_당첨번호_문자열_입력_로또갯수_예외(String lottoNumberText) {
 		assertThatThrownBy(() -> {
-			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
+			WinningNumbers winningNumbers = new WinningNumbers(
 				lottoNumbersMaker.makeLottoNumbers(lottoNumberText));
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
@@ -85,7 +81,7 @@ public class LottoWinningNumbersTest {
 	@ValueSource(strings = {"1,31,22,15,4,7", " 2, 43, 33, 25, 6, 10", "2, 43, 33, 25, 6, 10 ", "2 43 33 25 6 10"})
 	public void makeLottoWinningNumbers_당첨번호_문자열_입력_포맷_예외(String lottoNumberText) {
 		assertThatThrownBy(() -> {
-			LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
+			WinningNumbers winningNumbers = new WinningNumbers(
 				lottoNumbersMaker.makeLottoNumbers(lottoNumberText));
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}

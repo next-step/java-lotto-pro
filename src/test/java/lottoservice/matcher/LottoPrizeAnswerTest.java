@@ -25,10 +25,10 @@ public class LottoPrizeAnswerTest {
 	public void 당첨정답_생성() {
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(
 			Arrays.asList(1, 22, 3, 7, 30, 45));
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
+		WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
 		int number=17;
 		BonusNumber bonusNumber = new BonusNumber(number);
-		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(lottoWinningNumbers,bonusNumber);
+		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(winningNumbers,bonusNumber);
 
 		lottoNumbers.stream().forEach(it->
 			assertThat(lottoPrizeAnswer.hasNumberInWinningNumbers(it)).isEqualTo(true));
@@ -39,11 +39,11 @@ public class LottoPrizeAnswerTest {
 	public void 당첨정답_생성_보너스번호와_당첨번호_중복() {
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(
 			Arrays.asList(1, 22, 3, 7, 30, 45));
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
+		WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
 		int number=22;
 		BonusNumber bonusNumber = new BonusNumber(number);
 		assertThatThrownBy(()->{
-			LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(lottoWinningNumbers,bonusNumber);
+			LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(winningNumbers,bonusNumber);
 		}).isInstanceOf(DuplicateBonusNumberAndWinningNumbers.class);
 	}
 
@@ -53,7 +53,7 @@ public class LottoPrizeAnswerTest {
 		int number=17;
 		List<LottoNumber> winningNumbers = lottoNumbersMaker.makeLottoNumbers(
 			Arrays.asList(1, 22, 3, 7, 30, 45));
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
+		WinningNumbers lottoWinningNumbers = new WinningNumbers(winningNumbers);
 		BonusNumber bonusNumber = new BonusNumber(number);
 		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(lottoWinningNumbers,bonusNumber);
 
@@ -70,7 +70,7 @@ public class LottoPrizeAnswerTest {
 		int number=17;
 		List<LottoNumber> winningNumbers = lottoNumbersMaker.makeLottoNumbers(
 			Arrays.asList(1, 22, 3, 7, 30, 45));
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers);
+		WinningNumbers lottoWinningNumbers = new WinningNumbers(winningNumbers);
 		BonusNumber bonusNumber = new BonusNumber(number);
 		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(lottoWinningNumbers,bonusNumber);
 
@@ -84,7 +84,7 @@ public class LottoPrizeAnswerTest {
 
 	@Test
 	public void matchWinningAndTickets_정답과_로또티켓들_비교결과() {
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
+		WinningNumbers winningNumbers = new WinningNumbers(
 			lottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
 
 		List<LottoTicket> tickets = new ArrayList<>();
@@ -94,7 +94,7 @@ public class LottoPrizeAnswerTest {
 
 		int number=17;
 		BonusNumber bonusNumber = new BonusNumber(number);
-		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(lottoWinningNumbers,bonusNumber);
+		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(winningNumbers,bonusNumber);
 		LottoMatchResult lottoMatchResult = lottoPrizeAnswer.matchTickets(new LottoTickets(tickets));
 
 		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.ZERO_POINT)).isEqualTo(0);
@@ -105,7 +105,7 @@ public class LottoPrizeAnswerTest {
 
 	@Test
 	public void matchWinningAndTickets_당첨_수익률_계산() {
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
+		WinningNumbers winningNumbers = new WinningNumbers(
 			lottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
 
 		List<LottoTicket> tickets = new ArrayList<>();
@@ -118,7 +118,7 @@ public class LottoPrizeAnswerTest {
 
 		int number=17;
 		BonusNumber bonusNumber = new BonusNumber(number);
-		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(lottoWinningNumbers,bonusNumber);
+		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(winningNumbers,bonusNumber);
 		LottoMatchResult lottoMatchResult = lottoPrizeAnswer.matchTickets(lottoTickets);
 
 		Assertions.assertThat(lottoMatchResult.calculateProfitPercentage()).isEqualTo(2.27);

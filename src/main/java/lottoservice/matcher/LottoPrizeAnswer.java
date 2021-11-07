@@ -8,26 +8,26 @@ import lottoservice.lottoticket.LottoTickets;
 public class LottoPrizeAnswer {
 
 	private static final String ERROR_MESSAGE_DUPLICATE_WINNINGNUMBER_AND_BONUSNUMBER = "당첨번호와 보너스 번호는 중복될 수 없습니다.";
-	private LottoWinningNumbers lottoWinningNumbers;
+	private WinningNumbers winningNumbers;
 	private BonusNumber bonusNumber;
 
 	private LottoPrizeAnswer() {
 	}
 
-	public LottoPrizeAnswer(LottoWinningNumbers lottoWinningNumbers, BonusNumber bonusNumber) {
-		validateNotHasDuplicateNumbers(lottoWinningNumbers, bonusNumber);
-		this.lottoWinningNumbers = lottoWinningNumbers;
+	public LottoPrizeAnswer(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+		validateNotHasDuplicateNumbers(winningNumbers, bonusNumber);
+		this.winningNumbers = winningNumbers;
 		this.bonusNumber = bonusNumber;
 	}
 
-	private void validateNotHasDuplicateNumbers(LottoWinningNumbers lottoWinningNumbers, BonusNumber bonusNumber) {
-		if (lottoWinningNumbers.hasMatchNumber(bonusNumber.getLottoNumber())) {
+	private void validateNotHasDuplicateNumbers(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+		if (winningNumbers.hasMatchNumber(bonusNumber.getLottoNumber())) {
 			throw new DuplicateBonusNumberAndWinningNumbers(ERROR_MESSAGE_DUPLICATE_WINNINGNUMBER_AND_BONUSNUMBER);
 		}
 	}
 
 	public boolean hasNumberInWinningNumbers(LottoNumber lottoNumber) {
-		return lottoWinningNumbers.hasMatchNumber(lottoNumber);
+		return winningNumbers.hasMatchNumber(lottoNumber);
 	}
 
 	public boolean isMatchBonusNumber(LottoNumber lottoNumber) {
@@ -44,7 +44,7 @@ public class LottoPrizeAnswer {
 
 	public LottoMatchRank matchTicket(LottoTicket lottoTicket) {
 		boolean matchBonus = bonusNumber.matchTicket(lottoTicket);
-		int matchCount = lottoWinningNumbers.matchCountWinningAndTicket(lottoTicket);
+		int matchCount = winningNumbers.matchCountWinningAndTicket(lottoTicket);
 		return LottoMatchRank.valueOf(matchCount, matchBonus);
 	}
 }

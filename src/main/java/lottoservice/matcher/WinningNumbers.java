@@ -14,17 +14,17 @@ import lottoservice.lottoticket.LottoTickets;
  * 로또 당첨번호 클래스
  */
 
-public class LottoWinningNumbers {
+public class WinningNumbers {
 
 	private static String ERROR_MESSAGE_INVALID_LOTTO_FORMAT = "로또는 6개의 중복없는 숫자여야 합니다.";
 
 
 	private Set<LottoNumber> winningNumbers;
 
-	private LottoWinningNumbers(){
+	private WinningNumbers(){
 
 	}
-	public LottoWinningNumbers(List<LottoNumber> lottoNumbers) {
+	public WinningNumbers(List<LottoNumber> lottoNumbers) {
 		validateLottoNumberGroupRule(lottoNumbers);
 		winningNumbers = lottoNumbers.stream().collect(Collectors.toSet());
 	}
