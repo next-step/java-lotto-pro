@@ -8,7 +8,7 @@ import lotto.domain.result.*;
 import lotto.dto.*;
 
 public class ResultView {
-    private static final String BUY_NUMBER_OF_TICKETS_STATEMENT = "%d개를 구매했습니다.";
+    private static final String BUY_NUMBER_OF_TICKETS_STATEMENT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String WINNING_STATISTICS_STATEMENT = "당첨 통계";
     private static final String DASH_SEPARATOR = "---------";
     private static final String STATISTICS_DETAIL_STATEMENT = "%d개 일치 (%d원)- %d개";
@@ -22,13 +22,14 @@ public class ResultView {
             .collect(Collectors.toList()));
     }
 
-    private void outputBuyTickets(int size) {
-        System.out.printf(BUY_NUMBER_OF_TICKETS_STATEMENT, size);
+    private void outputBuyTickets(int manualTicketCount, int autoTicketCount) {
+        System.out.print(System.lineSeparator());
+        System.out.printf(BUY_NUMBER_OF_TICKETS_STATEMENT, manualTicketCount, autoTicketCount);
         System.out.print(System.lineSeparator());
     }
 
-    public void outputTickets(List<LottoNumbersDto> lottoNumbersDtos) {
-        outputBuyTickets(lottoNumbersDtos.size());
+    public void outputTickets(int manualTicketCount, List<LottoNumbersDto> lottoNumbersDtos) {
+        outputBuyTickets(manualTicketCount, lottoNumbersDtos.size() - manualTicketCount);
         lottoNumbersDtos
             .forEach(ResultView::outputTicket);
         System.out.print(System.lineSeparator());
