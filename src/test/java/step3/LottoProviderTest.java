@@ -13,20 +13,6 @@ import step3.domain.strategy.numbers.RandomLottoNumbers;
 
 public class LottoProviderTest {
 
-    @Test
-    @DisplayName("buyLotto 메소드 인자만큼 LottoNumbers 생성하는지 테스트")
-    void lottoProviderBuyLotto() {
-        // given
-        int expected = 5;
-
-        // when
-        LottoProvider lottoProvider = new LottoProvider();
-        lottoProvider.buyLotto(expected, new RandomLottoNumbers());
-
-        // then
-        assertThat(lottoProvider.lottoNumbersBundleSize()).isEqualTo(expected);
-    }
-
     @ParameterizedTest
     @CsvSource(value = {"10000:10", "5500:5"}, delimiter = ':')
     @DisplayName("지불 금액에 해당하는 구입가능 최대로 로또 구입")

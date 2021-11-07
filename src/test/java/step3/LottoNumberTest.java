@@ -13,15 +13,6 @@ import step3.domain.constance.LottoConstant;
 
 public class LottoNumberTest {
 
-    @Test
-    @DisplayName("LottoNumber 객체를 생성하고 동등성 비교합니다.")
-    void lottoNumberCreate() {
-        int number = 10;
-        LottoNumber lottoNumber = new LottoNumber(number);
-
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(number));
-    }
-
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46, 100})
     @DisplayName("LottoNumber 는 벗어난 범위의 숫자 생성시 실패 테스트")
