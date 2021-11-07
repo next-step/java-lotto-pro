@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class ResultView {
 
+    private static final String PURCHASED_GAME_COUNT = "%s개를 구매했습니다.";
     private static final String RESULT_TITLE_MESSAGE = "당첨 통계\r\n---------";
     private static final Map<Integer, Integer> PRIZE_MONEY = new HashMap<Integer, Integer>(){{
         put(3, 5_000);
@@ -16,6 +17,10 @@ public class ResultView {
     private static final String MATCHED_RESULT_MESSAGE = "%s개 일치 (%s원)- %s개";
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.";
     private static double totalPrizeMoney = 0.0;
+
+    public static void printPurchasedGameCount(int gameCount) {
+        System.out.println(String.format(PURCHASED_GAME_COUNT, gameCount));
+    }
 
     public static void printResult(LinkedHashMap<Integer, Integer> results) {
         System.out.println(RESULT_TITLE_MESSAGE);

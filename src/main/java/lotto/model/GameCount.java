@@ -13,7 +13,6 @@ public class GameCount {
     public GameCount(int purchaseAmount) {
         validate(purchaseAmount);
         this.count = purchaseAmount / GAME_PRICE;
-        System.out.println(String.format("%s개를 구매했습니다.", this.count));
     }
 
     public int getValue() {
