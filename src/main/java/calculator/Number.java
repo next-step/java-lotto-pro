@@ -26,7 +26,7 @@ public class Number {
     }
 
     private boolean isNullOrEmpty(String numberString) {
-        return numberString == null || "".equals(numberString);
+        return numberString == null || numberString.isEmpty();
     }
 
     public int getNumber() {
