@@ -42,7 +42,7 @@ public class Lotto {
 	 * @param lottoNumberList
 	 */
 	private void addNotDuplicatedNumber(List<Integer> lottoNumberList) {
-		int randomNumber = NumberUtil.getNumberBetweenOneAndFortyFive();
+		int randomNumber = Lottos.getNumberBetweenOneAndFortyFive();
 		if(!lottoNumberList.contains(randomNumber)) {
 			lottoNumberList.add(randomNumber);
 		}
@@ -53,7 +53,10 @@ public class Lotto {
 	 * @param winningNumbers
 	 */
 	public void setWinningNumberMatchesCount(List<Integer> winningNumbers) {
-		this.winningNumberMatchesCount = this.lottoNumbers.stream().filter(number -> winningNumbers.contains(number)).count();
+		this.winningNumberMatchesCount
+				= this.lottoNumbers.stream()
+						.filter(number -> winningNumbers.contains(number))
+						.count();
 	}
 
 	/**

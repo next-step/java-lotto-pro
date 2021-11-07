@@ -3,7 +3,6 @@ package edu.lotto.controller;
 import edu.lotto.constants.MessageConstants;
 import edu.lotto.constants.PatternConstants;
 import edu.lotto.model.Lottos;
-import edu.lotto.utils.NumberUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +34,7 @@ public class AutomaticLotto {
 		System.out.println(MessageConstants.INPUT_PERCHASE_AMOUNT_MESSAGE);
 		Scanner scan = new Scanner(System.in);
 		String amount = scan.next();
-		if (!NumberUtil.checkPerchaseAmountValidation(amount)) {
+		if (!Lottos.checkPerchaseAmountValidation(amount)) {
 			amount = getPerchaseAmount();
 		}
 		return amount;
@@ -62,7 +61,7 @@ public class AutomaticLotto {
 		System.out.println("\n"+MessageConstants.INPUT_LATEST_WINNING_NUMBERS_MESSAGE);
 		Scanner scan = new Scanner(System.in);
 		String winningNumbers = scan.next().trim();
-		if (!NumberUtil.checkInputWinningNumbersValidation(winningNumbers)) {
+		if (!Lottos.checkInputWinningNumbersValidation(winningNumbers)) {
 			System.out.println(MessageConstants.LATEST_WINNING_NUMBERS_ERROR_MESSAGE);
 			winningNumbers = getLatestWinningNumbersByUserInput();
 		}
