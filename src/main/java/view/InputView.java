@@ -2,12 +2,15 @@ package view;
 
 import static view.InputMessage.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import model.BonusBall;
 import model.Count;
 import model.LastWeekWinningNumber;
 import model.Lotto;
+import model.Lottos;
 import model.Money;
 import model.PurchaseCount;
 
@@ -21,9 +24,24 @@ public class InputView {
 	}
 
 	public static PurchaseCount printManualPurchaseCountMessageAndInput(Money money) {
+		nextLine();
 		printManualPurchaseCountMessage();
 		return inputForManualCountUntilValid(sc.nextLine(), money);
 	}
+
+	public static Lottos printManualLottoNumberMessageAndInput(PurchaseCount purchaseCount) {
+		nextLine();
+		printManualLottoNumberMessage();
+
+		List<Lotto> lottoList = new ArrayList<>();
+		for (int i = 0; i < purchaseCount.getValue(); i++) {
+			Lotto lotto = inputForManualLottoNumberUntilValid(sc.nextLine());
+			lottoList.add(lotto);
+		}
+
+		return Lottos.of(lottoList);
+	}
+
 
 	public static LastWeekWinningNumber printLastWeekWinningNumberAndInput() {
 		printLastWeekWinningNumberMessage();
@@ -60,8 +78,8 @@ public class InputView {
 		System.out.println(ERROR_PURCHASE_AMOUNT_MESSAGE);
 	}
 
-	public static void printErrorLastWeekWinningNumberInvalidation() {
-		System.out.println(ERROR_LAST_WEEK_WINNING_NUMBER_MESSAGE);
+	public static void printErrorLottoNumberInvalidation() {
+		System.out.println(ERROR_LOTTO_NUMBER_MESSAGE);
 	}
 
 	private static Money inputForPurchaseAmountUntilValid(String money) {
@@ -75,15 +93,16 @@ public class InputView {
 
 	private static LastWeekWinningNumber inputForLastWeekWinningNumberUntilValid(String lastWeekNumber) {
 		while (!LastWeekWinningNumber.validate(lastWeekNumber)) {
-			InputView.printErrorLastWeekWinningNumberInvalidation();
+			InputView.printErrorLottoNumberInvalidation();
 			lastWeekNumber = sc.nextLine();
 		}
 
 		return LastWeekWinningNumber.of(lastWeekNumber);
 	}
 
-	private static BonusBall inputForBonusBallUntilValid(String bonusBall, LastWeekWinningNumber lastWeekWinningNumber) {
-		while(!(BonusBall.validate(bonusBall) && lastWeekWinningNumber.isNotContain(bonusBall))) {
+	private static BonusBall inputForBonusBallUntilValid(String bonusBall,
+		LastWeekWinningNumber lastWeekWinningNumber) {
+		while (!(BonusBall.validate(bonusBall) && lastWeekWinningNumber.isNotContain(bonusBall))) {
 			InputView.printErrorBonusBallInvalidation();
 			bonusBall = sc.nextLine();
 		}
@@ -100,6 +119,15 @@ public class InputView {
 		}
 
 		return PurchaseCount.from(manualCount);
+	}
+
+	private static Lotto inputForManualLottoNumberUntilValid(String numbers) {
+		while(!Lotto.validate(numbers)) {
+			InputView.printErrorLottoNumberInvalidation();
+			numbers = sc.nextLine();
+		}
+
+		return Lotto.of(numbers);
 	}
 
 	private static void printErrorBonusBallInvalidation() {

@@ -9,7 +9,7 @@ import model.Lottos;
 import model.MatchResult;
 import model.MatchingNumberCount;
 import model.Money;
-import model.PurchaseCount;
+import model.Purchase;
 
 public class ResultView {
 
@@ -17,8 +17,9 @@ public class ResultView {
 	public static final String OPEN_SQUARE_BRACKET = "[";
 	public static final String CLOSE_SQUARE_BRACKET = "]";
 
-	public static void printPurchaseVolumeMessage(PurchaseCount purchaseCount) {
-		System.out.println(String.format(PURCHASE_MESSAGE, purchaseCount));
+	public static void printPurchaseInfoMessage(Purchase purchase) {
+		nextLine();
+		System.out.println(String.format(PURCHASE_MESSAGE, purchase.getManualCount(), purchase.getAutoCount()));
 	}
 
 	public static void printWinningStatisticsMessage(MatchResult matchResult, Money purchaseMoney) {

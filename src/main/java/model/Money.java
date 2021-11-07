@@ -10,6 +10,10 @@ public class Money {
 		this.value = BigDecimal.valueOf(value);
 	}
 
+	private Money(BigDecimal value) {
+		this.value = value;
+	}
+
 	public static boolean validate(String moneyString) {
 		return moneyString.matches(Regex.NUMBER)
 			&& Integer.parseInt(moneyString) >= Lotto.COST;
@@ -61,5 +65,9 @@ public class Money {
 	@Override
 	public String toString() {
 		return String.valueOf(value);
+	}
+
+	public Money remainMoney(Money money) {
+		return new Money(value.subtract(money.value));
 	}
 }

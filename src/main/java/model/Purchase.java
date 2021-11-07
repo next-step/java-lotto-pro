@@ -5,8 +5,16 @@ public class Purchase {
 
 	private Manual manual;
 
-	public Manual getManual() {
-		return manual;
+	public Purchase(PurchaseCount autoCount, Manual manual) {
+		this.autoCount = autoCount;
+		this.manual = manual;
+	}
+
+	public static Purchase of(Money money, PurchaseCount manualCount, Lottos manualLottos) {
+		Money remainMoney = money.remainMoney(Money.of(Lotto.COST, Count.from(manualCount.getValue())));
+		PurchaseCount autoCount = remainMoney.purchaseableCount(Money.of(Lotto.COST));
+
+		return new Purchase(autoCount, new Manual(manualCount, manualLottos));
 	}
 
 	public PurchaseCount getManualCount() {

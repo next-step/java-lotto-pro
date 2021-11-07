@@ -1,7 +1,9 @@
 package model;
 
 import static java.util.stream.Collectors.*;
+import static model.CommonString.*;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -32,6 +34,14 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
+	public static Lotto of(String numbersWithComma) {
+		Set<Integer> numbers = Arrays.stream(splitToEachNumber(numbersWithComma))
+			.map(Integer::parseInt)
+			.collect(toSet());
+
+		return Lotto.createByManual(numbers);
+	}
+
 	public static Lotto createByAuto() {
 		Collections.shuffle(numberCandidates);
 
@@ -44,7 +54,7 @@ public class Lotto {
 	public static Lotto createByManual(Set<Integer> numbers) {
 		Set<LottoNumber> lottoNumbers = numbers.stream()
 			.map(LottoNumber::of)
-			.collect(toSet());
+			.collect(toCollection(TreeSet::new));
 
 		return new Lotto(lottoNumbers);
 	}
@@ -78,6 +88,33 @@ public class Lotto {
 
 	public boolean isContains(LottoNumber lottoNumber) {
 		return numbers.contains(lottoNumber);
+	}
+
+	public static boolean validate(String value) {
+		String[] strings = value.replaceAll(Regex.SPACE, EMPTY_STRING)
+			.split(COMMA);
+
+		if (strings.length != NUMBER_COUNT) {
+			return false;
+		}
+
+		return Arrays.stream(strings)
+			.allMatch(string -> string.matches(Regex.NUMBER))
+			&& isValidNumber(strings);
+	}
+
+	private static boolean isValidNumber(String[] strings) {
+		Set<Integer> numbers = Arrays.stream(strings)
+			.map(Integer::parseInt)
+			.collect(toSet());
+
+		return isNotDuplicatedNumber(numbers)
+			&& isValidLottoNumber(numbers);
+	}
+
+	private static String[] splitToEachNumber(String lastWeekWinningNumber) {
+		return lastWeekWinningNumber.replaceAll(Regex.SPACE, EMPTY_STRING)
+			.split(COMMA);
 	}
 
 	public Set<LottoNumber> getNumbers() {

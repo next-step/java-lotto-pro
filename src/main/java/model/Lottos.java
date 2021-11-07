@@ -10,17 +10,12 @@ public class Lottos {
 		this.values = values;
 	}
 
-	public static PurchaseCount purchaseCountFrom(Money money) {
-		return money.purchaseableCount(Money.of(Lotto.COST));
+	public static Lottos of(List<Lotto> lottos) {
+		return new Lottos(lottos);
 	}
 
-	public static Lottos purchase(PurchaseCount purchaseCount) {
-		List<Lotto> values = new ArrayList<>();
-		for (int i = 0; i < purchaseCount.getValue(); i++) {
-			values.add(Lotto.createByAuto());
-		}
-
-		return new Lottos(values);
+	public static PurchaseCount purchaseCountFrom(Money money) {
+		return money.purchaseableCount(Money.of(Lotto.COST));
 	}
 
 	public static Lottos purchase(Purchase purchase) {
