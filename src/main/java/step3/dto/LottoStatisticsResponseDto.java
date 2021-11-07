@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import step3.domain.LottoRank;
 import step3.domain.LottoRanks;
 import step3.domain.LottoResult;
 
@@ -19,12 +18,14 @@ public class LottoStatisticsResponseDto {
         List<LottoResultDto> lottoResultDtos = new ArrayList<>();
         LottoRanks lottoRanks = lottoResult.getLottoRanks();
 
-        for (LottoRank lottoRank : lottoRanks.getLottoRanks()) {
+        for (LottoRanks.LottoRankResult lottoRank : lottoRanks.getLottoRankResults()) {
             LottoResultDto lottoResultDto = new LottoResultDto(
-                lottoRank.matchNumber,
-                lottoRank.matchCount,
-                lottoRank.prize);
-            
+                lottoRank.getLottoRank().matchNumber,
+                lottoRank.getLottoRank().prize,
+                lottoRank.getLottoRank().name(),
+                lottoRank.getWinningCount()
+            );
+
             lottoResultDtos.add(lottoResultDto);
         }
 
@@ -32,6 +33,6 @@ public class LottoStatisticsResponseDto {
     }
 
     public BigDecimal getYield() {
-        return lottoResult.getYield();
+        return lottoResult.getCalculatedYield();
     }
 }

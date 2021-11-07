@@ -54,8 +54,20 @@ public class LottoNumbers {
         return count;
     }
 
+    public boolean isContain(LottoNumber validLottoNumber) {
+        return lottoNumbers.contains(validLottoNumber);
+    }
+
+    public boolean isBonusContain(LottoNumber bonusLottoNumber) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (lottoNumber.equals(bonusLottoNumber))
+                return true;
+        }
+        return false;
+    }
+
     private int containCheckAndIncrementCount(int count, LottoNumber winLottoNumber) {
-        if (lottoNumbers.contains(winLottoNumber)) {
+        if (isContain(winLottoNumber)) {
             count++;
         }
         return count;
@@ -80,7 +92,4 @@ public class LottoNumbers {
         return Objects.hash(lottoNumbers);
     }
 
-    public int size() {
-        return lottoNumbers.size();
-    }
 }

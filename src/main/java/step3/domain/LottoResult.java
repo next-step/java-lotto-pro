@@ -5,16 +5,17 @@ import java.math.RoundingMode;
 
 public class LottoResult {
     private final LottoRanks lottoRanks;
-
-    private final BigDecimal yield;
+    private final Amount amount;
 
     public LottoResult(LottoRanks lottoRanks, Amount amount) {
         this.lottoRanks = lottoRanks;
-        this.yield = calculateYield(lottoRanks, amount);
+        this.amount = amount;
     }
 
-    private BigDecimal calculateYield(LottoRanks lottoRanks, Amount amount) {
-        return BigDecimal.valueOf(lottoRanks.totalPrize())
+    public BigDecimal getCalculatedYield() {
+        Long totalPrize = lottoRanks.totalPrize();
+        
+        return BigDecimal.valueOf(totalPrize)
             .divide(BigDecimal.valueOf(amount.getAmount()))
             .setScale(2, RoundingMode.CEILING);
     }
@@ -23,7 +24,8 @@ public class LottoResult {
         return lottoRanks;
     }
 
-    public BigDecimal getYield() {
-        return yield;
+    public Long getTotalPrize() {
+        return lottoRanks.totalPrize();
     }
+
 }

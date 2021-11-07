@@ -18,11 +18,13 @@ public class LottoNumbersBundle {
         lottoNumbersBundle.add(lottoNumbers);
     }
 
-    public LottoRanks lottoRanksOf(LottoNumbers winLottoNumbers) {
+    public LottoRanks lottoRanksOf(LottoNumbers winLottoNumbers, LottoNumber bonusLottoNumber) {
         LottoRanks lottoRanks = new LottoRanks();
 
         for (LottoNumbers lottoNumbers : lottoNumbersBundle) {
-            lottoRanks.matchOfMatchCount(lottoNumbers.containCount(winLottoNumbers));
+            int matchCount = lottoNumbers.containCount(winLottoNumbers);
+            boolean isBonusMatch = lottoNumbers.isBonusContain(bonusLottoNumber);
+            lottoRanks.matchIncrementCount(matchCount, isBonusMatch);
         }
 
         return lottoRanks;

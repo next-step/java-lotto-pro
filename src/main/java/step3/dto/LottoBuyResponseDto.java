@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import step3.domain.LottoNumbers;
-import step3.domain.LottoNumbersBundle;
 
 public class LottoBuyResponseDto {
     private final List<LottoNumbers> buyLottoList;
@@ -20,5 +19,4 @@ public class LottoBuyResponseDto {
         }
         return result;
     }
-
 }

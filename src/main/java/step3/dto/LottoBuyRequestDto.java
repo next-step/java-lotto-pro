@@ -6,7 +6,7 @@ import step3.domain.LottoNumbersBundle;
 public class LottoBuyRequestDto {
     private Amount amount;
 
-    public void mapAmount(int amount) {
+    public LottoBuyRequestDto(int amount) {
         this.amount = new Amount(amount);
     }
 

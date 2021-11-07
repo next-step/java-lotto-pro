@@ -18,9 +18,9 @@ public class InputView {
 
     public static int readOnlyNumber() {
         try {
-            return sc.nextInt();
+            return Integer.parseInt(getIntScanner());
         } catch (InvalidParamException invalidParamException) {
-            ResultView.println(ONLY_NUMBER);
+            ResultView.println(invalidParamException.getMessage());
             return readOnlyNumber();
         }
     }
@@ -32,10 +32,8 @@ public class InputView {
     public static LottoBuyRequestDto readLottoRequestDto() {
         try {
             ResultView.amountRequestPrintln();
-            LottoBuyRequestDto lottoRequestDto = new LottoBuyRequestDto();
-            lottoRequestDto.mapAmount(readOnlyNumber());
 
-            return lottoRequestDto;
+            return new LottoBuyRequestDto(readOnlyNumber());
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
             return readLottoRequestDto();
@@ -61,5 +59,13 @@ public class InputView {
             ResultView.println(invalidParamException.getMessage());
             return readLottoBonusNumberRequestDto();
         }
+    }
+
+    private static String getIntScanner() {
+        String result = sc.next();
+        if (!result.chars().allMatch(Character::isDigit)) {
+            throw new InvalidParamException(ONLY_NUMBER);
+        }
+        return result;
     }
 }

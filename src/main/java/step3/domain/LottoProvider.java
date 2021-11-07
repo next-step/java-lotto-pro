@@ -10,7 +10,7 @@ public class LottoProvider {
         for (int i = 0; i < count; i++) {
             lottoNumbersBundle.addLottoNumbers(numbersStrategy);
         }
-        
+
         return lottoNumbersBundle;
     }
 
@@ -22,10 +22,8 @@ public class LottoProvider {
         return lottoNumbersBundle.size();
     }
 
-    public LottoResult getLottoResult(LottoNumbers lottoNumbers, Amount amount) {
-        return new LottoResult(
-            lottoNumbersBundle.lottoRanksOf(lottoNumbers),
-            amount
-        );
+    public LottoResult getLottoResult(LottoNumbers winLottoNumber, Amount amount, LottoNumber bonusLottoNumber) {
+        LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winLottoNumber, bonusLottoNumber);
+        return new LottoResult(lottoRanks, amount);
     }
 }

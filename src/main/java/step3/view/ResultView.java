@@ -8,12 +8,14 @@ import step3.dto.LottoResultDto;
 import step3.dto.LottoStatisticsResponseDto;
 
 public class ResultView {
+    public static final String BONUS_RANK_NAME = "SECOND";
     public static final String TITLE = "당첨 통계\n";
     public static final String DIVIDE = "---------\n";
     public static final String LOTTO_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     public static final String YIELD_MESSAGE_FORMAT = "총 수익률은 %s입니다";
 
     public static final String LOTTO_RANK_FORMAT = "%s개 일치 (%d원)- %d개";
+    public static final String LOTTO_RANK_BONUS_SECOND_FORMAT = "%s개 일치, 보너스 볼 일치(%s원) - %s개";
     private static final String WINNER_NUMBER_REQUEST_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String AMOUNT_REQUEST_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String BONUS_NUMBER_REQUEST_MESSAGE = "보너스 볼을 입력해 주세요.";
@@ -70,9 +72,14 @@ public class ResultView {
     }
 
     private static void lottoResultPrint(LottoResultDto lottoResultDto) {
+        String format = LOTTO_RANK_FORMAT;
+        if (lottoResultDto.getRankName().equals(BONUS_RANK_NAME)) {
+            format = LOTTO_RANK_BONUS_SECOND_FORMAT;
+        }
+
         if (lottoResultDto.getMatchNumber() >= 3) {
             println(String.format(
-                LOTTO_RANK_FORMAT,
+                format,
                 lottoResultDto.getMatchNumber(),
                 lottoResultDto.getPrize(),
                 lottoResultDto.getMatchCount()
