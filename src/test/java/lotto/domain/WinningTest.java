@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,18 +17,22 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class WinningTest {
 
     static Stream<Arguments> matchCalculationParametersProvider() {
+        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
         return Stream.of(
-                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 6, 5, 4)),
-                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 6, 5)),
-                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7)),
-                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6))
+                arguments(lottoNumbers, Arrays.asList(1, 2, 3, 6, 5, 4)),
+                arguments(lottoNumbers, Arrays.asList(1, 2, 3, 4, 6, 5)),
+                arguments(lottoNumbers, Arrays.asList(1, 2, 3, 4, 5, 7)),
+                arguments(lottoNumbers, Arrays.asList(1, 2, 3, 4, 5, 6))
         );
     }
 
     @DisplayName("당첨 번호 일치 계산")
     @ParameterizedTest
     @MethodSource("matchCalculationParametersProvider")
-    void matchCalculation(List<Integer> lottoNumber, List<Integer> winningNumber) {
+    void matchCalculation(List<LottoNumber> lottoNumber, List<Integer> winningNumber) {
         //given
         Lotto lotto = new Lotto(lottoNumber);
 
@@ -43,10 +48,19 @@ class WinningTest {
     void winningResultTest() {
         //given
         List<Lotto> lotto = new ArrayList<>();
-        Lotto winningNumberThreeMatchLotto = new Lotto(Arrays.asList(1, 2, 3, 11, 22, 33));
-        Lotto winningNumberFourMatchLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 11, 22));
-        Lotto winningNumberFiveMatchLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 11));
-        Lotto winningNumberSixMatchLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        Lotto winningNumberThreeMatchLotto = Stream.of(1, 2, 3, 11, 22, 33)
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+        Lotto winningNumberFourMatchLotto = Stream.of(1, 2, 3, 4, 11, 22)
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+        Lotto winningNumberFiveMatchLotto = Stream.of(1, 2, 3, 4, 5, 11)
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+        Lotto winningNumberSixMatchLotto = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
 
         lotto.add(winningNumberThreeMatchLotto);
         lotto.add(winningNumberFourMatchLotto);
