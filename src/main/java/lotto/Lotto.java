@@ -4,33 +4,29 @@ import java.util.*;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
+    public static final String NUMBER_COUNT_MESSAGE = "숫자의 갯수는 6개입니다.";
+    public static final String DUPLICATE_MESSAGE = "중복된 값을 입력하였습니다.";
     private final List<LottoNumber> lotto = new ArrayList<>();
 
     public Lotto(List<Integer> lotto) {
-        if (validateSize(lotto)) {
-            throw new IllegalArgumentException("숫자의 갯수는 6개입니다.");
-        }
-        if (validateDuplicate(lotto)) {
-            throw new IllegalArgumentException("중복된 값을 입력하였습니다.");
-        }
+        validateSize(lotto);
+        validateDuplicate(lotto);
         for (Integer number : lotto) {
             this.lotto.add(new LottoNumber(number));
         }
     }
 
-    private boolean validateSize(List<Integer> lotto) {
-        if(lotto.size() != LOTTO_SIZE) {
-            return  true;
+    private void validateSize(List<Integer> lotto) {
+        if (lotto.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(NUMBER_COUNT_MESSAGE);
         }
-        return false;
     }
 
-    private boolean validateDuplicate(List<Integer> lotto) {
+    private void validateDuplicate(List<Integer> lotto) {
         Set<Integer> lottoSet = new HashSet<>(lotto);
         if (lottoSet.size() != LOTTO_SIZE) {
-            return true;
+            throw new IllegalArgumentException(DUPLICATE_MESSAGE);
         }
-        return false;
     }
 
     @Override
@@ -44,5 +40,13 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lotto);
+    }
+
+    public boolean contains(LottoNumber winningNumber) {
+        return lotto.contains(winningNumber);
+    }
+
+    public List<LottoNumber> getLotto() {
+        return lotto;
     }
 }
