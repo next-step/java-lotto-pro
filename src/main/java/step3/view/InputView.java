@@ -21,12 +21,15 @@ public class InputView {
             return Integer.parseInt(getIntScanner());
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
+
             return readOnlyNumber();
         }
     }
 
     public static int[] readLineToArray() {
-        return Stream.of(sc.next().split(",")).mapToInt(Integer::parseInt).toArray();
+        return Stream.of(sc.next().split(","))
+            .mapToInt(Integer::parseInt)
+            .toArray();
     }
 
     public static LottoBuyRequestDto readLottoRequestDto() {
@@ -47,6 +50,7 @@ public class InputView {
             return new LottoWinNumbersRequestDto(readLineToArray(), amount);
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
+
             return readLottoWinnerRequestDto(amount);
         }
     }
@@ -57,15 +61,18 @@ public class InputView {
             return new LottoBonusNumberRequestDto(readOnlyNumber());
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
+
             return readLottoBonusNumberRequestDto();
         }
     }
 
     private static String getIntScanner() {
         String result = sc.next();
+
         if (!result.chars().allMatch(Character::isDigit)) {
             throw new InvalidParamException(ONLY_NUMBER);
         }
+        
         return result;
     }
 }

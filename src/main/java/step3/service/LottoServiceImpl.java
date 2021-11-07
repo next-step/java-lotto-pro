@@ -19,9 +19,7 @@ public class LottoServiceImpl implements LottoService {
     public LottoBuyResponseDto buyLotto(LottoBuyRequestDto lottoBuyRequestDto, NumbersStrategy numbersStrategy) {
         int quantity = lottoProvider.availableQuantity(lottoBuyRequestDto.getAmount());
 
-        LottoNumbersBundle lottoNumbersBundle = lottoProvider.buyLotto(
-            quantity,
-            numbersStrategy);
+        LottoNumbersBundle lottoNumbersBundle = lottoProvider.buyLotto(quantity, numbersStrategy);
 
         return new LottoBuyResponseDto(lottoNumbersBundle.getLottoNumbersBundle());
     }

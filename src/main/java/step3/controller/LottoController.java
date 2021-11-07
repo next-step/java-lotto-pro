@@ -33,7 +33,7 @@ public class LottoController {
         LottoWinNumbersRequestDto lottoWinNumbersRequestDto = InputView.readLottoWinnerRequestDto(
             lottoRequestDto.getAmountValue());
 
-        // 보너스 볼을 입력해 주세요.
+        // 보너스 볼을 입력
         LottoBonusNumberRequestDto lottoBonusNumberRequestDto = getLottoBonusNumberRequestDto(
             lottoWinNumbersRequestDto);
 
