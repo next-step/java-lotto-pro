@@ -3,7 +3,6 @@ package step3;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -24,7 +23,7 @@ public class LottoRankTest {
         "3:True:FIFTH",
         "0:True:NONE",
     }, delimiter = ':')
-    @DisplayName("LottoRank 랭킹별 상금 테스트")
+    @DisplayName("일치하는 번호 갯수 와 버너스 여부에 따라 LottoRank 일치 검증")
     void valueOf_prize_matching(int matchCount, boolean isBonus, String expected) {
         // given
 

@@ -11,7 +11,7 @@ import step3.domain.Amount;
 public class AmountTest {
 
     @Test
-    @DisplayName("최금액 이하 에러 발생")
+    @DisplayName("최소금액 이하 에러 발생")
     void notEnoughAmountException() {
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {

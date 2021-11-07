@@ -49,6 +49,7 @@ public class LottoServiceImplTest {
 
     @ParameterizedTest
     @MethodSource("getResultStatisticsGenerateData")
+    @DisplayName("구입한 로또번호, 지난주 로또번호, 보너스번호를 입력받고, 로또출력(LottoResultDto) 리턴객체 일치 검증")
     void getResultStatistics(
         NumbersStrategy numbersStrategy,
         int[] winLottoNumbers,

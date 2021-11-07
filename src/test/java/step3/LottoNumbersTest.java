@@ -68,6 +68,7 @@ public class LottoNumbersTest {
         "1,2,3,4,5,6:1,11,10,9,8,7:1",
         "1,2,3,4,5,6:12,11,10,9,8,7:0",
     }, delimiter = ':')
+    @DisplayName("구매로또 번호 와 지난주로또 번호의 일치갯수 일치 검증")
     void containCount(String buyNumbersStr, String winNumbersStr, int expected) {
         // given
         int[] numbers = parseNumbers(buyNumbersStr);

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class LottoResult {
+    private static final int DECIMAL_POINT = 2;
     private final LottoRanks lottoRanks;
     private final Amount amount;
 
@@ -14,10 +15,10 @@ public class LottoResult {
 
     public BigDecimal getCalculatedYield() {
         Long totalPrize = lottoRanks.totalPrize();
-        
+
         return BigDecimal.valueOf(totalPrize)
             .divide(BigDecimal.valueOf(amount.getAmount()))
-            .setScale(2, RoundingMode.CEILING);
+            .setScale(DECIMAL_POINT, RoundingMode.CEILING);
     }
 
     public LottoRanks getLottoRanks() {
