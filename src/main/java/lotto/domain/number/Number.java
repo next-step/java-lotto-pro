@@ -1,6 +1,6 @@
 package lotto.domain.number;
 
-import java.util.Objects;
+import java.util.*;
 
 public abstract class Number {
     private final int number;
@@ -17,9 +17,11 @@ public abstract class Number {
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        final Number number1 = (Number) o;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        final Number number1 = (Number)o;
         return number == number1.number;
     }
 

@@ -1,10 +1,9 @@
 package calculator.domain;
 
-import calculator.exception.NotPermittedPatternException;
+import java.util.*;
+import java.util.regex.*;
 
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import calculator.exception.*;
 
 public class PositiveNumber {
     private static final Pattern POSITIVE_NUMBER_PATTERN = Pattern.compile("^\\d+");
@@ -46,7 +45,7 @@ public class PositiveNumber {
             return true;
         if (!(o instanceof PositiveNumber))
             return false;
-        PositiveNumber that = (PositiveNumber) o;
+        PositiveNumber that = (PositiveNumber)o;
         return positiveNumber == that.positiveNumber;
     }
 

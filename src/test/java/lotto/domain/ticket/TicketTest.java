@@ -1,31 +1,28 @@
 package lotto.domain.ticket;
 
-import lotto.domain.number.MatchedCount;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static lotto.fixture.Fixture.*;
+import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.stream.*;
 
-import static lotto.fixture.Fixture.LOTTO_NUMBER_1_2_3_4_5_6;
-import static lotto.fixture.Fixture.WINNING_LOTTO_NUMBERS_1_2_3_4_5_6;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.*;
+import org.junit.jupiter.params.provider.*;
+
+import lotto.domain.result.*;
 
 class TicketTest {
-    private static Stream<Arguments> provideCalculateResultTest() {
+    private static Stream<Arguments> provideDecideRankByWinningNumbersTest() {
         return Stream.of(
-            Arguments.of(Ticket.from(Arrays.asList(7, 8, 9, 10, 11, 12)), MatchedCount.from(0)),
-            Arguments.of(Ticket.from(Arrays.asList(6, 8, 9, 10, 11, 12)), MatchedCount.from(1)),
-            Arguments.of(Ticket.from(Arrays.asList(5, 6, 9, 10, 11, 12)), MatchedCount.from(2)),
-            Arguments.of(Ticket.from(Arrays.asList(4, 5, 6, 10, 11, 12)), MatchedCount.from(3)),
-            Arguments.of(Ticket.from(Arrays.asList(3, 4, 5, 6, 11, 12)), MatchedCount.from(4)),
-            Arguments.of(Ticket.from(Arrays.asList(2, 3, 4, 5, 6, 12)), MatchedCount.from(5)),
-            Arguments.of(Ticket.from(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchedCount.from(6))
+            Arguments.of(Ticket.from(Arrays.asList(1, 2, 3, 4, 5, 6)), Rank.FIRST),
+            Arguments.of(Ticket.from(Arrays.asList(1, 2, 3, 4, 5, 7)), Rank.SECOND),
+            Arguments.of(Ticket.from(Arrays.asList(1, 2, 3, 4, 5, 8)), Rank.THIRD),
+            Arguments.of(Ticket.from(Arrays.asList(1, 2, 3, 4, 7, 8)), Rank.FOURTH),
+            Arguments.of(Ticket.from(Arrays.asList(1, 2, 3, 7, 8, 9)), Rank.FIFTH),
+            Arguments.of(Ticket.from(Arrays.asList(1, 2, 7, 8, 9, 10)), Rank.MISS),
+            Arguments.of(Ticket.from(Arrays.asList(1, 7, 8, 9, 10, 11)), Rank.MISS),
+            Arguments.of(Ticket.from(Arrays.asList(7, 8, 9, 10, 11, 12)), Rank.MISS)
         );
     }
 
@@ -44,14 +41,14 @@ class TicketTest {
     @DisplayName("정적팩토리 메서드에 null값을 인자로 받으면, 예외를 던진다.")
     @Test
     void exceptionTest() {
-        assertThatThrownBy(() -> Ticket.from((List<Integer>) null)).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> Ticket.from((LottoNumbers) null)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Ticket.from((List<Integer>)null)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Ticket.from((LottoNumbers)null)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("티켓과 우승번호를 입력으로 하는 매칭개수함수를 호출하면 매칭개수 객체를 반환한다.")
+    @DisplayName("티켓과 우승번호를 입력으로 하는 함수를 호출하면 조건에 맞는 Rank 객체를 반환한다.")
     @ParameterizedTest
-    @MethodSource("provideCalculateResultTest")
-    void calculateResultTest(Ticket ticket, MatchedCount expected) {
-        assertThat(ticket.countEqualLottoNumber(WINNING_LOTTO_NUMBERS_1_2_3_4_5_6)).isEqualTo(expected);
+    @MethodSource("provideDecideRankByWinningNumbersTest")
+    void decideRankByWinningNumbersTest(Ticket ticket, Rank expected) {
+        assertThat(ticket.decideRankByWinningNumbers(WINNING_LOTTO_NUMBERS_1_2_3_4_5_6_BONUS_7)).isEqualTo(expected);
     }
 }

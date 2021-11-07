@@ -1,16 +1,14 @@
 package lotto.domain.number;
 
-import lotto.exception.OutOfBoundException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static org.assertj.core.api.Assertions.*;
 
-import java.util.stream.Stream;
+import java.util.stream.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.*;
+import org.junit.jupiter.params.provider.*;
+
+import lotto.exception.*;
 
 class PaymentTest {
     private static Stream<Arguments> provideNumberOfAvailableTicketsTest() {

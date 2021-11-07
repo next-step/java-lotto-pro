@@ -1,6 +1,6 @@
 package lotto.domain.number;
 
-import lotto.exception.OutOfBoundException;
+import lotto.exception.*;
 
 public class Payment extends Money {
     public static final int MINIMUM_MONEY = 1000;

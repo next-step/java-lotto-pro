@@ -1,20 +1,18 @@
 package lotto.view;
 
-import lotto.domain.number.Payment;
-import lotto.domain.result.Rank;
-import lotto.domain.result.Result;
-import lotto.dto.LottoNumbersDto;
+import java.util.*;
+import java.util.stream.*;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import lotto.domain.number.*;
+import lotto.domain.result.*;
+import lotto.dto.*;
 
 public class ResultView {
     private static final String BUY_NUMBER_OF_TICKETS_STATEMENT = "%d개를 구매했습니다.";
     private static final String WINNING_STATISTICS_STATEMENT = "당첨 통계";
     private static final String DASH_SEPARATOR = "---------";
     private static final String STATISTICS_DETAIL_STATEMENT = "%d개 일치 (%d원)- %d개";
+    private static final String STATISTICS_SECOND_DETAIL_STATEMENT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String RETURN_OF_INVESTMENT_STATEMENT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private static void outputTicket(LottoNumbersDto lottoNumbersDto) {
@@ -26,6 +24,7 @@ public class ResultView {
 
     private void outputBuyTickets(int size) {
         System.out.printf(BUY_NUMBER_OF_TICKETS_STATEMENT, size);
+        System.out.print(System.lineSeparator());
     }
 
     public void outputTickets(List<LottoNumbersDto> lottoNumbersDtos) {
@@ -49,7 +48,11 @@ public class ResultView {
     }
 
     private void outputStatisticsDetails(Rank rank, int count) {
-        System.out.printf(STATISTICS_DETAIL_STATEMENT, rank.matchCount(), rank.money(), count);
+        String statisticsDetailString = STATISTICS_DETAIL_STATEMENT;
+        if (rank.equals(Rank.SECOND)) {
+            statisticsDetailString = STATISTICS_SECOND_DETAIL_STATEMENT;
+        }
+        System.out.printf(statisticsDetailString, rank.matchCount(), rank.money(), count);
         System.out.print(System.lineSeparator());
     }
 

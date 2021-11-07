@@ -1,10 +1,10 @@
 package lotto.dto;
 
-import lotto.domain.number.Number;
-import lotto.domain.ticket.LottoNumbers;
+import java.util.*;
+import java.util.stream.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lotto.domain.number.Number;
+import lotto.domain.ticket.*;
 
 public class LottoNumbersDto {
     private final List<Integer> lottoNumbersDto;

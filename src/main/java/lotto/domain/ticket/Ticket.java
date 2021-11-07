@@ -1,9 +1,9 @@
 package lotto.domain.ticket;
 
-import lotto.domain.number.MatchedCount;
+import java.util.*;
 
-import java.util.List;
-import java.util.Objects;
+import lotto.domain.number.*;
+import lotto.domain.result.*;
 
 public class Ticket {
     private static final String NULL_EXCEPTION_STATEMENT = "입력값이 null입니다.";
@@ -36,15 +36,18 @@ public class Ticket {
         }
     }
 
-    public MatchedCount countEqualLottoNumber(LottoNumbers winningNumbers) {
-        return MatchedCount.from(
-            Math.toIntExact(lottoNumbers
-                .lottoNumbers()
+    public Rank decideRankByWinningNumbers(WinningNumbers winningNumbers) {
+        MatchedCount matchedCount = MatchedCount.from(
+            Math.toIntExact(lottoNumbers.lottoNumbers()
                 .stream()
                 .filter(winningNumbers::contains)
-                .count()
-            )
+                .count())
         );
+        return Rank.rankByMatchedCountAndBonusNumber(matchedCount, containsBonusNumber(winningNumbers.bonusNumber()));
+    }
+
+    public boolean containsBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     public LottoNumbers lottoNumbers() {

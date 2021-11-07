@@ -1,10 +1,11 @@
 package lotto.domain.number;
 
-import lotto.exception.OutOfBoundException;
+import lotto.exception.*;
 
 public class MatchedCount extends Number {
     private static final int MATCHED_COUNT_MIN = 0;
     private static final int MATCHED_COUNT_MAX = 6;
+    private static final int MATCHED_COUNT_FIVE = 5;
 
     private MatchedCount(int number) {
         super(number);
@@ -24,6 +25,10 @@ public class MatchedCount extends Number {
         if (number > MATCHED_COUNT_MAX) {
             throw OutOfBoundException.valueIsGreaterThan(number);
         }
+    }
+
+    public boolean isFive() {
+        return number() == MATCHED_COUNT_FIVE;
     }
 
 }

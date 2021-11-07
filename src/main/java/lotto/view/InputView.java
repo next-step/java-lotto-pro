@@ -1,14 +1,11 @@
 package lotto.view;
 
-import lotto.domain.number.Payment;
-import lotto.domain.ticket.LottoNumbers;
-
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.stream.*;
 
 public class InputView {
     private static final String INPUT_PAYMENT = "구입금액을 입력해 주세요.";
+    private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_LAST_WEEK_WINNING_NUMBERS_STATEMENT = "지난 주 당첨 번호를 입력해 주세요.";
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -16,20 +13,23 @@ public class InputView {
         return SCANNER.nextLine().trim();
     }
 
-    public Payment inputPayment() {
+    public int inputPayment() {
         System.out.println(INPUT_PAYMENT);
-        return Payment.from(Integer.parseInt(inputString()));
+        return Integer.parseInt(inputString());
     }
 
-    public LottoNumbers inputLottoNumbers() {
+    public List<Integer> inputLottoNumbers() {
         System.out.println(INPUT_LAST_WEEK_WINNING_NUMBERS_STATEMENT);
-        return LottoNumbers.from(
-            Arrays.stream(
-                    inputString().trim()
-                        .split(","))
-                .map(String::trim)
-                .map(Integer::valueOf)
-                .collect(Collectors.toList())
-        );
+        return Arrays.stream(inputString()
+                .trim()
+                .split(","))
+            .map(String::trim)
+            .map(Integer::valueOf)
+            .collect(Collectors.toList());
+    }
+
+    public int inputBonusNumber() {
+        System.out.println(INPUT_BONUS_NUMBER);
+        return Integer.parseInt(inputString());
     }
 }
