@@ -29,9 +29,9 @@ public class LottoMachine {
         this.activeNumberList = new ArrayList<>();
     }
 
-    public LottoMachine(Money money, List<List<Number>> activeNumberList) {
+    public LottoMachine(Money money, List<List<Integer>> activeNumberList) {
         this.money = money;
-        this.activeNumberList = activeNumberList;
+        this.activeNumberList = convertNumberList(activeNumberList);
     }
 
     public List<LottoNumber> getLottoList() {
@@ -54,6 +54,14 @@ public class LottoMachine {
     private List<LottoNumber> generateActiveLotto() {
         return activeNumberList.stream()
                 .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
+    private List<List<Number>> convertNumberList(List<List<Integer>> activeNumbers) {
+        return activeNumbers.stream()
+                .map(m -> m.stream()
+                        .map(s -> Number.of(s))
+                        .collect(Collectors.toList()))
                 .collect(Collectors.toList());
     }
 

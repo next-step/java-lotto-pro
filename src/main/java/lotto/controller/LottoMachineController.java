@@ -23,7 +23,7 @@ public class LottoMachineController {
     public void run() {
 
         Money money = new Money(getUserInputPurchaseAmount());
-        List<List<Number>> activeNumber = getUserInputActiveNumber();
+        List<List<Integer>> activeNumber = getUserInputActiveNumber();
 
         LottoMachine lottoMachine = new LottoMachine(money, activeNumber);
 
@@ -50,13 +50,9 @@ public class LottoMachineController {
                 .collect(Collectors.toList());
     }
 
-    private List<List<Number>> getUserInputActiveNumber() {
+    private List<List<Integer>> getUserInputActiveNumber() {
         List<List<Integer>> activeNumbers = inputView.getUserInputActiveNumbers();
-        return activeNumbers.stream()
-                .map(m -> m.stream()
-                        .map(s -> Number.of(s))
-                        .collect(Collectors.toList()))
-                .collect(Collectors.toList());
+        return activeNumbers;
     }
 
     private void printMatchResult(LottoResult matchLottoResultList) {
