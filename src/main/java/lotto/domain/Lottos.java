@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import lotto.utils.RandomGeneratorUtils;
-
 public class Lottos implements Iterable<Lotto> {
     private final List<Lotto> lottos;
 

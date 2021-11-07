@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LottoNumbers {
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
+    public static final int LOTTO_NUMBER_QUANTITY = 6;
+    
     private final List<Integer> numbers;
 
     private LottoNumbers(List<Integer> numbers) {
