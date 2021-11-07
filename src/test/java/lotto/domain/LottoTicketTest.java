@@ -77,26 +77,37 @@ class LottoTicketTest {
     @DisplayName("로또 결과 확인")
     @Test
     void winningRank() {
-        Rank first = lottoTicket.winningRank(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoNumber bonusNumber = new LottoNumber(25);
+        Rank first = lottoTicket.createWinningRank(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)), bonusNumber);
         assertEquals(Rank.FIRST, first);
 
-        Rank second = lottoTicket.winningRank(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        assertEquals(Rank.SECOND, second);
-
-        Rank third = lottoTicket.winningRank(new LottoTicket(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        Rank third = lottoTicket.createWinningRank(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7)), bonusNumber);
         assertEquals(Rank.THIRD, third);
 
-        Rank fifth = lottoTicket.winningRank(new LottoTicket(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        Rank fourth = lottoTicket.createWinningRank(new LottoTicket(Arrays.asList(1, 2, 3, 4, 7, 8)), bonusNumber);
+        assertEquals(Rank.FOURTH, fourth);
+
+        Rank fifth = lottoTicket.createWinningRank(new LottoTicket(Arrays.asList(1, 2, 3, 7, 8, 9)), bonusNumber);
         assertEquals(Rank.FIFTH, fifth);
 
-        Rank missByTwo = lottoTicket.winningRank(new LottoTicket(Arrays.asList(1, 2, 7, 8, 9, 10)));
+        Rank missByTwo = lottoTicket.createWinningRank(new LottoTicket(Arrays.asList(1, 2, 7, 8, 9, 10)), bonusNumber);
         assertEquals(Rank.MISS, missByTwo);
 
-        Rank missByOne = lottoTicket.winningRank(new LottoTicket(Arrays.asList(1, 7, 8, 9, 10, 11)));
+        Rank missByOne = lottoTicket.createWinningRank(new LottoTicket(Arrays.asList(1, 7, 8, 9, 10, 11)), bonusNumber);
         assertEquals(Rank.MISS, missByOne);
 
-        Rank missByZero = lottoTicket.winningRank(new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        Rank missByZero = lottoTicket.createWinningRank(new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)), bonusNumber);
         assertEquals(Rank.MISS, missByZero);
+    }
+
+    @DisplayName("로또 2등 결과 확인")
+    @Test
+    void winningRankSecond() {
+        int bonus = 25;
+        LottoNumber bonusNumber = new LottoNumber(bonus);
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, bonus));
+        Rank second = lottoTicket.createWinningRank(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)), bonusNumber);
+        assertEquals(Rank.SECOND, second);
     }
 
     @DisplayName("존재하는 로또 번호인지 확인")

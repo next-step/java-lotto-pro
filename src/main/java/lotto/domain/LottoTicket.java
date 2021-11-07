@@ -49,12 +49,12 @@ public class LottoTicket {
         }
     }
 
-    public Rank winningRank(LottoTicket winningTicket) {
+    public Rank createWinningRank(LottoTicket winningTicket, LottoNumber bonusNumber) {
         Set<LottoNumber> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
         List<LottoNumber> winningNumbers = winningTicket.lottoNumbers;
         nonDuplicateNumbers.addAll(winningNumbers);
         int countOfMatch = this.lottoNumbers.size() + winningNumbers.size() - nonDuplicateNumbers.size();
-        return Rank.valueOf(countOfMatch);
+        return Rank.valueOf(countOfMatch, lottoNumbers.contains(bonusNumber));
     }
 
     public boolean existLottoNumber(LottoNumber lottoNumber) {

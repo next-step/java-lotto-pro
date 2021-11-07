@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,10 +15,10 @@ class LottoReportsTest {
 
     @BeforeEach
     void setUp() {
-        lottoRank.add(Rank.FIRST);
-        lottoRank.add(Rank.SECOND);
-        lottoRank.add(Rank.THIRD);
-        lottoRank.add(Rank.FIFTH);
+        lottoRank.addAll(Arrays.asList(
+            Rank.FIRST, Rank.SECOND, Rank.THIRD,
+            Rank.FOURTH, Rank.FIFTH
+        ));
     }
 
     @DisplayName("당첨 등수에 대한 테스트")
@@ -34,6 +35,6 @@ class LottoReportsTest {
     @Test
     void getProfitRatio() {
         LottoReports lottoReports = new LottoReports(lottoRank, new LottoMoney("10000"));
-        assertEquals(200155.5, lottoReports.getProfitRatio());
+        assertEquals(203150.5, lottoReports.getProfitRatio());
     }
 }
