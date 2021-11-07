@@ -14,7 +14,7 @@ public class LottoNumbersTest {
     @Test
     void instantiate_6개_성공() {
         final List<LottoNumber> lottoNumberList = generateLottoNumberListOf(6);
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        final LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
         assertThat(lottoNumbers).isNotNull();
         assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
     }

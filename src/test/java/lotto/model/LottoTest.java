@@ -10,21 +10,21 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTest {
     @Test
     void howManyLottosCanIBuyWith_3000원() {
-        Money price = new Money(3_000);
-        int count = Lotto.howManyLottosCanIBuyWith(price);
+        final Money price = new Money(3_000);
+        final int count = Lotto.howManyLottosCanIBuyWith(price);
         assertThat(count).isEqualTo(3);
     }
 
     @Test
     void howManyLottosCanIBuyWith_0원() {
-        Money price = new Money(0);
-        int count = Lotto.howManyLottosCanIBuyWith(price);
+        final Money price = new Money(0);
+        final int count = Lotto.howManyLottosCanIBuyWith(price);
         assertThat(count).isEqualTo(0);
     }
 
     @Test
     void generate_성공() {
-        Lotto lotto = Lotto.generate(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Lotto lotto = Lotto.generate(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lotto).isNotNull();
         assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }

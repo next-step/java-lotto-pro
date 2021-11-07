@@ -13,11 +13,11 @@ public class Lottos {
     }
 
     public static Lottos generateAuto(int count) {
-        List<Lotto> lottos = new ArrayList<>();
+        final List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            List<Integer> list = NumberUtils.generateRandomNumbers(6, 1, 45);
-            Lotto lotto = Lotto.generate(list);
+            final List<Integer> list = NumberUtils.generateRandomNumbers(6, 1, 45);
+            final Lotto lotto = Lotto.generate(list);
             lottos.add(lotto);
         }
 

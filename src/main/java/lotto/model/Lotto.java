@@ -20,7 +20,7 @@ public class Lotto {
     }
 
     public static Lotto generate(List<Integer> numbers) {
-        List<LottoNumber> list = new ArrayList<>();
+        final List<LottoNumber> list = new ArrayList<>();
         for (int number : numbers) {
             list.add(new LottoNumber(number));
         }

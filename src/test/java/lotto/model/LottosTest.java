@@ -9,7 +9,7 @@ public class LottosTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 4, 5, 14, 50})
     void generateAuto(int size) {
-        Lottos lottos = Lottos.generateAuto(size);
+        final Lottos lottos = Lottos.generateAuto(size);
         assertThat(lottos).isNotNull();
         assertThat(lottos.size()).isEqualTo(size);
     }
