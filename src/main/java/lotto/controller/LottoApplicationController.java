@@ -9,8 +9,6 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStatistics;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningNumbers;
-import lotto.view.InputView;
-import lotto.view.OutputView;
 
 public class LottoApplicationController {
 	private static final int PURCHASE_FINISH = 0;
@@ -19,20 +17,17 @@ public class LottoApplicationController {
 	private LottoStatistics lottoStatistics = new LottoStatistics();
 	private List<Lotto> lottos = new ArrayList<>();
 
-	public boolean enterPurchaseAmount() {
+	public String validatePurchaseAmount(String purchaseAmount) {
 		try {
-			purchaseAmount = new PurchaseAmount(InputView.enterPurchaseAmount());
+			this.purchaseAmount = new PurchaseAmount(purchaseAmount);
 		} catch (IllegalArgumentException exception) {
-			OutputView.printMessage(exception.getMessage());
-			return true;
+			return exception.getMessage();
 		}
-		return false;
+		return "";
 	}
 
-	public void printPurchaseQuantity() {
-		int purchaseQuantity = purchaseAmount.purchase();
-		OutputView.printPurchaseQuantity(purchaseQuantity);
-
+	public void purchaseLotto() {
+		int purchaseQuantity = getPurchaseQuantity();
 		while (continuePurchase(purchaseQuantity)) {
 			lottos.add(new Lotto(new LottoNumbers(LottoNumberFactory.create())));
 			purchaseQuantity--;
@@ -43,31 +38,27 @@ public class LottoApplicationController {
 		return purchaseQuantity > PURCHASE_FINISH;
 	}
 
-	public void printPurchasedLottoNumbers() {
-		for (Lotto lotto : lottos) {
-			OutputView.printPurchasedLottoNumbers(lotto.getLottoNumbersStringValues());
-		}
-
-		OutputView.newLine();
-	}
-
-	public boolean enterWinningNumbers() {
+	public String validateWinningNumbers(String winningNumbers) {
 		try {
-			winningNumbers = new WinningNumbers(InputView.enterWinningNumbers());
+			this.winningNumbers = new WinningNumbers(winningNumbers);
 		} catch (IllegalArgumentException exception) {
-			OutputView.printMessage(exception.getMessage());
-			return true;
+			return exception.getMessage();
 		}
-		OutputView.newLine();
-		return false;
+		return "";
 	}
 
-	public void printLottoStatistics() {
-		OutputView.printLottoStatisticsHeader();
-
+	public LottoStatistics recorde() {
 		for (Lotto lotto : lottos) {
 			lottoStatistics.record(lotto.countMatchNumber(winningNumbers));
 		}
-		OutputView.printLottoStatisticsBody(lottoStatistics);
+		return lottoStatistics;
+	}
+
+	public int getPurchaseQuantity() {
+		return purchaseAmount.purchase();
+	}
+
+	public List<Lotto> getLotts() {
+		return lottos;
 	}
 }

@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.controller.LottoApplicationController;
 import lotto.domain.Repeater;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoApplication {
 
@@ -10,18 +12,27 @@ public class LottoApplication {
 		LottoApplicationController lottoApplicationController = new LottoApplicationController();
 
 		while (Repeater.isContinue()) {
-			Repeater.set(lottoApplicationController.enterPurchaseAmount());
+			String purchaseAmount = InputView.enterPurchaseAmount();
+			String validateResult = lottoApplicationController.validatePurchaseAmount(purchaseAmount);
+			OutputView.printMessage(validateResult);
+			Repeater.set(validateResult);
 		}
 
-		lottoApplicationController.printPurchaseQuantity();
+		OutputView.printPurchaseQuantity(lottoApplicationController.getPurchaseQuantity());
+		lottoApplicationController.purchaseLotto();
 
-		lottoApplicationController.printPurchasedLottoNumbers();
+		OutputView.printPurchasedLottoNumbers(lottoApplicationController.getLotts());
+		OutputView.newLine();
 
 		Repeater.init();
 		while (Repeater.isContinue()) {
-			Repeater.set(lottoApplicationController.enterWinningNumbers());
+			String WinningNumbers = InputView.enterWinningNumbers();
+			String validateResult = lottoApplicationController.validateWinningNumbers(WinningNumbers);
+			OutputView.printMessage(validateResult);
+			Repeater.set(validateResult);
+			OutputView.newLine();
 		}
-
-		lottoApplicationController.printLottoStatistics();
+		OutputView.printLottoStatisticsHeader();
+		OutputView.printLottoStatisticsBody(lottoApplicationController.recorde());
 	}
 }

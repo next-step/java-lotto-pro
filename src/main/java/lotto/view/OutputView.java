@@ -1,7 +1,9 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Scanner;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Rank;
 import lotto.domain.Winners;
@@ -16,7 +18,14 @@ public class OutputView {
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static void printMessage(String message) {
+		if (isBlank(message)) {
+			return;
+		}
 		System.out.println(message);
+	}
+
+	private static boolean isBlank(String message) {
+		return message.equals("");
 	}
 
 	public static void printPurchaseQuantity(int purchaseQuantity) {
@@ -31,8 +40,10 @@ public class OutputView {
 		System.out.println(PRINT_LOTTO_STATISTICS_HEADER);
 	}
 
-	public static void printPurchasedLottoNumbers(String lottoNumbersStringValues) {
-		System.out.printf(PRINT_PURCHASED_LOTTO_NUMBERS, lottoNumbersStringValues);
+	public static void printPurchasedLottoNumbers(List<Lotto> lottos) {
+		for (Lotto lotto : lottos) {
+			System.out.printf(PRINT_PURCHASED_LOTTO_NUMBERS, lotto.getLottoNumbersStringValues());
+		}
 	}
 
 	public static void printLottoStatisticsBody(LottoStatistics lottoStatistics) {
@@ -52,4 +63,6 @@ public class OutputView {
 	private static void printProfitRate(double profitRate) {
 		System.out.printf(PRINT_PROFIT_RATE, profitRate);
 	}
+
+
 }

@@ -14,7 +14,7 @@ public class Repeater {
 		return repeater;
 	}
 
-	public static void set(boolean setValue) {
-		repeater = setValue;
+	public static void set(String setValue) {
+		repeater = !setValue.equals("");
 	}
 }
