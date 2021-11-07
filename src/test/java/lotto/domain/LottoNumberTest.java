@@ -66,11 +66,11 @@ public class LottoNumberTest {
     public void lottoRank(List<Number> MatchNumbers, Number bonusNumber, List<Number> activeNumbers) {
         LottoNumber matchLotto = new LottoNumber(MatchNumbers);
         LottoNumber activeLotto = new LottoNumber(activeNumbers);
+        Rank matchRank = activeLotto.getMatchRank(new WinningLotto(matchLotto, bonusNumber));
 
-        boolean rankMatch =
-                activeLotto.getMatchRank(new WinningLotto(matchLotto, bonusNumber)).isRankMatch(Rank.FIVE);
+        Rank excepted = Rank.FIVE;
 
-        assertThat(rankMatch).isTrue();
+        assertThat(matchRank).isEqualTo(excepted);
     }
 
 }
