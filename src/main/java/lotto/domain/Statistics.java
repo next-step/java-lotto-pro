@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.EnumMap;
 
 public class Statistics {
-	private static final int LOTTO_PRICE = 1000;
 	private static final int NOT_CALCULATED_YET = -1;
 
 	private final Lotto winningLotto;
@@ -34,7 +33,7 @@ public class Statistics {
 	}
 
 	private int calcPurchaseAmount() {
-		return userLottos.size() * LOTTO_PRICE;
+		return userLottos.size() * Common.LOTTO_PRICE;
 	}
 
 	public EnumMap<Rank, Integer> winningCounts() {
