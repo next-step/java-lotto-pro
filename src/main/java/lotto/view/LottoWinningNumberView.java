@@ -35,7 +35,7 @@ public class LottoWinningNumberView {
     private static void winnerNumberRangeValid(List<String> winnerNumbers) {
         for (String winnerNumber : winnerNumbers) {
             int number = Integer.parseInt(winnerNumber);
-            if (number < LottoNumber.LOTTO_START_NUMBER && number > LottoNumber.LOTTO_END_NUMBER) {
+            if (!(number >= LottoNumber.LOTTO_START_NUMBER && number <= LottoNumber.LOTTO_END_NUMBER)) {
                 throw new IllegalArgumentException(ErrorMessage.LOTTO_WINNING_NUMBER_RANGE.getMessage());
             }
         }
