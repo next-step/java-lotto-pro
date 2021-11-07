@@ -19,7 +19,7 @@ public class LottoNumber {
 
     public Rank getMatchRank(WinningLotto winningLotto) {
         int matchCount = 0;
-        boolean matchBonus = winningLotto.isExistBonusNumber(lottoNumbers);
+        boolean matchBonus = winningLotto.isExistBonusNumber(this);
         for (Number number : lottoNumbers) {
             matchCount += winningLotto.isMatchNumber(number) ? 1 : 0;
         }

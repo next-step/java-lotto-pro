@@ -13,8 +13,8 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean isExistBonusNumber(List<Number> lottoNumbers) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean isExistBonusNumber(LottoNumber lottoNumbers) {
+        return lottoNumbers.isContains(bonusNumber);
     }
 
     public boolean isMatchNumber(Number lottoNumber) {

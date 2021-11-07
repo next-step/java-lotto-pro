@@ -15,39 +15,46 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class WinningLottoTest {
 
     static Stream<Arguments> isExistBonusNumberTest() {
-        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
-                Number.of(4), Number.of(5), Number.of(6));
-        Number bonusNumber = Number.of(7);
+        List<Integer> matchNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Integer bonusNumber = 7;
 
-        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
-                Number.of(4), Number.of(5), Number.of(7));
+        List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 7);
 
         return Stream.of(arguments(lottoNumber, matchNumber, bonusNumber));
     }
 
+    static Stream<Arguments> isNumberTest() {
+        List<Integer> matchNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Integer bonusNumber = 7;
+        return Stream.of(arguments(matchNumber, bonusNumber));
+    }
+
+    static Stream<Arguments> getLottoMatchResult() {
+        List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 7);
+        List<Integer> matchNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        return Stream.of(arguments(lottoNumber, matchNumber, 7));
+    }
+
+    LottoMachine lottoMachine = new LottoMachine();
+
     @ParameterizedTest
     @MethodSource("isExistBonusNumberTest")
     @DisplayName("로또 번호 보너스 매칭 확인")
-    public void isExistBonusNumberTest(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
-        WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
+    public void isExistBonusNumberTest(List<Integer> lottoNumber, List<Integer> matchNumber, Integer bonusNumber) {
+        WinningLotto winningLotto = new WinningLotto(lottoMachine.getLottoNumber(matchNumber),
+                lottoMachine.getBonusNumber(bonusNumber));
 
-        boolean actual = winningLotto.isExistBonusNumber(lottoNumber);
+        boolean actual = winningLotto.isExistBonusNumber(lottoMachine.getLottoNumber(lottoNumber));
 
         assertThat(actual).isTrue();
-    }
-
-    static Stream<Arguments> isNumberTest() {
-        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
-                Number.of(4), Number.of(5), Number.of(6));
-        Number bonusNumber = Number.of(7);
-        return Stream.of(arguments(matchNumber, bonusNumber));
     }
 
     @ParameterizedTest
     @MethodSource("isNumberTest")
     @DisplayName("로또 번호 매칭 확인")
-    public void isNumberTest(List<Number> matchNumber, Number bonusNumber) {
-        WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
+    public void isNumberTest(List<Integer> matchNumber, Integer bonusNumber) {
+        WinningLotto winningLotto = new WinningLotto(lottoMachine.getLottoNumber(matchNumber),
+                lottoMachine.getBonusNumber(bonusNumber));
         Number number = Number.of(3);
 
         boolean actual = winningLotto.isMatchNumber(number);
@@ -55,18 +62,13 @@ class WinningLottoTest {
         assertThat(actual).isTrue();
     }
 
-    static Stream<Arguments> getLottoMatchResult() {
-        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
-        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
-        return Stream.of(arguments(lottoNumber, matchNumber, Number.of(7)));
-    }
-
     @ParameterizedTest
     @MethodSource("getLottoMatchResult")
     @DisplayName("로또 매칭 결과 확인")
-    public void getLottoMatchResult(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
-        WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
-        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(new LottoNumber(lottoNumber)));
+    public void getLottoMatchResult(List<Integer> lottoNumber, List<Integer> matchNumber, Integer bonusNumber) {
+        WinningLotto winningLotto = new WinningLotto(lottoMachine.getLottoNumber(matchNumber),
+                lottoMachine.getBonusNumber(bonusNumber));
+        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(lottoMachine.getLottoNumber(lottoNumber)));
 
         int actualMatchRankCount = lottoMatchResult.getMatchRankCount(Rank.SECOND);
 

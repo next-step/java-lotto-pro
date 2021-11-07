@@ -16,31 +16,33 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class LottoResultTest {
 
+    static LottoMachine lottoMachine = new LottoMachine();
+
     static Stream<Arguments> lottoTestData() {
-        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
-        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
+        LottoNumber lottoNumber = lottoMachine.getLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 7));
+        LottoNumber matchNumber = lottoMachine.getLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         return Stream.of(arguments(lottoNumber, matchNumber, Number.of(7)));
     }
 
     static Stream<Arguments> lottoDifferentTestData() {
-        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
-        List<Number> lottoNumber2 = Arrays.asList(Number.of(7), Number.of(8), Number.of(9), Number.of(10), Number.of(5), Number.of(7));
-        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
+        LottoNumber lottoNumber = lottoMachine.getLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 7));
+        LottoNumber lottoNumber2 = lottoMachine.getLottoNumber(Arrays.asList(7, 8, 9, 10, 5, 7));
+        LottoNumber matchNumber = lottoMachine.getLottoNumber(Arrays.asList(1,2,3,4,5,6));
         return Stream.of(arguments(lottoNumber, lottoNumber2, matchNumber, Number.of(7)));
     }
 
     static Stream<Arguments> activeLottoBonusData() {
-        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
-        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
+        LottoNumber lottoNumber = lottoMachine.getLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 7));
+        LottoNumber matchNumber = lottoMachine.getLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         return Stream.of(arguments(lottoNumber, matchNumber, Number.of(7)));
     }
 
     @ParameterizedTest
     @MethodSource("lottoTestData")
     @DisplayName("로또 수익률 확인")
-    public void lottoTest(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
+    public void lottoTest(LottoNumber lottoNumber, LottoNumber matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
-        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(new LottoNumber(lottoNumber)));
+        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(lottoNumber));
         double expected = Rank.SECOND.getPrizeMoney().getMoney().divide(GAME_PRICE.getMoney().multiply(BigDecimal.valueOf(1))).doubleValue();
 
         double actual = lottoMatchResult.getLottoYield();
@@ -51,10 +53,10 @@ public class LottoResultTest {
     @ParameterizedTest
     @MethodSource("lottoDifferentTestData")
     @DisplayName("로또 수익률 확인")
-    public void lottoDifferentTest(List<Number> lottoNumber, List<Number> lottoNumber2, List<Number> matchNumber, Number bonusNumber) {
+    public void lottoDifferentTest(LottoNumber lottoNumber, LottoNumber lottoNumber2, LottoNumber matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
-        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(new LottoNumber(lottoNumber)));
-        LottoResult lottoMatchResult2 = winningLotto.getLottoMatchResult(Arrays.asList(new LottoNumber(lottoNumber2)));
+        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(lottoNumber));
+        LottoResult lottoMatchResult2 = winningLotto.getLottoMatchResult(Arrays.asList(lottoNumber2));
 
         double actual = lottoMatchResult.getLottoYield();
         double actual2 = lottoMatchResult2.getLottoYield();
@@ -65,10 +67,9 @@ public class LottoResultTest {
     @ParameterizedTest
     @MethodSource("activeLottoBonusData")
     @DisplayName("로또 번호 보너스 매칭 확인")
-    public void activeLottoBonus(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
+    public void activeLottoBonus(LottoNumber lottoNumber, LottoNumber matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
-        LottoNumber lotto = new LottoNumber(lottoNumber);
-        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(lotto));
+        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(lottoNumber));
 
         int actualCount = lottoMatchResult.getMatchRankCount(Rank.SECOND);
 
