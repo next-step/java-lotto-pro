@@ -41,16 +41,15 @@ public class InputView {
         return enterWinningNumbers();
     }
 
-    public Bonus enterBonus() {
+    public Bonus enterBonus(LottoNumbers winningNumbers) {
         System.out.println(INSERT_BONUS_BALL);
         String bonus = ConsoleUtils.console();
-        if (!ValidationUtils.isNumber(bonus)) {
-            System.out.println(ERROR_ONLY_NUMBER);
-            return enterBonus();
+        if (checkBonus(winningNumbers, bonus)) {
+            return Bonus.from(Integer.parseInt(bonus));
         }
-        return Bonus.from(Integer.parseInt(bonus));
+        return enterBonus(winningNumbers);
     }
-    
+
     private boolean checkWinningNumbers(String[] numbers) {
         if (!ValidationUtils.isCorrectQuantity(numbers)) {
             System.out.println(String.format(ERROR_NUMBER_QUANTITY, LottoNumbers.LOTTO_NUMBER_QUANTITY));
@@ -61,6 +60,22 @@ public class InputView {
             return false;
         }
         if (ValidationUtils.checkDuplicatedNumber(numbers)) {
+            System.out.println(ERROR_DUPLICATED_NUMBER);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkBonus(LottoNumbers winningNumbers, String bonus) {
+        if (!ValidationUtils.isNumber(bonus)) {
+            System.out.println(ERROR_ONLY_NUMBER);
+            return false;
+        }
+        if (!ValidationUtils.isBetweenRange(Integer.parseInt(bonus))) {
+            System.out.println(String.format(ERROR_NUMBER_RANGE,LottoNumbers.LOTTO_MIN_NUMBER, LottoNumbers.LOTTO_MAX_NUMBER));
+            return false;
+        }
+        if (winningNumbers.isMatchBonus(Bonus.from(Integer.parseInt(bonus)))) {
             System.out.println(ERROR_DUPLICATED_NUMBER);
             return false;
         }

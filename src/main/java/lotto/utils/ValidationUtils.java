@@ -32,7 +32,7 @@ public class ValidationUtils {
         return Arrays.stream(numbers).distinct().count() != numbers.length;
     }
 
-    private static boolean isBetweenRange(int number) {
+    public static boolean isBetweenRange(int number) {
         return number >= LottoNumbers.LOTTO_MIN_NUMBER && number <= LottoNumbers.LOTTO_MAX_NUMBER;
     }
 
