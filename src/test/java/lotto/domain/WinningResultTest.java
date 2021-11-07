@@ -11,7 +11,7 @@ public class WinningResultTest {
     @Test
     @DisplayName("통계가 잘 생성되는지 확인")
     void 통계_생성() {
-        WinningResult winningResult = new WinningResult(WinningRank.resultRank(4, true), 3);
+        WinningResult winningResult = WinningResult.of(WinningRank.resultRank(4, true), 3);
         assertThat(winningResult.getTotalReward()).isEqualTo(150000);
     }
 
@@ -19,7 +19,7 @@ public class WinningResultTest {
     @ParameterizedTest
     @ValueSource(ints = { 1, 2, 3 })
     void 통계_생성_보너스(int count) {
-        WinningResult winningResult = new WinningResult(WinningRank.resultRank(5, true), count);
+        WinningResult winningResult = WinningResult.of(WinningRank.resultRank(5, true), count);
         assertThat(winningResult.getTotalReward()).isEqualTo(count * WinningRank.SECOND_RANK.getReward());
     }
 
