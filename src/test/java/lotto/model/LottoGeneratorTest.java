@@ -1,11 +1,9 @@
 package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,7 +26,7 @@ class LottoGeneratorTest {
 
 		// then
 		assertThatThrownBy(() -> {
-			method.invoke(new LottoGenerator(), inputMoney);
+			method.invoke(new LottoGenerator(inputMoney), inputMoney);
 		}).isInstanceOf(InvocationTargetException.class);
 	}
 
@@ -40,7 +38,7 @@ class LottoGeneratorTest {
 
 		// then
 		assertThatThrownBy(() -> {
-			method.invoke(new LottoGenerator(), inputMoney);
+			method.invoke(new LottoGenerator(inputMoney), inputMoney);
 		}).isInstanceOf(InvocationTargetException.class);
 	}
 
@@ -52,7 +50,7 @@ class LottoGeneratorTest {
 
 		// then
 		assertThatThrownBy(() -> {
-			method.invoke(new LottoGenerator(), inputMoney);
+			method.invoke(new LottoGenerator(inputMoney), inputMoney);
 		}).isInstanceOf(InvocationTargetException.class);
 	}
 
@@ -61,55 +59,9 @@ class LottoGeneratorTest {
 	void 입력된_구입금액만큼_로또갯수를_구해주는_기능테스트(String inputMoney, int lottoAmount) throws Exception {
 		// given // when
 		Method method = privateMethod("calculateLottoAmount");
-		int resultAmount = (int)method.invoke(new LottoGenerator(), inputMoney);
+		int resultAmount = (int)method.invoke(new LottoGenerator(inputMoney), inputMoney);
 
 		// then
 		assertThat(lottoAmount).isEqualTo(resultAmount);
-	}
-
-	@ParameterizedTest(name = "index {index} ==> inputMoney {0}, lottoNumbersListSize {1}")
-	@CsvSource(value = {"10000:10", "1111:1", "20000:20", "13200:13"}, delimiter = ':')
-	void 입력된_구입금액만큼_로또를_생성하는_기능테스트(String inputMoney, int lottoNumbersListSize) throws Exception {
-		// given // when
-		Method method = privateMethod("generateLottoNumbers");
-		List<LottoNumbers> lottoNumbersList = (List<LottoNumbers>)method.invoke(new LottoGenerator(), inputMoney);
-
-		// then
-		assertAll(
-			() -> assertThat(lottoNumbersList).hasSize(lottoNumbersListSize),
-			() -> assertThat(lottoNumbersList.get(0)).isInstanceOf(LottoNumbers.class),
-			() -> assertThat(lottoNumbersList.get(0).lottoNumberList.get(0)).isInstanceOf(LottoNumber.class)
-		);
-	}
-
-	@ParameterizedTest(name = "index {index} ==> inputMoney {0}, lottoNumbersListSize {1}")
-	@CsvSource(value = {"10000:10", "1111:1", "20000:20", "13200:13"}, delimiter = ':')
-	void 입력된_구입금액만큼_로또생성기로_로또를_생성하는_테스트(String inputMoney, int lottoNumbersListSize) {
-		// given // when
-		LottoGenerator lottoGenerator = new LottoGenerator(inputMoney);
-
-		// then
-		assertAll(
-			() -> assertThat(lottoGenerator).isInstanceOf(LottoGenerator.class),
-			() -> assertThat(lottoGenerator.size()).isEqualTo(lottoNumbersListSize)
-		);
-	}
-
-	@ParameterizedTest(name = "index {index} ==> inputMoney {0}, inputNumber {1}, lottoNumbersListSize {2}")
-	@CsvSource(value = {
-		"10000:1,2,3,4,5,6:10",
-		"1111:1,2,3,4,5,6:1",
-		"20000:1,2,3,4,5,6:20",
-		"13200:1,2,3,4,5,6:13"}, delimiter = ':')
-	void 입력된_구입금액과_입력된숫자로_로또를_생성하는_테스트(String inputMoney, String inputNumber, int lottoNumbersListSize) {
-		// given // when
-		LottoGenerator lottoGenerator = new LottoGenerator(inputMoney, inputNumber);
-
-		// then
-		assertAll(
-			() -> assertThat(lottoGenerator).isInstanceOf(LottoGenerator.class),
-			() -> assertThat(lottoGenerator.size()).isEqualTo(lottoNumbersListSize),
-			() -> assertThat(lottoGenerator.contains(new LottoNumbers("1,2,3,4,5,6")))
-		);
 	}
 }

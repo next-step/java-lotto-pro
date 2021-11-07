@@ -7,20 +7,16 @@ import java.util.stream.Stream;
 public class LottoGenerator {
 	public static final int LOTTO_PRICE = 1000;
 	private static final String NUMBER_REGEX = "[0-9]+";
-	private String inputMoney;
-	private List<LottoNumbers> lottoNumbersList;
-
-	public LottoGenerator() {
-	}
+	private final String inputMoney;
+	private String inputNumber;
 
 	public LottoGenerator(String inputMoney) {
 		this.inputMoney = inputMoney;
-		this.lottoNumbersList = generateLottoNumbers(inputMoney);
 	}
 
 	public LottoGenerator(String inputMoney, String inputNumber) {
 		this.inputMoney = inputMoney;
-		this.lottoNumbersList = generateLottoNumbers(inputMoney, inputNumber);
+		this.inputNumber = inputNumber;
 	}
 
 	private void validNullOrEmpty(String input) {
@@ -57,7 +53,7 @@ public class LottoGenerator {
 		return Integer.parseInt(inputMoney) / LOTTO_PRICE;
 	}
 
-	private List<LottoNumbers> generateLottoNumbers(String inputMoney) {
+	public List<LottoNumbers> generateLottoNumbers() {
 		validNullOrEmpty(inputMoney);
 		validNumber(inputMoney);
 		validUnderLottoPrice(inputMoney);
@@ -66,24 +62,12 @@ public class LottoGenerator {
 			.limit(calculateLottoAmount(inputMoney)).collect(Collectors.toList());
 	}
 
-	private List<LottoNumbers> generateLottoNumbers(String inputMoney, String inputNumber) {
+	public List<LottoNumbers> generateLottoInputNumbers() {
 		return Stream.generate(() -> new LottoNumbers(inputNumber))
 			.limit(calculateLottoAmount(inputMoney)).collect(Collectors.toList());
 	}
 
-	public int size() {
-		return lottoNumbersList.size();
-	}
-
-	public boolean contains(LottoNumbers lottoNumbers) {
-		return this.lottoNumbersList.contains(lottoNumbers);
-	}
-
-	public List<LottoNumbers> getLottoNumbersList() {
-		return lottoNumbersList;
-	}
-
-	public int getInputMoney() {
-		return Integer.parseInt(this.inputMoney);
+	public String getInputMoney() {
+		return inputMoney;
 	}
 }

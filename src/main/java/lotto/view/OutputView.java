@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import lotto.model.LottoGenerator;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoResult;
+import lotto.model.Lottos;
 import lotto.model.RankCode;
 
 public class OutputView {
@@ -17,12 +17,12 @@ public class OutputView {
 	private final static int START_INDEX_CALCULATE_NUMBER = 0;
 	private final static int LAST_INDEX_CALCULATE_NUMBER = 1;
 
-	public static void printCompletePurchaseLotto(LottoGenerator lottoGenerator) {
-		System.out.println(lottoGenerator.size() + "개를 구입했습니다.");
+	public static void printCompletePurchaseLotto(Lottos lottos) {
+		System.out.println(lottos.size() + "개를 구입했습니다.");
 	}
 
-	public static void printLottoNumbers(LottoGenerator lottoGenerator) {
-		for (LottoNumbers lottoNumbers : lottoGenerator.getLottoNumbersList()) {
+	public static void printLottoNumbers(Lottos lottos) {
+		for (LottoNumbers lottoNumbers : lottos.getLottoNumbersList()) {
 			System.out.println(lottoNumbersToString(lottoNumbers));
 		}
 	}
