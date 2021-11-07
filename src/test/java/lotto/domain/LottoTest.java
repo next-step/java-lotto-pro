@@ -52,10 +52,10 @@ class LottoTest {
         Lotto lotto = new Lotto(numbers);
 
         // when
-        String lottoStatus = lotto.getStatus();
+        List<String> lottoStatus = lotto.getStatus();
 
         assertThat(lottoStatus)
-                .isEqualTo("[1, 2, 3, 4, 5, 6]");
+                .isEqualTo(Arrays.asList("1", "2", "3", "4", "5", "6"));
     }
 
     @Test

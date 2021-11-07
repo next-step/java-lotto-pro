@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.constant.LottoRank;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoBundle {
@@ -15,15 +16,14 @@ public class LottoBundle {
         return purchasedLottos.size();
     }
 
-    public String getStatus() {
-        StringBuilder sb = new StringBuilder();
+    public List<List<String>> getStatus() {
+        List<List<String>> lottoBundleStatus = new ArrayList<>();
 
         for (Lotto purchasedLotto : purchasedLottos) {
-            sb.append(purchasedLotto.getStatus());
-            sb.append("\n");
+            lottoBundleStatus.add(purchasedLotto.getStatus());
         }
 
-        return sb.toString();
+        return lottoBundleStatus;
     }
 
     public LottoResult getLottoResult(Lotto winningLotto) {

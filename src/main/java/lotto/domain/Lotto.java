@@ -56,15 +56,14 @@ public class Lotto {
         }
     }
 
-    public String getStatus() {
+    public List<String> getStatus() {
         List<String> lottoStatus = new ArrayList<>();
 
         for (LottoNumber lottoNumber : lineOfLottoNumber) {
             lottoStatus.add(lottoNumber.getNumberString());
         }
 
-        return "[" + String.join(", ", lottoStatus) + "]";
-
+        return lottoStatus;
     }
 
     public LottoRank checkMatchRank(Lotto lotto) {
