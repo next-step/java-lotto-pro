@@ -1,27 +1,30 @@
 package study.lotto.model;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import study.lotto.model.exception.MalFormedLottoNumberException;
+
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoNumberTest {
 
-    @Test
-    void 로또번호는_1에서_45_까지의_숫자로_구성되어_있다() {
-        assertAll(() -> {
-            for (int number = 1; number <= 45; number++) {
-                // given
-                final LottoNumber lottoNumber = LottoNumber.valueOf(number);
-                // when
-                final boolean result = lottoNumber.getValue() == number;
-                // then
-                assertThat(result).isTrue();
-            }
-        });
+    @ParameterizedTest
+    @MethodSource("provideCollectLottoNumber")
+    void 로또번호는_1에서_45_까지의_숫자로_구성되어_있다(int number) {
+        // given
+        final LottoNumber lottoNumber = LottoNumber.valueOf(number);
+        // when
+        final boolean result = lottoNumber.getValue() == number;
+        // then
+        assertThat(result).isTrue();
+    }
+
+    public static IntStream provideCollectLottoNumber() {
+        return IntStream.range(1, 45);
     }
 
     @ParameterizedTest

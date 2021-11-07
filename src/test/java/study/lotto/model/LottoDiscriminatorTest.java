@@ -20,15 +20,16 @@ public class LottoDiscriminatorTest {
                         LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                         LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))
                 );
-        winningLottery = WinningLottery.valueOf(winningLottoNumber);
+        final LottoNumber bonusNumber = LottoNumber.valueOf(7);
+        winningLottery = WinningLottery.valueOf(winningLottoNumber, bonusNumber);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:2:3:4:5:6:6", "7:2:3:4:5:6:5", "7:8:3:4:5:6:4", "7:8:9:4:5:6:3", "7:9:10:22:32:45:0"}, delimiterString = ":")
+    @CsvSource(value = {"1:2:3:4:5:6:FIRST", "7:2:3:4:5:6:SECOND", "7:8:3:4:5:6:FOURTH", "7:8:9:4:5:6:FIFTH", "10:8:9:4:5:6:FIFTH", "7:9:10:22:32:45:MISS"}, delimiterString = ":")
     void 당첨_로또복권_와_당첨번호_와_비교하여_당첨등수_를_확인할_수_있다(
             final int ticketLottoNumber1, final int ticketLottoNumber2, final int ticketLottoNumber3,
             final int ticketLottoNumber4, final int ticketLottoNumber5, final int ticketLottoNumber6,
-            final int countOfMatch) {
+            final Rank expectedRank) {
 
         final HashSet<LottoNumber> ticketLottoNumbers =
                 new HashSet<>(Arrays.asList(
@@ -39,6 +40,7 @@ public class LottoDiscriminatorTest {
         final TicketLottery ticketLottery = TicketLottery.valueOf(ticketLottoNumbers);
 
         final Rank rank = LottoDiscriminator.referee(winningLottery, ticketLottery);
-        assertThat(rank).isEqualTo(Rank.valueOf(countOfMatch));
+
+        assertThat(rank).isEqualTo(expectedRank);
     }
 }

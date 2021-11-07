@@ -13,7 +13,7 @@ public class LotteryFactory {
         return new LotteryFactory();
     }
 
-    public TicketLotteryBundle generateTicketLotteryByCount(final int count) {
+    public TicketLotteryBundle generateTicketLotteryBundleByCount(final int count) {
         final List<TicketLottery> ticketLotteries = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             ticketLotteries.add(generateTicketLottery());
@@ -24,10 +24,5 @@ public class LotteryFactory {
     public TicketLottery generateTicketLottery() {
         final Set<LottoNumber> lottoNumbers = LottoRandoms.getLottoRandomNumbers();
         return TicketLottery.valueOf(lottoNumbers);
-    }
-
-    public WinningLottery generateWinningLottery() {
-        final Set<LottoNumber> lottoNumbers = LottoRandoms.getLottoRandomNumbers();
-        return WinningLottery.valueOf(lottoNumbers);
     }
 }

@@ -41,25 +41,31 @@ class RankTest {
     }
 
     @Test
-    void 일치한_갯수가_3이면_당첨결과5등이이_반환된다() {
+    void 일치한_갯수가_3이면_당첨결과5등이_반환된다() {
         final Rank rank = Rank.valueOf(3);
         assertThat(rank).isEqualTo(Rank.FIFTH);
     }
 
     @Test
-    void 일치한_갯수가_4이면_당첨결과4등이이_반환된다() {
+    void 일치한_갯수가_4이면_당첨결과4등이_반환된다() {
         final Rank rank = Rank.valueOf(4);
         assertThat(rank).isEqualTo(Rank.FOURTH);
     }
 
     @Test
-    void 일치한_갯수가_5이면_당첨결과3등이이_반환된다() {
+    void 일치한_갯수가_5이면_당첨결과3등이_반환된다() {
         final Rank rank = Rank.valueOf(5);
         assertThat(rank).isEqualTo(Rank.THIRD);
     }
 
     @Test
-    void 일치한_갯수가_6이면_당첨결과1등이이_반환된다() {
+    void 일치한_갯수가_5이면서_보너스번호를_맞춘상태이면_당첨결과2등이_반환된다() {
+        final Rank rank = Rank.valueOf(5, true);
+        assertThat(rank).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    void 일치한_갯수가_6이면_당첨결과1등이_반환된다() {
         final Rank rank = Rank.valueOf(6);
         assertThat(rank).isEqualTo(Rank.FIRST);
     }

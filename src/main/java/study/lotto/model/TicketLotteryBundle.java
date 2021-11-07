@@ -1,5 +1,7 @@
 package study.lotto.model;
 
+import study.lotto.model.exception.TicketLotteryBundleMustBeNotEmptyException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
