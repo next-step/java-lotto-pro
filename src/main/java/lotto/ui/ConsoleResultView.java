@@ -14,7 +14,7 @@ public class ConsoleResultView implements ResultView {
     private static final String WIN_STATISTIC_ALARM_MESSAGE = "당첨 통계\n---------";
     private static final String CORRESPOND_LOTTO_NUMBERS_MESSAGE = "%d개 일치(%d원) - %d개";
     private static final String TOTAL_REVENUE_MESSAGE = "총 수익률 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-    private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 번호를 입력해 주세요.";
 
     @Override
     public void printPurchaseAmountMessage() {
