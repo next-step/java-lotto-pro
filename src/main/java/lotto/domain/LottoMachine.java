@@ -18,7 +18,7 @@ import static lotto.utils.RandomNumberUtils.generateRandomNumbers;
 public class LottoMachine {
 
     public static final int LOTTO_SIZE = 6;
-    public final static Money GAME_PRICE = new Money(BigDecimal.valueOf(1000));
+    public static final Money GAME_PRICE = new Money(BigDecimal.valueOf(1000));
 
     private final Money money;
     private final List<LottoNumber> activeNumberList;

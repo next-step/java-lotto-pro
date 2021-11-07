@@ -7,7 +7,7 @@ import static lotto.domain.LottoMachine.GAME_PRICE;
 
 public class LottoResult {
 
-    private final static int DECIMAL_POINT = 3;
+    private static final int DECIMAL_POINT = 3;
 
     private final EnumMap<Rank, Integer> lottoMatchResult;
 
