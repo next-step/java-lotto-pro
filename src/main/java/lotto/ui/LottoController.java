@@ -2,10 +2,12 @@ package lotto.ui;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoCalculator;
+import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
 import lotto.domain.WinningResults;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +18,7 @@ public class LottoController {
     private static final String BLANK = " ";
 
     public void run() {
-        LottoCalculator lottoCalculator = new LottoCalculator(ConsoleIn.inputPurchaseAmount());
+        LottoCalculator lottoCalculator = new LottoCalculator(ConsoleIn.inputPurchaseAmount(), new Lottos(new ArrayList<>()));
         printLottos(lottoCalculator);
         lottoCalculator.calculate(new WinningLotto(ConsoleIn.inputWinNumber(), ConsoleIn.inputBonusNumber()));
         WinningResults winningResults = lottoCalculator.getWinningResults();

@@ -1,9 +1,12 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -15,6 +18,12 @@ public class Lottos {
 
     public static Lottos of(Lotto... lottos) {
         return new Lottos(Arrays.asList(lottos));
+    }
+
+    public static Lottos of(Lottos manualLottos, Lottos autoLottos) {
+        return Stream.of(manualLottos.lottos, autoLottos.lottos)
+                .flatMap(Collection::stream)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
     }
 
     public List<Lotto> getLottos() {
