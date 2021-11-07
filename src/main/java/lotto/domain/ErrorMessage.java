@@ -16,8 +16,4 @@ public enum ErrorMessage {
     public String getMessage() {
         return message;
     }
-
-    public String getMessageForTest() {
-        return message.replace("%d", "\\d+");
-    }
 }

@@ -35,7 +35,7 @@ class LottoTest {
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
-                .withMessageMatching(ErrorMessage.LOTTO_NUMBER_SIZE_ERROR.getMessageForTest());
+                .withMessageMatching(ErrorMessage.LOTTO_NUMBER_SIZE_ERROR.getMessage().replace("%d", "\\d+"));
     }
 
     @Test
