@@ -15,11 +15,7 @@ public class WinningResults {
     }
 
     public static WinningResults of(List<Lotto> lottos, WinningLotto winningLotto) {
-        List<WinningResult> winningResults = lottos.stream()
-                .map(winningLotto::getWinningResult)
-                .filter(winningResult -> winningResult != WinningResult.NOT_MATCHED)
-                .collect(Collectors.toList());
-        return new WinningResults(winningResults);
+        return new WinningResults(getWinningResults(lottos, winningLotto));
     }
 
     public static WinningResults from(WinningResult... winningResults) {
@@ -49,5 +45,12 @@ public class WinningResults {
     @Override
     public int hashCode() {
         return Objects.hash(winningResults);
+    }
+
+    private static List<WinningResult> getWinningResults(List<Lotto> lottos, WinningLotto winningLotto) {
+        return lottos.stream()
+                .map(winningLotto::getWinningResult)
+                .filter(winningResult -> winningResult != WinningResult.NOT_MATCHED)
+                .collect(Collectors.toList());
     }
 }
