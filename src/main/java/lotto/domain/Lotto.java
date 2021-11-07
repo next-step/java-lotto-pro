@@ -18,6 +18,9 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public Lotto(int... numbers) {
+        if (numbers.length != LOTTO_NUMBER_COUNT) {
+            throw new LottoException(LOTTO_NUMBER_COUNT_ERROR);
+        }
         for (int number : numbers) {
             addLottoNumber(new LottoNumber(number));
         }
@@ -28,7 +31,7 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public void addLottoNumber(LottoNumber lottoNumber) {
+    protected void addLottoNumber(LottoNumber lottoNumber) {
         if (lottoNumbers.contains(lottoNumber)) {
             throw new LottoException(LOTTO_NUMBER_ERROR);
         }

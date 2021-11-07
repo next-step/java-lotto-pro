@@ -5,32 +5,23 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoTest {
 
     private Lotto lotto;
-    private final int number = 1;
 
     @BeforeEach
     void setUp() {
-        lotto = new Lotto(number);
+        lotto = new Lotto(1, 2, 3, 4, 5, 6);
     }
 
     @DisplayName("로또 번호 추가 성공 테스트")
-    @ParameterizedTest(name = "{displayName}{index} -> number: {0}")
-    @ValueSource(ints = {2, 3, 4})
-    void addLottoNumber_success(int number) {
-        // when
-        LottoNumber lottoNumber = new LottoNumber(number);
-        lotto.addLottoNumber(lottoNumber);
-
-        // then
-        Assertions.assertThat(lotto.getLottoNumbers())
-                .contains(lottoNumber);
+    @Test
+    void addLottoNumber_success() {
+        // when & then
+        Assertions.assertThat(lotto.getLottoNumbers()).hasSize(Lotto.LOTTO_NUMBER_COUNT);
     }
 
     @DisplayName("로또 번호 추가 실패 테스트")
@@ -38,7 +29,7 @@ class LottoTest {
     void addLottoNumber_failure() {
         // when & then
         assertThatExceptionOfType(LottoException.class)
-                .isThrownBy(() -> lotto.addLottoNumber(new LottoNumber(number)))
+                .isThrownBy(() -> lotto.addLottoNumber(new LottoNumber(1)))
                 .withMessage(Lotto.LOTTO_NUMBER_ERROR);
     }
 
@@ -47,13 +38,7 @@ class LottoTest {
     void lottoNumbers_count() {
         // when & then
         assertThatExceptionOfType(LottoException.class)
-                .isThrownBy(() ->
-                {
-                    for (int i = 0; i < Lotto.LOTTO_NUMBER_COUNT; i++) {
-                        int testNumber = number + (1 + i);
-                        lotto.addLottoNumber(new LottoNumber(testNumber));
-                    }
-                })
+                .isThrownBy(() -> lotto.addLottoNumber(new LottoNumber(7)))
                 .withMessage(Lotto.LOTTO_NUMBER_COUNT_ERROR);
     }
 }
