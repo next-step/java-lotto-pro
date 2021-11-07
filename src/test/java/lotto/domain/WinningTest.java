@@ -97,7 +97,7 @@ class WinningTest {
         WinningResult winningResult = new WinningResult(rankMap);
 
         //when
-        double profitRateResult = winningResult.profitRate(purchaseAmount);
+        double profitRateResult = winningResult.profitRate(new Money(purchaseAmount));
 
         //then
         assertThat(profitRateResult).isEqualTo(profitRate);

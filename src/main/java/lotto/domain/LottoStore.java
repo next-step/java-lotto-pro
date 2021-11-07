@@ -10,8 +10,8 @@ public class LottoStore {
     private LottoStore() {
     }
 
-    public static Lottos purchase(int purchaseAmount) {
-        LottoIssuanceCount issuance = LottoIssuanceCount.issuanceNumberCalculation(purchaseAmount);
+    public static Lottos purchase(Money money) {
+        LottoIssuanceCount issuance = LottoIssuanceCount.issuanceNumberCalculation(money);
         List<Lotto> lottos = createLottos(issuance);
         return new Lottos(lottos);
     }

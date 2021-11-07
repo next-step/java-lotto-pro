@@ -19,8 +19,8 @@ public class WinningResult {
         return winnerPerRank;
     }
 
-    public double profitRate(int purchaseAmount) {
-        return profitAmount() / (double) purchaseAmount;
+    public double profitRate(Money money) {
+        return profitAmount() / (double) money.getPurchaseAmount();
     }
 
     private long profitAmount() {

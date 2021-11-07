@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.ErrorMessage;
-
 import java.util.Objects;
 
 //로또 발급 개수와 관련된 역할을 가진 클래스
@@ -14,20 +12,13 @@ public class LottoIssuanceCount {
         this.issuanceCount = issuanceCount;
     }
 
-    public static LottoIssuanceCount issuanceNumberCalculation(int purchaseAmount) {
-        purchaseAmountOneThousandWonUnitValid(purchaseAmount);
-        int issuanceCount = purchaseAmount / LOTTO_PRICE;
+    public static LottoIssuanceCount issuanceNumberCalculation(Money money) {
+        int issuanceCount = money.getPurchaseAmount() / LOTTO_PRICE;
         return new LottoIssuanceCount(issuanceCount);
     }
 
     public int getIssuanceCount() {
         return issuanceCount;
-    }
-
-    private static void purchaseAmountOneThousandWonUnitValid(int purchaseAmount) {
-        if (purchaseAmount < LOTTO_PRICE || purchaseAmount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(ErrorMessage.PURCHASE_AMOUNT_NOT_ONE_THOUSAND_WON.getMessage());
-        }
     }
 
     @Override

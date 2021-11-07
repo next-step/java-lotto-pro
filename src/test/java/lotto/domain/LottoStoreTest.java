@@ -12,7 +12,7 @@ class LottoStoreTest {
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "10000:10", "50000:50"}, delimiter = ':')
     void lottoPurchase(int purchaseAmount, int expectLottoPurchaseNumber) {
-        Lottos lottos = LottoStore.purchase(purchaseAmount);
+        Lottos lottos = LottoStore.purchase(new Money(purchaseAmount));
 
         int lottoPurchaseNumber = lottos.purchaseNumber();
 
