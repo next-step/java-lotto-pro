@@ -5,12 +5,14 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.WinningRank;
 import lotto.domain.WinningResult;
 import lotto.domain.WinningResults;
 
 public class ResultView {
     private static final String NOTICE_BUY_QUANTITY = "개를 구매했습니다.";
     private static final String NOTICE_WINNING_STATISTICS_RESULT = "%d개 일치 (%d원)- %d개";
+    private static final String NOTICE_WINNING_BONUS_RESULT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static final String NOTICE_WINNING_STATISTICS = "당첨 통계\n---------";
     private static final String NOTICE_WINNING_REWARD_PERCENT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String ERROR_LOWER_THAN_MIN_PRICE = "최소 주문 금액(%d) 이하입니다.";
@@ -30,7 +32,7 @@ public class ResultView {
         System.out.println(NOTICE_WINNING_STATISTICS);
         List<WinningResult> resultList = results.getWinningResult();
         for (WinningResult winningResult : resultList) {
-            System.out.println(String.format(NOTICE_WINNING_STATISTICS_RESULT, winningResult.getWinningRank().getMatchCount(), winningResult.getWinningRank().getReward(), winningResult.getCount()));
+            printWinningResult(winningResult);
         }
     }
 
@@ -41,5 +43,13 @@ public class ResultView {
     public void printLowerThanMinPrice() {
         System.out.println(String.format(ERROR_LOWER_THAN_MIN_PRICE, Money.LOTTO_BUY_PRICE));
         System.out.println(NOTICE_END_GAME);
+    }
+
+    private void printWinningResult(WinningResult winningResult) {
+        if (winningResult.getWinningRank() == WinningRank.SECOND_RANK) {
+            System.out.println(String.format(NOTICE_WINNING_BONUS_RESULT, winningResult.getWinningRank().getMatchCount(), winningResult.getWinningRank().getReward(), winningResult.getCount()));
+            return;
+        }
+        System.out.println(String.format(NOTICE_WINNING_STATISTICS_RESULT, winningResult.getWinningRank().getMatchCount(), winningResult.getWinningRank().getReward(), winningResult.getCount()));
     }
 }

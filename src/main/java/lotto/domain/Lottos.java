@@ -23,9 +23,9 @@ public class Lottos implements Iterable<Lotto> {
         return this.lottos;
     }
 
-    public void execute(LottoNumbers winningNumbers) {
+    public void execute(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
-            lotto.judgeRank(winningNumbers);
+            lotto.judgeRank(winningLotto);
         }
     }
 

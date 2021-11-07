@@ -29,6 +29,10 @@ public class LottoNumbers {
                         .count();
     }
 
+    public boolean isMatchBonus(Bonus bonus) {
+        return numbers.stream().anyMatch(number -> bonus.isMatchBonus(number));
+    }
+
     @Override
     public String toString() {
         return Arrays.deepToString(numbers.toArray());
