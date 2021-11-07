@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.winpolicy.WinPolicy;
 import lotto.domain.winstatistics.WinStatistics;
@@ -20,6 +21,7 @@ public class WinStatisticsTest {
     Lotto latestWinLottos = Lotto.valueOf("1","2","5","17","19","20");
     Lotto match_3 = Lotto.valueOf("1","2","5","27","29","30");
     Lotto match_none = Lotto.valueOf("31","32","35","37","39","30");
+    LottoNumber bonusNumber = LottoNumber.valueOf("30");
 
     Lottos buyLottos = Lottos.valueOf(match_3,
                                       match_none,
@@ -29,7 +31,7 @@ public class WinStatisticsTest {
                                       match_none);
 
     // when
-    winStatistics.analysis(latestWinLottos, buyLottos);
+    winStatistics.analysis(latestWinLottos, buyLottos, bonusNumber);
 
     // then
     assertThat(winStatistics.getRevenueRatioValue()).isEqualTo("0.83");
@@ -45,6 +47,7 @@ public class WinStatisticsTest {
     Lotto match_3 = Lotto.valueOf("1","2","5","27","29","30");
     Lotto match_4 = Lotto.valueOf("1","2","5","17","29","30");
     Lotto match_none = Lotto.valueOf("31","32","35","37","39","30");
+    LottoNumber bonusNumber = LottoNumber.valueOf("30");
 
     Lottos buyLottos = Lottos.valueOf(match_3,
                                       match_3,
@@ -54,7 +57,7 @@ public class WinStatisticsTest {
                                       match_none);
 
     // when
-    winStatistics.analysis(latestWinLottos, buyLottos);
+    winStatistics.analysis(latestWinLottos, buyLottos, bonusNumber);
 
     // then
     assertThat(winStatistics.find(WinPolicy.THREE_MATCH).getCount()).isEqualTo(2);

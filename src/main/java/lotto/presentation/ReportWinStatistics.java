@@ -1,6 +1,7 @@
 package lotto.presentation;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.winpolicy.WinPolicy;
 import lotto.domain.winstatistics.WinStatistics;
@@ -15,6 +16,7 @@ public class ReportWinStatistics extends Screen {
   Label threeMatchWin;
   Label fourMatchWin;
   Label fiveMatchWin;
+  Label fiveAndBonusMatchWin;
   Label sixMatchWin;
 
   Label revenueRatio;
@@ -31,6 +33,7 @@ public class ReportWinStatistics extends Screen {
     threeMatchWin = new Label();
     fourMatchWin = new Label();
     fiveMatchWin = new Label();
+    fiveAndBonusMatchWin = new Label();
     sixMatchWin = new Label();
 
     revenueRatio = new Label("");
@@ -51,10 +54,11 @@ public class ReportWinStatistics extends Screen {
     title.render();
     division.render();
 
-    threeMatchWin.render();;
-    fourMatchWin.render();;
-    fiveMatchWin.render();;
-    sixMatchWin.render();;
+    threeMatchWin.render();
+    fourMatchWin.render();
+    fiveMatchWin.render();
+    fiveAndBonusMatchWin.render();
+    sixMatchWin.render();
 
     revenueRatio.render();
   }
@@ -62,15 +66,16 @@ public class ReportWinStatistics extends Screen {
   @Override
   public void update() {
     Lotto latestWinLotto = UiSharedData.getLatestWinLotto();
-
     Lottos buyLottos = UiSharedData.getBuyLottos();
+    LottoNumber bonusNumber = UiSharedData.getBonusNumber();
 
-    winStatistics.analysis(latestWinLotto, buyLottos);
+    winStatistics.analysis(latestWinLotto, buyLottos, bonusNumber);
 
-    threeMatchWin.setPrintText(getStatisticsText(WinPolicy.THREE_MATCH.getMatchCount() + "개", winStatistics.find(WinPolicy.THREE_MATCH)));
-    fourMatchWin.setPrintText(getStatisticsText(WinPolicy.FOUR_MATCH.getMatchCount() + "개", winStatistics.find(WinPolicy.FOUR_MATCH)));
-    fiveMatchWin.setPrintText(getStatisticsText(WinPolicy.FIVE_MATCH.getMatchCount() + "개", winStatistics.find(WinPolicy.FIVE_MATCH)));
-    sixMatchWin.setPrintText(getStatisticsText(WinPolicy.SIX_MATCH.getMatchCount() + "개", winStatistics.find(WinPolicy.SIX_MATCH)));
+    threeMatchWin.setPrintText(getStatisticsText(WinPolicy.THREE_MATCH.getMatchCount() + "개 일치", winStatistics.find(WinPolicy.THREE_MATCH)));
+    fourMatchWin.setPrintText(getStatisticsText(WinPolicy.FOUR_MATCH.getMatchCount() + "개 일치", winStatistics.find(WinPolicy.FOUR_MATCH)));
+    fiveMatchWin.setPrintText(getStatisticsText(WinPolicy.FIVE_MATCH.getMatchCount() + "개 일치", winStatistics.find(WinPolicy.FIVE_MATCH)));
+    fiveAndBonusMatchWin.setPrintText(getStatisticsText(WinPolicy.FIVE_BONUS_MATCH.getMatchCount() + "개 일치, 보너스 볼 일치", winStatistics.find(WinPolicy.FIVE_BONUS_MATCH)));    
+    sixMatchWin.setPrintText(getStatisticsText(WinPolicy.SIX_MATCH.getMatchCount() + "개 일치", winStatistics.find(WinPolicy.SIX_MATCH)));
 
     revenueRatio.setPrintText(getRevenueRatioValueText());
   }
@@ -84,7 +89,7 @@ public class ReportWinStatistics extends Screen {
   }
 
   private String getStatisticsText(String matchInformText, WinStatisticsInfo winStatisticsInfo) {
-    return String.format("%s 일치 (%d원)- %d개", matchInformText, winStatisticsInfo.getWinPrice(), winStatisticsInfo.getCount());
+    return String.format("%s (%d원)- %d개", matchInformText, winStatisticsInfo.getWinPrice(), winStatisticsInfo.getCount());
   }
 
 }
