@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.LottoNumber;
 import lotto.domain.Number;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -20,9 +19,14 @@ public class InputView {
         return parseInputStringToInteger(scanner.next());
     }
 
-    public List<Number> getUserInputMatchNumber() {
+    public List<Integer> getUserInputMatchNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return parseInputStringToNumberList(scanner.next());
+    }
+
+    public int getUserInputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return parseInputStringToInteger(scanner.next());
     }
 
     private int parseInputStringToInteger(String inputString) {
@@ -31,20 +35,18 @@ public class InputView {
         return Integer.parseInt(inputString);
     }
 
-    private List<Number> parseInputStringToNumberList(String inputString) {
+    private List<Integer> parseInputStringToNumberList(String inputString) {
         validateEmpty(inputString);
-        String[] strings = inputString.split(SPLIT_REGEX);
+        List<String> strings = Arrays.stream(inputString.split(SPLIT_REGEX)).collect(Collectors.toList());
         validateArrayLength(strings);
-        return getNumberList(strings);
+        strings.forEach(number -> validateNumberFormat(number));
+        return getIntegerList(strings);
     }
 
-    private List<Number> getNumberList(String[] strings) {
-        List<Number> result = new ArrayList<>();
-        for (String number : strings) {
-            validateNumberFormat(number);
-            result.add(new Number(Integer.parseInt(number)));
-        }
-        return result;
+    private List<Integer> getIntegerList(List<String> strings) {
+        return strings.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     private void validateNumberFormat(String inputString) {
@@ -54,8 +56,8 @@ public class InputView {
         }
     }
 
-    private void validateArrayLength(String[] strings) {
-        if (strings.length > LottoNumber.LOTTO_SIZE) {
+    private void validateArrayLength(List<String> strings) {
+        if (strings.size() > LottoNumber.LOTTO_SIZE) {
             throw new NumberFormatException("[ERROR] 당첨번호의 길이가 초과하였습니다.");
         }
     }

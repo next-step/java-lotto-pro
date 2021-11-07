@@ -1,39 +1,55 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoNumber;
-import lotto.domain.MatchResult;
+import lotto.domain.Number;
 import lotto.domain.Rank;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public void printPurchaseLottoList(Lotto lotto) {
-        int purchaseCount = lotto.getLottoNumbers().size();
-        System.out.println(purchaseCount + "개를 구매했습니다.");
-        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
-            System.out.println(lottoNumber.toString());
+    public void printPurchaseLottoList(List<LottoNumber> lotto) {
+        System.out.println(lotto.size() + "개를 구매했습니다.");
+        for (LottoNumber lottoNumber : lotto) {
+            printLottoNumbers(lottoNumber);
         }
     }
 
-    public void printPrizeLotto(MatchResult lottoMatch) {
+    public void printLottoNumbers(LottoNumber lottoNumber) {
+        System.out.println("[" +
+                String.join(",", lottoNumber.getLottoNumbers()
+                        .stream()
+                        .map(Number::getNumber)
+                        .map(String::valueOf)
+                        .collect(Collectors.toList()))
+                + "]");
+    }
+
+    public void printPrizeLotto(LottoResult matchLottoResultList) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-
-        HashMap<Rank, Integer> matchResult = lottoMatch.getMatchResult();
-        for (Map.Entry<Rank, Integer> entry : matchResult.entrySet()) {
-            printMatchResult(entry);
+        for (Rank rank : Rank.values()) {
+            int matchRankCount = matchLottoResultList.getMatchRankCount(rank);
+            printMatchResult(rank, matchRankCount);
         }
+        printLottoYield(matchLottoResultList.getLottoYield());
     }
 
-    private void printMatchResult(Map.Entry<Rank, Integer> entry) {
-        if (!entry.getKey().equals(Rank.NONE)) {
+    private void printLottoYield(double lottoYield) {
+        System.out.println(
+                "총 수익률은 " + lottoYield + "입니다."
+                        + (lottoYield < 1 ? "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" : "")
+        );
+    }
+
+    private void printMatchResult(Rank rank, int matchRankCount) {
+        if (!rank.isRankMatch(Rank.NONE)) {
             System.out.println(
-                    entry.getKey().getMatchCount() + "개 일치 "
-                            + "(" + entry.getKey().getPrizeMoney() + ")- "
-                            + entry.getValue() + "개"
+                    rank.getMatchCount() + "개 일치 "
+                            + "(" + rank.getPrizeMoney() + ")"
+                            + "- " + matchRankCount + "개"
             );
         }
     }

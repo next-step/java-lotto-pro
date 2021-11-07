@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static lotto.domain.Number.MAX_NUMBER;
 import static lotto.domain.Number.MIN_NUMBER;
@@ -10,6 +9,7 @@ import static lotto.utils.RandomNumberUtils.generateRandomNumbers;
 public class LottoNumber {
 
     public static final int LOTTO_SIZE = 6;
+    public final static int GAME_PRICE = 1000;
 
     private final List<Number> lottoNumbers;
 
@@ -24,17 +24,25 @@ public class LottoNumber {
         lottoNumbers = sortAsc(activeNumbers);
     }
 
+    public Rank getMatchRank(WinningLotto winningLotto) {
+        int matchCount = 0;
+        boolean matchBonus = winningLotto.isExistBonusNumber(lottoNumbers);
+        for (Number number : lottoNumbers) {
+            matchCount += winningLotto.isMatchNumber(number) ? 1 : 0;
+        }
+        return Rank.of(matchCount, matchBonus);
+    }
+
     private List<Number> getAutoLottoNumbers() {
         Set<Number> numbers = new HashSet<>();
         while (numbers.size() < LOTTO_SIZE) {
-            numbers.add(getRandomNumber());
+            numbers.add(Number.of(getRandomNumber()));
         }
         return new ArrayList<>(numbers);
     }
 
-    private Number getRandomNumber() {
-        int randomNumber = generateRandomNumbers(MIN_NUMBER, MAX_NUMBER);
-        return new Number(randomNumber);
+    private int getRandomNumber() {
+        return generateRandomNumbers(MIN_NUMBER, MAX_NUMBER);
     }
 
     private void validateLottoNumbersSize(List<Number> activeNumbers) {
@@ -48,25 +56,7 @@ public class LottoNumber {
         return lottoNumbers;
     }
 
-    public List<Number> getLottoNumber() {
+    public List<Number> getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    @Override
-    public String toString() {
-        return String.join(", ", lottoNumbers.toString());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumbers);
     }
 }
