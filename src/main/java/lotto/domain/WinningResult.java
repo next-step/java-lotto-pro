@@ -19,12 +19,6 @@ public class WinningResult {
         return winnerPerRank;
     }
 
-    //TODO 질문3
-    protected double profitRate(int purchaseAmount, int profitAmount) {
-        return profitAmount / (double) purchaseAmount;
-    }
-
-    //TODO 질문3
     public double profitRate(int purchaseAmount) {
         return profitAmount() / (double) purchaseAmount;
     }

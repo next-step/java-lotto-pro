@@ -7,9 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -77,16 +75,26 @@ class WinningTest {
 
     @DisplayName("수익률 계산")
     @ParameterizedTest
-    @CsvSource(value = {"1000:5000:5", "1000:0:0", "2000:15000:7.5", "5000:5000:1", "10000:5000:0.5"}, delimiter = ':')
-    void profitRateTest(int purchaseAmount, int profitAmount, double profitRate) {
+    @MethodSource("profitRateParametersProvider")
+    void profitRateTest(int purchaseAmount, Rank rank, int winningCount, int profitRate) {
         //given
-        Lottos lottos = new Lottos(new ArrayList<>());
-        WinningResult winningResult = lottos.winningResult(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Map<Rank, Integer> rankMap = new HashMap<>();
+        rankMap.put(rank, winningCount);
+        WinningResult winningResult = new WinningResult(rankMap);
 
         //when
-        double profitRateResult = winningResult.profitRate(purchaseAmount, profitAmount);
+        double profitRateResult = winningResult.profitRate(purchaseAmount);
 
         //then
         assertThat(profitRateResult).isEqualTo(profitRate);
+    }
+
+    static Stream<Arguments> profitRateParametersProvider() {
+        return Stream.of(
+                arguments(1000, Rank.FOURTH_PLACE, 1, 5),
+                arguments(1000, Rank.THIRD_PLACE, 1, 50),
+                arguments(1000, Rank.SECOND_PLACE, 1, 1500),
+                arguments(1000, Rank.FIRST_PLACE, 1, 2000000)
+        );
     }
 }
