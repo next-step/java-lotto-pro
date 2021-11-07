@@ -14,23 +14,18 @@ public class LottoController {
 
     private static final String BLANK = " ";
 
-    private final LottoCalculator lottoCalculator;
-
-    public LottoController() {
-        this.lottoCalculator = new LottoCalculator(ConsoleIn.inputPurchaseAmount());
-        printLottos();
-    }
-
     public void run() {
+        LottoCalculator lottoCalculator = new LottoCalculator(ConsoleIn.inputPurchaseAmount());
+        printLottos(lottoCalculator);
         lottoCalculator.calculate(new WinningLotto(ConsoleIn.inputWinNumber(), ConsoleIn.inputBonusNumber()));
         WinningResults winningResults = lottoCalculator.getWinningResults();
 
         printHeader();
         printWinningResults(winningResults);
-        printProceedsRate(winningResults);
+        printProceedsRate(lottoCalculator, winningResults);
     }
 
-    private void printLottos() {
+    private void printLottos(LottoCalculator lottoCalculator) {
         ConsoleOut.printMessage(Message.LOTTOS_PRINT.getMessage(), lottoCalculator.getLottosSize());
         for (Lotto lotto : lottoCalculator.getLottos().getLottos()) {
             ConsoleOut.printMessage(lotto.toString());
@@ -56,7 +51,7 @@ public class LottoController {
                         printWinningResult(winningResult, winningResultCounts.getOrDefault(winningResult, 0)));
     }
 
-    private void printProceedsRate(WinningResults winningResults) {
+    private void printProceedsRate(LottoCalculator lottoCalculator, WinningResults winningResults) {
         long proceeds = winningResults.getProceeds();
         ConsoleOut.printMessage(
                 Message.PROCEEDS_PRINT.getMessage(), lottoCalculator.getProceedsRate(), getCommentMessage(proceeds));
