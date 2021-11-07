@@ -1,11 +1,11 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -22,24 +22,30 @@ public class LottoResultTest {
         return Stream.of(arguments(lottoNumber, matchNumber, Number.of(7)));
     }
 
+    static Stream<Arguments> listProvide3() {
+        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
+        List<Number> lottoNumber2 = Arrays.asList(Number.of(7), Number.of(8), Number.of(9), Number.of(10), Number.of(5), Number.of(7));
+        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
+        return Stream.of(arguments(lottoNumber, lottoNumber2, matchNumber, Number.of(7)));
+    }
+
+    static Stream<Arguments> listProvide2() {
+        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
+        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
+        return Stream.of(arguments(lottoNumber, matchNumber, Number.of(7)));
+    }
+
     @ParameterizedTest
     @MethodSource("listProvide")
     @DisplayName("로또 수익률 확인")
     public void lottoTest(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
         LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(new LottoNumber(lottoNumber)));
-        int expected = Rank.SECOND.getPrizeMoney() / (1 * GAME_PRICE);
+        double expected = Rank.SECOND.getPrizeMoney().divide(GAME_PRICE.multiply(BigDecimal.valueOf(1))).doubleValue();
 
         double actual = lottoMatchResult.getLottoYield();
 
         assertThat(actual).isEqualTo(expected);
-    }
-
-    static Stream<Arguments> listProvide3() {
-        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
-        List<Number> lottoNumber2 = Arrays.asList(Number.of(7), Number.of(8), Number.of(9), Number.of(10), Number.of(5), Number.of(7));
-        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
-        return Stream.of(arguments(lottoNumber, lottoNumber2, matchNumber, Number.of(7)));
     }
 
     @ParameterizedTest
@@ -56,13 +62,6 @@ public class LottoResultTest {
         assertThat(actual).isNotEqualTo(actual2);
     }
 
-
-    static Stream<Arguments> listProvide2() {
-        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
-        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
-        return Stream.of(arguments(lottoNumber, matchNumber, Number.of(7)));
-    }
-
     @ParameterizedTest
     @MethodSource("listProvide2")
     @DisplayName("로또 번호 보너스 매칭 확인")
@@ -75,7 +74,6 @@ public class LottoResultTest {
 
         assertThat(actualCount).isEqualTo(1);
     }
-
 
 
 }

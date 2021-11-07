@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.LottoNumberSizeException;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import static lotto.domain.Number.MAX_NUMBER;
@@ -12,7 +13,7 @@ import static lotto.utils.ValidationUtils.*;
 public class LottoNumber {
 
     public static final int LOTTO_SIZE = 6;
-    public final static int GAME_PRICE = 1000;
+    public final static BigDecimal GAME_PRICE = BigDecimal.valueOf(1000);
 
     private final List<Number> lottoNumbers;
 

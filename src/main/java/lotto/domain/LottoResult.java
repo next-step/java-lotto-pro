@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.EnumMap;
 
 import static lotto.domain.LottoNumber.GAME_PRICE;
 
@@ -8,9 +9,9 @@ public class LottoResult {
 
     private final static int DECIMAL_POINT = 3;
 
-    private final Map<Rank, Integer> lottoMatchResult;
+    private final EnumMap<Rank, Integer> lottoMatchResult;
 
-    public LottoResult(Map<Rank, Integer> lottoMatchResult) {
+    public LottoResult(EnumMap<Rank, Integer> lottoMatchResult) {
         this.lottoMatchResult = lottoMatchResult;
     }
 
@@ -19,29 +20,26 @@ public class LottoResult {
     }
 
     public double getLottoYield() {
-        double sum = getPrizeMoneySum() / getPurchaseAmount(GAME_PRICE);
-        double yield = getMatchAround(sum, DECIMAL_POINT);
-        return yield;
+        return getPrizeMoneySum().divide(getPurchaseAmount(GAME_PRICE)).setScale(DECIMAL_POINT).doubleValue();
     }
 
-    private int getPrizeMoneySum() {
-        int sum = 0;
+    private BigDecimal getPrizeMoneySum() {
+        BigDecimal sum = BigDecimal.valueOf(0);
+
         for (Rank rank : lottoMatchResult.keySet()) {
-            sum += rank.getPrizeMoney() * lottoMatchResult.get(rank);
+            BigDecimal multiply = rank.getPrizeMoney().multiply(BigDecimal.valueOf(lottoMatchResult.get(rank)));
+            sum = sum.add(multiply);
         }
         return sum;
     }
 
-    private int getPurchaseAmount(int gamePrice) {
-        return lottoMatchResult.values()
-                .stream()
-                .mapToInt(Integer::intValue)
-                .sum() * gamePrice;
-    }
-
-    private double getMatchAround(double value, int position) {
-        double ndb = Math.pow(10.0, position);
-        return (Math.round(value * ndb) / ndb);
+    private BigDecimal getPurchaseAmount(BigDecimal gamePrice) {
+        return gamePrice.multiply(
+                BigDecimal.valueOf(lottoMatchResult.values()
+                        .stream()
+                        .mapToInt(Integer::intValue)
+                        .sum())
+        );
     }
 
 }

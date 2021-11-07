@@ -5,6 +5,7 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,8 +36,8 @@ public class LottoMachineController {
         printMatchResult(matchLottoResultResult);
     }
 
-    private int getUserInputPurchaseAmount() {
-        return inputView.getUserInputPurchaseAmount();
+    private BigDecimal getUserInputPurchaseAmount() {
+        return BigDecimal.valueOf(inputView.getUserInputPurchaseAmount());
     }
 
     private List<Number> getUserInputMatchNumber() {

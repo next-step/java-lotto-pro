@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -25,7 +26,7 @@ public class LottoMachineTest {
     @Test
     @DisplayName("입력 금액만큼 로또 생성")
     public void getLottoListTest() {
-        Money money = new Money(5000);
+        Money money = new Money(BigDecimal.valueOf(5000));
         LottoMachine machine = new LottoMachine(money);
 
         int actualSize = machine.getLottoList().size();
@@ -37,7 +38,7 @@ public class LottoMachineTest {
     @MethodSource("listProvide")
     @DisplayName("수동 금액만큼 로또 생성")
     public void getLottoListTest2(List<Number> lottoNumber) {
-        Money money = new Money(1000);
+        Money money = new Money(BigDecimal.valueOf(1000));
         LottoMachine machine = new LottoMachine(money, Arrays.asList(lottoNumber));
 
         int actualSize = machine.getLottoList().size();
