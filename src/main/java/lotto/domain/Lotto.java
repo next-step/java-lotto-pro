@@ -24,7 +24,12 @@ public class Lotto {
         this.lineOfLottoNumber = lottoNumbers;
     }
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (Integer number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+
         validateLottoNumbers(lottoNumbers);
 
         Collections.sort(lottoNumbers);
