@@ -1,9 +1,9 @@
 package lotto.view;
 
-import lotto.domain.LottoGame;
-import lotto.domain.Money;
-import lotto.domain.Ranking;
-import lotto.domain.Statistics;
+import lotto.domain.*;
+import lotto.exception.LottoBallNumberConvertException;
+
+import java.util.List;
 
 public class ResultView {
     private static final String TRY_COUNT_MESSAGE = "개를 구매했습니다.";
@@ -16,7 +16,7 @@ public class ResultView {
     }
 
     public void printLottoBalls(LottoGame lottoGame) {
-        System.out.println(lottoGame.toString());
+        System.out.println(createLottoBallsListMessage(lottoGame));
     }
 
     public void printLottoResult(Money inputMoney, Statistics statistics) {
@@ -38,5 +38,24 @@ public class ResultView {
                 .append("원) - ")
                 .append(statistics.getCount(ranking));
         return builder.toString();
+    }
+
+    private String createLottoBallsListMessage(LottoGame lottoGame) {
+        List<LottoBalls> lottoBallsList = lottoGame.getLottoBallsList();
+        StringBuilder builder = new StringBuilder();
+        for (LottoBalls lottoBalls : lottoBallsList) {
+            builder.append("[");
+            builder.append(createLottoBallsMessage(lottoBalls));
+            builder.append("]");
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
+
+    private String createLottoBallsMessage(LottoBalls lottoBalls) {
+        return lottoBalls.getLottoBalls().stream()
+                .map(lottoBall -> String.valueOf(lottoBall.getNumber()))
+                .reduce((d1, d2) -> String.join(",", d1, d2))
+                .orElseThrow(() -> new LottoBallNumberConvertException("로또 번호 문자열 변환 실패"));
     }
 }

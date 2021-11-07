@@ -18,14 +18,13 @@ public class LottoBall implements Comparable<LottoBall> {
         return number < LottoBallRule.MIN_LOTTO_NUMBER.getNumber() || number > LottoBallRule.MAX_LOTTO_NUMBER.getNumber();
     }
 
-    @Override
-    public int compareTo(LottoBall other) {
-        return Integer.compare(this.number, other.number);
+    public int getNumber() {
+        return number;
     }
 
     @Override
-    public String toString() {
-        return String.valueOf(number);
+    public int compareTo(LottoBall other) {
+        return Integer.compare(this.number, other.number);
     }
 
     @Override

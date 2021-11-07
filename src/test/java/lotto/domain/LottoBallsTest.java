@@ -28,19 +28,6 @@ class LottoBallsTest {
 
     }
 
-    @DisplayName("문자열 변환")
-    @Test
-    void convertString() {
-        LottoBalls balls = new LottoBalls(Arrays.asList(
-                new LottoBall(1), new LottoBall(2), new LottoBall(3),
-                new LottoBall(4), new LottoBall(5), new LottoBall(6)
-        ));
-
-        String result = balls.toString();
-
-        assertThat(result).isEqualTo("1,2,3,4,5,6");
-    }
-
     @DisplayName("당첨번호와 일치하는 번호의 개수를 구한다")
     @Test
     void countWinningBallCount() {

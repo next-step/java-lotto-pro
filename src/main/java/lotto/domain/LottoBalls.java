@@ -21,6 +21,10 @@ public class LottoBalls {
         this.lottoBalls = createLottoBallList(numbersSplitted);
     }
 
+    public List<LottoBall> getLottoBalls() {
+        return lottoBalls;
+    }
+
     private String[] splitNumberString(String numbersString) {
         String[] numbersSplitted = numbersString.split(",");
         if (numbersSplitted.length != LottoBallRule.LOTTO_BALLS_SIZE.getNumber()) {
@@ -43,14 +47,6 @@ public class LottoBalls {
             count = lottoBalls.contains(winBall) ? count + 1 : count;
         }
         return count;
-    }
-
-    @Override
-    public String toString() {
-        return lottoBalls.stream()
-                .map(LottoBall::toString)
-                .reduce((d1, d2) -> String.join(",", d1, d2))
-                .orElseThrow(() -> new LottoBallNumberConvertException("로또 번호 문자열 변환 실패"));
     }
 
 }

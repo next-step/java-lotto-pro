@@ -21,6 +21,10 @@ public class LottoGame {
         return tryCount;
     }
 
+    public List<LottoBalls> getLottoBallsList() {
+        return lottoBallsList;
+    }
+
     public Statistics calculateLottoResult(LottoBalls winLottoBalls) {
         Statistics statistics = new Statistics();
         for (LottoBalls lottoBalls : lottoBallsList) {
@@ -31,15 +35,4 @@ public class LottoGame {
         return statistics;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (LottoBalls lottoBalls : lottoBallsList) {
-            builder.append("[");
-            builder.append(lottoBalls.toString());
-            builder.append("]");
-            builder.append("\n");
-        }
-        return builder.toString();
-    }
 }
