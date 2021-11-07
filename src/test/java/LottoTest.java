@@ -6,9 +6,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoTest {
 
+	@Test
+	void from_sort() {
+		assertThat(Lotto.from("6,5,4,3,2,1").toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+	}
+
 	@ParameterizedTest
 	@ValueSource(strings = {"1,2", "1,2,3,4,5,6,7", "1,1,2,3,4,5"})
-	public void from_tooShort_tooLong_duplicated(String input) {
+	void from_tooShort_tooLong_duplicated(String input) {
 		assertThatExceptionOfType(LottoFormatException.class)
 			.isThrownBy(() -> Lotto.from(input))
 			.withMessage(LottoFormatException.ERROR_MESSAGE);
@@ -16,11 +21,12 @@ public class LottoTest {
 
 	@Test
 	void hasBonus() {
+		final String bonus = "45";
 		final WinningLotto winningLotto = WinningLottoBuilder.aWinningLotto()
 			.withLottoNumbers("1,2,3,4,5,6")
-			.withBonus("45")
+			.withBonus(bonus)
 			.build();
 		assertThat(Lotto.from("1,2,3,4,5,6").hasBonus(winningLotto)).isFalse();
-		assertThat(Lotto.from("1,2,3,4,5,45").hasBonus(winningLotto)).isTrue();
+		assertThat(Lotto.from(String.format("1,2,3,4,5,%s", bonus)).hasBonus(winningLotto)).isTrue();
 	}
 }

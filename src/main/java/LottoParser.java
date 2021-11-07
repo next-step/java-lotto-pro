@@ -13,7 +13,6 @@ public class LottoParser {
 			.map(String::trim)
 			.mapToInt(LottoParser::parseInt)
 			.mapToObj(LottoNumber::from)
-			.sorted()
 			.collect(Collectors.toList());
 	}
 
