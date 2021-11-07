@@ -5,12 +5,13 @@ import java.util.Objects;
 public class PurchaseAmount {
 	public static final int SALE_PRICE = 1000;
 	public static final int CHANGE = 0;
+	public static final String INVALID_AMOUNT = "금액이 올바르지 않습니다.";
 
 	private final int amount;
 
 	public PurchaseAmount(int money) {
 		if (isNotAmountCorrect(money)) {
-			throw new IllegalArgumentException("##");
+			throw new IllegalArgumentException(INVALID_AMOUNT);
 		}
 		this.amount = money;
 	}

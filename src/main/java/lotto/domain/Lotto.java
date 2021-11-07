@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class Lotto {
 
 	private static final int LOTTO_SIZE = 6;
+	public static final String INVALID_NUMBER = "번호가 올바르지 않습니다.";
 
 	private final List<LottoNumber> lottoNumbers;
 
@@ -17,7 +18,7 @@ public class Lotto {
 
 		Set<Integer> numbersCheck = new HashSet<>(numbers);
 		if (isLottoSize(numbersCheck.size())) {
-			throw new IllegalArgumentException("##");
+			throw new IllegalArgumentException(INVALID_NUMBER);
 		}
 
 		this.lottoNumbers = Collections.unmodifiableList(numbers.stream()
