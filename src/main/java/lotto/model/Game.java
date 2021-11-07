@@ -9,6 +9,10 @@ import static lotto.common.Constants.*;
 
 public class Game {
 
+    private static final List<Integer> randomNumbers = IntStream.range(MIN_RANGE_VALUE, MAX_RANGE_VALUE)
+            .boxed()
+            .collect(Collectors.toList());
+
     private List<Integer> numbers;
 
     public Game() {
@@ -22,9 +26,6 @@ public class Game {
      * @return GET_NUMBER_COUNT 길이의 배열을 반환
      */
     private List<Integer> generateNumbers() {
-        List<Integer> randomNumbers = IntStream.range(MIN_RANGE_VALUE, MAX_RANGE_VALUE)
-                .boxed()
-                .collect(Collectors.toList());
         Collections.shuffle(randomNumbers);
         return randomNumbers.subList(0, GET_NUMBER_COUNT)
                 .stream()
