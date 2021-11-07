@@ -10,11 +10,11 @@ public class LastWeekWinningNumber {
 	public static final String EMPTY_STRING = "";
 	public static final String COMMA = ",";
 
-	private Lotto value;
+	private Lotto lotto;
 	private BonusBall bonusBall;
 
-	private LastWeekWinningNumber(Lotto value) {
-		this.value = value;
+	private LastWeekWinningNumber(Lotto lotto) {
+		this.lotto = lotto;
 	}
 
 	public static boolean validate(String value) {
@@ -57,11 +57,11 @@ public class LastWeekWinningNumber {
 	}
 
 	public boolean isNotContain(String bonusBall) {
-		return value.isNotContain(BonusBall.from(bonusBall));
+		return lotto.isNotContain(BonusBall.from(bonusBall));
 	}
 
-	public Lotto getValue() {
-		return value;
+	public Lotto getLotto() {
+		return lotto;
 	}
 
 	public BonusBall getBonusBall() {

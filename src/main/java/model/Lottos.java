@@ -27,7 +27,7 @@ public class Lottos {
 		MatchResult matchResult = new MatchResult();
 
 		values.forEach(lotto -> {
-			Count count = lotto.matchCount(lastWeekWinningNumber.getValue());
+			Count count = lotto.matchCount(lastWeekWinningNumber.getLotto());
 			boolean isMatchBonusBall = lotto.isMatchBonusBall(lastWeekWinningNumber.getBonusBall());
 			matchResult.increaseByMatchCount(MatchingNumberCount.getByCount(count, isMatchBonusBall));
 		});
