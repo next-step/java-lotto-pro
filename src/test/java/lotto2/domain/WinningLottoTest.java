@@ -36,7 +36,6 @@ public class WinningLottoTest {
 		// when, then
 		assertThatThrownBy(() -> WinningLotto.of(lottoNumbers, bonusNumber))
 			.isInstanceOf(IllegalArgumentException.class);
-
 	}
 
 }

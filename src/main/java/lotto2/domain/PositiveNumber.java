@@ -19,7 +19,7 @@ public class PositiveNumber {
 				ErrorMessage.ONLY_POSITIVE_NUMBER.value());
 		}
 	}
-	
+
 	public int toInt() {
 		return this.number;
 	}
@@ -39,5 +39,13 @@ public class PositiveNumber {
 	@Override
 	public int hashCode() {
 		return number;
+	}
+
+	public boolean isLessThan(PositiveNumber other) {
+		return this.number < other.number;
+	}
+
+	public boolean isGreaterThan(PositiveNumber other) {
+		return this.number > other.number;
 	}
 }

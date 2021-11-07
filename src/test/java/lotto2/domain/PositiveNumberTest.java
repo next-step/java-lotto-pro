@@ -3,6 +3,7 @@ package lotto2.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -39,5 +40,39 @@ public class PositiveNumberTest {
 
 		// then
 		assertThat(result).isEqualTo(number);
+	}
+
+	@Test
+	@DisplayName("주어진 숫자보다 작은지 확인할 수 있어야 한다")
+	public void isLessThenTest() {
+		// given
+		PositiveNumber number = PositiveNumber.of(3);
+		PositiveNumber greaterNumber1 = PositiveNumber.of(4);
+		PositiveNumber greaterNumber2 = PositiveNumber.of(100);
+		PositiveNumber lessNumber1 = PositiveNumber.of(2);
+		PositiveNumber lessNumber2 = PositiveNumber.of(0);
+
+		// when, then
+		assertThat(number.isLessThan(greaterNumber1)).isEqualTo(true);
+		assertThat(number.isLessThan(greaterNumber2)).isEqualTo(true);
+		assertThat(number.isLessThan(lessNumber1)).isEqualTo(false);
+		assertThat(number.isLessThan(lessNumber2)).isEqualTo(false);
+	}
+
+	@Test
+	@DisplayName("주어진 숫자보다 큰지 확인할 수 있어야 한다")
+	public void isGreaterThenTest() {
+		// given
+		PositiveNumber number = PositiveNumber.of(3);
+		PositiveNumber greaterNumber1 = PositiveNumber.of(4);
+		PositiveNumber greaterNumber2 = PositiveNumber.of(100);
+		PositiveNumber lessNumber1 = PositiveNumber.of(2);
+		PositiveNumber lessNumber2 = PositiveNumber.of(0);
+
+		// when, then
+		assertThat(number.isGreaterThan(greaterNumber1)).isEqualTo(false);
+		assertThat(number.isGreaterThan(greaterNumber2)).isEqualTo(false);
+		assertThat(number.isGreaterThan(lessNumber1)).isEqualTo(true);
+		assertThat(number.isGreaterThan(lessNumber2)).isEqualTo(true);
 	}
 }
