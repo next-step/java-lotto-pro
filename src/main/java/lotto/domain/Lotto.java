@@ -37,6 +37,16 @@ public class Lotto {
 		return Collections.unmodifiableList(lottoNumbers);
 	}
 
+	public int countMatch(final Lotto targetLotto) {
+		int matchCount = 0;
+
+		for (LottoNumber targetNumber: targetLotto.lottoNumbers) {
+			matchCount += Collections.frequency(lottoNumbers, targetNumber);
+		}
+
+		return matchCount;
+	}
+
 	private void validateNonDuplicated(final List<LottoNumber> numbers) {
 		Set<LottoNumber> numberSet = new HashSet<>(numbers);
 
