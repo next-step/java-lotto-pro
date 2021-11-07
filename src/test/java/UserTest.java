@@ -21,6 +21,12 @@ public class UserTest {
     public void buy(){
         User user = new User(new BigInteger("14000"));
         user.buyLotto();
-        assertThat(user.getMoney()).isEqualTo(0);
+        assertThat(user.getMoney()).isEqualTo(13000);
+    }
+
+    @Test
+    public void getProfitRateTest() {
+
+
     }
 }

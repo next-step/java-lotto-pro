@@ -1,30 +1,21 @@
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
 
 public class User {
-    BigInteger money;
-    List<Lotto> lottoList;
+    public static final int lottoPrice = 1000;
+    private BigInteger money;
+    private Lottos lottoList;
 
     public User(BigInteger money) {
         this.money = money;
-        this.lottoList = new ArrayList<Lotto>();
+        this.lottoList = new Lottos();
     }
 
     public BigInteger getMoney() {
         return money;
     }
 
-    public void setMoney(BigInteger money) {
-        this.money = money;
-    }
-
-    public List<Lotto> getLottoList() {
+    public Lottos getLottoList() {
         return lottoList;
-    }
-
-    public void setLottoList(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
     }
 
     public void buyLotto(){
@@ -33,14 +24,26 @@ public class User {
     }
 
     private void expendMoney(){
-        this.money = this.money.subtract(LottoGame.lottoPrice);
+        this.money = this.money.subtract(BigInteger.valueOf(lottoPrice));
     }
 
     public boolean hasMoney(){
-        return this.money.compareTo(LottoGame.lottoPrice) >= 0 ;
+        return this.money.compareTo(BigInteger.valueOf(lottoPrice)) >= 0 ;
     }
 
     public int howManyLotto(){
         return lottoList.size();
+    }
+
+    public void checkMatch(Lotto lotto){
+        lottoList.checkMatch(lotto);
+    }
+
+    public int match(int matchCount){
+        return lottoList.match(matchCount);
+    }
+
+    public double getProfitRate(){
+        return Double.parseDouble(String.valueOf(lottoList.getProfit())) / Double.parseDouble(String.valueOf(lottoPrice * howManyLotto()));
     }
 }

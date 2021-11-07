@@ -22,9 +22,12 @@ public class LottoTest {
     public void issueLottoRuntimeException(){
         assertThatThrownBy(() -> new Lotto("1,2,3,4,5"))
                 .isInstanceOf(RuntimeException.class);
-
     }
 
-
-
+    @Test
+    public void isContainNumberTest(){
+        Lotto lotto = new Lotto("1,2,3,4,5,6");
+        lotto.isContainNumber(6);
+        assertThat(lotto).isEqualTo(new Lotto("1,2,3,4,5,6", 1));
+    }
 }
