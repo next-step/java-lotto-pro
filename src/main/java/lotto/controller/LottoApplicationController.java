@@ -41,10 +41,7 @@ public class LottoApplicationController {
 	}
 
 	private boolean continuePurchase(int purchaseQuantity) {
-		if (purchaseQuantity > PURCHASE_FINISH) {
-			return true;
-		}
-		return false;
+		return purchaseQuantity > PURCHASE_FINISH;
 	}
 
 	public void printPurchasedLottoNumbers() {
