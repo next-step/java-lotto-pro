@@ -40,5 +40,5 @@ public class SeperatorsTest {
 
     // then
     assertThat(separators.value()).isEqualTo(",:@");
-  }  
+  }
 }

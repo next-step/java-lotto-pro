@@ -5,7 +5,7 @@ package stringcalculator;
  */
 public class NaturalNumber {
   private Integer value;
-  
+
   /**
    * 계산에 사용되는 숫자에대해 유효성검사를 하여 통과시 해당값을 저장.
    *
@@ -36,7 +36,7 @@ public class NaturalNumber {
   }
 
   /**
-   * 자연수 덧셈. 
+   * 자연수 덧셈.
    *
    * @param naturalNumber 덧셈할 자연수값
    * @return 자연수 구초제
