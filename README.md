@@ -80,13 +80,11 @@
 ### 리팩토링 대상 확인
 - [x] 테스트를 위한 생성 메소드를 `LottoNumbers`에 넣기
   - [정적팩토리 메소드란](https://velog.io/@ljinsk3/%EC%A0%95%EC%A0%81-%ED%8C%A9%ED%86%A0%EB%A6%AC-%EB%A9%94%EC%84%9C%EB%93%9C%EB%8A%94-%EC%99%9C-%EC%82%AC%EC%9A%A9%ED%95%A0%EA%B9%8C)
-- [ ] 불안전한 객체를 `private`으로 막은 뒤 항상 "중복을 제외한 6개의 숫자"를 만족하는 객체가 되도록 만들기
-- [ ] LottoPapers 싱글톤 사용 자제 (객체의 생성으로 변환)
-- [ ] assert 사용보다  throw로 변경 
-- [ ] private static final Pattern PATTERN_FOO = Pattern.compile("your_regex");
-- [ ] `LottoNumberService.java` stream trim 을 사용 
-- [ ] `stream().filter(/*do stuff*/).count()`
+- [x] 불안전한 객체를 `private`으로 막은 뒤 항상 "중복을 제외한 6개의 숫자"를 만족하는 객체가 되도록 만들기
+- [x] LottoPapers 싱글톤 사용 자제 (객체의 생성으로 변환)
+- [x] assert 사용보다  throw로 변경 
+- [x] private static final Pattern PATTERN_FOO = Pattern.compile("your_regex");
+- [x] `LottoNumberService.java` stream trim 을 사용 
+- [x] `stream().filter(/*do stuff*/).count()`
 
 
-### 궁금한점 
-- 배열을 이용한 반복 테스트는 어떻게 진행해야하는가? 
