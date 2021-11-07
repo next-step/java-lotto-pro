@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.BuyAmount;
 import lotto.exception.MinimumTicketPriceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
