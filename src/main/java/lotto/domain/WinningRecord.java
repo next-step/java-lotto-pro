@@ -16,7 +16,7 @@ public class WinningRecord {
 	public WinningRecord(List<Rank> ranks) {
 		Map<Long, Integer> record = new HashMap<>();
 		for (Rank rank : ranks) {
-			record.put(rank.getMatchCount(), record.getOrDefault(rank.getMatchCount(), DEFAULT_VALUE) + ADD);
+			record.put(rank.getPrizeMoney(), record.getOrDefault(rank.getPrizeMoney(), DEFAULT_VALUE) + ADD);
 		}
 		this.record = record;
 		this.revenue = record.entrySet().stream()
@@ -25,7 +25,7 @@ public class WinningRecord {
 	}
 
 	public int getPlaceCount(Rank rank) {
-		return this.record.getOrDefault(rank.getMatchCount(), DEFAULT_VALUE);
+		return this.record.getOrDefault(rank.getPrizeMoney(), DEFAULT_VALUE);
 	}
 
 	public long getRevenue() {

@@ -13,6 +13,8 @@ public class ResultView {
 	public static final String PRINT_RETURN_RATE = "총 수익률은 %.2f 입니다.";
 	public static final String PRINT_MONEY_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 	public static final String PRINT_LOTTO_RECORD = "%d개 일치 (%s원)- %d개%n";
+	public static final String WINNING_STAT_INFO = "당첨 통계";
+	public static final String DASH = "---------";
 
 	public ResultView() {
 	}
@@ -38,10 +40,16 @@ public class ResultView {
 	}
 
 	public void printReturnRate(double rate) {
-		System.out.println(rate);
 		System.out.printf(PRINT_RETURN_RATE, rate);
-		if (rate > STANDARD_RATE) {
+		if (STANDARD_RATE > rate) {
 			System.out.println(PRINT_MONEY_LOSS);
 		}
+	}
+
+	public void printWinningStat(WinningRecord winningRecord, double rate){
+		System.out.println(WINNING_STAT_INFO);
+		System.out.println(DASH);
+		printWinningRecord(winningRecord);
+		printReturnRate(rate);
 	}
 }

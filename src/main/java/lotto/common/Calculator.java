@@ -1,13 +1,15 @@
 package lotto.common;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Calculator {
 
-	public static final double ROUNDS = 100.0;
+	public static final int DECIMAL_POINT = 2;
 
 	public static double profitRate(double initial, double review) {
-		double profitRate = review / initial;
-		return Math.round(profitRate * ROUNDS) / ROUNDS;
+		return new BigDecimal(review / initial)
+			.setScale(DECIMAL_POINT, RoundingMode.FLOOR)
+			.doubleValue();
 	}
 }
