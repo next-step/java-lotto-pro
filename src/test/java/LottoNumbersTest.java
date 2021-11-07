@@ -19,6 +19,16 @@ public class LottoNumbersTest {
 	}
 
 	@Test
+	@DisplayName("로또 숫자에 중복된 값이 포함되어있으면 예외")
+	void test_constructor2() {
+		assertThatThrownBy(() -> new LottoNumbers(
+			Arrays.asList(new LottoNumber(1), new LottoNumber(1), new LottoNumber(3),
+				new LottoNumber(4), new LottoNumber(5), new LottoNumber(7))
+		)).isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(LottoNumbers.MESSAGE_NOT_ALLOW_DUPLICATION);
+	}
+
+	@Test
 	@DisplayName("로또 숫자가 6개가 포함되면서 겹치는 값이 없으면 성공")
 	void test_constructor3() {
 		assertThatNoException().isThrownBy(() -> new LottoNumbers(

@@ -43,7 +43,7 @@
   * 구입금액 입력
   * 지난 주 당첨 번호 입력
 
-* LottoGame 클래스
+* LottoGame 클래스i
   * 구입금액 / 로또 장당 가격 수만큼 루프 돌면서 LottoNumbers 객체 생성
   * 번호 생성
   
