@@ -1,7 +1,8 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoGenerator {
 	public static final int LOTTO_PRICE = 1000;
@@ -60,23 +61,14 @@ public class LottoGenerator {
 		validNullOrEmpty(inputMoney);
 		validNumber(inputMoney);
 		validUnderLottoPrice(inputMoney);
-		List<LottoNumbers> lottoNumbersList = new ArrayList<>();
 
-		do {
-			lottoNumbersList.add(new LottoNumbers());
-		} while (lottoNumbersList.size() < calculateLottoAmount(inputMoney));
-
-		return lottoNumbersList;
+		return Stream.generate(LottoNumbers::new)
+			.limit(calculateLottoAmount(inputMoney)).collect(Collectors.toList());
 	}
 
 	private List<LottoNumbers> generateLottoNumbers(String inputMoney, String inputNumber) {
-		List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-
-		do {
-			lottoNumbersList.add(new LottoNumbers(inputNumber));
-		} while (lottoNumbersList.size() < calculateLottoAmount(inputMoney));
-
-		return lottoNumbersList;
+		return Stream.generate(() -> new LottoNumbers(inputNumber))
+			.limit(calculateLottoAmount(inputMoney)).collect(Collectors.toList());
 	}
 
 	public int size() {
