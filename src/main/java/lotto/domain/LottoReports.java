@@ -30,6 +30,12 @@ public class LottoReports {
             .count();
     }
 
+    public long getCountOfFourth() {
+        return lottoRanks.stream()
+            .filter(Rank::isFourth)
+            .count();
+    }
+
     public long getCountOfFifty() {
         return lottoRanks.stream()
             .filter(Rank::isFifth)
