@@ -21,6 +21,7 @@ public class ResultView {
     private static final String BONUS_NUMBER_REQUEST_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String BUY_COUNT_MESSAGE = "%d 개를 구매했습니다.";
     private static final BigDecimal LOSS = BigDecimal.valueOf(1);
+    private static final Integer MIN_RANK_NUMBER = 3;
 
     private ResultView() {
     }
@@ -77,7 +78,7 @@ public class ResultView {
             format = LOTTO_RANK_BONUS_SECOND_FORMAT;
         }
 
-        if (lottoResultDto.getMatchNumber() >= 3) {
+        if (lottoResultDto.getMatchNumber() >= MIN_RANK_NUMBER) {
             println(String.format(
                 format,
                 lottoResultDto.getMatchNumber(),
