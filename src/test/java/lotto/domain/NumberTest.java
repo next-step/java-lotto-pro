@@ -28,4 +28,13 @@ public class NumberTest {
                 .hasMessageContaining("[ERROR]");
     }
 
+    @Test
+    @DisplayName("로또 번호 범위 오류 검증")
+    public void NumberRange2() {
+        assertThatThrownBy(() -> {
+            Number.of(0);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
 }
