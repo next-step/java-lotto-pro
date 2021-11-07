@@ -28,7 +28,7 @@ public class Winner {
 	}
 
 	public Map<Integer, Integer> statistics(List<LottoNumber> lottoNumbers) {
-		assert lottoNumbers != null;
+		isNotEmpty(lottoNumbers);
 		for (LottoNumbers lottoPapers : lottoPapers) {
 			Integer winningCount = findMatchLottoNumber(lottoNumbers, lottoPapers);
 			Integer winningAmount = WinningAmount.valueOf(winningCount);
@@ -36,6 +36,12 @@ public class Winner {
 			sumWinningAmount(winningAmount);
 		}
 		return winningAmount;
+	}
+
+	private void isNotEmpty(List<LottoNumber> lottoNumbers) {
+		if (lottoNumbers.isEmpty()) {
+			throw new IllegalArgumentException("로또번호가 정상적으로 생서되지 않았습니다.");
+		}
 	}
 
 	private Integer findMatchLottoNumber(List<LottoNumber> lottoNumbers, LottoNumbers lottoPapers) {
@@ -54,15 +60,15 @@ public class Winner {
 		this.winningAmount.put(matchNumber, winningAmount);
 	}
 
-	public BigDecimal yield(Money money) {
-		yield = money.yield(sumWinningAmount);
-		return yield;
+	public void yield(Money inputWinningMoney) {
+		WinningMoney winningMoney = new WinningMoney(inputWinningMoney);
+		yield = winningMoney.yield(sumWinningAmount);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(THREE.getMessage()).append(THREE).append(EACH).append(Constant.ENTER);
+		sb.append(THREE.getMessage()).append(getWinner(THREE.getMatch())).append(EACH).append(Constant.ENTER);
 		sb.append(FOUR.getMessage()).append(getWinner(FOUR.getMatch())).append(EACH).append(ENTER);
 		sb.append(FIVE.getMessage()).append(getWinner(FIVE.getMatch())).append(EACH).append(ENTER);
 		sb.append(SIX.getMessage()).append(getWinner(SIX.getMatch())).append(EACH).append(ENTER);
