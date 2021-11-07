@@ -35,4 +35,11 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_COUNT + "개가 존재해야 합니다. (입력값: " + numbers.size());
         }
     }
+
+    @Override
+    public String toString() {
+        return "LottoTicket{" +
+                "numbers=" + numbers +
+                '}';
+    }
 }

@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Number {
+public class Number implements Comparable<Number> {
 
     private final int number;
 
@@ -32,5 +32,17 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(Number number) {
+        return Integer.compare(this.number, number.number);
+    }
+
+    @Override
+    public String toString() {
+        return "Number{" +
+                "number=" + number +
+                '}';
     }
 }
