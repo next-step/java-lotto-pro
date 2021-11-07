@@ -8,24 +8,24 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-@DisplayName("WinResults 테스트")
-class WinResultsTest {
+@DisplayName("WinningResults 테스트")
+class WinningResultsTest {
 
-    private WinResults winResults;
+    private WinningResults winningResults;
 
     @BeforeEach
     void setUp() {
-        winResults = WinResults.from(
-                WinResult.FIRST, WinResult.FIRST, WinResult.FIRST, WinResult.THIRD,
-                WinResult.THIRD, WinResult.FOURTH, WinResult.FIFTH);
+        winningResults = WinningResults.from(
+                WinningResult.FIRST, WinningResult.FIRST, WinningResult.FIRST, WinningResult.THIRD,
+                WinningResult.THIRD, WinningResult.FOURTH, WinningResult.FIFTH);
     }
 
     @ParameterizedTest(name = "{displayName} - {arguments}")
     @CsvSource(value = {"FIRST:3", "THIRD:2", "FOURTH:1", "FIFTH:1"}, delimiter = ':')
     @DisplayName("요청 당첨에 해당되는 개수를 반환한다.")
-    void getCount(WinResult winResult, int expected) {
+    void getCount(WinningResult winningResult, int expected) {
         // when
-        int count = winResults.getCount(winResult);
+        int count = winningResults.getCount(winningResult);
 
         // then
         assertThat(count).isEqualTo(expected);
@@ -35,7 +35,7 @@ class WinResultsTest {
     @DisplayName("수익금을 반환한다.")
     void getProceeds() {
         // when
-        long proceeds = winResults.getProceeds();
+        long proceeds = winningResults.getProceeds();
 
         // then
         assertThat(proceeds).isEqualTo(6_003_055_000L);

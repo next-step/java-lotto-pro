@@ -60,17 +60,17 @@ class LottoTest {
             "1:2:7:8:9:10:45:NOT_MATCHED"
     }, delimiter = ':')
     @DisplayName("당첨 결과를 반환한다.")
-    void getWinResult(int number1, int number2, int number3, int number4, int number5, int number6, int bonusNumber,
-                      WinResult expected) {
+    void getWinningResult(int number1, int number2, int number3, int number4, int number5, int number6, int bonusNumber,
+                          WinningResult expected) {
         // given
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when
-        WinResult winResult = lotto.getWinResult(
+        WinningResult winningResult = lotto.getWinningResult(
                 new Lotto(Arrays.asList(number1, number2, number3, number4, number5, number6)),
                 new LottoNumber(bonusNumber));
 
         // then
-        assertThat(winResult).isEqualTo(expected);
+        assertThat(winningResult).isEqualTo(expected);
     }
 }

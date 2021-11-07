@@ -9,7 +9,7 @@ public class LottoCalculator {
     public static final int PROFIT_RATE = 1;
 
     private final Lottos lottos;
-    private WinResults winResults;
+    private WinningResults winningResults;
 
     public LottoCalculator(PurchaseAmount purchaseAmount) {
         List<Lotto> lottos = new ArrayList<>();
@@ -23,12 +23,12 @@ public class LottoCalculator {
         return lottos;
     }
 
-    public WinResults getWinResults() {
-        return winResults;
+    public WinningResults getWinningResults() {
+        return winningResults;
     }
 
     public void calculate(Lotto winNumber, LottoNumber bonusNumber) {
-        this.winResults = lottos.getWinResults(winNumber, bonusNumber);
+        this.winningResults = lottos.getWinningResults(winNumber, bonusNumber);
     }
 
     public int getLottosSize() {
@@ -36,6 +36,6 @@ public class LottoCalculator {
     }
 
     public float getProceedsRate() {
-        return (float) winResults.getProceeds() / ((float) getLottosSize() * LOTTO_PRICE);
+        return (float) winningResults.getProceeds() / ((float) getLottosSize() * LOTTO_PRICE);
     }
 }

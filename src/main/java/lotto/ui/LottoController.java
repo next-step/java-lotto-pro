@@ -2,8 +2,8 @@ package lotto.ui;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoCalculator;
-import lotto.domain.WinResult;
-import lotto.domain.WinResults;
+import lotto.domain.WinningResult;
+import lotto.domain.WinningResults;
 
 import java.util.Arrays;
 
@@ -18,11 +18,11 @@ public class LottoController {
 
     public void run() {
         lottoCalculator.calculate(ConsoleIn.inputWinNumber(), ConsoleIn.inputBonusNumber());
-        WinResults winResults = lottoCalculator.getWinResults();
+        WinningResults winningResults = lottoCalculator.getWinningResults();
 
         printHeader();
-        printWinResults(winResults);
-        printProceedsRate(winResults);
+        printWinningResults(winningResults);
+        printProceedsRate(winningResults);
     }
 
     private void printLottos() {
@@ -39,21 +39,21 @@ public class LottoController {
         ConsoleOut.printMessage(Message.BAR_PRINT.getMessage());
     }
 
-    private void printWinResults(WinResults winResults) {
-        Arrays.stream(WinResult.values())
-                .filter(winResult -> winResult != WinResult.NOT_MATCHED)
-                .forEach(winResult -> printWinResult(winResult, winResults.getCount(winResult)));
+    private void printWinningResults(WinningResults winningResults) {
+        Arrays.stream(WinningResult.values())
+                .filter(winningResult -> winningResult != WinningResult.NOT_MATCHED)
+                .forEach(winningResult -> printWinningResult(winningResult, winningResults.getCount(winningResult)));
     }
 
-    private void printProceedsRate(WinResults winResults) {
-        long proceeds = winResults.getProceeds();
+    private void printProceedsRate(WinningResults winningResults) {
+        long proceeds = winningResults.getProceeds();
         ConsoleOut.printMessage(
                 Message.PROCEEDS_PRINT.getMessage(), lottoCalculator.getProceedsRate(), getComment(proceeds));
     }
 
-    private void printWinResult(WinResult winResult, int count) {
+    private void printWinningResult(WinningResult winningResult, int count) {
         ConsoleOut.printMessage(
-                Message.WIN_RESULTS_PRINT.getMessage(), winResult.getCount(), winResult.getPrize(), count);
+                Message.WIN_RESULTS_PRINT.getMessage(), winningResult.getCount(), winningResult.getPrize(), count);
     }
 
     private String getComment(float proceedsRate) {

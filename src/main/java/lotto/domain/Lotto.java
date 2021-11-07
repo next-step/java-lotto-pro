@@ -21,10 +21,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public WinResult getWinResult(Lotto winNumber, LottoNumber bonusNumber) {
+    public WinningResult getWinningResult(Lotto winNumber, LottoNumber bonusNumber) {
         int matchedCount = getMatchedCount(winNumber);
         boolean bonusNumberMatched = this.lottoNumbers.contains(bonusNumber);
-        return WinResult.fromCount(matchedCount, bonusNumberMatched);
+        return WinningResult.fromCount(matchedCount, bonusNumberMatched);
     }
 
     private void validate(List<Integer> numbers) {

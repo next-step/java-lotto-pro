@@ -25,7 +25,7 @@ class LottosTest {
 
     @Test
     @DisplayName("당첨 결과 리스트를 반환한다.")
-    void getWinResults() {
+    void getWinningResults() {
         // given
         Lottos lottos = Lottos.of(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
@@ -34,9 +34,9 @@ class LottosTest {
         );
 
         // when
-        WinResults winResults = lottos.getWinResults(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(45));
+        WinningResults winningResults = lottos.getWinningResults(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(45));
 
         // then
-        assertThat(winResults).isEqualTo(WinResults.from(WinResult.FIRST, WinResult.FIFTH));
+        assertThat(winningResults).isEqualTo(WinningResults.from(WinningResult.FIRST, WinningResult.FIFTH));
     }
 }

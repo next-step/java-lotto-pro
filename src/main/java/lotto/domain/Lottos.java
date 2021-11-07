@@ -25,8 +25,8 @@ public class Lottos {
         return lottos.size();
     }
 
-    public WinResults getWinResults(Lotto winNumber, LottoNumber bonusNumber) {
-        return WinResults.of(lottos, winNumber, bonusNumber);
+    public WinningResults getWinningResults(Lotto winNumber, LottoNumber bonusNumber) {
+        return WinningResults.of(lottos, winNumber, bonusNumber);
     }
 
     @Override
