@@ -16,11 +16,25 @@ public class LottoResult {
         matchCounts.put(LottoWinningPrice.FOUR, 0);
         matchCounts.put(LottoWinningPrice.FIVE, 0);
         matchCounts.put(LottoWinningPrice.SIX, 0);
+        matchCounts.put(LottoWinningPrice.BONUS, 0);
     }
 
-    public void addMatchCounts(int matchCount){
+    public void addMatchCounts(int matchCount, boolean isBonus){
         LottoWinningPrice lottoWinningPrice = LottoWinningPrice.getLottoWinningPrice(matchCount);
+        if(!lottoWinningPrice.isView())
+            return;
+
+        if(matchCount == LottoWinningPrice.BONUS.getWinningCount() && isBonus){
+            winningBonus();
+            return;
+        }
         matchCounts.put(lottoWinningPrice, matchCounts.get(lottoWinningPrice) + 1);
+    }
+
+    public void winningBonus() {
+        if(matchCounts.get(LottoWinningPrice.FIVE) > 0)
+            matchCounts.put(LottoWinningPrice.FIVE, matchCounts.get(LottoWinningPrice.FIVE) - 1);
+        matchCounts.put(LottoWinningPrice.BONUS, matchCounts.get(LottoWinningPrice.BONUS) + 1);
     }
 
     public void calculateYield(long buyPrice) {
@@ -34,8 +48,10 @@ public class LottoResult {
     }
 
     public void addWinningReward(LottoWinningPrice lottoWinningPrice, int matchCount) {
-        long reward = (long) lottoWinningPrice.getReward() * matchCount;
-        winningReward = winningReward.add(BigDecimal.valueOf(reward));
+        if(lottoWinningPrice.isView()){
+            long reward = (long) lottoWinningPrice.getReward() * matchCount;
+            winningReward = winningReward.add(BigDecimal.valueOf(reward));
+        }
     }
 
     public Map<LottoWinningPrice, Integer> getMatchCounts() {

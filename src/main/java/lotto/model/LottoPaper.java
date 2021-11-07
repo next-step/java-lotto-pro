@@ -11,7 +11,7 @@ public class LottoPaper {
 
     public LottoPaper(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        lottoPaPerCorrectCheck();
+        checkLottoPaPerCorrect();
     }
 
     public List<LottoNumber> getLottoNumber() {
@@ -28,7 +28,7 @@ public class LottoPaper {
                 .count();
     }
 
-    private void lottoPaPerCorrectCheck() {
+    private void checkLottoPaPerCorrect() {
         Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
         if(lottoNumberSet.size() != lottoNumbers.size()){
             throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_LOTTO_NUMBER_DUPLICATION_INPUT));

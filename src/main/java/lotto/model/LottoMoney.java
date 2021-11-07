@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.model;
 
 import lotto.util.GameRule;
 import lotto.view.GameMessage;

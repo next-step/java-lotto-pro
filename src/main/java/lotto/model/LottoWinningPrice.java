@@ -6,18 +6,23 @@ import java.util.Arrays;
 
 public enum LottoWinningPrice {
 
-    NONE(0, GameRule.MATCH_PRICE_NONE),
-    THREE(3, GameRule.MATCH_PRICE_3),
-    FOUR(4, GameRule.MATCH_PRICE_4),
-    FIVE(5, GameRule.MATCH_PRICE_5),
-    SIX(6, GameRule.MATCH_PRICE_6)
+    NONE(0, GameRule.MATCH_PRICE_NONE, false, false),
+    THREE(3, GameRule.MATCH_PRICE_3, true, false),
+    FOUR(4, GameRule.MATCH_PRICE_4, true, false),
+    FIVE(5, GameRule.MATCH_PRICE_5, true, false),
+    BONUS(5, GameRule.MATCH_PRICE_BONUS, true, true),
+    SIX(6, GameRule.MATCH_PRICE_6, true, false)
     ;
     private final int winningCount;
     private final int reward;
+    private final boolean view;
+    private final boolean bonus;
 
-    LottoWinningPrice(int winningCount, int reward) {
+    LottoWinningPrice(int winningCount, int reward, boolean view, boolean bonus) {
         this.winningCount = winningCount;
         this.reward = reward;
+        this.view = view;
+        this.bonus = bonus;
     }
 
     public int getWinningCount() {
@@ -35,4 +40,9 @@ public enum LottoWinningPrice {
                 .findFirst()
                 .orElse(LottoWinningPrice.NONE);
     }
+
+    public boolean isView(){
+        return view;
+    }
+
 }

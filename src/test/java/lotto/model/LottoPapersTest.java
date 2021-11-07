@@ -26,8 +26,8 @@ public class LottoPapersTest {
 
     @DisplayName("[정상]로또결과 확인 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,8,9,10:1,2,3,4,9,10:1,2,3,4,5,6"}, delimiter = ':')
-    void 로또결과_확인_테스트_정상(String inLottoNumber1, String inLottoNumber2, String inWinningNumber) {
+    @CsvSource(value = {"1,2,3,8,9,10:1,2,3,4,5,10:1,2,3,4,5,6:10"}, delimiter = ':')
+    void 로또결과_확인_테스트_정상(String inLottoNumber1, String inLottoNumber2, String inWinningNumber, String inBonusNumber) {
         // given
         List<LottoNumber> lottoNumbers1 = new ArrayList<>();
         Arrays.asList(inLottoNumber1.split(GameRule.LOTTO_NUMBER_DELIMITER)).
@@ -46,9 +46,11 @@ public class LottoPapersTest {
                 forEach(winningNumber -> winningLottoNumbers.add(new LottoNumber(Integer.parseInt(winningNumber))));
         LottoPaper winningLottoPaper = new LottoPaper(winningLottoNumbers);
         // when
-        LottoResult lottoResult = lottoPapers.calculateLottoResult(lottoPapers, winningLottoPaper);
+        LottoResult lottoResult = lottoPapers.calculateLottoResult(winningLottoPaper, new LottoNumber(inBonusNumber));
         // then
+        assertThat(lottoResult.getMatchCounts().get(LottoWinningPrice.FIVE)).isEqualTo(0);
         assertThat(lottoResult.getMatchCounts().get(LottoWinningPrice.THREE)).isEqualTo(1);
-        assertThat(lottoResult.getMatchCounts().get(LottoWinningPrice.FOUR)).isEqualTo(1);
+        assertThat(lottoResult.getMatchCounts().get(LottoWinningPrice.BONUS)).isEqualTo(1);
+
     }
 }

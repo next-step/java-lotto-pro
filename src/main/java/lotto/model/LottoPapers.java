@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.controller.LottoNumberGenerator;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,10 +28,12 @@ public class LottoPapers {
         return new LottoPapers(lottoPapers);
     }
 
-    public LottoResult calculateLottoResult(LottoPapers lottoPapers, LottoPaper winningLottoPaper) {
+    public LottoResult calculateLottoResult(LottoPaper winningLottoPaper, LottoNumber bonusNumber) {
         LottoResult lottoResult = new LottoResult();
-        lottoPapers.getLottoPapers()
-                .forEach(lottoPaper -> lottoResult.addMatchCounts(lottoPaper.matchLottoPaper(winningLottoPaper)));
+        getLottoPapers()
+                .forEach(
+                        lottoPaper ->
+                                lottoResult.addMatchCounts(lottoPaper.matchLottoPaper(winningLottoPaper), lottoPaper.isContainsLottoNumber(bonusNumber)));
         return  lottoResult;
     }
 }

@@ -12,4 +12,9 @@ public class InputView {
     public static void printWinningNumberInput() {
         System.out.println(GameMessage.WINNING_NUMBER_INPUT);
     }
+
+    public static void printBonusNumberInput() {
+        System.out.println(GameMessage.BONUS_NUMBER_INPUT);
+    }
+
 }

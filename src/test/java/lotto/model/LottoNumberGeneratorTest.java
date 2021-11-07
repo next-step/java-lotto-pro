@@ -1,7 +1,5 @@
-package lotto.controller;
+package lotto.model;
 
-import lotto.model.LottoNumber;
-import lotto.model.LottoPaper;
 import lotto.util.GameRule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
