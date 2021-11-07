@@ -33,8 +33,11 @@ public enum LottoWinningPrice {
         return reward;
     }
 
-    public static LottoWinningPrice getLottoWinningPrice(int winningCount) {
+    public static LottoWinningPrice getLottoWinningPrice(int winningCount,  boolean matchBonus) {
 
+        if (winningCount == BONUS.winningCount && matchBonus) {
+            return BONUS;
+        }
         return Arrays.stream(LottoWinningPrice.values())
                 .filter(lottoWinningPrice -> lottoWinningPrice.winningCount == winningCount)
                 .findFirst()

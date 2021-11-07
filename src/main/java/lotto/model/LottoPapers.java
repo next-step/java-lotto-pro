@@ -28,12 +28,12 @@ public class LottoPapers {
         return new LottoPapers(lottoPapers);
     }
 
-    public LottoResult calculateLottoResult(LottoPaper winningLottoPaper, LottoNumber bonusNumber) {
+    public LottoResult calculateLottoResult(WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
         getLottoPapers()
                 .forEach(
-                        lottoPaper ->
-                                lottoResult.addMatchCounts(lottoPaper.matchLottoPaper(winningLottoPaper), lottoPaper.isContainsLottoNumber(bonusNumber)));
+                        lottoPaper -> lottoResult.addMatchCounts(
+                                        lottoPaper.matchLottoPaper(winningLotto.getWinningLottoPaper()), lottoPaper.isContainsLottoNumber(winningLotto.getBonusLottoNumber())));
         return  lottoResult;
     }
 }

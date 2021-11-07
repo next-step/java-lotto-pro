@@ -20,11 +20,11 @@ public class LottoResult {
     }
 
     public void addMatchCounts(int matchCount, boolean isBonus){
-        LottoWinningPrice lottoWinningPrice = LottoWinningPrice.getLottoWinningPrice(matchCount);
-        if(!lottoWinningPrice.isView())
+        LottoWinningPrice lottoWinningPrice = LottoWinningPrice.getLottoWinningPrice(matchCount, isBonus);
+        if(!lottoWinningPrice.isView()){
             return;
-
-        if(matchCount == LottoWinningPrice.BONUS.getWinningCount() && isBonus){
+        }
+        if(lottoWinningPrice == LottoWinningPrice.BONUS){
             winningBonus();
             return;
         }
@@ -32,8 +32,9 @@ public class LottoResult {
     }
 
     public void winningBonus() {
-        if(matchCounts.get(LottoWinningPrice.FIVE) > 0)
+        if(matchCounts.get(LottoWinningPrice.FIVE) > 0){
             matchCounts.put(LottoWinningPrice.FIVE, matchCounts.get(LottoWinningPrice.FIVE) - 1);
+        }
         matchCounts.put(LottoWinningPrice.BONUS, matchCounts.get(LottoWinningPrice.BONUS) + 1);
     }
 

@@ -44,9 +44,8 @@ public class LottoPapersTest {
         List<LottoNumber> winningLottoNumbers = new ArrayList<>();
         Arrays.asList(inWinningNumber.split(GameRule.LOTTO_NUMBER_DELIMITER)).
                 forEach(winningNumber -> winningLottoNumbers.add(new LottoNumber(Integer.parseInt(winningNumber))));
-        LottoPaper winningLottoPaper = new LottoPaper(winningLottoNumbers);
         // when
-        LottoResult lottoResult = lottoPapers.calculateLottoResult(winningLottoPaper, new LottoNumber(inBonusNumber));
+        LottoResult lottoResult = lottoPapers.calculateLottoResult(new WinningLotto(new LottoPaper(winningLottoNumbers), new LottoNumber(inBonusNumber)));
         // then
         assertThat(lottoResult.getMatchCounts().get(LottoWinningPrice.FIVE)).isEqualTo(0);
         assertThat(lottoResult.getMatchCounts().get(LottoWinningPrice.THREE)).isEqualTo(1);

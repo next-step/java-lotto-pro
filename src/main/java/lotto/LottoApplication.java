@@ -16,8 +16,10 @@ public class LottoApplication {
         LottoPapers lottoPapers = LottoApplication.getRandomLottoPapers(lottoMoney);
 
         LottoPaper winningLottoPaper = LottoApplication.getWinningLottoPaper(lottoNumberGenerator);
-        LottoNumber bonusNumber = LottoApplication.getBonusNumber(winningLottoPaper);
-        LottoApplication.printLottoResult(lottoPapers, winningLottoPaper, bonusNumber);
+        LottoNumber bonusLottoNumber = LottoApplication.getBonusNumber(winningLottoPaper);
+
+        WinningLotto winningLotto = new WinningLotto(winningLottoPaper, bonusLottoNumber);
+        LottoApplication.printLottoResult(lottoPapers, winningLotto);
     }
 
     private static String getBuyPrice() {
@@ -39,8 +41,8 @@ public class LottoApplication {
         return lottoPapers;
     }
 
-    private static void printLottoResult(LottoPapers lottoPapers, LottoPaper winningLottoPaper, LottoNumber bonusNumber) {
-        LottoResult lottoResult = lottoPapers.calculateLottoResult(winningLottoPaper, bonusNumber);
+    private static void printLottoResult(LottoPapers lottoPapers, WinningLotto winningLotto) {
+        LottoResult lottoResult = lottoPapers.calculateLottoResult(winningLotto);
         lottoResult.calculateYield(lottoPapers.lottoPaperSize() * GameRule.LOTTO_PAPER_PRICE);
         ResultView.printWinningStatistics(lottoResult);
     }
