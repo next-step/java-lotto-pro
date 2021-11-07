@@ -59,7 +59,7 @@ public class LottoShop {
             String readLottoNumbers = inputView.readWinLottoNumbers();
             resultView.printBonusNumberInputMessage();
             String readBonusLottoNumber = inputView.readWinBonusLottoNumber();
-            return LottoWinReader.reader(readLottoNumbers, readBonusLottoNumber);
+            return LottoWinReader.read(readLottoNumbers, readBonusLottoNumber);
         } catch (IllegalArgumentException e) {
             return getLottoWinReader();
         }
