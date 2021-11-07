@@ -10,7 +10,7 @@ public class LottoWinningStatistics {
 
 	private LottoWinningStatistics(WinningLotto winningLotto, List<Lotto> lottos) {
 		this.numOfLottosByRank = lottos.stream()
-			.collect(Collectors.groupingBy((lotto) -> rank(winningLotto, lotto), Collectors.counting()));
+			.collect(Collectors.groupingBy(lotto -> rank(winningLotto, lotto), Collectors.counting()));
 	}
 
 	private LottoWinningRank rank(WinningLotto winningLotto, Lotto lotto) {
