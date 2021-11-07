@@ -20,13 +20,12 @@ public class LottoResult {
     }
 
     public double getLottoYield() {
-        return getPrizeMoneySum().getMoney()
-                .divide(getPurchaseAmount(GAME_PRICE))
+        return getPrizeMoneySum().divide(getPurchaseAmount(GAME_PRICE))
                 .setScale(DECIMAL_POINT)
                 .doubleValue();
     }
 
-    private Money getPrizeMoneySum() {
+    private BigDecimal getPrizeMoneySum() {
         BigDecimal sum = BigDecimal.valueOf(0);
 
         for (Rank rank : lottoMatchResult.keySet()) {
@@ -36,7 +35,7 @@ public class LottoResult {
 
             sum = sum.add(multiply);
         }
-        return new Money(sum);
+        return sum;
     }
 
     private BigDecimal getPurchaseAmount(Money gamePrice) {
