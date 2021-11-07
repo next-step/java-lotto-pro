@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lottos;
+import lotto.domain.Winnings;
 
 import java.util.Map;
 
@@ -11,6 +12,6 @@ public interface ResultView {
     void printLottos(Lottos lottos);
     void printLastWinLottoNumbersMessage();
     void printWinStatisticMessage();
-    void printCorrespondLottoNumber(Map<Integer, Integer> statistic);
+    void printCorrespondLottoNumber(Map<Winnings, Integer> statistic);
     void printTotalRevenueMessage(double percentage);
 }

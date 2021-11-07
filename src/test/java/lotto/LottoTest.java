@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.domain.Winnings.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -79,7 +80,7 @@ public class LottoTest {
     @ParameterizedTest
     @CsvSource(value = {"3:1", "4:4", "5:2", "6:1"}, delimiter = ':')
     public void winLotto_StatisticResultTest(int correspond, int win) {
-        LottoWinReader reader = new LottoWinReader(Arrays.asList(1, 3, 5, 6, 11, 44));
+        LottoWinReader reader = new LottoWinReader(Arrays.asList(1, 3, 5, 6, 11, 44), 39);
 
         Lotto one = new Lotto(Arrays.asList(1, 3, 5, 6, 11, 44));
 
@@ -95,20 +96,21 @@ public class LottoTest {
 
         Lottos lottos = new Lottos(Arrays.asList(one, two, three, four, five, six, seven, eight));
         LottoStatistic statistic = reader.distinguish(lottos);
-        Map<Integer, Integer> result = statistic.result(Arrays.asList(correspond));
-        assertThat(result.get(correspond)).isEqualTo(win);
+        Winnings winnings = Winnings.find(correspond, 0);
+        Map<Winnings, Integer> result = statistic.result(Arrays.asList(winnings));
+        assertThat(result.get(winnings)).isEqualTo(win);
     }
 
     @DisplayName("구입한 금액 대비 당첨 수익률 구하기 테스트")
     @Test
     public void getRevenueTest() {
-        Map<Integer, Integer> statistic = new HashMap<>();
-        statistic.put(1, 10);
-        statistic.put(2, 3);
-        statistic.put(3, 1);
-        statistic.put(4, 0);
-        statistic.put(5, 0);
-        statistic.put(6, 0);
+        Map<Winnings, Integer> statistic = new HashMap<>();
+        statistic.put(MISS, 13);
+        statistic.put(FIFTH, 1);
+        statistic.put(FORTH, 0);
+        statistic.put(THIRD, 0);
+        statistic.put(SECOND, 0);
+        statistic.put(FIRST, 0);
         PurchaseAmount amount = new PurchaseAmount(14_000);
         Revenue revenue = new Revenue(amount, statistic);
         assertThat(revenue.percentage()).isEqualTo(0.35);
@@ -121,6 +123,16 @@ public class LottoTest {
         LottoNumber two = new LottoNumber(2, true);
         assertThat(one.isBonus()).isFalse();
         assertThat(two.isBonus()).isTrue();
+    }
+
+    @DisplayName("로또 번호 5개와 보너스 번호 1개가 일치여부 테스트")
+    @Test
+    public void acquire_SecondWinningsTest() {
+        LottoWinReader lottoWinReader = new LottoWinReader(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
+        Lottos lottos = new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10))));
+        LottoStatistic statistic = lottoWinReader.distinguish(lottos);
+        Map<Winnings, Integer> result = statistic.result(Arrays.asList(SECOND));
+        assertThat(result.get(SECOND)).isEqualTo(1);
     }
 
 }

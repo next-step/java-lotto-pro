@@ -39,10 +39,10 @@ public class ConsoleResultView implements ResultView {
         System.out.println(WIN_STATISTIC_ALARM_MESSAGE);
     }
 
-    public void printCorrespondLottoNumber(Map<Integer, Integer> statistic) {
+    public void printCorrespondLottoNumber(Map<Winnings, Integer> statistic) {
         statistic.entrySet().stream()
-                .filter(e -> e.getKey() >= CORRESPOND_MIN_LOTTO_NUMBER)
-                .map(e -> String.format(CORRESPOND_LOTTO_NUMBERS_MESSAGE ,e.getKey(), Winnings.getAmount(e.getKey()), e.getValue()))
+                .filter(e -> !e.getKey().equals(Winnings.MISS))
+                .map(e -> String.format(CORRESPOND_LOTTO_NUMBERS_MESSAGE ,e.getKey().getCorrespondCount(), e.getKey().getAmount(), e.getValue()))
                 .forEach(System.out::println);
     }
 

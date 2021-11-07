@@ -33,11 +33,24 @@ public class Lotto implements Iterable<LottoNumber> {
         }
     }
 
-    public int correspondCount(Lotto winLotto) {
+    public Winnings acquireWinnings(Lotto winLotto, LottoNumber bonusNumber) {
+        int correspondCount = correspondCount(winLotto);
+        int bonusCorrespondCount = bonusCorrespondCount(bonusNumber);
+        return Winnings.find(correspondCount, bonusCorrespondCount);
+    }
+
+    private int correspondCount(Lotto winLotto) {
         return this.lottoNumbers.stream()
                 .filter(winLotto::contains)
                 .collect(toList())
                 .size();
+    }
+
+    private int bonusCorrespondCount(LottoNumber bonusNumber) {
+        if(contains(bonusNumber)) {
+            return 1;
+        }
+        return 0;
     }
 
     private boolean contains(LottoNumber number) {

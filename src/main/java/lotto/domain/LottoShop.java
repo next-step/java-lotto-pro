@@ -8,6 +8,7 @@ import lotto.ui.ResultView;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -31,7 +32,7 @@ public class LottoShop {
 
         LottoWinReader lottoWinReader = getLottoWinReader();
 
-        Map<Integer, Integer> statistic = getStatistic(lottoWinReader, lottos);
+        Map<Winnings, Integer> statistic = getStatistic(lottoWinReader, lottos);
         resultView.printCorrespondLottoNumber(statistic);
         Revenue revenue = getRevenue(amount, statistic);
         resultView.printTotalRevenueMessage(revenue.percentage());
@@ -58,21 +59,21 @@ public class LottoShop {
                             .map(String::trim)
                             .map(Integer::parseInt)
                             .distinct()
-                            .collect(toList())
+                            .collect(toList()), 0
             );
         } catch (IllegalArgumentException e) {
             return getLottoWinReader();
         }
     }
 
-    private Map<Integer, Integer> getStatistic(LottoWinReader lottoWinReader, Lottos lottos) {
+    private Map<Winnings, Integer> getStatistic(LottoWinReader lottoWinReader, Lottos lottos) {
         resultView.printWinStatisticMessage();
         LottoStatistic lottoStatistic = lottoWinReader.distinguish(lottos);
-        List<Integer> correspondedLottoNumbers = Arrays.asList(3, 4, 5, 6);
-        return lottoStatistic.result(correspondedLottoNumbers);
+        List<Winnings> winnings = Arrays.stream(Winnings.values()).collect(toList());
+        return lottoStatistic.result(winnings);
     }
 
-    private Revenue getRevenue(PurchaseAmount amount, Map<Integer, Integer> statistic) {
+    private Revenue getRevenue(PurchaseAmount amount, Map<Winnings, Integer> statistic) {
         return new Revenue(amount, statistic);
     }
 
