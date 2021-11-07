@@ -10,6 +10,15 @@ import org.junit.jupiter.api.Test;
 public class LottoNumbersTest {
 
 	@Test
+	@DisplayName("로또 숫자가 6개가 주어지지 않으면 예외")
+	void test_constructor1() {
+		assertThatThrownBy(() -> new LottoNumbers(
+			Arrays.asList(new LottoNumber(1), new LottoNumber(2))
+		)).isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(LottoNumbers.MESSAGE_NOT_ALLOW_LENGTH);
+	}
+
+	@Test
 	@DisplayName("로또 숫자가 6개가 포함되면서 겹치는 값이 없으면 성공")
 	void test_constructor3() {
 		assertThatNoException().isThrownBy(() -> new LottoNumbers(
