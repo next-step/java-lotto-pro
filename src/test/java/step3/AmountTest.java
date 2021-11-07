@@ -2,8 +2,7 @@ package step3;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.math.BigDecimal;
-
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import step3.common.exception.InvalidParamException;
@@ -12,14 +11,7 @@ import step3.domain.Amount;
 public class AmountTest {
 
     @Test
-    void test() {
-        BigDecimal bigdecimal = new BigDecimal(1000);
-        BigDecimal tmp = bigdecimal.divide(new BigDecimal(500));
-        System.out.println(tmp);
-
-    }
-
-    @Test
+    @DisplayName("최금액 이하 에러 발생")
     void notEnoughAmountException() {
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
