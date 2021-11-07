@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -7,12 +8,12 @@ public class Lottos {
 	private final String inputMoney;
 
 	public Lottos(List<LottoNumbers> lottoNumbersList, String inputMoney) {
-		this.lottoNumbersList = lottoNumbersList;
+		this.lottoNumbersList = Collections.unmodifiableList(lottoNumbersList);
 		this.inputMoney = inputMoney;
 	}
 
 	public Lottos(LottoGenerator lottoGenerator) {
-		this.lottoNumbersList = lottoGenerator.generateLottoNumbers();
+		this.lottoNumbersList = Collections.unmodifiableList(lottoGenerator.generateLottoNumbers());
 		this.inputMoney = lottoGenerator.getInputMoney();
 	}
 

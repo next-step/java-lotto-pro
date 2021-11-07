@@ -16,7 +16,7 @@ public class LottoNumbers {
 	public final List<LottoNumber> lottoNumberList;
 
 	public LottoNumbers() {
-		lottoNumberList = generateLottoNumberList();
+		lottoNumberList = Collections.unmodifiableList(generateLottoNumberList());
 	}
 
 	public LottoNumbers(List<LottoNumber> lottoNumberList) {
@@ -48,6 +48,14 @@ public class LottoNumbers {
 		return new ArrayList<>(lottoNumberSet);
 	}
 
+	public boolean containsLottoNumber(LottoNumber lottoNumber) {
+		return lottoNumberList.contains(lottoNumber);
+	}
+
+	public int size() {
+		return lottoNumberList.size();
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -61,14 +69,6 @@ public class LottoNumbers {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumberList);
-	}
-
-	public boolean containsLottoNumber(LottoNumber lottoNumber) {
-		return lottoNumberList.contains(lottoNumber);
-	}
-
-	public int size() {
-		return lottoNumberList.size();
 	}
 }
 
