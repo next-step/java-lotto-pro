@@ -17,8 +17,8 @@ public class LottoNumber {
 
 	static {
 		lottoNumbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
-			.mapToObj(Integer::valueOf)
-			.collect(toMap(Function.identity(), number -> new LottoNumber(number)));
+			.boxed()
+			.collect(toMap(Function.identity(), LottoNumber::new));
 	}
 
 	private LottoNumber(int number) {
@@ -51,5 +51,10 @@ public class LottoNumber {
 	@Override
 	public int hashCode() {
 		return Objects.hash(value);
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(value);
 	}
 }
