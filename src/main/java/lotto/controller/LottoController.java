@@ -21,7 +21,11 @@ public class LottoController {
 	 */
 	private void lottoStart() {
 		LotteryWallet wallet = purchaseLotto();
-		System.out.println("구매한 로또 개수: "+wallet.numberOfPurchasedLotto()+"개");
+		showPurchasedLotto(wallet);
+	}
+
+	private void showPurchasedLotto(LotteryWallet wallet) {
+		view.printlnPurchasedLottoResult(wallet);
 	}
 
 	private LotteryWallet purchaseLotto() {

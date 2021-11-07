@@ -13,4 +13,8 @@ public class LotteryWallet {
 	public int numberOfPurchasedLotto() {
 		return lottos.size();
 	}
+
+	public String lottosStatus() {
+		return lottos.toString();
+	}
 }
