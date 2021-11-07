@@ -36,6 +36,9 @@ public class View {
 	}
 
 	public void outBoughtLottos(int numOfManualLottos, List<Lotto> lottos) {
+		if (numOfManualLottos > 0) {
+			space();
+		}
 		final int numOfAutoLottos = lottos.size() - numOfManualLottos;
 		println(String.format(Message.BOUGHT_LOTTO.getContent(), numOfManualLottos, numOfAutoLottos));
 		lottos.stream().map(Lotto::toString).forEach(this::println);

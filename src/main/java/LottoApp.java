@@ -2,17 +2,16 @@ import java.util.List;
 
 public class LottoApp {
 
-	private final LottoStore store;
+	private final LottoBuyer buyer;
 	private final View view;
 
 	public LottoApp() {
-		this.store = new LottoStore();
+		this.buyer = new LottoBuyer(new LottoStore());
 		this.view = new View();
 	}
 
 	public void run() {
-		final List<Lotto> lottos = tryBuyLottos();
-		view.outBoughtLotto(lottos);
+		final List<Lotto> lottos = buyer.buy();
 		view.space();
 
 		final WinningLotto winningLotto = tryMakeWinningLotto();
@@ -20,23 +19,6 @@ public class LottoApp {
 
 		final LottoWinningStatistics statistics = LottoWinningStatistics.of(winningLotto, lottos);
 		view.outLottoWinningStatistics(statistics);
-	}
-
-	private List<Lotto> tryBuyLottos() {
-		List<Lotto> lotto;
-		do {
-			lotto = buyLottos(view.inPayKRW());
-		} while (null == lotto);
-		return lotto;
-	}
-
-	private List<Lotto> buyLottos(String pay) {
-		try {
-			return store.sell(pay);
-		} catch (LottoStorePaymentException e) {
-			view.error(e.getMessage());
-			return null;
-		}
 	}
 
 	private WinningLotto tryMakeWinningLotto() {
