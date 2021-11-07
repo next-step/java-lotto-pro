@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import lotto.domain.Bonus;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.utils.ConsoleUtils;
 import lotto.utils.ValidationUtils;
 
@@ -28,24 +29,27 @@ public class InputView {
         System.out.println(ERROR_ONLY_NUMBER);
         return enterMoney();
     }
+    public WinningLotto enterWinningLotto() {
+        return enterWinningNumbers();
+    }
 
-    public LottoNumbers enterWinningNumbers() {
+    private WinningLotto enterWinningNumbers() {
         System.out.println(INSERT_WINNING_NUMBER);
         String[] numbers = ConsoleUtils.console().split(",");
         if (checkWinningNumbers(numbers)) {
-            return LottoNumbers.valueOf(Arrays.stream(numbers)
-                    .mapToInt(Integer::parseInt)
-                    .boxed()
-                    .collect(Collectors.toList()));
+            return enterBonus(LottoNumbers.valueOf(Arrays.stream(numbers)
+                            .mapToInt(Integer::parseInt)
+                            .boxed()
+                            .collect(Collectors.toList())));
         }
         return enterWinningNumbers();
     }
 
-    public Bonus enterBonus(LottoNumbers winningNumbers) {
+    private WinningLotto enterBonus(LottoNumbers winningNumbers) {
         System.out.println(INSERT_BONUS_BALL);
         String bonus = ConsoleUtils.console();
         if (checkBonus(winningNumbers, bonus)) {
-            return Bonus.from(Integer.parseInt(bonus));
+            return WinningLotto.of(winningNumbers, Bonus.from(Integer.parseInt(bonus)));
         }
         return enterBonus(winningNumbers);
     }
