@@ -21,12 +21,7 @@ public class LottoTest {
     @Test
     public void lottoIssueTest() {
         PurchaseAmount amount = new PurchaseAmount(1_000);
-        LottoMachine lottoMachine = new LottoMachine(new NumberGenerator() {
-            @Override
-            public List<Integer> generate(int digit) {
-                return Arrays.asList(1, 2, 6, 10, 17, 42);
-            }
-        });
+        LottoMachine lottoMachine = new LottoMachine(digit -> Arrays.asList(1, 2, 6, 10, 17, 42));
         Lottos lottos = lottoMachine.issue(amount);
         assertThat(lottos).isNotEmpty();
         assertThat(lottos).containsExactly(new Lotto(Arrays.asList(1, 2, 6, 10, 17, 42)));
@@ -42,7 +37,10 @@ public class LottoTest {
     @DisplayName("로또의 숫자 개수 초과 발행 예외 테스트")
     @Test
     public void lottoNumberCountTest() {
-        assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7))).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> {
+            LottoMachine lottoMachine = new LottoMachine(digit -> Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+            lottoMachine.issue(new PurchaseAmount(1_000));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("제한된 범위의 숫자 생성 시 예외 테스트")
@@ -76,29 +74,59 @@ public class LottoTest {
         assertThat(lottos.count()).isEqualTo(14);
     }
 
-    @DisplayName("주어진 로또 리스트에서 당첨된 로또 개수 구하기 테스트")
-    @ParameterizedTest
-    @CsvSource(value = {"3:1", "4:4", "5:2", "6:1"}, delimiter = ':')
-    public void winLotto_StatisticResultTest(int correspond, int win) {
+    @DisplayName("주어진 로또 리스트에서 당첨된 로또 개수 구하기(3개일치할 때) 테스트 ")
+    @Test
+    public void winningsByFIFTHTest() {
         LottoWinReader reader = new LottoWinReader(Arrays.asList(1, 3, 5, 6, 11, 44), 39);
+        Lotto lotto = new Lotto(Arrays.asList(39, 13, 5, 9, 11, 44));
+        LottoStatistic statistic = reader.distinguish(new Lottos(Arrays.asList(lotto)));
+        Map<Winnings, Integer> result = statistic.result(Arrays.asList(find(3, 0)));
+        assertThat(result.get(FIFTH)).isEqualTo(1);
+    }
 
-        Lotto one = new Lotto(Arrays.asList(1, 3, 5, 6, 11, 44));
+    @DisplayName("주어진 로또 리스트에서 당첨된 로또 개수 구하기(4개일치할 때) 테스트 ")
+    @Test
+    public void winningsByFORTHTest() {
+        LottoWinReader reader = new LottoWinReader(Arrays.asList(1, 3, 5, 6, 11, 44), 39);
+        Lotto one = new Lotto(Arrays.asList(1, 3, 5, 6, 17, 42));
+        Lotto two = new Lotto(Arrays.asList(1, 3, 5, 6, 19, 42));
+        Lotto three = new Lotto(Arrays.asList(1, 3, 5, 7, 11, 42));
+        Lotto four = new Lotto(Arrays.asList(1, 3, 4, 6, 19, 44));
+        LottoStatistic statistic = reader.distinguish(new Lottos(Arrays.asList(one, two, three, four)));
+        Map<Winnings, Integer> result = statistic.result(Arrays.asList(find(4, 0)));
+        assertThat(result.get(FORTH)).isEqualTo(4);
+    }
 
-        Lotto two = new Lotto(Arrays.asList(1, 3, 5, 6, 11, 43));
-        Lotto three = new Lotto(Arrays.asList(1, 3, 5, 6, 11, 42));
-
-        Lotto four = new Lotto(Arrays.asList(1, 3, 5, 6, 17, 42));
-        Lotto five = new Lotto(Arrays.asList(1, 3, 5, 6, 19, 42));
-        Lotto six = new Lotto(Arrays.asList(1, 3, 5, 7, 11, 42));
-        Lotto seven = new Lotto(Arrays.asList(1, 3, 4, 6, 19, 44));
-
-        Lotto eight = new Lotto(Arrays.asList(10, 13, 5, 9, 11, 44));
-
-        Lottos lottos = new Lottos(Arrays.asList(one, two, three, four, five, six, seven, eight));
+    @DisplayName("주어진 로또 리스트에서 당첨된 로또 개수 구하기(5개일치할 때/보너스 번호 일치 X) 테스트 ")
+    @Test
+    public void winningsByTHRIDTest() {
+        LottoWinReader reader = new LottoWinReader(Arrays.asList(1, 3, 5, 6, 11, 44), 39);
+        Lotto one = new Lotto(Arrays.asList(1, 3, 5, 6, 11, 43));
+        Lotto two = new Lotto(Arrays.asList(1, 3, 5, 6, 11, 42));
+        Lottos lottos = new Lottos(Arrays.asList(one, two));
         LottoStatistic statistic = reader.distinguish(lottos);
-        Winnings winnings = Winnings.find(correspond, 0);
-        Map<Winnings, Integer> result = statistic.result(Arrays.asList(winnings));
-        assertThat(result.get(winnings)).isEqualTo(win);
+        Map<Winnings, Integer> result = statistic.result(Arrays.asList(find(5, 0)));
+        assertThat(result.get(THIRD)).isEqualTo(2);
+    }
+
+    @DisplayName("주어진 로또 리스트에서 당첨된 로또 개수 구하기(5개일치할 때/보너스 번호 일치 O) 테스트 ")
+    @Test
+    public void winningsBySECONDTest() {
+        LottoWinReader lottoWinReader = new LottoWinReader(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
+        Lottos lottos = new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10))));
+        LottoStatistic statistic = lottoWinReader.distinguish(lottos);
+        Map<Winnings, Integer> result = statistic.result(Arrays.asList(find(5, 1)));
+        assertThat(result.get(SECOND)).isEqualTo(1);
+    }
+
+    @DisplayName("주어진 로또 리스트에서 당첨된 로또 개수 구하기(6개일치할 때) 테스트 ")
+    @Test
+    public void winningsByFIRSTTest() {
+        LottoWinReader lottoWinReader = new LottoWinReader(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
+        Lottos lottos = new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        LottoStatistic statistic = lottoWinReader.distinguish(lottos);
+        Map<Winnings, Integer> result = statistic.result(Arrays.asList(find(6, 0)));
+        assertThat(result.get(FIRST)).isEqualTo(1);
     }
 
     @DisplayName("구입한 금액 대비 당첨 수익률 구하기 테스트")
@@ -125,14 +153,5 @@ public class LottoTest {
         assertThat(two.isBonus()).isTrue();
     }
 
-    @DisplayName("로또 번호 5개와 보너스 번호 1개가 일치여부 테스트")
-    @Test
-    public void acquire_SecondWinningsTest() {
-        LottoWinReader lottoWinReader = new LottoWinReader(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        Lottos lottos = new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10))));
-        LottoStatistic statistic = lottoWinReader.distinguish(lottos);
-        Map<Winnings, Integer> result = statistic.result(Arrays.asList(SECOND));
-        assertThat(result.get(SECOND)).isEqualTo(1);
-    }
 
 }
