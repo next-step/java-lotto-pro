@@ -56,19 +56,6 @@ public class Lotto {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Lotto)) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(lineOfLottoNumber, lotto.lineOfLottoNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lineOfLottoNumber);
-    }
-
     public String getStatus() {
         List<String> lottoStatus = new ArrayList<>();
 
@@ -86,5 +73,18 @@ public class Lotto {
                 .count();
 
         return LottoRank.findRank(matchingNumberCount);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lotto)) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lineOfLottoNumber, lotto.lineOfLottoNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lineOfLottoNumber);
     }
 }
