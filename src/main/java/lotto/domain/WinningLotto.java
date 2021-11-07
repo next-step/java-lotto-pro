@@ -5,11 +5,11 @@ import java.util.List;
 
 public class WinningLotto {
 
-    private final List<Number> matchNumber;
+    private final LottoNumber matchNumber;
     private final Number bonusNumber;
 
     public WinningLotto(List<Number> matchNumber, Number bonusNumber) {
-        this.matchNumber = matchNumber;
+        this.matchNumber = new LottoNumber(matchNumber);
         this.bonusNumber = bonusNumber;
     }
 
@@ -18,7 +18,7 @@ public class WinningLotto {
     }
 
     public boolean isMatchNumber(Number lottoNumber) {
-        return matchNumber.contains(lottoNumber);
+        return matchNumber.isContains(lottoNumber);
     }
 
     public LottoResult getLottoMatchResult(List<LottoNumber> lottoList) {
