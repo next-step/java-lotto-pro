@@ -37,6 +37,10 @@ public class BonusNumber {
 		return lottoNumber;
 	}
 
+	public boolean isMatchNumber(LottoNumber comparingLottoNumber){
+		return this.lottoNumber.equals(comparingLottoNumber);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

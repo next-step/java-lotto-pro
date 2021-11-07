@@ -55,4 +55,12 @@ class BonusNumberTest {
 		BonusNumber bonusNumber = new BonusNumber(number);
 		assertThat(bonusNumber.matchTicket(lottoTicket)).isEqualTo(matchBonus);
 	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1,1,true","10,17,false","45,45,true"})
+	public void LottoNumber와_BonusNumber_매칭(int lottoNum, int bonusNum, boolean matchBonus){
+		BonusNumber bonusNumber = new BonusNumber(bonusNum);
+		LottoNumber lottoNumber = LottoNumber.valueOf(lottoNum);
+		assertThat(bonusNumber.isMatchNumber(lottoNumber)).isEqualTo(matchBonus);
+	}
 }
