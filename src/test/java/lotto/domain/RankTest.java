@@ -16,9 +16,10 @@ class RankTest {
     @DisplayName("당첨번호와 로또번호가 3~6개 사이 일치 일 시 당첨")
     @ParameterizedTest
     @CsvSource(value = {"0:false", "1:false", "2:false", "3:true", "4:true", "5:true", "6:true", "7:false"}, delimiter = ':')
-    void prizeTest(int winningNumberSameCount, boolean isPrize) {
-        boolean prize = Rank.isPrize(winningNumberSameCount);
-        assertThat(prize).isEqualTo(isPrize);
+    void prizeTest(int winningNumberSameCount, boolean expectedPrize) {
+        Rank rank = Rank.of(winningNumberSameCount);
+        boolean prize = rank.isPrize();
+        assertThat(prize).isEqualTo(expectedPrize);
     }
 
     @DisplayName("번호 일치 개수 별 등수")

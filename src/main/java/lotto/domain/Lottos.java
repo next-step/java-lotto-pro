@@ -19,7 +19,8 @@ public class Lottos {
 
         for (Lotto lotto : lottos) {
             int winningNumberMatchCount = lotto.winningNumberMatchCount(winningNumbers);
-            if (Rank.isPrize(winningNumberMatchCount)) {
+            Rank rank = Rank.of(winningNumberMatchCount);
+            if (rank.isPrize()) {
                 winningResultAccumulate(winningResult, winningNumberMatchCount);
             }
         }
