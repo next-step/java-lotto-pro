@@ -1,12 +1,18 @@
 package lotto.view;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
-
-import static lotto.common.Constants.PRIZE_MONEY;
+import java.util.Map;
 
 public class ResultView {
 
     private static final String RESULT_TITLE_MESSAGE = "당첨 통계\r\n---------";
+    private static final Map<Integer, Integer> PRIZE_MONEY = new HashMap<Integer, Integer>(){{
+        put(3, 5_000);
+        put(4, 50_000);
+        put(5, 1_500_000);
+        put(6, 2_000_000_000);
+    }};
     private static final String MATCHED_RESULT_MESSAGE = "%s개 일치 (%s원)- %s개";
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.";
     private static double totalPrizeMoney = 0.0;
