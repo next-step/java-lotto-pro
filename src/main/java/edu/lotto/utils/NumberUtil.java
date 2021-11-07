@@ -1,7 +1,7 @@
-package edu.lotto.automatic.utils;
+package edu.lotto.utils;
 
-import edu.lotto.automatic.constants.MessageConstants;
-import edu.lotto.automatic.constants.PatternConstants;
+import edu.lotto.constants.MessageConstants;
+import edu.lotto.constants.PatternConstants;
 
 import java.util.regex.Pattern;
 

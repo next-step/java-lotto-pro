@@ -1,7 +1,7 @@
-package edu.lotto.automatic.model;
+package edu.lotto.model;
 
-import edu.lotto.automatic.constants.MessageConstants;
-import edu.lotto.automatic.utils.NumberUtil;
+import edu.lotto.constants.MessageConstants;
+import edu.lotto.utils.NumberUtil;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

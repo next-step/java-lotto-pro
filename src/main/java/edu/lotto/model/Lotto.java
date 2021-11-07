@@ -1,6 +1,6 @@
-package edu.lotto.automatic.model;
+package edu.lotto.model;
 
-import edu.lotto.automatic.utils.NumberUtil;
+import edu.lotto.utils.NumberUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

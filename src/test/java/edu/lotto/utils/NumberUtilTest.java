@@ -1,6 +1,6 @@
-package edu.lotto.automatic.utils;
+package edu.lotto.utils;
 
-import edu.lotto.automatic.constants.PatternConstants;
+import edu.lotto.constants.PatternConstants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

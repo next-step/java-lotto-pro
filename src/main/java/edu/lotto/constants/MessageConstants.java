@@ -1,4 +1,4 @@
-package edu.lotto.automatic.constants;
+package edu.lotto.constants;
 
 public class MessageConstants {
 

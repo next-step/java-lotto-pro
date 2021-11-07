@@ -1,4 +1,4 @@
-package edu.lotto.automatic.constants;
+package edu.lotto.constants;
 
 /**
  * 정규식 패턴을 저장하는 Constants

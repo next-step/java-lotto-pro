@@ -1,9 +1,9 @@
-package edu.lotto.automatic.controller;
+package edu.lotto.controller;
 
-import edu.lotto.automatic.constants.MessageConstants;
-import edu.lotto.automatic.constants.PatternConstants;
-import edu.lotto.automatic.model.Lottos;
-import edu.lotto.automatic.utils.NumberUtil;
+import edu.lotto.constants.MessageConstants;
+import edu.lotto.constants.PatternConstants;
+import edu.lotto.model.Lottos;
+import edu.lotto.utils.NumberUtil;
 
 import java.util.ArrayList;
 import java.util.List;
