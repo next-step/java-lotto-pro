@@ -34,10 +34,8 @@ public class LottoStore {
 
 		WinningLotto winningLotto = getLastWeekWinningLotto();
 		WinningRecord winningRecord = winningLotto.match(userLottos);
-
-		resultView.printWinningRecord(winningRecord);
-		System.out.print(purchaseAmount.getAmount());
-		resultView.printReturnRate(Calculator.profitRate(purchaseAmount.getAmount(), winningRecord.getRevenue()));
+		double profitRate = Calculator.profitRate(purchaseAmount.getAmount(), winningRecord.getRevenue());
+		resultView.printWinningStat(winningRecord, profitRate);
 	}
 
 	private PurchaseAmount pay() {
