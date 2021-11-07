@@ -43,7 +43,7 @@ public class LottoApp {
 		WinningLotto winningLotto;
 		do {
 			final String lottoNumbers = view.inWinningLotto();
-			final String bonus = view.inBonus();
+			final String bonus = view.inWinningBonus();
 			winningLotto = makeWinningLotto(lottoNumbers, bonus);
 		} while (null == winningLotto);
 		return winningLotto;

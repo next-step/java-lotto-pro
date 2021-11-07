@@ -15,8 +15,8 @@ public class View {
 		return Console.readLine();
 	}
 
-	public String inBonus() {
-		println(Message.INPUT_BONUS.getContent());
+	public String inWinningBonus() {
+		println(Message.INPUT_WINNING_BONUS.getContent());
 		return Console.readLine();
 	}
 
