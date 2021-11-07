@@ -27,12 +27,14 @@ public class Lotto {
 
 	}
 
-	public boolean isContains(LottoNumber number) {
-		return lottoNumbers.contains(number);
-	}
-
 	private boolean isLottoSize(int size) {
 		return LOTTO_SIZE != size;
+	}
+
+	public Rank match(Lotto lotto) {
+		return Rank.rank(this.lottoNumbers.stream()
+			.filter(no -> lotto.lottoNumbers.contains(no))
+			.count());
 	}
 
 	@Override

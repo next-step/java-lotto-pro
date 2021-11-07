@@ -15,9 +15,9 @@ public class RankTest {
 	void 로또_1등_당첨_금액() {
 		Rank rank = Rank.rank(6);
 
-		String prizeMoney = rank.getPrizeMoney();
+		double prizeMoney = rank.getPrizeMoney();
 
-		assertThat(prizeMoney).isEqualTo("200000000000");
+		assertThat(prizeMoney).isEqualTo(200000000000D);
 	}
 
 	@Test

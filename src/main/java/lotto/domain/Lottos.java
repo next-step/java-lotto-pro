@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -16,6 +17,11 @@ public class Lottos {
 		return lottos.size();
 	}
 
+	public List<Rank> match(Lotto standardLotto) {
+		return lottos.stream()
+			.map(lotto -> standardLotto.match(lotto))
+			.collect(Collectors.toList());
+	}
 	@Override
 	public String toString() {
 		return String.join(JOIN_DELIMITER, lottos.toString());

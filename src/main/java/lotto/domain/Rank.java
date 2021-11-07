@@ -7,7 +7,9 @@ public enum Rank {
 	FOURTH_PLACE(3, "5_000"),
 	FAILED(0, "0");
 
-	private final int matchCount;
+	public static final String UNDER_BAR = "_";
+
+	private final long matchCount;
 	private final String prizeMoney;
 
 	Rank(int matchCount, String prizeMoney) {
@@ -15,7 +17,7 @@ public enum Rank {
 		this.prizeMoney = prizeMoney;
 	}
 
-	public static Rank rank(int matchCount) {
+	public static Rank rank(long matchCount) {
 		if (isFirstPlace(matchCount)) {
 			return FIRST_PLACE;
 		}
@@ -31,23 +33,27 @@ public enum Rank {
 		return FAILED;
 	}
 
-	private static boolean isFourthPlace(int matchCount) {
+	private static boolean isFourthPlace(long matchCount) {
 		return FOURTH_PLACE.matchCount == matchCount;
 	}
 
-	private static boolean isThirdPlace(int matchCount) {
+	private static boolean isThirdPlace(long matchCount) {
 		return THIRD_PLACE.matchCount == matchCount;
 	}
 
-	private static boolean isSecondPlace(int matchCount) {
+	private static boolean isSecondPlace(long matchCount) {
 		return SECOND_PLACE.matchCount == matchCount;
 	}
 
-	private static boolean isFirstPlace(int matchCount) {
+	private static boolean isFirstPlace(long matchCount) {
 		return FIRST_PLACE.matchCount == matchCount;
 	}
 
-	public String getPrizeMoney() {
-		return this.prizeMoney.replace("_", "");
+	public double getPrizeMoney() {
+		return Double.parseDouble(this.prizeMoney.replace(UNDER_BAR, ""));
+	}
+
+	public long getMatchCount() {
+		return matchCount;
 	}
 }
