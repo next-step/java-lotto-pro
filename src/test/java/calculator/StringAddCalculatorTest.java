@@ -51,4 +51,10 @@ public class StringAddCalculatorTest {
         assertThatThrownBy(() -> stringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    public void splitAndSum_문자열() {
+        assertThatThrownBy(() -> stringAddCalculator.splitAndSum("1,2,qsqd"))
+                .isInstanceOf(RuntimeException.class);
+    }
 }
