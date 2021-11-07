@@ -21,7 +21,7 @@ public class LottoMachine {
     public final static Money GAME_PRICE = new Money(BigDecimal.valueOf(1000));
 
     private final Money money;
-    private final List<List<Number>> activeNumberList;
+    private final List<LottoNumber> activeNumberList;
 
     public LottoMachine(Money money) {
         validationMoney(money);
@@ -36,7 +36,7 @@ public class LottoMachine {
 
     public List<LottoNumber> getLottoList() {
         int autoCount = getPurchaseCount(GAME_PRICE) - activeNumberList.size();
-        return Stream.concat(generateActiveLotto().stream(), generateAutoLotto(autoCount).stream())
+        return Stream.concat(activeNumberList.stream(), generateAutoLotto(autoCount).stream())
                 .collect(Collectors.toList());
     }
 
@@ -51,17 +51,12 @@ public class LottoMachine {
         return lottoNumbers;
     }
 
-    private List<LottoNumber> generateActiveLotto() {
-        return activeNumberList.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
-
-    private List<List<Number>> convertNumberList(List<List<Integer>> activeNumbers) {
+    private List<LottoNumber> convertNumberList(List<List<Integer>> activeNumbers) {
         return activeNumbers.stream()
                 .map(m -> m.stream()
                         .map(s -> Number.of(s))
                         .collect(Collectors.toList()))
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
