@@ -71,13 +71,11 @@
 
 - 일급 콜렉션을 쓴다.
     - 6개의 숫자 값을 가지는 java collection 을 감싸는 객체를 추가해 구현해 본다.
-        - LottoNumbers 로 정의
 - 하드 코딩을 하지 않기 위해 상수 값을 사용하면 많은 상수 값이 발생한다. 자바의 enum 을 활용해 상수 값을 제거한다. 즉, enum 을 활용해 일치하는 수를 로또 등수로 변경해 본다.
-    - LottoRank 를 개선하기
 
 ## 4 단계 기능 목록
 
-- [ ] 보너스 숫자한개 입력받기
+- [X] 보너스 숫자한개 입력받기
 - [X] LottoRank 보너스 숫자 추가
 - [X] LottoRank 2등은 5개 일치 + 보너스볼 일치로 변경된 부분으로 로직 변경하기
 - [X] View static 메소드로 변경하여 인스턴스 변수를 줄여보기,
@@ -87,8 +85,8 @@
 - [X] RandomNumbers.java 초기화 블럭
   적용하기 [참고 링크](https://velog.io/@tomato2532/%EC%B4%88%EA%B8%B0%ED%99%94-%EB%B8%94%EB%9F%AD%EA%B3%BC-%EC%83%9D%EC%84%B1%EC%9E%90)
 - [X] DTO 개선하기
-- [ ] `lottoRanksOf`() 테스트 추가
+- [X] `lottoRanksOf`() 테스트 추가
 - [X] LottoNumbers 에서 불필요한 NumbersStrategy 사용 제거
+- [X] Dto 정리 하면서 Controller, Service, View 통합 리팩토링 진행
+- [X] 도메인 객체 테스트 코드 추가 및 개선
 
-- 리팩토링
-    - [X] Dto 정리 하면서 Controller, Service, View 통합 리팩토링 진행
