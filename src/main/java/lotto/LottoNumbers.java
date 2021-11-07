@@ -20,8 +20,7 @@ public class LottoNumbers {
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
-        this.lottoNumbers = new HashSet<>();
-        generateRandomLottoNumbers();
+        this.lottoNumbers = generateRandomLottoNumbers();
     }
 
     public LottoNumbers(Set<LottoNumber> lottoNumbers) {
@@ -46,12 +45,10 @@ public class LottoNumbers {
         return resultPocket;
     }
 
-    private void generateRandomLottoNumbers() {
+    private Set<LottoNumber> generateRandomLottoNumbers() {
         Collections.shuffle(randomLottoNumberPocket);
-        for (int index = 0; index < LOTTO_SIZE; index++) {
-            LottoNumber randomNumber = randomLottoNumberPocket.get(index);
-            lottoNumbers.add(randomNumber);
-        }
+
+        return new HashSet<>(randomLottoNumberPocket.subList(0, LOTTO_SIZE));
     }
 
     private void generateLottoNumbersFromString(String lottoNumbers, String separator) {
@@ -67,6 +64,10 @@ public class LottoNumbers {
         if (splitLottoNumbers.length != LOTTO_SIZE) {
             throw new WrongLottoNumberSizeException(WRONG_LOTTO_NUMBER_SIZE_MESSAGE);
         }
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     public boolean containsNumber(LottoNumber myLottoNumber) {
