@@ -1,4 +1,4 @@
-package model.common;
+package view.model;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import view.model.GuidePrinter;
+import view.model.UserInputSystem;
 
 @DisplayName("사용자 입력")
 class UserInputSystemTest {

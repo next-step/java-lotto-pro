@@ -3,9 +3,9 @@ package view;
 import java.util.Collection;
 import java.util.Scanner;
 
-import model.common.GuidePrinter;
-import model.common.UserInputSystem;
-import model.common.UserInputsSystem;
+import view.model.GuidePrinter;
+import view.model.UserInputSystem;
+import view.model.UserInputsSystem;
 
 public final class InputView {
 
