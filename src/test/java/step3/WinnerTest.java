@@ -18,6 +18,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 
 import step3.winner.Winner;
 import step3.winner.WinningAmount;
+import step3.winner.WinningMoney;
 
 public class WinnerTest {
 
@@ -54,16 +55,16 @@ public class WinnerTest {
 		"6,42,45,1,9,8:14000:0.00"}, delimiter = ':')
 	void yield(String userInputNumber, int inputMoney, String inputYield) {
 		// given
-		Money money = new Money(inputMoney);
-
-		// when
+		WinningMoney winningMoney = new WinningMoney(new Money(inputMoney));
 		winner = new Winner(papers);
 		winnerAmounts = winner.statistics(lottoNumberService.convertLottoNumber(userInputNumber));
 		Integer reduce = winnerAmounts.entrySet().stream().map(s -> s.getValue()).reduce(0, Integer::sum);
 
+		// when
+		BigDecimal calyield = winningMoney.yield(reduce);
+
 		// then
-		BigDecimal yield = money.yield(reduce);
-		assertThat(yield).isEqualTo(new BigDecimal(inputYield));
+		assertThat(calyield).isEqualTo(new BigDecimal(inputYield));
 	}
 	
 	@DisplayName("각각의 금액이 해당 금액 범위 내인지 확인")
