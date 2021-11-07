@@ -19,6 +19,11 @@ public class LottoCalculator {
         this.lottos = new Lottos(lottos);
     }
 
+    public LottoCalculator(PurchaseAmount purchaseAmount, WinningResults winningResults) {
+        this(purchaseAmount);
+        this.winningResults = winningResults;
+    }
+
     public Lottos getLottos() {
         return lottos;
     }

@@ -10,7 +10,7 @@ public class WinningResults {
 
     private final List<WinningResult> winningResults;
 
-    private WinningResults(List<WinningResult> winningResults) {
+    public WinningResults(List<WinningResult> winningResults) {
         this.winningResults = Collections.unmodifiableList(winningResults);
     }
 
