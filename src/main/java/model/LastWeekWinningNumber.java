@@ -56,6 +56,10 @@ public class LastWeekWinningNumber {
 		this.bonusBall = bonusBall;
 	}
 
+	public boolean isNotContain(String bonusBall) {
+		return value.isNotContain(BonusBall.from(bonusBall));
+	}
+
 	public Lotto getValue() {
 		return value;
 	}

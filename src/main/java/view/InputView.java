@@ -22,9 +22,9 @@ public class InputView {
 		return inputForLastWeekWinningNumberUntilValid(sc.nextLine());
 	}
 
-	public static BonusBall printBonusBallAndInput() {
+	public static BonusBall printBonusBallAndInput(LastWeekWinningNumber lastWeekWinningNumber) {
 		printBonusBallMessage();
-		return inputForBonusBallUntilValid(sc.nextLine());
+		return inputForBonusBallUntilValid(sc.nextLine(), lastWeekWinningNumber);
 	}
 
 	private static void printPurchaseAmountMessage() {
@@ -66,8 +66,8 @@ public class InputView {
 		return LastWeekWinningNumber.of(lastWeekNumber);
 	}
 
-	private static BonusBall inputForBonusBallUntilValid(String bonusBall) {
-		while(!BonusBall.validate(bonusBall)) {
+	private static BonusBall inputForBonusBallUntilValid(String bonusBall, LastWeekWinningNumber lastWeekWinningNumber) {
+		while(!(BonusBall.validate(bonusBall) && lastWeekWinningNumber.isNotContain(bonusBall))) {
 			InputView.printErrorBonusBallInvalidation();
 			bonusBall = sc.nextLine();
 		}

@@ -57,6 +57,10 @@ public class Lotto {
 		return numbers.contains(bonusBall.getNumber());
 	}
 
+	public boolean isNotContain(BonusBall bonusBall) {
+		return !numbers.contains(bonusBall.getNumber());
+	}
+
 	public Integer at(int index) {
 		return this.numbers.get(index);
 	}

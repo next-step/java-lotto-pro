@@ -1,5 +1,6 @@
 package controller;
 
+import model.BonusBall;
 import model.LastWeekWinningNumber;
 import model.Lottos;
 import model.Money;
@@ -17,7 +18,8 @@ public class LottoController {
 		ResultView.printLottoNumbers(lottos);
 
 		LastWeekWinningNumber lastWeekWinningNumber = InputView.printLastWeekWinningNumberAndInput();
-		lastWeekWinningNumber.updateBonusBall(InputView.printBonusBallAndInput());
+		BonusBall bonusBall = InputView.printBonusBallAndInput(lastWeekWinningNumber);
+		lastWeekWinningNumber.updateBonusBall(bonusBall);
 
 		ResultView.printWinningStatisticsMessage(lottos.matchResult(lastWeekWinningNumber), money);
 	}
