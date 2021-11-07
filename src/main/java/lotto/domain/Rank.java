@@ -2,23 +2,22 @@ package lotto.domain;
 
 import lotto.startegy.MatchStrategy;
 
+import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 public enum Rank {
-    NONE(2, 0, (count, match) -> count <= 2),
-    FIVE(3, 5_000, (count, match) -> count == 3),
-    FOUR(4, 50_000, (count, match) -> count == 4),
-    THIRD(5, 1_500_000, (count, match) -> (count == 5 && !match)),
-    SECOND(5, 30_000_000, (count, match) -> (count == 5 && match)),
-    FIRST(6, 2_000_000_000, (count, match) -> count == 6);
+    NONE(new WinningCondition(2, BigDecimal.valueOf(0)), (count, match) -> count <= 2),
+    FIVE(new WinningCondition(3, BigDecimal.valueOf(5_000)), (count, match) -> count == 3),
+    FOUR(new WinningCondition(4, BigDecimal.valueOf(50_000)), (count, match) -> count == 4),
+    THIRD(new WinningCondition(5, BigDecimal.valueOf(1_500_000)), (count, match) -> (count == 5 && !match)),
+    SECOND(new WinningCondition(5, BigDecimal.valueOf(30_000_000)), (count, match) -> (count == 5 && match)),
+    FIRST(new WinningCondition(6, BigDecimal.valueOf(2_000_000_000)), (count, match) -> count == 6);
 
-    private final int matchCount;
-    private final int prizeMoney;
+    private final WinningCondition winningCondition;
     private final MatchStrategy expression;
 
-    Rank(int matchCount, int prizeMoney, MatchStrategy expression) {
-        this.matchCount = matchCount;
-        this.prizeMoney = prizeMoney;
+    Rank(WinningCondition winningCondition, MatchStrategy expression) {
+        this.winningCondition = winningCondition;
         this.expression = expression;
     }
 
@@ -33,11 +32,11 @@ public enum Rank {
         return this.equals(rank);
     }
 
-    public int getPrizeMoney() {
-        return prizeMoney;
+    public BigDecimal getPrizeMoney() {
+        return winningCondition.getPrizeMoney();
     }
 
     public int getMatchCount() {
-        return matchCount;
+        return winningCondition.getCount();
     }
 }
