@@ -37,8 +37,12 @@ public class BonusNumber {
 		return lottoNumber;
 	}
 
-	public boolean isMatchNumber(LottoNumber comparingLottoNumber){
+	protected boolean isMatchNumber(LottoNumber comparingLottoNumber){
 		return this.lottoNumber.equals(comparingLottoNumber);
+	}
+
+	protected boolean matchTicket(LottoTicket lottoTicket) {
+		return lottoTicket.hasLottoNumber(getLottoNumber());
 	}
 
 	@Override
@@ -54,9 +58,5 @@ public class BonusNumber {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumber);
-	}
-
-	public boolean matchTicket(LottoTicket lottoTicket) {
-		return lottoTicket.hasLottoNumber(getLottoNumber());
 	}
 }

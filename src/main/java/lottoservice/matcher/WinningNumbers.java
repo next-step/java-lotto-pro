@@ -49,7 +49,7 @@ public class WinningNumbers {
 			.count();
 	}
 
-	public boolean hasMatchNumber(LottoNumber number){
+	protected boolean hasMatchNumber(LottoNumber number){
 		return winningNumbers.contains(number);
 	}
 
