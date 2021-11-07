@@ -14,7 +14,7 @@ public class LottoController {
 
 	private LottoGenerator generateLotto() {
 		LottoGenerator lottoGenerator = lottoGenerator();
-		OutputView.printCompletePurchaseLotto(lottoGenerator.size());
+		OutputView.printCompletePurchaseLotto(lottoGenerator);
 		OutputView.printLottoNumbers(lottoGenerator);
 
 		return lottoGenerator;
@@ -30,7 +30,7 @@ public class LottoController {
 
 	private WinningLottoNumbers winningLottoNumberGenerator() {
 		try {
-			return new WinningLottoNumbers(InputView.innputWinningLottoNumber());
+			return new WinningLottoNumbers(InputView.inputWinningLottoNumber());
 		} catch (IllegalArgumentException illegalArgumentException) {
 			return winningLottoNumberGenerator();
 		}

@@ -13,7 +13,7 @@ public class InputView {
 		return inputMoney;
 	}
 
-	public static String innputWinningLottoNumber() {
+	public static String inputWinningLottoNumber() {
 		System.out.println("");
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		String winningNumber = SCANNER.nextLine();
