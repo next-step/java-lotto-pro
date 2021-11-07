@@ -27,19 +27,18 @@ public class LottoStore {
 		}
 	}
 
-	private void validatePayment(int paidKRW, List<String> manuallyLottos) {
+	private void validatePayment(int paidKRW, List<String> manualLottos) {
 		if (paidKRW < Lotto.PRICE_KRW) {
 			throw new LottoStorePaymentException();
 		}
 		final int numOfLottosCanBeSold = paidKRW / Lotto.PRICE_KRW;
-		if (numOfLottosCanBeSold < manuallyLottos.size()) {
+		if (numOfLottosCanBeSold < manualLottos.size()) {
 			throw new LottoStorePaymentException();
 		}
 	}
 
 	private List<Lotto> sellManually(List<String> lottos) {
 		return lottos.stream()
-			.limit(lottos.size())
 			.map(LottoFactory::from)
 			.collect(Collectors.toList());
 	}
