@@ -13,8 +13,15 @@ public class Result {
 
     public Result(Lottos lottos, Lotto winLotto) {
         this.matchResult = createResultMap();
-        for (int i = 0; i < lottos.getLottoGroup().size(); i++) {
+        for (int i = 0; i < lottos.size(); i++) {
+
             Rank rank = winLotto.matchNumber(lottos.getLottoGroup().get(i));
+            matchResultPut(rank);
+        }
+    }
+
+    private void matchResultPut(Rank rank) {
+        if(rank != null && rank != Rank.MISS){
             matchResult.put(rank, matchResult.get(rank) + 1);
         }
     }
@@ -25,6 +32,7 @@ public class Result {
         for (Rank winningRank : winningRanks) {
             result.put(winningRank, 0);
         }
+
         return result;
     }
 
@@ -46,7 +54,7 @@ public class Result {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("");
         matchResult.forEach((rank, count) -> {
             sb.append(String.format(Message.STATS, rank.getCountOfMatch(), rank.getWinningMoney(), count));
         });
