@@ -4,11 +4,11 @@ import java.util.*;
 import java.util.stream.*;
 
 import lotto.domain.number.*;
+import lotto.exception.*;
 
 public class LottoNumbers {
-    private static final String LOTTO_NUMBERS_SIZE_IS_NOT_EQUAL_SIX_EXCEPTION_STATEMENT = "로또번호의 개수 6개가 아닙니다.";
+    private static final String LOTTO_NUMBERS_SIZE_IS_NOT_EQUAL_SIX_EXCEPTION_STATEMENT = "로또번호의 개수 6개가 아닙니다.(번호 중복 확인)";
     private static final int LOTTO_NUMBERS_SIZE = 6;
-    private static final String LOTTO_NUMBERS_IS_NULL_EXCEPTION_STATEMENT = "입력값이 null입니다.";
 
     protected final Set<LottoNumber> lottoNumbers;
 
@@ -26,7 +26,7 @@ public class LottoNumbers {
 
     public static LottoNumbers from(List<Integer> numbers) {
         if (Objects.isNull(numbers)) {
-            throw new IllegalArgumentException(LOTTO_NUMBERS_IS_NULL_EXCEPTION_STATEMENT);
+            throw new NullArgumentException(LottoNumbers.class.getSimpleName());
         }
         return new LottoNumbers(numbers);
     }
