@@ -34,6 +34,11 @@ public class Lotto {
 		return new LottoNumbers(suffledLottoNumbers.subList(0, LottoNumbers.LOTTO_NUMBER_COUNT));
 	}
 
+	/**
+	 * 로또에 입력받은 로또 번호가 존재하는지 여부
+	 * @param lottoNumber 로또 번호
+	 * @return 존재 여부
+	 */
 	public boolean contains(LottoNumber lottoNumber) {
 		return numbers.contains(lottoNumber);
 	}

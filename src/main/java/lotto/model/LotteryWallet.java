@@ -14,14 +14,26 @@ public class LotteryWallet {
 		lottos = new Lottos(possiblePurchase);
 	}
 
+	/**
+	 * 구매한 로또 개수
+	 * @return 구매한 로또 개수
+	 */
 	public int numberOfPurchasedLotto() {
 		return lottos.size();
 	}
 
+	/**
+	 * 실제 로또구매에 사용한 금액
+	 * @return 실제 로또구매에 사용한 금액
+	 */
 	public int getUsedMoney() {
 		return budget.getUsedMoney();
 	}
 
+	/**
+	 * 구매한 로또들의 상태 텍스트 반환
+	 * @return 로또들의 상태 텍스트
+	 */
 	public String lottosStatus() {
 		return lottos.toString();
 	}

@@ -8,6 +8,10 @@ public enum LottoResult {
 		this.reward = reward;
 	}
 
+	/**
+	 * 해당하는 로또 결과의 상금 반환
+	 * @return 로또 결과 상금
+	 */
 	public int getReward() {
 		return reward;
 	}

@@ -18,6 +18,11 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
+	/**
+	 * 입력받은 개수만큼 로또 생성
+	 * @param lottoCount 생성할 로또 수
+	 * @return 로또 목록
+	 */
 	public static List<Lotto> generateLottoList(int lottoCount) {
 		List<Lotto> result = new ArrayList<>();
 		for (int i = 0; i < lottoCount; i++) {
@@ -26,6 +31,10 @@ public class Lottos {
 		return result;
 	}
 
+	/**
+	 * 로또 개수 반환
+	 * @return 로또 개수
+	 */
 	public int size() {
 		return lottos.size();
 	}
