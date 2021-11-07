@@ -21,8 +21,6 @@ public class LottoNumberTest {
         return Stream.of(arguments(number));
     }
 
-    LottoMachine lottoMachine = new LottoMachine();
-
     @ParameterizedTest
     @MethodSource("autoLottoTest")
     @DisplayName("로또 번호 생성 확인")
@@ -51,11 +49,13 @@ public class LottoNumberTest {
     }
 
     static Stream<Arguments> lottoRank() {
-        List<Integer> MatchNumber = Arrays.asList(1,2,3,4,5,6);
-        List<Integer> LottoNumber = Arrays.asList(11,12,13,4,5,6);
+        List<Number> MatchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
+                Number.of(4), Number.of(5), Number.of(6));
+        List<Number> LottoNumber = Arrays.asList(Number.of(11), Number.of(12), Number.of(13),
+                Number.of(4), Number.of(5), Number.of(6));
         return Stream.of(arguments(
                 MatchNumber
-                , 7
+                , Number.of(7)
                 ,LottoNumber
         ));
     }
@@ -63,13 +63,12 @@ public class LottoNumberTest {
     @ParameterizedTest
     @MethodSource("lottoRank")
     @DisplayName("로또 번호 매칭 검증")
-    public void lottoRank(List<Integer> MatchNumbers, Integer bonusNumber, List<Integer> activeNumbers) {
-        LottoNumber matchLotto = lottoMachine.getLottoNumber(MatchNumbers);
-        LottoNumber activeLotto = lottoMachine.getLottoNumber(activeNumbers);
-        Number bonus = lottoMachine.getBonusNumber(bonusNumber);
+    public void lottoRank(List<Number> MatchNumbers, Number bonusNumber, List<Number> activeNumbers) {
+        LottoNumber matchLotto = new LottoNumber(MatchNumbers);
+        LottoNumber activeLotto = new LottoNumber(activeNumbers);
 
         boolean rankMatch =
-                activeLotto.getMatchRank(new WinningLotto(matchLotto, bonus)).isRankMatch(Rank.FIVE);
+                activeLotto.getMatchRank(new WinningLotto(matchLotto, bonusNumber)).isRankMatch(Rank.FIVE);
 
         assertThat(rankMatch).isTrue();
     }
