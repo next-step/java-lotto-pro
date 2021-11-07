@@ -58,14 +58,4 @@ public class LottoNumbersGroup {
     public int hashCode() {
         return Objects.hash(lottoNumbersGroup);
     }
-
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        for (LottoNumbers lottoNumbers : lottoNumbersGroup) {
-            result.append(lottoNumbers)
-                    .append(System.lineSeparator());
-        }
-        return result.toString();
-    }
 }
