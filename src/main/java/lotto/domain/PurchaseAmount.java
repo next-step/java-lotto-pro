@@ -24,7 +24,7 @@ public class PurchaseAmount {
 
 	private int validatePurchaseAmount(int purchaseAmount) {
 		if (purchaseAmount < LOTTO_PRICE) {
-			throw new IllegalStateException(ERROR_PURCHASE_AMOUNT);
+			throw new IllegalArgumentException(ERROR_PURCHASE_AMOUNT);
 		}
 		return purchaseAmount;
 

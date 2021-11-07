@@ -24,9 +24,6 @@ public class LottoApplicationController {
 		} catch (IllegalArgumentException exception) {
 			OutputView.printMessage(exception.getMessage());
 			return true;
-		} catch (IllegalStateException exception) {
-			OutputView.printMessage(exception.getMessage());
-			return true;
 		}
 		return false;
 	}
