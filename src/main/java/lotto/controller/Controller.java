@@ -25,5 +25,11 @@ public class Controller {
 		Lottos lottos = Store.order(money);
 
 		resultView.printPurchasedLottos(lottos);
+
+		List<Integer> winningNumbers = inputView.previousWinningNumber();
+		Lotto winningLotto = Lotto.from(winningNumbers);
+
+		Statistics statistics = new Statistics(winningLotto, lottos);
+		resultView.printStatistics(statistics);
 	}
 }
