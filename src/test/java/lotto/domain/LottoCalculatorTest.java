@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -28,19 +27,18 @@ public class LottoCalculatorTest {
         // given
         Lotto manualLotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto manualLotto2 = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
-        Lottos manualLottos = new Lottos(Arrays.asList(manualLotto1, manualLotto2), 2);
+        Lottos manualLottos = Lottos.fromManualLottos(Arrays.asList(manualLotto1, manualLotto2));
 
         // when
         LottoCalculator lottoCalculator = new LottoCalculator(purchaseAmount, manualLottos);
-        List<Lotto> lottos = lottoCalculator.getLottos().getLottos();
+        List<Lotto> lottos = lottoCalculator.getLottos().getManualLottos();
 
         // then
         assertAll(
                 () -> assertThat(lottoCalculator.getTotalQuantity()).isEqualTo(purchaseAmount.getQuantity()),
                 () -> assertThat(lottoCalculator.getAutoQuantity()).isEqualTo(purchaseAmount.getQuantity() - manualLottos.getManualQuantity()),
                 () -> assertThat(lottoCalculator.getManualQuantity()).isEqualTo(manualLottos.getManualQuantity()),
-                () -> assertThat(lottos.get(0)).isEqualTo(manualLotto1),
-                () -> assertThat(lottos.get(1)).isEqualTo(manualLotto2)
+                () -> assertThat(lottos).isEqualTo(manualLottos.getManualLottos())
         );
     }
 
@@ -51,7 +49,7 @@ public class LottoCalculatorTest {
         PurchaseAmount purchaseAmount = new PurchaseAmount(1_000);
         Lotto manualLotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto manualLotto2 = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
-        Lottos manualLottos = new Lottos(Arrays.asList(manualLotto1, manualLotto2), 2);
+        Lottos manualLottos = Lottos.fromManualLottos(Arrays.asList(manualLotto1, manualLotto2));
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -63,7 +61,7 @@ public class LottoCalculatorTest {
     @DisplayName("구입된 로또 개수를 반환한다.")
     void getTotalQuantity() {
         // given
-        LottoCalculator lottoCalculator = new LottoCalculator(purchaseAmount, new Lottos(new ArrayList<>(), 0));
+        LottoCalculator lottoCalculator = new LottoCalculator(purchaseAmount, Lottos.EMPTY);
 
         // when
         int lottosSize = lottoCalculator.getTotalQuantity();

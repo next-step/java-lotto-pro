@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,7 +17,7 @@ public class LottoCalculator {
     }
 
     public LottoCalculator(PurchaseAmount purchaseAmount, WinningResults winningResults) {
-        this(purchaseAmount, new Lottos(new ArrayList<>(), 0));
+        this(purchaseAmount, Lottos.EMPTY);
         this.winningResults = winningResults;
     }
 
@@ -39,7 +38,7 @@ public class LottoCalculator {
     }
 
     public int getAutoQuantity() {
-        return lottos.getQuantity() - lottos.getManualQuantity();
+        return lottos.getAutoQuantity();
     }
 
     public int getManualQuantity() {
@@ -64,7 +63,7 @@ public class LottoCalculator {
     private Lottos getAutoLottos(PurchaseAmount purchaseAmount, int autoQuantity) {
         return IntStream.range(0, autoQuantity)
                 .mapToObj(ignore -> LottoGenerator.generate())
-                .collect(Collectors.collectingAndThen(Collectors.toList(),
-                        lottos1 -> new Lottos(lottos1, purchaseAmount.getQuantity() - autoQuantity)));
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toList(), Lottos::fromAutoLottos));
     }
 }

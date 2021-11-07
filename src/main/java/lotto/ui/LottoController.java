@@ -40,7 +40,7 @@ public class LottoController {
         ConsoleOut.newLine();
         Integer manualQuantity = ConsoleIn.inputManualQuantity();
         ConsoleOut.newLine();
-        return new LottoCalculator(purchaseAmount, new Lottos(getManualLottos(manualQuantity), manualQuantity));
+        return new LottoCalculator(purchaseAmount, Lottos.fromManualLottos(getManualLottos(manualQuantity)));
     }
 
     private List<Lotto> getManualLottos(Integer manualQuantity) {
@@ -59,7 +59,10 @@ public class LottoController {
     private void printLottos(LottoCalculator lottoCalculator) {
         ConsoleOut.printMessage(Message.LOTTOS_PRINT.getMessage(),
                 lottoCalculator.getManualQuantity(), lottoCalculator.getAutoQuantity());
-        for (Lotto lotto : lottoCalculator.getLottos().getLottos()) {
+        for (Lotto lotto : lottoCalculator.getLottos().getManualLottos()) {
+            ConsoleOut.printMessage(getLottoMessage(lotto));
+        }
+        for (Lotto lotto : lottoCalculator.getLottos().getAutoLottos()) {
             ConsoleOut.printMessage(getLottoMessage(lotto));
         }
         ConsoleOut.newLine();

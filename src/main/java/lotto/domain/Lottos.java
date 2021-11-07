@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -10,39 +11,57 @@ import java.util.stream.Stream;
 
 public class Lottos {
 
-    private final List<Lotto> lottos;
-    private final int manualQuantity;
+    public final static Lottos EMPTY = new Lottos(new ArrayList<>(), new ArrayList<>());
 
-    public Lottos(List<Lotto> lottos, int manualQuantity) {
-        this.lottos = Collections.unmodifiableList(lottos);
-        this.manualQuantity = manualQuantity;
+    private final List<Lotto> autoLottos;
+    private final List<Lotto> manualLottos;
+
+    public Lottos(List<Lotto> autoLottos, List<Lotto> manualLottos) {
+        this.autoLottos = Collections.unmodifiableList(autoLottos);
+        this.manualLottos = Collections.unmodifiableList(manualLottos);
     }
 
     public static Lottos of(Lotto... lottos) {
-        return new Lottos(Arrays.asList(lottos), 0);
+        return new Lottos(Arrays.asList(lottos), new ArrayList<>());
     }
 
     public static Lottos of(Lottos autoLottos, Lottos manualLottos) {
-        return Stream.of(manualLottos.lottos, autoLottos.lottos)
-                .flatMap(Collection::stream)
-                .collect(Collectors.collectingAndThen(
-                        Collectors.toList(), lottos1 -> new Lottos(lottos1, manualLottos.getQuantity())));
+        return new Lottos(autoLottos.autoLottos, manualLottos.manualLottos);
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public static Lottos fromAutoLottos(List<Lotto> autoLottos) {
+        return new Lottos(autoLottos, new ArrayList<>());
+    }
+    public static Lottos fromManualLottos(List<Lotto> manualLottos) {
+        return new Lottos(new ArrayList<>(), manualLottos);
     }
 
-    public int getManualQuantity() {
-        return manualQuantity;
+    public List<Lotto> getAutoLottos() {
+        return autoLottos;
+    }
+
+    public List<Lotto> getManualLottos() {
+        return manualLottos;
     }
 
     public int getQuantity() {
-        return lottos.size();
+        return getAutoQuantity() + getManualQuantity();
+    }
+
+    public int getAutoQuantity() {
+        return autoLottos.size();
+    }
+
+    public int getManualQuantity() {
+        return manualLottos.size();
     }
 
     public WinningResults getWinningResults(WinningLotto winningLotto) {
-        return WinningResults.of(lottos, winningLotto);
+        List<Lotto> mergedLottos = Stream.of(autoLottos, manualLottos)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        return WinningResults.of(mergedLottos, winningLotto);
     }
 
     @Override
@@ -50,11 +69,11 @@ public class Lottos {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lottos lottos1 = (Lottos) o;
-        return Objects.equals(lottos, lottos1.lottos);
+        return Objects.equals(autoLottos, lottos1.autoLottos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottos);
+        return Objects.hash(autoLottos);
     }
 }

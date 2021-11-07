@@ -14,7 +14,7 @@ class LottosTest {
     @DisplayName("로또의 개수를 반환한다.")
     void getQuantity() {
         // given
-        Lottos lottos = new Lottos(Arrays.asList(LottoGenerator.generate(), LottoGenerator.generate()), 0);
+        Lottos lottos = Lottos.fromAutoLottos(Arrays.asList(LottoGenerator.generate(), LottoGenerator.generate()));
 
         // when
         int size = lottos.getQuantity();
