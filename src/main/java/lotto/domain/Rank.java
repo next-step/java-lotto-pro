@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 public enum Rank {
     FIRST(6, 0, 2_000_000_000),
-    SECOND_WITH_BONUS(5, 1, 1_500_000),
+    SECOND_WITH_BONUS(5, 1, 30_000_000),
     SECOND(5, 0, 1_500_000),
     THIRD(4, 0, 50_000),
     FOURTH(3, 0, 5_000),
