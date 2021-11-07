@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-	FIRST(6, 2_000_000_000),
-	THIRD(5, 1_500_000),
-	FOURTH(4, 50_000),
+	LOSS(0, 0),
 	FIFTH(3, 5_000),
-	LOSS(0, 0);
+	FOURTH(4, 50_000),
+	THIRD(5, 1_500_000),
+	FIRST(6, 2_000_000_000);
 
 	public static final String MATCH_COUNT_NOT_CORRECT_ERROR = "일치하는 숫자의 개수가 올바르지 않습니다.";
 
