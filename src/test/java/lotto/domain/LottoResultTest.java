@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static lotto.domain.LottoNumber.GAME_PRICE;
+import static lotto.domain.LottoMachine.GAME_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -41,7 +41,7 @@ public class LottoResultTest {
     public void lottoTest(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
         LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(new LottoNumber(lottoNumber)));
-        double expected = Rank.SECOND.getPrizeMoney().divide(GAME_PRICE.getMoney().multiply(BigDecimal.valueOf(1))).doubleValue();
+        double expected = Rank.SECOND.getPrizeMoney().getMoney().divide(GAME_PRICE.getMoney().multiply(BigDecimal.valueOf(1))).doubleValue();
 
         double actual = lottoMatchResult.getLottoYield();
 

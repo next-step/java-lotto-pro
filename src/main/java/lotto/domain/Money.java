@@ -1,11 +1,7 @@
 package lotto.domain;
 
-import lotto.exception.LottoPurchaseAmountException;
-
 import java.math.BigDecimal;
 import java.util.Objects;
-
-import static lotto.domain.LottoNumber.GAME_PRICE;
 
 public class Money {
 

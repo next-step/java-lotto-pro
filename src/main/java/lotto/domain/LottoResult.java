@@ -3,7 +3,7 @@ package lotto.domain;
 import java.math.BigDecimal;
 import java.util.EnumMap;
 
-import static lotto.domain.LottoNumber.GAME_PRICE;
+import static lotto.domain.LottoMachine.GAME_PRICE;
 
 public class LottoResult {
 
@@ -20,17 +20,23 @@ public class LottoResult {
     }
 
     public double getLottoYield() {
-        return getPrizeMoneySum().divide(getPurchaseAmount(GAME_PRICE)).setScale(DECIMAL_POINT).doubleValue();
+        return getPrizeMoneySum().getMoney()
+                .divide(getPurchaseAmount(GAME_PRICE))
+                .setScale(DECIMAL_POINT)
+                .doubleValue();
     }
 
-    private BigDecimal getPrizeMoneySum() {
+    private Money getPrizeMoneySum() {
         BigDecimal sum = BigDecimal.valueOf(0);
 
         for (Rank rank : lottoMatchResult.keySet()) {
-            BigDecimal multiply = rank.getPrizeMoney().multiply(BigDecimal.valueOf(lottoMatchResult.get(rank)));
+            BigDecimal multiply = rank.getPrizeMoney()
+                    .getMoney()
+                    .multiply(BigDecimal.valueOf(lottoMatchResult.get(rank)));
+
             sum = sum.add(multiply);
         }
-        return sum;
+        return new Money(sum);
     }
 
     private BigDecimal getPurchaseAmount(Money gamePrice) {
