@@ -9,7 +9,7 @@ public class TextEdit implements CuiComponent {
   private String printText = "";
   private String value = "";
 
-  private Scanner scanner = new Scanner(System.in);
+  public static Scanner scanner = new Scanner(System.in);
 
   public TextEdit() {
   }
