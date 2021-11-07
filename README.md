@@ -72,3 +72,15 @@
 - [x] 사용자가 입력한 문자열을 로또번호로 변경 
 - [x] 정규식 패턴 유틸 
 - [x] 생성된 로또번호와 지난주 로또번호의 갯수가 동일한지 확인
+
+### 변화할 수 있는 부분이 어떤 것인가?
+- 생성하는 부분이 변경될 수 있다. 
+- 입력하는 부분이 변경될 수 있다.
+
+### 리팩토링 대상 확인 
+- [ ] private으로 막은 뒤 항상 "중복을 제외한 6개의 숫자"를 만족하는 객체가 되도록 만드는 것
+- [ ] LottoPapers 싱글톤 사용 자제 (객체의 생성으로 변환)
+- [ ] assert 사용보다  throw로 변경 
+- [ ] private static final Pattern PATTERN_FOO = Pattern.compile("your_regex");
+- [ ] `LottoNumberService.java` stream trim 을 사용 
+- [ ] `stream().filter(/*do stuff*/).count()`
