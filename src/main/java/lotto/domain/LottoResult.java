@@ -10,34 +10,51 @@ public class LottoResult {
     public static final String FORMAT_LOTTO_RANK_STATUS = "%d개 일치 (%d원)- %d개%n";
 
     private final EnumMap<LottoRank, Integer> lottoRankResult;
-    private int totalLottoCount;
-    private int totalPrice;
 
     public LottoResult() {
         this.lottoRankResult = new EnumMap<>(LottoRank.class);
-        this.totalLottoCount = 0;
-        this.totalPrice = 0;
 
         initLottoRankResult();
     }
 
     private void initLottoRankResult() {
         Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> !LottoRank.NONE.equals(lottoRank))
                 .forEach(lottoRank -> lottoRankResult.put(lottoRank, 0));
     }
 
     public double computeEarningRate() {
-        return  totalPrice / ((double) totalLottoCount * Money.LOTTO_PRICE);
+        long totalPrice = this.getTotalPrice();
+        int totalLottoCount = this.getTotalLottoCount();
+
+        if (totalLottoCount == 0) {
+            return 0;
+        }
+
+        return totalPrice / ((double) totalLottoCount * Money.LOTTO_PRICE);
+    }
+
+    private long getTotalPrice() {
+        long totalPrice = 0;
+
+        for (Map.Entry<LottoRank, Integer> lottoRankResultEntry : lottoRankResult.entrySet()) {
+            totalPrice += (long) lottoRankResultEntry.getKey().getPrice() * lottoRankResultEntry.getValue();
+        }
+
+        return totalPrice;
+    }
+
+    private int getTotalLottoCount() {
+        int totalLottoCount = 0;
+
+        for (Integer lottoRankResultValue : lottoRankResult.values()) {
+            totalLottoCount += lottoRankResultValue;
+        }
+
+        return totalLottoCount;
     }
 
     public void addResult(LottoRank lottoRank) {
-        if (!LottoRank.NONE.equals(lottoRank)) {
-            lottoRankResult.put(lottoRank, lottoRankResult.get(lottoRank) + 1);
-        }
-
-        totalLottoCount++;
-        totalPrice += lottoRank.getPrice();
+        lottoRankResult.put(lottoRank, lottoRankResult.get(lottoRank) + 1);
     }
 
     public String getRankStatus() {
