@@ -20,5 +20,10 @@ public class Controller {
 	}
 
 	public void run() {
+		int purchaseMoney = inputView.purchaseMoneyAmount();
+		Money money = new Money(purchaseMoney);
+		Lottos lottos = Store.order(money);
+
+		resultView.printPurchasedLottos(lottos);
 	}
 }
