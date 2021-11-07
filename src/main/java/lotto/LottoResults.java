@@ -43,7 +43,7 @@ public class LottoResults {
     }
 
     public double getProfitRate(BuyAmount buyAmount) {
-        int totalReward = getTotalReward();
+        long totalReward = getTotalReward();
 
         return Math.floor((PROFIT_BASE + buyAmount.getProfitRate(totalReward)) * PROFIT_RATE_DECIMAL_POINT)
                 / PROFIT_RATE_DECIMAL_POINT;

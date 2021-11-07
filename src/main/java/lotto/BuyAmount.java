@@ -27,7 +27,7 @@ public class BuyAmount {
         return amount * LOTTO_TICKET_PRICE;
     }
 
-    public double getProfitRate(int totalReward) {
+    public double getProfitRate(long totalReward) {
         double basePrice = getPrice();
         return (totalReward - basePrice) / basePrice;
     }
