@@ -1,7 +1,10 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -45,5 +48,21 @@ public class Lottos {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottos);
+	}
+
+	/**
+	 * 가지고 있는 로또의 당첨결과 반환
+	 * @param winningLottoNumbers 로또 당첨 번호
+	 * @return 당첨 결과 객체
+	 */
+	public WinningLottoStatus getWinningStatus(WinningLottoNumbers winningLottoNumbers) {
+		Map<LottoResult, Integer> winningLottoCount = new HashMap<>();
+		EnumSet.allOf(LottoResult.class).forEach(result -> winningLottoCount.put(result, 0));
+		lottos.forEach(lotto -> {
+			LottoResult result = winningLottoNumbers.result(lotto);
+			winningLottoCount.merge(result, 1, Integer::sum);
+		});
+
+		return new WinningLottoStatus(winningLottoCount);
 	}
 }
