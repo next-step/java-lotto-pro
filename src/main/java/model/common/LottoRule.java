@@ -2,31 +2,30 @@ package model.common;
 
 import utility.Assert;
 
-public class LottoRule {
+public final class LottoRule {
 
 	private static final int MINIMUM_LIMIT = 1;
 
-	private final int minNumber;
-	private final int maxNumber;
+	private final Range range;
 	private final int count;
 
-	private LottoRule(int minNumber, int maxNumber, int count) {
-		validate(minNumber, maxNumber, count);
-		this.maxNumber = maxNumber;
-		this.minNumber = minNumber;
+	private LottoRule(Range range, int count) {
+		Assert.notNull(range, "'range' must not be null");
+		validate(range, count);
+		this.range = range;
 		this.count = count;
 	}
 
-	public static LottoRule of(int minNumber, int maxNumber, int count) {
-		return new LottoRule(minNumber, maxNumber, count);
+	public static LottoRule of(Range range, int count) {
+		return new LottoRule(range, count);
 	}
 
 	public int minNumber() {
-		return minNumber;
+		return range.min();
 	}
 
 	public int maxNumber() {
-		return maxNumber;
+		return range.max();
 	}
 
 	public boolean differentCount(int count) {
@@ -38,57 +37,27 @@ public class LottoRule {
 	}
 
 	public int[] numbers() {
-		int[] ints = new int[maxNumber - minNumber + 1];
-		int index = 0;
-		for (int value = minNumber; value <= maxNumber; value++) {
-			ints[index++] = value;
-		}
-		return ints;
+		return range.numbers();
 	}
 
 	public boolean outOfRange(int target) {
-		return lessThanMinValue(target) || moreThanMaxValue(target);
+		return range.isOut(target);
 	}
 
 	@Override
 	public String toString() {
 		return "LottoRule{" +
-			"minNumber=" + minNumber +
-			", maxNumber=" + maxNumber +
+			"range=" + range +
 			", count=" + count +
 			'}';
 	}
 
-	private boolean moreThanMaxValue(int target) {
-		return maxNumber < target;
-	}
-
-	private boolean lessThanMinValue(int target) {
-		return target < minNumber;
-	}
-
-	private void validate(int minNumber, int maxNumber, int count) {
-		Assert.isTrue(positive(minNumber), "'minNumber' must be positive");
-		Assert.isTrue(moreThanMinLimit(count),
+	private void validate(Range range, int count) {
+		Assert.isTrue(count >= MINIMUM_LIMIT,
 			String.format("count(%d) must be greater than %d", count, MINIMUM_LIMIT));
-		Assert.isTrue(moreThan(gap(maxNumber, minNumber), count),
-			String.format("gap between minValue(%d) and maxValue(%d) must be more than count(%d)", minNumber, maxNumber,
-				count));
-	}
 
-	private boolean moreThanMinLimit(int count) {
-		return moreThan(count, MINIMUM_LIMIT);
-	}
-
-	private int gap(int maxNumber, int minNumber) {
-		return maxNumber - minNumber + 1;
-	}
-
-	private boolean positive(int value) {
-		return moreThan(value, 0);
-	}
-
-	private boolean moreThan(int value, int target) {
-		return value >= target;
+		Assert.isTrue(range.lessThanSize(count),
+			String.format("gap between minValue(%d) and maxValue(%d) must be more than count(%d)",
+				range.min(), range.max(), count));
 	}
 }

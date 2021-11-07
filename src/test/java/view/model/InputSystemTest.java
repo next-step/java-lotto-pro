@@ -1,4 +1,4 @@
-package view;
+package view.model;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,20 +10,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("사용자 입력")
-class UserInputSystemTest {
+class InputSystemTest {
 
 	@Test
 	@DisplayName("객체화")
 	void instance() {
 		assertThatNoException()
-			.isThrownBy(() -> UserInputSystem.from(mock(GuidePrinter.class), mock(Scanner.class)));
+			.isThrownBy(() -> InputSystem.of(mock(GuidePrinter.class), mock(Scanner.class)));
 	}
 
 	@Test
 	@DisplayName("안내 프린터 없이 객체화하면 IllegalArgumentException")
 	void instance_nullGuidePrinter_illegalArgumentExceptionThrown() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> UserInputSystem.from(null, mock(Scanner.class)))
+			.isThrownBy(() -> InputSystem.of(null, mock(Scanner.class)))
 			.withMessage("'guidePrinter' must not be null");
 	}
 
@@ -31,7 +31,7 @@ class UserInputSystemTest {
 	@DisplayName("스캐너 없이 객체화하면 IllegalArgumentException")
 	void instance_nullScanner_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> UserInputSystem.from(mock(GuidePrinter.class), null))
+			.isThrownBy(() -> InputSystem.of(mock(GuidePrinter.class), null))
 			.withMessage("'scanner' must not be null");
 	}
 
@@ -47,13 +47,12 @@ class UserInputSystemTest {
 			.thenReturn(anyString);
 
 		//when
-		String input = UserInputSystem.from(mockPrinter, mockScanner).input();
+		String input = InputSystem.of(mockPrinter, mockScanner).input();
 
 		//then
-		assertAll(() -> {
-			assertThat(input)
-				.isEqualTo(anyString);
-			verify(mockPrinter, only()).print();
-		});
+		assertAll(
+			() -> assertThat(input).isEqualTo(anyString),
+			() -> verify(mockPrinter, only()).print()
+		);
 	}
 }

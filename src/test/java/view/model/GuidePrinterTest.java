@@ -1,4 +1,4 @@
-package view;
+package view.model;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -9,6 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+
+import view.model.GuidePrinter;
 
 @DisplayName("안내 문구 프린터")
 class GuidePrinterTest {

@@ -42,10 +42,10 @@ class LottoPapersTest {
 		//given
 		LottoPapers papers = LottoPapers.from(
 			Arrays.asList(
-				LottoPaper.from(lottoNumbers(9, 10, 11, 12, 13, 14)),
-				LottoPaper.from(lottoNumbers(1, 2, 3, 4, 5, 6)),
-				LottoPaper.from(lottoNumbers(1, 2, 3, 4, 8, 9)),
-				LottoPaper.from(lottoNumbers(1, 2, 3, 4, 5, 10))
+				LottoPaper.auto(lottoNumbers(9, 10, 11, 12, 13, 14)),
+				LottoPaper.auto(lottoNumbers(1, 2, 3, 4, 5, 6)),
+				LottoPaper.auto(lottoNumbers(1, 2, 3, 4, 8, 9)),
+				LottoPaper.auto(lottoNumbers(1, 2, 3, 4, 5, 10))
 			));
 
 		//when

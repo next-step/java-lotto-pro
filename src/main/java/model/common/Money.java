@@ -2,11 +2,15 @@ package model.common;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import utility.Assert;
 
 public final class Money {
+
+	private static final Map<Integer, Money> CACHE = new HashMap<>();
 
 	private static final int DEFAULT_DIVIDE_SCALE = 2;
 	private static final RoundingMode DEFAULT_DIVIDE_ROUND = RoundingMode.FLOOR;
@@ -19,7 +23,7 @@ public final class Money {
 	}
 
 	public static Money from(int value) {
-		return new Money(value);
+		return CACHE.computeIfAbsent(value, Money::new);
 	}
 
 	public static Money from(String string) {
@@ -57,10 +61,12 @@ public final class Money {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
+		}
 		Money money = (Money)o;
 		return value == money.value;
 	}

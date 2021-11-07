@@ -34,15 +34,15 @@ class LottoPaperTest {
 	@DisplayName("객체화")
 	void instance() {
 		assertThatNoException()
-			.isThrownBy(() -> LottoPaper.from(lottoNumbers(1, 2, 3, 4, 5, 6)));
+			.isThrownBy(() -> LottoPaper.auto(LottoNumbers.from(lottoNumbers(1, 2, 3, 4, 5, 6))));
 	}
 
 	@Test
 	@DisplayName("숫자 빈 상태로 객체화하면 IllegalArgumentException")
 	void instance_nullNumbers_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> LottoPaper.from(Collections.emptyList()))
-			.withMessage("'collection' must not be empty");
+			.isThrownBy(() -> LottoPaper.auto(null))
+			.withMessage("'lottoNumbers' must not be null");
 	}
 
 	@ParameterizedTest(name = "{displayName}[{index}] when the winning number is [1,2,3,4,5,6], {0} rank is {1}")
@@ -50,7 +50,7 @@ class LottoPaperTest {
 	@DisplayName("순위 매칭")
 	void rank(int[] winningNumber, LottoRank expected) {
 		//when
-		LottoRank rank = LottoPaper.from(lottoNumbers(winningNumber))
+		LottoRank rank = LottoPaper.auto(LottoNumbers.from(lottoNumbers(winningNumber)))
 			.rank(WinnerLotto.from(LottoNumbers.from(lottoNumbers(1, 2, 3, 4, 5, 6)), LottoNumber.from(10)));
 
 		//then
