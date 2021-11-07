@@ -1,8 +1,9 @@
-package step3;
+package step3.machine;
 
-import step3.machine.AutoLottoMachine;
-import step3.machine.Machine;
-import step3.machine.MachineValidation;
+import step3.LottoNumberService;
+import step3.LottoPapers;
+import step3.Money;
+import step3.Winner;
 import step3.view.InputView;
 import step3.view.ResultView;
 
@@ -20,20 +21,31 @@ public class LottoMachineFacade {
 		this.resultView = resultView;
 		this.lottoNumberService = lottoNumberService;
 		this.machineValidation = machineValidation;
-
 	}
 
-	public void pick() {
+	public void start() {
+		insertMoney();
+		createLottoPapers();
+		resultPrint();
+	}
+
+	private void insertMoney() {
 		int insertMoney = inputView.insertMoney();
 		money = new Money(insertMoney);
-		Machine machine = new AutoLottoMachine(money, machineValidation);
+	}
+
+	private void createLottoPapers() {
+		Machine machine = new AutoLottoMachine(machineValidation);
+		machine.insertMoney(money);
 		lottoPapers = machine.createLottoPapers();
+	}
+
+	private void resultPrint() {
 		resultView.purchasedCount(money.findPunchCount());
 		resultView.purchasedLottoPrint(lottoPapers);
 	}
 
-	public void result() {
-		;
+	public void findWinner() {
 		Winner winner = new Winner(lottoPapers);
 		winner.statistics(lottoNumberService.convertLottoNumber(inputView.insertLottoNumber()));
 		winner.yield(money);
