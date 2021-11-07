@@ -30,7 +30,7 @@ class LottoTicketTest {
 
     @DisplayName("잘못된 입력으로 로또티켓 생성시 에러")
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5", "asd,2,3,4,5,6", "-1,2,3,4,5,6", "1,2,3,4,5,5", ""})
+    @ValueSource(strings = {"1,2,3,4,5", "asd,2,3,4,5,6", "1,2,3,4,5,5", ""})
     void throwsError_whenInvalidTextLottoTicket(String invalidText) {
         assertThatExceptionOfType(LottoException.class)
             .isThrownBy(() -> new LottoTicket(invalidText))

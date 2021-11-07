@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -24,17 +23,19 @@ public class LottoTicket implements Printable {
     public static final int LOTTO_MAX_NUMBER = 45;
     public static final int LOTTO_SIZE = 6;
 
-    private List<Integer> numbers;
+    private List<LottoNumber> numbers;
 
     public LottoTicket(List<Integer> numbers) {
-        Collections.sort(numbers);
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+            .map(LottoNumber::new)
+            .sorted()
+            .collect(Collectors.toList());
     }
 
     public LottoTicket(String text) {
         String[] split = removeAllSpaces(text).split(COMMA);
 
-        Set<Integer> lottoSet = makeNoDuplicateNumbers(split);
+        Set<LottoNumber> lottoSet = makeNoDuplicateNumbers(split);
         checkValidSize(lottoSet);
 
         numbers = new ArrayList<>(lottoSet);
@@ -44,13 +45,13 @@ public class LottoTicket implements Printable {
         return text.replaceAll(ALL_SPACES_PATTERN, EMPTY);
     }
 
-    private Set<Integer> makeNoDuplicateNumbers(String[] split) {
-        Set<Integer> lottoSet = new HashSet<>();
+    private Set<LottoNumber> makeNoDuplicateNumbers(String[] split) {
+        Set<LottoNumber> lottoSet = new HashSet<>();
 
         for (String numberText : split) {
             int number = parseToValidNumber(numberText);
-            checkNumberInRange(number);
-            lottoSet.add(number);
+            LottoNumber lottoNumber = new LottoNumber(number);
+            lottoSet.add(lottoNumber);
         }
 
         return lottoSet;
@@ -64,13 +65,7 @@ public class LottoTicket implements Printable {
         }
     }
 
-    private void checkNumberInRange(int number) {
-        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
-            throw new LottoException(LottoErrorCode.INVALID_LOTTO_TICKET);
-        }
-    }
-
-    private void checkValidSize(Set<Integer> lottoSet) {
+    private void checkValidSize(Set<LottoNumber> lottoSet) {
         if (lottoSet.size() != LOTTO_SIZE) {
             throw new LottoException(LottoErrorCode.INVALID_LOTTO_TICKET);
         }
@@ -104,6 +99,6 @@ public class LottoTicket implements Printable {
     @Override
     public String makePrintableMessage() {
         return String.format(LOTTO_TICKET_MESSAGE_FORMAT,
-            numbers.stream().map(String::valueOf).collect(Collectors.joining(COMMA_SPACE)));
+            numbers.stream().map(LottoNumber::makePrintableMessage).collect(Collectors.joining(COMMA_SPACE)));
     }
 }
