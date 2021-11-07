@@ -12,7 +12,6 @@ import lotto.view.OutputView;
 
 public class LottoApplicationController {
 	private static final int PURCHASE_FINISH = 0;
-	private static final int LOTTO_PRICE = 1000;
 	private PurchaseAmount purchaseAmount;
 	private WinningNumbers winningNumbers;
 	private LottoStatistics lottoStatistics = new LottoStatistics();
@@ -36,8 +35,6 @@ public class LottoApplicationController {
 			lottos.add(new Lotto());
 			purchaseQuantity--;
 		}
-
-		OutputView.newLine();
 	}
 
 	private boolean continuePurchase(int purchaseQuantity) {
@@ -46,7 +43,7 @@ public class LottoApplicationController {
 
 	public void printPurchasedLottoNumbers() {
 		for (Lotto lotto : lottos) {
-			OutputView.printMessage(lotto.getLottoNumbersStringValues());
+			OutputView.printPurchasedLottoNumbers(lotto.getLottoNumbersStringValues());
 		}
 
 		OutputView.newLine();
