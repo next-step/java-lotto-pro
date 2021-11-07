@@ -37,4 +37,9 @@ public class Money {
     public Money plus(Money money) {
         return new Money(this.value + money.value);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
 }

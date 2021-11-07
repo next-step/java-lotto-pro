@@ -19,4 +19,9 @@ public class Winnings {
                 .reduce(new Money(0), Money::plus);
         return totalReward.divideBy(investment);
     }
+
+    public long getCountOf(Winning winning) {
+        return data.stream().filter(w -> w.equals(winning))
+                .count();
+    }
 }
