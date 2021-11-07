@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 
 public enum WinningResult {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000, true),
-    THIRD(5, 1_500_000, false),
-    FOURTH(4, 50_000),
     FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000, false),
+    SECOND(5, 30_000_000, true),
+    FIRST(6, 2_000_000_000),
     NOT_MATCHED(-1, 0);
 
     private static final int ONLY_ONE_MATCHED = 1;
@@ -52,5 +52,9 @@ public enum WinningResult {
 
     public int getPrize() {
         return prize;
+    }
+
+    public boolean isBonusNumberMatched() {
+        return bonusNumberMatched;
     }
 }

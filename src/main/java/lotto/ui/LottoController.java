@@ -12,6 +12,8 @@ import java.util.Map;
 
 public class LottoController {
 
+    private static final String BLANK = " ";
+
     private final LottoCalculator lottoCalculator;
 
     public LottoController() {
@@ -57,19 +59,28 @@ public class LottoController {
     private void printProceedsRate(WinningResults winningResults) {
         long proceeds = winningResults.getProceeds();
         ConsoleOut.printMessage(
-                Message.PROCEEDS_PRINT.getMessage(), lottoCalculator.getProceedsRate(), getComment(proceeds));
+                Message.PROCEEDS_PRINT.getMessage(), lottoCalculator.getProceedsRate(), getCommentMessage(proceeds));
     }
 
     private void printWinningResult(WinningResult winningResult, int count) {
         ConsoleOut.printMessage(
-                Message.WIN_RESULTS_PRINT.getMessage(), winningResult.getCount(), winningResult.getPrize(), count);
+                Message.WIN_RESULTS_PRINT.getMessage(), winningResult.getCount(), getBonusNumberMessage(winningResult),
+                winningResult.getPrize(), count);
     }
 
-    private String getComment(float proceedsRate) {
-        String comment = "";
+    private String getCommentMessage(float proceedsRate) {
+        String message = "";
         if (proceedsRate < LottoCalculator.PROFIT_RATE) {
-            comment = Message.PROCEEDS_COMMENT.getMessage();
+            message = Message.PROCEEDS_COMMENT.getMessage();
         }
-        return comment;
+        return message;
+    }
+
+    private String getBonusNumberMessage(WinningResult winningResult) {
+        String message = BLANK;
+        if (winningResult.isBonusNumberMatched()) {
+            message = Message.WIN_RESULTS_BONUS_NUMBER.getMessage();
+        }
+        return message;
     }
 }
