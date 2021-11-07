@@ -10,8 +10,8 @@ public class NumberFactory {
     private static final Pattern CUSTOM_DELIMITER_COMPILER = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
 
     public static String[] createNumberArray(String inputText) {
-        String[] numbers = {};
-        if (CUSTOM_DELIMITER_COMPILER.matcher(inputText).matches()){
+        if (CUSTOM_DELIMITER_COMPILER.matcher(inputText).matches()) {
+            String[] numbers = {};
             Matcher m = CUSTOM_DELIMITER_COMPILER.matcher(inputText);
             if (m.find()) {
                 String customDelimiter = m.group(1);
@@ -19,13 +19,13 @@ public class NumberFactory {
             }
             return numbers;
         }
-         return NumberFactory.splitCommaOrColonDelimiter(inputText);
+        return NumberFactory.splitCommaOrColonDelimiter(inputText);
     }
 
     public static String[] splitCommaOrColonDelimiter(String inputText) {
         if (inputText.contains(COMMA) || inputText.contains(COLON)) {
             return inputText.split(COMMA_OR_COLON);
         }
-        return new String[] {inputText};
+        return new String[]{inputText};
     }
 }

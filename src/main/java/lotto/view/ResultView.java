@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.LotteryCalculator;
 import lotto.PurchaseLotteryTicket;
+import lotto.WinningNumber;
 
 import static lotto.LotteryCalculator.LOTTO_TICKET_UNIT_PRICE;
 
@@ -23,13 +24,13 @@ public class ResultView {
     public static final int REWARD_FIVE_MATCH = 1500000;
     public static final int REWARD_SIX_MATCH = 2000000000;
 
-    public static void printWinningStatistics(int numberOfTicket, PurchaseLotteryTicket purchaseList, String[] winningNumber) {
+    public static void printWinningStatistics(int numberOfTicket, PurchaseLotteryTicket purchaseList, WinningNumber winningNumber) {
         System.out.println();
         System.out.println(OUTPUT_START_MESSAGE);
-        System.out.println(MATCH_THREE +purchaseList.countMatchThree(winningNumber)+ UNIT);
-        System.out.println(MATCH_FOUR +purchaseList.countMatchFour(winningNumber)+UNIT);
-        System.out.println(MATCH_FIVE +purchaseList.countMatchFive(winningNumber)+UNIT);
-        System.out.println(MATCH_SIX +purchaseList.countMatchSix(winningNumber)+UNIT);
+        System.out.println(MATCH_THREE + purchaseList.countMatchThree(winningNumber) + UNIT);
+        System.out.println(MATCH_FOUR + purchaseList.countMatchFour(winningNumber) + UNIT);
+        System.out.println(MATCH_FIVE + purchaseList.countMatchFive(winningNumber) + UNIT);
+        System.out.println(MATCH_SIX + purchaseList.countMatchSix(winningNumber) + UNIT);
         int totalWinningMoney = getTotalWinningMoney(purchaseList, winningNumber);
         int paidMoney = LOTTO_TICKET_UNIT_PRICE * numberOfTicket;
         double yield = LotteryCalculator.calculateRevenue(totalWinningMoney, paidMoney);
@@ -48,10 +49,10 @@ public class ResultView {
         }
     }
 
-    private static int getTotalWinningMoney(PurchaseLotteryTicket purchaseList, String[] winningNumber) {
+    private static int getTotalWinningMoney(PurchaseLotteryTicket purchaseList, WinningNumber winningNumber) {
         return purchaseList.countMatchThree(winningNumber) * REWARD_THREE_MATCH
-                                + purchaseList.countMatchFour(winningNumber) * REWARD_FOUR_MATCH
-                                + purchaseList.countMatchFive(winningNumber) * REWARD_FIVE_MATCH
-                                + purchaseList.countMatchSix(winningNumber) * REWARD_SIX_MATCH;
+                + purchaseList.countMatchFour(winningNumber) * REWARD_FOUR_MATCH
+                + purchaseList.countMatchFive(winningNumber) * REWARD_FIVE_MATCH
+                + purchaseList.countMatchSix(winningNumber) * REWARD_SIX_MATCH;
     }
 }

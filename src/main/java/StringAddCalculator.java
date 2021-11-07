@@ -13,7 +13,6 @@ public class StringAddCalculator {
     private static int sumStringNumberArray(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            System.out.println(number);
             NegativeNumberValidation.isNegative(number);
             sum += Integer.parseInt(number);
         }

@@ -8,10 +8,10 @@ public class LotteryGame {
         int numberOfTicket = InputView.payMoney();
         PurchaseLotteryTicket purchaseList = new PurchaseLotteryTicket();
         for(int i = 0 ; i < numberOfTicket ; i++) {
-            purchaseList.add(LotteryTicketCreator.createLotteryTicket());
-            purchaseList.get(i).printLottoNumber();
+            purchaseList.add(LotteryTicketFactory.createLotteryTicket());
+            InputView.printLottoTicketNumber(purchaseList.get(i).getLotteryNumber());
         }
-        String[] winningNumber = InputView.enterWinningNumber();
+        WinningNumber winningNumber = WinningNumber.createWinningNumber(InputView.enterWinningNumber());
         ResultView.printWinningStatistics(numberOfTicket, purchaseList, winningNumber);
     }
 }

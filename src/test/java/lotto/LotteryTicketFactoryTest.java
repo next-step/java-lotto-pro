@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LotteryTicketCreatorTest {
+public class LotteryTicketFactoryTest {
     @DisplayName("로또 번호 6자리를 자동 생성")
     @Test
     void createLottoTicket() {
-        LotteryTicket lotteryTicket = LotteryTicketCreator.createLotteryTicket();
+        LotteryTicket lotteryTicket = LotteryTicketFactory.createLotteryTicket();
         assertThat(lotteryTicket.size()).isEqualTo(6);
     }
 }

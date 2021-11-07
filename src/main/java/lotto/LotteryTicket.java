@@ -1,7 +1,5 @@
 package lotto;
 
-import lotto.view.InputView;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -13,26 +11,30 @@ public class LotteryTicket {
         this.lottoTicket = autoPickedLottoNumber;
     }
 
+    public static LotteryTicket createAutoLotteryNumber(List<Integer> autoPickedLottoNumber) {
+        return new LotteryTicket(autoPickedLottoNumber);
+    }
+
     public int size() {
         return lottoTicket.size();
     }
 
-    public int countMatch(String[] winningNumber) {
+    public int countMatch(WinningNumber winningNumber) {
         int cnt = 0;
-        for (int i = 0 ; i < winningNumber.length ; i++) {
-            cnt = countContain(winningNumber, cnt, i);
+        for (String no : winningNumber.getWinningNumber()){
+            cnt = getCnt(cnt, no);
         }
         return cnt;
     }
 
-    private int countContain(String[] winningNumber, int cnt, int i) {
-        if (lottoTicket.contains(Integer.parseInt(winningNumber[i]))) {
+    private int getCnt(int cnt, String no) {
+        if (lottoTicket.contains(Integer.parseInt(no))) {
             cnt++;
         }
         return cnt;
     }
 
-    public void printLottoNumber() {
-        InputView.printLottoTicketNumber(lottoTicket);
+    public List<Integer> getLotteryNumber() {
+        return lottoTicket;
     }
 }
