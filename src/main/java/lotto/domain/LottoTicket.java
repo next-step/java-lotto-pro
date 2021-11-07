@@ -23,6 +23,13 @@ public class LottoTicket {
         }
     }
 
+    private void validateRange(Integer lottoNumber) {
+        if (lottoNumber < LottoNumberRange.LOTTO_NUMBER_MIN_RANGE.getRange()
+            || lottoNumber > LottoNumberRange.LOTTO_NUMBER_MAX_RANGE.getRange()) {
+            throw new IllegalArgumentException(Message.OUT_OF_RANGE_NUMBER_MESSAGE.getMessage());
+        }
+    }
+
     private void validateSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LottoNumbersSize.LOTTO_NUMBERS_SIZE.getSize()) {
             throw new IllegalArgumentException(Message.WRONG_NUMBERS_SIZE_MESSAGE.getMessage());
@@ -33,13 +40,6 @@ public class LottoTicket {
         Set<Integer> nonDuplicatedNumbers = new HashSet<>(lottoNumbers);
         if (nonDuplicatedNumbers.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(Message.EXIST_DUPLICATE_NUMBER_MESSAGE.getMessage());
-        }
-    }
-
-    private void validateRange(Integer lottoNumber) {
-        if (lottoNumber < LottoNumberRange.LOTTO_NUMBER_MIN_RANGE.getRange()
-            || lottoNumber > LottoNumberRange.LOTTO_NUMBER_MAX_RANGE.getRange()) {
-            throw new IllegalArgumentException(Message.OUT_OF_RANGE_NUMBER_MESSAGE.getMessage());
         }
     }
 
