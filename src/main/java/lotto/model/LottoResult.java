@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import lotto.code.RankCode;
-
 public class LottoResult {
 
 	private static final int DEFAULT_VALUE = 0;
