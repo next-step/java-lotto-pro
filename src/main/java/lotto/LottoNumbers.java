@@ -14,12 +14,7 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
     public static final String FIND_ALL_SPACES = "\\s+";
     public static final String REMOVE_SPACES = "";
-    public static final String LOTTO_NUMBERS_BASE_SEPARATOR = ",";
-    public static final String LOTTO_NUMBERS_DESCRIPTION_OPEN_BRACKET = "[";
-    public static final String LOTTO_NUMBERS_DESCRIPTION_CLOSE_BRACKET = "]";
-    public static final String LOTTO_NUMBERS_DESCRIPTION_SPACE = " ";
     public static final int LOTTO_SIZE = 6;
-    private static final String WRONG_LOTTO_NUMBER_SIZE_MESSAGE = "입력하신 로또의 개수를 확인 해 주세요.";
     private static final List<LottoNumber> randomLottoNumberPocket = generateRandomLottoNumberPocket();
 
     private final Set<LottoNumber> lottoNumbers;
@@ -99,35 +94,5 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        result.append(LOTTO_NUMBERS_DESCRIPTION_OPEN_BRACKET);
-        addElementForMakingString(result, lottoNumbers);
-        result.append(LOTTO_NUMBERS_DESCRIPTION_CLOSE_BRACKET);
-        return result.toString();
-    }
-
-    private void addElementForMakingString(StringBuilder result, Set<LottoNumber> lottoNumbers) {
-        List<LottoNumber> sortedLottoNumbers = convertSetToSortedLottoNumbersList(lottoNumbers);
-        int index = 0;
-        int lastIndex = sortedLottoNumbers.size() - 1;
-        for (LottoNumber lottoNumber : sortedLottoNumbers) {
-            result.append(lottoNumber.toString());
-            if (index == lastIndex) {
-                break;
-            }
-            result.append(LOTTO_NUMBERS_BASE_SEPARATOR)
-                    .append(LOTTO_NUMBERS_DESCRIPTION_SPACE);
-            index++;
-        }
-    }
-
-    private List<LottoNumber> convertSetToSortedLottoNumbersList(Set<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
-                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
-                .collect(Collectors.toList());
     }
 }

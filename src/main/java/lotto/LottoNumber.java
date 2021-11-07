@@ -4,7 +4,7 @@ import lotto.exception.ExceedNumberBoundException;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_BOUND = 1;
     public static final int MAX_BOUND = 45;
     private static final String WRONG_NUMBER_FORMAT_MESSAGE = "입력된 숫자를 확인해 주세요.";
@@ -58,7 +58,7 @@ public class LottoNumber {
     }
 
     @Override
-    public String toString() {
-        return String.valueOf(number);
+    public int compareTo(LottoNumber otherLottoNumber) {
+        return number - otherLottoNumber.number;
     }
 }

@@ -20,10 +20,6 @@ public class LottoMessage {
         System.out.printf(BUY_AMOUNT_MESSAGE + System.lineSeparator(), buyAmount.getAmount());
     }
 
-    public static void showMyLottoNumbers(LottoNumbersGroup lottoNumbersGroup) {
-        System.out.println(lottoNumbersGroup);
-    }
-
     public static void showAskPrizeLottoNumbersMessage() {
         System.out.println(ASK_PRIZE_LOTTO_NUMBERS_MESSAGE);
     }
