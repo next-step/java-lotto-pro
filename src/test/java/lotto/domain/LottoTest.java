@@ -17,8 +17,7 @@ class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lotto = new Lotto();
-        lotto.addLottoNumber(new LottoNumber(number));
+        lotto = new Lotto(number);
     }
 
     @DisplayName("로또 번호 추가 성공 테스트")

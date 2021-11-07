@@ -1,14 +1,17 @@
 package lotto.domain;
 
 import lotto.common.Messages;
+import lotto.exception.LottoException;
 import lotto.utils.Console;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoMachine implements Machine {
 
     protected static final String NUMBER_DELIMITER = ",";
+    private static final String WINNING_LOTTO_ERROR = String.format("당첨 번호는 %d개여야 합니다.", Lotto.LOTTO_NUMBER_COUNT);
 
     @Override
     public void start() {
@@ -33,13 +36,14 @@ public class LottoMachine implements Machine {
     private Lotto getLastWeekWinningLotto() {
         System.out.println(System.lineSeparator() + Messages.LAST_WEEK_WINNING_NUMBER_INPUT);
         String[] stringNumbers = Console.readLine().split(NUMBER_DELIMITER);
-
-        Lotto lotto = new Lotto();
-        for (String stringNumber : stringNumbers) {
-            int number = Integer.parseInt(stringNumber.trim());
-            lotto.addLottoNumber(new LottoNumber(number));
+        if (stringNumbers.length != Lotto.LOTTO_NUMBER_COUNT) {
+            throw new LottoException(WINNING_LOTTO_ERROR);
         }
-        return lotto;
+
+        int[] numbers = Arrays.stream(stringNumbers)
+                .mapToInt(stringNumber -> Integer.parseInt(stringNumber.trim()))
+                .toArray();
+        return new Lotto(numbers);
     }
 
     private int getPurchasedLottoCount(PurchaseAmount purchaseAmount) {
@@ -58,12 +62,11 @@ public class LottoMachine implements Machine {
     }
 
     private Lotto generateLotto() {
-        Lotto lotto = new Lotto();
         List<Integer> values = LottoNumber.getValues().subList(0, Lotto.LOTTO_NUMBER_COUNT);
-        for (Integer value : values) {
-            LottoNumber lottoNumber = new LottoNumber(value);
-            lotto.addLottoNumber(lottoNumber);
-        }
+        int[] numbers = values.stream()
+                .mapToInt(value -> Integer.parseInt(String.valueOf(value)))
+                .toArray();
+        Lotto lotto = new Lotto(numbers);
         System.out.println(lotto);
         return lotto;
     }

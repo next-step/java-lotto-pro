@@ -17,9 +17,9 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public Lotto(LottoNumber... lottoNumbers) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            addLottoNumber(lottoNumber);
+    public Lotto(int... numbers) {
+        for (int number : numbers) {
+            addLottoNumber(new LottoNumber(number));
         }
     }
 
@@ -32,7 +32,7 @@ public class Lotto {
         if (lottoNumbers.contains(lottoNumber)) {
             throw new LottoException(LOTTO_NUMBER_ERROR);
         }
-        if (lottoNumbers.size() == 6) {
+        if (lottoNumbers.size() == LOTTO_NUMBER_COUNT) {
             throw new LottoException(LOTTO_NUMBER_COUNT_ERROR);
         }
         lottoNumbers.add(lottoNumber);
