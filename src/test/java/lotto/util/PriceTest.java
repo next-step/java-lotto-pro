@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PriceUtilTest {
+public class PriceTest {
 
     @DisplayName("금액을 나눠서 로또를 몇개 사는지 계산하는 기능")
     @Test

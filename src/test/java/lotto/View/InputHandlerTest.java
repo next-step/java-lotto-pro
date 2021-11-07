@@ -20,7 +20,7 @@ public class InputHandlerTest {
     @DisplayName("구입 금액을 문자로 입력할때 에러 검증")
     @Test
     void textPriceInputError() {
-        assertThatThrownBy(()->{
+        assertThatThrownBy(() -> {
             InputHandler.price("만사천원");
         }).isInstanceOf(NumberFormatException.class)
                 .hasMessageContaining(ErrorMessage.NUMBER_FORMAT_ERROR);
@@ -29,7 +29,7 @@ public class InputHandlerTest {
     @DisplayName("문자열을 나눠서 로또 int배열로 만드는 기능")
     @Test
     void splitTextToInts() {
-        int [] numbers = InputHandler.splitTextToInts("1, 2, 3, 4, 5, 6");
+        int[] numbers = InputHandler.splitTextToInts("1, 2, 3, 4, 5, 6");
 
         assertThat(numbers.length).isEqualTo(6);
     }
@@ -37,7 +37,7 @@ public class InputHandlerTest {
     @DisplayName("문자열 구분자를 잘못 넣었을때 에러")
     @Test
     void splitError() {
-        assertThatThrownBy(()->{
+        assertThatThrownBy(() -> {
             InputHandler.splitTextToInts("1. 2. 3. 4. 5. 6");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.SPLITED_ERROR);
@@ -46,7 +46,7 @@ public class InputHandlerTest {
     @DisplayName("당첨 로또 갯수가 작을때 에러")
     @Test
     void sizeError() {
-        assertThatThrownBy(()->{
+        assertThatThrownBy(() -> {
             InputHandler.splitTextToInts("1, 2, 3, 4, 5");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.SPLITED_ERROR);
@@ -55,7 +55,7 @@ public class InputHandlerTest {
     @DisplayName("당첨 로또 숫자가 범위를 벗어났을때 에러")
     @Test
     void rangeOverError() {
-        assertThatThrownBy(()->{
+        assertThatThrownBy(() -> {
             InputHandler.splitTextToInts("0, 1, 2, 3, 4, 46");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.SPLITED_ERROR);
