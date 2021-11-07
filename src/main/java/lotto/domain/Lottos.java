@@ -2,11 +2,7 @@ package lotto.domain;
 
 import lotto.exception.ErrorMessage;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class Lottos {
 
@@ -29,7 +25,7 @@ public class Lottos {
         }
         return new WinningResult(winningResult);
     }
-    
+
     private void winningNumberSizeValid(List<Integer> winningNumbers) {
         if (winningNumbers.size() != Lotto.LOTTO_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_WINNING_NUMBER_COUNT.getMessage());
@@ -49,9 +45,7 @@ public class Lottos {
     }
 
     public List<Lotto> purchaseList() {
-        return this.lottos
-                .stream()
-                .collect(Collectors.toList());
+        return new ArrayList<>(this.lottos);
     }
 
     @Override
