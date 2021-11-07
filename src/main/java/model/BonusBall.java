@@ -6,10 +6,10 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public class BonusBall {
-	private Integer number;
+	private LottoNumber number;
 
 	private BonusBall(Integer number) {
-		this.number = number;
+		this.number = LottoNumber.of(number);
 	}
 
 	public static BonusBall from(String number) {
@@ -29,7 +29,7 @@ public class BonusBall {
 		return isMatch && Lotto.isValidLottoNumber(numbers);
 	}
 
-	public Integer getNumber() {
+	public LottoNumber getNumber() {
 		return number;
 	}
 }
