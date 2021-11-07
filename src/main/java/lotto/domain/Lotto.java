@@ -14,8 +14,8 @@ import static lotto.constant.LottoConfig.MAX_COUNT_OF_ONE_LINE;
 public class Lotto {
     private final List<LottoNumber> lineOfLottoNumber;
 
-    public Lotto() {
-        List<LottoNumber> lottoNumbers = LottoRandomFactory.generateLineOfLottoNumber();
+    public Lotto(LottoFactory lottoFactory) {
+        List<LottoNumber> lottoNumbers = lottoFactory.generateLineOfLottoNumber();
 
         validateLottoNumbers(lottoNumbers);
 

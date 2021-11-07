@@ -8,11 +8,11 @@ import static lotto.constant.LottoConfig.FIRST_LOTTO_NUMBER;
 import static lotto.constant.LottoConfig.LAST_LOTTO_NUMBER;
 import static lotto.constant.LottoConfig.MAX_COUNT_OF_ONE_LINE;
 
-public class LottoRandomFactory {
+public class LottoRandomFactory implements LottoFactory {
 
-    private static final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    static {
+    public LottoRandomFactory() {
         List<LottoNumber> baseLottoNumbers = new ArrayList<>();
 
         for (int i = FIRST_LOTTO_NUMBER; i <= LAST_LOTTO_NUMBER; i++) {
@@ -21,11 +21,7 @@ public class LottoRandomFactory {
         lottoNumbers = baseLottoNumbers;
     }
 
-    private LottoRandomFactory() {
-        throw new UnsupportedOperationException();
-    }
-
-    public static List<LottoNumber> generateLineOfLottoNumber() {
+    public List<LottoNumber> generateLineOfLottoNumber() {
         Collections.shuffle(lottoNumbers);
 
         List<LottoNumber> randomLottoNumbers = new ArrayList<>();
