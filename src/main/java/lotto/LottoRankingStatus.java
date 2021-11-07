@@ -3,13 +3,11 @@ package lotto;
 import java.util.Arrays;
 
 public enum LottoRankingStatus {
-    MATCH3(3, 5000),
-    MATCH4(4, 50000),
-    MATCH5(5, 1500000),
-    MATCH6(6, 2000000000),
+    MATCH3(3, 5_000),
+    MATCH4(4, 50_000),
+    MATCH5(5, 1_500_000),
+    MATCH6(6, 2_000_000_000),
     NONE(0, 0);
-
-    public static final String MATCH_DESCRIPTION = "%s개 일치 (%s원)- %s개";
 
     private final int matchAmount;
     private final int prizeAmount;
@@ -23,8 +21,8 @@ public enum LottoRankingStatus {
         return matchAmount;
     }
 
-    public String getMatchDescription(int matchCount) {
-        return String.format(MATCH_DESCRIPTION, matchAmount, prizeAmount, matchCount);
+    public int getPrizeAmount() {
+        return prizeAmount;
     }
 
     public int getPrizeReward(int matchCount) {

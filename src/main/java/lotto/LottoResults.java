@@ -25,6 +25,10 @@ public class LottoResults {
         }
     }
 
+    public Map<LottoRankingStatus, Integer> getLottoRankingAmounts() {
+        return lottoRankingAmounts;
+    }
+
     public int getMatchAmount(int matchAmount) {
         return lottoRankingAmountMap.get(
                 LottoRankingStatus.getLottoRankingFromMatchAmount(matchAmount)
@@ -43,20 +47,5 @@ public class LottoResults {
 
         return Math.floor((PROFIT_BASE + buyAmount.getProfitRate(totalReward)) * PROFIT_RATE_DECIMAL_POINT)
                 / PROFIT_RATE_DECIMAL_POINT;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        for (LottoRankingStatus lottoRankingStatus : lottoRankingAmountMap.keySet()) {
-            if (lottoRankingStatus == LottoRankingStatus.NONE) {
-                continue;
-            }
-
-            int matchCount = lottoRankingAmountMap.get(lottoRankingStatus);
-            result.append(lottoRankingStatus.getMatchDescription(matchCount))
-                    .append(System.lineSeparator());
-        }
-        return result.toString();
     }
 }

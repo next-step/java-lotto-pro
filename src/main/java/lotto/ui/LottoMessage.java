@@ -29,10 +29,6 @@ public class LottoMessage {
         System.out.println(RESULT_SEPARATE_LINE);
     }
 
-    public static void showResultsStats(LottoResults lottoResults) {
-        System.out.println(lottoResults);
-    }
-
     public static void showTotalReward(LottoResults lottoResults) {
         System.out.println(lottoResults.getTotalReward());
     }

@@ -39,13 +39,6 @@ public class LottoNumbersTest {
         assertThat(prizeLottoNumbers).isEqualTo(expectLottoNumbers);
     }
 
-    @ParameterizedTest(name = "당첨 로또 입력 정렬 테스트")
-    @CsvSource(value = {"1,2,3,4,5,6:[1, 2, 3, 4, 5, 6]", "42,22,13,1,6,5:[1, 5, 6, 13, 22, 42]"}, delimiterString = ":")
-    void showLottoNumbersDescriptionTest(String prizeLottoNumbersString, String expect) {
-        prizeLottoNumbers = new LottoNumbers(prizeLottoNumbersString);
-        assertThat(prizeLottoNumbers.toString()).isEqualTo(expect);
-    }
-
     @DisplayName("내 숫자가 정답 숫자를 포함하는 지 테스트")
     @Test
     void matchNumberTest() {
