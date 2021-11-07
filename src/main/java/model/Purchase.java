@@ -11,7 +11,7 @@ public class Purchase {
 	}
 
 	public static Purchase of(Money money, PurchaseCount manualCount, Lottos manualLottos) {
-		Money remainMoney = money.remainMoney(Money.of(Lotto.COST, Count.from(manualCount.getValue())));
+		Money remainMoney = money.use(Money.of(Lotto.COST, Count.from(manualCount.getValue())));
 		PurchaseCount autoCount = remainMoney.purchaseableCount(Money.of(Lotto.COST));
 
 		return new Purchase(autoCount, new Manual(manualCount, manualLottos));

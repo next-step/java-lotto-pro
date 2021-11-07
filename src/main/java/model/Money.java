@@ -47,6 +47,15 @@ public class Money {
 		return value;
 	}
 
+	public Money use(Money money) {
+		BigDecimal remain = value.subtract(money.value);
+		if (remain.compareTo(BigDecimal.ZERO) < 0) {
+			throw new IllegalArgumentException("가진 돈보다 더 많은 돈을 사용할 수 없습니다.");
+		}
+
+		return new Money(remain);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -65,9 +74,5 @@ public class Money {
 	@Override
 	public String toString() {
 		return String.valueOf(value);
-	}
-
-	public Money remainMoney(Money money) {
-		return new Money(value.subtract(money.value));
 	}
 }
