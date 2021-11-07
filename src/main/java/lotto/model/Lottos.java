@@ -33,4 +33,12 @@ public class Lottos {
     public int size() {
         return data.size();
     }
+
+    public Winnings calculateWinning(LottoNumbers winNumbers) {
+        final List<Winning> winningList = new ArrayList<>();
+        for (Lotto lotto : data) {
+            winningList.add(lotto.calculateWinning(winNumbers));
+        }
+        return new Winnings(winningList);
+    }
 }
