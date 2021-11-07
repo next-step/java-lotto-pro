@@ -36,6 +36,10 @@ public class Money {
 	}
 
 	public PurchaseCount purchaseableCount(Money price) {
+		if (price.equals(Money.of(0))) {
+			throw new IllegalArgumentException("가격은 0원일 수 없습니다.");
+		}
+
 		return new PurchaseCount(this.value.intValue() / price.getValue().intValue());
 	}
 
