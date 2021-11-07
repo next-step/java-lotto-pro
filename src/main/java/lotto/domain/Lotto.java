@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.ErrorMessage;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -10,14 +11,14 @@ import java.util.Objects;
 public class Lotto {
 
     public static final int LOTTO_COUNT = 6;
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
     private int winningNumberMatchCount;
 
     public Lotto(List<Integer> lottoNumbers) {
         numberCountValid(lottoNumbers);
         numberDuplicateValid(lottoNumbers);
         numberRangeValid(lottoNumbers);
-        this.numbers = lottoNumbers;
+        this.numbers = Collections.unmodifiableList(lottoNumbers);
     }
 
     public Lotto(List<Integer> numbers, int winningNumberMatchCount) {
