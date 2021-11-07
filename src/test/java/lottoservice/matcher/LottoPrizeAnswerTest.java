@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import lottoservice.exception.DuplicateBonusNumberAndWinningNumbers;
 import lottoservice.lottonumber.LottoArrangeManipulator;
 import lottoservice.lottonumber.LottoNumber;
 import lottoservice.lottonumber.LottoNumbersMaker;
@@ -33,6 +34,19 @@ public class LottoPrizeAnswerTest {
 			assertThat(lottoPrizeAnswer.hasNumberInWinningNumbers(it)).isEqualTo(true));
 		assertThat(lottoPrizeAnswer.isMatchBonusNumber(LottoNumber.valueOf(number))).isEqualTo(true);
 	}
+
+	@Test
+	public void 당첨정답_생성_보너스번호와_당첨번호_중복() {
+		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(
+			Arrays.asList(1, 22, 3, 7, 30, 45));
+		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
+		int number=22;
+		BonusNumber bonusNumber = new BonusNumber(number);
+		assertThatThrownBy(()->{
+			LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(lottoWinningNumbers,bonusNumber);
+		}).isInstanceOf(DuplicateBonusNumberAndWinningNumbers.class);
+	}
+
 
 	@Test
 	public void 당첨정답과_티켓_비교() {
