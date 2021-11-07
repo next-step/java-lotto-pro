@@ -8,7 +8,8 @@ public enum Rank {
     SECOND_WITH_BONUS(5, 1, 1_500_000),
     SECOND(5, 0, 1_500_000),
     THIRD(4, 0, 50_000),
-    FOURTH(3, 0, 5_000);
+    FOURTH(3, 0, 5_000),
+    NONE(0, 0, 0);
 
     private final int matchingCount;
     private final int matchingBonusCount;
@@ -25,7 +26,7 @@ public enum Rank {
                 .filter(isMatched(matchingCount))
                 .filter(isMatchedBonusCount(matchingBonusCount))
                 .findFirst()
-                .orElse(null);
+                .orElse(NONE);
     }
 
     private static Predicate<Rank> isMatched(int matchingCount) {

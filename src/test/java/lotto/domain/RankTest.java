@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {
     @ParameterizedTest
-    @CsvSource(value = {"FOURTH:3", "THIRD:4", "SECOND:5", "FIRST:6"}, delimiter = ':')
+    @CsvSource(value = {"FOURTH:3", "THIRD:4", "SECOND:5", "FIRST:6", "NONE:0"}, delimiter = ':')
     void testRank(Rank rank, int matchedCount) {
         assertThat(Rank.of(matchedCount, 0)).isEqualTo(rank);
     }
