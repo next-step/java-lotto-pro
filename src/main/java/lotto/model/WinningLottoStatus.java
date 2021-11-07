@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.EnumSet;
 import java.util.Map;
 
 public class WinningLottoStatus {
