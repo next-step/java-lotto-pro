@@ -1,6 +1,7 @@
 package step3.controller;
 
 import step3.domain.LottoService;
+import step3.dto.LottoBonusNumberRequestDto;
 import step3.dto.LottoBuyRequestDto;
 import step3.dto.LottoBuyResponseDto;
 import step3.dto.LottoWinNumbersRequestDto;
@@ -30,7 +31,15 @@ public class LottoController {
         LottoWinNumbersRequestDto lottoWinNumbersRequestDto = InputView.readLottoWinnerRequestDto(
             lottoRequestDto.getAmountValue());
 
+        // 보너스 볼을 입력해 주세요.
+        LottoBonusNumberRequestDto lottoBonusNumberRequestDto = InputView.readLottoBonusNumberRequestDto();
+
         // 당첨통계를출력한다.(로또 당첨 갯수와 수익률)
-        ResultView.statisticsPrint(lottoService.getResultStatistics(lottoWinNumbersRequestDto));
+        ResultView.statisticsPrint(
+            lottoService.getResultStatistics(
+                lottoWinNumbersRequestDto,
+                lottoBonusNumberRequestDto
+            )
+        );
     }
 }

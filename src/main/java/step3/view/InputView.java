@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 import step3.common.exception.InvalidParamException;
+import step3.dto.LottoBonusNumberRequestDto;
 import step3.dto.LottoBuyRequestDto;
 import step3.dto.LottoWinNumbersRequestDto;
 
@@ -43,12 +44,22 @@ public class InputView {
 
     public static LottoWinNumbersRequestDto readLottoWinnerRequestDto(int amount) {
         ResultView.winnerRequestPrintln();
-        
+
         try {
             return new LottoWinNumbersRequestDto(readLineToArray(), amount);
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
             return readLottoWinnerRequestDto(amount);
+        }
+    }
+
+    public static LottoBonusNumberRequestDto readLottoBonusNumberRequestDto() {
+        ResultView.bonusNumberRequestPrintln();
+        try {
+            return new LottoBonusNumberRequestDto(readOnlyNumber());
+        } catch (InvalidParamException invalidParamException) {
+            ResultView.println(invalidParamException.getMessage());
+            return readLottoBonusNumberRequestDto();
         }
     }
 }

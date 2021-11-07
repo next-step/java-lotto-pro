@@ -1,11 +1,11 @@
 package step3.service;
 
-import step3.domain.Amount;
 import step3.domain.LottoNumbersBundle;
 import step3.domain.LottoProvider;
 import step3.domain.LottoResult;
 import step3.domain.LottoService;
 import step3.domain.strategy.numbers.RandomLottoNumbers;
+import step3.dto.LottoBonusNumberRequestDto;
 import step3.dto.LottoBuyRequestDto;
 import step3.dto.LottoBuyResponseDto;
 import step3.dto.LottoStatisticsResponseDto;
@@ -17,7 +17,7 @@ public class LottoServiceImpl implements LottoService {
     @Override
     public LottoBuyResponseDto buyLotto(LottoBuyRequestDto lottoBuyRequestDto) {
         int quantity = lottoProvider.availableQuantity(lottoBuyRequestDto.getAmount());
-        
+
         LottoNumbersBundle lottoNumbersBundle = lottoProvider.buyLotto(
             quantity,
             new RandomLottoNumbers());
@@ -26,10 +26,15 @@ public class LottoServiceImpl implements LottoService {
     }
 
     @Override
-    public LottoStatisticsResponseDto getResultStatistics(LottoWinNumbersRequestDto lottoWinNumbersRequestDto) {
+    public LottoStatisticsResponseDto getResultStatistics(LottoWinNumbersRequestDto lottoWinNumbersRequestDto,
+        LottoBonusNumberRequestDto lottoBonusNumberRequestDto) {
+
+        boolean isContainBonus = lottoWinNumbersRequestDto.isContain(lottoBonusNumberRequestDto.getLottoNumber());
+
         LottoResult lottoResult = lottoProvider.getLottoResult(
             lottoWinNumbersRequestDto.getLottoNumbers(),
-            lottoWinNumbersRequestDto.getAmount()
+            lottoWinNumbersRequestDto.getAmount(),
+            isContainBonus
         );
 
         return new LottoStatisticsResponseDto(lottoResult);
