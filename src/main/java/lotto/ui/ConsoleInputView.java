@@ -12,5 +12,9 @@ public class ConsoleInputView implements InputView {
         return UIBufferedReaders.readLine();
     }
 
+    @Override
+    public String readWinBonusLottoNumber() {
+        return UIBufferedReaders.readLine();
+    }
 
 }

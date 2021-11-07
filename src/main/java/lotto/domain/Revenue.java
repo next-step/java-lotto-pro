@@ -5,9 +5,9 @@ import java.util.Map;
 public class Revenue {
 
     private final PurchaseAmount amount;
-    private final Map<Integer, Integer> statistic;
+    private final Map<Winnings, Integer> statistic;
 
-    public Revenue(PurchaseAmount amount, Map<Integer, Integer> statistic) {
+    public Revenue(PurchaseAmount amount, Map<Winnings, Integer> statistic) {
         this.amount = amount;
         this.statistic = statistic;
     }
