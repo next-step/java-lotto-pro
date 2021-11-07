@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import lotto.common.Constants;
 import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
+import java.util.List;
 
-import static lotto.common.MathUtil.calculateYield;
+import static lotto.common.utils.MathUtil.calculateYield;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -17,43 +17,51 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class RanksTest {
-    Lotto winning;
-    Lotto firstPlaceLotto;
-    Lotto thirdPlaceLotto;
-    Lotto fourthPlaceLotto;
-    Lotto noPlaceLotto;
+    private LottoNumber bonusNumber;
+    private WinningLotto winningLotto;
+    private Lotto firstPlaceLotto;
+    private Lotto secondPlaceLotto;
+    private Lotto thirdPlaceLotto;
+    private Lotto fourthPlaceLotto;
+    private Lotto fifthPlaceLotto;
+    private Lotto noPlaceLotto;
 
     @BeforeEach
     void setUp() {
-        this.winning = new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
-        this.firstPlaceLotto = new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
-        this.thirdPlaceLotto = new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(10), new LottoNumber(12)));
-        this.fourthPlaceLotto = new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(33), new LottoNumber(10), new LottoNumber(12)));
-        this.noPlaceLotto = new Lotto(Arrays.asList(new LottoNumber(44), new LottoNumber(43), new LottoNumber(42), new LottoNumber(33), new LottoNumber(10), new LottoNumber(12)));
+        this.bonusNumber = LottoNumber.valueOf(7);
+        this.winningLotto = WinningLotto.valueOf("1,2,3,4,5,6", bonusNumber);
+        this.firstPlaceLotto = Lotto.valueOf("1,2,3,4,5,6");
+        this.secondPlaceLotto = Lotto.valueOf("1,2,3,4,5,7");
+        this.thirdPlaceLotto = Lotto.valueOf("1,2,3,4,5,11");
+        this.fourthPlaceLotto = Lotto.valueOf("1,2,3,4,11,12");
+        this.fifthPlaceLotto = Lotto.valueOf("1,2,3,11,12,13");
+        this.noPlaceLotto = Lotto.valueOf("9,10,11,12,13,14");
     }
 
     @Test
     @DisplayName("당첨금액 구하기")
     public void T1_totalRewards() {
         Lottos lottos = new Lottos(Arrays.asList(firstPlaceLotto, thirdPlaceLotto));
-        Ranks ranks = lottos.getResults(winning);
-        assertThat(ranks.totalRewards()).isEqualTo(Constants.REWARD_1ST + Constants.REWARD_3RD);
+        Ranks ranks = lottos.getResults(winningLotto);
+        assertThat(ranks.totalRewards()).isEqualTo(Rank.FIRST.getWinningMoney() + Rank.THIRD.getWinningMoney());
     }
 
     @Test
     @DisplayName("수익율 구하기")
     public void T2_earningRatio() {
-        Lottos lottos = new Lottos(Arrays.asList(fourthPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto));
-        Ranks ranks = lottos.getResults(winning);
-        assertThat(ranks.earningRatio()).isEqualTo(calculateYield(Constants.REWARD_4TH, PurchasePrice.LOTTO_PRICE * 14));
+        List<Lotto> lottoList = Arrays.asList(noPlaceLotto,noPlaceLotto,thirdPlaceLotto,noPlaceLotto);
+        Lottos lottos = new Lottos(lottoList);
+        Ranks ranks = lottos.getResults(winningLotto);
+        assertThat(ranks.earningRatio()).isEqualTo(calculateYield(Rank.THIRD.getWinningMoney(), PurchasePrice.LOTTO_PRICE * lottoList.size()));
     }
 
     @Test
     @DisplayName("수익율 구하기2")
     public void T2_earningRatio2() {
-        Lottos lottos = new Lottos(Arrays.asList(fourthPlaceLotto, firstPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto));
-        Ranks ranks = lottos.getResults(winning);
-        assertThat(ranks.earningRatio()).isEqualTo(calculateYield(Constants.REWARD_4TH + Constants.REWARD_1ST, PurchasePrice.LOTTO_PRICE * 14));
+        List<Lotto> lottoList = Arrays.asList(fourthPlaceLotto, firstPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto, noPlaceLotto);
+        Lottos lottos = new Lottos(lottoList);
+        Ranks ranks = lottos.getResults(winningLotto);
+        assertThat(ranks.earningRatio()).isEqualTo(calculateYield(Rank.FIRST.getWinningMoney() + Rank.FOURTH.getWinningMoney(), PurchasePrice.LOTTO_PRICE * lottoList.size()));
     }
 
 }

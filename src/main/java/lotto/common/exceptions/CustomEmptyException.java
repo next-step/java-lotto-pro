@@ -1,4 +1,4 @@
-package lotto.common;
+package lotto.common.exceptions;
 
 /**
  * packageName : lotto.common

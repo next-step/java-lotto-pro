@@ -31,11 +31,12 @@ public class Lottos {
     private List<Lotto> validate(List<Lotto> lottoList, PurchasePrice price) {
         if (lottoList == null) throw new NullPointerException("null값이 올 수 없습니다.");
         if (lottoList.isEmpty()) throw new IllegalArgumentException("빈 값이 올 수 없습니다.");
-        if( price != null && !price.equals(new PurchasePrice(lottoList.size() * PurchasePrice.LOTTO_PRICE))) throw new IllegalArgumentException("구매수량이 일치하지 않습니다.");
+        if (price != null && !price.equals(new PurchasePrice(lottoList.size() * PurchasePrice.LOTTO_PRICE)))
+            throw new IllegalArgumentException("구매수량이 일치하지 않습니다.");
         return lottoList;
     }
 
-    public Ranks getResults(Lotto winning) {
+    public Ranks getResults(WinningLotto winning) {
         return new Ranks(lottoList.stream().map(lotto -> lotto.getRank(winning)).collect(Collectors.toList()));
     }
 

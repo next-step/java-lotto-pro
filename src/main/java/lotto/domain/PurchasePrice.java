@@ -1,19 +1,20 @@
 package lotto.domain;
 
 import lotto.common.Constants;
-import lotto.common.CustomEmptyException;
-import lotto.common.StringUtil;
+import lotto.common.exceptions.CustomEmptyException;
+import lotto.common.utils.StringUtil;
 import lotto.ui.ResultView;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 /**
- *  피드백 내용 : 1) 생성자의 내용이 중복되므로 함수로 체크하도록 변경하자
- *             2) 불필요한 형변환(parseInt)을 줄이자. 정상일 경우 변환값을 변환 실패시 예외를 리턴하자.
- *             3) toString() 메소드는 객체의 상태정보를 가지는 메소드이므로 오버라이딩하는 것은 지양하자.(협업 시 잘못 사용될 수 있음)
- *               => https://lelecoder.com/42 참고자료
- * */
+ * 피드백 내용 : 1) 생성자의 내용이 중복되므로 함수로 체크하도록 변경하자
+ * 2) 불필요한 형변환(parseInt)을 줄이자. 정상일 경우 변환값을 변환 실패시 예외를 리턴하자.
+ * 3) toString() 메소드는 객체의 상태정보를 가지는 메소드이므로 오버라이딩하는 것은 지양하자.(협업 시 잘못 사용될 수 있음)
+ * => https://lelecoder.com/42 참고자료
+ */
+
 /**
  * packageName : lotto.domain
  * fileName : PurchasePrice
@@ -31,8 +32,12 @@ public class PurchasePrice {
     }
 
     public PurchasePrice(String strPrice) {
-        if(StringUtil.isStringEmpty(strPrice)) throw new CustomEmptyException();
+        if (StringUtil.isStringEmpty(strPrice)) throw new CustomEmptyException();
         this.purchaseQuantity = this.calculateQuantity(validate(StringUtil.parseNumber(strPrice.trim())));
+    }
+
+    public static PurchasePrice valueOf(int price) {
+        return new PurchasePrice(price);
     }
 
     public int validate(int price) {

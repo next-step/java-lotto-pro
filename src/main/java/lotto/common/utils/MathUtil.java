@@ -1,4 +1,4 @@
-package lotto.common;
+package lotto.common.utils;
 /***
  *  피드백 내용 : static 메소드가 있는 클래스는 사용 역할에 맞게 인스턴스 생성을 제한할 것
  */

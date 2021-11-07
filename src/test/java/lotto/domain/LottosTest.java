@@ -16,24 +16,26 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class LottosTest {
-    Lotto winning;
-    Lotto firstPlaceLotto;
-    Lotto thirdPlaceLotto;
+    private LottoNumber bonusNumber;
+    private WinningLotto winningLotto;
+    private Lotto firstPlaceLotto;
+    private Lotto thirdPlaceLotto;
 
     @BeforeEach
     void setUp() {
-        this.winning = new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
-        this.firstPlaceLotto = new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
-        this.thirdPlaceLotto = new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(10), new LottoNumber(12)));
+        this.bonusNumber = LottoNumber.valueOf(7);
+        this.winningLotto = WinningLotto.valueOf("1,2,3,4,5,6", bonusNumber);
+        this.firstPlaceLotto = Lotto.valueOf("1,2,3,4,5,6");
+        this.thirdPlaceLotto = Lotto.valueOf("1,2,3,4,5,11");
     }
 
     @Test
     @DisplayName("로또리스트에서 결과 구하기")
     public void T1_lottos() {
         Lottos lottos = new Lottos(Arrays.asList(firstPlaceLotto, thirdPlaceLotto));
-        Ranks ranks = lottos.getResults(winning);
-        assertThat(ranks.countPlace(new Rank(6))).isEqualTo(1);
-        assertThat(ranks.countPlace(new Rank(2))).isEqualTo(0);
+        Ranks ranks = lottos.getResults(winningLotto);
+        assertThat(ranks.countPlace(Rank.FIRST)).isEqualTo(1);
+        assertThat(ranks.countPlace(Rank.THIRD)).isEqualTo(1);
     }
 
 }

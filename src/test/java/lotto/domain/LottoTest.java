@@ -20,15 +20,15 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        this.lotto = new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+        this.lotto = new Lotto("1,2,3,4,5,6");
     }
 
     @Test
     @DisplayName("유효한 로또번호를 생성한다")
     public void T01_validLotto() {
         //THEN
-        assertThat(lotto.has(new LottoNumber(1))).isTrue();
-        assertThat(lotto.has(new LottoNumber(7))).isFalse();
+        assertThat(lotto.has(LottoNumber.valueOf(1))).isTrue();
+        assertThat(lotto.has(LottoNumber.valueOf(7))).isFalse();
     }
 
     @Test
@@ -37,6 +37,11 @@ public class LottoTest {
         //THEN
         assertThatThrownBy(() -> new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4)))).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("볼 개수가 일치하지 않습니다.");
+        assertThatThrownBy(() -> new Lotto("1,2,3,4")).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("볼 개수가 일치하지 않습니다.");
+        assertThatThrownBy(() -> Lotto.valueOf("1,2,3,4")).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("볼 개수가 일치하지 않습니다.");
+
     }
 
     @Test
@@ -46,6 +51,10 @@ public class LottoTest {
         //THEN
         assertThatThrownBy(() -> new Lotto(given)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("빈값이나 null은 허용되지 않습니다.");
+        assertThatThrownBy(() -> new Lotto("")).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("빈값이나 null은 허용되지 않습니다.");
+        assertThatThrownBy(() -> Lotto.valueOf("")).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("빈값이나 null은 허용되지 않습니다.");
     }
 
     @Test
@@ -53,6 +62,10 @@ public class LottoTest {
     public void T03_invalidLotto3() {
         //THEN
         assertThatThrownBy(() -> new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1)))).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("중복된 볼은 올 수 없습니다.");
+        assertThatThrownBy(() -> new Lotto("1,1,1,1,1,1")).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("중복된 볼은 올 수 없습니다.");
+        assertThatThrownBy(() -> Lotto.valueOf("1,1,1,1,1,1")).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복된 볼은 올 수 없습니다.");
     }
 

@@ -1,15 +1,5 @@
 package lotto.domain;
 
-import lotto.common.CustomEmptyException;
-import lotto.common.StringUtil;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static lotto.common.Constants.NUMBER_SEPARATOR;
-
 /**
  * packageName : lotto.domain
  * fileName : WinningLotto
@@ -18,8 +8,6 @@ import static lotto.common.Constants.NUMBER_SEPARATOR;
  * description :
  */
 public class WinningLotto {
-    public static final int BALL_CNT = 6;
-
     private final Lotto winningLotto;
     private final LottoNumber bonus;
 

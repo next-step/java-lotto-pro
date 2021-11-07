@@ -16,7 +16,4 @@ public class ResultView {
         System.out.println(msg);
     }
 
-    public static void print(InputType type) {
-        System.out.println(type.isPurchase() ? Constants.MSG_INPUT_PURCHASE_PRICE : type.isNumber() ? Constants.MSG_INPUT_LAST_WINNING_NUMBERS : "");
-    }
 }

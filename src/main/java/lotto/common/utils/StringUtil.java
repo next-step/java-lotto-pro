@@ -1,4 +1,6 @@
-package lotto.common;
+package lotto.common.utils;
+
+import lotto.common.Constants;
 
 /**
  * packageName : lotto.common
@@ -21,5 +23,9 @@ public class StringUtil {
         } catch(NumberFormatException nfe) {
             throw new NumberFormatException("숫자로 변환 할 수 없습니다.");
         }
+    }
+
+    public static String wrap(String msg) {
+        return new StringBuilder().append(Constants.CONTAINER_PREFIX).append(msg).append(Constants.CONTAINER_SUFFIX).toString();
     }
 }

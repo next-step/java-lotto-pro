@@ -1,51 +1,46 @@
 package lotto.domain;
 
-import java.util.Objects;
+
+import java.util.Arrays;
 
 /**
  * packageName : lotto.domain
  * fileName : Rank
  * author : haedoang
  * date : 2021-11-05
- * description : 순위 클래스
+ * description : Rank Enum
  */
-public class Rank {
-    public static final int FIRST_PLACE = 1;
-    public static final int SECOND_PLACE = 2;
-    public static final int THIRD_PLACE = 3;
-    public static final int FOURTH_PLACE = 4;
-    public static final int OTHERS_PLACE = 0;
+public enum Rank {
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
+    MISS(0, 0, false);
 
-    public static final int FIRST_PLACE_MATCH_COUNT = 6;
-    public static final int SECOND_PLACE_MATCH_COUNT = 5;
-    public static final int THIRD_PLACE_MATCH_COUNT = 4;
-    public static final int FOURTH_PLACE_MATCH_COUNT = 3;
+    private int countOfMatch;
+    private int winningMoney;
+    private boolean bonus;
 
-    private final int place;
-
-    public Rank(int matchCount) {
-        this.place = getRank(matchCount);
+    private Rank(int countOfMatch, int winningMoney, boolean bonus) {
+        this.countOfMatch = countOfMatch;
+        this.winningMoney = winningMoney;
+        this.bonus = bonus;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rank rank = (Rank) o;
-        return place == rank.place;
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(place);
+    public int getWinningMoney() {
+        return winningMoney;
     }
 
-    private int getRank(int matchCount) {
-        return matchCount == FIRST_PLACE_MATCH_COUNT ? FIRST_PLACE :
-                matchCount == SECOND_PLACE_MATCH_COUNT ? SECOND_PLACE :
-                        matchCount == THIRD_PLACE_MATCH_COUNT ? THIRD_PLACE :
-                                matchCount == FOURTH_PLACE_MATCH_COUNT ? FOURTH_PLACE : OTHERS_PLACE;
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.bonus == matchBonus)
+                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .findFirst()
+                .orElse(Rank.MISS);
     }
-
-
 }

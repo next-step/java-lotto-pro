@@ -21,10 +21,19 @@ public class LottoService {
         lottos.print();
         Lotto winning = this.inputWinningNumber();
         WinningLotto lottoWithBonus = this.inputBonusNumber(winning);
+        Ranks results = this.lottoResults(lottos, lottoWithBonus);
+        results.print();
+    }
 
 
-//        Ranks results = lottos.getResults(winning);
-//        results.print();
+    public PurchasePrice purchase() {
+        try {
+            ResultView.print(Message.PURCHASE.getMessage());
+            return new PurchasePrice(InputView.readLine());
+        } catch (Exception e) {
+            ResultView.print(e.getMessage());
+            return purchase();
+        }
     }
 
     private WinningLotto inputBonusNumber(Lotto winning) {
@@ -33,23 +42,14 @@ public class LottoService {
             String input = InputView.readLine();
             LottoNumber bonus = new LottoNumber(input);
             return new WinningLotto(winning, bonus);
-        } catch(Exception e){
+        } catch (Exception e) {
             ResultView.print(e.getMessage());
             return inputBonusNumber(winning);
         }
     }
 
-    public PurchasePrice purchase() {
-        try {
-            ResultView.print(Message.PURCHASE.getMessage());
-            return new PurchasePrice(InputView.readLine());
-        } catch(Exception e) {
-            ResultView.print(e.getMessage());
-            return purchase();
-        }
-    }
 
-    public Lottos getLottos(PurchasePrice price){
+    public Lottos getLottos(PurchasePrice price) {
         return price.buyLottery();
     }
 
@@ -57,10 +57,14 @@ public class LottoService {
         try {
             ResultView.print(Message.NUMBER.getMessage());
             return new Lotto(InputView.readLine());
-        } catch(Exception e) {
+        } catch (Exception e) {
             ResultView.print(e.getMessage());
             return inputWinningNumber();
         }
+    }
+
+    private Ranks lottoResults(Lottos lottos, WinningLotto lottoWithBonus) {
+        return lottos.getResults(lottoWithBonus);
     }
 
 
