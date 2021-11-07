@@ -23,12 +23,10 @@ public class LottoGame {
         return lottoBallsList;
     }
 
-    public Statistics calculateLottoResult(LottoBalls winLottoBalls, LottoBall bonusBall) {
+    public Statistics calculateLottoResult(WinningBalls winningBalls) {
         Statistics statistics = new Statistics();
         for (LottoBalls lottoBalls : lottoBallsList) {
-            int count = lottoBalls.countContainingWinNumbers(winLottoBalls);
-            boolean hasBonusBall = lottoBalls.hasBonusBall(bonusBall);
-            Ranking ranking = Ranking.find(count,hasBonusBall);
+            Ranking ranking = winningBalls.calculateRanking(lottoBalls);
             statistics.record(ranking);
         }
         return statistics;

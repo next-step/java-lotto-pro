@@ -23,10 +23,10 @@ class LottoGameTest {
                 )
         );
         LottoBall bonusBall = new LottoBall(10);
-
         LottoBalls winBalls = new LottoBalls("1,2,3,4,5,6");
+        WinningBalls winningBalls = new WinningBalls(winBalls, bonusBall);
 
-        Statistics statistics = lottoGame.calculateLottoResult(winBalls, bonusBall);
+        Statistics statistics = lottoGame.calculateLottoResult(winningBalls);
         assertAll(
                 () -> assertThat(statistics.getCount(Ranking.FIRST)).isEqualTo(1),
                 () -> assertThat(statistics.getCount(Ranking.SECOND_BONUS)).isEqualTo(1),
