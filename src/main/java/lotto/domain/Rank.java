@@ -6,20 +6,23 @@ import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 public enum Rank {
-    NONE(new WinningCondition(2, BigDecimal.valueOf(0)), (count, match) -> count <= 2),
-    FIVE(new WinningCondition(3, BigDecimal.valueOf(5_000)), (count, match) -> count == 3),
-    FOUR(new WinningCondition(4, BigDecimal.valueOf(50_000)), (count, match) -> count == 4),
-    THIRD(new WinningCondition(5, BigDecimal.valueOf(1_500_000)), (count, match) -> (count == 5 && !match)),
-    SECOND(new WinningCondition(5, BigDecimal.valueOf(30_000_000)), (count, match) -> (count == 5 && match)),
-    FIRST(new WinningCondition(6, BigDecimal.valueOf(2_000_000_000)), (count, match) -> count == 6);
+    NONE(2, new Money(BigDecimal.valueOf(0)), (count, match) -> count <= 2),
+    FIVE(3, new Money(BigDecimal.valueOf(5_000)), (count, match) -> count == 3),
+    FOUR(4, new Money(BigDecimal.valueOf(50_000)), (count, match) -> count == 4),
+    THIRD(5, new Money(BigDecimal.valueOf(1_500_000)), (count, match) -> (count == 5 && !match)),
+    SECOND(5, new Money(BigDecimal.valueOf(30_000_000)), (count, match) -> (count == 5 && match)),
+    FIRST(6, new Money(BigDecimal.valueOf(2_000_000_000)), (count, match) -> count == 6);
 
-    private final WinningCondition winningCondition;
+    private final int count;
+    private final Money prizeMoney;
     private final MatchStrategy expression;
 
-    Rank(WinningCondition winningCondition, MatchStrategy expression) {
-        this.winningCondition = winningCondition;
+    Rank(int count, Money prizeMoney, MatchStrategy expression) {
+        this.count = count;
+        this.prizeMoney = prizeMoney;
         this.expression = expression;
     }
+
 
     public static Rank of(int matchCount, boolean matchBonus) {
         return Stream.of(Rank.values())
@@ -33,10 +36,10 @@ public enum Rank {
     }
 
     public BigDecimal getPrizeMoney() {
-        return winningCondition.getPrizeMoney();
+        return prizeMoney.getMoney();
     }
 
     public int getMatchCount() {
-        return winningCondition.getCount();
+        return count;
     }
 }
