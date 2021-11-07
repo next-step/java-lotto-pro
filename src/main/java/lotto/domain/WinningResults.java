@@ -26,10 +26,8 @@ public class WinningResults {
         return new WinningResults(Arrays.asList(winningResults));
     }
 
-    public int getCount(WinningResult findingWinningResult) {
-        return (int) winningResults.stream()
-                .filter(winningResult -> winningResult == findingWinningResult)
-                .count();
+    public List<WinningResult> getWinningResults() {
+        return winningResults;
     }
 
     public long getProceeds() {

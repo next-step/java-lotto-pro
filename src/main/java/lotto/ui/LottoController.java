@@ -7,6 +7,8 @@ import lotto.domain.WinningResult;
 import lotto.domain.WinningResults;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LottoController {
 
@@ -41,9 +43,15 @@ public class LottoController {
     }
 
     private void printWinningResults(WinningResults winningResults) {
+        Map<WinningResult, Integer> winningResultCounts = new HashMap<>();
+        for (WinningResult winningResult : winningResults.getWinningResults()) {
+            winningResultCounts.put(winningResult, winningResultCounts.getOrDefault(winningResult, 0) + 1);
+        }
+
         Arrays.stream(WinningResult.values())
                 .filter(winningResult -> winningResult != WinningResult.NOT_MATCHED)
-                .forEach(winningResult -> printWinningResult(winningResult, winningResults.getCount(winningResult)));
+                .forEach(winningResult ->
+                        printWinningResult(winningResult, winningResultCounts.getOrDefault(winningResult, 0)));
     }
 
     private void printProceedsRate(WinningResults winningResults) {
