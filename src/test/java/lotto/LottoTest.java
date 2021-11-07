@@ -80,7 +80,7 @@ public class LottoTest {
         LottoWinReader reader = new LottoWinReader(Arrays.asList(1, 3, 5, 6, 11, 44), 39);
         Lotto lotto = new Lotto(Arrays.asList(39, 13, 5, 9, 11, 44));
         LottoStatistic statistic = reader.distinguish(new Lottos(Arrays.asList(lotto)));
-        Map<Winnings, Integer> result = statistic.result(Arrays.asList(find(3, 0)));
+        Map<Winnings, Integer> result = statistic.result(Arrays.asList(FIFTH));
         assertThat(result.get(FIFTH)).isEqualTo(1);
     }
 
@@ -93,7 +93,7 @@ public class LottoTest {
         Lotto three = new Lotto(Arrays.asList(1, 3, 5, 7, 11, 42));
         Lotto four = new Lotto(Arrays.asList(1, 3, 4, 6, 19, 44));
         LottoStatistic statistic = reader.distinguish(new Lottos(Arrays.asList(one, two, three, four)));
-        Map<Winnings, Integer> result = statistic.result(Arrays.asList(find(4, 0)));
+        Map<Winnings, Integer> result = statistic.result(Arrays.asList(FORTH));
         assertThat(result.get(FORTH)).isEqualTo(4);
     }
 
@@ -105,8 +105,9 @@ public class LottoTest {
         Lotto two = new Lotto(Arrays.asList(1, 3, 5, 6, 11, 42));
         Lottos lottos = new Lottos(Arrays.asList(one, two));
         LottoStatistic statistic = reader.distinguish(lottos);
-        Map<Winnings, Integer> result = statistic.result(Arrays.asList(find(5, 0)));
+        Map<Winnings, Integer> result = statistic.result(Arrays.asList(THIRD, SECOND));
         assertThat(result.get(THIRD)).isEqualTo(2);
+        assertThat(result.get(SECOND)).isEqualTo(0);
     }
 
     @DisplayName("주어진 로또 리스트에서 당첨된 로또 개수 구하기(5개일치할 때/보너스 번호 일치 O) 테스트 ")
@@ -115,8 +116,9 @@ public class LottoTest {
         LottoWinReader lottoWinReader = new LottoWinReader(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
         Lottos lottos = new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10))));
         LottoStatistic statistic = lottoWinReader.distinguish(lottos);
-        Map<Winnings, Integer> result = statistic.result(Arrays.asList(find(5, 1)));
+        Map<Winnings, Integer> result = statistic.result(Arrays.asList(THIRD, SECOND));
         assertThat(result.get(SECOND)).isEqualTo(1);
+        assertThat(result.get(THIRD)).isEqualTo(0);
     }
 
     @DisplayName("주어진 로또 리스트에서 당첨된 로또 개수 구하기(6개일치할 때) 테스트 ")
@@ -125,7 +127,7 @@ public class LottoTest {
         LottoWinReader lottoWinReader = new LottoWinReader(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
         Lottos lottos = new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))));
         LottoStatistic statistic = lottoWinReader.distinguish(lottos);
-        Map<Winnings, Integer> result = statistic.result(Arrays.asList(find(6, 0)));
+        Map<Winnings, Integer> result = statistic.result(Arrays.asList(FIRST));
         assertThat(result.get(FIRST)).isEqualTo(1);
     }
 
@@ -142,15 +144,6 @@ public class LottoTest {
         PurchaseAmount amount = new PurchaseAmount(14_000);
         Revenue revenue = new Revenue(amount, statistic);
         assertThat(revenue.percentage()).isEqualTo(0.35);
-    }
-
-    @DisplayName("로또 번호에 보너스 여부를 추가하는 테스트")
-    @Test
-    public void lottoNumber_isBonusTest() {
-        LottoNumber one = new LottoNumber(1);
-        LottoNumber two = new LottoNumber(2, true);
-        assertThat(one.isBonus()).isFalse();
-        assertThat(two.isBonus()).isTrue();
     }
 
 }

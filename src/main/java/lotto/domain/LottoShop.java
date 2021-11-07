@@ -59,13 +59,7 @@ public class LottoShop {
             String readLottoNumbers = inputView.readWinLottoNumbers();
             resultView.printBonusNumberInputMessage();
             String readBonusLottoNumber = inputView.readWinBonusLottoNumber();
-            return new LottoWinReader(
-                    Arrays.stream(readLottoNumbers.split(","))
-                            .map(String::trim)
-                            .map(Integer::parseInt)
-                            .distinct()
-                            .collect(toList()), Integer.parseInt(readBonusLottoNumber)
-            );
+            return LottoWinReader.reader(readLottoNumbers, readBonusLottoNumber);
         } catch (IllegalArgumentException e) {
             return getLottoWinReader();
         }
@@ -74,8 +68,7 @@ public class LottoShop {
     private Map<Winnings, Integer> getStatistic(LottoWinReader lottoWinReader, Lottos lottos) {
         resultView.printWinStatisticMessage();
         LottoStatistic lottoStatistic = lottoWinReader.distinguish(lottos);
-        List<Winnings> winnings = Arrays.stream(Winnings.values())
-                .collect(toList());
+        List<Winnings> winnings = Arrays.stream(Winnings.values()).collect(toList());
         return lottoStatistic.result(winnings);
     }
 

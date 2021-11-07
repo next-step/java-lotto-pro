@@ -16,8 +16,8 @@ public class ConsoleResultView implements ResultView {
     private static final String PURCHASE_ACK_MESSAGE = "%d개를 구매했습니다.";
     private static final String WIN_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String WIN_STATISTIC_ALARM_MESSAGE = "당첨 통계\n---------";
-    private static final String CORRESPOND_LOTTO_NUMBERS_MESSAGE = "%d개 일치(%d원) - %d개";
-    private static final String CORRESPOND_SECOND_LOTTO_NUMBERS_MESSAGE = "%d개 일치(%d원) 보너스 볼 일치 - %d개";
+    private static final String CORRESPOND_LOTTO_NUMBERS_MESSAGE = "%s - %d개";
+    private static final String CORRESPOND_SECOND_LOTTO_NUMBERS_MESSAGE = "%s 보너스 볼 일치 - %d개";
     private static final String TOTAL_REVENUE_MESSAGE = "총 수익률 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
 
@@ -52,7 +52,7 @@ public class ConsoleResultView implements ResultView {
     @Override
     public void printCorrespondLottoNumber(Map<Winnings, Integer> statistic) {
         statistic.entrySet().stream()
-                .filter(e -> !e.getKey().equals(Winnings.MISS))
+                .filter(e -> e.getKey().isWin())
                 .sorted(comparing(e -> e.getKey().getAmount()))
                 .map(this::winningToString)
                 .forEach(System.out::println);
@@ -60,12 +60,10 @@ public class ConsoleResultView implements ResultView {
 
     private String winningToString(Map.Entry<Winnings, Integer> entry) {
         Winnings winnings = entry.getKey();
-        if(winnings.equals(Winnings.SECOND)) {
-            return String.format(CORRESPOND_SECOND_LOTTO_NUMBERS_MESSAGE, winnings.getCorrespondCount(),
-                    winnings.getAmount(), entry.getValue());
+        if(winnings.isSecond()) {
+            return String.format(CORRESPOND_SECOND_LOTTO_NUMBERS_MESSAGE, winnings.toString(), entry.getValue());
         }
-        return String.format(CORRESPOND_LOTTO_NUMBERS_MESSAGE, winnings.getCorrespondCount(), winnings.getAmount(),
-                entry.getValue());
+        return String.format(CORRESPOND_LOTTO_NUMBERS_MESSAGE, winnings.toString(), entry.getValue());
     }
 
 

@@ -19,4 +19,6 @@ public class LottoStatistic {
         return keys.stream()
                 .collect(toMap(Function.identity(), k -> statistic.getOrDefault(k, 0)));
     }
+
+
 }

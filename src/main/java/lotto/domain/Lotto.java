@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static java.util.stream.Collectors.toList;
-import static lotto.domain.Winnings.LottoRanking.*;
+import static lotto.domain.Winnings.SECOND;
 
 public class Lotto implements Iterable<LottoNumber> {
 
@@ -36,11 +36,7 @@ public class Lotto implements Iterable<LottoNumber> {
 
     public Winnings acquireWinnings(Lotto winLotto, LottoNumber bonusNumber) {
         int correspondCount = correspondCount(winLotto);
-        int bonusCorrespondCount = bonusCorrespondCount(bonusNumber);
-        if(correspondCount != SECOND_PLACE.getCorrespondCount()) {
-            bonusCorrespondCount = 0;
-        }
-        return Winnings.find(correspondCount, bonusCorrespondCount);
+        return Winnings.find(correspondCount, bonusCorrespondCount(bonusNumber));
     }
 
     private int correspondCount(Lotto winLotto) {
@@ -50,11 +46,8 @@ public class Lotto implements Iterable<LottoNumber> {
                 .size();
     }
 
-    private int bonusCorrespondCount(LottoNumber bonusNumber) {
-        if(contains(bonusNumber)) {
-            return 1;
-        }
-        return 0;
+    private boolean bonusCorrespondCount(LottoNumber bonusNumber) {
+        return contains(bonusNumber);
     }
 
     private boolean contains(LottoNumber number) {

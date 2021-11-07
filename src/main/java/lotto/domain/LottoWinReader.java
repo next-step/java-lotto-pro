@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoWinReader {
 
@@ -14,7 +13,17 @@ public class LottoWinReader {
     public LottoWinReader(List<Integer> numbers, int bonusNumber) {
         validateBonusNumber(numbers, bonusNumber);
         this.winLotto = new Lotto(numbers);
-        this.bonusNumber = new LottoNumber(bonusNumber, true);
+        this.bonusNumber = new LottoNumber(bonusNumber);
+    }
+
+    public static LottoWinReader reader(String lottoNumbers, String bonusLottoNumber) {
+        List<Integer> numbers = Arrays.stream(lottoNumbers.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .distinct()
+                .collect(toList());
+
+        return new LottoWinReader(numbers, Integer.parseInt(bonusLottoNumber));
     }
 
     private void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
