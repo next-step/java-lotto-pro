@@ -8,6 +8,6 @@ public class CalculatorTest {
 	@Test
 	void profitRate_수익률_계산() {
 		double profitRate = Calculator.profitRate(14000, 5000);
-		assertThat(profitRate).isEqualTo(0.36);
+		assertThat(profitRate).isEqualTo(0.35);
 	}
 }
