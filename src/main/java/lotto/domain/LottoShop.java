@@ -6,10 +6,12 @@ import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static java.util.Comparator.*;
 import static java.util.stream.Collectors.toList;
 
 public class LottoShop {
@@ -72,7 +74,8 @@ public class LottoShop {
     private Map<Winnings, Integer> getStatistic(LottoWinReader lottoWinReader, Lottos lottos) {
         resultView.printWinStatisticMessage();
         LottoStatistic lottoStatistic = lottoWinReader.distinguish(lottos);
-        List<Winnings> winnings = Arrays.stream(Winnings.values()).collect(toList());
+        List<Winnings> winnings = Arrays.stream(Winnings.values())
+                .collect(toList());
         return lottoStatistic.result(winnings);
     }
 

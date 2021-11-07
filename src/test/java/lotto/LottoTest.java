@@ -153,5 +153,4 @@ public class LottoTest {
         assertThat(two.isBonus()).isTrue();
     }
 
-
 }
