@@ -55,4 +55,7 @@ public class LottoTicket {
 		return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
 	}
 
+	public boolean contains(LottoNumber number) {
+		return this.lottoNumbers.contains(number);
+	}
 }

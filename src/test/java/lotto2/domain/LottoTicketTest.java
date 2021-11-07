@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LottoTicketTest {
 
@@ -38,4 +40,19 @@ public class LottoTicketTest {
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@ParameterizedTest
+	@CsvSource(value = {"1,true", "6,true", "9,false"})
+	@DisplayName("로또 번호가 포함되어 있는지 체크할 수 있다")
+	public void containsTest(int number, boolean expected) {
+		// given
+		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		LottoNumber lottoNumber = LottoNumber.of(number);
+		LottoTicket ticket = LottoTicket.of(numbers);
+
+		// when
+		boolean result = ticket.contains(lottoNumber);
+
+		// then
+		assertThat(result).isEqualTo(expected);
+	}
 }
