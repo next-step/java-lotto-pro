@@ -13,6 +13,7 @@ public class LottoNumber {
 	public static final int LOTTO_NUMBER_SIZE = 6;
 
 	private List<Integer> lottoNumbers = new ArrayList<>();
+	private int bonusNumber = 0;
 
 	private LottoNumber() {
 	}
@@ -22,6 +23,16 @@ public class LottoNumber {
 		validateNumber(numbers);
 		Collections.sort(numbers);
 		lottoNumber.addAll(numbers);
+		return lottoNumber;
+	}
+
+	public static LottoNumber ofWinning(List<Integer> numbers, int bonusNumber) {
+		LottoNumber lottoNumber = new LottoNumber();
+		validateNumber(numbers);
+		Collections.sort(numbers);
+		lottoNumber.addAll(numbers);
+		validateBonusNumber(numbers, bonusNumber);
+		lottoNumber.setBonusNumber(bonusNumber);
 		return lottoNumber;
 	}
 
@@ -38,10 +49,21 @@ public class LottoNumber {
 		}
 	}
 
+	private static void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
+		if (numbers.contains(bonusNumber)) {
+			throw new IllegalArgumentException("보너스번호는 다른 번호들과 중복이 되면 안됩니다");
+		}
+		validateNumberRange(bonusNumber);
+	}
+
 	private static void validateNumberRange(int number) {
 		if (number < LOTTO_NUMBER_MINIMUM || number > LOTTO_NUMBER_MAXIMUM) {
 			throw new IllegalArgumentException("1이상 45이하인 숫자여야 합니다");
 		}
+	}
+
+	public static boolean isContainBonusNumber(LottoNumber winningNumber, LottoNumber number) {
+		return number.contains(winningNumber.getBonusNumber());
 	}
 
 	private void addAll(List<Integer> numbers) {
@@ -64,4 +86,24 @@ public class LottoNumber {
 		return cnt;
 	}
 
+	public boolean isMatchBonusNumber(int bonusNumber) {
+		return this.bonusNumber == bonusNumber;
+	}
+
+	private int getBonusNumber() {
+		return this.bonusNumber;
+	}
+
+	private void setBonusNumber(int bonusNumber) {
+		this.bonusNumber = bonusNumber;
+	}
+
+	@Override
+	public String toString() {
+		String[] ary = new String[lottoNumbers.size()];
+		for (int i = 0; i < ary.length; i++) {
+			ary[i] = String.valueOf(lottoNumbers.get(i));
+		}
+		return "numbers: " + String.join(",", ary) + ", bonusNumber: " + bonusNumber;
+	}
 }
