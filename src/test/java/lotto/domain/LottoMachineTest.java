@@ -16,7 +16,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class LottoMachineTest {
 
-    static Stream<Arguments> listProvide() {
+    static Stream<Arguments> getLottoListTest2() {
         List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
                 Number.of(4), Number.of(5), Number.of(7));
 
@@ -35,7 +35,7 @@ public class LottoMachineTest {
     }
 
     @ParameterizedTest
-    @MethodSource("listProvide")
+    @MethodSource("getLottoListTest2")
     @DisplayName("수동 금액만큼 로또 생성")
     public void getLottoListTest2(List<Number> lottoNumber) {
         Money money = new Money(BigDecimal.valueOf(1000));

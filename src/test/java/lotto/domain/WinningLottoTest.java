@@ -14,7 +14,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WinningLottoTest {
 
-    static Stream<Arguments> listProvide() {
+    static Stream<Arguments> isExistBonusNumberTest() {
         List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
                 Number.of(4), Number.of(5), Number.of(6));
         Number bonusNumber = Number.of(7);
@@ -26,7 +26,7 @@ class WinningLottoTest {
     }
 
     @ParameterizedTest
-    @MethodSource("listProvide")
+    @MethodSource("isExistBonusNumberTest")
     @DisplayName("로또 번호 보너스 매칭 확인")
     public void isExistBonusNumberTest(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
@@ -36,7 +36,7 @@ class WinningLottoTest {
         assertThat(actual).isTrue();
     }
 
-    static Stream<Arguments> listProvide2() {
+    static Stream<Arguments> isNumberTest() {
         List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
                 Number.of(4), Number.of(5), Number.of(6));
         Number bonusNumber = Number.of(7);
@@ -44,7 +44,7 @@ class WinningLottoTest {
     }
 
     @ParameterizedTest
-    @MethodSource("listProvide2")
+    @MethodSource("isNumberTest")
     @DisplayName("로또 번호 매칭 확인")
     public void isNumberTest(List<Number> matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
@@ -55,14 +55,14 @@ class WinningLottoTest {
         assertThat(actual).isTrue();
     }
 
-    static Stream<Arguments> listProvide3() {
+    static Stream<Arguments> getLottoMatchResult() {
         List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
         List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
         return Stream.of(arguments(lottoNumber, matchNumber, Number.of(7)));
     }
 
     @ParameterizedTest
-    @MethodSource("listProvide3")
+    @MethodSource("getLottoMatchResult")
     @DisplayName("로또 매칭 결과 확인")
     public void getLottoMatchResult(List<Number> lottoNumber, List<Number> matchNumber, Number bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
