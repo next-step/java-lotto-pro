@@ -14,20 +14,19 @@ public class LottoMachineController {
 
     private final InputView inputView;
     private final OutputView outputView;
+    private final LottoMachine lottoMachine;
 
     public LottoMachineController() {
         this.inputView = new InputView();
         this.outputView = new OutputView();
+        this.lottoMachine = new LottoMachine();
     }
 
     public void run() {
-
         Money money = new Money(getUserInputPurchaseAmount());
         List<List<Integer>> activeNumber = getUserInputActiveNumber();
 
-        LottoMachine lottoMachine = new LottoMachine(money, activeNumber);
-
-        List<LottoNumber> lottoList = lottoMachine.getLottoList();
+        List<LottoNumber> lottoList = lottoMachine.getLottoList(money, activeNumber);
         printPurchaseLottoList(lottoList, activeNumber.size());
 
         List<Number> matchNumber = getUserInputMatchNumber();

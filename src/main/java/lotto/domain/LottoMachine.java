@@ -20,28 +20,23 @@ public class LottoMachine {
     public static final int LOTTO_SIZE = 6;
     public static final Money GAME_PRICE = new Money(BigDecimal.valueOf(1000));
 
-    private final Money money;
-    private final List<LottoNumber> activeNumberList;
-
-    public LottoMachine(Money money) {
+    public List<LottoNumber> getLottoList(Money money) {
         validationMoney(money);
-        this.money = money;
-        this.activeNumberList = new ArrayList<>();
-    }
-
-    public LottoMachine(Money money, List<List<Integer>> activeNumberList) {
-        this.money = money;
-        this.activeNumberList = convertNumberList(activeNumberList);
-    }
-
-    public List<LottoNumber> getLottoList() {
-        int autoCount = getPurchaseCount(GAME_PRICE) - activeNumberList.size();
-        return Stream.concat(activeNumberList.stream(), generateAutoLotto(autoCount).stream())
+        int autoCount = getPurchaseCount(money, GAME_PRICE);
+        return generateAutoLotto(autoCount).stream()
                 .collect(Collectors.toList());
     }
 
-    private int getPurchaseCount(Money gamePrice) {
-        return money.getMoney().divide(gamePrice.getMoney()).intValue();
+    public List<LottoNumber> getLottoList(Money money, List<List<Integer>> activeNumberList) {
+        int activeCount = activeNumberList.size();
+        int autoCount = getPurchaseCount(money, GAME_PRICE) - activeCount;
+
+        return Stream.concat(generateActiveLotto(activeNumberList).stream(), generateAutoLotto(autoCount).stream())
+                .collect(Collectors.toList());
+    }
+
+    private int getPurchaseCount(Money purchaseAmount, Money gamePrice) {
+        return purchaseAmount.getMoney().divide(gamePrice.getMoney()).intValue();
     }
 
     private List<LottoNumber> generateAutoLotto(int count) {
@@ -51,7 +46,7 @@ public class LottoMachine {
         return lottoNumbers;
     }
 
-    private List<LottoNumber> convertNumberList(List<List<Integer>> activeNumbers) {
+    private List<LottoNumber> generateActiveLotto(List<List<Integer>> activeNumbers) {
         return activeNumbers.stream()
                 .map(m -> m.stream()
                         .map(s -> Number.of(s))

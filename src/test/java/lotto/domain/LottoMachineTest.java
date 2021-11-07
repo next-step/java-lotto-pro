@@ -27,9 +27,9 @@ public class LottoMachineTest {
     @DisplayName("입력 금액만큼 로또 생성")
     public void getLottoListTest() {
         Money money = new Money(BigDecimal.valueOf(5000));
-        LottoMachine machine = new LottoMachine(money);
+        LottoMachine machine = new LottoMachine();
 
-        int actualSize = machine.getLottoList().size();
+        int actualSize = machine.getLottoList(money).size();
 
         assertThat(actualSize).isEqualTo(5);
     }
@@ -39,9 +39,9 @@ public class LottoMachineTest {
     @DisplayName("수동 금액만큼 로또 생성")
     public void getLottoListTest2(List<Integer> lottoNumber) {
         Money money = new Money(BigDecimal.valueOf(1000));
-        LottoMachine machine = new LottoMachine(money, Arrays.asList(lottoNumber));
+        LottoMachine machine = new LottoMachine();
 
-        int actualSize = machine.getLottoList().size();
+        int actualSize = machine.getLottoList(money, Arrays.asList(lottoNumber)).size();
 
         assertThat(actualSize).isEqualTo(1);
     }
