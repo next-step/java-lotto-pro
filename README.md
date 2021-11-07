@@ -45,12 +45,13 @@
 
 * LottoGame 클래스
   * 구입금액 / 로또 장당 가격 수만큼 루프 돌면서 LottoNumbers 객체 생성
+  * 번호 생성
   
 * LottoNumber
   * 숫자 주입 생성자
   
 * LottoNumbers
-  * 번호 생성
+  * LottoNumber[6] 주입 생성자
   
 * ResultView
   * 당첨 통계
