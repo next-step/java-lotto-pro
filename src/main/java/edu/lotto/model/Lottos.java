@@ -1,6 +1,7 @@
 package edu.lotto.model;
 
 import edu.lotto.constants.MessageConstants;
+import edu.lotto.constants.PatternConstants;
 import edu.lotto.utils.NumberUtil;
 
 import java.text.DecimalFormat;
@@ -18,6 +19,7 @@ public class Lottos {
 	private static Logger logger = Logger.getLogger(Lottos.class.getName());
 
 	private long perchaseAmount;
+	// TODO Enum 구분 대상
 	private long threeMatches;
 	private long fourMatches;
 	private long fiveMatches;
@@ -36,7 +38,7 @@ public class Lottos {
 	 */
 	private List<Lotto> getLottos(int perchaseAmount) {
 		List<Lotto> lottos = new ArrayList<Lotto>();
-		int lottoCount = NumberUtil.getLottoCount(perchaseAmount);
+		int lottoCount = getLottoCount(perchaseAmount);
 		System.out.println(lottoCount + MessageConstants.LOTTO_PERCHASE_MESSAGE);
 		for(int i=0; i<lottoCount; i++) {
 			lottos.add(new Lotto());
@@ -80,5 +82,66 @@ public class Lottos {
 		if(number == 5) this.fiveMatches = matchesCount;
 		if(number == 6) this.sixMatches = matchesCount;
 		return matchesCount;
+	}
+
+	/**
+	 * 사용자가 입력한 구매 금액이 숫자이고, 1000 이상의 숫자인지 확인
+	 * @param amount
+	 * @return
+	 */
+	public static boolean checkPerchaseAmountValidation(String amount) {
+		boolean validPerchaseAmount = true;
+		if(!NumberUtil.isNumber(amount)) {
+			validPerchaseAmount = false;
+			System.out.println(MessageConstants.ONLY_INPUT_NUMBER_MESSAGE);
+		}
+		if(validPerchaseAmount && !NumberUtil.isMoreThanThousand(Integer.parseInt(amount))) {
+			validPerchaseAmount = false;
+			System.out.println(MessageConstants.LOTTO_PRICE_INFORMATION_MESSAGE);
+		}
+		return validPerchaseAmount;
+	}
+
+	/**
+	 * 구매 금액을 통해 구매된 로또 갯수 가져오기
+	 * @param perchaseAmount
+	 * @return
+	 */
+	public static int getLottoCount(int perchaseAmount) {
+		return (perchaseAmount / 1000);
+	}
+
+	/**
+	 * 1에서 45 사이의 숫자 가져오기
+	 * @return
+	 */
+	public static int getNumberBetweenOneAndFortyFive() {
+		return (int) ((Math.random() * 45) + 1);
+	}
+
+	/**
+	 * 사용자가 입력한 지난주 정답이 숫자 형태의 문자열인지 확인
+	 * @param winningNumbers
+	 * @return
+	 */
+	public static boolean checkInputWinningNumbersValidation(String winningNumbers) {
+		boolean isValidWinningNumbers = true;
+		String[] winningNumberArray = winningNumbers.split(PatternConstants.DEFAULT_SEPARATOR_PATTERN);
+		int currentWinningNumberIndex = 0;
+		while(isValidWinningNumbers && currentWinningNumberIndex < winningNumberArray.length) {
+			String winningNumber = winningNumberArray[currentWinningNumberIndex];
+			isValidWinningNumbers = ((winningNumberArray.length == 6) && NumberUtil.isNumber(winningNumber) && isNumberBetweenOneAndFortyFive(Integer.parseInt(winningNumber)));
+			currentWinningNumberIndex++;
+		}
+		return isValidWinningNumbers;
+	}
+
+	/**
+	 * 숫자가 1~45 사이의 숫자인지 확인
+	 * @param value
+	 * @return
+	 */
+	public static boolean isNumberBetweenOneAndFortyFive(int value) {
+		return ((value >= 1) && (value <= 45));
 	}
 }
