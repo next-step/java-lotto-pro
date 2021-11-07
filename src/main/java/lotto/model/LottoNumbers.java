@@ -32,7 +32,7 @@ public class LottoNumbers {
         return data.toString();
     }
 
-    public int findNumberOfMatch(LottoNumbers winNumbers) {
+    public int calculateNumberOfMatch(LottoNumbers winNumbers) {
         int result = 0;
         for (LottoNumber winNumber : winNumbers.data) {
             result += countIfMatch(winNumber);

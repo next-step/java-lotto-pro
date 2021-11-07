@@ -41,9 +41,9 @@ public class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("provideWinNumbers")
-    void findNumberOfMatch(LottoNumbers winNumbers, int expectedNumberOfMatch) {
+    void calculateNumberOfMatch(LottoNumbers winNumbers, int expectedNumberOfMatch) {
         final LottoNumbers buyNumbers = LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(buyNumbers.findNumberOfMatch(winNumbers))
+        assertThat(buyNumbers.calculateNumberOfMatch(winNumbers))
                 .isEqualTo(expectedNumberOfMatch);
     }
 

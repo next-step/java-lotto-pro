@@ -6,7 +6,7 @@ import java.util.List;
 public class Lotto {
     private static final Money SELLING_PRICE = new Money(1000);
 
-    private final LottoNumbers  numbers;
+    private final LottoNumbers numbers;
 
     private Lotto(LottoNumbers numbers) {
         this.numbers = numbers;
@@ -30,5 +30,10 @@ public class Lotto {
     @Override
     public String toString() {
         return numbers.toString();
+    }
+
+    public Winning calculateWinning(LottoNumbers winNumbers) {
+        final int count = numbers.calculateNumberOfMatch(winNumbers);
+        return Winning.ofMatchCount(count);
     }
 }
