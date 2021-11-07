@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 class LottoMatchRankTest {
 
 	@ParameterizedTest
-	@CsvSource(value = {"SIX_POINT,6", "FIVE_POINT,5", "FOUR_POINT,4", "THREE_POINT,3", "TWO_POINT,2", "ONE_POINT,1",
+	@CsvSource(value = {"SIX_POINT,6","FIVE_AND_BONUS_POINT", "FIVE_POINT,5", "FOUR_POINT,4", "THREE_POINT,3", "TWO_POINT,2", "ONE_POINT,1",
 		"ZERO_POINT,0"}, delimiter = ',')
 	public void 로또_당첨_결과_countofmatch(LottoMatchRank rank, int countOfMatch) {
 		LottoMatchRank lottoMatchRank = rank;
@@ -24,9 +24,9 @@ class LottoMatchRankTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"SIX_POINT,6", "FIVE_POINT,5", "FOUR_POINT,4", "THREE_POINT,3", "TWO_POINT,2", "ONE_POINT,1",
-		"ZERO_POINT,0"}, delimiter = ',')
-	public void 로또_당첨_결과_valueof_countOfMatch(LottoMatchRank rank, int countOfMatch) {
-		assertThat(LottoMatchRank.valueOf(countOfMatch)).isEqualTo(rank);
+	@CsvSource(value = {"SIX_POINT,6,false","FIVE_POINT_AND_BONUS,5,true", "FIVE_POINT,5,false", "FOUR_POINT,4,false",
+		"THREE_POINT,3,false", "TWO_POINT,2,false", "ONE_POINT,1,false","ZERO_POINT,0,false"}, delimiter = ',')
+	public void 로또_당첨_결과_valueof_countOfMatch(LottoMatchRank rank, int countOfMatch, boolean matchBonus) {
+		assertThat(LottoMatchRank.valueOf(countOfMatch,matchBonus)).isEqualTo(rank);
 	}
 }
