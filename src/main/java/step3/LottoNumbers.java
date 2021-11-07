@@ -2,7 +2,6 @@ package step3;
 
 import static java.util.stream.Collectors.*;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
@@ -11,53 +10,35 @@ import java.util.stream.Stream;
 
 public class LottoNumbers {
 	public static final int LOTTO_NUMBER_MAX = 6;
-	private static Set<LottoNumber> lottoNumbers;
+	private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
 	public LottoNumbers(Set<LottoNumber> lottoNumbers) {
-		this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
-	}
-
-	public LottoNumbers(){
-		lottoNumbers = new HashSet<>();
+		this.lottoNumbers = lottoNumbers;
+		validation();
 	}
 
 	public static LottoNumbers createLottoNumber(Set<LottoNumber> inputLottoNumber) {
-		lottoNumbers = new HashSet<>();
-		validation();
 		return new LottoNumbers(inputLottoNumber);
 	}
 
-	public static LottoNumbers createLottoNumber(LottoNumber ...inputLottoNumber) {
-		lottoNumbers = new HashSet<>();
+	public static LottoNumbers createLottoNumber(Integer ...inputLottoNumber) {
 		return new LottoNumbers(from(inputLottoNumber));
 	}
 
-	private static void validation() {
+	private void validation() {
 		if (isOverFlow()) {
 			throw new ArrayIndexOutOfBoundsException("로또 번호가 6개 이상 뽑혔습니다.");
 		}
 	}
 
-	private static boolean isOverFlow() {
+	private boolean isOverFlow() {
 		return lottoNumbers.size() > LOTTO_NUMBER_MAX;
 	}
 
-	private static Set<LottoNumber> from(LottoNumber[] inputLottoNumber) {
-		return Stream.of(inputLottoNumber).collect(toCollection(HashSet::new));
-	}
-
-	@Deprecated
-	public LottoNumbers createLottoNumbers() {
-		while (isNotMaxNumber()) {
-			validation();
-			lottoNumbers.add(new LottoNumber(RandomUtils.pick()));
-		}
-		return new LottoNumbers(this.lottoNumbers);
-	}
-
-	@Deprecated
-	private boolean isNotMaxNumber() {
-		return LOTTO_NUMBER_MAX != lottoNumbers.size();
+	private static Set<LottoNumber> from(Integer[] inputLottoNumber) {
+		return Stream.of(inputLottoNumber)
+			.map(LottoNumber::new)
+			.collect(toCollection(HashSet::new));
 	}
 
 	public Integer match(LottoNumber lottoNumber) {
