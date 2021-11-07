@@ -31,7 +31,7 @@ public enum WinningResult {
         this.prize = prize;
     }
 
-    public static WinningResult fromCount(int count, boolean bonusNumberMatched) {
+    public static WinningResult of(int count, boolean bonusNumberMatched) {
         List<WinningResult> winningResults = Arrays.stream(values())
                 .filter(winningResult -> winningResult.count == count)
                 .collect(Collectors.toList());

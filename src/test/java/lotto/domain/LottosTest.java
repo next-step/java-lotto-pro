@@ -32,9 +32,10 @@ class LottosTest {
                 new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)),
                 new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12))
         );
+        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(45));
 
         // when
-        WinningResults winningResults = lottos.getWinningResults(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(45));
+        WinningResults winningResults = lottos.getWinningResults(winningLotto);
 
         // then
         assertThat(winningResults).isEqualTo(WinningResults.from(WinningResult.FIRST, WinningResult.FIFTH));

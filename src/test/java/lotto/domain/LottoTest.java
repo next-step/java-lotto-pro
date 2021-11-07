@@ -50,27 +50,31 @@ class LottoTest {
                 .withMessageMatching(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
     }
 
+    @Test
+    @DisplayName("입력받은 로또 번호와 로또 숫자의 일치 개수를 반환한다.")
+    void getWinningResult() {
+        // given
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
+
+        // when
+        int matchedCount = lotto.getMatchedCount(winningLotto);
+
+        // then
+        assertThat(matchedCount).isEqualTo(3);
+    }
+
     @ParameterizedTest(name = "{displayName} - {arguments}")
-    @CsvSource(value = {
-            "1:2:3:4:5:6:45:FIRST",
-            "1:2:3:4:5:10:6:SECOND",
-            "1:2:3:4:5:10:45:THIRD",
-            "1:2:3:4:9:10:45:FOURTH",
-            "1:2:3:8:9:10:45:FIFTH",
-            "1:2:7:8:9:10:45:NOT_MATCHED"
-    }, delimiter = ':')
-    @DisplayName("당첨 결과를 반환한다.")
-    void getWinningResult(int number1, int number2, int number3, int number4, int number5, int number6, int bonusNumber,
-                          WinningResult expected) {
+    @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
+    @DisplayName("로또 숫자의 포함 여부를 반환한다.")
+    void isContained(int number, boolean expected) {
         // given
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when
-        WinningResult winningResult = lotto.getWinningResult(
-                new Lotto(Arrays.asList(number1, number2, number3, number4, number5, number6)),
-                new LottoNumber(bonusNumber));
+        boolean contained = lotto.isContained(new LottoNumber(number));
 
         // then
-        assertThat(winningResult).isEqualTo(expected);
+        assertThat(contained).isEqualTo(expected);
     }
 }

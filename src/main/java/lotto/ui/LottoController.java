@@ -2,6 +2,7 @@ package lotto.ui;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoCalculator;
+import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
 import lotto.domain.WinningResults;
 
@@ -17,7 +18,7 @@ public class LottoController {
     }
 
     public void run() {
-        lottoCalculator.calculate(ConsoleIn.inputWinNumber(), ConsoleIn.inputBonusNumber());
+        lottoCalculator.calculate(new WinningLotto(ConsoleIn.inputWinNumber(), ConsoleIn.inputBonusNumber()));
         WinningResults winningResults = lottoCalculator.getWinningResults();
 
         printHeader();

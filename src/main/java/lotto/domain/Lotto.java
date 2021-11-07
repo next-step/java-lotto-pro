@@ -21,10 +21,15 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public WinningResult getWinningResult(Lotto winNumber, LottoNumber bonusNumber) {
-        int matchedCount = getMatchedCount(winNumber);
-        boolean bonusNumberMatched = this.lottoNumbers.contains(bonusNumber);
-        return WinningResult.fromCount(matchedCount, bonusNumberMatched);
+    public int getMatchedCount(Lotto lotto) {
+        return (int) lottoNumbers.stream()
+                .map(lotto::isContained)
+                .filter(isContained -> isContained)
+                .count();
+    }
+
+    public boolean isContained(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     private void validate(List<Integer> numbers) {
@@ -49,14 +54,6 @@ public class Lotto {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-    }
-
-    private int getMatchedCount(Lotto winNumber) {
-        return (int) winNumber.lottoNumbers
-                .stream()
-                .map(this.lottoNumbers::contains)
-                .filter(isContained -> isContained)
-                .count();
     }
 
     @Override

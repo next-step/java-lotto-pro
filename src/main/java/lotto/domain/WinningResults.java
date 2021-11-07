@@ -14,9 +14,9 @@ public class WinningResults {
         this.winningResults = Collections.unmodifiableList(winningResults);
     }
 
-    public static WinningResults of(List<Lotto> lottos, Lotto winNumber, LottoNumber bonusNumber) {
+    public static WinningResults of(List<Lotto> lottos, WinningLotto winningLotto) {
         List<WinningResult> winningResults = lottos.stream()
-                .map(lotto -> lotto.getWinningResult(winNumber, bonusNumber))
+                .map(winningLotto::getWinningResult)
                 .filter(winningResult -> winningResult != WinningResult.NOT_MATCHED)
                 .collect(Collectors.toList());
         return new WinningResults(winningResults);

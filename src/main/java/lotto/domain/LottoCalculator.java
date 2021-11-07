@@ -27,8 +27,8 @@ public class LottoCalculator {
         return winningResults;
     }
 
-    public void calculate(Lotto winNumber, LottoNumber bonusNumber) {
-        this.winningResults = lottos.getWinningResults(winNumber, bonusNumber);
+    public void calculate(WinningLotto winningLotto) {
+        this.winningResults = lottos.getWinningResults(winningLotto);
     }
 
     public int getLottosSize() {
