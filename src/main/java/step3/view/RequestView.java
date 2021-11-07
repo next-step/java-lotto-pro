@@ -1,15 +1,14 @@
 package step3.view;
 
 import java.util.Scanner;
-
-import step3.PattenUtils;
+import java.util.regex.Pattern;
 
 public class RequestView implements InputView {
 
-	private static final String COMMA = "([\\w\\d].+)+([^\\w,]).+";
-	private static final String LAST_COMMA = "([0-9],){1,}";
-	private static final String ONLY_NUMBER = "((?:^|,)([0-9]+))+";
-	private static final String NUMBER_SIZE_SIX = "((?:^|,)([0-9]{1,2})){6}";
+	private static final Pattern COMMA = Pattern.compile("([\\w\\d].+)+([^\\w,]).+");
+	private static final Pattern LAST_COMMA = Pattern.compile("([0-9],){1,}");
+	private static final Pattern ONLY_NUMBER = Pattern.compile("((?:^|,)([0-9]+))+");
+	private static final Pattern NUMBER_SIZE_SIX = Pattern.compile("((?:^|,)([0-9]{1,2})){6}");
 
 	public int insertMoney() {
 		int insertMoney = 0;
@@ -37,21 +36,25 @@ public class RequestView implements InputView {
 	}
 
 	private static void validationInputWinningNumber(String input) {
-		if (PattenUtils.match(LAST_COMMA, input)) {
+		if (isMatch(LAST_COMMA, input)) {
 			throw new IllegalArgumentException("[ERROR] ,를 마지막에 입력하면 안됩니다.");
 		}
 
-		if (PattenUtils.match(COMMA, input)) {
+		if (isMatch(COMMA, input)) {
 			throw new IllegalArgumentException("[ERROR] 숫자는 ,구분해서 입력해야합니다.");
 		}
 
-		if (!PattenUtils.match(ONLY_NUMBER,input)) {
+		if (!isMatch(ONLY_NUMBER,input)) {
 			throw new IllegalArgumentException("[ERROR] 정수만을 입력해야합니다.");
 		}
 
-		if (!PattenUtils.match(NUMBER_SIZE_SIX,input)) {
+		if (!isMatch(NUMBER_SIZE_SIX,input)) {
 			throw new IllegalArgumentException("[ERROR] 숫자는 6개를 입력해야합니다.");
 		}
+	}
+
+	private static boolean isMatch(Pattern pattern, String input) {
+		return pattern.matcher(input).find();
 	}
 
 	private static String input() {
