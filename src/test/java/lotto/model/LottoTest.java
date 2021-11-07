@@ -18,4 +18,11 @@ public class LottoTest {
         int count = Lotto.howManyLottosCanIBuyWith(price);
         assertThat(count).isEqualTo(0);
     }
+
+    @Test
+    void generate() {
+        Lotto lotto = Lotto.generate(1, 2, 3, 4, 5, 6);
+        assertThat(lotto).isNotNull();
+        assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
 }

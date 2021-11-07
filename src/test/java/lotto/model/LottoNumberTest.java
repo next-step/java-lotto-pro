@@ -28,4 +28,10 @@ public class LottoNumberTest {
         assertThat(number).isEqualTo(new LottoNumber(1));
         assertThat(number).isNotEqualTo(new LottoNumber(45));
     }
+
+    @Test
+    void toStringTest() {
+        LottoNumber number = new LottoNumber(3);
+        assertThat(number.toString()).isEqualTo("3");
+    }
 }
