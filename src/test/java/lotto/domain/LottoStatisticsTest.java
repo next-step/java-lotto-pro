@@ -7,11 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStatistics;
-import lotto.domain.WinningInformation;
-import lotto.domain.WinningNumbers;
-
 public class LottoStatisticsTest {
 
 	Lotto lotto;

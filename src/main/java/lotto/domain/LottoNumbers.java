@@ -1,24 +1,25 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 	private static final int MATCHED_NUMBER_PLUS = 1;
 	private static final int NON_MATCHED_NUMBER = 0;
 	private static final String DELIMITER = ", ";
-	private final List<Integer> lottoNumbers = new ArrayList<>();
+	private final List<Integer> lottoNumbers;
 
 	public LottoNumbers(int... lottoNumbers) {
-		for (int lottoNumber : lottoNumbers) {
-			this.lottoNumbers.add(lottoNumber);
-		}
+		this(Arrays.stream(lottoNumbers)
+			.boxed()
+			.collect(Collectors.toList()));
 	}
 
 	public LottoNumbers(List<Integer> lottoNumbers) {
-		for (Integer lottoNumber : lottoNumbers) {
-			this.lottoNumbers.add(lottoNumber);
-		}
+		this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
 	}
 
 	public int isMatch(int winningNumber) {
