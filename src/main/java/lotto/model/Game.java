@@ -22,9 +22,14 @@ public class Game {
      * @return GET_NUMBER_COUNT 길이의 배열을 반환
      */
     private List<Integer> generateNumbers() {
-        List<Integer> randomNumbers = IntStream.range(MIN_RANGE_VALUE, MAX_RANGE_VALUE).boxed().collect(Collectors.toList());
+        List<Integer> randomNumbers = IntStream.range(MIN_RANGE_VALUE, MAX_RANGE_VALUE)
+                .boxed()
+                .collect(Collectors.toList());
         Collections.shuffle(randomNumbers);
-        return randomNumbers.subList(0, GET_NUMBER_COUNT).stream().sorted().collect(Collectors.toList());
+        return randomNumbers.subList(0, GET_NUMBER_COUNT)
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public List<Integer> getNumbers() {

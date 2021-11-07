@@ -21,7 +21,9 @@ public class WinningNumbers {
     public WinningNumbers(String inputRawValues) {
         String[] inputValues = inputRawValues.replace(" ", "").split(LIST_SEPARATOR);
         validateSize(inputValues);
-        this.values = Arrays.stream(inputValues).map(Integer::valueOf).collect(Collectors.toList());
+        this.values = Arrays.stream(inputValues)
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
         validateDuplicated();
         this.values.forEach(value -> validateWinningNumber(value));
     }
@@ -43,7 +45,10 @@ public class WinningNumbers {
      * 입력값이 중복되면 예외처리를 합니다.
      */
     private void validateDuplicated() {
-        long duplicatedCount = this.values.stream().filter(value -> Collections.frequency(this.values, value) > 1).count();
+        long duplicatedCount = this.values
+                .stream()
+                .filter(value -> Collections.frequency(this.values, value) > 1)
+                .count();
         if (duplicatedCount > 0) {
             throw new InvalidInputException(String.format(INVALID_DUPLICATE_MESSAGE));
         }
