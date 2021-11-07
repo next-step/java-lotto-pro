@@ -39,7 +39,7 @@ public enum Rank {
     }
 
     public boolean isNotMiss() {
-        return !this.equals(Rank.MISS);
+        return this != Rank.MISS;
     }
 
     public int calculateRevenue(int count) {
