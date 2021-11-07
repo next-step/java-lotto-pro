@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 public class LastWeekWinningNumber {
-	private static final String NUMBER_REGEX = "^[0-9]+$";
-	public static final String SPACE_REGEX = "\\s+";
 	public static final String EMPTY_STRING = "";
 	public static final String COMMA = ",";
 
@@ -20,7 +18,7 @@ public class LastWeekWinningNumber {
 	}
 
 	public static boolean validate(String value) {
-		String[] strings = value.replaceAll(SPACE_REGEX, EMPTY_STRING)
+		String[] strings = value.replaceAll(Regex.SPACE, EMPTY_STRING)
 			.split(COMMA);
 
 		if (strings.length != Lotto.NUMBER_COUNT) {
@@ -28,7 +26,7 @@ public class LastWeekWinningNumber {
 		}
 
 		return Arrays.stream(strings)
-			.allMatch(string -> string.matches(NUMBER_REGEX))
+			.allMatch(string -> string.matches(Regex.NUMBER))
 			&& isValidNumber(strings);
 	}
 
@@ -50,7 +48,7 @@ public class LastWeekWinningNumber {
 	}
 
 	private static String[] splitToEachNumber(String lastWeekWinningNumber) {
-		return lastWeekWinningNumber.replaceAll(SPACE_REGEX, EMPTY_STRING)
+		return lastWeekWinningNumber.replaceAll(Regex.SPACE, EMPTY_STRING)
 			.split(COMMA);
 	}
 
