@@ -5,7 +5,6 @@ import lotto.domain.LottoNumber;
 import lotto.exception.ErrorMessage;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,8 +19,7 @@ public class LottoWinningNumberView {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
 
-        Scanner scanner = new Scanner(System.in);
-        String winnerNumber = scanner.nextLine();
+        String winnerNumber = Console.nextLine();
         List<String> trimWinningNumbers = Stream.of(winnerNumber.split(WINNING_NUMBER_DELIMITER))
                 .map(String::trim)
                 .collect(Collectors.toList());

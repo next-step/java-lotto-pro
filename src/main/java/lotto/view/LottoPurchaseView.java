@@ -3,8 +3,6 @@ package lotto.view;
 import lotto.domain.LottoIssuanceCount;
 import lotto.exception.ErrorMessage;
 
-import java.util.Scanner;
-
 public class LottoPurchaseView {
 
     private LottoPurchaseView() {
@@ -12,8 +10,7 @@ public class LottoPurchaseView {
 
     public static int input() {
         System.out.println("구입금액을 입력해주세요.");
-        Scanner scanner = new Scanner(System.in);
-        String purchaseAmountInput = scanner.nextLine();
+        String purchaseAmountInput = Console.nextLine();
 
         int purchaseAmount = numberValid(purchaseAmountInput);
         purchaseAmountRangeValid(purchaseAmount);
