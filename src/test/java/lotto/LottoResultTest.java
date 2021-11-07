@@ -1,5 +1,6 @@
 package lotto;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -27,30 +28,27 @@ public class LottoResultTest {
                 Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
                         .collect(Collectors.toSet()));
+        LottoNumbers matchNoneLottoNumbers = new LottoNumbers(
+                Stream.of(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9),
+                        new LottoNumber(10), new LottoNumber(10), new LottoNumber(12))
+                        .collect(Collectors.toSet()));
+        LottoNumbers match3LottoNumbers = new LottoNumbers(
+                Stream.of(new LottoNumber(1), new LottoNumber(8), new LottoNumber(3),
+                        new LottoNumber(10), new LottoNumber(5), new LottoNumber(12))
+                        .collect(Collectors.toSet()));
         return Stream.of(
                 Arguments.of(
                         "내 숫자들 6개 다 맞는 경우 ",
                         prizeLottoNumbers,
-                        new LottoNumbers(
-                                Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
-                                        .collect(Collectors.toSet())),
+                        prizeLottoNumbers,
                         LottoRankingStatus.MATCH6),
                 Arguments.of(
                         "내 숫자들 0개 맞는 경우 ",
                         prizeLottoNumbers,
-                        new LottoNumbers(
-                                Stream.of(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9),
-                                        new LottoNumber(10), new LottoNumber(10), new LottoNumber(12))
-                                        .collect(Collectors.toSet())),
+                        matchNoneLottoNumbers,
                         LottoRankingStatus.NONE),
-                Arguments.of(
-                        "내 숫자들 3개만 맞는 경우 ",
-                        prizeLottoNumbers,
-                        new LottoNumbers(
-                                Stream.of(new LottoNumber(1), new LottoNumber(8), new LottoNumber(3),
-                                        new LottoNumber(10), new LottoNumber(5), new LottoNumber(12))
-                                        .collect(Collectors.toSet())),
+                Arguments.of("내 숫자들 3개만 맞는 경우 ", prizeLottoNumbers,
+                        match3LottoNumbers,
                         LottoRankingStatus.MATCH3)
         );
     }

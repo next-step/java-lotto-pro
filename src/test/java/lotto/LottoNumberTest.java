@@ -38,8 +38,8 @@ public class LottoNumberTest {
                         Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3))
                                 .collect(Collectors.toSet()),
                         new LottoNumber(1), true),
-                Arguments.of("1,2,3 - 4",
-                        Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3))
+                Arguments.of("1,3,5 - 4",
+                        Stream.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(5))
                                 .collect(Collectors.toSet()),
                         new LottoNumber(4), false)
         );
