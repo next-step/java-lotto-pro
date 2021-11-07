@@ -4,14 +4,11 @@ import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.LottoNumber;
 import lotto.util.ConstantString;
+import lotto.view.ErrorMessage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoCreateFactory {
-    public static final int LOTTO_SIZE = 6;
 
     public static Lotto createRandomLotto() {
         int[] randomNumbers = createRandomNumbers();
@@ -22,8 +19,8 @@ public class LottoCreateFactory {
     private static int[] createRandomNumbers() {
         List<Integer> numbers = makeNumbers();
         Collections.shuffle(numbers);
-        int[] result = new int[LOTTO_SIZE];
-        for (int i = 0; i < LOTTO_SIZE; i++) {
+        int[] result = new int[LottoNumber.SIZE];
+        for (int i = 0; i < LottoNumber.SIZE; i++) {
             result[i] = numbers.get(i);
         }
         Arrays.sort(result);
@@ -47,7 +44,18 @@ public class LottoCreateFactory {
     }
 
     public static Lotto createLotto(int[] numbers) {
+        if(validDuplicate(numbers)){
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_ERROR);
+        }
         return new Lotto(numbers);
+    }
+
+    private static boolean validDuplicate(int[] numbers) {
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < numbers.length; i++) {
+            set.add(numbers[i]);
+        }
+        return set.size() != LottoNumber.SIZE;
     }
 
 }

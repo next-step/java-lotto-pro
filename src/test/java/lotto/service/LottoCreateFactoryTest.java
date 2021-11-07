@@ -3,10 +3,12 @@ package lotto.service;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.util.InputHandler;
+import lotto.view.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoCreateFactoryTest {
     private final static int LOTTO_SIZE = 6;
@@ -32,6 +34,17 @@ public class LottoCreateFactoryTest {
         Lotto lotto = LottoCreateFactory.createLotto(InputHandler.splitTextToInts(text));
         assertThat(lotto.size()).isEqualTo(LOTTO_SIZE);
         assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+
+    }
+
+    @DisplayName("입력 받은 숫자 배열이 중복이면 에러가 나오게 하는 기능 검증")
+    @Test
+    void duplicateError() {
+        assertThatThrownBy(() ->{
+            Lotto lotto = LottoCreateFactory.createLotto(new int[]{1, 2, 3, 1, 2, 3});
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.DUPLICATE_ERROR);
+
 
     }
 }
