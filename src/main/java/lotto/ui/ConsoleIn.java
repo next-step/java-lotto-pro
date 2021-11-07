@@ -25,12 +25,12 @@ public class ConsoleIn {
         return purchaseAmount;
     }
 
-    public static Lotto inputWinNumber() {
-        Lotto winNumber = null;
-        while (Objects.isNull(winNumber)) {
-            winNumber = getWinNumber();
+    public static Lotto inputLotto(Message message) {
+        Lotto lotto = null;
+        while (Objects.isNull(lotto)) {
+            lotto = getLotto(message);
         }
-        return winNumber;
+        return lotto;
     }
 
     public static LottoNumber inputBonusNumber() {
@@ -41,9 +41,17 @@ public class ConsoleIn {
         return bonusNumber;
     }
 
+    public static Integer inputManualQuantity() {
+        Integer manualQuantity = null;
+        while (Objects.isNull(manualQuantity)) {
+            manualQuantity = getManualQuantity();
+        }
+        return manualQuantity;
+    }
+
     private static PurchaseAmount getPurchaseAmount() {
         try {
-            String input = input(Message.PURCHASE_AMOUNT_INPUT.getMessage());
+            String input = input(Message.PURCHASE_AMOUNT_INPUT);
             checkDigit(input);
             return new PurchaseAmount(Integer.parseInt(input));
         } catch (IllegalArgumentException e) {
@@ -52,9 +60,9 @@ public class ConsoleIn {
         return null;
     }
 
-    private static Lotto getWinNumber() {
+    private static Lotto getLotto(Message message) {
         try {
-            String input = input(Message.WIN_NUMBER_INPUT.getMessage());
+            String input = (message == Message.EMPTY ? input() : input(message));
             List<String> tokens = Arrays.stream(input.split(","))
                     .map(String::trim)
                     .collect(Collectors.toList());
@@ -72,7 +80,7 @@ public class ConsoleIn {
 
     private static LottoNumber getBonusNumber() {
         try {
-            String input = input(Message.BONUS_NUMBER_INPUT.getMessage());
+            String input = input(Message.BONUS_NUMBER_INPUT);
             checkDigit(input);
             return new LottoNumber(Integer.parseInt(input));
         } catch (IllegalArgumentException e) {
@@ -81,8 +89,23 @@ public class ConsoleIn {
         return null;
     }
 
-    private static String input(String message) {
-        ConsoleOut.printMessage(message);
+    private static Integer getManualQuantity() {
+        try {
+            String input = input(Message.MANUAL_QUANTITY_INPUT);
+            checkDigit(input);
+            return Integer.parseInt(input);
+        } catch (IllegalArgumentException e) {
+            ConsoleOut.printErrorMessage(e);
+        }
+        return null;
+    }
+
+    private static String input(Message message) {
+        ConsoleOut.printMessage(message.getMessage());
+        return SCANNER.nextLine();
+    }
+
+    private static String input() {
         return SCANNER.nextLine();
     }
 

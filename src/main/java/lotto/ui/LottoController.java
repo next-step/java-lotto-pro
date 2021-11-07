@@ -3,6 +3,7 @@ package lotto.ui;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCalculator;
 import lotto.domain.Lottos;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
 import lotto.domain.WinningResults;
@@ -10,17 +11,23 @@ import lotto.domain.WinningResults;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoController {
 
     private static final String BLANK = " ";
+    public static final int MANUAL_LOTTOS_EXIST = 0;
 
     public void run() {
-        LottoCalculator lottoCalculator = new LottoCalculator(ConsoleIn.inputPurchaseAmount(), new Lottos(new ArrayList<>()));
+        LottoCalculator lottoCalculator = getLottoCalculator();
+
+        ConsoleOut.newLine();
         printLottos(lottoCalculator);
-        lottoCalculator.calculate(new WinningLotto(ConsoleIn.inputWinNumber(), ConsoleIn.inputBonusNumber()));
+
+        lottoCalculator.calculate(new WinningLotto(ConsoleIn.inputLotto(Message.WIN_NUMBER_INPUT), ConsoleIn.inputBonusNumber()));
         WinningResults winningResults = lottoCalculator.getWinningResults();
 
         printHeader();
@@ -28,8 +35,30 @@ public class LottoController {
         printProceedsRate(lottoCalculator, winningResults);
     }
 
+    private LottoCalculator getLottoCalculator() {
+        PurchaseAmount purchaseAmount = ConsoleIn.inputPurchaseAmount();
+        ConsoleOut.newLine();
+        Integer manualQuantity = ConsoleIn.inputManualQuantity();
+        ConsoleOut.newLine();
+        return new LottoCalculator(purchaseAmount, new Lottos(getManualLottos(manualQuantity), manualQuantity));
+    }
+
+    private List<Lotto> getManualLottos(Integer manualQuantity) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        if (manualQuantity > MANUAL_LOTTOS_EXIST) {
+            manualLottos.add(ConsoleIn.inputLotto(Message.MANUAL_NUMBER_INPUT));
+        }
+        manualLottos.addAll(
+                IntStream.range(0, manualQuantity - 1)
+                        .mapToObj(ignored -> ConsoleIn.inputLotto(Message.EMPTY))
+                        .collect(Collectors.toList())
+        );
+        return manualLottos;
+    }
+
     private void printLottos(LottoCalculator lottoCalculator) {
-        ConsoleOut.printMessage(Message.LOTTOS_PRINT.getMessage(), lottoCalculator.getLottosSize());
+        ConsoleOut.printMessage(Message.LOTTOS_PRINT.getMessage(),
+                lottoCalculator.getManualQuantity(), lottoCalculator.getAutoQuantity());
         for (Lotto lotto : lottoCalculator.getLottos().getLottos()) {
             ConsoleOut.printMessage(getLottoMessage(lotto));
         }
