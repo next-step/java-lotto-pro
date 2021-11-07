@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class Money {
-    private static final int LOTTO_BUY_PRICE = 1000;
+    public static final int LOTTO_BUY_PRICE = 1000;
     private final int money;
 
     public Money(int money) {
@@ -14,5 +14,9 @@ public class Money {
 
     public int buyableQuantity() {
         return money / LOTTO_BUY_PRICE;
+    }
+    
+    public boolean isBuyableMoney() {
+        return money != 0;
     }
 }

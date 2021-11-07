@@ -13,6 +13,10 @@ public class LottoController {
 
     public void start() {
         Money money = inputView.enterMoney();
+        if (!money.isBuyableMoney()) {
+            resultView.printLowerThanMinPrice();
+            return;
+        }
         resultView.printBuyMessage(money);
         
         Lottos lottos = new Lottos(money);

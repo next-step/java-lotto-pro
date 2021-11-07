@@ -11,6 +11,10 @@ public class ConsoleUtils {
     private ConsoleUtils() {
     }
 
+    public static String consoleString() {
+        return scanner.nextLine().replaceAll(" ", "");
+    }
+
     public static int consoleInt() {
         return Integer.parseInt(scanner.nextLine().replaceAll(" ", ""));
     }
