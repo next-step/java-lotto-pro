@@ -19,11 +19,11 @@ public class Lotto {
         this.numbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public int winningNumberMatchCount(List<Integer> winningNumbers) {
+    public int winningNumberMatchCount(Lotto lotto) {
         int winningNumberMatchCount = 0;
 
-        for (Integer winningNumber : winningNumbers) {
-            winningNumberMatchCount += winningNumberMatchCount(winningNumber);
+        for (LottoNumber winningNumber : lotto.numbers) {
+            winningNumberMatchCount += winningNumberMatchCount(winningNumber.getNumber());
         }
         return winningNumberMatchCount;
     }

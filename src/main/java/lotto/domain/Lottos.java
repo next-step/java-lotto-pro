@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.exception.ErrorMessage;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -17,8 +18,12 @@ public class Lottos {
 
         Map<Rank, Integer> winningResult = new EnumMap<>(Rank.class);
 
+        Lotto winningNumber = winningNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+
         for (Lotto lotto : lottos) {
-            int winningNumberMatchCount = lotto.winningNumberMatchCount(winningNumbers);
+            int winningNumberMatchCount = lotto.winningNumberMatchCount(winningNumber);
             Rank rank = Rank.of(winningNumberMatchCount);
             if (rank.isPrize()) {
                 winningResultAccumulate(winningResult, winningNumberMatchCount);
