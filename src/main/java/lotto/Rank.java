@@ -1,9 +1,12 @@
-package lotto.common;
+package lotto;
 
 import java.util.Arrays;
 import java.util.Collections;
 
+import common.Messages;
+
 public enum Rank {
+
 	FIRST(6, 2_000_000_000),
 	SECOND(5, 30_000_000),
 	THIRD(5, 1_500_000),
@@ -19,6 +22,11 @@ public enum Rank {
 		this.winningMoney = winningMoney;
 	}
 
+	public static boolean contains(Integer test) {
+		return Arrays.stream(values())
+			.anyMatch(rank -> rank.countOfMatch == test);
+	}
+
 	public int getCountOfMatch() {
 		return countOfMatch;
 	}
@@ -29,11 +37,11 @@ public enum Rank {
 
 	public static Rank valueOf(int countOfMatch, boolean matchBonus) {
 		if (countOfMatch == 5 && matchBonus) {
-			return Rank.SECOND;
+			return SECOND;
 		}
 
 		Rank[] ranks = values();
-		return Arrays.stream(ranks)
+		return Arrays.stream(ranks).filter(rank -> rank != SECOND)
 			.filter(rank -> rank.countOfMatch == countOfMatch)
 			.findFirst().orElse(Rank.MISS);
 	}

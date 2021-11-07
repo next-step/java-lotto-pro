@@ -1,40 +1,33 @@
 package lotto;
 
-import java.util.List;
+import static common.CommonUtils.*;
 
-import lotto.common.Messages;
+import java.util.Objects;
 
 public class BonusBall {
 	private LottoNumber bonusBall;
 
 	public BonusBall(String input) {
-		this.bonusBall = new LottoNumber(parseNumber(input));
+		this.bonusBall = new LottoNumber(parseInt(input));
 	}
 
-	public BonusBall(String input, WinnerNumber winnerNumber) {
-		this.bonusBall = new LottoNumber(parseNumber(input));
-		validate(winnerNumber);
+	public boolean matched(Lotto lotto) {
+		return lotto.contains(bonusBall);
 	}
 
-	private void validate(WinnerNumber winnerNumber) {
-		if (winnerNumber.getWinnerNumber().getLottoNumbers().contains(this.bonusBall)) {
-			throw new IllegalArgumentException(Messages.INPUT_BONUS_BALL_NOT_VALID.getValues());
-		}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		BonusBall bonusBall1 = (BonusBall)o;
+		return Objects.equals(bonusBall, bonusBall1.bonusBall);
 	}
 
-	private Integer parseNumber(String input) {
-		try {
-			return Integer.parseInt(input);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(Messages.INPUT_NUMBER_FORMAT_NOT_VALID.getValues());
-		}
+	@Override
+	public int hashCode() {
+		return Objects.hash(bonusBall);
 	}
 
-	public LottoNumber getBonusBall() {
-		return bonusBall;
-	}
-
-	public boolean match(List<LottoNumber> numbers) {
-		return numbers.contains(this.bonusBall);
-	}
 }

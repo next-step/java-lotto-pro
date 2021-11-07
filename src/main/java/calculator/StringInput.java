@@ -14,15 +14,14 @@ public class StringInput {
 	private String input;
 
 	public StringInput(String input) {
-		setInput(input);
+		this.input = input;
+		validate();
 	}
 
-	private void setInput(String input) {
+	private void validate() {
 		if (isNull(input) || isEmpty(input)) {
 			this.input = "0";
-			return;
 		}
-		this.input = input;
 	}
 
 	public String[] separate() {

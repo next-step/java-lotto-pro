@@ -1,12 +1,9 @@
 package lotto;
 
-import static lotto.common.Constants.*;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
-import lotto.common.Rank;
+import investment.Investment;
 
 public class Winning {
 	private Map<Rank, Integer> winningMap;
@@ -16,23 +13,16 @@ public class Winning {
 	}
 
 	public void addWinningMap(Integer countOfMatch, boolean matchBonus) {
-		if (validateKey(countOfMatch)) {
+		if (!Rank.contains(countOfMatch)) {
 			return;
 		}
 		Rank key = Rank.valueOf(countOfMatch, matchBonus);
 		this.winningMap.put(key, this.winningMap.getOrDefault(key, 0) + 1);
 	}
 
-	private boolean validateKey(Integer key) {
-		if (2 < key && key > 7) {
-			return true;
-		}
-		return false;
-	}
-
-	public String getYield(int investment) {
+	public String getYield(Investment investment) {
 		Double total = getTotalAmount();
-		return String.format("%.2f", total / investment);
+		return String.format("%.2f", total / investment.getPriceSize());
 	}
 
 	public Integer getStrikeResult(Rank key) {
@@ -46,5 +36,4 @@ public class Winning {
 		}
 		return Double.valueOf(total);
 	}
-
 }
