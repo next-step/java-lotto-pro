@@ -12,7 +12,10 @@ import java.util.regex.Pattern;
  */
 public class NumberUtil {
 
-	private static final int THOUSAND = 1000;
+	private static final int THOUSAND = 1_000;
+
+	// Instance화를 막기 위한 private 생성자 선언
+	private NumberUtil() {}
 
 	/**
 	 * 숫자 형식의 문자열인지 확인
