@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +17,7 @@ public class LottoResult {
         Map<LottoRank, Integer> results = new HashMap<>();
         for (Lotto lotto : lottos) {
             LottoRank lottoRank = LottoRank.valueOf(winningNumber.winningCount(lotto));
-            results.put(lottoRank, results.getOrDefault(lottoRank,DEFAULT_VALUE) + ADD_COUNT);
+            results.put(lottoRank, results.getOrDefault(lottoRank, DEFAULT_VALUE) + ADD_COUNT);
         }
         this.lottoResults = results;
     }

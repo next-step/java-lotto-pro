@@ -1,7 +1,6 @@
-package lotto;
+package lotto.view;
 
 import utils.Console;
-
 
 public class InputView {
     public static final String PURCHASE_MESSAGE = "구입금액을 입력해 주세요.";
