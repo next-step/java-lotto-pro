@@ -5,6 +5,8 @@ import lotto.domain.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ConsoleView {
     private static final String ENTER_MONEY_TEXT = "구입금액을 입력해 주세요.";
@@ -31,8 +33,10 @@ public class ConsoleView {
         System.out.println(ENTER_MANUAL_LOTTO_NUMBER_TEXT);
     }
 
-    public static String enterManualLottoNumber() {
-        return scanner.nextLine();
+    public static List<String> enterManualLottoNumber(int manualCount) {
+        return IntStream.range(0, manualCount)
+                .mapToObj(i -> scanner.nextLine())
+                .collect(Collectors.toList());
     }
 
     public static void printBoughtLottoCount(BoughtLotto boughtLotto) {

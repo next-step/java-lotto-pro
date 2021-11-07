@@ -10,8 +10,6 @@ import lotto.module.NumberGeneratorStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static lotto.view.ConsoleView.*;
 
@@ -43,11 +41,7 @@ public final class LottoController {
     }
 
     private NumberGeneratorStrategy generateManualLottoNumbers(BoughtLotto boughtLotto) {
-        return new ManualGenerator(
-                IntStream.range(0, boughtLotto.getManualCount())
-                        .mapToObj(i -> enterManualLottoNumber())
-                        .collect(Collectors.toList())
-        );
+        return new ManualGenerator(enterManualLottoNumber(boughtLotto.getManualCount()));
     }
 
     private NumberGeneratorStrategy generateAutoLottoNumbers(BoughtLotto boughtLotto) {
