@@ -14,7 +14,7 @@ public class ConsoleView {
     private static final String BUY_LOTTO_TEXT = "%d개를 구매했습니다." + System.lineSeparator();
     private static final String ENTER_WINNING_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ERROR_TEXT = "[ERROR] %s";
-    private static final String WINNING_COUNT_TEXT = "%d개 일치 (%d원)- %d개";
+    private static final String WINNING_COUNT_TEXT = "%d개 일치%s(%d원)- %d개";
     private static final String REVENUE_PERCENT = "총 수익률은 %.2f입니다.";
     private static Scanner scanner = new Scanner(System.in);
 
@@ -47,9 +47,22 @@ public class ConsoleView {
         System.out.println("---------");
         Map<Rank, Integer> map = winningMap.getWinningMap();
         for (Rank rank : Rank.excludedMissList()) {
-            System.out.printf(WINNING_COUNT_TEXT, rank.getCountOfMatch(), rank.getWinningMoney(), map.getOrDefault(rank, 0));
+            System.out.printf(WINNING_COUNT_TEXT, rank.getCountOfMatch(), printSecondRank(rank), rank.getWinningMoney(), map.getOrDefault(rank, 0));
             printLine();
         }
+    }
+
+    private static String printSecondRank(Rank rank) {
+        if (rank.equals(Rank.SECOND)) {
+            return ", 보너스 볼 일치";
+        }
+
+        return "";
+    }
+
+    public static int enterBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static void printRevenue(double revenue) {

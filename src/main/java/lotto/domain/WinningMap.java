@@ -12,17 +12,28 @@ public class WinningMap {
 
     public static WinningMap winningOf(final LottoTicket lottoTicket, final Winning winning) {
         LottoNumbers winningNumbers = winning.getWinningNumbers();
+        LottoNumber bonusNumber = winning.getBonusNumber();
 
         return new WinningMap(lottoTicket.getTicket()
                 .stream()
-                .filter(lottoNumbers -> Rank.valueOf(lottoNumbers
-                        .matchReduce(winningNumbers))
-                        .isNotMiss())
+                .filter(lottoNumbers ->
+                        Rank.valueOf(lottoNumbers.matchReduce(winningNumbers),
+                                lottoNumbers.matchBonusNumber(bonusNumber))
+                                .isNotMiss())
                 .collect(Collectors.toMap(
-                        lottoNumbers -> Rank.valueOf(lottoNumbers.matchReduce(winningNumbers)),
+                        lottoNumbers ->
+                                Rank.valueOf(lottoNumbers.matchReduce(winningNumbers),
+                                        lottoNumbers.matchBonusNumber(bonusNumber)),
                         lottoNumbers -> 1,
                         (oldValue, newValue) -> oldValue + newValue)
                 ));
+    }
+
+    private int totalWinningAmount() {
+        return winningMap.keySet()
+                .stream()
+                .mapToInt(rank -> rank.calculateRevenue(winningMap.get(rank)))
+                .sum();
     }
 
     public Map<Rank, Integer> getWinningMap() {
@@ -30,9 +41,8 @@ public class WinningMap {
     }
 
     public double revenue(BoughtLotto boughtLotto) {
-        return winningMap.keySet()
-                .stream()
-                .mapToInt(rank -> rank.calculateRevenue(winningMap.get(rank)))
-                .sum() / (double) boughtLotto.getBoughtMoney();
+        return totalWinningAmount() / (double) boughtLotto.getBoughtMoney();
     }
+
+
 }

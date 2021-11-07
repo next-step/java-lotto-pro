@@ -11,11 +11,11 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(final int number) {
-        validation(number);
         this.number = number;
+        validation();
     }
 
-    private void validation(final int number) {
+    private void validation() {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new LottoNumberRangeException();
         }

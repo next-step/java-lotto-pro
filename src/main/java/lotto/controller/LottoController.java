@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.BoughtLotto;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 import lotto.domain.Winning;
 import lotto.module.AutoGenerator;
@@ -25,13 +26,21 @@ public final class LottoController {
         return LottoTicket.generate(boughtLotto.getBoughtCount(), new AutoGenerator());
     }
 
-    public Winning enterWinningLottoNumbers() {
+    public LottoNumbers enterWinningLottoNumbers() {
         try {
-            return new Winning(enterWinning());
+            return LottoNumbers.fromString(enterWinning());
         } catch (IllegalArgumentException e) {
             printError(e.getMessage());
             return enterWinningLottoNumbers();
         }
     }
 
+    public Winning enterWinningBonusNumber(LottoNumbers winningNumbers) {
+        try {
+            return Winning.of(winningNumbers, enterBonusNumber());
+        } catch (IllegalArgumentException e) {
+            printError(e.getMessage());
+            return enterWinningBonusNumber(winningNumbers);
+        }
+    }
 }
