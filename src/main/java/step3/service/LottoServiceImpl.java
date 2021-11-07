@@ -17,7 +17,10 @@ public class LottoServiceImpl implements LottoService {
     @Override
     public LottoBuyResponseDto buyLotto(LottoBuyRequestDto lottoBuyRequestDto) {
         int quantity = lottoProvider.availableQuantity(lottoBuyRequestDto.getAmount());
-        LottoNumbersBundle lottoNumbersBundle = lottoProvider.buyLotto(quantity, new RandomLottoNumbers());
+        
+        LottoNumbersBundle lottoNumbersBundle = lottoProvider.buyLotto(
+            quantity,
+            new RandomLottoNumbers());
 
         return new LottoBuyResponseDto(lottoNumbersBundle.getLottoNumbersBundle());
     }
@@ -28,7 +31,7 @@ public class LottoServiceImpl implements LottoService {
             lottoWinNumbersRequestDto.getLottoNumbers(),
             lottoWinNumbersRequestDto.getAmount()
         );
-        
+
         return new LottoStatisticsResponseDto(lottoResult);
     }
 }

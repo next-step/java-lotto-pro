@@ -24,13 +24,18 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int matchNumber, boolean matchBonus) {
-        if (matchNumber == SECOND.matchNumber && matchBonus)
+        if (isMatchSecond(matchNumber, matchBonus))
             return SECOND;
+
         return Arrays.stream(LottoRank.values())
             .filter(lottoRank -> lottoRank != SECOND)
             .filter(lottoRank -> lottoRank.matchNumber == matchNumber)
             .findFirst()
             .orElse(NONE);
+    }
+
+    private static boolean isMatchSecond(int matchNumber, boolean matchBonus) {
+        return matchNumber == SECOND.matchNumber && matchBonus;
     }
 
     public static LottoRank[] listOf() {
@@ -43,12 +48,12 @@ public enum LottoRank {
         }
     }
 
-    public Long totalPrize() {
-        return matchCount * prize;
-    }
-
     private boolean hasMatchNumber(int matchNumber) {
         return this.matchNumber == matchNumber;
+    }
+
+    public Long totalPrize() {
+        return matchCount * prize;
     }
 
     private static LottoRank[] getSortedValues() {

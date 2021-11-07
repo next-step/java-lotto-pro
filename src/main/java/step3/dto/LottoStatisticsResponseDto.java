@@ -18,8 +18,14 @@ public class LottoStatisticsResponseDto {
     public List<LottoResultDto> getLottoResultDtos() {
         List<LottoResultDto> lottoResultDtos = new ArrayList<>();
         LottoRanks lottoRanks = lottoResult.getLottoRanks();
+
         for (LottoRank lottoRank : lottoRanks.getLottoRanks()) {
-            lottoResultDtos.add(new LottoResultDto(lottoRank.matchNumber, lottoRank.matchCount, lottoRank.prize));
+            LottoResultDto lottoResultDto = new LottoResultDto(
+                lottoRank.matchNumber,
+                lottoRank.matchCount,
+                lottoRank.prize);
+            
+            lottoResultDtos.add(lottoResultDto);
         }
 
         return lottoResultDtos;

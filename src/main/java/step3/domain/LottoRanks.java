@@ -11,9 +11,11 @@ public class LottoRanks {
 
     public Long totalPrize() {
         long totalPrize = 0L;
+
         for (LottoRank lottoRank : lottoRanks) {
             totalPrize += lottoRank.totalPrize();
         }
+        
         return totalPrize;
     }
 

@@ -19,37 +19,44 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(int[] numbers) {
-        map(numbers);
-    }
-
-    private void map(int[] numbers) {
         this.lottoNumbers = mapOf(numbers);
         validSize();
     }
 
     private Set<LottoNumber> mapOf(int[] numbers) {
         Set<LottoNumber> result = new HashSet<>();
+
         for (int number : numbers) {
             result.add(new LottoNumber(number));
         }
+
         return result;
     }
 
     public String toString() {
         List<Integer> result = new ArrayList<>();
+
         for (LottoNumber lottoNumber : lottoNumbers) {
             result.add(lottoNumber.value());
         }
+
         Collections.sort(result);
+
         return Collections.unmodifiableList(result).toString();
     }
 
     public int containCount(LottoNumbers winLottoNumbers) {
         int count = 0;
+
         for (LottoNumber winLottoNumber : winLottoNumbers.lottoNumbers) {
-            if (lottoNumbers.contains(winLottoNumber)) {
-                count++;
-            }
+            count = containCheckAndIncrementCount(count, winLottoNumber);
+        }
+        return count;
+    }
+
+    private int containCheckAndIncrementCount(int count, LottoNumber winLottoNumber) {
+        if (lottoNumbers.contains(winLottoNumber)) {
+            count++;
         }
         return count;
     }

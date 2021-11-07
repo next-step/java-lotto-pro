@@ -46,6 +46,7 @@ public class ResultView {
         for (String numbers : lottoBuyResponseDto.getBuyLottoList()) {
             println(numbers);
         }
+
         buyCutPrintln(lottoBuyResponseDto.getBuyLottoList().size());
     }
 
@@ -76,7 +77,6 @@ public class ResultView {
                 lottoResultDto.getMatchCount()
             ));
         }
-
     }
 
     private static void yieldPrint(LottoStatisticsResponseDto lottoStatisticsResponseDto) {
@@ -84,15 +84,19 @@ public class ResultView {
             YIELD_MESSAGE_FORMAT,
             lottoStatisticsResponseDto.getYield()
         );
+
         result += lossPrintln(lottoStatisticsResponseDto.getYield());
+
         println(result);
     }
 
     private static String lossPrintln(BigDecimal yield) {
         int compareResult = yield.compareTo(LOSS);
+
         if (compareResult < 0) {
             return LOTTO_LOSS_MESSAGE;
         }
+
         return "";
     }
 }

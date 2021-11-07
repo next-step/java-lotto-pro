@@ -21,9 +21,13 @@ public class LottoNumber {
     }
 
     private void validRange(int number) {
-        if (number < LottoConstant.MIN_NUMBER_RANGE || number > LottoConstant.MAX_NUMBER_RANGE) {
+        if (isArrowedRange(number)) {
             throw new InvalidParamException(LottoConstant.LOTTO_RANGE_OVER_EXCEPTION);
         }
+    }
+
+    private boolean isArrowedRange(int number) {
+        return number < LottoConstant.MIN_NUMBER_RANGE || number > LottoConstant.MAX_NUMBER_RANGE;
     }
 
     @Override

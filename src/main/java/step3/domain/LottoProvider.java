@@ -1,10 +1,7 @@
 package step3.domain;
 
-import java.util.List;
-
 import step3.domain.constance.LottoConstant;
 import step3.domain.strategy.numbers.NumbersStrategy;
-import step3.domain.strategy.numbers.RandomLottoNumbers;
 
 public class LottoProvider {
     private final LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
@@ -13,6 +10,7 @@ public class LottoProvider {
         for (int i = 0; i < count; i++) {
             lottoNumbersBundle.addLottoNumbers(numbersStrategy);
         }
+        
         return lottoNumbersBundle;
     }
 

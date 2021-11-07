@@ -11,6 +11,7 @@ public class Amount {
 
     public Amount(int amount) {
         valid(amount);
+
         this.amount = amount;
     }
 
@@ -19,9 +20,13 @@ public class Amount {
     }
 
     private void valid(int amount) {
-        if (amount < LottoConstant.LOTTO_MINIMUM_PRICE) {
+        if (isBelowAmount(amount)) {
             throw new InvalidParamException(NOT_ENOUGH_MESSAGE);
         }
+    }
+
+    private boolean isBelowAmount(int amount) {
+        return amount < LottoConstant.LOTTO_MINIMUM_PRICE;
     }
 
 }

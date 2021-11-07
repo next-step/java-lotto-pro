@@ -33,16 +33,17 @@ public class InputView {
             ResultView.amountRequestPrintln();
             LottoBuyRequestDto lottoRequestDto = new LottoBuyRequestDto();
             lottoRequestDto.mapAmount(readOnlyNumber());
+
             return lottoRequestDto;
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
             return readLottoRequestDto();
         }
-
     }
 
     public static LottoWinNumbersRequestDto readLottoWinnerRequestDto(int amount) {
         ResultView.winnerRequestPrintln();
+        
         try {
             return new LottoWinNumbersRequestDto(readLineToArray(), amount);
         } catch (InvalidParamException invalidParamException) {

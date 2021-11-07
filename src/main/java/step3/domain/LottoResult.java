@@ -10,8 +10,11 @@ public class LottoResult {
 
     public LottoResult(LottoRanks lottoRanks, Amount amount) {
         this.lottoRanks = lottoRanks;
+        this.yield = calculateYield(lottoRanks, amount);
+    }
 
-        this.yield = BigDecimal.valueOf(lottoRanks.totalPrize())
+    private BigDecimal calculateYield(LottoRanks lottoRanks, Amount amount) {
+        return BigDecimal.valueOf(lottoRanks.totalPrize())
             .divide(BigDecimal.valueOf(amount.getAmount()))
             .setScale(2, RoundingMode.CEILING);
     }
