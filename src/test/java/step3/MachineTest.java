@@ -14,7 +14,8 @@ public class MachineTest {
 	@ParameterizedTest
 	@CsvSource(value = {"1000:1","2000:2","1500:1","3200:3"}, delimiter = ':')
 	void 금액당_로또_구매_갯수_확인(int money, int result) {
-		Machine machine = new AutoLottoMachine(new Money(money), new AutoMachineValidation());
+		Machine machine = new AutoLottoMachine(new AutoMachineValidation());
+		machine.insertMoney(new Money(money));
 		LottoPapers lottoPapers = machine.createLottoPapers();
 		assertThat(lottoPapers.papers.size()).isEqualTo(result);
 	}
