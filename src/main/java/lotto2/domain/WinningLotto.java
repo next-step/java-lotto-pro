@@ -21,6 +21,15 @@ public class WinningLotto {
 		}
 	}
 
+	public Rank getMatchRank(LottoTicket lottoTicket) {
+		int matchCnt = 0;
+		boolean isMatchBonus = lottoTicket.contains(this.bonusNumber);
+		for (LottoNumber lottoNumber : this.lottoNumbers) {
+			matchCnt += (lottoTicket.contains(lottoNumber)) ? 1 : 0;
+		}
+		return Rank.valueOf(PositiveNumber.of(matchCnt), isMatchBonus);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -41,4 +50,5 @@ public class WinningLotto {
 		result = 31 * result + bonusNumber.hashCode();
 		return result;
 	}
+
 }

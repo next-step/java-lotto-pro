@@ -2,9 +2,10 @@ package lotto2.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
-public class LottoTickets {
+public class LottoTickets implements Iterable<LottoTicket> {
 
 	private final List<LottoTicket> tickets;
 
@@ -44,5 +45,10 @@ public class LottoTickets {
 
 	public void add(LottoTicket ticket) {
 		this.tickets.add(ticket);
+	}
+
+	@Override
+	public Iterator<LottoTicket> iterator() {
+		return tickets.iterator();
 	}
 }
