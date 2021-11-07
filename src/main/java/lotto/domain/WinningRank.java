@@ -44,7 +44,7 @@ public enum WinningRank {
     }
     
     private boolean judgeRank(int count, boolean isMatchBonus) {
-        if (this.reward == SECOND_RANK.reward) {
+        if (this.matchCount == SECOND_RANK.matchCount && this.reward == SECOND_RANK.reward) {
             return this.matchCount == count && isMatchBonus;
         }
         return this.matchCount == count;
