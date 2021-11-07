@@ -31,7 +31,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     static {
-        IntStream.range(MIN_NUMBER, MAX_NUMBER).forEach(i ->
+        IntStream.range(MIN_NUMBER, MAX_NUMBER + 1).forEach(i ->
             lottoNumberMap.put(i, new LottoNumber(i))
         );
     }
