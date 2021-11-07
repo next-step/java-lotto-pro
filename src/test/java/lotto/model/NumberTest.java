@@ -1,12 +1,14 @@
-package lotto.model.dto;
+package lotto.model;
 
-import static lotto.model.dto.Number.*;
+import static lotto.model.Number.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import lotto.model.Number;
 
 public class NumberTest {
     @ParameterizedTest
@@ -15,7 +17,7 @@ public class NumberTest {
     void 객체_생성_시_유효성_검사(int input) {
         assertThatIllegalArgumentException().isThrownBy(() ->
             Number.ofValue(input)
-        ).withMessage(NUMBER_RANGE_ERR_MSG);
+        ).withMessageContaining(NUMBER_RANGE_ERR_MSG);
     }
 
     @Test

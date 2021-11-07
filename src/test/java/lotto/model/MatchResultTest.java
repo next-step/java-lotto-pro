@@ -1,13 +1,11 @@
-package lotto.model.dto;
+package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import lotto.model.dto.MatchResult;
-import lotto.model.dto.Payment;
-import lotto.model.dto.enums.MatchCount;
+import lotto.model.enums.MatchCount;
 
 public class MatchResultTest {
     private static final int PAYMENT = 14000;
@@ -25,6 +23,6 @@ public class MatchResultTest {
 
     @Test
     void getRateOfReturn() {
-        assertThat(matchResult.getRateOfReturn()).isEqualTo(((double)MatchCount.THREE.getPrizeMoney()) / PAYMENT);
+        assertThat(matchResult.getRateOfReturn()).isEqualTo(((double)MatchCount.THREE.getWinningMoney()) / PAYMENT);
     }
 }

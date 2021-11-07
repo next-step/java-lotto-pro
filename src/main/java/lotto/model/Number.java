@@ -1,9 +1,11 @@
-package lotto.model.dto;
+package lotto.model;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import lotto.exception.BadRequestException;
 
 public class Number implements Comparable<Number> {
     public static final int MIN_NUMBER = 1;
@@ -33,7 +35,7 @@ public class Number implements Comparable<Number> {
 
     private static void validate(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new IllegalArgumentException(NUMBER_RANGE_ERR_MSG);
+            throw new BadRequestException(NUMBER_RANGE_ERR_MSG);
         }
     }
 

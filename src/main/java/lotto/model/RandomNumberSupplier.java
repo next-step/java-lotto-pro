@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import lotto.model.dto.Number;
+import lotto.exception.BadRequestException;
 
 public class RandomNumberSupplier implements NumberSupplier {
     private static final int MIN_SIZE = 1;
@@ -28,13 +28,13 @@ public class RandomNumberSupplier implements NumberSupplier {
 
     private void validate() {
         if (size < MIN_SIZE) {
-            throw new IllegalArgumentException(SIZE_ERR_MSG);
+            throw new BadRequestException(SIZE_ERR_MSG);
         }
         if (startInclusive > endInclusive) {
-            throw new IllegalArgumentException(NUMBER_RANGE_ERR_MSG);
+            throw new BadRequestException(NUMBER_RANGE_ERR_MSG);
         }
         if (endInclusive - startInclusive + MIN_SIZE < size) {
-            throw new IllegalArgumentException(INVALID_ARGUMENTS_ERR_MSG);
+            throw new BadRequestException(INVALID_ARGUMENTS_ERR_MSG);
         }
     }
 

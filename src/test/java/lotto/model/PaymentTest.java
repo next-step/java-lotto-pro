@@ -1,12 +1,14 @@
-package lotto.model.dto;
+package lotto.model;
 
-import static lotto.model.dto.Payment.*;
+import static lotto.model.Payment.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import lotto.model.Payment;
 
 public class PaymentTest {
     private static final int PAYMENT = 14000;

@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.model.dto.enums.MatchCount;
+import lotto.model.enums.MatchCount;
 
 public class LottoNumbersTest {
     @ParameterizedTest
@@ -19,7 +19,7 @@ public class LottoNumbersTest {
     void 객체_생성_시_유효성_검사(int[] numbers) {
         assertThatIllegalArgumentException().isThrownBy(() ->
             new LottoNumbers(numbers)
-        ).withMessage(NUMBER_SIZE_ERR_MSG);
+        ).withMessageContaining(NUMBER_SIZE_ERR_MSG);
     }
 
     @ParameterizedTest
@@ -27,7 +27,7 @@ public class LottoNumbersTest {
     void getMatchCount(int[] numbers, int expectedMatchCount) {
         LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-        assertThat(winningNumbers.getMatchCount(lottoNumbers)).isEqualTo(MatchCount.ofValue(expectedMatchCount));
+        assertThat(winningNumbers.getMatchCount(lottoNumbers)).isEqualTo(MatchCount.valueOf(expectedMatchCount));
     }
 
     private static Stream<int[]> provideIllegalNumbers() {

@@ -1,28 +1,23 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import lotto.model.dto.MatchResult;
-import lotto.model.dto.Payment;
-import lotto.model.dto.enums.MatchCount;
+import lotto.model.enums.MatchCount;
 
 public class LottoMatcher {
-    private final Payment payment;
     private final LottoNumbers winningNumbers;
 
-    public LottoMatcher(int payment, String[] winningNumbers) {
-        this(payment, Arrays.stream(winningNumbers).mapToInt(Integer::parseInt).toArray());
+    public LottoMatcher(int... winningNumbers) {
+        this(new LottoNumbers(winningNumbers));
     }
 
-    public LottoMatcher(int payment, int... winningNumbers) {
-        this.payment = new Payment(payment);
-        this.winningNumbers = new LottoNumbers(winningNumbers);
+    public LottoMatcher(LottoNumbers winningNumbers) {
+        this.winningNumbers = winningNumbers;
     }
 
-    public MatchResult getMatchResult(Collection<LottoNumbers> lottoNumbersCollection) {
+    public MatchResult getMatchResult(Payment payment, Collection<LottoNumbers> lottoNumbersCollection) {
         List<MatchCount> matchCounts = new ArrayList<>();
 
         for (LottoNumbers lottoNumbers : lottoNumbersCollection) {

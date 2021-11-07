@@ -1,6 +1,8 @@
-package lotto.model.dto;
+package lotto.model;
 
 import java.util.Objects;
+
+import lotto.exception.BadRequestException;
 
 public class Payment {
     public static final int LOTTO_PRICE = 1000;
@@ -16,10 +18,10 @@ public class Payment {
 
     private void validate() {
         if (payment < LOTTO_PRICE) {
-            throw new IllegalArgumentException(MIN_MONEY_ERR_MSG);
+            throw new BadRequestException(MIN_MONEY_ERR_MSG);
         }
         if (payment % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(MONEY_MULTIPLE_ERR_MSG);
+            throw new BadRequestException(MONEY_MULTIPLE_ERR_MSG);
         }
     }
 

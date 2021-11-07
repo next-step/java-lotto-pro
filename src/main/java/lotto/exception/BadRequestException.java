@@ -1,6 +1,6 @@
-package lotto.controller.exception;
+package lotto.exception;
 
-public class BadRequestException extends RuntimeException {
+public class BadRequestException extends IllegalArgumentException {
     private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
 
     public BadRequestException(final String message) {

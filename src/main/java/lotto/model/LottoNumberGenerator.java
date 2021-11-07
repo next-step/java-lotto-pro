@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import lotto.model.RandomNumberSupplier.RandomNumberSupplierBuilder;
-import lotto.model.dto.Number;
-import lotto.model.dto.Payment;
 
 public class LottoNumberGenerator {
     static final String INPUT_MONEY_ERR_MSG = "구입 금액으로 숫자만 입력해야 합니다.";
@@ -15,8 +13,8 @@ public class LottoNumberGenerator {
 
     private final Payment payment;
 
-    public LottoNumberGenerator(int payment) {
-        this.payment = new Payment(payment);
+    public LottoNumberGenerator(Payment payment) {
+        this.payment = payment;
     }
 
     public Collection<LottoNumbers> getLottoNumbersCollection() {

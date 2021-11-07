@@ -1,4 +1,4 @@
-package lotto.model.dto;
+package lotto.model;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import lotto.model.dto.enums.MatchCount;
+import lotto.model.enums.MatchCount;
 
 public class MatchResult {
     private final Map<MatchCount, Integer> matchCountToCount = new HashMap<>();
@@ -22,7 +22,7 @@ public class MatchResult {
         int prizeMoney = 0;
         for (MatchCount matchCount : matchCounts) {
             matchCountToCount.merge(matchCount, 1, Integer::sum);
-            prizeMoney += matchCount.getPrizeMoney();
+            prizeMoney += matchCount.getWinningMoney();
         }
         rateOfReturn = payment.getRateOfReturn(prizeMoney);
     }

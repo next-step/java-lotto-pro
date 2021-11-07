@@ -7,12 +7,12 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import lotto.model.dto.Number;
-import lotto.model.dto.enums.MatchCount;
+import lotto.exception.BadRequestException;
+import lotto.model.enums.MatchCount;
 
 public class LottoNumbers {
     static final int NUMBER_SIZE = 6;
-    static final String NUMBER_SIZE_ERR_MSG = "로또 숫자는 " + NUMBER_SIZE + "개로 구성되어야 합니다.";
+    static final String NUMBER_SIZE_ERR_MSG = "로또 숫자는 서로 다른 " + NUMBER_SIZE + "개로 구성되어야 합니다.";
 
     private final SortedSet<Number> numbers;
 
@@ -27,7 +27,7 @@ public class LottoNumbers {
 
     private void validate() {
         if (numbers.size() != NUMBER_SIZE) {
-            throw new IllegalArgumentException(NUMBER_SIZE_ERR_MSG);
+            throw new BadRequestException(NUMBER_SIZE_ERR_MSG);
         }
     }
 
@@ -40,7 +40,7 @@ public class LottoNumbers {
         for (Number number : numbers) {
             matchCount += getMatchCount(number);
         }
-        return MatchCount.ofValue(matchCount);
+        return MatchCount.valueOf(matchCount);
     }
 
     private int getMatchCount(Number other) {
