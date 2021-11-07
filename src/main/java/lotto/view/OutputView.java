@@ -9,6 +9,7 @@ import java.util.Map;
 public class OutputView {
 
     private static final DecimalFormat AMOUNT_FORMATTER = new DecimalFormat("###,###");
+
     private OutputView() {
 
     }
@@ -41,10 +42,21 @@ public class OutputView {
             int lottoResultCount = calculateLottoResultCount(result, findRank);
             int winMoney = findRank.winMoney();
             totalPrizeMoney += winMoney * lottoResultCount;
-            System.out.println(findRank.count() + "개 일치 (" + AMOUNT_FORMATTER.format(winMoney) + "원)- " + lottoResultCount + "개");
+            System.out.println(printLottoRankResult(findRank, lottoResultCount, winMoney));
         }
         float earningRate = calculateEarnningRate(totalPrizeMoney, purchaseAmount);
         System.out.printf("총 수익률은 %.2f 입니다.", earningRate);
+    }
+
+    private static String printLottoRankResult(Rank findRank, int lottoResultCount, int winMoney) {
+        if (isSecondRank(findRank)) {
+            return (findRank.count() + "개 일치 ,보너스볼 일치 (" + AMOUNT_FORMATTER.format(winMoney) + "원)- " + lottoResultCount + "개");
+        }
+        return (findRank.count() + "개 일치 (" + AMOUNT_FORMATTER.format(winMoney) + "원)- " + lottoResultCount + "개");
+    }
+
+    private static boolean isSecondRank(Rank findRank) {
+        return Rank.SECOND == findRank;
     }
 
     private static float calculateEarnningRate(int totalPrizeMoney, int purchaseAmount) {

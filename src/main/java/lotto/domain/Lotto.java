@@ -28,15 +28,13 @@ public class Lotto {
 
     public int match(Lotto compareLotto) {
         return (int) this.balls().stream()
-                .filter(ball -> compareLotto.isContain(ball))
+                .filter(ball -> compareLotto.contains(ball))
                 .count();
     }
 
-    private boolean isContain(Ball ball) {
-        return this.balls.stream()
-                .anyMatch(compareNumber -> ball.number() == compareNumber.number());
+    public boolean contains(Ball ball) {
+        return this.balls().contains(ball);
     }
-
 
     private void checkValidLotto(List<Ball> balls) {
         checkDuplicationBall(balls);

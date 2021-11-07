@@ -18,9 +18,10 @@ public class LottoMain {
 
         Lottos lottos = lottoService.createLotto(countOfLotto);
         OutputView.printLotto(lottos.toString());
-        List<Integer> winningLottoNumber = InputView.printInputWinningLotto();
 
-        lottoService.makeWinningLotto(winningLottoNumber);
+        List<Integer> winningLottoNumbers = InputView.printInputWinningLotto();
+        int bonusBallNumber = InputView.printInputBonusNumber();
+        lottoService.makeWinningLotto(winningLottoNumbers, bonusBallNumber);
 
         Map<Rank, Integer> lottoResult = lottoService.result(lottos);
         OutputView.printResult(lottoResult, purchaseMoney);
