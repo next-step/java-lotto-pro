@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class LottoNumbers {
 	public static final int LOTTO_NUMBER_MAX = 6;
-	private Set<LottoNumber> lottoNumbers = new HashSet<>();
+	private Set<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(Set<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
