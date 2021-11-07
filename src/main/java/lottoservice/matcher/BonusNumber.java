@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.lottonumber.LottoNumber;
+import lottoservice.lottoticket.LottoTicket;
 
 public class BonusNumber {
 
@@ -49,5 +50,9 @@ public class BonusNumber {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumber);
+	}
+
+	public boolean matchTicket(LottoTicket lottoTicket) {
+		return lottoTicket.hasLottoNumber(getLottoNumber());
 	}
 }

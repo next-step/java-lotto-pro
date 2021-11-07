@@ -46,4 +46,13 @@ class BonusNumberTest {
 			BonusNumber bonusNumber = new BonusNumber(numberText);
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1,true","10,true","45,false"})
+	public void 보너스번호_매칭(int number, boolean matchBonus){
+		List<LottoNumber> lottoNumbers = Arrays.asList(1,5,10,25,30,6).stream().map(it -> LottoNumber.valueOf(it)).collect(Collectors.toList());
+		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		BonusNumber bonusNumber = new BonusNumber(number);
+		assertThat(bonusNumber.matchTicket(lottoTicket)).isEqualTo(matchBonus);
+	}
 }
