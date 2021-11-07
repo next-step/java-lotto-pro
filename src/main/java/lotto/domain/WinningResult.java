@@ -8,13 +8,17 @@ public class WinningResult {
         this.winningRank = winningRank;
         this.count = count;
     }
-    
+
     public int getCount() {
         return this.count;
     }
-    
+
     public WinningRank getWinningRank() {
         return this.winningRank;
+    }
+
+    public int getTotalReward() {
+        return count * winningRank.getReward();
     }
 
 }

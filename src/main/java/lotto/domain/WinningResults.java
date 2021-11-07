@@ -25,7 +25,7 @@ public class WinningResults {
     
     public double calculateRewardPercent(Money money) {
         int totalReward = winningResult.stream()
-                .mapToInt(wr -> wr.getCount() * wr.getWinningRank().getReward())
+                .mapToInt(wr -> wr.getTotalReward())
                 .sum();
         return totalReward / (double) money.getMoney();
     }
