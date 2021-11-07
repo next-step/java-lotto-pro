@@ -29,9 +29,9 @@ public class LottoResult {
 		return containsMap;
 	}
 
-	public RankCode getRankCodeUsingContainsCount(WinningLottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
+	public LottoRank getRankCodeUsingContainsCount(WinningLottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
 		int contains = containsWinningLottoNumbers(winningLottoNumbers, lottoNumbers);
-		return RankCode.getRankCode(contains);
+		return LottoRank.getRankCode(contains);
 	}
 
 	public int containsWinningLottoNumbers(WinningLottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
@@ -44,27 +44,27 @@ public class LottoResult {
 		return containsCount;
 	}
 
-	public Map<RankCode, Integer> getRankCodeMapUsingContainsMap() {
-		Map<RankCode, Integer> rankMap = RankCode.generateRankCodeMap();
+	public Map<LottoRank, Integer> getRankCodeMapUsingContainsMap() {
+		Map<LottoRank, Integer> rankMap = LottoRank.generateRankCodeMap();
 
 		for (Map.Entry<Integer, Integer> containsEntry : containsWinningLottoGenerator().entrySet()) {
-			RankCode key = getRankCodeUsingContainsCount(containsEntry.getKey());
+			LottoRank key = getRankCodeUsingContainsCount(containsEntry.getKey());
 			rankMap.put(key, rankMap.get(key) + containsEntry.getValue());
 		}
 
 		return rankMap;
 	}
 
-	public RankCode getRankCodeUsingContainsCount(int contains) {
-		return RankCode.getRankCode(contains);
+	public LottoRank getRankCodeUsingContainsCount(int contains) {
+		return LottoRank.getRankCode(contains);
 	}
 
 	public double calculateYield() {
 		double sum = DEFAULT_VALUE;
-		Map<RankCode, Integer> rankMap = getRankCodeMapUsingContainsMap();
+		Map<LottoRank, Integer> rankMap = getRankCodeMapUsingContainsMap();
 
-		for (Map.Entry<RankCode, Integer> rankCodeEntry : rankMap.entrySet()) {
-			sum += RankCode.getRankMoney(rankCodeEntry.getKey(), rankCodeEntry.getValue());
+		for (Map.Entry<LottoRank, Integer> rankCodeEntry : rankMap.entrySet()) {
+			sum += LottoRank.getRankMoney(rankCodeEntry.getKey(), rankCodeEntry.getValue());
 		}
 
 		return (Math.round((sum / lottos.getInputMoney() * LottoResult.MATH_ROUND_VALUE))

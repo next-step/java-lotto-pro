@@ -7,9 +7,9 @@ import java.util.Map;
 
 import lotto.exception.LottoException;
 import lotto.model.LottoNumbers;
+import lotto.model.LottoRank;
 import lotto.model.LottoResult;
 import lotto.model.Lottos;
-import lotto.model.RankCode;
 
 public class OutputView {
 	private final static String STARTING_BRACKET = "[";
@@ -50,7 +50,7 @@ public class OutputView {
 
 	public static List<String> convertRankMapToStringList(LottoResult lottoResult) {
 		List<String> rankStringList = new ArrayList<>();
-		for (Map.Entry<RankCode, Integer> rankEntry : lottoResult.getRankCodeMapUsingContainsMap().entrySet()) {
+		for (Map.Entry<LottoRank, Integer> rankEntry : lottoResult.getRankCodeMapUsingContainsMap().entrySet()) {
 			validNothing(rankStringList, rankEntry);
 		}
 		Collections.sort(rankStringList);
@@ -71,20 +71,20 @@ public class OutputView {
 		return stringBuilder.toString();
 	}
 
-	public static void validNothing(List<String> rankStringList, Map.Entry<RankCode, Integer> rankEntry) {
-		if (rankEntry.getKey() != RankCode.NOTHING) {
+	public static void validNothing(List<String> rankStringList, Map.Entry<LottoRank, Integer> rankEntry) {
+		if (rankEntry.getKey() != LottoRank.NOTHING) {
 			rankStringList.add(stringBuilderAppend(rankEntry));
 		}
 	}
 
-	public static String stringBuilderAppend(Map.Entry<RankCode, Integer> rankEntry) {
-		RankCode rankCode = rankEntry.getKey();
+	public static String stringBuilderAppend(Map.Entry<LottoRank, Integer> rankEntry) {
+		LottoRank lottoRank = rankEntry.getKey();
 		StringBuilder stringBuilder = new StringBuilder();
 		return stringBuilder
-			.append(RankCode.containsCount(rankCode))
+			.append(LottoRank.containsCount(lottoRank))
 			.append("개 일치 ")
 			.append("(")
-			.append(RankCode.getMoney(rankCode))
+			.append(LottoRank.getMoney(lottoRank))
 			.append("원)- ")
 			.append(rankEntry.getValue())
 			.append("개").toString();

@@ -19,7 +19,7 @@ class RankCodeTest {
 	}, delimiter = ':')
 	void 일치갯수에따라_RankCode를_반환하는_기능테스트(int containCount, String rankCodeName) {
 		// given // when // then
-		assertThat(RankCode.getRankCode(containCount)).isEqualTo(RankCode.valueOf(rankCodeName));
+		assertThat(LottoRank.getRankCode(containCount)).isEqualTo(LottoRank.valueOf(rankCodeName));
 	}
 
 	@ParameterizedTest
@@ -32,7 +32,7 @@ class RankCodeTest {
 	}, delimiter = ':')
 	void 랭크갯수에따라_당첨금액을_반환하는_기능테스트(String rank, int count, int sumMoney) {
 		// given // when
-		int sum = RankCode.getRankMoney(RankCode.valueOf(rank), count);
+		int sum = LottoRank.getRankMoney(LottoRank.valueOf(rank), count);
 
 		// then
 		assertThat(sum).isEqualTo(sumMoney);

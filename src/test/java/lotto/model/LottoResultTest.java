@@ -63,10 +63,10 @@ class LottoResultTest {
 		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottos);
 
 		// when
-		RankCode rankCode = lottoResult.getRankCodeUsingContainsCount(winningLottoNumbers, lottoNumbers);
+		LottoRank lottoRank = lottoResult.getRankCodeUsingContainsCount(winningLottoNumbers, lottoNumbers);
 
 		// then
-		assertThat(rankCode).isEqualTo(RankCode.getRankCode(resultCount));
+		assertThat(lottoRank).isEqualTo(LottoRank.getRankCode(resultCount));
 	}
 
 	@ParameterizedTest(name = "index {index} ==> winningNumber {0} , lottoNumber {1}, mapSize {2}")
@@ -82,7 +82,7 @@ class LottoResultTest {
 		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottos);
 
 		// when
-		Map<RankCode, Integer> rankMap = lottoResult.getRankCodeMapUsingContainsMap();
+		Map<LottoRank, Integer> rankMap = lottoResult.getRankCodeMapUsingContainsMap();
 
 		// then
 		assertThat(rankMap
