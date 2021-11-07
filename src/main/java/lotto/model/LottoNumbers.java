@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbers {
@@ -12,6 +13,14 @@ public class LottoNumbers {
         this.data = data;
     }
 
+    public static LottoNumbers of(List<Integer> numbers) {
+        final List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (Integer number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+        return new LottoNumbers(lottoNumbers);
+    }
+
     private void validate(List<LottoNumber> data) {
         if (data == null || data.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException();
@@ -21,5 +30,17 @@ public class LottoNumbers {
     @Override
     public String toString() {
         return data.toString();
+    }
+
+    public int findNumberOfMatch(LottoNumbers winNumbers) {
+        int result = 0;
+        for (LottoNumber winNumber : winNumbers.data) {
+            result += countIfMatch(winNumber);
+        }
+        return result;
+    }
+
+    private int countIfMatch(LottoNumber lottoNumber) {
+        return this.data.contains(lottoNumber) ? 1 : 0;
     }
 }
