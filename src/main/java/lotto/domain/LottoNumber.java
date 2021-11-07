@@ -6,13 +6,11 @@ import java.util.Objects;
 
 public class LottoNumber {
 	public static final String OUT_OF_RANGE_ERROR = "로또 번호의 범위는 1이상 45이하 입니다.";
-	private static final int NUMBER_RANGE_MIN = 1;
-	private static final int NUMBER_RANGE_MAX = 45;
 
 	private static final Map<Integer, LottoNumber> numbers =new HashMap<>();
 
 	static {
-		for (int i = NUMBER_RANGE_MIN; i <= NUMBER_RANGE_MAX; i++) {
+		for (int i = Common.NUMBER_RANGE_MIN; i <= Common.NUMBER_RANGE_MAX; i++) {
 			numbers.put(i, new LottoNumber(i));
 		}
 	}
@@ -34,7 +32,7 @@ public class LottoNumber {
 	}
 
 	private static void validateNumberRange(final int number) {
-		if (number < NUMBER_RANGE_MIN || number > NUMBER_RANGE_MAX) {
+		if (number < Common.NUMBER_RANGE_MIN || number > Common.NUMBER_RANGE_MAX) {
 			throw new IllegalArgumentException(OUT_OF_RANGE_ERROR);
 		}
 	}

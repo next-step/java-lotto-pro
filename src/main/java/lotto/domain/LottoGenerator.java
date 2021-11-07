@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
-	private static final int NUMBER_RANGE_MIN = 1;
-	private static final int NUMBER_RANGE_MAX = 45;
 
 	private static final List<Integer> LOTTO_NUMBERS = new ArrayList<>();
 
@@ -14,7 +12,7 @@ public class LottoGenerator {
 	}
 
 	static {
-		for (int i = NUMBER_RANGE_MIN; i <= NUMBER_RANGE_MAX; i++) {
+		for (int i = Common.NUMBER_RANGE_MIN; i <= Common.NUMBER_RANGE_MAX; i++) {
 			LOTTO_NUMBERS.add(i);
 		}
 	}
