@@ -2,8 +2,8 @@ package lotto2.domain;
 
 public class LottoNumber {
 
-	private static final int LOTTO_NUMBER_MIN = 1;
-	private static final int LOTTO_NUMBER_MAX = 45;
+	public static final int LOTTO_NUMBER_MINIMUM = 1;
+	public static final int LOTTO_NUMBER_MAXIMUM = 45;
 	private int number;
 
 	private LottoNumber(int number) {
@@ -11,8 +11,9 @@ public class LottoNumber {
 	}
 
 	public static void validate(int number) {
-		if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
-			throw new IllegalArgumentException("로또번호는 1~45번호이여야 합니다");
+		if (number < LOTTO_NUMBER_MINIMUM || number > LOTTO_NUMBER_MAXIMUM) {
+			throw new IllegalArgumentException(
+				ErrorMessage.LOTTO_NUMBER_OUT_OF_RANGE.value());
 		}
 	}
 

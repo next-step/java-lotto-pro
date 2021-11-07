@@ -2,7 +2,7 @@ package lotto2.domain;
 
 public class PositiveNumber {
 
-	private int number;
+	private final int number;
 
 	private PositiveNumber(int number) {
 		this.number = number;
@@ -18,6 +18,10 @@ public class PositiveNumber {
 			throw new IllegalArgumentException(
 				ErrorMessage.ONLY_POSITIVE_NUMBER.value());
 		}
+	}
+	
+	public int toInt() {
+		return this.number;
 	}
 
 	@Override
