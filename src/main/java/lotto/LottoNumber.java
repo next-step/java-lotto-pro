@@ -1,14 +1,13 @@
 package lotto;
 
 import lotto.exception.ExceedNumberBoundException;
+import lotto.ui.LottoMessage;
 
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_BOUND = 1;
     public static final int MAX_BOUND = 45;
-    private static final String WRONG_NUMBER_FORMAT_MESSAGE = "입력된 숫자를 확인해 주세요.";
-    private static final String WRONG_NUMBER_BOUND_MESSAGE = "입력된 숫자의 범위를 확인해 주세요.";
 
     private final int number;
 
@@ -34,13 +33,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
         try {
             return Integer.parseInt(lottoNumber);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(WRONG_NUMBER_FORMAT_MESSAGE);
+            throw new NumberFormatException(LottoMessage.WRONG_NUMBER_FORMAT_MESSAGE);
         }
     }
 
     private void validateNumberBound(int integerNumber) {
         if (integerNumber < MIN_BOUND || integerNumber > MAX_BOUND) {
-            throw new ExceedNumberBoundException(WRONG_NUMBER_BOUND_MESSAGE);
+            throw new ExceedNumberBoundException(LottoMessage.WRONG_NUMBER_BOUND_MESSAGE);
         }
     }
 

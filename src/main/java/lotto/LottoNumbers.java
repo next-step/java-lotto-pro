@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.exception.WrongLottoNumberSizeException;
+import lotto.ui.LottoMessage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +11,6 @@ import java.util.Objects;
 import java.util.Set;
 
 public class LottoNumbers {
-    private static final String WRONG_LOTTO_NUMBER_SIZE_MESSAGE = "입력하신 로또의 개수를 확인 해 주세요.";
     public static final String LOTTO_NUMBERS_BASE_SEPARATOR = ",";
     public static final String FIND_ALL_SPACES = "\\s+";
     public static final String REMOVE_SPACES = "";
@@ -62,7 +62,7 @@ public class LottoNumbers {
 
     private void validateLottoNumbers(String[] splitLottoNumbers) {
         if (splitLottoNumbers.length != LOTTO_SIZE) {
-            throw new WrongLottoNumberSizeException(WRONG_LOTTO_NUMBER_SIZE_MESSAGE);
+            throw new WrongLottoNumberSizeException(LottoMessage.WRONG_LOTTO_NUMBER_SIZE_MESSAGE);
         }
     }
 

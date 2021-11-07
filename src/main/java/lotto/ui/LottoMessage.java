@@ -1,10 +1,14 @@
 package lotto.ui;
 
 import lotto.BuyAmount;
-import lotto.LottoNumbersGroup;
 import lotto.LottoResults;
 
 public class LottoMessage {
+    public static final String MINIMUM_TICKET_PRICE_MESSAGE = "구입 금액을 확인해 주세요.";
+    public static final String WRONG_NUMBER_FORMAT_MESSAGE = "입력된 숫자를 확인해 주세요.";
+    public static final String WRONG_NUMBER_BOUND_MESSAGE = "입력된 숫자의 범위를 확인해 주세요.";
+    public static final String WRONG_LOTTO_NUMBER_SIZE_MESSAGE = "입력하신 로또의 개수를 확인 해 주세요.";
+
     public static final String ASK_BUY_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
     public static final String BUY_AMOUNT_MESSAGE = "%s개를 구매했습니다.";
     public static final String ASK_PRIZE_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";

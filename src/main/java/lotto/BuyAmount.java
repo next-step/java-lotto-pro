@@ -1,9 +1,9 @@
 package lotto;
 
 import lotto.exception.MinimumTicketPriceException;
+import lotto.ui.LottoMessage;
 
 public class BuyAmount {
-    private static final String MINIMUM_TICKET_PRICE_MESSAGE = "구입 금액을 확인해 주세요.";
     public static final int LOTTO_TICKET_PRICE = 1000;
 
     private final int amount;
@@ -15,7 +15,7 @@ public class BuyAmount {
 
     private void validateBuyPrice(int buyPrice) {
         if (buyPrice < LOTTO_TICKET_PRICE) {
-            throw new MinimumTicketPriceException(MINIMUM_TICKET_PRICE_MESSAGE);
+            throw new MinimumTicketPriceException(LottoMessage.MINIMUM_TICKET_PRICE_MESSAGE);
         }
     }
 
