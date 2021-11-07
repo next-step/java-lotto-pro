@@ -11,8 +11,6 @@ public class Lotto {
 	public static final String NUMBER_COUNT_ERROR = "Lotto 번호는 6개 여야 합니다.";
 	public static final String DUPLICATED_NUMBER_ERROR = "중복된 값이 포함되어 있습니다.";
 
-	private static final int LOTTO_NUMBER_COUNT = 6;
-
 	private final List<LottoNumber> lottoNumbers;
 
 	private Lotto(final List<LottoNumber> numbers) {
@@ -50,13 +48,13 @@ public class Lotto {
 	private void validateNonDuplicated(final List<LottoNumber> numbers) {
 		Set<LottoNumber> numberSet = new HashSet<>(numbers);
 
-		if (numberSet.size() != LOTTO_NUMBER_COUNT) {
+		if (numberSet.size() != Common.LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
 		}
 	}
 
 	private void validateNumberCount(final List<LottoNumber> numbers) {
-		if (numbers.size() != LOTTO_NUMBER_COUNT) {
+		if (numbers.size() != Common.LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException(NUMBER_COUNT_ERROR);
 		}
 	}
