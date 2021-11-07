@@ -11,6 +11,8 @@ public class OutputView {
     private static final String PRINT_PURCHASE_QUANTITY = "%s개를 구매했습니다.\n";
     private static final String PRINT_RATE_OF_RETURN = "총 수익률은 %s 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)\n";
     private static final String PRINT_WINNING_STATISTICS = "당첨 통계\n---------";
+    private static final String PRINT_INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+
     private static final String PRINT_FOURTH_RANK = "3개 일치 (5000원)- %s개\n";
     private static final String PRINT_THIRD_RANK = "4개 일치 (50000원)- %s개\n";
     private static final String PRINT_SECOND_RANK = "5개 일치 (1500000원)- %s개\n";
@@ -32,9 +34,15 @@ public class OutputView {
         lottoList.stream()
                 .map(Lotto::getLottoNumbers)
                 .forEach(System.out::println);
+        System.out.println();
+    }
+
+    public static void printInputWinningNumbers() {
+        System.out.println(PRINT_INPUT_WINNING_NUMBERS);
     }
 
     public static void printWinningStatistics(Lottos lottos) {
+        System.out.println();
         System.out.println(PRINT_WINNING_STATISTICS);
         System.out.printf(PRINT_FOURTH_RANK, lottos.getTotalRankCount(LottoRank.FOURTH));
         System.out.printf(PRINT_THIRD_RANK, lottos.getTotalRankCount(LottoRank.THIRD));

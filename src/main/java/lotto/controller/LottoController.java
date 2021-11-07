@@ -29,6 +29,7 @@ public class LottoController {
     }
 
     private LottoNumbers getWinningNumbers() {
+        printInputWinningNumbers();
         return new LottoNumbers(inputWinningNumbers());
     }
 
