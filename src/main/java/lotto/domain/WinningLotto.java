@@ -22,7 +22,7 @@ public class WinningLotto {
     }
 
     public LottoResult getLottoMatchResult(List<LottoNumber> lottoList) {
-        EnumMap<Rank, Integer> result = new EnumMap<Rank, Integer>(Rank.class);
+        EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
 
         for (LottoNumber lotto : lottoList) {
             Rank matchRank = lotto.getMatchRank(this);
