@@ -15,24 +15,31 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class LottoNumberTest {
 
-    @Test
-    @DisplayName("로또 번호 자동 생성 확인")
-    public void autoLottoTest() {
-        LottoNumber lottoNumber = new LottoNumber();
+    static Stream<Arguments> autoLottoTest() {
+        List<Number> number = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
+                Number.of(4), Number.of(5), Number.of(6));
+        return Stream.of(arguments(number));
+    }
+
+    @ParameterizedTest
+    @MethodSource("autoLottoTest")
+    @DisplayName("로또 번호 생성 확인")
+    public void autoLottoTest(List<Number> activeNumbers) {
+        LottoNumber lottoNumber = new LottoNumber(activeNumbers);
 
         int size = lottoNumber.getLottoNumbers().size();
 
         assertThat(size).isEqualTo(6);
     }
 
-    static Stream<Arguments> listProvide3() {
+    static Stream<Arguments> activeLottoNumberSize() {
         List<Number> number = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
                 Number.of(4), Number.of(5), Number.of(6), Number.of(7));
         return Stream.of(arguments(number));
     }
 
     @ParameterizedTest
-    @MethodSource("listProvide3")
+    @MethodSource("activeLottoNumberSize")
     @DisplayName("로또 번호 길이 검증")
     public void activeLottoNumberSize(List<Number> activeNumbers) {
         assertThatThrownBy(() -> {
@@ -41,7 +48,7 @@ public class LottoNumberTest {
                 .hasMessageContaining("[ERROR]");
     }
 
-    static Stream<Arguments> listProvide() {
+    static Stream<Arguments> lottoRank() {
         List<Number> MatchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3),
                 Number.of(4), Number.of(5), Number.of(6));
         List<Number> LottoNumber = Arrays.asList(Number.of(11), Number.of(12), Number.of(13),
@@ -54,7 +61,7 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @MethodSource("listProvide")
+    @MethodSource("lottoRank")
     @DisplayName("로또 번호 매칭 검증")
     public void lottoRank(List<Number> MatchNumbers, Number bonusNumber, List<Number> activeNumbers) {
         LottoNumber lottoNumber = new LottoNumber(activeNumbers);
