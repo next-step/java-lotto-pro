@@ -4,7 +4,6 @@ import static java.util.stream.Collectors.*;
 
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -41,13 +40,8 @@ public class LottoNumbers {
 			.collect(toCollection(HashSet::new));
 	}
 
-	public Integer match(LottoNumber lottoNumber) {
-		int count = 0;
-		Optional<LottoNumber> any = this.lottoNumbers.stream().filter(s -> s.equals(lottoNumber)).findAny();
-		if (any.isPresent()) {
-			count++;
-		}
-		return new Integer(count);
+	public long match(LottoNumber lottoNumber) {
+		return lottoNumbers.stream().filter(s -> s.equals(lottoNumber)).count();
 	}
 
 	@Override
