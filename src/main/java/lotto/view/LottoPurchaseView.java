@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoIssuanceCount;
 import lotto.exception.ErrorMessage;
+import lotto.exception.PurchaseAmountWrongFormatException;
 
 public class LottoPurchaseView {
 
@@ -22,7 +23,7 @@ public class LottoPurchaseView {
         try {
             return Integer.parseInt(purchaseAmount);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구입금액은 숫자만 입력이 가능합니다.");
+            throw new PurchaseAmountWrongFormatException();
         }
     }
 
