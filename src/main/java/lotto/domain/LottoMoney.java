@@ -15,6 +15,10 @@ public class LottoMoney implements Printable {
     private static final int MIN_MONEY = 0;
     private long money;
 
+    public LottoMoney(long money) {
+        this.money = money;
+    }
+
     public LottoMoney(String moneyText) {
         money = parseToValidMoney(moneyText);
     }
@@ -40,9 +44,6 @@ public class LottoMoney implements Printable {
         return number < MIN_MONEY;
     }
 
-    public LottoMoney(long money) {
-        this.money = money;
-    }
 
     public static EarningRate calculateEarningRate(List<LottoMoney> lottoMoneyList) {
         if(lottoMoneyList.size() == ZERO_SIZE) {
