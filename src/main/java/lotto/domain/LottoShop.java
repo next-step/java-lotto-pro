@@ -28,7 +28,7 @@ public class LottoShop {
 
     public void open() {
         PurchaseAmount amount = readAmount();
-        Lottos lottos = getLottos(amount);
+        Lottos lottos = buyLottos(amount);
         resultView.printPurchaseAckMessage(lottos.count());
         resultView.printLottos(lottos);
 
@@ -49,8 +49,8 @@ public class LottoShop {
         }
     }
 
-    private Lottos getLottos(PurchaseAmount amount) {
-        return lottoMachine.issue(amount);
+    private Lottos buyLottos(PurchaseAmount amount) {
+        return lottoMachine.issueAuto(amount);
     }
 
     private LottoWinReader getLottoWinReader() {

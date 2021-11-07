@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.LongStream;
 
@@ -15,16 +17,25 @@ public class LottoMachine {
         this.generator = generator;
     }
 
-    public Lottos issue(PurchaseAmount amount) {
+    public Lottos issueAuto(PurchaseAmount amount) {
         long lottoCount = amount.divide(new Amount(LOTTO_PRICE));
         List<Lotto> lottos = LongStream.rangeClosed(1, lottoCount)
-                .mapToObj(n -> issue())
+                .mapToObj(n -> issueAuto())
                 .collect(toList());
 
         return new Lottos(lottos);
     }
 
-    private Lotto issue() {
+    private Lotto issueAuto() {
         return new Lotto(generator.generate(LOTTO_NUMBER_COUNT));
+    }
+
+    public Lottos issueManual(List<String> numbers) {
+        List<Lotto> lottos = numbers.stream()
+                .map(n -> Arrays.stream(n.split(",")).map(String::trim).map(Integer::parseInt).collect(toList()))
+                .map(Lotto::new)
+                .collect(toList());
+
+        return new Lottos(lottos);
     }
 }

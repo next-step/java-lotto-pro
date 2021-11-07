@@ -22,7 +22,7 @@ public class LottoTest {
     public void lottoIssueTest() {
         PurchaseAmount amount = new PurchaseAmount(1_000);
         LottoMachine lottoMachine = new LottoMachine(digit -> Arrays.asList(1, 2, 6, 10, 17, 42));
-        Lottos lottos = lottoMachine.issue(amount);
+        Lottos lottos = lottoMachine.issueAuto(amount);
         assertThat(lottos).isNotEmpty();
         assertThat(lottos).containsExactly(new Lotto(Arrays.asList(1, 2, 6, 10, 17, 42)));
     }
@@ -39,7 +39,7 @@ public class LottoTest {
     public void lottoNumberCountTest() {
         assertThatThrownBy(() -> {
             LottoMachine lottoMachine = new LottoMachine(digit -> Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-            lottoMachine.issue(new PurchaseAmount(1_000));
+            lottoMachine.issueAuto(new PurchaseAmount(1_000));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -70,7 +70,7 @@ public class LottoTest {
     public void lottoCount_InAmountTest() {
         PurchaseAmount amount = new PurchaseAmount(14_000);
         LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerator());
-        Lottos lottos = lottoMachine.issue(amount);
+        Lottos lottos = lottoMachine.issueAuto(amount);
         assertThat(lottos.count()).isEqualTo(14);
     }
 
@@ -144,6 +144,15 @@ public class LottoTest {
         PurchaseAmount amount = new PurchaseAmount(14_000);
         Revenue revenue = new Revenue(amount, statistic);
         assertThat(revenue.percentage()).isEqualTo(0.35);
+    }
+
+    @DisplayName("수동으로 로또 발행 기능 테스트")
+    @Test
+    public void manualByLotto() {
+        LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerator());
+        List<String> numbers = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
+        Lottos lottos = lottoMachine.issueManual(numbers);
+        assertThat(lottos.count()).isEqualTo(3);
     }
 
 }
