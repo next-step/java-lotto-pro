@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoReports;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketFactory;
@@ -17,7 +18,9 @@ public class Lotto {
         List<LottoTicket> lottoTickets = buyLottoTicket(lottoMoney.getCountOfPossibleLotto());
         OutputView.printLottoTickets(lottoTickets);
         LottoTicket winningLottoTicket = InputView.winningNumbersOfLastWeek();
-        LottoReports lottoReports = new LottoReports(createRanks(lottoTickets, winningLottoTicket), lottoMoney);
+        LottoNumber bonusNumber = InputView.inputBonusNumber(winningLottoTicket);
+        LottoReports lottoReports = new LottoReports(createRanks(lottoTickets, winningLottoTicket, bonusNumber),
+            lottoMoney);
         OutputView.printLottoReports(lottoReports);
     }
 
@@ -29,10 +32,11 @@ public class Lotto {
         return lottoTickets;
     }
 
-    private List<Rank> createRanks(List<LottoTicket> lottoTickets, LottoTicket winningLottoTicket) {
+    private List<Rank> createRanks(List<LottoTicket> lottoTickets, LottoTicket winningLottoTicket,
+        LottoNumber bonusNumber) {
         List<Rank> ranks = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
-            ranks.add(lottoTicket.winningRank(winningLottoTicket));
+            ranks.add(lottoTicket.createWinningRank(winningLottoTicket, bonusNumber));
         }
         return ranks;
     }
