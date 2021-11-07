@@ -13,6 +13,7 @@ public class LottoGameController {
         ResultView.printLottoBalls(lottoGame);
 
         LottoBalls winLottoBalls = new LottoBalls(InputView.inputWinNumbers());
+        LottoBall bonusBall = InputView.inputBonusNumber();
         Statistics statistics = lottoGame.calculateLottoResult(winLottoBalls);
 
         ResultView.printLottoResult(money, statistics);
