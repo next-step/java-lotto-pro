@@ -39,27 +39,7 @@ public class LottoWinningNumbers {
 		return lottoNumber.stream().distinct().count() == LottoNumbersMaker.SIZE_OF_LOTTERY_NUMBERS;
 	}
 
-	/* 인자로 넘어온 티켓들을 정답과 비교하여 결과를 리턴 */
-	public LottoMatchResult matchWinningAndTickets(LottoTickets lottoTickets) {
-		LottoMatchResult lottoMatchResult = new LottoMatchResult();
-		for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-			setMatchResult(lottoMatchResult, lottoTicket);
-		}
-		return lottoMatchResult;
-	}
-
-	private void setMatchResult(LottoMatchResult lottoMatchResult, LottoTicket lottoTicket) {
-		int matchCount = matchCountWinningAndTicket(lottoTicket);
-		if (hasMatch(matchCount)) {
-			lottoMatchResult.addMatchCount(LottoMatchRank.valueOf(matchCount));
-		}
-	}
-
-	private boolean hasMatch(int matchCount) {
-		return matchCount > 0;
-	}
-
-	private int matchCountWinningAndTicket(LottoTicket lottoTicket) {
+	protected int matchCountWinningAndTicket(LottoTicket lottoTicket) {
 		return compareWithNumbers(lottoTicket.getLottoNumbers());
 	}
 

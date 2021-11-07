@@ -89,38 +89,4 @@ public class LottoWinningNumbersTest {
 				lottoNumbersMaker.makeLottoNumbers(lottoNumberText));
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
-
-	@Test
-	public void matchWinningAndTickets_정답과_로또티켓들_비교결과() {
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
-			lottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
-
-		List<LottoTicket> tickets = new ArrayList<>();
-		tickets.add(new LottoTicket(lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 5, 12, 26, 30, 40))));
-		tickets.add(new LottoTicket(lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 5, 3, 34, 20, 40))));
-
-		LottoMatchResult lottoMatchResult = lottoWinningNumbers.matchWinningAndTickets(new LottoTickets(tickets));
-
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.ZERO_POINT)).isEqualTo(0);
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.SIX_POINT)).isEqualTo(1);
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.THREE_POINT)).isEqualTo(1);
-	}
-
-	@Test
-	public void matchWinningAndTickets_당첨_수익률_계산() {
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
-			lottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
-
-		List<LottoTicket> tickets = new ArrayList<>();
-		for (int i = 0; i < 20; i++) {
-			tickets.add(new LottoTicket(lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 6, 11, 25, 32, 44))));
-		}
-		tickets.add(new LottoTicket(lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 4, 12, 26, 30, 40))));
-		tickets.add(new LottoTicket(lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 2, 31, 34, 20, 40))));
-
-		LottoTickets lottoTickets = new LottoTickets(tickets);
-		LottoMatchResult lottoMatchResult = lottoWinningNumbers.matchWinningAndTickets(lottoTickets);
-
-		Assertions.assertThat(lottoMatchResult.calculateProfitPercentage()).isEqualTo(2.27);
-	}
 }

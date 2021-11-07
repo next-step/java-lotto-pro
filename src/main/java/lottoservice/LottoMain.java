@@ -6,7 +6,9 @@ import lottoservice.lottonumber.LottoArrangeManipulator;
 import lottoservice.lottonumber.LottoNumbersMaker;
 import lottoservice.lottoticket.LottoTicketIssuer;
 import lottoservice.lottoticket.LottoTickets;
+import lottoservice.matcher.BonusNumber;
 import lottoservice.matcher.LottoMatchResult;
+import lottoservice.matcher.LottoPrizeAnswer;
 import lottoservice.matcher.LottoWinningNumbers;
 import lottoservice.ui.ConsoleInputView;
 import lottoservice.ui.ConsoleResultView;
@@ -42,7 +44,8 @@ public class LottoMain {
 		outputBoughtLottoTickets(lottoTickets);
 
 		LottoWinningNumbers lottoWinningNumbers = getLastWeekWinningNumbers(lottoNumbersMaker);
-		LottoMatchResult lottoMatchResult = matchLottoWinning(lottoWinningNumbers, lottoTickets);
+		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(lottoWinningNumbers,new BonusNumber(1));
+		LottoMatchResult lottoMatchResult = lottoPrizeAnswer.matchTickets(lottoTickets);
 		outputLottoMatchResults(lottoMatchResult);
 	}
 
@@ -80,9 +83,10 @@ public class LottoMain {
 		return inputView.readInputLine();
 	}
 
-	private LottoMatchResult matchLottoWinning(LottoWinningNumbers lottoWinningNumbers, LottoTickets lottoTickets) {
-		return lottoWinningNumbers.matchWinningAndTickets(lottoTickets);
-	}
+	// private LottoMatchResult matchLottoWinning(LottoWinningNumbers lottoWinningNumbers, LottoTickets lottoTickets) {
+	// 	return null;
+	// 	// return lottoWinningNumbers.matchWinningAndTickets(lottoTickets);
+	// }
 
 	private void outputLottoMatchResults(LottoMatchResult matchResult) {
 		resultView.outputGuide(RESULT_MESSAGE_MATCH_STATISTICS_START_LINE);
