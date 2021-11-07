@@ -13,28 +13,29 @@ public class LottoMoney implements Printable {
     private static final String WON = "원";
     private static final int ZERO_SIZE = 0;
     private static final int MIN_MONEY = 0;
+
     private long money;
 
     public LottoMoney(long money) {
         this.money = money;
     }
 
-    public LottoMoney(String moneyText) {
-        money = parseToValidMoney(moneyText);
+    public LottoMoney(String money) {
+        this.money = parseToValidMoney(money);
     }
 
     private long parseToValidMoney(String moneyText) {
-        long number = parseToNumber(moneyText);
-        if (isNegativeNumber(number)) {
+        long money = parseToNumber(moneyText);
+        if (isNegativeNumber(money)) {
             throw new LottoException(LottoErrorCode.INVALID_MONEY);
         }
 
-        return number;
+        return money;
     }
 
-    private long parseToNumber(String moneyText) {
+    private long parseToNumber(String money) {
         try {
-            return Long.parseLong(moneyText);
+            return Long.parseLong(money);
         } catch (NumberFormatException e) {
             throw new LottoException(LottoErrorCode.INVALID_MONEY);
         }
@@ -44,17 +45,16 @@ public class LottoMoney implements Printable {
         return number < MIN_MONEY;
     }
 
-
-    public static EarningRate calculateEarningRate(List<LottoMoney> lottoMoneyList) {
-        if(lottoMoneyList.size() == ZERO_SIZE) {
+    public static EarningRate calculateEarningRate(List<LottoMoney> lottoMonies) {
+        if (lottoMonies.size() == ZERO_SIZE) {
             return EarningRate.ZERO;
         }
 
-        long sum = lottoMoneyList.stream()
+        long sum = lottoMonies.stream()
             .mapToLong(lottoMoney -> lottoMoney.money)
             .sum();
 
-        return new EarningRate(BigDecimal.valueOf((double)sum / lottoMoneyList.size() / LOTTO_PRICE));
+        return new EarningRate(BigDecimal.valueOf((double)sum / lottoMonies.size() / LOTTO_PRICE));
     }
 
     public LottoCount calculateLottoCount() {

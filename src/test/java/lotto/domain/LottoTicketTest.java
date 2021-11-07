@@ -31,9 +31,9 @@ class LottoTicketTest {
     @DisplayName("잘못된 입력으로 로또티켓 생성시 에러")
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5", "asd,2,3,4,5,6", "1,2,3,4,5,5", ""})
-    void throwsError_whenInvalidTextLottoTicket(String invalidText) {
+    void throwsError_whenInvalidTextLottoTicket(String invalidLottoNumbers) {
         assertThatExceptionOfType(LottoException.class)
-            .isThrownBy(() -> new LottoTicket(invalidText))
+            .isThrownBy(() -> new LottoTicket(invalidLottoNumbers))
             .withMessage("1 ~ 45의 숫자 중 중복되지 않은 숫자 6개를 입력해주세요.");
     }
 
@@ -41,8 +41,8 @@ class LottoTicketTest {
     @ParameterizedTest
     @CsvSource(value = {"4, 5, 6, 7, 8, 9;THREE", "4, 5, 6, 1, 8, 9;FOUR", "4, 5, 6, 1, 2, 9;FIVE",
         "4, 5, 6, 1, 2, 3;SIX", "7, 8, 9, 10, 11, 12;NONE"}, delimiter = ';')
-    public void calculateResult(String text, String resultName) {
-        LottoTicket lottoTicket = new LottoTicket(text);
+    public void calculateResult(String lottoNumbers, String resultName) {
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         assertThat(lottoTicket.calculateResult(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6))))
             .isEqualTo(LottoResult.valueOf(resultName));
     }

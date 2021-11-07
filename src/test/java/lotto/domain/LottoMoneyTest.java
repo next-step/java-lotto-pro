@@ -25,8 +25,8 @@ class LottoMoneyTest {
     @DisplayName("텍스트 금액 입력 성공")
     @ParameterizedTest
     @ValueSource(strings = {"0", "1", "14000"})
-    void constructLottoMoney_success(String moneyText) {
-        assertThat(new LottoMoney(moneyText)).isEqualTo(new LottoMoney(Integer.parseInt(moneyText)));
+    void constructLottoMoney_success(String money) {
+        assertThat(new LottoMoney(money)).isEqualTo(new LottoMoney(Integer.parseInt(money)));
     }
 
     @DisplayName("잘못된 값으로 금액 입력시 에러")
@@ -41,8 +41,8 @@ class LottoMoneyTest {
     @DisplayName("구입 가능한 로또 개수 계산")
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "0,0", "999,0", "1001,1"})
-    void calculateLottoCount(String moneyText, int lottoCount) {
-        assertThat(new LottoMoney(moneyText).calculateLottoCount()).isEqualTo(new LottoCount(lottoCount));
+    void calculateLottoCount(String money, int lottoCount) {
+        assertThat(new LottoMoney(money).calculateLottoCount()).isEqualTo(new LottoCount(lottoCount));
     }
 
     @DisplayName("수익률 계산")
