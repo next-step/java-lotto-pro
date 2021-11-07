@@ -7,6 +7,7 @@ import java.util.Objects;
 //로또 발급 개수와 관련된 역할을 가진 클래스
 public class LottoIssuanceCount {
 
+    public static final int LOTTO_PRICE = 1000;
     private int issuanceCount;
 
     public LottoIssuanceCount(int issuanceCount) {
@@ -15,7 +16,7 @@ public class LottoIssuanceCount {
 
     public static LottoIssuanceCount issuanceNumberCalculation(int purchaseAmount) {
         purchaseAmountOneThousandWonUnitValid(purchaseAmount);
-        int issuanceCount = purchaseAmount / LottoProperty.LOTTO_PRICE;
+        int issuanceCount = purchaseAmount / LOTTO_PRICE;
         return new LottoIssuanceCount(issuanceCount);
     }
 
@@ -24,7 +25,7 @@ public class LottoIssuanceCount {
     }
 
     private static void purchaseAmountOneThousandWonUnitValid(int purchaseAmount) {
-        if (purchaseAmount < LottoProperty.LOTTO_PRICE || purchaseAmount % LottoProperty.LOTTO_PRICE != 0) {
+        if (purchaseAmount < LOTTO_PRICE || purchaseAmount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_AMOUNT_NOT_ONE_THOUSAND_WON.getMessage());
         }
     }

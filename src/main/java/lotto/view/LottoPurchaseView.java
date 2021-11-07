@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoProperty;
+import lotto.domain.LottoIssuanceCount;
 import lotto.exception.ErrorMessage;
 
 import java.util.Scanner;
@@ -30,7 +30,7 @@ public class LottoPurchaseView {
     }
 
     private static void purchaseAmountRangeValid(int purchaseAmount) {
-        if (purchaseAmount < LottoProperty.LOTTO_PRICE || purchaseAmount % LottoProperty.LOTTO_PRICE != 0) {
+        if (purchaseAmount < LottoIssuanceCount.LOTTO_PRICE || purchaseAmount % LottoIssuanceCount.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_AMOUNT_NOT_ONE_THOUSAND_WON.getMessage());
         }
     }

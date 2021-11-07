@@ -15,7 +15,7 @@ class LottoNumberTest {
     void lottoNumberSixTest() {
         List<Integer> lottoNumbers = LottoNumber.generator();
 
-        assertThat(lottoNumbers.size()).isEqualTo(LottoProperty.LOTTO_COUNT);
+        assertThat(lottoNumbers.size()).isEqualTo(Lotto.LOTTO_COUNT);
     }
 
     @DisplayName("로또 번호는 중복 불가")
@@ -42,7 +42,7 @@ class LottoNumberTest {
         List<Integer> lottoNumbers = LottoNumber.generator();
 
         boolean lottoNumberRange = lottoNumbers.stream()
-                .allMatch(number -> number >= LottoProperty.LOTTO_START_NUMBER && number <= LottoProperty.LOTTO_END_NUMBER);
+                .allMatch(number -> number >= LottoNumber.LOTTO_START_NUMBER && number <= LottoNumber.LOTTO_END_NUMBER);
 
         assertThat(lottoNumberRange).isTrue();
     }

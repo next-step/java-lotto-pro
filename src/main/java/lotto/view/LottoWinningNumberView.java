@@ -1,6 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoProperty;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.exception.ErrorMessage;
 
 import java.util.List;
@@ -36,15 +37,14 @@ public class LottoWinningNumberView {
     private static void winnerNumberRangeValid(List<String> winnerNumbers) {
         for (String winnerNumber : winnerNumbers) {
             int number = Integer.parseInt(winnerNumber);
-            if (number < LottoProperty.LOTTO_START_NUMBER && number > LottoProperty.LOTTO_END_NUMBER) {
+            if (number < LottoNumber.LOTTO_START_NUMBER && number > LottoNumber.LOTTO_END_NUMBER) {
                 throw new IllegalArgumentException(ErrorMessage.LOTTO_WINNING_NUMBER_RANGE.getMessage());
             }
         }
     }
 
-    //TODO : 질문4
     private static void winnerNumberSizeValid(List<String> winnerNumbers) {
-        if (winnerNumbers.size() != LottoProperty.LOTTO_COUNT) {
+        if (winnerNumbers.size() != Lotto.LOTTO_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_WINNING_NUMBER_COUNT.getMessage());
         }
     }
