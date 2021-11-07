@@ -34,6 +34,13 @@ public class LottoBalls {
         return lottoBallList;
     }
 
+    public int countContainingWinNumbers(LottoBalls winLottoBalls) {
+        int count = 0;
+        for (LottoBall winBall : winLottoBalls.lottoBalls) {
+            count = lottoBalls.contains(winBall) ? count + 1 : count;
+        }
+        return count;
+    }
 
     @Override
     public String toString() {

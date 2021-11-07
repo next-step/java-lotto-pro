@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import jdk.dynalink.beans.StaticClass;
+
 import java.util.List;
 
 public class LottoGame {
@@ -17,6 +19,16 @@ public class LottoGame {
 
     public int getTryCount() {
         return tryCount;
+    }
+
+    public Statistics calculateLottoResult(LottoBalls winLottoBalls) {
+        Statistics statistics = new Statistics();
+        for (LottoBalls lottoBalls : lottoBallsList) {
+            int count = lottoBalls.countContainingWinNumbers(winLottoBalls);
+            Ranking ranking = Ranking.find(count);
+            statistics.record(ranking);
+        }
+        return statistics;
     }
 
     @Override

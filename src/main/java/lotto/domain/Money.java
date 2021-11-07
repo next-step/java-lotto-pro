@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Money {
     private int money;
 
@@ -12,5 +15,19 @@ public class Money {
 
     public int calculateTryLottoCount(Money money, int lottoPrice) {
         return this.money / lottoPrice;
+    }
+
+    public Money multiply(Integer count) {
+        return new Money(this.money * count);
+    }
+
+    public Money plus(Money money) {
+        return new Money(this.money + money.money);
+    }
+
+    public double calculateRate(Money money) {
+        return new BigDecimal(this.money)
+                .divide(new BigDecimal(money.money), 2, RoundingMode.HALF_UP)
+                .doubleValue();
     }
 }
