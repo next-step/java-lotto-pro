@@ -7,7 +7,11 @@ public enum InputDataErrorCode {
     EXIST_DUPLICATION_NUMBER("[ERROR] 중복된 숫자를 가진 로또가 있습니다."),
     VALID_LOTTO_SIZE_SIX("[ERROR] 로또는 6개의 숫자가 있어야합니다."),
     INVALID_LOTTO_WIN_COUNT("[ERROR] 잘못된 당첨번호 개수를 입력하였습니다."),
-    DUPLICATE_BONUS_NUMBER_IN_WINNING_LOTTO_NUMBER("[ERROR] 입력하신 보너스 번호는 1등 로또 중에 중복 숫자가 있습니다.");
+    DUPLICATE_BONUS_NUMBER_IN_WINNING_LOTTO_NUMBER("[ERROR] 입력하신 보너스 번호는 1등 로또 중에 중복 숫자가 있습니다."),
+    GIVE_NO_MONEY("[ERROR] 돈을 내지 않았습니다."),
+    INPUT_NO_LOTTO("[ERROR] 로또를 입력하지 않았습니다."),
+    INPUT_NO_LOTTO_COUNT("[ERROR] 수동으로 구매할 로또 수를 입력하지 않았습니다."),
+    INPUT_MANUAL_LOTTO_COUNT_MAXED_OUT_MY_MONEY("[ERROR] 구입할 수 있는 로또개수를 초과하였습니다.");
 
     private String errorMessage;
 

@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Ball {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
-    private int number;
+    private final int number;
 
     public Ball(int number) {
         checkValidNumber(number);

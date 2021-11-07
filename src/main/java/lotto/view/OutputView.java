@@ -14,8 +14,8 @@ public class OutputView {
 
     }
 
-    public static void printLottoCount(int countOfLotto) {
-        System.out.println(countOfLotto + "개를 구매했습니다.");
+    public static void printLottoCount(int countOfManualLotto , int countOfAutoLotto) {
+        System.out.println("수동으로 " + countOfManualLotto+"장, 자동으로 "+ (countOfAutoLotto - countOfManualLotto)  + "개를 구매했습니다.");
     }
 
     public static void printLotto(List<List<Integer>> lottos) {
