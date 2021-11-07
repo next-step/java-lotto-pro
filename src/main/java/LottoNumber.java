@@ -1,9 +1,17 @@
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
 	public final static int MIN_INCLUSIVE_NUMBER = 1;
 	public final static int MAX_INCLUSIVE_NUMBER = 45;
+
+	private final static Map<Integer, LottoNumber> CACHED_LOTTO_NUMBERS =
+		Stream.iterate(LottoNumber.MIN_INCLUSIVE_NUMBER, num -> num + 1)
+			.limit(LottoNumber.MAX_INCLUSIVE_NUMBER)
+			.collect(Collectors.toMap(num -> num, LottoNumber::new));
 
 	private final int number;
 
@@ -19,7 +27,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static LottoNumber from(int number) {
-		return new LottoNumber(number);
+		if (!CACHED_LOTTO_NUMBERS.containsKey(number)) {
+			throw new LottoNumberFormatException();
+		}
+		return CACHED_LOTTO_NUMBERS.get(number);
 	}
 
 	public static LottoNumber from(String s) {
