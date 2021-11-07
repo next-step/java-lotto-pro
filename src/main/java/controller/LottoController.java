@@ -17,6 +17,7 @@ public class LottoController {
 		ResultView.printLottoNumbers(lottos);
 
 		LastWeekWinningNumber lastWeekWinningNumber = InputView.printLastWeekWinningNumberAndInput();
+		lastWeekWinningNumber.updateBonusBall(InputView.printBonusBallAndInput());
 
 		ResultView.printWinningStatisticsMessage(lottos.matchResult(lastWeekWinningNumber), money);
 	}

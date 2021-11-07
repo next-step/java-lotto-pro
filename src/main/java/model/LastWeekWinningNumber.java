@@ -54,6 +54,10 @@ public class LastWeekWinningNumber {
 			.split(COMMA);
 	}
 
+	public void updateBonusBall(BonusBall bonusBall) {
+		this.bonusBall = bonusBall;
+	}
+
 	public Lotto getValue() {
 		return value;
 	}
