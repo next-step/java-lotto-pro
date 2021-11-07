@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.LottoBallCountException;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class LottoBallsTest {
 
         ThrowableAssert.ThrowingCallable throwingCallable = () -> new LottoBalls(ballList);
 
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(LottoBallCountException.class)
                 .isThrownBy(throwingCallable)
                 .withMessageContaining("로또 공 개수가 6개가 아닙니다");
 

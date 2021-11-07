@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.NegativeInputMoneyException;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -8,7 +10,7 @@ public class Money {
 
     public Money(int money) {
         if (money < 0) {
-            throw new IllegalArgumentException("0 이상의 수를 입력해야 합니다.");
+            throw new NegativeInputMoneyException("0 이상의 수를 입력해야 합니다.");
         }
         this.money = money;
     }

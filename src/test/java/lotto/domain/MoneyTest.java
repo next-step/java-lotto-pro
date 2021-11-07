@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.NegativeInputMoneyException;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +17,7 @@ class MoneyTest {
     void givenLessThanZero(int input) {
         ThrowableAssert.ThrowingCallable throwingCallable = () -> new Money(input);
 
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(NegativeInputMoneyException.class)
                 .isThrownBy(throwingCallable)
                 .withMessageContaining("0 이상의 수를 입력해야 합니다.");
     }

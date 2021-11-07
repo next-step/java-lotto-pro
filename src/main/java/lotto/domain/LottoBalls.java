@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.LottoBallCountException;
+import lotto.exception.LottoBallNumberConvertException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +10,8 @@ public class LottoBalls {
     private List<LottoBall> lottoBalls;
 
     public LottoBalls(List<LottoBall> lottoBalls) {
-        if (lottoBalls.size() != LottoBallEnum.LOTTO_BALLS_SIZE.getNumber()) {
-            throw new IllegalArgumentException("로또 공 개수가 6개가 아닙니다");
+        if (lottoBalls.size() != LottoBallRule.LOTTO_BALLS_SIZE.getNumber()) {
+            throw new LottoBallCountException("로또 공 개수가 6개가 아닙니다");
         }
         this.lottoBalls = lottoBalls;
     }
@@ -20,8 +23,8 @@ public class LottoBalls {
 
     private String[] splitNumberString(String numbersString) {
         String[] numbersSplitted = numbersString.split(",");
-        if (numbersSplitted.length != LottoBallEnum.LOTTO_BALLS_SIZE.getNumber()) {
-            throw new IllegalArgumentException("로또 공 개수가 6개가 아닙니다.");
+        if (numbersSplitted.length != LottoBallRule.LOTTO_BALLS_SIZE.getNumber()) {
+            throw new LottoBallCountException("로또 공 개수가 6개가 아닙니다.");
         }
         return numbersSplitted;
     }
@@ -47,7 +50,7 @@ public class LottoBalls {
         return lottoBalls.stream()
                 .map(LottoBall::toString)
                 .reduce((d1, d2) -> String.join(",", d1, d2))
-                .orElseThrow(() -> new IllegalArgumentException("로또 번호 문자열 변환 실패"));
+                .orElseThrow(() -> new LottoBallNumberConvertException("로또 번호 문자열 변환 실패"));
     }
 
 }

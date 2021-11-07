@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.LottoBallNumberRangeException;
+
 import java.util.Objects;
 
 public class LottoBall implements Comparable<LottoBall> {
@@ -7,13 +9,13 @@ public class LottoBall implements Comparable<LottoBall> {
 
     public LottoBall(int number) {
         if (checkNumberRange(number)) {
-            throw new IllegalArgumentException("1~45 숫자를 입력해야 합니다.");
+            throw new LottoBallNumberRangeException("1~45 숫자를 입력해야 합니다.");
         }
         this.number = number;
     }
 
     private boolean checkNumberRange(int number) {
-        return number < LottoBallEnum.MIN_LOTTO_NUMBER.getNumber() || number > LottoBallEnum.MAX_LOTTO_NUMBER.getNumber();
+        return number < LottoBallRule.MIN_LOTTO_NUMBER.getNumber() || number > LottoBallRule.MAX_LOTTO_NUMBER.getNumber();
     }
 
     @Override
