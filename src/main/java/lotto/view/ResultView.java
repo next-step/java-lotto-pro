@@ -18,6 +18,10 @@ public class ResultView {
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.";
     private static double totalPrizeMoney = 0.0;
 
+    public ResultView() {
+        throw new AssertionError();
+    }
+
     public static void printPurchasedGameCount(int gameCount) {
         System.out.println(String.format(PURCHASED_GAME_COUNT, gameCount));
     }

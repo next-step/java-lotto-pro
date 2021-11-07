@@ -8,6 +8,10 @@ import lotto.view.strategy.InputWinNumbers;
 
 public class InputView {
 
+    public InputView() {
+        throw new AssertionError();
+    }
+
     /**
      * 로또 구매금액을 입력합니다.
      *
