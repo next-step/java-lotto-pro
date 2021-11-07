@@ -41,17 +41,19 @@ public final class LottoPaper implements Lotto {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
+		}
 		LottoPaper that = (LottoPaper)o;
-		return Objects.equals(lottoNumbers, that.lottoNumbers);
+		return Objects.equals(lottoNumbers, that.lottoNumbers) && type == that.type;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(lottoNumbers);
+		return Objects.hash(lottoNumbers, type);
 	}
 
 	boolean isAuto() {

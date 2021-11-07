@@ -20,12 +20,14 @@ public final class LottoNumber implements Comparable<LottoNumber> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
-		LottoNumber that = (LottoNumber)o;
-		return value == that.value;
+		}
+		LottoNumber number = (LottoNumber)o;
+		return value == number.value;
 	}
 
 	@Override
