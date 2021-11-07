@@ -24,9 +24,9 @@ class LottoResultTest {
     }
 
     @DisplayName("로또 결과 테스트")
-    @ParameterizedTest(name = "{displayName} -> number: {0}, expected: {1}")
+    @ParameterizedTest(name = "{displayName} -> input: {0}, key: {1}")
     @CsvSource(value = {
-            "1,2,3,4,5,6:6:"
+            "1,2,3,4,5,6:6"
             , "1,2,3,4,5,10:5"
             , "1,2,3,4,10,11:4"
             , "1,2,3,10,11,12:3"
