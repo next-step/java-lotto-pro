@@ -42,6 +42,10 @@ public class Lotto {
         this.lottoNumberList = new ArrayList<>(validate(inputLottoList));
     }
 
+    public static Lotto valueOf(List<LottoNumber> lottoNumberList) {
+        return new Lotto(lottoNumberList);
+    }
+
     private List<LottoNumber> validate(List<LottoNumber> lottoNumberList) {
         if (lottoNumberList == null) throw new NullPointerException("null값이 올 수 없습니다.");
         if (lottoNumberList.size() != BALL_CNT) throw new IllegalArgumentException("볼 개수가 일치하지 않습니다.");

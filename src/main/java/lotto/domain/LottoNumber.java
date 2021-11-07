@@ -9,6 +9,8 @@ import java.util.Objects;
  *               => 일급컬렉션에서 형변환을 해서 생성하기 떄문에 예외가 발생할 수 있고, 소스가 가독성이 좋아질 것같음
  *             2) 로또 번호 정렬하기
  *               => Comparable interface 사용
+ *             3) 정적 팩토리 메소드 사용 => 호출 시마다 객체생성을 줄일 수 있다. 가독성 좋아진다.
+ *                참고 : https://johngrib.github.io/wiki/pattern/static-factory-method/
  * */
 /**
  * packageName : lotto.domain
@@ -30,6 +32,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public LottoNumber(String strNumber) {
         if(StringUtil.isStringEmpty(strNumber)) throw new CustomEmptyException();
         this.number = this.validate(StringUtil.parseNumber(strNumber.trim()));
+    }
+
+    public static LottoNumber valueOf(int number) {
+        return new LottoNumber(number);
     }
 
     private int validate(int number) {
@@ -58,4 +64,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public int compareTo(LottoNumber comp1) {
         return this.number > comp1.number ? 1 : -1;
     }
+
+
 }

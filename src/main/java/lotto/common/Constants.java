@@ -8,14 +8,15 @@ package lotto.common;
  * description : 공통 상수 정의 클래스
  */
 public class Constants {
-    public static final long REWARD_4TH = 5000;
-    public static final long REWARD_3RD = 50000;
-    public static final long REWARD_2ND = 1500000;
-    public static final long REWARD_1ST = 2000000000;
+    public static final long REWARD_4TH = 5_000;
+    public static final long REWARD_3RD = 50_000;
+    public static final long REWARD_2ND = 1_500_000;
+    public static final long REWARD_1ST = 2_000_000_000;
 
-    public static final String MSG_INPUT_PURCHASE_PRICE = "구입금액을 입력해 주세요.";
+    public static final String MSG_INPUT_PURCHASE_PRICE = "";
     public static final String MSG_OUTPUT_PURCHASE_RESULT_SUFFIX = "개를 구매했습니다.";
-    public static final String MSG_INPUT_LAST_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String MSG_INPUT_LAST_WINNING_NUMBERS = "";
+    public static final String MSG_INPUT_BONUMS_NUMBER = "";
     public static final String MSG_OUTPUT_LOTTO_RESULT = "당첨통계";
     public static final String MSG_OUTPUT_LINE_SEPARATOR = "---------";
     public static final String MSG_OUTPUT_4TH_PREFIX = "3개 일치 (" + REWARD_4TH + "원)- ";

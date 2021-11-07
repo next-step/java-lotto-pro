@@ -55,4 +55,16 @@ public class LottoTest {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1)))).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복된 볼은 올 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("정적 팩토리 메소드 사용")
+    public void T04_staticFactoryMethod() {
+        //WHEN
+        LottoNumber number = LottoNumber.valueOf(LottoNumber.MIN_NUMBER);
+        //THEN
+        assertThat(number).isEqualTo(LottoNumber.valueOf(1));
+        assertThatThrownBy(() -> LottoNumber.valueOf(LottoNumber.MAX_NUMBER +1)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("1부터 45 사이의 숫자만 가능합니다.");
+
+    }
 }
