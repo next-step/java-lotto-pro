@@ -1,13 +1,28 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import nextstep.utils.Console;
+import step2.PositiveNumber;
 
 public class View {
 
 	public String inPayKRW() {
 		println(Message.INPUT_PAY_KRW.getContent());
 		return Console.readLine();
+	}
+
+	public String inNumOfManualLottos() {
+		println(Message.INPUT_NUM_OF_MANUAL_LOTTOS.getContent());
+		return Console.readLine();
+	}
+
+	public List<String> inManualLottos(PositiveNumber numOfLottos) {
+		println(Message.INPUT_MANUAL_LOTTOS.getContent());
+		return IntStream.range(0, numOfLottos.get())
+			.mapToObj(i -> Console.readLine())
+			.collect(Collectors.toList());
 	}
 
 	public String inWinningLotto() {
@@ -20,8 +35,9 @@ public class View {
 		return Console.readLine();
 	}
 
-	public void outBoughtLotto(List<Lotto> lottos) {
-		println(String.format(Message.BOUGHT_LOTTO.getContent(), lottos.size()));
+	public void outBoughtLottos(int numOfManualLottos, List<Lotto> lottos) {
+		final int numOfAutoLottos = lottos.size() - numOfManualLottos;
+		println(String.format(Message.BOUGHT_LOTTO.getContent(), numOfManualLottos, numOfAutoLottos));
 		lottos.stream().map(Lotto::toString).forEach(this::println);
 	}
 
