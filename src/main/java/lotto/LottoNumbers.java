@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbers {
+	private static final int MATCHED_NUMBER_PLUS = 1;
+	private static final int NON_MATCHED_NUMBER = 0;
 	private final List<Integer> lottoNumbers = new ArrayList<>();
 
 	public LottoNumbers(int... lottoNumbers) {
@@ -20,9 +22,9 @@ public class LottoNumbers {
 
 	public int isMatch(int winningNumber) {
 		if (lottoNumbers.contains(winningNumber)) {
-			return CommonConstant.MATCHED_NUMBER_PLUS;
+			return MATCHED_NUMBER_PLUS;
 		}
-		return CommonConstant.NON_MATCHED_NUMBER;
+		return NON_MATCHED_NUMBER;
 	}
 
 	public String StringValues() {

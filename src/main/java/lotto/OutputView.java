@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class OutputView {
+	private static final String PRINT_PURCHASE_QUANTITY = "%d개를 구매했습니다.";
+	private static final String PRINT_LOTTO_STATISTICS_HEADER = "당첨 통계 \n--------";
+	private static final String PRINT_WINNING_INFORMATION = "%d개 일치 (%d원)- %d개";
+	private static final String PRINT_PROFIT_RATE = "총 수익률은 %.2f입니다.";
+
 	private static Scanner scanner = new Scanner(System.in);
 
 	public static void printMessage(String message) {
@@ -11,7 +16,7 @@ public class OutputView {
 	}
 
 	public static void printPurchaseQuantity(int purchaseQuantity) {
-		System.out.printf(CommonMessage.PRINT_PURCHASE_QUANTITY, purchaseQuantity);
+		System.out.printf(PRINT_PURCHASE_QUANTITY, purchaseQuantity);
 	}
 
 	public static void newLine() {
@@ -19,7 +24,7 @@ public class OutputView {
 	}
 
 	public static void printLottoStatisticsHeader() {
-		System.out.println(CommonMessage.PRINT_LOTTO_STATISTICS_HEADER);
+		System.out.println(PRINT_LOTTO_STATISTICS_HEADER);
 	}
 
 	public static void printLottoStatisticsBody(List<WinningInformation> winningRecord, double profitRate) {
@@ -29,7 +34,7 @@ public class OutputView {
 
 	private static void printWinningInformation(List<WinningInformation> winningRecord) {
 		for (WinningInformation information : winningRecord) {
-			System.out.printf(CommonMessage.PRINT_WINNING_INFORMATION,
+			System.out.printf(PRINT_WINNING_INFORMATION,
 				information.getMatchedNumber(),
 				information.getWinningAmount(),
 				information.getWinnerCount());
@@ -39,6 +44,6 @@ public class OutputView {
 	}
 
 	private static void printProfitRate(double profitRate) {
-		System.out.printf(CommonMessage.PRINT_PROFIT_RATE, profitRate);
+		System.out.printf(PRINT_PROFIT_RATE, profitRate);
 	}
 }

@@ -3,6 +3,7 @@ package lotto;
 import java.util.List;
 
 public class LottoStatistics {
+	private static final int LOTTO_PRICE = 1000;
 	private final WinningRecord winningRecord = new WinningRecord();
 	private final Quantity totalLottoQuantity = new Quantity();
 
@@ -22,7 +23,7 @@ public class LottoStatistics {
 		for (WinningInformation information : getWinningRecord()) {
 			totalProfit += information.getWinningAmount() * information.getWinnerCount();
 		}
-		return totalProfit / (CommonConstant.LOTTO_SALES_PRICE * getTotalLottoQuantity());
+		return totalProfit / (LOTTO_PRICE * getTotalLottoQuantity());
 	}
 
 	private int getTotalLottoQuantity() {
