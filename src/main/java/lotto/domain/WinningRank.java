@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum WinningRank {
-    FIRST_RANK(6, 2000000000), 
-    SECOND_RANK(5, 1500000), 
-    THIRD_RANK(4, 50000), 
-    FOURTH_RANK(3, 5000), 
+    FIRST_RANK(6, 2_000_000_000), 
+    SECOND_RANK(5, 1_500_000), 
+    THIRD_RANK(4, 50_000), 
+    FOURTH_RANK(3, 5_000), 
     FAIL(0, 0);
 
     private final int matchCount;
