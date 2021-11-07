@@ -31,4 +31,48 @@ public class RankTest {
         //THEN
         assertThat(Rank.FIRST.getWinningMoney()).isEqualTo(2_000_000_000);
     }
+
+    @Test
+    @DisplayName("1등")
+    public void T3_1등() {
+        //THEN
+        assertThat(Rank.valueOf(6, false)).isEqualTo(Rank.FIRST);
+        assertThat(Rank.valueOf(6, true)).isEqualTo(Rank.FIRST);
+    }
+
+    @Test
+    @DisplayName("2등")
+    public void T4_2등() {
+        //THEN
+        assertThat(Rank.valueOf(5, true)).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    @DisplayName("3등")
+    public void T5_3등() {
+        //THEN
+        assertThat(Rank.valueOf(5, false)).isEqualTo(Rank.THIRD);
+    }
+    @Test
+    @DisplayName("4등")
+    public void T6_4등() {
+        //THEN
+        assertThat(Rank.valueOf(4, false)).isEqualTo(Rank.FOURTH);
+    }
+    @Test
+    @DisplayName("5등")
+    public void T7_5등() {
+        //THEN
+        assertThat(Rank.valueOf(3, false)).isEqualTo(Rank.FIFTH);
+    }
+    @Test
+    @DisplayName("꽝")
+    public void T8_꽝() {
+        //THEN
+        assertThat(Rank.valueOf(0, true)).isEqualTo(Rank.MISS);
+        assertThat(Rank.valueOf(1, false)).isEqualTo(Rank.MISS);
+        assertThat(Rank.valueOf(2, true)).isEqualTo(Rank.MISS);
+    }
+
+
 }
