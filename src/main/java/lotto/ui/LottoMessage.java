@@ -1,7 +1,7 @@
 package lotto.ui;
 
-import lotto.BuyAmount;
-import lotto.LottoResults;
+import lotto.domain.BuyAmount;
+import lotto.domain.LottoResults;
 
 public class LottoMessage {
     public static final String MINIMUM_TICKET_PRICE_MESSAGE = "구입 금액을 확인해 주세요.";

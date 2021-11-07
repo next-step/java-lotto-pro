@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.exception.WrongLottoNumberSizeException;
 import lotto.ui.LottoMessage;

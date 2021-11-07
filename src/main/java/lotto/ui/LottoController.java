@@ -1,9 +1,9 @@
 package lotto.ui;
 
-import lotto.BuyAmount;
-import lotto.LottoNumbers;
-import lotto.LottoNumbersGroup;
-import lotto.LottoResults;
+import lotto.domain.BuyAmount;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoNumbersGroup;
+import lotto.domain.LottoResults;
 
 import java.util.Scanner;
 

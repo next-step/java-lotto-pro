@@ -1,8 +1,8 @@
 package lotto.ui;
 
-import lotto.BuyAmount;
-import lotto.LottoRankingStatus;
-import lotto.LottoResults;
+import lotto.domain.BuyAmount;
+import lotto.domain.LottoRankingStatus;
+import lotto.domain.LottoResults;
 import lotto.dto.LottoResultsDto;
 
 import java.util.Map;

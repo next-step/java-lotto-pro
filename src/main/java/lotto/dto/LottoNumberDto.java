@@ -1,6 +1,6 @@
 package lotto.dto;
 
-import lotto.LottoNumber;
+import lotto.domain.LottoNumber;
 
 public class LottoNumberDto implements Comparable<LottoNumberDto> {
     private final int number;
