@@ -114,4 +114,13 @@ public class LottoTest {
         assertThat(revenue.percentage()).isEqualTo(0.35);
     }
 
+    @DisplayName("로또 번호에 보너스 여부를 추가하는 테스트")
+    @Test
+    public void lottoNumber_isBonusTest() {
+        LottoNumber one = new LottoNumber(1);
+        LottoNumber two = new LottoNumber(2, true);
+        assertThat(one.isBonus()).isFalse();
+        assertThat(two.isBonus()).isTrue();
+    }
+
 }
