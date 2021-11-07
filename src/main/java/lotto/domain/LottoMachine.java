@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LottoMachine implements Machine {
+public class LottoMachine {
 
     protected static final String NUMBER_DELIMITER = ",";
     private static final String WINNING_LOTTO_ERROR = String.format("당첨 번호는 %d개여야 합니다.", Lotto.LOTTO_NUMBER_COUNT);
 
-    @Override
     public void start() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         List<Lotto> lottoList = sell(purchaseAmount);
