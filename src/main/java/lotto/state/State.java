@@ -7,9 +7,16 @@ import java.util.Scanner;
 
 public interface State {
     void printQuestion(PrintStream out);
-    void printResult(String text, PrintStream out);
+
+    default void printResult(String text, PrintStream out) {
+        // do nothing
+    }
+
     State next();
-    boolean isFinish();
+
+    default boolean isFinish() {
+        return false;
+    }
 
     default void process(AutoLottoApplication autoLottoApplication, Scanner scanner) {
         printQuestion(System.out);
