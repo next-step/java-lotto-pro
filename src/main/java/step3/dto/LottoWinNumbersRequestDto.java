@@ -6,7 +6,7 @@ import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
 
 public class LottoWinNumbersRequestDto {
-    private static final String NOT_SAME_NUMBER = "담청번호와 동일 할 수 없습니다.";
+    private static final String NOT_SAME_NUMBER = "당첨번호와 동일 할 수 없습니다.";
     private final LottoNumbers lottoNumbers;
     private final Amount amount;
 
