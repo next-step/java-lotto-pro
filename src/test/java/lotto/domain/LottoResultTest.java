@@ -35,6 +35,28 @@ public class LottoResultTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    static Stream<Arguments> listProvide3() {
+        List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
+        List<Number> lottoNumber2 = Arrays.asList(Number.of(7), Number.of(8), Number.of(9), Number.of(10), Number.of(5), Number.of(7));
+        List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
+        return Stream.of(arguments(lottoNumber, lottoNumber2, matchNumber, Number.of(7)));
+    }
+
+    @ParameterizedTest
+    @MethodSource("listProvide3")
+    @DisplayName("로또 수익률 확인")
+    public void lottoDifferentTest(List<Number> lottoNumber, List<Number> lottoNumber2, List<Number> matchNumber, Number bonusNumber) {
+        WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
+        LottoResult lottoMatchResult = winningLotto.getLottoMatchResult(Arrays.asList(new LottoNumber(lottoNumber)));
+        LottoResult lottoMatchResult2 = winningLotto.getLottoMatchResult(Arrays.asList(new LottoNumber(lottoNumber2)));
+
+        double actual = lottoMatchResult.getLottoYield();
+        double actual2 = lottoMatchResult2.getLottoYield();
+
+        assertThat(actual).isNotEqualTo(actual2);
+    }
+
+
     static Stream<Arguments> listProvide2() {
         List<Number> lottoNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
         List<Number> matchNumber = Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
