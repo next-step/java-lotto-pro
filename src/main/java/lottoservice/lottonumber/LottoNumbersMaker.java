@@ -38,7 +38,6 @@ public class LottoNumbersMaker {
 		arrangeManipulator.shuffleElements(lottoNumberCandidates);
 		List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberCandidates.subList(0,
 			SIZE_OF_LOTTERY_NUMBERS));  /*List의 subList는 deepCopy가 아니므로 새로 인스턴스를 생성하여 전달 */
-		Collections.sort(lottoNumbers);
 		return lottoNumbers;
 	}
 
