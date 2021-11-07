@@ -2,6 +2,7 @@ package edu.lotto.model;
 
 import edu.lotto.constants.MessageConstants;
 import edu.lotto.constants.PatternConstants;
+import edu.lotto.utils.MessageUtil;
 import edu.lotto.utils.NumberUtil;
 
 import java.text.DecimalFormat;
@@ -39,7 +40,7 @@ public class Lottos {
 	private List<Lotto> getLottos(int perchaseAmount) {
 		List<Lotto> lottos = new ArrayList<Lotto>();
 		int lottoCount = getLottoCount(perchaseAmount);
-		System.out.println(lottoCount + MessageConstants.LOTTO_PERCHASE_MESSAGE);
+		MessageUtil.printMessage(lottoCount + MessageConstants.LOTTO_PERCHASE_MESSAGE);
 		for(int i=0; i<lottoCount; i++) {
 			lottos.add(new Lotto());
 		}
@@ -57,12 +58,13 @@ public class Lottos {
 	}
 
 	public void printLottoMatchesCountStatistics() {
-		System.out.println("\n"+MessageConstants.LOTTO_STATISTICS_MESSAGE);
-		System.out.println("---------");
-		System.out.println(MessageConstants.THREE_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(3) +"개");
-		System.out.println(MessageConstants.FOUR_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(4) +"개");
-		System.out.println(MessageConstants.FIVE_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(5) +"개");
-		System.out.println(MessageConstants.SIX_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(6) +"개");
+		MessageUtil.printMessage("\n"+MessageConstants.LOTTO_STATISTICS_MESSAGE);
+		MessageUtil.printSeparatorLine();
+
+		MessageUtil.printMessage(MessageConstants.THREE_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(3) +"개");
+		MessageUtil.printMessage(MessageConstants.FOUR_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(4) +"개");
+		MessageUtil.printMessage(MessageConstants.FIVE_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(5) +"개");
+		MessageUtil.printMessage(MessageConstants.SIX_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(6) +"개");
 		printLottoProfitRatio();
 	}
 
@@ -72,7 +74,7 @@ public class Lottos {
 				+ (1500000 * this.fiveMatches)
 				+ (2000000000 * this.sixMatches);
 		String profitRatio = new DecimalFormat("#.##").format((float) profit / (float) this.perchaseAmount);
-		System.out.println("총 수익률은 "+profitRatio+"입니다.");
+		MessageUtil.printMessage(MessageConstants.LOTTO_PROFIT_RATIO_MESSAGE, profitRatio);
 	}
 
 	public long getLottoMatchesCountByMatchNumber(long number) {
@@ -93,11 +95,11 @@ public class Lottos {
 		boolean validPerchaseAmount = true;
 		if(!NumberUtil.isNumber(amount)) {
 			validPerchaseAmount = false;
-			System.out.println(MessageConstants.ONLY_INPUT_NUMBER_MESSAGE);
+			MessageUtil.printMessage(MessageConstants.ONLY_INPUT_NUMBER_MESSAGE);
 		}
 		if(validPerchaseAmount && !NumberUtil.isMoreThanThousand(Integer.parseInt(amount))) {
 			validPerchaseAmount = false;
-			System.out.println(MessageConstants.LOTTO_PRICE_INFORMATION_MESSAGE);
+			MessageUtil.printMessage(MessageConstants.LOTTO_PRICE_INFORMATION_MESSAGE);
 		}
 		return validPerchaseAmount;
 	}

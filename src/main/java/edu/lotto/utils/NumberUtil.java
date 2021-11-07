@@ -1,6 +1,5 @@
 package edu.lotto.utils;
 
-import edu.lotto.constants.MessageConstants;
 import edu.lotto.constants.PatternConstants;
 
 import java.util.regex.Pattern;

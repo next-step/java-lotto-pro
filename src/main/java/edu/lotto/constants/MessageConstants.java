@@ -13,5 +13,6 @@ public class MessageConstants {
 	public static final String FOUR_MATCHES_MESSAGE = "4개 일치 (50000원)- ";
 	public static final String FIVE_MATCHES_MESSAGE = "5개 일치 (1500000원)- ";
 	public static final String SIX_MATCHES_MESSAGE = "6개 일치 (2000000000원)- ";
+	public static final String LOTTO_PROFIT_RATIO_MESSAGE = "총 수익률은 %s입니다.";
 
 }

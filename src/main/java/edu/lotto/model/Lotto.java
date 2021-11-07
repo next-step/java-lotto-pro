@@ -1,6 +1,6 @@
 package edu.lotto.model;
 
-import edu.lotto.utils.NumberUtil;
+import edu.lotto.utils.MessageUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +21,7 @@ public class Lotto {
 
 	public Lotto() {
 		this.lottoNumbers = setLottoNumber();
-		System.out.println(lottoNumbers.toString());
+		MessageUtil.printMessage(lottoNumbers.toString());
 	}
 
 	/**

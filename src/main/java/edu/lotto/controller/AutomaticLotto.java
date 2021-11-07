@@ -3,6 +3,7 @@ package edu.lotto.controller;
 import edu.lotto.constants.MessageConstants;
 import edu.lotto.constants.PatternConstants;
 import edu.lotto.model.Lottos;
+import edu.lotto.utils.MessageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class AutomaticLotto {
 	 * @return
 	 */
 	public static String getPerchaseAmount() {
-		System.out.println(MessageConstants.INPUT_PERCHASE_AMOUNT_MESSAGE);
+		MessageUtil.printMessage(MessageConstants.INPUT_PERCHASE_AMOUNT_MESSAGE);
 		Scanner scan = new Scanner(System.in);
 		String amount = scan.next();
 		if (!Lottos.checkPerchaseAmountValidation(amount)) {
@@ -58,11 +59,11 @@ public class AutomaticLotto {
 	 * @return
 	 */
 	public static String getLatestWinningNumbersByUserInput() {
-		System.out.println("\n"+MessageConstants.INPUT_LATEST_WINNING_NUMBERS_MESSAGE);
+		MessageUtil.printMessage("\n"+MessageConstants.INPUT_LATEST_WINNING_NUMBERS_MESSAGE);
 		Scanner scan = new Scanner(System.in);
 		String winningNumbers = scan.next().trim();
 		if (!Lottos.checkInputWinningNumbersValidation(winningNumbers)) {
-			System.out.println(MessageConstants.LATEST_WINNING_NUMBERS_ERROR_MESSAGE);
+			MessageUtil.printMessage(MessageConstants.LATEST_WINNING_NUMBERS_ERROR_MESSAGE);
 			winningNumbers = getLatestWinningNumbersByUserInput();
 		}
 		return winningNumbers;
