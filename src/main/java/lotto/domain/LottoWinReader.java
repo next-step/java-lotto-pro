@@ -7,12 +7,20 @@ import java.util.Map;
 
 public class LottoWinReader {
 
+    private static final String NUMBER_OVERLAP_ERROR_MESSAGE = "기존의 로또 번호와 보너스번호가 중복됩니다.";
     private final Lotto winLotto;
     private LottoNumber bonusNumber;
 
-    public LottoWinReader(List<Integer> numbers, int bonus) {
+    public LottoWinReader(List<Integer> numbers, int bonusNumber) {
+        validateBonusNumber(numbers, bonusNumber);
         this.winLotto = new Lotto(numbers);
-        this.bonusNumber = new LottoNumber(bonus, true);
+        this.bonusNumber = new LottoNumber(bonusNumber, true);
+    }
+
+    private void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
+        if(numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(NUMBER_OVERLAP_ERROR_MESSAGE);
+        }
     }
 
     public LottoStatistic distinguish(Lottos lottos) {
