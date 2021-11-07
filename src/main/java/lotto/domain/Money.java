@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.LottoPurchaseAmountException;
+
 import java.util.Objects;
 
 import static lotto.domain.LottoNumber.GAME_PRICE;
@@ -13,8 +15,8 @@ public class Money {
         this.money = money;
     }
 
-    public int getPurchaseCount() {
-        return money / GAME_PRICE;
+    public int getPurchaseCount(int gamePrice) {
+        return money / gamePrice;
     }
 
     private void validation(int purchaseAmount) {
@@ -25,14 +27,14 @@ public class Money {
     private void validateRemainderAmount(int purchaseAmount) {
         if (purchaseAmount % GAME_PRICE > 0) {
             System.out.println("[ERROR] 구입 시도 금액이 잘못되었습니다.");
-            throw new IllegalArgumentException("[ERROR] 구입 시도 금액이 잘못되었습니다.");
+            throw new LottoPurchaseAmountException("[ERROR] 구입 시도 금액이 잘못되었습니다.");
         }
     }
 
     private void validateZeroAmount(int purchaseAmount) {
         if (purchaseAmount == 0) {
             System.out.println("[ERROR] 구입 할 금액을 입력해주세요.");
-            throw new IllegalArgumentException("[ERROR] 구입 할 금액을 입력해주세요.");
+            throw new LottoPurchaseAmountException("[ERROR] 구입 할 금액을 입력해주세요.");
         }
     }
 
