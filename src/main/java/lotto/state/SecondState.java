@@ -1,4 +1,4 @@
-package lotto.auto;
+package lotto.state;
 
 import lotto.domain.LotteryTicket;
 import lotto.domain.LottoNumbers;

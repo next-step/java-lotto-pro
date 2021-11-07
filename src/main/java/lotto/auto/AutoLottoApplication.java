@@ -1,6 +1,9 @@
 package lotto.auto;
 
 import lotto.domain.CollectionsShuffler;
+import lotto.state.FirstState;
+import lotto.state.FirstStateView;
+import lotto.state.State;
 
 import java.util.Scanner;
 

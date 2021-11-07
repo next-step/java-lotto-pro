@@ -1,5 +1,6 @@
-package lotto.auto;
+package lotto.state;
 
+import lotto.auto.AutoLottoPrinter;
 import lotto.domain.*;
 
 import java.io.PrintStream;

@@ -1,4 +1,4 @@
-package lotto.auto;
+package lotto.state;
 
 import java.io.PrintStream;
 

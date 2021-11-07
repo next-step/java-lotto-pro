@@ -1,4 +1,6 @@
-package lotto.auto;
+package lotto.state;
+
+import lotto.auto.AutoLottoApplication;
 
 import java.io.PrintStream;
 import java.util.Scanner;

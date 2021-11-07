@@ -1,7 +1,9 @@
-package lotto.auto;
+package lotto.state;
 
 import lotto.domain.LotteryTicket;
 import lotto.domain.LottoNumbers;
+import lotto.state.SecondState;
+import lotto.state.SecondStateView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

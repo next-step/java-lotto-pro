@@ -1,4 +1,4 @@
-package lotto.auto;
+package lotto.state;
 
 import lotto.domain.Rank;
 import lotto.domain.Record;
