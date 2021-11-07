@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class RequestView implements InputView {
 
 	private static final Pattern COMMA = Pattern.compile("([\\w\\d].+)+([^\\w,]).+");
-	private static final Pattern LAST_COMMA = Pattern.compile("([0-9],){1,}");
+	private static final Pattern LAST_COMMA = Pattern.compile("/,\\s*$/");
 	private static final Pattern ONLY_NUMBER = Pattern.compile("((?:^|,)([0-9]+))+");
 	private static final Pattern NUMBER_SIZE_SIX = Pattern.compile("((?:^|,)([0-9]{1,2})){6}");
 
