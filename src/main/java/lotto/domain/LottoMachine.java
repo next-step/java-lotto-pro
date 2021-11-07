@@ -35,6 +35,16 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
+    public LottoNumber getLottoNumber(List<Integer> numbers) {
+        return new LottoNumber(numbers.stream()
+                .map(m -> Number.of(m))
+                .collect(Collectors.toList()));
+    }
+
+    public Number getBonusNumber(int bonusNumber) {
+        return Number.of(bonusNumber);
+    }
+
     private int getPurchaseCount(Money purchaseAmount, Money gamePrice) {
         return purchaseAmount.getMoney().divide(gamePrice.getMoney()).intValue();
     }
@@ -48,19 +58,17 @@ public class LottoMachine {
 
     private List<LottoNumber> generateActiveLotto(List<List<Integer>> activeNumbers) {
         return activeNumbers.stream()
-                .map(m -> m.stream()
-                        .map(s -> Number.of(s))
-                        .collect(Collectors.toList()))
-                .map(LottoNumber::new)
+                .map(m -> getLottoNumber(m))
                 .collect(Collectors.toList());
     }
 
     private LottoNumber getAutoLottoNumbers() {
-        Set<Number> numbers = new HashSet<>();
+        Set<Integer> numbers = new HashSet<>();
         while (numbers.size() < LOTTO_SIZE) {
-            numbers.add(Number.of(getRandomNumber()));
+            numbers.add(getRandomNumber());
         }
-        return new LottoNumber(new ArrayList<>(numbers));
+        LottoNumber lottoNumber = getLottoNumber(new ArrayList<>(numbers));
+        return lottoNumber;
     }
 
     private int getRandomNumber() {

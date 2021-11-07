@@ -29,8 +29,8 @@ public class LottoMachineController {
         List<LottoNumber> lottoList = lottoMachine.getLottoList(money, activeNumber);
         printPurchaseLottoList(lottoList, activeNumber.size());
 
-        List<Number> matchNumber = getUserInputMatchNumber();
-        Number bonusNumber = Number.of(inputView.getUserInputBonusNumber());
+        LottoNumber matchNumber = lottoMachine.getLottoNumber(getUserInputMatchNumber());
+        Number bonusNumber = lottoMachine.getBonusNumber(inputView.getUserInputBonusNumber());
 
         LottoResult matchLottoResultResult = new WinningLotto(matchNumber, bonusNumber).getLottoMatchResult(lottoList);
 
@@ -42,11 +42,8 @@ public class LottoMachineController {
         return BigDecimal.valueOf(inputView.getUserInputPurchaseAmount());
     }
 
-    private List<Number> getUserInputMatchNumber() {
-        return inputView.getUserInputMatchNumber()
-                .stream()
-                .map(m -> Number.of(m))
-                .collect(Collectors.toList());
+    private List<Integer> getUserInputMatchNumber() {
+        return inputView.getUserInputMatchNumber();
     }
 
     private List<List<Integer>> getUserInputActiveNumber() {
