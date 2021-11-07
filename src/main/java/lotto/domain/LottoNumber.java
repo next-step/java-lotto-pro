@@ -13,7 +13,7 @@ import static lotto.utils.ValidationUtils.*;
 public class LottoNumber {
 
     public static final int LOTTO_SIZE = 6;
-    public final static BigDecimal GAME_PRICE = BigDecimal.valueOf(1000);
+    public final static Money GAME_PRICE = new Money(BigDecimal.valueOf(1000));
 
     private final List<Number> lottoNumbers;
 

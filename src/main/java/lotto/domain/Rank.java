@@ -23,7 +23,6 @@ public enum Rank {
         this.expression = expression;
     }
 
-
     public static Rank of(int matchCount, boolean matchBonus) {
         return Stream.of(Rank.values())
                 .filter(rank -> rank.expression.isMatch(matchCount, matchBonus))

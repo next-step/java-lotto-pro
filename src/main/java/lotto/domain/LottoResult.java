@@ -33,13 +33,14 @@ public class LottoResult {
         return sum;
     }
 
-    private BigDecimal getPurchaseAmount(BigDecimal gamePrice) {
-        return gamePrice.multiply(
-                BigDecimal.valueOf(lottoMatchResult.values()
-                        .stream()
-                        .mapToInt(Integer::intValue)
-                        .sum())
-        );
+    private BigDecimal getPurchaseAmount(Money gamePrice) {
+        return gamePrice.getMoney()
+                .multiply(
+                        BigDecimal.valueOf(lottoMatchResult.values()
+                                .stream()
+                                .mapToInt(Integer::intValue)
+                                .sum())
+                );
     }
 
 }
