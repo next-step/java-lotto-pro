@@ -1,6 +1,7 @@
 package lotto.domain.winstatistics;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.winpolicy.Policy;
 import lotto.domain.winpolicy.WinPolicy;
@@ -21,13 +22,13 @@ public class WinStatistics {
     return revenueRatio.getValue();
   }
 
-  public void analysis(Lotto latestWinLotto, Lottos buyLottos) {
+  public void analysis(Lotto latestWinLotto, Lottos buyLottos, LottoNumber bonusNumber) {
     Integer totalWinPrice = 0;
 
     this.winStatisticsInfos.clear();
 
     for (WinPolicy winPolicy : WinPolicy.values()) {
-      Integer matchCount = winPolicy.getMatchCount(latestWinLotto, buyLottos);
+      Integer matchCount = winPolicy.getMatchCount(latestWinLotto, buyLottos, bonusNumber);
 
       this.winStatisticsInfos.add(WinStatisticsInfo.of(winPolicy, matchCount));
 

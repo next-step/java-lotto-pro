@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.AfterEach;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import lotto.infrastructure.component.TextEdit;
 import lotto.presentation.BuyLotto;
 import lotto.presentation.Screen;
 
@@ -46,12 +48,12 @@ public class BuyLottoTest {
   void  print_BuyLotto(String buyPrice, String expectedString) {
     // given
     System.setIn(new ByteArrayInputStream(Strings.join(buyPrice).with("\n").getBytes()));
+    TextEdit.scanner = new Scanner(System.in);
 
     Screen buyLotto = new BuyLotto();
 
     // when
     buyLotto.render();
-
     // then
     assertThat(outContent.toString().trim()).contains("구입금액을 입력해 주세요.", expectedString);
   }

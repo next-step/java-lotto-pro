@@ -1,6 +1,7 @@
 package lotto.domain.winpolicy;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 
 public class FiveMatch extends Policy {
   public FiveMatch() {
@@ -8,8 +9,8 @@ public class FiveMatch extends Policy {
   }
 
   @Override
-  public Boolean isMatch(Lotto latestWinLotto, Lotto lotto) {
-    if (latestWinLotto.matchCountOf(lotto).equals(5)) {
+  public Boolean isMatch(Lotto latestWinLotto, Lotto lotto, LottoNumber bonusNumber) {
+    if (latestWinLotto.matchCountOf(lotto).equals(5) && !lotto.containLottoNumber(bonusNumber)) {
       return true;
     }
 

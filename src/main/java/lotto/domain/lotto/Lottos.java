@@ -34,9 +34,9 @@ public class Lottos {
     return Lotto.PRICE * this.lottos.size();
   }
 
-  public Integer matchCount(Policy policy, Lotto latestWinLotto) {
+  public Integer matchCount(Policy policy, Lotto latestWinLotto, LottoNumber lottoNumber) {
     return (int) lottos.stream()
-                        .filter(lotto -> policy.isMatch(latestWinLotto, lotto))
+                        .filter(lotto -> policy.isMatch(latestWinLotto, lotto, lottoNumber))
                         .count();
   }
 }

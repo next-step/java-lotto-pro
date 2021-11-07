@@ -69,3 +69,16 @@ public class SetTest {
 
 ### Class Diagram
 ![class-diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/LuneChaser/java-lotto-pro/step3/classdiagram/Lotto_3step.pu)
+
+## 4단계-로또(2등)
+### 요구사항
+ - 로또번호가 5개가 일치하고 보너스 번호가 일치하면 2등이된다.
+ - 당첨 통계에 2등의 결과가 반영된다.
+
+### 기능목록
+ - [x] 2등 당첨정책은 5개가 일치하고 보너스 번호가 일치된다.
+ - [x] 당첨 정보 입력화면은 보너스 볼 입력을 받게된다.
+ - [x] 당첨 통계조회화면은 2등에대한 정보를 포함하여 출력된다.
+ 
+### Class Diagram
+![class-diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/LuneChaser/java-lotto-pro/step4/classdiagram/Lotto_4step.pu)
