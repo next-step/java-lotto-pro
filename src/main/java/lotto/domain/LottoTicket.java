@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -7,47 +8,41 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers) {
-        validateSize(lottoNumbers);
-        validateDuplicate(lottoNumbers);
-        validateRangeOfNumbers(lottoNumbers);
-        validateSorted(lottoNumbers);
-        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    public LottoTicket(List<Integer> numbers) {
+        validateSize(numbers);
+        validateDuplicate(numbers);
+        validateSorted(numbers);
+        this.lottoNumbers = Collections.unmodifiableList(createLottoNumbers(numbers));
     }
 
-    private void validateRangeOfNumbers(List<Integer> lottoNumbers) {
-        for (Integer lottoNumber : lottoNumbers) {
-            validateRange(lottoNumber);
+    private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (Integer number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
         }
+        return lottoNumbers;
     }
 
-    private void validateRange(Integer lottoNumber) {
-        if (lottoNumber < LottoNumberRange.LOTTO_NUMBER_MIN_RANGE.getRange()
-            || lottoNumber > LottoNumberRange.LOTTO_NUMBER_MAX_RANGE.getRange()) {
-            throw new IllegalArgumentException(Message.OUT_OF_RANGE_NUMBER_MESSAGE.getMessage());
-        }
-    }
-
-    private void validateSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LottoNumbersSize.LOTTO_NUMBERS_SIZE.getSize()) {
+    private void validateSize(List<Integer> numbers) {
+        if (numbers.size() != LottoNumbersSize.LOTTO_NUMBERS_SIZE.getSize()) {
             throw new IllegalArgumentException(Message.WRONG_NUMBERS_SIZE_MESSAGE.getMessage());
         }
     }
 
-    private void validateDuplicate(List<Integer> lottoNumbers) {
-        Set<Integer> nonDuplicatedNumbers = new HashSet<>(lottoNumbers);
-        if (nonDuplicatedNumbers.size() != lottoNumbers.size()) {
+    private void validateDuplicate(List<Integer> numbers) {
+        Set<Integer> nonDuplicatedNumbers = new HashSet<>(numbers);
+        if (nonDuplicatedNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException(Message.EXIST_DUPLICATE_NUMBER_MESSAGE.getMessage());
         }
     }
 
-    private void validateSorted(List<Integer> lottoNumbers) {
-        boolean isSorted = lottoNumbers.stream()
+    private void validateSorted(List<Integer> numbers) {
+        boolean isSorted = numbers.stream()
             .sorted()
             .collect(Collectors.toList())
-            .equals(lottoNumbers);
+            .equals(numbers);
 
         if (!isSorted) {
             throw new IllegalArgumentException(Message.NON_SORTED_NUMBERS_MESSAGE.getMessage());
@@ -55,8 +50,8 @@ public class LottoTicket {
     }
 
     public Rank winningRank(LottoTicket winningTicket) {
-        Set<Integer> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
-        List<Integer> winningNumbers = winningTicket.lottoNumbers;
+        Set<LottoNumber> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
+        List<LottoNumber> winningNumbers = winningTicket.lottoNumbers;
         nonDuplicateNumbers.addAll(winningNumbers);
         int countOfMatch = this.lottoNumbers.size() + winningNumbers.size() - nonDuplicateNumbers.size();
         return Rank.valueOf(countOfMatch);
