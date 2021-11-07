@@ -24,6 +24,8 @@ public class Lottos {
 	}
 	@Override
 	public String toString() {
-		return String.join(JOIN_DELIMITER, lottos.toString());
+		return lottos.stream()
+			.map(lotto -> lotto.toString()+JOIN_DELIMITER)
+			.collect(Collectors.joining());
 	}
 }

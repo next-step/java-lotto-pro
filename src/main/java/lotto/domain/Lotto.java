@@ -33,7 +33,7 @@ public class Lotto {
 
 	public Rank match(Lotto lotto) {
 		return Rank.rank(this.lottoNumbers.stream()
-			.filter(no -> lotto.lottoNumbers.contains(no))
+			.filter(lotto.lottoNumbers::contains)
 			.count());
 	}
 

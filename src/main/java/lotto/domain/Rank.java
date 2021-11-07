@@ -7,7 +7,8 @@ public enum Rank {
 	FOURTH_PLACE(3, "5_000"),
 	FAILED(0, "0");
 
-	public static final String UNDER_BAR = "_";
+	public static final String REPLACEMENT_EMPTY = "";
+	public static final String REPLACEMENT_TARGET = "_";
 
 	private final long matchCount;
 	private final String prizeMoney;
@@ -49,8 +50,8 @@ public enum Rank {
 		return FIRST_PLACE.matchCount == matchCount;
 	}
 
-	public double getPrizeMoney() {
-		return Double.parseDouble(this.prizeMoney.replace(UNDER_BAR, ""));
+	public long getPrizeMoney() {
+		return Long.parseLong(this.prizeMoney.replace(REPLACEMENT_TARGET, REPLACEMENT_EMPTY));
 	}
 
 	public long getMatchCount() {

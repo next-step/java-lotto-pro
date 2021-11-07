@@ -27,13 +27,12 @@ public class LottosTest {
 		int lottoCount = lottos.quantity();
 
 		assertThat(lottoCount).isEqualTo(lottoCount);
-		assertThat(lottos.toString()).isEqualTo(lottoCount);
 	}
 
 	@Test
 	public void 로또_순위_반환() {
-		Lotto lotto = new Lotto(Arrays.asList(1, 2, 13, 14, 15, 45));
-		List<Rank> rank = lottos.match(lotto);
-		assertThat(rank).contains(Rank.FOURTH_PLACE, Rank.FIRST_PLACE);
+		Lotto winninglotto = new Lotto(Arrays.asList(1, 4, 5, 6, 7, 8));
+		List<Rank> rank = lottos.match(winninglotto);
+		assertThat(rank).contains(Rank.FIRST_PLACE, Rank.THIRD_PLACE);
 	}
 }

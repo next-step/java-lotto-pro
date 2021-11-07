@@ -16,7 +16,7 @@ public class WinningLotto {
 	}
 
 	public WinningRecord match(Lottos lottos) {
-		return new WinningRecord(lottos.match(winningLotto));
+		return new WinningRecord(lottos.match(this.winningLotto));
 	}
 
 	@Override
