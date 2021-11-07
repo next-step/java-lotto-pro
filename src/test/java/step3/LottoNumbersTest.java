@@ -1,57 +1,39 @@
 package step3;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.assertj.core.util.Sets;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
 
 class LottoNumbersTest {
 
 	@Test
-	@DisplayName("로또번호가 중복되어서 출력되지 않는지 확인 ")
+	@DisplayName("로또 번호가 중복된 경우 6개만 뽑히는지 확인")
 	void createLotto() {
-		LottoNumbers lottoNumbers = new LottoNumbers();
-		try (MockedStatic<RandomUtils> randomMock = mockStatic(RandomUtils.class)) {
-			randomMock
-				.when(() -> RandomUtils.pick())
-				.thenReturn(1, 4, 4, 5, 6, 7, 9, 9);
-			LottoNumbers createLotto = lottoNumbers.createLottoNumbers();
-			assertThat(createLotto).isEqualTo(createNumbers());
-		}
+		// given
+		LottoNumber[] inputLottoNumber = {new LottoNumber(1),
+			new LottoNumber(4),
+			new LottoNumber(42),
+			new LottoNumber(5),
+			new LottoNumber(9),
+			new LottoNumber(9),
+			new LottoNumber(4)};
+
+		//when
+		LottoNumbers lottoNumbers = LottoNumbers.createLottoNumber(inputLottoNumber);
+
+		//then
+		Assertions.assertThat(lottoNumbers).isEqualTo(LottoNumbers.createLottoNumber(inputLottoNumber));
 	}
 
 	@Test
 	@DisplayName("로또 번호가 6개 이상 뽑히면 Exception 발생")
 	void createOverFlowThrow() {
 		assertThatThrownBy(() -> {
-			LottoNumbers lottoNumbers = new LottoNumbers(Sets.newHashSet(createOverMax()));
+			LottoNumbers lottoNumbers = LottoNumbers.createLottoNumber();
 			lottoNumbers.createLottoNumbers();
 		}).isInstanceOf(ArrayIndexOutOfBoundsException.class);
 	}
 
-	private List<LottoNumber> createOverMax() {
-		return Arrays.asList(
-			new LottoNumber(1),
-			new LottoNumber(3),
-			new LottoNumber(5),
-			new LottoNumber(6),
-			new LottoNumber(9),
-			new LottoNumber(4),
-			new LottoNumber(2));
-	}
-
-	private LottoNumbers createNumbers() {
-		return new LottoNumbers(Sets.newHashSet(Arrays.asList(new LottoNumber(1),
-			new LottoNumber(4),
-			new LottoNumber(5),
-			new LottoNumber(6),
-			new LottoNumber(7),
-			new LottoNumber(9))));
-	}
 }
