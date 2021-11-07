@@ -36,8 +36,7 @@ public class FirstState implements State {
         return new SecondState(new SecondStateView(), lotteryTicket);
     }
 
-    @Override
-    public boolean isFinish() {
-        return false;
+    protected LotteryTicket getLotteryTicket() {
+        return lotteryTicket;
     }
 }

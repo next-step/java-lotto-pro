@@ -1,5 +1,6 @@
 package lotto.state;
 
+import lotto.LottoApplication;
 import lotto.auto.AutoLottoApplication;
 
 import java.io.PrintStream;
@@ -18,12 +19,12 @@ public interface State {
         return false;
     }
 
-    default void process(AutoLottoApplication autoLottoApplication, Scanner scanner) {
+    default void process(LottoApplication lottoApplication, Scanner scanner) {
         printQuestion(System.out);
         try {
             String input = scanner.nextLine();
             printResult(input, System.out);
-            autoLottoApplication.setState(next());
+            lottoApplication.setState(next());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

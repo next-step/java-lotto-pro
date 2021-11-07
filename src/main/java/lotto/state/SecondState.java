@@ -30,9 +30,4 @@ public class SecondState implements State {
     public State next() {
         return new FinishState();
     }
-
-    @Override
-    public boolean isFinish() {
-        return false;
-    }
 }
