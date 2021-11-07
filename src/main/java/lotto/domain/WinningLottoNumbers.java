@@ -16,14 +16,23 @@ public class WinningLottoNumbers {
     }
 
     public Rank getRank(LottoNumbers lottoNumbers) {
-        int result = 0;
+        int matchedCount = 0;
+        int matchedBonusCount = 0;
         for (LottoNumber number : lottoNumbers.getNumbers()) {
-            result = getIncreasedNumberIfContains(winningNumbers, number, result);
+            matchedCount = getIncreasedNumberIfContains(number, matchedCount);
+            matchedBonusCount = getIncreasedBonusCountIfMatched(number, matchedBonusCount);
         }
-        return Rank.of(result);
+        return Rank.of(matchedCount, matchedBonusCount);
     }
 
-    private int getIncreasedNumberIfContains(LottoNumbers winningNumbers, LottoNumber number, int result) {
+    private int getIncreasedBonusCountIfMatched(LottoNumber number, int matchedBonusCount) {
+        if (Objects.equals(bonusNumber, number)) {
+            return matchedBonusCount + 1;
+        }
+        return matchedBonusCount;
+    }
+
+    private int getIncreasedNumberIfContains(LottoNumber number, int result) {
         if (winningNumbers.contains(number)) {
             return result + 1;
         }

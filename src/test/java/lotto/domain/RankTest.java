@@ -9,6 +9,6 @@ public class RankTest {
     @ParameterizedTest
     @CsvSource(value = {"FOURTH:3", "THIRD:4", "SECOND:5", "FIRST:6"}, delimiter = ':')
     void testRank(Rank rank, int matchedCount) {
-        assertThat(Rank.of(matchedCount)).isEqualTo(rank);
+        assertThat(Rank.of(matchedCount, 0)).isEqualTo(rank);
     }
 }
