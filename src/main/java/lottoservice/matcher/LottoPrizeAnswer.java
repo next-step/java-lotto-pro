@@ -29,7 +29,6 @@ public class LottoPrizeAnswer {
 		LottoMatchResult lottoMatchResult = new LottoMatchResult();
 		for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
 			lottoMatchResult.addMatchCount(matchTicket(lottoTicket));
-			// setMatchResult(lottoMatchResult, lottoTicket);
 		}
 		return lottoMatchResult;
 	}

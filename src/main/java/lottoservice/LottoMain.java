@@ -83,11 +83,6 @@ public class LottoMain {
 		return inputView.readInputLine();
 	}
 
-	// private LottoMatchResult matchLottoWinning(LottoWinningNumbers lottoWinningNumbers, LottoTickets lottoTickets) {
-	// 	return null;
-	// 	// return lottoWinningNumbers.matchWinningAndTickets(lottoTickets);
-	// }
-
 	private void outputLottoMatchResults(LottoMatchResult matchResult) {
 		resultView.outputGuide(RESULT_MESSAGE_MATCH_STATISTICS_START_LINE);
 		resultView.outputResult(matchResult);
