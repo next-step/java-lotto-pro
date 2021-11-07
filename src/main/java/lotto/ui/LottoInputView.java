@@ -1,7 +1,6 @@
 package lotto.ui;
 
 import lotto.BuyAmount;
-import lotto.LottoNumber;
 import lotto.LottoNumbers;
 import lotto.LottoNumbersGroup;
 import lotto.dto.LottoNumberDto;
@@ -32,18 +31,16 @@ public class LottoInputView {
     public void showMyLottoNumbersGroup() {
         LottoNumbersGroupDto lottoNumbersGroupDto = new LottoNumbersGroupDto(lottoNumbersGroup);
         StringBuilder myLottoNumbers = new StringBuilder();
-        List<LottoNumbers> lottoNumbersGroup = lottoNumbersGroupDto.getLottoNumbersGroup();
-        for (LottoNumbers lottoNumbers : lottoNumbersGroup) {
-            LottoNumbersDto lottoNumbersDto = new LottoNumbersDto(lottoNumbers);
+        List<LottoNumbersDto> lottoNumbersGroup = lottoNumbersGroupDto.getLottoNumbersGroup();
+        for (LottoNumbersDto lottoNumbersDto : lottoNumbersGroup) {
             printLottoNumbers(myLottoNumbers, lottoNumbersDto.getSortedLottoNumbers());
         }
 
         System.out.println(myLottoNumbers);
     }
 
-    private void printLottoNumbers(StringBuilder result, List<LottoNumber> lottoNumbers) {
+    private void printLottoNumbers(StringBuilder result, List<LottoNumberDto> lottoNumbers) {
         String resultLottoNumbers = lottoNumbers.stream()
-                .map(LottoNumberDto::new)
                 .map(LottoNumberDto::getNumber)
                 .map(String::valueOf)
                 .collect(Collectors
