@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.LottoMoney;
-import lotto.domain.LottoNumbersFactory;
 import lotto.domain.LottoReports;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketFactory;
 import lotto.domain.Rank;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -24,7 +24,7 @@ public class Lotto {
     private List<LottoTicket> buyLottoTicket(int countOfPossibleLotto) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < countOfPossibleLotto; i++) {
-            lottoTickets.add(new LottoTicket(LottoNumbersFactory.createLottoNumbers()));
+            lottoTickets.add(LottoTicketFactory.createLottoTicket());
         }
         return lottoTickets;
     }
