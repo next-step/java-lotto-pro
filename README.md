@@ -16,7 +16,7 @@
   - generate distinct 6 lotto numbers
   - has bonus
 - lotto store
-  - sell lottos
+  - sell lottos (pay, manually lottos)
 - lotto parser
 - winning lotto (extends lotto)
   - count matching
@@ -28,10 +28,12 @@
 - view
   - input
     - pay : should be bigger than price of lotto, otherwise retry
+    - number of lottos(n) to buy manually
+    - lottos to buy manually
     - winning numbers (','구분)
-    - bonus
+    - winning bonus
   - output
-    - lotto
+    - lottos (auto, manually)
     - winning statistics
     - error
 - app
