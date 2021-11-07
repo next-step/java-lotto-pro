@@ -40,7 +40,7 @@ public class LottoService {
         try {
             ResultView.print(Message.BONUS.getMessage());
             String input = InputView.readLine();
-            LottoNumber bonus = new LottoNumber(input);
+            LottoNumber bonus = LottoNumber.valueOf(input);
             return new WinningLotto(winning, bonus);
         } catch (Exception e) {
             ResultView.print(e.getMessage());

@@ -28,7 +28,7 @@ public class LottoMaker {
     } //인스턴스 생성 방지
 
     private static List<LottoNumber> init() {
-        return IntStream.range(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER).mapToObj(LottoNumber::new)
+        return IntStream.range(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER).mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 

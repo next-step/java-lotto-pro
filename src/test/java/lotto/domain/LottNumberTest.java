@@ -27,18 +27,18 @@ public class LottNumberTest {
     @DisplayName("유효한 로또 번호 테스트")
     public void T1_validLottoNumber() {
         //GIVEN
-        LottoNumber lottoNumber = new LottoNumber(1);
+        LottoNumber lottoNumber = LottoNumber.valueOf(1);
         //THEN
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(1));
+        assertThat(lottoNumber).isEqualTo(LottoNumber.valueOf(1));
         assertThat(LottoNumber.valueOf(1)).isEqualTo(LottoNumber.valueOf(1));
-        assertThat(new LottoNumber("1")).isEqualTo(LottoNumber.valueOf(1));
+        assertThat(LottoNumber.valueOf("1")).isEqualTo(LottoNumber.valueOf(1));
     }
 
     @ParameterizedTest(name = "유효하지 않은 로또 숫자 테스트(integer) : " + ParameterizedTest.ARGUMENTS_PLACEHOLDER)
     @ValueSource(ints = {-1, 0, 46, Integer.MIN_VALUE, Integer.MAX_VALUE})
     public void T02_invalidNumbers(int candidate) {
         //THEN
-        assertThatThrownBy(() -> new LottoNumber(candidate)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> LottoNumber.valueOf(candidate)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1부터 45 사이의 숫자만 가능합니다.");
     }
 
@@ -47,7 +47,7 @@ public class LottNumberTest {
     @ValueSource(strings = {"46","-1","0"})
     public void T03_invalidStringnumber(String candidate) {
         //THEN
-        assertThatThrownBy(() -> new LottoNumber(candidate)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> LottoNumber.valueOf(candidate)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1부터 45 사이의 숫자만 가능합니다.");
     }
 
@@ -55,7 +55,15 @@ public class LottNumberTest {
     @NullAndEmptySource
     public void T04_invalidNull(String str) {
         //THEN
-        assertThatThrownBy(() -> new LottoNumber(str)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> LottoNumber.valueOf(str)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("빈값이나 null은 허용되지 않습니다.");
+    }
+
+    @Test
+    @DisplayName("캐시 테스트")
+    public void T05_cache() {
+        LottoNumber lottoNumber = LottoNumber.valueOf(1);
+        assertThat(LottoNumber.valueOf(1) == lottoNumber).isTrue();
+
     }
 }
