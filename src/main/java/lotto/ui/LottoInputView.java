@@ -4,6 +4,7 @@ import lotto.BuyAmount;
 import lotto.LottoNumber;
 import lotto.LottoNumbers;
 import lotto.LottoNumbersGroup;
+import lotto.dto.LottoNumberDto;
 import lotto.dto.LottoNumbersDto;
 import lotto.dto.LottoNumbersGroupDto;
 
@@ -42,7 +43,8 @@ public class LottoInputView {
 
     private void printLottoNumbers(StringBuilder result, List<LottoNumber> lottoNumbers) {
         String resultLottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
+                .map(LottoNumberDto::new)
+                .map(LottoNumberDto::getNumber)
                 .map(String::valueOf)
                 .collect(Collectors
                         .joining(LottoNumbers.LOTTO_NUMBERS_BASE_SEPARATOR + LOTTO_NUMBERS_DESCRIPTION_SPACE)
