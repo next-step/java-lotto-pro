@@ -19,8 +19,7 @@ public class LottoResult {
     }
 
     public double getLottoYield() {
-        double purchaseAmount = getPurchaseAmount();
-        double sum = getPrizeMoneySum() / purchaseAmount;
+        double sum = getPrizeMoneySum() / getPurchaseAmount(GAME_PRICE);
         double yield = getMatchAround(sum, DECIMAL_POINT);
         return yield;
     }
@@ -33,11 +32,11 @@ public class LottoResult {
         return sum;
     }
 
-    private int getPurchaseAmount() {
+    private int getPurchaseAmount(int gamePrice) {
         return lottoMatchResult.values()
                 .stream()
                 .mapToInt(Integer::intValue)
-                .sum() * GAME_PRICE;
+                .sum() * gamePrice;
     }
 
     private double getMatchAround(double value, int position) {
