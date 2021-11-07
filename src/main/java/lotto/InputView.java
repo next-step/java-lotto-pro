@@ -1,0 +1,19 @@
+package lotto;
+
+import utils.Console;
+
+
+public class InputView {
+    public static final String PURCHASE_MESSAGE = "구입금액을 입력해 주세요.";
+    public static final String WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+
+    public String inputMoney() {
+        System.out.println(PURCHASE_MESSAGE);
+        return Console.readLine();
+    }
+
+    public String inputWiningLotto() {
+        System.out.println(WINNING_NUMBER_MESSAGE);
+        return Console.readLine();
+    }
+}
