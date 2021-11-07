@@ -21,7 +21,7 @@ public class LottoServiceImpl implements LottoService {
 
         LottoNumbersBundle lottoNumbersBundle = lottoProvider.buyLotto(quantity, numbersStrategy);
 
-        return new LottoBuyResponseDto(lottoNumbersBundle.getLottoNumbersBundle());
+        return new LottoBuyResponseDto(lottoNumbersBundle);
     }
 
     @Override

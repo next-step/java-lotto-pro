@@ -1,10 +1,9 @@
 package step3.dto;
 
 import step3.domain.Amount;
-import step3.domain.LottoNumbersBundle;
 
 public class LottoBuyRequestDto {
-    private Amount amount;
+    private final Amount amount;
 
     public LottoBuyRequestDto(int amount) {
         this.amount = new Amount(amount);

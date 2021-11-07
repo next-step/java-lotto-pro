@@ -30,6 +30,15 @@ public class LottoRanks {
         matchCountDown.increment();
     }
 
+    public List<LottoRankResult> getLottoRankResults() {
+        List<LottoRankResult> lottoRankResults = new ArrayList<>();
+        for (Map.Entry<LottoRank, CountDown> mapElement : lottoRanks.entrySet()) {
+            lottoRankResults.add(new LottoRankResult(mapElement.getKey(), mapElement.getValue().count));
+        }
+        Collections.sort(lottoRankResults);
+        return lottoRankResults;
+    }
+
     public Long totalPrize() {
         long totalPrize = 0L;
         for (Map.Entry<LottoRank, CountDown> mapElement : lottoRanks.entrySet()) {
@@ -40,17 +49,11 @@ public class LottoRanks {
         return totalPrize;
     }
 
-    public List<LottoRankResult> getLottoRankResults() {
-        List<LottoRankResult> lottoRankResults = new ArrayList<>();
-        for (Map.Entry<LottoRank, CountDown> mapElement : lottoRanks.entrySet()) {
-            lottoRankResults.add(new LottoRankResult(mapElement.getKey(), mapElement.getValue().count));
-        }
-        Collections.sort(lottoRankResults);
-        return lottoRankResults;
-    }
-
     private static class CountDown {
         private int count = 0;
+
+        private CountDown() {
+        }
 
         public void increment() {
             count++;

@@ -6,6 +6,7 @@ import step3.domain.strategy.numbers.RandomLottoNumbers;
 import step3.dto.LottoBonusNumberRequestDto;
 import step3.dto.LottoBuyRequestDto;
 import step3.dto.LottoBuyResponseDto;
+import step3.dto.LottoStatisticsResponseDto;
 import step3.dto.LottoWinNumbersRequestDto;
 import step3.service.LottoServiceImpl;
 import step3.view.InputView;
@@ -38,12 +39,9 @@ public class LottoController {
             lottoWinNumbersRequestDto);
 
         // 당첨통계를출력한다.(로또 당첨 갯수와 수익률)
-        ResultView.statisticsPrint(
-            lottoService.getResultStatistics(
-                lottoWinNumbersRequestDto,
-                lottoBonusNumberRequestDto
-            )
-        );
+        LottoStatisticsResponseDto lottoStatisticsResponseDto = lottoService.getResultStatistics(
+            lottoWinNumbersRequestDto, lottoBonusNumberRequestDto);
+        ResultView.statisticsPrint(lottoStatisticsResponseDto);
     }
 
     private LottoBonusNumberRequestDto getLottoBonusNumberRequestDto(

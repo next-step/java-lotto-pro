@@ -13,7 +13,6 @@ public class ResultView {
     public static final String DIVIDE = "---------\n";
     public static final String LOTTO_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     public static final String YIELD_MESSAGE_FORMAT = "총 수익률은 %s입니다";
-
     public static final String LOTTO_RANK_FORMAT = "%s개 일치 (%d원)- %d개";
     public static final String LOTTO_RANK_BONUS_SECOND_FORMAT = "%s개 일치, 보너스 볼 일치(%s원) - %s개";
     private static final String WINNER_NUMBER_REQUEST_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
@@ -38,7 +37,7 @@ public class ResultView {
         println(AMOUNT_REQUEST_MESSAGE);
     }
 
-    public static void buyCutPrintln(int size) {
+    public static void buyCountPrintln(int size) {
         println(String.format(BUY_COUNT_MESSAGE, size));
     }
 
@@ -51,7 +50,7 @@ public class ResultView {
             println(numbers);
         }
 
-        buyCutPrintln(lottoBuyResponseDto.getBuyLottoList().size());
+        buyCountPrintln(lottoBuyResponseDto.getBuyLottoList().size());
     }
 
     public static void statisticsPrint(LottoStatisticsResponseDto lottoStatisticsResponseDto) {
@@ -64,7 +63,6 @@ public class ResultView {
         }
 
         yieldPrint(lottoStatisticsResponseDto);
-
     }
 
     private static void statisticsHeaderPrint() {
