@@ -52,7 +52,7 @@ public class OutputView {
         if (!rank.isRankMatch(Rank.NONE)) {
             System.out.println(
                     rank.getMatchCount() + "개 일치 "
-                            + "(" + rank.getPrizeMoney() + ")"
+                            + "(" + rank.getPrizeMoney().getMoney() + ")"
                             + "- " + matchRankCount + "개"
             );
         }
