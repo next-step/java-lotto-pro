@@ -21,34 +21,21 @@ public class LottoMachineController {
     }
 
     public void run() {
-        try {
-            Money money = new Money(getUserInputPurchaseAmount());
-            List<List<Number>> activeNumber = getUserInputActiveNumber();
 
-            LottoMachine lottoMachine = new LottoMachine(money, activeNumber);
+        Money money = new Money(getUserInputPurchaseAmount());
+        List<List<Number>> activeNumber = getUserInputActiveNumber();
 
-            List<LottoNumber> lottoList = lottoMachine.getLottoList();
-            printPurchaseLottoList(lottoList, activeNumber.size());
+        LottoMachine lottoMachine = new LottoMachine(money, activeNumber);
 
-            List<Number> matchNumber = getUserInputMatchNumber();
-            Number bonusNumber = Number.of(inputView.getUserInputBonusNumber());
+        List<LottoNumber> lottoList = lottoMachine.getLottoList();
+        printPurchaseLottoList(lottoList, activeNumber.size());
 
-            LottoResult matchLottoResultResult = new WinningLotto(matchNumber, bonusNumber).getLottoMatchResult(lottoList);
+        List<Number> matchNumber = getUserInputMatchNumber();
+        Number bonusNumber = Number.of(inputView.getUserInputBonusNumber());
 
-            printMatchResult(matchLottoResultResult);
-        } catch (LottoPurchaseAmountException lpae) {
-            System.out.println(lpae.getMessage());
-        } catch (LottoMatchNumberException lmne) {
-            System.out.println(lmne.getMessage());
-        } catch (LottoBonusNumberException lbne) {
-            System.out.println(lbne.getMessage());
-        } catch (LottoActiveNumberException lane) {
-            System.out.println(lane.getMessage());
-        } catch (LottoNumberOutOfRangeException lnofre) {
-            System.out.println(lnofre.getMessage());
-        } catch (LottoNumberSizeException lnse) {
-            System.out.println(lnse.getMessage());
-        }
+        LottoResult matchLottoResultResult = new WinningLotto(matchNumber, bonusNumber).getLottoMatchResult(lottoList);
+
+        printMatchResult(matchLottoResultResult);
 
     }
 
