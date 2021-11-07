@@ -21,7 +21,7 @@ public class Payment extends Money {
         }
     }
 
-    public int numberOfAvailableTickets() {
-        return number() / MINIMUM_MONEY;
+    public int numberOfAvailableTicketsAutomatically(int manualTicketsCount) {
+        return (number() / MINIMUM_MONEY) - manualTicketsCount;
     }
 }
