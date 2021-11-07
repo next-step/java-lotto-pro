@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumberFactory;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStatistics;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningNumbers;
@@ -32,7 +34,7 @@ public class LottoApplicationController {
 		OutputView.printPurchaseQuantity(purchaseQuantity);
 
 		while (continuePurchase(purchaseQuantity)) {
-			lottos.add(new Lotto());
+			lottos.add(new Lotto(new LottoNumbers(LottoNumberFactory.create())));
 			purchaseQuantity--;
 		}
 	}

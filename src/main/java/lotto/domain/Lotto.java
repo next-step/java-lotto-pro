@@ -3,12 +3,12 @@ package lotto.domain;
 public class Lotto {
 	private final LottoNumbers lottoNumbers;
 
-	public Lotto() {
-		this.lottoNumbers = new LottoNumbers(LottoNumberFactory.create());
+	public Lotto(LottoNumbers lottoNumbers) {
+		this.lottoNumbers = lottoNumbers;
 	}
 
 	public Lotto(int... lottoNumbers) {
-		this.lottoNumbers = new LottoNumbers(lottoNumbers);
+		this(new LottoNumbers(lottoNumbers));
 	}
 
 	public MatchedNumber countMatchNumber(WinningNumbers winningNumbers) {
