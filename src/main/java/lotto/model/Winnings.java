@@ -12,4 +12,11 @@ public class Winnings {
     public int size() {
         return data.size();
     }
+
+    public double getReturnOnInvestment(Money investment) {
+        final Money totalReward = data.stream()
+                .map(Winning::getReward)
+                .reduce(new Money(0), Money::plus);
+        return totalReward.divideBy(investment);
+    }
 }

@@ -26,4 +26,11 @@ public class LottosTest {
 
         assertThat(winnings.size()).isEqualTo(5);
     }
+
+    @Test
+    void getSellingPrice() {
+        final Lottos lottos = Lottos.generateAuto(5);
+        final Money price = lottos.getSellingPrice();
+        assertThat(price).isEqualTo(new Money(5 * 1000));
+    }
 }

@@ -9,8 +9,8 @@ public class Money {
         this.value = value;
     }
 
-    public int divideBy(Money money) {
-        return this.value / money.value;
+    public double divideBy(Money money) {
+        return (double) this.value / money.value;
     }
 
     public boolean isZero() {
@@ -28,5 +28,13 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public Money multiplyBy(int value) {
+        return new Money(this.value * value);
+    }
+
+    public Money plus(Money money) {
+        return new Money(this.value + money.value);
     }
 }

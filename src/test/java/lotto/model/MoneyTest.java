@@ -20,6 +20,12 @@ public class MoneyTest {
     }
 
     @Test
+    void multiplyBy() {
+        final Money money = new Money(1_000);
+        assertThat(money.multiplyBy(5)).isEqualTo(new Money(5_000));
+    }
+
+    @Test
     void isZero() {
         Money money = new Money(0);
         assertThat(money.isZero()).isTrue();

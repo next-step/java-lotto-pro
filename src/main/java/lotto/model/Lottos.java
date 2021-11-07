@@ -4,6 +4,7 @@ import lotto.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> data;
@@ -40,5 +41,11 @@ public class Lottos {
             winningList.add(lotto.calculateWinning(winNumbers));
         }
         return new Winnings(winningList);
+    }
+
+    public Money getSellingPrice() {
+        return data.stream()
+                .map(Lotto::getSellingPrice)
+                .reduce(new Money(0), Money::plus);
     }
 }

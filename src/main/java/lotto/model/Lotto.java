@@ -16,7 +16,7 @@ public class Lotto {
         if (money.isZero()) {
             return 0;
         }
-        return money.divideBy(SELLING_PRICE);
+        return (int) money.divideBy(SELLING_PRICE);
     }
 
     public static Lotto generate(List<Integer> numbers) {
@@ -35,5 +35,9 @@ public class Lotto {
     public Winning calculateWinning(LottoNumbers winNumbers) {
         final int count = numbers.calculateNumberOfMatch(winNumbers);
         return Winning.ofMatchCount(count);
+    }
+
+    public Money getSellingPrice() {
+        return SELLING_PRICE;
     }
 }
