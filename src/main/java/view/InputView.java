@@ -18,6 +18,9 @@ public class InputView {
 
 	private static final Scanner sc = new Scanner(System.in);
 
+	private InputView() {
+	}
+
 	public static Money printPurchaseAmountMessageAndInput() {
 		printPurchaseAmountMessage();
 		return inputForPurchaseAmountUntilValid(sc.nextLine());
