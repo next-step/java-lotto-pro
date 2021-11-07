@@ -10,6 +10,9 @@ import java.util.List;
 public class ResultView {
     private static final String TRY_COUNT_MESSAGE = "개를 구매했습니다.";
     private static final String STATISTICS = "당첨통계";
+    private static final String STATISTICS_COUNT_MESSAGE = "개 일치 (";
+    private static final String STATISTICS_SECOND_BONUS_MESSAGE = "개 일치, 보너스볼 일치(";
+    private static final String STATISTICS_PRICE_MESSAGE = "원) - ";
 
     private ResultView() {
         throw new ExecutePrivateConstructorException(ErrorCode.OUTPUT_VIEW.getMsg());
@@ -28,22 +31,29 @@ public class ResultView {
     public static void printLottoResult(Money inputMoney, Statistics statistics) {
         System.out.println(STATISTICS);
         System.out.println("------------");
-        System.out.println(createCountingMessage(3, statistics));
-        System.out.println(createCountingMessage(4, statistics));
-        System.out.println(createCountingMessage(5, statistics));
-        System.out.println(createCountingMessage(6, statistics));
+        System.out.println(createCountingMessage(Ranking.FOURTH, statistics));
+        System.out.println(createCountingMessage(Ranking.THIRD, statistics));
+        System.out.println(createCountingMessage(Ranking.SECOND, statistics));
+        System.out.println(createCountingMessage(Ranking.SECOND_BONUS, statistics));
+        System.out.println(createCountingMessage(Ranking.FIRST, statistics));
         System.out.println("총 수익률은 " + statistics.calculateEarningRate(inputMoney) + " 입니다.");
     }
 
-    private static String createCountingMessage(int count, Statistics statistics) {
+    private static String createCountingMessage(Ranking ranking, Statistics statistics) {
         StringBuilder builder = new StringBuilder();
-        Ranking ranking = Ranking.find(count, false);
-        builder.append(count)
-                .append("개 일치 (")
+        builder.append(ranking.getCount())
+                .append(chooseMessage(ranking))
                 .append(ranking.getPrize())
-                .append("원) - ")
+                .append(STATISTICS_PRICE_MESSAGE)
                 .append(statistics.getCount(ranking));
         return builder.toString();
+    }
+
+    private static String chooseMessage(Ranking ranking) {
+        if (ranking == Ranking.SECOND_BONUS) {
+            return STATISTICS_SECOND_BONUS_MESSAGE;
+        }
+        return STATISTICS_COUNT_MESSAGE;
     }
 
     private static String createLottoBallsListMessage(LottoGame lottoGame) {
