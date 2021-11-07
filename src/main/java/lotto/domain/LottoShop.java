@@ -54,12 +54,15 @@ public class LottoShop {
     private LottoWinReader getLottoWinReader() {
         try {
             resultView.printLastWinLottoNumbersMessage();
+            String readLottoNumbers = inputView.readWinLottoNumbers();
+            resultView.printBonusNumberInputMessage();
+            String readBonusLottoNumber = inputView.readWinBonusLottoNumber();
             return new LottoWinReader(
-                    Arrays.stream(inputView.readWinLottoNumbers().split(","))
+                    Arrays.stream(readLottoNumbers.split(","))
                             .map(String::trim)
                             .map(Integer::parseInt)
                             .distinct()
-                            .collect(toList()), 0
+                            .collect(toList()), Integer.parseInt(readBonusLottoNumber)
             );
         } catch (IllegalArgumentException e) {
             return getLottoWinReader();

@@ -14,4 +14,6 @@ public interface ResultView {
     void printWinStatisticMessage();
     void printCorrespondLottoNumber(Map<Winnings, Integer> statistic);
     void printTotalRevenueMessage(double percentage);
+    void printBonusNumberInputMessage();
+
 }
