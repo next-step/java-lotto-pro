@@ -18,6 +18,15 @@ class LottoNumberTest {
             .hasMessage(Message.OUT_OF_RANGE_NUMBER_MESSAGE.getMessage());
     }
 
+    @DisplayName("로또 번호는 양수만 가능하다")
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "-1"})
+    void createLottoNumberValidateException(String number) {
+        assertThatThrownBy(() -> new LottoNumber(number))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
+    }
+
     @DisplayName("로또 번호 비교 테스트")
     @Test
     void compareLottoNumber() {

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.domain.LottoPattern.*;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -8,6 +10,19 @@ public class LottoNumber {
     public LottoNumber(int number) {
         validateRange(number);
         this.number = number;
+    }
+
+    public LottoNumber(String number) {
+        validatePositiveNumber(number);
+        int positiveNumber = Integer.parseInt(number);
+        validateRange(positiveNumber);
+        this.number = positiveNumber;
+    }
+
+    private void validatePositiveNumber(String number) {
+        if (!ONLY_POSITIVE_NUMBER.matcher(number).matches()) {
+            throw new IllegalArgumentException(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
+        }
     }
 
     private void validateRange(int number) {
