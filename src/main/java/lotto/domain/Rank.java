@@ -34,8 +34,8 @@ public enum Rank {
         return this.equals(rank);
     }
 
-    public BigDecimal getPrizeMoney() {
-        return prizeMoney.getMoney();
+    public Money getPrizeMoney() {
+        return prizeMoney;
     }
 
     public int getMatchCount() {
