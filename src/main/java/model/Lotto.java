@@ -5,32 +5,33 @@ import static java.util.stream.Collectors.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.IntStream;
 
 public class Lotto {
 	public static final Integer COST = 1000;
 	public static final Integer NUMBER_COUNT = 6;
 	public static final int INDEX_OF_START = 0;
-	private static List<Integer> numberCandidate;
+	private static List<Integer> numberCandidates;
 
 	static {
-		numberCandidate = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+		numberCandidates = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
 			.boxed()
 			.collect(toList());
 	}
 
-	private List<LottoNumber> numbers;
+	private Set<LottoNumber> numbers;
 
 	public Lotto(List<Integer> numbers) {
 		this.numbers = numbers.stream()
 			.map(LottoNumber::of)
-			.collect(toList());
+			.collect(toCollection(TreeSet::new));
 	}
 
 	public static Lotto create() {
-		Collections.shuffle(numberCandidate);
+		Collections.shuffle(numberCandidates);
 
-		List<Integer> selectedNumbers = numberCandidate.subList(INDEX_OF_START, INDEX_OF_START + NUMBER_COUNT);
+		List<Integer> selectedNumbers = numberCandidates.subList(INDEX_OF_START, INDEX_OF_START + NUMBER_COUNT);
 		Collections.sort(selectedNumbers);
 
 		return new Lotto(selectedNumbers);
@@ -47,8 +48,9 @@ public class Lotto {
 
 	public Count matchCount(Lotto other) {
 		Count count = Count.zero();
-		for (int i = 0; i < NUMBER_COUNT; i++) {
-			count = numbers.contains(other.at(i)) ? Count.sum(count, Count.one()) : count;
+
+		for (LottoNumber number : other.getNumbers()) {
+			count = numbers.contains(number) ? Count.sum(count, Count.one()) : count;
 		}
 
 		return count;
@@ -62,11 +64,7 @@ public class Lotto {
 		return !numbers.contains(bonusBall.getNumber());
 	}
 
-	public LottoNumber at(int index) {
-		return this.numbers.get(index);
-	}
-
-	public List<LottoNumber> getNumbers() {
+	public Set<LottoNumber> getNumbers() {
 		return numbers;
 	}
 }

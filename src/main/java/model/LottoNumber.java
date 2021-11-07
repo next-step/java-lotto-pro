@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 	public static final int MIN_NUMBER = 1;
 	public static final int MAX_NUMBER = 45;
 	public static final String OUT_OF_NUMBER_RANGE = "로또 번호의 범위를 벗어났습니다.";
@@ -56,5 +56,10 @@ public class LottoNumber {
 	@Override
 	public String toString() {
 		return String.valueOf(value);
+	}
+
+	@Override
+	public int compareTo(LottoNumber o) {
+		return this.value - o.value;
 	}
 }
