@@ -27,7 +27,7 @@ public final class LottoStore {
 		validateMoney();
 		int purchaseCount = customer.purchaseCount(price);
 		LottoPapers papers = lottoMachine.manualLotto(customer.numbers());
-		return papers.addAll(lottoMachine.randomLotto(restCount(purchaseCount, papers)));
+		return papers.merge(lottoMachine.randomLotto(restCount(purchaseCount, papers)));
 	}
 
 	@Override

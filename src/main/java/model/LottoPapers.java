@@ -52,7 +52,7 @@ public final class LottoPapers {
 			'}';
 	}
 
-	public LottoPapers addAll(LottoPapers papers) {
+	public LottoPapers merge(LottoPapers papers) {
 		Collection<LottoPaper> newCollection = new ArrayList<>(collection);
 		newCollection.addAll(papers.collection);
 		return from(newCollection);
