@@ -53,10 +53,17 @@ public enum LottoMatchRank {
 		if (!isPossibleSecondPrize(countOfMatch)) {
 			return rank.getCountOfMatch() == countOfMatch;
 		}
-		return matchBonus ? rank == LottoMatchRank.FIVE_POINT_AND_BONUS : rank == LottoMatchRank.FIVE_POINT;
+		if (matchBonus) {
+			return rank == LottoMatchRank.FIVE_POINT_AND_BONUS;
+		}
+		return rank == LottoMatchRank.FIVE_POINT;
 	}
 
 	public static boolean isPossibleSecondPrize(int countOfMatch) {
 		return countOfMatch == LottoMatchRank.FIVE_POINT.getCountOfMatch();
+	}
+
+	public static boolean isSecondPrize(LottoMatchRank rank) {
+		return rank == LottoMatchRank.FIVE_POINT_AND_BONUS;
 	}
 }

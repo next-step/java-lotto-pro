@@ -60,9 +60,14 @@ public class LottoMatchResult {
 	public String toString() {
 		return result.entrySet().stream()
 			.filter(matchResult -> matchResult.getKey().getWinningMoney() > 0)
-			.map(matchResult -> matchResult.getKey().getCountOfMatch() + "개 일치 ("
-				+ matchResult.getKey().getWinningMoney() + "원)- "
-				+ matchResult.getValue() + "개")
+			.map(it -> LottoMatchRank.isSecondPrize(it.getKey()) ?
+				it.getKey().getCountOfMatch() + "개 일치, 보너스 볼 일치("
+					+ it.getKey().getWinningMoney() + "원)- "
+					+ it.getValue() + "개"
+				:
+				it.getKey().getCountOfMatch() + "개 일치 ("
+					+ it.getKey().getWinningMoney() + "원)- "
+					+ it.getValue() + "개")
 			.collect(Collectors.joining("\n"));
 	}
 }
