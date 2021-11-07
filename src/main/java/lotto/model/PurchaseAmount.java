@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.constants.ErrorMessage;
+import lotto.constants.Lotto;
 import lotto.generator.LottoGenerator;
 
 import java.util.ArrayList;
@@ -19,23 +20,23 @@ public class PurchaseAmount {
   }
 
   private void checkLowerThanLottoPrice(int purchaseAmount) {
-    if (purchaseAmount < LottoGenerator.LOTTO_PRICE) {
+    if (purchaseAmount < Lotto.LOTTO_PRICE) {
       throw new RuntimeException(ErrorMessage.PURCHASE_AMOUNT_LOWER_ERROR_MESSAGE);
     }
   }
 
-  public List<Lotto> buyLottos(LottoGenerator lottoGenerator) {
+  public List<LottoNumbers> buyLottos(LottoGenerator lottoGenerator) {
     int lottoCount = buyLottoCount();
-    List<Lotto> lottos = new ArrayList<>();
+    List<LottoNumbers> lottoTicket = new ArrayList<>();
     for (int i = 0; i < lottoCount; i++) {
-      lottos.add(lottoGenerator.generate());
+      lottoTicket.add(lottoGenerator.generate());
     }
 
-    return lottos;
+    return lottoTicket;
   }
 
   public int buyLottoCount() {
-    return purchaseAmount / LottoGenerator.LOTTO_PRICE;
+    return purchaseAmount / Lotto.LOTTO_PRICE;
   }
 
   public double calculateYield(long sum) {

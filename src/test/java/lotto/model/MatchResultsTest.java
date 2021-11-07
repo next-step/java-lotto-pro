@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class MatchResultsTest {
   int[] buyerLottoNumber;
@@ -17,7 +16,7 @@ class MatchResultsTest {
   @BeforeEach
   void setUp() {
     buyerLottoNumber = new int[]{1, 2, 22, 33, 7};
-    buyer = LottoBuyer.buy(new PurchaseAmount(5000), () -> new Lotto(asList(buyerLottoNumber)));
+    buyer = LottoBuyer.buy(new PurchaseAmount(5000), () -> new LottoNumbers(asList(buyerLottoNumber)));
   }
 
   @DisplayName("총 당첨 금액을 반환한다.")
@@ -25,7 +24,7 @@ class MatchResultsTest {
   void getTotalWinningAmount() {
     int[] winningNumber = {1, 2, 3, 22, 33, 44};
 
-    MatchResults matchResults = buyer.matchWithWinningLotto(new Lotto(asList(winningNumber)));
+    MatchResults matchResults = buyer.matchWithWinningLotto(new LottoNumbers(asList(winningNumber)));
 
     assertThat(buyer.buyCount() * LottoRank.FOUR_MATCHES.getMoney()).isEqualTo(matchResults.getTotalWinningAmount());
   }
@@ -35,7 +34,7 @@ class MatchResultsTest {
   void calculateYield() {
     int[] winningNumber = {1, 2, 3, 22, 33, 44};
 
-    MatchResults matchResults = buyer.matchWithWinningLotto(new Lotto(asList(winningNumber)));
+    MatchResults matchResults = buyer.matchWithWinningLotto(new LottoNumbers(asList(winningNumber)));
 
     assertThat(matchResults.calculateYield(buyer.getPurchaseAmount())).isEqualTo(50);
   }

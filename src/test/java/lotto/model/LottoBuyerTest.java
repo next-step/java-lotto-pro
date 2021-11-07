@@ -2,9 +2,6 @@ package lotto.model;
 
 import lotto.constants.ErrorMessage;
 import lotto.constants.LottoRank;
-import lotto.model.Lotto;
-import lotto.model.LottoBuyer;
-import lotto.model.PurchaseAmount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +24,7 @@ public class LottoBuyerTest {
   @Test
   void lowerThanLottoPrice() {
     assertThatThrownBy(() -> LottoBuyer.buy(new PurchaseAmount(500),
-      () -> new Lotto(asList(lottoNumber))))
+      () -> new LottoNumbers(asList(lottoNumber))))
       .isInstanceOf(RuntimeException.class)
       .hasMessage(ErrorMessage.PURCHASE_AMOUNT_LOWER_ERROR_MESSAGE);
   }
@@ -37,7 +34,7 @@ public class LottoBuyerTest {
   void buyLottoCount() {
     int[] lottoNumber = {1, 2, 3, 4, 5, 6};
     LottoBuyer buyer = LottoBuyer.buy(new PurchaseAmount(14000),
-      () -> new Lotto(asList(lottoNumber)));
+      () -> new LottoNumbers(asList(lottoNumber)));
 
     assertThat(buyer.buyCount()).isEqualTo(14);
   }
@@ -46,10 +43,10 @@ public class LottoBuyerTest {
   @Test
   void matchWithWinningLotto() {
     LottoBuyer buyer = LottoBuyer.buy(new PurchaseAmount(14000),
-      () -> new Lotto(asList(lottoNumber)));
+      () -> new LottoNumbers(asList(lottoNumber)));
     int[] winningNumber = {1, 2, 3, 22, 33, 44};
 
-    MatchResults matchResults = buyer.matchWithWinningLotto(new Lotto(asList(winningNumber)));
+    MatchResults matchResults = buyer.matchWithWinningLotto(new LottoNumbers(asList(winningNumber)));
 
     assertThat(buyer.buyCount() * LottoRank.THREE_MATCHES.getMoney()).isEqualTo(matchResults.getTotalWinningAmount());
   }

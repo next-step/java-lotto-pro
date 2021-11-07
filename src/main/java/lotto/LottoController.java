@@ -3,18 +3,35 @@ package lotto;
 import lotto.generator.AutoLottoGenerator;
 import lotto.generator.LottoGenerator;
 import lotto.model.LottoBuyer;
-import lotto.model.LottoDrawer;
+import lotto.model.LottoNumbers;
+import lotto.model.MatchResults;
+import lotto.model.PurchaseAmount;
 
 import static lotto.view.InputView.*;
+import static lotto.view.OutputView.*;
+import static lotto.view.OutputView.printBuyCount;
+import static lotto.view.OutputView.printDrawnLotto;
 
 public class LottoController {
   public static void run() {
     LottoGenerator lottoGenerator = getAutoLottoGenerator();
-    LottoBuyer lottoBuyer = LottoBuyer.buy(inputPurchaseAmount(), lottoGenerator);
-    LottoDrawer lottoDrawer = LottoDrawer.draw(lottoGenerator);
-    LottoMachine lottoMachine = new LottoMachine(lottoDrawer, lottoBuyer);
+    PurchaseAmount purchaseAmount = inputPurchaseAmount();
+    printBuyCount(purchaseAmount);
 
-    lottoMachine.execute();
+    LottoBuyer lottoBuyer = LottoBuyer.buy(purchaseAmount, lottoGenerator);
+    printGeneratedLottos(lottoBuyer.getLottoTicket());
+
+    LottoNumbers drawnLottoNumbers = lottoGenerator.generate();
+    printDrawnLotto(drawnLottoNumbers);
+
+    processStatistics(lottoBuyer, drawnLottoNumbers);
+  }
+
+  private static void processStatistics(LottoBuyer lottoBuyer, LottoNumbers drawnLottoNumbers) {
+    printStatisticsGuideMessage();
+    MatchResults matchResults = lottoBuyer.matchWithWinningLotto(drawnLottoNumbers);
+    printMatches(matchResults.getMatchResults());
+    printYield(matchResults.calculateYield(lottoBuyer.getPurchaseAmount()));
   }
 
   private static AutoLottoGenerator getAutoLottoGenerator() {

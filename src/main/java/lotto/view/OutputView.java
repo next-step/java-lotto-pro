@@ -1,17 +1,23 @@
 package lotto.view;
 
 
-import lotto.constants.OutputMessage;
-import lotto.model.Lotto;
-import lotto.model.Lottos;
+import lotto.model.LottoNumbers;
+import lotto.model.LottoTicket;
 import lotto.model.MatchResult;
 import lotto.model.PurchaseAmount;
 
 import java.util.List;
 
-import static lotto.constants.OutputMessage.*;
 
 public class OutputView {
+  public static final String INPUT_PURCHASE_AMOUNT_GUIDE_MESSAGE = "구입금액을 입력해 주세요.";
+  public static final String INPUT_BUY_LOTTO_COUNTS_MESSAGE = "%d개를 구매했습니다.";
+  public static final String LAST_WEEK_DRAWN_LOTTO = "지난 주 당첨 번호를 입력해 주세요.";
+  public static final String STATISTICS_GUIDE_MESSAGE = "당첨 통계";
+  public static final String PERFORATION = "-------";
+  public static final String MATCH_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개";
+  public static final String YIELD_MESSAGE = "총 수익률은 %.2f입니다.";
+
   public static void printInputPurchaseAmountGuideMessage() {
     System.out.println(INPUT_PURCHASE_AMOUNT_GUIDE_MESSAGE);
   }
@@ -21,13 +27,13 @@ public class OutputView {
     System.out.println();
   }
 
-  public static void printGeneratedLottos(Lottos lottos) {
-    System.out.println(lottos.toString());
+  public static void printGeneratedLottos(LottoTicket lottoTicket) {
+    System.out.println(lottoTicket.toString());
   }
 
-  public static void printDrawnLotto(Lotto lotto) {
+  public static void printDrawnLotto(LottoNumbers lottoNumbers) {
     System.out.println(LAST_WEEK_DRAWN_LOTTO);
-    System.out.println(lotto.toString());
+    System.out.println(lottoNumbers.toString());
     System.out.println();
   }
 
@@ -51,7 +57,7 @@ public class OutputView {
   }
 
   public static void printYield(double yield) {
-    System.out.printf(OutputMessage.YIELD_MESSAGE, yield);
+    System.out.printf(YIELD_MESSAGE, yield);
     System.out.println();
   }
 }

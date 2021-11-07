@@ -1,36 +1,35 @@
 package lotto.model;
 
 import lotto.generator.LottoGenerator;
-import lotto.view.OutputView;
 
 import java.util.Objects;
 
-import static lotto.view.OutputView.printBuyCount;
 
 public class LottoBuyer {
   private final PurchaseAmount purchaseAmount;
-  private final Lottos lottos;
+  private final LottoTicket lottoTicket;
 
 
-  private LottoBuyer(PurchaseAmount purchaseAmount, Lottos lottos) {
+  private LottoBuyer(PurchaseAmount purchaseAmount, LottoTicket lottoTicket) {
     this.purchaseAmount = purchaseAmount;
-    this.lottos = lottos;
+    this.lottoTicket = lottoTicket;
   }
 
   public static LottoBuyer buy(PurchaseAmount purchaseAmount, LottoGenerator lottoGenerator) {
-    printBuyCount(purchaseAmount);
-    Lottos lottos = new Lottos(purchaseAmount.buyLottos(lottoGenerator));
-
-    OutputView.printGeneratedLottos(lottos);
-    return new LottoBuyer(purchaseAmount, lottos);
+    LottoTicket lottoTicket = new LottoTicket(purchaseAmount.buyLottos(lottoGenerator));
+    return new LottoBuyer(purchaseAmount, lottoTicket);
   }
 
-  public MatchResults matchWithWinningLotto(Lotto winningLotto) {
-    return lottos.totalWinningResults(winningLotto);
+  public MatchResults matchWithWinningLotto(LottoNumbers winningLottoNumbers) {
+    return lottoTicket.totalWinningResults(winningLottoNumbers);
   }
 
   public int buyCount() {
     return purchaseAmount.buyLottoCount();
+  }
+
+  public LottoTicket getLottoTicket() {
+    return lottoTicket;
   }
 
   public PurchaseAmount getPurchaseAmount() {

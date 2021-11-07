@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.view.OutputView;
-
 import java.util.List;
 
 public class MatchResults {
@@ -9,12 +7,6 @@ public class MatchResults {
 
   public MatchResults(List<MatchResult> matchResults) {
     this.matchResults = matchResults;
-  }
-
-  public void statistics(PurchaseAmount purchaseAmount) {
-    OutputView.printStatisticsGuideMessage();
-    OutputView.printMatches(matchResults);
-    OutputView.printYield(calculateYield(purchaseAmount));
   }
 
   public long getTotalWinningAmount() {

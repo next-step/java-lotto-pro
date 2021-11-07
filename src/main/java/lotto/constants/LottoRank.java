@@ -28,6 +28,6 @@ public enum LottoRank {
     return Arrays.stream(LottoRank.values())
       .filter(lottoRank -> lottoRank.rank == rank)
       .findAny()
-      .orElse(null);
+      .orElseThrow(NullPointerException::new);
   }
 }

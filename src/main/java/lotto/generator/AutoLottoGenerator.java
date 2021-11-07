@@ -1,7 +1,9 @@
 package lotto.generator;
 
-import lotto.model.Lotto;
+import lotto.constants.Lotto;
+import lotto.model.LottoNumbers;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -9,17 +11,23 @@ public class AutoLottoGenerator implements LottoGenerator {
   private static final int ZERO = 0;
 
   @Override
-  public Lotto generate() {
-    List<Integer> lottoNumbers = peakLottoNumbers(shuffle(getLottoNumbers()));
-    return new Lotto(lottoNumbers);
+  public LottoNumbers generate() {
+    List<Integer> orderedLottoNumbers = getOrderedLottoNumbers();
+    Collections.shuffle(orderedLottoNumbers);
+    List<Integer> lottoNumbers = peakLottoNumbers(orderedLottoNumbers);
+    return new LottoNumbers(lottoNumbers);
   }
 
   private List<Integer> peakLottoNumbers(List<Integer> lottoNumbers) {
-    return lottoNumbers.subList(ZERO, LOTTO_NUMBER_RANGE);
+    return lottoNumbers.subList(ZERO, Lotto.LOTTO_NUMBER_RANGE);
   }
 
-  private List<Integer> shuffle(List<Integer> lottoNumbers) {
-    Collections.shuffle(lottoNumbers);
+  List<Integer> getOrderedLottoNumbers() {
+    List<Integer> lottoNumbers = new ArrayList<>();
+    for (int i = Lotto.MIN_LOTTO_NUMBER; i <= Lotto.MAX_LOTTO_NUMBER; i++) {
+      lottoNumbers.add(i);
+    }
+
     return lottoNumbers;
   }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottosTest {
+public class LottoTicketTest {
   int[] lottoNumber;
 
   @BeforeEach
@@ -21,9 +21,9 @@ public class LottosTest {
   @Test
   void totalWinningResults() {
     LottoBuyer buyer = LottoBuyer.buy(new PurchaseAmount(14000),
-      () -> new Lotto(asList(lottoNumber)));
+      () -> new LottoNumbers(asList(lottoNumber)));
     int[] winningNumber = {1, 2, 3, 22, 33, 44};
-    MatchResults matchResults = buyer.matchWithWinningLotto(new Lotto(asList(winningNumber)));
+    MatchResults matchResults = buyer.matchWithWinningLotto(new LottoNumbers(asList(winningNumber)));
 
     int[] matchCount = {14, 0, 0, 0};
     int matchCountIndex = 0;
