@@ -4,25 +4,20 @@ import java.util.Map;
 
 public class Revenue {
 
-    private double value;
+    private final PurchaseAmount amount;
+    private final Map<Integer, Integer> statistic;
 
-    public Revenue(long amount, Map<Integer, Integer> statistic) {
-        long sum = statistic.entrySet().stream()
-                .mapToLong(e -> Winnings.getAmount(e.getKey()) * e.getValue())
-                .sum();
-
-        this.value = Math.floor(calculate(toDouble(sum), toDouble(amount)) * 100) / 100;
+    public Revenue(PurchaseAmount amount, Map<Integer, Integer> statistic) {
+        this.amount = amount;
+        this.statistic = statistic;
     }
 
-    private double calculate(double sum, double amount) {
-        return sum / amount;
-    }
-
-    private double toDouble(long amount) {
-        return (double) amount;
+    private Amount incomeAmount() {
+        return new Income(statistic).amount();
     }
 
     public double percentage() {
-        return this.value;
+        Amount incomeAmount = incomeAmount();
+        return Math.floor(incomeAmount.divideToDouble(amount) * 100) / 100;
     }
 }

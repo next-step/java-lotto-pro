@@ -1,11 +1,11 @@
 package lotto;
 
-import lotto.domain.LottoAutoManager;
+import lotto.domain.LottoShop;
 
 public class Main {
 
     public static void main(String[] args) {
-        LottoAutoManager manager = new LottoAutoManager();
-        manager.start();
+        LottoShop shop = new LottoShop();
+        shop.open();
     }
 }

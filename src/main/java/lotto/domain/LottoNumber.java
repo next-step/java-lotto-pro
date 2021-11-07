@@ -4,16 +4,18 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private final String VALUE_OUT_OF_RANGE_ERROR_MESSAGE = "제한된 범위를 벗어났습니다.";
-    private int number;
+    private final int number;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
+    private static final String VALUE_OUT_OF_RANGE_ERROR_MESSAGE = "제한된 범위를 벗어났습니다.";
 
     public LottoNumber(int number) {
-        validate(number);
+        validateNumberRange(number);
         this.number = number;
     }
 
-    private void validate(int number) {
-        if(number < 1 || number > 45) {
+    private void validateNumberRange(int number) {
+        if(number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException(VALUE_OUT_OF_RANGE_ERROR_MESSAGE);
         }
     }

@@ -8,19 +8,27 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.InstanceOfAssertFactories.STREAM;
 
 public class LottoTest {
 
     @DisplayName("로또 발행 테스트")
     @Test
     public void lottoIssueTest() {
-        Lottos lottos = LottoMachine.issue(1000);
-        assertThat(lottos).isNotNull();
+        PurchaseAmount amount = new PurchaseAmount(1_000);
+        LottoMachine lottoMachine = new LottoMachine(new NumberGenerator() {
+            @Override
+            public List<Integer> generate(int digit) {
+                return Arrays.asList(1, 2, 6, 10, 17, 42);
+            }
+        });
+        Lottos lottos = lottoMachine.issue(amount);
+        assertThat(lottos).isNotEmpty();
+        assertThat(lottos).containsExactly(new Lotto(Arrays.asList(1, 2, 6, 10, 17, 42)));
     }
 
     @DisplayName("로또 숫자를 비교하는 테스트")
@@ -61,7 +69,9 @@ public class LottoTest {
     @DisplayName("주어진 금액만큼 로또 개수를 발행 테스트")
     @Test
     public void lottoCount_InAmountTest() {
-        Lottos lottos = LottoMachine.issue(14_000);
+        PurchaseAmount amount = new PurchaseAmount(14_000);
+        LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerator());
+        Lottos lottos = lottoMachine.issue(amount);
         assertThat(lottos.count()).isEqualTo(14);
     }
 
@@ -84,8 +94,8 @@ public class LottoTest {
         Lotto eight = new Lotto(Arrays.asList(10, 13, 5, 9, 11, 44));
 
         Lottos lottos = new Lottos(Arrays.asList(one, two, three, four, five, six, seven, eight));
-        LottoStatisticResult result = reader.win(lottos);
-
+        LottoStatistic statistic = reader.distinguish(lottos);
+        Map<Integer, Integer> result = statistic.result(Arrays.asList(correspond));
         assertThat(result.get(correspond)).isEqualTo(win);
     }
 
@@ -99,7 +109,8 @@ public class LottoTest {
         statistic.put(4, 0);
         statistic.put(5, 0);
         statistic.put(6, 0);
-        Revenue revenue = new Revenue(14_000, statistic);
+        PurchaseAmount amount = new PurchaseAmount(14_000);
+        Revenue revenue = new Revenue(amount, statistic);
         assertThat(revenue.percentage()).isEqualTo(0.35);
     }
 
