@@ -23,19 +23,15 @@ public class ValidationUtils {
         return numbers.length == LottoNumbers.LOTTO_NUMBER_QUANTITY;
     }
 
-    public static boolean isAllNumber(String[] numbers) {
-        return Arrays.stream(numbers).allMatch(number -> isNumber(number));
+    public static boolean isCorrectNumber(String[] numbers) {
+        return Arrays.stream(numbers).allMatch(number -> isNumber(number) && isBetweenRange(Integer.parseInt(number)));
+
     }
 
     public static boolean checkDuplicatedNumber(String[] numbers) {
         return Arrays.stream(numbers).distinct().count() != numbers.length;
     }
 
-    public static boolean checkNumberRange(String[] numbers) {
-        return Arrays.stream(numbers)
-                .allMatch(number -> isBetweenRange(Integer.parseInt(number)));
-    }
-    
     private static boolean isBetweenRange(int number) {
         return number >= LottoNumbers.LOTTO_MIN_NUMBER && number <= LottoNumbers.LOTTO_MAX_NUMBER;
     }

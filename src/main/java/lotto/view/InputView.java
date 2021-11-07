@@ -22,36 +22,23 @@ public class InputView {
     public Money enterMoney() {
         System.out.println(INSERT_MONEY);
         String number = ConsoleUtils.console();
-        if (!ValidationUtils.isNumber(number)) {
-            System.out.println(ERROR_ONLY_NUMBER);
-            return enterMoney();
+        if (ValidationUtils.isNumber(number)) {
+            return new Money(Integer.parseInt(number));
         }
-        return new Money(Integer.parseInt(number));
+        System.out.println(ERROR_ONLY_NUMBER);
+        return enterMoney();
     }
 
     public LottoNumbers enterWinningNumbers() {
         System.out.println(INSERT_WINNING_NUMBER);
         String[] numbers = ConsoleUtils.console().split(",");
-        if (!ValidationUtils.isCorrectQuantity(numbers)) {
-            System.out.println(String.format(ERROR_NUMBER_QUANTITY, LottoNumbers.LOTTO_NUMBER_QUANTITY));
-            return enterWinningNumbers();
-        }
-        if (!ValidationUtils.isAllNumber(numbers)) {
-            System.out.println(ERROR_ONLY_NUMBER);
-            return enterWinningNumbers();
-        }
-        if (ValidationUtils.checkDuplicatedNumber(numbers)) {
-            System.out.println(ERROR_DUPLICATED_NUMBER);
-            return enterWinningNumbers();
-        }
-        if (!ValidationUtils.checkNumberRange(numbers)) {
-            System.out.println(String.format(ERROR_NUMBER_RANGE,LottoNumbers.LOTTO_MIN_NUMBER, LottoNumbers.LOTTO_MAX_NUMBER));
-            return enterWinningNumbers();
-        }
-        return LottoNumbers.valueOf(Arrays.stream(numbers)
+        if (checkWinningNumbers(numbers)) {
+            return LottoNumbers.valueOf(Arrays.stream(numbers)
                     .mapToInt(Integer::parseInt)
                     .boxed()
                     .collect(Collectors.toList()));
+        }
+        return enterWinningNumbers();
     }
 
     public Bonus enterBonus() {
@@ -62,6 +49,22 @@ public class InputView {
             return enterBonus();
         }
         return Bonus.from(Integer.parseInt(bonus));
+    }
+    
+    private boolean checkWinningNumbers(String[] numbers) {
+        if (!ValidationUtils.isCorrectQuantity(numbers)) {
+            System.out.println(String.format(ERROR_NUMBER_QUANTITY, LottoNumbers.LOTTO_NUMBER_QUANTITY));
+            return false;
+        }
+        if (!ValidationUtils.isCorrectNumber(numbers)) {
+            System.out.println(String.format(ERROR_NUMBER_RANGE,LottoNumbers.LOTTO_MIN_NUMBER, LottoNumbers.LOTTO_MAX_NUMBER));
+            return false;
+        }
+        if (ValidationUtils.checkDuplicatedNumber(numbers)) {
+            System.out.println(ERROR_DUPLICATED_NUMBER);
+            return false;
+        }
+        return true;
     }
 
 }
