@@ -1,8 +1,11 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoPapers {
 
@@ -16,7 +19,7 @@ public class LottoPapers {
         return Collections.unmodifiableList(lottoPapers);
     }
 
-    public long lottoPaperSize() {
+    public long getLottoPapersSize() {
         return lottoPapers.size();
     }
 
@@ -36,4 +39,14 @@ public class LottoPapers {
                                         lottoPaper.matchLottoPaper(winningLotto.getWinningLottoPaper()), lottoPaper.isContainsLottoNumber(winningLotto.getBonusLottoNumber())));
         return  lottoResult;
     }
+
+    public LottoPapers addLottoPapers(LottoPapers addLottoPapers) {
+
+        List<LottoPaper> mergedList = Stream.of(addLottoPapers.getLottoPapers(), lottoPapers)
+                                            .flatMap(Collection::stream)
+                                            .collect(Collectors.toList());
+
+        return new LottoPapers(mergedList);
+    }
+
 }

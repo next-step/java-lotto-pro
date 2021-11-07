@@ -28,7 +28,7 @@ public class LottoNumberGenerator {
         return new LottoPaper(randomLottoNumbers);
     }
 
-    public LottoPaper createWinningNumber(String input) {
+    public LottoPaper createManualLottoNumber(String input) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         Arrays.asList(input.split(GameRule.LOTTO_NUMBER_DELIMITER))
                 .forEach(number -> lottoNumbers.add(new LottoNumber(number)) );
