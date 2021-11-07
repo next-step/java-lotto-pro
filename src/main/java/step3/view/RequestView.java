@@ -1,40 +1,39 @@
-package step3;
+package step3.view;
 
 import java.util.Scanner;
 
-public class InputView {
+import step3.PattenUtils;
+
+public class RequestView implements InputView {
 
 	private static final String COMMA = "([\\w\\d].+)+([^\\w,]).+";
 	private static final String LAST_COMMA = "([0-9],){1,}";
 	private static final String ONLY_NUMBER = "((?:^|,)([0-9]+))+";
 	private static final String NUMBER_SIZE_SIX = "((?:^|,)([0-9]{1,2})){6}";
 
-	private LottoMachineFacade lottoMachineFacade;
-
-	public InputView(LottoMachineFacade lottoMachineFacade) {
-		this.lottoMachineFacade = lottoMachineFacade;
-	}
-
-	public void insertMoney() {
+	public int insertMoney() {
+		int insertMoney = 0;
 		try {
 			System.out.println("구입금액을 입력해 주세요.");
-			lottoMachineFacade.pick(Integer.parseInt(input()));
+			insertMoney = Integer.parseInt(input());
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			insertMoney();
 		}
+		return insertMoney;
 	}
 
-	public void insertLottoNumber() {
+	public String insertLottoNumber() {
+		String insertLottoNumber = "";
 		try {
 			System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-			String inputLottoNumber = input();
-			validationInputWinningNumber(inputLottoNumber);
-			lottoMachineFacade.result(inputLottoNumber);
+			insertLottoNumber = input();
+			validationInputWinningNumber(insertLottoNumber);
 		} catch (IllegalArgumentException ex) {
 			System.out.println(ex.getMessage());
 			insertLottoNumber();
 		}
+		return insertLottoNumber;
 	}
 
 	private static void validationInputWinningNumber(String input) {
