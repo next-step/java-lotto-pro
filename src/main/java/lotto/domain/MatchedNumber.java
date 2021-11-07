@@ -13,9 +13,6 @@ public class MatchedNumber {
 	}
 
 	public boolean isWinner() {
-		if (matchedNumber >= WINNER_MIN_BOUNDARY_VALUE) {
-			return true;
-		}
-		return false;
+		return matchedNumber >= WINNER_MIN_BOUNDARY_VALUE;
 	}
 }
