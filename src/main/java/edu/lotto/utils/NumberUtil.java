@@ -34,4 +34,13 @@ public class NumberUtil {
 		return (value >= THOUSAND);
 	}
 
+	/**
+	 * 숫자가 1~45 사이의 숫자인지 확인
+	 * @param value
+	 * @return
+	 */
+	public static boolean isNumberBetweenOneAndFortyFive(int value) {
+		return ((value >= 1) && (value <= 45));
+	}
+
 }

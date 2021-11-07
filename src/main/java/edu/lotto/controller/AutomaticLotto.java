@@ -4,6 +4,7 @@ import edu.lotto.constants.MessageConstants;
 import edu.lotto.constants.PatternConstants;
 import edu.lotto.model.Lottos;
 import edu.lotto.utils.MessageUtil;
+import edu.lotto.utils.NumberUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,8 @@ public class AutomaticLotto {
 		int perchaseAmount = Integer.parseInt(getPerchaseAmount());
 		Lottos lottos = new Lottos(perchaseAmount);
 		List<Integer> winningNumbers = getLatestWinningNumbers();
+		int secondWinningNumber =getSecondWinningNumber();
+		MessageUtil.printInfoLog("2등 보너스 볼 : "+ secondWinningNumber);
 		lottos.setWinningNumberMatchesCount(winningNumbers);
 		lottos.printLottoMatchesCountStatistics();
 	}
@@ -69,4 +72,14 @@ public class AutomaticLotto {
 		return winningNumbers;
 	}
 
+	public static int getSecondWinningNumber() {
+		int secondWinningNumber = 0;
+		MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_MESSAGE);
+		Scanner scan = new Scanner(System.in);
+		secondWinningNumber = scan.nextInt();
+		if(!NumberUtil.isNumber(String.valueOf(secondWinningNumber)) || !NumberUtil.isNumberBetweenOneAndFortyFive(secondWinningNumber)) {
+			secondWinningNumber = getSecondWinningNumber();
+		}
+		return secondWinningNumber;
+	}
 }

@@ -57,6 +57,9 @@ public class Lottos {
 		}
 	}
 
+	/**
+	 * 등수 별 로또 당첨 게임 출력
+	 */
 	public void printLottoMatchesCountStatistics() {
 		MessageUtil.printMessage("\n"+MessageConstants.LOTTO_STATISTICS_MESSAGE);
 		MessageUtil.printSeparatorLine();
@@ -68,6 +71,9 @@ public class Lottos {
 		printLottoProfitRatio();
 	}
 
+	/**
+	 * 로또 당침금 수익률 출력
+	 */
 	private void printLottoProfitRatio() {
 		long profit = (5000 * this.threeMatches)
 				+ (50000 * this.fourMatches)
@@ -77,6 +83,11 @@ public class Lottos {
 		MessageUtil.printMessage(MessageConstants.LOTTO_PROFIT_RATIO_MESSAGE, profitRatio);
 	}
 
+	/**
+	 * 일치 갯수 별 로또 당첨 게임 수 가져오기
+	 * @param number
+	 * @return
+	 */
 	public long getLottoMatchesCountByMatchNumber(long number) {
 		long matchesCount = this.lottos.stream().filter(lotto -> lotto.getWinningNumberMatchesCount() == number).count();
 		if(number == 3) this.threeMatches = matchesCount;
@@ -132,18 +143,9 @@ public class Lottos {
 		int currentWinningNumberIndex = 0;
 		while(isValidWinningNumbers && currentWinningNumberIndex < winningNumberArray.length) {
 			String winningNumber = winningNumberArray[currentWinningNumberIndex];
-			isValidWinningNumbers = ((winningNumberArray.length == 6) && NumberUtil.isNumber(winningNumber) && isNumberBetweenOneAndFortyFive(Integer.parseInt(winningNumber)));
+			isValidWinningNumbers = ((winningNumberArray.length == 6) && NumberUtil.isNumber(winningNumber) && NumberUtil.isNumberBetweenOneAndFortyFive(Integer.parseInt(winningNumber)));
 			currentWinningNumberIndex++;
 		}
 		return isValidWinningNumbers;
-	}
-
-	/**
-	 * 숫자가 1~45 사이의 숫자인지 확인
-	 * @param value
-	 * @return
-	 */
-	public static boolean isNumberBetweenOneAndFortyFive(int value) {
-		return ((value >= 1) && (value <= 45));
 	}
 }
