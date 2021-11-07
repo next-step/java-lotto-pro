@@ -3,9 +3,9 @@ package step3.machine;
 import step3.LottoNumberService;
 import step3.LottoPapers;
 import step3.Money;
-import step3.Winner;
 import step3.view.InputView;
 import step3.view.ResultView;
+import step3.winner.Winner;
 
 public class LottoMachineFacade {
 
