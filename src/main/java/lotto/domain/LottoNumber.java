@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
 	private static final int MIN_NUMBER = 1;
 	private static final int MAX_NUMBER = 45;
@@ -21,6 +21,11 @@ public class LottoNumber {
 	}
 
 	@Override
+	public String toString() {
+		return String.valueOf(lottoNumber);
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
@@ -33,5 +38,16 @@ public class LottoNumber {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumber);
+	}
+
+	@Override
+	public int compareTo(LottoNumber o) {
+		if (this.lottoNumber > o.lottoNumber) {
+			return 1;
+		}
+		if (this.lottoNumber < o.lottoNumber) {
+			return -1;
+		}
+		return 0;
 	}
 }

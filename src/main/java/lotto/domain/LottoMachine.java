@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,29 +12,26 @@ public class LottoMachine {
 	public static final int RANGE_MIN_LIST_INDEX = 0;
 	public static final int RANGE_MAX_LIST_INDEX = 6;
 
-	private final List<LottoNumber> lottoRangeNumbers;
+	private final List<Integer> lottoRangeNumbers;
 
 	public LottoMachine() {
-		this.lottoRangeNumbers = new ArrayList<>(
-			IntStream.range(RANGE_MIN_NUMBER, RANGE_MAX_NUMBER)
-				.mapToObj(LottoNumber::new)
-				.collect(Collectors.toList())
-		);
+		this.lottoRangeNumbers = IntStream.range(RANGE_MIN_NUMBER, RANGE_MAX_NUMBER)
+			.boxed()
+			.collect(Collectors.toList());
 	}
 
-	private List<LottoNumber> generateLottoNumber() {
+	private List<Integer> generateLottoNumber() {
 		Collections.shuffle(this.lottoRangeNumbers);
-		return this.lottoRangeNumbers.subList(RANGE_MIN_LIST_INDEX, RANGE_MAX_LIST_INDEX);
+		return lottoRangeNumbers.stream()
+			.limit(RANGE_MAX_LIST_INDEX)
+			.sorted()
+			.collect(Collectors.toList());
 	}
 
-	public List<Lotto> buyLottos(LottoMoney money){
-		int index = money.buyCount();
-		List<Lotto> lottos = new ArrayList<>();
-
-		while(index-- > 0){
-			lottos.add(new Lotto(generateLottoNumber()));
-		}
-
+	public List<Lotto> buySeveralLottoTickets(PurchaseAmount purchaseAmount) {
+		List<Lotto> lottos = IntStream.rangeClosed(0, purchaseAmount.getPurchaseQuantity())
+			.mapToObj(lotto -> new Lotto(generateLottoNumber()))
+			.collect(Collectors.toList());
 		return Collections.unmodifiableList(lottos);
 	}
 }

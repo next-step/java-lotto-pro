@@ -1,9 +1,10 @@
 package lotto.domain;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
 
@@ -12,8 +13,11 @@ public class WinningLotto {
 
 	private final List<LottoNumber> lottoNumbers;
 
-	WinningLotto(List<LottoNumber> lottoNumbers) {
-		this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+	public WinningLotto(List<Integer> numbers) {
+		this.lottoNumbers = Collections.unmodifiableList(numbers.stream()
+			.sorted()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList()));
 	}
 
 	public Rank match(Lotto lotto) {
