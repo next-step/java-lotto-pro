@@ -35,7 +35,12 @@ public enum Rank {
     }
 
     public static boolean isPrize(int winningNumberMatchCount) {
-        return winningNumberMatchCount >= FOURTH_PLACE.getWinningNumberCount() && winningNumberMatchCount <= FIRST_PLACE.getWinningNumberCount();
+        try {
+            of(winningNumberMatchCount);
+            return true;
+        }catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
     public long prizeMoneyCalculation(int winningCount) {
