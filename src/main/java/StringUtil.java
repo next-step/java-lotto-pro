@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class StringUtil {
     private StringUtil(){
-
     }
+
     public static String[] splitString(String str){
         return str.split(",");
     }
@@ -35,5 +37,15 @@ public class StringUtil {
             return true;
         }
         return false;
+    }
+
+    public static List<Integer> mapToInteger(String numbers) {
+        String[] numberStringArray = splitString(numbers);
+        List<Integer> numberList = new ArrayList<Integer>();
+
+        for(String numberString : numberStringArray){
+            numberList.add(Integer.parseInt(numberString));
+        }
+        return numberList;
     }
 }
