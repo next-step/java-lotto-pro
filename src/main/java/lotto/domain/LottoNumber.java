@@ -1,10 +1,13 @@
 package lotto.domain;
 
+import lotto.exception.LottoNumberSizeException;
+
 import java.util.*;
 
 import static lotto.domain.Number.MAX_NUMBER;
 import static lotto.domain.Number.MIN_NUMBER;
 import static lotto.utils.RandomNumberUtils.generateRandomNumbers;
+import static lotto.utils.ValidationUtils.*;
 
 public class LottoNumber {
 
@@ -46,8 +49,14 @@ public class LottoNumber {
     }
 
     private void validateLottoNumbersSize(List<Number> activeNumbers) {
-        if (activeNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("[ERROR] 숫자 입력 필수 자리수 : " + LOTTO_SIZE);
+        if (isArrayEmpty(activeNumbers)) {
+            throw new LottoNumberSizeException("[ERROR] 로또의 값이 없습니다.");
+        }
+        if (isArrayLengthOver(activeNumbers, LOTTO_SIZE)) {
+            throw new LottoNumberSizeException("[ERROR] 로또의 사이즈 보다 큽니다.");
+        }
+        if (isArrayLengthUnder(activeNumbers, LOTTO_SIZE)) {
+            throw new LottoNumberSizeException("[ERROR] 로또의 사이즈 보다 작습니다.");
         }
     }
 
