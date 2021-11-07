@@ -3,29 +3,20 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.reflect.Method;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class WinningLottoNumbersTest {
 
-	private Method privateMethod(String methodName) throws Exception {
-		Method method = WinningLottoNumbers.class.getDeclaredMethod(methodName, String.class);
-		method.setAccessible(true);
-		return method;
-	}
-
 	@ParameterizedTest(name = "index {0} ===> input {1}")
-	@ValueSource(strings = {
-		"1, 2,3, 4,5,6",
-		"1 ,6, 12, 34, 33, 23",
-		"1,10,11,12,13,41"
-	})
-	void 입력된_문자열로_당첨번호_생성테스트(String input) {
+	@CsvSource(value = {
+		"1, 2,3, 4,5,6 : 7",
+		"1 ,6, 12, 34, 33, 23 : 8",
+		"1,10,11,12,13,41 : 9"
+	}, delimiter = ':')
+	void 입력된_문자열로_당첨번호_생성테스트(String input, String bonusInput) {
 		// given // when
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(input);
+		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(input, bonusInput);
 
 		// then
 		assertAll(
