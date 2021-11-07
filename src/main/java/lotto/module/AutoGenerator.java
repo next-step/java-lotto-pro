@@ -11,10 +11,12 @@ import java.util.stream.IntStream;
 import static lotto.common.LottoConst.*;
 
 public class AutoGenerator implements NumberGeneratorStrategy {
-
     private static final List<Integer> ALL_LOTTO_NUMBERS = createNumbers();
 
-    public AutoGenerator() {
+    private int autoBoughtCount;
+
+    public AutoGenerator(int autoBoughtCount) {
+        this.autoBoughtCount = autoBoughtCount;
     }
 
     private static List<Integer> createNumbers() {
@@ -24,7 +26,13 @@ public class AutoGenerator implements NumberGeneratorStrategy {
     }
 
     @Override
-    public LottoNumbers createLotto() {
+    public List<LottoNumbers> createLottos() {
+        return IntStream.range(0, autoBoughtCount)
+                .mapToObj(i -> generateRandomLottoNumbers())
+                .collect(Collectors.toList());
+    }
+
+    private LottoNumbers generateRandomLottoNumbers() {
         List<Integer> numbers = new ArrayList<>();
         numbers.addAll(ALL_LOTTO_NUMBERS);
         Collections.shuffle(numbers);
