@@ -9,6 +9,8 @@ import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTicketTest {
     private LottoTicket lottoTicket;
@@ -95,5 +97,13 @@ class LottoTicketTest {
 
         Rank missByZero = lottoTicket.winningRank(new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)));
         assertEquals(Rank.MISS, missByZero);
+    }
+
+    @DisplayName("존재하는 로또 번호인지 확인")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 6})
+    void existLottoNumber(int number) {
+        assertTrue(lottoTicket.existLottoNumber(new LottoNumber(number)));
+        assertFalse(lottoTicket.existLottoNumber(new LottoNumber(7)));
     }
 }

@@ -57,6 +57,10 @@ public class LottoTicket {
         return Rank.valueOf(countOfMatch);
     }
 
+    public boolean existLottoNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.toString();
