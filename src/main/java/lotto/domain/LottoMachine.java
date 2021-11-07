@@ -28,10 +28,10 @@ public class LottoMachine {
 			.collect(Collectors.toList());
 	}
 
-	public List<Lotto> buySeveralLottoTickets(PurchaseAmount purchaseAmount) {
+	public Lottos buySeveralLottoTickets(PurchaseAmount purchaseAmount) {
 		List<Lotto> lottos = IntStream.rangeClosed(0, purchaseAmount.getPurchaseQuantity())
 			.mapToObj(lotto -> new Lotto(generateLottoNumber()))
 			.collect(Collectors.toList());
-		return Collections.unmodifiableList(lottos);
+		return new Lottos(lottos);
 	}
 }

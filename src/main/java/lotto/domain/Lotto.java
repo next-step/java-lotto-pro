@@ -37,7 +37,7 @@ public class Lotto {
 
 	@Override
 	public String toString() {
-		return "[" + String.join(",", this.lottoNumbers.toString()) + "]";
+		return String.join(",", this.lottoNumbers.toString());
 	}
 
 	@Override

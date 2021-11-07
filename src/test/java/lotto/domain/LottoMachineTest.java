@@ -11,9 +11,9 @@ public class LottoMachineTest {
 	@Test
 	public void 로또_숫자_생성_크기_비교() {
 		LottoMachine lottoMachine = new LottoMachine();
-		List<Lotto> lottos = lottoMachine.buySeveralLottoTickets(new PurchaseAmount(6000));
+		Lottos lottos = lottoMachine.buySeveralLottoTickets(new PurchaseAmount(6000));
 
-		int lottoNumberSize = lottos.size();
+		int lottoNumberSize = lottos.quantity();
 
 		assertThat(lottoNumberSize).isEqualTo(6);
 	}
