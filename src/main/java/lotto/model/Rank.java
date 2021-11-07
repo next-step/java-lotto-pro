@@ -1,6 +1,10 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Rank {
     MISS(0, 0),
@@ -23,6 +27,12 @@ public enum Rank {
 
     public int getWinningMoney() {
         return winningMoney;
+    }
+
+    public static List<Rank> createWinningRanks() {
+        return Stream.of(FIRST, SECOND, THIRD, FOURTH)
+                .sorted(Comparator.comparing(Rank::getCountOfMatch))
+                .collect(Collectors.toList());
     }
 
     public static Rank valueOf(int countOfMatch) {

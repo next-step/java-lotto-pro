@@ -2,7 +2,7 @@ package lotto.service;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
-import lotto.util.InputHandler;
+import lotto.view.InputHandler;
 import lotto.view.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

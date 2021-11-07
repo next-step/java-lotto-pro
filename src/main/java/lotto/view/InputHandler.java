@@ -1,24 +1,18 @@
-package lotto.util;
+package lotto.view;
 
+import lotto.model.Lotto;
 import lotto.model.LottoNumber;
-import lotto.view.ErrorMessage;
+import lotto.util.ConstantString;
+import lotto.model.Price;
 
 public class InputHandler {
-    private static final int LOTTO_MAX_BUY_LENGTH = 6;
 
     public static int price(String priceText) {
-        validRange(priceText.length());
         try {
-            int lottoCount = PriceUtil.getCount(Integer.parseInt(priceText));
+            int lottoCount = Price.getCount(Integer.parseInt(priceText));
             return lottoCount;
         } catch (NumberFormatException e) {
             throw new NumberFormatException(ErrorMessage.NUMBER_FORMAT_ERROR);
-        }
-    }
-
-    private static void validRange(int length) {
-        if (length > LOTTO_MAX_BUY_LENGTH) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_MAX_BUY_ERROR);
         }
     }
 
@@ -32,8 +26,8 @@ public class InputHandler {
     }
 
     private static int[] mapToInts(String[] splitedNumbers) {
-        int[] result = new int[LottoNumber.SIZE];
-        for (int i = 0; i < LottoNumber.SIZE; i++) {
+        int[] result = new int[Lotto.SIZE];
+        for (int i = 0; i < Lotto.SIZE; i++) {
             int lottoNumber = checkLottoNumber(splitedNumbers[i]);
             result[i] = lottoNumber;
         }

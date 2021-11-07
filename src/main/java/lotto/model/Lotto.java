@@ -6,18 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
+    public static final int SIZE = 6;
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(int[] numbers) {
-        valid(numbers.length);
+        valid(numbers);
         lottoNumbers = new ArrayList<>();
         for (int i = 0; i < numbers.length; i++) {
             lottoNumbers.add(new LottoNumber(numbers[i]));
         }
     }
 
-    private void valid(int length) {
-        if (length > LottoNumber.SIZE) {
+    private void valid(int[] numbers) {
+        if (numbers == null) {
+            throw new NullPointerException(ErrorMessage.LOTTO_NULL);
+        }
+        if (numbers.length > SIZE) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_SIZE_UNMATCHED);
         }
     }

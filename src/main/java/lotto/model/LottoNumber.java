@@ -5,10 +5,9 @@ import lotto.view.ErrorMessage;
 import java.util.Objects;
 
 public class LottoNumber {
-    private final int number;
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
-    public static final int SIZE = 6;
+    private final int number;
 
     public LottoNumber(int number) {
         valid(number);

@@ -4,16 +4,28 @@ import lotto.util.ConstantString;
 import lotto.view.Message;
 
 import java.math.BigInteger;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Result {
     private Map<Rank, Integer> matchResult;
 
-    public Result(Map<Rank, Integer> matchResult) {
-        if (matchResult.containsKey(Rank.MISS)) {
-            matchResult.remove(Rank.MISS);
+    public Result(Lottos lottos, Lotto winLotto) {
+        this.matchResult = createResultMap();
+        for (int i = 0; i < lottos.getLottoGroup().size(); i++) {
+            Rank rank = winLotto.matchNumber(lottos.getLottoGroup().get(i));
+            matchResult.put(rank, matchResult.get(rank) + 1);
         }
-        this.matchResult = matchResult;
+    }
+
+    private Map<Rank, Integer> createResultMap() {
+        Map<Rank, Integer> result = new LinkedHashMap<>();
+        List<Rank> winningRanks = Rank.createWinningRanks();
+        for (Rank winningRank : winningRanks) {
+            result.put(winningRank, 0);
+        }
+        return result;
     }
 
     public String yield(BigInteger purchase) {

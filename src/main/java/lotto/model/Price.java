@@ -1,8 +1,8 @@
-package lotto.util;
+package lotto.model;
 
 import java.math.BigInteger;
 
-public class PriceUtil {
+public class Price {
     private static final int lottoPrice = 1000;
 
     public static int getCount(int price) {

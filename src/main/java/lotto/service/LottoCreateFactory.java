@@ -19,8 +19,8 @@ public class LottoCreateFactory {
     private static int[] createRandomNumbers() {
         List<Integer> numbers = makeNumbers();
         Collections.shuffle(numbers);
-        int[] result = new int[LottoNumber.SIZE];
-        for (int i = 0; i < LottoNumber.SIZE; i++) {
+        int[] result = new int[Lotto.SIZE];
+        for (int i = 0; i < Lotto.SIZE; i++) {
             result[i] = numbers.get(i);
         }
         Arrays.sort(result);
@@ -55,7 +55,7 @@ public class LottoCreateFactory {
         for (int i = 0; i < numbers.length; i++) {
             set.add(numbers[i]);
         }
-        return set.size() != LottoNumber.SIZE;
+        return set.size() != Lotto.SIZE;
     }
 
 }

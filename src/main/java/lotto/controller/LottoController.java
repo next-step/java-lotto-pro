@@ -2,11 +2,11 @@ package lotto.controller;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
+import lotto.model.Price;
 import lotto.model.Result;
 import lotto.service.LottoCreateFactory;
 import lotto.util.Console;
-import lotto.util.InputHandler;
-import lotto.util.PriceUtil;
+import lotto.view.InputHandler;
 import lotto.view.Message;
 import lotto.view.ResultView;
 import lotto.view.View;
@@ -69,7 +69,7 @@ public class LottoController {
 
     private void winStatistics() {
         try {
-            Result result = new Result(lottos.matchResult(winLotto));
+            Result result = new Result(lottos,winLotto);
             View.print(result.toString());
             printYield(result);
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class LottoController {
     }
 
     private void printYield(Result result) {
-        BigInteger purchase = PriceUtil.getPurchase(lottos.size());
+        BigInteger purchase = Price.getPurchase(lottos.size());
         ResultView.printYield(result.yield(purchase));
     }
 }
