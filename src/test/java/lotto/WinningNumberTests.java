@@ -11,6 +11,7 @@ import java.util.List;
 import static lotto.common.Constants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("당첨번호 기능 테스트")
 public class WinningNumberTests {
@@ -21,16 +22,19 @@ public class WinningNumberTests {
     public void 당첨번호_생성_성공(String inputValues) {
         WinningNumbers winningNumbers = new WinningNumbers(inputValues);
 
-        assertThat(winningNumbers.getValues()).isInstanceOf(List.class);
-        assertThat(winningNumbers.getValues().size()).isEqualTo(GET_NUMBER_COUNT);
-
-        for (Integer value : winningNumbers.getValues()) {
-            assertThat(value)
-                    .isInstanceOf(Integer.class)
-                    .isPositive()
-                    .isGreaterThanOrEqualTo(MIN_RANGE_VALUE)
-                    .isLessThanOrEqualTo(MAX_RANGE_VALUE);
-        }
+        assertAll(
+                () -> assertThat(winningNumbers.getValues()).isInstanceOf(List.class),
+                () -> assertThat(winningNumbers.getValues().size()).isEqualTo(GET_NUMBER_COUNT),
+                () -> {
+                    for (Integer value : winningNumbers.getValues()) {
+                        assertThat(value)
+                                .isInstanceOf(Integer.class)
+                                .isPositive()
+                                .isGreaterThanOrEqualTo(MIN_RANGE_VALUE)
+                                .isLessThanOrEqualTo(MAX_RANGE_VALUE);
+                    }
+                }
+        );
     }
 
     @DisplayName("당첨번호 생성 실패를 테스트합니다.")
