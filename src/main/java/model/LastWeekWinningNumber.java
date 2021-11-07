@@ -13,6 +13,7 @@ public class LastWeekWinningNumber {
 	public static final String COMMA = ",";
 
 	private Lotto value;
+	private BonusBall bonusBall;
 
 	private LastWeekWinningNumber(Lotto value) {
 		this.value = value;
@@ -55,5 +56,9 @@ public class LastWeekWinningNumber {
 
 	public Lotto getValue() {
 		return value;
+	}
+
+	public BonusBall getBonusBall() {
+		return bonusBall;
 	}
 }

@@ -30,8 +30,8 @@ public class Count {
 		return BigDecimal.valueOf(value);
 	}
 
-	public int getValue() {
-		return value;
+	public boolean is(int value) {
+		return this.value == value;
 	}
 
 	@Override
