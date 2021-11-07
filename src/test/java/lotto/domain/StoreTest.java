@@ -13,16 +13,16 @@ class StoreTest {
 	@DisplayName("구매 금액이 부족한 경우 예외를 발생한다.")
 	void testPurchaseMoneyLack(int input) {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> Store.sell(new Money(input)))
+			.isThrownBy(() -> Store.order(new Money(input)))
 			.withMessage(Store.MINIMUM_PRICE_REQUIRED_ERROR);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"10000;10", "1500;1", "3900;3"}, delimiter = ';')
 	@DisplayName("구매 금액 범위 내에서 최대한 구매할 수 있다.")
-	void testLottoCount(int input, int expected) {
+	void testPurchasedLottoCount(int input, int expected) {
 		Money money = new Money(input);
-		Lottos lottos = Store.sell(money);
+		Lottos lottos = Store.order(money);
 		assertThat(lottos.size()).isEqualTo(expected);
 	}
 }

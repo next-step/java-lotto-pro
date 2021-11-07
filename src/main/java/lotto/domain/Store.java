@@ -9,7 +9,7 @@ public class Store {
 	private Store() {
 	}
 
-	public static Lottos sell(final Money money) {
+	public static Lottos order(final Money money) {
 		validateMinimumPrice(money);
 
 		int count = calcBuyAbleCount(money);
