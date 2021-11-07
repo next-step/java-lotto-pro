@@ -15,7 +15,7 @@ import model.common.LottoNumber;
 import model.common.LottoNumbers;
 import model.common.StringNumberConverter;
 import model.common.string.StringsProvider;
-import model.generator.LottoGenerator;
+import model.generator.RandomLottoGenerator;
 
 @DisplayName("로또 기계")
 class LottoMachineTest {
@@ -24,20 +24,20 @@ class LottoMachineTest {
 	@DisplayName("객체화")
 	void instance() {
 		assertThatNoException()
-			.isThrownBy(() -> LottoMachine.of(mock(StringNumberConverter.class), mock(LottoGenerator.class)));
+			.isThrownBy(() -> LottoMachine.of(mock(StringNumberConverter.class), mock(RandomLottoGenerator.class)));
 	}
 
 	@Test
 	@DisplayName("변환자 없이 객채화 하면 IllegalArgumentException")
 	void instance_nullConverter_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> LottoMachine.of(null, mock(LottoGenerator.class)))
+			.isThrownBy(() -> LottoMachine.of(null, mock(RandomLottoGenerator.class)))
 			.withMessage("'converter' must not be null");
 	}
 
 	@Test
 	@DisplayName("로또 생성기 없이 객채화 하면 IllegalArgumentException")
-	void instance_nullLottoGenerator_thrownIllegalArgumentException() {
+	void instance_nullRandomLottoGenerator_thrownIllegalArgumentException() {
 		assertThatIllegalArgumentException()
 			.isThrownBy(() -> LottoMachine.of(mock(StringNumberConverter.class), null))
 			.withMessage("'randomGenerator' must not be null");
@@ -56,7 +56,7 @@ class LottoMachineTest {
 			LottoNumbers.from(Collections.singleton(LottoNumber.from(1))));
 
 		//when
-		LottoPapers papers = LottoMachine.of(mockConverter, mock(LottoGenerator.class))
+		LottoPapers papers = LottoMachine.of(mockConverter, mock(RandomLottoGenerator.class))
 			.manualLotto(Arrays.asList(mockProvider, mockProvider, mockProvider));
 
 		//then
@@ -68,12 +68,12 @@ class LottoMachineTest {
 	@DisplayName("랜덤 로또 생성")
 	void randomLotto() {
 		//given
-		LottoGenerator<LottoPaper> mockGenerator = mock(LottoGenerator.class);
+		RandomLottoGenerator mockGenerator = mock(RandomLottoGenerator.class);
 		when(mockGenerator.lotto())
 			.thenReturn(LottoPaper.auto(LottoNumbers.from(Collections.singleton(LottoNumber.from(1)))));
 
 		//when
-		LottoPapers papers = LottoMachine.of(mock(StringNumberConverter.class), mock(LottoGenerator.class))
+		LottoPapers papers = LottoMachine.of(mock(StringNumberConverter.class), mock(RandomLottoGenerator.class))
 			.randomLotto(3);
 
 		//then

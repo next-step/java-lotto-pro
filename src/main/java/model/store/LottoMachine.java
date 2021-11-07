@@ -7,23 +7,23 @@ import model.LottoPaper;
 import model.LottoPapers;
 import model.common.StringNumberConverter;
 import model.common.string.StringsProvider;
-import model.generator.LottoGenerator;
 import model.generator.ManualLottoGenerator;
+import model.generator.RandomLottoGenerator;
 import utility.Assert;
 
 public final class LottoMachine {
 
 	private final StringNumberConverter converter;
-	private final LottoGenerator<LottoPaper> randomGenerator;
+	private final RandomLottoGenerator randomGenerator;
 
-	private LottoMachine(StringNumberConverter converter, LottoGenerator<LottoPaper> randomGenerator) {
+	private LottoMachine(StringNumberConverter converter, RandomLottoGenerator randomGenerator) {
 		Assert.notNull(converter, "'converter' must not be null");
 		Assert.notNull(randomGenerator, "'randomGenerator' must not be null");
 		this.converter = converter;
 		this.randomGenerator = randomGenerator;
 	}
 
-	public static LottoMachine of(StringNumberConverter converter, LottoGenerator<LottoPaper> randomGenerator) {
+	public static LottoMachine of(StringNumberConverter converter, RandomLottoGenerator randomGenerator) {
 		return new LottoMachine(converter, randomGenerator);
 	}
 
