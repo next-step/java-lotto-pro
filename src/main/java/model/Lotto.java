@@ -28,13 +28,25 @@ public class Lotto {
 			.collect(toCollection(TreeSet::new));
 	}
 
-	public static Lotto create() {
+	public Lotto(Set<LottoNumber> numbers) {
+		this.numbers = numbers;
+	}
+
+	public static Lotto createByAuto() {
 		Collections.shuffle(numberCandidates);
 
 		List<Integer> selectedNumbers = numberCandidates.subList(INDEX_OF_START, INDEX_OF_START + NUMBER_COUNT);
 		Collections.sort(selectedNumbers);
 
 		return new Lotto(selectedNumbers);
+	}
+
+	public static Lotto createByManual(Set<Integer> numbers) {
+		Set<LottoNumber> lottoNumbers = numbers.stream()
+			.map(LottoNumber::of)
+			.collect(toSet());
+
+		return new Lotto(lottoNumbers);
 	}
 
 	public static boolean isNotDuplicatedNumber(Set<Integer> numbers) {
@@ -57,11 +69,15 @@ public class Lotto {
 	}
 
 	public boolean isMatchBonusBall(BonusBall bonusBall) {
-		return numbers.contains(bonusBall.getNumber());
+		return isContains(bonusBall.getNumber());
 	}
 
 	public boolean isNotContain(BonusBall bonusBall) {
-		return !numbers.contains(bonusBall.getNumber());
+		return !isContains(bonusBall.getNumber());
+	}
+
+	public boolean isContains(LottoNumber lottoNumber) {
+		return numbers.contains(lottoNumber);
 	}
 
 	public Set<LottoNumber> getNumbers() {
