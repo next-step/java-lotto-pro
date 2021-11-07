@@ -3,6 +3,7 @@ package lotto.model;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     @Test
@@ -20,9 +21,19 @@ public class LottoTest {
     }
 
     @Test
-    void generate() {
+    void generate_성공() {
         Lotto lotto = Lotto.generate(1, 2, 3, 4, 5, 6);
         assertThat(lotto).isNotNull();
         assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
+
+    @Test
+    void generate_실패() {
+        assertThatThrownBy(() -> Lotto.generate(1, 2, 3, 4, 5))
+                .isInstanceOf(RuntimeException.class);
+
+        assertThatThrownBy(() -> Lotto.generate(1, 2, 3, 4, 5, 6, 7))
+                .isInstanceOf(RuntimeException.class);
+
     }
 }
