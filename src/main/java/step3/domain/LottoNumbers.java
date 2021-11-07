@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -59,11 +60,11 @@ public class LottoNumbers {
     }
 
     public boolean isBonusContain(LottoNumber bonusLottoNumber) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            if (lottoNumber.equals(bonusLottoNumber))
-                return true;
-        }
-        return false;
+        long matchedCount = lottoNumbers.stream()
+            .filter(lottoNumber -> lottoNumber.equals(bonusLottoNumber))
+            .count();
+        
+        return matchedCount != 0;
     }
 
     private int containCheckAndIncrementCount(int count, LottoNumber winLottoNumber) {
