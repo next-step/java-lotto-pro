@@ -29,4 +29,8 @@ public class PurchaseAmount {
 		return purchaseAmount;
 
 	}
+
+	public int purchase() {
+		return purchaseAmount / LOTTO_PRICE;
+	}
 }

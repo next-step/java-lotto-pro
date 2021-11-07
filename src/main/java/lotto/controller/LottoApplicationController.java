@@ -29,7 +29,7 @@ public class LottoApplicationController {
 	}
 
 	public void printPurchaseQuantity() {
-		int purchaseQuantity = purchaseAmount.value() / LOTTO_PRICE;
+		int purchaseQuantity = purchaseAmount.purchase();
 		OutputView.printPurchaseQuantity(purchaseQuantity);
 
 		while (continuePurchase(purchaseQuantity)) {
