@@ -1,7 +1,7 @@
 package step3.view;
 
 import step3.LottoPapers;
-import step3.Winner;
+import step3.winner.Winner;
 
 public interface ResultView {
 	public void purchasedLottoPrint(LottoPapers lottoPapers);

@@ -1,20 +1,22 @@
-package step3;
+package step3.winner;
+
+import static step3.Constant.*;
+import static step3.winner.WinningAmount.*;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import step3.Constant;
+import step3.LottoNumber;
+import step3.LottoNumbers;
+import step3.LottoPapers;
+import step3.Money;
+
 public class Winner {
 
-	private static final int THREE = 3;
-	private static final int FOUR = 4;
-	private static final int FIVE = 5;
-	private static final int SIX = 6;
-
-	private static Map<Integer, Integer> winnings;
 	private final Map<Integer, Integer> winningAmount;
 	private final LottoPapers lottoPapers;
 	private int sumWinningAmount;
@@ -22,20 +24,14 @@ public class Winner {
 
 	public Winner(LottoPapers lottoPapers) {
 		this.lottoPapers = lottoPapers;
-		winnings = new HashMap<>();
 		winningAmount = new HashMap<>();
-		winnings.put(3, 5_000);
-		winnings.put(4, 50_000);
-		winnings.put(5, 1_500_000);
-		winnings.put(6, 2_000_000_000);
-		winnings = Collections.unmodifiableMap(winnings);
 	}
 
 	public Map<Integer, Integer> statistics(List<LottoNumber> lottoNumbers) {
 		assert lottoNumbers != null;
 		for (LottoNumbers lottoPapers : lottoPapers) {
 			Integer winningCount = findMatchLottoNumber(lottoNumbers, lottoPapers);
-			Integer winningAmount = findWinningAmount(winningCount);
+			Integer winningAmount = WinningAmount.valueOf(winningCount);
 			addWinnerList(winningCount, winningAmount);
 			sumWinningAmount(winningAmount);
 		}
@@ -48,12 +44,6 @@ public class Winner {
 			matchCount += lottoPapers.match(lottoNumber);
 		}
 		return matchCount;
-	}
-
-	private Integer findWinningAmount(Integer matchNumber) {
-		Integer winningAmount = Optional.ofNullable(winnings.get(matchNumber)).orElse(0);
-		sumWinningAmount(winningAmount);
-		return winningAmount;
 	}
 
 	private void sumWinningAmount(Integer winningAmount) {
@@ -72,11 +62,11 @@ public class Winner {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("3개 일치 (5000원)-").append(getWinner(THREE)).append("개").append("\n");
-		sb.append("4개 일치 (50000원)-").append(getWinner(FOUR)).append("개").append("\n");
-		sb.append("5개 일치 (1500000원)-").append(getWinner(FIVE)).append("개").append("\n");
-		sb.append("6개 일치 (2000000000원)-").append(getWinner(SIX)).append("개").append("\n");
-		sb.append("총 수익률은 ").append(yield).append("입니다.");
+		sb.append(THREE.getMessage()).append(THREE).append(EACH).append(Constant.ENTER);
+		sb.append(FOUR.getMessage()).append(getWinner(FOUR.getMatch())).append(EACH).append(ENTER);
+		sb.append(FIVE.getMessage()).append(getWinner(FIVE.getMatch())).append(EACH).append(ENTER);
+		sb.append(SIX.getMessage()).append(getWinner(SIX.getMatch())).append(EACH).append(ENTER);
+		sb.append(TOTAL_YIELD).append(yield).append(END_OF_WORD);
 		return sb.toString();
 	}
 

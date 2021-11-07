@@ -1,6 +1,7 @@
 package step3;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,6 +14,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EnumSource;
+
+import step3.winner.Winner;
+import step3.winner.WinningAmount;
 
 public class WinnerTest {
 
@@ -59,6 +64,14 @@ public class WinnerTest {
 		// then
 		BigDecimal yield = money.yield(reduce);
 		assertThat(yield).isEqualTo(new BigDecimal(inputYield));
+	}
+	
+	@DisplayName("각각의 금액이 해당 금액 범위 내인지 확인")
+	@ParameterizedTest
+	@EnumSource(WinningAmount.class)
+	void WinningAmountTest(WinningAmount winningAmount) {
+		int amount = winningAmount.getAmount();
+		assertTrue(amount >= 5000 && amount <= 2_000_000_000);
 	}
 
 	private List<LottoNumbers> getLottoNumbers() {
