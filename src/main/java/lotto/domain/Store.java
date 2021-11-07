@@ -9,13 +9,13 @@ public class Store {
 	private Store() {
 	}
 
-	public static List<Lotto> sell(final Money money) {
+	public static Lottos sell(final Money money) {
 		validateMinimumPrice(money);
 
 		int count = calcBuyAbleCount(money);
 		money.spend(count * Common.LOTTO_PRICE);
 
-		return issueLottos(count);
+		return Lottos.from(issueLottos(count));
 	}
 
 	private static List<Lotto> issueLottos(int count) {

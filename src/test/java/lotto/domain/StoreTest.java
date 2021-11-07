@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -23,6 +22,7 @@ class StoreTest {
 	@DisplayName("구매 금액 범위 내에서 최대한 구매할 수 있다.")
 	void testLottoCount(int input, int expected) {
 		Money money = new Money(input);
-		assertThat(Store.sell(money)).hasSize(expected);
+		Lottos lottos = Store.sell(money);
+		assertThat(lottos.size()).isEqualTo(expected);
 	}
 }
