@@ -1,5 +1,6 @@
 package lottoservice;
 
+import lottoservice.exception.DuplicateBonusNumberAndWinningNumbers;
 import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.exception.InvalidMoneyException;
 import lottoservice.lottonumber.LottoArrangeManipulator;
@@ -19,6 +20,7 @@ public class LottoMain {
 
 	private static String GUIDE_MESSAGE_ENTER_INPUT_AMOUNT = "구매금액을 입력해주세요.";
 	private static String GUIDE_MESSAGE_ENTER_LAST_WEEK_WINNING_NUMBERS = "\n지난 주 당첨 번호를 입력해주세요.";
+	private static String GUIDE_MESSAGE_ENTER_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
 	private static String RESULT_MESSAGE_MATCH_STATISTICS_START_LINE = "\n당첨통계\n---------";
 	private static String RESULT_MESSAGE_MATCH_PROFIT_STATEMENT = "총 수익률은 %s 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
@@ -43,10 +45,20 @@ public class LottoMain {
 		LottoTickets lottoTickets = buyLottoTickets(lottoTicketIssuer);
 		outputBoughtLottoTickets(lottoTickets);
 
-		LottoWinningNumbers lottoWinningNumbers = getLastWeekWinningNumbers(lottoNumbersMaker);
-		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(lottoWinningNumbers,new BonusNumber(1));
+		LottoPrizeAnswer lottoPrizeAnswer = getLottoPrizeAnswer(lottoNumbersMaker);
 		LottoMatchResult lottoMatchResult = lottoPrizeAnswer.matchTickets(lottoTickets);
 		outputLottoMatchResults(lottoMatchResult);
+	}
+
+	private LottoPrizeAnswer getLottoPrizeAnswer(LottoNumbersMaker lottoNumbersMaker) {
+		try {
+			LottoWinningNumbers lottoWinningNumbers = getLastWeekWinningNumbers(lottoNumbersMaker);
+			BonusNumber bonusNumber = getBonusNumber();
+			return new LottoPrizeAnswer(lottoWinningNumbers, bonusNumber);
+		}catch (DuplicateBonusNumberAndWinningNumbers ex){
+			resultView.outputError(ex.getMessage());
+			return getLottoPrizeAnswer(lottoNumbersMaker);
+		}
 	}
 
 	private LottoTickets buyLottoTickets(LottoTicketIssuer lottoTicketIssuer) {
@@ -76,6 +88,21 @@ public class LottoMain {
 			resultView.outputError(ex.getMessage());
 			return getLastWeekWinningNumbers(lottoNumbersMaker);    /* 사용자가 잘못된 입력을 했을 경우 재입력*/
 		}
+	}
+
+	private BonusNumber getBonusNumber() {
+		try {
+			String number = inputBonusNumber();
+			return new BonusNumber(number);
+		} catch (InvalidLottoFormatException ex) {
+			resultView.outputError(ex.getMessage());
+			return getBonusNumber();    /* 사용자가 잘못된 입력을 했을 경우 재입력*/
+		}
+	}
+
+	private String inputBonusNumber() {
+		resultView.outputGuide(GUIDE_MESSAGE_ENTER_BONUS_NUMBER);
+		return inputView.readInputLine();
 	}
 
 	private String inputLastWeekWinningNumbers() {

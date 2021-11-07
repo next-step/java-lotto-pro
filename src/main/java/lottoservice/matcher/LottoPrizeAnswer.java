@@ -22,7 +22,7 @@ public class LottoPrizeAnswer {
 
 	private void validateNotHasDuplicateNumbers(LottoWinningNumbers lottoWinningNumbers, BonusNumber bonusNumber) {
 		if (lottoWinningNumbers.hasMatchNumber(bonusNumber.getLottoNumber())) {
-			throw new DuplicateBonusNumberAndWinningNumbers("당첨번호와 보너스 번호는 중복될 수 없습니다.");
+			throw new DuplicateBonusNumberAndWinningNumbers(ERROR_MESSAGE_DUPLICATE_WINNINGNUMBER_AND_BONUSNUMBER);
 		}
 	}
 
