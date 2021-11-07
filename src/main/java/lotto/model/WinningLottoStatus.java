@@ -38,4 +38,17 @@ public class WinningLottoStatus {
 	public double getRateOfReturn(int useMoney) {
 		return (double)getTotalReward() / useMoney;
 	}
+
+	/**
+	 * 당첨 상태 반환
+	 * @return 상태 정보 텍스트
+	 */
+	public String status() {
+		StringBuffer sbStatus = new StringBuffer();
+		sbStatus.append("3개 일치 (").append(LottoResult.MATCH_THREE).append(")- ").append(getMatchCount(LottoResult.MATCH_THREE)).append("개\n");
+		sbStatus.append("4개 일치 (").append(LottoResult.MATCH_FOUR).append(")- ").append(getMatchCount(LottoResult.MATCH_FOUR)).append("개\n");
+		sbStatus.append("5개 일치 (").append(LottoResult.MATCH_FIVE).append(")- ").append(getMatchCount(LottoResult.MATCH_FIVE)).append("개\n");
+		sbStatus.append("6개 일치 (").append(LottoResult.MATCH_SIX).append(")- ").append(getMatchCount(LottoResult.MATCH_SIX)).append("개");
+		return sbStatus.toString();
+	}
 }

@@ -13,6 +13,7 @@ public class Money {
 		return money / LOTTO_PRICE;
 	}
 
-	public static void main(String[] args) {
+	public int getUsedMoney() {
+		return (money / LOTTO_PRICE) * LOTTO_PRICE;
 	}
 }
