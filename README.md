@@ -51,7 +51,9 @@
   * 숫자 주입 생성자
   
 * LottoNumbers
-  * LottoNumber[6] 주입 생성자
+  * List<LottoNumber> 주입 생성자
+  * 생성자 예외1: 숫자가 6개가 아닌경우
+  * 생성자 예외2: 주입하려는 컬렉션 안에 같은 숫자가 포함되어 있는 경우
   
 * ResultView
   * 당첨 통계
