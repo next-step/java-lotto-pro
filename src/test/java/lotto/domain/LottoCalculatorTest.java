@@ -28,7 +28,7 @@ public class LottoCalculatorTest {
         // given
         Lotto manualLotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto manualLotto2 = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
-        Lottos manualLottos = new Lottos(Arrays.asList(manualLotto1, manualLotto2));
+        Lottos manualLottos = new Lottos(Arrays.asList(manualLotto1, manualLotto2), 2);
 
         // when
         LottoCalculator lottoCalculator = new LottoCalculator(purchaseAmount, manualLottos);
@@ -36,7 +36,9 @@ public class LottoCalculatorTest {
 
         // then
         assertAll(
-                () -> assertThat(lottoCalculator.getLottosSize()).isEqualTo(purchaseAmount.getQuantity()),
+                () -> assertThat(lottoCalculator.getTotalQuantity()).isEqualTo(purchaseAmount.getQuantity()),
+                () -> assertThat(lottoCalculator.getAutoQuantity()).isEqualTo(purchaseAmount.getQuantity() - manualLottos.getManualQuantity()),
+                () -> assertThat(lottoCalculator.getManualQuantity()).isEqualTo(manualLottos.getManualQuantity()),
                 () -> assertThat(lottos.get(0)).isEqualTo(manualLotto1),
                 () -> assertThat(lottos.get(1)).isEqualTo(manualLotto2)
         );
@@ -49,7 +51,7 @@ public class LottoCalculatorTest {
         PurchaseAmount purchaseAmount = new PurchaseAmount(1_000);
         Lotto manualLotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto manualLotto2 = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
-        Lottos manualLottos = new Lottos(Arrays.asList(manualLotto1, manualLotto2));
+        Lottos manualLottos = new Lottos(Arrays.asList(manualLotto1, manualLotto2), 2);
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -59,12 +61,12 @@ public class LottoCalculatorTest {
 
     @Test
     @DisplayName("구입된 로또 개수를 반환한다.")
-    void getLottosSize() {
+    void getTotalQuantity() {
         // given
-        LottoCalculator lottoCalculator = new LottoCalculator(purchaseAmount, new Lottos(new ArrayList<>()));
+        LottoCalculator lottoCalculator = new LottoCalculator(purchaseAmount, new Lottos(new ArrayList<>(), 0));
 
         // when
-        int lottosSize = lottoCalculator.getLottosSize();
+        int lottosSize = lottoCalculator.getTotalQuantity();
 
         // then
         assertThat(lottosSize).isEqualTo(purchaseAmount.getQuantity());

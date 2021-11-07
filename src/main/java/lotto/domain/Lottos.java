@@ -11,26 +11,33 @@ import java.util.stream.Stream;
 public class Lottos {
 
     private final List<Lotto> lottos;
+    private final int manualQuantity;
 
-    public Lottos(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos, int manualQuantity) {
         this.lottos = Collections.unmodifiableList(lottos);
+        this.manualQuantity = manualQuantity;
     }
 
     public static Lottos of(Lotto... lottos) {
-        return new Lottos(Arrays.asList(lottos));
+        return new Lottos(Arrays.asList(lottos), 0);
     }
 
-    public static Lottos of(Lottos manualLottos, Lottos autoLottos) {
+    public static Lottos of(Lottos autoLottos, Lottos manualLottos) {
         return Stream.of(manualLottos.lottos, autoLottos.lottos)
                 .flatMap(Collection::stream)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toList(), lottos1 -> new Lottos(lottos1, manualLottos.getQuantity())));
     }
 
     public List<Lotto> getLottos() {
         return lottos;
     }
 
-    public int size() {
+    public int getManualQuantity() {
+        return manualQuantity;
+    }
+
+    public int getQuantity() {
         return lottos.size();
     }
 

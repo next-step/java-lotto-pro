@@ -12,12 +12,12 @@ class LottosTest {
 
     @Test
     @DisplayName("로또의 개수를 반환한다.")
-    void size() {
+    void getQuantity() {
         // given
-        Lottos lottos = new Lottos(Arrays.asList(LottoGenerator.generate(), LottoGenerator.generate()));
+        Lottos lottos = new Lottos(Arrays.asList(LottoGenerator.generate(), LottoGenerator.generate()), 0);
 
         // when
-        int size = lottos.size();
+        int size = lottos.getQuantity();
 
         // then
         assertThat(size).isEqualTo(2);

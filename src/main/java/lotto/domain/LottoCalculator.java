@@ -17,9 +17,8 @@ public class LottoCalculator {
         this.lottos = generateLottos(purchaseAmount, manualLottos);
     }
 
-
     public LottoCalculator(PurchaseAmount purchaseAmount, WinningResults winningResults) {
-        this(purchaseAmount, new Lottos(new ArrayList<>()));
+        this(purchaseAmount, new Lottos(new ArrayList<>(), 0));
         this.winningResults = winningResults;
     }
 
@@ -35,12 +34,20 @@ public class LottoCalculator {
         this.winningResults = lottos.getWinningResults(winningLotto);
     }
 
-    public int getLottosSize() {
-        return lottos.size();
+    public int getTotalQuantity() {
+        return lottos.getQuantity();
+    }
+
+    public int getAutoQuantity() {
+        return lottos.getQuantity() - lottos.getManualQuantity();
+    }
+
+    public int getManualQuantity() {
+        return lottos.getManualQuantity();
     }
 
     public float getProceedsRate() {
-        return (float) winningResults.getProceeds() / ((float) getLottosSize() * LOTTO_PRICE);
+        return (float) winningResults.getProceeds() / ((float) getTotalQuantity() * LOTTO_PRICE);
     }
 
     private void validate(PurchaseAmount purchaseAmount, Lottos manualLottos) {
@@ -50,13 +57,14 @@ public class LottoCalculator {
     }
 
     private Lottos generateLottos(PurchaseAmount purchaseAmount, Lottos manualLottos) {
-        int autoQuantity = purchaseAmount.getQuantity() - manualLottos.size();
-        return Lottos.of(manualLottos, getAutoLottos(autoQuantity));
+        int autoQuantity = purchaseAmount.getQuantity() - manualLottos.getQuantity();
+        return Lottos.of(getAutoLottos(purchaseAmount, autoQuantity), manualLottos);
     }
 
-    private Lottos getAutoLottos(int autoQuantity) {
+    private Lottos getAutoLottos(PurchaseAmount purchaseAmount, int autoQuantity) {
         return IntStream.range(0, autoQuantity)
                 .mapToObj(ignore -> LottoGenerator.generate())
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+                .collect(Collectors.collectingAndThen(Collectors.toList(),
+                        lottos1 -> new Lottos(lottos1, purchaseAmount.getQuantity() - autoQuantity)));
     }
 }
