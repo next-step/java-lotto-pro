@@ -15,6 +15,7 @@
 ### domain
 - [X] 숫자를 표현하는 추상 클래스(Number)
 - [X] 로또번호 하나를 표현하는 클래스(LottoNumber)
+- [X] 수동티켓 개수를 표현하는 클래스(ManualTicketsCount)
 - [X] 로또번호와 당첨번호와 일치하는 개수를 표현하는 클래스(MatchedCount)
 - [X] 돈을 표현하는 클래스(Money)
   - [X] 상금계산 위한 곱하기  
@@ -36,16 +37,21 @@
 - [X] 로또 티켓를 만드는 생성기 클래스(TicketGenerator)
   - [X] 로또 티켓 여러개를 만들기
   - [X] 로또 티멧 콜렉션을 DTO로 반환하기
+- [X] 로또 티켓 여러개를 표현하는 클래스(Tickets)
+  - [X] 금액과 수동티켓기반 티켓 자동 생성하기 
 
 ### dto
 - [X] 로또번호 일급콜렉션 객체 전달용 클래스(LottoNumbersDto)
 
 ### exception
+- [X] null을 인자로 받았음을 표현하는 예외클래스(NullArgumentException)
 - [X] 범위를 벗어 났음을 표현하는 예외클래스(OutOfBoundException)
 
 ### view
 - [X] 입력 기능 클래스(InputView)
   - [X] 금액 입력
+  - [X] 수동 구매 로또 수 입력
+  - [X] 수동 구매 로또 번호 입력
   - [X] 당첨 번호 입력
   - [X] 보너스 번호 입력
 - [X] 출력 기능 클래스(ResultView)
