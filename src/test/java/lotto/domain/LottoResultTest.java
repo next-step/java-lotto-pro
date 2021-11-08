@@ -28,22 +28,10 @@ public class LottoResultTest {
     }
 
     private static Stream<Arguments> provideNumbersForLottoResultTest() {
-        LottoNumbers prizeLottoNumbers = new LottoNumbers(
-                Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
-                        .collect(Collectors.toSet()));
-        LottoNumbers matchNoneLottoNumbers = new LottoNumbers(
-                Stream.of(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9),
-                        new LottoNumber(10), new LottoNumber(10), new LottoNumber(12))
-                        .collect(Collectors.toSet()));
-        LottoNumbers match3LottoNumbers = new LottoNumbers(
-                Stream.of(new LottoNumber(1), new LottoNumber(8), new LottoNumber(3),
-                        new LottoNumber(10), new LottoNumber(5), new LottoNumber(12))
-                        .collect(Collectors.toSet()));
-        LottoNumbers match5LottoNumbers = new LottoNumbers(
-                Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(5), new LottoNumber(6), new LottoNumber(7))
-                        .collect(Collectors.toSet()));
+        LottoNumbers prizeLottoNumbers = Fixture.lottoNumbersOf(1,2,3,4,5,6);
+        LottoNumbers matchNoneLottoNumbers = Fixture.lottoNumbersOf(7,8,9,10,11,12);
+        LottoNumbers match3LottoNumbers = Fixture.lottoNumbersOf(1,8,3,10,5,12);
+        LottoNumbers match5LottoNumbers = Fixture.lottoNumbersOf(1,2,3,5,6,7);
         LottoNumber notMatchBonusLottoNumber = new LottoNumber(44);
         LottoNumber matchBonusLottoNumber = new LottoNumber(6);
         return Stream.of(
