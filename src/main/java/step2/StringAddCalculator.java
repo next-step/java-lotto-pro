@@ -1,13 +1,17 @@
 package step2;
 
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class StringAddCalculator {
 
     private static final int ZERO = 0;
     private static final int SINGLE_DIGIT_LENGTH = 1;
 
-    private static final String SEPARATOR = "[,:]";
+    private static final Pattern SEPARATOR = Pattern.compile("//(.)\n(.*)");
+
+    private static final String[] EMPTY_TEXT = {};
 
     private StringAddCalculator() {
     }
@@ -45,7 +49,14 @@ public final class StringAddCalculator {
     }
 
     public static String[] split(final String text) {
-        return text.split(SEPARATOR);
+        final Matcher matcher = SEPARATOR.matcher(text);
+
+        if (matcher.find()) {
+            final String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(customDelimiter);
+        }
+
+        return EMPTY_TEXT;
     }
 
     public static int sum(final String[] splitText) {
