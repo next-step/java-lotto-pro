@@ -1,11 +1,14 @@
 package step1;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.params.ParameterizedTest.*;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("학습테스트 - Set")
 public class SetTest {
@@ -28,5 +31,12 @@ public class SetTest {
 
         //when, then
         assertThat(numbers).hasSize(expectedSize);
+    }
+
+    @ParameterizedTest(name = DISPLAY_NAME_PLACEHOLDER + ARGUMENTS_PLACEHOLDER)
+    @ValueSource(ints = {1, 2, 3})
+    void ParameterizedTest를_활용해_중복_코드를_제거_할수_있는가(int number) {
+        //when, then
+        assertThat(numbers.contains(number)).isTrue();
     }
 }
