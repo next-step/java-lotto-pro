@@ -30,14 +30,13 @@ public class SettingLatestWinLotto extends Screen {
     bonusNumber.render();
 
     String tempLatestWinLotto = latestWinLotto.getValue();
-    Lotto latestWinLotto = Lotto.valueOf(tempLatestWinLotto.split(LOTTO_SPARATOR));
+    Lotto latestWinLottoItem = Lotto.valueOf(tempLatestWinLotto.split(LOTTO_SPARATOR));
 
-    UiSharedData.setLatestWinLotto(latestWinLotto);
+    UiSharedData.setLatestWinLotto(latestWinLottoItem);
     UiSharedData.setBonusNumber(LottoNumber.valueOf(bonusNumber.getValue()));
   }
 
   @Override
   public void update() {
   }
-
 }

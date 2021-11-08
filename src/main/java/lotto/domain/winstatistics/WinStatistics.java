@@ -3,7 +3,6 @@ package lotto.domain.winstatistics;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.winpolicy.Policy;
 import lotto.domain.winpolicy.WinPolicy;
 
 public class WinStatistics {
