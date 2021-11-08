@@ -1,3 +1,5 @@
+package calculator;
+
 public class CalculatorInputString {
 	public static final String MESSAGE_VALUE_IS_NOT_NUMBER_FORMAT = "VALUE_IS_NOT_NUMBER_FORMAT";
 	public static final String VALUE_ZERO = "0";

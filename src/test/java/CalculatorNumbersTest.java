@@ -5,6 +5,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import calculator.CalculatorNumber;
+import calculator.CalculatorNumbers;
+
 public class CalculatorNumbersTest {
 
 	@Test
