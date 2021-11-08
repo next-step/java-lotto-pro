@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.utils.NumberUtils;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,6 @@ public class LottoResult {
             winningAmount += (LottoPrize.getPrizeMoney(entry.getKey()) * entry.getValue());
         }
         double earningsRate = winningAmount / purchaseAmount;
-        return Math.floor(earningsRate * 100) / 100.0; // 소수점 셋째 자리 버림
+        return NumberUtils.roundDown(earningsRate, 3);
     }
 }
