@@ -50,6 +50,10 @@
 * LottoGame 클래스
   * 번호 생성
 
+* LottoNumberChoiceStrategy 인터페이스
+  * choose
+    * RandomClass
+
 * LottoNumber
   * 숫자 주입 생성자
   
