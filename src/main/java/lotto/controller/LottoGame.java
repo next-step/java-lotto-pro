@@ -3,12 +3,12 @@ package lotto.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.domain.LottoMoney;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoReports;
 import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
+import lotto.domain.LottoMoney;
+import lotto.domain.LottoReports;
 import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,9 +17,8 @@ public class LottoGame {
         LottoMoney lottoMoney = InputView.inputLottoAmount();
         List<Lotto> lottos = buyLottoTicket(lottoMoney.getCountOfPossibleLotto());
         OutputView.printLottoTickets(lottos);
-        Lotto winningLotto = InputView.inputWinningNumbersOfLastWeek();
-        LottoNumber bonusNumber = InputView.inputBonusNumber(winningLotto);
-        LottoReports lottoReports = new LottoReports(createRanks(lottos, winningLotto, bonusNumber),
+        WinningLotto winningLotto = InputView.createWinningLotto();
+        LottoReports lottoReports = new LottoReports(createRanks(lottos, winningLotto),
             lottoMoney);
         OutputView.printLottoReports(lottoReports);
     }
@@ -32,11 +31,10 @@ public class LottoGame {
         return lottos;
     }
 
-    private List<Rank> createRanks(List<Lotto> lottos, Lotto winningLotto,
-        LottoNumber bonusNumber) {
+    private List<Rank> createRanks(List<Lotto> lottos, WinningLotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            ranks.add(lotto.createWinningRank(winningLotto, bonusNumber));
+            ranks.add(winningLotto.createWinningRank(lotto));
         }
         return ranks;
     }
