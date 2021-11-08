@@ -5,10 +5,13 @@ import java.util.List;
 
 public class LottoGame {
     private int tryCount;
+    private int manualTryCount;
+    private int autoTryCount;
     private List<LottoBalls> lottoBallsList;
 
-    public LottoGame(int tryCount, List<LottoBalls> lottoBalls) {
-        this.tryCount = tryCount;
+    public LottoGame(int manualTryCount, int autoTryCount, List<LottoBalls> lottoBalls) {
+        this.manualTryCount = manualTryCount;
+        this.autoTryCount = autoTryCount;
         this.lottoBallsList = lottoBalls;
     }
 
