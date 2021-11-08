@@ -7,14 +7,14 @@ import java.util.stream.Collectors;
 
 import calculator.CalculatorInputStringParser;
 
-public class LottoNumbers {
+public class Lotto {
 	public static final String MESSAGE_NOT_ALLOW_LENGTH = "LOTTO_NUMBERS_LENGTH_MUST_BE_6";
 	public static final String MESSAGE_NOT_ALLOW_DUPLICATION = "LOTTO_NUMBERS_ELEMENT_MUST_BE_INDEPENDENT";
 	public static final int LOTTO_NUMBERS_LENGTH = 6;
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public LottoNumbers(List<LottoNumber> lottoNumbers) {
+	public Lotto(List<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() != LOTTO_NUMBERS_LENGTH) {
 			throw new IllegalArgumentException(MESSAGE_NOT_ALLOW_LENGTH);
 		}
@@ -25,8 +25,26 @@ public class LottoNumbers {
 		this.lottoNumbers.addAll(lottoNumbers);
 	}
 
-	public LottoNumbers(String lottoNumbersString) {
+	public Lotto(LottoNumberChoiceStrategy lottoNumberChoiceStrategy) {
+		this(lottoNumberChoiceStrategy.choose());
+	}
+
+	public Lotto(String lottoNumbersString) {
 		this(parse(lottoNumbersString));
+	}
+
+	public Rank calcLottoResult(Lotto winningLotto) {
+		LottoResult lottoResult = new LottoResult();
+		for (LottoNumber winningLottoNumber : winningLotto.lottoNumbers) {
+			containWinningLottoNumber(winningLottoNumber, lottoResult);
+		}
+		return lottoResult.getRank();
+	}
+
+	private void containWinningLottoNumber(LottoNumber winningLottoNumber, LottoResult lottoResult) {
+		if (lottoNumbers.contains(winningLottoNumber)) {
+			lottoResult.addMatchingCount();
+		}
 	}
 
 	private static List<LottoNumber> parse(String lottoNumbersString) {
@@ -64,12 +82,23 @@ public class LottoNumbers {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		LottoNumbers that = (LottoNumbers)o;
+		Lotto that = (Lotto)o;
 		return Objects.equals(lottoNumbers, that.lottoNumbers);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("[%d", lottoNumbers.get(0).getNumber()));
+		for (int i = 1; i < lottoNumbers.size(); ++i) {
+			sb.append(String.format(", %d", lottoNumbers.get(i).getNumber()));
+		}
+		sb.append("]");
+		return sb.toString();
 	}
 }
