@@ -18,39 +18,57 @@ public class LottoNumbers {
 
 	public final List<LottoNumber> lottoNumberList;
 
-	public LottoNumbers() {
-		lottoNumberList = Collections.unmodifiableList(generateLottoNumberList());
-	}
-
-	public LottoNumbers(List<LottoNumber> lottoNumberList) {
+	private LottoNumbers(List<LottoNumber> lottoNumberList) {
 		this.lottoNumberList = Collections.unmodifiableList(lottoNumberList);
 	}
 
-	public LottoNumbers(String inputNumber) {
-		this.lottoNumberList = generateLottoNumberList(inputNumber);
+	public static LottoNumbers from() {
+		return new LottoNumbers(generateLottoNumberList());
 	}
 
-	private List<LottoNumber> generateLottoNumberList(String inputNumber) {
+	public static LottoNumbers from(String inputNumber) {
+		return new LottoNumbers(generateLottoNumberList(inputNumber));
+	}
+
+	public static LottoNumbers from(List<LottoNumber> lottoNumberList) {
+		return new LottoNumbers(lottoNumberList);
+	}
+
+	private static List<LottoNumber> generateLottoNumberList(String inputNumber) {
 		isNotLottoNumberSize(inputNumber);
 		isDuplicateLottoNumber(inputNumber);
 		List<LottoNumber> lottoNumberList = new ArrayList<>();
 
 		for (String number : SplitUtil.splitInputNumbers(inputNumber)) {
-			lottoNumberList.add(new LottoNumber(Integer.parseInt(number)));
+			lottoNumberList.add(LottoNumber.from(number));
 		}
 
 		return lottoNumberList;
 	}
 
-	private List<LottoNumber> generateLottoNumberList() {
+	private static List<LottoNumber> generateLottoNumberList() {
 		Set<LottoNumber> lottoNumberSet = new HashSet<>();
 
 		do {
 			lottoNumberSet.add(
-				new LottoNumber(RandomUtil.pickNumber(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)));
+				LottoNumber.from(RandomUtil.pickNumber(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)));
 		} while (lottoNumberSet.size() < LOTTO_NUMBERS_SIZE);
 
 		return new ArrayList<>(lottoNumberSet);
+	}
+
+	private static void isNotLottoNumberSize(String input) {
+		if (SplitUtil.splitInputNumbers(input).length != LottoNumbers.LOTTO_NUMBERS_SIZE) {
+			throw new LottoException(ErrorCode.IS_NOT_LOTTO_NUMBER_SIZE_ERROR);
+		}
+	}
+
+	private static void isDuplicateLottoNumber(String input) {
+		Set<String> lottoNumberSet = new HashSet<>(Arrays.asList(SplitUtil.splitInputNumbers(input)));
+
+		if (lottoNumberSet.size() != LottoNumbers.LOTTO_NUMBERS_SIZE) {
+			throw new LottoException(ErrorCode.LOTTO_NUMBER_DUPLICATE_ERROR);
+		}
 	}
 
 	public boolean containsLottoNumber(LottoNumber lottoNumber) {
@@ -59,20 +77,6 @@ public class LottoNumbers {
 
 	public int size() {
 		return lottoNumberList.size();
-	}
-
-	private void isNotLottoNumberSize(String input) {
-		if (SplitUtil.splitInputNumbers(input).length != LottoNumbers.LOTTO_NUMBERS_SIZE) {
-			throw new LottoException(ErrorCode.IS_NOT_LOTTO_NUMBER_SIZE_ERROR);
-		}
-	}
-
-	private void isDuplicateLottoNumber(String input) {
-		Set<String> lottoNumberSet = new HashSet<>(Arrays.asList(SplitUtil.splitInputNumbers(input)));
-
-		if (lottoNumberSet.size() != LottoNumbers.LOTTO_NUMBERS_SIZE) {
-			throw new LottoException(ErrorCode.LOTTO_NUMBER_DUPLICATE_ERROR);
-		}
 	}
 
 	@Override

@@ -33,23 +33,23 @@ class LottoNumbersTest {
 	void 로또넘버_일급_콜렉션_생성_테스트(int lottoNumber) {
 		// given
 		for (int i = 1; i <= LottoNumbers.LOTTO_NUMBERS_SIZE; i++) {
-			lottoNumberList.add(new LottoNumber(i));
+			lottoNumberList.add(LottoNumber.from(i));
 		}
 
 		// when
-		LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+		LottoNumbers lottoNumbers = LottoNumbers.from(lottoNumberList);
 
 		// then
 		assertAll(
 			() -> assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class),
-			() -> assertThat(lottoNumbers.containsLottoNumber(new LottoNumber(lottoNumber)))
+			() -> assertThat(lottoNumbers.containsLottoNumber(LottoNumber.from(lottoNumber)))
 		);
 	}
 
 	@Test
 	void 로또번호_일급_콜렉션_랜덤_생성_테스트() {
 		// given // when
-		LottoNumbers lottoNumbers = new LottoNumbers();
+		LottoNumbers lottoNumbers = LottoNumbers.from();
 
 		// then
 		assertThat(lottoNumbers.size()).isEqualTo(LottoNumbers.LOTTO_NUMBERS_SIZE);
@@ -62,10 +62,10 @@ class LottoNumbersTest {
 		String inputNumber = "1,2,3,4,5,6";
 
 		//when
-		LottoNumbers lottoNumbers = new LottoNumbers(inputNumber);
+		LottoNumbers lottoNumbers = LottoNumbers.from(inputNumber);
 
 		//then
-		assertThat(lottoNumbers.containsLottoNumber(new LottoNumber(lottoNumber))).isTrue();
+		assertThat(lottoNumbers.containsLottoNumber(LottoNumber.from(lottoNumber))).isTrue();
 	}
 
 	@ParameterizedTest(name = "index {index} ===> input {0}")
@@ -77,18 +77,18 @@ class LottoNumbersTest {
 	void 입력된_당첨번호가_6자리가_아닐때_예외처리_테스트(String input) {
 		// given // when // then
 		assertThatThrownBy(() -> {
-			new LottoNumbers(input);
+			LottoNumbers.from(input);
 		}).isInstanceOf(LottoException.class);
 	}
 
 	@Test
-	void 입력된_당첨번호에_중복값이_존재할시_예외처리_테스트() throws Exception {
+	void 입력된_당첨번호에_중복값이_존재할시_예외처리_테스트() {
 		// given
 		String input = "1, 1, 2, 3, 4, 5";
 
 		// when // then
 		assertThatThrownBy(() -> {
-			new LottoNumbers(input);
+			LottoNumbers.from(input);
 		}).isInstanceOf(LottoException.class);
 	}
 }
