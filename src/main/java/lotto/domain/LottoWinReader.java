@@ -16,7 +16,7 @@ public class LottoWinReader {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public static LottoWinReader reader(String lottoNumbers, String bonusLottoNumber) {
+    public static LottoWinReader make(String lottoNumbers, String bonusLottoNumber) {
         List<Integer> numbers = Arrays.stream(lottoNumbers.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)

@@ -4,10 +4,10 @@ import java.util.Map;
 
 public class Revenue {
 
-    private final PurchaseAmount amount;
+    private final Amount amount;
     private final Map<Winnings, Integer> statistic;
 
-    public Revenue(PurchaseAmount amount, Map<Winnings, Integer> statistic) {
+    public Revenue(Amount amount, Map<Winnings, Integer> statistic) {
         this.amount = amount;
         this.statistic = statistic;
     }
@@ -16,7 +16,7 @@ public class Revenue {
         return new Income(statistic).amount();
     }
 
-    public double percentage() {
+    public double profitRate() {
         Amount incomeAmount = incomeAmount();
         return Math.floor(incomeAmount.divideToDouble(amount) * 100) / 100;
     }
