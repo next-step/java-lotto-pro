@@ -1,9 +1,6 @@
 import java.util.Collections;
 import java.util.List;
 
-import step2.PositiveNumber;
-import step2.PositiveNumberFormatException;
-
 public class LottoBuyer {
 
 	private final LottoStore store;
@@ -15,66 +12,73 @@ public class LottoBuyer {
 	}
 
 	public List<Lotto> buy() {
-		int numOfManualLottos;
-		List<Lotto> lottos;
-		do {
-			final String paidKRW = payKRW();
-			final List<String> manualLottos = writeManualLottos();
+		final LottoPayment payment = tryPay();
+		view.space();
 
-			numOfManualLottos = manualLottos.size();
-			lottos = buyLottos(paidKRW, manualLottos);
-		} while (null == lottos);
-		view.outBoughtLottos(numOfManualLottos, lottos);
+		final ManualLottoAmount manualLottoAmount = tryTellManualLottoAmount(payment);
+		view.space();
+
+		final List<Lotto> lottos = tryBuy(payment, manualLottoAmount);
+		view.outBoughtLottos(manualLottoAmount, lottos);
 		return lottos;
 	}
 
-	private String payKRW() {
-		final String paidKRW = view.inPayKRW();
-		view.space();
-		return paidKRW;
+	private LottoPayment tryPay() {
+		LottoPayment payment;
+		do {
+			payment = pay(view.inPayKRW());
+		} while (null == payment);
+		return payment;
 	}
 
-	private List<String> writeManualLottos() {
-		final PositiveNumber numOfManualLottos = tryGetNumOfManualLottos();
-		view.space();
+	private LottoPayment pay(String s) {
+		try {
+			return LottoPayment.from(s);
+		} catch(LottoPaymentFormatException e) {
+			view.error(e.getMessage());
+			return null;
+		}
+	}
 
-		if (numOfManualLottos.get() > 0) {
-			return view.inManualLottos(numOfManualLottos);
+	private ManualLottoAmount tryTellManualLottoAmount(LottoPayment payment) {
+		ManualLottoAmount manualLottoAmount;
+		do {
+			manualLottoAmount = tellManualLottoAmount(payment, view.inManualLottoAmount());
+		} while (null == manualLottoAmount);
+		return manualLottoAmount;
+	}
+
+	private ManualLottoAmount tellManualLottoAmount(LottoPayment payment, String s) {
+		try {
+			return ManualLottoAmount.from(payment, s);
+		} catch (ManualLottoAmountException e) {
+			view.error(e.getMessage());
+			return null;
+		}
+	}
+
+	private List<Lotto> tryBuy(LottoPayment payment, ManualLottoAmount manualLottoAmount) {
+		List<Lotto> lottos;
+		do {
+			final List<String> manualLottos = writeManualLottos(manualLottoAmount);
+			lottos = buyLottos(payment, manualLottos);
+		} while (null == lottos);
+		return lottos;
+	}
+
+	private List<String> writeManualLottos(ManualLottoAmount manualLottoAmount) {
+		if (manualLottoAmount.isBiggerThan(0)) {
+			return view.inManualLottos(manualLottoAmount);
 		}
 		return Collections.emptyList();
 	}
 
-	private PositiveNumber tryGetNumOfManualLottos() {
-		PositiveNumber numOfManualLottos;
-		do {
-			numOfManualLottos = getNumOfManualLottos(view.inNumOfManualLottos());
-		} while (null == numOfManualLottos);
-		return numOfManualLottos;
-	}
-
-	private PositiveNumber getNumOfManualLottos(String s) {
+	private List<Lotto> buyLottos(LottoPayment payment, List<String> manualLottos) {
 		try {
-			return parseNumOfLottos(s);
-		} catch (NumOfLottosFormatException e) {
-			view.error(e.getMessage());
-			return null;
-		}
-	}
-
-	private List<Lotto> buyLottos(String pay, List<String> manualLottos) {
-		try {
-			return store.sell(pay, manualLottos);
+			return store.sell(payment, manualLottos);
 		} catch (IllegalArgumentException e) {
 			view.error(e.getMessage());
 			return null;
-		}
-	}
-
-	private PositiveNumber parseNumOfLottos(String s) {
-		try {
-			return PositiveNumber.from(s);
-		} catch (PositiveNumberFormatException e) {
-			throw new NumOfLottosFormatException();
 		}
 	}
 }
