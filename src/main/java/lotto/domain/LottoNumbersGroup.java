@@ -13,16 +13,16 @@ public class LottoNumbersGroup {
         this.lottoNumbersGroup = generateRandomLottoNumbers(buyAmount.getAmount());
     }
 
-    public LottoNumbersGroup(String[] myLottoNumbers) throws Exception {
-        this.lottoNumbersGroup = generateManualLottoNumbers(myLottoNumbers);
+    public LottoNumbersGroup(String[] lottoNumbersGroup) throws Exception {
+        this.lottoNumbersGroup = generateManualLottoNumbers(lottoNumbersGroup);
     }
 
-    public LottoNumbersGroup(List<LottoNumbers> myLottoNumbers) {
-        this.lottoNumbersGroup = myLottoNumbers;
+    public LottoNumbersGroup(List<LottoNumbers> lottoNumbersGroup) {
+        this.lottoNumbersGroup = lottoNumbersGroup;
     }
 
-    public LottoNumbersGroup(BuyAmount buyAmount, List<LottoNumbers> manualLottoNumbers) throws Exception {
-        this.lottoNumbersGroup = manualLottoNumbers;
+    public LottoNumbersGroup(BuyAmount buyAmount, List<LottoNumbers> manualLottoNumbersGroup) throws Exception {
+        this.lottoNumbersGroup = manualLottoNumbersGroup;
         this.lottoNumbersGroup.addAll(generateRandomLottoNumbers(buyAmount.getAutoAmount()));
     }
 
