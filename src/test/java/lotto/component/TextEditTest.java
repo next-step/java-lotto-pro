@@ -6,7 +6,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import lotto.infrastructure.component.TextEdit;
+import lotto.infrastructure.util.Console;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TextEditTest {
@@ -39,8 +39,8 @@ public class TextEditTest {
   void render_printText() {
     // given
     System.setIn(new ByteArrayInputStream("1\n".getBytes()));
-    TextEdit.scanner = new Scanner(System.in);
     TextEdit textEdit = new TextEdit("값을 입력해주세요.");
+    Console.reLoadScanner();
 
     // when
     textEdit.render();
@@ -54,7 +54,7 @@ public class TextEditTest {
   void input_value() {
     // given
     System.setIn(new ByteArrayInputStream("1234\n".getBytes()));
-    TextEdit.scanner = new Scanner(System.in);
+    Console.reLoadScanner();
 
     TextEdit textEdit = new TextEdit("값을 입력해주세요.");
 
