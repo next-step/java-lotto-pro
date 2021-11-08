@@ -24,6 +24,10 @@ public enum LottoRankingStatus {
         return matchAmount;
     }
 
+    public boolean isMatchBonus() {
+        return matchBonus;
+    }
+
     public int getPrizeAmount() {
         return prizeAmount;
     }
