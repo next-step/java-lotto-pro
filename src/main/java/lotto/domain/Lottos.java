@@ -18,8 +18,7 @@ public class Lottos {
     public static Lottos buy(final int count) {
         List<Lotto> lottosList = new ArrayList<>();
         for( int i = 0; i < count; i++ ) {
-            AutoLottoPurchase autoLottoPurchase = new AutoLottoPurchase();
-            Lotto lotto = Lotto.from(autoLottoPurchase.generateLottoNumbers());
+            Lotto lotto = Lotto.from(new AutoLottoPurchase().generateLottoNumbers());
             lottosList.add(lotto);
         }
         return Lottos.from(lottosList);
