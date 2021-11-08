@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
+import calculator.CalculatorInputStringParser;
 
 public class LottoNumbers {
 	public static final String MESSAGE_NOT_ALLOW_LENGTH = "LOTTO_NUMBERS_LENGTH_MUST_BE_6";
@@ -20,6 +23,17 @@ public class LottoNumbers {
 		this.lottoNumbers = new ArrayList<>();
 		sortLottoNumbers(lottoNumbers);
 		this.lottoNumbers.addAll(lottoNumbers);
+	}
+
+	public LottoNumbers(String lottoNumbersString) {
+		this(parse(lottoNumbersString));
+	}
+
+	private static List<LottoNumber> parse(String lottoNumbersString) {
+		return CalculatorInputStringParser.parse(lottoNumbersString)
+			.stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
 	}
 
 	private void sortLottoNumbers(List<LottoNumber> lottoNumbers) {

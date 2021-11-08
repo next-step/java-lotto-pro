@@ -44,6 +44,44 @@ public class LottoNumbersTest {
 				new LottoNumber(6)
 			)
 		));
+
+		assertThat(new LottoNumbers(
+			Arrays.asList(
+				new LottoNumber(1),
+				new LottoNumber(2),
+				new LottoNumber(3),
+				new LottoNumber(4),
+				new LottoNumber(5),
+				new LottoNumber(6)
+			)
+		)).isEqualTo(new LottoNumbers(
+			Arrays.asList(
+				new LottoNumber(1),
+				new LottoNumber(2),
+				new LottoNumber(3),
+				new LottoNumber(4),
+				new LottoNumber(5),
+				new LottoNumber(6)
+			)
+		));
+	}
+
+	@Test
+	@DisplayName("로또 숫자 6개가 포함된 문자열로도 생성 가능")
+	void test_constructor4() {
+		assertThatNoException().isThrownBy(() -> new LottoNumbers("1, 2, 3, 4, 5, 6"));
+
+		assertThat(new LottoNumbers("1, 2, 3, 4, 5, 6"))
+			.isEqualTo(new LottoNumbers(
+				Arrays.asList(
+					new LottoNumber(1),
+					new LottoNumber(2),
+					new LottoNumber(3),
+					new LottoNumber(4),
+					new LottoNumber(5),
+					new LottoNumber(6)
+				)
+			));
 	}
 
 	@Test
