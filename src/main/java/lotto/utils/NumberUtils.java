@@ -6,8 +6,8 @@ public class NumberUtils {
         throw new UnsupportedOperationException();
     }
 
-    public static double roundDown(double decimal, int places) {
-        double i = (places - 1);
+    public static double roundDown(double decimal, int place) {
+        double i = (place - 1);
         return Math.floor(decimal * Math.pow(10, i)) / Math.pow(10, i);
     }
 }

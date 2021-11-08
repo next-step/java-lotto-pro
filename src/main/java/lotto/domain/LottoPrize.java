@@ -1,11 +1,14 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoPrize {
 
     FIRST_PLACE("1등", 6, 2_000_000_000)
     , SECOND_PLACE("2등", 5, 1_500_000)
     , THIRD_PLACE("3등", 4, 50_000)
-    , FOURTH_PLACE("4등", 3, 5_000);
+    , FOURTH_PLACE("4등", 3, 5_000)
+    , MISS("낙첨", 0, 0);
 
     private final String name;
     private final int matchCount;
@@ -29,19 +32,14 @@ public enum LottoPrize {
         return prizeMoney;
     }
 
-    public static int getPrizeMoney(int matchCount) {
-        if (matchCount == FIRST_PLACE.matchCount) {
-            return FIRST_PLACE.prizeMoney;
-        }
-        if (matchCount == SECOND_PLACE.matchCount) {
-            return SECOND_PLACE.prizeMoney;
-        }
-        if (matchCount == THIRD_PLACE.matchCount) {
-            return THIRD_PLACE.prizeMoney;
-        }
-        if (matchCount == FOURTH_PLACE.matchCount) {
-            return FOURTH_PLACE.prizeMoney;
-        }
-        return 0;
+    public static LottoPrize valueOf(int matchCount) {
+        return Arrays.stream(values())
+                .filter(lottoPrize -> lottoPrize.isEqual(matchCount))
+                .findFirst()
+                .orElse(MISS);
+    }
+
+    private boolean isEqual(int matchCount) {
+        return this.matchCount == matchCount;
     }
 }
