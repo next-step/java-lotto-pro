@@ -4,10 +4,13 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoGameController {
     public void start() {
         Money money = InputView.inputMoney();
-        int tryCount = InputView.inputManualTryCount();
+        int manualTryCount = InputView.inputManualTryCount();
+        List<String> manualNumbersStrings = InputView.inputManualNumbers(manualTryCount);
 
         LottoGame lottoGame = LottoStore.sell(money);
 

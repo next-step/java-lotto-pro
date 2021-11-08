@@ -6,15 +6,18 @@ import lotto.exception.ErrorCode;
 import lotto.exception.ExecutePrivateConstructorException;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_WIN_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_MANUAL_TRY_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_TRY_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final Scanner scanner = new Scanner(System.in);
 
     private InputView() {
@@ -44,5 +47,14 @@ public class InputView {
     public static int inputManualTryCount() {
         System.out.println(INPUT_MANUAL_TRY_COUNT_MESSAGE);
         return scanner.nextInt();
+    }
+
+    public static List<String> inputManualNumbers(int manualTryCount) {
+        System.out.println(INPUT_MANUAL_TRY_NUMBERS_MESSAGE);
+        return Collections.unmodifiableList(
+                Stream.generate(scanner::next)
+                        .limit(manualTryCount)
+                        .collect(Collectors.toList())
+        );
     }
 }
