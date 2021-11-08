@@ -31,4 +31,5 @@ public class Lotto {
     public LottoRank getLottoRank() {
         return lottoRank;
     }
+
 }

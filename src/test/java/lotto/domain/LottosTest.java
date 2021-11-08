@@ -60,4 +60,5 @@ class LottosTest {
         //then
         assertThat(lottos.getTotalRankCount(LottoRank.FOURTH)).isEqualTo(5);
     }
+
 }

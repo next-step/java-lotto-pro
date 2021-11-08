@@ -33,4 +33,5 @@ public class Lottos {
                 .filter(lotto -> lotto.getLottoRank().equals(rank))
                 .count());
     }
+
 }

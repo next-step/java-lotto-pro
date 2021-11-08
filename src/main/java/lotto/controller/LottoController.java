@@ -39,4 +39,5 @@ public class LottoController {
         printPurchaseQuantity(lottoPurchase.getPurchaseQuantity());
         return lottoPurchase;
     }
+
 }

@@ -49,4 +49,5 @@ public class LottoNumbers {
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
+
 }

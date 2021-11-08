@@ -19,4 +19,5 @@ class LottoIssueTest {
         //then
         assertThat(lottos.size()).isEqualTo(purchaseQuantity);
     }
+
 }

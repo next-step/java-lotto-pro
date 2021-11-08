@@ -22,4 +22,5 @@ class LottoGeneratorTest {
                 .distinct()
                 .count()).isEqualTo(6);
     }
+
 }

@@ -73,4 +73,5 @@ class LottoNumbersTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(throwingCallable);
     }
+
 }

@@ -15,4 +15,5 @@ public class LottoIssue {
                 .mapToObj(i -> new Lotto(LottoGenerator.generate()))
                 .collect(toList());
     }
+
 }

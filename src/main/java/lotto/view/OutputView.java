@@ -53,4 +53,5 @@ public class OutputView {
     public static void printRateOfReturn(double rateOfReturn) {
         System.out.printf(PRINT_RATE_OF_RETURN, rateOfReturn);
     }
+
 }

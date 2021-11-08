@@ -24,4 +24,5 @@ public class StringAddCalculator {
     private static int sum(List<Integer> numbers) {
         return numbers.stream().mapToInt(i -> i).sum();
     }
+
 }

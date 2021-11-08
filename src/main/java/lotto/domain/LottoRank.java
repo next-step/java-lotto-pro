@@ -35,4 +35,5 @@ public enum LottoRank {
     public int getPrizeMoney() {
         return prizeMoney;
     }
+
 }

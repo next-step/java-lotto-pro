@@ -32,4 +32,5 @@ class LottoPurchaseTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(throwingCallable);
     }
+
 }

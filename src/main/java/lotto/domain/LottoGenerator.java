@@ -25,4 +25,5 @@ public class LottoGenerator {
                 .sorted()
                 .collect(toList());
     }
+
 }
