@@ -2,6 +2,7 @@ package lotto.domain.winstatistics;
 
 public class RevenueRatio {
   private static final String REVENUE_RATIO_DISPLAY_FORMAT = "%.2f";
+  
   private final String value;
 
   public RevenueRatio(String value) {

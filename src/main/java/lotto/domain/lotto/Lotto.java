@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class Lotto {
   public static final Integer PRICE = 1000;
+  
   private final LottoNumbers numbers;
 
   private Lotto(LottoNumbers numbers) {

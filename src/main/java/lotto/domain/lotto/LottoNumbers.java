@@ -11,6 +11,7 @@ import lotto.infrastructure.util.RandomLottoNumber;
 
 public class LottoNumbers {
   private static final int VALID_LOTTONUMBER_HAS_COUNT = 6;
+  
   private List<LottoNumber> numbers;
 
   private LottoNumbers(List<LottoNumber> numbers) {
