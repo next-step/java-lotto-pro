@@ -14,7 +14,7 @@ public class LottoController {
     public void run() {
         LottoPurchase lottoPurchase = inputLottoPurchase();
 
-        LottoTicket lottoTicket = new LottoTicket(LottoIssue.ofAuto(lottoPurchase.getPurchaseQuantity()));
+        LottoTicket lottoTicket = LottoIssue.ofAuto(lottoPurchase.getPurchaseQuantity());
         printLottoNumber(lottoTicket);
 
         LottoNumbers lottoWinningNumbers = inputLottoWinningNumbers();

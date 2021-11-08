@@ -8,9 +8,10 @@ import java.util.function.Predicate;
 import static java.util.Comparator.naturalOrder;
 
 public class LottoNumbers {
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int LOTTO_NUMBER_SIZE = 6;
+
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
+    public static final int LOTTO_NUMBER_SIZE = 6;
     private static final String INVALID_BETWEEN_MIN_AND_MAX = "당첨 번호는 1 ~ 45 중에서 골라주세요.";
     private static final String INVALID_NUMBER = "로또번호는 중복이되면 안됩니다.";
     private static final String INVALID_NUMBER_SIZE = "로또번호는 6자리여야 합니다.";

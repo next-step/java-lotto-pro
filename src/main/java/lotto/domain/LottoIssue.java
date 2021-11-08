@@ -10,10 +10,11 @@ public class LottoIssue {
     private LottoIssue() {
     }
 
-    public static List<LottoNumbers> ofAuto(int purchaseQuantity) {
-        return IntStream.range(0, purchaseQuantity)
-                .mapToObj(i -> new LottoNumbers(LottoGenerator.generate()))
+    public static LottoTicket ofAuto(int purchaseQuantity) {
+        List<LottoNumbers> lottoNumbers = IntStream.range(0, purchaseQuantity)
+                .mapToObj(i -> LottoGenerator.generate())
                 .collect(toList());
+        return new LottoTicket(lottoNumbers);
     }
 
 }
