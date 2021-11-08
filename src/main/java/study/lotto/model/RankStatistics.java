@@ -22,12 +22,8 @@ public class RankStatistics {
     }
 
     public void countUpByRank(Rank rank) {
-        if (rankStatistics.containsKey(rank)) {
-            final Integer count = rankStatistics.get(rank);
-            rankStatistics.put(rank, count + 1);
-            return;
-        }
-        rankStatistics.put(rank, INIT_COUNT);
+        final Integer count = rankStatistics.getOrDefault(rank, DEFAULT_COUNT);
+        rankStatistics.put(rank, count + 1);
     }
 
     public int countByRank(final Rank rank) {

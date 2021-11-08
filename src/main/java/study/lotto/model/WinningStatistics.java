@@ -12,7 +12,6 @@ public class WinningStatistics {
     private WinningStatistics(final TicketLotteryBundle ticketLotteryBundle, final WinningLottery winningLottery) {
 
         final List<Rank> refereedRanks = LottoDiscriminator.referee(winningLottery, ticketLotteryBundle);
-
         BigDecimal income = BigDecimal.ZERO;
         final RankStatistics rankStatistics = RankStatistics.getInstance();
         for (final Rank rank : refereedRanks) {
