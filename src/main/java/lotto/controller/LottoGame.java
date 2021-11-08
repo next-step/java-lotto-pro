@@ -15,10 +15,10 @@ public class LottoGame {
 
     public void start() {
         final Money money = LottoView.getMoney();
-        final int manualCount = LottoView.getManualCount();
+        final LottoCount count = LottoView.getManualCount(money);
 
-        final ManualLottos manualLottos = LottoView.getManualLottos(manualCount);
-        final AutoLottos autoLottos = new AutoLottos(money, randomNumbers);
+        final ManualLottos manualLottos = LottoView.getManualLottos(count);
+        final AutoLottos autoLottos = new AutoLottos(count, randomNumbers);
         final Lottos lottos = new Lottos(autoLottos, manualLottos);
 
         LottoView.displayCount(money);

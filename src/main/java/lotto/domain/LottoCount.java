@@ -13,6 +13,10 @@ public class LottoCount {
         check();
     }
 
+    public LottoCount(Money money, int manualCount) {
+        this(money.buy(), manualCount);
+    }
+
     private void check() {
         if (this.autoCount < 0) {
             throw new IllegalArgumentException("자동 로또 개수는 음수가 될 수 없습니다.");
@@ -21,5 +25,9 @@ public class LottoCount {
 
     public int getAutoCount() {
         return autoCount;
+    }
+
+    public int getManualCount() {
+        return manualCount;
     }
 }

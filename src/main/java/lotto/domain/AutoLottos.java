@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,8 +16,8 @@ public class AutoLottos {
                 .collect(Collectors.toList());
     }
 
-    public AutoLottos(Money money, RandomNumbers randomNumbers) {
-        this(money.buy(), randomNumbers);
+    public AutoLottos(LottoCount count, RandomNumbers randomNumbers) {
+        this(count.getAutoCount(), randomNumbers);
     }
 
     public List<Lotto> getAutoLottos() {

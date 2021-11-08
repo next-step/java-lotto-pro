@@ -71,15 +71,15 @@ public class LottoView {
         return scanner.nextInt();
     }
 
-    public static int getManualCount() {
+    public static LottoCount getManualCount(Money money) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextInt();
+        return new LottoCount(money, scanner.nextInt());
     }
 
-    public static ManualLottos getManualLottos(int manualCount) {
+    public static ManualLottos getManualLottos(LottoCount count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        final List<String> numbers = IntStream.range(0, manualCount)
+        final List<String> numbers = IntStream.range(0, count.getManualCount())
                 .mapToObj(number -> scanner.next())
                 .collect(Collectors.toList());
         return new ManualLottos(numbers);
