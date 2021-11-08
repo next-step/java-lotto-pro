@@ -4,7 +4,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import nextstep.utils.Console;
-import step2.PositiveNumber;
 
 public class View {
 
@@ -13,14 +12,14 @@ public class View {
 		return Console.readLine();
 	}
 
-	public String inNumOfManualLottos() {
-		println(Message.INPUT_NUM_OF_MANUAL_LOTTOS.getContent());
+	public String inManualLottoAmount() {
+		println(Message.INPUT_MANUAL_LOTTO_AMOUNT.getContent());
 		return Console.readLine();
 	}
 
-	public List<String> inManualLottos(PositiveNumber numOfLottos) {
+	public List<String> inManualLottos(ManualLottoAmount manualLottoAmount) {
 		println(Message.INPUT_MANUAL_LOTTOS.getContent());
-		return IntStream.range(0, numOfLottos.get())
+		return IntStream.range(0, manualLottoAmount.get())
 			.mapToObj(i -> Console.readLine())
 			.collect(Collectors.toList());
 	}
@@ -35,12 +34,12 @@ public class View {
 		return Console.readLine();
 	}
 
-	public void outBoughtLottos(int numOfManualLottos, List<Lotto> lottos) {
-		if (numOfManualLottos > 0) {
+	public void outBoughtLottos(ManualLottoAmount manualLottoAmount, List<Lotto> lottos) {
+		if (manualLottoAmount.isBiggerThan(0)) {
 			space();
 		}
-		final int numOfAutoLottos = lottos.size() - numOfManualLottos;
-		println(String.format(Message.BOUGHT_LOTTO.getContent(), numOfManualLottos, numOfAutoLottos));
+		final int numOfAutoLottos = manualLottoAmount.subtractFrom(lottos.size());
+		println(String.format(Message.BOUGHT_LOTTO.getContent(), manualLottoAmount.get(), numOfAutoLottos));
 		lottos.stream().map(Lotto::toString).forEach(this::println);
 	}
 
@@ -65,7 +64,7 @@ public class View {
 		final int prizeKRW = rank.getPrizeKRW();
 		final Long numOfLottos = statistics.countLottos(rank);
 		println(String.format(Message.COUNT_MATCHING.getContent()
-			, matchingCount, matchingBonusMessage, prizeKRW, LottoStore.KRW_UNIT, numOfLottos));
+			, matchingCount, matchingBonusMessage, prizeKRW, LottoPayment.KRW_UNIT, numOfLottos));
 	}
 
 	private String getMatchingBonusMessageBy(LottoWinningRank rank) {
