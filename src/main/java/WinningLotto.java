@@ -2,12 +2,21 @@ import java.util.List;
 
 public class WinningLotto extends Lotto {
 
-	private WinningLotto(List<LottoNumber> lottoNumbers) {
+	private final LottoNumber bonus;
+
+	WinningLotto(List<LottoNumber> lottoNumbers, LottoNumber bonus) {
 		super(lottoNumbers);
+		validate(bonus);
+		this.bonus = bonus;
 	}
 
-	public static WinningLotto from(String s) {
-		return new WinningLotto(LottoParser.parse(s));
+	private void validate(LottoNumber bonus) {
+		if (null == bonus) {
+			throw new WinningLottoFormatException();
+		}
+		if (lottoNumbers.contains(bonus)) {
+			throw new WinningLottoFormatException();
+		}
 	}
 
 	public int countMatching(Lotto lotto) {
@@ -17,5 +26,9 @@ public class WinningLotto extends Lotto {
 
 	private int countIfContains(LottoNumber lottoNumber) {
 		return this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
+	}
+
+	public LottoNumber getBonus() {
+		return bonus;
 	}
 }

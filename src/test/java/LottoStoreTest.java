@@ -2,34 +2,26 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoStoreTest {
 
 	private final LottoStore lottoStore = new LottoStore();
 
-	@Test
-	public void sell() {
-		final int numOfLottos = 3;
-		final List<Lotto> soldLottos = lottoStore.sell(numOfLottos * Lotto.PRICE_KRW);
-		assertThat(soldLottos.size()).isEqualTo(numOfLottos);
-	}
-
-	@Test
-	public void sell_indivisible() {
-		final int numOfLottos = 2;
-		final int remainder = Lotto.PRICE_KRW / 2;
-		final List<Lotto> soldLottos = lottoStore.sell(numOfLottos * Lotto.PRICE_KRW + remainder);
+	@ParameterizedTest
+	@CsvSource(value = {"3000:3", "1234:1"}, delimiter = ':')
+	public void sell(String paidKRW, int numOfLottos) {
+		final List<Lotto> soldLottos = lottoStore.sell(paidKRW);
 		assertThat(soldLottos.size()).isEqualTo(numOfLottos);
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {-1, 0})
-	public void sell_notEnoughKRW(int paidKRW) {
+	@ValueSource(strings = {"-1", "0", "NaN"})
+	public void sell_notEnoughKRW(String pay) {
 		assertThatExceptionOfType(LottoStorePaymentException.class)
-			.isThrownBy(() -> lottoStore.sell(paidKRW))
+			.isThrownBy(() -> lottoStore.sell(pay))
 			.withMessage(LottoStorePaymentException.ERROR_NOT_ENOUGH_KRW);
 	}
 }

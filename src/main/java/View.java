@@ -5,13 +5,18 @@ import nextstep.utils.Console;
 
 public class View {
 
-	public int inPayKRW() {
+	public String inPayKRW() {
 		println(Message.INPUT_PAY_KRW.getContent());
-		return Console.readInt();
+		return Console.readLine();
 	}
 
 	public String inWinningLotto() {
 		println(Message.INPUT_WINNING_LOTTO.getContent());
+		return Console.readLine();
+	}
+
+	public String inWinningBonus() {
+		println(Message.INPUT_WINNING_BONUS.getContent());
 		return Console.readLine();
 	}
 
@@ -25,21 +30,30 @@ public class View {
 		println(Message.SEPARATOR.getContent());
 
 		Arrays.asList(
+			LottoWinningRank.FIFTH,
 			LottoWinningRank.FOURTH,
 			LottoWinningRank.THIRD,
 			LottoWinningRank.SECOND,
 			LottoWinningRank.FIRST
-		).forEach(rank -> outLottoMatchingCount(rank, statistics));
+		).forEach(rank -> outNumOfLottosByRank(rank, statistics));
 
 		outLottoEarningRate(statistics.earningRate());
 	}
 
-	private void outLottoMatchingCount(LottoWinningRank rank, LottoWinningStatistics statistics) {
+	private void outNumOfLottosByRank(LottoWinningRank rank, LottoWinningStatistics statistics) {
 		final int matchingCount = rank.getMatchingCount();
+		final String matchingBonusMessage = getMatchingBonusMessageBy(rank);
 		final int prizeKRW = rank.getPrizeKRW();
 		final Long numOfLottos = statistics.countLottos(rank);
 		println(String.format(Message.COUNT_MATCHING.getContent()
-			, matchingCount, prizeKRW, LottoStore.KRW_UNIT, numOfLottos));
+			, matchingCount, matchingBonusMessage, prizeKRW, LottoStore.KRW_UNIT, numOfLottos));
+	}
+
+	private String getMatchingBonusMessageBy(LottoWinningRank rank) {
+		if (LottoWinningRank.SECOND == rank) {
+			return Message.MATCH_WINNING_BONUS.getContent();
+		}
+		return "";
 	}
 
 	private void outLottoEarningRate(double earningRate) {

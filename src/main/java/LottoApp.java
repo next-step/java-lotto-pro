@@ -30,9 +30,9 @@ public class LottoApp {
 		return lotto;
 	}
 
-	private List<Lotto> buyLottos(int paidKRW) {
+	private List<Lotto> buyLottos(String pay) {
 		try {
-			return store.sell(paidKRW);
+			return store.sell(pay);
 		} catch (LottoStorePaymentException e) {
 			view.error(e.getMessage());
 			return null;
@@ -42,14 +42,19 @@ public class LottoApp {
 	private WinningLotto tryMakeWinningLotto() {
 		WinningLotto winningLotto;
 		do {
-			winningLotto = makeWinningLotto(view.inWinningLotto());
+			final String lottoNumbers = view.inWinningLotto();
+			final String bonus = view.inWinningBonus();
+			winningLotto = makeWinningLotto(lottoNumbers, bonus);
 		} while (null == winningLotto);
 		return winningLotto;
 	}
 
-	private WinningLotto makeWinningLotto(String s) {
+	private WinningLotto makeWinningLotto(String lottoNumbers, String bonus) {
 		try {
-			return WinningLotto.from(s);
+			return WinningLottoBuilder.aWinningLotto()
+				.withLottoNumbers(lottoNumbers)
+				.withBonus(bonus)
+				.build();
 		} catch (IllegalArgumentException e) {
 			view.error(e.getMessage());
 			return null;

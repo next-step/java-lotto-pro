@@ -7,14 +7,20 @@ public class LottoParser {
 	private static final String DELIMITER = ",";
 
 	public static List<LottoNumber> parse(String s) {
+		validate(s);
 		final String[] tokens = s.split(DELIMITER);
 		validate(tokens.length);
 		return Arrays.stream(tokens)
 			.map(String::trim)
 			.mapToInt(LottoParser::parseInt)
 			.mapToObj(LottoNumber::from)
-			.sorted()
 			.collect(Collectors.toList());
+	}
+
+	private static void validate(String s) {
+		if (null == s) {
+			throw new LottoFormatException();
+		}
 	}
 
 	private static void validate(int numOfLottoNumbers) {
