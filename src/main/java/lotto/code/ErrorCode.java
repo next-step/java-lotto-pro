@@ -6,7 +6,8 @@ public enum ErrorCode {
 	INVALID_INPUT_NUMBER_ERROR("ERR03", "숫자만 입력 가능합니다."),
 	IS_NOT_LOTTO_NUMBER_SIZE_ERROR("ERR04", "6자리의 로또 번호를 입력해주세요."),
 	LOTTO_NUMBER_DUPLICATE_ERROR("ERR06", "로또 번호 중 중복된 번호가 존재합니다."),
-	UNDER_LOTTO_PRICE_ERROR("ERR07", "로또를 구입하기 위해선 1000원 이상의 금액이 필요합니다.");
+	UNDER_LOTTO_PRICE_ERROR("ERR07", "로또를 구입하기 위해선 1000원 이상의 금액이 필요합니다."),
+	BONUS_NUMBER_DUPLICATE_ERROR("ERR08", "보너스번호는 로또번호와 중복될 수 없습니다.");
 
 	private final String errorCode;
 	private final String errorMessage;
