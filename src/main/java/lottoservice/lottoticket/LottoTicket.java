@@ -1,5 +1,7 @@
 package lottoservice.lottoticket;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -23,7 +25,12 @@ public class LottoTicket {
 
 	public LottoTicket(List<LottoNumber> lottoNumber) {
 		validateLottoNumberGroupRule(lottoNumber);
+		sortNumbersInAscOrder(lottoNumber);
 		this.lottoNumbers = lottoNumber;
+	}
+
+	private void sortNumbersInAscOrder(List<LottoNumber> lottoNumber) {
+		Collections.sort(lottoNumber);
 	}
 
 	private void validateLottoNumberGroupRule(List<LottoNumber> lottoNumber) {
@@ -48,11 +55,8 @@ public class LottoTicket {
 		return lottoNumbers.contains(lottoNumber);
 	}
 
-	@Override
-	public String toString() {
-		return lottoNumbers.stream()
-			.map(lottoNumber -> lottoNumber.toString())
-			.collect(Collectors.joining(", ", "[", "]"));
+	public LottoNumber getLottoNumber(int index){
+		return lottoNumbers.get(index);
 	}
 
 	@Override
@@ -61,17 +65,19 @@ public class LottoTicket {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		return hasAllSameNumbers((LottoTicket)o);
-	}
-
-	private boolean hasAllSameNumbers(LottoTicket that) {
-		return that.getLottoNumbers().stream()
-			.filter(it -> this.hasLottoNumber(it))
-			.count() == LottoNumbersMaker.SIZE_OF_LOTTERY_NUMBERS;
+		LottoTicket that = (LottoTicket)o;
+		return Objects.equals(getLottoNumbers(), that.getLottoNumbers());
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(getLottoNumbers());
+	}
+
+	@Override
+	public String toString() {
+		return lottoNumbers.stream()
+			.map(lottoNumber -> lottoNumber.toString())
+			.collect(Collectors.joining(", ", "[", "]"));
 	}
 }

@@ -1,12 +1,11 @@
 package lottoservice.lottoticket;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lottoservice.exception.NotDivisibleMoneyUnitException;
-import lottoservice.exception.NotEnoughtMoneyException;
+import lottoservice.exception.NotEnoughMoneyException;
 import lottoservice.exception.InvalidNumberFormatMoneyException;
 import lottoservice.lottonumber.LottoNumbersMaker;
 
@@ -20,31 +19,37 @@ public class LottoTicketIssuer {
 	private static String ERROR_MESSAGE_INPUT_AMOUNT_NOT_DIVISIBLE = "금액은 " + TICKET_PER_PRICE + "원 단위로 입력해주세요.";
 	private static String ERROR_MESSAGE_INPUT_AMOUNT_NOT_NUMBER = "금액을 숫자로 입력해주세요.";
 
+	private LottoNumbersMaker lottoNumbersMaker;
+
+	public LottoTicketIssuer(LottoNumbersMaker lottoNumbersMaker) {
+		this.lottoNumbersMaker = lottoNumbersMaker;
+	}
+
 	/**
 	 * 사용자가 입력한 금액만큼 자동으로 로또 티켓을 생성하여 리턴
 	 * @param inputAmount :  티켓 단위 금액(TICKET_PER_PRICE) < inputAmount < int형 최대값 and inputAmount % 1000 = 0 이어야 함
 	 * @return LottoTickets : LottoTicket을 리스트형태로 가지고 있는 일급컬렉션
 	 */
-	public static LottoTickets buyTickets(int inputAmount) {
+	public LottoTickets buyTickets(int inputAmount) {
 		validatePay(inputAmount);
 		int numOfTickets = getNumOfTicketsToBuy(inputAmount);
 		List<LottoTicket> lottoTickets = issuTickets(numOfTickets);
 		return new LottoTickets(lottoTickets);
 	}
 
-	private static int getNumOfTicketsToBuy(int inputAmount) {
+	private int getNumOfTicketsToBuy(int inputAmount) {
 		return inputAmount / TICKET_PER_PRICE;
 	}
 
-	private static List<LottoTicket> issuTickets(int numOfTickets) {
+	private List<LottoTicket> issuTickets(int numOfTickets) {
 		return IntStream.range(0, numOfTickets)
-			.mapToObj((it) -> new LottoTicket(LottoNumbersMaker.makeLottoNumbers()))
+			.mapToObj((it) -> new LottoTicket(lottoNumbersMaker.makeLottoNumbers()))
 			.collect(Collectors.toList());
 	}
 
-	private static void validatePay(int inputAmount) {
+	private void validatePay(int inputAmount) {
 		if (isMoneyTooLittle(inputAmount)) {
-			throw new NotEnoughtMoneyException(ERROR_MESSAGE_INPUT_AMOUNT_TOO_LITTLE);
+			throw new NotEnoughMoneyException(ERROR_MESSAGE_INPUT_AMOUNT_TOO_LITTLE);
 		}
 
 		if (isNotDivisibleMoneyByPerPrice(inputAmount)) {
@@ -52,14 +57,14 @@ public class LottoTicketIssuer {
 		}
 	}
 
-	private static boolean isNotDivisibleMoneyByPerPrice(int inputAmount) {
+	private boolean isNotDivisibleMoneyByPerPrice(int inputAmount) {
 		if ((inputAmount % TICKET_PER_PRICE) > 0) {
 			return true;
 		}
 		return false;
 	}
 
-	private static boolean isMoneyTooLittle(int inputAmount) {
+	private boolean isMoneyTooLittle(int inputAmount) {
 		if (inputAmount < TICKET_PER_PRICE) {
 			return true;
 		}
@@ -67,13 +72,13 @@ public class LottoTicketIssuer {
 	}
 
 	/* 사용자 입력값을 문자열로 받아 숫자형으로 변환 후  buyTickets(int inputAmount) 호출 */
-	public static LottoTickets buyTickets(String inputAmount) {
+	public LottoTickets buyTickets(String inputAmount) {
 		int convertedMoney = convertMoneyFormatToNumber(inputAmount);
 		return buyTickets(convertedMoney);
 	}
 
 	/* int형 양의 정수 최대값 보다 큰 값을 변환하는 경우도 예외 발생 */
-	private static int convertMoneyFormatToNumber(String inputAmount) {
+	private int convertMoneyFormatToNumber(String inputAmount) {
 		try {
 			return Integer.parseInt(inputAmount);
 		} catch (NumberFormatException ex) {

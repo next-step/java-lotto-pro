@@ -27,7 +27,7 @@ class LottoNumberTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {"1,2,-1", "5,5,0", "10,7,1"})
-	public void compareTo_로또번호_비교(int number, int compareNumber, int expected) {
+	public void 로또번호_비교(int number, int compareNumber, int expected) {
 		LottoNumber lottoNumber = LottoNumber.valueOf(number);
 		assertThat(lottoNumber.compareTo(LottoNumber.valueOf(compareNumber))).isEqualTo(expected);
 	}
