@@ -1,6 +1,6 @@
 package lotto.view;
 
-import utils.Console;
+import java.util.Scanner;
 
 public class InputView {
     public static final String PURCHASE_MESSAGE = "구입금액을 입력해 주세요.";
@@ -8,11 +8,13 @@ public class InputView {
 
     public String inputMoney() {
         System.out.println(PURCHASE_MESSAGE);
-        return Console.readLine();
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
     public String inputWiningLotto() {
         System.out.println(WINNING_NUMBER_MESSAGE);
-        return Console.readLine();
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 }

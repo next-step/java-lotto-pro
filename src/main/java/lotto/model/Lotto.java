@@ -11,6 +11,7 @@ public class Lotto {
     public Lotto(List<Integer> lotto) {
         validateSize(lotto);
         validateDuplicate(lotto);
+        Collections.sort(lotto);
         for (Integer number : lotto) {
             this.lotto.add(new LottoNumber(number));
         }

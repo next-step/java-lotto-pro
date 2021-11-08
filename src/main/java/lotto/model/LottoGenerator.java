@@ -13,6 +13,8 @@ public class LottoGenerator {
     public static final String DELIMITER = ",";
     public static final String DELIMITER_MESSAGE = "로또 숫자 구분자로 ,(콤마)를 입력해주세요.";
     private static final List<Integer> allNumbers = new ArrayList<>();
+    public static final String BLANK = " ";
+    public static final String NO_BLANK = "";
 
     static {
         for (int i = START_NUMBER; i <= END_NUMBER; i++) {
@@ -35,7 +37,7 @@ public class LottoGenerator {
 
     public WinningNumber createWinningNumber(String winningNumberString) {
         validateDelimiter(winningNumberString);
-        return new WinningNumber(new Lotto(toList(toInts(winningNumberString.split(DELIMITER)))).getLotto());
+        return new WinningNumber(toList(toInts(winningNumberString.replaceAll(BLANK, NO_BLANK).split(DELIMITER))));
     }
 
     private void validateDelimiter(String text) {
@@ -45,10 +47,14 @@ public class LottoGenerator {
     }
 
     private int[] toInts(String[] values) {
-        return Arrays.stream(values).mapToInt(Integer::parseInt).toArray();
+        return Arrays.stream(values)
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 
     private List<Integer> toList(int[] values) {
-        return Arrays.stream(values).boxed().collect(Collectors.toList());
+        return Arrays.stream(values)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }
