@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -40,6 +41,15 @@ public class RankTest {
 	@DisplayName("5개의 숫자가 일치하는 경우 3등이다")
 	void testThird() {
 		assertThat(Rank.from(5)).isEqualTo(Rank.THIRD);
+	}
+
+	@Test
+	@DisplayName("5개의 숫자와 하나의 보너스 번호가 일치하는 경우 2등이다.")
+	void testSecond() {
+		assertAll(
+			() -> assertThat(Rank.from(5, true)).isEqualTo(Rank.SECOND),
+			() -> assertThat(Rank.from(5, false)).isEqualTo(Rank.THIRD)
+		);
 	}
 
 	@Test
