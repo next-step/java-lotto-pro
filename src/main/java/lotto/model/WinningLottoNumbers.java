@@ -3,12 +3,15 @@ package lotto.model;
 import java.util.Arrays;
 
 public class WinningLottoNumbers extends LottoNumbers {
-	public WinningLottoNumbers(int...arrayIntNumbers) {
+	private final LottoNumber bonusNumber;
+
+	public WinningLottoNumbers(int[] arrayIntNumbers, int bonusNumber) {
 		super(arrayIntNumbers);
+		this.bonusNumber = new LottoNumber(bonusNumber);
 	}
 
-	public WinningLottoNumbers(String numbers) {
-		this(convertStringNumbersToIntArray(numbers));
+	public WinningLottoNumbers(String numbers, String bunusNumber) {
+		this(convertStringNumbersToIntArray(numbers), Integer.parseInt(bunusNumber));
 	}
 
 	/**
@@ -28,9 +31,10 @@ public class WinningLottoNumbers extends LottoNumbers {
 	 * @return 당첨결과
 	 */
 	public Rank result(Lotto lotto) {
-		int match = (int)numbers.stream()
+		int countOfMatch = (int)numbers.stream()
 			.filter(lotto::contains)
 			.count();
-		return Rank.valueOf(match, false);		//TODO 임시처리. 추후수정필요
+		boolean matchBonus = lotto.contains(bonusNumber);
+		return Rank.valueOf(countOfMatch, matchBonus);
 	}
 }

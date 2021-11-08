@@ -35,4 +35,8 @@ public class LottoView {
 	public void printlnWinningLottoRateOfReturn(WinningLottoStatus winningLottoStatus, int usedMoney) {
 		System.out.println(String.format("총 수익률은 %.2f입니다.", winningLottoStatus.getRateOfReturn(usedMoney)));
 	}
+
+	public void printlnInputWinningBonusNumber() {
+		System.out.println("보너스 볼을 입력해 주세요.");
+	}
 }

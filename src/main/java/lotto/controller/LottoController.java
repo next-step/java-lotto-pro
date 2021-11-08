@@ -40,7 +40,6 @@ public class LottoController {
 	 * @return 로또 당첨 번호
 	 */
 	private WinningLottoNumbers getWinningLottoNumbers() {
-		view.printlnInputWinningLottoNumbers();
 		WinningLottoNumbers winningLottoNumbers = null;
 		do {
 			winningLottoNumbers = makeWinningLottoNumbers();
@@ -54,8 +53,11 @@ public class LottoController {
 	 */
 	private WinningLottoNumbers makeWinningLottoNumbers() {
 		try {
+			view.printlnInputWinningLottoNumbers();
 			String numbers = scan.nextLine();
-			return new WinningLottoNumbers(numbers);
+			view.printlnInputWinningBonusNumber();
+			String bonusNumber = scan.nextLine();
+			return new WinningLottoNumbers(numbers, bonusNumber);
 		} catch (IllegalArgumentException e) {
 			view.printlnError(e);
 		}

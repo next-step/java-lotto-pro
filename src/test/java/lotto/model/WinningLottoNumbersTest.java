@@ -11,7 +11,7 @@ public class WinningLottoNumbersTest {
 
 	@BeforeAll
 	static void beforeAll() {
-		winningLottoNumbers = new WinningLottoNumbers(2,7,12,18,32,34);
+		winningLottoNumbers = new WinningLottoNumbers(new int[]{2, 7, 12, 18, 32, 34}, 13);
 	}
 
 	@Test
@@ -36,6 +36,14 @@ public class WinningLottoNumbersTest {
 		Lotto lotto = new Lotto(new LottoNumbers(2,7,12,18,32,25));
 		Rank result = winningLottoNumbers.result(lotto);
 		assertThat(result).isEqualTo(Rank.THIRD);
+	}
+
+	@Test
+	@DisplayName("로또 당첨 결과 확인 - 5개 매치 + 보너스 숫자")
+	void matchFiveAndBonus() {
+		Lotto lotto = new Lotto(new LottoNumbers(2,7,12,18,32,13));
+		Rank result = winningLottoNumbers.result(lotto);
+		assertThat(result).isEqualTo(Rank.SECOND);
 	}
 
 	@Test

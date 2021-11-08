@@ -32,7 +32,7 @@ public enum Rank {
 	}
 
 	public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-		if (countOfMatch == 2) {
+		if (countOfMatch == 5) {
 			return matchBonus ? SECOND : THIRD;
 		}
 		return Arrays.stream(values())
