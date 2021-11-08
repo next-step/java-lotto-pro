@@ -76,7 +76,7 @@ public class LottoTest {
         LottoNumber number = LottoNumber.valueOf(LottoNumber.MIN_NUMBER);
         //THEN
         assertThat(number).isEqualTo(LottoNumber.valueOf(1));
-        assertThatThrownBy(() -> LottoNumber.valueOf(LottoNumber.MAX_NUMBER +1)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> LottoNumber.valueOf(LottoNumber.MAX_NUMBER + 1)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1부터 45 사이의 숫자만 가능합니다.");
 
     }

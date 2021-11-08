@@ -44,7 +44,7 @@ public class LottNumberTest {
 
 
     @ParameterizedTest(name = "유효하지 않은 로또 숫자 테스트(string) : " + ParameterizedTest.ARGUMENTS_PLACEHOLDER)
-    @ValueSource(strings = {"46","-1","0"})
+    @ValueSource(strings = {"46", "-1", "0"})
     public void T03_invalidStringnumber(String candidate) {
         //THEN
         assertThatThrownBy(() -> LottoNumber.valueOf(candidate)).isInstanceOf(IllegalArgumentException.class)

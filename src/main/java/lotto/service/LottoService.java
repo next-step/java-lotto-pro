@@ -7,6 +7,8 @@ import lotto.ui.InputMessage;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 /***
  *  피드백 1) 출력에 대한 책임을 도메인에게 주는 것보다 도메인의 값을 활용하자.
@@ -24,10 +26,6 @@ import java.util.Optional;
 public class LottoService {
     public void start() {
         PurchasePrice price = this.purchase();
-        ResultView.printPurchaseResult(price);
-
-        int i = this.inputManualLottoCount(price);
-        System.out.println(i);
 
         Lottos lottos = this.getLottos(price);
         ResultView.printPurchasedLotto(lottos);
@@ -40,7 +38,7 @@ public class LottoService {
     }
 
 
-     private PurchasePrice purchase() {
+    private PurchasePrice purchase() {
         try {
             ResultView.print(InputMessage.PURCHASE.getMessage());
             return PurchasePrice.valueOf(InputView.readLine());
@@ -56,11 +54,20 @@ public class LottoService {
             Optional<String> input = Optional.ofNullable(InputView.readLine());
             if (!input.isPresent()) throw new CustomEmptyException();
             int count = StringUtil.parseNumber(input.get());
-            if(!price.isAbleToBuy(count)) throw new IllegalArgumentException("구매 가능한 수량을 초과하였습니다.");
+            if (!price.isAbleToBuy(count)) throw new IllegalArgumentException("구매 가능한 수량을 초과하였습니다.");
             return count;
         } catch (Exception e) {
             ResultView.print(e.getMessage());
             return inputManualLottoCount(price);
+        }
+    }
+
+    private Lotto inputManualLottoNumber() {
+        try {
+            return new Lotto(InputView.readLine());
+        } catch (Exception e) {
+            ResultView.print(e.getMessage());
+            return inputManualLottoNumber();
         }
     }
 
@@ -70,7 +77,7 @@ public class LottoService {
             ResultView.print(InputMessage.BONUS.getMessage());
             String input = InputView.readLine();
             LottoNumber bonus = LottoNumber.valueOf(input);
-            return new WinningLotto(winning, bonus);
+            return WinningLotto.valueOf(winning, bonus);
         } catch (Exception e) {
             ResultView.print(e.getMessage());
             return inputBonusNumber(winning);
@@ -79,7 +86,20 @@ public class LottoService {
 
 
     private Lottos getLottos(PurchasePrice price) {
-        return price.buyLottery();
+        int manualCount = this.inputManualLottoCount(price);
+        List<Lotto> lottoList = this.createManualLottoList(manualCount);
+        lottoList.addAll(price.buyAutomaticLottoExceptManualCnt(manualCount));
+        ResultView.printPurchaseResult(manualCount, price.calculateQuantity() - manualCount);
+        return new Lottos(lottoList);
+    }
+
+    private List<Lotto> createManualLottoList(int manualCount) {
+        List<Lotto> lottoList = new ArrayList<>();
+        ResultView.print(InputMessage.MANUAL_NUMBER.getMessage());
+        for (int i = 0; i < manualCount; i++) {
+            lottoList.add(this.inputManualLottoNumber());
+        }
+        return lottoList;
     }
 
     private Lotto inputWinningNumber() {

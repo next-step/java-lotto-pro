@@ -1,8 +1,5 @@
 package lotto;
 
-/**
- *
- * */
 import lotto.service.LottoService;
 
 /**

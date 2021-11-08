@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.BDDMockito;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -93,5 +94,21 @@ public class PurchasePriceTest {
         //THEN
         assertThat(purchasePrice.isAbleToBuy(possibleToBuyCount)).isTrue();
         assertThat(purchasePrice.isAbleToBuy(impossibleToBuyCount)).isFalse();
+    }
+
+    @Test
+    @DisplayName("자동 구매 테스트")
+    public void T7_() {
+        //GIVEN
+        int manualCnt = 3;
+        int autoCnt = 2;
+        //WHEN
+        PurchasePrice price = PurchasePrice.valueOf(5000);
+        //THEN
+        assertThat(price.isMatchCount(manualCnt + autoCnt)).isTrue();
+        //WHEN
+        List<Lotto> automaticLottoList = price.buyAutomaticLottoExceptManualCnt(manualCnt);
+        //THEN
+        assertThat(automaticLottoList.size()).isEqualTo(autoCnt);
     }
 }

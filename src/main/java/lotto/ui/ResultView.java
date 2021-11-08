@@ -22,8 +22,8 @@ public class ResultView {
         System.out.println(msg);
     }
 
-    public static void printPurchaseResult(PurchasePrice price) {
-        System.out.println(price.calculateQuantity() + Constants.MSG_OUTPUT_PURCHASE_RESULT_SUFFIX);
+    public static void printPurchaseResult(int manual, int automatic) {
+        System.out.printf(Constants.MSG_OUTPUT_PURCHASE_RESULT, manual, automatic);
     }
 
     public static void printPurchasedLotto(Lottos lottos) {
@@ -33,12 +33,12 @@ public class ResultView {
     public static void printLottoResult(Ranks ranks) {
         System.out.println(Constants.MSG_OUTPUT_LOTTO_RESULT);
         System.out.println(Constants.MSG_OUTPUT_LINE_SEPARATOR);
-        System.out.println(ranks.getPlaceMessage(Rank.FIFTH));
-        System.out.println(ranks.getPlaceMessage(Rank.FOURTH));
-        System.out.println(ranks.getPlaceMessage(Rank.THIRD));
-        System.out.println(ranks.getPlaceMessage(Rank.SECOND));
-        System.out.println(ranks.getPlaceMessage(Rank.FIRST));
-        System.out.println(Constants.MSG_OUTPUT_YIELD_PREFIX + ranks.earningRatio() + Constants.MSG_OUTPUT_YIELD_SUFFIX);
+        System.out.printf(Constants.MSG_OUTPUT_PLACE, Rank.FIFTH.getCountOfMatch(), Rank.FIFTH.getWinningMoney(), ranks.countPlace(Rank.FIFTH));
+        System.out.printf(Constants.MSG_OUTPUT_PLACE, Rank.FOURTH.getCountOfMatch(), Rank.FOURTH.getWinningMoney(), ranks.countPlace(Rank.FOURTH));
+        System.out.printf(Constants.MSG_OUTPUT_PLACE, Rank.THIRD.getCountOfMatch(), Rank.THIRD.getWinningMoney(), ranks.countPlace(Rank.THIRD));
+        System.out.printf(Constants.MSG_OUTPUT_PLACE_WITH_BONUS, Rank.SECOND.getCountOfMatch(), Rank.SECOND.getWinningMoney(), ranks.countPlace(Rank.SECOND));
+        System.out.printf(Constants.MSG_OUTPUT_PLACE, Rank.FIRST.getCountOfMatch(), Rank.FIRST.getWinningMoney(), ranks.countPlace(Rank.FIRST));
+        System.out.printf(Constants.MSG_OUTPUT_YIELD, ranks.earningRatio());
     }
 
 }

@@ -24,14 +24,14 @@ public class StringAddCalculator {
     private static final int NULL_OR_EMPTY = 0; //NULL 또는 공백의 경우 리턴 처리값
 
     public static int splitAndSum(String text) {
-        if(text == null || text.isEmpty()) return NULL_OR_EMPTY;
+        if (text == null || text.isEmpty()) return NULL_OR_EMPTY;
         if (text.length() == 1) return parseInt(text);
         return splitText(text);
     }
 
     //0~9 숫자가 아닐 경우 예외를 발생할 수 있습니다.
     private static int parseInt(String text) {
-        if(!text.matches(REG_EXP_NUMBER)) throw new RuntimeException("0~9 사이의 숫자만 입력이 가능합니다.");
+        if (!text.matches(REG_EXP_NUMBER)) throw new RuntimeException("0~9 사이의 숫자만 입력이 가능합니다.");
         return Integer.parseInt(text);
     }
 

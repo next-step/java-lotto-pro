@@ -53,18 +53,21 @@ public class RankTest {
         //THEN
         assertThat(Rank.valueOf(5, false)).isEqualTo(Rank.THIRD);
     }
+
     @Test
     @DisplayName("4등")
     public void T6_4등() {
         //THEN
         assertThat(Rank.valueOf(4, false)).isEqualTo(Rank.FOURTH);
     }
+
     @Test
     @DisplayName("5등")
     public void T7_5등() {
         //THEN
         assertThat(Rank.valueOf(3, false)).isEqualTo(Rank.FIFTH);
     }
+
     @Test
     @DisplayName("꽝")
     public void T8_꽝() {

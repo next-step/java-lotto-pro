@@ -47,7 +47,7 @@ public class SetTest {
     @Order(2)
     @DisplayName("요구사항2_contains_메소드로_값의_포함여부를_확인한다")
     @ParameterizedTest
-    @ValueSource(ints = {3,2,1})
+    @ValueSource(ints = {3, 2, 1})
     public void setContainsTest(int value) {
         //THEN
         assertThat(this.numberSet.contains(value)).isTrue();
@@ -58,7 +58,7 @@ public class SetTest {
     @Order(3)
     @DisplayName("요구사항3_parameterizedTest2_실패_테스트_추가하기")
     @ParameterizedTest
-    @CsvSource(value = {"1:true","2:true","3:true","4:false","5:false"}, delimiter = ':')
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
     public void setContainsTest2(int input, boolean result) {
         //THEN
         assertThat(this.numberSet.contains(input)).isEqualTo(result);

@@ -5,6 +5,8 @@ import lotto.common.exceptions.CustomEmptyException;
 import lotto.common.utils.StringUtil;
 import lotto.ui.ResultView;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -67,11 +69,12 @@ public class PurchasePrice {
         return Objects.hash(purchasePrice);
     }
 
-    public Lottos buyLottery() {
-        return new Lottos(IntStream.range(0, this.calculateQuantity()).mapToObj(i -> LottoMaker.createLotto()).collect(Collectors.toList()));
+    public List<Lotto> buyAutomaticLottoExceptManualCnt(int manualCnt) {
+        return IntStream.range(0, this.calculateQuantity() - manualCnt).mapToObj(i -> LottoMaker.createLotto()).collect(Collectors.toList());
     }
 
     public boolean isAbleToBuy(int wantToBuyCount) {
         return this.calculateQuantity() >= wantToBuyCount;
     }
+
 }

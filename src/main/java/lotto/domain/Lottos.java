@@ -32,7 +32,7 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottoList, PurchasePrice price) {
         List<Lotto> validateLottoList = validate(lottoList);
-        if(!price.isMatchCount(validateLottoList.size())) throw new IllegalArgumentException("구매 수량이 일치하지 않습니다.");
+        if (!price.isMatchCount(validateLottoList.size())) throw new IllegalArgumentException("구매 수량이 일치하지 않습니다.");
         this.lottoList = new ArrayList<>(validateLottoList);
     }
 
