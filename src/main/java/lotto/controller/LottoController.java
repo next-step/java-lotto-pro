@@ -30,10 +30,10 @@ public final class LottoController {
     public LottoTicket generateLottoTicket(BoughtLotto boughtLotto) {
         printManualLottoNumber();
         try {
-            List<LottoNumbers> lottoNumberList = new ArrayList<>();
-            lottoNumberList.addAll(generateLottoNumbers(generateManualLottoNumbers(boughtLotto)));
-            lottoNumberList.addAll(generateLottoNumbers(generateAutoLottoNumbers(boughtLotto)));
-            return new LottoTicket(lottoNumberList);
+            return LottoTicket.of(
+                    generateLottoNumbers(generateManualLottoNumbers(boughtLotto))
+                    , generateLottoNumbers(generateAutoLottoNumbers(boughtLotto))
+            );
         } catch (IllegalArgumentException e) {
             printError(e.getMessage());
             return generateLottoTicket(boughtLotto);

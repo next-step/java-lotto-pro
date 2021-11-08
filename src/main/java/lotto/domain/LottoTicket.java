@@ -12,6 +12,13 @@ public class LottoTicket {
         this.ticket = ticket;
     }
 
+    public static LottoTicket of(final List<LottoNumbers> manualLottoNumbers, final List<LottoNumbers> autoLottoNumbers){
+        List<LottoNumbers> lottoNumberList = new ArrayList<>();
+        lottoNumberList.addAll(manualLottoNumbers);
+        lottoNumberList.addAll(autoLottoNumbers);
+        return new LottoTicket(lottoNumberList);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
