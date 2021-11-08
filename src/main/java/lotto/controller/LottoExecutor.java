@@ -1,6 +1,5 @@
 package lotto.controller;
 
-
 import lotto.domain.BoughtLotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
@@ -32,12 +31,13 @@ public class LottoExecutor {
 
     private BoughtLotto enterPayment() {
         BoughtLotto boughtLotto = lottoController.buyLotto();
-        printBoughtLotto(boughtLotto.getBoughtCount());
+        printLine();
         return boughtLotto;
     }
 
     private LottoTicket generateLotto(BoughtLotto boughtLotto) {
         LottoTicket lottoTicket = lottoController.generateLottoTicket(boughtLotto);
+        printBoughtLottoCount(boughtLotto);
         printLottoTicket(lottoTicket);
         printLine();
         return lottoTicket;
