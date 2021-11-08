@@ -7,3 +7,9 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+
+## 예외 사항 정리
+* 구입 금액이 1000단위가 아니라면?
+* 구앱 금액을 입력할 때, 숫자를 입력하지 않는다면?

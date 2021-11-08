@@ -14,4 +14,5 @@ public class LottoDisplayMessage {
     public static final String WINNING_STAT_RESULT_POSTFIX_MESSAGE = "입니다.";
     public static final String PROFIT_STAT_MESSAGE = "(기준이 1이기 때문에 결과적으로 이익라는 의미임)";
     public static final String LOSS_STAT_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    public static final String LOTTO_NUMBER_INPUT_SPLIT = ",";
 }
