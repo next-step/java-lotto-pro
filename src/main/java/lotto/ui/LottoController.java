@@ -10,8 +10,9 @@ public class LottoController {
     public void startGame() {
         scanner = new Scanner(System.in);
         int buyPrice = inputBuyPrice();
-        BuyAmount buyAmount = new BuyAmount(buyPrice);
-        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(buyAmount);
+        int manualBuyAmount = getManualBuyAmount();
+        BuyAmount buyAmount = new BuyAmount(buyPrice, manualBuyAmount);
+        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(buyAmount, getManualLottoNumbers(buyAmount));
 
         showBuyStats(buyAmount, lottoNumbersGroup);
 
