@@ -1,6 +1,6 @@
 package lotto2;
 
-import lotto2.domain.LottoStatics;
+import lotto2.domain.LottoStaticsResult;
 import lotto2.domain.LottoTicketGenerator;
 import lotto2.domain.LottoTickets;
 import lotto2.domain.Money;
@@ -48,10 +48,11 @@ public class LottoGameController {
 			winningReqDto.getWinningNumbers(),
 			winningReqDto.getBonusNumber());
 		Money purchaseMoney = Money.of(dto.getPurchaseMoney());
-		LottoStatics lottoStatics = LottoStatics.of(dto.getTotalTickets()
+
+		LottoStaticsResult lottoStaticsResult = LottoStaticsResult.calculate(dto.getTotalTickets()
 			, winningLotto, purchaseMoney);
 
-		ResultView.showPrize(lottoStatics.getRankCount(), lottoStatics.getProfit());
+		ResultView.showPrize(lottoStaticsResult.getRankCount(), lottoStaticsResult.getProfit());
 	}
 
 	private static PositiveNumber getAutoLottoCount(Money purchaseMoney, int manualTicketSize) {

@@ -2,12 +2,12 @@ package lotto2.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import lotto2.domain.LottoNumber;
 import lotto2.domain.LottoTicket;
 import lotto2.domain.LottoTickets;
 import lotto2.domain.Rank;
+import lotto2.domain.RankCounts;
 
 public class ResultView {
 
@@ -31,7 +31,7 @@ public class ResultView {
 		return String.join(",", elements);
 	}
 
-	public static void showPrize(Map<String, Integer> rankCounts, double profit) {
+	public static void showPrize(RankCounts rankCounts, double profit) {
 		String result = "\n당첨통계\n";
 		result += "---------\n";
 		result += "3개 일치 (5000원)- " + rankCounts.get(Rank.FIFTH.name()) + "개\n";
