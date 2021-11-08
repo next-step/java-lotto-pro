@@ -23,7 +23,7 @@ public class LottoGenerator {
         }
     }
 
-    public List<LottoTicket> createLottoTickets(PurchaseCount purchaseCount) {
+    public LottoTickets createLottoTickets(PurchaseCount purchaseCount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         while (purchaseCount.isGreaterThanZero()) {
             Collections.shuffle(numbers);
@@ -32,6 +32,6 @@ public class LottoGenerator {
             lottoTickets.add(new LottoTicket(numbers));
             purchaseCount = purchaseCount.minus(MINUS_PURCHASE_COUNT);
         }
-        return lottoTickets;
+        return new LottoTickets(lottoTickets);
     }
 }
