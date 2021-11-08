@@ -3,7 +3,12 @@ package lotto.domain;
 import lotto.exception.DuplicateNumberException;
 import lotto.exception.LottoSizeException;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringJoiner;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static lotto.common.LottoConst.LOTTO_SIZE;
