@@ -32,15 +32,20 @@ public class Lotto {
     return this.numbers.contains(bonusNumber);
   }
 
+  public static Lotto gererate() {
+    return Lotto.valueOf(LottoNumbers.generate());
+  }
+
   @Override
   public boolean equals(Object o) {
-      if (o == this)
-          return true;
-      if (!(o instanceof Lotto)) {
-          return false;
-      }
-      Lotto lotto = (Lotto) o;
-      return Objects.equals(numbers, lotto.numbers);
+    if (o == this) {
+      return true;
+    }
+    if (!(o instanceof Lotto)) {
+      return false;
+    }
+    Lotto lotto = (Lotto) o;
+    return Objects.equals(numbers, lotto.numbers);
   }
 
   @Override

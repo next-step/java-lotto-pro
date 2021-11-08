@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -11,10 +12,6 @@ import lotto.infrastructure.util.RandomLottoNumber;
 public class LottoNumbers {
   private static final int VALID_LOTTONUMBER_HAS_COUNT = 6;
   private List<LottoNumber> numbers;
-
-  public LottoNumbers() {
-    this.numbers = new ArrayList<>();
-  }
 
   private LottoNumbers(List<LottoNumber> numbers) {
     checkLottoNumberInvalid(numbers);
@@ -32,6 +29,10 @@ public class LottoNumbers {
     return new LottoNumbers(numbers);
   }
 
+  public static LottoNumbers generate() {
+    return LottoNumbers.valueOf(RandomLottoNumber.generate());
+  }
+
   private void checkLottoNumberInvalid(List<LottoNumber> numbers) {
     checkLottoNumberCount(numbers);
     checkDuplicateLottoNumber(numbers);
@@ -47,10 +48,6 @@ public class LottoNumbers {
     if (numbers.size() != new HashSet<>(numbers).size()) {
       throw new IllegalArgumentException("로또 번호가 중복된 값이 존재합니다.");
     }
-  }
-
-  public void generate() {
-    this.numbers = RandomLottoNumber.generate();
   }
 
   public boolean contains(LottoNumber lottoNumber) {
@@ -71,10 +68,11 @@ public class LottoNumbers {
 
   @Override
   public boolean equals(Object o) {
-    if (o == this)
-        return true;
+    if (o == this)  {
+      return true;
+    }
     if (!(o instanceof LottoNumbers)) {
-        return false;
+      return false;
     }
     LottoNumbers lottoNumbers = (LottoNumbers) o;
 
