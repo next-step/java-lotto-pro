@@ -6,10 +6,10 @@ import java.util.List;
 public class Lotto {
     private static final Money SELLING_PRICE = new Money(1000);
 
-    private final LottoNumbers numbers;
+    private final LottoTicket ticket;
 
-    private Lotto(LottoNumbers numbers) {
-        this.numbers = numbers;
+    private Lotto(LottoTicket ticket) {
+        this.ticket = ticket;
     }
 
     public static int getNumberOfLottosPurchasableWith(Money money) {
@@ -24,16 +24,16 @@ public class Lotto {
         for (int number : numbers) {
             list.add(new LottoNumber(number));
         }
-        return new Lotto(new LottoNumbers(list));
+        return new Lotto(new LottoTicket(list));
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return ticket.toString();
     }
 
-    public Winning calculateWinning(LottoNumbers winNumbers) {
-        final int count = numbers.calculateNumberOfMatch(winNumbers);
+    public Winning calculateWinning(LottoTicket winTicket) {
+        final int count = ticket.calculateNumberOfMatch(winTicket);
         return Winning.ofMatchCount(count);
     }
 

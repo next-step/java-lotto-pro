@@ -18,8 +18,8 @@ public class LottoController {
     public void run() {
         final int buyMoney = getBuyMoney();
         final Lottos lottos = generateLottos(buyMoney);
-        final LottoNumbers winNumbers = getWinLottoNumbers();
-        printResult(lottos, winNumbers);
+        final LottoTicket winTicket = getWinLottoTicket();
+        printResult(lottos, winTicket);
     }
 
     private int getBuyMoney() {
@@ -34,16 +34,16 @@ public class LottoController {
         return lottos;
     }
 
-    private LottoNumbers getWinLottoNumbers() {
+    private LottoTicket getWinLottoTicket() {
         inputView.showEnterWinNumbersMessage();
         final List<Integer> inputNumbers = inputView.getWinNumbers();
-        return LottoNumbers.of(inputNumbers);
+        return LottoTicket.of(inputNumbers);
     }
 
-    private void printResult(Lottos lottos, LottoNumbers winNumbers) {
-        final LottoResult lottoResult = lottos.calculateWinning(winNumbers);
-        final double roi = lottoResult.getReturnOnInvestment(lottos.getSellingPrice());
-        resultView.showWinningStatistics(lottoResult);
+    private void printResult(Lottos lottos, LottoTicket winTicket) {
+        final LottoResult result = lottos.calculateWinning(winTicket);
+        final double roi = result.getReturnOnInvestment(lottos.getSellingPrice());
+        resultView.showWinningStatistics(result);
         resultView.showReturnOnInvestment(roi);
     }
 }

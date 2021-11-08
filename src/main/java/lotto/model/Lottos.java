@@ -7,7 +7,7 @@ import java.util.List;
 
 import static lotto.model.LottoNumber.MAX_VALUE;
 import static lotto.model.LottoNumber.MIN_VALUE;
-import static lotto.model.LottoNumbers.LOTTO_SIZE;
+import static lotto.model.LottoTicket.LOTTO_SIZE;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -36,10 +36,10 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoResult calculateWinning(LottoNumbers winNumbers) {
+    public LottoResult calculateWinning(LottoTicket winTicket) {
         final List<Winning> winnings = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            winnings.add(lotto.calculateWinning(winNumbers));
+            winnings.add(lotto.calculateWinning(winTicket));
         }
         return new LottoResult(winnings);
     }

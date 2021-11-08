@@ -3,22 +3,22 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoNumbers {
+public class LottoTicket {
     public static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> numbers;
 
-    public LottoNumbers(List<LottoNumber> numbers) {
+    public LottoTicket(List<LottoNumber> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
 
-    public static LottoNumbers of(List<Integer> numbers) {
+    public static LottoTicket of(List<Integer> numbers) {
         final List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (Integer number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
-        return new LottoNumbers(lottoNumbers);
+        return new LottoTicket(lottoNumbers);
     }
 
     private void validate(List<LottoNumber> numbers) {
@@ -32,9 +32,9 @@ public class LottoNumbers {
         return numbers.toString();
     }
 
-    public int calculateNumberOfMatch(LottoNumbers winNumbers) {
+    public int calculateNumberOfMatch(LottoTicket winTicket) {
         int result = 0;
-        for (LottoNumber winNumber : winNumbers.numbers) {
+        for (LottoNumber winNumber : winTicket.numbers) {
             result += countIfMatch(winNumber);
         }
         return result;
