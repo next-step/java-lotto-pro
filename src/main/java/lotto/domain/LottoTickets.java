@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
-    public static final String SPLIT_DELIMITER = ",";
-
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
@@ -22,14 +20,6 @@ public class LottoTickets {
             lottoTickets.add(LottoTicket.generateRandomLottoTicket());
         }
         return new LottoTickets(lottoTickets);
-    }
-
-    public static LottoTicket fromString(String inputWinningNumber) {
-        return new LottoTicket(Arrays.stream(inputWinningNumber
-                .split(SPLIT_DELIMITER))
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList()));
     }
 
     public int count() {

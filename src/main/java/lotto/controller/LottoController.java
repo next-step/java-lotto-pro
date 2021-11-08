@@ -5,6 +5,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.service.LottoService;
+import lotto.utility.ParseUtility;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -27,7 +28,7 @@ public class LottoController {
                 .toDTO());
 
         // 당첨번호 입력
-        LottoTicket winningLottoTicket = LottoTickets.fromString(inputView
+        LottoTicket winningLottoTicket = ParseUtility.StringToLottoTicket(inputView
                 .inputWinningNumber());
 
         // 결과 출력
