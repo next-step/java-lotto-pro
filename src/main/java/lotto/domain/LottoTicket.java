@@ -14,7 +14,7 @@ public class LottoTicket {
     public static final int LOTTO_NUMBER_SIZE = 6;
     public static final int FROM_INDEX = 0;
     public static final int START_INCLUSIVE = 1;
-    public static final int END_EXCLUSIVE = 46;
+    public static final int END_INCLUSIVE = 45;
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<Integer> lottoNumbers) {
@@ -24,7 +24,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket generateRandomLottoTicket() {
-        List<Integer> lottoNumbers = IntStream.range(START_INCLUSIVE, END_EXCLUSIVE)
+        List<Integer> lottoNumbers = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
                 .boxed()
                 .collect(Collectors
                         .toList());
