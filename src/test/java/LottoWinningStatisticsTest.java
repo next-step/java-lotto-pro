@@ -16,12 +16,12 @@ public class LottoWinningStatisticsTest {
 			.withBonus("45")
 			.build();
 		final List<Lotto> lottos = Arrays.asList(
-			Lotto.from("1,2,3,4,5,6"),
-			Lotto.from(String.format("1,2,3,4,5,%s", winningLotto.getBonus())),
-			Lotto.from("1,2,3,4,5,10"),
-			Lotto.from("1,2,3,4,10,11"),
-			Lotto.from("1,2,3,10,11,12"),
-			Lotto.from("10,11,12,13,14,15")
+			LottoFactory.from("1,2,3,4,5,6"),
+			LottoFactory.from(String.format("1,2,3,4,5,%s", winningLotto.getBonus())),
+			LottoFactory.from("1,2,3,4,5,10"),
+			LottoFactory.from("1,2,3,4,10,11"),
+			LottoFactory.from("1,2,3,10,11,12"),
+			LottoFactory.from("10,11,12,13,14,15")
 		);
 
 		final LottoWinningStatistics statistics = LottoWinningStatistics.of(winningLotto, lottos);
@@ -37,9 +37,9 @@ public class LottoWinningStatisticsTest {
 			.build();
 		final List<Lotto> lottos = Stream.iterate(1, num -> num + 1)
 			.limit(4)
-			.map(num -> Lotto.from("10,11,12,13,14,15"))
+			.map(num -> LottoFactory.from("10,11,12,13,14,15"))
 			.collect(Collectors.toList());
-		lottos.add(Lotto.from("1,2,3,10,11,12"));
+		lottos.add(LottoFactory.from("1,2,3,10,11,12"));
 
 		final LottoWinningStatistics statistics = LottoWinningStatistics.of(winningLotto, lottos);
 		assertThat(statistics.earningRate()).isEqualTo(1.d);

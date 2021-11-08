@@ -8,14 +8,14 @@ public class LottoTest {
 
 	@Test
 	void from_sort() {
-		assertThat(Lotto.from("6,5,4,3,2,1").toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+		assertThat(LottoFactory.from("6,5,4,3,2,1").toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {"1,2", "1,2,3,4,5,6,7", "1,1,2,3,4,5"})
 	void from_tooShort_tooLong_duplicated(String input) {
 		assertThatExceptionOfType(LottoFormatException.class)
-			.isThrownBy(() -> Lotto.from(input))
+			.isThrownBy(() -> LottoFactory.from(input))
 			.withMessage(LottoFormatException.ERROR_MESSAGE);
 	}
 
@@ -26,7 +26,7 @@ public class LottoTest {
 			.withLottoNumbers("1,2,3,4,5,6")
 			.withBonus(bonus)
 			.build();
-		assertThat(Lotto.from("1,2,3,4,5,6").hasBonus(winningLotto)).isFalse();
-		assertThat(Lotto.from(String.format("1,2,3,4,5,%s", bonus)).hasBonus(winningLotto)).isTrue();
+		assertThat(LottoFactory.from("1,2,3,4,5,6").hasBonus(winningLotto)).isFalse();
+		assertThat(LottoFactory.from(String.format("1,2,3,4,5,%s", bonus)).hasBonus(winningLotto)).isTrue();
 	}
 }

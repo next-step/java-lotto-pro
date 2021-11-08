@@ -13,7 +13,7 @@ public class LottoStore {
 		final int numOfLottos = paidKRW / Lotto.PRICE_KRW;
 		return Stream.iterate(1, num -> num + 1)
 			.limit(numOfLottos)
-			.map(num -> Lotto.of())
+			.map(num -> LottoFactory.of())
 			.collect(Collectors.toList());
 	}
 

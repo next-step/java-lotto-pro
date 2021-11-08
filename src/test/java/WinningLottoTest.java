@@ -27,6 +27,6 @@ class WinningLottoTest {
 			.withLottoNumbers("1,2,3,4,5,6")
 			.withBonus("45")
 			.build();
-		assertThat(winningLotto.countMatching(Lotto.from(lotto))).isEqualTo(numOfMatching);
+		assertThat(winningLotto.countMatching(LottoFactory.from(lotto))).isEqualTo(numOfMatching);
 	}
 }
