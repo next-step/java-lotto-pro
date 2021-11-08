@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumberChoiceRandom implements LottoNumberChoiceStrategy {
-
 	public static final int MIN_NUMBER = 1;
 	public static final int MAX_NUMBER = 45;
 	public static final int NUMBERS_COUNT = 6;
