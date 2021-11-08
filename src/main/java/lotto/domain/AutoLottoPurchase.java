@@ -17,15 +17,10 @@ public final class AutoLottoPurchase {
 
     public List<Integer> generateLottoNumbers() {
         Collections.shuffle(lottoNumber);
-        List<Integer> pickedNumber = new ArrayList<>();
+        List<Integer> lottoNumberSubList = new ArrayList<>(lottoNumber.subList(0, 6));
+        Collections.sort(lottoNumberSubList);
 
-        for (int i = 0; i < Constant.LOTTO_LIMIT_SIZE; i++) {
-            pickedNumber.add(lottoNumber.get(i));
-        }
-
-        Collections.sort(pickedNumber);
-
-        return pickedNumber;
+        return lottoNumberSubList;
     }
 
 }
