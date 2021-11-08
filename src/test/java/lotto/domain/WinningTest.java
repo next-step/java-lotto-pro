@@ -56,14 +56,6 @@ class WinningTest {
         assertThat(winningResult.winnerPerRank(Rank.FIRST_PLACE)).isEqualTo(1);
     }
 
-    @DisplayName("번호가 3개 이상 일치해야 당첨")
-    @ParameterizedTest
-    @CsvSource(value = {"1:false", "2:false", "3:true", "4:true", "5:true", "6:true"}, delimiter = ':')
-    void isPrizeTest(int winningNumberMatchCount, boolean isPrize) {
-        Rank rank = Rank.of(winningNumberMatchCount);
-        assertThat(rank.isPrize()).isEqualTo(isPrize);
-    }
-
     @DisplayName("수익률 계산")
     @ParameterizedTest
     @MethodSource("profitRateParametersProvider")
