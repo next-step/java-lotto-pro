@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 import static lotto.common.Constants.GET_NUMBER_COUNT;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("결과확인 기능 테스트")
 public class CheckerTests {
@@ -25,10 +26,12 @@ public class CheckerTests {
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
         Checker checker = new Checker(games, winningNumbers);
 
-        assertThat(checker.getResults())
-                .isInstanceOf(LinkedHashMap.class)
-                .isNotEmpty();
-        assertThat(checker.getResults().size()).isEqualTo(GET_NUMBER_COUNT + 1);
+        assertAll(
+                () -> assertThat(checker.getResults())
+                        .isInstanceOf(LinkedHashMap.class)
+                        .isNotEmpty(),
+                () -> assertThat(checker.getResults().size()).isEqualTo(GET_NUMBER_COUNT + 1)
+        );
     }
 
 }

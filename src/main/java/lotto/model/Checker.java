@@ -28,7 +28,10 @@ public class Checker {
 
     private int matchCount(Game game, WinningNumbers winningNumbers) {
         return (int) game.getNumbers().stream()
-            .filter(number -> winningNumbers.getValues().stream().anyMatch(Predicate.isEqual(number)))
+            .filter(number -> winningNumbers.getValues()
+                    .stream()
+                    .map(winningNumber -> winningNumber.getValue())
+                    .anyMatch(Predicate.isEqual(number)))
             .count();
     }
 

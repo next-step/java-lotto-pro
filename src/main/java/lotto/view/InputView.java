@@ -8,6 +8,10 @@ import lotto.view.strategy.InputWinNumbers;
 
 public class InputView {
 
+    public InputView() {
+        throw new AssertionError();
+    }
+
     /**
      * 로또 구매금액을 입력합니다.
      *
@@ -34,7 +38,7 @@ public class InputView {
             Input input = new InputWinNumbers();
             String value = input.getValue();
             return new WinningNumbers(value);
-        } catch (InvalidInputException e) {
+        } catch (InvalidInputException | NumberFormatException e) {
             System.out.println(e.getMessage());
             return inputWinningNumbers();
         }
