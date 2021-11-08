@@ -8,7 +8,7 @@ package lotto.ui;
  * description :
  */
 public enum InputType {
-    PURCHASE, NUMBER;
+    PURCHASE, NUMBER, BONUS;
 
     public boolean isPurchase() {
         return this == PURCHASE;
@@ -16,6 +16,10 @@ public enum InputType {
 
     public boolean isNumber() {
         return this == NUMBER;
+    }
+
+    public boolean isBonus() {
+        return this == BONUS;
     }
 }
 

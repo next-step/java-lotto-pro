@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import lotto.common.Constants;
+
 /**
  * packageName : lotto.ui
  * fileName : OutputView
@@ -8,8 +10,10 @@ package lotto.ui;
  * description :
  */
 public class ResultView {
+    private ResultView() {}
 
     public static void print(String msg) {
         System.out.println(msg);
     }
+
 }
