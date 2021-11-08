@@ -22,7 +22,7 @@ public class Lotto {
 
 	public Lotto() {
 		this.lottoNumbers = new ArrayList<>();
-		setLottoNumber(this.lottoNumbers);
+		setLottoNumber();
 		Collections.sort(this.lottoNumbers);
 		MessageUtil.printMessage(lottoNumbers.toString());
 	}
@@ -31,12 +31,13 @@ public class Lotto {
 	 * 로또 번호 6자리 세팅하기
 	 * @return
 	 */
-	private void setLottoNumber(List<Integer> lottoNumberList) {
-		int randomNumber = Lottos.getNumberBetweenOneAndFortyFive();
-		if(lottoNumberList.size() < 6 && !lottoNumberList.contains(randomNumber)) {
-			lottoNumberList.add(randomNumber);
-			setLottoNumber(lottoNumberList);
+	private void setLottoNumber() {
+		List<Integer> allLottoNumbers = new ArrayList<Integer>();
+		for(int i=1; i<=45; i++) {
+			allLottoNumbers.add(i);
 		}
+		Collections.shuffle(allLottoNumbers);
+		this.lottoNumbers = allLottoNumbers.subList(0,6);
 	}
 
 	/**
