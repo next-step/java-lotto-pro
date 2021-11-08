@@ -13,6 +13,17 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoBallsTest {
 
+    @DisplayName("서로 다른 6개의 숫자로만 로또볼 생성이 가능하다")
+    @Test
+    void createLottoBallsByString() {
+        ThrowableAssert.ThrowingCallable throwingCallable = () -> new LottoBalls("1,1,1,1,1,1");
+
+        assertThatExceptionOfType(LottoBallCountException.class)
+                .isThrownBy(throwingCallable)
+                .withMessageContaining("로또 공 개수가 6개가 아닙니다.");
+
+    }
+
     @DisplayName("6개 미만 공이 주어지면 예외 발생")
     @Test
     void givenLessThanSixBallThenThrowException() {

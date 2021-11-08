@@ -1,11 +1,8 @@
 package lotto.domain;
 
 import lotto.exception.LottoBallCountException;
-import lotto.exception.LottoBallNumberConvertException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoBalls {
     private List<LottoBall> lottoBalls;
@@ -28,10 +25,15 @@ public class LottoBalls {
 
     private String[] splitNumberString(String numbersString) {
         String[] numbersSplitted = numbersString.split(",");
-        if (numbersSplitted.length != LottoBallRule.LOTTO_BALLS_SIZE.getNumber()) {
+        if (!isNumberStringSizeSix(numbersSplitted)) {
             throw new LottoBallCountException("로또 공 개수가 6개가 아닙니다.");
         }
         return numbersSplitted;
+    }
+
+    private boolean isNumberStringSizeSix(String[] numbersSplitted) {
+        Set<String> numberSet = new HashSet<String>(Arrays.asList(numbersSplitted));
+        return numberSet.size() == LottoBallRule.LOTTO_BALLS_SIZE.getNumber();
     }
 
     private List<LottoBall> createLottoBallList(String[] numbersSplitted) {
