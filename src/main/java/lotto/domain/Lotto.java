@@ -10,6 +10,8 @@ import java.util.Set;
 public class Lotto {
 
     public static final int MAX_COUNT_OF_ONE_LINE = 6;
+    public static final String ERROR_MESSAGE_NUMBER_COUNT = "반드시 로또 한게임당 번호는 %d개 이어야 합니다.";
+    public static final String ERROR_MESSAGE_DUPLICATED_NUMBER = "중복 번호가 존재할 수 없습니다.";
 
     private final List<LottoNumber> lineOfLottoNumber;
 
@@ -44,7 +46,7 @@ public class Lotto {
 
     private void validateLottoNumberCount(int size) {
         if (size != MAX_COUNT_OF_ONE_LINE) {
-            throw new IllegalArgumentException("반드시 로또 한게임당 번호는 " + MAX_COUNT_OF_ONE_LINE + "개 이어야 합니다.");
+            throw new IllegalArgumentException(String.format(ERROR_MESSAGE_NUMBER_COUNT, MAX_COUNT_OF_ONE_LINE));
         }
     }
 
@@ -52,7 +54,7 @@ public class Lotto {
         Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
 
         if (lottoNumberSet.size() != MAX_COUNT_OF_ONE_LINE) {
-            throw new IllegalArgumentException("반드시 로또 한게임당 번호는 " + MAX_COUNT_OF_ONE_LINE + "개 이어야 합니다.");
+            throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED_NUMBER);
         }
     }
 
