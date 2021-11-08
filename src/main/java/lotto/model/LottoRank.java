@@ -30,22 +30,37 @@ public enum LottoRank {
 	}
 
 	public static LottoRank getRankCode(int containsCount, int bonusCount) {
+		if (validSecondRank(containsCount)) {
+			return getSecondRankCode(containsCount, bonusCount);
+		}
+
 		return Arrays.stream(LottoRank.values())
-			.filter(rankCode -> rankCode.containsCount == containsCount && rankCode.bonusCount == bonusCount)
+			.filter(rankCode -> rankCode.containsCount == containsCount)
 			.findAny()
 			.orElse(NOTHING);
 	}
 
-	public static int getRankMoney(LottoRank lottoRank, int count) {
-		return lottoRank.money * count;
+	public static LottoRank getSecondRankCode(int containsCount, int bonusCount) {
+		return Arrays.stream(LottoRank.values())
+			.filter(rankCode -> rankCode.containsCount == containsCount && bonusCount == SECOND.bonusCount)
+			.findAny()
+			.orElse(THIRD);
+	}
+
+	public static boolean validSecondRank(int containsCount) {
+		return containsCount == LottoRank.SECOND.containsCount;
 	}
 
 	public static Map<LottoRank, Integer> generateRankCodeMap() {
 		Map<LottoRank, Integer> rankCodeMap = new HashMap<>();
-		for (LottoRank lottoRank : LottoRank.values()) {
-			rankCodeMap.put(lottoRank, NOTHING.containsCount);
+		for (LottoRank rankCode : LottoRank.values()) {
+			rankCodeMap.put(rankCode, NOTHING.containsCount);
 		}
 		return rankCodeMap;
+	}
+
+	public static int getRankMoney(LottoRank lottoRank, int count) {
+		return lottoRank.money * count;
 	}
 
 	public static int getMoney(LottoRank lottoRank) {
