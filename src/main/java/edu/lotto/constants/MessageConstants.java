@@ -10,12 +10,8 @@ public class MessageConstants {
 	public static final String LATEST_WINNING_NUMBERS_ERROR_MESSAGE = "지난 주 당첨 번호는 1~45 사이의 숫자 6자리입니다.";
 	public static final String INPUT_SECON_WINNING_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 	public static final String LOTTO_STATISTICS_MESSAGE = "당첨 통계";
-	public static final String THREE_MATCHES_MESSAGE = "3개 일치 (5000원)- ";
-	public static final String FOUR_MATCHES_MESSAGE = "4개 일치 (50000원)- ";
-	public static final String FIVE_MATCHES_MESSAGE = "5개 일치 (1500000원)- ";
-	public static final String SIX_MATCHES_MESSAGE = "6개 일치 (2000000000원)- ";
-	public static final String LOTTO_MATCHES_MESSAGE = "%d개 일치 (%d원)- $d개";
-	public static final String LOTTO_SECOND_RANK_MESSAGE = "%d개 일치 보너스볼 일치(%d원)- $d개";
+	public static final String LOTTO_MATCHES_MESSAGE = "%d개 일치 (%d원)- %d개";
+	public static final String LOTTO_SECOND_RANK_MESSAGE = "%d개 일치 보너스볼 일치(%d원)- %d개";
 	public static final String LOTTO_PROFIT_RATIO_MESSAGE = "총 수익률은 %s입니다.";
 
 }

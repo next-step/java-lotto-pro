@@ -2,11 +2,13 @@ package edu.lotto.model;
 
 import edu.lotto.constants.MessageConstants;
 import edu.lotto.constants.PatternConstants;
+import edu.lotto.constants.Rank;
 import edu.lotto.utils.MessageUtil;
 import edu.lotto.utils.NumberUtil;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -20,11 +22,6 @@ public class Lottos {
 	private static Logger logger = Logger.getLogger(Lottos.class.getName());
 
 	private long perchaseAmount;
-	// TODO Enum 구분 대상
-	private long threeMatches;
-	private long fourMatches;
-	private long fiveMatches;
-	private long sixMatches;
 	private List<Lotto> lottos;
 
 	public Lottos(int perchaseAmount) {
@@ -55,7 +52,8 @@ public class Lottos {
 		for(Lotto lotto : this.lottos) {
 			lotto.setWinningNumberMatchesCount(winningNumbers);
 			lotto.setMatchBonusNumber(bonusNumber);
-			MessageUtil.printInfoLog("match bonus ? " + lotto.getMatchBonusNumber());
+			lotto.setRank();
+			lotto.setWinningMoney();
 		}
 	}
 
@@ -65,11 +63,13 @@ public class Lottos {
 	public void printLottoMatchesCountStatistics() {
 		MessageUtil.printMessage("\n"+MessageConstants.LOTTO_STATISTICS_MESSAGE);
 		MessageUtil.printSeparatorLine();
-
-		MessageUtil.printMessage(MessageConstants.THREE_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(3) +"개");
-		MessageUtil.printMessage(MessageConstants.FOUR_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(4) +"개");
-		MessageUtil.printMessage(MessageConstants.FIVE_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(5) +"개");
-		MessageUtil.printMessage(MessageConstants.SIX_MATCHES_MESSAGE + getLottoMatchesCountByMatchNumber(6) +"개");
+		Rank[] ranks = Rank.values();
+		for(int i=ranks.length-2; i>=0; i--) {
+			Rank rank = ranks[i];
+			boolean isSecond = (rank.name() == Rank.SECOND.name());
+			long count = this.lottos.stream().filter(lotto -> lotto.getRank() == rank).count();
+			MessageUtil.printRank((long)rank.getCountOfMatch(), (long)rank.getWinningMoney(), count, isSecond);
+		}
 		printLottoProfitRatio();
 	}
 
@@ -77,26 +77,12 @@ public class Lottos {
 	 * 로또 당침금 수익률 출력
 	 */
 	private void printLottoProfitRatio() {
-		long profit = (5000 * this.threeMatches)
-				+ (50000 * this.fourMatches)
-				+ (1500000 * this.fiveMatches)
-				+ (2000000000 * this.sixMatches);
+		long profit = 0;
+		for(Lotto lotto : lottos) {
+			profit += lotto.getWinningMoney();
+		}
 		String profitRatio = new DecimalFormat("#.##").format((float) profit / (float) this.perchaseAmount);
 		MessageUtil.printMessage(MessageConstants.LOTTO_PROFIT_RATIO_MESSAGE, profitRatio);
-	}
-
-	/**
-	 * 일치 갯수 별 로또 당첨 게임 수 가져오기
-	 * @param number
-	 * @return
-	 */
-	public long getLottoMatchesCountByMatchNumber(long number) {
-		long matchesCount = this.lottos.stream().filter(lotto -> lotto.getWinningNumberMatchesCount() == number).count();
-		if(number == 3) this.threeMatches = matchesCount;
-		if(number == 4) this.fourMatches = matchesCount;
-		if(number == 5) this.fiveMatches = matchesCount;
-		if(number == 6) this.sixMatches = matchesCount;
-		return matchesCount;
 	}
 
 	/**
@@ -105,16 +91,15 @@ public class Lottos {
 	 * @return
 	 */
 	public static boolean checkPerchaseAmountValidation(String amount) {
-		boolean validPerchaseAmount = true;
 		if(!NumberUtil.isNumber(amount)) {
-			validPerchaseAmount = false;
 			MessageUtil.printMessage(MessageConstants.ONLY_INPUT_NUMBER_MESSAGE);
+			return false;
 		}
-		if(validPerchaseAmount && !NumberUtil.isMoreThanThousand(Integer.parseInt(amount))) {
-			validPerchaseAmount = false;
+		if(!NumberUtil.isMoreThanThousand(Integer.parseInt(amount))) {
 			MessageUtil.printMessage(MessageConstants.LOTTO_PRICE_INFORMATION_MESSAGE);
+			return false;
 		}
-		return validPerchaseAmount;
+		return true;
 	}
 
 	/**

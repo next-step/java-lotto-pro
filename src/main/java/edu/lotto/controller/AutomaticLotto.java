@@ -25,7 +25,6 @@ public class AutomaticLotto {
 		Lottos lottos = new Lottos(perchaseAmount);
 		List<Integer> winningNumbers = getLatestWinningNumbers();
 		int secondWinningNumber =getSecondWinningNumber();
-		MessageUtil.printInfoLog("2등 보너스 볼 : "+ secondWinningNumber);
 		lottos.setWinningNumberMatchesCount(winningNumbers, secondWinningNumber);
 		lottos.printLottoMatchesCountStatistics();
 	}

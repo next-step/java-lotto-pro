@@ -1,5 +1,6 @@
 package edu.lotto.model;
 
+import edu.lotto.constants.Rank;
 import edu.lotto.utils.MessageUtil;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class Lotto {
 	private List<Integer> lottoNumbers;
 	private long winningNumberMatchesCount;
 	private boolean matchBonusNumber;
+	private Rank rank;
+	private long winningMoney;
 
 	public Lotto() {
 		this.lottoNumbers = new ArrayList<>();
@@ -38,18 +41,6 @@ public class Lotto {
 		}
 		Collections.shuffle(allLottoNumbers);
 		this.lottoNumbers = allLottoNumbers.subList(0,6);
-	}
-
-	/**
-	 * 임의의 숫자를 가져와서 숫자 리스트에 중복된 값이 없는 경우 리스트에 추가
-	 * @param lottoNumberList
-	 */
-	@Deprecated
-	private void addNotDuplicatedNumber(List<Integer> lottoNumberList) {
-		int randomNumber = Lottos.getNumberBetweenOneAndFortyFive();
-		if(!lottoNumberList.contains(randomNumber)) {
-			lottoNumberList.add(randomNumber);
-		}
 	}
 
 	/**
@@ -85,5 +76,36 @@ public class Lotto {
 	 */
 	public boolean getMatchBonusNumber() {
 		return this.matchBonusNumber;
+	}
+
+	/**
+	 * 로또 당첨 순위 Setter
+	 */
+	public void setRank() {
+		Long matchesCount = this.winningNumberMatchesCount;
+		this.rank = Rank.valueOf(matchesCount.intValue(), this.getMatchBonusNumber());
+	}
+
+	/**
+	 * 로또 당첨 순위 Getter
+	 * @return
+	 */
+	public Rank getRank() {
+		return this.rank;
+	}
+
+	/**
+	 * 로또 당첨 금액 Setter
+	 */
+	public void setWinningMoney() {
+		this.winningMoney = this.rank.getWinningMoney();
+	}
+
+	/**
+	 * 로또 당첨 금액 Getter
+	 * @return
+	 */
+	public long getWinningMoney() {
+		return this.winningMoney;
 	}
 }

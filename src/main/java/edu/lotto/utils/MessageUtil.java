@@ -1,5 +1,7 @@
 package edu.lotto.utils;
 
+import edu.lotto.constants.MessageConstants;
+
 import java.util.logging.Logger;
 
 /**
@@ -29,6 +31,19 @@ public class MessageUtil {
 	 */
 	public static void printMessage(String message, String ratio) {
 		System.out.printf(message, ratio);
+	}
+
+	/**
+	 * 순위 정보 출력
+	 * @param countOfRank
+	 * @param winningCount
+	 * @param matchedCount
+	 */
+	public static void printRank(long countOfRank, long winningCount, long matchedCount, boolean isSecond) {
+		String message = MessageConstants.LOTTO_MATCHES_MESSAGE;
+		if(isSecond) message = MessageConstants.LOTTO_SECOND_RANK_MESSAGE;
+		System.out.printf(message, countOfRank, winningCount, matchedCount);
+		System.out.println();
 	}
 
 	/**

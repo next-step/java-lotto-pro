@@ -19,6 +19,7 @@ public enum Rank {
 	FIFTH(3, 5_000),
 	MISS(0, 0);
 
+	private int rankNumber;
 	private int countOfMatch;
 	private int winningMoney;
 
@@ -38,13 +39,13 @@ public enum Rank {
 	public static Rank valueOf(int countOfMatch, boolean matchBonus) {
 		Rank[] ranks = values();
 		// 보너스볼을 포함하여 번호가 6개 일치하는 경우 2등
-		if(FIRST.countOfMatch == countOfMatch && matchBonus) {
+		if(SECOND.countOfMatch == countOfMatch && matchBonus)
 			return SECOND;
-		}
+		if(THIRD.countOfMatch == countOfMatch && !matchBonus)
+			return THIRD;
 		// 보너스 볼을 제외하고 번호가 일치하는 수에 따라 등수 계산
-		if(Arrays.stream(ranks).filter(rank -> rank.countOfMatch == countOfMatch).count() != 0 && !matchBonus) {
+		if(Arrays.stream(ranks).filter(rank -> rank.countOfMatch == countOfMatch).count() != 0)
 			return Arrays.stream(ranks).filter(rank -> rank.countOfMatch == countOfMatch).findFirst().get();
-		}
-		return null;
+		return MISS;
 	}
 }
