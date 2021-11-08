@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -28,28 +29,35 @@ class WinningMapTest {
 
     private static Stream<Arguments> inputWinningTest() {
         return Stream.of(
-                Arguments.of(lottoTicket, new Winning("1,2,37,41,43,44"), new HashMap<Rank, Integer>() {{
-                    put(Rank.FIFTH, 1);
-                }}, Rank.FIFTH),
-                Arguments.of(lottoTicket, new Winning("2,30,34,37,40,41"), new HashMap<Rank, Integer>() {{
-                    put(Rank.FOURTH, 1);
-                }}, Rank.FOURTH),
-                Arguments.of(lottoTicket, new Winning("1,2,8,30,37,42"), new HashMap<Rank, Integer>() {{
-                    put(Rank.THIRD, 1);
-                }}, Rank.THIRD),
-                Arguments.of(lottoTicket, new Winning("1,2,30,34,37,42"), new HashMap<Rank, Integer>() {{
-                    put(Rank.FIRST, 1);
-                }}, Rank.FIRST)
+                Arguments.of(LottoNumbers.fromString("1,2,37,41,43,44"), Rank.FIFTH),
+                Arguments.of(LottoNumbers.fromString("2,30,34,37,40,41"), Rank.FOURTH),
+                Arguments.of(LottoNumbers.fromString("1,2,8,30,37,42"), Rank.THIRD),
+                Arguments.of(LottoNumbers.fromString("1,2,30,34,37,42"), Rank.FIRST)
         );
     }
 
     @ParameterizedTest
     @MethodSource
     @DisplayName("각 등수별로 맞췄을 경우")
-    public void inputWinningTest(LottoTicket lottoTicket, Winning winning, Map<Rank, Integer> resultMap) {
+    public void inputWinningTest(LottoNumbers winningNumbers, Rank rank) {
+        Winning winning = Winning.of(winningNumbers, 10);
         WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
 
+        Map<Rank, Integer> resultMap = new HashMap<>();
+        resultMap.put(rank, 1);
+
         assertThat(winningMap.getWinningMap().equals(resultMap)).isTrue();
+    }
+
+    @Test
+    @DisplayName("2등 당첨 테스트")
+    public void secondRankTest() {
+        Winning winning = Winning.of(LottoNumbers.fromString("1,2,30,34,37,40"), 42);
+        WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
+        HashMap<Rank, Integer> resultRankMap = new HashMap<>();
+        resultRankMap.put(Rank.SECOND, 1);
+
+        assertThat(winningMap.getWinningMap().equals(resultRankMap)).isTrue();
     }
 
     @ParameterizedTest
@@ -60,7 +68,8 @@ class WinningMapTest {
     })
     @DisplayName("맞춘 번호가 2개 이하일 경우")
     public void lottoMatchNothing(String input) {
-        Winning winning = new Winning(input);
+        LottoNumbers lottoNumbers = LottoNumbers.fromString(input);
+        Winning winning = Winning.of(lottoNumbers, 11);
 
         WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
 
@@ -76,9 +85,10 @@ class WinningMapTest {
             "1,2,30,37,42,45|1500",
             "1,2,30,34,37,42|2000000"
     }, delimiter = '|')
-    @DisplayName("맞춘 번호가 2개 이하일 경우")
-    public void lottoMatchNothing(String input, int revenuePercent) {
-        Winning winning = new Winning(input);
+    @DisplayName("수익 계산")
+    public void revenueTest(String input, int revenuePercent) {
+        LottoNumbers winningNumbers = LottoNumbers.fromString(input);
+        Winning winning = Winning.of(winningNumbers, 10);
         BoughtLotto boughtLotto = new BoughtLotto(1000);
 
         WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);

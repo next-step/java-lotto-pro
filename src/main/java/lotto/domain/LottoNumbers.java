@@ -3,10 +3,7 @@ package lotto.domain;
 import lotto.exception.DuplicateNumberException;
 import lotto.exception.LottoSizeException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringJoiner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static lotto.common.LottoConst.LOTTO_SIZE;
@@ -38,6 +35,10 @@ public class LottoNumbers {
         return new LottoNumbers(numbers);
     }
 
+    public Rank hit(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        return Rank.valueOf(matchWinning(winningNumbers), matchBonusNumber(bonusNumber));
+    }
+
     private void validation(final List<Integer> numbers) {
         lottoSizeCheck(numbers);
         duplicatedCheck(numbers);
@@ -59,13 +60,20 @@ public class LottoNumbers {
         }
     }
 
-    public int matchReduce(LottoNumbers winningNumbers) {
+    public int matchWinning(LottoNumbers winningNumbers) {
         List<LottoNumber> winningLottoNumbers = winningNumbers.getLottoNumbers();
         int matchCounting = 0;
         for (LottoNumber winningLottoNumber : winningLottoNumbers) {
             matchCounting += matchNumber(winningLottoNumber);
         }
         return matchCounting;
+    }
+
+    public boolean matchBonusNumber(LottoNumber bonusNumber) {
+        if (this.lottoNumbers.contains(bonusNumber)) {
+            return true;
+        }
+        return false;
     }
 
     private int matchNumber(LottoNumber number) {
@@ -77,6 +85,23 @@ public class LottoNumbers {
 
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
+    }
+
+    public boolean hasNumber(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     @Override

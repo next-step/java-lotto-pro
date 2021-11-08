@@ -8,12 +8,12 @@ public class BoughtLotto {
     private int boughtMoney;
 
     public BoughtLotto(final int money) {
-        validMoney(money);
         this.boughtMoney = money;
+        validMoney();
     }
 
-    private void validMoney(final int money) {
-        if (!isThousandUnit(money) || !isPositiveInteger(money)) {
+    private void validMoney() {
+        if (!isThousandUnit(boughtMoney) || !isPositiveInteger(boughtMoney)) {
             throw new InvalidMoneyException();
         }
     }

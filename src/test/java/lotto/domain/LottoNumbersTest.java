@@ -3,7 +3,9 @@ package lotto.domain;
 import lotto.exception.DuplicateNumberException;
 import lotto.exception.LottoSizeException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
@@ -36,5 +38,55 @@ class LottoNumbersTest {
         assertThatThrownBy(() -> LottoNumbers.fromList(input))
                 .isInstanceOf(DuplicateNumberException.class);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "11,12,13,14,15,16|0",
+            "1,12,13,14,15,16|1",
+            "1,2,13,14,15,16|2",
+            "1,2,3,14,15,16|3",
+            "1,2,3,4,15,16|4",
+            "1,2,3,4,5,16|5",
+            "1,2,3,4,5,6|6",
+    }, delimiter = '|')
+    @DisplayName("맞춘 로또 번호 개수 구하기")
+    public void matchReduceTest(String input, int resultCount) {
+        //given
+        LottoNumbers userLottoNumbers = LottoNumbers.fromString("1,2,3,4,5,6");
+        LottoNumbers winningLottoNumbers = LottoNumbers.fromString(input);
+
+        //when
+        int matchCount = userLottoNumbers.matchWinning(winningLottoNumbers);
+
+        //then
+        assertThat(matchCount).isEqualTo(resultCount);
+    }
+
+    @Test
+    @DisplayName("보너스 번호 틀림")
+    public void matchBonusNumberNotMatchingTest() throws Exception {
+        //given
+        LottoNumbers userLottoNumbers = LottoNumbers.fromString("1,2,3,4,5,6");
+        LottoNumber bonusNumber = new LottoNumber(7);
+        //when
+        boolean isBonusMatch = userLottoNumbers.matchBonusNumber(bonusNumber);
+
+        //then
+        assertThat(isBonusMatch).isFalse();
+    }
+
+    @Test
+    @DisplayName("보너스 번호 맞음")
+    public void matchBonusNumberMatchingTest() throws Exception {
+        //given
+        LottoNumbers userLottoNumbers = LottoNumbers.fromString("1,2,3,4,5,6");
+        LottoNumber bonusNumber = new LottoNumber(1);
+        //when
+        boolean isBonusMatch = userLottoNumbers.matchBonusNumber(bonusNumber);
+
+        //then
+        assertThat(isBonusMatch).isTrue();
+    }
+
 
 }

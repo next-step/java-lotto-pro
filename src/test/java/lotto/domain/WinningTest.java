@@ -1,10 +1,11 @@
 package lotto.domain;
 
+import lotto.exception.DuplicateWinningNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
@@ -24,17 +25,18 @@ class WinningTest {
     @MethodSource
     @DisplayName("당첨 번호 입력(순서 정렬)")
     public void inputWinningTest(String input, Integer[] result) {
-        assertThat(new Winning(input)).isInstanceOf(Winning.class);
+        LottoNumbers winningNumbers = LottoNumbers.fromString(input);
+        assertThat(Winning.of(winningNumbers, 30)).isInstanceOf(Winning.class);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {
-            "a,1,2,3,4,5",
-            ",1,2,3,4,5,6"
-    })
-    @DisplayName("','부터 시작하거나 문자는 입력받을 수 없다.")
-    public void inputWinningTest_fail(String input) {
-        assertThatThrownBy(() -> new Winning(input)).isInstanceOf(NumberFormatException.class);
+    @CsvSource(value = {
+            "1,2,3,4,5,6|1",
+    }, delimiter = '|')
+    @DisplayName("보너스 번호는 당첨번호와 중복 될 수 없다.")
+    public void duplicateLottoNumberByBonusNumber(String input, int bonusNumber) {
+        LottoNumbers winningNumbers = LottoNumbers.fromString(input);
+        assertThatThrownBy(() -> Winning.of(winningNumbers, bonusNumber)).isInstanceOf(DuplicateWinningNumberException.class);
     }
 
 }
