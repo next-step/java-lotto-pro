@@ -8,6 +8,7 @@ public class LottoController {
     private InputView inputView = new InputView();
     private OutputView outputView = new OutputView();
     private LottoGenerator lottoGenerator = new LottoGenerator();
+
     public void start() {
         Money money = getMoney();
 
@@ -15,18 +16,28 @@ public class LottoController {
         outputView.printLottoCount(money.getLottoCount());
         outputView.printLottos(lottos);
 
-        WinningNumber winningNumber = getWinningNumber();
+        Lotto winningLotto = getWinningLotto();
+        WinningNumber winningNumber = getWinningNumber(winningLotto);
 
         LottoResult lottoResult = new LottoResult(lottos.getLottos(), winningNumber);
         OutputView.printLottoResult(lottoResult);
     }
 
-    private WinningNumber getWinningNumber() {
+    private WinningNumber getWinningNumber(Lotto winningLotto) {
+        try {
+            return new WinningNumber(winningLotto, new LottoNumber(inputView.inputBonusBall()));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getWinningNumber(winningLotto);
+        }
+    }
+
+    private Lotto getWinningLotto() {
         try {
             return lottoGenerator.createWinningNumber(inputView.inputWiningLotto());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getWinningNumber();
+            return getWinningLotto();
         }
     }
 

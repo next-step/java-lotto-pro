@@ -35,9 +35,9 @@ public class LottoGenerator {
         return new Lottos(lottos);
     }
 
-    public WinningNumber createWinningNumber(String winningNumberString) {
+    public Lotto createWinningNumber(String winningNumberString) {
         validateDelimiter(winningNumberString);
-        return new WinningNumber(toList(toInts(winningNumberString.replaceAll(BLANK, NO_BLANK).split(DELIMITER))));
+        return new Lotto(toList(toInts(winningNumberString.replaceAll(BLANK, NO_BLANK).split(DELIMITER))));
     }
 
     private void validateDelimiter(String text) {
