@@ -8,10 +8,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("학습테스트 - Set")
 public class SetTest {
+
+    private final static String DISPLAY_NAME = DISPLAY_NAME_PLACEHOLDER + ARGUMENTS_PLACEHOLDER;
+
     private Set<Integer> numbers;
 
     @BeforeEach
@@ -33,10 +37,19 @@ public class SetTest {
         assertThat(numbers).hasSize(expectedSize);
     }
 
-    @ParameterizedTest(name = DISPLAY_NAME_PLACEHOLDER + ARGUMENTS_PLACEHOLDER)
+    @ParameterizedTest(name = DISPLAY_NAME)
     @ValueSource(ints = {1, 2, 3})
     void ParameterizedTest를_활용해_중복_코드를_제거_할수_있는가(int number) {
         //when, then
         assertThat(numbers.contains(number)).isTrue();
+    }
+
+    @ParameterizedTest(name = DISPLAY_NAME)
+    @CsvSource({"1,2,3,4,5"})
+    void _1과2그리고3_값은_contains_메소드_실행결과_true_4와5_값을_넣으면_false_가_반환되는가(int firstTrueNumber, int secondTrueNumber,
+        int thirdTrueNumber, int firstFalseNumber, int secondFalseNumber) {
+        //when, then
+        assertThat(numbers).containsExactly(firstTrueNumber, secondTrueNumber, thirdTrueNumber);
+        assertThat(numbers).doesNotContainSubsequence(firstFalseNumber, secondFalseNumber);
     }
 }
