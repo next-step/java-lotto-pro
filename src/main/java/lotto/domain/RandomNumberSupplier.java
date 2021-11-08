@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
-public class RandomNumberGenerator implements NumberGenerator {
+public class RandomNumberSupplier implements NumberSupplier {
 
     private static final int START_NUMBER = 1;
     private static final int LAST_NUMBER = 45;
@@ -19,7 +19,7 @@ public class RandomNumberGenerator implements NumberGenerator {
     }
 
     @Override
-    public List<Integer> generate(int digit) {
+    public List<Integer> getAsInts(int digit) {
         Collections.shuffle(numbers);
         return this.numbers.stream().limit(digit).collect(toList());
     }

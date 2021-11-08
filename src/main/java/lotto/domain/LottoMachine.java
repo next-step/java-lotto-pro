@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.LongStream;
 
@@ -11,10 +10,10 @@ public class LottoMachine {
 
     private final static int LOTTO_NUMBER_COUNT = 6;
     public final static int LOTTO_PRICE = 1000;
-    private NumberGenerator generator;
+    private NumberSupplier numberSupplier;
 
-    public LottoMachine(NumberGenerator generator) {
-        this.generator = generator;
+    public LottoMachine(NumberSupplier generator) {
+        this.numberSupplier = generator;
     }
 
     public Lottos issueAuto(Amount amount) {
@@ -27,7 +26,7 @@ public class LottoMachine {
     }
 
     private Lotto issueAuto() {
-        return new Lotto(generator.generate(LOTTO_NUMBER_COUNT));
+        return new Lotto(numberSupplier.getAsInts(LOTTO_NUMBER_COUNT));
     }
 
     public Lottos issueManual(List<String> numbers) {

@@ -6,11 +6,8 @@ import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.LongStream;
-import java.util.stream.Stream;
 
-import static java.util.Comparator.*;
 import static java.util.stream.Collectors.toList;
 
 public class LottoShop {
@@ -22,7 +19,7 @@ public class LottoShop {
     public LottoShop() {
         this.inputView = new ConsoleInputView();
         this.resultView = new ConsoleResultView();
-        this.lottoMachine = new LottoMachine(new RandomNumberGenerator());
+        this.lottoMachine = new LottoMachine(new RandomNumberSupplier());
     }
 
     public void open() {

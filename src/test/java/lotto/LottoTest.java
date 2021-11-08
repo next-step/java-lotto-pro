@@ -3,8 +3,6 @@ package lotto;
 import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -69,7 +67,7 @@ public class LottoTest {
     @Test
     public void lottoCount_InAmountTest() {
         Amount amount = new Amount(14_000);
-        LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerator());
+        LottoMachine lottoMachine = new LottoMachine(new RandomNumberSupplier());
         Lottos lottos = lottoMachine.issueAuto(amount);
         assertThat(lottos.count()).isEqualTo(14);
     }
@@ -149,7 +147,7 @@ public class LottoTest {
     @DisplayName("수동으로 로또 발행 기능 테스트")
     @Test
     public void lottoIssueManualTest() {
-        LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerator());
+        LottoMachine lottoMachine = new LottoMachine(new RandomNumberSupplier());
         List<String> numbers = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
         Lottos lottos = lottoMachine.issueManual(numbers);
         assertThat(lottos.count()).isEqualTo(3);
@@ -159,7 +157,7 @@ public class LottoTest {
     @Test
     public void addLottosTest() {
 
-        LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerator());
+        LottoMachine lottoMachine = new LottoMachine(new RandomNumberSupplier());
         List<String> numbers = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
         Lottos manualLottos = lottoMachine.issueManual(numbers);
         Lottos autoLottos = lottoMachine.issueAuto(new Amount(11_000));
