@@ -28,7 +28,7 @@ class LottoServiceTest {
     @DisplayName("Lotto ball 6개를 만드는 테스트")
     void createLotto() {
         LottoService lottoService = new LottoService();
-        Lottos lottos = lottoService.createLotto(1);
+        Lottos lottos = lottoService.createAutoLotto(1);
         List<Lotto> lottoBasket = lottos.lottos();
         Lotto firstLotto = lottoBasket.get(0);
         List<Ball> firstBalls = firstLotto.balls();
