@@ -1,11 +1,8 @@
 package lotto.domain;
 
-import lotto.module.NumberGeneratorStrategy;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Objects;
 
 public class LottoTicket {
 

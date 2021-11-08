@@ -6,7 +6,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.Winning;
 import lotto.domain.WinningMap;
 
-import static lotto.view.ConsoleView.printBoughtLotto;
+import static lotto.view.ConsoleView.printBoughtLottoCount;
 import static lotto.view.ConsoleView.printRevenue;
 import static lotto.view.ConsoleView.printLottoTicket;
 import static lotto.view.ConsoleView.printLine;
