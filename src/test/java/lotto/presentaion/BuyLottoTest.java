@@ -6,17 +6,21 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.infrastructure.component.TextEdit;
+import lotto.infrastructure.util.Console;
 import lotto.presentation.BuyLotto;
 import lotto.presentation.Screen;
 
@@ -38,24 +42,49 @@ public class BuyLottoTest {
     System.out.println(outContent.toString().trim());
   }
 
-  @DisplayName("로또 구입화면을 테스트")
-  @CsvSource({"'14000', '14개를 구매했습니다.'",
-              "'13000', '13개를 구매했습니다.'",
-              "'1000', '1개를 구매했습니다.'",
-              "'1500', '1개를 구매했습니다.'"}
-            )
-  @ParameterizedTest
-  void  print_BuyLotto(String buyPrice, String expectedString) {
+  @DisplayName("구입화면을통해 금액을 입력받는다.")
+  @Test
+  void  print_BuyLotto() {
     // given
-    System.setIn(new ByteArrayInputStream(Strings.join(buyPrice).with("\n").getBytes()));
-    TextEdit.scanner = new Scanner(System.in);
+    buyLottoPriceOf("10000");
 
     Screen buyLotto = new BuyLotto();
 
     // when
     buyLotto.render();
+
     // then
-    assertThat(outContent.toString().trim()).contains("구입금액을 입력해 주세요.", expectedString);
+    assertThat(outContent.toString().trim()).contains("구입금액을 입력해 주세요.");
   }
 
+
+  
+  @DisplayName("구매 금액 유효성을 검사한다..")
+  @ValueSource(strings = {"-100", "Lotto", "@@!", "Price:1000"})
+  @ParameterizedTest
+  void  invalidCheck_LottoPirce(String iuputLottoPrice) {
+    // given
+    buyLottoPriceOf(iuputLottoPrice);
+
+    Screen buyLotto = new BuyLotto();
+
+    // when
+    Assertions.assertThrows(NoSuchElementException.class, 
+      () -> {buyLotto.render();}
+    );
+
+    // then
+    
+    List<String> exptedString = new ArrayList<String>();
+
+    exptedString.add("구입금액을 입력해 주세요.");
+    exptedString.add("입력한 구입금액이 유효하지 않습니다.");
+    
+    assertThat(outContent.toString().trim()).contains(exptedString);
+  }
+  
+  private void buyLottoPriceOf(String price) {
+    System.setIn(new ByteArrayInputStream(Strings.join(price).with("\n").getBytes()));
+    Console.reLoadScanner();
+  }
 }

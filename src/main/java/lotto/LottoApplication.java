@@ -2,8 +2,8 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.presentation.AutoGenerateLottoNumber;
 import lotto.presentation.BuyLotto;
+import lotto.presentation.GenerateLotto;
 import lotto.presentation.ReportWinStatistics;
 import lotto.presentation.Screen;
 import lotto.presentation.SettingLatestWinLotto;
@@ -19,7 +19,7 @@ public class LottoApplication {
     List<Screen> screens = new ArrayList<>();
 
     BuyLotto buyLotto = new BuyLotto();
-    AutoGenerateLottoNumber autoGenerateLottoNumber = new AutoGenerateLottoNumber();
+    GenerateLotto autoGenerateLottoNumber = new GenerateLotto();
     SettingLatestWinLotto settingLatestWinLotto = new SettingLatestWinLotto();
     ReportWinStatistics reportWinStatistics = new ReportWinStatistics();
 
