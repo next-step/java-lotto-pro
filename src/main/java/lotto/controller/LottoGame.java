@@ -12,7 +12,7 @@ import lotto.domain.Rank;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class Lotto {
+public class LottoGame {
     public void start() {
         LottoMoney lottoMoney = InputView.inputLottoAmount();
         List<LottoTicket> lottoTickets = buyLottoTicket(lottoMoney.getCountOfPossibleLotto());
