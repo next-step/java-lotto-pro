@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.IssueQuantity;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.WinningResults;
@@ -16,11 +17,12 @@ public class LottoController {
             resultView.printLowerThanMinPrice();
             return;
         }
-        resultView.printBuyMessage(money);
         
-        int manualBuyQuantity = inputView.enterManualBuyQuantity(money);
+        int manualQuantity = inputView.enterManualBuyQuantity(money);
+        IssueQuantity iq = new IssueQuantity().fromManual(manualQuantity).fromAuto(money.buyableQuantity() - manualQuantity);
         
-        Lottos lottos = new Lottos(money);
+        Lottos lottos = new Lottos(iq, inputView.enterManualNumbers(manualQuantity));
+        resultView.printBuyMessage(iq);
         resultView.printLottoList(lottos);
         lottos.execute(inputView.enterWinningLotto());
         

@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.List;
 
+import lotto.domain.IssueQuantity;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -10,16 +11,16 @@ import lotto.domain.WinningResult;
 import lotto.domain.WinningResults;
 
 public class ResultView {
-    private static final String NOTICE_BUY_QUANTITY = "개를 구매했습니다.";
     private static final String NOTICE_WINNING_STATISTICS_RESULT = "%d개 일치 (%d원)- %d개";
     private static final String NOTICE_WINNING_BONUS_RESULT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static final String NOTICE_WINNING_STATISTICS = "당첨 통계\n---------";
     private static final String NOTICE_WINNING_REWARD_PERCENT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String NOTICE_BUY_ISSUE_TYPE = "수동으로 %d장, 자동으로 %d장를 구매했습니다.";
     private static final String ERROR_LOWER_THAN_MIN_PRICE = "최소 주문 금액(%d) 이하입니다.";
     private static final String NOTICE_END_GAME = "게임을 종료합니다.";
 
-    public void printBuyMessage(Money money) {
-        System.out.println(money.buyableQuantity() + NOTICE_BUY_QUANTITY);
+    public void printBuyMessage(IssueQuantity issueQuantity) {
+        System.out.println(String.format(NOTICE_BUY_ISSUE_TYPE, issueQuantity.getManualQuantity(), issueQuantity.getAutoQuantity()));
     }
 
     public void printLottoList(Lottos lottos) {
