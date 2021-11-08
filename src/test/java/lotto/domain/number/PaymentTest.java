@@ -13,10 +13,15 @@ import lotto.exception.*;
 class PaymentTest {
     private static Stream<Arguments> provideNumberOfAvailableTicketsTest() {
         return Stream.of(
-            Arguments.of(Payment.from(1000), 1),
-            Arguments.of(Payment.from(1500), 1),
-            Arguments.of(Payment.from(1900), 1),
-            Arguments.of(Payment.from(2000), 2)
+            Arguments.of(Payment.from(1000), 0, 1),
+            Arguments.of(Payment.from(1000), 1, 0),
+            Arguments.of(Payment.from(1500), 0, 1),
+            Arguments.of(Payment.from(1500), 1, 0),
+            Arguments.of(Payment.from(1900), 0, 1),
+            Arguments.of(Payment.from(1900), 1, 0),
+            Arguments.of(Payment.from(2000), 2, 0),
+            Arguments.of(Payment.from(2000), 1, 1),
+            Arguments.of(Payment.from(2000), 0, 2)
         );
     }
 
@@ -32,10 +37,10 @@ class PaymentTest {
         assertThatThrownBy(() -> Payment.from(999)).isInstanceOf(OutOfBoundException.class);
     }
 
-    @DisplayName("금액이 주어지면, 구입 가능한 최대 티켓 수를 반환한다.")
+    @DisplayName("현재 보유한 금액 기준 수동티켓수를 입력받으면, 자동으로 구입 가능한 최대 티켓 수를 반환한다.")
     @ParameterizedTest
     @MethodSource("provideNumberOfAvailableTicketsTest")
-    void numberOfAvailableTicketsTest(Payment payment, int expected) {
-        assertThat(payment.numberOfAvailableTickets()).isEqualTo(expected);
+    void numberOfAvailableTicketsTest(Payment payment, int manualTicketsCount, int expected) {
+        assertThat(payment.numberOfAvailableTicketsAutomatically(manualTicketsCount)).isEqualTo(expected);
     }
 }

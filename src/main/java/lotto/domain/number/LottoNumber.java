@@ -40,5 +40,4 @@ public class LottoNumber extends Number {
             throw new IllegalArgumentException(LOTTO_NUMBER_IS_OUT_OF_BOUND_EXCEPTION_STATEMENT);
         }
     }
-
 }
