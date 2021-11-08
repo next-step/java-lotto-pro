@@ -9,9 +9,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import static lotto.constant.LottoConfig.MAX_COUNT_OF_ONE_LINE;
-
 public class Lotto {
+
+    public static final int MAX_COUNT_OF_ONE_LINE = 6;
+
     private final List<LottoNumber> lineOfLottoNumber;
 
     public Lotto(List<LottoNumber> lottoNumbers) {

@@ -2,10 +2,11 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import static lotto.constant.LottoConfig.FIRST_LOTTO_NUMBER;
-import static lotto.constant.LottoConfig.LAST_LOTTO_NUMBER;
-
 public class LottoNumber implements Comparable<LottoNumber> {
+
+    public static final int FIRST_LOTTO_NUMBER = 1;
+    public static final int LAST_LOTTO_NUMBER = 45;
+
     private final int number;
 
     public LottoNumber(int number) {

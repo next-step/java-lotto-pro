@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.constant.LottoConfig.FIRST_LOTTO_NUMBER;
-import static lotto.constant.LottoConfig.LAST_LOTTO_NUMBER;
-import static lotto.constant.LottoConfig.MAX_COUNT_OF_ONE_LINE;
-
 public class LottoRandomFactory implements LottoFactory {
+
+    public static final int FIRST_LOTTO_NUMBER = 1;
+    public static final int LAST_LOTTO_NUMBER = 45;
+    public static final int MAX_COUNT_OF_ONE_LINE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
