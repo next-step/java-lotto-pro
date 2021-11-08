@@ -17,7 +17,7 @@ public class Lotto {
         LottoMoney lottoMoney = InputView.inputLottoAmount();
         List<LottoTicket> lottoTickets = buyLottoTicket(lottoMoney.getCountOfPossibleLotto());
         OutputView.printLottoTickets(lottoTickets);
-        LottoTicket winningLottoTicket = InputView.winningNumbersOfLastWeek();
+        LottoTicket winningLottoTicket = InputView.inputWinningNumbersOfLastWeek();
         LottoNumber bonusNumber = InputView.inputBonusNumber(winningLottoTicket);
         LottoReports lottoReports = new LottoReports(createRanks(lottoTickets, winningLottoTicket, bonusNumber),
             lottoMoney);
