@@ -5,20 +5,18 @@ import java.util.Arrays;
 import lotto.domain.exception.IllegalMatchCountException;
 
 public enum Rank {
-	LOSS(0, false, 0),
-	FIFTH(3, false, 5_000),
-	FOURTH(4, false,50_000),
-	THIRD(5, false, 1_500_000),
-	SECOND(5,true, 30_000_000),
-	FIRST(6, false,2_000_000_000);
+	LOSS(0, 0),
+	FIFTH(3, 5_000),
+	FOURTH(4,50_000),
+	THIRD(5, 1_500_000),
+	SECOND(5, 30_000_000),
+	FIRST(6,2_000_000_000);
 
 	private int matchCount;
-	private boolean matchBonus;
 	private int prizeMoney;
 
-	Rank(final int matchCount, final boolean matchBonus, final int prizeMoney) {
+	Rank(final int matchCount, final int prizeMoney) {
 		this.matchCount = matchCount;
-		this.matchBonus = matchBonus;
 		this.prizeMoney = prizeMoney;
 	}
 
@@ -36,11 +34,15 @@ public enum Rank {
 			.findFirst()
 			.orElseThrow(IllegalMatchCountException::new);
 
-		if (rank == Rank.THIRD && matchBonus) {
+		if (isSecondRank(rank, matchBonus)) {
 			return Rank.SECOND;
 		}
 
 		return rank;
+	}
+
+	private static boolean isSecondRank(Rank rank, boolean matchBonus) {
+		return rank == Rank.THIRD && matchBonus;
 	}
 
 	public int matchCount() {
