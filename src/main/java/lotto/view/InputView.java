@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.LotteryCalculator;
+import lotto.Money;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ public class InputView {
     public static int payMoney() {
         Scanner sc = new Scanner(System.in);
         System.out.println(ENTER_PURCHASE_AMOUNT);
-        int numberOfTicket = LotteryCalculator.calculateTicket(sc.nextInt());
+        int numberOfTicket = LotteryCalculator.calculateTicket(new Money(sc.nextInt()));
         System.out.println(numberOfTicket + NUMBER_OF_LOTTO_TICKET);
         return numberOfTicket;
     }

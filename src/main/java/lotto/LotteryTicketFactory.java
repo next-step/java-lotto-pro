@@ -11,16 +11,16 @@ public class LotteryTicketFactory {
     public static final int NUMBER_OF_CHOICES_IN_LOTTERY_TICKET = 6;
 
     public static LotteryTicket createLotteryTicket() {
-        List<Integer> card = lotteryCardNumber();
-        Collections.shuffle(card);
+        List<Integer> ticketAllNumber = createLotteryTicketAllNumber();
+        Collections.shuffle(ticketAllNumber);
         List<Integer> pickedSixLotteryNo = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_CHOICES_IN_LOTTERY_TICKET; i++) {
-            pickedSixLotteryNo.add(card.get(i));
+            pickedSixLotteryNo.add(ticketAllNumber.get(i));
         }
         return LotteryTicket.createAutoLotteryNumber(pickedSixLotteryNo);
     }
 
-    private static List<Integer> lotteryCardNumber() {
+    private static List<Integer> createLotteryTicketAllNumber() {
         List<Integer> lottoCard = new ArrayList<>();
         for (int i = FIRST_NUMBER_IN_LOTTERY_TICKET; i <= LAST_NUMBER_IN_LOTTERY_TICKET; i++) {
             lottoCard.add(i);

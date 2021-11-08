@@ -22,14 +22,9 @@ public class LotteryTicket {
     public int countMatch(WinningNumber winningNumber) {
         int cnt = 0;
         for (String no : winningNumber.getWinningNumber()){
-            cnt = getCnt(cnt, no);
-        }
-        return cnt;
-    }
-
-    private int getCnt(int cnt, String no) {
-        if (lottoTicket.contains(Integer.parseInt(no))) {
-            cnt++;
+            if (lottoTicket.contains(Integer.parseInt(no))) {
+                cnt++;
+            }
         }
         return cnt;
     }

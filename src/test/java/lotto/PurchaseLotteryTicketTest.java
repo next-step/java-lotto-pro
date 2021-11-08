@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,32 +25,13 @@ public class PurchaseLotteryTicketTest {
         purchaseLotteryTicket.add(new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
-    @DisplayName("구매한 로또 티켓 중 당첨 번호가 3개인 티켓 수")
+    @DisplayName("구매한 전체 로또 티켓에서 당첨번호 등수별 티켓 수 확인")
     @Test
-    void matchThree() {
-        int matchThree = purchaseLotteryTicket.countMatchThree(winningNumber);
-        assertThat(matchThree).isEqualTo(3);
+    void countMatchInAllTicket() {
+        Map<Rank, Integer> rankIntegerMap = purchaseLotteryTicket.countMatchInAllTicket(winningNumber);
+        assertThat(rankIntegerMap.getOrDefault(Rank.FIRST, 0)).isEqualTo(1);
+        assertThat(rankIntegerMap.getOrDefault(Rank.SECOND, 0)).isEqualTo(1);
+        assertThat(rankIntegerMap.getOrDefault(Rank.THIRD, 0)).isEqualTo(0);
+        assertThat(rankIntegerMap.getOrDefault(Rank.FOURTH, 0)).isEqualTo(3);
     }
-
-    @DisplayName("구매한 로또 티켓 중 당첨 번호가 4개인 티켓 수")
-    @Test
-    void matchFour() {
-        int matchFour = purchaseLotteryTicket.countMatchFour(winningNumber);
-        assertThat(matchFour).isEqualTo(0);
-    }
-
-    @DisplayName("구매한 로또 티켓 중 당첨 번호가 5개인 티켓 수")
-    @Test
-    void matchFive() {
-        int matchFive = purchaseLotteryTicket.countMatchFive(winningNumber);
-        assertThat(matchFive).isEqualTo(1);
-    }
-
-    @DisplayName("구매한 로또 티켓 중 당첨 번호가 6개인 티켓 수")
-    @Test
-    void matchSix() {
-        int matchSix = purchaseLotteryTicket.countMatchSix(winningNumber);
-        assertThat(matchSix).isEqualTo(1);
-    }
-
 }
