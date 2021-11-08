@@ -14,7 +14,7 @@ class LottoIssueTest {
         int purchaseQuantity = 5;
 
         //when
-        List<Lotto> lottos = LottoIssue.ofAuto(purchaseQuantity);
+        List<LottoNumbers> lottos = LottoIssue.ofAuto(purchaseQuantity);
 
         //then
         assertThat(lottos.size()).isEqualTo(purchaseQuantity);

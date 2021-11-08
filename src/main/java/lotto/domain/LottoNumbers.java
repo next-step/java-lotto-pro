@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 import static java.util.Comparator.naturalOrder;
 
@@ -18,7 +21,23 @@ public class LottoNumbers {
         validateSize(lottoNumbers);
         validateBetweenMinAndMax(lottoNumbers);
         lottoNumbers.sort(naturalOrder());
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = Collections.unmodifiableList(new ArrayList<>(lottoNumbers));
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    public LottoRank compareWinningNumbers(LottoNumbers lottoWinningNumbers) {
+        return LottoRank.from(getMatchCount(lottoWinningNumbers));
+    }
+
+    private int getMatchCount(LottoNumbers lottoWinningNumbers) {
+        return (int) lottoNumbers.stream()
+                .filter(lottoNumber -> lottoWinningNumbers.getLottoNumbers()
+                        .stream()
+                        .anyMatch(Predicate.isEqual(lottoNumber)))
+                .count();
     }
 
     private void validateDuplicate(List<Integer> lottoNumbers) {
@@ -44,10 +63,6 @@ public class LottoNumbers {
 
     private static boolean isBetweenMinAndMax(int prizeNumber) {
         return (prizeNumber >= MIN_LOTTO_NUMBER) && (prizeNumber <= MAX_LOTTO_NUMBER);
-    }
-
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
     }
 
 }

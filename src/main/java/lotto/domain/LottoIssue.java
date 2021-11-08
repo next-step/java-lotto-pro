@@ -10,9 +10,9 @@ public class LottoIssue {
     private LottoIssue() {
     }
 
-    public static List<Lotto> ofAuto(int purchaseQuantity) {
+    public static List<LottoNumbers> ofAuto(int purchaseQuantity) {
         return IntStream.range(0, purchaseQuantity)
-                .mapToObj(i -> new Lotto(LottoGenerator.generate()))
+                .mapToObj(i -> new LottoNumbers(LottoGenerator.generate()))
                 .collect(toList());
     }
 

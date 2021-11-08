@@ -1,20 +1,18 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
+
+import java.util.TreeMap;
 
 public class OutputView {
     private static final String PRINT_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String PRINT_PURCHASE_QUANTITY = "%s개를 구매했습니다.\n";
-    private static final String PRINT_RATE_OF_RETURN = "총 수익률은 %s 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)\n";
-    private static final String PRINT_WINNING_STATISTICS = "당첨 통계\n---------";
     private static final String PRINT_INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
-
-    private static final String PRINT_FOURTH_RANK = "3개 일치 (5000원)- %s개\n";
-    private static final String PRINT_THIRD_RANK = "4개 일치 (50000원)- %s개\n";
-    private static final String PRINT_SECOND_RANK = "5개 일치 (1500000원)- %s개\n";
-    private static final String PRINT_FIRST_RANK = "6개 일치 (2000000000원)- %s개\n";
+    private static final String PRINT_WINNING_STATISTICS = "당첨 통계\n---------";
+    private static final String PRINT_WINNING_STATISTICS_RESULT = "%d개 일치 (%d원)- %s개\n";
 
     private OutputView() {
     }
@@ -29,7 +27,7 @@ public class OutputView {
 
     public static void printLottoNumber(LottoTicket lottoTicket) {
         lottoTicket.getLottoTicket().stream()
-                .map(Lotto::getLottoNumbers)
+                .map(LottoNumbers::getLottoNumbers)
                 .forEach(System.out::println);
         System.out.println();
     }
@@ -38,17 +36,18 @@ public class OutputView {
         System.out.println(PRINT_INPUT_WINNING_NUMBERS);
     }
 
-    public static void printWinningStatistics(LottoTicket lottoTicket) {
+    public static void printWinningStatistics(LottoResult lottoResult) {
         System.out.println();
         System.out.println(PRINT_WINNING_STATISTICS);
-        System.out.printf(PRINT_FOURTH_RANK, lottoTicket.getTotalRankCount(LottoRank.FOURTH));
-        System.out.printf(PRINT_THIRD_RANK, lottoTicket.getTotalRankCount(LottoRank.THIRD));
-        System.out.printf(PRINT_SECOND_RANK, lottoTicket.getTotalRankCount(LottoRank.SECOND));
-        System.out.printf(PRINT_FIRST_RANK, lottoTicket.getTotalRankCount(LottoRank.FIRST));
+        TreeMap<LottoRank, Integer> lottoRankTreeMap = new TreeMap<>(lottoResult.getLottoTicketRankMap());
+        lottoRankTreeMap.descendingKeySet().stream()
+                .filter(LottoRank::isNotNone)
+                .forEach(rank -> System.out.printf(PRINT_WINNING_STATISTICS_RESULT, rank.getMatchCount(), rank.getPrizeMoney(), lottoRankTreeMap.get(rank)));
+        printRateOfReturn(lottoResult);
     }
 
-    public static void printRateOfReturn(double rateOfReturn) {
-        System.out.printf(PRINT_RATE_OF_RETURN, rateOfReturn);
+    private static void printRateOfReturn(LottoResult lottoResult) {
+        System.out.println(lottoResult.getPrintRateOfReturnMsg());
     }
 
 }

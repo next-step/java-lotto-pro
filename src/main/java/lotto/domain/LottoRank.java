@@ -24,6 +24,10 @@ public enum LottoRank {
                 .orElse(NONE);
     }
 
+    public boolean isNotNone() {
+        return this != NONE;
+    }
+
     private boolean isEqualTo(int matchCount) {
         return this.matchCount == matchCount;
     }

@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.LottoIssue;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPurchase;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 
 import static lotto.view.InputView.*;
@@ -22,10 +23,8 @@ public class LottoController {
     }
 
     private void play(LottoPurchase lottoPurchase, LottoTicket lottoTicket, LottoNumbers lottoWinningNumbers) {
-        lottoTicket.compareWinningNumbers(lottoWinningNumbers);
-        double rateOfReturn = lottoTicket.getRateOfReturn(lottoPurchase);
-        printWinningStatistics(lottoTicket);
-        printRateOfReturn(rateOfReturn);
+        LottoResult lottoResult = new LottoResult(lottoPurchase, lottoTicket, lottoWinningNumbers);
+        printWinningStatistics(lottoResult);
     }
 
     private LottoNumbers getWinningNumbers() {
