@@ -19,10 +19,10 @@ public class WinningLottoStatusTest {
 		));
 		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(3,7,17,18,32,34);
 		WinningLottoStatus status = lottos.getWinningStatus(winningLottoNumbers);
-		int matchThreeCount = status.getMatchCount(LottoResult.MATCH_THREE);
-		int matchFourCount = status.getMatchCount(LottoResult.MATCH_FOUR);
-		int matchFiveCount = status.getMatchCount(LottoResult.MATCH_FIVE);
-		int matchSixCount = status.getMatchCount(LottoResult.MATCH_SIX);
+		int matchThreeCount = status.getMatchCount(Rank.FIFTH);
+		int matchFourCount = status.getMatchCount(Rank.FOURTH);
+		int matchFiveCount = status.getMatchCount(Rank.THIRD);
+		int matchSixCount = status.getMatchCount(Rank.FIRST);
 
 		assertThat(matchThreeCount).isEqualTo(1);
 		assertThat(matchFourCount).isEqualTo(2);

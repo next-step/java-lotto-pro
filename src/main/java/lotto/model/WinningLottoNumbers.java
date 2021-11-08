@@ -27,10 +27,10 @@ public class WinningLottoNumbers extends LottoNumbers {
 	 * @param lotto 로또
 	 * @return 당첨결과
 	 */
-	public LottoResult result(Lotto lotto) {
+	public Rank result(Lotto lotto) {
 		int match = (int)numbers.stream()
 			.filter(lotto::contains)
 			.count();
-		return LottoResult.getResult(match);
+		return Rank.valueOf(match, false);		//TODO 임시처리. 추후수정필요
 	}
 }

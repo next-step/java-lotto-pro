@@ -67,10 +67,10 @@ public class Lottos {
 	 * @return 당첨 결과 객체
 	 */
 	public WinningLottoStatus getWinningStatus(WinningLottoNumbers winningLottoNumbers) {
-		Map<LottoResult, Integer> winningLottoCount = new HashMap<>();
-		EnumSet.allOf(LottoResult.class).forEach(result -> winningLottoCount.put(result, 0));
+		Map<Rank, Integer> winningLottoCount = new HashMap<>();
+		EnumSet.allOf(Rank.class).forEach(result -> winningLottoCount.put(result, 0));
 		lottos.forEach(lotto -> {
-			LottoResult result = winningLottoNumbers.result(lotto);
+			Rank result = winningLottoNumbers.result(lotto);
 			winningLottoCount.merge(result, 1, Integer::sum);
 		});
 
