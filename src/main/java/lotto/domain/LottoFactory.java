@@ -32,8 +32,16 @@ public class LottoFactory {
         List<Integer> numbers = new ArrayList<>();
         String[] inputNumbersBySplit = inputNumbers.split(COMMA);
         for (String number : inputNumbersBySplit) {
-            numbers.add(Integer.parseInt(number));
+            convertToIntegerAndAddNumber(numbers, number);
         }
         return new Lotto(numbers);
+    }
+
+    private static void convertToIntegerAndAddNumber(List<Integer> numbers, String number) {
+        try {
+            numbers.add(Integer.parseInt(number));
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
+        }
     }
 }
