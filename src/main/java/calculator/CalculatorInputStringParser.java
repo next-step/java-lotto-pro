@@ -21,6 +21,7 @@ public class CalculatorInputStringParser {
 	private static List<Integer> extractNumbers(String inputString) {
 		String[] tokens = PATTERN_DEFAULT_DELIMITERS.split(inputString);
 		return Arrays.stream(tokens)
+			.map(String::strip)
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
 	}
@@ -29,6 +30,7 @@ public class CalculatorInputStringParser {
 		String customDelimiter = matcher.group(1);
 		String[] tokens = matcher.group(2).split(customDelimiter);
 		return Arrays.stream(tokens)
+			.map(String::strip)
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
 	}
