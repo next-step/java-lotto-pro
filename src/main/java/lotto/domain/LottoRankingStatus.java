@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRankingStatus {
-    MATCH3(3, false, 5_000),
-    MATCH4(4, false, 50_000),
-    MATCH5(5, false, 1_500_000),
-    MATCH5BONUS1(5, true, 30_000_000),
-    MATCH6(6, false, 2_000_000_000),
+    FIFTH(3, false, 5_000),
+    FOURTH(4, false, 50_000),
+    THIRD(5, false, 1_500_000),
+    SECOND(5, true, 30_000_000),
+    FIRST(6, false, 2_000_000_000),
     NONE(0, false, 0);
 
     private final int matchAmount;
