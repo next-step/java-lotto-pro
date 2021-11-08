@@ -19,7 +19,7 @@ public class Lottos {
 
 	public List<Rank> match(Lotto standardLotto) {
 		return lottos.stream()
-			.map(lotto -> standardLotto.match(lotto))
+			.map(standardLotto::match)
 			.collect(Collectors.toList());
 	}
 	@Override

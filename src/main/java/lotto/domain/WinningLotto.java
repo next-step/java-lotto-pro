@@ -2,17 +2,15 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
 
 	private final Lotto winningLotto;
 
-	public WinningLotto(List<Integer> numbers) {
-		this.winningLotto = new Lotto(
-			numbers.stream()
-			.sorted()
-			.collect(Collectors.toList()));
+	public WinningLotto(Set<LottoNumber> numbers) {
+		this.winningLotto = new Lotto(numbers);
 	}
 
 	public WinningRecord match(Lottos lottos) {

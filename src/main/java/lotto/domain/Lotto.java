@@ -10,22 +10,24 @@ import java.util.stream.Collectors;
 public class Lotto {
 
 	private static final int LOTTO_SIZE = 6;
-	public static final String INVALID_NUMBER = "번호가 올바르지 않습니다.";
+	public static final String INVALID_NUMBER = "6개의 숫자를 입력해주세요.";
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public Lotto(List<Integer> numbers) {
+	public Lotto(Set<LottoNumber> numbers) {
 
-		Set<Integer> numbersCheck = new HashSet<>(numbers);
-		if (isLottoSize(numbersCheck.size())) {
-			throw new IllegalArgumentException(INVALID_NUMBER);
-		}
+		validationLotto(numbers);
 
 		this.lottoNumbers = Collections.unmodifiableList(numbers.stream()
 			.sorted()
-			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 
+	}
+
+	private void validationLotto(Set<LottoNumber> numbers) {
+		if (isLottoSize(numbers.size())) {
+			throw new IllegalArgumentException(INVALID_NUMBER);
+		}
 	}
 
 	private boolean isLottoSize(int size) {
