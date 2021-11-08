@@ -15,6 +15,7 @@ public class LottoTicket {
     public static final int FROM_INDEX = 0;
     public static final int START_INCLUSIVE = 1;
     public static final int END_INCLUSIVE = 45;
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<Integer> lottoNumbers) {

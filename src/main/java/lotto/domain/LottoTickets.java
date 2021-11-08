@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class LottoTickets {
     public static final String SPLIT_DELIMITER = ",";
+
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {

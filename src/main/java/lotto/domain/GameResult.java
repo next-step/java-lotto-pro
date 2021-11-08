@@ -7,6 +7,7 @@ public class GameResult {
     public static final int DEFAULT_VALUE = 0;
     public static final int INCREASE_AMOUNT = 1;
     public static final int PRIZE_MONEY_DEFAULT = 0;
+
     private final Map<Integer, Integer> gameResult;
 
     public GameResult() {
