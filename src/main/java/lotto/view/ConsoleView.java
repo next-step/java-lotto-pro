@@ -1,17 +1,18 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoTicket;
-import lotto.domain.Rank;
-import lotto.domain.WinningMap;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ConsoleView {
     private static final String ENTER_MONEY_TEXT = "구입금액을 입력해 주세요.";
-    private static final String BUY_LOTTO_TEXT = "%d개를 구매했습니다." + System.lineSeparator();
+    private static final String ENTER_MANUAL_COUNT_TEXT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String ENTER_MANUAL_LOTTO_NUMBER_TEXT = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String BUY_LOTTO_TEXT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String ENTER_WINNING_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ERROR_TEXT = "[ERROR] %s";
     private static final String WINNING_COUNT_TEXT = "%d개 일치%s(%d원)- %d개";
@@ -23,8 +24,24 @@ public class ConsoleView {
         return scanner.nextLine();
     }
 
-    public static void printBoughtLotto(int boughtCount) {
-        System.out.printf(BUY_LOTTO_TEXT, boughtCount);
+    public static String enterManualCount() {
+        System.out.println(ENTER_MANUAL_COUNT_TEXT);
+        return scanner.nextLine();
+    }
+
+    public static void printManualLottoNumber() {
+        System.out.println(ENTER_MANUAL_LOTTO_NUMBER_TEXT);
+    }
+
+    public static List<String> enterManualLottoNumber(int manualCount) {
+        return IntStream.range(0, manualCount)
+                .mapToObj(i -> scanner.nextLine())
+                .collect(Collectors.toList());
+    }
+
+    public static void printBoughtLottoCount(BoughtLotto boughtLotto) {
+        System.out.printf(BUY_LOTTO_TEXT, boughtLotto.getManualCount(), boughtLotto.getAutoCount());
+        printLine();
     }
 
     public static void printLottoTicket(LottoTicket lottoTicket) {

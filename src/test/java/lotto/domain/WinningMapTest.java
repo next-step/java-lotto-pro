@@ -89,7 +89,7 @@ class WinningMapTest {
     public void revenueTest(String input, int revenuePercent) {
         LottoNumbers winningNumbers = LottoNumbers.fromString(input);
         Winning winning = Winning.of(winningNumbers, 10);
-        BoughtLotto boughtLotto = new BoughtLotto(1000);
+        BoughtLotto boughtLotto = BoughtLotto.of("1000", "0");
 
         WinningMap winningMap = WinningMap.winningOf(lottoTicket, winning);
 

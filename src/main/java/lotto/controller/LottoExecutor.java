@@ -1,8 +1,16 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.BoughtLotto;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoTicket;
+import lotto.domain.Winning;
+import lotto.domain.WinningMap;
 
-import static lotto.view.ConsoleView.*;
+import static lotto.view.ConsoleView.printBoughtLottoCount;
+import static lotto.view.ConsoleView.printRevenue;
+import static lotto.view.ConsoleView.printLottoTicket;
+import static lotto.view.ConsoleView.printLine;
+import static lotto.view.ConsoleView.printWinning;
 
 public class LottoExecutor {
 
@@ -23,12 +31,13 @@ public class LottoExecutor {
 
     private BoughtLotto enterPayment() {
         BoughtLotto boughtLotto = lottoController.buyLotto();
-        printBoughtLotto(boughtLotto.getBoughtCount());
+        printLine();
         return boughtLotto;
     }
 
     private LottoTicket generateLotto(BoughtLotto boughtLotto) {
         LottoTicket lottoTicket = lottoController.generateLottoTicket(boughtLotto);
+        printBoughtLottoCount(boughtLotto);
         printLottoTicket(lottoTicket);
         printLine();
         return lottoTicket;
