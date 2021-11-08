@@ -12,17 +12,15 @@ public class LottoNumberChoiceRandom implements LottoNumberChoiceStrategy {
 	public static final int NUMBERS_COUNT = 6;
 
 	@Override
-	public LottoNumbers choose() {
+	public List<LottoNumber> choose() {
 		List<Integer> numbers = new ArrayList<>();
 		for (int i = MIN_NUMBER; i <= MAX_NUMBER; ++i) {
 			numbers.add(i);
 		}
 		Collections.shuffle(numbers);
-		return new LottoNumbers(
-			numbers.subList(0, NUMBERS_COUNT)
-				.stream()
-				.map(LottoNumber::new)
-				.collect(Collectors.toList())
-		);
+		return numbers.subList(0, NUMBERS_COUNT)
+			.stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
 	}
 }

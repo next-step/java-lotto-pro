@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public interface LottoNumberChoiceStrategy {
-	LottoNumbers choose();
+	List<LottoNumber> choose();
 }
