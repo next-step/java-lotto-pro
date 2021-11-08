@@ -26,8 +26,7 @@ public class LottoNumber {
     }
 
     private void validateRange(int number) {
-        if (number < LottoNumberRange.LOTTO_NUMBER_MIN_RANGE.getRange()
-            || number > LottoNumberRange.LOTTO_NUMBER_MAX_RANGE.getRange()) {
+        if (!LottoNumberRange.isBetween(number)) {
             throw new IllegalArgumentException(Message.OUT_OF_RANGE_NUMBER_MESSAGE.getMessage());
         }
     }
