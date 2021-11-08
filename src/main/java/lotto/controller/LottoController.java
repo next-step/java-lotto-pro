@@ -18,6 +18,8 @@ public class LottoController {
         }
         resultView.printBuyMessage(money);
         
+        int manualBuyQuantity = inputView.enterManualBuyQuantity(money);
+        
         Lottos lottos = new Lottos(money);
         resultView.printLottoList(lottos);
         lottos.execute(inputView.enterWinningLotto());

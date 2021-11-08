@@ -12,6 +12,7 @@ import lotto.utils.ValidationUtils;
 
 public class InputView {
     private static final String INSERT_MONEY = "구입금액을 입력해 주세요.";
+    private static final String INSERT_MANUAL_BUY_QUANTITY = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INSERT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INSERT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
 
@@ -29,6 +30,17 @@ public class InputView {
         System.out.println(ERROR_ONLY_NUMBER);
         return enterMoney();
     }
+
+    public int enterManualBuyQuantity(Money money) {
+    	System.out.println(INSERT_MANUAL_BUY_QUANTITY);
+        String number = ConsoleUtils.console();
+        if (ValidationUtils.isNumber(number) && Integer.parseInt(number) <= money.buyableQuantity()) {
+            return Integer.parseInt(number);
+        }
+        System.out.println(ERROR_ONLY_NUMBER);
+        return enterManualBuyQuantity(money);
+    }
+
     public WinningLotto enterWinningLotto() {
         return enterWinningNumbers();
     }
