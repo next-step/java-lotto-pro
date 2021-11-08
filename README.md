@@ -60,5 +60,8 @@
 보너스(`Bonus`)
 `Bonus`는 보너스 숫자를 가진다
 
+로또_개수(`LottoCount`)
+`LottoCount`는 전체 로또 개수, 수동 로또 개수, 자동 로또 개수를 가진다
+
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
