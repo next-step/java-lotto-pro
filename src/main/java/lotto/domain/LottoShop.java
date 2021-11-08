@@ -27,29 +27,29 @@ public class LottoShop {
     }
 
     public void open() {
-        PurchaseAmount amount = readAmount();
-        Lottos lottos = buyLottos(amount);
+        Amount amount = readAmount();
+        Lottos lottos = purchaseLottos(amount);
         resultView.printPurchaseAckMessage(lottos.count());
         resultView.printLottos(lottos);
 
         LottoWinReader lottoWinReader = getLottoWinReader();
 
-        Map<Winnings, Integer> statistic = getStatistic(lottoWinReader, lottos);
+        Map<Winnings, Integer> statistic = giveStatistic(lottoWinReader, lottos);
         resultView.printCorrespondLottoNumber(statistic);
         Revenue revenue = getRevenue(amount, statistic);
-        resultView.printTotalRevenueMessage(revenue.percentage());
+        resultView.printTotalRevenueMessage(revenue.profitRate());
     }
 
-    private PurchaseAmount readAmount() {
+    private Amount readAmount() {
         try {
             resultView.printPurchaseAmountMessage();
-            return new PurchaseAmount(Long.parseLong(inputView.readAmount()));
+            return new Amount(Long.parseLong(inputView.readAmount()));
         } catch (IllegalArgumentException e) {
             return readAmount();
         }
     }
 
-    private Lottos buyLottos(PurchaseAmount amount) {
+    private Lottos purchaseLottos(Amount amount) {
         return lottoMachine.issueAuto(amount);
     }
 
@@ -65,14 +65,14 @@ public class LottoShop {
         }
     }
 
-    private Map<Winnings, Integer> getStatistic(LottoWinReader lottoWinReader, Lottos lottos) {
+    private Map<Winnings, Integer> giveStatistic(LottoWinReader lottoWinReader, Lottos lottos) {
         resultView.printWinStatisticMessage();
         LottoStatistic lottoStatistic = lottoWinReader.distinguish(lottos);
         List<Winnings> winnings = Arrays.stream(Winnings.values()).collect(toList());
         return lottoStatistic.result(winnings);
     }
 
-    private Revenue getRevenue(PurchaseAmount amount, Map<Winnings, Integer> statistic) {
+    private Revenue getRevenue(Amount amount, Map<Winnings, Integer> statistic) {
         return new Revenue(amount, statistic);
     }
 
