@@ -71,7 +71,7 @@ public class LottoView {
         return scanner.nextInt();
     }
 
-    public static LottoCount getManualCount(Money money) {
+    public static LottoCount getLottoCount(Money money) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return new LottoCount(money, scanner.nextInt());
     }

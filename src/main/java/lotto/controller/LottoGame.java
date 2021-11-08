@@ -15,20 +15,28 @@ public class LottoGame {
 
     public void start() {
         final Money money = LottoView.getMoney();
-        final LottoCount count = LottoView.getManualCount(money);
+        final LottoCount count = LottoView.getLottoCount(money);
 
-        final ManualLottos manualLottos = LottoView.getManualLottos(count);
-        final AutoLottos autoLottos = new AutoLottos(count, randomNumbers);
-        final Lottos lottos = new Lottos(autoLottos, manualLottos);
+        final Lottos lottos = getLottos(count);
 
         LottoView.displayCount(money);
         LottoView.displayLottos(lottos);
 
-        final WinningLotto winningLotto = new WinningLotto(
-                LottoView.getWinningNumbers(),
-                LottoView.getBonusBall());
+        final WinningLotto winningLotto = getWinningLotto();
         final List<Rank> ranks = lottos.match(winningLotto);
 
         LottoView.displayStatic(new Result(ranks, money));
+    }
+
+    private WinningLotto getWinningLotto() {
+        final String winningNumbers = LottoView.getWinningNumbers();
+        final Integer bonusBall = LottoView.getBonusBall();
+        return new WinningLotto(winningNumbers, bonusBall);
+    }
+
+    private Lottos getLottos(LottoCount count) {
+        final ManualLottos manualLottos = LottoView.getManualLottos(count);
+        final AutoLottos autoLottos = new AutoLottos(count, randomNumbers);
+        return new Lottos(autoLottos, manualLottos);
     }
 }
