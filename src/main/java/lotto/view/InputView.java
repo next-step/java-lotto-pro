@@ -104,18 +104,23 @@ public class InputView {
     
     public List<LottoNumbers> enterManualNumbers(int manualBuyQuantity) {
     	System.out.println(INSERT_MANUAL_BUY_NUMBER);
-    	List<LottoNumbers> lottos = new ArrayList<LottoNumbers>(); 
+    	List<LottoNumbers> lottoNumbers = new ArrayList<LottoNumbers>(); 
     	for (int i = 0; i < manualBuyQuantity;) {
-            String[] numbers = ConsoleUtils.console().split(",");
-            if (checkNumbers(numbers)) {
-            	lottos.add(LottoNumbers.valueOf(Arrays.stream(numbers)
-	                        .mapToInt(Integer::parseInt)
-	                        .boxed()
-	                        .collect(Collectors.toList())));
-            	i++;
-			}
+    		enterManualNumber(lottoNumbers);
+    		i = lottoNumbers.size();
 		}
-    	return lottos;
+    	return lottoNumbers;
+    }
+    
+    private List<LottoNumbers> enterManualNumber(List<LottoNumbers> lottoNumbers) {
+        String[] numbers = ConsoleUtils.console().split(",");
+        if (checkNumbers(numbers)) {
+        	lottoNumbers.add(LottoNumbers.valueOf(Arrays.stream(numbers)
+                        .mapToInt(Integer::parseInt)
+                        .boxed()
+                        .collect(Collectors.toList())));
+        }
+        return lottoNumbers;
     }
 
 }
