@@ -3,10 +3,12 @@ package nextstep.lotto.domain;
 import nextstep.lotto.constance.LottoExceptionMessage;
 import nextstep.lotto.exception.LottoRuntimeException;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
-    private static final LottoNumber LOTTO_MIN_NUMBER = new LottoNumber(1);
-    private static final LottoNumber LOTTO_MAX_NUMBER = new LottoNumber(9);
+    private static final Integer LOTTO_MIN_NUMBER = 1;
+    private static final Integer LOTTO_MAX_NUMBER = 9;
 
     private final Integer lottoNumber;
 
@@ -16,16 +18,21 @@ public class LottoNumber {
     }
 
     private void validateLottoNumber(Integer lottoNumber) {
-        if (!(LOTTO_MIN_NUMBER.isGreaterThanEqual(lottoNumber) && LOTTO_MAX_NUMBER.isLessThanEqual(lottoNumber))) {
+        if (!(LOTTO_MIN_NUMBER <= lottoNumber && LOTTO_MAX_NUMBER >= lottoNumber)) {
             throw new LottoRuntimeException(LottoExceptionMessage.INVALID_LOTTO_NUMBER_MESSAGE);
         }
     }
 
-    private Boolean isGreaterThanEqual(Integer lottoNumber) {
-        return this.lottoNumber >= lottoNumber;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return Objects.equals(lottoNumber, that.lottoNumber);
     }
 
-    private Boolean isLessThanEqual(Integer lottoNumber) {
-        return this.lottoNumber <= lottoNumber;
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }
