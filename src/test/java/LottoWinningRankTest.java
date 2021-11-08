@@ -1,22 +1,22 @@
 import static org.assertj.core.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoWinningRankTest {
 
 	@ParameterizedTest
-	@CsvSource(value = {"6:FIRST", "4:FOURTH", "3:FIFTH", "2:OTHER", "1:OTHER", "0:OTHER"}, delimiter = ':')
-	void valueOf_exceptSecondThird(int matchingCount, String rankName) {
-		assertThat(LottoWinningRank.valueOf(matchingCount, true).name()).isEqualTo(rankName);
-		assertThat(LottoWinningRank.valueOf(matchingCount, false).name()).isEqualTo(rankName);
-	}
-
-	@Test
-	void valueOf_second_third() {
-		final int matchingCount = 5;
-		assertThat(LottoWinningRank.valueOf(matchingCount, true)).isEqualTo(LottoWinningRank.SECOND);
-		assertThat(LottoWinningRank.valueOf(matchingCount, false)).isEqualTo(LottoWinningRank.THIRD);
+	@CsvSource(value = {
+		"6:true:FIRST", "6:false:FIRST",
+		"5:true:SECOND",
+		"5:false:THIRD",
+		"4:true:FOURTH", "4:false:FOURTH",
+		"3:true:FIFTH", "3:false:FIFTH",
+		"2:true:OTHER", "2:false:OTHER",
+		"1:true:OTHER", "1:false:OTHER",
+		"0:true:OTHER", "0:false:OTHER",
+	}, delimiter = ':')
+	void valueOf(int matchingCount, boolean hasBonus, String rankName) {
+		assertThat(LottoWinningRank.valueOf(matchingCount, hasBonus).name()).isEqualTo(rankName);
 	}
 }
