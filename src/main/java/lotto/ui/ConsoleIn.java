@@ -2,6 +2,7 @@ package lotto.ui;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoType;
 import lotto.domain.PurchaseAmount;
 
 import java.util.Arrays;
@@ -68,7 +69,7 @@ public class ConsoleIn {
                     .collect(Collectors.toList());
             checkWinNumber(tokens);
 
-            return new Lotto(tokens.stream()
+            return Lotto.from(tokens.stream()
                     .mapToInt(Integer::parseInt)
                     .boxed()
                     .collect(Collectors.toList()));

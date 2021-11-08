@@ -16,7 +16,7 @@ public class PurchaseAmount {
     }
 
     public boolean isAvailableManualQuantity(Lottos manualLottos) {
-        return getQuantity() >= manualLottos.getQuantity();
+        return getQuantity() >= manualLottos.getTotalQuantity();
     }
 
     private void validate(int amount) {

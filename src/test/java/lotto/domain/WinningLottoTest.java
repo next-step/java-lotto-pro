@@ -21,12 +21,12 @@ class WinningLottoTest {
                           WinningResult expected) {
         // given
         WinningLotto winningLotto = new WinningLotto(
-                new Lotto(Arrays.asList(number1, number2, number3, number4, number5, number6)),
+                Lotto.from(Arrays.asList(number1, number2, number3, number4, number5, number6)),
                 new LottoNumber(bonusNumber)
         );
 
         // when
-        WinningResult winningResult = winningLotto.getWinningResult(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        WinningResult winningResult = winningLotto.getWinningResult(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         // then
         assertThat(winningResult).isEqualTo(expected);

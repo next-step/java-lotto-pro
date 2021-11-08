@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 public class LottoCalculator {
 
     public static final int LOTTO_PRICE = 1_000;
@@ -34,7 +31,7 @@ public class LottoCalculator {
     }
 
     public int getTotalQuantity() {
-        return lottos.getQuantity();
+        return lottos.getTotalQuantity();
     }
 
     public int getAutoQuantity() {
@@ -56,14 +53,6 @@ public class LottoCalculator {
     }
 
     private Lottos generateLottos(PurchaseAmount purchaseAmount, Lottos manualLottos) {
-        int autoQuantity = purchaseAmount.getQuantity() - manualLottos.getQuantity();
-        return Lottos.of(getAutoLottos(purchaseAmount, autoQuantity), manualLottos);
-    }
-
-    private Lottos getAutoLottos(PurchaseAmount purchaseAmount, int autoQuantity) {
-        return IntStream.range(0, autoQuantity)
-                .mapToObj(ignore -> LottoGenerator.generate())
-                .collect(Collectors.collectingAndThen(
-                        Collectors.toList(), Lottos::fromAutoLottos));
+        return LottosGenerator.generate(purchaseAmount, manualLottos);
     }
 }

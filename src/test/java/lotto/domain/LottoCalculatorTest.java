@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -25,20 +26,18 @@ public class LottoCalculatorTest {
     @DisplayName("로또 계산기를 생성한다.")
     void create() {
         // given
-        Lotto manualLotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto manualLotto2 = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
-        Lottos manualLottos = Lottos.fromManualLottos(Arrays.asList(manualLotto1, manualLotto2));
+        Lotto manualLotto1 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto manualLotto2 = Lotto.from(Arrays.asList(7, 8, 9, 10, 11, 12));
+        Lottos manualLottos = Lottos.of(manualLotto1, manualLotto2);
 
         // when
         LottoCalculator lottoCalculator = new LottoCalculator(purchaseAmount, manualLottos);
-        List<Lotto> lottos = lottoCalculator.getLottos().getManualLottos();
 
         // then
         assertAll(
                 () -> assertThat(lottoCalculator.getTotalQuantity()).isEqualTo(purchaseAmount.getQuantity()),
                 () -> assertThat(lottoCalculator.getAutoQuantity()).isEqualTo(purchaseAmount.getQuantity() - manualLottos.getManualQuantity()),
-                () -> assertThat(lottoCalculator.getManualQuantity()).isEqualTo(manualLottos.getManualQuantity()),
-                () -> assertThat(lottos).isEqualTo(manualLottos.getManualLottos())
+                () -> assertThat(lottoCalculator.getManualQuantity()).isEqualTo(manualLottos.getManualQuantity())
         );
     }
 
@@ -47,9 +46,9 @@ public class LottoCalculatorTest {
     void createThrowException() {
         // given
         PurchaseAmount purchaseAmount = new PurchaseAmount(1_000);
-        Lotto manualLotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto manualLotto2 = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
-        Lottos manualLottos = Lottos.fromManualLottos(Arrays.asList(manualLotto1, manualLotto2));
+        Lotto manualLotto1 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto manualLotto2 = Lotto.from(Arrays.asList(7, 8, 9, 10, 11, 12));
+        Lottos manualLottos = Lottos.of(manualLotto1, manualLotto2);
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
