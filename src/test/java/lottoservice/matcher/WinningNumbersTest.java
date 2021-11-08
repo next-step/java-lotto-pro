@@ -14,6 +14,7 @@ import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.lottonumber.LottoArrangeManipulator;
 import lottoservice.lottonumber.LottoNumber;
 import lottoservice.lottonumber.LottoNumbersMaker;
+import lottoservice.testfactory.TestLottoDataFactory;
 
 public class WinningNumbersTest {
 
@@ -24,7 +25,7 @@ public class WinningNumbersTest {
 	@DisplayName("당첨번호_생성")
 	@Test
 	public void makeLottoWinningNumbers() {
-		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(Arrays.asList(3, 34, 22, 17, 26, 7));
+		List<LottoNumber> lottoNumbers = TestLottoDataFactory.getLottoNumbers(3, 34, 22, 17, 26, 7);
 		WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
 
 		assertThat(winningNumbers.sizeOfWinningNumbers()).isEqualTo(lottoNumbers.size());
@@ -35,30 +36,24 @@ public class WinningNumbersTest {
 	@DisplayName("당첨번호_리스트_중복숫자_입력_예외")
 	@Test
 	public void validateLottoNumberGroupRule_duplicate() {
-		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(Arrays.asList(3, 34, 22, 17, 3, 7));
-
 		assertThatThrownBy(() -> {
-			WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
+			WinningNumbers winningNumbers = new WinningNumbers(TestLottoDataFactory.getLottoNumbers(3, 34, 22, 17, 3, 7));
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
 	@DisplayName("당첨번호_리스트_갯수가_작은경우_예외")
 	@Test
 	public void validateLottoNumberGroupRule_smaller_size() {
-		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 22, 17, 3, 7));
-
 		assertThatThrownBy(() -> {
-			WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
+			WinningNumbers winningNumbers = new WinningNumbers(TestLottoDataFactory.getLottoNumbers(1, 22, 17, 3, 7));
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 
 	@DisplayName("당첨번호_리스트_갯수가_큰_경우_예외")
 	@Test
 	public void validateLottoNumberGroupRule_biggersize() {
-		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(Arrays.asList(1, 22, 17, 3, 7, 30, 45));
-
 		assertThatThrownBy(() -> {
-			WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
+			WinningNumbers winningNumbers = new WinningNumbers(TestLottoDataFactory.getLottoNumbers(1, 22, 17, 3, 7, 30, 45));
 		}).isInstanceOf(InvalidLottoFormatException.class);
 	}
 

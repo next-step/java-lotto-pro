@@ -2,11 +2,6 @@ package lottoservice.matcher;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import lottoservice.exception.InvalidLottoFormatException;
 import lottoservice.lottonumber.LottoNumber;
 import lottoservice.lottoticket.LottoTicket;
+import lottoservice.testfactory.TestLottoDataFactory;
 
 class BonusNumberTest {
 
@@ -50,8 +46,7 @@ class BonusNumberTest {
 	@ParameterizedTest
 	@CsvSource(value = {"1,true","10,true","45,false"})
 	public void 보너스번호_매칭(int number, boolean matchBonus){
-		List<LottoNumber> lottoNumbers = Arrays.asList(1,5,10,25,30,6).stream().map(it -> LottoNumber.valueOf(it)).collect(Collectors.toList());
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket = TestLottoDataFactory.getLottoTicket(1,5,10,25,30,6);
 		BonusNumber bonusNumber = new BonusNumber(number);
 		assertThat(bonusNumber.matchTicket(lottoTicket)).isEqualTo(matchBonus);
 	}
