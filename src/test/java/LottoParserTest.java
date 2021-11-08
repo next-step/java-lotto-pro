@@ -21,6 +21,13 @@ class LottoParserTest {
 		);
 	}
 
+	@Test
+	void parse_null() {
+		assertThatExceptionOfType(LottoFormatException.class)
+			.isThrownBy(() -> LottoParser.parse(null))
+			.withMessage(LottoFormatException.ERROR_MESSAGE);
+	}
+
 	@ParameterizedTest
 	@ValueSource(strings = {"1,2", "1,2,3,4,5,6,7"})
 	void parse_invalidLength(String s) {
