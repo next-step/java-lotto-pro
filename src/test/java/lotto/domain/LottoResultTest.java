@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.controller.LottoController;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -36,7 +37,7 @@ class LottoResultTest {
     }, delimiter = ':')
     void lottoResult(String input, int key) {
         // when
-        String[] stringNumbers = input.split(LottoMachine.NUMBER_DELIMITER);
+        String[] stringNumbers = input.split(LottoController.NUMBER_DELIMITER);
         int[] numbers = Arrays.stream(stringNumbers)
                 .mapToInt(Integer::parseInt)
                 .toArray();
