@@ -31,10 +31,8 @@ public class OutputView {
     System.out.println(lottoTicket.toString());
   }
 
-  public static void printDrawnLotto(LottoNumbers lottoNumbers) {
+  public static void printInputWinningLottoNumbersGuideMessage() {
     System.out.println(LAST_WEEK_DRAWN_LOTTO);
-    System.out.println(lottoNumbers.toString());
-    System.out.println();
   }
 
   public static void printStatisticsGuideMessage() {

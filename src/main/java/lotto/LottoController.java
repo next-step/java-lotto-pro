@@ -6,11 +6,12 @@ import lotto.model.LottoBuyer;
 import lotto.model.LottoNumbers;
 import lotto.model.MatchResults;
 import lotto.model.PurchaseAmount;
+import lotto.view.InputView;
 
 import static lotto.view.InputView.*;
 import static lotto.view.OutputView.*;
 import static lotto.view.OutputView.printBuyCount;
-import static lotto.view.OutputView.printDrawnLotto;
+import static lotto.view.OutputView.printInputWinningLottoNumbersGuideMessage;
 
 public class LottoController {
   public static void run() {
@@ -21,8 +22,7 @@ public class LottoController {
     LottoBuyer lottoBuyer = LottoBuyer.buy(purchaseAmount, lottoGenerator);
     printGeneratedLottos(lottoBuyer.getLottoTicket());
 
-    LottoNumbers drawnLottoNumbers = lottoGenerator.generate();
-    printDrawnLotto(drawnLottoNumbers);
+    LottoNumbers drawnLottoNumbers = InputView.inputWinningLottoNumbers();
 
     processStatistics(lottoBuyer, drawnLottoNumbers);
   }
