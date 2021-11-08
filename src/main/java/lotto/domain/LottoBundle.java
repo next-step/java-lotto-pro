@@ -26,7 +26,7 @@ public class LottoBundle {
         return lottoBundleStatus;
     }
 
-    public LottoResult getLottoResult(Lotto winningLotto) {
+    public LottoResult getLottoResult(WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
         for (Lotto purchasedLotto : purchasedLottos) {
             LottoRank lottoRank = winningLotto.checkMatchRank(purchasedLotto);
