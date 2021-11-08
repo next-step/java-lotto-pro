@@ -32,10 +32,6 @@ public enum LottoRank {
         return matchingCount;
     }
 
-    public int getBonusMatchingCount() {
-        return bonusMatchingCount;
-    }
-
     public int getPrice() {
         return price;
     }
