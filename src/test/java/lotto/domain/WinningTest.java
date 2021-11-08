@@ -41,10 +41,13 @@ class WinningTest {
         lotto.add(winningNumberSixMatchLotto);
 
         Lottos lottos = new Lottos(lotto);
-        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        Lotto verifiedWinningNumber = Stream.of(1,2,3,4,5,6)
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
 
         //when
-        WinningResult winningResult = lottos.winningResult(winningNumber);
+        WinningResult winningResult = lottos.winningResult(verifiedWinningNumber);
 
         //then
         assertThat(winningResult.winnerPerRank(Rank.FOURTH_PLACE)).isEqualTo(1);

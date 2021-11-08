@@ -8,8 +8,6 @@ import lotto.view.LottoPurchaseView;
 import lotto.view.LottoWinnerStatisticView;
 import lotto.view.LottoWinningNumberView;
 
-import java.util.List;
-
 public class LottoController {
     public static void main(String[] args) {
         Money money = new Money(LottoPurchaseView.input());
@@ -17,7 +15,6 @@ public class LottoController {
 
         LottoPurchaseListView.print(lottos);
 
-        List<Integer> winnerNumber = LottoWinningNumberView.input();
-        LottoWinnerStatisticView.print(lottos.winningResult(winnerNumber), money);
+        LottoWinnerStatisticView.print(lottos.winningResult(LottoWinningNumberView.input()), money);
     }
 }
