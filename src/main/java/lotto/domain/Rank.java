@@ -12,8 +12,8 @@ public enum Rank {
 	SECOND(5, 30_000_000),
 	FIRST(6,2_000_000_000);
 
-	private int matchCount;
-	private int prizeMoney;
+	private final int matchCount;
+	private final int prizeMoney;
 
 	Rank(final int matchCount, final int prizeMoney) {
 		this.matchCount = matchCount;
