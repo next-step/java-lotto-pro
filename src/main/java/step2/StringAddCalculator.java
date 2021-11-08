@@ -9,7 +9,8 @@ public final class StringAddCalculator {
     private static final int ZERO = 0;
     private static final int SINGLE_DIGIT_LENGTH = 1;
 
-    private static final Pattern SEPARATOR = Pattern.compile("//(.)\n(.*)");
+    private static final String DELIMITER = "[,:]";
+    private static final Pattern CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
 
     private static final String[] EMPTY_TEXT = {};
 
@@ -25,11 +26,15 @@ public final class StringAddCalculator {
             return ZERO;
         }
 
-        if (hasSingleDigit(text)) {
+        if (hasSingleNumber(text)) {
             return parseInt(text);
         }
 
-        return sum(split(text));
+        if (isDelimiterContainCommaAndColon(text)) {
+            return sum(split(text));
+        }
+
+        return sum(customSplit(text));
     }
 
     private static boolean isNull(final String text) {
@@ -40,7 +45,7 @@ public final class StringAddCalculator {
         return text.isEmpty();
     }
 
-    private static boolean hasSingleDigit(final String text) {
+    private static boolean hasSingleNumber(final String text) {
         return text.length() == SINGLE_DIGIT_LENGTH;
     }
 
@@ -48,8 +53,16 @@ public final class StringAddCalculator {
         return Integer.parseInt(text);
     }
 
-    public static String[] split(final String text) {
-        final Matcher matcher = SEPARATOR.matcher(text);
+    private static boolean isDelimiterContainCommaAndColon(final String text) {
+        return text.contains(",") || text.contains(":");
+    }
+
+    private static String[] split(final String text) {
+        return text.split(DELIMITER);
+    }
+
+    private static String[] customSplit(final String text) {
+        final Matcher matcher = CUSTOM_DELIMITER.matcher(text);
 
         if (matcher.find()) {
             final String customDelimiter = matcher.group(1);
@@ -59,11 +72,24 @@ public final class StringAddCalculator {
         return EMPTY_TEXT;
     }
 
-    public static int sum(final String[] splitText) {
+    private static boolean isNegative(final int number) {
+        return number < ZERO;
+    }
+
+    private static void validateNegative(final int number) {
+        if (isNegative(number)) {
+            throw new RuntimeException("not allowed negative numbers.");
+        }
+    }
+
+    private static int sum(final String[] splitText) {
         int sum = 0;
 
         for (String text : splitText) {
-            sum += parseInt(text);
+            final int number = parseInt(text);
+            validateNegative(number);
+
+            sum += number;
         }
 
         return sum;
