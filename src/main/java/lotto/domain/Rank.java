@@ -5,35 +5,50 @@ import java.util.Map;
 
 public enum Rank {
 
-    FIRST_PLACE(6, 2000000000),
-    SECOND_PLACE(5, 1500000),
-    THIRD_PLACE(4, 50000),
-    FOURTH_PLACE(3, 5000),
-    LOSER(0 ,0);
+    FIRST_PLACE(6, 2_000_000_000, false),
+    SECOND_PLACE(5, 1_500_000, false),
+    BONUS_SECOND_PLACE(5, 30_000_000, true),
+    THIRD_PLACE(4, 50_000, false),
+    FOURTH_PLACE(3, 5_000, false),
+    LOSER(0 ,0, false);
 
-    private static Map<Integer, Rank> rankMap = new HashMap<>();
+    private static Map<Integer, Map<Boolean, Rank>> rankMap = new HashMap<>();
 
     static {
         for (Rank rank : Rank.values()) {
-            rankMap.put(rank.getWinningNumberCount(), rank);
+                rankMap.computeIfAbsent(rank.getWinningNumberCount(), key -> new HashMap<>());
+                Map<Boolean, Rank> accordingToBonusRankMap = rankMap.get(rank.getWinningNumberCount());
+                accordingToBonusRankMap.put(rank.isBonus, rank);
+                rankMap.put(rank.getWinningNumberCount(), accordingToBonusRankMap);
         }
     }
 
     private int winningNumberCount;
     private int prizeMoney;
+    private boolean isBonus;
 
-    Rank(int winningNumberCount, int prizeMoney) {
+    Rank(int winningNumberCount, int prizeMoney, boolean isBonus) {
         this.winningNumberCount = winningNumberCount;
         this.prizeMoney = prizeMoney;
+        this.isBonus = isBonus;
     }
 
     static Rank of(int winningNumberCount) {
-        Rank rank = rankMap.get(winningNumberCount);
+        Map<Boolean, Rank> rank = rankMap.get(winningNumberCount);
         if (rank == null) {
             return LOSER;
         }
-        return rank;
+        return rank.get(false);
     }
+
+    static Rank of(int winningNumberCount, boolean matchBonus) {
+        Map<Boolean, Rank> rank = rankMap.get(winningNumberCount);
+        if (rank == null) {
+            return LOSER;
+        }
+        return rank.get(matchBonus);
+    }
+
 
     public boolean isPrize() {
         return this != Rank.LOSER;
