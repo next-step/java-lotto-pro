@@ -35,14 +35,14 @@ public class InputView {
         return enterMoney();
     }
 
-    public IssueQuantity enterManualBuyQuantity(Money money) {
+    public IssueQuantity enterManualQuantity(Money money) {
     	System.out.println(INSERT_MANUAL_BUY_QUANTITY);
         String number = ConsoleUtils.console();
         if (ValidationUtils.isNumber(number) && Integer.parseInt(number) <= money.buyableQuantity()) {
             return new IssueQuantity().manual(Integer.parseInt(number)).auto(money.buyableQuantity() - Integer.parseInt(number));
         }
         System.out.println(ERROR_ONLY_NUMBER);
-        return enterManualBuyQuantity(money);
+        return enterManualQuantity(money);
     }
 
     public WinningLotto enterWinningLotto() {
