@@ -7,6 +7,7 @@ import lotto.domain.LottoResult;
 import lotto.domain.PurchaseAmount;
 import lotto.exception.LottoException;
 import lotto.utils.Console;
+import lotto.view.ResultView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +28,7 @@ public class LottoController {
 
         Lotto lastWeekWinningLotto = getLastWeekWinningLotto();
         LottoResult lottoResult = new LottoResult(lastWeekWinningLotto, lottoList);
-        System.out.println(lottoResult);
+        System.out.println(ResultView.print(lottoResult));
     }
 
     private PurchaseAmount getPurchaseAmount() {

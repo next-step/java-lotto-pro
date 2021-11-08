@@ -4,11 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.domain.LottoPrize.FIRST_PLACE;
-import static lotto.domain.LottoPrize.FOURTH_PLACE;
-import static lotto.domain.LottoPrize.SECOND_PLACE;
-import static lotto.domain.LottoPrize.THIRD_PLACE;
-
 public class LottoResult {
 
     private final Lotto winningLotto;
@@ -28,11 +23,11 @@ public class LottoResult {
         }
     }
 
-    protected int getResult(int key) {
+    public int getResult(int key) {
         return resultMap.get(key) == null ? 0 : resultMap.get(key);
     }
 
-    protected double getEarningsRate() {
+    public double getEarningsRate() {
         int purchaseAmount = Lotto.PRICE * lottoList.size();
         double winningAmount = 0;
         for (Map.Entry<Integer, Integer> entry : resultMap.entrySet()) {
@@ -40,21 +35,5 @@ public class LottoResult {
         }
         double earningsRate = winningAmount / purchaseAmount;
         return Math.floor(earningsRate * 100) / 100.0; // 소수점 셋째 자리 버림
-    }
-
-    @Override
-    public String toString() {
-        return String.format("당첨 통계\n" +
-                        "---------\n" +
-                        "%d개 일치 (%d원)- %d개\n" +
-                        "%d개 일치 (%d원)- %d개\n" +
-                        "%d개 일치 (%d원)- %d개\n" +
-                        "%d개 일치 (%d원)- %d개\n" +
-                        "총 수익률은 %f입니다."
-                , FOURTH_PLACE.getMatchCount(), FOURTH_PLACE.getPrizeMoney(), getResult(FOURTH_PLACE.getMatchCount())
-                , THIRD_PLACE.getMatchCount(), THIRD_PLACE.getPrizeMoney(), getResult(THIRD_PLACE.getMatchCount())
-                , SECOND_PLACE.getMatchCount(), SECOND_PLACE.getPrizeMoney(), getResult(SECOND_PLACE.getMatchCount())
-                , FIRST_PLACE.getMatchCount(), FIRST_PLACE.getPrizeMoney(), getResult(FIRST_PLACE.getMatchCount())
-                , getEarningsRate());
     }
 }
