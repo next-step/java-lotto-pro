@@ -4,11 +4,13 @@ import java.util.Objects;
 
 public final class StringAddCalculator {
 
-    private StringAddCalculator() {
-    }
-
     private static final int ZERO = 0;
     private static final int SINGLE_DIGIT_LENGTH = 1;
+
+    private static final String SEPARATOR = ",";
+
+    private StringAddCalculator() {
+    }
 
     public static int splitAndSum(final String text) {
         if (isNull(text)) {
@@ -23,7 +25,7 @@ public final class StringAddCalculator {
             return parseInt(text);
         }
 
-        return 2;
+        return sum(split(text));
     }
 
     private static boolean isNull(final String text) {
@@ -40,5 +42,19 @@ public final class StringAddCalculator {
 
     private static int parseInt(final String text) {
         return Integer.parseInt(text);
+    }
+
+    public static String[] split(final String text) {
+        return text.split(SEPARATOR);
+    }
+
+    public static int sum(final String[] splitText) {
+        int sum = 0;
+
+        for (String text : splitText) {
+            sum += parseInt(text);
+        }
+
+        return sum;
     }
 }
