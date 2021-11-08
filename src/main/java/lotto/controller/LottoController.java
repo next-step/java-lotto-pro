@@ -12,12 +12,12 @@ import static lotto.view.OutputView.*;
 public class LottoController {
 
     public void run() {
-        LottoPurchase lottoPurchase = getPurchaseAmount();
+        LottoPurchase lottoPurchase = inputLottoPurchase();
 
         LottoTicket lottoTicket = new LottoTicket(LottoIssue.ofAuto(lottoPurchase.getPurchaseQuantity()));
         printLottoNumber(lottoTicket);
 
-        LottoNumbers lottoWinningNumbers = getWinningNumbers();
+        LottoNumbers lottoWinningNumbers = inputLottoWinningNumbers();
 
         play(lottoPurchase, lottoTicket, lottoWinningNumbers);
     }
@@ -27,12 +27,12 @@ public class LottoController {
         printWinningStatistics(lottoResult);
     }
 
-    private LottoNumbers getWinningNumbers() {
+    private LottoNumbers inputLottoWinningNumbers() {
         printInputWinningNumbers();
         return new LottoNumbers(inputWinningNumbers());
     }
 
-    private LottoPurchase getPurchaseAmount() {
+    private LottoPurchase inputLottoPurchase() {
         printPurchaseAmount();
         LottoPurchase lottoPurchase = new LottoPurchase(inputPurchaseAmount());
         printPurchaseQuantity(lottoPurchase.getPurchaseQuantity());

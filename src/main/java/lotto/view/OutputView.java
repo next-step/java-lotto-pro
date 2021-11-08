@@ -47,7 +47,7 @@ public class OutputView {
     }
 
     private static void printRateOfReturn(LottoResult lottoResult) {
-        System.out.println(lottoResult.getPrintRateOfReturnMsg());
+        System.out.println(lottoResult.makePrintRateOfReturnMsg());
     }
 
 }

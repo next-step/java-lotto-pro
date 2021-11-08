@@ -29,10 +29,10 @@ public class LottoNumbers {
     }
 
     public LottoRank compareWinningNumbers(LottoNumbers lottoWinningNumbers) {
-        return LottoRank.from(getMatchCount(lottoWinningNumbers));
+        return LottoRank.from(calculateMatchCount(lottoWinningNumbers));
     }
 
-    private int getMatchCount(LottoNumbers lottoWinningNumbers) {
+    private int calculateMatchCount(LottoNumbers lottoWinningNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(lottoNumber -> lottoWinningNumbers.getLottoNumbers()
                         .stream()

@@ -41,7 +41,7 @@ class LottoNumbersTest {
     }
 
     @Test
-    public void 로또번호가_중복이다() {
+    public void 로또번호는_중복이_될_수_없다() {
         //given
         List<Integer> input = Arrays.asList(1, 1, 2, 3, 4, 5);
 
@@ -92,12 +92,13 @@ class LottoNumbersTest {
     @MethodSource("generateWinningNumbers")
     public void 로또번호와_당첨번호_비교_후_당첨결과_반환(List<Integer> inputWinningNumbers, LottoRank rank) {
         //given
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumbers lottoWinningNumbers = new LottoNumbers(inputWinningNumbers);
-// new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+
         //when
-//        lottoNumbers.compareWinningNumbers(lottoWinningNumbers);
+        LottoRank lottoRank = lottoNumbers.compareWinningNumbers(lottoWinningNumbers);
 
         //then
-//        assertThat(lottoNumbers.getLottoRank()).isEqualTo(rank);
+        assertThat(lottoRank).isEqualTo(rank);
     }
 }

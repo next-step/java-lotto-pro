@@ -44,7 +44,7 @@ public class LottoResult {
         return rateOfReturn;
     }
 
-    public String getPrintRateOfReturnMsg() {
+    public String makePrintRateOfReturnMsg() {
         String rateOfReturnMsg = String.format(PRINT_RATE_OF_RETURN, rateOfReturn);
         if (rateOfReturn < STANDARD_RATE_OF_RETURN)
             rateOfReturnMsg += PRINT_RATE_OF_RETURN_LESS_THEN_STANDARD;
