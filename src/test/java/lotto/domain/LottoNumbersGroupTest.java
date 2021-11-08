@@ -26,11 +26,11 @@ public class LottoNumbersGroupTest {
 
     @DisplayName("랜덤 로또 숫자 그룹 생성 테스트")
     @Test
-    void generateRandomLottoNumberGroupTest() {
+    void generateRandomLottoNumberGroupTest() throws Exception {
         BuyAmount buyAmount = new BuyAmount(1000);
         LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(buyAmount) {
             @Override
-            protected List<LottoNumbers> generateRandomLottoNumbers(int amount) {
+            protected List<LottoNumbers> generateRandomLottoNumbers(int amount) throws Exception {
                 List<LottoNumbers> lottoNumbers = new ArrayList<>();
                 lottoNumbers.add(new LottoNumbers("1,2,3,4,5,6"));
                 return lottoNumbers;
@@ -44,7 +44,7 @@ public class LottoNumbersGroupTest {
 
     @DisplayName("로또 숫자 수동 그룹 생성 테스트")
     @Test
-    void generateManualLottoNumberGroupTest() {
+    void generateManualLottoNumberGroupTest() throws Exception {
         String[] myLottoNumbers = new String[]{"1,2,3,4,5,6", "2,3,4,13,12,14", "42,12,24,32,11,15"};
         LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(myLottoNumbers);
         assertThat(lottoNumbersGroup).isEqualTo(new LottoNumbersGroup(getExampleLottoNumbers()));
@@ -57,7 +57,7 @@ public class LottoNumbersGroupTest {
 
     @DisplayName("로또 그룹 결과 테스트")
     @Test
-    void getLottoResultFromLottoNumberGroupTest() {
+    void getLottoResultFromLottoNumberGroupTest() throws Exception {
         String[] myLottoNumbers = new String[]{"1,2,3,4,5,6", "2,3,4,13,12,14", "27,13,25,35,9,15"};
         LottoNumber bonusLottoNumber = new LottoNumber(44);
         LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(myLottoNumbers);

@@ -1,15 +1,18 @@
 package lotto.domain;
 
+import lotto.exception.WrongLottoNumbersInputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("로또 숫자들 테스트")
 public class LottoNumbersTest {
@@ -23,7 +26,7 @@ public class LottoNumbersTest {
 
     @DisplayName("당첨 로또 입력 테스트 커스텀 구분자")
     @Test
-    void generateManualWithSeparatorNumbers() {
+    void generateManualWithSeparatorNumbers() throws Exception {
         String prizeLottoNumbersString = "1:2:3:4:5:6";
         String separator = ":";
         LottoNumbers lottoNumbers = new LottoNumbers(prizeLottoNumbersString, separator);
@@ -53,6 +56,17 @@ public class LottoNumbersTest {
                 Arguments.of("내 숫자들 0개 맞는 경우 ", exampleLottoNumbers, matchNoneLottoNumbers, 0),
                 Arguments.of("내 숫자들 3개만 맞는 경우 ", exampleLottoNumbers, match3LottoNumbers, 3)
         );
+    }
+
+    @ParameterizedTest(name = "null 수동 입력 시 오류 테스트")
+    @CsvSource(value = {"null abc", "abc null", "null null"},
+            nullValues = "null",
+            delimiterString = " ")
+    void generateManualNullInputNumbersException(String examLottoNumbers, String separator) {
+        assertThatThrownBy(() -> {
+            LottoNumbers lottoNumbers = new LottoNumbers(examLottoNumbers, separator);
+        }).isInstanceOf(WrongLottoNumbersInputException.class)
+        .hasMessageContaining("수동 입력 로또 번호를 확인해 주세요.");
     }
 
 }
