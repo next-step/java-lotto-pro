@@ -54,20 +54,21 @@ public class LottoNumbers {
     }
 
     private void generateLottoNumbersFromString(String lottoNumbers, String separator) throws Exception {
-        lottoNumbers = Optional.ofNullable(lottoNumbers)
-                .orElseThrow(() ->
-                        new WrongLottoNumbersInputException(LottoMessage.WRONG_LOTTO_NUMBER_INPUT_MESSAGE)
-                );
+        lottoNumbers = validateNullableValues(lottoNumbers);
+        separator = validateNullableValues(separator);
         lottoNumbers = lottoNumbers.replaceAll(FIND_ALL_SPACES, REMOVE_SPACES);
-        separator = Optional.ofNullable(separator)
-                .orElseThrow(() ->
-                        new WrongLottoNumbersInputException(LottoMessage.WRONG_LOTTO_NUMBER_INPUT_MESSAGE)
-                );
         String[] splitLottoNumbers = lottoNumbers.split(separator);
         validateLottoNumbers(splitLottoNumbers);
         for (String lottoNumberString : splitLottoNumbers) {
             this.lottoNumbers.add(new LottoNumber(lottoNumberString));
         }
+    }
+
+    private String validateNullableValues(String value) throws Exception {
+        return Optional.ofNullable(value)
+                .orElseThrow(() ->
+                        new WrongLottoNumbersInputException(LottoMessage.WRONG_LOTTO_NUMBER_INPUT_MESSAGE)
+                );
     }
 
     private void validateLottoNumbers(String[] splitLottoNumbers) {
