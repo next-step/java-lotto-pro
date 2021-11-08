@@ -28,11 +28,11 @@ public class InputView {
         String input = Console.readLine();
         String[] splitInput = input.split(WINNING_LOTTO_DELIMITER);
 
-        List<Integer> numbers = new ArrayList<>();
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String s : splitInput) {
-            numbers.add(Integer.parseInt(s));
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(s)));
         }
 
-        return new Lotto(numbers);
+        return new Lotto(lottoNumbers);
     }
 }

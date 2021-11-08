@@ -14,9 +14,7 @@ import static lotto.constant.LottoConfig.MAX_COUNT_OF_ONE_LINE;
 public class Lotto {
     private final List<LottoNumber> lineOfLottoNumber;
 
-    public Lotto(LottoFactory lottoFactory) {
-        List<LottoNumber> lottoNumbers = lottoFactory.generateLineOfLottoNumber();
-
+    public Lotto(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
 
         Collections.sort(lottoNumbers);
@@ -24,17 +22,20 @@ public class Lotto {
         this.lineOfLottoNumber = lottoNumbers;
     }
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(LottoFactory lottoFactory) {
+        this(lottoFactory.generateLineOfLottoNumber());
+    }
+
+    public Lotto(int... numbers) {
+        this(convertIntArrayToLottoNumbers(numbers));
+    }
+
+    private static List<LottoNumber> convertIntArrayToLottoNumbers(int... numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (Integer number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
-
-        validateLottoNumbers(lottoNumbers);
-
-        Collections.sort(lottoNumbers);
-
-        this.lineOfLottoNumber = lottoNumbers;
+        return lottoNumbers;
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
