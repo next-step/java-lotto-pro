@@ -4,6 +4,7 @@ import lotto.exception.LottoException;
 import lotto.model.LottoGenerator;
 import lotto.model.LottoResult;
 import lotto.model.Lottos;
+import lotto.model.Money;
 import lotto.model.WinningLottoNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -24,7 +25,9 @@ public class LottoController {
 
 	private Lottos lottoGenerator() {
 		try {
-			return new Lottos(new LottoGenerator(InputView.inputMoneyPurchaseLotto()));
+			Money inputMoney = Money.from(InputView.inputMoneyPurchaseLotto());
+			LottoGenerator lottoGenerator = LottoGenerator.of(inputMoney);
+			return Lottos.of(lottoGenerator.generateLottoNumbers(), inputMoney);
 		} catch (LottoException lottoException) {
 			OutputView.printErrorMessage(lottoException);
 			return lottoGenerator();
@@ -33,7 +36,7 @@ public class LottoController {
 
 	private WinningLottoNumbers winningLottoNumberGenerator() {
 		try {
-			return new WinningLottoNumbers(InputView.inputWinningLottoNumber(), InputView.inputBonusLottoNumber());
+			return WinningLottoNumbers.of(InputView.inputWinningLottoNumber(), InputView.inputBonusLottoNumber());
 		} catch (LottoException lottoException) {
 			OutputView.printErrorMessage(lottoException);
 			return winningLottoNumberGenerator();
@@ -42,7 +45,7 @@ public class LottoController {
 
 	private void generateLottoResult(Lottos lottos, WinningLottoNumbers winningLottoNumbers) {
 		OutputView.printResultHead();
-		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottos);
+		LottoResult lottoResult = LottoResult.of(winningLottoNumbers, lottos);
 		OutputView.printResultLottoList(lottoResult);
 		OutputView.printYieldResult(lottoResult);
 	}
