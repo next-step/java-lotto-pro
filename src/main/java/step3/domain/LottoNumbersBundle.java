@@ -11,6 +11,10 @@ public class LottoNumbersBundle {
     public LottoNumbersBundle() {
     }
 
+    public LottoNumbersBundle(List<LottoNumbers> lottoNumbersBundle) {
+        this.lottoNumbersBundle.addAll(lottoNumbersBundle);
+    }
+
     public void addLottoNumbers(NumbersStrategy numbersStrategy) {
         int[] numbers = numbersStrategy.getNumbers();
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
@@ -18,12 +22,12 @@ public class LottoNumbersBundle {
         lottoNumbersBundle.add(lottoNumbers);
     }
 
-    public LottoRanks lottoRanksOf(LottoNumbers winLottoNumbers, LottoNumber bonusLottoNumber) {
+    public LottoRanks lottoRanksOf(WinningLotto winningLotto) {
         LottoRanks lottoRanks = new LottoRanks();
 
         for (LottoNumbers lottoNumbers : lottoNumbersBundle) {
-            int matchCount = lottoNumbers.containCount(winLottoNumbers);
-            boolean isBonusMatch = lottoNumbers.isBonusContain(bonusLottoNumber);
+            int matchCount = winningLotto.containCount(lottoNumbers);
+            boolean isBonusMatch = winningLotto.bonusMatch(lottoNumbers);
             lottoRanks.matchIncrementCount(matchCount, isBonusMatch);
         }
 

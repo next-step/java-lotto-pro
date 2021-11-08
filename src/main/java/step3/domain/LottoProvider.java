@@ -1,29 +1,48 @@
 package step3.domain;
 
+import java.util.List;
+
 import step3.domain.constance.LottoConstant;
 import step3.domain.strategy.numbers.NumbersStrategy;
 
 public class LottoProvider {
-    private final LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
+    // @Deprecated
+    // private final LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
 
     public LottoNumbersBundle buyLotto(int count, NumbersStrategy numbersStrategy) {
+        LottoNumbersBundle result = new LottoNumbersBundle();
         for (int i = 0; i < count; i++) {
-            lottoNumbersBundle.addLottoNumbers(numbersStrategy);
+            result.addLottoNumbers(numbersStrategy);
         }
 
-        return lottoNumbersBundle;
+        return result;
+    }
+
+    public LottoNumbersBundle buyLotto(List<NumbersStrategy> numbersStrategies) {
+        LottoNumbersBundle result = new LottoNumbersBundle();
+        for (NumbersStrategy numbersStrategy : numbersStrategies) {
+            result.addLottoNumbers(numbersStrategy);
+        }
+
+        return result;
     }
 
     public int availableQuantity(Amount amount) {
         return amount.getAmount() / LottoConstant.LOTTO_MINIMUM_PRICE;
     }
 
-    public int lottoNumbersBundleSize() {
-        return lottoNumbersBundle.size();
-    }
+    // @Deprecated
+    // public int lottoNumbersBundleSize() {
+    //     return lottoNumbersBundle.size();
+    // }
 
-    public LottoResult getLottoResult(LottoNumbers winLottoNumber, Amount amount, LottoNumber bonusLottoNumber) {
-        LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winLottoNumber, bonusLottoNumber);
-        return new LottoResult(lottoRanks, amount);
+    // @Deprecated
+    // public LottoResult getLottoResult(LottoNumbersBundle lottoNumbersBundle, WinningLotto winningLotto) {
+    //     LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winningLotto);
+    //     return new LottoResult(lottoRanks);
+    // }
+
+    public LottoRanks getLottoResult(LottoNumbersBundle lottoNumbersBundle, WinningLotto winningLotto) {
+        return lottoNumbersBundle.lottoRanksOf(winningLotto);
     }
 }

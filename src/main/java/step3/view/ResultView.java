@@ -19,6 +19,7 @@ public class ResultView {
     private static final String AMOUNT_REQUEST_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String BONUS_NUMBER_REQUEST_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String BUY_COUNT_MESSAGE = "%d 개를 구매했습니다.";
+    private static final String TOTAL_LOTTO_BUY_COUNT_MESSAGE = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     private static final BigDecimal LOSS = BigDecimal.valueOf(1);
     private static final Integer MIN_RANK_NUMBER = 3;
 
@@ -45,12 +46,24 @@ public class ResultView {
         println(WINNER_NUMBER_REQUEST_MESSAGE);
     }
 
-    public static void lottoBuyListPrint(LottoBuyResponseDto lottoBuyResponseDto) {
-        for (String numbers : lottoBuyResponseDto.getBuyLottoList()) {
+    public static void lottoBuyListPrint(LottoBuyResponseDto manualLottoBuyResponseDto,
+        LottoBuyResponseDto lottoBuyResponseDto) {
+
+        println(String.format(
+            TOTAL_LOTTO_BUY_COUNT_MESSAGE,
+            manualLottoBuyResponseDto.size(),
+            lottoBuyResponseDto.size()));
+
+        printLottoNumbers(lottoBuyResponseDto);
+        printLottoNumbers(manualLottoBuyResponseDto);
+
+        buyCountPrintln(lottoBuyResponseDto.getBuyLottoListToString().size());
+    }
+
+    private static void printLottoNumbers(LottoBuyResponseDto lottoBuyResponseDto) {
+        for (String numbers : lottoBuyResponseDto.getBuyLottoListToString()) {
             println(numbers);
         }
-
-        buyCountPrintln(lottoBuyResponseDto.getBuyLottoList().size());
     }
 
     public static void statisticsPrint(LottoStatisticsResponseDto lottoStatisticsResponseDto) {

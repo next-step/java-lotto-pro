@@ -1,5 +1,7 @@
 package step3.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoRanks {
+    private static final int DECIMAL_POINT = 2;
     private final Map<LottoRank, CountDown> lottoRanks = new HashMap<>();
 
     public LottoRanks() {
@@ -47,6 +50,12 @@ public class LottoRanks {
         }
 
         return totalPrize;
+    }
+
+    public BigDecimal getCalculatedYield() {
+        return BigDecimal.valueOf(totalPrize())
+            .divide(BigDecimal.valueOf(100000))//amount.getAmount()
+            .setScale(DECIMAL_POINT, RoundingMode.CEILING);
     }
 
     private static class CountDown {

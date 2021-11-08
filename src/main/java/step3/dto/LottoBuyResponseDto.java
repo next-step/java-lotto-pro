@@ -13,11 +13,25 @@ public class LottoBuyResponseDto {
         this.buyLottoList = lottoNumbersBundle.getLottoNumbersBundle();
     }
 
-    public List<String> getBuyLottoList() {
+    public List<String> getBuyLottoListToString() {
         List<String> result = new ArrayList<>();
         for (LottoNumbers lottoNumbers : buyLottoList) {
             result.add(lottoNumbers.toString());
         }
         return result;
     }
+
+    public int size() {
+        return buyLottoList.size();
+    }
+
+    public List<LottoNumbers> getBuyLottoList() {
+        return buyLottoList;
+    }
+
+    public List<LottoNumbers> merge(LottoBuyResponseDto lottoBuyResponseDto) {
+        buyLottoList.addAll(lottoBuyResponseDto.getBuyLottoList());
+        return buyLottoList;
+    }
+
 }

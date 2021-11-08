@@ -3,10 +3,10 @@ package step3.view;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-import step3.common.exception.BaseException;
 import step3.common.exception.InvalidParamException;
 import step3.dto.LottoBonusNumberRequestDto;
 import step3.dto.LottoBuyRequestDto;
+import step3.dto.LottoManualLottoNumbersRequestDto;
 import step3.dto.LottoWinNumbersRequestDto;
 
 public class InputView {
@@ -14,6 +14,8 @@ public class InputView {
     private static final String COMMA_INPUT_REQUEST_MESSAGE = "콤마로 분리된 숫자만 입력해주세요(1,2,3,4,5,6)";
 
     private static final Scanner sc = new Scanner(System.in);
+    public static final String MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
     private InputView() {
     }
@@ -83,5 +85,21 @@ public class InputView {
         }
 
         return result;
+    }
+
+    public static LottoManualLottoNumbersRequestDto readLottoManualLottoNumbersRequestDto(int tryCount) {
+        ResultView.println(MANUAL_LOTTO_NUMBER_MESSAGE);
+        LottoManualLottoNumbersRequestDto lottoManualLottoNumbersRequestDto = new LottoManualLottoNumbersRequestDto();
+
+        for (int i = 0; i < tryCount; i++) {
+            lottoManualLottoNumbersRequestDto.add(readLineToArray());
+        }
+
+        return lottoManualLottoNumbersRequestDto;
+    }
+
+    public static int readManualLottoBuyCount() {
+        ResultView.println(MANUAL_LOTTO_COUNT_MESSAGE);
+        return readOnlyNumber();
     }
 }
