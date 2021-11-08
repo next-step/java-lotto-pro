@@ -1,5 +1,7 @@
 package lotto2.domain;
 
+import java.util.List;
+
 public class WinningLotto {
 
 	private final LottoTicket lottoNumbers;
@@ -19,6 +21,12 @@ public class WinningLotto {
 		if (lottoNumbers.contains(bonusNumber)) {
 			throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_NOT_DUPLICATE.value());
 		}
+	}
+
+	public static WinningLotto of(List<Integer> winningNumbers, int bonusNumberInt) {
+		LottoTicket lottoNumbers = LottoTicket.of(winningNumbers);
+		LottoNumber bonusNumber = LottoNumber.of(bonusNumberInt);
+		return WinningLotto.of(lottoNumbers, bonusNumber);
 	}
 
 	public Rank getMatchRank(LottoTicket lottoTicket) {

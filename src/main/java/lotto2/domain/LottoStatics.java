@@ -81,4 +81,8 @@ public class LottoStatics {
 	public int getCount(String rankName) {
 		return this.rankCounts.get(rankName);
 	}
+
+	public Map<String, Integer> getRankCount() {
+		return this.rankCounts;
+	}
 }

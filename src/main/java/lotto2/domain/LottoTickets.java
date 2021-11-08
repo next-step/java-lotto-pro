@@ -1,7 +1,6 @@
 package lotto2.domain;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,22 +10,28 @@ public class LottoTickets implements Iterable<LottoTicket> {
 	private final List<LottoTicket> tickets;
 
 	private LottoTickets(List<LottoTicket> tickets) {
-		this.tickets = tickets;
+		this.tickets = new ArrayList<>(tickets);
 	}
 
-	public static LottoTickets of(Collection<LottoTicket> ticketList) {
-		return new LottoTickets(new ArrayList<>(ticketList));
+	public static LottoTickets of(List<LottoTicket> ticketList) {
+		return new LottoTickets(ticketList);
 	}
 
 	public static LottoTickets of() {
 		return new LottoTickets(new ArrayList<>());
 	}
 
-	public static LottoTickets of(List<List<Integer>> manualLottoNumbers) {
-		List<LottoTicket> lottoTicketList = manualLottoNumbers.stream()
+	public static LottoTickets ofIntList(List<List<Integer>> lottoNumbers) {
+		List<LottoTicket> lottoTicketList = lottoNumbers.stream()
 			.map(LottoTicket::of)
 			.collect(Collectors.toList());
 		return new LottoTickets(lottoTicketList);
+	}
+
+	public static LottoTickets combine(LottoTickets tickets1, LottoTickets tickets2) {
+		LottoTickets lottoTickets = new LottoTickets(tickets1.tickets);
+		lottoTickets.addAll(tickets2);
+		return lottoTickets;
 	}
 
 	@Override
@@ -61,5 +66,9 @@ public class LottoTickets implements Iterable<LottoTicket> {
 
 	public void addAll(LottoTickets manualLottoTickets) {
 		this.tickets.addAll(manualLottoTickets.tickets);
+	}
+
+	public int getSize() {
+		return this.tickets.size();
 	}
 }
