@@ -1,8 +1,12 @@
 package lotto.domain;
 
+import lotto.view.ResultView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -25,15 +29,18 @@ class LottoTicketsTest {
     @Test
     void toStringTest() {
         // given
+        ResultView resultView = new ResultView();
         ArrayList<LottoTicket> lottoTicketsSource = new ArrayList<>();
         lottoTicketsSource.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottoTicketsSource.add(new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)));
         LottoTickets lottoTickets = new LottoTickets(lottoTicketsSource);
 
         // then
-        assertThat(lottoTickets.toResultString()).isEqualTo("[1, 2, 3, 4, 5, 6]"
-                + "\n"
-                + "[7, 8, 9, 10, 11, 12]");
+        assertThat(resultView.getLottoResultString(lottoTickets)).isEqualTo(
+                "[1, 2, 3, 4, 5, 6]"
+                        + "\n"
+                        + "[7, 8, 9, 10, 11, 12]"
+        );
     }
 
     @Test

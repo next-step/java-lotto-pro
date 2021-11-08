@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class LottoTickets {
     public static final String SPLIT_DELIMITER = ",";
-    public static final String JOIN_DELIMITER = "\n";
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
@@ -24,7 +23,7 @@ public class LottoTickets {
 
     public static LottoTicket fromString(String inputWinningNumber) {
         return new LottoTicket(Arrays.stream(inputWinningNumber
-                        .split(SPLIT_DELIMITER))
+                .split(SPLIT_DELIMITER))
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList()));
@@ -34,13 +33,6 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public String toResultString() {
-        List<String> resultStrings = lottoTickets.stream()
-                .map(LottoTicket::toResultString)
-                .collect(Collectors.toList());
-        return String.join(JOIN_DELIMITER, resultStrings);
-    }
-
     public GameResult getGameResult(LottoTicket winningNumber) {
         GameResult gameResult = new GameResult();
         for (LottoTicket lottoTicket : lottoTickets) {
@@ -48,5 +40,9 @@ public class LottoTickets {
             gameResult.add(sameNumberCount);
         }
         return gameResult;
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 }

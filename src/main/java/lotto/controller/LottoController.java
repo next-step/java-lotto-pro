@@ -23,14 +23,14 @@ public class LottoController {
         // 로또 구입
         Money inputMoney = new Money(inputView.inputMoney());
         LottoTickets lottoTickets = lottoService.buyLottoTickets(inputMoney);
-        resultView.printBuyResult(lottoTickets.count(), lottoTickets.toResultString());
-        
+        resultView.printBuyResult(lottoTickets);
+
         // 당첨번호 입력
         LottoTicket winningLottoTicket = LottoTickets.fromString(inputView.inputWinningNumber());
 
         // 결과 출력
         GameResult gameResult = lottoService.getGameResult(lottoTickets, winningLottoTicket);
-        resultView.printGameResult(gameResult.toString());
+        resultView.printGameResult(gameResult);
         resultView.printEarningRatio(inputMoney, new Money(gameResult.getPrize()));
     }
 }

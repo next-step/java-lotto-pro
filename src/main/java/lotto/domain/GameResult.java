@@ -4,10 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameResult {
-    public static final int THREE_MATCH_PRIZE = 5_000;
-    public static final int FOUR_MATCH_PRIZE = 50_000;
-    public static final int FIVE_MATCH_PRIZE = 1_500_000;
-    public static final int SIX_MATCH_PRIZE = 2_000_000_000;
     Map<Integer, Integer> gameResult;
 
     public GameResult() {
@@ -29,16 +25,20 @@ public class GameResult {
 
     @Override
     public String toString() {
-        return 3 + "개 일치 (" + THREE_MATCH_PRIZE + "원)- " + gameResult.get(3) + "개\n" +
-                4 + "개 일치 (" + FOUR_MATCH_PRIZE + "원)- " + gameResult.get(4) + "개\n" +
-                5 + "개 일치 (" + FIVE_MATCH_PRIZE + "원)- " + gameResult.get(5) + "개\n" +
-                6 + "개 일치 (" + SIX_MATCH_PRIZE + "원)- " + gameResult.get(6) + "개";
+        return 3 + "개 일치 (" + Prize.THREE_MATCH_PRIZE.getPrizeMoney() + "원)- " + gameResult.get(3) + "개\n" +
+                4 + "개 일치 (" + Prize.FOUR_MATCH_PRIZE.getPrizeMoney() + "원)- " + gameResult.get(4) + "개\n" +
+                5 + "개 일치 (" + Prize.FIVE_MATCH_PRIZE.getPrizeMoney() + "원)- " + gameResult.get(5) + "개\n" +
+                6 + "개 일치 (" + Prize.SIX_MATCH_PRIZE.getPrizeMoney() + "원)- " + gameResult.get(6) + "개";
     }
 
     public int getPrize() {
-        return gameResult.get(3) * THREE_MATCH_PRIZE
-                + gameResult.get(4) * FOUR_MATCH_PRIZE
-                + gameResult.get(5) * FIVE_MATCH_PRIZE
-                + gameResult.get(6) * SIX_MATCH_PRIZE;
+        return gameResult.get(3) * Prize.THREE_MATCH_PRIZE.getPrizeMoney()
+                + gameResult.get(4) * Prize.FOUR_MATCH_PRIZE.getPrizeMoney()
+                + gameResult.get(5) * Prize.FIVE_MATCH_PRIZE.getPrizeMoney()
+                + gameResult.get(6) * Prize.SIX_MATCH_PRIZE.getPrizeMoney();
+    }
+
+    public Integer getMatchCount(int matchCount) {
+        return gameResult.get(matchCount);
     }
 }
