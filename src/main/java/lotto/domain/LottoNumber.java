@@ -7,19 +7,21 @@ import java.util.Objects;
 public class LottoNumber {
     private final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validateRange(number);
         this.number = number;
     }
 
-    public LottoNumber(String number) {
+    public static LottoNumber valueOf(int number) {
+        return new LottoNumber(number);
+    }
+    
+    public static LottoNumber valueOf(String number) {
         validatePositiveNumber(number);
-        int positiveNumber = Integer.parseInt(number);
-        validateRange(positiveNumber);
-        this.number = positiveNumber;
+        return new LottoNumber(Integer.parseInt(number));
     }
 
-    private void validatePositiveNumber(String number) {
+    private static void validatePositiveNumber(String number) {
         if (!ONLY_POSITIVE_NUMBER.matcher(number).matches()) {
             throw new IllegalArgumentException(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
         }

@@ -77,7 +77,7 @@ class LottoTicketTest {
     @DisplayName("로또 결과 확인")
     @Test
     void winningRank() {
-        LottoNumber bonusNumber = new LottoNumber(25);
+        LottoNumber bonusNumber = LottoNumber.valueOf(25);
         Rank first = lottoTicket.createWinningRank(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)), bonusNumber);
         assertEquals(Rank.FIRST, first);
 
@@ -104,7 +104,7 @@ class LottoTicketTest {
     @Test
     void winningRankSecond() {
         int bonus = 25;
-        LottoNumber bonusNumber = new LottoNumber(bonus);
+        LottoNumber bonusNumber = LottoNumber.valueOf(bonus);
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, bonus));
         Rank second = lottoTicket.createWinningRank(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)), bonusNumber);
         assertEquals(Rank.SECOND, second);
@@ -114,7 +114,7 @@ class LottoTicketTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 6})
     void existLottoNumber(int number) {
-        assertTrue(lottoTicket.existLottoNumber(new LottoNumber(number)));
-        assertFalse(lottoTicket.existLottoNumber(new LottoNumber(7)));
+        assertTrue(lottoTicket.existLottoNumber(LottoNumber.valueOf(number)));
+        assertFalse(lottoTicket.existLottoNumber(LottoNumber.valueOf(7)));
     }
 }

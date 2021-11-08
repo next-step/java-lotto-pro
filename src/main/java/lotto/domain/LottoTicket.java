@@ -20,7 +20,7 @@ public class LottoTicket {
     private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(LottoNumber.valueOf(number));
         }
         return lottoNumbers;
     }

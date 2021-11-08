@@ -13,7 +13,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void createLottoNumberRangeException(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.valueOf(number))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(Message.OUT_OF_RANGE_NUMBER_MESSAGE.getMessage());
     }
@@ -22,7 +22,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"a", "-1"})
     void createLottoNumberValidateException(String number) {
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.valueOf(number))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
     }
@@ -30,9 +30,9 @@ class LottoNumberTest {
     @DisplayName("로또 번호 비교 테스트")
     @Test
     void compareLottoNumber() {
-        LottoNumber lottoNumber1 = new LottoNumber(1);
-        LottoNumber lottoNumber2 = new LottoNumber(1);
-        LottoNumber lottoNumber3 = new LottoNumber(3);
+        LottoNumber lottoNumber1 = LottoNumber.valueOf(1);
+        LottoNumber lottoNumber2 = LottoNumber.valueOf(1);
+        LottoNumber lottoNumber3 = LottoNumber.valueOf(3);
 
         assertEquals(lottoNumber1, lottoNumber2);
         assertNotEquals(lottoNumber1, lottoNumber3);
