@@ -1,9 +1,6 @@
 package lottoservice.lottonumber;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -33,12 +30,8 @@ public class LottoNumbersMaker {
 			.mapToObj(LottoNumber::new).collect(Collectors.toList());
 	}
 
-	/* lottoNumberCandidates를 재배열 한 후 앞에서 부터 SIZE_OF_LOTTERY_NUMBERS 갯수만큼 subList  */
 	public List<LottoNumber> makeLottoNumbers() {
-		arrangeManipulator.shuffleElements(lottoNumberCandidates);
-		List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberCandidates.subList(0,
-			SIZE_OF_LOTTERY_NUMBERS));  /*List의 subList는 deepCopy가 아니므로 새로 인스턴스를 생성하여 전달 */
-		return lottoNumbers;
+		return arrangeManipulator.getRandomElements(lottoNumberCandidates,SIZE_OF_LOTTERY_NUMBERS);
 	}
 
 	public List<LottoNumber> makeLottoNumbers(List<Integer> numbers) {
