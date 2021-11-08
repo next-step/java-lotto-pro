@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,13 +32,10 @@ public class LottoDiscriminatorTest {
             final int ticketLottoNumber4, final int ticketLottoNumber5, final int ticketLottoNumber6,
             final Rank expectedRank) {
 
-        final HashSet<LottoNumber> ticketLottoNumbers =
-                new HashSet<>(Arrays.asList(
-                        LottoNumber.valueOf(ticketLottoNumber1), LottoNumber.valueOf(ticketLottoNumber2), LottoNumber.valueOf(ticketLottoNumber3),
-                        LottoNumber.valueOf(ticketLottoNumber4), LottoNumber.valueOf(ticketLottoNumber5), LottoNumber.valueOf(ticketLottoNumber6))
-                );
+        final List<Integer> ticketLottoNumbers =
+                Arrays.asList(ticketLottoNumber1, ticketLottoNumber2, ticketLottoNumber3, ticketLottoNumber4, ticketLottoNumber5, ticketLottoNumber6);
 
-        final TicketLottery ticketLottery = TicketLottery.valueOf(ticketLottoNumbers);
+        final TicketLottery ticketLottery = TicketLottery.valueOf(ticketLottoNumbers, TicketLotteryType.AUTO);
 
         final Rank rank = LottoDiscriminator.referee(winningLottery, ticketLottery);
 

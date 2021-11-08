@@ -4,7 +4,9 @@ import study.lotto.model.exception.IllegalLotterySizeException;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Lottery {
     public static final int LOTTO_NUMBER_COUNT = 6;
@@ -13,18 +15,42 @@ public class Lottery {
 
     private final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-    protected Lottery(final Set<LottoNumber> lottoNumbers) {
+    private Lottery(final Set<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers.addAll(lottoNumbers);
     }
 
+    private Lottery(final List<Integer> lottoNumbers) {
+        this(toSet(lottoNumbers));
+    }
+
+    private static Set<LottoNumber> toSet(final List<Integer> lottoNumbers) {
+        final Set<LottoNumber> lottoNumberSet = new HashSet<>();
+        for (final Integer lottoNumber : lottoNumbers) {
+            lottoNumberSet.add(LottoNumber.valueOf(lottoNumber));
+        }
+        return lottoNumberSet;
+    }
+
+    public static Lottery valueOf(final List<Integer> lottoNumbers) {
+        return new Lottery(lottoNumbers);
+    }
 
     public static Lottery valueOf(final Set<LottoNumber> lottoNumbers) {
         return new Lottery(lottoNumbers);
     }
 
+    public boolean contains(final LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     public boolean containsAll(final HashSet<LottoNumber> lottoNumbers) {
         return this.lottoNumbers.containsAll(lottoNumbers);
+    }
+
+    private void validate(final Set<LottoNumber> lottoNumbers) {
+        validateNotNull(lottoNumbers);
+        validateSize(lottoNumbers);
     }
 
     private void validateNotNull(final Set<LottoNumber> lottoNumbers) {
@@ -56,10 +82,5 @@ public class Lottery {
     @Override
     public int hashCode() {
         return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
-    }
-
-    private void validate(final Set<LottoNumber> lottoNumbers) {
-        validateNotNull(lottoNumbers);
-        validateSize(lottoNumbers);
     }
 }
