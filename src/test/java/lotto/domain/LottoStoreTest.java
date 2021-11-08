@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Collections;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStoreTest {
@@ -14,7 +16,7 @@ class LottoStoreTest {
     void calculateTryCount(int inputMoney, int tryCount) {
         Money money = new Money(inputMoney);
 
-        LottoGame game = LottoStore.sell(money);
+        LottoGame game = LottoStore.sell(Collections.emptyList(), money);
 
         assertThat(game.getTryCount()).isEqualTo(tryCount);
     }
