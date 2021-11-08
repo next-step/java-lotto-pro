@@ -3,14 +3,14 @@ package lotto.model;
 import java.math.BigInteger;
 
 public class Price {
-    private static final int lottoPrice = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
-    public static int getCount(int price) {
-        return price / lottoPrice;
+    public static int numberPurchases(int price) {
+        return price / LOTTO_PRICE;
     }
 
-    public static BigInteger getPurchase(int count) {
-        BigInteger price = new BigInteger(String.valueOf(lottoPrice));
+    public static BigInteger totalPurchase(int count) {
+        BigInteger price = new BigInteger(String.valueOf(LOTTO_PRICE));
         return price.multiply(new BigInteger(String.valueOf(count)));
     }
 }

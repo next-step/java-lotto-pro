@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.factory;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
@@ -6,6 +6,8 @@ import lotto.view.InputHandler;
 import lotto.view.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -41,7 +43,7 @@ public class LottoCreateFactoryTest {
     @Test
     void duplicateError() {
         assertThatThrownBy(() -> {
-            Lotto lotto = LottoCreateFactory.createLotto(new int[]{1, 2, 3, 1, 2, 3});
+            Lotto lotto = LottoCreateFactory.createLotto(Arrays.asList(1, 2, 3, 1, 2, 3));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.DUPLICATE_ERROR);
     }

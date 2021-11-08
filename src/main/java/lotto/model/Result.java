@@ -4,6 +4,7 @@ import lotto.util.ConstantString;
 import lotto.view.Message;
 
 import java.math.BigInteger;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +21,12 @@ public class Result {
         }
     }
 
+    public Map<Rank, Integer> getMatchResult() {
+        return Collections.unmodifiableMap(matchResult);
+    }
+
     private void matchResultPut(Rank rank) {
-        if(rank != null && rank != Rank.MISS){
+        if (rank != null && rank != Rank.MISS) {
             matchResult.put(rank, matchResult.get(rank) + 1);
         }
     }
@@ -50,14 +55,5 @@ public class Result {
             amount = amount.add(rankAmount);
         }
         return amount;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("");
-        matchResult.forEach((rank, count) -> {
-            sb.append(String.format(Message.STATS, rank.getCountOfMatch(), rank.getWinningMoney(), count));
-        });
-        return sb.toString();
     }
 }

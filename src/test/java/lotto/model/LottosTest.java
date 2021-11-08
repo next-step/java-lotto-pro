@@ -1,12 +1,12 @@
 package lotto.model;
 
-import lotto.service.LottoCreateFactory;
+import lotto.factory.LottoCreateFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
-import java.util.Map;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,9 +18,9 @@ public class LottosTest {
 
     @BeforeEach
     void setUp() {
-        Lotto lotto1 = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-        Lotto lotto2 = new Lotto(new int[]{4, 5, 6, 7, 8, 9});
-        winLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
+        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
+        winLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottos = new Lottos(new Lotto[]{lotto1, lotto2});
         result = new Result(lottos, winLotto);
     }
@@ -44,7 +44,7 @@ public class LottosTest {
     @DisplayName("수익률 결과")
     @Test
     void name() {
-        BigInteger purchase = Price.getPurchase(lottos.size());
+        BigInteger purchase = Price.totalPurchase(lottos.size());
 
         assertThat(lottos.size()).isEqualTo(2);
         assertThat(purchase.toString()).isEqualTo("2000");
