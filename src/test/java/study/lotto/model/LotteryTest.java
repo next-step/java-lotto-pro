@@ -8,6 +8,7 @@ import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 
 class LotteryTest {
@@ -15,7 +16,16 @@ class LotteryTest {
     void 서로_다른_6개의_로또번호_로_생성할_수_있다() {
         final HashSet<LottoNumber> lottoNumbers = new HashSet<>(Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3), LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
         final Lottery winningNumber = Lottery.valueOf(lottoNumbers);
-        assertThat(winningNumber.containsAll(lottoNumbers)).isTrue();
+        assertAll(() -> {
+            assertThat(winningNumber.containsAll(lottoNumbers)).isTrue();
+            assertThat(winningNumber.contains(LottoNumber.valueOf(1))).isTrue();
+            assertThat(winningNumber.contains(LottoNumber.valueOf(2))).isTrue();
+            assertThat(winningNumber.contains(LottoNumber.valueOf(3))).isTrue();
+            assertThat(winningNumber.contains(LottoNumber.valueOf(4))).isTrue();
+            assertThat(winningNumber.contains(LottoNumber.valueOf(5))).isTrue();
+            assertThat(winningNumber.contains(LottoNumber.valueOf(6))).isTrue();
+
+        });
     }
 
     @Test
