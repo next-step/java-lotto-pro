@@ -5,15 +5,14 @@ import java.util.Map;
 
 public class LottoStatics {
 
-	private Map<String, Integer> rankCounts;
-	private double profit;
+	private final Map<String, Integer> rankCounts;
+	private final double profit;
 
 	private LottoStatics(Map<String, Integer> rankCounts, double profit) {
 		this.rankCounts = rankCounts;
 		this.profit = profit;
 	}
 
-	// TODO: LottoStatics 클래스 분리 필요
 	public static LottoStatics of(LottoTickets lottoTickets, WinningLotto winningLotto, Money purchaseMoney) {
 		Map<String, Integer> rankCounts = calculateRankCount(lottoTickets, winningLotto);
 		double profit = calculateProfit(calculateTotalPrize(rankCounts), purchaseMoney);
@@ -23,7 +22,7 @@ public class LottoStatics {
 	private static Map<String, Integer> calculateRankCount(LottoTickets tickets, WinningLotto winningLotto) {
 		Map<String, Integer> map = initRankCounts();
 		for (LottoTicket lottoTicket : tickets) {
-			Rank rank = getMatchRank(winningLotto, lottoTicket);
+			Rank rank = winningLotto.getMatchRank(lottoTicket);
 			String rankName = rank.name();
 			map.put(rankName, map.get(rankName) + 1);
 		}
@@ -49,12 +48,6 @@ public class LottoStatics {
 	private static double calculateProfit(int totalPrizeMoney, Money money) {
 		double result = (double)totalPrizeMoney / money.toInt();
 		return Math.floor(result * 100) / 100D;
-	}
-
-	private static Rank getMatchRank(WinningLotto winningLotto, LottoTicket lottoTicket) {
-		int matchCnt = lottoTicket.getMatchCount(winningLotto.getLottoNumbers());
-		boolean isMatchBonus = lottoTicket.contains(winningLotto.getBonusNumber());
-		return Rank.valueOf(PositiveNumber.of(matchCnt), isMatchBonus);
 	}
 
 	@Override
@@ -85,7 +78,7 @@ public class LottoStatics {
 		return this.profit;
 	}
 
-	public int getCount(Rank rank) {
-		return this.rankCounts.get(rank.name());
+	public int getCount(String rankName) {
+		return this.rankCounts.get(rankName);
 	}
 }

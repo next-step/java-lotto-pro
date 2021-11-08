@@ -21,12 +21,10 @@ public class WinningLotto {
 		}
 	}
 
-	public LottoTicket getLottoNumbers() {
-		return this.lottoNumbers;
-	}
-
-	public LottoNumber getBonusNumber() {
-		return this.bonusNumber;
+	public Rank getMatchRank(LottoTicket lottoTicket) {
+		int matchCnt = lottoTicket.getMatchCount(this.lottoNumbers);
+		boolean isMatchBonus = lottoTicket.contains(this.bonusNumber);
+		return Rank.valueOf(PositiveNumber.of(matchCnt), isMatchBonus);
 	}
 
 	@Override

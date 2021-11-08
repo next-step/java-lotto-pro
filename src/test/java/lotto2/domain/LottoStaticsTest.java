@@ -39,11 +39,11 @@ public class LottoStaticsTest {
 		assertThat(statics)
 			.isEqualTo(LottoStatics.of(lottoTickets, winningLotto, money));
 		assertThat(statics.getProfit()).isEqualTo(156273.84D);
-		assertThat(statics.getCount(Rank.FIRST)).isEqualTo(1);
-		assertThat(statics.getCount(Rank.SECOND)).isEqualTo(1);
-		assertThat(statics.getCount(Rank.THIRD)).isEqualTo(1);
-		assertThat(statics.getCount(Rank.FOURTH)).isEqualTo(1);
-		assertThat(statics.getCount(Rank.FIFTH)).isEqualTo(2);
+		assertThat(statics.getCount(Rank.FIRST.name())).isEqualTo(1);
+		assertThat(statics.getCount(Rank.SECOND.name())).isEqualTo(1);
+		assertThat(statics.getCount(Rank.THIRD.name())).isEqualTo(1);
+		assertThat(statics.getCount(Rank.FOURTH.name())).isEqualTo(1);
+		assertThat(statics.getCount(Rank.FIFTH.name())).isEqualTo(2);
 	}
 
 }

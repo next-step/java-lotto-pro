@@ -38,4 +38,8 @@ public class LottoNumber {
 	public int hashCode() {
 		return number;
 	}
+
+	public int toInt() {
+		return this.number;
+	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets implements Iterable<LottoTicket> {
 
@@ -14,12 +15,18 @@ public class LottoTickets implements Iterable<LottoTicket> {
 	}
 
 	public static LottoTickets of(Collection<LottoTicket> ticketList) {
-		List<LottoTicket> ticketSet = new ArrayList<>(ticketList);
-		return new LottoTickets(ticketSet);
+		return new LottoTickets(new ArrayList<>(ticketList));
 	}
 
 	public static LottoTickets of() {
 		return new LottoTickets(new ArrayList<>());
+	}
+
+	public static LottoTickets of(List<List<Integer>> manualLottoNumbers) {
+		List<LottoTicket> lottoTicketList = manualLottoNumbers.stream()
+			.map(LottoTicket::of)
+			.collect(Collectors.toList());
+		return new LottoTickets(lottoTicketList);
 	}
 
 	@Override
@@ -50,5 +57,9 @@ public class LottoTickets implements Iterable<LottoTicket> {
 	@Override
 	public Iterator<LottoTicket> iterator() {
 		return tickets.iterator();
+	}
+
+	public void addAll(LottoTickets manualLottoTickets) {
+		this.tickets.addAll(manualLottoTickets.tickets);
 	}
 }

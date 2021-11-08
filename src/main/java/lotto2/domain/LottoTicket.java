@@ -67,4 +67,8 @@ public class LottoTicket {
 		return this.lottoNumbers.contains(number);
 	}
 
+	public Collection<LottoNumber> getNumbers() {
+		return this.lottoNumbers;
+	}
+
 }
