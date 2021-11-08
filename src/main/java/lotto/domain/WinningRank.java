@@ -7,10 +7,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum WinningRank {
-    FIRST_RANK(6, 2000000000), 
-    SECOND_RANK(5, 1500000), 
-    THIRD_RANK(4, 50000), 
-    FOURTH_RANK(3, 5000), 
+    FIRST_RANK(6, 2_000_000_000), 
+    SECOND_RANK(5, 30_000_000), 
+    THIRD_RANK(5, 1_500_000), 
+    FOURTH_RANK(4, 50_000), 
+    FIFTH_RANK(3, 5_000), 
     FAIL(0, 0);
 
     private final int matchCount;
@@ -21,9 +22,9 @@ public enum WinningRank {
         this.reward = reward;
     }
 
-    public static WinningRank resultRank(int matchCount) {
+    public static WinningRank resultRank(int matchCount, boolean isMatchBonus) {
         return Arrays.stream(values())
-                .filter(winningRank -> winningRank.equals(matchCount))
+                .filter(winningRank -> winningRank.judgeRank(matchCount, isMatchBonus))
                 .findFirst()
                 .orElse(FAIL);
     }
@@ -37,12 +38,15 @@ public enum WinningRank {
     }
     
     public static List<WinningRank> createWinningRanks() {
-        return Stream.of(FIRST_RANK, SECOND_RANK, THIRD_RANK, FOURTH_RANK)
-                .sorted(Comparator.comparing(WinningRank::getMatchCount))
+        return Stream.of(FIRST_RANK, SECOND_RANK, THIRD_RANK, FOURTH_RANK, FIFTH_RANK)
+                .sorted(Comparator.comparing(WinningRank::getReward))
                 .collect(Collectors.toList());
     }
     
-    private boolean equals(int count) {
+    private boolean judgeRank(int count, boolean isMatchBonus) {
+        if (this.matchCount == SECOND_RANK.matchCount && this.reward == SECOND_RANK.reward) {
+            return this.matchCount == count && isMatchBonus;
+        }
         return this.matchCount == count;
     }
 }

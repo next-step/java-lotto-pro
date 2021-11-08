@@ -14,7 +14,7 @@ public class WinningResults {
         List<WinningResult> winningRanks = new ArrayList<WinningResult>();
         List<WinningRank> ranks = WinningRank.createWinningRanks();
         for (WinningRank winningRank : ranks) {
-            winningRanks.add(new WinningResult(winningRank, countWinningRank(winningRank, lottos)));
+            winningRanks.add(WinningResult.of(winningRank, countWinningRank(winningRank, lottos)));
         }
         return winningRanks;
     }
@@ -25,7 +25,7 @@ public class WinningResults {
     
     public double calculateRewardPercent(Money money) {
         int totalReward = winningResult.stream()
-                .mapToInt(wr -> wr.getCount() * wr.getWinningRank().getReward())
+                .mapToInt(wr -> wr.getTotalReward())
                 .sum();
         return totalReward / (double) money.getMoney();
     }

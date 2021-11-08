@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import lotto.utils.RandomGeneratorUtils;
-
 public class Lottos implements Iterable<Lotto> {
     private final List<Lotto> lottos;
 
@@ -16,7 +14,7 @@ public class Lottos implements Iterable<Lotto> {
     public static List<Lotto> buyLotto(Money money) {
         List<Lotto> lottos = new ArrayList<Lotto>();
         for (int i = 0; i < money.buyableQuantity(); i++) {
-            lottos.add(new Lotto(RandomGeneratorUtils.makeRandomNumbers()));
+            lottos.add(Lotto.buyAuto());
         }
         return lottos;
     }
@@ -25,9 +23,9 @@ public class Lottos implements Iterable<Lotto> {
         return this.lottos;
     }
 
-    public void execute(LottoNumbers winningNumbers) {
+    public void execute(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
-            lotto.judgeRank(winningNumbers);
+            lotto.judgeRank(winningLotto);
         }
     }
 

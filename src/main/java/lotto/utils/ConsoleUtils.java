@@ -1,9 +1,6 @@
 package lotto.utils;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class ConsoleUtils {
     private static final Scanner scanner = new Scanner(System.in);
@@ -11,16 +8,8 @@ public class ConsoleUtils {
     private ConsoleUtils() {
     }
 
-    public static int consoleInt() {
-        return Integer.parseInt(scanner.nextLine().replaceAll(" ", ""));
-    }
-
-    public static List<Integer> consoleIntegerList() {
-        String console = scanner.nextLine().replaceAll(" ", "");
-        return Arrays.stream(console.split(","))
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList());
+    public static String console() {
+        return scanner.nextLine().replaceAll(" ", "");
     }
 
 }
