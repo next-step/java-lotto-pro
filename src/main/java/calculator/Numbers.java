@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Numbers {
-    private List<Number> numbers;
+    private final List<Number> numbers;
 
     public Numbers(String[] numbersText) {
         this.numbers = generateNumbers(numbersText);
@@ -18,10 +18,6 @@ public class Numbers {
 
     private List<Number> generateNumbers(String[] numbersText) {
         List<Number> resultNumbers = new ArrayList<>();
-        if (numbersText == null) {
-            return resultNumbers;
-        }
-
         for (String numberText : numbersText) {
             resultNumbers.add(new Number(numberText));
         }

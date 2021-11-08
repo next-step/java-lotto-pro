@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Number {
     private static final String ERROR_WRONG_NUMBER_FORMAT = "입력한 숫자를 확인해 주세요.";
     private static final String ERROR_NEGATIVE_NUMBER = "입력된 숫자가 0 미만입니다.";
-    private int number;
+    private final int number;
 
     public Number(String number) {
         validateNumber(number);

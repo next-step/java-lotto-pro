@@ -2,33 +2,35 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class NumbersTest {
-    @DisplayName("숫자 하나 입력")
-    @Test
-    void inputNumberSingle() {
+    @ParameterizedTest(name = "{index}. {0} 테스트")
+    @MethodSource("provideArrayListForNumbers")
+    void calculateSumTest(String testTitle, List<Number> numbersInput, int expect) {
         // given
-        Numbers numbers = new Numbers(Arrays.asList(new Number("1")));
+        Numbers numbers = new Numbers(numbersInput);
         // when
         int result = numbers.getSum();
         // then
-        assertThat(result).isEqualTo(1);
+        assertThat(result).isEqualTo(expect);
     }
 
-    @DisplayName("숫자 여러개 입력")
-    @Test
-    void inputNumberMultiple() {
-        // given
-        Numbers numbers = new Numbers(Arrays.asList(new Number("1"), new Number("2")));
-        // when
-        int result = numbers.getSum();
-        // then
-        assertThat(result).isEqualTo(3);
+    private static Stream<Arguments> provideArrayListForNumbers() {
+        return Stream.of(
+                Arguments.of("숫자 하나 입력", Arrays.asList(new Number("1")), 1),
+                Arguments.of("숫자 여러개 입력", Arrays.asList(new Number("1"), new Number("2")), 3)
+        );
     }
 
     @DisplayName("잘못된 숫자 입력 예외")

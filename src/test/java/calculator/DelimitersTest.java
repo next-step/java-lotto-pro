@@ -1,32 +1,20 @@
 package calculator;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DelimitersTest {
-    @DisplayName("커스텀 구분자 없이 입력")
-    @Test
-    void inputWithoutCustomDelimiter() {
+    @ParameterizedTest(name = "{0} 구분자 입력 테스트")
+    @CsvSource(value = {",: 1,2,3", ",:b 1b2b3b"}, delimiterString = " ")
+    void inputDelimiterTest(String delimitersInput, String numbersInput) {
         // given
-        Delimiters delimiters = new Delimiters();
+        Delimiters delimiters = new Delimiters(delimitersInput);
         // when
-        String[] numbersText = delimiters.splitTextByDelimiter("1,2,3");
-        Numbers numbers = new Numbers(numbersText);
-        // then
-        assertThat(numbers).isEqualTo(new Numbers(Arrays.asList(new Number("1"), new Number("2"), new Number("3"))));
-    }
-
-    @DisplayName("커스텀 구분자 있는 입력")
-    @Test
-    void inputWithCustomDelimiter() {
-        // given
-        Delimiters delimiters = new Delimiters("b");
-        // when
-        String[] numbersText = delimiters.splitTextByDelimiter("1b2b3");
+        String[] numbersText = delimiters.splitTextByDelimiter(numbersInput);
         Numbers numbers = new Numbers(numbersText);
         // then
         assertThat(numbers).isEqualTo(new Numbers(Arrays.asList(new Number("1"), new Number("2"), new Number("3"))));

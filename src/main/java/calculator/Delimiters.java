@@ -3,41 +3,30 @@ package calculator;
 import java.util.Objects;
 
 public class Delimiters {
-    private static final String DEFAULT_DELIMITER1 = ",";
-    private static final String DEFAULT_DELIMITER2 = ":";
     private static final String DELIMITER_OF_DELIMITERS = "|";
-    private String delimiters;
+    private final StringBuilder delimiters;
 
-    public Delimiters() {
-        this(null);
+    public Delimiters(String delimiters) {
+        this.delimiters = new StringBuilder();
+        addCustomDelimiters(delimiters);
     }
 
-    public Delimiters(String delimiter) {
-        this.delimiters = "";
-        addDelimiter(DEFAULT_DELIMITER1);
-        addDelimiter(DEFAULT_DELIMITER2);
-        addCustomDelimiter(delimiter);
-    }
-
-    private void addCustomDelimiter(String delimiter) {
-        if (delimiter == null) {
-            return;
+    private void addCustomDelimiters(String delimiters) {
+        for (String delimiter: delimiters.split("")) {
+            addDelimiter(delimiter);
         }
-
-        addDelimiter(delimiter);
     }
 
     private void addDelimiter(String delimiter) {
-        if (this.delimiters.length() == 0) {
-            this.delimiters += delimiter;
-            return;
+        if (!this.delimiters.isEmpty()) {
+            this.delimiters.append(DELIMITER_OF_DELIMITERS);
         }
 
-        this.delimiters += DELIMITER_OF_DELIMITERS + delimiter;
+        this.delimiters.append(delimiter);
     }
 
     public String[] splitTextByDelimiter(String text) {
-        return text.split(delimiters);
+        return text.split(delimiters.toString());
     }
 
     @Override
