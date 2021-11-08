@@ -56,4 +56,16 @@ public class StringTest {
             .isEqualTo("1,2");
     }
 
+    @Test
+    @DisplayName("abc값이 주어졌을 때 charAt() 메소드를 활용해 특정 위치의 문자를 가져올 때 위치 값을 벗어나면 StringIndexOutOfBoundsException이 발생하는가?")
+    void abc값을_charAt로_특정_위치의_문자를_가져올_때_위치_값이_벗어나면_StringIndexOutOfBoundsException이_발생하는가() {
+        //given
+        final String abc = "abc";
+        final int indexOutOfBounds = abc.length() + 1;
+
+        //when, then
+        assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+            .isThrownBy(() -> abc.charAt(indexOutOfBounds))
+            .as("특정 위치의 문자를 가져올 때 위치 값을 벗어나면 StringIndexOutOfBoundsException이 발생하는가?");
+    }
 }
