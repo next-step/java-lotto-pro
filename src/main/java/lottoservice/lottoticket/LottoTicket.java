@@ -1,5 +1,6 @@
 package lottoservice.lottoticket;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -54,12 +55,6 @@ public class LottoTicket {
 		return lottoNumbers.contains(lottoNumber);
 	}
 
-	private boolean hasAllSameNumbers(LottoTicket that) {
-		return that.getLottoNumbers().stream()
-			.filter(it -> this.hasLottoNumber(it))
-			.count() == LottoNumbersMaker.SIZE_OF_LOTTERY_NUMBERS;
-	}
-
 	public LottoNumber getLottoNumber(int index){
 		return lottoNumbers.get(index);
 	}
@@ -70,7 +65,8 @@ public class LottoTicket {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		return hasAllSameNumbers((LottoTicket)o);
+		LottoTicket that = (LottoTicket)o;
+		return Objects.equals(getLottoNumbers(), that.getLottoNumbers());
 	}
 
 	@Override

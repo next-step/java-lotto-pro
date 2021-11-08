@@ -38,4 +38,16 @@ public class LottoTicketTest {
 			assertThat(lottoTicket.getLottoNumber(i).compareTo(lottoTicket.getLottoNumber(i-1))).isEqualTo(1);
 		}
 	}
+
+	@Test
+	public void equals_LottoTicket비교() {
+		List<LottoNumber> lottoNumbers = Arrays.asList(1,34,10,2,30,6)
+			.stream().map(it -> LottoNumber.valueOf(it)).collect(Collectors.toList());
+
+		List<LottoNumber> lottoNumbers2 = Arrays.asList(1,34,10,2,30,6)
+			.stream().map(it -> LottoNumber.valueOf(it)).collect(Collectors.toList());
+		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers2);
+		assertThat(lottoTicket).isEqualTo(lottoTicket2);
+	}
 }
