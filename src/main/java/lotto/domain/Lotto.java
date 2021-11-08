@@ -2,7 +2,10 @@ package lotto.domain;
 
 import lotto.domain.common.Constant;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -43,9 +46,16 @@ public class Lotto {
     public int countMatchingNumber(final Lotto comparableLotto) {
         int matchingCount = 0;
         for (LottoNumber lottoNumber : comparableLotto.lottoNums) {
-            matchingCount += Collections.frequency(this.lottoNums, lottoNumber);
+                matchingCount += matchCount(lottoNumber);
         }
         return matchingCount;
+    }
+
+    private int matchCount(LottoNumber lottoNumber) {
+        if( this.lottoNums.contains(lottoNumber) ) {
+            return 1;
+        }
+        return 0;
     }
 
     public List<LottoNumber> getLottoNumbers() {
