@@ -4,52 +4,61 @@ import lotto.code.ErrorCode;
 import lotto.exception.LottoException;
 
 public class Money {
+	public static final int LOTTO_PRICE = 1000;
 	private static final String NUMBER_REGEX = "[0-9]+";
+	private final int money;
 
-	private final String inputMoney;
+	private Money(int money) {
+		this.money = money;
+	}
 
-	public Money(String inputMoney) {
+	public static Money from(String inputMoney) {
 		validNullOrEmpty(inputMoney);
 		validNumber(inputMoney);
 		validUnderLottoPrice(inputMoney);
-		this.inputMoney = inputMoney;
+		return new Money(Integer.parseInt(inputMoney));
 	}
 
-	private void validNullOrEmpty(String input) {
+	public static Money from(int inputMoney) {
+		return new Money(inputMoney);
+	}
+
+	private static void validNullOrEmpty(String input) {
 		if (isNullOrEmpty(input)) {
 			throw new LottoException(ErrorCode.INVALID_INPUT_NULL_VALUE_ERROR);
 		}
 	}
 
-	private void validNumber(String input) {
+	private static void validNumber(String input) {
 		if (isNumber(input)) {
 			throw new LottoException(ErrorCode.INVALID_INPUT_NUMBER_ERROR);
 		}
 	}
 
-	private boolean isNumber(String input) {
+	private static boolean isNumber(String input) {
 		return !input.matches(NUMBER_REGEX);
 	}
 
-	private boolean isNullOrEmpty(String input) {
+	private static boolean isNullOrEmpty(String input) {
 		return input == null || input.isEmpty();
 	}
 
-	private void validUnderLottoPrice(String input) {
+	private static void validUnderLottoPrice(String input) {
 		if (isUnderLottoPrice(input)) {
 			throw new LottoException(ErrorCode.UNDER_LOTTO_PRICE_ERROR);
 		}
 	}
 
-	private boolean isUnderLottoPrice(String input) {
-		return Integer.parseInt(input) < LottoGenerator.LOTTO_PRICE;
+	private static boolean isUnderLottoPrice(String input) {
+		return Integer.parseInt(input) < LOTTO_PRICE;
 	}
 
-	public String money() {
-		return inputMoney;
+	public int calculateLottoAmount() {
+		return money / LOTTO_PRICE;
 	}
 
-	public int moneyToInt() {
-		return Integer.parseInt(inputMoney);
+	public int getMoney() {
+		return money;
 	}
+
 }

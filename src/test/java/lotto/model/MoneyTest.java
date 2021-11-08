@@ -25,7 +25,7 @@ class MoneyTest {
 
 		// then
 		assertThatThrownBy(() -> {
-			method.invoke(new Money(inputMoney), inputMoney);
+			method.invoke(Money.from(inputMoney), inputMoney);
 		}).isInstanceOf(LottoException.class);
 	}
 
@@ -37,7 +37,7 @@ class MoneyTest {
 
 		// then
 		assertThatThrownBy(() -> {
-			method.invoke(new Money(inputMoney), inputMoney);
+			method.invoke(Money.from(inputMoney), inputMoney);
 		}).isInstanceOf(LottoException.class);
 	}
 
@@ -49,7 +49,7 @@ class MoneyTest {
 
 		// then
 		assertThatThrownBy(() -> {
-			method.invoke(new Money(inputMoney), inputMoney);
+			method.invoke(Money.from(inputMoney), inputMoney);
 		}).isInstanceOf(LottoException.class);
 	}
 }
