@@ -23,10 +23,11 @@ public class LottoShop {
     }
 
     public void open() {
-        Amount totalAmount = readAmount();
-        Amount manualAmount = readManualLottosCount();
+        Amount totalAmount = readTotalAmount();
+        Amount manualAmount = readManualLottosCount(totalAmount);
+        Amount autoAmount = subtractAmount(totalAmount, manualAmount);
         Lottos manualLottos = purchaseManualLottos(manualAmount);
-        Lottos autoLottos = purchaseAutoLottos(subtractAmount(totalAmount, manualAmount));
+        Lottos autoLottos = purchaseAutoLottos(autoAmount);
         resultView.printPurchaseAckMessage(manualLottos.count(), autoLottos.count());
         Lottos totalLottos = combineLottos(manualLottos, autoLottos);
         resultView.printLottos(totalLottos);
@@ -39,21 +40,23 @@ public class LottoShop {
         resultView.printTotalRevenueMessage(revenue.profitRate());
     }
 
-    private Amount readAmount() {
+    private Amount readTotalAmount() {
         try {
             resultView.printPurchaseAmountMessage();
             return new Amount(Long.parseLong(inputView.readPurchaseAmount()));
         } catch (IllegalArgumentException e) {
-            return readAmount();
+            return readTotalAmount();
         }
     }
 
-    private Amount readManualLottosCount() {
+    private Amount readManualLottosCount(Amount totalAmount) {
         try {
             resultView.printPurchaseManualLottosCountMessage();
-            return new Amount(Integer.parseInt(inputView.readManualLottosCount()) * LottoMachine.LOTTO_PRICE);
+            Amount amount = new Amount(Integer.parseInt(inputView.readManualLottosCount()) * LottoMachine.LOTTO_PRICE);
+            subtractAmount(totalAmount, amount);
+            return amount;
         } catch (IllegalArgumentException e) {
-            return readManualLottosCount();
+            return readManualLottosCount(totalAmount);
         }
     }
 
