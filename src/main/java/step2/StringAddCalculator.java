@@ -7,7 +7,7 @@ public final class StringAddCalculator {
     private static final int ZERO = 0;
     private static final int SINGLE_DIGIT_LENGTH = 1;
 
-    private static final String SEPARATOR = ",";
+    private static final String SEPARATOR = "[,:]";
 
     private StringAddCalculator() {
     }
