@@ -35,6 +35,10 @@ public enum MatchingNumberCount {
 		return matchingNumberCounts.get(0);
 	}
 
+	public Money getPrizeMultiplyCount(Count matchCount) {
+		return prizeMoney.multiply(matchCount);
+	}
+
 	public Count getMatchCount() {
 		return matchCount;
 	}

@@ -1,5 +1,7 @@
 package model;
 
+import static model.EarningsRate.*;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -58,6 +60,18 @@ public class Money {
 		}
 
 		return new Money(remain);
+	}
+
+	public Money multiply(Count count) {
+		return new Money(value.multiply(count.toBigDecimal()));
+	}
+
+	public Money add(Money money) {
+		return new Money(value.add(money.getValue()));
+	}
+
+	public BigDecimal divideForEarningsRate(Money money) {
+		return value.divide(money.getValue(), EARNINGS_RATE_SCALE, EARNINGS_RATE_ROUNDING_MODE);
 	}
 
 	@Override

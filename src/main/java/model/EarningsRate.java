@@ -5,16 +5,18 @@ import java.math.RoundingMode;
 import java.util.Objects;
 
 public class EarningsRate {
+	public static final int EARNINGS_RATE_SCALE = 2;
+	public static final RoundingMode EARNINGS_RATE_ROUNDING_MODE = RoundingMode.FLOOR;
 	private BigDecimal value;
 
 	EarningsRate(BigDecimal value) {
-		this.value = value.setScale(2, RoundingMode.FLOOR);
+		this.value = value.setScale(EARNINGS_RATE_SCALE, EARNINGS_RATE_ROUNDING_MODE);
 	}
 
 	public static EarningsRate calculateOf(MatchResult matchResult, Money purchaseMoney) {
-		BigDecimal totalPayout = matchResult.calculateTotalPayout();
+		Money totalPayout = matchResult.calculateTotalPayout();
 
-		return new EarningsRate(totalPayout.divide(purchaseMoney.getValue(), 2, RoundingMode.FLOOR));
+		return new EarningsRate(totalPayout.divideForEarningsRate(purchaseMoney));
 	}
 
 	public boolean isLessThanOne() {
