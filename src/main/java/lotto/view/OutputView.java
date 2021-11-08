@@ -2,9 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
-import lotto.domain.Lottos;
-
-import java.util.List;
+import lotto.domain.LottoTicket;
 
 public class OutputView {
     private static final String PRINT_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
@@ -29,9 +27,8 @@ public class OutputView {
         System.out.printf(PRINT_PURCHASE_QUANTITY, purchaseQuantity);
     }
 
-    public static void printLottoNumber(Lottos lottos) {
-        List<Lotto> lottoList = lottos.getLottos();
-        lottoList.stream()
+    public static void printLottoNumber(LottoTicket lottoTicket) {
+        lottoTicket.getLottoTicket().stream()
                 .map(Lotto::getLottoNumbers)
                 .forEach(System.out::println);
         System.out.println();
@@ -41,13 +38,13 @@ public class OutputView {
         System.out.println(PRINT_INPUT_WINNING_NUMBERS);
     }
 
-    public static void printWinningStatistics(Lottos lottos) {
+    public static void printWinningStatistics(LottoTicket lottoTicket) {
         System.out.println();
         System.out.println(PRINT_WINNING_STATISTICS);
-        System.out.printf(PRINT_FOURTH_RANK, lottos.getTotalRankCount(LottoRank.FOURTH));
-        System.out.printf(PRINT_THIRD_RANK, lottos.getTotalRankCount(LottoRank.THIRD));
-        System.out.printf(PRINT_SECOND_RANK, lottos.getTotalRankCount(LottoRank.SECOND));
-        System.out.printf(PRINT_FIRST_RANK, lottos.getTotalRankCount(LottoRank.FIRST));
+        System.out.printf(PRINT_FOURTH_RANK, lottoTicket.getTotalRankCount(LottoRank.FOURTH));
+        System.out.printf(PRINT_THIRD_RANK, lottoTicket.getTotalRankCount(LottoRank.THIRD));
+        System.out.printf(PRINT_SECOND_RANK, lottoTicket.getTotalRankCount(LottoRank.SECOND));
+        System.out.printf(PRINT_FIRST_RANK, lottoTicket.getTotalRankCount(LottoRank.FIRST));
     }
 
     public static void printRateOfReturn(double rateOfReturn) {

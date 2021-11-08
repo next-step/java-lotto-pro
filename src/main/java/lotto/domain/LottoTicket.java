@@ -2,20 +2,20 @@ package lotto.domain;
 
 import java.util.List;
 
-public class Lottos {
+public class LottoTicket {
 
-    private List<Lotto> lottos;
+    private List<Lotto> lottoTicket;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public LottoTicket(List<Lotto> lottoTicket) {
+        this.lottoTicket = lottoTicket;
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public List<Lotto> getLottoTicket() {
+        return lottoTicket;
     }
 
     public void compareWinningNumbers(LottoNumbers lottoWinningNumbers) {
-        lottos.forEach(lotto -> lotto.compareWinningNumbers(lottoWinningNumbers));
+        lottoTicket.forEach(lotto -> lotto.compareWinningNumbers(lottoWinningNumbers));
     }
 
     public double getRateOfReturn(LottoPurchase lottoPurchase) {
@@ -23,13 +23,13 @@ public class Lottos {
     }
 
     public int getTotalPrizeMoney() {
-        return lottos.stream()
+        return lottoTicket.stream()
                 .map(lotto -> lotto.getLottoRank().getPrizeMoney())
                 .reduce(0, Integer::sum);
     }
 
     public int getTotalRankCount(LottoRank rank) {
-        return Math.toIntExact(lottos.stream()
+        return Math.toIntExact(lottoTicket.stream()
                 .filter(lotto -> lotto.getLottoRank().equals(rank))
                 .count());
     }
