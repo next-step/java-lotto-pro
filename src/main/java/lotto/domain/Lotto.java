@@ -11,10 +11,20 @@ public class Lotto {
     public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
+    private final LottoType lottoType;
 
-    public Lotto(List<Integer> numbers) {
+    private Lotto(List<Integer> numbers, LottoType lottoType) {
         validate(numbers);
         this.lottoNumbers = Collections.unmodifiableList(mapToLottoNumbers(numbers));
+        this.lottoType = lottoType;
+    }
+
+    public static Lotto of(List<Integer> numbers, LottoType lottoType) {
+        return new Lotto(numbers, lottoType);
+    }
+
+    public static Lotto from(List<Integer> numbers) {
+        return new Lotto(numbers, LottoType.MANUAL);
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -30,6 +40,10 @@ public class Lotto {
 
     public boolean isContained(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public boolean isManual() {
+        return lottoType == LottoType.MANUAL;
     }
 
     private void validate(List<Integer> numbers) {

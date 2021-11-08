@@ -15,6 +15,10 @@ public class PurchaseAmount {
         return amount / LottoCalculator.LOTTO_PRICE;
     }
 
+    public boolean isAvailableManualQuantity(Lottos manualLottos) {
+        return getQuantity() >= manualLottos.getTotalQuantity();
+    }
+
     private void validate(int amount) {
         if (amount < LottoCalculator.LOTTO_PRICE) {
             throw new IllegalArgumentException(

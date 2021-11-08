@@ -20,10 +20,10 @@ class LottoTest {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         // when
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.from(lottoNumbers);
 
         // then
-        assertThat(lotto).isEqualTo(new Lotto(lottoNumbers));
+        assertThat(lotto).isEqualTo(Lotto.from(lottoNumbers));
     }
 
     @Test
@@ -34,7 +34,7 @@ class LottoTest {
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new Lotto(lottoNumbers))
+                .isThrownBy(() -> Lotto.from(lottoNumbers))
                 .withMessageMatching(ErrorMessage.LOTTO_NUMBER_SIZE_ERROR.getMessage().replace("%d", "\\d+"));
     }
 
@@ -46,7 +46,7 @@ class LottoTest {
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new Lotto(lottoNumbers))
+                .isThrownBy(() -> Lotto.from(lottoNumbers))
                 .withMessageMatching(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
     }
 
@@ -54,8 +54,8 @@ class LottoTest {
     @DisplayName("입력받은 로또 번호와 로또 숫자의 일치 개수를 반환한다.")
     void getWinningResult() {
         // given
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto winningLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
+        Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = Lotto.from(Arrays.asList(4, 5, 6, 7, 8, 9));
 
         // when
         int matchedCount = lotto.getMatchedCount(winningLotto);
@@ -69,7 +69,7 @@ class LottoTest {
     @DisplayName("로또 숫자의 포함 여부를 반환한다.")
     void isContained(int number, boolean expected) {
         // given
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when
         boolean contained = lotto.isContained(new LottoNumber(number));
