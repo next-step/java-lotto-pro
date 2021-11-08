@@ -3,6 +3,7 @@ package step3;
 import static java.util.stream.Collectors.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -40,8 +41,9 @@ public class LottoNumbers {
 			.collect(toCollection(HashSet::new));
 	}
 
-	public long match(LottoNumber lottoNumber) {
-		return lottoNumbers.stream().filter(s -> s.equals(lottoNumber)).count();
+	public int match(List<LottoNumber> userLottoNumbers) {
+		return (int) lottoNumbers.stream()
+			.filter(lottoNumber -> userLottoNumbers.stream().anyMatch(s -> s.equals(lottoNumber))).count();
 	}
 
 	@Override

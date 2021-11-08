@@ -10,6 +10,10 @@ public class Money {
 		this.money = money;
 	}
 
+	public Money(String input) {
+		this(Integer.parseInt(input));
+	}
+
 	private void validation(int money) {
 		if (isDefaultMoneyLessThen(money)) {
 			throw new IllegalArgumentException("금액이 부족합니다.");
@@ -22,10 +26,6 @@ public class Money {
 
 	public int buyCount() {
 		size = Math.floorDiv(money, DEFAULT_MONEY);
-		return size;
-	}
-
-	public int findPunchCount() {
 		return size;
 	}
 

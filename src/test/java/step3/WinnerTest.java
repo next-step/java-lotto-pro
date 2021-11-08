@@ -41,12 +41,11 @@ public class WinnerTest {
 		lottoNumberService = new LottoNumberService();
 
 		//when
-		winner = new Winner(papers);
-		winnerAmounts = winner.statistics(lottoNumberService.convertLottoNumber(userInputWinnerNumber));
+		winner = new Winner();
+		int total = winner.statistics(lottoNumberService.convertLottoNumber(userInputWinnerNumber), papers);
 
 		//then
-		assertThat(winnerAmounts.get(3)).isEqualTo(5_000);
-		assertThat(winnerAmounts.get(4)).isEqualTo(50_000);
+		assertThat(total).isEqualTo(55_000);
 	}
 
 	@DisplayName("당첨금액의 총 수익률 계산")
@@ -55,16 +54,15 @@ public class WinnerTest {
 		"6,42,45,1,9,8:14000:0.00"}, delimiter = ':')
 	void yield(String userInputNumber, int inputMoney, String inputYield) {
 		// given
-		WinningMoney winningMoney = new WinningMoney(new Money(inputMoney));
-		winner = new Winner(papers);
-		winnerAmounts = winner.statistics(lottoNumberService.convertLottoNumber(userInputNumber));
-		Integer reduce = winnerAmounts.entrySet().stream().map(s -> s.getValue()).reduce(0, Integer::sum);
+		WinningMoney winningMoney = new WinningMoney();
+		winner = new Winner();
+		int total = winner.statistics(lottoNumberService.convertLottoNumber(userInputNumber), papers);
 
 		// when
-		BigDecimal calyield = winningMoney.yield(reduce);
+		BigDecimal yield = winner.yield(inputMoney,total);
 
 		// then
-		assertThat(calyield).isEqualTo(new BigDecimal(inputYield));
+		assertThat(yield).isEqualTo(inputYield);
 	}
 	
 	@DisplayName("각각의 금액이 해당 금액 범위 내인지 확인")

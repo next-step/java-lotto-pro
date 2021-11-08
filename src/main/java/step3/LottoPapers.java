@@ -1,10 +1,11 @@
 package step3;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoPapers extends AbstractList<LottoNumbers> {
+import step3.winner.WinningAmount;
+
+public class LottoPapers {
 
 	public List<LottoNumbers> papers;
 
@@ -16,14 +17,13 @@ public class LottoPapers extends AbstractList<LottoNumbers> {
 		return new LottoPapers(lottoNumbers);
 	}
 
-	@Override
-	public int size() {
-		return papers.size();
-	}
-
-	@Override
-	public LottoNumbers get(int index) {
-		return papers.get(index);
+	public int  findMatchLottoNumber(List<LottoNumber> userLottoNumbers) {
+		int total = 0;
+		for (LottoNumbers lottoNumbers : papers) {
+			int match = lottoNumbers.match(userLottoNumbers);
+			total += WinningAmount.valueOf(match);
+		}
+		return total;
 	}
 
 	@Override
@@ -34,6 +34,5 @@ public class LottoPapers extends AbstractList<LottoNumbers> {
 		}
 		return sb.toString();
 	}
-
 
 }
