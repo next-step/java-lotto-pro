@@ -44,12 +44,10 @@ public class WinningLottoStatus {
 	 * @return 상태 정보 텍스트
 	 */
 	public String status() {
-		StringBuffer sbStatus = new StringBuffer();
-		sbStatus.append(String.format("3개 일치(%d원)- %d개\n" ,Rank.FIFTH.getWinningMoney(), getMatchCount(Rank.FIFTH)));
-		sbStatus.append(String.format("4개 일치(%d원)- %d개\n" ,Rank.FOURTH.getWinningMoney(), getMatchCount(Rank.FOURTH)));
-		sbStatus.append(String.format("5개 일치(%d원)- %d개\n" ,Rank.THIRD.getWinningMoney(), getMatchCount(Rank.THIRD)));
-		sbStatus.append(String.format("5개 일치, 보너스 볼 일치(%d원)- %d개\n" ,Rank.SECOND.getWinningMoney(), getMatchCount(Rank.SECOND)));
-		sbStatus.append(String.format("6개 일치(%d원)- %d개\n" ,Rank.FIRST.getWinningMoney(), getMatchCount(Rank.FIRST)));
-		return sbStatus.toString();
+		return  String.format("3개 일치(%d원)- %d개\n", Rank.FIFTH.getWinningMoney(), getMatchCount(Rank.FIFTH))
+			+ String.format("4개 일치(%d원)- %d개\n", Rank.FOURTH.getWinningMoney(), getMatchCount(Rank.FOURTH))
+			+ String.format("5개 일치(%d원)- %d개\n", Rank.THIRD.getWinningMoney(), getMatchCount(Rank.THIRD))
+			+ String.format("5개 일치, 보너스 볼 일치(%d원)- %d개\n", Rank.SECOND.getWinningMoney(), getMatchCount(Rank.SECOND))
+			+ String.format("6개 일치(%d원)- %d개\n", Rank.FIRST.getWinningMoney(), getMatchCount(Rank.FIRST));
 	}
 }
