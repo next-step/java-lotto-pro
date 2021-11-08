@@ -55,4 +55,19 @@ public class LottoTicketTest {
 		// then
 		assertThat(result).isEqualTo(expected);
 	}
+
+	@Test
+	@DisplayName("다른 로또티켓이 주어지면 같은 번호 갯수를 반환해야 한다")
+	public void getMatchCountTest() {
+		// given
+		int expected = 5;
+		LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+		LottoTicket other = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 10));
+
+		// when
+		int matchCnt = lottoTicket.getMatchCount(other);
+
+		// then
+		assertThat(matchCnt).isEqualTo(expected);
+	}
 }

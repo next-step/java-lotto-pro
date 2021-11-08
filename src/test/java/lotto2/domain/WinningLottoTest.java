@@ -38,17 +38,4 @@ public class WinningLottoTest {
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
-	@Test
-	@DisplayName("로또티켓과 비교하여 당첨순위를 반환한다")
-	public void getMatchRankTest() {
-		LottoTicket ticket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 45));
-		LottoTicket winningNumbers = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-		LottoNumber bonusNumber = LottoNumber.of(45);
-		WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusNumber);
-
-		Rank rank = winningLotto.getMatchRank(ticket);
-
-		assertThat(rank).isEqualTo(Rank.SECOND);
-	}
-
 }

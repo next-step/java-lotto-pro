@@ -1,12 +1,11 @@
 package lotto2.domain;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoTicket implements Iterable<LottoNumber> {
+public class LottoTicket {
 
 	private static final int LOTTO_NUMBER_COUNT = 6;
 
@@ -39,6 +38,14 @@ public class LottoTicket implements Iterable<LottoNumber> {
 		}
 	}
 
+	public int getMatchCount(LottoTicket other) {
+		int matchCnt = 0;
+		for (LottoNumber number : other.lottoNumbers) {
+			matchCnt += this.contains(number) ? 1 : 0;
+		}
+		return matchCnt;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -60,8 +67,4 @@ public class LottoTicket implements Iterable<LottoNumber> {
 		return this.lottoNumbers.contains(number);
 	}
 
-	@Override
-	public Iterator<LottoNumber> iterator() {
-		return this.lottoNumbers.iterator();
-	}
 }
