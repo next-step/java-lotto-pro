@@ -15,7 +15,7 @@ public class Money {
         this.money = money;
     }
 
-    public int calculateTryLottoCount(Money money, int lottoPrice) {
+    public int calculateTryLottoCount(int lottoPrice) {
         return this.money / lottoPrice;
     }
 

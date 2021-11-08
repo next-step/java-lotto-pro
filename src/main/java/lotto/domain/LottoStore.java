@@ -17,8 +17,9 @@ public class LottoStore {
 
     public static LottoGame sell(List<String> manualNumbersStrings, Money money) {
         List<LottoBalls> manualLottoBalls = createManualLottoBalls(manualNumbersStrings);
-        int tryCount = money.calculateTryLottoCount(money, LOTTO_PRICE);
-        List<LottoBalls> autoLottoBalls = Collections.unmodifiableList(createLottoBalls(tryCount));
+        int allTryCount = money.calculateTryLottoCount(LOTTO_PRICE);
+        TryCount tryCount = new TryCount(allTryCount,manualLottoBalls.size());
+        List<LottoBalls> autoLottoBalls = Collections.unmodifiableList(createLottoBalls(tryCount.getAutoTryCount()));
         return createLottoGame(manualLottoBalls,autoLottoBalls,tryCount);
     }
 
@@ -36,10 +37,9 @@ public class LottoStore {
                 .collect(Collectors.toList());
     }
 
-    private static LottoGame createLottoGame(List<LottoBalls> manualLottoBalls,List<LottoBalls> autoLottoBalls,int tryCount) {
+    private static LottoGame createLottoGame(List<LottoBalls> manualLottoBalls,List<LottoBalls> autoLottoBalls,TryCount tryCount) {
         return new LottoGame(
-                manualLottoBalls.size(),
-                tryCount - manualLottoBalls.size(),
+                tryCount,
                 Stream.concat(manualLottoBalls.stream(), autoLottoBalls.stream()).collect(Collectors.toList())
         );
     }
