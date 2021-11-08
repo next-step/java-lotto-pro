@@ -1,31 +1,28 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
 
-    private final List<Number> matchNumber;
+    private final LottoNumber matchNumber;
     private final Number bonusNumber;
 
-    public WinningLotto(List<Number> matchNumber, Number bonusNumber) {
+    public WinningLotto(LottoNumber matchNumber, Number bonusNumber) {
         this.matchNumber = matchNumber;
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean isExistBonusNumber(List<Number> lottoNumbers) {
-        return Collections.frequency(lottoNumbers, bonusNumber) > 0 ? true : false;
+    public boolean isExistBonusNumber(LottoNumber lottoNumbers) {
+        return lottoNumbers.isContains(bonusNumber);
     }
 
     public boolean isMatchNumber(Number lottoNumber) {
-        return Collections.frequency(matchNumber, lottoNumber) > 0 ? true : false;
+        return matchNumber.isContains(lottoNumber);
     }
 
     public LottoResult getLottoMatchResult(List<LottoNumber> lottoList) {
-        Map<Rank, Integer> result = new HashMap<>();
+        EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
 
         for (LottoNumber lotto : lottoList) {
             Rank matchRank = lotto.getMatchRank(this);

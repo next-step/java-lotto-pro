@@ -10,8 +10,12 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public void printPurchaseLottoList(List<LottoNumber> lotto) {
-        System.out.println(lotto.size() + "개를 구매했습니다.");
+    public void printPurchaseLottoList(List<LottoNumber> lotto, int size) {
+        if (size > 0) {
+            System.out.println("수동으로 " + size + "장, "
+                    + "자동으로 " + (lotto.size() - size) + "장 을 구매했습니다."
+            );
+        }
         for (LottoNumber lottoNumber : lotto) {
             printLottoNumbers(lottoNumber);
         }
@@ -48,7 +52,7 @@ public class OutputView {
         if (!rank.isRankMatch(Rank.NONE)) {
             System.out.println(
                     rank.getMatchCount() + "개 일치 "
-                            + "(" + rank.getPrizeMoney() + ")"
+                            + "(" + rank.getPrizeMoney().getMoney() + ")"
                             + "- " + matchRankCount + "개"
             );
         }

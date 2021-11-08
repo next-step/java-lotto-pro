@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.LottoNumberOutOfRangeException;
+import lotto.exception.LottoNumberSizeException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -9,14 +12,14 @@ public class Number implements Comparable<Number> {
 
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
-
-    private final int number;
     private static final Map<Integer, Number> lottoNumbers = new HashMap<>();
 
     static {
-        IntStream.rangeClosed(MIN_NUMBER,MAX_NUMBER)
+        IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
                 .forEach(i -> lottoNumbers.put(i, new Number(i)));
     }
+
+    private final int number;
 
     private Number(int number) {
         this.number = number;
@@ -29,10 +32,10 @@ public class Number implements Comparable<Number> {
 
     private static void validateNumberRange(int randomNumber) {
         if (randomNumber > MAX_NUMBER) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호의 최대 크기 : " + MAX_NUMBER);
+            throw new LottoNumberOutOfRangeException("[ERROR] 로또 번호의 최대 크기 : " + MAX_NUMBER);
         }
         if (randomNumber < MIN_NUMBER) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호의 최소 크기 : " + MIN_NUMBER);
+            throw new LottoNumberOutOfRangeException("[ERROR] 로또 번호의 최소 크기 : " + MIN_NUMBER);
         }
     }
 

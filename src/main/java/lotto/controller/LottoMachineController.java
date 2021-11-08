@@ -1,18 +1,20 @@
 package lotto.controller;
 
-import lotto.domain.*;
 import lotto.domain.Number;
+import lotto.domain.*;
+import lotto.exception.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoMachineController {
 
-    private InputView inputView;
-    private OutputView outputView;
-    private LottoMachine lottoMachine;
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final LottoMachine lottoMachine;
 
     public LottoMachineController() {
         this.inputView = new InputView();
@@ -21,36 +23,40 @@ public class LottoMachineController {
     }
 
     public void run() {
-        List<LottoNumber> lottoList = lottoMachine.getLottoList(new Money(getUserInputPurchaseAmount()));
-        printPurchaseLottoList(lottoList);
+        Money money = new Money(getUserInputPurchaseAmount());
+        List<List<Integer>> activeNumber = getUserInputActiveNumber();
 
-        List<Number> matchNumber = getUserInputMatchNumber();
-        Number bonusNumber = Number.of(inputView.getUserInputBonusNumber());
+        List<LottoNumber> lottoList = lottoMachine.getLottoList(money, activeNumber);
+        printPurchaseLottoList(lottoList, activeNumber.size());
 
-        WinningLotto winningLotto = new WinningLotto(matchNumber, bonusNumber);
-        LottoResult matchLottoResultResult = winningLotto.getLottoMatchResult(lottoList);
+        LottoNumber matchNumber = lottoMachine.getLottoNumber(getUserInputMatchNumber());
+        Number bonusNumber = lottoMachine.getBonusNumber(inputView.getUserInputBonusNumber());
+
+        LottoResult matchLottoResultResult = new WinningLotto(matchNumber, bonusNumber).getLottoMatchResult(lottoList);
 
         printMatchResult(matchLottoResultResult);
+
     }
 
-    private int getUserInputPurchaseAmount() {
-        return inputView.getUserInputPurchaseAmount();
+    private BigDecimal getUserInputPurchaseAmount() {
+        return BigDecimal.valueOf(inputView.getUserInputPurchaseAmount());
     }
 
-    private void printPurchaseLottoList(List<LottoNumber> lottoList) {
-        outputView.printPurchaseLottoList(lottoList);
+    private List<Integer> getUserInputMatchNumber() {
+        return inputView.getUserInputMatchNumber();
     }
 
-    private List<Number> getUserInputMatchNumber() {
-        return inputView.getUserInputMatchNumber()
-                .stream()
-                .map(m -> Number.of(m))
-                .collect(Collectors.toList());
+    private List<List<Integer>> getUserInputActiveNumber() {
+        List<List<Integer>> activeNumbers = inputView.getUserInputActiveNumbers();
+        return activeNumbers;
     }
 
     private void printMatchResult(LottoResult matchLottoResultList) {
         outputView.printPrizeLotto(matchLottoResultList);
     }
 
+    private void printPurchaseLottoList(List<LottoNumber> lottoList, int size) {
+        outputView.printPurchaseLottoList(lottoList, size);
+    }
 
 }

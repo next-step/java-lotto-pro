@@ -1,39 +1,18 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Objects;
-
-import static lotto.domain.LottoNumber.GAME_PRICE;
 
 public class Money {
 
-    private final int money;
+    private final BigDecimal money;
 
-    public Money(int money) {
-        validation(money);
+    public Money(BigDecimal money) {
         this.money = money;
     }
 
-    public int getPurchaseCount() {
-        return money / GAME_PRICE;
-    }
-
-    private void validation(int purchaseAmount) {
-        validateZeroAmount(purchaseAmount);
-        validateRemainderAmount(purchaseAmount);
-    }
-
-    private void validateRemainderAmount(int purchaseAmount) {
-        if (purchaseAmount % GAME_PRICE > 0) {
-            System.out.println("[ERROR] 구입 시도 금액이 잘못되었습니다.");
-            throw new IllegalArgumentException("[ERROR] 구입 시도 금액이 잘못되었습니다.");
-        }
-    }
-
-    private void validateZeroAmount(int purchaseAmount) {
-        if (purchaseAmount == 0) {
-            System.out.println("[ERROR] 구입 할 금액을 입력해주세요.");
-            throw new IllegalArgumentException("[ERROR] 구입 할 금액을 입력해주세요.");
-        }
+    public BigDecimal getMoney() {
+        return money;
     }
 
     @Override
@@ -41,12 +20,11 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money1 = (Money) o;
-        return money == money1.money;
+        return Objects.equals(money, money1.money);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(money);
     }
-
 }

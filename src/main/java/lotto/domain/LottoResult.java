@@ -1,14 +1,17 @@
 package lotto.domain;
 
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.EnumMap;
 
-import static lotto.domain.LottoNumber.GAME_PRICE;
+import static lotto.domain.LottoMachine.GAME_PRICE;
 
 public class LottoResult {
 
-    private final Map<Rank, Integer> lottoMatchResult;
+    private static final int DECIMAL_POINT = 3;
 
-    public LottoResult(Map<Rank, Integer> lottoMatchResult) {
+    private final EnumMap<Rank, Integer> lottoMatchResult;
+
+    public LottoResult(EnumMap<Rank, Integer> lottoMatchResult) {
         this.lottoMatchResult = lottoMatchResult;
     }
 
@@ -17,30 +20,32 @@ public class LottoResult {
     }
 
     public double getLottoYield() {
-        double purchaseAmount = getPurchaseAmount();
-        double sum = getPrizeMoneySum() / purchaseAmount;
-        double yield = getMatchAround(sum, 3);
-        return yield;
+        return getPrizeMoneySum().divide(getPurchaseAmount(GAME_PRICE))
+                .setScale(DECIMAL_POINT)
+                .doubleValue();
     }
 
-    private int getPrizeMoneySum() {
-        int sum = 0;
+    private BigDecimal getPrizeMoneySum() {
+        BigDecimal sum = BigDecimal.valueOf(0);
+
         for (Rank rank : lottoMatchResult.keySet()) {
-            sum += rank.getPrizeMoney() * lottoMatchResult.get(rank);
+            BigDecimal multiply = rank.getPrizeMoney()
+                    .getMoney()
+                    .multiply(BigDecimal.valueOf(lottoMatchResult.get(rank)));
+
+            sum = sum.add(multiply);
         }
         return sum;
     }
 
-    private int getPurchaseAmount() {
-        return lottoMatchResult.values()
-                .stream()
-                .mapToInt(Integer::intValue)
-                .sum() * GAME_PRICE;
-    }
-
-    private double getMatchAround(double value, int position) {
-        double ndb = Math.pow(10.0, position);
-        return (Math.round(value * ndb) / ndb);
+    private BigDecimal getPurchaseAmount(Money gamePrice) {
+        return gamePrice.getMoney()
+                .multiply(
+                        BigDecimal.valueOf(lottoMatchResult.values()
+                                .stream()
+                                .mapToInt(Integer::intValue)
+                                .sum())
+                );
     }
 
 }

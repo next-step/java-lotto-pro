@@ -1,53 +1,44 @@
 package lotto.domain;
 
-import java.util.*;
+import lotto.exception.LottoNumberSizeException;
 
-import static lotto.domain.Number.MAX_NUMBER;
-import static lotto.domain.Number.MIN_NUMBER;
-import static lotto.utils.RandomNumberUtils.generateRandomNumbers;
+import java.util.Collections;
+import java.util.List;
+
+import static lotto.domain.LottoMachine.LOTTO_SIZE;
+import static lotto.utils.ValidationUtils.*;
 
 public class LottoNumber {
 
-    public static final int LOTTO_SIZE = 6;
-    public final static int GAME_PRICE = 1000;
-
     private final List<Number> lottoNumbers;
 
-    public LottoNumber() {
-        List<Number> autoLottoNumbers = getAutoLottoNumbers();
-        validateLottoNumbersSize(autoLottoNumbers);
-        lottoNumbers = sortAsc(autoLottoNumbers);
-    }
-
-    public LottoNumber(List<Number> activeNumbers) {
-        validateLottoNumbersSize(activeNumbers);
-        lottoNumbers = sortAsc(activeNumbers);
+    public LottoNumber(List<Number> lottoNumbers) {
+        validateActiveLotto(lottoNumbers);
+        this.lottoNumbers = sortAsc(lottoNumbers);
     }
 
     public Rank getMatchRank(WinningLotto winningLotto) {
         int matchCount = 0;
-        boolean matchBonus = winningLotto.isExistBonusNumber(lottoNumbers);
+        boolean matchBonus = winningLotto.isExistBonusNumber(this);
         for (Number number : lottoNumbers) {
             matchCount += winningLotto.isMatchNumber(number) ? 1 : 0;
         }
         return Rank.of(matchCount, matchBonus);
     }
 
-    private List<Number> getAutoLottoNumbers() {
-        Set<Number> numbers = new HashSet<>();
-        while (numbers.size() < LOTTO_SIZE) {
-            numbers.add(Number.of(getRandomNumber()));
+    public boolean isContains(Number number) {
+        return lottoNumbers.contains(number);
+    }
+
+    private void validateActiveLotto(List<Number> activeNumbers) {
+        if (isArrayEmpty(activeNumbers)) {
+            throw new LottoNumberSizeException("[ERROR] 로또의 값이 없습니다.");
         }
-        return new ArrayList<>(numbers);
-    }
-
-    private int getRandomNumber() {
-        return generateRandomNumbers(MIN_NUMBER, MAX_NUMBER);
-    }
-
-    private void validateLottoNumbersSize(List<Number> activeNumbers) {
-        if (activeNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("[ERROR] 숫자 입력 필수 자리수 : " + LOTTO_SIZE);
+        if (isArrayLengthOver(activeNumbers, LOTTO_SIZE)) {
+            throw new LottoNumberSizeException("[ERROR] 로또의 사이즈 보다 큽니다.");
+        }
+        if (isArrayLengthUnder(activeNumbers, LOTTO_SIZE)) {
+            throw new LottoNumberSizeException("[ERROR] 로또의 사이즈 보다 작습니다.");
         }
     }
 
