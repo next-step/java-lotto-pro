@@ -49,9 +49,9 @@ public class LottoTest {
     public void T02_invalidLotto2() {
         String given = null;
         //THEN
-        assertThatThrownBy(() -> new Lotto(given)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> Lotto.valueOf(given)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("빈값이나 null은 허용되지 않습니다.");
-        assertThatThrownBy(() -> new Lotto("")).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> Lotto.valueOf("")).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("빈값이나 null은 허용되지 않습니다.");
         assertThatThrownBy(() -> Lotto.valueOf("")).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("빈값이나 null은 허용되지 않습니다.");

@@ -1,10 +1,14 @@
 package lotto.service;
 
 import lotto.domain.*;
-import lotto.ui.InputType;
+import lotto.ui.InputMessage;
 import lotto.ui.InputView;
-import lotto.ui.Message;
 import lotto.ui.ResultView;
+/***
+ *  피드백 1) 출력에 대한 책임을 도메인에게 주는 것보다 도메인의 값을 활용하자.
+ *     참고 : https://javacan.tistory.com/entry/methods-about-exporting-domain-object-to-view
+ *
+ */
 
 /**
  * packageName : lotto.service
@@ -16,20 +20,23 @@ import lotto.ui.ResultView;
 public class LottoService {
     public void start() {
         PurchasePrice price = this.purchase();
-        price.print();
+        ResultView.printPurchaseResult(price);
+
         Lottos lottos = this.getLottos(price);
-        lottos.print();
+        ResultView.printPurchasedLotto(lottos);
+
         Lotto winning = this.inputWinningNumber();
         WinningLotto lottoWithBonus = this.inputBonusNumber(winning);
+
         Ranks results = this.lottoResults(lottos, lottoWithBonus);
-        results.print();
+        ResultView.printLottoResult(results);
     }
 
 
-    public PurchasePrice purchase() {
+     private PurchasePrice purchase() {
         try {
-            ResultView.print(Message.PURCHASE.getMessage());
-            return new PurchasePrice(InputView.readLine());
+            ResultView.print(InputMessage.PURCHASE.getMessage());
+            return PurchasePrice.valueOf(InputView.readLine());
         } catch (Exception e) {
             ResultView.print(e.getMessage());
             return purchase();
@@ -38,7 +45,7 @@ public class LottoService {
 
     private WinningLotto inputBonusNumber(Lotto winning) {
         try {
-            ResultView.print(Message.BONUS.getMessage());
+            ResultView.print(InputMessage.BONUS.getMessage());
             String input = InputView.readLine();
             LottoNumber bonus = LottoNumber.valueOf(input);
             return new WinningLotto(winning, bonus);
@@ -49,13 +56,13 @@ public class LottoService {
     }
 
 
-    public Lottos getLottos(PurchasePrice price) {
+    private Lottos getLottos(PurchasePrice price) {
         return price.buyLottery();
     }
 
-    public Lotto inputWinningNumber() {
+    private Lotto inputWinningNumber() {
         try {
-            ResultView.print(Message.NUMBER.getMessage());
+            ResultView.print(InputMessage.NUMBER.getMessage());
             return new Lotto(InputView.readLine());
         } catch (Exception e) {
             ResultView.print(e.getMessage());

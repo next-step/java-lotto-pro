@@ -11,16 +11,17 @@ import lotto.common.Constants;
  */
 public class StringUtil {
 
-    private StringUtil() {}
+    private StringUtil() {
+    }
 
     public static boolean isStringEmpty(String str) {
-        return (str == null || str.trim().isEmpty());
+        return str.trim().isEmpty();
     }
 
     public static int parseNumber(String str) throws NumberFormatException {
         try {
             return Integer.parseInt(str);
-        } catch(NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             throw new NumberFormatException("숫자로 변환 할 수 없습니다.");
         }
     }

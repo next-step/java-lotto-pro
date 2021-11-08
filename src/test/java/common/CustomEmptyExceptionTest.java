@@ -19,7 +19,7 @@ public class CustomEmptyExceptionTest {
     @ValueSource(strings = {""})
     @NullSource()
     public void T01_emptyTest(String candidate) {
-        Assertions.assertThatThrownBy(() -> new PurchasePrice(candidate))
+        Assertions.assertThatThrownBy(() -> PurchasePrice.valueOf(candidate))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("빈값이나 null은 허용되지 않습니다.");
     }

@@ -34,21 +34,28 @@ public class PurchasePriceTest {
     @Test
     @DisplayName("로또 구매 금액 테스트")
     public void T01_validPurchasePrice() {
-        PurchasePrice price = new PurchasePrice(5000);
+        //WHEN
+        PurchasePrice price = PurchasePrice.valueOf(5000);
+        //THEN
         assertThat(price).isEqualTo(PurchasePrice.valueOf(5000));
     }
 
     @ParameterizedTest(name = "유효하지 않은 금액 테스트 : " + ParameterizedTest.ARGUMENTS_PLACEHOLDER)
     @ValueSource(ints = {0, 500, -5000, 350, 990})
     public void T2_invalid(int candidate) {
-        assertThatThrownBy(() -> new PurchasePrice(candidate)).isInstanceOf(IllegalArgumentException.class)
+        //THEN
+        assertThatThrownBy(() -> PurchasePrice.valueOf(candidate)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또를 구입할 금액이 부족합니다.");
     }
+
     @Test
     @DisplayName("로또 금액에 대한 로또구매개수 테스트")
     public void T03_validGetLottos() {
-        Lottos lottos = new Lottos(Arrays.asList(firstPlaceLotto, thirdPlaceLotto), new PurchasePrice(2000));
+        //GIVEN
+        Lottos lottos = new Lottos(Arrays.asList(firstPlaceLotto, thirdPlaceLotto), PurchasePrice.valueOf(2000));
+        //WHEN
         Ranks ranks = lottos.getResults(winningLotto);
+        //THEN
         assertThat(ranks.countPlace(Rank.FIRST)).isEqualTo(1);
         assertThat(ranks.countPlace(Rank.THIRD)).isEqualTo(1);
         assertThat(ranks.countPlace(Rank.FIFTH)).isEqualTo(0);
@@ -58,8 +65,19 @@ public class PurchasePriceTest {
     @Test
     @DisplayName("로또 금액에 맞게 로또구매개수 테스트 실패")
     public void T04_invalidGetLottos() {
+        //THEN
         assertThatThrownBy(() -> new Lottos(Arrays.asList(firstPlaceLotto, thirdPlaceLotto), PurchasePrice.valueOf(50000)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("구매수량이 일치하지 않습니다.");
+                .hasMessageContaining("구매 수량이 일치하지 않습니다.");
+    }
+
+    @Test
+    @DisplayName("구매 수량 일치 테스트")
+    public void T5_purchaseCount() {
+        //GIVEN
+        PurchasePrice purchasePrice = PurchasePrice.valueOf(5000);
+        //THEN
+        assertThat(purchasePrice.isMatchCount(5)).isTrue();
+        assertThat(purchasePrice.isMatchCount(6)).isFalse();
     }
 }

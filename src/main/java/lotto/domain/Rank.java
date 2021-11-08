@@ -22,7 +22,6 @@ public enum Rank {
 
     private int countOfMatch;
     private int winningMoney;
-    private boolean bonus;
 
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;

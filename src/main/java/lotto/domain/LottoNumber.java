@@ -6,6 +6,7 @@ import lotto.common.utils.StringUtil;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.IntStream;
 /**
  * 피드백 내용 : 1) LottoNumber 생성자로 String을 받는 것을 추가하자
@@ -32,21 +33,23 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     static {
         IntStream.range(MIN_NUMBER, MAX_NUMBER + 1).forEach(i ->
-            lottoNumberMap.put(i, new LottoNumber(i))
+                lottoNumberMap.put(i, new LottoNumber(i))
         );
     }
+
     private LottoNumber(int number) {
         this.number = number;
     }
 
     public static LottoNumber valueOf(int number) {
         LottoNumber lottoNumber = lottoNumberMap.get(number);
-        if(lottoNumber == null) throw new IllegalArgumentException("1부터 45 사이의 숫자만 가능합니다.");
+        if (lottoNumber == null) throw new IllegalArgumentException("1부터 45 사이의 숫자만 가능합니다.");
         return lottoNumber;
     }
 
     public static LottoNumber valueOf(String strNumber) {
-        if (StringUtil.isStringEmpty(strNumber)) throw new CustomEmptyException();
+        if (!Optional.ofNullable(strNumber).isPresent() || StringUtil.isStringEmpty(strNumber))
+            throw new CustomEmptyException();
         return LottoNumber.valueOf(StringUtil.parseNumber(strNumber.trim()));
     }
 

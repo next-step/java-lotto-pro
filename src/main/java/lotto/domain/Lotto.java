@@ -8,6 +8,7 @@ import lotto.ui.ResultView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static lotto.common.Constants.NUMBER_SEPARATOR;
@@ -36,7 +37,8 @@ public class Lotto {
     }
 
     public Lotto(String input) {
-        if (StringUtil.isStringEmpty(input)) throw new CustomEmptyException();
+        if (!Optional.ofNullable(input).isPresent() || StringUtil.isStringEmpty(input))
+            throw new CustomEmptyException();
         List<LottoNumber> inputLottoList = Arrays.stream(input.split(NUMBER_SEPARATOR)).map(LottoNumber::valueOf).collect(Collectors.toList());
         this.lottoNumberList = new ArrayList<>(validate(inputLottoList));
     }
@@ -68,7 +70,7 @@ public class Lotto {
         return Rank.valueOf(this.match(winning), this.lottoNumberList.stream().anyMatch(winning::isBonus));
     }
 
-    public void print() {
-        ResultView.print(StringUtil.wrap(lottoNumberList.stream().sorted().map(LottoNumber::printNumber).collect(Collectors.joining(NUMBER_SEPARATOR))));
+    public String printBalls() {
+        return lottoNumberList.stream().sorted().map(LottoNumber::printNumber).collect(Collectors.joining(NUMBER_SEPARATOR));
     }
 }
