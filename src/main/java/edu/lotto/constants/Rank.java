@@ -36,12 +36,13 @@ public enum Rank {
 	}
 
 	public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-		// TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
 		Rank[] ranks = values();
-		if(Arrays.stream(ranks).filter(rank -> rank.countOfMatch == countOfMatch).count() != 0 && matchBonus) {
+		// 보너스볼을 포함하여 번호가 6개 일치하는 경우 2등
+		if(FIRST.countOfMatch == countOfMatch && matchBonus) {
 			return SECOND;
 		}
-		if(Arrays.stream(ranks).filter(rank -> rank.countOfMatch == countOfMatch).count() != 0) {
+		// 보너스 볼을 제외하고 번호가 일치하는 수에 따라 등수 계산
+		if(Arrays.stream(ranks).filter(rank -> rank.countOfMatch == countOfMatch).count() != 0 && !matchBonus) {
 			return Arrays.stream(ranks).filter(rank -> rank.countOfMatch == countOfMatch).findFirst().get();
 		}
 		return null;
