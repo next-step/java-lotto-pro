@@ -23,12 +23,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static LottoNumber from(String s) {
-		final String trimmed = s.trim();
-		validate(trimmed);
-		return from(Integer.parseInt(trimmed));
+		validate(s);
+		return from(Integer.parseInt(s.trim()));
 	}
 
 	private static void validate(String s) {
+		if (null == s) {
+			throw new LottoNumberFormatException();
+		}
 		try {
 			Integer.parseInt(s);
 		} catch (NumberFormatException e) {
