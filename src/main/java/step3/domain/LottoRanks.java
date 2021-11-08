@@ -52,9 +52,9 @@ public class LottoRanks {
         return totalPrize;
     }
 
-    public BigDecimal getCalculatedYield() {
+    public BigDecimal getCalculatedYield(Amount amount) {
         return BigDecimal.valueOf(totalPrize())
-            .divide(BigDecimal.valueOf(100000))//amount.getAmount()
+            .divide(BigDecimal.valueOf(amount.getAmount()))
             .setScale(DECIMAL_POINT, RoundingMode.CEILING);
     }
 

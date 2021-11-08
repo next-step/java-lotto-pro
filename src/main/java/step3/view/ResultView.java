@@ -3,6 +3,7 @@ package step3.view;
 import java.math.BigDecimal;
 import java.util.List;
 
+import step3.domain.Amount;
 import step3.dto.LottoBuyResponseDto;
 import step3.dto.LottoResultDto;
 import step3.dto.LottoStatisticsResponseDto;
@@ -66,7 +67,7 @@ public class ResultView {
         }
     }
 
-    public static void statisticsPrint(LottoStatisticsResponseDto lottoStatisticsResponseDto) {
+    public static void statisticsPrint(LottoStatisticsResponseDto lottoStatisticsResponseDto, Amount amount) {
         List<LottoResultDto> lottoResultDtos = lottoStatisticsResponseDto.getLottoResultDtos();
 
         statisticsHeaderPrint();
@@ -75,7 +76,7 @@ public class ResultView {
             lottoResultPrint(lottoResultDto);
         }
 
-        yieldPrint(lottoStatisticsResponseDto);
+        yieldPrint(lottoStatisticsResponseDto.getYield(amount));
     }
 
     private static void statisticsHeaderPrint() {
@@ -99,13 +100,12 @@ public class ResultView {
         }
     }
 
-    private static void yieldPrint(LottoStatisticsResponseDto lottoStatisticsResponseDto) {
+    private static void yieldPrint(BigDecimal yield) {
         String result = String.format(
             YIELD_MESSAGE_FORMAT,
-            lottoStatisticsResponseDto.getYield()
+            yield
         );
-
-        result += lossPrintln(lottoStatisticsResponseDto.getYield());
+        result += lossPrintln(yield);
 
         println(result);
     }

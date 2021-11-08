@@ -3,7 +3,6 @@ package step3.service;
 import step3.domain.LottoNumbersBundle;
 import step3.domain.LottoProvider;
 import step3.domain.LottoRanks;
-import step3.domain.LottoResult;
 import step3.domain.LottoService;
 import step3.domain.strategy.numbers.NumbersStrategy;
 import step3.dto.LottoBuyRequestDto;
@@ -35,8 +34,7 @@ public class LottoServiceImpl implements LottoService {
     public LottoStatisticsResponseDto getResultStatistics(LottoStatisticsRequestDto lottoStatisticsRequestDto) {
         LottoRanks lottoRanks = lottoProvider.getLottoResult(
             new LottoNumbersBundle(lottoStatisticsRequestDto.getBuyLottoList()),
-            lottoStatisticsRequestDto.getWinningLotto()
-        );
+            lottoStatisticsRequestDto.getWinningLotto());
 
         return new LottoStatisticsResponseDto(lottoRanks);
     }
