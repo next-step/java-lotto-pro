@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.LottoTicketDTO;
 import lotto.dto.LottoTicketsDTO;
 
 import java.util.ArrayList;
@@ -43,10 +42,6 @@ public class LottoTickets {
             gameResult.add(sameNumberCount);
         }
         return gameResult;
-    }
-
-    public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
     }
 
     public LottoTicketsDTO toDTO() {

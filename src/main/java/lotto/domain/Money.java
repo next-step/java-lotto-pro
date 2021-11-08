@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.MoneyDTO;
 import lotto.exception.NegativeMoneyException;
 
 public class Money {
@@ -17,7 +18,11 @@ public class Money {
         }
     }
 
-    public int get() {
-        return this.money;
+    public MoneyDTO toDTO() {
+        return new MoneyDTO(money);
+    }
+
+    public int getLottoAmount(int lottoTicketPrice) {
+        return money / lottoTicketPrice;
     }
 }

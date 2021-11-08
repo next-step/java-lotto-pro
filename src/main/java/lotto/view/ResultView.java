@@ -1,8 +1,10 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.GameResult;
+import lotto.domain.Prize;
 import lotto.dto.LottoTicketDTO;
 import lotto.dto.LottoTicketsDTO;
+import lotto.dto.MoneyDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,7 +45,7 @@ public class ResultView {
                 sixMatchPrize.getMatchCount() + GAME_RESULT_VIEW_1 + sixMatchPrize.getPrizeMoney() + GAME_RESULT_VIEW_2 + gameResult.getMatchCount(sixMatchPrize.getMatchCount()) + GAME_RESULT_VIEW_3);
     }
 
-    public void printEarningRatio(Money inputMoney, Money prize) {
+    public void printEarningRatio(MoneyDTO inputMoney, MoneyDTO prize) {
         double earningRatio = (double) prize.get() / inputMoney.get();
         String result = "총 수익률은 " + earningRatio + "입니다. ";
         if (earningRatio < BEP) {

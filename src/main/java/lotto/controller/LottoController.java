@@ -4,7 +4,6 @@ import lotto.domain.GameResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
-import lotto.dto.LottoTicketsDTO;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -32,6 +31,8 @@ public class LottoController {
         // 결과 출력
         GameResult gameResult = lottoService.getGameResult(lottoTickets, winningLottoTicket);
         resultView.printGameResult(gameResult);
-        resultView.printEarningRatio(inputMoney, new Money(gameResult.getPrize()));
+        resultView.printEarningRatio(inputMoney.toDTO(),
+                new Money(gameResult.getPrize())
+                        .toDTO());
     }
 }

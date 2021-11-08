@@ -21,6 +21,8 @@ class MoneyTest {
     void getTest() {
         Money money = new Money(10000);
 
-        assertThat(money.get()).isEqualTo(10000);
+        assertThat(money.toDTO()
+                .get())
+                .isEqualTo(10000);
     }
 }

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.LottoNumberDTO;
 import lotto.dto.LottoTicketDTO;
 import lotto.exception.IllegalLottoNumberSizeException;
 import lotto.exception.NumberDuplicationException;
@@ -16,7 +15,7 @@ public class LottoTicket {
     public static final int FROM_INDEX = 0;
     public static final int START_INCLUSIVE = 1;
     public static final int END_EXCLUSIVE = 46;
-    List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<Integer> lottoNumbers) {
         checkLottoNumberSize(lottoNumbers);

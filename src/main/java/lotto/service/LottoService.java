@@ -4,7 +4,6 @@ import lotto.domain.GameResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
-import lotto.dto.LottoTicketsDTO;
 
 public class LottoService {
 
@@ -19,7 +18,7 @@ public class LottoService {
     }
 
     private int getAmount(Money money) {
-        return money.get() / LOTTO_TICKET_PRICE;
+        return money.getLottoAmount(LOTTO_TICKET_PRICE);
     }
 
     public GameResult getGameResult(LottoTickets lottoTickets, LottoTicket winningNumber) {
