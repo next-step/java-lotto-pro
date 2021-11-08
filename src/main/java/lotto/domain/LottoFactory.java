@@ -6,19 +6,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoTicketFactory {
+public class LottoFactory {
     private static final String COMMA = ", ";
 
-    private LottoTicketFactory() {
+    private LottoFactory() {
     }
 
-    public static LottoTicket createLottoTicket() {
+    public static Lotto createLottoTicket() {
         List<Integer> allLottoNumbers = createAllLottoNumbers();
         Collections.shuffle(allLottoNumbers);
         List<Integer> lottoNumbers = allLottoNumbers.subList(
             LottoNumbersSize.LOTTO_NUMBERS_ZERO_SIZE.getSize(), LottoNumbersSize.LOTTO_NUMBERS_SIZE.getSize());
         Collections.sort(lottoNumbers);
-        return new LottoTicket(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
     private static List<Integer> createAllLottoNumbers() {
@@ -28,12 +28,12 @@ public class LottoTicketFactory {
             .collect(Collectors.toList());
     }
 
-    public static LottoTicket createManualLottoTicket(String inputNumbers) {
+    public static Lotto createManualLottoTicket(String inputNumbers) {
         List<Integer> numbers = new ArrayList<>();
         String[] inputNumbersBySplit = inputNumbers.split(COMMA);
         for (String number : inputNumbersBySplit) {
             numbers.add(Integer.parseInt(number));
         }
-        return new LottoTicket(numbers);
+        return new Lotto(numbers);
     }
 }

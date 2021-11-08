@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketFactory;
+import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
 import lotto.domain.Message;
 
 public class InputView {
@@ -25,11 +25,11 @@ public class InputView {
         }
     }
 
-    public static LottoTicket inputWinningNumbersOfLastWeek() {
+    public static Lotto inputWinningNumbersOfLastWeek() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String numbers = scanner.nextLine();
         try {
-            return LottoTicketFactory.createManualLottoTicket(numbers);
+            return LottoFactory.createManualLottoTicket(numbers);
         } catch (NumberFormatException exception) {
             System.out.println(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
             return inputWinningNumbersOfLastWeek();
@@ -39,21 +39,21 @@ public class InputView {
         }
     }
 
-    public static LottoNumber inputBonusNumber(LottoTicket winningLottoTicket) {
+    public static LottoNumber inputBonusNumber(Lotto winningLotto) {
         System.out.println("보너스 볼을 입력해 주세요.");
         String number = scanner.nextLine();
         try {
             LottoNumber lottoNumber = LottoNumber.valueOf(number);
-            validateDuplicateLottoNumber(winningLottoTicket, lottoNumber);
+            validateDuplicateLottoNumber(winningLotto, lottoNumber);
             return lottoNumber;
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
-            return inputBonusNumber(winningLottoTicket);
+            return inputBonusNumber(winningLotto);
         }
     }
 
-    private static void validateDuplicateLottoNumber(LottoTicket winningLottoTicket, LottoNumber lottoNumber) {
-        if (winningLottoTicket.existLottoNumber(lottoNumber)) {
+    private static void validateDuplicateLottoNumber(Lotto winningLotto, LottoNumber lottoNumber) {
+        if (winningLotto.existLottoNumber(lottoNumber)) {
             throw new IllegalArgumentException(Message.EXIST_DUPLICATE_NUMBER_MESSAGE.getMessage());
         }
     }

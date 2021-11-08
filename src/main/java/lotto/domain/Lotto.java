@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoTicket {
+public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
         validateSorted(numbers);
@@ -49,7 +49,7 @@ public class LottoTicket {
         }
     }
 
-    public Rank createWinningRank(LottoTicket winningTicket, LottoNumber bonusNumber) {
+    public Rank createWinningRank(Lotto winningTicket, LottoNumber bonusNumber) {
         Set<LottoNumber> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
         List<LottoNumber> winningNumbers = winningTicket.lottoNumbers;
         nonDuplicateNumbers.addAll(winningNumbers);
