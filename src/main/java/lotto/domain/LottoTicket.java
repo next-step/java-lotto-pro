@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class LottoTicket {
@@ -34,6 +35,10 @@ public class LottoTicket {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_COUNT + "개가 존재해야 합니다. (입력값: " + numbers.size());
         }
+    }
+
+    public boolean isContainNumber(Number number) {
+        return numbers.contains(number);
     }
 
     @Override
