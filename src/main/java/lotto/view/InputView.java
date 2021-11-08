@@ -30,6 +30,9 @@ public class InputView {
         String numbers = scanner.nextLine();
         try {
             return LottoTicketFactory.createManualLottoTicket(numbers);
+        } catch (NumberFormatException exception) {
+            System.out.println(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
+            return inputWinningNumbersOfLastWeek();
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
             return inputWinningNumbersOfLastWeek();

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.LottoPattern.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,15 +32,8 @@ public class LottoTicketFactory {
         List<Integer> numbers = new ArrayList<>();
         String[] inputNumbersBySplit = inputNumbers.split(COMMA);
         for (String number : inputNumbersBySplit) {
-            validatePositiveNumber(number);
             numbers.add(Integer.parseInt(number));
         }
         return new LottoTicket(numbers);
-    }
-
-    private static void validatePositiveNumber(String number) {
-        if (!ONLY_POSITIVE_NUMBER.matcher(number).matches()) {
-            throw new IllegalArgumentException(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
-        }
     }
 }
