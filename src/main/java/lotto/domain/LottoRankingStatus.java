@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.WrongLottoRankingStatusException;
+import lotto.ui.LottoMessage;
+
 import java.util.Arrays;
 
 public enum LottoRankingStatus {
@@ -40,10 +43,18 @@ public enum LottoRankingStatus {
         return this.matchAmount == matchAmount && this.matchBonus == matchBonus;
     }
 
+    public static boolean isNone(int matchAmount) {
+        return matchAmount < LottoRankingStatus.FIFTH.getMatchAmount();
+    }
+
     public static LottoRankingStatus valueOf(int matchAmount, boolean matchBonus) {
+        if (isNone(matchAmount)) {
+            return LottoRankingStatus.NONE;
+        }
+
         return Arrays.stream(LottoRankingStatus.values())
                 .filter(lottoRankingStatus -> lottoRankingStatus.isSameLottoRankingStatus(matchAmount, matchBonus))
                 .findFirst()
-                .orElse(LottoRankingStatus.NONE);
+                .orElseThrow(() -> new WrongLottoRankingStatusException(LottoMessage.WRONG_LOTTO_RANKING_STATUS_MESSAGE));
     }
 }
