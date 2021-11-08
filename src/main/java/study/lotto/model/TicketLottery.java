@@ -1,5 +1,6 @@
 package study.lotto.model;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -8,7 +9,7 @@ public class TicketLottery {
     private final Lottery lottery;
     private final TicketLotteryType type;
 
-    private TicketLottery(final Set<LottoNumber> lottoNumbers, final TicketLotteryType type) {
+    private TicketLottery(final Set<Integer> lottoNumbers, final TicketLotteryType type) {
         this.type = type;
         this.lottery = Lottery.valueOf(lottoNumbers);
     }
@@ -23,7 +24,7 @@ public class TicketLottery {
         this.lottery = Lottery.valueOf(lottoNumbers);
     }
 
-    public static TicketLottery valueOf(final Set<LottoNumber> lottoNumbers, final TicketLotteryType type) {
+    public static TicketLottery valueOf(final Set<Integer> lottoNumbers, final TicketLotteryType type) {
         return new TicketLottery(lottoNumbers, type);
     }
 
@@ -35,16 +36,17 @@ public class TicketLottery {
         return new TicketLottery(lottoNumbers, type);
     }
 
+
+    private static Set<LottoNumber> toLottoNumberSet(final Set<Integer> lottoNumbers) {
+        final Set<LottoNumber> lottoNumberSet = new HashSet<>();
+        for (final Integer lottoNumber : lottoNumbers) {
+            lottoNumberSet.add(LottoNumber.valueOf(lottoNumber));
+        }
+        return lottoNumberSet;
+    }
+
     public boolean contains(LottoNumber lottoNumber) {
         return lottery.contains(lottoNumber);
-    }
-
-    public boolean isAutoTicket() {
-        return type.isAutoTicket();
-    }
-
-    public boolean isManualTicket() {
-        return type.isManualTicket();
     }
 
     @Override
@@ -68,4 +70,9 @@ public class TicketLottery {
     public Set<LottoNumber> getLottoNumbers() {
         return this.lottery.getLottoNumbers();
     }
+
+    public TicketLotteryType getType() {
+        return type;
+    }
+
 }

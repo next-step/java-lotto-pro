@@ -17,10 +17,6 @@ public class LottoWinningNumberRequestDto {
     }
 
     public WinningLottery toEntity() {
-        final Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (Integer lottoNumber : lottoWinningNumbers) {
-            lottoNumbers.add(LottoNumber.valueOf(lottoNumber));
-        }
-        return WinningLottery.valueOf(lottoNumbers, LottoNumber.valueOf(bonusNumber));
+        return WinningLottery.valueOf(lottoWinningNumbers, LottoNumber.valueOf(bonusNumber));
     }
 }

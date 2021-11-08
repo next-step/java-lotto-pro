@@ -3,6 +3,8 @@ package study.lotto.model;
 import study.lotto.model.exception.DuplicatedBonusLottoNumberException;
 import study.lotto.model.exception.EmptyBonusLottoNumberException;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class WinningLottery {
@@ -13,14 +15,18 @@ public class WinningLottery {
     private final Lottery lottery;
     private final LottoNumber bonusLottoNumber;
 
-    private WinningLottery(final Set<LottoNumber> lottoNumbers, final LottoNumber bonusLottoNumber) {
+    private WinningLottery(final Set<Integer> lottoNumbers, final LottoNumber bonusLottoNumber) {
         this.lottery = Lottery.valueOf(lottoNumbers);
         validateBonusNumber(bonusLottoNumber);
         this.bonusLottoNumber = bonusLottoNumber;
     }
 
-    public static WinningLottery valueOf(final Set<LottoNumber> lottoNumbers, final LottoNumber bonusLottoNumber) {
+    public static WinningLottery valueOf(final Set<Integer> lottoNumbers, final LottoNumber bonusLottoNumber) {
         return new WinningLottery(lottoNumbers, bonusLottoNumber);
+    }
+
+    public static WinningLottery valueOf(final List<Integer> lottoNumbers, final LottoNumber bonusLottoNumber) {
+        return new WinningLottery(new HashSet<>(lottoNumbers), bonusLottoNumber);
     }
 
     private void validateBonusNumber(LottoNumber bonusLottoNumber) {

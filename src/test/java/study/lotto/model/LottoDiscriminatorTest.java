@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,11 +15,7 @@ public class LottoDiscriminatorTest {
 
     @BeforeEach
     void setUp() {
-        final HashSet<LottoNumber> winningLottoNumber =
-                new HashSet<>(Arrays.asList(
-                        LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))
-                );
+        final List<Integer> winningLottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
         final LottoNumber bonusNumber = LottoNumber.valueOf(7);
         winningLottery = WinningLottery.valueOf(winningLottoNumber, bonusNumber);
     }

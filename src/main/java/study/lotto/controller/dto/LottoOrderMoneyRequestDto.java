@@ -12,4 +12,8 @@ public class LottoOrderMoneyRequestDto {
     public Money toEntity() {
         return Money.valueOf(money);
     }
+
+    public int getMoney() {
+        return money;
+    }
 }

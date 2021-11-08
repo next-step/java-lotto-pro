@@ -22,7 +22,7 @@ public class LotteryFactory {
     }
 
     public TicketLottery generateTicketLottery() {
-        final Set<LottoNumber> lottoNumbers = LottoRandoms.getLottoRandomNumbers();
+        final Set<Integer> lottoNumbers = LottoRandoms.getLottoRandomNumbers();
         return TicketLottery.valueOf(lottoNumbers, TicketLotteryType.AUTO);
     }
 }

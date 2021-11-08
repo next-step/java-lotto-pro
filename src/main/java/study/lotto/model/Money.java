@@ -24,11 +24,7 @@ public class Money {
         return new Money(money);
     }
 
-    public int getMoney() {
-        return money;
-    }
-
-    public int divide(final int priceOfLottoTicket) {
+    public int divide(int priceOfLottoTicket) {
         return money / priceOfLottoTicket;
     }
 }

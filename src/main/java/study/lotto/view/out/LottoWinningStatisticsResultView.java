@@ -1,4 +1,4 @@
-package study.lotto.view;
+package study.lotto.view.out;
 
 import study.lotto.controller.dto.WinningStatisticsResponseDto;
 import study.lotto.model.Rank;
@@ -6,7 +6,7 @@ import study.lotto.model.RankStatistics;
 
 import java.util.EnumMap;
 
-public class LottoWinningStatisticsView {
+public class LottoWinningStatisticsResultView {
 
     private static final int STANDARD_VALUE = 1;
     private static final String INCOME_RATE_GUIDE_TEMPLATE_MESSAGE = "총 수익률은 %.2f입니다.";
@@ -14,7 +14,7 @@ public class LottoWinningStatisticsView {
     public static final String RANK_STATISTICS_GUIDE_MESSAGE = "%d 일치 (%d원)- %d개\n";
     public static final String TITLE_MESSAGE = "당첨 통계\n---------";
 
-    private LottoWinningStatisticsView() {
+    private LottoWinningStatisticsResultView() {
     }
 
     public static void resolve(final WinningStatisticsResponseDto winningStatistics) {

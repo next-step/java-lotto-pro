@@ -1,6 +1,5 @@
 package study.lotto.controller.dto;
 
-import study.lotto.model.LottoNumber;
 import study.lotto.model.TicketLottery;
 import study.lotto.model.TicketLotteryBundle;
 import study.lotto.model.TicketLotteryType;
@@ -28,9 +27,10 @@ public class TicketLotteryBundleResponseDto {
     public TicketLotteryBundle toEntity() {
         final List<TicketLottery> ticketLotteries = new ArrayList<>();
         for (final TicketLotteryResponseDto ticketLotteryResponseDto : ticketLotteryResponseDtos) {
-            final Set<LottoNumber> lottoNumberSet = ticketLotteryResponseDto.toEntity();
+            final Set<Integer> lottoNumberSet = ticketLotteryResponseDto.getLottoNumbers();
             ticketLotteries.add(TicketLottery.valueOf(lottoNumberSet, TicketLotteryType.AUTO));
         }
         return TicketLotteryBundle.valueOf(ticketLotteries);
     }
+
 }

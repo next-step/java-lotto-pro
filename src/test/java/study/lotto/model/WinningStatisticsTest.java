@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,11 +25,7 @@ class WinningStatisticsTest {
         );
 
         ticketLotteryBundle = TicketLotteryBundle.valueOf(ticketLotteries);
-        winningLottery = WinningLottery.valueOf(
-                new HashSet<>(Arrays.asList(
-                        LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))
-                ), LottoNumber.valueOf(9));
+        winningLottery = WinningLottery.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(9));
     }
 
     @Test
