@@ -20,7 +20,7 @@ public class LottosTest {
     @Test
     void calculateWinning() {
         final Lottos lottos = Lottos.generateAuto(5);
-        final LottoTicket winTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final WinTicket winTicket = WinTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         final LottoResult lottoResult = lottos.calculateWinning(winTicket);
 

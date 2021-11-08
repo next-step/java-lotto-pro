@@ -18,7 +18,7 @@ public class LottoController {
     public void run() {
         final int buyMoney = getBuyMoney();
         final Lottos lottos = generateLottos(buyMoney);
-        final LottoTicket winTicket = getWinLottoTicket();
+        final WinTicket winTicket = getWinLottoTicket();
         printResult(lottos, winTicket);
     }
 
@@ -34,13 +34,15 @@ public class LottoController {
         return lottos;
     }
 
-    private LottoTicket getWinLottoTicket() {
+    private WinTicket getWinLottoTicket() {
         inputView.showEnterWinNumbersMessage();
-        final List<Integer> inputNumbers = inputView.getWinNumbers();
-        return LottoTicket.of(inputNumbers);
+        final List<Integer> winNumbers = inputView.getWinNumbers();
+        inputView.showEnterBonusNumbersMessage();
+        final Integer bonusNumber = inputView.getBonusNumber();
+        return WinTicket.of(winNumbers, bonusNumber);
     }
 
-    private void printResult(Lottos lottos, LottoTicket winTicket) {
+    private void printResult(Lottos lottos, WinTicket winTicket) {
         final LottoResult result = lottos.calculateWinning(winTicket);
         final double roi = result.getReturnOnInvestment(lottos.getSellingPrice());
         resultView.showWinningStatistics(result);

@@ -20,9 +20,7 @@ public class InputView {
     }
 
     public int getBuyMoney() {
-        final int buyMoney = scanner.nextInt();
-        scanner.nextLine();
-        return buyMoney;
+        return getInteger();
     }
 
     public void showLottoBoughtMessage(Lottos lottos) {
@@ -42,5 +40,19 @@ public class InputView {
                 .map(String::trim)
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
+    }
+
+    public void showEnterBonusNumbersMessage() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
+    public int getBonusNumber() {
+        return getInteger();
+    }
+
+    private int getInteger() {
+        final int i = scanner.nextInt();
+        scanner.nextLine();
+        return i;
     }
 }

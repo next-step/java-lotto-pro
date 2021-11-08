@@ -32,10 +32,10 @@ public class LottoTicket {
         return numbers.toString();
     }
 
-    public int calculateNumberOfMatch(LottoTicket winTicket) {
+    public int calculateNumberOfMatch(LottoTicket ticket) {
         int result = 0;
-        for (LottoNumber winNumber : winTicket.numbers) {
-            result += countIfMatch(winNumber);
+        for (LottoNumber number : ticket.numbers) {
+            result += countIfMatch(number);
         }
         return result;
     }

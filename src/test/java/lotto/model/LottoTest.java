@@ -45,7 +45,7 @@ public class LottoTest {
 
     @ParameterizedTest
     @MethodSource("provideWinTicket")
-    void calculateWinning(LottoTicket winTicket, Winning expectedWinning) {
+    void calculateWinning(WinTicket winTicket, Winning expectedWinning) {
         final Lotto lotto = Lotto.generate(Arrays.asList(1, 2, 3, 4, 5, 6));
         final Winning winning = lotto.calculateWinning(winTicket);
         assertThat(winning).isEqualTo(expectedWinning);
@@ -53,9 +53,9 @@ public class LottoTest {
 
     private static Stream<Arguments> provideWinTicket() {
         return Stream.of(
-                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), Winning.FIRST_PRIZE),
-                Arguments.of(LottoTicket.of(Arrays.asList(11, 12, 13, 14, 15, 16)), Winning.NONE),
-                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 14, 15, 16)), Winning.FOURTH_PRIZE)
+                Arguments.of(WinTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7), Winning.FIRST_PRIZE),
+                Arguments.of(WinTicket.of(Arrays.asList(11, 12, 13, 14, 15, 16), 17), Winning.NONE),
+                Arguments.of(WinTicket.of(Arrays.asList(1, 2, 3, 14, 15, 16), 17), Winning.FOURTH_PRIZE)
         );
     }
 }

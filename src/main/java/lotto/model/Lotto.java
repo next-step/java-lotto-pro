@@ -32,7 +32,7 @@ public class Lotto {
         return ticket.toString();
     }
 
-    public Winning calculateWinning(LottoTicket winTicket) {
+    public Winning calculateWinning(WinTicket winTicket) {
         final int count = ticket.calculateNumberOfMatch(winTicket);
         return Winning.ofMatchCount(count);
     }

@@ -36,7 +36,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoResult calculateWinning(LottoTicket winTicket) {
+    public LottoResult calculateWinning(WinTicket winTicket) {
         final List<Winning> winnings = new ArrayList<>();
         for (Lotto lotto : lottos) {
             winnings.add(lotto.calculateWinning(winTicket));
