@@ -1,7 +1,6 @@
 package controller;
 
-import java.util.Scanner;
-
+import model.BonusBall;
 import model.LastWeekWinningNumber;
 import model.Lottos;
 import model.Money;
@@ -10,45 +9,19 @@ import view.InputView;
 import view.ResultView;
 
 public class LottoController {
-	private static Scanner sc = new Scanner(System.in);
-
-	private final InputView inputView;
-	private final ResultView resultView;
-
-	public LottoController(InputView inputView, ResultView resultView) {
-		this.inputView = inputView;
-		this.resultView = resultView;
-	}
 
 	public void start() {
-		inputView.printPurchaseAmountMessage();
-		Money money = inputForPurchaseAmountUntilValid(sc.nextLine());
+		Money money = InputView.printPurchaseAmountMessageAndInput();
 		PurchaseCount purchaseCount = Lottos.purchaseCountFrom(money);
-		resultView.printPurchaseVolumeMessage(purchaseCount);
+		ResultView.printPurchaseVolumeMessage(purchaseCount);
 		Lottos lottos = Lottos.purchase(purchaseCount);
-		resultView.printLottoNumbers(lottos);
+		ResultView.printLottoNumbers(lottos);
 
-		inputView.printLastWeekWinningNumberMessage();
-		LastWeekWinningNumber lastWeekWinningNumber = inputForLastWeekWinningNumberUntilValid(sc.nextLine());
+		LastWeekWinningNumber lastWeekWinningNumber = InputView.printLastWeekWinningNumberAndInput();
+		BonusBall bonusBall = InputView.printBonusBallAndInput(lastWeekWinningNumber);
+		lastWeekWinningNumber.updateBonusBall(bonusBall);
 
-		resultView.printWinningStatisticsMessage(lottos.matchResult(lastWeekWinningNumber), money);
+		ResultView.printWinningStatisticsMessage(lottos.matchResult(lastWeekWinningNumber), money);
 	}
 
-	public Money inputForPurchaseAmountUntilValid(String money) {
-		while (!Money.validate(money)) {
-			inputView.printErrorPurchaseAmountInvalidation();
-			money = sc.nextLine();
-		}
-
-		return Money.of(money);
-	}
-
-	private LastWeekWinningNumber inputForLastWeekWinningNumberUntilValid(String lastWeekNumber) {
-		while (!LastWeekWinningNumber.validate(lastWeekNumber)) {
-			inputView.printErrorLastWeekWinningNumberInvalidation();
-			lastWeekNumber = sc.nextLine();
-		}
-
-		return LastWeekWinningNumber.of(lastWeekNumber);
-	}
 }

@@ -53,6 +53,26 @@ public class LottoTest {
 		assertThat(result).isEqualTo(Count.from(0));
 	}
 
+	@Test
+	void 보너스볼_일치() {
+		Lotto winningNumber = new Lotto(Lists.newArrayList(1, 2, 3, 4, 5, 6));
+		BonusBall bonusBall = BonusBall.from(6);
+
+		boolean result = winningNumber.isMatchBonusBall(bonusBall);
+
+		assertThat(result).isTrue();
+	}
+
+	@Test
+	void 보너스볼_불일치() {
+		Lotto winningNumber = new Lotto(Lists.newArrayList(1, 2, 3, 4, 5, 6));
+		BonusBall bonusBall = BonusBall.from(7);
+
+		boolean result = winningNumber.isMatchBonusBall(bonusBall);
+
+		assertThat(result).isFalse();
+	}
+
 	@RepeatedTest(value = ENOUGH_TEST_COUNT, name = "중복되는 수는 없어야 한다 {currentRepetition} / {totalRepetitions}")
 	void 중복되는_숫자는_없어야_한다() {
 		Lotto lotto = Lotto.create();

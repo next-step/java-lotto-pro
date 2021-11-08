@@ -41,6 +41,7 @@ public class LottosTest {
 		);
 
 		LastWeekWinningNumber winningNumber = LastWeekWinningNumber.of("3, 4, 5, 6, 10, 11");
+		winningNumber.updateBonusBall(BonusBall.from(12));
 		MatchResult matchResult = lottos.matchResult(winningNumber);
 
 		assertAll(
@@ -61,6 +62,7 @@ public class LottosTest {
 		);
 
 		LastWeekWinningNumber winningNumber = LastWeekWinningNumber.of("3, 4, 5, 6, 10, 11");
+		winningNumber.updateBonusBall(BonusBall.from(12));
 		MatchResult matchResult = lottos.matchResult(winningNumber);
 
 		assertAll(

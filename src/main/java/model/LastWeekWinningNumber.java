@@ -7,19 +7,18 @@ import java.util.List;
 import java.util.Set;
 
 public class LastWeekWinningNumber {
-	private static final String NUMBER_REGEX = "^[0-9]+$";
-	public static final String SPACE_REGEX = "\\s+";
 	public static final String EMPTY_STRING = "";
 	public static final String COMMA = ",";
 
-	private Lotto value;
+	private Lotto lotto;
+	private BonusBall bonusBall;
 
-	private LastWeekWinningNumber(Lotto value) {
-		this.value = value;
+	private LastWeekWinningNumber(Lotto lotto) {
+		this.lotto = lotto;
 	}
 
 	public static boolean validate(String value) {
-		String[] strings = value.replaceAll(SPACE_REGEX, EMPTY_STRING)
+		String[] strings = value.replaceAll(Regex.SPACE, EMPTY_STRING)
 			.split(COMMA);
 
 		if (strings.length != Lotto.NUMBER_COUNT) {
@@ -27,7 +26,7 @@ public class LastWeekWinningNumber {
 		}
 
 		return Arrays.stream(strings)
-			.allMatch(string -> string.matches(NUMBER_REGEX))
+			.allMatch(string -> string.matches(Regex.NUMBER))
 			&& isValidNumber(strings);
 	}
 
@@ -36,18 +35,8 @@ public class LastWeekWinningNumber {
 			.map(Integer::parseInt)
 			.collect(toSet());
 
-		return isNotDuplicatedNumber(numbers) && isValidLottoNumber(numbers);
-	}
-
-	private static boolean isNotDuplicatedNumber(Set<Integer> numbers) {
-		return numbers.size() == Lotto.NUMBER_COUNT;
-	}
-
-	private static boolean isValidLottoNumber(Set<Integer> numbers) {
-		return
-			numbers.stream().allMatch(
-				number -> number.compareTo(Lotto.MIN_NUMBER) >= 0 && number.compareTo(Lotto.MAX_NUMBER) <= 0
-			);
+		return Lotto.isNotDuplicatedNumber(numbers)
+			&& Lotto.isValidLottoNumber(numbers);
 	}
 
 	public static LastWeekWinningNumber of(String lastWeekWinningNumber) {
@@ -59,11 +48,23 @@ public class LastWeekWinningNumber {
 	}
 
 	private static String[] splitToEachNumber(String lastWeekWinningNumber) {
-		return lastWeekWinningNumber.replaceAll(SPACE_REGEX, EMPTY_STRING)
+		return lastWeekWinningNumber.replaceAll(Regex.SPACE, EMPTY_STRING)
 			.split(COMMA);
 	}
 
-	public Lotto getValue() {
-		return value;
+	public void updateBonusBall(BonusBall bonusBall) {
+		this.bonusBall = bonusBall;
+	}
+
+	public boolean isNotContain(String bonusBall) {
+		return lotto.isNotContain(BonusBall.from(bonusBall));
+	}
+
+	public Lotto getLotto() {
+		return lotto;
+	}
+
+	public BonusBall getBonusBall() {
+		return bonusBall;
 	}
 }

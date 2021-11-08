@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money {
-	private static final String NUMBER_REGEX = "^[0-9]+$";
-
 	private BigDecimal value;
 
 	private Money(int value) {
@@ -13,7 +11,7 @@ public class Money {
 	}
 
 	public static boolean validate(String moneyString) {
-		return moneyString.matches(NUMBER_REGEX)
+		return moneyString.matches(Regex.NUMBER)
 			&& Integer.parseInt(moneyString) >= Lotto.COST;
 	}
 

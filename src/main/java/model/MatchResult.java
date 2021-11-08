@@ -1,20 +1,31 @@
 package model;
 
-import java.util.HashMap;
+import java.math.BigDecimal;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class MatchResult {
-	private final Map<MatchingNumberCount, Count> countByMatchingNumberCount = new HashMap<>();
+	private final Map<MatchingNumberCount, Count> countByMatchingNumberCount = new EnumMap<>(MatchingNumberCount.class);
 
 	public MatchResult() {
 	}
 
-	MatchResult(Count threeMatchCount, Count fourMatchCount, Count fiveMatchCount, Count sixMatchCount) {
+	MatchResult(Count threeMatchCount, Count fourMatchCount, Count fiveMatchCount, Count fiveAndBonusMatchCount, Count sixMatchCount) {
 		countByMatchingNumberCount.put(MatchingNumberCount.THREE, threeMatchCount);
 		countByMatchingNumberCount.put(MatchingNumberCount.FOUR, fourMatchCount);
 		countByMatchingNumberCount.put(MatchingNumberCount.FIVE, fiveMatchCount);
+		countByMatchingNumberCount.put(MatchingNumberCount.FIVE_AND_BONUS, fiveAndBonusMatchCount);
 		countByMatchingNumberCount.put(MatchingNumberCount.SIX, sixMatchCount);
+	}
+
+	public BigDecimal calculateTotalPayout() {
+		return MatchingNumberCount.THREE.getPrizeMoney().getValue().multiply(getThreeMatchCount().toBigDecimal())
+			.add(MatchingNumberCount.FOUR.getPrizeMoney().getValue().multiply(getFourMatchCount().toBigDecimal()))
+			.add(MatchingNumberCount.FIVE.getPrizeMoney().getValue().multiply(getFiveMatchCount().toBigDecimal()))
+			.add(MatchingNumberCount.FIVE_AND_BONUS.getPrizeMoney().getValue()
+				.multiply(getFiveAndBonusBallMatchCount().toBigDecimal()))
+			.add(MatchingNumberCount.SIX.getPrizeMoney().getValue().multiply(getSixMatchCount().toBigDecimal()));
 	}
 
 	public void increaseByMatchCount(MatchingNumberCount matchingNumberCount) {
@@ -31,6 +42,10 @@ public class MatchResult {
 
 	public Count getFiveMatchCount() {
 		return countByMatchingNumberCount.getOrDefault(MatchingNumberCount.FIVE, Count.zero());
+	}
+
+	public Count getFiveAndBonusBallMatchCount() {
+		return countByMatchingNumberCount.getOrDefault(MatchingNumberCount.FIVE_AND_BONUS, Count.zero());
 	}
 
 	public Count getSixMatchCount() {
