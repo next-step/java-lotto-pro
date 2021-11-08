@@ -1,11 +1,10 @@
 package step3;
 
-import static java.util.stream.Collectors.*;
-
-import java.util.HashSet;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoNumbers {
@@ -15,14 +14,6 @@ public class LottoNumbers {
 	public LottoNumbers(Set<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
 		validation();
-	}
-
-	public static LottoNumbers createLottoNumber(Set<LottoNumber> inputLottoNumber) {
-		return new LottoNumbers(inputLottoNumber);
-	}
-
-	public static LottoNumbers createLottoNumber(Integer ...inputLottoNumber) {
-		return new LottoNumbers(from(inputLottoNumber));
 	}
 
 	private void validation() {
@@ -35,15 +26,37 @@ public class LottoNumbers {
 		return lottoNumbers.size() > LOTTO_NUMBER_MAX;
 	}
 
-	private static Set<LottoNumber> from(Integer[] inputLottoNumber) {
-		return Stream.of(inputLottoNumber)
-			.map(LottoNumber::new)
-			.collect(toCollection(HashSet::new));
+	public static LottoNumbers createLottoNumber(Set<LottoNumber> inputLottoNumber) {
+		return new LottoNumbers(inputLottoNumber);
 	}
 
-	public int match(List<LottoNumber> userLottoNumbers) {
+	public static LottoNumbers createLottoNumber(Integer ...inputLottoNumber) {
+		return new LottoNumbers(conventToSet(inputLottoNumber));
+	}
+
+	private static Set<LottoNumber> conventToSet(Integer[] inputLottoNumber) {
+		return Stream.of(inputLottoNumber)
+			.map(LottoNumber::new)
+			.collect(Collectors.toSet());
+	}
+
+	public static LottoNumbers from(String userInputLottoNumbers) {
+		return new LottoNumbers(Arrays.stream(userInputLottoNumbers.split(","))
+			.map(String::trim)
+			.map(s -> new LottoNumber(Integer.parseInt(s)))
+			.collect(Collectors.toSet()));
+	}
+
+	public int match(LottoNumbers userLottoNumbers) {
 		return (int) lottoNumbers.stream()
-			.filter(lottoNumber -> userLottoNumbers.stream().anyMatch(s -> s.equals(lottoNumber))).count();
+			.filter(lottoNumber ->
+				userLottoNumbers.getList().stream()
+					.anyMatch(lottoNumber::equals))
+			.count();
+	}
+
+	private Set<LottoNumber> getList() {
+		return Collections.unmodifiableSet(lottoNumbers);
 	}
 
 	@Override

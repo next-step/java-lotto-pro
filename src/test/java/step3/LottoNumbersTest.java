@@ -34,4 +34,11 @@ class LottoNumbersTest {
 		}).isInstanceOf(ArrayIndexOutOfBoundsException.class);
 	}
 
+	@Test
+	void 유저가_입력한_숫자_갯수를_찾는지_확인() {
+		LottoNumbers lottoNumber = LottoNumbers.createLottoNumber(1,2,3,4,5,6);
+		LottoNumbers userLottNumber = LottoNumbers.createLottoNumber(1,2,42,44,23,19);
+		int match = lottoNumber.match(userLottNumber);
+		Assertions.assertThat(match).isEqualTo(2);
+	}
 }
