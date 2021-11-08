@@ -10,12 +10,12 @@ public class IssueQuantity {
 		this.issueQuantity = new HashMap<IssueType, Integer>();
 	}
 
-	public IssueQuantity fromAuto(int autoQuantity) {
+	public IssueQuantity auto(int autoQuantity) {
 		this.issueQuantity.put(IssueType.AUTO, autoQuantity);
 		return this;
 	}
 
-	public IssueQuantity fromManual(int manualQuantity) {
+	public IssueQuantity manual(int manualQuantity) {
 		this.issueQuantity.put(IssueType.MANUAL, manualQuantity);
 		return this;
 	}

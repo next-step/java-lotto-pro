@@ -16,14 +16,14 @@ public class LottosTest {
 	@ParameterizedTest
 	@ValueSource(ints = { 1, 2, 3 })
 	public void 로또_자동_구매_확인(int autoQuantity) {
-		assertThat(new Lottos(new IssueQuantity().fromAuto(autoQuantity), null).getLottos().size()).isEqualTo(autoQuantity);
+		assertThat(new Lottos(new IssueQuantity().auto(autoQuantity), null).getLottos().size()).isEqualTo(autoQuantity);
 	}
 
 	@Test
 	@DisplayName("로또 수동으로 구매하는지 확인")
 	public void 로또_수동_구매_확인() {
 		List<LottoNumbers> manual = Arrays.asList(LottoNumbers.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6 )));
-		assertThat(new Lottos(new IssueQuantity().fromManual(manual.size()), manual).getLottos().size()).isEqualTo(manual.size());
+		assertThat(new Lottos(new IssueQuantity().manual(manual.size()), manual).getLottos().size()).isEqualTo(manual.size());
 	}
 
 }

@@ -18,11 +18,9 @@ public class LottoController {
             return;
         }
         
-        int manualQuantity = inputView.enterManualBuyQuantity(money);
-        IssueQuantity iq = new IssueQuantity().fromManual(manualQuantity).fromAuto(money.buyableQuantity() - manualQuantity);
-        
-        Lottos lottos = new Lottos(iq, inputView.enterManualNumbers(manualQuantity));
-        resultView.printBuyMessage(iq);
+        IssueQuantity issueQuantity = inputView.enterManualBuyQuantity(money);
+        Lottos lottos = new Lottos(issueQuantity, inputView.enterManualNumbers(issueQuantity.getManualQuantity()));
+        resultView.printBuyMessage(issueQuantity);
         resultView.printLottoList(lottos);
         lottos.execute(inputView.enterWinningLotto());
         
