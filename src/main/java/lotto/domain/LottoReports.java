@@ -51,6 +51,7 @@ public class LottoReports {
         return getCountOfFirst() * Rank.FIRST.getWinningMoney()
             + getCountOfSecond() * Rank.SECOND.getWinningMoney()
             + getCountOfThird() * Rank.THIRD.getWinningMoney()
+            + getCountOfFourth() * Rank.FOURTH.getWinningMoney()
             + getCountOfFifty() * Rank.FIFTH.getWinningMoney();
     }
 }
