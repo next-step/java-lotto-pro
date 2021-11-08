@@ -16,7 +16,7 @@ public class LottoResult {
     public LottoResult(List<Lotto> lottos, WinningNumber winningNumber) {
         Map<LottoRank, Integer> results = new HashMap<>();
         for (Lotto lotto : lottos) {
-            LottoRank lottoRank = LottoRank.valueOf(winningNumber.winningCount(lotto));
+            LottoRank lottoRank = LottoRank.valueOf(lotto.winningCount(winningNumber.getWinningLotto()), lotto.contains(winningNumber.getBonusBall()));
             results.put(lottoRank, results.getOrDefault(lottoRank, DEFAULT_VALUE) + ADD_COUNT);
         }
         this.lottoResults = results;

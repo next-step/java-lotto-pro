@@ -17,8 +17,11 @@ public class WinningNumber {
         }
     }
 
-    public int winningCount(Lotto lotto) {
-        return (int) winningNumber.getLotto().stream()
-                .filter(lotto::contains).count();
+    public Lotto getWinningLotto() {
+        return winningNumber;
+    }
+
+    public LottoNumber getBonusBall() {
+        return bonusBall;
     }
 }
