@@ -64,11 +64,14 @@ public class LottoTicket {
     }
 
     private int increaseSameNumberCount(LottoTicket TargetLottoTicket, int sameNumberCount, LottoNumber lottoNumber) {
-        if (TargetLottoTicket.lottoNumbers
-                .contains(lottoNumber)) {
+        if (TargetLottoTicket.contains(lottoNumber)) {
             sameNumberCount++;
         }
         return sameNumberCount;
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public LottoTicketDTO toDTO() {
