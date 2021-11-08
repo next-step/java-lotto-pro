@@ -52,5 +52,9 @@
 보너스(`Bonus`)
 `Bonus`는 보너스 숫자를 가진다
 
+수동 로또들(`ManualLottos`)
+`ManualLottos`는 `Lotto` 리스트를 가진다
+`ManualLottos`는 로또 숫자 문자열로 생성한다
+
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
