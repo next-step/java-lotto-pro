@@ -24,21 +24,6 @@ public class LottoPrizeAnswerTest {
 
 	@DisplayName("당첨정답_생성_보너스번호와_당첨번호_중복")
 	@Test
-	public void winningNumbers_constructor() {
-		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(
-			Arrays.asList(1, 22, 3, 7, 30, 45));
-		WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
-		int number=17;
-		BonusNumber bonusNumber = new BonusNumber(number);
-		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(winningNumbers,bonusNumber);
-
-		lottoNumbers.stream().forEach(it->
-			assertThat(lottoPrizeAnswer.hasNumberInWinningNumbers(it)).isEqualTo(true));
-		assertThat(lottoPrizeAnswer.isMatchBonusNumber(LottoNumber.valueOf(number))).isEqualTo(true);
-	}
-
-	@DisplayName("당첨정답_생성_보너스번호와_당첨번호_중복")
-	@Test
 	public void winningNumbers_constructor_duplicate_exception() {
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(
 			Arrays.asList(1, 22, 3, 7, 30, 45));

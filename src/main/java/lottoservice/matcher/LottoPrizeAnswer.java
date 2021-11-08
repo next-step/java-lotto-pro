@@ -26,14 +26,6 @@ public class LottoPrizeAnswer {
 		}
 	}
 
-	public boolean hasNumberInWinningNumbers(LottoNumber lottoNumber) {
-		return winningNumbers.hasMatchNumber(lottoNumber);
-	}
-
-	public boolean isMatchBonusNumber(LottoNumber lottoNumber) {
-		return bonusNumber.isMatchNumber(lottoNumber);
-	}
-
 	public LottoMatchResult matchTickets(LottoTickets lottoTickets) {
 		LottoMatchResult lottoMatchResult = new LottoMatchResult();
 		for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
