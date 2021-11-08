@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoNumbersMakerTest {
@@ -16,8 +17,9 @@ public class LottoNumbersMakerTest {
 
 	private LottoNumbersMaker lottoNumbersMaker = new LottoNumbersMaker(new LottoArrangeManipulator());
 
+	@DisplayName("1에서45사이_6개의_숫자생성")
 	@Test
-	public void makeLottoNumbers_1에서45사이_6개의_숫자생성() {
+	public void makeLottoNumbers_shuffle_constructor() {
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers();
 		assertThat(lottoNumbers.size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
 		lottoNumbers
@@ -25,8 +27,9 @@ public class LottoNumbersMakerTest {
 				.isBetween(START_INCLUSIVE_NUMBER, END_EXCLUSIVE_NUMBER));
 	}
 
+	@DisplayName("Integer 리스트 인자전달해서 생성")
 	@Test
-	public void makeLottoNumbers_정수리스트_인자전달() {
+	public void makeLottoNumbers_constructor_integers() {
 		List<Integer> numbers = Arrays.asList(1, 10, 20, 30, 40, 45);
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(numbers);
 		assertThat(lottoNumbers.size()).isEqualTo(SIZE_OF_LOTTERY_NUMBERS);
@@ -35,8 +38,9 @@ public class LottoNumbersMakerTest {
 		}
 	}
 
+	@DisplayName("문자열_인자전달")
 	@Test
-	public void makeLottoNumbers_문자열_인자전달() {
+	public void makeLottoNumbers_constructor_string() {
 		String numbertext = "1, 15, 20, 25, 30, 45";
 		List<Integer> numbers = Arrays.asList(1, 15, 20, 25, 30, 45);
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(numbertext);

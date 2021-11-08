@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lottoservice.lottonumber.LottoArrangeManipulator;
@@ -17,8 +18,9 @@ public class LottoTicketTest {
 
 	private static final int SIZE_OF_LOTTERY_NUMBERS = 6;
 
+	@DisplayName("로또_티켓_발급")
 	@Test
-	public void makeLottoTicket_로또_티켓_발급() {
+	public void makeLottoTicket() {
 		LottoNumbersMaker lottoNumbersMaker = new LottoNumbersMaker(new LottoArrangeManipulator());
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers();
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
@@ -29,8 +31,9 @@ public class LottoTicketTest {
 		lottoNumbers.forEach((it) -> assertThat(lottoTicket.hasLottoNumber(it)));
 	}
 
+	@DisplayName("티켓 안의_numbers_정렬")
 	@Test
-	public void sortNumbersInAscOrder_ticket안의_numbers_정렬() {
+	public void sortNumbersInAscOrder() {
 		List<LottoNumber> lottoNumbers = Arrays.asList(1,34,10,2,30,6)
 			.stream().map(it -> LottoNumber.valueOf(it)).collect(Collectors.toList());
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
@@ -40,7 +43,7 @@ public class LottoTicketTest {
 	}
 
 	@Test
-	public void equals_LottoTicket비교() {
+	public void 티켓_equals_검증() {
 		List<LottoNumber> lottoNumbers = Arrays.asList(1,34,10,2,30,6)
 			.stream().map(it -> LottoNumber.valueOf(it)).collect(Collectors.toList());
 

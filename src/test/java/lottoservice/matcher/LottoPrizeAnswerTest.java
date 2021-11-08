@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lottoservice.exception.DuplicateBonusNumberAndWinningNumbers;
@@ -21,8 +22,9 @@ public class LottoPrizeAnswerTest {
 
 	private LottoNumbersMaker lottoNumbersMaker = new LottoNumbersMaker(new LottoArrangeManipulator());
 
+	@DisplayName("당첨정답_생성_보너스번호와_당첨번호_중복")
 	@Test
-	public void 당첨정답_생성() {
+	public void winningNumbers_constructor() {
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(
 			Arrays.asList(1, 22, 3, 7, 30, 45));
 		WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
@@ -35,8 +37,9 @@ public class LottoPrizeAnswerTest {
 		assertThat(lottoPrizeAnswer.isMatchBonusNumber(LottoNumber.valueOf(number))).isEqualTo(true);
 	}
 
+	@DisplayName("당첨정답_생성_보너스번호와_당첨번호_중복")
 	@Test
-	public void 당첨정답_생성_보너스번호와_당첨번호_중복() {
+	public void winningNumbers_constructor_duplicate_exception() {
 		List<LottoNumber> lottoNumbers = lottoNumbersMaker.makeLottoNumbers(
 			Arrays.asList(1, 22, 3, 7, 30, 45));
 		WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
@@ -48,8 +51,9 @@ public class LottoPrizeAnswerTest {
 	}
 
 
+	@DisplayName("당첨정답과_티켓_비교")
 	@Test
-	public void 당첨정답과_티켓_비교() {
+	public void matchTicket() {
 		int number=17;
 		List<LottoNumber> winningNumbers = lottoNumbersMaker.makeLottoNumbers(
 			Arrays.asList(1, 22, 3, 7, 30, 45));
@@ -65,8 +69,9 @@ public class LottoPrizeAnswerTest {
 		assertThat(rank).isEqualTo(LottoMatchRank.FOUR_POINT);
 	}
 
+	@DisplayName("당첨정답과_티켓_비교_2등")
 	@Test
-	public void 당첨정답과_티켓_비교_2등() {
+	public void matchTicket_secondPrize() {
 		int number=17;
 		List<LottoNumber> winningNumbers = lottoNumbersMaker.makeLottoNumbers(
 			Arrays.asList(1, 22, 3, 7, 30, 45));
@@ -82,8 +87,9 @@ public class LottoPrizeAnswerTest {
 		assertThat(rank).isEqualTo(LottoMatchRank.FIVE_POINT_AND_BONUS);
 	}
 
+	@DisplayName("정답과_로또티켓들_총_비교결과")
 	@Test
-	public void matchWinningAndTickets_정답과_로또티켓들_비교결과() {
+	public void matchTickets() {
 		WinningNumbers winningNumbers = new WinningNumbers(
 			lottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
 
@@ -103,8 +109,9 @@ public class LottoPrizeAnswerTest {
 		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.FIVE_POINT_AND_BONUS)).isEqualTo(1);
 	}
 
+	@DisplayName("당첨_수익률_계산")
 	@Test
-	public void matchWinningAndTickets_당첨_수익률_계산() {
+	public void calculateProfitPercentage() {
 		WinningNumbers winningNumbers = new WinningNumbers(
 			lottoNumbersMaker.makeLottoNumbers("1, 5, 20, 34, 3, 40"));
 

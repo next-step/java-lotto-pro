@@ -14,7 +14,7 @@ import lottoservice.lottonumber.LottoNumbersMaker;
 class LottoTicketsTest {
 
 	@Test
-	public void getNumOfTickets_로또_티켓_생성() {
+	public void 로또_티켓_생성() {
 		LottoNumbersMaker lottoNumbersMaker = new LottoNumbersMaker(new LottoArrangeManipulator());
 		List<LottoTicket> tickets = Arrays.asList(
 			new LottoTicket(lottoNumbersMaker.makeLottoNumbers()),

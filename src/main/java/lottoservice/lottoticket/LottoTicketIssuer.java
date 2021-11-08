@@ -1,12 +1,11 @@
 package lottoservice.lottoticket;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lottoservice.exception.NotDivisibleMoneyUnitException;
-import lottoservice.exception.NotEnoughtMoneyException;
+import lottoservice.exception.NotEnoughMoneyException;
 import lottoservice.exception.InvalidNumberFormatMoneyException;
 import lottoservice.lottonumber.LottoNumbersMaker;
 
@@ -50,7 +49,7 @@ public class LottoTicketIssuer {
 
 	private void validatePay(int inputAmount) {
 		if (isMoneyTooLittle(inputAmount)) {
-			throw new NotEnoughtMoneyException(ERROR_MESSAGE_INPUT_AMOUNT_TOO_LITTLE);
+			throw new NotEnoughMoneyException(ERROR_MESSAGE_INPUT_AMOUNT_TOO_LITTLE);
 		}
 
 		if (isNotDivisibleMoneyByPerPrice(inputAmount)) {
