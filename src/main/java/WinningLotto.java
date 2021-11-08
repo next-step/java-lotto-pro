@@ -11,6 +11,9 @@ public class WinningLotto extends Lotto {
 	}
 
 	private void validate(LottoNumber bonus) {
+		if (null == bonus) {
+			throw new WinningLottoFormatException();
+		}
 		if (lottoNumbers.contains(bonus)) {
 			throw new WinningLottoFormatException();
 		}

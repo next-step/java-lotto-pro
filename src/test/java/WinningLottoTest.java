@@ -7,7 +7,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 class WinningLottoTest {
 
 	@Test
-	void winningLotto_invalidBonus() {
+	void winningLotto_bonus_null() {
+		assertThatExceptionOfType(WinningLottoFormatException.class)
+			.isThrownBy(() -> new WinningLotto(LottoParser.parse("1,2,3,4,5,6"), null))
+			.withMessage(WinningLottoFormatException.ERROR_MESSAGE);
+	}
+
+	@Test
+	void winningLotto_duplicated_bonus_with_lotto() {
 		assertThatExceptionOfType(WinningLottoFormatException.class)
 			.isThrownBy(() -> new WinningLotto(LottoParser.parse("1,2,3,4,5,6"), LottoNumber.from("1")))
 			.withMessage(WinningLottoFormatException.ERROR_MESSAGE);

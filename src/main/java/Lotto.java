@@ -24,6 +24,9 @@ public class Lotto {
 	}
 
 	private void validate(List<LottoNumber> lottoNumbers) {
+		if (null == lottoNumbers) {
+			throw new LottoFormatException();
+		}
 		if (lottoNumbers.size() != NUM_OF_LOTTO_NUMBERS) {
 			throw new LottoFormatException();
 		}
