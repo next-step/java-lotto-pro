@@ -1,31 +1,39 @@
 package step3.service;
 
-import step3.domain.Amount;
+import step3.domain.LottoNumbersBundle;
 import step3.domain.LottoProvider;
+import step3.domain.LottoResult;
 import step3.domain.LottoService;
-import step3.domain.strategy.lotto.LottoProviderStrategy;
-import step3.dto.LottoListDto;
-import step3.dto.LottoRanksDto;
-import step3.dto.WinnerLottoNumbersDto;
+import step3.domain.strategy.numbers.NumbersStrategy;
+import step3.domain.strategy.numbers.RandomLottoNumbers;
+import step3.dto.LottoBonusNumberRequestDto;
+import step3.dto.LottoBuyRequestDto;
+import step3.dto.LottoBuyResponseDto;
+import step3.dto.LottoStatisticsResponseDto;
+import step3.dto.LottoWinNumbersRequestDto;
 
 public class LottoServiceImpl implements LottoService {
-    LottoProviderStrategy lottoProvider = new LottoProvider();
+    LottoProvider lottoProvider = new LottoProvider();
 
     @Override
-    public void buyLotto(Amount amount) {
-        int quantity = lottoProvider.availableQuantity(amount.getAmount());
-        lottoProvider.buyLotto(quantity);
+    public LottoBuyResponseDto buyLotto(LottoBuyRequestDto lottoBuyRequestDto, NumbersStrategy numbersStrategy) {
+        int quantity = lottoProvider.availableQuantity(lottoBuyRequestDto.getAmount());
+
+        LottoNumbersBundle lottoNumbersBundle = lottoProvider.buyLotto(quantity, numbersStrategy);
+
+        return new LottoBuyResponseDto(lottoNumbersBundle);
     }
 
     @Override
-    public LottoListDto lottoList() {
-        return new LottoListDto(lottoProvider.getLottoNumbersBundle().toList());
-    }
+    public LottoStatisticsResponseDto getResultStatistics(LottoWinNumbersRequestDto lottoWinNumbersRequestDto,
+        LottoBonusNumberRequestDto lottoBonusNumberRequestDto) {
 
-    @Override
-    public LottoRanksDto lottoPurchaseDetails(Amount amount, WinnerLottoNumbersDto winLottoNumbers) {
-        return LottoRanksDto.of(
-            lottoProvider.getLottoNumbersBundle().lottoRanksOf(winLottoNumbers), amount);
-    }
+        LottoResult lottoResult = lottoProvider.getLottoResult(
+            lottoWinNumbersRequestDto.getLottoNumbers(),
+            lottoWinNumbersRequestDto.getAmount(),
+            lottoBonusNumberRequestDto.getBonusLottoNumber()
+        );
 
+        return new LottoStatisticsResponseDto(lottoResult);
+    }
 }

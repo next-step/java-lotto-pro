@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import step3.common.exception.InvalidParamException;
-import step3.domain.strategy.numbers.NumbersStrategy;
 
 public class LottoNumbers {
     public static final int MAX_LOTTO_NUMBERS_SIZE = 6;
@@ -16,45 +16,60 @@ public class LottoNumbers {
         MAX_LOTTO_NUMBERS_SIZE);
     private Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers() {
+    private LottoNumbers() {
     }
 
     public LottoNumbers(int[] numbers) {
-        map(numbers);
-    }
-
-    public LottoNumbers(NumbersStrategy numbersStrategy) {
-        map(numbersStrategy.getNumbers());
-    }
-
-    private void map(int[] numbers) {
         this.lottoNumbers = mapOf(numbers);
         validSize();
     }
 
     private Set<LottoNumber> mapOf(int[] numbers) {
         Set<LottoNumber> result = new HashSet<>();
+
         for (int number : numbers) {
             result.add(new LottoNumber(number));
         }
+
         return result;
     }
 
     public String toString() {
         List<Integer> result = new ArrayList<>();
+
         for (LottoNumber lottoNumber : lottoNumbers) {
             result.add(lottoNumber.value());
         }
+
         Collections.sort(result);
+
         return Collections.unmodifiableList(result).toString();
     }
 
     public int containCount(LottoNumbers winLottoNumbers) {
         int count = 0;
+
         for (LottoNumber winLottoNumber : winLottoNumbers.lottoNumbers) {
-            if (lottoNumbers.contains(winLottoNumber)) {
-                count++;
-            }
+            count = containCheckAndIncrementCount(count, winLottoNumber);
+        }
+        return count;
+    }
+
+    public boolean isContain(LottoNumber validLottoNumber) {
+        return lottoNumbers.contains(validLottoNumber);
+    }
+
+    public boolean isBonusContain(LottoNumber bonusLottoNumber) {
+        long matchedCount = lottoNumbers.stream()
+            .filter(lottoNumber -> lottoNumber.equals(bonusLottoNumber))
+            .count();
+        
+        return matchedCount != 0;
+    }
+
+    private int containCheckAndIncrementCount(int count, LottoNumber winLottoNumber) {
+        if (isContain(winLottoNumber)) {
+            count++;
         }
         return count;
     }
@@ -78,7 +93,4 @@ public class LottoNumbers {
         return Objects.hash(lottoNumbers);
     }
 
-    public int size() {
-        return lottoNumbers.size();
-    }
 }

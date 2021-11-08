@@ -2,38 +2,56 @@ package step3;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import java.util.Arrays;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
 import step3.domain.LottoNumbersBundle;
-import step3.domain.constance.LottoConstant;
-import step3.domain.strategy.numbers.RandomNumbers;
+import step3.domain.LottoRanks;
+import step3.domain.strategy.numbers.NumbersStrategy;
 
 public class LottoNumbersBundleTest {
 
-    @Test
-    void create() {
+    @ParameterizedTest
+    @CsvSource(value = {
+        "1,2,3,4,5,6:1,2,3,4,5,6:7:2000000000", // 1등
+        "1,2,3,4,5,6:1,2,3,4,5,7:6:30000000",   // 2등
+        "1,2,3,4,5,6:1,2,3,4,5,7:10:1500000",   // 3등
+        "1,2,3,4,5,6:1,2,3,4,8,7:6:50000",      // 4등
+        "1,2,3,4,5,6:1,2,3,9,8,7:6:5000",       // 5등
+    }, delimiter = ':')
+    @DisplayName("등수별 총 상금 테스트")
+    void lottoRanksOf_totalPrize(String buyNumbersStr, String winNumbersStr, int bonusNumber, Long expected) {
+        // given
+        LottoNumbers winLottoNumbers = new LottoNumbers(parseNumbers(winNumbersStr));
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
         LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
-        lottoNumbersBundle.addLottoNumbers(
-            new RandomNumbers(LottoConstant.MIN_NUMBER_RANGE, LottoConstant.MAX_NUMBER_RANGE,
-                LottoNumbers.MAX_LOTTO_NUMBERS_SIZE));
+        addLottoNumbers(buyNumbersStr, lottoNumbersBundle);
+
+        // when
+        LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winLottoNumbers, bonusLottoNumber);
+        Long totalPrize = lottoRanks.totalPrize();
+
+        // then
+        assertThat(totalPrize).isEqualTo(expected);
     }
 
-    @Test
-    @DisplayName("출력된 로또번호는 불변성객체로 수정불가 테스트")
-    void toArrayUnmodifiableTest() {
-        // given
-        LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
-        lottoNumbersBundle.addLottoNumbers(
-            new RandomNumbers(LottoConstant.MIN_NUMBER_RANGE, LottoConstant.MAX_NUMBER_RANGE,
-                LottoNumbers.MAX_LOTTO_NUMBERS_SIZE));
+    private void addLottoNumbers(String buyNumbersStr, LottoNumbersBundle lottoNumbersBundle) {
+        NumbersStrategy numbersStrategy = new NumbersStrategy() {
+            @Override
+            public int[] getNumbers() {
+                return parseNumbers(buyNumbersStr);
+            }
+        };
+        lottoNumbersBundle.addLottoNumbers(numbersStrategy);
+    }
 
-        assertThatThrownBy(() -> {
-            // when
-            lottoNumbersBundle.toList().remove(0);
-        })// then
-            .isInstanceOf(UnsupportedOperationException.class);
+    private int[] parseNumbers(String inputNumbers) {
+        return Arrays.stream(inputNumbers.split(",")).mapToInt(Integer::parseInt).toArray();
     }
 
 }
