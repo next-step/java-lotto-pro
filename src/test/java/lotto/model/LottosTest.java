@@ -13,10 +13,11 @@ class LottosTest {
 	@CsvSource(value = {"10000:10", "1111:1", "20000:20", "13200:13"}, delimiter = ':')
 	void 입력된_구입금액만큼_로또생성기로_로또를_생성하는_테스트(String inputMoney, int lottoNumbersListSize) {
 		// given
-		LottoGenerator lottoGenerator = new LottoGenerator(inputMoney);
+		Money money = Money.from(inputMoney);
+		LottoGenerator lottoGenerator = LottoGenerator.of(money);
 
 		// when
-		Lottos lottos = new Lottos(lottoGenerator);
+		Lottos lottos = Lottos.of(lottoGenerator.generateLottoNumbers(), money);
 
 		// then
 		assertAll(
@@ -33,16 +34,17 @@ class LottosTest {
 		"13200:1,2,3,4,5,6:1"}, delimiter = ':')
 	void 입력된_구입금액과_입력된숫자로_로또를_생성하는_테스트(String inputMoney, String inputNumber, int lottoNumbersListSize) {
 		// given
-		LottoGenerator lottoGenerator = new LottoGenerator(inputMoney, Collections.singletonList(inputNumber));
+		Money money = Money.from(inputMoney);
+		LottoGenerator lottoGenerator = LottoGenerator.of(money, Collections.singletonList(inputNumber));
 
 		// when
-		Lottos lottos = new Lottos(lottoGenerator);
+		Lottos lottos = Lottos.of(lottoGenerator.generateLottoNumbers(), money);
 
 		// then
 		assertAll(
 			() -> assertThat(lottos).isInstanceOf(Lottos.class),
 			() -> assertThat(lottos.size()).isEqualTo(lottoNumbersListSize),
-			() -> assertThat(lottos.contains(new LottoNumbers("1,2,3,4,5,6")))
+			() -> assertThat(lottos.contains(LottoNumbers.from("1,2,3,4,5,6")))
 		);
 	}
 

@@ -5,16 +5,19 @@ import java.util.List;
 
 public class Lottos {
 	private final List<LottoNumbers> lottoNumbersList;
-	private final String inputMoney;
+	private final Money inputMoney;
 
-	public Lottos(List<LottoNumbers> lottoNumbersList, String inputMoney) {
+	private Lottos(List<LottoNumbers> lottoNumbersList, Money inputMoney) {
 		this.lottoNumbersList = Collections.unmodifiableList(lottoNumbersList);
 		this.inputMoney = inputMoney;
 	}
 
-	public Lottos(LottoGenerator lottoGenerator) {
-		this.lottoNumbersList = Collections.unmodifiableList(lottoGenerator.generateLottoNumbers());
-		this.inputMoney = lottoGenerator.getInputMoney();
+	public static Lottos of(List<LottoNumbers> lottoNumbersList, String inputMoney) {
+		return new Lottos(lottoNumbersList, Money.from(inputMoney));
+	}
+
+	public static Lottos of(List<LottoNumbers> lottoNumbersList, Money inputMoney) {
+		return new Lottos(lottoNumbersList, inputMoney);
 	}
 
 	public boolean contains(LottoNumbers lottoNumbers) {
@@ -26,7 +29,7 @@ public class Lottos {
 	}
 
 	public int getInputMoney() {
-		return Integer.parseInt(this.inputMoney);
+		return inputMoney.getMoney();
 	}
 
 	public int size() {
