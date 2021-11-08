@@ -25,8 +25,8 @@ public class Application {
     }
 
     private static void refereeTicketLottery(final TicketLotteryBundleResponseDto ticketLotteryBundle) {
-        final LottoWinningNumberRequestDto lottoNumbers = LottoWinningNumberInputView.submit();
-        final WinningStatisticsResponseDto winningStatistics = LottoController.referee(lottoNumbers, ticketLotteryBundle);
+        final LottoWinningNumberRequestDto winningLottoNumbers = LottoWinningNumberInputView.submit();
+        final WinningStatisticsResponseDto winningStatistics = LottoController.referee(winningLottoNumbers, ticketLotteryBundle);
         LottoWinningStatisticsView.resolve(winningStatistics);
     }
 }
