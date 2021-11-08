@@ -24,7 +24,7 @@ public class AutomaticLotto {
 		int perchaseAmount = Integer.parseInt(getPerchaseAmount());
 		Lottos lottos = new Lottos(perchaseAmount);
 		List<Integer> winningNumbers = getLatestWinningNumbers();
-		int secondWinningNumber =getSecondWinningNumber();
+		int secondWinningNumber =getSecondWinningNumber(winningNumbers);
 		lottos.setWinningNumberMatchesCount(winningNumbers, secondWinningNumber);
 		lottos.printLottoMatchesCountStatistics();
 	}
@@ -75,13 +75,16 @@ public class AutomaticLotto {
 	 * 사용자 입력을 통해 2등 보너스볼 숫자 가져오기
 	 * @return
 	 */
-	public static int getSecondWinningNumber() {
+	public static int getSecondWinningNumber(List<Integer> winningNumbers) {
 		int secondWinningNumber = 0;
 		MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_MESSAGE);
 		Scanner scan = new Scanner(System.in);
 		secondWinningNumber = scan.nextInt();
-		if(!NumberUtil.isNumber(String.valueOf(secondWinningNumber)) || !NumberUtil.isNumberBetweenOneAndFortyFive(secondWinningNumber)) {
-			secondWinningNumber = getSecondWinningNumber();
+		if(!NumberUtil.isNumber(String.valueOf(secondWinningNumber))
+				|| !NumberUtil.isNumberBetweenOneAndFortyFive(secondWinningNumber)
+				|| winningNumbers.contains(secondWinningNumber)) {
+			MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_ERROR_MESSAGE);
+			secondWinningNumber = getSecondWinningNumber(winningNumbers);
 		}
 		return secondWinningNumber;
 	}
