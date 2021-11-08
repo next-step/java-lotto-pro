@@ -41,10 +41,10 @@ public class LottoNumbersGroup {
         return lottoNumbersGroup;
     }
 
-    public LottoResults getLottoResults(LottoNumbers prizeLottoNumbers) {
+    public LottoResults getLottoResults(LottoNumbers prizeLottoNumbers, LottoNumber bonusLottoNumber) {
         List<LottoResult> lottoResults = new ArrayList<>();
         for (LottoNumbers lottoNumbers : lottoNumbersGroup) {
-            LottoResult lottoResult = lottoNumbers.getLottoResult(prizeLottoNumbers);
+            LottoResult lottoResult = lottoNumbers.getLottoResult(prizeLottoNumbers, bonusLottoNumber);
             lottoResults.add(lottoResult);
         }
 
