@@ -55,16 +55,17 @@ public class LottoTicket {
         return lottoNumbers.toString();
     }
 
-    public int getSameNumberCount(LottoTicket lottoTicket2) {
+    public int getSameNumberCount(LottoTicket TargetlottoTicket) {
         int sameNumberCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            sameNumberCount = increaseSameNumberCount(lottoTicket2, sameNumberCount, lottoNumber);
+            sameNumberCount = increaseSameNumberCount(TargetlottoTicket, sameNumberCount, lottoNumber);
         }
         return sameNumberCount;
     }
 
-    private int increaseSameNumberCount(LottoTicket lottoTicket2, int sameNumberCount, LottoNumber lottoNumber) {
-        if (lottoTicket2.lottoNumbers.contains(lottoNumber)) {
+    private int increaseSameNumberCount(LottoTicket TargetLottoTicket, int sameNumberCount, LottoNumber lottoNumber) {
+        if (TargetLottoTicket.lottoNumbers
+                .contains(lottoNumber)) {
             sameNumberCount++;
         }
         return sameNumberCount;
