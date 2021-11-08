@@ -47,6 +47,5 @@ public class LottoDiscriminator {
 
     private static boolean isMatchBonusNumber(final WinningLottery winningLottery, final TicketLottery ticketLottery) {
         return ticketLottery.getLottoNumbers().contains(winningLottery.getBonusLottoNumber());
-//        return winningLottery.isMatchBonusNumber(ticketLottery);
     }
 }

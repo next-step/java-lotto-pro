@@ -42,8 +42,4 @@ public class WinningLottery extends Lottery {
     public LottoNumber getBonusLottoNumber() {
         return bonusLottoNumber;
     }
-
-    //    public boolean isMatchBonusNumber(final TicketLottery ticketLottery) {
-//        return ticketLottery.getLottoNumbers().contains(bonusLottoNumber);
-//    }
 }

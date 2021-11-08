@@ -15,6 +15,5 @@ public class LottoStore {
 
     private static int calcOrderCountByMoney(final Money money) {
         return money.getMoney() / PRICE_OF_LOTTO_TICKET;
-//        return money.divide(PRICE_OF_LOTTO_TICKET);
     }
 }
