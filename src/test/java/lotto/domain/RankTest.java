@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class RankTest {
-    @DisplayName("Rank valueOf 테스트")
+    @DisplayName("정상적인 Rank 를 반환하는지 확인한다")
     @Test
     void valueOf() {
         assertEquals(Rank.FIRST, Rank.valueOf(6, false));
@@ -19,7 +19,7 @@ class RankTest {
         assertEquals(Rank.MISS, Rank.valueOf(0, false));
     }
 
-    @DisplayName("Rank is 메서드 테스트")
+    @DisplayName("Rank 객체를 확인하는 메서드가 정상적으로 동작하는지 확인한다")
     @Test
     void is() {
         assertTrue(Rank.FIRST.isFirst());

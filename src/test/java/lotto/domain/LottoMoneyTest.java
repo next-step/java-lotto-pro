@@ -33,7 +33,7 @@ class LottoMoneyTest {
             .hasMessage(Message.WRONG_LOTTO_AMOUNT_UNIT.getMessage());
     }
 
-    @DisplayName("로또 구매 가능 갯수")
+    @DisplayName("1000원 단위로 로또 구매 가능한 숫자를 구한다")
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "2000,2", "12000, 12", "15000,15", "50000,50"})
     void countOfPossibleLotto(String amount, int expected) {
@@ -41,7 +41,7 @@ class LottoMoneyTest {
         assertEquals(expected, lottoMoney.getCountOfPossibleLotto());
     }
 
-    @DisplayName("로또 수익률")
+    @DisplayName("투자금액과 당첨금액을 통해 수익률을 구한다")
     @ParameterizedTest
     @CsvSource(value = {"14000,5000,0.35", "10000,20000,2", "1000000,5000,0"})
     void profitRatio(String lottoAmount, int profitAmount, double expected) {

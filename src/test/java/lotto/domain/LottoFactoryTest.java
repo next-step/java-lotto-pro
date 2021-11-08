@@ -8,19 +8,19 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 class LottoFactoryTest {
-    @DisplayName("로또 번호 생성 테스트")
+    @DisplayName("정상적으로 로또를 생성한다")
     @RepeatedTest(10)
     void lottoNumbersTest() {
         assertNotNull(LottoFactory.createLotto());
     }
 
-    @DisplayName("문자열 번호 숫자로 변환 테스트")
+    @DisplayName("문자열로 전달된 번호를 숫자로 변환한다")
     @Test
     void convertInputNumbersToNumbers() {
         LottoFactory.createManualLotto("1, 10, 15, 20, 25, 30");
     }
 
-    @DisplayName("문자열 번호 숫자로 변환 테스트 - 문자나 음수")
+    @DisplayName("문자열에 음수나 문자가 포함된 경우 예외가 발생한다")
     @Test
     void convertInputNumbersToNumbersException() {
         assertThatThrownBy(() -> LottoFactory.createManualLotto("a,b,c,d,e,f"))

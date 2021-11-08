@@ -21,7 +21,7 @@ class LottoReportsTest {
         ));
     }
 
-    @DisplayName("당첨 등수에 대한 테스트")
+    @DisplayName("당첨 등수가 제대로 카운트 되는지 확인한다")
     @Test
     void getRankCount() {
         LottoReports lottoReports = new LottoReports(lottoRank, new LottoMoney("10000"));
@@ -31,7 +31,7 @@ class LottoReportsTest {
         assertEquals(1, lottoReports.getCountOfFifty());
     }
 
-    @DisplayName("수익률 테스트")
+    @DisplayName("수익률을 제대로 계산하는지 확인한다")
     @Test
     void getProfitRatio() {
         LottoReports lottoReports = new LottoReports(lottoRank, new LottoMoney("10000"));

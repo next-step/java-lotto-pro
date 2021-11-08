@@ -27,7 +27,7 @@ class LottoNumberTest {
             .hasMessage(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
     }
 
-    @DisplayName("로또 번호 비교 테스트")
+    @DisplayName("로또 번호가 값을 통해 비교되는지 확인한다")
     @Test
     void compareLottoNumber() {
         LottoNumber lottoNumber1 = LottoNumber.valueOf(1);
