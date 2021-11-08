@@ -14,9 +14,8 @@ public class Result {
 
     public Result(Lottos lottos, Lotto winLotto) {
         this.matchResult = createResultMap();
-        for (int i = 0; i < lottos.size(); i++) {
-
-            Rank rank = winLotto.matchNumber(lottos.getLottoGroup().get(i));
+        for (Lotto lotto : lottos.getLottoGroup()) {
+            Rank rank = winLotto.matchNumber(lotto);
             matchResultPut(rank);
         }
     }
