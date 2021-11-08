@@ -37,25 +37,22 @@ public enum LottoMatchRank {
 	public static LottoMatchRank valueOf(final int countOfMatch, final boolean matchBonus) {
 		LottoMatchRank[] ranks = LottoMatchRank.values();
 		Optional<LottoMatchRank> foundRank = Arrays.stream(ranks)
-			.filter(rank -> isFind(rank, countOfMatch, matchBonus)).findFirst();
+			.filter(rank -> rank.isMatchRank(countOfMatch, matchBonus)).findFirst();
 		return foundRank.orElseThrow(() -> new IllegalStateException(ERROR_MESSAGE_UNEXPECTED_COUNTOFMATCH));
 	}
 
-	private static boolean isFind(LottoMatchRank rank, int countOfMatch, boolean matchBonus) {
-		if (!isPossibleSecondPrize(countOfMatch)) {
-			return rank.getCountOfMatch() == countOfMatch;
+	public boolean isMatchRank(int inputCountOfMatch, boolean matchBonus) {
+		if(isSecondPrize()){
+			return matchBonus && isSameMatchCount(inputCountOfMatch);
 		}
-		if (matchBonus) {
-			return rank == LottoMatchRank.FIVE_POINT_AND_BONUS;
-		}
-		return rank == LottoMatchRank.FIVE_POINT;
+		return getCountOfMatch() == inputCountOfMatch;
 	}
 
-	private static boolean isPossibleSecondPrize(int countOfMatch) {
-		return countOfMatch == LottoMatchRank.FIVE_POINT.getCountOfMatch();
+	public boolean isSecondPrize() {
+		return this == LottoMatchRank.FIVE_POINT_AND_BONUS;
 	}
 
-	protected static boolean isSecondPrize(LottoMatchRank rank) {
-		return rank == LottoMatchRank.FIVE_POINT_AND_BONUS;
+	public boolean isSameMatchCount(int inputCountOfMatch){
+		return getCountOfMatch() == inputCountOfMatch;
 	}
 }

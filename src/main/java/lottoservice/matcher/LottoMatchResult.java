@@ -60,7 +60,7 @@ public class LottoMatchResult {
 	public String toString() {
 		return result.entrySet().stream()
 			.filter(matchResult -> matchResult.getKey().getWinningMoney() > 0)
-			.map(it -> LottoMatchRank.isSecondPrize(it.getKey()) ?
+			.map(it -> it.getKey().isSecondPrize() ?
 				it.getKey().getCountOfMatch() + "개 일치, 보너스 볼 일치("
 					+ it.getKey().getWinningMoney() + "원)- "
 					+ it.getValue() + "개"
