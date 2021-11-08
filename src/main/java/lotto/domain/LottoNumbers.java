@@ -52,21 +52,6 @@ public class LottoNumbers {
         return Collections.unmodifiableList(numbers);
     }
 
-    public Rank getRank(LottoNumbers winningNumbers) {
-        int result = 0;
-        for (LottoNumber number : numbers) {
-            result = getIncreasedNumberIfContains(winningNumbers, number, result);
-        }
-        return Rank.of(result);
-    }
-
-    private int getIncreasedNumberIfContains(LottoNumbers winningNumbers, LottoNumber number, int result) {
-        if (winningNumbers.contains(number)) {
-            return result + 1;
-        }
-        return result;
-    }
-
     public boolean contains(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
     }

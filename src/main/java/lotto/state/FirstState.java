@@ -1,5 +1,6 @@
-package lotto.auto;
+package lotto.state;
 
+import lotto.auto.AutoLottoPrinter;
 import lotto.domain.*;
 
 import java.io.PrintStream;
@@ -35,8 +36,7 @@ public class FirstState implements State {
         return new SecondState(new SecondStateView(), lotteryTicket);
     }
 
-    @Override
-    public boolean isFinish() {
-        return false;
+    protected LotteryTicket getLotteryTicket() {
+        return lotteryTicket;
     }
 }

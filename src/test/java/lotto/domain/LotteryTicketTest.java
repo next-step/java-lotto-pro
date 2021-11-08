@@ -28,7 +28,7 @@ public class LotteryTicketTest {
     @DisplayName("Record에 당첨 기록을 한다")
     @Test
     void testWriteRecord() {
-        LottoNumbers winningNumber = LottoNumbers.of("1,2,3,4,5,6");
+        WinningLottoNumbers winningNumber = new WinningLottoNumbers(LottoNumbers.of("1,2,3,4,5,6"));
         Record record = new Record(lotteryTicket, winningNumber);
         assertThat(record.getWinningCount(Rank.FIRST)).isEqualTo(1);
     }

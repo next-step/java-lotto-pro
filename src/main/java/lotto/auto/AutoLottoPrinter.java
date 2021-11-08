@@ -1,6 +1,5 @@
 package lotto.auto;
 
-import lotto.domain.CollectionsShuffler;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPrinter;
 import lotto.domain.Shuffleable;

@@ -1,26 +1,40 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 public enum Rank {
-    FOURTH(3, 5_000),
-    THIRD(4, 50_000),
-    SECOND(5, 1_500_000),
-    FIRST(6, 2_000_000_000);
+    FIRST(6, 0, 2_000_000_000),
+    SECOND_WITH_BONUS(5, 1, 30_000_000),
+    SECOND(5, 0, 1_500_000),
+    THIRD(4, 0, 50_000),
+    FOURTH(3, 0, 5_000),
+    NONE(0, 0, 0);
 
-    private final int matchedCount;
+    private final int matchingCount;
+    private final int matchingBonusCount;
     private final Money winningMoney;
 
-    Rank(int matchedCount, long winningMoney) {
-        this.matchedCount = matchedCount;
+    Rank(int matchingCount, int matchingBonusCount, long winningMoney) {
+        this.matchingCount = matchingCount;
+        this.matchingBonusCount = matchingBonusCount;
         this.winningMoney = Money.of(winningMoney);
     }
 
-    public static Rank of(int matchedCount) {
+    public static Rank of(int matchingCount, int matchingBonusCount) {
         return Arrays.stream(values())
-                .filter(rank -> rank.matchedCount == matchedCount)
+                .filter(isMatched(matchingCount))
+                .filter(isMatchedBonusCount(matchingBonusCount))
                 .findFirst()
-                .orElse(null);
+                .orElse(NONE);
+    }
+
+    private static Predicate<Rank> isMatched(int matchingCount) {
+        return rank -> rank.matchingCount == matchingCount;
+    }
+
+    private static Predicate<Rank> isMatchedBonusCount(int matchingBonusCount) {
+        return rank -> rank.matchingBonusCount == 0 || rank.matchingBonusCount == matchingBonusCount;
     }
 
     public int getCount(Record record) {
@@ -31,8 +45,8 @@ public enum Rank {
         return winningMoney.multiply(getCount(record));
     }
 
-    public int getMatchedCount() {
-        return matchedCount;
+    public int getMatchingCount() {
+        return matchingCount;
     }
 
     public Money getWinningMoney() {

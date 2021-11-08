@@ -1,26 +1,16 @@
 package lotto.auto;
 
+import lotto.LottoApplication;
 import lotto.domain.CollectionsShuffler;
+import lotto.state.FirstState;
+import lotto.state.FirstStateView;
+import lotto.state.State;
 
 import java.util.Scanner;
 
-public class AutoLottoApplication {
-    private State state;
-
+public class AutoLottoApplication extends LottoApplication {
     public AutoLottoApplication(State state) {
-        this.state = state;
-    }
-
-    public void play() {
-        Scanner scanner = new Scanner(System.in);
-
-        while (!state.isFinish()) {
-            state.process(this, scanner);
-        }
-    }
-
-    public void setState(State state) {
-        this.state = state;
+        super(state);
     }
 
     public static void main(String[] args) {
