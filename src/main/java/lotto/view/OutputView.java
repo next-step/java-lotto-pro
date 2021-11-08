@@ -42,8 +42,16 @@ public class OutputView {
 
 	public static void printPurchasedLottoNumbers(List<Lotto> lottos) {
 		for (Lotto lotto : lottos) {
-			System.out.printf(PRINT_PURCHASED_LOTTO_NUMBERS, lotto.getLottoNumbersStringValues());
+			System.out.printf(PRINT_PURCHASED_LOTTO_NUMBERS, changeFormat(lotto));
 		}
+	}
+
+	private static String changeFormat(Lotto lotto) {
+		String lottoNumberStringValue = "";
+		for (String lottoNumber : lotto.getLottoNumbersStringValues()) {
+			lottoNumberStringValue += lottoNumber + ", ";
+		}
+		return lottoNumberStringValue.substring(0, lottoNumberStringValue.length() - 2);
 	}
 
 	public static void printLottoStatisticsBody(LottoStatistics lottoStatistics) {

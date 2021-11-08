@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
 	private static final int MATCHED_NUMBER_PLUS = 1;
 	private static final int NON_MATCHED_NUMBER = 0;
-	private static final String DELIMITER = ", ";
 	private final List<Integer> lottoNumbers;
 
 	public LottoNumbers(int... lottoNumbers) {
@@ -29,11 +28,12 @@ public class LottoNumbers {
 		return NON_MATCHED_NUMBER;
 	}
 
-	public String StringValues() {
-		String values = "";
+	public List<String> StringValues() {
+		List<String> stringValues = new ArrayList<>();
 		for (Integer lottoNumber : lottoNumbers) {
-			values += String.valueOf(lottoNumber) + DELIMITER;
+			stringValues.add(String.valueOf(lottoNumber));
 		}
-		return values.substring(0, values.length()-2);
+		return stringValues;
 	}
 }
+
