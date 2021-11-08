@@ -1,6 +1,7 @@
 package lotto.domain;
 
 public class LottoPurchase {
+
     private static final int LOTTO_PRICE = 1_000;
     private static final String INVALID_PURCHASE_AMOUNT = "로또는 1장에 1000원입니다. 구입금액을 다시 입력해주세요.";
     private int purchaseAmount;

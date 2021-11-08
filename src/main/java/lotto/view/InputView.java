@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import static java.util.Arrays.stream;
 
 public class InputView {
+
     private static final String INVALID_WINNING_NUMBER = "로또 번호를 정확하게 입력해주세요.";
     private static final Scanner SCAN = new Scanner(System.in);
     private static final String SEPARATOR_COMMA = ",";
