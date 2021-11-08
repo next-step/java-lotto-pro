@@ -42,14 +42,23 @@ public class LottoTickets {
         }
     }
 
+    public int getPurchaseMoney() {
+        return this.lottoTickets.size() * LottoShop.LOTTO_TICKET_PER_PRICE;
+    }
+
+    public String getLottoTicketsString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            stringBuilder.append(lottoTicket.getLottoTicketString());
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
     @Override
     public String toString() {
         return "LottoTickets{" +
                 "lottoTickets=" + lottoTickets +
                 '}';
-    }
-
-    public int getPurchaseMoney() {
-        return this.lottoTickets.size() * LottoShop.LOTTO_TICKET_PER_PRICE;
     }
 }

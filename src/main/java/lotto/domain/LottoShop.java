@@ -11,6 +11,10 @@ public class LottoShop {
         return purchaseMoney.divide(LOTTO_TICKET_PER_PRICE);
     }
 
+    public LottoTickets createLottoTickets(PurchaseCount purchaseCount) {
+        return lottoGenerator.createLottoTickets(purchaseCount);
+    }
+
     private void validatePurchaseAmount(Money purchaseMoney) {
         if (purchaseMoney.isLessThan(LOTTO_TICKET_PER_PRICE)) {
             throw new IllegalArgumentException("로또 1장의 가격은 " + LOTTO_TICKET_PER_PRICE + "원 입니다. (입력값: " + purchaseMoney.getMoney() + ")");

@@ -41,6 +41,18 @@ public class LottoTicket {
         return numbers.contains(number);
     }
 
+    public String getLottoTicketString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for (Number number : numbers) {
+            stringBuilder.append(number.getNumber());
+            stringBuilder.append(", ");
+        }
+        stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), "");
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
     @Override
     public String toString() {
         return "LottoTicket{" +

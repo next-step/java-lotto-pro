@@ -22,4 +22,8 @@ public class LottoRewardResult {
         }
         return (double) profitMoney / purchaseMoney;
     }
+
+    public int getWinningLottoTicketCount(LottoReward lottoReward) {
+        return lottoRewardMap.getOrDefault(lottoReward, 0);
+    }
 }
