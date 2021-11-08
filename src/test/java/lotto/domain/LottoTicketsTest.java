@@ -36,7 +36,7 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(lottoTicketsSource);
 
         // then
-        assertThat(resultView.getLottoResultString(lottoTickets)).isEqualTo(
+        assertThat(resultView.getLottoResultString(lottoTickets.toDTO())).isEqualTo(
                 "[1, 2, 3, 4, 5, 6]"
                         + "\n"
                         + "[7, 8, 9, 10, 11, 12]"

@@ -4,6 +4,7 @@ import lotto.domain.GameResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.dto.LottoTicketsDTO;
 
 public class LottoService {
 

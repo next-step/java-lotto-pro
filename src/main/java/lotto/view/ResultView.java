@@ -1,6 +1,8 @@
 package lotto.view;
 
 import lotto.domain.*;
+import lotto.dto.LottoTicketDTO;
+import lotto.dto.LottoTicketsDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,16 +22,16 @@ public class ResultView {
     public ResultView() {
     }
 
-    public void printBuyResult(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.count() + "개를 구매했습니다.");
-        String lottoResultStrings = getLottoResultString(lottoTickets);
+    public void printBuyResult(LottoTicketsDTO lottoTicketsDTO) {
+        System.out.println(lottoTicketsDTO.size() + "개를 구매했습니다.");
+        String lottoResultStrings = getLottoResultString(lottoTicketsDTO);
         System.out.println(lottoResultStrings);
     }
 
-    public String getLottoResultString(LottoTickets lottoTickets) {
-        List<String> resultStrings = lottoTickets.getLottoTickets()
+    public String getLottoResultString(LottoTicketsDTO lottoTicketsDTO) {
+        List<String> resultStrings = lottoTicketsDTO.getLottoTickets()
                 .stream()
-                .map(LottoTicket::toResultString)
+                .map(LottoTicketDTO::toString)
                 .collect(Collectors.toList());
         return String.join(JOIN_DELIMITER, resultStrings);
     }

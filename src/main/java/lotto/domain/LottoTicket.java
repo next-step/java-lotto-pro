@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.LottoTicketDTO;
 import lotto.exception.IllegalLottoNumberSizeException;
 import lotto.exception.NumberDuplicationException;
 
@@ -70,4 +71,7 @@ public class LottoTicket {
         return sameNumberCount;
     }
 
+    public LottoTicketDTO toDTO() {
+        return new LottoTicketDTO(lottoNumbers);
+    }
 }

@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.dto.LottoTicketDTO;
+import lotto.dto.LottoTicketsDTO;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,5 +47,12 @@ public class LottoTickets {
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public LottoTicketsDTO toDTO() {
+        return new LottoTicketsDTO(lottoTickets.stream()
+                .map(LottoTicket::toDTO)
+                .collect(Collectors
+                        .toList()));
     }
 }
