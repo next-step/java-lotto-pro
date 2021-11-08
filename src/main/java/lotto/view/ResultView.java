@@ -1,20 +1,20 @@
 package lotto.view;
 
 import lotto.model.Winning;
-import lotto.model.Winnings;
+import lotto.model.LottoResult;
 
 public class ResultView {
-    public void showWinningStatistics(Winnings winnings) {
+    public void showWinningStatistics(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(getWinningMessage(winnings, Winning.FOURTH_PRIZE));
-        System.out.println(getWinningMessage(winnings, Winning.THIRD_PRIZE));
-        System.out.println(getWinningMessage(winnings, Winning.SECOND_PRIZE));
-        System.out.println(getWinningMessage(winnings, Winning.FIRST_PRIZE));
+        System.out.println(getWinningMessage(lottoResult, Winning.FOURTH_PRIZE));
+        System.out.println(getWinningMessage(lottoResult, Winning.THIRD_PRIZE));
+        System.out.println(getWinningMessage(lottoResult, Winning.SECOND_PRIZE));
+        System.out.println(getWinningMessage(lottoResult, Winning.FIRST_PRIZE));
     }
 
-    private String getWinningMessage(Winnings winnings, Winning winning) {
-        final long winningCount = winnings.getCountOf(winning);
+    private String getWinningMessage(LottoResult lottoResult, Winning winning) {
+        final long winningCount = lottoResult.getCountOf(winning);
         return String.format("%d개 일치 (%s원)- %d개",
                 winning.getMatchCount(),
                 winning.getReward(),

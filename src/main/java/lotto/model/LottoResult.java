@@ -2,26 +2,26 @@ package lotto.model;
 
 import java.util.List;
 
-public class Winnings {
-    private final List<Winning> data;
+public class LottoResult {
+    private final List<Winning> winnings;
 
-    public Winnings(List<Winning> data) {
-        this.data = data;
+    public LottoResult(List<Winning> winnings) {
+        this.winnings = winnings;
     }
 
     public int size() {
-        return data.size();
+        return winnings.size();
     }
 
     public double getReturnOnInvestment(Money investment) {
-        final Money totalReward = data.stream()
+        final Money totalReward = winnings.stream()
                 .map(Winning::getReward)
                 .reduce(new Money(0), Money::plus);
         return totalReward.divideBy(investment);
     }
 
     public long getCountOf(Winning winning) {
-        return data.stream().filter(w -> w.equals(winning))
+        return winnings.stream().filter(w -> w.equals(winning))
                 .count();
     }
 }

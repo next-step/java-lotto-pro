@@ -12,7 +12,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static int howManyLottosCanIBuyWith(Money money) {
+    public static int getNumberOfLottosPurchasableWith(Money money) {
         if (money.isZero()) {
             return 0;
         }

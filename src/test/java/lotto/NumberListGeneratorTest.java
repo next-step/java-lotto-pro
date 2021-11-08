@@ -6,10 +6,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class NumberUtilsTest {
+class NumberListGeneratorTest {
     @Test
     void generateRandomNumbers() {
-        List<Integer> result = NumberUtils.generateRandomNumbers(6, 1, 45);
+        final List<Integer> result = NumberListGenerator.generateRandomNumbers(6, 1, 45);
         assertThat(result).isNotNull();
         assertThat(result.size()).isEqualTo(6);
         for (Integer integer : result) {

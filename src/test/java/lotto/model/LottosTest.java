@@ -22,9 +22,9 @@ public class LottosTest {
         final Lottos lottos = Lottos.generateAuto(5);
         final LottoNumbers winNumbers = LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        final Winnings winnings = lottos.calculateWinning(winNumbers);
+        final LottoResult lottoResult = lottos.calculateWinning(winNumbers);
 
-        assertThat(winnings.size()).isEqualTo(5);
+        assertThat(lottoResult.size()).isEqualTo(5);
     }
 
     @Test

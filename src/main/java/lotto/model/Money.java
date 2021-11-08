@@ -3,18 +3,18 @@ package lotto.model;
 import java.util.Objects;
 
 public class Money {
-    private final int value;
+    private final int money;
 
-    public Money(int value) {
-        this.value = value;
+    public Money(int money) {
+        this.money = money;
     }
 
     public double divideBy(Money money) {
-        return (double) this.value / money.value;
+        return (double) this.money / money.money;
     }
 
     public boolean isZero() {
-        return value == 0;
+        return money == 0;
     }
 
     @Override
@@ -22,24 +22,24 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
-        return value == money.value;
+        return this.money == money.money;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(money);
     }
 
     public Money multiplyBy(int value) {
-        return new Money(this.value * value);
+        return new Money(this.money * value);
     }
 
     public Money plus(Money money) {
-        return new Money(this.value + money.value);
+        return new Money(this.money + money.money);
     }
 
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return String.valueOf(money);
     }
 }
