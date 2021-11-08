@@ -5,7 +5,6 @@ import java.util.EnumMap;
 public class RankStatistics {
 
     public static final int DEFAULT_COUNT = 0;
-    private static final int INIT_COUNT = 1;
 
     private final EnumMap<Rank, Integer> rankStatistics;
 
