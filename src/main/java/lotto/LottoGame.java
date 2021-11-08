@@ -16,10 +16,11 @@ public class LottoGame {
 
     public static void start() {
         Payment payment = InputView.readPaymentHandlingException();
-        Collection<LottoNumbers> lottoNumbersCollection = new LottoNumberGenerator(payment).getLottoNumbersCollection();
+        Collection<LottoNumbers> lottoNumbersCollection =
+            new LottoNumberGenerator(payment).generateLottoNumbersCollection();
         OutputView.printLottoPurchase(lottoNumbersCollection);
         LottoNumbers winningNumbers = InputView.readWinningNumbersHandlingException();
-        MatchResult matchResult = new LottoMatcher(winningNumbers).getMatchResult(payment, lottoNumbersCollection);
+        MatchResult matchResult = new LottoMatcher(winningNumbers).match(payment, lottoNumbersCollection);
         OutputView.printLottoResult(matchResult);
     }
 }

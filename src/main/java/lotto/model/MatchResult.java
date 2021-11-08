@@ -9,7 +9,9 @@ import java.util.Objects;
 import lotto.model.enums.MatchCount;
 
 public class MatchResult {
-    private final Map<MatchCount, Integer> matchCountToCount = new HashMap<>();
+    private static final int BREAK_EVEN_RATE = 1;
+
+    private final Map<MatchCount, Integer> matchCountToCount;
     private final double rateOfReturn;
 
     public MatchResult(Payment payment, MatchCount... matchCounts) {
@@ -17,6 +19,7 @@ public class MatchResult {
     }
 
     public MatchResult(Payment payment, List<MatchCount> matchCounts) {
+        matchCountToCount = new HashMap<>();
         initialize();
 
         int prizeMoney = 0;
@@ -39,6 +42,14 @@ public class MatchResult {
 
     public double getRateOfReturn() {
         return rateOfReturn;
+    }
+
+    public boolean isLosingMoney() {
+        return rateOfReturn < BREAK_EVEN_RATE;
+    }
+
+    public int getCount(MatchCount matchCount) {
+        return matchCountToCount.get(matchCount);
     }
 
     @Override

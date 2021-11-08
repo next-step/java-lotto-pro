@@ -17,11 +17,11 @@ public class LottoMatcher {
         this.winningNumbers = winningNumbers;
     }
 
-    public MatchResult getMatchResult(Payment payment, Collection<LottoNumbers> lottoNumbersCollection) {
+    public MatchResult match(Payment payment, Collection<LottoNumbers> lottoNumbersCollection) {
         List<MatchCount> matchCounts = new ArrayList<>();
 
         for (LottoNumbers lottoNumbers : lottoNumbersCollection) {
-            MatchCount matchCount = lottoNumbers.getMatchCount(winningNumbers);
+            MatchCount matchCount = lottoNumbers.match(winningNumbers);
             matchCounts.add(matchCount);
         }
 

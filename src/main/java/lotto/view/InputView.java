@@ -49,9 +49,10 @@ public class InputView {
         if (!LOTTO_NUMBER_PATTERN.matcher(winningNumbers).matches()) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_INPUT_ERR_MSG);
         }
-        return new LottoNumbers(
-            Arrays.stream(winningNumbers.split(NUMBER_DELIMITER)).mapToInt(Integer::parseInt).toArray()
-        );
+        int[] parsedWinningNumbers = Arrays.stream(winningNumbers.split(NUMBER_DELIMITER))
+            .mapToInt(Integer::parseInt)
+            .toArray();
+        return new LottoNumbers(parsedWinningNumbers);
     }
 
     private static <T> T handleException(final Supplier<T> supplier) {

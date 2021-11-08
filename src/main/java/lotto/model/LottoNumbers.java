@@ -1,11 +1,12 @@
 package lotto.model;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import lotto.model.enums.MatchCount;
 
@@ -16,11 +17,11 @@ public class LottoNumbers {
     private final SortedSet<Number> numbers;
 
     public LottoNumbers(int... numbers) {
-        this(() -> Arrays.stream(numbers).mapToObj(Number::ofValue).collect(Collectors.toSet()));
+        this(Arrays.stream(numbers).mapToObj(Number::ofValue).collect(toSet()));
     }
 
-    public LottoNumbers(NumberSupplier numberSupplier) {
-        this.numbers = Collections.unmodifiableSortedSet(new TreeSet<>(numberSupplier.getNumbers()));
+    public LottoNumbers(Set<Number> numbers) {
+        this.numbers = Collections.unmodifiableSortedSet(new TreeSet<>(numbers));
         validate();
     }
 
@@ -30,23 +31,13 @@ public class LottoNumbers {
         }
     }
 
-    public MatchCount getMatchCount(LottoNumbers other) {
-        return other.getMatchCount(this.numbers);
+    public MatchCount match(LottoNumbers other) {
+        return other.match(this.numbers);
     }
 
-    private MatchCount getMatchCount(Set<Number> numbers) {
-        int matchCount = 0;
-        for (Number number : numbers) {
-            matchCount += getMatchCount(number);
-        }
+    private MatchCount match(Set<Number> numbers) {
+        int matchCount = (int)numbers.stream().filter(this.numbers::contains).count();
         return MatchCount.valueOf(matchCount);
-    }
-
-    private int getMatchCount(Number other) {
-        if (this.numbers.contains(other)) {
-            return 1;
-        }
-        return 0;
     }
 
     @Override

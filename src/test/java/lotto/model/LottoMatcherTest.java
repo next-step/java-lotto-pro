@@ -12,7 +12,7 @@ public class LottoMatcherTest {
 
     @Test
     void getMatchResult() {
-        assertThat(new LottoMatcher(1, 2, 3, 4, 5, 6).getMatchResult(
+        assertThat(new LottoMatcher(1, 2, 3, 4, 5, 6).match(
             PAYMENT,
             Arrays.asList(
                 new LottoNumbers(1, 2, 3, 7, 8, 9),

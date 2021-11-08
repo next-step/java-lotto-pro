@@ -1,10 +1,6 @@
 package lotto.view;
 
-import static lotto.model.enums.MatchCount.*;
-
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.StringJoiner;
 
 import lotto.model.LottoNumbers;
@@ -35,22 +31,18 @@ public class OutputView {
     public static void printLottoResult(MatchResult matchResult) {
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
         stringJoiner.add(RESULT_HEADER);
-        for (MatchCount matchCount : getMatchCountsWithWinningMoney()) {
+        for (MatchCount matchCount : MatchCount.getMatchCountsWithWinningMoney()) {
             stringJoiner.add(
                 String.format(MATCH_STATEMENT_FORMAT, matchCount.getCountOfMatch(), matchCount.getWinningMoney(),
-                    matchResult.getMatchCountToCount().get(matchCount)));
+                    matchResult.getCount(matchCount)));
         }
         stringJoiner.add(String.format(RATE_OF_RETURN_STATEMENT_FORMAT, matchResult.getRateOfReturn()));
         System.out.println();
-        System.out.println(stringJoiner + getTrailingStatement(matchResult.getRateOfReturn()));
+        System.out.println(stringJoiner + getTrailingStatement(matchResult));
     }
 
-    private static List<MatchCount> getMatchCountsWithWinningMoney() {
-        return Arrays.asList(THREE, FOUR, FIVE, SIX);
-    }
-
-    private static String getTrailingStatement(double rateOfReturn) {
-        if (rateOfReturn < 1) {
+    private static String getTrailingStatement(MatchResult matchResult) {
+        if (matchResult.isLosingMoney()) {
             return FAILURE_STATEMENT;
         }
         return SUCCESS_STATEMENT;
