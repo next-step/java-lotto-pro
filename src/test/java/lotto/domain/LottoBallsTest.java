@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.LottoBallCountException;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,23 +22,10 @@ class LottoBallsTest {
 
         ThrowableAssert.ThrowingCallable throwingCallable = () -> new LottoBalls(ballList);
 
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(LottoBallCountException.class)
                 .isThrownBy(throwingCallable)
                 .withMessageContaining("로또 공 개수가 6개가 아닙니다");
 
-    }
-
-    @DisplayName("문자열 변환")
-    @Test
-    void convertString() {
-        LottoBalls balls = new LottoBalls(Arrays.asList(
-                new LottoBall(1), new LottoBall(2), new LottoBall(3),
-                new LottoBall(4), new LottoBall(5), new LottoBall(6)
-        ));
-
-        String result = balls.toString();
-
-        assertThat(result).isEqualTo("1,2,3,4,5,6");
     }
 
     @DisplayName("당첨번호와 일치하는 번호의 개수를 구한다")
@@ -56,6 +44,18 @@ class LottoBallsTest {
         int result = balls.countContainingWinNumbers(winningBalls);
 
         assertThat(result).isEqualTo(3);
+    }
+
+    @DisplayName("보너스볼을 가지고 있으면 true 반환")
+    @Test
+    void hasBonusBall() {
+        LottoBalls balls = new LottoBalls(Arrays.asList(
+                new LottoBall(1), new LottoBall(2), new LottoBall(3),
+                new LottoBall(4), new LottoBall(5), new LottoBall(6)
+        ));
+        LottoBall bonusBall = new LottoBall(5);
+
+        assertThat(balls.hasBonusBall(bonusBall)).isTrue();
     }
 
 }

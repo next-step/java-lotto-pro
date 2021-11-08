@@ -12,28 +12,35 @@ class RankingTest {
     @DisplayName("6일경우 FIRST 반환")
     @Test
     void first() {
-        Ranking ranking = Ranking.find(6);
+        Ranking ranking = Ranking.find(6, false);
         assertThat(ranking).isEqualTo(Ranking.FIRST);
+    }
+
+    @DisplayName("5이면서 보너스볼을 가지면 SECOND_BONUS 반환")
+    @Test
+    void secondBonus() {
+        Ranking ranking = Ranking.find(5, true);
+        assertThat(ranking).isEqualTo(Ranking.SECOND_BONUS);
     }
 
     @DisplayName("5일경우 SECOND 반환")
     @Test
     void second() {
-        Ranking ranking = Ranking.find(5);
+        Ranking ranking = Ranking.find(5, false);
         assertThat(ranking).isEqualTo(Ranking.SECOND);
     }
 
     @DisplayName("4일경우 THIRD 반환")
     @Test
     void third() {
-        Ranking ranking = Ranking.find(4);
+        Ranking ranking = Ranking.find(4, false);
         assertThat(ranking).isEqualTo(Ranking.THIRD);
     }
 
     @DisplayName("3일경우 FOURTH 반환")
     @Test
     void fourth() {
-        Ranking ranking = Ranking.find(3);
+        Ranking ranking = Ranking.find(3, false);
         assertThat(ranking).isEqualTo(Ranking.FOURTH);
     }
 
@@ -41,7 +48,7 @@ class RankingTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2})
     void etcCount(int count) {
-        Ranking ranking = Ranking.find(count);
+        Ranking ranking = Ranking.find(count, false);
         assertThat(ranking).isEqualTo(Ranking.DROP);
     }
 

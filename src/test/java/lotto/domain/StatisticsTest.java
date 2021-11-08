@@ -36,7 +36,7 @@ class StatisticsTest {
     @DisplayName("10,000원 넣어서 5,000원 당첨되면 수익률은 0.50 이다.")
     @Test
     void test() {
-        Money inputMoney = new Money(10000);
+        Money inputMoney = new Money(10_000);
         statistics.record(Ranking.FOURTH);
 
         double rate = statistics.calculateEarningRate(inputMoney);

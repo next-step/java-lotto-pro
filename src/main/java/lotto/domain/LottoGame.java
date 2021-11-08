@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import jdk.dynalink.beans.StaticClass;
-
 import java.util.List;
 
 public class LottoGame {
@@ -21,25 +19,17 @@ public class LottoGame {
         return tryCount;
     }
 
-    public Statistics calculateLottoResult(LottoBalls winLottoBalls) {
+    public List<LottoBalls> getLottoBallsList() {
+        return lottoBallsList;
+    }
+
+    public Statistics calculateLottoResult(WinningBalls winningBalls) {
         Statistics statistics = new Statistics();
         for (LottoBalls lottoBalls : lottoBallsList) {
-            int count = lottoBalls.countContainingWinNumbers(winLottoBalls);
-            Ranking ranking = Ranking.find(count);
+            Ranking ranking = winningBalls.calculateRanking(lottoBalls);
             statistics.record(ranking);
         }
         return statistics;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (LottoBalls lottoBalls : lottoBallsList) {
-            builder.append("[");
-            builder.append(lottoBalls.toString());
-            builder.append("]");
-            builder.append("\n");
-        }
-        return builder.toString();
-    }
 }

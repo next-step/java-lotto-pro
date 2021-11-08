@@ -6,19 +6,18 @@ import lotto.view.ResultView;
 
 public class LottoGameController {
     public void start() {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
-
-        Money money = inputView.inputMoney();
+        Money money = InputView.inputMoney();
         LottoGame lottoGame = LottoStore.sell(money);
 
-        resultView.printLottoTryCount(lottoGame);
-        resultView.printLottoBalls(lottoGame);
+        ResultView.printLottoTryCount(lottoGame);
+        ResultView.printLottoBalls(lottoGame);
 
-        LottoBalls winLottoBalls = new LottoBalls(inputView.inputWinNumbers());
-        Statistics statistics = lottoGame.calculateLottoResult(winLottoBalls);
+        LottoBalls winLottoBalls = new LottoBalls(InputView.inputWinNumbers());
+        LottoBall bonusBall = InputView.inputBonusNumber();
+        WinningBalls winningBalls = new WinningBalls(winLottoBalls, bonusBall);
+        Statistics statistics = lottoGame.calculateLottoResult(winningBalls);
 
-        resultView.printLottoResult(money, statistics);
-
+        ResultView.printLottoResult(money, statistics);
     }
+
 }
