@@ -41,7 +41,9 @@ public class Lottos {
 
 	@Override
 	public String toString() {
-		return lottos.stream().map(Object::toString).collect(Collectors.joining("\n"));
+		return lottos.stream()
+			.map(Object::toString)
+			.collect(Collectors.joining("\n"));
 	}
 
 	@Override

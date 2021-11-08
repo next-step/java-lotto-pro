@@ -1,7 +1,7 @@
 package lotto.model;
 
 public enum LottoResult {
-	NOT_MATCH(0), MATCH_THREE(5000), MATCH_FOUR(50000), MATCH_FIVE(1500000), MATCH_SIX(2000000000);
+	NOT_MATCH(0), MATCH_THREE(5_000), MATCH_FOUR(50_000), MATCH_FIVE(1_500_000), MATCH_SIX(2_000_000_000);
 
 	private final int reward;
 	LottoResult(int reward) {

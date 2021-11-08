@@ -28,7 +28,9 @@ public class WinningLottoNumbers extends LottoNumbers {
 	 * @return 당첨결과
 	 */
 	public LottoResult result(Lotto lotto) {
-		int match = (int)numbers.stream().filter(lotto::contains).count();
+		int match = (int)numbers.stream()
+			.filter(lotto::contains)
+			.count();
 		return LottoResult.getResult(match);
 	}
 }
