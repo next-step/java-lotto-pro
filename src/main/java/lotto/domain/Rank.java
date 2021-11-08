@@ -1,7 +1,6 @@
 package lotto.domain;
 
 
-import sun.management.StackTraceElementCompositeData;
 
 import java.util.Arrays;
 

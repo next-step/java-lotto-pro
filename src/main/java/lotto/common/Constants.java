@@ -1,6 +1,5 @@
 package lotto.common;
 
-import java.util.Locale;
 
 /**
  * packageName : lotto.common

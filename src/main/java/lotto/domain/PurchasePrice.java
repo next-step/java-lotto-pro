@@ -1,11 +1,7 @@
 package lotto.domain;
 
-import lotto.common.Constants;
 import lotto.common.exceptions.CustomEmptyException;
 import lotto.common.utils.StringUtil;
-import lotto.ui.ResultView;
-
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;

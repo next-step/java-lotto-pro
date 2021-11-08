@@ -3,7 +3,6 @@ package lotto.ui;
 import lotto.common.Constants;
 import lotto.common.utils.StringUtil;
 import lotto.domain.Lottos;
-import lotto.domain.PurchasePrice;
 import lotto.domain.Rank;
 import lotto.domain.Ranks;
 

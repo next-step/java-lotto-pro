@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.common.Constants;
-import lotto.ui.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;

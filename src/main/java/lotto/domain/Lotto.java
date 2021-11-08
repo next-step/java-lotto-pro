@@ -3,7 +3,6 @@ package lotto.domain;
 
 import lotto.common.exceptions.CustomEmptyException;
 import lotto.common.utils.StringUtil;
-import lotto.ui.ResultView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
