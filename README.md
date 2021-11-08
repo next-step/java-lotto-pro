@@ -23,9 +23,17 @@
 `WinningLotto`는 `Bonus` 와 중복될 수 없다
 
 로또들 (`Lottos`)
-`Lottos`는 `RandomNumbers`를 가진다
-`Lottos`는 로또 개수(`count`)를 받아 로또들을 반환한다
+`Lottos`는 `AutoLottos`와 `ManualLottos`를 가진다
 `Lottos`는 당첨 로또와 비교하여 `Rank`들을 반환한다
+
+수동 로또들(`ManualLottos`)
+`ManualLottos`는 `Lotto` 리스트를 가진다
+`ManualLottos`는 로또 숫자 문자열로 생성한다
+
+자동 로또들(`AutoLottos`)
+`AutoLottos`는 `Lotto` 리스트를 가진다
+`AutoLottos`는 로또 숫자 문자열로 생성한다
+`AutoLottos`는 `Numbers`와 `count`를 가진다
 
 로또 번호 (`LottoNumber`)
 `LottoNumber`는 `number`를 가진다
@@ -51,15 +59,6 @@
 
 보너스(`Bonus`)
 `Bonus`는 보너스 숫자를 가진다
-
-수동 로또들(`ManualLottos`)
-`ManualLottos`는 `Lotto` 리스트를 가진다
-`ManualLottos`는 로또 숫자 문자열로 생성한다
-
-수동 로또들(`AutoLottos`)
-`AutoLottos`는 `Lotto` 리스트를 가진다
-`AutoLottos`는 로또 숫자 문자열로 생성한다
-`AutoLottos`는 `Numbers`와 `count`를 가진다
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)

@@ -17,7 +17,11 @@ public class AutoLottos {
                 .collect(Collectors.toList());
     }
 
+    public AutoLottos(Money money, RandomNumbers randomNumbers) {
+        this(money.buy(), randomNumbers);
+    }
+
     public List<Lotto> getAutoLottos() {
-        return Collections.unmodifiableList(autoLottos);
+        return autoLottos;
     }
 }

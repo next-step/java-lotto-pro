@@ -3,9 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.LottoView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class LottoGame {
 
@@ -17,11 +15,11 @@ public class LottoGame {
 
     public void start() {
         final Money money = LottoView.getMoney();
-
         final int manualCount = LottoView.getManualCount();
-        final ManualLottos manualLottos = LottoView.getManualLottos(manualCount);
 
-        final Lottos lottos = new Lottos(money, randomNumbers);
+        final ManualLottos manualLottos = LottoView.getManualLottos(manualCount);
+        final AutoLottos autoLottos = new AutoLottos(money, randomNumbers);
+        final Lottos lottos = new Lottos(autoLottos, manualLottos);
 
         LottoView.displayCount(money);
         LottoView.displayLottos(lottos);
