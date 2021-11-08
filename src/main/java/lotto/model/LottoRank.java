@@ -1,22 +1,22 @@
 package lotto.model;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public enum LottoRank {
-	FIRST(6, 0, 2_000_000_000),
-	SECOND(5, 1, 30_000_000),
-	THIRD(5, 0, 1_500_000),
-	FORTH(4, 0, 50_000),
-	FIFTH(3, 0, 5_000),
-	NOTHING(0, 0, 0);
+	FIRST(6, 0, Money.from(2_000_000_000)),
+	SECOND(5, 1, Money.from(30_000_000)),
+	THIRD(5, 0, Money.from(1_500_000)),
+	FORTH(4, 0, Money.from(50_000)),
+	FIFTH(3, 0, Money.from(5_000)),
+	NOTHING(0, 0, Money.from(0));
 
-	private int containsCount;
-	private int bonusCount;
-	private int money;
+	private final int containsCount;
+	private final int bonusCount;
+	private final Money money;
 
-	LottoRank(int containsCount, int bonusCount, int money) {
+	LottoRank(int containsCount, int bonusCount, Money money) {
 		this.containsCount = containsCount;
 		this.bonusCount = bonusCount;
 		this.money = money;
@@ -52,7 +52,7 @@ public enum LottoRank {
 	}
 
 	public static Map<LottoRank, Integer> generateRankCodeMap() {
-		Map<LottoRank, Integer> rankCodeMap = new HashMap<>();
+		Map<LottoRank, Integer> rankCodeMap = new EnumMap<>(LottoRank.class);
 		for (LottoRank rankCode : LottoRank.values()) {
 			rankCodeMap.put(rankCode, NOTHING.containsCount);
 		}
@@ -60,11 +60,11 @@ public enum LottoRank {
 	}
 
 	public static int getRankMoney(LottoRank lottoRank, int count) {
-		return lottoRank.money * count;
+		return lottoRank.money.getMoney() * count;
 	}
 
 	public static int getMoney(LottoRank lottoRank) {
-		return LottoRank.valueOf(lottoRank.name()).money;
+		return LottoRank.valueOf(lottoRank.name()).money.getMoney();
 	}
 
 	public static int containsCount(LottoRank lottoRank) {
