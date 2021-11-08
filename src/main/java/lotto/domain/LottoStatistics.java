@@ -17,6 +17,10 @@ public class LottoStatistics {
         return new LottoRewardResult(createLottoRewardStatisticsMap(winningCountStatisticsMap));
     }
 
+    public double getRateOfProfit(LottoTickets lottoTickets, LottoRewardResult lottoRewardResult) {
+        return lottoRewardResult.getRateOfProfit(lottoTickets.getPurchaseMoney());
+    }
+
     private Map<LottoReward, Integer> createLottoRewardStatisticsMap(Map<Integer, Integer> winningCountStatisticsMap) {
         Map<LottoReward, Integer> lottoRewardMap = new HashMap<>();
         for (int winningCount : winningCountStatisticsMap.keySet()) {

@@ -48,4 +48,8 @@ public class LottoTickets {
                 "lottoTickets=" + lottoTickets +
                 '}';
     }
+
+    public int getPurchaseMoney() {
+        return this.lottoTickets.size() * LottoShop.LOTTO_TICKET_PER_PRICE;
+    }
 }

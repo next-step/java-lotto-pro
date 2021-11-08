@@ -14,4 +14,12 @@ public class LottoRewardResult {
     public Map<LottoReward, Integer> getLottoRewardMap() {
         return lottoRewardMap;
     }
+
+    public double getRateOfProfit(int purchaseMoney) {
+        long profitMoney = 0;
+        for (LottoReward lottoReward : lottoRewardMap.keySet()) {
+            profitMoney += lottoReward.getRewardMoney() * lottoRewardMap.get(lottoReward);
+        }
+        return (double) profitMoney / purchaseMoney;
+    }
 }
