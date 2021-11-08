@@ -12,6 +12,7 @@ public class LottoMessage {
     public static final String ASK_BUY_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
     public static final String BUY_AMOUNT_MESSAGE = "%s개를 구매했습니다.";
     public static final String ASK_PRIZE_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String ASK_BONUS_LOTTO_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     public static final String RESULT_STATS_TITLE = "당첨 통계";
     public static final String RESULT_SEPARATE_LINE = "---------";
     public static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f 입니다.";
@@ -39,5 +40,9 @@ public class LottoMessage {
 
     public static void showProfitRate(BuyAmount buyAmount, LottoResults lottoResults) {
         System.out.printf(PROFIT_RATE_MESSAGE, buyAmount.getProfitRate(lottoResults.getTotalReward()));
+    }
+
+    public static void showAskBonusNumber() {
+        System.out.println(ASK_BONUS_LOTTO_NUMBER_MESSAGE);
     }
 }
