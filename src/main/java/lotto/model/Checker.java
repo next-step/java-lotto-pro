@@ -3,39 +3,44 @@ package lotto.model;
 import java.util.LinkedHashMap;
 import java.util.function.Predicate;
 
-import static lotto.common.Constants.GET_NUMBER_COUNT;
-
 public class Checker {
 
-    private LinkedHashMap<Integer, Integer> results;
+    private LinkedHashMap<Rank, Integer> results;
 
-    public Checker(Games games, WinningNumbers winningNumbers) {
+    public Checker(Games games, WinningNumbers winningNumbers, WinningNumber bonusNumber) {
         init();
 
         for (Game game : games.getList()) {
             int matchedCount = matchCount(game, winningNumbers);
-            results.put(matchedCount, results.get(matchedCount) + 1);
+            boolean matchBonus = isMatchedBonusNumber(game, bonusNumber);
+            Rank rank = Rank.valueOf(matchedCount, matchBonus);
+            results.put(rank, results.get(rank) + 1);
         }
     }
 
     private void init() {
         results = new LinkedHashMap<>();
-
-        for (int i = 0; i <= GET_NUMBER_COUNT; i++) {
-            results.put(i, 0);
+        for (Rank rank : Rank.values()) {
+            results.put(rank, 0);
         }
     }
 
     private int matchCount(Game game, WinningNumbers winningNumbers) {
         return (int) game.getNumbers().stream()
-            .filter(number -> winningNumbers.getValues()
-                    .stream()
-                    .map(winningNumber -> winningNumber.getValue())
-                    .anyMatch(Predicate.isEqual(number)))
-            .count();
+                .filter(number -> winningNumbers.getValues()
+                        .stream()
+                        .map(winningNumber -> winningNumber.getValue())
+                        .anyMatch(Predicate.isEqual(number)))
+                .count();
     }
 
-    public LinkedHashMap<Integer, Integer> getResults() {
+    private boolean isMatchedBonusNumber(Game game, WinningNumber bonusNumber) {
+        return game.getNumbers()
+                .stream()
+                .anyMatch(number -> number == bonusNumber.getValue());
+    }
+
+    public LinkedHashMap<Rank, Integer> getResults() {
         return results;
     }
 

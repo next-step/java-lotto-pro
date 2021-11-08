@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.model.Checker;
-import lotto.model.GameCount;
-import lotto.model.Games;
-import lotto.model.WinningNumbers;
+import lotto.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,13 +21,14 @@ public class CheckerTests {
         GameCount gameCount = new GameCount(purchaseAmount);
         Games games = new Games(gameCount.getValue());
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
-        Checker checker = new Checker(games, winningNumbers);
+        BonusNumber bonusNumber = new BonusNumber("10", winningNumbers);
+        Checker checker = new Checker(games, winningNumbers, bonusNumber);
 
         assertAll(
                 () -> assertThat(checker.getResults())
                         .isInstanceOf(LinkedHashMap.class)
                         .isNotEmpty(),
-                () -> assertThat(checker.getResults().size()).isEqualTo(GET_NUMBER_COUNT + 1)
+                () -> assertThat(checker.getResults().size()).isEqualTo(GET_NUMBER_COUNT)
         );
     }
 
