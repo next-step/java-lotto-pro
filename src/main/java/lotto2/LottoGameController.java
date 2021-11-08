@@ -21,27 +21,42 @@ public class LottoGameController {
 	}
 
 	private static PurchaseResDto purchaseLotto() {
+
 		PurchaseReqDto purchaseReqDto = InputView.getPurchaseInfo();
 		Money purchaseMoney = Money.of(purchaseReqDto.getMoney());
 		LottoTickets manualTickets = LottoTickets.ofIntList(purchaseReqDto.getManualLottoNumbers());
-		PositiveNumber autoLottoCount = Purchase.calculateCount(purchaseMoney);
+
+		PositiveNumber autoLottoCount = getAutoLottoCount(purchaseMoney, manualTickets.getSize());
 		LottoTickets autoLottoTickets = LottoTicketGenerator.generateByCount(autoLottoCount);
 		LottoTickets totalTickets = LottoTickets.combine(manualTickets, autoLottoTickets);
+
 		ResultView.showLottoNumbers(manualTickets.getSize(), autoLottoTickets.getSize(), totalTickets);
+
 		return PurchaseResDto.of(manualTickets.getSize(),
 			autoLottoTickets.getSize(),
 			totalTickets,
 			purchaseReqDto.getMoney());
+
 	}
 
 	private static void showWinningResult(PurchaseResDto dto) {
+
 		WinningReqDto winningReqDto = InputView.getWinningInfo();
-		WinningLotto winningLotto = WinningLotto.of(winningReqDto.getWinningNumbers(),
+
+		WinningLotto winningLotto = WinningLotto.of(
+			winningReqDto.getWinningNumbers(),
 			winningReqDto.getBonusNumber());
 		Money purchaseMoney = Money.of(dto.getPurchaseMoney());
 		LottoStatics lottoStatics = LottoStatics.of(dto.getTotalTickets()
 			, winningLotto, purchaseMoney);
+
 		ResultView.showPrize(lottoStatics.getRankCount(), lottoStatics.getProfit());
+	}
+
+	private static PositiveNumber getAutoLottoCount(Money purchaseMoney, int manualTicketSize) {
+		PositiveNumber autoLottoCount = Purchase.calculateCount(purchaseMoney);
+		autoLottoCount.minus(manualTicketSize);
+		return autoLottoCount;
 	}
 
 }

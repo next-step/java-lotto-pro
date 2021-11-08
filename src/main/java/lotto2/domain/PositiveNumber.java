@@ -2,7 +2,7 @@ package lotto2.domain;
 
 public class PositiveNumber {
 
-	private final int number;
+	private int number;
 
 	private PositiveNumber(int number) {
 		this.number = number;
@@ -47,5 +47,9 @@ public class PositiveNumber {
 
 	public boolean isGreaterThan(PositiveNumber other) {
 		return this.number > other.number;
+	}
+
+	public void minus(int number) {
+		this.number -= number;
 	}
 }
