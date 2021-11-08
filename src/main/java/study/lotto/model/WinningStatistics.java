@@ -10,19 +10,22 @@ public class WinningStatistics {
     private final RankStatistics rankStatistics; // 당첨 등수 통계
 
     private WinningStatistics(final TicketLotteryBundle ticketLotteryBundle, final WinningLottery winningLottery) {
-
         final List<Rank> refereedRanks = LottoDiscriminator.referee(winningLottery, ticketLotteryBundle);
-        BigDecimal income = BigDecimal.ZERO;
         final RankStatistics rankStatistics = RankStatistics.getInstance();
+        final BigDecimal income = setUp(refereedRanks, rankStatistics);
+
+        this.incomeRate = IncomeRate.valueOf(income, ticketLotteryBundle.size());
+        this.rankStatistics = rankStatistics;
+    }
+
+    private BigDecimal setUp(List<Rank> refereedRanks, RankStatistics rankStatistics) {
+        BigDecimal income = BigDecimal.ZERO;
         for (final Rank rank : refereedRanks) {
             final BigDecimal winningMoney = BigDecimal.valueOf(rank.getWinningMoney());
             income = income.add(winningMoney);
             rankStatistics.countUpByRank(rank);
         }
-
-        final int ticketCount = ticketLotteryBundle.size();
-        this.incomeRate = IncomeRate.valueOf(income, ticketCount);
-        this.rankStatistics = rankStatistics;
+        return income;
     }
 
     public static WinningStatistics valueOf(final TicketLotteryBundle ticketLotteryBundle, final WinningLottery winningLottery) {
