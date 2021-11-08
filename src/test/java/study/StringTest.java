@@ -1,7 +1,5 @@
 package study;
 
-import lotto.common.Constants;
-import lotto.domain.Rank;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -3,7 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.BDDMockito;
 
 import java.util.Arrays;
 import java.util.List;
