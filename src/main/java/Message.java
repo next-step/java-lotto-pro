@@ -6,6 +6,7 @@ public enum Message {
 	BOUGHT_LOTTO("%d개를 구매했습니다."),
 	WINNING_STATISTICS("당첨 통계"),
 	SEPARATOR("---------"),
+	MATCH_WINNING_BONUS(", 보너스 볼 일치"),
 	COUNT_MATCHING("%d개 일치%s(%d%s)- %d개"),
 	EARNING_RATE("총 수익률은 %.2f입니다."),
 	EARNING_RATE_NOTE("(기준이 1이기 때문에 결과적으로 손해라는 의미임)"),

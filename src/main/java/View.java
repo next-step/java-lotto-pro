@@ -35,18 +35,25 @@ public class View {
 			LottoWinningRank.THIRD,
 			LottoWinningRank.SECOND,
 			LottoWinningRank.FIRST
-		).forEach(rank -> outLottoMatchingCount(rank, statistics));
+		).forEach(rank -> outNumOfLottosByRank(rank, statistics));
 
 		outLottoEarningRate(statistics.earningRate());
 	}
 
-	private void outLottoMatchingCount(LottoWinningRank rank, LottoWinningStatistics statistics) {
+	private void outNumOfLottosByRank(LottoWinningRank rank, LottoWinningStatistics statistics) {
 		final int matchingCount = rank.getMatchingCount();
+		final String matchingBonusMessage = getMatchingBonusMessageBy(rank);
 		final int prizeKRW = rank.getPrizeKRW();
-		final String message = rank.getExtraMessage();
 		final Long numOfLottos = statistics.countLottos(rank);
 		println(String.format(Message.COUNT_MATCHING.getContent()
-			, matchingCount, message, prizeKRW, LottoStore.KRW_UNIT, numOfLottos));
+			, matchingCount, matchingBonusMessage, prizeKRW, LottoStore.KRW_UNIT, numOfLottos));
+	}
+
+	private String getMatchingBonusMessageBy(LottoWinningRank rank) {
+		if (LottoWinningRank.SECOND == rank) {
+			return Message.MATCH_WINNING_BONUS.getContent();
+		}
+		return "";
 	}
 
 	private void outLottoEarningRate(double earningRate) {
