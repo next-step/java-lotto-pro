@@ -2,6 +2,8 @@ package lotto.ui;
 
 import lotto.domain.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoController {
@@ -34,6 +36,22 @@ public class LottoController {
     private int inputBuyPrice() {
         LottoMessage.showAskBuyPriceMessage();
         return Integer.parseInt(scanner.nextLine());
+    }
+
+    private int getManualBuyAmount() {
+        LottoMessage.showAskManualBuyAmountMessage();
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    private List<LottoNumbers> getManualLottoNumbers(BuyAmount buyAmount) throws Exception {
+        LottoMessage.showAskManualBuyLottoNumbersMessage();
+        List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < buyAmount.getManualAmount(); i++) {
+            String lottoNumbers = scanner.nextLine();
+            manualLottoNumbers.add(new LottoNumbers(lottoNumbers));
+        }
+
+        return manualLottoNumbers;
     }
 
     private void showBuyStats(BuyAmount buyAmount, LottoNumbersGroup lottoNumbersGroup) {
