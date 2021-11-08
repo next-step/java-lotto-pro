@@ -140,4 +140,10 @@ public class OverflowValidator implements MachineValidator {
 }
 ```
 
+## Step4. 로또 2등
++ 사용자의 입력을 추가 "보너스 볼을 입력해 주세요.
+
+## 당첨 통계
++ 5개 일치, 보너스 볼 일치(30000000원) - 0개
+
 
