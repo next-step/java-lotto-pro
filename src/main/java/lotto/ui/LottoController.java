@@ -21,7 +21,8 @@ public class LottoController {
         int bonusNumber = inputBonusNumber();
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
-        showResults(buyAmount, lottoNumbersGroup, prizeLottoNumbers, bonusLottoNumber);
+        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers, bonusLottoNumber);
+        showResults(buyAmount, lottoResults);
     }
 
     private int inputBonusNumber() {
@@ -44,9 +45,7 @@ public class LottoController {
         return scanner.nextLine();
     }
 
-    private void showResults(BuyAmount buyAmount, LottoNumbersGroup lottoNumbersGroup,
-                             LottoNumbers prizeLottoNumbers, LottoNumber bonusLottoNumber) {
-        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers, bonusLottoNumber);
+    private void showResults(BuyAmount buyAmount, LottoResults lottoResults) {
         LottoResultsView lottoResultsView = new LottoResultsView(buyAmount, lottoResults);
         lottoResultsView.showResults();
     }
