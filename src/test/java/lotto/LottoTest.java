@@ -163,8 +163,8 @@ public class LottoTest {
         List<String> numbers = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
         Lottos manualLottos = lottoMachine.issueManual(numbers);
         Lottos autoLottos = lottoMachine.issueAuto(new Amount(11_000));
-        manualLottos.addLottos(autoLottos);
-        assertThat(manualLottos.count()).isEqualTo(14);
+        Lottos totalLottos = manualLottos.addLottos(autoLottos);
+        assertThat(totalLottos.count()).isEqualTo(14);
     }
 
     @DisplayName("입력받은 금액에서 수동으로 살 로또 개수 빼는 기능 테스트")

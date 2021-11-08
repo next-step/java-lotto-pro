@@ -3,7 +3,7 @@ package lotto.ui;
 public class ConsoleInputView implements InputView {
 
     @Override
-    public String readAmount() {
+    public String readPurchaseAmount() {
         return UIBufferedReaders.readLine();
     }
 
@@ -14,6 +14,16 @@ public class ConsoleInputView implements InputView {
 
     @Override
     public String readWinBonusLottoNumber() {
+        return UIBufferedReaders.readLine();
+    }
+
+    @Override
+    public String readManualLottosCount() {
+        return UIBufferedReaders.readLine();
+    }
+
+    @Override
+    public String readManualLottosNumber() {
         return UIBufferedReaders.readLine();
     }
 

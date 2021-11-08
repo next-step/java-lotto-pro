@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Amount {
 
-    protected final long amount;
     private static final int MIN_AMOUNT = 0;
     private static final String ILLEGAL_AMOUNT_ERROR_MESSAGE = "적절하지 않은 금액입니다.";
+    protected final long amount;
 
     public Amount(long amount) {
         validatePurchaseAmount(amount);

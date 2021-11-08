@@ -5,10 +5,9 @@ import lotto.ui.ConsoleResultView;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import static java.util.Comparator.*;
@@ -27,30 +26,63 @@ public class LottoShop {
     }
 
     public void open() {
-        Amount amount = readAmount();
-        Lottos lottos = purchaseLottos(amount);
-        resultView.printPurchaseAckMessage(lottos.count());
-        resultView.printLottos(lottos);
+        Amount totalAmount = readAmount();
+        Amount manualAmount = readManualLottosCount();
+        Lottos manualLottos = purchaseManualLottos(manualAmount);
+        Lottos autoLottos = purchaseAutoLottos(subtractAmount(totalAmount, manualAmount));
+        resultView.printPurchaseAckMessage(manualLottos.count(), autoLottos.count());
+        Lottos totalLottos = combineLottos(manualLottos, autoLottos);
+        resultView.printLottos(totalLottos);
 
         LottoWinReader lottoWinReader = makeLottoWinReader();
 
-        Map<Winnings, Integer> statistic = giveStatistic(lottoWinReader, lottos);
+        Map<Winnings, Integer> statistic = giveStatistic(lottoWinReader, totalLottos);
         resultView.printCorrespondLottoNumber(statistic);
-        Revenue revenue = getRevenue(amount, statistic);
+        Revenue revenue = getRevenue(totalAmount, statistic);
         resultView.printTotalRevenueMessage(revenue.profitRate());
     }
 
     private Amount readAmount() {
         try {
             resultView.printPurchaseAmountMessage();
-            return new Amount(Long.parseLong(inputView.readAmount()));
+            return new Amount(Long.parseLong(inputView.readPurchaseAmount()));
         } catch (IllegalArgumentException e) {
             return readAmount();
         }
     }
 
-    private Lottos purchaseLottos(Amount amount) {
+    private Amount readManualLottosCount() {
+        try {
+            resultView.printPurchaseManualLottosCountMessage();
+            return new Amount(Integer.parseInt(inputView.readManualLottosCount()) * LottoMachine.LOTTO_PRICE);
+        } catch (IllegalArgumentException e) {
+            return readManualLottosCount();
+        }
+    }
+
+    private Amount subtractAmount(Amount purchaseAmount, Amount subtractAmount) {
+        return purchaseAmount.subtract(subtractAmount);
+    }
+
+    private Lottos purchaseManualLottos(Amount amount) {
+        try {
+            resultView.printPurchaseManualLottosNumberMessage();
+            long count = amount.divide(new Amount(LottoMachine.LOTTO_PRICE));
+            List<String> numbers = LongStream.rangeClosed(1, count)
+                    .mapToObj(n -> inputView.readManualLottosNumber())
+                    .collect(toList());
+            return lottoMachine.issueManual(numbers);
+        } catch (IllegalArgumentException e) {
+            return purchaseManualLottos(amount);
+        }
+    }
+
+    private Lottos purchaseAutoLottos(Amount amount) {
         return lottoMachine.issueAuto(amount);
+    }
+
+    private Lottos combineLottos(Lottos manualLottos, Lottos autoLottos) {
+        return manualLottos.addLottos(autoLottos);
     }
 
     private LottoWinReader makeLottoWinReader() {
