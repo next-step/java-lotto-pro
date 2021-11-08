@@ -88,3 +88,56 @@
 - [x] `stream().filter(/*do stuff*/).count()`
 
 
+### 무엇을 이해했는가?
+1. 객체와의 관계을 `역할`과`책임`으로 나누어진다.
+2. 객체의 명칭은 의미보다는 `책임`에 의해 이름이 만들어진다.
+3. `일급컬렉션`은 상속보다는 합성을 이용하는 것이 용이하다
+    - [상속보다 합성을 이용하라](https://tecoble.techcourse.co.kr/post/2020-05-18-inheritance-vs-composition/)
+#### before
+
+```java
+public class LottoPapers extends AbstractList<LottoNumbers> 
+```
+
+#### after
+```java
+public class LottoPapers {
+	private final List<LottoNumbers> list = new LottoNumbers();
+} 
+```
+
+4. `테스트 픽스처`
+    - [테스트 픽스처](https://jojoldu.tistory.com/611?category=1011740)
+5. 인터페이스는 `행위`에 집중하여 설계하는 것이 좋다고 생각한다.
+    - 이전 방식은 클래스에게 `여러개의 행위에 대한 책임`을 위임한다면
+    - 아래 방식은 `하나의 클래스에 하나의 행위`를 위임하고 있다.
+#### before
+```java
+public class AutoMachineValidation implements MachineValidation{
+	@Override
+	public boolean isOverFlow(int size) {
+		if (size == LOTTO_NUMBER_MAX) {
+			return false;
+		}
+		return true;
+	}
+}
+
+```
+#### after
+```java
+public interface MachineValidator {
+
+    boolean validate();
+}
+
+public class OverflowValidator implements MachineValidator {
+
+    @Override
+    public boolean validate() {
+        // ... overflow 관련 로직
+    }
+}
+```
+
+
