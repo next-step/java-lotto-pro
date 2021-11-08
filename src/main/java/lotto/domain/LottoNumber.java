@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.LottoNumberDTO;
 import lotto.exception.IllegalLottoNumberException;
 
 import java.util.Objects;
@@ -7,7 +8,7 @@ import java.util.Objects;
 public class LottoNumber {
     public static final int MAX_LOTTO_NUMBER = 45;
     public static final int MIN_LOTTO_NUMBER = 1;
-    int lottoNumber;
+    private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
         validateLottoNumber(lottoNumber);
@@ -16,6 +17,10 @@ public class LottoNumber {
 
     public static LottoNumber from(Integer lottoNumber) {
         return new LottoNumber(lottoNumber);
+    }
+
+    public LottoNumberDTO toDTO() {
+        return new LottoNumberDTO(lottoNumber);
     }
 
     private void validateLottoNumber(int lottoNumber) {
@@ -37,8 +42,4 @@ public class LottoNumber {
         return Objects.hash(lottoNumber);
     }
 
-    @Override
-    public String toString() {
-        return Integer.toString(lottoNumber);
-    }
 }

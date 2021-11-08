@@ -5,9 +5,9 @@ import lotto.domain.LottoNumber;
 import java.util.List;
 
 public class LottoTicketDTO {
-    private final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumberDTO> lottoNumbers;
 
-    public LottoTicketDTO(List<LottoNumber> lottoNumbers) {
+    public LottoTicketDTO(List<LottoNumberDTO> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -15,4 +15,9 @@ public class LottoTicketDTO {
     public String toString() {
         return lottoNumbers.toString();
     }
+
+    public String toResultString() {
+        return lottoNumbers.toString();
+    }
+
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.LottoNumberDTO;
 import lotto.dto.LottoTicketDTO;
 import lotto.exception.IllegalLottoNumberSizeException;
 import lotto.exception.NumberDuplicationException;
@@ -47,10 +48,6 @@ public class LottoTicket {
         }
     }
 
-    public String toResultString() {
-        return lottoNumbers.toString();
-    }
-
     @Override
     public String toString() {
         return lottoNumbers.toString();
@@ -72,6 +69,9 @@ public class LottoTicket {
     }
 
     public LottoTicketDTO toDTO() {
-        return new LottoTicketDTO(lottoNumbers);
+        return new LottoTicketDTO(lottoNumbers.stream()
+                .map(LottoNumber::toDTO)
+                .collect(Collectors
+                        .toList()));
     }
 }
