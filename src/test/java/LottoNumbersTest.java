@@ -7,6 +7,9 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import model.LottoNumber;
+import model.LottoNumbers;
+
 public class LottoNumbersTest {
 
 	@Test

@@ -6,6 +6,8 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import model.LottoNumber;
+
 public class LottoNumberTest {
 	@Test
 	@DisplayName("equals의 구현이 정상적으로 되었는지 확인")
