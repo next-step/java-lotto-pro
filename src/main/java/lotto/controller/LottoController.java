@@ -33,7 +33,7 @@ public class LottoController {
 
 	private WinningLottoNumbers winningLottoNumberGenerator() {
 		try {
-			return new WinningLottoNumbers(InputView.inputWinningLottoNumber());
+			return new WinningLottoNumbers(InputView.inputWinningLottoNumber(), InputView.inputBonusLottoNumber());
 		} catch (LottoException lottoException) {
 			OutputView.printErrorMessage(lottoException);
 			return winningLottoNumberGenerator();
