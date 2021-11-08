@@ -10,10 +10,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	private final int lottoNumber;
 
 	public LottoNumber(int number) {
+		validationLottoNumber(number);
+		this.lottoNumber = number;
+	}
+
+	private void validationLottoNumber(int number) {
 		if (isNotLottoNumber(number)) {
 			throw new IllegalArgumentException();
 		}
-		this.lottoNumber = number;
 	}
 
 	private boolean isNotLottoNumber(int number) {
