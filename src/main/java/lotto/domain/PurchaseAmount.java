@@ -5,7 +5,7 @@ import java.util.Objects;
 public class PurchaseAmount {
 	public static final int SALE_PRICE = 1000;
 	public static final int CHANGE = 0;
-	public static final String INVALID_AMOUNT = "로또 한장에 " + SALE_PRICE + "원 입니다. 금액을 확인해주세요.";
+	public static final String INVALID_AMOUNT = "로또 한장에 1000원 입니다. 금액을 확인해주세요.";
 
 	private final int amount;
 

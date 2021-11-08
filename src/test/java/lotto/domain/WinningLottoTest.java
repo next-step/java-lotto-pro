@@ -5,36 +5,49 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class WinningLottoTest {
 
-	private WinningLotto winningLotto;
-
+	private Lottos lottos;
 
 	@BeforeEach
 	void setUp() {
-		winningLotto = new WinningLotto(Arrays.asList(10, 11, 12, 13, 14, 15));
+		List<Lotto> lottosStuff = new ArrayList<>();
+		lottosStuff.add(
+			new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
+				.stream()
+				.map(LottoNumber::new)
+				.collect(Collectors.toSet())
+			)
+		);
+		lottosStuff.add(
+			new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10)
+				.stream()
+				.map(LottoNumber::new)
+				.collect(Collectors.toSet())
+			)
+		);
+		lottos = new Lottos(lottosStuff);
 	}
 
+	@DisplayName("로또 당첨번호 기록 확인")
 	@Test
-	public void 로또_당첨_번호_생성() {
-		assertThat(winningLotto).isEqualTo(new WinningLotto(Arrays.asList(10, 11, 12, 13, 14, 15)));
-	}
-
-	@Test
-	public void 로또_순위_반환() {
-		List<Lotto> lottoList = new ArrayList<>();
-		lottoList.add(new Lotto(Arrays.asList(10, 11, 12, 13, 14, 15)));
-		lottoList.add(new Lotto(Arrays.asList(1, 11, 12, 13, 14, 15)));
-		lottoList.add(new Lotto(Arrays.asList(1, 11, 12, 13, 14, 15)));
-		Lottos lottos = new Lottos(lottoList);
+	void winningLottoMatch() {
+		WinningLotto winningLotto = new WinningLotto(
+			Arrays.asList(1, 2, 3, 4, 5, 6)
+				.stream()
+				.map(LottoNumber::new)
+				.collect(Collectors.toSet()));
 
 		WinningRecord winningRecord = winningLotto.match(lottos);
+		int secondCount = winningRecord.getPlaceCount(Rank.SECOND_PLACE);
 
-		assertThat(winningRecord.getPlaceCount(Rank.FIRST_PLACE)).isEqualTo(1);
-		assertThat(winningRecord.getPlaceCount(Rank.SECOND_PLACE)).isEqualTo(2);
+		assertThat(secondCount).isEqualTo(1);
 	}
+
 }

@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class Lotto {
 
 	private static final int LOTTO_SIZE = 6;
-	public static final String INVALID_NUMBER = "6개의 숫자를 입력해주세요.";
+	public static final String INVALID_NUMBER = "중복되지 않은 6개의 숫자를 입력해주세요.";
 
 	private final List<LottoNumber> lottoNumbers;
 

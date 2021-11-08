@@ -38,11 +38,7 @@ public class WinningRecord {
 		return this.record.getOrDefault(rank.getPrizeMoney(), DEFAULT_VALUE);
 	}
 
-	public long getRevenue() {
-		return revenue;
-	}
-
-	public double profitRate(double standard, double revenue) {
+	public double profitRate(double standard) {
 		return new BigDecimal(revenue / standard)
 			.setScale(DECIMAL_POINT, RoundingMode.FLOOR)
 			.doubleValue();
