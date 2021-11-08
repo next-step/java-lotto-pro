@@ -70,11 +70,12 @@ public class LottoNumbersGroupTest {
     @Test
     void getLottoResultFromLottoNumberGroupTest() {
         String[] myLottoNumbers = new String[]{"1,2,3,4,5,6", "2,3,4,13,12,14", "27,13,25,35,9,15"};
+        LottoNumber bonusLottoNumber = new LottoNumber(44);
         LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(myLottoNumbers);
         // when
-        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers);
+        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers, bonusLottoNumber);
         // then
-        assertThat(lottoResults.getMatchAmount(3)).isEqualTo(1);
-        assertThat(lottoResults.getMatchAmount(6)).isEqualTo(1);
+        assertThat(lottoResults.getMatchAmount(3, false)).isEqualTo(1);
+        assertThat(lottoResults.getMatchAmount(6, false)).isEqualTo(1);
     }
 }
