@@ -24,7 +24,10 @@ public class LottoTicket {
     }
 
     public static LottoTicket generateRandomLottoTicket() {
-        List<Integer> lottoNumbers = IntStream.range(START_INCLUSIVE, END_EXCLUSIVE).boxed().collect(Collectors.toList());
+        List<Integer> lottoNumbers = IntStream.range(START_INCLUSIVE, END_EXCLUSIVE)
+                .boxed()
+                .collect(Collectors
+                        .toList());
         Collections.shuffle(lottoNumbers);
         return new LottoTicket(lottoNumbers.subList(FROM_INDEX, LOTTO_NUMBER_SIZE));
     }

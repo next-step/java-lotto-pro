@@ -23,10 +23,12 @@ public class LottoController {
         // 로또 구입
         Money inputMoney = new Money(inputView.inputMoney());
         LottoTickets lottoTickets = lottoService.buyLottoTickets(inputMoney);
-        resultView.printBuyResult(lottoTickets.toDTO());
+        resultView.printBuyResult(lottoTickets
+                .toDTO());
 
         // 당첨번호 입력
-        LottoTicket winningLottoTicket = LottoTickets.fromString(inputView.inputWinningNumber());
+        LottoTicket winningLottoTicket = LottoTickets.fromString(inputView
+                .inputWinningNumber());
 
         // 결과 출력
         GameResult gameResult = lottoService.getGameResult(lottoTickets, winningLottoTicket);
