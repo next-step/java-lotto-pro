@@ -18,7 +18,7 @@ class SeparatorTest {
 
 		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(throwingCallable)
-			.withMessage(Messages.VALUE_NOT_SPLITABLE_ERROR);
+			.withMessage(ValueNotSplittableException.VALUE_NOT_SPLITTABLE_ERROR);
 	}
 
 	@ParameterizedTest
