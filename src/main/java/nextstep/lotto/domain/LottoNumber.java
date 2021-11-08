@@ -2,6 +2,7 @@ package nextstep.lotto.domain;
 
 import nextstep.lotto.constance.LottoExceptionMessage;
 import nextstep.lotto.exception.LottoRuntimeException;
+import nextstep.lotto.util.LottoRandomGenerator;
 
 import java.util.Objects;
 
@@ -11,6 +12,10 @@ public class LottoNumber {
     private static final Integer LOTTO_MAX_NUMBER = 9;
 
     private final Integer lottoNumber;
+
+    public LottoNumber() {
+        this.lottoNumber = LottoRandomGenerator.pickNumberInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER);
+    }
 
     public LottoNumber(Integer lottoNumber) {
         validateLottoNumber(lottoNumber);

@@ -7,4 +7,8 @@ public class PurchaseLottoAmount {
     public PurchaseLottoAmount(Integer purchaseLottoAmount) {
         this.purchaseLottoAmount = purchaseLottoAmount;
     }
+
+    public Integer calculateLottoPurchaseCount(Integer lottoPrice) {
+        return purchaseLottoAmount / lottoPrice;
+    }
 }
