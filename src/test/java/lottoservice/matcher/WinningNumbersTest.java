@@ -18,8 +18,6 @@ import lottoservice.testfactory.TestLottoDataFactory;
 
 public class WinningNumbersTest {
 
-	private static int SIZE_OF_LOTTERY_NUMBERS = 6;
-
 	LottoNumbersMaker lottoNumbersMaker = new LottoNumbersMaker(new LottoArrangeManipulator());
 
 	@DisplayName("당첨번호_생성")
