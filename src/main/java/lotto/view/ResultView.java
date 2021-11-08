@@ -6,16 +6,19 @@ public class ResultView {
 
     public static final int BEP = 1;
 
-    public static void printBuyResult(int count, String toResultString) {
+    public ResultView() {
+    }
+
+    public void printBuyResult(int count, String toResultString) {
         System.out.println(count + "개를 구매했습니다.");
         System.out.println(toResultString);
     }
 
-    public static void printGameResult(String resultString) {
+    public void printGameResult(String resultString) {
         System.out.println(resultString);
     }
 
-    public static void printEarningRatio(Money inputMoney, Money prize) {
+    public void printEarningRatio(Money inputMoney, Money prize) {
         double earningRatio = (double) prize.get() / inputMoney.get();
         String result = "총 수익률은 " + earningRatio + "입니다. ";
         if (earningRatio < BEP) {

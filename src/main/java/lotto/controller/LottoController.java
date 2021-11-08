@@ -9,9 +9,9 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
-    InputView inputView;
-    ResultView resultView;
-    LottoService lottoService;
+    private final InputView inputView;
+    private final ResultView resultView;
+    private final LottoService lottoService;
 
     public LottoController(InputView inputView, ResultView resultView) {
         this.lottoService = new LottoService();
@@ -22,10 +22,10 @@ public class LottoController {
     public void run() {
         Money inputMoney = new Money(inputView.inputMoney());
         LottoTickets lottoTickets = lottoService.buyLottoTickets(inputMoney);
-        ResultView.printBuyResult(lottoTickets.count(), lottoTickets.toResultString());
+        resultView.printBuyResult(lottoTickets.count(), lottoTickets.toResultString());
         LottoTicket winningLottoTicket = LottoTickets.fromString(inputView.inputWinningNumber());
         GameResult gameResult = lottoService.getGameResult(lottoTickets, winningLottoTicket);
-        ResultView.printGameResult(gameResult.toString());
-        ResultView.printEarningRatio(inputMoney, new Money(gameResult.getPrize()));
+        resultView.printGameResult(gameResult.toString());
+        resultView.printEarningRatio(inputMoney, new Money(gameResult.getPrize()));
     }
 }
