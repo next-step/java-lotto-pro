@@ -11,7 +11,9 @@ package lotto.common.utils;
  * description : 공통 계산식 함수 클래스
  */
 public class MathUtil {
-    private MathUtil() {} //인스턴스 생성 방지
+    private MathUtil() {
+    } //인스턴스 생성 방지
+
     public static double calculateYield(double earning, double investment) {
         return Math.floor(earning / investment * 100.0) / 100.0;
     }

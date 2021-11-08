@@ -1,7 +1,6 @@
 package lotto.domain;
 
 
-import sun.management.StackTraceElementCompositeData;
 
 import java.util.Arrays;
 
@@ -22,7 +21,6 @@ public enum Rank {
 
     private int countOfMatch;
     private int winningMoney;
-    private boolean bonus;
 
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;

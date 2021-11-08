@@ -25,9 +25,9 @@ public class StringTest {
         //WHEN
         String[] result = given.split(",");
         //THEN
-        assertThat(result).contains("1","2"); //contains 포함 여부를 확인한다.
+        assertThat(result).contains("1", "2"); //contains 포함 여부를 확인한다.
         assertThat(result.length).isEqualTo(2);
-        assertThat(result).containsExactly("1","2"); //containsExactly 배열의 순서 및 값을 확인한다.
+        assertThat(result).containsExactly("1", "2"); //containsExactly 배열의 순서 및 값을 확인한다.
     }
 
     //"1"을 ,로 split 했을 때 1만을 포함하는 배열이 반환되는지에 대한 학습 테스트를 구현한다.
@@ -52,7 +52,7 @@ public class StringTest {
         //GIVEN
         String given = "(1,2)";
         //WHEN
-        String result = given.substring(1, given.length()-1);
+        String result = given.substring(1, given.length() - 1);
         //THEN
         assertThat(result).isEqualTo("1,2");
     }
@@ -86,10 +86,5 @@ public class StringTest {
                 .isInstanceOf(StringIndexOutOfBoundsException.class)
                 .hasMessageContaining("String index out of range:");
     }
-
-
-
-
-
 
 }

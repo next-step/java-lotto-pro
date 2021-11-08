@@ -49,7 +49,7 @@ public class RanksTest {
     @Test
     @DisplayName("수익율 구하기")
     public void T2_earningRatio() {
-        List<Lotto> lottoList = Arrays.asList(noPlaceLotto,noPlaceLotto,thirdPlaceLotto,noPlaceLotto);
+        List<Lotto> lottoList = Arrays.asList(noPlaceLotto, noPlaceLotto, thirdPlaceLotto, noPlaceLotto);
         Lottos lottos = new Lottos(lottoList);
         Ranks ranks = lottos.getResults(winningLotto);
         assertThat(ranks.earningRatio()).isEqualTo(calculateYield(Rank.THIRD.getWinningMoney(), PurchasePrice.LOTTO_PRICE * lottoList.size()));

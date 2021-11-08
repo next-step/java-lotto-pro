@@ -2,12 +2,18 @@ package lotto.domain;
 
 /***
  *  피드백 내용 : 1) 중복된 코드 줄이기
+ *              2) 디미터의 법칙의 사용  : 1. 객체 자신의 메서드, 2. 메서드의 파라미터로 넘어온 객체들의 메서드,
+ *                                      3. 메서드 내부 생성,초기화된 메서드, 4. 인서튼스 변수로 가지고 있는 객체가 소유한 메서드 사용
+ *                                      => PurchasePrice 객체에 값을 전달하는것으로 구현
  *
  *
  */
 
+import lotto.common.exceptions.CustomEmptyException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -21,18 +27,17 @@ public class Lottos {
     private final List<Lotto> lottoList;
 
     public Lottos(List<Lotto> lottoList) {
-        this.lottoList = new ArrayList<>(validate(lottoList, null));
+        this.lottoList = new ArrayList<>(validate(lottoList));
     }
 
     public Lottos(List<Lotto> lottoList, PurchasePrice price) {
-        this.lottoList = new ArrayList<>(validate(lottoList, price));
+        List<Lotto> validateLottoList = validate(lottoList);
+        if (!price.isMatchCount(validateLottoList.size())) throw new IllegalArgumentException("구매 수량이 일치하지 않습니다.");
+        this.lottoList = new ArrayList<>(validateLottoList);
     }
 
-    private List<Lotto> validate(List<Lotto> lottoList, PurchasePrice price) {
-        if (lottoList == null) throw new NullPointerException("null값이 올 수 없습니다.");
-        if (lottoList.isEmpty()) throw new IllegalArgumentException("빈 값이 올 수 없습니다.");
-        if (price != null && !price.equals(new PurchasePrice(lottoList.size() * PurchasePrice.LOTTO_PRICE)))
-            throw new IllegalArgumentException("구매수량이 일치하지 않습니다.");
+    private List<Lotto> validate(List<Lotto> lottoList) {
+        if (!Optional.ofNullable(lottoList).isPresent() || lottoList.isEmpty()) throw new CustomEmptyException();
         return lottoList;
     }
 
@@ -40,7 +45,7 @@ public class Lottos {
         return new Ranks(lottoList.stream().map(lotto -> lotto.getRank(winning)).collect(Collectors.toList()));
     }
 
-    public void print() {
-        this.lottoList.stream().forEach(Lotto::print);
+    public List<String> getPrintBallList() {
+        return this.lottoList.stream().map(Lotto::printBalls).collect(Collectors.toList());
     }
 }

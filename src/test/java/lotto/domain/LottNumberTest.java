@@ -5,9 +5,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,7 +42,7 @@ public class LottNumberTest {
 
 
     @ParameterizedTest(name = "유효하지 않은 로또 숫자 테스트(string) : " + ParameterizedTest.ARGUMENTS_PLACEHOLDER)
-    @ValueSource(strings = {"46","-1","0"})
+    @ValueSource(strings = {"46", "-1", "0"})
     public void T03_invalidStringnumber(String candidate) {
         //THEN
         assertThatThrownBy(() -> LottoNumber.valueOf(candidate)).isInstanceOf(IllegalArgumentException.class)

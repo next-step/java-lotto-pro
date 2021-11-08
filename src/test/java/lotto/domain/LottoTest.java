@@ -49,9 +49,9 @@ public class LottoTest {
     public void T02_invalidLotto2() {
         String given = null;
         //THEN
-        assertThatThrownBy(() -> new Lotto(given)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> Lotto.valueOf(given)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("빈값이나 null은 허용되지 않습니다.");
-        assertThatThrownBy(() -> new Lotto("")).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> Lotto.valueOf("")).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("빈값이나 null은 허용되지 않습니다.");
         assertThatThrownBy(() -> Lotto.valueOf("")).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("빈값이나 null은 허용되지 않습니다.");
@@ -76,7 +76,7 @@ public class LottoTest {
         LottoNumber number = LottoNumber.valueOf(LottoNumber.MIN_NUMBER);
         //THEN
         assertThat(number).isEqualTo(LottoNumber.valueOf(1));
-        assertThatThrownBy(() -> LottoNumber.valueOf(LottoNumber.MAX_NUMBER +1)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> LottoNumber.valueOf(LottoNumber.MAX_NUMBER + 1)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1부터 45 사이의 숫자만 가능합니다.");
 
     }

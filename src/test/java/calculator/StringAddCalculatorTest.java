@@ -7,10 +7,9 @@ import static org.assertj.core.api.Assertions.*;
 
 
 /**
- *   피드백 내용
- *      1) 테스트를 설명할 DisplayName을 작성한다.
- *
- * */
+ * 피드백 내용
+ * 1) 테스트를 설명할 DisplayName을 작성한다.
+ */
 
 /**
  * packageName : calculator

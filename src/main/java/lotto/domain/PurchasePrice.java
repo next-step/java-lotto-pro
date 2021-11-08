@@ -1,11 +1,10 @@
 package lotto.domain;
 
-import lotto.common.Constants;
 import lotto.common.exceptions.CustomEmptyException;
 import lotto.common.utils.StringUtil;
-import lotto.ui.ResultView;
-
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 /**
@@ -24,29 +23,33 @@ import java.util.stream.IntStream;
  */
 public class PurchasePrice {
     public static final int LOTTO_PRICE = 1000;
+    private final int purchasePrice;
 
-    private final int purchaseQuantity;
-
-    public PurchasePrice(int price) {
-        this.purchaseQuantity = this.calculateQuantity(validate(price));
-    }
-
-    public PurchasePrice(String strPrice) {
-        if (StringUtil.isStringEmpty(strPrice)) throw new CustomEmptyException();
-        this.purchaseQuantity = this.calculateQuantity(validate(StringUtil.parseNumber(strPrice.trim())));
+    private PurchasePrice(int price) {
+        this.purchasePrice = validate(price);
     }
 
     public static PurchasePrice valueOf(int price) {
         return new PurchasePrice(price);
     }
 
-    public int validate(int price) {
+    public static PurchasePrice valueOf(String price) {
+        if (!Optional.ofNullable(price).isPresent() || StringUtil.isStringEmpty(price))
+            throw new CustomEmptyException();
+        return PurchasePrice.valueOf(StringUtil.parseNumber(price));
+    }
+
+    private int validate(int price) {
         if (price < LOTTO_PRICE) throw new IllegalArgumentException("로또를 구입할 금액이 부족합니다.");
         return price;
     }
 
-    public int calculateQuantity(int price) {
-        return price / LOTTO_PRICE;
+    public boolean isMatchCount(int count) {
+        return this.calculateQuantity() == count;
+    }
+
+    public int calculateQuantity() {
+        return this.purchasePrice / LOTTO_PRICE;
     }
 
     @Override
@@ -54,19 +57,20 @@ public class PurchasePrice {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PurchasePrice that = (PurchasePrice) o;
-        return purchaseQuantity == that.purchaseQuantity;
+        return purchasePrice == that.purchasePrice;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(purchaseQuantity);
+        return Objects.hash(purchasePrice);
     }
 
-    public void print() {
-        ResultView.print(this.purchaseQuantity + Constants.MSG_OUTPUT_PURCHASE_RESULT_SUFFIX);
+    public List<Lotto> buyAutomaticLottoExceptManualCnt(int manualCnt) {
+        return IntStream.range(0, this.calculateQuantity() - manualCnt).mapToObj(i -> LottoMaker.createLotto()).collect(Collectors.toList());
     }
 
-    public Lottos buyLottery() {
-        return new Lottos(IntStream.range(0, purchaseQuantity).mapToObj(i -> LottoMaker.createLotto()).collect(Collectors.toList()));
+    public boolean isAbleToBuy(int wantToBuyCount) {
+        return this.calculateQuantity() >= wantToBuyCount;
     }
+
 }

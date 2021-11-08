@@ -2,11 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.*;
 
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * packageName : lotto.domain

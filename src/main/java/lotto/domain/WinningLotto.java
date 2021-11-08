@@ -11,15 +11,19 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonus;
 
-    public WinningLotto(Lotto lotto, LottoNumber bonus) {
+    private WinningLotto(Lotto lotto, LottoNumber bonus) {
         this.winningLotto = lotto;
         this.bonus = validate(lotto, bonus);
     }
 
-    public WinningLotto(String input, LottoNumber bonus) {
+    private WinningLotto(String input, LottoNumber bonus) {
         Lotto winningLotto = new Lotto(input);
         this.winningLotto = winningLotto;
         this.bonus = validate(winningLotto, bonus);
+    }
+
+    public static WinningLotto valueOf(Lotto lotto, LottoNumber bonus) {
+        return new WinningLotto(lotto, bonus);
     }
 
     public static WinningLotto valueOf(String input, LottoNumber bonus) {
