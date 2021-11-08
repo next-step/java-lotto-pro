@@ -3,6 +3,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import exception.OutOfRange;
 import model.LottoNumber;
 
 public class LottoNumberTest {
@@ -12,5 +13,14 @@ public class LottoNumberTest {
 		LottoNumber lottoNumber = new LottoNumber(1);
 
 		assertThat(lottoNumber).isEqualTo(new LottoNumber(1));
+	}
+
+
+	@Test
+	@DisplayName("로또 숫자가 범위를 벗어난 값을 가질 때 예외")
+	void test_constructor1() {
+		assertThatThrownBy(() -> new LottoNumber(122))
+			.isInstanceOf(OutOfRange.class)
+			.hasMessage(LottoNumber.MESSAGE_OUT_OF_RANGE);
 	}
 }
