@@ -7,11 +7,11 @@ import java.util.List;
 public class Lottos implements Iterable<Lotto> {
     private final List<Lotto> lottos;
 
-    public Lottos(IssueQuantity issueQuantity, List<List<Integer>> manualNumbers) {
+    public Lottos(IssueQuantity issueQuantity, List<LottoNumbers> manualNumbers) {
         this.lottos = buyLotto(issueQuantity, manualNumbers);
     }
 
-    public static List<Lotto> buyLotto(IssueQuantity issueQuantity, List<List<Integer>> manualNumbers) {
+    public static List<Lotto> buyLotto(IssueQuantity issueQuantity, List<LottoNumbers> manualNumbers) {
         List<Lotto> lottos = new ArrayList<Lotto>();
         for (int i = 0; i < issueQuantity.getManualQuantity(); i++) {
         	lottos.add(Lotto.buyManual(manualNumbers.get(i)));

@@ -101,16 +101,16 @@ public class InputView {
         return true;
     }
     
-    public List<List<Integer>> enterManualNumbers(int manualBuyQuantity) {
+    public List<LottoNumbers> enterManualNumbers(int manualBuyQuantity) {
     	System.out.println(INSERT_MANUAL_BUY_NUMBER);
-    	List<List<Integer>> lottos = new ArrayList<List<Integer>>(); 
+    	List<LottoNumbers> lottos = new ArrayList<LottoNumbers>(); 
     	for (int i = 0; i < manualBuyQuantity;) {
             String[] numbers = ConsoleUtils.console().split(",");
             if (checkNumbers(numbers)) {
-            	lottos.add(Arrays.stream(numbers)
-                        .mapToInt(Integer::parseInt)
-                        .boxed()
-                        .collect(Collectors.toList()));
+            	lottos.add(LottoNumbers.valueOf(Arrays.stream(numbers)
+	                        .mapToInt(Integer::parseInt)
+	                        .boxed()
+	                        .collect(Collectors.toList())));
             	i++;
 			}
 		}

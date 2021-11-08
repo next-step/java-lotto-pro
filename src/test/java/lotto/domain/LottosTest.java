@@ -22,7 +22,7 @@ public class LottosTest {
 	@Test
 	@DisplayName("로또 수동으로 구매하는지 확인")
 	public void 로또_수동_구매_확인() {
-		List<List<Integer>> manual = Arrays.asList(Arrays.asList( 1, 2, 3, 4, 5, 6 ));
+		List<LottoNumbers> manual = Arrays.asList(LottoNumbers.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6 )));
 		assertThat(new Lottos(new IssueQuantity().fromManual(manual.size()), manual).getLottos().size()).isEqualTo(manual.size());
 	}
 
