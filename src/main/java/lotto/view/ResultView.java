@@ -16,18 +16,15 @@ public class ResultView {
 	public static final String WINNING_STAT_INFO = "당첨 통계";
 	public static final String DASH = "---------";
 
-	public ResultView() {
-	}
-
-	public void printLottoPurchaseQuantity(int purchaseQuantity) {
+	public static void printLottoPurchaseQuantity(int purchaseQuantity) {
 		System.out.printf(PRINT_PURCHASE_QUANTITY, purchaseQuantity);
 	}
 
-	public void printLottos(Lottos lottos) {
+	public static void printLottos(Lottos lottos) {
 		System.out.println(lottos.toString());
 	}
 
-	public void printWinningRecord(WinningRecord winningRecord) {
+	public static void printWinningRecord(WinningRecord winningRecord) {
 		Arrays.stream(Rank.values())
 			.filter(rank -> Rank.FAILED != rank)
 			.sorted((o1, o2) -> Long.valueOf(o1.getMatchCount()-o2.getMatchCount()).intValue())
@@ -39,14 +36,14 @@ public class ResultView {
 			);
 	}
 
-	public void printReturnRate(double rate) {
+	public static void printReturnRate(double rate) {
 		System.out.printf(PRINT_RETURN_RATE, rate);
 		if (STANDARD_RATE > rate) {
 			System.out.println(PRINT_MONEY_LOSS);
 		}
 	}
 
-	public void printWinningStat(WinningRecord winningRecord, double rate){
+	public static void printWinningStat(WinningRecord winningRecord, double rate){
 		System.out.println(WINNING_STAT_INFO);
 		System.out.println(DASH);
 		printWinningRecord(winningRecord);
