@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Arrays;
 
+import lotto.domain.exception.IllegalMatchCountException;
+
 public enum Rank {
 	LOSS(0, false, 0),
 	FIFTH(3, false, 5_000),
@@ -9,8 +11,6 @@ public enum Rank {
 	THIRD(5, false, 1_500_000),
 	SECOND(5,true, 30_000_000),
 	FIRST(6, false,2_000_000_000);
-
-	public static final String MATCH_COUNT_NOT_CORRECT_ERROR = "일치하는 숫자의 개수가 올바르지 않습니다.";
 
 	private int matchCount;
 	private boolean matchBonus;
@@ -34,7 +34,7 @@ public enum Rank {
 		Rank rank = Arrays.stream(values())
 			.filter(r -> r.isCountMatch(matchCount))
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException(MATCH_COUNT_NOT_CORRECT_ERROR));
+			.orElseThrow(IllegalMatchCountException::new);
 
 		if (rank == Rank.THIRD && matchBonus) {
 			return Rank.SECOND;

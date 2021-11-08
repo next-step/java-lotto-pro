@@ -6,6 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.exception.LottoNumberOutOfRangeException;
+
 class LottoNumberTest {
 	@ParameterizedTest
 	@ValueSource(ints = {1, 20, 45})
@@ -19,12 +21,10 @@ class LottoNumberTest {
 	@ValueSource(ints = {0, 46, -1})
 	@DisplayName("허용 범위를 벗어나는 숫자를 전달하면 예외가 발생한다.")
 	public void testNotAllowedNumber(int input) {
-		assertThatIllegalArgumentException()
-			.isThrownBy(() -> LottoNumber.from(input))
-			.withMessage(LottoNumber.OUT_OF_RANGE_ERROR);
+		assertThatExceptionOfType(LottoNumberOutOfRangeException.class)
+			.isThrownBy(() -> LottoNumber.from(input));
 
-		assertThatIllegalArgumentException()
-			.isThrownBy(() -> LottoNumber.from(input))
-			.withMessage(LottoNumber.OUT_OF_RANGE_ERROR);
+		assertThatThrownBy(() -> LottoNumber.from(input))
+			.isInstanceOf(LottoNumberOutOfRangeException.class);
 	}
 }

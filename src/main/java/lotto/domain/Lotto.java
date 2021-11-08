@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import lotto.domain.exception.DuplicateNumberException;
+import lotto.domain.exception.IllegalNumbersException;
+
 public class Lotto {
-	public static final String NUMBER_COUNT_ERROR = "Lotto 번호는 6개 여야 합니다.";
-	public static final String DUPLICATED_NUMBER_ERROR = "중복된 값이 포함되어 있습니다.";
 
 	private final List<LottoNumber> lottoNumbers;
 
@@ -53,13 +54,13 @@ public class Lotto {
 		Set<LottoNumber> numberSet = new HashSet<>(numbers);
 
 		if (numberSet.size() != Common.LOTTO_NUMBER_COUNT) {
-			throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
+			throw new DuplicateNumberException();
 		}
 	}
 
 	private void validateNumberCount(final List<LottoNumber> numbers) {
 		if (numbers.size() != Common.LOTTO_NUMBER_COUNT) {
-			throw new IllegalArgumentException(NUMBER_COUNT_ERROR);
+			throw new IllegalNumbersException();
 		}
 	}
 

@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -9,13 +9,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.exception.IllegalMatchCountException;
+
 public class RankTest {
 	@Test
 	@DisplayName("숫자가 일치하는 개수가 유효하지 않을 경우 예외가 발생한다.")
 	void testInvalid() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> Rank.from(7))
-			.withMessage(Rank.MATCH_COUNT_NOT_CORRECT_ERROR);
+		Assertions.assertThatExceptionOfType(IllegalMatchCountException.class)
+			.isThrownBy(() -> Rank.from(7));
 	}
 
 	@ParameterizedTest

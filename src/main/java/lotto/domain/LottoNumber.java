@@ -4,8 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import lotto.domain.exception.LottoNumberOutOfRangeException;
+
 public class LottoNumber {
-	public static final String OUT_OF_RANGE_ERROR = "로또 번호의 범위는 1이상 45이하 입니다.";
 
 	private static final Map<Integer, LottoNumber> numbers =new HashMap<>();
 
@@ -33,7 +34,7 @@ public class LottoNumber {
 
 	private static void validateNumberRange(final int number) {
 		if (number < Common.NUMBER_RANGE_MIN || number > Common.NUMBER_RANGE_MAX) {
-			throw new IllegalArgumentException(OUT_OF_RANGE_ERROR);
+			throw new LottoNumberOutOfRangeException();
 		}
 	}
 

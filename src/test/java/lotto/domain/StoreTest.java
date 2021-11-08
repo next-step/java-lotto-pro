@@ -7,14 +7,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.exception.LackOfMoneyException;
+
 class StoreTest {
 	@ParameterizedTest
 	@ValueSource(ints = {900, 0, 500})
 	@DisplayName("구매 금액이 부족한 경우 예외를 발생한다.")
 	void testPurchaseMoneyLack(int input) {
-		assertThatIllegalArgumentException()
-			.isThrownBy(() -> Store.order(new Money(input)))
-			.withMessage(Store.MINIMUM_PRICE_REQUIRED_ERROR);
+		assertThatExceptionOfType(LackOfMoneyException.class)
+			.isThrownBy(() -> Store.order(new Money(input)));
 	}
 
 	@ParameterizedTest

@@ -3,8 +3,9 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 
+import lotto.domain.exception.LottosNotCollectableException;
+
 public class Lottos {
-	public static final String LOTTOS_NULL_OR_EMPTY_ERROR = "로또 목록은 null 이나 0개 일 수 없습니다.";
 
 	private final List<Lotto> lottos;
 
@@ -28,7 +29,7 @@ public class Lottos {
 
 	private static void validateNotNullOrEmpty(List<Lotto> lottos) {
 		if (lottos == null || lottos.size() == 0) {
-			throw new IllegalArgumentException(LOTTOS_NULL_OR_EMPTY_ERROR);
+			throw new LottosNotCollectableException();
 		}
 	}
 }
