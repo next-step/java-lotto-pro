@@ -20,7 +20,7 @@ public class ResultView {
 
     public static void printLottoTryCount(LottoGame lottoGame) {
         StringBuilder builder = new StringBuilder();
-        builder.append(lottoGame.getTryCount()).append(TRY_COUNT_MESSAGE);
+        builder.append(lottoGame.getAutoTryCount()).append(TRY_COUNT_MESSAGE);
         System.out.println(builder.toString());
     }
 
