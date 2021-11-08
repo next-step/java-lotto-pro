@@ -20,6 +20,7 @@ public class ResultView {
 	private static final String WINNING_STATISTICS = "당첨 통계";
 	private static final String HORIZONTAL_LINE = "---------";
 	private static final String WINNING_INFO_MESSAGE = "%d개 일치 (%d원)- %d개";
+	private static final String WINNING_INFO_SECOND_RANK_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
 	private static final String EARNING_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
 	private static final String LOSS_NOTIFY_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
@@ -49,12 +50,19 @@ public class ResultView {
 		List<Rank> printTargets = filterTargetRanks();
 
 		for (Rank rank : printTargets) {
-			builder.append(String.format(WINNING_INFO_MESSAGE,
-				rank.matchCount(), rank.prizeMoney(), winningCounts.get(rank)));
+			builder.append(makeDetailWinningInfoString(rank, winningCounts.get(rank)));
 			builder.append("\n");
 		}
 
 		return builder.toString();
+	}
+
+	private String makeDetailWinningInfoString(Rank rank, int count) {
+		if (rank == Rank.SECOND) {
+			return String.format(WINNING_INFO_SECOND_RANK_MESSAGE, rank.matchCount(), rank.prizeMoney(), count);
+		}
+
+		return String.format(WINNING_INFO_MESSAGE, rank.matchCount(), rank.prizeMoney(), count);
 	}
 
 	private List<Rank> filterTargetRanks() {
