@@ -27,7 +27,7 @@ public class LottoGame {
     private List<Lotto> buyLottoTicket(int countOfPossibleLotto) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < countOfPossibleLotto; i++) {
-            lottos.add(LottoFactory.createLottoTicket());
+            lottos.add(LottoFactory.createLotto());
         }
         return lottos;
     }

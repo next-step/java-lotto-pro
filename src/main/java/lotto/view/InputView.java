@@ -29,7 +29,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String numbers = scanner.nextLine();
         try {
-            return LottoFactory.createManualLottoTicket(numbers);
+            return LottoFactory.createManualLotto(numbers);
         } catch (NumberFormatException exception) {
             System.out.println(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
             return inputWinningNumbersOfLastWeek();

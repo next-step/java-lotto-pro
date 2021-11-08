@@ -12,7 +12,7 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static Lotto createLottoTicket() {
+    public static Lotto createLotto() {
         List<Integer> allLottoNumbers = createAllLottoNumbers();
         Collections.shuffle(allLottoNumbers);
         List<Integer> lottoNumbers = allLottoNumbers.subList(
@@ -28,7 +28,7 @@ public class LottoFactory {
             .collect(Collectors.toList());
     }
 
-    public static Lotto createManualLottoTicket(String inputNumbers) {
+    public static Lotto createManualLotto(String inputNumbers) {
         List<Integer> numbers = new ArrayList<>();
         String[] inputNumbersBySplit = inputNumbers.split(COMMA);
         for (String number : inputNumbersBySplit) {
