@@ -14,8 +14,8 @@ class LottoParserTest {
 	void parse() {
 		final List<LottoNumber> lotto = LottoParser.parse("1, 2, 3, 4, 5, 6");
 		assertThat(lotto).containsExactlyElementsOf(
-			Stream.iterate(LottoNumber.MIN_INCLUSIVE_NUMBER, num -> num + 1)
-				.limit(Lotto.NUM_OF_LOTTO_NUMBERS)
+			Stream.iterate(1, num -> num + 1)
+				.limit(6)
 				.map(LottoNumber::from)
 				.collect(Collectors.toList())
 		);

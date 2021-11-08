@@ -23,11 +23,17 @@ public class LottoNumberTest {
 	@Test
 	void from_String() {
 		assertThat(LottoNumber.from("1").get()).isEqualTo(1);
+	}
 
+	@Test
+	void from_String_null() {
 		assertThatExceptionOfType(LottoNumberFormatException.class)
 			.isThrownBy(() -> LottoNumber.from(null))
 			.withMessage(LottoNumberFormatException.ERROR_MESSAGE);
+	}
 
+	@Test
+	void from_String_notNumber() {
 		assertThatExceptionOfType(LottoNumberFormatException.class)
 			.isThrownBy(() -> LottoNumber.from("a"))
 			.withMessage(LottoNumberFormatException.ERROR_MESSAGE);
