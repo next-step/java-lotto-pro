@@ -23,6 +23,6 @@ public class LottoBallFactory {
         Collections.shuffle(CACHE_BALL);
         List<LottoBall> ballsDraw = new ArrayList<>(CACHE_BALL.subList(0, LottoBallRule.LOTTO_BALLS_SIZE.getNumber()));
         Collections.sort(ballsDraw);
-        return ballsDraw;
+        return Collections.unmodifiableList(ballsDraw);
     }
 }

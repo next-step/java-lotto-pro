@@ -27,7 +27,7 @@ public enum Ranking {
     }
 
     public static Ranking find(int count, boolean hasBonusBall) {
-        if (count == Ranking.SECOND_BONUS.getCount() && !hasBonusBall) {
+        if (count == Ranking.SECOND.getCount() && !hasBonusBall) {
             return Ranking.SECOND;
         }
 

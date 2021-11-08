@@ -4,6 +4,7 @@ import lotto.exception.LottoBallCountException;
 import lotto.exception.LottoBallNumberConvertException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoBalls {
@@ -13,16 +14,16 @@ public class LottoBalls {
         if (lottoBalls.size() != LottoBallRule.LOTTO_BALLS_SIZE.getNumber()) {
             throw new LottoBallCountException("로또 공 개수가 6개가 아닙니다");
         }
-        this.lottoBalls = lottoBalls;
+        this.lottoBalls = Collections.unmodifiableList(lottoBalls);
     }
 
     public LottoBalls(String numbersString) {
         String[] numbersSplitted = splitNumberString(numbersString);
-        this.lottoBalls = createLottoBallList(numbersSplitted);
+        this.lottoBalls = Collections.unmodifiableList(createLottoBallList(numbersSplitted));
     }
 
     public List<LottoBall> getLottoBalls() {
-        return lottoBalls;
+        return Collections.unmodifiableList(lottoBalls);
     }
 
     private String[] splitNumberString(String numbersString) {

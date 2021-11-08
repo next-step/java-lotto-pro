@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.CreateLottoStoreException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,7 +16,7 @@ public class LottoStore {
 
     public static LottoGame sell(Money money) {
         int tryCount = money.calculateTryLottoCount(money, LOTTO_PRICE);
-        List<LottoBalls> lottoBalls = createLottoBalls(tryCount);
+        List<LottoBalls> lottoBalls = Collections.unmodifiableList(createLottoBalls(tryCount));
         return new LottoGame(tryCount, lottoBalls);
     }
 
