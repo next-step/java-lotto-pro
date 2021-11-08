@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class LottoController {
     private static Scanner scanner;
 
-    public void startGame() {
+    public void startGame() throws Exception {
         scanner = new Scanner(System.in);
         int buyPrice = inputBuyPrice();
         int manualBuyAmount = getManualBuyAmount();

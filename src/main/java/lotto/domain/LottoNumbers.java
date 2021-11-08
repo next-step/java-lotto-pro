@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.WrongLottoNumbersInputException;
 import lotto.exception.WrongLottoNumberSizeException;
 import lotto.ui.LottoMessage;
 
@@ -8,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 public class LottoNumbers {
@@ -27,11 +29,11 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoNumbers(String lottoNumbersString) {
+    public LottoNumbers(String lottoNumbersString) throws Exception {
         this(lottoNumbersString, LOTTO_NUMBERS_BASE_SEPARATOR);
     }
 
-    public LottoNumbers(String lottoNumbers, String separator) {
+    public LottoNumbers(String lottoNumbers, String separator) throws Exception {
         this.lottoNumbers = new HashSet<>();
         generateLottoNumbersFromString(lottoNumbers, separator);
     }
@@ -51,8 +53,16 @@ public class LottoNumbers {
         return new HashSet<>(randomLottoNumberPocket.subList(0, LOTTO_SIZE));
     }
 
-    private void generateLottoNumbersFromString(String lottoNumbers, String separator) {
+    private void generateLottoNumbersFromString(String lottoNumbers, String separator) throws Exception {
+        lottoNumbers = Optional.ofNullable(lottoNumbers)
+                .orElseThrow(() ->
+                        new WrongLottoNumbersInputException(LottoMessage.WRONG_LOTTO_NUMBER_INPUT_MESSAGE)
+                );
         lottoNumbers = lottoNumbers.replaceAll(FIND_ALL_SPACES, REMOVE_SPACES);
+        separator = Optional.ofNullable(separator)
+                .orElseThrow(() ->
+                        new WrongLottoNumbersInputException(LottoMessage.WRONG_LOTTO_NUMBER_INPUT_MESSAGE)
+                );
         String[] splitLottoNumbers = lottoNumbers.split(separator);
         validateLottoNumbers(splitLottoNumbers);
         for (String lottoNumberString : splitLottoNumbers) {

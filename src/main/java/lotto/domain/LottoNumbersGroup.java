@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.WrongLottoNumbersInputException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -7,11 +9,11 @@ import java.util.Objects;
 public class LottoNumbersGroup {
     private final List<LottoNumbers> lottoNumbersGroup;
 
-    public LottoNumbersGroup(BuyAmount buyAmount) {
+    public LottoNumbersGroup(BuyAmount buyAmount) throws Exception {
         this.lottoNumbersGroup = generateRandomLottoNumbers(buyAmount.getAmount());
     }
 
-    public LottoNumbersGroup(String[] myLottoNumbers) {
+    public LottoNumbersGroup(String[] myLottoNumbers) throws Exception {
         this.lottoNumbersGroup = generateManualLottoNumbers(myLottoNumbers);
     }
 
@@ -19,7 +21,12 @@ public class LottoNumbersGroup {
         this.lottoNumbersGroup = myLottoNumbers;
     }
 
-    protected List<LottoNumbers> generateRandomLottoNumbers(int amount) {
+    public LottoNumbersGroup(BuyAmount buyAmount, List<LottoNumbers> manualLottoNumbers) throws Exception {
+        this.lottoNumbersGroup = manualLottoNumbers;
+        this.lottoNumbersGroup.addAll(generateRandomLottoNumbers(buyAmount.getAutoAmount()));
+    }
+
+    protected List<LottoNumbers> generateRandomLottoNumbers(int amount) throws WrongLottoNumbersInputException, Exception {
         List<LottoNumbers> resultLottoNumbers = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
             resultLottoNumbers.add(new LottoNumbers());
@@ -28,7 +35,7 @@ public class LottoNumbersGroup {
         return resultLottoNumbers;
     }
 
-    private List<LottoNumbers> generateManualLottoNumbers(String[] myLottoNumbers) {
+    private List<LottoNumbers> generateManualLottoNumbers(String[] myLottoNumbers) throws Exception {
         List<LottoNumbers> resultLottoNumbers = new ArrayList<>();
         for (String lottoNumbers : myLottoNumbers) {
             resultLottoNumbers.add(new LottoNumbers(lottoNumbers));
