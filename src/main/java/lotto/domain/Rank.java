@@ -27,22 +27,22 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch == Rank.MISS.countOfMatch) {
-            return Rank.MISS;
+        if (countOfMatch == MISS.countOfMatch) {
+            return MISS;
         }
         if (isThirdCondition(countOfMatch, matchBonus)) {
-            return Rank.THIRD;
+            return THIRD;
         }
 
         Rank[] ranks = values();
         return Arrays.stream(ranks)
             .filter(rank -> countOfMatch == rank.countOfMatch)
             .findFirst()
-            .orElse(Rank.MISS);
+            .orElse(MISS);
     }
 
     private static boolean isThirdCondition(int countOfMatch, boolean matchBonus) {
-        return countOfMatch == Rank.THIRD.countOfMatch && !matchBonus;
+        return countOfMatch == THIRD.countOfMatch && !matchBonus;
     }
 
     public boolean isFirst() {

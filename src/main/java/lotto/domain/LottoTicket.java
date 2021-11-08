@@ -24,11 +24,11 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder lottoStringBuilder = new StringBuilder();
         for (Lotto lotto : lottos) {
-            sb.append(lotto);
-            sb.append("\n");
+            lottoStringBuilder.append(lotto);
+            lottoStringBuilder.append("\n");
         }
-        return sb.toString();
+        return lottoStringBuilder.toString();
     }
 }
