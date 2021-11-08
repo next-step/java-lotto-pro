@@ -12,7 +12,7 @@ import lotto2.domain.Rank;
 public class ResultView {
 
 	public static void showLottoNumbers(int manualCount, int autoCount, LottoTickets tickets) {
-		System.out.printf("\n수동으로 %d 장, 자동으로 %d 개를 구매했습니다.\n"
+		System.out.printf("\n수동으로 %d 장, 자동으로 %d 장을 구매했습니다.\n"
 			, manualCount, autoCount);
 		StringBuilder result = new StringBuilder();
 		for (LottoTicket ticket : tickets) {
@@ -41,5 +41,9 @@ public class ResultView {
 		result += "6개 일치 (2000000000원)- " + rankCounts.get(Rank.FIRST.name()) + "개\n";
 		System.out.println(result);
 		System.out.printf("총 수익률은 %.2f입니다\n", profit);
+	}
+
+	public static void error(String message) {
+		System.out.println(message);
 	}
 }

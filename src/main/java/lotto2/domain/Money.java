@@ -15,7 +15,7 @@ public class Money {
 
 	public static void validateMoney(int inputMoney) {
 		if (inputMoney < 0) {
-			throw new IllegalArgumentException(ErrorMessage.ONLY_POSITIVE_NUMBER.value());
+			throw new IllegalArgumentException(ErrorMessage.MONEY_ONLY_POSITIVE_NUMBER.value());
 		}
 	}
 

@@ -16,7 +16,7 @@ public class PositiveNumber {
 	private static void validateNumber(int number) {
 		if (number < 0) {
 			throw new IllegalArgumentException(
-				ErrorMessage.ONLY_POSITIVE_NUMBER.value());
+				ErrorMessage.NUMBER_ONLY_POSITIVE_NUMBER.value());
 		}
 	}
 

@@ -16,14 +16,18 @@ import lotto2.view.ResultView;
 public class LottoGameController {
 
 	public static void main(String[] args) {
-		PurchaseResDto purchaseResDto = purchaseLotto();
-		showWinningResult(purchaseResDto);
+		try {
+			PurchaseResDto purchaseResDto = purchaseLotto();
+			showWinningResult(purchaseResDto);
+		} catch (IllegalArgumentException ex) {
+			ResultView.error(ex.getMessage());
+		}
 	}
 
 	private static PurchaseResDto purchaseLotto() {
-
 		PurchaseReqDto purchaseReqDto = InputView.getPurchaseInfo();
 		Money purchaseMoney = Money.of(purchaseReqDto.getMoney());
+
 		LottoTickets manualTickets = LottoTickets.ofIntList(purchaseReqDto.getManualLottoNumbers());
 
 		PositiveNumber autoLottoCount = getAutoLottoCount(purchaseMoney, manualTickets.getSize());
@@ -32,10 +36,7 @@ public class LottoGameController {
 
 		ResultView.showLottoNumbers(manualTickets.getSize(), autoLottoTickets.getSize(), totalTickets);
 
-		return PurchaseResDto.of(manualTickets.getSize(),
-			autoLottoTickets.getSize(),
-			totalTickets,
-			purchaseReqDto.getMoney());
+		return new PurchaseResDto(totalTickets, purchaseReqDto.getMoney());
 
 	}
 

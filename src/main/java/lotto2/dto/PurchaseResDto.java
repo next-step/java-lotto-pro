@@ -4,33 +4,13 @@ import lotto2.domain.LottoTickets;
 
 public class PurchaseResDto {
 
-	private int manualLottoCount;
+	private final LottoTickets totalTickets;
 
-	private int autoLottoCount;
+	private final int purchaseMoney;
 
-	private LottoTickets totalTickets;
-
-	private int purchaseMoney;
-
-	private PurchaseResDto() {
-	}
-
-	public static PurchaseResDto of(int manualLottoCount, int autoLottoCount, LottoTickets totalTickets,
-		int purchaseMoney) {
-		PurchaseResDto dto = new PurchaseResDto();
-		dto.manualLottoCount = manualLottoCount;
-		dto.autoLottoCount = autoLottoCount;
-		dto.totalTickets = totalTickets;
-		dto.purchaseMoney = purchaseMoney;
-		return dto;
-	}
-
-	public int getManualLottoCount() {
-		return manualLottoCount;
-	}
-
-	public int getAutoLottoCount() {
-		return autoLottoCount;
+	public PurchaseResDto(LottoTickets totalTickets, int purchaseMoney) {
+		this.totalTickets = totalTickets;
+		this.purchaseMoney = purchaseMoney;
 	}
 
 	public LottoTickets getTotalTickets() {
