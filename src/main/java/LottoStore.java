@@ -5,35 +5,26 @@ import java.util.stream.Stream;
 
 public class LottoStore {
 
-	public static final String KRW_UNIT = "원";
-
-	public List<Lotto> sell(String pay, List<String> manualLottos) {
-		final int paidKRW = parsePaidKRW(pay);
-		validatePayment(paidKRW, manualLottos);
+	public List<Lotto> sell(LottoPayment payment, List<String> manualLottos) {
+		validate(payment, manualLottos);
 
 		final List<Lotto> lottosManually = sellManually(manualLottos);
-		final List<Lotto> lottosAuto = sellAuto(paidKRW, lottosManually);
+		final List<Lotto> lottosAuto = sellAuto(payment, lottosManually);
 
 		return Stream.of(lottosManually, lottosAuto)
 			.flatMap(Collection::stream)
 			.collect(Collectors.toList());
 	}
 
-	private int parsePaidKRW(String s) {
-		try {
-			return Integer.parseInt(s);
-		} catch (NumberFormatException e) {
-			throw new LottoStorePaymentException();
+	private void validate(LottoPayment payment, List<String> manualLottos) {
+		if (null == payment) {
+			throw new LottoStoreSellException();
 		}
-	}
-
-	private void validatePayment(int paidKRW, List<String> manualLottos) {
-		if (paidKRW < Lotto.PRICE_KRW) {
-			throw new LottoStorePaymentException();
+		if (null == manualLottos) {
+			throw new LottoStoreSellException();
 		}
-		final int numOfLottosCanBeSold = paidKRW / Lotto.PRICE_KRW;
-		if (numOfLottosCanBeSold < manualLottos.size()) {
-			throw new LottoStorePaymentException();
+		if (!payment.canBuy(manualLottos.size())) {
+			throw new LottoStoreSellException();
 		}
 	}
 
@@ -43,8 +34,8 @@ public class LottoStore {
 			.collect(Collectors.toList());
 	}
 
-	private List<Lotto> sellAuto(int paidKRW, List<Lotto> lottosManually) {
-		final int numOfLottosCanBeSold = paidKRW / Lotto.PRICE_KRW;
+	private List<Lotto> sellAuto(LottoPayment payment, List<Lotto> lottosManually) {
+		final int numOfLottosCanBeSold = payment.getNumOfLottosCanBuy();
 		final int numOfLottosAuto = numOfLottosCanBeSold - lottosManually.size();
 		return Stream.iterate(1, num -> num + 1)
 			.limit(numOfLottosAuto)
