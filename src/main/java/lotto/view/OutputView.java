@@ -65,26 +65,54 @@ public class OutputView {
 			.append("총 수익률은 ")
 			.append(yield)
 			.append("입니다.");
-		if (yield < LottoResult.COUNT_VALUE) {
-			stringBuilder.append("(기준이 1이기 떄문에 결과적으로 손해라는 의미임)");
-		}
+		appendLossYield(stringBuilder, yield);
+
 		return stringBuilder.toString();
 	}
 
+	public static void appendLossYield(StringBuilder stringBuilder, double yield) {
+		if (validLossYield(yield)) {
+			stringBuilder.append("(기준이 1이기 떄문에 결과적으로 손해라는 의미임)");
+		}
+	}
+
+	public static boolean validLossYield(double yield) {
+		return yield < LottoResult.COUNT_VALUE;
+	}
+
 	public static void validNothing(List<String> rankStringList, Map.Entry<LottoRank, Integer> rankEntry) {
-		if (rankEntry.getKey() != LottoRank.NOTHING) {
+		if (validNothing(rankEntry)) {
 			rankStringList.add(stringBuilderAppend(rankEntry));
 		}
+	}
+
+	public static boolean validNothing(Map.Entry<LottoRank, Integer> rankEntry) {
+		return rankEntry.getKey() != LottoRank.NOTHING;
 	}
 
 	public static String stringBuilderAppend(Map.Entry<LottoRank, Integer> rankEntry) {
 		LottoRank lottoRank = rankEntry.getKey();
 		StringBuilder stringBuilder = new StringBuilder();
+		if (lottoRank == LottoRank.SECOND) {
+			return stringBuilderSecondRankAppend(stringBuilder, rankEntry);
+		}
 		return stringBuilder
 			.append(LottoRank.containsCount(lottoRank))
 			.append("개 일치 ")
 			.append("(")
 			.append(LottoRank.getMoney(lottoRank))
+			.append("원)- ")
+			.append(rankEntry.getValue())
+			.append("개").toString();
+	}
+
+	public static String stringBuilderSecondRankAppend(StringBuilder stringBuilder,
+		Map.Entry<LottoRank, Integer> rankEntry) {
+		return stringBuilder
+			.append(LottoRank.containsCount(rankEntry.getKey()))
+			.append("개 일치, 보너스 볼 일치")
+			.append("(")
+			.append(LottoRank.getMoney(rankEntry.getKey()))
 			.append("원)- ")
 			.append(rankEntry.getValue())
 			.append("개").toString();
