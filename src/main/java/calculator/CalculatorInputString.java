@@ -16,7 +16,7 @@ public class CalculatorInputString {
 
 	public CalculatorNumbers toCalculateNumbers() {
 		try {
-			return new CalculatorNumbers(CalculatorInputStringParser.parse(value));
+			return new CalculatorNumbers(StringSplitParser.parse(value));
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(MESSAGE_VALUE_IS_NOT_NUMBER_FORMAT);
 		}

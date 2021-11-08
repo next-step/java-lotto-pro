@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class CalculatorInputStringParser {
+public class StringSplitParser {
 	private static final Pattern PATTERN_DEFAULT_DELIMITERS = Pattern.compile("[,:]");
 	private static final Pattern PATTERN_FOR_CAPTURE_CUSTOM_DELIMITER_AND_NUMBERS = Pattern.compile("//(.)\n(.*)");
 

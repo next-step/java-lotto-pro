@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import calculator.CalculatorInputStringParser;
+import calculator.StringSplitParser;
 
 public class Lotto {
 	public static final String MESSAGE_NOT_ALLOW_LENGTH = "LOTTO_NUMBERS_LENGTH_MUST_BE_6";
@@ -48,7 +48,7 @@ public class Lotto {
 	}
 
 	private static List<LottoNumber> parse(String lottoNumbersString) {
-		return CalculatorInputStringParser.parse(lottoNumbersString)
+		return StringSplitParser.parse(lottoNumbersString)
 			.stream()
 			.map(LottoNumber::new)
 			.collect(Collectors.toList());
