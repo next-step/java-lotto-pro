@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoStatics;
 import lotto.domain.LottoStaticsResult;
 import lotto.domain.LottoTicketGenerator;
 import lotto.domain.LottoTickets;
@@ -49,7 +50,7 @@ public class LottoGameController {
 			winningReqDto.getBonusNumber());
 		Money purchaseMoney = Money.of(dto.getPurchaseMoney());
 
-		LottoStaticsResult lottoStaticsResult = LottoStaticsResult.calculate(dto.getTotalTickets()
+		LottoStaticsResult lottoStaticsResult = LottoStatics.calculate(dto.getTotalTickets()
 			, winningLotto, purchaseMoney);
 
 		ResultView.showPrize(lottoStaticsResult.getRankCount(), lottoStaticsResult.getProfit());

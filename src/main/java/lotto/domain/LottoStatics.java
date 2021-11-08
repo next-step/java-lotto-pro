@@ -5,7 +5,16 @@ import java.util.Map;
 
 public class LottoStatics {
 
-	public static RankCounts calculateRankCount(LottoTickets tickets, WinningLotto winningLotto) {
+	public static LottoStaticsResult calculate(LottoTickets lottoTickets,
+		WinningLotto winningLotto,
+		Money purchaseMoney
+	) {
+		RankCounts rankCounts = LottoStatics.calculateRankCount(lottoTickets, winningLotto);
+		double profit = LottoStatics.calculateProfit(rankCounts, purchaseMoney);
+		return LottoStaticsResult.of(rankCounts, profit);
+	}
+
+	private static RankCounts calculateRankCount(LottoTickets tickets, WinningLotto winningLotto) {
 		Map<Rank, Integer> map = initRankCounts();
 		for (LottoTicket lottoTicket : tickets) {
 			Rank rank = winningLotto.getMatchRank(lottoTicket);
@@ -14,7 +23,7 @@ public class LottoStatics {
 		return RankCounts.of(map);
 	}
 
-	public static int calculateTotalPrize(RankCounts rankCounts) {
+	private static int calculateTotalPrize(RankCounts rankCounts) {
 		return rankCounts.entrySet()
 			.stream()
 			.map((entry) ->
@@ -22,7 +31,7 @@ public class LottoStatics {
 			.reduce(0, Integer::sum);
 	}
 
-	public static double calculateProfit(RankCounts rankCounts, Money money) {
+	private static double calculateProfit(RankCounts rankCounts, Money money) {
 		int totalPrizeMoney = calculateTotalPrize(rankCounts);
 		return calculateProfit(totalPrizeMoney, money);
 	}

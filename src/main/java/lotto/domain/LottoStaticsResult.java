@@ -10,13 +10,6 @@ public class LottoStaticsResult {
 		this.profit = profit;
 	}
 
-	public static LottoStaticsResult calculate(LottoTickets lottoTickets, WinningLotto winningLotto,
-		Money purchaseMoney) {
-		RankCounts rankCounts = LottoStatics.calculateRankCount(lottoTickets, winningLotto);
-		double profit = LottoStatics.calculateProfit(rankCounts, purchaseMoney);
-		return new LottoStaticsResult(rankCounts, profit);
-	}
-
 	public static LottoStaticsResult of(RankCounts rankCounts, double profit) {
 		return new LottoStaticsResult(rankCounts, profit);
 	}

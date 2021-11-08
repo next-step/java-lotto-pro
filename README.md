@@ -99,8 +99,7 @@
     - 당첨 순위에 해당하는 당첨금을 반환한다
     - 일치개수는 0~6 사이여야 한다
 - LottoStatics
-    - 로또티켓들과 당첨번호로 당첨순위들정보(RankCounts)를 계산한다
-    - RankCounts와 구매금액을 통해서 수익률을 계산한다
+    - 로또티켓들과 당첨번호로 당첨순위들정보(RankCounts)와 수익률을 계산한다
 - LottoStaticsResult
     - 순위집계와 수익률 데이터
 - RankCounts
