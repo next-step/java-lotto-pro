@@ -28,4 +28,15 @@ public class BuyAmountTest {
         }).isInstanceOf(MinimumTicketPriceException.class)
         .hasMessageContaining("구입 금액을 확인해 주세요.");
     }
+
+    @DisplayName("수동 구매 크기 초과 테스트")
+    @Test
+    void getManualBuyAmountSizeExceptionTest() {
+        int buyPrice = 3000;
+        // when
+        assertThatThrownBy(() -> {
+            BuyAmount buyAmount = new BuyAmount(buyPrice, 5);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("수동 로또 구매 수를 확인해 주세요.");
+    }
 }
