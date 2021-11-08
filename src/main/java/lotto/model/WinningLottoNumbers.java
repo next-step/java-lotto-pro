@@ -10,19 +10,23 @@ public class WinningLottoNumbers {
 	private final LottoNumbers winningLottoNumbers;
 	private final LottoNumber bonusNumber;
 
-	public WinningLottoNumbers(String inputWinningLottoNumber, String inputBonusNumber) {
-		duplicateBonusNumber(inputWinningLottoNumber, inputBonusNumber);
-		this.winningLottoNumbers = new LottoNumbers(inputWinningLottoNumber);
-		this.bonusNumber = new LottoNumber(Integer.parseInt(inputBonusNumber));
+	private WinningLottoNumbers(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
+		this.winningLottoNumbers = winningLottoNumbers;
+		this.bonusNumber = bonusNumber;
 	}
 
-	private void duplicateBonusNumber(String inputWinningLottoNumber, String bonusNumber) {
+	public static WinningLottoNumbers of(String inputWinningLottoNumber, String inputBonusNumber) {
+		duplicateBonusNumber(inputWinningLottoNumber, inputBonusNumber);
+		return new WinningLottoNumbers(LottoNumbers.from(inputWinningLottoNumber), LottoNumber.from(inputBonusNumber));
+	}
+
+	private static void duplicateBonusNumber(String inputWinningLottoNumber, String bonusNumber) {
 		if (validDuplicateBonusNumber(inputWinningLottoNumber, bonusNumber)) {
 			throw new LottoException(ErrorCode.BONUS_NUMBER_DUPLICATE_ERROR);
 		}
 	}
 
-	private boolean validDuplicateBonusNumber(String inputWinningLottoNumber, String bonusNumber) {
+	private static boolean validDuplicateBonusNumber(String inputWinningLottoNumber, String bonusNumber) {
 		return inputWinningLottoNumber.contains(bonusNumber);
 	}
 

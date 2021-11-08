@@ -19,12 +19,12 @@ class WinningLottoNumbersTest {
 	}, delimiter = ':')
 	void 입력된_문자열로_당첨번호_생성테스트(String input, String bonusInput) {
 		// given // when
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(input, bonusInput);
+		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(input, bonusInput);
 
 		// then
 		assertAll(
 			() -> assertThat(winningLottoNumbers.size()).isEqualTo(6),
-			() -> assertThat(winningLottoNumbers.containsLottoNumber(new LottoNumber(1))).isTrue()
+			() -> assertThat(winningLottoNumbers.containsLottoNumber(LottoNumber.from(1))).isTrue()
 		);
 	}
 
@@ -37,7 +37,7 @@ class WinningLottoNumbersTest {
 	void 보너스볼이_입력된_로또번호와_겹칠때_예외처리(String input, String bonusInput) {
 		// given // when // then
 		assertThatThrownBy(() -> {
-			new WinningLottoNumbers(input, bonusInput);
+			WinningLottoNumbers.of(input, bonusInput);
 		}).isInstanceOf(LottoException.class)
 			.hasMessageContaining(ErrorCode.BONUS_NUMBER_DUPLICATE_ERROR.getErrorMessage());
 	}
@@ -49,10 +49,10 @@ class WinningLottoNumbersTest {
 	}, delimiter = ':')
 	void 로또번호와_당첨번호를_비교하여_값이_존재하는지_판단하는_테스트(String inputNumber, String bonusNumber, int lottoNumber, int resultCount) {
 		//given
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputNumber, bonusNumber);
+		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(inputNumber, bonusNumber);
 
 		//when
-		int containsCount = winningLottoNumbers.containsCountLottoNumber(new LottoNumber(lottoNumber));
+		int containsCount = winningLottoNumbers.containsCountLottoNumber(LottoNumber.from(lottoNumber));
 
 		//then
 		assertThat(resultCount).isEqualTo(containsCount);
