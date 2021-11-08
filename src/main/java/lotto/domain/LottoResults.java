@@ -29,9 +29,9 @@ public class LottoResults {
         return lottoRankingAmounts;
     }
 
-    public int getMatchAmount(int matchAmount) {
+    public int getMatchAmount(int matchAmount, boolean matchBonus) {
         return lottoRankingAmounts.get(
-                LottoRankingStatus.getLottoRankingFromMatchAmount(matchAmount)
+                LottoRankingStatus.valueOf(matchAmount, matchBonus)
         );
     }
 
