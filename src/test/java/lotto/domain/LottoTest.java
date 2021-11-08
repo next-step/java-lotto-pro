@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.Arrays;
 
@@ -36,5 +37,16 @@ class LottoTest {
 		Lotto lotto2 = Lotto.from(Arrays.asList(1, 2, 3, 7, 8, 9));
 
 		assertThat(lotto1.countMatch(lotto2)).isEqualTo(3);
+	}
+
+	@Test
+	@DisplayName("특정 로또 번호의 포함 여부를 확인할 수 있다.")
+	void testNumberContains() {
+		Lotto lotto = Lotto.from(Arrays.asList(1,2,3,4,5,6));
+
+		assertAll(
+			() -> assertThat(lotto.contains(LottoNumber.from(5))).isTrue(),
+			() -> assertThat(lotto.contains(LottoNumber.from(7))).isFalse()
+		);
 	}
 }

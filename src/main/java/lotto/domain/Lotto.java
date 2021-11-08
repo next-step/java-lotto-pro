@@ -45,6 +45,10 @@ public class Lotto {
 		return matchCount;
 	}
 
+	public boolean contains(final LottoNumber number) {
+		return lottoNumbers.contains(number);
+	}
+
 	private void validateNonDuplicated(final List<LottoNumber> numbers) {
 		Set<LottoNumber> numberSet = new HashSet<>(numbers);
 
