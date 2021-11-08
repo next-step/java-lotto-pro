@@ -32,7 +32,7 @@ public class LottoShop {
         resultView.printPurchaseAckMessage(lottos.count());
         resultView.printLottos(lottos);
 
-        LottoWinReader lottoWinReader = getLottoWinReader();
+        LottoWinReader lottoWinReader = makeLottoWinReader();
 
         Map<Winnings, Integer> statistic = giveStatistic(lottoWinReader, lottos);
         resultView.printCorrespondLottoNumber(statistic);
@@ -53,15 +53,15 @@ public class LottoShop {
         return lottoMachine.issueAuto(amount);
     }
 
-    private LottoWinReader getLottoWinReader() {
+    private LottoWinReader makeLottoWinReader() {
         try {
             resultView.printLastWinLottoNumbersMessage();
             String readLottoNumbers = inputView.readWinLottoNumbers();
             resultView.printBonusNumberInputMessage();
             String readBonusLottoNumber = inputView.readWinBonusLottoNumber();
-            return LottoWinReader.read(readLottoNumbers, readBonusLottoNumber);
+            return LottoWinReader.make(readLottoNumbers, readBonusLottoNumber);
         } catch (IllegalArgumentException e) {
-            return getLottoWinReader();
+            return makeLottoWinReader();
         }
     }
 
