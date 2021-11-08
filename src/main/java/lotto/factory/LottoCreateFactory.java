@@ -47,10 +47,7 @@ public class LottoCreateFactory {
     }
 
     private static boolean validDuplicate(List<Integer> numbers) {
-        Set<Integer> set = new HashSet<>();
-        for (Integer number : numbers) {
-            set.add(number);
-        }
+        Set<Integer> set = new HashSet<>(numbers);
         return set.size() != Lotto.SIZE;
     }
 
