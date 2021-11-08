@@ -80,8 +80,8 @@ public class LottoNumbers {
                 .count();
     }
 
-    public LottoResult getLottoResult(LottoNumbers prizeLottoNumbers) {
-        return new LottoResult(getMatchCount(prizeLottoNumbers));
+    public LottoResult getLottoResult(LottoNumbers prizeLottoNumbers, LottoNumber bonusLottoNumber) {
+        return new LottoResult(getMatchCount(prizeLottoNumbers), containsNumber(bonusLottoNumber));
     }
 
     @Override

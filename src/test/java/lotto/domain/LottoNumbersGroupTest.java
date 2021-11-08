@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,18 +17,9 @@ public class LottoNumbersGroupTest {
 
     @BeforeEach
     void setup() {
-        exampleLottoNumbers1 = new LottoNumbers(
-                Stream.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
-                        .collect(Collectors.toSet()));
-        exampleLottoNumbers2 = new LottoNumbers(
-                Stream.of(new LottoNumber(4), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(13), new LottoNumber(12), new LottoNumber(14))
-                        .collect(Collectors.toSet()));
-        exampleLottoNumbers3 = new LottoNumbers(
-                Stream.of(new LottoNumber(42), new LottoNumber(12), new LottoNumber(24),
-                        new LottoNumber(32), new LottoNumber(11), new LottoNumber(15))
-                        .collect(Collectors.toSet()));
+        exampleLottoNumbers1 = Fixture.lottoNumbersOf(1, 2, 3, 4, 5, 6);
+        exampleLottoNumbers2 = Fixture.lottoNumbersOf(4, 2, 3, 13, 12, 14);
+        exampleLottoNumbers3 = Fixture.lottoNumbersOf(42, 12, 24, 32, 11, 15);
 
         prizeLottoNumbers = exampleLottoNumbers1;
     }
@@ -70,11 +59,12 @@ public class LottoNumbersGroupTest {
     @Test
     void getLottoResultFromLottoNumberGroupTest() {
         String[] myLottoNumbers = new String[]{"1,2,3,4,5,6", "2,3,4,13,12,14", "27,13,25,35,9,15"};
+        LottoNumber bonusLottoNumber = new LottoNumber(44);
         LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(myLottoNumbers);
         // when
-        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers);
+        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers, bonusLottoNumber);
         // then
-        assertThat(lottoResults.getMatchAmount(3)).isEqualTo(1);
-        assertThat(lottoResults.getMatchAmount(6)).isEqualTo(1);
+        assertThat(lottoResults.getMatchAmount(3, false)).isEqualTo(1);
+        assertThat(lottoResults.getMatchAmount(6, false)).isEqualTo(1);
     }
 }

@@ -1,9 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.BuyAmount;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoNumbersGroup;
-import lotto.domain.LottoResults;
+import lotto.domain.*;
 
 import java.util.Scanner;
 
@@ -21,7 +18,16 @@ public class LottoController {
         String prizeLottoNumbersText = inputPrizeLottoNumbers();
         LottoNumbers prizeLottoNumbers = new LottoNumbers(prizeLottoNumbersText);
 
-        showResults(buyAmount, lottoNumbersGroup, prizeLottoNumbers);
+        int bonusNumber = inputBonusNumber();
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+
+        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers, bonusLottoNumber);
+        showResults(buyAmount, lottoResults);
+    }
+
+    private int inputBonusNumber() {
+        LottoMessage.showAskBonusNumber();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     private int inputBuyPrice() {
@@ -39,9 +45,7 @@ public class LottoController {
         return scanner.nextLine();
     }
 
-    private void showResults(BuyAmount buyAmount, LottoNumbersGroup lottoNumbersGroup,
-                             LottoNumbers prizeLottoNumbers) {
-        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers);
+    private void showResults(BuyAmount buyAmount, LottoResults lottoResults) {
         LottoResultsView lottoResultsView = new LottoResultsView(buyAmount, lottoResults);
         lottoResultsView.showResults();
     }

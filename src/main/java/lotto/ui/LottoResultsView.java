@@ -8,7 +8,9 @@ import lotto.dto.LottoResultsDto;
 import java.util.Map;
 
 public class LottoResultsView {
-    public static final String MATCH_DESCRIPTION = "%s개 일치 (%s원)- %s개";
+    public static final String MATCH_AMOUNT_DESCRIPTION = "%s개 일치";
+    public static final String MATCH_BONUS_DESCRIPTION = ", 보너스 볼 일치";
+    public static final String MATCH_PRICE_AND_TOTAL_AMOUNT_DESCRIPTION = " (%s원)- %s개";
     private final BuyAmount buyAmount;
     private final LottoResults lottoResults;
 
@@ -39,12 +41,16 @@ public class LottoResultsView {
             return;
         }
 
-        result.append(getMatchDescription(lottoRankingStatus.getMatchAmount(), lottoRankingStatus.getPrizeAmount(), matchCount))
+        result.append(getMatchDescription(lottoRankingStatus, matchCount))
                 .append(System.lineSeparator());
 
     }
 
-    public String getMatchDescription(int matchAmount, int prizeAmount, int matchCount) {
-        return String.format(MATCH_DESCRIPTION, matchAmount, prizeAmount, matchCount);
+    private String getMatchDescription(LottoRankingStatus lottoRankingStatus, int matchCount) {
+        String description = lottoRankingStatus.isMatchBonus() ?
+                MATCH_AMOUNT_DESCRIPTION + MATCH_BONUS_DESCRIPTION + MATCH_PRICE_AND_TOTAL_AMOUNT_DESCRIPTION :
+                MATCH_AMOUNT_DESCRIPTION + MATCH_PRICE_AND_TOTAL_AMOUNT_DESCRIPTION;
+
+        return String.format(description, lottoRankingStatus.getMatchAmount(), lottoRankingStatus.getPrizeAmount(), matchCount);
     }
 }

@@ -22,7 +22,7 @@ public class LottoResultsTest {
     @DisplayName("로또 결과들 중 6개 다 맞춘 순위의 개수 테스트")
     @Test
     void getLottoResults() {
-        assertThat(lottoResults.getMatchAmount(6)).isEqualTo(1);
+        assertThat(lottoResults.getMatchAmount(6, false)).isEqualTo(1);
     }
 
     @DisplayName("로또 결과들 중 match3 1개, match6 1개 맞췄을 경우 합계 테스트")
