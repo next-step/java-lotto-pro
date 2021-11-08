@@ -18,6 +18,7 @@ public class Lotto {
 
 	private List<Integer> lottoNumbers;
 	private long winningNumberMatchesCount;
+	private boolean matchBonusNumber;
 
 	public Lotto() {
 		this.lottoNumbers = new ArrayList<>();
@@ -67,5 +68,21 @@ public class Lotto {
 	 */
 	public long getWinningNumberMatchesCount() {
 		return this.winningNumberMatchesCount;
+	}
+
+	/**
+	 * 보너스볼 일치 여부 Setter
+	 * @param bonusNumber
+	 */
+	public void setMatchBonusNumber(int bonusNumber) {
+		this.matchBonusNumber = lottoNumbers.contains(bonusNumber);
+	}
+
+	/**
+	 * 보너스볼 일치여부 Getter
+	 * @return
+	 */
+	public boolean getMatchBonusNumber() {
+		return this.matchBonusNumber;
 	}
 }

@@ -26,7 +26,7 @@ public class AutomaticLotto {
 		List<Integer> winningNumbers = getLatestWinningNumbers();
 		int secondWinningNumber =getSecondWinningNumber();
 		MessageUtil.printInfoLog("2등 보너스 볼 : "+ secondWinningNumber);
-		lottos.setWinningNumberMatchesCount(winningNumbers);
+		lottos.setWinningNumberMatchesCount(winningNumbers, secondWinningNumber);
 		lottos.printLottoMatchesCountStatistics();
 	}
 
@@ -72,6 +72,10 @@ public class AutomaticLotto {
 		return winningNumbers;
 	}
 
+	/**
+	 * 사용자 입력을 통해 2등 보너스볼 숫자 가져오기
+	 * @return
+	 */
 	public static int getSecondWinningNumber() {
 		int secondWinningNumber = 0;
 		MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_MESSAGE);

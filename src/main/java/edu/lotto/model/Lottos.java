@@ -51,9 +51,11 @@ public class Lottos {
 	 * 지난주 정답이 로또 리스트의 로또 번호와 일치하는 숫자가 몇개인지 설정
 	 * @param winningNumbers
 	 */
-	public void setWinningNumberMatchesCount(List<Integer> winningNumbers) {
+	public void setWinningNumberMatchesCount(List<Integer> winningNumbers, int bonusNumber) {
 		for(Lotto lotto : this.lottos) {
 			lotto.setWinningNumberMatchesCount(winningNumbers);
+			lotto.setMatchBonusNumber(bonusNumber);
+			MessageUtil.printInfoLog("match bonus ? " + lotto.getMatchBonusNumber());
 		}
 	}
 
