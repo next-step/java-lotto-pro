@@ -7,14 +7,6 @@ import java.util.Optional;
  * 당첨번호와 비교하여 발생할 수 있는 결과 케이스를 enum으로 정의
  */
 public enum LottoMatchRank {
-	// FIRST(6, 2_000_000_000),
-	// SECOND(5, 30_000_000),
-	// THIRD(5, 1_500_000),
-	// FOURTH(4, 50_000),
-	// FIFTH(3, 5_000),
-	// SIXTH(2, 0),
-	// SEVENTH(1, 0),
-	// MISS(0, 0);
 
 	SIX_POINT(6, 2_000_000_000),
 	FIVE_POINT_AND_BONUS(5, 30_000_000),

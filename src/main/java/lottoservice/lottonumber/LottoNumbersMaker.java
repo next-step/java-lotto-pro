@@ -33,7 +33,7 @@ public class LottoNumbersMaker {
 			.mapToObj(LottoNumber::new).collect(Collectors.toList());
 	}
 
-	/* Collections.shuffle 메서드를 이용하여 collection을 섞은 후 앞에서 부터 SIZE_OF_LOTTERY_NUMBERS 갯수만큼 subList  */
+	/* lottoNumberCandidates를 재배열 한 후 앞에서 부터 SIZE_OF_LOTTERY_NUMBERS 갯수만큼 subList  */
 	public List<LottoNumber> makeLottoNumbers() {
 		arrangeManipulator.shuffleElements(lottoNumberCandidates);
 		List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberCandidates.subList(0,
