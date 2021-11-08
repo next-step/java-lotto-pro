@@ -7,10 +7,10 @@
 
 ### 프로그래밍 요구사항
 
-- [ ] 모든 원시값과 문자열을 포장.
+- 모든 원시값과 문자열을 포장.
     - 로또 숫자가 int이니 LottoNumber 구현
-- [ ] 축약 금지
-- [ ] 예외처리를 통해 에러가 발생하지 않도록 하기
+- 축약 금지
+- 예외처리를 통해 에러가 발생하지 않도록 하기
     - 사용자가 잘못된 값을 이력 시 exception으로 에러 처리하기
     - java 8 optional 을 적용해 NullPointerException 발생하지 않도록 하기
 - UI 로직을 제외하고, 모두 TDD로 구현한다
@@ -72,7 +72,6 @@
 - PositiveNumber
     - 0 이상 정슈어야 한다
     - 수동 구매 갯수, 구입가능갯수
-    - [ ] 보다 크거나, 작거나, 같은지 비교할 수 있어야 한다
 - LottoBoolean
     - boolean 객체
     - 참인지, 거짓인지 확인할 수 있어야 한다
@@ -95,7 +94,6 @@
     - N개의 로또 티켓들로 생성한다
     - 로또 사이즈를 확인할 수 있다
     - 로또 티켓을 추가한다
-    - [ ] LottoTicketsDto 을 생성하여 반환한다
 - LottoTicketGenerator
     - 입력한 갯수에 맞는 로또 티켓들을 자동 생성한다
 - WinningLotto
@@ -110,24 +108,10 @@
 - LottoStatics
     - 로또티켓들과 당첨번호로 당첨순위들정보(RankCounts)를 계산한다
     - RankCounts와 구매금액을 통해서 수익률을 계산한다
-- PurchaseStaticsDto
-    - 수동과 자동으로 몇장 갯수, 총 구매한 로또티켓 번호들 정보
-
-
-- NumberDto
-    - 입력한 구매금액
-    - 입력한 수동구매 로또 수
-    - 보너스 번호
-- ResultStaticsDto
-    - 순위갯수정보(RankCounts) 와 수익률을 저장한 DTO
-        - 각 순위별 일치 갯수, 각 순위별 당첨금 정보, 수익률(소수점) 정보
-- LottoTicketDto
-    - 입력받은 당첨번호
-    - 수동으로 구매하는 번호
-    - 출력하는 로또티켓 번호
-- LottoTicketsDto
-    - 입력한 수동으로 구매할 번호들
-    - 출력할 로또 티켓들의 번호들
+- LottoStaticsResult
+    - 순위집계와 수익률 데이터
+- RankCounts
+    - 순위집계 데이터
 
 ---
 
