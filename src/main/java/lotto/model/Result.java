@@ -41,7 +41,8 @@ public class Result {
         return result;
     }
 
-    public String yield(BigInteger purchase) {
+    public String yield(int size) {
+        BigInteger purchase = Price.totalPurchase(size);
         BigInteger lottoRevenueAmount = makeRevenueAmount();
         double lottoYield = lottoRevenueAmount.doubleValue() / purchase.doubleValue();
         return String.format(ConstantString.SECOND_DECIMAL_PLACE, lottoYield);

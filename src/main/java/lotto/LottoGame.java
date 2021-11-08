@@ -48,6 +48,6 @@ public class LottoGame {
         View.print(Message.WINNING_LINE);
         Result result = new Result(lottos, winLotto);
         ResultView.printReport(result.getMatchResult());
-        ResultView.printYield(result.yield(Price.totalPurchase(lottos.size())));
+        ResultView.printYield(result.yield(lottos.size()));
     }
 }

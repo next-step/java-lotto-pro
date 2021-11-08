@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.factory.LottoCreateFactory;
+import lotto.view.ResultView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,15 +33,6 @@ public class LottosTest {
         assertThat(lottos.size()).isEqualTo(20);
     }
 
-    @DisplayName("당첨 통계 결과 검증")
-    @Test
-    void report() {
-        assertThat(result.toString()).isEqualTo("3개 일치 (5000원)- 1개\n" +
-                "4개 일치 (50000원)- 0개\n" +
-                "5개 일치 (1500000원)- 0개\n" +
-                "6개 일치 (2000000000원)- 1개\n");
-    }
-
     @DisplayName("수익률 결과")
     @Test
     void name() {
@@ -49,6 +41,6 @@ public class LottosTest {
         assertThat(lottos.size()).isEqualTo(2);
         assertThat(purchase.toString()).isEqualTo("2000");
         assertThat(result.makeRevenueAmount()).isEqualTo("2000005000");
-        assertThat(result.yield(purchase)).isEqualTo("1000002.50");
+        assertThat(result.yield(lottos.size())).isEqualTo("1000002.50");
     }
 }
