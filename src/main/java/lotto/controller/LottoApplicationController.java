@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumberFactory;
+import lotto.domain.LottoShop;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStatistics;
 import lotto.domain.PurchaseAmount;
@@ -29,7 +29,7 @@ public class LottoApplicationController {
 	public void purchaseLotto() {
 		int purchaseQuantity = getPurchaseQuantity();
 		while (continuePurchase(purchaseQuantity)) {
-			lottos.add(new Lotto(new LottoNumbers(LottoNumberFactory.create())));
+			// lottos.add(new Lotto(new LottoNumbers(LottoShop.sell())));
 			purchaseQuantity--;
 		}
 	}

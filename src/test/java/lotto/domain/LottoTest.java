@@ -16,7 +16,7 @@ public class LottoTest {
 		LottoNumbers lottoNumbers = new LottoNumbers(1, 13, 26, 38, 41, 8);
 
 		//when
-		int result = lottoNumbers.isMatch(inputData);
+		int result = lottoNumbers.ifMatchCount(inputData);
 
 		//then
 		assertThat(result).isEqualTo(expectedValue);
