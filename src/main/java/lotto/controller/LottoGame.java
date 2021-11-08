@@ -3,7 +3,9 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.LottoView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class LottoGame {
 
@@ -15,6 +17,10 @@ public class LottoGame {
 
     public void start() {
         final Money money = LottoView.getMoney();
+
+        final int manualCount = LottoView.getManualCount();
+        final ManualLottos manualLottos = LottoView.getManualLottos(manualCount);
+
         final Lottos lottos = new Lottos(money, randomNumbers);
 
         LottoView.displayCount(money);
