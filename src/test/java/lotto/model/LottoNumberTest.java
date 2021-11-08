@@ -20,7 +20,7 @@ class LottoNumberTest {
 	void 로또번호_생성시_1_45범위의_숫자가_아닐경우_예외처리(int outNumber) {
 		// given // when // then
 		assertThatThrownBy(() -> {
-			new LottoNumber(outNumber);
+			LottoNumber.from(outNumber);
 		}).isInstanceOf(LottoException.class)
 			.hasMessageContaining(ErrorCode.OUT_OF_LOTTO_NUMBER_RANGE_ERROR.getErrorMessage());
 	}
@@ -29,7 +29,7 @@ class LottoNumberTest {
 	@Test
 	void 랜덤로또번호_생성_테스트() {
 		// given // when
-		LottoNumber lottoNumber = new LottoNumber();
+		LottoNumber lottoNumber = LottoNumber.from();
 
 		// then
 		assertThat(lottoNumber).isInstanceOf(LottoNumber.class);
@@ -43,9 +43,9 @@ class LottoNumberTest {
 		int number2 = 4;
 
 		// when
-		LottoNumber lottoNumber1 = new LottoNumber(number1);
-		LottoNumber lottoNumber2 = new LottoNumber(number1);
-		LottoNumber lottoNumber3 = new LottoNumber(number2);
+		LottoNumber lottoNumber1 = LottoNumber.from(number1);
+		LottoNumber lottoNumber2 = LottoNumber.from(number1);
+		LottoNumber lottoNumber3 = LottoNumber.from(number2);
 
 		// then
 		assertAll(
