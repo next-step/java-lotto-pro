@@ -1,9 +1,13 @@
 package lotto.service;
 
+import lotto.common.exceptions.CustomEmptyException;
+import lotto.common.utils.StringUtil;
 import lotto.domain.*;
 import lotto.ui.InputMessage;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
+
+import java.util.Optional;
 /***
  *  피드백 1) 출력에 대한 책임을 도메인에게 주는 것보다 도메인의 값을 활용하자.
  *     참고 : https://javacan.tistory.com/entry/methods-about-exporting-domain-object-to-view
@@ -21,6 +25,9 @@ public class LottoService {
     public void start() {
         PurchasePrice price = this.purchase();
         ResultView.printPurchaseResult(price);
+
+        int i = this.inputManualLottoCount(price);
+        System.out.println(i);
 
         Lottos lottos = this.getLottos(price);
         ResultView.printPurchasedLotto(lottos);
@@ -42,6 +49,21 @@ public class LottoService {
             return purchase();
         }
     }
+
+    private int inputManualLottoCount(PurchasePrice price) {
+        try {
+            ResultView.print(InputMessage.MANUAL_COUNT.getMessage());
+            Optional<String> input = Optional.ofNullable(InputView.readLine());
+            if (!input.isPresent()) throw new CustomEmptyException();
+            int count = StringUtil.parseNumber(input.get());
+            if(!price.isAbleToBuy(count)) throw new IllegalArgumentException("구매 가능한 수량을 초과하였습니다.");
+            return count;
+        } catch (Exception e) {
+            ResultView.print(e.getMessage());
+            return inputManualLottoCount(price);
+        }
+    }
+
 
     private WinningLotto inputBonusNumber(Lotto winning) {
         try {

@@ -70,4 +70,8 @@ public class PurchasePrice {
     public Lottos buyLottery() {
         return new Lottos(IntStream.range(0, this.calculateQuantity()).mapToObj(i -> LottoMaker.createLotto()).collect(Collectors.toList()));
     }
+
+    public boolean isAbleToBuy(int wantToBuyCount) {
+        return this.calculateQuantity() >= wantToBuyCount;
+    }
 }

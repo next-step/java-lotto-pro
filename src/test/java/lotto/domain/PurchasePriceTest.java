@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.BDDMockito;
 
 import java.util.Arrays;
 
@@ -79,5 +80,18 @@ public class PurchasePriceTest {
         //THEN
         assertThat(purchasePrice.isMatchCount(5)).isTrue();
         assertThat(purchasePrice.isMatchCount(6)).isFalse();
+    }
+
+    @Test
+    @DisplayName("수동_로또구매개수_테스트")
+    public void T6_manualCountTest() {
+        //GIVEN
+        int possibleToBuyCount = 5;
+        int impossibleToBuyCount = 6;
+        //WHEN
+        PurchasePrice purchasePrice = PurchasePrice.valueOf(5000);
+        //THEN
+        assertThat(purchasePrice.isAbleToBuy(possibleToBuyCount)).isTrue();
+        assertThat(purchasePrice.isAbleToBuy(impossibleToBuyCount)).isFalse();
     }
 }
