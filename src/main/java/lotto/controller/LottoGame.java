@@ -20,7 +20,9 @@ public class LottoGame {
         LottoView.displayCount(money);
         LottoView.displayLottos(lottos);
 
-        final Lotto winningLotto = LottoView.getWinningLotto();
+        final WinningLotto winningLotto = new WinningLotto(
+                LottoView.getWinningNumbers(),
+                LottoView.getBonusBall());
         final List<Rank> ranks = lottos.match(winningLotto);
 
         LottoView.displayStatic(new Result(ranks, money));

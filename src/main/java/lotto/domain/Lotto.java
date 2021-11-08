@@ -32,7 +32,7 @@ public class Lotto {
         }
     }
 
-    public int match(final Lotto lotto) {
+    public int matchCount(final Lotto lotto) {
         return (int) this.lotto.stream()
                 .filter(lotto::contain)
                 .count();
@@ -40,6 +40,10 @@ public class Lotto {
 
     private boolean contain(LottoNumber number) {
         return this.lotto.contains(number);
+    }
+
+    public boolean containBonus(Bonus bonus) {
+        return lotto.contains(new LottoNumber(bonus));
     }
 
     @Override

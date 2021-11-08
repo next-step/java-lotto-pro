@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
 
-    private static final Lotto 로또 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    public static final Lotto 로또 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
     @Test
     void 로또를_생성한다() {
@@ -29,13 +29,12 @@ public class LottoTest {
     }
 
     @Test
-    void 당첨번호_개수를_반환한다() {
-        Lotto 당첨_로또 = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
-        assertThat(당첨_로또.match(로또)).isEqualTo(3);
+    void 숫자_문자열로_생성한다() {
+        assertThat(new Lotto("1, 2, 3, 4, 5, 6")).isEqualTo(로또);
     }
 
     @Test
-    void 숫자_문자열로_생성한다() {
-        assertThat(new Lotto("1, 2, 3, 4, 5, 6")).isEqualTo(로또);
+    void 보너스_숫자를_확인한다() {
+        assertThat(로또.containBonus(new Bonus(1))).isTrue();
     }
 }

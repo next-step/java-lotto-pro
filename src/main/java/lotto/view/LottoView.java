@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 public class LottoView {
 
+    private static final String MATCH_RESULT_BONUS = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
+    private static final String MATCH_RESULT = "%d개 일치 (%d원)- %d개\n";
+    private static final int MIN_PROFIT_RATE = 1;
     private static final Scanner scanner = new Scanner(System.in);
 
     public static Money getMoney() {
@@ -31,9 +34,9 @@ public class LottoView {
         System.out.printf("[ %s ]\n", lotto.toString());
     }
 
-    public static Lotto getWinningLotto() {
+    public static String getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new Lotto(scanner.next());
+        return scanner.next();
     }
 
     public static void displayStatic(final Result result) {
@@ -41,9 +44,27 @@ public class LottoView {
         System.out.println("---------");
 
         for (Map.Entry<Rank, Integer> entry : result.getResult().entrySet()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", entry.getKey().getCount(), entry.getKey().getPrice(), entry.getValue());
+            final Rank rank = entry.getKey();;
+            System.out.printf(getResultMessage(rank), rank.getCount(), rank.getPrice(), entry.getValue());
         }
 
-        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result.getProfitRate());
+        final double rate = result.getProfitRate();
+
+        System.out.printf("총 수익률은 %.2f입니다.", rate);
+        if (rate < MIN_PROFIT_RATE) {
+            System.out.printf("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+    }
+
+    private static String getResultMessage(Rank rank) {
+        if (rank.equals(Rank.SECOND)) {
+            return MATCH_RESULT_BONUS;
+        }
+        return MATCH_RESULT;
+    }
+
+    public static Integer getBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
     }
 }

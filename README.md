@@ -14,8 +14,13 @@
 로또 (`Lotto`)
 `Lotto`는 6개의 `LottoNumber`를 가진다
 `Lotto`는 `LottoNumber`는 중복되지 않는다
-`Lotto`는 `Lotto` 와 비교하여 당첨번호 개수를 반환한다
 `Lotto`는 6자리의 숫자 문자열을 받아 생성한다
+`Lotto`는 보너스 숫자를 가지는지 확인한다
+
+당첨로또 (`WinningLotto`)
+`WinningLotto`는 6개의 `LottoNumber`와 `Bonus`를 가진다
+`WinningLotto`는 `Lotto` 와 비교하여 당첨번호 개수를 반환한다
+`WinningLotto`는 `Bonus` 와 중복될 수 없다
 
 로또들 (`Lottos`)
 `Lottos`는 `RandomNumbers`를 가진다
@@ -29,7 +34,7 @@
 랭크(`Rank`)
 `Rank`는 당첨번호 개수 `count`를 가진다
 `Rank`는 당첨번호 금액 `price`를 가진다
-`Rank`는 당첨번호 개수를 받아 `Rank`를 반환한다
+`Rank`는 당첨번호 개수와 보너스 번호를 받아 `Rank`를 반환한다
 
 결과(`Result`)
 `Result`는 `Rank`들을 가진다
@@ -43,6 +48,9 @@
 `RandomNumbers`는 1에서 45까지 랜덤한 숫자들을 생성한다
 `RandomNumbers`는 6자리의 숫자를 생성한다
 `RandomNumbers`는 숫자들은 중복되지 않는다
+
+보너스(`Bonus`)
+`Bonus`는 보너스 숫자를 가진다
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
