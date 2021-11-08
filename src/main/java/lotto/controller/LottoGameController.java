@@ -7,6 +7,8 @@ import lotto.view.ResultView;
 public class LottoGameController {
     public void start() {
         Money money = InputView.inputMoney();
+        int tryCount = InputView.inputManualTryCount();
+
         LottoGame lottoGame = LottoStore.sell(money);
 
         ResultView.printLottoTryCount(lottoGame);
