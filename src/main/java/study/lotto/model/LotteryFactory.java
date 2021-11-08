@@ -23,6 +23,6 @@ public class LotteryFactory {
 
     public TicketLottery generateTicketLottery() {
         final Set<LottoNumber> lottoNumbers = LottoRandoms.getLottoRandomNumbers();
-        return TicketLottery.valueOf(lottoNumbers);
+        return TicketLottery.valueOf(lottoNumbers, TicketLotteryType.AUTO);
     }
 }

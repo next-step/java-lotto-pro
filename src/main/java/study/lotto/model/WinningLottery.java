@@ -5,15 +5,16 @@ import study.lotto.model.exception.EmptyBonusLottoNumberException;
 
 import java.util.Set;
 
-public class WinningLottery extends Lottery {
+public class WinningLottery {
 
     private static final String DUPLICATED_ERROR_MESSAGE = "보너스 번호는 기존에 당첨번호와 중복될 수 없습니다.";
     public static final String NOT_NULL_ERROR_MESSAGE = "보너스 번호는 필수 입니다.";
 
+    private final Lottery lottery;
     private final LottoNumber bonusLottoNumber;
 
     private WinningLottery(final Set<LottoNumber> lottoNumbers, final LottoNumber bonusLottoNumber) {
-        super(lottoNumbers);
+        this.lottery = Lottery.valueOf(lottoNumbers);
         validateBonusNumber(bonusLottoNumber);
         this.bonusLottoNumber = bonusLottoNumber;
     }
@@ -34,12 +35,30 @@ public class WinningLottery extends Lottery {
     }
 
     private void validateDuplicateBonusLottoNumber(final LottoNumber bonusLottoNumber) {
-        if (super.getLottoNumbers().contains(bonusLottoNumber)) {
+        if (lottery.getLottoNumbers().contains(bonusLottoNumber)) {
             throw new DuplicatedBonusLottoNumberException(DUPLICATED_ERROR_MESSAGE);
         }
     }
 
-    public LottoNumber getBonusLottoNumber() {
-        return bonusLottoNumber;
+    public boolean isMatchBonusNumber(final TicketLottery ticketLottery) {
+        return ticketLottery.contains(bonusLottoNumber);
     }
+
+
+    public int match(final TicketLottery ticketLottery) {
+        final Set<LottoNumber> ticketLotteryLottoNumbers = ticketLottery.getLottoNumbers();
+        int matchCount = 0;
+        for (final LottoNumber ticketLotteryLottoNumber : ticketLotteryLottoNumbers) {
+            matchCount = plusIfContains(ticketLotteryLottoNumber, matchCount);
+        }
+        return matchCount;
+    }
+
+    private int plusIfContains(final LottoNumber lottoNumber, int matchCount) {
+        if (lottery.contains(lottoNumber)) {
+            matchCount++;
+        }
+        return matchCount;
+    }
+
 }
