@@ -56,7 +56,7 @@ public class LottoStoreTest {
 		assertThat(lottoStore.sell(payment, manualLottos).size()).isEqualTo(numOfLottos);
 	}
 
-	private LottoPayment createLottoPayment(int KRW) {
-		return LottoPayment.from(String.valueOf(KRW));
+	private LottoPayment createLottoPayment(int krw) {
+		return LottoPayment.from(String.valueOf(krw));
 	}
 }

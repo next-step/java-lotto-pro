@@ -2,25 +2,25 @@ public class LottoPayment {
 
 	public static final String KRW_UNIT = "원";
 
-	private final int numOfLottosCanBuy;
+	private final int krw;
 
-	private LottoPayment(int KRW) {
-		validate(KRW);
-		this.numOfLottosCanBuy = KRW / Lotto.PRICE_KRW;
+	private LottoPayment(int krw) {
+		validate(krw);
+		this.krw = krw;
 	}
 
-	private void validate(int KRW) {
-		if (KRW < Lotto.PRICE_KRW) {
+	private void validate(int krw) {
+		if (krw < Lotto.PRICE_KRW) {
 			throw new LottoPaymentFormatException();
 		}
 	}
 
 	public boolean canBuy(int numberOfLottos) {
-		return numberOfLottos <= numOfLottosCanBuy;
+		return numberOfLottos <= getNumOfLottosCanBuy();
 	}
 
 	public int getNumOfLottosCanBuy() {
-		return numOfLottosCanBuy;
+		return krw / Lotto.PRICE_KRW;
 	}
 
 	public static LottoPayment from(String s) {
