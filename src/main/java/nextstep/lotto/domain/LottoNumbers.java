@@ -3,6 +3,7 @@ package nextstep.lotto.domain;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -22,7 +23,10 @@ public class LottoNumbers implements Iterable<LottoNumber> {
             LottoNumber lottoNumber = new LottoNumber();
             lottoNumbers.add(lottoNumber);
         }
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+
+        List<LottoNumber> sorted = new ArrayList<>(lottoNumbers);
+        Collections.sort(sorted);
+        this.lottoNumbers = sorted;
     }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {

@@ -6,7 +6,7 @@ import nextstep.lotto.util.LottoRandomGenerator;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final Integer LOTTO_MIN_NUMBER = 1;
     private static final Integer LOTTO_MAX_NUMBER = 45;
@@ -44,5 +44,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return Integer.toString(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber that) {
+        return this.lottoNumber - that.lottoNumber;
     }
 }

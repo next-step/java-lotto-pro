@@ -1,6 +1,7 @@
 package nextstep.lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,7 +27,6 @@ public class LottoCount {
             Lotto lotto = new Lotto(lottoNumbers);
             purchaseLotto.add(lotto);
         }
-
         return new PurchaseLotto(purchaseLotto);
     }
 

@@ -1,12 +1,14 @@
 package nextstep.lotto.io;
 
 import nextstep.lotto.domain.Lotto;
+import nextstep.lotto.domain.LottoCount;
 import nextstep.lotto.domain.PurchaseLotto;
 import nextstep.lotto.domain.PurchaseLottoAmount;
 
 import java.util.Scanner;
 
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_AMOUNT_MESSAGE;
+import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_COUNT_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_POSTFIX;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_PREFIX;
 import static nextstep.lotto.constance.LottoExceptionMessage.ERROR;
@@ -29,6 +31,10 @@ public class LottoDisplay {
             System.out.println(ERROR + INVALID_LOTTO_PURCHASE_AMOUNT_MESSAGE);
             return inputPurchaseAmount();
         }
+    }
+
+    public static void printLottoCountResult(LottoCount lottoCount) {
+        System.out.println(lottoCount + PURCHASE_LOTTO_COUNT_MESSAGE);
     }
 
     public static void printAutoLottoResult(PurchaseLotto purchaseLotto) {
