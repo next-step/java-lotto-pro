@@ -43,4 +43,5 @@ public class SetTest {
     public void isContains(int input, Boolean expected) {
         assertThat(numbers.contains(input)).isEqualTo(expected);
     }
+
 }
