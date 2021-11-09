@@ -67,7 +67,7 @@ class LottoTest {
         Lotto winningLotto = new Lotto(winningNumbers);
 
         // when
-        int matchingCountFromLotto = lotto.getMatchingCountFromLotto(winningLotto);
+        int matchingCountFromLotto = lotto.countMatchingFromLotto(winningLotto);
 
         // then
         assertThat(matchingCountFromLotto)
@@ -83,7 +83,7 @@ class LottoTest {
         LottoNumber bonusNumber = new LottoNumber(3);
 
         // when
-        int matchingCountFromLotto = lotto.getMatchingCountFromNumber(bonusNumber);
+        int matchingCountFromLotto = lotto.countMatchingFromLottoNumber(bonusNumber);
 
         // then
         assertThat(matchingCountFromLotto)

@@ -12,8 +12,8 @@ public class WinningLotto {
     }
 
     public LottoRank checkMatchRank(Lotto purchasedLotto) {
-        int matchingNumberCount = purchasedLotto.getMatchingCountFromLotto(lotto);
-        int matchingBonusNumberCount = purchasedLotto.getMatchingCountFromNumber(bonusNumber);
+        int matchingNumberCount = purchasedLotto.countMatchingFromLotto(lotto);
+        int matchingBonusNumberCount = purchasedLotto.countMatchingFromLottoNumber(bonusNumber);
 
         return LottoRank.findRank(matchingNumberCount, matchingBonusNumberCount);
     }
