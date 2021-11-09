@@ -28,11 +28,6 @@ public class LottoStatisticsResponseDto {
         return lottoResultDtos;
     }
 
-    @Deprecated
-    public BigDecimal getYield(Amount amount) {
-        return lottoRanks.getCalculatedYield(amount);
-    }
-
     public BigDecimal getYield() {
         return lottoRanks.getCalculatedYield(amount);
     }
