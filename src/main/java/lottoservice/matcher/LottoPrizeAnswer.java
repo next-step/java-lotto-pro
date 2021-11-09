@@ -43,9 +43,7 @@ public class LottoPrizeAnswer {
 	public LottoMatchResult matchTickets(LottoTickets... tickets) {
 		LottoMatchResult lottoMatchResult = new LottoMatchResult();
 		for(LottoTickets lottoTickets : tickets){
-			for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-				lottoMatchResult.addMatchCount(matchTicket(lottoTicket));
-			}
+			lottoMatchResult.addResult(matchTickets(lottoTickets));
 		}
 		return lottoMatchResult;
 	}
