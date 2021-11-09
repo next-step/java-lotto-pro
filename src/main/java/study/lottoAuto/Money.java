@@ -19,7 +19,11 @@ public class Money {
     }
 
     //구매갯수를 구하는 책임을 여기서 맡을 필요가 있을까...?
-    public int getBuyCount() {
+    public int getPurchaseCount() {
         return money/1000;
+    }
+
+    public int getMoney() {
+        return this.money;
     }
 }

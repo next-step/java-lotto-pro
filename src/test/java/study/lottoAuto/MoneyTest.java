@@ -40,6 +40,6 @@ class MoneyTest {
     @ValueSource(strings = {"14000", "14999"})
     void buyCountTest(String userInput) {
         Money money = new Money(userInput);
-        assertThat(money.getBuyCount()).isEqualTo(14);
+        assertThat(money.getPurchaseCount()).isEqualTo(14);
     }
 }
