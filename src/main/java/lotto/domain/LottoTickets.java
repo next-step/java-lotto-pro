@@ -14,22 +14,6 @@ public class LottoTickets {
         this.lottoTickets = convertArrayToLottoTickets(numberArray);
     }
 
-    private List<LottoTicket> convertArrayToLottoTickets(int[][] numberArray) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int[] numbers : numberArray) {
-            lottoTickets.add(convertArrayToLottoTicket(numbers));
-        }
-        return lottoTickets;
-    }
-
-    private LottoTicket convertArrayToLottoTicket(int[] numbers) {
-        List<Number> numberList = new ArrayList<>();
-        for (int number : numbers) {
-            numberList.add(new Number(number));
-        }
-        return new LottoTicket(numberList);
-    }
-
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
@@ -61,6 +45,22 @@ public class LottoTickets {
             containsBonusNumbers.put(lottoTicket, lottoTicket.isContainNumber(bonusNumber));
         }
         return containsBonusNumbers;
+    }
+
+    private List<LottoTicket> convertArrayToLottoTickets(int[][] numberArray) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int[] numbers : numberArray) {
+            lottoTickets.add(convertArrayToLottoTicket(numbers));
+        }
+        return lottoTickets;
+    }
+
+    private LottoTicket convertArrayToLottoTicket(int[] numbers) {
+        List<Number> numberList = new ArrayList<>();
+        for (int number : numbers) {
+            numberList.add(new Number(number));
+        }
+        return new LottoTicket(numberList);
     }
 
     @Override

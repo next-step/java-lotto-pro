@@ -17,6 +17,22 @@ public class LottoTicket {
         this.numbers = numbers;
     }
 
+    public boolean isContainNumber(Number number) {
+        return numbers.contains(number);
+    }
+
+    public String getLottoTicketString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for (Number number : numbers) {
+            stringBuilder.append(number.getNumber());
+            stringBuilder.append(", ");
+        }
+        stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), "");
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
     private void validateDuplicatedNumber(List<Number> numbers) {
         Set<Number> numberSet = new HashSet<>();
         for (Number number : numbers) {
@@ -33,24 +49,8 @@ public class LottoTicket {
 
     private void validateNumbersCount(List<Number> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_COUNT + "개가 존재해야 합니다. (입력값: " + numbers.size());
+            throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_COUNT + "개가 존재해야 합니다. (입력값: " + numbers.size() + ")");
         }
-    }
-
-    public boolean isContainNumber(Number number) {
-        return numbers.contains(number);
-    }
-
-    public String getLottoTicketString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        for (Number number : numbers) {
-            stringBuilder.append(number.getNumber());
-            stringBuilder.append(", ");
-        }
-        stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), "");
-        stringBuilder.append("]");
-        return stringBuilder.toString();
     }
 
     @Override

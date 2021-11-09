@@ -27,20 +27,6 @@ public enum LottoReward {
         return rewardMoney;
     }
 
-    public static boolean isWinning(int matchCount) {
-        LottoReward lottoReward = findLottoReward(matchCount);
-        return lottoReward == MISS ? false : true;
-    }
-
-    public static LottoReward getLottoReward(int matchCount) {
-        for (LottoReward lottoReward : LottoReward.values()) {
-            if (isSameMathCount(lottoReward.matchCount, matchCount)) {
-                return lottoReward;
-            }
-        }
-        return null;
-    }
-
     public static LottoReward getLottoReward(int matchCount, boolean matchBonus) {
         if (isSameMathCount(matchCount, SECOND_PLACE.matchCount)) {
             return getSecondOrThird(matchBonus);
