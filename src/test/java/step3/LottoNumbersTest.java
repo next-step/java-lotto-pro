@@ -26,7 +26,7 @@ public class LottoNumbersTest {
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
-                new LottoNumbers(overSizeNumbers);
+                LottoNumbers.of(overSizeNumbers);
             }) // then
             .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
     }
@@ -40,7 +40,7 @@ public class LottoNumbersTest {
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
-                new LottoNumbers(numbers);
+                LottoNumbers.of(numbers);
             }) // then
             .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
     }
@@ -53,7 +53,7 @@ public class LottoNumbersTest {
 
         // when
         LottoNumber bonusLottoNumber = LottoNumber.of(1);
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        LottoNumbers lottoNumbers = LottoNumbers.of(numbers);
 
         // then
         boolean isBonusContain = lottoNumbers.isBonusContain(bonusLottoNumber);
@@ -77,8 +77,8 @@ public class LottoNumbersTest {
         List<Integer> winNumbers = parseNumbers(winNumbersStr);
 
         // when
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-        LottoNumbers winLottoNumbers = new LottoNumbers(winNumbers);
+        LottoNumbers lottoNumbers = LottoNumbers.of(numbers);
+        LottoNumbers winLottoNumbers = LottoNumbers.of(winNumbers);
 
         // then
         assertThat(lottoNumbers.containCount(winLottoNumbers)).isEqualTo(expected);

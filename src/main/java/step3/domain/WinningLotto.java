@@ -16,7 +16,7 @@ public class WinningLotto {
     }
 
     public static WinningLotto of(List<Integer> numbers, int bonusNumber) {
-        return new WinningLotto(new LottoNumbers(numbers), LottoNumber.of(bonusNumber));
+        return new WinningLotto(LottoNumbers.of(numbers), LottoNumber.of(bonusNumber));
     }
 
     public int containCount(LottoNumbers lottoNumbers) {

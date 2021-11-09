@@ -1,6 +1,8 @@
 package step3.domain;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +16,7 @@ public class LottoNumbersBundle {
 
     public void addLottoNumbers(NumbersStrategy numbersStrategy) {
         List<Integer> numbers = numbersStrategy.getNumbers();
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        LottoNumbers lottoNumbers = LottoNumbers.of(numbers);
 
         lottoNumbersBundle.add(lottoNumbers);
     }
@@ -42,7 +44,7 @@ public class LottoNumbersBundle {
     public List<String> getResult() {
         return lottoNumbersBundle.stream()
             .map(LottoNumbers::toString)
-            .collect(Collectors.toList());
+            .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
     }
 
     public void merge(LottoNumbersBundle autoLottoNumbersBundle) {

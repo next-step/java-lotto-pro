@@ -13,24 +13,15 @@ public class LottoNumbers {
     public static final int MAX_LOTTO_NUMBERS_SIZE = 6;
     public static final String RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE = String.format("로또 티켓은 %s 개의 숫자만 가능합니다.",
         MAX_LOTTO_NUMBERS_SIZE);
-    private Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    private LottoNumbers() {
-    }
-
-    public LottoNumbers(List<Integer> numbers) {
-        this.lottoNumbers = mapOf(numbers);
+    private LottoNumbers(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
         validSize();
     }
 
-    private Set<LottoNumber> mapOf(List<Integer> numbers) {
-        Set<LottoNumber> result = new HashSet<>();
-
-        for (int number : numbers) {
-            result.add(LottoNumber.of(number));
-        }
-
-        return result;
+    public static LottoNumbers of(List<Integer> numbers) {
+        return new LottoNumbers(mapOf(numbers));
     }
 
     public String toString() {
@@ -77,6 +68,16 @@ public class LottoNumbers {
         if (this.lottoNumbers.size() != MAX_LOTTO_NUMBERS_SIZE) {
             throw new InvalidParamException(RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
         }
+    }
+
+    private static Set<LottoNumber> mapOf(List<Integer> numbers) {
+        Set<LottoNumber> result = new HashSet<>();
+
+        for (int number : numbers) {
+            result.add(LottoNumber.of(number));
+        }
+
+        return result;
     }
 
     @Override
