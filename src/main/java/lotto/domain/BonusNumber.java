@@ -3,10 +3,10 @@ package lotto.domain;
 public class BonusNumber {
     private LottoNumber bonusNumber;
     public BonusNumber(String bonusNumber) {
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = new LottoNumber(Integer.parseInt(bonusNumber));
     }
 
-    public String getBonusNumber() {
-        return this.bonusNumber.getValue();
+    public LottoNumber getBonusNumber() {
+        return this.bonusNumber;
     }
 }
