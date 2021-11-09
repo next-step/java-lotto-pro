@@ -20,4 +20,12 @@ public class LottoCashier {
             throw new IllegalArgumentException(String.format("%d원 단위로 구매하실 수 있습니다", DEFAULT_PRICE.intValue()));
         }
     }
+
+    public boolean isPossibleToBuy(Money cash, int count) {
+        if (count == 0) {
+            return true;
+        }
+        Money wanted = DEFAULT_PRICE.multiply(count);
+        return cash.getDividedIntValue(wanted) >= count;
+    }
 }

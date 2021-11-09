@@ -55,5 +55,6 @@ public class MoneyTest {
     @Test
     void testGetDividedIntValue() {
         assertThat(Money.of(100).getDividedIntValue(Money.of(10))).isEqualTo(10);
+        assertThat(Money.of(100).getDividedIntValue(10)).isEqualTo(10);
     }
 }
