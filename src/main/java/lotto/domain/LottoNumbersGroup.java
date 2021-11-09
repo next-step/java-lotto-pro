@@ -7,8 +7,8 @@ import java.util.Objects;
 public class LottoNumbersGroup {
     private final List<LottoNumbers> lottoNumbersGroup;
 
-    public LottoNumbersGroup(BuyAmount buyAmount) {
-        this.lottoNumbersGroup = generateRandomLottoNumbers(buyAmount.getTotalAmount());
+    public LottoNumbersGroup(PurchaseInfo purchaseInfo) {
+        this.lottoNumbersGroup = generateRandomLottoNumbers(purchaseInfo.getTotalAmount());
     }
 
     public LottoNumbersGroup(String[] lottoNumbersGroup) {
@@ -19,9 +19,9 @@ public class LottoNumbersGroup {
         this.lottoNumbersGroup = lottoNumbersGroup;
     }
 
-    public LottoNumbersGroup(BuyAmount buyAmount, List<LottoNumbers> manualLottoNumbersGroup) {
+    public LottoNumbersGroup(PurchaseInfo purchaseInfo, List<LottoNumbers> manualLottoNumbersGroup) {
         this.lottoNumbersGroup = manualLottoNumbersGroup;
-        this.lottoNumbersGroup.addAll(generateRandomLottoNumbers(buyAmount.getAutoAmount()));
+        this.lottoNumbersGroup.addAll(generateRandomLottoNumbers(purchaseInfo.getAutoAmount()));
     }
 
     protected List<LottoNumbers> generateRandomLottoNumbers(int amount) {

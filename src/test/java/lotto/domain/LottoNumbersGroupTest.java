@@ -27,8 +27,8 @@ public class LottoNumbersGroupTest {
     @DisplayName("랜덤 로또 숫자 그룹 생성 테스트")
     @Test
     void generateRandomLottoNumberGroupTest() {
-        BuyAmount buyAmount = new BuyAmount(1000);
-        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(buyAmount) {
+        PurchaseInfo purchaseInfo = new PurchaseInfo(1000);
+        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(purchaseInfo) {
             @Override
             protected List<LottoNumbers> generateRandomLottoNumbers(int amount) {
                 List<LottoNumbers> lottoNumbers = new ArrayList<>();

@@ -3,19 +3,19 @@ package lotto.domain;
 import lotto.exception.MinimumTicketPriceException;
 import lotto.ui.LottoMessage;
 
-public class BuyAmount {
-    public static final Money LOTTO_BASE_MONEY = Money.of(1000);
+public class PurchaseInfo {
+    public static final Money LOTTO_BASE_MONEY = Money.of(1_000);
 
     private final Money totalMoney;
     private final Money manualMoney;
 
-    public BuyAmount(int buyPrice) {
+    public PurchaseInfo(int buyPrice) {
         this(buyPrice, 0);
     }
 
-    public BuyAmount(int buyPrice, int manualAmount) {
+    public PurchaseInfo(int buyPrice, int manualCount) {
         this.totalMoney = Money.of(buyPrice);
-        this.manualMoney = Money.of(manualAmount, LOTTO_BASE_MONEY);
+        this.manualMoney = Money.of(manualCount, LOTTO_BASE_MONEY);
         validateBuyPrice();
         validateNotExceedAmountSize();
     }

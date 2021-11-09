@@ -1,6 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.BuyAmount;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.LottoRankingStatus;
 import lotto.domain.LottoResults;
 import lotto.dto.LottoResultsDto;
@@ -11,18 +11,18 @@ public class LottoResultsView {
     public static final String MATCH_AMOUNT_DESCRIPTION = "%s개 일치";
     public static final String MATCH_BONUS_DESCRIPTION = ", 보너스 볼 일치";
     public static final String MATCH_PRICE_AND_TOTAL_AMOUNT_DESCRIPTION = " (%s원)- %s개";
-    private final BuyAmount buyAmount;
+    private final PurchaseInfo purchaseInfo;
     private final LottoResults lottoResults;
 
-    public LottoResultsView(BuyAmount buyAmount, LottoResults lottoResults) {
-        this.buyAmount = buyAmount;
+    public LottoResultsView(PurchaseInfo purchaseInfo, LottoResults lottoResults) {
+        this.purchaseInfo = purchaseInfo;
         this.lottoResults = lottoResults;
     }
 
     public void showResults() {
         LottoMessage.showResultsTitle();
         showResultsStats();
-        LottoMessage.showProfitRate(buyAmount, lottoResults);
+        LottoMessage.showProfitRate(purchaseInfo, lottoResults);
     }
 
     private void showResultsStats() {

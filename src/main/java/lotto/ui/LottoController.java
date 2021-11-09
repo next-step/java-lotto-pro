@@ -13,10 +13,10 @@ public class LottoController {
         scanner = new Scanner(System.in);
         int buyPrice = inputBuyPrice();
         int manualBuyAmount = getManualBuyAmount();
-        BuyAmount buyAmount = new BuyAmount(buyPrice, manualBuyAmount);
-        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(buyAmount, getManualLottoNumbers(buyAmount));
+        PurchaseInfo purchaseInfo = new PurchaseInfo(buyPrice, manualBuyAmount);
+        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(purchaseInfo, getManualLottoNumbers(purchaseInfo));
 
-        showBuyStats(buyAmount, lottoNumbersGroup);
+        showBuyStats(purchaseInfo, lottoNumbersGroup);
 
         String prizeLottoNumbersText = inputPrizeLottoNumbers();
 
@@ -24,7 +24,7 @@ public class LottoController {
 
         PrizeLottoNumbers prizeLottoNumbers = new PrizeLottoNumbers(prizeLottoNumbersText, bonusNumber);
         LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers);
-        showResults(buyAmount, lottoResults);
+        showResults(purchaseInfo, lottoResults);
     }
 
     private int inputBonusNumber() {
@@ -42,10 +42,10 @@ public class LottoController {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    private List<LottoNumbers> getManualLottoNumbers(BuyAmount buyAmount) {
+    private List<LottoNumbers> getManualLottoNumbers(PurchaseInfo purchaseInfo) {
         LottoMessage.showAskManualBuyLottoNumbersMessage();
         List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < buyAmount.getManualAmount(); i++) {
+        for (int i = 0; i < purchaseInfo.getManualAmount(); i++) {
             String lottoNumbers = scanner.nextLine();
             manualLottoNumbers.add(new LottoNumbers(lottoNumbers));
         }
@@ -53,8 +53,8 @@ public class LottoController {
         return manualLottoNumbers;
     }
 
-    private void showBuyStats(BuyAmount buyAmount, LottoNumbersGroup lottoNumbersGroup) {
-        LottoInputView lottoInputView = new LottoInputView(buyAmount, lottoNumbersGroup);
+    private void showBuyStats(PurchaseInfo purchaseInfo, LottoNumbersGroup lottoNumbersGroup) {
+        LottoInputView lottoInputView = new LottoInputView(purchaseInfo, lottoNumbersGroup);
         lottoInputView.showBuyStats();
     }
 
@@ -63,8 +63,8 @@ public class LottoController {
         return scanner.nextLine();
     }
 
-    private void showResults(BuyAmount buyAmount, LottoResults lottoResults) {
-        LottoResultsView lottoResultsView = new LottoResultsView(buyAmount, lottoResults);
+    private void showResults(PurchaseInfo purchaseInfo, LottoResults lottoResults) {
+        LottoResultsView lottoResultsView = new LottoResultsView(purchaseInfo, lottoResults);
         lottoResultsView.showResults();
     }
 

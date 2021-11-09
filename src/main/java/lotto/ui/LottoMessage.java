@@ -1,6 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.BuyAmount;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.LottoResults;
 
 public class LottoMessage {
@@ -35,8 +35,8 @@ public class LottoMessage {
         System.out.println(ASK_MANUAL_BUY_LOTTO_NUMBERS_MESSAGE);
     }
 
-    public static void showBuyAmount(BuyAmount buyAmount) {
-        System.out.printf(BUY_AMOUNT_MESSAGE + System.lineSeparator(), buyAmount.getManualAmount(), buyAmount.getAutoAmount());
+    public static void showBuyAmount(PurchaseInfo purchaseInfo) {
+        System.out.printf(BUY_AMOUNT_MESSAGE + System.lineSeparator(), purchaseInfo.getManualAmount(), purchaseInfo.getAutoAmount());
     }
 
     public static void showAskPrizeLottoNumbersMessage() {
@@ -52,8 +52,8 @@ public class LottoMessage {
         System.out.println(lottoResults.getTotalReward());
     }
 
-    public static void showProfitRate(BuyAmount buyAmount, LottoResults lottoResults) {
-        System.out.printf(PROFIT_RATE_MESSAGE, buyAmount.getProfitRate(lottoResults.getTotalReward()));
+    public static void showProfitRate(PurchaseInfo purchaseInfo, LottoResults lottoResults) {
+        System.out.printf(PROFIT_RATE_MESSAGE, purchaseInfo.getProfitRate(lottoResults.getTotalReward()));
     }
 
     public static void showAskBonusNumber() {
