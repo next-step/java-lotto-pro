@@ -23,8 +23,12 @@ public class ResultView {
 
     public static void printLottoTryCount(LottoGame lottoGame) {
         StringBuilder builder = new StringBuilder();
-        builder.append(TRY_COUNT_MANUAL_MESSAGE).append(lottoGame.getManualTryCount()).append(TRY_COUNT_MIDDLE_MESSAGE);
-        builder.append(TRY_COUNT_AUTO_MESSAGE).append(lottoGame.getAutoTryCount()).append(TRY_COUNT_MESSAGE);
+        builder.append(TRY_COUNT_MANUAL_MESSAGE)
+                .append(lottoGame.getManualTryCount())
+                .append(TRY_COUNT_MIDDLE_MESSAGE)
+                .append(TRY_COUNT_AUTO_MESSAGE)
+                .append(lottoGame.getAutoTryCount())
+                .append(TRY_COUNT_MESSAGE);
         System.out.println(builder.toString());
     }
 

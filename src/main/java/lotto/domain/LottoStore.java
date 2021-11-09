@@ -40,7 +40,8 @@ public class LottoStore {
     private static LottoGame createLottoGame(List<LottoBalls> manualLottoBalls, List<LottoBalls> autoLottoBalls, TryCount tryCount) {
         return new LottoGame(
                 tryCount,
-                Stream.concat(manualLottoBalls.stream(), autoLottoBalls.stream()).collect(Collectors.toList())
+                Stream.concat(manualLottoBalls.stream(), autoLottoBalls.stream())
+                        .collect(Collectors.toList())
         );
     }
 }
