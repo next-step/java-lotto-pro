@@ -26,7 +26,7 @@ public class LottoPapers {
     public static LottoPapers createLottoPapers(long lottoPaperCount) {
         List<LottoPaper> lottoPapers = new ArrayList<>();
         for (int i = 0; i < lottoPaperCount; i++) {
-            lottoPapers.add(LottoNumberGenerator.getLottoNumbers());
+            lottoPapers.add(LottoNumberGenerator.createLottoNumbers());
         }
         return new LottoPapers(lottoPapers);
     }
