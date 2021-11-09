@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.code.ErrorCode;
 import lotto.exception.LottoException;
+import lotto.util.RandomUtil;
 
 @DisplayName("로또 번호 테스트")
 class LottoNumberTest {
@@ -29,7 +30,8 @@ class LottoNumberTest {
 	@Test
 	void 랜덤로또번호_생성_테스트() {
 		// given // when
-		LottoNumber lottoNumber = LottoNumber.from();
+		LottoNumber lottoNumber = LottoNumber.from(
+			RandomUtil.pickNumber(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER));
 
 		// then
 		assertThat(lottoNumber).isInstanceOf(LottoNumber.class);

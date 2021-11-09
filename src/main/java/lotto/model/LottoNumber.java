@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import lotto.code.ErrorCode;
 import lotto.exception.LottoException;
-import lotto.util.RandomUtil;
 
 public class LottoNumber {
 
@@ -15,12 +14,6 @@ public class LottoNumber {
 
 	private LottoNumber(int number) {
 		this.number = number;
-	}
-
-	public static LottoNumber from() {
-		int number = RandomUtil.pickNumber(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
-		isNumberInLottoNumberRange(number);
-		return new LottoNumber(number);
 	}
 
 	public static LottoNumber from(int number) {
