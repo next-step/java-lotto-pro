@@ -29,9 +29,4 @@ public class LottoBuyResponseDto {
         return buyLottoList;
     }
 
-    public List<LottoNumbers> merge(LottoBuyResponseDto lottoBuyResponseDto) {
-        buyLottoList.addAll(lottoBuyResponseDto.getBuyLottoList());
-        return buyLottoList;
-    }
-
 }

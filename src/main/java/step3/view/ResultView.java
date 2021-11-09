@@ -3,7 +3,7 @@ package step3.view;
 import java.math.BigDecimal;
 import java.util.List;
 
-import step3.domain.Amount;
+import step3.dto.LottoBoughtListResponse;
 import step3.dto.LottoBuyResponseDto;
 import step3.dto.LottoResultDto;
 import step3.dto.LottoStatisticsResponseDto;
@@ -67,7 +67,7 @@ public class ResultView {
         }
     }
 
-    public static void statisticsPrint(LottoStatisticsResponseDto lottoStatisticsResponseDto, Amount amount) {
+    public static void statisticsPrint(LottoStatisticsResponseDto lottoStatisticsResponseDto) {
         List<LottoResultDto> lottoResultDtos = lottoStatisticsResponseDto.getLottoResultDtos();
 
         statisticsHeaderPrint();
@@ -76,7 +76,7 @@ public class ResultView {
             lottoResultPrint(lottoResultDto);
         }
 
-        yieldPrint(lottoStatisticsResponseDto.getYield(amount));
+        yieldPrint(lottoStatisticsResponseDto.getYield()); // Todo
     }
 
     private static void statisticsHeaderPrint() {
@@ -122,5 +122,17 @@ public class ResultView {
 
     public static void bonusNumberRequestPrintln() {
         println(BONUS_NUMBER_REQUEST_MESSAGE);
+    }
+
+    public static void boughtLottoView(LottoBoughtListResponse lottoBoughtListResponse) {
+        ResultView.println(
+            String.format(
+                ViewConstant.TOTAL_LOTTO_BUY_COUNT_MESSAGE,
+                lottoBoughtListResponse.getManualSize(),
+                lottoBoughtListResponse.getAutoSize()));
+
+        for (String numbers : lottoBoughtListResponse.getManualLottoList()) {
+            println(numbers);
+        }
     }
 }

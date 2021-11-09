@@ -3,7 +3,6 @@ package step3.dto;
 import java.util.List;
 
 import step3.domain.Amount;
-import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
 import step3.domain.WinningLotto;
 

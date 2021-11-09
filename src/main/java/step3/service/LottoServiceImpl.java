@@ -12,11 +12,7 @@ import step3.domain.WinningLotto;
 import step3.domain.strategy.numbers.NumbersStrategy;
 import step3.domain.strategy.numbers.RandomLottoNumbers;
 import step3.dto.LottoBoughtListResponse;
-import step3.dto.LottoBuyRequestDto;
-import step3.dto.LottoBuyResponseDto;
-import step3.dto.LottoManualLottoNumbersRequestDto;
 import step3.dto.LottoResultDto;
-import step3.dto.LottoStatisticsRequestDto;
 import step3.dto.LottoStatisticsResponseDto;
 
 public class LottoServiceImpl implements LottoService {
@@ -68,34 +64,4 @@ public class LottoServiceImpl implements LottoService {
 
         return new LottoStatisticsResponseDto(lottoRanks, amount);
     }
-
-    //--
-    @Override
-    @Deprecated
-    public LottoBuyResponseDto buyLotto(LottoBuyRequestDto lottoBuyRequestDto, NumbersStrategy numbersStrategy) {
-        int quantity = lottoProvider.availableQuantity(lottoBuyRequestDto.getAmount());
-
-        LottoNumbersBundle lottoNumbersBundle = lottoProvider.buyLotto(quantity, numbersStrategy);
-
-        return new LottoBuyResponseDto(lottoNumbersBundle);
-    }
-
-    @Override
-    @Deprecated
-    public LottoBuyResponseDto buyLotto(LottoManualLottoNumbersRequestDto lottoManualLottoNumbersRequestDto) {
-        LottoNumbersBundle lottoNumbersBundle = lottoProvider.buyLotto(
-            lottoManualLottoNumbersRequestDto.getManualLottoNumbers());
-        return new LottoBuyResponseDto(lottoNumbersBundle);
-    }
-
-    @Override
-    @Deprecated
-    public LottoStatisticsResponseDto getResultStatistics(LottoStatisticsRequestDto lottoStatisticsRequestDto) {
-        LottoRanks lottoRanks = lottoProvider.getLottoResult(
-            new LottoNumbersBundle(lottoStatisticsRequestDto.getBuyLottoList()),
-            lottoStatisticsRequestDto.getWinningLotto());
-
-        return new LottoStatisticsResponseDto(lottoRanks, new Amount(1));
-    }
-
 }

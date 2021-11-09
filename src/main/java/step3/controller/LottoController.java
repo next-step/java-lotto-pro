@@ -7,13 +7,13 @@ import step3.domain.LottoService;
 import step3.domain.strategy.numbers.NumbersStrategy;
 import step3.dto.LottoBoughtListResponse;
 import step3.dto.LottoStatisticsResponseDto;
-import step3.view2.InputView;
-import step3.view2.ResultView;
+import step3.view.InputView;
+import step3.view.ResultView;
 
-public class LottoController2 {
+public class LottoController {
     LottoService lottoService;
 
-    public LottoController2(LottoService lottoService) {
+    public LottoController(LottoService lottoService) {
         this.lottoService = lottoService;
     }
 
