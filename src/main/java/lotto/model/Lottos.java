@@ -28,8 +28,8 @@ public class Lottos {
 		return lottoNumbersList;
 	}
 
-	public int getInputMoney() {
-		return inputMoney.getMoney();
+	public Money getInputMoney() {
+		return inputMoney;
 	}
 
 	public int size() {
