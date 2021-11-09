@@ -9,7 +9,7 @@ class LottoShopTest {
 
     @ParameterizedTest(name = DISPLAY_NAME)
     @ValueSource(ints = {1000, 2000, 3000, 4000, 5000})
-    void 로또샵은_돈을받고_로또티켓을_판매한다(final int moneyOfThousand) {
+    void 로또샵은_돈을받고_로또티켓을_판매하고_판매한_로또개수를_알려줄수있다(final int moneyOfThousand) {
         //given
         final Money money = new Money(moneyOfThousand);
 
@@ -20,5 +20,6 @@ class LottoShopTest {
         //then
         assertThat(lottoTicket).isNotNull();
         assertThat(lottoTicket.get()).hasSize(money.changeUnit());
+        assertThat(lottoShop.countOfSelling()).isEqualTo(money.get());
     }
 }

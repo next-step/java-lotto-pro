@@ -11,7 +11,7 @@ public class Money {
         this.money = money;
     }
 
-    public int getMoney() {
+    public int get() {
         return this.money;
     }
 
@@ -20,7 +20,7 @@ public class Money {
     }
 
     public void earn(final Money money) {
-        this.money += money.getMoney();
+        this.money += money.get();
     }
 
     @Override

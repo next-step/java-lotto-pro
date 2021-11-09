@@ -17,11 +17,15 @@ public class LottoShop {
         return lottoTicket;
     }
 
+    private void earn(final Money money) {
+        this.money.earn(money);
+    }
+
     public Money income() {
         return this.money;
     }
 
-    private void earn(final Money money) {
-        this.money.earn(money);
+    public int countOfSelling() {
+        return this.money.get();
     }
 }
