@@ -60,7 +60,7 @@ public class OutputView {
 
 	public static String convertYieldToString(LottoResult lottoResult) {
 		StringBuilder stringBuilder = new StringBuilder();
-		double yield = lottoResult.calculateYield();
+		double yield = lottoResult.getYield();
 		stringBuilder
 			.append("총 수익률은 ")
 			.append(yield)
