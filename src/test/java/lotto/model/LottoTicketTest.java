@@ -16,33 +16,23 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
     @Test
-    void instantiate_6개_성공() {
-        final List<LottoNumber> numbers = generateLottoNumberListOf(6);
-        final LottoTicket ticket = new LottoTicket(numbers);
+    void of_6개성공() {
+        final LottoTicket ticket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(ticket).isNotNull();
         assertThat(ticket).isInstanceOf(LottoTicket.class);
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5, 7, 10})
-    void instantiate_실패(int count) {
-        final List<LottoNumber> numbers = generateLottoNumberListOf(count);
-        assertThatThrownBy(() -> new LottoTicket(numbers))
+    @Test
+    void of_7개실패() {
+        assertThatThrownBy(() -> LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
                 .isInstanceOf(RuntimeException.class);
-    }
-
-    private List<LottoNumber> generateLottoNumberListOf(int count) {
-        final List<LottoNumber> numbers = new ArrayList<>();
-        for (int i = 1; i <= count; i++) {
-            numbers.add(new LottoNumber(i));
-        }
-        return numbers;
     }
 
     @ParameterizedTest
     @MethodSource("provideWinTicket")
     void calculateNumberOfMatch(WinTicket winTicket, int expectedNumberOfMatch) {
         final LottoTicket buyTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+
         assertThat(buyTicket.calculateNumberOfMatch(winTicket))
                 .isEqualTo(expectedNumberOfMatch);
     }

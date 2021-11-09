@@ -8,7 +8,7 @@ import java.util.List;
 public class LottoTicket {
     private final List<LottoNumber> numbers;
 
-    public LottoTicket(List<LottoNumber> numbers) {
+    protected LottoTicket(List<LottoNumber> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }

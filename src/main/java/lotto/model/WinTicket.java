@@ -6,7 +6,7 @@ import java.util.List;
 public class WinTicket extends LottoTicket {
     private final LottoNumber bonusNumber;
 
-    public WinTicket(List<LottoNumber> numbers, LottoNumber bonusNumber) {
+    private WinTicket(List<LottoNumber> numbers, LottoNumber bonusNumber) {
         super(numbers);
         this.bonusNumber = bonusNumber;
     }

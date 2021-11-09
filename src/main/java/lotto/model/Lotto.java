@@ -2,7 +2,6 @@ package lotto.model;
 
 import lotto.LottoConstants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -20,11 +19,7 @@ public class Lotto {
     }
 
     public static Lotto generate(List<Integer> numbers) {
-        final List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-        return new Lotto(new LottoTicket(lottoNumbers));
+        return new Lotto(LottoTicket.of(numbers));
     }
 
     @Override
