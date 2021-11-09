@@ -32,21 +32,21 @@ public class LottoTest {
     }
 
     @Test
-    void 로또_4등() {
+    void 로또_5등() {
         Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "7", "8", "9")));
+        assertThat(lotto.compareWinningNumbers(winningNumbers)).isEqualTo(LottoPrize.FIFTH);
+    }
+
+    @Test
+    void 로또_4등() {
+        Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "8", "9")));
         assertThat(lotto.compareWinningNumbers(winningNumbers)).isEqualTo(LottoPrize.FOURTH);
     }
 
     @Test
     void 로또_3등() {
-        Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "8", "9")));
-        assertThat(lotto.compareWinningNumbers(winningNumbers)).isEqualTo(LottoPrize.THIRD);
-    }
-
-    @Test
-    void 로또_2등() {
         Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "9")));
-        assertThat(lotto.compareWinningNumbers(winningNumbers)).isEqualTo(LottoPrize.SECOND);
+        assertThat(lotto.compareWinningNumbers(winningNumbers)).isEqualTo(LottoPrize.THIRD);
     }
 
     @Test
