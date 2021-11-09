@@ -14,7 +14,7 @@ class LottosTest {
 	void 입력된_구입금액만큼_로또생성기로_로또를_생성하는_테스트(String inputMoney, int lottoNumbersListSize) {
 		// given
 		Money money = Money.from(inputMoney);
-		LottoGenerator lottoGenerator = LottoGenerator.of(money);
+		LottoGenerator lottoGenerator = LottoGenerator.from(money);
 
 		// when
 		Lottos lottos = Lottos.of(lottoGenerator.generateLottoNumbers(), money);
@@ -30,8 +30,8 @@ class LottosTest {
 	@CsvSource(value = {
 		"1000:1,2,3,4,5,6:1",
 		"1111:1,2,3,4,5,6:1",
-		"2000:1,2,3,4,5,6:1",
-		"13200:1,2,3,4,5,6:1"}, delimiter = ':')
+		"2000:1,2,3,4,5,6:2",
+		"13200:1,2,3,4,5,6:13"}, delimiter = ':')
 	void 입력된_구입금액과_입력된숫자로_로또를_생성하는_테스트(String inputMoney, String inputNumber, int lottoNumbersListSize) {
 		// given
 		Money money = Money.from(inputMoney);
