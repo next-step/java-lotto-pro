@@ -6,20 +6,17 @@ import step3.domain.Lotto;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
 
-public final class ConsoleOutputView {
+public class ConsoleOutputView {
 
-    private ConsoleOutputView() {
-    }
-
-    public static void print(final String message) {
+    public void print(final String message) {
         System.out.println(message);
     }
 
-    public static void lineSeparator() {
+    public void lineSeparator() {
         System.out.println();
     }
 
-    public static void error(final Throwable cause) {
+    public void error(final Throwable cause) {
         if (cause instanceof RuntimeException) {
             print(cause.getMessage());
             return;
@@ -28,11 +25,11 @@ public final class ConsoleOutputView {
         print("오류가 발생했습니다.");
     }
 
-    public static void printMoney(final Money money) {
+    public void printMoney(final Money money) {
         print(format("{0}개를 구매했습니다.", money.changeUnit()));
     }
 
-    public static void printLottoTicket(final LottoTicket lottoTicket) {
+    public void printLottoTicket(final LottoTicket lottoTicket) {
         final List<Lotto> lotteries = lottoTicket.get();
 
         for (final Lotto lotto : lotteries) {

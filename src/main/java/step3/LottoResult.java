@@ -1,21 +1,24 @@
 package step3;
 
+import java.util.StringJoiner;
 import step3.domain.Lotto;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
 import step3.enums.Prizes;
-import step3.view.ConsoleOutputView;
 
 public class LottoResult {
 
-    public void check(final Lotto winningLotto, final LottoTicket lottoTicket, final Money money) {
-        ConsoleOutputView.print("당첨 통계");
-        ConsoleOutputView.print("---------");
-        ConsoleOutputView.lineSeparator();
+    public String checkout(final Lotto winningLotto, final LottoTicket lottoTicket, final Money money) {
+        final StringJoiner result = new StringJoiner(System.lineSeparator());
+
+        result.add("당첨 통계");
+        result.add("---------");
 
         final Prizes prizes = lottoTicket.check(winningLotto);
 
-        ConsoleOutputView.print(prizes.getResults());
-        ConsoleOutputView.print(prizes.averageYield(money));
+        result.add(prizes.getResults());
+        result.add(prizes.averageYield(money));
+
+        return result.toString();
     }
 }
