@@ -21,8 +21,8 @@ public class Lottos {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < lottoGroup.size(); i++) {
-            stringBuilder.append(lottoGroup.get(i).toString() + "\n");
+        for (Lotto lotto : lottoGroup) {
+            stringBuilder.append(lotto.toString() + "\n");
         }
         return stringBuilder.toString();
     }
