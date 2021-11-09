@@ -15,8 +15,8 @@ public class Money {
         return new Money(manualAmount * minimumTicketPrice.price);
     }
 
-    public boolean isExceedMoney(Money manualMoney) {
-        return price > manualMoney.price;
+    public boolean isExceedMoney(Money baseMoney) {
+        return price > baseMoney.price;
     }
 
     public int getPrice() {
