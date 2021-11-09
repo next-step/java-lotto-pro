@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.exception.LottoException;
@@ -51,5 +52,33 @@ class MoneyTest {
 		assertThatThrownBy(() -> {
 			method.invoke(Money.from(inputMoney), inputMoney);
 		}).isInstanceOf(LottoException.class);
+	}
+
+	@ParameterizedTest(name = "index {index} ==> inputMoney {0}, resultAmount {1}")
+	@CsvSource(value = {
+		"10000 : 10", "5555 : 5", "2323 : 2", "30000 : 30"
+	}, delimiter = ':')
+	void 구입금액에_따른_로또_갯수구하는_기능테스트(String inputMoney, int resultAmount) {
+		// given
+		Money money = Money.from(inputMoney);
+
+		// when
+		int size = money.calculateLottoAmount();
+
+		// then
+		assertThat(resultAmount).isEqualTo(size);
+	}
+
+	@Test
+	void 구입금액에_비례하여_수익률을_계산하는_기능테스트() {
+		// given
+		Money money = Money.from(10000);
+		float sum = 5000f;
+
+		// when
+		float yield = money.calculateYield(sum);
+
+		// then
+		assertThat(yield).isEqualTo(0.5f);
 	}
 }

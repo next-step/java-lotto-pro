@@ -5,6 +5,7 @@ import lotto.exception.LottoException;
 
 public class Money {
 	public static final int LOTTO_PRICE = 1000;
+	private static final double MATH_ROUND_VALUE = 100d;
 	private static final String NUMBER_REGEX = "[0-9]+";
 	private final int money;
 
@@ -61,4 +62,8 @@ public class Money {
 		return money;
 	}
 
+	public float calculateYield(float sum) {
+		return (float)(Math.round(sum / (float)money * LottoResult.MATH_ROUND_VALUE)
+			/ LottoResult.MATH_ROUND_VALUE);
+	}
 }
