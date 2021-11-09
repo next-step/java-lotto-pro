@@ -13,8 +13,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import step3.domain.Amount;
-import step3.domain.LottoNumber;
-import step3.domain.LottoNumbers;
 import step3.domain.LottoRank;
 import step3.domain.LottoService;
 import step3.domain.WinningLotto;
@@ -68,7 +66,7 @@ public class LottoServiceImplTest {
 
         LottoStatisticsRequestDto lottoStatisticsRequestDto = new LottoStatisticsRequestDto();
 
-        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(winLottoNumbers), LottoNumber.of(bonusNumber));
+        WinningLotto winningLotto = WinningLotto.of(winLottoNumbers, bonusNumber);
         lottoStatisticsRequestDto.mapAmount(new Amount(amount));
         lottoStatisticsRequestDto.mapWinningLotto(winningLotto);
         lottoStatisticsRequestDto.mapBuyLottoList(lottoBuyResponseDto.getBuyLottoList());

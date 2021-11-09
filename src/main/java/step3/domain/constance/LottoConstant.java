@@ -11,6 +11,8 @@ public class LottoConstant {
         MAX_NUMBER_RANGE);
     public static final String LOTTO_REPORT_FORMAT = "%s개 일치 (%d원)- %d개";
     public static final String WON = "원";
+    public static final String BONUS_NUMBER_ALREADY_EXIST_MESSAGE = "지난 주 우승 번호에 포함된 숫자는 보너스번호가 될 수 없습니다.";
+    public static final String LACK_OF_AMOUNT = "구매 비용이 부족합니다.";
 
     private LottoConstant() {
     }

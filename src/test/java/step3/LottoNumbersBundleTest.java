@@ -28,13 +28,13 @@ public class LottoNumbersBundleTest {
     @DisplayName("등수별 총 상금 테스트")
     void lottoRanksOf_totalPrize(String buyNumbersStr, String winNumbersStr, int bonusNumber, Long expected) {
         // given
-        LottoNumbers winLottoNumbers = new LottoNumbers(parseNumbers(winNumbersStr));
-        LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
+        // LottoNumbers winLottoNumbers = new LottoNumbers();
+        // LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
         LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
         addLottoNumbers(buyNumbersStr, lottoNumbersBundle);
 
         // when
-        WinningLotto winningLotto = new WinningLotto(winLottoNumbers, bonusLottoNumber);
+        WinningLotto winningLotto = WinningLotto.of(parseNumbers(winNumbersStr), bonusNumber);
         LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winningLotto);
         Long totalPrize = lottoRanks.totalPrize();
 

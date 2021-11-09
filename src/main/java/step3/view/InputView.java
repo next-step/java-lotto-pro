@@ -10,10 +10,11 @@ import step3.dto.LottoManualLottoNumbersRequestDto;
 import step3.dto.LottoWinNumbersRequestDto;
 
 public class InputView {
+    private static final Scanner sc = new Scanner(System.in);
+
     private static final String ONLY_NUMBER = "숫자만 입력 해주세요.";
     private static final String COMMA_INPUT_REQUEST_MESSAGE = "콤마로 분리된 숫자만 입력해주세요(1,2,3,4,5,6)";
 
-    private static final Scanner sc = new Scanner(System.in);
     public static final String MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     public static final String MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 

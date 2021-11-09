@@ -9,9 +9,11 @@ import step3.domain.LottoRanks;
 
 public class LottoStatisticsResponseDto {
     private final LottoRanks lottoRanks;
+    private final Amount amount;
 
-    public LottoStatisticsResponseDto(LottoRanks lottoResult) {
+    public LottoStatisticsResponseDto(LottoRanks lottoResult, Amount amount) {
         this.lottoRanks = lottoResult;
+        this.amount = amount;
     }
 
     public List<LottoResultDto> getLottoResultDtos() {
@@ -31,7 +33,12 @@ public class LottoStatisticsResponseDto {
         return lottoResultDtos;
     }
 
+    @Deprecated
     public BigDecimal getYield(Amount amount) {
+        return lottoRanks.getCalculatedYield(amount);
+    }
+
+    public BigDecimal getYield() {
         return lottoRanks.getCalculatedYield(amount);
     }
 }

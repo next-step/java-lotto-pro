@@ -8,11 +8,13 @@ public class Amount {
         LottoConstant.LOTTO_MINIMUM_PRICE, LottoConstant.WON);
 
     private final int amount;
+    private int remainingAmount;
 
     public Amount(int amount) {
         valid(amount);
 
         this.amount = amount;
+        this.remainingAmount = amount;
     }
 
     public int getAmount() {
@@ -25,8 +27,23 @@ public class Amount {
         }
     }
 
+    public void minusAmount(int size) {
+        int minusAmount = calculateMinusAmount(size);
+        if (minusAmount > this.remainingAmount) {
+            throw new InvalidParamException(LottoConstant.LACK_OF_AMOUNT);
+        }
+        this.remainingAmount -= minusAmount;
+    }
+
+    public int buyAvailableQuantity() {
+        return this.remainingAmount / LottoConstant.LOTTO_MINIMUM_PRICE;
+    }
+
+    private int calculateMinusAmount(int size) {
+        return size * LottoConstant.LOTTO_MINIMUM_PRICE;
+    }
+
     private boolean isBelowAmount(int amount) {
         return amount < LottoConstant.LOTTO_MINIMUM_PRICE;
     }
-
 }

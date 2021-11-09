@@ -2,6 +2,7 @@ package step3.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import step3.domain.strategy.numbers.NumbersStrategy;
 
@@ -40,5 +41,15 @@ public class LottoNumbersBundle {
 
     public List<LottoNumbers> getLottoNumbersBundle() {
         return lottoNumbersBundle;
+    }
+
+    public List<String> getResult() {
+        return lottoNumbersBundle.stream()
+            .map(LottoNumbers::toString)
+            .collect(Collectors.toList());
+    }
+
+    public void merge(LottoNumbersBundle autoLottoNumbersBundle) {
+        lottoNumbersBundle.addAll(autoLottoNumbersBundle.getLottoNumbersBundle());
     }
 }

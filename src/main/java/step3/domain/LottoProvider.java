@@ -6,8 +6,6 @@ import step3.domain.constance.LottoConstant;
 import step3.domain.strategy.numbers.NumbersStrategy;
 
 public class LottoProvider {
-    // @Deprecated
-    // private final LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
 
     public LottoNumbersBundle buyLotto(int count, NumbersStrategy numbersStrategy) {
         LottoNumbersBundle result = new LottoNumbersBundle();
@@ -31,18 +29,13 @@ public class LottoProvider {
         return amount.getAmount() / LottoConstant.LOTTO_MINIMUM_PRICE;
     }
 
-    // @Deprecated
-    // public int lottoNumbersBundleSize() {
-    //     return lottoNumbersBundle.size();
-    // }
-
-    // @Deprecated
-    // public LottoResult getLottoResult(LottoNumbersBundle lottoNumbersBundle, WinningLotto winningLotto) {
-    //     LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winningLotto);
-    //     return new LottoResult(lottoRanks);
-    // }
-
     public LottoRanks getLottoResult(LottoNumbersBundle lottoNumbersBundle, WinningLotto winningLotto) {
         return lottoNumbersBundle.lottoRanksOf(winningLotto);
+    }
+
+    public LottoRanks getLottoResult(LottoNumbersBundle baseLottoNumberBundle,
+        LottoNumbersBundle autoLottoNumbersBundle, WinningLotto winningLotto) {
+        baseLottoNumberBundle.merge(autoLottoNumbersBundle);
+        return baseLottoNumberBundle.lottoRanksOf(winningLotto);
     }
 }
