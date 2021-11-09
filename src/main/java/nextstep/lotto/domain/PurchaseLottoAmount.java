@@ -18,6 +18,6 @@ public class PurchaseLottoAmount {
         BigDecimal total = new BigDecimal(totalWinningAmount);
         BigDecimal purchase = new BigDecimal(purchaseLottoAmount);
 
-        return total.divide(purchase, 2);
+        return total.divide(purchase, 2, BigDecimal.ROUND_DOWN);
     }
 }

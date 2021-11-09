@@ -9,6 +9,7 @@ import nextstep.lotto.domain.MatchCountCollection;
 import nextstep.lotto.domain.PurchaseLotto;
 import nextstep.lotto.domain.PurchaseLottoAmount;
 import nextstep.lotto.domain.WinningLotto;
+import nextstep.lotto.exception.LottoRuntimeException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -79,6 +80,9 @@ public class LottoDisplay {
 
         } catch (NumberFormatException e) {
             System.out.println(ERROR + INVALID_WINNING_LOTTO_NUMBER_MESSAGE);
+            return inputLastWeekWinningLotto();
+        } catch (LottoRuntimeException e) {
+            System.out.println(ERROR + e.getMessage());
             return inputLastWeekWinningLotto();
         }
     }

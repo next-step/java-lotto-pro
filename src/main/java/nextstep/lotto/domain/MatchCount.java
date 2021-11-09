@@ -1,6 +1,8 @@
 package nextstep.lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static nextstep.lotto.constance.LottoDisplayMessage.MATCH_COUNT_MIDDLE_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.MATCH_COUNT_POSTFIX_MESSAGE;
@@ -24,6 +26,16 @@ public class MatchCount implements Comparable<MatchCount> {
 
     public Long mulMatchCountAndPrice() {
         return lottoWinningPrice.price * matchCount;
+    }
+
+    public static Map<Integer, MatchCount> initMatchCountCache() {
+
+        Map<Integer, MatchCount> matchCountMap = new HashMap<>();
+        for (LottoWinningPrice lottoWinningPrice : LottoWinningPrice.values()) {
+            MatchCount matchCount = new MatchCount(lottoWinningPrice.index, 0);
+            matchCountMap.put(lottoWinningPrice.index, matchCount);
+        }
+        return matchCountMap;
     }
 
     @Override

@@ -38,7 +38,7 @@ public class MatchCountCollection implements Iterable<MatchCount> {
 
     public static MatchCountCollection matchPurchaseLottoWithWinningLotto(PurchaseLotto purchaseLotto, WinningLotto winningLotto) {
 
-        Map<Integer, MatchCount> matchCountMap = new HashMap<>();
+        Map<Integer, MatchCount> matchCountMap = MatchCount.initMatchCountCache();
         for (Lotto eachLotto : purchaseLotto) {
             Integer calculatedCount = winningLotto.matchWithPurchaseLottoCount(eachLotto);
 
@@ -52,7 +52,7 @@ public class MatchCountCollection implements Iterable<MatchCount> {
     private static void loadMatchCountMap(Map<Integer, MatchCount> matchCountMap, Integer key, MatchCount value) {
 
         if (Objects.isNull(value)) {
-            matchCountMap.put(key, new MatchCount(key, 0));
+            matchCountMap.put(key, new MatchCount(key, 1));
             return;
         }
 
