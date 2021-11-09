@@ -76,6 +76,11 @@ public class LottoNumbersTest {
             }
         }
 
+        @DisplayName("자동 생성 시 수동 여부가 false이다")
+        @Test
+        void testIsManualFalse() {
+            assertThat(lottoNumbers.isManual()).isFalse();
+        }
     }
     @DisplayName("수동 번호 생성")
     @Nested
@@ -108,6 +113,12 @@ public class LottoNumbersTest {
         @ValueSource(strings = {"1,2,3,4,5,5", "1, 3, 45, 6, 1, 4"})
         void testNotDuplicate(String text) {
             assertThatThrownBy(() -> LottoNumbers.of(text)).isInstanceOf(IllegalArgumentException.class);
+        }
+
+        @DisplayName("수동 생성 시 수동 여부가 true이다")
+        @Test
+        void testIsManualTrue() {
+            assertThat(LottoNumbers.of("1,2,3,4,5,6").isManual()).isTrue();
         }
     }
 }

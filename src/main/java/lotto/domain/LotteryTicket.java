@@ -38,6 +38,22 @@ public class LotteryTicket {
         return lottoNumbersList;
     }
 
+    public LotteryTicket merge(LotteryTicket addedLotteryTicket) {
+        List<LottoNumbers> newList = new ArrayList<>(lottoNumbersList);
+        newList.addAll(addedLotteryTicket.lottoNumbersList);
+        return new LotteryTicket(newList);
+    }
+
+    public int getManualLottoSize() {
+        return (int) lottoNumbersList.stream()
+                .filter(LottoNumbers::isManual)
+                .count();
+    }
+
+    public int getAutoLottoSize() {
+        return size() - getManualLottoSize();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
