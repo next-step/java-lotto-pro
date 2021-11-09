@@ -93,7 +93,7 @@ public class LottoManualOrderInputView {
         }
     }
 
-    private static HashSet<Integer> toLottery(final String ticketLotteryNumbers) {
+    private static Set<Integer> toLottery(final String ticketLotteryNumbers) {
         final String[] ticketLotteryNumberArr = ticketLotteryNumbers.split(DELIMITER);
         final HashSet<Integer> numberSet = new HashSet<>();
         for (final String ticketLotteryNumber : ticketLotteryNumberArr) {
