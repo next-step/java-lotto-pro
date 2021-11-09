@@ -75,7 +75,7 @@ public class RecordTest {
                     LottoNumbers.of("1,2,3,4,5,45"),
                     LottoNumbers.of("1,2,3,4,5,6")
             );
-            WinningLottoNumbers winningNumber = new WinningLottoNumbers(LottoNumbers.of("1,2,3,4,5,6"), new LottoNumber(45));
+            WinningLottoNumbers winningNumber = new WinningLottoNumbers(LottoNumbers.of("1,2,3,4,5,6"), LottoNumber.of(45));
             record = new Record(new LotteryTicket(lottoNumbersList), winningNumber);
         }
 

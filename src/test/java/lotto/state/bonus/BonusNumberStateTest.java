@@ -31,7 +31,7 @@ public class BonusNumberStateTest {
                 LottoNumbers.of("1,2,3,4,5,6")
         );
         LottoNumbers winningNumbers = LottoNumbers.of("1,2,3,4,5,6");
-        bonusNumberState = new BonusNumberState(new BonusNumberStateView(), new LotteryTicket(lottoNumbersList), new WinningLottoNumbers(winningNumbers, new LottoNumber(45)));
+        bonusNumberState = new BonusNumberState(new BonusNumberStateView(), new LotteryTicket(lottoNumbersList), new WinningLottoNumbers(winningNumbers, LottoNumber.of(45)));
         standardOut = System.out;
         captor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(captor));

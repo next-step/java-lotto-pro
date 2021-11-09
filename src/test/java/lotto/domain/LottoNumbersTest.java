@@ -86,7 +86,7 @@ public class LottoNumbersTest {
         void testInputWinningNumber() {
             LottoNumbers lottoNumbers = LottoNumbers.of("1,2,3,4,5,6");
             assertThat(lottoNumbers.getNumbers()).hasSize(6)
-                    .contains(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+                    .contains(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
         }
 
         @DisplayName("6개가 아닌 값을 입력 받으면 오류를 발생한다")

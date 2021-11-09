@@ -9,7 +9,7 @@ public class LottoNumbers {
     private static final String DEFAULT_DELIMITER = ",";
     private static final List<LottoNumber> DEFAULT_LOTTO_NUMBERS =
             IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
-                    .mapToObj(LottoNumber::new)
+                    .mapToObj(LottoNumber::of)
                     .collect(Collectors.toList());
 
     private final List<LottoNumber> numbers;
@@ -30,7 +30,7 @@ public class LottoNumbers {
         validateStringNumbersLength(text, numberStrings);
         List<LottoNumber> numbers = new ArrayList<>();
         for (String number : numberStrings) {
-            numbers.add(new LottoNumber(number));
+            numbers.add(LottoNumber.of(number));
         }
         return new LottoNumbers(numbers);
     }

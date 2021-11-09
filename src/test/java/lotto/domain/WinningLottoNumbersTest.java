@@ -13,7 +13,7 @@ public class WinningLottoNumbersTest {
     @Test
     void testEquals() {
         LottoNumbers winningNumbers = LottoNumbers.of("1,2,3,4,5,6");
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.of(7);
         assertThat(new WinningLottoNumbers(winningNumbers, bonusNumber)).isEqualTo(new WinningLottoNumbers(winningNumbers, bonusNumber));
         assertThat(new WinningLottoNumbers(winningNumbers)).isEqualTo(new WinningLottoNumbers(winningNumbers));
     }
@@ -22,7 +22,7 @@ public class WinningLottoNumbersTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,4,5,6:1"}, delimiter = ':')
     void testNotDuplicate(String text, String bonusNumber) {
-        assertThatThrownBy(() -> new WinningLottoNumbers(LottoNumbers.of(text), new LottoNumber(bonusNumber)))
+        assertThatThrownBy(() -> new WinningLottoNumbers(LottoNumbers.of(text), LottoNumber.of(bonusNumber)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -40,7 +40,7 @@ public class WinningLottoNumbersTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,7,8,45:45:FOURTH", "1,2,3,4,5,45:45:SECOND_WITH_BONUS"}, delimiter = ':')
     void testGetRankWithBonus(String text, int bonusNumber, Rank expectedRank) {
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(LottoNumbers.of("1,2,3,4,5,6"), new LottoNumber(bonusNumber));
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(LottoNumbers.of("1,2,3,4,5,6"), LottoNumber.of(bonusNumber));
         LottoNumbers lottoNumbers = LottoNumbers.of(text);
         Rank rank = winningLottoNumbers.getRank(lottoNumbers);
         assertThat(rank).isEqualTo(expectedRank);
