@@ -1,20 +1,45 @@
 package step3;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
 public class Lotto {
 
-    private final int number;
+    private static final int LOTTO_LENGTH = 6;
 
-    public Lotto(final int number) {
-        this.number = number;
+    private final List<LottoNumber> lottoNumbers;
+
+    public Lotto(final LottoNumber... lottoNumbers) {
+        verifyLottoNumbersLength(lottoNumbers);
+
+        this.lottoNumbers = Arrays.asList(lottoNumbers);
     }
 
-    private void verifyLottoNumber(final int number) {
-        if (isAvailableLottoNumber(number)) {
-            throw new IllegalArgumentException("잘못 된 로또 번호입니다.");
+    private boolean isAvailableLottoNumbersLength(final LottoNumber[] lottoNumbers) {
+        return lottoNumbers.length == LOTTO_LENGTH;
+    }
+
+    private void verifyLottoNumbersLength(final LottoNumber[] lottoNumbers) {
+        if (!isAvailableLottoNumbersLength(lottoNumbers)) {
+            throw new IllegalArgumentException("로또는 6개의 숫자로 구성되어야 합니다.");
         }
     }
 
-    private boolean isAvailableLottoNumber(final int number) {
-        return number >= 1 && number <= 45;
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Lotto)) {
+            return false;
+        }
+        final Lotto lotto = (Lotto)o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }
