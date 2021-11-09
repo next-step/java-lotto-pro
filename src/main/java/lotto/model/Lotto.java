@@ -1,11 +1,11 @@
 package lotto.model;
 
+import lotto.LottoConstants;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    public static final Money SELLING_PRICE = new Money(1000);
-
     private final LottoTicket ticket;
 
     private Lotto(LottoTicket ticket) {
@@ -16,7 +16,7 @@ public class Lotto {
         if (money.isZero()) {
             return 0;
         }
-        return (int) money.divideBy(SELLING_PRICE);
+        return (int) money.divideBy(LottoConstants.SELLING_PRICE);
     }
 
     public static Lotto generate(List<Integer> numbers) {

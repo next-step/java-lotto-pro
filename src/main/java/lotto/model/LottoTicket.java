@@ -1,11 +1,11 @@
 package lotto.model;
 
+import lotto.LottoConstants;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
-    public static final int LOTTO_SIZE = 6;
-
     private final List<LottoNumber> numbers;
 
     public LottoTicket(List<LottoNumber> numbers) {
@@ -22,7 +22,7 @@ public class LottoTicket {
     }
 
     private void validate(List<LottoNumber> numbers) {
-        if (numbers == null || numbers.size() != LOTTO_SIZE) {
+        if (numbers == null || numbers.size() != LottoConstants.LOTTO_SIZE) {
             throw new IllegalArgumentException();
         }
     }

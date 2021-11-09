@@ -1,12 +1,14 @@
 package lotto.model;
 
+import lotto.LottoConstants;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.model.LottoNumber.MAX_VALUE;
-import static lotto.model.LottoNumber.MIN_VALUE;
-import static lotto.model.LottoTicket.LOTTO_SIZE;
+import static lotto.LottoConstants.MAX_VALUE;
+import static lotto.LottoConstants.MIN_VALUE;
+import static lotto.LottoConstants.LOTTO_SIZE;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -44,7 +46,7 @@ public class Lottos {
     }
 
     public Money getSellingPrice() {
-        return Lotto.SELLING_PRICE.multiplyBy(lottos.size());
+        return LottoConstants.SELLING_PRICE.multiplyBy(lottos.size());
     }
 
     private static List<Integer> getRandomNumbers() {
