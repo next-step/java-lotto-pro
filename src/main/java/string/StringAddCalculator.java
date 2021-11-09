@@ -1,3 +1,5 @@
+package string;
+
 public class StringAddCalculator {
     private static final int RESULT_WHEN_INPUT_IS_EMPTY = 0;
 
