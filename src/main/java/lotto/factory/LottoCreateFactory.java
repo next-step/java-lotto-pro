@@ -50,5 +50,4 @@ public class LottoCreateFactory {
         Set<Integer> set = new HashSet<>(numbers);
         return set.size() != Lotto.SIZE;
     }
-
 }
