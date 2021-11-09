@@ -28,7 +28,7 @@ public class LottoNumbers {
         Set<LottoNumber> result = new HashSet<>();
 
         for (int number : numbers) {
-            result.add(new LottoNumber(number));
+            result.add(LottoNumber.of(number));
         }
 
         return result;
@@ -63,7 +63,7 @@ public class LottoNumbers {
         long matchedCount = lottoNumbers.stream()
             .filter(lottoNumber -> lottoNumber.equals(bonusLottoNumber))
             .count();
-        
+
         return matchedCount != 0;
     }
 

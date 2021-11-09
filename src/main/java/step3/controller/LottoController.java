@@ -24,7 +24,6 @@ public class LottoController {
     }
 
     public void play() {
-        // Todo 수동으로 구매할 번호가 예외 발생시?
         LottoStatisticsRequestDto lottoStatisticsRequestDto = new LottoStatisticsRequestDto();
 
         LottoBuyRequestDto lottoRequestDto = InputView.readLottoRequestDto();
@@ -43,7 +42,7 @@ public class LottoController {
             lottoRequestDto.getAmountValue());
 
         LottoBonusNumberRequestDto lottoBonusNumberRequestDto = getLottoBonusNumberRequestDto();
-        
+
         lottoStatisticsRequestDto.mapWinningLotto(new WinningLotto(lottoWinNumbersRequestDto.getLottoNumbers(),
             lottoBonusNumberRequestDto.getBonusLottoNumber()));
 

@@ -6,7 +6,7 @@ public class LottoBonusNumberRequestDto {
     private final LottoNumber bonusLottoNumber;
 
     public LottoBonusNumberRequestDto(int number) {
-        this.bonusLottoNumber = new LottoNumber(number);
+        this.bonusLottoNumber = LottoNumber.of(number);
     }
 
     public LottoNumber getBonusLottoNumber() {

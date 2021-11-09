@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
+import step3.domain.constance.LottoConstant;
 
 public class RandomLottoNumbers implements NumbersStrategy {
 
@@ -16,7 +17,7 @@ public class RandomLottoNumbers implements NumbersStrategy {
 
     static {
         lottoRangeNumbers =
-            IntStream.range(LottoNumber.MIN_NUMBER_RANGE, LottoNumber.MAX_NUMBER_RANGE + RANGE_MAX_ADD_VALUE)
+            IntStream.range(LottoConstant.MIN_NUMBER_RANGE, LottoConstant.MAX_NUMBER_RANGE + RANGE_MAX_ADD_VALUE)
                 .boxed()
                 .collect(Collectors.toList());
     }

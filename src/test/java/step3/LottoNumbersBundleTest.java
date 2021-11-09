@@ -29,7 +29,7 @@ public class LottoNumbersBundleTest {
     void lottoRanksOf_totalPrize(String buyNumbersStr, String winNumbersStr, int bonusNumber, Long expected) {
         // given
         LottoNumbers winLottoNumbers = new LottoNumbers(parseNumbers(winNumbersStr));
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
         LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
         addLottoNumbers(buyNumbersStr, lottoNumbersBundle);
 

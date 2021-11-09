@@ -68,7 +68,7 @@ public class LottoServiceImplTest {
 
         LottoStatisticsRequestDto lottoStatisticsRequestDto = new LottoStatisticsRequestDto();
 
-        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(winLottoNumbers), new LottoNumber(bonusNumber));
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(winLottoNumbers), LottoNumber.of(bonusNumber));
         lottoStatisticsRequestDto.mapAmount(new Amount(amount));
         lottoStatisticsRequestDto.mapWinningLotto(winningLotto);
         lottoStatisticsRequestDto.mapBuyLottoList(lottoBuyResponseDto.getBuyLottoList());

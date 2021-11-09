@@ -50,7 +50,7 @@ public class LottoNumbersTest {
         int[] numbers = {1, 2, 3, 4, 5, 6};
 
         // when
-        LottoNumber bonusLottoNumber = new LottoNumber(1);
+        LottoNumber bonusLottoNumber = LottoNumber.of(1);
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
 
         // then
