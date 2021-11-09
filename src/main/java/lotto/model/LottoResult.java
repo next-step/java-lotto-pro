@@ -1,6 +1,6 @@
 package lotto.model;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResult {
@@ -12,9 +12,13 @@ public class LottoResult {
 	private final WinningLottoNumbers winningLottoNumbers;
 	private final Lottos lottos;
 
-	public LottoResult(WinningLottoNumbers winningLottoNumbers, Lottos lottos) {
+	private LottoResult(WinningLottoNumbers winningLottoNumbers, Lottos lottos) {
 		this.winningLottoNumbers = winningLottoNumbers;
 		this.lottos = lottos;
+	}
+
+	public static LottoResult of(WinningLottoNumbers winningLottoNumbers, Lottos lottos) {
+		return new LottoResult(winningLottoNumbers, lottos);
 	}
 
 	public Map<LottoRank, Integer> getRankCodeMapUsingContainsMap() {
@@ -27,8 +31,8 @@ public class LottoResult {
 		return rankMap;
 	}
 
-	public Map<LottoRank, Integer> containsWinningLottoGenerator() {
-		Map<LottoRank, Integer> lottoRankMap = new HashMap<>();
+	private Map<LottoRank, Integer> containsWinningLottoGenerator() {
+		Map<LottoRank, Integer> lottoRankMap = new EnumMap<>(LottoRank.class);
 
 		for (LottoNumbers lottoNumbers : lottos.getLottoNumbersList()) {
 			LottoRank lottoRank = LottoRank
@@ -41,12 +45,7 @@ public class LottoResult {
 		return lottoRankMap;
 	}
 
-	public LottoRank getRankCodeUsingContainsCount(WinningLottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
-		int contains = containsWinningLottoNumbers(winningLottoNumbers, lottoNumbers);
-		return LottoRank.getRankCode(contains);
-	}
-
-	public int containsWinningLottoNumbers(WinningLottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
+	private int containsWinningLottoNumbers(WinningLottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
 		int containsCount = 0;
 
 		for (LottoNumber lottoNumber : lottoNumbers.lottoNumberList) {
@@ -56,19 +55,22 @@ public class LottoResult {
 		return containsCount;
 	}
 
-	public int containsBonusLottoNumber(WinningLottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
+	private int containsBonusLottoNumber(WinningLottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
 		return winningLottoNumbers.containsBonusCountLottoNumber(lottoNumbers);
 	}
 
-	public double calculateYield() {
-		double sum = DEFAULT_VALUE;
+	public float calculateSum() {
+		float sum = DEFAULT_VALUE;
 		Map<LottoRank, Integer> rankMap = containsWinningLottoGenerator();
 
 		for (Map.Entry<LottoRank, Integer> rankCodeEntry : rankMap.entrySet()) {
 			sum += LottoRank.getRankMoney(rankCodeEntry.getKey(), rankCodeEntry.getValue());
 		}
 
-		return (Math.round((sum / lottos.getInputMoney() * LottoResult.MATH_ROUND_VALUE))
-			/ LottoResult.MATH_ROUND_VALUE);
+		return sum;
+	}
+
+	public float getYield() {
+		return lottos.getInputMoney().calculateYield(calculateSum());
 	}
 }

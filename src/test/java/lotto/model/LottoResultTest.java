@@ -2,6 +2,7 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Map;
 
@@ -10,21 +11,33 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoResultTest {
 
+	private static Money money = Money.from(1000);
+
+	private Method privateMethod(String methodName) throws Exception {
+		Method method = LottoResult.class.getDeclaredMethod(methodName);
+		method.setAccessible(true);
+		return method;
+	}
+
 	@ParameterizedTest(name = "index {index} ==> winningNumber {0} , lottoNumber {1}, resultCount {2}")
 	@CsvSource(value = {
 		"1,2,3,4,5,6 : 9 : 1,2,3,4,5,6 : 6",
 		"1,2,3,4,5,6 : 9 : 1,2,3,4,7,8 : 4",
 		"1,2,3,4,5,6 : 15 : 7,8,9,10,11,12 : 0"
 	}, delimiter = ':')
-	void 당첨번호와_로또번호를_비교해주는_기능테스트(String winningNumber, String bonusNumber, String lottoNumber, int resultCount) {
+	void 당첨번호와_로또번호를_비교해주는_기능테스트(String winningNumber, String bonusNumber, String lottoNumber, int resultCount) throws
+		Exception {
 		//given
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumber, bonusNumber);
-		LottoNumbers lottoNumbers = new LottoNumbers(lottoNumber);
-		Lottos lottos = new Lottos(Collections.singletonList(lottoNumbers), "1000");
-		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottos);
+		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(winningNumber, bonusNumber);
+		LottoNumbers lottoNumbers = LottoNumbers.from(lottoNumber);
+		Lottos lottos = Lottos.of(Collections.singletonList(lottoNumbers), money);
+		LottoResult lottoResult = LottoResult.of(winningLottoNumbers, lottos);
 
 		//when
-		int contains = lottoResult.containsWinningLottoNumbers(winningLottoNumbers, lottoNumbers);
+		Method method = LottoResult.class.getDeclaredMethod("containsWinningLottoNumbers", WinningLottoNumbers.class,
+			LottoNumbers.class);
+		method.setAccessible(true);
+		int contains = (int)method.invoke(lottoResult, winningLottoNumbers, lottoNumbers);
 
 		//then
 		assertThat(contains).isEqualTo(resultCount);
@@ -37,37 +50,20 @@ class LottoResultTest {
 		"1,2,3,4,5,6 : 7 : 1,2,3,4,5,8 : THIRD",
 		"1,2,3,4,5,6 : 7 : 7,8,9,10,11,12 : NOTHING"
 	}, delimiter = ':')
-	void 당첨번호와_로또생성기로_생성된_로또를_비교해주는_기능테스트(String winningNumber, String bonusNumber, String inputNumber, String result) {
+	void 당첨번호와_로또생성기로_생성된_로또를_비교해주는_기능테스트(String winningNumber, String bonusNumber, String inputNumber,
+		String result) throws
+		Exception {
 		//given
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumber, bonusNumber);
-		Lottos lottos = new Lottos(Collections.singletonList(new LottoNumbers(inputNumber)), "1000");
-		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottos);
+		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(winningNumber, bonusNumber);
+		Lottos lottos = Lottos.of(Collections.singletonList(LottoNumbers.from(inputNumber)), money);
+		LottoResult lottoResult = LottoResult.of(winningLottoNumbers, lottos);
 
 		//when
-		Map<LottoRank, Integer> lottoRankMap = lottoResult.containsWinningLottoGenerator();
+		Method method = privateMethod("containsWinningLottoGenerator");
+		Map<LottoRank, Integer> lottoRankMap = (Map<LottoRank, Integer>)method.invoke(lottoResult);
 
 		//then
 		assertThat(lottoRankMap.get(LottoRank.valueOf(result))).isEqualTo(1);
-	}
-
-	@ParameterizedTest(name = "index {index} ==> winningNumber {0} , lottoNumber {1}, resultCount {2}")
-	@CsvSource(value = {
-		"1,2,3,4,5,6 : 9 : 1,2,3,4,5,6 : 6",
-		"1,2,3,4,5,6 : 9 : 1,2,3,4,7,8 : 4",
-		"1,2,3,4,5,6 : 15 : 7,8,9,10,11,12 : 0"
-	}, delimiter = ':')
-	void 일치결과를_통해_로또등수를_구하는_기능테스트(String winningLottoNumber, String bonusNumber, String lottoNumber, int resultCount) {
-		// given
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningLottoNumber, bonusNumber);
-		LottoNumbers lottoNumbers = new LottoNumbers(lottoNumber);
-		Lottos lottos = new Lottos(Collections.singletonList(lottoNumbers), "1000");
-		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottos);
-
-		// when
-		LottoRank lottoRank = lottoResult.getRankCodeUsingContainsCount(winningLottoNumbers, lottoNumbers);
-
-		// then
-		assertThat(lottoRank).isEqualTo(LottoRank.getRankCode(resultCount));
 	}
 
 	@ParameterizedTest(name = "index {index} ==> winningNumber {0} , lottoNumber {1}, mapSize {2}")
@@ -82,12 +78,12 @@ class LottoResultTest {
 	void 로또등수Map을_통해_총_수익률을_반환해주는_기능테스트(String winningLottoNumber, String bonusNumber, String lottoNumber,
 		double yieldResult) {
 		// given
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningLottoNumber, bonusNumber);
-		Lottos lottos = new Lottos(Collections.singletonList(new LottoNumbers(lottoNumber)), "1000");
-		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottos);
+		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(winningLottoNumber, bonusNumber);
+		Lottos lottos = Lottos.of(Collections.singletonList(LottoNumbers.from(lottoNumber)), money);
+		LottoResult lottoResult = LottoResult.of(winningLottoNumbers, lottos);
 
 		// when
-		double yield = lottoResult.calculateYield();
+		double yield = lottoResult.getYield();
 
 		// then
 		assertThat(yield).isEqualTo(yieldResult);
