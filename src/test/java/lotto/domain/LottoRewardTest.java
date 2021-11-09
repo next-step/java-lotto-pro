@@ -18,18 +18,13 @@ class LottoRewardTest {
         assertThat(result).isEqualTo(expectResult);
     }
 
-    @Test
-    void getLottoReward() {
-        // given
-        int input1 = 3;
-        int input2 = 2;
-
+    @ParameterizedTest
+    @CsvSource(value = {"6:false:FIRST_PLACE", "5:true:SECOND_PLACE", "5:false:THIRD_PLACE", "2:false:MISS"}, delimiter = ':')
+    void getLottoReward(int matchCount, boolean matchBonus, LottoReward lottoReward) {
         // when
-        LottoReward result1 = LottoReward.getLottoReward(input1);
-        LottoReward result2 = LottoReward.getLottoReward(input2);
+        LottoReward result = LottoReward.getLottoReward(matchCount, matchBonus);
 
         // then
-        assertThat(result1).isEqualTo(LottoReward.FOURTH_PLACE);
-        assertThat(result2).isEqualTo(null);
+        assertThat(result).isEqualTo(lottoReward);
     }
 }

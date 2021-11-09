@@ -40,8 +40,8 @@ class LottoStatisticsTest {
         assertThat(lottoRewardMap.size()).isEqualTo(4);
         assertThat(lottoRewardMap.get(LottoReward.FIRST_PLACE)).isEqualTo(1);
         assertThat(lottoRewardMap.get(LottoReward.SECOND_PLACE)).isEqualTo(2);
-        assertThat(lottoRewardMap.get(LottoReward.THIRD_PLACE)).isEqualTo(1);
         assertThat(lottoRewardMap.get(LottoReward.FOURTH_PLACE)).isEqualTo(1);
+        assertThat(lottoRewardMap.get(LottoReward.FIFTH_PLACE)).isEqualTo(1);
     }
 
     @Test

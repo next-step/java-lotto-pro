@@ -1,16 +1,15 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public enum LottoReward {
 
-    FIRST_PLACE(6, 2000000000),
-    SECOND_PLACE(5, 1500000),
-    THIRD_PLACE(4, 50000),
-    FOURTH_PLACE(3, 5000);
+    FIRST_PLACE(6, 2_000_000_000),
+    SECOND_PLACE(5, 30_000_000),
+    THIRD_PLACE(5, 1_500_000),
+    FOURTH_PLACE(4, 50_000),
+    FIFTH_PLACE(3, 5_000),
+    MISS(0, 0);
 
     private final int matchCount;
     private final int rewardMoney;
@@ -29,16 +28,41 @@ public enum LottoReward {
     }
 
     public static boolean isWinning(int matchCount) {
-        List<Integer> matchCounts = Arrays.stream(LottoReward.values())
-                .map(lottoReward -> lottoReward.getMatchCount())
-                .collect(Collectors.toList());
-        return matchCounts.contains(matchCount);
+        LottoReward lottoReward = findLottoReward(matchCount);
+        return lottoReward == MISS ? false : true;
     }
 
     public static LottoReward getLottoReward(int matchCount) {
-        Optional<LottoReward> lottoReward = Arrays.stream(LottoReward.values())
-                .filter(l -> l.getMatchCount() == matchCount)
-                .findAny();
-        return lottoReward.orElse(null);
+        for (LottoReward lottoReward : LottoReward.values()) {
+            if (isSameMathCount(lottoReward.matchCount, matchCount)) {
+                return lottoReward;
+            }
+        }
+        return null;
+    }
+
+    public static LottoReward getLottoReward(int matchCount, boolean matchBonus) {
+        if (isSameMathCount(matchCount, SECOND_PLACE.matchCount)) {
+            return getSecondOrThird(matchBonus);
+        }
+        return findLottoReward(matchCount);
+    }
+
+    private static LottoReward findLottoReward(int matchCount) {
+        return Arrays.stream(LottoReward.values())
+                .filter(l -> isSameMathCount(l.matchCount, matchCount))
+                .findAny()
+                .orElse(MISS);
+    }
+
+    private static boolean isSameMathCount(int matchCount, int secondMatchCount) {
+        return matchCount == secondMatchCount;
+    }
+
+    private static LottoReward getSecondOrThird(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND_PLACE;
+        }
+        return THIRD_PLACE;
     }
 }
