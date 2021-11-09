@@ -13,7 +13,6 @@ import step3.RandomUtils;
 
 public class AutoLottoMachine implements Machine {
 
-	private Money money;
 	private MachineValidation machineValidation;
 
 	public AutoLottoMachine(MachineValidation machineValidation) {
@@ -21,12 +20,7 @@ public class AutoLottoMachine implements Machine {
 	}
 
 	@Override
-	public void insertMoney(Money money) {
-		this.money = money;
-	}
-
-	@Override
-	public LottoPapers createLottoPapers() {
+	public LottoPapers createLottoPapers(Money money) {
 		List<LottoNumbers> lottoNumbers = new ArrayList<>();
 		for (int i = 0; i < money.buyCount(); i++) {
 			lottoNumbers.add(createOneLineLottoNumbers());

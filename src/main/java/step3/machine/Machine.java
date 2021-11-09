@@ -4,6 +4,5 @@ import step3.LottoPapers;
 import step3.Money;
 
 public interface Machine {
-	void insertMoney(Money money);
-	LottoPapers createLottoPapers();
+	LottoPapers createLottoPapers(Money money);
 }
