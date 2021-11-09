@@ -35,13 +35,13 @@ public class LottoServiceImplTest {
     ) {
         // given
         int amount = 2000;
+
         // when
         LottoService lottoService = new LottoServiceImpl();
         lottoService.registerBuyAmount(amount);
         lottoService.registerManualLottoBuy(numbersStrategy);
         lottoService.buyAutoLotto();
         lottoService.winningLottoNumber(new ManualLottoNumbers(winLottoNumbers), bonusNumber);
-
         LottoStatisticsResponseDto lottoStatisticsResponseDto = lottoService.resultStatistics();
 
         // then

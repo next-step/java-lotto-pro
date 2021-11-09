@@ -30,7 +30,7 @@ public class LottoServiceImpl implements LottoService {
     @Override
     public void registerManualLottoBuy(List<NumbersStrategy> manualLottoNumbers) {
         manualLottoNumbersBundle = lottoProvider.buyLotto(manualLottoNumbers);
-        amount.minusAmount(manualLottoNumbers.size());
+        amount.lottoBuyAndAmountMinus(manualLottoNumbers.size());
     }
 
     @Override
@@ -41,7 +41,7 @@ public class LottoServiceImpl implements LottoService {
         }
 
         autoLottoNumbersBundle = lottoProvider.buyLotto(autoLottoNumbers);
-        amount.minusAmount(autoLottoNumbers.size());
+        amount.lottoBuyAndAmountMinus(autoLottoNumbers.size());
     }
 
     @Override

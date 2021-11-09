@@ -27,7 +27,7 @@ public class Amount {
         }
     }
 
-    public void minusAmount(int size) {
+    public void lottoBuyAndAmountMinus(int size) {
         int minusAmount = calculateMinusAmount(size);
         if (minusAmount > this.remainingAmount) {
             throw new InvalidParamException(LottoConstant.LACK_OF_AMOUNT);

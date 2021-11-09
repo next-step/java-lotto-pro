@@ -20,4 +20,15 @@ public class AmountTest {
             }) // then
             .withMessageMatching(Amount.NOT_ENOUGH_MESSAGE);
     }
+
+    @Test
+    @DisplayName("지불 금액보다 많은 로또 구매시 에러 발생")
+    void valid() {
+        assertThatExceptionOfType(InvalidParamException.class)
+            .isThrownBy(() -> {
+                // when
+                Amount amount = new Amount(1000);
+                amount.lottoBuyAndAmountMinus(2);
+            });
+    }
 }
