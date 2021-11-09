@@ -1,54 +1,62 @@
 package lotto.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoGenerator {
-	public static final int LOTTO_PRICE = 1000;
 	private final Money money;
-	private List<String> inputNumberList;
+	private final List<String> inputNumberList;
 
-	public LottoGenerator(String inputMoney) {
-		this.money = new Money(inputMoney);
+	private LottoGenerator(Money money, List<String> inputNumberList) {
+		this.money = money;
+		this.inputNumberList = Collections.unmodifiableList(inputNumberList);
 	}
 
-	public LottoGenerator(String inputMoney, List<String> inputNumberList) {
-		this.money = new Money(inputMoney);
-		this.inputNumberList = inputNumberList;
+	public static LottoGenerator from(Money money) {
+		return new LottoGenerator(money, new ArrayList<>());
 	}
 
-	private int calculateLottoAmount(String inputMoney) {
-		return Integer.parseInt(inputMoney) / LOTTO_PRICE;
+	public static LottoGenerator of(Money money, List<String> inputNumberList) {
+		return new LottoGenerator(money, inputNumberList);
 	}
 
 	public List<LottoNumbers> generateLottoNumbers() {
 		if (isNullInputNumberList()) {
 			return generateRandomLottoNumbers();
 		}
-		return generateLottoInputNumbers();
+		return generateMixLottoNumbers();
 	}
 
-	public List<LottoNumbers> generateRandomLottoNumbers() {
-		return Stream
-			.generate(LottoNumbers::new)
-			.limit(calculateLottoAmount(money.money()))
+	private int calculateRandomSize() {
+		return money.calculateLottoAmount() - inputNumberList.size();
+	}
+
+	private List<LottoNumbers> generateMixLottoNumbers() {
+		return Stream.of(generateLottoInputNumbers(), generateRandomLottoNumbers())
+			.flatMap(Collection::stream)
 			.collect(Collectors.toList());
 	}
 
-	public List<LottoNumbers> generateLottoInputNumbers() {
+	private List<LottoNumbers> generateRandomLottoNumbers() {
+		return Stream
+			.generate(LottoNumbers::from)
+			.limit(calculateRandomSize())
+			.collect(Collectors.toList());
+	}
+
+	private List<LottoNumbers> generateLottoInputNumbers() {
 		return inputNumberList
 			.stream()
-			.map(LottoNumbers::new)
-			.limit(calculateLottoAmount(money.money()))
+			.map(LottoNumbers::from)
+			.limit(inputNumberList.size())
 			.collect(Collectors.toList());
 	}
 
 	private boolean isNullInputNumberList() {
 		return this.inputNumberList == null || this.inputNumberList.isEmpty();
-	}
-
-	public String getInputMoney() {
-		return money.money();
 	}
 }
