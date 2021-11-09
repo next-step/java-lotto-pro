@@ -1,4 +1,4 @@
-package study.lottoAuto;
+package study.lotto.auto;
 
 import org.junit.jupiter.api.Test;
 
