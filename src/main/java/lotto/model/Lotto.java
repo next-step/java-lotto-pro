@@ -1,8 +1,10 @@
-package lotto;
+package lotto.model;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import lotto.constants.Rank;
 
 public class Lotto {
 	private final List<Integer> numbers;
@@ -30,5 +32,11 @@ public class Lotto {
 		return new Numbers(numbers.stream()
 			.filter(lotto.numbers::contains)
 			.collect(Collectors.toList()));
+	}
+
+	public Rank compare(Lotto lotto) {
+		Numbers numbers = compareNumbers(lotto);
+
+		return Rank.valueOf(numbers.size());
 	}
 }

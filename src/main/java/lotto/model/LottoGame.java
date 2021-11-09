@@ -1,7 +1,9 @@
-package lotto;
+package lotto.model;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import lotto.constants.Rank;
 
 public class LottoGame {
 	private final Lotto winLotto;
@@ -11,10 +13,10 @@ public class LottoGame {
 	}
 
 	public Prize winPrize(Lottos lottos) {
-		List<Numbers> numbers = new LinkedList<>();
+		List<Rank> ranks = new LinkedList<>();
 		for (Lotto lotto : lottos) {
-			numbers.add(winLotto.compareNumbers(lotto));
+			ranks.add(winLotto.compare(lotto));
 		}
-		return new Prize(numbers);
+		return new Prize(ranks);
 	}
 }
