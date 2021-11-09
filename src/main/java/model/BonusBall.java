@@ -21,12 +21,11 @@ public class BonusBall {
 	}
 
 	public static boolean validate(String number) {
-		boolean isMatch = number.matches(Regex.NUMBER);
-		Set<Integer> numbers = Stream.of(number)
-			.map(Integer::parseInt)
-			.collect(toSet());
+		if (!number.matches(Regex.NUMBER)) {
+			return false;
+		}
 
-		return isMatch && Lotto.isValidLottoNumber(numbers);
+		return LottoNumber.isValidNumber(Integer.parseInt(number));
 	}
 
 	public LottoNumber getNumber() {
