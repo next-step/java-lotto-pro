@@ -1,10 +1,12 @@
-package step3;
+package step3.domain;
 
 import static helper.Constants.*;
 import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step3.domain.Lotto;
+import step3.domain.LottoNumber;
 
 @DisplayName("로또 테스트")
 class LottoTest {
