@@ -1,8 +1,7 @@
 package lotto.model;
 
-import lotto.NumberListGenerator;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static lotto.model.LottoNumber.MAX_VALUE;
@@ -20,7 +19,7 @@ public class Lottos {
         final List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            final List<Integer> numbers = NumberListGenerator.generateRandomNumbers(LOTTO_SIZE, MIN_VALUE, MAX_VALUE);
+            final List<Integer> numbers = Lottos.getRandomNumbers();
             final Lotto lotto = Lotto.generate(numbers);
             lottos.add(lotto);
         }
@@ -46,5 +45,21 @@ public class Lottos {
 
     public Money getSellingPrice() {
         return Lotto.SELLING_PRICE.multiplyBy(lottos.size());
+    }
+
+    private static List<Integer> getRandomNumbers() {
+        final List<Integer> allNumbers = getAllNumbers();
+        Collections.shuffle(allNumbers);
+        final List<Integer> pickedNumbers = new ArrayList<>(allNumbers.subList(0, LOTTO_SIZE));
+        Collections.sort(pickedNumbers);
+        return pickedNumbers;
+    }
+
+    private static List<Integer> getAllNumbers() {
+        final List<Integer> numbers = new ArrayList<>();
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
+            numbers.add(i);
+        }
+        return numbers;
     }
 }
