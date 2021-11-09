@@ -98,21 +98,4 @@ public class Lottos {
 	public static int getNumberBetweenOneAndFortyFive() {
 		return (int) ((Math.random() * 45) + 1);
 	}
-
-	/**
-	 * 사용자가 입력한 지난주 정답이 숫자 형태의 문자열인지 확인
-	 * @param winningNumbers
-	 * @return
-	 */
-	public static boolean checkInputWinningNumbersValidation(String winningNumbers) {
-		boolean isValidWinningNumbers = true;
-		String[] winningNumberArray = winningNumbers.split(PatternConstants.DEFAULT_SEPARATOR_PATTERN);
-		int currentWinningNumberIndex = 0;
-		while(isValidWinningNumbers && currentWinningNumberIndex < winningNumberArray.length) {
-			String winningNumber = winningNumberArray[currentWinningNumberIndex];
-			isValidWinningNumbers = ((winningNumberArray.length == 6) && NumberUtil.isNumber(winningNumber) && NumberUtil.isNumberBetweenOneAndFortyFive(Integer.parseInt(winningNumber)));
-			currentWinningNumberIndex++;
-		}
-		return isValidWinningNumbers;
-	}
 }
