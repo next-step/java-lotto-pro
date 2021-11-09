@@ -26,7 +26,7 @@ public class Number implements Comparable<Number> {
         this.number = number;
     }
 
-    public static Number ofValue(int number) {
+    public static Number valueOf(int number) {
         validate(number);
         return VALUE_TO_NUMBER.get(number);
     }

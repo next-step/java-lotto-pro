@@ -14,17 +14,17 @@ public class NumberTest {
     @DisplayName("로또의 숫자가 1~45 사이의 수가 아닐 경우 예외 발생")
     void 객체_생성_시_유효성_검사(int input) {
         assertThatIllegalArgumentException().isThrownBy(() ->
-            Number.ofValue(input)
+            Number.valueOf(input)
         ).withMessageContaining(NUMBER_RANGE_ERR_MSG);
     }
 
     @Test
     void equals() {
-        assertThat(Number.ofValue(1)).isEqualTo(Number.ofValue(1));
+        assertThat(Number.valueOf(1)).isEqualTo(Number.valueOf(1));
     }
 
     @Test
     void compareTo() {
-        assertThat(Number.ofValue(2)).isGreaterThan(Number.ofValue(1));
+        assertThat(Number.valueOf(2)).isGreaterThan(Number.valueOf(1));
     }
 }

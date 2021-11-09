@@ -49,7 +49,7 @@ public class InputView {
         System.out.println(QUERY_FOR_BONUS_NUMBER);
         String bonusNumber = readLine();
         validateNumberPattern(bonusNumber);
-        return Number.ofValue(Integer.parseInt(bonusNumber));
+        return Number.valueOf(Integer.parseInt(bonusNumber));
     }
 
     private static void validateNumberPattern(String input) {

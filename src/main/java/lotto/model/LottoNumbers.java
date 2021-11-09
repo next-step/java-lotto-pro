@@ -15,7 +15,7 @@ public class LottoNumbers {
     private final SortedSet<Number> numbers;
 
     public LottoNumbers(int... numbers) {
-        this(Arrays.stream(numbers).mapToObj(Number::ofValue).collect(toSet()));
+        this(Arrays.stream(numbers).mapToObj(Number::valueOf).collect(toSet()));
     }
 
     public LottoNumbers(Set<Number> numbers) {

@@ -9,7 +9,7 @@ public class RandomNumberSupplierTest {
     void generateNumbers() {
         assertThat(RandomNumberSupplier.generateNumbers())
             .hasSize(LottoNumbers.NUMBER_SIZE)
-            .allMatch(number -> number.compareTo(Number.ofValue(Number.MIN_NUMBER)) >= 0)
-            .allMatch(number -> number.compareTo(Number.ofValue(Number.MAX_NUMBER)) <= 0);
+            .allMatch(number -> number.compareTo(Number.valueOf(Number.MIN_NUMBER)) >= 0)
+            .allMatch(number -> number.compareTo(Number.valueOf(Number.MAX_NUMBER)) <= 0);
     }
 }

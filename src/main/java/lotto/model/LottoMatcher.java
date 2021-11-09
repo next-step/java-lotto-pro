@@ -13,7 +13,7 @@ public class LottoMatcher {
     private final LottoNumbers winningNumbers;
 
     public LottoMatcher(int bonusNumber, int... winningNumbers) {
-        this(Number.ofValue(bonusNumber), new LottoNumbers(winningNumbers));
+        this(Number.valueOf(bonusNumber), new LottoNumbers(winningNumbers));
     }
 
     public LottoMatcher(Number bonusNumber, LottoNumbers winningNumbers) {

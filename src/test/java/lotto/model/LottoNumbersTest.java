@@ -51,7 +51,7 @@ public class LottoNumbersTest {
     @Test
     void contains() {
         LottoNumbers numbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-        assertThat(numbers.contains(Number.ofValue(1))).isTrue();
-        assertThat(numbers.contains(Number.ofValue(7))).isFalse();
+        assertThat(numbers.contains(Number.valueOf(1))).isTrue();
+        assertThat(numbers.contains(Number.valueOf(7))).isFalse();
     }
 }
