@@ -30,7 +30,7 @@ public class LottoTicketIssuer {
 	 * @param inputAmount :  티켓 단위 금액(TICKET_PER_PRICE) < inputAmount < int형 최대값 and inputAmount % 1000 = 0 이어야 함
 	 * @return LottoTickets : LottoTicket을 리스트형태로 가지고 있는 일급컬렉션
 	 */
-	public LottoTickets buyTickets(int inputAmount) {
+	public LottoTickets buyAutoTickets(int inputAmount) {
 		validatePay(inputAmount);
 		int numOfTickets = getNumOfTicketsToBuy(inputAmount);
 		List<LottoTicket> lottoTickets = issuTickets(numOfTickets);
@@ -72,9 +72,9 @@ public class LottoTicketIssuer {
 	}
 
 	/* 사용자 입력값을 문자열로 받아 숫자형으로 변환 후  buyTickets(int inputAmount) 호출 */
-	public LottoTickets buyTickets(String inputAmount) {
+	public LottoTickets buyAutoTickets(String inputAmount) {
 		int convertedMoney = convertMoneyFormatToNumber(inputAmount);
-		return buyTickets(convertedMoney);
+		return buyAutoTickets(convertedMoney);
 	}
 
 	/* int형 양의 정수 최대값 보다 큰 값을 변환하는 경우도 예외 발생 */

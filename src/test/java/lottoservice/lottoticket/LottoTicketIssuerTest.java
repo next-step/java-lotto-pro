@@ -2,6 +2,7 @@ package lottoservice.lottoticket;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -21,7 +22,7 @@ public class LottoTicketIssuerTest {
 	@ParameterizedTest
 	@CsvSource(value = {"1000:1", "10000:10"}, delimiter = ':')
 	public void buyTickets(int inputAmount, int numOfTickets) {
-		LottoTickets lottoTickets = lottoTicketIssuer.buyTickets(inputAmount);
+		LottoTickets lottoTickets = lottoTicketIssuer.buyAutoTickets(inputAmount);
 		Assertions.assertThat(lottoTickets.getNumOfTickets()).isEqualTo(numOfTickets);
 	}
 
@@ -30,7 +31,7 @@ public class LottoTicketIssuerTest {
 	@ValueSource(ints = {999, 900, 0, -1, -1000})
 	public void buyTickets_not_enough_money(int inputAmount) {
 		Assertions.assertThatThrownBy(() -> {
-			LottoTickets lottoTickets = lottoTicketIssuer.buyTickets(inputAmount);
+			LottoTickets lottoTickets = lottoTicketIssuer.buyAutoTickets(inputAmount);
 		}).isInstanceOf(NotEnoughMoneyException.class);
 	}
 
@@ -39,7 +40,7 @@ public class LottoTicketIssuerTest {
 	@ValueSource(ints = {1001, 1100})
 	public void buyTickets_not_divisible(int inputAmount) {
 		Assertions.assertThatThrownBy(() -> {
-			LottoTickets lottoTickets = lottoTicketIssuer.buyTickets(inputAmount);
+			LottoTickets lottoTickets = lottoTicketIssuer.buyAutoTickets(inputAmount);
 		}).isInstanceOf(NotDivisibleMoneyUnitException.class);
 	}
 
@@ -47,7 +48,7 @@ public class LottoTicketIssuerTest {
 	@ParameterizedTest
 	@CsvSource(value = {"1000:1", "10000:10", "00011000:11"}, delimiter = ':')
 	public void buyTickets_string_amount(String inputAmount, int numOfTickets) {
-		LottoTickets lottoTickets = lottoTicketIssuer.buyTickets(inputAmount);
+		LottoTickets lottoTickets = lottoTicketIssuer.buyAutoTickets(inputAmount);
 		Assertions.assertThat(lottoTickets.getNumOfTickets()).isEqualTo(numOfTickets);
 	}
 
@@ -56,7 +57,7 @@ public class LottoTicketIssuerTest {
 	@ValueSource(strings = {"", "1000f"})
 	public void buyTickets_string_amount_cannot_parse(String inputAmount) {
 		Assertions.assertThatThrownBy(() -> {
-			LottoTickets lottoTickets = lottoTicketIssuer.buyTickets(inputAmount);
+			LottoTickets lottoTickets = lottoTicketIssuer.buyAutoTickets(inputAmount);
 		}).isInstanceOf(InvalidNumberFormatMoneyException.class);
 	}
 
@@ -65,7 +66,11 @@ public class LottoTicketIssuerTest {
 	@ValueSource(strings = {"21474830000", "2147484000"})
 	public void buyTickets_amount_bigger_than_limit(String inputAmount) {
 		Assertions.assertThatThrownBy(() -> {
-			LottoTickets lottoTickets = lottoTicketIssuer.buyTickets(inputAmount);
+			LottoTickets lottoTickets = lottoTicketIssuer.buyAutoTickets(inputAmount);
 		}).isInstanceOf(InvalidNumberFormatMoneyException.class);
+	}
+
+	@Test
+	public void 수동으로_로또_구매() {
 	}
 }
