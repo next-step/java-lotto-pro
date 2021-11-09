@@ -171,3 +171,12 @@ public class OverflowValidator implements MachineValidator {
 - [x] LottoNumbersService 삭제 
   - 행위의 의한 범위가 아닌 하나의 대한 인터페이스는 의미 없어보이므로 삭제 
   - 해당 로직을 LottoNumbers.from으로 변경
+- [x] Money `명령-쿼리` 
+  - 값의 조회와 함께 수정은 오류를 예측하기 어려워지므로 `하나의 일`만 하도록 처리
+- [x] `보너스볼` 추가 
+  - 보너스 볼을 `LottoNumber`를 상속하여 번호의 범위가 1 ~ 45 범위 이도록 변경 
+- [x] LottoNumber 번호의 범위 추가 
+  - 로또번호는 1 ~ 45까지의 범위이어야한다.
+
+
+### 궁금한점 
