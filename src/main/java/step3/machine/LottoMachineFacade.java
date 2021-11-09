@@ -46,7 +46,6 @@ public class LottoMachineFacade {
 
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			enterUserLottoNumber();
 		}
 
 	}
