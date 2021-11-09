@@ -16,10 +16,18 @@ public class LottoResult {
     public LottoResult(List<Lotto> lottos, WinningNumber winningNumber) {
         Map<LottoRank, Integer> results = new HashMap<>();
         for (Lotto lotto : lottos) {
-            LottoRank lottoRank = LottoRank.valueOf(lotto.winningCount(winningNumber.getWinningLotto()), lotto.contains(winningNumber.getBonusBall()));
+            LottoRank lottoRank = LottoRank.valueOf(getMatchCount(winningNumber, lotto), isBonus(winningNumber, lotto));
             results.put(lottoRank, results.getOrDefault(lottoRank, DEFAULT_VALUE) + ADD_COUNT);
         }
         this.lottoResults = results;
+    }
+
+    private boolean isBonus(WinningNumber winningNumber, Lotto lotto) {
+        return lotto.contains(winningNumber.getBonusBall());
+    }
+
+    private int getMatchCount(WinningNumber winningNumber, Lotto lotto) {
+        return lotto.winningCount(winningNumber.getWinningLotto());
     }
 
     public int getResult(LottoRank key) {

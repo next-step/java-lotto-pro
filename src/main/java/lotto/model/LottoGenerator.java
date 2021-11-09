@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoGenerator {
-    public static final int LOTTO_SIZE = 6;
     public static final String DELIMITER = ",";
     public static final String DELIMITER_MESSAGE = "로또 숫자 구분자로 ,(콤마)를 입력해주세요.";
     public static final String BLANK = " ";
@@ -22,7 +21,7 @@ public class LottoGenerator {
 
     public List<Integer> generate() {
         Collections.shuffle(allNumbers);
-        return allNumbers.stream().limit(LOTTO_SIZE).collect(Collectors.toList());
+        return allNumbers.stream().limit(Lotto.LOTTO_SIZE).collect(Collectors.toList());
     }
 
     public Lottos createLottos(int count) {

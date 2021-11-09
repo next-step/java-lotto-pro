@@ -8,7 +8,7 @@ public class LottoNumber {
     public static final String OUT_OF_RANGE_MESSAGE = "로또 범위를 벗어났습니다.";
     private final int number;
 
-    public LottoNumber (String text) {
+    public LottoNumber(String text) {
         this(Integer.parseInt(text));
     }
 
