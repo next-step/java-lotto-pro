@@ -20,9 +20,10 @@ public class WinningStatistics {
             result.put(ranking, 0);
         }
 
-        List<Integer> matchingCounts = lottos.getMatchingCounts(winningLotto);
+        List<MatchResult> matchingCounts = lottos.getMatchingCounts(winningLotto);
 
-        for(int matchingCount : matchingCounts) {
+        for(MatchResult matchingCount : matchingCounts) {
+
             Ranking findRanking = Ranking.findCorrect(matchingCount);
             result.put(findRanking, result.getOrDefault(findRanking, 0) + 1);
         }
