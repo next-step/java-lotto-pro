@@ -4,10 +4,20 @@ import java.util.Objects;
 
 public class LottoNumber {
 
+	public final int MIN_NUMBER = 1;
+	public final int MAX_NUMBER = 45;
+
 	protected final int no;
 
 	public LottoNumber(int no) {
 		this.no = no;
+		validation();
+	}
+
+	private void validation() {
+		if (no > MAX_NUMBER ||  no < MIN_NUMBER) {
+			throw new IllegalArgumentException("로또 번호는 1 ~ 45까지 숫자이어야 합니다.");
+		}
 	}
 
 	@Override
