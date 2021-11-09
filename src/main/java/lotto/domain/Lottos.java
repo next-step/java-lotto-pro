@@ -19,9 +19,7 @@ public class Lottos {
         for (Lotto lotto : lottos) {
             WinningNumberMatchResult winningNumberMatchResult = lotto.winningNumberMatch(winningNumber, bonusNumber);
             Rank rank = winningNumberMatchResult.rank();
-            if (rank.isPrize()) {
-                winningResultAccumulate(winningResult, rank);
-            }
+            winningResultAccumulate(winningResult, rank);
         }
         return new WinningResult(winningResult);
     }
@@ -34,8 +32,9 @@ public class Lottos {
     }
 
     private void winningResultAccumulate(Map<Rank, Integer> winningResult, Rank rank) {
-        if (winningResult.putIfAbsent(rank, 0) == null) {
-            winningResult.put(rank, winningResult.get(rank) + 1);
+        if (rank.isPrize()) {
+            Integer winsNumberCount = winningResult.computeIfAbsent(rank, key -> 0);
+            winningResult.put(rank, winsNumberCount + 1);
         }
     }
 
