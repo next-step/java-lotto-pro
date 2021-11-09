@@ -4,6 +4,8 @@ import nextstep.lotto.domain.Lotto;
 import nextstep.lotto.domain.LottoCount;
 import nextstep.lotto.domain.LottoNumber;
 import nextstep.lotto.domain.LottoNumbers;
+import nextstep.lotto.domain.MatchCount;
+import nextstep.lotto.domain.MatchCountCollection;
 import nextstep.lotto.domain.PurchaseLotto;
 import nextstep.lotto.domain.PurchaseLottoAmount;
 import nextstep.lotto.domain.WinningLotto;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 
 import static nextstep.lotto.constance.LottoDisplayMessage.DIVIDE_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.LAST_WEEK_LOTTO_WIN_NUMBERS_MESSAGE;
+import static nextstep.lotto.constance.LottoDisplayMessage.MATCH_COUNT_PREFIX_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_AMOUNT_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_COUNT_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_MIDDLE;
@@ -25,6 +28,7 @@ import static nextstep.lotto.constance.LottoDisplayMessage.WINNING_STAT_MESSAGE;
 import static nextstep.lotto.constance.LottoExceptionMessage.ERROR;
 import static nextstep.lotto.constance.LottoExceptionMessage.INVALID_LOTTO_PURCHASE_AMOUNT_MESSAGE;
 import static nextstep.lotto.constance.LottoExceptionMessage.INVALID_WINNING_LOTTO_NUMBER_MESSAGE;
+import static nextstep.lotto.domain.MatchCountCollection.WINNER_LOTTO_MIN_MATCHING_COUNT;
 
 public class LottoDisplay {
 
@@ -74,9 +78,12 @@ public class LottoDisplay {
         }
     }
 
-    public static void printWinningStatMessage() {
+    public static void printWinningStatMessage(MatchCountCollection matchCountCollection) {
         System.out.println(WINNING_STAT_MESSAGE);
         System.out.println(DIVIDE_MESSAGE);
+        for (MatchCount matchCount : matchCountCollection) {
+            System.out.println(matchCount);
+        }
 
     }
 

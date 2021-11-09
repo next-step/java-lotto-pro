@@ -7,10 +7,8 @@ public class LottoDisplayMessage {
     public static final String LAST_WEEK_LOTTO_WIN_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String WINNING_STAT_MESSAGE = "당첨 통계";
     public static final String DIVIDE_MESSAGE = "---------";
-    public static final String MATCH_3_COUNT_PREFIX_MESSAGE = "3개 일치 (5000원)- ";
-    public static final String MATCH_4_COUNT_PREFIX_MESSAGE = "4개 일치 (50000원)- ";
-    public static final String MATCH_5_COUNT_PREFIX_MESSAGE = "5개 일치 (1500000원)-";
-    public static final String MATCH_6_COUNT_PREFIX_MESSAGE = "6개 일치 (2000000000원)- ";
+    public static final String MATCH_COUNT_PREFIX_MESSAGE = "개 일치 (";
+    public static final String MATCH_COUNT_MIDDLE_MESSAGE = ")-";
     public static final String MATCH_COUNT_POSTFIX_MESSAGE = "개";
     public static final String WINNING_STAT_RESULT_PREFIX_MESSAGE = "총 수익률은 ";
     public static final String WINNING_STAT_RESULT_POSTFIX_MESSAGE = "입니다.";

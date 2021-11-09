@@ -8,6 +8,10 @@ public class WinningLotto {
         this.winningLotto = winningLotto;
     }
 
+    public Integer matchWithPurchaseLottoCount(Lotto purchaseLotto) {
+        return winningLotto.matchWithPurchaseLottoCount(purchaseLotto);
+    }
+
     @Override
     public String toString() {
         return winningLotto.toString();
