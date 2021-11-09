@@ -9,14 +9,14 @@ public class LotteryFactory {
     private LotteryFactory() {
     }
 
-    public static TicketLotteryBundle generateTicketLotteryBundleByCount(final TicketOrderCount orderCount) {
+    public static TicketLotteryBundle generateAutoTicketLotteryBundleByCount(final TicketOrderCount orderCount) {
         final List<TicketLottery> ticketLotteries = orderCount.getStream()
-                .mapToObj(index -> generateTicketLottery())
+                .mapToObj(index -> generateAutoTicketLottery())
                 .collect(Collectors.toList());
         return TicketLotteryBundle.valueOf(ticketLotteries);
     }
 
-    public static TicketLottery generateTicketLottery() {
+    public static TicketLottery generateAutoTicketLottery() {
         final Set<Integer> lottoNumbers = LottoRandoms.getLottoRandomNumbers();
         return TicketLottery.valueOf(lottoNumbers, TicketLotteryType.AUTO);
     }

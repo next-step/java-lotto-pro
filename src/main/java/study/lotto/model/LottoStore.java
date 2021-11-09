@@ -9,6 +9,6 @@ public class LottoStore {
 
     public static TicketLotteryBundle orderTicketLotteryBundleByMoney(final Money money) {
         final TicketOrderCount orderCount = TicketOrderCount.valueOf(money);
-        return LotteryFactory.generateTicketLotteryBundleByCount(orderCount);
+        return LotteryFactory.generateAutoTicketLotteryBundleByCount(orderCount);
     }
 }
