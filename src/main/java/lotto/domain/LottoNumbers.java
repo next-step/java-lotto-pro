@@ -1,24 +1,16 @@
 package lotto.domain;
 
-import lotto.utils.LottoNumberRange;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private List<String> lottoNumbers = new ArrayList<>();
+    private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public LottoNumbers(List<String> lottoNumbers) {
-        validateNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    private void validateNumbers(List<String> lottoNumbers) {
-        lottoNumbers.stream()
-                .filter(l -> Integer.parseInt(l) < LottoNumberRange.LOTTO_START_NUMBER || Integer.parseInt(l) > LottoNumberRange.LOTTO_END_NUMBER)
-                .forEach(l -> {
-                    throw new IllegalArgumentException("");
-                });
+        this.lottoNumbers = lottoNumbers.stream()
+                                .map(l -> new LottoNumber(Integer.parseInt(l)))
+                                .collect(Collectors.toList());
     }
 
     public long compare(LottoNumbers winningNumbers) {
@@ -27,11 +19,17 @@ public class LottoNumbers {
                         .count();
     }
 
-    private boolean isContainNumber(String lottoNumber) {
+    protected boolean isContainNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
     public List<String> getLottoNumbers() {
-        return lottoNumbers;
+        return lottoNumbers.stream()
+                .map(l -> l.getValue())
+                .collect(Collectors.toList());
+    }
+
+    public boolean isContainBonusNumber(WinningLottoNumbers winningNumbers) {
+        return isContainNumber(winningNumbers.getBonusNumber());
     }
 }
