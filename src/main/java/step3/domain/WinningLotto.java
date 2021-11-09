@@ -9,14 +9,14 @@ public class WinningLotto {
     private final LottoNumbers winningLottoNumbers;
     private final LottoNumber bonusLottoNumber;
 
-    private WinningLotto(LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
-        valid(winningLottoNumbers, bonusLottoNumber);
-        this.winningLottoNumbers = winningLottoNumbers;
-        this.bonusLottoNumber = bonusLottoNumber;
+    private WinningLotto(List<Integer> numbers, int bonusNumber) {
+        this.winningLottoNumbers = LottoNumbers.of(numbers);
+        this.bonusLottoNumber = LottoNumber.of(bonusNumber);
+        valid();
     }
 
     public static WinningLotto of(List<Integer> numbers, int bonusNumber) {
-        return new WinningLotto(LottoNumbers.of(numbers), LottoNumber.of(bonusNumber));
+        return new WinningLotto(numbers, bonusNumber);
     }
 
     public int containCount(LottoNumbers lottoNumbers) {
@@ -27,7 +27,7 @@ public class WinningLotto {
         return lottoNumbers.isBonusContain(bonusLottoNumber);
     }
 
-    private void valid(LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
+    private void valid() {
         if (winningLottoNumbers.isBonusContain(bonusLottoNumber)) {
             throw new InvalidParamException(LottoConstant.BONUS_NUMBER_ALREADY_EXIST_MESSAGE);
         }

@@ -1,6 +1,5 @@
 package step3.domain;
 
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,7 +42,7 @@ public class LottoNumbersBundle {
 
     public List<String> getResult() {
         return lottoNumbersBundle.stream()
-            .map(LottoNumbers::toString)
+            .map(LottoNumbers::toCommaSerialize)
             .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
     }
 

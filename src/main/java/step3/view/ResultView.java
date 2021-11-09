@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import step3.dto.LottoBoughtListResponse;
-import step3.dto.LottoBuyResponseDto;
 import step3.dto.LottoResultDto;
 import step3.dto.LottoStatisticsResponseDto;
 

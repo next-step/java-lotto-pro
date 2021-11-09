@@ -1,11 +1,10 @@
 package step3.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import step3.common.exception.InvalidParamException;
 
@@ -22,18 +21,6 @@ public class LottoNumbers {
 
     public static LottoNumbers of(List<Integer> numbers) {
         return new LottoNumbers(mapOf(numbers));
-    }
-
-    public String toString() {
-        List<Integer> result = new ArrayList<>();
-
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            result.add(lottoNumber.value());
-        }
-
-        Collections.sort(result);
-
-        return Collections.unmodifiableList(result).toString();
     }
 
     public int containCount(LottoNumbers winLottoNumbers) {
@@ -55,6 +42,12 @@ public class LottoNumbers {
             .count();
 
         return matchedCount != 0;
+    }
+
+    public String toCommaSerialize() {
+        return lottoNumbers.stream()
+            .map(LottoNumber::value)
+            .collect(Collectors.toList()).toString();
     }
 
     private int containCheckAndIncrementCount(int count, LottoNumber winLottoNumber) {

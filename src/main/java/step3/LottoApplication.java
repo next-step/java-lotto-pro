@@ -1,7 +1,6 @@
 package step3;
 
 import step3.controller.LottoController;
-import step3.service.LottoServiceImpl;
 
 public class LottoApplication {
 
