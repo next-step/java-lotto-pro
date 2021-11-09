@@ -31,7 +31,7 @@ public class LottoGame {
         int lottoCount = InputHandler.price(Console.readLine());
         ResultView.printBought(lottoCount);
         lottos = LottoCreateFactory.createLottos(lottoCount);
-        View.print(lottos.toString());
+        ResultView.printLottoList(lottos);
     }
 
     private void setWinningLotto() {
