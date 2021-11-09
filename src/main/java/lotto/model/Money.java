@@ -29,5 +29,9 @@ public class Money {
     public int getLottoCount() {
         return this.amount / PRICE_ONE_LOTTO;
     }
+
+    public boolean isExceed(int lottoCount) {
+        return lottoCount * PRICE_ONE_LOTTO > amount;
+    }
 }
 

@@ -9,6 +9,6 @@ public class LottoRankTest {
     @ParameterizedTest
     @EnumSource(names = {"FIVE_MATCHES"})
     void rankTest(LottoRank lottoRank) {
-        assertThat(lottoRank).isEqualTo(LottoRank.valueOf(5));
+        assertThat(lottoRank).isEqualTo(LottoRank.valueOf(5, false));
     }
 }

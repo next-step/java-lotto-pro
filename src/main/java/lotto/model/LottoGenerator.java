@@ -24,17 +24,18 @@ public class LottoGenerator {
         return allNumbers.stream().limit(Lotto.LOTTO_SIZE).collect(Collectors.toList());
     }
 
-    public Lottos createLottos(int count) {
+    public Lottos createLottos(int count, List<Lotto> manualLottos) {
         List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(manualLottos);
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(generate()));
         }
         return new Lottos(lottos);
     }
 
-    public Lotto createWinningNumber(String winningNumberString) {
-        validateDelimiter(winningNumberString);
-        return new Lotto(toList(toInts(winningNumberString.replaceAll(BLANK, NO_BLANK).split(DELIMITER))));
+    public Lotto createManualNumber(String manualNumberString) {
+        validateDelimiter(manualNumberString);
+        return new Lotto(toList(toInts(manualNumberString.replaceAll(BLANK, NO_BLANK).split(DELIMITER))));
     }
 
     private void validateDelimiter(String text) {
@@ -53,5 +54,13 @@ public class LottoGenerator {
         return Arrays.stream(values)
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    public Lottos createManualLottos(List<String> manualStrings) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (String manualString : manualStrings) {
+            lottos.add(createManualNumber(manualString));
+        }
+        return new Lottos(lottos);
     }
 }
