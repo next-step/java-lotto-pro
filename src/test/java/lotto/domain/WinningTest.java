@@ -53,8 +53,9 @@ class WinningTest {
         return Stream.of(
                 arguments(1000, Rank.FOURTH_PLACE, 1, 5),
                 arguments(1000, Rank.THIRD_PLACE, 1, 50),
-                arguments(1000, Rank.SECOND_PLACE, 1, 1500),
-                arguments(1000, Rank.FIRST_PLACE, 1, 2000000)
+                arguments(1000, Rank.SECOND_PLACE, 1, 1_500),
+                arguments(1000, Rank.BONUS_SECOND_PLACE, 1, 30_000),
+                arguments(1000, Rank.FIRST_PLACE, 1, 2_000_000)
         );
     }
 
