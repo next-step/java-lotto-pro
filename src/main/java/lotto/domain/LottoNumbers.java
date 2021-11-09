@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.LottoNumberRange;
+import lotto.service.CreateShuffledLottoNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class LottoNumbers {
 
     private void validateNumbers(List<String> lottoNumbers) {
         lottoNumbers.stream()
-                .filter(l -> Integer.parseInt(l) < LottoNumberRange.LOTTO_START_NUMBER || Integer.parseInt(l) > LottoNumberRange.LOTTO_END_NUMBER)
+                .filter(l -> Integer.parseInt(l) < CreateShuffledLottoNumbers.LOTTO_START_NUMBER || Integer.parseInt(l) > CreateShuffledLottoNumbers.LOTTO_END_NUMBER)
                 .forEach(l -> {
                     throw new IllegalArgumentException("");
                 });
