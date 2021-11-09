@@ -22,9 +22,14 @@ public class Controller {
 
 	public void run() {
 		int purchaseMoney = inputView.purchaseMoneyAmount();
-		Money money = new Money(purchaseMoney);
-		Lottos lottos = Store.order(money);
+		int manualLottoCount = inputView.manualLottoCount();
+		List<List<Integer>> manualLottoNumbers = inputView.manualLottoNumbers(manualLottoCount);
 
+		Money money = new Money(purchaseMoney);
+		Lottos lottos = Store.order(money, manualLottoNumbers);
+
+		int autoLottoCount = lottos.size() - manualLottoCount;
+		resultView.printPurchasedLottosCount(manualLottoCount, autoLottoCount);
 		resultView.printPurchasedLottos(lottos);
 
 		List<Integer> winningNumbers = inputView.previousWinningNumber();
