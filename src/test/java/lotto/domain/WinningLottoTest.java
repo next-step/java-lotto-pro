@@ -68,7 +68,7 @@ class WinningLottoTest {
     @DisplayName("로또 결과 확인 - 4등")
     void 로또_결과_확인_4등() {
         // given
-        int[] numbers = {1, 2, 3, 4, 8, 9};
+        int[] numbers = {1, 2, 3, 4, 7, 8};
         Lotto lotto = new Lotto(numbers);
 
         // when
@@ -83,7 +83,7 @@ class WinningLottoTest {
     @DisplayName("로또 결과 확인 - 5등")
     void 로또_결과_확인_5등() {
         // given
-        int[] numbers = {1, 2, 3, 8, 9, 10};
+        int[] numbers = {1, 2, 3, 7, 8, 9};
         Lotto lotto = new Lotto(numbers);
 
         // when
@@ -98,7 +98,7 @@ class WinningLottoTest {
     @DisplayName("로또 결과 확인 - 당첨안됨")
     void 로또_결과_확인_당첨안됨() {
         // given
-        int[] numbers = {1, 2, 8, 9, 10, 11};
+        int[] numbers = {1, 2, 7, 8, 9, 10};
         Lotto lotto = new Lotto(numbers);
 
         // when
