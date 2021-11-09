@@ -8,7 +8,14 @@ public class WinningLottoNumbers extends LottoNumbers{
 
     public WinningLottoNumbers(List<String> lottoNumbers, BonusNumber bonusNumber) {
         super(lottoNumbers);
+        validateBonusNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validateBonusNumber(BonusNumber bonusNumber) {
+        if (isContainNumber(bonusNumber.getBonusNumber())) {
+            throw new IllegalArgumentException("보너스 번호가 당첨 번호에 포함되어 있습니다.");
+        }
     }
 
     public LottoNumber getBonusNumber() {
