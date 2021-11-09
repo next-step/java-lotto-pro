@@ -10,8 +10,8 @@ public enum LottoRank {
     FIFTH(3, 5_000L),
     NONE(0, 0L);
 
-    public int matchNumber; // 일치하는 로또번호 갯수
-    public long prize; // 상금
+    public final int matchNumber; // 일치하는 로또번호 갯수
+    public final long prize; // 상금
 
     LottoRank(int matchNumber, long prize) {
         this.matchNumber = matchNumber;
