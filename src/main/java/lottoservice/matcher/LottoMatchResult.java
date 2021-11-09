@@ -23,7 +23,11 @@ public class LottoMatchResult {
 	}
 
 	public void addMatchCount(LottoMatchRank lottoMatchRank) {
-		result.put(lottoMatchRank, result.getOrDefault(lottoMatchRank, 0) + 1);
+		addMatchCount(lottoMatchRank, 1);
+	}
+
+	public void addMatchCount(LottoMatchRank lottoMatchRank, int count) {
+		result.put(lottoMatchRank, result.getOrDefault(lottoMatchRank, 0) + count);
 	}
 
 	public Map<LottoMatchRank, Integer> getResult() {
@@ -56,12 +60,10 @@ public class LottoMatchResult {
 			.sum();
 	}
 
-	public void addResult(LottoMatchResult otherResult){
-		for(Map.Entry<LottoMatchRank, Integer> entry : otherResult.getResult().entrySet()){
-			result.put(entry.getKey(), getRankMatchCount(entry.getKey())+entry.getValue());
-		}
+	public void addResult(LottoMatchResult otherResult) {
+		result.forEach((rank, count) -> addMatchCount(rank, otherResult.getRankMatchCount(rank)));
 	}
-	
+
 	@Override
 	public String toString() {
 		return result.entrySet().stream()
