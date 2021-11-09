@@ -1,5 +1,7 @@
 package nextstep.lotto.domain;
 
+import nextstep.lotto.constance.LottoExceptionMessage;
+import nextstep.lotto.exception.LottoRuntimeException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_M
 
 public class LottoNumbers implements Iterable<LottoNumber> {
 
-    private static final Integer LOTTO_NUMBER_COUNT = 6;
+    public static final Integer LOTTO_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -30,7 +32,14 @@ public class LottoNumbers implements Iterable<LottoNumber> {
     }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        validateLottoNumberCount(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void validateLottoNumberCount(List<LottoNumber> lottoNumbers) {
+        if (!LOTTO_NUMBER_COUNT.equals(lottoNumbers.size())) {
+            throw new LottoRuntimeException(LottoExceptionMessage.INVALID_LOTTO_NUMBER_COUNT_MESSAGE);
+        }
     }
 
     @Override

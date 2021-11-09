@@ -1,12 +1,15 @@
 package nextstep.lotto.domain;
 
-import java.util.List;
-
 public class WinningLotto {
 
-    private final List<Lotto> winningLotto;
+    private final Lotto winningLotto;
 
-    public WinningLotto(List<Lotto> winningLotto) {
+    public WinningLotto(Lotto winningLotto) {
         this.winningLotto = winningLotto;
+    }
+
+    @Override
+    public String toString() {
+        return winningLotto.toString();
     }
 }

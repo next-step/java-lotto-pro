@@ -3,6 +3,7 @@ package nextstep.lotto.service;
 import nextstep.lotto.domain.LottoCount;
 import nextstep.lotto.domain.PurchaseLotto;
 import nextstep.lotto.domain.PurchaseLottoAmount;
+import nextstep.lotto.domain.WinningLotto;
 import nextstep.lotto.io.LottoDisplay;
 
 public class LottoService {
@@ -15,6 +16,8 @@ public class LottoService {
 
         PurchaseLotto purchaseLotto = lottoCount.purchaseLottoByLottoCount();
         LottoDisplay.printAutoLottoResult(purchaseLotto);
+
+        WinningLotto winningLotto = LottoDisplay.inputLastWeekWinningLotto();
 
     }
 }
