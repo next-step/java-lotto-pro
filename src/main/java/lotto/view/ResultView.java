@@ -14,14 +14,14 @@ public class ResultView {
     }
 
     public static void printLottoNumbers(List<Lotto> lottoList) {
+        StringBuffer sb = new StringBuffer();
         lottoList.stream()
                 .forEach(l -> {
-                    StringBuffer sb = new StringBuffer();
                     sb.append("[");
                     sb.append(String.join(", ", l.getLottoNumbers()));
-                    sb.append("]");
-                    System.out.println(sb);
+                    sb.append("]\n");
                 });
+        System.out.println(sb);
         System.out.println();
     }
 
