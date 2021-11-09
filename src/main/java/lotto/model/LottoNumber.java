@@ -2,7 +2,8 @@ package lotto.model;
 
 import java.util.Objects;
 
-import lotto.util.RandomUtil;
+import lotto.code.ErrorCode;
+import lotto.exception.LottoException;
 
 public class LottoNumber {
 
@@ -11,23 +12,29 @@ public class LottoNumber {
 
 	private final int number;
 
-	public LottoNumber() {
-		this.number = RandomUtil.pickNumber(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+	private LottoNumber(int number) {
+		this.number = number;
 	}
 
-	public LottoNumber(int number) {
-		this.number = isNumberInLottoNumberRange(number);
+	public static LottoNumber from(int number) {
+		isNumberInLottoNumberRange(number);
+		return new LottoNumber(number);
 	}
 
-	private boolean validLottoNumber(int number) {
-		return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
+	public static LottoNumber from(String number) {
+		int parseInt = Integer.parseInt(number);
+		isNumberInLottoNumberRange(parseInt);
+		return new LottoNumber(parseInt);
 	}
 
-	private int isNumberInLottoNumberRange(int number) {
+	private static void isNumberInLottoNumberRange(int number) {
 		if (validLottoNumber(number)) {
-			throw new IllegalArgumentException();
+			throw new LottoException(ErrorCode.OUT_OF_LOTTO_NUMBER_RANGE_ERROR);
 		}
-		return number;
+	}
+
+	private static boolean validLottoNumber(int number) {
+		return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
 	}
 
 	public int toInt() {

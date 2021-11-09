@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.exception.LottoException;
+
 class LottoNumbersTest {
 
 	private List<LottoNumber> lottoNumberList;
@@ -31,23 +33,23 @@ class LottoNumbersTest {
 	void 로또넘버_일급_콜렉션_생성_테스트(int lottoNumber) {
 		// given
 		for (int i = 1; i <= LottoNumbers.LOTTO_NUMBERS_SIZE; i++) {
-			lottoNumberList.add(new LottoNumber(i));
+			lottoNumberList.add(LottoNumber.from(i));
 		}
 
 		// when
-		LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+		LottoNumbers lottoNumbers = LottoNumbers.from(lottoNumberList);
 
 		// then
 		assertAll(
 			() -> assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class),
-			() -> assertThat(lottoNumbers.containsLottoNumber(new LottoNumber(lottoNumber)))
+			() -> assertThat(lottoNumbers.containsLottoNumber(LottoNumber.from(lottoNumber)))
 		);
 	}
 
 	@Test
 	void 로또번호_일급_콜렉션_랜덤_생성_테스트() {
 		// given // when
-		LottoNumbers lottoNumbers = new LottoNumbers();
+		LottoNumbers lottoNumbers = LottoNumbers.from();
 
 		// then
 		assertThat(lottoNumbers.size()).isEqualTo(LottoNumbers.LOTTO_NUMBERS_SIZE);
@@ -60,22 +62,33 @@ class LottoNumbersTest {
 		String inputNumber = "1,2,3,4,5,6";
 
 		//when
-		LottoNumbers lottoNumbers = new LottoNumbers(inputNumber);
+		LottoNumbers lottoNumbers = LottoNumbers.from(inputNumber);
 
 		//then
-		assertThat(lottoNumbers.containsLottoNumber(new LottoNumber(lottoNumber))).isTrue();
+		assertThat(lottoNumbers.containsLottoNumber(LottoNumber.from(lottoNumber))).isTrue();
+	}
+
+	@ParameterizedTest(name = "index {index} ===> input {0}")
+	@ValueSource(strings = {
+		"1, 2, 3, 4, 5, 6, 7",
+		"1, 2, 3, 4,",
+		""
+	})
+	void 입력된_당첨번호가_6자리가_아닐때_예외처리_테스트(String input) {
+		// given // when // then
+		assertThatThrownBy(() -> {
+			LottoNumbers.from(input);
+		}).isInstanceOf(LottoException.class);
 	}
 
 	@Test
-	void 로또번호를_문자열로_반환하는_기능테스트() {
+	void 입력된_당첨번호에_중복값이_존재할시_예외처리_테스트() {
 		// given
-		String inputNumber = "1,2,3,4,5,6";
-		LottoNumbers lottoNumbers = new LottoNumbers(inputNumber);
+		String input = "1, 1, 2, 3, 4, 5";
 
-		// when
-		String lottoNumbersString = lottoNumbers.listToString();
-
-		// then
-		assertThat(lottoNumbersString).isEqualTo("[1 ,2 ,3 ,4 ,5 ,6]");
+		// when // then
+		assertThatThrownBy(() -> {
+			LottoNumbers.from(input);
+		}).isInstanceOf(LottoException.class);
 	}
 }

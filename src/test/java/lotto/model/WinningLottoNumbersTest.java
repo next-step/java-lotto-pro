@@ -3,101 +3,58 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
+
+import lotto.code.ErrorCode;
+import lotto.exception.LottoException;
 
 class WinningLottoNumbersTest {
 
-	private Method privateMethod(String methodName) throws Exception {
-		Method method = WinningLottoNumbers.class.getDeclaredMethod(methodName, String.class);
-		method.setAccessible(true);
-		return method;
-	}
-
 	@ParameterizedTest(name = "index {index} ===> input {0}")
-	@ValueSource(strings = {
-		"1, 2, 3, 4, 5, 6, 7",
-		"1, 2, 3, 4,",
-		""
-	})
-	void 입력된_당첨번호가_6자리가_아닐때_예외처리_테스트(String input) throws Exception {
+	@CsvSource(value = {
+		"1, 2,3, 4,5,6 : 7",
+		"1 ,6, 12, 34, 33, 23 : 8",
+		"1,10,11,12,13,41 : 9"
+	}, delimiter = ':')
+	void 입력된_문자열로_당첨번호_생성테스트(String input, String bonusInput) {
 		// given // when
-		Method method = privateMethod("isNotLottoNumberSize");
-
-		// then
-		assertThatThrownBy(() -> {
-			method.invoke(new WinningLottoNumbers(), input);
-		}).isInstanceOf(InvocationTargetException.class);
-	}
-
-	@Test
-	void 입력된_당첨번호에_중복값이_존재할시_예외처리_테스트() throws Exception {
-		// given
-		String input = "1, 1, 2, 3, 4, 5";
-
-		// when
-		Method method = privateMethod("isDuplicateLottoNumber");
-
-		// then
-		assertThatThrownBy(() -> {
-			method.invoke(new WinningLottoNumbers(), input);
-		}).isInstanceOf(InvocationTargetException.class);
-	}
-
-	@Test
-	void 입력된_당첨번호를_로또번호_일급_콜렉션으로_만드는_기능테스트() throws Exception {
-		// given
-		String input = "1, 2, 3, 4, 5, 6";
-		LottoNumbers lottoNumbers = new LottoNumbers(input);
-
-		// when
-		Method method = privateMethod("generateWinningLottoNumbers");
-		LottoNumbers winningLottoNumbers = (LottoNumbers)method.invoke(new WinningLottoNumbers(), input);
-
-		// then
-		assertAll(
-			() -> assertThat(winningLottoNumbers).isNotNull(),
-			() -> assertThat(winningLottoNumbers.size()).isEqualTo(LottoNumbers.LOTTO_NUMBERS_SIZE),
-			() -> assertThat(lottoNumbers.equals(winningLottoNumbers)).isTrue()
-		);
-	}
-
-	@ParameterizedTest(name = "index {0} ===> input {1}")
-	@ValueSource(strings = {
-		"1, 2,3, 4,5,6",
-		"1 ,6, 12, 34, 33, 23",
-		"1,10,11,12,13,41"
-	})
-	void 입력된_문자열로_당첨번호_생성테스트(String input) {
-		// given // when
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(input);
+		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(input, bonusInput);
 
 		// then
 		assertAll(
 			() -> assertThat(winningLottoNumbers.size()).isEqualTo(6),
-			() -> assertThat(winningLottoNumbers.containsLottoNumber(new LottoNumber(1))).isTrue()
+			() -> assertThat(winningLottoNumbers.containsLottoNumber(LottoNumber.from(1))).isTrue()
 		);
+	}
+
+	@ParameterizedTest(name = "index {index} ===> input {0}, bonusBall {1}")
+	@CsvSource(value = {
+		"1, 2,3, 4,5,6 : 6",
+		"1 ,6, 12, 34, 33, 23 : 34",
+		"1,10,11,12,13,41 : 12"
+	}, delimiter = ':')
+	void 보너스볼이_입력된_로또번호와_겹칠때_예외처리(String input, String bonusInput) {
+		// given // when // then
+		assertThatThrownBy(() -> {
+			WinningLottoNumbers.of(input, bonusInput);
+		}).isInstanceOf(LottoException.class)
+			.hasMessageContaining(ErrorCode.BONUS_NUMBER_DUPLICATE_ERROR.getErrorMessage());
 	}
 
 	@ParameterizedTest(name = "index {index} ===> inputNumber {0}, lottoNumber {1}, resultCount {2}")
 	@CsvSource(value = {
-		"1,2,3,4,5,6 : 5 : 1",
-		"1,2,3,4,5,6 : 8 : 0"
+		"1,2,3,4,5,6 : 7 : 5 : 1",
+		"1,2,3,4,5,6 : 7 : 8 : 0"
 	}, delimiter = ':')
-	void 로또번호와_당첨번호를_비교하여_값이_존재하는지_판단하는_테스트(String inputNumber, int lottoNumber, int resultCount) {
+	void 로또번호와_당첨번호를_비교하여_값이_존재하는지_판단하는_테스트(String inputNumber, String bonusNumber, int lottoNumber, int resultCount) {
 		//given
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputNumber);
+		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(inputNumber, bonusNumber);
 
 		//when
-		int containsCount = winningLottoNumbers.containsCountLottoNumber(new LottoNumber(lottoNumber));
+		int containsCount = winningLottoNumbers.containsCountLottoNumber(LottoNumber.from(lottoNumber));
 
 		//then
 		assertThat(resultCount).isEqualTo(containsCount);
 	}
-
 }

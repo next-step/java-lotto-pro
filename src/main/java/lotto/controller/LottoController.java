@@ -1,7 +1,10 @@
 package lotto.controller;
 
+import lotto.exception.LottoException;
 import lotto.model.LottoGenerator;
 import lotto.model.LottoResult;
+import lotto.model.Lottos;
+import lotto.model.Money;
 import lotto.model.WinningLottoNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -12,33 +15,37 @@ public class LottoController {
 		generateLottoResult(generateLotto(), winningLottoNumberGenerator());
 	}
 
-	private LottoGenerator generateLotto() {
-		LottoGenerator lottoGenerator = lottoGenerator();
-		OutputView.printCompletePurchaseLotto(lottoGenerator.size());
-		OutputView.printLottoNumbers(lottoGenerator);
+	private Lottos generateLotto() {
+		Lottos lottos = lottoGenerator();
+		OutputView.printCompletePurchaseLotto(lottos);
+		OutputView.printLottoNumbers(lottos);
 
-		return lottoGenerator;
+		return lottos;
 	}
 
-	private LottoGenerator lottoGenerator() {
+	private Lottos lottoGenerator() {
 		try {
-			return new LottoGenerator(InputView.inputMoneyPurchaseLotto());
-		} catch (IllegalArgumentException illegalArgumentException) {
+			Money inputMoney = Money.from(InputView.inputMoneyPurchaseLotto());
+			LottoGenerator lottoGenerator = LottoGenerator.from(inputMoney);
+			return Lottos.of(lottoGenerator.generateLottoNumbers(), inputMoney);
+		} catch (LottoException lottoException) {
+			OutputView.printErrorMessage(lottoException);
 			return lottoGenerator();
 		}
 	}
 
 	private WinningLottoNumbers winningLottoNumberGenerator() {
 		try {
-			return new WinningLottoNumbers(InputView.innputWinningLottoNumber());
-		} catch (IllegalArgumentException illegalArgumentException) {
+			return WinningLottoNumbers.of(InputView.inputWinningLottoNumber(), InputView.inputBonusLottoNumber());
+		} catch (LottoException lottoException) {
+			OutputView.printErrorMessage(lottoException);
 			return winningLottoNumberGenerator();
 		}
 	}
 
-	private void generateLottoResult(LottoGenerator lottoGenerator, WinningLottoNumbers winningLottoNumbers) {
+	private void generateLottoResult(Lottos lottos, WinningLottoNumbers winningLottoNumbers) {
 		OutputView.printResultHead();
-		LottoResult lottoResult = new LottoResult(winningLottoNumbers, lottoGenerator);
+		LottoResult lottoResult = LottoResult.of(winningLottoNumbers, lottos);
 		OutputView.printResultLottoList(lottoResult);
 		OutputView.printYieldResult(lottoResult);
 	}

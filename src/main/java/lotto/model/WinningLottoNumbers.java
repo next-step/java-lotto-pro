@@ -1,55 +1,56 @@
 package lotto.model;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
-import lotto.util.SplitUtil;
+import lotto.code.ErrorCode;
+import lotto.exception.LottoException;
 
 public class WinningLottoNumbers {
 	private static final int COUNT_VALUE = 1;
 	private static final int NOT_COUNT_VALUE = 0;
 
-	private LottoNumbers winninglottoNumbers;
+	private final LottoNumbers winningLottoNumbers;
+	private final LottoNumber bonusNumber;
 
-	public WinningLottoNumbers() {
+	private WinningLottoNumbers(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
+		this.winningLottoNumbers = winningLottoNumbers;
+		this.bonusNumber = bonusNumber;
 	}
 
-	public WinningLottoNumbers(String input) {
-		this.winninglottoNumbers = generateWinningLottoNumbers(input);
+	public static WinningLottoNumbers of(String inputWinningLottoNumber, String inputBonusNumber) {
+		duplicateBonusNumber(inputWinningLottoNumber, inputBonusNumber);
+		return new WinningLottoNumbers(LottoNumbers.from(inputWinningLottoNumber), LottoNumber.from(inputBonusNumber));
 	}
 
-	private void isNotLottoNumberSize(String input) {
-		if (SplitUtil.splitInputNumbers(input).length != LottoNumbers.LOTTO_NUMBERS_SIZE) {
-			throw new IllegalArgumentException();
+	private static void duplicateBonusNumber(String inputWinningLottoNumber, String bonusNumber) {
+		if (validDuplicateBonusNumber(inputWinningLottoNumber, bonusNumber)) {
+			throw new LottoException(ErrorCode.BONUS_NUMBER_DUPLICATE_ERROR);
 		}
 	}
 
-	private void isDuplicateLottoNumber(String input) {
-		Set<String> lottoNumberSet = new HashSet<>(Arrays.asList(SplitUtil.splitInputNumbers(input)));
-
-		if (lottoNumberSet.size() != LottoNumbers.LOTTO_NUMBERS_SIZE) {
-			throw new IllegalArgumentException();
-		}
-	}
-
-	private LottoNumbers generateWinningLottoNumbers(String input) {
-		isNotLottoNumberSize(input);
-		isDuplicateLottoNumber(input);
-
-		return new LottoNumbers(input);
+	private static boolean validDuplicateBonusNumber(String inputWinningLottoNumber, String bonusNumber) {
+		return inputWinningLottoNumber.contains(bonusNumber);
 	}
 
 	public int size() {
-		return winninglottoNumbers.size();
+		return winningLottoNumbers.size();
 	}
 
 	public boolean containsLottoNumber(LottoNumber lottoNumber) {
-		return winninglottoNumbers.containsLottoNumber(lottoNumber);
+		return winningLottoNumbers.containsLottoNumber(lottoNumber);
 	}
 
 	public int containsCountLottoNumber(LottoNumber lottoNumber) {
 		if (containsLottoNumber(lottoNumber)) {
+			return COUNT_VALUE;
+		}
+		return NOT_COUNT_VALUE;
+	}
+
+	public boolean containsBonusLottoNumber(LottoNumbers lottoNumbers) {
+		return lottoNumbers.containsLottoNumber(bonusNumber);
+	}
+
+	public int containsBonusCountLottoNumber(LottoNumbers lottoNumbers) {
+		if (containsBonusLottoNumber(lottoNumbers)) {
 			return COUNT_VALUE;
 		}
 		return NOT_COUNT_VALUE;
