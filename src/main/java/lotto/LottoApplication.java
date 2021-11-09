@@ -2,25 +2,27 @@ package lotto;
 
 import lotto.controller.LottoApplicationController;
 import lotto.controller.Repeater;
+import lotto.domain.LottoShop;
+import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoApplication {
 
+
 	public static void main(String[] args) {
 		Repeater.init();
 		LottoApplicationController lottoApplicationController = new LottoApplicationController();
 
-		int purchaseAmount = 0;
+		Money purchaseAmount = null;
 		while (Repeater.isContinue()) {
 			purchaseAmount = InputView.enterPurchaseAmount();
 			Repeater.set(purchaseAmount);
 		}
 
-		int purchaseQuantity = lottoApplicationController.getPurchaseQuantity(purchaseAmount);
-		lottoApplicationController.purchaseLotto(purchaseQuantity);
+		lottoApplicationController.purchaseLotto(purchaseAmount);
 
-		OutputView.printPurchaseQuantity(purchaseQuantity);
+		OutputView.printPurchaseQuantity(purchaseAmount.getPurchaseQuantity(LottoShop.LOTTO_PRICE));
 		OutputView.printPurchasedLottoNumbers(lottoApplicationController.getLottos());
 		OutputView.newLine();
 
@@ -31,15 +33,15 @@ public class LottoApplication {
 			Repeater.set(winningNumbers);
 		}
 
-		int bonusBallNumber = 0;
+		Money bonusBallNumber = null;
 		Repeater.init();
 		while (Repeater.isContinue()) {
-			bonusBallNumber = InputView.enterBonusBallNumber(winningNumbers);
+			// bonusBallNumber = InputView.enterBonusBallNumber(winningNumbers);
 			Repeater.set(bonusBallNumber);
 		}
 		OutputView.newLine();
 
 		OutputView.printLottoStatisticsHeader();
-		OutputView.printLottoStatisticsBody(lottoApplicationController.recorde(winningNumbers, bonusBallNumber));
+		// OutputView.printLottoStatisticsBody(lottoApplicationController.recorde(winningNumbers, bonusBallNumber));
 	}
 }

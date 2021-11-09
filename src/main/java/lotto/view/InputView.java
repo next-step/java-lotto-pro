@@ -6,6 +6,8 @@ import java.util.Scanner;
 import lotto.controller.LottoApplicationController;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoShop;
+import lotto.domain.Money;
 
 public class InputView {
 	private static final String ENTER_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
@@ -15,14 +17,13 @@ public class InputView {
 	private static final String ERROR_PURCHASE_AMOUNT = "[ERROR] 구매금액은 최소 1000원 이상입니다.";
 	private static final String ERROR_WINNING_NUMBER_FORMAT = "[ERROR] 당첨 번호는 (, )를 구분자로 6자리의 숫자만 입력 가능합니다. \n[예시] 1, 2, 3, 4, 5, 6";
 	private static final String ERROR_DUPLICATE_BONUS_NUMBER = "[ERROR] 당첨 번호랑 보너스 번호는 중복 될 수 없습니다.";
-
 	private static final String DELIMITER = ", ";
 
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public static int enterPurchaseAmount() {
+	public static Money enterPurchaseAmount() {
 		OutputView.printMessage(ENTER_PURCHASE_AMOUNT);
-		return validatePurchaseAmount(scanner.nextLine());
+		return new Money(validatePurchaseAmount(scanner.nextLine()));
 	}
 
 	private static int validatePurchaseAmount(String purchaseAmount) {
@@ -30,7 +31,7 @@ public class InputView {
 			return validatePurchaseAmount(stringValueToIntValue(purchaseAmount));
 		} catch (IllegalArgumentException exception) {
 			OutputView.printMessage(exception.getMessage());
-			return -1;
+			return 0;
 		}
 	}
 
@@ -43,7 +44,7 @@ public class InputView {
 	}
 
 	private static int validatePurchaseAmount(int purchaseAmount) {
-		if (purchaseAmount < LottoApplicationController.LOTTO_PRICE) {
+		if (purchaseAmount < LottoShop.LOTTO_PRICE) {
 			throw new IllegalArgumentException(ERROR_PURCHASE_AMOUNT);
 		}
 		return purchaseAmount;

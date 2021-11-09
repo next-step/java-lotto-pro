@@ -8,6 +8,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 
 public class LottoApplicationController {
 
@@ -33,10 +34,6 @@ public class LottoApplicationController {
 			lotto.recordeRank(new LottoNumbers(winningNumbers), new LottoNumber(bonusBallNumber));
 		}
 		return lottos.getLottos();
-	}
-
-	public int getPurchaseQuantity(int purchaseAmount) {
-		return purchaseAmount / LottoShop.LOTTO_PRICE;
 	}
 
 	public List<Lotto> getLottos() {

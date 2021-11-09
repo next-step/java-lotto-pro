@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import lotto.domain.Money;
+
 public class Repeater {
 	private static boolean repeater;
 
@@ -14,8 +16,8 @@ public class Repeater {
 		return repeater;
 	}
 
-	public static void set(int setValue) {
-		repeater = setValue == -1;
+	public static void set(Money setValue) {
+		repeater = setValue.equals(0);
 	}
 
 	public static void set(String setValue) {

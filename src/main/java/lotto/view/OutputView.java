@@ -5,6 +5,7 @@ import java.util.List;
 import lotto.controller.LottoApplicationController;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoShop;
 import lotto.domain.Rank;
 
 public class OutputView {
@@ -60,7 +61,7 @@ public class OutputView {
 			printFist(rank, lottos);
 			profitSum += rank.getWinningAmount() * countWinners(rank, lottos);
 		}
-		double profitRate = profitSum / (LottoApplicationController.LOTTO_PRICE * lottos.size());
+		double profitRate = profitSum / (LottoShop.LOTTO_PRICE * lottos.size());
 		System.out.printf(PRINT_PROFIT_RATE, profitRate);
 	}
 
