@@ -9,9 +9,6 @@ import static study.lottoAuto.MessageUtil.*;
 
 public class InputView {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
-
     private static final Scanner sc = new Scanner(System.in);
 
     public static String readMoney() {
@@ -29,15 +26,12 @@ public class InputView {
         if(money < 0) {
             throw new IllegalStateException(NEGATIVE_NUMBER_ERR_MSG);
         }
-        if(money < 1000) {
-            throw new IllegalStateException(MINIMUM_MONEY_INPUT_ERR_MSG);
-        }
     }
 
     public static String readLastLottoNumbers() {
         String line = removeSpace(sc.nextLine());
         try {
-            validateLastLottoNumbers(line);
+            validateInputLottoNumbers(line);
         } catch (RuntimeException e) {
             line = readLastLottoNumbers();
         }
@@ -48,14 +42,8 @@ public class InputView {
         return line.replaceAll(" ", "");
     }
 
-    private static void validateLastLottoNumbers(final String line) {
-
+    private static void validateInputLottoNumbers(final String line) {
         validateDelimeter(line);
-
-        String[] lottoNumbers = line.split(",");
-        for(String lottoNumber : lottoNumbers) {
-            validateLottoNumber(lottoNumber);
-        }
     }
 
     private static void validateDelimeter(final String line) {
@@ -63,11 +51,4 @@ public class InputView {
             throw new IllegalArgumentException(StringAddCalculator.INVALID_CUSTOM_PATTERN_ERR_MSG);
         }
     }
-
-    private static void validateLottoNumber(String lottoNumber) {
-        if(Integer.parseInt(lottoNumber) < MIN_LOTTO_NUMBER || Integer.parseInt(lottoNumber) > MAX_LOTTO_NUMBER) {
-            throw new IllegalStateException(INVALID_LOTTO_NUMBER_ERR_MSG);
-        }
-    }
-
 }
