@@ -27,7 +27,7 @@ public class LottoTest {
     @Test
     public void isContainNumberTest() {
         Lotto lotto = new Lotto("1,2,3,4,5,6");
-        lotto.isContainNumber(6);
+        lotto.isContainNumber(new LottoNumber(6));
         assertThat(lotto).isEqualTo(new Lotto("1,2,3,4,5,6", 1));
     }
 }

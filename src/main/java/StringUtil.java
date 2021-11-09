@@ -49,4 +49,14 @@ public class StringUtil {
         }
         return numberList;
     }
+
+    public static List<LottoNumber> mapToLotto(String numbers){
+        String[] numberStringArray = splitString(numbers);
+        List<LottoNumber> numberList = new ArrayList<LottoNumber>();
+
+        for (String numberString : numberStringArray) {
+            numberList.add(new LottoNumber(Integer.parseInt(numberString)));
+        }
+        return numberList;
+    }
 }

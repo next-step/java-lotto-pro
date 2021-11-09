@@ -5,7 +5,7 @@ public class User {
     private BigInteger money;
     private Lottos lottoList;
 
-    public User(BigInteger money) {
+    public User(BigInteger money){
         this.money = money;
         this.lottoList = new Lottos();
     }
@@ -16,6 +16,12 @@ public class User {
 
     public Lottos getLottoList() {
         return lottoList;
+    }
+
+    public void buyLottos() {
+        while (hasMoney()) {
+            buyLotto();
+        }
     }
 
     public void buyLotto() {
@@ -39,8 +45,8 @@ public class User {
         lottoList.checkMatch(lotto);
     }
 
-    public int match(int matchCount) {
-        return lottoList.match(matchCount);
+    public int getMatchLottoCount(LottoReward reward) {
+        return lottoList.getMatchLottoCount(reward);
     }
 
     public double getProfitRate() {

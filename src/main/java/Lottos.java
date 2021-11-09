@@ -1,7 +1,6 @@
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lottos {
     private List<Lotto> lottoList;
@@ -20,16 +19,16 @@ public class Lottos {
         }
     }
 
-    public int match(int matchCount) {
+    public int getMatchLottoCount(LottoReward reward) {
         return (int) lottoList.stream()
-                .filter(lotto -> lotto.isMatch(matchCount))
+                .filter(lotto -> lotto.isMatch(reward))
                 .count();
     }
 
     public BigInteger getProfit() {
         BigInteger reward = BigInteger.valueOf(0);
         for (LottoReward lottoReward : LottoReward.values()) {
-            reward = reward.add(BigInteger.valueOf(match(lottoReward.getMatchCount()) * lottoReward.getReward()));
+            reward = reward.add(BigInteger.valueOf(getMatchLottoCount(lottoReward) * lottoReward.getReward()));
         }
         return reward;
     }
