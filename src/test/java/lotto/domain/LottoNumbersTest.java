@@ -42,7 +42,7 @@ class LottoNumbersTest {
 	public void LottoNumbersConstructorListTest(int lottoNumber) {
 		//given
 		List<LottoNumber> lottoNumberList = new ArrayList<>();
-		for (int i = 1; i <=6; i++) {
+		for (int i = 1; i <= 6; i++) {
 			lottoNumberList.add(new LottoNumber(i));
 		}
 		//when
@@ -52,7 +52,7 @@ class LottoNumbersTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"1:1", "2:1","3:1","4:1","5:1","6:1","8:0",}, delimiter = ':')
+	@CsvSource(value = {"1:1", "2:1", "3:1", "4:1", "5:1", "6:1", "8:0",}, delimiter = ':')
 	@DisplayName("LottoNumbers 당첨번호 1개 확인 테스트")
 	public void LottoNumbersMatchTest(int lottoNumber, int expectedValue) {
 		//given
@@ -60,14 +60,6 @@ class LottoNumbersTest {
 		LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
 		//then
 		assertThat(lottoNumbers.ifMatchCount(new LottoNumber(lottoNumber))).isEqualTo(expectedValue);
-	}
-
-	@Test
-	@DisplayName("LottoNumbers 구분자 예외처리 테스트")
-	public void LottoNumbersDelimiterExceptionTest() {
-		assertThatThrownBy(() -> new LottoNumbers("1,2,3, 4| 5. 6"))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessage("[ERROR] 당첨 번호는 (, )를 구분자로 숫자만 입력 가능합니다. \n[예시] 1, 2, 3, 4, 5, 6");
 	}
 
 	@Test
@@ -79,10 +71,18 @@ class LottoNumbersTest {
 	}
 
 	@Test
-	@DisplayName("LottoNumbers 숫자외의 값 예외처리 테스트")
+	@DisplayName("LottoNumbers 중복 값 예외처리 테스트")
 	public void LottoNumbersDuplicateExceptionTest() {
 		assertThatThrownBy(() -> new LottoNumbers("1, 2, 3, 35, 35, 6"))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("[ERROR] 로또 번호는 중복 될 수 없습니다.");
+	}
+
+	@Test
+	@DisplayName("LottoNumbers 6자리 숫자 가지는지 여부 예외 테스트")
+	public void LottoNumbersLengthExceptionTest() {
+		assertThatThrownBy(() -> new LottoNumbers(1, 2, 3, 4, 5))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("[ERROR] 로또 번호는 6자리 숫자를 가져야 합니다.");
 	}
 }

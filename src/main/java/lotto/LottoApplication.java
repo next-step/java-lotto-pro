@@ -11,28 +11,35 @@ public class LottoApplication {
 		Repeater.init();
 		LottoApplicationController lottoApplicationController = new LottoApplicationController();
 
+		int purchaseAmount = 0;
 		while (Repeater.isContinue()) {
-			String purchaseAmount = InputView.enterPurchaseAmount();
-			String validateResult = lottoApplicationController.validatePurchaseAmount(purchaseAmount);
-			OutputView.printMessage(validateResult);
-			Repeater.set(validateResult);
+			purchaseAmount = InputView.enterPurchaseAmount();
+			Repeater.set(purchaseAmount);
 		}
 
-		OutputView.printPurchaseQuantity(lottoApplicationController.getPurchaseQuantity());
-		lottoApplicationController.purchaseLotto();
+		int purchaseQuantity = lottoApplicationController.getPurchaseQuantity(purchaseAmount);
+		lottoApplicationController.purchaseLotto(purchaseQuantity);
 
-		OutputView.printPurchasedLottoNumbers(lottoApplicationController.getLotts());
+		OutputView.printPurchaseQuantity(purchaseQuantity);
+		OutputView.printPurchasedLottoNumbers(lottoApplicationController.getLottos());
 		OutputView.newLine();
 
+		String winningNumbers = "";
 		Repeater.init();
 		while (Repeater.isContinue()) {
-			String WinningNumbers = InputView.enterWinningNumbers();
-			String validateResult = lottoApplicationController.validateWinningNumbers(WinningNumbers);
-			OutputView.printMessage(validateResult);
-			Repeater.set(validateResult);
-			OutputView.newLine();
+			winningNumbers = InputView.enterWinningNumbers();
+			Repeater.set(winningNumbers);
 		}
+
+		int bonusBallNumber = 0;
+		Repeater.init();
+		while (Repeater.isContinue()) {
+			bonusBallNumber = InputView.enterBonusBallNumber(winningNumbers);
+			Repeater.set(bonusBallNumber);
+		}
+		OutputView.newLine();
+
 		OutputView.printLottoStatisticsHeader();
-		OutputView.printLottoStatisticsBody(lottoApplicationController.recorde());
+		OutputView.printLottoStatisticsBody(lottoApplicationController.recorde(winningNumbers, bonusBallNumber));
 	}
 }

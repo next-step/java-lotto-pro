@@ -4,61 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoShop;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoStatistics;
-import lotto.domain.PurchaseAmount;
-import lotto.domain.WinningNumbers;
+import lotto.domain.LottoShop;
+import lotto.domain.Lottos;
 
 public class LottoApplicationController {
+
+	public static final int LOTTO_PRICE = 1000;
 	private static final int PURCHASE_FINISH = 0;
-	private PurchaseAmount purchaseAmount;
-	private WinningNumbers winningNumbers;
-	private LottoStatistics lottoStatistics = new LottoStatistics();
-	private List<Lotto> lottos = new ArrayList<>();
+	private Lottos lottos;
 
-	public String validatePurchaseAmount(String purchaseAmount) {
-		try {
-			this.purchaseAmount = new PurchaseAmount(purchaseAmount);
-		} catch (IllegalArgumentException exception) {
-			return exception.getMessage();
-		}
-		return "";
-	}
-
-	public void purchaseLotto() {
-		int purchaseQuantity = getPurchaseQuantity();
+	public void purchaseLotto(int purchaseQuantity) {
+		List<Lotto> lottos = new ArrayList<>();
 		while (continuePurchase(purchaseQuantity)) {
-			// lottos.add(new Lotto(new LottoNumbers(LottoShop.sell())));
+			lottos.add(LottoShop.sell());
 			purchaseQuantity--;
 		}
+		this.lottos = new Lottos(lottos);
 	}
 
 	private boolean continuePurchase(int purchaseQuantity) {
 		return purchaseQuantity > PURCHASE_FINISH;
 	}
 
-	public String validateWinningNumbers(String winningNumbers) {
-		try {
-			this.winningNumbers = new WinningNumbers(winningNumbers);
-		} catch (IllegalArgumentException exception) {
-			return exception.getMessage();
+	public List<Lotto> recorde(String winningNumbers, int bonusBallNumber) {
+		for (Lotto lotto : lottos.getLottos()) {
+			lotto.recordeRank(new LottoNumbers(winningNumbers), new LottoNumber(bonusBallNumber));
 		}
-		return "";
+		return lottos.getLottos();
 	}
 
-	public LottoStatistics recorde() {
-		for (Lotto lotto : lottos) {
-			lottoStatistics.record(lotto.countMatchNumber(winningNumbers));
-		}
-		return lottoStatistics;
+	public int getPurchaseQuantity(int purchaseAmount) {
+		return purchaseAmount / LOTTO_PRICE;
 	}
 
-	public int getPurchaseQuantity() {
-		return purchaseAmount.purchase();
-	}
-
-	public List<Lotto> getLotts() {
-		return lottos;
+	public List<Lotto> getLottos() {
+		return lottos.getLottos();
 	}
 }

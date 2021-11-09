@@ -46,9 +46,6 @@ class LottoShopTest {
 	@Test
 	@DisplayName("로또 수동 판매시 번호 중복 예외 테스트")
 	public void LottoShopStringSellExceptionTest() {
-		//given
-		//when
-		//then
 		assertThatThrownBy(() -> LottoShop.sell("1, 2, 32, 32, 5, 45"))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("[ERROR] 로또 번호는 중복 될 수 없습니다.");

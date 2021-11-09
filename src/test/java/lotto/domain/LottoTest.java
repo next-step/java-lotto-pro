@@ -16,7 +16,7 @@ public class LottoTest {
 		LottoNumbers lottoNumbers = new LottoNumbers(1, 13, 26, 38, 41, 8);
 
 		//when
-		int result = lottoNumbers.ifMatchCount(inputData);
+		int result = lottoNumbers.ifMatchCount(new LottoNumber(inputData));
 
 		//then
 		assertThat(result).isEqualTo(expectedValue);
@@ -27,13 +27,13 @@ public class LottoTest {
 	@DisplayName("일치하는 로또번호 개수 확인 테스트")
 	public void LottoNumbersMatchTest(String inputData, int expectedValue) {
 		//given
-		WinningNumbers winningNumbers = new WinningNumbers(inputData);
+		LottoNumbers lottoNumbers = new LottoNumbers(inputData);
 		Lotto lotto = new Lotto(1, 13, 26, 38, 41, 8);
 
 		//when
-		int matchedNumber = lotto.countMatchNumber(winningNumbers);
+		lotto.recordeRank(lottoNumbers, new LottoNumber(45));
 
 		//then
-		assertThat(matchedNumber).isEqualTo(expectedValue);
+		assertThat(lotto.getWinningRank().getCountOfMatch()).isEqualTo(expectedValue);
 	}
 }

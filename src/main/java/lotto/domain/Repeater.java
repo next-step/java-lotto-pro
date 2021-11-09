@@ -14,7 +14,11 @@ public class Repeater {
 		return repeater;
 	}
 
+	public static void set(int setValue) {
+		repeater = setValue == -1;
+	}
+
 	public static void set(String setValue) {
-		repeater = !setValue.equals("");
+		repeater = setValue.equals("");
 	}
 }

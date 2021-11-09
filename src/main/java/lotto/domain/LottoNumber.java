@@ -6,7 +6,7 @@ public class LottoNumber {
 	public static final int MIN_BOUND = 1;
 	public static final int MAX_BOUND = 45;
 	private static final String ERROR_LOTTO_NUMBER_BOUNDARY = "[ERROR] 로또번호는 1~45의 값을 가져야 합니다.";
-	private static final String ERROR_LOTTO_NUMBER_VALUE = "[ERROR] 로또번호는 숫자만 입력가능합니다.";
+	public static final String ERROR_LOTTO_NUMBER_VALUE = "[ERROR] 로또번호는 숫자만 입력가능합니다.";
 	private final int lottoNumber;
 
 	public LottoNumber(final int lottoNumber) {
