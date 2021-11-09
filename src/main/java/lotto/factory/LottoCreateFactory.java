@@ -3,6 +3,7 @@ package lotto.factory;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.LottoNumber;
+import lotto.model.WinningLotto;
 import lotto.view.ErrorMessage;
 
 import java.util.*;
@@ -49,5 +50,9 @@ public class LottoCreateFactory {
     private static boolean validDuplicate(List<Integer> numbers) {
         Set<Integer> set = new HashSet<>(numbers);
         return set.size() != Lotto.SIZE;
+    }
+
+    public static WinningLotto createWinningLotto(List<Integer> winLottoNumbers, int bonusNumber) {
+        return new WinningLotto(createLotto(winLottoNumbers),new LottoNumber(bonusNumber));
     }
 }

@@ -1,7 +1,9 @@
 package lotto.factory;
 
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
+import lotto.model.WinningLotto;
 import lotto.view.InputHandler;
 import lotto.view.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
@@ -31,11 +33,12 @@ public class LottoCreateFactoryTest {
 
     @DisplayName("문자열을 입력받아 당첨 로또를 생성하는 기능 검증")
     @Test
-    void createWinLottos() {
+    void createWinningLotto() {
         String text = "1, 2, 3, 4, 5, 6";
-        Lotto lotto = LottoCreateFactory.createLotto(InputHandler.splitTextToInts(text));
-        assertThat(lotto.size()).isEqualTo(LOTTO_SIZE);
-        assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        int bonusNumber = 7;
+        WinningLotto winningLotto = LottoCreateFactory.createWinningLotto(InputHandler.splitTextToInts(text),bonusNumber);
+
+        assertThat(winningLotto).isEqualTo(new WinningLotto(new Lotto(Arrays.asList(1,2,3,4,5,6)),new LottoNumber(7)));
 
     }
 
@@ -43,7 +46,7 @@ public class LottoCreateFactoryTest {
     @Test
     void duplicateError() {
         assertThatThrownBy(() -> {
-            Lotto lotto = LottoCreateFactory.createLotto(Arrays.asList(1, 2, 3, 1, 2, 3));
+            LottoCreateFactory.createLotto(Arrays.asList(1, 2, 3, 1, 2, 3));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.DUPLICATE_ERROR);
     }

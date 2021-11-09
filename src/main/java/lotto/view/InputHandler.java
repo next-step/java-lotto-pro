@@ -37,7 +37,7 @@ public class InputHandler {
         return result;
     }
 
-    private static int checkLottoNumber(String textNumber) {
+    public static int checkLottoNumber(String textNumber) {
         try {
             int number = Integer.parseInt(textNumber);
             if (LottoNumber.MAX_NUMBER < number || LottoNumber.MIN_NUMBER > number) {
