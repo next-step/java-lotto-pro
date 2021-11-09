@@ -9,27 +9,22 @@ public class StringAddCalculator {
     private static final Pattern PATTERN_CUSTOM = Pattern.compile("//(.)\n(.*)");
     private static final int ZERO = 0;
     private static final String MESSAGE_INVALID_CHARACTER_FORMAT = "Invalid character format.";
-    private static final String MESSAGE_NOT_POSITIVE_INT = "For input only positive integers.";
 
     public static int splitAndSum(String str) {
         if( str == null || str.isEmpty() ) {
             return ZERO;
         }
-        int result = ZERO;
+
         if( str.length() == 1 ) {
-            result = checkOneNumber(str);
+            return checkOneNumber(str);
         }
-        if( PATTERN_DELIMITERS.matcher(str).find() ) {
-            result = checkSeparatorAndDelimiter(str);
-        }
+
         Matcher matcher = PATTERN_CUSTOM.matcher(str);
         if( matcher.find() ) {
-            result = checkCustomDelimiter(matcher);
+            return checkCustomDelimiter(matcher);
         }
-        if( result == ZERO ) {
-            throw new IllegalArgumentException(MESSAGE_INVALID_CHARACTER_FORMAT);
-        }
-        return result;
+
+        return checkSeparatorAndDelimiter(str);
     }
 
     private static int checkOneNumber(String str) {
@@ -50,16 +45,18 @@ public class StringAddCalculator {
     private static int addStringArray(String[] strs) {
         int result = ZERO;
         for(String str : strs) {
-            result += checkInt(Integer.parseInt(str));
+            checkNumberFormat(str);
+            result += Integer.parseInt(str);
         }
         return result;
     }
 
-    private static int checkInt(int number) {
-        if( number < ZERO ) {
-            throw new RuntimeException(MESSAGE_NOT_POSITIVE_INT);
+    private static void checkNumberFormat(String str) {
+        for( int i = 0; i < str.length(); i++) {
+            if( !Character.isDigit(str.charAt(i)) ) {
+                throw new NumberFormatException(MESSAGE_INVALID_CHARACTER_FORMAT);
+            }
         }
-        return number;
     }
 
     private StringAddCalculator(){}
