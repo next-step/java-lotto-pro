@@ -56,6 +56,12 @@ public class LottoMatchResult {
 			.sum();
 	}
 
+	public void addResult(LottoMatchResult otherResult){
+		for(Map.Entry<LottoMatchRank, Integer> entry : otherResult.getResult().entrySet()){
+			result.put(entry.getKey(), getRankMatchCount(entry.getKey())+entry.getValue());
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return result.entrySet().stream()
