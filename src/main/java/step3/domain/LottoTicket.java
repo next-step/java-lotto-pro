@@ -3,6 +3,8 @@ package step3.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import step3.enums.Prize;
+import step3.enums.Prizes;
 import util.LottoNumbers;
 
 public class LottoTicket {
@@ -19,6 +21,16 @@ public class LottoTicket {
 
     public List<Lotto> get() {
         return this.lotteries;
+    }
+
+    public Prizes check(final Lotto winningLotto) {
+        final Prizes prizes = new Prizes();
+
+        for (Lotto lotto : this.lotteries) {
+            prizes.add(Prize.of(lotto.check(winningLotto)));
+        }
+
+        return prizes;
     }
 
     @Override

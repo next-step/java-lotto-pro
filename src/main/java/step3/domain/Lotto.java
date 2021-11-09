@@ -3,6 +3,7 @@ package step3.domain;
 import static java.text.MessageFormat.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class Lotto {
 
@@ -14,6 +15,20 @@ public class Lotto {
         verifyLottoNumbersLength(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public List<LottoNumber> get() {
+        return this.lottoNumbers;
+    }
+
+    public int check(final Lotto winningLotto) {
+        int winningCount = 0;
+
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            winningCount += lottoNumber.check(winningLotto.get());
+        }
+
+        return winningCount;
     }
 
     private boolean isAvailableLottoNumbersLength(final List<LottoNumber> lottoNumbers) {
@@ -41,5 +56,16 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        final StringJoiner numberJoiner = new StringJoiner(", ", "[", "]");
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            numberJoiner.add(lottoNumber.toString());
+        }
+
+        return numberJoiner.toString();
     }
 }

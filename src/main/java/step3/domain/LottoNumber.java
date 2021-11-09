@@ -1,6 +1,7 @@
 package step3.domain;
 
 import static java.text.MessageFormat.*;
+import java.util.List;
 import java.util.Objects;
 import util.Numbers;
 
@@ -15,6 +16,14 @@ public class LottoNumber {
         verifyLottoNumber(number);
 
         this.number = number;
+    }
+
+    public int check(final List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.contains(this)) {
+            return 1;
+        }
+
+        return 0;
     }
 
     private void verifyLottoNumber(final int number) {
@@ -47,5 +56,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.number);
     }
 }
