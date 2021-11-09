@@ -179,4 +179,101 @@ public class OverflowValidator implements MachineValidator {
   - 로또번호는 1 ~ 45까지의 범위이어야한다.
 
 
-### 궁금한점 
+### 생각 이상으로 객체지향은 어렵다.
+
+```java
+import java.util.Collections;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public interface InputView {
+	// 화면 호출 메시지
+	message();
+
+	// 입력
+	enter();
+}
+
+public class MoneyView implements InputView {
+	@Override
+	public void message() {
+		System.out.println("구입금액을 입력하세요");
+	}
+
+	@Override
+	public String enter() {
+		return sc.nextLine();
+	}
+}
+
+public class BonusBallView implements InputView {
+	@Override
+	public void message() {
+		System.out.println("보너스 볼을 입력해 주세요");
+	}
+
+	@Override
+	public String enter() {
+		return sc.nextLine();
+	}
+}
+
+public interface Config {
+	Map.Entry<InputView, Object> getFactory();
+}
+
+public class FactoryConfig implements Config {
+	private Map<InputView, Object> factory
+
+	public FactoryConfig() {
+		factory = new HashMap<>();
+		factory.put(new MoneyView(), new CreateOperation());
+		factory.put(new BonusBallView(), new BonusBallOperation());
+	}
+
+	public Map.Entry<InputView, Object> getFactory() {
+		return Collections.unmodifiableMap(factory.entrySet());
+	}
+}
+
+public class LottoManagement {
+
+	private FacotryConfig facotryConfig;
+
+	public LottoManagement(FactoryConfig factoryConfig) {
+		this.factory = facotryConfig;
+	}
+
+	public void run() {
+		List<InputView> views = facotryConfig.getView();
+
+		for (Map.Entry<InputView, Object> factory : getFactory) {
+			InputView view = factory.getKey();
+			Object operation = factory.getValue();
+			view.message();
+			String enter = view.enter();
+			operation.start(enter);
+		}
+	}
+}
+
+public interface CreateOperation {
+	void start(Money money);
+}
+
+public interface BonusBallOperation {
+	void start(LottoNumbers lottoNumbers, BonusBall bonusBall);
+}
+
+public interface LottoOperation extends CreateOperation, BonusBallOperation {
+	void start(String enter);
+}
+
+public class Main {
+
+	LottoManagement lottoManagement = new LottoManagement(new FactoryConfig());
+	lottoManagement.run();
+}
+
+
+```
