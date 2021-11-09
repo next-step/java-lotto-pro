@@ -27,8 +27,8 @@ public class Payment {
         return payment / LOTTO_PRICE;
     }
 
-    public double getRateOfReturn(int prizeMoney) {
-        return ((double)prizeMoney) / payment;
+    public RateOfReturn getRateOfReturn(int prizeMoney) {
+        return new RateOfReturn((double)prizeMoney / payment);
     }
 
     @Override

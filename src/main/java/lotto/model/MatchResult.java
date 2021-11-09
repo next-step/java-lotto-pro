@@ -9,10 +9,8 @@ import java.util.Objects;
 import lotto.model.enums.Rank;
 
 public class MatchResult {
-    private static final int BREAK_EVEN_RATE = 1;
-
     private final Map<Rank, Integer> rankToCount;
-    private final double rateOfReturn;
+    private final RateOfReturn rateOfReturn;
 
     public MatchResult(Payment payment, Rank... ranks) {
         this(payment, Arrays.asList(ranks));
@@ -36,12 +34,8 @@ public class MatchResult {
         }
     }
 
-    public double getRateOfReturn() {
+    public RateOfReturn getRateOfReturn() {
         return rateOfReturn;
-    }
-
-    public boolean isLosingMoney() {
-        return rateOfReturn < BREAK_EVEN_RATE;
     }
 
     public int getCount(Rank rank) {
@@ -56,9 +50,8 @@ public class MatchResult {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        MatchResult other = (MatchResult)obj;
-        return Double.compare(other.rateOfReturn, rateOfReturn) == 0
-            && rankToCount.equals(other.rankToCount);
+        MatchResult that = (MatchResult)obj;
+        return Objects.equals(rankToCount, that.rankToCount) && Objects.equals(rateOfReturn, that.rateOfReturn);
     }
 
     @Override

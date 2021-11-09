@@ -16,14 +16,9 @@ public class MatchResultTest {
 
     @Test
     void getRateOfReturn() {
-        double expectedRateOfReturn = (double)EXPECTED_RANKS.stream().mapToInt(Rank::getWinningMoney).sum() / PAYMENT;
-        assertThat(EXPECTED_MATCH_RESULT.getRateOfReturn()).isEqualTo(expectedRateOfReturn);
-    }
-
-    @Test
-    void isLosingMoney() {
         int expectedWinningMoney = EXPECTED_RANKS.stream().mapToInt(Rank::getWinningMoney).sum();
-        assertThat(EXPECTED_MATCH_RESULT.isLosingMoney()).isEqualTo(expectedWinningMoney < PAYMENT);
+        RateOfReturn expectedRateOfReturn = new RateOfReturn((double)expectedWinningMoney / PAYMENT);
+        assertThat(EXPECTED_MATCH_RESULT.getRateOfReturn()).isEqualTo(expectedRateOfReturn);
     }
 
     @Test
