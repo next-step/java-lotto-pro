@@ -146,4 +146,28 @@ public class OverflowValidator implements MachineValidator {
 ## 당첨 통계
 + 5개 일치, 보너스 볼 일치(30000000원) - 0개
 
+## 기능사항 정의
 
+- [x] findMatchLottoNumber 로직변경
+  - 기존 로직 수정 
+    - LottoPapers.java findMatchLottoNumber() 
+      - 로또 상금에 해당하는 대상을 찾는 로직 
+- [x] LottoNumbers match() 
+  - 기존 로직 수정 
+    - 유저의 지난주 로또번호와 보너스볼을 가지고서 보너스볼을 가지고 있는지 확인 
+    - 보너스볼 유무 및 매칭되는 볼 숫자를 리턴한다.
+  - 추가된 로직 
+    - matchCount 
+      - 6개의 로또번호를 탐색하여 매칭되는 수를 리턴 
+    - matchBonusBall
+      - 6개의 로또번 중 보너스 볼과 매칭되는 경우 true 아니면 false를 리턴
+- [x] LottoNumbers getList 추가 
+  - 대상의 데이터는 `불변` 하도록 처리 
+- [x] ViewException 추가 
+  - 화면에서 처리한 로직 Exception의 상위 클래스 생성 
+    - 각각의 오류에 대한 Exception 클래스 생성 
+- [x] 문자열 상수 정의
+  - 문자열을 코드에 넣었던 형태를 상수로 전환
+- [x] LottoNumbersService 삭제 
+  - 행위의 의한 범위가 아닌 하나의 대한 인터페이스는 의미 없어보이므로 삭제 
+  - 해당 로직을 LottoNumbers.from으로 변경
