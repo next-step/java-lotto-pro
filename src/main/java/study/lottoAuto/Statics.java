@@ -17,11 +17,10 @@ public class Statics {
         resultMap.put(new Rank(5), new Count());
         resultMap.put(new Rank(6), new Count());
 
-        prizeMap.put(new Rank(3), new Prize(5000));
-        prizeMap.put(new Rank(4), new Prize(50000));
-        prizeMap.put(new Rank(5), new Prize(1500000));
-        prizeMap.put(new Rank(6), new Prize(2000000000));
-        //다른 방법이 없을까...
+        prizeMap.put(new Rank(3), new Prize(5_000));
+        prizeMap.put(new Rank(4), new Prize(50_000));
+        prizeMap.put(new Rank(5), new Prize(1_500_000));
+        prizeMap.put(new Rank(6), new Prize(2_000_000_000));
     }
 
     public Statics(Money money) {
