@@ -10,7 +10,7 @@ public class WinningStatistics {
     private final RankStatistics rankStatistics; // 당첨 등수 통계
 
     private WinningStatistics(final TicketLotteryBundle ticketLotteryBundle, final WinningLottery winningLottery) {
-        final List<Rank> refereedRanks = LottoDiscriminator.referee(winningLottery, ticketLotteryBundle);
+        final List<Rank> refereedRanks = winningLottery.match(ticketLotteryBundle);
         final RankStatistics rankStatistics = RankStatistics.getInstance();
         final BigDecimal income = setUp(refereedRanks, rankStatistics);
 

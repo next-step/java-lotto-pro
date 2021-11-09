@@ -9,8 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoDiscriminatorTest {
-
+class WinningLotteryTest {
     WinningLottery winningLottery;
 
     @BeforeEach
@@ -32,7 +31,7 @@ public class LottoDiscriminatorTest {
 
         final TicketLottery ticketLottery = TicketLottery.valueOf(ticketLottoNumbers, TicketLotteryType.AUTO);
 
-        final Rank rank = LottoDiscriminator.referee(winningLottery, ticketLottery);
+        final Rank rank = winningLottery.match(ticketLottery);
 
         assertThat(rank).isEqualTo(expectedRank);
     }
