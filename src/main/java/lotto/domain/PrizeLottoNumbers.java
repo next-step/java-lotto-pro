@@ -16,7 +16,7 @@ public class PrizeLottoNumbers {
 
     public PrizeLottoNumbers(LottoNumbers prizeLottoNumbers, int bonusNumber) {
         this.prizeLottoNumbers = prizeLottoNumbers;
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
         validateBonusNumberContains();
     }
 

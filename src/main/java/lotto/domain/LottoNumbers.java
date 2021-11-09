@@ -41,7 +41,7 @@ public class LottoNumbers {
     private static List<LottoNumber> generateRandomLottoNumberPocket() {
         List<LottoNumber> resultPocket = new ArrayList<>();
         for (int number = LottoNumber.MIN_BOUND; number <= LottoNumber.MAX_BOUND; number++) {
-            resultPocket.add(new LottoNumber(number));
+            resultPocket.add(LottoNumber.of(number));
         }
 
         return resultPocket;
@@ -60,7 +60,7 @@ public class LottoNumbers {
         String[] splitLottoNumbers = lottoNumbers.split(separator);
         validateLottoNumbers(splitLottoNumbers);
         for (String lottoNumberString : splitLottoNumbers) {
-            this.lottoNumbers.add(new LottoNumber(lottoNumberString));
+            this.lottoNumbers.add(LottoNumber.of(lottoNumberString));
         }
     }
 
@@ -89,10 +89,6 @@ public class LottoNumbers {
         return (int) lottoNumbers.stream()
                 .filter(prizeLottoNumbers::containsNumber)
                 .count();
-    }
-
-    public LottoResult getLottoResult(LottoNumbers prizeLottoNumbers, LottoNumber bonusLottoNumber) {
-        return new LottoResult(getMatchCount(prizeLottoNumbers), containsNumber(bonusLottoNumber));
     }
 
     @Override
