@@ -1,6 +1,5 @@
 package study.lottoAuto;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 import static study.lottoAuto.MessageUtil.INVALID_LOTTO_NUMBER_ERR_MSG;

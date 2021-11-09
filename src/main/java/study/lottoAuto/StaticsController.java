@@ -1,7 +1,5 @@
 package study.lottoAuto;
 
-import java.util.List;
-
 public class StaticsController {
 
     private final int COUNT_BASE = 3;
