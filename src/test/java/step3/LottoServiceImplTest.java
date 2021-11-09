@@ -13,16 +13,18 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import step3.domain.Amount;
+import step3.domain.LottoNumber;
+import step3.domain.LottoNumbers;
 import step3.domain.LottoRank;
 import step3.domain.LottoService;
+import step3.domain.WinningLotto;
 import step3.domain.strategy.numbers.NumbersStrategy;
 import step3.domain.strategy.numbers.RandomLottoNumbers;
-import step3.dto.LottoBonusNumberRequestDto;
 import step3.dto.LottoBuyRequestDto;
 import step3.dto.LottoBuyResponseDto;
 import step3.dto.LottoResultDto;
+import step3.dto.LottoStatisticsRequestDto;
 import step3.dto.LottoStatisticsResponseDto;
-import step3.dto.LottoWinNumbersRequestDto;
 import step3.service.LottoServiceImpl;
 
 public class LottoServiceImplTest {
@@ -43,7 +45,7 @@ public class LottoServiceImplTest {
             new RandomLottoNumbers());// 로또구매
 
         // then
-        int buyLottoSize = lottoBuyResponseDto.getBuyLottoList().size(); // 구매된 로또 갯수
+        int buyLottoSize = lottoBuyResponseDto.getBuyLottoListToString().size(); // 구매된 로또 갯수
         assertThat(buyLottoSize).isEqualTo(expected); // 비교
     }
 
@@ -53,25 +55,30 @@ public class LottoServiceImplTest {
     void getResultStatistics(
         NumbersStrategy numbersStrategy,
         int[] winLottoNumbers,
-        LottoBonusNumberRequestDto lottoBonusNumberRequestDto,
+        int bonusNumber,
         LottoResultDto expectedLottoResultDto
     ) {
         // given
-        Amount amount = new Amount(1000); // 한개에대한 테스트 이므로 1000 고정입니다.
-        LottoBuyRequestDto lottoBuyRequestDto = new LottoBuyRequestDto(amount.getAmount());
+        int amount = 1000;
+        LottoBuyRequestDto lottoBuyRequestDto = new LottoBuyRequestDto(amount);
 
         // when
         LottoService lottoService = new LottoServiceImpl();
-        lottoService.buyLotto(lottoBuyRequestDto, numbersStrategy); // 로또 구매
-        LottoWinNumbersRequestDto lottoWinNumbersRequestDto = new LottoWinNumbersRequestDto(winLottoNumbers,
-            amount.getAmount()); // 지난주 로또번호 입력받기
+        LottoBuyResponseDto lottoBuyResponseDto = lottoService.buyLotto(lottoBuyRequestDto, numbersStrategy);
+
+        LottoStatisticsRequestDto lottoStatisticsRequestDto = new LottoStatisticsRequestDto();
+
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(winLottoNumbers), new LottoNumber(bonusNumber));
+        lottoStatisticsRequestDto.mapAmount(new Amount(amount));
+        lottoStatisticsRequestDto.mapWinningLotto(winningLotto);
+        lottoStatisticsRequestDto.mapBuyLottoList(lottoBuyResponseDto.getBuyLottoList());
+
         LottoStatisticsResponseDto lottoStatisticsResponseDto = lottoService.getResultStatistics(
-            lottoWinNumbersRequestDto, lottoBonusNumberRequestDto); // 통계 결과 객체 리턴
+            lottoStatisticsRequestDto);
 
         // then
         List<LottoResultDto> lottoResultDtos = lottoStatisticsResponseDto.getLottoResultDtos();
         assertThat(lottoResultDtos).contains(expectedLottoResultDto); // 예상 통계결과 객체 확인
-
     }
 
     private static Stream<Arguments> getResultStatisticsGenerateData() {
@@ -79,17 +86,17 @@ public class LottoServiceImplTest {
             Arguments.of(
                 getNumbersStrategy("1,2,3,4,5,6"), // 구매될 로또 넘버 6자리
                 parseNumbers("1,2,3,4,5,6"), // 지난 주 당첨 로또 번호
-                new LottoBonusNumberRequestDto(45), // 보너스 번호
+                45, // 보너스 번호
                 new LottoResultDto(6, 2000000000, LottoRank.FIRST.name(), 1)), // 비교할 당첨 결과 비교 객체
             Arguments.of(
                 getNumbersStrategy("1,2,3,4,5,6"), parseNumbers("1,2,3,4,5,7"),
-                new LottoBonusNumberRequestDto(45), new LottoResultDto(5, 1500000, LottoRank.THIRD.name(), 1)),
+                45, new LottoResultDto(5, 1500000, LottoRank.THIRD.name(), 1)),
             Arguments.of(
                 getNumbersStrategy("1,2,3,4,5,6"), parseNumbers("1,2,3,4,5,7"),
-                new LottoBonusNumberRequestDto(6), new LottoResultDto(5, 30000000, LottoRank.SECOND.name(), 1)),
+                6, new LottoResultDto(5, 30000000, LottoRank.SECOND.name(), 1)),
             Arguments.of(
                 getNumbersStrategy("1,2,3,4,5,6"), parseNumbers("11,12,13,14,15,17"),
-                new LottoBonusNumberRequestDto(6), new LottoResultDto(0, 0, LottoRank.NONE.name(), 1))
+                6, new LottoResultDto(0, 0, LottoRank.NONE.name(), 1))
         );
     }
 

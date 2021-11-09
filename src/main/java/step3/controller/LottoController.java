@@ -24,43 +24,30 @@ public class LottoController {
     }
 
     public void play() {
-        // 사용자에게 구매할 돈을입금 받는다.
+        // Todo 수동으로 구매할 번호가 예외 발생시?
+        LottoStatisticsRequestDto lottoStatisticsRequestDto = new LottoStatisticsRequestDto();
+
         LottoBuyRequestDto lottoRequestDto = InputView.readLottoRequestDto();
         Amount amount = lottoRequestDto.getAmount();
+        lottoStatisticsRequestDto.mapAmount(amount);
 
-        // Todo 수동으로 구매할 번호가 예외 발생시?
-
-        // 수동으로 구매할 로또 수를 입력해 주세요.
         int manualBuyCount = InputView.readManualLottoBuyCount();
 
-        // 수동으로 구매할 번호를 입력해 주세요.
-        LottoManualLottoNumbersRequestDto lottoManualLottoNumbersRequestDto = InputView.readLottoManualLottoNumbersRequestDto(
-            manualBuyCount);
+        LottoBuyResponseDto manualLottoBuyResponseDto = manualLottoBuy(manualBuyCount);
 
-        // 수동 로또번호 구매진행
-        LottoBuyResponseDto manualLottoBuyResponseDto = lottoService.buyLotto(lottoManualLottoNumbersRequestDto);
-
-        // 자동 로또를 구매한다.
         LottoBuyResponseDto lottoBuyResponseDto = lottoService.buyLotto(lottoRequestDto, new RandomLottoNumbers());
 
-        // 총몇개를 구입했는지 출력한다.
-        // 구매한 로또를 출력한다.
         ResultView.lottoBuyListPrint(manualLottoBuyResponseDto, lottoBuyResponseDto);
 
-        // 지난 주 당첨번호 받기
         LottoWinNumbersRequestDto lottoWinNumbersRequestDto = InputView.readLottoWinnerRequestDto(
             lottoRequestDto.getAmountValue());
 
-        // 보너스 볼을 입력
-        LottoBonusNumberRequestDto lottoBonusNumberRequestDto = getLottoBonusNumberRequestDto(
-            lottoWinNumbersRequestDto);
+        LottoBonusNumberRequestDto lottoBonusNumberRequestDto = getLottoBonusNumberRequestDto();
+        
+        lottoStatisticsRequestDto.mapWinningLotto(new WinningLotto(lottoWinNumbersRequestDto.getLottoNumbers(),
+            lottoBonusNumberRequestDto.getBonusLottoNumber()));
 
-        // 당첨통계를출력한다.(로또 당첨 갯수와 수익률)
-        WinningLotto winningLotto = new WinningLotto(lottoWinNumbersRequestDto.getLottoNumbers(),
-            lottoBonusNumberRequestDto.getBonusLottoNumber());
-        LottoStatisticsRequestDto lottoStatisticsRequestDto = new LottoStatisticsRequestDto(
-            manualLottoBuyResponseDto.merge(lottoBuyResponseDto), amount, winningLotto
-        );
+        lottoStatisticsRequestDto.mapBuyLottoList(manualLottoBuyResponseDto.merge(lottoBuyResponseDto));
 
         LottoStatisticsResponseDto lottoStatisticsResponseDto = lottoService.getResultStatistics(
             lottoStatisticsRequestDto);
@@ -68,21 +55,24 @@ public class LottoController {
         ResultView.statisticsPrint(lottoStatisticsResponseDto, amount);
     }
 
-    private LottoBonusNumberRequestDto getLottoBonusNumberRequestDto(
-        LottoWinNumbersRequestDto lottoWinNumbersRequestDto) {
+    private LottoBuyResponseDto manualLottoBuy(int manualBuyCount) {
         try {
-            LottoBonusNumberRequestDto lottoBonusNumberRequestDto = InputView.readLottoBonusNumberRequestDto();
-            validBonus(lottoWinNumbersRequestDto, lottoBonusNumberRequestDto);
+            LottoManualLottoNumbersRequestDto lottoManualLottoNumbersRequestDto = InputView.readLottoManualLottoNumbersRequestDto(
+                manualBuyCount);
 
-            return lottoBonusNumberRequestDto;
+            return lottoService.buyLotto(lottoManualLottoNumbersRequestDto);
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
-            return getLottoBonusNumberRequestDto(lottoWinNumbersRequestDto);
+            return manualLottoBuy(manualBuyCount);
         }
     }
 
-    private void validBonus(LottoWinNumbersRequestDto lottoWinNumbersRequestDto,
-        LottoBonusNumberRequestDto lottoBonusNumberRequestDto) {
-        lottoWinNumbersRequestDto.validContain(lottoBonusNumberRequestDto.getBonusLottoNumber());
+    private LottoBonusNumberRequestDto getLottoBonusNumberRequestDto() {
+        try {
+            return InputView.readLottoBonusNumberRequestDto();
+        } catch (InvalidParamException invalidParamException) {
+            ResultView.println(invalidParamException.getMessage());
+            return getLottoBonusNumberRequestDto();
+        }
     }
 }

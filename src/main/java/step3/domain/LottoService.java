@@ -15,6 +15,4 @@ public interface LottoService {
     LottoStatisticsResponseDto getResultStatistics(LottoStatisticsRequestDto lottoStatisticsRequestDto);
 
     LottoBuyResponseDto buyLotto(LottoManualLottoNumbersRequestDto lottoManualLottoNumbersRequestDto);
-
-    // LottoStatisticsResponseDto getResultStatistics(LottoStatisticsRequestDto lottoStatisticsRequestDto);
 }

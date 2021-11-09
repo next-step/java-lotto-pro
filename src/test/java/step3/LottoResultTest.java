@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import step3.domain.Amount;
 import step3.domain.LottoRanks;
-import step3.domain.LottoResult;
 
 public class LottoResultTest {
 
@@ -31,8 +30,7 @@ public class LottoResultTest {
         lottoRanks.matchIncrementCount(matchCount, isContainBonus);
 
         // when
-        LottoResult lottoResult = new LottoResult(lottoRanks, amount);
-        BigDecimal yield = lottoResult.getCalculatedYield();
+        BigDecimal yield = lottoRanks.getCalculatedYield(amount);
 
         // then
         assertThat(yield).isEqualTo(expected);
@@ -53,12 +51,11 @@ public class LottoResultTest {
         // given
         Amount amount = new Amount(10000);
         LottoRanks lottoRanks = new LottoRanks();
-        LottoResult lottoResult = new LottoResult(lottoRanks, amount);
 
         // when
         lottoRanks.matchIncrementCount(matchCount1, isContainBonus);
         lottoRanks.matchIncrementCount(matchCount2, isContainBonus);
-        Long totalPrize = lottoResult.getTotalPrize();
+        Long totalPrize = lottoRanks.totalPrize();
 
         // then
         assertThat(totalPrize).isEqualTo(expected);

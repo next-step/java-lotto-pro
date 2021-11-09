@@ -12,6 +12,7 @@ import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
 import step3.domain.LottoNumbersBundle;
 import step3.domain.LottoRanks;
+import step3.domain.WinningLotto;
 import step3.domain.strategy.numbers.NumbersStrategy;
 
 public class LottoNumbersBundleTest {
@@ -33,7 +34,8 @@ public class LottoNumbersBundleTest {
         addLottoNumbers(buyNumbersStr, lottoNumbersBundle);
 
         // when
-        LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winLottoNumbers, bonusLottoNumber);
+        WinningLotto winningLotto = new WinningLotto(winLottoNumbers, bonusLottoNumber);
+        LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winningLotto);
         Long totalPrize = lottoRanks.totalPrize();
 
         // then
