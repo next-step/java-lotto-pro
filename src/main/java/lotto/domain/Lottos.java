@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.BonusNumberDuplicateException;
+
 import java.util.*;
 
 public class Lottos {
@@ -11,6 +13,7 @@ public class Lottos {
     }
 
     public WinningResult winningResult(Lotto winningNumber, LottoNumber bonusNumber) {
+        duplicateWinningNumberAndBonusNumberValid(winningNumber, bonusNumber);
         Map<Rank, Integer> winningResult = new EnumMap<>(Rank.class);
 
         for (Lotto lotto : lottos) {
@@ -21,6 +24,13 @@ public class Lottos {
             }
         }
         return new WinningResult(winningResult);
+    }
+
+    private void duplicateWinningNumberAndBonusNumberValid(Lotto winningNumber, LottoNumber bonusNumber) {
+        List<LottoNumber> winningNumbers = winningNumber.lottoNumbers();
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new BonusNumberDuplicateException();
+        }
     }
 
     private void winningResultAccumulate(Map<Rank, Integer> winningResult, Rank rank) {

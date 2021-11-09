@@ -25,6 +25,10 @@ public class Lotto {
         return new WinningNumberMatchResult(winningNumberMatchCount, isBonusNumberMatch(bonusNumber));
     }
 
+    public List<LottoNumber> lottoNumbers() {
+        return new ArrayList<>(this.numbers);
+    }
+
     private boolean isBonusNumberMatch(LottoNumber bonusNumber) {
         return this.numbers.contains(bonusNumber);
     }

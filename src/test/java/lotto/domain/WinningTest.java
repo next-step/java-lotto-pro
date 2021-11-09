@@ -1,16 +1,21 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WinningTest {
@@ -47,6 +52,29 @@ class WinningTest {
 
         //then
         assertThat(profitRateResult).isEqualTo(profitRate);
+    }
+
+    @DisplayName("보너스 번호가 당첨 번호에 존재할 때 예외")
+    @Test
+    void duplicateWinningNumberAndBonusNumberExceptionTest() {
+        //given
+        Lotto lotto = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+
+        Lotto verifiedWinningNumber = Stream.of(1,2,3,4,5,45)
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+
+        Lottos lottos = Stream.of(lotto)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+
+        LottoNumber bonusNumber = new LottoNumber(45);
+
+        //when and then
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            lottos.winningResult(verifiedWinningNumber, bonusNumber);
+        });
     }
 
     static Stream<Arguments> profitRateParametersProvider() {
