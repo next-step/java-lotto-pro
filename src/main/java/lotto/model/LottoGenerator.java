@@ -7,17 +7,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoGenerator {
-    private static final int START_NUMBER = 1;
-    private static final int END_NUMBER = 45;
     public static final int LOTTO_SIZE = 6;
     public static final String DELIMITER = ",";
     public static final String DELIMITER_MESSAGE = "로또 숫자 구분자로 ,(콤마)를 입력해주세요.";
-    private static final List<Integer> allNumbers = new ArrayList<>();
     public static final String BLANK = " ";
     public static final String NO_BLANK = "";
+    private static final List<Integer> allNumbers = new ArrayList<>();
 
     static {
-        for (int i = START_NUMBER; i <= END_NUMBER; i++) {
+        for (int i = LottoNumber.START_NUMBER; i <= LottoNumber.END_NUMBER; i++) {
             allNumbers.add(i);
         }
     }
@@ -35,9 +33,9 @@ public class LottoGenerator {
         return new Lottos(lottos);
     }
 
-    public WinningNumber createWinningNumber(String winningNumberString) {
+    public Lotto createWinningNumber(String winningNumberString) {
         validateDelimiter(winningNumberString);
-        return new WinningNumber(toList(toInts(winningNumberString.replaceAll(BLANK, NO_BLANK).split(DELIMITER))));
+        return new Lotto(toList(toInts(winningNumberString.replaceAll(BLANK, NO_BLANK).split(DELIMITER))));
     }
 
     private void validateDelimiter(String text) {

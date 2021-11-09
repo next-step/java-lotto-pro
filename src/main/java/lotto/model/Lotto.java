@@ -43,11 +43,16 @@ public class Lotto {
         return Objects.hash(lotto);
     }
 
-    public boolean contains(LottoNumber winningNumber) {
-        return lotto.contains(winningNumber);
+    public boolean contains(LottoNumber number) {
+        return lotto.contains(number);
     }
 
     public List<LottoNumber> getLotto() {
         return lotto;
+    }
+
+    public int winningCount(Lotto winningLotto) {
+        return (int) lotto.stream()
+                .filter(winningLotto::contains).count();
     }
 }
