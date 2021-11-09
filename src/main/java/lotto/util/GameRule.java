@@ -15,6 +15,8 @@ public class GameRule {
     public static final int MATCH_PRICE_BONUS = 30_000_000;
     public static final int MATCH_PRICE_6 = 2_000_000_000;
 
+    public static final int LOTTO_BUY_MIN_VALUE = 0;
+
     public static final String LOTTO_NUMBER_DELIMITER = ",";
 
     private GameRule() {
