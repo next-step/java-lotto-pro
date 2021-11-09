@@ -46,7 +46,7 @@ public class ResultView {
 
     private static void printRankInfo(final WinningStatistics winningsStatistics, final Ranking ranking) {
         if (ranking != Ranking.MISS) {
-            System.out.printf("%d개 일치 (%d원) - %d개%n", ranking.getCorrect(), ranking.getAmount(), winningsStatistics.getRankHitsCount(ranking));
+            System.out.printf("%s (%d원) - %d개%n", ranking.getMessage(), ranking.getAmount(), winningsStatistics.getRankHitsCount(ranking));
         }
     }
 
