@@ -34,13 +34,13 @@ public class LottoTest {
 					.map(LottoNumber::new)
 					.collect(Collectors.toSet());
 
-				Lotto lotto = new Lotto(lottoNumbers);
+				new Lotto(lottoNumbers);
 			}).withMessageMatching("중복되지 않은 6개의 숫자를 입력해주세요.");
 	}
 
 	@DisplayName("두개의 로또 번호 비교를 통한 순위 반환")
 	@ParameterizedTest
-	@EnumSource(names = {"FIRST_PLACE"})
+	@EnumSource(names = {"FIRST"})
 	void lottoMatch(Rank rank) {
 		Set<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
 			.map(LottoNumber::new)

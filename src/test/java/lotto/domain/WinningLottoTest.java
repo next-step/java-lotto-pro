@@ -45,7 +45,7 @@ public class WinningLottoTest {
 				.collect(Collectors.toSet()));
 
 		WinningRecord winningRecord = winningLotto.match(lottos);
-		int secondCount = winningRecord.getPlaceCount(Rank.SECOND_PLACE);
+		int secondCount = winningRecord.getPlaceCount(Rank.SECOND);
 
 		assertThat(secondCount).isEqualTo(1);
 	}

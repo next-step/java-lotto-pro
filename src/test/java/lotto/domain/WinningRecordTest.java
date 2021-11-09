@@ -20,19 +20,19 @@ public class WinningRecordTest {
 	@BeforeEach
 	void setUp() {
 		ranks = new ArrayList<>();
-		ranks.add(Rank.FOURTH_PLACE);
-		ranks.add(Rank.FOURTH_PLACE);
-		ranks.add(Rank.THIRD_PLACE);
+		ranks.add(Rank.FOURTH);
+		ranks.add(Rank.FOURTH);
+		ranks.add(Rank.THIRD);
 		lottoRecord = new WinningRecord(ranks);
 	}
 
 	@DisplayName("로또 당첨 개수 반환")
 	@Test
 	public void getPlaceCount() {
-		int secondPlaceCount = lottoRecord.getPlaceCount(Rank.FOURTH_PLACE);
+		int secondPlaceCount = lottoRecord.getPlaceCount(Rank.FOURTH);
 		assertThat(secondPlaceCount).isEqualTo(2);
 
-		secondPlaceCount = lottoRecord.getPlaceCount(Rank.THIRD_PLACE);
+		secondPlaceCount = lottoRecord.getPlaceCount(Rank.THIRD);
 		assertThat(secondPlaceCount).isEqualTo(1);
 	}
 

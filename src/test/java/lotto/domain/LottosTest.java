@@ -49,7 +49,7 @@ public class LottosTest {
 
 	@DisplayName("로또 순위 match")
 	@ParameterizedTest
-	@EnumSource(names = {"FIRST_PLACE", "SECOND_PLACE"})
+	@EnumSource(names = {"FIRST", "SECOND"})
 	void lottosRankMatch(Rank rank) {
 		Lotto winninglotto = new Lotto(
 			Arrays.asList(1, 2, 3, 4, 5, 6)
