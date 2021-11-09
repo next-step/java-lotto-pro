@@ -1,31 +1,31 @@
 package step3.view;
 
-import static step3.Constant.*;
-import static step3.winner.WinningAmount.*;
+import java.math.BigDecimal;
 
-import step3.Constant;
 import step3.LottoPapers;
-import step3.winner.WinningAmount;
+import step3.winner.Winner;
 
 public class ReturnView implements ResultView {
+
+	private static final String MESSAGE_BUY_COUNT = "%s개를 구매했습니다.";
+	private static final String MESSAGE_WINNING_STATISTICS = "당첨 통계";
+	private static final String MESSAGE_PERFORATED_LINE = "---------";
+	private static final String MESSAGE_TOTAL_YIELD = "총 수익률은 %d 입니다.";
 
 	public void purchasedLottoPrint(LottoPapers lottoPapers) {
 		System.out.println(lottoPapers);
 	}
 
 	public void purchasedCount(int size) {
-		System.out.println(String.format("%s개를 구매했습니다.", size));
+		System.out.println(String.format(MESSAGE_BUY_COUNT, size));
 	}
 
-	public void statisticsPrintAndYield(int yield) {
-		System.out.println("당첨 통계");
-		System.out.println("---------");
-		StringBuilder sb = new StringBuilder();
-		sb.append(THREE.getMessage()).append(WinningAmount.THREE.getMatch()).append(EACH).append(Constant.ENTER);
-		sb.append(FOUR.getMessage()).append(WinningAmount.FOUR.getMatch()).append(EACH).append(ENTER);
-		sb.append(FIVE.getMessage()).append(WinningAmount.FIVE.getMatch()).append(EACH).append(ENTER);
-		sb.append(SIX.getMessage()).append(WinningAmount.SIX.getMatch()).append(EACH).append(ENTER);
-		sb.append(TOTAL_YIELD).append(yield).append(END_OF_WORD);
-		System.out.println(sb);
+	public void statisticsPrint(Winner winner) {
+		System.out.println(MESSAGE_WINNING_STATISTICS);
+		System.out.println(MESSAGE_PERFORATED_LINE);
+		System.out.println(winner);
 	}
+
+	public void yieldPrint(BigDecimal yield) {
+		System.out.println(String.format(MESSAGE_TOTAL_YIELD, yield));	}
 }
