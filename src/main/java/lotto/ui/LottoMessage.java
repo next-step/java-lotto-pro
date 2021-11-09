@@ -10,6 +10,7 @@ public class LottoMessage {
     public static final String WRONG_LOTTO_NUMBER_SIZE_MESSAGE = "입력하신 로또의 개수를 확인 해 주세요.";
     public static final String EXCEED_MANUAL_LOTTO_SIZE_MESSAGE = "수동 로또 구매 수를 확인해 주세요.";
     public static final String WRONG_LOTTO_NUMBER_INPUT_MESSAGE = "수동 입력 로또 번호를 확인해 주세요.";
+    public static final String WRONG_BONUS_NUMBER_INPUT_MESSAGE = "보너스 번호 입력을 확인해 주세요.";
     public static final String WRONG_LOTTO_RANKING_STATUS_MESSAGE = "잘못 들어온 로또 당첨 순위입니다.";
 
     public static final String ASK_BUY_PRICE_MESSAGE = "구입금액을 입력해 주세요.";

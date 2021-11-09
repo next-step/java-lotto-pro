@@ -19,12 +19,11 @@ public class LottoController {
         showBuyStats(buyAmount, lottoNumbersGroup);
 
         String prizeLottoNumbersText = inputPrizeLottoNumbers();
-        LottoNumbers prizeLottoNumbers = new LottoNumbers(prizeLottoNumbersText);
 
         int bonusNumber = inputBonusNumber();
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
-        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers, bonusLottoNumber);
+        PrizeLottoNumbers prizeLottoNumbers = new PrizeLottoNumbers(prizeLottoNumbersText, bonusNumber);
+        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers);
         showResults(buyAmount, lottoResults);
     }
 

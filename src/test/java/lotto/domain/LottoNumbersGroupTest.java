@@ -44,7 +44,7 @@ public class LottoNumbersGroupTest {
 
     @DisplayName("로또 숫자 수동 그룹 생성 테스트")
     @Test
-    void generateManualLottoNumberGroupTest() throws Exception {
+    void generateManualLottoNumberGroupTest() {
         String[] myLottoNumbers = new String[]{"1,2,3,4,5,6", "2,3,4,13,12,14", "42,12,24,32,11,15"};
         LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(myLottoNumbers);
         assertThat(lottoNumbersGroup).isEqualTo(new LottoNumbersGroup(getExampleLottoNumbers()));
@@ -59,10 +59,11 @@ public class LottoNumbersGroupTest {
     @Test
     void getLottoResultFromLottoNumberGroupTest() {
         String[] myLottoNumbers = new String[]{"1,2,3,4,5,6", "2,3,4,13,12,14", "27,13,25,35,9,15"};
-        LottoNumber bonusLottoNumber = new LottoNumber(44);
+        int bonusLottoNumber = 44;
+        PrizeLottoNumbers prizeLottoNumbers = new PrizeLottoNumbers(this.prizeLottoNumbers, bonusLottoNumber);
         LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(myLottoNumbers);
         // when
-        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers, bonusLottoNumber);
+        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers);
         // then
         assertThat(lottoResults.getMatchAmount(3, false)).isEqualTo(1);
         assertThat(lottoResults.getMatchAmount(6, false)).isEqualTo(1);

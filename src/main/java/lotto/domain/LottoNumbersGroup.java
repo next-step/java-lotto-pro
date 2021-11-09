@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.WrongLottoNumbersInputException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -48,11 +46,10 @@ public class LottoNumbersGroup {
         return lottoNumbersGroup;
     }
 
-    public LottoResults getLottoResults(LottoNumbers prizeLottoNumbers, LottoNumber bonusLottoNumber) {
+    public LottoResults getLottoResults(PrizeLottoNumbers prizeLottoNumbers) {
         List<LottoResult> lottoResults = new ArrayList<>();
         for (LottoNumbers lottoNumbers : lottoNumbersGroup) {
-            LottoResult lottoResult = lottoNumbers.getLottoResult(prizeLottoNumbers, bonusLottoNumber);
-            lottoResults.add(lottoResult);
+            lottoResults.add(prizeLottoNumbers.getLottoResult(lottoNumbers));
         }
 
         return new LottoResults(lottoResults);
