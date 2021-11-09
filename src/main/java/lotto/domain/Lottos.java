@@ -10,22 +10,20 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public WinningResult winningResult(Lotto winningNumber) {
+    public WinningResult winningResult(Lotto winningNumber, LottoNumber bonusNumber) {
         Map<Rank, Integer> winningResult = new EnumMap<>(Rank.class);
 
         for (Lotto lotto : lottos) {
-            int winningNumberMatchCount = lotto.winningNumberMatchCount(winningNumber);
-            Rank rank = Rank.of(winningNumberMatchCount);
+            WinningNumberMatchResult winningNumberMatchResult = lotto.winningNumberMatch(winningNumber, bonusNumber);
+            Rank rank = winningNumberMatchResult.rank();
             if (rank.isPrize()) {
-                winningResultAccumulate(winningResult, winningNumberMatchCount);
+                winningResultAccumulate(winningResult, rank);
             }
         }
         return new WinningResult(winningResult);
     }
 
-    private void winningResultAccumulate(Map<Rank, Integer> winningResult, int winningNumberMatchCount) {
-        Rank rank = Rank.of(winningNumberMatchCount);
-
+    private void winningResultAccumulate(Map<Rank, Integer> winningResult, Rank rank) {
         if (winningResult.putIfAbsent(rank, 0) == null) {
             winningResult.put(rank, winningResult.get(rank) + 1);
         }

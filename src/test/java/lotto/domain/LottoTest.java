@@ -27,16 +27,19 @@ class LottoTest {
         return Stream.of(
                 arguments(lottoNumbers, Stream.of(1,2,3,11,22,33)
                         .map(LottoNumber::new)
-                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), 3),
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), 3, new LottoNumber(45), false),
                 arguments(lottoNumbers, Stream.of(1,2,3,4,11,22)
                         .map(LottoNumber::new)
-                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), 4),
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), 4, new LottoNumber(45), false),
                 arguments(lottoNumbers, Stream.of(1,2,3,4,5,11)
                         .map(LottoNumber::new)
-                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), 5),
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), 5, new LottoNumber(45), false),
+                arguments(lottoNumbers, Stream.of(1,2,3,4,5,11)
+                        .map(LottoNumber::new)
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), 5, new LottoNumber(6), true),
                 arguments(lottoNumbers, Stream.of(1,2,3,4,5,6)
                         .map(LottoNumber::new)
-                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), 6)
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), 6, new LottoNumber(45), false)
         );
 
     }
@@ -77,14 +80,18 @@ class LottoTest {
     @DisplayName("당첨 번호 일치 계산")
     @ParameterizedTest
     @MethodSource("matchCalculationParametersProvider")
-    void matchCalculation(List<LottoNumber> lottoNumber, Lotto winningNumber, int winningNumberMatchCount) {
+    void matchCalculation(List<LottoNumber> lottoNumber,
+                          Lotto winningNumber,
+                          int winningNumberMatchCount,
+                          LottoNumber bonusNumber,
+                          boolean matchBonus) {
         //given
         Lotto lotto = new Lotto(lottoNumber);
 
         //when
-        int winningNumberMatchResult = lotto.winningNumberMatchCount(winningNumber);
+        WinningNumberMatchResult winningNumberMatchResult = lotto.winningNumberMatch(winningNumber, bonusNumber);
 
         //then
-        assertThat(winningNumberMatchResult).isEqualTo(winningNumberMatchCount);
+        assertThat(winningNumberMatchResult).isEqualTo(new WinningNumberMatchResult(winningNumberMatchCount, matchBonus));
     }
 }
