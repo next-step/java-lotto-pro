@@ -6,10 +6,13 @@ import study.lotto.controller.dto.TicketLotteryBundleResponseDto;
 import study.lotto.controller.dto.WinningStatisticsResponseDto;
 import study.lotto.model.LottoStore;
 import study.lotto.model.Money;
+import study.lotto.model.Rank;
 import study.lotto.model.TicketLotteryBundle;
 import study.lotto.model.WinningLottery;
 import study.lotto.model.WinningStatistics;
 import study.lotto.model.exception.NotEnoughMoneyException;
+
+import java.util.List;
 
 public class LottoService {
     public static TicketLotteryBundleResponseDto orderTicketLotteryBundle(final LottoOrderRequestDto orderRequestDto) {
@@ -26,7 +29,7 @@ public class LottoService {
     public static WinningStatisticsResponseDto fetchWinningStatistics(final LottoWinningNumberRequestDto winningNumberRequestDto, final TicketLotteryBundleResponseDto ticketLotteryBundleResponseDto) {
         final TicketLotteryBundle ticketLotteryBundle = ticketLotteryBundleResponseDto.toEntity();
         final WinningLottery winningLottery = winningNumberRequestDto.toEntity();
-        final WinningStatistics winningStatistics = WinningStatistics.valueOf(ticketLotteryBundle, winningLottery);
-        return new WinningStatisticsResponseDto(winningStatistics);
+        final List<Rank> refereedRanks = winningLottery.match(ticketLotteryBundle);
+        return new WinningStatisticsResponseDto(WinningStatistics.valueOf(refereedRanks));
     }
 }
