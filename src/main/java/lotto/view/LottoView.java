@@ -13,6 +13,7 @@ public class LottoView {
     public static final String MESSAGE_PRINT_LOTTO_RESULT_TITLE = "\n당첨 통계\n---------\n";
     public static final String MESSAGE_EARNING_RATE_ALERT = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     public static final String FORMAT_LOTTO_RANK_STATUS = "%d개 일치 (%d원)- %d개%n";
+    public static final String FORMAT_LOTTO_RANK_SECOND_STATUS = "%d개 일치, 보너스 볼 일치(%d원)- %d개%n";
     public static final String FORMAT_EARNING_RATE = "총 수익률은 %f입니다.";
     public static final String LOTTO_STATUS_START = "[";
     public static final String LOTTO_STATUS_END = "]";
@@ -55,11 +56,19 @@ public class LottoView {
 
         rankStatus.entrySet().stream()
                 .filter(rankStatusEntry -> !LottoRank.NONE.equals(rankStatusEntry.getKey()))
-                .forEach(rankStatusEntry -> sb.append(String.format(FORMAT_LOTTO_RANK_STATUS
+                .forEach(rankStatusEntry -> sb.append(String.format(findLottoRankStatusFormat(rankStatusEntry.getKey())
                         , rankStatusEntry.getKey().getMatchingCount()
                         , rankStatusEntry.getKey().getPrice()
                         , rankStatusEntry.getValue())));
 
         return sb.toString();
+    }
+
+    private static String findLottoRankStatusFormat(LottoRank lottoRank) {
+        if (LottoRank.SECOND.equals(lottoRank)) {
+            return FORMAT_LOTTO_RANK_SECOND_STATUS;
+        }
+
+        return FORMAT_LOTTO_RANK_STATUS;
     }
 }

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.constant.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ class LottoTest {
     @DisplayName("정상 생성 확인")
     void 정상_생성_확인() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int[] numbers = {1, 2, 3, 4, 5, 6};
 
         // when, then
         assertThat(new Lotto(numbers)).isEqualTo(new Lotto(numbers));
@@ -26,7 +25,7 @@ class LottoTest {
     @DisplayName("중복 숫자 에러")
     void 중복_숫자_에러() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 1, 2, 2, 3, 3);
+        int[] numbers = {1, 1, 2, 2, 3, 3};
 
         // when, then
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -37,7 +36,7 @@ class LottoTest {
     @DisplayName("번호 갯수 불일치")
     void 번호_갯수_불일치() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        int[] numbers = {1, 2, 3, 4, 5};
 
         // when, then
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -48,7 +47,7 @@ class LottoTest {
     @DisplayName("상태 출력 확인")
     void 상태_출력_확인() {
         // given
-        List<Integer> numbers = Arrays.asList(6, 5, 4, 3, 2, 1);
+        int[] numbers = {6, 5, 4, 3, 2, 1};
         Lotto lotto = new Lotto(numbers);
 
         // when
@@ -62,15 +61,32 @@ class LottoTest {
     @DisplayName("로또 결과 확인")
     void 로또_결과_확인() {
         // given
-        List<Integer> numbers = Arrays.asList(6, 5, 4, 3, 2, 1);
+        int[] numbers = {6, 5, 4, 3, 2, 1};
         Lotto lotto = new Lotto(numbers);
-        Lotto winningLotto = new Lotto(numbers);
+        int[] winningNumbers = {4, 5, 6, 7, 8, 9};
+        Lotto winningLotto = new Lotto(winningNumbers);
 
         // when
-        LottoRank lottoRank = winningLotto.checkMatchRank(lotto);
+        int matchingCountFromLotto = lotto.getMatchingCountFromLotto(winningLotto);
 
         // then
-        assertThat(lottoRank)
-                .isEqualTo(LottoRank.FIRST);
+        assertThat(matchingCountFromLotto)
+                .isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("보너스 결과 확인")
+    void 보너스_결과_확인() {
+        // given
+        int[] numbers = {6, 5, 4, 3, 2, 1};
+        Lotto lotto = new Lotto(numbers);
+        LottoNumber bonusNumber = new LottoNumber(3);
+
+        // when
+        int matchingCountFromLotto = lotto.getMatchingCountFromNumber(bonusNumber);
+
+        // then
+        assertThat(matchingCountFromLotto)
+                .isEqualTo(1);
     }
 }

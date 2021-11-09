@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import nextstep.utils.Console;
 
 import java.util.ArrayList;
@@ -22,17 +23,32 @@ public class InputView {
         return new Money(Integer.parseInt(Console.readLine()));
     }
 
-    public static Lotto getWinningLotto() {
+    public static WinningLotto getWinningLotto() {
+        Lotto winningLotto = getWinningLottoFromUser();
+        LottoNumber bonusNumber = getBonusNumber();
+
+        return new WinningLotto(winningLotto, bonusNumber);
+    }
+
+    private static Lotto getWinningLottoFromUser() {
         System.out.println(MESSAGE_GET_WINNING_LOTTO);
 
         String input = Console.readLine();
         String[] splitInput = input.split(WINNING_LOTTO_DELIMITER);
 
-        List<Integer> numbers = new ArrayList<>();
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String s : splitInput) {
-            numbers.add(Integer.parseInt(s));
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(s)));
         }
 
-        return new Lotto(numbers);
+        return new Lotto(lottoNumbers);
+    }
+
+    private static LottoNumber getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        String input = Console.readLine();
+
+        return new LottoNumber(Integer.parseInt(input));
     }
 }

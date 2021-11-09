@@ -1,9 +1,9 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoBundle;
 import lotto.domain.LottoResult;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.LottoView;
 
@@ -16,7 +16,7 @@ public class LottoGame {
 
         LottoView.printLottoBundleStatus(lottoBundle);
 
-        Lotto winningLotto = InputView.getWinningLotto();
+        WinningLotto winningLotto = InputView.getWinningLotto();
 
         LottoResult lottoResult = lottoBundle.getLottoResult(winningLotto);
 

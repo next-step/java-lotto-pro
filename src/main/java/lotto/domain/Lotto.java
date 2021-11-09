@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.constant.LottoRank;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -9,14 +7,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import static lotto.constant.LottoConfig.MAX_COUNT_OF_ONE_LINE;
-
 public class Lotto {
+
+    public static final int MAX_COUNT_OF_ONE_LINE = 6;
+    public static final String ERROR_MESSAGE_NUMBER_COUNT = "반드시 로또 한게임당 번호는 %d개 이어야 합니다.";
+    public static final String ERROR_MESSAGE_DUPLICATED_NUMBER = "중복 번호가 존재할 수 없습니다.";
+
     private final List<LottoNumber> lineOfLottoNumber;
 
-    public Lotto(LottoFactory lottoFactory) {
-        List<LottoNumber> lottoNumbers = lottoFactory.generateLineOfLottoNumber();
-
+    public Lotto(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
 
         Collections.sort(lottoNumbers);
@@ -24,17 +23,20 @@ public class Lotto {
         this.lineOfLottoNumber = lottoNumbers;
     }
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(LottoFactory lottoFactory) {
+        this(lottoFactory.generateLineOfLottoNumber());
+    }
+
+    public Lotto(int... numbers) {
+        this(convertIntArrayToLottoNumbers(numbers));
+    }
+
+    private static List<LottoNumber> convertIntArrayToLottoNumbers(int... numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (Integer number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
-
-        validateLottoNumbers(lottoNumbers);
-
-        Collections.sort(lottoNumbers);
-
-        this.lineOfLottoNumber = lottoNumbers;
+        return lottoNumbers;
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -44,7 +46,7 @@ public class Lotto {
 
     private void validateLottoNumberCount(int size) {
         if (size != MAX_COUNT_OF_ONE_LINE) {
-            throw new IllegalArgumentException("반드시 로또 한게임당 번호는 " + MAX_COUNT_OF_ONE_LINE + "개 이어야 합니다.");
+            throw new IllegalArgumentException(String.format(ERROR_MESSAGE_NUMBER_COUNT, MAX_COUNT_OF_ONE_LINE));
         }
     }
 
@@ -52,7 +54,7 @@ public class Lotto {
         Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
 
         if (lottoNumberSet.size() != MAX_COUNT_OF_ONE_LINE) {
-            throw new IllegalArgumentException("반드시 로또 한게임당 번호는 " + MAX_COUNT_OF_ONE_LINE + "개 이어야 합니다.");
+            throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED_NUMBER);
         }
     }
 
@@ -66,12 +68,16 @@ public class Lotto {
         return lottoStatus;
     }
 
-    public LottoRank checkMatchRank(Lotto lotto) {
-        int matchingNumberCount = (int) lineOfLottoNumber.stream()
+    public int getMatchingCountFromLotto(Lotto lotto) {
+        return (int) lineOfLottoNumber.stream()
                 .filter(lotto.lineOfLottoNumber::contains)
                 .count();
+    }
 
-        return LottoRank.findRank(matchingNumberCount);
+    public int getMatchingCountFromNumber(LottoNumber bonusNumber) {
+        return (int) lineOfLottoNumber.stream()
+                .filter(bonusNumber::equals)
+                .count();
     }
 
     @Override
