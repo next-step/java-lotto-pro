@@ -24,11 +24,11 @@ public class LottoStore {
     }
 
     private static List<LottoBalls> createManualLottoBalls(List<String> manualNumbersStrings) {
-        List<LottoBalls> manualLottoBalls = new ArrayList<>();
-        for (String manualNumberString : manualNumbersStrings) {
-            manualLottoBalls.add(new LottoBalls(LottoBallFactory.createLottoBallByStringNumber(manualNumberString)));
-        }
-        return manualLottoBalls;
+        return Collections.unmodifiableList(
+                manualNumbersStrings.stream()
+                        .map(numbersString -> new LottoBalls(LottoBallFactory.createLottoBallByStringNumber(numbersString)))
+                        .collect(Collectors.toList())
+        );
     }
 
     private static List<LottoBalls> createLottoBalls(int tryCount) {
