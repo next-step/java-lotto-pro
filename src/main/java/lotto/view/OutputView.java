@@ -11,6 +11,7 @@ public class OutputView {
     private static final String PRINT_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String PRINT_PURCHASE_QUANTITY = "%s개를 구매했습니다.\n";
     private static final String PRINT_INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String PRINT_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String PRINT_WINNING_STATISTICS = "당첨 통계\n---------";
     private static final String PRINT_WINNING_STATISTICS_RESULT = "%d개 일치 (%d원)- %s개\n";
 
@@ -34,6 +35,10 @@ public class OutputView {
 
     public static void printInputWinningNumbers() {
         System.out.println(PRINT_INPUT_WINNING_NUMBERS);
+    }
+
+    public static void printInputLottoBonusNumber() {
+        System.out.println(PRINT_INPUT_BONUS_NUMBER);
     }
 
     public static void printWinningStatistics(LottoResult lottoResult) {

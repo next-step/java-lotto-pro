@@ -1,13 +1,21 @@
 package lotto.controller;
 
 import lotto.domain.LottoIssue;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPurchase;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 
-import static lotto.view.InputView.*;
-import static lotto.view.OutputView.*;
+import static lotto.view.InputView.inputBonusNumber;
+import static lotto.view.InputView.inputPurchaseAmount;
+import static lotto.view.InputView.inputWinningNumbers;
+import static lotto.view.OutputView.printInputLottoBonusNumber;
+import static lotto.view.OutputView.printInputWinningNumbers;
+import static lotto.view.OutputView.printLottoNumber;
+import static lotto.view.OutputView.printPurchaseAmount;
+import static lotto.view.OutputView.printPurchaseQuantity;
+import static lotto.view.OutputView.printWinningStatistics;
 
 public class LottoController {
 
@@ -18,8 +26,14 @@ public class LottoController {
         printLottoNumber(lottoTicket);
 
         LottoNumbers lottoWinningNumbers = inputLottoWinningNumbers();
+        LottoNumber lottoBonusNumber = inputLottoBonusNumber();
 
         play(lottoPurchase, lottoTicket, lottoWinningNumbers);
+    }
+
+    private LottoNumber inputLottoBonusNumber() {
+        printInputLottoBonusNumber();
+        return new LottoNumber(inputBonusNumber());
     }
 
     private void play(LottoPurchase lottoPurchase, LottoTicket lottoTicket, LottoNumbers lottoWinningNumbers) {

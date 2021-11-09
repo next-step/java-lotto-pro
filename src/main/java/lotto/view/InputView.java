@@ -23,6 +23,10 @@ public class InputView {
         return splitWinningNumbers(SCAN.nextLine());
     }
 
+    public static int inputBonusNumber() {
+        return Integer.parseInt(SCAN.nextLine());
+    }
+
     private static List<Integer> splitWinningNumbers(String inputWinningNumbers) {
         validateNullOrEmpty(inputWinningNumbers);
         return stream(inputWinningNumbers.split(SEPARATOR_COMMA))
