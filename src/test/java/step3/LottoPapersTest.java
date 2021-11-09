@@ -10,6 +10,10 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import step3.lotto.BonusBall;
+import step3.lotto.LottoNumber;
+import step3.lotto.LottoNumbers;
+import step3.lotto.LottoPapers;
 import step3.winner.Rank;
 
 class LottoPapersTest {

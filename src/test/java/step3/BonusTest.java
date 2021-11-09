@@ -5,6 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import step3.lotto.BonusBall;
+import step3.lotto.LottoNumbers;
+
 public class BonusTest {
 
 	@ParameterizedTest

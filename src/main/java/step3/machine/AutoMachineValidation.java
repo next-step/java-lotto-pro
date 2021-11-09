@@ -1,6 +1,6 @@
 package step3.machine;
 
-import static step3.LottoNumbers.*;
+import static step3.lotto.LottoNumbers.*;
 
 public class AutoMachineValidation implements MachineValidation{
 	@Override

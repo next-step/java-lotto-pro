@@ -8,6 +8,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import step3.lotto.BonusBall;
+import step3.lotto.LottoNumbers;
+
 class LottoNumbersTest {
 
 	@Test

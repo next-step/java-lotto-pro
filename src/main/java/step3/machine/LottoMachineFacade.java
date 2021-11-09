@@ -2,9 +2,9 @@ package step3.machine;
 
 import java.math.BigDecimal;
 
-import step3.BonusBall;
-import step3.LottoNumbers;
-import step3.LottoPapers;
+import step3.lotto.BonusBall;
+import step3.lotto.LottoNumbers;
+import step3.lotto.LottoPapers;
 import step3.Money;
 import step3.view.InputView;
 import step3.view.ResultView;

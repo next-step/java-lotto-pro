@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import step3.lotto.LottoPapers;
 import step3.machine.AutoLottoMachine;
 import step3.machine.AutoMachineValidation;
 import step3.machine.Machine;

@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import step3.LottoNumber;
-import step3.LottoNumbers;
-import step3.LottoPapers;
+import step3.lotto.LottoNumber;
+import step3.lotto.LottoNumbers;
+import step3.lotto.LottoPapers;
 import step3.Money;
 import step3.RandomUtils;
 

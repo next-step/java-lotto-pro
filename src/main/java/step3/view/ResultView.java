@@ -2,7 +2,7 @@ package step3.view;
 
 import java.math.BigDecimal;
 
-import step3.LottoPapers;
+import step3.lotto.LottoPapers;
 import step3.winner.Winner;
 
 public interface ResultView {

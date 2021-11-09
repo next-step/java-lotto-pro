@@ -1,4 +1,4 @@
-package step3;
+package step3.lotto;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import step3.lotto.LottoNumber;
+
 public class LottoNumberTest {
 
 	@DisplayName("로또 번호는 1 ~ 45까지 숫자이어야합니다.")

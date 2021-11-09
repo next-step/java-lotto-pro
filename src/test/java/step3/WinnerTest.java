@@ -16,6 +16,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import step3.lotto.BonusBall;
+import step3.lotto.LottoNumbers;
+import step3.lotto.LottoPapers;
 import step3.winner.Rank;
 import step3.winner.Winner;
 import step3.winner.WinningMoney;
