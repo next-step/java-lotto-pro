@@ -24,18 +24,7 @@ public class LottoResult {
         if(!lottoWinningPrice.isView()){
             return;
         }
-        if(lottoWinningPrice == LottoWinningPrice.BONUS){
-            winningBonus();
-            return;
-        }
         matchCounts.put(lottoWinningPrice, matchCounts.get(lottoWinningPrice) + 1);
-    }
-
-    public void winningBonus() {
-        if(matchCounts.get(LottoWinningPrice.FIVE) > 0){
-            matchCounts.put(LottoWinningPrice.FIVE, matchCounts.get(LottoWinningPrice.FIVE) - 1);
-        }
-        matchCounts.put(LottoWinningPrice.BONUS, matchCounts.get(LottoWinningPrice.BONUS) + 1);
     }
 
     public void calculateYield(long buyPrice) {
