@@ -8,19 +8,9 @@ public class LottoNumbers {
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public LottoNumbers(List<String> lottoNumbers) {
-        validateNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
                                 .map(l -> new LottoNumber(Integer.parseInt(l)))
                                 .collect(Collectors.toList());
-    }
-
-    private void validateNumbers(List<String> lottoNumbers) {
-        lottoNumbers.stream()
-                .filter(l -> Integer.parseInt(l) < LottoNumber.LOTTO_START_NUMBER || Integer.parseInt(l) > LottoNumber.LOTTO_END_NUMBER)
-                .findAny()
-                .ifPresent(l -> {
-                    throw new IllegalArgumentException("로또 번호 범위는 1 ~ 45 입니다.");
-                });
     }
 
     public long compare(LottoNumbers winningNumbers) {
@@ -29,7 +19,7 @@ public class LottoNumbers {
                         .count();
     }
 
-    private boolean isContainNumber(LottoNumber lottoNumber) {
+    protected boolean isContainNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
