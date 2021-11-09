@@ -5,8 +5,9 @@ import java.util.regex.Pattern;
 
 import step3.view.exception.CommaSeparatedNumbersException;
 import step3.view.exception.EnterNumberIsOnlyIntegerException;
-import step3.view.exception.EnterNumberIsRnageSixExpcetion;
+import step3.view.exception.EnterNumberIsRangeSixException;
 import step3.view.exception.LastCommaException;
+import step3.view.exception.ViewException;
 
 public class RequestView implements InputView {
 
@@ -23,9 +24,8 @@ public class RequestView implements InputView {
 		int insertMoney = 0;
 		try {
 			System.out.println(ENTER_MONEY);
-			return insertMoney = Integer.parseInt(input());
+			return Integer.parseInt(input());
 		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
 			insertMoney();
 		}
 		return insertMoney;
@@ -35,8 +35,8 @@ public class RequestView implements InputView {
 		int insertBonusBall = 0;
 		try {
 			System.out.println(ENTER_BONUS_BALL);
-			return insertBonusBall = Integer.parseInt(input());
-		} catch (IllegalArgumentException e) {
+			return Integer.parseInt(input());
+		} catch (ViewException e) {
 			System.out.println(e.getMessage());
 			insertBonusBall();
 		}
@@ -51,7 +51,7 @@ public class RequestView implements InputView {
 			insertLottoNumber = input();
 			validationInputWinningNumber(insertLottoNumber);
 			return insertLottoNumber;
-		} catch (IllegalArgumentException ex) {
+		} catch (ViewException ex) {
 			System.out.println(ex.getMessage());
 			insertLottoNumber();
 		}
@@ -72,7 +72,7 @@ public class RequestView implements InputView {
 		}
 
 		if (!isMatch(NUMBER_SIZE_SIX,input)) {
-			throw new EnterNumberIsRnageSixExpcetion();
+			throw new EnterNumberIsRangeSixException();
 		}
 	}
 
