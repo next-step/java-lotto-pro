@@ -14,11 +14,11 @@ public class LottoNumberGenerator {
     }
 
     public Collection<LottoNumbers> generateLottoNumbersCollection() {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        List<LottoNumbers> lottoNumbersCollection = new ArrayList<>();
         int lottoCount = payment.getLottoCount();
         for (int i = 0; i < lottoCount; i++) {
-            lottoNumbers.add(new LottoNumbers(RandomNumberSupplier.generateNumbers()));
+            lottoNumbersCollection.add(new LottoNumbers(RandomNumberSupplier.generateNumbers()));
         }
-        return lottoNumbers;
+        return lottoNumbersCollection;
     }
 }

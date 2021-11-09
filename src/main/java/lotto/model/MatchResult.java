@@ -6,38 +6,38 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import lotto.model.enums.MatchCount;
+import lotto.model.enums.Rank;
 
 public class MatchResult {
     private static final int BREAK_EVEN_RATE = 1;
 
-    private final Map<MatchCount, Integer> matchCountToCount;
+    private final Map<Rank, Integer> rankToCount;
     private final double rateOfReturn;
 
-    public MatchResult(Payment payment, MatchCount... matchCounts) {
-        this(payment, Arrays.asList(matchCounts));
+    public MatchResult(Payment payment, Rank... ranks) {
+        this(payment, Arrays.asList(ranks));
     }
 
-    public MatchResult(Payment payment, List<MatchCount> matchCounts) {
-        matchCountToCount = new HashMap<>();
+    public MatchResult(Payment payment, List<Rank> ranks) {
+        rankToCount = new HashMap<>();
         initialize();
 
         int prizeMoney = 0;
-        for (MatchCount matchCount : matchCounts) {
-            matchCountToCount.merge(matchCount, 1, Integer::sum);
-            prizeMoney += matchCount.getWinningMoney();
+        for (Rank rank : ranks) {
+            rankToCount.merge(rank, 1, Integer::sum);
+            prizeMoney += rank.getWinningMoney();
         }
         rateOfReturn = payment.getRateOfReturn(prizeMoney);
     }
 
     private void initialize() {
-        for (MatchCount value : MatchCount.values()) {
-            matchCountToCount.put(value, 0);
+        for (Rank value : Rank.values()) {
+            rankToCount.put(value, 0);
         }
     }
 
-    public Map<MatchCount, Integer> getMatchCountToCount() {
-        return matchCountToCount;
+    public Map<Rank, Integer> getRankToCount() {
+        return rankToCount;
     }
 
     public double getRateOfReturn() {
@@ -48,8 +48,8 @@ public class MatchResult {
         return rateOfReturn < BREAK_EVEN_RATE;
     }
 
-    public int getCount(MatchCount matchCount) {
-        return matchCountToCount.get(matchCount);
+    public int getCount(Rank rank) {
+        return rankToCount.get(rank);
     }
 
     @Override
@@ -62,11 +62,11 @@ public class MatchResult {
         }
         MatchResult other = (MatchResult)obj;
         return Double.compare(other.rateOfReturn, rateOfReturn) == 0
-            && matchCountToCount.equals(other.matchCountToCount);
+            && rankToCount.equals(other.rankToCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matchCountToCount, rateOfReturn);
+        return Objects.hash(rankToCount, rateOfReturn);
     }
 }

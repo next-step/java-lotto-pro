@@ -10,8 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.model.enums.MatchCount;
-
 public class LottoNumbersTest {
     @ParameterizedTest
     @DisplayName(NUMBER_SIZE + "개의 숫자로 구성되어 있지 않을 경우 예외 발생")
@@ -24,10 +22,10 @@ public class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("provideNumberAndExpectedResult")
-    void getMatchCount(int[] numbers, int expectedMatchCount) {
+    void getCountOfMatch(int[] numbers, int countOfMatch) {
         LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-        assertThat(winningNumbers.match(lottoNumbers)).isEqualTo(MatchCount.valueOf(expectedMatchCount));
+        assertThat(winningNumbers.getCountOfMatch(lottoNumbers)).isEqualTo(countOfMatch);
     }
 
     private static Stream<int[]> provideIllegalNumbers() {

@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import lotto.model.enums.MatchCount;
+import lotto.model.enums.Rank;
 
 public class MatchResultTest {
     private static final int PAYMENT = 14000;
@@ -13,16 +13,16 @@ public class MatchResultTest {
 
     @BeforeEach
     void setUp() {
-        matchResult = new MatchResult(new Payment(PAYMENT), MatchCount.THREE);
+        matchResult = new MatchResult(new Payment(PAYMENT), Rank.FIFTH);
     }
 
     @Test
-    void getMatchCountToCount() {
-        assertThat(matchResult.getMatchCountToCount()).hasSize(MatchCount.values().length);
+    void getRankToCount() {
+        assertThat(matchResult.getRankToCount()).hasSize(Rank.values().length);
     }
 
     @Test
     void getRateOfReturn() {
-        assertThat(matchResult.getRateOfReturn()).isEqualTo(((double)MatchCount.THREE.getWinningMoney()) / PAYMENT);
+        assertThat(matchResult.getRateOfReturn()).isEqualTo(((double)Rank.FIFTH.getWinningMoney()) / PAYMENT);
     }
 }
