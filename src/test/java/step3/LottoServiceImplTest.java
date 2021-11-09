@@ -1,69 +1,54 @@
 package step3;
 
+import static org.assertj.core.api.Assertions.*;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import step3.domain.LottoNumber;
+import step3.domain.LottoNumbers;
 import step3.domain.LottoRank;
+import step3.domain.LottoService;
+import step3.domain.WinningLotto;
+import step3.domain.strategy.numbers.ManualLottoNumbers;
 import step3.domain.strategy.numbers.NumbersStrategy;
 import step3.dto.LottoResultDto;
+import step3.dto.LottoStatisticsResponseDto;
+import step3.service.LottoServiceImpl;
 
 public class LottoServiceImplTest {
 
-    // Todo 수익률 계산은 LottoRanks로 이동함
-    // @ParameterizedTest
-    // @CsvSource(value = {
-    //     "1000:1",
-    //     "5000:5",
-    // }, delimiter = ':')
-    // @DisplayName("투자금에 맞는 로또 구매갯수 검증")
-    // void buyLotto_구매된_로또갯수(int amount, int expected) {
-    //     // given
-    //     LottoBuyRequestDto lottoBuyRequestDto = new LottoBuyRequestDto(amount); // 로또구매 금액 입력받기
-    //
-    //     // when
-    //     LottoService lottoService = new LottoServiceImpl();
-    //     LottoBuyResponseDto lottoBuyResponseDto = lottoService.buyAutoLotto(lottoBuyRequestDto,
-    //         new RandomLottoNumbers());// 로또구매
-    //
-    //     // then
-    //     int buyLottoSize = lottoBuyResponseDto.getBuyLottoListToString().size(); // 구매된 로또 갯수
-    //     assertThat(buyLottoSize).isEqualTo(expected); // 비교
-    // }
+    @ParameterizedTest
+    @MethodSource("getResultStatisticsGenerateData")
+    @DisplayName("구입한 로또번호, 지난주 로또번호, 보너스번호를 입력받고, 로또출력(LottoResultDto) 리턴객체 일치 검증")
+    void getResultStatistics(
+        List<NumbersStrategy> numbersStrategy,
+        int[] winLottoNumbers,
+        int bonusNumber,
+        LottoResultDto expectedLottoResultDto
+    ) {
+        // given
+        int amount = 2000;
+        // when
+        LottoService lottoService = new LottoServiceImpl();
+        lottoService.registerBuyAmount(amount);
+        lottoService.registerManualLottoBuy(numbersStrategy);
+        lottoService.buyAutoLotto();
+        lottoService.winningLottoNumber(new ManualLottoNumbers(winLottoNumbers), bonusNumber);
 
-    // Todo 다시 만들기
-    // @ParameterizedTest
-    // @MethodSource("getResultStatisticsGenerateData")
-    // @DisplayName("구입한 로또번호, 지난주 로또번호, 보너스번호를 입력받고, 로또출력(LottoResultDto) 리턴객체 일치 검증")
-    // void getResultStatistics(
-    //     NumbersStrategy numbersStrategy,
-    //     int[] winLottoNumbers,
-    //     int bonusNumber,
-    //     LottoResultDto expectedLottoResultDto
-    // ) {
-    //     // given
-    //     int amount = 1000;
-    //     LottoBuyRequestDto lottoBuyRequestDto = new LottoBuyRequestDto(amount);
-    //
-    //     // when
-    //     LottoService lottoService = new LottoServiceImpl();
-    //     LottoBuyResponseDto lottoBuyResponseDto = lottoService.buyLotto(lottoBuyRequestDto, numbersStrategy);
-    //
-    //     LottoStatisticsRequestDto lottoStatisticsRequestDto = new LottoStatisticsRequestDto();
-    //
-    //     WinningLotto winningLotto = WinningLotto.of(winLottoNumbers, bonusNumber);
-    //     lottoStatisticsRequestDto.mapAmount(new Amount(amount));
-    //     lottoStatisticsRequestDto.mapWinningLotto(winningLotto);
-    //     lottoStatisticsRequestDto.mapBuyLottoList(lottoBuyResponseDto.getBuyLottoList());
-    //
-    //     LottoStatisticsResponseDto lottoStatisticsResponseDto = lottoService.getResultStatistics(
-    //         lottoStatisticsRequestDto);
-    //
-    //     // then
-    //     List<LottoResultDto> lottoResultDtos = lottoStatisticsResponseDto.getLottoResultDtos();
-    //     assertThat(lottoResultDtos).contains(expectedLottoResultDto); // 예상 통계결과 객체 확인
-    // }
+        LottoStatisticsResponseDto lottoStatisticsResponseDto = lottoService.resultStatistics();
+
+        // then
+        List<LottoResultDto> lottoResultDtos = lottoStatisticsResponseDto.getLottoResultDtos();
+        assertThat(lottoResultDtos).contains(expectedLottoResultDto); // 예상 통계결과 객체 확인
+    }
 
     private static Stream<Arguments> getResultStatisticsGenerateData() {
         return Stream.of(
@@ -80,17 +65,19 @@ public class LottoServiceImplTest {
                 6, new LottoResultDto(5, 30000000, LottoRank.SECOND.name(), 1)),
             Arguments.of(
                 getNumbersStrategy("1,2,3,4,5,6"), parseNumbers("11,12,13,14,15,17"),
-                6, new LottoResultDto(0, 0, LottoRank.NONE.name(), 1))
+                6, new LottoResultDto(0, 0, LottoRank.NONE.name(), 2))
         );
     }
 
-    private static NumbersStrategy getNumbersStrategy(String buyNumbersStr) {
-        return new NumbersStrategy() {
+    private static List<NumbersStrategy> getNumbersStrategy(String buyNumbersStr) {
+        List<NumbersStrategy> result = new ArrayList<>();
+        result.add(new NumbersStrategy() {
             @Override
             public int[] getNumbers() {
                 return parseNumbers(buyNumbersStr);
             }
-        };
+        });
+        return result;
     }
 
     private static int[] parseNumbers(String inputNumbers) {
