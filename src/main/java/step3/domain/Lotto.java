@@ -1,27 +1,26 @@
 package step3.domain;
 
 import static java.text.MessageFormat.*;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
 
-    private static final int LOTTO_LENGTH = 6;
+    public static final int LOTTO_LENGTH = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(final LottoNumber... lottoNumbers) {
+    public Lotto(final List<LottoNumber> lottoNumbers) {
         verifyLottoNumbersLength(lottoNumbers);
 
-        this.lottoNumbers = Arrays.asList(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private boolean isAvailableLottoNumbersLength(final LottoNumber[] lottoNumbers) {
-        return lottoNumbers.length == LOTTO_LENGTH;
+    private boolean isAvailableLottoNumbersLength(final List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.size() == LOTTO_LENGTH;
     }
 
-    private void verifyLottoNumbersLength(final LottoNumber[] lottoNumbers) {
+    private void verifyLottoNumbersLength(final List<LottoNumber> lottoNumbers) {
         if (!isAvailableLottoNumbersLength(lottoNumbers)) {
             throw new IllegalArgumentException(format("로또는 {0}개의 숫자로 구성되어야 합니다.", LOTTO_LENGTH));
         }

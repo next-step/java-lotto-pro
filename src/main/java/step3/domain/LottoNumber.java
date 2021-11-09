@@ -6,8 +6,8 @@ import util.Numbers;
 
 public class LottoNumber {
 
-    private static final int MINIMUM_LOTTO_NUMBER = 1;
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+    public static final int MINIMUM_LOTTO_NUMBER = 1;
+    public static final int MAXIMUM_LOTTO_NUMBER = 45;
 
     private final int number;
 
