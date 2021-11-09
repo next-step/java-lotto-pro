@@ -2,10 +2,9 @@ package edu.lotto.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.regex.Pattern;
+import edu.lotto.constants.PatternConstants;
+import edu.lotto.utils.NumberUtil;
+import org.junit.jupiter.api.Test;
 
 /**
  * 로또(자동) Test Code
@@ -14,4 +13,15 @@ import java.util.regex.Pattern;
  */
 public class AutomaticLottoTest {
 
+	@Test
+	void test() {
+		String s = "1, 2, 3, 4, 5, 6".replaceAll(" ", "");
+		System.out.println("s : " + s);
+		String[] winningNumberArray = s.split(PatternConstants.DEFAULT_SEPARATOR_PATTERN);
+		assertThat(winningNumberArray.length == 6).isTrue();
+		for(String n : winningNumberArray) {
+			assertThat(NumberUtil.isNumber(n)).isTrue();
+			assertThat(NumberUtil.isNumberBetweenOneAndFortyFive(Integer.parseInt(n)));
+		}
+	}
 }
