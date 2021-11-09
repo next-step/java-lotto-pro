@@ -1,12 +1,14 @@
-package lotto.view;
+package lotto.console;
 
+import java.util.Arrays;
 import java.util.List;
 
-import lotto.controller.LottoApplicationController;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoShop;
+import lotto.domain.Lottos;
 import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 
 public class OutputView {
 	private static final String PRINT_PURCHASE_QUANTITY = "%d개를 구매했습니다.\n";
@@ -53,10 +55,10 @@ public class OutputView {
 		return lottoNumberStringValue.substring(0, lottoNumberStringValue.length() - 2);
 	}
 
-	public static void printLottoStatisticsBody(List<Lotto> lottos) {
+	public static void printLottoStatisticsBody(Lottos lottos, WinningLotto winningLotto) {
 		double profitSum = 0;
 		for (Rank rank : Rank.values()) {
-			printFifthToThird(rank, lottos);
+			printFifthToThird(rank, rank.countWinners(lottos, winningLotto));
 			printSencod(rank, lottos);
 			printFist(rank, lottos);
 			profitSum += rank.getWinningAmount() * countWinners(rank, lottos);
@@ -65,7 +67,7 @@ public class OutputView {
 		System.out.printf(PRINT_PROFIT_RATE, profitRate);
 	}
 
-	private static void printFifthToThird(Rank rank, List<Lotto> lottos) {
+	private static void printFifthToThird(Rank rank, int winners) {
 		if (rank == Rank.FIFTH || rank == Rank.FOURTH || rank == Rank.THIRD) {
 			System.out.printf(PRINT_WINNING_INFORMATION,
 				rank.getCountOfMatch(),

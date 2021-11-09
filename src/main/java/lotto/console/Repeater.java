@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.console;
 
 import lotto.domain.Money;
 
@@ -22,5 +22,9 @@ public class Repeater {
 
 	public static void set(String setValue) {
 		repeater = setValue.equals("");
+	}
+
+	public static void set(int setValue) {
+		repeater = setValue == -1;
 	}
 }

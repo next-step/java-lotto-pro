@@ -40,7 +40,7 @@ public class LottoNumbers {
 		return NON_MATCHED_NUMBER;
 	}
 
-	public List<LottoNumber>  getLottoNumbers() {
+	public List<LottoNumber> getLottoNumbers() {
 		return Collections.unmodifiableList(lottoNumbers);
 	}
 

@@ -13,20 +13,10 @@ import lotto.domain.Money;
 public class LottoApplicationController {
 
 
-	private static final int PURCHASE_FINISH = 0;
 	private Lottos lottos;
 
-	public void purchaseLotto(int purchaseQuantity) {
-		List<Lotto> lottos = new ArrayList<>();
-		while (continuePurchase(purchaseQuantity)) {
-			lottos.add(LottoShop.sell());
-			purchaseQuantity--;
-		}
-		this.lottos = new Lottos(lottos);
-	}
-
-	private boolean continuePurchase(int purchaseQuantity) {
-		return purchaseQuantity > PURCHASE_FINISH;
+	public void purchaseLotto(Money purchaseAmount) {
+		this.lottos = LottoShop.sell(purchaseAmount);
 	}
 
 	public List<Lotto> recorde(String winningNumbers, int bonusBallNumber) {

@@ -1,9 +1,8 @@
-package lotto.view;
+package lotto.console;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-import lotto.controller.LottoApplicationController;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoShop;
@@ -87,7 +86,6 @@ public class InputView {
 			OutputView.printMessage(exception.getMessage());
 			return -1;
 		}
-
 	}
 
 	private static int validateDuplicateNumbers(String bonusNumber, String winningNumbers) {

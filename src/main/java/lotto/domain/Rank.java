@@ -1,5 +1,6 @@
 package lotto.domain;
 
+
 public enum Rank {
 
 	MISS(0,0),
@@ -23,5 +24,10 @@ public enum Rank {
 
 	public int getWinningAmount() {
 		return winningAmount;
+	}
+
+	public int countWinners(Lottos lottos, WinningLotto winningLotto) {
+		lottos.stream()
+		return 1;
 	}
 }
