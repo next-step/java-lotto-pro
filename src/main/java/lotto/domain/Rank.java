@@ -33,14 +33,6 @@ public enum Rank {
         this.isBonus = isBonus;
     }
 
-    static Rank of(int winningNumberCount) {
-        Map<Boolean, Rank> rank = rankMap.get(winningNumberCount);
-        if (rank == null) {
-            return LOSER;
-        }
-        return rank.get(false);
-    }
-
     static Rank of(int winningNumberCount, boolean matchBonus) {
         Map<Boolean, Rank> rank = rankMap.get(winningNumberCount);
         if (rank == null) {
