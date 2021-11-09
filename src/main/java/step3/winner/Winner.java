@@ -46,6 +46,13 @@ public class Winner {
 			.reduce(0, Integer::sum);
 	}
 
+	public List<Rank> getRank() {
+		return ranks.entrySet().stream()
+			.map(Map.Entry::getKey)
+			.collect(Collectors.toList());
+
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

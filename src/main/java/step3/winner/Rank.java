@@ -7,7 +7,7 @@ public enum Rank {
 	SECOND(5, 30_000_000,"5개 일치, 보너스 볼 일치(30000000원) - %d개\n"),
 	THIRD(5, 1_500_000,"5개 일치 (1500000원)- %d개\n"),
 	FOUR(4, 50_000,"4개 일치 (50000원)- %d개\n"),
-	FIFTH(3, 5_000,"3개 일치 (5000원)- %d개"),
+	FIFTH(3, 5_000,"3개 일치 (5000원)- %d개\n"),
 	MISS(0, 0,"");
 
 	private final int matchCount;
@@ -22,7 +22,7 @@ public enum Rank {
 
 	public static Rank valueOf(int matchCount, boolean isBonusBall) {
 
-		if (THIRD.matchCount == matchCount && isBonusBall) {
+		if (THIRD.matchCount == matchCount && !isBonusBall) {
 			return THIRD;
 		}
 
