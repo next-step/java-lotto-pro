@@ -33,7 +33,7 @@ class LottoStatisticsTest {
     @Test
     void 로또_당첨_통계() {
         // given, when
-        LottoRewardResult result = lottoStatistics.getStatistics(lottoTickets);
+        LottoRewardResult result = lottoStatistics.getLottoRewardResult(lottoTickets);
 
         // then
         Map<LottoReward, Integer> lottoRewardMap = result.getLottoRewardMap();
@@ -47,7 +47,7 @@ class LottoStatisticsTest {
     @Test
     void 수익률() {
         // given
-        LottoRewardResult lottoRewardResult = lottoStatistics.getStatistics(lottoTickets);
+        LottoRewardResult lottoRewardResult = lottoStatistics.getLottoRewardResult(lottoTickets);
 
         // when
         double rateOfProfit = lottoStatistics.getRateOfProfit(lottoTickets, lottoRewardResult);

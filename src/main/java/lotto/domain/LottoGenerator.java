@@ -6,12 +6,12 @@ import java.util.List;
 
 public class LottoGenerator {
 
-    private static final List<Number> numbers = new ArrayList<>();
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_SUBLIST_INDEX = 0;
     private static final int MAX_SUBLIST_INDEX = LottoTicket.LOTTO_NUMBER_COUNT;
     private static final int MINUS_PURCHASE_COUNT = 1;
+    private static final List<Number> numbers = new ArrayList<>();
 
     public LottoGenerator() {
         initNumbers();

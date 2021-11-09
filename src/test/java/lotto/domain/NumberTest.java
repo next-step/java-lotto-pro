@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static lotto.domain.Number.MAX_NUMBER;
+import static lotto.domain.Number.MIN_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -24,6 +26,6 @@ class NumberTest {
         // given, when, then
         assertThatThrownBy(() -> new Number(inputNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호는 1 ~ 45의 숫자만 입력 가능합니다. (입력값: " + inputNumber + ")");
+                .hasMessageContaining("로또 번호는 " + MIN_NUMBER + " ~ " + MAX_NUMBER + "의 숫자만 입력 가능합니다. (입력값: " + inputNumber + ")");
     }
 }

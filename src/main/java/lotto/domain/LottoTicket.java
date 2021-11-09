@@ -21,7 +21,6 @@ public class LottoTicket {
         Set<Number> numberSet = new HashSet<>();
         for (Number number : numbers) {
             validateContainsNumber(numberSet, number);
-            numberSet.add(number);
         }
     }
 
@@ -29,6 +28,7 @@ public class LottoTicket {
         if (numberSet.contains(number)) {
             throw new IllegalArgumentException("중복된 로또 번호가 입력될 수 없습니다. (입력값: " + number.getNumber() + ")");
         }
+        numberSet.add(number);
     }
 
     private void validateNumbersCount(List<Number> numbers) {

@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 public enum LottoReward {
 
     FIRST_PLACE(6, 2000000000),
@@ -24,20 +29,16 @@ public enum LottoReward {
     }
 
     public static boolean isWinning(int matchCount) {
-        for (LottoReward lottoReward : LottoReward.values()) {
-            if (lottoReward.matchCount == matchCount) {
-                return true;
-            }
-        }
-        return false;
+        List<Integer> matchCounts = Arrays.stream(LottoReward.values())
+                .map(lottoReward -> lottoReward.getMatchCount())
+                .collect(Collectors.toList());
+        return matchCounts.contains(matchCount);
     }
 
     public static LottoReward getLottoReward(int matchCount) {
-        for (LottoReward lottoReward : LottoReward.values()) {
-            if (lottoReward.matchCount == matchCount) {
-                return lottoReward;
-            }
-        }
-        return null;
+        Optional<LottoReward> lottoReward = Arrays.stream(LottoReward.values())
+                .filter(l -> l.getMatchCount() == matchCount)
+                .findAny();
+        return lottoReward.orElse(null);
     }
 }

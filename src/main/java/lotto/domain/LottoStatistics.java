@@ -11,7 +11,7 @@ public class LottoStatistics {
         this.winningNumbers = winningNumbers;
     }
 
-    public LottoRewardResult getStatistics(LottoTickets lottoTickets) {
+    public LottoRewardResult getLottoRewardResult(LottoTickets lottoTickets) {
         Map<LottoTicket, Integer> winningCountMap = winningNumbers.getWinningCountMap(lottoTickets);
         Map<Integer, Integer> winningCountStatisticsMap = createWinningCountStatisticsMap(winningCountMap);
         return new LottoRewardResult(createLottoRewardStatisticsMap(winningCountStatisticsMap));
