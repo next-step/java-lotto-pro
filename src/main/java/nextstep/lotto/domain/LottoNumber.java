@@ -9,7 +9,7 @@ import java.util.Objects;
 public class LottoNumber {
 
     private static final Integer LOTTO_MIN_NUMBER = 1;
-    private static final Integer LOTTO_MAX_NUMBER = 9;
+    private static final Integer LOTTO_MAX_NUMBER = 45;
 
     private final Integer lottoNumber;
 
@@ -39,5 +39,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(lottoNumber);
     }
 }

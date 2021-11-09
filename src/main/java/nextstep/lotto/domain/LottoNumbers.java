@@ -1,11 +1,16 @@
 package nextstep.lotto.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LottoNumbers {
+import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_MIDDLE;
+
+public class LottoNumbers implements Iterable<LottoNumber> {
 
     private static final Integer LOTTO_NUMBER_COUNT = 6;
 
@@ -24,5 +29,13 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
+    @Override
+    public Iterator<LottoNumber> iterator() {
+        return lottoNumbers.iterator();
+    }
 
+    @Override
+    public String toString() {
+        return StringUtils.join(lottoNumbers, PURCHASE_LOTTO_VIEW_MIDDLE);
+    }
 }

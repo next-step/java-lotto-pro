@@ -42,4 +42,9 @@ public class LottoCount {
     public int hashCode() {
         return Objects.hash(lottoCount);
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(lottoCount);
+    }
 }

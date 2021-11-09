@@ -12,7 +12,7 @@ public class LottoService {
         PurchaseLottoAmount purchaseLottoAmount = LottoDisplay.inputPurchaseAmount();
         LottoCount lottoCount = new LottoCount(purchaseLottoAmount);
         PurchaseLotto purchaseLotto = lottoCount.purchaseLottoByLottoCount();
-
+        LottoDisplay.printAutoLottoResult(purchaseLotto);
 
     }
 }
