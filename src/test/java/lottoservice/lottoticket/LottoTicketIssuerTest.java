@@ -76,7 +76,16 @@ public class LottoTicketIssuerTest {
 		}).isInstanceOf(InvalidNumberFormatMoneyException.class);
 	}
 
-	@DisplayName("수동으로_로또_발매")
+	@DisplayName("수동으로_로또_한장_발매")
+	@Test
+	public void buyManualTicket() {
+		String numbers = "8, 21, 23, 41, 42, 43";
+		LottoTicket lottoTicket = lottoTicketIssuer.buyManualTicket(numbers);
+
+		assertThat(lottoTicket).isEqualTo(TestLottoDataFactory.getLottoTicket(numbers));
+	}
+
+	@DisplayName("수동으로_로또_여러장_한번에_발매")
 	@Test
 	public void buyManualTickets() {
 		String first = "8, 21, 23, 41, 42, 43";

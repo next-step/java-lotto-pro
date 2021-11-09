@@ -89,7 +89,11 @@ public class LottoTicketIssuer {
 
 	public LottoTickets buyManualTickets(ArrayList<String> numbersText) {
 		return new LottoTickets(numbersText.stream()
-			.map(it -> new LottoTicket(lottoNumbersMaker.makeLottoNumbers(it)))
+			.map(it -> buyManualTicket(it))
 			.collect(Collectors.toList()));
+	}
+
+	public LottoTicket buyManualTicket(String numbers) {
+		return new LottoTicket(lottoNumbersMaker.makeLottoNumbers(numbers));
 	}
 }
