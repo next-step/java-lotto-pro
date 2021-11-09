@@ -6,8 +6,6 @@ import lotto.util.GameRule;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class LottoApplication {
 
@@ -17,8 +15,10 @@ public class LottoApplication {
         String buyPrice = LottoApplication.getBuyPrice();
         LottoMoney lottoMoney = new LottoMoney(buyPrice);
 
-        LottoPapers manualLottoPapers = LottoApplication.getManualLottoPapers(lottoMoney, lottoNumberGenerator);
-        LottoPapers lottoPapers = LottoApplication.getRandomLottoPapers(lottoMoney);
+        LottoPapersGenerator lottoPapersGenerator = new LottoPapersGenerator(lottoMoney, lottoNumberGenerator);
+
+        LottoPapers manualLottoPapers = lottoPapersGenerator.getManualLottoPapers();
+        LottoPapers lottoPapers = lottoPapersGenerator.getRandomLottoPapers();
 
         LottoApplication.printLottoBuyCount(lottoMoney);
 
@@ -26,7 +26,7 @@ public class LottoApplication {
         LottoApplication.printLottoPapers(lottoPapers);
 
         LottoPaper winningLottoPaper = LottoApplication.getWinningLottoPaper(lottoNumberGenerator);
-        LottoNumber bonusLottoNumber = LottoApplication.getBonusNumber(winningLottoPaper);
+        LottoNumber bonusLottoNumber = LottoApplication.getBonusNumber();
 
         WinningLotto winningLotto = new WinningLotto(winningLottoPaper, bonusLottoNumber);
         LottoApplication.printLottoResult(lottoPapers, winningLotto);
@@ -43,11 +43,6 @@ public class LottoApplication {
         return lottoNumberGenerator.createManualLottoNumber(winningNumber);
     }
 
-    private static LottoPapers getRandomLottoPapers(LottoMoney lottoMoney) {
-        int lottoPaperCount = lottoMoney.getLottoPaperCount();
-        return LottoPapers.createLottoPapers(lottoPaperCount);
-    }
-
     private static void printLottoBuyCount(LottoMoney lottoMoney) {
         ResultView.printBuyCountOutput(lottoMoney.getManualLottoPaperCount(), lottoMoney.getLottoPaperCount() );
     }
@@ -61,24 +56,10 @@ public class LottoApplication {
         ResultView.printWinningStatistics(lottoResult);
     }
 
-    private static LottoNumber getBonusNumber(LottoPaper winningLottoPaper) {
+    private static LottoNumber getBonusNumber() {
         InputView.printBonusNumberInput();
         String bonusNumber = Client.getLineConsole();
-        return new LottoNumber(bonusNumber, winningLottoPaper);
+        return new LottoNumber(bonusNumber);
     }
 
-    private static LottoPapers getManualLottoPapers(LottoMoney lottoMoney, LottoNumberGenerator lottoNumberGenerator) {
-
-        List<LottoPaper> manualLottoPapers = new ArrayList<>();
-        InputView.printManualLottoBuyCountInput();
-        int manualLottoBuyCount = lottoMoney.buyManualLottoPaper(Client.getLineConsole());
-
-        InputView.printManualLottoNumberInput();
-
-        for (int i = 0; i < manualLottoBuyCount; i++) {
-            String manualNumber = Client.getLineConsole();
-            manualLottoPapers.add(lottoNumberGenerator.createManualLottoNumber(manualNumber));
-        }
-        return new LottoPapers(manualLottoPapers);
-    }
 }
