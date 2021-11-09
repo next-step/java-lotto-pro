@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.model.GameCount;
-import lotto.model.Games;
-import lotto.model.Checker;
-import lotto.model.WinningNumbers;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -15,7 +12,8 @@ public class LottoApplication {
         ResultView.printPurchasedGameCount(gameCount.getValue());
         Games games = new Games(gameCount.getValue());
         WinningNumbers winningNumbers = InputView.inputWinningNumbers();
-        Checker checker = new Checker(games, winningNumbers);
+        WinningNumber bonusNumber = InputView.inputBonusNumber(winningNumbers);
+        Checker checker = new Checker(games, winningNumbers, bonusNumber);
         ResultView.printResult(checker.getResults());
         ResultView.printEarningRate(purchaseAmount);
     }

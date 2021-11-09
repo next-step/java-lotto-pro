@@ -1,8 +1,11 @@
 package lotto.view;
 
 import lotto.exception.InvalidInputException;
+import lotto.model.BonusNumber;
+import lotto.model.WinningNumber;
 import lotto.model.WinningNumbers;
 import lotto.view.strategy.Input;
+import lotto.view.strategy.InputBonusNumber;
 import lotto.view.strategy.InputPurchaseAmount;
 import lotto.view.strategy.InputWinNumbers;
 
@@ -14,7 +17,7 @@ public class InputView {
 
     /**
      * 로또 구매금액을 입력합니다.
-     *
+     * <p>
      * return 로또 구매금액
      */
     public static int inputPurchaseAmount() {
@@ -41,6 +44,22 @@ public class InputView {
         } catch (InvalidInputException | NumberFormatException e) {
             System.out.println(e.getMessage());
             return inputWinningNumbers();
+        }
+    }
+
+    /**
+     * 로또 보너스번호를 입력합니다.
+     *
+     * @return
+     */
+    public static WinningNumber inputBonusNumber(WinningNumbers winningNumbers) {
+        try {
+            Input input = new InputBonusNumber();
+            String value = input.getValue();
+            return new BonusNumber(value, winningNumbers);
+        } catch (InvalidInputException | NumberFormatException e) {
+            System.out.println(e.getMessage());
+            return inputBonusNumber(winningNumbers);
         }
     }
 
