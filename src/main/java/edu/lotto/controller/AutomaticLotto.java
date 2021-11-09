@@ -77,15 +77,26 @@ public class AutomaticLotto {
 	 */
 	public static int getSecondWinningNumber(List<Integer> winningNumbers) {
 		int secondWinningNumber = 0;
-		MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_MESSAGE);
-		Scanner scan = new Scanner(System.in);
-		secondWinningNumber = scan.nextInt();
-		if(!NumberUtil.isNumber(String.valueOf(secondWinningNumber))
-				|| !NumberUtil.isNumberBetweenOneAndFortyFive(secondWinningNumber)
-				|| winningNumbers.contains(secondWinningNumber)) {
-			MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_ERROR_MESSAGE);
-			secondWinningNumber = getSecondWinningNumber(winningNumbers);
-		}
+		do {
+			MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_MESSAGE);
+			Scanner scan = new Scanner(System.in);
+			secondWinningNumber = scan.nextInt();
+		} while (!isValidBonusNumber(secondWinningNumber, winningNumbers));
 		return secondWinningNumber;
+	}
+
+	/**
+	 * 2등 보너스 숫자 검증
+	 * @param bonusNumber
+	 * @param winningNumbers
+	 * @return
+	 */
+	private static boolean isValidBonusNumber(int bonusNumber, List<Integer> winningNumbers) {
+		if(NumberUtil.isNumber(String.valueOf(bonusNumber))
+			&& NumberUtil.isNumberBetweenOneAndFortyFive(bonusNumber)
+			&& !winningNumbers.contains(bonusNumber)) {
+			return true;
+		}
+		return false;
 	}
 }
