@@ -12,39 +12,46 @@ public class LottoReports {
         this.lottoMoney = lottoMoney;
     }
 
-    public long countOfFirst() {
+    public long getCountOfFirst() {
         return lottoRanks.stream()
             .filter(Rank::isFirst)
             .count();
     }
 
-    public long countOfSecond() {
+    public long getCountOfSecond() {
         return lottoRanks.stream()
             .filter(Rank::isSecond)
             .count();
     }
 
-    public long countOfThird() {
+    public long getCountOfThird() {
         return lottoRanks.stream()
             .filter(Rank::isThird)
             .count();
     }
 
-    public long countOfFifty() {
+    public long getCountOfFourth() {
+        return lottoRanks.stream()
+            .filter(Rank::isFourth)
+            .count();
+    }
+
+    public long getCountOfFifty() {
         return lottoRanks.stream()
             .filter(Rank::isFifth)
             .count();
     }
 
-    public double profitRatio() {
+    public double getProfitRatio() {
         long winningAmount = sumWinningAmount();
-        return lottoMoney.profitRatio(winningAmount);
+        return lottoMoney.calculateProfitRatio(winningAmount);
     }
 
     private long sumWinningAmount() {
-        return countOfFirst() * Rank.FIRST.getWinningMoney()
-            + countOfSecond() * Rank.SECOND.getWinningMoney()
-            + countOfThird() * Rank.THIRD.getWinningMoney()
-            + countOfFifty() * Rank.FIFTH.getWinningMoney();
+        return getCountOfFirst() * Rank.FIRST.getWinningMoney()
+            + getCountOfSecond() * Rank.SECOND.getWinningMoney()
+            + getCountOfThird() * Rank.THIRD.getWinningMoney()
+            + getCountOfFourth() * Rank.FOURTH.getWinningMoney()
+            + getCountOfFifty() * Rank.FIFTH.getWinningMoney();
     }
 }

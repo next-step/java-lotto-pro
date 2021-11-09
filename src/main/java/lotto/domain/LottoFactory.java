@@ -1,26 +1,24 @@
 package lotto.domain;
 
-import static lotto.domain.LottoPattern.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumbersFactory {
-    public static final String COMMA = ", ";
+public class LottoFactory {
+    private static final String COMMA = ", ";
 
-    private LottoNumbersFactory() {
+    private LottoFactory() {
     }
 
-    public static List<Integer> createLottoNumbers() {
+    public static Lotto createLotto() {
         List<Integer> allLottoNumbers = createAllLottoNumbers();
         Collections.shuffle(allLottoNumbers);
         List<Integer> lottoNumbers = allLottoNumbers.subList(
             LottoNumbersSize.LOTTO_NUMBERS_ZERO_SIZE.getSize(), LottoNumbersSize.LOTTO_NUMBERS_SIZE.getSize());
         Collections.sort(lottoNumbers);
-        return lottoNumbers;
+        return new Lotto(lottoNumbers);
     }
 
     private static List<Integer> createAllLottoNumbers() {
@@ -30,18 +28,19 @@ public class LottoNumbersFactory {
             .collect(Collectors.toList());
     }
 
-    public static List<Integer> createManualLottoNumbers(String inputNumbers) {
+    public static Lotto createManualLotto(String inputNumbers) {
         List<Integer> numbers = new ArrayList<>();
         String[] inputNumbersBySplit = inputNumbers.split(COMMA);
         for (String number : inputNumbersBySplit) {
-            validatePositiveNumber(number);
-            numbers.add(Integer.parseInt(number));
+            convertToIntegerAndAddNumber(numbers, number);
         }
-        return numbers;
+        return new Lotto(numbers);
     }
 
-    private static void validatePositiveNumber(String number) {
-        if (!ONLY_POSITIVE_NUMBER.matcher(number).matches()) {
+    private static void convertToIntegerAndAddNumber(List<Integer> numbers, String number) {
+        try {
+            numbers.add(Integer.parseInt(number));
+        } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(Message.NON_POSITIVE_LOTTO_NUMBER_MESSAGE.getMessage());
         }
     }

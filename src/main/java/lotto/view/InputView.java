@@ -1,11 +1,12 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.Scanner;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
 import lotto.domain.LottoMoney;
-import lotto.domain.LottoNumbersFactory;
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinningLotto;
 
 public class InputView {
     private static final Scanner scanner = getScanner();
@@ -24,15 +25,30 @@ public class InputView {
         }
     }
 
-    public static LottoTicket winningNumbersOfLastWeek() {
+    public static WinningLotto createWinningLotto() {
+        return inputBonusNumber(inputWinningNumbersOfLastWeek());
+    }
+
+    public static Lotto inputWinningNumbersOfLastWeek() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String numbers = scanner.nextLine();
         try {
-            List<Integer> winningNumbers = LottoNumbersFactory.createManualLottoNumbers(numbers);
-            return new LottoTicket(winningNumbers);
+            return LottoFactory.createManualLotto(numbers);
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
-            return winningNumbersOfLastWeek();
+            return inputWinningNumbersOfLastWeek();
+        }
+    }
+
+    public static WinningLotto inputBonusNumber(Lotto winningLotto) {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String number = scanner.nextLine();
+        try {
+            LottoNumber lottoNumber = LottoNumber.valueOf(number);
+            return new WinningLotto(winningLotto, lottoNumber);
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            return inputBonusNumber(winningLotto);
         }
     }
 

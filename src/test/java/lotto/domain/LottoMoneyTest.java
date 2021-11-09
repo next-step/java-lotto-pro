@@ -9,40 +9,44 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoMoneyTest {
-    @DisplayName("로또 구매 금액 - 숫자가 아니거나 음수 입력")
+    @DisplayName("로또 구매 금액은 음수나 문자가 될 수 없다")
     @Test
     void lottoMoneyNonPositiveException() {
         assertThatThrownBy(() -> new LottoMoney("abc"))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(Message.NON_POSITIVE_NUMBER_MESSAGE.getMessage());
 
         assertThatThrownBy(() -> new LottoMoney("-123"))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(Message.NON_POSITIVE_NUMBER_MESSAGE.getMessage());
     }
 
-    @DisplayName("로또 구매 금액 - 단위에 맞지 않는 금액 입력")
+    @DisplayName("로또 구매 금액은 1000원 단위만 가능하다")
     @Test
     void lottoMoneyWrongUnitException() {
         assertThatThrownBy(() -> new LottoMoney("0"))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(Message.WRONG_LOTTO_AMOUNT_UNIT.getMessage());
 
         assertThatThrownBy(() -> new LottoMoney("123456"))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(Message.WRONG_LOTTO_AMOUNT_UNIT.getMessage());
     }
 
-    @DisplayName("로또 구매 가능 갯수")
+    @DisplayName("1000원 단위로 로또 구매 가능한 숫자를 구한다")
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "2000,2", "12000, 12", "15000,15", "50000,50"})
     void countOfPossibleLotto(String amount, int expected) {
         LottoMoney lottoMoney = new LottoMoney(amount);
-        assertEquals(expected, lottoMoney.countOfPossibleLotto());
+        assertEquals(expected, lottoMoney.getCountOfPossibleLotto());
     }
 
-    @DisplayName("로또 수익률")
+    @DisplayName("투자금액과 당첨금액을 통해 수익률을 구한다")
     @ParameterizedTest
     @CsvSource(value = {"14000,5000,0.35", "10000,20000,2", "1000000,5000,0"})
     void profitRatio(String lottoAmount, int profitAmount, double expected) {
         LottoMoney lottoMoney = new LottoMoney(lottoAmount);
-        double profitRatio = lottoMoney.profitRatio(profitAmount);
+        double profitRatio = lottoMoney.calculateProfitRatio(profitAmount);
         assertEquals(expected, profitRatio);
     }
 }
