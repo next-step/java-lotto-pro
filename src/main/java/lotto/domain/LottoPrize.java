@@ -19,7 +19,6 @@ public enum LottoPrize {
     }
 
     public static LottoPrize findPrize(long matchCount, boolean matchBonus) {
-        LottoPrize[] values = LottoPrize.values();
         LottoPrize lottoPrize = Arrays.stream(LottoPrize.values())
                                     .filter(l -> l.isMatchCount(matchCount))
                                     .findFirst()
