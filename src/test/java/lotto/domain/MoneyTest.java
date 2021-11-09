@@ -5,13 +5,15 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.exception.IllegalMoneyException;
+import lotto.domain.exception.OverSpendingMoneyException;
+
 public class MoneyTest {
 	@Test
 	@DisplayName("구입을 위한 금액은 0 이상이어야 한다.")
 	void testNoMoney() {
-		assertThatIllegalArgumentException()
-			.isThrownBy(() -> new Money(-1000))
-			.withMessage(Money.NO_MONEY_ERROR);
+		assertThatThrownBy(() -> new Money(-1000))
+			.isInstanceOf(IllegalMoneyException.class);
 	}
 
 	@Test
@@ -25,8 +27,7 @@ public class MoneyTest {
 	@DisplayName("과소비는 허용되지 않는다.")
 	void testNotAllowedOverSpend() {
 		Money money = new Money(10000);
-		assertThatIllegalArgumentException()
-			.isThrownBy(() -> money.spend(20000))
-			.withMessage(Money.OVERSPENDING_ERROR);
+		assertThatExceptionOfType(OverSpendingMoneyException.class)
+			.isThrownBy(() -> money.spend(11000));
 	}
 }

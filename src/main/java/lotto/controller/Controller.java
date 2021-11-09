@@ -7,6 +7,7 @@ import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Statistics;
 import lotto.domain.Store;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -27,7 +28,8 @@ public class Controller {
 		resultView.printPurchasedLottos(lottos);
 
 		List<Integer> winningNumbers = inputView.previousWinningNumber();
-		Lotto winningLotto = Lotto.from(winningNumbers);
+		int bonusNumber = inputView.bonusNumber();
+		WinningLotto winningLotto = new WinningLotto(Lotto.from(winningNumbers), bonusNumber);
 
 		Statistics statistics = new Statistics(winningLotto, lottos);
 		resultView.printStatistics(statistics);

@@ -2,17 +2,18 @@ package lotto.domain;
 
 import java.util.Arrays;
 
+import lotto.domain.exception.IllegalMatchCountException;
+
 public enum Rank {
 	LOSS(0, 0),
 	FIFTH(3, 5_000),
-	FOURTH(4, 50_000),
+	FOURTH(4,50_000),
 	THIRD(5, 1_500_000),
-	FIRST(6, 2_000_000_000);
+	SECOND(5, 30_000_000),
+	FIRST(6,2_000_000_000);
 
-	public static final String MATCH_COUNT_NOT_CORRECT_ERROR = "일치하는 숫자의 개수가 올바르지 않습니다.";
-
-	private int matchCount;
-	private int prizeMoney;
+	private final int matchCount;
+	private final int prizeMoney;
 
 	Rank(final int matchCount, final int prizeMoney) {
 		this.matchCount = matchCount;
@@ -20,14 +21,28 @@ public enum Rank {
 	}
 
 	public static Rank from(final int matchCount) {
+		return from(matchCount, false);
+	}
+
+	public static Rank from(final int matchCount, final boolean matchBonus) {
 		if (matchCount < FIFTH.matchCount) {
 			return LOSS;
 		}
 
-		return Arrays.stream(values())
-			.filter(rank -> rank.isCountMatch(matchCount))
+		Rank rank = Arrays.stream(values())
+			.filter(r -> r.isCountMatch(matchCount))
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException(MATCH_COUNT_NOT_CORRECT_ERROR));
+			.orElseThrow(IllegalMatchCountException::new);
+
+		if (isSecondRank(rank, matchBonus)) {
+			return Rank.SECOND;
+		}
+
+		return rank;
+	}
+
+	private static boolean isSecondRank(Rank rank, boolean matchBonus) {
+		return rank == Rank.THIRD && matchBonus;
 	}
 
 	public int matchCount() {

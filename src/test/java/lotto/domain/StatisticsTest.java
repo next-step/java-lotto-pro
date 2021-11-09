@@ -18,9 +18,10 @@ public class StatisticsTest {
 
 	@BeforeEach
 	void setUp() {
-		Lotto winningLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+		Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+		WinningLotto winningLotto = new WinningLotto(lotto, 7);
 		Lottos userLottos = Lottos.from(
-			Collections.singletonList(Lotto.from(Arrays.asList(1, 2, 3, 7, 8, 9)))
+			Collections.singletonList(Lotto.from(Arrays.asList(1, 2, 3, 8, 9, 10)))
 		);
 
 		statistics = new Statistics(winningLotto, userLottos);

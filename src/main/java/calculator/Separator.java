@@ -25,7 +25,7 @@ public class Separator {
 
 	private static void validateInputNotNullOrEmpty(String input) {
 		if (input == null || input.isEmpty()) {
-			throw new IllegalArgumentException(Messages.VALUE_NOT_SPLITABLE_ERROR);
+			throw new ValueNotSplittableException();
 		}
 	}
 }

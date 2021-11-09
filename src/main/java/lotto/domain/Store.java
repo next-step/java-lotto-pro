@@ -3,8 +3,9 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.domain.exception.LackOfMoneyException;
+
 public class Store {
-	public static final String MINIMUM_PRICE_REQUIRED_ERROR = "구매 금액은 1000원 이상이어야 합니다.";
 
 	private Store() {
 	}
@@ -34,7 +35,7 @@ public class Store {
 
 	private static void validateMinimumPrice(final Money money) {
 		if (money.amount() < Common.LOTTO_PRICE) {
-			throw new IllegalArgumentException(MINIMUM_PRICE_REQUIRED_ERROR);
+			throw new LackOfMoneyException();
 		}
 	}
 }

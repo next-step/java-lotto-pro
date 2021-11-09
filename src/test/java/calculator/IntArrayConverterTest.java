@@ -27,7 +27,7 @@ class IntArrayConverterTest {
 
 		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(throwingCallable)
-			.withMessage(Messages.VALUES_NOT_CONVERTABLE_ERROR);
+			.withMessage(ValuesNotConvertibleException.VALUES_NOT_CONVERTABLE_ERROR);
 	}
 
 	@Test
@@ -39,6 +39,6 @@ class IntArrayConverterTest {
 
 		Assertions.assertThatExceptionOfType(RuntimeException.class)
 			.isThrownBy(throwingCallable)
-			.withMessageMatching(Messages.OUT_OF_MINIMUM_NUMBER_RANGE_ERROR);
+			.withMessageMatching(NumberOutOfRangeException.OUT_OF_MINIMUM_NUMBER_RANGE_ERROR);
 	}
 }

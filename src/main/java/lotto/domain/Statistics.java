@@ -5,14 +5,14 @@ import java.util.EnumMap;
 public class Statistics {
 	private static final int NOT_CALCULATED_YET = -1;
 
-	private final Lotto winningLotto;
+	private final WinningLotto winningLotto;
 	private final Lottos userLottos;
 
 	private int purchaseAmount;
 	private int totalPrize;
 	private EnumMap<Rank, Integer> winningResults;
 
-	public Statistics(Lotto winningLotto, Lottos userLottos) {
+	public Statistics(final WinningLotto winningLotto, final Lottos userLottos) {
 		this.winningLotto = winningLotto;
 		this.userLottos = userLottos;
 		this.purchaseAmount = NOT_CALCULATED_YET;
@@ -52,8 +52,7 @@ public class Statistics {
 		}
 
 		for (Lotto lotto : userLottos.lottos()) {
-			int matchCount = winningLotto.countMatch(lotto);
-			Rank rank = Rank.from(matchCount);
+			Rank rank = winningLotto.match(lotto);
 			winningResults.put(rank, winningResults.getOrDefault(rank, 0) + 1);
 		}
 	}
@@ -62,8 +61,7 @@ public class Statistics {
 		totalPrize = 0;
 
 		for (Lotto lotto : userLottos.lottos()) {
-			int matchCount = winningLotto.countMatch(lotto);
-			Rank rank = Rank.from(matchCount);
+			Rank rank = winningLotto.match(lotto);
 			totalPrize += rank.prizeMoney();
 		}
 

@@ -22,13 +22,13 @@ public class IntArrayConverter {
 
 	private static void validateValuesNotNullOrEmpty(String[] values) {
 		if (values == null || values.length == 0) {
-			throw new IllegalArgumentException(Messages.VALUES_NOT_CONVERTABLE_ERROR);
+			throw new ValuesNotConvertibleException();
 		}
 	}
 
 	private static int validateNumberRangeMinimum(int number) {
 		if (number < NUMBER_RANGE_MINIMUM) {
-			throw new RuntimeException(Messages.OUT_OF_MINIMUM_NUMBER_RANGE_ERROR);
+			throw new NumberOutOfRangeException();
 		}
 
 		return number;

@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,6 +10,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+
+import lotto.domain.exception.LottosNotCollectableException;
 
 public class LottosTest {
 
@@ -31,9 +32,8 @@ public class LottosTest {
 	@NullAndEmptySource
 	@DisplayName("null 이나 빈 리스트를 전달하면 예외가 발생한다.")
 	void testInvalid(List<Lotto> input) {
-		assertThatIllegalArgumentException()
-			.isThrownBy(() -> Lottos.from(input))
-			.withMessage(Lottos.LOTTOS_NULL_OR_EMPTY_ERROR);
+		assertThatExceptionOfType(LottosNotCollectableException.class)
+			.isThrownBy(() -> Lottos.from(input));
 	}
 
 	@Test
