@@ -15,8 +15,12 @@ public class Rank {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Rank rank1 = (Rank) o;
         return getRank() == rank1.getRank();
     }
