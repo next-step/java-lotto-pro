@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.WrongLottoNumbersInputException;
 import lotto.exception.WrongLottoNumberSizeException;
 import lotto.ui.LottoMessage;
 
@@ -8,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 public class LottoNumbers {
@@ -39,7 +41,7 @@ public class LottoNumbers {
     private static List<LottoNumber> generateRandomLottoNumberPocket() {
         List<LottoNumber> resultPocket = new ArrayList<>();
         for (int number = LottoNumber.MIN_BOUND; number <= LottoNumber.MAX_BOUND; number++) {
-            resultPocket.add(new LottoNumber(number));
+            resultPocket.add(LottoNumber.of(number));
         }
 
         return resultPocket;
@@ -52,12 +54,21 @@ public class LottoNumbers {
     }
 
     private void generateLottoNumbersFromString(String lottoNumbers, String separator) {
+        lottoNumbers = validateNullableValues(lottoNumbers);
+        separator = validateNullableValues(separator);
         lottoNumbers = lottoNumbers.replaceAll(FIND_ALL_SPACES, REMOVE_SPACES);
         String[] splitLottoNumbers = lottoNumbers.split(separator);
         validateLottoNumbers(splitLottoNumbers);
         for (String lottoNumberString : splitLottoNumbers) {
-            this.lottoNumbers.add(new LottoNumber(lottoNumberString));
+            this.lottoNumbers.add(LottoNumber.of(lottoNumberString));
         }
+    }
+
+    private String validateNullableValues(String value) {
+        return Optional.ofNullable(value)
+                .orElseThrow(() ->
+                        new WrongLottoNumbersInputException(LottoMessage.WRONG_LOTTO_NUMBER_INPUT_MESSAGE)
+                );
     }
 
     private void validateLottoNumbers(String[] splitLottoNumbers) {
@@ -78,10 +89,6 @@ public class LottoNumbers {
         return (int) lottoNumbers.stream()
                 .filter(prizeLottoNumbers::containsNumber)
                 .count();
-    }
-
-    public LottoResult getLottoResult(LottoNumbers prizeLottoNumbers, LottoNumber bonusLottoNumber) {
-        return new LottoResult(getMatchCount(prizeLottoNumbers), containsNumber(bonusLottoNumber));
     }
 
     @Override

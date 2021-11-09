@@ -1,6 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.BuyAmount;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoNumbersGroup;
 import lotto.dto.LottoNumberDto;
@@ -15,16 +15,16 @@ public class LottoInputView {
     public static final String LOTTO_NUMBERS_DESCRIPTION_CLOSE_BRACKET = "]";
     public static final String LOTTO_NUMBERS_DESCRIPTION_SPACE = " ";
 
-    private final BuyAmount buyAmount;
+    private final PurchaseInfo purchaseInfo;
     private final LottoNumbersGroup lottoNumbersGroup;
 
-    public LottoInputView(BuyAmount buyAmount, LottoNumbersGroup lottoNumbersGroup) {
-        this.buyAmount = buyAmount;
+    public LottoInputView(PurchaseInfo purchaseInfo, LottoNumbersGroup lottoNumbersGroup) {
+        this.purchaseInfo = purchaseInfo;
         this.lottoNumbersGroup = lottoNumbersGroup;
     }
 
     public void showBuyStats() {
-        LottoMessage.showBuyAmount(buyAmount);
+        LottoMessage.showBuyAmount(purchaseInfo);
         showMyLottoNumbersGroup();
     }
 

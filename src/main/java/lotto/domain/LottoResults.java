@@ -42,10 +42,10 @@ public class LottoResults {
                 .sum();
     }
 
-    public double getProfitRate(BuyAmount buyAmount) {
+    public double getProfitRate(PurchaseInfo purchaseInfo) {
         long totalReward = getTotalReward();
 
-        return Math.floor((PROFIT_BASE + buyAmount.getProfitRate(totalReward)) * PROFIT_RATE_DECIMAL_POINT)
+        return Math.floor((PROFIT_BASE + purchaseInfo.getProfitRate(totalReward)) * PROFIT_RATE_DECIMAL_POINT)
                 / PROFIT_RATE_DECIMAL_POINT;
     }
 }

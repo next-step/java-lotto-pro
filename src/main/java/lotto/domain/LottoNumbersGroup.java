@@ -7,16 +7,21 @@ import java.util.Objects;
 public class LottoNumbersGroup {
     private final List<LottoNumbers> lottoNumbersGroup;
 
-    public LottoNumbersGroup(BuyAmount buyAmount) {
-        this.lottoNumbersGroup = generateRandomLottoNumbers(buyAmount.getAmount());
+    public LottoNumbersGroup(PurchaseInfo purchaseInfo) {
+        this.lottoNumbersGroup = generateRandomLottoNumbers(purchaseInfo.getTotalAmount());
     }
 
-    public LottoNumbersGroup(String[] myLottoNumbers) {
-        this.lottoNumbersGroup = generateManualLottoNumbers(myLottoNumbers);
+    public LottoNumbersGroup(String[] lottoNumbersGroup) {
+        this.lottoNumbersGroup = generateManualLottoNumbers(lottoNumbersGroup);
     }
 
-    public LottoNumbersGroup(List<LottoNumbers> myLottoNumbers) {
-        this.lottoNumbersGroup = myLottoNumbers;
+    public LottoNumbersGroup(List<LottoNumbers> lottoNumbersGroup) {
+        this.lottoNumbersGroup = lottoNumbersGroup;
+    }
+
+    public LottoNumbersGroup(PurchaseInfo purchaseInfo, List<LottoNumbers> manualLottoNumbersGroup) {
+        this.lottoNumbersGroup = manualLottoNumbersGroup;
+        this.lottoNumbersGroup.addAll(generateRandomLottoNumbers(purchaseInfo.getAutoAmount()));
     }
 
     protected List<LottoNumbers> generateRandomLottoNumbers(int amount) {
@@ -41,11 +46,10 @@ public class LottoNumbersGroup {
         return lottoNumbersGroup;
     }
 
-    public LottoResults getLottoResults(LottoNumbers prizeLottoNumbers, LottoNumber bonusLottoNumber) {
+    public LottoResults getLottoResults(PrizeLottoNumbers prizeLottoNumbers) {
         List<LottoResult> lottoResults = new ArrayList<>();
         for (LottoNumbers lottoNumbers : lottoNumbersGroup) {
-            LottoResult lottoResult = lottoNumbers.getLottoResult(prizeLottoNumbers, bonusLottoNumber);
-            lottoResults.add(lottoResult);
+            lottoResults.add(prizeLottoNumbers.getLottoResult(lottoNumbers));
         }
 
         return new LottoResults(lottoResults);

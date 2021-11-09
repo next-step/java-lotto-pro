@@ -1,13 +1,16 @@
 package lotto.domain;
 
+import lotto.exception.WrongLottoRankingStatusException;
+import lotto.ui.LottoMessage;
+
 import java.util.Arrays;
 
 public enum LottoRankingStatus {
-    MATCH3(3, false, 5_000),
-    MATCH4(4, false, 50_000),
-    MATCH5(5, false, 1_500_000),
-    MATCH5BONUS1(5, true, 30_000_000),
-    MATCH6(6, false, 2_000_000_000),
+    FIFTH(3, false, 5_000),
+    FOURTH(4, false, 50_000),
+    THIRD(5, false, 1_500_000),
+    SECOND(5, true, 30_000_000),
+    FIRST(6, false, 2_000_000_000),
     NONE(0, false, 0);
 
     private final int matchAmount;
@@ -40,10 +43,18 @@ public enum LottoRankingStatus {
         return this.matchAmount == matchAmount && this.matchBonus == matchBonus;
     }
 
+    public static boolean isNone(int matchAmount) {
+        return matchAmount < LottoRankingStatus.FIFTH.getMatchAmount();
+    }
+
     public static LottoRankingStatus valueOf(int matchAmount, boolean matchBonus) {
+        if (isNone(matchAmount)) {
+            return LottoRankingStatus.NONE;
+        }
+
         return Arrays.stream(LottoRankingStatus.values())
                 .filter(lottoRankingStatus -> lottoRankingStatus.isSameLottoRankingStatus(matchAmount, matchBonus))
                 .findFirst()
-                .orElse(LottoRankingStatus.NONE);
+                .orElseThrow(() -> new WrongLottoRankingStatusException(LottoMessage.WRONG_LOTTO_RANKING_STATUS_MESSAGE));
     }
 }

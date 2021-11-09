@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,7 +38,7 @@ public class LottoResultTest {
                         "내 숫자들 6개 다 맞는 경우 ",
                         prizeLottoNumbers,
                         prizeLottoNumbers,
-                        LottoRankingStatus.MATCH6,
+                        LottoRankingStatus.FIRST,
                         notMatchBonusLottoNumber),
                 Arguments.of(
                         "내 숫자들 0개 맞는 경우 ",
@@ -49,11 +48,11 @@ public class LottoResultTest {
                         notMatchBonusLottoNumber),
                 Arguments.of("내 숫자들 3개만 맞는 경우 ", prizeLottoNumbers,
                         match3LottoNumbers,
-                        LottoRankingStatus.MATCH3,
+                        LottoRankingStatus.FIFTH,
                         notMatchBonusLottoNumber),
                 Arguments.of("내 숫자들 5개, 보너스 1개 맞는 경우 ", prizeLottoNumbers,
                         match5LottoNumbers,
-                        LottoRankingStatus.MATCH5BONUS1,
+                        LottoRankingStatus.SECOND,
                         matchBonusLottoNumber)
         );
     }

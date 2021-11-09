@@ -34,6 +34,6 @@ public class LottoResultsTest {
     @DisplayName("로또 결과들 중 match3 1개 맞췄을 경우 수익률 테스트")
     @Test
     void getProfitRateTest() {
-        assertThat(lottoResults.getProfitRate(new BuyAmount(14000))).isEqualTo(142857.50);
+        assertThat(lottoResults.getProfitRate(new PurchaseInfo(14000))).isEqualTo(142857.50);
     }
 }

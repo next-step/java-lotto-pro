@@ -2,6 +2,8 @@ package lotto.ui;
 
 import lotto.domain.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoController {
@@ -10,19 +12,19 @@ public class LottoController {
     public void startGame() {
         scanner = new Scanner(System.in);
         int buyPrice = inputBuyPrice();
-        BuyAmount buyAmount = new BuyAmount(buyPrice);
-        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(buyAmount);
+        int manualBuyAmount = getManualBuyAmount();
+        PurchaseInfo purchaseInfo = new PurchaseInfo(buyPrice, manualBuyAmount);
+        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(purchaseInfo, getManualLottoNumbers(purchaseInfo));
 
-        showBuyStats(buyAmount, lottoNumbersGroup);
+        showBuyStats(purchaseInfo, lottoNumbersGroup);
 
         String prizeLottoNumbersText = inputPrizeLottoNumbers();
-        LottoNumbers prizeLottoNumbers = new LottoNumbers(prizeLottoNumbersText);
 
         int bonusNumber = inputBonusNumber();
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
-        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers, bonusLottoNumber);
-        showResults(buyAmount, lottoResults);
+        PrizeLottoNumbers prizeLottoNumbers = new PrizeLottoNumbers(prizeLottoNumbersText, bonusNumber);
+        LottoResults lottoResults = lottoNumbersGroup.getLottoResults(prizeLottoNumbers);
+        showResults(purchaseInfo, lottoResults);
     }
 
     private int inputBonusNumber() {
@@ -35,8 +37,24 @@ public class LottoController {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    private void showBuyStats(BuyAmount buyAmount, LottoNumbersGroup lottoNumbersGroup) {
-        LottoInputView lottoInputView = new LottoInputView(buyAmount, lottoNumbersGroup);
+    private int getManualBuyAmount() {
+        LottoMessage.showAskManualBuyAmountMessage();
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    private List<LottoNumbers> getManualLottoNumbers(PurchaseInfo purchaseInfo) {
+        LottoMessage.showAskManualBuyLottoNumbersMessage();
+        List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < purchaseInfo.getManualAmount(); i++) {
+            String lottoNumbers = scanner.nextLine();
+            manualLottoNumbers.add(new LottoNumbers(lottoNumbers));
+        }
+
+        return manualLottoNumbers;
+    }
+
+    private void showBuyStats(PurchaseInfo purchaseInfo, LottoNumbersGroup lottoNumbersGroup) {
+        LottoInputView lottoInputView = new LottoInputView(purchaseInfo, lottoNumbersGroup);
         lottoInputView.showBuyStats();
     }
 
@@ -45,8 +63,8 @@ public class LottoController {
         return scanner.nextLine();
     }
 
-    private void showResults(BuyAmount buyAmount, LottoResults lottoResults) {
-        LottoResultsView lottoResultsView = new LottoResultsView(buyAmount, lottoResults);
+    private void showResults(PurchaseInfo purchaseInfo, LottoResults lottoResults) {
+        LottoResultsView lottoResultsView = new LottoResultsView(purchaseInfo, lottoResults);
         lottoResultsView.showResults();
     }
 

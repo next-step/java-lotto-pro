@@ -24,6 +24,6 @@ public class LottoRankingStatusTest {
     @DisplayName("LottoRankingStatus 보너스 확인")
     @Test
     void getLottoRankingStatusMatch5Bonus1Test() {
-        assertThat(LottoRankingStatus.valueOf(5, true)).isEqualTo(LottoRankingStatus.MATCH5BONUS1);
+        assertThat(LottoRankingStatus.valueOf(5, true)).isEqualTo(LottoRankingStatus.SECOND);
     }
 }
