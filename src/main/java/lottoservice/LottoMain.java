@@ -30,7 +30,7 @@ public class LottoMain {
 	private static final String RESULT_MESSAGE_MATCH_STATISTICS_START_LINE = "\n당첨통계\n---------";
 	private static final String RESULT_MESSAGE_MATCH_PROFIT_STATEMENT = "총 수익률은 %s 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 	private static final String RESULT_MESSAGE_TOTAL_NUM_OF_TICKETS = "\n수동으로 %s장 자동으로 %s장을 구매했습니다.";
-	private static final String ERROR_MESSAGE_INVALID_INPUT_NUM_OF_MANUAL_LOTTOES = "구매할 로또 수를 숫자로 입력해주세요.";
+	private static final String ERROR_MESSAGE_INVALID_INPUT_NUM_OF_MANUAL_LOTTOES = "구매할 로또 수를 0 이상의 정수로 입력해주세요.";
 
 	private InputView inputView;
 	private ResultView resultView;
@@ -53,8 +53,7 @@ public class LottoMain {
 		LottoTickets autoLottoTickets = buyAutoLottoTickets(lottoTicketIssuer);
 		LottoTickets manualLottoTickets = buyManualLottoTickets(lottoTicketIssuer);
 
-		outputNumOfTotalBought(manualLottoTickets.getNumOfTickets(),
-			autoLottoTickets.getNumOfTickets());
+		outputNumOfTotalBought(manualLottoTickets.getNumOfTickets(),autoLottoTickets.getNumOfTickets());
 		outputBoughtLottoTickets(manualLottoTickets);
 		outputBoughtLottoTickets(autoLottoTickets);
 
@@ -87,10 +86,19 @@ public class LottoMain {
 	private int getNumOfTicketsToBuy() {
 		resultView.outputResult(GUIDE_MESSAGE_INPUT_NUM_OF_MANUAL_LOTTOES);
 		try {
-			return Integer.parseInt(inputView.readInputLine());
-		} catch (NumberFormatException ex) {
+			String numOfTicket = inputView.readInputLine();
+			validateInputNumOfTicket(numOfTicket);
+			return Integer.parseInt(numOfTicket);
+		} catch (IllegalArgumentException ex) {
 			resultView.outputError(ERROR_MESSAGE_INVALID_INPUT_NUM_OF_MANUAL_LOTTOES);
 			return getNumOfTicketsToBuy();    /* 사용자가 잘못된 입력을 했을 경우 재입력*/
+		}
+	}
+
+	private void validateInputNumOfTicket(String numOfTicket) {
+		int number = Integer.parseInt(numOfTicket);
+		if(number<0) {
+			throw new IllegalArgumentException();
 		}
 	}
 
