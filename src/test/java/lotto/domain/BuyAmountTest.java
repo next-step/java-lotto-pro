@@ -15,7 +15,7 @@ public class BuyAmountTest {
         int buyPrice = 30000;
         // when
         BuyAmount buyAmount = new BuyAmount(buyPrice);
-        assertThat(buyAmount.getAmount()).isEqualTo(30);
+        assertThat(buyAmount.getTotalAmount()).isEqualTo(30);
     }
 
     @DisplayName("구매 오류 테스트")

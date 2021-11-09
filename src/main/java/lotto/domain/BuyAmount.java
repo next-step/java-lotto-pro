@@ -6,8 +6,8 @@ import lotto.ui.LottoMessage;
 public class BuyAmount {
     public static final int LOTTO_TICKET_PRICE = 1000;
 
-    private final int amount;
-    private final int manualAmount;
+    private final Money totalMoney;
+    private final Money manualMoney;
 
     public BuyAmount(int buyPrice) {
         this(buyPrice, 0);
@@ -15,9 +15,9 @@ public class BuyAmount {
 
     public BuyAmount(int buyPrice, int manualAmount) {
         validateBuyPrice(buyPrice);
-        this.amount = buyPrice / LOTTO_TICKET_PRICE;
-        validateNotExceedAmountSize(manualAmount);
-        this.manualAmount = manualAmount;
+        this.totalMoney = new Money(buyPrice);
+        this.manualMoney = new Money(manualAmount * LOTTO_TICKET_PRICE);
+        validateNotExceedAmountSize();
     }
 
     private void validateBuyPrice(int buyPrice) {
@@ -26,26 +26,26 @@ public class BuyAmount {
         }
     }
 
-    private void validateNotExceedAmountSize(int manualAmount) {
-        if((amount < manualAmount)) {
+    private void validateNotExceedAmountSize() {
+        if((totalMoney.isExceedMoney(manualMoney))) {
             throw new IllegalArgumentException(LottoMessage.EXCEED_MANUAL_LOTTO_SIZE_MESSAGE);
         }
     }
 
-    public int getAmount() {
-        return amount;
+    public int getTotalAmount() {
+        return totalMoney.getPrice() / LOTTO_TICKET_PRICE;
     }
 
     public int getManualAmount() {
-        return manualAmount;
+        return manualMoney.getPrice() / LOTTO_TICKET_PRICE;
     }
 
     public int getAutoAmount() {
-        return amount - manualAmount;
+        return getTotalAmount() - getManualAmount();
     }
 
     public int getPrice() {
-        return amount * LOTTO_TICKET_PRICE;
+        return totalMoney.getPrice();
     }
 
     public double getProfitRate(long totalReward) {

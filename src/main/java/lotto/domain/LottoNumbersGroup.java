@@ -8,7 +8,7 @@ public class LottoNumbersGroup {
     private final List<LottoNumbers> lottoNumbersGroup;
 
     public LottoNumbersGroup(BuyAmount buyAmount) {
-        this.lottoNumbersGroup = generateRandomLottoNumbers(buyAmount.getAmount());
+        this.lottoNumbersGroup = generateRandomLottoNumbers(buyAmount.getTotalAmount());
     }
 
     public LottoNumbersGroup(String[] lottoNumbersGroup) {
