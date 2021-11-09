@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-	private final int no;
+	protected final int no;
 
 	public LottoNumber(int no) {
 		this.no = no;
@@ -14,7 +14,7 @@ public class LottoNumber {
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
-		if (o == null || getClass() != o.getClass())
+		if (o == null)
 			return false;
 		LottoNumber that = (LottoNumber)o;
 		return no == that.no;

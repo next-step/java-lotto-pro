@@ -39,22 +39,23 @@ public class WinnerTest {
 
 		//when
 		Winner winner = Winner.of();
-		Winner result = winner.statistics(userLottoNumbers, papers, 2);
+		Winner result = winner.statistics(userLottoNumbers, papers, BonusBall.of(2, userLottoNumbers));
 		int totalWinningAmount = result.getTotal();
 		//then
-		assertThat(totalWinningAmount).isEqualTo(1505000);
+		assertThat(totalWinningAmount).isEqualTo(30005000);
 	}
 
 	@DisplayName("당첨금액의 총 수익률 계산")
 	@ParameterizedTest
-	@CsvSource(value = {"1, 2, 3, 4, 5, 6:14000:107.50",
+	@CsvSource(value = {"1, 2, 3, 4, 5, 6:14000:2143.21",
 		"36,42,45,21,30,20:14000:3.92",
 		"6,42,45,1,9,8:14000:0.00",
 		"4, 3, 5, 7, 43, 44:14000:3.92"}, delimiter = ':')
-	void yield(String userLottoNumbers, int inputMoney, String inputYield) {
+	void yield(String inputUserLottoNumbers, int inputMoney, String inputYield) {
 		// given
+		LottoNumbers userLottoNumbers = LottoNumbers.from(inputUserLottoNumbers);
 		Winner winner = Winner.of();
-		Winner statistics = winner.statistics(LottoNumbers.from(userLottoNumbers), papers, 2);
+		Winner statistics = winner.statistics(userLottoNumbers, papers, BonusBall.of(2, userLottoNumbers));
 		int totalWinningAmount = statistics.getTotal();
 
 		// when

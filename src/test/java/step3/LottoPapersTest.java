@@ -29,9 +29,10 @@ class LottoPapersTest {
 	void createLottoCount() {
 		// given
 		LottoPapers lottoPapers = LottoPapers.createPapers(getLottoNumbers());
+		LottoNumbers userLottoNumbers = LottoNumbers.from("1,5,7,3,5,2");
 
 		// when
-		List<Rank> matchLottoNumber = lottoPapers.findMatchLottoNumber(LottoNumbers.from("1,5,7,3,5,2"), 2);
+		List<Rank> matchLottoNumber = lottoPapers.findMatchLottoNumber(userLottoNumbers, BonusBall.of(2, userLottoNumbers));
 
 		// then
 		Assertions.assertThat(matchLottoNumber.size()).isEqualTo(2);
@@ -42,9 +43,10 @@ class LottoPapersTest {
 	void findMatchLottoNumber() {
 		// given
 		LottoPapers lottoPapers = LottoPapers.createPapers(getLottoNumbers());
+		LottoNumbers userLottoNumbers = LottoNumbers.from("1,5,7,3,5,2");
 
 		// when
-		List<Rank> matchLottoNumber = lottoPapers.findMatchLottoNumber(LottoNumbers.from("1,5,7,3,5,2"), 3);
+		List<Rank> matchLottoNumber = lottoPapers.findMatchLottoNumber(userLottoNumbers, BonusBall.of(3, userLottoNumbers));
 
 		// then
 		Assertions.assertThat(matchLottoNumber.get(0)).isEqualTo(Rank.FOUR);

@@ -51,7 +51,7 @@ public class LottoNumbers {
 		);
 	}
 
-	public Map<Integer, Boolean> match(LottoNumbers userLottoNumbers, int bonusBall) {
+	public Map<Integer, Boolean> match(LottoNumbers userLottoNumbers, BonusBall bonusBall) {
 		Map<Integer, Boolean> ranks = new HashMap<>();
 		ranks.put(matchCount(userLottoNumbers), matchBonusBall(bonusBall));
 		return ranks;
@@ -65,12 +65,12 @@ public class LottoNumbers {
 		return count;
 	}
 
-	private Boolean matchBonusBall(int bonusBall) {
+	private Boolean matchBonusBall(BonusBall bonusBall) {
 		return lottoNumbers.stream()
-			.anyMatch(lottoNumber -> lottoNumber.equals(new LottoNumber(bonusBall)));
+			.anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
 	}
 
-	private Set<LottoNumber> getList() {
+	public Set<LottoNumber> getList() {
 		return Collections.unmodifiableSet(lottoNumbers);
 	}
 
@@ -78,7 +78,7 @@ public class LottoNumbers {
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
-		if (o == null || getClass() != o.getClass())
+		if (o == null)
 			return false;
 		LottoNumbers that = (LottoNumbers)o;
 		return Objects.equals(lottoNumbers, that.lottoNumbers);
@@ -94,4 +94,7 @@ public class LottoNumbers {
 		return String.valueOf(lottoNumbers);
 	}
 
+	public boolean hasBonusBall(BonusBall bonusBall) {
+		return lottoNumbers.contains(bonusBall);
+	}
 }

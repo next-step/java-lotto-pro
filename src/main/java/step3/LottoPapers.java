@@ -18,10 +18,10 @@ public class LottoPapers {
 		return new LottoPapers(lottoNumbers);
 	}
 
-	public List<Rank> findMatchLottoNumber(LottoNumbers userLottoNumbers, int isBonusBall) {
+	public List<Rank> findMatchLottoNumber(LottoNumbers userLottoNumbers, BonusBall bonusBall) {
 		List<Rank> ranks = new ArrayList<>();
 		for (LottoNumbers paper : papers) {
-			Map<Integer, Boolean> match = paper.match(userLottoNumbers, isBonusBall);
+			Map<Integer, Boolean> match = paper.match(userLottoNumbers, bonusBall);
 			for (Map.Entry<Integer,Boolean> matchNumber : match.entrySet()) {
 				Rank rank = Rank.valueOf(matchNumber.getKey(), matchNumber.getValue());
 				ranks.add(rank);

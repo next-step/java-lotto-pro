@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import step3.BonusBall;
 import step3.LottoNumbers;
 import step3.LottoPapers;
 
@@ -24,8 +25,8 @@ public class Winner {
 		return new Winner(new HashMap<>());
 	}
 
-	public Winner statistics(LottoNumbers userLottoNumbers, LottoPapers createLottoNumbers, int isBonusBall) {
-		List<Rank> matchLottoNumber = createLottoNumbers.findMatchLottoNumber(userLottoNumbers, isBonusBall);
+	public Winner statistics(LottoNumbers userLottoNumbers, LottoPapers createLottoNumbers, BonusBall bonusBall) {
+		List<Rank> matchLottoNumber = createLottoNumbers.findMatchLottoNumber(userLottoNumbers, bonusBall);
 		return new Winner(
 			matchLottoNumber.stream()
 				.collect(
