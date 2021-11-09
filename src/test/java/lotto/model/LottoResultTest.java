@@ -14,9 +14,9 @@ public class LottoResultTest {
     @BeforeEach
     void setUp() {
         final List<Winning> winnings = new ArrayList<>();
+        winnings.add(Winning.FOURTH_PRIZE);
         winnings.add(Winning.THIRD_PRIZE);
-        winnings.add(Winning.SECOND_PRIZE);
-        winnings.add(Winning.SECOND_PRIZE);
+        winnings.add(Winning.THIRD_PRIZE);
         winnings.add(Winning.NONE);
         this.lottoResult = new LottoResult(winnings);
     }

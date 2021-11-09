@@ -10,6 +10,6 @@ public class WinningTest {
     @EnumSource(Winning.class)
     void ofMatchCount(Winning givenWinning) {
         final Winning winning = Winning.ofMatchCount(givenWinning.getMatchCount());
-        assertThat(winning.getReward()).isEqualTo(givenWinning.getReward());
+        assertThat(winning.getMatchCount()).isEqualTo(givenWinning.getMatchCount());
     }
 }

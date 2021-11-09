@@ -54,8 +54,9 @@ public class LottoTest {
     private static Stream<Arguments> provideWinTicket() {
         return Stream.of(
                 Arguments.of(WinTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7), Winning.FIRST_PRIZE),
+                Arguments.of(WinTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7), 6), Winning.SECOND_PRIZE),
                 Arguments.of(WinTicket.of(Arrays.asList(11, 12, 13, 14, 15, 16), 17), Winning.NONE),
-                Arguments.of(WinTicket.of(Arrays.asList(1, 2, 3, 14, 15, 16), 17), Winning.FOURTH_PRIZE)
+                Arguments.of(WinTicket.of(Arrays.asList(1, 2, 3, 14, 15, 16), 17), Winning.FIFTH_PRIZE)
         );
     }
 }

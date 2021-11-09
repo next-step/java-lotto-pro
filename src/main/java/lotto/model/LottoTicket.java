@@ -43,4 +43,8 @@ public class LottoTicket {
     private int count(LottoNumber lottoNumber) {
         return this.numbers.contains(lottoNumber) ? 1 : 0;
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
+    }
 }

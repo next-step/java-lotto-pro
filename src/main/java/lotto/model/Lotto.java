@@ -29,6 +29,11 @@ public class Lotto {
 
     public Winning calculateWinning(WinTicket winTicket) {
         final int count = ticket.calculateNumberOfMatch(winTicket);
-        return Winning.ofMatchCount(count);
+        Winning winning = Winning.ofMatchCount(count);
+        if (winning.needBonus()
+                && !ticket.contains(winTicket.getBonusNumber())) {
+            winning = Winning.THIRD_PRIZE;
+        }
+        return winning;
     }
 }

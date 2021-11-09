@@ -44,4 +44,11 @@ public class LottoTicketTest {
                 Arguments.of(WinTicket.of(Arrays.asList(1, 2, 13, 14, 15, 16), 17), 2)
         );
     }
+
+    @Test
+    void contains() {
+        final LottoTicket buyTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(buyTicket.contains(new LottoNumber(2))).isTrue();
+        assertThat(buyTicket.contains(new LottoNumber(7))).isFalse();
+    }
 }
