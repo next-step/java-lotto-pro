@@ -4,8 +4,11 @@ import nextstep.lotto.domain.LottoCount;
 import nextstep.lotto.domain.MatchCountCollection;
 import nextstep.lotto.domain.PurchaseLotto;
 import nextstep.lotto.domain.PurchaseLottoAmount;
+import nextstep.lotto.domain.TotalWinningAmount;
 import nextstep.lotto.domain.WinningLotto;
 import nextstep.lotto.io.LottoDisplay;
+
+import java.math.BigDecimal;
 
 public class LottoService {
 
@@ -22,7 +25,8 @@ public class LottoService {
         MatchCountCollection matchCountCollection = MatchCountCollection.matchPurchaseLottoWithWinningLotto(purchaseLotto, winningLotto);
 
         LottoDisplay.printWinningStatMessage(matchCountCollection);
-
-
+        TotalWinningAmount totalWinningAmount = new TotalWinningAmount(matchCountCollection);
+        BigDecimal returnRate = totalWinningAmount.calculateReturnRate(purchaseLottoAmount);
+        LottoDisplay.printReturnRate(returnRate);
     }
 }

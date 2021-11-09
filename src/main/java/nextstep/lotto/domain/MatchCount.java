@@ -22,6 +22,10 @@ public class MatchCount implements Comparable<MatchCount> {
         return new MatchCount(index, matchCount + 1);
     }
 
+    public Long mulMatchCountAndPrice() {
+        return lottoWinningPrice.price * matchCount;
+    }
+
     @Override
     public int compareTo(MatchCount that) {
         return this.index - that.index;

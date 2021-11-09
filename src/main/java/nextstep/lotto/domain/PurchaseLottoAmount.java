@@ -1,14 +1,23 @@
 package nextstep.lotto.domain;
 
+import java.math.BigDecimal;
+
 public class PurchaseLottoAmount {
 
-    private final Integer purchaseLottoAmount;
+    private final Long purchaseLottoAmount;
 
-    public PurchaseLottoAmount(Integer purchaseLottoAmount) {
+    public PurchaseLottoAmount(Long purchaseLottoAmount) {
         this.purchaseLottoAmount = purchaseLottoAmount;
     }
 
-    public Integer calculateLottoPurchaseCount(Integer lottoPrice) {
+    public Long calculateLottoPurchaseCount(Long lottoPrice) {
         return purchaseLottoAmount / lottoPrice;
+    }
+
+    public BigDecimal calculateReturnRate(Long totalWinningAmount) {
+        BigDecimal total = new BigDecimal(totalWinningAmount);
+        BigDecimal purchase = new BigDecimal(purchaseLottoAmount);
+
+        return total.divide(purchase, 2);
     }
 }

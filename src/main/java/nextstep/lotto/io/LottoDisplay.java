@@ -11,6 +11,7 @@ import nextstep.lotto.domain.PurchaseLottoAmount;
 import nextstep.lotto.domain.WinningLotto;
 import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -18,17 +19,19 @@ import java.util.stream.Collectors;
 
 import static nextstep.lotto.constance.LottoDisplayMessage.DIVIDE_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.LAST_WEEK_LOTTO_WIN_NUMBERS_MESSAGE;
-import static nextstep.lotto.constance.LottoDisplayMessage.MATCH_COUNT_PREFIX_MESSAGE;
+import static nextstep.lotto.constance.LottoDisplayMessage.LOSS_STAT_MESSAGE;
+import static nextstep.lotto.constance.LottoDisplayMessage.PROFIT_STAT_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_AMOUNT_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_COUNT_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_MIDDLE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_POSTFIX;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_PREFIX;
 import static nextstep.lotto.constance.LottoDisplayMessage.WINNING_STAT_MESSAGE;
+import static nextstep.lotto.constance.LottoDisplayMessage.WINNING_STAT_RESULT_POSTFIX_MESSAGE;
+import static nextstep.lotto.constance.LottoDisplayMessage.WINNING_STAT_RESULT_PREFIX_MESSAGE;
 import static nextstep.lotto.constance.LottoExceptionMessage.ERROR;
 import static nextstep.lotto.constance.LottoExceptionMessage.INVALID_LOTTO_PURCHASE_AMOUNT_MESSAGE;
 import static nextstep.lotto.constance.LottoExceptionMessage.INVALID_WINNING_LOTTO_NUMBER_MESSAGE;
-import static nextstep.lotto.domain.MatchCountCollection.WINNER_LOTTO_MIN_MATCHING_COUNT;
 
 public class LottoDisplay {
 
@@ -41,7 +44,7 @@ public class LottoDisplay {
 
         try {
             String inputPurchaseAmount = scanner.nextLine();
-            Integer purchaseAmount = Integer.valueOf(inputPurchaseAmount);
+            Long purchaseAmount = Long.valueOf(inputPurchaseAmount);
             return new PurchaseLottoAmount(purchaseAmount);
         } catch (NumberFormatException e) {
             System.out.println(ERROR + INVALID_LOTTO_PURCHASE_AMOUNT_MESSAGE);
@@ -54,6 +57,7 @@ public class LottoDisplay {
     }
 
     public static void printAutoLottoResult(PurchaseLotto purchaseLotto) {
+
         for (Lotto lotto : purchaseLotto) {
             System.out.println(PURCHASE_LOTTO_VIEW_PREFIX + lotto + PURCHASE_LOTTO_VIEW_POSTFIX);
         }
@@ -61,6 +65,7 @@ public class LottoDisplay {
     }
 
     public static WinningLotto inputLastWeekWinningLotto() {
+
         System.out.println(LAST_WEEK_LOTTO_WIN_NUMBERS_MESSAGE);
 
         try {
@@ -79,12 +84,22 @@ public class LottoDisplay {
     }
 
     public static void printWinningStatMessage(MatchCountCollection matchCountCollection) {
+
         System.out.println(WINNING_STAT_MESSAGE);
         System.out.println(DIVIDE_MESSAGE);
         for (MatchCount matchCount : matchCountCollection) {
             System.out.println(matchCount);
         }
-
     }
 
+    public static void printReturnRate(BigDecimal rate) {
+
+        System.out.print(WINNING_STAT_RESULT_PREFIX_MESSAGE + rate + WINNING_STAT_RESULT_POSTFIX_MESSAGE);
+        if (rate.compareTo(new BigDecimal(1)) > 0) {
+            System.out.println(PROFIT_STAT_MESSAGE);
+            return;
+        }
+
+        System.out.println(LOSS_STAT_MESSAGE);
+    }
 }

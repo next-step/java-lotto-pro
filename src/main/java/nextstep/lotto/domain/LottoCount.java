@@ -1,7 +1,6 @@
 package nextstep.lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,11 +8,7 @@ import static nextstep.lotto.constance.LottoConstance.LOTTO_PRICE;
 
 public class LottoCount {
 
-    private final Integer lottoCount;
-
-    public LottoCount(Integer lottoCount) {
-        this.lottoCount = lottoCount;
-    }
+    private final Long lottoCount;
 
     public LottoCount(PurchaseLottoAmount purchaseLottoAmount) {
         this.lottoCount = purchaseLottoAmount.calculateLottoPurchaseCount(LOTTO_PRICE);
@@ -21,7 +16,7 @@ public class LottoCount {
 
     public PurchaseLotto purchaseLottoByLottoCount() {
 
-        List<Lotto> purchaseLotto = new ArrayList<>(lottoCount);
+        List<Lotto> purchaseLotto = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             LottoNumbers lottoNumbers = new LottoNumbers();
             Lotto lotto = new Lotto(lottoNumbers);
@@ -45,6 +40,6 @@ public class LottoCount {
 
     @Override
     public String toString() {
-        return Integer.toString(lottoCount);
+        return Long.toString(lottoCount);
     }
 }
