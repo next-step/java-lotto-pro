@@ -1,8 +1,12 @@
 package step3;
 
 import java.util.Objects;
+import util.Numbers;
 
 public class LottoNumber {
+
+    private static final int MINIMUM_LOTTO_NUMBER = 1;
+    private static final int MAXIMUM_LOTTO_NUMBER = 45;
 
     private final int number;
 
@@ -13,7 +17,7 @@ public class LottoNumber {
     }
 
     private void verifyLottoNumber(final int number) {
-        if (isNegativeLottoNumber(number)) {
+        if (Numbers.isNegative(number)) {
             throw new IllegalArgumentException("음수를 로또 번호로 할 수 없습니다.");
         }
 
@@ -23,11 +27,7 @@ public class LottoNumber {
     }
 
     private boolean isAvailableLottoNumber(final int number) {
-        return number >= 1 && number <= 45;
-    }
-
-    private boolean isNegativeLottoNumber(final int number) {
-        return number < 0;
+        return number >= MINIMUM_LOTTO_NUMBER && number <= MAXIMUM_LOTTO_NUMBER;
     }
 
     @Override
