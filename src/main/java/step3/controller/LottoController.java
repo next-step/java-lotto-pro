@@ -7,14 +7,28 @@ import step3.domain.LottoService;
 import step3.domain.strategy.numbers.NumbersStrategy;
 import step3.dto.LottoBoughtListResponse;
 import step3.dto.LottoStatisticsResponseDto;
+import step3.service.LottoServiceImpl;
 import step3.view.InputView;
 import step3.view.ResultView;
 
 public class LottoController {
-    LottoService lottoService;
+    LottoService lottoService = new LottoServiceImpl();
 
-    public LottoController(LottoService lottoService) {
-        this.lottoService = lottoService;
+    public LottoController() {
+    }
+
+    public void play(LottoController lottoController) {
+        lottoController.registerUserLottoBuyAmount();
+
+        lottoController.registerManualLottoNumbers();
+
+        lottoController.registerAutoLottoNumbers();
+
+        lottoController.lottoBoughtResult();
+
+        lottoController.registerLatestLottoNumberAndBonus();
+
+        lottoController.resultStatistics();
     }
 
     public void registerUserLottoBuyAmount() {
@@ -76,4 +90,5 @@ public class LottoController {
         LottoStatisticsResponseDto result = lottoService.resultStatistics();
         ResultView.statisticsPrint(result);
     }
+
 }
