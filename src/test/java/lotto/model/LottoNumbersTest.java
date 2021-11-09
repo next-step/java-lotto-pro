@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,19 +21,19 @@ public class LottoNumbersTest {
         ).withMessageContaining(NUMBER_SIZE_ERR_MSG);
     }
 
+    private static Stream<int[]> provideIllegalNumbers() {
+        return Stream.of(
+            new int[] {1, 2, 3, 4, 5},
+            new int[] {1, 2, 3, 4, 5, 6, 7}
+        );
+    }
+
     @ParameterizedTest
     @MethodSource("provideNumberAndExpectedResult")
     void getCountOfMatch(int[] numbers, int countOfMatch) {
         LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         assertThat(winningNumbers.getCountOfMatch(lottoNumbers)).isEqualTo(countOfMatch);
-    }
-
-    private static Stream<int[]> provideIllegalNumbers() {
-        return Stream.of(
-            new int[] {1, 2, 3, 4, 5},
-            new int[] {1, 2, 3, 4, 5, 6, 7}
-        );
     }
 
     private static Stream<Arguments> provideNumberAndExpectedResult() {
@@ -45,5 +46,12 @@ public class LottoNumbersTest {
             Arguments.of(new int[] {1, 2, 3, 4, 5, 12}, 5),
             Arguments.of(new int[] {1, 2, 3, 4, 5, 6}, 6)
         );
+    }
+
+    @Test
+    void contains() {
+        LottoNumbers numbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
+        assertThat(numbers.contains(Number.ofValue(1))).isTrue();
+        assertThat(numbers.contains(Number.ofValue(7))).isFalse();
     }
 }
