@@ -4,6 +4,8 @@ import lotto.exception.MinimumTicketPriceException;
 import lotto.ui.LottoMessage;
 
 public class BuyAmount {
+    public static final Money LOTTO_BASE_MONEY = Money.of(1000);
+
     private final Money totalMoney;
     private final Money manualMoney;
 
@@ -12,30 +14,30 @@ public class BuyAmount {
     }
 
     public BuyAmount(int buyPrice, int manualAmount) {
-        validateBuyPrice(buyPrice);
-        this.totalMoney = new Money(buyPrice);
-        this.manualMoney = new Money(manualAmount * Money.LOTTO_TICKET_PRICE);
+        this.totalMoney = Money.of(buyPrice);
+        this.manualMoney = Money.of(manualAmount, LOTTO_BASE_MONEY);
+        validateBuyPrice();
         validateNotExceedAmountSize();
     }
 
-    private void validateBuyPrice(int buyPrice) {
-        if (buyPrice < Money.LOTTO_TICKET_PRICE) {
+    private void validateBuyPrice() {
+        if (LOTTO_BASE_MONEY.isExceedMoney(totalMoney)) {
             throw new MinimumTicketPriceException(LottoMessage.MINIMUM_TICKET_PRICE_MESSAGE);
         }
     }
 
     private void validateNotExceedAmountSize() {
-        if((totalMoney.isExceedMoney(manualMoney))) {
+        if((manualMoney.isExceedMoney(totalMoney))) {
             throw new IllegalArgumentException(LottoMessage.EXCEED_MANUAL_LOTTO_SIZE_MESSAGE);
         }
     }
 
     public int getTotalAmount() {
-        return totalMoney.getPrice() / Money.LOTTO_TICKET_PRICE;
+        return totalMoney.getAmount(LOTTO_BASE_MONEY);
     }
 
     public int getManualAmount() {
-        return manualMoney.getPrice() / Money.LOTTO_TICKET_PRICE;
+        return manualMoney.getAmount(LOTTO_BASE_MONEY);
     }
 
     public int getAutoAmount() {

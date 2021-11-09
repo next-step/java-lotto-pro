@@ -11,9 +11,9 @@ class MoneyTest {
     @DisplayName("수동 입력 돈 초과 테스트")
     @Test
     void isExceedMoney() {
-        Money totalMoney = new Money(8000);
-        Money manualMoney = new Money(10000);
-        assertTrue(totalMoney.isExceedMoney(manualMoney));
+        Money totalMoney = Money.of(8000);
+        Money manualMoney = Money.of(10000);
+        assertTrue(manualMoney.isExceedMoney(totalMoney));
     }
 
 }
