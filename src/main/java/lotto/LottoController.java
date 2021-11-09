@@ -6,6 +6,7 @@ import lotto.domain.Money;
 import lotto.view.LottoPurchaseListView;
 import lotto.view.LottoPurchaseView;
 import lotto.view.LottoWinnerStatisticView;
+import lotto.view.LottoWinningBonusNumberView;
 import lotto.view.LottoWinningNumberView;
 
 public class LottoController {
@@ -15,6 +16,6 @@ public class LottoController {
 
         LottoPurchaseListView.print(lottos);
 
-        LottoWinnerStatisticView.print(lottos.winningResult(LottoWinningNumberView.input()), money);
+        LottoWinnerStatisticView.print(lottos.winningResult(LottoWinningNumberView.input(), LottoWinningBonusNumberView.input()), money);
     }
 }
