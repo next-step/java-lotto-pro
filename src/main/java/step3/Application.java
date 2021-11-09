@@ -12,6 +12,6 @@ public class Application {
 			new AutoLottoMachine(new AutoMachineValidation()),
 			new RequestView(),
 			new ReturnView());
-		lottoMachineFacade.start();
+		lottoMachineFacade.LottoMachineExecute();
 	}
 }
