@@ -29,7 +29,7 @@ public class LottoTicketIssuerTest {
 	@CsvSource(value = {"1000:1", "10000:10"}, delimiter = ':')
 	public void buyAutoTickets(int inputAmount, int numOfTickets) {
 		LottoTickets lottoTickets = lottoTicketIssuer.buyAutoTickets(inputAmount);
-		Assertions.assertThat(lottoTickets.getNumOfTickets()).isEqualTo(numOfTickets);
+		assertThat(lottoTickets.getNumOfTickets()).isEqualTo(numOfTickets);
 	}
 
 	@DisplayName("금액이_티켓_한장값_미만인_경우_예외처리")
@@ -55,7 +55,7 @@ public class LottoTicketIssuerTest {
 	@CsvSource(value = {"1000:1", "10000:10", "00011000:11"}, delimiter = ':')
 	public void buyAutoTickets_string_amount(String inputAmount, int numOfTickets) {
 		LottoTickets lottoTickets = lottoTicketIssuer.buyAutoTickets(inputAmount);
-		Assertions.assertThat(lottoTickets.getNumOfTickets()).isEqualTo(numOfTickets);
+		assertThat(lottoTickets.getNumOfTickets()).isEqualTo(numOfTickets);
 	}
 
 	@DisplayName("금액을_문자열로_입력받은경우_숫자가아닌경우_예외처리")

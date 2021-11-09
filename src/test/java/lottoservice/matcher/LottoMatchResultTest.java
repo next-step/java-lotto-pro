@@ -49,7 +49,7 @@ class LottoMatchResultTest {
 		otherlottoMatchResult.addMatchCount(LottoMatchRank.SIX_POINT);
 
 		lottoMatchResult.addResult(otherlottoMatchResult);
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.ONE_POINT)).isEqualTo(1);
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.SIX_POINT)).isEqualTo(1);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.ONE_POINT)).isEqualTo(1);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.SIX_POINT)).isEqualTo(1);
 	}
 } 

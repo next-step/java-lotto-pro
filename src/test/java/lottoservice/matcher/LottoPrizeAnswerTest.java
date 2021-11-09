@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -66,10 +65,10 @@ public class LottoPrizeAnswerTest {
 		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(winningNumbers, new BonusNumber(17));
 		LottoMatchResult lottoMatchResult = lottoPrizeAnswer.matchTickets(lottoTickets);
 
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.ZERO_POINT)).isEqualTo(0);
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.SIX_POINT)).isEqualTo(1);
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.THREE_POINT)).isEqualTo(1);
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.FIVE_POINT_AND_BONUS)).isEqualTo(1);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.ZERO_POINT)).isEqualTo(0);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.SIX_POINT)).isEqualTo(1);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.THREE_POINT)).isEqualTo(1);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.FIVE_POINT_AND_BONUS)).isEqualTo(1);
 	}
 
 	@DisplayName("당첨_수익률_계산")
@@ -88,7 +87,7 @@ public class LottoPrizeAnswerTest {
 		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(winningNumbers,new BonusNumber(17));
 		LottoMatchResult lottoMatchResult = lottoPrizeAnswer.matchTickets(lottoTickets);
 
-		Assertions.assertThat(lottoMatchResult.calculateProfitPercentage()).isEqualTo(2.27);
+		assertThat(lottoMatchResult.calculateProfitPercentage()).isEqualTo(2.27);
 	}
 
 	@DisplayName("수동티켓들과_자동티켓들_함께_정답과_비교")
@@ -109,9 +108,9 @@ public class LottoPrizeAnswerTest {
 		LottoPrizeAnswer lottoPrizeAnswer = new LottoPrizeAnswer(winningNumbers,new BonusNumber(17));
 		LottoMatchResult lottoMatchResult = lottoPrizeAnswer.matchTickets(autoLottoTickets,manualLottoTickets);
 
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.ZERO_POINT)).isEqualTo(0);
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.SIX_POINT)).isEqualTo(1);
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.THREE_POINT)).isEqualTo(1);
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.FIVE_POINT_AND_BONUS)).isEqualTo(1);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.ZERO_POINT)).isEqualTo(0);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.SIX_POINT)).isEqualTo(1);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.THREE_POINT)).isEqualTo(1);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.FIVE_POINT_AND_BONUS)).isEqualTo(1);
 	}
 }
