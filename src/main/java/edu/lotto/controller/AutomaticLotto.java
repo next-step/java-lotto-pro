@@ -37,10 +37,27 @@ public class AutomaticLotto {
 		MessageUtil.printMessage(MessageConstants.INPUT_PERCHASE_AMOUNT_MESSAGE);
 		Scanner scan = new Scanner(System.in);
 		String amount = scan.next();
-		if (!Lottos.checkPerchaseAmountValidation(amount)) {
+		if (!checkPerchaseAmountValidation(amount)) {
 			amount = getPerchaseAmount();
 		}
 		return amount;
+	}
+
+	/**
+	 * 사용자가 입력한 구매 금액이 숫자이고, 1000 이상의 숫자인지 확인
+	 * @param amount
+	 * @return
+	 */
+	public static boolean checkPerchaseAmountValidation(String amount) {
+		if(!NumberUtil.isNumber(amount)) {
+			MessageUtil.printMessage(MessageConstants.ONLY_INPUT_NUMBER_MESSAGE);
+			return false;
+		}
+		if(!NumberUtil.isMoreThanThousand(Integer.parseInt(amount))) {
+			MessageUtil.printMessage(MessageConstants.LOTTO_PRICE_INFORMATION_MESSAGE);
+			return false;
+		}
+		return true;
 	}
 
 	/**
