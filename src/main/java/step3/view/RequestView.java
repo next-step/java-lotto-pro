@@ -31,10 +31,6 @@ public class RequestView implements InputView {
 		return insertMoney;
 	}
 
-	private boolean userInsertMoney() {
-		return false;
-	}
-
 	public int insertBonusBall() {
 		int insertBonusBall = 0;
 		try {
