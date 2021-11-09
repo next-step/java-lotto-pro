@@ -19,13 +19,6 @@ public enum LottoRank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoRank from(int matchCount) {
-        return Arrays.stream(values())
-                .filter(lottoRank -> lottoRank.isEqualTo(matchCount))
-                .findFirst()
-                .orElse(NONE);
-    }
-
     public static LottoRank of(int matchCount, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(lottoRank -> lottoRank.isEqualTo(matchCount))
@@ -47,6 +40,10 @@ public enum LottoRank {
 
     private boolean isEqualTo(int matchCount) {
         return this.matchCount == matchCount;
+    }
+
+    public int calculatePrize(Integer lottoLankCount) {
+        return getPrizeMoney() * lottoLankCount;
     }
 
     public int getMatchCount() {

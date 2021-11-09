@@ -6,6 +6,7 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPurchase;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoWinningNumbers;
 
 import static lotto.view.InputView.inputBonusNumber;
 import static lotto.view.InputView.inputPurchaseAmount;
@@ -25,8 +26,7 @@ public class LottoController {
         LottoTicket lottoTicket = LottoIssue.ofAuto(lottoPurchase.getPurchaseQuantity());
         printLottoNumber(lottoTicket);
 
-        LottoNumbers lottoWinningNumbers = inputLottoWinningNumbers();
-        LottoNumber lottoBonusNumber = inputLottoBonusNumber();
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(inputLottoWinningNumbers(), inputLottoBonusNumber());
 
         play(lottoPurchase, lottoTicket, lottoWinningNumbers);
     }
@@ -36,7 +36,7 @@ public class LottoController {
         return new LottoNumber(inputBonusNumber());
     }
 
-    private void play(LottoPurchase lottoPurchase, LottoTicket lottoTicket, LottoNumbers lottoWinningNumbers) {
+    private void play(LottoPurchase lottoPurchase, LottoTicket lottoTicket, LottoWinningNumbers lottoWinningNumbers) {
         LottoResult lottoResult = new LottoResult(lottoPurchase, lottoTicket, lottoWinningNumbers);
         printWinningStatistics(lottoResult);
     }

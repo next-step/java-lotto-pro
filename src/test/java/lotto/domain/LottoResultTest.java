@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -24,27 +25,31 @@ class LottoResultTest {
     }
 
     @Test
+    @DisplayName("5등이 2개 당첨된 경우")
     public void 로또들의_당첨_통계를_구한다() {
         //given
         LottoPurchase lottoPurchase = new LottoPurchase(5000);
         LottoTicket lottoTicket = new LottoTicket(generateLottoTicket());
-        LottoNumbers lottoWinningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 11, 12, 13));
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 11, 12, 13)), new LottoNumber(7));
 
         //when
         LottoResult lottoResult = new LottoResult(lottoPurchase, lottoTicket, lottoWinningNumbers);
+
+
         Map<LottoRank, Integer> lottoTicketRankMap = lottoResult.getLottoTicketRankMap();
-        Integer count = lottoTicketRankMap.get(LottoRank.FOURTH);
+        Integer count = lottoTicketRankMap.get(LottoRank.FIFTH);
 
         //then
         assertThat(count).isEqualTo(2);
     }
 
     @Test
+    @DisplayName("5000원으로 5등이 2개 당첨된 경우")
     public void 총_수익률을_계산한다() {
         //given
         LottoPurchase lottoPurchase = new LottoPurchase(5000);
         LottoTicket lottoTicket = new LottoTicket(generateLottoTicket());
-        LottoNumbers lottoWinningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 11, 12, 13));
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 11, 12, 13)), new LottoNumber(7));
 
         //when
         LottoResult lottoResult = new LottoResult(lottoPurchase, lottoTicket, lottoWinningNumbers);

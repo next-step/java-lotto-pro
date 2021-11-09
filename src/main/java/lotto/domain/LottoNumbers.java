@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.naturalOrder;
@@ -28,16 +27,8 @@ public class LottoNumbers {
         return Collections.unmodifiableList(new ArrayList<>(lottoNumbers));
     }
 
-    public LottoRank compareWinningNumbers(LottoNumbers lottoWinningNumbers) {
-        return LottoRank.from(calculateMatchCount(lottoWinningNumbers));
-    }
-
-    private int calculateMatchCount(LottoNumbers lottoWinningNumbers) {
-        return (int) lottoNumbers.stream()
-                .filter(lottoNumber -> lottoWinningNumbers.getLottoNumbers()
-                        .stream()
-                        .anyMatch(Predicate.isEqual(lottoNumber)))
-                .count();
+    public boolean contains(LottoNumber lottoBonusNumber) {
+        return lottoNumbers.contains(lottoBonusNumber);
     }
 
     private void validateDuplicate(List<Integer> lottoNumbers) {
