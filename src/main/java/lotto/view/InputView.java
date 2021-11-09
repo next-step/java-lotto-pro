@@ -1,9 +1,12 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.Bonus;
+import lotto.domain.IssueQuantity;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
@@ -12,6 +15,8 @@ import lotto.utils.ValidationUtils;
 
 public class InputView {
     private static final String INSERT_MONEY = "구입금액을 입력해 주세요.";
+    private static final String INSERT_MANUAL_BUY_QUANTITY = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INSERT_MANUAL_BUY_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String INSERT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INSERT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
 
@@ -29,6 +34,17 @@ public class InputView {
         System.out.println(ERROR_ONLY_NUMBER);
         return enterMoney();
     }
+
+    public IssueQuantity enterManualQuantity(Money money) {
+    	System.out.println(INSERT_MANUAL_BUY_QUANTITY);
+        String number = ConsoleUtils.console();
+        if (ValidationUtils.isNumber(number) && Integer.parseInt(number) <= money.buyableQuantity()) {
+            return new IssueQuantity().manual(Integer.parseInt(number)).auto(money.buyableQuantity() - Integer.parseInt(number));
+        }
+        System.out.println(ERROR_ONLY_NUMBER);
+        return enterManualQuantity(money);
+    }
+
     public WinningLotto enterWinningLotto() {
         return enterWinningNumbers();
     }
@@ -36,7 +52,7 @@ public class InputView {
     private WinningLotto enterWinningNumbers() {
         System.out.println(INSERT_WINNING_NUMBER);
         String[] numbers = ConsoleUtils.console().split(",");
-        if (checkWinningNumbers(numbers)) {
+        if (checkNumbers(numbers)) {
             return enterBonus(LottoNumbers.valueOf(Arrays.stream(numbers)
                             .mapToInt(Integer::parseInt)
                             .boxed()
@@ -54,7 +70,7 @@ public class InputView {
         return enterBonus(winningNumbers);
     }
 
-    private boolean checkWinningNumbers(String[] numbers) {
+    private boolean checkNumbers(String[] numbers) {
         if (!ValidationUtils.isCorrectQuantity(numbers)) {
             System.out.println(String.format(ERROR_NUMBER_QUANTITY, LottoNumbers.LOTTO_NUMBER_QUANTITY));
             return false;
@@ -84,6 +100,27 @@ public class InputView {
             return false;
         }
         return true;
+    }
+    
+    public List<LottoNumbers> enterManualNumbers(int manualBuyQuantity) {
+    	System.out.println(INSERT_MANUAL_BUY_NUMBER);
+    	List<LottoNumbers> lottoNumbers = new ArrayList<LottoNumbers>(); 
+    	for (int i = 0; i < manualBuyQuantity;) {
+    		enterManualNumber(lottoNumbers);
+    		i = lottoNumbers.size();
+		}
+    	return lottoNumbers;
+    }
+    
+    private List<LottoNumbers> enterManualNumber(List<LottoNumbers> lottoNumbers) {
+        String[] numbers = ConsoleUtils.console().split(",");
+        if (checkNumbers(numbers)) {
+        	lottoNumbers.add(LottoNumbers.valueOf(Arrays.stream(numbers)
+                        .mapToInt(Integer::parseInt)
+                        .boxed()
+                        .collect(Collectors.toList())));
+        }
+        return lottoNumbers;
     }
 
 }

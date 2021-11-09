@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 import lotto.utils.RandomGeneratorUtils;
 
 public class Lotto {
@@ -9,16 +7,16 @@ public class Lotto {
     private final LottoNumbers lottoNumbers;
     private WinningRank winningRank;
 
-    private Lotto(List<Integer> numbers) {
-        this.lottoNumbers = LottoNumbers.valueOf(numbers);
+    private Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public static Lotto buyAuto() {
-        return new Lotto(RandomGeneratorUtils.makeRandomNumbers());
+        return new Lotto(LottoNumbers.valueOf(RandomGeneratorUtils.makeRandomNumbers()));
     }
 
-    public static Lotto buyManual(List<Integer> numbers) {
-        return new Lotto(numbers);
+    public static Lotto buyManual(LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 
     public WinningRank getWinningRank() {
