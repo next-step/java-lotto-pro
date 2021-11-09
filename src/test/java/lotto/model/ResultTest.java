@@ -19,7 +19,7 @@ public class ResultTest {
     void setUp() {
         Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
-        winLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)) , new LottoNumber(7));
+        winLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
         lottos = new Lottos(Arrays.asList(lotto1, lotto2));
         result = new Result(lottos, winLotto);
     }

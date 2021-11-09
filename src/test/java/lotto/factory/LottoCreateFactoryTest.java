@@ -36,9 +36,9 @@ public class LottoCreateFactoryTest {
     void createWinningLotto() {
         String text = "1, 2, 3, 4, 5, 6";
         int bonusNumber = 7;
-        WinningLotto winningLotto = LottoCreateFactory.createWinningLotto(InputHandler.splitTextToInts(text),bonusNumber);
+        WinningLotto winningLotto = LottoCreateFactory.createWinningLotto(InputHandler.splitTextToInts(text), bonusNumber);
 
-        assertThat(winningLotto).isEqualTo(new WinningLotto(new Lotto(Arrays.asList(1,2,3,4,5,6)),new LottoNumber(7)));
+        assertThat(winningLotto).isEqualTo(new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7)));
 
     }
 

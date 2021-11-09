@@ -52,11 +52,4 @@ public enum Rank {
         }
         return THIRD;
     }
-
-    public static Rank valueOf(int countOfMatch) {
-        return Arrays.stream(values())
-                .filter(rank -> countOfMatch == rank.countOfMatch)
-                .findFirst()
-                .orElse(MISS);
-    }
 }

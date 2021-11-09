@@ -39,7 +39,7 @@ public class LottoGame {
         List<Integer> winLottoNumbers = InputHandler.splitTextToInts(Console.readLine());
         View.print(Message.BONUS_NUMBER);
         int bonusNumber = InputHandler.checkLottoNumber(Console.readLine());
-        winningLotto = LottoCreateFactory.createWinningLotto(winLottoNumbers,bonusNumber);
+        winningLotto = LottoCreateFactory.createWinningLotto(winLottoNumbers, bonusNumber);
     }
 
     private void statistics() {

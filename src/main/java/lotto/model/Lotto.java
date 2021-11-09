@@ -3,7 +3,6 @@ package lotto.model;
 import lotto.view.ErrorMessage;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
