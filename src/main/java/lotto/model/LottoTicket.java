@@ -35,12 +35,12 @@ public class LottoTicket {
     public int calculateNumberOfMatch(LottoTicket ticket) {
         int result = 0;
         for (LottoNumber number : ticket.numbers) {
-            result += countIfMatch(number);
+            result += count(number);
         }
         return result;
     }
 
-    private int countIfMatch(LottoNumber lottoNumber) {
+    private int count(LottoNumber lottoNumber) {
         return this.numbers.contains(lottoNumber) ? 1 : 0;
     }
 }

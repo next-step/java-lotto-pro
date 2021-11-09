@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    private static final Money SELLING_PRICE = new Money(1000);
+    public static final Money SELLING_PRICE = new Money(1000);
 
     private final LottoTicket ticket;
 
@@ -12,7 +12,7 @@ public class Lotto {
         this.ticket = ticket;
     }
 
-    public static int getNumberOfLottosPurchasableWith(Money money) {
+    public static int countPurchasable(Money money) {
         if (money.isZero()) {
             return 0;
         }
@@ -20,11 +20,11 @@ public class Lotto {
     }
 
     public static Lotto generate(List<Integer> numbers) {
-        final List<LottoNumber> list = new ArrayList<>();
+        final List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int number : numbers) {
-            list.add(new LottoNumber(number));
+            lottoNumbers.add(new LottoNumber(number));
         }
-        return new Lotto(new LottoTicket(list));
+        return new Lotto(new LottoTicket(lottoNumbers));
     }
 
     @Override
@@ -35,9 +35,5 @@ public class Lotto {
     public Winning calculateWinning(WinTicket winTicket) {
         final int count = ticket.calculateNumberOfMatch(winTicket);
         return Winning.ofMatchCount(count);
-    }
-
-    public Money getSellingPrice() {
-        return SELLING_PRICE;
     }
 }

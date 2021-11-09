@@ -20,8 +20,8 @@ public class Lottos {
         final List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            final List<Integer> list = NumberListGenerator.generateRandomNumbers(LOTTO_SIZE, MIN_VALUE, MAX_VALUE);
-            final Lotto lotto = Lotto.generate(list);
+            final List<Integer> numbers = NumberListGenerator.generateRandomNumbers(LOTTO_SIZE, MIN_VALUE, MAX_VALUE);
+            final Lotto lotto = Lotto.generate(numbers);
             lottos.add(lotto);
         }
 
@@ -45,8 +45,6 @@ public class Lottos {
     }
 
     public Money getSellingPrice() {
-        return lottos.stream()
-                .map(Lotto::getSellingPrice)
-                .reduce(new Money(0), Money::plus);
+        return Lotto.SELLING_PRICE.multiplyBy(lottos.size());
     }
 }

@@ -15,14 +15,14 @@ public class LottoTest {
     @Test
     void howManyLottosCanIBuyWith_3000원() {
         final Money price = new Money(3_000);
-        final int count = Lotto.getNumberOfLottosPurchasableWith(price);
+        final int count = Lotto.countPurchasable(price);
         assertThat(count).isEqualTo(3);
     }
 
     @Test
     void howManyLottosCanIBuyWith_0원() {
         final Money price = new Money(0);
-        final int count = Lotto.getNumberOfLottosPurchasableWith(price);
+        final int count = Lotto.countPurchasable(price);
         assertThat(count).isEqualTo(0);
     }
 
