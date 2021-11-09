@@ -16,7 +16,7 @@ public class ManualLottoQuantity {
 		if (quantity < 0) {
 			throw new ManualLottoQuantityException(payment);
 		}
-		if (payment.getNumOfLottosCanBuy() < quantity) {
+		if (!payment.canBuy(quantity)) {
 			throw new ManualLottoQuantityException(payment);
 		}
 	}

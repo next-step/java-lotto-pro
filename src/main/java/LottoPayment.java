@@ -15,8 +15,8 @@ public class LottoPayment {
 		}
 	}
 
-	public boolean canBuy(int numberOfLottos) {
-		return numberOfLottos <= getNumOfLottosCanBuy();
+	public boolean canBuy(int numOfLottos) {
+		return numOfLottos <= getNumOfLottosCanBuy();
 	}
 
 	public int getNumOfLottosCanBuy() {
