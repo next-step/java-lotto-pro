@@ -22,12 +22,16 @@ public class LottoPapers {
 		List<Rank> ranks = new ArrayList<>();
 		for (LottoNumbers paper : papers) {
 			Map<Integer, Boolean> match = paper.match(userLottoNumbers, bonusBall);
-			for (Map.Entry<Integer,Boolean> matchNumber : match.entrySet()) {
-				Rank rank = Rank.valueOf(matchNumber.getKey(), matchNumber.getValue());
-				ranks.add(rank);
-			}
+			createRanks(ranks, match);
 		}
 		return ranks;
+	}
+
+	private void createRanks(List<Rank> ranks, Map<Integer, Boolean> match) {
+		for (Map.Entry<Integer,Boolean> matchNumber : match.entrySet()) {
+			Rank rank = Rank.valueOf(matchNumber.getKey(), matchNumber.getValue());
+			ranks.add(rank);
+		}
 	}
 
 	public int size() {
