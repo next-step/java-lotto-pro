@@ -28,10 +28,18 @@ public class LottoStore {
 		Lottos userLottos = buyingLotto(purchaseAmount.getPurchaseQuantity());
 
 		WinningLotto winningLotto = getLastWeekWinningLotto();
-		WinningRecord winningRecord = winningLotto.match(userLottos);
+		WinningRecord winningRecord = getWinngRecord(winningLotto, userLottos);
 
 		double profitRate = winningRecord.profitRate(purchaseAmount.getAmount());
 		ResultView.printWinningStat(winningRecord, profitRate);
+	}
+
+	private WinningRecord getWinngRecord(WinningLotto winningLotto, Lottos userLottos) {
+		try {
+			return winningLotto.match(userLottos, new LottoNumber(InputView.inputBonusNumber()));
+		} catch (IllegalArgumentException e) {
+			return getWinngRecord(winningLotto, userLottos);
+		}
 	}
 
 	private PurchaseAmount pay() {

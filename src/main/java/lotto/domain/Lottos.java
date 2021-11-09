@@ -16,9 +16,9 @@ public class Lottos {
 		return lottos.size();
 	}
 
-	public List<Rank> match(Lotto standardLotto) {
+	public List<Rank> match(Lotto standardLotto, LottoNumber bonusNumber) {
 		return lottos.stream()
-			.map(standardLotto::match)
+			.map(lotto -> standardLotto.match(lotto, bonusNumber))
 			.collect(Collectors.toList());
 	}
 

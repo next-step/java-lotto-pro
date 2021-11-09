@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,7 @@ public class LottoTest {
 	void invalidLotto() {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
-				Set<LottoNumber> lottoNumbers = Arrays.asList(1, 1, 3, 4, 5, 6).stream()
+				Set<LottoNumber> lottoNumbers = Stream.of(1, 1, 3, 4, 5, 6)
 					.map(LottoNumber::new)
 					.collect(Collectors.toSet());
 
@@ -42,13 +43,14 @@ public class LottoTest {
 	@ParameterizedTest
 	@EnumSource(names = {"FIRST"})
 	void lottoMatch(Rank rank) {
-		Set<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+		Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
 			.map(LottoNumber::new)
 			.collect(Collectors.toSet());
 		Lotto stamdardLotto = new Lotto(lottoNumbers);
 		Lotto lotto = new Lotto(lottoNumbers);
+		LottoNumber bonusNumber = new LottoNumber(10);
 
-		Rank returnRank = stamdardLotto.match(lotto);
+		Rank returnRank = stamdardLotto.match(lotto, new LottoNumber(10));
 
 		assertThat(returnRank).isEqualTo(rank);
 	}

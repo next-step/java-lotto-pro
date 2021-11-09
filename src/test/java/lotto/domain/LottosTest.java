@@ -23,15 +23,13 @@ public class LottosTest {
 	void setUp() {
 		List<Lotto> lottosStuff = new ArrayList<>();
 		lottosStuff.add(
-			new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
-				.stream()
+			new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
 				.map(LottoNumber::new)
 				.collect(Collectors.toSet())
 			)
 		);
 		lottosStuff.add(
-			new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10)
-				.stream()
+			new Lotto(Stream.of(1, 2, 3, 4, 5, 10)
 				.map(LottoNumber::new)
 				.collect(Collectors.toSet())
 			)
@@ -52,12 +50,12 @@ public class LottosTest {
 	@EnumSource(names = {"FIRST", "SECOND"})
 	void lottosRankMatch(Rank rank) {
 		Lotto winninglotto = new Lotto(
-			Arrays.asList(1, 2, 3, 4, 5, 6)
-				.stream()
+			Stream.of(1, 2, 3, 4, 5, 6)
 				.map(LottoNumber::new)
 				.collect(Collectors.toSet()));
+		LottoNumber bonusNumber = new LottoNumber(10);
 
-		List<Rank> ranks = lottos.match(winninglotto);
+		List<Rank> ranks = lottos.match(winninglotto,bonusNumber);
 
 		assertThat(ranks).contains(rank);
 	}

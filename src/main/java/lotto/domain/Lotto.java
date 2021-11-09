@@ -33,14 +33,19 @@ public class Lotto {
 		return LOTTO_SIZE != size;
 	}
 
-	public Rank match(Lotto lotto) {
+	public Rank match(Lotto lotto, LottoNumber bonusNumber) {
 		return Rank.rank(this.lottoNumbers.stream()
-			.filter(lotto.lottoNumbers::contains)
-			.count());
+				.filter(lotto.lottoNumbers::contains)
+				.count(),
+			lotto.contains(bonusNumber));
 	}
 
 	public List<LottoNumber> getLottoNumbers() {
 		return lottoNumbers;
+	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
 	}
 
 	@Override
