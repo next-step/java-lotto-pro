@@ -55,6 +55,14 @@ public class LottoTickets {
         return stringBuilder.toString();
     }
 
+    public Map<LottoTicket, Boolean> getContainsBonusNumberMap(Number bonusNumber) {
+        Map<LottoTicket, Boolean> containsBonusNumbers = new HashMap<>();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            containsBonusNumbers.put(lottoTicket, lottoTicket.isContainNumber(bonusNumber));
+        }
+        return containsBonusNumbers;
+    }
+
     @Override
     public String toString() {
         return "LottoTickets{" +

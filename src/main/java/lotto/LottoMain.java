@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.Number;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,7 +20,8 @@ public class LottoMain {
         resultView.printLottoTickets(lottoTickets);
 
         WinningNumbers winningNumbers = inputView.getWinningNumbers();
+        Number bonusNumber = inputView.getBonusNumber();
 
-        resultView.printLottoRewardResult(winningNumbers, lottoTickets);
+        resultView.printLottoRewardResult(winningNumbers, lottoTickets, bonusNumber);
     }
 }

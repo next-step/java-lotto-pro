@@ -13,6 +13,7 @@ public class InputView {
 
     public static final String INPUT_PURCHASE_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     public static final String INPUT_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private final Scanner scanner = new Scanner(System.in);
 
     public Money inputPurchaseMoney() {
@@ -43,5 +44,11 @@ public class InputView {
             numbers.add(new Number(number));
         }
         return new WinningNumbers(numbers);
+    }
+
+    public Number getBonusNumber() {
+        System.out.println(INPUT_BONUS_BALL_MESSAGE);
+        int input = Integer.parseInt(scanner.nextLine());
+        return new Number(input);
     }
 }
