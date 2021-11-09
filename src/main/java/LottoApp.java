@@ -2,16 +2,18 @@ import java.util.List;
 
 public class LottoApp {
 
-	private final LottoBuyer buyer;
+	private final LottoStore lottoStore;
 	private final View view;
+	private final BuyLottosController buyLottosController;
 
 	public LottoApp() {
-		this.buyer = new LottoBuyer(new LottoStore());
+		this.lottoStore = new LottoStore();
 		this.view = new View();
+		this.buyLottosController = new BuyLottosController(view);
 	}
 
 	public void run() {
-		final List<Lotto> lottos = buyer.buy();
+		final List<Lotto> lottos = buyLottosController.buyLottosAt(lottoStore);
 		view.space();
 
 		final WinningLotto winningLotto = tryMakeWinningLotto();

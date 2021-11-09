@@ -1,24 +1,22 @@
 import java.util.Collections;
 import java.util.List;
 
-public class LottoBuyer {
+public class BuyLottosController {
 
-	private final LottoStore store;
 	private final View view;
 
-	public LottoBuyer(LottoStore lottoStore) {
-		this.store = lottoStore;
-		this.view = new View();
+	public BuyLottosController(View view) {
+		this.view = view;
 	}
 
-	public List<Lotto> buy() {
+	public List<Lotto> buyLottosAt(LottoStore store) {
 		final LottoPayment payment = tryPay();
 		view.space();
 
 		final ManualLottoAmount manualLottoAmount = tryTellManualLottoAmount(payment);
 		view.space();
 
-		final List<Lotto> lottos = tryBuy(payment, manualLottoAmount);
+		final List<Lotto> lottos = tryBuy(store, payment, manualLottoAmount);
 		view.outBoughtLottos(manualLottoAmount, lottos);
 		return lottos;
 	}
@@ -57,11 +55,11 @@ public class LottoBuyer {
 		}
 	}
 
-	private List<Lotto> tryBuy(LottoPayment payment, ManualLottoAmount manualLottoAmount) {
+	private List<Lotto> tryBuy(LottoStore store, LottoPayment payment, ManualLottoAmount manualLottoAmount) {
 		List<Lotto> lottos;
 		do {
 			final List<String> manualLottos = writeManualLottos(manualLottoAmount);
-			lottos = buyLottos(payment, manualLottos);
+			lottos = buyLottos(store, payment, manualLottos);
 		} while (null == lottos);
 		return lottos;
 	}
@@ -73,7 +71,7 @@ public class LottoBuyer {
 		return Collections.emptyList();
 	}
 
-	private List<Lotto> buyLottos(LottoPayment payment, List<String> manualLottos) {
+	private List<Lotto> buyLottos(LottoStore store, LottoPayment payment, List<String> manualLottos) {
 		try {
 			return store.sell(payment, manualLottos);
 		} catch (IllegalArgumentException e) {
