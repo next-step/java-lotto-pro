@@ -8,6 +8,7 @@ import study.utils.Console;
 import study.utils.StringUtils;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class LottoWinningNumberInputView {
 
@@ -27,11 +28,11 @@ public class LottoWinningNumberInputView {
     }
 
     public static LottoWinningNumberRequestDto submit() {
-        final HashSet<Integer> lottoWinningNumber = getLottoWinningNumber();
+        final Set<Integer> lottoWinningNumber = getLottoWinningNumber();
         return new LottoWinningNumberRequestDto(lottoWinningNumber, getBonusNumber(lottoWinningNumber));
     }
 
-    private static int getBonusNumber(final HashSet<Integer> lottoWinningNumber) {
+    private static int getBonusNumber(final Set<Integer> lottoWinningNumber) {
         try {
             System.out.println(BONUS_BALL_INPUT_GUIDE_MESSAGE);
             final String bonusNumberStr = Console.readLine();
@@ -44,7 +45,7 @@ public class LottoWinningNumberInputView {
         return getBonusNumber(lottoWinningNumber);
     }
 
-    private static void validateBonusNumberDuplicated(final HashSet<Integer> lottoWinningNumber, final String bonusNumberStr) {
+    private static void validateBonusNumberDuplicated(final Set<Integer> lottoWinningNumber, final String bonusNumberStr) {
         if (lottoWinningNumber.contains(parseInt(bonusNumberStr))) {
             throw new InvalidLottoInputViewException(LOTTO_BONUS_NUMBER_NOT_DUPLICATED_ERROR_MESSAGE);
         }
@@ -56,7 +57,7 @@ public class LottoWinningNumberInputView {
         }
     }
 
-    private static HashSet<Integer> getLottoWinningNumber() {
+    private static Set<Integer> getLottoWinningNumber() {
         try {
             System.out.println(LOTTO_WINNING_NUMBER_INPUT_GUIDE_MESSAGE);
             final String winningNumberStr = Console.readLine();
@@ -74,9 +75,9 @@ public class LottoWinningNumberInputView {
         }
     }
 
-    private static HashSet<Integer> toSet(final String winningNumberStr) {
+    private static Set<Integer> toSet(final String winningNumberStr) {
         final String[] winningNumberArr = winningNumberStr.split(DELIMITER);
-        final HashSet<Integer> numberSet = new HashSet<>();
+        final Set<Integer> numberSet = new HashSet<>();
         for (final String winningNumber : winningNumberArr) {
             numberSet.add(parseLottoNumber(winningNumber));
         }
