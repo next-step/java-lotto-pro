@@ -1,6 +1,5 @@
 package step3.domain;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -13,13 +12,10 @@ import step3.domain.constance.LottoConstant;
 
 public class LottoNumber {
     private final int number;
-    private static final Map<Integer, LottoNumber> lottoNos = new HashMap<>();
-
-    static {
-        for (int i = LottoConstant.MIN_NUMBER_RANGE; i <= LottoConstant.MAX_NUMBER_RANGE; i++) {
-            lottoNos.put(i, new LottoNumber(i));
-        }
-    }
+    private static final Map<Integer, LottoNumber> lottoNos = IntStream.rangeClosed(LottoConstant.MIN_NUMBER_RANGE,
+            LottoConstant.MAX_NUMBER_RANGE)
+        .mapToObj(LottoNumber::new)
+        .collect(Collectors.toMap(lottoNumber -> lottoNumber.number, Function.identity()));
 
     private LottoNumber(int number) {
         validRange(number);
