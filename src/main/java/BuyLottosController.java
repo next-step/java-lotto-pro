@@ -13,11 +13,11 @@ public class BuyLottosController {
 		final LottoPayment payment = tryPay();
 		view.space();
 
-		final ManualLottoAmount manualLottoAmount = tryTellManualLottoAmount(payment);
+		final ManualLottoQuantity manualLottoQuantity = tryGetManualLottoQuantity(payment);
 		view.space();
 
-		final List<Lotto> lottos = tryBuy(store, payment, manualLottoAmount);
-		view.outBoughtLottos(manualLottoAmount, lottos);
+		final List<Lotto> lottos = tryBuy(store, payment, manualLottoQuantity);
+		view.outBoughtLottos(manualLottoQuantity, lottos);
 		return lottos;
 	}
 
@@ -38,35 +38,35 @@ public class BuyLottosController {
 		}
 	}
 
-	private ManualLottoAmount tryTellManualLottoAmount(LottoPayment payment) {
-		ManualLottoAmount manualLottoAmount;
+	private ManualLottoQuantity tryGetManualLottoQuantity(LottoPayment payment) {
+		ManualLottoQuantity manualLottoQuantity;
 		do {
-			manualLottoAmount = tellManualLottoAmount(payment, view.inManualLottoAmount());
-		} while (null == manualLottoAmount);
-		return manualLottoAmount;
+			manualLottoQuantity = getManualLottoQuentity(payment, view.inManualLottoQuantity());
+		} while (null == manualLottoQuantity);
+		return manualLottoQuantity;
 	}
 
-	private ManualLottoAmount tellManualLottoAmount(LottoPayment payment, String s) {
+	private ManualLottoQuantity getManualLottoQuentity(LottoPayment payment, String s) {
 		try {
-			return ManualLottoAmount.from(payment, s);
-		} catch (ManualLottoAmountException e) {
+			return ManualLottoQuantity.from(payment, s);
+		} catch (ManualLottoQuantityException e) {
 			view.error(e.getMessage());
 			return null;
 		}
 	}
 
-	private List<Lotto> tryBuy(LottoStore store, LottoPayment payment, ManualLottoAmount manualLottoAmount) {
+	private List<Lotto> tryBuy(LottoStore store, LottoPayment payment, ManualLottoQuantity manualLottoQuantity) {
 		List<Lotto> lottos;
 		do {
-			final List<String> manualLottos = writeManualLottos(manualLottoAmount);
+			final List<String> manualLottos = writeManualLottos(manualLottoQuantity);
 			lottos = buyLottos(store, payment, manualLottos);
 		} while (null == lottos);
 		return lottos;
 	}
 
-	private List<String> writeManualLottos(ManualLottoAmount manualLottoAmount) {
-		if (manualLottoAmount.isBiggerThan(0)) {
-			return view.inManualLottos(manualLottoAmount);
+	private List<String> writeManualLottos(ManualLottoQuantity manualLottoQuantity) {
+		if (manualLottoQuantity.isBiggerThan(0)) {
+			return view.inManualLottos(manualLottoQuantity);
 		}
 		return Collections.emptyList();
 	}

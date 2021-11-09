@@ -19,7 +19,7 @@
   - validate whether it's bigger than lotto.priceKRW
   - can buy the num of lottos
   - get num of lottos can buy(= paidKRW / lotto.priceKRW)
-- manual lotto amount
+- manual lotto quantity
   - validate 0 <= it <= payment.(num of lottos can buy)
   - is bigger than
   - subtract from
@@ -36,7 +36,7 @@
 - view
   - input
     - pay : should be bigger than price of lotto, otherwise retry
-    - manual lotto amount
+    - manual lotto quantity
     - manual lottos
     - winning numbers (','구분)
     - winning bonus

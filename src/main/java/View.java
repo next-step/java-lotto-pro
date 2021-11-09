@@ -12,14 +12,14 @@ public class View {
 		return Console.readLine();
 	}
 
-	public String inManualLottoAmount() {
-		println(Message.INPUT_MANUAL_LOTTO_AMOUNT.getContent());
+	public String inManualLottoQuantity() {
+		println(Message.INPUT_MANUAL_LOTTO_QUANTITY.getContent());
 		return Console.readLine();
 	}
 
-	public List<String> inManualLottos(ManualLottoAmount manualLottoAmount) {
+	public List<String> inManualLottos(ManualLottoQuantity manualLottoQuantity) {
 		println(Message.INPUT_MANUAL_LOTTOS.getContent());
-		return IntStream.range(0, manualLottoAmount.get())
+		return IntStream.range(0, manualLottoQuantity.get())
 			.mapToObj(i -> Console.readLine())
 			.collect(Collectors.toList());
 	}
@@ -34,12 +34,12 @@ public class View {
 		return Console.readLine();
 	}
 
-	public void outBoughtLottos(ManualLottoAmount manualLottoAmount, List<Lotto> lottos) {
-		if (manualLottoAmount.isBiggerThan(0)) {
+	public void outBoughtLottos(ManualLottoQuantity manualLottoQuantity, List<Lotto> lottos) {
+		if (manualLottoQuantity.isBiggerThan(0)) {
 			space();
 		}
-		final int numOfAutoLottos = manualLottoAmount.subtractFrom(lottos.size());
-		println(String.format(Message.BOUGHT_LOTTO.getContent(), manualLottoAmount.get(), numOfAutoLottos));
+		final int numOfAutoLottos = manualLottoQuantity.subtractFrom(lottos.size());
+		println(String.format(Message.BOUGHT_LOTTO.getContent(), manualLottoQuantity.get(), numOfAutoLottos));
 		lottos.stream().map(Lotto::toString).forEach(this::println);
 	}
 
