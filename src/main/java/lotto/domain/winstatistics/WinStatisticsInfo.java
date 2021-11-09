@@ -1,6 +1,5 @@
 package lotto.domain.winstatistics;
 
-import lotto.domain.winpolicy.Policy;
 import lotto.domain.winpolicy.WinPolicy;
 
 public class WinStatisticsInfo {

@@ -82,3 +82,13 @@ public class SetTest {
  
 ### Class Diagram
 ![class-diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/LuneChaser/java-lotto-pro/step4/classdiagram/Lotto_4step.pu)
+
+## 5단계-로또(수동)
+### 요구사항
+- 사용자가 수동으로 구매할 수 및 추첨번호를 입력할 수 있다.
+- 구입금액과 수동 구매한 로또 수 차이만큼 자동으로 로또가 생성된다.
+
+### 기능목록
+- [] 수동으로 구매 할 로또 수는 로또 생성화면에서 설정된다.
+- [] 수동으로 입력되는 로또 번호는 로또 생성화면에서 설정된다.
+- [] 자동생성된 로또는 전체 구매할 수 있는 로또개수에서 수동으로 생성하는 로또 개수 차이만큼 생성된다.

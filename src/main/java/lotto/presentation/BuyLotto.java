@@ -1,51 +1,66 @@
 package lotto.presentation;
 
-import java.util.ArrayList;
-import java.util.List;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumbers;
-import lotto.domain.lotto.Lottos;
 import lotto.infrastructure.component.Label;
 import lotto.infrastructure.component.TextEdit;
 import lotto.infrastructure.datashared.UiSharedData;
 
 public class BuyLotto extends Screen {
-  private TextEdit buyingLottoPrice;
-  private Label resultBuyingLottoCount;
+  private final TextEdit buyingLottoPrice;
+  private final Label invalidAlertForInvalidLottosPrice;
 
   public BuyLotto() {
+    buyingLottoPrice = new TextEdit("구입금액을 입력해 주세요.");
+    invalidAlertForInvalidLottosPrice = new Label();
+    
     initialize();
   }
 
   @Override
   public void initialize() {
-    buyingLottoPrice = new TextEdit("구입금액을 입력해 주세요.");
-    resultBuyingLottoCount = new Label("");
+    invalidAlertForInvalidLottosPrice.setPrintText("입력한 구입금액이 유효하지 않습니다.");
   }
 
   @Override
   public void render() {
     super.render();
 
-    buyingLottoPrice.render();
+    Integer lottosPrice = renderInputLottosPrice();
 
-    String buyPrice = buyingLottoPrice.getValue();
+    UiSharedData.setLottosPrice(lottosPrice);
+  }
 
-    int lottoCount = Integer.valueOf(buyPrice) / Lotto.PRICE;
+  private Integer renderInputLottosPrice() {
+    Integer lottosPrice = -1;
 
-    resultBuyingLottoCount.setPrintText(String.format("%d개를 구매했습니다.", lottoCount));
-    resultBuyingLottoCount.render();
+    while (lottosPrice < 0) {
+      buyingLottoPrice.render();
 
-    List<Lotto> lottos = new ArrayList<>();
+      lottosPrice = inputLottosPrice();
+    } 
 
-    for (int i = 0; i < lottoCount; i++) {
-      LottoNumbers lottoNumbers = new LottoNumbers();
-      lottoNumbers.generate();
+    return lottosPrice;
+  }
 
-      lottos.add(Lotto.valueOf(lottoNumbers));
+  private Integer inputLottosPrice() {
+    Integer lottosPrice = - 1;
+
+    try {
+      lottosPrice = Integer.valueOf(buyingLottoPrice.getValue());
+      
+      invalidLottosPriceIsNegative(lottosPrice);
+      
+      return lottosPrice;
+    } catch (Exception ex) {
+      invalidAlertForInvalidLottosPrice.render();
     }
 
-    UiSharedData.setBuyLottos(Lottos.valueOf(lottos));
+    return lottosPrice;
+  }
+
+  private void invalidLottosPriceIsNegative(Integer lottosPrice) {
+    if (lottosPrice < 0) {
+      invalidAlertForInvalidLottosPrice.render();  
+    }
   }
 
   @Override

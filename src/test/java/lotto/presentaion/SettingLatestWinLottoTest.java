@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.NoSuchElementException;
 
@@ -19,6 +18,7 @@ import org.junit.jupiter.api.TestInstance;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.infrastructure.datashared.UiSharedData;
+import lotto.infrastructure.util.Console;
 import lotto.presentation.Screen;
 import lotto.presentation.SettingLatestWinLotto;
 
@@ -26,7 +26,6 @@ import lotto.presentation.SettingLatestWinLotto;
 public class SettingLatestWinLottoTest {
   private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
   private static final PrintStream originalOut = System.out;
-  private static final InputStream originalIn = System.in;
 
   @BeforeEach
   public void setUpStreams() {
@@ -36,7 +35,6 @@ public class SettingLatestWinLottoTest {
   @AfterEach
   public void restoreStreams() {
     System.setOut(originalOut);
-    System.setIn(originalIn);
     System.out.println(outContent.toString().trim());
   }
 
@@ -45,6 +43,7 @@ public class SettingLatestWinLottoTest {
   void input_latestWinLotto() {
     // given
     System.setIn(new ByteArrayInputStream(Strings.join("1, 10, 11, 12, 13, 14").with("\n").getBytes()));
+    Console.reLoadScanner();
 
     Screen settingLatestWinLotto = new SettingLatestWinLotto();
 
@@ -64,6 +63,7 @@ public class SettingLatestWinLottoTest {
   void input_bonusNumber() {
     // given
     System.setIn(new ByteArrayInputStream(Strings.join("1, 10, 11, 12, 13, 14", "7").with("\n").getBytes()));
+    Console.reLoadScanner();
 
     Screen settingLatestWinLotto = new SettingLatestWinLotto();
 

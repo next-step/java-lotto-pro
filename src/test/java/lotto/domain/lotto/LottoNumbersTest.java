@@ -33,8 +33,6 @@ public class LottoNumbersTest {
   @Test
   void gerate_lottonumbers_auto() {
     // given
-    LottoNumbers lottoNumbers = new LottoNumbers();
-
     when(RandomLottoNumber.generate()).thenReturn(Arrays.asList(LottoNumber.valueOf("1"),
                                                                 LottoNumber.valueOf("3"),
                                                                 LottoNumber.valueOf("5"),
@@ -43,10 +41,10 @@ public class LottoNumbersTest {
                                                                 LottoNumber.valueOf("17")));
 
     // when
-    lottoNumbers.generate();
+    LottoNumbers realLottoNumbers = LottoNumbers.generate();
 
     // then
-    assertThat(lottoNumbers).isEqualTo(LottoNumbers.valueOf("1", "3", "5", "6", "14", "17"));
+    assertThat(realLottoNumbers).isEqualTo(LottoNumbers.valueOf("1", "3", "5", "6", "14", "17"));
   }
 
   @DisplayName("로또 번호들중 일치하는 로또번호 일치 여부 판단")

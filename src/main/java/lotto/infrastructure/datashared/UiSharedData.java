@@ -8,8 +8,14 @@ public class UiSharedData {
   private static Lottos buyLottos;
   private static Lotto latestWinLotto;
   private static LottoNumber bonusNumber;
-
-  public UiSharedData() {
+  private static Integer lottosPrice;
+  
+  public static void setLottosPrice(Integer lottosPrice) {
+    UiSharedData.lottosPrice = lottosPrice;
+  }
+  
+  public static Integer getLottosPrice() {
+    return UiSharedData.lottosPrice;
   }
 
   public static void setBuyLottos(Lottos buyLottos) {

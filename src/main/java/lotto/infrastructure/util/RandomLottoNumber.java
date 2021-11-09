@@ -8,9 +8,6 @@ import lotto.domain.lotto.LottoNumber;
 public class RandomLottoNumber {
   private static final List<LottoNumber> cachedNumbers;
 
-  private RandomLottoNumber() {
-  }
-
   static {
     cachedNumbers = new ArrayList<>();
 

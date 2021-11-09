@@ -51,16 +51,28 @@ public class ReportWinStatistics extends Screen {
   public void render() {
     super.render();
 
-    title.render();
-    division.render();
+    renderStatisticTitle();
 
+    renderStatisticContent();
+
+    renderRevenueRatio();
+  }
+
+  private void renderRevenueRatio() {
+    revenueRatio.render();
+  }
+
+  private void renderStatisticContent() {
     threeMatchWin.render();
     fourMatchWin.render();
     fiveMatchWin.render();
     fiveAndBonusMatchWin.render();
     sixMatchWin.render();
+  }
 
-    revenueRatio.render();
+  private void renderStatisticTitle() {
+    title.render();
+    division.render();
   }
 
   @Override
@@ -71,13 +83,17 @@ public class ReportWinStatistics extends Screen {
 
     winStatistics.analysis(latestWinLotto, buyLottos, bonusNumber);
 
+    setStatisticContentText();
+
+    revenueRatio.setPrintText(getRevenueRatioValueText());
+  }
+
+  private void setStatisticContentText() {
     threeMatchWin.setPrintText(getStatisticsText(WinPolicy.THREE_MATCH.getMatchCount() + "개 일치", winStatistics.find(WinPolicy.THREE_MATCH)));
     fourMatchWin.setPrintText(getStatisticsText(WinPolicy.FOUR_MATCH.getMatchCount() + "개 일치", winStatistics.find(WinPolicy.FOUR_MATCH)));
     fiveMatchWin.setPrintText(getStatisticsText(WinPolicy.FIVE_MATCH.getMatchCount() + "개 일치", winStatistics.find(WinPolicy.FIVE_MATCH)));
     fiveAndBonusMatchWin.setPrintText(getStatisticsText(WinPolicy.FIVE_BONUS_MATCH.getMatchCount() + "개 일치, 보너스 볼 일치", winStatistics.find(WinPolicy.FIVE_BONUS_MATCH)));    
     sixMatchWin.setPrintText(getStatisticsText(WinPolicy.SIX_MATCH.getMatchCount() + "개 일치", winStatistics.find(WinPolicy.SIX_MATCH)));
-
-    revenueRatio.setPrintText(getRevenueRatioValueText());
   }
 
   private String getRevenueRatioValueText() {
