@@ -49,4 +49,13 @@ public class LottoCashierTest {
         LotteryTicket lotteryTicket = lottoCashier.buy(Money.of(2000), new String[]{"1,2,3,4,5,6", "7,8,9,10,11,12"});
         assertThat(lotteryTicket).isEqualTo(new LotteryTicket(Arrays.asList(LottoNumbers.of("1,2,3,4,5,6"), LottoNumbers.of("7,8,9,10,11,12"))));
     }
+
+    @DisplayName("수동 구매를 하고 남은 금액으로 자동 구매를 한다")
+    @Test
+    void testBuyManualLottoSize() {
+        LotteryTicket lotteryTicket = lottoCashier.buy(Money.of(5000), new String[]{"1,2,3,4,5,6", "7,8,9,10,11,12"});
+        assertThat(lotteryTicket.size()).isEqualTo(5);
+        assertThat(lotteryTicket.getAutoLottoSize()).isEqualTo(3);
+        assertThat(lotteryTicket.getManualLottoSize()).isEqualTo(2);
+    }
 }

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class LottoCashier {
     private static final Money DEFAULT_PRICE = Money.of(1000);
 
@@ -18,7 +20,17 @@ public class LottoCashier {
     public LotteryTicket buy(Money cash, String[] texts) {
         validateDefaultPrice(cash);
         validatePossibleToBuy(cash, texts);
-        return new LotteryTicket(texts);
+
+        LotteryTicket lotteryTicket = new LotteryTicket(texts);
+        Money changes = cash.minus(DEFAULT_PRICE.multiply(texts.length));
+        if (!changes.isLessThan(DEFAULT_PRICE)) {
+            lotteryTicket = lotteryTicket.merge(buy(changes));
+        }
+        return lotteryTicket;
+    }
+
+    public LotteryTicket buy(Money cash, List<String> textList) {
+        return buy(cash, textList.toArray(new String[] {}));
     }
 
     private void validatePossibleToBuy(Money cash, String[] text) {
