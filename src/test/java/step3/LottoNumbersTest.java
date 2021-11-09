@@ -41,8 +41,8 @@ class LottoNumbersTest {
 
 	@Test
 	void 유저가_입력한_숫자_갯수를_찾는지_확인() {
-		LottoNumbers lottoNumber = LottoNumbers.createLottoNumber(1,2,3,4,5,6);
-		LottoNumbers userLottNumber = LottoNumbers.createLottoNumber(1,2,42,44,23,19);
+		LottoNumbers lottoNumber = LottoNumbers.createLottoNumber(1, 2, 3, 4, 5, 6);
+		LottoNumbers userLottNumber = LottoNumbers.createLottoNumber(1, 2, 42, 44, 23, 19);
 		Map<Integer, Boolean> match = lottoNumber.match(userLottNumber, BonusBall.of(45, userLottNumber));
 
 		Assertions.assertThat(match.size()).isEqualTo(1);

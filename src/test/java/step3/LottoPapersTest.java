@@ -36,7 +36,8 @@ class LottoPapersTest {
 		LottoNumbers userLottoNumbers = LottoNumbers.from("1,5,7,3,5,2");
 
 		// when
-		List<Rank> matchLottoNumber = lottoPapers.findMatchLottoNumber(userLottoNumbers, BonusBall.of(44, userLottoNumbers));
+		List<Rank> matchLottoNumber = lottoPapers.findMatchLottoNumber(userLottoNumbers,
+			BonusBall.of(44, userLottoNumbers));
 
 		// then
 		Assertions.assertThat(matchLottoNumber.size()).isEqualTo(2);
@@ -50,7 +51,8 @@ class LottoPapersTest {
 		LottoNumbers userLottoNumbers = LottoNumbers.from("1,5,7,3,5,2");
 
 		// when
-		List<Rank> matchLottoNumber = lottoPapers.findMatchLottoNumber(userLottoNumbers, BonusBall.of(32, userLottoNumbers));
+		List<Rank> matchLottoNumber = lottoPapers.findMatchLottoNumber(userLottoNumbers,
+			BonusBall.of(32, userLottoNumbers));
 
 		// then
 		Assertions.assertThat(matchLottoNumber.get(0)).isEqualTo(Rank.FOUR);
@@ -65,7 +67,7 @@ class LottoPapersTest {
 		return collect;
 	}
 
-	private Set<LottoNumber> getLottoNumber(Integer ...input) {
+	private Set<LottoNumber> getLottoNumber(Integer... input) {
 		Set<LottoNumber> lottoNumbers = new HashSet<>();
 		for (Integer integer : input) {
 			lottoNumbers.add(new LottoNumber(integer));
