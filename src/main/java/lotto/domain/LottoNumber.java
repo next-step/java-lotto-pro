@@ -3,22 +3,19 @@ package lotto.domain;
 import lotto.exception.ExceedNumberBoundException;
 import lotto.ui.LottoMessage;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_BOUND = 1;
     public static final int MAX_BOUND = 45;
-    private static final Map<Integer, LottoNumber> lottoNumbers = createLottoNumbers();
-    private static Map<Integer,LottoNumber> createLottoNumbers() {
-        Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
-        for (int number=MIN_BOUND; number<= MAX_BOUND;number++) {
-            lottoNumbers.put(number, new LottoNumber(number));
-        }
-
-        return  lottoNumbers;
-    }
+    private static final Map<Integer, LottoNumber> lottoNumbers =
+            IntStream.rangeClosed(MIN_BOUND, MAX_BOUND)
+                    .mapToObj(LottoNumber::new)
+                    .collect(Collectors.toMap(lottoNumber -> lottoNumber.number, Function.identity()));
 
     private final int number;
 
