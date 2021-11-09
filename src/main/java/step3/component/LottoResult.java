@@ -1,4 +1,4 @@
-package step3;
+package step3.component;
 
 import java.util.StringJoiner;
 import step3.domain.Lotto;
