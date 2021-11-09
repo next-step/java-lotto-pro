@@ -11,7 +11,7 @@ public class WinningLottoNumbers extends LottoNumbers{
         this.bonusNumber = bonusNumber;
     }
 
-    public String getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         Optional.ofNullable(bonusNumber).orElseThrow(
                 () -> new RuntimeException("보너스 번호가 존재하지 않습니다."));
         return bonusNumber.getBonusNumber();
