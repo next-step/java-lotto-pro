@@ -7,6 +7,7 @@ import java.util.Objects;
 public class WinningLotto {
     private Lotto lotto;
     private LottoNumber bonusNumber;
+
     public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
         this.lotto = lotto;
         validBonusExist(bonusNumber);
