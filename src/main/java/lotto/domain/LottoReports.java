@@ -1,45 +1,18 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 
 public class LottoReports {
-    private final List<Rank> lottoRanks;
     private final LottoMoney lottoMoney;
+    private final LottoRanksCount lottoRanksCount;
 
     public LottoReports(List<Rank> lottoRanks, LottoMoney lottoMoney) {
-        this.lottoRanks = Collections.unmodifiableList(lottoRanks);
         this.lottoMoney = lottoMoney;
+        this.lottoRanksCount = new LottoRanksCount(lottoRanks);
     }
 
-    public long getCountOfFirst() {
-        return lottoRanks.stream()
-            .filter(Rank::isFirst)
-            .count();
-    }
-
-    public long getCountOfSecond() {
-        return lottoRanks.stream()
-            .filter(Rank::isSecond)
-            .count();
-    }
-
-    public long getCountOfThird() {
-        return lottoRanks.stream()
-            .filter(Rank::isThird)
-            .count();
-    }
-
-    public long getCountOfFourth() {
-        return lottoRanks.stream()
-            .filter(Rank::isFourth)
-            .count();
-    }
-
-    public long getCountOfFifty() {
-        return lottoRanks.stream()
-            .filter(Rank::isFifth)
-            .count();
+    public long getRankCount(Rank rank) {
+        return lottoRanksCount.getRankCount(rank);
     }
 
     public double getProfitRatio() {
@@ -48,10 +21,10 @@ public class LottoReports {
     }
 
     private long sumWinningAmount() {
-        return getCountOfFirst() * Rank.FIRST.getWinningMoney()
-            + getCountOfSecond() * Rank.SECOND.getWinningMoney()
-            + getCountOfThird() * Rank.THIRD.getWinningMoney()
-            + getCountOfFourth() * Rank.FOURTH.getWinningMoney()
-            + getCountOfFifty() * Rank.FIFTH.getWinningMoney();
+        return getRankCount(Rank.FIRST) * Rank.FIRST.getWinningMoney()
+            + getRankCount(Rank.SECOND) * Rank.SECOND.getWinningMoney()
+            + getRankCount(Rank.THIRD) * Rank.THIRD.getWinningMoney()
+            + getRankCount(Rank.FOURTH) * Rank.FOURTH.getWinningMoney()
+            + getRankCount(Rank.FIFTH) * Rank.FIFTH.getWinningMoney();
     }
 }

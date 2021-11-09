@@ -26,11 +26,11 @@ class LottoReportsTest {
     @Test
     void getRankCount() {
         LottoReports lottoReports = new LottoReports(lottoRank, new LottoMoney("10000"));
-        assertEquals(1, lottoReports.getCountOfFirst());
-        assertEquals(1, lottoReports.getCountOfSecond());
-        assertEquals(1, lottoReports.getCountOfThird());
-        assertEquals(1, lottoReports.getCountOfFourth());
-        assertEquals(1, lottoReports.getCountOfFifty());
+        assertEquals(1, lottoReports.getRankCount(Rank.FIFTH));
+        assertEquals(1, lottoReports.getRankCount(Rank.SECOND));
+        assertEquals(1, lottoReports.getRankCount(Rank.THIRD));
+        assertEquals(1, lottoReports.getRankCount(Rank.FOURTH));
+        assertEquals(1, lottoReports.getRankCount(Rank.FIFTH));
     }
 
     @DisplayName("1등 수익률을 제대로 계산하는지 확인한다")
