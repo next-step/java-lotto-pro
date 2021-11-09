@@ -2,7 +2,6 @@ package step3.domain;
 
 import java.util.List;
 
-import step3.domain.constance.LottoConstant;
 import step3.domain.strategy.numbers.NumbersStrategy;
 
 public class LottoProvider {
@@ -23,14 +22,6 @@ public class LottoProvider {
         }
 
         return result;
-    }
-
-    public int availableQuantity(Amount amount) {
-        return amount.getAmount() / LottoConstant.LOTTO_MINIMUM_PRICE;
-    }
-
-    public LottoRanks getLottoResult(LottoNumbersBundle lottoNumbersBundle, WinningLotto winningLotto) {
-        return lottoNumbersBundle.lottoRanksOf(winningLotto);
     }
 
     public LottoRanks getLottoResult(LottoNumbersBundle baseLottoNumberBundle,

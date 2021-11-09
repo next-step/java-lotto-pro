@@ -12,10 +12,6 @@ public class LottoNumbersBundle {
     public LottoNumbersBundle() {
     }
 
-    public LottoNumbersBundle(List<LottoNumbers> lottoNumbersBundle) {
-        this.lottoNumbersBundle.addAll(lottoNumbersBundle);
-    }
-
     public void addLottoNumbers(NumbersStrategy numbersStrategy) {
         int[] numbers = numbersStrategy.getNumbers();
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);

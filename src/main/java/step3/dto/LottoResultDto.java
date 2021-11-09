@@ -27,6 +27,10 @@ public class LottoResultDto {
         return rankName;
     }
 
+    public long getPrize() {
+        return prize;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -41,10 +45,6 @@ public class LottoResultDto {
     @Override
     public int hashCode() {
         return Objects.hash(rankName, matchNumber, matchCount, prize);
-    }
-
-    public long getPrize() {
-        return prize;
     }
 }
 

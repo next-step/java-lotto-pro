@@ -25,10 +25,6 @@ public class WinningLotto {
         return lottoNumbers.isBonusContain(bonusLottoNumber);
     }
 
-    public Object match(LottoNumbers lottoNumber) {
-        return null;
-    }
-
     private void valid(LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
         if (winningLottoNumbers.isBonusContain(bonusLottoNumber)) {
             throw new InvalidParamException(LottoConstant.BONUS_NUMBER_ALREADY_EXIST_MESSAGE);
