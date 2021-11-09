@@ -41,6 +41,33 @@ class MoneyTest {
         //then
         assertThat(lottoBundle.getLottoCount())
                 .isEqualTo(expectedResult);
+    }
 
+    @Test
+    @DisplayName("수동 로또 구입 가능 여부 확인 - 성공")
+    void 수동_로또_구입_가능_여부_확인_성공() {
+        // given
+        Money money = new Money(10000);
+
+        // when
+        boolean ableToBuyCustomLotto = money.isAbleToBuyCustomLotto(10);
+
+        // when, then
+        assertThat(ableToBuyCustomLotto)
+                .isTrue();
+    }
+
+    @Test
+    @DisplayName("수동 로또 구입 가능 여부 확인 - 실패")
+    void 수동_로또_구입_가능_여부_확인_실패() {
+        // given
+        Money money = new Money(10000);
+
+        // when
+        boolean ableToBuyCustomLotto = money.isAbleToBuyCustomLotto(11);
+
+        // when, then
+        assertThat(ableToBuyCustomLotto)
+                .isFalse();
     }
 }
