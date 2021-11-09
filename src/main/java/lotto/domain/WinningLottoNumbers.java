@@ -37,7 +37,7 @@ public class WinningLottoNumbers {
     }
 
     private int getIncreasedBonusCountIfMatched(LottoNumber number, int matchedBonusCount) {
-        if (Objects.equals(bonusNumber, number)) {
+        if (number.equals(bonusNumber)) {
             return matchedBonusCount + 1;
         }
         return matchedBonusCount;
