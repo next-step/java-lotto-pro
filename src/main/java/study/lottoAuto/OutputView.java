@@ -12,8 +12,10 @@ public class OutputView {
         System.out.println(String.format(PURCHASE_COUNT_OUPUT_MSG, count));
     }
 
-    public static void printLottoNumberGroup(LottoNumbers group) {
-        System.out.println(group.makeLottoNumberPrintFormat());
+    public static void printLottoNumbersGroup(LottoNumbersGroup group) {
+        for(LottoNumbers lottoNumbers : group.getLottoNumbersList()){
+            System.out.println(lottoNumbers.makeLottoNumberPrintFormat());
+        }
     }
 
     public static void requestLastLottoNumberGroup() {

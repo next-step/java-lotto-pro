@@ -7,9 +7,14 @@ public class LottoController {
 
     public void run() {
         Money userInputMoney = readMoney();
+
         LottoNumbersGroup lottoNumbersGroup = generateLottoNumbersGroup(userInputMoney.getPurchaseCount());
+        OutputView.printLottoNumbersGroup(lottoNumbersGroup);
+
         LottoNumbers lastWeekLottoNumbers = generateLastLottoNumbers();
-        handleStatics(userInputMoney, lottoNumbersGroup, lastWeekLottoNumbers);
+
+        Statics statics = handleStatics(userInputMoney, lottoNumbersGroup, lastWeekLottoNumbers);
+        OutputView.printStatics(statics);
     }
 
     private Money readMoney() {
@@ -21,10 +26,9 @@ public class LottoController {
 
     private LottoNumbersGroup generateLottoNumbersGroup(final int purchaseCount) {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for(int i=0; i<purchaseCount; i++) {
+        for(int i = 0; i < purchaseCount; i++) {
             LottoNumbers lottoNumbers = new LottoNumbers();
             lottoNumbersList.add(lottoNumbers);
-            OutputView.printLottoNumberGroup(lottoNumbers); // 출력하는 부분이 여기 있는게 좀 어색한듯...?
         }
         return new LottoNumbersGroup(lottoNumbersList);
     }
@@ -34,9 +38,9 @@ public class LottoController {
         return new LottoNumbers(InputView.readLastLottoNumbers());
     }
 
-    private void handleStatics(Money userInputMoney, LottoNumbersGroup lottoNumbersGroup, LottoNumbers lastLottoNumbers) {
-        StaticsController staticsController = new StaticsController(userInputMoney, lottoNumbersGroup, lastLottoNumbers);
-        staticsController.analyst();
-        OutputView.printStatics(staticsController.getStatics());
+    private Statics handleStatics(Money userInputMoney, LottoNumbersGroup lottoNumbersGroup, LottoNumbers lastLottoNumbers) {
+        Statics statics = new Statics(userInputMoney, lottoNumbersGroup, lastLottoNumbers);
+        statics.analyst();
+        return statics;
     }
 }
