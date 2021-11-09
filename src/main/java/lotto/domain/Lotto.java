@@ -9,9 +9,10 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoPrize compareWinningNumbers(LottoNumbers winningNumbers) {
+    public LottoPrize compareWinningNumbers(WinningLottoNumbers winningNumbers) {
         long matchCount = lottoNumbers.compare(winningNumbers);
-        return LottoPrize.findPrize(matchCount);
+        boolean matchBonus = lottoNumbers.isContainBonusNumber(winningNumbers);
+        return LottoPrize.findPrize(matchCount, matchBonus);
     }
 
     public List<String> getLottoNumbers() {

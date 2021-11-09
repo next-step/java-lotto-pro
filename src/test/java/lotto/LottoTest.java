@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoPrize;
+import lotto.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,11 +11,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTest {
-    LottoNumbers winningNumbers;
+    WinningLottoNumbers winningNumbers;
 
     @BeforeEach
     void init() {
-        winningNumbers = new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        BonusNumber bonusNumber = new BonusNumber("45");
+        winningNumbers = new WinningLottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"), bonusNumber);
     }
 
     @Test
@@ -47,6 +46,12 @@ public class LottoTest {
     void 로또_3등() {
         Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "9")));
         assertThat(lotto.compareWinningNumbers(winningNumbers)).isEqualTo(LottoPrize.THIRD);
+    }
+
+    @Test
+    void 로또_2등() {
+        Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "45")));
+        assertThat(lotto.compareWinningNumbers(winningNumbers)).isEqualTo(LottoPrize.SECOND);
     }
 
     @Test
