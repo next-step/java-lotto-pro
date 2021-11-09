@@ -58,11 +58,10 @@ public class LottoNumbers {
 	}
 
 	private Integer matchCount(LottoNumbers userLottoNumbers) {
-		Integer count = (int) lottoNumbers.stream()
+		return (int) lottoNumbers.stream()
 			.filter(lottoNumber -> userLottoNumbers.getList().stream()
 				.anyMatch(lottoNumber::equals)
 			).count();
-		return count;
 	}
 
 	private Boolean matchBonusBall(BonusBall bonusBall) {
