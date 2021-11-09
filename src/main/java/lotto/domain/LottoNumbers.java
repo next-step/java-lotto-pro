@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.service.CreateShuffledLottoNumbers;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,5 +32,9 @@ public class LottoNumbers {
 
     public List<String> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public boolean isContainBonusNumber(WinningLottoNumbers winningNumbers) {
+        return isContainNumber(winningNumbers.getBonusNumber());
     }
 }
