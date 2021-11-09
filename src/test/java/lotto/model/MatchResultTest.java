@@ -15,11 +15,6 @@ public class MatchResultTest {
     private static final MatchResult EXPECTED_MATCH_RESULT = new MatchResult(new Payment(PAYMENT), EXPECTED_RANKS);
 
     @Test
-    void getRankToCount() {
-        assertThat(EXPECTED_MATCH_RESULT.getRankToCount()).hasSize(Rank.values().length);
-    }
-
-    @Test
     void getRateOfReturn() {
         double expectedRateOfReturn = (double)EXPECTED_RANKS.stream().mapToInt(Rank::getWinningMoney).sum() / PAYMENT;
         assertThat(EXPECTED_MATCH_RESULT.getRateOfReturn()).isEqualTo(expectedRateOfReturn);

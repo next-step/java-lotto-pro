@@ -36,10 +36,6 @@ public class MatchResult {
         }
     }
 
-    public Map<Rank, Integer> getRankToCount() {
-        return rankToCount;
-    }
-
     public double getRateOfReturn() {
         return rateOfReturn;
     }
