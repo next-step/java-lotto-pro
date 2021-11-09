@@ -46,7 +46,7 @@ public class Result {
         return String.format(ConstantString.SECOND_DECIMAL_PLACE, lottoYield);
     }
 
-    public BigInteger makeRevenueAmount() {
+    private BigInteger makeRevenueAmount() {
         BigInteger amount = BigInteger.ZERO;
         for (Rank rank : matchResult.keySet()) {
             BigInteger rankAmount = new BigInteger(String.valueOf(rank.getWinningMoney()));

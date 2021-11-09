@@ -11,8 +11,8 @@ import lotto.view.View;
 import java.util.List;
 
 public class LottoGame {
-    private static Lottos lottos;
-    private static WinningLotto winningLotto;
+    private Lottos lottos;
+    private WinningLotto winningLotto;
 
     public void run() {
         try {

@@ -6,8 +6,8 @@ public class Lottos {
 
     private final List<Lotto> lottoGroup;
 
-    public Lottos(Lotto[] lottoArray) {
-        lottoGroup = Arrays.asList(lottoArray);
+    public Lottos(List<Lotto> lottoGroup) {
+        this.lottoGroup = lottoGroup;
     }
 
     public int size() {
@@ -18,12 +18,4 @@ public class Lottos {
         return Collections.unmodifiableList(lottoGroup);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Lotto lotto : lottoGroup) {
-            stringBuilder.append(lotto.toString() + "\n");
-        }
-        return stringBuilder.toString();
-    }
 }

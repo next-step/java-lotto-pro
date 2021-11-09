@@ -12,8 +12,7 @@ public class LottoCreateFactory {
 
     public static Lotto createRandomLotto() {
         List<Integer> randomNumbers = createRandomNumbers();
-        Lotto lotto = new Lotto(randomNumbers);
-        return lotto;
+        return new Lotto(randomNumbers);
     }
 
     private static List<Integer> createRandomNumbers() {
@@ -33,11 +32,11 @@ public class LottoCreateFactory {
     }
 
     public static Lottos createLottos(int size) {
-        Lotto[] lottoArray = new Lotto[size];
+        List<Lotto> lottoGroup = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            lottoArray[i] = createRandomLotto();
+            lottoGroup.add(createRandomLotto());
         }
-        return new Lottos(lottoArray);
+        return new Lottos(lottoGroup);
     }
 
     public static Lotto createLotto(List<Integer> numbers) {
@@ -53,6 +52,6 @@ public class LottoCreateFactory {
     }
 
     public static WinningLotto createWinningLotto(List<Integer> winLottoNumbers, int bonusNumber) {
-        return new WinningLotto(createLotto(winLottoNumbers),new LottoNumber(bonusNumber));
+        return new WinningLotto(createLotto(winLottoNumbers), new LottoNumber(bonusNumber));
     }
 }
