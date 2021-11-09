@@ -8,21 +8,21 @@ public class Lotto {
     private List<Integer> numbers;
     private int matchCount = 0;
 
-    public Lotto(){
+    public Lotto() {
         numbers = new ArrayList<Integer>();
-        while(numbers.size() < LOTTO_NUMBER_COUNT) {
+        while (numbers.size() < LOTTO_NUMBER_COUNT) {
             getLottoNumber();
         }
     }
 
-    public Lotto(String numbers) throws RuntimeException{
+    public Lotto(String numbers) throws IllegalArgumentException{
         this(numbers, 0);
     }
 
-    public Lotto(String numbers, int matchCount){
+    public Lotto(String numbers, int matchCount) {
         List<Integer> lotto = StringUtil.mapToInteger(numbers);
-        if(lotto.size() < LOTTO_NUMBER_COUNT){
-            throw new RuntimeException("[ERROR] 숫자 " + LOTTO_NUMBER_COUNT + "개를 입력해야 합니다.");
+        if (lotto.size() < LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("[ERROR] 숫자 " + LOTTO_NUMBER_COUNT + "개를 입력해야 합니다.");
         }
         this.numbers = lotto;
         this.matchCount = matchCount;
@@ -32,29 +32,29 @@ public class Lotto {
         return numbers;
     }
 
-    public void getLottoNumber(){
-        int number = LottoMain.getLottoNumber();
+    public void getLottoNumber() {
+        int number = LottoGame.getLottoNumber();
 
-        if( ! numbers.contains(number)){
+        if (!numbers.contains(number)) {
             numbers.add(number);
         }
     }
 
     public void match(Lotto winLotto) {
         List<Integer> winNumber = winLotto.getNumbers();
-        for(int number : winNumber){
+        for (int number : winNumber) {
             isContainNumber(number);
         }
     }
 
-    public void isContainNumber(int number){
-        if(numbers.contains(number)) {
+    public void isContainNumber(int number) {
+        if (numbers.contains(number)) {
             matchCount++;
         }
     }
 
-    public boolean isMatch(int matchCount){
-        if(this.matchCount == matchCount){
+    public boolean isMatch(int matchCount) {
+        if (this.matchCount == matchCount) {
             return true;
         }
         return false;

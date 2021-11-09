@@ -7,7 +7,7 @@ public class InputView {
     private InputView() {
     }
 
-    public static String inputMoney(){
+    public static String inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         return scanner.nextLine();
     }

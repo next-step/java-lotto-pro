@@ -5,12 +5,12 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printBuyResult(int count){
+    public static void printBuyResult(int count) {
         System.out.printf("%d개를 구매했습니다.\n", count);
     }
 
-    public static void printLottoList(Lottos lottoList){
-        for(int i = 0; i < lottoList.size(); i++){
+    public static void printLottoList(Lottos lottoList) {
+        for (int i = 0; i < lottoList.size(); i++) {
             System.out.println(lottoList.get(i));
         }
     }

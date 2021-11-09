@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Lottos{
+public class Lottos {
     private List<Lotto> lottoList;
 
     public Lottos() {
@@ -15,18 +15,20 @@ public class Lottos{
     }
 
     public void checkMatch(Lotto lotto) {
-        for(Lotto myLotto : lottoList){
+        for (Lotto myLotto : lottoList) {
             myLotto.match(lotto);
         }
     }
 
     public int match(int matchCount) {
-        return (int) lottoList.stream().filter(l -> l.isMatch(matchCount)).count();
+        return (int) lottoList.stream()
+                .filter(lotto -> lotto.isMatch(matchCount))
+                .count();
     }
 
     public BigInteger getProfit() {
         BigInteger reward = BigInteger.valueOf(0);
-        for(LottoReward lottoReward : LottoReward.values()){
+        for (LottoReward lottoReward : LottoReward.values()) {
             reward = reward.add(BigInteger.valueOf(match(lottoReward.getMatchCount()) * lottoReward.getReward()));
         }
         return reward;
@@ -41,7 +43,7 @@ public class Lottos{
         return this.lottoList.size();
     }
 
-    public Lotto get(int index){
+    public Lotto get(int index) {
         return this.lottoList.get(index);
     }
 }

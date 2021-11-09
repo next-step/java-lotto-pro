@@ -28,36 +28,36 @@ public class InputString {
         this.numbers = numbers;
     }
 
-    public boolean isNullOrEmpty(){
+    public boolean isNullOrEmpty() {
         return StringUtil.isNullOrEmpty(this.str);
     }
 
-    public boolean isOneNumber(){
+    public boolean isOneNumber() {
         return StringUtil.isOneNumber(this.str);
     }
 
-    public boolean isValidNumber(){
-        if(Arrays.stream(numbers).anyMatch(i -> i < 0)) {
+    public boolean isValidNumber() {
+        if (Arrays.stream(numbers).anyMatch(i -> i < 0)) {
             throw new RuntimeException("[ERROR] 양의 정수를 입력하세요.");
         }
         return true;
     }
 
-    public int[] splitToNumberArray(){
+    public int[] splitToNumberArray() {
         return toNumberArray(splitString());
     }
 
-    private Matcher hasCustomDelimiter(){
+    private Matcher hasCustomDelimiter() {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(this.str);
-        if(m.find()) {
+        if (m.find()) {
             return m;
         }
         return null;
     }
 
-    private String[] splitString(){
+    private String[] splitString() {
         Matcher m = hasCustomDelimiter();
-        if(Objects.isNull(m)){
+        if (Objects.isNull(m)) {
             return StringUtil.splitString(this.str, DELIMITER);
         }
 
@@ -65,15 +65,15 @@ public class InputString {
         return StringUtil.splitString(m.group(2), customDelimiter);
     }
 
-    private int[] toNumberArray(String[] stringNumberArray){
+    private int[] toNumberArray(String[] stringNumberArray) {
         int[] numberArray = new int[stringNumberArray.length];
-        for(int i = 0; i < stringNumberArray.length; i++){
+        for (int i = 0; i < stringNumberArray.length; i++) {
             numberArray[i] = Integer.parseInt(stringNumberArray[i]);
         }
         return numberArray;
     }
 
-    public int sumNumbers(){
+    public int sumNumbers() {
         return Arrays.stream(numbers).sum();
     }
 }

@@ -14,7 +14,7 @@ public class LottosTest {
     }
 
     @Test
-    void getProfitTest(){
+    void getProfitTest() {
         Lottos lottos = new Lottos(Arrays.asList(new Lotto("1,2,3,4,5,6"), new Lotto("1,2,5,6,7,8"), new Lotto("1,2,3,7,8,9")));
         lottos.checkMatch(new Lotto("1,2,3,4,11,12"));
         assertThat(lottos.getProfit()).isEqualTo(55000);

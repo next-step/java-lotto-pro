@@ -1,12 +1,12 @@
 
 public class StringAddCalculator {
-    public static int splitAndSum(String str){
+    public static int splitAndSum(String str) {
         InputString inputString = new InputString(str);
 
-        if(inputString.isNullOrEmpty()) {
+        if (inputString.isNullOrEmpty()) {
             return 0;
         }
-        if(inputString.isOneNumber()) {
+        if (inputString.isOneNumber()) {
             return Integer.parseInt(str);
         }
 
