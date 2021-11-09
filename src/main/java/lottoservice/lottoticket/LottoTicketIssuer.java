@@ -87,7 +87,7 @@ public class LottoTicketIssuer {
 		}
 	}
 
-	public LottoTickets buyManualTickets(ArrayList<String> numbersText) {
+	public LottoTickets buyManualTickets(List<String> numbersText) {
 		return new LottoTickets(numbersText.stream()
 			.map(it -> buyManualTicket(it))
 			.collect(Collectors.toList()));
