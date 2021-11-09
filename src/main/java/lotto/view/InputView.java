@@ -13,6 +13,7 @@ public class InputView {
     public static final String MESSAGE_GET_USER_MONEY = "구입 금액을 입력해 주세요.";
     public static final String MESSAGE_GET_WINNING_LOTTO = "\n지난 주 당첨 번호를 입력해 주세요.";
     public static final String WINNING_LOTTO_DELIMITER = ", ";
+    public static final String MESSAGE_GET_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
     private InputView() {
         throw new UnsupportedOperationException();
@@ -45,7 +46,7 @@ public class InputView {
     }
 
     private static LottoNumber getBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
+        System.out.println(MESSAGE_GET_BONUS_NUMBER);
 
         String input = Console.readLine();
 
