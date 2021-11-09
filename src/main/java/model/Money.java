@@ -25,7 +25,7 @@ public class Money {
 		return new Money(money);
 	}
 
-	public static Money of(Integer money, Count count) {
+	public static Money total(Integer money, Count count) {
 		return Money.of(money * count.getValue());
 	}
 

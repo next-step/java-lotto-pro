@@ -18,7 +18,7 @@ public class Lottos {
 		return money.purchaseableCount(Money.of(Lotto.COST));
 	}
 
-	public static Lottos purchase(Purchase purchase) {
+	public static Lottos from(Purchase purchase) {
 		List<Lotto> values = new ArrayList<>(purchase.getManualLottos().values);
 
 		for (int i = 0; i < purchase.getAutoCount().getValue(); i++) {
