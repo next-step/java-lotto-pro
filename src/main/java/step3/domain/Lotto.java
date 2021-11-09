@@ -1,5 +1,6 @@
 package step3.domain;
 
+import static java.text.MessageFormat.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +23,7 @@ public class Lotto {
 
     private void verifyLottoNumbersLength(final LottoNumber[] lottoNumbers) {
         if (!isAvailableLottoNumbersLength(lottoNumbers)) {
-            throw new IllegalArgumentException("로또는 6개의 숫자로 구성되어야 합니다.");
+            throw new IllegalArgumentException(format("로또는 {0}개의 숫자로 구성되어야 합니다.", LOTTO_LENGTH));
         }
     }
 

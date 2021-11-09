@@ -1,5 +1,6 @@
 package step3.domain;
 
+import static java.text.MessageFormat.*;
 import java.util.Objects;
 import util.Numbers;
 
@@ -18,11 +19,12 @@ public class LottoNumber {
 
     private void verifyLottoNumber(final int number) {
         if (Numbers.isNegative(number)) {
-            throw new IllegalArgumentException("음수를 로또 번호로 할 수 없습니다.");
+            throw new IllegalArgumentException("로또 번호는 음수일 수 없습니다.");
         }
 
         if (!isAvailableLottoNumber(number)) {
-            throw new IllegalArgumentException("잘못 된 로또 번호입니다.");
+            throw new IllegalArgumentException(
+                format("로또 번호는 {0} ~ {1} 까지 가능합니다.", MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER));
         }
     }
 
