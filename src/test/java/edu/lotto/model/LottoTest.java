@@ -1,4 +1,4 @@
-package edu.lotto.automatic.model;
+package edu.lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

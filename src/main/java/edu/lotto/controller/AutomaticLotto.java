@@ -1,9 +1,10 @@
-package edu.lotto.automatic.controller;
+package edu.lotto.controller;
 
-import edu.lotto.automatic.constants.MessageConstants;
-import edu.lotto.automatic.constants.PatternConstants;
-import edu.lotto.automatic.model.Lottos;
-import edu.lotto.automatic.utils.NumberUtil;
+import edu.lotto.constants.MessageConstants;
+import edu.lotto.constants.PatternConstants;
+import edu.lotto.model.Lottos;
+import edu.lotto.utils.MessageUtil;
+import edu.lotto.utils.NumberUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,8 @@ public class AutomaticLotto {
 		int perchaseAmount = Integer.parseInt(getPerchaseAmount());
 		Lottos lottos = new Lottos(perchaseAmount);
 		List<Integer> winningNumbers = getLatestWinningNumbers();
-		lottos.setWinningNumberMatchesCount(winningNumbers);
+		int secondWinningNumber =getSecondWinningNumber(winningNumbers);
+		lottos.setWinningNumberMatchesCount(winningNumbers, secondWinningNumber);
 		lottos.printLottoMatchesCountStatistics();
 	}
 
@@ -32,10 +34,10 @@ public class AutomaticLotto {
 	 * @return
 	 */
 	public static String getPerchaseAmount() {
-		System.out.println(MessageConstants.INPUT_PERCHASE_AMOUNT_MESSAGE);
+		MessageUtil.printMessage(MessageConstants.INPUT_PERCHASE_AMOUNT_MESSAGE);
 		Scanner scan = new Scanner(System.in);
 		String amount = scan.next();
-		if (!NumberUtil.checkPerchaseAmountValidation(amount)) {
+		if (!Lottos.checkPerchaseAmountValidation(amount)) {
 			amount = getPerchaseAmount();
 		}
 		return amount;
@@ -59,14 +61,31 @@ public class AutomaticLotto {
 	 * @return
 	 */
 	public static String getLatestWinningNumbersByUserInput() {
-		System.out.println("\n"+MessageConstants.INPUT_LATEST_WINNING_NUMBERS_MESSAGE);
+		MessageUtil.printMessage("\n"+MessageConstants.INPUT_LATEST_WINNING_NUMBERS_MESSAGE);
 		Scanner scan = new Scanner(System.in);
 		String winningNumbers = scan.next().trim();
-		if (!NumberUtil.checkInputWinningNumbersValidation(winningNumbers)) {
-			System.out.println(MessageConstants.LATEST_WINNING_NUMBERS_ERROR_MESSAGE);
+		if (!Lottos.checkInputWinningNumbersValidation(winningNumbers)) {
+			MessageUtil.printMessage(MessageConstants.LATEST_WINNING_NUMBERS_ERROR_MESSAGE);
 			winningNumbers = getLatestWinningNumbersByUserInput();
 		}
 		return winningNumbers;
 	}
 
+	/**
+	 * 사용자 입력을 통해 2등 보너스볼 숫자 가져오기
+	 * @return
+	 */
+	public static int getSecondWinningNumber(List<Integer> winningNumbers) {
+		int secondWinningNumber = 0;
+		MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_MESSAGE);
+		Scanner scan = new Scanner(System.in);
+		secondWinningNumber = scan.nextInt();
+		if(!NumberUtil.isNumber(String.valueOf(secondWinningNumber))
+				|| !NumberUtil.isNumberBetweenOneAndFortyFive(secondWinningNumber)
+				|| winningNumbers.contains(secondWinningNumber)) {
+			MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_ERROR_MESSAGE);
+			secondWinningNumber = getSecondWinningNumber(winningNumbers);
+		}
+		return secondWinningNumber;
+	}
 }
