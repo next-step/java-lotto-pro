@@ -99,12 +99,13 @@
 
 ## 5 단계 기능 목록
 
-- [ ] 수동 구매 갯수 받기
-- [ ] 수동 로또 번호 받기
-- [ ] Amonut 구입할때 금액 차감?
-- [ ] validBonus 중복 검증코드 제거
-- [ ] WinningLotto 추가 (지난주 우승 로또번호, 보너스볼)
+- [X] 수동 구매 갯수 받기
+- [X] 수동 로또 번호 받기
+- [X] Amount 에서 수익률 계산 추가
+- [X] validBonus 중복 검증코드 제거
+- [X] WinningLotto 추가 (지난주 우승 로또번호, 보너스볼)
 - [ ] LottoRanks -> LottoResult 고민해보기
+- [X] view,controller,service 플로우 리팩토링
 
 ### 프로젝트 구조
 
