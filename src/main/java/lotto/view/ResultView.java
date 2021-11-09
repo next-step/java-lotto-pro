@@ -1,7 +1,11 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.WinningRecord;
@@ -13,21 +17,31 @@ public class ResultView {
 	public static final String PRINT_RETURN_RATE = "총 수익률은 %.2f 입니다.";
 	public static final String PRINT_MONEY_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 	public static final String PRINT_LOTTO_RECORD = "%d개 일치 (%s원)- %d개%n";
+	public static final String PRINT_LOTTO_NUMBER = "[%s]%n";
 	public static final String WINNING_STAT_INFO = "당첨 통계";
 	public static final String DASH = "---------";
+	public static final String DELIMITER = ", ";
 
 	public static void printLottoPurchaseQuantity(int purchaseQuantity) {
 		System.out.printf(PRINT_PURCHASE_QUANTITY, purchaseQuantity);
 	}
 
 	public static void printLottos(Lottos lottos) {
-		System.out.println(lottos.toString());
+		lottos.getLottos().forEach(ResultView::printLotto);
+	}
+
+	private static void printLotto(Lotto lotto) {
+		System.out.printf(PRINT_LOTTO_NUMBER,
+			lotto.getLottoNumbers().stream()
+				.map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
+				.collect(Collectors.joining(DELIMITER))
+		);
 	}
 
 	public static void printWinningRecord(WinningRecord winningRecord) {
 		Arrays.stream(Rank.values())
 			.filter(rank -> Rank.FAILED != rank)
-			.sorted((o1, o2) -> Long.valueOf(o1.getMatchCount()-o2.getMatchCount()).intValue())
+			.sorted((o1, o2) -> Long.valueOf(o1.getMatchCount() - o2.getMatchCount()).intValue())
 			.forEach(rank ->
 				System.out.printf(
 					PRINT_LOTTO_RECORD,
@@ -43,7 +57,7 @@ public class ResultView {
 		}
 	}
 
-	public static void printWinningStat(WinningRecord winningRecord, double rate){
+	public static void printWinningStat(WinningRecord winningRecord, double rate) {
 		System.out.println(WINNING_STAT_INFO);
 		System.out.println(DASH);
 		printWinningRecord(winningRecord);
