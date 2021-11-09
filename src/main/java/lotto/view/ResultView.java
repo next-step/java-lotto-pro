@@ -32,6 +32,11 @@ public class ResultView {
         Arrays.stream(LottoPrize.values())
                 .filter(l -> !l.equals(LottoPrize.NONE))
                 .forEach(l -> {
+                    if (l.equals(LottoPrize.SECOND)) {
+                        System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개", l.getCount(), l.getMoney(), lottoWinningMap.getOrDefault(l, 0));
+                        System.out.println();
+                        return;
+                    }
                     System.out.printf("%d개 일치 (%d원)- %d개", l.getCount(), l.getMoney(), lottoWinningMap.getOrDefault(l, 0));
                     System.out.println();
                 });
