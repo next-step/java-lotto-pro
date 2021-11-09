@@ -4,6 +4,9 @@ import static study.lottoAuto.MessageUtil.MINIMUM_MONEY_INPUT_ERR_MSG;
 import static study.lottoAuto.MessageUtil.NEGATIVE_NUMBER_ERR_MSG;
 
 public class Money {
+
+    private static final int LOTTO_PRICE = 1000;
+
     private final int money;
 
     public Money(String userInput) {
@@ -14,13 +17,12 @@ public class Money {
     private void validateMoney() {
         if(money < 0)
             throw new IllegalStateException(NEGATIVE_NUMBER_ERR_MSG);
-        if(money < 1000)
+        if(money < LOTTO_PRICE)
             throw new IllegalStateException(MINIMUM_MONEY_INPUT_ERR_MSG);
     }
 
-    //구매갯수를 구하는 책임을 여기서 맡을 필요가 있을까...?
     public int getPurchaseCount() {
-        return money/1000;
+        return money/LOTTO_PRICE;
     }
 
     public int getMoney() {
