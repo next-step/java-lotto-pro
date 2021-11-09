@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.DuplicateNumberException;
 import lotto.exception.LottoBallCountException;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
@@ -18,9 +19,9 @@ class LottoBallsTest {
     void createLottoBallsByString() {
         ThrowableAssert.ThrowingCallable throwingCallable = () -> new LottoBalls(LottoBallFactory.createLottoBallByStringNumber("1,1,2,3,4,5"));
 
-        assertThatExceptionOfType(LottoBallCountException.class)
+        assertThatExceptionOfType(DuplicateNumberException.class)
                 .isThrownBy(throwingCallable)
-                .withMessageContaining("로또 공 개수가 6개가 아닙니다.");
+                .withMessageContaining("중복된 숫자가 존재합니다.");
 
     }
 

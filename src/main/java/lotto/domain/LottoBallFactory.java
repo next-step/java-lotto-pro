@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.CreateLottoBallFactoryException;
-import lotto.exception.LottoBallCountException;
+import lotto.exception.DuplicateNumberException;
 
 import java.util.*;
 
@@ -32,15 +32,15 @@ public class LottoBallFactory {
 
     private static String[] splitNumberString(String numbersString) {
         String[] numbersSplitted = numbersString.split(",");
-        if (!isNumberStringSizeSix(numbersSplitted)) {
-            throw new LottoBallCountException("로또 공 개수가 6개가 아닙니다.");
+        if (hasDuplicatedNumber(numbersSplitted)) {
+            throw new DuplicateNumberException("중복된 숫자가 존재합니다.");
         }
         return numbersSplitted;
     }
 
-    private static boolean isNumberStringSizeSix(String[] numbersSplitted) {
+    private static boolean hasDuplicatedNumber(String[] numbersSplitted) {
         Set<String> numberSet = new HashSet<String>(Arrays.asList(numbersSplitted));
-        return numberSet.size() == LottoBallRule.LOTTO_BALLS_SIZE.getNumber();
+        return numberSet.size() != LottoBallRule.LOTTO_BALLS_SIZE.getNumber();
     }
 
     private static List<LottoBall> createLottoBallList(String[] numbersSplitted) {
