@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.toList;
 public class LottoGenerator {
 
     private static final List<Integer> LOTTO_NUMBERS =
-            IntStream.rangeClosed(LottoNumbers.MIN_LOTTO_NUMBER, LottoNumbers.MAX_LOTTO_NUMBER)
+            IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
                     .boxed()
                     .collect(toList());
 
