@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoApplicationController;
-import lotto.domain.Repeater;
+import lotto.controller.Repeater;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

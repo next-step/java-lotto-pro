@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoShop {
+	public static final int LOTTO_PRICE = 1000;
 	private static final List<LottoNumber> allLottoNumbers = new ArrayList<>();
 
 	static {

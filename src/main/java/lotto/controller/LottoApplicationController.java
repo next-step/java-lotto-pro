@@ -11,7 +11,7 @@ import lotto.domain.Lottos;
 
 public class LottoApplicationController {
 
-	public static final int LOTTO_PRICE = 1000;
+
 	private static final int PURCHASE_FINISH = 0;
 	private Lottos lottos;
 
@@ -36,7 +36,7 @@ public class LottoApplicationController {
 	}
 
 	public int getPurchaseQuantity(int purchaseAmount) {
-		return purchaseAmount / LOTTO_PRICE;
+		return purchaseAmount / LottoShop.LOTTO_PRICE;
 	}
 
 	public List<Lotto> getLottos() {

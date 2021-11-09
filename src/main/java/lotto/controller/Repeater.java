@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.controller;
 
 public class Repeater {
 	private static boolean repeater;
