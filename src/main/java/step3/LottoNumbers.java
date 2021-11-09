@@ -41,17 +41,18 @@ public class LottoNumbers {
 	}
 
 	public static LottoNumbers from(String userInputLottoNumbers) {
-		return new LottoNumbers(Arrays.stream(userInputLottoNumbers.split(","))
-			.map(String::trim)
-			.map(s -> new LottoNumber(Integer.parseInt(s)))
-			.collect(Collectors.toSet()));
+		return new LottoNumbers(
+			Arrays.stream(userInputLottoNumbers.split(","))
+				.map(String::trim)
+				.map(s -> new LottoNumber(Integer.parseInt(s)))
+				.collect(Collectors.toSet())
+		);
 	}
 
 	public int match(LottoNumbers userLottoNumbers) {
 		return (int) lottoNumbers.stream()
-			.filter(lottoNumber ->
-				userLottoNumbers.getList().stream()
-					.anyMatch(lottoNumber::equals))
+			.filter(lottoNumber -> userLottoNumbers.getList().stream()
+				.anyMatch(lottoNumber::equals))
 			.count();
 	}
 

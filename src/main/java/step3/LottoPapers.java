@@ -1,29 +1,28 @@
 package step3;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import step3.winner.WinningAmount;
+import java.util.stream.Collectors;
 
 public class LottoPapers {
 
-	public List<LottoNumbers> papers;
+	private final List<LottoNumbers> papers;
 
 	private LottoPapers(List<LottoNumbers> lottoNumbers) {
-		this.papers = new ArrayList<>(lottoNumbers);
+		this.papers = lottoNumbers;
 	}
 
 	public static LottoPapers createPapers(List<LottoNumbers> lottoNumbers) {
 		return new LottoPapers(lottoNumbers);
 	}
 
-	public int  findMatchLottoNumber(List<LottoNumber> userLottoNumbers) {
-		int total = 0;
-		for (LottoNumbers lottoNumbers : papers) {
-			int match = lottoNumbers.match(userLottoNumbers);
-			total += WinningAmount.valueOf(match);
-		}
-		return total;
+	public List<Integer> findMatchLottoNumber(LottoNumbers userLottoNumbers) {
+		return papers.stream()
+			.map(lottoNumbers -> lottoNumbers.match(userLottoNumbers))
+			.collect(Collectors.toList());
+	}
+
+	public int size() {
+		return papers.size();
 	}
 
 	@Override
@@ -34,5 +33,4 @@ public class LottoPapers {
 		}
 		return sb.toString();
 	}
-
 }

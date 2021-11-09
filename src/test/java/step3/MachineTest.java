@@ -17,6 +17,6 @@ public class MachineTest {
 		Machine machine = new AutoLottoMachine(new AutoMachineValidation());
 		machine.insertMoney(new Money(money));
 		LottoPapers lottoPapers = machine.createLottoPapers();
-		assertThat(lottoPapers.papers.size()).isEqualTo(result);
+		assertThat(lottoPapers.size()).isEqualTo(result);
 	}
 }

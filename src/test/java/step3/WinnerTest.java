@@ -1,6 +1,6 @@
 package step3;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
@@ -16,20 +16,18 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import step3.winner.Rank;
 import step3.winner.Winner;
-import step3.winner.WinningAmount;
 import step3.winner.WinningMoney;
 
 public class WinnerTest {
 
-	private LottoNumberService lottoNumberService;
 	private Map<Integer, Integer> winnerAmounts;
 	private Winner winner;
 	private LottoPapers papers;
 
 	@BeforeEach
 	void setUp() {
-		lottoNumberService = new LottoNumberService();
 		papers = LottoPapers.createPapers(getLottoNumbers());
 	}
 
@@ -37,40 +35,40 @@ public class WinnerTest {
 	@DisplayName("각 로또종이별 매칭되는 수에따른 금액 확인")
 	void eachWinAmount() {
 		//given
-		String userInputWinnerNumber = "1, 2, 3, 4, 5, 6";
-		lottoNumberService = new LottoNumberService();
+		LottoNumbers userLottoNumbers = LottoNumbers.from("1, 2, 3, 4, 5, 6");
 
 		//when
-		winner = new Winner();
-		int total = winner.statistics(lottoNumberService.convertLottoNumber(userInputWinnerNumber), papers);
-
+		Winner winner = Winner.of();
+		Winner result = winner.statistics(userLottoNumbers, papers);
+		int totalWinningAmount = result.getTotal();
 		//then
-		assertThat(total).isEqualTo(55_000);
+		assertThat(totalWinningAmount).isEqualTo(55_000);
 	}
 
 	@DisplayName("당첨금액의 총 수익률 계산")
 	@ParameterizedTest
 	@CsvSource(value = {"1, 2, 3, 4, 5, 6:14000:3.92", "36,42,45,21,30,20:14000:3.92",
 		"6,42,45,1,9,8:14000:0.00"}, delimiter = ':')
-	void yield(String userInputNumber, int inputMoney, String inputYield) {
+	void yield(String userLottoNumbers, int inputMoney, String inputYield) {
 		// given
-		WinningMoney winningMoney = new WinningMoney();
-		winner = new Winner();
-		int total = winner.statistics(lottoNumberService.convertLottoNumber(userInputNumber), papers);
+
+		Winner winner = Winner.of();
+		Winner statistics = winner.statistics(LottoNumbers.from(userLottoNumbers), papers);
+		int totalWinningAmount = statistics.getTotal();
 
 		// when
-		BigDecimal yield = winner.yield(inputMoney,total);
+		BigDecimal bigDecimal = WinningMoney.calculateYield(new Money(inputMoney), totalWinningAmount);
 
 		// then
-		assertThat(yield).isEqualTo(inputYield);
+		assertThat(bigDecimal).isEqualTo(inputYield);
 	}
 	
 	@DisplayName("각각의 금액이 해당 금액 범위 내인지 확인")
 	@ParameterizedTest
-	@EnumSource(WinningAmount.class)
-	void WinningAmountTest(WinningAmount winningAmount) {
+	@EnumSource(mode = EnumSource.Mode.EXCLUDE, names = {"MISS"})
+	void WinningAmountTest(Rank winningAmount) {
 		int amount = winningAmount.getAmount();
-		assertTrue(amount >= 5000 && amount <= 2_000_000_000);
+		assertTrue(amount >= 5_000 && amount <= 2_000_000_000);
 	}
 
 	private List<LottoNumbers> getLottoNumbers() {

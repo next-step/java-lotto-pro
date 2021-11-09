@@ -1,55 +1,42 @@
 package step3.machine;
 
-import step3.LottoNumberService;
+import step3.LottoNumbers;
 import step3.LottoPapers;
 import step3.Money;
 import step3.view.InputView;
 import step3.view.ResultView;
 import step3.winner.Winner;
+import step3.winner.WinningMoney;
 
 public class LottoMachineFacade {
 
-	private Money money;
-	private LottoNumberService lottoNumberService;
-	private MachineValidation machineValidation;
-	private LottoPapers lottoPapers;
-	private InputView inputView;
-	private ResultView resultView;
+	private final Machine machine;
+	private final InputView inputView;
+	private final ResultView resultView;
 
-	public LottoMachineFacade(LottoNumberService lottoNumberService, MachineValidation machineValidation, InputView inputView, ResultView resultView) {
+	public LottoMachineFacade(Machine machine, InputView inputView, ResultView resultView) {
+		this.machine = machine;
 		this.inputView = inputView;
 		this.resultView = resultView;
-		this.lottoNumberService = lottoNumberService;
-		this.machineValidation = machineValidation;
 	}
 
 	public void start() {
-		insertMoney();
-		createLottoPapers();
-		resultPrint();
+		Money money = new Money(inputView.insertMoney());
+		createLottoPapers(money);
 	}
 
-	private void insertMoney() {
-		int insertMoney = inputView.insertMoney();
-		money = new Money(insertMoney);
-	}
+	public void createLottoPapers(Money money) {
 
-	private void createLottoPapers() {
-		Machine machine = new AutoLottoMachine(machineValidation);
 		machine.insertMoney(money);
-		lottoPapers = machine.createLottoPapers();
-	}
-
-	private void resultPrint() {
-		resultView.purchasedCount(money.findPunchCount());
+		LottoPapers lottoPapers = machine.createLottoPapers();
+		resultView.purchasedCount(money.buyCount());
 		resultView.purchasedLottoPrint(lottoPapers);
-	}
 
-	public void findWinner() {
-		Winner winner = new Winner(lottoPapers);
-		winner.statistics(lottoNumberService.convertLottoNumber(inputView.insertLottoNumber()));
-		winner.yield(money);
-		resultView.statisticsPrintAndYield(winner);
+		Winner winner = Winner.of();
+		String userLottoNumbers = inputView.insertLottoNumber();
+		Winner statistics = winner.statistics(LottoNumbers.from(userLottoNumbers), lottoPapers);
+		int totalWinningAmount = statistics.getTotal();
+		WinningMoney.calculateYield(money, totalWinningAmount);
 	}
 
 }
