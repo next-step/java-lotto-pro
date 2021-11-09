@@ -8,7 +8,7 @@ import lotto.domain.exception.LottoNumberOutOfRangeException;
 
 public class LottoNumber {
 
-	private static final Map<Integer, LottoNumber> numbers =new HashMap<>();
+	private static final Map<Integer, LottoNumber> numbers = new HashMap<>();
 
 	static {
 		for (int i = Common.NUMBER_RANGE_MIN; i <= Common.NUMBER_RANGE_MAX; i++) {

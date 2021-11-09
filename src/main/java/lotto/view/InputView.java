@@ -67,7 +67,7 @@ public class InputView {
 	private List<String> userInputs(int count) {
 		List<String> inputs = new ArrayList<>();
 
-		for(int i = 0; i < count; i++) {
+		for (int i = 0; i < count; i++) {
 			inputs.add(userInput());
 		}
 		return inputs;
