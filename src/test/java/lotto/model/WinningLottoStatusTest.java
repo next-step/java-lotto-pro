@@ -15,18 +15,21 @@ public class WinningLottoStatusTest {
 			new Lotto(new LottoNumbers(3,6,23,24,32,34)),
 			new Lotto(new LottoNumbers(3,7,23,24,32,34)),
 			new Lotto(new LottoNumbers(5,7,13,34,36,37)),
+			new Lotto(new LottoNumbers(3,7,13,18,32,34)),
 			new Lotto(new LottoNumbers(3,7,17,22,31,34))
 		));
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(3,7,17,18,32,34);
+		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(new int[]{3, 7, 17, 18, 32, 34},13);
 		WinningLottoStatus status = lottos.getWinningStatus(winningLottoNumbers);
-		int matchThreeCount = status.getMatchCount(LottoResult.MATCH_THREE);
-		int matchFourCount = status.getMatchCount(LottoResult.MATCH_FOUR);
-		int matchFiveCount = status.getMatchCount(LottoResult.MATCH_FIVE);
-		int matchSixCount = status.getMatchCount(LottoResult.MATCH_SIX);
+		int matchThreeCount = status.getMatchCount(Rank.FIFTH);
+		int matchFourCount = status.getMatchCount(Rank.FOURTH);
+		int matchFiveCount = status.getMatchCount(Rank.THIRD);
+		int matchFiveCountAndBonus = status.getMatchCount(Rank.SECOND);
+		int matchSixCount = status.getMatchCount(Rank.FIRST);
 
 		assertThat(matchThreeCount).isEqualTo(1);
 		assertThat(matchFourCount).isEqualTo(2);
 		assertThat(matchFiveCount).isEqualTo(0);
+		assertThat(matchFiveCountAndBonus).isEqualTo(1);
 		assertThat(matchSixCount).isEqualTo(0);
 	}
 
@@ -39,7 +42,7 @@ public class WinningLottoStatusTest {
 			new Lotto(new LottoNumbers(5,7,13,34,36,37)),
 			new Lotto(new LottoNumbers(3,7,17,22,31,34))
 		));
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(3,7,17,18,32,34);
+		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(new int[]{3, 7, 17, 18, 32, 34},13);
 		WinningLottoStatus status = lottos.getWinningStatus(winningLottoNumbers);
 		int useMoney = 4000;	//로또구매에 사용한 금액
 		int totalReward = status.getTotalReward();
