@@ -39,4 +39,14 @@ public class LottoPrizeAnswer {
 		int matchCount = winningNumbers.matchCountWinningAndTicket(lottoTicket);
 		return LottoMatchRank.valueOf(matchCount, matchBonus);
 	}
+
+	public LottoMatchResult matchTickets(LottoTickets... tickets) {
+		LottoMatchResult lottoMatchResult = new LottoMatchResult();
+		for(LottoTickets lottoTickets : tickets){
+			for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+				lottoMatchResult.addMatchCount(matchTicket(lottoTicket));
+			}
+		}
+		return lottoMatchResult;
+	}
 }
