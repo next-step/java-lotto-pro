@@ -32,4 +32,11 @@ public class LotteryTicketTest {
         Record record = new Record(lotteryTicket, winningNumber);
         assertThat(record.getWinningCount(Rank.FIRST)).isEqualTo(1);
     }
+
+    @DisplayName("String[]으로 생성 가능")
+    @Test
+    void testCreateTexts() {
+        String[] texts = {"1,2,3,4,5,6"};
+        assertThat(lotteryTicket).isEqualTo(new LotteryTicket(texts));
+    }
 }

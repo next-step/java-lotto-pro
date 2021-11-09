@@ -3,9 +3,12 @@ package lotto.domain;
 import lotto.auto.AutoLottoPrinter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -36,8 +39,15 @@ public class LottoCashierTest {
 
     @DisplayName("원하는 수량만큼 살 수 있는 금액인지 확인한다")
     @ParameterizedTest
-    @CsvSource(value = {"1500:2:false", "1000:1:true", "1000:0:true"}, delimiter = ':')
+    @CsvSource(value = {"1500:2:false", "1000:1:true", "1000:0:true", "2000:2:true"}, delimiter = ':')
     void testIsPossibleToBuy(int cash, int count, boolean result) {
         assertThat(lottoCashier.isPossibleToBuy(Money.of(cash), count)).isEqualTo(result);
+    }
+
+    @DisplayName("구입 금액 이하의 로또를 수동으로 구매한다")
+    @Test
+    void testBuyManualLotto() {
+        LotteryTicket lotteryTicket = lottoCashier.buy(Money.of(2000), new String[]{"1,2,3,4,5,6", "7,8,9,10,11,12"});
+        assertThat(lotteryTicket).isEqualTo(new LotteryTicket(Arrays.asList(LottoNumbers.of("1,2,3,4,5,6"), LottoNumbers.of("7,8,9,10,11,12"))));
     }
 }
