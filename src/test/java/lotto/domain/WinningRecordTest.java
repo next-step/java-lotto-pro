@@ -22,7 +22,7 @@ public class WinningRecordTest {
 		ranks = new ArrayList<>();
 		ranks.add(Rank.FOURTH);
 		ranks.add(Rank.FOURTH);
-		ranks.add(Rank.THIRD);
+		ranks.add(Rank.FIFTH);
 		lottoRecord = new WinningRecord(ranks);
 	}
 
@@ -32,16 +32,17 @@ public class WinningRecordTest {
 		int secondPlaceCount = lottoRecord.getPlaceCount(Rank.FOURTH);
 		assertThat(secondPlaceCount).isEqualTo(2);
 
-		secondPlaceCount = lottoRecord.getPlaceCount(Rank.THIRD);
+		secondPlaceCount = lottoRecord.getPlaceCount(Rank.FIFTH);
 		assertThat(secondPlaceCount).isEqualTo(1);
 	}
 
 	@DisplayName("수익률 계산")
 	@ParameterizedTest
-	@CsvSource(value = {"10000:6.00", "2000000:0.02"}, delimiter = ':')
+	@CsvSource(value = {"10000:10.50", "2000000:0.05"}, delimiter = ':')
 	public void profitRate(double standard, double revenue) {
 		double profitRate = lottoRecord.profitRate(standard);
 
 		assertThat(profitRate).isEqualTo(revenue);
 	}
+
 }
