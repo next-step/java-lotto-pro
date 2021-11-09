@@ -18,13 +18,9 @@ public class Lotto {
 	private static Logger logger = Logger.getLogger(Lotto.class.getName());
 
 	private List<Integer> lottoNumbers;
-	private long winningNumberMatchesCount;
-	private boolean matchBonusNumber;
 	private Rank rank;
-	private long winningMoney;
 
 	public Lotto() {
-		this.lottoNumbers = new ArrayList<>();
 		setLottoNumber();
 		Collections.sort(this.lottoNumbers);
 		MessageUtil.printMessage(lottoNumbers.toString());
@@ -53,46 +49,14 @@ public class Lotto {
 	}
 
 	/**
-	 * 지난주 정답과 로또 번호가 몇개 일치하는지 확인
-	 * @param winningNumbers
-	 */
-	public void setWinningNumberMatchesCount(List<Integer> winningNumbers) {
-		this.winningNumberMatchesCount
-				= this.lottoNumbers.stream()
-						.filter(number -> winningNumbers.contains(number))
-						.count();
-	}
-
-	/**
-	 * WinningNumberMatchesCount 가져오기
-	 * @return
-	 */
-	public long getWinningNumberMatchesCount() {
-		return this.winningNumberMatchesCount;
-	}
-
-	/**
-	 * 보너스볼 일치 여부 Setter
-	 * @param bonusNumber
-	 */
-	public void setMatchBonusNumber(int bonusNumber) {
-		this.matchBonusNumber = lottoNumbers.contains(bonusNumber);
-	}
-
-	/**
-	 * 보너스볼 일치여부 Getter
-	 * @return
-	 */
-	public boolean getMatchBonusNumber() {
-		return this.matchBonusNumber;
-	}
-
-	/**
 	 * 로또 당첨 순위 Setter
 	 */
-	public void setRank() {
-		Long matchesCount = this.winningNumberMatchesCount;
-		this.rank = Rank.valueOf(matchesCount.intValue(), this.getMatchBonusNumber());
+	public void setRank(List<Integer> winningNumbers, int bonusNumber) {
+		Long matchesCount
+				= this.lottoNumbers.stream()
+									.filter(number -> winningNumbers.contains(number))
+									.count();
+		this.rank = Rank.valueOf(matchesCount.intValue(), isMatchBonusNumber(bonusNumber));
 	}
 
 	/**
@@ -104,17 +68,11 @@ public class Lotto {
 	}
 
 	/**
-	 * 로또 당첨 금액 Setter
-	 */
-	public void setWinningMoney() {
-		this.winningMoney = this.rank.getWinningMoney();
-	}
-
-	/**
-	 * 로또 당첨 금액 Getter
+	 * 보너스 번호가 Lotto 번호 안에 있는지 확인
+	 * @param bonusNumber
 	 * @return
 	 */
-	public long getWinningMoney() {
-		return this.winningMoney;
+	private boolean isMatchBonusNumber(int bonusNumber) {
+		return this.lottoNumbers.contains(bonusNumber);
 	}
 }

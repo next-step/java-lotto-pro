@@ -7,9 +7,7 @@ import edu.lotto.utils.MessageUtil;
 import edu.lotto.utils.NumberUtil;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 /**
@@ -50,10 +48,7 @@ public class Lottos {
 	 */
 	public void setWinningNumberMatchesCount(List<Integer> winningNumbers, int bonusNumber) {
 		for(Lotto lotto : this.lottos) {
-			lotto.setWinningNumberMatchesCount(winningNumbers);
-			lotto.setMatchBonusNumber(bonusNumber);
-			lotto.setRank();
-			lotto.setWinningMoney();
+			lotto.setRank(winningNumbers, bonusNumber);
 		}
 	}
 
@@ -81,27 +76,10 @@ public class Lottos {
 	private void printLottoProfitRatio() {
 		long profit = 0;
 		for(Lotto lotto : lottos) {
-			profit += lotto.getWinningMoney();
+			profit += lotto.getRank().getWinningMoney();
 		}
 		String profitRatio = new DecimalFormat("#.##").format((float) profit / (float) this.perchaseAmount);
 		MessageUtil.printMessage(MessageConstants.LOTTO_PROFIT_RATIO_MESSAGE, profitRatio);
-	}
-
-	/**
-	 * 사용자가 입력한 구매 금액이 숫자이고, 1000 이상의 숫자인지 확인
-	 * @param amount
-	 * @return
-	 */
-	public static boolean checkPerchaseAmountValidation(String amount) {
-		if(!NumberUtil.isNumber(amount)) {
-			MessageUtil.printMessage(MessageConstants.ONLY_INPUT_NUMBER_MESSAGE);
-			return false;
-		}
-		if(!NumberUtil.isMoreThanThousand(Integer.parseInt(amount))) {
-			MessageUtil.printMessage(MessageConstants.LOTTO_PRICE_INFORMATION_MESSAGE);
-			return false;
-		}
-		return true;
 	}
 
 	/**
