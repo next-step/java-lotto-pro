@@ -24,7 +24,8 @@ public class Money {
         return new Money(money);
     }
 
-    public int divide(int priceOfLottoTicket) {
-        return money / priceOfLottoTicket;
+    public int divideByPriceOfLottoTicket() {
+        return this.money / LottoStore.PRICE_OF_LOTTO_TICKET;
     }
+
 }

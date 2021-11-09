@@ -13,11 +13,10 @@ public class LotteryFactory {
         return new LotteryFactory();
     }
 
-    public TicketLotteryBundle generateTicketLotteryBundleByCount(final int count) {
+    public TicketLotteryBundle generateTicketLotteryBundleByCount(final TicketOrderCount orderCount) {
         final List<TicketLottery> ticketLotteries = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            ticketLotteries.add(generateTicketLottery());
-        }
+        orderCount.getStream()
+                .forEach(value -> ticketLotteries.add(generateTicketLottery()));
         return TicketLotteryBundle.valueOf(ticketLotteries);
     }
 

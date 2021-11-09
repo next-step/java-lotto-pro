@@ -11,5 +11,8 @@ public class LotteryFactoryTest {
         final TicketLottery ticketLottery = lotteryFactory.generateTicketLottery();
         assertThat(ticketLottery).isNotNull();
     }
+//
+//    @Test
+//    void 로또생성기
 
 }

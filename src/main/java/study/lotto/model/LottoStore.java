@@ -9,11 +9,7 @@ public class LottoStore {
 
     public static TicketLotteryBundle orderTicketLotteryBundleByMoney(final Money money) {
         final LotteryFactory lotteryFactory = LotteryFactory.getInstance();
-        final int orderCount = calcOrderCountByMoney(money);
+        final TicketOrderCount orderCount = TicketOrderCount.valueOf(money);
         return lotteryFactory.generateTicketLotteryBundleByCount(orderCount);
-    }
-
-    private static int calcOrderCountByMoney(final Money money) {
-        return money.divide(PRICE_OF_LOTTO_TICKET);
     }
 }
