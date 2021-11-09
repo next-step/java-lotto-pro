@@ -10,7 +10,7 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_BOUND = 1;
     public static final int MAX_BOUND = 45;
-    private static Map<Integer, LottoNumber> lottoNumbers = createLottoNumbers();
+    private static final Map<Integer, LottoNumber> lottoNumbers = createLottoNumbers();
     private static Map<Integer,LottoNumber> createLottoNumbers() {
         Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
         for (int number=MIN_BOUND; number<= MAX_BOUND;number++) {
