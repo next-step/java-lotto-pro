@@ -13,13 +13,13 @@ import study.lotto.model.exception.NotEnoughMoneyException;
 
 public class LottoService {
     public static TicketLotteryBundleResponseDto orderTicketLotteryBundle(final LottoOrderRequestDto orderRequestDto) {
+        final TicketLotteryBundle manualTicketLotteryBundle = orderRequestDto.getManualTicketLotteryBundle().toEntity();
         try {
             final Money money = orderRequestDto.getAutoOrderMoneyRequestDto().toEntity();
             final TicketLotteryBundle autoTicketLotteryBundle = LottoStore.orderTicketLotteryBundleByMoney(money);
-            final TicketLotteryBundle manualTicketLotteryBundle = orderRequestDto.getManualTicketLotteryBundle().toEntity();
             return new TicketLotteryBundleResponseDto(autoTicketLotteryBundle.merge(manualTicketLotteryBundle));
         } catch (final NotEnoughMoneyException exception) {
-            return new TicketLotteryBundleResponseDto(orderRequestDto.getManualTicketLotteryBundle().toEntity());
+            return new TicketLotteryBundleResponseDto(manualTicketLotteryBundle);
         }
     }
 
