@@ -5,16 +5,6 @@ import java.util.List;
 import step3.domain.strategy.numbers.NumbersStrategy;
 
 public class LottoProvider {
-
-    public LottoNumbersBundle buyLotto(int count, NumbersStrategy numbersStrategy) {
-        LottoNumbersBundle result = new LottoNumbersBundle();
-        for (int i = 0; i < count; i++) {
-            result.addLottoNumbers(numbersStrategy);
-        }
-
-        return result;
-    }
-
     public LottoNumbersBundle buyLotto(List<NumbersStrategy> numbersStrategies) {
         LottoNumbersBundle result = new LottoNumbersBundle();
         for (NumbersStrategy numbersStrategy : numbersStrategies) {

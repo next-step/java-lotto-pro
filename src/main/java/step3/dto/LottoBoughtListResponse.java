@@ -9,8 +9,7 @@ public class LottoBoughtListResponse {
     private final LottoNumbersBundle manualLottoList;
     private final LottoNumbersBundle autoLottoList;
 
-    public LottoBoughtListResponse(LottoNumbersBundle manualLottoList,
-        LottoNumbersBundle autoLottoList) {
+    public LottoBoughtListResponse(LottoNumbersBundle manualLottoList, LottoNumbersBundle autoLottoList) {
         this.manualLottoList = manualLottoList;
         this.autoLottoList = autoLottoList;
     }

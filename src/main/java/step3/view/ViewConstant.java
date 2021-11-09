@@ -16,9 +16,11 @@ public class ViewConstant {
     public static final String BONUS_NUMBER_REQUEST_MESSAGE = "보너스 볼을 입력해 주세요.";
     public static final String BUY_COUNT_MESSAGE = "%d 개를 구매했습니다.";
     public static final String TOTAL_LOTTO_BUY_COUNT_MESSAGE = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
-    public static final BigDecimal LOSS = BigDecimal.valueOf(1);
-    public static final Integer MIN_RANK_NUMBER = 3;
     public static final String MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     public static final String MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     public static final String COMMA_INPUT_REQUEST_MESSAGE = "콤마로 분리된 숫자만 입력해주세요(1,2,3,4,5,6)";
+
+    public static final BigDecimal LOSS = BigDecimal.valueOf(1);
+    
+    public static final Integer MIN_RANK_NUMBER = 3;
 }

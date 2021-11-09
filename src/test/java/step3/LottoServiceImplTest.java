@@ -12,11 +12,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import step3.domain.LottoNumber;
-import step3.domain.LottoNumbers;
 import step3.domain.LottoRank;
+import step3.domain.LottoRanks;
 import step3.domain.LottoService;
-import step3.domain.WinningLotto;
 import step3.domain.strategy.numbers.ManualLottoNumbers;
 import step3.domain.strategy.numbers.NumbersStrategy;
 import step3.dto.LottoResultDto;
@@ -51,22 +49,25 @@ public class LottoServiceImplTest {
     }
 
     private static Stream<Arguments> getResultStatisticsGenerateData() {
+
         return Stream.of(
             Arguments.of(
                 getNumbersStrategy("1,2,3,4,5,6"), // 구매될 로또 넘버 6자리
                 parseNumbers("1,2,3,4,5,6"), // 지난 주 당첨 로또 번호
                 45, // 보너스 번호
-                new LottoResultDto(6, 2000000000, LottoRank.FIRST.name(), 1)), // 비교할 당첨 결과 비교 객체
+                createLottoResultDto(LottoRank.FIRST)), // 비교할 당첨 결과 비교 객체
             Arguments.of(
                 getNumbersStrategy("1,2,3,4,5,6"), parseNumbers("1,2,3,4,5,7"),
-                45, new LottoResultDto(5, 1500000, LottoRank.THIRD.name(), 1)),
+                45,
+                createLottoResultDto(LottoRank.THIRD)),
             Arguments.of(
                 getNumbersStrategy("1,2,3,4,5,6"), parseNumbers("1,2,3,4,5,7"),
-                6, new LottoResultDto(5, 30000000, LottoRank.SECOND.name(), 1)),
-            Arguments.of(
-                getNumbersStrategy("1,2,3,4,5,6"), parseNumbers("11,12,13,14,15,17"),
-                6, new LottoResultDto(0, 0, LottoRank.NONE.name(), 2))
+                6, createLottoResultDto(LottoRank.SECOND))
         );
+    }
+
+    private static LottoResultDto createLottoResultDto(LottoRank lottoRank) {
+        return new LottoResultDto(new LottoRanks.LottoRankResult(lottoRank, 1));
     }
 
     private static List<NumbersStrategy> getNumbersStrategy(String buyNumbersStr) {
