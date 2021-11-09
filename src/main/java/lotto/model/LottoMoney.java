@@ -32,18 +32,22 @@ public class LottoMoney {
 
         try {
             int parsedCount = Integer.parseInt(count);
-            if (parsedCount < 0) {
-                throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_NUMBER_INPUT));
-            }
-            if (parsedCount > getLottoPaperCount()) {
-                throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_MANUAL_LOTTO_BUY_COUNT_INPUT));
-            }
+            checkManualLottoPaperCount(parsedCount);
             manualLottoPaperCount = parsedCount;
             return parsedCount;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_NUMBER_INPUT));
         }
 
+    }
+
+    private void checkManualLottoPaperCount(int parsedCount) {
+        if (parsedCount < GameRule.LOTTO_BUY_MIN_VALUE) {
+            throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_NUMBER_INPUT));
+        }
+        if (parsedCount > getLottoPaperCount()) {
+            throw new IllegalArgumentException(GameMessage.invalidInputMsg(GameMessage.ERROR_MANUAL_LOTTO_BUY_COUNT_INPUT));
+        }
     }
 
     public int getManualLottoPaperCount() {
