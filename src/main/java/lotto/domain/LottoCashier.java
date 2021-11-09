@@ -33,7 +33,7 @@ public class LottoCashier {
         }
     }
 
-    public boolean isPossibleToBuy(Money cash, int count) {
+    public static boolean isPossibleToBuy(Money cash, int count) {
         return cash.getDividedIntValue(DEFAULT_PRICE) >= count;
     }
 }
