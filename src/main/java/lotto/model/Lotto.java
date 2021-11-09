@@ -4,6 +4,7 @@ import lotto.view.ErrorMessage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
     public static final int SIZE = 6;
@@ -42,10 +43,25 @@ public class Lotto {
         return Rank.valueOf(result);
     }
 
+    public boolean isBounsNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
 }
