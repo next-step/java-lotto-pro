@@ -1,7 +1,6 @@
 package step3.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -19,12 +18,12 @@ public class LottoNumbers {
     private LottoNumbers() {
     }
 
-    public LottoNumbers(int[] numbers) {
+    public LottoNumbers(List<Integer> numbers) {
         this.lottoNumbers = mapOf(numbers);
         validSize();
     }
 
-    private Set<LottoNumber> mapOf(int[] numbers) {
+    private Set<LottoNumber> mapOf(List<Integer> numbers) {
         Set<LottoNumber> result = new HashSet<>();
 
         for (int number : numbers) {

@@ -1,9 +1,10 @@
 package step3.view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import step3.common.exception.InvalidParamException;
 import step3.domain.strategy.numbers.ManualLottoNumbers;
@@ -79,12 +80,12 @@ public class InputView {
         return Integer.parseInt(result);
     }
 
-    private static int[] readLineToArray() {
+    private static List<Integer> readLineToArray() {
         try {
-            return Stream.of(sc.nextLine().split(","))
-                .filter(v -> v.chars().allMatch(Character::isDigit))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+            return Arrays.stream(sc.nextLine().split(","))
+                .filter(number -> number.chars().allMatch(Character::isDigit))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
         } catch (InvalidParamException invalidParamException) {
             step3.view.ResultView.println(ViewConstant.COMMA_INPUT_REQUEST_MESSAGE);
 

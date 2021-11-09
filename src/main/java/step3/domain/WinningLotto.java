@@ -1,5 +1,7 @@
 package step3.domain;
 
+import java.util.List;
+
 import step3.common.exception.InvalidParamException;
 import step3.domain.constance.LottoConstant;
 
@@ -13,7 +15,7 @@ public class WinningLotto {
         this.bonusLottoNumber = bonusLottoNumber;
     }
 
-    public static WinningLotto of(int[] numbers, int bonusNumber) {
+    public static WinningLotto of(List<Integer> numbers, int bonusNumber) {
         return new WinningLotto(new LottoNumbers(numbers), LottoNumber.of(bonusNumber));
     }
 

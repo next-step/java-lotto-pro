@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
 import step3.domain.constance.LottoConstant;
 
@@ -26,14 +25,14 @@ public class RandomLottoNumbers implements NumbersStrategy {
     }
 
     @Override
-    public int[] getNumbers() {
+    public List<Integer> getNumbers() {
         return getLottoNumbers();
     }
 
-    private static int[] getLottoNumbers() {
+    private static List<Integer> getLottoNumbers() {
         Collections.shuffle(lottoRangeNumbers);
         List<Integer> result = lottoRangeNumbers.subList(SUB_START_INDEX, LottoNumbers.MAX_LOTTO_NUMBERS_SIZE);
         Collections.sort(result);
-        return result.stream().mapToInt(i -> i).toArray();
+        return result;
     }
 }

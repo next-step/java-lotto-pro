@@ -1,14 +1,16 @@
 package step3.domain.strategy.numbers;
 
-public class ManualLottoNumbers implements NumbersStrategy {
-    private final int[] numbers;
+import java.util.List;
 
-    public ManualLottoNumbers(int[] numbers) {
+public class ManualLottoNumbers implements NumbersStrategy {
+    private final List<Integer> numbers;
+
+    public ManualLottoNumbers(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
     @Override
-    public int[] getNumbers() {
+    public List<Integer> getNumbers() {
         return numbers;
     }
 }

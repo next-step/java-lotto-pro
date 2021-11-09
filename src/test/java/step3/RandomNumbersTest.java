@@ -14,6 +14,6 @@ public class RandomNumbersTest {
     void createRandomNumberCountTest() {
         NumbersStrategy numbersStrategy = new RandomLottoNumbers();
 
-        assertThat(numbersStrategy.getNumbers().length).isEqualTo(LottoNumbers.MAX_LOTTO_NUMBERS_SIZE);
+        assertThat(numbersStrategy.getNumbers().size()).isEqualTo(LottoNumbers.MAX_LOTTO_NUMBERS_SIZE);
     }
 }

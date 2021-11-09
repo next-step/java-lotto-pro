@@ -1,5 +1,7 @@
 package step3.domain.strategy.numbers;
 
+import java.util.List;
+
 public interface NumbersStrategy {
-    int[] getNumbers();
+    List<Integer> getNumbers();
 }

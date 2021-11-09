@@ -3,6 +3,8 @@ package step3;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +21,7 @@ public class LottoNumbersTest {
     @DisplayName("LottoNumbers.MAX_LOTTO_NUMBERS_SIZE 와 일치 하지 않는경우 예외 발생한다.")
     void createLottoNumbersByBuyCount() {
         // given
-        int[] overSizeNumbers = new int[] {1, 2, 3, 4, 5, 6, 7};
+        List<Integer> overSizeNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
@@ -33,7 +35,7 @@ public class LottoNumbersTest {
     @DisplayName("중복숫자 생성시 예외 발생한다.")
     void lottoNumbersCheckIsDuplicate() {
         // given
-        int[] numbers = {1, 2, 3, 4, 6, 6};
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 6, 6);
 
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
@@ -47,7 +49,7 @@ public class LottoNumbersTest {
     @DisplayName("보너스 숫자 포함여부체크, true 를 반환한다.")
     void isBonusContain() {
         // given
-        int[] numbers = {1, 2, 3, 4, 5, 6};
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         // when
         LottoNumber bonusLottoNumber = LottoNumber.of(1);
@@ -71,8 +73,8 @@ public class LottoNumbersTest {
     @DisplayName("구매로또 번호 와 지난주로또 번호의 일치갯수 일치 검증")
     void containCount(String buyNumbersStr, String winNumbersStr, int expected) {
         // given
-        int[] numbers = parseNumbers(buyNumbersStr);
-        int[] winNumbers = parseNumbers(winNumbersStr);
+        List<Integer> numbers = parseNumbers(buyNumbersStr);
+        List<Integer> winNumbers = parseNumbers(winNumbersStr);
 
         // when
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
@@ -82,8 +84,10 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers.containCount(winLottoNumbers)).isEqualTo(expected);
     }
 
-    private int[] parseNumbers(String inputNumbers) {
-        return Arrays.stream(inputNumbers.split(",")).mapToInt(Integer::parseInt).toArray();
+    private List<Integer> parseNumbers(String inputNumbers) {
+        return Arrays.stream(inputNumbers.split(","))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 
 }

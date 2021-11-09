@@ -3,13 +3,13 @@ package step3;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import step3.domain.LottoNumber;
-import step3.domain.LottoNumbers;
 import step3.domain.LottoNumbersBundle;
 import step3.domain.LottoRanks;
 import step3.domain.WinningLotto;
@@ -43,15 +43,17 @@ public class LottoNumbersBundleTest {
     private void addLottoNumbers(String buyNumbersStr, LottoNumbersBundle lottoNumbersBundle) {
         NumbersStrategy numbersStrategy = new NumbersStrategy() {
             @Override
-            public int[] getNumbers() {
+            public List<Integer> getNumbers() {
                 return parseNumbers(buyNumbersStr);
             }
         };
         lottoNumbersBundle.addLottoNumbers(numbersStrategy);
     }
 
-    private int[] parseNumbers(String inputNumbers) {
-        return Arrays.stream(inputNumbers.split(",")).mapToInt(Integer::parseInt).toArray();
+    private List<Integer> parseNumbers(String inputNumbers) {
+        return Arrays.stream(inputNumbers.split(","))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 
 }

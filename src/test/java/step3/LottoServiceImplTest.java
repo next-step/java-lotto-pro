@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +29,7 @@ public class LottoServiceImplTest {
     @DisplayName("구입한 로또번호, 지난주 로또번호, 보너스번호를 입력받고, 로또출력(LottoResultDto) 리턴객체 일치 검증")
     void getResultStatistics(
         List<NumbersStrategy> numbersStrategy,
-        int[] winLottoNumbers,
+        List<Integer> winLottoNumbers,
         int bonusNumber,
         LottoResultDto expectedLottoResultDto
     ) {
@@ -74,14 +75,14 @@ public class LottoServiceImplTest {
         List<NumbersStrategy> result = new ArrayList<>();
         result.add(new NumbersStrategy() {
             @Override
-            public int[] getNumbers() {
+            public List<Integer> getNumbers() {
                 return parseNumbers(buyNumbersStr);
             }
         });
         return result;
     }
 
-    private static int[] parseNumbers(String inputNumbers) {
-        return Arrays.stream(inputNumbers.split(",")).mapToInt(Integer::parseInt).toArray();
+    private static List<Integer> parseNumbers(String inputNumbers) {
+        return Arrays.stream(inputNumbers.split(",")).map(Integer::parseInt).collect(Collectors.toList());
     }
 }
