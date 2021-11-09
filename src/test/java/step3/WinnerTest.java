@@ -42,7 +42,7 @@ public class WinnerTest {
 
 		//when
 		Winner winner = Winner.of();
-		Winner result = winner.statistics(userLottoNumbers, papers, BonusBall.of(2, userLottoNumbers));
+		Winner result = winner.statistics(userLottoNumbers, papers, BonusBall.of(45, userLottoNumbers));
 		int totalWinningAmount = result.getTotal();
 		//then
 		assertThat(totalWinningAmount).isEqualTo(30005000);
@@ -58,7 +58,7 @@ public class WinnerTest {
 		// given
 		LottoNumbers userLottoNumbers = LottoNumbers.from(inputUserLottoNumbers);
 		Winner winner = Winner.of();
-		Winner statistics = winner.statistics(userLottoNumbers, papers, BonusBall.of(2, userLottoNumbers));
+		Winner statistics = winner.statistics(userLottoNumbers, papers, BonusBall.of(32, userLottoNumbers));
 		int totalWinningAmount = statistics.getTotal();
 
 		// when
