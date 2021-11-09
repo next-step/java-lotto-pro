@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@DisplayName("당첨 로또 테스트")
 class PrizeLottoNumbersTest {
 
     @DisplayName("당첨 로또 결과 테스트")
