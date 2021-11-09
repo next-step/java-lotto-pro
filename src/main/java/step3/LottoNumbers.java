@@ -53,20 +53,21 @@ public class LottoNumbers {
 
 	public Map<Integer, Boolean> match(LottoNumbers userLottoNumbers, int bonusBall) {
 		Map<Integer, Boolean> ranks = new HashMap<>();
-		int count = 0;
-		boolean equals = false;
-		for (LottoNumber lottoNumber : lottoNumbers)
-			for (LottoNumber userLottoNumber : userLottoNumbers.getList()) {
-				if (lottoNumber.equals(userLottoNumber)) {
-					count++;
-					break;
-				}
-				if (lottoNumber.equals(new LottoNumber(bonusBall))) {
-					equals = true;
-				}
-			}
-		ranks.put(count, equals);
+		ranks.put(matchCount(userLottoNumbers), matchBonusBall(bonusBall));
 		return ranks;
+	}
+
+	private Integer matchCount(LottoNumbers userLottoNumbers) {
+		Integer count = (int) lottoNumbers.stream()
+			.filter(lottoNumber -> userLottoNumbers.getList().stream()
+				.anyMatch(lottoNumber::equals)
+			).count();
+		return count;
+	}
+
+	private Boolean matchBonusBall(int bonusBall) {
+		return lottoNumbers.stream()
+			.anyMatch(lottoNumber -> lottoNumber.equals(new LottoNumber(bonusBall)));
 	}
 
 	private Set<LottoNumber> getList() {

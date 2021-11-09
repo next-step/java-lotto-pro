@@ -42,7 +42,7 @@ public class WinnerTest {
 		Winner result = winner.statistics(userLottoNumbers, papers, 2);
 		int totalWinningAmount = result.getTotal();
 		//then
-		assertThat(totalWinningAmount).isEqualTo(55_000);
+		assertThat(totalWinningAmount).isEqualTo(1505000);
 	}
 
 	@DisplayName("당첨금액의 총 수익률 계산")
