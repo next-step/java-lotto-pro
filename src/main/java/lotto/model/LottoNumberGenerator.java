@@ -21,7 +21,7 @@ public class LottoNumberGenerator {
                 .forEach(lottoNumber -> lottoNumbers.add(new LottoNumber(lottoNumber)));
     }
 
-    public static LottoPaper getLottoNumbers() {
+    public static LottoPaper createLottoNumbers() {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> randomLottoNumbers = new ArrayList<>(lottoNumbers.subList(GameRule.LOTTO_START_INDEX, GameRule.LOTTO_END_INDEX));
         Collections.sort(randomLottoNumbers);
