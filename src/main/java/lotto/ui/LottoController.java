@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class LottoController {
     private static Scanner scanner;
 
-    public void startGame() throws Exception {
+    public void startGame() {
         scanner = new Scanner(System.in);
         int buyPrice = inputBuyPrice();
         int manualBuyAmount = getManualBuyAmount();
@@ -43,7 +43,7 @@ public class LottoController {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    private List<LottoNumbers> getManualLottoNumbers(BuyAmount buyAmount) throws Exception {
+    private List<LottoNumbers> getManualLottoNumbers(BuyAmount buyAmount) {
         LottoMessage.showAskManualBuyLottoNumbersMessage();
         List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < buyAmount.getManualAmount(); i++) {

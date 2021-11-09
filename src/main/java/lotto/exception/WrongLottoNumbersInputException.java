@@ -1,6 +1,6 @@
 package lotto.exception;
 
-public class WrongLottoNumbersInputException extends Exception {
+public class WrongLottoNumbersInputException extends RuntimeException {
     private static final long serialVersionUID = 5L;
 
     public WrongLottoNumbersInputException(String message) {

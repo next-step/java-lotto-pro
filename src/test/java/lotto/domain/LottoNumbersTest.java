@@ -26,7 +26,7 @@ public class LottoNumbersTest {
 
     @DisplayName("당첨 로또 입력 테스트 커스텀 구분자")
     @Test
-    void generateManualWithSeparatorNumbers() throws Exception {
+    void generateManualWithSeparatorNumbers() {
         String prizeLottoNumbersString = "1:2:3:4:5:6";
         String separator = ":";
         LottoNumbers lottoNumbers = new LottoNumbers(prizeLottoNumbersString, separator);

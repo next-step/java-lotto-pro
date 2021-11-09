@@ -29,11 +29,11 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoNumbers(String lottoNumbersString) throws Exception {
+    public LottoNumbers(String lottoNumbersString) {
         this(lottoNumbersString, LOTTO_NUMBERS_BASE_SEPARATOR);
     }
 
-    public LottoNumbers(String lottoNumbers, String separator) throws Exception {
+    public LottoNumbers(String lottoNumbers, String separator) {
         this.lottoNumbers = new HashSet<>();
         generateLottoNumbersFromString(lottoNumbers, separator);
     }
@@ -53,7 +53,7 @@ public class LottoNumbers {
         return new HashSet<>(randomLottoNumberPocket.subList(0, LOTTO_SIZE));
     }
 
-    private void generateLottoNumbersFromString(String lottoNumbers, String separator) throws Exception {
+    private void generateLottoNumbersFromString(String lottoNumbers, String separator) {
         lottoNumbers = validateNullableValues(lottoNumbers);
         separator = validateNullableValues(separator);
         lottoNumbers = lottoNumbers.replaceAll(FIND_ALL_SPACES, REMOVE_SPACES);
@@ -64,7 +64,7 @@ public class LottoNumbers {
         }
     }
 
-    private String validateNullableValues(String value) throws Exception {
+    private String validateNullableValues(String value) {
         return Optional.ofNullable(value)
                 .orElseThrow(() ->
                         new WrongLottoNumbersInputException(LottoMessage.WRONG_LOTTO_NUMBER_INPUT_MESSAGE)
