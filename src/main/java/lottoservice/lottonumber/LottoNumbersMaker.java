@@ -35,7 +35,7 @@ public class LottoNumbersMaker {
 	}
 
 	public List<LottoNumber> makeLottoNumbers(List<Integer> numbers) {
-		return numbers.stream().sorted().map(LottoNumber::new).collect(Collectors.toList());
+		return numbers.stream().sorted().map(LottoNumber::valueOf).collect(Collectors.toList());
 	}
 
 	public List<LottoNumber> makeLottoNumbers(String numbersTxt) {
