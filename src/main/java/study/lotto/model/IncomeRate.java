@@ -6,6 +6,7 @@ import java.math.RoundingMode;
 public class IncomeRate {
 
     public static final int DECIMAL_SCALE = 2;
+    public static final RoundingMode ROUNDING_MODE = RoundingMode.FLOOR;
     private final double incomeRate;
 
     public IncomeRate(final BigDecimal income, final int ticketCount) {
@@ -23,7 +24,7 @@ public class IncomeRate {
 
         final BigDecimal incomeRate = income
                 .divide(BigDecimal.valueOf(ticketCount)
-                        .multiply(BigDecimal.valueOf(LottoStore.PRICE_OF_LOTTO_TICKET)), DECIMAL_SCALE, RoundingMode.FLOOR
+                        .multiply(BigDecimal.valueOf(LottoStore.PRICE_OF_LOTTO_TICKET)), DECIMAL_SCALE, ROUNDING_MODE
                 );
         return incomeRate.doubleValue();
 
