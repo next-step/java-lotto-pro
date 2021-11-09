@@ -5,19 +5,25 @@ import lotto.view.ErrorMessage;
 import java.util.Objects;
 
 public class WinningLotto {
-    private Lotto lotto;
+    private Lotto winLotto;
     private LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
-        this.lotto = lotto;
+    public WinningLotto(Lotto winLotto, LottoNumber bonusNumber) {
+        this.winLotto = winLotto;
         validBonusExist(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
     private void validBonusExist(LottoNumber bonusNumber) {
-        if(lotto.isBounsNumber(bonusNumber)){
+        if (winLotto.isBounsNumber(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.BONUS_EXIST);
         }
+    }
+
+    public Rank matchRank(Lotto lotto) {
+        int result = this.winLotto.matchNumber(lotto);
+        boolean matchBonus = lotto.isBounsNumber(bonusNumber);
+        return Rank.valueOf(result, matchBonus);
     }
 
     @Override
@@ -25,11 +31,11 @@ public class WinningLotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
-        return Objects.equals(lotto, that.lotto) && Objects.equals(bonusNumber, that.bonusNumber);
+        return Objects.equals(winLotto, that.winLotto) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto, bonusNumber);
+        return Objects.hash(winLotto, bonusNumber);
     }
 }

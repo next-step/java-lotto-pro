@@ -21,9 +21,9 @@ public class LottoGame {
         try {
             buyLotto();
 
-            setWinningLotto();
+            //setWinningLotto();
 
-            statistics();
+            //statistics();
         } catch (Exception e) {
             View.print(e.getMessage());
         }
@@ -37,7 +37,7 @@ public class LottoGame {
         View.print(lottos.toString());
     }
 
-    private void setWinningLotto() {
+    /*private void setWinningLotto() {
         View.print(Message.WINNING_NUMBER);
         List<Integer> winLottoNumbers = InputHandler.splitTextToInts(Console.readLine());
         winLotto = LottoCreateFactory.createLotto(winLottoNumbers);
@@ -49,5 +49,5 @@ public class LottoGame {
         Result result = new Result(lottos, winLotto);
         ResultView.printReport(result.getMatchResult());
         ResultView.printYield(result.yield(lottos.size()));
-    }
+    }*/
 }

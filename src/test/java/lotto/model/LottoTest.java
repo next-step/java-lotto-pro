@@ -24,13 +24,17 @@ public class LottoTest {
     @Test
     void matchNumber() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto winLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.matchNumber(winLotto)).isEqualTo(Rank.valueOf(6));
+        WinningLotto winLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
+        assertThat(winLotto.matchRank(lotto)).isEqualTo(Rank.valueOf(6, true));
+        assertThat(winLotto.matchRank(lotto)).isEqualTo(Rank.FIRST);
 
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        winLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
-        assertThat(lotto.matchNumber(winLotto)).isEqualTo(Rank.valueOf(3));
-        assertThat(lotto.matchNumber(winLotto)).isEqualTo(Rank.FOURTH);
+        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        winLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
+        assertThat(winLotto.matchRank(lotto)).isEqualTo(Rank.SECOND);
+
+        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        winLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(8));
+        assertThat(winLotto.matchRank(lotto)).isEqualTo(Rank.THIRD);
     }
 
     @DisplayName("로또 번호가 맞지 않을때 나오는 에러")

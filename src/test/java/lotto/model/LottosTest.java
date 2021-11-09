@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
-    private Lotto winLotto;
+    private WinningLotto winLotto;
     private Lottos lottos;
     private Result result;
 
@@ -21,7 +21,7 @@ public class LottosTest {
     void setUp() {
         Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
-        winLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)) , new LottoNumber(7));
         lottos = new Lottos(new Lotto[]{lotto1, lotto2});
         result = new Result(lottos, winLotto);
     }

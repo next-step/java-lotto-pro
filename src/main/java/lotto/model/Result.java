@@ -1,7 +1,6 @@
 package lotto.model;
 
 import lotto.util.ConstantString;
-import lotto.view.Message;
 
 import java.math.BigInteger;
 import java.util.Collections;
@@ -12,10 +11,10 @@ import java.util.Map;
 public class Result {
     private Map<Rank, Integer> matchResult;
 
-    public Result(Lottos lottos, Lotto winLotto) {
+    public Result(Lottos lottos, WinningLotto winLotto) {
         this.matchResult = createResultMap();
         for (Lotto lotto : lottos.getLottoGroup()) {
-            Rank rank = winLotto.matchNumber(lotto);
+            Rank rank = winLotto.matchRank(lotto);
             matchResultPut(rank);
         }
     }

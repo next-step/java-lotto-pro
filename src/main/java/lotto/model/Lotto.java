@@ -3,6 +3,7 @@ package lotto.model;
 import lotto.view.ErrorMessage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,16 +36,16 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public Rank matchNumber(Lotto winLotto) {
-        int result = 0;
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            result += winLotto.compare(lottoNumber) ? 1 : 0;
-        }
-        return Rank.valueOf(result);
-    }
-
     public boolean isBounsNumber(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
+    }
+
+    public int matchNumber(Lotto lotto) {
+        int result = 0;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            result += lotto.compare(lottoNumber) ? 1 : 0;
+        }
+        return result;
     }
 
     @Override
