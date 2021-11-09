@@ -16,10 +16,9 @@ public enum Rank {
 
     static {
         for (Rank rank : Rank.values()) {
-                rankMap.computeIfAbsent(rank.getWinningNumberCount(), key -> new HashMap<>());
-                Map<Boolean, Rank> accordingToBonusRankMap = rankMap.get(rank.getWinningNumberCount());
-                accordingToBonusRankMap.put(rank.isBonus, rank);
-                rankMap.put(rank.getWinningNumberCount(), accordingToBonusRankMap);
+            Map<Boolean, Rank> accordingToBonusRankMap = rankMap.computeIfAbsent(rank.getWinningNumberCount(), key -> new HashMap<>());
+            accordingToBonusRankMap.put(rank.isBonus, rank);
+            rankMap.put(rank.getWinningNumberCount(), accordingToBonusRankMap);
         }
     }
 
