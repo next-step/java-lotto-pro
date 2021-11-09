@@ -4,8 +4,6 @@ import lotto.exception.MinimumTicketPriceException;
 import lotto.ui.LottoMessage;
 
 public class BuyAmount {
-    public static final int LOTTO_TICKET_PRICE = 1000;
-
     private final Money totalMoney;
     private final Money manualMoney;
 
@@ -16,12 +14,12 @@ public class BuyAmount {
     public BuyAmount(int buyPrice, int manualAmount) {
         validateBuyPrice(buyPrice);
         this.totalMoney = new Money(buyPrice);
-        this.manualMoney = new Money(manualAmount * LOTTO_TICKET_PRICE);
+        this.manualMoney = new Money(manualAmount * Money.LOTTO_TICKET_PRICE);
         validateNotExceedAmountSize();
     }
 
     private void validateBuyPrice(int buyPrice) {
-        if (buyPrice < LOTTO_TICKET_PRICE) {
+        if (buyPrice < Money.LOTTO_TICKET_PRICE) {
             throw new MinimumTicketPriceException(LottoMessage.MINIMUM_TICKET_PRICE_MESSAGE);
         }
     }
@@ -33,11 +31,11 @@ public class BuyAmount {
     }
 
     public int getTotalAmount() {
-        return totalMoney.getPrice() / LOTTO_TICKET_PRICE;
+        return totalMoney.getPrice() / Money.LOTTO_TICKET_PRICE;
     }
 
     public int getManualAmount() {
-        return manualMoney.getPrice() / LOTTO_TICKET_PRICE;
+        return manualMoney.getPrice() / Money.LOTTO_TICKET_PRICE;
     }
 
     public int getAutoAmount() {
