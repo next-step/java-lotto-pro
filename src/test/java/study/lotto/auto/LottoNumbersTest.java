@@ -22,7 +22,7 @@ class LottoNumbersTest {
     void 출력형태_테스트() {
         LottoNumbers lottoNumbers = new LottoNumbers();
         String printFormat = lottoNumbers.makeLottoNumberPrintFormat();
-        assertThat(printFormat.matches("")).isTrue();
+        assertThat(printFormat.matches("^\\[(\\d+,\\s){5}\\d+\\]$")).isTrue();
     }
 
     @Test
