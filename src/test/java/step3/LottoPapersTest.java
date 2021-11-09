@@ -10,6 +10,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import step3.winner.Rank;
+
 class LottoPapersTest {
 
 	@Test
@@ -29,7 +31,7 @@ class LottoPapersTest {
 		LottoPapers lottoPapers = LottoPapers.createPapers(getLottoNumbers());
 
 		// when
-		List<Integer> matchLottoNumber = lottoPapers.findMatchLottoNumber(LottoNumbers.from("1,5,7,3,5,2"));
+		List<Rank> matchLottoNumber = lottoPapers.findMatchLottoNumber(LottoNumbers.from("1,5,7,3,5,2"), 2);
 
 		// then
 		Assertions.assertThat(matchLottoNumber.size()).isEqualTo(2);
@@ -42,11 +44,11 @@ class LottoPapersTest {
 		LottoPapers lottoPapers = LottoPapers.createPapers(getLottoNumbers());
 
 		// when
-		List<Integer> matchLottoNumber = lottoPapers.findMatchLottoNumber(LottoNumbers.from("1,5,7,3,5,2"));
+		List<Rank> matchLottoNumber = lottoPapers.findMatchLottoNumber(LottoNumbers.from("1,5,7,3,5,2"), 3);
 
 		// then
-		Assertions.assertThat(matchLottoNumber.get(0)).isEqualTo(4);
-		Assertions.assertThat(matchLottoNumber.get(1)).isEqualTo(2);
+		Assertions.assertThat(matchLottoNumber.get(0)).isEqualTo(Rank.FOUR);
+		Assertions.assertThat(matchLottoNumber.get(1)).isEqualTo(Rank.MISS);
 	}
 
 	private List<LottoNumbers> getLottoNumbers() {

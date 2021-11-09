@@ -2,6 +2,8 @@ package step3;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -9,7 +11,7 @@ import java.util.stream.Stream;
 
 public class LottoNumbers {
 	public static final int LOTTO_NUMBER_MAX = 6;
-	private Set<LottoNumber> lottoNumbers;
+	private final Set<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(Set<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
@@ -30,7 +32,7 @@ public class LottoNumbers {
 		return new LottoNumbers(inputLottoNumber);
 	}
 
-	public static LottoNumbers createLottoNumber(Integer ...inputLottoNumber) {
+	public static LottoNumbers createLottoNumber(Integer... inputLottoNumber) {
 		return new LottoNumbers(conventToSet(inputLottoNumber));
 	}
 
@@ -49,11 +51,22 @@ public class LottoNumbers {
 		);
 	}
 
-	public int match(LottoNumbers userLottoNumbers) {
-		return (int) lottoNumbers.stream()
-			.filter(lottoNumber -> userLottoNumbers.getList().stream()
-				.anyMatch(lottoNumber::equals))
-			.count();
+	public Map<Integer, Boolean> match(LottoNumbers userLottoNumbers, int bonusBall) {
+		Map<Integer, Boolean> ranks = new HashMap<>();
+		int count = 0;
+		boolean equals = false;
+		for (LottoNumber lottoNumber : lottoNumbers)
+			for (LottoNumber userLottoNumber : userLottoNumbers.getList()) {
+				if (lottoNumber.equals(userLottoNumber)) {
+					count++;
+					break;
+				}
+				if (lottoNumber.equals(new LottoNumber(bonusBall))) {
+					equals = true;
+				}
+			}
+		ranks.put(count, equals);
+		return ranks;
 	}
 
 	private Set<LottoNumber> getList() {

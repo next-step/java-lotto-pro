@@ -1,8 +1,11 @@
 package step3.winner;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import step3.LottoNumbers;
@@ -21,11 +24,10 @@ public class Winner {
 		return new Winner(new HashMap<>());
 	}
 
-	public Winner statistics(LottoNumbers userLottoNumbers, LottoPapers createLottoNumbers) {
-		List<Integer> matchLottoNumber = createLottoNumbers.findMatchLottoNumber(userLottoNumbers);
+	public Winner statistics(LottoNumbers userLottoNumbers, LottoPapers createLottoNumbers, int isBonusBall) {
+		List<Rank> matchLottoNumber = createLottoNumbers.findMatchLottoNumber(userLottoNumbers, isBonusBall);
 		return new Winner(
 			matchLottoNumber.stream()
-				.map(Rank::valueOf)
 				.collect(
 					Collectors.toMap(
 						(matchNumber -> matchNumber),
@@ -41,5 +43,19 @@ public class Winner {
 			.map(Map.Entry::getKey)
 			.map(Rank::getAmount)
 			.reduce(0, Integer::sum);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		Arrays.stream(Rank.values()).sorted(Collections.reverseOrder()).forEach(s-> {
+			sb.append(String.format(s.getMessage(),getWinner(s)));
+		});
+		return sb.toString();
+	}
+
+	private Integer getWinner(Rank rank) {
+		Optional<Integer> integer = Optional.ofNullable(ranks.get(rank));
+		return integer.orElse(0);
 	}
 }

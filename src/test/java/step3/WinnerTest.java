@@ -39,7 +39,7 @@ public class WinnerTest {
 
 		//when
 		Winner winner = Winner.of();
-		Winner result = winner.statistics(userLottoNumbers, papers);
+		Winner result = winner.statistics(userLottoNumbers, papers, 2);
 		int totalWinningAmount = result.getTotal();
 		//then
 		assertThat(totalWinningAmount).isEqualTo(55_000);
@@ -47,13 +47,14 @@ public class WinnerTest {
 
 	@DisplayName("당첨금액의 총 수익률 계산")
 	@ParameterizedTest
-	@CsvSource(value = {"1, 2, 3, 4, 5, 6:14000:3.92", "36,42,45,21,30,20:14000:3.92",
-		"6,42,45,1,9,8:14000:0.00"}, delimiter = ':')
+	@CsvSource(value = {"1, 2, 3, 4, 5, 6:14000:107.50",
+		"36,42,45,21,30,20:14000:3.92",
+		"6,42,45,1,9,8:14000:0.00",
+		"4, 3, 5, 7, 43, 44:14000:3.92"}, delimiter = ':')
 	void yield(String userLottoNumbers, int inputMoney, String inputYield) {
 		// given
-
 		Winner winner = Winner.of();
-		Winner statistics = winner.statistics(LottoNumbers.from(userLottoNumbers), papers);
+		Winner statistics = winner.statistics(LottoNumbers.from(userLottoNumbers), papers, 2);
 		int totalWinningAmount = statistics.getTotal();
 
 		// when
@@ -62,7 +63,7 @@ public class WinnerTest {
 		// then
 		assertThat(bigDecimal).isEqualTo(inputYield);
 	}
-	
+
 	@DisplayName("각각의 금액이 해당 금액 범위 내인지 확인")
 	@ParameterizedTest
 	@EnumSource(mode = EnumSource.Mode.EXCLUDE, names = {"MISS"})
@@ -77,7 +78,7 @@ public class WinnerTest {
 			LottoNumbers.createLottoNumber(18, 3, 36, 42, 45, 30),
 			LottoNumbers.createLottoNumber(21, 22, 38, 25, 42, 30),
 			LottoNumbers.createLottoNumber(35, 37, 21, 22, 23, 12),
-			LottoNumbers.createLottoNumber(1, 2, 3, 4, 41, 25),
+			LottoNumbers.createLottoNumber(1, 2, 3, 4, 5, 25),
 			LottoNumbers.createLottoNumber(18, 20, 22, 40, 42, 12),
 			LottoNumbers.createLottoNumber(38, 23, 39, 10, 29, 15),
 			LottoNumbers.createLottoNumber(2, 19, 36, 11, 44, 13),

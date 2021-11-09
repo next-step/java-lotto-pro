@@ -2,6 +2,8 @@ package step3;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Map;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,7 +40,8 @@ class LottoNumbersTest {
 	void 유저가_입력한_숫자_갯수를_찾는지_확인() {
 		LottoNumbers lottoNumber = LottoNumbers.createLottoNumber(1,2,3,4,5,6);
 		LottoNumbers userLottNumber = LottoNumbers.createLottoNumber(1,2,42,44,23,19);
-		int match = lottoNumber.match(userLottNumber);
-		Assertions.assertThat(match).isEqualTo(2);
+		Map<Integer, Boolean> match = lottoNumber.match(userLottNumber, 2);
+
+		Assertions.assertThat(match.size()).isEqualTo(1);
 	}
 }

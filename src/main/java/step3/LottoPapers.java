@@ -1,7 +1,10 @@
 package step3;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
+
+import step3.winner.Rank;
 
 public class LottoPapers {
 
@@ -15,10 +18,16 @@ public class LottoPapers {
 		return new LottoPapers(lottoNumbers);
 	}
 
-	public List<Integer> findMatchLottoNumber(LottoNumbers userLottoNumbers) {
-		return papers.stream()
-			.map(lottoNumbers -> lottoNumbers.match(userLottoNumbers))
-			.collect(Collectors.toList());
+	public List<Rank> findMatchLottoNumber(LottoNumbers userLottoNumbers, int isBonusBall) {
+		List<Rank> ranks = new ArrayList<>();
+		for (LottoNumbers paper : papers) {
+			Map<Integer, Boolean> match = paper.match(userLottoNumbers, isBonusBall);
+			for (Map.Entry<Integer,Boolean> matchNumber : match.entrySet()) {
+				Rank rank = Rank.valueOf(matchNumber.getKey(), matchNumber.getValue());
+				ranks.add(rank);
+			}
+		}
+		return ranks;
 	}
 
 	public int size() {
