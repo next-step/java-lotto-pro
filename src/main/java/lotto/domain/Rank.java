@@ -37,7 +37,14 @@ public enum Rank {
         if (rank == null) {
             return LOSER;
         }
+        if (isRankWithoutBonus(rank, matchBonus)) {
+            return rank.get(false);
+        }
         return rank.get(matchBonus);
+    }
+
+    private static boolean isRankWithoutBonus(Map<Boolean, Rank> rank, boolean matchBonus) {
+        return rank.get(matchBonus) == null;
     }
 
 

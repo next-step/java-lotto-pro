@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,7 +16,7 @@ class RankTest {
 
     @DisplayName("당첨번호와 로또번호가 3~6개 사이 일치 일 시 당첨")
     @ParameterizedTest
-    @CsvSource(value = {"0:false:false", "1:false:false", "2:false:false", "3:true:false", "4:true:false", "5:true:false", "6:true:false", "7:false:false"}, delimiter = ':')
+    @CsvSource(value = {"0:false:true", "0:false:false", "1:false:false", "2:false:false", "3:true:false", "4:true:false", "5:true:false", "6:true:false", "7:false:false"}, delimiter = ':')
     void prizeTest(int winningNumberSameCount, boolean expectedPrize, boolean expectedBonus) {
         Rank rank = Rank.of(winningNumberSameCount, expectedBonus);
         boolean prize = rank.isPrize();
