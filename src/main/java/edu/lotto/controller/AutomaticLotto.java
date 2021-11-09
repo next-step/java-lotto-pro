@@ -80,7 +80,7 @@ public class AutomaticLotto {
 	public static String getLatestWinningNumbersByUserInput() {
 		MessageUtil.printMessage("\n"+MessageConstants.INPUT_LATEST_WINNING_NUMBERS_MESSAGE);
 		Scanner scan = new Scanner(System.in);
-		String winningNumbers = scan.next().trim();
+		String winningNumbers = scan.next().replaceAll(" ", "");
 		if (!Lottos.checkInputWinningNumbersValidation(winningNumbers)) {
 			MessageUtil.printMessage(MessageConstants.LATEST_WINNING_NUMBERS_ERROR_MESSAGE);
 			winningNumbers = getLatestWinningNumbersByUserInput();
