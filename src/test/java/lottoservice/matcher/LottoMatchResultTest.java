@@ -1,6 +1,9 @@
 package lottoservice.matcher;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoMatchResultTest {
@@ -10,8 +13,8 @@ class LottoMatchResultTest {
 		LottoMatchResult lottoMatchResult = new LottoMatchResult();
 		lottoMatchResult.addMatchCount(LottoMatchRank.ONE_POINT);
 
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.SIX_POINT)).isEqualTo(0);
-		Assertions.assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.ONE_POINT)).isEqualTo(1);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.SIX_POINT)).isEqualTo(0);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.ONE_POINT)).isEqualTo(1);
 	}
 
 	@Test
@@ -22,7 +25,7 @@ class LottoMatchResultTest {
 		}
 		lottoMatchResult.addMatchCount(LottoMatchRank.THREE_POINT);
 
-		Assertions.assertThat(lottoMatchResult.calculateProfit()).isEqualTo(5000);
+		assertThat(lottoMatchResult.calculateProfit()).isEqualTo(5000);
 	}
 
 	@Test
@@ -33,6 +36,20 @@ class LottoMatchResultTest {
 		}
 		lottoMatchResult.addMatchCount(LottoMatchRank.THREE_POINT);
 
-		Assertions.assertThat(lottoMatchResult.calculateProfitPercentage()).isEqualTo(0.35);
+		assertThat(lottoMatchResult.calculateProfitPercentage()).isEqualTo(0.35);
+	}
+
+	@DisplayName("정답 비교 결과 합치기")
+	@Test
+	public void addResult(){
+		LottoMatchResult lottoMatchResult = new LottoMatchResult();
+		lottoMatchResult.addMatchCount(LottoMatchRank.ONE_POINT);
+
+		LottoMatchResult otherlottoMatchResult = new LottoMatchResult();
+		otherlottoMatchResult.addMatchCount(LottoMatchRank.SIX_POINT);
+
+		lottoMatchResult.addResult(otherlottoMatchResult);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.ONE_POINT)).isEqualTo(1);
+		assertThat(lottoMatchResult.getRankMatchCount(LottoMatchRank.SIX_POINT)).isEqualTo(1);
 	}
 } 
