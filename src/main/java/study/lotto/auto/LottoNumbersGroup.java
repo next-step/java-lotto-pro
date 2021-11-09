@@ -1,4 +1,4 @@
-package study.lottoAuto;
+package study.lotto.auto;
 
 import java.util.List;
 

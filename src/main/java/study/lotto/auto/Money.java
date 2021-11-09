@@ -1,7 +1,4 @@
-package study.lottoAuto;
-
-import static study.lottoAuto.MessageUtil.MINIMUM_MONEY_INPUT_ERR_MSG;
-import static study.lottoAuto.MessageUtil.NEGATIVE_NUMBER_ERR_MSG;
+package study.lotto.auto;
 
 public class Money {
 
@@ -16,9 +13,9 @@ public class Money {
 
     private void validateMoney() {
         if(money < 0)
-            throw new IllegalStateException(NEGATIVE_NUMBER_ERR_MSG);
+            throw new IllegalStateException(MessageUtil.NEGATIVE_NUMBER_ERR_MSG);
         if(money < LOTTO_PRICE)
-            throw new IllegalStateException(MINIMUM_MONEY_INPUT_ERR_MSG);
+            throw new IllegalStateException(MessageUtil.MINIMUM_MONEY_INPUT_ERR_MSG);
     }
 
     public int getPurchaseCount() {

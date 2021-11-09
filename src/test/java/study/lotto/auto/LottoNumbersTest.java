@@ -16,7 +16,8 @@ class LottoNumbersTest {
 
         //각 원소들이 서로 다른지 어떻게 테스트 해보지...?
     }
-    
+
+
     @Test
     void 출력형태_테스트() {
         LottoNumbers lottoNumbers = new LottoNumbers();

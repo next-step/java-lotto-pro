@@ -1,8 +1,8 @@
-package study.lottoAuto;
+package study.lotto.auto;
 
 import java.util.Objects;
 
-import static study.lottoAuto.MessageUtil.INVALID_LOTTO_NUMBER_ERR_MSG;
+import static study.lotto.auto.MessageUtil.INVALID_LOTTO_NUMBER_ERR_MSG;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
