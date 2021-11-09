@@ -6,4 +6,8 @@ public class LackOfMoneyException extends IllegalArgumentException {
 	public LackOfMoneyException() {
 		super(MINIMUM_PRICE_REQUIRED_ERROR);
 	}
+
+	public LackOfMoneyException(String message) {
+		super(message);
+	}
 }
