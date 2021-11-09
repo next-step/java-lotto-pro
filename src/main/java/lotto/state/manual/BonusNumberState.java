@@ -1,10 +1,10 @@
-package lotto.state.bonus;
+package lotto.state.manual;
 
 import lotto.domain.*;
-import lotto.state.FinishState;
 import lotto.state.State;
 
 import java.io.PrintStream;
+import java.util.List;
 
 public class BonusNumberState implements State {
 
@@ -24,8 +24,8 @@ public class BonusNumberState implements State {
     }
 
     @Override
-    public void printResult(String text, PrintStream out) {
-        Record record = new Record(lotteryTicket, new WinningLottoNumbers(winningLottoNumbers, LottoNumber.of(text)));
+    public void printResult(List<String> texts, PrintStream out) {
+        Record record = new Record(lotteryTicket, new WinningLottoNumbers(winningLottoNumbers, LottoNumber.of(texts.get(0))));
         bonusNumberStateView.printResult(out, record);
     }
 
