@@ -67,7 +67,9 @@ public class Lottos {
 		for(int i=ranks.length-2; i>=0; i--) {
 			Rank rank = ranks[i];
 			boolean isSecond = (rank.name() == Rank.SECOND.name());
-			long count = this.lottos.stream().filter(lotto -> lotto.getRank() == rank).count();
+			long count = this.lottos.stream()
+									.filter(lotto -> lotto.getRank() == rank)
+									.count();
 			MessageUtil.printRank((long)rank.getCountOfMatch(), (long)rank.getWinningMoney(), count, isSecond);
 		}
 		printLottoProfitRatio();

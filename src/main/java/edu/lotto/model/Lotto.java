@@ -35,12 +35,21 @@ public class Lotto {
 	 * @return
 	 */
 	private void setLottoNumber() {
+		List<Integer> allLottoNumbers = getLottoNumberRange();
+		Collections.shuffle(allLottoNumbers);
+		this.lottoNumbers = allLottoNumbers.subList(0,6);
+	}
+
+	/**
+	 * 1~45까지 담긴 로또 번호 리스트 가져오기
+	 * @return
+	 */
+	private List<Integer> getLottoNumberRange() {
 		List<Integer> allLottoNumbers = new ArrayList<Integer>();
 		for(int i=1; i<=45; i++) {
 			allLottoNumbers.add(i);
 		}
-		Collections.shuffle(allLottoNumbers);
-		this.lottoNumbers = allLottoNumbers.subList(0,6);
+		return allLottoNumbers;
 	}
 
 	/**
