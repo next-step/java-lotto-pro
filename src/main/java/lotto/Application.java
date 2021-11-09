@@ -7,6 +7,8 @@ import lotto.domain.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class Application {
 
     public static void main(String[] args) {
@@ -16,7 +18,9 @@ public class Application {
 
         Lottos lottos = Lottos.buy(payment.getPurchaseCount());
         ResultView.printLottos(lottos);
-        Lotto winningLotto = Lotto.from(InputView.inputWinningNumbers());
+        List<Integer> winningLottoNumber = InputView.inputWinningNumbers();
+        int bonusNumber = InputView.inputWinningBonusNumbers();
+        Lotto winningLotto = Lotto.from(winningLottoNumber, bonusNumber);
 
         WinningStatistics winningStatistics = WinningStatistics.statistics(winningLotto, lottos);
         ResultView.printStatistics(winningStatistics);
