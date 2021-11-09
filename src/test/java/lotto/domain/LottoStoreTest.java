@@ -29,7 +29,7 @@ class LottoStoreTest {
     @Test
     void calculateManualTryCount() {
         Money money = new Money(5000);
-        List<String> manualNumbers = Arrays.asList("1,2,3,4,5,6","1,2,4,5,6,7");
+        List<String> manualNumbers = Arrays.asList("1,2,3,4,5,6", "1,2,4,5,6,7");
 
         LottoGame game = LottoStore.sell(manualNumbers, money);
 

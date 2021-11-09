@@ -12,7 +12,7 @@ public class LottoGameController {
         int manualTryCount = InputView.inputManualTryCount();
         List<String> manualNumbersStrings = InputView.inputManualNumbers(manualTryCount);
 
-        LottoGame lottoGame = LottoStore.sell(manualNumbersStrings,money);
+        LottoGame lottoGame = LottoStore.sell(manualNumbersStrings, money);
 
         ResultView.printLottoTryCount(lottoGame);
         ResultView.printLottoBalls(lottoGame);

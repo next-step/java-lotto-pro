@@ -13,7 +13,7 @@ class MoneyTest {
 
     @DisplayName("0보다 작은 수를 입력하면 예외가 발생한다")
     @ParameterizedTest
-    @ValueSource(ints = {-10000,-5000})
+    @ValueSource(ints = {-10000, -5000})
     void givenLessThanZero(int input) {
         ThrowableAssert.ThrowingCallable throwingCallable = () -> new Money(input);
 
