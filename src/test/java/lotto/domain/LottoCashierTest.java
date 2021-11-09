@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.auto.AutoLottoPrinter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ public class LottoCashierTest {
     @ParameterizedTest
     @CsvSource(value = {"1500:2:false", "1000:1:true", "1000:0:true", "2000:2:true"}, delimiter = ':')
     void testIsPossibleToBuy(int cash, int count, boolean result) {
-        assertThat(lottoCashier.isPossibleToBuy(Money.of(cash), count)).isEqualTo(result);
+        assertThat(LottoCashier.isPossibleToBuy(Money.of(cash), count)).isEqualTo(result);
     }
 
     @DisplayName("구입 금액 이하의 로또를 수동으로 구매한다")

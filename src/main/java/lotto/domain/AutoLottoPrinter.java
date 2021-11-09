@@ -1,4 +1,4 @@
-package lotto.auto;
+package lotto.domain;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPrinter;
