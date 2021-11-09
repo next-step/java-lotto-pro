@@ -17,18 +17,18 @@ public class LottoController {
     public LottoController() {
     }
 
-    public void play(LottoController lottoController) {
-        lottoController.registerUserLottoBuyAmount();
+    public void play() {
+        registerUserLottoBuyAmount();
 
-        lottoController.registerManualLottoNumbers();
+        registerManualLottoNumbers();
 
-        lottoController.registerAutoLottoNumbers();
+        registerAutoLottoNumbers();
 
-        lottoController.lottoBoughtResult();
+        lottoBoughtResult();
 
-        lottoController.registerLatestLottoNumberAndBonus();
+        registerLatestLottoNumberAndBonus();
 
-        lottoController.resultStatistics();
+        resultStatistics();
     }
 
     public void registerUserLottoBuyAmount() {
