@@ -13,7 +13,7 @@ import lotto.domain.Statistics;
 
 public class ResultView {
 
-	private static final String PURCHASED_COUNT = "%d개를 구매했습니다.";
+	private static final String PURCHASED_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 	private static final String OPEN_BRACKET = "[";
 	private static final String CLOSE_BRACKET = "]";
 	private static final String NUMBER_DELIMITER = ", ";
@@ -24,10 +24,12 @@ public class ResultView {
 	private static final String EARNING_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
 	private static final String LOSS_NOTIFY_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-	public void printPurchasedLottos(Lottos lottos) {
-		String purchasedMessage = String.format(PURCHASED_COUNT, lottos.size());
+	public void printPurchasedLottosCount(final int manualLottoCount, final int autoLottoCount) {
+		String purchasedMessage = String.format(PURCHASED_COUNT, manualLottoCount, autoLottoCount);
 		System.out.println(purchasedMessage);
+	}
 
+	public void printPurchasedLottos(final Lottos lottos) {
 		for (Lotto lotto : lottos.lottos()) {
 			System.out.println(makeLottNumberPrintString(lotto));
 		}
