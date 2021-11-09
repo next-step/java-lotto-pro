@@ -18,15 +18,15 @@ public class LottoStore {
     public static LottoGame sell(List<String> manualNumbersStrings, Money money) {
         List<LottoBalls> manualLottoBalls = createManualLottoBalls(manualNumbersStrings);
         int allTryCount = money.calculateTryLottoCount(LOTTO_PRICE);
-        TryCount tryCount = new TryCount(allTryCount,manualLottoBalls.size());
+        TryCount tryCount = new TryCount(allTryCount, manualLottoBalls.size());
         List<LottoBalls> autoLottoBalls = Collections.unmodifiableList(createLottoBalls(tryCount.getAutoTryCount()));
-        return createLottoGame(manualLottoBalls,autoLottoBalls,tryCount);
+        return createLottoGame(manualLottoBalls, autoLottoBalls, tryCount);
     }
 
     private static List<LottoBalls> createManualLottoBalls(List<String> manualNumbersStrings) {
         List<LottoBalls> manualLottoBalls = new ArrayList<>();
         for (String manualNumberString : manualNumbersStrings) {
-            manualLottoBalls.add(new LottoBalls(manualNumberString));
+            manualLottoBalls.add(new LottoBalls(LottoBallFactory.createLottoBallByStringNumber(manualNumberString)));
         }
         return manualLottoBalls;
     }
@@ -37,7 +37,7 @@ public class LottoStore {
                 .collect(Collectors.toList());
     }
 
-    private static LottoGame createLottoGame(List<LottoBalls> manualLottoBalls,List<LottoBalls> autoLottoBalls,TryCount tryCount) {
+    private static LottoGame createLottoGame(List<LottoBalls> manualLottoBalls, List<LottoBalls> autoLottoBalls, TryCount tryCount) {
         return new LottoGame(
                 tryCount,
                 Stream.concat(manualLottoBalls.stream(), autoLottoBalls.stream()).collect(Collectors.toList())

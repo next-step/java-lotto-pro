@@ -1,10 +1,9 @@
 package lotto.domain;
 
 import lotto.exception.CreateLottoBallFactoryException;
+import lotto.exception.LottoBallCountException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoBallFactory {
     private static final List<LottoBall> CACHE_BALL = new ArrayList<>();
@@ -25,4 +24,31 @@ public class LottoBallFactory {
         Collections.sort(ballsDraw);
         return Collections.unmodifiableList(ballsDraw);
     }
+
+    public static List<LottoBall> createLottoBallByStringNumber(String stringNumber) {
+        String[] numbersSplitted = splitNumberString(stringNumber);
+        return Collections.unmodifiableList(createLottoBallList(numbersSplitted));
+    }
+
+    private static String[] splitNumberString(String numbersString) {
+        String[] numbersSplitted = numbersString.split(",");
+        if (!isNumberStringSizeSix(numbersSplitted)) {
+            throw new LottoBallCountException("로또 공 개수가 6개가 아닙니다.");
+        }
+        return numbersSplitted;
+    }
+
+    private static boolean isNumberStringSizeSix(String[] numbersSplitted) {
+        Set<String> numberSet = new HashSet<String>(Arrays.asList(numbersSplitted));
+        return numberSet.size() == LottoBallRule.LOTTO_BALLS_SIZE.getNumber();
+    }
+
+    private static List<LottoBall> createLottoBallList(String[] numbersSplitted) {
+        List<LottoBall> lottoBallList = new ArrayList<>();
+        for (String numberString : numbersSplitted) {
+            lottoBallList.add(new LottoBall(Integer.parseInt(numberString)));
+        }
+        return lottoBallList;
+    }
+
 }

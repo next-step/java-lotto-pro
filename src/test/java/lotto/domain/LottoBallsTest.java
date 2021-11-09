@@ -16,7 +16,7 @@ class LottoBallsTest {
     @DisplayName("서로 다른 6개의 숫자로만 로또볼 생성이 가능하다")
     @Test
     void createLottoBallsByString() {
-        ThrowableAssert.ThrowingCallable throwingCallable = () -> new LottoBalls("1,1,1,1,1,1");
+        ThrowableAssert.ThrowingCallable throwingCallable = () -> new LottoBalls(LottoBallFactory.createLottoBallByStringNumber("1,1,2,3,4,5"));
 
         assertThatExceptionOfType(LottoBallCountException.class)
                 .isThrownBy(throwingCallable)

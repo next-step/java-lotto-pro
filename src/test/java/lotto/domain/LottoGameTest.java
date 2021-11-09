@@ -15,15 +15,15 @@ class LottoGameTest {
     void getStatistics() {
         LottoGame lottoGame = new LottoGame(
                 Arrays.asList(
-                        new LottoBalls("1,2,3,4,5,6"),
-                        new LottoBalls("1,2,3,4,5,10"),
-                        new LottoBalls("1,2,3,4,5,7"),
-                        new LottoBalls("1,2,3,4,7,8"),
-                        new LottoBalls("1,2,3,4,7,8")
+                        new LottoBalls(LottoBallFactory.createLottoBallByStringNumber("1,2,3,4,5,6")),
+                        new LottoBalls(LottoBallFactory.createLottoBallByStringNumber("1,2,3,4,5,10")),
+                        new LottoBalls(LottoBallFactory.createLottoBallByStringNumber("1,2,3,4,5,7")),
+                        new LottoBalls(LottoBallFactory.createLottoBallByStringNumber("1,2,3,4,7,8")),
+                        new LottoBalls(LottoBallFactory.createLottoBallByStringNumber("1,2,3,4,7,8"))
                 )
         );
         LottoBall bonusBall = new LottoBall(10);
-        LottoBalls winBalls = new LottoBalls("1,2,3,4,5,6");
+        LottoBalls winBalls = new LottoBalls(LottoBallFactory.createLottoBallByStringNumber("1,2,3,4,5,6"));
         WinningBalls winningBalls = new WinningBalls(winBalls, bonusBall);
 
         Statistics statistics = lottoGame.calculateLottoResult(winningBalls);
