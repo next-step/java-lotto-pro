@@ -90,8 +90,8 @@ public class LottoTicketIssuerTest {
 	public void buyManualTickets() {
 		String first = "8, 21, 23, 41, 42, 43";
 		String second = "3, 5, 11, 16, 32, 38";
-		LottoTickets lottoTickets = lottoTicketIssuer.buyManualTickets(new ArrayList<>(Arrays.asList(first,second)));
 
+		LottoTickets lottoTickets = lottoTicketIssuer.buyManualTickets(Arrays.asList(first,second));
 		assertThat(lottoTickets.hasTicket(TestLottoDataFactory.getLottoTicket(first)));
 		assertThat(lottoTickets.hasTicket(TestLottoDataFactory.getLottoTicket(second)));
 	}
