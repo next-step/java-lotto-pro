@@ -1,5 +1,6 @@
 package lottoservice.lottoticket;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -71,7 +72,7 @@ public class LottoTicketIssuer {
 		return false;
 	}
 
-	/* 사용자 입력값을 문자열로 받아 숫자형으로 변환 후  buyTickets(int inputAmount) 호출 */
+	/* 사용자 입력값을 문자열로 받아 숫자형으로 변환 후  buyAutoTickets(int inputAmount) 호출 */
 	public LottoTickets buyAutoTickets(String inputAmount) {
 		int convertedMoney = convertMoneyFormatToNumber(inputAmount);
 		return buyAutoTickets(convertedMoney);
@@ -85,4 +86,10 @@ public class LottoTicketIssuer {
 			throw new InvalidNumberFormatMoneyException(ERROR_MESSAGE_INPUT_AMOUNT_NOT_NUMBER);
 		}
 	}
-} 
+
+	public LottoTickets buyManualTickets(ArrayList<String> numbersText) {
+		return new LottoTickets(numbersText.stream()
+			.map(it -> new LottoTicket(lottoNumbersMaker.makeLottoNumbers(it)))
+			.collect(Collectors.toList()));
+	}
+}
