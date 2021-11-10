@@ -3,6 +3,7 @@ package nextstep.lotto.domain;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static nextstep.lotto.constance.LottoDisplayMessage.MATCH_COUNT_MIDDLE_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.MATCH_COUNT_POSTFIX_MESSAGE;
@@ -17,6 +18,12 @@ public class MatchCount implements Comparable<MatchCount> {
     public MatchCount(Integer index, Integer matchCount) {
         this.index = index;
         this.lottoWinningPrice = LottoWinningPrice.winningPrice(index);
+        this.matchCount = matchCount;
+    }
+
+    public MatchCount(Integer index, LottoWinningPrice lottoWinningPrice, Integer matchCount) {
+        this.index = index;
+        this.lottoWinningPrice = lottoWinningPrice;
         this.matchCount = matchCount;
     }
 
@@ -51,6 +58,19 @@ public class MatchCount implements Comparable<MatchCount> {
                 MATCH_COUNT_MIDDLE_MESSAGE +
                 matchCount +
                 MATCH_COUNT_POSTFIX_MESSAGE;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MatchCount that = (MatchCount) o;
+        return Objects.equals(index, that.index) && lottoWinningPrice == that.lottoWinningPrice && Objects.equals(matchCount, that.matchCount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, lottoWinningPrice, matchCount);
     }
 
     enum LottoWinningPrice {

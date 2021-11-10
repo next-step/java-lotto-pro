@@ -20,13 +20,12 @@ public class LottoNumberTest {
         Assertions.assertThat(lottoNumber).isNotNull();
     }
 
-    @DisplayName("유효한 로또 넘버 생성자 테스트")
+    @DisplayName("유효하지 않는 로또 넘버 생성자 테스트")
     @ParameterizedTest
-    @ValueSource(ints = {10, -1, 0})
+    @ValueSource(ints = {100, -1, 0})
     public void constructorExceptionTest(Integer given) {
         Assertions.assertThatThrownBy(() -> {
             LottoNumber lottoNumber = new LottoNumber(given);
-            System.out.println(lottoNumber);
         }).isInstanceOf(LottoRuntimeException.class);
     }
 }
