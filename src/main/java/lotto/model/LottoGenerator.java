@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +8,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import lotto.code.ErrorCode;
+import lotto.exception.LottoException;
 import lotto.util.RandomUtil;
 
 public class LottoGenerator {
@@ -25,7 +26,24 @@ public class LottoGenerator {
 	}
 
 	public static LottoGenerator of(Money money, List<String> inputNumberList) {
+		validInputListSize(money, inputNumberList.size());
 		return new LottoGenerator(money, inputNumberList);
+	}
+
+	public static LottoGenerator of(Money money, List<String> inputNumberList, String inputSize) {
+		validInputSize(inputSize, inputNumberList.size());
+		validInputListSize(money, Integer.parseInt(inputSize));
+		return new LottoGenerator(money, inputNumberList);
+	}
+
+	private static void validInputSize(String input, int inputNumberListSize) {
+		if (input == null || input.isEmpty() || !input.matches("[1-9]")) {
+			throw new LottoException(ErrorCode.NEGATIVE_AMOUNT_ERROR);
+		}
+
+		if (Integer.parseInt(input) != inputNumberListSize) {
+			throw new LottoException(ErrorCode.INVALID_INPUT_SIZE_INPUT_LIST_SIZE_ERROR);
+		}
 	}
 
 	private static List<String> generateStringNumberSet() {
@@ -42,6 +60,12 @@ public class LottoGenerator {
 		return String.valueOf(RandomUtil.pickNumber(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER));
 	}
 
+	private static void validInputListSize(Money money, int inputSize) {
+		if (money.validSizeUnderAmount(inputSize)) {
+			throw new LottoException(ErrorCode.INVALID_MONEY_INPUT_NUMBER_SIZE_ERROR);
+		}
+	}
+
 	private List<List<String>> generateLottoNumberList() {
 		return Stream
 			.generate(LottoGenerator::generateStringNumberSet)
@@ -49,39 +73,22 @@ public class LottoGenerator {
 			.collect(Collectors.toList());
 	}
 
-	public List<LottoNumbers> generateLottoNumbers() {
-		if (isNullInputNumberList()) {
-			return generateRandomLottoNumbers();
-		}
-		return generateMixLottoNumbers();
-	}
-
 	private int calculateRandomSize() {
 		return money.calculateLottoAmount() - inputNumberList.size();
 	}
 
-	private List<LottoNumbers> generateMixLottoNumbers() {
-		return Stream.of(generateLottoInputNumbers(), generateRandomLottoNumbers())
-			.flatMap(Collection::stream)
-			.collect(Collectors.toList());
-	}
-
-	private List<LottoNumbers> generateRandomLottoNumbers() {
+	public List<LottoNumbers> generateRandomLottoNumbers() {
 		return generateLottoNumberList()
 			.stream()
 			.map(LottoNumbers::from)
 			.collect(Collectors.toList());
 	}
 
-	private List<LottoNumbers> generateLottoInputNumbers() {
+	public List<LottoNumbers> generateInputLottoNumbers() {
 		return inputNumberList
 			.stream()
 			.map(LottoNumbers::from)
 			.limit(inputNumberList.size())
 			.collect(Collectors.toList());
-	}
-
-	private boolean isNullInputNumberList() {
-		return this.inputNumberList == null || this.inputNumberList.isEmpty();
 	}
 }
