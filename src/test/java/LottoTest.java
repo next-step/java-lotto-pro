@@ -41,8 +41,6 @@ public class LottoTest {
 	@Test
 	@DisplayName("로또 숫자 6개가 포함된 문자열로도 생성 가능")
 	void test_constructor4() {
-		assertThatNoException().isThrownBy(() -> new Lotto("1, 2, 3, 4, 5, 6"));
-
 		assertThat(new Lotto("1, 2, 3, 4, 5, 6"))
 			.isEqualTo(new Lotto(
 				Arrays.asList(1, 2, 3, 4, 5, 6)
