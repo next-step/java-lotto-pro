@@ -8,6 +8,11 @@ public class Money {
 	public Money(int money) {
 		validation(money);
 		this.money = money;
+		this.size = Math.floorDiv(money, DEFAULT_MONEY);
+	}
+
+	public Money(String input) {
+		this(Integer.parseInt(input));
 	}
 
 	private void validation(int money) {
@@ -21,11 +26,6 @@ public class Money {
 	}
 
 	public int buyCount() {
-		size = Math.floorDiv(money, DEFAULT_MONEY);
-		return size;
-	}
-
-	public int findPunchCount() {
 		return size;
 	}
 

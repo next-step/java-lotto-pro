@@ -5,15 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import step3.LottoNumber;
-import step3.LottoNumbers;
-import step3.LottoPapers;
+import step3.lotto.LottoNumber;
+import step3.lotto.LottoNumbers;
+import step3.lotto.LottoPapers;
 import step3.Money;
 import step3.RandomUtils;
 
 public class AutoLottoMachine implements Machine {
 
-	private Money money;
 	private MachineValidation machineValidation;
 
 	public AutoLottoMachine(MachineValidation machineValidation) {
@@ -21,12 +20,7 @@ public class AutoLottoMachine implements Machine {
 	}
 
 	@Override
-	public void insertMoney(Money money) {
-		this.money = money;
-	}
-
-	@Override
-	public LottoPapers createLottoPapers() {
+	public LottoPapers createLottoPapers(Money money) {
 		List<LottoNumbers> lottoNumbers = new ArrayList<>();
 		for (int i = 0; i < money.buyCount(); i++) {
 			lottoNumbers.add(createOneLineLottoNumbers());

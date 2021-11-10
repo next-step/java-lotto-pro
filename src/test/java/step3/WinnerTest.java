@@ -1,6 +1,6 @@
 package step3;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
@@ -16,20 +16,21 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import step3.lotto.BonusBall;
+import step3.lotto.LottoNumbers;
+import step3.lotto.LottoPapers;
+import step3.winner.Rank;
 import step3.winner.Winner;
-import step3.winner.WinningAmount;
 import step3.winner.WinningMoney;
 
 public class WinnerTest {
 
-	private LottoNumberService lottoNumberService;
 	private Map<Integer, Integer> winnerAmounts;
 	private Winner winner;
 	private LottoPapers papers;
 
 	@BeforeEach
 	void setUp() {
-		lottoNumberService = new LottoNumberService();
 		papers = LottoPapers.createPapers(getLottoNumbers());
 	}
 
@@ -37,42 +38,42 @@ public class WinnerTest {
 	@DisplayName("각 로또종이별 매칭되는 수에따른 금액 확인")
 	void eachWinAmount() {
 		//given
-		String userInputWinnerNumber = "1, 2, 3, 4, 5, 6";
-		lottoNumberService = new LottoNumberService();
+		LottoNumbers userLottoNumbers = LottoNumbers.from("1, 2, 3, 4, 5, 6");
 
 		//when
-		winner = new Winner(papers);
-		winnerAmounts = winner.statistics(lottoNumberService.convertLottoNumber(userInputWinnerNumber));
-
+		Winner winner = Winner.of();
+		Winner result = winner.statistics(userLottoNumbers, papers, BonusBall.of(45, userLottoNumbers));
+		int totalWinningAmount = result.getTotal();
 		//then
-		assertThat(winnerAmounts.get(3)).isEqualTo(5_000);
-		assertThat(winnerAmounts.get(4)).isEqualTo(50_000);
+		assertThat(totalWinningAmount).isEqualTo(30005000);
 	}
 
 	@DisplayName("당첨금액의 총 수익률 계산")
 	@ParameterizedTest
-	@CsvSource(value = {"1, 2, 3, 4, 5, 6:14000:3.92", "36,42,45,21,30,20:14000:3.92",
-		"6,42,45,1,9,8:14000:0.00"}, delimiter = ':')
-	void yield(String userInputNumber, int inputMoney, String inputYield) {
+	@CsvSource(value = {"1, 2, 3, 4, 5, 6:14000:2143.21",
+		"36,42,45,21,30,20:14000:3.92",
+		"6,42,45,1,9,8:14000:0.00",
+		"4, 3, 5, 7, 43, 44:14000:3.92"}, delimiter = ':')
+	void yield(String inputUserLottoNumbers, int inputMoney, String inputYield) {
 		// given
-		WinningMoney winningMoney = new WinningMoney(new Money(inputMoney));
-		winner = new Winner(papers);
-		winnerAmounts = winner.statistics(lottoNumberService.convertLottoNumber(userInputNumber));
-		Integer reduce = winnerAmounts.entrySet().stream().map(s -> s.getValue()).reduce(0, Integer::sum);
+		LottoNumbers userLottoNumbers = LottoNumbers.from(inputUserLottoNumbers);
+		Winner winner = Winner.of();
+		Winner statistics = winner.statistics(userLottoNumbers, papers, BonusBall.of(32, userLottoNumbers));
+		int totalWinningAmount = statistics.getTotal();
 
 		// when
-		BigDecimal calyield = winningMoney.yield(reduce);
+		BigDecimal bigDecimal = WinningMoney.calculateYield(new Money(inputMoney), totalWinningAmount);
 
 		// then
-		assertThat(calyield).isEqualTo(new BigDecimal(inputYield));
+		assertThat(bigDecimal).isEqualTo(inputYield);
 	}
-	
+
 	@DisplayName("각각의 금액이 해당 금액 범위 내인지 확인")
 	@ParameterizedTest
-	@EnumSource(WinningAmount.class)
-	void WinningAmountTest(WinningAmount winningAmount) {
+	@EnumSource(mode = EnumSource.Mode.EXCLUDE, names = {"MISS"})
+	void WinningAmountTest(Rank winningAmount) {
 		int amount = winningAmount.getAmount();
-		assertTrue(amount >= 5000 && amount <= 2_000_000_000);
+		assertTrue(amount >= 5_000 && amount <= 2_000_000_000);
 	}
 
 	private List<LottoNumbers> getLottoNumbers() {
@@ -81,7 +82,7 @@ public class WinnerTest {
 			LottoNumbers.createLottoNumber(18, 3, 36, 42, 45, 30),
 			LottoNumbers.createLottoNumber(21, 22, 38, 25, 42, 30),
 			LottoNumbers.createLottoNumber(35, 37, 21, 22, 23, 12),
-			LottoNumbers.createLottoNumber(1, 2, 3, 4, 41, 25),
+			LottoNumbers.createLottoNumber(1, 2, 3, 4, 5, 25),
 			LottoNumbers.createLottoNumber(18, 20, 22, 40, 42, 12),
 			LottoNumbers.createLottoNumber(38, 23, 39, 10, 29, 15),
 			LottoNumbers.createLottoNumber(2, 19, 36, 11, 44, 13),

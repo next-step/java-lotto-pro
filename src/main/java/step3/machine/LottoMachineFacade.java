@@ -1,55 +1,68 @@
 package step3.machine;
 
-import step3.LottoNumberService;
-import step3.LottoPapers;
+import java.math.BigDecimal;
+
 import step3.Money;
+import step3.lotto.BonusBall;
+import step3.lotto.LottoNumbers;
+import step3.lotto.LottoPapers;
 import step3.view.InputView;
 import step3.view.ResultView;
 import step3.winner.Winner;
+import step3.winner.WinningMoney;
 
 public class LottoMachineFacade {
 
-	private Money money;
-	private LottoNumberService lottoNumberService;
-	private MachineValidation machineValidation;
-	private LottoPapers lottoPapers;
-	private InputView inputView;
-	private ResultView resultView;
+	private final Machine machine;
+	private final InputView inputView;
+	private final ResultView resultView;
 
-	public LottoMachineFacade(LottoNumberService lottoNumberService, MachineValidation machineValidation, InputView inputView, ResultView resultView) {
+	public LottoMachineFacade(Machine machine, InputView inputView, ResultView resultView) {
+		this.machine = machine;
 		this.inputView = inputView;
 		this.resultView = resultView;
-		this.lottoNumberService = lottoNumberService;
-		this.machineValidation = machineValidation;
 	}
 
-	public void start() {
-		insertMoney();
-		createLottoPapers();
-		resultPrint();
+
+	public void LottoMachineExecute() {
+
+		try {
+
+			Money money = enterMoney();
+			LottoPapers lottoPapers = machine.createLottoPapers(money);
+
+			resultView.purchasedCount(money.buyCount());
+			resultView.purchasedLottoPrint(lottoPapers);
+
+			LottoNumbers userLottoNumbers = enterUserLottoNumber();
+			BonusBall bonusBall = enterBonusBall(userLottoNumbers);
+
+			Winner winner = Winner.of();
+			Winner statistics = winner.statistics(userLottoNumbers, lottoPapers, bonusBall);
+			BigDecimal bigDecimal = WinningMoney.calculateYield(money, statistics.getTotal());
+
+			resultView.statisticsPrint(statistics);
+			resultView.yieldPrint(bigDecimal);
+
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
 
-	private void insertMoney() {
-		int insertMoney = inputView.insertMoney();
-		money = new Money(insertMoney);
+	private LottoNumbers enterUserLottoNumber() {
+		String userLottoNumbers = inputView.insertLottoNumber();
+		return LottoNumbers.from(userLottoNumbers);
 	}
 
-	private void createLottoPapers() {
-		Machine machine = new AutoLottoMachine(machineValidation);
-		machine.insertMoney(money);
-		lottoPapers = machine.createLottoPapers();
+	private Money enterMoney() {
+		Money money = new Money(inputView.insertMoney());
+		return money;
 	}
 
-	private void resultPrint() {
-		resultView.purchasedCount(money.findPunchCount());
-		resultView.purchasedLottoPrint(lottoPapers);
-	}
-
-	public void findWinner() {
-		Winner winner = new Winner(lottoPapers);
-		winner.statistics(lottoNumberService.convertLottoNumber(inputView.insertLottoNumber()));
-		winner.yield(money);
-		resultView.statisticsPrintAndYield(winner);
+	private BonusBall enterBonusBall(LottoNumbers userLottoNumbers) {
+		int bonusBall = inputView.insertBonusBall();
+		return BonusBall.of(bonusBall, userLottoNumbers);
 	}
 
 }

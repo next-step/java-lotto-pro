@@ -88,3 +88,192 @@
 - [x] `stream().filter(/*do stuff*/).count()`
 
 
+### 무엇을 이해했는가?
+1. 객체와의 관계을 `역할`과`책임`으로 나누어진다.
+2. 객체의 명칭은 의미보다는 `책임`에 의해 이름이 만들어진다.
+3. `일급컬렉션`은 상속보다는 합성을 이용하는 것이 용이하다
+    - [상속보다 합성을 이용하라](https://tecoble.techcourse.co.kr/post/2020-05-18-inheritance-vs-composition/)
+#### before
+
+```java
+public class LottoPapers extends AbstractList<LottoNumbers> 
+```
+
+#### after
+```java
+public class LottoPapers {
+	private final List<LottoNumbers> list = new LottoNumbers();
+} 
+```
+
+4. `테스트 픽스처`
+    - [테스트 픽스처](https://jojoldu.tistory.com/611?category=1011740)
+5. 인터페이스는 `행위`에 집중하여 설계하는 것이 좋다고 생각한다.
+    - 이전 방식은 클래스에게 `여러개의 행위에 대한 책임`을 위임한다면
+    - 아래 방식은 `하나의 클래스에 하나의 행위`를 위임하고 있다.
+#### before
+```java
+public class AutoMachineValidation implements MachineValidation{
+	@Override
+	public boolean isOverFlow(int size) {
+		if (size == LOTTO_NUMBER_MAX) {
+			return false;
+		}
+		return true;
+	}
+}
+
+```
+#### after
+```java
+public interface MachineValidator {
+
+    boolean validate();
+}
+
+public class OverflowValidator implements MachineValidator {
+
+    @Override
+    public boolean validate() {
+        // ... overflow 관련 로직
+    }
+}
+```
+
+## Step4. 로또 2등
++ 사용자의 입력을 추가 "보너스 볼을 입력해 주세요.
+
+## 당첨 통계
++ 5개 일치, 보너스 볼 일치(30000000원) - 0개
+
+## 기능사항 정의
+
+- [x] findMatchLottoNumber 로직변경
+  - 기존 로직 수정 
+    - LottoPapers.java findMatchLottoNumber() 
+      - 로또 상금에 해당하는 대상을 찾는 로직 
+- [x] LottoNumbers match() 
+  - 기존 로직 수정 
+    - 유저의 지난주 로또번호와 보너스볼을 가지고서 보너스볼을 가지고 있는지 확인 
+    - 보너스볼 유무 및 매칭되는 볼 숫자를 리턴한다.
+  - 추가된 로직 
+    - matchCount 
+      - 6개의 로또번호를 탐색하여 매칭되는 수를 리턴 
+    - matchBonusBall
+      - 6개의 로또번 중 보너스 볼과 매칭되는 경우 true 아니면 false를 리턴
+- [x] LottoNumbers getList 추가 
+  - 대상의 데이터는 `불변` 하도록 처리 
+- [x] ViewException 추가 
+  - 화면에서 처리한 로직 Exception의 상위 클래스 생성 
+    - 각각의 오류에 대한 Exception 클래스 생성 
+- [x] 문자열 상수 정의
+  - 문자열을 코드에 넣었던 형태를 상수로 전환
+- [x] LottoNumbersService 삭제 
+  - 행위의 의한 범위가 아닌 하나의 대한 인터페이스는 의미 없어보이므로 삭제 
+  - 해당 로직을 LottoNumbers.from으로 변경
+- [x] Money `명령-쿼리` 
+  - 값의 조회와 함께 수정은 오류를 예측하기 어려워지므로 `하나의 일`만 하도록 처리
+- [x] `보너스볼` 추가 
+  - 보너스 볼을 `LottoNumber`를 상속하여 번호의 범위가 1 ~ 45 범위 이도록 변경 
+- [x] LottoNumber 번호의 범위 추가 
+  - 로또번호는 1 ~ 45까지의 범위이어야한다.
+
+
+### 생각 이상으로 객체지향은 어렵다.
+
+```java
+import java.util.Collections;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public interface InputView {
+	// 화면 호출 메시지
+	message();
+
+	// 입력
+	enter();
+}
+
+public class MoneyView implements InputView {
+	@Override
+	public void message() {
+		System.out.println("구입금액을 입력하세요");
+	}
+
+	@Override
+	public String enter() {
+		return sc.nextLine();
+	}
+}
+
+public class BonusBallView implements InputView {
+	@Override
+	public void message() {
+		System.out.println("보너스 볼을 입력해 주세요");
+	}
+
+	@Override
+	public String enter() {
+		return sc.nextLine();
+	}
+}
+
+public interface Config {
+	Map.Entry<InputView, Object> getFactory();
+}
+
+public class FactoryConfig implements Config {
+	private Map<InputView, Object> factory
+
+	public FactoryConfig() {
+		factory = new HashMap<>();
+		factory.put(new MoneyView(), new CreateOperation());
+		factory.put(new BonusBallView(), new BonusBallOperation());
+	}
+
+	public Map.Entry<InputView, Object> getFactory() {
+		return Collections.unmodifiableMap(factory.entrySet());
+	}
+}
+
+public class LottoManagement {
+
+	private FacotryConfig facotryConfig;
+
+	public LottoManagement(FactoryConfig factoryConfig) {
+		this.factory = facotryConfig;
+	}
+
+	public void run() {
+		List<InputView> views = facotryConfig.getView();
+
+		for (Map.Entry<InputView, Object> factory : getFactory) {
+			InputView view = factory.getKey();
+			Object operation = factory.getValue();
+			view.message();
+			String enter = view.enter();
+			operation.start(enter);
+		}
+	}
+}
+
+public interface CreateOperation {
+	void start(Money money);
+}
+
+public interface BonusBallOperation {
+	void start(LottoNumbers lottoNumbers, BonusBall bonusBall);
+}
+
+public interface LottoOperation extends CreateOperation, BonusBallOperation {
+	void start(String enter);
+}
+
+public class Main {
+
+	LottoManagement lottoManagement = new LottoManagement(new FactoryConfig());
+	lottoManagement.run();
+}
+
+
+```

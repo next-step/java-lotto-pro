@@ -1,10 +1,13 @@
 package step3.view;
 
-import step3.LottoPapers;
+import java.math.BigDecimal;
+
+import step3.lotto.LottoPapers;
 import step3.winner.Winner;
 
 public interface ResultView {
-	public void purchasedLottoPrint(LottoPapers lottoPapers);
-	public void purchasedCount(int size);
-	public void statisticsPrintAndYield(Winner winner);
+	void purchasedLottoPrint(LottoPapers lottoPapers);
+	void purchasedCount(int size);
+	void statisticsPrint(Winner statistics);
+	void yieldPrint(BigDecimal statistics);
 }

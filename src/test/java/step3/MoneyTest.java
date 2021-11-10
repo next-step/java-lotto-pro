@@ -16,7 +16,7 @@ public class MoneyTest {
 
 	@ParameterizedTest
 	@DisplayName("입력한 금액에따라 구매가능한 갯수를 리턴")
-	@CsvSource(value = {"1000:1","2000:2","1100:1"}, delimiter = ':')
+	@CsvSource(value = {"1000:1", "2000:2", "1100:1"}, delimiter = ':')
 	void buyCount(int input, int result) {
 		Money money = new Money(input);
 		Assertions.assertThat(money.buyCount()).isEqualTo(result);

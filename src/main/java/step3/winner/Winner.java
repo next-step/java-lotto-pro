@@ -1,83 +1,69 @@
 package step3.winner;
 
-import static step3.Constant.*;
-import static step3.winner.WinningAmount.*;
-
-import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import step3.Constant;
-import step3.LottoNumber;
-import step3.LottoNumbers;
-import step3.LottoPapers;
-import step3.Money;
+import step3.lotto.BonusBall;
+import step3.lotto.LottoNumbers;
+import step3.lotto.LottoPapers;
 
 public class Winner {
 
-	private final Map<Integer, Integer> winningAmount;
-	private final LottoPapers lottoPapers;
-	private int sumWinningAmount;
-	private BigDecimal yield;
+	private final Map<Rank, Integer> ranks;
+	private final int WINNING_COUNT = 1;
 
-	public Winner(LottoPapers lottoPapers) {
-		this.lottoPapers = lottoPapers;
-		winningAmount = new HashMap<>();
+	private Winner(Map<Rank, Integer> ranks) {
+		this.ranks = ranks;
 	}
 
-	public Map<Integer, Integer> statistics(List<LottoNumber> lottoNumbers) {
-		isNotEmpty(lottoNumbers);
-		for (LottoNumbers lottoPapers : lottoPapers) {
-			Integer winningCount = findMatchLottoNumber(lottoNumbers, lottoPapers);
-			Integer winningAmount = WinningAmount.valueOf(winningCount);
-			addWinnerList(winningCount, winningAmount);
-			sumWinningAmount(winningAmount);
-		}
-		return winningAmount;
+	public static Winner of() {
+		return new Winner(new HashMap<>());
 	}
 
-	private void isNotEmpty(List<LottoNumber> lottoNumbers) {
-		if (lottoNumbers.isEmpty()) {
-			throw new IllegalArgumentException("로또번호가 정상적으로 생서되지 않았습니다.");
-		}
+	public Winner statistics(LottoNumbers userLottoNumbers, LottoPapers createLottoNumbers, BonusBall bonusBall) {
+		List<Rank> matchLottoNumber = createLottoNumbers.findMatchLottoNumber(userLottoNumbers, bonusBall);
+		return new Winner(
+			matchLottoNumber.stream()
+				.collect(
+					Collectors.toMap(
+						(matchNumber -> matchNumber),
+						matchNumber -> WINNING_COUNT,
+						Integer::sum
+					)
+				)
+		);
 	}
 
-	private Integer findMatchLottoNumber(List<LottoNumber> lottoNumbers, LottoNumbers lottoPapers) {
-		int matchCount = 0;
-		for (LottoNumber lottoNumber : lottoNumbers) {
-			matchCount += lottoPapers.match(lottoNumber);
-		}
-		return matchCount;
+	public int getTotal() {
+		return ranks.entrySet().stream()
+			.map(Map.Entry::getKey)
+			.map(Rank::getAmount)
+			.reduce(0, Integer::sum);
 	}
 
-	private void sumWinningAmount(Integer winningAmount) {
-		sumWinningAmount += winningAmount;
-	}
+	public List<Rank> getRank() {
+		return ranks.entrySet().stream()
+			.map(Map.Entry::getKey)
+			.collect(Collectors.toList());
 
-	private void addWinnerList(Integer matchNumber, Integer winningAmount) {
-		this.winningAmount.put(matchNumber, winningAmount);
-	}
-
-	public void yield(Money inputWinningMoney) {
-		WinningMoney winningMoney = new WinningMoney(inputWinningMoney);
-		yield = winningMoney.yield(sumWinningAmount);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(THREE.getMessage()).append(getWinner(THREE.getMatch())).append(EACH).append(Constant.ENTER);
-		sb.append(FOUR.getMessage()).append(getWinner(FOUR.getMatch())).append(EACH).append(ENTER);
-		sb.append(FIVE.getMessage()).append(getWinner(FIVE.getMatch())).append(EACH).append(ENTER);
-		sb.append(SIX.getMessage()).append(getWinner(SIX.getMatch())).append(EACH).append(ENTER);
-		sb.append(TOTAL_YIELD).append(yield).append(END_OF_WORD);
+		Arrays.stream(Rank.values()).sorted(Collections.reverseOrder()).forEach(s-> {
+			sb.append(String.format(s.getMessage(),getWinner(s)));
+		});
 		return sb.toString();
 	}
 
-	private Integer getWinner(int matchCount) {
-		Optional<Integer> integer = Optional.ofNullable(winningAmount.get(matchCount));
+	private Integer getWinner(Rank rank) {
+		Optional<Integer> integer = Optional.ofNullable(ranks.get(rank));
 		return integer.orElse(0);
 	}
 }

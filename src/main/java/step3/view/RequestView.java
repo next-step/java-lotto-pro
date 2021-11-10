@@ -3,6 +3,12 @@ package step3.view;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import step3.view.exception.CommaSeparatedNumbersException;
+import step3.view.exception.EnterNumberIsOnlyIntegerException;
+import step3.view.exception.EnterNumberIsRangeSixException;
+import step3.view.exception.LastCommaException;
+import step3.view.exception.ViewException;
+
 public class RequestView implements InputView {
 
 	private static final Pattern COMMA = Pattern.compile("([\\w\\d].+)+([^\\w,]).+");
@@ -10,25 +16,42 @@ public class RequestView implements InputView {
 	private static final Pattern ONLY_NUMBER = Pattern.compile("((?:^|,)([0-9]+))+");
 	private static final Pattern NUMBER_SIZE_SIX = Pattern.compile("((?:^|,)([0-9]{1,2})){6}");
 
+	private static final String ENTER_MONEY = "구입금액을 입력해 주세요.";
+	private static final String ENTER_BONUS_BALL = "보너스 볼을 입력해 주세요";
+	private static final String ENTER_LAST_WEEK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+
 	public int insertMoney() {
 		int insertMoney = 0;
 		try {
-			System.out.println("구입금액을 입력해 주세요.");
-			insertMoney = Integer.parseInt(input());
+			System.out.println(ENTER_MONEY);
+			return Integer.parseInt(input());
 		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
 			insertMoney();
 		}
 		return insertMoney;
 	}
 
+	public int insertBonusBall() {
+		int insertBonusBall = 0;
+		try {
+			System.out.println(ENTER_BONUS_BALL);
+			return Integer.parseInt(input());
+		} catch (ViewException e) {
+			System.out.println(e.getMessage());
+			insertBonusBall();
+		}
+		return insertBonusBall;
+	}
+
+
 	public String insertLottoNumber() {
 		String insertLottoNumber = "";
 		try {
-			System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+			System.out.println(ENTER_LAST_WEEK_WINNING_NUMBERS);
 			insertLottoNumber = input();
 			validationInputWinningNumber(insertLottoNumber);
-		} catch (IllegalArgumentException ex) {
+			return insertLottoNumber;
+		} catch (ViewException ex) {
 			System.out.println(ex.getMessage());
 			insertLottoNumber();
 		}
@@ -37,19 +60,19 @@ public class RequestView implements InputView {
 
 	private static void validationInputWinningNumber(String input) {
 		if (isMatch(LAST_COMMA, input)) {
-			throw new IllegalArgumentException("[ERROR] ,를 마지막에 입력하면 안됩니다.");
+			throw new LastCommaException();
 		}
 
 		if (isMatch(COMMA, input)) {
-			throw new IllegalArgumentException("[ERROR] 숫자는 ,구분해서 입력해야합니다.");
+			throw new CommaSeparatedNumbersException();
 		}
 
 		if (!isMatch(ONLY_NUMBER,input)) {
-			throw new IllegalArgumentException("[ERROR] 정수만을 입력해야합니다.");
+			throw new EnterNumberIsOnlyIntegerException();
 		}
 
 		if (!isMatch(NUMBER_SIZE_SIX,input)) {
-			throw new IllegalArgumentException("[ERROR] 숫자는 6개를 입력해야합니다.");
+			throw new EnterNumberIsRangeSixException();
 		}
 	}
 
@@ -57,7 +80,7 @@ public class RequestView implements InputView {
 		return pattern.matcher(input).find();
 	}
 
-	private static String input() {
+	private String input() {
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextLine();
 	}
