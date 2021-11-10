@@ -17,6 +17,7 @@ public class LottoTicket {
     public static final int END_INCLUSIVE = 45;
 
     private final List<LottoNumber> lottoNumbers;
+    private LottoNumber bonusNumber;
 
     public LottoTicket(List<Integer> lottoNumbers) {
         checkLottoNumberSize(lottoNumbers);
@@ -24,11 +25,17 @@ public class LottoTicket {
         this.lottoNumbers = getLottoNumbers(lottoNumbers);
     }
 
+    public LottoTicket(List<Integer> lottoNumbers, int bonusNumber) {
+        checkLottoNumberSize(lottoNumbers);
+        checkNumberDuplication(lottoNumbers);
+        this.lottoNumbers = getLottoNumbers(lottoNumbers);
+        this.bonusNumber = LottoNumber.from(bonusNumber);
+    }
+
     public static LottoTicket generateRandomLottoTicket() {
         List<Integer> lottoNumbers = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
                 .boxed()
-                .collect(Collectors
-                        .toList());
+                .collect(Collectors.toList());
         Collections.shuffle(lottoNumbers);
         return new LottoTicket(lottoNumbers.subList(FROM_INDEX, LOTTO_NUMBER_SIZE));
     }
@@ -56,16 +63,20 @@ public class LottoTicket {
         return lottoNumbers.toString();
     }
 
-    public int getSameNumberCount(LottoTicket TargetlottoTicket) {
+    public Prize getPrize(LottoTicket targetLottoTicket) {
         int sameNumberCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            sameNumberCount = increaseSameNumberCount(TargetlottoTicket, sameNumberCount, lottoNumber);
+            sameNumberCount = increaseSameNumberCount(targetLottoTicket, sameNumberCount, lottoNumber);
         }
-        return sameNumberCount;
+        return Prize.valueOf(sameNumberCount, isBonusNumber(targetLottoTicket));
     }
 
-    private int increaseSameNumberCount(LottoTicket TargetLottoTicket, int sameNumberCount, LottoNumber lottoNumber) {
-        if (TargetLottoTicket.contains(lottoNumber)) {
+    private boolean isBonusNumber(LottoTicket targetLottoTicket) {
+        return lottoNumbers.contains(targetLottoTicket.bonusNumber);
+    }
+
+    private int increaseSameNumberCount(LottoTicket targetLottoTicket, int sameNumberCount, LottoNumber lottoNumber) {
+        if (targetLottoTicket.contains(lottoNumber)) {
             sameNumberCount++;
         }
         return sameNumberCount;
@@ -78,7 +89,6 @@ public class LottoTicket {
     public LottoTicketDTO toDTO() {
         return new LottoTicketDTO(lottoNumbers.stream()
                 .map(LottoNumber::toDTO)
-                .collect(Collectors
-                        .toList()));
+                .collect(Collectors.toList()));
     }
 }

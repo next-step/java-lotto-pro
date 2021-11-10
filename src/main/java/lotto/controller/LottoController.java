@@ -24,18 +24,14 @@ public class LottoController {
         // 로또 구입
         Money inputMoney = new Money(inputView.inputMoney());
         LottoTickets lottoTickets = lottoService.buyLottoTickets(inputMoney);
-        resultView.printBuyResult(lottoTickets
-                .toDTO());
+        resultView.printBuyResult(lottoTickets.toDTO());
 
         // 당첨번호 입력
-        LottoTicket winningLottoTicket = ParseUtility.StringToLottoTicket(inputView
-                .inputWinningNumber());
+        LottoTicket winningLottoTicket = ParseUtility.StringToLottoTicket(inputView.inputWinningNumber(), inputView.inputBonusNumber());
 
         // 결과 출력
         GameResult gameResult = lottoService.getGameResult(lottoTickets, winningLottoTicket);
         resultView.printGameResult(gameResult);
-        resultView.printEarningRatio(inputMoney.toDTO(),
-                new Money(gameResult.getPrize())
-                        .toDTO());
+        resultView.printEarningRatio(inputMoney.toDTO(), new Money(gameResult.getPrize()).toDTO());
     }
 }

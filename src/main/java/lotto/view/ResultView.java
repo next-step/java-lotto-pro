@@ -14,9 +14,11 @@ public class ResultView {
     public static final int BEP = 1;
     public static final String JOIN_DELIMITER = "\n";
     public static final String BUY_MESSAGE = "%d개를 구매했습니다.";
-    public static final String GAME_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+    public static final String GAME_RESULT_MESSAGE = "%s (%d원)- %d개\n";
     public static final String EARNING_RATIO_MESSAGE = "총 수익률은 %f입니다. ";
     public static final String EARNING_RATIO_LOSS_MESSAGE = "기준이 1이기 때문에 결과적으로 손해라는 의미임";
+    public static final String COUNT_OF_MATCH_MESSAGE = "%d개 일치";
+    public static final String COUNT_OF_MATCH_SECOND_PRIZE_MESSAGE = "5개 일치, 보너스 볼 일치";
 
     public ResultView() {
     }
@@ -37,12 +39,17 @@ public class ResultView {
 
     public void printGameResult(GameResult gameResult) {
         for (Prize prize : Prize.values()) {
-            System.out.printf(GAME_RESULT_MESSAGE,
-                    prize.getMatchCount(),
-                    prize.getPrizeMoney(),
-                    gameResult.getMatchCount(prize
-                            .getMatchCount()));
+            String countOfMatchMessage = getCountOfMatchMessage(prize);
+            System.out.printf(GAME_RESULT_MESSAGE, countOfMatchMessage, prize.getPrizeMoney(), gameResult.getMatchCount(prize));
         }
+    }
+
+    private String getCountOfMatchMessage(Prize prize) {
+        String countOfMatchMessage = String.format(COUNT_OF_MATCH_MESSAGE, prize.getCountOfMatch());
+        if (prize == Prize.SECOND) {
+            countOfMatchMessage = COUNT_OF_MATCH_SECOND_PRIZE_MESSAGE;
+        }
+        return countOfMatchMessage;
     }
 
     public void printEarningRatio(MoneyDTO inputMoney, MoneyDTO prize) {

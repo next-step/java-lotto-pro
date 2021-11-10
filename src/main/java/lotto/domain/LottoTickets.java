@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.dto.LottoTicketsDTO;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,8 +28,8 @@ public class LottoTickets {
     public GameResult getGameResult(LottoTicket winningNumber) {
         GameResult gameResult = new GameResult();
         for (LottoTicket lottoTicket : lottoTickets) {
-            int sameNumberCount = lottoTicket.getSameNumberCount(winningNumber);
-            gameResult.add(sameNumberCount);
+            Prize prize = lottoTicket.getPrize(winningNumber);
+            gameResult.add(prize);
         }
         return gameResult;
     }
@@ -38,7 +37,6 @@ public class LottoTickets {
     public LottoTicketsDTO toDTO() {
         return new LottoTicketsDTO(lottoTickets.stream()
                 .map(LottoTicket::toDTO)
-                .collect(Collectors
-                        .toList()));
+                .collect(Collectors.toList()));
     }
 }

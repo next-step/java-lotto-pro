@@ -8,28 +8,25 @@ public class GameResult {
     public static final int INCREASE_AMOUNT = 1;
     public static final int PRIZE_MONEY_DEFAULT = 0;
 
-    private final Map<Integer, Integer> gameResult;
+    private final Map<Prize, Integer> gameResult;
 
     public GameResult() {
         gameResult = new HashMap<>();
     }
 
-    public void add(int sameNumberCount) {
-        gameResult.put(sameNumberCount, gameResult
-                .getOrDefault(sameNumberCount, DEFAULT_VALUE) + INCREASE_AMOUNT);
+    public void add(Prize prize) {
+        gameResult.put(prize, gameResult.getOrDefault(prize, DEFAULT_VALUE) + INCREASE_AMOUNT);
     }
 
     public int getPrize() {
         int prizeMoney = PRIZE_MONEY_DEFAULT;
         for (Prize prize : Prize.values()) {
-            prizeMoney += gameResult.getOrDefault(prize
-                    .getMatchCount(), DEFAULT_VALUE) * prize
-                    .getPrizeMoney();
+            prizeMoney += gameResult.getOrDefault(prize, DEFAULT_VALUE) * prize.getPrizeMoney();
         }
         return prizeMoney;
     }
 
-    public Integer getMatchCount(int matchCount) {
-        return gameResult.getOrDefault(matchCount, DEFAULT_VALUE);
+    public Integer getMatchCount(Prize prize) {
+        return gameResult.getOrDefault(prize, DEFAULT_VALUE);
     }
 }
