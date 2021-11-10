@@ -20,7 +20,8 @@ public class LotteryResult {
     }
 
     public int calculateTotalWinningMoney() {
-        return results.getOrDefault(FOURTH, 0) * FOURTH.getWinningMoney()
+        return results.getOrDefault(FIFTH, 0) * FIFTH.getWinningMoney()
+                + results.getOrDefault(FOURTH, 0) * FOURTH.getWinningMoney()
                 + results.getOrDefault(THIRD, 0) * THIRD.getWinningMoney()
                 + results.getOrDefault(SECOND, 0) * SECOND.getWinningMoney()
                 + results.getOrDefault(FIRST, 0) * FIRST.getWinningMoney();
