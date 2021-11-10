@@ -28,6 +28,8 @@ public class AmountTest {
             .isThrownBy(() -> {
                 // when
                 Amount amount = new Amount(1000);
+
+                // then
                 amount.lottoBuyAndAmountMinus(2);
             });
     }

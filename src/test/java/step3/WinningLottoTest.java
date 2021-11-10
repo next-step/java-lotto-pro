@@ -36,7 +36,7 @@ public class WinningLottoTest {
 
     @ParameterizedTest
     @MethodSource("getContainCountData")
-    @DisplayName("우승번호 일치 카운팅")
+    @DisplayName("우승로또 번호와, 구입한 로또번호 매칭하여 카운팅 테스트")
     void containCount(List<Integer> winningLottoNumbers, LottoNumbers buyLottoNumbers, int bonusNumber,
         int containCountExpected) {
 
@@ -82,28 +82,28 @@ public class WinningLottoTest {
 
     private static Stream<Arguments> getContainCountData() {
         return Stream.of(
-            Arguments.of(
+            Arguments.of( // 1등
                 Arrays.asList(1, 2, 3, 4, 5, 6),
                 LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 5, 6)),
                     BuyType.MANUAL),
                 45,
                 6
             ),
-            Arguments.of(
+            Arguments.of( // 2등
                 Arrays.asList(1, 2, 3, 4, 5, 6),
                 LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 5, 7)),
                     BuyType.MANUAL),
                 7,
                 5
             ),
-            Arguments.of(
+            Arguments.of( // 3등
                 Arrays.asList(1, 2, 3, 4, 5, 6),
                 LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 5, 7)),
                     BuyType.MANUAL),
                 45,
                 5
             ),
-            Arguments.of(
+            Arguments.of( // 4등
                 Arrays.asList(1, 2, 3, 4, 5, 6),
                 LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 8, 7)),
                     BuyType.MANUAL),
