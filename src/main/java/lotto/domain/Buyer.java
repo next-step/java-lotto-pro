@@ -6,10 +6,12 @@ public class Buyer {
 	public static final String ERROR_SHORT_MONEY = "구입금액이 부족합니다.";
 	private final PurchaseAmount purchaseAmount;
 	private final ManualNumber manualNumber;
+	private final Lottos lottos;
 
-	public Buyer(PurchaseAmount purchaseAmount, ManualNumber manualNumber) {
+	public Buyer(PurchaseAmount purchaseAmount, ManualNumber manualNumber, Lottos lottos) {
 		this.purchaseAmount = purchaseAmount;
 		this.manualNumber = manualNumber;
+		this.lottos = lottos;
 		validation();
 	}
 
@@ -17,6 +19,18 @@ public class Buyer {
 		if(purchaseAmount.isShortMoney(manualNumber)){
 			throw new IllegalArgumentException(ERROR_SHORT_MONEY);
 		}
+	}
+
+	public int getPurchaseQuantity() {
+		return purchaseAmount.getPurchaseQuantity();
+	}
+
+	public double getAmount() {
+		return purchaseAmount.getAmount();
+	}
+
+	public Lottos mergeLottos(Lottos targetLottos) {
+		return lottos.mergeLottos(targetLottos);
 	}
 
 	@Override
