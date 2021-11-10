@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class CreateShuffledLottoNumbers {
     private static final int LOTTO_NUMBER_MAX_COUNT = 6;
-    private static List<Integer> lottoNumberRangeList = createLottoNumberRangeList();
+    private static List<Integer> lottoRangeNumbers = createLottoNumberRangeList();
 
     private static List<Integer> createLottoNumberRangeList() {
         List<Integer> lottoNumberList = new ArrayList<>();
@@ -20,8 +20,8 @@ public class CreateShuffledLottoNumbers {
     }
 
     public static List<String> createLottoNumbers() {
-        Collections.shuffle(lottoNumberRangeList);
-        return lottoNumberRangeList
+        Collections.shuffle(lottoRangeNumbers);
+        return lottoRangeNumbers
                 .stream()
                 .limit(LOTTO_NUMBER_MAX_COUNT)
                 .sorted()
