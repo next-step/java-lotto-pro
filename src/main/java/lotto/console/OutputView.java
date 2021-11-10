@@ -59,9 +59,9 @@ public class OutputView {
 		double profitSum = 0;
 		for (Rank rank : Rank.values()) {
 			printFifthToThird(rank, rank.countWinners(lottos, winningLotto));
-			printSencod(rank, lottos);
-			printFist(rank, lottos);
-			profitSum += rank.getWinningAmount() * countWinners(rank, lottos);
+			printSencod(rank, rank.countWinners(lottos, winningLotto));
+			printFist(rank, rank.countWinners(lottos, winningLotto));
+			profitSum += rank.getWinningAmount() * rank.countWinners(lottos, winningLotto);
 		}
 		double profitRate = profitSum / (LottoShop.LOTTO_PRICE * lottos.size());
 		System.out.printf(PRINT_PROFIT_RATE, profitRate);
@@ -72,40 +72,28 @@ public class OutputView {
 			System.out.printf(PRINT_WINNING_INFORMATION,
 				rank.getCountOfMatch(),
 				rank.getWinningAmount(),
-				countWinners(rank, lottos)
+				winners
 			);
 		}
 	}
 
-	private static void printSencod(Rank rank, List<Lotto> lottos) {
+	private static void printSencod(Rank rank, int winners) {
 		if (rank == Rank.SECOND) {
 			System.out.printf(PRINT_WINNING_INFORMATION_SECOND,
 				rank.getCountOfMatch(),
 				rank.getWinningAmount(),
-				countWinners(rank, lottos)
+				winners
 			);
 		}
 	}
 
-	private static void printFist(Rank rank, List<Lotto> lottos) {
+	private static void printFist(Rank rank, int winners) {
 		if (rank == Rank.FIRST) {
 			System.out.printf(PRINT_WINNING_INFORMATION,
 				rank.getCountOfMatch(),
 				rank.getWinningAmount(),
-				countWinners(rank, lottos)
+				winners
 			);
 		}
-	}
-
-	private static int countWinners(Rank rank, List<Lotto> lottos) {
-		int count = 0;
-		for (Lotto lotto : lottos) {
-			count += ifSameRankCount(rank, lotto);
-		}
-		return count;
-	}
-
-	private static int ifSameRankCount(Rank rank, Lotto lotto) {
-		return rank == lotto.getWinningRank() ? 1 : 0;
 	}
 }

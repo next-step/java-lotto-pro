@@ -17,7 +17,7 @@ public class Repeater {
 	}
 
 	public static void set(Money setValue) {
-		repeater = setValue.equals(0);
+		repeater = setValue.equals(new Money(0));
 	}
 
 	public static void set(String setValue) {

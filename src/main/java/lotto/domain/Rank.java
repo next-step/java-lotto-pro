@@ -1,9 +1,8 @@
 package lotto.domain;
 
-
 public enum Rank {
 
-	MISS(0,0),
+	MISS(0, 0),
 	FIFTH(3, 5000),
 	FOURTH(4, 50000),
 	THIRD(5, 1500000),
@@ -27,7 +26,36 @@ public enum Rank {
 	}
 
 	public int countWinners(Lottos lottos, WinningLotto winningLotto) {
-		lottos.stream()
-		return 1;
+		int count = 0;
+		for (Lotto lotto : lottos.getLottos()) {
+			count += ifSameRankCount(lotto.countMatchedNumber(winningLotto),
+				lotto.isMatch(winningLotto.getBonusBallNumber()));
+		}
+		return count;
+	}
+
+	private int ifSameRankCount(long countOfMatch, boolean bonusBallMatch) {
+		if (this == getRank(countOfMatch, bonusBallMatch)) {
+			return 1;
+		}
+		return 0;
+	}
+
+	private Rank getRank(long countOfMatch, boolean bonusBallMatch) {
+		if (countOfMatch == Rank.SECOND.getCountOfMatch()) {
+			return secondOrThirdRank(bonusBallMatch);
+		}
+
+		if (this.getCountOfMatch() == countOfMatch) {
+			return this;
+		}
+		return Rank.MISS;
+	}
+
+	private Rank secondOrThirdRank(boolean bonusBallMatch) {
+		if (bonusBallMatch) {
+			return Rank.SECOND;
+		}
+		return Rank.THIRD;
 	}
 }

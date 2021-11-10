@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoNumbers {
 	private static final String ERROR_DUPLICATE_LOTTO_NUMBER = "[ERROR] 로또 번호는 중복 될 수 없습니다.";
@@ -33,13 +34,6 @@ public class LottoNumbers {
 		this.lottoNumbers = new ArrayList<>(lottoNumbers);
 	}
 
-	public int ifMatchCount(LottoNumber winningNumber) {
-		if (lottoNumbers.contains(winningNumber)) {
-			return MATCHED_NUMBER;
-		}
-		return NON_MATCHED_NUMBER;
-	}
-
 	public List<LottoNumber> getLottoNumbers() {
 		return Collections.unmodifiableList(lottoNumbers);
 	}
@@ -54,9 +48,7 @@ public class LottoNumbers {
 
 	private static void validateDuplicate(String[] stringNumberArray) {
 		Set<String> duplicateCheck = new HashSet<>();
-		for (String number : stringNumberArray) {
-			duplicateCheck.add(number);
-		}
+		Collections.addAll(duplicateCheck, stringNumberArray);
 		if (duplicateCheck.size() < MAX_RANGE_VALUE) {
 			throw new IllegalArgumentException(ERROR_DUPLICATE_LOTTO_NUMBER);
 		}
@@ -68,5 +60,8 @@ public class LottoNumbers {
 		}
 	}
 
+	public Stream<LottoNumber> stream() {
+		return lottoNumbers.stream();
+	}
 }
 

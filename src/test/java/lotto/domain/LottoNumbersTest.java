@@ -8,7 +8,6 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumbersTest {
@@ -51,16 +50,6 @@ class LottoNumbersTest {
 		assertThat(lottoNumbers.getLottoNumbers().contains(new LottoNumber(lottoNumber))).isTrue();
 	}
 
-	@ParameterizedTest
-	@CsvSource(value = {"1:1", "2:1", "3:1", "4:1", "5:1", "6:1", "8:0",}, delimiter = ':')
-	@DisplayName("LottoNumbers 당첨번호 1개 확인 테스트")
-	public void LottoNumbersMatchTest(int lottoNumber, int expectedValue) {
-		//given
-		//when
-		LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-		//then
-		assertThat(lottoNumbers.ifMatchCount(new LottoNumber(lottoNumber))).isEqualTo(expectedValue);
-	}
 
 	@Test
 	@DisplayName("LottoNumbers 숫자외의 값 예외처리 테스트")

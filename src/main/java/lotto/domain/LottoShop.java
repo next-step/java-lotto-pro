@@ -15,7 +15,7 @@ public class LottoShop {
 		}
 	}
 
-	public static Lotto create() {
+	private static Lotto create() {
 		Collections.shuffle(allLottoNumbers);
 		List<LottoNumber> lottoNumbers = allLottoNumbers.subList(LottoNumbers.MIN_RANGE_VALUE,
 			LottoNumbers.MAX_RANGE_VALUE);
@@ -23,7 +23,7 @@ public class LottoShop {
 		return new Lotto(new LottoNumbers(lottoNumbers));
 	}
 
-	public static Lotto create(String lottoNumbers) {
+	private static Lotto create(String lottoNumbers) {
 		return new Lotto(new LottoNumbers(lottoNumbers));
 	}
 

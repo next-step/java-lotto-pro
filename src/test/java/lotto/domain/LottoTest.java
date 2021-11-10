@@ -9,16 +9,16 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class LottoTest {
 
 	@ParameterizedTest
-	@CsvSource(value = {"1:1", "13:1", "26:1", "31:0", "44:0", "4:0"}, delimiter = ':')
+	@CsvSource(value = {"1:true", "13:true", "26:true", "31:false", "44:false", "4:false"}, delimiter = ':')
 	@DisplayName("번호 1개 일치여부 확인 기능 테스트")
-	public void LottoNumberMatchTest(int inputData, int expectedValue) {
+	public void LottoNumberMatchTest(int inputData, boolean expectedValue) {
 		//given
-		LottoNumbers lottoNumbers = new LottoNumbers(1, 13, 26, 38, 41, 8);
+		Lotto lotto = new Lotto(1, 13, 26, 38, 41, 8);
 
 		//when
-		int result = lottoNumbers.ifMatchCount(new LottoNumber(inputData));
+		boolean result = lotto.isMatch(new LottoNumber(inputData));
 
-		//then
+		// then
 		assertThat(result).isEqualTo(expectedValue);
 	}
 
@@ -31,9 +31,10 @@ public class LottoTest {
 		Lotto lotto = new Lotto(1, 13, 26, 38, 41, 8);
 
 		//when
-		lotto.recordeRank(lottoNumbers, new LottoNumber(45));
+		long count = lotto.countMatchedNumber(new WinningLotto(inputData, 45));
 
 		//then
-		assertThat(lotto.getWinningRank().getCountOfMatch()).isEqualTo(expectedValue);
+		assertThat(count).isEqualTo(expectedValue);
 	}
+
 }
