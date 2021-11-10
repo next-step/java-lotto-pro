@@ -14,7 +14,7 @@ public class LottoNumbers {
 
     public long compare(LottoNumbers winningNumbers) {
         return  lottoNumbers.stream()
-                        .filter(l -> winningNumbers.isContainNumber(l))
+                        .filter(winningNumbers::isContainNumber)
                         .count();
     }
 
@@ -24,7 +24,7 @@ public class LottoNumbers {
 
     public List<String> getLottoNumbers() {
         return lottoNumbers.stream()
-                .map(l -> l.getValue())
+                .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
     }
 
