@@ -27,10 +27,6 @@ public class ResultTest {
     @DisplayName("수익률 결과")
     @Test
     void yieldResult() {
-        BigInteger purchase = Price.totalPurchase(lottos.size());
-
-        assertThat(lottos.size()).isEqualTo(2);
-        assertThat(purchase.toString()).isEqualTo("2000");
         assertThat(result.yield(lottos.size())).isEqualTo("1000002.50");
     }
 }

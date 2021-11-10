@@ -20,34 +20,26 @@ public class LottoTest {
         assertThat(lotto.size()).isEqualTo(LOTTO_SIZE);
     }
 
-    @DisplayName("당첨번호와 로또를 비교하여 몇개 맞췄는지 출력하는 기능 검증")
-    @Test
-    void matchNumber() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
-        assertThat(winLotto.matchRank(lotto)).isEqualTo(Rank.valueOf(6, true));
-        assertThat(winLotto.matchRank(lotto)).isEqualTo(Rank.FIRST);
-
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-        winLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
-        assertThat(winLotto.matchRank(lotto)).isEqualTo(Rank.SECOND);
-
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-        winLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(8));
-        assertThat(winLotto.matchRank(lotto)).isEqualTo(Rank.THIRD);
-    }
-
-    @DisplayName("로또 번호가 맞지 않을때 나오는 에러")
+    @DisplayName("로또 번호가 갯수가 맞지 않을때 나오는 에러")
     @Test
     void lottoSizeUnmatchedError() {
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5));
+            new Lotto(Arrays.asList(1, 2, 3, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.LOTTO_SIZE_UNMATCHED);
 
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.LOTTO_SIZE_UNMATCHED);
+    }
+
+    @DisplayName("로또가 중복일때 나오는 에러")
+    @Test
+    void lottoDuplicate() {
+        assertThatThrownBy(() -> {
+            new Lotto(Arrays.asList(1, 1, 1, 1, 1, 1));
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.DUPLICATE_ERROR);
     }
 }

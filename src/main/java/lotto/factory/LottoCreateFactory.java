@@ -10,7 +10,7 @@ import java.util.*;
 
 public class LottoCreateFactory {
 
-    public static Lotto createRandomLotto() {
+    private static Lotto createRandomLotto() {
         List<Integer> randomNumbers = createRandomNumbers();
         return new Lotto(randomNumbers);
     }
@@ -40,15 +40,7 @@ public class LottoCreateFactory {
     }
 
     public static Lotto createLotto(List<Integer> numbers) {
-        if (validDuplicate(numbers)) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_ERROR);
-        }
         return new Lotto(numbers);
-    }
-
-    private static boolean validDuplicate(List<Integer> numbers) {
-        Set<Integer> set = new HashSet<>(numbers);
-        return set.size() != Lotto.SIZE;
     }
 
     public static WinningLotto createWinningLotto(List<Integer> winLottoNumbers, int bonusNumber) {

@@ -12,7 +12,7 @@ public class Result {
     private Map<Rank, Integer> matchResult;
 
     public Result(Lottos lottos, WinningLotto winLotto) {
-        this.matchResult = createResultMap();
+        this.matchResult = Rank.createRankMap();
         for (Lotto lotto : lottos.getLottoGroup()) {
             Rank rank = winLotto.matchRank(lotto);
             matchResultPut(rank);
@@ -27,16 +27,6 @@ public class Result {
         if (rank != null && rank != Rank.MISS) {
             matchResult.put(rank, matchResult.get(rank) + 1);
         }
-    }
-
-    private Map<Rank, Integer> createResultMap() {
-        Map<Rank, Integer> result = new LinkedHashMap<>();
-        List<Rank> winningRanks = Rank.createWinningRanks();
-        for (Rank winningRank : winningRanks) {
-            result.put(winningRank, 0);
-        }
-
-        return result;
     }
 
     public String yield(int size) {

@@ -2,9 +2,7 @@ package lotto.model;
 
 import lotto.view.ErrorMessage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
     public static final int SIZE = 6;
@@ -19,11 +17,27 @@ public class Lotto {
     }
 
     private void valid(List<Integer> numbers) {
-        if (numbers == null) {
-            throw new NullPointerException(ErrorMessage.LOTTO_NULL);
-        }
+        validNumberEmpty(numbers);
+        validSizeUnmatched(numbers);
+        validDuplicate(numbers);
+    }
+
+    private void validSizeUnmatched(List<Integer> numbers) {
         if (numbers.size() > SIZE || numbers.size() < SIZE) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_SIZE_UNMATCHED);
+        }
+    }
+
+    private void validNumberEmpty(List<Integer> numbers) {
+        if (numbers == null || numbers.isEmpty()) {
+            throw new NullPointerException(ErrorMessage.LOTTO_NULL);
+        }
+    }
+
+    private static void validDuplicate(List<Integer> numbers) {
+        Set<Integer> set = new HashSet<>(numbers);
+        if (set.size() != SIZE) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_ERROR);
         }
     }
 

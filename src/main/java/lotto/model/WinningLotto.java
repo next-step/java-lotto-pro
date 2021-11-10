@@ -5,8 +5,8 @@ import lotto.view.ErrorMessage;
 import java.util.Objects;
 
 public class WinningLotto {
-    private Lotto winLotto;
-    private LottoNumber bonusNumber;
+    private final Lotto winLotto;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winLotto, LottoNumber bonusNumber) {
         this.winLotto = winLotto;

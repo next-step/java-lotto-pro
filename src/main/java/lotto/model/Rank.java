@@ -1,8 +1,6 @@
 package lotto.model;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,7 +28,16 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static List<Rank> createWinningRanks() {
+    public static Map<Rank, Integer> createRankMap() {
+        Map<Rank, Integer> result = new LinkedHashMap<>();
+        List<Rank> winningRanks = Rank.createWinningRanks();
+        for (Rank winningRank : winningRanks) {
+            result.put(winningRank, 0);
+        }
+        return result;
+    }
+
+    private static List<Rank> createWinningRanks() {
         return Stream.of(FIRST, SECOND, THIRD, FOURTH, FIFTH)
                 .sorted(Comparator.comparing(Rank::getWinningMoney))
                 .collect(Collectors.toList());

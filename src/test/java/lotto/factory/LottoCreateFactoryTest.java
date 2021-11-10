@@ -15,14 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoCreateFactoryTest {
-    private final static int LOTTO_SIZE = 6;
-
-    @DisplayName("로또를 자동생성하는 기능 검증")
-    @Test
-    void lottoCreate() {
-        Lotto lotto = LottoCreateFactory.createRandomLotto();
-        assertThat(lotto.size()).isEqualTo(LOTTO_SIZE);
-    }
 
     @DisplayName("숫자를 입력하면 입력한 갯수만큼 로또를 생성하는 기능 검증")
     @Test
