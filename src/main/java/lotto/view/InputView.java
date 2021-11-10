@@ -1,6 +1,12 @@
 package lotto.view;
 
+import static java.lang.Integer.*;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lotto.domain.LottoNumber;
 
@@ -11,19 +17,46 @@ public class InputView {
 	public static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
 	private static final Scanner scanner = new Scanner(System.in);
+	public static final String INPUT_MANUAL_NUMBER = "수동으로 구매할 로또 수를 입력해 주세요.";
+	public static final String ERROR_NUMBER_FORMAT = "문자가 입력되었습니다. 숫자만 입력해주세요.";
 
 	public static int inputPurchaseAmount() {
 		System.out.println(INPUT_PURCHASE_AMOUNT);
-		return Integer.parseInt(scanner.nextLine());
+		return parseInt(scanner.next());
 	}
 
-	public static String[] inputLastWeekLottoNumber() {
+	public static List<Integer> inputLastWeekLottoNumber() {
 		System.out.println(INPUT_LAST_WEEK_WINNING_LOTTO_NUMBER);
-		return scanner.nextLine().split(REGEX_DELIMITER);
+		try {
+			return Stream.of(scanner.next().split(REGEX_DELIMITER))
+				.map(Integer::parseInt)
+				.collect(Collectors.toList());
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException(ERROR_NUMBER_FORMAT);
+		}
 	}
 
 	public static int inputBonusNumber() {
 		System.out.println(INPUT_BONUS_NUMBER);
-		return Integer.parseInt(scanner.next());
+		return parseInt(scanner.next());
+	}
+
+	public static int inputManualNumber() {
+		System.out.println(INPUT_MANUAL_NUMBER);
+		try {
+			return Integer.parseInt(scanner.next());
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException(ERROR_NUMBER_FORMAT);
+		}
+	}
+
+	public static List<Integer> inputManualNumbers() {
+		try {
+			return Stream.of(scanner.next().split(REGEX_DELIMITER))
+				.map(Integer::parseInt)
+				.collect(Collectors.toList());
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException(1234+"");
+		}
 	}
 }
