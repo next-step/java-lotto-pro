@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import model.Lotto;
-import model.LottoNumber;
 import model.Rank;
 
 public class LottoTest {
@@ -15,9 +14,8 @@ public class LottoTest {
 	@Test
 	@DisplayName("로또 숫자가 6개가 주어지지 않으면 예외")
 	void test_constructor1() {
-		assertThatThrownBy(() -> new Lotto(
-			Arrays.asList(new LottoNumber(1), new LottoNumber(2))
-		)).isInstanceOf(IllegalArgumentException.class)
+		assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2)))
+			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(Lotto.MESSAGE_NOT_ALLOW_LENGTH);
 	}
 
@@ -25,8 +23,7 @@ public class LottoTest {
 	@DisplayName("로또 숫자에 중복된 값이 포함되어있으면 예외")
 	void test_constructor2() {
 		assertThatThrownBy(() -> new Lotto(
-			Arrays.asList(new LottoNumber(1), new LottoNumber(1), new LottoNumber(3),
-				new LottoNumber(4), new LottoNumber(5), new LottoNumber(7))
+			Arrays.asList(1, 1, 3, 4, 5, 7)
 		)).isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(Lotto.MESSAGE_NOT_ALLOW_DUPLICATION);
 	}
@@ -35,23 +32,9 @@ public class LottoTest {
 	@DisplayName("로또 숫자가 6개가 포함되면서 겹치는 값이 없으면 성공")
 	void test_constructor3() {
 		assertThat(new Lotto(
-			Arrays.asList(
-				new LottoNumber(1),
-				new LottoNumber(2),
-				new LottoNumber(3),
-				new LottoNumber(4),
-				new LottoNumber(5),
-				new LottoNumber(6)
-			)
+			Arrays.asList(1, 2, 3, 4, 5, 6)
 		)).isEqualTo(new Lotto(
-			Arrays.asList(
-				new LottoNumber(1),
-				new LottoNumber(2),
-				new LottoNumber(3),
-				new LottoNumber(4),
-				new LottoNumber(5),
-				new LottoNumber(6)
-			)
+			Arrays.asList(1, 2, 3, 4, 5, 6)
 		));
 	}
 
@@ -62,14 +45,7 @@ public class LottoTest {
 
 		assertThat(new Lotto("1, 2, 3, 4, 5, 6"))
 			.isEqualTo(new Lotto(
-				Arrays.asList(
-					new LottoNumber(1),
-					new LottoNumber(2),
-					new LottoNumber(3),
-					new LottoNumber(4),
-					new LottoNumber(5),
-					new LottoNumber(6)
-				)
+				Arrays.asList(1, 2, 3, 4, 5, 6)
 			));
 	}
 

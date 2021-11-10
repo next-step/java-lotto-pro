@@ -1,14 +1,12 @@
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import model.Lotto;
-import model.LottoNumber;
 import model.LottoNumberChoiceRandom;
 import model.LottoPurchaseCount;
 import model.Lottos;
@@ -21,10 +19,8 @@ public class LottosTest {
 	void test_calcReward1() {
 		Lottos lottos = new Lottos(new LottoNumberChoiceRandom() {
 			@Override
-			public List<LottoNumber> choose() {
-				return Stream.of(1, 2, 3, 4, 5, 6)
-					.map(LottoNumber::new)
-					.collect(Collectors.toList());
+			public List<Integer> choose() {
+				return Arrays.asList(1, 2, 3, 4, 5, 6);
 			}
 		}, new LottoPurchaseCount("1000"));
 		RewardCalculator rewardCalculator = lottos.calcReward(new Lotto("1, 2, 3, 4, 5, 7"));
@@ -39,10 +35,8 @@ public class LottosTest {
 	void test_toString() {
 		Lottos lottos = new Lottos(new LottoNumberChoiceRandom() {
 			@Override
-			public List<LottoNumber> choose() {
-				return Stream.of(1, 2, 3, 4, 5, 6)
-					.map(LottoNumber::new)
-					.collect(Collectors.toList());
+			public List<Integer> choose() {
+				return Arrays.asList(1, 2, 3, 4, 5, 6);
 			}
 		}, new LottoPurchaseCount("2000"));
 

@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -16,14 +15,16 @@ public class Lotto {
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public Lotto(List<LottoNumber> lottoNumbers) {
+	public Lotto(List<Integer> lottoNumbers) {
 		if (lottoNumbers.size() != LOTTO_NUMBERS_LENGTH) {
 			throw new IllegalArgumentException(MESSAGE_NOT_ALLOW_LENGTH);
 		}
 		validateDuplication(lottoNumbers);
 
-		this.lottoNumbers = new ArrayList<>(lottoNumbers);
-		sortLottoNumbers(lottoNumbers);
+		this.lottoNumbers = lottoNumbers.stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
+		sortLottoNumbers(this.lottoNumbers);
 	}
 
 	public Lotto(LottoNumberChoiceStrategy lottoNumberChoiceStrategy) {
@@ -48,19 +49,16 @@ public class Lotto {
 		}
 	}
 
-	private static List<LottoNumber> parse(String lottoNumbersString) {
-		return StringSplitParser.parse(lottoNumbersString)
-			.stream()
-			.map(LottoNumber::new)
-			.collect(Collectors.toList());
+	private static List<Integer> parse(String lottoNumbersString) {
+		return StringSplitParser.parse(lottoNumbersString);
 	}
 
 	private void sortLottoNumbers(List<LottoNumber> lottoNumbers) {
 		lottoNumbers.sort(LottoNumber::getComparatorOther);
 	}
 
-	private void validateDuplication(List<LottoNumber> lottoNumbers) {
-		Set<LottoNumber> lottoNumbersWithoutDuplication = new HashSet<>(lottoNumbers);
+	private void validateDuplication(List<Integer> lottoNumbers) {
+		Set<Integer> lottoNumbersWithoutDuplication = new HashSet<>(lottoNumbers);
 		if (lottoNumbersWithoutDuplication.size() != lottoNumbers.size()) {
 			throw new IllegalArgumentException(MESSAGE_NOT_ALLOW_DUPLICATION);
 		}

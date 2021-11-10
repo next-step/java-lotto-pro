@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoNumberChoiceRandom implements LottoNumberChoiceStrategy {
 	public static final int MIN_NUMBER = 1;
@@ -11,15 +10,12 @@ public class LottoNumberChoiceRandom implements LottoNumberChoiceStrategy {
 	public static final int NUMBERS_COUNT = 6;
 
 	@Override
-	public List<LottoNumber> choose() {
+	public List<Integer> choose() {
 		List<Integer> numbers = new ArrayList<>();
 		for (int i = MIN_NUMBER; i <= MAX_NUMBER; ++i) {
 			numbers.add(i);
 		}
 		Collections.shuffle(numbers);
-		return numbers.subList(0, NUMBERS_COUNT)
-			.stream()
-			.map(LottoNumber::new)
-			.collect(Collectors.toList());
+		return numbers.subList(0, NUMBERS_COUNT);
 	}
 }
