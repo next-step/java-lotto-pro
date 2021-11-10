@@ -2,7 +2,7 @@ package model;
 
 import java.util.Objects;
 
-import exception.OutOfRange;
+import exception.OutOfRangeException;
 
 public class LottoNumber {
 	private static final int BOUNDARY_MIN = 1;
@@ -19,7 +19,7 @@ public class LottoNumber {
 
 	private void validateNumberIsInRange(int number) {
 		if (number < BOUNDARY_MIN || number > BOUNDARY_MAX) {
-			throw new OutOfRange(MESSAGE_OUT_OF_RANGE);
+			throw new OutOfRangeException(MESSAGE_OUT_OF_RANGE);
 		}
 	}
 
