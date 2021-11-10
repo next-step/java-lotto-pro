@@ -17,7 +17,8 @@ class LottosTest {
 		LottoGenerator lottoGenerator = LottoGenerator.from(money);
 
 		// when
-		Lottos lottos = Lottos.of(lottoGenerator.generateLottoNumbers(), money);
+		Lottos lottos = Lottos.of(lottoGenerator.generateInputLottoNumbers(),
+			lottoGenerator.generateRandomLottoNumbers());
 
 		// then
 		assertAll(
@@ -38,13 +39,13 @@ class LottosTest {
 		LottoGenerator lottoGenerator = LottoGenerator.of(money, Collections.singletonList(inputNumber));
 
 		// when
-		Lottos lottos = Lottos.of(lottoGenerator.generateLottoNumbers(), money);
+		Lottos lottos = Lottos.of(lottoGenerator.generateInputLottoNumbers(),
+			lottoGenerator.generateRandomLottoNumbers());
 
 		// then
 		assertAll(
 			() -> assertThat(lottos).isInstanceOf(Lottos.class),
-			() -> assertThat(lottos.size()).isEqualTo(lottoNumbersListSize),
-			() -> assertThat(lottos.contains(LottoNumbers.from("1,2,3,4,5,6")))
+			() -> assertThat(lottos.size()).isEqualTo(lottoNumbersListSize)
 		);
 	}
 

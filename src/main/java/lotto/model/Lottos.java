@@ -1,34 +1,44 @@
 package lotto.model;
 
+import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
-	private final List<LottoNumbers> lottoNumbersList;
-	private final Money inputMoney;
+	private final List<LottoNumbers> inputLottoNumbersList;
+	private final List<LottoNumbers> randomLottoNumbersList;
 
-	private Lottos(List<LottoNumbers> lottoNumbersList, Money inputMoney) {
-		this.lottoNumbersList = Collections.unmodifiableList(lottoNumbersList);
-		this.inputMoney = inputMoney;
-	}
-	
-	public static Lottos of(List<LottoNumbers> lottoNumbersList, Money inputMoney) {
-		return new Lottos(lottoNumbersList, inputMoney);
+	private Lottos(List<LottoNumbers> inputLottoNumbersList, List<LottoNumbers> randomLottoNumbersList) {
+		this.inputLottoNumbersList = Collections.unmodifiableList(inputLottoNumbersList);
+		this.randomLottoNumbersList = Collections.unmodifiableList(randomLottoNumbersList);
 	}
 
-	public boolean contains(LottoNumbers lottoNumbers) {
-		return this.lottoNumbersList.contains(lottoNumbers);
+	public static Lottos of(List<LottoNumbers> inputLottoNumbersList, List<LottoNumbers> randomLottoNumbersList) {
+		return new Lottos(inputLottoNumbersList, randomLottoNumbersList);
 	}
 
 	public List<LottoNumbers> getLottoNumbersList() {
-		return lottoNumbersList;
-	}
-
-	public Money getInputMoney() {
-		return inputMoney;
+		return Stream.of(inputLottoNumbersList, randomLottoNumbersList)
+			.flatMap(Collection::stream)
+			.collect(Collectors.toList());
 	}
 
 	public int size() {
-		return lottoNumbersList.size();
+		return getLottoNumbersList().size();
+	}
+
+	public int inputSize() {
+		return inputLottoNumbersList.size();
+	}
+
+	public int randomSize() {
+		return randomLottoNumbersList.size();
+	}
+
+	public Money purchaseMoney() {
+		return Money.from(Money.LOTTO_PRICE.multiply(new BigDecimal(size())));
 	}
 }
