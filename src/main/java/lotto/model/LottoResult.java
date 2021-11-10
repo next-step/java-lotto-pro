@@ -46,7 +46,7 @@ public class LottoResult {
 	}
 
 	private int containsWinningLottoNumbers(WinningLottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
-		int containsCount = 0;
+		int containsCount = DEFAULT_VALUE;
 
 		for (LottoNumber lottoNumber : lottoNumbers.lottoNumberList) {
 			containsCount += winningLottoNumbers.containsCountLottoNumber(lottoNumber);
