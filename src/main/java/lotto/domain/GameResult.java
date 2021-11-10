@@ -26,7 +26,7 @@ public class GameResult {
         return prizeMoney;
     }
 
-    public Integer getMatchCount(int matchCount) {
-        return gameResult.getOrDefault(matchCount, DEFAULT_VALUE);
+    public Integer getMatchCount(Prize prize) {
+        return gameResult.getOrDefault(prize, DEFAULT_VALUE);
     }
 }
