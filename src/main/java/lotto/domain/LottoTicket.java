@@ -17,11 +17,19 @@ public class LottoTicket {
     public static final int END_INCLUSIVE = 45;
 
     private final List<LottoNumber> lottoNumbers;
+    private LottoNumber bonusNumber;
 
     public LottoTicket(List<Integer> lottoNumbers) {
         checkLottoNumberSize(lottoNumbers);
         checkNumberDuplication(lottoNumbers);
         this.lottoNumbers = getLottoNumbers(lottoNumbers);
+    }
+
+    public LottoTicket(List<Integer> lottoNumbers, int bonusNumber) {
+        checkLottoNumberSize(lottoNumbers);
+        checkNumberDuplication(lottoNumbers);
+        this.lottoNumbers = getLottoNumbers(lottoNumbers);
+        this.bonusNumber = LottoNumber.from(bonusNumber);
     }
 
     public static LottoTicket generateRandomLottoTicket() {
