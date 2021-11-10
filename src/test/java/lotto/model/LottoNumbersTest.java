@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,24 +14,14 @@ import lotto.exception.LottoException;
 
 class LottoNumbersTest {
 
-	private List<LottoNumber> lottoNumberList;
-
-	@BeforeEach
-	void setup() {
-		lottoNumberList = new ArrayList<>();
-	}
-
-	@AfterEach
-	void tearDown() {
-		lottoNumberList = null;
-	}
-
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3, 4, 5, 6})
 	void 로또넘버_일급_콜렉션_생성_테스트(int lottoNumber) {
 		// given
+		List<String> lottoNumberList = new ArrayList<>();
+
 		for (int i = 1; i <= LottoNumbers.LOTTO_NUMBERS_SIZE; i++) {
-			lottoNumberList.add(LottoNumber.from(i));
+			lottoNumberList.add(String.valueOf(i));
 		}
 
 		// when
@@ -44,15 +32,6 @@ class LottoNumbersTest {
 			() -> assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class),
 			() -> assertThat(lottoNumbers.containsLottoNumber(LottoNumber.from(lottoNumber)))
 		);
-	}
-
-	@Test
-	void 로또번호_일급_콜렉션_랜덤_생성_테스트() {
-		// given // when
-		LottoNumbers lottoNumbers = LottoNumbers.from();
-
-		// then
-		assertThat(lottoNumbers.size()).isEqualTo(LottoNumbers.LOTTO_NUMBERS_SIZE);
 	}
 
 	@ParameterizedTest
