@@ -84,10 +84,12 @@ public class Lotto {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(String.format("[%d", lottoNumbers.get(0).getNumber()));
-		for (int i = 1; i < lottoNumbers.size(); ++i) {
-			sb.append(String.format(", %d", lottoNumbers.get(i).getNumber()));
-		}
+		sb.append("[");
+		sb.append(lottoNumbers
+			.stream()
+			.map(LottoNumber::toString)
+			.collect(Collectors.joining(", "))
+		);
 		sb.append("]");
 		return sb.toString();
 	}
