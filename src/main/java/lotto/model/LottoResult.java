@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class LottoResult {
-    private static final int ONE_LOTTO_PRICE = 1000;
     private static final int DEFAULT_VALUE = 0;
     private static final int ADD_COUNT = 1;
     private static final int DECIMAL_CALCULATION_NUMBER = 100;
@@ -42,7 +41,7 @@ public class LottoResult {
     private long getPurchaseAmount(Set<LottoRank> lottoRanks) {
         return lottoRanks.stream()
                 .mapToLong(lottoResults::get)
-                .sum() * ONE_LOTTO_PRICE;
+                .sum() * Money.PRICE_ONE_LOTTO;
     }
 
     private long getTotalReward(Set<LottoRank> lottoRanks) {

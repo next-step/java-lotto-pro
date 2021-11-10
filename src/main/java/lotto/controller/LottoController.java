@@ -29,7 +29,7 @@ public class LottoController {
         try {
             return lottoGenerator.createManualLottos(inputView.inputManualLotto(manualCount));
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.printError(e.getMessage());
             return getManualLotto(manualCount);
         }
     }
@@ -38,7 +38,7 @@ public class LottoController {
         try {
             return new LottoCount(inputView.inputManualCountLotto(), money);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.printError(e.getMessage());
             return getManualCount(money);
         }
     }
@@ -47,7 +47,7 @@ public class LottoController {
         try {
             return new WinningNumber(winningLotto, new LottoNumber(inputView.inputBonusBall()));
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.printError(e.getMessage());
             return getWinningNumber(winningLotto);
         }
     }
@@ -56,7 +56,7 @@ public class LottoController {
         try {
             return lottoGenerator.createManualNumber(inputView.inputWiningLotto());
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.printError(e.getMessage());
             return getWinningLotto();
         }
     }
@@ -65,7 +65,7 @@ public class LottoController {
         try {
             return new Money(inputView.inputMoney());
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.printError(e.getMessage());
             return getMoney();
         }
     }

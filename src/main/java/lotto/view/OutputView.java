@@ -15,6 +15,10 @@ public class OutputView {
 
     private static final StringBuffer STRING_BUFFER = new StringBuffer();
 
+    public static void printError(String message) {
+        System.out.println(message);
+    }
+
     public void printLottoCount(int manualCount, int autoCount) {
         System.out.println(String.format(LOTTO_COUNT_MESSAGE, manualCount, autoCount));
     }

@@ -2,6 +2,7 @@ package lotto.model;
 
 public class WinningNumber {
     public static final String CONTAINS_MESSAGE = "당첨번호와 같은 보너스볼을 입력했습니다.";
+
     private final Lotto winningNumber;
     private final LottoNumber bonusBall;
 
