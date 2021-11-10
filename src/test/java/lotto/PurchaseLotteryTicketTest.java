@@ -28,10 +28,10 @@ public class PurchaseLotteryTicketTest {
     @DisplayName("구매한 전체 로또 티켓에서 당첨번호 등수별 티켓 수 확인")
     @Test
     void countMatchInAllTicket() {
-        Map<Rank, Integer> rankIntegerMap = purchaseLotteryTicket.countMatchInAllTicket(winningNumber);
-        assertThat(rankIntegerMap.getOrDefault(Rank.FIRST, 0)).isEqualTo(1);
-        assertThat(rankIntegerMap.getOrDefault(Rank.SECOND, 0)).isEqualTo(1);
-        assertThat(rankIntegerMap.getOrDefault(Rank.THIRD, 0)).isEqualTo(0);
-        assertThat(rankIntegerMap.getOrDefault(Rank.FOURTH, 0)).isEqualTo(3);
+        LotteryResult lotteryResult = purchaseLotteryTicket.countMatchInAllTicket(winningNumber);
+        assertThat(lotteryResult.getOrDefault(Rank.FIRST, 0)).isEqualTo(1);
+        assertThat(lotteryResult.getOrDefault(Rank.SECOND, 0)).isEqualTo(1);
+        assertThat(lotteryResult.getOrDefault(Rank.THIRD, 0)).isEqualTo(0);
+        assertThat(lotteryResult.getOrDefault(Rank.FOURTH, 0)).isEqualTo(3);
     }
 }

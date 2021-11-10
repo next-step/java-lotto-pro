@@ -18,14 +18,15 @@ public class ResultView {
     public static final String MATCH_FIVE = "5개 일치 (1500000원)- ";
     public static final String MATCH_SIX = "6개 일치 (2000000000원)- ";
 
-    public static void printWinningStatistics(int numberOfTicket, PurchaseLotteryTicket purchaseList, WinningNumber winningNumber) {
+    public static void printWinningStatistics(int numberOfTicket, PurchaseLotteryTicket purchaseLotteryTicket, WinningNumber winningNumber) {
+        LotteryResult lotteryResult = purchaseLotteryTicket.countMatchInAllTicket(winningNumber);
         System.out.println();
         System.out.println(OUTPUT_START_MESSAGE);
-        System.out.println(MATCH_THREE + purchaseList.countMatchInAllTicket(winningNumber).getOrDefault(Rank.FOURTH, 0) + UNIT);
-        System.out.println(MATCH_FOUR + purchaseList.countMatchInAllTicket(winningNumber).getOrDefault(Rank.THIRD, 0) + UNIT);
-        System.out.println(MATCH_FIVE + purchaseList.countMatchInAllTicket(winningNumber).getOrDefault(Rank.SECOND, 0) + UNIT);
-        System.out.println(MATCH_SIX + purchaseList.countMatchInAllTicket(winningNumber).getOrDefault(Rank.FIRST, 0) + UNIT);
-        Money totalWinningMoney = new Money(Rank.getTotalWinningMoney(purchaseList, winningNumber));
+        System.out.println(MATCH_THREE + lotteryResult.getOrDefault(Rank.FOURTH, 0) + UNIT);
+        System.out.println(MATCH_FOUR + lotteryResult.getOrDefault(Rank.THIRD, 0) + UNIT);
+        System.out.println(MATCH_FIVE + lotteryResult.getOrDefault(Rank.SECOND, 0) + UNIT);
+        System.out.println(MATCH_SIX + lotteryResult.getOrDefault(Rank.FIRST, 0) + UNIT);
+        Money totalWinningMoney = new Money(lotteryResult.calculateTotalWinningMoney());
         Money paidMoney = new Money(LOTTO_TICKET_UNIT_PRICE * numberOfTicket);
         double yield = totalWinningMoney.calculateYield(paidMoney);
         printYield(yield);
