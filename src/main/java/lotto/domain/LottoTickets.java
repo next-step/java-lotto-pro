@@ -39,4 +39,13 @@ public class LottoTickets {
                 .map(LottoTicket::toDTO)
                 .collect(Collectors.toList()));
     }
+
+    public LottoTickets addAll(LottoTickets anotherLottoTickets) {
+        anotherLottoTickets.lottoTickets.addAll(this.lottoTickets);
+        return anotherLottoTickets;
+    }
+
+    public void add(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
+    }
 }

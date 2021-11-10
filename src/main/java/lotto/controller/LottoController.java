@@ -1,13 +1,12 @@
 package lotto.controller;
 
-import lotto.domain.GameResult;
-import lotto.domain.LottoTickets;
-import lotto.domain.Money;
-import lotto.domain.WinningLottoNumbers;
+import lotto.domain.*;
 import lotto.service.LottoService;
 import lotto.utility.ParseUtility;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.ArrayList;
 
 public class LottoController {
     private final InputView inputView;
@@ -23,8 +22,7 @@ public class LottoController {
     public void run() {
         // 로또 구입
         Money inputMoney = new Money(inputView.inputMoney());
-        LottoTickets lottoTickets = lottoService.buyLottoTickets(inputMoney);
-        resultView.printBuyResult(lottoTickets.toDTO());
+        LottoTickets lottoTickets = getLottoTickets(inputMoney);
 
         // 당첨번호 입력
         WinningLottoNumbers winningLottoNumbers = ParseUtility.StringToWinningNumbers(inputView.inputWinningNumber(), inputView.inputBonusNumber());
@@ -33,5 +31,26 @@ public class LottoController {
         GameResult gameResult = lottoService.getGameResult(lottoTickets, winningLottoNumbers);
         resultView.printGameResult(gameResult);
         resultView.printEarningRatio(inputMoney.toDTO(), new Money(gameResult.getPrize()).toDTO());
+    }
+
+    private LottoTickets getLottoTickets(Money inputMoney) {
+        // 수동 구입
+        int countsOfManualTickets = inputView.inputCountsOfManualTickets();
+        LottoTickets manualLottoTickets = getManualLottoTickets(countsOfManualTickets);
+
+        // 자동 구입
+        int countsOfAutoTickets = lottoService.getCountsOfAutoTickets(inputMoney, countsOfManualTickets);
+        LottoTickets autoLottoTickets = lottoService.buyAutoLottoTickets(countsOfAutoTickets);
+        LottoTickets lottoTickets = manualLottoTickets.addAll(autoLottoTickets);
+        resultView.printBuyResult(lottoTickets.toDTO());
+        return lottoTickets;
+    }
+
+    private LottoTickets getManualLottoTickets(int countsOfManualTickets) {
+        LottoTickets manualLottoTickets = new LottoTickets(new ArrayList<>());
+        for (int i = 0; i < countsOfManualTickets; i++) {
+            manualLottoTickets.add(ParseUtility.StringToLottoTicket(inputView.inputLottoNumbers()));
+        }
+        return manualLottoTickets;
     }
 }

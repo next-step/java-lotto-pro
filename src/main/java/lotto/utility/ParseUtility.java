@@ -1,5 +1,6 @@
 package lotto.utility;
 
+import lotto.domain.LottoTicket;
 import lotto.domain.WinningLottoNumbers;
 
 import java.util.Arrays;
@@ -14,5 +15,13 @@ public class ParseUtility {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList()), bonusNumber);
+    }
+
+    public static LottoTicket StringToLottoTicket(String inputWinningNumber) {
+        return new LottoTicket(Arrays.stream(inputWinningNumber
+                        .split(SPLIT_DELIMITER))
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList()));
     }
 }

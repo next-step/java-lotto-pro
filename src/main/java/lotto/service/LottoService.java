@@ -12,16 +12,15 @@ public class LottoService {
     public LottoService() {
     }
 
-    public LottoTickets buyLottoTickets(Money money) {
-        int amount = getAmount(money);
-        return LottoTickets.generateRandomLottoTickets(amount);
-    }
-
-    private int getAmount(Money money) {
-        return money.getLottoAmount(LOTTO_TICKET_PRICE);
+    public LottoTickets buyAutoLottoTickets(int countsOfAutoTickets) {
+        return LottoTickets.generateRandomLottoTickets(countsOfAutoTickets);
     }
 
     public GameResult getGameResult(LottoTickets lottoTickets, WinningLottoNumbers winningLottoNumbers) {
         return lottoTickets.getGameResult(winningLottoNumbers);
+    }
+
+    public int getCountsOfAutoTickets(Money inputMoney, int countsOfManualTickets) {
+        return inputMoney.getLottoAmount(LOTTO_TICKET_PRICE) - countsOfManualTickets;
     }
 }
