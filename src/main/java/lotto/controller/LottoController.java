@@ -5,8 +5,10 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningLotto;
 import lotto.exception.LottoException;
 import lotto.utils.Console;
+import lotto.utils.StringUtils;
 import lotto.view.ResultView;
 
 import java.util.Arrays;
@@ -20,15 +22,10 @@ public class LottoController {
     public void run(LottoMachine lottoMachine) {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         List<Lotto> lottoList = lottoMachine.sell(purchaseAmount);
+        printLottoList(lottoList);
 
-        System.out.println(Messages.getPurchasedLottoCount(lottoList.size()));
-        for (Lotto lotto : lottoList) {
-            System.out.println(lotto);
-        }
-
-        Lotto lastWeekWinningLotto = getLastWeekWinningLotto();
-        LottoResult lottoResult = new LottoResult(lastWeekWinningLotto, lottoList);
-        System.out.println(ResultView.print(lottoResult));
+        WinningLotto winningLotto = initWeekWinningLotto();
+        printLottoResult(winningLotto, lottoList);
     }
 
     private PurchaseAmount getPurchaseAmount() {
@@ -37,16 +34,44 @@ public class LottoController {
         return new PurchaseAmount(amount);
     }
 
-    private Lotto getLastWeekWinningLotto() {
+    private void printLottoList(List<Lotto> lottoList) {
+        System.out.println(Messages.getPurchasedLottoCount(lottoList.size()));
+        for (Lotto lotto : lottoList) {
+            System.out.println(lotto);
+        }
+    }
+
+    private WinningLotto initWeekWinningLotto() {
+        int[] winningNumbers = getWinningNumbers();
+        int winningBonusNumber = getWinningBonusNumber();
+
+        return new WinningLotto(winningBonusNumber, winningNumbers);
+    }
+
+    private int[] getWinningNumbers() {
         System.out.println(System.lineSeparator() + Messages.LAST_WEEK_WINNING_NUMBER_INPUT);
         String[] stringNumbers = Console.readLine().split(NUMBER_DELIMITER);
+
         if (stringNumbers.length != Lotto.LOTTO_NUMBER_COUNT) {
             throw new LottoException(WINNING_LOTTO_ERROR);
         }
-
-        int[] numbers = Arrays.stream(stringNumbers)
+        return Arrays.stream(stringNumbers)
                 .mapToInt(stringNumber -> Integer.parseInt(stringNumber.trim()))
                 .toArray();
-        return new Lotto(numbers);
+    }
+
+    private int getWinningBonusNumber() {
+        System.out.println(Messages.LAST_WEEK_WINNING_BONUS_NUMBER_INPUT);
+        String stringNumber = Console.readLine();
+
+        if (StringUtils.isNotNumber(stringNumber)) {
+            throw new LottoException(StringUtils.IS_NOT_STRING_NUMBER);
+        }
+        return StringUtils.toNumber(stringNumber);
+    }
+
+    private void printLottoResult(WinningLotto winningLotto, List<Lotto> lottoList) {
+        LottoResult lottoResult = new LottoResult(winningLotto, lottoList);
+        System.out.println(System.lineSeparator() + ResultView.print(lottoResult));
     }
 }
