@@ -32,7 +32,7 @@ public class WinningLottery implements LotteryMatchAble {
     }
 
 
-    public Rank match(final TicketLottery ticketLottery) {
+    private Rank match(final TicketLottery ticketLottery) {
         int matchCount = getMatchCount(ticketLottery);
         final boolean resultOfBonusNumberMatch = isMatchBonusNumber(ticketLottery);
         return Rank.valueOf(matchCount, resultOfBonusNumberMatch);
