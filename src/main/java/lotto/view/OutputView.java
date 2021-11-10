@@ -19,7 +19,26 @@ public class OutputView {
 	private final static int LAST_INDEX_CALCULATE_NUMBER = 1;
 
 	public static void printCompletePurchaseLotto(Lottos lottos) {
-		System.out.println(lottos.size() + "개를 구입했습니다.");
+		System.out.println(completePurchaseLottoToString(lottos));
+	}
+
+	private static String completePurchaseLottoToString(Lottos lottos) {
+		StringBuilder stringBuilder = new StringBuilder();
+
+		if (validPurchaseSize(lottos)) {
+			stringBuilder.append("수동으로 ")
+				.append(lottos.inputSize())
+				.append("장, ");
+		}
+		stringBuilder.append("자동으로 ")
+			.append(lottos.randomSize())
+			.append("개를 구매했습니다.");
+
+		return stringBuilder.toString();
+	}
+
+	private static boolean validPurchaseSize(Lottos lottos) {
+		return lottos.inputSize() > START_INDEX_CALCULATE_NUMBER;
 	}
 
 	public static void printLottoNumbers(Lottos lottos) {
@@ -60,7 +79,7 @@ public class OutputView {
 
 	public static String convertYieldToString(LottoResult lottoResult) {
 		StringBuilder stringBuilder = new StringBuilder();
-		double yield = lottoResult.getYield();
+		float yield = lottoResult.getYield();
 		stringBuilder
 			.append("총 수익률은 ")
 			.append(yield)
