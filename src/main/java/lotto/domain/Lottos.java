@@ -18,15 +18,14 @@ public class Lottos {
     public static Lottos buy(final int count) {
         List<Lotto> lottosList = new ArrayList<>();
         for( int i = 0; i < count; i++ ) {
-            AutoLottoPurchase autoLottoPurchase = new AutoLottoPurchase();
-            Lotto lotto = Lotto.from(autoLottoPurchase.generateLottoNumbers());
+            Lotto lotto = Lotto.from(new AutoLottoPurchase().generateLottoNumbers());
             lottosList.add(lotto);
         }
         return Lottos.from(lottosList);
     }
 
-    public List<Integer> getMatchingCounts(final Lotto winningLotto) {
-        List<Integer> matchingCounts = new ArrayList<>();
+    public List<MatchResult> getMatchingCounts(final Lotto winningLotto) {
+        List<MatchResult> matchingCounts = new ArrayList<>();
         for (Lotto lotto : lottos) {
             matchingCounts.add(winningLotto.countMatchingNumber(lotto));
         }
