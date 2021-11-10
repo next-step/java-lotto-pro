@@ -5,17 +5,17 @@ import java.util.Optional;
 public class LotteryWallet {
 	private final Money budget;
 	private final Lottos lottosAuto;
-	private final Lottos lottosMenual;
+	private final Lottos lottosManual;
 
 
-	public LotteryWallet(String strMoney, Lottos menual) {
+	public LotteryWallet(String strMoney, Lottos manual) {
 		budget = new Money(strMoney);
 		int possiblePurchase = budget.getNumberOfPurchaseAvailable();
-		lottosMenual = Optional.ofNullable(menual).orElse(new Lottos(0));
-		if (lottosMenual.size() > possiblePurchase) {
-			throw new IllegalArgumentException("구매가능한 로또의 개수를 초과했습니다. - 금액 : "+strMoney+" / 수동구매 로또개수: "+lottosMenual.size());
+		lottosManual = Optional.ofNullable(manual).orElse(new Lottos(0));
+		if (lottosManual.size() > possiblePurchase) {
+			throw new IllegalArgumentException("구매가능한 로또의 개수를 초과했습니다. - 금액 : "+strMoney+" / 수동구매 로또개수: "+lottosManual.size());
 		}
-		lottosAuto = new Lottos(possiblePurchase - lottosMenual.size());
+		lottosAuto = new Lottos(possiblePurchase - lottosManual.size());
 	}
 
 
@@ -24,7 +24,7 @@ public class LotteryWallet {
 	 * @return 구매한 로또 총 개수
 	 */
 	public int numberOfPurchasedLottoTotal() {
-		return numberOfPurchasedLottoAuto() + numberOfPurchasedLottoMenual();
+		return numberOfPurchasedLottoAuto() + numberOfPurchasedLottoManual();
 	}
 
 
@@ -41,8 +41,8 @@ public class LotteryWallet {
 	 * 수동 구매한 로또 개수
 	 * @return 수동 구매한 로또 개수
 	 */
-	public int numberOfPurchasedLottoMenual() {
-		return lottosMenual.size();
+	public int numberOfPurchasedLottoManual() {
+		return lottosManual.size();
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class LotteryWallet {
 	 * @return 로또들의 상태 텍스트
 	 */
 	public String lottosStatus() {
-		return lottosMenual.toString() + "\n" + lottosAuto.toString();
+		return lottosManual.toString() + "\n" + lottosAuto.toString();
 	}
 
 	/**
@@ -67,7 +67,6 @@ public class LotteryWallet {
 	 * @return 당첨 결과 객체
 	 */
 	public WinningLottoStatus getWinningStatus(WinningLottoNumbers winningLottoNumbers) {
-		//return lottosAuto.getWinningStatus(winningLottoNumbers);
-		return WinningLottoStatus.merge(lottosMenual.getWinningStatus(winningLottoNumbers), lottosAuto.getWinningStatus(winningLottoNumbers));
+		return WinningLottoStatus.merge(lottosManual.getWinningStatus(winningLottoNumbers), lottosAuto.getWinningStatus(winningLottoNumbers));
 	}
 }

@@ -10,7 +10,6 @@ import lotto.view.LottoView;
 public class LottoController {
 	private LottoView view = new LottoView();
 	private Scanner scan = new Scanner(System.in);
-	//TODO 수동구매 개발 해야함
 
 	/**
 	 * 프로그램 시작

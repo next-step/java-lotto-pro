@@ -22,23 +22,23 @@ public class LotteryWalletTest {
 
 	@Test
 	@DisplayName("수동구매 + 자동구매(올바른 값)")
-	void purchaseAutoAndMenual() {
-		Lottos menual = new Lottos(4);
-		LotteryWallet wallet = new LotteryWallet("15000", menual);
+	void purchaseAutoAndManual() {
+		Lottos manual = new Lottos(4);
+		LotteryWallet wallet = new LotteryWallet("15000", manual);
 		int purchasedLottoAuto = wallet.numberOfPurchasedLottoAuto();
-		int purchasedLottoMenual = wallet.numberOfPurchasedLottoMenual();
+		int purchasedLottoManual = wallet.numberOfPurchasedLottoManual();
 
 		assertThat(purchasedLottoAuto).isEqualTo(11);
-		assertThat(purchasedLottoMenual).isEqualTo(4);
+		assertThat(purchasedLottoManual).isEqualTo(4);
 	}
 
 	@Test
 	@DisplayName("수동구매 + 자동구매(개수 오버)")
-	void purchaseAutoAndMenualOver() {
-		Lottos menual = new Lottos(24);
+	void purchaseAutoAndManualOver() {
+		Lottos manual = new Lottos(24);
 		assertThatThrownBy(()->{
 			@SuppressWarnings("unused")
-			LotteryWallet wallet = new LotteryWallet("15000", menual);
+			LotteryWallet wallet = new LotteryWallet("15000", manual);
 		}).isInstanceOf(IllegalArgumentException.class);
 	}
 }
