@@ -32,8 +32,8 @@ public class PurchaseAmount {
 		return amount;
 	}
 
-	public boolean isShortMoney(int manual) {
-		return CORRECT > getPurchaseQuantity() - manual;
+	public boolean isShortMoney(ManualNumber manual) {
+		return manual.isMoreThanNumber(getPurchaseQuantity());
 	}
 
 	@Override

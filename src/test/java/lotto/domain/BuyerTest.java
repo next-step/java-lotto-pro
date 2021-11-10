@@ -18,9 +18,10 @@ public class BuyerTest {
 	@DisplayName("판매자 생성")
 	@Test
 	void generateBuyer() {
-		Buyer buyer = new Buyer(purchaseAmount, 5);
+		ManualNumber manualNumber = new ManualNumber(5);
+		Buyer buyer = new Buyer(purchaseAmount, manualNumber);
 
-		assertThat(buyer).isEqualTo(new Buyer(purchaseAmount, 5));
+		assertThat(buyer).isEqualTo(new Buyer(purchaseAmount, manualNumber));
 	}
 
 	@DisplayName("구입금액보다 많은 수동 횟수인 경우")
@@ -28,7 +29,9 @@ public class BuyerTest {
 	void shortMoney() {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
-				new Buyer(purchaseAmount, 11);
+				ManualNumber manualNumber = new ManualNumber(5);
+
+				new Buyer(purchaseAmount, manualNumber);
 			}).withMessageMatching("구입금액이 부족합니다.");
 	}
 }
