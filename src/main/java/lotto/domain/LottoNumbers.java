@@ -1,11 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<String> lottoNumbers) {
         this.lottoNumbers = lottoNumbers.stream()
