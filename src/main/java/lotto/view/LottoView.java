@@ -14,7 +14,7 @@ public class LottoView {
 	}
 
 	public void printlnPurchasedLottoResult(LotteryWallet wallet) {
-		System.out.println(wallet.numberOfPurchasedLottoTotal()+"개를 구매했습니다.");
+		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", wallet.numberOfPurchasedLottoManual(), wallet.numberOfPurchasedLottoAuto());
 		System.out.println(wallet.lottosStatus());
 	}
 

@@ -115,7 +115,9 @@ public class LottoController {
 		List<Lotto> manualLottoList = new ArrayList<>();
 		int manualLottoCount = getManualLottoCount();
 		view.printlnBlank();
-		view.printlnPurchasedManualLotto();
+		if (manualLottoCount > 0) {
+			view.printlnPurchasedManualLotto();
+		}
 		for (int i = 0; i < manualLottoCount; i++) {
 			manualLottoList.add(getManualLotto());
 		}
