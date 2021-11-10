@@ -1,25 +1,48 @@
 package lotto.model;
 
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 
 public class LotteryWallet {
-	private Money budget;
-	private Lottos lottos;
+	private final Money budget;
+	private final Lottos lottosAuto;
+	private final Lottos lottosMenual;
 
-	public LotteryWallet(String strMoney) {
+
+	public LotteryWallet(String strMoney, Lottos menual) {
 		budget = new Money(strMoney);
 		int possiblePurchase = budget.getNumberOfPurchaseAvailable();
-		lottos = new Lottos(possiblePurchase);
+		lottosMenual = Optional.ofNullable(menual).orElse(new Lottos(0));
+		if (lottosMenual.size() > possiblePurchase) {
+			throw new IllegalArgumentException("구매가능한 로또의 개수를 초과했습니다. - 금액 : "+strMoney+" / 수동구매 로또개수: "+lottosMenual.size());
+		}
+		lottosAuto = new Lottos(possiblePurchase - lottosMenual.size());
 	}
 
+
 	/**
-	 * 구매한 로또 개수
-	 * @return 구매한 로또 개수
+	 * 구매한 로또 총 개수
+	 * @return 구매한 로또 총 개수
 	 */
-	public int numberOfPurchasedLotto() {
-		return lottos.size();
+	public int numberOfPurchasedLottoTotal() {
+		return numberOfPurchasedLottoAuto() + numberOfPurchasedLottoMenual();
+	}
+
+
+	/**
+	 * 자동 구매한 로또 개수
+	 * @return 자동 구매한 로또 개수
+	 */
+	public int numberOfPurchasedLottoAuto() {
+		return lottosAuto.size();
+	}
+
+
+	/**
+	 * 수동 구매한 로또 개수
+	 * @return 수동 구매한 로또 개수
+	 */
+	public int numberOfPurchasedLottoMenual() {
+		return lottosMenual.size();
 	}
 
 	/**
@@ -35,7 +58,7 @@ public class LotteryWallet {
 	 * @return 로또들의 상태 텍스트
 	 */
 	public String lottosStatus() {
-		return lottos.toString();
+		return lottosAuto.toString();
 	}
 
 	/**
@@ -44,6 +67,6 @@ public class LotteryWallet {
 	 * @return 당첨 결과 객체
 	 */
 	public WinningLottoStatus getWinningStatus(WinningLottoNumbers winningLottoNumbers) {
-		return lottos.getWinningStatus(winningLottoNumbers);
+		return lottosAuto.getWinningStatus(winningLottoNumbers);
 	}
 }

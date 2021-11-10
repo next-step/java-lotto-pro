@@ -82,7 +82,7 @@ public class LottoController {
 		LotteryWallet wallet = null;
 		do {
 			wallet = makeWallet();
-		} while(wallet == null || wallet.numberOfPurchasedLotto() == 0);
+		} while(wallet == null || wallet.numberOfPurchasedLottoTotal() == 0);
 		return wallet;
 	}
 
@@ -93,7 +93,7 @@ public class LottoController {
 	private LotteryWallet makeWallet() {
 		try {
 			String money = scan.nextLine();
-			return new LotteryWallet(money);
+			return new LotteryWallet(money, null);
 		} catch (IllegalArgumentException e) {
 			view.printlnError(e);
 		}

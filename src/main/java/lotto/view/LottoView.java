@@ -14,7 +14,7 @@ public class LottoView {
 	}
 
 	public void printlnPurchasedLottoResult(LotteryWallet wallet) {
-		System.out.println(wallet.numberOfPurchasedLotto()+"개를 구매했습니다.");
+		System.out.println(wallet.numberOfPurchasedLottoTotal()+"개를 구매했습니다.");
 		System.out.println(wallet.lottosStatus());
 	}
 
