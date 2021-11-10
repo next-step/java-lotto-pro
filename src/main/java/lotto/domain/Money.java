@@ -7,17 +7,17 @@ import lotto.domain.exception.OverSpendingMoneyException;
 
 public class Money {
 
-	private final int amount;
+	private int amount;
 
 	public Money(final int amount) {
 		validateMoneyExist(amount);
 		this.amount = amount;
 	}
 
-	public Money spend(int payment) {
+	public void spend(int payment) {
 		validateNotOverSpending(payment);
 
-		return new Money(amount - payment);
+		amount -= payment;
 	}
 
 	public int amount() {

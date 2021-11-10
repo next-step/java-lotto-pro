@@ -39,7 +39,7 @@ public class Lotto {
 	public int countMatch(final Lotto targetLotto) {
 		int matchCount = 0;
 
-		for (LottoNumber targetNumber: targetLotto.lottoNumbers) {
+		for (LottoNumber targetNumber : targetLotto.lottoNumbers) {
 			matchCount += Collections.frequency(lottoNumbers, targetNumber);
 		}
 

@@ -17,10 +17,12 @@ public class MoneyTest {
 	}
 
 	@Test
-	@DisplayName("금액을 사용하면 남은 금액이 반환된다.")
+	@DisplayName("금액을 사용한만큼 차감된다.")
 	void testMoneySpend() {
 		Money money = new Money(10000);
-		assertThat(money.spend(1000)).isEqualTo(new Money(9000));
+		money.spend(1000);
+
+		assertThat(money.amount()).isEqualTo(9000);
 	}
 
 	@Test
