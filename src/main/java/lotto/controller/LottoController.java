@@ -37,7 +37,7 @@ public class LottoController {
     }
 
     private void play(LottoPurchase lottoPurchase, LottoTicket lottoTicket, LottoWinningNumbers lottoWinningNumbers) {
-        LottoResult lottoResult = new LottoResult(lottoPurchase, lottoTicket, lottoWinningNumbers);
+        LottoResult lottoResult = LottoResult.of(lottoPurchase, lottoTicket, lottoWinningNumbers);
         printWinningStatistics(lottoResult);
     }
 

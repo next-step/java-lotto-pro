@@ -33,7 +33,7 @@ class LottoResultTest {
         LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 11, 12, 13)), new LottoNumber(7));
 
         //when
-        LottoResult lottoResult = new LottoResult(lottoPurchase, lottoTicket, lottoWinningNumbers);
+        LottoResult lottoResult = LottoResult.of(lottoPurchase, lottoTicket, lottoWinningNumbers);
 
 
         Map<LottoRank, Integer> lottoTicketRankMap = lottoResult.getLottoTicketRankMap();
@@ -52,7 +52,7 @@ class LottoResultTest {
         LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 11, 12, 13)), new LottoNumber(7));
 
         //when
-        LottoResult lottoResult = new LottoResult(lottoPurchase, lottoTicket, lottoWinningNumbers);
+        LottoResult lottoResult = LottoResult.of(lottoPurchase, lottoTicket, lottoWinningNumbers);
 
         //then
         assertThat(lottoResult.getRateOfReturn()).isEqualTo(2);

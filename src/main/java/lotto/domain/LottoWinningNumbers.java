@@ -10,12 +10,12 @@ public class LottoWinningNumbers {
     private final LottoNumber lottoBonusNumber;
 
     public LottoWinningNumbers(LottoNumbers lottoWinningNumbers, LottoNumber lottoBonusNumber) {
+        validateDuplicate(lottoWinningNumbers, lottoBonusNumber);
         this.lottoWinningNumbers = lottoWinningNumbers;
         this.lottoBonusNumber = lottoBonusNumber;
-        validateDuplicate();
     }
 
-    private void validateDuplicate() {
+    private void validateDuplicate(LottoNumbers lottoWinningNumbers, LottoNumber lottoBonusNumber) {
         if (lottoWinningNumbers.contains(lottoBonusNumber)) {
             throw new IllegalArgumentException(INVALID_BONUS_NUMBER);
         }
