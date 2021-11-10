@@ -5,13 +5,13 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
+        validateDuplicateBonusNumber(lotto, bonusNumber);
         this.lotto = lotto;
         this.bonusNumber = bonusNumber;
-        validateDuplicateBonusNumber();
     }
 
-    private void validateDuplicateBonusNumber() {
-        if (this.lotto.existLottoNumber(this.bonusNumber)) {
+    private void validateDuplicateBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto.existLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException(Message.EXIST_DUPLICATE_NUMBER_MESSAGE.getMessage());
         }
     }
