@@ -3,7 +3,8 @@ package step3.view;
 import java.math.BigDecimal;
 import java.util.List;
 
-import step3.dto.LottoBoughtListResponse;
+import step3.domain.BuyType;
+import step3.domain.LottoBuyer;
 import step3.dto.LottoResultDto;
 import step3.dto.LottoStatisticsResponseDto;
 
@@ -19,23 +20,17 @@ public class ResultView {
         System.out.print(message);
     }
 
-    public static void buyCountPrintln(int size) {
-        println(String.format(ViewConstant.BUY_COUNT_MESSAGE, size));
+    public static void buyCountResultView(LottoBuyer lottoBuyer) {
+        println(String.format(
+            ViewConstant.TOTAL_LOTTO_BUY_COUNT_MESSAGE,
+            lottoBuyer.countOf(BuyType.MANUAL),
+            lottoBuyer.countOf(BuyType.AUTO)
+        ));
     }
 
-    public static void bonusNumberRequestPrintln() {
-        println(ViewConstant.BONUS_NUMBER_REQUEST_MESSAGE);
-    }
-
-    public static void boughtLottoView(LottoBoughtListResponse lottoBoughtListResponse) {
-        ResultView.println(
-            String.format(
-                ViewConstant.TOTAL_LOTTO_BUY_COUNT_MESSAGE,
-                lottoBoughtListResponse.getManualSize(),
-                lottoBoughtListResponse.getAutoSize()));
-
-        for (String numbers : lottoBoughtListResponse.getManualLottoList()) {
-            println(numbers);
+    public static void buyLottoResultView(LottoBuyer lottoBuyer) {
+        for (String result : lottoBuyer.getLottoNumberList()) {
+            println(result);
         }
     }
 
@@ -91,5 +86,4 @@ public class ResultView {
 
         return "";
     }
-
 }
