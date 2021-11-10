@@ -23,8 +23,8 @@ public class ManualCountState implements State {
     }
 
     @Override
-    public void printResult(List<String> texts, PrintStream out) {
-        count = parseInt(texts.get(0));
+    public void printResult(List<String> textLottoNumbers, PrintStream out) {
+        count = parseInt(textLottoNumbers.get(0));
         if (!LottoCashier.isPossibleToBuy(cash, count)) {
             throw new IllegalArgumentException("구입 가능한 매수를 초과했습니다");
         }

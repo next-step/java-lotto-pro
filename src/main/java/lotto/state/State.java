@@ -15,7 +15,7 @@ public interface State {
         // do nothing
     }
 
-    default void printResult(List<String> texts, PrintStream out) {
+    default void printResult(List<String> inputTexts, PrintStream out) {
         // do nothing
     }
 

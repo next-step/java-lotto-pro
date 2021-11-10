@@ -37,8 +37,8 @@ public class LotteryTicketTest {
     @DisplayName("String[]으로 생성 가능")
     @Test
     void testCreateTexts() {
-        String[] texts = {"1,2,3,4,5,6"};
-        assertThat(lotteryTicket).isEqualTo(new LotteryTicket(texts));
+        String[] textLottoNumbers = {"1,2,3,4,5,6"};
+        assertThat(lotteryTicket).isEqualTo(new LotteryTicket(textLottoNumbers));
     }
 
     @DisplayName("두개의 LotteryTicket을 병합한다")

@@ -24,8 +24,8 @@ public class BonusNumberState implements State {
     }
 
     @Override
-    public void printResult(List<String> texts, PrintStream out) {
-        Record record = new Record(lotteryTicket, new WinningLottoNumbers(winningLottoNumbers, LottoNumber.of(texts.get(0))));
+    public void printResult(List<String> textLottoNumbers, PrintStream out) {
+        Record record = new Record(lotteryTicket, new WinningLottoNumbers(winningLottoNumbers, LottoNumber.of(textLottoNumbers.get(0))));
         bonusNumberStateView.printResult(out, record);
     }
 

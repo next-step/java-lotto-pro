@@ -24,9 +24,9 @@ public class ManualBuyState implements State {
     }
 
     @Override
-    public void printResult(List<String> texts, PrintStream out) {
+    public void printResult(List<String> textLottoNumbers, PrintStream out) {
         LottoCashier lottoCashier = new LottoCashier(new AutoLottoPrinter(new CollectionsShuffler()));
-        lotteryTicket = lottoCashier.buy(cash, texts);
+        lotteryTicket = lottoCashier.buy(cash, textLottoNumbers);
         manualBuyStateView.printResult(out, lotteryTicket);
     }
 

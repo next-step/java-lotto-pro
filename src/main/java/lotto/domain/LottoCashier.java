@@ -17,12 +17,12 @@ public class LottoCashier {
         return new LotteryTicket(lottoPrinter.print(count));
     }
 
-    public LotteryTicket buy(Money cash, String[] texts) {
+    public LotteryTicket buy(Money cash, String[] textLottoNumbers) {
         validateDefaultPrice(cash);
-        validatePossibleToBuy(cash, texts);
+        validatePossibleToBuy(cash, textLottoNumbers);
 
-        LotteryTicket lotteryTicket = new LotteryTicket(texts);
-        Money changes = cash.minus(DEFAULT_PRICE.multiply(texts.length));
+        LotteryTicket lotteryTicket = new LotteryTicket(textLottoNumbers);
+        Money changes = cash.minus(DEFAULT_PRICE.multiply(textLottoNumbers.length));
         if (!changes.isLessThan(DEFAULT_PRICE)) {
             lotteryTicket = lotteryTicket.merge(buy(changes));
         }

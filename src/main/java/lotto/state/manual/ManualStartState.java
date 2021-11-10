@@ -21,8 +21,8 @@ public class ManualStartState implements State {
     }
 
     @Override
-    public void printResult(List<String> texts, PrintStream out) {
-        cash = Money.of(texts.get(0));
+    public void printResult(List<String> textLottoNumbers, PrintStream out) {
+        cash = Money.of(textLottoNumbers.get(0));
     }
 
     @Override

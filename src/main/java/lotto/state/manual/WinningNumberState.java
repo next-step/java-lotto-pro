@@ -24,8 +24,8 @@ public class WinningNumberState implements State {
     }
 
     @Override
-    public void printResult(List<String> texts, PrintStream out) {
-        winningLottoNumbers = new WinningLottoNumbers(LottoNumbers.of(texts.get(0)));
+    public void printResult(List<String> textLottoNumbers, PrintStream out) {
+        winningLottoNumbers = new WinningLottoNumbers(LottoNumbers.of(textLottoNumbers.get(0)));
     }
 
     @Override

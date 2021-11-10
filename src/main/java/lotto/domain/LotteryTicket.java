@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LotteryTicket {
     private final List<LottoNumbers> lottoNumbersList;
@@ -11,16 +13,14 @@ public class LotteryTicket {
         this.lottoNumbersList = lottoNumbersList;
     }
 
-    public LotteryTicket(String[] texts) {
-        this(getLottoNumbers(texts));
+    public LotteryTicket(String[] textLottoNumbers) {
+        this(getLottoNumbers(textLottoNumbers));
     }
 
-    private static List<LottoNumbers> getLottoNumbers(String[] texts) {
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for (String textLottoNumbers : texts) {
-            lottoNumbersList.add(LottoNumbers.of(textLottoNumbers));
-        }
-        return lottoNumbersList;
+    private static List<LottoNumbers> getLottoNumbers(String[] textLottoNumbers) {
+        return Arrays.stream(textLottoNumbers)
+                .map(LottoNumbers::of)
+                .collect(Collectors.toList());
     }
 
     public int size() {
