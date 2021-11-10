@@ -11,10 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LotteryTicketTest {
 
     private LotteryTicket lotteryTicket;
+    private WinningNumber winningNumber;
 
     @BeforeEach
     void setUp() {
         lotteryTicket = LotteryTicket.createAutoLotteryNumber(Arrays.asList(10, 5, 4, 3, 2, 1));
+        winningNumber = WinningNumber.createWinningNumber("1, 2, 3, 4, 5, 6".split(", "), 10);
     }
 
     @DisplayName("로또 번호 자동 생성 시 숫자가 오름차순 정렬되어 저장되는지 확인")
@@ -26,7 +28,6 @@ public class LotteryTicketTest {
     @DisplayName("로또 티켓의 로또 번호에 당첨 번호가 몇개 있는지 세기")
     @Test
     void countMatch() {
-        WinningNumber winningNumber = WinningNumber.createWinningNumber("1, 2, 3, 4, 5, 6".split(", "));
         assertThat(lotteryTicket.countMatch(winningNumber)).isEqualTo(5);
     }
 
@@ -40,5 +41,11 @@ public class LotteryTicketTest {
     @Test
     void getLotteryNumber() {
         assertThat(lotteryTicket.getLotteryNumber()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 10));
+    }
+
+    @DisplayName("로또 티켓 번호에 보너스 번호 매치 여부 확인")
+    @Test
+    void isMatchBonus() {
+        assertThat(lotteryTicket.isMatchBonus(winningNumber)).isTrue();
     }
 }

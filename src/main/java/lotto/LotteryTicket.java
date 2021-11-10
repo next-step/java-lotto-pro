@@ -32,4 +32,8 @@ public class LotteryTicket {
     public List<Integer> getLotteryNumber() {
         return lottoTicket;
     }
+
+    public boolean isMatchBonus(WinningNumber winningNumber) {
+        return lottoTicket.contains(winningNumber.getBonusNumber());
+    }
 }
