@@ -3,9 +3,13 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import lotto.util.RandomUtil;
 
 public class LottoGenerator {
 	private final Money money;
@@ -22,6 +26,27 @@ public class LottoGenerator {
 
 	public static LottoGenerator of(Money money, List<String> inputNumberList) {
 		return new LottoGenerator(money, inputNumberList);
+	}
+
+	private static List<String> generateStringNumberSet() {
+		Set<String> lottoNumberSet = new HashSet<>();
+
+		do {
+			lottoNumberSet.add(randomLottoNumber());
+		} while (lottoNumberSet.size() < LottoNumbers.LOTTO_NUMBERS_SIZE);
+
+		return new ArrayList<>(lottoNumberSet);
+	}
+
+	private static String randomLottoNumber() {
+		return String.valueOf(RandomUtil.pickNumber(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER));
+	}
+
+	private List<List<String>> generateLottoNumberList() {
+		return Stream
+			.generate(LottoGenerator::generateStringNumberSet)
+			.limit(calculateRandomSize())
+			.collect(Collectors.toList());
 	}
 
 	public List<LottoNumbers> generateLottoNumbers() {
@@ -42,9 +67,9 @@ public class LottoGenerator {
 	}
 
 	private List<LottoNumbers> generateRandomLottoNumbers() {
-		return Stream
-			.generate(LottoNumbers::from)
-			.limit(calculateRandomSize())
+		return generateLottoNumberList()
+			.stream()
+			.map(LottoNumbers::from)
 			.collect(Collectors.toList());
 	}
 
