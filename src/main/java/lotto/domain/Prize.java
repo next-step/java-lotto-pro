@@ -44,7 +44,8 @@ public enum Prize {
     }
 
     private static Prize getPrize(int countOfMatch, Prize prizeResult, Prize prize) {
-        if (countOfMatch == prize.countOfMatch && prize != SECOND) {
+        boolean matchCondition = countOfMatch == prize.countOfMatch;
+        if (matchCondition && prize != SECOND && prizeResult != SECOND) {
             prizeResult = prize;
         }
         return prizeResult;

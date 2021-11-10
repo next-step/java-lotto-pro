@@ -65,19 +65,14 @@ public class LottoTicket {
 
     public Prize getPrize(LottoTicket targetLottoTicket) {
         int sameNumberCount = 0;
-        boolean bonusNumber  = false;
         for (LottoNumber lottoNumber : lottoNumbers) {
             sameNumberCount = increaseSameNumberCount(targetLottoTicket, sameNumberCount, lottoNumber);
         }
-        bonusNumber = isBonusNumber(targetLottoTicket, bonusNumber);
-        return Prize.valueOf(sameNumberCount, bonusNumber);
+        return Prize.valueOf(sameNumberCount, isBonusNumber(targetLottoTicket));
     }
 
-    private boolean isBonusNumber(LottoTicket targetLottoTicket, boolean bonusNumber) {
-        if (lottoNumbers.contains(targetLottoTicket.bonusNumber)) {
-            bonusNumber = true;
-        }
-        return bonusNumber;
+    private boolean isBonusNumber(LottoTicket targetLottoTicket) {
+        return lottoNumbers.contains(targetLottoTicket.bonusNumber);
     }
 
     private int increaseSameNumberCount(LottoTicket targetLottoTicket, int sameNumberCount, LottoNumber lottoNumber) {
