@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 class LottoTicketTest {
     private LottoTicket lottoTicket;
     private WinningLotto winningLotto;
+    private final int manualLottosCount = 3;
+    private final int autoLottosCount = 3;
 
     @BeforeEach
     void setUp() {
@@ -24,8 +26,8 @@ class LottoTicketTest {
                 new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)),
                 new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)),
                 new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12))
-            )
-        );
+            ),
+            new LottoTypesCount(manualLottosCount, autoLottosCount));
         winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.valueOf(7));
     }
 
@@ -39,10 +41,16 @@ class LottoTicketTest {
         );
     }
 
+    @DisplayName("로또 타입별로 카운트 수를 가져오는지 확인한다")
+    @Test
+    void getCountOfLottoType() {
+        assertEquals(manualLottosCount, lottoTicket.getCountOfLottoType(LottoType.MANUAL));
+        assertEquals(autoLottosCount, lottoTicket.getCountOfLottoType(LottoType.AUTO));
+    }
+
     @DisplayName("로또의 개수를 제대로 가져오는지 확인한다")
     @Test
     void getSize() {
         assertEquals(6, lottoTicket.getSize());
     }
-
 }
