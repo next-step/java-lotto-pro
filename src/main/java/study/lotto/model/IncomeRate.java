@@ -42,7 +42,7 @@ public class IncomeRate {
 
         final BigDecimal incomeRate = income
                 .divide(BigDecimal.valueOf(ticketCount)
-                        .multiply(BigDecimal.valueOf(LottoStore.PRICE_OF_LOTTO_TICKET)), DECIMAL_SCALE, ROUNDING_MODE
+                        .multiply(BigDecimal.valueOf(LottoStore.PRICE_OF_LOTTO_TICKET.intValue())), DECIMAL_SCALE, ROUNDING_MODE
                 );
         return incomeRate.doubleValue();
 

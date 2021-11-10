@@ -36,4 +36,8 @@ public class TicketOrderCount {
     public IntStream getStream() {
         return IntStream.range(DEFAULT_LOW_BOUND, orderCount);
     }
+
+    public int intValue() {
+        return this.orderCount;
+    }
 }

@@ -1,6 +1,5 @@
 package study.lotto.model;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -36,15 +35,6 @@ public class TicketLottery {
         return new TicketLottery(lottoNumbers, type);
     }
 
-
-    private static Set<LottoNumber> toLottoNumberSet(final Set<Integer> lottoNumbers) {
-        final Set<LottoNumber> lottoNumberSet = new HashSet<>();
-        for (final Integer lottoNumber : lottoNumbers) {
-            lottoNumberSet.add(LottoNumber.valueOf(lottoNumber));
-        }
-        return lottoNumberSet;
-    }
-
     public boolean contains(LottoNumber lottoNumber) {
         return lottery.contains(lottoNumber);
     }
@@ -65,6 +55,14 @@ public class TicketLottery {
         int result = lottery != null ? lottery.hashCode() : 0;
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TicketLottery{" +
+                "lottery=" + lottery +
+                ", type=" + type +
+                '}';
     }
 
     public Set<LottoNumber> getLottoNumbers() {

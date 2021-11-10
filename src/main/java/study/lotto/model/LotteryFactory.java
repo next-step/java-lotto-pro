@@ -20,4 +20,8 @@ public class LotteryFactory {
         final Set<Integer> lottoNumbers = LottoRandoms.getLottoRandomNumbers();
         return TicketLottery.valueOf(lottoNumbers, TicketLotteryType.AUTO);
     }
+
+    public static TicketLotteryBundle generateManualTicketLotteryBundle(OrderManualTicketLotteryBundle manualLottoNumbers) {
+        return TicketLotteryBundle.valueOf(manualLottoNumbers, TicketLotteryType.MANUAL);
+    }
 }
