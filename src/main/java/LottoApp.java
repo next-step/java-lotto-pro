@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class LottoApp {
 
 	private final LottoStore lottoStore;
@@ -13,13 +11,13 @@ public class LottoApp {
 	}
 
 	public void run() {
-		final List<Lotto> lottos = buyLottosController.buyLottosAt(lottoStore);
+		final Lottos lottos = buyLottosController.buyLottosAt(lottoStore);
 		view.space();
 
 		final WinningLotto winningLotto = tryMakeWinningLotto();
 		view.space();
 
-		final LottoWinningStatistics statistics = LottoWinningStatistics.of(winningLotto, lottos);
+		final LottoWinningStatistics statistics = LottoWinningStatistics.from(winningLotto, lottos);
 		view.outLottoWinningStatistics(statistics);
 	}
 

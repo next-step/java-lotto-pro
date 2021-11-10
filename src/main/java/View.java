@@ -34,13 +34,13 @@ public class View {
 		return Console.readLine();
 	}
 
-	public void outBoughtLottos(ManualLottoQuantity manualLottoQuantity, List<Lotto> lottos) {
+	public void outBoughtLottos(ManualLottoQuantity manualLottoQuantity, Lottos lottos) {
 		if (manualLottoQuantity.isBiggerThan(0)) {
 			space();
 		}
 		final int numOfAutoLottos = manualLottoQuantity.subtractFrom(lottos.size());
 		println(String.format(Message.BOUGHT_LOTTO.getContent(), manualLottoQuantity.get(), numOfAutoLottos));
-		lottos.stream().map(Lotto::toString).forEach(this::println);
+		println(lottos);
 	}
 
 	public void outLottoWinningStatistics(LottoWinningStatistics statistics) {
@@ -87,6 +87,10 @@ public class View {
 
 	public void space() {
 		System.out.println();
+	}
+
+	private void println(Object o) {
+		System.out.println(o);
 	}
 
 	private void println(String s) {

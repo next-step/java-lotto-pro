@@ -9,14 +9,14 @@ public class BuyLottosController {
 		this.view = view;
 	}
 
-	public List<Lotto> buyLottosAt(LottoStore store) {
+	public Lottos buyLottosAt(LottoStore store) {
 		final LottoPayment payment = tryPay();
 		view.space();
 
 		final ManualLottoQuantity manualLottoQuantity = tryGetManualLottoQuantity(payment);
 		view.space();
 
-		final List<Lotto> lottos = tryBuy(store, payment, manualLottoQuantity);
+		final Lottos lottos = tryBuy(store, payment, manualLottoQuantity);
 		view.outBoughtLottos(manualLottoQuantity, lottos);
 		return lottos;
 	}
@@ -55,8 +55,8 @@ public class BuyLottosController {
 		}
 	}
 
-	private List<Lotto> tryBuy(LottoStore store, LottoPayment payment, ManualLottoQuantity manualLottoQuantity) {
-		List<Lotto> lottos;
+	private Lottos tryBuy(LottoStore store, LottoPayment payment, ManualLottoQuantity manualLottoQuantity) {
+		Lottos lottos;
 		do {
 			final List<String> manualLottos = writeManualLottos(manualLottoQuantity);
 			lottos = buyLottos(store, payment, manualLottos);
@@ -71,7 +71,7 @@ public class BuyLottosController {
 		return Collections.emptyList();
 	}
 
-	private List<Lotto> buyLottos(LottoStore store, LottoPayment payment, List<String> manualLottos) {
+	private Lottos buyLottos(LottoStore store, LottoPayment payment, List<String> manualLottos) {
 		try {
 			return store.sell(payment, manualLottos);
 		} catch (IllegalArgumentException e) {
