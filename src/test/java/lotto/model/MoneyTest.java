@@ -3,6 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.*;
 
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -73,7 +74,7 @@ class MoneyTest {
 	void 구입금액에_비례하여_수익률을_계산하는_기능테스트() {
 		// given
 		Money money = Money.from(10000);
-		float sum = 5000f;
+		BigDecimal sum = new BigDecimal(5000);
 
 		// when
 		float yield = money.calculateYield(sum);
