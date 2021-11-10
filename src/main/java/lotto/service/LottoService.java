@@ -44,7 +44,7 @@ public class LottoService {
     private static List<Lotto> createLottoList(int lottoCount) {
         List<Lotto> lottoList = new LinkedList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottoList.add(new Lotto(new LottoNumbers(CreateShuffledLottoNumbers.createLottoNumbers())));
+            lottoList.add(new Lotto(new LottoNumbers(ShuffledLottoNumbers.createShuffledLottoNumbers())));
         }
         return lottoList;
     }
