@@ -11,35 +11,41 @@ public class RankTest {
     @DisplayName("일치하는 번호가 6개이면 1등")
     @Test
     void rankFirst() {
-        Rank rank = Rank.valueOf(6);
-        assertThat(rank).isEqualTo(Rank.FIRST);
+        assertThat(Rank.valueOf(6, true)).isEqualTo(Rank.FIRST);
+        assertThat(Rank.valueOf(6, false)).isEqualTo(Rank.FIRST);
     }
 
-    @DisplayName("일치하는 번호가 5개이면 2등")
+    @DisplayName("일치하는 번호가 5개이고, 보너스 번호가 일치하면 2등")
     @Test
     void rankSecond() {
-        Rank rank = Rank.valueOf(5);
-        assertThat(rank).isEqualTo(Rank.SECOND);
+        assertThat( Rank.valueOf(5, true)).isEqualTo(Rank.SECOND);
     }
 
-    @DisplayName("일치하는 번호가 4개이면 3등")
+    @DisplayName("일치하는 번호가 5개이고, 보너스 번호가 일치하지 않으면 3등")
     @Test
     void rankThird() {
-        Rank rank = Rank.valueOf(4);
-        assertThat(rank).isEqualTo(Rank.THIRD);
+        assertThat(Rank.valueOf(5, false)).isEqualTo(Rank.THIRD);
     }
 
-    @DisplayName("일치하는 번호가 3개이면 4등")
+    @DisplayName("일치하는 번호가 4개이면 4등")
     @Test
     void rankFourth() {
-        Rank rank = Rank.valueOf(3);
-        assertThat(rank).isEqualTo(Rank.FOURTH);
+        assertThat(Rank.valueOf(4, true)).isEqualTo(Rank.FOURTH);
+        assertThat(Rank.valueOf(4, false)).isEqualTo(Rank.FOURTH);
+    }
+
+    @DisplayName("일치하는 번호가 3개이면 5등")
+    @Test
+    void rankFifth() {
+        assertThat(Rank.valueOf(3, true)).isEqualTo(Rank.FIFTH);
+        assertThat(Rank.valueOf(3, false)).isEqualTo(Rank.FIFTH);
     }
 
     @DisplayName("일치하는 번호가 3개 미만이면 상금 없음")
     @Test
     void rankNoMatch() {
-        Rank rank = Rank.valueOf(2);
-        assertThat(rank).isEqualTo(Rank.NO_MATCH);
+        assertThat(Rank.valueOf(2, true)).isEqualTo(Rank.NO_MATCH);
+        assertThat(Rank.valueOf(1, false)).isEqualTo(Rank.NO_MATCH);
+        assertThat(Rank.valueOf(0, true)).isEqualTo(Rank.NO_MATCH);
     }
 }
