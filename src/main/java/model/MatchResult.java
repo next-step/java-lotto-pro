@@ -19,13 +19,12 @@ public class MatchResult {
 		countByMatchingNumberCount.put(MatchingNumberCount.SIX, sixMatchCount);
 	}
 
-	public BigDecimal calculateTotalPayout() {
-		return MatchingNumberCount.THREE.getPrizeMoney().getValue().multiply(getThreeMatchCount().toBigDecimal())
-			.add(MatchingNumberCount.FOUR.getPrizeMoney().getValue().multiply(getFourMatchCount().toBigDecimal()))
-			.add(MatchingNumberCount.FIVE.getPrizeMoney().getValue().multiply(getFiveMatchCount().toBigDecimal()))
-			.add(MatchingNumberCount.FIVE_AND_BONUS.getPrizeMoney().getValue()
-				.multiply(getFiveAndBonusBallMatchCount().toBigDecimal()))
-			.add(MatchingNumberCount.SIX.getPrizeMoney().getValue().multiply(getSixMatchCount().toBigDecimal()));
+	public Money calculateTotalPayout() {
+		return MatchingNumberCount.THREE.getPrizeMultiplyCount(getThreeMatchCount())
+			.add(MatchingNumberCount.FOUR.getPrizeMultiplyCount(getFourMatchCount()))
+			.add(MatchingNumberCount.FIVE.getPrizeMultiplyCount(getFiveMatchCount()))
+			.add(MatchingNumberCount.FIVE_AND_BONUS.getPrizeMultiplyCount(getFiveAndBonusBallMatchCount()))
+			.add(MatchingNumberCount.SIX.getPrizeMultiplyCount(getSixMatchCount()));
 	}
 
 	public void increaseByMatchCount(MatchingNumberCount matchingNumberCount) {

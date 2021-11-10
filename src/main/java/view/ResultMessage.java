@@ -1,7 +1,7 @@
 package view;
 
 public class ResultMessage {
-	public static final String PURCHASE_MESSAGE = "%s개를 구매했습니다.";
+	public static final String PURCHASE_MESSAGE = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
 	public static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
 	public static final String LINE = "---------";
 	private static final String PRIZE_MONEY_AND_MATCH_COUNT = "(%s원)- %s개";

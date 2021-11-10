@@ -10,14 +10,19 @@ public class Lottos {
 		this.values = values;
 	}
 
+	public static Lottos of(List<Lotto> lottos) {
+		return new Lottos(lottos);
+	}
+
 	public static PurchaseCount purchaseCountFrom(Money money) {
 		return money.purchaseableCount(Money.of(Lotto.COST));
 	}
 
-	public static Lottos purchase(PurchaseCount purchaseCount) {
-		List<Lotto> values = new ArrayList<>();
-		for (int i = 0; i < purchaseCount.getValue(); i++) {
-			values.add(Lotto.create());
+	public static Lottos from(Purchase purchase) {
+		List<Lotto> values = new ArrayList<>(purchase.getManualLottos().values);
+
+		for (int i = 0; i < purchase.getAutoCount().getValue(); i++) {
+			values.add(Lotto.createByAuto());
 		}
 
 		return new Lottos(values);

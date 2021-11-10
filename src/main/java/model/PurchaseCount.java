@@ -9,6 +9,14 @@ public class PurchaseCount {
 		this.value = value;
 	}
 
+	public static PurchaseCount from(String manualCount) {
+		return new PurchaseCount(Integer.parseInt(manualCount));
+	}
+
+	public static boolean validate(String manualCount) {
+		return manualCount.matches(Regex.NUMBER);
+	}
+
 	public int getValue() {
 		return value;
 	}

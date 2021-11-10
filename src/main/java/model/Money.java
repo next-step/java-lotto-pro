@@ -1,5 +1,7 @@
 package model;
 
+import static model.EarningsRate.*;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -8,6 +10,10 @@ public class Money {
 
 	private Money(int value) {
 		this.value = BigDecimal.valueOf(value);
+	}
+
+	private Money(BigDecimal value) {
+		this.value = value;
 	}
 
 	public static boolean validate(String moneyString) {
@@ -19,6 +25,10 @@ public class Money {
 		return new Money(money);
 	}
 
+	public static Money total(Integer money, Count count) {
+		return Money.of(money * count.getValue());
+	}
+
 	public static Money of(String moneyString) {
 		try {
 			return new Money(Integer.parseInt(moneyString));
@@ -28,11 +38,40 @@ public class Money {
 	}
 
 	public PurchaseCount purchaseableCount(Money price) {
+		if (price.equals(Money.of(0))) {
+			throw new IllegalArgumentException("가격은 0원일 수 없습니다.");
+		}
+
 		return new PurchaseCount(this.value.intValue() / price.getValue().intValue());
+	}
+
+	public boolean isPurchaseable(Money price) {
+		return this.value.compareTo(price.value) >= 0;
 	}
 
 	public BigDecimal getValue() {
 		return value;
+	}
+
+	public Money use(Money money) {
+		BigDecimal remain = value.subtract(money.value);
+		if (remain.compareTo(BigDecimal.ZERO) < 0) {
+			throw new IllegalArgumentException("가진 돈보다 더 많은 돈을 사용할 수 없습니다.");
+		}
+
+		return new Money(remain);
+	}
+
+	public Money multiply(Count count) {
+		return new Money(value.multiply(count.toBigDecimal()));
+	}
+
+	public Money add(Money money) {
+		return new Money(value.add(money.getValue()));
+	}
+
+	public BigDecimal divideForEarningsRate(Money money) {
+		return value.divide(money.getValue(), EARNINGS_RATE_SCALE, EARNINGS_RATE_ROUNDING_MODE);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package model;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Set;
 
@@ -15,9 +16,23 @@ public class LottoTest {
 
 	@Test
 	void 생성한_숫자는_6개() {
-		Lotto lotto = Lotto.create();
+		Lotto lotto = Lotto.createByAuto();
 
 		assertThat(lotto.getNumbers().size()).isEqualTo(6);
+	}
+
+	@Test
+	void 수동_생성() {
+		Lotto result = Lotto.createByManual(Sets.newHashSet(Lists.newArrayList(1, 2, 3, 4, 5, 6)));
+
+		assertAll(
+			() -> result.isContains(LottoNumber.of(1)),
+			() -> result.isContains(LottoNumber.of(2)),
+			() -> result.isContains(LottoNumber.of(3)),
+			() -> result.isContains(LottoNumber.of(4)),
+			() -> result.isContains(LottoNumber.of(5)),
+			() -> result.isContains(LottoNumber.of(6))
+		);
 	}
 
 	@Test
@@ -75,8 +90,8 @@ public class LottoTest {
 
 	@RepeatedTest(value = ENOUGH_TEST_COUNT, name = "중복되는 수는 없어야 한다 {currentRepetition} / {totalRepetitions}")
 	void 중복되는_숫자는_없어야_한다() {
-		Lotto lotto = Lotto.create();
-		Set<Integer> numberSet = Sets.newHashSet(lotto.getNumbers());
+		Lotto lotto = Lotto.createByAuto();
+		Set<LottoNumber> numberSet = Sets.newHashSet(lotto.getNumbers());
 
 		assertThat(numberSet.size()).isEqualTo(6);
 	}

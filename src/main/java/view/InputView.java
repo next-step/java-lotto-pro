@@ -4,82 +4,65 @@ import static view.InputMessage.*;
 
 import java.util.Scanner;
 
-import model.BonusBall;
-import model.LastWeekWinningNumber;
-import model.Money;
-
 public class InputView {
 
 	private static final Scanner sc = new Scanner(System.in);
 
-	public static Money printPurchaseAmountMessageAndInput() {
-		printPurchaseAmountMessage();
-		return inputForPurchaseAmountUntilValid(sc.nextLine());
+	private InputView() {
 	}
 
-	public static LastWeekWinningNumber printLastWeekWinningNumberAndInput() {
-		printLastWeekWinningNumberMessage();
-		return inputForLastWeekWinningNumberUntilValid(sc.nextLine());
-	}
-
-	public static BonusBall printBonusBallAndInput(LastWeekWinningNumber lastWeekWinningNumber) {
-		printBonusBallMessage();
-		return inputForBonusBallUntilValid(sc.nextLine(), lastWeekWinningNumber);
-	}
-
-	private static void printPurchaseAmountMessage() {
+	public static String printPurchaseAmountMessageAndInput() {
 		System.out.println(PURCHASE_AMOUNT_MESSAGE);
+		return sc.nextLine();
 	}
 
-	private static void printLastWeekWinningNumberMessage() {
+	public static String reInputIfInvalidPurchaseAmount() {
+		System.out.println(ERROR_PURCHASE_AMOUNT_MESSAGE);
+		return sc.nextLine();
+	}
+
+	public static String printManualPurchaseCountMessageAndInput() {
+		nextLine();
+		System.out.println(MANUAL_PURCHASE_COUNT_MESSAGE);
+		return sc.nextLine();
+	}
+
+	public static String reInputIfInvalidManualPurchaseCount() {
+		System.out.println(ERROR_MANUAL_PURCHASE_COUNT_MESSAGE);
+		return sc.nextLine();
+	}
+
+	public static void printManualLottoNumberMessageAndInput() {
+		nextLine();
+		System.out.println(MANUAL_LOTTO_NUMBER_MESSAGE);
+	}
+
+	public static String reInputIfInvalidLottoNumber() {
+		System.out.println(ERROR_LOTTO_NUMBER_MESSAGE);
+		return sc.nextLine();
+	}
+
+	public static String printLastWeekWinningNumberMessageAndInput() {
 		nextLine();
 		System.out.println(LAST_WEEK_WINNING_NUMBER_MESSAGE);
+		return sc.nextLine();
 	}
 
-	private static void printBonusBallMessage() {
+	public static String printBonusBallMessageAndInput() {
 		System.out.println(BONUS_BALL_MESSAGE);
+		return sc.nextLine();
 	}
 
-	public static void printErrorPurchaseAmountInvalidation() {
-		System.out.println(ERROR_PURCHASE_AMOUNT_MESSAGE);
-	}
-
-	public static void printErrorLastWeekWinningNumberInvalidation() {
-		System.out.println(ERROR_LAST_WEEK_WINNING_NUMBER_MESSAGE);
-	}
-
-	private static Money inputForPurchaseAmountUntilValid(String money) {
-		while (!Money.validate(money)) {
-			InputView.printErrorPurchaseAmountInvalidation();
-			money = sc.nextLine();
-		}
-
-		return Money.of(money);
-	}
-
-	private static LastWeekWinningNumber inputForLastWeekWinningNumberUntilValid(String lastWeekNumber) {
-		while (!LastWeekWinningNumber.validate(lastWeekNumber)) {
-			InputView.printErrorLastWeekWinningNumberInvalidation();
-			lastWeekNumber = sc.nextLine();
-		}
-
-		return LastWeekWinningNumber.of(lastWeekNumber);
-	}
-
-	private static BonusBall inputForBonusBallUntilValid(String bonusBall, LastWeekWinningNumber lastWeekWinningNumber) {
-		while(!(BonusBall.validate(bonusBall) && lastWeekWinningNumber.isNotContain(bonusBall))) {
-			InputView.printErrorBonusBallInvalidation();
-			bonusBall = sc.nextLine();
-		}
-
-		return BonusBall.from(bonusBall);
-	}
-
-	private static void printErrorBonusBallInvalidation() {
+	public static String reInputIfInvalidBonusBall() {
 		System.out.println(ERROR_BONUS_BALL_MESSAGE);
+		return sc.nextLine();
 	}
 
 	private static void nextLine() {
 		System.out.println();
+	}
+
+	public static String input() {
+		return sc.nextLine();
 	}
 }
