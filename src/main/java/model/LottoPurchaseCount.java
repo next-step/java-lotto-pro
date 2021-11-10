@@ -2,11 +2,16 @@ package model;
 
 public class LottoPurchaseCount {
 	public static final int LOTTO_PRICE = 1000;
+	public static final String MESSAGE_PRICE_MUST_BE_LARGER_THAN_ZERO = "PRICE_MUST_BE_LARGER_THAN_ZERO";
 
 	private final int purchaseCount;
 
 	public LottoPurchaseCount(String purchasePriceString) {
-		this.purchaseCount = Integer.parseInt(purchasePriceString) / LOTTO_PRICE;
+		int purchaseCount = Integer.parseInt(purchasePriceString) / LOTTO_PRICE;
+		if (purchaseCount == 0) {
+			throw new IllegalArgumentException(MESSAGE_PRICE_MUST_BE_LARGER_THAN_ZERO);
+		}
+		this.purchaseCount = purchaseCount;
 	}
 
 	public int get() {

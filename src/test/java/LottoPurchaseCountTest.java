@@ -21,6 +21,14 @@ public class LottoPurchaseCountTest {
 	}
 
 	@Test
+	@DisplayName("0원을 제공하면 예외")
+	void test_constructor3() {
+		assertThatThrownBy(() -> new LottoPurchaseCount("0"))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(LottoPurchaseCount.MESSAGE_PRICE_MUST_BE_LARGER_THAN_ZERO);
+	}
+
+	@Test
 	@DisplayName("호출시 구매한 횟수 반환")
 	void test_get1() {
 		assertThat(new LottoPurchaseCount("1000").get()).isEqualTo(1);
