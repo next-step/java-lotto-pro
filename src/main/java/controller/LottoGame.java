@@ -11,8 +11,8 @@ import view.InputView;
 import view.ResultView;
 
 public class LottoGame {
-	InputView inputView = new InputView();
-	ResultView resultView = new ResultView();
+	private final InputView inputView = new InputView();
+	private final ResultView resultView = new ResultView();
 
 	public void start() {
 		LottoPurchaseCount lottoPurchaseCount = requestPurchasingPrice();
