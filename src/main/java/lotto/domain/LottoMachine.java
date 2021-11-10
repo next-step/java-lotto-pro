@@ -30,9 +30,8 @@ public class LottoMachine {
 	}
 
 	public Lottos generateLottos(int purchaseQuantity) {
-		List<Lotto> lottos = IntStream.range(RANGE_MIN_LIST_INDEX, purchaseQuantity)
+		return IntStream.range(RANGE_MIN_LIST_INDEX, purchaseQuantity)
 			.mapToObj(lotto -> new Lotto(generateLottoNumber()))
-			.collect(Collectors.toList());
-		return new Lottos(lottos);
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
 	}
 }
