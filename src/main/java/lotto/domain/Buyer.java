@@ -16,13 +16,13 @@ public class Buyer {
 	}
 
 	private void validation() {
-		if(purchaseAmount.isShortMoney(manualNumber)){
+		if (purchaseAmount.isShortMoney(manualNumber)) {
 			throw new IllegalArgumentException(ERROR_SHORT_MONEY);
 		}
 	}
 
-	public int getPurchaseQuantity() {
-		return purchaseAmount.getPurchaseQuantity();
+	public int getManualNumber() {
+		return manualNumber.getManualNumber();
 	}
 
 	public double getAmount() {
