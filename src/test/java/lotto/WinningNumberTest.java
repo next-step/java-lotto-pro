@@ -13,7 +13,7 @@ public class WinningNumberTest {
 
     @BeforeEach
     void setUp() {
-        winningNumber = WinningNumber.createWinningNumber(new String[]{"1", "2", "3", "4", "5", "6"});
+        winningNumber = WinningNumber.createWinningNumber(new String[]{"1", "2", "3", "4", "5", "6"}, 7);
     }
 
     @DisplayName("당첨 번호 객체의 배열 길이 확인")
@@ -31,7 +31,14 @@ public class WinningNumberTest {
     @DisplayName("당첨 번호가 6개가 아니면 에러 발생")
     @Test
     void validNumberLength() {
-        assertThatThrownBy(() -> winningNumber = WinningNumber.createWinningNumber(new String[]{"1", "2", "3", "4", "5"}))
+        assertThatThrownBy(() -> winningNumber = WinningNumber.createWinningNumber(new String[]{"1", "2", "3", "4", "5"}, 7))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("보너스 번호가 당첨 번호에 존재하는 번호이면 에러 발생")
+    @Test
+    void validateDuplicate() {
+        assertThatThrownBy(() -> winningNumber = WinningNumber.createWinningNumber(new String[]{"1", "2", "3", "4", "5", "6"}, 6))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
