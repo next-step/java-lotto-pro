@@ -1,11 +1,11 @@
 package lotto.service;
 
 import java.util.Arrays;
-import java.util.Spliterator;
 import java.util.stream.Collectors;
 
-import lotto.common.Calculator;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
+
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
@@ -15,32 +15,36 @@ import lotto.view.ResultView;
 
 public class LottoStore {
 
-	public static final String REGEX_DELIMITER = ",";
-	private final InputView inputView;
-	private final ResultView resultView;
 	private final LottoMachine lottoMachine;
 
 	public LottoStore() {
-		inputView = new InputView();
-		resultView = new ResultView();
 		lottoMachine = new LottoMachine();
 	}
 
 	public void start() {
 		PurchaseAmount purchaseAmount = pay();
-		resultView.printLottoPurchaseQuantity(purchaseAmount.getPurchaseQuantity());
+		ResultView.printLottoPurchaseQuantity(purchaseAmount.getPurchaseQuantity());
 
 		Lottos userLottos = buyingLotto(purchaseAmount.getPurchaseQuantity());
 
 		WinningLotto winningLotto = getLastWeekWinningLotto();
-		WinningRecord winningRecord = winningLotto.match(userLottos);
-		double profitRate = Calculator.profitRate(purchaseAmount.getAmount(), winningRecord.getRevenue());
-		resultView.printWinningStat(winningRecord, profitRate);
+		WinningRecord winningRecord = getWinngRecord(winningLotto, userLottos);
+
+		double profitRate = winningRecord.profitRate(purchaseAmount.getAmount());
+		ResultView.printWinningStat(winningRecord, profitRate);
+	}
+
+	private WinningRecord getWinngRecord(WinningLotto winningLotto, Lottos userLottos) {
+		try {
+			return winningLotto.match(userLottos, new LottoNumber(InputView.inputBonusNumber()));
+		} catch (IllegalArgumentException e) {
+			return getWinngRecord(winningLotto, userLottos);
+		}
 	}
 
 	private PurchaseAmount pay() {
 		try {
-			return new PurchaseAmount(Integer.parseInt(inputView.inputPurchaseAmount()));
+			return new PurchaseAmount(InputView.inputPurchaseAmount());
 		} catch (IllegalArgumentException e) {
 			return pay();
 		}
@@ -48,9 +52,10 @@ public class LottoStore {
 
 	private WinningLotto getLastWeekWinningLotto() {
 		try {
-			return new WinningLotto(Arrays.stream(inputView.inputLastWeekLottoNumber().split(REGEX_DELIMITER))
+			return new WinningLotto(Arrays.stream(InputView.inputLastWeekLottoNumber())
 				.map(Integer::valueOf)
-				.collect(Collectors.toList()));
+				.map(LottoNumber::new)
+				.collect(Collectors.toSet()));
 		} catch (IllegalArgumentException e) {
 			return getLastWeekWinningLotto();
 		}
@@ -58,7 +63,7 @@ public class LottoStore {
 
 	private Lottos buyingLotto(int purchaseQuantity) {
 		Lottos lottos = lottoMachine.generateLottos(purchaseQuantity);
-		resultView.printLottos(lottos);
+		ResultView.printLottos(lottos);
 		return lottos;
 	}
 }

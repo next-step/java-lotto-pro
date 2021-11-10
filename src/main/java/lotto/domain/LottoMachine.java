@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,24 +13,24 @@ public class LottoMachine {
 	public static final int RANGE_MIN_LIST_INDEX = 0;
 	public static final int RANGE_MAX_LIST_INDEX = 6;
 
-	private final List<Integer> lottoRangeNumbers;
+	private final List<LottoNumber> lottoRangeNumbers;
 
 	public LottoMachine() {
 		this.lottoRangeNumbers = IntStream.range(RANGE_MIN_NUMBER, RANGE_MAX_NUMBER)
 			.boxed()
+			.map(LottoNumber::new)
 			.collect(Collectors.toList());
 	}
 
-	private List<Integer> generateLottoNumber() {
+	private Set<LottoNumber> generateLottoNumber() {
 		Collections.shuffle(this.lottoRangeNumbers);
 		return lottoRangeNumbers.stream()
 			.limit(RANGE_MAX_LIST_INDEX)
-			.sorted()
-			.collect(Collectors.toList());
+			.collect(Collectors.toSet());
 	}
 
 	public Lottos generateLottos(int purchaseQuantity) {
-		List<Lotto> lottos = IntStream.range(0, purchaseQuantity)
+		List<Lotto> lottos = IntStream.range(RANGE_MIN_LIST_INDEX, purchaseQuantity)
 			.mapToObj(lotto -> new Lotto(generateLottoNumber()))
 			.collect(Collectors.toList());
 		return new Lottos(lottos);

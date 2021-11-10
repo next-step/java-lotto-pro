@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -10,37 +9,43 @@ import java.util.stream.Collectors;
 public class Lotto {
 
 	private static final int LOTTO_SIZE = 6;
-	public static final String INVALID_NUMBER = "번호가 올바르지 않습니다.";
+	public static final String INVALID_NUMBER = "중복되지 않은 6개의 숫자를 입력해주세요.";
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public Lotto(List<Integer> numbers) {
+	public Lotto(Set<LottoNumber> numbers) {
 
-		Set<Integer> numbersCheck = new HashSet<>(numbers);
-		if (isLottoSize(numbersCheck.size())) {
-			throw new IllegalArgumentException(INVALID_NUMBER);
-		}
+		validationLotto(numbers);
 
 		this.lottoNumbers = Collections.unmodifiableList(numbers.stream()
 			.sorted()
-			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 
+	}
+
+	private void validationLotto(Set<LottoNumber> numbers) {
+		if (isLottoSize(numbers.size())) {
+			throw new IllegalArgumentException(INVALID_NUMBER);
+		}
 	}
 
 	private boolean isLottoSize(int size) {
 		return LOTTO_SIZE != size;
 	}
 
-	public Rank match(Lotto lotto) {
+	public Rank match(Lotto lotto, LottoNumber bonusNumber) {
 		return Rank.rank(this.lottoNumbers.stream()
-			.filter(lotto.lottoNumbers::contains)
-			.count());
+				.filter(lotto.lottoNumbers::contains)
+				.count(),
+			lotto.contains(bonusNumber));
 	}
 
-	@Override
-	public String toString() {
-		return String.join(",", this.lottoNumbers.toString());
+	public List<LottoNumber> getLottoNumbers() {
+		return lottoNumbers;
+	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
 	}
 
 	@Override

@@ -1,10 +1,13 @@
 package lotto.domain;
 
+import java.util.stream.Stream;
+
 public enum Rank {
-	FIRST_PLACE(6, "200_000_000_000"),
-	SECOND_PLACE(5, "1_500_000"),
-	THIRD_PLACE(4, "50_000"),
-	FOURTH_PLACE(3, "5_000"),
+	FIRST(6, "200_000_000_000"),
+	SECOND(5, "30_000_000"),
+	THIRD(5, "1_500_000"),
+	FOURTH(4, "50_000"),
+	FIFTH(3, "5_000"),
 	FAILED(0, "0");
 
 	public static final String REPLACEMENT_EMPTY = "";
@@ -18,36 +21,34 @@ public enum Rank {
 		this.prizeMoney = prizeMoney;
 	}
 
-	public static Rank rank(long matchCount) {
-		if (isFirstPlace(matchCount)) {
-			return FIRST_PLACE;
+	public static Rank rank(long matchCount, boolean matchBonus) {
+		if (isFailed(matchCount)) {
+			return FAILED;
 		}
-		if (isSecondPlace(matchCount)) {
-			return SECOND_PLACE;
+
+		if(SECOND.isMatchCount(matchCount)){
+			return rankBonus(matchBonus);
 		}
-		if (isThirdPlace(matchCount)) {
-			return THIRD_PLACE;
-		}
-		if (isFourthPlace(matchCount)) {
-			return FOURTH_PLACE;
-		}
-		return FAILED;
+
+		return Stream.of(values())
+			.filter(rank -> rank.isMatchCount(matchCount))
+			.findFirst()
+			.orElse(FAILED);
 	}
 
-	private static boolean isFourthPlace(long matchCount) {
-		return FOURTH_PLACE.matchCount == matchCount;
+	private static Rank rankBonus(boolean matchBonus) {
+		if(matchBonus){
+			return SECOND;
+		}
+		return THIRD;
 	}
 
-	private static boolean isThirdPlace(long matchCount) {
-		return THIRD_PLACE.matchCount == matchCount;
+	private static boolean isFailed(long matchCount) {
+		return FIFTH.matchCount > matchCount;
 	}
 
-	private static boolean isSecondPlace(long matchCount) {
-		return SECOND_PLACE.matchCount == matchCount;
-	}
-
-	private static boolean isFirstPlace(long matchCount) {
-		return FIRST_PLACE.matchCount == matchCount;
+	private boolean isMatchCount(long matchCount) {
+		return this.matchCount == matchCount;
 	}
 
 	public long getPrizeMoney() {

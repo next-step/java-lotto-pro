@@ -5,15 +5,19 @@ import java.util.Objects;
 public class PurchaseAmount {
 	public static final int SALE_PRICE = 1000;
 	public static final int CHANGE = 0;
-	public static final String INVALID_AMOUNT = "금액이 올바르지 않습니다.";
+	public static final String INVALID_AMOUNT = "로또 한장에 1000원 입니다. 금액을 확인해주세요.";
 
 	private final int amount;
 
 	public PurchaseAmount(int money) {
+		validationPurchaseAmount(money);
+		this.amount = money;
+	}
+
+	private void validationPurchaseAmount(int money) {
 		if (isNotAmountCorrect(money)) {
 			throw new IllegalArgumentException(INVALID_AMOUNT);
 		}
-		this.amount = money;
 	}
 
 	private boolean isNotAmountCorrect(int amount) {

@@ -2,19 +2,34 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+import java.util.stream.IntStream;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
-	@Test
-	public void init() {
-		LottoNumber lottoNumber = new LottoNumber(1);
-		assertThat(lottoNumber).isEqualTo(new LottoNumber(1));
+	public static IntStream provideLottoNumber() {
+		return IntStream.range(1, 45);
 	}
 
-	@Test
-	public void 로또_번호_1_에서_45_숫자_검증() {
-		assertThatThrownBy(() -> new LottoNumber(80))
-			.isInstanceOf(IllegalArgumentException.class);
+	@DisplayName("유효 범위 내의 로또 번호 생성")
+	@ParameterizedTest
+	@MethodSource("provideLottoNumber")
+	void validLottoNumber(int number) {
+		LottoNumber lottoNumber = new LottoNumber(number);
+
+		assertThat(lottoNumber).isEqualTo(new LottoNumber(number));
+	}
+
+	@DisplayName("유효 범위 외의 로또 번호 생성")
+	@ParameterizedTest
+	@ValueSource(ints = {0, 80, 120})
+	void invalidLottoNumber(int number) {
+		assertThatThrownBy(() -> new LottoNumber(number))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("로또 번호는 1 ~ 45 사이의 값을 입력하세요.");
 	}
 
 }
