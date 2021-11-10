@@ -41,10 +41,6 @@ public class Lotto {
         }
     }
 
-    public int size() {
-        return lottoNumbers.size();
-    }
-
     private boolean compare(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }

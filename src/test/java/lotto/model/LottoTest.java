@@ -17,7 +17,6 @@ public class LottoTest {
     void lottoCreate() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
-        assertThat(lotto.size()).isEqualTo(LOTTO_SIZE);
     }
 
     @DisplayName("로또 번호가 갯수가 맞지 않을때 나오는 에러 검증")

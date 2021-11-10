@@ -39,11 +39,11 @@ public class LottoCreateFactory {
         return new Lottos(lottoGroup);
     }
 
-    public static Lotto createLotto(List<Integer> numbers) {
-        return new Lotto(numbers);
-    }
-
     public static WinningLotto createWinningLotto(List<Integer> winLottoNumbers, int bonusNumber) {
         return new WinningLotto(createLotto(winLottoNumbers), new LottoNumber(bonusNumber));
+    }
+
+    private static Lotto createLotto(List<Integer> numbers) {
+        return new Lotto(numbers);
     }
 }
