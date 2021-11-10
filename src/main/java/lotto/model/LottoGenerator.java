@@ -13,6 +13,7 @@ import lotto.exception.LottoException;
 import lotto.util.RandomUtil;
 
 public class LottoGenerator {
+	private static final String IS_NUMBER_REGEX = "[1-9]";
 	private final Money money;
 	private final List<String> inputNumberList;
 
@@ -37,7 +38,7 @@ public class LottoGenerator {
 	}
 
 	private static void validInputSize(String input, int inputNumberListSize) {
-		if (input == null || input.isEmpty() || !input.matches("[1-9]")) {
+		if (input == null || input.isEmpty() || !input.matches(IS_NUMBER_REGEX)) {
 			throw new LottoException(ErrorCode.NEGATIVE_AMOUNT_ERROR);
 		}
 
