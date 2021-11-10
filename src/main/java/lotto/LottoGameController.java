@@ -58,7 +58,7 @@ public class LottoGameController {
 
 	private static PositiveNumber getAutoLottoCount(Money purchaseMoney, int manualTicketSize) {
 		PositiveNumber autoLottoCount = Purchase.calculateCount(purchaseMoney);
-		autoLottoCount.minus(manualTicketSize);
+		autoLottoCount = autoLottoCount.minus(manualTicketSize);
 		return autoLottoCount;
 	}
 

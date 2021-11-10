@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-	private static final int LOTTO_NUMBER_COUNT = 6;
-
 	private final Set<LottoNumber> lottoNumbers;
 
 	private LottoTicket(Set<LottoNumber> lottoNumbers) {
@@ -28,7 +26,7 @@ public class LottoTicket {
 	}
 
 	private static void validate(Collection<Integer> numbersList, Set<LottoNumber> numbersSet) {
-		if (numbersList.size() != LOTTO_NUMBER_COUNT) {
+		if (numbersList.size() != LottoNumber.LOTTO_NUMBER_SIZE) {
 			throw new IllegalArgumentException(
 				ErrorMessage.LOTTO_NUMBER_COUNT_INVALID.value());
 		}

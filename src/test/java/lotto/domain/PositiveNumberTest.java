@@ -75,4 +75,17 @@ public class PositiveNumberTest {
 		assertThat(number.isGreaterThan(lessNumber1)).isEqualTo(true);
 		assertThat(number.isGreaterThan(lessNumber2)).isEqualTo(true);
 	}
+
+	@Test
+	@DisplayName("주어진 숫자와 마이너스를 하면 마이너스 된 숫자가 반환되어야 한다")
+	public void minusTest() {
+		// given
+		PositiveNumber number = PositiveNumber.of(10);
+
+		// when
+		PositiveNumber result = number.minus(9);
+
+		// then
+		assertThat(result).isEqualTo(PositiveNumber.of(1));
+	}
 }

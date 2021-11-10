@@ -21,7 +21,23 @@ public class RankCountsTest {
 
 		// when
 		RankCounts rankCounts = RankCounts.of(rankAndCount);
+
 		// then
 		assertThat(rankCounts).isEqualTo(RankCounts.of(rankAndCount));
+	}
+
+	@Test
+	@DisplayName("구매금액이 주어지면, 수익률을 계산한다")
+	public void calculateProfitRate() {
+		// given
+		Map<Rank, Integer> rankAndCount = new HashMap<>();
+		rankAndCount.put(Rank.FIFTH, 2);
+		RankCounts rankCounts = RankCounts.of(rankAndCount);
+
+		// when
+		double profitRate = rankCounts.calculateProfitRate(Money.of(10000));
+
+		// then
+		assertThat(profitRate).isEqualTo(1.0D);
 	}
 }

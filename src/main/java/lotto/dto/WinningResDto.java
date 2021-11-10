@@ -4,8 +4,8 @@ import java.util.Map;
 
 public class WinningResDto {
 
-	private Map<String, Integer> rankCounts;
-	private double profit;
+	private final Map<String, Integer> rankCounts;
+	private final double profit;
 
 	public WinningResDto(Map<String, Integer> rankCounts, double profit) {
 		this.rankCounts = rankCounts;

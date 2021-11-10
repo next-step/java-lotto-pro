@@ -44,23 +44,27 @@ public class LottoTicketsTest {
 	}
 
 	@Test
-	@DisplayName("로또 티켓을 추가할 수 있어야 한다")
-	public void addTest() {
+	@DisplayName("당첨번호가 주어지면 당첨갯수를 계산해야 한다")
+	public void countRanksTest() {
 		// given
-		LottoTickets tickets = LottoTickets.of();
 		LottoTicket ticket1 = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-		LottoTicket ticket2 = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-		LottoTicket ticket3 = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7));
+		LottoTicket ticket2 = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 45));
+		LottoTicket ticket3 = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 10));
 		List<LottoTicket> ticketList = Arrays.asList(ticket1, ticket2, ticket3);
+		LottoTickets lottoTickets = LottoTickets.of(ticketList);
+		LottoTicket lottoNumbers = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+		LottoNumber bonusNumber = LottoNumber.of(45);
+		WinningLotto winningLotto = WinningLotto.of(lottoNumbers, bonusNumber);
 
 		// when
-		tickets.add(ticket1);
-		tickets.add(ticket2);
-		tickets.add(ticket3);
+		RankCounts rankCounts = lottoTickets.countRanks(winningLotto);
 
 		// then
-		assertThat(tickets).isEqualTo(LottoTickets.of(ticketList));
-
+		assertThat(rankCounts.get(Rank.FIRST.name())).isEqualTo(1);
+		assertThat(rankCounts.get(Rank.SECOND.name())).isEqualTo(1);
+		assertThat(rankCounts.get(Rank.THIRD.name())).isEqualTo(1);
+		assertThat(rankCounts.get(Rank.FOURTH.name())).isEqualTo(0);
+		assertThat(rankCounts.get(Rank.FIFTH.name())).isEqualTo(0);
 	}
 
 }

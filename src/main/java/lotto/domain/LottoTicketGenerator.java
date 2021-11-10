@@ -5,28 +5,30 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicketGenerator {
 
-	private static final List<LottoNumber> candidates = new ArrayList<>();
+	private static final List<LottoNumber> CANDIDATES = new ArrayList<>();
 
 	static {
 		for (int i = LottoNumber.LOTTO_NUMBER_MINIMUM; i <= LottoNumber.LOTTO_NUMBER_MAXIMUM; i++) {
-			candidates.add(LottoNumber.of(i));
+			CANDIDATES.add(LottoNumber.of(i));
 		}
 	}
 
 	public static LottoTickets generateByCount(PositiveNumber count) {
-		LottoTickets tickets = LottoTickets.of();
-		for (int i = 0; i < count.toInt(); i++) {
-			tickets.add(generate());
-		}
-		return tickets;
+		List<LottoTicket> lottoTickets = IntStream.range(0, count.toInt())
+			.mapToObj(i -> generate())
+			.collect(Collectors.toList());
+		return LottoTickets.of(lottoTickets);
+
 	}
 
 	private static LottoTicket generate() {
-		Collections.shuffle(candidates);
-		Set<LottoNumber> numbers = new HashSet<>(candidates.subList(0, LottoNumber.LOTTO_NUMBER_SIZE));
+		Collections.shuffle(CANDIDATES);
+		Set<LottoNumber> numbers = new HashSet<>(CANDIDATES.subList(0, LottoNumber.LOTTO_NUMBER_SIZE));
 		return LottoTicket.of(numbers);
 	}
 

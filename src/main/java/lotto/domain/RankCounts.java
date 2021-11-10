@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class RankCounts {
 
@@ -16,12 +15,12 @@ public class RankCounts {
 		return new RankCounts(rankAndCount);
 	}
 
-	public Set<Map.Entry<Rank, Integer>> entrySet() {
-		return rankAndCount.entrySet();
-	}
-
 	public int get(String rankName) {
-		return this.rankAndCount.get(Rank.valueOf(rankName));
+		Rank rank = Rank.valueOf(rankName);
+		if (this.rankAndCount.containsKey(rank)) {
+			return this.rankAndCount.get(rank);
+		}
+		return 0;
 	}
 
 	@Override
@@ -40,4 +39,19 @@ public class RankCounts {
 	public int hashCode() {
 		return rankAndCount.hashCode();
 	}
+
+	public double calculateProfitRate(Money purchaseMoney) {
+		int totalPrizeMoney = calculateTotalPrize();
+		double result = (double)totalPrizeMoney / purchaseMoney.toInt();
+		return Math.floor(result * 100) / 100D;
+	}
+
+	private int calculateTotalPrize() {
+		return rankAndCount.entrySet()
+			.stream()
+			.map((entry) ->
+				entry.getKey().getPrize() * entry.getValue())
+			.reduce(0, Integer::sum);
+	}
+
 }

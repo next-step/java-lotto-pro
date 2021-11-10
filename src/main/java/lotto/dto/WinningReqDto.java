@@ -4,9 +4,9 @@ import java.util.List;
 
 public class WinningReqDto {
 
-	private List<Integer> winningNumbers;
+	private final List<Integer> winningNumbers;
 
-	private int bonusNumber;
+	private final int bonusNumber;
 
 	public WinningReqDto(List<Integer> winningNumbers, int bonusNumber) {
 		this.winningNumbers = winningNumbers;
