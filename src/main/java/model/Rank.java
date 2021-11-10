@@ -2,7 +2,6 @@ package model;
 
 public enum Rank {
 	FIRST(2000000000),
-	SECOND(0),
 	THIRD(1500000),
 	FOURTH(50000),
 	FIFTH(5000),
