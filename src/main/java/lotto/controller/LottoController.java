@@ -1,5 +1,9 @@
 package lotto.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import lotto.exception.LottoException;
 import lotto.model.LottoGenerator;
 import lotto.model.LottoResult;
@@ -26,12 +30,20 @@ public class LottoController {
 	private Lottos lottoGenerator() {
 		try {
 			Money inputMoney = Money.from(InputView.inputMoneyPurchaseLotto());
-			LottoGenerator lottoGenerator = LottoGenerator.from(inputMoney);
-			return Lottos.of(lottoGenerator.generateLottoNumbers(), inputMoney);
+			LottoGenerator lottoGenerator = LottoGenerator.of(inputMoney, generatePurchaseLotto());
+			return Lottos.of(lottoGenerator.generateInputLottoNumbers(), lottoGenerator.generateRandomLottoNumbers());
 		} catch (LottoException lottoException) {
 			OutputView.printErrorMessage(lottoException);
 			return lottoGenerator();
 		}
+	}
+
+	private List<String> generatePurchaseLotto() {
+		String count = InputView.inputPurchaseLottoCount();
+		InputView.inputPurchaseLottoNumberMent();
+		return Stream.generate(InputView::inputPurchaseLottoNumber)
+			.limit(Integer.parseInt(count))
+			.collect(Collectors.toList());
 	}
 
 	private WinningLottoNumbers winningLottoNumberGenerator() {
