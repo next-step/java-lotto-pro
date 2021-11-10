@@ -29,6 +29,10 @@ public class Buyer {
 		return purchaseAmount.getAmount();
 	}
 
+	public int getRemainingNumber() {
+		return purchaseAmount.getPurchaseQuantity() - manualNumber.getManualNumber();
+	}
+
 	public Lottos mergeLottos(Lottos targetLottos) {
 		return lottos.mergeLottos(targetLottos);
 	}

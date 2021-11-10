@@ -13,6 +13,10 @@ public class ManualNumber {
 		return manualNumber > number;
 	}
 
+	public int getManualNumber() {
+		return manualNumber;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -27,5 +31,4 @@ public class ManualNumber {
 	public int hashCode() {
 		return Objects.hash(manualNumber);
 	}
-
 }

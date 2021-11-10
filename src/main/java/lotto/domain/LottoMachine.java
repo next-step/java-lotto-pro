@@ -29,9 +29,9 @@ public class LottoMachine {
 			.collect(Collectors.toSet());
 	}
 
-	public Lottos generateLottos(int purchaseQuantity) {
-		return IntStream.range(RANGE_MIN_LIST_INDEX, purchaseQuantity)
+	public Lottos generateLottos(Buyer buyer) {
+		return buyer.mergeLottos(IntStream.range(RANGE_MIN_LIST_INDEX, buyer.getRemainingNumber())
 			.mapToObj(lotto -> new Lotto(generateLottoNumber()))
-			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new)));
 	}
 }
