@@ -5,56 +5,75 @@ import java.util.Objects;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_COUNT = 6;
-    private List<Integer> numbers;
+    private List<LottoNumber> numbers;
     private int matchCount = 0;
+    private LottoNumber bonusNumber;
+    private LottoReward reward;
 
-    public Lotto(){
-        numbers = new ArrayList<Integer>();
-        while(numbers.size() < LOTTO_NUMBER_COUNT) {
+    public Lotto() {
+        numbers = new ArrayList<LottoNumber>();
+        while (numbers.size() < LOTTO_NUMBER_COUNT) {
             getLottoNumber();
         }
     }
 
-    public Lotto(String numbers) throws RuntimeException{
+    public Lotto(String numbers) throws IllegalArgumentException {
         this(numbers, 0);
     }
 
-    public Lotto(String numbers, int matchCount){
-        List<Integer> lotto = StringUtil.mapToInteger(numbers);
-        if(lotto.size() < LOTTO_NUMBER_COUNT){
-            throw new RuntimeException("[ERROR] 숫자 " + LOTTO_NUMBER_COUNT + "개를 입력해야 합니다.");
+    public Lotto(String numbers, int matchCount) {
+        List<LottoNumber> lotto = StringUtil.mapToLotto(numbers);
+        if (lotto.size() < LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("[ERROR] 숫자 " + LOTTO_NUMBER_COUNT + "개를 입력해야 합니다.");
         }
         this.numbers = lotto;
         this.matchCount = matchCount;
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 
-    public void getLottoNumber(){
-        int number = LottoMain.getLottoNumber();
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 
-        if( ! numbers.contains(number)){
+    public void setBonusNumber(LottoNumber bonusNumber) {
+        this.bonusNumber = bonusNumber;
+    }
+
+    public void getLottoNumber() {
+        LottoNumber number = new LottoNumber();
+
+        if (!numbers.contains(number)) {
             numbers.add(number);
         }
     }
 
     public void match(Lotto winLotto) {
-        List<Integer> winNumber = winLotto.getNumbers();
-        for(int number : winNumber){
+        List<LottoNumber> winNumber = winLotto.getNumbers();
+        for (LottoNumber number : winNumber) {
             isContainNumber(number);
         }
+        boolean isContainsBonusNumber = isContainsNumber(winLotto.getBonusNumber());
+        reward = LottoReward.valueOf(matchCount, isContainsBonusNumber);
     }
 
-    public void isContainNumber(int number){
-        if(numbers.contains(number)) {
+    public void isContainNumber(LottoNumber number) {
+        if (numbers.contains(number)) {
             matchCount++;
         }
     }
 
-    public boolean isMatch(int matchCount){
-        if(this.matchCount == matchCount){
+    public boolean isContainsNumber(LottoNumber number) {
+        if (numbers.contains(number)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isMatch(LottoReward reward) {
+        if (this.reward.equals(reward)) {
             return true;
         }
         return false;

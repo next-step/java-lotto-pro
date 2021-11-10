@@ -3,37 +3,38 @@ import java.util.List;
 import java.util.Objects;
 
 public class StringUtil {
-    private StringUtil(){
+    private StringUtil() {
     }
 
-    public static String[] splitString(String str){
+    public static String[] splitString(String str) {
         return str.split(",");
     }
-    public static String[] splitString(String str, String delimiter){
+
+    public static String[] splitString(String str, String delimiter) {
         return str.split(delimiter);
     }
 
-    public static String removeParenthesis(String str){
-        return str.substring(1, str.length() - 1 );
+    public static String removeParenthesis(String str) {
+        return str.substring(1, str.length() - 1);
     }
 
-    public static String findCharUseIndex(int index){
+    public static String findCharUseIndex(int index) {
         String abc = "abc";
         return Character.toString(abc.charAt(index));
     }
 
-    public static boolean isNullOrEmpty(String str){
-        if(Objects.isNull(str)) {
+    public static boolean isNullOrEmpty(String str) {
+        if (Objects.isNull(str)) {
             return true;
         }
-        if(str.isEmpty()) {
+        if (str.isEmpty()) {
             return true;
         }
         return false;
     }
 
-    public static boolean isOneNumber(String str){
-        if(str.length() == 1) {
+    public static boolean isOneNumber(String str) {
+        if (str.length() == 1) {
             return true;
         }
         return false;
@@ -43,8 +44,18 @@ public class StringUtil {
         String[] numberStringArray = splitString(numbers);
         List<Integer> numberList = new ArrayList<Integer>();
 
-        for(String numberString : numberStringArray){
+        for (String numberString : numberStringArray) {
             numberList.add(Integer.parseInt(numberString));
+        }
+        return numberList;
+    }
+
+    public static List<LottoNumber> mapToLotto(String numbers){
+        String[] numberStringArray = splitString(numbers);
+        List<LottoNumber> numberList = new ArrayList<LottoNumber>();
+
+        for (String numberString : numberStringArray) {
+            numberList.add(new LottoNumber(Integer.parseInt(numberString)));
         }
         return numberList;
     }

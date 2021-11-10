@@ -9,25 +9,25 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTest {
 
     @Test
-    public void issueLotto(){
+    public void issueLotto() {
         assertThat(new Lotto().getNumbers().size()).isEqualTo(6);
     }
 
     @Test
-    public void issueLottoUseString(){
+    public void issueLottoUseString() {
         assertThat(new Lotto("1,2,3,4,5,6").getNumbers().size()).isEqualTo(6);
     }
 
     @Test
-    public void issueLottoRuntimeException(){
+    public void issueLottoIllegalArgumentException() {
         assertThatThrownBy(() -> new Lotto("1,2,3,4,5"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void isContainNumberTest(){
+    public void isContainNumberTest() {
         Lotto lotto = new Lotto("1,2,3,4,5,6");
-        lotto.isContainNumber(6);
+        lotto.isContainNumber(new LottoNumber(6));
         assertThat(lotto).isEqualTo(new Lotto("1,2,3,4,5,6", 1));
     }
 }

@@ -5,7 +5,7 @@ public class User {
     private BigInteger money;
     private Lottos lottoList;
 
-    public User(BigInteger money) {
+    public User(BigInteger money){
         this.money = money;
         this.lottoList = new Lottos();
     }
@@ -18,32 +18,38 @@ public class User {
         return lottoList;
     }
 
-    public void buyLotto(){
+    public void buyLottos() {
+        while (hasMoney()) {
+            buyLotto();
+        }
+    }
+
+    public void buyLotto() {
         expendMoney();
         lottoList.add(new Lotto());
     }
 
-    private void expendMoney(){
+    private void expendMoney() {
         this.money = this.money.subtract(BigInteger.valueOf(lottoPrice));
     }
 
-    public boolean hasMoney(){
-        return this.money.compareTo(BigInteger.valueOf(lottoPrice)) >= 0 ;
+    public boolean hasMoney() {
+        return this.money.compareTo(BigInteger.valueOf(lottoPrice)) >= 0;
     }
 
-    public int howManyLotto(){
+    public int howManyLotto() {
         return lottoList.size();
     }
 
-    public void checkMatch(Lotto lotto){
+    public void checkMatch(Lotto lotto) {
         lottoList.checkMatch(lotto);
     }
 
-    public int match(int matchCount){
-        return lottoList.match(matchCount);
+    public int getMatchLottoCount(LottoReward reward) {
+        return lottoList.getMatchLottoCount(reward);
     }
 
-    public double getProfitRate(){
+    public double getProfitRate() {
         return Double.parseDouble(String.valueOf(lottoList.getProfit())) / Double.parseDouble(String.valueOf(lottoPrice * howManyLotto()));
     }
 }

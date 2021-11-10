@@ -1,27 +1,48 @@
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoGame {
-    private User user;
+    public static List<Integer> numbers = new ArrayList<>();
 
-    public LottoGame() {
-        user = new User(new BigInteger(InputView.inputMoney()));
+    static {
+        for (int i = 1; i < 45; i++) {
+            numbers.add(i);
+        }
     }
 
-    public void start(){
-        while (user.hasMoney()){
-            user.buyLotto();
-        }
+    public void start() {
+        String money = InputView.inputMoney();
+        User user = new User(new BigInteger(money));
+        user.buyLottos();
 
         ResultView.printBuyResult(user.howManyLotto());
         ResultView.printLottoList(user.getLottoList());
 
-        user.checkMatch(inputWinLotto());
+        Lotto lotto = inputWinLotto();
 
+        LottoNumber bonusNumber = null;
+        do {
+            bonusNumber = inputBonusNumber();
+        } while (lotto.isContainsNumber(bonusNumber));
+        lotto.setBonusNumber(bonusNumber);
+
+        user.checkMatch(lotto);
         ResultView.printResult(user);
-
     }
 
-    public Lotto inputWinLotto(){
+    public Lotto inputWinLotto() {
         return new Lotto(InputView.inputWinLotto());
+    }
+
+    public LottoNumber inputBonusNumber() {
+        LottoNumber number = null;
+        try {
+            number = new LottoNumber(InputView.inputBonusNumber());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            inputBonusNumber();
+        }
+        return number;
     }
 }
