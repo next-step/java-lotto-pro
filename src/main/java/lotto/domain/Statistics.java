@@ -7,8 +7,8 @@ public class Statistics {
     private final EnumMap<Ranking, Integer> rankingMap = new EnumMap<Ranking, Integer>(Ranking.class);
 
     public void record(Ranking ranking) {
-        rankingMap.computeIfPresent(ranking, (key,value) -> value +1);
-        rankingMap.putIfAbsent(ranking,1);
+        rankingMap.computeIfPresent(ranking, (key, value) -> value + 1);
+        rankingMap.putIfAbsent(ranking, 1);
     }
 
     public Integer getCount(Ranking ranking) {

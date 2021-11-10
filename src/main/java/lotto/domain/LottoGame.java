@@ -1,12 +1,13 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoGame {
-    private int tryCount;
+    private TryCount tryCount;
     private List<LottoBalls> lottoBallsList;
 
-    public LottoGame(int tryCount, List<LottoBalls> lottoBalls) {
+    public LottoGame(TryCount tryCount, List<LottoBalls> lottoBalls) {
         this.tryCount = tryCount;
         this.lottoBallsList = lottoBalls;
     }
@@ -15,12 +16,16 @@ public class LottoGame {
         this.lottoBallsList = lottoBalls;
     }
 
-    public int getTryCount() {
-        return tryCount;
+    public int getManualTryCount() {
+        return tryCount.getManualTryCount();
+    }
+
+    public int getAutoTryCount() {
+        return tryCount.getAutoTryCount();
     }
 
     public List<LottoBalls> getLottoBallsList() {
-        return lottoBallsList;
+        return Collections.unmodifiableList(lottoBallsList);
     }
 
     public Statistics calculateLottoResult(WinningBalls winningBalls) {
