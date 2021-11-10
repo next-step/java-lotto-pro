@@ -18,7 +18,7 @@ public class LottoWinningNumbersTest {
     @Test
     void 당첨번호는_보너스볼과_다른_번호이다() {
         LottoNumbers lottoWinningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoBonusNumber = new LottoNumber(7);
+        LottoNumber lottoBonusNumber = LottoNumber.from(7);
 
         LottoWinningNumbers winningNumbers = new LottoWinningNumbers(lottoWinningNumbers, lottoBonusNumber);
 
@@ -28,7 +28,7 @@ public class LottoWinningNumbersTest {
     @Test
     void 보너스볼은_당첨번호와_같을_수_없다() {
         LottoNumbers lottoWinningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoBonusNumber = new LottoNumber(6);
+        LottoNumber lottoBonusNumber = LottoNumber.from(6);
 
         ThrowingCallable throwingCallable = () -> new LottoWinningNumbers(lottoWinningNumbers, lottoBonusNumber);
 
@@ -52,7 +52,7 @@ public class LottoWinningNumbersTest {
     public void 로또번호와_당첨번호_비교_후_당첨결과_반환(List<Integer> inputWinningNumbers, int inputLottoBonusNumber, LottoRank rank) {
         //given
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new LottoNumbers(inputWinningNumbers), new LottoNumber(inputLottoBonusNumber));
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new LottoNumbers(inputWinningNumbers), LottoNumber.from(inputLottoBonusNumber));
 
         //when
         LottoRank lottoRank = lottoWinningNumbers.compareLottoNumbers(lottoNumbers);

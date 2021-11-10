@@ -33,7 +33,7 @@ public class LottoController {
 
     private LottoNumber inputLottoBonusNumber() {
         printInputLottoBonusNumber();
-        return new LottoNumber(inputBonusNumber());
+        return LottoNumber.from(inputBonusNumber());
     }
 
     private void play(LottoPurchase lottoPurchase, LottoTicket lottoTicket, LottoWinningNumbers lottoWinningNumbers) {

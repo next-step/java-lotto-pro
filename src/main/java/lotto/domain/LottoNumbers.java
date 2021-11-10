@@ -19,7 +19,7 @@ public class LottoNumbers {
         validateSize(lottoNumbers);
         lottoNumbers.sort(naturalOrder());
         this.lottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 

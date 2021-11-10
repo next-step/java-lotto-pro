@@ -30,7 +30,7 @@ class LottoResultTest {
         //given
         LottoPurchase lottoPurchase = new LottoPurchase(5000);
         LottoTicket lottoTicket = new LottoTicket(generateLottoTicket());
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 11, 12, 13)), new LottoNumber(7));
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 11, 12, 13)), LottoNumber.from(7));
 
         //when
         LottoResult lottoResult = LottoResult.of(lottoPurchase, lottoTicket, lottoWinningNumbers);
@@ -49,7 +49,7 @@ class LottoResultTest {
         //given
         LottoPurchase lottoPurchase = new LottoPurchase(5000);
         LottoTicket lottoTicket = new LottoTicket(generateLottoTicket());
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 11, 12, 13)), new LottoNumber(7));
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 11, 12, 13)), LottoNumber.from(7));
 
         //when
         LottoResult lottoResult = LottoResult.of(lottoPurchase, lottoTicket, lottoWinningNumbers);
