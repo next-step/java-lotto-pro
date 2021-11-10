@@ -17,31 +17,21 @@ public class Lotto {
     }
 
     public WinningNumberMatchResult winningNumberMatch(Lotto winningNumbers, LottoNumber bonusNumber) {
-        int winningNumberMatchCount = 0;
+        int winningNumberMatchCount = (int) winningNumbers.numbers
+                .stream()
+                .filter(this::contains)
+                .mapToInt(LottoNumber::getNumber)
+                .count();
 
-        for (LottoNumber winningNumber : winningNumbers.numbers) {
-            winningNumberMatchCount += winningNumberMatchCount(winningNumber.getNumber());
-        }
-        return new WinningNumberMatchResult(winningNumberMatchCount, isBonusNumberMatch(bonusNumber));
+        return new WinningNumberMatchResult(winningNumberMatchCount, contains(bonusNumber));
     }
 
     public List<LottoNumber> lottoNumbers() {
         return new ArrayList<>(this.numbers);
     }
 
-    private boolean isBonusNumberMatch(LottoNumber bonusNumber) {
-        return this.numbers.contains(bonusNumber);
-    }
-
-    private int winningNumberMatchCount(Integer winningNumber) {
-        if (isWinningNumberMatch(winningNumber)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    private boolean isWinningNumberMatch(Integer winningNumber) {
-        return this.numbers.contains(new LottoNumber(winningNumber));
+    private boolean contains(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
     private void numberCountValid(List<LottoNumber> lottoNumbers) {
