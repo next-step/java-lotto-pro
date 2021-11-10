@@ -7,25 +7,25 @@ import java.util.Objects;
 public class RewardCalculator {
 	public static final int DEFAULT_COUNT = 0;
 
-	private final Map<Rank, Integer> rankMap;
+	private final Map<Rank, Integer> rankMatchingCounts;
 
 	public RewardCalculator() {
-		this.rankMap = new HashMap<>();
+		this.rankMatchingCounts = new HashMap<>();
 	}
 
 	public void addCount(Rank rank) {
-		int rankCount = rankMap.getOrDefault(rank, DEFAULT_COUNT);
-		rankMap.put(rank, rankCount + 1);
+		int rankCount = rankMatchingCounts.getOrDefault(rank, DEFAULT_COUNT);
+		rankMatchingCounts.put(rank, rankCount + 1);
 	}
 
 	public int getCount(Rank rank) {
-		return rankMap.getOrDefault(rank, DEFAULT_COUNT);
+		return rankMatchingCounts.getOrDefault(rank, DEFAULT_COUNT);
 	}
 
 	public int sum() {
 		int sum = 0;
-		for (Rank rank : rankMap.keySet()) {
-			sum += rankMap.get(rank) * rank.getReward();
+		for (Rank rank : rankMatchingCounts.keySet()) {
+			sum += rankMatchingCounts.get(rank) * rank.getReward();
 		}
 		return sum;
 	}
@@ -37,11 +37,11 @@ public class RewardCalculator {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		RewardCalculator that = (RewardCalculator)o;
-		return Objects.equals(rankMap, that.rankMap);
+		return Objects.equals(rankMatchingCounts, that.rankMatchingCounts);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(rankMap);
+		return Objects.hash(rankMatchingCounts);
 	}
 }
