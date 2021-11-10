@@ -10,7 +10,7 @@ public class ParseUtility {
 
     public static LottoTicket StringToLottoTicket(String inputWinningNumber, int bonusNumber) {
         return new LottoTicket(Arrays.stream(inputWinningNumber
-                .split(SPLIT_DELIMITER))
+                        .split(SPLIT_DELIMITER))
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList()), bonusNumber);

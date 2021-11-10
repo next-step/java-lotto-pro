@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
-
 public enum Prize {
     MISS(0, 0),
     FIFTH(3, 5_000),
@@ -16,15 +14,6 @@ public enum Prize {
     Prize(int matchCount, int prizeMoney) {
         this.countOfMatch = matchCount;
         this.prizeMoney = prizeMoney;
-    }
-
-    public int getPrizeMoney() {
-        return prizeMoney;
-    }
-
-
-    public int getCountOfMatch() {
-        return countOfMatch;
     }
 
     public static Prize valueOf(int countOfMatch, boolean matchBonus) {
@@ -49,5 +38,13 @@ public enum Prize {
             prizeResult = prize;
         }
         return prizeResult;
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 }
