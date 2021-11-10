@@ -107,3 +107,11 @@
 - [X] LottoRanks -> LottoResult 고민해보기
 - [X] view,controller,service 플로우 리팩토링
 
+### 리팩토링
+
+- [X] 수동,자동 타입 BuyType ENUM 추가
+- [X] `LottoBuyer` 도메인 추가 기존에 구입 한 로또를 변수로 관리하면서 애매한 부분이 많았는데 구매금액과, 구매 로또의 상태를 가지는 도메인이 있어야 되겠다고 생각해서 추가했습니다.
+- [X] `LottoService` 인스턴스 변수 간소화 리팩토링
+- [X] 컨트롤러 및 전반적인 프로세스 개선
+- [X] 기존 로또랜덤 번호 추상화 객체를 제거
+- [X] `LottoNumbersFactory` 추가, `List<LottoNumber>` 를 캐싱처리  
