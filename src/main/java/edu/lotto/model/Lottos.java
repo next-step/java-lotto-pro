@@ -30,8 +30,13 @@ public class Lottos {
 	 * 수동으로 입력한 Lotto 번호 등록
 	 * @param manualLottoNumbers
 	 */
-	public void setManualLottos(List<Lotto> manualLottoNumbers) {
-		this.lottos.addAll(manualLottoNumbers);
+	public void setManualLottos(List<String> manualLottoNumbers) {
+		// TODO
+	}
+
+	private List<Lotto> stringListToLottoList(List<String> manualLottoNumbers) {
+		List<Lotto> manualLottos = new ArrayList<Lotto>();
+		return manualLottos;
 	}
 
 	/**

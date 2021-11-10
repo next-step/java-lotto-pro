@@ -26,7 +26,8 @@ public class AutomaticLotto {
 		int perchaseAmount = Integer.parseInt(getPerchaseAmount());
 		int perchaseLottoCount = getLottoCount(perchaseAmount);
 		int manualCount = getManualLottoCount(perchaseLottoCount);
-		calcLottoResults(perchaseAmount, perchaseLottoCount, manualCount);
+		List<String> manualLottoNumbers = getManualLottoNumbers(manualCount);
+		calcLottoResults(perchaseAmount, perchaseLottoCount, manualCount, manualLottoNumbers);
 	}
 
 	/**
@@ -35,8 +36,9 @@ public class AutomaticLotto {
 	 * @param perchaseLottoCount
 	 * @param manualCount
 	 */
-	public static void calcLottoResults(int perchaseAmount, int perchaseLottoCount, int manualCount) {
+	public static void calcLottoResults(int perchaseAmount, int perchaseLottoCount, int manualCount, List<String> manualLottoNumbers) {
 		Lottos lottos = new Lottos();
+		lottos.setManualLottos(manualLottoNumbers);
 		lottos.setAutomaticLottos(perchaseAmount, perchaseLottoCount, manualCount);
 		List<Integer> winningNumbers = getLatestWinningNumbers();
 		int secondWinningNumber = getSecondWinningNumber(winningNumbers);
@@ -97,6 +99,25 @@ public class AutomaticLotto {
 			manualCount = scan.nextInt();
 		} while (!isValidManualCount(manualCount, perchaseLottoCount));
 		return manualCount;
+	}
+
+	public static List<String> getManualLottoNumbers(int manualCount) {
+		List<String> manualNumbers = new ArrayList<String>();
+		MessageUtil.printMessage(NEW_LINE + MessageConstants.INPUT_PERCHASE_MANUAL_NUMBER_MESSAGE);
+		do {
+			manualNumbers.add(addManualLottoNumber());
+		} while (manualNumbers.size() < manualCount);
+		return manualNumbers;
+	}
+
+	public static String addManualLottoNumber() {
+		String inputManualNumber = "";
+		Scanner scan = new Scanner(System.in);
+		inputManualNumber = scan.nextLine().replaceAll(" ", "");
+		if(!checkInputWinningNumbersValidation(inputManualNumber)) {
+			inputManualNumber = addManualLottoNumber();
+		}
+		return inputManualNumber;
 	}
 
 	/**
