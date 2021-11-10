@@ -10,7 +10,7 @@ public class GameCount {
 
     private final int count;
 
-    public GameCount(int purchaseAmount) {
+    public GameCount(final int purchaseAmount) {
         validate(purchaseAmount);
         this.count = purchaseAmount / GAME_PRICE;
     }

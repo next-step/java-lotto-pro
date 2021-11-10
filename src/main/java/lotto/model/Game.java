@@ -20,6 +20,13 @@ public class Game {
         System.out.println(this.numbers);
     }
 
+    public Game(LottoNumbers lottoNumbers) {
+        this.numbers = lottoNumbers.getValues()
+                .stream()
+                .map(lottoNumber -> lottoNumber.getValue())
+                .collect(Collectors.toList());
+    }
+
     /**
      * 난수목록 생성
      *
