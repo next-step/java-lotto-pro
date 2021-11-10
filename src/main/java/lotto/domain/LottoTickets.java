@@ -20,9 +20,7 @@ public class LottoTickets {
 
     public void checkContainsNumber(Number number, Map<LottoTicket, Integer> winningCountCache) {
         for (LottoTicket lottoTicket : lottoTickets) {
-            if (lottoTicket.isContainNumber(number)) {
-                winningCountCache.put(lottoTicket, winningCountCache.getOrDefault(lottoTicket, 0) + 1);
-            }
+            isContainsNumberAndCaching(number, winningCountCache, lottoTicket);
         }
     }
 
@@ -45,6 +43,12 @@ public class LottoTickets {
             containsBonusNumbers.put(lottoTicket, lottoTicket.isContainNumber(bonusNumber));
         }
         return containsBonusNumbers;
+    }
+
+    private void isContainsNumberAndCaching(Number number, Map<LottoTicket, Integer> winningCountCache, LottoTicket lottoTicket) {
+        if (lottoTicket.isContainNumber(number)) {
+            winningCountCache.put(lottoTicket, winningCountCache.getOrDefault(lottoTicket, 0) + 1);
+        }
     }
 
     private List<LottoTicket> convertArrayToLottoTickets(int[][] numberArray) {
