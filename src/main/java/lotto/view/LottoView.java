@@ -2,8 +2,11 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoView {
 
@@ -66,5 +69,19 @@ public class LottoView {
     public static Integer getBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextInt();
+    }
+
+    public static LottoCount getLottoCount(Money money) {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return new LottoCount(money, scanner.nextInt());
+    }
+
+    public static ManualLottos getManualLottos(LottoCount count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        final List<String> numbers = IntStream.range(0, count.getManualCount())
+                .mapToObj(number -> scanner.next())
+                .collect(Collectors.toList());
+        return new ManualLottos(numbers);
     }
 }
