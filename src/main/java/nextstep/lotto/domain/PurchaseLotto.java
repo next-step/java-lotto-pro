@@ -11,6 +11,10 @@ public class PurchaseLotto implements Iterable<Lotto> {
         this.purchaseLotto = purchaseLotto;
     }
 
+    public Integer size() {
+        return purchaseLotto.size();
+    }
+
     @Override
     public Iterator<Lotto> iterator() {
         return purchaseLotto.iterator();
