@@ -11,11 +11,7 @@ public class Lottos {
 		this.lottoNumbersList = Collections.unmodifiableList(lottoNumbersList);
 		this.inputMoney = inputMoney;
 	}
-
-	public static Lottos of(List<LottoNumbers> lottoNumbersList, String inputMoney) {
-		return new Lottos(lottoNumbersList, Money.from(inputMoney));
-	}
-
+	
 	public static Lottos of(List<LottoNumbers> lottoNumbersList, Money inputMoney) {
 		return new Lottos(lottoNumbersList, inputMoney);
 	}
