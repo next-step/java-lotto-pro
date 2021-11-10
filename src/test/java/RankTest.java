@@ -20,7 +20,6 @@ public class RankTest {
 	static Stream<Arguments> test_getReward1_parameter() {
 		return Stream.of(
 			Arguments.of(Rank.FIRST, 2000000000),
-			Arguments.of(Rank.SECOND, 0),
 			Arguments.of(Rank.THIRD, 1500000),
 			Arguments.of(Rank.FOURTH, 50000),
 			Arguments.of(Rank.FIFTH, 5000),
