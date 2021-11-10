@@ -20,8 +20,7 @@ public class Amount {
     public void minusAmountFrom(LottoNumbersBundle lottoNumbersBundle) {
         int minusAmount = lottoNumbersBundle.getTotalPrise();
         if (amount < minusAmount) {
-            throw new InvalidParamException(String.format("최소금액은 %s%s 입니다. 로또를 구매할 수 없습니다.",
-                LottoConstant.LOTTO_MINIMUM_PRICE, LottoConstant.WON));
+            throw new InvalidParamException(NOT_ENOUGH_MESSAGE);
         }
 
         remainingAmount -= minusAmount;
