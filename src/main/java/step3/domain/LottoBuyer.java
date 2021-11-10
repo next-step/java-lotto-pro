@@ -25,15 +25,6 @@ public class LottoBuyer {
         buyLotto(LottoNumbersFactory.createLottoNumbersBundle(qty));
     }
 
-    private void lottoSave(LottoNumbersBundle lottoNumbersBundle2) {
-        if (boughtLottoNumberBundle == null) {
-            boughtLottoNumberBundle = lottoNumbersBundle2;
-            return;
-        }
-
-        this.boughtLottoNumberBundle.merge(lottoNumbersBundle2);
-    }
-
     public LottoRanks getLottoRanks(WinningLotto winningLotto) {
         return boughtLottoNumberBundle.lottoRanksOf(winningLotto, amount);
     }
@@ -50,5 +41,14 @@ public class LottoBuyer {
         if (!amount.isBuyAvailableQuantity(buyQuantity)) {
             throw new InvalidParamException(LottoConstant.EXCEEDING_AVAILABLE_QUANTITY);
         }
+    }
+
+    private void lottoSave(LottoNumbersBundle lottoNumbersBundle) {
+        if (boughtLottoNumberBundle == null) {
+            boughtLottoNumberBundle = lottoNumbersBundle;
+            return;
+        }
+
+        this.boughtLottoNumberBundle.merge(lottoNumbersBundle);
     }
 }

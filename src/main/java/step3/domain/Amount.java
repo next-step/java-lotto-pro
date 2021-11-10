@@ -31,14 +31,6 @@ public class Amount {
         return this.remainingAmount / LottoConstant.LOTTO_MINIMUM_PRICE;
     }
 
-    public void lottoBuyAndAmountMinus(int buyQuantity) {
-        if (!isBuyAvailableQuantity(buyQuantity)) {
-            throw new InvalidParamException(LottoConstant.LACK_OF_AMOUNT);
-        }
-        int minusAmount = calculateMinusAmount(buyQuantity);
-        this.remainingAmount -= minusAmount;
-    }
-
     public int getAmount() {
         return amount;
     }
