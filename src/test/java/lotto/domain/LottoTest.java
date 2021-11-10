@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -19,7 +18,7 @@ public class LottoTest {
 	@Test
 	void validLotto() {
 		Set<LottoNumber> lottoNumbers = IntStream.range(1, 7)
-			.mapToObj(LottoNumber::new)
+			.mapToObj(LottoNumber::of)
 			.collect(Collectors.toSet());
 		Lotto lotto = new Lotto(lottoNumbers);
 
@@ -32,7 +31,7 @@ public class LottoTest {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
 				Set<LottoNumber> lottoNumbers = Stream.of(1, 1, 3, 4, 5, 6)
-					.map(LottoNumber::new)
+					.map(LottoNumber::of)
 					.collect(Collectors.toSet());
 
 				new Lotto(lottoNumbers);
@@ -44,13 +43,12 @@ public class LottoTest {
 	@EnumSource(names = {"FIRST"})
 	void lottoMatch(Rank rank) {
 		Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.collect(Collectors.toSet());
 		Lotto stamdardLotto = new Lotto(lottoNumbers);
 		Lotto lotto = new Lotto(lottoNumbers);
-		LottoNumber bonusNumber = new LottoNumber(10);
 
-		Rank returnRank = stamdardLotto.match(lotto, new LottoNumber(10));
+		Rank returnRank = stamdardLotto.match(lotto, LottoNumber.of(10));
 
 		assertThat(returnRank).isEqualTo(rank);
 	}

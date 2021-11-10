@@ -18,7 +18,7 @@ public class LottoMachine {
 	public LottoMachine() {
 		this.lottoRangeNumbers = IntStream.range(RANGE_MIN_NUMBER, RANGE_MAX_NUMBER)
 			.boxed()
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.collect(Collectors.toList());
 	}
 

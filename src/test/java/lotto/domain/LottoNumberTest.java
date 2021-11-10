@@ -18,16 +18,16 @@ public class LottoNumberTest {
 	@ParameterizedTest
 	@MethodSource("provideLottoNumber")
 	void validLottoNumber(int number) {
-		LottoNumber lottoNumber = new LottoNumber(number);
+		LottoNumber lottoNumber = LottoNumber.of(number);
 
-		assertThat(lottoNumber).isEqualTo(new LottoNumber(number));
+		assertThat(lottoNumber).isEqualTo(LottoNumber.of(number));
 	}
 
 	@DisplayName("유효 범위 외의 로또 번호 생성")
 	@ParameterizedTest
 	@ValueSource(ints = {0, 80, 120})
 	void invalidLottoNumber(int number) {
-		assertThatThrownBy(() -> new LottoNumber(number))
+		assertThatThrownBy(() -> LottoNumber.of(number))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("로또 번호는 1 ~ 45 사이의 값을 입력하세요.");
 	}

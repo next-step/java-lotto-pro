@@ -23,6 +23,9 @@ public class LottoStore {
 
 	public void start() {
 		PurchaseAmount purchaseAmount = pay();
+
+
+
 		ResultView.printLottoPurchaseQuantity(purchaseAmount.getPurchaseQuantity());
 
 		Lottos userLottos = buyingLotto(purchaseAmount.getPurchaseQuantity());
@@ -59,13 +62,13 @@ public class LottoStore {
 	}
 
 	private LottoNumber generateBonusNumber() {
-		return new LottoNumber(InputView.inputBonusNumber());
+		return LottoNumber.of(InputView.inputBonusNumber());
 	}
 
 	private Lotto generateWinningLotto() {
 		return new Lotto(Arrays.stream(InputView.inputLastWeekLottoNumber())
 			.map(Integer::valueOf)
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.collect(Collectors.toSet()));
 	}
 

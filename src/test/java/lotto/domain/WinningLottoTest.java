@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,13 +20,13 @@ public class WinningLottoTest {
 		List<Lotto> lottosStuff = new ArrayList<>();
 		lottosStuff.add(
 			new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-				.map(LottoNumber::new)
+				.map(LottoNumber::of)
 				.collect(Collectors.toSet())
 			)
 		);
 		lottosStuff.add(
 			new Lotto(Stream.of(1, 2, 3, 4, 5, 10)
-				.map(LottoNumber::new)
+				.map(LottoNumber::of)
 				.collect(Collectors.toSet())
 			)
 		);
@@ -39,9 +38,9 @@ public class WinningLottoTest {
 	void winningLottoMatch_FIRST() {
 		WinningLotto winningLotto = new WinningLotto(
 			new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-				.map(LottoNumber::new)
+				.map(LottoNumber::of)
 				.collect(Collectors.toSet())),
-			new LottoNumber(7)
+			LottoNumber.of(7)
 		);
 
 		WinningRecord winningRecord = winningLotto.match(lottos);
@@ -55,9 +54,9 @@ public class WinningLottoTest {
 	void winningLottoMatch_SECOND_AND_THIRD() {
 		WinningLotto winningLotto = new WinningLotto(
 			new Lotto(Stream.of(1, 2, 3, 4, 5, 8)
-				.map(LottoNumber::new)
+				.map(LottoNumber::of)
 				.collect(Collectors.toSet())),
-			new LottoNumber(6)
+			LottoNumber.of(6)
 		);
 		WinningRecord winningRecord = winningLotto.match(lottos);
 
@@ -76,11 +75,11 @@ public class WinningLottoTest {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
 				Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 8)
-					.map(LottoNumber::new)
+					.map(LottoNumber::of)
 					.collect(Collectors.toSet()));
-				LottoNumber lottoNumber = new LottoNumber(2);
+				LottoNumber lottoNumber = LottoNumber.of(2);
 
-				WinningLotto winningLotto = new WinningLotto(lotto, lottoNumber);
+				new WinningLotto(lotto, lottoNumber);
 			}).withMessageMatching("보너스 볼이 중복되었습니다.");
 	}
 
