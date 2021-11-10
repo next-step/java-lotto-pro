@@ -10,11 +10,11 @@ public enum Rank {
 	FIRST(6, 2000000000);
 
 	private final int countOfMatch;
-	private final int winningAmount;
+	private final Money winningAmount;
 
 	Rank(int countOfMatch, int winningAmount) {
 		this.countOfMatch = countOfMatch;
-		this.winningAmount = winningAmount;
+		this.winningAmount = new Money(winningAmount);
 	}
 
 	public int getCountOfMatch() {
@@ -22,7 +22,7 @@ public enum Rank {
 	}
 
 	public int getWinningAmount() {
-		return winningAmount;
+		return winningAmount.value();
 	}
 
 	public int countWinners(Lottos lottos, WinningLotto winningLotto) {

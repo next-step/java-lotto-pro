@@ -34,6 +34,10 @@ public class Money {
 		return purchaseAmount < money;
 	}
 
+	public int value() {
+		return money;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

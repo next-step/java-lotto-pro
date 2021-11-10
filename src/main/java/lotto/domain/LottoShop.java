@@ -2,7 +2,9 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoShop {
@@ -19,7 +21,7 @@ public class LottoShop {
 		Collections.shuffle(allLottoNumbers);
 		List<LottoNumber> lottoNumbers = allLottoNumbers.subList(LottoNumbers.MIN_RANGE_VALUE,
 			LottoNumbers.MAX_RANGE_VALUE);
-		Collections.sort(lottoNumbers, (l1, l2) -> Integer.compare(l1.getValue(), l2.getValue()));
+		lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getValue));
 		return new Lotto(new LottoNumbers(lottoNumbers));
 	}
 
@@ -28,9 +30,8 @@ public class LottoShop {
 	}
 
 	public static Lottos sell(Money purchaseAmount) {
-		List<Lotto> lottos = new ArrayList<>();
-		IntStream.rangeClosed(1, purchaseAmount.getPurchaseQuantity(LOTTO_PRICE))
-			.forEach((i) -> lottos.add(create()));
-		return new Lottos(lottos);
+		return IntStream.range(0, purchaseAmount.getPurchaseQuantity(LOTTO_PRICE))
+			.mapToObj(ignore -> create())
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
 	}
 }
