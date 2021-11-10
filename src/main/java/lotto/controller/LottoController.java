@@ -29,9 +29,8 @@ public class LottoController {
 
     public void run() {
         LottoPurchase lottoPurchase = inputLottoPurchase();
-        Map<Integer, List<Integer>> inputManualLottoNumbers = inputManualLottoNumbers(lottoPurchase);
 
-        LottoTicket lottoTicket = LottoIssue.ofAuto(lottoPurchase.getPurchaseQuantity());
+        LottoTicket lottoTicket = LottoIssue.of(lottoPurchase, inputManualLottoNumbers(lottoPurchase));
 
         printPurchaseQuantity(lottoPurchase);
         printLottoNumber(lottoTicket);
@@ -39,6 +38,11 @@ public class LottoController {
         LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(inputLottoWinningNumbers(), inputLottoBonusNumber());
 
         play(lottoPurchase, lottoTicket, lottoWinningNumbers);
+    }
+
+    private void play(LottoPurchase lottoPurchase, LottoTicket lottoTicket, LottoWinningNumbers lottoWinningNumbers) {
+        LottoResult lottoResult = LottoResult.of(lottoPurchase, lottoTicket, lottoWinningNumbers);
+        printWinningStatistics(lottoResult);
     }
 
     private Map<Integer, List<Integer>> inputManualLottoNumbers(LottoPurchase lottoPurchase) {
@@ -57,11 +61,6 @@ public class LottoController {
     private LottoNumber inputLottoBonusNumber() {
         printInputLottoBonusNumber();
         return LottoNumber.from(inputBonusNumber());
-    }
-
-    private void play(LottoPurchase lottoPurchase, LottoTicket lottoTicket, LottoWinningNumbers lottoWinningNumbers) {
-        LottoResult lottoResult = LottoResult.of(lottoPurchase, lottoTicket, lottoWinningNumbers);
-        printWinningStatistics(lottoResult);
     }
 
     private LottoNumbers inputLottoWinningNumbers() {

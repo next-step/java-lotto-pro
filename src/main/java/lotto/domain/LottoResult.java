@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static java.util.Arrays.stream;
+
 public class LottoResult {
 
     private static final int STANDARD_RATE_OF_RETURN = 1;
@@ -16,7 +18,10 @@ public class LottoResult {
     }
 
     public static LottoResult of(LottoPurchase lottoPurchase, LottoTicket lottoTicket, LottoWinningNumbers lottoWinningNumbers) {
-        Map<LottoRank, Integer> lottoTicketRankMap = lottoTicket.countLottoRank(lottoWinningNumbers);
+        Map<LottoRank, Integer> lottoTicketRankMap = new TreeMap<>();
+        stream(LottoRank.values())
+                .forEach(lottoRank -> lottoTicketRankMap.put(lottoRank, lottoTicket.countLottoRank(lottoRank, lottoWinningNumbers)));
+
         double rateOfReturn = calculateRateOfReturn(lottoPurchase, lottoTicketRankMap);
         return new LottoResult(lottoTicketRankMap, rateOfReturn);
     }

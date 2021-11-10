@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -18,10 +16,11 @@ public class LottoTicket {
         return lottoTicket;
     }
 
-    public Map<LottoRank, Integer> countLottoRank(LottoWinningNumbers lottoWinningNumbers) {
-        return lottoTicket.stream()
+    public Integer countLottoRank(LottoRank lottoRank, LottoWinningNumbers lottoWinningNumbers) {
+        return Math.toIntExact(lottoTicket.stream()
                 .map(lottoWinningNumbers::compareLottoNumbers)
-                .collect(Collectors.toMap(rank -> rank, rank -> 1, Integer::sum));
+                .filter(rank -> rank.equals(lottoRank))
+                .count());
     }
 
 }
