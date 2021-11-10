@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 
 public class ResultView {
 
-    private static final String PURCHASED_GAME_COUNT = "%s개를 구매했습니다.";
+    private static final String PURCHASED_GAME_COUNT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.\n";
     private static final String RESULT_TITLE_MESSAGE = "당첨 통계\r\n---------";
     private static final String MATCHED_RESULT_MESSAGE_PREFIX = "%s개 일치";
     private static final String MATCHED_RESULT_MESSAGE_SUFFIX = " (%s원) - %s개";
@@ -23,8 +23,8 @@ public class ResultView {
      *
      * @param gameCount
      */
-    public static void printPurchasedGameCount(int gameCount) {
-        System.out.println(String.format(PURCHASED_GAME_COUNT, gameCount));
+    public static void printPurchasedGameCount(int gameCount, int manualGameCount) {
+        System.out.println(String.format(PURCHASED_GAME_COUNT, manualGameCount, gameCount));
     }
 
     /**
