@@ -22,9 +22,27 @@ public class Lottos {
 	private long perchaseAmount;
 	private List<Lotto> lottos;
 
-	public Lottos(int perchaseAmount) {
+	public Lottos() {
+		this.lottos = new ArrayList<Lotto>();
+	}
+
+	/**
+	 * 수동으로 입력한 Lotto 번호 등록
+	 * @param manualLottoNumbers
+	 */
+	public void setManualLottos(List<Lotto> manualLottoNumbers) {
+		this.lottos.addAll(manualLottoNumbers);
+	}
+
+	/**
+	 * 자동으로 발급된 로또 번호 추가
+	 * @param perchaseAmount
+	 * @param perchaseLottoCount
+	 * @param manualCount
+	 */
+	public void setAutomaticLottos(int perchaseAmount, int perchaseLottoCount, int manualCount) {
 		this.perchaseAmount = perchaseAmount;
-		this.lottos = getLottos(perchaseAmount);
+		addLottos(perchaseAmount, perchaseLottoCount, manualCount);
 	}
 
 	/**
@@ -32,14 +50,23 @@ public class Lottos {
 	 * @param perchaseAmount
 	 * @return
 	 */
-	private List<Lotto> getLottos(int perchaseAmount) {
-		List<Lotto> lottos = new ArrayList<Lotto>();
-		int lottoCount = getLottoCount(perchaseAmount);
-		MessageUtil.printMessage(lottoCount + MessageConstants.LOTTO_PERCHASE_MESSAGE);
-		for(int i=0; i<lottoCount; i++) {
+	private void addLottos(int perchaseAmount, int perchaseLottoCount, int manualCount) {
+		List<Lotto> automaticLottos = new ArrayList<Lotto>();
+		int automaticLottoCount = getAutomaticLottoCount(perchaseLottoCount, manualCount);
+		MessageUtil.printMessage(MessageConstants.LOTTO_PERCHASE_MANUAL_MESSAGE, manualCount, automaticLottoCount);
+		for(int i=0; i<automaticLottoCount; i++) {
 			lottos.add(new Lotto());
 		}
-		return lottos;
+	}
+
+	/**
+	 * 수동 구매 수를 제외하고 자동으로 발급할 로또 갯수 가져오기
+	 * @param perchaseLottoCount
+	 * @param manualCount
+	 * @return
+	 */
+	private int getAutomaticLottoCount(int perchaseLottoCount, int manualCount) {
+		return perchaseLottoCount-manualCount;
 	}
 
 	/**
@@ -56,7 +83,7 @@ public class Lottos {
 	 * 등수 별 로또 당첨 게임 출력
 	 */
 	public void printLottoMatchesCountStatistics() {
-		MessageUtil.printMessage("\n"+MessageConstants.LOTTO_STATISTICS_MESSAGE);
+		MessageUtil.printMessage(MessageConstants.LOTTO_STATISTICS_MESSAGE);
 		MessageUtil.printSeparatorLine();
 		Rank[] ranks = Rank.values();
 		for(int i=ranks.length-2; i>=0; i--) {
@@ -80,15 +107,6 @@ public class Lottos {
 		}
 		String profitRatio = new DecimalFormat("#.##").format((float) profit / (float) this.perchaseAmount);
 		MessageUtil.printMessage(MessageConstants.LOTTO_PROFIT_RATIO_MESSAGE, profitRatio);
-	}
-
-	/**
-	 * 구매 금액을 통해 구매된 로또 갯수 가져오기
-	 * @param perchaseAmount
-	 * @return
-	 */
-	public static int getLottoCount(int perchaseAmount) {
-		return (perchaseAmount / 1000);
 	}
 
 	/**

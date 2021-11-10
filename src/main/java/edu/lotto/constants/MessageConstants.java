@@ -3,9 +3,11 @@ package edu.lotto.constants;
 public class MessageConstants {
 
 	public static final String INPUT_PERCHASE_AMOUNT_MESSAGE = "구매금액을 입력해 주세요.";
+	public static final String INPUT_PERCHASE_MANUAL_COUNT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 	public static final String ONLY_INPUT_NUMBER_MESSAGE = "숫자만 입력 가능합니다.";
 	public static final String LOTTO_PRICE_INFORMATION_MESSAGE = "로또 1장의 가격은 1000원입니다.";
 	public static final String LOTTO_PERCHASE_MESSAGE = "개를 구매했습니다.";
+	public static final String LOTTO_PERCHASE_MANUAL_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 	public static final String INPUT_LATEST_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 	public static final String LATEST_WINNING_NUMBERS_ERROR_MESSAGE = "지난 주 당첨 번호는 1~45 사이의 숫자 6자리입니다.";
 	public static final String INPUT_SECON_WINNING_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";

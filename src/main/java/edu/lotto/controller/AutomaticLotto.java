@@ -2,6 +2,7 @@ package edu.lotto.controller;
 
 import edu.lotto.constants.MessageConstants;
 import edu.lotto.constants.PatternConstants;
+import edu.lotto.model.Lotto;
 import edu.lotto.model.Lottos;
 import edu.lotto.utils.MessageUtil;
 import edu.lotto.utils.NumberUtil;
@@ -19,12 +20,26 @@ import java.util.logging.Logger;
 public class AutomaticLotto {
 
 	private static Logger logger = Logger.getLogger(AutomaticLotto.class.getName());
+	private static final String NEW_LINE = "\n";
 
 	public static void main(String[] args) {
 		int perchaseAmount = Integer.parseInt(getPerchaseAmount());
-		Lottos lottos = new Lottos(perchaseAmount);
+		int perchaseLottoCount = getLottoCount(perchaseAmount);
+		int manualCount = getManualLottoCount(perchaseLottoCount);
+		calcLottoResults(perchaseAmount, perchaseLottoCount, manualCount);
+	}
+
+	/**
+	 * 로또 결과 계산
+	 * @param perchaseAmount
+	 * @param perchaseLottoCount
+	 * @param manualCount
+	 */
+	public static void calcLottoResults(int perchaseAmount, int perchaseLottoCount, int manualCount) {
+		Lottos lottos = new Lottos();
+		lottos.setAutomaticLottos(perchaseAmount, perchaseLottoCount, manualCount);
 		List<Integer> winningNumbers = getLatestWinningNumbers();
-		int secondWinningNumber =getSecondWinningNumber(winningNumbers);
+		int secondWinningNumber = getSecondWinningNumber(winningNumbers);
 		lottos.setWinningNumberMatchesCount(winningNumbers, secondWinningNumber);
 		lottos.printLottoMatchesCountStatistics();
 	}
@@ -34,13 +49,22 @@ public class AutomaticLotto {
 	 * @return
 	 */
 	public static String getPerchaseAmount() {
-		MessageUtil.printMessage(MessageConstants.INPUT_PERCHASE_AMOUNT_MESSAGE);
+		MessageUtil.printMessage(NEW_LINE + MessageConstants.INPUT_PERCHASE_AMOUNT_MESSAGE);
 		Scanner scan = new Scanner(System.in);
 		String amount = scan.next();
 		if (!checkPerchaseAmountValidation(amount)) {
 			amount = getPerchaseAmount();
 		}
 		return amount;
+	}
+
+	/**
+	 * 구매 금액을 통해 구매된 로또 갯수 가져오기
+	 * @param perchaseAmount
+	 * @return
+	 */
+	public static int getLottoCount(int perchaseAmount) {
+		return (perchaseAmount / 1000);
 	}
 
 	/**
@@ -61,6 +85,31 @@ public class AutomaticLotto {
 	}
 
 	/**
+	 * 수동으로 구매할 로또 갯수 입력받기
+	 * @param perchaseLottoCount
+	 * @return
+	 */
+	public static int getManualLottoCount(int perchaseLottoCount) {
+		int manualCount = 0;
+		do {
+			MessageUtil.printMessage(NEW_LINE + MessageConstants.INPUT_PERCHASE_MANUAL_COUNT_MESSAGE);
+			Scanner scan = new Scanner(System.in);
+			manualCount = scan.nextInt();
+		} while (!isValidManualCount(manualCount, perchaseLottoCount));
+		return manualCount;
+	}
+
+	/**
+	 * 수동으로 구매할 로또 수 검증
+	 * @param manualCount
+	 * @param perchaseLottoCount
+	 * @return
+	 */
+	private static boolean isValidManualCount(int manualCount, int perchaseLottoCount) {
+		return (manualCount >= 0) && (manualCount <= perchaseLottoCount);
+	}
+
+	/**
 	 * 사용자 입력을 통해 가져온 지난주 정답을 숫자 리스트 형태로 변환하여 가져오기
 	 * @return 정답이 저장된 숫자 배열
 	 */
@@ -78,7 +127,7 @@ public class AutomaticLotto {
 	 * @return
 	 */
 	public static String getLatestWinningNumbersByUserInput() {
-		MessageUtil.printMessage("\n"+MessageConstants.INPUT_LATEST_WINNING_NUMBERS_MESSAGE);
+		MessageUtil.printMessage(NEW_LINE + MessageConstants.INPUT_LATEST_WINNING_NUMBERS_MESSAGE);
 		Scanner scan = new Scanner(System.in);
 		String winningNumbers = scan.nextLine().replaceAll(" ", "");
 		if (!checkInputWinningNumbersValidation(winningNumbers)) {

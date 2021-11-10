@@ -16,7 +16,6 @@ public class AutomaticLottoTest {
 	@Test
 	void test() {
 		String s = "1, 2, 3, 4, 5, 6".replaceAll(" ", "");
-		System.out.println("s : " + s);
 		String[] winningNumberArray = s.split(PatternConstants.DEFAULT_SEPARATOR_PATTERN);
 		assertThat(winningNumberArray.length == 6).isTrue();
 		for(String n : winningNumberArray) {
