@@ -1,15 +1,20 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import lotto.model.LotteryWallet;
+import lotto.model.Lotto;
+import lotto.model.LottoNumbers;
+import lotto.model.Lottos;
 import lotto.model.WinningLottoNumbers;
 import lotto.model.WinningLottoStatus;
 import lotto.view.LottoView;
 
 public class LottoController {
-	private LottoView view = new LottoView();
-	private Scanner scan = new Scanner(System.in);
+	private final LottoView view = new LottoView();
+	private final Scanner scan = new Scanner(System.in);
 
 	/**
 	 * 프로그램 시작
@@ -23,6 +28,7 @@ public class LottoController {
 	 */
 	private void lottoStart() {
 		LotteryWallet wallet = purchaseLotto();
+		view.printlnBlank();
 		showPurchasedLotto(wallet);
 		WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbers();
 		WinningLottoStatus winningLottoStatus = wallet.getWinningStatus(winningLottoNumbers);
@@ -93,7 +99,54 @@ public class LottoController {
 	private LotteryWallet makeWallet() {
 		try {
 			String money = scan.nextLine();
-			return new LotteryWallet(money, null);
+			view.printlnBlank();
+			return new LotteryWallet(money, getManualLottos());
+		} catch (IllegalArgumentException e) {
+			view.printlnError(e);
+		}
+		return null;
+	}
+
+	/**
+	 * 수동 입력 로또 구매
+	 * @return 수동 입력 로또
+	 */
+	private Lottos getManualLottos() {
+		List<Lotto> manualLottoList = new ArrayList<>();
+		int manualLottoCount = getManualLottoCount();
+		view.printlnBlank();
+		view.printlnPurchasedManualLotto();
+		for (int i = 0; i < manualLottoCount; i++) {
+			manualLottoList.add(getManualLotto());
+		}
+		return new Lottos(manualLottoList);
+	}
+
+	/**
+	 * 수동 입력 로또 개수 입력
+	 * @return 수동 입력 로또 개수
+	 */
+	private int getManualLottoCount() {
+		view.printlnInputManualLottoCount();
+		return Integer.parseUnsignedInt(scan.nextLine());
+	}
+
+	/**
+	 * 수동 입력 로또 가져오기
+	 * @return 수동 입력으로 생성된 로또
+	 */
+	private Lotto getManualLotto() {
+		Lotto lotto = null;
+		do {
+			lotto = makeLotto();
+		} while(lotto == null);
+		return lotto;
+	}
+
+	private Lotto makeLotto() {
+		try {
+			String lottoNumbers = scan.nextLine();
+			return new Lotto(new LottoNumbers(lottoNumbers));
 		} catch (IllegalArgumentException e) {
 			view.printlnError(e);
 		}
