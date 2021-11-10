@@ -21,10 +21,7 @@ public class LottoGameController {
 			LottoTickets autoTickets = generateAutoTickets(purchaseInfo);
 			LottoTickets manualTickets = getManualLottoTickets(purchaseInfo);
 			showLottoTicketTotal(autoTickets, manualTickets);
-			WinningInfo winningInfo = getWinningInfo();
-			LottoTickets totalTickets = getTotalTickets(autoTickets, manualTickets);
-			LottoStaticsResult staticsResult = getStaticsResult(winningInfo, purchaseInfo, totalTickets);
-			showWinningResult(staticsResult);
+			showStaticsResult(getWinningInfo(), purchaseInfo, getTotalTickets(autoTickets, manualTickets));
 		} catch (Exception ex) {
 			ResultView.error(ex.getMessage());
 		}
@@ -34,7 +31,9 @@ public class LottoGameController {
 		return LottoTickets.combine(manualTickets, autoTickets);
 	}
 
-	private static void showWinningResult(LottoStaticsResult staticsResult) {
+	private static void showStaticsResult(WinningInfo winningInfo, PurchaseInfo purchaseInfo,
+		LottoTickets totalTickets) {
+		LottoStaticsResult staticsResult = getStaticsResult(winningInfo, purchaseInfo, totalTickets);
 		ResultView.showPrize(staticsResult.getRankCount(), staticsResult.getProfit());
 	}
 
