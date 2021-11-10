@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import lotto.dto.PurchaseReqDto;
-import lotto.dto.WinningReqDto;
+import lotto.dto.PurchaseInfo;
+import lotto.dto.WinningInfo;
 
 public class InputView {
 
 	private static final Scanner sc = new Scanner(System.in);
 
-	public static PurchaseReqDto getPurchaseInfo() {
+	public static PurchaseInfo getPurchaseInfo() {
 		int money = getMoney();
 		int manualLottoCount = getManualLottoCount();
 		List<List<Integer>> manualLottoList = getManualLotto(manualLottoCount);
-		return new PurchaseReqDto(money, manualLottoList);
+		return new PurchaseInfo(money, manualLottoList);
 	}
 
 	private static int getMoney() {
@@ -31,7 +31,7 @@ public class InputView {
 	}
 
 	private static List<List<Integer>> getManualLotto(int count) {
-		if (count == 0) {
+		if (count <= 0) {
 			return new ArrayList<>();
 		}
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
@@ -42,10 +42,10 @@ public class InputView {
 		return list;
 	}
 
-	public static WinningReqDto getWinningInfo() {
+	public static WinningInfo getWinningInfo() {
 		List<Integer> winningLottoNumbers = getWinningLottoNumbers();
 		int bonusNumber = getBonusNumber();
-		return new WinningReqDto(winningLottoNumbers, bonusNumber);
+		return new WinningInfo(winningLottoNumbers, bonusNumber);
 	}
 
 	private static List<Integer> getWinningLottoNumbers() {

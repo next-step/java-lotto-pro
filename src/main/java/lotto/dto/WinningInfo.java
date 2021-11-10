@@ -2,13 +2,13 @@ package lotto.dto;
 
 import java.util.List;
 
-public class WinningReqDto {
+public class WinningInfo {
 
 	private final List<Integer> winningNumbers;
 
 	private final int bonusNumber;
 
-	public WinningReqDto(List<Integer> winningNumbers, int bonusNumber) {
+	public WinningInfo(List<Integer> winningNumbers, int bonusNumber) {
 		this.winningNumbers = winningNumbers;
 		this.bonusNumber = bonusNumber;
 	}
