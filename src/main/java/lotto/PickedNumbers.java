@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PickedNumbers {
 
-    private static final int SIZE = 6;
+    public static final int SIZE = 6;
 
     private final List<Number> pickedNumbers;
 
