@@ -58,6 +58,7 @@ public class LottoController {
 
         try {
             lottoBuyer.checkBuyAvailableQuantity(manualBuyCount);
+            
             return InputView.readManualLottoNumbers(manualBuyCount);
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());

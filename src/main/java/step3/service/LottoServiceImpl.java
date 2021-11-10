@@ -16,8 +16,8 @@ public class LottoServiceImpl implements LottoService {
     }
 
     @Override
-    public void buyLotto(LottoBuyer lottoBuyer, LottoNumbersBundle lottoNumbersBundle2) {
-        lottoBuyer.buyLotto(lottoNumbersBundle2);
+    public void buyLotto(LottoBuyer lottoBuyer, LottoNumbersBundle lottoNumbersBundle) {
+        lottoBuyer.buyLotto(lottoNumbersBundle);
         lottoBuyer.autoBuyLotto();
     }
 

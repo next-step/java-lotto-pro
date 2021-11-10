@@ -14,9 +14,9 @@ public class LottoBuyer {
         this.amount = amount;
     }
 
-    public void buyLotto(LottoNumbersBundle lottoNumbersBundle2) {
-        amount.minusAmountFrom(lottoNumbersBundle2);
-        lottoSave(lottoNumbersBundle2);
+    public void buyLotto(LottoNumbersBundle lottoNumbersBundle) {
+        amount.minusAmountFrom(lottoNumbersBundle);
+        lottoSave(lottoNumbersBundle);
     }
 
     public void autoBuyLotto() {
