@@ -3,25 +3,49 @@ package step3.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import step3.domain.strategy.numbers.NumbersStrategy;
+import step3.domain.constance.LottoConstant;
 
 public class LottoNumbersBundle {
-    private final List<LottoNumbers> lottoNumbersBundle = new ArrayList<>();
+    private final List<LottoNumbers> lottoNumbersBundle;
 
-    public LottoNumbersBundle() {
+    private LottoNumbersBundle(List<LottoNumbers> lottoNumbers) {
+        this.lottoNumbersBundle = lottoNumbers;
     }
 
-    public void addLottoNumbers(NumbersStrategy numbersStrategy) {
-        List<Integer> numbers = numbersStrategy.getNumbers();
-        LottoNumbers lottoNumbers = LottoNumbers.of(numbers);
-
-        lottoNumbersBundle.add(lottoNumbers);
+    public static LottoNumbersBundle of(List<LottoNumbers> lottoNumbers) {
+        return new LottoNumbersBundle(lottoNumbers);
     }
 
-    public LottoRanks lottoRanksOf(WinningLotto winningLotto) {
-        LottoRanks lottoRanks = new LottoRanks();
+    public void merge(LottoNumbersBundle buyLottoNumbersBundle) {
+        this.lottoNumbersBundle.addAll(buyLottoNumbersBundle.getLottoNumbersBundle());
+    }
+
+    public int getTotalPrise() {
+        return LottoConstant.LOTTO_MINIMUM_PRICE * lottoNumbersBundle.size();
+    }
+
+    public int countOf(BuyType buyType) {
+        return (int)lottoNumbersBundle.stream()
+            .filter(lottoNumbers -> lottoNumbers.isBuyType(buyType))
+            .count();
+    }
+
+    private List<LottoNumbers> getLottoNumbersBundle() {
+        return lottoNumbersBundle;
+    }
+
+    public List<String> numbersForResults() {
+        List<String> result = new ArrayList<>();
+        for (LottoNumbers lottoNumbers : lottoNumbersBundle) {
+            result.add(lottoNumbers.toCommaSerialize());
+        }
+
+        return Collections.unmodifiableList(result);
+    }
+
+    public LottoRanks lottoRanksOf(WinningLotto winningLotto, Amount amount) {
+        LottoRanks lottoRanks = new LottoRanks(amount);
 
         for (LottoNumbers lottoNumbers : lottoNumbersBundle) {
             int matchCount = winningLotto.containCount(lottoNumbers);
@@ -30,23 +54,5 @@ public class LottoNumbersBundle {
         }
 
         return lottoRanks;
-    }
-
-    public int size() {
-        return lottoNumbersBundle.size();
-    }
-
-    public List<LottoNumbers> getLottoNumbersBundle() {
-        return lottoNumbersBundle;
-    }
-
-    public List<String> getResult() {
-        return lottoNumbersBundle.stream()
-            .map(LottoNumbers::toCommaSerialize)
-            .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
-    }
-
-    public void merge(LottoNumbersBundle autoLottoNumbersBundle) {
-        lottoNumbersBundle.addAll(autoLottoNumbersBundle.getLottoNumbersBundle());
     }
 }

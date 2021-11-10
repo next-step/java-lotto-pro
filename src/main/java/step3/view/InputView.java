@@ -7,8 +7,11 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import step3.common.exception.InvalidParamException;
-import step3.domain.strategy.numbers.ManualLottoNumbers;
-import step3.domain.strategy.numbers.NumbersStrategy;
+import step3.domain.LottoNumber;
+import step3.domain.LottoNumbers;
+import step3.domain.LottoNumbersBundle;
+import step3.domain.WinningLotto;
+import step3.domain.factory.LottoNumbersFactory;
 
 public class InputView {
     private static final Scanner sc = new Scanner(System.in);
@@ -35,21 +38,23 @@ public class InputView {
         }
     }
 
-    public static List<NumbersStrategy> readManualLottoNumbers(int tryCount) {
+    public static LottoNumbersBundle readManualLottoNumbers(int tryCount) {
         ResultView.println(ViewConstant.MANUAL_LOTTO_NUMBER_MESSAGE);
-        List<NumbersStrategy> manualLottoNumbers = new ArrayList<>();
+        List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
 
         for (int i = 0; i < tryCount; i++) {
-            manualLottoNumbers.add(new ManualLottoNumbers(readLineToArray()));
+            manualLottoNumbers.add(LottoNumbersFactory.createManualLottoNumbers(readLineToArray()));
         }
 
-        return manualLottoNumbers;
+        return LottoNumbersBundle.of(manualLottoNumbers);
     }
 
-    public static NumbersStrategy readWinningLottoNumbers() {
+    public static WinningLotto readWinningLottoNumbers() {
         ResultView.println(ViewConstant.WINNER_NUMBER_REQUEST_MESSAGE);
         try {
-            return new ManualLottoNumbers(readLineToArray());
+            LottoNumbers winningNumbers = LottoNumbersFactory.createManualLottoNumbers(readLineToArray());
+
+            return WinningLotto.of(winningNumbers, readBonusNumber());
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
 
@@ -57,12 +62,12 @@ public class InputView {
         }
     }
 
-    public static int readBonusNumber() {
+    public static LottoNumber readBonusNumber() {
         ResultView.println(ViewConstant.BONUS_NUMBER_REQUEST_MESSAGE);
 
         try {
 
-            return scanInt();
+            return LottoNumber.of(scanInt());
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
 
@@ -87,7 +92,7 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
         } catch (InvalidParamException invalidParamException) {
-            step3.view.ResultView.println(ViewConstant.COMMA_INPUT_REQUEST_MESSAGE);
+            ResultView.println(ViewConstant.COMMA_INPUT_REQUEST_MESSAGE);
 
             return readLineToArray();
         }

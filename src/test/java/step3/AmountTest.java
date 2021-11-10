@@ -22,13 +22,13 @@ public class AmountTest {
     }
 
     @Test
-    @DisplayName("지불 금액보다 많은 로또 구매시 에러 발생")
+    @DisplayName("지불 금액보다 많은 로또 구매 수량 체크시 false 반환")
     void valid() {
-        assertThatExceptionOfType(InvalidParamException.class)
-            .isThrownBy(() -> {
-                // when
-                Amount amount = new Amount(1000);
-                amount.lottoBuyAndAmountMinus(2);
-            });
+        // when
+        Amount amount = new Amount(1000);
+
+        // then
+        assertThat(amount.isBuyAvailableQuantity(2)).isFalse();
     }
+
 }

@@ -4,16 +4,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import step3.domain.Amount;
 import step3.domain.LottoRanks;
 
 public class LottoStatisticsResponseDto {
     private final LottoRanks lottoRanks;
-    private final Amount amount;
 
-    public LottoStatisticsResponseDto(LottoRanks lottoResult, Amount amount) {
-        this.lottoRanks = lottoResult;
-        this.amount = amount;
+    public LottoStatisticsResponseDto(LottoRanks lottoRanks) {
+        this.lottoRanks = lottoRanks;
     }
 
     public List<LottoResultDto> getLottoResultDtos() {
@@ -29,6 +26,6 @@ public class LottoStatisticsResponseDto {
     }
 
     public BigDecimal getYield() {
-        return lottoRanks.getCalculatedYield(amount);
+        return lottoRanks.getCalculatedYield();
     }
 }

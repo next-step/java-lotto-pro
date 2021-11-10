@@ -10,10 +10,12 @@ import java.util.Map;
 
 public class LottoRanks {
     private static final int DECIMAL_POINT = 2;
+    private final Amount amount;
     private final Map<LottoRank, CountDown> lottoRanks = new HashMap<>();
 
-    public LottoRanks() {
+    public LottoRanks(Amount amount) {
         init();
+        this.amount = amount;
     }
 
     private void init() {
@@ -52,7 +54,7 @@ public class LottoRanks {
         return totalPrize;
     }
 
-    public BigDecimal getCalculatedYield(Amount amount) {
+    public BigDecimal getCalculatedYield() {
         return BigDecimal.valueOf(totalPrize())
             .divide(BigDecimal.valueOf(amount.getAmount()))
             .setScale(DECIMAL_POINT, RoundingMode.CEILING);

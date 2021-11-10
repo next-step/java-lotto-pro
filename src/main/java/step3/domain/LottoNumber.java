@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 import step3.common.exception.InvalidParamException;
 import step3.domain.constance.LottoConstant;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
     private static final Map<Integer, LottoNumber> lottoNos = IntStream.rangeClosed(LottoConstant.MIN_NUMBER_RANGE,
             LottoConstant.MAX_NUMBER_RANGE)
@@ -56,4 +56,11 @@ public class LottoNumber {
         return Objects.hash(number);
     }
 
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        if (number > lottoNumber.number) {
+            return 0;
+        }
+        return -1;
+    }
 }

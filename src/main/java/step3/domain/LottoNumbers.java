@@ -12,15 +12,29 @@ public class LottoNumbers {
     public static final int MAX_LOTTO_NUMBERS_SIZE = 6;
     public static final String RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE = String.format("로또 티켓은 %s 개의 숫자만 가능합니다.",
         MAX_LOTTO_NUMBERS_SIZE);
+
+    private final BuyType buyType;
     private final Set<LottoNumber> lottoNumbers;
 
-    private LottoNumbers(Set<LottoNumber> lottoNumbers) {
+    private LottoNumbers(Set<LottoNumber> lottoNumbers, BuyType buyType) {
         this.lottoNumbers = lottoNumbers;
+        this.buyType = buyType;
         validSize();
     }
 
-    public static LottoNumbers of(List<Integer> numbers) {
-        return new LottoNumbers(mapOf(numbers));
+    public static LottoNumbers of(List<LottoNumber> numbers, BuyType buyType) {
+        return new LottoNumbers(new HashSet<>(numbers), buyType);
+    }
+
+    public boolean isBuyType(BuyType buyType) {
+        return this.buyType == buyType;
+    }
+
+    public String toCommaSerialize() {
+        return lottoNumbers.stream()
+            .sorted()
+            .map(LottoNumber::value)
+            .collect(Collectors.toList()).toString();
     }
 
     public int containCount(LottoNumbers winLottoNumbers) {
@@ -32,22 +46,14 @@ public class LottoNumbers {
         return count;
     }
 
-    public boolean isContain(LottoNumber validLottoNumber) {
-        return lottoNumbers.contains(validLottoNumber);
-    }
-
     public boolean isBonusContain(LottoNumber bonusLottoNumber) {
-        long matchedCount = lottoNumbers.stream()
-            .filter(lottoNumber -> lottoNumber.equals(bonusLottoNumber))
-            .count();
-
-        return matchedCount != 0;
+        return lottoNumbers.contains(bonusLottoNumber);
     }
 
-    public String toCommaSerialize() {
-        return lottoNumbers.stream()
-            .map(LottoNumber::value)
-            .collect(Collectors.toList()).toString();
+    private void validSize() {
+        if (this.lottoNumbers.size() != MAX_LOTTO_NUMBERS_SIZE) {
+            throw new InvalidParamException(RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
+        }
     }
 
     private int containCheckAndIncrementCount(int count, LottoNumber winLottoNumber) {
@@ -57,20 +63,8 @@ public class LottoNumbers {
         return count;
     }
 
-    private void validSize() {
-        if (this.lottoNumbers.size() != MAX_LOTTO_NUMBERS_SIZE) {
-            throw new InvalidParamException(RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
-        }
-    }
-
-    private static Set<LottoNumber> mapOf(List<Integer> numbers) {
-        Set<LottoNumber> result = new HashSet<>();
-
-        for (int number : numbers) {
-            result.add(LottoNumber.of(number));
-        }
-
-        return result;
+    private boolean isContain(LottoNumber validLottoNumber) {
+        return lottoNumbers.contains(validLottoNumber);
     }
 
     @Override
