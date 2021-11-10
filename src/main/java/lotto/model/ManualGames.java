@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.exception.InvalidInputException;
 import lotto.view.strategy.Input;
 import lotto.view.strategy.InputManualGameNumbers;
 
@@ -8,15 +9,32 @@ import java.util.List;
 
 public class ManualGames {
 
+    private static final String INPUT_MESSAGE = "\n수동으로 구매할 번호를 입력해 주세요.";
+
     List<LottoNumbers> list;
 
     public ManualGames(final int manualGameCount) {
+        System.out.println(INPUT_MESSAGE);
         list = new ArrayList<>();
 
         for (int i = 0; i < manualGameCount; i++) {
+            list.add(addManualGame());
+        }
+    }
+
+    /**
+     * 수동게임번호 추가
+     *
+     * @return
+     */
+    private LottoNumbers addManualGame() {
+        try {
             Input input = new InputManualGameNumbers();
             String value = input.getValue();
-            list.add(new LottoNumbers(value));
+            return new LottoNumbers(value);
+        } catch (InvalidInputException e) {
+            System.out.println(e.getMessage());
+            return addManualGame();
         }
     }
 

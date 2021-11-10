@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.exception.InvalidInputException;
+import lotto.exception.UnexpectValueException;
 import lotto.model.*;
 import lotto.view.strategy.*;
 
@@ -36,7 +37,7 @@ public class InputView {
             Input input = new InputPurchaseManualGameCount();
             String value = input.getValue();
             return new ManualGameCount(gameCount.getValue(), Integer.valueOf(value));
-        } catch (InvalidInputException e) {
+        } catch (InvalidInputException | UnexpectValueException e) {
             System.out.println(e.getMessage());
             return inputPurchaseManualGameCount(gameCount);
         }
@@ -48,12 +49,7 @@ public class InputView {
      * @return
      */
     public static ManualGames inputManualGameNumbers(int manualGameCount) {
-        try {
-            return new ManualGames(manualGameCount);
-        } catch (InvalidInputException e) {
-            System.out.println(e.getMessage());
-            return inputManualGameNumbers(manualGameCount);
-        }
+        return new ManualGames(manualGameCount);
     }
 
     /**
