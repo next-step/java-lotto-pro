@@ -1,5 +1,6 @@
 package study;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -8,6 +9,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
+
+    @BeforeEach
+    void cleanUp() {
+        Numbers.cleanUp();
+    }
+
     @Test
     void splitAndSum_null_또는_빈문자() {
         int result = StringAddCalculator.splitAndSum(null);
