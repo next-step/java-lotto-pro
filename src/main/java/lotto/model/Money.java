@@ -5,6 +5,7 @@ public class Money {
     public static final String NUMBER_PATTERN = "-?\\d+";
     public static final String NUMBER_MESSAGE = "숫자를 입력해 주세요.";
     public static final String MINIMUM_AMOUNT_MESSAGE = "최소 금액 1000원보다 작은 금액을 입력하였습니다.";
+
     private int amount;
 
     public Money(String text) {
@@ -28,6 +29,10 @@ public class Money {
 
     public int getLottoCount() {
         return this.amount / PRICE_ONE_LOTTO;
+    }
+
+    public boolean isExceed(int lottoCount) {
+        return lottoCount * PRICE_ONE_LOTTO > amount;
     }
 }
 

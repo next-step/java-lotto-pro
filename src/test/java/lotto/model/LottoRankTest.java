@@ -7,8 +7,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRankTest {
     @ParameterizedTest
-    @EnumSource(names = {"FIVE_MATCHES"})
+    @EnumSource(names = {"THIRD"})
     void rankTest(LottoRank lottoRank) {
-        assertThat(lottoRank).isEqualTo(LottoRank.valueOf(5));
+        assertThat(lottoRank).isEqualTo(LottoRank.valueOf(5, false));
     }
 }

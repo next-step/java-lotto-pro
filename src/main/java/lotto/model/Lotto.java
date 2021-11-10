@@ -6,6 +6,7 @@ public class Lotto {
     public static final int LOTTO_SIZE = 6;
     public static final String NUMBER_COUNT_MESSAGE = "숫자의 갯수는 6개입니다.";
     public static final String DUPLICATE_MESSAGE = "중복된 값을 입력하였습니다.";
+
     private final List<LottoNumber> lotto = new ArrayList<>();
 
     public Lotto(List<Integer> lotto) {
@@ -32,8 +33,12 @@ public class Lotto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Lotto lotto1 = (Lotto) o;
         return Objects.equals(lotto, lotto1.lotto);
     }
