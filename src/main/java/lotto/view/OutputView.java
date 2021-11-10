@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoReports;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoType;
 import lotto.domain.Rank;
 
 public class OutputView {
@@ -9,7 +10,8 @@ public class OutputView {
     }
 
     public static void printLottoTickets(LottoTicket lottoTicket) {
-        System.out.println(lottoTicket.getSize() + "개를 구매했습니다.");
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다. %n",
+            lottoTicket.getCountOfLottoType(LottoType.MANUAL), lottoTicket.getCountOfLottoType(LottoType.AUTO));
         System.out.println(lottoTicket);
         System.out.println();
     }
