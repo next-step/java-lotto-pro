@@ -38,7 +38,6 @@ public class LottoTickets {
     public LottoTicketsDTO toDTO() {
         return new LottoTicketsDTO(lottoTickets.stream()
                 .map(LottoTicket::toDTO)
-                .collect(Collectors
-                        .toList()));
+                .collect(Collectors.toList()));
     }
 }

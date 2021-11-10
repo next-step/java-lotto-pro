@@ -27,8 +27,7 @@ public class LottoTicket {
     public static LottoTicket generateRandomLottoTicket() {
         List<Integer> lottoNumbers = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
                 .boxed()
-                .collect(Collectors
-                        .toList());
+                .collect(Collectors.toList());
         Collections.shuffle(lottoNumbers);
         return new LottoTicket(lottoNumbers.subList(FROM_INDEX, LOTTO_NUMBER_SIZE));
     }
@@ -78,7 +77,6 @@ public class LottoTicket {
     public LottoTicketDTO toDTO() {
         return new LottoTicketDTO(lottoNumbers.stream()
                 .map(LottoNumber::toDTO)
-                .collect(Collectors
-                        .toList()));
+                .collect(Collectors.toList()));
     }
 }

@@ -35,7 +35,6 @@ public class LottoController {
         GameResult gameResult = lottoService.getGameResult(lottoTickets, winningLottoTicket);
         resultView.printGameResult(gameResult);
         resultView.printEarningRatio(inputMoney.toDTO(),
-                new Money(gameResult.getPrize())
-                        .toDTO());
+                new Money(gameResult.getPrize()).toDTO());
     }
 }

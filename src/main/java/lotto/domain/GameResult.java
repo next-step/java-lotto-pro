@@ -15,16 +15,13 @@ public class GameResult {
     }
 
     public void add(int sameNumberCount) {
-        gameResult.put(sameNumberCount, gameResult
-                .getOrDefault(sameNumberCount, DEFAULT_VALUE) + INCREASE_AMOUNT);
+        gameResult.put(sameNumberCount, gameResult.getOrDefault(sameNumberCount, DEFAULT_VALUE) + INCREASE_AMOUNT);
     }
 
     public int getPrize() {
         int prizeMoney = PRIZE_MONEY_DEFAULT;
         for (Prize prize : Prize.values()) {
-            prizeMoney += gameResult.getOrDefault(prize
-                    .getMatchCount(), DEFAULT_VALUE) * prize
-                    .getPrizeMoney();
+            prizeMoney += gameResult.getOrDefault(prize.getMatchCount(), DEFAULT_VALUE) * prize.getPrizeMoney();
         }
         return prizeMoney;
     }
