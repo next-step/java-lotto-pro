@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class LottoShop {
-	public static final int LOTTO_PRICE = 1000;
+	public static final Money LOTTO_PRICE = new Money(1000);
 	private static final List<LottoNumber> allLottoNumbers = new ArrayList<>();
 
 	static {

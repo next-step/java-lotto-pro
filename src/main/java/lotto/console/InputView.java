@@ -43,7 +43,7 @@ public class InputView {
 	}
 
 	private static int validatePurchaseAmount(int purchaseAmount) {
-		if (purchaseAmount < LottoShop.LOTTO_PRICE) {
+		if (LottoShop.LOTTO_PRICE.isLess(purchaseAmount)) {
 			throw new IllegalArgumentException(ERROR_PURCHASE_AMOUNT);
 		}
 		return purchaseAmount;

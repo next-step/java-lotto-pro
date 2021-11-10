@@ -20,7 +20,7 @@ class MoneyTest {
 		//given
 		Money money = new Money(15000);
 		//when
-		int purchaseQuantity = money.getPurchaseQuantity(1000);
+		int purchaseQuantity = money.getPurchaseQuantity(new Money(1000));
 		//then
 		assertThat(purchaseQuantity).isEqualTo(15);
 	}

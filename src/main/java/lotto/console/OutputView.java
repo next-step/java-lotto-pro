@@ -63,7 +63,7 @@ public class OutputView {
 			printFist(rank, rank.countWinners(lottos, winningLotto));
 			profitSum += rank.getWinningAmount() * rank.countWinners(lottos, winningLotto);
 		}
-		double profitRate = profitSum / (LottoShop.LOTTO_PRICE * lottos.size());
+		double profitRate = profitSum / (LottoShop.LOTTO_PRICE.multiply(lottos.size()));
 		System.out.printf(PRINT_PROFIT_RATE, profitRate);
 	}
 

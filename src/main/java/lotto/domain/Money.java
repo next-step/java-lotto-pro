@@ -18,12 +18,20 @@ public class Money {
 		}
 	}
 
-	public int getPurchaseQuantity(int lottoPrice) {
+	public int getPurchaseQuantity(Money lottoPrice) {
 		return divide(lottoPrice);
 	}
 
-	private int divide(int lottoPrice) {
-		return money/lottoPrice;
+	private int divide(Money lottoPrice) {
+		return money / lottoPrice.money;
+	}
+
+	public int multiply(int size) {
+		return money * size;
+	}
+
+	public boolean isLess(int purchaseAmount) {
+		return purchaseAmount < money;
 	}
 
 	@Override
@@ -40,5 +48,6 @@ public class Money {
 	public int hashCode() {
 		return Objects.hash(money);
 	}
+
 
 }
