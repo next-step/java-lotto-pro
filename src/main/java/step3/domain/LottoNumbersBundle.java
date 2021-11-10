@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import step3.domain.constance.LottoConstant;
@@ -40,7 +41,7 @@ public class LottoNumbersBundle {
             result.add(lottoNumbers.toCommaSerialize());
         }
 
-        return result;
+        return Collections.unmodifiableList(result);
     }
 
     public LottoRanks lottoRanksOf(WinningLotto winningLotto, Amount amount) {
