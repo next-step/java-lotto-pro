@@ -1,13 +1,8 @@
 package lotto.view;
 
 import lotto.exception.InvalidInputException;
-import lotto.model.BonusNumber;
-import lotto.model.WinningNumber;
-import lotto.model.WinningNumbers;
-import lotto.view.strategy.Input;
-import lotto.view.strategy.InputBonusNumber;
-import lotto.view.strategy.InputPurchaseAmount;
-import lotto.view.strategy.InputWinNumbers;
+import lotto.model.*;
+import lotto.view.strategy.*;
 
 public class InputView {
 
@@ -32,15 +27,45 @@ public class InputView {
     }
 
     /**
+     * 로또 수동 구매수량을 입력합니다.
+     *
+     * @return
+     */
+    public static ManualGameCount inputPurchaseManualGameCount(GameCount gameCount) {
+        try {
+            Input input = new InputPurchaseManualGameCount();
+            String value = input.getValue();
+            return new ManualGameCount(gameCount.getValue(), Integer.valueOf(value));
+        } catch (InvalidInputException e) {
+            System.out.println(e.getMessage());
+            return inputPurchaseManualGameCount(gameCount);
+        }
+    }
+
+    /**
+     * 로또 수동 번호를 입력합니다.
+     *
+     * @return
+     */
+    public static ManualGames inputManualGameNumbers(int manualGameCount) {
+        try {
+            return new ManualGames(manualGameCount);
+        } catch (InvalidInputException e) {
+            System.out.println(e.getMessage());
+            return inputManualGameNumbers(manualGameCount);
+        }
+    }
+
+    /**
      * 로또 당첨번호를 입력합니다.
      *
      * @return 로또 당첨번호
      */
-    public static WinningNumbers inputWinningNumbers() {
+    public static LottoNumbers inputWinningNumbers() {
         try {
             Input input = new InputWinNumbers();
             String value = input.getValue();
-            return new WinningNumbers(value);
+            return new LottoNumbers(value);
         } catch (InvalidInputException | NumberFormatException e) {
             System.out.println(e.getMessage());
             return inputWinningNumbers();
@@ -52,7 +77,7 @@ public class InputView {
      *
      * @return
      */
-    public static WinningNumber inputBonusNumber(WinningNumbers winningNumbers) {
+    public static LottoNumber inputBonusNumber(LottoNumbers winningNumbers) {
         try {
             Input input = new InputBonusNumber();
             String value = input.getValue();
