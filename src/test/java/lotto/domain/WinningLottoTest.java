@@ -38,11 +38,13 @@ public class WinningLottoTest {
 	@Test
 	void winningLottoMatch_FIRST() {
 		WinningLotto winningLotto = new WinningLotto(
-			Stream.of(1, 2, 3, 4, 5, 6)
+			new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
 				.map(LottoNumber::new)
-				.collect(Collectors.toSet()));
+				.collect(Collectors.toSet())),
+			new LottoNumber(7)
+		);
 
-		WinningRecord winningRecord = winningLotto.match(lottos, new LottoNumber(7));
+		WinningRecord winningRecord = winningLotto.match(lottos);
 		int secondCount = winningRecord.getPlaceCount(Rank.FIRST);
 
 		assertThat(secondCount).isEqualTo(1);
@@ -52,10 +54,12 @@ public class WinningLottoTest {
 	@Test
 	void winningLottoMatch_SECOND_AND_THIRD() {
 		WinningLotto winningLotto = new WinningLotto(
-			Stream.of(1, 2, 3, 4, 5, 8)
+			new Lotto(Stream.of(1, 2, 3, 4, 5, 8)
 				.map(LottoNumber::new)
-				.collect(Collectors.toSet()));
-		WinningRecord winningRecord = winningLotto.match(lottos, new LottoNumber(6));
+				.collect(Collectors.toSet())),
+			new LottoNumber(6)
+		);
+		WinningRecord winningRecord = winningLotto.match(lottos);
 
 		int rankCount = winningRecord.getPlaceCount(Rank.SECOND);
 
@@ -68,17 +72,15 @@ public class WinningLottoTest {
 
 	@DisplayName("순위 반환 보너스 볼 중복")
 	@Test
-	void matchDuplicateBonusNumber(){
+	void matchDuplicateBonusNumber() {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
-				WinningLotto winningLotto = new WinningLotto(
-					Stream.of(1, 2, 3, 4, 5, 8)
-						.map(LottoNumber::new)
-						.collect(Collectors.toSet()));
-				LottoNumber bonusNumber = new LottoNumber(2);
+				Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 8)
+					.map(LottoNumber::new)
+					.collect(Collectors.toSet()));
+				LottoNumber lottoNumber = new LottoNumber(2);
 
-				winningLotto.match(lottos, bonusNumber);
-
+				WinningLotto winningLotto = new WinningLotto(lotto, lottoNumber);
 			}).withMessageMatching("보너스 볼이 중복되었습니다.");
 	}
 

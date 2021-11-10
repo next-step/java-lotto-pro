@@ -36,7 +36,7 @@ public class LottoTest {
 					.collect(Collectors.toSet());
 
 				new Lotto(lottoNumbers);
-			}).withMessageMatching("중복되지 않은 6개의 숫자를 입력해주세요.");
+			}).withMessageMatching("중복되지 않은 6개의 숫자를 입력해 주세요.");
 	}
 
 	@DisplayName("두개의 로또 번호 비교를 통한 순위 반환")

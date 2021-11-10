@@ -3,9 +3,9 @@ package lotto.service;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
-
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
@@ -36,7 +36,7 @@ public class LottoStore {
 
 	private WinningRecord getWinngRecord(WinningLotto winningLotto, Lottos userLottos) {
 		try {
-			return winningLotto.match(userLottos, new LottoNumber(InputView.inputBonusNumber()));
+			return winningLotto.match(userLottos);
 		} catch (IllegalArgumentException e) {
 			return getWinngRecord(winningLotto, userLottos);
 		}
@@ -52,13 +52,21 @@ public class LottoStore {
 
 	private WinningLotto getLastWeekWinningLotto() {
 		try {
-			return new WinningLotto(Arrays.stream(InputView.inputLastWeekLottoNumber())
-				.map(Integer::valueOf)
-				.map(LottoNumber::new)
-				.collect(Collectors.toSet()));
+			return new WinningLotto(generateWinningLotto(), generateBonusNumber());
 		} catch (IllegalArgumentException e) {
 			return getLastWeekWinningLotto();
 		}
+	}
+
+	private LottoNumber generateBonusNumber() {
+		return new LottoNumber(InputView.inputBonusNumber());
+	}
+
+	private Lotto generateWinningLotto() {
+		return new Lotto(Arrays.stream(InputView.inputLastWeekLottoNumber())
+			.map(Integer::valueOf)
+			.map(LottoNumber::new)
+			.collect(Collectors.toSet()));
 	}
 
 	private Lottos buyingLotto(int purchaseQuantity) {
