@@ -12,8 +12,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import step3.common.exception.InvalidParamException;
+import step3.domain.BuyType;
 import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
+import step3.domain.factory.LottoNumbersFactory;
 
 public class LottoNumbersTest {
 
@@ -21,12 +23,13 @@ public class LottoNumbersTest {
     @DisplayName("LottoNumbers.MAX_LOTTO_NUMBERS_SIZE 와 일치 하지 않는경우 예외 발생한다.")
     void createLottoNumbersByBuyCount() {
         // given
-        List<Integer> overSizeNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        List<LottoNumber> overSizeNumbers = LottoNumbersFactory.createManualLottoNumbersToList(
+            Arrays.asList(1, 2, 3, 4, 5, 6, 7));
 
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
-                LottoNumbers.of(overSizeNumbers);
+                LottoNumbers.of(overSizeNumbers, BuyType.MANUAL);
             }) // then
             .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
     }
@@ -35,12 +38,13 @@ public class LottoNumbersTest {
     @DisplayName("중복숫자 생성시 예외 발생한다.")
     void lottoNumbersCheckIsDuplicate() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 6, 6);
+        List<LottoNumber> overSizeNumbers = LottoNumbersFactory.createManualLottoNumbersToList(
+            Arrays.asList(1, 2, 3, 4, 6, 6));
 
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
-                LottoNumbers.of(numbers);
+                LottoNumbers.of(overSizeNumbers, BuyType.MANUAL);
             }) // then
             .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
     }
@@ -49,11 +53,11 @@ public class LottoNumbersTest {
     @DisplayName("보너스 숫자 포함여부체크, true 를 반환한다.")
     void isBonusContain() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> numbers = LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when
         LottoNumber bonusLottoNumber = LottoNumber.of(1);
-        LottoNumbers lottoNumbers = LottoNumbers.of(numbers);
+        LottoNumbers lottoNumbers = LottoNumbers.of(numbers, BuyType.MANUAL);
 
         // then
         boolean isBonusContain = lottoNumbers.isBonusContain(bonusLottoNumber);
@@ -73,12 +77,12 @@ public class LottoNumbersTest {
     @DisplayName("구매로또 번호 와 지난주로또 번호의 일치갯수 일치 검증")
     void containCount(String buyNumbersStr, String winNumbersStr, int expected) {
         // given
-        List<Integer> numbers = parseNumbers(buyNumbersStr);
-        List<Integer> winNumbers = parseNumbers(winNumbersStr);
+        List<LottoNumber> numbers = LottoNumbersFactory.createManualLottoNumbersToList(parseNumbers(buyNumbersStr));
+        List<LottoNumber> winNumbers = LottoNumbersFactory.createManualLottoNumbersToList(parseNumbers(winNumbersStr));
 
         // when
-        LottoNumbers lottoNumbers = LottoNumbers.of(numbers);
-        LottoNumbers winLottoNumbers = LottoNumbers.of(winNumbers);
+        LottoNumbers lottoNumbers = LottoNumbers.of(numbers, BuyType.MANUAL);
+        LottoNumbers winLottoNumbers = LottoNumbers.of(winNumbers, BuyType.MANUAL);
 
         // then
         assertThat(lottoNumbers.containCount(winLottoNumbers)).isEqualTo(expected);

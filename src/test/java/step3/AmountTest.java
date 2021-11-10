@@ -31,4 +31,5 @@ public class AmountTest {
                 amount.lottoBuyAndAmountMinus(2);
             });
     }
+
 }

@@ -2,6 +2,7 @@ package step3;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,10 +11,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import step3.domain.Amount;
+import step3.domain.LottoNumber;
+import step3.domain.LottoNumbers;
 import step3.domain.LottoNumbersBundle;
 import step3.domain.LottoRanks;
 import step3.domain.WinningLotto;
-import step3.domain.strategy.numbers.NumbersStrategy;
+import step3.domain.factory.LottoNumbersFactory;
 
 public class LottoNumbersBundleTest {
 
@@ -28,26 +32,20 @@ public class LottoNumbersBundleTest {
     @DisplayName("등수별 총 상금 테스트")
     void lottoRanksOf_totalPrize(String buyNumbersStr, String winNumbersStr, int bonusNumber, Long expected) {
         // given
-        LottoNumbersBundle lottoNumbersBundle = new LottoNumbersBundle();
-        addLottoNumbers(buyNumbersStr, lottoNumbersBundle);
+        Amount amount = new Amount(1000);
+        List<LottoNumbers> buyLotto = new ArrayList<>();
+        List<LottoNumbers> winLotto = new ArrayList<>();
+        buyLotto.add(LottoNumbersFactory.createManualLottoNumbers(parseNumbers(buyNumbersStr)));
+        LottoNumbersBundle lottoNumbersBundle = LottoNumbersBundle.of(buyLotto);
 
         // when
-        WinningLotto winningLotto = WinningLotto.of(parseNumbers(winNumbersStr), bonusNumber);
-        LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winningLotto);
+        WinningLotto winningLotto = WinningLotto.of(
+            LottoNumbersFactory.createManualLottoNumbers(parseNumbers(winNumbersStr)), LottoNumber.of(bonusNumber));
+        LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winningLotto, amount);
         Long totalPrize = lottoRanks.totalPrize();
 
         // then
         assertThat(totalPrize).isEqualTo(expected);
-    }
-
-    private void addLottoNumbers(String buyNumbersStr, LottoNumbersBundle lottoNumbersBundle) {
-        NumbersStrategy numbersStrategy = new NumbersStrategy() {
-            @Override
-            public List<Integer> getNumbers() {
-                return parseNumbers(buyNumbersStr);
-            }
-        };
-        lottoNumbersBundle.addLottoNumbers(numbersStrategy);
     }
 
     private List<Integer> parseNumbers(String inputNumbers) {
