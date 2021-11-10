@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 public class ResultView {
 
     private static final String PURCHASED_GAME_COUNT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.\n";
-    private static final String RESULT_TITLE_MESSAGE = "당첨 통계\r\n---------";
+    private static final String RESULT_TITLE_MESSAGE = "당첨 통계\n---------";
     private static final String MATCHED_RESULT_MESSAGE_PREFIX = "%s개 일치";
     private static final String MATCHED_RESULT_MESSAGE_SUFFIX = " (%s원) - %s개";
     private static final String MATCHED_RESULT_MESSAGE_FOR_SECOND_RANK = ", 보너스 볼 일치";
