@@ -1,94 +1,69 @@
 package step3.controller;
 
-import java.util.List;
-
 import step3.common.exception.InvalidParamException;
+import step3.domain.LottoBuyer;
+import step3.domain.LottoNumbersBundle;
 import step3.domain.LottoService;
-import step3.domain.strategy.numbers.NumbersStrategy;
-import step3.dto.LottoBoughtListResponse;
+import step3.domain.WinningLotto;
 import step3.dto.LottoStatisticsResponseDto;
 import step3.service.LottoServiceImpl;
 import step3.view.InputView;
 import step3.view.ResultView;
 
 public class LottoController {
-    LottoService lottoService = new LottoServiceImpl();
+    private final LottoService lottoService = new LottoServiceImpl();
+    private final LottoBuyer lottoBuyer;
 
     public LottoController() {
+        this.lottoBuyer = createLottoBuyer();
     }
 
     public void play() {
-        registerUserLottoBuyAmount();
+        lottoService.buyLotto(lottoBuyer, registerManualLottoNumbers());
 
-        registerManualLottoNumbers();
+        buyLottoResult();
 
-        registerAutoLottoNumbers();
-
-        lottoBoughtResult();
-
-        registerLatestLottoNumberAndBonus();
-
-        resultStatistics();
+        statisticsResult(registerLatestLottoNumberAndBonus());
     }
 
-    public void registerUserLottoBuyAmount() {
+    private void statisticsResult(WinningLotto winningLotto) {
+        LottoStatisticsResponseDto lottoStatisticsResponseDto = lottoService.resultStatistics(lottoBuyer, winningLotto);
+
+        ResultView.statisticsPrint(lottoStatisticsResponseDto);
+    }
+
+    private WinningLotto registerLatestLottoNumberAndBonus() {
+        return InputView.readWinningLottoNumbers();
+    }
+
+    private void buyLottoResult() {
+        ResultView.buyCountResultView(lottoBuyer);
+        ResultView.buyLottoResultView(lottoBuyer);
+    }
+
+    private LottoBuyer createLottoBuyer() {
         int buyAmount = InputView.readLottoAmount();
 
         try {
-            lottoService.registerBuyAmount(buyAmount);
+            return lottoService.registerLottoBuyer(buyAmount);
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
 
-            registerUserLottoBuyAmount();
+            return createLottoBuyer();
         }
     }
 
-    public void registerManualLottoNumbers() {
+    private LottoNumbersBundle registerManualLottoNumbers() {
         int manualBuyCount = InputView.readLottoManualBuyCount();
 
         try {
-            List<NumbersStrategy> manualLottoNumbers = InputView.readManualLottoNumbers(manualBuyCount);
-            lottoService.registerManualLottoBuy(manualLottoNumbers);
+            lottoBuyer.checkBuyAvailableQuantity(manualBuyCount);
+            return InputView.readManualLottoNumbers(manualBuyCount);
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
 
-            registerManualLottoNumbers();
+            return registerManualLottoNumbers();
         }
-    }
-
-    public void registerAutoLottoNumbers() {
-        lottoService.buyAutoLotto();
-    }
-
-    public void lottoBoughtResult() {
-        LottoBoughtListResponse lottoBoughtListResponse = lottoService.getBoughtLottos();
-        ResultView.boughtLottoView(lottoBoughtListResponse);
-    }
-
-    public void registerLatestLottoNumberAndBonus() {
-        try {
-            NumbersStrategy winningLottoNumber = InputView.readWinningLottoNumbers();
-            lottoService.winningLottoNumber(winningLottoNumber, registerBonusNumber());
-        } catch (InvalidParamException invalidParamException) {
-            ResultView.println(invalidParamException.getMessage());
-
-            registerLatestLottoNumberAndBonus();
-        }
-    }
-
-    public int registerBonusNumber() {
-        try {
-            return InputView.readBonusNumber();
-        } catch (InvalidParamException invalidParamException) {
-            ResultView.println(invalidParamException.getMessage());
-
-            return registerBonusNumber();
-        }
-    }
-
-    public void resultStatistics() {
-        LottoStatisticsResponseDto result = lottoService.resultStatistics();
-        ResultView.statisticsPrint(result);
     }
 
 }
