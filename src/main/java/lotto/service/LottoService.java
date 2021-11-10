@@ -1,9 +1,9 @@
 package lotto.service;
 
 import lotto.domain.GameResult;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.WinningLottoNumbers;
 
 public class LottoService {
 
@@ -21,7 +21,7 @@ public class LottoService {
         return money.getLottoAmount(LOTTO_TICKET_PRICE);
     }
 
-    public GameResult getGameResult(LottoTickets lottoTickets, LottoTicket winningNumber) {
-        return lottoTickets.getGameResult(winningNumber);
+    public GameResult getGameResult(LottoTickets lottoTickets, WinningLottoNumbers winningLottoNumbers) {
+        return lottoTickets.getGameResult(winningLottoNumbers);
     }
 }

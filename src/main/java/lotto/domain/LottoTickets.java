@@ -25,7 +25,7 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public GameResult getGameResult(LottoTicket winningNumber) {
+    public GameResult getGameResult(WinningLottoNumbers winningNumber) {
         GameResult gameResult = new GameResult();
         for (LottoTicket lottoTicket : lottoTickets) {
             Prize prize = lottoTicket.getPrize(winningNumber);

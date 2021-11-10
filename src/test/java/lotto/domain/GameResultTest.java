@@ -22,7 +22,7 @@ class GameResultTest {
         LottoTickets lottoTickets = new LottoTickets(lottoTicketsSource);
 
         // when
-        GameResult gameResult = lottoTickets.getGameResult(new LottoTicket(Arrays.asList(7, 8, 9, 10, 4, 5), 24));
+        GameResult gameResult = lottoTickets.getGameResult(new WinningLottoNumbers(Arrays.asList(7, 8, 9, 10, 4, 5), 24));
 
         // then
         assertThat(gameResult.getPrize()).isEqualTo(2001555000);
@@ -36,7 +36,7 @@ class GameResultTest {
         LottoTickets lottoTickets = new LottoTickets(lottoTicketsSource);
 
         // when
-        GameResult gameResult = lottoTickets.getGameResult(new LottoTicket(Arrays.asList(10, 2, 3, 4, 5, 11), 6));
+        GameResult gameResult = lottoTickets.getGameResult(new WinningLottoNumbers(Arrays.asList(10, 2, 3, 4, 5, 11), 6));
 
         // then
         assertThat(gameResult.getPrize()).isEqualTo(30000000);

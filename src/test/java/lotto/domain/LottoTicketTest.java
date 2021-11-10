@@ -47,9 +47,9 @@ class LottoTicketTest {
     @Test
     @DisplayName("동일한 숫자의 개수를 반환한다")
     void getSameNumberCountTest() {
-        LottoTicket lottoTicket1 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicket2 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7), 8);
 
-        assertThat(lottoTicket1.getPrize(lottoTicket2)).isEqualTo(Prize.THIRD);
+        assertThat(lottoTicket.getPrize(winningLottoNumbers)).isEqualTo(Prize.THIRD);
     }
 }

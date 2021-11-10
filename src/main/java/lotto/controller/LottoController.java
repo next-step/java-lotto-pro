@@ -1,9 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.GameResult;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.WinningLottoNumbers;
 import lotto.service.LottoService;
 import lotto.utility.ParseUtility;
 import lotto.view.InputView;
@@ -27,10 +27,10 @@ public class LottoController {
         resultView.printBuyResult(lottoTickets.toDTO());
 
         // 당첨번호 입력
-        LottoTicket winningLottoTicket = ParseUtility.StringToLottoTicket(inputView.inputWinningNumber(), inputView.inputBonusNumber());
+        WinningLottoNumbers winningLottoNumbers = ParseUtility.StringToWinningNumbers(inputView.inputWinningNumber(), inputView.inputBonusNumber());
 
         // 결과 출력
-        GameResult gameResult = lottoService.getGameResult(lottoTickets, winningLottoTicket);
+        GameResult gameResult = lottoService.getGameResult(lottoTickets, winningLottoNumbers);
         resultView.printGameResult(gameResult);
         resultView.printEarningRatio(inputMoney.toDTO(), new Money(gameResult.getPrize()).toDTO());
     }
