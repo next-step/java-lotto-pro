@@ -4,11 +4,11 @@ import lotto.exception.InvalidInputException;
 
 import java.util.List;
 
-public class BonusNumber extends WinningNumber {
+public class BonusNumber extends LottoNumber {
 
     private static final String INVALID_DUPLICATE_MESSAGE = "당첨번호와 중복된 보너스번호를 입력할 수 없습니다.";
 
-    public BonusNumber(String value, WinningNumbers winningNumbers) {
+    public BonusNumber(String value, LottoNumbers winningNumbers) {
         super(value);
         validateDuplicated(winningNumbers.getValues());
     }
@@ -19,7 +19,7 @@ public class BonusNumber extends WinningNumber {
      *
      * @param numbers 당첨번호
      */
-    private void validateDuplicated(List<WinningNumber> numbers) {
+    private void validateDuplicated(List<LottoNumber> numbers) {
         boolean hasDuplicatedNumber = numbers.stream()
                 .anyMatch(winningNumber -> winningNumber.getValue() == this.getValue());
 

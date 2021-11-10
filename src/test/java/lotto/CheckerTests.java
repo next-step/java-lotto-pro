@@ -20,7 +20,7 @@ public class CheckerTests {
         int purchaseAmount = 3000;
         GameCount gameCount = new GameCount(purchaseAmount);
         Games games = new Games(gameCount.getValue());
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+        LottoNumbers winningNumbers = new LottoNumbers("1,2,3,4,5,6");
         BonusNumber bonusNumber = new BonusNumber("10", winningNumbers);
         Checker checker = new Checker(games, winningNumbers, bonusNumber);
 

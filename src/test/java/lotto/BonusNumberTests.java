@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.exception.InvalidInputException;
 import lotto.model.BonusNumber;
-import lotto.model.WinningNumbers;
+import lotto.model.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -17,7 +17,7 @@ public class BonusNumberTests {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6;7", "8,10,24,38,44,45;12"}, delimiterString = ";")
     public void 보너스번호_생성_성공(String inputValues, String inputBonusNumber) {
-        WinningNumbers winningNumbers = new WinningNumbers(inputValues);
+        LottoNumbers winningNumbers = new LottoNumbers(inputValues);
         BonusNumber bonusNumber = new BonusNumber(inputBonusNumber, winningNumbers);
 
         assertThat(bonusNumber.getValue())
@@ -30,7 +30,7 @@ public class BonusNumberTests {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6;0", "1,2,3,4,5,6;1"}, delimiterString = ";")
     public void 보너스번호_생성_실패(String inputValues, String inputBonusNumber) {
-        WinningNumbers winningNumbers = new WinningNumbers(inputValues);
+        LottoNumbers winningNumbers = new LottoNumbers(inputValues);
 
         assertThatThrownBy(() -> new BonusNumber(inputBonusNumber, winningNumbers)).isInstanceOf(InvalidInputException.class);
     }

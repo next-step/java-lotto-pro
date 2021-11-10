@@ -5,13 +5,13 @@ import lotto.exception.InvalidInputException;
 import static lotto.common.Constants.MAX_RANGE_VALUE;
 import static lotto.common.Constants.MIN_RANGE_VALUE;
 
-public class WinningNumber {
+public class LottoNumber {
 
     private static final String INVALID_WINNING_NUMBER_MESSAGE = "%s-%s 사이의 숫자만 입력할 수 있습니다.";
 
     private Integer value;
 
-    public WinningNumber(String value) {
+    public LottoNumber(final String value) {
         this.value = Integer.parseInt(value);
         validateWinningNumber();
     }
