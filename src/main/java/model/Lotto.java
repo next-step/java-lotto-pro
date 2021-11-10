@@ -20,9 +20,8 @@ public class Lotto {
 		}
 		validateDuplication(lottoNumbers);
 
-		this.lottoNumbers = new ArrayList<>();
+		this.lottoNumbers = new ArrayList<>(lottoNumbers);
 		sortLottoNumbers(lottoNumbers);
-		this.lottoNumbers.addAll(lottoNumbers);
 	}
 
 	public Lotto(LottoNumberChoiceStrategy lottoNumberChoiceStrategy) {
