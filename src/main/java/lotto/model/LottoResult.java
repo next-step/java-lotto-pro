@@ -73,6 +73,6 @@ public class LottoResult {
 	}
 
 	public float getYield() {
-		return lottos.getInputMoney().calculateYield(calculateSum());
+		return lottos.purchaseMoney().calculateYield(calculateSum());
 	}
 }

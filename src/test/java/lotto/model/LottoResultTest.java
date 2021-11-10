@@ -3,6 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.*;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ class LottoResultTest {
 		//given
 		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(winningNumber, bonusNumber);
 		LottoNumbers lottoNumbers = LottoNumbers.from(lottoNumber);
-		Lottos lottos = Lottos.of(Collections.singletonList(lottoNumbers), money);
+		Lottos lottos = Lottos.of(Collections.singletonList(lottoNumbers), new ArrayList<>());
 		LottoResult lottoResult = LottoResult.of(winningLottoNumbers, lottos);
 
 		//when
@@ -55,7 +56,7 @@ class LottoResultTest {
 		Exception {
 		//given
 		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(winningNumber, bonusNumber);
-		Lottos lottos = Lottos.of(Collections.singletonList(LottoNumbers.from(inputNumber)), money);
+		Lottos lottos = Lottos.of(Collections.singletonList(LottoNumbers.from(inputNumber)), new ArrayList<>());
 		LottoResult lottoResult = LottoResult.of(winningLottoNumbers, lottos);
 
 		//when
@@ -79,7 +80,7 @@ class LottoResultTest {
 		float yieldResult) {
 		// given
 		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(winningLottoNumber, bonusNumber);
-		Lottos lottos = Lottos.of(Collections.singletonList(LottoNumbers.from(lottoNumber)), money);
+		Lottos lottos = Lottos.of(Collections.singletonList(LottoNumbers.from(lottoNumber)), new ArrayList<>());
 		LottoResult lottoResult = LottoResult.of(winningLottoNumbers, lottos);
 
 		// when
