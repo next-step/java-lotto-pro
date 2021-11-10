@@ -1,16 +1,16 @@
 package lotto.domain;
 
 public enum Prize {
-    THREE_MATCH_PRIZE(3, 5_000),
-    FOUR_MATCH_PRIZE(4, 50_000),
-    FIVE_MATCH_PRIZE(5, 1_500_000),
-    SIX_MATCH_PRIZE(6, 2_000_000_000);
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    FIRST(6, 2_000_000_000);
 
-    private final int matchCount;
+    private final int countOfMatch;
     private final int prizeMoney;
 
     Prize(int matchCount, int prizeMoney) {
-        this.matchCount = matchCount;
+        this.countOfMatch = matchCount;
         this.prizeMoney = prizeMoney;
     }
 
@@ -18,7 +18,7 @@ public enum Prize {
         return prizeMoney;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 }

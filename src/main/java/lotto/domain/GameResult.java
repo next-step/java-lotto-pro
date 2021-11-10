@@ -21,7 +21,7 @@ public class GameResult {
     public int getPrize() {
         int prizeMoney = PRIZE_MONEY_DEFAULT;
         for (Prize prize : Prize.values()) {
-            prizeMoney += gameResult.getOrDefault(prize.getMatchCount(), DEFAULT_VALUE) * prize.getPrizeMoney();
+            prizeMoney += gameResult.getOrDefault(prize.getCountOfMatch(), DEFAULT_VALUE) * prize.getPrizeMoney();
         }
         return prizeMoney;
     }

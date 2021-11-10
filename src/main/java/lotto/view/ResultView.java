@@ -38,10 +38,10 @@ public class ResultView {
     public void printGameResult(GameResult gameResult) {
         for (Prize prize : Prize.values()) {
             System.out.printf(GAME_RESULT_MESSAGE,
-                    prize.getMatchCount(),
+                    prize.getCountOfMatch(),
                     prize.getPrizeMoney(),
                     gameResult.getMatchCount(prize
-                            .getMatchCount()));
+                            .getCountOfMatch()));
         }
     }
 
