@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
 
 	MISS(0, 0),
@@ -25,34 +27,20 @@ public enum Rank {
 		return winningAmount.value();
 	}
 
-	public int countWinners(Lottos lottos, WinningLotto winningLotto) {
-		int count = 0;
-		for (Lotto lotto : lottos.getLottos()) {
-			count += ifSameRankCount(lotto.countMatchedNumber(winningLotto),
-				lotto.isMatch(winningLotto.getBonusBallNumber()));
+	public static Rank checkRank(long countOfMatch, boolean bonusNumberMatch) {
+		if (countOfMatch < Rank.FIFTH.getCountOfMatch()) {
+			return Rank.MISS;
 		}
-		return count;
-	}
-
-	private int ifSameRankCount(long countOfMatch, boolean bonusBallMatch) {
-		if (this == getRank(countOfMatch, bonusBallMatch)) {
-			return 1;
-		}
-		return 0;
-	}
-
-	private Rank getRank(long countOfMatch, boolean bonusBallMatch) {
 		if (countOfMatch == Rank.SECOND.getCountOfMatch()) {
-			return secondOrThirdRank(bonusBallMatch);
+			return secondOrThirdRank(bonusNumberMatch);
 		}
-
-		if (this.getCountOfMatch() == countOfMatch) {
-			return this;
-		}
-		return Rank.MISS;
+		return Arrays.stream(Rank.values())
+			.filter(rank -> rank.getCountOfMatch() == countOfMatch)
+			.findFirst()
+			.get();
 	}
 
-	private Rank secondOrThirdRank(boolean bonusBallMatch) {
+	private static Rank secondOrThirdRank(boolean bonusBallMatch) {
 		if (bonusBallMatch) {
 			return Rank.SECOND;
 		}

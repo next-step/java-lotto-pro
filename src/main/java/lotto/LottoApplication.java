@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.console.Repeater;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -9,7 +10,6 @@ import lotto.console.OutputView;
 import lotto.domain.WinningLotto;
 
 public class LottoApplication {
-
 
 	public static void main(String[] args) {
 		Repeater.init();
@@ -42,7 +42,8 @@ public class LottoApplication {
 		OutputView.newLine();
 		WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBallNumber);
 
+		LottoResult lottoResult = lottos.createLottoResult(winningLotto);
 		OutputView.printLottoStatisticsHeader();
-		OutputView.printLottoStatisticsBody(lottos, winningLotto);
+		OutputView.printLottoStatisticsBody(lottoResult);
 	}
 }

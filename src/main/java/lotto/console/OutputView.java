@@ -1,14 +1,12 @@
 package lotto.console;
 
-import java.util.Arrays;
 import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoShop;
-import lotto.domain.Lottos;
 import lotto.domain.Rank;
-import lotto.domain.WinningLotto;
 
 public class OutputView {
 	private static final String PRINT_PURCHASE_QUANTITY = "%d개를 구매했습니다.\n";
@@ -50,20 +48,21 @@ public class OutputView {
 	private static String extractStringValue(Lotto lotto) {
 		String lottoNumberStringValue = "";
 		for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
-			lottoNumberStringValue += lottoNumber.getValue() + ", ";
+			lottoNumberStringValue += lottoNumber.getValue() + Lotto.DELIMITER;
 		}
 		return lottoNumberStringValue.substring(0, lottoNumberStringValue.length() - 2);
 	}
 
-	public static void printLottoStatisticsBody(Lottos lottos, WinningLotto winningLotto) {
+	public static void printLottoStatisticsBody(LottoResult lottoResult) {
 		double profitSum = 0;
 		for (Rank rank : Rank.values()) {
-			printFifthToThird(rank, rank.countWinners(lottos, winningLotto));
-			printSencod(rank, rank.countWinners(lottos, winningLotto));
-			printFist(rank, rank.countWinners(lottos, winningLotto));
-			profitSum += rank.getWinningAmount() * rank.countWinners(lottos, winningLotto);
+			int winnerOfCount = lottoResult.countWinner(rank);
+			printFifthToThird(rank, winnerOfCount);
+			printSecond(rank, winnerOfCount);
+			printFist(rank, winnerOfCount);
+			profitSum += rank.getWinningAmount() * winnerOfCount;
 		}
-		double profitRate = profitSum / (LottoShop.LOTTO_PRICE.multiply(lottos.size()));
+		double profitRate = profitSum / (LottoShop.LOTTO_PRICE.multiply(lottoResult.countLotto()));
 		System.out.printf(PRINT_PROFIT_RATE, profitRate);
 	}
 
@@ -77,7 +76,7 @@ public class OutputView {
 		}
 	}
 
-	private static void printSencod(Rank rank, int winners) {
+	private static void printSecond(Rank rank, int winners) {
 		if (rank == Rank.SECOND) {
 			System.out.printf(PRINT_WINNING_INFORMATION_SECOND,
 				rank.getCountOfMatch(),

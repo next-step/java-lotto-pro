@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.LottoShop;
 import lotto.domain.Money;
 
@@ -67,7 +67,7 @@ public class InputView {
 	}
 
 	private static void validateStringLottoNumbersLength(String[] stringNumberArray) {
-		if (stringNumberArray.length != LottoNumbers.MAX_RANGE_VALUE) {
+		if (stringNumberArray.length != Lotto.MAX_RANGE_VALUE) {
 			throw new IllegalArgumentException(ERROR_WINNING_NUMBER_FORMAT);
 		}
 	}

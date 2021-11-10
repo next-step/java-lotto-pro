@@ -19,14 +19,10 @@ public class LottoShop {
 
 	private static Lotto create() {
 		Collections.shuffle(allLottoNumbers);
-		List<LottoNumber> lottoNumbers = allLottoNumbers.subList(LottoNumbers.MIN_RANGE_VALUE,
-			LottoNumbers.MAX_RANGE_VALUE);
+		List<LottoNumber> lottoNumbers = allLottoNumbers.subList(Lotto.MIN_RANGE_VALUE,
+			Lotto.MAX_RANGE_VALUE);
 		lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getValue));
-		return new Lotto(new LottoNumbers(lottoNumbers));
-	}
-
-	private static Lotto create(String lottoNumbers) {
-		return new Lotto(new LottoNumbers(lottoNumbers));
+		return new Lotto(lottoNumbers);
 	}
 
 	public static Lottos sell(Money purchaseAmount) {

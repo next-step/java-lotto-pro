@@ -25,10 +25,7 @@ class LottoShopTest {
 		//given
 		Lottos lottos = LottoShop.sell(new Money(1000));
 		//when
-		HashSet<LottoNumber> duplicateCheck = new HashSet<>();
-		lottos.stream().
-			forEach(lotto -> lotto.stream()
-				.forEach(lottoNumber -> duplicateCheck.add(lottoNumber)));
+		HashSet<LottoNumber> duplicateCheck = new HashSet<>(lottos.getLottos().get(0).getLottoNumbers());
 		//then
 		assertThat(duplicateCheck).hasSize(6);
 	}
