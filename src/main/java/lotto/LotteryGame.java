@@ -11,7 +11,7 @@ public class LotteryGame {
             purchaseLotteryTicket.add(LotteryTicketFactory.createLotteryTicket());
             InputView.printLottoTicketNumber(purchaseLotteryTicket.get(i).getLotteryNumber());
         }
-        WinningNumber winningNumber = WinningNumber.createWinningNumber(InputView.enterWinningNumber());
+        WinningNumber winningNumber = WinningNumber.createWinningNumber(InputView.enterWinningNumber(), InputView.enterBonusNumber());
         ResultView.printWinningStatistics(numberOfTicket, purchaseLotteryTicket, winningNumber);
     }
 }
