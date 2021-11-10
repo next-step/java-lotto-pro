@@ -10,7 +10,7 @@ public enum LottoNumbersSize {
         this.size = size;
     }
 
-    public int getSize() {
+    int getSize() {
         return size;
     }
 }

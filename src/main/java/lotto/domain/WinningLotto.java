@@ -16,7 +16,7 @@ public class WinningLotto {
         }
     }
 
-    public Rank createWinningRank(Lotto userLotto) {
+    Rank createWinningRank(Lotto userLotto) {
         int countOfMatch = lotto.match(userLotto);
         boolean matchBonus = userLotto.existLottoNumber(bonusNumber);
         return Rank.valueOf(countOfMatch, matchBonus);

@@ -26,7 +26,7 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+    static Rank valueOf(int countOfMatch, boolean matchBonus) {
         if (countOfMatch == MISS.countOfMatch) {
             return MISS;
         }

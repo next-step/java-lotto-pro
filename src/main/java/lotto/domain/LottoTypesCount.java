@@ -17,7 +17,7 @@ public class LottoTypesCount {
         return lottoTypesCount;
     }
 
-    public int getCountOfType(LottoType lottoType) {
+    int getCountOfType(LottoType lottoType) {
         return lottoTypesCount.get(lottoType);
     }
 }

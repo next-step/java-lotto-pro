@@ -7,7 +7,7 @@ import java.util.Map;
 public class LottoRanksCount {
     private final Map<Rank, Integer> lottoRanksCount;
 
-    public LottoRanksCount(List<Rank> lottoRanks) {
+    LottoRanksCount(List<Rank> lottoRanks) {
         this.lottoRanksCount = createRanksCount(lottoRanks);
     }
 
@@ -19,7 +19,7 @@ public class LottoRanksCount {
         return ranksCount;
     }
 
-    public long getRankCount(Rank rank) {
+    long getRankCount(Rank rank) {
         return lottoRanksCount.getOrDefault(rank, RankCount.RANK_DEFAULT_COUNT.count);
     }
 

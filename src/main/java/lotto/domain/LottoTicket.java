@@ -24,7 +24,7 @@ public class LottoTicket {
         return lottoTypesCount.getCountOfType(lottoType);
     }
 
-    public int getSize() {
+    int getSize() {
         return lottos.size();
     }
 

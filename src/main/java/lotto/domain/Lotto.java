@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
+    Lotto(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
         validateSorted(numbers);
@@ -49,14 +49,14 @@ public class Lotto {
         }
     }
 
-    public int match(Lotto userLotto) {
+    int match(Lotto userLotto) {
         Set<LottoNumber> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
         List<LottoNumber> userLottoNumbers = userLotto.lottoNumbers;
         nonDuplicateNumbers.addAll(userLottoNumbers);
         return this.lottoNumbers.size() + userLottoNumbers.size() - nonDuplicateNumbers.size();
     }
 
-    public boolean existLottoNumber(LottoNumber lottoNumber) {
+    boolean existLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

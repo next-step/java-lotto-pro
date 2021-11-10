@@ -12,10 +12,10 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber valueOf(int number) {
+    static LottoNumber valueOf(int number) {
         return new LottoNumber(number);
     }
-    
+
     public static LottoNumber valueOf(String number) {
         validatePositiveNumber(number);
         return new LottoNumber(Integer.parseInt(number));
