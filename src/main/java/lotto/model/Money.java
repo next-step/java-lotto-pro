@@ -57,6 +57,10 @@ public class Money {
 		return Integer.parseInt(input) < LOTTO_PRICE.intValue();
 	}
 
+	public static Money from(BigDecimal input) {
+		return new Money(input);
+	}
+
 	public int calculateLottoAmount() {
 		return money.divide(LOTTO_PRICE).intValue();
 	}
@@ -67,5 +71,9 @@ public class Money {
 
 	public float calculateYield(BigDecimal sum) {
 		return sum.divide(money, MATH_ROUND_VALUE, RoundingMode.HALF_EVEN).floatValue();
+	}
+
+	public boolean validSizeUnderAmount(int inputSize) {
+		return calculateLottoAmount() < inputSize;
 	}
 }
