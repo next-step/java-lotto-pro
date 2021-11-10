@@ -6,6 +6,10 @@ public class BonusLottoNumber extends LottoNumber {
 
     protected static final String BONUS_NUMBER_ERROR = "보너스 볼은 당첨 번호와 같을 수 없습니다.";
 
+    protected BonusLottoNumber(int bonusNumber) {
+        super(bonusNumber);
+    }
+
     public BonusLottoNumber(int bonusNumber, int[] numbers) {
         super(bonusNumber);
         validateBonusNumber(bonusNumber, numbers);

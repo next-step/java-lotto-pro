@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoResult;
 
+import static lotto.domain.LottoPrize.FIFTH_PLACE;
 import static lotto.domain.LottoPrize.FIRST_PLACE;
 import static lotto.domain.LottoPrize.FOURTH_PLACE;
 import static lotto.domain.LottoPrize.SECOND_PLACE;
@@ -19,12 +20,14 @@ public class ResultView {
                         "%d개 일치 (%d원)- %d개\n" +
                         "%d개 일치 (%d원)- %d개\n" +
                         "%d개 일치 (%d원)- %d개\n" +
+                        "%d개 일치, 보너스 볼 일치(%d원)- %d개\n" +
                         "%d개 일치 (%d원)- %d개\n" +
                         "총 수익률은 %f입니다."
-                , FOURTH_PLACE.getMatchCount(), FOURTH_PLACE.getPrizeMoney(), lottoResult.getResult(FOURTH_PLACE.getMatchCount())
-                , THIRD_PLACE.getMatchCount(), THIRD_PLACE.getPrizeMoney(), lottoResult.getResult(THIRD_PLACE.getMatchCount())
-                , SECOND_PLACE.getMatchCount(), SECOND_PLACE.getPrizeMoney(), lottoResult.getResult(SECOND_PLACE.getMatchCount())
-                , FIRST_PLACE.getMatchCount(), FIRST_PLACE.getPrizeMoney(), lottoResult.getResult(FIRST_PLACE.getMatchCount())
+                , FIFTH_PLACE.getMatchCount(), FIFTH_PLACE.getPrizeMoney(), lottoResult.getPrizeCount(FIFTH_PLACE)
+                , FOURTH_PLACE.getMatchCount(), FOURTH_PLACE.getPrizeMoney(), lottoResult.getPrizeCount(FOURTH_PLACE)
+                , THIRD_PLACE.getMatchCount(), THIRD_PLACE.getPrizeMoney(), lottoResult.getPrizeCount(THIRD_PLACE)
+                , SECOND_PLACE.getMatchCount(), SECOND_PLACE.getPrizeMoney(), lottoResult.getPrizeCount(SECOND_PLACE)
+                , FIRST_PLACE.getMatchCount(), FIRST_PLACE.getPrizeMoney(), lottoResult.getPrizeCount(FIRST_PLACE)
                 , lottoResult.getEarningsRate());
     }
 }

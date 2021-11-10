@@ -41,4 +41,14 @@ class LottoTest {
                 .isThrownBy(() -> lotto.addLottoNumber(new LottoNumber(7)))
                 .withMessage(Lotto.LOTTO_NUMBER_COUNT_ERROR);
     }
+
+    @DisplayName("일치하는 번호 개수 테스트")
+    @Test
+    void getMatchCount() {
+        // given
+        Lotto lotto = new Lotto(1, 2, 3, 7, 8, 9);
+
+        // when & then
+        Assertions.assertThat(this.lotto.getMatchCount(lotto)).isEqualTo(3);
+    }
 }

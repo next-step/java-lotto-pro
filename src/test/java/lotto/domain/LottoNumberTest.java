@@ -1,11 +1,12 @@
 package lotto.domain;
 
 import lotto.exception.LottoException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoNumberTest {
@@ -28,7 +29,39 @@ class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber(number);
 
         // then
-        Assertions.assertThat(lottoNumber)
+        assertThat(lottoNumber)
                 .isExactlyInstanceOf(LottoNumber.class);
+    }
+
+    @DisplayName("isBonusNumber true 테스트")
+    @Test
+    void isBonusNumber_true() {
+        // given
+        int number = 1;
+        int bonusNumber = 1;
+
+        // when
+        LottoNumber lottoNumber = new LottoNumber(number);
+        BonusLottoNumber bonusLottoNumber = new BonusLottoNumber(bonusNumber);
+        boolean result = lottoNumber.isBonusNumber(bonusLottoNumber);
+
+        // then
+        assertThat(result).isTrue();
+    }
+
+    @DisplayName("isBonusNumber false 테스트")
+    @Test
+    void isBonusNumber_false() {
+        // given
+        int number = 1;
+        int bonusNumber = 2;
+
+        // when
+        LottoNumber lottoNumber = new LottoNumber(number);
+        BonusLottoNumber bonusLottoNumber = new BonusLottoNumber(bonusNumber);
+        boolean result = lottoNumber.isBonusNumber(bonusLottoNumber);
+
+        // then
+        assertThat(result).isFalse();
     }
 }
