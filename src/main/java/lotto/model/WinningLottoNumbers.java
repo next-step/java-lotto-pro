@@ -8,6 +8,9 @@ public class WinningLottoNumbers extends LottoNumbers {
 	public WinningLottoNumbers(int[] arrayIntNumbers, int bonusNumber) {
 		super(arrayIntNumbers);
 		this.bonusNumber = new LottoNumber(bonusNumber);
+		if (this.numbers.contains(this.bonusNumber)) {
+			throw new IllegalArgumentException("보너스 번호는 당첨번호와 다른 번호여야 합니다. ("+this.numbers+" / "+this.bonusNumber+")");
+		}
 	}
 
 	public WinningLottoNumbers(String numbers, String bunusNumber) {
