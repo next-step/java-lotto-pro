@@ -11,6 +11,9 @@ public class TicketLotteryBundle {
     private static final String TICKET_LOTTERY_BUNDLE_MUST_BE_NOT_EMPTY_ERROR_MESSAGE = "로또복권묶음은 최소 1개의 로또복권이 존재해야 합니다.";
     private final List<TicketLottery> ticketLotteries = new ArrayList<>();
 
+    public TicketLotteryBundle() {
+    }
+
     private TicketLotteryBundle(final List<TicketLottery> ticketLotteries) {
         validateNotEmpty(ticketLotteries);
         this.ticketLotteries.addAll(ticketLotteries);
@@ -26,21 +29,24 @@ public class TicketLotteryBundle {
         return new TicketLotteryBundle(ticketLotteries);
     }
 
-    public static TicketLotteryBundle valueOf(List<Set<Integer>> manualTicketLotteryBundle, TicketLotteryType type) {
+    public static TicketLotteryBundle valueOf(final List<Set<Integer>> ticketLotteryBundle, final TicketLotteryType type) {
         final List<TicketLottery> ticketLotteries = new ArrayList<>();
-        for (Set<Integer> numbers : manualTicketLotteryBundle) {
+        for (Set<Integer> numbers : ticketLotteryBundle) {
             ticketLotteries.add(TicketLottery.valueOf(numbers, type));
         }
         return TicketLotteryBundle.valueOf(ticketLotteries);
     }
 
-    public TicketLotteryBundle merge(final TicketLotteryBundle ticketLotteryBundle) {
-        return this.addAll(ticketLotteryBundle);
+    public static TicketLotteryBundle valueOf(OrderManualTicketLotteryBundle ticketLotteryBundle, TicketLotteryType type) {
+        return new TicketLotteryBundle(ticketLotteryBundle.parseTicketLotteryList(type));
     }
 
-    private TicketLotteryBundle addAll(TicketLotteryBundle ticketLotteryBundle) {
+    public void merge(final TicketLotteryBundle ticketLotteryBundle) {
+        this.addAll(ticketLotteryBundle);
+    }
+
+    private void addAll(TicketLotteryBundle ticketLotteryBundle) {
         this.ticketLotteries.addAll(ticketLotteryBundle.ticketLotteries);
-        return this;
     }
 
     public List<TicketLottery> getTicketLotteries() {
@@ -51,4 +57,15 @@ public class TicketLotteryBundle {
         return ticketLotteries.size();
     }
 
+    public int getAutoTicketSize() {
+        return (int) ticketLotteries.stream()
+                .filter(ticketLottery -> ticketLottery.getType().isAutoTicket())
+                .count();
+    }
+
+    public int getManualTicketSize() {
+        return (int) ticketLotteries.stream()
+                .filter(ticketLottery -> ticketLottery.getType().isManualTicket())
+                .count();
+    }
 }
