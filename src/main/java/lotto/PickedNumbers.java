@@ -3,15 +3,15 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Numbers {
+public class PickedNumbers {
 
     private static final int SIZE = 6;
 
-    private final List<Number> numbers;
+    private final List<Number> pickedNumbers;
 
-    public Numbers(List<Number> numbers) {
-        validateSize(numbers);
-        this.numbers = new ArrayList<>(numbers);
+    public PickedNumbers(List<Number> pickedNumbers) {
+        validateSize(pickedNumbers);
+        this.pickedNumbers = new ArrayList<>(pickedNumbers);
     }
 
     private void validateSize(final List<Number> numbers) {

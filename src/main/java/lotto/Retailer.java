@@ -9,7 +9,7 @@ public class Retailer {
     public static Playslips buy(final Price amount) {
         List<Playslip> playslips = new ArrayList<>();
         for (int i = 0; i < amount.calculateNumberOfUnits(); i++) {
-            final Numbers numbers = new Numbers(Arrays.asList(
+            final PickedNumbers numbers = new PickedNumbers(Arrays.asList(
                 new Number(1),
                 new Number(2),
                 new Number(3),
