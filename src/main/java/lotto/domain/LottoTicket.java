@@ -9,9 +9,8 @@ import java.util.stream.Collectors;
 
 import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
-import view.Printable;
 
-public class LottoTicket implements Printable {
+public class LottoTicket {
     private static final String LOTTO_TICKET_MESSAGE_FORMAT = "[%s]";
     private static final String COMMA_SPACE = ", ";
 
@@ -95,7 +94,6 @@ public class LottoTicket implements Printable {
         return Objects.hash(lottoNumbers);
     }
 
-    @Override
     public String makePrintableMessage() {
         return String.format(LOTTO_TICKET_MESSAGE_FORMAT,
             lottoNumbers.stream().map(LottoNumber::makePrintableMessage).collect(Collectors.joining(COMMA_SPACE)));

@@ -6,9 +6,8 @@ import java.util.Objects;
 
 import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
-import view.Printable;
 
-public class LottoMoney implements Printable {
+public class LottoMoney {
     private static final int LOTTO_PRICE = 1000;
     private static final String WON = "원";
     private static final int ZERO_SIZE = 0;
@@ -78,7 +77,6 @@ public class LottoMoney implements Printable {
         return Objects.hash(money);
     }
 
-    @Override
     public String makePrintableMessage() {
         return money + WON;
     }

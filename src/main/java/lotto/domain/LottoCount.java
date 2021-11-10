@@ -4,9 +4,8 @@ import java.util.Objects;
 
 import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
-import view.Printable;
 
-public class LottoCount implements Printable {
+public class LottoCount {
     private static final int MIN_COUNT = 0;
     private final long count;
 
@@ -42,7 +41,6 @@ public class LottoCount implements Printable {
         return Objects.hash(count);
     }
 
-    @Override
     public String makePrintableMessage() {
         return String.valueOf(count);
     }

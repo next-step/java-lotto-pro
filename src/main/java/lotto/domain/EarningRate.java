@@ -4,9 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-import view.Printable;
-
-public class EarningRate implements Printable {
+public class EarningRate {
     public static final EarningRate ZERO = new EarningRate(BigDecimal.ZERO);
 
     private static final int DECIMAL_SCALE = 2;
@@ -33,7 +31,6 @@ public class EarningRate implements Printable {
         return Objects.hash(rate);
     }
 
-    @Override
     public String makePrintableMessage() {
         return String.valueOf(rate);
     }

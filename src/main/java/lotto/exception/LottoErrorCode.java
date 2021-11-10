@@ -1,8 +1,6 @@
 package lotto.exception;
 
-import view.Printable;
-
-public enum LottoErrorCode implements Printable {
+public enum LottoErrorCode {
     INVALID_MONEY("0 이상의 숫자를 입력해주세요."),
     INVALID_LOTTO_NUMBER("1 ~ 45 사이의 숫자를 입력해주세요."),
     INVALID_LOTTO_COUNT("로또 티켓 갯수는 양수여야 합니다."),
@@ -14,7 +12,6 @@ public enum LottoErrorCode implements Printable {
         this.message = message;
     }
 
-    @Override
     public String makePrintableMessage() {
         return message;
     }

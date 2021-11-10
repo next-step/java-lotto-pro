@@ -16,40 +16,40 @@ public class LottoMachine {
         LottoMoney lottoMoney = getLottoMoney();
 
         LottoCount lottoCount = lottoMoney.calculateLottoCount();
-        ResultView.print(() -> String.format(OutputMessage.PRINT_NUMBER_OF_PURCHASED_LOTTO.makePrintableMessage(),
+        ResultView.print(String.format(OutputMessage.PRINT_NUMBER_OF_PURCHASED_LOTTO.getMessage(),
             lottoCount.makePrintableMessage()));
 
         LottoTickets lottoTickets = LottoTicketFactory.createRandomLottoTickets(lottoCount);
-        ResultView.print(lottoTickets);
+        ResultView.print(lottoTickets.makePrintableMessage());
         printWinningStatistics(lottoTickets.calculateResult(getWinnerTicket()));
     }
 
     private LottoMoney getLottoMoney() {
-        ResultView.print(OutputMessage.ASK_PURCHASE_AMOUNT);
+        ResultView.print(OutputMessage.ASK_PURCHASE_AMOUNT.getMessage());
         try {
             return new LottoMoney(InputView.readLine());
         } catch (LottoException lottoException) {
-            ResultView.print(lottoException::getMessage);
+            ResultView.print(lottoException.getMessage());
             return getLottoMoney();
         }
     }
 
     private LottoTicket getWinnerTicket() {
-        ResultView.print(OutputMessage.PRINT_NEW_LINE);
-        ResultView.print(OutputMessage.ASK_WINNER_TICKET);
+        ResultView.print(OutputMessage.PRINT_NEW_LINE.getMessage());
+        ResultView.print(OutputMessage.ASK_WINNER_TICKET.getMessage());
         try {
             return new LottoTicket(InputView.readLine());
         } catch (LottoException lottoException) {
-            ResultView.print(lottoException::getMessage);
+            ResultView.print(lottoException.getMessage());
             return getWinnerTicket();
         }
     }
 
     private void printWinningStatistics(LottoResults lottoResults) {
-        ResultView.print(OutputMessage.PRINT_NEW_LINE);
-        ResultView.print(OutputMessage.PRINT_STATISTICS_INTRO);
-        ResultView.print(lottoResults);
-        ResultView.print(() -> String.format(OutputMessage.PRINT_TOTAL_EARNING_RATE.makePrintableMessage(),
+        ResultView.print(OutputMessage.PRINT_NEW_LINE.getMessage());
+        ResultView.print(OutputMessage.PRINT_STATISTICS_INTRO.getMessage());
+        ResultView.print(lottoResults.makePrintableMessage());
+        ResultView.print(String.format(OutputMessage.PRINT_TOTAL_EARNING_RATE.getMessage(),
             lottoResults.calculateEarningRate().makePrintableMessage()));
     }
 }

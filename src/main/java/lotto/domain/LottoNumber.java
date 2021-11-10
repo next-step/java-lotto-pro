@@ -4,9 +4,8 @@ import java.util.Objects;
 
 import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
-import view.Printable;
 
-public class LottoNumber implements Comparable<LottoNumber>, Printable {
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
     public static final int LOTTO_MIN_NUMBER = 1;
     public static final int LOTTO_MAX_NUMBER = 45;
@@ -44,7 +43,6 @@ public class LottoNumber implements Comparable<LottoNumber>, Printable {
         return Integer.compare(this.number, that.number);
     }
 
-    @Override
     public String makePrintableMessage() {
         return String.valueOf(number);
     }

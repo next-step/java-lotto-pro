@@ -1,7 +1,7 @@
 package view;
 
 public class ResultView {
-    public static void print(Printable printable) {
-        System.out.println(printable.makePrintableMessage());
+    public static void print(String message) {
+        System.out.println(message);
     }
 }

@@ -5,9 +5,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import view.Printable;
-
-public enum LottoResult implements Printable {
+public enum LottoResult {
     THREE(3, new LottoMoney(5000)),
     FOUR(4, new LottoMoney(50000)),
     FIVE(5, new LottoMoney(1500000)),
@@ -37,7 +35,6 @@ public enum LottoResult implements Printable {
         return lottoMoney;
     }
 
-    @Override
     public String makePrintableMessage() {
         return String.format(LOTTO_RESULT_MESSAGE_FORMAT, correctCount, lottoMoney.makePrintableMessage());
     }

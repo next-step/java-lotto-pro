@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import view.Printable;
-
-public class LottoTickets implements Printable {
+public class LottoTickets {
     private List<LottoTicket> lottoTicketList;
 
     private static final String NEW_LINE = "\n";
@@ -38,7 +36,6 @@ public class LottoTickets implements Printable {
         return Objects.hash(lottoTicketList);
     }
 
-    @Override
     public String makePrintableMessage() {
         return lottoTicketList.stream().map(LottoTicket::makePrintableMessage).collect(Collectors.joining(NEW_LINE));
     }

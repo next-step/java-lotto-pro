@@ -9,9 +9,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import view.Printable;
-
-public class LottoResults implements Printable {
+public class LottoResults {
     private static final String NEW_LINE = "\n";
     private static final String LOTTO_RESULTS_MESSAGE_FORMAT = "%s- %d개";
     private static final long ZERO_COUNT = 0L;
@@ -43,7 +41,6 @@ public class LottoResults implements Printable {
         return LottoMoney.calculateEarningRate(lottoResults.stream().map(LottoResult::getLottoMoney).collect(toList()));
     }
 
-    @Override
     public String makePrintableMessage() {
         Map<LottoResult, Long> resultCounts = lottoResults.stream()
             .collect(groupingBy(Function.identity(), counting()));
