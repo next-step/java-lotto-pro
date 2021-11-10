@@ -1,8 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import calculator.StringSplitParser;
@@ -58,19 +60,8 @@ public class Lotto {
 	}
 
 	private void validateDuplication(List<LottoNumber> lottoNumbers) {
-		for (int i = 0; i < lottoNumbers.size(); ++i) {
-			validateDuplication(lottoNumbers, i);
-		}
-	}
-
-	private void validateDuplication(List<LottoNumber> lottoNumbers, int i) {
-		for (int j = i + 1; j < lottoNumbers.size(); ++j) {
-			validateDuplication(lottoNumbers, i, j);
-		}
-	}
-
-	private void validateDuplication(List<LottoNumber> lottoNumbers, int i, int j) {
-		if (lottoNumbers.get(i).equals(lottoNumbers.get(j))) {
+		Set<LottoNumber> lottoNumbersWithoutDuplication = new HashSet<>(lottoNumbers);
+		if (lottoNumbersWithoutDuplication.size() != lottoNumbers.size()) {
 			throw new IllegalArgumentException(MESSAGE_NOT_ALLOW_DUPLICATION);
 		}
 	}
