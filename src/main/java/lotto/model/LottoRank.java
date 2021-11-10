@@ -22,13 +22,6 @@ public enum LottoRank {
 		this.money = money;
 	}
 
-	public static LottoRank getRankCode(int containsCount) {
-		return Arrays.stream(LottoRank.values())
-			.filter(rankCode -> rankCode.containsCount == containsCount)
-			.findAny()
-			.orElse(NOTHING);
-	}
-
 	public static LottoRank getRankCode(int containsCount, int bonusCount) {
 		if (validSecondRank(containsCount)) {
 			return getSecondRankCode(containsCount, bonusCount);
