@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import lotto.model.enums.Rank;
 
@@ -13,12 +14,16 @@ public class LottoMatcher {
     private final LottoNumbers winningNumbers;
 
     public LottoMatcher(int bonusNumber, int... winningNumbers) {
-        this(Number.valueOf(bonusNumber), new LottoNumbers(winningNumbers));
+        this(Number.of(bonusNumber), new LottoNumbers(winningNumbers));
     }
 
     public LottoMatcher(Number bonusNumber, LottoNumbers winningNumbers) {
+        Objects.requireNonNull(bonusNumber);
+        Objects.requireNonNull(winningNumbers);
+
         this.bonusNumber = bonusNumber;
         this.winningNumbers = winningNumbers;
+
         validate();
     }
 
@@ -28,12 +33,14 @@ public class LottoMatcher {
         }
     }
 
-    public MatchResult match(Payment payment, Collection<LottoNumbers> lottoNumbersCollection) {
+    public MatchResult match(Payment payment, Collection<LottoNumbers> lottoNumbers) {
+        Objects.requireNonNull(payment);
+        Objects.requireNonNull(lottoNumbers);
+
         List<Rank> ranks = new ArrayList<>();
-        for (LottoNumbers lottoNumbers : lottoNumbersCollection) {
-            int countOfMatch = lottoNumbers.getCountOfMatch(winningNumbers);
-            boolean matchBonus = lottoNumbers.contains(bonusNumber);
-            ranks.add(Rank.valueOf(countOfMatch, matchBonus));
+        for (LottoNumbers numbers : lottoNumbers) {
+            Rank rank = numbers.computeRank(bonusNumber, winningNumbers);
+            ranks.add(rank);
         }
         return new MatchResult(payment, ranks);
     }

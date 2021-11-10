@@ -10,10 +10,10 @@ public class RandomNumberSupplier {
     private RandomNumberSupplier() {
     }
 
-    public static Set<Number> generateNumbers() {
+    public static Set<Number> generate() {
         List<Number> numbers = new ArrayList<>();
         for (int i = Number.MIN_NUMBER; i <= Number.MAX_NUMBER; i++) {
-            numbers.add(Number.valueOf(i));
+            numbers.add(Number.of(i));
         }
         Collections.shuffle(numbers);
         Set<Number> chosenNumbers = new HashSet<>(numbers.subList(0, LottoNumbers.NUMBER_SIZE));

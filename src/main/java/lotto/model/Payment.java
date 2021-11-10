@@ -23,11 +23,11 @@ public class Payment {
         }
     }
 
-    public int getLottoCount() {
+    public int countLotto() {
         return payment / LOTTO_PRICE;
     }
 
-    public RateOfReturn getRateOfReturn(int prizeMoney) {
+    public RateOfReturn computeRateOfReturn(int prizeMoney) {
         return new RateOfReturn((double)prizeMoney / payment);
     }
 

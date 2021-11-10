@@ -17,6 +17,9 @@ public class MatchResult {
     }
 
     public MatchResult(Payment payment, List<Rank> ranks) {
+        Objects.requireNonNull(payment);
+        Objects.requireNonNull(ranks);
+
         rankToCount = new HashMap<>();
         initialize();
 
@@ -25,7 +28,7 @@ public class MatchResult {
             rankToCount.merge(rank, 1, Integer::sum);
             prizeMoney += rank.getWinningMoney();
         }
-        rateOfReturn = payment.getRateOfReturn(prizeMoney);
+        rateOfReturn = payment.computeRateOfReturn(prizeMoney);
     }
 
     private void initialize() {
@@ -38,7 +41,7 @@ public class MatchResult {
         return rateOfReturn;
     }
 
-    public int getCount(Rank rank) {
+    public int countRank(Rank rank) {
         return rankToCount.get(rank);
     }
 

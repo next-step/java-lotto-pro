@@ -20,11 +20,11 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoPurchase(Collection<LottoNumbers> numbersCollection) {
+    public static void printLottoPurchase(Collection<LottoNumbers> lottoNumbers) {
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
-        stringJoiner.add(String.format(NUMBER_OF_LOTTO_STATEMENT_FORMAT, numbersCollection.size()));
-        for (LottoNumbers lottoNumbers : numbersCollection) {
-            stringJoiner.add(lottoNumbers.toString());
+        stringJoiner.add(String.format(NUMBER_OF_LOTTO_STATEMENT_FORMAT, lottoNumbers.size()));
+        for (LottoNumbers numbers : lottoNumbers) {
+            stringJoiner.add(numbers.toString());
         }
         System.out.println(stringJoiner);
         System.out.println();
@@ -36,7 +36,7 @@ public class OutputView {
         for (Rank rank : Rank.getRanksHavingWinningMoney()) {
             stringJoiner.add(
                 String.format(getMatchStatementFormat(rank), rank.getCountOfMatch(), rank.getWinningMoney(),
-                    matchResult.getCount(rank)));
+                    matchResult.countRank(rank)));
         }
         stringJoiner.add(String.format(RATE_OF_RETURN_STATEMENT_FORMAT, matchResult.getRateOfReturn()));
         System.out.println();

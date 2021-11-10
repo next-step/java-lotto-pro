@@ -11,6 +11,8 @@ import lotto.model.Number;
 import lotto.model.Payment;
 
 public class InputView {
+    static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
     private static final String NUMBER_DELIMITER = ",";
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
     private static final Pattern LOTTO_NUMBER_PATTERN = Pattern.compile("\\d+(" + NUMBER_DELIMITER + "\\d+){5}");
@@ -20,8 +22,6 @@ public class InputView {
     private static final String QUERY_FOR_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String INVALID_NUMBER_INPUT_ERR_MSG = "숫자만 입력 가능합니다.";
     private static final String INVALID_LOTTO_NUMBER_INPUT_ERR_MSG = "잘못된 형식의 로또 번호입니다.";
-
-    private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
 
     private InputView() {
     }
@@ -49,7 +49,7 @@ public class InputView {
         System.out.println(QUERY_FOR_BONUS_NUMBER);
         String bonusNumber = readLine();
         validateNumberPattern(bonusNumber);
-        return Number.valueOf(Integer.parseInt(bonusNumber));
+        return Number.of(Integer.parseInt(bonusNumber));
     }
 
     private static void validateNumberPattern(String input) {
@@ -60,7 +60,7 @@ public class InputView {
 
     private static String readLine() {
         try {
-            return BUFFERED_READER.readLine().trim();
+            return bufferedReader.readLine().trim();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

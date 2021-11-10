@@ -26,7 +26,8 @@ public enum Rank {
         if (countOfMatch == THIRD.getCountOfMatch() && !matchBonus) {
             return THIRD;
         }
-        return Arrays.stream(values()).filter(rank -> rank.getCountOfMatch() == countOfMatch)
+        return Arrays.stream(values())
+            .filter(rank -> rank.getCountOfMatch() == countOfMatch)
             .findFirst()
             .orElse(MISS);
     }

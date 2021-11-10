@@ -16,8 +16,18 @@ public class RateOfReturnTest {
     }
 
     @Test
+    @DisplayName("1 미만의 값을 가지면 isLosingMoney()는 true를 반환, 1 이상의 값을 가지면 false를 반환하는지 테스트")
     void isLosingMoney() {
-        assertThat(new RateOfReturn(1).isLosingMoney()).isFalse();
-        assertThat(new RateOfReturn(0.99).isLosingMoney()).isTrue();
+        RateOfReturn notLosingMoneyRate = new RateOfReturn(1);
+        assertThat(notLosingMoneyRate.isLosingMoney()).isFalse();
+
+        RateOfReturn losingMoneyRate = new RateOfReturn(0.99);
+        assertThat(losingMoneyRate.isLosingMoney()).isTrue();
+    }
+
+    @Test
+    @DisplayName("동등성 검사")
+    void equals() {
+        assertThat(new RateOfReturn(1.1)).isEqualTo(new RateOfReturn(1.1));
     }
 }
