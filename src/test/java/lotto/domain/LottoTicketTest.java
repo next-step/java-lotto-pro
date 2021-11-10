@@ -47,10 +47,4 @@ class LottoTicketTest {
         assertEquals(manualLottosCount, lottoTicket.getCountOfLottoType(LottoType.MANUAL));
         assertEquals(autoLottosCount, lottoTicket.getCountOfLottoType(LottoType.AUTO));
     }
-
-    @DisplayName("로또의 개수를 제대로 가져오는지 확인한다")
-    @Test
-    void getSize() {
-        assertEquals(6, lottoTicket.getSize());
-    }
 }

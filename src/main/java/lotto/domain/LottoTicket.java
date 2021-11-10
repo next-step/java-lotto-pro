@@ -24,10 +24,6 @@ public class LottoTicket {
         return lottoTypesCount.getCountOfType(lottoType);
     }
 
-    int getSize() {
-        return lottos.size();
-    }
-
     @Override
     public String toString() {
         StringBuilder lottoStringBuilder = new StringBuilder();
