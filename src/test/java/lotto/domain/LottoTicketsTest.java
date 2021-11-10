@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.view.ResultView;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class LottoTicketsTest {
 
     @Test
+    @DisplayName("자동 로또를 개수대로 생성한다")
     void generateRandomLottoTickets() {
         // given
         int amount = 3;
@@ -23,6 +25,7 @@ class LottoTicketsTest {
     }
 
     @Test
+    @DisplayName("로또를 문자열로 변환한다")
     void toStringTest() {
         // given
         ResultView resultView = new ResultView();

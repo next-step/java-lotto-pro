@@ -29,6 +29,7 @@ class GameResultTest {
     }
 
     @Test
+    @DisplayName("2등 상금을 구한다")
     void getSecondPrize() {
         // given
         ArrayList<LottoTicket> lottoTicketsSource = new ArrayList<>();
