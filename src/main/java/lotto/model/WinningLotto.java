@@ -9,13 +9,31 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winLotto, LottoNumber bonusNumber) {
+        valid(winLotto, bonusNumber);
         this.winLotto = winLotto;
-        validBonusExist(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    private void validBonusExist(LottoNumber bonusNumber) {
-        if (winLotto.isBounsNumber(bonusNumber)) {
+    private void valid(Lotto lotto, LottoNumber bonusNumber) {
+        validEmpty(lotto);
+        validEmpty(bonusNumber);
+        validBonusExist(lotto, bonusNumber);
+    }
+
+    private void validEmpty(Lotto lotto) {
+        if (lotto == null) {
+            throw new NullPointerException(ErrorMessage.LOTTO_NULL);
+        }
+    }
+
+    private void validEmpty(LottoNumber bonusNumber) {
+        if (bonusNumber == null) {
+            throw new NullPointerException(ErrorMessage.LOTTO_NULL);
+        }
+    }
+
+    private void validBonusExist(Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto.isBounsNumber(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.BONUS_EXIST);
         }
     }
