@@ -55,7 +55,7 @@ public class LottoNumbers {
 	}
 
 	private void validateLottoNumberLength(List<LottoNumber> lottoNumbers) {
-		if (lottoNumbers.size() < MAX_RANGE_VALUE) {
+		if (lottoNumbers.size() != MAX_RANGE_VALUE) {
 			throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_LENGTH);
 		}
 	}
