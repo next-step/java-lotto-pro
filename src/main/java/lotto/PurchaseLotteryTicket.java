@@ -23,7 +23,7 @@ public class PurchaseLotteryTicket {
     public LotteryResult countMatchInAllTicket(WinningNumber winningNumber) {
         Map<Rank, Integer> result = new HashMap<>();
         for (LotteryTicket lotteryTicket : purchaseLotteryTicket) {
-            Rank rank = Rank.valueOf(lotteryTicket.countMatch(winningNumber));
+            Rank rank = Rank.valueOf(lotteryTicket.countMatch(winningNumber), lotteryTicket.isMatchBonus(winningNumber));
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         }
         return LotteryResult.saveLotteryResult(result);
