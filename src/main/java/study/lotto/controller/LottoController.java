@@ -2,18 +2,24 @@ package study.lotto.controller;
 
 import study.lotto.controller.dto.LottoOrderRequestDto;
 import study.lotto.controller.dto.LottoWinningNumberRequestDto;
-import study.lotto.controller.dto.TicketLotteryBundleResponseDto;
+import study.lotto.controller.dto.OrderTicketLotteryResponseDto;
 import study.lotto.controller.dto.WinningStatisticsResponseDto;
 import study.lotto.service.LottoService;
 
 public class LottoController {
 
-    public static TicketLotteryBundleResponseDto orderTicketLotteryBundle(final LottoOrderRequestDto orderRequestDto) {
-        return LottoService.orderTicketLotteryBundle(orderRequestDto);
+    private final LottoService lottoService;
+
+    public LottoController() {
+        this.lottoService = new LottoService();
     }
 
-    public static WinningStatisticsResponseDto fetchWinningStatistics(final LottoWinningNumberRequestDto winningNumberRequestDto,
-                                                                      final TicketLotteryBundleResponseDto ticketLotteryBundleResponseDto) {
-        return LottoService.fetchWinningStatistics(winningNumberRequestDto, ticketLotteryBundleResponseDto);
+    public OrderTicketLotteryResponseDto orderTicketLotteryBundle(final LottoOrderRequestDto orderRequestDto) {
+        return lottoService.orderTicketLotteryBundle(orderRequestDto);
+    }
+
+    public WinningStatisticsResponseDto fetchWinningStatistics(final LottoWinningNumberRequestDto winningNumberRequestDto,
+                                                               final OrderTicketLotteryResponseDto orderTicketLotteryResponseDto) {
+        return lottoService.fetchWinningStatistics(winningNumberRequestDto, orderTicketLotteryResponseDto);
     }
 }
