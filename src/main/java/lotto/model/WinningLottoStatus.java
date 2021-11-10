@@ -2,14 +2,26 @@ package lotto.model;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WinningLottoStatus {
 	private final Map<Rank, Integer> winningLottoCount;
 
 	public WinningLottoStatus(Map<Rank, Integer> winningLottoCount) {
 		this.winningLottoCount = winningLottoCount;
+	}
+
+	public static WinningLottoStatus merge(WinningLottoStatus status1, WinningLottoStatus status2) {
+		Map<Rank, Integer> merged = new HashMap<>();
+
+		EnumSet.allOf(Rank.class)
+			.forEach(result -> merged.put(result, status1.getMatchCount(result) + status2.getMatchCount(result)));
+
+		return new WinningLottoStatus(merged);
 	}
 
 	/**

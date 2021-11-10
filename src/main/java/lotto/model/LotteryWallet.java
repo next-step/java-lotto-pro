@@ -58,7 +58,7 @@ public class LotteryWallet {
 	 * @return 로또들의 상태 텍스트
 	 */
 	public String lottosStatus() {
-		return lottosAuto.toString();
+		return lottosMenual.toString() + "\n" + lottosAuto.toString();
 	}
 
 	/**
@@ -67,6 +67,7 @@ public class LotteryWallet {
 	 * @return 당첨 결과 객체
 	 */
 	public WinningLottoStatus getWinningStatus(WinningLottoNumbers winningLottoNumbers) {
-		return lottosAuto.getWinningStatus(winningLottoNumbers);
+		//return lottosAuto.getWinningStatus(winningLottoNumbers);
+		return WinningLottoStatus.merge(lottosMenual.getWinningStatus(winningLottoNumbers), lottosAuto.getWinningStatus(winningLottoNumbers));
 	}
 }
