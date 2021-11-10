@@ -1,4 +1,4 @@
-package lotto.state.bonus;
+package lotto.state.manual;
 
 import lotto.domain.Rank;
 import lotto.domain.Record;

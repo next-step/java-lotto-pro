@@ -1,5 +1,6 @@
-package lotto.auto;
+package lotto.domain;
 
+import lotto.domain.AutoLottoPrinter;
 import lotto.domain.CollectionsShuffler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

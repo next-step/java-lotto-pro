@@ -39,6 +39,10 @@ public class Money {
         return divide(money).intValue();
     }
 
+    public int getDividedIntValue(int amount) {
+        return getDividedIntValue(Money.of(amount));
+    }
+
     public Money plus(Money money) {
         return Money.of(amount.add(money.amount));
     }

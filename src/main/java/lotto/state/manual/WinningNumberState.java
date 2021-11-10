@@ -1,31 +1,31 @@
-package lotto.state.bonus;
+package lotto.state.manual;
 
 import lotto.domain.LotteryTicket;
 import lotto.domain.LottoNumbers;
 import lotto.domain.WinningLottoNumbers;
-import lotto.state.SecondStateView;
 import lotto.state.State;
 
 import java.io.PrintStream;
+import java.util.List;
 
 public class WinningNumberState implements State {
-    private final SecondStateView secondStateView;
+    private final WinningNumberStateView winningNumberStateView;
     private final LotteryTicket lotteryTicket;
     private WinningLottoNumbers winningLottoNumbers;
 
-    public WinningNumberState(SecondStateView secondStateView, LotteryTicket lotteryTicket) {
-        this.secondStateView = secondStateView;
+    public WinningNumberState(WinningNumberStateView winningNumberStateView, LotteryTicket lotteryTicket) {
+        this.winningNumberStateView = winningNumberStateView;
         this.lotteryTicket = lotteryTicket;
     }
 
     @Override
     public void printQuestion(PrintStream out) {
-        secondStateView.printQuestion(out);
+        winningNumberStateView.printQuestion(out);
     }
 
     @Override
-    public void printResult(String text, PrintStream out) {
-        winningLottoNumbers = new WinningLottoNumbers(LottoNumbers.of(text));
+    public void printResult(List<String> textLottoNumbers, PrintStream out) {
+        winningLottoNumbers = new WinningLottoNumbers(LottoNumbers.of(textLottoNumbers.get(0)));
     }
 
     @Override

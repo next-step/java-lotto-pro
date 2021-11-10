@@ -1,16 +1,26 @@
 package lotto.state;
 
 import lotto.LottoApplication;
-import lotto.auto.AutoLottoApplication;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public interface State {
-    void printQuestion(PrintStream out);
 
-    default void printResult(String text, PrintStream out) {
+    int DEFAULT_READ_LINE = 1;
+
+    default void printQuestion(PrintStream out) {
         // do nothing
+    }
+
+    default void printResult(List<String> inputTexts, PrintStream out) {
+        // do nothing
+    }
+
+    default int readLineCount() {
+        return DEFAULT_READ_LINE;
     }
 
     State next();
@@ -22,11 +32,19 @@ public interface State {
     default void process(LottoApplication lottoApplication, Scanner scanner) {
         printQuestion(System.out);
         try {
-            String input = scanner.nextLine();
-            printResult(input, System.out);
+            List<String> inputs = getInputs(scanner);
+            printResult(inputs, System.out);
             lottoApplication.setState(next());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    default List<String> getInputs(Scanner scanner) {
+        List<String> inputs = new ArrayList<>();
+        for (int i = 0, n = readLineCount(); i < n; i++) {
+            inputs.add(scanner.nextLine());
+        }
+        return inputs;
     }
 }

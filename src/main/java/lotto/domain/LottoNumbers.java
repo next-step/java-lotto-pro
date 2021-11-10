@@ -9,20 +9,22 @@ public class LottoNumbers {
     private static final String DEFAULT_DELIMITER = ",";
     private static final List<LottoNumber> DEFAULT_LOTTO_NUMBERS =
             IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
-                    .mapToObj(LottoNumber::new)
+                    .mapToObj(LottoNumber::of)
                     .collect(Collectors.toList());
 
     private final List<LottoNumber> numbers;
+    private final Boolean isManual;
 
-    private LottoNumbers(List<LottoNumber> numbers) {
+    public LottoNumbers(List<LottoNumber> numbers, boolean isManual) {
         validateDuplication(numbers);
+        this.isManual = isManual;
         this.numbers = numbers;
     }
 
     public static LottoNumbers create(Shuffleable shuffler) {
         List<LottoNumber> numbers = new ArrayList<>(DEFAULT_LOTTO_NUMBERS);
         shuffler.shuffle(numbers);
-        return new LottoNumbers(numbers.subList(0, MAX_SIZE));
+        return new LottoNumbers(numbers.subList(0, MAX_SIZE), false);
     }
 
     public static LottoNumbers of(String text) {
@@ -30,9 +32,9 @@ public class LottoNumbers {
         validateStringNumbersLength(text, numberStrings);
         List<LottoNumber> numbers = new ArrayList<>();
         for (String number : numberStrings) {
-            numbers.add(new LottoNumber(number));
+            numbers.add(LottoNumber.of(number));
         }
-        return new LottoNumbers(numbers);
+        return new LottoNumbers(numbers, true);
     }
 
     private static void validateDuplication(List<LottoNumber> numbers) {
@@ -56,16 +58,20 @@ public class LottoNumbers {
         return numbers.contains(lottoNumber);
     }
 
+    public boolean isManual() {
+        return this.isManual;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumbers that = (LottoNumbers) o;
-        return Objects.equals(numbers, that.numbers);
+        return Objects.equals(numbers, that.numbers) && Objects.equals(isManual, that.isManual);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(numbers, isManual);
     }
 }

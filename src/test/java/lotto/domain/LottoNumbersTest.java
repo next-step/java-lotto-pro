@@ -76,6 +76,11 @@ public class LottoNumbersTest {
             }
         }
 
+        @DisplayName("자동 생성 시 수동 여부가 false이다")
+        @Test
+        void testIsManualFalse() {
+            assertThat(lottoNumbers.isManual()).isFalse();
+        }
     }
     @DisplayName("수동 번호 생성")
     @Nested
@@ -86,7 +91,7 @@ public class LottoNumbersTest {
         void testInputWinningNumber() {
             LottoNumbers lottoNumbers = LottoNumbers.of("1,2,3,4,5,6");
             assertThat(lottoNumbers.getNumbers()).hasSize(6)
-                    .contains(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+                    .contains(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
         }
 
         @DisplayName("6개가 아닌 값을 입력 받으면 오류를 발생한다")
@@ -108,6 +113,12 @@ public class LottoNumbersTest {
         @ValueSource(strings = {"1,2,3,4,5,5", "1, 3, 45, 6, 1, 4"})
         void testNotDuplicate(String text) {
             assertThatThrownBy(() -> LottoNumbers.of(text)).isInstanceOf(IllegalArgumentException.class);
+        }
+
+        @DisplayName("수동 생성 시 수동 여부가 true이다")
+        @Test
+        void testIsManualTrue() {
+            assertThat(LottoNumbers.of("1,2,3,4,5,6").isManual()).isTrue();
         }
     }
 }
