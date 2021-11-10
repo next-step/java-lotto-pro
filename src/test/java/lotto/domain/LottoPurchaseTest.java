@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.ThrowableAssert.ThrowingCallable;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoPurchaseTest {
 
     @Test
-    public void 로또를_5장_구매한다() {
+    public void 로또를_자동으로_5장_구매한다() {
         //given
         int purchaseAmount = 5000;
 
@@ -17,7 +18,26 @@ class LottoPurchaseTest {
         LottoPurchase lottoPurchase = new LottoPurchase(purchaseAmount);
 
         //then
-        assertThat(lottoPurchase.getPurchaseQuantity()).isEqualTo(5);
+        assertAll(
+                () -> assertThat(lottoPurchase.getPurchaseQuantity()).isEqualTo(5),
+                () -> assertThat(lottoPurchase.getAutoPurchaseQuantity()).isEqualTo(5)
+        );
+    }
+
+    @Test
+    public void 로또를_수동으로_5장_구매한다() {
+        //given
+        int purchaseAmount = 5000;
+
+        //when
+        LottoPurchase lottoPurchase = new LottoPurchase(purchaseAmount);
+        lottoPurchase.buyManual(5);
+
+        //then
+        assertAll(
+                () -> assertThat(lottoPurchase.getPurchaseQuantity()).isEqualTo(5),
+                () -> assertThat(lottoPurchase.getManualPurchaseQuantity()).isEqualTo(5)
+        );
     }
 
     @Test

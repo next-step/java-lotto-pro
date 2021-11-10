@@ -19,15 +19,19 @@ public class InputView {
         return Integer.parseInt(SCAN.nextLine());
     }
 
-    public static List<Integer> inputWinningNumbers() {
-        return splitWinningNumbers(SCAN.nextLine());
+    public static int inputManualPurchaseQuantity() {
+        return Integer.parseInt(SCAN.nextLine());
+    }
+
+    public static List<Integer> inputLottoNumbers() {
+        return splitLottoNumbers(SCAN.nextLine());
     }
 
     public static int inputBonusNumber() {
         return Integer.parseInt(SCAN.nextLine());
     }
 
-    private static List<Integer> splitWinningNumbers(String inputWinningNumbers) {
+    private static List<Integer> splitLottoNumbers(String inputWinningNumbers) {
         validateNullOrEmpty(inputWinningNumbers);
         return stream(inputWinningNumbers.split(SEPARATOR_COMMA))
                 .map(String::trim)
