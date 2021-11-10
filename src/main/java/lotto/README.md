@@ -89,22 +89,21 @@
 
 ### STEP 5
 
-- [ ] 모델 구현
-    - [ ] 로또 번호 일급 콜렉션(LottoNumbers) 모델
-        - [ ] Random 외부 분리
-    - [ ] 로또 생성기 (LottoGenerator) 모델
-        - [ ] inputList, Money 멤버 변수 제거
-        - [ ] Random Set으로 랜덤 로또번호 생성 기능
-        - [ ] 수동 로또 생성 기능
-        - [ ] 수동 + 자동 로또 생성 기능
-    - [ ] 금액 (Money) 모델
-        - [ ] double(float) 자료형 -> BigDecimal로 리팩토링
-- [ ] 뷰 구현
-    - [ ] 입력 값 (InputView)에 대한 뷰
-        - [ ] 수동 로또 갯수 입력 뷰
-        - [ ] 수동 로또 입력 받는 뷰
-    - [ ] 출력 값 (OutputView)에 대한 뷰
-        - [ ] 수동 로또 출력 뷰
-- [ ] 컨트롤러 구현
-    - [ ] 로또 게임 진행 기능
-        - [ ] 수동 로또 갯수를 입력받는 기능
+- [X] 모델 구현
+    - [X] 로또 번호 일급 콜렉션(LottoNumbers) 모델
+        - [X] Random 외부 분리
+    - [X] 로또 생성기 (LottoGenerator) 모델
+        - [X] Random Set으로 랜덤 로또번호 생성 기능
+        - [X] 수동 로또 생성 기능
+        - [X] 수동 + 자동 로또 생성 기능
+    - [X] 금액 (Money) 모델
+        - [X] double(float) 자료형 -> BigDecimal로 리팩토링
+- [X] 뷰 구현
+    - [X] 입력 값 (InputView)에 대한 뷰
+        - [X] 수동 로또 갯수 입력 뷰
+        - [X] 수동 로또 입력 받는 뷰
+    - [X] 출력 값 (OutputView)에 대한 뷰
+        - [X] 수동 로또 출력 뷰
+- [X] 컨트롤러 구현
+    - [X] 로또 게임 진행 기능
+        - [X] 수동 로또 갯수를 입력받는 기능
