@@ -1,33 +1,23 @@
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoStore {
 
-	public static final String KRW_UNIT = "원";
-
-	public List<Lotto> sell(String pay) {
-		final int paidKRW = parsePaidKRW(pay);
-		validatePayment(paidKRW);
-
-		final int numOfLottos = paidKRW / Lotto.PRICE_KRW;
-		return Stream.iterate(1, num -> num + 1)
-			.limit(numOfLottos)
-			.map(num -> LottoFactory.of())
-			.collect(Collectors.toList());
+	public Lottos sell(LottoPayment payment, List<String> manualLottos) {
+		validate(payment, manualLottos);
+		final Lottos lottosManually = LottosFactory.manuallyFrom(manualLottos);
+		final Lottos lottosAuto = LottosFactory.autoFrom(payment, lottosManually);
+		return Lottos.merge(lottosManually, lottosAuto);
 	}
 
-	private int parsePaidKRW(String s) {
-		try {
-			return Integer.parseInt(s);
-		} catch (NumberFormatException e) {
-			throw new LottoStorePaymentException();
+	private void validate(LottoPayment payment, List<String> manualLottos) {
+		if (null == payment) {
+			throw new LottoStoreSellException();
 		}
-	}
-
-	private void validatePayment(int paidKRW) {
-		if (paidKRW < Lotto.PRICE_KRW) {
-			throw new LottoStorePaymentException();
+		if (null == manualLottos) {
+			throw new LottoStoreSellException();
+		}
+		if (!payment.canBuy(manualLottos.size())) {
+			throw new LottoStoreSellException();
 		}
 	}
 }

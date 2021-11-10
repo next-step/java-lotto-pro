@@ -1,5 +1,7 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import nextstep.utils.Console;
 
@@ -8,6 +10,18 @@ public class View {
 	public String inPayKRW() {
 		println(Message.INPUT_PAY_KRW.getContent());
 		return Console.readLine();
+	}
+
+	public String inManualLottoQuantity() {
+		println(Message.INPUT_MANUAL_LOTTO_QUANTITY.getContent());
+		return Console.readLine();
+	}
+
+	public List<String> inManualLottos(ManualLottoQuantity manualLottoQuantity) {
+		println(Message.INPUT_MANUAL_LOTTOS.getContent());
+		return IntStream.range(0, manualLottoQuantity.get())
+			.mapToObj(i -> Console.readLine())
+			.collect(Collectors.toList());
 	}
 
 	public String inWinningLotto() {
@@ -20,9 +34,13 @@ public class View {
 		return Console.readLine();
 	}
 
-	public void outBoughtLotto(List<Lotto> lottos) {
-		println(String.format(Message.BOUGHT_LOTTO.getContent(), lottos.size()));
-		lottos.stream().map(Lotto::toString).forEach(this::println);
+	public void outBoughtLottos(ManualLottoQuantity manualLottoQuantity, Lottos lottos) {
+		if (manualLottoQuantity.isBiggerThan(0)) {
+			space();
+		}
+		final int numOfAutoLottos = manualLottoQuantity.subtractFrom(lottos.size());
+		println(String.format(Message.BOUGHT_LOTTO.getContent(), manualLottoQuantity.get(), numOfAutoLottos));
+		println(lottos);
 	}
 
 	public void outLottoWinningStatistics(LottoWinningStatistics statistics) {
@@ -46,7 +64,7 @@ public class View {
 		final int prizeKRW = rank.getPrizeKRW();
 		final Long numOfLottos = statistics.countLottos(rank);
 		println(String.format(Message.COUNT_MATCHING.getContent()
-			, matchingCount, matchingBonusMessage, prizeKRW, LottoStore.KRW_UNIT, numOfLottos));
+			, matchingCount, matchingBonusMessage, prizeKRW, LottoPayment.KRW_UNIT, numOfLottos));
 	}
 
 	private String getMatchingBonusMessageBy(LottoWinningRank rank) {
@@ -69,6 +87,10 @@ public class View {
 
 	public void space() {
 		System.out.println();
+	}
+
+	private void println(Object o) {
+		System.out.println(o);
 	}
 
 	private void println(String s) {

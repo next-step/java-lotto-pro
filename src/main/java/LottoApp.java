@@ -1,42 +1,24 @@
-import java.util.List;
-
 public class LottoApp {
 
-	private final LottoStore store;
+	private final LottoStore lottoStore;
 	private final View view;
+	private final BuyLottosController buyLottosController;
 
 	public LottoApp() {
-		this.store = new LottoStore();
+		this.lottoStore = new LottoStore();
 		this.view = new View();
+		this.buyLottosController = new BuyLottosController(view);
 	}
 
 	public void run() {
-		final List<Lotto> lottos = tryBuyLottos();
-		view.outBoughtLotto(lottos);
+		final Lottos lottos = buyLottosController.buyLottosAt(lottoStore);
 		view.space();
 
 		final WinningLotto winningLotto = tryMakeWinningLotto();
 		view.space();
 
-		final LottoWinningStatistics statistics = LottoWinningStatistics.of(winningLotto, lottos);
+		final LottoWinningStatistics statistics = LottoWinningStatistics.from(winningLotto, lottos);
 		view.outLottoWinningStatistics(statistics);
-	}
-
-	private List<Lotto> tryBuyLottos() {
-		List<Lotto> lotto;
-		do {
-			lotto = buyLottos(view.inPayKRW());
-		} while (null == lotto);
-		return lotto;
-	}
-
-	private List<Lotto> buyLottos(String pay) {
-		try {
-			return store.sell(pay);
-		} catch (LottoStorePaymentException e) {
-			view.error(e.getMessage());
-			return null;
-		}
 	}
 
 	private WinningLotto tryMakeWinningLotto() {

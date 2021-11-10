@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -8,9 +7,10 @@ public class LottoWinningStatistics {
 
 	private final Map<LottoWinningRank, Long> numOfLottosByRank;
 
-	private LottoWinningStatistics(WinningLotto winningLotto, List<Lotto> lottos) {
-		this.numOfLottosByRank = lottos.stream()
-			.collect(Collectors.groupingBy((lotto) -> rank(winningLotto, lotto), Collectors.counting()));
+	private LottoWinningStatistics(WinningLotto winningLotto, Lottos lottos) {
+		this.numOfLottosByRank = lottos.collect(
+			Collectors.groupingBy(lotto -> rank(winningLotto, lotto), Collectors.counting())
+		);
 	}
 
 	private LottoWinningRank rank(WinningLotto winningLotto, Lotto lotto) {
@@ -19,7 +19,7 @@ public class LottoWinningStatistics {
 		return LottoWinningRank.valueOf(matchingCount, hasBonus);
 	}
 
-	public static LottoWinningStatistics of(WinningLotto winningLotto, List<Lotto> lottos) {
+	public static LottoWinningStatistics from(WinningLotto winningLotto, Lottos lottos) {
 		return new LottoWinningStatistics(winningLotto, lottos);
 	}
 

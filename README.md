@@ -12,11 +12,19 @@
 - lotto number
   - validate 1~45
 - lotto
-  - price = 1000 
+  - priceKRW = 1000 
   - generate distinct 6 lotto numbers
   - has bonus
+- lotto payment
+  - validate whether it's bigger than lotto.priceKRW
+  - can buy the num of lottos
+  - get num of lottos can buy(= paidKRW / lotto.priceKRW)
+- manual lotto quantity
+  - validate 0 <= it <= payment.(num of lottos can buy)
+  - is bigger than
+  - subtract from
 - lotto store
-  - sell lottos
+  - sell lottos (pay, manual lottos)
 - lotto parser
 - winning lotto (extends lotto)
   - count matching
@@ -28,10 +36,13 @@
 - view
   - input
     - pay : should be bigger than price of lotto, otherwise retry
+    - manual lotto quantity
+    - manual lottos
     - winning numbers (','구분)
-    - bonus
+    - winning bonus
   - output
-    - lotto
+    - lottos (manually + auto)
     - winning statistics
     - error
 - app
+  - lotto buyer : 로또 구매 과정이 길어짐에 따라 컨트롤러 분리 
