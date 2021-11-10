@@ -76,7 +76,7 @@ class LottoResultTest {
 		"1,2,3,4,5,6 : 8 : 7,8,9,10,11,12 : 0"
 	}, delimiter = ':')
 	void 로또등수Map을_통해_총_수익률을_반환해주는_기능테스트(String winningLottoNumber, String bonusNumber, String lottoNumber,
-		double yieldResult) {
+		float yieldResult) {
 		// given
 		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(winningLottoNumber, bonusNumber);
 		Lottos lottos = Lottos.of(Collections.singletonList(LottoNumbers.from(lottoNumber)), money);

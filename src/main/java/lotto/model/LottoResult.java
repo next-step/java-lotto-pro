@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.math.BigDecimal;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -7,7 +8,6 @@ public class LottoResult {
 
 	public static final int DEFAULT_VALUE = 0;
 	public static final int COUNT_VALUE = 1;
-	public static final double MATH_ROUND_VALUE = 100d;
 
 	private final WinningLottoNumbers winningLottoNumbers;
 	private final Lottos lottos;
@@ -59,12 +59,14 @@ public class LottoResult {
 		return winningLottoNumbers.containsBonusCountLottoNumber(lottoNumbers);
 	}
 
-	public float calculateSum() {
-		float sum = DEFAULT_VALUE;
+	public BigDecimal calculateSum() {
+		BigDecimal sum = new BigDecimal(DEFAULT_VALUE);
 		Map<LottoRank, Integer> rankMap = containsWinningLottoGenerator();
 
 		for (Map.Entry<LottoRank, Integer> rankCodeEntry : rankMap.entrySet()) {
-			sum += LottoRank.getRankMoney(rankCodeEntry.getKey(), rankCodeEntry.getValue());
+			BigDecimal rankMoney = new BigDecimal(
+				LottoRank.getRankMoney(rankCodeEntry.getKey(), rankCodeEntry.getValue()));
+			sum = sum.add(rankMoney);
 		}
 
 		return sum;
