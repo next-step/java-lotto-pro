@@ -19,7 +19,7 @@ class WinningStatisticsTest {
                 Lotto.from(Arrays.asList(18,20,23,25,32,33)),
                 Lotto.from(Arrays.asList(3,4,5,9,10,20))
         ));
-        Lotto winningLotto = Lotto.from("3,4,5,9,10,20", "11");
+        WinningLotto winningLotto = WinningLotto.from("3,4,5,9,10,20", "11");
         WinningStatistics winningStatistics = WinningStatistics.statistics(winningLotto, lottos);
         assertThat(winningStatistics.getRankHitsCount(Ranking.FIRST)).isEqualTo(1);
     }
@@ -34,7 +34,7 @@ class WinningStatisticsTest {
                 Lotto.from(Arrays.asList(18,20,23,25,32,33)),
                 Lotto.from(Arrays.asList(3,4,5,9,10,20))
         ));
-        Lotto winningLotto = Lotto.from("3,4,5,9,10,30", "20");
+        WinningLotto winningLotto = WinningLotto.from("3,4,5,9,10,30", "20");
         WinningStatistics winningStatistics = WinningStatistics.statistics(winningLotto, lottos);
         assertThat(winningStatistics.getRankHitsCount(Ranking.SECOND_BONUS)).isEqualTo(1);
     }

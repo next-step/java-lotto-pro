@@ -14,7 +14,7 @@ public class WinningStatistics {
         this.result = result;
     }
 
-    public static WinningStatistics statistics(final Lotto winningLotto, final Lottos lottos)  {
+    public static WinningStatistics statistics(final WinningLotto winningLotto, final Lottos lottos)  {
         EnumMap<Ranking, Integer> result = new EnumMap<>(Ranking.class);
         for (Ranking ranking : Ranking.values()) {
             result.put(ranking, 0);
