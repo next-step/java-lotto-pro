@@ -17,8 +17,8 @@ public class Amount {
         this.remainingAmount = amount;
     }
 
-    public void minusAmountFrom(LottoNumbersBundle lottoNumbersBundle) {
-        int minusAmount = lottoNumbersBundle.getTotalPrise();
+    public void minusAmountFrom(int lottoBuyCount) {
+        int minusAmount = LottoConstant.LOTTO_MINIMUM_PRICE * lottoBuyCount;
         if (amount < minusAmount) {
             throw new InvalidParamException(NOT_ENOUGH_MESSAGE);
         }

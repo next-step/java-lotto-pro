@@ -1,38 +1,92 @@
 package step3;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import step3.domain.Amount;
+import step3.domain.LottoNumber;
+import step3.domain.LottoNumbers;
+import step3.domain.LottoNumbersBundle;
+import step3.domain.LottoRank;
 import step3.domain.LottoRanks;
+import step3.domain.WinningLotto;
+import step3.domain.factory.LottoNumbersFactory;
 
 public class LottoRanksTest {
+    private static final int BUY_AMOUNT = 1000;
 
     @ParameterizedTest
-    @CsvSource(value = {
-        "5:6:false:2001500000", // 1등, 3등
-        "5:6:true:2030000000",  // 1등, 2등
-        "5:5:true:60000000",    // 2등, 2등
-        "5:5:false:3000000",    // 3등, 3등
-        "3:0:true:5000",        // 5등, 당첨없음
-        "2:0:false:0",          // 당첨없음, 당첨없음
-        "0:0:false:0",          // 당첨없음 당첨없음
-    }, delimiter = ':')
-    @DisplayName("다중 당첨시 총 상금 테스트")
-    void getTotalPrize_다중_당첨(int matchCount1, int matchCount2, boolean isContainBonus, Long expected) {
+    @MethodSource("getResultStatisticsGenerateData")
+    @DisplayName("등수별 수익률을 비교합니다")
+    void getCalculatedYield_수익률_테스트(LottoNumbersBundle boughtLottoNumberBundle, WinningLotto winningLotto,
+        BigDecimal expectYield) {
         // given
-        Amount amount = new Amount(10000);
-        LottoRanks lottoRanks = new LottoRanks(amount);
 
         // when
-        lottoRanks.matchIncrementCount(matchCount1, isContainBonus);
-        lottoRanks.matchIncrementCount(matchCount2, isContainBonus);
-        Long totalPrize = lottoRanks.totalPrize();
+        LottoRanks lottoRanks = new LottoRanks.Build()
+            .init()
+            .setAmount(new Amount(BUY_AMOUNT))
+            .match(boughtLottoNumberBundle, winningLotto)
+            .build();
 
         // then
-        assertThat(totalPrize).isEqualTo(expected);
+        assertAll(
+            () -> assertThat(lottoRanks.getCalculatedYield()).isEqualTo(expectYield)
+        );
+    }
+
+    private static Stream<Arguments> getResultStatisticsGenerateData() {
+        return Stream.of(
+            Arguments.of(
+                createListLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10),
+                BigDecimal.valueOf(LottoRank.FIRST.prize / BUY_AMOUNT).setScale(2, RoundingMode.CEILING)
+            ),
+            Arguments.of(
+                createListLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 10)),
+                createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10),
+                BigDecimal.valueOf(LottoRank.SECOND.prize / BUY_AMOUNT).setScale(2, RoundingMode.CEILING)
+            ),
+            Arguments.of(
+                createListLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 20)),
+                createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10),
+                BigDecimal.valueOf(LottoRank.THIRD.prize / BUY_AMOUNT).setScale(2, RoundingMode.CEILING)
+            ),
+            Arguments.of(
+                createListLottoNumber(Arrays.asList(1, 2, 3, 4, 21, 20)),
+                createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10),
+                BigDecimal.valueOf(LottoRank.FOURTH.prize / BUY_AMOUNT).setScale(2, RoundingMode.CEILING)
+            ),
+            Arguments.of(
+                createListLottoNumber(Arrays.asList(1, 2, 3, 22, 21, 20)),
+                createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10),
+                BigDecimal.valueOf(LottoRank.FIFTH.prize / BUY_AMOUNT).setScale(2, RoundingMode.CEILING)
+            )
+        );
+    }
+
+    private static WinningLotto createWinningLotto(List<Integer> winnerLottoNumbers, int bonusNumber) {
+        return WinningLotto.of(
+            LottoNumbersFactory.createManualLottoNumbers(winnerLottoNumbers),
+            LottoNumber.of(bonusNumber)
+        );
+    }
+
+    private static LottoNumbersBundle createListLottoNumber(List<Integer> lottoNumbers) {
+        List<LottoNumbers> result = new ArrayList<>();
+        result.add(LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(lottoNumbers)));
+        return LottoNumbersBundle.of(result);
     }
 }

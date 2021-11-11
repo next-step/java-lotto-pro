@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import step3.domain.Amount;
-import step3.domain.BuyType;
+import step3.domain.LottoBuyCount;
 import step3.domain.LottoBuyer;
 import step3.domain.LottoNumbers;
 import step3.domain.LottoNumbersBundle;
@@ -28,15 +28,14 @@ public class LottoBuyerTest {
         List<LottoNumbers> manualBundle = new ArrayList<>();
         manualBundle.add(LottoNumbersFactory.createManualLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         manualBundle.add(LottoNumbersFactory.createManualLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 10)));
-        LottoNumbersBundle lottoNumbersBundle2 = LottoNumbersBundle.of(manualBundle);
+        LottoNumbersBundle lottoNumbersBundle = LottoNumbersBundle.of(manualBundle);
 
         // when
-        lottoBuyer.buyLotto(lottoNumbersBundle2);
-        lottoBuyer.autoBuyLotto();
+        LottoBuyCount lottoBuyCount = lottoBuyer.buyLotto(lottoNumbersBundle);
 
         // then
-        assertThat(lottoBuyer.countOf(BuyType.MANUAL)).isEqualTo(2);
-        assertThat(lottoBuyer.countOf(BuyType.AUTO)).isEqualTo(8);
+        assertThat(lottoBuyCount.getManualLottoBuyCount()).isEqualTo(2);
+        assertThat(lottoBuyCount.getAutoLottoBuyCount()).isEqualTo(8);
     }
 
     @Test
@@ -47,10 +46,10 @@ public class LottoBuyerTest {
         LottoBuyer lottoBuyer = new LottoBuyer(amount);
 
         // when
-        lottoBuyer.autoBuyLotto();
+        LottoBuyCount lottoBuyCount = lottoBuyer.buyLotto(LottoNumbersBundle.of(new ArrayList<>()));
 
         // then
-        assertThat(lottoBuyer.countOf(BuyType.AUTO)).isEqualTo(5);
+        assertThat(lottoBuyCount.getAutoLottoBuyCount()).isEqualTo(5);
     }
 
     @Test
@@ -64,7 +63,7 @@ public class LottoBuyerTest {
 
         // when
         LottoNumbersBundle lottoNumbersBundle = LottoNumbersBundle.of(manualBundle);
-        lottoBuyer.buyLotto(lottoNumbersBundle);
+        lottoBuyer.buyManualLotto(lottoNumbersBundle);
 
         // then
         Collections.sort(buyNumbers);

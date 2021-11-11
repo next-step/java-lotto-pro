@@ -14,7 +14,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import step3.domain.Amount;
-import step3.domain.BuyType;
 import step3.domain.LottoBuyer;
 import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
@@ -44,9 +43,9 @@ public class LottoServiceImplTest {
         LottoService lottoService = new LottoServiceImpl();
         LottoBuyer lottoBuyer = new LottoBuyer(new Amount(amount));
         LottoNumbersBundle lottoNumbersBundle = LottoNumbersBundle.of(buyLottoNumbers);
-        lottoBuyer.buyLotto(lottoNumbersBundle);
+        lottoBuyer.buyManualLotto(lottoNumbersBundle);
         WinningLotto winningLotto = WinningLotto.of(
-            LottoNumbersFactory.createLottoNumbers(winLottoNumbers, BuyType.MANUAL), LottoNumber.of(bonusNumber));
+            LottoNumbersFactory.createLottoNumbers(winLottoNumbers), LottoNumber.of(bonusNumber));
 
         // when
         LottoStatisticsResponseDto lottoStatisticsResponseDto = lottoService.resultStatistics(lottoBuyer,
@@ -79,7 +78,7 @@ public class LottoServiceImplTest {
 
     private static List<LottoNumbers> getLottoNumbersToList(List<Integer> asList) {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        lottoNumbersList.add(LottoNumbersFactory.createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), BuyType.MANUAL));
+        lottoNumbersList.add(LottoNumbersFactory.createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         return lottoNumbersList;
     }
 
