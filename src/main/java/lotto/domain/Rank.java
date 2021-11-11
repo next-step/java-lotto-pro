@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 public enum Rank {
 
@@ -11,16 +10,6 @@ public enum Rank {
     THIRD_PLACE(4, 50_000, false),
     FOURTH_PLACE(3, 5_000, false),
     LOSER(0 ,0, false);
-
-    private static Map<Integer, Map<Boolean, Rank>> rankMap = new HashMap<>();
-
-    static {
-        for (Rank rank : Rank.values()) {
-            Map<Boolean, Rank> accordingToBonusRankMap = rankMap.computeIfAbsent(rank.getWinningNumberCount(), key -> new HashMap<>());
-            accordingToBonusRankMap.put(rank.isBonus, rank);
-            rankMap.put(rank.getWinningNumberCount(), accordingToBonusRankMap);
-        }
-    }
 
     private int winningNumberCount;
     private int prizeMoney;
@@ -33,20 +22,12 @@ public enum Rank {
     }
 
     static Rank of(int winningNumberCount, boolean matchBonus) {
-        Map<Boolean, Rank> rank = rankMap.get(winningNumberCount);
-        if (rank == null) {
-            return LOSER;
-        }
-        if (isRankWithoutBonus(rank, matchBonus)) {
-            return rank.get(false);
-        }
-        return rank.get(matchBonus);
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.winningNumberCount == winningNumberCount &&
+                        rank.isBonus == matchBonus)
+                .findFirst()
+                .orElse(LOSER);
     }
-
-    private static boolean isRankWithoutBonus(Map<Boolean, Rank> rank, boolean matchBonus) {
-        return rank.get(matchBonus) == null;
-    }
-
 
     public boolean isPrize() {
         return this != Rank.LOSER;
@@ -56,7 +37,6 @@ public enum Rank {
         return (long) this.prizeMoney * winningCount;
     }
 
-    public int getWinningNumberCount() {
-        return winningNumberCount;
-    }
 }
+
+
