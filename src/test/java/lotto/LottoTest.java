@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoPrize;
+import lotto.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,11 +11,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTest {
-    LottoNumbers winningNumbers;
+    WinningLottoNumbers winningNumbers;
 
     @BeforeEach
     void init() {
-        winningNumbers = new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        BonusNumber bonusNumber = new BonusNumber("45");
+        winningNumbers = new WinningLottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"), bonusNumber);
     }
 
     @Test
@@ -32,20 +31,33 @@ public class LottoTest {
     }
 
     @Test
-    void 로또_4등() {
+    void 보너스번호_당첨번호_포함_에러() {
+        assertThatThrownBy(
+                () -> new WinningLottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"), new BonusNumber("6"))
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 로또_5등() {
         Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "7", "8", "9")));
+        assertThat(lotto.compareWinningNumbers(winningNumbers)).isEqualTo(LottoPrize.FIFTH);
+    }
+
+    @Test
+    void 로또_4등() {
+        Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "8", "9")));
         assertThat(lotto.compareWinningNumbers(winningNumbers)).isEqualTo(LottoPrize.FOURTH);
     }
 
     @Test
     void 로또_3등() {
-        Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "8", "9")));
+        Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "9")));
         assertThat(lotto.compareWinningNumbers(winningNumbers)).isEqualTo(LottoPrize.THIRD);
     }
 
     @Test
     void 로또_2등() {
-        Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "9")));
+        Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "45")));
         assertThat(lotto.compareWinningNumbers(winningNumbers)).isEqualTo(LottoPrize.SECOND);
     }
 

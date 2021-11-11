@@ -1,8 +1,6 @@
 package lotto.service;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoPrize;
+import lotto.domain.*;
 import lotto.utils.StringUtils;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -20,7 +18,8 @@ public class LottoService {
         ResultView.printLottoCount(lottoCount);
         List<Lotto> lottoList = createLottoList(lottoCount);
         ResultView.printLottoNumbers(lottoList);
-        LottoNumbers winningLottoNumbers = new LottoNumbers(StringUtils.separate(InputView.inputWinningNumber()));
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(StringUtils.separate(InputView.inputWinningNumber()),
+                                                                                    new BonusNumber(InputView.inputBonusNumber()));
         Map<LottoPrize, Integer> lottoResultMap = createLottoResult(lottoList, winningLottoNumbers);
         ResultView.printWinningStatistics(lottoResultMap);
         ResultView.printProfitRate(LottoServiceCalculator.calculateProfitRate(lottoResultMap, boughtMoney));
@@ -32,7 +31,7 @@ public class LottoService {
         }
     }
 
-    private static Map<LottoPrize, Integer> createLottoResult(List<Lotto> lottoList, LottoNumbers winningLottoNumbers) {
+    private static Map<LottoPrize, Integer> createLottoResult(List<Lotto> lottoList, WinningLottoNumbers winningLottoNumbers) {
         Map<LottoPrize, Integer> lottoResultMap = new HashMap<>();
         for (Lotto lotto : lottoList) {
             LottoPrize lottoPrize = lotto.compareWinningNumbers(winningLottoNumbers);
@@ -45,7 +44,7 @@ public class LottoService {
     private static List<Lotto> createLottoList(int lottoCount) {
         List<Lotto> lottoList = new LinkedList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottoList.add(new Lotto(new LottoNumbers(CreateShuffledLottoNumbers.createLottoNumbers())));
+            lottoList.add(new Lotto(new LottoNumbers(ShuffledLottoNumbers.createShuffledLottoNumbers())));
         }
         return lottoList;
     }

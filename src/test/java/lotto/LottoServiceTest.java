@@ -19,7 +19,7 @@ public class LottoServiceTest {
     @Test
     void 총_수익률_계산() {
         Map<LottoPrize, Integer> lottoResultMap = new HashMap<>();
-        lottoResultMap.put(LottoPrize.FOURTH, 1);
+        lottoResultMap.put(LottoPrize.FIFTH, 1);
         assertThat(LottoServiceCalculator.calculateProfitRate(lottoResultMap, 14000)).isEqualTo(0.35);
     }
 }
