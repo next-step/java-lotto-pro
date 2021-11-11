@@ -58,6 +58,7 @@
 
 * LottoNumber
   * 숫자 주입 생성자
+  * 문자열 생성자
   * 주입된 숫자 반환 
 
 * LottoPurchaseCount
