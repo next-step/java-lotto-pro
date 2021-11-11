@@ -14,8 +14,13 @@ public class ManualGames {
     List<LottoNumbers> list;
 
     public ManualGames(final int manualGameCount) {
-        System.out.println(INPUT_MESSAGE);
         list = new ArrayList<>();
+
+        if (manualGameCount <= 0) {
+            return;
+        }
+
+        System.out.println(INPUT_MESSAGE);
 
         for (int i = 0; i < manualGameCount; i++) {
             list.add(addManualGame());
