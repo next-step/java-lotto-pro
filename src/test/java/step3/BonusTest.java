@@ -14,7 +14,7 @@ import step3.lotto.BonusBall;
 import step3.lotto.LottoNumbers;
 import step3.lotto.LottoPapers;
 import step3.winner.Rank;
-import step3.winner.Winner;
+import step3.winner.Winning;
 
 public class BonusTest {
 
@@ -44,8 +44,8 @@ public class BonusTest {
 		LottoNumbers userLottoNumber = LottoNumbers.from(enterUserLottoNumbers);
 
 		// when
-		Winner winner = Winner.of();
-		Winner statistics = winner.statistics(userLottoNumber, lottoPapers, BonusBall.of(bonusBall, userLottoNumber));
+		Winning winning = Winning.of();
+		Winning statistics = winning.statistics(userLottoNumber, lottoPapers, BonusBall.of(bonusBall, userLottoNumber));
 		List<Rank> ranks = statistics.getRank();
 
 		// then

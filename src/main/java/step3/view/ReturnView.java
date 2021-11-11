@@ -3,7 +3,7 @@ package step3.view;
 import java.math.BigDecimal;
 
 import step3.lotto.LottoPapers;
-import step3.winner.Winner;
+import step3.winner.Winning;
 
 public class ReturnView implements ResultView {
 
@@ -20,10 +20,10 @@ public class ReturnView implements ResultView {
 		System.out.println(String.format(MESSAGE_BUY_COUNT, size));
 	}
 
-	public void statisticsPrint(Winner winner) {
+	public void statisticsPrint(Winning winning) {
 		System.out.println(MESSAGE_WINNING_STATISTICS);
 		System.out.println(MESSAGE_PERFORATED_LINE);
-		System.out.println(winner);
+		System.out.println(winning);
 	}
 
 	public void yieldPrint(BigDecimal yield) {

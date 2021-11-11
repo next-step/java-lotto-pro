@@ -12,22 +12,22 @@ import step3.lotto.BonusBall;
 import step3.lotto.LottoNumbers;
 import step3.lotto.LottoPapers;
 
-public class Winner {
+public class Winning {
 
 	private final Map<Rank, Integer> ranks;
 	private final int WINNING_COUNT = 1;
 
-	private Winner(Map<Rank, Integer> ranks) {
+	private Winning(Map<Rank, Integer> ranks) {
 		this.ranks = ranks;
 	}
 
-	public static Winner of() {
-		return new Winner(new HashMap<>());
+	public static Winning of() {
+		return new Winning(new HashMap<>());
 	}
 
-	public Winner statistics(LottoNumbers userLottoNumbers, LottoPapers createLottoNumbers, BonusBall bonusBall) {
+	public Winning statistics(LottoNumbers userLottoNumbers, LottoPapers createLottoNumbers, BonusBall bonusBall) {
 		List<Rank> matchLottoNumber = createLottoNumbers.findMatchLottoNumber(userLottoNumbers, bonusBall);
-		return new Winner(
+		return new Winning(
 			matchLottoNumber.stream()
 				.collect(
 					Collectors.toMap(

@@ -8,7 +8,7 @@ import step3.lotto.LottoNumbers;
 import step3.lotto.LottoPapers;
 import step3.view.InputView;
 import step3.view.ResultView;
-import step3.winner.Winner;
+import step3.winner.Winning;
 import step3.winner.WinningMoney;
 
 public class LottoMachineFacade {
@@ -37,8 +37,8 @@ public class LottoMachineFacade {
 			LottoNumbers userLottoNumbers = enterUserLottoNumber();
 			BonusBall bonusBall = enterBonusBall(userLottoNumbers);
 
-			Winner winner = Winner.of();
-			Winner statistics = winner.statistics(userLottoNumbers, lottoPapers, bonusBall);
+			Winning winning = Winning.of();
+			Winning statistics = winning.statistics(userLottoNumbers, lottoPapers, bonusBall);
 			BigDecimal bigDecimal = WinningMoney.calculateYield(money, statistics.getTotal());
 
 			resultView.statisticsPrint(statistics);

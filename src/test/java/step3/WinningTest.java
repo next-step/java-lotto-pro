@@ -20,13 +20,13 @@ import step3.lotto.BonusBall;
 import step3.lotto.LottoNumbers;
 import step3.lotto.LottoPapers;
 import step3.winner.Rank;
-import step3.winner.Winner;
+import step3.winner.Winning;
 import step3.winner.WinningMoney;
 
-public class WinnerTest {
+public class WinningTest {
 
 	private Map<Integer, Integer> winnerAmounts;
-	private Winner winner;
+	private Winning winning;
 	private LottoPapers papers;
 
 	@BeforeEach
@@ -41,8 +41,8 @@ public class WinnerTest {
 		LottoNumbers userLottoNumbers = LottoNumbers.from("1, 2, 3, 4, 5, 6");
 
 		//when
-		Winner winner = Winner.of();
-		Winner result = winner.statistics(userLottoNumbers, papers, BonusBall.of(45, userLottoNumbers));
+		Winning winning = Winning.of();
+		Winning result = winning.statistics(userLottoNumbers, papers, BonusBall.of(45, userLottoNumbers));
 		int totalWinningAmount = result.getTotal();
 		//then
 		assertThat(totalWinningAmount).isEqualTo(30005000);
@@ -57,8 +57,8 @@ public class WinnerTest {
 	void yield(String inputUserLottoNumbers, int inputMoney, String inputYield) {
 		// given
 		LottoNumbers userLottoNumbers = LottoNumbers.from(inputUserLottoNumbers);
-		Winner winner = Winner.of();
-		Winner statistics = winner.statistics(userLottoNumbers, papers, BonusBall.of(32, userLottoNumbers));
+		Winning winning = Winning.of();
+		Winning statistics = winning.statistics(userLottoNumbers, papers, BonusBall.of(32, userLottoNumbers));
 		int totalWinningAmount = statistics.getTotal();
 
 		// when
