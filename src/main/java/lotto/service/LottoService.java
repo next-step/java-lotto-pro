@@ -4,6 +4,7 @@ import lotto.domain.GameResult;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinningLottoNumbers;
+import lotto.exception.NotEnoughMoneyException;
 
 public class LottoService {
 
@@ -21,6 +22,10 @@ public class LottoService {
     }
 
     public int getCountsOfAutoTickets(Money inputMoney, int countsOfManualTickets) {
-        return inputMoney.getLottoAmount(LOTTO_TICKET_PRICE) - countsOfManualTickets;
+        int countsOfAutoTickets = inputMoney.getLottoAmount(LOTTO_TICKET_PRICE) - countsOfManualTickets;
+        if (countsOfAutoTickets < 0) {
+            throw new NotEnoughMoneyException();
+        }
+        return countsOfAutoTickets;
     }
 }

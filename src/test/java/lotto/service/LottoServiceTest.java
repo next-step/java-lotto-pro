@@ -2,9 +2,11 @@ package lotto.service;
 
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.exception.NotEnoughMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoServiceTest {
@@ -29,5 +31,15 @@ class LottoServiceTest {
 
         // then
         assertThat(countsOfAutoTickets).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("돈이 부족할 때 예외를 던진다")
+    void notEnoughMoneyTest() {
+        LottoService lottoService = new LottoService();
+        // given, when
+        assertThatThrownBy(() -> lottoService.getCountsOfAutoTickets(new Money(10000), 11))
+                // then
+                .isInstanceOf(NotEnoughMoneyException.class);
     }
 }
