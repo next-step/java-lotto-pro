@@ -24,7 +24,7 @@ public class Lottos {
         return Lottos.from(lottosList);
     }
 
-    public List<MatchResult> getMatchingCounts(final Lotto winningLotto) {
+    public List<MatchResult> getMatchingCounts(final WinningLotto winningLotto) {
         List<MatchResult> matchingCounts = new ArrayList<>();
         for (Lotto lotto : lottos) {
             matchingCounts.add(winningLotto.countMatchingNumber(lotto));

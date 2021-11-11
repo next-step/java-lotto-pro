@@ -26,14 +26,14 @@ class LottosTest {
 
     @Test
     void getMatchingCounts_복수_로또_생성_중_1등당첨() {
-        Lotto winningLotto = Lotto.from("3,4,5,9,10,20", "1");
+        WinningLotto winningLotto = WinningLotto.from("3,4,5,9,10,20", "1");
         List<MatchResult> matchList = lottos.getMatchingCounts(winningLotto);
         assertThat(matchList.contains(MatchResult.from(6, false))).isTrue();
     }
 
     @Test
     void getMatchingBonus_복수_로또_생성_보너스번호_일치() {
-        Lotto winningLotto = Lotto.from("3,4,5,9,10,45", "20");
+        WinningLotto winningLotto = WinningLotto.from("3,4,5,9,10,45", "20");
         List<MatchResult> matchList = lottos.getMatchingCounts(winningLotto);
         assertThat(matchList.contains(MatchResult.from(5, true))).isTrue();
 
