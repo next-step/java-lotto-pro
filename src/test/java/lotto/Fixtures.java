@@ -3,6 +3,8 @@ package lotto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.Number;
+import lotto.domain.PickedNumbers;
 
 public class Fixtures {
 
