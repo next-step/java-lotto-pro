@@ -1,12 +1,13 @@
 package step3;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ import step3.lotto.BonusBall;
 import step3.lotto.LottoNumber;
 import step3.lotto.LottoNumbers;
 import step3.lotto.LottoPapers;
-import step3.winner.Rank;
+import step3.winner.MatchResult;
 
 class LottoPapersTest {
 
@@ -25,38 +26,40 @@ class LottoPapersTest {
 		LottoPapers papers = LottoPapers.createPapers(getLottoNumbers());
 
 		// then
-		Assertions.assertThat(papers.size()).isEqualTo(2);
+		assertThat(papers.size()).isEqualTo(2);
 	}
 
 	@Test
-	@DisplayName("생성된 로또 수만 큼 생성되는지 확인 ")
-	void createLottoCount() {
+	@DisplayName("당첨번호와 보너스볼의 매칭 확인")
+	void matchResultAndBonusBall() {
 		// given
 		LottoPapers lottoPapers = LottoPapers.createPapers(getLottoNumbers());
-		LottoNumbers userLottoNumbers = LottoNumbers.from("1,5,7,3,5,2");
+		LottoNumbers winningLottoNumbers = LottoNumbers.from("1,5,7,3,5,2");
 
 		// when
-		List<Rank> matchLottoNumber = lottoPapers.findMatchLottoNumber(userLottoNumbers,
-			BonusBall.of(44, userLottoNumbers));
+		MatchResult findWinningResult = lottoPapers.matchResultAndBonusBall(
+			winningLottoNumbers,
+			new BonusBall(44));
 
 		// then
-		Assertions.assertThat(matchLottoNumber.size()).isEqualTo(2);
+		assertThat(findWinningResult.hasMatchCount(4)).isTrue();
+		assertThat(findWinningResult.isBonusBalls(4)).isFalse();
 	}
 
 	@Test
-	@DisplayName("생성된 로또와 사용자가 입력한 숫자의 매칭 수가 같은지 확인")
-	void findMatchLottoNumber() {
+	void 당첨번호가_5개이상_보너스볼까지_맞춘경우() {
 		// given
 		LottoPapers lottoPapers = LottoPapers.createPapers(getLottoNumbers());
-		LottoNumbers userLottoNumbers = LottoNumbers.from("1,5,7,3,5,2");
+		LottoNumbers winningLottoNumbers = LottoNumbers.from("1,5,7,3,5,24");
 
 		// when
-		List<Rank> matchLottoNumber = lottoPapers.findMatchLottoNumber(userLottoNumbers,
-			BonusBall.of(32, userLottoNumbers));
+		MatchResult findWinningResult = lottoPapers.matchResultAndBonusBall(
+			winningLottoNumbers,
+			new BonusBall(22));
 
 		// then
-		Assertions.assertThat(matchLottoNumber.get(0)).isEqualTo(Rank.FOUR);
-		Assertions.assertThat(matchLottoNumber.get(1)).isEqualTo(Rank.MISS);
+		assertThat(findWinningResult.hasMatchCount(5)).isTrue();
+		assertThat(findWinningResult.isBonusBalls(5)).isTrue();
 	}
 
 	private List<LottoNumbers> getLottoNumbers() {
