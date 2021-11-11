@@ -8,13 +8,17 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Integer matchWithPurchaseLottoCount(Lotto purchaseLotto) {
+    public Integer matchWithPurchaseLottoCount(Lotto purchaseLotto, BonusBall bonusBall) {
         int initialMatchCount = 0;
 
         for (LottoNumber lottoNumber : lottoNumbers) {
             if (purchaseLotto.lottoNumbers.isContains(lottoNumber)) {
                 initialMatchCount += 1;
             }
+        }
+
+        if (purchaseLotto.lottoNumbers.isBonusBallContains(bonusBall)) {
+            initialMatchCount += 1;
         }
 
         return initialMatchCount;

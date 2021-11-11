@@ -46,6 +46,10 @@ public class LottoNumbers implements Iterable<LottoNumber> {
         return lottoNumbers.contains(lottoNumber);
     }
 
+    public Boolean isBonusBallContains(BonusBall bonusBall) {
+        return bonusBall.isContain(lottoNumbers);
+    }
+
     @Override
     public Iterator<LottoNumber> iterator() {
         return lottoNumbers.iterator();
