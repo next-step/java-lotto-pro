@@ -73,7 +73,7 @@ public class Lottos {
 	 * @param winningNumbers
 	 * @param bonusBall
 	 */
-	public void printResult(List<Integer> winningNumbers, int bonusBall) {
+	public void printResult(List<LottoNumber> winningNumbers, int bonusBall) {
 		System.out.println();
 		MessageUtil.printMessage(MessageConstants.LOTTO_STATISTICS_MESSAGE);
 		MessageUtil.printSeparatorLine();
@@ -92,7 +92,7 @@ public class Lottos {
 	/**
 	 * 로또 당침금 수익률 출력
 	 */
-	private void printLottoProfitRatio(List<Integer> winningNumbers, int bonusBall) {
+	private void printLottoProfitRatio(List<LottoNumber> winningNumbers, int bonusBall) {
 		long profit = 0;
 		for(Lotto lotto : lottos) {
 			profit += lotto.getRank(winningNumbers, bonusBall).getWinningMoney();

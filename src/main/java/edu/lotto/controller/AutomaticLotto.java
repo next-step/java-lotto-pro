@@ -3,6 +3,7 @@ package edu.lotto.controller;
 import edu.lotto.constants.MessageConstants;
 import edu.lotto.constants.PatternConstants;
 import edu.lotto.model.Lotto;
+import edu.lotto.model.LottoNumber;
 import edu.lotto.model.Lottos;
 import edu.lotto.utils.MessageUtil;
 import edu.lotto.utils.NumberUtil;
@@ -26,7 +27,7 @@ public class AutomaticLotto {
 		int manualCount = getManualLottoCount(perchaseLottoCount);
 		List<String> manualLottoNumbers = getManualLottoNumbers(manualCount);
 		Lottos lottos = new Lottos(perchaseAmount, perchaseLottoCount, manualLottoNumbers);
-		List<Integer> winningNumbers = getLatestWinningNumbers();
+		List<LottoNumber> winningNumbers = getLatestWinningNumbers();
 		int bonusBall = getBonusBall(winningNumbers);
 		lottos.printResult(winningNumbers, bonusBall);
 	}
@@ -120,11 +121,11 @@ public class AutomaticLotto {
 	 * 사용자 입력을 통해 가져온 지난주 정답을 숫자 리스트 형태로 변환하여 가져오기
 	 * @return 정답이 저장된 숫자 배열
 	 */
-	public static List<Integer> getLatestWinningNumbers() {
-		List<Integer> winningNumbers = new ArrayList<Integer>();
+	public static List<LottoNumber> getLatestWinningNumbers() {
+		List<LottoNumber> winningNumbers = new ArrayList<LottoNumber>();
 		String[] winningNumbersString = getLatestWinningNumbersByUserInput().split(PatternConstants.DEFAULT_SEPARATOR_PATTERN);
 		for(String winningNumberString : winningNumbersString) {
-			winningNumbers.add(Integer.parseInt(winningNumberString));
+			winningNumbers.add(new LottoNumber(Integer.parseInt(winningNumberString)));
 		}
 		return winningNumbers;
 	}
@@ -182,7 +183,7 @@ public class AutomaticLotto {
 	 * 사용자 입력을 통해 2등 보너스볼 숫자 가져오기
 	 * @return
 	 */
-	public static int getBonusBall(List<Integer> winningNumbers) {
+	public static int getBonusBall(List<LottoNumber> winningNumbers) {
 		int bonusBall = 0;
 		do {
 			MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_MESSAGE);
@@ -198,7 +199,7 @@ public class AutomaticLotto {
 	 * @param winningNumbers
 	 * @return
 	 */
-	private static boolean isValidBonusNumber(int bonusNumber, List<Integer> winningNumbers) {
+	private static boolean isValidBonusNumber(int bonusNumber, List<LottoNumber> winningNumbers) {
 		if(NumberUtil.isNumber(String.valueOf(bonusNumber))
 			&& NumberUtil.isNumberBetweenOneAndFortyFive(bonusNumber)
 			&& !winningNumbers.contains(bonusNumber)) {
