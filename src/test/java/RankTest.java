@@ -20,6 +20,7 @@ public class RankTest {
 	static Stream<Arguments> test_getReward1_parameter() {
 		return Stream.of(
 			Arguments.of(Rank.FIRST, 2000000000),
+			Arguments.of(Rank.SECOND, 30000000),
 			Arguments.of(Rank.THIRD, 1500000),
 			Arguments.of(Rank.FOURTH, 50000),
 			Arguments.of(Rank.FIFTH, 5000),
@@ -30,19 +31,20 @@ public class RankTest {
 	@ParameterizedTest
 	@DisplayName("matchingCount에 따라서 Rank를 반환")
 	@MethodSource("test_getByMatchingCount1_parameter")
-	void test_getByMatchingCount1(int matchingCount, Rank expectedRank) {
-		assertThat(expectedRank).isEqualTo(Rank.getByMatchingCount(matchingCount));
+	void test_getByMatchingCount1(int matchingCount, Rank expectedRank, boolean isMatchBonusNumber) {
+		assertThat(expectedRank).isEqualTo(Rank.mapByMatchingCountAndBonusFlag(matchingCount, isMatchBonusNumber));
 	}
 
 	static Stream<Arguments> test_getByMatchingCount1_parameter() {
 		return Stream.of(
-			Arguments.of(6, Rank.FIRST),
-			Arguments.of(5, Rank.THIRD),
-			Arguments.of(4, Rank.FOURTH),
-			Arguments.of(3, Rank.FIFTH),
-			Arguments.of(2, Rank.NONE),
-			Arguments.of(1, Rank.NONE),
-			Arguments.of(0, Rank.NONE)
+			Arguments.of(6, Rank.FIRST, true),
+			Arguments.of(5, Rank.SECOND, true),
+			Arguments.of(5, Rank.THIRD, false),
+			Arguments.of(4, Rank.FOURTH, true),
+			Arguments.of(3, Rank.FIFTH, true),
+			Arguments.of(2, Rank.NONE, true),
+			Arguments.of(1, Rank.NONE, true),
+			Arguments.of(0, Rank.NONE, true)
 		);
 	}
 }

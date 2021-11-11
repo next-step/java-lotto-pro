@@ -13,8 +13,8 @@ public class LottoResult {
 		matchingCount++;
 	}
 
-	public Rank getRank() {
-		return Rank.getByMatchingCount(matchingCount);
+	public Rank getRank(boolean isMatchBonusNumber) {
+		return Rank.mapByMatchingCountAndBonusFlag(matchingCount, isMatchBonusNumber);
 	}
 
 	@Override

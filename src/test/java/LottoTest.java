@@ -1,12 +1,18 @@
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import model.Lotto;
+import model.LottoNumber;
 import model.Rank;
 
 public class LottoTest {
@@ -47,13 +53,36 @@ public class LottoTest {
 			));
 	}
 
-	@Test
+	@ParameterizedTest
 	@DisplayName("당첨 번호를 제공하면 해당하는 Rank 반환")
-	void test_calcLotto() {
-		Lotto lotto = new Lotto("1,2,3,4,5,6");
-		Rank lottoResult = lotto.calcLottoResult(new Lotto("1,2,3,4,5,6"));
+	@MethodSource("test_calcLotto_parameter")
+	void test_calcLotto(List<Integer> userLottoList, List<Integer> winningLotto, int bonusNumber, Rank rank) {
+		Lotto lotto = new Lotto(userLottoList);
+		Rank lottoResult = lotto.calcLottoResult(new Lotto(winningLotto), new LottoNumber(bonusNumber));
 
-		assertThat(lottoResult).isEqualTo(Rank.FIRST);
+		assertThat(lottoResult).isEqualTo(rank);
+	}
+
+	private static Stream<Arguments> test_calcLotto_parameter() {
+		int bonusNumberHit = 6;
+		int bonusNumberNotHit = 45;
+
+		return Stream.of(
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6),
+				bonusNumberNotHit,
+				Rank.FIRST),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7),
+				bonusNumberHit, Rank.SECOND),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7),
+				bonusNumberNotHit,
+				Rank.THIRD),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 7, 8),
+				bonusNumberHit, Rank.FOURTH),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 7, 8, 9),
+				bonusNumberHit, Rank.FIFTH),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 7, 8, 9, 10),
+				bonusNumberHit, Rank.NONE)
+		);
 	}
 
 	@Test

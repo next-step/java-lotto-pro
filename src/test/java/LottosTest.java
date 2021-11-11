@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import model.Lotto;
+import model.LottoNumber;
 import model.LottoNumberChoiceRandom;
 import model.LottoPurchaseCount;
 import model.Lottos;
@@ -80,7 +81,7 @@ public class LottosTest {
 	@ParameterizedTest
 	@DisplayName("당첨 번호를 제공하면 해당하는 RewardCalculator 반환")
 	@MethodSource("test_calcReward1_parameter")
-	void test_calcReward1(List<Integer> userLotto, List<Integer> winningLotto, Rank expectedRank) {
+	void test_calcReward1(List<Integer> userLotto, List<Integer> winningLotto, Rank expectedRank, int bonusNumber) {
 		Lottos lottos = new Lottos(
 			new LottoNumberChoiceRandom() {
 				@Override
@@ -88,7 +89,7 @@ public class LottosTest {
 					return userLotto;
 				}
 			}, new LottoPurchaseCount("1000"));
-		RewardCalculator rewardCalculator = lottos.calcReward(new Lotto(winningLotto));
+		RewardCalculator rewardCalculator = lottos.calcReward(new Lotto(winningLotto), new LottoNumber(bonusNumber));
 		RewardCalculator expectedRewardCalculator = new RewardCalculator();
 		expectedRewardCalculator.addCount(expectedRank);
 
@@ -96,14 +97,18 @@ public class LottosTest {
 	}
 
 	private static Stream<Arguments> test_calcReward1_parameter() {
+		int bonusNumberHit = 6;
+		int bonusNumberNotHit = 45;
+
 		return Stream.of(
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), Rank.FIRST),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7), Rank.THIRD),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 7, 8), Rank.FOURTH),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 7, 8, 9), Rank.FIFTH),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 7, 8, 9, 10), Rank.NONE),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 7, 8, 9, 10, 11), Rank.NONE),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(7, 8, 9, 10, 11, 12), Rank.NONE)
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), Rank.FIRST, bonusNumberNotHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7), Rank.SECOND, bonusNumberHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7), Rank.THIRD, bonusNumberNotHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 7, 8), Rank.FOURTH, bonusNumberHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 7, 8, 9), Rank.FIFTH, bonusNumberHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 7, 8, 9, 10), Rank.NONE, bonusNumberHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 7, 8, 9, 10, 11), Rank.NONE, bonusNumberHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(7, 8, 9, 10, 11, 12), Rank.NONE, bonusNumberHit)
 		);
 	}
 

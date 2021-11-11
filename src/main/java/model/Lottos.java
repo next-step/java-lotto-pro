@@ -15,10 +15,10 @@ public class Lottos {
 		}
 	}
 
-	public RewardCalculator calcReward(Lotto winningLotto) {
+	public RewardCalculator calcReward(Lotto winningLotto, LottoNumber bonusNumber) {
 		RewardCalculator rewardCalculator = new RewardCalculator();
 		for (Lotto lotto : lottos) {
-			Rank lottoRank = lotto.calcLottoResult(winningLotto);
+			Rank lottoRank = lotto.calcLottoResult(winningLotto, bonusNumber);
 			addResultCountWhenRankIsNotNone(lottoRank, rewardCalculator);
 		}
 		return rewardCalculator;

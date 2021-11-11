@@ -37,24 +37,25 @@ public class LottoResultTest {
 	@ParameterizedTest
 	@DisplayName("matchingCount에 따라 rank 반환")
 	@MethodSource("test_getRank1_param")
-	void test_getRank1(int matchingCount, Rank rank) {
+	void test_getRank1(int matchingCount, Rank rank, boolean isMatchBonusNumber) {
 		LottoResult lottoResult = new LottoResult();
 		for (int i = 0; i < matchingCount; ++i) {
 			lottoResult.addMatchingCount();
 		}
 
-		assertThat(lottoResult.getRank()).isEqualTo(rank);
+		assertThat(lottoResult.getRank(isMatchBonusNumber)).isEqualTo(rank);
 	}
 
 	static Stream<Arguments> test_getRank1_param() {
 		return Stream.of(
-			Arguments.of(0, Rank.NONE),
-			Arguments.of(1, Rank.NONE),
-			Arguments.of(2, Rank.NONE),
-			Arguments.of(3, Rank.FIFTH),
-			Arguments.of(4, Rank.FOURTH),
-			Arguments.of(5, Rank.THIRD),
-			Arguments.of(6, Rank.FIRST)
+			Arguments.of(0, Rank.NONE, true),
+			Arguments.of(1, Rank.NONE, true),
+			Arguments.of(2, Rank.NONE, true),
+			Arguments.of(3, Rank.FIFTH, true),
+			Arguments.of(4, Rank.FOURTH, true),
+			Arguments.of(5, Rank.THIRD, false),
+			Arguments.of(5, Rank.SECOND, true),
+			Arguments.of(6, Rank.FIRST, true)
 		);
 	}
 }
