@@ -22,17 +22,17 @@ public class InputView {
 
     public String inputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
-        return scanner.next();
+        return scanner.nextLine();
     }
 
-    public int inputBonusNumber() {
+    public String inputBonusNumber() {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
-        return scanner.nextInt();
+        return scanner.nextLine();
     }
 
-    public int inputCountsOfManualTickets() {
+    public String inputCountsOfManualTickets() {
         System.out.println(INPUT_COUNTS_OF_MANUAL_TICKETS);
-        return scanner.nextInt();
+        return scanner.nextLine();
     }
 
     public String inputLottoNumbers() {

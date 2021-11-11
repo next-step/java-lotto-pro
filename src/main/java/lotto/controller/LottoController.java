@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.exception.NotEnoughMoneyException;
+import lotto.exception.*;
 import lotto.service.LottoService;
 import lotto.utility.ParseUtility;
 import lotto.view.InputView;
@@ -37,7 +37,7 @@ public class LottoController {
     private WinningLottoNumbers getWinningLottoNumbers() {
         try {
             return ParseUtility.StringToWinningNumbers(inputView.inputWinningNumber(), inputView.inputBonusNumber());
-        } catch (RuntimeException e) {
+        } catch (IllegalLottoNumberException | IllegalLottoNumberSizeException | NotANumberException | NumberDuplicationException e) {
             System.out.println(e.getMessage());
             return getWinningLottoNumbers();
         }
@@ -46,7 +46,7 @@ public class LottoController {
     private Money getInputMoney() {
         try {
             return Money.from(inputView.inputMoney());
-        } catch (RuntimeException e) {
+        } catch (NegativeMoneyException | NotANumberException e) {
             System.out.println(e.getMessage());
             return getInputMoney();
         }
@@ -72,10 +72,10 @@ public class LottoController {
 
     private TicketAmount getManualTicketAmount(Money inputMoney) {
         try {
-            TicketAmount ticketAmount = new TicketAmount(inputView.inputCountsOfManualTickets());
+            TicketAmount ticketAmount = TicketAmount.from(inputView.inputCountsOfManualTickets());
             lottoService.checkEnoughMoney(inputMoney, ticketAmount);
             return ticketAmount;
-        } catch (RuntimeException e) {
+        } catch (NotANumberException | IllegalTicketAmountException | NotEnoughMoneyException e) {
             System.out.println(e.getMessage());
             return getManualTicketAmount(inputMoney);
         }
@@ -92,8 +92,9 @@ public class LottoController {
     private void getManualLottoTicket(LottoTickets manualLottoTickets) {
         try {
             manualLottoTickets.add(ParseUtility.StringToLottoTicket(inputView.inputLottoNumbers()));
-        } catch (RuntimeException e) {
+        } catch (IllegalLottoNumberException | IllegalLottoNumberSizeException | NotANumberException | NumberDuplicationException e) {
             System.out.println(e.getMessage());
+            getManualLottoTicket(manualLottoTickets);
         }
     }
 }
