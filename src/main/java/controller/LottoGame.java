@@ -21,15 +21,19 @@ public class LottoGame {
 		inputView.showResponseInputOfPurchaseLottos(purchasedLottos);
 
 		Lotto winningLotto = requestWinningLotto();
-		requestBonusNumber();
-		LottoNumber bonusNumber = new LottoNumber(1);
+		LottoNumber bonusNumber = requestBonusNumber();
 
 		RewardCalculator rewardCalculator = purchasedLottos.calcReward(winningLotto, bonusNumber);
 		resultView.showResult(lottoPurchaseCount, rewardCalculator);
 	}
 
-	private void requestBonusNumber() {
-		inputView.showRequestInputOfBonusNumber();
+	private LottoNumber requestBonusNumber() {
+		LottoNumber bonusNumber = null;
+		while (Objects.isNull(bonusNumber)) {
+			inputView.showRequestInputOfBonusNumber();
+			bonusNumber = parseInputOfBonusNumber();
+		}
+		return bonusNumber;
 	}
 
 	private Lotto requestWinningLotto() {
@@ -68,6 +72,15 @@ public class LottoGame {
 			return new LottoPurchaseCount(inputView.pollInput());
 		} catch (RuntimeException e) {
 			inputView.showRequestInputExceptionOfPurchasedPrice();
+			return null;
+		}
+	}
+
+	private LottoNumber parseInputOfBonusNumber() {
+		try {
+			return new LottoNumber(inputView.pollInput());
+		} catch (RuntimeException e) {
+			inputView.showRequestInputExceptionOfBonusNumber();
 			return null;
 		}
 	}
