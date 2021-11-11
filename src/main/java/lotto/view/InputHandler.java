@@ -11,7 +11,7 @@ public class InputHandler {
 
     public static int price(String priceText) {
         try {
-            int lottoCount = Price.numberPurchases(Integer.parseInt(priceText));
+            int lottoCount = Price.numberPurchases(validStringToInt(priceText));
             return lottoCount;
         } catch (NumberFormatException e) {
             throw new NumberFormatException(ErrorMessage.NUMBER_FORMAT_ERROR);

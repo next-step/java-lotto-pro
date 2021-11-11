@@ -29,6 +29,10 @@ public class LottoGame {
     private void buyLotto() {
         View.print(Message.PURCHASE_AMOUNT);
         int lottoCount = InputHandler.price(Console.readLine());
+
+        View.print(Message.MANUAL_PURCHASE);
+
+
         ResultView.printBought(lottoCount);
         lottos = LottoCreateFactory.createLottos(lottoCount);
         ResultView.printLottoList(lottos);
