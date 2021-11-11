@@ -14,10 +14,10 @@ public class LottoTest {
     @DisplayName("당첨된 번호와 내가 산 로또 번호가 몇개 매칭이 되었는지 테스트")
     @ParameterizedTest
     @MethodSource("provideParameter")
-    public void matchWithPurchaseLottoCountTest(Lotto winningNumbers, Lotto purchased, Integer expected) {
+    public void matchWithPurchaseLottoCountTest(Lotto winningNumbers, Lotto purchased, BonusBall bonusBall, Integer expected) {
 
         // when
-        Integer result = winningNumbers.matchWithPurchaseLottoCount(purchased);
+        Integer result = winningNumbers.matchWithPurchaseLottoCount(purchased, bonusBall);
 
         // then
         Assertions.assertThat(result).isEqualTo(expected);
@@ -46,6 +46,7 @@ public class LottoTest {
                                         new LottoNumber(6)
                                 ))
                         ),
+                        new BonusBall(new LottoNumber(10)),
                         6
                 ),
                 Arguments.of(
@@ -68,7 +69,8 @@ public class LottoTest {
                                         new LottoNumber(9)
                                 ))
                         ),
-                        3
+                        new BonusBall(new LottoNumber(7)),
+                        4
                 )
         );
     }
