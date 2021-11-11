@@ -15,9 +15,9 @@ public class InputView {
     public InputView() {
     }
 
-    public int inputMoney() {
+    public String inputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
-        return scanner.nextInt();
+        return scanner.nextLine();
     }
 
     public String inputWinningNumber() {

@@ -13,6 +13,10 @@ public class Money {
         this.money = money;
     }
 
+    public static Money from(String inputMoney) {
+        return new Money(Integer.parseInt(inputMoney));
+    }
+
     private void checkMoneyNegative(int money) {
         if (money < ZERO) {
             throw new NegativeMoneyException();
