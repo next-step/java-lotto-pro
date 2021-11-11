@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 public class WinningResult {
 
+	private final static int WINNING_COUNT = 1;
+	private final static int ZERO = 0;
 	private List<Rank> winnings;
 
 	public WinningResult() {
@@ -28,7 +30,7 @@ public class WinningResult {
 		return new WinningResultMap(winnings.stream()
 			.collect(Collectors.toMap(
 				(matchNumber -> matchNumber),
-				matchNumber -> 1,
+				matchNumber -> WINNING_COUNT,
 				Integer::sum
 			)));
 	}
@@ -36,6 +38,6 @@ public class WinningResult {
 	public int getTotal() {
 		return winnings.stream()
 			.map(Rank::getAmount)
-			.reduce(0, Integer::sum);
+			.reduce(ZERO, Integer::sum);
 	}
 }
