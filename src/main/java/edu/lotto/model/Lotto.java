@@ -4,10 +4,7 @@ import edu.lotto.constants.PatternConstants;
 import edu.lotto.constants.Rank;
 import edu.lotto.utils.MessageUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 /**
@@ -29,7 +26,7 @@ public class Lotto {
 		List<LottoNumber> allLottoNumbers = getLottoNumberRange();
 		Collections.shuffle(allLottoNumbers);
 		this.lottoNumbers = allLottoNumbers.subList(0,6);
-		 sortLottoNumbers();
+		sortLottoNumber();
 	}
 
 	/**
@@ -38,7 +35,7 @@ public class Lotto {
 	 */
 	public Lotto(String manualNumber) {
 		this.lottoNumbers = changeStringToListLottoNumberType(manualNumber);
-		 sortLottoNumbers();
+		sortLottoNumber();
 	}
 
 	/**
@@ -55,9 +52,22 @@ public class Lotto {
 		return lottoNumbers;
 	}
 
-	private void sortLottoNumbers() {
-//		this.lottoNumbers
+	/**
+	 * 로또 번호 정렬
+	 */
+	private void sortLottoNumber() {
+		Collections.sort(this.lottoNumbers, comparator);
 	}
+
+	/**
+	 * 로또 번호 정렬을 위한 Comparator
+	 */
+	Comparator<LottoNumber> comparator = new Comparator<LottoNumber>() {
+		@Override
+		public int compare(LottoNumber l1, LottoNumber l2) {
+			return l1.getLottoNumber() - l2.getLottoNumber();
+		}
+	};
 
 	/**
 	 * 로또 번호 출력
