@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import step3.lotto.exception.DuplicationOrLessThenSixException;
+
 public class LottoNumbers {
 	public static final int LOTTO_NUMBER_MAX = 6;
 	private final Set<LottoNumber> lottoNumbers;
@@ -20,6 +22,13 @@ public class LottoNumbers {
 		if (isOverFlow()) {
 			throw new ArrayIndexOutOfBoundsException("로또 번호가 6개 이상 뽑혔습니다.");
 		}
+		if (duplicationNumber()) {
+			throw new DuplicationOrLessThenSixException();
+		}
+	}
+
+	private boolean duplicationNumber() {
+		return lottoNumbers.size() < LOTTO_NUMBER_MAX;
 	}
 
 	private boolean isOverFlow() {
