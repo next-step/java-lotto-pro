@@ -16,7 +16,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import step3.domain.Amount;
-import step3.domain.BuyType;
 import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
 import step3.domain.LottoNumbersBundle;
@@ -87,7 +86,7 @@ public class LottoRanksTest {
 
     private static LottoNumbersBundle createListLottoNumber(List<Integer> lottoNumbers) {
         List<LottoNumbers> result = new ArrayList<>();
-        result.add(LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(lottoNumbers), BuyType.MANUAL));
+        result.add(LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(lottoNumbers)));
         return LottoNumbersBundle.of(result);
     }
 }

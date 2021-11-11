@@ -13,7 +13,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import step3.common.exception.InvalidParamException;
-import step3.domain.BuyType;
 import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
 import step3.domain.WinningLotto;
@@ -42,7 +41,7 @@ public class WinningLottoTest {
 
         // when
         WinningLotto winningLotto = WinningLotto.of(
-            LottoNumbersFactory.createLottoNumbers(winningLottoNumbers, BuyType.MANUAL), LottoNumber.of(bonusNumber));
+            LottoNumbersFactory.createLottoNumbers(winningLottoNumbers), LottoNumber.of(bonusNumber));
 
         // then
         assertThat(winningLotto.containCount(buyLottoNumbers)).isEqualTo(containCountExpected);
@@ -52,10 +51,8 @@ public class WinningLottoTest {
     @DisplayName("보너스 일치 여부 체크")
     void bonusMatch_contain() {
         // given
-        LottoNumbers winningLottoNumbers = LottoNumbersFactory.createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6),
-            BuyType.MANUAL);
-        LottoNumbers buyLottoNumbers = LottoNumbersFactory.createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7),
-            BuyType.MANUAL);
+        LottoNumbers winningLottoNumbers = LottoNumbersFactory.createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers buyLottoNumbers = LottoNumbersFactory.createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
 
         // when
         WinningLotto winningLotto = WinningLotto.of(winningLottoNumbers, LottoNumber.of(7));
@@ -68,10 +65,8 @@ public class WinningLottoTest {
     @DisplayName("보너스 미일치 체크")
     void bonusMatch_not_contain() {
         // given
-        LottoNumbers winningLottoNumbers = LottoNumbersFactory.createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6),
-            BuyType.MANUAL);
-        LottoNumbers buyLottoNumbers = LottoNumbersFactory.createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7),
-            BuyType.MANUAL);
+        LottoNumbers winningLottoNumbers = LottoNumbersFactory.createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers buyLottoNumbers = LottoNumbersFactory.createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
 
         // when
         WinningLotto winningLotto = WinningLotto.of(winningLottoNumbers, LottoNumber.of(45));
@@ -84,29 +79,25 @@ public class WinningLottoTest {
         return Stream.of(
             Arguments.of( // 1등
                 Arrays.asList(1, 2, 3, 4, 5, 6),
-                LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                    BuyType.MANUAL),
+                LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 5, 6))),
                 45,
                 6
             ),
             Arguments.of( // 2등
                 Arrays.asList(1, 2, 3, 4, 5, 6),
-                LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                    BuyType.MANUAL),
+                LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 5, 7))),
                 7,
                 5
             ),
             Arguments.of( // 3등
                 Arrays.asList(1, 2, 3, 4, 5, 6),
-                LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                    BuyType.MANUAL),
+                LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 5, 7))),
                 45,
                 5
             ),
             Arguments.of( // 4등
                 Arrays.asList(1, 2, 3, 4, 5, 6),
-                LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 8, 7)),
-                    BuyType.MANUAL),
+                LottoNumbers.of(LottoNumbersFactory.createManualLottoNumbersToList(Arrays.asList(1, 2, 3, 4, 8, 7))),
                 45,
                 4
             )

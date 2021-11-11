@@ -11,28 +11,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import step3.domain.Amount;
-import step3.domain.BuyType;
+import step3.domain.LottoBuyCount;
 import step3.domain.LottoBuyer;
 import step3.domain.LottoNumbers;
 import step3.domain.LottoNumbersBundle;
 import step3.domain.factory.LottoNumbersFactory;
 
 public class LottoBuyerTest {
-
-    @Test
-    void test() {
-        // given
-        Amount amount = new Amount(1000000000);
-        LottoBuyer lottoBuyer = new LottoBuyer(amount);
-        List<LottoNumbers> manualBundle = new ArrayList<>();
-        manualBundle.add(LottoNumbersFactory.createManualLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        manualBundle.add(LottoNumbersFactory.createManualLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 10)));
-        LottoNumbersBundle lottoNumbersBundle2 = LottoNumbersBundle.of(manualBundle);
-
-        // when
-        lottoBuyer.buyManualLotto(lottoNumbersBundle2);
-        lottoBuyer.autoBuyLotto();
-    }
 
     @Test
     @DisplayName("지불금액 : 10000원 , 수동 2개, 자동 8개, 검증")
@@ -43,15 +28,14 @@ public class LottoBuyerTest {
         List<LottoNumbers> manualBundle = new ArrayList<>();
         manualBundle.add(LottoNumbersFactory.createManualLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         manualBundle.add(LottoNumbersFactory.createManualLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 10)));
-        LottoNumbersBundle lottoNumbersBundle2 = LottoNumbersBundle.of(manualBundle);
+        LottoNumbersBundle lottoNumbersBundle = LottoNumbersBundle.of(manualBundle);
 
         // when
-        lottoBuyer.buyManualLotto(lottoNumbersBundle2);
-        lottoBuyer.autoBuyLotto();
+        LottoBuyCount lottoBuyCount = lottoBuyer.buyLotto(lottoNumbersBundle);
 
         // then
-        assertThat(lottoBuyer.countOf(BuyType.MANUAL)).isEqualTo(2);
-        assertThat(lottoBuyer.countOf(BuyType.AUTO)).isEqualTo(8);
+        assertThat(lottoBuyCount.getManualLottoBuyCount()).isEqualTo(2);
+        assertThat(lottoBuyCount.getAutoLottoBuyCount()).isEqualTo(8);
     }
 
     @Test
@@ -62,10 +46,10 @@ public class LottoBuyerTest {
         LottoBuyer lottoBuyer = new LottoBuyer(amount);
 
         // when
-        lottoBuyer.autoBuyLotto();
+        LottoBuyCount lottoBuyCount = lottoBuyer.buyLotto(LottoNumbersBundle.of(new ArrayList<>()));
 
         // then
-        assertThat(lottoBuyer.countOf(BuyType.AUTO)).isEqualTo(5);
+        assertThat(lottoBuyCount.getAutoLottoBuyCount()).isEqualTo(5);
     }
 
     @Test

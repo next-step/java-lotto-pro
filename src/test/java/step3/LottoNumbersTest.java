@@ -12,7 +12,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import step3.common.exception.InvalidParamException;
-import step3.domain.BuyType;
 import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
 import step3.domain.factory.LottoNumbersFactory;
@@ -29,7 +28,7 @@ public class LottoNumbersTest {
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
-                LottoNumbers.of(overSizeNumbers, BuyType.MANUAL);
+                LottoNumbers.of(overSizeNumbers);
             }) // then
             .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
     }
@@ -44,7 +43,7 @@ public class LottoNumbersTest {
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
-                LottoNumbers.of(overSizeNumbers, BuyType.MANUAL);
+                LottoNumbers.of(overSizeNumbers);
             }) // then
             .withMessageMatching(LottoNumbers.RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
     }
@@ -57,7 +56,7 @@ public class LottoNumbersTest {
 
         // when
         LottoNumber bonusLottoNumber = LottoNumber.of(1);
-        LottoNumbers lottoNumbers = LottoNumbers.of(numbers, BuyType.MANUAL);
+        LottoNumbers lottoNumbers = LottoNumbers.of(numbers);
 
         // then
         boolean isBonusContain = lottoNumbers.isBonusContain(bonusLottoNumber);
@@ -81,8 +80,8 @@ public class LottoNumbersTest {
         List<LottoNumber> winNumbers = LottoNumbersFactory.createManualLottoNumbersToList(parseNumbers(winNumbersStr));
 
         // when
-        LottoNumbers lottoNumbers = LottoNumbers.of(numbers, BuyType.MANUAL);
-        LottoNumbers winLottoNumbers = LottoNumbers.of(winNumbers, BuyType.MANUAL);
+        LottoNumbers lottoNumbers = LottoNumbers.of(numbers);
+        LottoNumbers winLottoNumbers = LottoNumbers.of(winNumbers);
 
         // then
         assertThat(lottoNumbers.containCount(winLottoNumbers)).isEqualTo(expected);
