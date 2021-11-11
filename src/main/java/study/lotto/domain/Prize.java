@@ -1,4 +1,4 @@
-package study.lotto.auto;
+package study.lotto.domain;
 
 public class Prize {
     private final int prize;

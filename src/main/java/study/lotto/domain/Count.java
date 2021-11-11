@@ -1,4 +1,4 @@
-package study.lotto.auto;
+package study.lotto.domain;
 
 public class Count {
     private int count;

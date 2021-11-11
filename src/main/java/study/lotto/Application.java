@@ -1,6 +1,8 @@
-package study.lotto.auto;
+package study.lotto;
 
-public class Main {
+import study.lotto.controller.LottoController;
+
+public class Application {
     public static void main(String[] args) {
         LottoController controller = new LottoController();
         controller.run();

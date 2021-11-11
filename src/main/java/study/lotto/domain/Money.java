@@ -1,4 +1,6 @@
-package study.lotto.auto;
+package study.lotto.domain;
+
+import study.lotto.view.MessageUtil;
 
 public class Money {
 

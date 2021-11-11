@@ -1,11 +1,11 @@
-package study.lotto.auto;
+package study.lotto.view;
 
 import study.StringAddCalculator;
 
 import java.util.IllegalFormatException;
 import java.util.Scanner;
 
-import static study.lotto.auto.MessageUtil.*;
+import static study.lotto.view.MessageUtil.*;
 
 public class InputView {
 

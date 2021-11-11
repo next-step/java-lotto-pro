@@ -1,4 +1,11 @@
-package study.lotto.auto;
+package study.lotto.controller;
+
+import study.lotto.domain.LottoNumbers;
+import study.lotto.domain.LottoNumbersGroup;
+import study.lotto.domain.Money;
+import study.lotto.domain.Statics;
+import study.lotto.view.InputView;
+import study.lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;

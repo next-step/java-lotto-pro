@@ -1,4 +1,4 @@
-package study.lotto.auto;
+package study.lotto.view;
 
 public class MessageUtil {
     public static final String REQUEST_MONEY_INPUT_MSG = "구입금액을 입력해 주세요.";

@@ -1,4 +1,4 @@
-package study.lotto.auto;
+package study.lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;

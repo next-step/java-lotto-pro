@@ -1,6 +1,10 @@
-package study.lotto.auto;
+package study.lotto.view;
 
-import static study.lotto.auto.MessageUtil.*;
+import study.lotto.domain.LottoNumbers;
+import study.lotto.domain.LottoNumbersGroup;
+import study.lotto.domain.Statics;
+
+import static study.lotto.view.MessageUtil.*;
 
 public class OutputView {
 
