@@ -13,21 +13,15 @@ public class LottoNumbers {
     public static final String RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE = String.format("로또 티켓은 %s 개의 숫자만 가능합니다.",
         MAX_LOTTO_NUMBERS_SIZE);
 
-    private final BuyType buyType;
     private final Set<LottoNumber> lottoNumbers;
 
-    private LottoNumbers(Set<LottoNumber> lottoNumbers, BuyType buyType) {
+    private LottoNumbers(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        this.buyType = buyType;
         validSize();
     }
 
-    public static LottoNumbers of(List<LottoNumber> numbers, BuyType buyType) {
-        return new LottoNumbers(new HashSet<>(numbers), buyType);
-    }
-
-    public boolean isBuyType(BuyType buyType) {
-        return this.buyType == buyType;
+    public static LottoNumbers of(List<LottoNumber> numbers) {
+        return new LottoNumbers(new HashSet<>(numbers));
     }
 
     public String toCommaSerialize() {

@@ -2,6 +2,7 @@ package step3.controller;
 
 import step3.common.exception.InvalidParamException;
 import step3.domain.Amount;
+import step3.domain.LottoBuyCount;
 import step3.domain.LottoBuyer;
 import step3.domain.LottoNumbersBundle;
 import step3.domain.LottoService;
@@ -20,9 +21,9 @@ public class LottoController {
     }
 
     public void play() {
-        lottoService.buyLotto(lottoBuyer, registerManualLottoNumbers());
+        LottoBuyCount lottoBuyCount = lottoService.buyLotto(lottoBuyer, registerManualLottoNumbers());
 
-        buyLottoResult();
+        buyLottoResult(lottoBuyCount);
 
         statisticsResult(registerLatestLottoNumberAndBonus());
     }
@@ -37,8 +38,8 @@ public class LottoController {
         return InputView.readWinningLottoNumbers();
     }
 
-    private void buyLottoResult() {
-        ResultView.buyCountResultView(lottoBuyer);
+    private void buyLottoResult(LottoBuyCount lottoBuyCount) {
+        ResultView.buyCountResultView(lottoBuyCount);
         ResultView.buyLottoResultView(lottoBuyer);
     }
 

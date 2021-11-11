@@ -1,5 +1,6 @@
 package step3.service;
 
+import step3.domain.LottoBuyCount;
 import step3.domain.LottoBuyer;
 import step3.domain.LottoNumbersBundle;
 import step3.domain.LottoRanks;
@@ -10,9 +11,8 @@ import step3.dto.LottoStatisticsResponseDto;
 public class LottoServiceImpl implements LottoService {
 
     @Override
-    public void buyLotto(LottoBuyer lottoBuyer, LottoNumbersBundle lottoNumbersBundle) {
-        lottoBuyer.buyManualLotto(lottoNumbersBundle);
-        lottoBuyer.autoBuyLotto();
+    public LottoBuyCount buyLotto(LottoBuyer lottoBuyer, LottoNumbersBundle lottoNumbersBundle) {
+        return lottoBuyer.buyLotto(lottoNumbersBundle);
     }
 
     @Override

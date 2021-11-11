@@ -14,15 +14,25 @@ public class LottoBuyer {
         this.amount = amount;
     }
 
+    public LottoBuyCount buyLotto(LottoNumbersBundle lottoNumbersBundle) {
+        int manualBuyCount = lottoNumbersBundle.size();
+        buyManualLotto(lottoNumbersBundle);
+        return new LottoBuyCount.Builder()
+            .setLottoManualLottoBuyCount(manualBuyCount)
+            .setLottoAutoLottoBuyCount(buyAutoLotto())
+            .build();
+    }
+
     public void buyManualLotto(LottoNumbersBundle lottoNumbersBundle) {
         amount.minusAmountFrom(lottoNumbersBundle);
         lottoSave(lottoNumbersBundle);
     }
 
-    public void autoBuyLotto() {
+    public int buyAutoLotto() {
         int quantity = amount.buyAvailableQuantity();
 
         buyManualLotto(LottoNumbersFactory.createLottoNumbersBundle(quantity));
+        return quantity;
     }
 
     public LottoRanks getLottoRanks(WinningLotto winningLotto) {
@@ -31,10 +41,6 @@ public class LottoBuyer {
             .setAmount(amount)
             .match(boughtLottoNumberBundle, winningLotto)
             .build();
-    }
-
-    public int countOf(BuyType buyType) {
-        return boughtLottoNumberBundle.countOf(buyType);
     }
 
     public List<String> getLottoNumberList() {
@@ -55,4 +61,5 @@ public class LottoBuyer {
 
         this.boughtLottoNumberBundle.merge(lottoNumbersBundle);
     }
+
 }

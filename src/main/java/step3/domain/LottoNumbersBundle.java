@@ -25,12 +25,6 @@ public class LottoNumbersBundle {
         return LottoConstant.LOTTO_MINIMUM_PRICE * lottoNumbersBundle.size();
     }
 
-    public int countOf(BuyType buyType) {
-        return (int)lottoNumbersBundle.stream()
-            .filter(lottoNumbers -> lottoNumbers.isBuyType(buyType))
-            .count();
-    }
-
     public List<String> numbersForResults() {
         List<String> result = new ArrayList<>();
         for (LottoNumbers lottoNumbers : lottoNumbersBundle) {
@@ -46,6 +40,10 @@ public class LottoNumbersBundle {
                 winningLotto.bonusMatch(lottoNumbers)))
             .filter(lottoRank -> lottoRank == matchLottoRank)
             .count();
+    }
+
+    public int size() {
+        return lottoNumbersBundle.size();
     }
 
     private List<LottoNumbers> getLottoNumbersBundle() {
