@@ -68,13 +68,4 @@ class LottoTicketTest {
         // then
         assertThat(result).isEqualTo(expectResult);
     }
-
-    @Test
-    void 로또_티켓_문자열_반환() {
-        // when
-        String result = lottoTicket.getLottoTicketString();
-
-        // then
-        assertThat(result).isEqualTo("[1, 2, 3, 4, 5, 6]");
-    }
 }

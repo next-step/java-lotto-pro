@@ -19,7 +19,7 @@ class LottoShopTest {
         Money purchaseMoney = new Money(money);
 
         // when
-        int result = lottoShop.getPurchasableLottoTicketCount(purchaseMoney);
+        int result = lottoShop.calculatePurchasableLottoTicketCount(purchaseMoney);
 
         // then
         assertThat(result).isEqualTo(expectResult);
@@ -32,7 +32,7 @@ class LottoShopTest {
         Money purchaseMoney = new Money(money);
 
         // when, then
-        assertThatThrownBy(() -> lottoShop.getPurchasableLottoTicketCount(purchaseMoney))
+        assertThatThrownBy(() -> lottoShop.calculatePurchasableLottoTicketCount(purchaseMoney))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 1장의 가격은 " + LottoShop.LOTTO_TICKET_PER_PRICE + "원 입니다. (입력값: " + money + ")");
     }

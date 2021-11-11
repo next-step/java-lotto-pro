@@ -11,7 +11,7 @@ class LottoRewardTest {
     @CsvSource(value = {"6:false:FIRST_PLACE", "5:true:SECOND_PLACE", "5:false:THIRD_PLACE", "2:false:MISS"}, delimiter = ':')
     void 로또_보상_Enum_값_조회(int matchCount, boolean matchBonus, LottoReward lottoReward) {
         // when
-        LottoReward result = LottoReward.getLottoReward(matchCount, matchBonus);
+        LottoReward result = LottoReward.findLottoReward(matchCount, matchBonus);
 
         // then
         assertThat(result).isEqualTo(lottoReward);

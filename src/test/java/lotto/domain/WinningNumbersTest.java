@@ -29,7 +29,7 @@ class WinningNumbersTest {
         List<LottoTicket> getLottoTickets = lottoTickets.getLottoTickets();
 
         // when
-        Map<LottoTicket, Integer> result = winningNumbers.getWinningCountMap(lottoTickets);
+        Map<LottoTicket, Integer> result = winningNumbers.checkWinningCount(lottoTickets);
 
         // then
         assertThat(result.get(getLottoTickets.get(0))).isEqualTo(4);

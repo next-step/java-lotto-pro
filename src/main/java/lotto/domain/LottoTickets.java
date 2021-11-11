@@ -14,30 +14,17 @@ public class LottoTickets {
         this.lottoTickets = convertArrayToLottoTickets(numberArray);
     }
 
-    public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
-    }
-
     public void checkContainsNumber(Number number, Map<LottoTicket, Integer> winningCountCache) {
         for (LottoTicket lottoTicket : lottoTickets) {
             isContainsNumberAndCaching(number, winningCountCache, lottoTicket);
         }
     }
 
-    public int getPurchaseMoney() {
+    public int calculatePurchaseMoney() {
         return this.lottoTickets.size() * LottoShop.LOTTO_TICKET_PER_PRICE;
     }
 
-    public String getLottoTicketsString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            stringBuilder.append(lottoTicket.getLottoTicketString());
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-    }
-
-    public Map<LottoTicket, Boolean> getContainsBonusNumberMap(Number bonusNumber) {
+    public Map<LottoTicket, Boolean> checkContainsBonusNumber(Number bonusNumber) {
         Map<LottoTicket, Boolean> containsBonusNumbers = new HashMap<>();
         for (LottoTicket lottoTicket : lottoTickets) {
             containsBonusNumbers.put(lottoTicket, lottoTicket.isContainNumber(bonusNumber));
@@ -65,6 +52,10 @@ public class LottoTickets {
             numberList.add(new Number(number));
         }
         return new LottoTicket(numberList);
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 
     @Override

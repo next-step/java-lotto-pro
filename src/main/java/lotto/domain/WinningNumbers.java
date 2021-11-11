@@ -17,7 +17,7 @@ public class WinningNumbers {
         this.numbers = numbers;
     }
 
-    public Map<LottoTicket, Integer> getWinningCountMap(LottoTickets lottoTickets) {
+    public Map<LottoTicket, Integer> checkWinningCount(LottoTickets lottoTickets) {
         Map<LottoTicket, Integer> winningCountCache = new HashMap<>();
         for (Number number : numbers) {
             lottoTickets.checkContainsNumber(number, winningCountCache);

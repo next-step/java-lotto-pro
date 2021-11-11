@@ -6,7 +6,7 @@ public class LottoShop {
 
     private final LottoGenerator lottoGenerator = new LottoGenerator();
 
-    public int getPurchasableLottoTicketCount(Money purchaseMoney) {
+    public int calculatePurchasableLottoTicketCount(Money purchaseMoney) {
         validatePurchaseAmount(purchaseMoney);
         return purchaseMoney.divide(LOTTO_TICKET_PER_PRICE);
     }

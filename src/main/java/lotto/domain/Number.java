@@ -13,14 +13,19 @@ public class Number implements Comparable<Number> {
         this.number = number;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     private void validateNumber(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 " + MIN_NUMBER + " ~ " + MAX_NUMBER + "의 숫자만 입력 가능합니다. (입력값: " + number + ")");
         }
+    }
+
+    @Override
+    public int compareTo(Number number) {
+        return Integer.compare(this.number, number.number);
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
@@ -34,11 +39,6 @@ public class Number implements Comparable<Number> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    @Override
-    public int compareTo(Number number) {
-        return Integer.compare(this.number, number.number);
     }
 
     @Override

@@ -14,12 +14,8 @@ public class LottoGenerator {
     private static final List<Number> numbers = new ArrayList<>();
 
     public LottoGenerator() {
-        initNumbers();
-    }
-
-    private void initNumbers() {
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            numbers.add(new Number(i));
+        if (numbers.isEmpty()) {
+            initNumbers();
         }
     }
 
@@ -27,11 +23,17 @@ public class LottoGenerator {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         while (purchaseCount.isGreaterThanZero()) {
             Collections.shuffle(numbers);
-            List<Number> numbers = new ArrayList<>(LottoGenerator.numbers.subList(MIN_SUBLIST_INDEX, MAX_SUBLIST_INDEX));
-            Collections.sort(numbers);
-            lottoTickets.add(new LottoTicket(numbers));
+            List<Number> selectedNumbers = new ArrayList<>(numbers.subList(MIN_SUBLIST_INDEX, MAX_SUBLIST_INDEX));
+            Collections.sort(selectedNumbers);
+            lottoTickets.add(new LottoTicket(selectedNumbers));
             purchaseCount = purchaseCount.minus(MINUS_PURCHASE_COUNT);
         }
         return new LottoTickets(lottoTickets);
+    }
+
+    private void initNumbers() {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            numbers.add(new Number(i));
+        }
     }
 }

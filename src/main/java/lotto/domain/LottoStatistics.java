@@ -13,21 +13,21 @@ public class LottoStatistics {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoRewardResult getLottoRewardResult(LottoTickets lottoTickets, Number bonusNumber) {
-        Map<LottoTicket, Integer> winningCountMap = winningNumbers.getWinningCountMap(lottoTickets);
-        Map<LottoTicket, Boolean> containsBonusNumberMap = lottoTickets.getContainsBonusNumberMap(bonusNumber);
-        Map<LottoReward, Integer> lottoRewardMap = getLottoRewardMap(winningCountMap, containsBonusNumberMap);
-        return new LottoRewardResult(lottoRewardMap);
+    public LottoRewardResult collectLottoRewardResult(LottoTickets lottoTickets) {
+        Map<LottoTicket, Integer> winningCountResult = winningNumbers.checkWinningCount(lottoTickets);
+        Map<LottoTicket, Boolean> containsBonusNumberResult = lottoTickets.checkContainsBonusNumber(bonusNumber);
+        Map<LottoReward, Integer> lottoReward = collectLottoRewardCount(winningCountResult, containsBonusNumberResult);
+        return new LottoRewardResult(lottoReward);
     }
 
-    public double getRateOfProfit(LottoTickets lottoTickets, LottoRewardResult lottoRewardResult) {
-        return lottoRewardResult.getRateOfProfit(lottoTickets.getPurchaseMoney());
+    public double calculateRateOfProfit(LottoTickets lottoTickets, LottoRewardResult lottoRewardResult) {
+        return lottoRewardResult.calculateRateOfProfit(lottoTickets.calculatePurchaseMoney());
     }
 
-    private Map<LottoReward, Integer> getLottoRewardMap(Map<LottoTicket, Integer> winningCountMap, Map<LottoTicket, Boolean> containsBonusNumberMap) {
+    private Map<LottoReward, Integer> collectLottoRewardCount(Map<LottoTicket, Integer> winningCountMap, Map<LottoTicket, Boolean> containsBonusNumberMap) {
         Map<LottoReward, Integer> lottoRewards = new HashMap<>();
         for (Map.Entry<LottoTicket, Integer> entry : winningCountMap.entrySet()) {
-            LottoReward lottoReward = LottoReward.getLottoReward(entry.getValue(), containsBonusNumberMap.get(entry.getKey()));
+            LottoReward lottoReward = LottoReward.findLottoReward(entry.getValue(), containsBonusNumberMap.get(entry.getKey()));
             lottoRewards.put(lottoReward, lottoRewards.getOrDefault(lottoReward, 0) + 1);
         }
         return lottoRewards;

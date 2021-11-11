@@ -39,21 +39,10 @@ class LottoTicketsTest {
     @Test
     void 구입한_로또_금액_조회() {
         // when
-        int result = lottoTickets.getPurchaseMoney();
+        int result = lottoTickets.calculatePurchaseMoney();
 
         // then
         assertThat(result).isEqualTo(2000);
-    }
-
-    @Test
-    void 로또_출력_문자열() {
-        // when
-        String result = lottoTickets.getLottoTicketsString();
-
-        // then
-        assertThat(result).contains("[");
-        assertThat(result).contains("]");
-        assertThat(result).contains(", ");
     }
 
     @Test
@@ -63,7 +52,7 @@ class LottoTicketsTest {
         List<LottoTicket> lottoTickets = this.lottoTickets.getLottoTickets();
 
         // when
-        Map<LottoTicket, Boolean> result = this.lottoTickets.getContainsBonusNumberMap(bonusNumber);
+        Map<LottoTicket, Boolean> result = this.lottoTickets.checkContainsBonusNumber(bonusNumber);
 
         // then
         assertThat(result.get(lottoTickets.get(0))).isTrue();

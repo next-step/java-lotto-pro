@@ -27,7 +27,7 @@ class LottoRewardResultTest {
         int purchaseMoney = 14000;
 
         // when
-        double result = lottoRewardResult.getRateOfProfit(purchaseMoney);
+        double result = lottoRewardResult.calculateRateOfProfit(purchaseMoney);
 
         // then
         assertThat(result).isGreaterThanOrEqualTo(0.35);
@@ -38,7 +38,7 @@ class LottoRewardResultTest {
     @CsvSource(value = {"FIFTH_PLACE:1", "FIRST_PLACE:0"}, delimiter = ':')
     void 주어진_등수에_당첨된_갯수_조회(LottoReward lottoReward, int expectCount) {
         // when
-        int result = lottoRewardResult.getWinningLottoTicketCount(lottoReward);
+        int result = lottoRewardResult.findWinningLottoTicketCount(lottoReward);
 
         // then
         assertThat(result).isEqualTo(expectCount);
