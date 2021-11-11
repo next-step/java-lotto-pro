@@ -69,42 +69,35 @@ public class Lottos {
 	}
 
 	/**
-	 * 지난주 정답이 로또 리스트의 로또 번호와 일치하는 숫자가 몇개인지 설정
+	 * 로또 결과 출력
 	 * @param winningNumbers
+	 * @param bonusBall
 	 */
-	public void setWinningNumberMatchesCount(List<Integer> winningNumbers, int bonusNumber) {
-//		for(Lotto lotto : this.lottos) {
-//			lotto.setRank(winningNumbers, bonusNumber);
-//		}
-	}
-
-	/**
-	 * 등수 별 로또 당첨 게임 출력
-	 */
-	public void printLottoMatchesCountStatistics() {
-//		MessageUtil.printMessage(MessageConstants.LOTTO_STATISTICS_MESSAGE);
-//		MessageUtil.printSeparatorLine();
-//		Rank[] ranks = Rank.values();
-//		for(int i=ranks.length-2; i>=0; i--) {
-//			Rank rank = ranks[i];
-//			boolean isSecond = (rank.name() == Rank.SECOND.name());
-//			long count = this.lottos.stream()
-//									.filter(lotto -> lotto.getRank() == rank)
-//									.count();
-//			MessageUtil.printRank((long)rank.getCountOfMatch(), (long)rank.getWinningMoney(), count, isSecond);
-//		}
-//		printLottoProfitRatio();
+	public void printResult(List<Integer> winningNumbers, int bonusBall) {
+		System.out.println();
+		MessageUtil.printMessage(MessageConstants.LOTTO_STATISTICS_MESSAGE);
+		MessageUtil.printSeparatorLine();
+		Rank[] ranks = Rank.values();
+		for(int i=ranks.length-2; i>=0; i--) {
+			Rank rank = ranks[i];
+			boolean isSecond = (rank.name() == Rank.SECOND.name());
+			long count = this.lottos.stream()
+									.filter(lotto -> lotto.getRank(winningNumbers, bonusBall) == rank)
+									.count();
+			MessageUtil.printRank((long)rank.getCountOfMatch(), (long)rank.getWinningMoney(), count, isSecond);
+		}
+		printLottoProfitRatio(winningNumbers, bonusBall);
 	}
 
 	/**
 	 * 로또 당침금 수익률 출력
 	 */
-	private void printLottoProfitRatio() {
-//		long profit = 0;
-//		for(Lotto lotto : lottos) {
-//			profit += lotto.getRank().getWinningMoney();
-//		}
-//		String profitRatio = new DecimalFormat("#.##").format((float) profit / (float) this.perchaseAmount);
-//		MessageUtil.printMessage(MessageConstants.LOTTO_PROFIT_RATIO_MESSAGE, profitRatio);
+	private void printLottoProfitRatio(List<Integer> winningNumbers, int bonusBall) {
+		long profit = 0;
+		for(Lotto lotto : lottos) {
+			profit += lotto.getRank(winningNumbers, bonusBall).getWinningMoney();
+		}
+		String profitRatio = new DecimalFormat("#.##").format((float) profit / (float) this.perchaseAmount);
+		MessageUtil.printMessage(MessageConstants.LOTTO_PROFIT_RATIO_MESSAGE, profitRatio);
 	}
 }

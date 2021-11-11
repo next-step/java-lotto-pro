@@ -27,24 +27,9 @@ public class AutomaticLotto {
 		List<String> manualLottoNumbers = getManualLottoNumbers(manualCount);
 		Lottos lottos = new Lottos(perchaseAmount, perchaseLottoCount, manualLottoNumbers);
 		List<Integer> winningNumbers = getLatestWinningNumbers();
-		int secondWinningNumber = getSecondWinningNumber(winningNumbers);
+		int bonusBall = getBonusBall(winningNumbers);
+		lottos.printResult(winningNumbers, bonusBall);
 	}
-
-	/**
-	 * 로또 결과 계산
-	 * @param perchaseAmount
-	 * @param perchaseLottoCount
-	 * @param manualCount
-	 */
-//	public static void calcLottoResults(int perchaseAmount, int perchaseLottoCount, int manualCount, List<String> manualLottoNumbers) {
-//		Lottos lottos = new Lottos();
-//		lottos.setManualLottos(manualLottoNumbers);
-//		lottos.setAutomaticLottos(perchaseAmount, perchaseLottoCount, manualCount);
-//		List<Integer> winningNumbers = getLatestWinningNumbers();
-//		int secondWinningNumber = getSecondWinningNumber(winningNumbers);
-//		lottos.setWinningNumberMatchesCount(winningNumbers, secondWinningNumber);
-//		lottos.printLottoMatchesCountStatistics();
-//	}
 
 	/**
 	 * 사용자가 입력한 구매 금액 가져오기
@@ -179,6 +164,11 @@ public class AutomaticLotto {
 		return isValidWinningNumbers;
 	}
 
+	/**
+	 * 중복된 값이 있는지 확인
+	 * @param value
+	 * @return
+	 */
 	public static boolean hasNotDuplicateNumber(String value) {
 		String[] values = value.split(PatternConstants.DEFAULT_SEPARATOR_PATTERN);
 		List<String> valueList = Arrays.asList(values);
@@ -192,14 +182,14 @@ public class AutomaticLotto {
 	 * 사용자 입력을 통해 2등 보너스볼 숫자 가져오기
 	 * @return
 	 */
-	public static int getSecondWinningNumber(List<Integer> winningNumbers) {
-		int secondWinningNumber = 0;
+	public static int getBonusBall(List<Integer> winningNumbers) {
+		int bonusBall = 0;
 		do {
 			MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_MESSAGE);
 			Scanner scan = new Scanner(System.in);
-			secondWinningNumber = scan.nextInt();
-		} while (!isValidBonusNumber(secondWinningNumber, winningNumbers));
-		return secondWinningNumber;
+			bonusBall = scan.nextInt();
+		} while (!isValidBonusNumber(bonusBall, winningNumbers));
+		return bonusBall;
 	}
 
 	/**
