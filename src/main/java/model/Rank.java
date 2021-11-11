@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum Rank {
-	FIRST(2000000000, 6),
-	SECOND(30000000, 5),
-	THIRD(1500000, 5),
-	FOURTH(50000, 4),
-	FIFTH(5000, 3),
+	FIRST(2_000_000_000, 6),
+	SECOND(30_000_000, 5),
+	THIRD(1_500_000, 5),
+	FOURTH(50_000, 4),
+	FIFTH(5_000, 3),
 	NONE(0, 0);
 
 	private final int reward;
