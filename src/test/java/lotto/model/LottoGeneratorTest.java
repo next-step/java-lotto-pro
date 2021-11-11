@@ -68,11 +68,10 @@ class LottoGeneratorTest {
 		List<String> inputNumberList = Arrays.asList("12,3,4,5,6,7", "12,3,4,5,6,7", "12,3,4,5,6,7");
 
 		// when
-		List<LottoNumbers> lottoNumbersList = LottoGenerator.of(inputMoney, inputNumberList)
-			.generateInputLottoNumbers();
+		List<LottoNumbers> lottoNumbersList = LottoGenerator.of(inputMoney, inputNumberList).generateLottoNumbers();
 
 		// then
-		assertThat(lottoNumbersList).hasSize(inputNumberList.size());
+		assertThat(lottoNumbersList).hasSize(inputMoney.calculateLottoAmount());
 	}
 
 	@Test

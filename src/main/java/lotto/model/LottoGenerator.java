@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -78,18 +79,24 @@ public class LottoGenerator {
 		return money.calculateLottoAmount() - inputNumberList.size();
 	}
 
-	public List<LottoNumbers> generateRandomLottoNumbers() {
+	private List<LottoNumbers> generateRandomLottoNumbers() {
 		return generateLottoNumberList()
 			.stream()
 			.map(LottoNumbers::from)
 			.collect(Collectors.toList());
 	}
 
-	public List<LottoNumbers> generateInputLottoNumbers() {
+	private List<LottoNumbers> generateInputLottoNumbers() {
 		return inputNumberList
 			.stream()
 			.map(LottoNumbers::from)
 			.limit(inputNumberList.size())
+			.collect(Collectors.toList());
+	}
+
+	public List<LottoNumbers> generateLottoNumbers() {
+		return Stream.of(generateInputLottoNumbers(), generateRandomLottoNumbers())
+			.flatMap(Collection::stream)
 			.collect(Collectors.toList());
 	}
 }
