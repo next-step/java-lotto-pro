@@ -25,4 +25,11 @@ public class LottoService {
         }
         return new TicketAmount(countsOfAutoTickets);
     }
+
+    public void checkEnoughMoney(Money inputMoney, TicketAmount countsOfManualTickets) {
+        int countsOfAutoTickets = inputMoney.getLottoAmount(LOTTO_TICKET_PRICE) - countsOfManualTickets.getTicketAmount();
+        if (countsOfAutoTickets < 0) {
+            throw new NotEnoughMoneyException();
+        }
+    }
 }
