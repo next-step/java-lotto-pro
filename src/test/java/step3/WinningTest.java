@@ -1,6 +1,5 @@
 package step3;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
@@ -8,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +21,7 @@ import step3.lotto.LottoPapers;
 import step3.winner.Rank;
 import step3.winner.Winning;
 import step3.winner.WinningMoney;
+import step3.winner.WinningResult;
 
 public class WinningTest {
 
@@ -32,37 +33,34 @@ public class WinningTest {
 	}
 
 	@Test
-	@DisplayName("각 로또종이별 매칭되는 수에따른 금액 확인")
+	@DisplayName("매칭되는 수에따른 금액 확인")
 	void eachWinAmount() {
 		//given
-		LottoNumbers userLottoNumbers = LottoNumbers.from("1, 2, 3, 4, 5, 6");
-
-		//when
-		Winning winning = Winning.of();
-		Winning result = winning.statistics(userLottoNumbers, papers, BonusBall.of(45, userLottoNumbers));
-		int totalWinningAmount = result.getTotal();
-		//then
-		assertThat(totalWinningAmount).isEqualTo(30005000);
+		Winning winning = new Winning(LottoNumbers.from("1, 2, 3, 4, 5, 6"), new BonusBall(45));
+		WinningResult winningResult = winning.match(papers);
+		int total = winningResult.getTotal();
+		Assertions.assertThat(total).isEqualTo(Rank.FIRST.getAmount());
 	}
 
 	@DisplayName("당첨금액의 총 수익률 계산")
 	@ParameterizedTest
-	@CsvSource(value = {"1, 2, 3, 4, 5, 6:14000:2143.21",
-		"36,42,45,21,30,20:14000:3.92",
-		"6,42,45,1,9,8:14000:0.00",
-		"4, 3, 5, 7, 43, 44:14000:3.92"}, delimiter = ':')
-	void yield(String inputUserLottoNumbers, int inputMoney, String inputYield) {
+	@CsvSource(value = {
+		"1,2,3,4,5,6:4000:500000.00",
+		"36,42,45,21,32,20:4000:7500.00",
+		"6,42,45,1,9,8:4000:1.25",
+		"4,3,5,7,43,44:4000:1.25",
+		"7,8,9,10,11,12:4000:0.00"}, delimiter = ':')
+	void yield(String winningLottoNumbers, int inputMoney, String inputYield) {
 		// given
-		LottoNumbers userLottoNumbers = LottoNumbers.from(inputUserLottoNumbers);
-		Winning winning = Winning.of();
-		Winning statistics = winning.statistics(userLottoNumbers, papers, BonusBall.of(32, userLottoNumbers));
-		int totalWinningAmount = statistics.getTotal();
+		Winning winning = new Winning(LottoNumbers.from(winningLottoNumbers), new BonusBall(30));
+		WinningResult winningResult = winning.match(LottoPapers.createPapers(getLottoNumbers()));
 
 		// when
-		BigDecimal bigDecimal = WinningMoney.calculateYield(new Money(inputMoney), totalWinningAmount);
+		int total = winningResult.getTotal();
+		BigDecimal bigDecimal = WinningMoney.calculateYield(new Money(inputMoney), total);
 
 		// then
-		assertThat(bigDecimal).isEqualTo(inputYield);
+		assertEquals(inputYield, bigDecimal.toString());
 	}
 
 	@DisplayName("각각의 금액이 해당 금액 범위 내인지 확인")
@@ -75,20 +73,10 @@ public class WinningTest {
 
 	private List<LottoNumbers> getLottoNumbers() {
 		Stream<LottoNumbers> lottoNumbersStream = Stream.of(
-			LottoNumbers.createLottoNumber(2, 3, 5, 7, 43, 16),
-			LottoNumbers.createLottoNumber(18, 3, 36, 42, 45, 30),
-			LottoNumbers.createLottoNumber(21, 22, 38, 25, 42, 30),
-			LottoNumbers.createLottoNumber(35, 37, 21, 22, 23, 12),
-			LottoNumbers.createLottoNumber(1, 2, 3, 4, 5, 25),
-			LottoNumbers.createLottoNumber(18, 20, 22, 40, 42, 12),
-			LottoNumbers.createLottoNumber(38, 23, 39, 10, 29, 15),
-			LottoNumbers.createLottoNumber(2, 19, 36, 11, 44, 13),
-			LottoNumbers.createLottoNumber(36, 22, 10, 29, 13, 15),
-			LottoNumbers.createLottoNumber(20, 37, 22, 24, 43, 44),
-			LottoNumbers.createLottoNumber(37, 38, 24, 25, 9, 27),
-			LottoNumbers.createLottoNumber(18, 37, 22, 26, 45, 16),
-			LottoNumbers.createLottoNumber(17, 3, 26, 11, 12, 32),
-			LottoNumbers.createLottoNumber(17, 35, 6, 40, 26, 42));
+			LottoNumbers.createLottoNumber(1, 2, 3, 4, 5, 6),
+			LottoNumbers.createLottoNumber(36, 42, 45, 21, 32, 30),
+			LottoNumbers.createLottoNumber(6, 42, 45, 43, 44, 45),
+			LottoNumbers.createLottoNumber(31, 32, 33, 34, 35, 36));
 		List<LottoNumbers> collect = lottoNumbersStream
 			.collect(Collectors.toList());
 		return collect;

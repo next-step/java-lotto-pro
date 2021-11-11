@@ -1,69 +1,31 @@
 package step3.winner;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import step3.lotto.BonusBall;
 import step3.lotto.LottoNumbers;
 import step3.lotto.LottoPapers;
 
 public class Winning {
 
-	private final Map<Rank, Integer> ranks;
-	private final int WINNING_COUNT = 1;
+	private LottoNumbers lottoNumbers;
+	private BonusBall bonusBall;
 
-	private Winning(Map<Rank, Integer> ranks) {
-		this.ranks = ranks;
+	public Winning(LottoNumbers winningLottoNumbers, BonusBall bonusBall) {
+		this.lottoNumbers = winningLottoNumbers;
+		this.bonusBall = bonusBall;
+		validation();
 	}
 
-	public static Winning of() {
-		return new Winning(new HashMap<>());
+	public Winning(LottoNumbers winningLottoNumbers, int bonusBall) {
+		this(winningLottoNumbers, new BonusBall(bonusBall));
 	}
 
-	public Winning statistics(LottoNumbers userLottoNumbers, LottoPapers createLottoNumbers, BonusBall bonusBall) {
-		List<Rank> matchLottoNumber = createLottoNumbers.findMatchLottoNumber(userLottoNumbers, bonusBall);
-		return new Winning(
-			matchLottoNumber.stream()
-				.collect(
-					Collectors.toMap(
-						(matchNumber -> matchNumber),
-						matchNumber -> WINNING_COUNT,
-						Integer::sum
-					)
-				)
-		);
+	private void validation() {
+		if (lottoNumbers.matchBonusBall(bonusBall)) {
+			throw new IllegalArgumentException("보너스 번호가 당첨 번호와 동일할 수 없습니다");
+		}
 	}
 
-	public int getTotal() {
-		return ranks.entrySet().stream()
-			.map(Map.Entry::getKey)
-			.map(Rank::getAmount)
-			.reduce(0, Integer::sum);
-	}
-
-	public List<Rank> getRank() {
-		return ranks.entrySet().stream()
-			.map(Map.Entry::getKey)
-			.collect(Collectors.toList());
-
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		Arrays.stream(Rank.values()).sorted(Collections.reverseOrder()).forEach(s-> {
-			sb.append(String.format(s.getMessage(),getWinner(s)));
-		});
-		return sb.toString();
-	}
-
-	private Integer getWinner(Rank rank) {
-		Optional<Integer> integer = Optional.ofNullable(ranks.get(rank));
-		return integer.orElse(0);
+	public WinningResult match(LottoPapers lottoPapers) {
+		return lottoPapers.findMatchWinningResult(lottoNumbers, bonusBall);
 	}
 }

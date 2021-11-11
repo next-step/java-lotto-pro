@@ -2,6 +2,7 @@ package step3.winner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningResult {
 
@@ -21,5 +22,20 @@ public class WinningResult {
 
 	public boolean containsRank(Rank rank) {
 		return winnings.contains(rank);
+	}
+
+	public WinningResultMap getStatistics() {
+		return new WinningResultMap(winnings.stream()
+			.collect(Collectors.toMap(
+				(matchNumber -> matchNumber),
+				matchNumber -> 1,
+				Integer::sum
+			)));
+	}
+
+	public int getTotal() {
+		return winnings.stream()
+			.map(Rank::getAmount)
+			.reduce(0, Integer::sum);
 	}
 }
