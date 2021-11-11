@@ -19,9 +19,9 @@ public class InputViewTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1q2w3e4r!", "1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,46", "0,1,2,3,4,5"})
-    void readWinningNumbersByInvalidInput(String winningNumbers) {
+    void readWinningLottoByInvalidInput(String winningNumbers) {
         setInputToReader(winningNumbers);
-        assertThatIllegalArgumentException().isThrownBy(InputView::readWinningNumbers);
+        assertThatIllegalArgumentException().isThrownBy(InputView::readWinningLotto);
     }
 
     @ParameterizedTest

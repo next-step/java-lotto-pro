@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import lotto.model.LottoNumbers;
+import lotto.model.Lotto;
 import lotto.model.Number;
 import lotto.model.Payment;
 
@@ -33,7 +33,7 @@ public class InputView {
         return new Payment(Integer.parseInt(payment));
     }
 
-    public static LottoNumbers readWinningNumbers() {
+    public static Lotto readWinningLotto() {
         System.out.println(QUERY_FOR_WINNING_NUMBERS);
         String winningNumbers = readLine().replace(" ", "");
         if (!LOTTO_NUMBER_PATTERN.matcher(winningNumbers).matches()) {
@@ -42,7 +42,7 @@ public class InputView {
         int[] parsedWinningNumbers = Arrays.stream(winningNumbers.split(NUMBER_DELIMITER))
             .mapToInt(Integer::parseInt)
             .toArray();
-        return new LottoNumbers(parsedWinningNumbers);
+        return new Lotto(parsedWinningNumbers);
     }
 
     public static Number readBonusNumber() {

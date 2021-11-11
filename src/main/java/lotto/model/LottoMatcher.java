@@ -11,35 +11,35 @@ public class LottoMatcher {
     static final String DUPLICATE_BONUS_NUMBER_ERR_MSG = "보너스 번호는 당첨번호와 겹칠 수 없습니다.";
 
     private final Number bonusNumber;
-    private final LottoNumbers winningNumbers;
+    private final Lotto winningLotto;
 
     public LottoMatcher(int bonusNumber, int... winningNumbers) {
-        this(Number.of(bonusNumber), new LottoNumbers(winningNumbers));
+        this(Number.of(bonusNumber), new Lotto(winningNumbers));
     }
 
-    public LottoMatcher(Number bonusNumber, LottoNumbers winningNumbers) {
+    public LottoMatcher(Number bonusNumber, Lotto winningLotto) {
         Objects.requireNonNull(bonusNumber);
-        Objects.requireNonNull(winningNumbers);
+        Objects.requireNonNull(winningLotto);
 
         this.bonusNumber = bonusNumber;
-        this.winningNumbers = winningNumbers;
+        this.winningLotto = winningLotto;
 
         validate();
     }
 
     private void validate() {
-        if (winningNumbers.contains(bonusNumber)) {
+        if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_ERR_MSG);
         }
     }
 
-    public MatchResult match(Payment payment, Collection<LottoNumbers> lottoNumbers) {
+    public MatchResult match(Payment payment, Collection<Lotto> lottos) {
         Objects.requireNonNull(payment);
-        Objects.requireNonNull(lottoNumbers);
+        Objects.requireNonNull(lottos);
 
         List<Rank> ranks = new ArrayList<>();
-        for (LottoNumbers numbers : lottoNumbers) {
-            Rank rank = numbers.computeRank(bonusNumber, winningNumbers);
+        for (Lotto lotto : lottos) {
+            Rank rank = lotto.computeRank(bonusNumber, winningLotto);
             ranks.add(rank);
         }
         return new MatchResult(payment, ranks);

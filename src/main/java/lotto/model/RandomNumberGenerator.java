@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class RandomNumberSupplier {
-    private RandomNumberSupplier() {
+public class RandomNumberGenerator {
+    private RandomNumberGenerator() {
     }
 
     public static Set<Number> generate() {
@@ -16,7 +16,7 @@ public class RandomNumberSupplier {
             numbers.add(Number.of(i));
         }
         Collections.shuffle(numbers);
-        Set<Number> chosenNumbers = new HashSet<>(numbers.subList(0, LottoNumbers.NUMBER_SIZE));
+        Set<Number> chosenNumbers = new HashSet<>(numbers.subList(0, Lotto.NUMBER_SIZE));
         return Collections.unmodifiableSet(chosenNumbers);
     }
 }

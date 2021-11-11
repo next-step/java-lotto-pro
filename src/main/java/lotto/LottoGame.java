@@ -2,9 +2,9 @@ package lotto;
 
 import java.util.function.Supplier;
 
+import lotto.model.Lotto;
+import lotto.model.LottoGenerator;
 import lotto.model.LottoMatcher;
-import lotto.model.LottoNumberGenerator;
-import lotto.model.LottoNumbers;
 import lotto.model.MatchResult;
 import lotto.model.Number;
 import lotto.model.Payment;
@@ -19,13 +19,13 @@ public class LottoGame {
 
     public static void start() {
         Payment payment = handleException(InputView::readPayment);
-        OutputView.printLottoPurchase(new LottoNumberGenerator(payment).generate());
-        LottoNumbers winningNumbers = handleException(InputView::readWinningNumbers);
+        OutputView.printLottoPurchase(new LottoGenerator(payment).generate());
+        Lotto winningLotto = handleException(InputView::readWinningLotto);
         LottoMatcher lottoMatcher = handleException(() -> {
             Number bonusNumber = InputView.readBonusNumber();
-            return new LottoMatcher(bonusNumber, winningNumbers);
+            return new LottoMatcher(bonusNumber, winningLotto);
         });
-        MatchResult matchResult = lottoMatcher.match(payment, new LottoNumberGenerator(payment).generate());
+        MatchResult matchResult = lottoMatcher.match(payment, new LottoGenerator(payment).generate());
         OutputView.printLottoResult(matchResult);
     }
 

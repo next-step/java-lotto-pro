@@ -7,12 +7,12 @@ import java.util.Collection;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoNumberGeneratorTest {
+public class LottoGeneratorTest {
     @Test
     @DisplayName("생성자의 매개변수로 null이 전달될 때 예외를 발생시킨다")
     void createByNull() {
         assertThatNullPointerException().isThrownBy(() ->
-            new LottoNumberGenerator(null)
+            new LottoGenerator(null)
         );
     }
 
@@ -21,8 +21,8 @@ public class LottoNumberGeneratorTest {
     void generate() {
         Payment payment = new Payment(14000);
 
-        Collection<LottoNumbers> lottoNumbers = new LottoNumberGenerator(payment).generate();
+        Collection<Lotto> lottos = new LottoGenerator(payment).generate();
 
-        assertThat(lottoNumbers).hasSize(14000 / Payment.LOTTO_PRICE);
+        assertThat(lottos).hasSize(14000 / Payment.LOTTO_PRICE);
     }
 }

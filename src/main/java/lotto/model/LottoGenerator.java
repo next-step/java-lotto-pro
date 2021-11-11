@@ -5,20 +5,20 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoNumberGenerator {
+public class LottoGenerator {
     private final Payment payment;
 
-    public LottoNumberGenerator(Payment payment) {
+    public LottoGenerator(Payment payment) {
         Objects.requireNonNull(payment);
         this.payment = payment;
     }
 
-    public Collection<LottoNumbers> generate() {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    public Collection<Lotto> generate() {
+        List<Lotto> lottos = new ArrayList<>();
         int lottoCount = payment.countLotto();
         for (int i = 0; i < lottoCount; i++) {
-            lottoNumbers.add(new LottoNumbers(RandomNumberSupplier.generate()));
+            lottos.add(new Lotto(RandomNumberGenerator.generate()));
         }
-        return lottoNumbers;
+        return lottos;
     }
 }

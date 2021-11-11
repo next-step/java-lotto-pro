@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.Collection;
 import java.util.StringJoiner;
 
-import lotto.model.LottoNumbers;
+import lotto.model.Lotto;
 import lotto.model.MatchResult;
 import lotto.model.RateOfReturn;
 import lotto.model.enums.Rank;
@@ -20,11 +20,11 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoPurchase(Collection<LottoNumbers> lottoNumbers) {
+    public static void printLottoPurchase(Collection<Lotto> lottos) {
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
-        stringJoiner.add(String.format(NUMBER_OF_LOTTO_STATEMENT_FORMAT, lottoNumbers.size()));
-        for (LottoNumbers numbers : lottoNumbers) {
-            stringJoiner.add(numbers.toString());
+        stringJoiner.add(String.format(NUMBER_OF_LOTTO_STATEMENT_FORMAT, lottos.size()));
+        for (Lotto lotto : lottos) {
+            stringJoiner.add(lotto.toString());
         }
         System.out.println(stringJoiner);
         System.out.println();
