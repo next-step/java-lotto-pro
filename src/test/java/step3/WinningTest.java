@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,8 +24,6 @@ import step3.winner.WinningMoney;
 
 public class WinningTest {
 
-	private Map<Integer, Integer> winnerAmounts;
-	private Winning winning;
 	private LottoPapers papers;
 
 	@BeforeEach
