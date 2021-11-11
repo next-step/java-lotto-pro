@@ -76,6 +76,8 @@
 * Rank
   * enum
   * 가격 매핑
+  * matchingCount 매핑
+  * matchingCount를 파라미터로 Rank 반환
   
 * LottoResult
   * 몇개의 숫자가 맞는지 체크
