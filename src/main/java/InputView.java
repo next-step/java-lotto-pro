@@ -10,6 +10,16 @@ public class InputView {
     private InputView() {
     }
 
+    public static int inputInteger(String message){
+        try {
+            System.out.println(message);
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력하세요.");
+            return inputInteger(message);
+        }
+    }
+
     public static String inputString(String message) {
         System.out.println(message);
         return scanner.nextLine();

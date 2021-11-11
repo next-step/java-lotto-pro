@@ -5,7 +5,7 @@ import java.util.List;
 public class LottoMain {
 
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame();
-        lottoGame.start();
+        User user = new User();
+        user.startGame();
     }
 }

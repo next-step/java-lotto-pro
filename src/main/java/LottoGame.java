@@ -16,20 +16,25 @@ public class LottoGame {
         }
     }
 
-    public void start() {
-        String money = InputView.inputString(INPUT_MONEY);
-        int manualCount = Integer.parseInt(InputView.inputString(INPUT_BUY_MANUAL_COUNT));
-        User user = new User(new BigInteger(money));
+    public void start(User user) {
+        user.setMoney(new BigInteger(String.valueOf(InputView.inputInteger(INPUT_MONEY))));
+        int manualCount = inputBuyManualCount(user);
 
-        if (!user.hasMoney(manualCount)) {
-            System.out.println("보유 금액이 부족합니다.");
+        try{
+            user.buyLottos(InputView.inputString(INPUT_BUY_MANUAL_NUMBER, manualCount));
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            user.buyLottos(InputView.inputString(INPUT_BUY_MANUAL_NUMBER, manualCount));
         }
-
-        List<String> manualLottoString = InputView.inputString(INPUT_BUY_MANUAL_NUMBER, manualCount);
-        user.buyLottos(manualLottoString);
         ResultView.printLottoList(user.getLottoList());
 
-        Lotto lotto = inputWinLotto();
+        Lotto lotto = null;
+        try {
+             lotto = inputWinLotto();
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            lotto = inputWinLotto();
+        }
 
         LottoNumber bonusNumber = null;
         do {
@@ -41,7 +46,7 @@ public class LottoGame {
         ResultView.printResult(user);
     }
 
-    public Lotto inputWinLotto() {
+    public Lotto inputWinLotto() throws IllegalArgumentException{
         return new Lotto(InputView.inputString(INPUT_WIN_LOTTO));
     }
 
@@ -51,8 +56,16 @@ public class LottoGame {
             number = new LottoNumber(InputView.inputString(INPUT_BONUS_NUMBER));
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            inputBonusNumber();
+            number = new LottoNumber(InputView.inputString(INPUT_BONUS_NUMBER));
         }
         return number;
+    }
+
+    public int inputBuyManualCount(User user){
+        int manualCount = 0;
+        do{
+            manualCount = InputView.inputInteger(INPUT_BUY_MANUAL_COUNT);
+        }while(! user.hasMoney(manualCount));
+        return manualCount;
     }
 }
