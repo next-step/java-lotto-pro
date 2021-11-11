@@ -3,7 +3,8 @@ package step3.view;
 import java.math.BigDecimal;
 
 import step3.lotto.LottoPapers;
-import step3.winner.Winning;
+import step3.winner.Rank;
+import step3.winner.WinningResultMap;
 
 public class ReturnView implements ResultView {
 
@@ -20,10 +21,15 @@ public class ReturnView implements ResultView {
 		System.out.println(String.format(MESSAGE_BUY_COUNT, size));
 	}
 
-	public void statisticsPrint(Winning winning) {
+	public void statisticsPrint(WinningResultMap winning) {
 		System.out.println(MESSAGE_WINNING_STATISTICS);
 		System.out.println(MESSAGE_PERFORATED_LINE);
-		System.out.println(winning);
+		StringBuilder sb = new StringBuilder();
+
+		for (Rank rank : Rank.reverse()) {
+			sb.append(String.format("%d개 일치 (%d)- %d개\n", rank.getMatch(), rank.getAmount(), winning.get(rank)));
+		}
+		System.out.println(sb);
 	}
 
 	public void yieldPrint(BigDecimal yield) {

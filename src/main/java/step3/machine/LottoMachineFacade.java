@@ -1,5 +1,7 @@
 package step3.machine;
 
+import java.math.BigDecimal;
+
 import step3.Money;
 import step3.lotto.BonusBall;
 import step3.lotto.LottoNumbers;
@@ -9,6 +11,7 @@ import step3.view.ResultView;
 import step3.winner.Winning;
 import step3.winner.WinningMoney;
 import step3.winner.WinningResult;
+import step3.winner.WinningResultMap;
 
 public class LottoMachineFacade {
 
@@ -26,7 +29,6 @@ public class LottoMachineFacade {
 	public void LottoMachineExecute() {
 
 		try {
-
 			Money money = enterMoney();
 			LottoPapers lottoPapers = machine.createLottoPapers(money);
 
@@ -38,10 +40,10 @@ public class LottoMachineFacade {
 
 			Winning winning = new Winning(userLottoNumbers, bonusBall);
 			WinningResult winningResult = winning.match(lottoPapers);
-			int total = winningResult.getTotal();
-			WinningMoney.calculateYield(money, total);
-
-
+			WinningResultMap winningResultMap = winningResult.getStatistics();
+			resultView.statisticsPrint(winningResultMap);
+			BigDecimal yield = WinningMoney.calculateYield(money, winningResult.getTotal());
+			resultView.yieldPrint(yield);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
