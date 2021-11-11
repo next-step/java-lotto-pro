@@ -14,18 +14,12 @@ public enum Rank {
 	private final int matchCnt;
 	private final int prize;
 
-	private Rank(int matchCnt, int prize) {
+	Rank(int matchCnt, int prize) {
 		this.matchCnt = matchCnt;
 		this.prize = prize;
 	}
 
-	public static Rank getMatchRank(LottoNumber winningNumber, LottoNumber number) {
-		int matchCnt = winningNumber.getMatchCount(number);
-		boolean isMatchBonus = LottoNumber.isContainBonusNumber(winningNumber, number);
-		return valueOf(matchCnt, isMatchBonus);
-	}
-
-	public static Rank valueOf(int matchCnt, boolean isMatchBonus) {
+	public static Rank valueOf(PositiveNumber matchCnt, boolean isMatchBonus) {
 		validateMatchCnt(matchCnt);
 		return Arrays.stream(values())
 			.filter(rank -> rank.isMatch(matchCnt, isMatchBonus))
@@ -33,14 +27,14 @@ public enum Rank {
 			.orElse(MISS);
 	}
 
-	private static void validateMatchCnt(int matchCnt) {
-		if (matchCnt > 6 || matchCnt < 0) {
-			throw new IllegalArgumentException("일치하는 개숫는 0~6이어야 합니다.");
+	private static void validateMatchCnt(PositiveNumber matchCnt) {
+		if (matchCnt.toInt() > FIRST.matchCnt || matchCnt.toInt() < MISS.matchCnt) {
+			throw new IllegalArgumentException(ErrorMessage.MATCH_CNT_OUT_OF_RANGE.value());
 		}
 	}
 
-	private boolean isMatch(int matchCnt, boolean isMatchBonus) {
-		if (this.matchCnt != matchCnt) {
+	private boolean isMatch(PositiveNumber matchCnt, boolean isMatchBonus) {
+		if (this.matchCnt != matchCnt.toInt()) {
 			return false;
 		}
 		if (this.equals(Rank.SECOND)) {

@@ -4,17 +4,51 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import lotto.dto.PurchaseInfo;
+import lotto.dto.WinningInfo;
+
 public class InputView {
 
 	private static final Scanner sc = new Scanner(System.in);
 
-	public static int getMoney() {
+	public static PurchaseInfo getPurchaseInfo() {
+		int money = getMoney();
+		int manualLottoCount = getManualLottoCount();
+		List<List<Integer>> manualLottoList = getManualLotto(manualLottoCount);
+		return new PurchaseInfo(money, manualLottoList);
+	}
+
+	private static int getMoney() {
 		System.out.println("구입금액을 입력해 주세요.");
 		String input = sc.nextLine();
 		return Integer.parseInt(input);
 	}
 
-	public static List<Integer> getLottoNumbers() {
+	private static int getManualLottoCount() {
+		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+		String line = sc.nextLine();
+		return Integer.parseInt(line);
+	}
+
+	private static List<List<Integer>> getManualLotto(int count) {
+		if (count <= 0) {
+			return new ArrayList<>();
+		}
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+		List<List<Integer>> list = new ArrayList<>();
+		for (int i = 0; i < count; i++) {
+			list.add(parseLottoNumber(sc.nextLine()));
+		}
+		return list;
+	}
+
+	public static WinningInfo getWinningInfo() {
+		List<Integer> winningLottoNumbers = getWinningLottoNumbers();
+		int bonusNumber = getBonusNumber();
+		return new WinningInfo(winningLottoNumbers, bonusNumber);
+	}
+
+	private static List<Integer> getWinningLottoNumbers() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		String line = sc.nextLine();
 		String[] str = line.split(",");
@@ -25,10 +59,18 @@ public class InputView {
 		return numbers;
 	}
 
-	public static int getBonusNumber() {
+	private static int getBonusNumber() {
 		System.out.println("보너스 볼을 입력해 주세요.");
 		String line = sc.nextLine();
 		return Integer.parseInt(line);
 	}
 
+	private static List<Integer> parseLottoNumber(String line) {
+		String[] str = line.split(",");
+		List<Integer> numbers = new ArrayList<>();
+		for (String s : str) {
+			numbers.add(Integer.parseInt(s));
+		}
+		return numbers;
+	}
 }
