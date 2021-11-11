@@ -81,8 +81,7 @@ public class AutomaticLotto {
 		int manualCount = 0;
 		do {
 			MessageUtil.printMessage(NEW_LINE + MessageConstants.INPUT_PERCHASE_MANUAL_COUNT_MESSAGE);
-			Scanner scan = new Scanner(System.in);
-			manualCount = scan.nextInt();
+			manualCount = inputUserNumber();
 		} while (!isValidManualCount(manualCount, perchaseLottoCount));
 		return manualCount;
 	}
@@ -187,8 +186,7 @@ public class AutomaticLotto {
 		int bonusBall = 0;
 		do {
 			MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_MESSAGE);
-			Scanner scan = new Scanner(System.in);
-			bonusBall = scan.nextInt();
+			bonusBall = inputUserNumber();
 		} while (!isValidBonusNumber(bonusBall, winningNumbers));
 		return bonusBall;
 	}
@@ -206,5 +204,21 @@ public class AutomaticLotto {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * 사용자가 숫자를 잘못 입력한 경우 예외 처리
+	 * @return
+	 */
+	private static int inputUserNumber() {
+		int number = 0;
+		Scanner scan = new Scanner(System.in);
+		try {
+			number = scan.nextInt();
+		} catch (Exception e) {
+			MessageUtil.printMessage(MessageConstants.ONLY_INPUT_NUMBER_MESSAGE);
+			number = inputUserNumber();
+		}
+		return number;
 	}
 }
