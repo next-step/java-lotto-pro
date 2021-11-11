@@ -30,4 +30,22 @@ public class LottoNumber {
         return value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof LottoNumber) || o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        LottoNumber that = (LottoNumber) o;
+        if (this.value.equals(that.getValue()) && this.value == that.getValue()) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
