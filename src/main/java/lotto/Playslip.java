@@ -7,4 +7,8 @@ public class Playslip {
     public Playslip(final PickedNumbers pickedNumbers) {
         this.pickedNumbers = pickedNumbers;
     }
+
+    public boolean contains(PickedNumbers winningNumbers, int x) {
+        return pickedNumbers.contains(winningNumbers, x);
+    }
 }

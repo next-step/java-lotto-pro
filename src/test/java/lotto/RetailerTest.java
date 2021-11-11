@@ -11,6 +11,6 @@ public class RetailerTest {
     @DisplayName("로또를 구매할 수 있다.")
     void buy_size() {
         final Playslips playslips = Retailer.buy(new Price(14_000L));
-        assertThat(playslips.getSize()).isEqualTo(14);
+        assertThat(playslips.size()).isEqualTo(14);
     }
 }
