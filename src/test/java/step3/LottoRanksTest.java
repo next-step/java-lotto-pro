@@ -42,9 +42,7 @@ public class LottoRanksTest {
             .build();
 
         // then
-        assertAll(
-            () -> assertThat(lottoRanks.getCalculatedYield()).isEqualTo(expectYield)
-        );
+        assertThat(lottoRanks.getCalculatedYield()).isEqualTo(expectYield);
     }
 
     private static Stream<Arguments> getResultStatisticsGenerateData() {
