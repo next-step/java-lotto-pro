@@ -8,7 +8,7 @@ import step3.winner.WinningResultMap;
 
 public class ReturnView implements ResultView {
 
-	private static final String MESSAGE_BUY_COUNT = "%s개를 구매했습니다.";
+	private static final String MESSAGE_BUY_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 	private static final String MESSAGE_WINNING_STATISTICS = "당첨 통계";
 	private static final String MESSAGE_PERFORATED_LINE = "---------";
 	private static final String MESSAGE_TOTAL_YIELD = "총 수익률은 %s 입니다.";
@@ -17,8 +17,8 @@ public class ReturnView implements ResultView {
 		System.out.println(lottoPapers);
 	}
 
-	public void purchasedCount(int size) {
-		System.out.println(String.format(MESSAGE_BUY_COUNT, size));
+	public void purchasedCount(int autoCount,int manualCount) {
+		System.out.println(String.format(MESSAGE_BUY_COUNT, autoCount, manualCount));
 	}
 
 	public void statisticsPrint(WinningResultMap winning) {

@@ -7,7 +7,8 @@ import step3.winner.WinningResultMap;
 
 public interface ResultView {
 	void purchasedLottoPrint(LottoPapers lottoPapers);
-	void purchasedCount(int size);
+
+	void purchasedCount(int autoCount, int manualCount);
 	void statisticsPrint(WinningResultMap statistics);
 	void yieldPrint(BigDecimal statistics);
 }

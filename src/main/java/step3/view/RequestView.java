@@ -1,5 +1,7 @@
 package step3.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -17,6 +19,8 @@ public class RequestView implements InputView {
 	private static final Pattern NUMBER_SIZE_SIX = Pattern.compile("((?:^|,)([0-9]{1,2})){6}");
 
 	private static final String ENTER_MONEY = "구입금액을 입력해 주세요.";
+	public static final String  ENTER_MANUAL_COUNT= "수동으로 구매할 번호를 입력해 주세요.";
+	public static final String  ENTER_MANUAL_LOTTO_NUMBERS= "수동으로 구매할 로또 수를 입력해 주세요.";
 	private static final String ENTER_BONUS_BALL = "보너스 볼을 입력해 주세요";
 	private static final String ENTER_LAST_WEEK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 
@@ -31,6 +35,33 @@ public class RequestView implements InputView {
 		return insertMoney;
 	}
 
+	@Override
+	public int insertManualCount() {
+		int manualCount = 0;
+		try {
+			System.out.println(ENTER_MANUAL_LOTTO_NUMBERS);
+			return Integer.parseInt(input());
+		} catch (IllegalArgumentException e) {
+			insertMoney();
+		}
+		return manualCount;
+	}
+
+	public List<String> insertManualLottoNumbers(int manualCount) {
+		List<String> list = new ArrayList<>();
+		try {
+			System.out.println(ENTER_MANUAL_COUNT);
+			for (int i = 0; i < manualCount; i++) {
+				list.add(input());
+			}
+			return list;
+		} catch (ViewException e) {
+			System.out.println(e.getMessage());
+			insertBonusBall();
+		}
+		return list;
+	}
+
 	public int insertBonusBall() {
 		int insertBonusBall = 0;
 		try {
@@ -42,7 +73,6 @@ public class RequestView implements InputView {
 		}
 		return insertBonusBall;
 	}
-
 
 	public String insertLottoNumber() {
 		String insertLottoNumber = "";
