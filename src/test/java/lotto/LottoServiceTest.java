@@ -5,6 +5,7 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPrize;
 import lotto.service.LottoServiceCalculator;
 import lotto.service.ManualLottoService;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -36,5 +37,13 @@ public class LottoServiceTest {
         assertThat(manualLotties).contains(new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"))),
                                             new Lotto(new LottoNumbers(Arrays.asList("7", "8", "9", "10", "11", "12"))),
                                             new Lotto(new LottoNumbers(Arrays.asList("13", "14", "15", "16", "17", "18"))));
+    }
+
+    @Test
+    void 수동로또_개수_0미만_오류() {
+        int manualLottoCount = -1;
+        List<String> inputManualLottoNumbersString = Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12", "13,14,15,16,17,18");
+        Assertions.assertThatThrownBy(() -> ManualLottoService.createManualLotties(manualLottoCount, inputManualLottoNumbersString))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
