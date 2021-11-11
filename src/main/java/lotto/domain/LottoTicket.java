@@ -22,17 +22,17 @@ public class LottoTicket {
     }
 
     private void validateDuplicatedNumber(List<Number> numbers) {
-        Set<Number> numberSet = new HashSet<>();
+        Set<Number> duplicateCheckNumbers = new HashSet<>();
         for (Number number : numbers) {
-            validateContainsNumber(numberSet, number);
+            validateContainsNumber(duplicateCheckNumbers, number);
         }
     }
 
-    private void validateContainsNumber(Set<Number> numberSet, Number number) {
-        if (numberSet.contains(number)) {
+    private void validateContainsNumber(Set<Number> duplicateCheckNumbers, Number number) {
+        if (duplicateCheckNumbers.contains(number)) {
             throw new IllegalArgumentException("중복된 로또 번호가 입력될 수 없습니다. (입력값: " + number.getNumber() + ")");
         }
-        numberSet.add(number);
+        duplicateCheckNumbers.add(number);
     }
 
     private void validateNumbersCount(List<Number> numbers) {
