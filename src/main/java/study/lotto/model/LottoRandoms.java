@@ -7,17 +7,17 @@ import java.util.List;
 import java.util.Set;
 
 public class LottoRandoms {
-    private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private static final List<Integer> lottoNumbers = new ArrayList<>();
 
     static {
         for (int i = LottoNumber.MIN_NUMBER; i < LottoNumber.MAX_NUMBER; i++) {
-            lottoNumbers.add(LottoNumber.valueOf(i));
+            lottoNumbers.add(i);
         }
     }
 
-    public static Set<LottoNumber> getLottoRandomNumbers() {
+    public static Set<Integer> getLottoRandomNumbers() {
         Collections.shuffle(lottoNumbers);
-        final List<LottoNumber> lottoNumbers = LottoRandoms.lottoNumbers.subList(0, Lottery.LOTTO_NUMBER_COUNT);
+        final List<Integer> lottoNumbers = LottoRandoms.lottoNumbers.subList(0, Lottery.LOTTO_NUMBER_COUNT);
         return Collections.unmodifiableSet(new HashSet<>(lottoNumbers));
     }
 }

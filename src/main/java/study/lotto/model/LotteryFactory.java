@@ -1,28 +1,27 @@
 package study.lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LotteryFactory {
 
     private LotteryFactory() {
     }
 
-    public static LotteryFactory getInstance() {
-        return new LotteryFactory();
-    }
-
-    public TicketLotteryBundle generateTicketLotteryBundleByCount(final int count) {
-        final List<TicketLottery> ticketLotteries = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            ticketLotteries.add(generateTicketLottery());
-        }
+    public static TicketLotteryBundle generateAutoTicketLotteryBundleByCount(final TicketOrderCount orderCount) {
+        final List<TicketLottery> ticketLotteries = orderCount.getStream()
+                .mapToObj(index -> generateAutoTicketLottery())
+                .collect(Collectors.toList());
         return TicketLotteryBundle.valueOf(ticketLotteries);
     }
 
-    public TicketLottery generateTicketLottery() {
-        final Set<LottoNumber> lottoNumbers = LottoRandoms.getLottoRandomNumbers();
-        return TicketLottery.valueOf(lottoNumbers);
+    public static TicketLottery generateAutoTicketLottery() {
+        final Set<Integer> lottoNumbers = LottoRandoms.getLottoRandomNumbers();
+        return TicketLottery.valueOf(lottoNumbers, TicketLotteryType.AUTO);
+    }
+
+    public static TicketLotteryBundle generateManualTicketLotteryBundle(OrderManualTicketLotteryBundle manualLottoNumbers) {
+        return TicketLotteryBundle.valueOf(manualLottoNumbers, TicketLotteryType.MANUAL);
     }
 }

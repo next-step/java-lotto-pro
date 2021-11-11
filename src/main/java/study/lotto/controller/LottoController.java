@@ -1,23 +1,25 @@
 package study.lotto.controller;
 
-import study.lotto.controller.dto.LottoOrderMoneyRequestDto;
+import study.lotto.controller.dto.LottoOrderRequestDto;
 import study.lotto.controller.dto.LottoWinningNumberRequestDto;
-import study.lotto.controller.dto.TicketLotteryBundleResponseDto;
+import study.lotto.controller.dto.OrderTicketLotteryResponseDto;
 import study.lotto.controller.dto.WinningStatisticsResponseDto;
-import study.lotto.model.LottoStore;
-import study.lotto.model.Money;
-import study.lotto.model.WinningStatistics;
+import study.lotto.service.LottoService;
 
 public class LottoController {
 
-    public static TicketLotteryBundleResponseDto orderTicketLotteryBundleByMoney(final LottoOrderMoneyRequestDto orderCountRequestDto) {
-        final Money money = orderCountRequestDto.toEntity();
-        return new TicketLotteryBundleResponseDto(LottoStore.orderTicketLotteryBundleByMoney(money));
+    private final LottoService lottoService;
+
+    public LottoController() {
+        this.lottoService = new LottoService();
     }
 
-    public static WinningStatisticsResponseDto referee(final LottoWinningNumberRequestDto winningNumberRequestDto,
-                                                       final TicketLotteryBundleResponseDto ticketLotteryBundleResponseDto) {
-        final WinningStatistics winningStatistics = WinningStatistics.valueOf(ticketLotteryBundleResponseDto.toEntity(), winningNumberRequestDto.toEntity());
-        return new WinningStatisticsResponseDto(winningStatistics);
+    public OrderTicketLotteryResponseDto orderTicketLotteryBundle(final LottoOrderRequestDto orderRequestDto) {
+        return lottoService.orderTicketLotteryBundle(orderRequestDto);
+    }
+
+    public WinningStatisticsResponseDto fetchWinningStatistics(final LottoWinningNumberRequestDto winningNumberRequestDto,
+                                                               final OrderTicketLotteryResponseDto orderTicketLotteryResponseDto) {
+        return lottoService.fetchWinningStatistics(winningNumberRequestDto, orderTicketLotteryResponseDto);
     }
 }

@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.EnumMap;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
@@ -39,13 +40,12 @@ class RankStatisticsTest {
         });
     }
 
-    private EnumMap<Rank, Integer> getDummyRankStatistics() {
-        final EnumMap<Rank, Integer> r = new EnumMap<>(Rank.class);
-        r.put(Rank.FIRST, 1);
-        r.put(Rank.THIRD, 2);
-        r.put(Rank.FOURTH, 3);
-        r.put(Rank.FIFTH, 4);
-        r.put(Rank.MISS, 5);
-        return r;
+    private List<Rank> getDummyRankStatistics() {
+        return Arrays.asList(Rank.FIRST,
+                Rank.THIRD, Rank.THIRD,
+                Rank.FOURTH, Rank.FOURTH, Rank.FOURTH,
+                Rank.FIFTH, Rank.FIFTH, Rank.FIFTH, Rank.FIFTH,
+                Rank.MISS, Rank.MISS, Rank.MISS, Rank.MISS, Rank.MISS
+        );
     }
 }

@@ -4,8 +4,8 @@ import study.lotto.model.exception.NotEnoughMoneyException;
 
 public class Money {
 
-    private static final String ORDER_MONEY_NOT_ENOUGH_ERROR_MESSAGE = "최소 1000 이상의 값이어야 합니다.";
-    private static final int MINIMUM_MONEY = 1000;
+    private static final String ORDER_MONEY_NOT_ENOUGH_ERROR_MESSAGE = "최소 0 이상의 값이어야 합니다.";
+    private static final int MINIMUM_MONEY = 0;
 
     private final int money;
 
@@ -24,11 +24,42 @@ public class Money {
         return new Money(money);
     }
 
-    public int getMoney() {
-        return money;
+    public int divideByPriceOfLottoTicket() {
+        return divide(LottoStore.PRICE_OF_LOTTO_TICKET).intValue();
     }
 
-    public int divide(final int priceOfLottoTicket) {
-        return money / priceOfLottoTicket;
+    int intValue() {
+        return this.money;
+    }
+
+    public Money divide(final Money money) {
+        return valueOf(this.money / money.money);
+    }
+
+    public boolean greaterThan(final Money money) {
+        return this.money >= money.money;
+    }
+
+    public Money multiply(final int times) {
+        return valueOf(this.money * times);
+    }
+
+    public Money minus(Money money) {
+        return valueOf(this.money - money.money);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Money money1 = (Money) o;
+
+        return money == money1.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return money;
     }
 }

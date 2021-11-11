@@ -4,6 +4,7 @@ import study.lotto.model.exception.IllegalLotterySizeException;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Lottery {
@@ -13,27 +14,50 @@ public class Lottery {
 
     private final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-    protected Lottery(final Set<LottoNumber> lottoNumbers) {
+    private Lottery(final Set<Integer> lottoNumbers) {
         validate(lottoNumbers);
-        this.lottoNumbers.addAll(lottoNumbers);
+        addAll(lottoNumbers);
     }
 
+    private Lottery(final List<Integer> lottoNumbers) {
+        this(new HashSet<>(lottoNumbers));
+    }
 
-    public static Lottery valueOf(final Set<LottoNumber> lottoNumbers) {
+    private void addAll(Set<Integer> lottoNumbers) {
+        for (final Integer lottoNumber : lottoNumbers) {
+            this.lottoNumbers.add(LottoNumber.valueOf(lottoNumber));
+        }
+    }
+
+    public static Lottery valueOf(final List<Integer> lottoNumbers) {
         return new Lottery(lottoNumbers);
     }
 
-    public boolean containsAll(final HashSet<LottoNumber> lottoNumbers) {
+    public static Lottery valueOf(final Set<Integer> lottoNumbers) {
+        return new Lottery(lottoNumbers);
+    }
+
+
+    public boolean contains(final LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public boolean containsAll(final Set<LottoNumber> lottoNumbers) {
         return this.lottoNumbers.containsAll(lottoNumbers);
     }
 
-    private void validateNotNull(final Set<LottoNumber> lottoNumbers) {
+    private void validate(final Set<Integer> lottoNumbers) {
+        validateNotNull(lottoNumbers);
+        validateSize(lottoNumbers);
+    }
+
+    private void validateNotNull(final Set<Integer> lottoNumbers) {
         if (lottoNumbers == null) {
             throw new IllegalLotterySizeException(ILLEGAL_LOTTERY_SIZE_ERROR_MESSAGE);
         }
     }
 
-    private void validateSize(final Set<LottoNumber> lottoNumbers) {
+    private void validateSize(final Set<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalLotterySizeException(ILLEGAL_LOTTERY_SIZE_ERROR_MESSAGE);
         }
@@ -56,10 +80,5 @@ public class Lottery {
     @Override
     public int hashCode() {
         return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
-    }
-
-    private void validate(final Set<LottoNumber> lottoNumbers) {
-        validateNotNull(lottoNumbers);
-        validateSize(lottoNumbers);
     }
 }

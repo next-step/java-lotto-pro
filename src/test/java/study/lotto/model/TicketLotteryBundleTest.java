@@ -5,7 +5,6 @@ import study.lotto.model.exception.TicketLotteryBundleMustBeNotEmptyException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -34,14 +33,8 @@ class TicketLotteryBundleTest {
     @Test
     void 로또복권묶음은_한장_이상의_로또복권으로_생성할_수_있다() {
         final List<TicketLottery> ticketLotteries = Arrays.asList(
-                TicketLottery.valueOf(new HashSet<>(Arrays.asList(
-                        LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))
-                )),
-                TicketLottery.valueOf(new HashSet<>(Arrays.asList(
-                        LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))
-                ))
+                TicketLottery.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6), TicketLotteryType.AUTO),
+                TicketLottery.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6), TicketLotteryType.AUTO)
         );
         assertThatNoException()
                 .isThrownBy(() -> TicketLotteryBundle.valueOf(ticketLotteries));

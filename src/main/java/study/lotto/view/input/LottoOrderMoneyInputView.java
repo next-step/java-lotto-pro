@@ -1,6 +1,7 @@
-package study.lotto.view;
+package study.lotto.view.input;
 
 import study.lotto.controller.dto.LottoOrderMoneyRequestDto;
+import study.lotto.view.InvalidLottoInputViewException;
 import study.utils.Console;
 
 public class LottoOrderMoneyInputView {

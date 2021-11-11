@@ -1,25 +1,25 @@
-package study.lotto.view;
+package study.lotto.view.out;
 
-import study.lotto.controller.dto.TicketLotteryBundleResponseDto;
+import study.lotto.controller.dto.OrderTicketLotteryResponseDto;
 import study.lotto.controller.dto.TicketLotteryResponseDto;
 
 import java.util.List;
 
 public class LottoOrderResultView {
 
-    private static final String ORDER_GUIDE_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String ORDER_GUIDE_MESSAGE = "자동으로 %d장, 수동으로 %d개를 구매했습니다.\n";
 
     private LottoOrderResultView() {
     }
 
-    public static void resolve(final TicketLotteryBundleResponseDto ticketLotteryBundle) {
+    public static void resolve(final OrderTicketLotteryResponseDto ticketLotteryBundle) {
         final List<TicketLotteryResponseDto> ticketLotteryResponseDtos = ticketLotteryBundle.getTicketLotteryResponseDtos();
-        printOrderCount(ticketLotteryResponseDtos.size());
+        printOrderCount(ticketLotteryBundle.getAutoTicketSize(), ticketLotteryBundle.getManualTicketSize());
         printTicketLotteryBundle(ticketLotteryResponseDtos);
     }
 
-    private static void printOrderCount(final int orderCount) {
-        System.out.printf(ORDER_GUIDE_MESSAGE, orderCount);
+    private static void printOrderCount(final int manualOrderCount, final int autoOrderCount) {
+        System.out.printf(ORDER_GUIDE_MESSAGE, manualOrderCount, autoOrderCount);
     }
 
     private static void printTicketLotteryBundle(final List<TicketLotteryResponseDto> ticketLotteryResponseDtos) {
