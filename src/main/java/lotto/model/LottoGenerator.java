@@ -9,8 +9,7 @@ public class LottoGenerator {
     private final Payment payment;
 
     public LottoGenerator(Payment payment) {
-        Objects.requireNonNull(payment);
-        this.payment = payment;
+        this.payment = Objects.requireNonNull(payment);
     }
 
     public Collection<Lotto> generate() {

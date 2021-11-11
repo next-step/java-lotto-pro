@@ -24,8 +24,8 @@ public class Lotto {
     }
 
     public Lotto(Set<Number> numbers) {
-        Objects.requireNonNull(numbers);
-        this.numbers = Collections.unmodifiableSortedSet(new TreeSet<>(numbers));
+        TreeSet<Number> sortedNumbers = new TreeSet<>(Objects.requireNonNull(numbers));
+        this.numbers = Collections.unmodifiableSortedSet(sortedNumbers);
         validate();
     }
 

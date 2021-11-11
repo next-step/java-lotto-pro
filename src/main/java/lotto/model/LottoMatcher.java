@@ -18,11 +18,8 @@ public class LottoMatcher {
     }
 
     public LottoMatcher(Number bonusNumber, Lotto winningLotto) {
-        Objects.requireNonNull(bonusNumber);
-        Objects.requireNonNull(winningLotto);
-
-        this.bonusNumber = bonusNumber;
-        this.winningLotto = winningLotto;
+        this.bonusNumber = Objects.requireNonNull(bonusNumber);
+        this.winningLotto = Objects.requireNonNull(winningLotto);
 
         validate();
     }
