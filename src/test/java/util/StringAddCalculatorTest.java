@@ -44,7 +44,7 @@ class StringAddCalculatorTest {
     @Test
     void splitAndSum_예외_음수() {
         Exception exception = assertThrows(RuntimeException.class, () -> StringAddCalculator.splitAndSum("-1,2,3"));
-        String expectedMessage = "For input only positive integers";
+        String expectedMessage = "For input only positive integers.";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
