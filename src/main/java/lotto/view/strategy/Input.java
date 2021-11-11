@@ -17,7 +17,14 @@ public interface Input {
      * 입력 값에 대한 유효성 검사
      */
     default String getValue() {
-        System.out.println(this.getMessage());
+        return getValue(true);
+    }
+
+    default String getValue(boolean isPrintTitle) {
+        if (isPrintTitle) {
+            System.out.println(this.getMessage());
+        }
+
         String inputValue = Console.readLine();
 
         if (!this.inputRegexCompiler().matcher(inputValue).matches()) {
