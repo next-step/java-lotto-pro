@@ -13,9 +13,9 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets generateRandomLottoTickets(int amount) {
+    public static LottoTickets generateRandomLottoTickets(TicketAmount amount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < amount.getTicketAmount(); i++) {
             lottoTickets.add(LottoTicket.generateRandomLottoTicket());
         }
         return new LottoTickets(lottoTickets);

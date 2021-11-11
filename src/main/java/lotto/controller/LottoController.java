@@ -35,21 +35,21 @@ public class LottoController {
 
     private LottoTickets getLottoTickets(Money inputMoney) {
         // 수동 구입
-        int countsOfManualTickets = inputView.inputCountsOfManualTickets();
+        TicketAmount countsOfManualTickets = new TicketAmount(inputView.inputCountsOfManualTickets());
         LottoTickets manualLottoTickets = getManualLottoTickets(countsOfManualTickets);
 
         // 자동 구입
-        int countsOfAutoTickets = lottoService.getCountsOfAutoTickets(inputMoney, countsOfManualTickets);
+        TicketAmount countsOfAutoTickets = lottoService.getCountsOfAutoTickets(inputMoney, countsOfManualTickets);
         LottoTickets autoLottoTickets = lottoService.buyAutoLottoTickets(countsOfAutoTickets);
         LottoTickets lottoTickets = autoLottoTickets.addAll(manualLottoTickets);
-        resultView.printCountOfLottoTickets(countsOfManualTickets, countsOfAutoTickets);
+        resultView.printCountOfLottoTickets(countsOfManualTickets.getTicketAmount(), countsOfAutoTickets);
         resultView.printBuyResult(lottoTickets.toDTO());
         return lottoTickets;
     }
 
-    private LottoTickets getManualLottoTickets(int countsOfManualTickets) {
+    private LottoTickets getManualLottoTickets(TicketAmount countsOfManualTickets) {
         LottoTickets manualLottoTickets = new LottoTickets(new ArrayList<>());
-        for (int i = 0; i < countsOfManualTickets; i++) {
+        for (int i = 0; i < countsOfManualTickets.getTicketAmount(); i++) {
             manualLottoTickets.add(ParseUtility.StringToLottoTicket(inputView.inputLottoNumbers()));
         }
         return manualLottoTickets;

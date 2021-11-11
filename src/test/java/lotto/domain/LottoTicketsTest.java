@@ -15,7 +15,7 @@ class LottoTicketsTest {
     @DisplayName("자동 로또를 개수대로 생성한다")
     void generateRandomLottoTickets() {
         // given
-        int amount = 3;
+        TicketAmount amount = new TicketAmount(3);
 
         // when
         LottoTickets lottoTickets = LottoTickets.generateRandomLottoTickets(amount);

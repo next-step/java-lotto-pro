@@ -2,6 +2,7 @@ package lotto.service;
 
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.TicketAmount;
 import lotto.exception.NotEnoughMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class LottoServiceTest {
     @DisplayName("구입한 로또의 개수를 확인한다")
     void buyLottosTest() {
         LottoService lottoService = new LottoService();
-        LottoTickets lottos = lottoService.buyAutoLottoTickets(1);
+        LottoTickets lottos = lottoService.buyAutoLottoTickets(new TicketAmount(1));
 
         assertThat(lottos.count()).isEqualTo(1);
     }
@@ -27,10 +28,10 @@ class LottoServiceTest {
         LottoService lottoService = new LottoService();
 
         // when
-        int countsOfAutoTickets = lottoService.getCountsOfAutoTickets(new Money(11001), 5);
+        TicketAmount countsOfAutoTickets = lottoService.getCountsOfAutoTickets(new Money(11001), new TicketAmount(5));
 
         // then
-        assertThat(countsOfAutoTickets).isEqualTo(6);
+        assertThat(countsOfAutoTickets).isEqualTo(new TicketAmount(6));
     }
 
     @Test
@@ -38,7 +39,7 @@ class LottoServiceTest {
     void notEnoughMoneyTest() {
         LottoService lottoService = new LottoService();
         // given, when
-        assertThatThrownBy(() -> lottoService.getCountsOfAutoTickets(new Money(10000), 11))
+        assertThatThrownBy(() -> lottoService.getCountsOfAutoTickets(new Money(10000), new TicketAmount(11)))
                 // then
                 .isInstanceOf(NotEnoughMoneyException.class);
     }

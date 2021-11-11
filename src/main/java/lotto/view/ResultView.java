@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.GameResult;
 import lotto.domain.Prize;
+import lotto.domain.TicketAmount;
 import lotto.dto.LottoTicketDTO;
 import lotto.dto.LottoTicketsDTO;
 import lotto.dto.MoneyDTO;
@@ -63,7 +64,7 @@ public class ResultView {
         System.out.print(result);
     }
 
-    public void printCountOfLottoTickets(int countsOfManualTickets, int countsOfAutoTickets) {
-        System.out.printf(TICKET_AMOUNT_MESSAGE, countsOfManualTickets, countsOfAutoTickets);
+    public void printCountOfLottoTickets(int countsOfManualTickets, TicketAmount countsOfAutoTickets) {
+        System.out.printf(TICKET_AMOUNT_MESSAGE, countsOfManualTickets, countsOfAutoTickets.getTicketAmount());
     }
 }

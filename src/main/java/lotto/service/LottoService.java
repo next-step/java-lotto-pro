@@ -1,9 +1,6 @@
 package lotto.service;
 
-import lotto.domain.GameResult;
-import lotto.domain.LottoTickets;
-import lotto.domain.Money;
-import lotto.domain.WinningLottoNumbers;
+import lotto.domain.*;
 import lotto.exception.NotEnoughMoneyException;
 
 public class LottoService {
@@ -13,7 +10,7 @@ public class LottoService {
     public LottoService() {
     }
 
-    public LottoTickets buyAutoLottoTickets(int countsOfAutoTickets) {
+    public LottoTickets buyAutoLottoTickets(TicketAmount countsOfAutoTickets) {
         return LottoTickets.generateRandomLottoTickets(countsOfAutoTickets);
     }
 
@@ -21,11 +18,11 @@ public class LottoService {
         return lottoTickets.getGameResult(winningLottoNumbers);
     }
 
-    public int getCountsOfAutoTickets(Money inputMoney, int countsOfManualTickets) {
-        int countsOfAutoTickets = inputMoney.getLottoAmount(LOTTO_TICKET_PRICE) - countsOfManualTickets;
+    public TicketAmount getCountsOfAutoTickets(Money inputMoney, TicketAmount countsOfManualTickets) {
+        int countsOfAutoTickets = inputMoney.getLottoAmount(LOTTO_TICKET_PRICE) - countsOfManualTickets.getTicketAmount();
         if (countsOfAutoTickets < 0) {
             throw new NotEnoughMoneyException();
         }
-        return countsOfAutoTickets;
+        return new TicketAmount(countsOfAutoTickets);
     }
 }
