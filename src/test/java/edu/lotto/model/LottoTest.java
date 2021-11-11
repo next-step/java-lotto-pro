@@ -72,9 +72,12 @@ public class LottoTest {
 	};
 
 	@Test
-	@DisplayName("지난주 당첨 번호와 내 로또 번호가 일치하는 숫자가 몇개인지 확인")
-	void setWinningNumberMatchesCount() {
-		long matchedCount = myLottoNumbers.stream().filter(number -> winningNumbers.contains(number)).count();
-		assertThat(matchedCount).isEqualTo(3);
+	@DisplayName("로또 번호가 지난 주 정답에 포함되어 있는지 검증")
+	void containBonusBall() {
+		int bonusBall = 42;
+		long containCunt = newLottoNumbers.stream()
+								.filter(lottoNumber -> lottoNumber.getLottoNumber() == bonusBall)
+								.count();
+		assertThat(containCunt).isNotEqualTo(0);
 	}
 }

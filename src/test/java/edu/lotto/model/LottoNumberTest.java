@@ -27,11 +27,10 @@ public class LottoNumberTest {
 	@Test
 	@DisplayName("로또 번호가 지난 주 정답에 포함되어 있는지 검증")
 	void containLottoNumber() {
-		boolean hasLottoNumber = false;
 		LottoNumber number = new LottoNumber(1);
-		long containCunt = winningNumbers.stream()
+		long containCount = winningNumbers.stream()
 									.filter(lottoNumber -> lottoNumber.getLottoNumber() == number.getLottoNumber())
 									.count();
-		assertThat(containCunt).isNotEqualTo(0);
+		assertThat(containCount).isNotEqualTo(0);
 	}
 }
