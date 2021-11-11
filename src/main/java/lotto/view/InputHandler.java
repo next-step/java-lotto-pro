@@ -43,6 +43,13 @@ public class InputHandler {
         } catch (Exception e) {
             throw new NumberFormatException(ErrorMessage.NUMBER_FORMAT_ERROR);
         }
+    }
 
+    public static int buyManualLotto(String textManualCount, int lottoCount) {
+        int manualCount = validStringToInt(textManualCount);
+        if(lottoCount - manualCount < 0){
+            throw new IllegalArgumentException(ErrorMessage.LACK_OF_MONEY);
+        }
+        return manualCount;
     }
 }

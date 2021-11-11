@@ -53,4 +53,23 @@ public class InputHandlerTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.SPLITED_ERROR);
     }
+
+    @DisplayName("구매가능한 로또수와 수동으로 구매할 로또 수 입력 검증")
+    @Test
+    void buyManualLotto() {
+        int manualLottoCount = InputHandler.buyManualLotto("5", 11);
+        assertThat(manualLottoCount).isEqualTo(5);
+
+        manualLottoCount = InputHandler.buyManualLotto("10", 10);
+        assertThat(manualLottoCount).isEqualTo(10);
+    }
+
+    @DisplayName("수동으로 구매할 로또 수가 구매가능한 로또수 보다 클때 에러 검증")
+    @Test
+    void buyManualLottoOverError() {
+        assertThatThrownBy(() -> {
+            InputHandler.buyManualLotto("10", 9);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.LACK_OF_MONEY);
+    }
 }
