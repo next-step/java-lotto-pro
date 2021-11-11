@@ -7,6 +7,10 @@ public class Games {
 
     private List<Game> list;
 
+    public Games(final int gameCount) {
+        new Games(gameCount, new ArrayList<>());
+    }
+
     public Games(final int gameCount, final List<LottoNumbers> manualGames) {
         list = new ArrayList<>();
         addManualGames(manualGames);
