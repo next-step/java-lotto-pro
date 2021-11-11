@@ -20,9 +20,9 @@ public class LottoGame {
         user.setMoney(new BigInteger(String.valueOf(InputView.inputInteger(INPUT_MONEY))));
         int manualCount = inputBuyManualCount(user);
 
-        try{
+        try {
             user.buyLottos(InputView.inputString(INPUT_BUY_MANUAL_NUMBER, manualCount));
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             user.buyLottos(InputView.inputString(INPUT_BUY_MANUAL_NUMBER, manualCount));
         }
@@ -30,8 +30,8 @@ public class LottoGame {
 
         Lotto lotto = null;
         try {
-             lotto = inputWinLotto();
-        }catch(IllegalArgumentException e){
+            lotto = inputWinLotto();
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             lotto = inputWinLotto();
         }
@@ -46,7 +46,7 @@ public class LottoGame {
         ResultView.printResult(user);
     }
 
-    public Lotto inputWinLotto() throws IllegalArgumentException{
+    public Lotto inputWinLotto() throws IllegalArgumentException {
         return new Lotto(InputView.inputString(INPUT_WIN_LOTTO));
     }
 
@@ -61,11 +61,11 @@ public class LottoGame {
         return number;
     }
 
-    public int inputBuyManualCount(User user){
+    public int inputBuyManualCount(User user) {
         int manualCount = 0;
-        do{
+        do {
             manualCount = InputView.inputInteger(INPUT_BUY_MANUAL_COUNT);
-        }while(! user.hasMoney(manualCount));
+        } while (!user.hasMoney(manualCount));
         return manualCount;
     }
 }

@@ -10,7 +10,7 @@ public class InputView {
     private InputView() {
     }
 
-    public static int inputInteger(String message){
+    public static int inputInteger(String message) {
         try {
             System.out.println(message);
             return Integer.parseInt(scanner.nextLine());
