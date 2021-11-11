@@ -38,6 +38,9 @@ public class ResultView {
 
     public void printGameResult(GameResult gameResult) {
         for (Prize prize : Prize.values()) {
+            if (prize == Prize.MISS) {
+                continue;
+            }
             String countOfMatchMessage = getCountOfMatchMessage(prize);
             System.out.printf(GAME_RESULT_MESSAGE, countOfMatchMessage, prize.getPrizeMoney(), gameResult.getMatchCount(prize));
         }
