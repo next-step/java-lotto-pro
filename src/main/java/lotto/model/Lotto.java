@@ -6,6 +6,8 @@ import java.util.*;
 
 public class Lotto {
     public static final int SIZE = 6;
+    public static final int INCREMENT_BY_ONE = 1;
+    public static final int INCREMENT_BY_ZERO = 1;
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
@@ -52,9 +54,16 @@ public class Lotto {
     public int matchNumber(Lotto lotto) {
         int result = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            result += lotto.compare(lottoNumber) ? 1 : 0;
+            result += increment(lotto, lottoNumber);
         }
         return result;
+    }
+
+    private int increment(Lotto lotto, LottoNumber lottoNumber) {
+        if(lotto.compare(lottoNumber)){
+            return INCREMENT_BY_ONE;
+        }
+        return INCREMENT_BY_ZERO;
     }
 
     @Override

@@ -28,7 +28,7 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Map<Rank, Integer> createRankMap() {
+    public static Map<Rank, Integer> createRanks() {
         Map<Rank, Integer> result = new LinkedHashMap<>();
         List<Rank> winningRanks = Rank.createWinningRanks();
         for (Rank winningRank : winningRanks) {

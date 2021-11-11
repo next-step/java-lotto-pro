@@ -4,15 +4,13 @@ import lotto.util.ConstantString;
 
 import java.math.BigInteger;
 import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Result {
     private Map<Rank, Integer> matchResult;
 
     public Result(Lottos lottos, WinningLotto winLotto) {
-        this.matchResult = Rank.createRankMap();
+        this.matchResult = Rank.createRanks();
         for (Lotto lotto : lottos.getLottoGroup()) {
             Rank rank = winLotto.matchRank(lotto);
             matchResultPut(rank);

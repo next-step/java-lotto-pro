@@ -40,10 +40,7 @@ public class LottoCreateFactory {
     }
 
     public static WinningLotto createWinningLotto(List<Integer> winLottoNumbers, int bonusNumber) {
-        return new WinningLotto(createLotto(winLottoNumbers), new LottoNumber(bonusNumber));
+        return new WinningLotto(new Lotto(winLottoNumbers), new LottoNumber(bonusNumber));
     }
 
-    private static Lotto createLotto(List<Integer> numbers) {
-        return new Lotto(numbers);
-    }
 }

@@ -18,7 +18,7 @@ public class LottoGame {
         try {
             buyLotto();
 
-            enterWinningLotto();
+            inputWinningLotto();
 
             statistics();
         } catch (Exception e) {
@@ -34,7 +34,7 @@ public class LottoGame {
         ResultView.printLottoList(lottos);
     }
 
-    private void enterWinningLotto() {
+    private void inputWinningLotto() {
         View.print(Message.WINNING_NUMBER);
         List<Integer> winLottoNumbers = InputHandler.splitTextToInts(Console.readLine());
         View.print(Message.BONUS_NUMBER);

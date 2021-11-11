@@ -3,7 +3,6 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,7 +25,7 @@ public class RankTest {
     @DisplayName("랭크Map 순서에 맞게 나오는지 검증")
     @Test
     void createRankMapTest() {
-        Map<Rank, Integer> result = Rank.createRankMap();
+        Map<Rank, Integer> result = Rank.createRanks();
         assertThat(result.toString()).isEqualTo("{FIFTH=0, FOURTH=0, THIRD=0, SECOND=0, FIRST=0}");
     }
 
