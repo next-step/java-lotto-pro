@@ -81,14 +81,6 @@ public class Lotto {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		sb.append(lottoNumbers
-			.stream()
-			.map(LottoNumber::toString)
-			.collect(Collectors.joining(", "))
-		);
-		sb.append("]");
-		return sb.toString();
+		return lottoNumbers.toString();
 	}
 }
