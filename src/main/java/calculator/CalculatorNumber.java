@@ -1,3 +1,5 @@
+package calculator;
+
 public class CalculatorNumber {
 	public static final String MESSAGE_ILLEGAL_NEGATIVE_NUMBER = "MESSAGE_ILLEGAL_NEGATIVE_NUMBER";
 

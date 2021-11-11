@@ -37,3 +37,51 @@
   * 콜론 구분자로 입력할 경우에도 각 숫자의 합을 반환한다.
   * "//"와 "\n" 문자 사이에 커스텀 구분자를 지정할 수 있으며, 해당 구분자를 사용할 경우 두 숫자의 합을 반환한다.
   * 음수를 전달할 경우 RuntimeException 예외가 발생한다. (예 : "-1,2,3")
+
+## 로또 (자동) 기능 요구사항
+* InputView 클래스
+  * 금액 입력 요청 문구 출력
+  * 당첨번호 입력 요청 문구 출력
+  * 당첨번호 입력, 구입 금액 입력
+
+* ResultView
+  * 당첨 통계
+
+* LottoGame 클래스
+  * 번호 생성
+
+* LottoNumberChoiceStrategy 인터페이스
+  * choose
+    * RandomClass
+
+* LottoNumber
+  * 숫자 주입 생성자
+  * 주입된 숫자 반환 
+
+* LottoPurchaseCount
+  * 0원을 제공하면 예외 
+  * 로또 산 횟수 반환
+  * 처음에 소모한 비용 반환
+  
+* Lotto
+  * List<LottoNumber> 주입 생성자
+  * LottoNumberChoiceStrategy 인터페이스 생성자
+  * 생성자 예외1: 숫자가 6개가 아닌경우
+  * 생성자 예외2: 주입하려는 컬렉션 안에 같은 숫자가 포함되어 있는 경우
+  * 다른 로또와 비교하여 몇등인지 반환
+
+* Lottos
+  * 순회하며 몇등짜리 로또인지를 저장 
+
+* Rank
+  * enum
+  * 가격 매핑
+  
+* LottoResult
+  * 몇개의 숫자가 맞는지 체크
+  * 몇개의 숫자가 맞는지를 기준으로 Rank 반환
+
+* RewardCalculator
+  * 무엇이 당첨되었는지 추가
+  * 특정 등수가 당첨된 횟수 반환
+  * 모든 등수의 상금과 횟수를 곱한 값을 반환

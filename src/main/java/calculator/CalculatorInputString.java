@@ -1,3 +1,5 @@
+package calculator;
+
 public class CalculatorInputString {
 	public static final String MESSAGE_VALUE_IS_NOT_NUMBER_FORMAT = "VALUE_IS_NOT_NUMBER_FORMAT";
 	public static final String VALUE_ZERO = "0";
@@ -14,7 +16,7 @@ public class CalculatorInputString {
 
 	public CalculatorNumbers toCalculateNumbers() {
 		try {
-			return new CalculatorNumbers(CalculatorInputStringParser.parse(value));
+			return new CalculatorNumbers(StringSplitParser.parse(value));
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(MESSAGE_VALUE_IS_NOT_NUMBER_FORMAT);
 		}

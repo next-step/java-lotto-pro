@@ -9,6 +9,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import calculator.CalculatorInputString;
+import calculator.CalculatorNumber;
+import calculator.StringAddCalculator;
+
 public class StringAddCalculatorTest {
 
 	StringAddCalculator stringAddCalculator;
