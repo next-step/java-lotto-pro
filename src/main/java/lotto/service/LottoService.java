@@ -11,23 +11,27 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoService {
+    private static final int MINIMUM_AUTO_LOTTO_COUNT = 0;
+
     public static void play() {
-        int boughtMoney = InputView.inputBoughtMoney();
-        validateBoughtMoney(boughtMoney);
-        int lottoCount = LottoServiceCalculator.getLottoCount(boughtMoney);
-        ResultView.printLottoCount(lottoCount);
-        List<Lotto> lottoList = createLottoList(lottoCount);
-        ResultView.printLottoNumbers(lottoList);
+        int boughtMoney = BoughtMoneyService.getBoughtMoney(InputView.inputBoughtMoney());
+        int manualLottoCount = InputView.inputManualLottoCount();;
+        int autoLottoCount = LottoServiceCalculator.getLottoCount(boughtMoney) - manualLottoCount;
+        validateManualLottoCount(autoLottoCount);
+        List<Lotto> lotties = ManualLottoService.createManualLotties(manualLottoCount, InputView.inputManualLottoNumbers(manualLottoCount));
+        lotties.addAll(createAutoLotties(autoLottoCount));
+        ResultView.printLottoCount(manualLottoCount, autoLottoCount);
+        ResultView.printLottoNumbers(lotties);
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(StringUtils.separate(InputView.inputWinningNumber()),
                                                                                     new BonusNumber(InputView.inputBonusNumber()));
-        Map<LottoPrize, Integer> lottoResultMap = createLottoResult(lottoList, winningLottoNumbers);
+        Map<LottoPrize, Integer> lottoResultMap = createLottoResult(lotties, winningLottoNumbers);
         ResultView.printWinningStatistics(lottoResultMap);
         ResultView.printProfitRate(LottoServiceCalculator.calculateProfitRate(lottoResultMap, boughtMoney));
     }
 
-    private static void validateBoughtMoney(int boughtMoney) {
-        if (boughtMoney <= 0) {
-            throw new IllegalArgumentException("구매급액은 0 이상의 값을 입력해주세요.");
+    private static void validateManualLottoCount(int autoLottoCount) {
+        if (autoLottoCount < MINIMUM_AUTO_LOTTO_COUNT) {
+            throw new IllegalArgumentException("수동 로또 개수는 총 구매한 로또 개수를 넘으면 안됩니다.");
         }
     }
 
@@ -41,11 +45,11 @@ public class LottoService {
         return lottoResultMap;
     }
 
-    private static List<Lotto> createLottoList(int lottoCount) {
-        List<Lotto> lottoList = new LinkedList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottoList.add(new Lotto(new LottoNumbers(ShuffledLottoNumbers.createShuffledLottoNumbers())));
+    private static List<Lotto> createAutoLotties(int autoLottoCount) {
+        List<Lotto> lotties = new LinkedList<>();
+        for (int i = 0; i < autoLottoCount; i++) {
+            lotties.add(new Lotto(new LottoNumbers(ShuffledLottoNumbers.createShuffledLottoNumbers())));
         }
-        return lottoList;
+        return lotties;
     }
 }
