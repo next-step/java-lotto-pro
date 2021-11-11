@@ -13,18 +13,17 @@ public class ResultView {
 
     public static final int BEP = 1;
     public static final String JOIN_DELIMITER = "\n";
-    public static final String BUY_MESSAGE = "%d개를 구매했습니다.";
     public static final String GAME_RESULT_MESSAGE = "%s (%d원)- %d개\n";
     public static final String EARNING_RATIO_MESSAGE = "총 수익률은 %f입니다. ";
     public static final String EARNING_RATIO_LOSS_MESSAGE = "기준이 1이기 때문에 결과적으로 손해라는 의미임";
     public static final String COUNT_OF_MATCH_MESSAGE = "%d개 일치";
     public static final String COUNT_OF_MATCH_SECOND_PRIZE_MESSAGE = "5개 일치, 보너스 볼 일치";
+    public static final String TICKET_AMOUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 
     public ResultView() {
     }
 
     public void printBuyResult(LottoTicketsDTO lottoTicketsDTO) {
-        System.out.printf(BUY_MESSAGE, lottoTicketsDTO.size());
         String lottoResultStrings = getLottoResultString(lottoTicketsDTO);
         System.out.println(lottoResultStrings);
     }
@@ -59,5 +58,9 @@ public class ResultView {
             result += EARNING_RATIO_LOSS_MESSAGE;
         }
         System.out.print(result);
+    }
+
+    public void printCountOfLottoTickets(int countsOfManualTickets, int countsOfAutoTickets) {
+        System.out.printf(TICKET_AMOUNT_MESSAGE, countsOfManualTickets, countsOfAutoTickets);
     }
 }

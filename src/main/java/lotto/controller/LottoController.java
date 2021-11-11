@@ -42,6 +42,7 @@ public class LottoController {
         int countsOfAutoTickets = lottoService.getCountsOfAutoTickets(inputMoney, countsOfManualTickets);
         LottoTickets autoLottoTickets = lottoService.buyAutoLottoTickets(countsOfAutoTickets);
         LottoTickets lottoTickets = manualLottoTickets.addAll(autoLottoTickets);
+        resultView.printCountOfLottoTickets(countsOfManualTickets, countsOfAutoTickets);
         resultView.printBuyResult(lottoTickets.toDTO());
         return lottoTickets;
     }
