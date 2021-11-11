@@ -2,31 +2,31 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Games {
 
     private List<Game> list;
 
-    public Games(final int gameCount) {
-        new Games(gameCount, new ArrayList<>());
-    }
-
     public Games(final int gameCount, final List<LottoNumbers> manualGames) {
         list = new ArrayList<>();
-        addManualGames(manualGames);
-        addAutoGames(gameCount - manualGames.size());
+        list.addAll(addManualGames(manualGames));
+        list.addAll(addAutoGames(gameCount - manualGames.size()));
     }
 
-    private void addManualGames(final List<LottoNumbers> manualGames) {
-        manualGames.forEach(manualGame -> {
-            list.add(new Game(manualGame));
-        });
+    private List<Game> addManualGames(final List<LottoNumbers> manualGames) {
+        return manualGames
+                .stream()
+                .map(Game::new)
+                .collect(Collectors.toList());
     }
 
-    private void addAutoGames(final int gameCount) {
-        for (int i = 0; i < gameCount; i++) {
-            list.add(new Game());
-        }
+    private List<Game> addAutoGames(final int gameCount) {
+        return IntStream.rangeClosed(0, gameCount)
+                .boxed()
+                .map(index -> new Game())
+                .collect(Collectors.toList());
     }
 
     public List<Game> getList() {

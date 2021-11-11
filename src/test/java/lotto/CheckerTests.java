@@ -4,6 +4,7 @@ import lotto.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import static lotto.common.Constants.GET_NUMBER_COUNT;
@@ -19,7 +20,7 @@ public class CheckerTests {
     public void 결과확인() {
         int purchaseAmount = 3000;
         GameCount gameCount = new GameCount(purchaseAmount);
-        Games games = new Games(gameCount.getValue());
+        Games games = new Games(gameCount.getValue(), new ArrayList<>());
         LottoNumbers winningNumbers = new LottoNumbers("1,2,3,4,5,6");
         BonusNumber bonusNumber = new BonusNumber("10", winningNumbers);
         Checker checker = new Checker(games, winningNumbers, bonusNumber);
