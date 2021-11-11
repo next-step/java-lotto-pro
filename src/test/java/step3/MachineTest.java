@@ -12,8 +12,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import step3.lotto.LottoPapers;
-import step3.machine.LottoMachine;
 import step3.machine.Bought;
+import step3.machine.LottoMachine;
 import step3.machine.Machine;
 
 public class MachineTest {
@@ -28,16 +28,18 @@ public class MachineTest {
 	}
 
 	@ParameterizedTest
-	@MethodSource(value = "generateData")
+	@MethodSource(value = "manualLottoNumbers")
 	void 수동으로_입력시_구매수_확인(List<String> manualLottoNumbers, int size) {
 		Machine machine = new LottoMachine();
 		LottoPapers manualLottoPapers = machine.createManualLottoPapers(manualLottoNumbers);
 		assertThat(manualLottoPapers.size()).isEqualTo(size);
 	}
 
-	static Stream<Arguments> generateData() {
+	static Stream<Arguments> manualLottoNumbers() {
 		return Stream.of(
-			Arguments.of(Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12", "13,14,15,16,17,18"), 3)
+			Arguments.of(Arrays.asList("1,2,32,34,5,6", "7,8,9,10,11,12", "13,14,15,16,17,18"), 3),
+			Arguments.of(Arrays.asList("1,2,36,34,5,6"), 1)
 		);
 	}
+
 }
