@@ -20,12 +20,12 @@ public class PurchaseLotteryTicket {
         return purchaseLotteryTicket.get(i);
     }
 
-    public Map<Rank, Integer> countMatchInAllTicket(WinningNumber winningNumber) {
-        Map<Rank, Integer> results = new HashMap<>();
+    public LotteryResult countMatchInAllTicket(WinningNumber winningNumber) {
+        Map<Rank, Integer> result = new HashMap<>();
         for (LotteryTicket lotteryTicket : purchaseLotteryTicket) {
-            Rank rank = Rank.rank(lotteryTicket.countMatch(winningNumber));
-            results.put(rank, results.getOrDefault(rank, 0) + 1);
+            Rank rank = Rank.valueOf(lotteryTicket.countMatch(winningNumber), lotteryTicket.isMatchBonus(winningNumber));
+            result.put(rank, result.getOrDefault(rank, 0) + 1);
         }
-        return results;
+        return LotteryResult.saveLotteryResult(result);
     }
 }

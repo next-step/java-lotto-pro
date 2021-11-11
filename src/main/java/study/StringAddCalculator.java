@@ -1,3 +1,5 @@
+package study;
+
 public class StringAddCalculator {
 
     public static final int NUMBER_ZERO = 0;

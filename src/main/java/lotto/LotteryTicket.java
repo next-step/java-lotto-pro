@@ -21,7 +21,7 @@ public class LotteryTicket {
 
     public int countMatch(WinningNumber winningNumber) {
         int cnt = 0;
-        for (String no : winningNumber.getWinningNumber()){
+        for (String no : winningNumber.getWinningNumber()) {
             if (lottoTicket.contains(Integer.parseInt(no))) {
                 cnt++;
             }
@@ -31,5 +31,9 @@ public class LotteryTicket {
 
     public List<Integer> getLotteryNumber() {
         return lottoTicket;
+    }
+
+    public boolean isMatchBonus(WinningNumber winningNumber) {
+        return lottoTicket.contains(winningNumber.getBonusNumber());
     }
 }

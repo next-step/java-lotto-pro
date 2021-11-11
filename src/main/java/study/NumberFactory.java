@@ -1,3 +1,5 @@
+package study;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,14 +12,10 @@ public class NumberFactory {
     private static final Pattern CUSTOM_DELIMITER_COMPILER = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
 
     public static String[] createNumberArray(String inputText) {
-        if (CUSTOM_DELIMITER_COMPILER.matcher(inputText).matches()) {
-            String[] numbers = {};
-            Matcher m = CUSTOM_DELIMITER_COMPILER.matcher(inputText);
-            if (m.find()) {
-                String customDelimiter = m.group(1);
-                numbers = m.group(2).split(customDelimiter);
-            }
-            return numbers;
+        Matcher m = CUSTOM_DELIMITER_COMPILER.matcher(inputText);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return m.group(2).split(customDelimiter);
         }
         return NumberFactory.splitCommaOrColonDelimiter(inputText);
     }

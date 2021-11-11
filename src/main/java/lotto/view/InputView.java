@@ -10,6 +10,7 @@ public class InputView {
     public static final String ENTER_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     public static final String NUMBER_OF_LOTTO_TICKET = "개를 구매했습니다.";
     public static final String ENTER_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String ENTER_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     public static final String DELIMITER = ", ";
 
     public static int payMoney() {
@@ -29,5 +30,11 @@ public class InputView {
         System.out.println();
         System.out.println(ENTER_WINNING_NUMBER);
         return sc.nextLine().split(DELIMITER);
+    }
+
+    public static int enterBonusNumber() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(ENTER_BONUS_NUMBER);
+        return sc.nextInt();
     }
 }
