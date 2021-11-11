@@ -94,18 +94,21 @@ public class Lotto {
 	public Rank getRank(List<LottoNumber> winningNumbers, int bonusNumber) {
 		Long matchesCount
 				= this.lottoNumbers.stream()
-									.filter(number -> winningNumbers.contains(number))
+									.filter(lottoNumber ->  lottoNumber.containLottoNumber(winningNumbers))
 									.count();
-		return Rank.valueOf(matchesCount.intValue(), isMatchBonusNumber(bonusNumber));
+		return Rank.valueOf(matchesCount.intValue(), containBonusBall(bonusNumber));
 	}
 
 	/**
 	 * 보너스 번호가 Lotto 번호 안에 있는지 확인
-	 * @param bonusNumber
+	 * @param bonusBall
 	 * @return
 	 */
-	private boolean isMatchBonusNumber(int bonusNumber) {
-		return this.lottoNumbers.contains(bonusNumber);
+	private boolean containBonusBall(int bonusBall) {
+		long containCount = this.lottoNumbers.stream()
+											.filter(lottoNumber -> lottoNumber.getLottoNumber() == bonusBall)
+											.count();
+		return (containCount != 0);
 	}
 
 	@Override
