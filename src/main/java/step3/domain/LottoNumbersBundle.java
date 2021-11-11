@@ -31,10 +31,6 @@ public class LottoNumbersBundle {
             .count();
     }
 
-    private List<LottoNumbers> getLottoNumbersBundle() {
-        return lottoNumbersBundle;
-    }
-
     public List<String> numbersForResults() {
         List<String> result = new ArrayList<>();
         for (LottoNumbers lottoNumbers : lottoNumbersBundle) {
@@ -44,15 +40,15 @@ public class LottoNumbersBundle {
         return Collections.unmodifiableList(result);
     }
 
-    public LottoRanks lottoRanksOf(WinningLotto winningLotto, Amount amount) {
-        LottoRanks lottoRanks = new LottoRanks(amount);
+    public int getLottoMatchCountOf(LottoRank matchLottoRank, WinningLotto winningLotto) {
+        return (int)lottoNumbersBundle.stream()
+            .map(lottoNumbers -> LottoRank.valueOf(winningLotto.containCount(lottoNumbers),
+                winningLotto.bonusMatch(lottoNumbers)))
+            .filter(lottoRank -> lottoRank == matchLottoRank)
+            .count();
+    }
 
-        for (LottoNumbers lottoNumbers : lottoNumbersBundle) {
-            int matchCount = winningLotto.containCount(lottoNumbers);
-            boolean isBonusMatch = winningLotto.bonusMatch(lottoNumbers);
-            lottoRanks.matchIncrementCount(matchCount, isBonusMatch);
-        }
-
-        return lottoRanks;
+    private List<LottoNumbers> getLottoNumbersBundle() {
+        return lottoNumbersBundle;
     }
 }

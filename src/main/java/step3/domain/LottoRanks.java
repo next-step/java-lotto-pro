@@ -11,28 +11,11 @@ import java.util.Map;
 public class LottoRanks {
     private static final int DECIMAL_POINT = 2;
     private final Amount amount;
-    private final Map<LottoRank, CountDown> lottoRanks = new HashMap<>();
+    private final Map<LottoRank, CountDown> lottoRanks;
 
-    public LottoRanks(Amount amount) {
-        init();
+    public LottoRanks(Amount amount, Map<LottoRank, CountDown> lottoRanks) {
         this.amount = amount;
-    }
-
-    private void init() {
-        for (LottoRank lottoRank : LottoRank.values()) {
-            CountDown matchCountDown = lottoRanks.getOrDefault(
-                lottoRank,
-                new CountDown());
-
-            lottoRanks.put(lottoRank, matchCountDown);
-        }
-    }
-
-    public void matchIncrementCount(int matchCount, boolean isContainBonus) {
-        LottoRank matchLottoRank = LottoRank.valueOf(matchCount, isContainBonus);
-        CountDown matchCountDown = lottoRanks.get(matchLottoRank);
-
-        matchCountDown.increment();
+        this.lottoRanks = lottoRanks;
     }
 
     public List<LottoRankResult> getLottoRankResults() {
@@ -60,14 +43,51 @@ public class LottoRanks {
             .setScale(DECIMAL_POINT, RoundingMode.CEILING);
     }
 
+    public static class Build {
+        Map<LottoRank, CountDown> lottoRanks = new HashMap<>();
+        Amount amount;
+
+        public Build match(LottoNumbersBundle boughtLottoNumberBundle, WinningLotto winningLotto) {
+            for (Map.Entry<LottoRank, CountDown> mapElement : lottoRanks.entrySet()) {
+                LottoRank targetLottoRank = mapElement.getKey();
+                CountDown countDown = mapElement.getValue();
+                int matchCount = boughtLottoNumberBundle.getLottoMatchCountOf(targetLottoRank, winningLotto);
+                countDown.incrementOf(matchCount);
+            }
+
+            return this;
+        }
+
+        public Build setAmount(Amount amount) {
+            this.amount = amount;
+
+            return this;
+        }
+
+        public Build init() {
+            for (LottoRank lottoRank : LottoRank.values()) {
+                CountDown matchCountDown = lottoRanks.getOrDefault(
+                    lottoRank,
+                    new CountDown());
+
+                lottoRanks.put(lottoRank, matchCountDown);
+            }
+            return this;
+        }
+
+        public LottoRanks build() {
+            return new LottoRanks(amount, lottoRanks);
+        }
+    }
+
     private static class CountDown {
         private int count = 0;
 
         private CountDown() {
         }
 
-        public void increment() {
-            count++;
+        public void incrementOf(int plusCount) {
+            count += plusCount;
         }
     }
 
@@ -96,5 +116,4 @@ public class LottoRanks {
             return 0;
         }
     }
-
 }

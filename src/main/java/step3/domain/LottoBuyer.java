@@ -14,19 +14,23 @@ public class LottoBuyer {
         this.amount = amount;
     }
 
-    public void buyLotto(LottoNumbersBundle lottoNumbersBundle) {
+    public void buyManualLotto(LottoNumbersBundle lottoNumbersBundle) {
         amount.minusAmountFrom(lottoNumbersBundle);
         lottoSave(lottoNumbersBundle);
     }
 
     public void autoBuyLotto() {
-        int qty = amount.buyAvailableQuantity();
+        int quantity = amount.buyAvailableQuantity();
 
-        buyLotto(LottoNumbersFactory.createLottoNumbersBundle(qty));
+        buyManualLotto(LottoNumbersFactory.createLottoNumbersBundle(quantity));
     }
 
     public LottoRanks getLottoRanks(WinningLotto winningLotto) {
-        return boughtLottoNumberBundle.lottoRanksOf(winningLotto, amount);
+        return new LottoRanks.Build()
+            .init()
+            .setAmount(amount)
+            .match(boughtLottoNumberBundle, winningLotto)
+            .build();
     }
 
     public int countOf(BuyType buyType) {
