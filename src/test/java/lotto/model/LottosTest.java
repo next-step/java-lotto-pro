@@ -17,8 +17,7 @@ class LottosTest {
 		LottoGenerator lottoGenerator = LottoGenerator.from(money);
 
 		// when
-		Lottos lottos = Lottos.of(lottoGenerator.generateInputLottoNumbers(),
-			lottoGenerator.generateRandomLottoNumbers());
+		Lottos lottos = Lottos.of(lottoGenerator.generateLottoNumbers());
 
 		// then
 		assertAll(
@@ -39,8 +38,7 @@ class LottosTest {
 		LottoGenerator lottoGenerator = LottoGenerator.of(money, Collections.singletonList(inputNumber));
 
 		// when
-		Lottos lottos = Lottos.of(lottoGenerator.generateInputLottoNumbers(),
-			lottoGenerator.generateRandomLottoNumbers());
+		Lottos lottos = Lottos.of(lottoGenerator.generateLottoNumbers());
 
 		// then
 		assertAll(
