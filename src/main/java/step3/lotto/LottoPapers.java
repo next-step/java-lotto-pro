@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import step3.winner.Rank;
-import step3.winner.MatchResult;
+import step3.winner.WinningResult;
 
 public class LottoPapers {
 
@@ -37,12 +37,12 @@ public class LottoPapers {
 		}
 	}
 
-	public MatchResult matchResultAndBonusBall(LottoNumbers userLottoNumbers, BonusBall bonusBall) {
-		MatchResult winningResult = new MatchResult();
+	public WinningResult findMatchWinningResult(LottoNumbers userLottoNumbers, BonusBall bonusBall) {
+		WinningResult winningResult = new WinningResult();
 		for (LottoNumbers lottoNumbers : papers) {
 			Integer matchCount = lottoNumbers.matchCount(userLottoNumbers);
 			boolean hasBonusBall = lottoNumbers.hasBonusBall(bonusBall);
-			winningResult.put(matchCount, hasBonusBall);
+			winningResult.add(matchCount, hasBonusBall);
 		}
 		return winningResult;
 	}

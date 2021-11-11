@@ -10,12 +10,15 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import step3.lotto.BonusBall;
 import step3.lotto.LottoNumber;
 import step3.lotto.LottoNumbers;
 import step3.lotto.LottoPapers;
-import step3.winner.MatchResult;
+import step3.winner.Rank;
+import step3.winner.WinningResult;
 
 class LottoPapersTest {
 
@@ -29,38 +32,25 @@ class LottoPapersTest {
 		assertThat(papers.size()).isEqualTo(2);
 	}
 
-	@Test
-	@DisplayName("당첨번호와 보너스볼의 매칭 확인")
-	void matchResultAndBonusBall() {
+	@ParameterizedTest
+	@DisplayName("당첨번호, 보너스볼 매칭 순위확인")
+	@CsvSource(value = {
+		"1,5,7,3,42,2:44:4",
+		"1,5,7,3,42,29:22:2"},delimiter = ':')
+	void matchResultAndBonusBall(String inputWinningLottoNumbers, int bonusBall, int rankNumber) {
 		// given
 		LottoPapers lottoPapers = LottoPapers.createPapers(getLottoNumbers());
-		LottoNumbers winningLottoNumbers = LottoNumbers.from("1,5,7,3,5,2");
+		LottoNumbers winningLottoNumbers = LottoNumbers.from(inputWinningLottoNumbers);
 
 		// when
-		MatchResult findWinningResult = lottoPapers.matchResultAndBonusBall(
+		WinningResult findWinningResult = lottoPapers.findMatchWinningResult(
 			winningLottoNumbers,
-			new BonusBall(44));
+			new BonusBall(bonusBall));
 
 		// then
-		assertThat(findWinningResult.hasMatchCount(4)).isTrue();
-		assertThat(findWinningResult.isBonusBalls(4)).isFalse();
+		assertThat(findWinningResult.containsRank(Rank.valueOf(rankNumber))).isTrue();
 	}
 
-	@Test
-	void 당첨번호가_5개이상_보너스볼까지_맞춘경우() {
-		// given
-		LottoPapers lottoPapers = LottoPapers.createPapers(getLottoNumbers());
-		LottoNumbers winningLottoNumbers = LottoNumbers.from("1,5,7,3,5,24");
-
-		// when
-		MatchResult findWinningResult = lottoPapers.matchResultAndBonusBall(
-			winningLottoNumbers,
-			new BonusBall(22));
-
-		// then
-		assertThat(findWinningResult.hasMatchCount(5)).isTrue();
-		assertThat(findWinningResult.isBonusBalls(5)).isTrue();
-	}
 
 	private List<LottoNumbers> getLottoNumbers() {
 		Set<LottoNumber> lottoNumber1 = getLottoNumber(1, 5, 7, 3, 24, 22);
