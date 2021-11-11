@@ -12,21 +12,21 @@ public class Number implements Comparable<Number> {
 
     private static final Map<Integer, Number> VALUE_TO_NUMBER;
 
-    static {
-        Map<Integer, Number> map = new HashMap<>();
-        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            map.put(i, new Number(i));
-        }
-        VALUE_TO_NUMBER = Collections.unmodifiableMap(map);
-    }
-
     private final int number;
+
+    static {
+        Map<Integer, Number> cache = new HashMap<>();
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            cache.put(i, new Number(i));
+        }
+        VALUE_TO_NUMBER = Collections.unmodifiableMap(cache);
+    }
 
     private Number(int number) {
         this.number = number;
     }
 
-    public static Number ofValue(int number) {
+    public static Number of(int number) {
         validate(number);
         return VALUE_TO_NUMBER.get(number);
     }

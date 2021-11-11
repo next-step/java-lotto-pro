@@ -3,21 +3,21 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoNumberGenerator {
-    static final String INPUT_MONEY_ERR_MSG = "구입 금액으로 숫자만 입력해야 합니다.";
-
     private final Payment payment;
 
     public LottoNumberGenerator(Payment payment) {
+        Objects.requireNonNull(payment);
         this.payment = payment;
     }
 
-    public Collection<LottoNumbers> generateLottoNumbersCollection() {
+    public Collection<LottoNumbers> generate() {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        int lottoCount = payment.getLottoCount();
+        int lottoCount = payment.countLotto();
         for (int i = 0; i < lottoCount; i++) {
-            lottoNumbers.add(new LottoNumbers(RandomNumberSupplier.generateNumbers()));
+            lottoNumbers.add(new LottoNumbers(RandomNumberSupplier.generate()));
         }
         return lottoNumbers;
     }
