@@ -26,6 +26,10 @@ public class LottoPapers {
 		return matchResult;
 	}
 
+	public void addAll(LottoPapers autoLottoPapers) {
+		this.papers.addAll(autoLottoPapers.papers);
+	}
+
 	public int size() {
 		return papers.size();
 	}
