@@ -19,59 +19,53 @@ public class Lottos {
 
 	private static Logger logger = Logger.getLogger(Lottos.class.getName());
 
-	private long perchaseAmount;
+	private int perchaseAmount;
 	private List<Lotto> lottos;
 
-	public Lottos() {
+	private Lottos() {}
+
+	public Lottos(int perchaseAmount, int perchaseCount, List<String> manualLottoNumbers) {
+		this.perchaseAmount = perchaseAmount;
 		this.lottos = new ArrayList<Lotto>();
+
+		int automaticCount = perchaseCount-manualLottoNumbers.size();
+		addManualLottos(manualLottoNumbers);
+		addAutomaticLottos(automaticCount);
+		printLottos(perchaseCount, automaticCount);
 	}
 
 	/**
-	 * 수동으로 입력한 Lotto 번호 등록
+	 * 수동으로 입력한 Lotto 번호 발급
 	 * @param manualLottoNumbers
 	 */
-	public void setManualLottos(List<String> manualLottoNumbers) {
-		// TODO
-	}
-
-	private List<Lotto> stringListToLottoList(List<String> manualLottoNumbers) {
-		List<Lotto> manualLottos = new ArrayList<Lotto>();
-		return manualLottos;
-	}
-
-	/**
-	 * 자동으로 발급된 로또 번호 추가
-	 * @param perchaseAmount
-	 * @param perchaseLottoCount
-	 * @param manualCount
-	 */
-	public void setAutomaticLottos(int perchaseAmount, int perchaseLottoCount, int manualCount) {
-		this.perchaseAmount = perchaseAmount;
-		addLottos(perchaseAmount, perchaseLottoCount, manualCount);
-	}
-
-	/**
-	 * 구매 갯수만큼 Lotto 번호 발급 
-	 * @param perchaseAmount
-	 * @return
-	 */
-	private void addLottos(int perchaseAmount, int perchaseLottoCount, int manualCount) {
-		List<Lotto> automaticLottos = new ArrayList<Lotto>();
-		int automaticLottoCount = getAutomaticLottoCount(perchaseLottoCount, manualCount);
-		MessageUtil.printMessage(MessageConstants.LOTTO_PERCHASE_MANUAL_MESSAGE, manualCount, automaticLottoCount);
-		for(int i=0; i<automaticLottoCount; i++) {
-			lottos.add(new Lotto());
+	public void addManualLottos(List<String> manualLottoNumbers) {
+		for(String manualLottoNumber : manualLottoNumbers) {
+			Lotto lotto = new Lotto();
+			this.lottos.add(new Lotto(manualLottoNumber));
 		}
 	}
 
 	/**
-	 * 수동 구매 수를 제외하고 자동으로 발급할 로또 갯수 가져오기
-	 * @param perchaseLottoCount
-	 * @param manualCount
-	 * @return
+	 * 자동으로 구매한 갯수만큼 로또 번호 발급
+	 * @param automaticCount
 	 */
-	private int getAutomaticLottoCount(int perchaseLottoCount, int manualCount) {
-		return perchaseLottoCount-manualCount;
+	public void addAutomaticLottos(int automaticCount) {
+		for(int i=0; i<automaticCount; i++) {
+			this.lottos.add(new Lotto());
+		}
+	}
+
+	/**
+	 * 발급된 로또 번호 출력
+	 * @param perchaseCount
+	 * @param automaticCount
+	 */
+	private void printLottos(int perchaseCount, int automaticCount) {
+		System.out.println();
+		MessageUtil.printMessage(MessageConstants.LOTTO_PERCHASE_MANUAL_MESSAGE, (perchaseCount-automaticCount), automaticCount);
+		for(Lotto lotto : lottos) {
+			lotto.printLottoNumber();
+		}
 	}
 
 	/**
@@ -79,46 +73,38 @@ public class Lottos {
 	 * @param winningNumbers
 	 */
 	public void setWinningNumberMatchesCount(List<Integer> winningNumbers, int bonusNumber) {
-		for(Lotto lotto : this.lottos) {
-			lotto.setRank(winningNumbers, bonusNumber);
-		}
+//		for(Lotto lotto : this.lottos) {
+//			lotto.setRank(winningNumbers, bonusNumber);
+//		}
 	}
 
 	/**
 	 * 등수 별 로또 당첨 게임 출력
 	 */
 	public void printLottoMatchesCountStatistics() {
-		MessageUtil.printMessage(MessageConstants.LOTTO_STATISTICS_MESSAGE);
-		MessageUtil.printSeparatorLine();
-		Rank[] ranks = Rank.values();
-		for(int i=ranks.length-2; i>=0; i--) {
-			Rank rank = ranks[i];
-			boolean isSecond = (rank.name() == Rank.SECOND.name());
-			long count = this.lottos.stream()
-									.filter(lotto -> lotto.getRank() == rank)
-									.count();
-			MessageUtil.printRank((long)rank.getCountOfMatch(), (long)rank.getWinningMoney(), count, isSecond);
-		}
-		printLottoProfitRatio();
+//		MessageUtil.printMessage(MessageConstants.LOTTO_STATISTICS_MESSAGE);
+//		MessageUtil.printSeparatorLine();
+//		Rank[] ranks = Rank.values();
+//		for(int i=ranks.length-2; i>=0; i--) {
+//			Rank rank = ranks[i];
+//			boolean isSecond = (rank.name() == Rank.SECOND.name());
+//			long count = this.lottos.stream()
+//									.filter(lotto -> lotto.getRank() == rank)
+//									.count();
+//			MessageUtil.printRank((long)rank.getCountOfMatch(), (long)rank.getWinningMoney(), count, isSecond);
+//		}
+//		printLottoProfitRatio();
 	}
 
 	/**
 	 * 로또 당침금 수익률 출력
 	 */
 	private void printLottoProfitRatio() {
-		long profit = 0;
-		for(Lotto lotto : lottos) {
-			profit += lotto.getRank().getWinningMoney();
-		}
-		String profitRatio = new DecimalFormat("#.##").format((float) profit / (float) this.perchaseAmount);
-		MessageUtil.printMessage(MessageConstants.LOTTO_PROFIT_RATIO_MESSAGE, profitRatio);
-	}
-
-	/**
-	 * 1에서 45 사이의 숫자 가져오기
-	 * @return
-	 */
-	public static int getNumberBetweenOneAndFortyFive() {
-		return (int) ((Math.random() * 45) + 1);
+//		long profit = 0;
+//		for(Lotto lotto : lottos) {
+//			profit += lotto.getRank().getWinningMoney();
+//		}
+//		String profitRatio = new DecimalFormat("#.##").format((float) profit / (float) this.perchaseAmount);
+//		MessageUtil.printMessage(MessageConstants.LOTTO_PROFIT_RATIO_MESSAGE, profitRatio);
 	}
 }

@@ -27,7 +27,7 @@ public class AutomaticLotto {
 		int perchaseLottoCount = getLottoCount(perchaseAmount);
 		int manualCount = getManualLottoCount(perchaseLottoCount);
 		List<String> manualLottoNumbers = getManualLottoNumbers(manualCount);
-		calcLottoResults(perchaseAmount, perchaseLottoCount, manualCount, manualLottoNumbers);
+		Lottos lottos = new Lottos(perchaseAmount, perchaseLottoCount, manualLottoNumbers);
 	}
 
 	/**
@@ -36,15 +36,15 @@ public class AutomaticLotto {
 	 * @param perchaseLottoCount
 	 * @param manualCount
 	 */
-	public static void calcLottoResults(int perchaseAmount, int perchaseLottoCount, int manualCount, List<String> manualLottoNumbers) {
-		Lottos lottos = new Lottos();
-		lottos.setManualLottos(manualLottoNumbers);
-		lottos.setAutomaticLottos(perchaseAmount, perchaseLottoCount, manualCount);
-		List<Integer> winningNumbers = getLatestWinningNumbers();
-		int secondWinningNumber = getSecondWinningNumber(winningNumbers);
-		lottos.setWinningNumberMatchesCount(winningNumbers, secondWinningNumber);
-		lottos.printLottoMatchesCountStatistics();
-	}
+//	public static void calcLottoResults(int perchaseAmount, int perchaseLottoCount, int manualCount, List<String> manualLottoNumbers) {
+//		Lottos lottos = new Lottos();
+//		lottos.setManualLottos(manualLottoNumbers);
+//		lottos.setAutomaticLottos(perchaseAmount, perchaseLottoCount, manualCount);
+//		List<Integer> winningNumbers = getLatestWinningNumbers();
+//		int secondWinningNumber = getSecondWinningNumber(winningNumbers);
+//		lottos.setWinningNumberMatchesCount(winningNumbers, secondWinningNumber);
+//		lottos.printLottoMatchesCountStatistics();
+//	}
 
 	/**
 	 * 사용자가 입력한 구매 금액 가져오기

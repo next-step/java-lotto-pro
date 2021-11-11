@@ -1,5 +1,6 @@
 package edu.lotto.model;
 
+import edu.lotto.constants.PatternConstants;
 import edu.lotto.constants.Rank;
 import edu.lotto.utils.MessageUtil;
 
@@ -18,22 +19,50 @@ public class Lotto {
 	private static Logger logger = Logger.getLogger(Lotto.class.getName());
 
 	private List<Integer> lottoNumbers;
-	private Rank rank;
-
-	public Lotto() {
-		setLottoNumber();
-		Collections.sort(this.lottoNumbers);
-		MessageUtil.printMessage(lottoNumbers.toString());
-	}
 
 	/**
-	 * 로또 번호 6자리 세팅하기
+	 * 로또 번호 자동발급
 	 * @return
 	 */
-	private void setLottoNumber() {
+	public Lotto() {
 		List<Integer> allLottoNumbers = getLottoNumberRange();
 		Collections.shuffle(allLottoNumbers);
 		this.lottoNumbers = allLottoNumbers.subList(0,6);
+		sortLottoNumbers();
+	}
+
+	/**
+	 * 수동으로 입력한 로또 발급
+	 * @return
+	 */
+	public Lotto(String manualNumber) {
+		this.lottoNumbers = changeStringToListIntegerType(manualNumber);
+		sortLottoNumbers();
+	}
+
+	/**
+	 *
+	 * @param lottoNumber
+	 * @return
+	 */
+	private List<Integer> changeStringToListIntegerType(String lottoNumber) {
+		List<Integer> lottoNumbers = new ArrayList<Integer>();
+		String[] lottoNumberArray = lottoNumber.replace(" ", "").split(PatternConstants.DEFAULT_SEPARATOR_PATTERN);
+		for(String lottoNumberValue : lottoNumberArray) {
+			lottoNumbers.add(Integer.parseInt(lottoNumberValue));
+		}
+		return lottoNumbers;
+	}
+
+	private void sortLottoNumbers() {
+		Collections.sort(this.lottoNumbers);
+	}
+
+	/**
+	 * 로또 번호 출력
+	 */
+	public void printLottoNumber() {
+		MessageUtil.printMessage(lottoNumbers.toString());
 	}
 
 	/**
@@ -49,22 +78,14 @@ public class Lotto {
 	}
 
 	/**
-	 * 로또 당첨 순위 Setter
+	 * 로또 당첨 순위 가져오기
 	 */
-	public void setRank(List<Integer> winningNumbers, int bonusNumber) {
+	public Rank getRank(List<Integer> winningNumbers, int bonusNumber) {
 		Long matchesCount
 				= this.lottoNumbers.stream()
 									.filter(number -> winningNumbers.contains(number))
 									.count();
-		this.rank = Rank.valueOf(matchesCount.intValue(), isMatchBonusNumber(bonusNumber));
-	}
-
-	/**
-	 * 로또 당첨 순위 Getter
-	 * @return
-	 */
-	public Rank getRank() {
-		return this.rank;
+		return Rank.valueOf(matchesCount.intValue(), isMatchBonusNumber(bonusNumber));
 	}
 
 	/**
