@@ -15,10 +15,10 @@ public enum Ranking {
 
     private final int correct;
     private final boolean bonusMatch;
-    private final int amount;
+    private final long amount;
     private final String message;
 
-    Ranking(int correct, boolean bonusMatch, int amount, String message) {
+    Ranking(int correct, boolean bonusMatch, long amount, String message) {
         this.correct = correct;
         this.bonusMatch = bonusMatch;
         this.amount = amount;
@@ -33,7 +33,7 @@ public enum Ranking {
                 .orElse(MISS);
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return this.amount;
     }
 
@@ -43,7 +43,7 @@ public enum Ranking {
 
     public String getMessage() { return this.message; }
 
-    public int totalWinningMoney(final int hitCount) {
+    public long totalWinningMoney(final int hitCount) {
         return this.amount * hitCount;
     }
 }
