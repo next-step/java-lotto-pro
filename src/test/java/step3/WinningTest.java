@@ -75,7 +75,7 @@ public class WinningTest {
 		Stream<LottoNumbers> lottoNumbersStream = Stream.of(
 			LottoNumbers.createLottoNumber(1, 2, 3, 4, 5, 6),
 			LottoNumbers.createLottoNumber(36, 42, 45, 21, 32, 30),
-			LottoNumbers.createLottoNumber(6, 42, 45, 43, 44, 45),
+			LottoNumbers.createLottoNumber(6, 42, 45, 43, 44, 41),
 			LottoNumbers.createLottoNumber(31, 32, 33, 34, 35, 36));
 		List<LottoNumbers> collect = lottoNumbersStream
 			.collect(Collectors.toList());

@@ -24,7 +24,7 @@ public class LottoNumber {
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
-		if (o == null)
+		if (o == null || getClass() != o.getClass())
 			return false;
 		LottoNumber that = (LottoNumber)o;
 		return no == that.no;

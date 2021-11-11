@@ -1,9 +1,17 @@
 package step3.lotto;
 
-public class BonusBall extends LottoNumber {
+import java.util.Objects;
+
+public class BonusBall {
+
+	private LottoNumber lottoNumber;
 
 	public BonusBall(int no) {
-		super(no);
+		this.lottoNumber = new LottoNumber(no);
+	}
+
+	public LottoNumber asLottoNumber() {
+		return lottoNumber;
 	}
 
 	@Deprecated
@@ -17,11 +25,19 @@ public class BonusBall extends LottoNumber {
 
 	@Override
 	public boolean equals(Object o) {
-		return super.equals(o);
+		if (!(o instanceof BonusBall))
+			return false;
+		BonusBall bonusBall = (BonusBall)o;
+		return Objects.equals(lottoNumber, bonusBall.lottoNumber);
 	}
 
 	@Override
 	public int hashCode() {
-		return super.hashCode();
+		return Objects.hash(lottoNumber);
+	}
+
+	@Override
+	public String toString() {
+		return lottoNumber.toString();
 	}
 }

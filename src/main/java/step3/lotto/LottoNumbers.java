@@ -66,11 +66,15 @@ public class LottoNumbers {
 	}
 
 	public Boolean matchBonusBall(BonusBall bonusBall) {
-		return lottoNumbers.contains(bonusBall);
+		return lottoNumbers.contains(bonusBall.asLottoNumber());
 	}
 
 	public Set<LottoNumber> getList() {
 		return Collections.unmodifiableSet(lottoNumbers);
+	}
+
+	public boolean hasBonusBall(BonusBall bonusBall) {
+		return lottoNumbers.contains(bonusBall.asLottoNumber());
 	}
 
 	@Override
@@ -91,9 +95,5 @@ public class LottoNumbers {
 	@Override
 	public String toString() {
 		return String.valueOf(lottoNumbers);
-	}
-
-	public boolean hasBonusBall(BonusBall bonusBall) {
-		return lottoNumbers.contains(bonusBall);
 	}
 }
