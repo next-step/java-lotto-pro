@@ -59,20 +59,19 @@ public class LottoResult {
 		return winningLottoNumbers.containsBonusCountLottoNumber(lottoNumbers);
 	}
 
-	public BigDecimal calculateSum() {
-		BigDecimal sum = new BigDecimal(DEFAULT_VALUE);
+	public Money calculateSum() {
+		Money sum = Money.from(DEFAULT_VALUE);
 		Map<LottoRank, Integer> rankMap = containsWinningLottoGenerator();
 
 		for (Map.Entry<LottoRank, Integer> rankCodeEntry : rankMap.entrySet()) {
-			BigDecimal rankMoney = new BigDecimal(
-				LottoRank.getRankMoney(rankCodeEntry.getKey(), rankCodeEntry.getValue()));
-			sum = sum.add(rankMoney);
+			Money rankMoney = LottoRank.getRankMoney(rankCodeEntry.getKey(), rankCodeEntry.getValue());
+			sum = sum.sumMoney(rankMoney);
 		}
 
 		return sum;
 	}
 
-	public float getYield() {
+	public BigDecimal getYield() {
 		return lottos.purchaseMoney().calculateYield(calculateSum());
 	}
 }

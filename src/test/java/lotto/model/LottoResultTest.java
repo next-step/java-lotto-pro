@@ -3,7 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.*;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Map;
 
@@ -31,7 +31,7 @@ class LottoResultTest {
 		//given
 		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(winningNumber, bonusNumber);
 		LottoNumbers lottoNumbers = LottoNumbers.from(lottoNumber);
-		Lottos lottos = Lottos.of(Collections.singletonList(lottoNumbers), new ArrayList<>());
+		Lottos lottos = Lottos.of(Collections.singletonList(lottoNumbers));
 		LottoResult lottoResult = LottoResult.of(winningLottoNumbers, lottos);
 
 		//when
@@ -56,7 +56,7 @@ class LottoResultTest {
 		Exception {
 		//given
 		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(winningNumber, bonusNumber);
-		Lottos lottos = Lottos.of(Collections.singletonList(LottoNumbers.from(inputNumber)), new ArrayList<>());
+		Lottos lottos = Lottos.of(Collections.singletonList(LottoNumbers.from(inputNumber)));
 		LottoResult lottoResult = LottoResult.of(winningLottoNumbers, lottos);
 
 		//when
@@ -77,16 +77,16 @@ class LottoResultTest {
 		"1,2,3,4,5,6 : 8 : 7,8,9,10,11,12 : 0"
 	}, delimiter = ':')
 	void 로또등수Map을_통해_총_수익률을_반환해주는_기능테스트(String winningLottoNumber, String bonusNumber, String lottoNumber,
-		float yieldResult) {
+		BigDecimal yieldResult) {
 		// given
 		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(winningLottoNumber, bonusNumber);
-		Lottos lottos = Lottos.of(Collections.singletonList(LottoNumbers.from(lottoNumber)), new ArrayList<>());
+		Lottos lottos = Lottos.of(Collections.singletonList(LottoNumbers.from(lottoNumber)));
 		LottoResult lottoResult = LottoResult.of(winningLottoNumbers, lottos);
 
 		// when
-		double yield = lottoResult.getYield();
+		BigDecimal yield = lottoResult.getYield();
 
 		// then
-		assertThat(yield).isEqualTo(yieldResult);
+		assertThat(yield.compareTo(yieldResult)).isZero();
 	}
 }
