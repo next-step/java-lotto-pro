@@ -1,18 +1,14 @@
 package lotto.view;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import lotto.model.Lotto;
 import lotto.model.Number;
 import lotto.model.Payment;
+import lotto.util.Console;
 
 public class InputView {
-    static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-
     private static final String NUMBER_DELIMITER = ",";
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
     private static final Pattern LOTTO_NUMBER_PATTERN = Pattern.compile("\\d+(" + NUMBER_DELIMITER + "\\d+){5}");
@@ -28,14 +24,14 @@ public class InputView {
 
     public static Payment readPayment() {
         System.out.println(QUERY_FOR_PAYMENT);
-        String payment = readLine();
+        String payment = Console.readLine();
         validateNumberPattern(payment);
         return new Payment(Integer.parseInt(payment));
     }
 
     public static Lotto readWinningLotto() {
         System.out.println(QUERY_FOR_WINNING_NUMBERS);
-        String winningNumbers = readLine().replace(" ", "");
+        String winningNumbers = Console.readLine().replace(" ", "");
         if (!LOTTO_NUMBER_PATTERN.matcher(winningNumbers).matches()) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_INPUT_ERR_MSG);
         }
@@ -47,7 +43,7 @@ public class InputView {
 
     public static Number readBonusNumber() {
         System.out.println(QUERY_FOR_BONUS_NUMBER);
-        String bonusNumber = readLine();
+        String bonusNumber = Console.readLine();
         validateNumberPattern(bonusNumber);
         return Number.of(Integer.parseInt(bonusNumber));
     }
@@ -55,14 +51,6 @@ public class InputView {
     private static void validateNumberPattern(String input) {
         if (!NUMBER_PATTERN.matcher(input).matches()) {
             throw new IllegalArgumentException(INVALID_NUMBER_INPUT_ERR_MSG);
-        }
-    }
-
-    private static String readLine() {
-        try {
-            return bufferedReader.readLine().trim();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 }

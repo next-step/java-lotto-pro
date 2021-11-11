@@ -1,39 +1,50 @@
 package lotto.view;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.InputStreamReader;
-
+import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.MockedStatic;
+
+import lotto.util.Console;
 
 public class InputViewTest {
     @ParameterizedTest
     @ValueSource(strings = {"1q2w3e4r!", "999", "1001"})
     void readPaymentByInvalidInput(String payment) {
-        setInputToReader(payment);
-        assertThatIllegalArgumentException().isThrownBy(InputView::readPayment);
+        assertTestWithMockedInput(
+            () -> assertThatIllegalArgumentException().isThrownBy(InputView::readPayment),
+            payment
+        );
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1q2w3e4r!", "1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,46", "0,1,2,3,4,5"})
     void readWinningLottoByInvalidInput(String winningNumbers) {
-        setInputToReader(winningNumbers);
-        assertThatIllegalArgumentException().isThrownBy(InputView::readWinningLotto);
+        assertTestWithMockedInput(
+            () -> assertThatIllegalArgumentException().isThrownBy(InputView::readWinningLotto),
+            winningNumbers
+        );
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1q2w3e4r!", "0", "46"})
     void readBonusNumber(String bonusNumber) {
-        setInputToReader(bonusNumber);
-        assertThatIllegalArgumentException().isThrownBy(InputView::readBonusNumber);
+        assertTestWithMockedInput(
+            () -> assertThatIllegalArgumentException().isThrownBy(InputView::readBonusNumber),
+            bonusNumber
+        );
     }
 
-    private void setInputToReader(String input) {
-        byte[] inputBytes = (input + System.lineSeparator()).getBytes();
-        System.setIn(new ByteArrayInputStream(inputBytes));
-        InputView.bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    private void assertTestWithMockedInput(Executable executable, String input) {
+        try (final MockedStatic<Console> inputView = mockStatic(Console.class)) {
+            inputView.when(Console::readLine)
+                .thenReturn(input);
+            executable.execute();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 }
