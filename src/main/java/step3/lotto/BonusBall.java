@@ -2,14 +2,15 @@ package step3.lotto;
 
 public class BonusBall extends LottoNumber {
 
-	private BonusBall(int no) {
+	public BonusBall(int no) {
 		super(no);
 	}
 
+	@Deprecated
 	public static BonusBall of(int no, LottoNumbers userLottoNumbers) {
 		BonusBall bonusBall = new BonusBall(no);
 		if (userLottoNumbers.hasBonusBall(bonusBall)) {
-			throw new IllegalArgumentException("보너스 볼 번호가 지난주 보너스 볼 번호와 동일 할 수 없습니다.");
+			throw new IllegalArgumentException("보너스 번호가 당첨 번호와 동일할 수 없습니다");
 		}
 		return new BonusBall(no);
 	}

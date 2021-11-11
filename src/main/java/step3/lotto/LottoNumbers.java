@@ -51,22 +51,22 @@ public class LottoNumbers {
 		);
 	}
 
+	@Deprecated
 	public Map<Integer, Boolean> match(LottoNumbers userLottoNumbers, BonusBall bonusBall) {
 		Map<Integer, Boolean> ranks = new HashMap<>();
 		ranks.put(matchCount(userLottoNumbers), matchBonusBall(bonusBall));
 		return ranks;
 	}
 
-	private Integer matchCount(LottoNumbers userLottoNumbers) {
+	public Integer matchCount(LottoNumbers userLottoNumbers) {
 		return (int) lottoNumbers.stream()
 			.filter(lottoNumber -> userLottoNumbers.getList().stream()
 				.anyMatch(lottoNumber::equals)
 			).count();
 	}
 
-	private Boolean matchBonusBall(BonusBall bonusBall) {
-		return lottoNumbers.stream()
-			.anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
+	public Boolean matchBonusBall(BonusBall bonusBall) {
+		return lottoNumbers.contains(bonusBall);
 	}
 
 	public Set<LottoNumber> getList() {

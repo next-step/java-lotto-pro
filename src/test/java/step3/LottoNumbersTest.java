@@ -2,8 +2,6 @@ package step3;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Map;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,11 +38,17 @@ class LottoNumbersTest {
 	}
 
 	@Test
-	void 유저가_입력한_숫자_갯수를_찾는지_확인() {
+	void 당첨번호와_생성된_당첨번호의_수를_확인() {
 		LottoNumbers lottoNumber = LottoNumbers.createLottoNumber(1, 2, 3, 4, 5, 6);
 		LottoNumbers userLottNumber = LottoNumbers.createLottoNumber(1, 2, 42, 44, 23, 19);
-		Map<Integer, Boolean> match = lottoNumber.match(userLottNumber, BonusBall.of(45, userLottNumber));
+		Integer matchCount = lottoNumber.matchCount(userLottNumber);
+		assertThat(matchCount).isEqualTo(2);
+	}
 
-		Assertions.assertThat(match.size()).isEqualTo(1);
+	@Test
+	void 유저가_입력한_숫자에_보너스볼이_존재하는_확인 () {
+		LottoNumbers userLottNumber = LottoNumbers.createLottoNumber(1, 2, 42, 44, 23, 19);
+		Boolean bonusBall = userLottNumber.matchBonusBall(new BonusBall(42));
+		assertThat(bonusBall).isTrue();
 	}
 }
