@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,27 +19,28 @@ public class OutputView {
 	private final static int START_INDEX_CALCULATE_NUMBER = 0;
 	private final static int LAST_INDEX_CALCULATE_NUMBER = 1;
 
-	public static void printCompletePurchaseLotto(Lottos lottos) {
-		System.out.println(completePurchaseLottoToString(lottos));
+	public static void printCompletePurchaseLotto(String inputSizeStr, int lottoSize) {
+		int inputSize = Integer.parseInt(inputSizeStr);
+		System.out.println(completePurchaseLottoToString(inputSize, lottoSize - inputSize));
 	}
 
-	private static String completePurchaseLottoToString(Lottos lottos) {
+	private static String completePurchaseLottoToString(int inputSize, int lottoSize) {
 		StringBuilder stringBuilder = new StringBuilder();
 
-		if (validPurchaseSize(lottos)) {
+		if (validPurchaseSize(inputSize)) {
 			stringBuilder.append("수동으로 ")
-				.append(lottos.inputSize())
+				.append(inputSize)
 				.append("장, ");
 		}
 		stringBuilder.append("자동으로 ")
-			.append(lottos.randomSize())
+			.append(lottoSize)
 			.append("개를 구매했습니다.");
 
 		return stringBuilder.toString();
 	}
 
-	private static boolean validPurchaseSize(Lottos lottos) {
-		return lottos.inputSize() > START_INDEX_CALCULATE_NUMBER;
+	private static boolean validPurchaseSize(int inputSize) {
+		return inputSize > START_INDEX_CALCULATE_NUMBER;
 	}
 
 	public static void printLottoNumbers(Lottos lottos) {
@@ -79,7 +81,7 @@ public class OutputView {
 
 	public static String convertYieldToString(LottoResult lottoResult) {
 		StringBuilder stringBuilder = new StringBuilder();
-		float yield = lottoResult.getYield();
+		BigDecimal yield = lottoResult.getYield();
 		stringBuilder
 			.append("총 수익률은 ")
 			.append(yield)
@@ -89,14 +91,14 @@ public class OutputView {
 		return stringBuilder.toString();
 	}
 
-	public static void appendLossYield(StringBuilder stringBuilder, double yield) {
+	public static void appendLossYield(StringBuilder stringBuilder, BigDecimal yield) {
 		if (validLossYield(yield)) {
 			stringBuilder.append("(기준이 1이기 떄문에 결과적으로 손해라는 의미임)");
 		}
 	}
 
-	public static boolean validLossYield(double yield) {
-		return yield < LottoResult.COUNT_VALUE;
+	public static boolean validLossYield(BigDecimal yield) {
+		return yield.compareTo(new BigDecimal(LottoResult.COUNT_VALUE)) < LottoResult.DEFAULT_VALUE;
 	}
 
 	public static void validNothing(List<String> rankStringList, Map.Entry<LottoRank, Integer> rankEntry) {
