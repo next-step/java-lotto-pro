@@ -29,7 +29,7 @@ public class LottoMoney {
         return amount / LottoAmountUnit.LOTTO_AMOUNT_UNIT.getUnit();
     }
 
-    public double calculateProfitRatio(long winningAmount) {
+    double calculateProfitRatio(long winningAmount) {
         int profitRatioScale = LottoAmountUnit.PROFIT_RATIO_SCALE.getUnit();
         double profitRatio = (double)winningAmount / amount;
         return Math.floor(profitRatio * profitRatioScale) / profitRatioScale;

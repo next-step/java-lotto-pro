@@ -5,9 +5,11 @@ import java.util.List;
 
 public class LottoTicket {
     private final List<Lotto> lottos;
+    private final LottoTypesCount lottoTypesCount;
 
-    public LottoTicket(List<Lotto> lottos) {
+    public LottoTicket(List<Lotto> lottos, LottoTypesCount lottoTypesCount) {
         this.lottos = lottos;
+        this.lottoTypesCount = lottoTypesCount;
     }
 
     public List<Rank> createWinningRanks(WinningLotto winningLotto) {
@@ -18,8 +20,8 @@ public class LottoTicket {
         return ranks;
     }
 
-    public int getSize() {
-        return lottos.size();
+    public int getCountOfLottoType(LottoType lottoType) {
+        return lottoTypesCount.getCountOfType(lottoType);
     }
 
     @Override
