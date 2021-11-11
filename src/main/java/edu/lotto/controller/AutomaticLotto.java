@@ -7,9 +7,7 @@ import edu.lotto.model.Lottos;
 import edu.lotto.utils.MessageUtil;
 import edu.lotto.utils.NumberUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.logging.Logger;
 
 /**
@@ -28,6 +26,8 @@ public class AutomaticLotto {
 		int manualCount = getManualLottoCount(perchaseLottoCount);
 		List<String> manualLottoNumbers = getManualLottoNumbers(manualCount);
 		Lottos lottos = new Lottos(perchaseAmount, perchaseLottoCount, manualLottoNumbers);
+		List<Integer> winningNumbers = getLatestWinningNumbers();
+		int secondWinningNumber = getSecondWinningNumber(winningNumbers);
 	}
 
 	/**
@@ -115,6 +115,7 @@ public class AutomaticLotto {
 		Scanner scan = new Scanner(System.in);
 		inputManualNumber = scan.nextLine().replaceAll(" ", "");
 		if(!checkInputWinningNumbersValidation(inputManualNumber)) {
+			MessageUtil.printMessage(MessageConstants.INPUT_NUMBER_DUPLICATE_ERROR_MESSAGE);
 			inputManualNumber = addManualLottoNumber();
 		}
 		return inputManualNumber;
@@ -169,10 +170,22 @@ public class AutomaticLotto {
 		int currentWinningNumberIndex = 0;
 		while(isValidWinningNumbers && currentWinningNumberIndex < winningNumberArray.length) {
 			String winningNumber = winningNumberArray[currentWinningNumberIndex];
-			isValidWinningNumbers = ((winningNumberArray.length == 6) && NumberUtil.isNumber(winningNumber) && NumberUtil.isNumberBetweenOneAndFortyFive(Integer.parseInt(winningNumber)));
+			isValidWinningNumbers = ((winningNumberArray.length == 6)
+										&& hasNotDuplicateNumber(winningNumbers)
+										&& NumberUtil.isNumber(winningNumber)
+										&& NumberUtil.isNumberBetweenOneAndFortyFive(Integer.parseInt(winningNumber)));
 			currentWinningNumberIndex++;
 		}
 		return isValidWinningNumbers;
+	}
+
+	public static boolean hasNotDuplicateNumber(String value) {
+		String[] values = value.split(PatternConstants.DEFAULT_SEPARATOR_PATTERN);
+		List<String> valueList = Arrays.asList(values);
+		if(valueList.size() != valueList.stream().distinct().count()) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
