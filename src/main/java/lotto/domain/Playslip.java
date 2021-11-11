@@ -11,4 +11,9 @@ public class Playslip {
     public boolean contains(PickedNumbers winningNumbers, int x) {
         return pickedNumbers.contains(winningNumbers, x);
     }
+
+    @Override
+    public String toString() {
+        return pickedNumbers.toString();
+    }
 }

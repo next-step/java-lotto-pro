@@ -44,4 +44,9 @@ public class Price {
     public Price add(final Price o) {
         return new Price(this.price + o.price);
     }
+
+    @Override
+    public String toString() {
+        return Long.valueOf(price).toString();
+    }
 }

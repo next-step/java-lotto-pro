@@ -20,6 +20,8 @@ public class LottoNumbers {
 
     public static PickedNumbers pickRandom() {
         Collections.shuffle(lottoNumbers);
-        return new PickedNumbers(lottoNumbers.subList(SUBLIST_FROM_INDEX, SUBLIST_TO_INDEX));
+        final List<Number> randoms = lottoNumbers.subList(SUBLIST_FROM_INDEX, SUBLIST_TO_INDEX);
+        Collections.sort(randoms);
+        return new PickedNumbers(randoms);
     }
 }

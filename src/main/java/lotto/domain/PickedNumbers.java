@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PickedNumbers {
 
@@ -12,6 +14,14 @@ public class PickedNumbers {
     public PickedNumbers(List<Number> pickedNumbers) {
         validateSize(pickedNumbers);
         this.pickedNumbers = new ArrayList<>(pickedNumbers);
+    }
+
+    public static PickedNumbers of(final String winningNumbers) {
+        return new PickedNumbers(
+            Arrays.stream(winningNumbers.split(","))
+                .map(Integer::parseInt)
+                .map(Number::new)
+                .collect(Collectors.toList()));
     }
 
     private void validateSize(final List<Number> numbers) {
@@ -30,6 +40,15 @@ public class PickedNumbers {
             numberOfMatchingNumbers += contains(other.pickedNumbers.get(i));
         }
         return numberOfMatchingNumbers == x;
+    }
+
+    @Override
+    public String toString() {
+        return pickedNumbers
+            .stream()
+            .map(Number::getValue)
+            .collect(Collectors.toList())
+            .toString();
     }
 
     private int contains(Number pickedNumber) {

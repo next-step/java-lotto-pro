@@ -44,4 +44,14 @@ public class Playslips {
         final Playslip ithPlayslip = playslips.get(i);
         return ithPlayslip.contains(winningNumbers, x) ? 1 : 0;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Playslip p : playslips) {
+            sb.append(p.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
