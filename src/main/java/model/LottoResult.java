@@ -14,20 +14,7 @@ public class LottoResult {
 	}
 
 	public Rank getRank() {
-		if (matchingCount == 6) {
-			return Rank.FIRST;
-		}
-		if (matchingCount == 5) {
-			return Rank.THIRD;
-		}
-		if (matchingCount == 4) {
-			return Rank.FOURTH;
-		}
-		if (matchingCount == 3) {
-			return Rank.FIFTH;
-		}
-
-		return Rank.NONE;
+		return Rank.getByMatchingCount(matchingCount);
 	}
 
 	@Override

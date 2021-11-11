@@ -26,4 +26,23 @@ public class RankTest {
 			Arguments.of(Rank.NONE, 0)
 		);
 	}
+
+	@ParameterizedTest
+	@DisplayName("matchingCount에 따라서 Rank를 반환")
+	@MethodSource("test_getByMatchingCount1_parameter")
+	void test_getByMatchingCount1(int matchingCount, Rank expectedRank) {
+		assertThat(expectedRank).isEqualTo(Rank.getByMatchingCount(matchingCount));
+	}
+
+	static Stream<Arguments> test_getByMatchingCount1_parameter() {
+		return Stream.of(
+			Arguments.of(6, Rank.FIRST),
+			Arguments.of(5, Rank.THIRD),
+			Arguments.of(4, Rank.FOURTH),
+			Arguments.of(3, Rank.FIFTH),
+			Arguments.of(2, Rank.NONE),
+			Arguments.of(1, Rank.NONE),
+			Arguments.of(0, Rank.NONE)
+		);
+	}
 }
