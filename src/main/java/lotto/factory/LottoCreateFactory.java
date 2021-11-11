@@ -3,16 +3,16 @@ package lotto.factory;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.LottoNumber;
+import lotto.model.WinningLotto;
 import lotto.view.ErrorMessage;
 
 import java.util.*;
 
 public class LottoCreateFactory {
 
-    public static Lotto createRandomLotto() {
+    private static Lotto createRandomLotto() {
         List<Integer> randomNumbers = createRandomNumbers();
-        Lotto lotto = new Lotto(randomNumbers);
-        return lotto;
+        return new Lotto(randomNumbers);
     }
 
     private static List<Integer> createRandomNumbers() {
@@ -32,23 +32,18 @@ public class LottoCreateFactory {
     }
 
     public static Lottos createLottos(int size) {
-        Lotto[] lottoArray = new Lotto[size];
+        List<Lotto> lottoGroup = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            lottoArray[i] = createRandomLotto();
+            lottoGroup.add(createRandomLotto());
         }
-        return new Lottos(lottoArray);
+        return new Lottos(lottoGroup);
     }
 
-    public static Lotto createLotto(List<Integer> numbers) {
-        if (validDuplicate(numbers)) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_ERROR);
-        }
+    public static WinningLotto createWinningLotto(List<Integer> winLottoNumbers, int bonusNumber) {
+        return new WinningLotto(createLotto(winLottoNumbers), new LottoNumber(bonusNumber));
+    }
+
+    private static Lotto createLotto(List<Integer> numbers) {
         return new Lotto(numbers);
     }
-
-    private static boolean validDuplicate(List<Integer> numbers) {
-        Set<Integer> set = new HashSet<>(numbers);
-        return set.size() != Lotto.SIZE;
-    }
-
 }

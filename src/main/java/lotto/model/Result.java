@@ -1,7 +1,6 @@
 package lotto.model;
 
 import lotto.util.ConstantString;
-import lotto.view.Message;
 
 import java.math.BigInteger;
 import java.util.Collections;
@@ -12,10 +11,10 @@ import java.util.Map;
 public class Result {
     private Map<Rank, Integer> matchResult;
 
-    public Result(Lottos lottos, Lotto winLotto) {
-        this.matchResult = createResultMap();
+    public Result(Lottos lottos, WinningLotto winLotto) {
+        this.matchResult = Rank.createRankMap();
         for (Lotto lotto : lottos.getLottoGroup()) {
-            Rank rank = winLotto.matchNumber(lotto);
+            Rank rank = winLotto.matchRank(lotto);
             matchResultPut(rank);
         }
     }
@@ -30,16 +29,6 @@ public class Result {
         }
     }
 
-    private Map<Rank, Integer> createResultMap() {
-        Map<Rank, Integer> result = new LinkedHashMap<>();
-        List<Rank> winningRanks = Rank.createWinningRanks();
-        for (Rank winningRank : winningRanks) {
-            result.put(winningRank, 0);
-        }
-
-        return result;
-    }
-
     public String yield(int size) {
         BigInteger purchase = Price.totalPurchase(size);
         BigInteger lottoRevenueAmount = makeRevenueAmount();
@@ -47,7 +36,7 @@ public class Result {
         return String.format(ConstantString.SECOND_DECIMAL_PLACE, lottoYield);
     }
 
-    public BigInteger makeRevenueAmount() {
+    private BigInteger makeRevenueAmount() {
         BigInteger amount = BigInteger.ZERO;
         for (Rank rank : matchResult.keySet()) {
             BigInteger rankAmount = new BigInteger(String.valueOf(rank.getWinningMoney()));

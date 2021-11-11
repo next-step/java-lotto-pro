@@ -1,10 +1,7 @@
 package lotto;
 
 import lotto.factory.LottoCreateFactory;
-import lotto.model.Lotto;
-import lotto.model.Lottos;
-import lotto.model.Price;
-import lotto.model.Result;
+import lotto.model.*;
 import lotto.util.Console;
 import lotto.view.InputHandler;
 import lotto.view.Message;
@@ -14,14 +11,14 @@ import lotto.view.View;
 import java.util.List;
 
 public class LottoGame {
-    private static Lottos lottos;
-    private static Lotto winLotto;
+    private Lottos lottos;
+    private WinningLotto winningLotto;
 
     public void run() {
         try {
             buyLotto();
 
-            setWinningLotto();
+            enterWinningLotto();
 
             statistics();
         } catch (Exception e) {
@@ -34,19 +31,21 @@ public class LottoGame {
         int lottoCount = InputHandler.price(Console.readLine());
         ResultView.printBought(lottoCount);
         lottos = LottoCreateFactory.createLottos(lottoCount);
-        View.print(lottos.toString());
+        ResultView.printLottoList(lottos);
     }
 
-    private void setWinningLotto() {
+    private void enterWinningLotto() {
         View.print(Message.WINNING_NUMBER);
         List<Integer> winLottoNumbers = InputHandler.splitTextToInts(Console.readLine());
-        winLotto = LottoCreateFactory.createLotto(winLottoNumbers);
+        View.print(Message.BONUS_NUMBER);
+        int bonusNumber = InputHandler.validStringToInt(Console.readLine());
+        winningLotto = LottoCreateFactory.createWinningLotto(winLottoNumbers, bonusNumber);
     }
 
     private void statistics() {
         View.print(Message.WINNING_STATS);
         View.print(Message.WINNING_LINE);
-        Result result = new Result(lottos, winLotto);
+        Result result = new Result(lottos, winningLotto);
         ResultView.printReport(result.getMatchResult());
         ResultView.printYield(result.yield(lottos.size()));
     }

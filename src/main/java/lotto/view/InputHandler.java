@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.util.ConstantString;
 import lotto.model.Price;
@@ -31,21 +30,18 @@ public class InputHandler {
     private static List<Integer> mapToInts(String[] splitedNumbers) {
         List<Integer> result = new ArrayList<>();
         for (String textNumber : splitedNumbers) {
-            int lottoNumber = checkLottoNumber(textNumber);
+            int lottoNumber = validStringToInt(textNumber);
             result.add(lottoNumber);
         }
         return result;
     }
 
-    private static int checkLottoNumber(String textNumber) {
+    public static int validStringToInt(String textNumber) {
         try {
             int number = Integer.parseInt(textNumber);
-            if (LottoNumber.MAX_NUMBER < number || LottoNumber.MIN_NUMBER > number) {
-                throw new IllegalArgumentException();
-            }
             return number;
         } catch (Exception e) {
-            throw new IllegalArgumentException();
+            throw new NumberFormatException(ErrorMessage.NUMBER_FORMAT_ERROR);
         }
 
     }
