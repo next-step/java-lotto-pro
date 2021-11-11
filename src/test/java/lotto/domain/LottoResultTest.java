@@ -1,15 +1,10 @@
 package lotto.domain;
 
-import lotto.controller.LottoController;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,35 +12,76 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
 
-    private Lotto winningLotto;
+    private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {
-        winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        winningLotto = new WinningLotto(7, 1, 2, 3, 4, 5, 6);
     }
 
-    @DisplayName("로또 결과 테스트")
-    @ParameterizedTest(name = "{displayName} -> input: {0}, key: {1}")
-    @CsvSource(value = {
-            "1,2,3,4,5,6:6"
-            , "1,2,3,4,5,10:5"
-            , "1,2,3,4,10,11:4"
-            , "1,2,3,10,11,12:3"
-            , "1,2,10,11,12,13:2"
-            , "1,10,11,12,13,14:1"
-            , "10,11,12,13,14,15:0"
-    }, delimiter = ':')
-    void lottoResult(String input, int key) {
+    @DisplayName("로또 1등 테스트")
+    @Test
+    void firstPlace() {
+        // given
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+
         // when
-        String[] stringNumbers = input.split(LottoController.NUMBER_DELIMITER);
-        int[] numbers = Arrays.stream(stringNumbers)
-                .mapToInt(Integer::parseInt)
-                .toArray();
-        Lotto lotto = new Lotto(numbers);
         LottoResult lottoResult = new LottoResult(winningLotto, Collections.singletonList(lotto));
 
         // then
-        assertThat(lottoResult.getResult(key)).isOne();
+        assertThat(lottoResult.getPrizeCount(LottoPrize.FIRST_PLACE)).isOne();
+    }
+
+    @DisplayName("로또 2등 테스트")
+    @Test
+    void secondPlace() {
+        // given
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 7);
+
+        // when
+        LottoResult lottoResult = new LottoResult(winningLotto, Collections.singletonList(lotto));
+
+        // then
+        assertThat(lottoResult.getPrizeCount(LottoPrize.SECOND_PLACE)).isOne();
+    }
+
+    @DisplayName("로또 3등 테스트")
+    @Test
+    void thirdPlace() {
+        // given
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 10);
+
+        // when
+        LottoResult lottoResult = new LottoResult(winningLotto, Collections.singletonList(lotto));
+
+        // then
+        assertThat(lottoResult.getPrizeCount(LottoPrize.THIRD_PLACE)).isOne();
+    }
+
+    @DisplayName("로또 4등 테스트")
+    @Test
+    void fourth_Place() {
+        // given
+        Lotto lotto = new Lotto(1, 2, 3, 4, 10, 11);
+
+        // when
+        LottoResult lottoResult = new LottoResult(winningLotto, Collections.singletonList(lotto));
+
+        // then
+        assertThat(lottoResult.getPrizeCount(LottoPrize.FOURTH_PLACE)).isOne();
+    }
+
+    @DisplayName("로또 5등 테스트")
+    @Test
+    void lottoResult_firstPlace() {
+        // given
+        Lotto lotto = new Lotto(1, 2, 3, 10, 11, 12);
+
+        // when
+        LottoResult lottoResult = new LottoResult(winningLotto, Collections.singletonList(lotto));
+
+        // then
+        assertThat(lottoResult.getPrizeCount(LottoPrize.FIFTH_PLACE)).isOne();
     }
 
     @DisplayName("로또 수익률 테스트")
@@ -75,6 +111,6 @@ class LottoResultTest {
         LottoResult lottoResult = new LottoResult(winningLotto, lottoList);
 
         // then
-        Assertions.assertThat(lottoResult.getEarningsRate()).isEqualTo(0.35);
+        assertThat(lottoResult.getEarningsRate()).isEqualTo(0.35);
     }
 }

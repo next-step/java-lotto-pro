@@ -41,7 +41,7 @@ public class Lotto {
         lottoNumbers.add(lottoNumber);
     }
 
-    public int match(Lotto lotto) {
+    public int getMatchCount(Lotto lotto) {
         int count = 0;
         for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
             count += matchCount(lottoNumber);
