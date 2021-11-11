@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
@@ -20,30 +22,13 @@ public class LottosTest {
         assertThat(lottos.getProfit()).isEqualTo(55000);
     }
 
-    @Test
-    void matchFirst() throws Exception {
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,4,5,7:SECOND", "1,2,3,4,5,8:THREE"}, delimiter = ':')
+    void matchTest(String numbers, String lottoReward) throws Exception {
         Lotto winLotto = new Lotto("1,2,3,4,5,6");
-        Lottos lottos = new Lottos(Arrays.asList(new Lotto("1,2,3,4,5,6")));
+        Lottos lottos = new Lottos(Arrays.asList(new Lotto(numbers)));
         winLotto.setBonusNumber(new LottoNumber("7"));
         lottos.checkMatch(winLotto);
-        assertThat(lottos.getMatchLottoCount(LottoReward.FIRST)).isEqualTo(1);
-    }
-
-    @Test
-    void matchSecond() throws Exception {
-        Lotto winLotto = new Lotto("1,2,3,4,5,6");
-        Lottos lottos = new Lottos(Arrays.asList(new Lotto("1,2,3,4,5,7")));
-        winLotto.setBonusNumber(new LottoNumber("7"));
-        lottos.checkMatch(winLotto);
-        assertThat(lottos.getMatchLottoCount(LottoReward.SECOND)).isEqualTo(1);
-    }
-
-    @Test
-    void matchThree() throws Exception {
-        Lotto winLotto = new Lotto("1,2,3,4,5,6");
-        Lottos lottos = new Lottos(Arrays.asList(new Lotto("1,2,3,4,5,8")));
-        winLotto.setBonusNumber(new LottoNumber("7"));
-        lottos.checkMatch(winLotto);
-        assertThat(lottos.getMatchLottoCount(LottoReward.THREE)).isEqualTo(1);
+        assertThat(lottos.getMatchLottoCount(LottoReward.valueOf(lottoReward))).isEqualTo(1);
     }
 }

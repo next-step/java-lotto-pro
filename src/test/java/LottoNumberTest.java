@@ -12,7 +12,7 @@ public class LottoNumberTest {
     @Test
     void newLottoNumberWithString() {
         assertThatThrownBy(() -> new LottoNumber("a"))
-                .isInstanceOf(NumberFormatException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
 }

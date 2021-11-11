@@ -19,6 +19,23 @@ public class Lottos {
         }
     }
 
+    public int getManualCount() {
+        int manualCount = 0;
+        for (Lotto lotto : lottoList) {
+            manualCount = lotto.isBuyManual() ? manualCount + 1 : manualCount;
+        }
+
+        return manualCount;
+    }
+
+    public int getAutoCount() {
+        int autoCount = 0;
+        for (Lotto lotto : lottoList) {
+            autoCount = lotto.isBuyManual() ? autoCount : autoCount + 1;
+        }
+        return autoCount;
+    }
+
     public int getMatchLottoCount(LottoReward reward) {
         return (int) lottoList.stream()
                 .filter(lotto -> lotto.isMatch(reward))

@@ -31,13 +31,24 @@ public enum LottoReward {
                 .orElse(MISS);
     }
 
-    private boolean isMatch(int countOfMatch, boolean matchBonus){
-        if(this.matchCount != countOfMatch){
+    private boolean isMatch(int countOfMatch, boolean matchBonus) {
+        if (this.matchCount != countOfMatch) {
             return false;
         }
-        if(this.equals(LottoReward.SECOND)){
+        if (this.equals(LottoReward.SECOND)) {
             return matchBonus;
         }
         return true;
+    }
+
+    public void printReward(int matchCount) {
+        if (this.equals(LottoReward.MISS)) {
+            return;
+        }
+        if (this.equals(LottoReward.SECOND)) {
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d) - %d개\n", this.getMatchCount(), this.getReward(), matchCount);
+            return;
+        }
+        System.out.printf("%d개 일치 (%d) - %d개\n", this.getMatchCount(), this.getReward(), matchCount);
     }
 }

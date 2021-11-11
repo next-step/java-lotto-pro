@@ -9,25 +9,29 @@ public class Lotto {
     private int matchCount = 0;
     private LottoNumber bonusNumber;
     private LottoReward reward;
+    private boolean buyManual = false;
+
 
     public Lotto() {
         numbers = new ArrayList<LottoNumber>();
         while (numbers.size() < LOTTO_NUMBER_COUNT) {
             getLottoNumber();
         }
+        this.buyManual = false;
     }
 
     public Lotto(String numbers) throws IllegalArgumentException {
         this(numbers, 0);
     }
 
-    public Lotto(String numbers, int matchCount) {
+    public Lotto(String numbers, int matchCount) throws IllegalArgumentException {
         List<LottoNumber> lotto = StringUtil.mapToLotto(numbers);
         if (lotto.size() < LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("[ERROR] 숫자 " + LOTTO_NUMBER_COUNT + "개를 입력해야 합니다.");
         }
         this.numbers = lotto;
         this.matchCount = matchCount;
+        this.buyManual = true;
     }
 
     public List<LottoNumber> getNumbers() {
@@ -40,6 +44,10 @@ public class Lotto {
 
     public void setBonusNumber(LottoNumber bonusNumber) {
         this.bonusNumber = bonusNumber;
+    }
+
+    public boolean isBuyManual() {
+        return buyManual;
     }
 
     public void getLottoNumber() {

@@ -25,7 +25,9 @@ public class UserTest {
     }
 
     @Test
-    public void getProfitRateTest() {
-
+    public void buyManual() throws Exception {
+        User user = new User(new BigInteger("14000"));
+        user.buyLotto("1,2,3,4,5,6");
+        assertThat(user.getMoney()).isEqualTo(13000);
     }
 }
