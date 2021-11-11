@@ -31,10 +31,10 @@ public class LottoMachineFacade {
 			int manualCount = enterManualCount();
 			LottoPapers lottoPapers = createLottoPapers(money, manualCount);
 
-			LottoNumbers userLottoNumbers = enterUserLottoNumber();
-			BonusBall bonusBall = enterBonusBall(userLottoNumbers);
+			LottoNumbers winningLottoNumbers = enterUserLottoNumber();
+			BonusBall bonusBall = enterBonusBall(winningLottoNumbers);
 
-			Winning winning = new Winning(userLottoNumbers, bonusBall);
+			Winning winning = new Winning(winningLottoNumbers, bonusBall);
 			WinningResult winningResult = winning.match(lottoPapers);
 			WinningResultMap winningResultMap = winningResult.getStatistics();
 			resultView.statisticsPrint(winningResultMap);
@@ -69,13 +69,13 @@ public class LottoMachineFacade {
 	}
 
 	private LottoNumbers enterUserLottoNumber() {
-		String userLottoNumbers = inputView.insertLottoNumber();
-		return LottoNumbers.from(userLottoNumbers);
+		String winningLottoNumbers = inputView.insertLottoNumber();
+		return LottoNumbers.from(winningLottoNumbers);
 	}
 
-	private BonusBall enterBonusBall(LottoNumbers userLottoNumbers) {
+	private BonusBall enterBonusBall(LottoNumbers winningLottoNumbers) {
 		int bonusBall = inputView.insertBonusBall();
-		return BonusBall.of(bonusBall, userLottoNumbers);
+		return BonusBall.of(bonusBall, winningLottoNumbers);
 	}
 
 }

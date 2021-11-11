@@ -49,9 +49,9 @@ public class LottoNumbers {
 		);
 	}
 
-	public Integer matchCount(LottoNumbers userLottoNumbers) {
+	public Integer matchCount(LottoNumbers winningLottoNumbers) {
 		return (int) lottoNumbers.stream()
-			.filter(lottoNumber -> userLottoNumbers.getList().stream()
+			.filter(lottoNumber -> winningLottoNumbers.getList().stream()
 				.anyMatch(lottoNumber::equals)
 			).count();
 	}

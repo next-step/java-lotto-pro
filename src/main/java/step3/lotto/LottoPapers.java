@@ -16,10 +16,10 @@ public class LottoPapers {
 		return new LottoPapers(lottoNumbers);
 	}
 
-	public WinningResult findMatchWinningResult(LottoNumbers userLottoNumbers, BonusBall bonusBall) {
+	public WinningResult findMatchWinningResult(LottoNumbers winningLottoNumbers, BonusBall bonusBall) {
 		WinningResult matchResult = new WinningResult();
 		for (LottoNumbers lottoNumbers : papers) {
-			Integer matchCount = lottoNumbers.matchCount(userLottoNumbers);
+			Integer matchCount = lottoNumbers.matchCount(winningLottoNumbers);
 			boolean hasBonusBall = lottoNumbers.hasBonusBall(bonusBall);
 			matchResult.add(matchCount, hasBonusBall);
 		}

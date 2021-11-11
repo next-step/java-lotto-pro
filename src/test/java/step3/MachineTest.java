@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import step3.lotto.LottoPapers;
-import step3.machine.AutoLottoMachine;
+import step3.machine.LottoMachine;
 import step3.machine.Bought;
 import step3.machine.Machine;
 
@@ -21,7 +21,7 @@ public class MachineTest {
 	@ParameterizedTest
 	@CsvSource(value = {"1000:1", "2000:2", "1500:1", "3200:3"}, delimiter = ':')
 	void 천원당_로또번호가_생성되는지_확인(int money, int result) {
-		Machine machine = new AutoLottoMachine();
+		Machine machine = new LottoMachine();
 		Bought bought = new Bought(new Money(money));
 		LottoPapers lottoPapers = machine.createLottoPapers(bought.buyAutoCount());
 		assertThat(lottoPapers.size()).isEqualTo(result);
@@ -30,7 +30,7 @@ public class MachineTest {
 	@ParameterizedTest
 	@MethodSource(value = "generateData")
 	void 수동으로_입력시_구매수_확인(List<String> manualLottoNumbers, int size) {
-		Machine machine = new AutoLottoMachine();
+		Machine machine = new LottoMachine();
 		LottoPapers manualLottoPapers = machine.createManualLottoPapers(manualLottoNumbers);
 		assertThat(manualLottoPapers.size()).isEqualTo(size);
 	}
