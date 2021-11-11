@@ -32,8 +32,9 @@ public class LottoController {
 	private Lottos lottoGenerator() {
 		try {
 			Money inputMoney = Money.from(InputView.inputMoneyPurchaseLotto());
-			LottoGenerator lottoGenerator = LottoGenerator.of(inputMoney, generatePurchaseLotto());
-			return Lottos.of(lottoGenerator.generateLottoNumbers());
+			return Lottos.of(LottoGenerator
+				.getInstance()
+				.generateLottoNumbers(inputMoney, generatePurchaseLotto(), inputCount));
 		} catch (LottoException lottoException) {
 			OutputView.printErrorMessage(lottoException);
 			return lottoGenerator();

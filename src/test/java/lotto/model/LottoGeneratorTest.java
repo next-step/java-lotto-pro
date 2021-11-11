@@ -13,20 +13,16 @@ import lotto.exception.LottoException;
 
 class LottoGeneratorTest {
 
-	private Method privateMethod(String methodName) throws Exception {
-		Method method = LottoGenerator.class.getDeclaredMethod(methodName);
-		method.setAccessible(true);
-		return method;
-	}
-
 	@Test
 	void 자동로또만_생성하는_기능테스트() throws Exception {
 		// given
 		Money inputMoney = Money.from("10000");
+		Method method = LottoGenerator.class.getDeclaredMethod("generateRandomLottoNumbers", Money.class, int.class);
+		method.setAccessible(true);
 
 		// when
-		Method method = privateMethod("generateRandomLottoNumbers");
-		List<LottoNumbers> lottoNumbersList = (List<LottoNumbers>)method.invoke(LottoGenerator.from(inputMoney));
+		List<LottoNumbers> lottoNumbersList = (List<LottoNumbers>)method.invoke(LottoGenerator.getInstance(),
+			inputMoney, 0);
 
 		// then
 		assertThat(lottoNumbersList).hasSize(inputMoney.calculateLottoAmount());
@@ -37,11 +33,12 @@ class LottoGeneratorTest {
 		// given
 		Money inputMoney = Money.from("3000");
 		List<String> inputNumberList = Arrays.asList("12,3,4,5,6,7", "12,3,4,5,6,7", "12,3,4,5,6,7");
+		Method method = LottoGenerator.class.getDeclaredMethod("generateInputLottoNumbers", List.class);
+		method.setAccessible(true);
 
 		// when
-		Method method = privateMethod("generateInputLottoNumbers");
 		List<LottoNumbers> lottoNumbersList = (List<LottoNumbers>)method.invoke(
-			LottoGenerator.of(inputMoney, inputNumberList));
+			LottoGenerator.getInstance(), inputNumberList);
 
 		// then
 		assertThat(lottoNumbersList).hasSize(inputMoney.calculateLottoAmount());
@@ -52,10 +49,11 @@ class LottoGeneratorTest {
 		// given
 		Money inputMoney = Money.from("10000");
 		List<String> inputNumberList = Arrays.asList("12,3,4,5,6,7", "12,3,4,5,6,7", "12,3,4,5,6,7");
+		Method method = LottoGenerator.class.getDeclaredMethod("calculateRandomSize", Money.class, int.class);
+		method.setAccessible(true);
 
 		// when
-		Method method = privateMethod("calculateRandomSize");
-		int randomSize = (int)method.invoke(LottoGenerator.of(inputMoney, inputNumberList));
+		int randomSize = (int)method.invoke(LottoGenerator.getInstance(), inputMoney, inputNumberList.size());
 
 		// then
 		assertThat(randomSize).isEqualTo(inputMoney.calculateLottoAmount() - inputNumberList.size());
@@ -68,7 +66,9 @@ class LottoGeneratorTest {
 		List<String> inputNumberList = Arrays.asList("12,3,4,5,6,7", "12,3,4,5,6,7", "12,3,4,5,6,7");
 
 		// when
-		List<LottoNumbers> lottoNumbersList = LottoGenerator.of(inputMoney, inputNumberList).generateLottoNumbers();
+		List<LottoNumbers> lottoNumbersList = LottoGenerator
+			.getInstance()
+			.generateLottoNumbers(inputMoney, inputNumberList);
 
 		// then
 		assertThat(lottoNumbersList).hasSize(inputMoney.calculateLottoAmount());
@@ -82,7 +82,7 @@ class LottoGeneratorTest {
 
 		// when // then
 		assertThatThrownBy(() -> {
-			LottoGenerator.of(inputMoney, inputList);
+			LottoGenerator.getInstance().generateLottoNumbers(inputMoney, inputList);
 		}).isInstanceOf(LottoException.class)
 			.hasMessageContaining(ErrorCode.INVALID_MONEY_INPUT_NUMBER_SIZE_ERROR.getErrorMessage());
 	}
@@ -96,7 +96,7 @@ class LottoGeneratorTest {
 
 		// when // then
 		assertThatThrownBy(() -> {
-			LottoGenerator.of(inputMoney, inputList, inputSize);
+			LottoGenerator.getInstance().generateLottoNumbers(inputMoney, inputList, inputSize);
 		}).isInstanceOf(LottoException.class)
 			.hasMessageContaining(ErrorCode.INVALID_MONEY_INPUT_NUMBER_SIZE_ERROR.getErrorMessage());
 	}
@@ -110,7 +110,7 @@ class LottoGeneratorTest {
 
 		// when // then
 		assertThatThrownBy(() -> {
-			LottoGenerator.of(inputMoney, inputList, inputSize);
+			LottoGenerator.getInstance().generateLottoNumbers(inputMoney, inputList, inputSize);
 		}).isInstanceOf(LottoException.class)
 			.hasMessageContaining(ErrorCode.INVALID_INPUT_SIZE_INPUT_LIST_SIZE_ERROR.getErrorMessage());
 	}

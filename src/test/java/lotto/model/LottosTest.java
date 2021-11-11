@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,10 +15,11 @@ class LottosTest {
 	void 입력된_구입금액만큼_로또생성기로_로또를_생성하는_테스트(String inputMoney, int lottoNumbersListSize) {
 		// given
 		Money money = Money.from(inputMoney);
-		LottoGenerator lottoGenerator = LottoGenerator.from(money);
+		List<LottoNumbers> lottoNumbersList = LottoGenerator.getInstance().generateLottoNumbers(money);
+		System.out.println(lottoNumbersList.size());
 
 		// when
-		Lottos lottos = Lottos.of(lottoGenerator.generateLottoNumbers());
+		Lottos lottos = Lottos.of(lottoNumbersList);
 
 		// then
 		assertAll(
@@ -35,10 +37,11 @@ class LottosTest {
 	void 입력된_구입금액과_입력된숫자로_로또를_생성하는_테스트(String inputMoney, String inputNumber, int lottoNumbersListSize) {
 		// given
 		Money money = Money.from(inputMoney);
-		LottoGenerator lottoGenerator = LottoGenerator.of(money, Collections.singletonList(inputNumber));
+		List<LottoNumbers> lottoGenerator = LottoGenerator.getInstance()
+			.generateLottoNumbers(money, Collections.singletonList(inputNumber));
 
 		// when
-		Lottos lottos = Lottos.of(lottoGenerator.generateLottoNumbers());
+		Lottos lottos = Lottos.of(lottoGenerator);
 
 		// then
 		assertAll(

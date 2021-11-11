@@ -2,7 +2,6 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,27 +14,13 @@ import lotto.util.RandomUtil;
 
 public class LottoGenerator {
 	private static final String IS_NUMBER_REGEX = "[1-9]";
-	private final Money money;
-	private final List<String> inputNumberList;
+	private static final int ONLY_RANDOM_NUMBERS = 0;
 
-	private LottoGenerator(Money money, List<String> inputNumberList) {
-		this.money = money;
-		this.inputNumberList = Collections.unmodifiableList(inputNumberList);
+	private LottoGenerator() {
 	}
 
-	public static LottoGenerator from(Money money) {
-		return new LottoGenerator(money, new ArrayList<>());
-	}
-
-	public static LottoGenerator of(Money money, List<String> inputNumberList) {
-		validInputListSize(money, inputNumberList.size());
-		return new LottoGenerator(money, inputNumberList);
-	}
-
-	public static LottoGenerator of(Money money, List<String> inputNumberList, String inputSize) {
-		validInputSize(inputSize, inputNumberList.size());
-		validInputListSize(money, Integer.parseInt(inputSize));
-		return new LottoGenerator(money, inputNumberList);
+	public static LottoGenerator getInstance() {
+		return new LottoGenerator();
 	}
 
 	private static void validInputSize(String input, int inputNumberListSize) {
@@ -68,25 +53,43 @@ public class LottoGenerator {
 		}
 	}
 
-	private List<List<String>> generateLottoNumberList() {
+	public List<LottoNumbers> generateLottoNumbers(Money money) {
+		return generateRandomLottoNumbers(money, ONLY_RANDOM_NUMBERS);
+	}
+
+	public List<LottoNumbers> generateLottoNumbers(Money money, List<String> inputNumberList) {
+		validInputListSize(money, inputNumberList.size());
+
+		return generateMixLottoNumbers(money, inputNumberList);
+	}
+
+	public List<LottoNumbers> generateLottoNumbers(Money money, List<String> inputNumberList, String inputSize) {
+		validInputSize(inputSize, inputNumberList.size());
+		validInputListSize(money, Integer.parseInt(inputSize));
+
+		return generateMixLottoNumbers(money, inputNumberList);
+	}
+
+	private List<List<String>> generateLottoNumberList(Money money, int inputNumberListSize) {
 		return Stream
 			.generate(LottoGenerator::generateStringNumberSet)
-			.limit(calculateRandomSize())
+			.limit(calculateRandomSize(money, inputNumberListSize))
 			.collect(Collectors.toList());
 	}
 
-	private int calculateRandomSize() {
-		return money.calculateLottoAmount() - inputNumberList.size();
+	private int calculateRandomSize(Money money, int inputNumberListSize) {
+		System.out.println();
+		return money.calculateLottoAmount() - inputNumberListSize;
 	}
 
-	private List<LottoNumbers> generateRandomLottoNumbers() {
-		return generateLottoNumberList()
+	private List<LottoNumbers> generateRandomLottoNumbers(Money money, int inputNumberListSize) {
+		return generateLottoNumberList(money, inputNumberListSize)
 			.stream()
 			.map(LottoNumbers::from)
 			.collect(Collectors.toList());
 	}
 
-	private List<LottoNumbers> generateInputLottoNumbers() {
+	private List<LottoNumbers> generateInputLottoNumbers(List<String> inputNumberList) {
 		return inputNumberList
 			.stream()
 			.map(LottoNumbers::from)
@@ -94,8 +97,9 @@ public class LottoGenerator {
 			.collect(Collectors.toList());
 	}
 
-	public List<LottoNumbers> generateLottoNumbers() {
-		return Stream.of(generateInputLottoNumbers(), generateRandomLottoNumbers())
+	private List<LottoNumbers> generateMixLottoNumbers(Money money, List<String> inputNumberList) {
+		return Stream.of(generateInputLottoNumbers(inputNumberList),
+			generateRandomLottoNumbers(money, inputNumberList.size()))
 			.flatMap(Collection::stream)
 			.collect(Collectors.toList());
 	}
