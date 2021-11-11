@@ -1,11 +1,12 @@
 import java.math.BigInteger;
+import java.util.List;
 
 public class User {
     public static final int lottoPrice = 1000;
     private BigInteger money;
     private Lottos lottoList;
 
-    public User(BigInteger money){
+    public User(BigInteger money) {
         this.money = money;
         this.lottoList = new Lottos();
     }
@@ -18,7 +19,8 @@ public class User {
         return lottoList;
     }
 
-    public void buyLottos() {
+    public void buyLottos(List<String> manualLottoString) {
+        buyLottosManual(manualLottoString);
         while (hasMoney()) {
             buyLotto();
         }
@@ -29,12 +31,27 @@ public class User {
         lottoList.add(new Lotto());
     }
 
+    public void buyLotto(String lottoNumber) {
+        expendMoney();
+        lottoList.add(new Lotto(lottoNumber));
+    }
+
+    public void buyLottosManual(List<String> manualLottoString) {
+        for (String lottoString : manualLottoString) {
+            buyLotto(lottoString);
+        }
+    }
+
     private void expendMoney() {
         this.money = this.money.subtract(BigInteger.valueOf(lottoPrice));
     }
 
     public boolean hasMoney() {
         return this.money.compareTo(BigInteger.valueOf(lottoPrice)) >= 0;
+    }
+
+    public boolean hasMoney(int lottoCount) {
+        return this.money.compareTo(BigInteger.valueOf(lottoPrice).multiply(BigInteger.valueOf(lottoCount))) >= 0;
     }
 
     public int howManyLotto() {

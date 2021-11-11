@@ -1,15 +1,17 @@
-import com.sun.org.apache.xpath.internal.operations.Lt;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class ResultView {
 
     private ResultView() {
     }
 
-    public static void printBuyResult(int count) {
-        System.out.printf("%d개를 구매했습니다.\n", count);
+    public static void printBuyResult(int manualCount, int autoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualCount, autoCount);
     }
 
     public static void printLottoList(Lottos lottoList) {
+        printBuyResult(lottoList.getManualCount(), lottoList.getAutoCount());
         for (int i = 0; i < lottoList.size(); i++) {
             System.out.println(lottoList.get(i));
         }
@@ -17,11 +19,9 @@ public class ResultView {
 
     public static void printResult(User user) {
         System.out.println("\n당첨 통계\n-------------");
-        System.out.printf("3개 일치 (5000원)-%d개\n", user.getMatchLottoCount(LottoReward.FIFTH));
-        System.out.printf("4개 일치 (50000원)-%d개\n", user.getMatchLottoCount(LottoReward.FOURTH));
-        System.out.printf("5개 일치 (1500000원)-%d개\n", user.getMatchLottoCount(LottoReward.THREE));
-        System.out.printf("5개 일치, 보너스 볼 일치 (30000000원)-%d개\n", user.getMatchLottoCount(LottoReward.SECOND));
-        System.out.printf("6개 일치 (2000000000원)-%d개\n", user.getMatchLottoCount(LottoReward.FIRST));
+        Arrays.stream(LottoReward.values())
+                .sorted(Comparator.reverseOrder())
+                .forEach(reward -> reward.printReward(user.getMatchLottoCount(reward)));
         System.out.printf("총 수익률은 %.2f 입니다.", user.getProfitRate());
     }
 
