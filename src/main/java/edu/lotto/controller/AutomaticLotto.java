@@ -100,7 +100,7 @@ public class AutomaticLotto {
 		Scanner scan = new Scanner(System.in);
 		inputManualNumber = scan.nextLine().replaceAll(" ", "");
 		if(!checkInputWinningNumbersValidation(inputManualNumber)) {
-			MessageUtil.printMessage(MessageConstants.INPUT_NUMBER_DUPLICATE_ERROR_MESSAGE);
+			MessageUtil.printMessage(MessageConstants.INPUT_NUMBER_NOT_SIX_COUNT_OR_DUPLICATE_ERROR_MESSAGE);
 			inputManualNumber = addManualLottoNumber();
 		}
 		return inputManualNumber;
@@ -200,9 +200,10 @@ public class AutomaticLotto {
 	private static boolean isValidBonusNumber(int bonusNumber, List<LottoNumber> winningNumbers) {
 		if(NumberUtil.isNumber(String.valueOf(bonusNumber))
 			&& NumberUtil.isNumberBetweenOneAndFortyFive(bonusNumber)
-			&& !winningNumbers.contains(bonusNumber)) {
+			&& !(new LottoNumber(bonusNumber).containLottoNumber(winningNumbers))) {
 			return true;
 		}
+		MessageUtil.printMessage(MessageConstants.INPUT_SECON_WINNING_NUMBER_ERROR_MESSAGE);
 		return false;
 	}
 
