@@ -1,12 +1,27 @@
 package lotto.model;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WinningLottoStatus {
 	private final Map<Rank, Integer> winningLottoCount;
 
 	public WinningLottoStatus(Map<Rank, Integer> winningLottoCount) {
 		this.winningLottoCount = winningLottoCount;
+	}
+
+	public static WinningLottoStatus merge(WinningLottoStatus status1, WinningLottoStatus status2) {
+		Map<Rank, Integer> merged = new HashMap<>();
+
+		EnumSet.allOf(Rank.class)
+			.forEach(result -> merged.put(result, status1.getMatchCount(result) + status2.getMatchCount(result)));
+
+		return new WinningLottoStatus(merged);
 	}
 
 	/**
@@ -44,10 +59,10 @@ public class WinningLottoStatus {
 	 * @return 상태 정보 텍스트
 	 */
 	public String status() {
-		return  String.format("3개 일치(%d원)- %d개\n", Rank.FIFTH.getWinningMoney(), getMatchCount(Rank.FIFTH))
-			+ String.format("4개 일치(%d원)- %d개\n", Rank.FOURTH.getWinningMoney(), getMatchCount(Rank.FOURTH))
-			+ String.format("5개 일치(%d원)- %d개\n", Rank.THIRD.getWinningMoney(), getMatchCount(Rank.THIRD))
-			+ String.format("5개 일치, 보너스 볼 일치(%d원)- %d개\n", Rank.SECOND.getWinningMoney(), getMatchCount(Rank.SECOND))
-			+ String.format("6개 일치(%d원)- %d개\n", Rank.FIRST.getWinningMoney(), getMatchCount(Rank.FIRST));
+		return Arrays.stream(Rank.values())
+			.filter(Rank::isWinning)
+			.sorted(Comparator.comparingInt(Rank::getWinningMoney))
+			.map(rank -> String.format("%s- %d개", rank.formatedText(), getMatchCount(rank)))
+			.collect(Collectors.joining("\n"));
 	}
 }

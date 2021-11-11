@@ -51,4 +51,35 @@ public class WinningLottoStatusTest {
 		assertThat(totalReward).isEqualTo(105000);
 		assertThat(rateOfReturn).isEqualTo(26.25);
 	}
+
+	@Test
+	@DisplayName("당첨 결과 병합")
+	void merge() {
+		Lottos lottos1 = new Lottos(Arrays.asList(
+			new Lotto(new LottoNumbers(3,6,23,24,32,34)),
+			new Lotto(new LottoNumbers(3,7,23,24,32,34)),
+			new Lotto(new LottoNumbers(5,7,13,34,36,37))
+		));
+		Lottos lottos2 = new Lottos(Arrays.asList(
+			new Lotto(new LottoNumbers(3,7,13,18,32,34)),
+			new Lotto(new LottoNumbers(3,7,17,22,31,34))
+		));
+		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(new int[]{3, 7, 17, 18, 32, 34},13);
+		WinningLottoStatus status1 = lottos1.getWinningStatus(winningLottoNumbers);
+		WinningLottoStatus status2 = lottos2.getWinningStatus(winningLottoNumbers);
+
+		WinningLottoStatus merged = WinningLottoStatus.merge(status1, status2);
+
+		int matchThreeCount = merged.getMatchCount(Rank.FIFTH);
+		int matchFourCount = merged.getMatchCount(Rank.FOURTH);
+		int matchFiveCount = merged.getMatchCount(Rank.THIRD);
+		int matchFiveCountAndBonus = merged.getMatchCount(Rank.SECOND);
+		int matchSixCount = merged.getMatchCount(Rank.FIRST);
+
+		assertThat(matchThreeCount).isEqualTo(1);
+		assertThat(matchFourCount).isEqualTo(2);
+		assertThat(matchFiveCount).isEqualTo(0);
+		assertThat(matchFiveCountAndBonus).isEqualTo(1);
+		assertThat(matchSixCount).isEqualTo(0);
+	}
 }

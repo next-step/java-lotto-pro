@@ -14,7 +14,7 @@ public enum Rank {
 	private int countOfMatch;
 	private int winningMoney;
 
-	private Rank(int countOfMatch, int winningMoney) {
+	Rank(int countOfMatch, int winningMoney) {
 		this.countOfMatch = countOfMatch;
 		this.winningMoney = winningMoney;
 	}
@@ -39,5 +39,26 @@ public enum Rank {
 			.filter(rank -> rank.getCountOfMatch() == countOfMatch)
 			.findFirst()
 			.orElse(MISS);
+	}
+
+	/**
+	 * 형식 문자열 반환
+	 * @return 형식 문자열
+	 */
+	public String formatedText() {
+		StringBuffer sbFormated = new StringBuffer(String.format("%d개 일치", countOfMatch));
+		if (this == SECOND) {
+			sbFormated.append(", 보너스 볼 일치");
+		}
+		sbFormated.append(String.format("(%d원)", winningMoney));
+		return sbFormated.toString();
+	}
+
+	/**
+	 * 당첨되었는지 여부 반환
+	 * @return 당첨여부
+	 */
+	public boolean isWinning() {
+		return this != MISS;
 	}
 }
