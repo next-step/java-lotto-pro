@@ -12,7 +12,7 @@ import step3.lotto.LottoNumber;
 import step3.lotto.LottoNumbers;
 import step3.lotto.LottoPapers;
 
-public class AutoLottoMachine implements Machine {
+public class LottoMachine implements Machine {
 	@Override
 	public LottoPapers createLottoPapers(int buyCount) {
 		List<LottoNumbers> lottoNumbers = new ArrayList<>();
