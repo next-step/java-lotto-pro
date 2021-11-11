@@ -8,12 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.constants.LottoConstants;
 import lotto.constants.Rank;
 import lotto.model.Lotto;
-import lotto.model.LottoGame;
-import lotto.model.Lottos;
 import lotto.model.Prize;
+import lotto.model.PurchaseMoney;
 
 public class PrizeTest {
 	Lotto lotto1;
@@ -28,22 +26,26 @@ public class PrizeTest {
 	}
 
 	@Test
-	@DisplayName("게임 진행시 Prize 생성되는 테스트")
-	void generate() {
-		LottoGame game = new LottoGame(winLotto);
-		Prize prize = game.winPrize(new Lottos(Arrays.asList(lotto1, lotto2)));
-
-		assertThat(prize).isEqualTo(
-			new Prize(winLotto.compare(lotto1), winLotto.compare(lotto2)));
+	@DisplayName("로또 등수에 따른 총 상금액 계산")
+	void winMoney() {
+		Prize prize = Prize.withRankList(Arrays.asList(Rank.FIRST, Rank.SECOND));
+		assertThat(prize.winMoney()).isEqualTo(Rank.FIRST.getWinningMoney() + Rank.SECOND.getWinningMoney());
 	}
 
 	@Test
-	@DisplayName("당첨된 로또들의 상금액과 수익률을 계산하는 테스트")
+	@DisplayName("로또 구매 비용과 로또 등수에 따른 총 상금액 간의 비율 계산")
 	void winPrize() {
-		Prize prize = new Prize(Rank.FIRST, Rank.THIRD);
+		Prize prize = Prize.withRankList(Arrays.asList(Rank.FIRST, Rank.SECOND));
 
-		assertThat(prize.winMoney()).isEqualTo(Rank.FIRST.getPrize() + Rank.THIRD.getPrize());
-		assertThat(prize.rateReturn(2 * LottoConstants.PRICE)).isEqualTo(
-			(Rank.FIRST.getPrize() + Rank.THIRD.getPrize()) / (2.0 * LottoConstants.PRICE));
+		assertThat(prize.rateReturn(new PurchaseMoney(3000))).isEqualTo(
+			(Rank.FIRST.getWinningMoney() + Rank.SECOND.getWinningMoney()) / 3000.0);
+	}
+
+	@Test
+	@DisplayName("로또 등수에 따른 ")
+	void rankCount() {
+		Prize prize = Prize.withRankList(Arrays.asList(Rank.FIRST, Rank.FIRST, Rank.SECOND, Rank.THIRD));
+		assertThat(prize.getCount(Rank.FIRST)).isEqualTo(2);
+		assertThat(prize.getCount(Rank.SECOND)).isEqualTo(1);
 	}
 }
