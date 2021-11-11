@@ -17,10 +17,10 @@ public class WinningMoney {
 		if (Character.isDigit(sumAmount)) {
 			throw new IllegalArgumentException(WINNING_SUM_NOT_DIGIT);
 		}
-		return new BigDecimal(String.valueOf(sumAmount))
-				.divide(new BigDecimal(String.valueOf(money)),
-					TWO_DIGITS,
-					RoundingMode.FLOOR);
+		return
+			new BigDecimal(String.valueOf(sumAmount)).divide(new BigDecimal(String.valueOf(money)),
+				TWO_DIGITS,
+				RoundingMode.FLOOR);
 	}
 
 }
