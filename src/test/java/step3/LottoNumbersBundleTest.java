@@ -12,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import step3.domain.Amount;
+import step3.domain.LottoBuyer;
 import step3.domain.LottoNumber;
 import step3.domain.LottoNumbers;
 import step3.domain.LottoNumbersBundle;
@@ -33,15 +34,17 @@ public class LottoNumbersBundleTest {
     void lottoRanksOf_totalPrize(String buyNumbersStr, String winNumbersStr, int bonusNumber, Long expected) {
         // given
         Amount amount = new Amount(1000);
+        LottoBuyer lottoBuyer = new LottoBuyer(amount);
+
         List<LottoNumbers> buyLotto = new ArrayList<>();
-        List<LottoNumbers> winLotto = new ArrayList<>();
         buyLotto.add(LottoNumbersFactory.createManualLottoNumbers(parseNumbers(buyNumbersStr)));
         LottoNumbersBundle lottoNumbersBundle = LottoNumbersBundle.of(buyLotto);
+        lottoBuyer.buyManualLotto(lottoNumbersBundle);
 
         // when
         WinningLotto winningLotto = WinningLotto.of(
             LottoNumbersFactory.createManualLottoNumbers(parseNumbers(winNumbersStr)), LottoNumber.of(bonusNumber));
-        LottoRanks lottoRanks = lottoNumbersBundle.lottoRanksOf(winningLotto, amount);
+        LottoRanks lottoRanks = lottoBuyer.getLottoRanks(winningLotto);
         Long totalPrize = lottoRanks.totalPrize();
 
         // then

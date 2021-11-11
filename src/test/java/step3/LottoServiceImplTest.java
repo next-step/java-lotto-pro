@@ -44,7 +44,7 @@ public class LottoServiceImplTest {
         LottoService lottoService = new LottoServiceImpl();
         LottoBuyer lottoBuyer = new LottoBuyer(new Amount(amount));
         LottoNumbersBundle lottoNumbersBundle = LottoNumbersBundle.of(buyLottoNumbers);
-        lottoBuyer.buyLotto(lottoNumbersBundle);
+        lottoBuyer.buyManualLotto(lottoNumbersBundle);
         WinningLotto winningLotto = WinningLotto.of(
             LottoNumbersFactory.createLottoNumbers(winLottoNumbers, BuyType.MANUAL), LottoNumber.of(bonusNumber));
 

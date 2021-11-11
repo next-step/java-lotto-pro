@@ -20,6 +20,21 @@ import step3.domain.factory.LottoNumbersFactory;
 public class LottoBuyerTest {
 
     @Test
+    void test() {
+        // given
+        Amount amount = new Amount(1000000000);
+        LottoBuyer lottoBuyer = new LottoBuyer(amount);
+        List<LottoNumbers> manualBundle = new ArrayList<>();
+        manualBundle.add(LottoNumbersFactory.createManualLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        manualBundle.add(LottoNumbersFactory.createManualLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 10)));
+        LottoNumbersBundle lottoNumbersBundle2 = LottoNumbersBundle.of(manualBundle);
+
+        // when
+        lottoBuyer.buyManualLotto(lottoNumbersBundle2);
+        lottoBuyer.autoBuyLotto();
+    }
+
+    @Test
     @DisplayName("지불금액 : 10000원 , 수동 2개, 자동 8개, 검증")
     void countOf_수동구매_자동구매_카운트() {
         // given
@@ -31,7 +46,7 @@ public class LottoBuyerTest {
         LottoNumbersBundle lottoNumbersBundle2 = LottoNumbersBundle.of(manualBundle);
 
         // when
-        lottoBuyer.buyLotto(lottoNumbersBundle2);
+        lottoBuyer.buyManualLotto(lottoNumbersBundle2);
         lottoBuyer.autoBuyLotto();
 
         // then
@@ -64,7 +79,7 @@ public class LottoBuyerTest {
 
         // when
         LottoNumbersBundle lottoNumbersBundle = LottoNumbersBundle.of(manualBundle);
-        lottoBuyer.buyLotto(lottoNumbersBundle);
+        lottoBuyer.buyManualLotto(lottoNumbersBundle);
 
         // then
         Collections.sort(buyNumbers);
