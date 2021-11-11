@@ -68,13 +68,13 @@ public class Lotto {
         return lottoStatus;
     }
 
-    public int getMatchingCountFromLotto(Lotto lotto) {
+    public int countMatchingFromLotto(Lotto lotto) {
         return (int) lineOfLottoNumber.stream()
                 .filter(lotto.lineOfLottoNumber::contains)
                 .count();
     }
 
-    public int getMatchingCountFromNumber(LottoNumber bonusNumber) {
+    public int countMatchingFromLottoNumber(LottoNumber bonusNumber) {
         return (int) lineOfLottoNumber.stream()
                 .filter(bonusNumber::equals)
                 .count();

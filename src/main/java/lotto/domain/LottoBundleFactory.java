@@ -19,4 +19,14 @@ public class LottoBundleFactory {
 
         return new LottoBundle(lottos);
     }
+
+    public static LottoBundle generateCustomLotto(List<List<LottoNumber>> customLottoNumbersBundle) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (List<LottoNumber> customLottoNumbers : customLottoNumbersBundle) {
+            lottos.add(new Lotto(customLottoNumbers));
+        }
+
+        return new LottoBundle(lottos);
+    }
 }

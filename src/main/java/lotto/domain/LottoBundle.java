@@ -35,4 +35,11 @@ public class LottoBundle {
 
         return lottoResult;
     }
+
+    public LottoBundle addAll(LottoBundle lottoBundle) {
+        List<Lotto> allLottos = new ArrayList<>(purchasedLottos);
+        allLottos.addAll(lottoBundle.purchasedLottos);
+
+        return new LottoBundle(allLottos);
+    }
 }

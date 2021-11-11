@@ -1,6 +1,8 @@
 package lotto.constant;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
     NONE(0, 0, 0),
@@ -21,8 +23,19 @@ public enum LottoRank {
     }
 
     public static LottoRank findRank(int matchingCount, int bonusMatchingCount) {
-        return Arrays.stream(LottoRank.values())
+        List<LottoRank> filteredLottoRanks = Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.matchingCount == matchingCount)
+                .collect(Collectors.toList());
+
+        if (filteredLottoRanks.isEmpty()) {
+            return LottoRank.NONE;
+        }
+
+        if (filteredLottoRanks.size() == 1) {
+            return filteredLottoRanks.get(0);
+        }
+
+        return filteredLottoRanks.stream()
                 .filter(lottoRank -> lottoRank.bonusMatchingCount == bonusMatchingCount)
                 .findFirst()
                 .orElse(LottoRank.NONE);

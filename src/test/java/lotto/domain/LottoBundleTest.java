@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -17,5 +18,21 @@ class LottoBundleTest {
 
         assertThat(lottoBundle.getLottoCount())
                 .isEqualTo(testValue);
+    }
+
+    @Test
+    @DisplayName("로또 번들 통합 확인")
+    void 로또_번들_통합_확인() {
+        // given
+        LottoBundle lottoBundle = LottoBundleFactory.generateRandomLotto(3);
+        LottoBundle secondLottoBundle = LottoBundleFactory.generateRandomLotto(4);
+
+        // when
+        LottoBundle totalLottoBundle = lottoBundle.addAll(secondLottoBundle);
+        int totalLottoCount = totalLottoBundle.getLottoCount();
+
+        // then
+        assertThat(totalLottoCount)
+                .isEqualTo(7);
     }
 }
