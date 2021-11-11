@@ -115,4 +115,5 @@
 - [X] 컨트롤러 및 전반적인 프로세스 개선
 - [X] 기존 로또랜덤 번호 추상화 객체를 제거
 - [X] `LottoNumbersFactory` 추가, `List<LottoNumber>` 를 캐싱처리
-- [X] 등수를 구하는 책임은 LottoRanks 로 리팩토링 
+- [X] 등수를 구하는 책임은 LottoRanks 로 리팩토링
+- [X] BuyType 제거 하고, LottoBuyCount 객체화 리팩토링 
