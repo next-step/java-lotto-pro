@@ -7,8 +7,8 @@ import lotto.code.ErrorCode;
 import lotto.exception.LottoException;
 
 public class Money {
-	public static final BigDecimal LOTTO_PRICE = new BigDecimal(1000);
-	private static final int MATH_ROUND_VALUE = 2;
+	public static final Money LOTTO_PRICE = Money.from(new BigDecimal(1000));
+	private static final int MATH_ROUND_VALUE = 1;
 	private static final String NUMBER_REGEX = "[0-9]+";
 	private final BigDecimal money;
 
@@ -54,7 +54,7 @@ public class Money {
 	}
 
 	private static boolean isUnderLottoPrice(String input) {
-		return Integer.parseInt(input) < LOTTO_PRICE.intValue();
+		return LOTTO_PRICE.money.compareTo(new BigDecimal(input)) > 0;
 	}
 
 	public static Money from(BigDecimal input) {
@@ -62,18 +62,30 @@ public class Money {
 	}
 
 	public int calculateLottoAmount() {
-		return money.divide(LOTTO_PRICE).intValue();
+		return money.divide(LOTTO_PRICE.money).intValue();
 	}
 
 	public int getMoney() {
 		return money.intValue();
 	}
 
-	public float calculateYield(BigDecimal sum) {
-		return sum.divide(money, MATH_ROUND_VALUE, RoundingMode.HALF_EVEN).floatValue();
+	public BigDecimal calculateYield(Money sum) {
+		return sum.money.divide(money, MATH_ROUND_VALUE, RoundingMode.HALF_EVEN);
 	}
 
 	public boolean validSizeUnderAmount(int inputSize) {
 		return calculateLottoAmount() < inputSize;
+	}
+
+	public Money calculatePurchaseMoney(BigDecimal size) {
+		return Money.from(LOTTO_PRICE.money.multiply(size));
+	}
+
+	public Money sumMoney(Money inputMoney) {
+		return Money.from(money.add(inputMoney.money));
+	}
+
+	public Money calculateRankMoney(BigDecimal size) {
+		return Money.from(money.multiply(size));
 	}
 }

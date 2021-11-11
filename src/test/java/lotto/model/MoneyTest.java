@@ -74,12 +74,12 @@ class MoneyTest {
 	void 구입금액에_비례하여_수익률을_계산하는_기능테스트() {
 		// given
 		Money money = Money.from(10000);
-		BigDecimal sum = new BigDecimal(5000);
+		Money sum = Money.from(5000);
 
 		// when
-		float yield = money.calculateYield(sum);
+		BigDecimal yield = money.calculateYield(sum);
 
 		// then
-		assertThat(yield).isEqualTo(0.5f);
+		assertThat(yield.compareTo(new BigDecimal("0.5"))).isZero();
 	}
 }
