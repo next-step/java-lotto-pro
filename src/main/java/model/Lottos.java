@@ -25,9 +25,7 @@ public class Lottos {
 	}
 
 	private void addResultCountWhenRankIsNotNone(Rank lottoRank, RewardCalculator rewardCalculator) {
-		if (lottoRank != Rank.NONE) {
-			rewardCalculator.addCount(lottoRank);
-		}
+		rewardCalculator.addCount(lottoRank);
 	}
 
 	@Override

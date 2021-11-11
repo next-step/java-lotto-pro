@@ -50,7 +50,7 @@ public class RewardCalculatorTest {
 			Arguments.of(Rank.THIRD, 1),
 			Arguments.of(Rank.FOURTH, 1),
 			Arguments.of(Rank.FIFTH, 1),
-			Arguments.of(Rank.NONE, 0)
+			Arguments.of(Rank.NONE, 1)
 		);
 	}
 
