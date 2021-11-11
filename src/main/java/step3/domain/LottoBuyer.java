@@ -24,7 +24,7 @@ public class LottoBuyer {
     }
 
     public void buyManualLotto(LottoNumbersBundle lottoNumbersBundle) {
-        amount.minusAmountFrom(lottoNumbersBundle);
+        amount.minusAmountFrom(lottoNumbersBundle.size());
         lottoSave(lottoNumbersBundle);
     }
 

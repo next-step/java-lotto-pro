@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import step3.domain.constance.LottoConstant;
-
 public class LottoNumbersBundle {
     private final List<LottoNumbers> lottoNumbersBundle;
 
@@ -19,10 +17,6 @@ public class LottoNumbersBundle {
 
     public void merge(LottoNumbersBundle buyLottoNumbersBundle) {
         this.lottoNumbersBundle.addAll(buyLottoNumbersBundle.getLottoNumbersBundle());
-    }
-
-    public int getTotalPrise() {
-        return LottoConstant.LOTTO_MINIMUM_PRICE * lottoNumbersBundle.size();
     }
 
     public List<String> numbersForResults() {
