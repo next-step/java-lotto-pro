@@ -42,9 +42,9 @@ public class LottoNumbersFactory {
             .collect(Collectors.toList());
     }
 
-    public static LottoNumbersBundle createLottoNumbersBundle(int qty) {
+    public static LottoNumbersBundle createLottoNumbersBundle(int quantity) {
         List<LottoNumbers> autoBundle = new ArrayList<>();
-        for (int i = 0; i < qty; i++) {
+        for (int i = 0; i < quantity; i++) {
             autoBundle.add(LottoNumbersFactory.createAutoLottoNumbers());
         }
         return LottoNumbersBundle.of(autoBundle);
