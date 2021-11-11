@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
@@ -52,8 +53,8 @@ public enum LottoRank {
 		return rankCodeMap;
 	}
 
-	public static int getRankMoney(LottoRank lottoRank, int count) {
-		return lottoRank.money.getMoney() * count;
+	public static Money getRankMoney(LottoRank lottoRank, int count) {
+		return lottoRank.money.calculateRankMoney(new BigDecimal(count));
 	}
 
 	public static int getMoney(LottoRank lottoRank) {

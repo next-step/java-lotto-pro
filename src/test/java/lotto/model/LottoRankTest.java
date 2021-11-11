@@ -34,9 +34,9 @@ class LottoRankTest {
 	}, delimiter = ':')
 	void 랭크갯수에따라_당첨금액을_반환하는_기능테스트(String rank, int count, int sumMoney) {
 		// given // when
-		int sum = LottoRank.getRankMoney(LottoRank.valueOf(rank), count);
+		Money sum = LottoRank.getRankMoney(LottoRank.valueOf(rank), count);
 
 		// then
-		assertThat(sum).isEqualTo(sumMoney);
+		assertThat(sum.getMoney()).isEqualTo(sumMoney);
 	}
 }
