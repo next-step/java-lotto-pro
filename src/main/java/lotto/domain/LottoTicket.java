@@ -4,6 +4,7 @@ import lotto.dto.LottoTicketDTO;
 import lotto.exception.IllegalLottoNumberSizeException;
 import lotto.exception.NumberDuplicationException;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,7 @@ public class LottoTicket {
     public LottoTicket(List<Integer> lottoNumbers) {
         checkLottoNumberSize(lottoNumbers);
         checkNumberDuplication(lottoNumbers);
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = getLottoNumbers(lottoNumbers);
     }
 

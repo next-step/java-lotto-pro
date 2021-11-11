@@ -52,4 +52,13 @@ class LottoTicketTest {
 
         assertThat(lottoTicket.getPrize(winningLottoNumbers)).isEqualTo(Prize.THIRD);
     }
+
+    @Test
+    @DisplayName("숫자를 오름차순으로 정렬한다")
+    void sortTest() {
+        LottoTicket lottoTicket1 = new LottoTicket(Arrays.asList(7, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket2 = new LottoTicket(Arrays.asList(2, 3, 4, 5, 6, 7));
+
+        assertThat(lottoTicket1.toDTO().toString()).isEqualTo(lottoTicket2.toDTO().toString());
+    }
 }
