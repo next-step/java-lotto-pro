@@ -69,6 +69,23 @@ class WinningTest {
         }).isInstanceOf(BonusNumberDuplicateException.class);
     }
 
+    @DisplayName("로또 번호와 당첨 번호 일치 개수")
+    @Test
+    void winningNumberMatchTest() {
+        //given
+        Lotto lotto = Stream.of(1,2,3,4,5,6)
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+        Lotto winningNumbers = Stream.of(1,40,41,42,43,44)
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+
+        //when
+        int winningNumberMatch = lotto.winningNumberMatch(winningNumbers);
+
+        //then
+        assertThat(winningNumberMatch).isEqualTo(1);
+    }
     static Stream<Arguments> profitRateParametersProvider() {
         return Stream.of(
                 arguments(1000, Rank.FOURTH_PLACE, 1, 5),
