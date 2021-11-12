@@ -23,7 +23,7 @@ public class Games {
     }
 
     private List<Game> addAutoGames(final int gameCount) {
-        return IntStream.rangeClosed(0, gameCount)
+        return IntStream.rangeClosed(0, gameCount - 1)
                 .boxed()
                 .map(index -> new Game())
                 .collect(Collectors.toList());
