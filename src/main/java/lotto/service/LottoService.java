@@ -14,7 +14,7 @@ public class LottoService {
     private static final int MINIMUM_AUTO_LOTTO_COUNT = 0;
 
     public static void play() {
-        int boughtMoney = BoughtMoneyService.getBoughtMoney(InputView.inputBoughtMoney());
+        int boughtMoney = new BoughtMoney(InputView.inputBoughtMoney()).getBoughtMoney();
         int manualLottoCount = InputView.inputManualLottoCount();;
         int autoLottoCount = LottoServiceCalculator.getLottoCount(boughtMoney) - manualLottoCount;
         validateManualLottoCount(autoLottoCount);
