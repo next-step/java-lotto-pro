@@ -7,7 +7,6 @@ import lotto.view.strategy.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -55,41 +54,18 @@ public class InputView {
      * @return
      */
     public static ManualNumbers inputManualNumbers(int manualGameCount) {
-        final int firstIndex = 0;
-        List<LottoNumbers> list = IntStream.range(firstIndex, manualGameCount)
-                .boxed()
-                .map(operand -> inputManualGameNumbers(operand <= firstIndex))
-                .collect(Collectors.toList());
+        InputMultiLine input = new InputManualGameNumbers();
 
-        return new ManualNumbers(list);
-    }
-
-    /**
-     * 로또 수동번호를 입력합니다.
-     *
-     * @param printTitleMessage
-     * @return
-     */
-    private static LottoNumbers inputManualGameNumbers(boolean printTitleMessage) {
         try {
-            Input input = new InputManualGameNumbers();
-            String value = input.getValue(printTitleMessage);
-            return new LottoNumbers(value);
+            List<String> values = input.getMultiValues(manualGameCount);
+            List<LottoNumbers> list = values.stream()
+                    .map(LottoNumbers::new)
+                    .collect(Collectors.toList());
+            return new ManualNumbers(list);
         } catch (InvalidInputException | NumberFormatException e) {
             System.out.println(e.getMessage());
-            return inputManualGameNumbers(false);
+            return inputManualNumbers(manualGameCount);
         }
-    }
-
-    /**
-     * 입력된 로또 당첨번호를 반환합니다.
-     *
-     * @return
-     */
-    public static WinnerNumbers inputWinningNumbers() {
-        LottoNumbers firstPrizeNumbers = inputFirstPrizeNumbers();
-        BonusNumber bonusNumber = inputBonusNumber(firstPrizeNumbers);
-        return new WinnerNumbers(firstPrizeNumbers, bonusNumber);
     }
 
     /**
@@ -97,9 +73,9 @@ public class InputView {
      *
      * @return 로또 당첨번호
      */
-    private static LottoNumbers inputFirstPrizeNumbers() {
+    public static LottoNumbers inputFirstPrizeNumbers() {
         try {
-            Input input = new InputWinNumbers();
+            Input input = new InputFirstPrizeNumbers();
             String value = input.getValue();
             return new LottoNumbers(value);
         } catch (InvalidInputException | NumberFormatException e) {
@@ -114,7 +90,7 @@ public class InputView {
      * @param winningNumbers
      * @return
      */
-    private static BonusNumber inputBonusNumber(LottoNumbers winningNumbers) {
+    public static BonusNumber inputBonusNumber(LottoNumbers winningNumbers) {
         try {
             Input input = new InputBonusNumber();
             String value = input.getValue();
