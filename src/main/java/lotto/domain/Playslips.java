@@ -10,6 +10,9 @@ public class Playslips {
     private static final int MATCH_FIVE = 5;
     private static final int MATCH_SIX = 6;
 
+    private static final int NUMBER_NOT_CONTAINED = 0;
+    private static final int NUMBER_CONTAINED = 1;
+
     private final List<Playslip> playslips;
 
     public Playslips(List<Playslip> playslips) {
@@ -42,7 +45,7 @@ public class Playslips {
 
     private int contains(PickedNumbers winningNumbers, int x, int i) {
         final Playslip ithPlayslip = playslips.get(i);
-        return ithPlayslip.contains(winningNumbers, x) ? 1 : 0;
+        return ithPlayslip.contains(winningNumbers, x) ? NUMBER_CONTAINED : NUMBER_NOT_CONTAINED;
     }
 
     @Override

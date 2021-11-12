@@ -9,6 +9,9 @@ public class PickedNumbers {
 
     public static final int SIZE = 6;
 
+    private static final int NUMBER_NOT_CONTAINED = 0;
+    private static final int NUMBER_CONTAINED = 1;
+
     private final List<Number> pickedNumbers;
 
     public PickedNumbers(List<Number> pickedNumbers) {
@@ -52,6 +55,6 @@ public class PickedNumbers {
     }
 
     private int contains(Number pickedNumber) {
-        return pickedNumbers.contains(pickedNumber) ? 1 : 0;
+        return pickedNumbers.contains(pickedNumber) ? NUMBER_CONTAINED : NUMBER_NOT_CONTAINED;
     }
 }

@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 public class LottoNumbers {
 
-    private final static List<Number> lottoNumbers = createLottoNumbersCache();
+    private final static List<Number> LOTTO_NUMBERS = createLottoNumbersCache();
     private final static int SUBLIST_FROM_INDEX = 0;
     private final static int SUBLIST_TO_INDEX = PickedNumbers.SIZE;
 
@@ -19,8 +19,8 @@ public class LottoNumbers {
     }
 
     public static PickedNumbers pickRandom() {
-        Collections.shuffle(lottoNumbers);
-        final List<Number> randoms = lottoNumbers.subList(SUBLIST_FROM_INDEX, SUBLIST_TO_INDEX);
+        Collections.shuffle(LOTTO_NUMBERS);
+        final List<Number> randoms = LOTTO_NUMBERS.subList(SUBLIST_FROM_INDEX, SUBLIST_TO_INDEX);
         Collections.sort(randoms);
         return new PickedNumbers(randoms);
     }
