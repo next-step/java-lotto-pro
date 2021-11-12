@@ -44,7 +44,8 @@ public class LottoMatcherTest {
         Number bonusNumber = Number.of(7);
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        MatchResult matchResult = new LottoMatcher(bonusNumber, winningLotto).match(new Payment(14000), lottos);
+        MatchResult matchResult =
+            new LottoMatcher(bonusNumber, winningLotto).match(new Payment(14000), new Lottos(lottos));
 
         assertThat(matchResult).isEqualTo(
             new MatchResult(new Payment(14000), Rank.FIFTH, Rank.THIRD, Rank.FIRST, Rank.SECOND, Rank.MISS));
@@ -64,7 +65,7 @@ public class LottoMatcherTest {
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
         assertThatNullPointerException().isThrownBy(() ->
-            new LottoMatcher(bonusNumber, winningLotto).match(null, lottos)
+            new LottoMatcher(bonusNumber, winningLotto).match(null, new Lottos(lottos))
         );
         assertThatNullPointerException().isThrownBy(() ->
             new LottoMatcher(bonusNumber, winningLotto).match(new Payment(14000), null)

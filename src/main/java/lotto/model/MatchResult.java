@@ -1,8 +1,8 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -22,7 +22,7 @@ public class MatchResult {
         this(payment, Arrays.asList(ranks));
     }
 
-    public MatchResult(Payment payment, List<Rank> ranks) {
+    public MatchResult(Payment payment, Collection<Rank> ranks) {
         Objects.requireNonNull(payment);
         Objects.requireNonNull(ranks);
 

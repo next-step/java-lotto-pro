@@ -1,14 +1,12 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.function.Supplier;
 
 import lotto.model.Lotto;
 import lotto.model.LottoCount;
 import lotto.model.LottoGenerator;
 import lotto.model.LottoMatcher;
+import lotto.model.Lottos;
 import lotto.model.MatchResult;
 import lotto.model.Number;
 import lotto.model.Payment;
@@ -27,8 +25,8 @@ public class LottoGame {
             int manualCount = InputView.readManualLottoCount();
             return payment.computeLottoCount(manualCount);
         });
-        Collection<Lotto> lottos = handleException(() -> InputView.readManualLottos(lottoCount.getManualCount()));
-        Collection<Lotto> generatedLottos = LottoGenerator.generate(lottoCount.getAutoCount());
+        Lottos lottos = handleException(() -> InputView.readManualLottos(lottoCount.getManualCount()));
+        Lottos generatedLottos = LottoGenerator.generate(lottoCount.getAutoCount());
         lottos.addAll(generatedLottos);
         OutputView.printLottoPurchase(lottos, lottoCount);
         Lotto winningLotto = handleException(InputView::readWinningLotto);

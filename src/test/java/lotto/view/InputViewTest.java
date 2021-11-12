@@ -41,7 +41,7 @@ public class InputViewTest {
 
     @Test
     void readManualLottosByZeroCount() {
-        assertThat(InputView.readManualLottos(0)).isEmpty();
+        assertThat(InputView.readManualLottos(0).isEmpty()).isTrue();
     }
 
     @ParameterizedTest

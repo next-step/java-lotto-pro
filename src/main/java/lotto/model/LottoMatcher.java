@@ -1,8 +1,6 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 import lotto.model.enums.Rank;
@@ -30,15 +28,11 @@ public class LottoMatcher {
         }
     }
 
-    public MatchResult match(Payment payment, Collection<Lotto> lottos) {
+    public MatchResult match(Payment payment, Lottos lottos) {
         Objects.requireNonNull(payment);
         Objects.requireNonNull(lottos);
 
-        List<Rank> ranks = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            Rank rank = lotto.computeRank(bonusNumber, winningLotto);
-            ranks.add(rank);
-        }
+        Collection<Rank> ranks = lottos.computeRanks(bonusNumber, winningLotto);
         return new MatchResult(payment, ranks);
     }
 }

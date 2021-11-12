@@ -1,11 +1,10 @@
 package lotto.view;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.Number;
 import lotto.model.Payment;
 import lotto.util.Console;
@@ -33,9 +32,9 @@ public class InputView {
         return InputParser.toInteger(manualLottoCount);
     }
 
-    public static Collection<Lotto> readManualLottos(int manualCount) {
+    public static Lottos readManualLottos(int manualCount) {
         if (manualCount == 0) {
-            return Collections.emptyList();
+            return Lottos.empty();
         }
         System.out.println(QUERY_FOR_MANUAL_LOTTOS);
         List<Lotto> manualLottos = new ArrayList<>();
@@ -44,7 +43,7 @@ public class InputView {
             Lotto lotto = InputParser.toLotto(lottoNumbers);
             manualLottos.add(lotto);
         }
-        return manualLottos;
+        return new Lottos(manualLottos);
     }
 
     public static Lotto readWinningLotto() {

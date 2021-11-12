@@ -1,22 +1,19 @@
 package lotto.view;
 
-import java.util.Collection;
 import java.util.StringJoiner;
 
-import lotto.model.Lotto;
 import lotto.model.LottoCount;
+import lotto.model.Lottos;
 import lotto.model.MatchResult;
 
 public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoPurchase(Collection<Lotto> lottos, LottoCount lottoCount) {
+    public static void printLottoPurchase(Lottos lottos, LottoCount lottoCount) {
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
         stringJoiner.add(lottoCount.computeNumberOfLottoStatement());
-        for (Lotto lotto : lottos) {
-            stringJoiner.add(lotto.toString());
-        }
+        stringJoiner.add(lottos.toString());
         System.out.println(stringJoiner);
         System.out.println();
     }
