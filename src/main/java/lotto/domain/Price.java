@@ -12,9 +12,23 @@ public class Price {
         this.price = price;
     }
 
+    public Price(final String price) {
+        this(parseLong(price));
+    }
+
     public Price(final int unitNumber) {
         validateUnitNumber(unitNumber);
         this.price = (long) UNIT_PRICE * unitNumber;
+    }
+
+    private static long parseLong(final String price) {
+        long value;
+        try {
+            value = Long.parseLong(price);
+        } catch (NumberFormatException nfe) {
+            throw new IllegalArgumentException("로또 구입금액을 올바르게 입력해주세요.");
+        }
+        return value;
     }
 
     private void validateUnit(final long price) {
@@ -45,8 +59,7 @@ public class Price {
         return new Price(this.price + o.price);
     }
 
-    @Override
-    public String toString() {
+    public String asString() {
         return Long.valueOf(price).toString();
     }
 }

@@ -51,8 +51,7 @@ public class PickedNumbers {
         return numberOfMatchingNumbers == x;
     }
 
-    @Override
-    public String toString() {
+    public String asString() {
         return pickedNumbers
             .stream()
             .map(Number::getValue)

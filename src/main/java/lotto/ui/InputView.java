@@ -13,9 +13,9 @@ public class InputView {
     }
 
     public static Playslips purchaseLotto(final String purchaseAmount) {
-        final Playslips playslips = Retailer.buy(new Price(Long.parseLong(purchaseAmount)));
+        final Playslips playslips = Retailer.buy(new Price(purchaseAmount));
         System.out.println(playslips.size() + "개를 구매했습니다.");
-        System.out.println(playslips);
+        System.out.println(playslips.asString());
         return playslips;
     }
 

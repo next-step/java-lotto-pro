@@ -12,8 +12,7 @@ public class Playslip {
         return pickedNumbers.contains(winningNumbers, x);
     }
 
-    @Override
-    public String toString() {
-        return pickedNumbers.toString();
+    public String asString() {
+        return pickedNumbers.asString();
     }
 }

@@ -48,11 +48,10 @@ public class Playslips {
         return ithPlayslip.contains(winningNumbers, x) ? NUMBER_CONTAINED : NUMBER_NOT_CONTAINED;
     }
 
-    @Override
-    public String toString() {
+    public String asString() {
         StringBuilder sb = new StringBuilder();
         for (Playslip p : playslips) {
-            sb.append(p.toString());
+            sb.append(p.asString());
             sb.append("\n");
         }
         return sb.toString();
