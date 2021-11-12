@@ -9,7 +9,6 @@ import lotto.exception.LottoException;
 
 public class LottoMoney {
     private static final int LOTTO_PRICE = 1000;
-    private static final String WON = "원";
     private static final int ZERO_SIZE = 0;
     private static final int MIN_MONEY = 0;
 
@@ -44,6 +43,10 @@ public class LottoMoney {
         return number < MIN_MONEY;
     }
 
+    public long getMoney() {
+        return money;
+    }
+
     public static EarningRate calculateEarningRate(List<LottoMoney> lottoMonies) {
         if (lottoMonies.size() == ZERO_SIZE) {
             return EarningRate.ZERO;
@@ -75,9 +78,5 @@ public class LottoMoney {
     @Override
     public int hashCode() {
         return Objects.hash(money);
-    }
-
-    public String makePrintableMessage() {
-        return money + WON;
     }
 }

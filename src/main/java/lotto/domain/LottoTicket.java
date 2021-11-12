@@ -11,9 +11,6 @@ import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
 
 public class LottoTicket {
-    private static final String LOTTO_TICKET_MESSAGE_FORMAT = "[%s]";
-    private static final String COMMA_SPACE = ", ";
-
     private static final String COMMA = ",";
     private static final String ALL_SPACES_PATTERN = "\\s";
     private static final String EMPTY = "";
@@ -69,6 +66,10 @@ public class LottoTicket {
         }
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     public LottoResult calculateResult(LottoTicket winnerTicket) {
         int correctCount = (int)this.lottoNumbers.stream()
             .filter(number -> winnerTicket.lottoNumbers.contains(number))
@@ -92,10 +93,5 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    public String makePrintableMessage() {
-        return String.format(LOTTO_TICKET_MESSAGE_FORMAT,
-            lottoNumbers.stream().map(LottoNumber::makePrintableMessage).collect(Collectors.joining(COMMA_SPACE)));
     }
 }

@@ -13,10 +13,4 @@ public class EarningRateTest {
     void constructEarningRate() {
         assertThat(new EarningRate(BigDecimal.valueOf(0.5))).isEqualTo(new EarningRate(BigDecimal.valueOf(0.5)));
     }
-
-    @DisplayName("수익률 메시지 테스트")
-    @Test
-    void makePrintableMessage() {
-        assertThat(new EarningRate(BigDecimal.valueOf(0.5)).makePrintableMessage()).isEqualTo("0.50");
-    }
 }

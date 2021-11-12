@@ -20,6 +20,10 @@ public class LottoCount {
         }
     }
 
+    public long getCount() {
+        return count;
+    }
+
     public boolean isBiggerThan(long count) {
         return count < this.count;
     }
@@ -39,9 +43,5 @@ public class LottoCount {
     @Override
     public int hashCode() {
         return Objects.hash(count);
-    }
-
-    public String makePrintableMessage() {
-        return String.valueOf(count);
     }
 }

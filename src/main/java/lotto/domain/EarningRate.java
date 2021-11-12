@@ -31,7 +31,7 @@ public class EarningRate {
         return Objects.hash(rate);
     }
 
-    public String makePrintableMessage() {
-        return String.valueOf(rate);
+    public BigDecimal getRate() {
+        return rate;
     }
 }

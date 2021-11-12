@@ -34,12 +34,4 @@ class LottoTicketsTest {
         assertThat(lottoTickets.calculateResult(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6))))
             .isEqualTo(new LottoResults(Arrays.asList(LottoResult.SIX, LottoResult.NONE)));
     }
-
-    @DisplayName("로또 티켓 묶음 메시지 생성")
-    @Test
-    void makeMessage() {
-        assertThat(new LottoTickets(Arrays.asList(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)))).makePrintableMessage())
-            .isEqualTo("[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 6]");
-    }
 }

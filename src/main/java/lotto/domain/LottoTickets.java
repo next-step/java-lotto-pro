@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 public class LottoTickets {
     private List<LottoTicket> lottoTicketList;
 
-    private static final String NEW_LINE = "\n";
-
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTicketList = lottoTickets;
     }
@@ -17,6 +15,10 @@ public class LottoTickets {
         return new LottoResults(lottoTicketList.stream()
             .map(lottoTicket -> lottoTicket.calculateResult(winnerTicket))
             .collect(Collectors.toList()));
+    }
+
+    public List<LottoTicket> getLottoTicketList() {
+        return lottoTicketList;
     }
 
     @Override
@@ -34,9 +36,5 @@ public class LottoTickets {
     @Override
     public int hashCode() {
         return Objects.hash(lottoTicketList);
-    }
-
-    public String makePrintableMessage() {
-        return lottoTicketList.stream().map(LottoTicket::makePrintableMessage).collect(Collectors.joining(NEW_LINE));
     }
 }

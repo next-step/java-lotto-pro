@@ -16,9 +16,4 @@ class LottoResultTest {
         assertThat(LottoResult.findResult(cnt)).isEqualTo(LottoResult.valueOf(resultName));
     }
 
-    @DisplayName("로또 결과 출력")
-    @Test
-    void makePrintableMessage() {
-        assertThat(LottoResult.THREE.makePrintableMessage()).isEqualTo("3개 일치 (5000원)");
-    }
 }

@@ -12,8 +12,6 @@ public enum LottoResult {
     SIX(6, new LottoMoney(2000000000)),
     NONE(0, new LottoMoney(0));
 
-    private static final String LOTTO_RESULT_MESSAGE_FORMAT = "%d개 일치 (%s)";
-
     private final int correctCount;
     private final LottoMoney lottoMoney;
 
@@ -35,7 +33,7 @@ public enum LottoResult {
         return lottoMoney;
     }
 
-    public String makePrintableMessage() {
-        return String.format(LOTTO_RESULT_MESSAGE_FORMAT, correctCount, lottoMoney.makePrintableMessage());
+    public int getCorrectCount() {
+        return correctCount;
     }
 }

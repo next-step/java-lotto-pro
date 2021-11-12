@@ -25,16 +25,4 @@ public class LottoResultsTest {
         assertThat(lottoResults.calculateEarningRate()).isEqualTo(new EarningRate(BigDecimal.valueOf(2.5)));
     }
 
-    @DisplayName("로또 결과물 메시지 생성")
-    @Test
-    void makePrintableMessage() {
-        LottoResults lottoResults = new LottoResults(
-            Arrays.asList(LottoResult.THREE, LottoResult.NONE, LottoResult.FIVE));
-        assertThat(lottoResults.makePrintableMessage()).isEqualTo(
-            "3개 일치 (5000원)- 1개\n"
-                + "4개 일치 (50000원)- 0개\n"
-                + "5개 일치 (1500000원)- 1개\n"
-                + "6개 일치 (2000000000원)- 0개"
-        );
-    }
 }
