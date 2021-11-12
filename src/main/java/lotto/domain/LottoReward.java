@@ -1,11 +1,15 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoReward {
 
-    FIRST_PLACE(6, 2000000000),
-    SECOND_PLACE(5, 1500000),
-    THIRD_PLACE(4, 50000),
-    FOURTH_PLACE(3, 5000);
+    FIRST_PLACE(6, 2_000_000_000),
+    SECOND_PLACE(5, 30_000_000),
+    THIRD_PLACE(5, 1_500_000),
+    FOURTH_PLACE(4, 50_000),
+    FIFTH_PLACE(3, 5_000),
+    MISS(0, 0);
 
     private final int matchCount;
     private final int rewardMoney;
@@ -15,29 +19,36 @@ public enum LottoReward {
         this.rewardMoney = rewardMoney;
     }
 
+    public static LottoReward findLottoReward(int matchCount, boolean matchBonus) {
+        if (isSameMathCount(matchCount, SECOND_PLACE.matchCount)) {
+            return distinguishSecondOrThird(matchBonus);
+        }
+        return findLottoReward(matchCount);
+    }
+
+    private static LottoReward findLottoReward(int matchCount) {
+        return Arrays.stream(LottoReward.values())
+                .filter(l -> isSameMathCount(l.matchCount, matchCount))
+                .findAny()
+                .orElse(MISS);
+    }
+
+    private static boolean isSameMathCount(int matchCount, int secondMatchCount) {
+        return matchCount == secondMatchCount;
+    }
+
+    private static LottoReward distinguishSecondOrThird(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND_PLACE;
+        }
+        return THIRD_PLACE;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
 
     public int getRewardMoney() {
         return rewardMoney;
-    }
-
-    public static boolean isWinning(int matchCount) {
-        for (LottoReward lottoReward : LottoReward.values()) {
-            if (lottoReward.matchCount == matchCount) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static LottoReward getLottoReward(int matchCount) {
-        for (LottoReward lottoReward : LottoReward.values()) {
-            if (lottoReward.matchCount == matchCount) {
-                return lottoReward;
-            }
-        }
-        return null;
     }
 }

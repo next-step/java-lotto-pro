@@ -17,6 +17,14 @@ public class WinningNumbers {
         this.numbers = numbers;
     }
 
+    public Map<LottoTicket, Integer> checkWinningCount(LottoTickets lottoTickets) {
+        Map<LottoTicket, Integer> winningCountCache = new HashMap<>();
+        for (Number number : numbers) {
+            lottoTickets.checkContainsNumber(number, winningCountCache);
+        }
+        return winningCountCache;
+    }
+
     private void validateDuplicatedNumber(List<Number> numbers) {
         Set<Number> numberSet = new HashSet<>();
         for (Number number : numbers) {
@@ -37,13 +45,5 @@ public class WinningNumbers {
             numbers.add(new Number(number));
         }
         return numbers;
-    }
-
-    public Map<LottoTicket, Integer> getWinningCountMap(LottoTickets lottoTickets) {
-        Map<LottoTicket, Integer> winningCountCache = new HashMap<>();
-        for (Number number : numbers) {
-            lottoTickets.checkContainsNumber(number, winningCountCache);
-        }
-        return winningCountCache;
     }
 }

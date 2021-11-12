@@ -14,6 +14,30 @@ public class LottoTickets {
         this.lottoTickets = convertArrayToLottoTickets(numberArray);
     }
 
+    public void checkContainsNumber(Number number, Map<LottoTicket, Integer> winningCountCache) {
+        for (LottoTicket lottoTicket : lottoTickets) {
+            isContainsNumberAndCaching(number, winningCountCache, lottoTicket);
+        }
+    }
+
+    public int calculatePurchaseMoney() {
+        return this.lottoTickets.size() * LottoShop.LOTTO_TICKET_PER_PRICE;
+    }
+
+    public Map<LottoTicket, Boolean> checkContainsBonusNumber(Number bonusNumber) {
+        Map<LottoTicket, Boolean> containsBonusNumbers = new HashMap<>();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            containsBonusNumbers.put(lottoTicket, lottoTicket.isContainNumber(bonusNumber));
+        }
+        return containsBonusNumbers;
+    }
+
+    private void isContainsNumberAndCaching(Number number, Map<LottoTicket, Integer> winningCountCache, LottoTicket lottoTicket) {
+        if (lottoTicket.isContainNumber(number)) {
+            winningCountCache.put(lottoTicket, winningCountCache.getOrDefault(lottoTicket, 0) + 1);
+        }
+    }
+
     private List<LottoTicket> convertArrayToLottoTickets(int[][] numberArray) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int[] numbers : numberArray) {
@@ -32,27 +56,6 @@ public class LottoTickets {
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
-    }
-
-    public void checkContainsNumber(Number number, Map<LottoTicket, Integer> winningCountCache) {
-        for (LottoTicket lottoTicket : lottoTickets) {
-            if (lottoTicket.isContainNumber(number)) {
-                winningCountCache.put(lottoTicket, winningCountCache.getOrDefault(lottoTicket, 0) + 1);
-            }
-        }
-    }
-
-    public int getPurchaseMoney() {
-        return this.lottoTickets.size() * LottoShop.LOTTO_TICKET_PER_PRICE;
-    }
-
-    public String getLottoTicketsString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            stringBuilder.append(lottoTicket.getLottoTicketString());
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
     }
 
     @Override

@@ -6,41 +6,30 @@ import java.util.Map;
 public class LottoStatistics {
 
     private final WinningNumbers winningNumbers;
+    private final Number bonusNumber;
 
-    public LottoStatistics(WinningNumbers winningNumbers) {
+    public LottoStatistics(WinningNumbers winningNumbers, Number bonusNumber) {
         this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public LottoRewardResult getStatistics(LottoTickets lottoTickets) {
-        Map<LottoTicket, Integer> winningCountMap = winningNumbers.getWinningCountMap(lottoTickets);
-        Map<Integer, Integer> winningCountStatisticsMap = createWinningCountStatisticsMap(winningCountMap);
-        return new LottoRewardResult(createLottoRewardStatisticsMap(winningCountStatisticsMap));
+    public LottoRewardResult collectLottoRewardResult(LottoTickets lottoTickets) {
+        Map<LottoTicket, Integer> winningCountResult = winningNumbers.checkWinningCount(lottoTickets);
+        Map<LottoTicket, Boolean> containsBonusNumberResult = lottoTickets.checkContainsBonusNumber(bonusNumber);
+        Map<LottoReward, Integer> lottoReward = collectLottoRewardCount(winningCountResult, containsBonusNumberResult);
+        return new LottoRewardResult(lottoReward);
     }
 
-    public double getRateOfProfit(LottoTickets lottoTickets, LottoRewardResult lottoRewardResult) {
-        return lottoRewardResult.getRateOfProfit(lottoTickets.getPurchaseMoney());
+    public double calculateRateOfProfit(LottoTickets lottoTickets, LottoRewardResult lottoRewardResult) {
+        return lottoRewardResult.calculateRateOfProfit(lottoTickets.calculatePurchaseMoney());
     }
 
-    private Map<LottoReward, Integer> createLottoRewardStatisticsMap(Map<Integer, Integer> winningCountStatisticsMap) {
-        Map<LottoReward, Integer> lottoRewardMap = new HashMap<>();
-        for (int winningCount : winningCountStatisticsMap.keySet()) {
-            checkWinningAndPutRewardMap(winningCountStatisticsMap, lottoRewardMap, winningCount);
+    private Map<LottoReward, Integer> collectLottoRewardCount(Map<LottoTicket, Integer> winningCountMap, Map<LottoTicket, Boolean> containsBonusNumberMap) {
+        Map<LottoReward, Integer> lottoRewards = new HashMap<>();
+        for (Map.Entry<LottoTicket, Integer> entry : winningCountMap.entrySet()) {
+            LottoReward lottoReward = LottoReward.findLottoReward(entry.getValue(), containsBonusNumberMap.get(entry.getKey()));
+            lottoRewards.put(lottoReward, lottoRewards.getOrDefault(lottoReward, 0) + 1);
         }
-        return lottoRewardMap;
-    }
-
-    private void checkWinningAndPutRewardMap(Map<Integer, Integer> winningCountStatisticsMap, Map<LottoReward, Integer> lottoRewardMap, int winningCount) {
-        if (LottoReward.isWinning(winningCount)) {
-            LottoReward lottoReward = LottoReward.getLottoReward(winningCount);
-            lottoRewardMap.put(lottoReward, winningCountStatisticsMap.get(winningCount));
-        }
-    }
-
-    private Map<Integer, Integer> createWinningCountStatisticsMap(Map<LottoTicket, Integer> winningCountMap) {
-        Map<Integer, Integer> countStatisticsMap = new HashMap<>();
-        for (int count : winningCountMap.values()) {
-            countStatisticsMap.put(count, countStatisticsMap.getOrDefault(count, 0) + 1);
-        }
-        return countStatisticsMap;
+        return lottoRewards;
     }
 }

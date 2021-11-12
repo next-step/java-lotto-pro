@@ -1,9 +1,11 @@
 package lotto.view;
 
 import lotto.domain.*;
+import lotto.domain.Number;
 
 public class ResultView {
 
+    public static final String EMPTY_MESSAGE = "";
     public static final String STATISTICS_MESSAGE = "당첨 통계";
     public static final String STATISTICS_HYPHEN = "---------";
     public static final String PROFIT_MESSAGE = "이익";
@@ -15,22 +17,36 @@ public class ResultView {
     }
 
     public void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getLottoTicketsString());
+        StringBuilder stringBuilder = new StringBuilder();
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+            stringBuilder.append(makeLottoTicketString(lottoTicket));
+            stringBuilder.append("\n");
+        }
+        System.out.println(stringBuilder);
     }
 
-    public void printLottoRewardResult(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
+    private String makeLottoTicketString(LottoTicket lottoTicket) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for (Number number : lottoTicket.getNumbers()) {
+            stringBuilder.append(number.getNumber());
+            stringBuilder.append(", ");
+        }
+        stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), "");
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
+    public void printLottoRewardResult(WinningNumbers winningNumbers, LottoTickets lottoTickets, Number bonusNumber) {
+        System.out.println(EMPTY_MESSAGE);
         System.out.println(STATISTICS_MESSAGE);
         System.out.println(STATISTICS_HYPHEN);
 
-        LottoStatistics lottoStatistics = new LottoStatistics(winningNumbers);
-        LottoRewardResult lottoRewardResult = lottoStatistics.getStatistics(lottoTickets);
+        LottoStatistics lottoStatistics = new LottoStatistics(winningNumbers, bonusNumber);
+        LottoRewardResult lottoRewardResult = lottoStatistics.collectLottoRewardResult(lottoTickets);
 
-        printLottoRewardStatistics(LottoReward.FOURTH_PLACE, lottoRewardResult);
-        printLottoRewardStatistics(LottoReward.THIRD_PLACE, lottoRewardResult);
-        printLottoRewardStatistics(LottoReward.SECOND_PLACE, lottoRewardResult);
-        printLottoRewardStatistics(LottoReward.FIRST_PLACE, lottoRewardResult);
-
-        printRateOfProfit(lottoStatistics.getRateOfProfit(lottoTickets, lottoRewardResult));
+        printLottoRewardStatistics(lottoRewardResult);
+        printRateOfProfit(lottoStatistics.calculateRateOfProfit(lottoTickets, lottoRewardResult));
     }
 
     private void printRateOfProfit(double rateOfProfit) {
@@ -48,7 +64,24 @@ public class ResultView {
         return ORIGIN_MESSAGE;
     }
 
-    private void printLottoRewardStatistics(LottoReward lottoReward, LottoRewardResult lottoRewardResult) {
-        System.out.println(lottoReward.getMatchCount() + "개 일치 (" + lottoReward.getRewardMoney() + "원)- " + lottoRewardResult.getWinningLottoTicketCount(lottoReward));
+    private void printLottoRewardStatistics(LottoRewardResult lottoRewardResult) {
+        for (int i = LottoReward.values().length - 1; i >= 0; i--) {
+            LottoReward lottoReward = LottoReward.values()[i];
+            printLottoRewardStatistics(lottoRewardResult, lottoReward);
+        }
+    }
+
+    private void printLottoRewardStatistics(LottoRewardResult lottoRewardResult, LottoReward lottoReward) {
+        if (lottoReward != LottoReward.MISS) {
+            printNotMissLottoRewardStatistics(lottoRewardResult, lottoReward);
+        }
+    }
+
+    private void printNotMissLottoRewardStatistics(LottoRewardResult lottoRewardResult, LottoReward lottoReward) {
+        if (lottoReward == LottoReward.SECOND_PLACE) {
+            System.out.println(lottoReward.getMatchCount() + "개 일치, 보너스 볼 일치 (" + lottoReward.getRewardMoney() + "원)- " + lottoRewardResult.findWinningLottoTicketCount(lottoReward));
+            return;
+        }
+        System.out.println(lottoReward.getMatchCount() + "개 일치 (" + lottoReward.getRewardMoney() + "원)- " + lottoRewardResult.findWinningLottoTicketCount(lottoReward));
     }
 }

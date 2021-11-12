@@ -11,11 +11,7 @@ public class LottoRewardResult {
         this.lottoRewardMap = lottoRewardMap;
     }
 
-    public Map<LottoReward, Integer> getLottoRewardMap() {
-        return lottoRewardMap;
-    }
-
-    public double getRateOfProfit(int purchaseMoney) {
+    public double calculateRateOfProfit(int purchaseMoney) {
         long profitMoney = 0;
         for (LottoReward lottoReward : lottoRewardMap.keySet()) {
             profitMoney += lottoReward.getRewardMoney() * lottoRewardMap.get(lottoReward);
@@ -23,7 +19,11 @@ public class LottoRewardResult {
         return (double) profitMoney / purchaseMoney;
     }
 
-    public int getWinningLottoTicketCount(LottoReward lottoReward) {
+    public int findWinningLottoTicketCount(LottoReward lottoReward) {
         return lottoRewardMap.getOrDefault(lottoReward, 0);
+    }
+
+    public Map<LottoReward, Integer> getLottoRewardMap() {
+        return lottoRewardMap;
     }
 }
