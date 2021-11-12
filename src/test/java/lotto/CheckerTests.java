@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.*;
+import lotto.view.InputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,9 +22,10 @@ public class CheckerTests {
         int purchaseAmount = 3000;
         GameCount gameCount = new GameCount(purchaseAmount);
         Games games = new Games(gameCount.getValue(), new ManualNumbers(new ArrayList<>()));
-        LottoNumbers winningNumbers = new LottoNumbers("1,2,3,4,5,6");
-        BonusNumber bonusNumber = new BonusNumber("10", winningNumbers);
-        Checker checker = new Checker(games, winningNumbers, bonusNumber);
+        LottoNumbers firstPrizeNumbers = new LottoNumbers("1,2,3,4,5,6");
+        BonusNumber bonusNumber = new BonusNumber("10", firstPrizeNumbers);
+        WinnerNumbers winningNumbers = new WinnerNumbers(firstPrizeNumbers, bonusNumber);
+        Checker checker = new Checker(games, winningNumbers);
 
         assertAll(
                 () -> assertThat(checker.getResults())

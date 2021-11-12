@@ -14,9 +14,8 @@ public class LottoApplication {
         ResultView.printPurchasedGameCount(gameCount.getValue(), manualGameCount.getValue());
         Games games = new Games(gameCount.getValue(), manualNumbers);
         ResultView.printPurchaseGames(games.getList());
-        LottoNumbers winningNumbers = InputView.inputWinningNumbers();
-        LottoNumber bonusNumber = InputView.inputBonusNumber(winningNumbers);
-        Checker checker = new Checker(games, winningNumbers, bonusNumber);
+        WinnerNumbers winningNumbers = InputView.inputWinningNumbers();
+        Checker checker = new Checker(games, winningNumbers);
         ResultView.printResult(checker.getResults());
         ResultView.printEarningRate(purchaseAmount);
     }

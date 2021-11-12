@@ -7,12 +7,12 @@ public class Checker {
 
     private LinkedHashMap<Rank, Integer> results;
 
-    public Checker(Games games, LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+    public Checker(Games games, WinnerNumbers winningNumbers) {
         init();
 
         for (Game game : games.getList()) {
-            int matchedCount = matchCount(game, winningNumbers);
-            boolean matchBonus = isMatchedBonusNumber(game, bonusNumber);
+            int matchedCount = matchCount(game, winningNumbers.getFirstPrizeNumbers());
+            boolean matchBonus = isMatchedBonusNumber(game, winningNumbers.getBonusNumber());
             Rank rank = Rank.valueOf(matchedCount, matchBonus);
             results.put(rank, results.get(rank) + 1);
         }

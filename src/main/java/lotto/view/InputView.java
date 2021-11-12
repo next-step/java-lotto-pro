@@ -82,18 +82,29 @@ public class InputView {
     }
 
     /**
-     * 로또 당첨번호를 입력합니다.
+     * 입력된 로또 당첨번호를 반환합니다.
+     *
+     * @return
+     */
+    public static WinnerNumbers inputWinningNumbers() {
+        LottoNumbers firstPrizeNumbers = inputFirstPrizeNumbers();
+        BonusNumber bonusNumber = inputBonusNumber(firstPrizeNumbers);
+        return new WinnerNumbers(firstPrizeNumbers, bonusNumber);
+    }
+
+    /**
+     * 로또 1등번호를 입력합니다.
      *
      * @return 로또 당첨번호
      */
-    public static LottoNumbers inputWinningNumbers() {
+    private static LottoNumbers inputFirstPrizeNumbers() {
         try {
             Input input = new InputWinNumbers();
             String value = input.getValue();
             return new LottoNumbers(value);
         } catch (InvalidInputException | NumberFormatException e) {
             System.out.println(e.getMessage());
-            return inputWinningNumbers();
+            return inputFirstPrizeNumbers();
         }
     }
 
@@ -103,7 +114,7 @@ public class InputView {
      * @param winningNumbers
      * @return
      */
-    public static LottoNumber inputBonusNumber(LottoNumbers winningNumbers) {
+    private static BonusNumber inputBonusNumber(LottoNumbers winningNumbers) {
         try {
             Input input = new InputBonusNumber();
             String value = input.getValue();
