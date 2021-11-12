@@ -1,5 +1,8 @@
 package lotto;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import lotto.console.Repeater;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoShop;
@@ -29,17 +32,18 @@ public class LottoApplication {
 		OutputView.newLine();
 
 		Repeater.init();
-		Lottos manualLotts = null;
-		while (Repeater.isContinue()) {
-			manualLotts = InputView.enterManualLottoNumbers(manualPurchaseAmount);
-			Repeater.set(manualPurchaseAmount);
-		}
+		InputView.enterManualLottoNumbersHeader();
+		Lottos manualLottos = IntStream.range(0, manualPurchaseAmount.getPurchaseQuantity(LottoShop.LOTTO_PRICE))
+			.mapToObj(ignore -> InputView.enterManualLottoNumbersBody())
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
 		OutputView.newLine();
 
+		Money autoPurchaseAmount = purchaseAmount.deduct(manualPurchaseAmount);
+		Lottos autoLottos = LottoShop.sell(autoPurchaseAmount);
+		Lottos lottos = manualLottos.addAll(autoLottos);
 
-		Lottos lottos = LottoShop.sell(purchaseAmount);
-
-		OutputView.printPurchaseQuantity(purchaseAmount.getPurchaseQuantity(LottoShop.LOTTO_PRICE));
+		OutputView.printPurchaseQuantity(manualPurchaseAmount.getPurchaseQuantity(LottoShop.LOTTO_PRICE)
+			, autoPurchaseAmount.getPurchaseQuantity(LottoShop.LOTTO_PRICE));
 		OutputView.printPurchasedLottoNumbers(lottos.getLottos());
 		OutputView.newLine();
 

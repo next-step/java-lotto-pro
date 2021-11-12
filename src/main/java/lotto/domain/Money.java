@@ -39,7 +39,7 @@ public class Money {
 	}
 
 	public Money getPurchaseAmount(int inputQuantity) {
-		return new Money(LottoShop.LOTTO_PRICE.money * inputQuantity);
+		return new Money(money * inputQuantity);
 	}
 
 	public boolean isGreater(Money purchaseAmount) {

@@ -9,7 +9,7 @@ import lotto.domain.LottoShop;
 import lotto.domain.Rank;
 
 public class OutputView {
-	private static final String PRINT_PURCHASE_QUANTITY = "%d개를 구매했습니다.\n";
+	private static final String PRINT_PURCHASE_QUANTITY = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 	private static final String PRINT_LOTTO_STATISTICS_HEADER = "당첨 통계 \n--------";
 	private static final String PRINT_WINNING_INFORMATION = "%d개 일치 (%d원)- %d개\n";
 	private static final String PRINT_WINNING_INFORMATION_SECOND = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
@@ -27,8 +27,8 @@ public class OutputView {
 		return message.equals("");
 	}
 
-	public static void printPurchaseQuantity(int purchaseQuantity) {
-		System.out.printf(PRINT_PURCHASE_QUANTITY, purchaseQuantity);
+	public static void printPurchaseQuantity(int manualQuantity, int autoQuantity) {
+		System.out.printf(PRINT_PURCHASE_QUANTITY, manualQuantity, autoQuantity);
 	}
 
 	public static void newLine() {

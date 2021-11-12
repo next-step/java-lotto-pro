@@ -1,5 +1,7 @@
 package lotto.console;
 
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 
 public class Repeater {
@@ -26,5 +28,9 @@ public class Repeater {
 
 	public static void set(int setValue) {
 		repeater = setValue == -1;
+	}
+
+	public static void set(Lotto manualLottoNumber) {
+		repeater = manualLottoNumber == null;
 	}
 }

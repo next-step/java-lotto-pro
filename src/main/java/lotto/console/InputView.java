@@ -139,10 +139,30 @@ public class InputView {
 		}
 	}
 
-	public static Lottos enterManualLottoNumbers(Money manualPurchaseAmount) {
+	public static Lotto enterManualLottoNumbersBody() {
+
+		Repeater.init();
+		Lotto manualLottoNumber = null;
+		while (Repeater.isContinue()) {
+			manualLottoNumber = validateStringManualLottoNumbersLength(scanner.nextLine());
+			Repeater.set(manualLottoNumber);
+		}
+		return manualLottoNumber;
+	}
+
+	private static Lotto validateStringManualLottoNumbersLength(String lottoNumbers) {
+		try {
+			String[] stringNumberArray = lottoNumbers.split(DELIMITER);
+			validateStringLottoNumbersLength(stringNumberArray);
+			validateStringArrayToInt(stringNumberArray);
+			return new Lotto(lottoNumbers);
+		} catch (IllegalArgumentException exception) {
+			OutputView.printMessage(exception.getMessage());
+			return null;
+		}
+	}
+
+	public static void enterManualLottoNumbersHeader() {
 		OutputView.printMessage(ENTER_MANUAL_LOTTO_NUMBER);
-		return IntStream.range(0, manualPurchaseAmount.getPurchaseQuantity(LottoShop.LOTTO_PRICE))
-			.mapToObj(ignore -> new Lotto(validateStringLottoNumbersLength(scanner.nextLine())))
-			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Lottos {
 	private final List<Lotto> lottos;
@@ -28,5 +29,12 @@ public class Lottos {
 			lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
 		}
 		return new LottoResult(lottoResult);
+	}
+
+	public Lottos addAll(Lottos autoLottos) {
+		List<Lotto> newLottos = new ArrayList<>();
+		newLottos.addAll(lottos);
+		newLottos.addAll(autoLottos.lottos);
+		return new Lottos(newLottos);
 	}
 }
