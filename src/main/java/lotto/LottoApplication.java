@@ -17,7 +17,7 @@ public class LottoApplication {
 
         LottoPapersGenerator lottoPapersGenerator = new LottoPapersGenerator(lottoMoney, lottoNumberGenerator);
 
-        LottoPapers manualLottoPapers = lottoPapersGenerator.getManualLottoPapers();
+        LottoPapers manualLottoPapers = lottoPapersGenerator.getManualLottoPapers(getManualLottoBuyCount(lottoMoney));
         LottoPapers lottoPapers = lottoPapersGenerator.getRandomLottoPapers();
 
         LottoApplication.printLottoBuyCount(lottoMoney);
@@ -60,6 +60,16 @@ public class LottoApplication {
         InputView.printBonusNumberInput();
         String bonusNumber = Client.getLineConsole();
         return new LottoNumber(bonusNumber);
+    }
+
+    private static int getManualLottoBuyCount(LottoMoney lottoMoney) {
+
+        InputView.printManualLottoBuyCountInput();
+        int manualLottoBuyCount = lottoMoney.parseManualLottoPaperCount(Client.getLineConsole());
+
+        InputView.printManualLottoNumberInput();
+
+        return manualLottoBuyCount;
     }
 
 }
