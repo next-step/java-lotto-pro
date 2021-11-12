@@ -6,24 +6,24 @@ import java.util.List;
 import java.util.Map;
 
 public class PurchaseLotteryTicket {
-    private List<LotteryTicket> purchaseLotteryTicket;
+    private List<LotteryNumbers> purchaseLotteryTicket;
 
     public PurchaseLotteryTicket() {
         purchaseLotteryTicket = new ArrayList<>();
     }
 
-    public void add(LotteryTicket lotteryTicket) {
-        this.purchaseLotteryTicket.add(lotteryTicket);
+    public void add(LotteryNumbers lotteryNumbers) {
+        this.purchaseLotteryTicket.add(lotteryNumbers);
     }
 
-    public LotteryTicket get(int i) {
+    public LotteryNumbers get(int i) {
         return purchaseLotteryTicket.get(i);
     }
 
     public LotteryResult countMatchInAllTicket(WinningNumber winningNumber) {
         Map<Rank, Integer> result = new HashMap<>();
-        for (LotteryTicket lotteryTicket : purchaseLotteryTicket) {
-            Rank rank = Rank.valueOf(lotteryTicket.countMatch(winningNumber), lotteryTicket.isMatchBonus(winningNumber));
+        for (LotteryNumbers lotteryNumbers : purchaseLotteryTicket) {
+            Rank rank = Rank.valueOf(winningNumber.countMatch(lotteryNumbers), winningNumber.isMatchBonus(lotteryNumbers));
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         }
         return LotteryResult.saveLotteryResult(result);
