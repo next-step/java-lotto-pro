@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.Game;
+import lotto.model.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ public class GameTests {
     @DisplayName("난수 생성 기능을 테스트합니다.")
     @Test
     public void 난수생성() {
-        List<Integer> list = game.getNumbers();
+        List<LottoNumber> list = game.getNumbers();
         assertAll(
                 () -> assertThat(list)
                         .isNotEmpty()
@@ -38,8 +39,8 @@ public class GameTests {
     public void 생성된_난수_유효성검사() {
         assertAll(
                 () -> {
-                    for (Integer number : game.getNumbers()) {
-                        assertThat(number)
+                    for (LottoNumber number : game.getNumbers()) {
+                        assertThat(number.getValue())
                                 .isInstanceOf(Integer.class)
                                 .isPositive()
                                 .isGreaterThanOrEqualTo(MIN_RANGE_VALUE)

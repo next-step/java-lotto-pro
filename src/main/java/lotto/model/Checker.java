@@ -29,7 +29,6 @@ public class Checker {
         return (int) game.getNumbers().stream()
                 .filter(number -> winningNumbers.getValues()
                         .stream()
-                        .map(winningNumber -> winningNumber.getValue())
                         .anyMatch(Predicate.isEqual(number)))
                 .count();
     }
@@ -37,7 +36,7 @@ public class Checker {
     private boolean isMatchedBonusNumber(Game game, LottoNumber bonusNumber) {
         return game.getNumbers()
                 .stream()
-                .anyMatch(number -> number == bonusNumber.getValue());
+                .anyMatch(bonusNumber::equals);
     }
 
     public LinkedHashMap<Rank, Integer> getResults() {

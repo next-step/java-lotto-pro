@@ -11,6 +11,11 @@ public class LottoNumber {
 
     private Integer value;
 
+    public LottoNumber(final int value) {
+        this.value = value;
+        validateWinningNumber();
+    }
+
     public LottoNumber(final String value) {
         this.value = Integer.parseInt(value);
         validateWinningNumber();

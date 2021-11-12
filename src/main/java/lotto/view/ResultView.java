@@ -2,10 +2,13 @@ package lotto.view;
 
 import lotto.model.Game;
 import lotto.model.Games;
+import lotto.model.LottoNumber;
 import lotto.model.Rank;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -36,7 +39,13 @@ public class ResultView {
      * @param gameList
      */
     public static void printPurchaseGames(List<Game> gameList) {
-        gameList.forEach(game -> System.out.println(game.getNumbers()));
+        gameList.forEach(game -> {
+            List<Integer> printNumbers = game.getNumbers()
+                    .stream()
+                    .map(LottoNumber::getValue)
+                    .collect(Collectors.toList());
+            System.out.println(printNumbers);
+        });
     }
 
     /**
