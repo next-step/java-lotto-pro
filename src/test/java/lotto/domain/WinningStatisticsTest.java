@@ -42,9 +42,10 @@ class WinningStatisticsTest {
         Map<Rank, Integer> rankMap = new HashMap<>();
         rankMap.put(rank, winningCount);
         WinningResult winningResult = new WinningResult(rankMap);
+        Money money = new Money(purchaseAmount);
 
         //when
-        double profitRateResult = winningResult.profitRate(new Money(purchaseAmount));
+        double profitRateResult = money.profitRate(winningResult);
 
         //then
         assertThat(profitRateResult).isEqualTo(profitRate);
