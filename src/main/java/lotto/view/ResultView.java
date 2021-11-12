@@ -1,10 +1,15 @@
 package lotto.view;
 
-import lotto.model.Winning;
 import lotto.model.LottoResult;
+import lotto.model.Winning;
 
 public class ResultView {
-    public void showWinningStatistics(LottoResult lottoResult) {
+    public void printResult(LottoResult result, double roi) {
+        showWinningStatistics(result);
+        showReturnOnInvestment(roi);
+    }
+
+    private void showWinningStatistics(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println(getWinningMessage(lottoResult, Winning.FIFTH_PRIZE));
@@ -24,7 +29,7 @@ public class ResultView {
                 winningCount);
     }
 
-    public void showReturnOnInvestment(double roi) {
+    private void showReturnOnInvestment(double roi) {
         System.out.printf("총 수익률은 %.2f입니다.%n", roi);
     }
 }
