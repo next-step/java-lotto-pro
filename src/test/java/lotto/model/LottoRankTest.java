@@ -32,11 +32,11 @@ class LottoRankTest {
 		"FIFTH : 4 : 20000",
 		"NOTHING : 10 : 0",
 	}, delimiter = ':')
-	void 랭크갯수에따라_당첨금액을_반환하는_기능테스트(String rank, int count, int sumMoney) {
+	void 랭크갯수에따라_당첨금액을_반환하는_기능테스트(String rank, int count, int totalPrize) {
 		// given // when
-		int sum = LottoRank.getRankMoney(LottoRank.valueOf(rank), count);
+		Money rankPrize = LottoRank.getRankMoney(LottoRank.valueOf(rank), count);
 
 		// then
-		assertThat(sum).isEqualTo(sumMoney);
+		assertThat(rankPrize.getMoney()).isEqualTo(totalPrize);
 	}
 }

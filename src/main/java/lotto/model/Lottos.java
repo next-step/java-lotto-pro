@@ -1,38 +1,29 @@
 package lotto.model;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
 	private final List<LottoNumbers> lottoNumbersList;
-	private final Money inputMoney;
 
-	private Lottos(List<LottoNumbers> lottoNumbersList, Money inputMoney) {
+	private Lottos(List<LottoNumbers> lottoNumbersList) {
 		this.lottoNumbersList = Collections.unmodifiableList(lottoNumbersList);
-		this.inputMoney = inputMoney;
 	}
 
-	public static Lottos of(List<LottoNumbers> lottoNumbersList, String inputMoney) {
-		return new Lottos(lottoNumbersList, Money.from(inputMoney));
-	}
-
-	public static Lottos of(List<LottoNumbers> lottoNumbersList, Money inputMoney) {
-		return new Lottos(lottoNumbersList, inputMoney);
-	}
-
-	public boolean contains(LottoNumbers lottoNumbers) {
-		return this.lottoNumbersList.contains(lottoNumbers);
+	public static Lottos of(List<LottoNumbers> lottoNumbersList) {
+		return new Lottos(lottoNumbersList);
 	}
 
 	public List<LottoNumbers> getLottoNumbersList() {
-		return lottoNumbersList;
-	}
-
-	public Money getInputMoney() {
-		return inputMoney;
+		return this.lottoNumbersList;
 	}
 
 	public int size() {
-		return lottoNumbersList.size();
+		return getLottoNumbersList().size();
+	}
+
+	public Money purchaseMoney() {
+		return Money.LOTTO_PRICE.calculatePurchaseMoney(new BigDecimal(size()));
 	}
 }

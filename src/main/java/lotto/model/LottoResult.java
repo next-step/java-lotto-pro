@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.math.BigDecimal;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -7,7 +8,6 @@ public class LottoResult {
 
 	public static final int DEFAULT_VALUE = 0;
 	public static final int COUNT_VALUE = 1;
-	public static final double MATH_ROUND_VALUE = 100d;
 
 	private final WinningLottoNumbers winningLottoNumbers;
 	private final Lottos lottos;
@@ -46,7 +46,7 @@ public class LottoResult {
 	}
 
 	private int containsWinningLottoNumbers(WinningLottoNumbers winningLottoNumbers, LottoNumbers lottoNumbers) {
-		int containsCount = 0;
+		int containsCount = DEFAULT_VALUE;
 
 		for (LottoNumber lottoNumber : lottoNumbers.lottoNumberList) {
 			containsCount += winningLottoNumbers.containsCountLottoNumber(lottoNumber);
@@ -59,18 +59,19 @@ public class LottoResult {
 		return winningLottoNumbers.containsBonusCountLottoNumber(lottoNumbers);
 	}
 
-	public float calculateSum() {
-		float sum = DEFAULT_VALUE;
+	public Money calculateTotal() {
+		Money total = Money.from(DEFAULT_VALUE);
 		Map<LottoRank, Integer> rankMap = containsWinningLottoGenerator();
 
 		for (Map.Entry<LottoRank, Integer> rankCodeEntry : rankMap.entrySet()) {
-			sum += LottoRank.getRankMoney(rankCodeEntry.getKey(), rankCodeEntry.getValue());
+			Money rankPrize = LottoRank.getRankMoney(rankCodeEntry.getKey(), rankCodeEntry.getValue());
+			total = total.sumMoney(rankPrize);
 		}
 
-		return sum;
+		return total;
 	}
 
-	public float getYield() {
-		return lottos.getInputMoney().calculateYield(calculateSum());
+	public BigDecimal getYield() {
+		return lottos.purchaseMoney().calculateYield(calculateTotal());
 	}
 }
