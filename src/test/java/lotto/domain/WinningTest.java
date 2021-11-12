@@ -86,6 +86,21 @@ class WinningTest {
         //then
         assertThat(winningNumberMatch).isEqualTo(1);
     }
+
+    @DisplayName("로또 번호와 보너스 번호 일치 여부")
+    @Test
+    void bonusNumberMatchTest() {
+        //given
+        Lotto lotto = Stream.of(1,2,3,4,5,6)
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+
+        //when
+        boolean bonusNumberMatch = lotto.contains(new LottoNumber(6));
+
+        assertThat(bonusNumberMatch).isTrue();
+    }
+
     static Stream<Arguments> profitRateParametersProvider() {
         return Stream.of(
                 arguments(1000, Rank.FOURTH_PLACE, 1, 5),
