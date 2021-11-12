@@ -9,7 +9,7 @@ public enum Rank {
     BONUS_SECOND_PLACE(5, new PrizeMoney(30_000_000), true),
     THIRD_PLACE(4, new PrizeMoney(50_000), false),
     FOURTH_PLACE(3, new PrizeMoney(5_000), false),
-    LOSER(0 ,new PrizeMoney(0), false);
+    LOSER(0, new PrizeMoney(0), false);
 
     private int winningNumberCount;
     private PrizeMoney prizeMoney;

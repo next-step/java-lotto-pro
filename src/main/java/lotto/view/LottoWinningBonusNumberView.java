@@ -19,7 +19,7 @@ public class LottoWinningBonusNumberView {
     private static int numberValid(String bonusNumber) {
         try {
             return Integer.parseInt(bonusNumber);
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new BonusNumberWrongFormatException(e);
         }
     }

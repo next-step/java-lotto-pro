@@ -15,42 +15,6 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WinningStatisticsTest {
 
-    @DisplayName("당첨 결과 통계")
-    @ParameterizedTest
-    @MethodSource("winningResultParametersProvider")
-    void winningResultTest(Lotto lotto, LottoNumber bonusNumber, Rank rank) {
-        //given
-        Lottos lottos = Stream.of(lotto)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
-        Lotto verifiedWinningNumber = Stream.of(1,2,3,4,5,6)
-                .map(LottoNumber::new)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
-        WinningLotto winningLotto = new WinningLotto(verifiedWinningNumber, bonusNumber);
-
-        //when
-        WinningResult winningResult = lottos.winningResult(winningLotto);
-
-        //then
-        assertThat(winningResult.winnerPerRank(rank)).isEqualTo(1);
-    }
-
-    @DisplayName("수익률 계산")
-    @ParameterizedTest
-    @MethodSource("profitRateParametersProvider")
-    void profitRateTest(int purchaseAmount, Rank rank, int winningCount, int profitRate) {
-        //given
-        Map<Rank, Integer> rankMap = new HashMap<>();
-        rankMap.put(rank, winningCount);
-        WinningResult winningResult = new WinningResult(rankMap);
-        Money money = new Money(purchaseAmount);
-
-        //when
-        double profitRateResult = money.profitRate(winningResult);
-
-        //then
-        assertThat(profitRateResult).isEqualTo(profitRate);
-    }
-
     static Stream<Arguments> profitRateParametersProvider() {
         return Stream.of(
                 arguments(1000, Rank.FOURTH_PLACE, 1, 5),
@@ -81,5 +45,41 @@ class WinningStatisticsTest {
                         .map(LottoNumber::new)
                         .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), bonusNumber, Rank.FIRST_PLACE)
         );
+    }
+
+    @DisplayName("당첨 결과 통계")
+    @ParameterizedTest
+    @MethodSource("winningResultParametersProvider")
+    void winningResultTest(Lotto lotto, LottoNumber bonusNumber, Rank rank) {
+        //given
+        Lottos lottos = Stream.of(lotto)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+        Lotto verifiedWinningNumber = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+        WinningLotto winningLotto = new WinningLotto(verifiedWinningNumber, bonusNumber);
+
+        //when
+        WinningResult winningResult = lottos.winningResult(winningLotto);
+
+        //then
+        assertThat(winningResult.winnerPerRank(rank)).isEqualTo(1);
+    }
+
+    @DisplayName("수익률 계산")
+    @ParameterizedTest
+    @MethodSource("profitRateParametersProvider")
+    void profitRateTest(int purchaseAmount, Rank rank, int winningCount, int profitRate) {
+        //given
+        Map<Rank, Integer> rankMap = new HashMap<>();
+        rankMap.put(rank, winningCount);
+        WinningResult winningResult = new WinningResult(rankMap);
+        Money money = new Money(purchaseAmount);
+
+        //when
+        double profitRateResult = money.profitRate(winningResult);
+
+        //then
+        assertThat(profitRateResult).isEqualTo(profitRate);
     }
 }
