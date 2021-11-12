@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public final class AutoLottoPurchase {
+public final class AutoLottoPurchaseMachine {
 
     private static final List<Integer> lottoNumber =
             IntStream.rangeClosed(Constant.LOTTO_MIN, Constant.LOTTO_MAX)
