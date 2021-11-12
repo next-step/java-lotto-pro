@@ -20,8 +20,8 @@ public interface Input {
         return getValue(true);
     }
 
-    default String getValue(boolean isPrintTitle) {
-        if (isPrintTitle) {
+    default String getValue(boolean printableTitle) {
+        if (printableTitle) {
             System.out.println(this.getMessage());
         }
 
