@@ -3,6 +3,7 @@ package lotto.model;
 import static java.util.stream.Collectors.*;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class Lotto {
             .collect(toSet()));
     }
 
-    public Lotto(Set<Number> numbers) {
+    public Lotto(Collection<Number> numbers) {
         TreeSet<Number> sortedNumbers = new TreeSet<>(Objects.requireNonNull(numbers));
         this.numbers = Collections.unmodifiableSortedSet(sortedNumbers);
         validate();
