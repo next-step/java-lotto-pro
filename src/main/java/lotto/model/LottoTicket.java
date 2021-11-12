@@ -1,11 +1,11 @@
 package lotto.model;
 
-import lotto.LottoConstants;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
+    public static final Money SELLING_PRICE = new Money(1000);
+    public static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> numbers;
 
     protected LottoTicket(List<LottoNumber> numbers) {
@@ -22,7 +22,7 @@ public class LottoTicket {
     }
 
     private void validate(List<LottoNumber> numbers) {
-        if (numbers == null || numbers.size() != LottoConstants.LOTTO_SIZE) {
+        if (numbers == null || numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException();
         }
     }
@@ -31,7 +31,7 @@ public class LottoTicket {
         if (money.isZero()) {
             return 0;
         }
-        return (int) money.divideBy(LottoConstants.SELLING_PRICE);
+        return (int) money.divideBy(SELLING_PRICE);
     }
 
     public Winning calculateWinning(WinTicket winTicket) {

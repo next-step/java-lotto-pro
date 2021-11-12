@@ -1,14 +1,14 @@
 package lotto.model;
 
-import lotto.LottoConstants;
-
 import java.util.Objects;
 
 public class LottoNumber {
+    public final static int MIN_VALUE = 1;
+    public final static int MAX_VALUE = 45;
     private final int number;
 
     public LottoNumber(int number) {
-        if (number < LottoConstants.MIN_VALUE || number > LottoConstants.MAX_VALUE) {
+        if (number < MIN_VALUE || number > MAX_VALUE) {
             throw new IllegalArgumentException();
         }
         this.number = number;
