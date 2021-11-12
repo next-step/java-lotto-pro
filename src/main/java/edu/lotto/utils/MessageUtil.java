@@ -33,6 +33,11 @@ public class MessageUtil {
 		System.out.printf(message, ratio);
 	}
 
+	public static void printMessage(String message, int firstNo, int secondNo) {
+		System.out.printf(message, firstNo, secondNo);
+		System.out.println();
+	}
+
 	/**
 	 * 순위 정보 출력
 	 * @param countOfRank

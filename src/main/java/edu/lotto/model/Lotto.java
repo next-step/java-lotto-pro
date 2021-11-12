@@ -1,11 +1,10 @@
 package edu.lotto.model;
 
+import edu.lotto.constants.PatternConstants;
 import edu.lotto.constants.Rank;
 import edu.lotto.utils.MessageUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 /**
@@ -17,95 +16,109 @@ public class Lotto {
 
 	private static Logger logger = Logger.getLogger(Lotto.class.getName());
 
-	private List<Integer> lottoNumbers;
-	private long winningNumberMatchesCount;
-	private boolean matchBonusNumber;
-	private Rank rank;
-	private long winningMoney;
+	private List<LottoNumber> lottoNumbers;
 
+	/**
+	 * 로또 번호 자동발급
+	 * @return
+	 */
 	public Lotto() {
-		this.lottoNumbers = new ArrayList<>();
-		setLottoNumber();
-		Collections.sort(this.lottoNumbers);
+		List<LottoNumber> allLottoNumbers = getLottoNumberRange();
+		Collections.shuffle(allLottoNumbers);
+		this.lottoNumbers = allLottoNumbers.subList(0,6);
+		sortLottoNumber();
+	}
+
+	/**
+	 * 수동으로 입력한 로또 발급
+	 * @return
+	 */
+	public Lotto(String manualNumber) {
+		this.lottoNumbers = changeStringToListLottoNumberType(manualNumber);
+		sortLottoNumber();
+	}
+
+	/**
+	 * 문자열로 전달된 로또 번호를 List<LottoNumber> 타입으로 변환
+	 * @param lottoNumber
+	 * @return
+	 */
+	private List<LottoNumber> changeStringToListLottoNumberType(String lottoNumber) {
+		List<LottoNumber> lottoNumbers = new ArrayList<LottoNumber>();
+		String[] lottoNumberArray = lottoNumber.replace(" ", "").split(PatternConstants.DEFAULT_SEPARATOR_PATTERN);
+		for(String lottoNumberValue : lottoNumberArray) {
+			lottoNumbers.add(new LottoNumber(Integer.parseInt(lottoNumberValue)));
+		}
+		return lottoNumbers;
+	}
+
+	/**
+	 * 로또 번호 정렬
+	 */
+	private void sortLottoNumber() {
+		Collections.sort(this.lottoNumbers, comparator);
+	}
+
+	/**
+	 * 로또 번호 정렬을 위한 Comparator
+	 */
+	Comparator<LottoNumber> comparator = new Comparator<LottoNumber>() {
+		@Override
+		public int compare(LottoNumber l1, LottoNumber l2) {
+			return l1.getLottoNumber() - l2.getLottoNumber();
+		}
+	};
+
+	/**
+	 * 로또 번호 출력
+	 */
+	public void printLottoNumber() {
 		MessageUtil.printMessage(lottoNumbers.toString());
 	}
 
 	/**
-	 * 로또 번호 6자리 세팅하기
+	 * 1~45까지 담긴 로또 번호 리스트 가져오기
 	 * @return
 	 */
-	private void setLottoNumber() {
-		List<Integer> allLottoNumbers = new ArrayList<Integer>();
+	private List<LottoNumber> getLottoNumberRange() {
+		List<LottoNumber> allLottoNumbers = new ArrayList<LottoNumber>();
 		for(int i=1; i<=45; i++) {
-			allLottoNumbers.add(i);
+			allLottoNumbers.add(new LottoNumber(i));
 		}
-		Collections.shuffle(allLottoNumbers);
-		this.lottoNumbers = allLottoNumbers.subList(0,6);
+		return allLottoNumbers;
 	}
 
 	/**
-	 * 지난주 정답과 로또 번호가 몇개 일치하는지 확인
-	 * @param winningNumbers
+	 * 로또 당첨 순위 가져오기
 	 */
-	public void setWinningNumberMatchesCount(List<Integer> winningNumbers) {
-		this.winningNumberMatchesCount
+	public Rank getRank(List<LottoNumber> winningNumbers, int bonusNumber) {
+		Long matchesCount
 				= this.lottoNumbers.stream()
-						.filter(number -> winningNumbers.contains(number))
-						.count();
+									.filter(lottoNumber ->  lottoNumber.containLottoNumber(winningNumbers))
+									.count();
+		return Rank.valueOf(matchesCount.intValue(), containBonusBall(bonusNumber));
 	}
 
 	/**
-	 * WinningNumberMatchesCount 가져오기
+	 * 보너스 번호가 Lotto 번호 안에 있는지 확인
+	 * @param bonusBall
 	 * @return
 	 */
-	public long getWinningNumberMatchesCount() {
-		return this.winningNumberMatchesCount;
+	private boolean containBonusBall(int bonusBall) {
+		long containCount = this.lottoNumbers.stream()
+											.filter(lottoNumber -> lottoNumber.getLottoNumber() == bonusBall)
+											.count();
+		return (containCount != 0);
 	}
 
-	/**
-	 * 보너스볼 일치 여부 Setter
-	 * @param bonusNumber
-	 */
-	public void setMatchBonusNumber(int bonusNumber) {
-		this.matchBonusNumber = lottoNumbers.contains(bonusNumber);
-	}
-
-	/**
-	 * 보너스볼 일치여부 Getter
-	 * @return
-	 */
-	public boolean getMatchBonusNumber() {
-		return this.matchBonusNumber;
-	}
-
-	/**
-	 * 로또 당첨 순위 Setter
-	 */
-	public void setRank() {
-		Long matchesCount = this.winningNumberMatchesCount;
-		this.rank = Rank.valueOf(matchesCount.intValue(), this.getMatchBonusNumber());
-	}
-
-	/**
-	 * 로또 당첨 순위 Getter
-	 * @return
-	 */
-	public Rank getRank() {
-		return this.rank;
-	}
-
-	/**
-	 * 로또 당첨 금액 Setter
-	 */
-	public void setWinningMoney() {
-		this.winningMoney = this.rank.getWinningMoney();
-	}
-
-	/**
-	 * 로또 당첨 금액 Getter
-	 * @return
-	 */
-	public long getWinningMoney() {
-		return this.winningMoney;
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		for(LottoNumber lottoNumber : this.lottoNumbers) {
+			sb.append(lottoNumber.toString() + " ");
+		}
+		sb.append("]");
+		return sb.toString().replace(" ]", "]");
 	}
 }

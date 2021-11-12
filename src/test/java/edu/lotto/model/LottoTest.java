@@ -7,6 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -18,6 +20,7 @@ public class LottoTest {
 
 	private List<Integer> winningNumbers;
 	private List<Integer> myLottoNumbers;
+	private List<LottoNumber> newLottoNumbers;
 
 	@BeforeEach
 	void setWinningNumbers() {
@@ -41,10 +44,40 @@ public class LottoTest {
 		myLottoNumbers.add(42);
 	}
 
+	@BeforeEach
+	void setNewLottoNumbers() {
+		newLottoNumbers = new ArrayList<LottoNumber>();
+		newLottoNumbers.add(new LottoNumber(1));
+		newLottoNumbers.add(new LottoNumber(42));
+		newLottoNumbers.add(new LottoNumber(22));
+		newLottoNumbers.add(new LottoNumber(9));
+		newLottoNumbers.add(new LottoNumber(33));
+		newLottoNumbers.add(new LottoNumber(15));
+	}
+
 	@Test
-	@DisplayName("지난주 당첨 번호와 내 로또 번호가 일치하는 숫자가 몇개인지 확인")
-	void setWinningNumberMatchesCount() {
-		long matchedCount = myLottoNumbers.stream().filter(number -> winningNumbers.contains(number)).count();
-		assertThat(matchedCount).isEqualTo(3);
+	@DisplayName("로또 번호 정렬 확인")
+	void sortLottoNumber() {
+		Collections.sort(newLottoNumbers, comparator);
+		for(int i=0; i<newLottoNumbers.size(); i++) {
+			assertThat(newLottoNumbers.get(i).toString()).isEqualTo(String.valueOf(myLottoNumbers.get(i)));
+		}
+	}
+
+	Comparator<LottoNumber> comparator = new Comparator<LottoNumber>() {
+		@Override
+		public int compare(LottoNumber l1, LottoNumber l2) {
+			return l1.getLottoNumber() - l2.getLottoNumber();
+		}
+	};
+
+	@Test
+	@DisplayName("로또 번호가 지난 주 정답에 포함되어 있는지 검증")
+	void containBonusBall() {
+		int bonusBall = 42;
+		long containCunt = newLottoNumbers.stream()
+								.filter(lottoNumber -> lottoNumber.getLottoNumber() == bonusBall)
+								.count();
+		assertThat(containCunt).isNotEqualTo(0);
 	}
 }

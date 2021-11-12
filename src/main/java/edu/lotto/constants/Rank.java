@@ -1,9 +1,6 @@
 package edu.lotto.constants;
 
-import edu.lotto.utils.MessageUtil;
-
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 /**
  * Lotto 결과(순위) Enum
@@ -41,11 +38,10 @@ public enum Rank {
 		// 보너스볼을 포함하여 번호가 6개 일치하는 경우 2등
 		if(SECOND.countOfMatch == countOfMatch && matchBonus)
 			return SECOND;
-		if(THIRD.countOfMatch == countOfMatch && !matchBonus)
-			return THIRD;
 		// 보너스 볼을 제외하고 번호가 일치하는 수에 따라 등수 계산
-		if(Arrays.stream(ranks).filter(rank -> rank.countOfMatch == countOfMatch).count() != 0)
-			return Arrays.stream(ranks).filter(rank -> rank.countOfMatch == countOfMatch).findFirst().get();
-		return MISS;
+		return Arrays.stream(ranks)
+						.filter(rank -> rank.countOfMatch == countOfMatch && rank.name() != Rank.SECOND.name() )
+						.findFirst()
+						.orElse(MISS);
 	}
 }
