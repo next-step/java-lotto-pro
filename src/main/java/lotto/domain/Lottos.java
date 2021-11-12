@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = Collections.unmodifiableList(lottos);
     }
 
     public WinningResult winningResult(WinningLotto winningLotto) {
