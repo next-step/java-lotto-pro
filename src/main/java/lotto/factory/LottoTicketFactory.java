@@ -1,5 +1,6 @@
 package lotto.factory;
 
+import static lotto.domain.LottoNumber.*;
 import static lotto.domain.LottoTicket.*;
 
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ public class LottoTicketFactory {
 
         return new LottoTicket(possibleNumbers.stream()
             .limit(LOTTO_SIZE)
-            .sorted()
             .collect(Collectors.toList()));
     }
 }

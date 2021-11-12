@@ -1,66 +1,34 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
 
 public class LottoTicket {
-    private static final String COMMA = ",";
-    private static final String ALL_SPACES_PATTERN = "\\s";
-    private static final String EMPTY = "";
-
-    public static final int LOTTO_MIN_NUMBER = 1;
-    public static final int LOTTO_MAX_NUMBER = 45;
     public static final int LOTTO_SIZE = 6;
 
     private List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<Integer> numbers) {
+        checkValidSize(numbers);
+        checkNoDuplicate(numbers);
+
         this.lottoNumbers = numbers.stream()
             .map(LottoNumber::new)
             .sorted()
             .collect(Collectors.toList());
     }
 
-    public LottoTicket(String numbers) {
-        String[] split = removeAllSpaces(numbers).split(COMMA);
-
-        Set<LottoNumber> lottoNumbers = makeNoDuplicateNumbers(split);
-        checkValidSize(lottoNumbers);
-
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
-    }
-
-    private String removeAllSpaces(String numbers) {
-        return numbers.replaceAll(ALL_SPACES_PATTERN, EMPTY);
-    }
-
-    private Set<LottoNumber> makeNoDuplicateNumbers(String[] split) {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-
-        for (String number : split) {
-            LottoNumber lottoNumber = new LottoNumber(parseToValidNumber(number));
-            lottoNumbers.add(lottoNumber);
-        }
-
-        return lottoNumbers;
-    }
-
-    private int parseToValidNumber(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
+    private void checkNoDuplicate(List<Integer> numbers) {
+        if (LOTTO_SIZE != numbers.stream().distinct().count()) {
             throw new LottoException(LottoErrorCode.INVALID_LOTTO_TICKET);
         }
     }
 
-    private void checkValidSize(Set<LottoNumber> lottoNumbers) {
+    private void checkValidSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new LottoException(LottoErrorCode.INVALID_LOTTO_TICKET);
         }
