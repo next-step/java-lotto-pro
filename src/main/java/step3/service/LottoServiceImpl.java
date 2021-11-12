@@ -1,39 +1,24 @@
 package step3.service;
 
+import step3.domain.LottoBuyCount;
+import step3.domain.LottoBuyer;
 import step3.domain.LottoNumbersBundle;
-import step3.domain.LottoProvider;
-import step3.domain.LottoResult;
+import step3.domain.LottoRanks;
 import step3.domain.LottoService;
-import step3.domain.strategy.numbers.NumbersStrategy;
-import step3.domain.strategy.numbers.RandomLottoNumbers;
-import step3.dto.LottoBonusNumberRequestDto;
-import step3.dto.LottoBuyRequestDto;
-import step3.dto.LottoBuyResponseDto;
+import step3.domain.WinningLotto;
 import step3.dto.LottoStatisticsResponseDto;
-import step3.dto.LottoWinNumbersRequestDto;
 
 public class LottoServiceImpl implements LottoService {
-    LottoProvider lottoProvider = new LottoProvider();
 
     @Override
-    public LottoBuyResponseDto buyLotto(LottoBuyRequestDto lottoBuyRequestDto, NumbersStrategy numbersStrategy) {
-        int quantity = lottoProvider.availableQuantity(lottoBuyRequestDto.getAmount());
-
-        LottoNumbersBundle lottoNumbersBundle = lottoProvider.buyLotto(quantity, numbersStrategy);
-
-        return new LottoBuyResponseDto(lottoNumbersBundle);
+    public LottoBuyCount buyLotto(LottoBuyer lottoBuyer, LottoNumbersBundle lottoNumbersBundle) {
+        return lottoBuyer.buyLotto(lottoNumbersBundle);
     }
 
     @Override
-    public LottoStatisticsResponseDto getResultStatistics(LottoWinNumbersRequestDto lottoWinNumbersRequestDto,
-        LottoBonusNumberRequestDto lottoBonusNumberRequestDto) {
-
-        LottoResult lottoResult = lottoProvider.getLottoResult(
-            lottoWinNumbersRequestDto.getLottoNumbers(),
-            lottoWinNumbersRequestDto.getAmount(),
-            lottoBonusNumberRequestDto.getBonusLottoNumber()
-        );
-
-        return new LottoStatisticsResponseDto(lottoResult);
+    public LottoStatisticsResponseDto resultStatistics(LottoBuyer lottoBuyer, WinningLotto winningLotto) {
+        LottoRanks lottoRanks = lottoBuyer.getLottoRanks(winningLotto);
+        return new LottoStatisticsResponseDto(lottoRanks);
     }
+
 }

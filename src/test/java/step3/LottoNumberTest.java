@@ -19,8 +19,7 @@ public class LottoNumberTest {
         assertThatExceptionOfType(InvalidParamException.class)
             .isThrownBy(() -> {
                 // when
-                new LottoNumber(inputLottoNumber);
-            }) // then
-            .withMessageMatching(LottoConstant.LOTTO_RANGE_OVER_EXCEPTION);
+                LottoNumber.of(inputLottoNumber);
+            });
     }
 }

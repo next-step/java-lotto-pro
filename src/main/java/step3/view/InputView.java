@@ -1,87 +1,101 @@
 package step3.view;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
-import step3.common.exception.BaseException;
 import step3.common.exception.InvalidParamException;
-import step3.dto.LottoBonusNumberRequestDto;
-import step3.dto.LottoBuyRequestDto;
-import step3.dto.LottoWinNumbersRequestDto;
+import step3.domain.LottoNumber;
+import step3.domain.LottoNumbers;
+import step3.domain.LottoNumbersBundle;
+import step3.domain.WinningLotto;
+import step3.domain.factory.LottoNumbersFactory;
 
 public class InputView {
-    private static final String ONLY_NUMBER = "숫자만 입력 해주세요.";
-    private static final String COMMA_INPUT_REQUEST_MESSAGE = "콤마로 분리된 숫자만 입력해주세요(1,2,3,4,5,6)";
-
     private static final Scanner sc = new Scanner(System.in);
 
-    private InputView() {
-    }
-
-    public static int readOnlyNumber() {
+    public static int readLottoAmount() {
         try {
-            return Integer.parseInt(getIntScanner());
+            ResultView.println(ViewConstant.AMOUNT_REQUEST_MESSAGE);
+            return scanInt();
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
 
-            return readOnlyNumber();
+            return readLottoAmount();
         }
     }
 
-    public static int[] readLineToArray() {
+    public static int readLottoManualBuyCount() {
         try {
-            return Stream.of(sc.nextLine().split(","))
-                .filter(v -> v.chars().allMatch(Character::isDigit))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+            ResultView.println(ViewConstant.MANUAL_LOTTO_COUNT_MESSAGE);
+            return scanInt();
         } catch (InvalidParamException invalidParamException) {
-            ResultView.println(COMMA_INPUT_REQUEST_MESSAGE);
+            ResultView.println(invalidParamException.getMessage());
+
+            return readLottoManualBuyCount();
+        }
+    }
+
+    public static LottoNumbersBundle readManualLottoNumbers(int tryCount) {
+        ResultView.println(ViewConstant.MANUAL_LOTTO_NUMBER_MESSAGE);
+        List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
+
+        for (int i = 0; i < tryCount; i++) {
+            manualLottoNumbers.add(LottoNumbersFactory.createManualLottoNumbers(readLineToArray()));
+        }
+
+        return LottoNumbersBundle.of(manualLottoNumbers);
+    }
+
+    public static WinningLotto readWinningLottoNumbers() {
+        ResultView.println(ViewConstant.WINNER_NUMBER_REQUEST_MESSAGE);
+        try {
+            LottoNumbers winningNumbers = LottoNumbersFactory.createManualLottoNumbers(readLineToArray());
+
+            return WinningLotto.of(winningNumbers, readBonusNumber());
+        } catch (InvalidParamException invalidParamException) {
+            ResultView.println(invalidParamException.getMessage());
+
+            return readWinningLottoNumbers();
+        }
+    }
+
+    public static LottoNumber readBonusNumber() {
+        ResultView.println(ViewConstant.BONUS_NUMBER_REQUEST_MESSAGE);
+
+        try {
+
+            return LottoNumber.of(scanInt());
+        } catch (InvalidParamException invalidParamException) {
+            ResultView.println(invalidParamException.getMessage());
+
+            return readBonusNumber();
+        }
+    }
+
+    private static int scanInt() {
+        String result = sc.nextLine();
+
+        if (!result.chars().allMatch(Character::isDigit)) {
+            throw new InvalidParamException(ViewConstant.ONLY_NUMBER);
+        }
+
+        return Integer.parseInt(result);
+    }
+
+    private static List<Integer> readLineToArray() {
+        try {
+            return Arrays.stream(sc.nextLine().split(","))
+                .filter(number -> number.chars().allMatch(Character::isDigit))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        } catch (InvalidParamException invalidParamException) {
+            ResultView.println(ViewConstant.COMMA_INPUT_REQUEST_MESSAGE);
 
             return readLineToArray();
         }
     }
 
-    public static LottoBuyRequestDto readLottoRequestDto() {
-        try {
-            ResultView.amountRequestPrintln();
-
-            return new LottoBuyRequestDto(readOnlyNumber());
-        } catch (InvalidParamException invalidParamException) {
-            ResultView.println(invalidParamException.getMessage());
-            return readLottoRequestDto();
-        }
-    }
-
-    public static LottoWinNumbersRequestDto readLottoWinnerRequestDto(int amount) {
-        ResultView.winnerRequestPrintln();
-
-        try {
-            return new LottoWinNumbersRequestDto(readLineToArray(), amount);
-        } catch (InvalidParamException invalidParamException) {
-            ResultView.println(invalidParamException.getMessage());
-
-            return readLottoWinnerRequestDto(amount);
-        }
-    }
-
-    public static LottoBonusNumberRequestDto readLottoBonusNumberRequestDto() {
-        ResultView.bonusNumberRequestPrintln();
-        try {
-            return new LottoBonusNumberRequestDto(readOnlyNumber());
-        } catch (InvalidParamException invalidParamException) {
-            ResultView.println(invalidParamException.getMessage());
-
-            return readLottoBonusNumberRequestDto();
-        }
-    }
-
-    private static String getIntScanner() {
-        String result = sc.nextLine();
-
-        if (!result.chars().allMatch(Character::isDigit)) {
-            throw new InvalidParamException(ONLY_NUMBER);
-        }
-
-        return result;
-    }
 }

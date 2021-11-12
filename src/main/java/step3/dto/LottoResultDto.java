@@ -2,17 +2,21 @@ package step3.dto;
 
 import java.util.Objects;
 
+import step3.domain.LottoRank;
+import step3.domain.LottoRanks;
+
 public class LottoResultDto {
     private final String rankName;
     private final int matchNumber;
     private final int matchCount;
     private final long prize;
 
-    public LottoResultDto(int matchNumber, long prize, String rankName, int matchCount) {
-        this.matchNumber = matchNumber;
-        this.matchCount = matchCount;
-        this.prize = prize;
-        this.rankName = rankName;
+    public LottoResultDto(LottoRanks.LottoRankResult lottoRankResult) {
+        LottoRank lottoRank = lottoRankResult.getLottoRank();
+        this.matchCount = lottoRankResult.getWinningCount();
+        this.matchNumber = lottoRank.matchNumber;
+        this.prize = lottoRank.prize;
+        this.rankName = lottoRank.name();
     }
 
     public int getMatchNumber() {
@@ -25,6 +29,10 @@ public class LottoResultDto {
 
     public String getRankName() {
         return rankName;
+    }
+
+    public long getPrize() {
+        return prize;
     }
 
     @Override
@@ -41,10 +49,6 @@ public class LottoResultDto {
     @Override
     public int hashCode() {
         return Objects.hash(rankName, matchNumber, matchCount, prize);
-    }
-
-    public long getPrize() {
-        return prize;
     }
 }
 

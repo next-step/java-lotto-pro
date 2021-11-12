@@ -3,25 +3,12 @@ package step3.view;
 import java.math.BigDecimal;
 import java.util.List;
 
-import step3.dto.LottoBuyResponseDto;
+import step3.domain.LottoBuyCount;
+import step3.domain.LottoBuyer;
 import step3.dto.LottoResultDto;
 import step3.dto.LottoStatisticsResponseDto;
 
 public class ResultView {
-    public static final String BONUS_RANK_NAME = "SECOND";
-    public static final String TITLE = "당첨 통계\n";
-    public static final String DIVIDE = "---------\n";
-    public static final String LOTTO_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-    public static final String YIELD_MESSAGE_FORMAT = "총 수익률은 %s입니다";
-    public static final String LOTTO_RANK_FORMAT = "%s개 일치 (%d원)- %d개";
-    public static final String LOTTO_RANK_BONUS_SECOND_FORMAT = "%s개 일치, 보너스 볼 일치(%s원) - %s개";
-    private static final String WINNER_NUMBER_REQUEST_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String AMOUNT_REQUEST_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String BONUS_NUMBER_REQUEST_MESSAGE = "보너스 볼을 입력해 주세요.";
-    private static final String BUY_COUNT_MESSAGE = "%d 개를 구매했습니다.";
-    private static final BigDecimal LOSS = BigDecimal.valueOf(1);
-    private static final Integer MIN_RANK_NUMBER = 3;
-
     private ResultView() {
     }
 
@@ -33,24 +20,18 @@ public class ResultView {
         System.out.print(message);
     }
 
-    public static void amountRequestPrintln() {
-        println(AMOUNT_REQUEST_MESSAGE);
+    public static void buyCountResultView(LottoBuyCount lottoBuyCount) {
+        println(String.format(
+            ViewConstant.TOTAL_LOTTO_BUY_COUNT_MESSAGE,
+            lottoBuyCount.getManualLottoBuyCount(),
+            lottoBuyCount.getAutoLottoBuyCount()
+        ));
     }
 
-    public static void buyCountPrintln(int size) {
-        println(String.format(BUY_COUNT_MESSAGE, size));
-    }
-
-    public static void winnerRequestPrintln() {
-        println(WINNER_NUMBER_REQUEST_MESSAGE);
-    }
-
-    public static void lottoBuyListPrint(LottoBuyResponseDto lottoBuyResponseDto) {
-        for (String numbers : lottoBuyResponseDto.getBuyLottoList()) {
-            println(numbers);
+    public static void buyLottoResultView(LottoBuyer lottoBuyer) {
+        for (String result : lottoBuyer.getLottoNumberList()) {
+            println(result);
         }
-
-        buyCountPrintln(lottoBuyResponseDto.getBuyLottoList().size());
     }
 
     public static void statisticsPrint(LottoStatisticsResponseDto lottoStatisticsResponseDto) {
@@ -62,21 +43,21 @@ public class ResultView {
             lottoResultPrint(lottoResultDto);
         }
 
-        yieldPrint(lottoStatisticsResponseDto);
+        yieldPrint(lottoStatisticsResponseDto.getYield());
     }
 
     private static void statisticsHeaderPrint() {
-        print(TITLE);
-        print(DIVIDE);
+        print(ViewConstant.TITLE);
+        print(ViewConstant.DIVIDE);
     }
 
     private static void lottoResultPrint(LottoResultDto lottoResultDto) {
-        String format = LOTTO_RANK_FORMAT;
-        if (lottoResultDto.getRankName().equals(BONUS_RANK_NAME)) {
-            format = LOTTO_RANK_BONUS_SECOND_FORMAT;
+        String format = ViewConstant.LOTTO_RANK_FORMAT;
+        if (lottoResultDto.getRankName().equals(ViewConstant.BONUS_RANK_NAME)) {
+            format = ViewConstant.LOTTO_RANK_BONUS_SECOND_FORMAT;
         }
 
-        if (lottoResultDto.getMatchNumber() >= MIN_RANK_NUMBER) {
+        if (lottoResultDto.getMatchNumber() >= ViewConstant.MIN_RANK_NUMBER) {
             println(String.format(
                 format,
                 lottoResultDto.getMatchNumber(),
@@ -86,28 +67,23 @@ public class ResultView {
         }
     }
 
-    private static void yieldPrint(LottoStatisticsResponseDto lottoStatisticsResponseDto) {
+    private static void yieldPrint(BigDecimal yield) {
         String result = String.format(
-            YIELD_MESSAGE_FORMAT,
-            lottoStatisticsResponseDto.getYield()
+            ViewConstant.YIELD_MESSAGE_FORMAT,
+            yield
         );
-
-        result += lossPrintln(lottoStatisticsResponseDto.getYield());
+        result += lossPrintln(yield);
 
         println(result);
     }
 
     private static String lossPrintln(BigDecimal yield) {
-        int compareResult = yield.compareTo(LOSS);
+        int compareResult = yield.compareTo(ViewConstant.LOSS);
 
         if (compareResult < 0) {
-            return LOTTO_LOSS_MESSAGE;
+            return ViewConstant.LOTTO_LOSS_MESSAGE;
         }
 
         return "";
-    }
-
-    public static void bonusNumberRequestPrintln() {
-        println(BONUS_NUMBER_REQUEST_MESSAGE);
     }
 }

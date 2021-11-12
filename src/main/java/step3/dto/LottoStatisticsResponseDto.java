@@ -5,26 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import step3.domain.LottoRanks;
-import step3.domain.LottoResult;
 
 public class LottoStatisticsResponseDto {
-    private final LottoResult lottoResult;
+    private final LottoRanks lottoRanks;
 
-    public LottoStatisticsResponseDto(LottoResult lottoResult) {
-        this.lottoResult = lottoResult;
+    public LottoStatisticsResponseDto(LottoRanks lottoRanks) {
+        this.lottoRanks = lottoRanks;
     }
 
     public List<LottoResultDto> getLottoResultDtos() {
         List<LottoResultDto> lottoResultDtos = new ArrayList<>();
-        LottoRanks lottoRanks = lottoResult.getLottoRanks();
 
-        for (LottoRanks.LottoRankResult lottoRank : lottoRanks.getLottoRankResults()) {
-            LottoResultDto lottoResultDto = new LottoResultDto(
-                lottoRank.getLottoRank().matchNumber,
-                lottoRank.getLottoRank().prize,
-                lottoRank.getLottoRank().name(),
-                lottoRank.getWinningCount()
-            );
+        for (LottoRanks.LottoRankResult lottoRankResult : lottoRanks.getLottoRankResults()) {
+            LottoResultDto lottoResultDto = new LottoResultDto(lottoRankResult);
 
             lottoResultDtos.add(lottoResultDto);
         }
@@ -33,6 +26,6 @@ public class LottoStatisticsResponseDto {
     }
 
     public BigDecimal getYield() {
-        return lottoResult.getCalculatedYield();
+        return lottoRanks.getCalculatedYield();
     }
 }

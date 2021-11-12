@@ -90,52 +90,30 @@
 - [X] Dto 정리 하면서 Controller, Service, View 통합 리팩토링 진행
 - [X] 도메인 객체 테스트 코드 추가 및 개선
 
-### 프로젝트 구조
+# 5단계 - 로또(수동)
 
-```text
+## 추가된 요구 사항 정리
 
- |-controller
-   |-LottoController.java                   // 로또 진행 컨트롤러
-   
- |-dto
-   |-LottoWinNumbersRequestDto.java         // 지난주 우승 로또 번호 
-   |-LottoBonusNumberRequestDto.java        // 보너스 로또 번호
-   |-LottoBuyRequestDto.java                // 주문할 금액
-    
-   |-LottoBuyResponseDto.java               // 구입한 로또목록
-   |-LottoStatisticsResponseDto.java        // 로또 당첨 통계
-   |-LottoResultDto.java                    // 로또 당첨 통계 세부 데이터
- 
- |-common
-   |-exception                     // 커스텀 exception
-     |-BaseException.java
-     |-InvalidParamException.java
-     |-ErrorMessage.java
- 
- |-service
-   |-LottoServiceImpl.java      // LottoService.java 구현체
- 
- |-view                         // UI
-   |-InputView.java 
-   |-ResultView.java
- 
- |-domain
-   |-Amount.java                // 주문금액 객체
-   |-LottoNumber.java           // 1-45숫자를 가지는 객체
-   |-LottoNumbers.java          // LottoNumber 일급 콜렉션
-   |-LottoNumbersBundle.java    // LottoNumbers 일급 콜렉션, 로또랭킹 계산 수행
+- 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
+- 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
 
-   |-LottoRank.java             // 등수별 일치갯수와 당첨금 ENUM
-   |-LottoRanks.java            // LottoRank 일급컬렉션, 등수별 당첨갯수 카운팅
-        |- CountDown            // Rank 별 당첨 카운트
-        |- LottoRankResult      // 인스턴스 변수 : LottoRank(Enum), winningCount(LottoRank 의 당첨갯수) 
-  
-   |-LottoProvider.java         // 로또구입 과 당첨결과(LottoResult) 수행
-   |-LottoResult.java           // 총 수익금액 과 수익률 계산, LottoRanks 를 가짐
-   |-LottoService.java          // 로또구입, 통계결과 메소드를 가지는 인터페이스
-   |-strategy
-     |-numbers
-       |-RandomLottoNumbers.java // 로또자동번호 생성기(NumbersStrategy 구현체)
-       |-NumbersStrategy.java    // getNumbers() 메소드를 가지는 인터페이스
+## 5 단계 기능 목록
 
-```
+- [X] 수동 구매 갯수 받기
+- [X] 수동 로또 번호 받기
+- [X] Amount 에서 수익률 계산 추가
+- [X] validBonus 중복 검증코드 제거
+- [X] WinningLotto 추가 (지난주 우승 로또번호, 보너스볼)
+- [X] LottoRanks -> LottoResult 고민해보기
+- [X] view,controller,service 플로우 리팩토링
+
+### 리팩토링
+
+- [X] 수동,자동 타입 BuyType ENUM 추가
+- [X] `LottoBuyer` 도메인 추가 기존에 구입 한 로또를 변수로 관리하면서 애매한 부분이 많았는데 구매금액과, 구매 로또의 상태를 가지는 도메인이 있어야 되겠다고 생각해서 추가했습니다.
+- [X] `LottoService` 인스턴스 변수 간소화 리팩토링
+- [X] 컨트롤러 및 전반적인 프로세스 개선
+- [X] 기존 로또랜덤 번호 추상화 객체를 제거
+- [X] `LottoNumbersFactory` 추가, `List<LottoNumber>` 를 캐싱처리
+- [X] 등수를 구하는 책임은 LottoRanks 로 리팩토링
+- [X] BuyType 제거 하고, LottoBuyCount 객체화 리팩토링

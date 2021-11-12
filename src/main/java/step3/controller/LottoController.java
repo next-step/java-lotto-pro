@@ -1,64 +1,72 @@
 package step3.controller;
 
 import step3.common.exception.InvalidParamException;
+import step3.domain.Amount;
+import step3.domain.LottoBuyCount;
+import step3.domain.LottoBuyer;
+import step3.domain.LottoNumbersBundle;
 import step3.domain.LottoService;
-import step3.domain.strategy.numbers.RandomLottoNumbers;
-import step3.dto.LottoBonusNumberRequestDto;
-import step3.dto.LottoBuyRequestDto;
-import step3.dto.LottoBuyResponseDto;
+import step3.domain.WinningLotto;
 import step3.dto.LottoStatisticsResponseDto;
-import step3.dto.LottoWinNumbersRequestDto;
 import step3.service.LottoServiceImpl;
 import step3.view.InputView;
 import step3.view.ResultView;
 
 public class LottoController {
-    LottoService lottoService;
+    private final LottoService lottoService = new LottoServiceImpl();
+    private final LottoBuyer lottoBuyer;
 
     public LottoController() {
-        lottoService = new LottoServiceImpl();
+        this.lottoBuyer = createLottoBuyer();
     }
 
     public void play() {
-        // 사용자에게 구매할 돈을입금 받는다.
-        LottoBuyRequestDto lottoRequestDto = InputView.readLottoRequestDto();
+        LottoBuyCount lottoBuyCount = lottoService.buyLotto(lottoBuyer, registerManualLottoNumbers());
 
-        // 로또를 구매한다.
-        LottoBuyResponseDto lottoBuyResponseDto = lottoService.buyLotto(lottoRequestDto, new RandomLottoNumbers());
+        buyLottoResult(lottoBuyCount);
 
-        // 총몇개를 구입했는지 출력한다.
-        // 구매한 로또를 출력한다.
-        ResultView.lottoBuyListPrint(lottoBuyResponseDto);
+        statisticsResult(registerLatestLottoNumberAndBonus());
+    }
 
-        // 지난 주 당첨번호 받기
-        LottoWinNumbersRequestDto lottoWinNumbersRequestDto = InputView.readLottoWinnerRequestDto(
-            lottoRequestDto.getAmountValue());
+    private void statisticsResult(WinningLotto winningLotto) {
+        LottoStatisticsResponseDto lottoStatisticsResponseDto = lottoService.resultStatistics(lottoBuyer, winningLotto);
 
-        // 보너스 볼을 입력
-        LottoBonusNumberRequestDto lottoBonusNumberRequestDto = getLottoBonusNumberRequestDto(
-            lottoWinNumbersRequestDto);
-
-        // 당첨통계를출력한다.(로또 당첨 갯수와 수익률)
-        LottoStatisticsResponseDto lottoStatisticsResponseDto = lottoService.getResultStatistics(
-            lottoWinNumbersRequestDto, lottoBonusNumberRequestDto);
         ResultView.statisticsPrint(lottoStatisticsResponseDto);
     }
 
-    private LottoBonusNumberRequestDto getLottoBonusNumberRequestDto(
-        LottoWinNumbersRequestDto lottoWinNumbersRequestDto) {
-        try {
-            LottoBonusNumberRequestDto lottoBonusNumberRequestDto = InputView.readLottoBonusNumberRequestDto();
-            validBonus(lottoWinNumbersRequestDto, lottoBonusNumberRequestDto);
+    private WinningLotto registerLatestLottoNumberAndBonus() {
+        return InputView.readWinningLottoNumbers();
+    }
 
-            return lottoBonusNumberRequestDto;
+    private void buyLottoResult(LottoBuyCount lottoBuyCount) {
+        ResultView.buyCountResultView(lottoBuyCount);
+        ResultView.buyLottoResultView(lottoBuyer);
+    }
+
+    private LottoBuyer createLottoBuyer() {
+        int buyAmount = InputView.readLottoAmount();
+
+        try {
+            return new LottoBuyer(new Amount(buyAmount));
         } catch (InvalidParamException invalidParamException) {
             ResultView.println(invalidParamException.getMessage());
-            return getLottoBonusNumberRequestDto(lottoWinNumbersRequestDto);
+
+            return createLottoBuyer();
         }
     }
 
-    private void validBonus(LottoWinNumbersRequestDto lottoWinNumbersRequestDto,
-        LottoBonusNumberRequestDto lottoBonusNumberRequestDto) {
-        lottoWinNumbersRequestDto.validContain(lottoBonusNumberRequestDto.getBonusLottoNumber());
+    private LottoNumbersBundle registerManualLottoNumbers() {
+        int manualBuyCount = InputView.readLottoManualBuyCount();
+
+        try {
+            lottoBuyer.checkBuyAvailableQuantity(manualBuyCount);
+
+            return InputView.readManualLottoNumbers(manualBuyCount);
+        } catch (InvalidParamException invalidParamException) {
+            ResultView.println(invalidParamException.getMessage());
+
+            return registerManualLottoNumbers();
+        }
     }
+
 }

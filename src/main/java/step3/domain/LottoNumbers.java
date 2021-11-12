@@ -1,12 +1,10 @@
 package step3.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import step3.common.exception.InvalidParamException;
 
@@ -14,36 +12,23 @@ public class LottoNumbers {
     public static final int MAX_LOTTO_NUMBERS_SIZE = 6;
     public static final String RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE = String.format("로또 티켓은 %s 개의 숫자만 가능합니다.",
         MAX_LOTTO_NUMBERS_SIZE);
-    private Set<LottoNumber> lottoNumbers;
 
-    private LottoNumbers() {
-    }
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(int[] numbers) {
-        this.lottoNumbers = mapOf(numbers);
+    private LottoNumbers(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
         validSize();
     }
 
-    private Set<LottoNumber> mapOf(int[] numbers) {
-        Set<LottoNumber> result = new HashSet<>();
-
-        for (int number : numbers) {
-            result.add(new LottoNumber(number));
-        }
-
-        return result;
+    public static LottoNumbers of(List<LottoNumber> numbers) {
+        return new LottoNumbers(new HashSet<>(numbers));
     }
 
-    public String toString() {
-        List<Integer> result = new ArrayList<>();
-
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            result.add(lottoNumber.value());
-        }
-
-        Collections.sort(result);
-
-        return Collections.unmodifiableList(result).toString();
+    public String toCommaSerialize() {
+        return lottoNumbers.stream()
+            .sorted()
+            .map(LottoNumber::value)
+            .collect(Collectors.toList()).toString();
     }
 
     public int containCount(LottoNumbers winLottoNumbers) {
@@ -55,16 +40,14 @@ public class LottoNumbers {
         return count;
     }
 
-    public boolean isContain(LottoNumber validLottoNumber) {
-        return lottoNumbers.contains(validLottoNumber);
+    public boolean isBonusContain(LottoNumber bonusLottoNumber) {
+        return lottoNumbers.contains(bonusLottoNumber);
     }
 
-    public boolean isBonusContain(LottoNumber bonusLottoNumber) {
-        long matchedCount = lottoNumbers.stream()
-            .filter(lottoNumber -> lottoNumber.equals(bonusLottoNumber))
-            .count();
-        
-        return matchedCount != 0;
+    private void validSize() {
+        if (this.lottoNumbers.size() != MAX_LOTTO_NUMBERS_SIZE) {
+            throw new InvalidParamException(RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
+        }
     }
 
     private int containCheckAndIncrementCount(int count, LottoNumber winLottoNumber) {
@@ -74,10 +57,8 @@ public class LottoNumbers {
         return count;
     }
 
-    private void validSize() {
-        if (this.lottoNumbers.size() != MAX_LOTTO_NUMBERS_SIZE) {
-            throw new InvalidParamException(RANGE_OUTBOUND_SIZE_EXCEPTION_MESSAGE);
-        }
+    private boolean isContain(LottoNumber validLottoNumber) {
+        return lottoNumbers.contains(validLottoNumber);
     }
 
     @Override
