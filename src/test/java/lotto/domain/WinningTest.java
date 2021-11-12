@@ -52,6 +52,9 @@ class WinningTest {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
 
         return Stream.of(
+                arguments(lotto, Stream.of(39,40,41,42,43,44)
+                        .map(LottoNumber::new)
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), Rank.LOSER, new LottoNumber(45)),
                 arguments(lotto, Stream.of(1,2,3,43,44,45)
                         .map(LottoNumber::new)
                         .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), Rank.FOURTH_PLACE, new LottoNumber(40)),
