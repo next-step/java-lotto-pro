@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Supplier;
 
@@ -25,7 +26,7 @@ public class LottoGame {
             int manualCount = InputView.readManualLottoCount();
             return payment.computeLottoCount(manualCount);
         });
-        Collection<Lotto> generatedLottos = new LottoGenerator(payment).generate();
+        Collection<Lotto> generatedLottos = LottoGenerator.generate(lottoCount.getAutoCount());
         OutputView.printLottoPurchase(generatedLottos);
         Lotto winningLotto = handleException(InputView::readWinningLotto);
         LottoMatcher lottoMatcher = handleException(() -> {
