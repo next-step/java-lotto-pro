@@ -15,21 +15,17 @@ public class StringAddCalculator {
         if( str == null || str.isEmpty() ) {
             return ZERO;
         }
-        int result = ZERO;
+
         if( str.length() == 1 ) {
-            result = checkOneNumber(str);
+            return checkOneNumber(str);
         }
-        if( PATTERN_DELIMITERS.matcher(str).find() ) {
-            result = checkSeparatorAndDelimiter(str);
-        }
+
         Matcher matcher = PATTERN_CUSTOM.matcher(str);
         if( matcher.find() ) {
-            result = checkCustomDelimiter(matcher);
+            return checkCustomDelimiter(matcher);
         }
-        if( result == ZERO ) {
-            throw new IllegalArgumentException(MESSAGE_INVALID_CHARACTER_FORMAT);
-        }
-        return result;
+
+        return checkSeparatorAndDelimiter(str);
     }
 
     private static int checkOneNumber(String str) {
@@ -57,7 +53,7 @@ public class StringAddCalculator {
 
     private static int checkInt(int number) {
         if( number < ZERO ) {
-            throw new RuntimeException(MESSAGE_NOT_POSITIVE_INT);
+            throw new IllegalArgumentException(MESSAGE_NOT_POSITIVE_INT);
         }
         return number;
     }
