@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.model.LottoNumbers;
-import lotto.model.ManualGames;
+import lotto.model.ManualNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,9 +22,9 @@ public class ManualGameTests {
     @Test
     public void 빈_수동게임_생성() {
         List<LottoNumbers> manualGameNumbers = new ArrayList<>();
-        ManualGames manualGames = new ManualGames(manualGameNumbers);
+        ManualNumbers manualNumbers = new ManualNumbers(manualGameNumbers);
 
-        assertThat(manualGames.getList().size()).isEqualTo(0);
+        assertThat(manualNumbers.getList().size()).isEqualTo(0);
     }
 
     @DisplayName("수동게임 생성을 테스트합니다.")
@@ -35,16 +35,16 @@ public class ManualGameTests {
                 .boxed()
                 .map(operand -> new LottoNumbers(inputValues[operand]))
                 .collect(Collectors.toList());
-        ManualGames manualGames = new ManualGames(list);
+        ManualNumbers manualNumbers = new ManualNumbers(list);
 
         assertAll(
-                () -> assertThat(manualGames.getList().size()).isEqualTo(inputValues.length),
-                () -> manualGames.getList().forEach(manualGame -> {
+                () -> assertThat(manualNumbers.getList().size()).isEqualTo(inputValues.length),
+                () -> manualNumbers.getList().forEach(manualGame -> {
                     assertThat(manualGame)
                             .isNotNull()
                             .isInstanceOf(LottoNumbers.class);
                 }),
-                () -> manualGames.getList().forEach(manualGame -> {
+                () -> manualNumbers.getList().forEach(manualGame -> {
                     manualGame.getValues().forEach(lottoNumber -> {
                         assertThat(lottoNumber.getValue())
                                 .isInstanceOf(Integer.class)

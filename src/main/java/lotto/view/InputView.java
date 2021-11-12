@@ -54,14 +54,14 @@ public class InputView {
      * @param manualGameCount
      * @return
      */
-    public static ManualGames inputManualGames(int manualGameCount) {
+    public static ManualNumbers inputManualNumbers(int manualGameCount) {
         final int firstIndex = 0;
         List<LottoNumbers> list = IntStream.range(firstIndex, manualGameCount)
                 .boxed()
                 .map(operand -> inputManualGameNumbers(operand <= firstIndex))
                 .collect(Collectors.toList());
 
-        return new ManualGames(list);
+        return new ManualNumbers(list);
     }
 
     /**

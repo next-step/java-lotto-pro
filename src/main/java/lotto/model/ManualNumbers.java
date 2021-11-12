@@ -2,11 +2,11 @@ package lotto.model;
 
 import java.util.List;
 
-public class ManualGames {
+public class ManualNumbers {
 
     private List<LottoNumbers> list;
 
-    public ManualGames(final List<LottoNumbers> list) {
+    public ManualNumbers(final List<LottoNumbers> list) {
         this.list = list;
     }
 

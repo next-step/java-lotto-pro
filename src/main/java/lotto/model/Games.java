@@ -9,14 +9,14 @@ public class Games {
 
     private List<Game> list;
 
-    public Games(final int gameCount, final ManualGames manualGames) {
+    public Games(final int gameCount, final ManualNumbers manualNumbers) {
         list = new ArrayList<>();
-        list.addAll(addManualGames(manualGames));
-        list.addAll(addAutoGames(gameCount - manualGames.size()));
+        list.addAll(addManualGames(manualNumbers));
+        list.addAll(addAutoGames(gameCount - manualNumbers.size()));
     }
 
-    private List<Game> addManualGames(final ManualGames manualGames) {
-        return manualGames.getList()
+    private List<Game> addManualGames(final ManualNumbers manualNumbers) {
+        return manualNumbers.getList()
                 .stream()
                 .map(Game::new)
                 .collect(Collectors.toList());
