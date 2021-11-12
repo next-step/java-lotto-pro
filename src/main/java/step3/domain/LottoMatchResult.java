@@ -10,6 +10,9 @@ public class LottoMatchResult {
 
   final private Map<Integer, Integer> matchCountMap = new HashMap<>();
 
+  public LottoMatchResult() {
+  }
+
   public LottoMatchResult(LottoTickets lottoTickets, LottoTicket winningTicket) {
     lottoTickets.getLottoTickets().forEach(lottoTicket -> {
       int matchCount = calculateMatchCount(lottoTicket, winningTicket);
@@ -19,9 +22,10 @@ public class LottoMatchResult {
     });
   }
 
-  public int calculateMatchCount(LottoTicket sourceTicket, LottoTicket targetTicket) {
+  public static int calculateMatchCount(LottoTicket sourceTicket, LottoTicket targetTicket) {
     return (int) sourceTicket.getNumbersAsInteger().stream()
-        .filter(winningNumber -> targetTicket.getNumbersAsInteger().contains(winningNumber)).count();
+        .filter(winningNumber -> targetTicket.getNumbersAsInteger().contains(winningNumber))
+        .count();
   }
 
   public int getMatchCountNum(int matchCount) {
