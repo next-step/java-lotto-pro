@@ -3,7 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,7 +46,7 @@ class LottosTest {
     }
 
     @Test
-    void buy_자동_수동_로또구매_생성() throws IOException {
+    void buy_자동_수동_로또구매_생성() {
         Lottos autoLottos = Lottos.buy(7);
         List<List<Integer>> manualLottos = Arrays.asList(
                 Arrays.asList(1,2,3,4,5,6),

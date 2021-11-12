@@ -9,6 +9,8 @@ import java.util.List;
 
 public class ResultView {
 
+    private ResultView(){}
+
     private static final String RIGHT_SQUARE_BRACKET = "[";
     private static final String LEFT_SQUARE_BRACKET = "]";
 

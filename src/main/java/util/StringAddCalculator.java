@@ -8,7 +8,6 @@ public class StringAddCalculator {
     private static final Pattern PATTERN_DELIMITERS = Pattern.compile("[,:]");
     private static final Pattern PATTERN_CUSTOM = Pattern.compile("//(.)\n(.*)");
     private static final int ZERO = 0;
-    private static final String MESSAGE_INVALID_CHARACTER_FORMAT = "Invalid character format.";
     private static final String MESSAGE_NOT_POSITIVE_INT = "For input only positive integers.";
 
     public static int splitAndSum(String str) {

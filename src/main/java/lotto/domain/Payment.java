@@ -6,7 +6,6 @@ public class Payment {
 
     private static final String THE_PRICE_OF_A_LOTTERY_TICKET_IS_1_000_WON = "The price of a lottery ticket is 1,000 won.";
     private static final String ONLY_NUMBERS_CAN_BE_ENTERED = "Only numbers can be entered.";
-    private static final String THE_PURCHASE_AMOUNT_IS_INSUFFICIENT = "The purchase amount is insufficient.";
     private final int payment;
 
     public Payment(final int payment) {

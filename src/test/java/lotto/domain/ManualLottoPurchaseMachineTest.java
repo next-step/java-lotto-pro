@@ -3,7 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +23,7 @@ class ManualLottoPurchaseMachineTest {
     }
 
     @Test
-    void buy_수동로또구매() throws IOException {
+    void buy_수동로또구매() {
         ManualLottoPurchaseMachine manualLottoPurchaseMachine = ManualLottoPurchaseMachine.from(10, 3, lottos);
         assertThat(manualLottoPurchaseMachine.getManualLottoPurchaseSize()).isEqualTo(3);
     }

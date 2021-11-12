@@ -37,10 +37,6 @@ public enum Ranking {
         return this.amount;
     }
 
-    public int getCorrect() {
-        return this.lottoNumberMatch;
-    }
-
     public String getMessage() { return this.message; }
 
     public long totalWinningMoney(final int hitCount) {
