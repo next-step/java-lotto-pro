@@ -1,0 +1,21 @@
+package step3.domain;
+
+public class LottoTicketsPrice {
+
+  private final int UNIT_TICKET_PRICE = 1000;
+  private final int purchasePrice;
+  private final int actualPurchasePrice;
+
+  public LottoTicketsPrice(int purchasePrice) {
+    this.purchasePrice = purchasePrice;
+    this.actualPurchasePrice = purchasePrice - purchasePrice % UNIT_TICKET_PRICE;
+  }
+
+  public int getTicketCount() {
+    return this.purchasePrice / UNIT_TICKET_PRICE;
+  }
+
+  public int getTicketsPrice() {
+    return this.actualPurchasePrice;
+  }
+}
