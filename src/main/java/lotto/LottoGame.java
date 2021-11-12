@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.function.Supplier;
 
 import lotto.model.Lotto;
+import lotto.model.LottoCount;
 import lotto.model.LottoGenerator;
 import lotto.model.LottoMatcher;
 import lotto.model.MatchResult;
@@ -20,6 +21,10 @@ public class LottoGame {
 
     public static void start() {
         Payment payment = handleException(InputView::readPayment);
+        LottoCount lottoCount = handleException(() -> {
+            int manualCount = InputView.readManualLottoCount();
+            return payment.computeLottoCount(manualCount);
+        });
         Collection<Lotto> generatedLottos = new LottoGenerator(payment).generate();
         OutputView.printLottoPurchase(generatedLottos);
         Lotto winningLotto = handleException(InputView::readWinningLotto);

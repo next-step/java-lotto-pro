@@ -17,11 +17,11 @@ public class PaymentTest {
     }
 
     @Test
-    @DisplayName("구매금액이 주어졌을 때 적절한 로또의 갯수를 반환하는지 테스트")
-    void countLotto() {
+    @DisplayName("구매금액과 수동으로 구매할 로또의 수가 주어졌을 때 적절한 로또의 갯수를 반환하는지 테스트")
+    void computeLottoCount() {
         Payment payment = new Payment(14000);
-        int count = payment.countLotto();
-        assertThat(count).isEqualTo(14000 / LOTTO_PRICE);
+        LottoCount lottoCount = payment.computeLottoCount(3);
+        assertThat(lottoCount).isEqualTo(new LottoCount(3, 14000 / LOTTO_PRICE));
     }
 
     @Test

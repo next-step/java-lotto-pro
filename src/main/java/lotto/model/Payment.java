@@ -23,8 +23,8 @@ public class Payment {
         }
     }
 
-    public int countLotto() {
-        return payment / LOTTO_PRICE;
+    public LottoCount computeLottoCount(int manualCount) {
+        return new LottoCount(manualCount, payment / LOTTO_PRICE);
     }
 
     public RateOfReturn computeRateOfReturn(int prizeMoney) {

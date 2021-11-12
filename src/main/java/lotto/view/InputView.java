@@ -14,6 +14,7 @@ public class InputView {
     private static final Pattern LOTTO_NUMBER_PATTERN = Pattern.compile("\\d+(" + NUMBER_DELIMITER + "\\d+){5}");
 
     private static final String QUERY_FOR_PAYMENT = "구입금액을 입력해주세요.";
+    private static final String QUERY_FOR_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String QUERY_FOR_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String QUERY_FOR_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String INVALID_NUMBER_INPUT_ERR_MSG = "숫자만 입력 가능합니다.";
@@ -27,6 +28,13 @@ public class InputView {
         String payment = Console.readLine();
         validateNumberPattern(payment);
         return new Payment(Integer.parseInt(payment));
+    }
+
+    public static int readManualLottoCount() {
+        System.out.println(QUERY_FOR_MANUAL_LOTTO_COUNT);
+        String manualLottoCount = Console.readLine();
+        validateNumberPattern(manualLottoCount);
+        return Integer.parseInt(manualLottoCount);
     }
 
     public static Lotto readWinningLotto() {

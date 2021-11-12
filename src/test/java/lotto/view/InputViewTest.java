@@ -3,6 +3,7 @@ package lotto.view;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -19,6 +20,24 @@ public class InputViewTest {
             payment
         );
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "-1"})
+    void readManualLottoCount(String manualLottoCount) {
+        assertTestWithMockedInput(
+            () -> assertThatIllegalArgumentException().isThrownBy(InputView::readManualLottoCount),
+            manualLottoCount
+        );
+    }
+
+    // @ParameterizedTest
+    // @ValueSource(strings = {"1q2w3e4r!", "1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,46", "0,1,2,3,4,5"})
+    // void readManualLottoByInvalidInput(String numbers) {
+    //     assertTestWithMockedInput(
+    //         () -> assertThatIllegalArgumentException().isThrownBy(InputView::readManualLotto),
+    //         numbers
+    //     );
+    // }
 
     @ParameterizedTest
     @ValueSource(strings = {"1q2w3e4r!", "1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,46", "0,1,2,3,4,5"})
