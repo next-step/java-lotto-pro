@@ -38,6 +38,18 @@ public class Money {
 		return money;
 	}
 
+	public Money getPurchaseAmount(int inputQuantity) {
+		return new Money(LottoShop.LOTTO_PRICE.money * inputQuantity);
+	}
+
+	public boolean isGreater(Money purchaseAmount) {
+		return money < purchaseAmount.money;
+	}
+
+	public Money deduct(Money inputPurchaseAmount) {
+		return new Money(money - inputPurchaseAmount.money);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
