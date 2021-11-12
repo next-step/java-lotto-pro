@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.model.Lotto;
+import lotto.model.LottoTicket;
 import lotto.model.Lottos;
 
 import java.util.Arrays;
@@ -25,7 +25,7 @@ public class InputView {
 
     public void showLottoBoughtMessage(Lottos lottos) {
         System.out.printf("%d개를 구매했습니다.%n", lottos.size());
-        final List<Lotto> lottoList = lottos.getLottos();
+        final List<LottoTicket> lottoList = lottos.getLottos();
         lottoList.forEach(lotto -> System.out.println(lotto.toString()));
     }
 

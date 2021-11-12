@@ -4,11 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,6 +25,20 @@ public class LottoTicketTest {
                 .isInstanceOf(RuntimeException.class);
     }
 
+    @Test
+    void countPurchasable_3000원() {
+        final Money price = new Money(3_000);
+        final int count = LottoTicket.countPurchasable(price);
+        assertThat(count).isEqualTo(3);
+    }
+
+    @Test
+    void countPurchasable_0원() {
+        final Money price = new Money(0);
+        final int count = LottoTicket.countPurchasable(price);
+        assertThat(count).isEqualTo(0);
+    }
+
     @ParameterizedTest
     @MethodSource("provideWinTicket")
     void calculateNumberOfMatch(WinTicket winTicket, int expectedNumberOfMatch) {
@@ -43,12 +54,5 @@ public class LottoTicketTest {
                 Arguments.of(WinTicket.of(Arrays.asList(11, 12, 13, 14, 15, 16), 17), 0),
                 Arguments.of(WinTicket.of(Arrays.asList(1, 2, 13, 14, 15, 16), 17), 2)
         );
-    }
-
-    @Test
-    void contains() {
-        final LottoTicket buyTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(buyTicket.contains(new LottoNumber(2))).isTrue();
-        assertThat(buyTicket.contains(new LottoNumber(7))).isFalse();
     }
 }

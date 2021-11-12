@@ -27,12 +27,20 @@ public class LottoTicket {
         }
     }
 
-    @Override
-    public String toString() {
-        return numbers.toString();
+    public static int countPurchasable(Money money) {
+        if (money.isZero()) {
+            return 0;
+        }
+        return (int) money.divideBy(LottoConstants.SELLING_PRICE);
     }
 
-    public int calculateNumberOfMatch(LottoTicket ticket) {
+    public Winning calculateWinning(WinTicket winTicket) {
+        final int count = calculateNumberOfMatch(winTicket);
+        final boolean bonus = numbers.contains(winTicket.getBonusNumber());
+        return Winning.of(count, bonus);
+    }
+
+    int calculateNumberOfMatch(LottoTicket ticket) {
         int result = 0;
         for (LottoNumber number : ticket.numbers) {
             result += count(number);
@@ -41,10 +49,12 @@ public class LottoTicket {
     }
 
     private int count(LottoNumber lottoNumber) {
-        return this.numbers.contains(lottoNumber) ? 1 : 0;
+        return numbers.contains(lottoNumber) ? 1 : 0;
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return this.numbers.contains(lottoNumber);
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
+
 }

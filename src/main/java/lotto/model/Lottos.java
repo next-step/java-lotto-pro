@@ -11,25 +11,25 @@ import static lotto.LottoConstants.MIN_VALUE;
 import static lotto.LottoConstants.LOTTO_SIZE;
 
 public class Lottos {
-    private final List<Lotto> lottos;
+    private final List<LottoTicket> lottos;
 
-    private Lottos(List<Lotto> lottos) {
+    private Lottos(List<LottoTicket> lottos) {
         this.lottos = lottos;
     }
 
     public static Lottos generateAuto(int count) {
-        final List<Lotto> lottos = new ArrayList<>();
+        final List<LottoTicket> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
             final List<Integer> numbers = Lottos.getRandomNumbers();
-            final Lotto lotto = Lotto.generate(numbers);
+            final LottoTicket lotto = LottoTicket.of(numbers);
             lottos.add(lotto);
         }
 
         return new Lottos(lottos);
     }
 
-    public List<Lotto> getLottos() {
+    public List<LottoTicket> getLottos() {
         return lottos;
     }
 
@@ -39,7 +39,7 @@ public class Lottos {
 
     public LottoResult calculateWinning(WinTicket winTicket) {
         final List<Winning> winnings = new ArrayList<>();
-        for (Lotto lotto : lottos) {
+        for (LottoTicket lotto : lottos) {
             winnings.add(lotto.calculateWinning(winTicket));
         }
         return new LottoResult(winnings);

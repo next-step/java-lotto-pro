@@ -21,11 +21,18 @@ public enum Winning {
         this.bonus = bonus;
     }
 
-    public static Winning ofMatchCount(int count) {
+    public static Winning of(int count, boolean bonus) {
         return Arrays.stream(Winning.values())
-                .filter(w -> w.matchCount == count)
+                .filter(winning -> winning.match(count, bonus))
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    private boolean match(int count, boolean bonus) {
+        if (this.bonus) {
+            return bonus && this.matchCount == count;
+        }
+        return this.matchCount == count;
     }
 
     public Money getReward() {

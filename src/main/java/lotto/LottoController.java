@@ -28,7 +28,7 @@ public class LottoController {
     }
 
     private Lottos generateLottos(int buyMoney) {
-        final int lottoCount = Lotto.countPurchasable(new Money(buyMoney));
+        final int lottoCount = LottoTicket.countPurchasable(new Money(buyMoney));
         final Lottos lottos = Lottos.generateAuto(lottoCount);
         inputView.showLottoBoughtMessage(lottos);
         return lottos;
