@@ -3,6 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,7 +16,8 @@ class LottosTest {
 	void 입력된_구입금액만큼_로또생성기로_로또를_생성하는_테스트(String inputMoney, int lottoNumbersListSize) {
 		// given
 		Money money = Money.from(inputMoney);
-		List<LottoNumbers> lottoNumbersList = LottoGenerator.getInstance().generateLottoNumbers(money);
+		List<LottoNumbers> lottoNumbersList = LottoGenerator.getInstance()
+			.generateLottoNumbers(money, new ArrayList<>(), "0");
 		System.out.println(lottoNumbersList.size());
 
 		// when
@@ -38,7 +40,7 @@ class LottosTest {
 		// given
 		Money money = Money.from(inputMoney);
 		List<LottoNumbers> lottoGenerator = LottoGenerator.getInstance()
-			.generateLottoNumbers(money, Collections.singletonList(inputNumber));
+			.generateLottoNumbers(money, Collections.singletonList(inputNumber), "1");
 
 		// when
 		Lottos lottos = Lottos.of(lottoGenerator);

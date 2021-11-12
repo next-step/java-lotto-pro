@@ -1,6 +1,7 @@
 package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -68,7 +69,7 @@ class LottoGeneratorTest {
 		// when
 		List<LottoNumbers> lottoNumbersList = LottoGenerator
 			.getInstance()
-			.generateLottoNumbers(inputMoney, inputNumberList);
+			.generateLottoNumbers(inputMoney, inputNumberList, String.valueOf(inputNumberList.size()));
 
 		// then
 		assertThat(lottoNumbersList).hasSize(inputMoney.calculateLottoAmount());
@@ -79,10 +80,11 @@ class LottoGeneratorTest {
 		// given
 		Money inputMoney = Money.from("1000");
 		List<String> inputList = Arrays.asList("12,3,4,5,6,7", "1,2,3,4,5,6", "1,2,3,4,5,6");
+		String inputSize = String.valueOf(inputList.size());
 
 		// when // then
 		assertThatThrownBy(() -> {
-			LottoGenerator.getInstance().generateLottoNumbers(inputMoney, inputList);
+			LottoGenerator.getInstance().generateLottoNumbers(inputMoney, inputList, inputSize);
 		}).isInstanceOf(LottoException.class)
 			.hasMessageContaining(ErrorCode.INVALID_MONEY_INPUT_NUMBER_SIZE_ERROR.getErrorMessage());
 	}
@@ -115,4 +117,31 @@ class LottoGeneratorTest {
 			.hasMessageContaining(ErrorCode.INVALID_INPUT_SIZE_INPUT_LIST_SIZE_ERROR.getErrorMessage());
 	}
 
+	@Test
+	void 싱글톤_객체_생성테스트() {
+		//given //when
+		LottoGenerator lottoGenerator1 = LottoGenerator.getInstance();
+		LottoGenerator lottoGenerator2 = LottoGenerator.getInstance();
+
+		//then
+		assertThat(lottoGenerator1.equals(lottoGenerator2)).isTrue();
+	}
+
+	@Test
+	void 입력금액과_수동로또_갯수와_리스트로_최종로또를_생성하는_기능테스트() {
+		//given
+		Money inputMoney = Money.from("5000");
+		List<String> inputList = Arrays.asList("12,3,4,5,6,7", "1,2,3,4,5,6", "1,2,3,4,5,6");
+		String inputSize = "3";
+
+		//when
+		List<LottoNumbers> lottoNumbersList = LottoGenerator.getInstance()
+			.generateLottoNumbers(inputMoney, inputList, inputSize);
+
+		//then
+		assertAll(
+			() -> assertThat(lottoNumbersList).hasSize(inputMoney.calculateLottoAmount()),
+			() -> assertThat(lottoNumbersList).contains(LottoNumbers.from("12,3,4,5,6,7"))
+		);
+	}
 }
