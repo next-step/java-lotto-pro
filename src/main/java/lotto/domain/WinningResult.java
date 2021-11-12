@@ -19,21 +19,18 @@ public class WinningResult {
         return winnerPerRank;
     }
 
-    public double profitRate(Money money) {
-        return profitAmount() / (double) money.getPurchaseAmount();
-    }
-
-    private long profitAmount() {
+    public PrizeMoney prizeMoneyStatistics() {
         Set<Map.Entry<Rank, Integer>> resultEntrySet = this.result.entrySet();
-        long profitAmount = 0L;
+        PrizeMoney prizeMoney = null;
 
         for (Map.Entry<Rank, Integer> winningRanks : resultEntrySet) {
-            Rank key = winningRanks.getKey();
+            Rank rank = winningRanks.getKey();
             Integer winningCount = winningRanks.getValue();
 
-            profitAmount += key.prizeMoneyCalculation(winningCount);
+            prizeMoney = rank.getPrizeMoney();
+            prizeMoney.prizeMoneyAccumulate(winningCount);
         }
 
-        return profitAmount;
+        return prizeMoney;
     }
 }

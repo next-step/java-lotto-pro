@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoIssuanceCount;
+import lotto.domain.Money;
 import lotto.exception.ErrorMessage;
 import lotto.exception.PurchaseAmountWrongFormatException;
 
@@ -28,7 +28,7 @@ public class LottoPurchaseView {
     }
 
     private static void purchaseAmountRangeValid(int purchaseAmount) {
-        if (purchaseAmount < LottoIssuanceCount.LOTTO_PRICE || purchaseAmount % LottoIssuanceCount.LOTTO_PRICE != 0) {
+        if (purchaseAmount < Money.LOTTO_PRICE || purchaseAmount % Money.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_AMOUNT_NOT_ONE_THOUSAND_WON.getMessage());
         }
     }

@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.exception.ErrorMessage;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 // 로또
 public class Lotto {
@@ -19,24 +16,20 @@ public class Lotto {
         this.numbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public int winningNumberMatchCount(Lotto lotto) {
-        int winningNumberMatchCount = 0;
-
-        for (LottoNumber winningNumber : lotto.numbers) {
-            winningNumberMatchCount += winningNumberMatchCount(winningNumber.getNumber());
-        }
-        return winningNumberMatchCount;
+    public int winningNumberMatch(Lotto winningNumbers) {
+        return (int) winningNumbers.numbers
+                .stream()
+                .filter(this::contains)
+                .mapToInt(LottoNumber::getNumber)
+                .count();
     }
 
-    private int winningNumberMatchCount(Integer winningNumber) {
-        if (isWinningNumberMatch(winningNumber)) {
-            return 1;
-        }
-        return 0;
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
-    private boolean isWinningNumberMatch(Integer winningNumber) {
-        return this.numbers.contains(new LottoNumber(winningNumber));
+    public List<LottoNumber> lottoNumbers() {
+        return new ArrayList<>(this.numbers);
     }
 
     private void numberCountValid(List<LottoNumber> lottoNumbers) {

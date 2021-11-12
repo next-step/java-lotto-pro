@@ -1,48 +1,29 @@
 package lotto.domain;
 
-import lotto.exception.ErrorMessage;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    public WinningResult winningResult(List<Integer> winningNumbers) {
-        winningNumberSizeValid(winningNumbers);
-
+    public WinningResult winningResult(WinningLotto winningLotto) {
         Map<Rank, Integer> winningResult = new EnumMap<>(Rank.class);
 
-        Lotto winningNumber = winningNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
-
         for (Lotto lotto : lottos) {
-            int winningNumberMatchCount = lotto.winningNumberMatchCount(winningNumber);
-            Rank rank = Rank.of(winningNumberMatchCount);
-            if (rank.isPrize()) {
-                winningResultAccumulate(winningResult, winningNumberMatchCount);
-            }
+            Rank rank = winningLotto.rankResult(lotto);
+            winningResultAccumulate(winningResult, rank);
         }
         return new WinningResult(winningResult);
     }
 
-    private void winningNumberSizeValid(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != Lotto.LOTTO_COUNT) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_WINNING_NUMBER_COUNT.getMessage());
-        }
-    }
-
-    private void winningResultAccumulate(Map<Rank, Integer> winningResult, int winningNumberMatchCount) {
-        Rank rank = Rank.of(winningNumberMatchCount);
-
-        if (winningResult.putIfAbsent(rank, 0) == null) {
-            winningResult.put(rank, winningResult.get(rank) + 1);
+    private void winningResultAccumulate(Map<Rank, Integer> winningResult, Rank rank) {
+        if (rank.isPrize()) {
+            Integer winsNumberCount = winningResult.computeIfAbsent(rank, key -> 0);
+            winningResult.put(rank, winsNumberCount + 1);
         }
     }
 

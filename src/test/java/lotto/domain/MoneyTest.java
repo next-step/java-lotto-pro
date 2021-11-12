@@ -9,13 +9,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class LottoIssuanceCountTest {
+class MoneyTest {
 
     @DisplayName("1000원당 로또 1장")
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "10000:10", "100000:100"}, delimiter = ':')
     void oneLottoPerOneThousandWon(int purchaseAmount, int lottoIssuanceCount) {
-        assertThat(LottoIssuanceCount.issuanceNumberCalculation(new Money(purchaseAmount))).isEqualTo(new LottoIssuanceCount(lottoIssuanceCount));
+        Money money = new Money(purchaseAmount);
+        assertThat(money.divide()).isEqualTo(lottoIssuanceCount);
     }
 
     @DisplayName("구매금액이 1000원 단위가 아닐 시 예외")

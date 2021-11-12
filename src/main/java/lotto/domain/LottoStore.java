@@ -11,15 +11,14 @@ public class LottoStore {
     }
 
     public static Lottos purchase(Money money) {
-        LottoIssuanceCount issuance = LottoIssuanceCount.issuanceNumberCalculation(money);
-        List<Lotto> lottos = createLottos(issuance);
+        List<Lotto> lottos = createLottos(money.divide());
         return new Lottos(lottos);
     }
 
-    private static List<Lotto> createLottos(LottoIssuanceCount issuance) {
+    private static List<Lotto> createLottos(int issuanceCount) {
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < issuance.getIssuanceCount(); i++) {
+        for (int i = 0; i < issuanceCount; i++) {
             List<Integer> generatedLottoNumbers = LottoNumberGenerator.generator();
 
             List<LottoNumber> lottoNumbers = generatedLottoNumbers.stream()
