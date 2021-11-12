@@ -5,12 +5,16 @@ import java.util.List;
 
 public class LottoTickets {
 
-  private final List<LottoTicket> lottoTickets = new ArrayList<>();
+  private List<LottoTicket> lottoTickets = new ArrayList<>();
 
   public LottoTickets(int ticketCount) {
     for (int i = 0; i < ticketCount; i++) {
       this.lottoTickets.add(new LottoTicket());
     }
+  }
+
+  public LottoTickets(List<LottoTicket> lottoTicketList) {
+    this.lottoTickets = lottoTicketList;
   }
 
   public List<LottoTicket> getLottoTickets() {

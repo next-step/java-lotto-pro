@@ -10,16 +10,23 @@ public class LottoTicket {
 
   private final List<LottoNumber> numbers;
 
+  // 랜덤 티켓
   public LottoTicket() {
     this.numbers = generateRandomLottoNumbers();
   }
 
+  // 번호를 입력 받는 티켓
   public LottoTicket(List<LottoNumber> numbers) {
     this.numbers = numbers;
+    validate();
   }
 
   public List<LottoNumber> getNumbers() {
     return this.numbers;
+  }
+
+  public List<Integer> getNumbersAsInteger() {
+    return this.numbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList());
   }
 
   private List<LottoNumber> generateRandomLottoNumbers() {
@@ -40,5 +47,12 @@ public class LottoTicket {
       totalNumbers.add(i);
     }
     return totalNumbers;
+  }
+
+  private void validate() {
+    if (this.numbers == null || this.numbers.size() != NUMBERS_COUNT
+        || this.numbers.stream().distinct().count() != NUMBERS_COUNT) {
+      throw new RuntimeException("[ERROR] not valid lotto ticket. numbers = " + this.numbers);
+    }
   }
 }
