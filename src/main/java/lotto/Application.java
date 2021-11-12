@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Payment payment = Payment.from(InputView.inputAmount());
 
