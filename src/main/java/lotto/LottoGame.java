@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Collection;
 import java.util.function.Supplier;
 
 import lotto.model.Lotto;
@@ -19,13 +20,14 @@ public class LottoGame {
 
     public static void start() {
         Payment payment = handleException(InputView::readPayment);
-        OutputView.printLottoPurchase(new LottoGenerator(payment).generate());
+        Collection<Lotto> generatedLottos = new LottoGenerator(payment).generate();
+        OutputView.printLottoPurchase(generatedLottos);
         Lotto winningLotto = handleException(InputView::readWinningLotto);
         LottoMatcher lottoMatcher = handleException(() -> {
             Number bonusNumber = InputView.readBonusNumber();
             return new LottoMatcher(bonusNumber, winningLotto);
         });
-        MatchResult matchResult = lottoMatcher.match(payment, new LottoGenerator(payment).generate());
+        MatchResult matchResult = lottoMatcher.match(payment, generatedLottos);
         OutputView.printLottoResult(matchResult);
     }
 
