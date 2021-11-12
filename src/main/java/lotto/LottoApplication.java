@@ -13,12 +13,29 @@ public class LottoApplication {
 
 	public static void main(String[] args) {
 		Repeater.init();
-
 		Money purchaseAmount = null;
 		while (Repeater.isContinue()) {
 			purchaseAmount = InputView.enterPurchaseAmount();
 			Repeater.set(purchaseAmount);
 		}
+		OutputView.newLine();
+
+		Repeater.init();
+		Money manualPurchaseAmount = null;
+		while (Repeater.isContinue()) {
+			manualPurchaseAmount = InputView.enterManualLottoPurchaseQuantity(purchaseAmount);
+			Repeater.set(manualPurchaseAmount);
+		}
+		OutputView.newLine();
+
+		Repeater.init();
+		Lottos manualLotts = null;
+		while (Repeater.isContinue()) {
+			manualLotts = InputView.enterManualLottoNumbers(manualPurchaseAmount);
+			Repeater.set(manualPurchaseAmount);
+		}
+		OutputView.newLine();
+
 
 		Lottos lottos = LottoShop.sell(purchaseAmount);
 
