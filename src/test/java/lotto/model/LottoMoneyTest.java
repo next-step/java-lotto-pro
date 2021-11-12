@@ -36,7 +36,7 @@ public class LottoMoneyTest {
     void 로또수동구입_입력값_테스트_정상(String money, String count) {
 
         LottoMoney lottoMoney = new LottoMoney(money);
-        int manualLottoPaperCount = lottoMoney.buyManualLottoPaper(count);
+        int manualLottoPaperCount = lottoMoney.parseManualLottoPaperCount(count);
 
         assertThat(lottoMoney.isMoneySame((manualLottoPaperCount + lottoMoney.getLottoPaperCount()) * GameRule.LOTTO_PAPER_PRICE)).isEqualTo(true);
     }
@@ -46,6 +46,6 @@ public class LottoMoneyTest {
     @CsvSource(value = {"14000:-20","14000:15"}, delimiter = ':')
     void 로또수동구입_입력값_테스트_예외(String money, String count) {
 
-        assertThrows(IllegalArgumentException.class, () -> new LottoMoney(money).buyManualLottoPaper(count));
+        assertThrows(IllegalArgumentException.class, () -> new LottoMoney(money).parseManualLottoPaperCount(count));
     }
 }

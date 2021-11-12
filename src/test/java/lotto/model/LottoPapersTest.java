@@ -60,7 +60,7 @@ public class LottoPapersTest {
         // given
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         LottoMoney lottoMoney = new LottoMoney(buyPrice);
-        int manualLottoPaper = lottoMoney.buyManualLottoPaper(manualSize);
+        int manualLottoPaper = lottoMoney.parseManualLottoPaperCount(manualSize);
 
         List<LottoPaper> manualLottoPapers = new ArrayList<>();
         manualLottoPapers.add(lottoNumberGenerator.createManualLottoNumber(manualNumber1));
