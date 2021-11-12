@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    private static final String BOUGHT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
+    private static final String BOUGHT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String YIELD_MESSAGE = "총 수익률은 %s입니다.";
     private static final String STATS = "%d개 일치 (%d원)- %d개\n";
     private static final String LINE_BREAK = "\n";

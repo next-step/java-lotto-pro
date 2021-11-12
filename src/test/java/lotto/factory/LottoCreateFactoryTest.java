@@ -32,6 +32,4 @@ public class LottoCreateFactoryTest {
 
         assertThat(winningLotto).isEqualTo(new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7)));
     }
-
-
 }
