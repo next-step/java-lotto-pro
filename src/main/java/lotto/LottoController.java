@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.view.LottoPurchaseListView;
 import lotto.view.LottoPurchaseView;
 import lotto.view.LottoWinnerStatisticView;
@@ -16,6 +17,8 @@ public class LottoController {
 
         LottoPurchaseListView.print(lottos);
 
-        LottoWinnerStatisticView.print(lottos.winningResult(LottoWinningNumberView.input(), LottoWinningBonusNumberView.input()), money);
+        WinningLotto winningLotto = new WinningLotto(LottoWinningNumberView.input(), LottoWinningBonusNumberView.input());
+
+        LottoWinnerStatisticView.print(lottos.winningResult(winningLotto), money);
     }
 }

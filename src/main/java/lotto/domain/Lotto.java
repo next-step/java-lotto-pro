@@ -16,22 +16,20 @@ public class Lotto {
         this.numbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public WinningNumberMatchResult winningNumberMatch(Lotto winningNumbers, LottoNumber bonusNumber) {
-        int winningNumberMatchCount = (int) winningNumbers.numbers
+    public int winningNumberMatch(Lotto winningNumbers) {
+        return (int) winningNumbers.numbers
                 .stream()
                 .filter(this::contains)
                 .mapToInt(LottoNumber::getNumber)
                 .count();
+    }
 
-        return new WinningNumberMatchResult(winningNumberMatchCount, contains(bonusNumber));
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
     public List<LottoNumber> lottoNumbers() {
         return new ArrayList<>(this.numbers);
-    }
-
-    private boolean contains(LottoNumber lottoNumber) {
-        return this.numbers.contains(lottoNumber);
     }
 
     private void numberCountValid(List<LottoNumber> lottoNumbers) {

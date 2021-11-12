@@ -28,9 +28,10 @@ class WinningTest {
         Lotto verifiedWinningNumber = Stream.of(1,2,3,4,5,6)
                 .map(LottoNumber::new)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+        WinningLotto winningLotto = new WinningLotto(verifiedWinningNumber, bonusNumber);
 
         //when
-        WinningResult winningResult = lottos.winningResult(verifiedWinningNumber, bonusNumber);
+        WinningResult winningResult = lottos.winningResult(winningLotto);
 
         //then
         assertThat(winningResult.winnerPerRank(rank)).isEqualTo(1);
@@ -56,22 +57,15 @@ class WinningTest {
     @Test
     void duplicateWinningNumberAndBonusNumberExceptionTest() {
         //given
-        Lotto lotto = Stream.of(1, 2, 3, 4, 5, 6)
+        Lotto winningNumber = Stream.of(1,2,3,4,5,45)
                 .map(LottoNumber::new)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
-
-        Lotto verifiedWinningNumber = Stream.of(1,2,3,4,5,45)
-                .map(LottoNumber::new)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
-
-        Lottos lottos = Stream.of(lotto)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
 
         LottoNumber bonusNumber = new LottoNumber(45);
 
         //when and then
         assertThatThrownBy( () -> {
-            lottos.winningResult(verifiedWinningNumber, bonusNumber);
+            new WinningLotto(winningNumber, bonusNumber);
         }).isInstanceOf(BonusNumberDuplicateException.class);
     }
 
