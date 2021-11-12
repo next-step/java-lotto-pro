@@ -10,15 +10,15 @@ import java.util.List;
 public class ManualLottoService {
     private static final int MANUAL_LOTTO_COUNT_MINIMUM = 0;
 
-    public static List<Lotto> createManualLotties(int manualLottoCount, List<String> inputManualLottoNumbersString) {
+    public static List<Lotto> createManualLottos(int manualLottoCount, List<String> inputManualLottoNumbersString) {
         validateManualLottoCount(manualLottoCount);
         validateManualLottoNumbersStringSize(manualLottoCount, inputManualLottoNumbersString.size());
-        List<Lotto> manualLotties = new LinkedList<>();
+        List<Lotto> manualLottos = new LinkedList<>();
 
         for (int i = 0; i < manualLottoCount; i++) {
-            manualLotties.add(new Lotto(new LottoNumbers(StringUtils.separate(inputManualLottoNumbersString.get(i)))));
+            manualLottos.add(new Lotto(new LottoNumbers(StringUtils.separate(inputManualLottoNumbersString.get(i)))));
         }
-        return manualLotties;
+        return manualLottos;
     }
 
     private static void validateManualLottoNumbersStringSize(int manualLottoCount, int manualLottoNumbersStringSize) {

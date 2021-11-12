@@ -15,16 +15,16 @@ public class LottoService {
 
     public static void play() {
         int boughtMoney = new BoughtMoney(InputView.inputBoughtMoney()).getBoughtMoney();
-        int manualLottoCount = InputView.inputManualLottoCount();;
+        int manualLottoCount = InputView.inputManualLottoCount();
         int autoLottoCount = LottoServiceCalculator.getLottoCount(boughtMoney) - manualLottoCount;
         validateManualLottoCount(autoLottoCount);
-        List<Lotto> lotties = ManualLottoService.createManualLotties(manualLottoCount, InputView.inputManualLottoNumbers(manualLottoCount));
-        lotties.addAll(createAutoLotties(autoLottoCount));
+        List<Lotto> lottos = ManualLottoService.createManualLottos(manualLottoCount, InputView.inputManualLottoNumbers(manualLottoCount));
+        lottos.addAll(createAutoLottos(autoLottoCount));
         ResultView.printLottoCount(manualLottoCount, autoLottoCount);
-        ResultView.printLottoNumbers(lotties);
+        ResultView.printLottoNumbers(lottos);
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(StringUtils.separate(InputView.inputWinningNumber()),
                                                                                     new BonusNumber(InputView.inputBonusNumber()));
-        Map<LottoPrize, Integer> lottoResultMap = createLottoResult(lotties, winningLottoNumbers);
+        Map<LottoPrize, Integer> lottoResultMap = createLottoResult(lottos, winningLottoNumbers);
         ResultView.printWinningStatistics(lottoResultMap);
         ResultView.printProfitRate(LottoServiceCalculator.calculateProfitRate(lottoResultMap, boughtMoney));
     }
@@ -35,9 +35,9 @@ public class LottoService {
         }
     }
 
-    private static Map<LottoPrize, Integer> createLottoResult(List<Lotto> lottoList, WinningLottoNumbers winningLottoNumbers) {
+    private static Map<LottoPrize, Integer> createLottoResult(List<Lotto> lottos, WinningLottoNumbers winningLottoNumbers) {
         Map<LottoPrize, Integer> lottoResultMap = new HashMap<>();
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottos) {
             LottoPrize lottoPrize = lotto.compareWinningNumbers(winningLottoNumbers);
             int lottoWinningCount = lottoResultMap.getOrDefault(lottoPrize, 0);
             lottoResultMap.put(lottoPrize, ++lottoWinningCount);
@@ -45,11 +45,11 @@ public class LottoService {
         return lottoResultMap;
     }
 
-    private static List<Lotto> createAutoLotties(int autoLottoCount) {
-        List<Lotto> lotties = new LinkedList<>();
+    private static List<Lotto> createAutoLottos(int autoLottoCount) {
+        List<Lotto> lottos = new LinkedList<>();
         for (int i = 0; i < autoLottoCount; i++) {
-            lotties.add(new Lotto(new LottoNumbers(ShuffledLottoNumbers.createShuffledLottoNumbers())));
+            lottos.add(new Lotto(new LottoNumbers(ShuffledLottoNumbers.createShuffledLottoNumbers())));
         }
-        return lotties;
+        return lottos;
     }
 }

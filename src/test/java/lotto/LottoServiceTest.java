@@ -40,8 +40,8 @@ public class LottoServiceTest {
     @Test
     void 수동로또_생성() {
         int manualLottoCount = 3;
-        List<Lotto> manualLotties = ManualLottoService.createManualLotties(manualLottoCount, inputManualLottoNumbersString);
-        assertThat(manualLotties).contains(new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"))),
+        List<Lotto> manualLottos = ManualLottoService.createManualLottos(manualLottoCount, inputManualLottoNumbersString);
+        assertThat(manualLottos).contains(new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"))),
                                             new Lotto(new LottoNumbers(Arrays.asList("7", "8", "9", "10", "11", "12"))),
                                             new Lotto(new LottoNumbers(Arrays.asList("13", "14", "15", "16", "17", "18"))));
     }
@@ -49,14 +49,14 @@ public class LottoServiceTest {
     @Test
     void 수동로또_개수_0미만_오류() {
         int manualLottoCount = -1;
-        Assertions.assertThatThrownBy(() -> ManualLottoService.createManualLotties(manualLottoCount, inputManualLottoNumbersString))
+        Assertions.assertThatThrownBy(() -> ManualLottoService.createManualLottos(manualLottoCount, inputManualLottoNumbersString))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 수동로또_개수_입력받은로또_개수_오류() {
         int manualLottoCount = 2;
-        Assertions.assertThatThrownBy(() -> ManualLottoService.createManualLotties(manualLottoCount, inputManualLottoNumbersString))
+        Assertions.assertThatThrownBy(() -> ManualLottoService.createManualLottos(manualLottoCount, inputManualLottoNumbersString))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
