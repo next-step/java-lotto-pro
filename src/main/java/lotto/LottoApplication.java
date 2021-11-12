@@ -14,10 +14,12 @@ public class LottoApplication {
         ResultView.printPurchasedGameCount(gameCount.getValue(), manualGameCount.getValue());
         Games games = new Games(gameCount.getValue(), manualNumbers);
         ResultView.printPurchaseGames(games.getList());
-        WinnerNumbers winningNumbers = InputView.inputWinningNumbers();
+        LottoNumbers firstPrizeNumbers = InputView.inputFirstPrizeNumbers();
+        BonusNumber bonusNumber = InputView.inputBonusNumber(firstPrizeNumbers);
+        WinnerNumbers winningNumbers = new WinnerNumbers(firstPrizeNumbers, bonusNumber);
         Checker checker = new Checker(games, winningNumbers);
-        ResultView.printResult(checker.getResults());
-        ResultView.printEarningRate(purchaseAmount);
+        Integer totalPrizeMoney = ResultView.printResult(checker.getResults());
+        ResultView.printEarningRate(purchaseAmount, totalPrizeMoney);
     }
 
 }
