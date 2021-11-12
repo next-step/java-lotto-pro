@@ -22,28 +22,4 @@ public class MatchResultTest {
             new MatchResult(new Payment(14000), (List<Rank>)null)
         );
     }
-
-    @Test
-    @DisplayName("로또 결과가 주어졌을 때 적절한 수익률을 반환하는지 테스트")
-    void getRateOfReturn() {
-        MatchResult matchResult = new MatchResult(new Payment(14000), Rank.FIFTH, Rank.SECOND);
-        int expectedWinningMoney = Stream.of(Rank.FIFTH, Rank.SECOND)
-            .mapToInt(Rank::getWinningMoney)
-            .sum();
-        RateOfReturn expectedRateOfReturn = new RateOfReturn((double)expectedWinningMoney / 14000);
-
-        RateOfReturn actualRateOfReturn = matchResult.getRateOfReturn();
-
-        assertThat(actualRateOfReturn).isEqualTo(expectedRateOfReturn);
-    }
-
-    @Test
-    @DisplayName("로또 결과가 주어졌을 때 적절한 등수(Rank)의 갯수를 반환하는지 테스트")
-    void countRank() {
-        MatchResult matchResult = new MatchResult(new Payment(14000), Rank.FIFTH, Rank.FIFTH);
-
-        int rankCount = matchResult.countRank(Rank.FIFTH);
-
-        assertThat(rankCount).isEqualTo(2);
-    }
 }

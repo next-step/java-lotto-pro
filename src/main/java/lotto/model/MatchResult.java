@@ -5,10 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 import lotto.model.enums.Rank;
 
 public class MatchResult {
+    private static final String RESULT_HEADER = "당첨 통계" + System.lineSeparator() + "---------";
+    private static final String RATE_OF_RETURN_STATEMENT_FORMAT = "총 수익률은 %s입니다.";
+    private static final String SUCCESS_STATEMENT = "(기준이 1이기 때문에 결과적으로 손해는 아니라는 의미임)";
+    private static final String FAILURE_STATEMENT = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+
     private final Map<Rank, Integer> rankToCount;
     private final RateOfReturn rateOfReturn;
 
@@ -37,12 +43,27 @@ public class MatchResult {
         }
     }
 
-    public RateOfReturn getRateOfReturn() {
-        return rateOfReturn;
+    public String toResultString() {
+        StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
+        stringJoiner.add(RESULT_HEADER);
+        for (Rank rank : Rank.getRanksHavingWinningMoney()) {
+            int totalCount = rankToCount.get(rank);
+            String matchStatement = rank.computeMatchStatement(totalCount);
+            stringJoiner.add(matchStatement);
+        }
+        stringJoiner.add(computeRateOfReturnStatement());
+        return stringJoiner.toString();
     }
 
-    public int countRank(Rank rank) {
-        return rankToCount.get(rank);
+    private String computeRateOfReturnStatement() {
+        return String.format(RATE_OF_RETURN_STATEMENT_FORMAT, rateOfReturn) + getTrailingStatement();
+    }
+
+    private String getTrailingStatement() {
+        if (rateOfReturn.isLosingMoney()) {
+            return FAILURE_STATEMENT;
+        }
+        return SUCCESS_STATEMENT;
     }
 
     @Override
