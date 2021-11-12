@@ -33,38 +33,6 @@ class WinningTest {
         }).isInstanceOf(BonusNumberDuplicateException.class);
     }
 
-    @DisplayName("로또 번호와 당첨 번호 일치 개수")
-    @Test
-    void winningNumberMatchTest() {
-        //given
-        Lotto lotto = Stream.of(1,2,3,4,5,6)
-                .map(LottoNumber::new)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
-        Lotto winningNumbers = Stream.of(1,40,41,42,43,44)
-                .map(LottoNumber::new)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
-
-        //when
-        int winningNumberMatch = lotto.winningNumberMatch(winningNumbers);
-
-        //then
-        assertThat(winningNumberMatch).isEqualTo(1);
-    }
-
-    @DisplayName("로또 번호와 보너스 번호 일치 여부")
-    @Test
-    void bonusNumberMatchTest() {
-        //given
-        Lotto lotto = Stream.of(1,2,3,4,5,6)
-                .map(LottoNumber::new)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
-
-        //when
-        boolean bonusNumberMatch = lotto.contains(new LottoNumber(6));
-
-        assertThat(bonusNumberMatch).isTrue();
-    }
-
     @DisplayName("당첨번호와 로또번호가 3~6개 사이 일치 일 시 당첨")
     @ParameterizedTest
     @CsvSource(value = {"0:false:true", "0:false:false", "1:false:false", "2:false:false", "3:true:false", "4:true:false", "5:true:false", "6:true:false", "7:false:false"}, delimiter = ':')
