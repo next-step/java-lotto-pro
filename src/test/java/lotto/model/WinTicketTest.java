@@ -3,6 +3,7 @@ package lotto.model;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +16,6 @@ public class WinTicketTest {
         final WinTicket ticket = WinTicket.of(numbers, 20);
         assertThat(ticket).isNotNull();
         assertThat(ticket).isInstanceOf(WinTicket.class);
-        assertThat(ticket.getBonusNumber()).isEqualTo(new LottoNumber(20));
     }
 
     @Test
@@ -24,5 +24,14 @@ public class WinTicketTest {
 
         assertThatThrownBy(() -> WinTicket.of(numbers, 20))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void matchBonusNumber() {
+        final WinTicket ticket = WinTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), 20);
+        assertThat(ticket.matchBonusNumber(Collections.singletonList(new LottoNumber(20))))
+                .isTrue();
+        assertThat(ticket.matchBonusNumber(Collections.singletonList(new LottoNumber(19))))
+                .isFalse();
     }
 }

@@ -41,18 +41,18 @@ public class LottoTicketTest {
 
     @ParameterizedTest
     @MethodSource("provideWinTicket")
-    void calculateNumberOfMatch(WinTicket winTicket, int expectedNumberOfMatch) {
+    void calculateNumberOfMatch(LottoTicket winLottoTicket, int expectedNumberOfMatch) {
         final LottoTicket buyTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(buyTicket.calculateNumberOfMatch(winTicket))
+        assertThat(buyTicket.calculateNumberOfMatch(winLottoTicket))
                 .isEqualTo(expectedNumberOfMatch);
     }
 
     private static Stream<Arguments> provideWinTicket() {
         return Stream.of(
-                Arguments.of(WinTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7), 6),
-                Arguments.of(WinTicket.of(Arrays.asList(11, 12, 13, 14, 15, 16), 17), 0),
-                Arguments.of(WinTicket.of(Arrays.asList(1, 2, 13, 14, 15, 16), 17), 2)
+                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 6),
+                Arguments.of(LottoTicket.of(Arrays.asList(11, 12, 13, 14, 15, 16)), 0),
+                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 13, 14, 15, 16)), 2)
         );
     }
 }

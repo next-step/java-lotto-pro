@@ -1,26 +1,27 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class WinTicket extends LottoTicket {
+public class WinTicket {
+
+    private final LottoTicket lottoTicket;
+
     private final LottoNumber bonusNumber;
 
-    private WinTicket(List<LottoNumber> numbers, LottoNumber bonusNumber) {
-        super(numbers);
+    public WinTicket(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        this.lottoTicket = lottoTicket;
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinTicket of(List<Integer> numbers, Integer bonusNumber) {
-        final List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-        final LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
-        return new WinTicket(lottoNumbers, bonusLottoNumber);
+    public static WinTicket of(List<Integer> numbers, int bonusNumber) {
+        return new WinTicket(LottoTicket.of(numbers), new LottoNumber(bonusNumber));
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public int calculateNumberOfMatch(LottoTicket lottoTicket) {
+        return this.lottoTicket.calculateNumberOfMatch(lottoTicket);
+    }
+
+    public boolean matchBonusNumber(List<LottoNumber> numbers) {
+        return numbers.contains(bonusNumber);
     }
 }

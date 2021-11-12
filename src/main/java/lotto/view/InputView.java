@@ -35,7 +35,7 @@ public class InputView {
         showEnterWinNumbersMessage();
         final List<Integer> winNumbers = getWinNumbers();
         showEnterBonusNumbersMessage();
-        final Integer bonusNumber = getBonusNumber();
+        final int bonusNumber = getBonusNumber();
         return WinTicket.of(winNumbers, bonusNumber);
     }
 

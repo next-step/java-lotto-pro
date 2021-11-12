@@ -35,12 +35,12 @@ public class LottoTicket {
     }
 
     public Winning calculateWinning(WinTicket winTicket) {
-        final int count = calculateNumberOfMatch(winTicket);
-        final boolean bonus = numbers.contains(winTicket.getBonusNumber());
+        final int count = winTicket.calculateNumberOfMatch(this);
+        final boolean bonus = winTicket.matchBonusNumber(numbers);
         return Winning.of(count, bonus);
     }
 
-    int calculateNumberOfMatch(LottoTicket ticket) {
+    public int calculateNumberOfMatch(LottoTicket ticket) {
         int result = 0;
         for (LottoNumber number : ticket.numbers) {
             result += count(number);
