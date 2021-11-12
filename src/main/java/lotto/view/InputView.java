@@ -58,7 +58,7 @@ public class InputView {
         final int firstIndex = 0;
         List<LottoNumbers> list = IntStream.range(firstIndex, manualGameCount)
                 .boxed()
-                .map(operand -> inputManualGameNumbers(operand > firstIndex))
+                .map(operand -> inputManualGameNumbers(operand <= firstIndex))
                 .collect(Collectors.toList());
 
         return new ManualGames(list);
