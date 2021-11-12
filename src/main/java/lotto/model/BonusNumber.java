@@ -9,7 +9,7 @@ public class BonusNumber extends LottoNumber {
     private static final String INVALID_DUPLICATE_MESSAGE = "당첨번호와 중복된 보너스번호를 입력할 수 없습니다.";
 
     public BonusNumber(String value, LottoNumbers winningNumbers) {
-        super(value);
+        super(Integer.parseInt(value));
         validateDuplicated(winningNumbers.getValues());
     }
 

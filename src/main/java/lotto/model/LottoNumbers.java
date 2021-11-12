@@ -12,8 +12,8 @@ import static lotto.common.Constants.GET_NUMBER_COUNT;
 public class LottoNumbers {
 
     private static final String LIST_SEPARATOR = ",";
-    private static final String INVALID_NUMBER_COUNT_MESSAGE= "%s개의 번호를 입력해야 합니다.";
-    private static final String INVALID_DUPLICATE_MESSAGE= "중복된 번호를 입력할 수 없습니다.";
+    private static final String INVALID_NUMBER_COUNT_MESSAGE = "%s개의 번호를 입력해야 합니다.";
+    private static final String INVALID_DUPLICATE_MESSAGE = "중복된 번호를 입력할 수 없습니다.";
 
     private List<LottoNumber> values;
 
@@ -21,6 +21,7 @@ public class LottoNumbers {
         String[] inputValues = inputRawValues.replace(" ", "").split(LIST_SEPARATOR);
         validateSize(inputValues);
         this.values = Arrays.stream(inputValues)
+                .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         validateDuplicated();

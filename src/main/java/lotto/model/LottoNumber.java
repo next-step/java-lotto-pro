@@ -16,11 +16,6 @@ public class LottoNumber {
         validateWinningNumber();
     }
 
-    public LottoNumber(final String value) {
-        this.value = Integer.parseInt(value);
-        validateWinningNumber();
-    }
-
     /**
      * 입력값 유효성검사
      * 입력값이 MIN_RANGE_VALUE와 MAX_RANGE_VALUE의 사이에 포함되지 않으면 예외처리를 합니다.
