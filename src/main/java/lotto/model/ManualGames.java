@@ -14,4 +14,8 @@ public class ManualGames {
         return list;
     }
 
+    public int size() {
+        return list.size();
+    }
+
 }

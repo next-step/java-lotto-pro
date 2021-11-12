@@ -12,7 +12,7 @@ public class LottoApplication {
         ManualGameCount manualGameCount = InputView.inputPurchaseManualGameCount(gameCount);
         ManualGames manualGames = InputView.inputManualGames(manualGameCount.getValue());
         ResultView.printPurchasedGameCount(gameCount.getValue(), manualGameCount.getValue());
-        Games games = new Games(gameCount.getValue(), manualGames.getList());
+        Games games = new Games(gameCount.getValue(), manualGames);
         ResultView.printPurchaseGames(games.getList());
         LottoNumbers winningNumbers = InputView.inputWinningNumbers();
         LottoNumber bonusNumber = InputView.inputBonusNumber(winningNumbers);
