@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,9 +17,22 @@ class PaymentTest {
                         .hasMessageContaining("The price of a lottery ticket is 1,000 won.");
     }
 
+    @ParameterizedTest
     @CsvSource(value = {"1500:1", "14000:14"}, delimiter = ':')
     void calculate_구입금액_로또_장수_계산(int pay, int count) {
         int cnt = Payment.from(pay).getPurchaseCount();
         assertThat(cnt).isEqualTo(count);
+    }
+
+    @Test
+    void validate_예외_한글입력() {
+        assertThatThrownBy(()-> Payment.from("a")).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Only numbers can be entered.");
+    }
+
+    @Test
+    void validate_예외_1000원_이하입력() {
+        assertThatThrownBy(()-> Payment.from("999")).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("The price of a lottery ticket is 1,000 won.");
     }
 }
