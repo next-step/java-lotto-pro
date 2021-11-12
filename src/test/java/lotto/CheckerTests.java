@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.model.*;
-import lotto.view.InputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,11 +1,9 @@
 package lotto.view;
 
 import lotto.model.Game;
-import lotto.model.Games;
 import lotto.model.LottoNumber;
 import lotto.model.Rank;
 
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,7 +66,7 @@ public class ResultView {
 
     /**
      * 2위일 경우 추가 메시지 반환
-     * 
+     *
      * @param rank 당첨순위
      * @return 추가메시지
      */
