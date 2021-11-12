@@ -4,12 +4,13 @@ import java.util.Collection;
 import java.util.StringJoiner;
 
 import lotto.model.Lotto;
+import lotto.model.LottoCount;
 import lotto.model.MatchResult;
 import lotto.model.RateOfReturn;
 import lotto.model.enums.Rank;
 
 public class OutputView {
-    private static final String NUMBER_OF_LOTTO_STATEMENT_FORMAT = "%d개를 구매했습니다.";
+    private static final String NUMBER_OF_LOTTO_STATEMENT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String RESULT_HEADER = "당첨 통계" + System.lineSeparator() + "---------";
     private static final String NORMAL_MATCH_STATEMENT_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final String SECOND_MATCH_STATEMENT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
@@ -20,9 +21,11 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoPurchase(Collection<Lotto> lottos) {
+    public static void printLottoPurchase(Collection<Lotto> lottos, LottoCount lottoCount) {
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
-        stringJoiner.add(String.format(NUMBER_OF_LOTTO_STATEMENT_FORMAT, lottos.size()));
+        String numberOfLottoStatement = String.format(NUMBER_OF_LOTTO_STATEMENT_FORMAT, lottoCount.getManualCount(),
+            lottoCount.getAutoCount());
+        stringJoiner.add(numberOfLottoStatement);
         for (Lotto lotto : lottos) {
             stringJoiner.add(lotto.toString());
         }

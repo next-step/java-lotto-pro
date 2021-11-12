@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Supplier;
 
 import lotto.model.Lotto;
@@ -26,14 +27,16 @@ public class LottoGame {
             int manualCount = InputView.readManualLottoCount();
             return payment.computeLottoCount(manualCount);
         });
+        Collection<Lotto> lottos = handleException(() -> InputView.readManualLottos(lottoCount.getManualCount()));
         Collection<Lotto> generatedLottos = LottoGenerator.generate(lottoCount.getAutoCount());
-        OutputView.printLottoPurchase(generatedLottos);
+        lottos.addAll(generatedLottos);
+        OutputView.printLottoPurchase(lottos, lottoCount);
         Lotto winningLotto = handleException(InputView::readWinningLotto);
         LottoMatcher lottoMatcher = handleException(() -> {
             Number bonusNumber = InputView.readBonusNumber();
             return new LottoMatcher(bonusNumber, winningLotto);
         });
-        MatchResult matchResult = lottoMatcher.match(payment, generatedLottos);
+        MatchResult matchResult = lottoMatcher.match(payment, lottos);
         OutputView.printLottoResult(matchResult);
     }
 

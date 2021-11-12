@@ -23,21 +23,26 @@ public class InputViewTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"a", "-1"})
-    void readManualLottoCount(String manualLottoCount) {
+    void readManualLottoCountByInvalidInput(String manualLottoCount) {
         assertTestWithMockedInput(
             () -> assertThatIllegalArgumentException().isThrownBy(InputView::readManualLottoCount),
             manualLottoCount
         );
     }
 
-    // @ParameterizedTest
-    // @ValueSource(strings = {"1q2w3e4r!", "1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,46", "0,1,2,3,4,5"})
-    // void readManualLottoByInvalidInput(String numbers) {
-    //     assertTestWithMockedInput(
-    //         () -> assertThatIllegalArgumentException().isThrownBy(InputView::readManualLotto),
-    //         numbers
-    //     );
-    // }
+    @ParameterizedTest
+    @ValueSource(strings = {"1q2w3e4r!", "1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,46", "0,1,2,3,4,5"})
+    void readManualLottosByInvalidInput(String numbers) {
+        assertTestWithMockedInput(
+            () -> assertThatIllegalArgumentException().isThrownBy(() -> InputView.readManualLottos(1)),
+            numbers
+        );
+    }
+
+    @Test
+    void readManualLottosByZeroCount() {
+        assertThat(InputView.readManualLottos(0)).isEmpty();
+    }
 
     @ParameterizedTest
     @ValueSource(strings = {"1q2w3e4r!", "1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,46", "0,1,2,3,4,5"})
@@ -50,7 +55,7 @@ public class InputViewTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1q2w3e4r!", "0", "46"})
-    void readBonusNumber(String bonusNumber) {
+    void readBonusNumberByInvalidInput(String bonusNumber) {
         assertTestWithMockedInput(
             () -> assertThatIllegalArgumentException().isThrownBy(InputView::readBonusNumber),
             bonusNumber
