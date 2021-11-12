@@ -5,10 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,41 +16,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WinningTest {
-
-    @DisplayName("당첨 결과 통계")
-    @ParameterizedTest
-    @MethodSource("winningResultParametersProvider")
-    void winningResultTest(Lotto lotto, LottoNumber bonusNumber, Rank rank) {
-        //given
-        Lottos lottos = Stream.of(lotto)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
-        Lotto verifiedWinningNumber = Stream.of(1,2,3,4,5,6)
-                .map(LottoNumber::new)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
-        WinningLotto winningLotto = new WinningLotto(verifiedWinningNumber, bonusNumber);
-
-        //when
-        WinningResult winningResult = lottos.winningResult(winningLotto);
-
-        //then
-        assertThat(winningResult.winnerPerRank(rank)).isEqualTo(1);
-    }
-
-    @DisplayName("수익률 계산")
-    @ParameterizedTest
-    @MethodSource("profitRateParametersProvider")
-    void profitRateTest(int purchaseAmount, Rank rank, int winningCount, int profitRate) {
-        //given
-        Map<Rank, Integer> rankMap = new HashMap<>();
-        rankMap.put(rank, winningCount);
-        WinningResult winningResult = new WinningResult(rankMap);
-
-        //when
-        double profitRateResult = winningResult.profitRate(new Money(purchaseAmount));
-
-        //then
-        assertThat(profitRateResult).isEqualTo(profitRate);
-    }
 
     @DisplayName("보너스 번호가 당첨 번호에 존재할 때 예외")
     @Test
@@ -101,35 +65,54 @@ class WinningTest {
         assertThat(bonusNumberMatch).isTrue();
     }
 
-    static Stream<Arguments> profitRateParametersProvider() {
+    @DisplayName("당첨번호와 로또번호가 3~6개 사이 일치 일 시 당첨")
+    @ParameterizedTest
+    @CsvSource(value = {"0:false:true", "0:false:false", "1:false:false", "2:false:false", "3:true:false", "4:true:false", "5:true:false", "6:true:false", "7:false:false"}, delimiter = ':')
+    void prizeTest(int winningNumberSameCount, boolean expectedPrize, boolean expectedBonus) {
+        Rank rank = Rank.of(winningNumberSameCount, expectedBonus);
+        boolean prize = rank.isPrize();
+        assertThat(prize).isEqualTo(expectedPrize);
+    }
+
+    @DisplayName("번호 일치 개수 별 등수")
+    @ParameterizedTest
+    @MethodSource("rankParametersProvider")
+    void rankTest(Lotto lotto, Lotto winningNumber, Rank expectedRank, LottoNumber bonusNumber) {
+        //given
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
+
+        //when
+        Rank rank = winningLotto.rankResult(lotto);
+
+        //then
+        assertThat(rank).isEqualTo(expectedRank);
+    }
+
+    static Stream<Arguments> rankParametersProvider() {
+        Lotto lotto = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+
         return Stream.of(
-                arguments(1000, Rank.FOURTH_PLACE, 1, 5),
-                arguments(1000, Rank.THIRD_PLACE, 1, 50),
-                arguments(1000, Rank.SECOND_PLACE, 1, 1_500),
-                arguments(1000, Rank.BONUS_SECOND_PLACE, 1, 30_000),
-                arguments(1000, Rank.FIRST_PLACE, 1, 2_000_000)
+                arguments(lotto, Stream.of(1,2,3,43,44,45)
+                        .map(LottoNumber::new)
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), Rank.FOURTH_PLACE, new LottoNumber(40)),
+
+                arguments(lotto, Stream.of(1,2,3,4,44,45)
+                        .map(LottoNumber::new)
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), Rank.THIRD_PLACE, new LottoNumber(40)),
+
+                arguments(lotto, Stream.of(1,2,3,4,5,45)
+                        .map(LottoNumber::new)
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), Rank.SECOND_PLACE, new LottoNumber(40)),
+                arguments(lotto, Stream.of(1,2,3,4,5,7)
+                        .map(LottoNumber::new)
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), Rank.BONUS_SECOND_PLACE, new LottoNumber(6)),
+                arguments(lotto, Stream.of(1,2,3,4,5,6)
+                        .map(LottoNumber::new)
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), Rank.FIRST_PLACE, new LottoNumber(45))
         );
     }
 
-    static Stream<Arguments> winningResultParametersProvider() {
-        LottoNumber bonusNumber = new LottoNumber(45);
 
-        return Stream.of(
-                arguments(Stream.of(1, 2, 3, 11, 22, 33)
-                        .map(LottoNumber::new)
-                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), bonusNumber, Rank.FOURTH_PLACE),
-                arguments(Stream.of(1, 2, 3, 4, 11, 22)
-                        .map(LottoNumber::new)
-                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), bonusNumber, Rank.THIRD_PLACE),
-                arguments(Stream.of(1, 2, 3, 4, 5, 11)
-                        .map(LottoNumber::new)
-                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), bonusNumber, Rank.SECOND_PLACE),
-                arguments(Stream.of(1, 2, 3, 4, 5, 45)
-                        .map(LottoNumber::new)
-                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), bonusNumber, Rank.BONUS_SECOND_PLACE),
-                arguments(Stream.of(1, 2, 3, 4, 5, 6)
-                        .map(LottoNumber::new)
-                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)), bonusNumber, Rank.FIRST_PLACE)
-        );
-    }
 }
