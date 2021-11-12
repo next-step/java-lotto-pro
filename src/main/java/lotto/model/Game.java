@@ -17,7 +17,6 @@ public class Game {
 
     public Game() {
         this.numbers = generateNumbers();
-        System.out.println(this.numbers);
     }
 
     public Game(LottoNumbers lottoNumbers) {

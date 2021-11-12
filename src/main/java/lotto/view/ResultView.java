@@ -1,8 +1,11 @@
 package lotto.view;
 
+import lotto.model.Game;
+import lotto.model.Games;
 import lotto.model.Rank;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class ResultView {
 
@@ -25,6 +28,15 @@ public class ResultView {
      */
     public static void printPurchasedGameCount(int gameCount, int manualGameCount) {
         System.out.println(String.format(PURCHASED_GAME_COUNT, manualGameCount, gameCount));
+    }
+
+    /**
+     * 구매한 게임목록 출력
+     *
+     * @param gameList
+     */
+    public static void printPurchaseGames(List<Game> gameList) {
+        gameList.forEach(game -> System.out.println(game.getNumbers()));
     }
 
     /**
