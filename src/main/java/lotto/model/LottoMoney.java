@@ -28,7 +28,7 @@ public class LottoMoney {
         return this.money / GameRule.LOTTO_PAPER_PRICE - manualLottoPaperCount;
     }
 
-    public int buyManualLottoPaper(String count) {
+    public int parseManualLottoPaperCount(String count) {
 
         try {
             int parsedCount = Integer.parseInt(count);
