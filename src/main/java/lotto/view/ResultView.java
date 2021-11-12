@@ -11,8 +11,8 @@ public class ResultView {
     private ResultView() {
 
     }
-    public static void printBuyCountOutput(long buyCount) {
-        System.out.printf("%d %s%n", buyCount, GameMessage.BUY_COUNT_OUTPUT);
+    public static void printBuyCountOutput(int manualBuyCount, int buyCount) {
+        System.out.printf(GameMessage.FORMAT_BUY_COUNT_OUTPUT, manualBuyCount, buyCount);
     }
 
     public static void printLottoPapers(LottoPapers lottoPapers) {

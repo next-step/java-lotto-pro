@@ -20,21 +20,11 @@ public class LottoResult {
     }
 
     public void addMatchCounts(int matchCount, boolean isBonus){
-        LottoWinningPrice lottoWinningPrice = LottoWinningPrice.getLottoWinningPrice(matchCount);
-        if(!lottoWinningPrice.isView())
-            return;
-
-        if(matchCount == LottoWinningPrice.BONUS.getWinningCount() && isBonus){
-            winningBonus();
+        LottoWinningPrice lottoWinningPrice = LottoWinningPrice.getLottoWinningPrice(matchCount, isBonus);
+        if(!lottoWinningPrice.isView()){
             return;
         }
         matchCounts.put(lottoWinningPrice, matchCounts.get(lottoWinningPrice) + 1);
-    }
-
-    public void winningBonus() {
-        if(matchCounts.get(LottoWinningPrice.FIVE) > 0)
-            matchCounts.put(LottoWinningPrice.FIVE, matchCounts.get(LottoWinningPrice.FIVE) - 1);
-        matchCounts.put(LottoWinningPrice.BONUS, matchCounts.get(LottoWinningPrice.BONUS) + 1);
     }
 
     public void calculateYield(long buyPrice) {

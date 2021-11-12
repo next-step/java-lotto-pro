@@ -20,7 +20,7 @@ public class LottoNumberGeneratorTest {
         // given
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         // when
-        LottoPaper winningNumber = lottoNumberGenerator.createWinningNumber(input);
+        LottoPaper winningNumber = lottoNumberGenerator.createManualLottoNumber(input);
         // then
         assertThat(winningNumber.getLottoNumber().size()).isEqualTo(GameRule.LOTTO_END_INDEX);
         Assertions.assertTrue(winningNumber.getLottoNumber().contains(new LottoNumber(Integer.parseInt(input.split(",")[0]))));
@@ -34,7 +34,7 @@ public class LottoNumberGeneratorTest {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         // when
         // then
-        assertThrows(IllegalArgumentException.class, () -> lottoNumberGenerator.createWinningNumber(input));
+        assertThrows(IllegalArgumentException.class, () -> lottoNumberGenerator.createManualLottoNumber(input));
     }
 
 }

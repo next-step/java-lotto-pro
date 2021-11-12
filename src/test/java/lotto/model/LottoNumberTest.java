@@ -21,11 +21,10 @@ public class LottoNumberTest {
         assertThat(lottoNumber).isEqualTo(new LottoNumber(inNumber));
     }
 
-
     @DisplayName("[ERROR]로또번호 생성 범위 테스트")
     @ParameterizedTest
     @CsvSource(value = {"-1:0:100"}, delimiter = ':')
-    void 로또번호_생성_범위_예외(int inNumber) {
+    void 로또번호_생성_범위_예외(String inNumber) {
         assertThrows(IllegalArgumentException.class, () -> new LottoNumber(inNumber));
     }
 }
