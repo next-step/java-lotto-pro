@@ -16,13 +16,9 @@ public class LottoPapersGenerator {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public LottoPapers getManualLottoPapers() {
+    public LottoPapers getManualLottoPapers(int manualLottoBuyCount) {
 
         List<LottoPaper> manualLottoPapers = new ArrayList<>();
-        InputView.printManualLottoBuyCountInput();
-        int manualLottoBuyCount = lottoMoney.buyManualLottoPaper(Client.getLineConsole());
-
-        InputView.printManualLottoNumberInput();
 
         for (int i = 0; i < manualLottoBuyCount; i++) {
             String manualNumber = Client.getLineConsole();
