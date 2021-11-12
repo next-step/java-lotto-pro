@@ -1,26 +1,43 @@
 package step3.lotto;
 
-public class BonusBall extends LottoNumber {
+import java.util.Objects;
 
-	private BonusBall(int no) {
-		super(no);
+public class BonusBall {
+
+	private LottoNumber lottoNumber;
+
+	public BonusBall(int no) {
+		this.lottoNumber = new LottoNumber(no);
 	}
 
-	public static BonusBall of(int no, LottoNumbers userLottoNumbers) {
+	public LottoNumber asLottoNumber() {
+		return lottoNumber;
+	}
+
+	@Deprecated
+	public static BonusBall of(int no, LottoNumbers winningLottoNumbers) {
 		BonusBall bonusBall = new BonusBall(no);
-		if (userLottoNumbers.hasBonusBall(bonusBall)) {
-			throw new IllegalArgumentException("보너스 볼 번호가 지난주 보너스 볼 번호와 동일 할 수 없습니다.");
+		if (winningLottoNumbers.hasBonusBall(bonusBall)) {
+			throw new IllegalArgumentException("보너스 번호가 당첨 번호와 동일할 수 없습니다");
 		}
 		return new BonusBall(no);
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		return super.equals(o);
+		if (!(o instanceof BonusBall))
+			return false;
+		BonusBall bonusBall = (BonusBall)o;
+		return Objects.equals(lottoNumber, bonusBall.lottoNumber);
 	}
 
 	@Override
 	public int hashCode() {
-		return super.hashCode();
+		return Objects.hash(lottoNumber);
+	}
+
+	@Override
+	public String toString() {
+		return lottoNumber.toString();
 	}
 }

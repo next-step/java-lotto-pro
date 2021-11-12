@@ -3,12 +3,10 @@ package step3;
 public class Money {
 	private final int money;
 	private final int DEFAULT_MONEY = 1000;
-	private int size;
 
 	public Money(int money) {
 		validation(money);
 		this.money = money;
-		this.size = Math.floorDiv(money, DEFAULT_MONEY);
 	}
 
 	public Money(String input) {
@@ -26,7 +24,7 @@ public class Money {
 	}
 
 	public int buyCount() {
-		return size;
+		return Math.floorDiv(money, DEFAULT_MONEY);
 	}
 
 	@Override

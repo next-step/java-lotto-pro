@@ -2,12 +2,12 @@ package step3.lotto;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import step3.lotto.exception.DuplicationOrLessThenSixException;
 
 public class LottoNumbers {
 	public static final int LOTTO_NUMBER_MAX = 6;
@@ -22,6 +22,13 @@ public class LottoNumbers {
 		if (isOverFlow()) {
 			throw new ArrayIndexOutOfBoundsException("로또 번호가 6개 이상 뽑혔습니다.");
 		}
+		if (duplicationNumber()) {
+			throw new DuplicationOrLessThenSixException();
+		}
+	}
+
+	private boolean duplicationNumber() {
+		return lottoNumbers.size() < LOTTO_NUMBER_MAX;
 	}
 
 	private boolean isOverFlow() {
@@ -51,26 +58,23 @@ public class LottoNumbers {
 		);
 	}
 
-	public Map<Integer, Boolean> match(LottoNumbers userLottoNumbers, BonusBall bonusBall) {
-		Map<Integer, Boolean> ranks = new HashMap<>();
-		ranks.put(matchCount(userLottoNumbers), matchBonusBall(bonusBall));
-		return ranks;
-	}
-
-	private Integer matchCount(LottoNumbers userLottoNumbers) {
+	public Integer matchCount(LottoNumbers winningLottoNumbers) {
 		return (int) lottoNumbers.stream()
-			.filter(lottoNumber -> userLottoNumbers.getList().stream()
+			.filter(lottoNumber -> winningLottoNumbers.getList().stream()
 				.anyMatch(lottoNumber::equals)
 			).count();
 	}
 
-	private Boolean matchBonusBall(BonusBall bonusBall) {
-		return lottoNumbers.stream()
-			.anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
+	public Boolean matchBonusBall(BonusBall bonusBall) {
+		return lottoNumbers.contains(bonusBall.asLottoNumber());
 	}
 
 	public Set<LottoNumber> getList() {
 		return Collections.unmodifiableSet(lottoNumbers);
+	}
+
+	public boolean hasBonusBall(BonusBall bonusBall) {
+		return lottoNumbers.contains(bonusBall.asLottoNumber());
 	}
 
 	@Override
@@ -91,9 +95,5 @@ public class LottoNumbers {
 	@Override
 	public String toString() {
 		return String.valueOf(lottoNumbers);
-	}
-
-	public boolean hasBonusBall(BonusBall bonusBall) {
-		return lottoNumbers.contains(bonusBall);
 	}
 }

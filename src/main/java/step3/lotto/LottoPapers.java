@@ -1,10 +1,8 @@
 package step3.lotto;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import step3.winner.Rank;
+import step3.winner.WinningResult;
 
 public class LottoPapers {
 
@@ -18,20 +16,18 @@ public class LottoPapers {
 		return new LottoPapers(lottoNumbers);
 	}
 
-	public List<Rank> findMatchLottoNumber(LottoNumbers userLottoNumbers, BonusBall bonusBall) {
-		List<Rank> ranks = new ArrayList<>();
-		for (LottoNumbers paper : papers) {
-			Map<Integer, Boolean> match = paper.match(userLottoNumbers, bonusBall);
-			createRanks(ranks, match);
+	public WinningResult findMatchWinningResult(LottoNumbers winningLottoNumbers, BonusBall bonusBall) {
+		WinningResult matchResult = new WinningResult();
+		for (LottoNumbers lottoNumbers : papers) {
+			Integer matchCount = lottoNumbers.matchCount(winningLottoNumbers);
+			boolean matchBonusBall = lottoNumbers.hasBonusBall(bonusBall);
+			matchResult.add(matchCount, matchBonusBall);
 		}
-		return ranks;
+		return matchResult;
 	}
 
-	private void createRanks(List<Rank> ranks, Map<Integer, Boolean> match) {
-		for (Map.Entry<Integer,Boolean> matchNumber : match.entrySet()) {
-			Rank rank = Rank.valueOf(matchNumber.getKey(), matchNumber.getValue());
-			ranks.add(rank);
-		}
+	public void addAll(LottoPapers autoLottoPapers) {
+		this.papers.addAll(autoLottoPapers.papers);
 	}
 
 	public int size() {

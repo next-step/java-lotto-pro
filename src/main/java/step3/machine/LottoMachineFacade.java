@@ -1,6 +1,7 @@
 package step3.machine;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import step3.Money;
 import step3.lotto.BonusBall;
@@ -8,8 +9,10 @@ import step3.lotto.LottoNumbers;
 import step3.lotto.LottoPapers;
 import step3.view.InputView;
 import step3.view.ResultView;
-import step3.winner.Winner;
+import step3.winner.Winning;
 import step3.winner.WinningMoney;
+import step3.winner.WinningResult;
+import step3.winner.WinningResultMap;
 
 public class LottoMachineFacade {
 
@@ -23,36 +26,20 @@ public class LottoMachineFacade {
 		this.resultView = resultView;
 	}
 
-
 	public void LottoMachineExecute() {
-
-		try {
-
 			Money money = enterMoney();
-			LottoPapers lottoPapers = machine.createLottoPapers(money);
+			int manualCount = enterManualCount();
+			LottoPapers lottoPapers = createLottoPapers(money, manualCount);
 
-			resultView.purchasedCount(money.buyCount());
-			resultView.purchasedLottoPrint(lottoPapers);
+			LottoNumbers winningLottoNumbers = enterUserLottoNumber();
+			BonusBall bonusBall = enterBonusBall(winningLottoNumbers);
 
-			LottoNumbers userLottoNumbers = enterUserLottoNumber();
-			BonusBall bonusBall = enterBonusBall(userLottoNumbers);
-
-			Winner winner = Winner.of();
-			Winner statistics = winner.statistics(userLottoNumbers, lottoPapers, bonusBall);
-			BigDecimal bigDecimal = WinningMoney.calculateYield(money, statistics.getTotal());
-
-			resultView.statisticsPrint(statistics);
-			resultView.yieldPrint(bigDecimal);
-
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-		}
-
-	}
-
-	private LottoNumbers enterUserLottoNumber() {
-		String userLottoNumbers = inputView.insertLottoNumber();
-		return LottoNumbers.from(userLottoNumbers);
+			Winning winning = new Winning(winningLottoNumbers, bonusBall);
+			WinningResult winningResult = winning.match(lottoPapers);
+			WinningResultMap winningResultMap = winningResult.getStatistics();
+			resultView.statisticsPrint(winningResultMap);
+			BigDecimal yield = WinningMoney.calculateYield(money, winningResult.getTotal());
+			resultView.yieldPrint(yield);
 	}
 
 	private Money enterMoney() {
@@ -60,9 +47,35 @@ public class LottoMachineFacade {
 		return money;
 	}
 
-	private BonusBall enterBonusBall(LottoNumbers userLottoNumbers) {
+	private int enterManualCount() {
+		return inputView.insertManualCount();
+	}
+
+	private LottoPapers createLottoPapers(Money money, int manualCount) {
+		Bought bought = new Bought(money, manualCount);
+
+		LottoPapers manualLottoPapers = machine.createManualLottoPapers(enterManualLottoNumbers(manualCount));
+		LottoPapers autoLottoPapers = machine.createLottoPapers(bought.buyAutoCount());
+		manualLottoPapers.addAll(autoLottoPapers);
+
+		resultView.purchasedCount(manualCount, bought.buyAutoCount());
+		resultView.purchasedLottoPrint(autoLottoPapers);
+
+		return autoLottoPapers;
+	}
+
+	private List<String> enterManualLottoNumbers(int manualCount) {
+		return inputView.insertManualLottoNumbers(manualCount);
+	}
+
+	private LottoNumbers enterUserLottoNumber() {
+		String winningLottoNumbers = inputView.insertLottoNumber();
+		return LottoNumbers.from(winningLottoNumbers);
+	}
+
+	private BonusBall enterBonusBall(LottoNumbers winningLottoNumbers) {
 		int bonusBall = inputView.insertBonusBall();
-		return BonusBall.of(bonusBall, userLottoNumbers);
+		return BonusBall.of(bonusBall, winningLottoNumbers);
 	}
 
 }

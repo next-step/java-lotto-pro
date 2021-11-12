@@ -1,6 +1,9 @@
 package step3.winner;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
 	FIRST(6, 2_000_000_000,"6개 일치 (2000000000원)- %d개\n"),
@@ -41,6 +44,13 @@ public enum Rank {
 			.filter(s -> s.matchCount == matchCount)
 			.findAny()
 			.orElse(MISS);
+	}
+
+	public static List<Rank> reverse() {
+		return Arrays.stream(values())
+			.sorted(Comparator.reverseOrder())
+			.filter(s-> (s != MISS))
+			.collect(Collectors.toList());
 	}
 
 	public int getMatch() {
