@@ -21,7 +21,6 @@ public class PickedNumbers {
 
     public static PickedNumbers of(final String winningNumbers) {
         return Arrays.stream(winningNumbers.split(","))
-            .map(Integer::parseInt)
             .map(Number::new)
             .collect(Collectors.collectingAndThen(Collectors.toList(), PickedNumbers::new));
     }

@@ -14,7 +14,21 @@ public class Number implements Comparable<Number> {
         this.number = number;
     }
 
-    private void validateRange(final int number) {
+    public Number(final String number) {
+        this(parseInt(number));
+    }
+
+    private static int parseInt(final String number) {
+        int value;
+        try {
+            value = Integer.parseInt(number);
+        } catch (NumberFormatException nfe) {
+            throw new IllegalArgumentException("로또 번호를 올바르게 입력해주세요.");
+        }
+        return value;
+    }
+
+    private static void validateRange(final int number) {
         if (number < LOWER_BOUND || number > UPPER_BOUND) {
             throw new IllegalArgumentException(
                 "로또 숫자는 " + LOWER_BOUND + "보다 크거나 " + UPPER_BOUND + "보다 작아야합니다."
