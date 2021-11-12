@@ -29,6 +29,13 @@ public class PickedNumbersTest {
             .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    @DisplayName("로또 번호는 중복 선택할 수 없다.")
+    void create_duplicates() {
+        assertThatThrownBy(() -> PickedNumbers.of("1,1,1,1,1,1"))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @ParameterizedTest
     @CsvSource(value = {
         "0:11,12,13,14,15,16",

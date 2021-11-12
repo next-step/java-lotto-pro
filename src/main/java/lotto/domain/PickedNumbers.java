@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ public class PickedNumbers {
 
     public PickedNumbers(List<Number> pickedNumbers) {
         validateSize(pickedNumbers);
+        validateDuplicates(pickedNumbers);
         this.pickedNumbers = new ArrayList<>(pickedNumbers);
     }
 
@@ -27,7 +29,13 @@ public class PickedNumbers {
 
     private void validateSize(final List<Number> numbers) {
         if (numbers.size() != SIZE) {
-            throw new IllegalArgumentException("로또 숫자는 6개의 숫자로 생성할 수 있습니다.");
+            throw new IllegalArgumentException("로또 번호는 6개의 숫자로 생성할 수 있습니다.");
+        }
+    }
+
+    private void validateDuplicates(final List<Number> numbers) {
+        if (new HashSet<>(numbers).size() != SIZE) {
+            throw new IllegalArgumentException("로또 번호는 중복 선택할 수 없습니다.");
         }
     }
 
