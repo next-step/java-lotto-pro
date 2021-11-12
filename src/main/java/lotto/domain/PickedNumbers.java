@@ -20,11 +20,10 @@ public class PickedNumbers {
     }
 
     public static PickedNumbers of(final String winningNumbers) {
-        return new PickedNumbers(
-            Arrays.stream(winningNumbers.split(","))
-                .map(Integer::parseInt)
-                .map(Number::new)
-                .collect(Collectors.toList()));
+        return Arrays.stream(winningNumbers.split(","))
+            .map(Integer::parseInt)
+            .map(Number::new)
+            .collect(Collectors.collectingAndThen(Collectors.toList(), PickedNumbers::new));
     }
 
     private void validateSize(final List<Number> numbers) {
