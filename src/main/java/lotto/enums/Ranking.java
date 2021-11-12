@@ -13,13 +13,13 @@ public enum Ranking {
     FORTH(3, false, 5_000, "3개 일치"),
     MISS(0, false, 0, null);
 
-    private final int correct;
+    private final int lottoNumberMatch;
     private final boolean bonusMatch;
     private final long amount;
     private final String message;
 
-    Ranking(int correct, boolean bonusMatch, long amount, String message) {
-        this.correct = correct;
+    Ranking(int lottoNumberMatch, boolean bonusMatch, long amount, String message) {
+        this.lottoNumberMatch = lottoNumberMatch;
         this.bonusMatch = bonusMatch;
         this.amount = amount;
         this.message = message;
@@ -27,7 +27,7 @@ public enum Ranking {
 
     public static Ranking findCorrect(final MatchResult matchResult) {
         return Arrays.stream(Ranking.values())
-                .filter(ranking -> matchResult.isResultMatch(ranking.correct))
+                .filter(ranking -> matchResult.isResultMatch(ranking.lottoNumberMatch))
                 .filter(ranking -> matchResult.isBonusMatch(ranking.bonusMatch))
                 .findAny()
                 .orElse(MISS);
@@ -38,7 +38,7 @@ public enum Ranking {
     }
 
     public int getCorrect() {
-        return this.correct;
+        return this.lottoNumberMatch;
     }
 
     public String getMessage() { return this.message; }

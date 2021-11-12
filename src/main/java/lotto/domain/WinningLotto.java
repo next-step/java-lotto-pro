@@ -16,62 +16,62 @@ public class WinningLotto {
     public static final int MATCH_ONE = 1;
     public static final int MIS_MATCH_ZERO = 0;
 
-    private final List<LottoNumber> lottoNums;
-    private final LottoNumber bonus;
+    private final List<LottoNumber> lottoNumbers;
+    private final LottoNumber bonusNumber;
 
-    private WinningLotto(final List<Integer> numbers, final int bonus) {
-        this.lottoNums = numbers.stream()
+    private WinningLotto(final List<Integer> lottoNumbers, final int bonusNumber) {
+        this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
-        this.bonus = LottoNumber.from(bonus);
+        this.bonusNumber = LottoNumber.from(bonusNumber);
     }
 
-    public static WinningLotto from(final List<Integer> numbers, final int bonus) {
-        validate(numbers);
-        validateBonus(numbers, bonus);
-        return new WinningLotto(numbers, bonus);
+    public static WinningLotto from(final List<Integer> winningLottoNumbers, final int bonusBall) {
+        validate(winningLottoNumbers);
+        validateBonus(winningLottoNumbers, bonusBall);
+        return new WinningLotto(winningLottoNumbers, bonusBall);
     }
 
-    public static WinningLotto from(final String input, final String inputBonus) {
-        List<Integer> lottoNums = Arrays.stream(input.split(Constant.SEPERATOR))
+    public static WinningLotto from(final String inputWinningLottoNumbers, final String inputBonusBall) {
+        List<Integer> winningLottoNumbers = Arrays.stream(inputWinningLottoNumbers.split(Constant.SEPERATOR))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        validate(lottoNums);
-        int bonus = Integer.parseInt(inputBonus);
-        validateBonus(lottoNums, bonus);
-        return new WinningLotto(lottoNums, bonus);
+        validate(winningLottoNumbers);
+        int bonusBall = Integer.parseInt(inputBonusBall);
+        validateBonus(winningLottoNumbers, bonusBall);
+        return new WinningLotto(winningLottoNumbers, bonusBall);
     }
 
-    private static void validate(final List<Integer> numbers) {
-        if( numbers.size() != Constant.LOTTO_LIMIT_SIZE) {
+    private static void validate(final List<Integer> winningLottoNumbers) {
+        if( winningLottoNumbers.size() != Constant.LOTTO_LIMIT_SIZE) {
             throw new IllegalArgumentException(THE_LOTTERY_MUST_CONSIST_OF_6_DIGITS);
         }
-        if( new HashSet<>(numbers).size() != Constant.LOTTO_LIMIT_SIZE ) {
+        if( new HashSet<>(winningLottoNumbers).size() != Constant.LOTTO_LIMIT_SIZE ) {
             throw new IllegalArgumentException(THE_LOTTERY_MUST_NOT_HAVE_DUPLICATE_NUMBERS);
         }
     }
 
-    private static void validateBonus(List<Integer> numbers, int bonus) {
-        if( numbers.contains(bonus) ) {
+    private static void validateBonus(final List<Integer> winningLottoNumbers, final int bonusBall) {
+        if( winningLottoNumbers.contains(bonusBall) ) {
             throw new IllegalArgumentException(BONUS_NUMBERS_ARE_DUPLICATED_IN_LOTTERY_NUMBERS);
         }
     }
 
-    public MatchResult countMatchingNumber(final Lotto comparableLotto) {
+    public MatchResult countMatchingNumber(final Lotto lotto) {
         int matchNumber = 0;
-        for (LottoNumber lottoNumber : comparableLotto.getLottoNumbers()) {
-            matchNumber += matchNumber(lottoNumber);
+        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
+            matchNumber += matchOfCount(lottoNumber);
         }
-        boolean matchBonus = isMatchBonus(comparableLotto);
+        boolean matchBonus = isMatchBonus(lotto);
         return MatchResult.from(matchNumber, matchBonus);
     }
 
-    private boolean isMatchBonus(Lotto comparableLotto) {
-        return comparableLotto.getLottoNumbers().contains(this.bonus);
+    private boolean isMatchBonus(final Lotto lotto) {
+        return lotto.getLottoNumbers().contains(this.bonusNumber);
     }
 
-    public int matchNumber(LottoNumber lottoNumber) {
-        if( this.lottoNums.contains(lottoNumber) ) {
+    public int matchOfCount(final LottoNumber lottoNumber) {
+        if( this.lottoNumbers.contains(lottoNumber) ) {
             return MATCH_ONE;
         }
         return MIS_MATCH_ZERO;
@@ -82,6 +82,6 @@ public class WinningLotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto lotto = (WinningLotto) o;
-        return Objects.equals(lottoNums, lotto.lottoNums);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 }
