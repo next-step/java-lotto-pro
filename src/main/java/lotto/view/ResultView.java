@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
+import lotto.model.LottosCount;
 import lotto.model.Rank;
 
 import java.util.List;
@@ -13,8 +14,8 @@ public class ResultView {
     private static final String STATS = "%d개 일치 (%d원)- %d개\n";
     private static final String LINE_BREAK = "\n";
 
-    public static void printBought(int manualLottoCount, int autoLottoCount) {
-        System.out.printf(BOUGHT, manualLottoCount, autoLottoCount);
+    public static void printBought(LottosCount lottosCount) {
+        System.out.printf(BOUGHT, lottosCount.getManual(), lottosCount.auto());
     }
 
     public static void printYield(String yield) {
@@ -37,4 +38,6 @@ public class ResultView {
         }
         System.out.print(sb.toString());
     }
+
+
 }

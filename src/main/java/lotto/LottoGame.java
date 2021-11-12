@@ -8,15 +8,19 @@ import lotto.view.Message;
 import lotto.view.ResultView;
 import lotto.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-    private Lottos lottos;
+    private LottosCount lottosCount;
+    private Lottos totalLottos;
     private WinningLotto winningLotto;
 
     public void run() {
         try {
             buyLotto();
+
+            createLotto();
 
             inputWinningLotto();
 
@@ -28,17 +32,27 @@ public class LottoGame {
 
     private void buyLotto() {
         View.print(Message.PURCHASE_AMOUNT);
-        int lottoCount = InputHandler.price(Console.readLine());
+        int totalCount = InputHandler.price(Console.readLine());
 
         View.print(Message.MANUAL_PURCHASE);
-        int manualLottoCount = InputHandler.buyManualLotto(Console.readLine(), lottoCount);
+        int manualCount = InputHandler.validStringToInt(Console.readLine());
+        lottosCount = new LottosCount(totalCount, manualCount);
+    }
 
+    private void createLotto() {
         View.print(Message.MANUAL_LOTTO);
+        List<String> manualLottoTexts = inputManualLotto(lottosCount.getManual());
+        totalLottos = LottoCreateFactory.createTotalLottos(lottosCount, manualLottoTexts);
+        ResultView.printBought(lottosCount);
+        ResultView.printLottoList(totalLottos);
+    }
 
-        int autoLottoCount = lottoCount - manualLottoCount;
-        ResultView.printBought(manualLottoCount, autoLottoCount);
-        lottos = LottoCreateFactory.createLottos(autoLottoCount);
-        ResultView.printLottoList(lottos);
+    private List<String> inputManualLotto(int manual) {
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < manual; i++) {
+            result.add(Console.readLine());
+        }
+        return result;
     }
 
     private void inputWinningLotto() {
@@ -52,8 +66,8 @@ public class LottoGame {
     private void statistics() {
         View.print(Message.WINNING_STATS);
         View.print(Message.WINNING_LINE);
-        Result result = new Result(lottos, winningLotto);
+        Result result = new Result(totalLottos, winningLotto);
         ResultView.printReport(result.getMatchResult());
-        ResultView.printYield(result.yield(lottos.size()));
+        ResultView.printYield(result.yield(totalLottos.size()));
     }
 }

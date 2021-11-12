@@ -54,12 +54,12 @@ public class Lotto {
     public int matchNumber(Lotto lotto) {
         int result = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            result += increment(lotto, lottoNumber);
+            result += matchNumberIncrement(lotto, lottoNumber);
         }
         return result;
     }
 
-    private int increment(Lotto lotto, LottoNumber lottoNumber) {
+    private int matchNumberIncrement(Lotto lotto, LottoNumber lottoNumber) {
         if(lotto.compare(lottoNumber)){
             return INCREMENT_BY_ONE;
         }
