@@ -10,30 +10,28 @@ import lotto.constants.Rank;
 public class Prize {
 	private final Map<Rank, Integer> winCount;
 
-	public Prize(Rank... ranks) {
-		winCount = new HashMap<>();
+	private Prize(Map<Rank, Integer> winCount) {
+		this.winCount = winCount;
+	}
+
+	public static Prize withRankList(List<Rank> ranks) {
+		Map<Rank, Integer> winCount = new HashMap<>();
 		for (Rank rank : ranks) {
 			winCount.put(rank, winCount.getOrDefault(rank, 0) + 1);
 		}
+		return new Prize(winCount);
 	}
 
-	public Prize(List<Rank> ranks) {
-		winCount = new HashMap<>();
-		for (Rank rank : ranks) {
-			winCount.put(rank, winCount.getOrDefault(rank, 0) + 1);
-		}
-	}
-
-	public double rateReturn(int money) {
-		return (double)winMoney() / money;
+	public double rateReturn(PurchaseMoney money) {
+		return (double)winMoney() / money.getMoney();
 	}
 
 	public int winMoney() {
 		return winCount.entrySet().stream().reduce(0, (acc, entry) -> {
 			Rank rank = entry.getKey();
-			Integer prize = rank.getPrize();
+			Integer winningMoney = rank.getWinningMoney();
 
-			acc += prize * entry.getValue();
+			acc += winningMoney * entry.getValue();
 			return acc;
 		}, Integer::sum);
 	}

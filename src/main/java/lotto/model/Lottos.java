@@ -1,10 +1,12 @@
 package lotto.model;
 
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class Lottos implements Iterable<Lotto> {
+import lotto.constants.Rank;
+
+public class Lottos {
 
 	private final List<Lotto> lottos;
 
@@ -20,11 +22,6 @@ public class Lottos implements Iterable<Lotto> {
 	}
 
 	@Override
-	public Iterator<Lotto> iterator() {
-		return lottos.iterator();
-	}
-
-	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
 
@@ -33,5 +30,13 @@ public class Lottos implements Iterable<Lotto> {
 		}
 
 		return joiner.toString();
+	}
+
+	public Prize winPrize(WinLotto winLotto) {
+		List<Rank> ranks = new LinkedList<>();
+		for (Lotto lotto : lottos) {
+			ranks.add(winLotto.compare(lotto));
+		}
+		return Prize.withRankList(ranks);
 	}
 }
