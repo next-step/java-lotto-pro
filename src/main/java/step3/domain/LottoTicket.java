@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
+
   public static final int NUMBERS_COUNT = 6;
 
   private final List<LottoNumber> numbers;
@@ -54,5 +55,11 @@ public class LottoTicket {
         || this.numbers.stream().distinct().count() != NUMBERS_COUNT) {
       throw new RuntimeException("[ERROR] not valid lotto ticket. numbers = " + this.numbers);
     }
+  }
+
+  @Override
+  public String toString() {
+    return this.numbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList())
+        .toString();
   }
 }

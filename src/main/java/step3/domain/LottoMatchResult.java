@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class LottoMatchResult {
 
-  static final private int MATCH_COUNT_MIN = 3;
-  static final private int MATCH_COUNT_MAX = 6;
+  static final public int MATCH_COUNT_MIN = 3;
+  static final public int MATCH_COUNT_MAX = 6;
 
   final private Map<Integer, Integer> matchCountMap = new HashMap<>();
 
@@ -30,15 +30,5 @@ public class LottoMatchResult {
 
   public int getMatchCountNum(int matchCount) {
     return matchCountMap.get(matchCount) != null ? matchCountMap.get(matchCount) : 0;
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder result = new StringBuilder();
-    for (int matchCount = MATCH_COUNT_MIN; matchCount <= MATCH_COUNT_MAX; matchCount++) {
-      result
-          .append(String.format("%d개 일치 (5000원)- %d\n", matchCount, getMatchCountNum(matchCount)));
-    }
-    return result.toString();
   }
 }

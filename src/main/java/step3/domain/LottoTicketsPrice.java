@@ -3,8 +3,11 @@ package step3.domain;
 public class LottoTicketsPrice {
 
   private final int UNIT_TICKET_PRICE = 1000;
-  private final int purchasePrice;
-  private final int actualPurchasePrice;
+  private int purchasePrice;
+  private int actualPurchasePrice;
+
+  public LottoTicketsPrice() {
+  }
 
   public LottoTicketsPrice(int purchasePrice) {
     this.purchasePrice = purchasePrice;

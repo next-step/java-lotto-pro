@@ -3,7 +3,6 @@ package step3.domain;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -20,31 +19,23 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class LottoMatchResultTest {
 
   private LottoTicket winningTicket;
+
+  private static Stream<Arguments> generateNumberList() {
+    List<Arguments> listOfArguments = new LinkedList<>();
+    listOfArguments
+        .add(Arguments.of(Arrays.asList(1, 4, 27, 38, 40, 41), 5)); // winningTicket 과 5개 매치
+    listOfArguments
+        .add(Arguments.of(Arrays.asList(3, 4, 26, 27, 38, 45), 4)); // winningTicket 과 4개 매치
+    listOfArguments
+        .add(Arguments.of(Arrays.asList(1, 2, 9, 11, 28, 41), 1)); // winningTicket 과 1개 매치
+    return listOfArguments.stream();
+  }
+
   @BeforeEach
   void setUp() {
     winningTicket = new LottoTicket(Stream.of(1, 4, 26, 27, 38, 40)
         .map(LottoNumber::new)
         .collect(Collectors.toList()));
-  }
-
-  @ParameterizedTest
-  @MethodSource("generateNumberList")
-  @DisplayName("입력 받은 (당첨)번호가 유효한지 확인 _ 실패")
-  void checkWinningLottoNumbersValid_Fail(List<Integer> inputWinningNumbers) {
-
-    assertThatThrownBy(() -> {
-      new LottoTicket(inputWinningNumbers.stream()
-          .map(LottoNumber::new)
-          .collect(Collectors.toList()));
-    }).isInstanceOf(RuntimeException.class);
-  }
-
-  private static Stream<Arguments> generateNumberList() {
-    List<Arguments> listOfArguments = new LinkedList<>();
-    listOfArguments.add(Arguments.of(Arrays.asList(1, 4, 27, 38, 40, 41), 5)); // winningTicket 과 5개 매치
-    listOfArguments.add(Arguments.of(Arrays.asList(3, 4, 26, 27, 38, 45), 4)); // winningTicket 과 4개 매치
-    listOfArguments.add(Arguments.of(Arrays.asList(1, 2, 9, 11, 28, 41), 1)); // winningTicket 과 1개 매치
-    return listOfArguments.stream();
   }
 
   @ParameterizedTest

@@ -25,7 +25,7 @@ public class LottoTickets {
   public String toString() {
     StringBuilder lottoTicketsString = new StringBuilder();
     this.lottoTickets.forEach(lottoTicket ->
-        lottoTicketsString.append(lottoTicket.getNumbers()).append("\n"));
+        lottoTicketsString.append(lottoTicket).append("\n"));
     return lottoTicketsString.toString();
   }
 }
