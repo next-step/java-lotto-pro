@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.Objects;
+import util.Numbers;
 
 public class Money {
     public static final int THOUSAND_ONE = 1000;
@@ -8,7 +9,15 @@ public class Money {
     private int money;
 
     public Money(final int money) {
+        verifyMoney(money);
+
         this.money = money;
+    }
+
+    private void verifyMoney(final int money) {
+        if (Numbers.isNegative(money)) {
+            throw new IllegalArgumentException("돈은 음수일 수 없습니다.");
+        }
     }
 
     public int get() {

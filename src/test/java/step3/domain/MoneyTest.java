@@ -2,6 +2,7 @@ package step3.domain;
 
 import static helper.Constants.*;
 import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -33,5 +34,10 @@ class MoneyTest {
         //then
         assertThat(money).isNotNull();
         assertThat(money.get()).isEqualTo(1000 + additionalMoney);
+    }
+
+    @Test
+    void 돈은_마이너스가_될_수_없다() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Money(-1)).withMessageContaining("음수");
     }
 }
