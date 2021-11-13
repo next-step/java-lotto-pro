@@ -13,16 +13,17 @@ class LottoShopTest {
     LottoShop lottoShop = new LottoShop();
 
     @ParameterizedTest
-    @CsvSource(value = {"1000:1", "14000:14"}, delimiter = ':')
-    void 구입_가능한_로또_갯수_조회(int money, int expectResult) {
+    @CsvSource(value = {"1000:0:1", "1000:1:0", "14000:4:10"}, delimiter = ':')
+    void 구입_가능한_로또_갯수_조회(int money, int manualCount, int autoCount) {
         // given
         Money purchaseMoney = new Money(money);
+        PurchaseCount manualPurchaseCount = new PurchaseCount(manualCount);
 
         // when
-        int result = lottoShop.countPurchasableLotto(purchaseMoney);
+        PurchaseCounts resultCounts = lottoShop.countPurchasableLotto(purchaseMoney, manualPurchaseCount);
 
         // then
-        assertThat(result).isEqualTo(expectResult);
+        assertThat(resultCounts).isEqualTo(new PurchaseCounts(new PurchaseCount(autoCount), new PurchaseCount(manualCount)));
     }
 
     @Test
@@ -30,11 +31,25 @@ class LottoShopTest {
         // given
         int money = LottoShop.LOTTO_TICKET_PER_PRICE - 1;
         Money purchaseMoney = new Money(money);
+        PurchaseCount manualPurchaseCount = new PurchaseCount(1);
 
         // when, then
-        assertThatThrownBy(() -> lottoShop.countPurchasableLotto(purchaseMoney))
+        assertThatThrownBy(() -> lottoShop.countPurchasableLotto(purchaseMoney, manualPurchaseCount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 1장의 가격은 " + LottoShop.LOTTO_TICKET_PER_PRICE + "원 입니다. (입력값: " + money + ")");
+    }
+
+    @Test
+    void 구입_가능한_로또_갯수_조회_수동_갯수_초과() {
+        // given
+        Money purchaseMoney = new Money(14000);
+        int manualCount = 15;
+        PurchaseCount manualPurchaseCount = new PurchaseCount(manualCount);
+
+        // when, then
+        assertThatThrownBy(() -> lottoShop.countPurchasableLotto(purchaseMoney, manualPurchaseCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("수동 구매 갯수는 총 구매 가능 갯수보다 작거나 같아야 합니다. (입력값: " + manualCount + ")");
     }
 
     @ParameterizedTest
