@@ -27,7 +27,7 @@ public class ResultView {
      * @param gameCount
      */
     public static void printPurchasedGameCount(int gameCount, int manualGameCount) {
-        System.out.println(String.format(PURCHASED_GAME_COUNT, manualGameCount, gameCount));
+        System.out.println(String.format(PURCHASED_GAME_COUNT, manualGameCount, gameCount - manualGameCount));
     }
 
     /**
