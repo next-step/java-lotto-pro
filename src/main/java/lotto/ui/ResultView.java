@@ -4,7 +4,7 @@ public class ResultView {
 
     public static void printPlayslips(final int numberOfPlayslips, final String playslips) {
         System.out.println(numberOfPlayslips + "개를 구매했습니다.");
-        System.out.println(playslips);
+        System.out.println(playslips + "\n");
     }
 
     public static void printStats(final String prizes, final double returnOnInvestment) {
