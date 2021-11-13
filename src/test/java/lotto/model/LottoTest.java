@@ -4,7 +4,6 @@ import static lotto.model.Lotto.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Collection;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
