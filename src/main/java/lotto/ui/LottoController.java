@@ -1,21 +1,20 @@
 package lotto.ui;
 
+import lotto.application.LottoPurchaseService;
 import lotto.application.LottoResultChecker;
 import lotto.application.LottoResultResponse;
-import lotto.domain.Playslips;
-import lotto.domain.Price;
-import lotto.domain.Retailer;
+import lotto.application.PlayslipsResponse;
 
 public class LottoController {
 
     public static void run() {
         final String purchaseAmount = InputView.askPurchaseAmount();
-        final Playslips playslips = Retailer.buy(new Price(purchaseAmount));
-        ResultView.printPlayslips(playslips.size(), playslips.asString());
+        final PlayslipsResponse playslipsResponse = LottoPurchaseService.purchase(purchaseAmount);
+        ResultView.printPlayslips(playslipsResponse.asString());
 
         final String pastWinningNumbers = InputView.askPastWinningNumbers();
         final LottoResultResponse resultResponse =
-            LottoResultChecker.check(playslips, pastWinningNumbers);
+            LottoResultChecker.check(playslipsResponse.getPlayslips(), pastWinningNumbers);
         ResultView.printStats(resultResponse.asString());
     }
 }

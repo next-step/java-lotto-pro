@@ -1,14 +1,13 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Playslips {
 
     private static final int NUMBER_NOT_CONTAINED = 0;
     private static final int NUMBER_CONTAINED = 1;
-    private static final CharSequence NEWLINE = "\n";
 
     private final List<Playslip> playslips;
 
@@ -36,14 +35,12 @@ public class Playslips {
         );
     }
 
-    public int size() {
-        return playslips.size();
+    public List<Playslip> getPlayslips() {
+        return Collections.unmodifiableList(playslips);
     }
 
-    public String asString() {
-        return playslips.stream()
-            .map(Playslip::asString)
-            .collect(Collectors.joining(NEWLINE));
+    public int size() {
+        return playslips.size();
     }
 
     private int contains(PickedNumbers winningNumbers, int x, int i) {
