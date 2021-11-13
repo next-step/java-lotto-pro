@@ -65,16 +65,12 @@ public class LottoNumbers {
 			).count();
 	}
 
-	public Boolean matchBonusBall(BonusBall bonusBall) {
+	public boolean matchBonusBall(BonusBall bonusBall) {
 		return lottoNumbers.contains(bonusBall.asLottoNumber());
 	}
 
 	public Set<LottoNumber> getList() {
 		return Collections.unmodifiableSet(lottoNumbers);
-	}
-
-	public boolean hasBonusBall(BonusBall bonusBall) {
-		return lottoNumbers.contains(bonusBall.asLottoNumber());
 	}
 
 	@Override
