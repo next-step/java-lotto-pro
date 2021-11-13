@@ -7,7 +7,7 @@ import java.util.*;
 public class Lotto {
     public static final int SIZE = 6;
     public static final int INCREMENT_BY_ONE = 1;
-    public static final int INCREMENT_BY_ZERO = 1;
+    public static final int INCREMENT_BY_ZERO = 0;
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
