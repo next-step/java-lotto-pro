@@ -28,4 +28,13 @@ public class InputHandlerTest {
 
         assertThat(numbers.size()).isEqualTo(6);
     }
+
+    @DisplayName("로또 번호 문자로 잘못 넣었을때 에러")
+    @Test
+    void splitError() {
+        assertThatThrownBy(() -> {
+            InputHandler.splitTextToInts("일, 이, 삼, 사, 오, 육");
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.SPLITED_ERROR);
+    }
 }

@@ -10,8 +10,12 @@ import java.util.List;
 public class InputHandler {
 
     public static List<Integer> splitTextToInts(String numbersText) {
-        String[] splitedNumbers = numbersText.split(ConstantString.SEPARATOR);
-        return mapToInts(splitedNumbers);
+        try {
+            String[] splitedNumbers = numbersText.split(ConstantString.SEPARATOR);
+            return mapToInts(splitedNumbers);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(ErrorMessage.SPLITED_ERROR);
+        }
     }
 
     private static List<Integer> mapToInts(String[] splitedNumbers) {
