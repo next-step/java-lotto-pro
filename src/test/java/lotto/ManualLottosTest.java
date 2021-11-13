@@ -13,4 +13,12 @@ public class ManualLottosTest {
         assertThatThrownBy(() ->
                 new ManualLottosCount(totalLottoCount, manualLottoCount)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 수동로또_개수_0미만_오류() {
+        int totalLottoCount = 3;
+        int manualLottoCount = -1;
+        assertThatThrownBy(() ->
+                new ManualLottosCount(totalLottoCount, manualLottoCount)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
