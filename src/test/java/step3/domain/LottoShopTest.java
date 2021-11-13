@@ -22,7 +22,7 @@ class LottoShopTest {
         //then
         assertAll(
             () -> assertThat(lottoTicket).isNotNull(),
-            () -> assertThat(lottoTicket.get().size()).isEqualTo(money.exchangeLottoPurchasableCount()),
+            () -> assertThat(lottoTicket.size()).isEqualTo(money.exchangeLottoPurchasableCount()),
             () -> assertThat(lottoShop.countOfSelling()).isEqualTo(money.get())
         );
     }

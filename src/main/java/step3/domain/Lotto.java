@@ -1,6 +1,7 @@
 package step3.domain;
 
 import static java.text.MessageFormat.*;
+import static util.NumberUtils.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +20,7 @@ public class Lotto {
     }
 
     public int findWinningCount(final Lotto winningLotto) {
-        int winningCount = 0;
+        int winningCount = ZERO;
 
         for (LottoNumber lottoNumber : this.lottoNumbers) {
             winningCount += lottoNumber.findWinningCount(winningLotto.get());

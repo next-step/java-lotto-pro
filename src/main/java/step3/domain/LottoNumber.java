@@ -1,9 +1,9 @@
 package step3.domain;
 
 import static java.text.MessageFormat.*;
+import static util.NumberUtils.*;
 import java.util.List;
 import java.util.Objects;
-import util.NumberUtils;
 
 public class LottoNumber {
 
@@ -23,11 +23,11 @@ public class LottoNumber {
             return 1;
         }
 
-        return 0;
+        return ZERO;
     }
 
     private void verifyLottoNumber(final int number) {
-        if (NumberUtils.isNegative(number)) {
+        if (isNegative(number)) {
             throw new IllegalArgumentException("로또 번호는 음수일 수 없습니다.");
         }
 

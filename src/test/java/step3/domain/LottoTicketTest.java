@@ -10,7 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import step3.component.SimpleLottoShuffler;
 import step3.enums.Prize;
-import step3.enums.Prizes;
 
 class LottoTicketTest {
 
@@ -27,7 +26,7 @@ class LottoTicketTest {
         //then
         assertAll(
             () -> assertThat(lottoTicket).isNotNull(),
-            () -> assertThat(lottoTicket.get().size()).isEqualTo(money.exchangeLottoPurchasableCount())
+            () -> assertThat(lottoTicket.size()).isEqualTo(money.exchangeLottoPurchasableCount())
         );
     }
 

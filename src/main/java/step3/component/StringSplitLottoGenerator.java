@@ -14,7 +14,7 @@ public class StringSplitLottoGenerator implements LottoGeneratorable {
     public Lotto generate(String numbers) {
         final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-        for (String number : numbers.split(DELIMITER)) {
+        for (final String number : numbers.split(DELIMITER)) {
             lottoNumbers.add(new LottoNumber(NumberUtils.parseInt(number.replace(" ", ""))));
         }
 

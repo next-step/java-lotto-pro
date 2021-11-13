@@ -1,8 +1,6 @@
 package step3.view;
 
 import static java.text.MessageFormat.*;
-import java.util.List;
-import step3.domain.Lotto;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
 
@@ -30,10 +28,6 @@ public class ConsoleOutputView {
     }
 
     public void printLottoTicket(final LottoTicket lottoTicket) {
-        final List<Lotto> lotteries = lottoTicket.get();
-
-        for (final Lotto lotto : lotteries) {
-            print(lotto.toString());
-        }
+        print(lottoTicket.toString());
     }
 }

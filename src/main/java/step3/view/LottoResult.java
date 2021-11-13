@@ -4,7 +4,7 @@ import java.util.StringJoiner;
 import step3.domain.Lotto;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
-import step3.enums.Prizes;
+import step3.domain.Prizes;
 
 public final class LottoResult {
 
