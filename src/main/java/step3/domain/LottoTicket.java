@@ -3,19 +3,19 @@ package step3.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import step3.component.LottoShuffleable;
 import step3.enums.Prize;
 import step3.enums.Prizes;
-import util.LottoNumbers;
 
 public class LottoTicket {
 
     private final List<Lotto> lotteries = new ArrayList<>();
 
-    public void publish(final Money money) {
+    public void publish(final Money money, final LottoShuffleable lottoShuffleable) {
         final long publishCount = money.exchangeLottoPurchasableCount();
 
         for (int lottoCount = 0; lottoCount < publishCount; lottoCount++) {
-            lotteries.add(new Lotto(LottoNumbers.shuffle()));
+            lotteries.add(lottoShuffleable.shuffle());
         }
     }
 
@@ -23,7 +23,7 @@ public class LottoTicket {
         return this.lotteries;
     }
 
-    public Prizes findWinningCount(final Lotto winningLotto) {
+    public Prizes toWinningPrizes(final Lotto winningLotto) {
         final Prizes prizes = new Prizes();
 
         for (Lotto lotto : this.lotteries) {

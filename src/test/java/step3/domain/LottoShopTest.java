@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import step3.component.SimpleLottoShuffler;
 
 class LottoShopTest {
 
@@ -16,7 +17,7 @@ class LottoShopTest {
 
         //when
         final LottoShop lottoShop = new LottoShop();
-        final LottoTicket lottoTicket = lottoShop.sell(money);
+        final LottoTicket lottoTicket = lottoShop.sell(money, new SimpleLottoShuffler());
 
         //then
         assertAll(

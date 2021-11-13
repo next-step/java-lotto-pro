@@ -17,7 +17,7 @@ public final class LottoResult {
         result.add("당첨 통계");
         result.add("---------");
 
-        final Prizes prizes = lottoTicket.findWinningCount(winningLotto);
+        final Prizes prizes = lottoTicket.toWinningPrizes(winningLotto);
 
         result.add(prizes.getResults());
         result.add(prizes.averageYield(money));

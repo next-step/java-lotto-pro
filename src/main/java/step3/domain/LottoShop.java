@@ -1,5 +1,7 @@
 package step3.domain;
 
+import step3.component.LottoShuffleable;
+
 public class LottoShop {
 
     private final Money income;
@@ -8,11 +10,11 @@ public class LottoShop {
         this.income = new Money(0);
     }
 
-    public LottoTicket sell(final Money money) {
+    public LottoTicket sell(final Money money, final LottoShuffleable lottoShuffleable) {
         earn(money);
 
         final LottoTicket lottoTicket = new LottoTicket();
-        lottoTicket.publish(money);
+        lottoTicket.publish(money, lottoShuffleable);
 
         return lottoTicket;
     }
