@@ -29,6 +29,10 @@ public class PurchaseCount {
         return inputCount - this.count;
     }
 
+    public boolean isZero() {
+        return this.count == 0;
+    }
+
     public int getCount() {
         return count;
     }

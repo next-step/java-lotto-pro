@@ -56,19 +56,6 @@ public class LottoTicket {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoTicket that = (LottoTicket) o;
-        return Objects.equals(numbers, that.numbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numbers);
-    }
-
-    @Override
     public String toString() {
         return "LottoTicket{" +
                 "numbers=" + numbers +

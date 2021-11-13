@@ -2,11 +2,14 @@ package lotto.domain;
 
 import java.util.*;
 
+import static lotto.domain.LottoTicket.LOTTO_NUMBER_COUNT;
+
 public class WinningNumbers {
 
     private final List<Number> numbers;
 
     public WinningNumbers(List<Number> numbers) {
+        validateNumbersCount(numbers);
         validateDuplicatedNumber(numbers);
         this.numbers = numbers;
     }
@@ -23,6 +26,10 @@ public class WinningNumbers {
             lottoTickets.checkContainsNumber(number, winningCountCache);
         }
         return winningCountCache;
+    }
+
+    public boolean isContains(Number number) {
+        return this.numbers.contains(number);
     }
 
     private void validateDuplicatedNumber(List<Number> numbers) {
@@ -45,5 +52,11 @@ public class WinningNumbers {
             numbers.add(new Number(number));
         }
         return numbers;
+    }
+
+    private void validateNumbersCount(List<Number> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_COUNT + "개가 존재해야 합니다. (입력값: " + numbers.size() + ")");
+        }
     }
 }

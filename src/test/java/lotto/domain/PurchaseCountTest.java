@@ -71,4 +71,17 @@ class PurchaseCountTest {
         // then
         assertThat(result).isEqualTo(expectedResult);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0:true", "1:false"}, delimiter = ':')
+    void 값이_0인지_확인(int input, boolean expectedResult) {
+        // given
+        PurchaseCount inputCount = new PurchaseCount(input);
+
+        // when
+        boolean result = inputCount.isZero();
+
+        // then
+        assertThat(result).isEqualTo(expectedResult);
+    }
 }

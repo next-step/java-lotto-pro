@@ -40,7 +40,7 @@ class LottoTicketTest {
         LottoTicket result = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // then
-        assertThat(result).isEqualTo(lottoTicket);
+        assertThat(result.getNumbers().size()).isEqualTo(6);
     }
 
     @Test

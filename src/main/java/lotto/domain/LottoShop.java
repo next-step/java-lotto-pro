@@ -15,6 +15,12 @@ public class LottoShop {
         return new PurchaseCounts(new PurchaseCount(manualPurchaseCount.gap(purchasableCount)), manualPurchaseCount);
     }
 
+    public static void validatePurchaseAmount(Money purchaseMoney) {
+        if (purchaseMoney.isLessThan(LOTTO_TICKET_PER_PRICE)) {
+            throw new IllegalArgumentException("로또 1장의 가격은 " + LOTTO_TICKET_PER_PRICE + "원 입니다. (입력값: " + purchaseMoney.getMoney() + ")");
+        }
+    }
+
     public LottoTickets createAutoLottoTickets(PurchaseCount purchaseCount) {
         return lottoGenerator.createAutoLottoTickets(purchaseCount);
     }
@@ -26,12 +32,6 @@ public class LottoShop {
     private void validateManualPurchaseCount(PurchaseCount manualPurchaseCount, int purchasableCount) {
         if (manualPurchaseCount.isGreaterThan(purchasableCount)) {
             throw new IllegalArgumentException("수동 구매 갯수는 총 구매 가능 갯수보다 작거나 같아야 합니다. (입력값: " + manualPurchaseCount.getCount() + ")");
-        }
-    }
-
-    private void validatePurchaseAmount(Money purchaseMoney) {
-        if (purchaseMoney.isLessThan(LOTTO_TICKET_PER_PRICE)) {
-            throw new IllegalArgumentException("로또 1장의 가격은 " + LOTTO_TICKET_PER_PRICE + "원 입니다. (입력값: " + purchaseMoney.getMoney() + ")");
         }
     }
 }

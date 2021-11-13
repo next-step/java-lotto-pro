@@ -59,4 +59,19 @@ class LottoTicketsTest {
         assertThat(result.get(lottoTickets.get(1))).isFalse();
     }
 
+    @Test
+    void 로또티켓_합치기() {
+        // given
+        int currentSize = lottoTickets.getLottoTickets().size();
+        LottoTickets otherLottoTicket = new LottoTickets(new int[][] {
+                {13, 14, 15, 16, 17, 18},
+                {19, 20, 21, 22, 23, 24},
+        });
+
+        // when
+        LottoTickets result = lottoTickets.add(otherLottoTicket);
+
+        // then
+        assertThat(result.getLottoTickets().size()).isEqualTo(currentSize + otherLottoTicket.getLottoTickets().size());
+    }
 }
