@@ -13,7 +13,7 @@ public class LottoMain {
         LottoShop lottoShop = new LottoShop();
 
         Money money = inputView.getPurchaseMoney();
-        int lottoTicketCount = lottoShop.calculatePurchasableLottoTicketCount(money);
+        int lottoTicketCount = lottoShop.countPurchasableLotto(money);
         resultView.printLottoTicketCount(lottoTicketCount);
 
         LottoTickets lottoTickets = lottoShop.createLottoTickets(new PurchaseCount(lottoTicketCount));
