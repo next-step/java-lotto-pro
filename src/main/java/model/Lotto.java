@@ -35,12 +35,14 @@ public class Lotto {
 		this(parse(lottoNumbersString));
 	}
 
-	public Rank calcLottoResult(Lotto winningLotto) {
+	public Rank calcLottoResult(Lotto winningLotto, LottoNumber bonusNumber) {
 		LottoResult lottoResult = new LottoResult();
+		boolean isMatchBonusNumber = false;
 		for (LottoNumber winningLottoNumber : winningLotto.lottoNumbers) {
 			containWinningLottoNumber(winningLottoNumber, lottoResult);
+			isMatchBonusNumber = lottoNumbers.contains(bonusNumber);
 		}
-		return lottoResult.getRank();
+		return lottoResult.getRank(isMatchBonusNumber);
 	}
 
 	private void containWinningLottoNumber(LottoNumber winningLottoNumber, LottoResult lottoResult) {
@@ -81,14 +83,6 @@ public class Lotto {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		sb.append(lottoNumbers
-			.stream()
-			.map(LottoNumber::toString)
-			.collect(Collectors.joining(", "))
-		);
-		sb.append("]");
-		return sb.toString();
+		return lottoNumbers.toString();
 	}
 }

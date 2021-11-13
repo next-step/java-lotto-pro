@@ -42,7 +42,9 @@
 * InputView 클래스
   * 금액 입력 요청 문구 출력
   * 당첨번호 입력 요청 문구 출력
+  * 보너스볼 입력 요청 문구 출력
   * 당첨번호 입력, 구입 금액 입력
+  * 보너스볼 입력
 
 * ResultView
   * 당첨 통계
@@ -56,6 +58,7 @@
 
 * LottoNumber
   * 숫자 주입 생성자
+  * 문자열 생성자
   * 주입된 숫자 반환 
 
 * LottoPurchaseCount
@@ -64,23 +67,26 @@
   * 처음에 소모한 비용 반환
   
 * Lotto
-  * List<LottoNumber> 주입 생성자
+  * List<Integer> 주입 생성자
   * LottoNumberChoiceStrategy 인터페이스 생성자
   * 생성자 예외1: 숫자가 6개가 아닌경우
   * 생성자 예외2: 주입하려는 컬렉션 안에 같은 숫자가 포함되어 있는 경우
   * 다른 로또와 비교하여 몇등인지 반환
 
 * Lottos
-  * 순회하며 몇등짜리 로또인지를 저장 
+  * 순회하며 몇등짜리 로또인지를 저장
 
 * Rank
   * enum
   * 가격 매핑
+  * matchingCount 매핑
+  * matchingCount를 파라미터와 bonus 여부로 Rank 반환
   
 * LottoResult
   * 몇개의 숫자가 맞는지 체크
+  * 보너스 숫자 맞는지 체크
   * 몇개의 숫자가 맞는지를 기준으로 Rank 반환
-
+  
 * RewardCalculator
   * 무엇이 당첨되었는지 추가
   * 특정 등수가 당첨된 횟수 반환

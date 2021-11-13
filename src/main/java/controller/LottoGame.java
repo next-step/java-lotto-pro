@@ -3,6 +3,7 @@ package controller;
 import java.util.Objects;
 
 import model.Lotto;
+import model.LottoNumber;
 import model.LottoNumberChoiceRandom;
 import model.LottoPurchaseCount;
 import model.Lottos;
@@ -20,9 +21,19 @@ public class LottoGame {
 		inputView.showResponseInputOfPurchaseLottos(purchasedLottos);
 
 		Lotto winningLotto = requestWinningLotto();
+		LottoNumber bonusNumber = requestBonusNumber();
 
-		RewardCalculator rewardCalculator = purchasedLottos.calcReward(winningLotto);
+		RewardCalculator rewardCalculator = purchasedLottos.calcReward(winningLotto, bonusNumber);
 		resultView.showResult(lottoPurchaseCount, rewardCalculator);
+	}
+
+	private LottoNumber requestBonusNumber() {
+		LottoNumber bonusNumber = null;
+		while (Objects.isNull(bonusNumber)) {
+			inputView.showRequestInputOfBonusNumber();
+			bonusNumber = parseInputOfBonusNumber();
+		}
+		return bonusNumber;
 	}
 
 	private Lotto requestWinningLotto() {
@@ -61,6 +72,15 @@ public class LottoGame {
 			return new LottoPurchaseCount(inputView.pollInput());
 		} catch (RuntimeException e) {
 			inputView.showRequestInputExceptionOfPurchasedPrice();
+			return null;
+		}
+	}
+
+	private LottoNumber parseInputOfBonusNumber() {
+		try {
+			return new LottoNumber(inputView.pollInput());
+		} catch (RuntimeException e) {
+			inputView.showRequestInputExceptionOfBonusNumber();
 			return null;
 		}
 	}

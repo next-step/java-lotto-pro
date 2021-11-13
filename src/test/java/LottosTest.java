@@ -2,11 +2,16 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import model.Lotto;
+import model.LottoNumber;
 import model.LottoNumberChoiceRandom;
 import model.LottoPurchaseCount;
 import model.Lottos;
@@ -73,21 +78,38 @@ public class LottosTest {
 			.hasMessage(LottoPurchaseCount.MESSAGE_PRICE_MUST_BE_LARGER_THAN_ZERO);
 	}
 
-	@Test
+	@ParameterizedTest
 	@DisplayName("당첨 번호를 제공하면 해당하는 RewardCalculator 반환")
-	void test_calcReward1() {
+	@MethodSource("test_calcReward1_parameter")
+	void test_calcReward1(List<Integer> userLotto, List<Integer> winningLotto, Rank expectedRank, int bonusNumber) {
 		Lottos lottos = new Lottos(
 			new LottoNumberChoiceRandom() {
 				@Override
 				public List<Integer> choose() {
-					return Arrays.asList(1, 2, 3, 4, 5, 6);
+					return userLotto;
 				}
 			}, new LottoPurchaseCount("1000"));
-		RewardCalculator rewardCalculator = lottos.calcReward(new Lotto("1, 2, 3, 4, 5, 7"));
+		RewardCalculator rewardCalculator = lottos.calcReward(new Lotto(winningLotto), new LottoNumber(bonusNumber));
 		RewardCalculator expectedRewardCalculator = new RewardCalculator();
-		expectedRewardCalculator.addCount(Rank.THIRD);
+		expectedRewardCalculator.addCount(expectedRank);
 
 		assertThat(rewardCalculator).isEqualTo(expectedRewardCalculator);
+	}
+
+	private static Stream<Arguments> test_calcReward1_parameter() {
+		int bonusNumberHit = 6;
+		int bonusNumberNotHit = 45;
+
+		return Stream.of(
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), Rank.FIRST, bonusNumberNotHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7), Rank.SECOND, bonusNumberHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7), Rank.THIRD, bonusNumberNotHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 7, 8), Rank.FOURTH, bonusNumberHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 7, 8, 9), Rank.FIFTH, bonusNumberHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 7, 8, 9, 10), Rank.NONE, bonusNumberHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 7, 8, 9, 10, 11), Rank.NONE, bonusNumberHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(7, 8, 9, 10, 11, 12), Rank.NONE, bonusNumberHit)
+		);
 	}
 
 	@Test

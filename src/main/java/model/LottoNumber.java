@@ -17,6 +17,10 @@ public class LottoNumber {
 		this.number = number;
 	}
 
+	public LottoNumber(String numberString) {
+		this(Integer.parseInt(numberString));
+	}
+
 	private void validateNumberIsInRange(int number) {
 		if (number < BOUNDARY_MIN || number > BOUNDARY_MAX) {
 			throw new OutOfRangeException(MESSAGE_OUT_OF_RANGE);
