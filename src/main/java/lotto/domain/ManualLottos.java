@@ -19,7 +19,7 @@ public class ManualLottos {
         }
     }
 
-    public List<Lotto> getManualLotts() {
+    public List<Lotto> getManualLottos() {
         return manualLottos;
     }
 }

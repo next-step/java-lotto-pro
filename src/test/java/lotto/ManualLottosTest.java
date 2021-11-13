@@ -43,6 +43,6 @@ public class ManualLottosTest {
     @Test
     void 수동로또_생성() {
         manualLottos.createManualLottos(inputManualLottoNumbersString);
-        assertThat(manualLottos.getManualLotts()).contains(new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"))));
+        assertThat(manualLottos.getManualLottos()).contains(new Lotto(new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"))));
     }
 }
