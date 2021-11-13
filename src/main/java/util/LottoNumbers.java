@@ -20,7 +20,7 @@ public final class LottoNumbers {
         }
     }
 
-    private LottoNumbers() {
+    public LottoNumbers() {
     }
 
     public static List<LottoNumber> shuffle() {
@@ -34,7 +34,7 @@ public final class LottoNumbers {
         final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for (String number : numbers.split(DELIMITER)) {
-            lottoNumbers.add(new LottoNumber(Numbers.parseInt(number.replace(" ", ""))));
+            lottoNumbers.add(new LottoNumber(NumberUtils.parseInt(number.replace(" ", ""))));
         }
 
         return lottoNumbers;

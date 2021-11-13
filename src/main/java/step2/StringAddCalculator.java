@@ -3,7 +3,7 @@ package step2;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import util.Numbers;
+import util.NumberUtils;
 
 public final class StringAddCalculator {
 
@@ -51,7 +51,7 @@ public final class StringAddCalculator {
     }
 
     private static int parseInt(final String text) {
-        return Numbers.parseInt(text);
+        return NumberUtils.parseInt(text);
     }
 
     private static boolean isDelimiterContainCommaAndColon(final String text) {

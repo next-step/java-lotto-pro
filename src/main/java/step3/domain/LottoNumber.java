@@ -3,7 +3,7 @@ package step3.domain;
 import static java.text.MessageFormat.*;
 import java.util.List;
 import java.util.Objects;
-import util.Numbers;
+import util.NumberUtils;
 
 public class LottoNumber {
 
@@ -27,7 +27,7 @@ public class LottoNumber {
     }
 
     private void verifyLottoNumber(final int number) {
-        if (Numbers.isNegative(number)) {
+        if (NumberUtils.isNegative(number)) {
             throw new IllegalArgumentException("로또 번호는 음수일 수 없습니다.");
         }
 

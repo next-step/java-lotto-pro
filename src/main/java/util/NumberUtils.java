@@ -1,8 +1,8 @@
 package util;
 
-public final class Numbers {
+public final class NumberUtils {
 
-    private Numbers() {
+    private NumberUtils() {
     }
 
     public static boolean isNegative(final Number number) {
