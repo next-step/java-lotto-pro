@@ -1,80 +1,100 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Result {
 
-    public static final Price FIRST_PRIZE = new Price(2_000_000_000L);
-    public static final Price SECOND_PRIZE = new Price(1_500_000L);
-    public static final Price THIRD_PRIZE = new Price(50_000L);
-    public static final Price FOURTH_PRIZE = new Price(5_000L);
+    private static final char NEWLINE = '\n';
 
-    private final int numberOfPayslips;
-    private final int matchedThreeNumbers;
-    private final int matchedFourNumbers;
-    private final int matchedFiveNumbers;
-    private final int matchedSixNumbers;
+    private final List<Prize> prizes = new ArrayList<>();
+    private final int numberOfPlayslips;
 
     public Result(
-        final int numberOfPayslips,
-        final int matchedThreeNumbers,
-        final int matchedFourNumbers,
-        final int matchedFiveNumbers,
-        final int matchedSixNumbers
+        final int numberOfPlayslips,
+        final int numberOfFirstPrizes,
+        final int numberOfSecondPrizes,
+        final int numberOfThirdPrizes,
+        final int numberOfFourthPrizes
     ) {
-        this.numberOfPayslips = numberOfPayslips;
-        this.matchedThreeNumbers = matchedThreeNumbers;
-        this.matchedFourNumbers = matchedFourNumbers;
-        this.matchedFiveNumbers = matchedFiveNumbers;
-        this.matchedSixNumbers = matchedSixNumbers;
+        this.numberOfPlayslips = numberOfPlayslips;
+        for (int i = 0; i < numberOfFirstPrizes; i++) {
+            prizes.add(Prize.FIRST);
+        }
+        for (int i = 0; i < numberOfSecondPrizes; i++) {
+            prizes.add(Prize.SECOND);
+        }
+        for (int i = 0; i < numberOfThirdPrizes; i++) {
+            prizes.add(Prize.THIRD);
+        }
+        for (int i = 0; i < numberOfFourthPrizes; i++) {
+            prizes.add(Prize.FOURTH);
+        }
     }
 
-    public int getMatchedThreeNumbers() {
-        return matchedThreeNumbers;
+    public String asString() {
+        return prizeString(Prize.FOURTH, getNumberOfFourthPrizes()) + NEWLINE
+            + prizeString(Prize.THIRD, getNumberOfThirdPrizes()) + NEWLINE
+            + prizeString(Prize.SECOND, getNumberOfSecondPrizes()) + NEWLINE
+            + prizeString(Prize.FIRST, getNumberOfFirstPrizes());
     }
 
-    public int getMatchedFourNumbers() {
-        return matchedFourNumbers;
+    private String prizeString(final Prize prize, final int numberOfPrizes) {
+        return prize.getMatchCount()
+            + " 개 일치 ("
+            + prize.getAmountAsString()
+            + " 원)- "
+            + numberOfPrizes
+            + "개";
     }
 
-    public int getMatchedFiveNumbers() {
-        return matchedFiveNumbers;
+    public int getNumberOfFirstPrizes() {
+        return getNumberOfWinningPrizes(Prize.FIRST);
     }
 
-    public int getMatchedSixNumbers() {
-        return matchedSixNumbers;
+    public int getNumberOfSecondPrizes() {
+        return getNumberOfWinningPrizes(Prize.SECOND);
+    }
+
+    public int getNumberOfThirdPrizes() {
+        return getNumberOfWinningPrizes(Prize.THIRD);
+    }
+
+    public int getNumberOfFourthPrizes() {
+        return getNumberOfWinningPrizes(Prize.FOURTH);
+    }
+
+    private int getNumberOfWinningPrizes(final Prize prize) {
+        return Collections.frequency(prizes, prize);
     }
 
     public double calculateReturnOnInvestment() {
-        final long totalPrize = calculateTotalPrize().getValue();
-        final long investedAmount = new Price(numberOfPayslips).getValue();
-        double roi;
-        try {
-            roi = (double) totalPrize / investedAmount;
-        } catch (Exception ex) {
-            throw new IllegalStateException();
-        }
-        return roi;
+        final long totalPrize = calculateTotalPrizeAmount().getValue();
+        final long investedAmount = new Price(numberOfPlayslips).getValue();
+        return (double) totalPrize / investedAmount;
     }
 
-    private Price calculateTotalPrize() {
-        return calculateFirstPrize()
-            .add(calculateSecondPrize())
-            .add(calculateThirdPrize())
-            .add(calculateFourthPrize());
+    private Price calculateTotalPrizeAmount() {
+        return calculateFirstPrizeAmount()
+            .add(calculateSecondPrizeAmount())
+            .add(calculateThirdPrizeAmount())
+            .add(calculateFourthPrizeAmount());
     }
 
-    private Price calculateFirstPrize() {
-        return FIRST_PRIZE.multiply(getMatchedSixNumbers());
+    private Price calculateFirstPrizeAmount() {
+        return Prize.FIRST.getAmount().multiply(getNumberOfFirstPrizes());
     }
 
-    private Price calculateSecondPrize() {
-        return SECOND_PRIZE.multiply(getMatchedFiveNumbers());
+    private Price calculateSecondPrizeAmount() {
+        return Prize.SECOND.getAmount().multiply(getNumberOfSecondPrizes());
     }
 
-    private Price calculateThirdPrize() {
-        return THIRD_PRIZE.multiply(getMatchedFourNumbers());
+    private Price calculateThirdPrizeAmount() {
+        return Prize.THIRD.getAmount().multiply(getNumberOfThirdPrizes());
     }
 
-    private Price calculateFourthPrize() {
-        return FOURTH_PRIZE.multiply(getMatchedThreeNumbers());
+    private Price calculateFourthPrizeAmount() {
+        return Prize.FOURTH.getAmount().multiply(getNumberOfFourthPrizes());
     }
 }

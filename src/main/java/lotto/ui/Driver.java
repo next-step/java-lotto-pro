@@ -15,6 +15,6 @@ public class Driver {
 
         final String pastWinningNumbers = InputView.askPastWinningNumbers();
         final Result result = playslips.checkResult(PickedNumbers.of(pastWinningNumbers));
-        ResultView.printStats(result);
+        ResultView.printStats(result.asString(), result.calculateReturnOnInvestment());
     }
 }
