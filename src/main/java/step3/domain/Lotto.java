@@ -1,6 +1,7 @@
 package step3.domain;
 
 import static java.text.MessageFormat.*;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -17,10 +18,6 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> get() {
-        return this.lottoNumbers;
-    }
-
     public int findWinningCount(final Lotto winningLotto) {
         int winningCount = 0;
 
@@ -29,6 +26,10 @@ public class Lotto {
         }
 
         return winningCount;
+    }
+
+    List<LottoNumber> get() {
+        return Collections.unmodifiableList(this.lottoNumbers);
     }
 
     private boolean isAvailableLottoNumbersLength(final List<LottoNumber> lottoNumbers) {
