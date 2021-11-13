@@ -6,8 +6,8 @@ import java.util.List;
 public class LottoMachine {
 
     public List<Lotto> sell(PurchaseAmount purchaseAmount) {
-        int purchasedLottoCount = purchaseAmount.buyLotto();
-        return generateLottoList(purchasedLottoCount);
+        int count = purchaseAmount.getPurchasableLottoCount();
+        return generateLottoList(count);
     }
 
     private List<Lotto> generateLottoList(int purchasedLottoCount) {
