@@ -1,17 +1,15 @@
 package lotto.ui;
 
-import lotto.domain.PickedNumbers;
-import lotto.domain.Playslips;
 import lotto.domain.Result;
 
 public class ResultView {
 
-    public static void printStats(
-        final Playslips playslips,
-        final PickedNumbers pastWinningNumbers
-    ) {
-        final Result result = playslips.checkResult(pastWinningNumbers);
+    public static void printPlayslips(final int numberOfPlayslips, final String playslips) {
+        System.out.println(numberOfPlayslips + "개를 구매했습니다.");
+        System.out.println(playslips);
+    }
 
+    public static void printStats(Result result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println("3 개 일치 ("
