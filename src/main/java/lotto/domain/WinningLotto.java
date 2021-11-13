@@ -6,7 +6,6 @@ import java.util.List;
 
 public class WinningLotto extends Lotto {
 
-    public static final String WINNING_LOTTO_ERROR = String.format("당첨 번호는 %d개여야 합니다.", Lotto.LOTTO_NUMBER_COUNT);
     protected static final String BONUS_NUMBER_ERROR = "보너스 볼은 당첨 번호와 같을 수 없습니다.";
 
     private final LottoNumber bonusLottoNumber;

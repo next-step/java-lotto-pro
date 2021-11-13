@@ -28,38 +28,52 @@ public class LottoController {
         int manualLottoCount = getManualLottoCount(purchaseAmount);
         int autoLottoCount = purchaseAmount.getPurchasableLottoCount() - manualLottoCount;
 
-        lottoList.addAll(lottoMachine.sell(manualLottoCount));
+        addManualLotto(manualLottoCount);
         lottoList.addAll(lottoMachine.sell(autoLottoCount));
-        printLottoList(lottoList);
 
-        WinningLotto winningLotto = initWeekWinningLotto();
-        printLottoResult(winningLotto, lottoList);
+        printLottoCount(manualLottoCount, autoLottoCount);
+        printLottoList(lottoList);
+        printLottoResult(initWeekWinningLotto(), lottoList);
     }
 
     private PurchaseAmount getPurchaseAmount() {
         System.out.println(Messages.PURCHASE_AMOUNT_INPUT);
 
         int amount = Integer.parseInt(Console.readLine());
-
-        System.out.print(System.lineSeparator());
         return new PurchaseAmount(amount);
     }
 
     private int getManualLottoCount(PurchaseAmount purchaseAmount) {
-        System.out.println(Messages.MANUAL_LOTTO_COUNT_INPUT);
+        System.out.println(System.lineSeparator() + Messages.MANUAL_LOTTO_COUNT_INPUT);
 
         int count = Integer.parseInt(Console.readLine());
         purchaseAmount.validatePurchasableLottoCount(count);
-
-        System.out.print(System.lineSeparator());
         return count;
     }
 
+    private void addManualLotto(int manualLottoCount) {
+        if (manualLottoCount > 0) {
+            System.out.println(System.lineSeparator() + Messages.MANUAL_LOTTO_NUMBER_INPUT);
+        }
+        for (int i = 0; i < manualLottoCount; i++) {
+            Lotto manualLotto = getManualLotto();
+            lottoList.add(manualLotto);
+        }
+    }
+
+    private void printLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.println(System.lineSeparator() + Messages.getPurchasedLottoCount(manualLottoCount, autoLottoCount));
+    }
+
     private void printLottoList(List<Lotto> lottoList) {
-        System.out.println(Messages.getPurchasedLottoCount(lottoList.size()));
         for (Lotto lotto : lottoList) {
             System.out.println(lotto);
         }
+    }
+
+    private Lotto getManualLotto() {
+        int[] numbers = getNumbers();
+        return new Lotto(numbers);
     }
 
     private WinningLotto initWeekWinningLotto() {
@@ -71,10 +85,13 @@ public class LottoController {
 
     private int[] getWinningNumbers() {
         System.out.println(System.lineSeparator() + Messages.LAST_WEEK_WINNING_NUMBER_INPUT);
-        String[] stringNumbers = Console.readLine().split(NUMBER_DELIMITER);
+        return getNumbers();
+    }
 
+    private int[] getNumbers() {
+        String[] stringNumbers = Console.readLine().split(NUMBER_DELIMITER);
         if (stringNumbers.length != Lotto.LOTTO_NUMBER_COUNT) {
-            throw new LottoException(WinningLotto.WINNING_LOTTO_ERROR);
+            throw new LottoException(Lotto.LOTTO_NUMBER_COUNT_ERROR);
         }
         return Arrays.stream(stringNumbers)
                 .mapToInt(stringNumber -> Integer.parseInt(stringNumber.trim()))
