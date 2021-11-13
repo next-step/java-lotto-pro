@@ -32,7 +32,8 @@ public class LottoGame {
 
     private void buyLotto() {
         View.print(Message.PURCHASE_AMOUNT);
-        int totalCount = InputHandler.price(Console.readLine());
+        int price = InputHandler.validStringToInt(Console.readLine());
+        int totalCount = Price.numberPurchases(price);
 
         View.print(Message.MANUAL_PURCHASE);
         int manualCount = InputHandler.validStringToInt(Console.readLine());

@@ -9,15 +9,6 @@ import java.util.List;
 
 public class InputHandler {
 
-    public static int price(String priceText) {
-        try {
-            int lottoCount = Price.numberPurchases(validStringToInt(priceText));
-            return lottoCount;
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException(ErrorMessage.NUMBER_FORMAT_ERROR);
-        }
-    }
-
     public static List<Integer> splitTextToInts(String numbersText) {
         try {
             String[] splitedNumbers = numbersText.split(ConstantString.SEPARATOR);

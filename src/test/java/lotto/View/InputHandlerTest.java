@@ -12,18 +12,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class InputHandlerTest {
 
-    @DisplayName("정상 입력값 검증")
-    @Test
-    void nomalInput() {
-        int price = InputHandler.price("14000");
-        assertThat(price).isEqualTo(14);
-    }
-
     @DisplayName("구입 금액을 문자로 입력할때 에러 검증")
     @Test
     void textPriceInputError() {
         assertThatThrownBy(() -> {
-            InputHandler.price("만사천원");
+            InputHandler.validStringToInt("만사천원");
         }).isInstanceOf(NumberFormatException.class)
                 .hasMessageContaining(ErrorMessage.NUMBER_FORMAT_ERROR);
     }
