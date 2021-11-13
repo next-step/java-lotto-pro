@@ -4,27 +4,27 @@ import java.util.Objects;
 import util.NumberUtils;
 
 public class Money {
-    public static final int THOUSAND_ONE = 1000;
+    public static final long THOUSAND_ONE = 1000;
 
-    private int money;
+    private long money;
 
-    public Money(final int money) {
+    public Money(final long money) {
         verifyMoney(money);
 
         this.money = money;
     }
 
-    private void verifyMoney(final int money) {
+    private void verifyMoney(final long money) {
         if (NumberUtils.isNegative(money)) {
             throw new IllegalArgumentException("돈은 음수일 수 없습니다.");
         }
     }
 
-    public int get() {
+    public long get() {
         return this.money;
     }
 
-    public int changeUnit() {
+    public long exchangeLottoPurchasableCount() {
         return Math.floorDiv(this.money, THOUSAND_ONE);
     }
 

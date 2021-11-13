@@ -29,7 +29,7 @@ class LottoTest {
         //given
         final List<LottoNumber> lottoNumbers = Arrays.asList(
             new LottoNumber(3), new LottoNumber(2), new LottoNumber(42),
-            new LottoNumber(12), new LottoNumber(40), new LottoNumber(11)
+            new LottoNumber(12), new LottoNumber(40), new LottoNumber(11), new LottoNumber(7)
         );
 
         //when

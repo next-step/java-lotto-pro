@@ -21,7 +21,7 @@ public class LottoShop {
         this.income.earn(money);
     }
 
-    public int countOfSelling() {
+    public long countOfSelling() {
         return this.income.get();
     }
 }

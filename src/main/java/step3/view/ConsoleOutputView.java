@@ -26,7 +26,7 @@ public class ConsoleOutputView {
     }
 
     public void printMoney(final Money money) {
-        print(format("{0}개를 구매했습니다.", money.changeUnit()));
+        print(format("{0}개를 구매했습니다.", money.exchangeLottoPurchasableCount()));
     }
 
     public void printLottoTicket(final LottoTicket lottoTicket) {

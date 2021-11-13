@@ -29,7 +29,7 @@ public class Prizes {
     }
 
     public String averageYield(final Money money) {
-        return String.format("총 수익률은 %.2f입니다.", (double)totalReward / money.changeUnit());
+        return String.format("총 수익률은 %.2f입니다.", (double)totalReward / money.exchangeLottoPurchasableCount());
     }
 
     private String getResultBy(final Prize targetPrize) {
@@ -45,7 +45,7 @@ public class Prizes {
 
     private void accumulateRewards(final List<Prize> prizes) {
         for (final Prize prize : prizes) {
-            totalReward += prize.getReward().changeUnit();
+            totalReward += prize.getReward().exchangeLottoPurchasableCount();
         }
     }
 

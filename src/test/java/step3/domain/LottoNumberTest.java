@@ -2,20 +2,22 @@ package step3.domain;
 
 import static helper.Constants.*;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("로또번호 테스트")
 class LottoNumberTest {
 
-    @ParameterizedTest(name = DISPLAY_NAME)
-    @CsvSource(value = "1,45")
-    void _1에서_45번으로_로또번호를_만들_수_있다(final int startNumber, final int endNumber) {
+    @Test
+    void _1에서_45번으로_로또번호를_만들_수_있다() {
+        final int startNumber = 1;
+        final int endNumber = 45;
+
         for (int number = startNumber; number <= endNumber; number++) {
             //given when
             final LottoNumber lottoNumber = new LottoNumber(number);
@@ -54,7 +56,9 @@ class LottoNumberTest {
         final int notSameLottoNumberWinningCount = notSameLottoNumber.findWinningCount(winningLottoNumbers);
 
         //then
-        assertThat(sameLottoNumberWinningCount).isEqualTo(1);
-        assertThat(notSameLottoNumberWinningCount).isEqualTo(0);
+        assertAll(
+            () -> assertThat(sameLottoNumberWinningCount).isEqualTo(1),
+            () -> assertThat(notSameLottoNumberWinningCount).isEqualTo(0)
+        );
     }
 }

@@ -12,7 +12,7 @@ public class LottoTicket {
     private final List<Lotto> lotteries = new ArrayList<>();
 
     public void publish(final Money money) {
-        final int publishCount = money.changeUnit();
+        final long publishCount = money.exchangeLottoPurchasableCount();
 
         for (int lottoCount = 0; lottoCount < publishCount; lottoCount++) {
             lotteries.add(new Lotto(LottoNumbers.shuffle()));
