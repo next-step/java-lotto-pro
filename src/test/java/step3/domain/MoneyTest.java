@@ -20,4 +20,18 @@ class MoneyTest {
         assertThat(money).isNotNull().isEqualTo(new Money(moneyOfThousand));
         assertThat(sellingCount).isEqualTo(moneyOfThousand / Money.THOUSAND_ONE);
     }
+
+    @ParameterizedTest(name = DISPLAY_NAME)
+    @ValueSource(ints = {1000, 2000, 3000, 4000, 5000})
+    void 추가로돈이생기게되면_소지하고있는_돈은_늘어난다(final int additionalMoney) {
+        //given
+        final Money money = new Money(1000);
+
+        //when
+        money.earn(new Money(additionalMoney));
+
+        //then
+        assertThat(money).isNotNull();
+        assertThat(money.get()).isEqualTo(1000 + additionalMoney);
+    }
 }
