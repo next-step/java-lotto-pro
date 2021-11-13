@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.Arrays;
 
-public enum Winning {
+public enum Rank {
     FIRST_PRIZE(6, new Money(2_000_000_000), false),
     SECOND_PRIZE(5, new Money(3_000_000), true),
     THIRD_PRIZE(5, new Money(1_500_000), false),
@@ -15,14 +15,14 @@ public enum Winning {
     private final Money reward;
     private final boolean bonus;
 
-    Winning(int matchCount, Money reward, boolean bonus) {
+    Rank(int matchCount, Money reward, boolean bonus) {
         this.matchCount = matchCount;
         this.reward = reward;
         this.bonus = bonus;
     }
 
-    public static Winning of(int count, boolean bonus) {
-        return Arrays.stream(Winning.values())
+    public static Rank of(int count, boolean bonus) {
+        return Arrays.stream(Rank.values())
                 .filter(winning -> winning.match(count, bonus))
                 .findFirst()
                 .orElse(NONE);

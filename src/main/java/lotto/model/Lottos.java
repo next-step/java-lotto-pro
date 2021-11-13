@@ -36,14 +36,14 @@ public class Lottos {
     }
 
     public LottoResult calculateWinning(WinTicket winTicket) {
-        final List<Winning> winnings = new ArrayList<>();
+        final List<Rank> ranks = new ArrayList<>();
         for (LottoTicket lotto : lottos) {
-            winnings.add(lotto.calculateWinning(winTicket));
+            ranks.add(lotto.calculateWinning(winTicket));
         }
-        return new LottoResult(winnings);
+        return new LottoResult(ranks);
     }
 
-    public Money getSellingPrice() {
+    public Money calculateTotalSellingPrice() {
         return LottoTicket.SELLING_PRICE.multiplyBy(lottos.size());
     }
 

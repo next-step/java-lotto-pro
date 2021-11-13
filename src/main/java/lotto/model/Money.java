@@ -6,6 +6,9 @@ public class Money {
     private final int money;
 
     public Money(int money) {
+        if (money < 0) {
+            throw new IllegalArgumentException();
+        }
         this.money = money;
     }
 

@@ -23,7 +23,7 @@ public class LottoGame {
         final WinTicket winTicket = inputView.getWinLottoTicket();
 
         final LottoResult result = lottos.calculateWinning(winTicket);
-        final double roi = result.getReturnOnInvestment(lottos.getSellingPrice());
+        final double roi = result.getReturnOnInvestment(lottos.calculateTotalSellingPrice());
         resultView.printResult(result, roi);
     }
 }

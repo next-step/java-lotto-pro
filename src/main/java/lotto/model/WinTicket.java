@@ -8,7 +8,7 @@ public class WinTicket {
 
     private final LottoNumber bonusNumber;
 
-    public WinTicket(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+    private WinTicket(LottoTicket lottoTicket, LottoNumber bonusNumber) {
         this.lottoTicket = lottoTicket;
         this.bonusNumber = bonusNumber;
     }

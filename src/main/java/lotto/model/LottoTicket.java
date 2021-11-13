@@ -8,7 +8,7 @@ public class LottoTicket {
     public static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> numbers;
 
-    protected LottoTicket(List<LottoNumber> numbers) {
+    private LottoTicket(List<LottoNumber> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
@@ -34,10 +34,10 @@ public class LottoTicket {
         return (int) money.divideBy(SELLING_PRICE);
     }
 
-    public Winning calculateWinning(WinTicket winTicket) {
+    public Rank calculateWinning(WinTicket winTicket) {
         final int count = winTicket.calculateNumberOfMatch(this);
         final boolean bonus = winTicket.matchBonusNumber(numbers);
-        return Winning.of(count, bonus);
+        return Rank.of(count, bonus);
     }
 
     public int calculateNumberOfMatch(LottoTicket ticket) {

@@ -30,7 +30,7 @@ public class LottosTest {
     @Test
     void getSellingPrice() {
         final Lottos lottos = Lottos.generateAuto(5);
-        final Money price = lottos.getSellingPrice();
+        final Money price = lottos.calculateTotalSellingPrice();
         assertThat(price).isEqualTo(new Money(5 * 1000));
     }
 }
