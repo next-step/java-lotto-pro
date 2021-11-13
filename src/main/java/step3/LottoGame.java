@@ -1,7 +1,7 @@
 package step3;
 
 import step3.component.GameStatusChangeable;
-import step3.component.LottoResult;
+import step3.view.LottoResult;
 import step3.domain.Lotto;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
@@ -13,15 +13,12 @@ public class LottoGame {
     private final GameStatusChangeable gameStatusManager;
     private final ConsoleInputView consoleInputView;
     private final ConsoleOutputView consoleOutputView;
-    private final LottoResult lottoResult;
 
     public LottoGame(final GameStatusChangeable gameStatusManager, final ConsoleInputView consoleInputView,
-        final ConsoleOutputView consoleOutputView,
-        final LottoResult lottoResult) {
+        final ConsoleOutputView consoleOutputView) {
         this.gameStatusManager = gameStatusManager;
         this.consoleInputView = consoleInputView;
         this.consoleOutputView = consoleOutputView;
-        this.lottoResult = lottoResult;
 
         this.gameStatusManager.start();
     }
@@ -40,7 +37,7 @@ public class LottoGame {
             final Lotto winningLotto = prepareWinningLotto();
             consoleOutputView.lineSeparator();
 
-            final String result = lottoResult.checkout(winningLotto, lottoTicket, money);
+            final String result = LottoResult.checkout(winningLotto, lottoTicket, money);
             consoleOutputView.print(result);
 
             gameStatusManager.end();

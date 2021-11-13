@@ -1,4 +1,4 @@
-package step3.component;
+package step3.view;
 
 import java.util.StringJoiner;
 import step3.domain.Lotto;
@@ -6,9 +6,12 @@ import step3.domain.LottoTicket;
 import step3.domain.Money;
 import step3.enums.Prizes;
 
-public class LottoResult {
+public final class LottoResult {
 
-    public String checkout(final Lotto winningLotto, final LottoTicket lottoTicket, final Money money) {
+    private LottoResult() {
+    }
+
+    public static String checkout(final Lotto winningLotto, final LottoTicket lottoTicket, final Money money) {
         final StringJoiner result = new StringJoiner(System.lineSeparator());
 
         result.add("당첨 통계");
