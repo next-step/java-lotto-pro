@@ -10,10 +10,10 @@ import java.util.StringJoiner;
 import lotto.model.enums.Rank;
 
 public class MatchResult {
-    private static final String RESULT_HEADER = "당첨 통계" + System.lineSeparator() + "---------";
+    static final String RESULT_HEADER = "당첨 통계" + System.lineSeparator() + "---------";
+    static final String SUCCESS_STATEMENT = "(기준이 1이기 때문에 결과적으로 손해는 아니라는 의미임)";
+    static final String FAILURE_STATEMENT = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String RATE_OF_RETURN_STATEMENT_FORMAT = "총 수익률은 %s입니다.";
-    private static final String SUCCESS_STATEMENT = "(기준이 1이기 때문에 결과적으로 손해는 아니라는 의미임)";
-    private static final String FAILURE_STATEMENT = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private final Map<Rank, Integer> rankToCount;
     private final RateOfReturn rateOfReturn;

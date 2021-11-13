@@ -3,6 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -14,5 +15,21 @@ public class LottoCountTest {
         assertThatIllegalArgumentException().isThrownBy(() ->
             new LottoCount(manualCount, totalCount)
         );
+    }
+
+    @Test
+    @DisplayName("computeNumberOfLottoStatement 메서드 정상 작동 여부 테스트")
+    void computeNumberOfLottoStatement() {
+        LottoCount lottoCount = new LottoCount(2, 5);
+        String numberOfLottoStatement = lottoCount.computeNumberOfLottoStatement();
+        assertThat(numberOfLottoStatement).contains("2", "3");
+    }
+
+    @Test
+    @DisplayName("동등성 검사")
+    void equals() {
+        LottoCount actual = new LottoCount(1, 5);
+        LottoCount expected = new LottoCount(1, 5);
+        assertThat(actual).isEqualTo(expected);
     }
 }

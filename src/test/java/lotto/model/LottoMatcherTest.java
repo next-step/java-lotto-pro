@@ -32,28 +32,37 @@ public class LottoMatcherTest {
     }
 
     @Test
-    @DisplayName("구입한 로또번호들과 보너스번호, 당첨번호가 주어질 때 적절한 결과값이 반환되는지 테스트")
-    void match() {
-        List<Lotto> lottos = Arrays.asList(
-            new Lotto(1, 2, 3, 7, 8, 9),
-            new Lotto(1, 2, 3, 4, 5, 11),
-            new Lotto(1, 2, 3, 4, 5, 6),
-            new Lotto(1, 2, 3, 4, 5, 7),
-            new Lotto(1, 2, 9, 10, 11, 12)
-        );
+    @DisplayName("match() 메서드의 매개변수로 null이 전달될 때 예외를 발생시킨다")
+    void matchByNull() {
+        Lottos lottos = provideDefaultLottos();
         Number bonusNumber = Number.of(7);
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        MatchResult matchResult =
-            new LottoMatcher(bonusNumber, winningLotto).match(new Payment(14000), new Lottos(lottos));
+        assertThatNullPointerException().isThrownBy(() ->
+            new LottoMatcher(bonusNumber, winningLotto)
+                .match(null, lottos)
+        );
+        assertThatNullPointerException().isThrownBy(() ->
+            new LottoMatcher(bonusNumber, winningLotto)
+                .match(new Payment(14000), null)
+        );
+    }
+
+    @Test
+    @DisplayName("구입한 로또번호들과 보너스번호, 당첨번호가 주어질 때 적절한 결과값이 반환되는지 테스트")
+    void match() {
+        Lottos lottos = provideDefaultLottos();
+        Number bonusNumber = Number.of(7);
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+
+        MatchResult matchResult = new LottoMatcher(bonusNumber, winningLotto)
+            .match(new Payment(14000), lottos);
 
         assertThat(matchResult).isEqualTo(
             new MatchResult(new Payment(14000), Rank.FIFTH, Rank.THIRD, Rank.FIRST, Rank.SECOND, Rank.MISS));
     }
 
-    @Test
-    @DisplayName("match() 메서드의 매개변수로 null이 전달될 때 예외를 발생시킨다")
-    void matchByNull() {
+    private Lottos provideDefaultLottos() {
         List<Lotto> lottos = Arrays.asList(
             new Lotto(1, 2, 3, 7, 8, 9),
             new Lotto(1, 2, 3, 4, 5, 11),
@@ -61,14 +70,6 @@ public class LottoMatcherTest {
             new Lotto(1, 2, 3, 4, 5, 7),
             new Lotto(1, 2, 9, 10, 11, 12)
         );
-        Number bonusNumber = Number.of(7);
-        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-
-        assertThatNullPointerException().isThrownBy(() ->
-            new LottoMatcher(bonusNumber, winningLotto).match(null, new Lottos(lottos))
-        );
-        assertThatNullPointerException().isThrownBy(() ->
-            new LottoMatcher(bonusNumber, winningLotto).match(new Payment(14000), null)
-        );
+        return new Lottos(lottos);
     }
 }

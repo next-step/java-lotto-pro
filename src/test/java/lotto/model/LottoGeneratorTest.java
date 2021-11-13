@@ -12,4 +12,11 @@ public class LottoGeneratorTest {
         Lottos lottos = LottoGenerator.generate(3);
         assertThat(lottos.size()).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("추출할 로또의 갯수를 음수로 전달할 때 예외 발생")
+    void generateByNegativeAutoCount() {
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> LottoGenerator.generate(-1));
+    }
 }

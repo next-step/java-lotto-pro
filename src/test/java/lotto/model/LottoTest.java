@@ -3,6 +3,7 @@ package lotto.model;
 import static lotto.model.Lotto.*;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -35,7 +36,7 @@ public class LottoTest {
     @DisplayName("생성자의 매개변수로 null이 전달될 때 예외를 발생시킨다")
     void createByNull() {
         assertThatNullPointerException().isThrownBy(() ->
-            new Lotto((Set<Number>)null)
+            new Lotto((Collection<Number>)null)
         );
     }
 

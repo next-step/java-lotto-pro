@@ -2,22 +2,16 @@ package lotto.model;
 
 import java.util.Objects;
 
+import lotto.util.Validator;
+
 public class RateOfReturn {
-    static final String NEGATIVE_VALUE_ERR_MSG = "수익률은 0보다 작은 값일 수 없습니다.";
-    private static final int MIN = 0;
     private static final int BREAK_EVEN_RATE = 1;
 
     private final double rateOfReturn;
 
     public RateOfReturn(double rateOfReturn) {
         this.rateOfReturn = rateOfReturn;
-        validate();
-    }
-
-    private void validate() {
-        if (rateOfReturn < MIN) {
-            throw new IllegalArgumentException(NEGATIVE_VALUE_ERR_MSG);
-        }
+        Validator.validateNonNegative(this.rateOfReturn);
     }
 
     public boolean isLosingMoney() {

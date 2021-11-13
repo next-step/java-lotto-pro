@@ -13,7 +13,7 @@ import java.util.TreeSet;
 import lotto.model.enums.Rank;
 
 public class Lotto {
-    static final int NUMBER_SIZE = 6;
+    public static final int NUMBER_SIZE = 6;
     static final String NUMBER_SIZE_ERR_MSG = "로또 숫자는 서로 다른 " + NUMBER_SIZE + "개로 구성되어야 합니다.";
 
     private final SortedSet<Number> numbers;
