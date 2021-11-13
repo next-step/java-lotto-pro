@@ -7,12 +7,12 @@ public class Checker {
 
     private LinkedHashMap<Rank, Integer> results;
 
-    public Checker(Games games, WinningNumbers winningNumbers, WinningNumber bonusNumber) {
+    public Checker(Games games, WinnerNumbers winningNumbers) {
         init();
 
         for (Game game : games.getList()) {
-            int matchedCount = matchCount(game, winningNumbers);
-            boolean matchBonus = isMatchedBonusNumber(game, bonusNumber);
+            int matchedCount = matchCount(game, winningNumbers.getFirstPrizeNumbers());
+            boolean matchBonus = isMatchedBonusNumber(game, winningNumbers.getBonusNumber());
             Rank rank = Rank.valueOf(matchedCount, matchBonus);
             results.put(rank, results.get(rank) + 1);
         }
@@ -25,19 +25,18 @@ public class Checker {
         }
     }
 
-    private int matchCount(Game game, WinningNumbers winningNumbers) {
+    private int matchCount(Game game, LottoNumbers winningNumbers) {
         return (int) game.getNumbers().stream()
                 .filter(number -> winningNumbers.getValues()
                         .stream()
-                        .map(winningNumber -> winningNumber.getValue())
                         .anyMatch(Predicate.isEqual(number)))
                 .count();
     }
 
-    private boolean isMatchedBonusNumber(Game game, WinningNumber bonusNumber) {
+    private boolean isMatchedBonusNumber(Game game, LottoNumber bonusNumber) {
         return game.getNumbers()
                 .stream()
-                .anyMatch(number -> number == bonusNumber.getValue());
+                .anyMatch(bonusNumber::equals);
     }
 
     public LinkedHashMap<Rank, Integer> getResults() {

@@ -13,11 +13,14 @@ public class Game {
             .boxed()
             .collect(Collectors.toList());
 
-    private List<Integer> numbers;
+    private List<LottoNumber> numbers;
 
     public Game() {
         this.numbers = generateNumbers();
-        System.out.println(this.numbers);
+    }
+
+    public Game(LottoNumbers lottoNumbers) {
+        this.numbers = lottoNumbers.getValues();
     }
 
     /**
@@ -25,15 +28,16 @@ public class Game {
      *
      * @return GET_NUMBER_COUNT 길이의 배열을 반환
      */
-    private List<Integer> generateNumbers() {
+    private List<LottoNumber> generateNumbers() {
         Collections.shuffle(randomNumbers);
         return randomNumbers.subList(0, GET_NUMBER_COUNT)
                 .stream()
                 .sorted()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 

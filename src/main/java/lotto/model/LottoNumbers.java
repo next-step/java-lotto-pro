@@ -9,19 +9,20 @@ import java.util.stream.Collectors;
 
 import static lotto.common.Constants.GET_NUMBER_COUNT;
 
-public class WinningNumbers {
+public class LottoNumbers {
 
     private static final String LIST_SEPARATOR = ",";
-    private static final String INVALID_NUMBER_COUNT_MESSAGE= "당첨번호 %s개를 입력해야 합니다.";
-    private static final String INVALID_DUPLICATE_MESSAGE= "당첨번호를 중복입력을 할 수 없습니다.";
+    private static final String INVALID_NUMBER_COUNT_MESSAGE = "%s개의 번호를 입력해야 합니다.";
+    private static final String INVALID_DUPLICATE_MESSAGE = "중복된 번호를 입력할 수 없습니다.";
 
-    private List<WinningNumber> values;
+    private List<LottoNumber> values;
 
-    public WinningNumbers(String inputRawValues) {
+    public LottoNumbers(final String inputRawValues) {
         String[] inputValues = inputRawValues.replace(" ", "").split(LIST_SEPARATOR);
         validateSize(inputValues);
         this.values = Arrays.stream(inputValues)
-                .map(WinningNumber::new)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
         validateDuplicated();
     }
@@ -52,7 +53,7 @@ public class WinningNumbers {
         }
     }
 
-    public List<WinningNumber> getValues() {
+    public List<LottoNumber> getValues() {
         return values;
     }
 
