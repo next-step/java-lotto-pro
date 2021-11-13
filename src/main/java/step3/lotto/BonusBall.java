@@ -17,7 +17,7 @@ public class BonusBall {
 	@Deprecated
 	public static BonusBall of(int no, LottoNumbers winningLottoNumbers) {
 		BonusBall bonusBall = new BonusBall(no);
-		if (winningLottoNumbers.hasBonusBall(bonusBall)) {
+		if (winningLottoNumbers.matchBonusBall(bonusBall)) {
 			throw new IllegalArgumentException("보너스 번호가 당첨 번호와 동일할 수 없습니다");
 		}
 		return new BonusBall(no);
