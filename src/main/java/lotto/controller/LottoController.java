@@ -11,17 +11,25 @@ import lotto.utils.Console;
 import lotto.utils.StringUtils;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class LottoController {
 
     public static final String NUMBER_DELIMITER = ",";
-    private static final String WINNING_LOTTO_ERROR = String.format("당첨 번호는 %d개여야 합니다.", Lotto.LOTTO_NUMBER_COUNT);
+
+    private final List<Lotto> lottoList = new ArrayList<>();
 
     public void run(LottoMachine lottoMachine) {
+        lottoList.clear();
+
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        List<Lotto> lottoList = lottoMachine.sell(purchaseAmount);
+        int manualLottoCount = getManualLottoCount(purchaseAmount);
+        int autoLottoCount = purchaseAmount.getPurchasableLottoCount() - manualLottoCount;
+
+        lottoList.addAll(lottoMachine.sell(manualLottoCount));
+        lottoList.addAll(lottoMachine.sell(autoLottoCount));
         printLottoList(lottoList);
 
         WinningLotto winningLotto = initWeekWinningLotto();
@@ -30,8 +38,21 @@ public class LottoController {
 
     private PurchaseAmount getPurchaseAmount() {
         System.out.println(Messages.PURCHASE_AMOUNT_INPUT);
+
         int amount = Integer.parseInt(Console.readLine());
+
+        System.out.print(System.lineSeparator());
         return new PurchaseAmount(amount);
+    }
+
+    private int getManualLottoCount(PurchaseAmount purchaseAmount) {
+        System.out.println(Messages.MANUAL_LOTTO_COUNT_INPUT);
+
+        int count = Integer.parseInt(Console.readLine());
+        purchaseAmount.validatePurchasableLottoCount(count);
+
+        System.out.print(System.lineSeparator());
+        return count;
     }
 
     private void printLottoList(List<Lotto> lottoList) {
@@ -53,7 +74,7 @@ public class LottoController {
         String[] stringNumbers = Console.readLine().split(NUMBER_DELIMITER);
 
         if (stringNumbers.length != Lotto.LOTTO_NUMBER_COUNT) {
-            throw new LottoException(WINNING_LOTTO_ERROR);
+            throw new LottoException(WinningLotto.WINNING_LOTTO_ERROR);
         }
         return Arrays.stream(stringNumbers)
                 .mapToInt(stringNumber -> Integer.parseInt(stringNumber.trim()))
