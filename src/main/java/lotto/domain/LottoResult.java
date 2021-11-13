@@ -8,11 +8,10 @@ import static java.util.Arrays.stream;
 
 public class LottoResult {
 
-    private static final int STANDARD_RATE_OF_RETURN = 1;
     private final Map<LottoRank, Integer> lottoTicketRankMap;
-    private final double rateOfReturn;
+    private final RateOfReturn rateOfReturn;
 
-    private LottoResult(Map<LottoRank, Integer> lottoTicketRankMap, double rateOfReturn) {
+    private LottoResult(Map<LottoRank, Integer> lottoTicketRankMap, RateOfReturn rateOfReturn) {
         this.lottoTicketRankMap = lottoTicketRankMap;
         this.rateOfReturn = rateOfReturn;
     }
@@ -22,7 +21,7 @@ public class LottoResult {
         stream(LottoRank.values())
                 .forEach(lottoRank -> lottoTicketRankMap.put(lottoRank, lottoTicket.countLottoRank(lottoRank, lottoWinningNumbers)));
 
-        double rateOfReturn = calculateRateOfReturn(lottoPurchase, lottoTicketRankMap);
+        RateOfReturn rateOfReturn = RateOfReturn.from(calculateRateOfReturn(lottoPurchase, lottoTicketRankMap));
         return new LottoResult(lottoTicketRankMap, rateOfReturn);
     }
 
@@ -38,12 +37,8 @@ public class LottoResult {
         return Collections.unmodifiableMap(new TreeMap<>(lottoTicketRankMap));
     }
 
-    public double getRateOfReturn() {
+    public RateOfReturn getRateOfReturn() {
         return rateOfReturn;
-    }
-
-    public boolean isRateOfReturnLessThenStandard() {
-        return rateOfReturn < STANDARD_RATE_OF_RETURN;
     }
 
 }

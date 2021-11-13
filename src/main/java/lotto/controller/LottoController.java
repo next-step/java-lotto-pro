@@ -23,6 +23,7 @@ import static lotto.view.OutputView.printLottoNumber;
 import static lotto.view.OutputView.printManualPurchaseQuantity;
 import static lotto.view.OutputView.printPurchaseAmount;
 import static lotto.view.OutputView.printPurchaseQuantity;
+import static lotto.view.OutputView.printRateOfReturn;
 import static lotto.view.OutputView.printWinningStatistics;
 
 public class LottoController {
@@ -43,6 +44,7 @@ public class LottoController {
     private void play(LottoPurchase lottoPurchase, LottoTicket lottoTicket, LottoWinningNumbers lottoWinningNumbers) {
         LottoResult lottoResult = LottoResult.of(lottoPurchase, lottoTicket, lottoWinningNumbers);
         printWinningStatistics(lottoResult);
+        printRateOfReturn(lottoResult.getRateOfReturn());
     }
 
     private Map<Integer, List<Integer>> inputManualLottoNumbers(LottoPurchase lottoPurchase) {
