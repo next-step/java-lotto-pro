@@ -84,7 +84,7 @@ class LottoTest {
 		Lotto lotto = new Lotto(inputData);
 		Lotto otherLotto = new Lotto(1, 13, 26, 38, 41, 8);
 		//when
-		long count = lotto.matchCount(otherLotto);
+		int count = lotto.matchCount(otherLotto);
 		//then
 		assertThat(count).isEqualTo(expectedValue);
 	}

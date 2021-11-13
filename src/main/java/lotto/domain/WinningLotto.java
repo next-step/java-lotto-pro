@@ -10,7 +10,7 @@ public class WinningLotto {
 	}
 
 	public Rank getRank(Lotto lotto) {
-		long countOfMatch = winningNumbers.matchCount(lotto);
+		int countOfMatch = winningNumbers.matchCount(lotto);
 		boolean bonusNumberMatch = lotto.isMatch(bonusBallNumber);
 		return Rank.checkRank(countOfMatch, bonusNumberMatch);
 	}

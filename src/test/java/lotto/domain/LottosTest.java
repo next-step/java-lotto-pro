@@ -2,6 +2,8 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,12 +14,13 @@ public class LottosTest {
 	@DisplayName("로또 결과 생성 여부 테스트")
 	public void LottosRuesltTest() {
 		//given
-		Lottos lottos = LottoShop.sell(new Money(5000));
-		WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 9);
+		Lottos lottos = IntStream.range(1, 6).mapToObj(value -> new Lotto(11, 12, 13, 14, 15, value))
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+		WinningLotto winningLotto = new WinningLotto("11, 12, 13, 14, 15, 16", 9);
 		//when
-		int count = lottos.createLottoResult(winningLotto).countLotto();
+		int WinnerCount = lottos.createLottoResult(winningLotto).countWinner(Rank.THIRD);
 		//then
-		assertThat(count).isEqualTo(5);
+		assertThat(WinnerCount).isEqualTo(5);
 	}
 
 	@Test
@@ -25,8 +28,10 @@ public class LottosTest {
 	public void addAllTest() {
 		//given
 		//when
-		Lottos lottos = LottoShop.sell(new Money(5000));
-		Lottos otherLottos = LottoShop.sell(new Money(3000));
+		Lottos lottos = IntStream.range(1, 6).mapToObj(value -> new Lotto(11, 12, 13, 14, 15, value))
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+		Lottos otherLottos = IntStream.range(1, 4).mapToObj(value -> new Lotto(11, 12, 13, 14, 15, value))
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
 		//then
 		assertThat(lottos.addAll(otherLottos).size()).isEqualTo(8);
 	}

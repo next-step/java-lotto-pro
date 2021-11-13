@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class WinningLottoTest {
 
 	@Test
-	@DisplayName("")
+	@DisplayName("로또 당첨등수 구하기 테스트")
 	public void WinningLottoTest() {
 		//given
 		WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 9);
