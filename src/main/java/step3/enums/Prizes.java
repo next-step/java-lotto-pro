@@ -8,7 +8,7 @@ import java.util.StringJoiner;
 import step3.domain.Money;
 
 public class Prizes {
-    private static int totalReward;
+    private static long totalReward;
 
     private final List<Prize> prizes = new ArrayList<>();
 
