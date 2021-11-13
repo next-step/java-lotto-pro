@@ -19,7 +19,7 @@ public class LottoGenerator {
         }
     }
 
-    public LottoTickets createLottoTickets(PurchaseCount purchaseCount) {
+    public LottoTickets createAutoLottoTickets(PurchaseCount purchaseCount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         while (purchaseCount.isGreaterThanZero()) {
             Collections.shuffle(numbers);
@@ -27,6 +27,15 @@ public class LottoGenerator {
             Collections.sort(selectedNumbers);
             lottoTickets.add(new LottoTicket(selectedNumbers));
             purchaseCount = purchaseCount.minus(MINUS_PURCHASE_COUNT);
+        }
+        return new LottoTickets(lottoTickets);
+    }
+
+    public LottoTickets createManualLottoTickets(List<List<Integer>> manualNumbers) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (List<Integer> numbers : manualNumbers) {
+            Collections.sort(numbers);
+            lottoTickets.add(LottoTicket.of(numbers));
         }
         return new LottoTickets(lottoTickets);
     }

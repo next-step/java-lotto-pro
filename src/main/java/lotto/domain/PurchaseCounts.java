@@ -12,6 +12,14 @@ public class PurchaseCounts {
         this.manualPurchaseCount = manualPurchaseCount;
     }
 
+    public PurchaseCount getAutoPurchaseCount() {
+        return autoPurchaseCount;
+    }
+
+    public PurchaseCount getManualPurchaseCount() {
+        return manualPurchaseCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

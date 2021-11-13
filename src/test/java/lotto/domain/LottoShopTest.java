@@ -59,7 +59,7 @@ class LottoShopTest {
         PurchaseCount purchaseCount = new PurchaseCount(count);
 
         // when
-        LottoTickets lottoTickets = lottoShop.createLottoTickets(purchaseCount);
+        LottoTickets lottoTickets = lottoShop.createAutoLottoTickets(purchaseCount);
 
         // then
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(count);

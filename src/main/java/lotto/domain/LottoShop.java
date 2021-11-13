@@ -1,15 +1,12 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class LottoShop {
 
     public static final int LOTTO_TICKET_PER_PRICE = 1000;
 
     private final LottoGenerator lottoGenerator = new LottoGenerator();
-
-    public int countPurchasableLotto(Money purchaseMoney) {
-        validatePurchaseAmount(purchaseMoney);
-        return purchaseMoney.divide(LOTTO_TICKET_PER_PRICE);
-    }
 
     public PurchaseCounts countPurchasableLotto(Money purchaseMoney, PurchaseCount manualPurchaseCount) {
         validatePurchaseAmount(purchaseMoney);
@@ -18,8 +15,12 @@ public class LottoShop {
         return new PurchaseCounts(new PurchaseCount(manualPurchaseCount.gap(purchasableCount)), manualPurchaseCount);
     }
 
-    public LottoTickets createLottoTickets(PurchaseCount purchaseCount) {
-        return lottoGenerator.createLottoTickets(purchaseCount);
+    public LottoTickets createAutoLottoTickets(PurchaseCount purchaseCount) {
+        return lottoGenerator.createAutoLottoTickets(purchaseCount);
+    }
+
+    public LottoTickets createManualLottoTickets(List<List<Integer>> manualNumbers) {
+        return lottoGenerator.createManualLottoTickets(manualNumbers);
     }
 
     private void validateManualPurchaseCount(PurchaseCount manualPurchaseCount, int purchasableCount) {

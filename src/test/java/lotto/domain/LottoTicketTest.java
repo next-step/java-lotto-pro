@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,6 +32,15 @@ class LottoTicketTest {
 
         // then
         assertThat(lottoTicket).isNotNull();
+    }
+
+    @Test
+    void 로또_티켓_생성_정적_팩터리_메서드() {
+        // when
+        LottoTicket result = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        // then
+        assertThat(result).isEqualTo(lottoTicket);
     }
 
     @Test
