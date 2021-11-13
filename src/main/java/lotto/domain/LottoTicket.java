@@ -19,16 +19,16 @@ public class LottoTicket {
         return new LottoTicket(numbers);
     }
 
+    public boolean isContainNumber(Number number) {
+        return numbers.contains(number);
+    }
+
     private static List<Number> convertIntegerToNumber(List<Integer> inputNumbers) {
         List<Number> numbers = new ArrayList<>();
         for (int number : inputNumbers) {
             numbers.add(new Number(number));
         }
         return numbers;
-    }
-
-    public boolean isContainNumber(Number number) {
-        return numbers.contains(number);
     }
 
     private void validateDuplicatedNumber(List<Number> numbers) {
