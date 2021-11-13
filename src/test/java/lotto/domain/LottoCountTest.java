@@ -20,7 +20,7 @@ public class LottoCountTest {
         assertThat(lottoCount).isEqualTo(new LottoCount(count));
     }
 
-    @DisplayName("로또 개수 생성")
+    @DisplayName("음수로 로또 개수 생성 시 에러")
     @Test
     void throwsError_whenNegativeLottoCount() {
         assertThatExceptionOfType(LottoException.class)

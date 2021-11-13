@@ -14,6 +14,10 @@ public class EarningRate {
         this.rate = rate.setScale(DECIMAL_SCALE, RoundingMode.HALF_UP);
     }
 
+    public BigDecimal getRate() {
+        return rate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -29,9 +33,5 @@ public class EarningRate {
     @Override
     public int hashCode() {
         return Objects.hash(rate);
-    }
-
-    public BigDecimal getRate() {
-        return rate;
     }
 }

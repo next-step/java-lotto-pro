@@ -14,7 +14,6 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
 public class LottoTicketFactory {
-
     public static LottoTickets createRandomLottoTickets(LottoCount lottoCount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; lottoCount.isBiggerThan(i); i++) {
