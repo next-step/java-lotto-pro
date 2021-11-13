@@ -28,16 +28,13 @@ public enum Rank {
 	}
 
 	public static Rank checkRank(long countOfMatch, boolean bonusNumberMatch) {
-		if (countOfMatch < Rank.FIFTH.getCountOfMatch()) {
-			return Rank.MISS;
-		}
 		if (countOfMatch == Rank.SECOND.getCountOfMatch()) {
 			return secondOrThirdRank(bonusNumberMatch);
 		}
 		return Arrays.stream(Rank.values())
 			.filter(rank -> rank.getCountOfMatch() == countOfMatch)
 			.findFirst()
-			.get();
+			.orElse(MISS);
 	}
 
 	private static Rank secondOrThirdRank(boolean bonusBallMatch) {

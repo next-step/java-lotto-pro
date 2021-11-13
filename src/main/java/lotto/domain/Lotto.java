@@ -5,10 +5,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
 	private static final String ERROR_DUPLICATE_LOTTO_NUMBER = "[ERROR] 로또 번호는 중복 될 수 없습니다.";
@@ -59,11 +57,9 @@ public class Lotto {
 		}
 	}
 
-	public long matchCount(Lotto lotto) {
-		return lottoNumbers.stream()
-			.filter(lottoNumber -> lotto.lottoNumbers
-				.stream()
-				.anyMatch(targetLottoNumber -> lottoNumber.equals(targetLottoNumber)))
+	public int matchCount(Lotto lotto) {
+		return (int)lottoNumbers.stream()
+			.filter(lotto.lottoNumbers::contains)
 			.count();
 	}
 

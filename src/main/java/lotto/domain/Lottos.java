@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 	private final List<Lotto> lottos;
@@ -29,4 +31,10 @@ public class Lottos {
 		}
 		return new LottoResult(lottoResult);
 	}
+
+	public Lottos addAll(Lottos autoLottos) {
+		return Stream.concat(lottos.stream(), autoLottos.lottos.stream())
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+	}
+	
 }

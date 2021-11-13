@@ -84,8 +84,28 @@ class LottoTest {
 		Lotto lotto = new Lotto(inputData);
 		Lotto otherLotto = new Lotto(1, 13, 26, 38, 41, 8);
 		//when
-		long count = lotto.matchCount(otherLotto);
+		int count = lotto.matchCount(otherLotto);
 		//then
 		assertThat(count).isEqualTo(expectedValue);
+	}
+
+	@Test
+	@DisplayName("번호 1개 일치 성공 확인")
+	public void LottoNumberMatchSuccessTest() {
+		//given
+		//when
+		Lotto lotto = new Lotto(1, 4, 5, 6, 8, 9);
+		//then
+		assertThat(lotto.isMatch(new LottoNumber(9))).isTrue();
+	}
+
+	@Test
+	@DisplayName("번호 1개 일치 실패 확인")
+	public void LottoNumberMatchFailTest() {
+		//given
+		//when
+		Lotto lotto = new Lotto(1, 4, 5, 6, 8, 9);
+		//then
+		assertThat(lotto.isMatch(new LottoNumber(2))).isFalse();
 	}
 }
