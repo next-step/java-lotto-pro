@@ -3,6 +3,6 @@ package lotto.service;
 import java.util.List;
 
 @FunctionalInterface
-public interface CreateLottoStrategy {
+public interface CreateLottoNumbersStrategy {
     List<String> createLottoNumberStrings();
 }
