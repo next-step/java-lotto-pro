@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,12 +19,16 @@ public class LottoResultsTest {
         assertThat(lottoResults).isEqualTo(new LottoResults(Arrays.asList(LottoResult.THREE, LottoResult.NONE)));
     }
 
-    @DisplayName("수익률 계산")
+    @DisplayName("통계 생성")
     @Test
-    void calculateEarningRate() {
+    void makeStatistics() {
         LottoResults lottoResults = new LottoResults(
             Arrays.asList(LottoResult.THREE, LottoResult.THREE, LottoResult.NONE, LottoResult.NONE));
-        assertThat(lottoResults.calculateEarningRate()).isEqualTo(new EarningRate(BigDecimal.valueOf(2.5)));
-    }
 
+        Map<LottoResult, Long> resultCounts = new HashMap<>();
+        resultCounts.put(LottoResult.THREE, 2L);
+        resultCounts.put(LottoResult.NONE, 2L);
+        assertThat(lottoResults.makeStatistics()).isEqualTo(
+            new LottoStatistics(resultCounts, new EarningRate(BigDecimal.valueOf(2.5))));
+    }
 }

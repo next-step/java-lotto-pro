@@ -27,7 +27,7 @@ public class LottoMachine {
 
         LottoTickets lottoTickets = LottoTicketFactory.createRandomLottoTickets(lottoCount);
         ResultView.printLottoTickets(lottoTickets);
-        ResultView.printWinningStatistics(lottoTickets.calculateResult(getWinnerTicket()));
+        ResultView.printWinningStatistics(lottoTickets.calculateResult(getWinnerTicket()).makeStatistics());
     }
 
     private LottoMoney getLottoMoney() {

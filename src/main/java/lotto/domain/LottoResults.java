@@ -3,7 +3,9 @@ package lotto.domain;
 import static java.util.stream.Collectors.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 
 public class LottoResults {
     private final List<LottoResult> results;
@@ -16,8 +18,14 @@ public class LottoResults {
         return results;
     }
 
-    public EarningRate calculateEarningRate() {
-        return LottoMoney.calculateEarningRate(results.stream().map(LottoResult::getLottoMoney).collect(toList()));
+    public LottoStatistics makeStatistics() {
+        Map<LottoResult, Long> resultCounts = results.stream()
+            .collect(groupingBy(Function.identity(), counting()));
+
+        EarningRate earningRate = LottoMoney.calculateEarningRate(
+            results.stream().map(LottoResult::getLottoMoney).collect(toList()));
+
+        return new LottoStatistics(resultCounts, earningRate);
     }
 
     @Override

@@ -1,14 +1,11 @@
 package view;
 
-import static java.util.stream.Collectors.*;
-
 import java.util.Arrays;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoResult;
-import lotto.domain.LottoResults;
+import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.exception.LottoException;
@@ -52,21 +49,18 @@ public class ResultView {
         System.out.println(OutputMessage.ASK_WINNER_TICKET.getMessage());
     }
 
-    public static void printWinningStatistics(LottoResults lottoResults) {
+    public static void printWinningStatistics(LottoStatistics lottoStatistics) {
         System.out.println();
         System.out.println(OutputMessage.PRINT_STATISTICS_INTRO.getMessage());
-        System.out.println(makeLottoResultsMessage(lottoResults));
-        System.out.println("총 수익률은 " + lottoResults.calculateEarningRate().getRate() + " 입니다.");
+        System.out.println(makeLottoResultsMessage(lottoStatistics.getResultCounts()));
+        System.out.println("총 수익률은 " + lottoStatistics.getEarningRate().getRate() + " 입니다.");
     }
 
-    private static String makeLottoResultsMessage(LottoResults lottoResults) {
-        Map<LottoResult, Long> resultCounts = lottoResults.getResults().stream()
-            .collect(groupingBy(Function.identity(), counting()));
-
+    private static String makeLottoResultsMessage(Map<LottoResult, Long> resultCounts) {
         return Arrays.stream(LottoResult.values())
             .filter(lottoResult -> lottoResult != LottoResult.NONE)
             .map(lottoResult -> makeLottoResultMessage(lottoResult) + "- " + resultCounts.getOrDefault(lottoResult,
-                ZERO_COUNT) + "")
+                ZERO_COUNT) + "개")
             .collect(Collectors.joining(NEW_LINE));
     }
 
