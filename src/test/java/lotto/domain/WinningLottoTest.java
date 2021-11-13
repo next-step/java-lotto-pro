@@ -39,7 +39,7 @@ class WinningLottoTest {
         // when & then
         assertThatExceptionOfType(LottoException.class)
                 .isThrownBy(() -> new WinningLotto(bonusNumber, numbers))
-                .withMessage(BonusLottoNumber.BONUS_NUMBER_ERROR);
+                .withMessage(WinningLotto.BONUS_NUMBER_ERROR);
     }
 
     @DisplayName("checkMatchBonus true 테스트")
