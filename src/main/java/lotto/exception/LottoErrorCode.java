@@ -12,7 +12,7 @@ public enum LottoErrorCode {
         this.message = message;
     }
 
-    public String makePrintableMessage() {
+    public String getMessage() {
         return message;
     }
 }
