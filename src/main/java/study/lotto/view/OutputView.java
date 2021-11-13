@@ -32,4 +32,8 @@ public class OutputView {
         System.out.println(statics.makeStaticPrintFormat());
         System.out.println(statics.makeProfitPrintFormat());
     }
+
+    public static void requestBonusBall() {
+        System.out.println(REQUEST_BONUS_BALL_INPUT_MSG);
+    }
 }

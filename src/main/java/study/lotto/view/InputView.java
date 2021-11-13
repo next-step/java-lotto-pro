@@ -5,7 +5,7 @@ import study.StringAddCalculator;
 import java.util.IllegalFormatException;
 import java.util.Scanner;
 
-import static study.lotto.view.MessageUtil.*;
+import static study.temp.lotto.auto.MessageUtil.NEGATIVE_NUMBER_ERR_MSG;
 
 public class InputView {
 
@@ -49,6 +49,22 @@ public class InputView {
     private static void validateDelimeter(final String line) {
         if(line.matches(".*\\d[^,]\\d.*")) {
             throw new IllegalArgumentException(StringAddCalculator.INVALID_CUSTOM_PATTERN_ERR_MSG);
+        }
+    }
+
+    public static int readBonusBallNumber() {
+        String line = sc.nextLine();
+        try {
+            validateInput(line);
+        } catch (RuntimeException e) {
+            line = readLastLottoNumbers();
+        }
+        return Integer.parseInt(line);
+    }
+
+    private static void validateInput(final String line) {
+        if(Integer.parseInt(line) < 0) {
+            throw new RuntimeException(NEGATIVE_NUMBER_ERR_MSG);
         }
     }
 }
