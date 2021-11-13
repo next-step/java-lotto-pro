@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
 
+import lotto.model.Payment;
 import lotto.util.Console;
 
 public class InputViewTest {
@@ -23,9 +24,9 @@ public class InputViewTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"a", "-1"})
-    void readManualLottoCountByInvalidInput(String manualLottoCount) {
+    void readLottoCountByInvalidInput(String manualLottoCount) {
         assertTestWithMockedInput(
-            () -> assertThatIllegalArgumentException().isThrownBy(InputView::readManualLottoCount),
+            () -> assertThatIllegalArgumentException().isThrownBy(() -> InputView.readLottoCount(new Payment(14000))),
             manualLottoCount
         );
     }

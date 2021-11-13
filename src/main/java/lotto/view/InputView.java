@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.model.Lotto;
+import lotto.model.LottoCount;
 import lotto.model.Lottos;
 import lotto.model.Number;
 import lotto.model.Payment;
@@ -26,10 +27,10 @@ public class InputView {
         return InputParser.toPayment(payment);
     }
 
-    public static int readManualLottoCount() {
+    public static LottoCount readLottoCount(Payment payment) {
         System.out.println(QUERY_FOR_MANUAL_LOTTO_COUNT);
-        String manualLottoCount = Console.readLine();
-        return InputParser.toInteger(manualLottoCount);
+        int manualLottoCount = InputParser.toInteger(Console.readLine());
+        return payment.computeLottoCount(manualLottoCount);
     }
 
     public static Lottos readManualLottos(int manualCount) {

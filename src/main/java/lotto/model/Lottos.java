@@ -26,8 +26,10 @@ public class Lottos {
         return new Lottos(new ArrayList<>());
     }
 
-    public void addAll(Lottos other) {
+    public Lottos combine(Lottos other) {
+        ArrayList<Lotto> lottos = new ArrayList<>(this.lottos);
         lottos.addAll(other.getLottos());
+        return new Lottos(lottos);
     }
 
     private Collection<Lotto> getLottos() {

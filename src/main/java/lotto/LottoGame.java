@@ -21,21 +21,22 @@ public class LottoGame {
 
     public static void start() {
         Payment payment = handleException(InputView::readPayment);
-        LottoCount lottoCount = handleException(() -> {
-            int manualCount = InputView.readManualLottoCount();
-            return payment.computeLottoCount(manualCount);
-        });
-        Lottos lottos = handleException(() -> InputView.readManualLottos(lottoCount.getManualCount()));
+        LottoCount lottoCount = handleException(() -> InputView.readLottoCount(payment));
+        Lottos manualLottos = handleException(() -> InputView.readManualLottos(lottoCount.getManualCount()));
         Lottos generatedLottos = LottoGenerator.generate(lottoCount.getAutoCount());
-        lottos.addAll(generatedLottos);
-        OutputView.printLottoPurchase(lottos, lottoCount);
+        Lottos totalLottos = manualLottos.combine(generatedLottos);
+        OutputView.printLottoPurchase(totalLottos, lottoCount);
         Lotto winningLotto = handleException(InputView::readWinningLotto);
-        LottoMatcher lottoMatcher = handleException(() -> {
+        LottoMatcher lottoMatcher = computeLottoMatcher(winningLotto);
+        MatchResult matchResult = lottoMatcher.match(payment, totalLottos);
+        OutputView.printLottoResult(matchResult);
+    }
+
+    private static LottoMatcher computeLottoMatcher(Lotto winningLotto) {
+        return handleException(() -> {
             Number bonusNumber = InputView.readBonusNumber();
             return new LottoMatcher(bonusNumber, winningLotto);
         });
-        MatchResult matchResult = lottoMatcher.match(payment, lottos);
-        OutputView.printLottoResult(matchResult);
     }
 
     private static <T> T handleException(final Supplier<T> supplier) {
