@@ -11,6 +11,9 @@ public enum Rank {
     NONE(0, new Money(0), false),
     ;
 
+    private static final int MIN_MATCH_COUNT = 0;
+    private static final int MAX_MATCH_COUNT = 6;
+
     private final int matchCount;
     private final Money reward;
     private final boolean bonus;
@@ -25,14 +28,21 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(winning -> winning.match(count, bonus))
                 .findFirst()
-                .orElse(NONE);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     private boolean match(int count, boolean bonus) {
         if (this.bonus) {
             return bonus && this.matchCount == count;
         }
-        return this.matchCount == count;
+        if (this.matchCount == count) {
+            return true;
+        }
+        return NONE.equals(this) && isValidMatchCount(count);
+    }
+
+    private boolean isValidMatchCount(int count) {
+        return count >= MIN_MATCH_COUNT && count <= MAX_MATCH_COUNT;
     }
 
     public Money getReward() {

@@ -26,10 +26,10 @@ public class LottoTicketTest {
     }
 
     @Test
-    void countPurchasable_3000원() {
-        final Money price = new Money(3_000);
+    void countPurchasable_1장() {
+        final Money price = new Money(1_000);
         final int count = LottoTicket.countPurchasable(price);
-        assertThat(count).isEqualTo(3);
+        assertThat(count).isEqualTo(1);
     }
 
     @Test
@@ -37,6 +37,13 @@ public class LottoTicketTest {
         final Money price = new Money(0);
         final int count = LottoTicket.countPurchasable(price);
         assertThat(count).isEqualTo(0);
+    }
+
+    @Test
+    void countPurchasable_딱떨어지지않음() {
+        final Money price = new Money(1_500);
+        final int count = LottoTicket.countPurchasable(price);
+        assertThat(count).isEqualTo(1);
     }
 
     @ParameterizedTest

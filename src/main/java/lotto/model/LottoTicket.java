@@ -34,6 +34,10 @@ public class LottoTicket {
         return (int) money.divideBy(SELLING_PRICE);
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
+    }
+
     public Rank calculateWinning(WinTicket winTicket) {
         final int count = winTicket.calculateNumberOfMatch(this);
         final boolean bonus = winTicket.matchBonusNumber(numbers);

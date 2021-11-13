@@ -3,10 +3,12 @@ package lotto.model;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class RankTest {
     @ParameterizedTest
@@ -30,5 +32,12 @@ public class RankTest {
                 Arguments.of(0, true, Rank.NONE),
                 Arguments.of(0, false, Rank.NONE)
         );
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 7, 45})
+    void of_invalid() {
+        assertThatThrownBy(() -> Rank.of(7, false))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -9,6 +9,9 @@ public class WinTicket {
     private final LottoNumber bonusNumber;
 
     private WinTicket(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        if (lottoTicket.contains(bonusNumber)) {
+            throw new IllegalArgumentException();
+        }
         this.lottoTicket = lottoTicket;
         this.bonusNumber = bonusNumber;
     }
