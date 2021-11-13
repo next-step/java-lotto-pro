@@ -14,10 +14,9 @@ public class ResultView {
     private static final String NEW_LINE = "\n";
     private static final String COMMA_SPACE = ", ";
     private static final long ZERO_COUNT = 0L;
-    private static final String WON = "원";
 
     public static void printNumberOfPurchasedLotto(long number) {
-        System.out.println(number + "개를 구매했습니다.");
+        System.out.println(String.format(OutputMessage.NUMBER_OF_PURCHASED_LOTTO_FORMAT.getMessage(), number));
     }
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
@@ -28,12 +27,10 @@ public class ResultView {
     }
 
     private static String makeLottoTicketMessage(LottoTicket lottoTicket) {
-        return "[" +
-            lottoTicket.getLottoNumbers()
-                .stream()
+        return String.format(OutputMessage.LOTTO_TICKET_FORMAT.getMessage(),
+            lottoTicket.getLottoNumbers().stream()
                 .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
-                .collect(Collectors.joining(COMMA_SPACE))
-            + "]";
+                .collect(Collectors.joining(COMMA_SPACE)));
     }
 
     public static void printAskPurchaseAmount() {
@@ -51,20 +48,22 @@ public class ResultView {
 
     public static void printWinningStatistics(LottoStatistics lottoStatistics) {
         System.out.println();
-        System.out.println(OutputMessage.PRINT_STATISTICS_INTRO.getMessage());
+        System.out.println(OutputMessage.STATISTICS_INTRO.getMessage());
         System.out.println(makeLottoResultsMessage(lottoStatistics.getResultCounts()));
-        System.out.println("총 수익률은 " + lottoStatistics.getEarningRate().getRate() + " 입니다.");
+        System.out.println(String.format(OutputMessage.TOTAL_EARNING_RATE_FORMAT.getMessage(),
+            lottoStatistics.getEarningRate().getRate()));
     }
 
     private static String makeLottoResultsMessage(Map<LottoResult, Long> resultCounts) {
         return Arrays.stream(LottoResult.values())
             .filter(lottoResult -> lottoResult != LottoResult.NONE)
-            .map(lottoResult -> makeLottoResultMessage(lottoResult) + "- " + resultCounts.getOrDefault(lottoResult,
-                ZERO_COUNT) + "개")
+            .map(lottoResult -> String.format(OutputMessage.LOTTO_RESULTS_FORMAT.getMessage(),
+                makeLottoResultMessage(lottoResult), resultCounts.getOrDefault(lottoResult, ZERO_COUNT)))
             .collect(Collectors.joining(NEW_LINE));
     }
 
     private static String makeLottoResultMessage(LottoResult lottoResult) {
-        return lottoResult.getCorrectCount() + "개 일치 (" + lottoResult.getLottoMoney().getMoney() + WON + ")";
+        return String.format(OutputMessage.LOTTO_RESULT_FORMAT.getMessage(),
+            lottoResult.getCorrectCount(), lottoResult.getLottoMoney().getMoney());
     }
 }
