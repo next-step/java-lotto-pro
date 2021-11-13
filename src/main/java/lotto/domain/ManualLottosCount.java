@@ -17,4 +17,8 @@ public class ManualLottosCount {
             throw new IllegalArgumentException("수동 로또 개수는 0 이상이어야 합니다.");
         }
     }
+
+    public int getValue() {
+        return manualLottoCount;
+    }
 }
