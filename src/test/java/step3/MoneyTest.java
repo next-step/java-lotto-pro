@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import step3.machine.Bought;
+
 public class MoneyTest {
 	@Test
 	void 금액이_천원보다작다면_예외() {
@@ -17,8 +19,8 @@ public class MoneyTest {
 	@ParameterizedTest
 	@DisplayName("입력한 금액에따라 구매가능한 갯수를 리턴")
 	@CsvSource(value = {"1000:1", "2000:2", "1100:1"}, delimiter = ':')
-	void buyCount(int input, int result) {
-		Money money = new Money(input);
-		Assertions.assertThat(money.buyCount()).isEqualTo(result);
+	void buyCount(int inputMoney, int result) {
+		Bought bought = new Bought(new Money(inputMoney));
+		Assertions.assertThat(bought.buyAutoCount()).isEqualTo(result);
 	}
 }
