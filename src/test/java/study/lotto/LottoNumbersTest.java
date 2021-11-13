@@ -2,22 +2,13 @@ package study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import study.lotto.domain.LottoNumber;
 import study.lotto.domain.LottoNumbers;
+import study.lotto.domain.Rank;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoNumbersTest {
-
-    @Test
-    @DisplayName("1~45의 숫자로 구성된 6개의 숫자 그룹을 만드는 테스트")
-    void 생성_테스트() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        assertThat(lottoNumbers.getLottoNumbers()).isSorted();
-        assertThat(lottoNumbers.getLottoNumbers().size()).isEqualTo(6);
-
-        //각 원소들이 서로 다른지 어떻게 테스트 해보지...?
-    }
-
 
     @Test
     void 출력형태_테스트() {
@@ -27,12 +18,25 @@ class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("로또숫자 두 그룹 사이에 몇개가 일치하는지 테스트")
-    void getMatchCount() {
-        LottoNumbers lottoNumbers = new LottoNumbers("3,11,14,15,23,33");
-        LottoNumbers lottoNumbers2 = new LottoNumbers("3,13,19,29,31,33");
+    @DisplayName("자동 생성된 로또번호들과 지난주 당첨로또번호, 보너스 볼이 주어졌을때 각각 몇개가 일치하는지 테스트")
+    void match() {
+        LottoNumbers lottoNumbers1 = new LottoNumbers("1,2,3,4,5,6");
+        LottoNumbers lottoNumbers2 = new LottoNumbers("7,1,2,3,4,5");
+        LottoNumbers lottoNumbers3 = new LottoNumbers("1,2,3,4,5,8");
+        LottoNumbers lottoNumbers4 = new LottoNumbers("1,2,3,4,7,8");
 
-        assertThat(lottoNumbers.getMatchCount(lottoNumbers2)).isEqualTo(2);
+        LottoNumbers lastLottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+        LottoNumber bonusBall = new LottoNumber(7);
+
+        lottoNumbers1.match(lastLottoNumbers, bonusBall);
+        lottoNumbers2.match(lastLottoNumbers, bonusBall);
+        lottoNumbers3.match(lastLottoNumbers, bonusBall);
+        lottoNumbers4.match(lastLottoNumbers, bonusBall);
+
+        assertThat(Rank.FIRST.getCorrect()).isEqualTo(1);
+        assertThat(Rank.SECOND.getCorrect()).isEqualTo(1);
+        assertThat(Rank.THIRD.getCorrect()).isEqualTo(1);
+        assertThat(Rank.FOURTH.getCorrect()).isEqualTo(1);
+        assertThat(Rank.FIFTH.getCorrect()).isEqualTo(0);
     }
-
 }
