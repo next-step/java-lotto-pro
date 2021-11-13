@@ -28,22 +28,4 @@ public class InputHandlerTest {
 
         assertThat(numbers.size()).isEqualTo(6);
     }
-
-    @DisplayName("문자열 구분자를 잘못 넣었을때 에러")
-    @Test
-    void splitError() {
-        assertThatThrownBy(() -> {
-            InputHandler.splitTextToInts("1. 2. 3. 4. 5. 6");
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.SPLITED_ERROR);
-    }
-
-    @DisplayName("당첨 로또 숫자가 범위를 벗어났을때 에러")
-    @Test
-    void rangeOverError() {
-        assertThatThrownBy(() -> {
-            InputHandler.splitTextToInts("0, 1, 2, 3, 4, 46");
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.SPLITED_ERROR);
-    }
 }
