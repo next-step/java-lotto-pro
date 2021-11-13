@@ -1,9 +1,9 @@
 package lotto.ui;
 
-import lotto.domain.PickedNumbers;
+import lotto.application.LottoResultChecker;
+import lotto.application.LottoResultResponse;
 import lotto.domain.Playslips;
 import lotto.domain.Price;
-import lotto.domain.Result;
 import lotto.domain.Retailer;
 
 public class LottoController {
@@ -14,7 +14,8 @@ public class LottoController {
         ResultView.printPlayslips(playslips.size(), playslips.asString());
 
         final String pastWinningNumbers = InputView.askPastWinningNumbers();
-        final Result result = playslips.checkResult(PickedNumbers.of(pastWinningNumbers));
-        ResultView.printStats(result.asString(), result.calculateReturnOnInvestment());
+        final LottoResultResponse resultResponse =
+            LottoResultChecker.check(playslips, pastWinningNumbers);
+        ResultView.printStats(resultResponse.asString());
     }
 }

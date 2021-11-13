@@ -6,8 +6,6 @@ import java.util.List;
 
 public class Result {
 
-    private static final char NEWLINE = '\n';
-
     private final List<Prize> prizes = new ArrayList<>();
     private final int numberOfPlayslips;
 
@@ -31,22 +29,6 @@ public class Result {
         for (int i = 0; i < numberOfFourthPrizes; i++) {
             prizes.add(Prize.FOURTH);
         }
-    }
-
-    public String asString() {
-        return prizeString(Prize.FOURTH, getNumberOfFourthPrizes()) + NEWLINE
-            + prizeString(Prize.THIRD, getNumberOfThirdPrizes()) + NEWLINE
-            + prizeString(Prize.SECOND, getNumberOfSecondPrizes()) + NEWLINE
-            + prizeString(Prize.FIRST, getNumberOfFirstPrizes());
-    }
-
-    private String prizeString(final Prize prize, final int numberOfPrizes) {
-        return prize.getMatchCount()
-            + " 개 일치 ("
-            + prize.getAmountAsString()
-            + " 원)- "
-            + numberOfPrizes
-            + "개";
     }
 
     public int getNumberOfFirstPrizes() {
