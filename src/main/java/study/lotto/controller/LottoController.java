@@ -1,9 +1,6 @@
 package study.lotto.controller;
 
-import study.lotto.domain.LottoNumbers;
-import study.lotto.domain.LottoNumbersGroup;
-import study.lotto.domain.Money;
-import study.lotto.domain.Statics;
+import study.lotto.domain.*;
 import study.lotto.view.InputView;
 import study.lotto.view.OutputView;
 
@@ -18,10 +15,10 @@ public class LottoController {
         LottoNumbersGroup lottoNumbersGroup = generateLottoNumbersGroup(userInputMoney.getPurchaseCount());
         OutputView.printLottoNumbersGroup(lottoNumbersGroup);
 
-        LottoNumbers lastWeekLottoNumbers = generateLastLottoNumbers();
+        lottoNumbersGroup.setLastLastLottoNumbers(generateLastLottoNumbers());
+        lottoNumbersGroup.setBonusBall(generateBonusBall());
 
-        Statics statics = handleStatics(userInputMoney, lottoNumbersGroup, lastWeekLottoNumbers);
-        OutputView.printStatics(statics);
+        OutputView.printStatics(Statics.valueOf(userInputMoney, lottoNumbersGroup));
     }
 
     private Money readMoney() {
@@ -45,9 +42,8 @@ public class LottoController {
         return new LottoNumbers(InputView.readLastLottoNumbers());
     }
 
-    private Statics handleStatics(Money userInputMoney, LottoNumbersGroup lottoNumbersGroup, LottoNumbers lastLottoNumbers) {
-        Statics statics = new Statics(userInputMoney, lottoNumbersGroup, lastLottoNumbers);
-        statics.analyst();
-        return statics;
+    private LottoNumber generateBonusBall() {
+        OutputView.requestBonusBall();
+        return new LottoNumber(InputView.readBonusBallNumber());
     }
 }
