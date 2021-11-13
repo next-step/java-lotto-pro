@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.service.CreateLottoStrategy;
+import lotto.service.CreateLottoNumbersStrategy;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -14,9 +14,9 @@ public class Lottos {
         lottos.addAll(manualLottos.getManualLottos());
     }
 
-    public void createAutoLottos(CreateLottoStrategy createLottoStrategy, int autoLottoCount) {
+    public void createAutoLottos(CreateLottoNumbersStrategy createLottoNumbersStrategy, int autoLottoCount) {
         for (int i = 0; i < autoLottoCount; i++) {
-            lottos.add(new Lotto(new LottoNumbers(createLottoStrategy.createLottoNumberStrings())));
+            lottos.add(new Lotto(new LottoNumbers(createLottoNumbersStrategy.createLottoNumberStrings())));
         }
     }
 

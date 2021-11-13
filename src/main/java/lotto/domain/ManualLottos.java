@@ -22,4 +22,8 @@ public class ManualLottos {
     public List<Lotto> getManualLottos() {
         return manualLottos;
     }
+
+    public int getManualLottosCount() {
+        return manualLottosCount.getValue();
+    }
 }
