@@ -2,10 +2,10 @@ package step3.domain;
 
 public class LottoShop {
 
-    private final Money money;
+    private final Money income;
 
     public LottoShop() {
-        this.money = new Money(0);
+        this.income = new Money(0);
     }
 
     public LottoTicket sell(final Money money) {
@@ -18,14 +18,10 @@ public class LottoShop {
     }
 
     private void earn(final Money money) {
-        this.money.earn(money);
-    }
-
-    public Money income() {
-        return this.money;
+        this.income.earn(money);
     }
 
     public int countOfSelling() {
-        return this.money.get();
+        return this.income.get();
     }
 }
