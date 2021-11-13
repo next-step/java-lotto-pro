@@ -14,10 +14,6 @@ public class LottoResults {
         this.results = results;
     }
 
-    public List<LottoResult> getResults() {
-        return results;
-    }
-
     public LottoStatistics makeStatistics() {
         Map<LottoResult, Long> resultCounts = results.stream()
             .collect(groupingBy(Function.identity(), counting()));

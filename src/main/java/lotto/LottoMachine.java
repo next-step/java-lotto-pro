@@ -54,15 +54,15 @@ public class LottoMachine {
         }
     }
 
+    private String removeAllSpaces(String numbers) {
+        return numbers.replaceAll(ALL_SPACES_PATTERN, EMPTY);
+    }
+
     private int parseInt(String number) {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new LottoException(LottoErrorCode.INVALID_LOTTO_TICKET);
         }
-    }
-
-    private String removeAllSpaces(String numbers) {
-        return numbers.replaceAll(ALL_SPACES_PATTERN, EMPTY);
     }
 }
