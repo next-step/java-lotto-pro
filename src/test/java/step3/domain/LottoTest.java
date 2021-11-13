@@ -54,7 +54,7 @@ class LottoTest {
         ));
 
         //when
-        final int check = purchasedLotto.check(winningLotto);
+        final int check = purchasedLotto.findWinningCount(winningLotto);
 
         //then
         assertThat(check).isEqualTo(3);

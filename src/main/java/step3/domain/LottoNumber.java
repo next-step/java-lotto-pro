@@ -18,7 +18,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public int check(final List<LottoNumber> lottoNumbers) {
+    public int findWinningCount(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.contains(this)) {
             return 1;
         }

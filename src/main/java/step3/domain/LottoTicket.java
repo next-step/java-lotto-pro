@@ -23,11 +23,11 @@ public class LottoTicket {
         return this.lotteries;
     }
 
-    public Prizes check(final Lotto winningLotto) {
+    public Prizes findWinningCount(final Lotto winningLotto) {
         final Prizes prizes = new Prizes();
 
         for (Lotto lotto : this.lotteries) {
-            prizes.add(Prize.of(lotto.check(winningLotto)));
+            prizes.add(Prize.of(lotto.findWinningCount(winningLotto)));
         }
 
         return prizes;

@@ -21,11 +21,11 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public int check(final Lotto winningLotto) {
+    public int findWinningCount(final Lotto winningLotto) {
         int winningCount = 0;
 
         for (LottoNumber lottoNumber : this.lottoNumbers) {
-            winningCount += lottoNumber.check(winningLotto.get());
+            winningCount += lottoNumber.findWinningCount(winningLotto.get());
         }
 
         return winningCount;
