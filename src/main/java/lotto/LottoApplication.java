@@ -1,12 +1,12 @@
 package lotto;
 
-import lotto.ui.Driver;
+import lotto.ui.LottoController;
 
-public class Application {
+public class LottoApplication {
 
     public static void main(String[] args) {
         try {
-            Driver.run();
+            LottoController.run();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

@@ -6,7 +6,7 @@ import lotto.domain.Price;
 import lotto.domain.Result;
 import lotto.domain.Retailer;
 
-public class Driver {
+public class LottoController {
 
     public static void run() {
         final String purchaseAmount = InputView.askPurchaseAmount();
