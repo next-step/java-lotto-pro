@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ShuffledLottoNumbers {
+public class ShuffledLottoNumbersStrategy implements CreateLottoNumbersStrategy {
     private static final int LOTTO_NUMBER_MAX_COUNT = 6;
     private static List<Integer> lottoRangeNumbers = createLottoNumberRangeList();
 
@@ -19,7 +19,8 @@ public class ShuffledLottoNumbers {
         return lottoNumberList;
     }
 
-    public static List<String> createShuffledLottoNumbers() {
+    @Override
+    public List<String> createLottoNumberStrings() {
         Collections.shuffle(lottoRangeNumbers);
         return lottoRangeNumbers
                 .stream()
