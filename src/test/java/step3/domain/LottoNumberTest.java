@@ -2,6 +2,8 @@ package step3.domain;
 
 import static helper.Constants.*;
 import static org.assertj.core.api.Assertions.*;
+import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,5 +39,22 @@ class LottoNumberTest {
     void _1에서_45번_이외의_숫자로_로또번호를_만드려고_하면_예외가발생한다(final int number) {
         //when then
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(number));
+    }
+
+    @Test
+    void 당첨_로또번호와_비교해서_맞은_숫자개수를_얻을_수_있다() {
+        //given
+        final List<LottoNumber> winningLottoNumbers = Collections.singletonList(new LottoNumber(7));
+
+        final LottoNumber sameLottoNumber = new LottoNumber(7);
+        final LottoNumber notSameLottoNumber = new LottoNumber(3);
+
+        //when
+        final int sameLottoNumberWinningCount = sameLottoNumber.findWinningCount(winningLottoNumbers);
+        final int notSameLottoNumberWinningCount = notSameLottoNumber.findWinningCount(winningLottoNumbers);
+
+        //then
+        assertThat(sameLottoNumberWinningCount).isEqualTo(1);
+        assertThat(notSameLottoNumberWinningCount).isEqualTo(0);
     }
 }
