@@ -1,34 +1,33 @@
 package lotto.model;
 
-import lotto.NumberListGenerator;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static lotto.model.LottoNumber.MAX_VALUE;
 import static lotto.model.LottoNumber.MIN_VALUE;
-import static lotto.model.LottoNumbers.LOTTO_SIZE;
+import static lotto.model.LottoTicket.LOTTO_SIZE;
 
 public class Lottos {
-    private final List<Lotto> lottos;
+    private final List<LottoTicket> lottos;
 
-    private Lottos(List<Lotto> lottos) {
+    private Lottos(List<LottoTicket> lottos) {
         this.lottos = lottos;
     }
 
     public static Lottos generateAuto(int count) {
-        final List<Lotto> lottos = new ArrayList<>();
+        final List<LottoTicket> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            final List<Integer> list = NumberListGenerator.generateRandomNumbers(LOTTO_SIZE, MIN_VALUE, MAX_VALUE);
-            final Lotto lotto = Lotto.generate(list);
+            final List<Integer> numbers = Lottos.getRandomNumbers();
+            final LottoTicket lotto = LottoTicket.of(numbers);
             lottos.add(lotto);
         }
 
         return new Lottos(lottos);
     }
 
-    public List<Lotto> getLottos() {
+    public List<LottoTicket> getLottos() {
         return lottos;
     }
 
@@ -36,17 +35,31 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoResult calculateWinning(LottoNumbers winNumbers) {
+    public LottoResult calculateWinning(WinTicket winTicket) {
         final List<Winning> winnings = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            winnings.add(lotto.calculateWinning(winNumbers));
+        for (LottoTicket lotto : lottos) {
+            winnings.add(lotto.calculateWinning(winTicket));
         }
         return new LottoResult(winnings);
     }
 
     public Money getSellingPrice() {
-        return lottos.stream()
-                .map(Lotto::getSellingPrice)
-                .reduce(new Money(0), Money::plus);
+        return LottoTicket.SELLING_PRICE.multiplyBy(lottos.size());
+    }
+
+    private static List<Integer> getRandomNumbers() {
+        final List<Integer> allNumbers = getAllNumbers();
+        Collections.shuffle(allNumbers);
+        final List<Integer> pickedNumbers = new ArrayList<>(allNumbers.subList(0, LOTTO_SIZE));
+        Collections.sort(pickedNumbers);
+        return pickedNumbers;
+    }
+
+    private static List<Integer> getAllNumbers() {
+        final List<Integer> numbers = new ArrayList<>();
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
+            numbers.add(i);
+        }
+        return numbers;
     }
 }

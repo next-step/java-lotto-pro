@@ -30,8 +30,8 @@ public class Money {
         return Objects.hash(money);
     }
 
-    public Money multiplyBy(int value) {
-        return new Money(this.money * value);
+    public Money multiplyBy(int multiplier) {
+        return new Money(this.money * multiplier);
     }
 
     public Money plus(Money money) {
