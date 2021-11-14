@@ -16,7 +16,7 @@ class MatchResultsTest {
   LottoTicket lottoTicket;
   @BeforeEach
   void setUp() {
-    buyerLottoNumber = new int[]{1, 2, 22, 33, 7};
+    buyerLottoNumber = new int[]{1, 2, 22, 33, 7, 5};
     purchaseAmount = PurchaseAmount.valueOf(5000);
     lottoTicket = purchaseAmount.buyLottoTicket(() -> new LottoNumbers(asList(buyerLottoNumber)));
   }

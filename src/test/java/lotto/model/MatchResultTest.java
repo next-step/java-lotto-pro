@@ -15,9 +15,9 @@ public class MatchResultTest {
   void match() {
     int[] winningNumber = {1, 2, 3, 22, 33, 44};
 
-    LottoBuyer buyer = LottoBuyer.buy(PurchaseAmount.valueOf(4000),
-      () -> new LottoNumbers(asList(winningNumber)));
-    MatchResults matchResults = buyer.matchWithWinningLotto(new LottoNumbers(asList(winningNumber)));
+    PurchaseAmount purchaseAmount = PurchaseAmount.valueOf(4000);
+    LottoTicket lottoTicket = purchaseAmount.buyLottoTicket(() -> new LottoNumbers(asList(winningNumber)));
+    MatchResults matchResults = lottoTicket.totalWinningResults(new LottoNumbers(asList(winningNumber)));
     MatchResult winningMatchResult = new MatchResult(LottoRank.FIRST, new MatchCount(3));
 
     assertThat(matchResults.getMatchResults().get(3)).isEqualTo(winningMatchResult);
