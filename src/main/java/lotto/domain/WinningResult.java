@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Map;
-import java.util.Optional;
 
 public class WinningResult {
     private Map<LottoPrize, Integer> winningResultMap;
