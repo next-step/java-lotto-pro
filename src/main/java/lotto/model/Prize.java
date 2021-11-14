@@ -23,15 +23,14 @@ public class Prize {
 	}
 
 	public double rateReturn(PurchaseMoney money) {
-		return (double)winMoney() / money.getMoney();
+		return money.divided(winMoney());
 	}
 
 	public int winMoney() {
 		return winCount.entrySet().stream().reduce(0, (acc, entry) -> {
 			Rank rank = entry.getKey();
-			Integer winningMoney = rank.getWinningMoney();
-
-			acc += winningMoney * entry.getValue();
+			int count = entry.getValue();
+			acc += rank.calculateWinningMoney(count);
 			return acc;
 		}, Integer::sum);
 	}

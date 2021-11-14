@@ -13,10 +13,7 @@ public class WinLotto {
 
 	public Rank compare(Lotto lotto) {
 		int sameCount = this.lotto.compareNumbers(lotto);
-		if (lotto.contains(bonusNumber)) {
-			return Rank.valueOf(sameCount, true);
-		}
 
-		return Rank.valueOf(sameCount, false);
+		return Rank.valueOf(sameCount, lotto.contains(bonusNumber));
 	}
 }

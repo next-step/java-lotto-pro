@@ -2,12 +2,10 @@ package lotto.util;
 
 import static lotto.constants.LottoConstants.*;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
@@ -34,11 +32,6 @@ public class LottoGenerator {
 		return new Lottos(IntStream.range(0, numberOfAutoCreation)
 			.mapToObj(i -> LottoGenerator.generateAuto())
 			.collect(Collectors.toList()));
-	}
-
-	public static Lottos purchaseLottos(int numberOfAutoCreation, Lotto... lottos) {
-		return new Lottos(Stream.concat(IntStream.range(0, numberOfAutoCreation)
-			.mapToObj(i -> LottoGenerator.generateAuto()), Arrays.stream(lottos)).collect(Collectors.toList()));
 	}
 
 	private LottoGenerator() {
