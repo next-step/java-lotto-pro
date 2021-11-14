@@ -14,7 +14,7 @@ public class Lotto {
         valid(numbers);
         lottoNumbers = new ArrayList<>();
         for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(LottoNumber.of(number));
         }
     }
 
@@ -60,7 +60,7 @@ public class Lotto {
     }
 
     private int matchNumberIncrement(Lotto lotto, LottoNumber lottoNumber) {
-        if(lotto.compare(lottoNumber)){
+        if (lotto.compare(lottoNumber)) {
             return INCREMENT_BY_ONE;
         }
         return INCREMENT_BY_ZERO;

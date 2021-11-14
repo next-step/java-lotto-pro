@@ -2,22 +2,32 @@ package lotto.model;
 
 import lotto.view.ErrorMessage;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
     private final int number;
 
-    public LottoNumber(int number) {
-        valid(number);
+    static {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
+
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void valid(int number) {
-        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+    public static LottoNumber of(int number) {
+        LottoNumber lottoNumber = lottoNumbers.get(number);
+        if (lottoNumber == null) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_RANGE_OVER);
         }
+        return lottoNumber;
     }
 
     @Override

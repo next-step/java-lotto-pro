@@ -1,6 +1,7 @@
 package lotto.factory;
 
 import lotto.model.*;
+
 import java.util.*;
 
 public class LottoCreateFactory {
@@ -40,6 +41,6 @@ public class LottoCreateFactory {
     }
 
     public static WinningLotto createWinningLotto(List<Integer> winLottoNumbers, int bonusNumber) {
-        return new WinningLotto(new Lotto(winLottoNumbers), new LottoNumber(bonusNumber));
+        return new WinningLotto(new Lotto(winLottoNumbers), LottoNumber.of(bonusNumber));
     }
 }

@@ -12,23 +12,23 @@ public class LottoNumberTest {
     @DisplayName("로또 경계 숫자 객체 생성 검증")
     @Test
     void lottoNumber() {
-        LottoNumber lottoNumber = new LottoNumber(1);
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(1));
+        LottoNumber lottoNumber = LottoNumber.of(1);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(1));
 
-        lottoNumber = new LottoNumber(45);
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(45));
+        lottoNumber = LottoNumber.of(45);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(45));
     }
 
     @DisplayName("로또 숫자의 범위 검증")
     @Test
     void lottoNumberRange() {
         assertThatThrownBy(() -> {
-            new LottoNumber(46);
+            LottoNumber.of(46);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.LOTTO_RANGE_OVER);
 
         assertThatThrownBy(() -> {
-            new LottoNumber(0);
+            LottoNumber.of(0);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.LOTTO_RANGE_OVER);
     }
