@@ -8,8 +8,8 @@ import lotto.model.LottoCount;
 import lotto.model.Lottos;
 import lotto.model.Number;
 import lotto.model.Payment;
-import lotto.util.Console;
-import lotto.util.InputParser;
+import lotto.view.util.Console;
+import lotto.view.util.InputParser;
 
 public class InputView {
     private static final String QUERY_FOR_PAYMENT = "구입금액을 입력해주세요.";

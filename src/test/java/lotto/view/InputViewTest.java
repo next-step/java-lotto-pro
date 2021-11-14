@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
 
 import lotto.model.Payment;
-import lotto.util.Console;
+import lotto.view.util.Console;
 
 public class InputViewTest {
     @ParameterizedTest
