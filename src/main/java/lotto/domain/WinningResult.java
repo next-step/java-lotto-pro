@@ -31,6 +31,10 @@ public class WinningResult {
             prizeMoney.prizeMoneyAccumulate(winningCount);
         }
 
+        if (prizeMoney == null) {
+            prizeMoney = new PrizeMoney(0);
+        }
+
         return prizeMoney;
     }
 }
