@@ -48,21 +48,4 @@ public class RankTest {
         List<Rank> ranks = Rank.getRanksHavingWinningMoney();
         assertThat(ranks).allMatch(rank -> rank.getWinningMoney() > 0);
     }
-
-    @Test
-    @DisplayName("등수에 따라 적절한 결과 안내문을 반환하는지 테스트")
-    void computeMatchStatement() {
-        String secondMatchStatement = SECOND.computeMatchStatement(1);
-        assertThat(secondMatchStatement).contains("보너스");
-
-        String thirdMatchStatement = THIRD.computeMatchStatement(1);
-        assertThat(thirdMatchStatement).doesNotContain("보너스");
-    }
-
-    @Test
-    @DisplayName("당첨된 로또의 수로 음수가 전달될 때 예외를 발생시키는지 테스트")
-    void computeMatchStatementByInvalidTotalCount() {
-        assertThatIllegalArgumentException()
-            .isThrownBy(() -> FIRST.computeMatchStatement(-1));
-    }
 }

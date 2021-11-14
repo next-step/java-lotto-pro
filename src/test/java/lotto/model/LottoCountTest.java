@@ -18,14 +18,6 @@ public class LottoCountTest {
     }
 
     @Test
-    @DisplayName("computeNumberOfLottoStatement 메서드 정상 작동 여부 테스트")
-    void computeNumberOfLottoStatement() {
-        LottoCount lottoCount = new LottoCount(2, 5);
-        String numberOfLottoStatement = lottoCount.computeNumberOfLottoStatement();
-        assertThat(numberOfLottoStatement).contains("2", "3");
-    }
-
-    @Test
     @DisplayName("동등성 검사")
     void equals() {
         LottoCount actual = new LottoCount(1, 5);

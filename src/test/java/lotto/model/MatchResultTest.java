@@ -1,7 +1,6 @@
 package lotto.model;
 
 import static java.util.Collections.*;
-import static lotto.model.MatchResult.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
@@ -24,11 +23,18 @@ public class MatchResultTest {
     }
 
     @Test
-    @DisplayName("적절한 당첨 결과 안내문이 나오는지 테스트")
-    void toResultString() {
-        MatchResult matchResult = new MatchResult(new Payment(10000), Rank.FIFTH, Rank.SECOND);
-        String actual = matchResult.toResultString();
-        assertThat(actual).contains(RESULT_HEADER, SUCCESS_STATEMENT);
+    @DisplayName("countRank가 적절한 값을 반환하는지 테스트")
+    void countRank() {
+        MatchResult matchResult = new MatchResult(new Payment(10000), Rank.FIFTH, Rank.FIFTH, Rank.SECOND);
+        int actual = matchResult.countRank(Rank.FIFTH);
+        assertThat(actual).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("countRank 함수에 매개변수로 null이 전달될 때 예외 발생")
+    void countRankByNull() {
+        MatchResult matchResult = new MatchResult(new Payment(10000), Rank.FIFTH);
+        assertThatNullPointerException().isThrownBy(() -> matchResult.countRank(null));
     }
 
     @Test

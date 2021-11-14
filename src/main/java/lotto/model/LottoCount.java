@@ -5,7 +5,6 @@ import java.util.Objects;
 public class LottoCount {
     private static final String NEGATIVE_COUNT_ERR_MSG = "로또의 수는 음수일 수 없습니다.";
     private static final String MANUAL_COUNT_SIZE_ERR_MSG = "수동으로 구매하려고 하는 로또의 수가 총 로또의 수를 초과합니다.";
-    private static final String NUMBER_OF_LOTTO_STATEMENT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
     private final int manualCount;
     private final int autoCount;
@@ -23,10 +22,6 @@ public class LottoCount {
         if (manualCount > totalCount) {
             throw new IllegalArgumentException(MANUAL_COUNT_SIZE_ERR_MSG);
         }
-    }
-
-    public String computeNumberOfLottoStatement() {
-        return String.format(NUMBER_OF_LOTTO_STATEMENT_FORMAT, manualCount, autoCount);
     }
 
     public int getManualCount() {

@@ -13,8 +13,6 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private static final String NORMAL_MATCH_STATEMENT_FORMAT = "%d개 일치 (%d원) - %d개";
-    private static final String SECOND_MATCH_STATEMENT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
     private static final String COUNT_OF_MATCH_SIZE_ERR_MSG = "매칭된 숫자의 갯수가 0보다 작거나 6보다 클 수는 없습니다.";
 
     private final int countOfMatch;
@@ -49,18 +47,11 @@ public enum Rank {
         return Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST);
     }
 
-    public String computeMatchStatement(int totalCount) {
-        return String.format(getMatchStatementFormat(), getCountOfMatch(), getWinningMoney(), totalCount);
+    public boolean isSecond() {
+        return this == SECOND;
     }
 
-    private String getMatchStatementFormat() {
-        if (this == SECOND) {
-            return SECOND_MATCH_STATEMENT_FORMAT;
-        }
-        return NORMAL_MATCH_STATEMENT_FORMAT;
-    }
-
-    private int getCountOfMatch() {
+    public int getCountOfMatch() {
         return countOfMatch;
     }
 
