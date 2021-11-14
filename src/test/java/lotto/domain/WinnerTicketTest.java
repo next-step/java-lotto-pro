@@ -4,12 +4,27 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class WinnerTicketTest {
+    @DisplayName("당첨 티켓 생성")
     @Test
     void constructWinnerTicket() {
-        WinnerTicket winnerTicket = new WinnerTicket(new LottoTicket(Arrays.asList(1,2,3,4,5,6)), new BonusNumber(new LottoNumber(7)));
-        assertThat(winnerTicket).isEqualTo(new WinnerTicket(new LottoTicket(Arrays.asList(1,2,3,4,5,6)), new BonusNumber(new LottoNumber(7))));
+        WinnerTicket winnerTicket = new WinnerTicket(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            new BonusNumber(new LottoNumber(7)));
+        assertThat(winnerTicket).isEqualTo(
+            new WinnerTicket(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)), new BonusNumber(new LottoNumber(7))));
+    }
+
+    @DisplayName("당첨 결과 계산")
+    @Test
+    void calculateResult() {
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            new LottoTicket(Arrays.asList(7, 8, 9, 10, 5, 6))));
+        WinnerTicket winnerTicket = new WinnerTicket(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            new BonusNumber(new LottoNumber(7)));
+        assertThat(winnerTicket.calculateResult(lottoTickets)).isEqualTo(
+            new LottoResults(Arrays.asList(LottoResult.FIRST, LottoResult.MISS)));
     }
 }

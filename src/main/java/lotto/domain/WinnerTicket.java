@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class WinnerTicket {
     private final LottoTicket lottoTicket;
@@ -27,5 +28,11 @@ public class WinnerTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoTicket, bonusNumber);
+    }
+
+    public LottoResults calculateResult(LottoTickets lottoTickets) {
+        return new LottoResults(lottoTickets.getLottoTicketList().stream()
+            .map(lottoTicket -> lottoTicket.calculateResult(this.lottoTicket))
+            .collect(Collectors.toList()));
     }
 }
