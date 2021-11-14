@@ -1,5 +1,6 @@
 package lotto.model;
 
+import static lotto.model.RateOfReturn.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -9,8 +10,9 @@ public class RateOfReturnTest {
     @Test
     @DisplayName("음수가 들어올 경우 예외 발생")
     void 객체_생성_시_유효성_검사() {
-        assertThatIllegalArgumentException()
-            .isThrownBy(() -> new RateOfReturn(-0.1));
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> new RateOfReturn(-0.1)
+        ).withMessageContaining(NEGATIVE_RATE_OF_RETURN_ERR_MSG);
     }
 
     @Test

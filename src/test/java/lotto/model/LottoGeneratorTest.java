@@ -1,5 +1,6 @@
 package lotto.model;
 
+import static lotto.model.LottoGenerator.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +17,8 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("추출할 로또의 갯수를 음수로 전달할 때 예외 발생")
     void generateByNegativeAutoCount() {
-        assertThatIllegalArgumentException()
-            .isThrownBy(() -> LottoGenerator.generate(-1));
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> LottoGenerator.generate(-1)
+        ).withMessageContaining(NEGATIVE_COUNT_ERR_MSG);
     }
 }

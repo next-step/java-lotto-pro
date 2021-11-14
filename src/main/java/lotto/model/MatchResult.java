@@ -29,12 +29,12 @@ public class MatchResult {
         rankToCount = new HashMap<>();
         initialize();
 
-        int prizeMoney = 0;
+        int winningMoney = 0;
         for (Rank rank : ranks) {
             rankToCount.merge(rank, 1, Integer::sum);
-            prizeMoney += rank.getWinningMoney();
+            winningMoney += rank.getWinningMoney();
         }
-        rateOfReturn = payment.computeRateOfReturn(prizeMoney);
+        rateOfReturn = payment.computeRateOfReturn(winningMoney);
     }
 
     private void initialize() {

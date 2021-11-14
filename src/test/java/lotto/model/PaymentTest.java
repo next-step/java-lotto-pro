@@ -30,8 +30,9 @@ public class PaymentTest {
     void computeLottoCountByNegativeManualCount() {
         Payment payment = new Payment(14000);
 
-        assertThatIllegalArgumentException()
-            .isThrownBy(() -> payment.computeLottoCount(-1));
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> payment.computeLottoCount(-1)
+        ).withMessageContaining(NEGATIVE_MANUAL_COUNT_ERR_MSG);
     }
 
     @Test
@@ -44,11 +45,12 @@ public class PaymentTest {
 
     @Test
     @DisplayName("당첨금이 음수로 주어졌을 때 예외 발생")
-    void computeRateOfReturnByNegativePrizeMoney() {
+    void computeRateOfReturnByNegativeWinningMoney() {
         Payment payment = new Payment(14000);
 
-        assertThatIllegalArgumentException()
-            .isThrownBy(() -> payment.computeRateOfReturn(-1));
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> payment.computeRateOfReturn(-1)
+        ).withMessageContaining(NEGATIVE_WINNING_MONEY_ERR_MSG);
     }
 
     @Test

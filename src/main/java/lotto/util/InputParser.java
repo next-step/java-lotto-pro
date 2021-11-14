@@ -1,9 +1,8 @@
 package lotto.util;
 
-import static lotto.util.Validator.*;
-
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import lotto.model.Lotto;
@@ -11,7 +10,13 @@ import lotto.model.Number;
 import lotto.model.Payment;
 
 public class InputParser {
-    static final String NUMBER_DELIMITER = ",";
+    private static final String NUMBER_DELIMITER = ",";
+
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
+    private static final Pattern LOTTO_NUMBER_PATTERN = Pattern.compile("\\d+(" + NUMBER_DELIMITER + "\\d+){5}");
+
+    private static final String INVALID_NUMBER_INPUT_ERR_MSG = "숫자만 입력 가능합니다.";
+    private static final String INVALID_LOTTO_NUMBER_INPUT_ERR_MSG = "잘못된 형식의 로또 번호입니다.";
 
     private InputParser() {
     }
@@ -36,5 +41,17 @@ public class InputParser {
             .map(number -> Number.of(Integer.parseInt(number)))
             .collect(Collectors.toList());
         return new Lotto(numbers);
+    }
+
+    private static void validateNumberPattern(String input) {
+        if (!NUMBER_PATTERN.matcher(input).matches()) {
+            throw new IllegalArgumentException(INVALID_NUMBER_INPUT_ERR_MSG);
+        }
+    }
+
+    private static void validateLottoPattern(String lottoNumbers) {
+        if (!LOTTO_NUMBER_PATTERN.matcher(lottoNumbers).matches()) {
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_INPUT_ERR_MSG);
+        }
     }
 }
