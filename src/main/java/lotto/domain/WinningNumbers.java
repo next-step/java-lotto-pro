@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.consts.LottoNumberConst;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ public class WinningNumbers {
 
     public WinningNumbers(List<Integer> numbers) {
         validationCheck(numbers);
+        Collections.sort(numbers);
         this.numbers = numbers;
     }
 

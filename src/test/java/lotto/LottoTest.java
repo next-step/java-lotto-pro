@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.consts.LottoNumberConst;
 import lotto.consts.PriceConst;
+import lotto.consts.WinningEnum;
 import lotto.domain.*;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -61,6 +63,7 @@ public class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5))));
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 1))));
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7))));
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, null))));
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(new ArrayList<>(Arrays.asList(LottoNumberConst.START_NUMBER - 1, 2, 3, 4, 5, 6))));
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(new ArrayList<>(Arrays.asList(LottoNumberConst.END_NUMBER + 1, 2, 3, 4, 5, 6))));
     }
@@ -79,10 +82,11 @@ public class LottoTest {
         WinningNumbers winningNumbers = new WinningNumbers(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         WinningStats winningStats = new WinningStats(lottos, winningNumbers);
 
-        assertThat(winningStats.getFirst()).isEqualTo(1);
-        assertThat(winningStats.getThird()).isEqualTo(1);
-        assertThat(winningStats.getFourth()).isEqualTo(2);
-        assertThat(winningStats.getFifth()).isEqualTo(1);
+        Map<Integer, Integer> winningStatsMap = winningStats.getWinningStats();
+        assertThat(winningStatsMap.get(WinningEnum.FIRST.getRank())).isEqualTo(1);
+        assertThat(winningStatsMap.get(WinningEnum.THIRD.getRank())).isEqualTo(1);
+        assertThat(winningStatsMap.get(WinningEnum.FOURTH.getRank())).isEqualTo(2);
+        assertThat(winningStatsMap.get(WinningEnum.FIFTH.getRank())).isEqualTo(1);
     }
 
     @Test

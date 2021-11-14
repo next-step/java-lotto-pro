@@ -1,38 +1,33 @@
 package lotto.domain;
 
+import lotto.consts.WinningEnum;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class WinningStats {
 
-    private final int first;
-    // private final int second;
-    private final int third;
-    private final int fourth;
-    private final int fifth;
+    private final Map<Integer, Integer> winningStats;
 
     public WinningStats(Lottos lottos, WinningNumbers winningNumbers) {
-        int first = 0;
-        int third = 0;
-        int fourth = 0;
-        int fifth = 0;
+        winningStats = new HashMap<>();
+        winningStats.put(WinningEnum.FIRST.getRank(), 0);
+        winningStats.put(WinningEnum.THIRD.getRank(), 0);
+        winningStats.put(WinningEnum.FOURTH.getRank(), 0);
+        winningStats.put(WinningEnum.FIFTH.getRank(), 0);
 
-        this.first = first;
-        this.third = third;
-        this.fourth = fourth;
-        this.fifth = fifth;
+        for (Lotto lotto : lottos.getLottos()) {
+            setResult(lotto.getWinningResult(winningNumbers));
+        }
     }
 
-    public int getFirst() {
-        return first;
+    private void setResult(int result) {
+        if (result != WinningEnum.NONE.getRank()) {
+            winningStats.put(result, winningStats.get(result) + 1);
+        }
     }
 
-    public int getThird() {
-        return third;
-    }
-
-    public int getFourth() {
-        return fourth;
-    }
-
-    public int getFifth() {
-        return fifth;
+    public Map<Integer, Integer> getWinningStats() {
+        return winningStats;
     }
 }

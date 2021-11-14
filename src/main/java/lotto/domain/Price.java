@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.consts.PriceConst;
+import lotto.consts.WinningEnum;
 
 public class Price {
 
@@ -21,6 +22,21 @@ public class Price {
     }
 
     public ProfitRate getProfitRate(WinningStats winningStats) {
-        return new ProfitRate(Math.floor((double) 5000 / price * 100) / 100.0);
+        int totalPrize = 0;
+        for (WinningEnum winningEnum : WinningEnum.values()) {
+            if (winningEnum == WinningEnum.NONE) {
+                continue;
+            }
+            totalPrize += getPrize(winningEnum, winningStats);
+        }
+
+        return new ProfitRate(Math.floor((double) totalPrize / price * 100) / 100.0);
+    }
+
+    private int getPrize(WinningEnum winningEnum, WinningStats winningStats) {
+        if (winningEnum == WinningEnum.NONE) {
+            return 0;
+        }
+        return winningStats.getWinningStats().get(winningEnum.getRank()) * winningEnum.getPrize();
     }
 }

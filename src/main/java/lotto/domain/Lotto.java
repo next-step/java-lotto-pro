@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.consts.LottoNumberConst;
 import lotto.consts.WinningEnum;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validationCheck(numbers);
+        Collections.sort(numbers);
         this.numbers = numbers;
     }
 
@@ -35,6 +37,23 @@ public class Lotto {
     }
 
     public int getWinningResult(WinningNumbers winningNumbers) {
+        int count = 0;
+        for (int number : numbers)
+            count += isContain(number, winningNumbers.getNumbers());
+        if (count == LottoNumberConst.LOTTO_NUMBER_SIZE)
+            return WinningEnum.FIRST.getRank();
+        if (count == LottoNumberConst.LOTTO_NUMBER_SIZE - 1)
+            return WinningEnum.THIRD.getRank();
+        if (count == LottoNumberConst.LOTTO_NUMBER_SIZE - 2)
+            return WinningEnum.FOURTH.getRank();
+        if (count == LottoNumberConst.LOTTO_NUMBER_SIZE - 3)
+            return WinningEnum.FIFTH.getRank();
         return WinningEnum.NONE.getRank();
+    }
+
+    private int isContain(int number, List<Integer> winningNumbers) {
+        if (winningNumbers.contains(number))
+            return 1;
+        return 0;
     }
 }

@@ -1,8 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import lotto.consts.LottoNumberConst;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
 
@@ -10,8 +12,12 @@ public class Lottos {
 
     public Lottos(Price price) {
         lottos = new ArrayList<>();
-        for (int i = 0; i < price.getNumberOfLotto(); i++)
-            lottos.add(createLotto());
+        List<Integer> numbers = IntStream.rangeClosed(LottoNumberConst.START_NUMBER, LottoNumberConst.END_NUMBER).boxed().collect(Collectors.toList());
+
+        for (int i = 0; i < price.getNumberOfLotto(); i++) {
+            Collections.shuffle(numbers);
+            lottos.add(new Lotto(new ArrayList<>(numbers.subList(0, LottoNumberConst.LOTTO_NUMBER_SIZE))));
+        }
     }
 
     /**
@@ -23,10 +29,5 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
-    }
-
-    private Lotto createLotto() {
-        List<Integer> numbers = new ArrayList<>(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        return new Lotto(numbers);
     }
 }
