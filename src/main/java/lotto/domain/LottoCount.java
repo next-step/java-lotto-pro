@@ -7,6 +7,7 @@ import lotto.exception.LottoException;
 
 public class LottoCount {
     private static final int MIN_COUNT = 0;
+
     private final long count;
 
     public LottoCount(long count) {

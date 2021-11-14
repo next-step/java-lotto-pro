@@ -12,6 +12,16 @@ public class WinnerTicket {
         this.bonusNumber = bonusNumber;
     }
 
+    public LottoResults calculateResult(LottoTickets lottoTickets) {
+        return new LottoResults(lottoTickets.getLottoTicketList().stream()
+            .map(lottoTicket -> lottoTicket.calculateResult(this.lottoTicket, containsBonus(lottoTicket)))
+            .collect(Collectors.toList()));
+    }
+
+    private boolean containsBonus(LottoTicket lottoTicket) {
+        return lottoTicket.getLottoNumbers().stream().anyMatch(bonusNumber::isBonus);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -28,15 +38,5 @@ public class WinnerTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoTicket, bonusNumber);
-    }
-
-    public LottoResults calculateResult(LottoTickets lottoTickets) {
-        return new LottoResults(lottoTickets.getLottoTicketList().stream()
-            .map(lottoTicket -> lottoTicket.calculateResult(this.lottoTicket, containsBonus(lottoTicket)))
-            .collect(Collectors.toList()));
-    }
-
-    private boolean containsBonus(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoNumbers().stream().anyMatch(bonusNumber::isBonus);
     }
 }

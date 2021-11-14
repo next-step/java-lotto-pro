@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoStatistics {
-    private Map<LottoResult, Long> resultCounts;
-    private EarningRate earningRate;
+    private final Map<LottoResult, Long> resultCounts;
+    private final EarningRate earningRate;
 
     public LottoStatistics(Map<LottoResult, Long> resultCounts, EarningRate earningRate) {
         this.resultCounts = resultCounts;

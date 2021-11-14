@@ -13,13 +13,13 @@ public enum LottoResult {
     FIFTH(3, new LottoMoney(5_000)),
     MISS(0, new LottoMoney(0));
 
-    private final int correctCount;
-    private final LottoMoney lottoMoney;
-
     private static final Map<Integer, LottoResult> countToLottoResultMap =
         Arrays.stream(values())
             .filter(lottoResult -> lottoResult != MISS && lottoResult != SECOND)
             .collect(Collectors.toMap(lottoResult -> lottoResult.correctCount, Function.identity()));
+
+    private final int correctCount;
+    private final LottoMoney lottoMoney;
 
     LottoResult(int correctCount, LottoMoney lottoMoney) {
         this.correctCount = correctCount;

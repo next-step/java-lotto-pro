@@ -10,7 +10,7 @@ import lotto.exception.LottoException;
 public class LottoTicket {
     public static final int LOTTO_SIZE = 6;
 
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<Integer> numbers) {
         checkValidSize(numbers);

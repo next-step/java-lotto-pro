@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class EarningRate {
     public static final EarningRate ZERO = new EarningRate(BigDecimal.ZERO);
-
     private static final int DECIMAL_SCALE = 2;
+
     private final BigDecimal rate;
 
     public EarningRate(BigDecimal rate) {

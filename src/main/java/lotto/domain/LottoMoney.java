@@ -12,7 +12,7 @@ public class LottoMoney {
     private static final int ZERO_SIZE = 0;
     private static final int MIN_MONEY = 0;
 
-    private long money;
+    private final long money;
 
     public LottoMoney(long money) {
         this.money = money;
@@ -43,10 +43,6 @@ public class LottoMoney {
         return number < MIN_MONEY;
     }
 
-    public long getMoney() {
-        return money;
-    }
-
     public static EarningRate calculateEarningRate(List<LottoMoney> lottoMonies) {
         if (lottoMonies.size() == ZERO_SIZE) {
             return EarningRate.ZERO;
@@ -57,6 +53,10 @@ public class LottoMoney {
             .sum();
 
         return new EarningRate(BigDecimal.valueOf((double)sum / lottoMonies.size() / LOTTO_PRICE));
+    }
+
+    public long getMoney() {
+        return money;
     }
 
     public LottoCount calculateLottoCount() {
