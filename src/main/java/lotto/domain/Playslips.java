@@ -15,27 +15,36 @@ public class Playslips {
         this.playslips = new ArrayList<>(playslips);
     }
 
-    public Result checkResult(PickedNumbers winningNumbers) {
+    public Result checkResult(PickedNumbers winningNumbers, Number bonusNumber) {
         int numberOfFirstPrizes = 0;
         int numberOfSecondPrizes = 0;
-        int numberOfThridPrizes = 0;
+        int numberOfThirdPrizes = 0;
         int numberOfFourthPrizes = 0;
+        int numberOfFifthPrizes = 0;
         for (int i = 0; i < playslips.size(); i++) {
-            numberOfFirstPrizes += contains(winningNumbers, Prize.FIRST.getMatchCount(), i);
-            numberOfSecondPrizes += contains(winningNumbers, Prize.SECOND.getMatchCount(), i);
-            numberOfThridPrizes += contains(winningNumbers, Prize.THIRD.getMatchCount(), i);
-            numberOfFourthPrizes += contains(winningNumbers, Prize.FOURTH.getMatchCount(), i);
+            numberOfFirstPrizes +=
+                contains(playslips.get(i), winningNumbers, Prize.FIRST.getMatchCount());
+            numberOfSecondPrizes +=
+                containsSecondPrize(playslips.get(i), winningNumbers, bonusNumber);
+            numberOfThirdPrizes +=
+                contains(playslips.get(i), winningNumbers, Prize.THIRD.getMatchCount());
+            numberOfFourthPrizes +=
+                contains(playslips.get(i), winningNumbers, Prize.FOURTH.getMatchCount());
+            numberOfFifthPrizes +=
+                contains(playslips.get(i), winningNumbers, Prize.FIFTH.getMatchCount());
         }
         final int numberOfNoPrizes = size()
             - numberOfFirstPrizes
             - numberOfSecondPrizes
-            - numberOfThridPrizes
-            - numberOfFourthPrizes;
+            - numberOfThirdPrizes
+            - numberOfFourthPrizes
+            - numberOfFifthPrizes;
         return new Result(
             numberOfFirstPrizes,
             numberOfSecondPrizes,
-            numberOfThridPrizes,
+            numberOfThirdPrizes,
             numberOfFourthPrizes,
+            numberOfFifthPrizes,
             numberOfNoPrizes
         );
     }
@@ -48,8 +57,16 @@ public class Playslips {
         return playslips.size();
     }
 
-    private int contains(PickedNumbers winningNumbers, int x, int i) {
-        final Playslip ithPlayslip = playslips.get(i);
-        return ithPlayslip.contains(winningNumbers, x) ? NUMBER_CONTAINED : NUMBER_NOT_CONTAINED;
+    private int contains(Playslip playslip, PickedNumbers winningNumbers, int x) {
+        return playslip.contains(winningNumbers, x) ? NUMBER_CONTAINED : NUMBER_NOT_CONTAINED;
+    }
+
+    private int containsSecondPrize(
+        Playslip playslip,
+        PickedNumbers winningNumbers,
+        Number bonusNumber
+    ) {
+        return contains(playslip, winningNumbers, Prize.SECOND.getMatchCount()) == NUMBER_CONTAINED
+            && playslip.contains(bonusNumber) ? NUMBER_CONTAINED : NUMBER_NOT_CONTAINED;
     }
 }

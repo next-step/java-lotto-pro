@@ -51,15 +51,15 @@ public class PickedNumbers {
         return numberOfMatchingNumbers == x;
     }
 
+    public int contains(Number number) {
+        return pickedNumbers.contains(number) ? NUMBER_CONTAINED : NUMBER_NOT_CONTAINED;
+    }
+
     public String asString() {
         return pickedNumbers
             .stream()
             .map(Number::getValue)
             .collect(Collectors.toList())
             .toString();
-    }
-
-    private int contains(Number pickedNumber) {
-        return pickedNumbers.contains(pickedNumber) ? NUMBER_CONTAINED : NUMBER_NOT_CONTAINED;
     }
 }

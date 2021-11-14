@@ -19,7 +19,8 @@ public class ResultTest {
         "5.0:1,2,3,14,15,16",
         "50.0:1,2,3,4,15,16",
         "1500.0:1,2,3,4,5,16",
-        "2000000.0:1,2,3,4,5,6"
+        "31500.0:1,2,3,4,5,7",
+        "2000000.0:1,2,3,4,5,6",
     }, delimiter = ':')
     @DisplayName("로또 번호 갯수가 일치하는지 확인할 수 있다.")
     void m(final double expected, final String numbers) {
@@ -32,7 +33,7 @@ public class ResultTest {
             )
         );
         final Playslips playslips = new Playslips(Arrays.asList(playslip));
-        final Result result = playslips.checkResult(Fixtures.winningNumbers);
+        final Result result = playslips.checkResult(Fixtures.winningNumbers, Fixtures.bonusNumber);
         assertThat(result.calculateReturnOnInvestment()).isEqualTo(expected);
     }
 }

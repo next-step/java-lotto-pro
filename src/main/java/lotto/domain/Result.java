@@ -12,12 +12,14 @@ public class Result {
         final int numberOfSecondPrizes,
         final int numberOfThirdPrizes,
         final int numberOfFourthPrizes,
+        final int numberOfFifthPrizes,
         final int numberOfNoPrizes
     ) {
         prizes.put(Prize.FIRST, numberOfFirstPrizes);
         prizes.put(Prize.SECOND, numberOfSecondPrizes);
         prizes.put(Prize.THIRD, numberOfThirdPrizes);
         prizes.put(Prize.FOURTH, numberOfFourthPrizes);
+        prizes.put(Prize.FIFTH, numberOfFifthPrizes);
         prizes.put(Prize.NONE, numberOfNoPrizes);
     }
 
@@ -37,6 +39,10 @@ public class Result {
         return prizes.get(Prize.FOURTH);
     }
 
+    public int getNumberOfFifthPrizes() {
+        return prizes.get(Prize.FIFTH);
+    }
+
     public double calculateReturnOnInvestment() {
         final long totalPrize = calculateTotalPrizeAmount().getValue();
         final int numberOfPlayslips = prizes.values().stream().mapToInt(Integer::intValue).sum();
@@ -48,7 +54,8 @@ public class Result {
         return calculateFirstPrizeAmount()
             .add(calculateSecondPrizeAmount())
             .add(calculateThirdPrizeAmount())
-            .add(calculateFourthPrizeAmount());
+            .add(calculateFourthPrizeAmount())
+            .add(calculateFifthPrizeAmount());
     }
 
     private Price calculateFirstPrizeAmount() {
@@ -65,5 +72,9 @@ public class Result {
 
     private Price calculateFourthPrizeAmount() {
         return Prize.FOURTH.getAmount().multiply(getNumberOfFourthPrizes());
+    }
+
+    private Price calculateFifthPrizeAmount() {
+        return Prize.FIFTH.getAmount().multiply(getNumberOfFifthPrizes());
     }
 }
