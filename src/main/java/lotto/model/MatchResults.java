@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MatchResults {
@@ -12,7 +13,7 @@ public class MatchResults {
   public long getTotalWinningAmount() {
     long sum = 0;
     for (MatchResult matchResult : matchResults) {
-      sum += ((long) matchResult.getMatchCount() * matchResult.getLottoRank().getMoney());
+      sum += matchResult.calculateWinningAmount();
     }
     return sum;
   }
@@ -22,6 +23,6 @@ public class MatchResults {
   }
 
   public List<MatchResult> getMatchResults() {
-    return matchResults;
+    return new ArrayList<>(matchResults);
   }
 }

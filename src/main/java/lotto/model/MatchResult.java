@@ -13,12 +13,17 @@ public class MatchResult {
     this.matchCount = matchCount;
   }
 
-  public void addCount() {
-    this.matchCount = matchCount.increment();
+
+  public void addMatchCount(int matchCount) {
+    this.matchCount = new MatchCount(matchCount);
   }
 
   public boolean isWin(int rank) {
     return lottoRank.getRank() == rank;
+  }
+
+  public long calculateWinningAmount() {
+    return ((long) matchCount.getMatchCount() * lottoRank.getMoney());
   }
 
   public LottoRank getLottoRank() {

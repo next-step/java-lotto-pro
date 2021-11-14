@@ -20,7 +20,7 @@ public class LottoTicketTest {
   @DisplayName("종합 당첨 결과를 반환한다.")
   @Test
   void totalWinningResults() {
-    LottoBuyer buyer = LottoBuyer.buy(new PurchaseAmount(14000),
+    LottoBuyer buyer = LottoBuyer.buy(PurchaseAmount.valueOf(14000),
       () -> new LottoNumbers(asList(lottoNumber)));
     int[] winningNumber = {1, 2, 3, 22, 33, 44};
     MatchResults matchResults = buyer.matchWithWinningLotto(new LottoNumbers(asList(winningNumber)));

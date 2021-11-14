@@ -2,10 +2,10 @@ package lotto.view;
 
 import lotto.model.LottoNumbers;
 import lotto.model.PurchaseAmount;
-import lotto.util.InputUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import static lotto.constants.ErrorMessage.*;
@@ -14,7 +14,8 @@ import static lotto.view.OutputView.printInputWinningLottoNumbersGuideMessage;
 
 public class InputView {
   private static final String SPLIT_DELIMITER = ",";
-  private static Pattern numberPattern = Pattern.compile("\\d+");
+  private static final Pattern numberPattern = Pattern.compile("\\d+");
+  private static final Scanner SCANNER = new Scanner(System.in);
 
   public static PurchaseAmount inputPurchaseAmount() {
     printInputPurchaseAmountGuideMessage();
@@ -27,11 +28,9 @@ public class InputView {
   }
 
   private static PurchaseAmount inputPurchaseAmountAndVerify() {
-    String input = InputUtils.readLine();
+    String input = SCANNER.nextLine();
     try {
-      checkNullOrEmpty(input);
-      checkStringIsNumber(input);
-      return new PurchaseAmount(parseInt(input));
+      return PurchaseAmount.valueOf(parseInt(input));
     } catch (Exception e) {
       System.out.println(e.getMessage());
       return inputPurchaseAmountAndVerify();
@@ -39,7 +38,7 @@ public class InputView {
   }
 
   private static LottoNumbers inputWinningLottoNumbersAndVerify() {
-    String input = InputUtils.readLine();
+    String input = SCANNER.nextLine();
     try {
       String[] splitedString = getSplitedString(input);
       List<Integer> lottoNumbers = getLottoNumbers(splitedString);
@@ -62,8 +61,7 @@ public class InputView {
   private static String[] getSplitedString(String input) {
     checkNullOrEmpty(input);
     checkSplitByComma(input);
-    String[] splitedString = input.split(SPLIT_DELIMITER);
-    return splitedString;
+    return input.split(SPLIT_DELIMITER);
   }
 
   private static void checkSplitedStringIsNumber(String[] splitedString) {

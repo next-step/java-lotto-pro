@@ -3,10 +3,11 @@ package lotto.constants;
 import java.util.Arrays;
 
 public enum LottoRank {
-  THREE_MATCHES(3, 5000),
-  FOUR_MATCHES(4, 50000),
-  FIVE_MATCHES(5, 1500000),
-  SIX_MATCHES(6, 2000000000);
+  FIRST(6, 2_000_000_000),
+  SECOND(5, 30_000_000),
+  THIRD(5, 1_500_000),
+  FOURTH(4, 50_000),
+  FIFTH(3, 5_000);
 
   private final int rank;
   private final int money;

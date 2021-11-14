@@ -7,32 +7,39 @@ import lotto.generator.LottoGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.constants.ErrorMessage.INPUT_EMPTY_ERROR_MESSAGE;
+
 public class PurchaseAmount {
   private final int purchaseAmount;
-  public PurchaseAmount(int purchaseAmount) {
-    checkPurchaseAmount(purchaseAmount);
 
+  private PurchaseAmount(int purchaseAmount) {
     this.purchaseAmount = purchaseAmount;
   }
 
-  private void checkPurchaseAmount(int purchaseAmount) {
+  public static PurchaseAmount valueOf(int purchaseAmount) {
+    checkPurchaseAmount(purchaseAmount);
+
+    return new PurchaseAmount(purchaseAmount);
+  }
+
+  private static void checkPurchaseAmount(int purchaseAmount) {
     checkLowerThanLottoPrice(purchaseAmount);
   }
 
-  private void checkLowerThanLottoPrice(int purchaseAmount) {
+  private static void checkLowerThanLottoPrice(int purchaseAmount) {
     if (purchaseAmount < Lotto.LOTTO_PRICE) {
       throw new RuntimeException(ErrorMessage.PURCHASE_AMOUNT_LOWER_ERROR_MESSAGE);
     }
   }
 
-  public List<LottoNumbers> buyLottos(LottoGenerator lottoGenerator) {
+  public LottoTicket buyLottoTicket(LottoGenerator lottoGenerator) {
     int lottoCount = buyLottoCount();
-    List<LottoNumbers> lottoTicket = new ArrayList<>();
+    List<LottoNumbers> lottoList = new ArrayList<>();
     for (int i = 0; i < lottoCount; i++) {
-      lottoTicket.add(lottoGenerator.generate());
+      lottoList.add(lottoGenerator.generate());
     }
 
-    return lottoTicket;
+    return new LottoTicket(lottoList);
   }
 
   public int buyLottoCount() {

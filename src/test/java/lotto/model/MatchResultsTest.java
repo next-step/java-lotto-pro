@@ -12,11 +12,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MatchResultsTest {
   int[] buyerLottoNumber;
-  LottoBuyer buyer;
+  PurchaseAmount purchaseAmount;
+  LottoTicket lottoTicket;
   @BeforeEach
   void setUp() {
     buyerLottoNumber = new int[]{1, 2, 22, 33, 7};
-    buyer = LottoBuyer.buy(new PurchaseAmount(5000), () -> new LottoNumbers(asList(buyerLottoNumber)));
+    purchaseAmount = PurchaseAmount.valueOf(5000);
+    lottoTicket = purchaseAmount.buyLottoTicket(() -> new LottoNumbers(asList(buyerLottoNumber)));
   }
 
   @DisplayName("총 당첨 금액을 반환한다.")
@@ -24,9 +26,9 @@ class MatchResultsTest {
   void getTotalWinningAmount() {
     int[] winningNumber = {1, 2, 3, 22, 33, 44};
 
-    MatchResults matchResults = buyer.matchWithWinningLotto(new LottoNumbers(asList(winningNumber)));
+    MatchResults matchResults = lottoTicket.totalWinningResults(new LottoNumbers(asList(winningNumber)));
 
-    assertThat(buyer.buyCount() * LottoRank.FOUR_MATCHES.getMoney()).isEqualTo(matchResults.getTotalWinningAmount());
+    assertThat(purchaseAmount.buyLottoCount() * LottoRank.FOURTH.getMoney()).isEqualTo(matchResults.getTotalWinningAmount());
   }
 
   @DisplayName("수익률을 계산한다. (당첨금액 / 구입금액)")
@@ -34,9 +36,9 @@ class MatchResultsTest {
   void calculateYield() {
     int[] winningNumber = {1, 2, 3, 22, 33, 44};
 
-    MatchResults matchResults = buyer.matchWithWinningLotto(new LottoNumbers(asList(winningNumber)));
+    MatchResults matchResults = lottoTicket.totalWinningResults(new LottoNumbers(asList(winningNumber)));
 
-    assertThat(matchResults.calculateYield(buyer.getPurchaseAmount())).isEqualTo(50);
+    assertThat(matchResults.calculateYield(purchaseAmount)).isEqualTo(50);
   }
 
   private List<Integer> asList(int[] numbers) {

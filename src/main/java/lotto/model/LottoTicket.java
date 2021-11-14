@@ -14,25 +14,30 @@ public class LottoTicket {
 
   public MatchResults totalWinningResults(LottoNumbers winningLottoNumbers) {
     List<MatchResult> matchResults = new ArrayList<>();
-    for (int i = LottoRank.THREE_MATCHES.getRank(); i <= LottoRank.SIX_MATCHES.getRank(); i++) {
+    for (int i = LottoRank.FIFTH.getRank(); i <= LottoRank.FIRST.getRank(); i++) {
       MatchResult matchResult = new MatchResult(LottoRank.valueOf(i), new MatchCount(0));
-      countingWinningResultsByOrder(winningLottoNumbers, matchResult);
+      matchResult.addMatchCount(countingWinningResultsByOrder(winningLottoNumbers, matchResult));
       matchResults.add(matchResult);
     }
 
     return new MatchResults(matchResults);
   }
 
-  private void countingWinningResultsByOrder(LottoNumbers winningLottoNumbers, MatchResult matchResult) {
+  private int countingWinningResultsByOrder(LottoNumbers winningLottoNumbers, MatchResult matchResult) {
+    int count = 0;
     for (LottoNumbers lottoNumbers : lottoTicket) {
-      countMatching(winningLottoNumbers, matchResult, lottoNumbers);
+      count += countMatching(winningLottoNumbers, matchResult, lottoNumbers);
     }
+
+    return count;
   }
 
-  private void countMatching(LottoNumbers winningLottoNumbers, MatchResult matchResult, LottoNumbers lottoNumbers) {
+  private int countMatching(LottoNumbers winningLottoNumbers, MatchResult matchResult, LottoNumbers lottoNumbers) {
     if (matchResult.isWin(lottoNumbers.countMatchNumber(winningLottoNumbers))) {
-      matchResult.addCount();
+      return 1;
     }
+
+    return 0;
   }
 
   @Override
