@@ -39,7 +39,7 @@ public class LottoManual {
 
     private void manualLottoMoneyExcessCheck(final int lottoManualPurchaseCount, final Money money) {
         if (money.divide() - lottoManualPurchaseCount < 0) {
-            throw new IllegalArgumentException("수동으로 구매할 로또 수는 로또 구입금액을 초과할 수 없습니다.");
+            throw new IllegalArgumentException("수동으로 구매할 로또 수가 로또 구입금액을 초과하였습니다.");
         }
     }
 
