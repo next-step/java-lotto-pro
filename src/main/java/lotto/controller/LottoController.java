@@ -4,18 +4,27 @@ import lotto.domain.LottoIssue;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPurchase;
+import lotto.domain.LottoPurchaseType;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinningNumbers;
 
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import static lotto.view.InputView.inputBonusNumber;
+import static lotto.view.InputView.inputLottoNumbers;
+import static lotto.view.InputView.inputManualPurchaseQuantity;
 import static lotto.view.InputView.inputPurchaseAmount;
-import static lotto.view.InputView.inputWinningNumbers;
 import static lotto.view.OutputView.printInputLottoBonusNumber;
+import static lotto.view.OutputView.printInputManualLottoNumbers;
 import static lotto.view.OutputView.printInputWinningNumbers;
 import static lotto.view.OutputView.printLottoNumber;
+import static lotto.view.OutputView.printManualPurchaseQuantity;
 import static lotto.view.OutputView.printPurchaseAmount;
 import static lotto.view.OutputView.printPurchaseQuantity;
+import static lotto.view.OutputView.printRateOfReturn;
 import static lotto.view.OutputView.printWinningStatistics;
 
 public class LottoController {
@@ -23,7 +32,9 @@ public class LottoController {
     public void run() {
         LottoPurchase lottoPurchase = inputLottoPurchase();
 
-        LottoTicket lottoTicket = LottoIssue.ofAuto(lottoPurchase.getPurchaseQuantity());
+        LottoTicket lottoTicket = LottoIssue.of(lottoPurchase, inputManualLottoNumbers(lottoPurchase));
+
+        printPurchaseQuantity(lottoPurchase);
         printLottoNumber(lottoTicket);
 
         LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(inputLottoWinningNumbers(), inputLottoBonusNumber());
@@ -31,25 +42,42 @@ public class LottoController {
         play(lottoPurchase, lottoTicket, lottoWinningNumbers);
     }
 
-    private LottoNumber inputLottoBonusNumber() {
-        printInputLottoBonusNumber();
-        return new LottoNumber(inputBonusNumber());
+    private void play(LottoPurchase lottoPurchase, LottoTicket lottoTicket, LottoWinningNumbers lottoWinningNumbers) {
+        LottoResult lottoResult = LottoResult.of(lottoPurchase, lottoTicket, lottoWinningNumbers);
+        printWinningStatistics(lottoResult);
+        printRateOfReturn(lottoResult.getRateOfReturn());
     }
 
-    private void play(LottoPurchase lottoPurchase, LottoTicket lottoTicket, LottoWinningNumbers lottoWinningNumbers) {
-        LottoResult lottoResult = new LottoResult(lottoPurchase, lottoTicket, lottoWinningNumbers);
-        printWinningStatistics(lottoResult);
+    private Map<Integer, List<Integer>> inputManualLottoNumbers(LottoPurchase lottoPurchase) {
+        Map<Integer, List<Integer>> inputManualLottoNumbers = new TreeMap<>();
+        if (lottoPurchase.findPurchaseQuantity(LottoPurchaseType.MANUAL) != 0) {
+            printInputManualLottoNumbers();
+        }
+
+        for (int i = 0; i < lottoPurchase.findPurchaseQuantity(LottoPurchaseType.MANUAL); i++) {
+            inputManualLottoNumbers.put(i, inputLottoNumbers());
+        }
+
+        return inputManualLottoNumbers;
+    }
+
+    private LottoNumber inputLottoBonusNumber() {
+        printInputLottoBonusNumber();
+        return LottoNumber.from(inputBonusNumber());
     }
 
     private LottoNumbers inputLottoWinningNumbers() {
         printInputWinningNumbers();
-        return new LottoNumbers(inputWinningNumbers());
+        return new LottoNumbers(inputLottoNumbers());
     }
 
     private LottoPurchase inputLottoPurchase() {
         printPurchaseAmount();
         LottoPurchase lottoPurchase = new LottoPurchase(inputPurchaseAmount());
-        printPurchaseQuantity(lottoPurchase.getPurchaseQuantity());
+
+        printManualPurchaseQuantity();
+        lottoPurchase.buyManualQuantity(inputManualPurchaseQuantity());
+
         return lottoPurchase;
     }
 

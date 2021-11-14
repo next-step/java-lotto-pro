@@ -14,15 +14,15 @@ public class LottoNumberTest {
     @ValueSource(ints = {1, 45})
     @DisplayName("로또번호가 유효한 번호일 경우")
     public void 로또번호가_1과_45_사이이다(int input) {
-        LottoNumber lottoNumber = new LottoNumber(input);
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(input));
+        LottoNumber lottoNumber = LottoNumber.from(input);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.from(input));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     @DisplayName("로또번호가 유효한 번호가 아닐 경우")
     public void 로또번호가_1과_45_사이가_아니다(int input) {
-        ThrowingCallable throwingCallable = () -> new LottoNumber(input);
+        ThrowingCallable throwingCallable = () -> LottoNumber.from(input);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(throwingCallable);
