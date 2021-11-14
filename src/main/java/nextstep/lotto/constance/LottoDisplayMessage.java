@@ -5,6 +5,7 @@ public class LottoDisplayMessage {
     public static final String PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해주세요.";
     public static final String PURCHASE_LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
     public static final String LAST_WEEK_LOTTO_WIN_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     public static final String WINNING_STAT_MESSAGE = "당첨 통계";
     public static final String DIVIDE_MESSAGE = "---------";
     public static final String MATCH_COUNT_PREFIX_MESSAGE = "개 일치 (";

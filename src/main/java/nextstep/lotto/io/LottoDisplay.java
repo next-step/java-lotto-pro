@@ -1,5 +1,6 @@
 package nextstep.lotto.io;
 
+import nextstep.lotto.domain.BonusBall;
 import nextstep.lotto.domain.Lotto;
 import nextstep.lotto.domain.LottoCount;
 import nextstep.lotto.domain.LottoNumber;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import static nextstep.lotto.constance.LottoDisplayMessage.BONUS_BALL_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.DIVIDE_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.LAST_WEEK_LOTTO_WIN_NUMBERS_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.LOSS_STAT_MESSAGE;
@@ -60,7 +62,8 @@ public class LottoDisplay {
     public static void printAutoLottoResult(PurchaseLotto purchaseLotto) {
 
         for (Lotto lotto : purchaseLotto) {
-            System.out.println(PURCHASE_LOTTO_VIEW_PREFIX + lotto + PURCHASE_LOTTO_VIEW_POSTFIX);
+            List<LottoNumber> lottoNumbers = lotto.getLottoNumbers().getLottoNumbers();
+            System.out.println(PURCHASE_LOTTO_VIEW_PREFIX + StringUtils.join(lottoNumbers, PURCHASE_LOTTO_VIEW_MIDDLE) + PURCHASE_LOTTO_VIEW_POSTFIX);
         }
         System.out.println();
     }
@@ -76,7 +79,9 @@ public class LottoDisplay {
                     .collect(Collectors.toList());
 
             Lotto winningLotto = new Lotto(new LottoNumbers(winningLottoNumbers));
-            return new WinningLotto(winningLotto);
+            BonusBall bonusBall = inputBonusBallLotto(winningLotto);
+
+            return new WinningLotto(winningLotto, bonusBall);
 
         } catch (NumberFormatException e) {
             System.out.println(ERROR + INVALID_WINNING_LOTTO_NUMBER_MESSAGE);
@@ -84,6 +89,23 @@ public class LottoDisplay {
         } catch (LottoRuntimeException e) {
             System.out.println(ERROR + e.getMessage());
             return inputLastWeekWinningLotto();
+        }
+    }
+
+    public static BonusBall inputBonusBallLotto(Lotto winningLotto) {
+
+        System.out.println(BONUS_BALL_MESSAGE);
+
+        try {
+            String inputBonusBall = scanner.nextLine();
+            LottoNumber bonusBallNumber = new LottoNumber(Integer.parseInt(inputBonusBall));
+            return new BonusBall(bonusBallNumber, winningLotto);
+        } catch (NumberFormatException e) {
+            System.out.println(ERROR + INVALID_WINNING_LOTTO_NUMBER_MESSAGE);
+            return inputBonusBallLotto(winningLotto);
+        } catch (LottoRuntimeException e) {
+            System.out.println(ERROR + e.getMessage());
+            return inputBonusBallLotto(winningLotto);
         }
     }
 

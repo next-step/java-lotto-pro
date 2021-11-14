@@ -11,48 +11,47 @@ import static nextstep.lotto.constance.LottoDisplayMessage.MATCH_COUNT_PREFIX_ME
 
 public class MatchCount implements Comparable<MatchCount> {
 
-    private final Integer index;
     private final LottoWinningPrice lottoWinningPrice;
     private final Integer matchCount;
 
-    public MatchCount(Integer index, Integer matchCount) {
-        this.index = index;
-        this.lottoWinningPrice = LottoWinningPrice.winningPrice(index);
-        this.matchCount = matchCount;
-    }
-
-    public MatchCount(Integer index, LottoWinningPrice lottoWinningPrice, Integer matchCount) {
-        this.index = index;
+    public MatchCount(LottoWinningPrice lottoWinningPrice, Integer matchCount) {
         this.lottoWinningPrice = lottoWinningPrice;
         this.matchCount = matchCount;
     }
 
     public MatchCount addToMatchCount() {
-        return new MatchCount(index, matchCount + 1);
+        return new MatchCount(lottoWinningPrice, matchCount + 1);
     }
 
     public Long mulMatchCountAndPrice() {
         return lottoWinningPrice.price * matchCount;
     }
 
-    public static Map<Integer, MatchCount> initMatchCountCache() {
+    public static Map<LottoWinningPrice, MatchCount> initMatchCountCache() {
 
-        Map<Integer, MatchCount> matchCountMap = new HashMap<>();
+        Map<LottoWinningPrice, MatchCount> matchCountMap = new HashMap<>();
+
         for (LottoWinningPrice lottoWinningPrice : LottoWinningPrice.values()) {
-            MatchCount matchCount = new MatchCount(lottoWinningPrice.index, 0);
-            matchCountMap.put(lottoWinningPrice.index, matchCount);
+            initLottoWinningPriceExceptNone(matchCountMap, lottoWinningPrice);
         }
         return matchCountMap;
     }
 
+    private static void initLottoWinningPriceExceptNone(Map<LottoWinningPrice, MatchCount> matchCountMap, LottoWinningPrice lottoWinningPrice) {
+        if (lottoWinningPrice != LottoWinningPrice.NONE) {
+            MatchCount matchCount = new MatchCount(lottoWinningPrice, 0);
+            matchCountMap.put(lottoWinningPrice, matchCount);
+        }
+    }
+
     @Override
     public int compareTo(MatchCount that) {
-        return this.index - that.index;
+        return this.lottoWinningPrice.matchCount - that.lottoWinningPrice.matchCount;
     }
 
     @Override
     public String toString() {
-        return index +
+        return lottoWinningPrice.matchCount +
                 MATCH_COUNT_PREFIX_MESSAGE +
                 lottoWinningPrice.price +
                 MATCH_COUNT_MIDDLE_MESSAGE +
@@ -65,12 +64,12 @@ public class MatchCount implements Comparable<MatchCount> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MatchCount that = (MatchCount) o;
-        return Objects.equals(index, that.index) && lottoWinningPrice == that.lottoWinningPrice && Objects.equals(matchCount, that.matchCount);
+        return lottoWinningPrice == that.lottoWinningPrice && Objects.equals(matchCount, that.matchCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(index, lottoWinningPrice, matchCount);
+        return Objects.hash(lottoWinningPrice, matchCount);
     }
 
     enum LottoWinningPrice {
@@ -81,17 +80,18 @@ public class MatchCount implements Comparable<MatchCount> {
         MATCH_6_COUNT(6, 2_000_000_000L),
         NONE(Integer.MIN_VALUE, Long.MIN_VALUE);
 
-        private final Integer index;
+
+        private final Integer matchCount;
         private final Long price;
 
-        LottoWinningPrice(Integer index, Long price) {
-            this.index = index;
+        LottoWinningPrice(Integer matchCount, Long price) {
+            this.matchCount = matchCount;
             this.price = price;
         }
 
-        public static LottoWinningPrice winningPrice(Integer index) {
+        public static LottoWinningPrice winningPrice(Integer matchCount) {
             return Arrays.stream(LottoWinningPrice.values())
-                    .filter(i -> i.index.equals(index))
+                    .filter(i -> i.matchCount.equals(matchCount))
                     .findFirst()
                     .orElse(NONE);
         }

@@ -14,10 +14,10 @@ public class LottoTest {
     @DisplayName("당첨된 번호와 내가 산 로또 번호가 몇개 매칭이 되었는지 테스트")
     @ParameterizedTest
     @MethodSource("provideParameter")
-    public void matchWithPurchaseLottoCountTest(Lotto winningNumbers, Lotto purchased, Integer expected) {
+    public void matchWithPurchaseLottoCountTest(Lotto winningNumbers, Lotto purchased, BonusBall bonusBall, Integer expected) {
 
         // when
-        Integer result = winningNumbers.matchWithPurchaseLottoCount(purchased);
+        Integer result = winningNumbers.matchWithPurchaseLottoCount(purchased, bonusBall);
 
         // then
         Assertions.assertThat(result).isEqualTo(expected);
@@ -25,17 +25,29 @@ public class LottoTest {
 
 
     private static Stream<Arguments> provideParameter() {
+
+        Lotto winningLotto1 = new Lotto(new LottoNumbers(
+                Arrays.asList(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6))
+        ));
+
+        Lotto winningLotto2 = new Lotto(new LottoNumbers(
+                Arrays.asList(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6))
+        ));
+
         return Stream.of(
-                Arguments.of(
-                        new Lotto(new LottoNumbers(
-                                Arrays.asList(
-                                        new LottoNumber(1),
-                                        new LottoNumber(2),
-                                        new LottoNumber(3),
-                                        new LottoNumber(4),
-                                        new LottoNumber(5),
-                                        new LottoNumber(6))
-                        )),
+                Arguments.of(winningLotto1,
                         new Lotto(new LottoNumbers(
                                 Arrays.asList(
                                         new LottoNumber(1),
@@ -46,18 +58,10 @@ public class LottoTest {
                                         new LottoNumber(6)
                                 ))
                         ),
+                        new BonusBall(new LottoNumber(10), winningLotto1),
                         6
                 ),
-                Arguments.of(
-                        new Lotto(new LottoNumbers(
-                                Arrays.asList(
-                                        new LottoNumber(1),
-                                        new LottoNumber(2),
-                                        new LottoNumber(3),
-                                        new LottoNumber(4),
-                                        new LottoNumber(5),
-                                        new LottoNumber(6))
-                        )),
+                Arguments.of(winningLotto2,
                         new Lotto(new LottoNumbers(
                                 Arrays.asList(
                                         new LottoNumber(1),
@@ -68,7 +72,8 @@ public class LottoTest {
                                         new LottoNumber(9)
                                 ))
                         ),
-                        3
+                        new BonusBall(new LottoNumber(7), winningLotto2),
+                        4
                 )
         );
     }
