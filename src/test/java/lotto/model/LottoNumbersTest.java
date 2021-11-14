@@ -23,7 +23,7 @@ public class LottoNumbersTest {
     LottoNumbers machineLottoNumbers = new LottoNumbers(asList(new int[]{1, 2, 3, 5, 10, 11}));
     LottoNumbers buyerLotto = new LottoNumbers(asList(lottoData));
 
-    assertThat(buyerLotto.countMatchNumber(machineLottoNumbers)).isEqualTo(4);
+    assertThat(buyerLotto.countOfMatch(machineLottoNumbers)).isEqualTo(4);
   }
 
   @DisplayName("로또 번호를 문자열 형태로 반환한다.")
