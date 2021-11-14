@@ -9,6 +9,7 @@ public enum OutputMessage {
     LOTTO_TICKET_FORMAT("[%s]"),
     LOTTO_RESULTS_FORMAT("%s- %d개"),
     LOTTO_RESULT_FORMAT("%d개 일치 (%d원)"),
+    LOTTO_BONUS_RESULT_FORMAT("%d개 일치, 보너스 볼 일치(%d원)"),
     TOTAL_EARNING_RATE_FORMAT("총 수익률은 %s입니다.");
 
     private final String message;

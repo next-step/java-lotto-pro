@@ -6,12 +6,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum LottoResult {
-    FIRST(6, new LottoMoney(2_000_000_000)),
-    SECOND(5, new LottoMoney(30_000_000)),
-    THIRD(5, new LottoMoney(1_500_000)),
-    FOURTH(4, new LottoMoney(50_000)),
+    MISS(0, new LottoMoney(0)),
     FIFTH(3, new LottoMoney(5_000)),
-    MISS(0, new LottoMoney(0));
+    FOURTH(4, new LottoMoney(50_000)),
+    THIRD(5, new LottoMoney(1_500_000)),
+    SECOND(5, new LottoMoney(30_000_000)),
+    FIRST(6, new LottoMoney(2_000_000_000));
 
     private static final Map<Integer, LottoResult> countToLottoResultMap =
         Arrays.stream(values())

@@ -67,6 +67,11 @@ public class ResultView {
     }
 
     private static String makeLottoResultMessage(LottoResult lottoResult) {
+        if (LottoResult.SECOND == lottoResult) {
+            return String.format(OutputMessage.LOTTO_BONUS_RESULT_FORMAT.getMessage(),
+                lottoResult.getCorrectCount(), lottoResult.getLottoMoney().getMoney());
+        }
+
         return String.format(OutputMessage.LOTTO_RESULT_FORMAT.getMessage(),
             lottoResult.getCorrectCount(), lottoResult.getLottoMoney().getMoney());
     }
