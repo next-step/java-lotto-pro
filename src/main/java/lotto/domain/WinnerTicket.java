@@ -8,16 +8,16 @@ import lotto.exception.LottoException;
 
 public class WinnerTicket {
     private final LottoTicket lottoTicket;
-    private final BonusNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinnerTicket(LottoTicket lottoTicket, BonusNumber bonusNumber) {
+    public WinnerTicket(LottoTicket lottoTicket, LottoNumber bonusNumber) {
         validate(lottoTicket, bonusNumber);
         this.lottoTicket = lottoTicket;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validate(LottoTicket lottoTicket, BonusNumber bonusNumber) {
-        if (lottoTicket.getLottoNumbers().stream().anyMatch(bonusNumber::isBonus)) {
+    private void validate(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        if (lottoTicket.getLottoNumbers().contains(bonusNumber)) {
             throw new LottoException(LottoErrorCode.INVALID_BONUS_NUMBER);
         }
     }
@@ -29,7 +29,7 @@ public class WinnerTicket {
     }
 
     private boolean containsBonus(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoNumbers().stream().anyMatch(bonusNumber::isBonus);
+        return lottoTicket.getLottoNumbers().contains(bonusNumber);
     }
 
     @Override

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.domain.BonusNumber;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumber;
@@ -66,7 +65,7 @@ public class LottoMachine {
 
         try {
             LottoNumber lottoNumber = new LottoNumber(parseInt(removeAllSpaces(InputView.readLine())));
-            return new WinnerTicket(ticket, new BonusNumber(lottoNumber));
+            return new WinnerTicket(ticket, lottoNumber);
         } catch (LottoException lottoException) {
             ResultView.printErrorMessage(lottoException);
             return getWinnerTicket(ticket);

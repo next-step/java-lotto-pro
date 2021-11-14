@@ -14,9 +14,9 @@ public class WinnerTicketTest {
     @Test
     void constructWinnerTicket() {
         WinnerTicket winnerTicket = new WinnerTicket(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            new BonusNumber(new LottoNumber(7)));
+            new LottoNumber(7));
         assertThat(winnerTicket).isEqualTo(
-            new WinnerTicket(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)), new BonusNumber(new LottoNumber(7))));
+            new WinnerTicket(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7)));
     }
 
     @DisplayName("당첨 티켓 중복 에러")
@@ -24,8 +24,7 @@ public class WinnerTicketTest {
     void throwsError_whenInvalidBonusNumber() {
         assertThatExceptionOfType(LottoException.class)
             .isThrownBy(() -> {
-                new WinnerTicket(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                    new BonusNumber(new LottoNumber(6)));
+                new WinnerTicket(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(6));
             }).withMessage("지난 주 당첨 번호와 중복되지 않은 숫자를 입력해주세요.");
     }
 
@@ -35,7 +34,7 @@ public class WinnerTicketTest {
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
             new LottoTicket(Arrays.asList(7, 8, 9, 10, 5, 6))));
         WinnerTicket winnerTicket = new WinnerTicket(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            new BonusNumber(new LottoNumber(7)));
+            new LottoNumber(7));
         assertThat(winnerTicket.calculateResult(lottoTickets)).isEqualTo(
             new LottoResults(Arrays.asList(LottoResult.FIRST, LottoResult.MISS)));
     }
