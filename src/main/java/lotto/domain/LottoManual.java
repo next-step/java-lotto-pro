@@ -23,7 +23,7 @@ public class LottoManual {
         manualLottoCountCheck(manualLottoNumbers);
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i=0; i<purchaseCount; i++) {
+        for (int i = 0; i < purchaseCount; i++) {
             lottos.add(manualLottoNumbers.get(i).stream()
                     .map(LottoNumber::new)
                     .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)));

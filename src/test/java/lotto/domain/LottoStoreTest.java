@@ -20,7 +20,7 @@ class LottoStoreTest {
         final Money money = new Money(purchaseAmount);
         final LottoManual lottoManual = new LottoManual(1, money);
         List<List<Integer>> manualLottoNumbers = new ArrayList<>();
-        manualLottoNumbers.add(Arrays.asList(1,2,3,4,5,6));
+        manualLottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoManual.createLottos(manualLottoNumbers);
 
         //when

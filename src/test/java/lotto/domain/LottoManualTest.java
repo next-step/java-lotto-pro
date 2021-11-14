@@ -30,8 +30,8 @@ class LottoManualTest {
     void lottoManualPurchaseCountNotMatchManualLottoCount() {
         final LottoManual lottoManual = new LottoManual(3, new Money(4000));
         List<List<Integer>> manualLottoNumbers = new ArrayList<>();
-        manualLottoNumbers.add(Arrays.asList(1,2,3,4,5,6));
-        manualLottoNumbers.add(Arrays.asList(7,8,9,10,11,12));
+        manualLottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+        manualLottoNumbers.add(Arrays.asList(7, 8, 9, 10, 11, 12));
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
             lottoManual.createLottos(manualLottoNumbers);
@@ -44,17 +44,17 @@ class LottoManualTest {
         //given
         final LottoManual lottoManual = new LottoManual(3, new Money(4000));
         List<List<Integer>> manualLottoNumbers = new ArrayList<>();
-        manualLottoNumbers.add(Arrays.asList(1,2,3,4,5,6));
-        manualLottoNumbers.add(Arrays.asList(7,8,9,10,11,12));
-        manualLottoNumbers.add(Arrays.asList(13,14,15,16,17,18));
+        manualLottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+        manualLottoNumbers.add(Arrays.asList(7, 8, 9, 10, 11, 12));
+        manualLottoNumbers.add(Arrays.asList(13, 14, 15, 16, 17, 18));
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(Stream.of(1,2,3,4,5,6)
+        lottos.add(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)));
-        lottos.add(Stream.of(7,8,9,10,11,12)
+        lottos.add(Stream.of(7, 8, 9, 10, 11, 12)
                 .map(LottoNumber::new)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)));
-        lottos.add(Stream.of(13,14,15,16,17,18)
+        lottos.add(Stream.of(13, 14, 15, 16, 17, 18)
                 .map(LottoNumber::new)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new)));
 
