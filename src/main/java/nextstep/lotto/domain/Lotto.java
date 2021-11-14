@@ -12,9 +12,7 @@ public class Lotto {
         int initialMatchCount = 0;
 
         for (LottoNumber lottoNumber : lottoNumbers) {
-            if (purchaseLotto.lottoNumbers.isContains(lottoNumber)) {
-                initialMatchCount += 1;
-            }
+            initialMatchCount += addContainsLottoNumberCount(lottoNumber, purchaseLotto);
         }
 
         if (purchaseLotto.lottoNumbers.isBonusBallContains(bonusBall)) {
@@ -24,8 +22,21 @@ public class Lotto {
         return initialMatchCount;
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
+    public Integer addContainsLottoNumberCount(LottoNumber lottoNumber, Lotto purchaseLotto) {
+        if (purchaseLotto.lottoNumbers.isContains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public static Boolean isContainsLottoNumber(LottoNumber lottoNumber, Lotto purchaseLotto) {
+        if (purchaseLotto.lottoNumbers.isContains(lottoNumber)) {
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
     }
 }

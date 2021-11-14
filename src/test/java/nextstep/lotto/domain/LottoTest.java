@@ -25,17 +25,29 @@ public class LottoTest {
 
 
     private static Stream<Arguments> provideParameter() {
+
+        Lotto winningLotto1 = new Lotto(new LottoNumbers(
+                Arrays.asList(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6))
+        ));
+
+        Lotto winningLotto2 = new Lotto(new LottoNumbers(
+                Arrays.asList(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6))
+        ));
+
         return Stream.of(
-                Arguments.of(
-                        new Lotto(new LottoNumbers(
-                                Arrays.asList(
-                                        new LottoNumber(1),
-                                        new LottoNumber(2),
-                                        new LottoNumber(3),
-                                        new LottoNumber(4),
-                                        new LottoNumber(5),
-                                        new LottoNumber(6))
-                        )),
+                Arguments.of(winningLotto1,
                         new Lotto(new LottoNumbers(
                                 Arrays.asList(
                                         new LottoNumber(1),
@@ -46,19 +58,10 @@ public class LottoTest {
                                         new LottoNumber(6)
                                 ))
                         ),
-                        new BonusBall(new LottoNumber(10)),
+                        new BonusBall(new LottoNumber(10), winningLotto1),
                         6
                 ),
-                Arguments.of(
-                        new Lotto(new LottoNumbers(
-                                Arrays.asList(
-                                        new LottoNumber(1),
-                                        new LottoNumber(2),
-                                        new LottoNumber(3),
-                                        new LottoNumber(4),
-                                        new LottoNumber(5),
-                                        new LottoNumber(6))
-                        )),
+                Arguments.of(winningLotto2,
                         new Lotto(new LottoNumbers(
                                 Arrays.asList(
                                         new LottoNumber(1),
@@ -69,7 +72,7 @@ public class LottoTest {
                                         new LottoNumber(9)
                                 ))
                         ),
-                        new BonusBall(new LottoNumber(7)),
+                        new BonusBall(new LottoNumber(7), winningLotto2),
                         4
                 )
         );
