@@ -4,7 +4,7 @@ public class LottoPurchase {
 
     private static final int LOTTO_PRICE = 1_000;
     private static final String INVALID_PURCHASE_AMOUNT = "로또는 1장에 1000원입니다. 구입금액을 다시 입력해주세요.";
-    private long purchaseAmount;
+    private Money purchaseAmount;
     private LottoPurchaseQuantity purchaseQuantity;
 
     private LottoPurchase() {
@@ -12,7 +12,7 @@ public class LottoPurchase {
 
     public LottoPurchase(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
+        this.purchaseAmount = Money.from(purchaseAmount);
         this.purchaseQuantity = new LottoPurchaseQuantity();
         initPurchaseQuantity();
     }
@@ -28,7 +28,7 @@ public class LottoPurchase {
     }
 
     public long getPurchaseAmount() {
-        return purchaseAmount;
+        return purchaseAmount.getAmount();
     }
 
     public int findPurchaseQuantity(LottoPurchaseType lottoPurchaseType) {
@@ -36,11 +36,11 @@ public class LottoPurchase {
     }
 
     private int calculateAllQuantity() {
-        return (int) (purchaseAmount / LOTTO_PRICE);
+        return purchaseAmount.getAmount() / LOTTO_PRICE;
     }
 
     private int calculateAutoQuantity(int inputManualPurchaseQuantity) {
-        return (int) ((purchaseAmount / LOTTO_PRICE) - inputManualPurchaseQuantity);
+        return (purchaseAmount.getAmount() / LOTTO_PRICE) - inputManualPurchaseQuantity;
     }
 
     private void validatePurchaseAmount(int purchaseAmount) {
