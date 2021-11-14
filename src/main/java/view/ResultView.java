@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import lotto.domain.LottoResult;
-import lotto.domain.LottoStatistics;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.Rank;
+import lotto.domain.Statistics;
+import lotto.domain.Ticket;
+import lotto.domain.Tickets;
 import lotto.exception.LottoException;
 
 public class ResultView {
@@ -19,17 +19,17 @@ public class ResultView {
         System.out.println(String.format(OutputMessage.NUMBER_OF_PURCHASED_LOTTO_FORMAT.getMessage(), number));
     }
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getLottoTicketList()
+    public static void printTickets(Tickets tickets) {
+        System.out.println(tickets.getTickets()
             .stream()
-            .map(ResultView::makeLottoTicketMessage)
+            .map(ResultView::makeTicketMessage)
             .collect(Collectors.joining(NEW_LINE)));
     }
 
-    private static String makeLottoTicketMessage(LottoTicket lottoTicket) {
-        return String.format(OutputMessage.LOTTO_TICKET_FORMAT.getMessage(),
-            lottoTicket.getLottoNumbers().stream()
-                .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
+    private static String makeTicketMessage(Ticket ticket) {
+        return String.format(OutputMessage.TICKET_FORMAT.getMessage(),
+            ticket.getBalls().stream()
+                .map(ball -> String.valueOf(ball.getNumber()))
                 .collect(Collectors.joining(COMMA_SPACE)));
     }
 
@@ -47,32 +47,32 @@ public class ResultView {
     }
 
     public static void printAskBonusNumber() {
-        System.out.println(OutputMessage.ASK_BONUS_NUMBER.getMessage());
+        System.out.println(OutputMessage.ASK_BONUS_BALL.getMessage());
     }
 
-    public static void printWinningStatistics(LottoStatistics lottoStatistics) {
+    public static void printWinningStatistics(Statistics statistics) {
         System.out.println();
         System.out.println(OutputMessage.STATISTICS_INTRO.getMessage());
-        System.out.println(makeLottoResultsMessage(lottoStatistics.getResultCounts()));
+        System.out.println(makeRanksMessage(statistics.getRankCounts()));
         System.out.println(String.format(OutputMessage.TOTAL_EARNING_RATE_FORMAT.getMessage(),
-            lottoStatistics.getEarningRate().getRate()));
+            statistics.getEarningRate().getRate()));
     }
 
-    private static String makeLottoResultsMessage(Map<LottoResult, Long> resultCounts) {
-        return Arrays.stream(LottoResult.values())
-            .filter(lottoResult -> lottoResult != LottoResult.MISS)
-            .map(lottoResult -> String.format(OutputMessage.LOTTO_RESULTS_FORMAT.getMessage(),
-                makeLottoResultMessage(lottoResult), resultCounts.getOrDefault(lottoResult, ZERO_COUNT)))
+    private static String makeRanksMessage(Map<Rank, Long> rankCounts) {
+        return Arrays.stream(Rank.values())
+            .filter(rank -> rank != Rank.MISS)
+            .map(rank -> String.format(OutputMessage.RANKS_FORMAT.getMessage(),
+                makeRankMessage(rank), rankCounts.getOrDefault(rank, ZERO_COUNT)))
             .collect(Collectors.joining(NEW_LINE));
     }
 
-    private static String makeLottoResultMessage(LottoResult lottoResult) {
-        if (LottoResult.SECOND == lottoResult) {
-            return String.format(OutputMessage.LOTTO_BONUS_RESULT_FORMAT.getMessage(),
-                lottoResult.getCorrectCount(), lottoResult.getLottoMoney().getMoney());
+    private static String makeRankMessage(Rank rank) {
+        if (Rank.SECOND == rank) {
+            return String.format(OutputMessage.BONUS_RANK_FORMAT.getMessage(),
+                rank.getCorrectCount(), rank.getMoney().getMoney());
         }
 
-        return String.format(OutputMessage.LOTTO_RESULT_FORMAT.getMessage(),
-            lottoResult.getCorrectCount(), lottoResult.getLottoMoney().getMoney());
+        return String.format(OutputMessage.RANK_FORMAT.getMessage(),
+            rank.getCorrectCount(), rank.getMoney().getMoney());
     }
 }

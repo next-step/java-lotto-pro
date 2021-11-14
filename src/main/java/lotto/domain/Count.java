@@ -5,19 +5,19 @@ import java.util.Objects;
 import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
 
-public class LottoCount {
+public class Count {
     private static final int MIN_COUNT = 0;
 
     private final long count;
 
-    public LottoCount(long count) {
+    public Count(long count) {
         validate(count);
         this.count = count;
     }
 
     private void validate(long count) {
         if (count < MIN_COUNT) {
-            throw new LottoException(LottoErrorCode.INVALID_LOTTO_COUNT);
+            throw new LottoException(LottoErrorCode.INVALID_COUNT);
         }
     }
 
@@ -34,10 +34,10 @@ public class LottoCount {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof LottoCount)) {
+        if (!(o instanceof Count)) {
             return false;
         }
-        LottoCount that = (LottoCount)o;
+        Count that = (Count)o;
         return count == that.count;
     }
 

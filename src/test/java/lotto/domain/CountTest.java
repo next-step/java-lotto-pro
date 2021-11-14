@@ -10,21 +10,21 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.exception.LottoException;
 
-public class LottoCountTest {
+public class CountTest {
 
     @DisplayName("로또 개수 생성")
     @ParameterizedTest
     @ValueSource(ints = {0, 1})
-    void constructLottoCount_success(int count) {
-        LottoCount lottoCount = new LottoCount(count);
-        assertThat(lottoCount).isEqualTo(new LottoCount(count));
+    void constructCount_success(int num) {
+        Count count = new Count(num);
+        assertThat(count).isEqualTo(new Count(num));
     }
 
     @DisplayName("음수로 로또 개수 생성 시 에러")
     @Test
-    void throwsError_whenNegativeLottoCount() {
+    void throwsError_whenNegativeCount() {
         assertThatExceptionOfType(LottoException.class)
-            .isThrownBy(() -> new LottoCount(-1))
+            .isThrownBy(() -> new Count(-1))
             .withMessage("로또 티켓 갯수는 양수여야 합니다.");
     }
 
@@ -32,6 +32,6 @@ public class LottoCountTest {
     @ParameterizedTest
     @CsvSource(value = {"1,true", "2,false", "3,false"})
     void isBiggerThan(int count, boolean result) {
-        assertThat(new LottoCount(2).isBiggerThan(count)).isEqualTo(result);
+        assertThat(new Count(2).isBiggerThan(count)).isEqualTo(result);
     }
 }
