@@ -15,7 +15,7 @@ public enum Prize {
     private final int correct;
     private final Money reward;
 
-    Prize(int correct, Money reward) {
+    Prize(final int correct, final Money reward) {
         this.correct = correct;
         this.reward = reward;
     }
@@ -44,15 +44,15 @@ public enum Prize {
         return OUT_OF_RANKING;
     }
 
-    private static boolean isPrizePlace(Prize prize, int correct) {
+    private static boolean isPrizePlace(final Prize prize, final int correct) {
         return prize.correct == correct;
     }
 
-    private static boolean isLessThanCorrect(int correct) {
+    private static boolean isLessThanCorrect(final int correct) {
         return correct < FORTH_PLACE.correct;
     }
 
-    public Money accumulateReward(int correctCount) {
+    public Money accumulateReward(final int correctCount) {
         if (isZero(correctCount)) {
             return new Money(ZERO);
         }
