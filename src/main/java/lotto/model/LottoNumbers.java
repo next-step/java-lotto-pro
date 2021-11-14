@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.constants.ErrorMessage;
 import lotto.constants.Lotto;
 
 import java.util.LinkedHashSet;
@@ -44,7 +43,7 @@ public class LottoNumbers {
     }
   }
 
-  public int countMatchNumber(LottoNumbers targetLottoNumbers) {
+  public int countOfMatch(LottoNumbers targetLottoNumbers) {
     int count = 0;
     for (Integer lottoNumber : targetLottoNumbers.lottoNumbers) {
       count += matchCount(lottoNumber);
@@ -57,6 +56,10 @@ public class LottoNumbers {
       return 1;
     }
     return 0;
+  }
+
+  public boolean hasBonusNumber(int bonusNumber) {
+    return lottoNumbers.contains(bonusNumber);
   }
 
   @Override
