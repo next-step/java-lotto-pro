@@ -35,14 +35,18 @@ public class MatchCountCollection implements Iterable<MatchCount> {
         for (Lotto eachLotto : purchaseLotto) {
             Integer calculatedCount = winningLotto.matchWithPurchaseLottoCount(eachLotto);
             LottoWinningPrice lottoWinningPrice = LottoWinningPrice.winningPrice(calculatedCount);
-            MatchCount cached = matchCountMap.get(lottoWinningPrice);
-            loadMatchCountMap(matchCountMap, lottoWinningPrice, cached);
+            loadMatchCountMap(matchCountMap, lottoWinningPrice, matchCountMap.get(lottoWinningPrice));
         }
 
         return new MatchCountCollection(matchCountMap);
     }
 
+
     private static void loadMatchCountMap(Map<LottoWinningPrice, MatchCount> matchCountMap, LottoWinningPrice key, MatchCount value) {
+
+        if (key == LottoWinningPrice.NONE) {
+            return;
+        }
 
         if (Objects.isNull(value)) {
             matchCountMap.put(key, new MatchCount(key, 1));
