@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PurchaseLotteryTicketTest {
@@ -17,11 +15,11 @@ public class PurchaseLotteryTicketTest {
     void setUp() {
         winningNumber = WinningNumber.createWinningNumber("1, 2, 3, 4, 5, 6".split(", "), 7);
         purchaseLotteryTicket = new PurchaseLotteryTicket();
-        purchaseLotteryTicket.add(new LotteryNumbers(Arrays.asList(1, 2, 3, 10, 11, 12)));
-        purchaseLotteryTicket.add(new LotteryNumbers(Arrays.asList(1, 2, 3, 10, 11, 12)));
-        purchaseLotteryTicket.add(new LotteryNumbers(Arrays.asList(1, 2, 3, 10, 11, 12)));
-        purchaseLotteryTicket.add(new LotteryNumbers(Arrays.asList(21, 2, 3, 4, 5, 6)));
-        purchaseLotteryTicket.add(new LotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        purchaseLotteryTicket.add(LotteryNumbers.createManualLotteryNumber("1, 2, 3, 10, 11, 12".split(", ")));
+        purchaseLotteryTicket.add(LotteryNumbers.createManualLotteryNumber("1, 2, 3, 10, 11, 12".split(", ")));
+        purchaseLotteryTicket.add(LotteryNumbers.createManualLotteryNumber("1, 2, 3, 10, 11, 12".split(", ")));
+        purchaseLotteryTicket.add(LotteryNumbers.createManualLotteryNumber("21, 2, 3, 4, 5, 6".split(", ")));
+        purchaseLotteryTicket.add(LotteryNumbers.createManualLotteryNumber("1, 2, 3, 4, 5, 6".split(", ")));
     }
 
     @DisplayName("구매한 전체 로또 티켓에서 등수별 티켓 수 확인(보너스 번호 추가)")

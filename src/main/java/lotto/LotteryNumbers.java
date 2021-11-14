@@ -3,28 +3,31 @@ package lotto;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static lotto.LotteryTicketFactory.FIRST_NUMBER_IN_LOTTERY_TICKET;
+import static lotto.LotteryTicketFactory.LAST_NUMBER_IN_LOTTERY_TICKET;
+
 public class LotteryNumbers {
-    public static final String LOTTO_NUMBER_NEGATIVE_MESSAGE = "로또 번호가 음수일 수 없습니다.";
+    public static final String LOTTO_NUMBER_POSITIVE_MESSAGE = "로또 번호는 1과 45 사이의 정수이어야합니다.";
     public static final String LOTTO_NUMBER_DUPLICATE_MESSAGE = "로또 번호에 중복된 번호가 있으면 안됩니다.";
 
     private final List<Integer> lottoNumbers;
 
-    public LotteryNumbers(List<Integer> lottoNumbers) {
+    private LotteryNumbers(List<Integer> lottoNumbers) {
         validateDuplicate(lottoNumbers);
-        validatePositive(lottoNumbers);
+        validateLottoNumberRange(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validatePositive(List<Integer> lottoNumbers) {
+    private void validateLottoNumberRange(List<Integer> lottoNumbers) {
         for (int lottoNo : lottoNumbers) {
-            isNegative(lottoNo);
+            validateRange(lottoNo);
         }
     }
 
-    private void isNegative(int lottoNo) {
-        if (lottoNo < 0) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_NEGATIVE_MESSAGE);
+    private void validateRange(int lottoNo) {
+        if (lottoNo < FIRST_NUMBER_IN_LOTTERY_TICKET || lottoNo > LAST_NUMBER_IN_LOTTERY_TICKET) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_POSITIVE_MESSAGE);
         }
     }
 
@@ -40,7 +43,31 @@ public class LotteryNumbers {
     }
 
     public static LotteryNumbers createManualLotteryNumber(String[] enterManualLotteryNumbers) {
-        return new LotteryNumbers(Arrays.stream(enterManualLotteryNumbers).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList()));
+        return new LotteryNumbers(Arrays.stream(enterManualLotteryNumbers)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList()));
+    }
+
+    public static LotteryNumbers createWinningLotteryNumber(String[] winningNumber) {
+        return new LotteryNumbers(Arrays.stream(winningNumber)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList()));
+    }
+
+    public int countMatch(LotteryNumbers winningNumber) {
+        int cnt = 0;
+        for (int no : winningNumber.getLotteryNumber()) {
+            if (lottoNumbers.contains(no)) {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+
+    public boolean isMatchBonus(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     public int size() {
@@ -49,10 +76,6 @@ public class LotteryNumbers {
 
     public List<Integer> getLotteryNumber() {
         return lottoNumbers;
-    }
-
-    public boolean contains(int no) {
-        return lottoNumbers.contains(no);
     }
 
     @Override

@@ -1,9 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class WinningNumber {
     public static final String LENGTH_INVALID_MESSAGE = "당첨 번호가 6개가 아닙니다.";
@@ -15,7 +13,7 @@ public class WinningNumber {
     private WinningNumber(String[] winningNumber, int bonusNumber) {
         validateDuplicate(winningNumber, bonusNumber);
         validNumberLength(winningNumber);
-        this.winningNumber = new LotteryNumbers(convertStringArrayToIntegerList(winningNumber));
+        this.winningNumber = LotteryNumbers.createWinningLotteryNumber(winningNumber);
         this.bonusNumber = bonusNumber;
     }
 
@@ -35,22 +33,10 @@ public class WinningNumber {
         }
     }
 
-    private List<Integer> convertStringArrayToIntegerList(String[] winningNumber) {
-        return Arrays.stream(winningNumber).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
-    }
-
-    public int countMatch(LotteryNumbers lotteryNumbers) {
-        int cnt = 0;
-        for (int no : lotteryNumbers.getLotteryNumber()) {
-            if (winningNumber.contains(no)) {
-                cnt++;
-            }
-        }
-        return cnt;
-    }
-
-    public boolean isMatchBonus(LotteryNumbers lotteryNumbers) {
-        return lotteryNumbers.contains(bonusNumber);
+    public Rank match(LotteryNumbers userLottoNumbers) {
+        int countOfMatch = userLottoNumbers.countMatch(winningNumber);
+        boolean matchBonus = userLottoNumbers.isMatchBonus(bonusNumber);
+        return Rank.valueOf(countOfMatch, matchBonus);
     }
 
     @Override

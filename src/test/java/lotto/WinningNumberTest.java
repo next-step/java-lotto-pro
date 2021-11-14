@@ -44,23 +44,10 @@ public class WinningNumberTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("당첨 번호의 자료형이 String 배열에서 Integer 리스트로 변환")
+    @DisplayName("당첨 번호와 로또 번호를 한번 매치해서 몇 등인지 판별")
     @Test
-    void convertStringArrayToIntegerList() {
-        List<Integer> result = Arrays.stream(new String[]{"1", "2", "3", "4", "5", "6"}).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
-        assertThat(result).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
-    }
-
-    @DisplayName("로또 티켓의 로또 번호에 당첨 번호가 몇개 있는지 세기")
-    @Test
-    void countMatch() {
-        assertThat(winningNumber.countMatch(lotteryNumbers)).isEqualTo(5);
-    }
-
-    @DisplayName("로또 티켓 번호에 보너스 번호 매치 여부 확인")
-    @Test
-    void isMatchBonus() {
-        assertThat(winningNumber.isMatchBonus(lotteryNumbers)).isTrue();
-        assertThat(winningNumber2.isMatchBonus(lotteryNumbers)).isFalse();
+    void match() {
+        assertThat(winningNumber.match(lotteryNumbers)).isEqualTo(Rank.SECOND);
+        assertThat(winningNumber2.match(lotteryNumbers)).isEqualTo(Rank.THIRD);
     }
 }
