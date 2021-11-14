@@ -19,8 +19,6 @@ public class WinningResult {
     }
 
     public Map<LottoPrize, Integer> getValue() {
-        Optional.ofNullable(winningResultMap).orElseThrow(
-                () -> new RuntimeException("보너스 번호가 존재하지 않습니다."));
         return winningResultMap;
     }
 
