@@ -2,7 +2,6 @@ package nextstep.lotto.domain;
 
 import nextstep.lotto.constance.LottoExceptionMessage;
 import nextstep.lotto.exception.LottoRuntimeException;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,8 +9,6 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_MIDDLE;
 
 public class LottoNumbers implements Iterable<LottoNumber> {
 
@@ -33,12 +30,20 @@ public class LottoNumbers implements Iterable<LottoNumber> {
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validateLottoNumberCount(lottoNumbers);
+        validateDuplicateLottoNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     private void validateLottoNumberCount(List<LottoNumber> lottoNumbers) {
         if (!LOTTO_NUMBER_COUNT.equals(lottoNumbers.size())) {
             throw new LottoRuntimeException(LottoExceptionMessage.INVALID_LOTTO_NUMBER_COUNT_MESSAGE);
+        }
+    }
+
+    private void validateDuplicateLottoNumber(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> checkDuplicationCache = new LinkedHashSet<>(lottoNumbers);
+        if (checkDuplicationCache.size() != LOTTO_NUMBER_COUNT) {
+            throw new LottoRuntimeException(LottoExceptionMessage.INVALID_DUPLICATE_LOTTO_NUMBER_COUNT_MESSAGE);
         }
     }
 
@@ -50,13 +55,12 @@ public class LottoNumbers implements Iterable<LottoNumber> {
         return bonusBall.isContain(lottoNumbers);
     }
 
-    @Override
-    public Iterator<LottoNumber> iterator() {
-        return lottoNumbers.iterator();
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     @Override
-    public String toString() {
-        return StringUtils.join(lottoNumbers, PURCHASE_LOTTO_VIEW_MIDDLE);
+    public Iterator<LottoNumber> iterator() {
+        return lottoNumbers.iterator();
     }
 }

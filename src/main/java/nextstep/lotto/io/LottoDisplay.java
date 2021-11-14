@@ -62,7 +62,8 @@ public class LottoDisplay {
     public static void printAutoLottoResult(PurchaseLotto purchaseLotto) {
 
         for (Lotto lotto : purchaseLotto) {
-            System.out.println(PURCHASE_LOTTO_VIEW_PREFIX + lotto + PURCHASE_LOTTO_VIEW_POSTFIX);
+            List<LottoNumber> lottoNumbers = lotto.getLottoNumbers().getLottoNumbers();
+            System.out.println(PURCHASE_LOTTO_VIEW_PREFIX + StringUtils.join(lottoNumbers, PURCHASE_LOTTO_VIEW_MIDDLE) + PURCHASE_LOTTO_VIEW_POSTFIX);
         }
         System.out.println();
     }
@@ -78,7 +79,7 @@ public class LottoDisplay {
                     .collect(Collectors.toList());
 
             Lotto winningLotto = new Lotto(new LottoNumbers(winningLottoNumbers));
-            BonusBall bonusBall = inputBonusBallLotto();
+            BonusBall bonusBall = inputBonusBallLotto(winningLotto);
 
             return new WinningLotto(winningLotto, bonusBall);
 
@@ -91,20 +92,20 @@ public class LottoDisplay {
         }
     }
 
-    public static BonusBall inputBonusBallLotto() {
+    public static BonusBall inputBonusBallLotto(Lotto winningLotto) {
 
         System.out.println(BONUS_BALL_MESSAGE);
 
         try {
             String inputBonusBall = scanner.nextLine();
             LottoNumber bonusBallNumber = new LottoNumber(Integer.parseInt(inputBonusBall));
-            return new BonusBall(bonusBallNumber);
+            return new BonusBall(bonusBallNumber, winningLotto);
         } catch (NumberFormatException e) {
             System.out.println(ERROR + INVALID_WINNING_LOTTO_NUMBER_MESSAGE);
-            return inputBonusBallLotto();
+            return inputBonusBallLotto(winningLotto);
         } catch (LottoRuntimeException e) {
             System.out.println(ERROR + e.getMessage());
-            return inputBonusBallLotto();
+            return inputBonusBallLotto(winningLotto);
         }
     }
 
