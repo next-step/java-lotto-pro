@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.util.Console;
 import lotto.util.ConstantString;
 import lotto.model.Price;
@@ -34,5 +36,13 @@ public class InputHandler {
         } catch (Exception e) {
             throw new NumberFormatException(ErrorMessage.NUMBER_FORMAT_ERROR);
         }
+    }
+
+    public static List<Lotto> createManualLotto(List<String> manualLottoTexts) {
+        List<Lotto> lottoGroup = new ArrayList<>();
+        for (String manualLottoText : manualLottoTexts) {
+            lottoGroup.add(new Lotto(InputHandler.splitTextToInts(manualLottoText)));
+        }
+        return lottoGroup;
     }
 }

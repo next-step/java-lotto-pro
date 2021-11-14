@@ -18,7 +18,8 @@ public class LottoCreateFactoryTest {
     void createTotalLottos() {
         LottosCount lottosCount = new LottosCount(4, 2);
         List<String> manualLottoTexts = Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12");
-        Lottos lottos = LottoCreateFactory.createTotalLottos(lottosCount, manualLottoTexts);
+
+        Lottos lottos = LottoCreateFactory.createTotalLottos(lottosCount, InputHandler.createManualLotto(manualLottoTexts));
 
         assertThat(lottos.size()).isEqualTo(4);
     }
