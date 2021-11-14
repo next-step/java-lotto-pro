@@ -18,6 +18,7 @@ public class LottoManual {
         if (this.purchaseCount == 0) {
             return this;
         }
+
         manualLottoCountCheck(manualLottoNumbers);
         List<Lotto> lottos = new ArrayList<>();
 
@@ -30,7 +31,7 @@ public class LottoManual {
 
         return this;
     }
-    
+
     private void manualLottoCountCheck(final List<List<Integer>> manualLottoNumbers) {
         if (this.purchaseCount != manualLottoNumbers.size()) {
             throw new IllegalArgumentException("수동으로 구매할 로또 수와 로또의 개수가 일치하지 않습니다.");
@@ -45,5 +46,9 @@ public class LottoManual {
 
     public List<Lotto> getManualLotto() {
         return new ArrayList<>(manualLotto);
+    }
+
+    public int getPurchaseCount() {
+        return purchaseCount;
     }
 }

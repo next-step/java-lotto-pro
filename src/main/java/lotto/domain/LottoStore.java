@@ -10,15 +10,23 @@ public class LottoStore {
     private LottoStore() {
     }
 
-    public static Lottos purchase(Money money) {
-        List<Lotto> lottos = createLottos(money.divide());
+    public static Lottos purchase(Money money, LottoManual lottoManual) {
+        List<Lotto> lottos = createLottos(money.divide(), lottoManual.getManualLotto());
         return new Lottos(lottos);
     }
 
-    private static List<Lotto> createLottos(int issuanceCount) {
-        List<Lotto> lottos = new ArrayList<>();
+    private static List<Lotto> createLottos(int autoIssuanceCount, List<Lotto> manualLotto) {
+        List<Lotto> lottos = new ArrayList<>(manualLotto);
+        final int autoIssuance = autoIssuanceCount - manualLotto.size();
+        if (autoIssuance > 0) {
+            autoLottoIssuance(autoIssuance, lottos);
+        }
 
-        for (int i = 0; i < issuanceCount; i++) {
+        return lottos;
+    }
+
+    private static void autoLottoIssuance(final int autoIssuanceCount, final List<Lotto> lottos) {
+        for (int i = 0; i < autoIssuanceCount; i++) {
             List<Integer> generatedLottoNumbers = LottoNumberGenerator.generator();
 
             List<LottoNumber> lottoNumbers = generatedLottoNumbers.stream()
@@ -27,7 +35,5 @@ public class LottoStore {
 
             lottos.add(new Lotto(lottoNumbers));
         }
-
-        return lottos;
     }
 }
