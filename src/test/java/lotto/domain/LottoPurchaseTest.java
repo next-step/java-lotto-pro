@@ -19,8 +19,8 @@ class LottoPurchaseTest {
 
         //then
         assertAll(
-                () -> assertThat(lottoPurchase.getPurchaseQuantity()).isEqualTo(5),
-                () -> assertThat(lottoPurchase.getAutoPurchaseQuantity()).isEqualTo(5)
+                () -> assertThat(lottoPurchase.findPurchaseQuantity(LottoPurchaseType.ALL)).isEqualTo(5),
+                () -> assertThat(lottoPurchase.findPurchaseQuantity(LottoPurchaseType.AUTO)).isEqualTo(5)
         );
     }
 
@@ -31,12 +31,12 @@ class LottoPurchaseTest {
 
         //when
         LottoPurchase lottoPurchase = new LottoPurchase(purchaseAmount);
-        lottoPurchase.buyManual(5);
+        lottoPurchase.buyManualQuantity(5);
 
         //then
         assertAll(
-                () -> assertThat(lottoPurchase.getPurchaseQuantity()).isEqualTo(5),
-                () -> assertThat(lottoPurchase.getManualPurchaseQuantity()).isEqualTo(5)
+                () -> assertThat(lottoPurchase.findPurchaseQuantity(LottoPurchaseType.ALL)).isEqualTo(5),
+                () -> assertThat(lottoPurchase.findPurchaseQuantity(LottoPurchaseType.MANUAL)).isEqualTo(5)
         );
     }
 

@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPurchase;
+import lotto.domain.LottoPurchaseType;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
@@ -41,7 +42,7 @@ public class OutputView {
 
     public static void printPurchaseQuantity(LottoPurchase lottoPurchase) {
         System.out.println();
-        System.out.printf(PRINT_PURCHASE_QUANTITY, lottoPurchase.getManualPurchaseQuantity(), lottoPurchase.getAutoPurchaseQuantity());
+        System.out.printf(PRINT_PURCHASE_QUANTITY, lottoPurchase.findPurchaseQuantity(LottoPurchaseType.MANUAL), lottoPurchase.findPurchaseQuantity(LottoPurchaseType.AUTO));
     }
 
     public static void printLottoNumber(LottoTicket lottoTicket) {

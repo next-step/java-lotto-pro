@@ -15,7 +15,7 @@ public class LottoIssue {
     public static LottoTicket of(LottoPurchase lottoPurchase, Map<Integer, List<Integer>> inputManualLottoNumbers) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         lottoNumbers.addAll(fromManual(inputManualLottoNumbers));
-        lottoNumbers.addAll(fromAuto(lottoPurchase.getAutoPurchaseQuantity()));
+        lottoNumbers.addAll(fromAuto(lottoPurchase.findPurchaseQuantity(LottoPurchaseType.AUTO)));
         return new LottoTicket(lottoNumbers);
     }
 

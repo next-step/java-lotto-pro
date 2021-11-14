@@ -28,7 +28,7 @@ class LottoIssueTest {
     public void 로또를_수동으로_2장_자동으로_5장_발급한다() {
         //given
         LottoPurchase lottoPurchase = new LottoPurchase(7000);
-        lottoPurchase.buyManual(2);
+        lottoPurchase.buyManualQuantity(2);
         Map<Integer, List<Integer>> inputManualLottoNumbers = new TreeMap<>();
         inputManualLottoNumbers.put(1, Arrays.asList(1, 2, 3, 4, 5, 6));
         inputManualLottoNumbers.put(2, Arrays.asList(11, 12, 13, 14, 15, 16));

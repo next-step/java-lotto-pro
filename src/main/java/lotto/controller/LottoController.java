@@ -4,6 +4,7 @@ import lotto.domain.LottoIssue;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPurchase;
+import lotto.domain.LottoPurchaseType;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinningNumbers;
@@ -49,11 +50,11 @@ public class LottoController {
 
     private Map<Integer, List<Integer>> inputManualLottoNumbers(LottoPurchase lottoPurchase) {
         Map<Integer, List<Integer>> inputManualLottoNumbers = new TreeMap<>();
-        if (lottoPurchase.getManualPurchaseQuantity() != 0) {
+        if (lottoPurchase.findPurchaseQuantity(LottoPurchaseType.MANUAL) != 0) {
             printInputManualLottoNumbers();
         }
 
-        for (int i = 0; i < lottoPurchase.getManualPurchaseQuantity(); i++) {
+        for (int i = 0; i < lottoPurchase.findPurchaseQuantity(LottoPurchaseType.MANUAL); i++) {
             inputManualLottoNumbers.put(i, inputLottoNumbers());
         }
 
@@ -75,7 +76,7 @@ public class LottoController {
         LottoPurchase lottoPurchase = new LottoPurchase(inputPurchaseAmount());
 
         printManualPurchaseQuantity();
-        lottoPurchase.buyManual(inputManualPurchaseQuantity());
+        lottoPurchase.buyManualQuantity(inputManualPurchaseQuantity());
 
         return lottoPurchase;
     }
