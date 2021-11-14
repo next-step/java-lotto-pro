@@ -19,15 +19,17 @@ public class LottoController {
     printGeneratedLottos(lottoTicket);
 
     LottoNumbers drawnLottoNumbers = InputView.inputWinningLottoNumbers();
+    int bonusNumber = InputView.inputBonusNumber();
 
-    processStatistics(purchaseAmount, lottoTicket, drawnLottoNumbers);
+    processStatistics(purchaseAmount, lottoTicket, drawnLottoNumbers, bonusNumber);
   }
 
   private static void processStatistics(PurchaseAmount purchaseAmount,
                                         LottoTicket lottoTicket,
-                                        LottoNumbers drawnLottoNumbers) {
+                                        LottoNumbers drawnLottoNumbers,
+                                        int bonusNumber) {
     printStatisticsGuideMessage();
-    MatchResults matchResults = lottoTicket.totalWinningResults(drawnLottoNumbers);
+    MatchResults matchResults = lottoTicket.totalWinningResults(drawnLottoNumbers, bonusNumber);
     printMatches(matchResults.getMatchResults());
     printYield(matchResults.calculateYield(purchaseAmount));
   }
