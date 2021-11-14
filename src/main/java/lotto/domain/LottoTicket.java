@@ -38,13 +38,12 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public LottoResult calculateResult(LottoTicket winnerTicket) {
+    public LottoResult calculateResult(LottoTicket winnerTicket, boolean containsBonus) {
         int correctCount = (int)this.lottoNumbers.stream()
             .filter(number -> winnerTicket.lottoNumbers.contains(number))
             .count();
 
-        // TODO
-        return LottoResult.findResult(correctCount);
+        return LottoResult.findResult(correctCount, containsBonus);
     }
 
     @Override

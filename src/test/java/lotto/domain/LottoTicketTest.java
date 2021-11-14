@@ -41,11 +41,12 @@ class LottoTicketTest {
 
     @DisplayName("로또티켓 결과 계산")
     @ParameterizedTest
-    @CsvSource(value = {"4,5,6,7,8,9;FIFTH", "4,5,6,1,8,9;FOURTH", "4,5,6,1,2,9;THIRD",
-        "4,5,6,1,2,3;FIRST", "7,8,9,10,11,12;MISS"}, delimiter = ';')
-    public void calculateResult(String lottoNumbers, String resultName) {
+    @CsvSource(value = {"4,5,6,7,8,9;false;FIFTH", "4,5,6,1,8,9;false;FOURTH", "4,5,6,1,8,9;true;FOURTH",
+        "4,5,6,1,2,9;false;THIRD", "4,5,6,1,2,9;true;SECOND", "4,5,6,1,2,3;false;FIRST", "7,8,9,10,11,12;false;MISS",
+        "1,2,9,10,11,12;true;MISS"}, delimiter = ';')
+    public void calculateResult(String lottoNumbers, boolean containsBonus, String resultName) {
         LottoTicket lottoTicket = new LottoTicket(parseToList(lottoNumbers));
-        assertThat(lottoTicket.calculateResult(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6))))
+        assertThat(lottoTicket.calculateResult(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)), containsBonus))
             .isEqualTo(LottoResult.valueOf(resultName));
     }
 

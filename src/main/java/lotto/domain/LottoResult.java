@@ -26,10 +26,6 @@ public enum LottoResult {
         this.lottoMoney = lottoMoney;
     }
 
-    public static LottoResult findResult(int correctCount) {
-        return countToLottoResultMap.getOrDefault(correctCount, MISS);
-    }
-
     public static LottoResult findResult(int correctCount, boolean containsBonus) {
         LottoResult result = countToLottoResultMap.getOrDefault(correctCount, MISS);
         if (result == THIRD && containsBonus) {

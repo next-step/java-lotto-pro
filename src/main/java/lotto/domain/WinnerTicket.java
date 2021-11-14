@@ -32,7 +32,11 @@ public class WinnerTicket {
 
     public LottoResults calculateResult(LottoTickets lottoTickets) {
         return new LottoResults(lottoTickets.getLottoTicketList().stream()
-            .map(lottoTicket -> lottoTicket.calculateResult(this.lottoTicket))
+            .map(lottoTicket -> lottoTicket.calculateResult(this.lottoTicket, containsBonus(lottoTicket)))
             .collect(Collectors.toList()));
+    }
+
+    private boolean containsBonus(LottoTicket lottoTicket) {
+        return lottoTicket.getLottoNumbers().stream().anyMatch(bonusNumber::isBonus);
     }
 }
