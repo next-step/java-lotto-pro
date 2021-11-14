@@ -2,41 +2,40 @@ package step3.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Stream;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoWinningPriceTest {
 
-  @Test
-  void lottoWinningPriceTest() {
-    final int matchCountNum3 = 1;
-    final int matchCountNum4 = 4;
-    final int matchCountNum5 = 2;
-    final int matchCountNum6 = 3;
+  private static Stream<Arguments> generateMatchCountList() {
+    List<Arguments> listOfArguments = new LinkedList<>();
+    // matchCount number, price
+    listOfArguments.add(Arguments.of(Arrays.asList(1, 1, 1, 0, 0, 0, 0), 0));
+    listOfArguments.add(Arguments.of(Arrays.asList(0, 0, 0, 1, 0, 0, 0), 5000));
+    listOfArguments.add(Arguments.of(Arrays.asList(0, 0, 0, 0, 1, 0, 0), 50_000));
+    listOfArguments.add(Arguments.of(Arrays.asList(0, 0, 0, 0, 0, 1, 0), 1_500_000));
+    listOfArguments.add(Arguments.of(Arrays.asList(0, 0, 0, 0, 0, 0, 1), 2_000_000_000));
+    listOfArguments.add(Arguments.of(Arrays.asList(0, 0, 0, 1, 1, 1, 1), 2_001_555_000));
+    return listOfArguments.stream();
+  }
 
-    LottoMatchResult mockMatchResult = new LottoMatchResult() {
+  @ParameterizedTest
+  @MethodSource("generateMatchCountList")
+  void lottoWinningPriceTest(List<Integer> matchCountNums, int expectedPrice) {
+
+    LottoMatchResult lottoMatchResult = new LottoMatchResult() {
       @Override
-      public int getMatchCountNum(int matchCount) {
-        switch (matchCount) {
-          case 3:
-            return matchCountNum3;
-          case 4:
-            return matchCountNum4;
-          case 5:
-            return matchCountNum5;
-          case 6:
-            return matchCountNum6;
-          default:
-            return super.getMatchCountNum(matchCount);
-        }
+      public int getMatchCountNum(LottoMatchCaseEnum matchCaseEnum) {
+        return matchCountNums.get(matchCaseEnum.getMatchCount());
       }
     };
 
-    int expectedPrice = matchCountNum3 * 5_000
-        + matchCountNum4 * 50_000
-        + matchCountNum5 * 1_500_000
-        + matchCountNum6 * 2_000_000_000;
-
-    LottoWinningPrice lottoWinningPrice = new LottoWinningPrice(mockMatchResult);
+    LottoWinningPrice lottoWinningPrice = lottoMatchResult.getLottoWinningPrice();
     assertEquals(expectedPrice, lottoWinningPrice.getWinningPrice());
   }
 

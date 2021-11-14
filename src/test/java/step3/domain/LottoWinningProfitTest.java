@@ -9,14 +9,13 @@ public class LottoWinningProfitTest {
 
   @ParameterizedTest
   @CsvSource(value = {"100 : 1000: 0.1", "5000 : 14000 : 0.35714287"}, delimiter = ':')
-  void winningProfitTest(int winningPrice, int purchasePrice, float profit) {
+  void winningProfitTest(Long winningPrice, int purchasePrice, float profit) {
     LottoWinningPrice lottoWinningPrice = new LottoWinningPrice() {
       @Override
-      public int getWinningPrice() {
+      public Long getWinningPrice() {
         return winningPrice;
       }
     };
-
     LottoTicketsPrice lottoTicketsPrice = new LottoTicketsPrice() {
       @Override
       public int getTicketsPrice() {
@@ -24,8 +23,7 @@ public class LottoWinningProfitTest {
       }
     };
 
-    LottoWinningProfit lottoWinningProfit = new LottoWinningProfit(lottoWinningPrice,
-        lottoTicketsPrice);
+    LottoWinningProfit lottoWinningProfit = lottoWinningPrice.getWinningProfit(lottoTicketsPrice);
     assertEquals(profit, lottoWinningProfit.getProfit());
   }
 }

@@ -4,12 +4,18 @@ public class LottoWinningProfit {
 
   private final float profit;
 
-  public LottoWinningProfit(LottoWinningPrice winningPrice, LottoTicketsPrice ticketsPrice) {
-    // 당첨금(winning price), 티켓구입금액(ticketsPrice) -> 이율 계산
-    this.profit = (float) winningPrice.getWinningPrice() / ticketsPrice.getTicketsPrice();
+  public LottoWinningProfit(float profit) {
+    validate(profit);
+    this.profit = profit;
   }
 
   public float getProfit() {
     return this.profit;
+  }
+
+  private void validate(float profit) {
+    if (profit < 0) {
+      throw new RuntimeException("[ERROR] winning price profit cannot be negative. profit =" + profit);
+    }
   }
 }

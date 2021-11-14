@@ -1,17 +1,37 @@
 package step3.view;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import step3.domain.LottoMatchCaseEnum;
+import step3.domain.LottoMatchResult;
+import step3.domain.LottoTicket;
 import step3.domain.LottoTickets;
-import step3.domain.LottoWinningPrice;
 
 public class ResultView {
 
   public static void printTickets(LottoTickets lottoTickets) {
-    System.out.println(lottoTickets);
+    System.out.println(lottoTickets.getLottoTickets().stream()
+        .map(LottoTicket::toString)
+        .collect(Collectors.joining("\n")));
   }
 
-  public static void printWinningPrice(LottoWinningPrice lottoWinningPrice) {
+  public static void printWinningPrice(LottoMatchResult lottoMatchResult) {
     System.out.println("\n당첨 통계\n---------");
-    System.out.println(lottoWinningPrice);
+    System.out.println(Arrays.stream(LottoMatchCaseEnum.values())
+        .map(lottoMatchCase -> unitResultToString(lottoMatchResult, lottoMatchCase))
+        .collect(Collectors.joining()));
+  }
+
+  public static String unitResultToString(LottoMatchResult lottoMatchResult,
+      LottoMatchCaseEnum matchCaseEnum) {
+    final int PRINT_MATCH_COUNT_LIMIT = 3;
+    if (matchCaseEnum.getMatchCount() < PRINT_MATCH_COUNT_LIMIT) {
+      return "";
+    }
+    return String.format("%d개 일치 (%d원)- %d\n",
+        matchCaseEnum.getMatchCount(),
+        matchCaseEnum.getPrice(),
+        lottoMatchResult.getMatchCountNum(matchCaseEnum));
   }
 
   public static void printWinningProfit(float profit) {
@@ -26,7 +46,7 @@ public class ResultView {
   }
 
   public static void printWinningNumberRequest() {
-    System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
   }
 
   public static void printPurchasePriceRequest() {

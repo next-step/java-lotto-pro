@@ -18,14 +18,22 @@ public class LottoTickets {
   }
 
   public List<LottoTicket> getLottoTickets() {
-    return lottoTickets;
+    return this.lottoTickets;
   }
 
-  @Override
-  public String toString() {
-    StringBuilder lottoTicketsString = new StringBuilder();
-    this.lottoTickets.forEach(lottoTicket ->
-        lottoTicketsString.append(lottoTicket).append("\n"));
-    return lottoTicketsString.toString();
+  public LottoMatchResult matchWinningNumbers(LottoTicket winningTicket) {
+    LottoMatchResult lottoMatchResult = new LottoMatchResult();
+    this.lottoTickets.forEach(lottoTicket -> {
+      LottoMatchCaseEnum matchCaseEnum = calculateMatchCase(lottoTicket, winningTicket);
+      lottoMatchResult.addMatchCountNum(matchCaseEnum);
+    });
+    return lottoMatchResult;
+  }
+
+  public static LottoMatchCaseEnum calculateMatchCase(LottoTicket sourceTicket, LottoTicket winningTicket) {
+    int matchCount = (int) sourceTicket.getNumbers().stream()
+        .filter(winningTicket::contains)
+        .count();
+    return LottoMatchCaseEnum.value(matchCount);
   }
 }

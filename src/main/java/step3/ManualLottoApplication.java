@@ -27,14 +27,12 @@ public class ManualLottoApplication {
     LottoTicket winningTicket = new LottoTicket(InputView.getWinningNumbersInput());
 
     // 당첨 결과 출력
-    LottoMatchResult lottoMatchResult = new LottoMatchResult(lottoTickets,
-        winningTicket); // 숫자 매칭 결과
-    LottoWinningPrice lottoWinningPrice = new LottoWinningPrice(lottoMatchResult); // 당첨금 계산
-    ResultView.printWinningPrice(lottoWinningPrice);
+    LottoMatchResult lottoMatchResult = lottoTickets.matchWinningNumbers(winningTicket);
+    LottoWinningPrice lottoWinningPrice = lottoMatchResult.getLottoWinningPrice();
+    ResultView.printWinningPrice(lottoMatchResult);
 
     // 수익률 출력
-    LottoWinningProfit lottoWinningProfit =
-        new LottoWinningProfit(lottoWinningPrice, lottoTicketsPrice); // 수익률 계산
+    LottoWinningProfit lottoWinningProfit = lottoWinningPrice.getWinningProfit(lottoTicketsPrice);
     ResultView.printWinningProfit(lottoWinningProfit.getProfit());
   }
 }
