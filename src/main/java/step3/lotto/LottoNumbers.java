@@ -1,7 +1,6 @@
 package step3.lotto;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -59,22 +58,17 @@ public class LottoNumbers {
 	}
 
 	public Integer matchCount(LottoNumbers winningLottoNumbers) {
-		return (int) lottoNumbers.stream()
-			.filter(lottoNumber -> winningLottoNumbers.getList().stream()
-				.anyMatch(lottoNumber::equals)
-			).count();
+		return (int)lottoNumbers.stream()
+			.filter(winningLottoNumbers::contains)
+			.count();
 	}
 
-	public Boolean matchBonusBall(BonusBall bonusBall) {
+	public boolean matchBonusBall(BonusBall bonusBall) {
 		return lottoNumbers.contains(bonusBall.asLottoNumber());
 	}
 
-	public Set<LottoNumber> getList() {
-		return Collections.unmodifiableSet(lottoNumbers);
-	}
-
-	public boolean hasBonusBall(BonusBall bonusBall) {
-		return lottoNumbers.contains(bonusBall.asLottoNumber());
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.stream().anyMatch(s -> s.equals(lottoNumber));
 	}
 
 	@Override

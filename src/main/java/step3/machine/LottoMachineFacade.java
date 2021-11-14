@@ -1,5 +1,7 @@
 package step3.machine;
 
+import static step3.machine.create.LottoMachineType.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import step3.Money;
 import step3.lotto.BonusBall;
 import step3.lotto.LottoNumbers;
 import step3.lotto.LottoPapers;
+import step3.machine.create.Machine;
 import step3.view.InputView;
 import step3.view.ResultView;
 import step3.winner.Winning;
@@ -16,12 +19,10 @@ import step3.winner.WinningResultMap;
 
 public class LottoMachineFacade {
 
-	private final Machine machine;
 	private final InputView inputView;
 	private final ResultView resultView;
 
-	public LottoMachineFacade(Machine machine, InputView inputView, ResultView resultView) {
-		this.machine = machine;
+	public LottoMachineFacade(InputView inputView, ResultView resultView) {
 		this.inputView = inputView;
 		this.resultView = resultView;
 	}
@@ -52,16 +53,21 @@ public class LottoMachineFacade {
 	}
 
 	private LottoPapers createLottoPapers(Money money, int manualCount) {
+
 		Bought bought = new Bought(money, manualCount);
 
-		LottoPapers manualLottoPapers = machine.createManualLottoPapers(enterManualLottoNumbers(manualCount));
-		LottoPapers autoLottoPapers = machine.createLottoPapers(bought.buyAutoCount());
+		Machine manual = lottoFactory(MANUAL);
+		Machine auto = lottoFactory(AUTO);
+
+		LottoPapers manualLottoPapers = manual.createLotto(enterManualLottoNumbers(manualCount));
+		LottoPapers autoLottoPapers = auto.createLotto(bought.buyAutoCount());
+
 		manualLottoPapers.addAll(autoLottoPapers);
 
 		resultView.purchasedCount(manualCount, bought.buyAutoCount());
 		resultView.purchasedLottoPrint(autoLottoPapers);
 
-		return autoLottoPapers;
+		return manualLottoPapers;
 	}
 
 	private List<String> enterManualLottoNumbers(int manualCount) {
@@ -75,7 +81,7 @@ public class LottoMachineFacade {
 
 	private BonusBall enterBonusBall(LottoNumbers winningLottoNumbers) {
 		int bonusBall = inputView.insertBonusBall();
-		return BonusBall.of(bonusBall, winningLottoNumbers);
+		return new BonusBall(bonusBall);
 	}
 
 }

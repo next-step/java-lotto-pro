@@ -1,6 +1,7 @@
 package step3;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
+import static step3.machine.create.LottoMachineType.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,25 +14,32 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import step3.lotto.LottoPapers;
 import step3.machine.Bought;
-import step3.machine.LottoMachine;
-import step3.machine.Machine;
+import step3.machine.create.Machine;
 
 public class MachineTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {"1000:1", "2000:2", "1500:1", "3200:3"}, delimiter = ':')
 	void 천원당_로또번호가_생성되는지_확인(int money, int result) {
-		Machine machine = new LottoMachine();
+
+		// when
+		Machine lottoMachine = lottoFactory(AUTO);
 		Bought bought = new Bought(new Money(money));
-		LottoPapers lottoPapers = machine.createLottoPapers(bought.buyAutoCount());
+		LottoPapers lottoPapers = lottoMachine.createLotto(bought.buyAutoCount());
+
+		// then
 		assertThat(lottoPapers.size()).isEqualTo(result);
 	}
 
 	@ParameterizedTest
 	@MethodSource(value = "manualLottoNumbers")
 	void 수동으로_입력시_구매수_확인(List<String> manualLottoNumbers, int size) {
-		Machine machine = new LottoMachine();
-		LottoPapers manualLottoPapers = machine.createManualLottoPapers(manualLottoNumbers);
+
+		// when
+		Machine lottoMachine = lottoFactory(MANUAL);
+		LottoPapers manualLottoPapers = lottoMachine.createLotto(manualLottoNumbers);
+
+		// then
 		assertThat(manualLottoPapers.size()).isEqualTo(size);
 	}
 

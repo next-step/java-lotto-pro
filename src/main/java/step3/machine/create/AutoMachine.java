@@ -1,4 +1,4 @@
-package step3.machine;
+package step3.machine.create;
 
 import static step3.lotto.LottoNumbers.*;
 
@@ -12,21 +12,13 @@ import step3.lotto.LottoNumber;
 import step3.lotto.LottoNumbers;
 import step3.lotto.LottoPapers;
 
-public class LottoMachine implements Machine {
+public class AutoMachine implements CreateMachine<Integer> {
+
 	@Override
-	public LottoPapers createLottoPapers(int buyCount) {
+	public LottoPapers createLotto(Integer buyCount) {
 		List<LottoNumbers> lottoNumbers = new ArrayList<>();
 		for (int i = 0; i < buyCount; i++) {
 			lottoNumbers.add(createOneLineLottoNumbers());
-		}
-		return LottoPapers.createPapers(lottoNumbers);
-	}
-
-	@Override
-	public LottoPapers createManualLottoPapers(List<String> manualLottoNumbers) {
-		List<LottoNumbers> lottoNumbers = new ArrayList<>();
-		for (String string : manualLottoNumbers) {
-			lottoNumbers.add(LottoNumbers.from(string));
 		}
 		return LottoPapers.createPapers(lottoNumbers);
 	}
@@ -40,11 +32,7 @@ public class LottoMachine implements Machine {
 	}
 
 	private boolean isOverFlow(int size) {
-		if (size == LOTTO_NUMBER_MAX) {
-			return false;
-		}
-		return true;
+		return size != LOTTO_NUMBER_MAX;
 	}
-
 
 }

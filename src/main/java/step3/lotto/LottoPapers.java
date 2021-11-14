@@ -20,7 +20,7 @@ public class LottoPapers {
 		WinningResult matchResult = new WinningResult();
 		for (LottoNumbers lottoNumbers : papers) {
 			Integer matchCount = lottoNumbers.matchCount(winningLottoNumbers);
-			boolean matchBonusBall = lottoNumbers.hasBonusBall(bonusBall);
+			boolean matchBonusBall = lottoNumbers.matchBonusBall(bonusBall);
 			matchResult.add(matchCount, matchBonusBall);
 		}
 		return matchResult;
