@@ -22,4 +22,12 @@ public class PurchaseMoneyTest {
 	void purchase() {
 		assertThat(new PurchaseMoney(5000).purchase()).isEqualTo(5);
 	}
+
+	@Test
+	void purchaseWithoutManual() {
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			PurchaseMoney money = new PurchaseMoney(3000);
+			money.purchaseWithoutManual(4);
+		});
+	}
 }

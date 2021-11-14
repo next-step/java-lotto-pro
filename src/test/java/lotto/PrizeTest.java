@@ -42,7 +42,7 @@ public class PrizeTest {
 	}
 
 	@Test
-	@DisplayName("로또 등수에 따른 ")
+	@DisplayName("로또 등수의 개수를 계산할 수 있어야 한다.")
 	void rankCount() {
 		Prize prize = Prize.withRankList(Arrays.asList(Rank.FIRST, Rank.FIRST, Rank.SECOND, Rank.THIRD));
 		assertThat(prize.getCount(Rank.FIRST)).isEqualTo(2);
