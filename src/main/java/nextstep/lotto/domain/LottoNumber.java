@@ -14,7 +14,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final Integer lottoNumber;
 
     public LottoNumber() {
-        this.lottoNumber = LottoRandomGenerator.pickNumberInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER);
+        this(LottoRandomGenerator.pickNumberInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
     }
 
     public LottoNumber(Integer lottoNumber) {
