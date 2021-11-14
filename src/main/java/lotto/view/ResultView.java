@@ -4,13 +4,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import javax.swing.text.html.Option;
-
-import lotto.domain.Buyer;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoQuantity;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.WinningRecord;
@@ -30,8 +26,8 @@ public class ResultView {
 	public static final String PRINT_MANUAL_LOTTOS = "수동으로 구매할 번호를 입력해 주세요.";
 	public static final String PRINT_ERROR_COMMON = "잘못 입력하였습니다.";
 
-	public static void printLottoPurchaseQuantity(Buyer buyer) {
-		System.out.printf(PRINT_PURCHASE_QUANTITY, buyer.getManualNumber(), buyer.getRemainingNumber());
+	public static void printLottoPurchaseQuantity(LottoQuantity lottoCount) {
+		System.out.printf(PRINT_PURCHASE_QUANTITY, lottoCount.getManualQuantity(), lottoCount.getAutoQuantity());
 	}
 
 	public static void printLottos(Lottos lottos) {
@@ -41,6 +37,7 @@ public class ResultView {
 	private static void printLotto(Lotto lotto) {
 		System.out.printf(PRINT_LOTTO_NUMBER,
 			lotto.getLottoNumbers().stream()
+				.sorted()
 				.map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
 				.collect(Collectors.joining(DELIMITER))
 		);
@@ -65,18 +62,18 @@ public class ResultView {
 		return PRINT_LOTTO_RECORD;
 	}
 
+	public static void printWinningStat(WinningRecord winningRecord, double amount) {
+		System.out.println(WINNING_STAT_INFO);
+		System.out.println(DASH);
+		printWinningRecord(winningRecord);
+		printReturnRate(winningRecord.profitRate(amount));
+	}
+
 	public static void printReturnRate(double rate) {
 		System.out.printf(PRINT_RETURN_RATE, rate);
 		if (STANDARD_RATE > rate) {
 			System.out.println(PRINT_MONEY_LOSS);
 		}
-	}
-
-	public static void printWinningStat(WinningRecord winningRecord, double rate) {
-		System.out.println(WINNING_STAT_INFO);
-		System.out.println(DASH);
-		printWinningRecord(winningRecord);
-		printReturnRate(rate);
 	}
 
 	public static void printManualLottosInfo() {
