@@ -56,7 +56,7 @@ public class ResultView {
 
     private static String makeLottoResultsMessage(Map<LottoResult, Long> resultCounts) {
         return Arrays.stream(LottoResult.values())
-            .filter(lottoResult -> lottoResult != LottoResult.NONE)
+            .filter(lottoResult -> lottoResult != LottoResult.MISS)
             .map(lottoResult -> String.format(OutputMessage.LOTTO_RESULTS_FORMAT.getMessage(),
                 makeLottoResultMessage(lottoResult), resultCounts.getOrDefault(lottoResult, ZERO_COUNT)))
             .collect(Collectors.joining(NEW_LINE));

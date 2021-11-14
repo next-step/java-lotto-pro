@@ -32,6 +32,6 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
             new LottoTicket(Arrays.asList(7, 8, 9, 10, 5, 6))));
         assertThat(lottoTickets.calculateResult(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6))))
-            .isEqualTo(new LottoResults(Arrays.asList(LottoResult.SIX, LottoResult.NONE)));
+            .isEqualTo(new LottoResults(Arrays.asList(LottoResult.FIRST, LottoResult.MISS)));
     }
 }

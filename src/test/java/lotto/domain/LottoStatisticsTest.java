@@ -12,10 +12,10 @@ class LottoStatisticsTest {
     @DisplayName("로또 통계 생성")
     @Test
     void constructLottoStatistics() {
-        LottoStatistics lottoStatistics = new LottoStatistics(Collections.singletonMap(LottoResult.FIVE, 1L),
+        LottoStatistics lottoStatistics = new LottoStatistics(Collections.singletonMap(LottoResult.FIFTH, 1L),
             new EarningRate(BigDecimal.ONE));
 
         assertThat(lottoStatistics).isEqualTo(
-            new LottoStatistics(Collections.singletonMap(LottoResult.FIVE, 1L), new EarningRate(BigDecimal.ONE)));
+            new LottoStatistics(Collections.singletonMap(LottoResult.FIFTH, 1L), new EarningRate(BigDecimal.ONE)));
     }
 }

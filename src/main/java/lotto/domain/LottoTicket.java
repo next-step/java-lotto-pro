@@ -43,6 +43,7 @@ public class LottoTicket {
             .filter(number -> winnerTicket.lottoNumbers.contains(number))
             .count();
 
+        // TODO
         return LottoResult.findResult(correctCount);
     }
 
