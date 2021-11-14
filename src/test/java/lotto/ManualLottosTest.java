@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.ManualLottos;
-import lotto.domain.ManualLottosCount;
+import lotto.domain.LottosCount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ public class ManualLottosTest {
 
     @BeforeEach
     void init() {
-        manualLottos = new ManualLottos(new ManualLottosCount(2,1));
+        manualLottos = new ManualLottos();
         inputManualLottoNumbersString = Arrays.asList("1,2,3,4,5,6");
         manualLottos.createManualLottos(inputManualLottoNumbersString);
     }
@@ -29,7 +29,7 @@ public class ManualLottosTest {
         int totalLottoCount = 3;
         int manualLottoCount = 5;
         assertThatThrownBy(() ->
-                new ManualLottosCount(totalLottoCount, manualLottoCount)).isInstanceOf(IllegalArgumentException.class);
+                new LottosCount(totalLottoCount, manualLottoCount)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class ManualLottosTest {
         int totalLottoCount = 3;
         int manualLottoCount = -1;
         assertThatThrownBy(() ->
-                new ManualLottosCount(totalLottoCount, manualLottoCount)).isInstanceOf(IllegalArgumentException.class);
+                new LottosCount(totalLottoCount, manualLottoCount)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

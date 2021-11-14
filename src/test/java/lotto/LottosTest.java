@@ -15,7 +15,7 @@ public class LottosTest {
 
     @BeforeEach
     void init() {
-        ManualLottos manualLottos = new ManualLottos(new ManualLottosCount(2, 1));
+        ManualLottos manualLottos = new ManualLottos();
         manualLottos.createManualLottos(Arrays.asList("1,2,3,4,5,6"));
         lottos = new Lottos(manualLottos);
     }
