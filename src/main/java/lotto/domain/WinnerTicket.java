@@ -3,13 +3,23 @@ package lotto.domain;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import lotto.exception.LottoErrorCode;
+import lotto.exception.LottoException;
+
 public class WinnerTicket {
     private final LottoTicket lottoTicket;
     private final BonusNumber bonusNumber;
 
     public WinnerTicket(LottoTicket lottoTicket, BonusNumber bonusNumber) {
+        validate(lottoTicket, bonusNumber);
         this.lottoTicket = lottoTicket;
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validate(LottoTicket lottoTicket, BonusNumber bonusNumber) {
+        if (lottoTicket.getLottoNumbers().stream().anyMatch(bonusNumber::isBonus)) {
+            throw new LottoException(LottoErrorCode.INVALID_BONUS_NUMBER);
+        }
     }
 
     public LottoResults calculateResult(LottoTickets lottoTickets) {

@@ -32,9 +32,8 @@ public class LottoMachine {
         ResultView.printLottoTickets(lottoTickets);
 
         LottoTicket winnerLottoTicket = getWinnerLottoTicket();
-        BonusNumber bonusNumber = getBonusNumber();
+        WinnerTicket winnerTicket = getWinnerTicket(winnerLottoTicket);
 
-        WinnerTicket winnerTicket = new WinnerTicket(winnerLottoTicket, bonusNumber);
         ResultView.printWinningStatistics(winnerTicket.calculateResult(lottoTickets).makeStatistics());
     }
 
@@ -62,14 +61,15 @@ public class LottoMachine {
         }
     }
 
-    private BonusNumber getBonusNumber() {
+    private WinnerTicket getWinnerTicket(LottoTicket ticket) {
         ResultView.printAskBonusNumber();
+
         try {
             LottoNumber lottoNumber = new LottoNumber(parseInt(removeAllSpaces(InputView.readLine())));
-            return new BonusNumber(lottoNumber);
+            return new WinnerTicket(ticket, new BonusNumber(lottoNumber));
         } catch (LottoException lottoException) {
             ResultView.printErrorMessage(lottoException);
-            return getBonusNumber();
+            return getWinnerTicket(ticket);
         }
 
     }
@@ -82,7 +82,7 @@ public class LottoMachine {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new LottoException(LottoErrorCode.INVALID_LOTTO_TICKET);
+            throw new LottoException(LottoErrorCode.INVALID_NUMBER);
         }
     }
 }
