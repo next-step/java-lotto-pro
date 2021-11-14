@@ -9,6 +9,7 @@ public class LottoPurchaseListView {
     }
 
     public static void print(Lottos lottos, LottoManual lottoManual) {
+        System.out.println();
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoManual.getPurchaseCount(), lottos.purchaseNumber() - lottoManual.getPurchaseCount());
         System.out.println();
 
