@@ -34,22 +34,17 @@ public enum LottoPrize {
     }
 
     public static LottoPrize valueOf(int matchCount, boolean matchBonus) {
-        if (matchCount == SECOND_PLACE.matchCount && matchBonus) {
-            return SECOND_PLACE;
+        if (SECOND_PLACE.isEqual(matchCount)) {
+            return getSecondOrThirdPlace(matchBonus);
         }
         return Arrays.stream(values())
-                .filter(LottoPrize::isNotSecondPlace)
                 .filter(lottoPrize -> lottoPrize.isEqual(matchCount))
                 .findFirst()
                 .orElse(MISS);
     }
 
-    private boolean isSecondPlace() {
-        return this == SECOND_PLACE;
-    }
-
-    private boolean isNotSecondPlace() {
-        return !isSecondPlace();
+    private static LottoPrize getSecondOrThirdPlace(boolean matchBonus) {
+        return matchBonus ? SECOND_PLACE : THIRD_PLACE;
     }
 
     private boolean isEqual(int matchCount) {
