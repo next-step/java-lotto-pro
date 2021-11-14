@@ -16,6 +16,7 @@ public class LottoManual {
 
     public LottoManual createLottos(final List<List<Integer>> manualLottoNumbers) {
         if (this.purchaseCount == 0) {
+            manualLotto = new ArrayList<>();
             return this;
         }
 
