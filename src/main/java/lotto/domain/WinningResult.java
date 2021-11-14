@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class WinningResult {
@@ -20,5 +19,9 @@ public class WinningResult {
 
     public Map<LottoPrize, Integer> getValue() {
         return winningResultMap;
+    }
+
+    public boolean isExist() {
+        return !winningResultMap.isEmpty();
     }
 }

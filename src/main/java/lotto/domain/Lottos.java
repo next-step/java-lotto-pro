@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class Lottos {
     private List<Lotto> lottos = new LinkedList<>();
+    private WinningResult winningResult;
 
     public Lottos(ManualLottos manualLottos) {
         lottos.addAll(manualLottos.getManualLottos());
@@ -24,14 +25,22 @@ public class Lottos {
         return lottos;
     }
 
-    public Map<LottoPrize, Integer> createLottosResult(WinningLottoNumbers winningLottoNumbers) {
+    public Map<LottoPrize, Integer> getWinningResult(WinningLottoNumbers winningLottoNumbers) {
+        if (winningResult != null && winningResult.isExist()){
+            return winningResult.getValue();
+        }
         Map<LottoPrize, Integer> lottoResultMap = new HashMap<>();
         for (Lotto lotto : lottos) {
             LottoPrize lottoPrize = lotto.compareWinningNumbers(winningLottoNumbers);
             int lottoWinningCount = lottoResultMap.getOrDefault(lottoPrize, 0);
             lottoResultMap.put(lottoPrize, ++lottoWinningCount);
         }
-        return lottoResultMap;
+        winningResult = new WinningResult(lottoResultMap);
+        return winningResult.getValue();
+    }
 
+    public double calculateProfitRate(int boughtMoney) {
+        int winningMoney = winningResult.calculateWinningMoney();
+        return Math.floor((((double) winningMoney / boughtMoney) * 100)) / 100.0;
     }
 }
