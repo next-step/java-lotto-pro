@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import lotto.model.enums.Rank;
@@ -13,13 +14,22 @@ import lotto.model.enums.Rank;
 public class Lottos {
     private final Collection<Lotto> lottos;
 
-    public Lottos(Lotto... lottos) {
+    Lottos(Lotto... lottos) {
         this(Arrays.stream(lottos)
             .collect(Collectors.toList()));
     }
 
-    public Lottos(Collection<Lotto> lottos) {
+    Lottos(Collection<Lotto> lottos) {
         this.lottos = Objects.requireNonNull(lottos);
+    }
+
+    public static Lottos newInstance(int lottoCount, Supplier<Collection<Integer>> numberSupplier) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            Lotto lotto = new Lotto(numberSupplier.get());
+            lottos.add(lotto);
+        }
+        return new Lottos(lottos);
     }
 
     public static Lottos empty() {

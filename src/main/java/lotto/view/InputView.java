@@ -1,8 +1,5 @@
 package lotto.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lotto.model.Lotto;
 import lotto.model.LottoCount;
 import lotto.model.Lottos;
@@ -38,13 +35,10 @@ public class InputView {
             return Lottos.empty();
         }
         System.out.println(QUERY_FOR_MANUAL_LOTTOS);
-        List<Lotto> manualLottos = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
+        return Lottos.newInstance(manualCount, () -> {
             String lottoNumbers = Console.readLine();
-            Lotto lotto = InputParser.toLotto(lottoNumbers);
-            manualLottos.add(lotto);
-        }
-        return new Lottos(manualLottos);
+            return InputParser.toIntegers(lottoNumbers);
+        });
     }
 
     public static Lotto readWinningLotto() {

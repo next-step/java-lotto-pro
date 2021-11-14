@@ -37,10 +37,16 @@ public class InputParser {
     public static Lotto toLotto(String inputNumbers) {
         String inputWithoutBlanks = inputNumbers.replace(" ", "");
         validateLottoPattern(inputWithoutBlanks);
-        List<Number> numbers = Arrays.stream(inputWithoutBlanks.split(NUMBER_DELIMITER))
-            .map(number -> Number.of(Integer.parseInt(number)))
-            .collect(Collectors.toList());
+        List<Integer> numbers = toIntegers(inputWithoutBlanks);
         return new Lotto(numbers);
+    }
+
+    public static List<Integer> toIntegers(String input) {
+        String inputWithoutBlanks = input.replace(" ", "");
+        validateLottoPattern(inputWithoutBlanks);
+        return Arrays.stream(inputWithoutBlanks.split(NUMBER_DELIMITER))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 
     private static void validateNumberPattern(String input) {

@@ -35,7 +35,7 @@ public class LottoTest {
     @DisplayName("생성자의 매개변수로 null이 전달될 때 예외를 발생시킨다")
     void createByNull() {
         assertThatNullPointerException().isThrownBy(() ->
-            new Lotto((Collection<Number>)null)
+            new Lotto((Collection<Integer>)null)
         );
     }
 

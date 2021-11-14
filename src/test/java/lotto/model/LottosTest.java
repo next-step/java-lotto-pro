@@ -2,6 +2,7 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Stream;
 
@@ -20,6 +21,13 @@ public class LottosTest {
         assertThatNullPointerException().isThrownBy(() ->
             new Lottos((Collection<Lotto>)null)
         );
+    }
+
+    @Test
+    @DisplayName("정적팩토리 메서드 테스트")
+    void newInstance() {
+        Lottos lottos = Lottos.newInstance(3, RandomNumberGenerator::generate);
+        assertThat(lottos.size()).isEqualTo(3);
     }
 
     @Test

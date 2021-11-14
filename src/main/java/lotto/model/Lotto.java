@@ -18,16 +18,19 @@ public class Lotto {
 
     private final SortedSet<Number> numbers;
 
-    public Lotto(int... numbers) {
-        this(Arrays.stream(numbers)
-            .mapToObj(Number::of)
-            .collect(toSet()));
-    }
-
-    public Lotto(Collection<Number> numbers) {
-        TreeSet<Number> sortedNumbers = new TreeSet<>(Objects.requireNonNull(numbers));
+    public Lotto(Collection<Integer> numbers) {
+        TreeSet<Number> sortedNumbers = Objects.requireNonNull(numbers)
+            .stream()
+            .map(Number::of)
+            .collect(toCollection(TreeSet::new));
         this.numbers = Collections.unmodifiableSortedSet(sortedNumbers);
         validate();
+    }
+
+    Lotto(int... numbers) {
+        this(Arrays.stream(numbers)
+            .boxed()
+            .collect(toSet()));
     }
 
     private void validate() {
