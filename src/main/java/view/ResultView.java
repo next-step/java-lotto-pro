@@ -46,6 +46,10 @@ public class ResultView {
         System.out.println(OutputMessage.ASK_WINNER_TICKET.getMessage());
     }
 
+    public static void printAskBonusNumber() {
+        System.out.println(OutputMessage.ASK_BONUS_NUMBER.getMessage());
+    }
+
     public static void printWinningStatistics(LottoStatistics lottoStatistics) {
         System.out.println();
         System.out.println(OutputMessage.STATISTICS_INTRO.getMessage());

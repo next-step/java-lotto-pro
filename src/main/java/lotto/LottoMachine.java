@@ -4,10 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinnerTicket;
 import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
 import lotto.factory.LottoTicketFactory;
@@ -27,7 +30,12 @@ public class LottoMachine {
 
         LottoTickets lottoTickets = LottoTicketFactory.createRandomLottoTickets(lottoCount);
         ResultView.printLottoTickets(lottoTickets);
-        ResultView.printWinningStatistics(lottoTickets.calculateResult(getWinnerTicket()).makeStatistics());
+
+        LottoTicket winnerLottoTicket = getWinnerLottoTicket();
+        BonusNumber bonusNumber = getBonusNumber();
+
+        WinnerTicket winnerTicket = new WinnerTicket(winnerLottoTicket, bonusNumber);
+        ResultView.printWinningStatistics(winnerTicket.calculateResult(lottoTickets).makeStatistics());
     }
 
     private LottoMoney getLottoMoney() {
@@ -40,7 +48,7 @@ public class LottoMachine {
         }
     }
 
-    private LottoTicket getWinnerTicket() {
+    private LottoTicket getWinnerLottoTicket() {
         ResultView.printAskWinnerTicket();
         try {
             List<Integer> numbers = Arrays.stream(removeAllSpaces(InputView.readLine()).split(COMMA))
@@ -50,8 +58,20 @@ public class LottoMachine {
             return new LottoTicket(numbers);
         } catch (LottoException lottoException) {
             ResultView.printErrorMessage(lottoException);
-            return getWinnerTicket();
+            return getWinnerLottoTicket();
         }
+    }
+
+    private BonusNumber getBonusNumber() {
+        ResultView.printAskBonusNumber();
+        try {
+            LottoNumber lottoNumber = new LottoNumber(parseInt(removeAllSpaces(InputView.readLine())));
+            return new BonusNumber(lottoNumber);
+        } catch (LottoException lottoException) {
+            ResultView.printErrorMessage(lottoException);
+            return getBonusNumber();
+        }
+
     }
 
     private String removeAllSpaces(String numbers) {
