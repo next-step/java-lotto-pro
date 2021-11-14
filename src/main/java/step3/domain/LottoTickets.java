@@ -17,6 +17,14 @@ public class LottoTickets {
     this.lottoTickets = lottoTicketList;
   }
 
+  public static LottoMatchCaseEnum calculateMatchCase(LottoTicket sourceTicket,
+      LottoTicket winningTicket) {
+    int matchCount = (int) sourceTicket.getNumbers().stream()
+        .filter(winningTicket::contains)
+        .count();
+    return LottoMatchCaseEnum.value(matchCount);
+  }
+
   public List<LottoTicket> getLottoTickets() {
     return this.lottoTickets;
   }
@@ -28,12 +36,5 @@ public class LottoTickets {
       lottoMatchResult.addMatchCountNum(matchCaseEnum);
     });
     return lottoMatchResult;
-  }
-
-  public static LottoMatchCaseEnum calculateMatchCase(LottoTicket sourceTicket, LottoTicket winningTicket) {
-    int matchCount = (int) sourceTicket.getNumbers().stream()
-        .filter(winningTicket::contains)
-        .count();
-    return LottoMatchCaseEnum.value(matchCount);
   }
 }

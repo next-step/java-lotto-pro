@@ -4,15 +4,20 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import step3.domain.LottoMatchCaseEnum;
 import step3.domain.LottoMatchResult;
+import step3.domain.LottoNumber;
 import step3.domain.LottoTicket;
 import step3.domain.LottoTickets;
 
 public class ResultView {
 
   public static void printTickets(LottoTickets lottoTickets) {
-    System.out.println(lottoTickets.getLottoTickets().stream()
-        .map(LottoTicket::toString)
-        .collect(Collectors.joining("\n")));
+    lottoTickets.getLottoTickets().forEach(ResultView::printTicket);
+  }
+
+  private static void printTicket(LottoTicket lottoTicket) {
+    System.out.println(lottoTicket.getNumbers().stream()
+        .map(LottoNumber::getNumber)
+        .collect(Collectors.toList()));
   }
 
   public static void printWinningPrice(LottoMatchResult lottoMatchResult) {

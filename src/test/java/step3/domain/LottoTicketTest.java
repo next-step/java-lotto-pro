@@ -19,12 +19,6 @@ public class LottoTicketTest {
 
   private List<Integer> winningNumbers;
 
-  @BeforeEach
-  void setUp() {
-    // 유효한 로또 숫자 목록 (당첨 번호)
-    winningNumbers = Arrays.asList(1, 2, 3, 4, 20, 45);
-  }
-
   private static Stream<Arguments> generateNumberList() {
     List<Arguments> listOfArguments = new LinkedList<>();
     listOfArguments.add(Arguments.of(Arrays.asList(1, 2, 3, 4))); // 4 개 숫자
@@ -32,6 +26,12 @@ public class LottoTicketTest {
     listOfArguments
         .add(Arguments.of(Arrays.asList(-1, 3, 5, 7, 8, 10))); // 6 개 숫자 with invalid number
     return listOfArguments.stream();
+  }
+
+  @BeforeEach
+  void setUp() {
+    // 유효한 로또 숫자 목록 (당첨 번호)
+    winningNumbers = Arrays.asList(1, 2, 3, 4, 20, 45);
   }
 
   @Test

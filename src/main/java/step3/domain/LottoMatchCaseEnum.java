@@ -1,5 +1,7 @@
 package step3.domain;
 
+import java.util.Arrays;
+
 public enum LottoMatchCaseEnum {
   ZERO_NUMBER_MATCH(0, 0),
   ONE_NUMBER_MATCH(1, 0),
@@ -18,24 +20,10 @@ public enum LottoMatchCaseEnum {
   }
 
   public static LottoMatchCaseEnum value(int matchCount) {
-    switch (matchCount) {
-      case 0:
-        return ZERO_NUMBER_MATCH;
-      case 1:
-        return ONE_NUMBER_MATCH;
-      case 2:
-        return TWO_NUMBERS_MATCH;
-      case 3:
-        return THREE_NUMBERS_MATCH;
-      case 4:
-        return FOUR_NUMBERS_MATCH;
-      case 5:
-        return FIVE_NUMBERS_MATCH;
-      case 6:
-        return SIX_NUMBERS_MATCH;
-      default:
-        return null;
-    }
+    return Arrays.stream(LottoMatchCaseEnum.values())
+        .filter(matchCaseEnum -> matchCaseEnum.getMatchCount() == matchCount)
+        .findAny()
+        .orElse(null);
   }
 
   public int getMatchCount() {

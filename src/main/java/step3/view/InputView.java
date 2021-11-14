@@ -25,8 +25,8 @@ public class InputView {
         .collect(Collectors.toList());
   }
 
-  public static int getPurchasePriceInput() {
+  public static Long getPurchasePriceInput() {
     ResultView.printPurchasePriceRequest();
-    return Integer.parseInt(sc.nextLine());
+    return Long.parseLong(sc.nextLine());
   }
 }

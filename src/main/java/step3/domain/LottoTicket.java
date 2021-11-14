@@ -52,12 +52,4 @@ public class LottoTicket {
       throw new RuntimeException("[ERROR] not valid lotto numbers. numbers = " + numbers);
     }
   }
-
-  @Override
-  public String toString() {
-    return this.numbers.stream()
-        .map(LottoNumber::getNumber)
-        .collect(Collectors.toList())
-        .toString();
-  }
 }

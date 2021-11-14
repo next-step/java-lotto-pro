@@ -19,13 +19,13 @@ public class LottoMatchResult {
     this.matchCountMap.put(matchCaseEnum, getMatchCountNum(matchCaseEnum) + 1);
   }
 
-  public LottoWinningPrice getLottoWinningPrice() {
+  public Money getLottoWinningPrice() {
     Long winningPrice = Arrays.stream(LottoMatchCaseEnum.values())
         .mapToLong(lottoMatchCase ->
             (long) lottoMatchCase.getPrice() * this.getMatchCountNum(lottoMatchCase))
         .sum();
 
-    return new LottoWinningPrice(winningPrice);
+    return new Money(winningPrice);
   }
 
 }

@@ -35,8 +35,8 @@ public class LottoWinningPriceTest {
       }
     };
 
-    LottoWinningPrice lottoWinningPrice = lottoMatchResult.getLottoWinningPrice();
-    assertEquals(expectedPrice, lottoWinningPrice.getWinningPrice());
+    Money lottoWinningPrice = lottoMatchResult.getLottoWinningPrice();
+    assertEquals(expectedPrice, lottoWinningPrice.getPrice());
   }
 
 

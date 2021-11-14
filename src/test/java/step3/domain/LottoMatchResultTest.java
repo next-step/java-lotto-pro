@@ -22,11 +22,11 @@ public class LottoMatchResultTest {
   private static Stream<Arguments> generateNumberList() {
     List<Arguments> listOfArguments = new LinkedList<>();
     listOfArguments.add(Arguments
-            .of(Arrays.asList(1, 4, 27, 38, 40, 41), LottoMatchCaseEnum.FIVE_NUMBERS_MATCH));
+        .of(Arrays.asList(1, 4, 27, 38, 40, 41), LottoMatchCaseEnum.FIVE_NUMBERS_MATCH));
     listOfArguments.add(Arguments
-            .of(Arrays.asList(3, 4, 26, 27, 38, 45), LottoMatchCaseEnum.FOUR_NUMBERS_MATCH));
+        .of(Arrays.asList(3, 4, 26, 27, 38, 45), LottoMatchCaseEnum.FOUR_NUMBERS_MATCH));
     listOfArguments.add(Arguments
-            .of(Arrays.asList(1, 2, 9, 11, 28, 41), LottoMatchCaseEnum.ONE_NUMBER_MATCH));
+        .of(Arrays.asList(1, 2, 9, 11, 28, 41), LottoMatchCaseEnum.ONE_NUMBER_MATCH));
     listOfArguments.add(Arguments
         .of(Arrays.asList(4, 15, 26, 27, 38, 40), LottoMatchCaseEnum.FIVE_NUMBERS_MATCH));
     return listOfArguments.stream();
