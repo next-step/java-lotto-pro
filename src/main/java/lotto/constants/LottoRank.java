@@ -28,7 +28,16 @@ public enum LottoRank {
   public static LottoRank valueOf(int rank) {
     return Arrays.stream(LottoRank.values())
       .filter(lottoRank -> lottoRank.rank == rank)
+      .filter(lottoRank -> !lottoRank.equals(SECOND))
       .findAny()
       .orElseThrow(NullPointerException::new);
+  }
+
+  public static LottoRank valueOf(int rank, boolean matchBonus) {
+    if (rank == SECOND.rank && matchBonus) {
+      return SECOND;
+    }
+
+    return LottoRank.valueOf(rank);
   }
 }
