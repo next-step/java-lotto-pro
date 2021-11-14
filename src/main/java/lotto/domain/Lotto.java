@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
+    public static final int LOTTO_PRICE = 1000;
     private LottoNumbers lottoNumbers;
 
     public Lotto(LottoNumbers lottoNumbers) {
