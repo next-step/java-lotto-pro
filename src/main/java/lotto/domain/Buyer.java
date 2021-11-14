@@ -3,38 +3,24 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Buyer {
-	public static final String ERROR_SHORT_MONEY = "구입금액이 부족합니다.";
 	private final PurchaseAmount purchaseAmount;
-	private final ManualNumber manualNumber;
 	private final Lottos lottos;
 
-	public Buyer(PurchaseAmount purchaseAmount, ManualNumber manualNumber, Lottos lottos) {
+	public Buyer(PurchaseAmount purchaseAmount, Lottos lottos) {
 		this.purchaseAmount = purchaseAmount;
-		this.manualNumber = manualNumber;
 		this.lottos = lottos;
-		validation();
-	}
-
-	private void validation() {
-		if (purchaseAmount.isShortMoney(manualNumber)) {
-			throw new IllegalArgumentException(ERROR_SHORT_MONEY);
-		}
-	}
-
-	public int getManualNumber() {
-		return manualNumber.getManualNumber();
 	}
 
 	public double getAmount() {
 		return purchaseAmount.getAmount();
 	}
 
-	public int getRemainingNumber() {
-		return purchaseAmount.getPurchaseQuantity() - manualNumber.getManualNumber();
+	public Lottos getLottos() {
+		return lottos;
 	}
 
-	public Lottos mergeLottos(Lottos targetLottos) {
-		return lottos.mergeLottos(targetLottos);
+	public WinningRecord match(WinningLotto winningLotto) {
+		return winningLotto.match(lottos);
 	}
 
 	@Override
@@ -44,12 +30,12 @@ public class Buyer {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Buyer buyer = (Buyer)o;
-		return Objects.equals(purchaseAmount, buyer.purchaseAmount) && Objects.equals(manualNumber,
-			buyer.manualNumber);
+		return Objects.equals(purchaseAmount, buyer.purchaseAmount) && Objects.equals(lottos,
+			buyer.lottos);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(purchaseAmount, manualNumber);
+		return Objects.hash(purchaseAmount, lottos);
 	}
 }

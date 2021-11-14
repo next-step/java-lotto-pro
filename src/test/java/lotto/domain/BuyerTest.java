@@ -34,41 +34,9 @@ public class BuyerTest {
 	@DisplayName("판매자 생성")
 	@Test
 	void generateBuyer() {
-		ManualNumber manualNumber = new ManualNumber(5);
-		Buyer buyer = new Buyer(purchaseAmount, manualNumber, lottos);
+		Buyer buyer = new Buyer(purchaseAmount, lottos);
 
-		assertThat(buyer).isEqualTo(new Buyer(purchaseAmount, manualNumber, lottos));
-	}
-
-	@DisplayName("구입금액보다 많은 수동 횟수인 경우")
-	@Test
-	void shortMoney() {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> {
-				ManualNumber manualNumber = new ManualNumber(15);
-
-				new Buyer(purchaseAmount, manualNumber, lottos);
-			}).withMessageMatching("구입금액이 부족합니다.");
-	}
-
-	@DisplayName("수동 로또 자동 로또 합치기")
-	@Test
-	void mergeLotto() {
-		ManualNumber manualNumber = new ManualNumber(3);
-		Buyer buyer = new Buyer(purchaseAmount, manualNumber, lottos);
-		List<Lotto> targetLottoList = new ArrayList<>();
-		targetLottoList.add(new Lotto(
-			Stream.of(1, 2, 3, 4, 5, 6)
-				.map(LottoNumber::of)
-				.collect(Collectors.toSet())));
-		Lottos targetLottos = new Lottos(targetLottoList);
-
-		Lottos mergeLottos = buyer.mergeLottos(targetLottos);
-		Lottos concatLottos = new Lottos(Stream.concat(lottoList.stream(), targetLottoList.stream())
-			.collect(Collectors.toList()));
-
-		assertThat(mergeLottos).isEqualTo(concatLottos);
-
+		assertThat(buyer).isEqualTo(new Buyer(purchaseAmount, lottos));
 	}
 
 }
