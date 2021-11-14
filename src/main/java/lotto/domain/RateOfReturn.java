@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class RateOfReturn {
 
-    private static final int STANDARD_RATE_OF_RETURN = 1;
     private static final int DEFAULT_RATE_OF_RETURN = 0;
+    private static final int STANDARD_RATE_OF_RETURN = 1;
     private final double rateOfReturn;
 
     private RateOfReturn(double rateOfReturn) {

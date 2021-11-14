@@ -7,7 +7,7 @@ import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.RateOfReturn;
 
-import java.util.TreeMap;
+import java.util.NavigableMap;
 
 public class OutputView {
     private static final String PRINT_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
@@ -62,13 +62,13 @@ public class OutputView {
     public static void printWinningStatistics(LottoResult lottoResult) {
         System.out.println();
         System.out.println(PRINT_WINNING_STATISTICS);
-        TreeMap<LottoRank, Integer> lottoRankTreeMap = new TreeMap<>(lottoResult.getLottoTicketRankMap());
-        lottoRankTreeMap.descendingKeySet().stream()
+        NavigableMap<LottoRank, Long> rankResult = lottoResult.getRankResult();
+        rankResult.descendingKeySet().stream()
                 .filter(LottoRank::isNotNone)
-                .forEach(rank -> checkLottoRank(rank, lottoRankTreeMap));
+                .forEach(rank -> checkLottoRank(rank, rankResult));
     }
 
-    private static void checkLottoRank(LottoRank rank, TreeMap<LottoRank, Integer> lottoRankTreeMap) {
+    private static void checkLottoRank(LottoRank rank, NavigableMap<LottoRank, Long> lottoRankTreeMap) {
         if (rank == LottoRank.SECOND) {
             System.out.printf(PRINT_WINNING_STATISTICS_SECOND_RESULT, rank.getMatchCount(), rank.getPrizeMoney(), lottoRankTreeMap.get(rank));
             return;

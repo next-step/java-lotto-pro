@@ -16,11 +16,11 @@ public class LottoTicket {
         return lottoTicket;
     }
 
-    public Integer countLottoRank(LottoRank lottoRank, LottoWinningNumbers lottoWinningNumbers) {
-        return Math.toIntExact(lottoTicket.stream()
+    public long countLottoRank(LottoRank lottoRank, LottoWinningNumbers lottoWinningNumbers) {
+        return lottoTicket.stream()
                 .map(lottoWinningNumbers::compareLottoNumbers)
                 .filter(rank -> rank.equals(lottoRank))
-                .count());
+                .count();
     }
 
 }

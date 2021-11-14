@@ -36,15 +36,15 @@ class LottoResultTest {
         LottoResult lottoResult = LottoResult.of(lottoPurchase, lottoTicket, lottoWinningNumbers);
 
 
-        Map<LottoRank, Integer> lottoTicketRankMap = lottoResult.getLottoTicketRankMap();
-        Integer count = lottoTicketRankMap.get(LottoRank.FIFTH);
+        Map<LottoRank, Long> rankResult = lottoResult.getRankResult();
+        long count = rankResult.get(LottoRank.FIFTH);
 
         //then
         assertThat(count).isEqualTo(2);
     }
 
     @Test
-    @DisplayName("5000원으로 5등이 2개 당첨된 경우")
+    @DisplayName("5000원으로 5등이 2개 당첨된 경우 수익률은 2이다.")
     public void 총_수익률을_계산한다() {
         //given
         LottoPurchase lottoPurchase = new LottoPurchase(5000);
@@ -55,7 +55,7 @@ class LottoResultTest {
         LottoResult lottoResult = LottoResult.of(lottoPurchase, lottoTicket, lottoWinningNumbers);
 
         //then
-        assertThat(lottoResult.getRateOfReturn()).isEqualTo(2);
+        assertThat(lottoResult.getRateOfReturn()).isEqualTo(RateOfReturn.from(2));
     }
 
 }
