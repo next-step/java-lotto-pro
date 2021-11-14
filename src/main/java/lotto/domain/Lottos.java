@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -9,6 +10,10 @@ import java.util.stream.Stream;
 public class Lottos {
 
 	private final List<Lotto> lottos;
+
+	public Lottos() {
+		this.lottos = Collections.unmodifiableList(new ArrayList<>());
+	}
 
 	public Lottos(List<Lotto> lottoList) {
 		this.lottos = Collections.unmodifiableList(lottoList);

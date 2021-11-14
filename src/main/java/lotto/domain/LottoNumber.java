@@ -1,9 +1,12 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -27,6 +30,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	public static LottoNumber of(int number) {
 		return Optional.ofNullable(lottoNumbers.get(number))
 			.orElseThrow(() -> new IllegalArgumentException(ERROR_LOTTO_NUMBER));
+	}
+
+	public static List<LottoNumber> getLottoNumbers() {
+		return new ArrayList<>(lottoNumbers.values());
 	}
 
 	public int getLottoNumber() {
