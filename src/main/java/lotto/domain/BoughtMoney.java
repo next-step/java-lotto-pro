@@ -17,4 +17,8 @@ public class BoughtMoney {
     public int getBoughtMoney() {
         return boughtMoney;
     }
+
+    public int getLottoCount() {
+        return boughtMoney / Lotto.LOTTO_PRICE;
+    }
 }
