@@ -34,13 +34,18 @@ public enum LottoPrize {
     }
 
     public static LottoPrize valueOf(int matchCount, boolean matchBonus) {
+        if (matchCount < FIFTH_PLACE.matchCount && matchCount >= 0) {
+            return MISS;
+        }
+
         if (SECOND_PLACE.isEqual(matchCount)) {
             return getSecondOrThirdPlace(matchBonus);
         }
+
         return Arrays.stream(values())
                 .filter(lottoPrize -> lottoPrize.isEqual(matchCount))
                 .findFirst()
-                .orElse(MISS);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     private static LottoPrize getSecondOrThirdPlace(boolean matchBonus) {
