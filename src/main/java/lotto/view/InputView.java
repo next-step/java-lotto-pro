@@ -27,6 +27,22 @@ public class InputView {
     return inputWinningLottoNumbersAndVerify();
   }
 
+  public static int inputBonusNumber() {
+    printInputBonusNumberGuideMessage();
+    return inputBonusNumberAndVerify();
+  }
+
+  private static int inputBonusNumberAndVerify() {
+    String input = SCANNER.nextLine();
+    try {
+      checkStringIsNumber(input);
+      return parseInt(input);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      return inputBonusNumberAndVerify();
+    }
+  }
+
   private static PurchaseAmount inputPurchaseAmountAndVerify() {
     String input = SCANNER.nextLine();
     try {
