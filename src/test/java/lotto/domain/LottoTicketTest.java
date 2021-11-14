@@ -20,7 +20,7 @@ class LottoTicketTest {
     @BeforeEach
     void setUp() {
         for (int i = 1; i <= LottoTicket.LOTTO_NUMBER_COUNT; i++) {
-            numbers.add(new Number(i));
+            numbers.add(Number.of(i));
         }
         lottoTicket = new LottoTicket(numbers);
     }
@@ -60,7 +60,7 @@ class LottoTicketTest {
         int duplicatedNumber = 1;
         numbers = new ArrayList<>();
         for (int i = 1; i <= LottoTicket.LOTTO_NUMBER_COUNT; i++) {
-            numbers.add(new Number(duplicatedNumber));
+            numbers.add(Number.of(duplicatedNumber));
         }
 
         // when, throw
@@ -73,7 +73,7 @@ class LottoTicketTest {
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
     void 숫자_포함하는지_검사(int inputNumber, boolean expectResult) {
         // when
-        boolean result = lottoTicket.isContainNumber(new Number(inputNumber));
+        boolean result = lottoTicket.isContainNumber(Number.of(inputNumber));
 
         // then
         assertThat(result).isEqualTo(expectResult);

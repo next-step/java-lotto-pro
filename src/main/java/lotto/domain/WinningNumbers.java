@@ -49,7 +49,7 @@ public class WinningNumbers {
     private List<Number> convertArrayToList(int[] inputNumbers) {
         List<Number> numbers = new ArrayList<>();
         for (int number : inputNumbers) {
-            numbers.add(new Number(number));
+            numbers.add(Number.of(number));
         }
         return numbers;
     }

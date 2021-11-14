@@ -19,12 +19,13 @@ public class LottoMain {
         PurchaseCounts purchaseCounts = inputView.getPurchaseCounts(money);
 
         List<List<Integer>> manualNumbers = inputView.getManualNumbers(purchaseCounts.getManualPurchaseCount());
-        LottoTickets manualLottoTickets = lottoShop.createManualLottoTickets(manualNumbers);
+        List<LottoTicket> manualLottoTickets = lottoShop.createManualLottoTickets(manualNumbers);
 
         resultView.printLottoTicketCount(purchaseCounts);
 
-        LottoTickets autoLottoTickets = lottoShop.createAutoLottoTickets(purchaseCounts.getAutoPurchaseCount());
-        LottoTickets totalLottoTickets = manualLottoTickets.add(autoLottoTickets);
+        List<LottoTicket> autoLottoTickets = lottoShop.createAutoLottoTickets(purchaseCounts.getAutoPurchaseCount());
+        manualLottoTickets.addAll(autoLottoTickets);
+        LottoTickets totalLottoTickets = new LottoTickets(manualLottoTickets);
         resultView.printLottoTickets(totalLottoTickets);
 
         WinningNumbers winningNumbers = inputView.getWinningNumbers();

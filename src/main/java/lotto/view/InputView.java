@@ -56,7 +56,7 @@ public class InputView {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
         String input = scanner.nextLine();
         try {
-            Number bonusNumber = new Number(Integer.parseInt(input));
+            Number bonusNumber = Number.of(Integer.parseInt(input));
             validateContainsNumber(winningNumbers, bonusNumber);
             return bonusNumber;
         } catch (IllegalArgumentException e) {
@@ -71,8 +71,7 @@ public class InputView {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
         String input = scanner.nextLine();
         try {
-            PurchaseCount manualPurchaseCount = new PurchaseCount(Integer.parseInt(input));
-            return lottoShop.countPurchasableLotto(money, manualPurchaseCount);
+            return lottoShop.countPurchasableLotto(money.getMoney(), Integer.parseInt(input));
         } catch (NumberFormatException e) {
             System.out.println("숫자만 입력 가능합니다. (입력값: " + input + ")");
         } catch (IllegalArgumentException e) {
@@ -106,7 +105,7 @@ public class InputView {
     private List<Number> convertIntsToNumbers(List<Integer> intNumbers) {
         List<Number> numbers = new ArrayList<>();
         for (int number : intNumbers) {
-            numbers.add(new Number(number));
+            numbers.add(Number.of(number));
         }
         return numbers;
     }

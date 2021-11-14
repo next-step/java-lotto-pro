@@ -8,7 +8,9 @@ public class LottoShop {
 
     private final LottoGenerator lottoGenerator = new LottoGenerator();
 
-    public PurchaseCounts countPurchasableLotto(Money purchaseMoney, PurchaseCount manualPurchaseCount) {
+    public PurchaseCounts countPurchasableLotto(int purchaseMoneyParam, int manualPurchaseCountParam) {
+        Money purchaseMoney = new Money(purchaseMoneyParam);
+        PurchaseCount manualPurchaseCount = new PurchaseCount(manualPurchaseCountParam);
         validatePurchaseAmount(purchaseMoney);
         int purchasableCount = purchaseMoney.divide(LOTTO_TICKET_PER_PRICE);
         validateManualPurchaseCount(manualPurchaseCount, purchasableCount);
@@ -21,11 +23,11 @@ public class LottoShop {
         }
     }
 
-    public LottoTickets createAutoLottoTickets(PurchaseCount purchaseCount) {
+    public List<LottoTicket> createAutoLottoTickets(PurchaseCount purchaseCount) {
         return lottoGenerator.createAutoLottoTickets(purchaseCount);
     }
 
-    public LottoTickets createManualLottoTickets(List<List<Integer>> manualNumbers) {
+    public List<LottoTicket> createManualLottoTickets(List<List<Integer>> manualNumbers) {
         return lottoGenerator.createManualLottoTickets(manualNumbers);
     }
 

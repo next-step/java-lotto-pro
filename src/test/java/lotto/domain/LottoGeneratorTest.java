@@ -19,10 +19,10 @@ class LottoGeneratorTest {
         PurchaseCount purchaseCount = new PurchaseCount(count);
 
         // when
-        LottoTickets lottoTickets = lottoGenerator.createAutoLottoTickets(purchaseCount);
+        List<LottoTicket> autoLottoTickets = lottoGenerator.createAutoLottoTickets(purchaseCount);
 
         // then
-        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(count);
+        assertThat(autoLottoTickets.size()).isEqualTo(count);
     }
 
     @Test
@@ -35,9 +35,9 @@ class LottoGeneratorTest {
 
 
         // when
-        LottoTickets lottoTickets = lottoGenerator.createManualLottoTickets(manualNumbers);
+        List<LottoTicket> manualLottoTickets = lottoGenerator.createManualLottoTickets(manualNumbers);
 
         // then
-        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(manualNumbers.size());
+        assertThat(manualLottoTickets.size()).isEqualTo(manualNumbers.size());
     }
 }

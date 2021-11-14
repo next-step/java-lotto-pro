@@ -32,11 +32,6 @@ public class LottoTickets {
         return containsBonusNumbers;
     }
 
-    public LottoTickets add(LottoTickets lottoTickets) {
-        this.lottoTickets.addAll(lottoTickets.lottoTickets);
-        return this;
-    }
-
     private void isContainsNumberAndCaching(Number number, Map<LottoTicket, Integer> winningCountCache, LottoTicket lottoTicket) {
         if (lottoTicket.isContainNumber(number)) {
             winningCountCache.put(lottoTicket, winningCountCache.getOrDefault(lottoTicket, 0) + 1);
@@ -54,7 +49,7 @@ public class LottoTickets {
     private LottoTicket convertArrayToLottoTicket(int[] numbers) {
         List<Number> numberList = new ArrayList<>();
         for (int number : numbers) {
-            numberList.add(new Number(number));
+            numberList.add(Number.of(number));
         }
         return new LottoTicket(numberList);
     }

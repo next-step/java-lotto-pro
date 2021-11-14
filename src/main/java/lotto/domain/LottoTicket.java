@@ -26,7 +26,7 @@ public class LottoTicket {
     private static List<Number> convertIntegerToNumber(List<Integer> inputNumbers) {
         List<Number> numbers = new ArrayList<>();
         for (int number : inputNumbers) {
-            numbers.add(new Number(number));
+            numbers.add(Number.of(number));
         }
         return numbers;
     }
