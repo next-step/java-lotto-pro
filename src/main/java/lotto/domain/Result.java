@@ -1,58 +1,45 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class Result {
 
-    private final List<Prize> prizes = new ArrayList<>();
-    private final int numberOfPlayslips;
+    private final Map<Prize, Integer> prizes = new EnumMap<>(Prize.class);
 
     public Result(
-        final int numberOfPlayslips,
         final int numberOfFirstPrizes,
         final int numberOfSecondPrizes,
         final int numberOfThirdPrizes,
-        final int numberOfFourthPrizes
+        final int numberOfFourthPrizes,
+        final int numberOfNoPrizes
     ) {
-        this.numberOfPlayslips = numberOfPlayslips;
-        for (int i = 0; i < numberOfFirstPrizes; i++) {
-            prizes.add(Prize.FIRST);
-        }
-        for (int i = 0; i < numberOfSecondPrizes; i++) {
-            prizes.add(Prize.SECOND);
-        }
-        for (int i = 0; i < numberOfThirdPrizes; i++) {
-            prizes.add(Prize.THIRD);
-        }
-        for (int i = 0; i < numberOfFourthPrizes; i++) {
-            prizes.add(Prize.FOURTH);
-        }
+        prizes.put(Prize.FIRST, numberOfFirstPrizes);
+        prizes.put(Prize.SECOND, numberOfSecondPrizes);
+        prizes.put(Prize.THIRD, numberOfThirdPrizes);
+        prizes.put(Prize.FOURTH, numberOfFourthPrizes);
+        prizes.put(Prize.NONE, numberOfNoPrizes);
     }
 
     public int getNumberOfFirstPrizes() {
-        return getNumberOfWinningPrizes(Prize.FIRST);
+        return prizes.get(Prize.FIRST);
     }
 
     public int getNumberOfSecondPrizes() {
-        return getNumberOfWinningPrizes(Prize.SECOND);
+        return prizes.get(Prize.SECOND);
     }
 
     public int getNumberOfThirdPrizes() {
-        return getNumberOfWinningPrizes(Prize.THIRD);
+        return prizes.get(Prize.THIRD);
     }
 
     public int getNumberOfFourthPrizes() {
-        return getNumberOfWinningPrizes(Prize.FOURTH);
-    }
-
-    private int getNumberOfWinningPrizes(final Prize prize) {
-        return Collections.frequency(prizes, prize);
+        return prizes.get(Prize.FOURTH);
     }
 
     public double calculateReturnOnInvestment() {
         final long totalPrize = calculateTotalPrizeAmount().getValue();
+        final int numberOfPlayslips = prizes.values().stream().mapToInt(Integer::intValue).sum();
         final long investedAmount = new Price(numberOfPlayslips).getValue();
         return (double) totalPrize / investedAmount;
     }

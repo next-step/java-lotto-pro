@@ -4,7 +4,8 @@ public enum Prize {
     FIRST(6, new Price(2_000_000_000L)),
     SECOND(5, new Price(1_500_000L)),
     THIRD(4, new Price(50_000L)),
-    FOURTH(3, new Price(5_000L));
+    FOURTH(3, new Price(5_000L)),
+    NONE(0, new Price(0L));
 
     private final int matchCount;
     private final Price amount;

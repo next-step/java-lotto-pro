@@ -26,12 +26,17 @@ public class Playslips {
             numberOfThridPrizes += contains(winningNumbers, Prize.THIRD.getMatchCount(), i);
             numberOfFourthPrizes += contains(winningNumbers, Prize.FOURTH.getMatchCount(), i);
         }
+        final int numberOfNoPrizes = size()
+            - numberOfFirstPrizes
+            - numberOfSecondPrizes
+            - numberOfThridPrizes
+            - numberOfFourthPrizes;
         return new Result(
-            playslips.size(),
             numberOfFirstPrizes,
             numberOfSecondPrizes,
             numberOfThridPrizes,
-            numberOfFourthPrizes
+            numberOfFourthPrizes,
+            numberOfNoPrizes
         );
     }
 
