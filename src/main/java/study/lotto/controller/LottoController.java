@@ -4,18 +4,14 @@ import study.lotto.domain.*;
 import study.lotto.view.InputView;
 import study.lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoController {
 
     public void run() {
         Money userInputMoney = readMoney();
-
-        LottoNumbersGroup lottoNumbersGroup = generateLottoNumbersGroup(userInputMoney.getPurchaseCount());
+        LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(userInputMoney);
         OutputView.printLottoNumbersGroup(lottoNumbersGroup);
 
-        lottoNumbersGroup.setLastLastLottoNumbers(generateLastLottoNumbers());
+        lottoNumbersGroup.setWinningLottoNumbers(generateWinningLottoNumbers());
         lottoNumbersGroup.setBonusBall(generateBonusBall());
 
         OutputView.printStatics(Statics.valueOf(userInputMoney, lottoNumbersGroup));
@@ -28,22 +24,13 @@ public class LottoController {
         return money;
     }
 
-    private LottoNumbersGroup generateLottoNumbersGroup(final int purchaseCount) {
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for(int i = 0; i < purchaseCount; i++) {
-            LottoNumbers lottoNumbers = new LottoNumbers();
-            lottoNumbersList.add(lottoNumbers);
-        }
-        return new LottoNumbersGroup(lottoNumbersList);
-    }
-
-    private LottoNumbers generateLastLottoNumbers() {
-        OutputView.requestLastLottoNumberGroup();
-        return new LottoNumbers(InputView.readLastLottoNumbers());
+    private LottoNumbers generateWinningLottoNumbers() {
+        OutputView.requestWinningLottoNumberGroup();
+        return new LottoNumbers(InputView.readWinningLottoNumbers());
     }
 
     private LottoNumber generateBonusBall() {
         OutputView.requestBonusBall();
-        return new LottoNumber(InputView.readBonusBallNumber());
+        return new LottoNumber(Integer.parseInt(InputView.readBonusBallNumber()));
     }
 }
