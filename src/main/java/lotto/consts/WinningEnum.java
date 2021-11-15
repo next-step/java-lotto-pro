@@ -23,6 +23,10 @@ public enum WinningEnum {
         return prize;
     }
 
+    public int getMatched() {
+        return matched;
+    }
+
     public static WinningEnum findByMatched(int matched) {
         return Arrays.stream(values()).filter(winningEnum -> winningEnum.matched == matched).findAny().orElse(NONE);
     }

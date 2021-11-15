@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.consts.LottoNumberConst;
 import lotto.consts.WinningEnum;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
@@ -19,12 +18,12 @@ public class OutputView {
     }
 
     public void printWinningStats(WinningStats winningStats) {
-        System.out.println("\n당첨 통계");
-        System.out.println("---------");
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoNumberConst.LOTTO_NUMBER_SIZE - 3, WinningEnum.FIFTH.getPrize(), winningStats.getWinningStats().get(WinningEnum.FIFTH));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoNumberConst.LOTTO_NUMBER_SIZE - 2, WinningEnum.FOURTH.getPrize(), winningStats.getWinningStats().get(WinningEnum.FOURTH));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoNumberConst.LOTTO_NUMBER_SIZE - 1, WinningEnum.THIRD.getPrize(), winningStats.getWinningStats().get(WinningEnum.THIRD));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoNumberConst.LOTTO_NUMBER_SIZE, WinningEnum.FIRST.getPrize(), winningStats.getWinningStats().get(WinningEnum.FIRST));
+        System.out.println("\n당첨 통계\n" +
+                        "---------\n" +
+                        String.format("%d개 일치 (%d원)- %d개\n", WinningEnum.FIFTH.getMatched(), WinningEnum.FIFTH.getPrize(), winningStats.getWinningStats().get(WinningEnum.FIFTH)) +
+                        String.format("%d개 일치 (%d원)- %d개\n", WinningEnum.FOURTH.getMatched(), WinningEnum.FOURTH.getPrize(), winningStats.getWinningStats().get(WinningEnum.FOURTH)) +
+                        String.format("%d개 일치 (%d원)- %d개\n", WinningEnum.THIRD.getMatched(), WinningEnum.THIRD.getPrize(), winningStats.getWinningStats().get(WinningEnum.THIRD)) +
+                        String.format("%d개 일치 (%d원)- %d개\n", WinningEnum.FIRST.getMatched(), WinningEnum.FIRST.getPrize(), winningStats.getWinningStats().get(WinningEnum.FIRST)));
     }
 
     public void printProfitRate(ProfitRate profitRate) {
