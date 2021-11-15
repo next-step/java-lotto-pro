@@ -23,7 +23,8 @@ class LottoMachineTest {
     void sell(int amount, int expected) {
         // when
         PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
-        List<Lotto> lottoList = lottoMachine.sell(purchaseAmount);
+        int count = purchaseAmount.getPurchasableLottoCount();
+        List<Lotto> lottoList = lottoMachine.sell(count);
 
         // then
         Assertions.assertThat(lottoList).hasSize(expected);

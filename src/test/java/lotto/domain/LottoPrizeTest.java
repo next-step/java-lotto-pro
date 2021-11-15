@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoPrizeTest {
 
@@ -77,5 +78,25 @@ class LottoPrizeTest {
 
         // then
         assertThat(lottoPrize).isEqualTo(LottoPrize.FIFTH_PLACE);
+    }
+
+    @DisplayName("valueOf 낙첨")
+    @ParameterizedTest(name = "{displayName}{index} -> matchCount: {0}")
+    @ValueSource(ints = {0, 1, 2})
+    void valueOf_miss(int matchCount) {
+        // when
+        LottoPrize lottoPrize = LottoPrize.valueOf(matchCount, false);
+
+        // then
+        assertThat(lottoPrize).isEqualTo(LottoPrize.MISS);
+    }
+
+    @DisplayName("valueOf 유효하지 않은 matchCount 테스트")
+    @ParameterizedTest(name = "{displayName}{index} -> matchCount: {0}")
+    @ValueSource(ints = {-1, 7})
+    void valueOf_invalidMatchCount(int matchCount) {
+        // when & then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoPrize.valueOf(matchCount, false));
     }
 }

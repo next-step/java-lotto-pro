@@ -11,34 +11,69 @@ import lotto.utils.Console;
 import lotto.utils.StringUtils;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class LottoController {
 
     public static final String NUMBER_DELIMITER = ",";
-    private static final String WINNING_LOTTO_ERROR = String.format("당첨 번호는 %d개여야 합니다.", Lotto.LOTTO_NUMBER_COUNT);
+
+    private final List<Lotto> lottoList = new ArrayList<>();
 
     public void run(LottoMachine lottoMachine) {
-        PurchaseAmount purchaseAmount = getPurchaseAmount();
-        List<Lotto> lottoList = lottoMachine.sell(purchaseAmount);
-        printLottoList(lottoList);
+        lottoList.clear();
 
-        WinningLotto winningLotto = initWeekWinningLotto();
-        printLottoResult(winningLotto, lottoList);
+        PurchaseAmount purchaseAmount = getPurchaseAmount();
+        int manualLottoCount = getManualLottoCount(purchaseAmount);
+        int autoLottoCount = purchaseAmount.getPurchasableLottoCount() - manualLottoCount;
+
+        addManualLotto(manualLottoCount);
+        lottoList.addAll(lottoMachine.sell(autoLottoCount));
+
+        printLottoCount(manualLottoCount, autoLottoCount);
+        printLottoList(lottoList);
+        printLottoResult(initWeekWinningLotto(), lottoList);
     }
 
     private PurchaseAmount getPurchaseAmount() {
         System.out.println(Messages.PURCHASE_AMOUNT_INPUT);
+
         int amount = Integer.parseInt(Console.readLine());
         return new PurchaseAmount(amount);
     }
 
+    private int getManualLottoCount(PurchaseAmount purchaseAmount) {
+        System.out.println(System.lineSeparator() + Messages.MANUAL_LOTTO_COUNT_INPUT);
+
+        int count = Integer.parseInt(Console.readLine());
+        purchaseAmount.validatePurchasableLottoCount(count);
+        return count;
+    }
+
+    private void addManualLotto(int manualLottoCount) {
+        if (manualLottoCount > 0) {
+            System.out.println(System.lineSeparator() + Messages.MANUAL_LOTTO_NUMBER_INPUT);
+        }
+        for (int i = 0; i < manualLottoCount; i++) {
+            Lotto manualLotto = getManualLotto();
+            lottoList.add(manualLotto);
+        }
+    }
+
+    private void printLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.println(System.lineSeparator() + Messages.getPurchasedLottoCount(manualLottoCount, autoLottoCount));
+    }
+
     private void printLottoList(List<Lotto> lottoList) {
-        System.out.println(Messages.getPurchasedLottoCount(lottoList.size()));
         for (Lotto lotto : lottoList) {
             System.out.println(lotto);
         }
+    }
+
+    private Lotto getManualLotto() {
+        int[] numbers = getNumbers();
+        return new Lotto(numbers);
     }
 
     private WinningLotto initWeekWinningLotto() {
@@ -50,10 +85,13 @@ public class LottoController {
 
     private int[] getWinningNumbers() {
         System.out.println(System.lineSeparator() + Messages.LAST_WEEK_WINNING_NUMBER_INPUT);
-        String[] stringNumbers = Console.readLine().split(NUMBER_DELIMITER);
+        return getNumbers();
+    }
 
+    private int[] getNumbers() {
+        String[] stringNumbers = Console.readLine().split(NUMBER_DELIMITER);
         if (stringNumbers.length != Lotto.LOTTO_NUMBER_COUNT) {
-            throw new LottoException(WINNING_LOTTO_ERROR);
+            throw new LottoException(Lotto.LOTTO_NUMBER_COUNT_ERROR);
         }
         return Arrays.stream(stringNumbers)
                 .mapToInt(stringNumber -> Integer.parseInt(stringNumber.trim()))

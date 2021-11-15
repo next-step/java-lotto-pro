@@ -42,7 +42,7 @@ class LottoNumberTest {
 
         // when
         LottoNumber lottoNumber = new LottoNumber(number);
-        BonusLottoNumber bonusLottoNumber = new BonusLottoNumber(bonusNumber);
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
         boolean result = lottoNumber.isBonusNumber(bonusLottoNumber);
 
         // then
@@ -58,7 +58,7 @@ class LottoNumberTest {
 
         // when
         LottoNumber lottoNumber = new LottoNumber(number);
-        BonusLottoNumber bonusLottoNumber = new BonusLottoNumber(bonusNumber);
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
         boolean result = lottoNumber.isBonusNumber(bonusLottoNumber);
 
         // then
