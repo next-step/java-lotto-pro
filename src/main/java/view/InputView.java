@@ -6,9 +6,9 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import lotto.domain.Ball;
-import lotto.domain.TicketCount;
 import lotto.domain.Money;
 import lotto.domain.Ticket;
+import lotto.domain.TicketCount;
 import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
 

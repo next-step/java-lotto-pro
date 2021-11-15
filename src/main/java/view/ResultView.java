@@ -44,6 +44,10 @@ public class ResultView {
         System.out.println(OutputMessage.ASK_MANUAL_COUNT.getMessage());
     }
 
+    public static void printAskManualTicket() {
+        System.out.println(OutputMessage.ASK_MANUAL_TICKET.getMessage());
+    }
+
     public static void printErrorMessage(LottoException lottoException) {
         System.out.println(lottoException.getMessage());
     }

@@ -1,10 +1,13 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lotto.domain.Ball;
-import lotto.domain.TicketCount;
 import lotto.domain.Money;
 import lotto.domain.Ranks;
 import lotto.domain.Ticket;
+import lotto.domain.TicketCount;
 import lotto.domain.Tickets;
 import lotto.domain.WinnerBall;
 import lotto.exception.LottoErrorCode;
@@ -21,10 +24,12 @@ public class LottoMachine {
         ResultView.printNumberOfPurchasedLotto(totalTicketCount.getCount());
 
         TicketCount manualTicketCount = getManualCount(totalTicketCount);
+        Tickets manualTickets = getManualTickets(manualTicketCount);
 
         Tickets tickets = TicketFactory.createRandomTickets(totalTicketCount);
         ResultView.printTickets(tickets);
 
+        ResultView.printAskWinnerTicket();
         Ticket winnerTicket = getTicket();
         WinnerBall winnerBall = getWinnerTicket(winnerTicket);
 
@@ -60,8 +65,18 @@ public class LottoMachine {
         }
     }
 
+    private Tickets getManualTickets(TicketCount manualTicketCount) {
+        ResultView.printAskManualTicket();
+        List<Ticket> tickets = new ArrayList<>();
+
+        for (int i = 0; manualTicketCount.isBiggerThan(i); i++) {
+            tickets.add(getTicket());
+        }
+
+        return new Tickets(tickets);
+    }
+
     private Ticket getTicket() {
-        ResultView.printAskWinnerTicket();
         try {
             return InputView.readTicket();
         } catch (LottoException lottoException) {
