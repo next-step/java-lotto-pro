@@ -57,6 +57,14 @@ public class MatchCountCollection implements Iterable<MatchCount> {
         matchCountMap.put(key, value.addToMatchCount());
     }
 
+    public Integer size() {
+        return matchCounts.size();
+    }
+
+    public List<MatchCount> getMatchCounts() {
+        return matchCounts;
+    }
+
     @Override
     public Iterator<MatchCount> iterator() {
         return matchCounts.iterator();

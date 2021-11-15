@@ -44,6 +44,10 @@ public class MatchCount implements Comparable<MatchCount> {
         return lottoWinningPrice;
     }
 
+    public Integer getMatchCount() {
+        return matchCount;
+    }
+
     @Override
     public int compareTo(MatchCount that) {
         return Long.compare(this.lottoWinningPrice.price, that.lottoWinningPrice.price);
