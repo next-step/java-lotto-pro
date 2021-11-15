@@ -12,11 +12,11 @@ public class Ball implements Comparable<Ball> {
     private final int number;
 
     public Ball(int number) {
-        validate(number);
+        validateNumberInRange(number);
         this.number = number;
     }
 
-    private void validate(int number) {
+    private void validateNumberInRange(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new LottoException(LottoErrorCode.INVALID_BALL);
         }

@@ -11,11 +11,11 @@ public class TicketCount {
     private final long count;
 
     public TicketCount(long count) {
-        validate(count);
+        validateNotNegative(count);
         this.count = count;
     }
 
-    private void validate(long count) {
+    private void validateNotNegative(long count) {
         if (count < MIN_COUNT) {
             throw new LottoException(LottoErrorCode.INVALID_COUNT);
         }

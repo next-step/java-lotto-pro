@@ -11,12 +11,12 @@ public class WinnerBall {
     private final Ball bonusBall;
 
     public WinnerBall(Ticket ticket, Ball bonusBall) {
-        validate(ticket, bonusBall);
+        validateNoDuplicate(ticket, bonusBall);
         this.ticket = ticket;
         this.bonusBall = bonusBall;
     }
 
-    private void validate(Ticket ticket, Ball bonusBall) {
+    private void validateNoDuplicate(Ticket ticket, Ball bonusBall) {
         if (ticket.getBalls().contains(bonusBall)) {
             throw new LottoException(LottoErrorCode.INVALID_BONUS_BALL);
         }
