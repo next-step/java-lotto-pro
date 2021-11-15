@@ -26,15 +26,19 @@ public class InputView {
     }
 
     public static Ticket readTicket() {
-        List<Integer> numbers = Arrays.stream(removeAllSpaces(scanner.nextLine()).split(COMMA))
+        String[] numbers = removeAllSpaces(scanner.nextLine()).split(COMMA);
+
+        List<Integer> validNumbers = Arrays.stream(numbers)
             .map(InputView::parseInt)
             .collect(Collectors.toList());
 
-        return new Ticket(numbers);
+        return new Ticket(validNumbers);
     }
 
     public static Ball readBall() {
-        return new Ball(parseInt(removeAllSpaces(scanner.nextLine())));
+        String number = removeAllSpaces(scanner.nextLine());
+        int validNumber = parseInt(number);
+        return new Ball(validNumber);
     }
 
     private static String removeAllSpaces(String numbers) {

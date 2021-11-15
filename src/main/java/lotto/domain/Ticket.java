@@ -22,16 +22,22 @@ public class Ticket {
             .collect(Collectors.toList());
     }
 
-    private void checkNoDuplicate(List<Integer> numbers) {
-        if (SIZE != numbers.stream().distinct().count()) {
-            throw new LottoException(LottoErrorCode.INVALID_TICKET);
-        }
-    }
-
     private void checkValidSize(List<Integer> numbers) {
         if (numbers.size() != SIZE) {
             throw new LottoException(LottoErrorCode.INVALID_TICKET);
         }
+    }
+
+    private void checkNoDuplicate(List<Integer> numbers) {
+        if (containsDuplicate(numbers)) {
+            throw new LottoException(LottoErrorCode.INVALID_TICKET);
+        }
+    }
+
+    private boolean containsDuplicate(List<Integer> numbers) {
+        return SIZE != numbers.stream()
+            .distinct()
+            .count();
     }
 
     public List<Ball> getBalls() {

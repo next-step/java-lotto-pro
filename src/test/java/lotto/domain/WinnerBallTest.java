@@ -15,6 +15,7 @@ public class WinnerBallTest {
     void constructWinnerTicket() {
         WinnerBall winnerBall = new WinnerBall(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)),
             new Ball(7));
+
         assertThat(winnerBall).isEqualTo(
             new WinnerBall(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)), new Ball(7)));
     }
@@ -35,6 +36,7 @@ public class WinnerBallTest {
             new Ticket(Arrays.asList(7, 8, 9, 10, 5, 6))));
         WinnerBall winnerBall = new WinnerBall(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)),
             new Ball(7));
+
         assertThat(winnerBall.calculateRank(tickets)).isEqualTo(
             new Ranks(Arrays.asList(Rank.FIRST, Rank.MISS)));
     }

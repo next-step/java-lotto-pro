@@ -20,9 +20,12 @@ class TicketsTest {
     @DisplayName("로또 티켓 묶음 여러 건")
     @Test
     void constructTicketsFromList() {
-        assertThat(new Tickets(Arrays.asList(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            new Ticket(Arrays.asList(7, 8, 9, 10, 11, 12)))))
-            .isEqualTo(new Tickets(Arrays.asList(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Ticket(Arrays.asList(7, 8, 9, 10, 11, 12)))));
+        Tickets expected = new Tickets(Arrays.asList(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            new Ticket(Arrays.asList(7, 8, 9, 10, 11, 12))));
+
+        Tickets actual = new Tickets(Arrays.asList(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            new Ticket(Arrays.asList(7, 8, 9, 10, 11, 12))));
+
+        assertThat(actual).isEqualTo(expected);
     }
 }

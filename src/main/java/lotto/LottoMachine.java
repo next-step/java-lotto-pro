@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Ball;
 import lotto.domain.Count;
 import lotto.domain.Money;
+import lotto.domain.Ranks;
 import lotto.domain.Ticket;
 import lotto.domain.Tickets;
 import lotto.domain.WinnerBall;
@@ -24,7 +25,8 @@ public class LottoMachine {
         Ticket winnerTicket = getTicket();
         WinnerBall winnerBall = getWinnerTicket(winnerTicket);
 
-        ResultView.printWinningStatistics(winnerBall.calculateRank(tickets).makeStatistics());
+        Ranks ranks = winnerBall.calculateRank(tickets);
+        ResultView.printWinningStatistics(ranks.makeStatistics());
     }
 
     private Money getMoney() {

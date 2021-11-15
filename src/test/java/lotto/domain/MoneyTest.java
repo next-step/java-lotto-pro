@@ -50,6 +50,7 @@ class MoneyTest {
     void calculateEarningRate() {
         assertThat(Money.calculateEarningRate(Arrays.asList(new Money(5000), new Money(150000))))
             .isEqualTo(new EarningRate(BigDecimal.valueOf(77.5)));
+
         assertThat(Money.calculateEarningRate(new ArrayList<>()))
             .isEqualTo(EarningRate.ZERO);
     }

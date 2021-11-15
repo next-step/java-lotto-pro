@@ -18,8 +18,10 @@ public class Ranks {
         Map<Rank, Long> rankCounts = ranks.stream()
             .collect(groupingBy(Function.identity(), counting()));
 
-        EarningRate earningRate = Money.calculateEarningRate(
-            ranks.stream().map(Rank::getMoney).collect(toList()));
+        final List<Money> moneys = ranks.stream()
+            .map(Rank::getMoney)
+            .collect(toList());
+        EarningRate earningRate = Money.calculateEarningRate(moneys);
 
         return new Statistics(rankCounts, earningRate);
     }

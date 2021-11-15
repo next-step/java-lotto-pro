@@ -62,9 +62,12 @@ public class ResultView {
 
     private static String makeRanksMessage(Map<Rank, Long> rankCounts) {
         return Rank.winningValues().stream()
-            .map(rank -> String.format(OutputMessage.RANKS_FORMAT.getMessage(),
-                makeRankMessage(rank), rankCounts.getOrDefault(rank, ZERO_COUNT)))
+            .map(rank -> makeRankCountMessage(rank, rankCounts.getOrDefault(rank, ZERO_COUNT)))
             .collect(Collectors.joining(NEW_LINE));
+    }
+
+    private static String makeRankCountMessage(Rank rank, long count) {
+        return String.format(OutputMessage.RANKS_FORMAT.getMessage(), makeRankMessage(rank), count);
     }
 
     private static String makeRankMessage(Rank rank) {
