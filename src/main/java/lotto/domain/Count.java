@@ -25,6 +25,10 @@ public class Count {
         return count;
     }
 
+    public boolean isBiggerThan(Count count) {
+        return isBiggerThan(count.count);
+    }
+
     public boolean isBiggerThan(long count) {
         return count < this.count;
     }

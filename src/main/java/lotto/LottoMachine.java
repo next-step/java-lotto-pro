@@ -7,6 +7,7 @@ import lotto.domain.Ranks;
 import lotto.domain.Ticket;
 import lotto.domain.Tickets;
 import lotto.domain.WinnerBall;
+import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
 import lotto.factory.TicketFactory;
 import view.InputView;
@@ -19,7 +20,7 @@ public class LottoMachine {
         Count totalCount = money.calculateCount();
         ResultView.printNumberOfPurchasedLotto(totalCount.getCount());
 
-        Count manualCount = getManualCount();
+        Count manualCount = getManualCount(totalCount);
 
         Tickets tickets = TicketFactory.createRandomTickets(totalCount);
         ResultView.printTickets(tickets);
@@ -41,13 +42,21 @@ public class LottoMachine {
         }
     }
 
-    private Count getManualCount() {
+    private Count getManualCount(Count totalCount) {
         ResultView.printAskManualCount();
         try {
-            return InputView.readCount();
+            Count manualCount = InputView.readCount();
+            checkManualCountIsSmallerThanTotalCount(manualCount, totalCount);
+            return manualCount;
         } catch (LottoException lottoException) {
             ResultView.printErrorMessage(lottoException);
-            return getManualCount();
+            return getManualCount(totalCount);
+        }
+    }
+
+    private void checkManualCountIsSmallerThanTotalCount(Count manualCount, Count totalCount) {
+        if (manualCount.isBiggerThan(totalCount)) {
+            throw new LottoException(LottoErrorCode.INVALID_MANUAL_COUNT);
         }
     }
 

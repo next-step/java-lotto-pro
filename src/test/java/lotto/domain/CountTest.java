@@ -28,10 +28,17 @@ public class CountTest {
             .withMessage("로또 티켓 갯수는 양수여야 합니다.");
     }
 
-    @DisplayName("입력받은 숫자보다 큰 로또개수인지 확인")
+    @DisplayName("입력받은 숫자보다 큰 개수인지 확인")
     @ParameterizedTest
     @CsvSource(value = {"1,true", "2,false", "3,false"})
     void isBiggerThan(int count, boolean result) {
         assertThat(new Count(2).isBiggerThan(count)).isEqualTo(result);
+    }
+
+    @DisplayName("입력받은 숫자보다 큰 개수 class인지 확인")
+    @ParameterizedTest
+    @CsvSource(value = {"1,true", "2,false", "3,false"})
+    void isBiggerThanCount(int count, boolean result) {
+        assertThat(new Count(2).isBiggerThan(new Count(count))).isEqualTo(result);
     }
 }
