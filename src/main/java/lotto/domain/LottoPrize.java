@@ -10,6 +10,7 @@ public enum LottoPrize {
     FIFTH (3, 5000, false),
     NONE (0, 0, false);
 
+    private static final long SECOND_OR_THIRD_COUNT = 5;
     private int count;
     private int money;
     private boolean bonus;
@@ -29,7 +30,10 @@ public enum LottoPrize {
     }
 
     private boolean matchPrize(long matchCount, boolean matchBonus) {
-        return count == matchCount && bonus == matchBonus;
+        if (matchCount == SECOND_OR_THIRD_COUNT) {
+            return count == matchCount && bonus == matchBonus;
+        }
+        return count == matchCount;
     }
 
     public int getCount() {
