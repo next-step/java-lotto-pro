@@ -1,49 +1,51 @@
 package view;
 
-import java.lang.reflect.Field;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import lotto.domain.Ball;
+import lotto.domain.Money;
+import lotto.domain.Ticket;
+import lotto.exception.LottoErrorCode;
+import lotto.exception.LottoException;
 
 public class InputView {
-    private static Scanner scanner = getScanner();
+    private static final Scanner scanner = new Scanner(System.in);
+
+    private static final String COMMA = ",";
+    private static final String ALL_SPACES_PATTERN = "\\s";
+    private static final String EMPTY = "";
 
     private InputView() {
     }
 
-    /**
-     * {@link Scanner#nextLine()} 결과를 반환하는 메소드.
-     * <p>
-     * 개행문자 전까지의 사용자가 입력한 문자열을 반환한다.
-     * </p>
-     *
-     * @return {@link Scanner#nextLine()}
-     * @throws NoSuchElementException scanner.nexLine()중 발생하는 예외
-     * @throws IllegalStateException  scanner.nexLine()중 발생하는 예외
-     */
-    public static String readLine() {
-        makeNewScannerIfScannerIsClosed();
-        return scanner.nextLine();
+    public static Money readMoney() {
+        return new Money(scanner.nextLine());
     }
 
-    private static void makeNewScannerIfScannerIsClosed() {
-        if (Objects.isNull(scanner) || scannerIsClosed()) {
-            scanner = getScanner();
-        }
+    public static Ticket readTicket() {
+        List<Integer> numbers = Arrays.stream(removeAllSpaces(scanner.nextLine()).split(COMMA))
+            .map(InputView::parseInt)
+            .collect(Collectors.toList());
+
+        return new Ticket(numbers);
     }
 
-    private static boolean scannerIsClosed() {
+    public static Ball readBall() {
+        return new Ball(parseInt(removeAllSpaces(scanner.nextLine())));
+    }
+
+    private static String removeAllSpaces(String numbers) {
+        return numbers.replaceAll(ALL_SPACES_PATTERN, EMPTY);
+    }
+
+    private static int parseInt(String number) {
         try {
-            Field sourceClosedField = Scanner.class.getDeclaredField("sourceClosed");
-            sourceClosedField.setAccessible(true);
-            return sourceClosedField.getBoolean(scanner);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            System.out.println("리플렉션 중 에러 발생");
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new LottoException(LottoErrorCode.INVALID_NUMBER);
         }
-        return true;
-    }
-
-    private static Scanner getScanner() {
-        return new Scanner(System.in);
     }
 }
