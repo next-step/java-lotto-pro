@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class LottoTicket {
 
@@ -17,8 +14,21 @@ public class LottoTicket {
         this.numbers = numbers;
     }
 
+    public static LottoTicket of(List<Integer> intNumbers) {
+        List<Number> numbers = convertIntegerToNumber(intNumbers);
+        return new LottoTicket(numbers);
+    }
+
     public boolean isContainNumber(Number number) {
         return numbers.contains(number);
+    }
+
+    private static List<Number> convertIntegerToNumber(List<Integer> inputNumbers) {
+        List<Number> numbers = new ArrayList<>();
+        for (int number : inputNumbers) {
+            numbers.add(Number.of(number));
+        }
+        return numbers;
     }
 
     private void validateDuplicatedNumber(List<Number> numbers) {

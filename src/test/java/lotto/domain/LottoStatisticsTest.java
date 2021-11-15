@@ -17,7 +17,7 @@ class LottoStatisticsTest {
     @BeforeEach
     void setUp() {
         winningNumbers = new WinningNumbers(new int[] {1, 2, 3, 4, 5, 6});
-        bonusNumber = new Number(7);
+        bonusNumber = Number.of(7);
         lottoStatistics = new LottoStatistics(winningNumbers, bonusNumber);
 
         lottoTickets = new LottoTickets(new int[][] {

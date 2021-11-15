@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,7 +20,7 @@ class LottoTicketTest {
     @BeforeEach
     void setUp() {
         for (int i = 1; i <= LottoTicket.LOTTO_NUMBER_COUNT; i++) {
-            numbers.add(new Number(i));
+            numbers.add(Number.of(i));
         }
         lottoTicket = new LottoTicket(numbers);
     }
@@ -31,6 +32,15 @@ class LottoTicketTest {
 
         // then
         assertThat(lottoTicket).isNotNull();
+    }
+
+    @Test
+    void 로또_티켓_생성_정적_팩터리_메서드() {
+        // when
+        LottoTicket result = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        // then
+        assertThat(result.getNumbers().size()).isEqualTo(6);
     }
 
     @Test
@@ -50,7 +60,7 @@ class LottoTicketTest {
         int duplicatedNumber = 1;
         numbers = new ArrayList<>();
         for (int i = 1; i <= LottoTicket.LOTTO_NUMBER_COUNT; i++) {
-            numbers.add(new Number(duplicatedNumber));
+            numbers.add(Number.of(duplicatedNumber));
         }
 
         // when, throw
@@ -63,7 +73,7 @@ class LottoTicketTest {
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
     void 숫자_포함하는지_검사(int inputNumber, boolean expectResult) {
         // when
-        boolean result = lottoTicket.isContainNumber(new Number(inputNumber));
+        boolean result = lottoTicket.isContainNumber(Number.of(inputNumber));
 
         // then
         assertThat(result).isEqualTo(expectResult);

@@ -24,7 +24,7 @@ class LottoTicketsTest {
     @Test
     void 주어진_번호가_있으면_캐시에_저장() throws Exception {
         // given
-        Number number = new Number(1);
+        Number number = Number.of(1);
         Map<LottoTicket, Integer> winningCountCache = new HashMap<>();
 
         // when
@@ -48,7 +48,7 @@ class LottoTicketsTest {
     @Test
     void 보너스_번호_포함_여부_Map_조회() {
         // given
-        Number bonusNumber = new Number(6);
+        Number bonusNumber = Number.of(6);
         List<LottoTicket> lottoTickets = this.lottoTickets.getLottoTickets();
 
         // when
@@ -58,5 +58,4 @@ class LottoTicketsTest {
         assertThat(result.get(lottoTickets.get(0))).isTrue();
         assertThat(result.get(lottoTickets.get(1))).isFalse();
     }
-
 }

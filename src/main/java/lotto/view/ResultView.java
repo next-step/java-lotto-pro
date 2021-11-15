@@ -11,16 +11,18 @@ public class ResultView {
     public static final String PROFIT_MESSAGE = "이익";
     public static final String DAMAGE_MESSAGE = "손해";
     public static final String ORIGIN_MESSAGE = "본전";
+    public static final String NEXT_LINE_MESSAGE = "\n";
 
-    public void printLottoTicketCount(int lottoTicketCount) {
-        System.out.println(lottoTicketCount + "개를 구매했습니다.");
+    public void printLottoTicketCount(PurchaseCounts purchaseCounts) {
+        System.out.println(EMPTY_MESSAGE);
+        System.out.println("수동으로 " + purchaseCounts.getManualPurchaseCount().getCount() + "장, 자동으로 " + purchaseCounts.getAutoPurchaseCount().getCount() + "개를 구매했습니다.");
     }
 
     public void printLottoTickets(LottoTickets lottoTickets) {
         StringBuilder stringBuilder = new StringBuilder();
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             stringBuilder.append(makeLottoTicketString(lottoTicket));
-            stringBuilder.append("\n");
+            stringBuilder.append(NEXT_LINE_MESSAGE);
         }
         System.out.println(stringBuilder);
     }

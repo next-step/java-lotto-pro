@@ -49,7 +49,7 @@ public class LottoTickets {
     private LottoTicket convertArrayToLottoTicket(int[] numbers) {
         List<Number> numberList = new ArrayList<>();
         for (int number : numbers) {
-            numberList.add(new Number(number));
+            numberList.add(Number.of(number));
         }
         return new LottoTicket(numberList);
     }

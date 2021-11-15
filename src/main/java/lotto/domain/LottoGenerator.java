@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.domain.Number.MAX_NUMBER;
+import static lotto.domain.Number.MIN_NUMBER;
+
 public class LottoGenerator {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_SUBLIST_INDEX = 0;
     private static final int MAX_SUBLIST_INDEX = LottoTicket.LOTTO_NUMBER_COUNT;
     private static final int MINUS_PURCHASE_COUNT = 1;
@@ -19,7 +20,7 @@ public class LottoGenerator {
         }
     }
 
-    public LottoTickets createLottoTickets(PurchaseCount purchaseCount) {
+    public List<LottoTicket> createAutoLottoTickets(PurchaseCount purchaseCount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         while (purchaseCount.isGreaterThanZero()) {
             Collections.shuffle(numbers);
@@ -28,12 +29,21 @@ public class LottoGenerator {
             lottoTickets.add(new LottoTicket(selectedNumbers));
             purchaseCount = purchaseCount.minus(MINUS_PURCHASE_COUNT);
         }
-        return new LottoTickets(lottoTickets);
+        return lottoTickets;
+    }
+
+    public List<LottoTicket> createManualLottoTickets(List<List<Integer>> manualNumbers) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (List<Integer> numbers : manualNumbers) {
+            Collections.sort(numbers);
+            lottoTickets.add(LottoTicket.of(numbers));
+        }
+        return lottoTickets;
     }
 
     private void initNumbers() {
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            numbers.add(new Number(i));
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            numbers.add(Number.of(i));
         }
     }
 }

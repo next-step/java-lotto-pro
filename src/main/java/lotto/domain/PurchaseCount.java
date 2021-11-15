@@ -21,6 +21,22 @@ public class PurchaseCount {
         return new PurchaseCount(this.count - count);
     }
 
+    public boolean isGreaterThan(int inputCount) {
+        return this.count > inputCount;
+    }
+
+    public int gap(int inputCount) {
+        return inputCount - this.count;
+    }
+
+    public boolean isZero() {
+        return this.count == 0;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -5,6 +5,9 @@ import lotto.domain.Number;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+import java.util.Optional;
+
 public class LottoMain {
 
     public static void main(String[] args) {
@@ -13,15 +16,21 @@ public class LottoMain {
         LottoShop lottoShop = new LottoShop();
 
         Money money = inputView.getPurchaseMoney();
-        int lottoTicketCount = lottoShop.calculatePurchasableLottoTicketCount(money);
-        resultView.printLottoTicketCount(lottoTicketCount);
+        PurchaseCounts purchaseCounts = inputView.getPurchaseCounts(money);
 
-        LottoTickets lottoTickets = lottoShop.createLottoTickets(new PurchaseCount(lottoTicketCount));
-        resultView.printLottoTickets(lottoTickets);
+        List<List<Integer>> manualNumbers = inputView.getManualNumbers(purchaseCounts.getManualPurchaseCount());
+        List<LottoTicket> manualLottoTickets = lottoShop.createManualLottoTickets(manualNumbers);
+
+        resultView.printLottoTicketCount(purchaseCounts);
+
+        List<LottoTicket> autoLottoTickets = lottoShop.createAutoLottoTickets(purchaseCounts.getAutoPurchaseCount());
+        manualLottoTickets.addAll(autoLottoTickets);
+        LottoTickets totalLottoTickets = new LottoTickets(manualLottoTickets);
+        resultView.printLottoTickets(totalLottoTickets);
 
         WinningNumbers winningNumbers = inputView.getWinningNumbers();
-        Number bonusNumber = inputView.getBonusNumber();
+        Number bonusNumber = inputView.getBonusNumber(winningNumbers);
 
-        resultView.printLottoRewardResult(winningNumbers, lottoTickets, bonusNumber);
+        resultView.printLottoRewardResult(winningNumbers, totalLottoTickets, bonusNumber);
     }
 }

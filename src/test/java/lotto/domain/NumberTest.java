@@ -14,17 +14,17 @@ class NumberTest {
     @ValueSource(ints = {1, 45})
     void number_생성(int inputNumber) {
         // given, when
-        Number number = new Number(inputNumber);
+        Number number = Number.of(inputNumber);
 
         // then
-        assertThat(number).isEqualTo(new Number(inputNumber));
+        assertThat(number).isEqualTo(Number.of(inputNumber));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void number_생성_범위_초과(int inputNumber) {
         // given, when, then
-        assertThatThrownBy(() -> new Number(inputNumber))
+        assertThatThrownBy(() -> Number.of(inputNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호는 " + MIN_NUMBER + " ~ " + MAX_NUMBER + "의 숫자만 입력 가능합니다. (입력값: " + inputNumber + ")");
     }
