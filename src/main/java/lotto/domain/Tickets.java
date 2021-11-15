@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,6 +9,15 @@ public class Tickets {
 
     public Tickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public static Tickets combineTickets(Tickets... allTickets) {
+        List<Ticket> combinedTickets = new ArrayList<>();
+        for (Tickets tickets : allTickets) {
+            combinedTickets.addAll(tickets.tickets);
+        }
+
+        return new Tickets(combinedTickets);
     }
 
     public List<Ticket> getTickets() {

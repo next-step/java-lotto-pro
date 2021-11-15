@@ -17,8 +17,9 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printNumberOfPurchasedLotto(long number) {
-        System.out.println(String.format(OutputMessage.NUMBER_OF_PURCHASED_LOTTO_FORMAT.getMessage(), number));
+    public static void printNumberOfPurchasedLotto(long manual, long auto) {
+        System.out.println();
+        System.out.println(String.format(OutputMessage.NUMBER_OF_PURCHASED_LOTTO_FORMAT.getMessage(), manual, auto));
     }
 
     public static void printTickets(Tickets tickets) {
@@ -45,6 +46,7 @@ public class ResultView {
     }
 
     public static void printAskManualTicket() {
+        System.out.println();
         System.out.println(OutputMessage.ASK_MANUAL_TICKET.getMessage());
     }
 

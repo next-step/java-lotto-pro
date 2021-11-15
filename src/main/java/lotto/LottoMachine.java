@@ -21,14 +21,15 @@ public class LottoMachine {
         Money money = getMoney();
 
         TicketCount totalTicketCount = money.calculateCount();
-        ResultView.printNumberOfPurchasedLotto(totalTicketCount.getCount());
 
         TicketCount manualTicketCount = getManualCount(totalTicketCount);
         Tickets manualTickets = getManualTickets(manualTicketCount);
 
         TicketCount autoTicketCount = totalTicketCount.minus(manualTicketCount);
 
-        Tickets tickets = TicketFactory.createRandomTickets(autoTicketCount);
+        Tickets autoTickets = TicketFactory.createRandomTickets(autoTicketCount);
+        Tickets tickets = Tickets.combineTickets(manualTickets, autoTickets);
+        ResultView.printNumberOfPurchasedLotto(manualTicketCount.getCount(), autoTicketCount.getCount());
         ResultView.printTickets(tickets);
 
         ResultView.printAskWinnerTicket();

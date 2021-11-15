@@ -28,4 +28,16 @@ class TicketsTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @DisplayName("티켓 묶음 합치기")
+    @Test
+    void combineTickets() {
+        Tickets tickets1 = new Tickets(Collections.singletonList(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        Tickets tickets2 = new Tickets(Collections.singletonList(new Ticket(Arrays.asList(7, 8, 9, 10, 11, 12))));
+
+        Tickets expected = new Tickets(Arrays.asList(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            new Ticket(Arrays.asList(7, 8, 9, 10, 11, 12))));
+
+        assertThat(Tickets.combineTickets(tickets1, tickets2)).isEqualTo(expected);
+    }
 }
