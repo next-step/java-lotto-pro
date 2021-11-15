@@ -1,5 +1,6 @@
 package nextstep.lotto.domain;
 
+import nextstep.lotto.domain.MatchCount.LottoWinningPrice;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,7 +16,7 @@ public class MatchCountTest {
     @DisplayName("MatchCount 생성자 테스트")
     @ParameterizedTest
     @MethodSource("provide")
-    public void matchCountConstructorTest(Integer index, Integer matchCount, MatchCount given) {
+    public void matchCountConstructorTest(LottoWinningPrice index, Integer matchCount, MatchCount given) {
 
         // when
         MatchCount provide = new MatchCount(index, matchCount);
@@ -27,7 +28,7 @@ public class MatchCountTest {
 
     public static Stream<Arguments> provide() {
         return Stream.of(
-                Arguments.of(3, 1, new MatchCount(3, MATCH_3_COUNT, 1))
+                Arguments.of(MATCH_3_COUNT, 1, new MatchCount(MATCH_3_COUNT, 1))
         );
     }
 }

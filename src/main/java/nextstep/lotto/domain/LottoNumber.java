@@ -14,7 +14,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final Integer lottoNumber;
 
     public LottoNumber() {
-        this.lottoNumber = LottoRandomGenerator.pickNumberInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER);
+        this(LottoRandomGenerator.pickNumberInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
     }
 
     public LottoNumber(Integer lottoNumber) {
@@ -26,6 +26,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (!(LOTTO_MIN_NUMBER <= lottoNumber && LOTTO_MAX_NUMBER >= lottoNumber)) {
             throw new LottoRuntimeException(LottoExceptionMessage.INVALID_LOTTO_NUMBER_MESSAGE);
         }
+    }
+
+    @Override
+    public int compareTo(LottoNumber that) {
+        return this.lottoNumber - that.lottoNumber;
     }
 
     @Override
@@ -44,10 +49,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public String toString() {
         return Integer.toString(lottoNumber);
-    }
-
-    @Override
-    public int compareTo(LottoNumber that) {
-        return this.lottoNumber - that.lottoNumber;
     }
 }

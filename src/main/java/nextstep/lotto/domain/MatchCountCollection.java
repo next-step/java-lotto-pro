@@ -1,5 +1,7 @@
 package nextstep.lotto.domain;
 
+import nextstep.lotto.domain.MatchCount.LottoWinningPrice;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -9,46 +11,42 @@ import java.util.Objects;
 
 public class MatchCountCollection implements Iterable<MatchCount> {
 
-    public static final Integer WINNER_LOTTO_MIN_MATCHING_COUNT = 3;
     private final List<MatchCount> matchCounts;
 
     public MatchCountCollection(List<MatchCount> matchCounts) {
         this.matchCounts = matchCounts;
     }
 
-    private MatchCountCollection(Map<Integer, MatchCount> matchCountMap) {
+    private MatchCountCollection(Map<LottoWinningPrice, MatchCount> matchCountMap) {
 
         List<MatchCount> matchCounts = new ArrayList<>();
-        for (Map.Entry<Integer, MatchCount> entry : matchCountMap.entrySet()) {
-            Integer key = entry.getKey();
+        for (Map.Entry<LottoWinningPrice, MatchCount> entry : matchCountMap.entrySet()) {
             MatchCount value = entry.getValue();
-            loadGreaterThanMinMatchingCount(matchCounts, key, value);
+            matchCounts.add(value);
         }
 
         Collections.sort(matchCounts);
         this.matchCounts = matchCounts;
     }
 
-    private void loadGreaterThanMinMatchingCount(List<MatchCount> matchCounts, Integer key, MatchCount value) {
-        if (key >= WINNER_LOTTO_MIN_MATCHING_COUNT) {
-            matchCounts.add(value);
-        }
-    }
-
     public static MatchCountCollection matchPurchaseLottoWithWinningLotto(PurchaseLotto purchaseLotto, WinningLotto winningLotto) {
 
-        Map<Integer, MatchCount> matchCountMap = MatchCount.initMatchCountCache();
+        Map<LottoWinningPrice, MatchCount> matchCountMap = MatchCount.initMatchCountCache();
         for (Lotto eachLotto : purchaseLotto) {
             Integer calculatedCount = winningLotto.matchWithPurchaseLottoCount(eachLotto);
-
-            MatchCount cached = matchCountMap.get(calculatedCount);
-            loadMatchCountMap(matchCountMap, calculatedCount, cached);
+            LottoWinningPrice lottoWinningPrice = LottoWinningPrice.winningPrice(calculatedCount);
+            loadMatchCountMap(matchCountMap, lottoWinningPrice, matchCountMap.get(lottoWinningPrice));
         }
 
         return new MatchCountCollection(matchCountMap);
     }
 
-    private static void loadMatchCountMap(Map<Integer, MatchCount> matchCountMap, Integer key, MatchCount value) {
+
+    private static void loadMatchCountMap(Map<LottoWinningPrice, MatchCount> matchCountMap, LottoWinningPrice key, MatchCount value) {
+
+        if (key == LottoWinningPrice.NONE) {
+            return;
+        }
 
         if (Objects.isNull(value)) {
             matchCountMap.put(key, new MatchCount(key, 1));

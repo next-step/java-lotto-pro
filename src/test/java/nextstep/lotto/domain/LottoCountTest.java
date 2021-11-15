@@ -1,8 +1,8 @@
 package nextstep.lotto.domain;
 
 import nextstep.lotto.util.LottoRandomGenerator;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -28,7 +28,7 @@ public class LottoCountTest {
         // return
         Assertions.assertThat(purchaseLotto.size()).isEqualTo(1);
         for (Lotto lotto : purchaseLotto) {
-            Assertions.assertThat(lotto.toString()).isEqualTo("1, 2, 3, 4, 5, 6");
+            Assertions.assertThat(StringUtils.join(lotto.getLottoNumbers().getLottoNumbers(), ", ")).isEqualTo("1, 2, 3, 4, 5, 6");
         }
 
         mockRandoms.close();
