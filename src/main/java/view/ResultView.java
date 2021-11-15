@@ -39,6 +39,11 @@ public class ResultView {
         System.out.println(OutputMessage.ASK_PURCHASE_AMOUNT.getMessage());
     }
 
+    public static void printAskManualCount() {
+        System.out.println();
+        System.out.println(OutputMessage.ASK_MANUAL_COUNT.getMessage());
+    }
+
     public static void printErrorMessage(LottoException lottoException) {
         System.out.println(lottoException.getMessage());
     }

@@ -16,10 +16,12 @@ public class LottoMachine {
     public void start() {
         Money money = getMoney();
 
-        Count count = money.calculateCount();
-        ResultView.printNumberOfPurchasedLotto(count.getCount());
+        Count totalCount = money.calculateCount();
+        ResultView.printNumberOfPurchasedLotto(totalCount.getCount());
 
-        Tickets tickets = TicketFactory.createRandomTickets(count);
+        Count manualCount = getManualCount();
+
+        Tickets tickets = TicketFactory.createRandomTickets(totalCount);
         ResultView.printTickets(tickets);
 
         Ticket winnerTicket = getTicket();
@@ -36,6 +38,16 @@ public class LottoMachine {
         } catch (LottoException lottoException) {
             ResultView.printErrorMessage(lottoException);
             return getMoney();
+        }
+    }
+
+    private Count getManualCount() {
+        ResultView.printAskManualCount();
+        try {
+            return InputView.readCount();
+        } catch (LottoException lottoException) {
+            ResultView.printErrorMessage(lottoException);
+            return getManualCount();
         }
     }
 

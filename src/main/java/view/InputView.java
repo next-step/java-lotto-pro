@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import lotto.domain.Ball;
+import lotto.domain.Count;
 import lotto.domain.Money;
 import lotto.domain.Ticket;
 import lotto.exception.LottoErrorCode;
@@ -25,6 +26,11 @@ public class InputView {
         return new Money(scanner.nextLine());
     }
 
+    public static Count readCount() {
+        long count = parseLong(scanner.nextLine());
+        return new Count(count);
+    }
+
     public static Ticket readTicket() {
         String[] numbers = removeAllSpaces(scanner.nextLine()).split(COMMA);
 
@@ -39,6 +45,14 @@ public class InputView {
         String number = removeAllSpaces(scanner.nextLine());
         int validNumber = parseInt(number);
         return new Ball(validNumber);
+    }
+
+    private static long parseLong(String number) {
+        try {
+            return Long.parseLong(number);
+        } catch (NumberFormatException e) {
+            throw new LottoException(LottoErrorCode.INVALID_NUMBER);
+        }
     }
 
     private static String removeAllSpaces(String numbers) {
