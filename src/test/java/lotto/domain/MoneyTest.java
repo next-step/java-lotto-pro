@@ -14,19 +14,19 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.exception.LottoException;
 
-class LottoMoneyTest {
+class MoneyTest {
     @DisplayName("로또 생성")
     @Test
-    void constructLottoMoney() {
-        LottoMoney lottoMoney = new LottoMoney(5000);
-        assertThat(lottoMoney).isEqualTo(new LottoMoney(5000));
+    void constructMoney() {
+        Money money = new Money(5000);
+        assertThat(money).isEqualTo(new Money(5000));
     }
 
     @DisplayName("텍스트 금액 입력 성공")
     @ParameterizedTest
     @ValueSource(strings = {"0", "1", "14000"})
-    void constructLottoMoney_success(String money) {
-        assertThat(new LottoMoney(money)).isEqualTo(new LottoMoney(Integer.parseInt(money)));
+    void constructMoney_success(String money) {
+        assertThat(new Money(money)).isEqualTo(new Money(Integer.parseInt(money)));
     }
 
     @DisplayName("잘못된 값으로 금액 입력시 에러")
@@ -34,23 +34,23 @@ class LottoMoneyTest {
     @ValueSource(strings = {"test", "-1", ""})
     void throwsError_whenInvalidMoney(String invalidMoney) {
         assertThatExceptionOfType(LottoException.class)
-            .isThrownBy(() -> new LottoMoney(invalidMoney))
+            .isThrownBy(() -> new Money(invalidMoney))
             .withMessage("0 이상의 숫자를 입력해주세요.");
     }
 
     @DisplayName("구입 가능한 로또 개수 계산")
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "0,0", "999,0", "1001,1"})
-    void calculateLottoCount(String money, int lottoCount) {
-        assertThat(new LottoMoney(money).calculateLottoCount()).isEqualTo(new LottoCount(lottoCount));
+    void calculateCount(String money, int num) {
+        assertThat(new Money(money).calculateCount()).isEqualTo(new Count(num));
     }
 
     @DisplayName("수익률 계산")
     @Test
     void calculateEarningRate() {
-        assertThat(LottoMoney.calculateEarningRate(Arrays.asList(new LottoMoney(5000), new LottoMoney(150000))))
+        assertThat(Money.calculateEarningRate(Arrays.asList(new Money(5000), new Money(150000))))
             .isEqualTo(new EarningRate(BigDecimal.valueOf(77.5)));
-        assertThat(LottoMoney.calculateEarningRate(new ArrayList<>()))
+        assertThat(Money.calculateEarningRate(new ArrayList<>()))
             .isEqualTo(EarningRate.ZERO);
     }
 }

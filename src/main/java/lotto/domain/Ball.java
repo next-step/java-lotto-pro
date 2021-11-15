@@ -5,19 +5,20 @@ import java.util.Objects;
 import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
 
-public class LottoNumber implements Comparable<LottoNumber> {
-    private final int number;
-    public static final int LOTTO_MIN_NUMBER = 1;
-    public static final int LOTTO_MAX_NUMBER = 45;
+public class Ball implements Comparable<Ball> {
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
 
-    public LottoNumber(int number) {
-        checkValidLottoNumber(number);
+    private final int number;
+
+    public Ball(int number) {
+        validate(number);
         this.number = number;
     }
 
-    private void checkValidLottoNumber(int number) {
-        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
-            throw new LottoException(LottoErrorCode.INVALID_LOTTO_NUMBER);
+    private void validate(int number) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+            throw new LottoException(LottoErrorCode.INVALID_BALL);
         }
     }
 
@@ -30,10 +31,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof LottoNumber)) {
+        if (!(o instanceof Ball)) {
             return false;
         }
-        LottoNumber that = (LottoNumber)o;
+        Ball that = (Ball)o;
         return number == that.number;
     }
 
@@ -43,7 +44,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public int compareTo(LottoNumber that) {
+    public int compareTo(Ball that) {
         return Integer.compare(this.number, that.number);
     }
 }

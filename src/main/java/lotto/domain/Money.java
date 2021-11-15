@@ -7,28 +7,28 @@ import java.util.Objects;
 import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
 
-public class LottoMoney {
+public class Money {
     private static final int LOTTO_PRICE = 1000;
     private static final int ZERO_SIZE = 0;
     private static final int MIN_MONEY = 0;
 
-    private long money;
+    private final long money;
 
-    public LottoMoney(long money) {
+    public Money(long money) {
         this.money = money;
     }
 
-    public LottoMoney(String money) {
+    public Money(String money) {
         this.money = parseToValidMoney(money);
     }
 
-    private long parseToValidMoney(String moneyText) {
-        long money = parseToNumber(moneyText);
-        if (isNegativeNumber(money)) {
+    private long parseToValidMoney(String money) {
+        long validMoney = parseToNumber(money);
+        if (isNegativeNumber(validMoney)) {
             throw new LottoException(LottoErrorCode.INVALID_MONEY);
         }
 
-        return money;
+        return validMoney;
     }
 
     private long parseToNumber(String money) {
@@ -43,24 +43,24 @@ public class LottoMoney {
         return number < MIN_MONEY;
     }
 
+    public static EarningRate calculateEarningRate(List<Money> monies) {
+        if (monies.size() == ZERO_SIZE) {
+            return EarningRate.ZERO;
+        }
+
+        long sum = monies.stream()
+            .mapToLong(Money::getMoney)
+            .sum();
+
+        return new EarningRate(BigDecimal.valueOf((double)sum / monies.size() / LOTTO_PRICE));
+    }
+
     public long getMoney() {
         return money;
     }
 
-    public static EarningRate calculateEarningRate(List<LottoMoney> lottoMonies) {
-        if (lottoMonies.size() == ZERO_SIZE) {
-            return EarningRate.ZERO;
-        }
-
-        long sum = lottoMonies.stream()
-            .mapToLong(lottoMoney -> lottoMoney.money)
-            .sum();
-
-        return new EarningRate(BigDecimal.valueOf((double)sum / lottoMonies.size() / LOTTO_PRICE));
-    }
-
-    public LottoCount calculateLottoCount() {
-        return new LottoCount(money / LOTTO_PRICE);
+    public Count calculateCount() {
+        return new Count(money / LOTTO_PRICE);
     }
 
     @Override
@@ -68,10 +68,10 @@ public class LottoMoney {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof LottoMoney)) {
+        if (!(o instanceof Money)) {
             return false;
         }
-        LottoMoney that = (LottoMoney)o;
+        Money that = (Money)o;
         return money == that.money;
     }
 
