@@ -5,7 +5,7 @@ import study.StringAddCalculator;
 import java.util.IllegalFormatException;
 import java.util.Scanner;
 
-import static study.temp.lotto.auto.MessageUtil.NEGATIVE_NUMBER_ERR_MSG;
+import static study.lotto.view.MessageUtil.NEGATIVE_NUMBER_ERR_MSG;
 
 public class InputView {
 
@@ -14,26 +14,19 @@ public class InputView {
     public static String readMoney() {
         String line = sc.nextLine();
         try {
-            validateMoney(line);
+            validateNegativeNumber(line);
         } catch (IllegalStateException | IllegalFormatException e) {
             line = readMoney();
         }
         return line;
     }
 
-    private static void validateMoney(final String line) {
-        int money = Integer.parseInt(line);
-        if(money < 0) {
-            throw new IllegalStateException(NEGATIVE_NUMBER_ERR_MSG);
-        }
-    }
-
-    public static String readLastLottoNumbers() {
+    public static String readWinningLottoNumbers() {
         String line = removeSpace(sc.nextLine());
         try {
             validateInputLottoNumbers(line);
         } catch (RuntimeException e) {
-            line = readLastLottoNumbers();
+            line = readWinningLottoNumbers();
         }
         return line;
     }
@@ -52,19 +45,20 @@ public class InputView {
         }
     }
 
-    public static int readBonusBallNumber() {
+    public static String readBonusBallNumber() {
         String line = sc.nextLine();
         try {
-            validateInput(line);
+            validateNegativeNumber(line);
         } catch (RuntimeException e) {
-            line = readLastLottoNumbers();
+            line = readBonusBallNumber();
         }
-        return Integer.parseInt(line);
+        return line;
     }
 
-    private static void validateInput(final String line) {
-        if(Integer.parseInt(line) < 0) {
-            throw new RuntimeException(NEGATIVE_NUMBER_ERR_MSG);
+    private static void validateNegativeNumber(final String line) {
+        int number = Integer.parseInt(line);
+        if(number < 0) {
+            throw new IllegalStateException(NEGATIVE_NUMBER_ERR_MSG);
         }
     }
 }
