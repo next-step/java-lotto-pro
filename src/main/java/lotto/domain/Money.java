@@ -15,26 +15,12 @@ public class Money {
     private final long money;
 
     public Money(long money) {
+        validateNotNegative(money);
         this.money = money;
     }
 
-    public Money(String money) {
-        this.money = parseToValidMoney(money);
-    }
-
-    private long parseToValidMoney(String money) {
-        long validMoney = parseToNumber(money);
-        if (isNegativeNumber(validMoney)) {
-            throw new LottoException(LottoErrorCode.INVALID_MONEY);
-        }
-
-        return validMoney;
-    }
-
-    private long parseToNumber(String money) {
-        try {
-            return Long.parseLong(money);
-        } catch (NumberFormatException e) {
+    private void validateNotNegative(long money) {
+        if (isNegativeNumber(money)) {
             throw new LottoException(LottoErrorCode.INVALID_MONEY);
         }
     }

@@ -23,7 +23,7 @@ public class InputView {
     }
 
     public static Money readMoney() {
-        return new Money(scanner.nextLine());
+        return new Money(parseLong(scanner.nextLine()));
     }
 
     public static TicketCount readCount() {
