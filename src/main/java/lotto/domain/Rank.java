@@ -16,7 +16,7 @@ public enum Rank {
 
     private static final Map<Integer, Rank> countToRank =
         winningValues().stream()
-            .filter(rank -> rank != SECOND)
+            .filter(rank -> !isSecond(rank))
             .collect(Collectors.toMap(rank -> rank.correctCount, Function.identity()));
 
     private final int correctCount;
@@ -40,6 +40,10 @@ public enum Rank {
         return Arrays.stream(values())
             .filter(rank -> rank != MISS)
             .collect(Collectors.toList());
+    }
+
+    public static boolean isSecond(Rank rank) {
+        return rank == SECOND;
     }
 
     public Money getMoney() {

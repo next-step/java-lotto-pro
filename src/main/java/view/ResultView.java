@@ -65,7 +65,7 @@ public class ResultView {
     }
 
     private static String makeRankMessage(Rank rank) {
-        if (Rank.SECOND == rank) {
+        if (Rank.isSecond(rank)) {
             return String.format(OutputMessage.BONUS_RANK_FORMAT.getMessage(),
                 rank.getCorrectCount(), rank.getMoney().getMoney());
         }
