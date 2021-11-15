@@ -1,38 +1,37 @@
 package study.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbersGroup {
 
     private final List<LottoNumbers> lottoNumbersGroup;
 
-    private LottoNumbers lastLottoNumbers;
+    private LottoNumbers winningLottoNumbers;
     private LottoNumber bonusBall;
 
-    public LottoNumbersGroup(List<LottoNumbers> lottoNumbersGroup) {
-        this.lottoNumbersGroup = lottoNumbersGroup;
-    }
-
-    public LottoNumbersGroup(List<LottoNumbers> lottoNumbersGroup, LottoNumbers lastLottoNumbers, LottoNumber bonusBall) {
-        this.lottoNumbersGroup = lottoNumbersGroup;
-        this.lastLottoNumbers = lastLottoNumbers;
-        this.bonusBall = bonusBall;
+    public LottoNumbersGroup(Money money) {
+        lottoNumbersGroup = new ArrayList<>();
+        for(int i = 0; i < money.getPurchaseCount(); i++) {
+            LottoNumbers lottoNumbers = new LottoNumbers();
+            lottoNumbersGroup.add(lottoNumbers);
+        }
     }
 
     public List<LottoNumbers> getLottoNumbersList() {
         return lottoNumbersGroup;
     }
 
-    public void setLastLastLottoNumbers(LottoNumbers lastLottoNumbers) {
-        this.lastLottoNumbers = lastLottoNumbers;
+    public void setWinningLottoNumbers(LottoNumbers winningLottoNumbers) {
+        this.winningLottoNumbers = winningLottoNumbers;
     }
 
     public void setBonusBall(LottoNumber bonusBall) {
         this.bonusBall = bonusBall;
     }
 
-    public LottoNumbers getLastLottoNumbers() {
-        return this.lastLottoNumbers;
+    public LottoNumbers getWinningLottoNumbers() {
+        return this.winningLottoNumbers;
     }
 
     public LottoNumber getBonusBall() {
