@@ -17,7 +17,7 @@ public class LottoTest {
     public void matchWithPurchaseLottoCountTest(Lotto winningNumbers, Lotto purchased, BonusBall bonusBall, Integer expected) {
 
         // when
-        Integer result = winningNumbers.matchWithPurchaseLottoCount(purchased, bonusBall);
+        Integer result = winningNumbers.matchWithPurchaseLottoCount(purchased);
 
         // then
         Assertions.assertThat(result).isEqualTo(expected);

@@ -1,12 +1,13 @@
 package nextstep.lotto.domain;
 
-import nextstep.lotto.constance.LottoExceptionMessage;
 import nextstep.lotto.exception.LottoRuntimeException;
 import nextstep.lotto.util.LottoRandomGenerator;
 
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+
+    public static final String INVALID_LOTTO_NUMBER_MESSAGE = "로또 번호는 1~9까지의 수입니다.";
 
     private static final Integer LOTTO_MIN_NUMBER = 1;
     private static final Integer LOTTO_MAX_NUMBER = 45;
@@ -24,7 +25,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validateLottoNumber(Integer lottoNumber) {
         if (!(LOTTO_MIN_NUMBER <= lottoNumber && LOTTO_MAX_NUMBER >= lottoNumber)) {
-            throw new LottoRuntimeException(LottoExceptionMessage.INVALID_LOTTO_NUMBER_MESSAGE);
+            throw new LottoRuntimeException(INVALID_LOTTO_NUMBER_MESSAGE);
         }
     }
 

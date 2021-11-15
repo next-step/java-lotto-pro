@@ -23,6 +23,7 @@ import static nextstep.lotto.constance.LottoDisplayMessage.BONUS_BALL_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.DIVIDE_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.LAST_WEEK_LOTTO_WIN_NUMBERS_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.LOSS_STAT_MESSAGE;
+import static nextstep.lotto.constance.LottoDisplayMessage.MATCH_COUNT_POSTFIX_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PROFIT_STAT_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_AMOUNT_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_COUNT_MESSAGE;
@@ -32,14 +33,16 @@ import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_P
 import static nextstep.lotto.constance.LottoDisplayMessage.WINNING_STAT_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.WINNING_STAT_RESULT_POSTFIX_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.WINNING_STAT_RESULT_PREFIX_MESSAGE;
-import static nextstep.lotto.constance.LottoExceptionMessage.ERROR;
-import static nextstep.lotto.constance.LottoExceptionMessage.INVALID_LOTTO_PURCHASE_AMOUNT_MESSAGE;
-import static nextstep.lotto.constance.LottoExceptionMessage.INVALID_WINNING_LOTTO_NUMBER_MESSAGE;
+
 
 public class LottoDisplay {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    public static final String ERROR = "[ERROR]";
+    public static final String INVALID_LOTTO_PURCHASE_AMOUNT_MESSAGE = "구입 금액은 숫자만 입력이 가능합니다.";
+    public static final String INVALID_WINNING_LOTTO_NUMBER_MESSAGE = "당첨 번호는 숫자만 입력이 가능합니다.";
 
+
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static PurchaseLottoAmount inputPurchaseAmount() {
 
@@ -114,7 +117,9 @@ public class LottoDisplay {
         System.out.println(WINNING_STAT_MESSAGE);
         System.out.println(DIVIDE_MESSAGE);
         for (MatchCount matchCount : matchCountCollection) {
-            System.out.println(matchCount);
+            System.out.print(matchCount.getLottoWinningPrice());
+            System.out.print(matchCount);
+            System.out.println(MATCH_COUNT_POSTFIX_MESSAGE);
         }
     }
 

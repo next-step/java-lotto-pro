@@ -11,7 +11,11 @@ public class WinningLotto {
     }
 
     public Integer matchWithPurchaseLottoCount(Lotto purchaseLotto) {
-        return winningLotto.matchWithPurchaseLottoCount(purchaseLotto, bonusBall);
+        return winningLotto.matchWithPurchaseLottoCount(purchaseLotto);
+    }
+
+    public Boolean isBonusBallContains(Lotto purchased) {
+        return bonusBall.isContain(purchased);
     }
 
     @Override

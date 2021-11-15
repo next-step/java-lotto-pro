@@ -8,8 +8,6 @@ public class LottoDisplayMessage {
     public static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     public static final String WINNING_STAT_MESSAGE = "당첨 통계";
     public static final String DIVIDE_MESSAGE = "---------";
-    public static final String MATCH_COUNT_PREFIX_MESSAGE = "개 일치 (";
-    public static final String MATCH_COUNT_MIDDLE_MESSAGE = ")-";
     public static final String MATCH_COUNT_POSTFIX_MESSAGE = "개";
     public static final String WINNING_STAT_RESULT_PREFIX_MESSAGE = "총 수익률은 ";
     public static final String WINNING_STAT_RESULT_POSTFIX_MESSAGE = "입니다.";

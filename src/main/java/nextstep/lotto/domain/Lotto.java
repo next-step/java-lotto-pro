@@ -8,15 +8,11 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Integer matchWithPurchaseLottoCount(Lotto purchaseLotto, BonusBall bonusBall) {
+    public Integer matchWithPurchaseLottoCount(Lotto purchaseLotto) {
         int initialMatchCount = 0;
 
         for (LottoNumber lottoNumber : lottoNumbers) {
             initialMatchCount += addContainsLottoNumberCount(lottoNumber, purchaseLotto);
-        }
-
-        if (purchaseLotto.lottoNumbers.isBonusBallContains(bonusBall)) {
-            initialMatchCount += 1;
         }
 
         return initialMatchCount;
@@ -27,6 +23,10 @@ public class Lotto {
             return 1;
         }
         return 0;
+    }
+
+    public Boolean isContains(LottoNumber lottoNumber) {
+        return lottoNumbers.isContains(lottoNumber);
     }
 
     public static Boolean isContainsLottoNumber(LottoNumber lottoNumber, Lotto purchaseLotto) {
