@@ -14,6 +14,9 @@ public class ResultView {
     private static final String COMMA_SPACE = ", ";
     private static final long ZERO_COUNT = 0L;
 
+    private ResultView() {
+    }
+
     public static void printNumberOfPurchasedLotto(long number) {
         System.out.println(String.format(OutputMessage.NUMBER_OF_PURCHASED_LOTTO_FORMAT.getMessage(), number));
     }

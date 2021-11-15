@@ -14,6 +14,9 @@ import lotto.domain.Ticket;
 import lotto.domain.Tickets;
 
 public class TicketFactory {
+    private TicketFactory() {
+    }
+
     public static Tickets createRandomTickets(Count count) {
         List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; count.isBiggerThan(i); i++) {
