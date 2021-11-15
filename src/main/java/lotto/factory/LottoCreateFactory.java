@@ -1,14 +1,32 @@
 package lotto.factory;
 
-import lotto.model.Lotto;
-import lotto.model.Lottos;
-import lotto.model.LottoNumber;
-import lotto.model.WinningLotto;
-import lotto.view.ErrorMessage;
+import lotto.model.*;
 
 import java.util.*;
 
 public class LottoCreateFactory {
+    private static final List<Integer> numbers = new ArrayList<>();
+
+    static {
+        for (int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
+            numbers.add(i);
+        }
+    }
+
+    public static Lottos createTotalLottos(LottosCount lottosCount, List<Lotto> manualLotto) {
+        List<Lotto> totalLottoGroup = new ArrayList<>();
+        Collections.addAll(totalLottoGroup, manualLotto.toArray(new Lotto[0]));
+        Collections.addAll(totalLottoGroup, createAutoLottos(lottosCount.auto()).toArray(new Lotto[0]));
+        return new Lottos(totalLottoGroup);
+    }
+
+    private static List<Lotto> createAutoLottos(int size) {
+        List<Lotto> lottoGroup = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            lottoGroup.add(createRandomLotto());
+        }
+        return lottoGroup;
+    }
 
     private static Lotto createRandomLotto() {
         List<Integer> randomNumbers = createRandomNumbers();
@@ -16,34 +34,13 @@ public class LottoCreateFactory {
     }
 
     private static List<Integer> createRandomNumbers() {
-        List<Integer> numbers = makeNumbers();
         Collections.shuffle(numbers);
         List<Integer> result = numbers.subList(0, Lotto.SIZE);
         Collections.sort(result);
         return result;
     }
 
-    private static List<Integer> makeNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
-            numbers.add(i);
-        }
-        return numbers;
-    }
-
-    public static Lottos createLottos(int size) {
-        List<Lotto> lottoGroup = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            lottoGroup.add(createRandomLotto());
-        }
-        return new Lottos(lottoGroup);
-    }
-
     public static WinningLotto createWinningLotto(List<Integer> winLottoNumbers, int bonusNumber) {
-        return new WinningLotto(createLotto(winLottoNumbers), new LottoNumber(bonusNumber));
-    }
-
-    private static Lotto createLotto(List<Integer> numbers) {
-        return new Lotto(numbers);
+        return new WinningLotto(new Lotto(winLottoNumbers), LottoNumber.of(bonusNumber));
     }
 }

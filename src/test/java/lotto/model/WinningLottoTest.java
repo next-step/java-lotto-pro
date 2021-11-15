@@ -19,14 +19,14 @@ public class WinningLottoTest {
     @BeforeEach
     void setUp() {
         lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        lottoNumber = new LottoNumber(7);
+        lottoNumber = LottoNumber.of(7);
         winningLotto = new WinningLotto(lotto, lottoNumber);
     }
 
     @DisplayName("당첨번호 와 보너스 번호 객체 검증")
     @Test
     void winningLotto() {
-        assertThat(winningLotto).isEqualTo(new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7)));
+        assertThat(winningLotto).isEqualTo(new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7)));
     }
 
     @DisplayName("당첨번호와 로또를 비교하여 몇개 맞췄는지 출력하는 기능 검증")
@@ -70,7 +70,7 @@ public class WinningLottoTest {
     @Test
     void bonusExistError() {
         assertThatThrownBy(() -> {
-            new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(6));
+            new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(6));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.BONUS_EXIST);
     }
@@ -79,7 +79,7 @@ public class WinningLottoTest {
     @Test
     void nullWinningLotto() {
         assertThatThrownBy(() -> {
-            new WinningLotto(null, new LottoNumber(6));
+            new WinningLotto(null, LottoNumber.of(6));
         }).isInstanceOf(NullPointerException.class)
                 .hasMessageContaining(ErrorMessage.LOTTO_NULL);
 

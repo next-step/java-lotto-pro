@@ -2,19 +2,20 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
+import lotto.model.LottosCount;
 import lotto.model.Rank;
 
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    private static final String BOUGHT = "개를 구매했습니다.";
+    private static final String BOUGHT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String YIELD_MESSAGE = "총 수익률은 %s입니다.";
     private static final String STATS = "%d개 일치 (%d원)- %d개\n";
     private static final String LINE_BREAK = "\n";
 
-    public static void printBought(int count) {
-        System.out.println(count + BOUGHT);
+    public static void printBought(LottosCount lottosCount) {
+        System.out.printf(BOUGHT, lottosCount.getManual(), lottosCount.auto());
     }
 
     public static void printYield(String yield) {
@@ -33,8 +34,10 @@ public class ResultView {
         List<Lotto> lottoGroup = lottos.getLottoGroup();
         StringBuilder sb = new StringBuilder("");
         for (Lotto lotto : lottoGroup) {
-            sb.append(lotto.toString()+LINE_BREAK);
+            sb.append(lotto.toString() + LINE_BREAK);
         }
         System.out.print(sb.toString());
     }
+
+
 }

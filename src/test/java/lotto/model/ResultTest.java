@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +24,7 @@ public class ResultTest {
         Lotto fourth = new Lotto(Arrays.asList(1, 2, 3, 5, 8, 9));
         fifth = new Lotto(Arrays.asList(1, 2, 5, 8, 9, 10));
         miss = new Lotto(Arrays.asList(1, 5, 8, 9, 10, 45));
-        winLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
+        winLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7));
         lottos = new Lottos(Arrays.asList(first, second, third, fourth, fifth, miss));
         result = new Result(lottos, winLotto);
     }

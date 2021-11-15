@@ -15,13 +15,6 @@ public class LottosTest {
 
     private Lottos lottos;
 
-    @DisplayName("갯수를 입력받아 Factory로 로또를 여러개 생성하는 기능 검증")
-    @Test
-    void createLottosFromFactory() {
-        lottos = LottoCreateFactory.createLottos(20);
-        assertThat(lottos.size()).isEqualTo(20);
-    }
-
     @DisplayName("로또묶음을 생성하는 기능 검증")
     @Test
     void createLottos() {
