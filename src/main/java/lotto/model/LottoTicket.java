@@ -1,7 +1,12 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+
+import static lotto.model.LottoNumber.MAX_VALUE;
+import static lotto.model.LottoNumber.MIN_VALUE;
 
 public class LottoTicket {
     public static final Money SELLING_PRICE = new Money(1000);
@@ -11,14 +16,6 @@ public class LottoTicket {
     private LottoTicket(List<LottoNumber> numbers) {
         validate(numbers);
         this.numbers = numbers;
-    }
-
-    public static LottoTicket of(List<Integer> numbers) {
-        final List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-        return new LottoTicket(lottoNumbers);
     }
 
     private void validate(List<LottoNumber> numbers) {
@@ -32,6 +29,35 @@ public class LottoTicket {
             return 0;
         }
         return (int) money.divideBy(SELLING_PRICE);
+    }
+
+    public static LottoTicket of(List<Integer> numbers) {
+        final List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (Integer number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+        return new LottoTicket(lottoNumbers);
+    }
+
+    public static LottoTicket ofRandomNumbers() {
+        final List<Integer> numbers = LottoTicket.getRandomNumbers();
+        return LottoTicket.of(numbers);
+    }
+
+    private static List<Integer> getRandomNumbers() {
+        final List<Integer> allNumbers = getAllNumbers();
+        Collections.shuffle(allNumbers);
+        final List<Integer> pickedNumbers = new ArrayList<>(allNumbers.subList(0, LOTTO_SIZE));
+        Collections.sort(pickedNumbers);
+        return pickedNumbers;
+    }
+
+    private static List<Integer> getAllNumbers() {
+        final List<Integer> numbers = new ArrayList<>();
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
+            numbers.add(i);
+        }
+        return numbers;
     }
 
     public boolean contains(LottoNumber lottoNumber) {
@@ -61,4 +87,16 @@ public class LottoTicket {
         return numbers.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final LottoTicket that = (LottoTicket) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
+    }
 }

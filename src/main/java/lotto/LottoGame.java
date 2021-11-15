@@ -4,6 +4,8 @@ import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoGame {
     private final InputView inputView;
     private final ResultView resultView;
@@ -15,9 +17,13 @@ public class LottoGame {
 
     public void run() {
         final int buyMoney = inputView.getBuyMoney();
+        final int manualCount = inputView.getManualCount();
+        final List<String> manualLottoNumbers = inputView.getManualLottoNumbers(manualCount);
 
-        final int lottoCount = LottoTicket.countPurchasable(new Money(buyMoney));
-        final Lottos lottos = Lottos.generateAuto(lottoCount);
+        final int totalCount = LottoTicket.countPurchasable(new Money(buyMoney));
+        final Lottos lottos = new Lottos(totalCount, manualCount);
+        lottos.generateManual(manualLottoNumbers);
+        lottos.generateAuto();
         inputView.showLottoBoughtMessage(lottos);
 
         final WinTicket winTicket = inputView.getWinLottoTicket();

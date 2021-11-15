@@ -4,6 +4,7 @@ import lotto.model.LottoTicket;
 import lotto.model.Lottos;
 import lotto.model.WinTicket;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -17,16 +18,28 @@ public class InputView {
     }
 
     public int getBuyMoney() {
-        showEnterBuyMoneyMessage();
+        System.out.println("구입금액을 입력해 주세요.");
         return getInteger();
     }
 
-    public void showEnterBuyMoneyMessage() {
-        System.out.println("구입금액을 입력해 주세요.");
+    public int getManualCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return getInteger();
+    }
+
+    public List<String> getManualLottoNumbers(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        final List<String> inputs = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            inputs.add(scanner.nextLine());
+        }
+
+        return inputs;
     }
 
     public void showLottoBoughtMessage(Lottos lottos) {
-        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.%n", lottos.getManualCount(), lottos.getAutoCount());
         final List<LottoTicket> lottoList = lottos.getLottos();
         lottoList.forEach(lotto -> System.out.println(lotto.toString()));
     }
