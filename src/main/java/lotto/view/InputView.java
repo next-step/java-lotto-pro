@@ -1,8 +1,6 @@
 package lotto.view;
 
 import lotto.consts.PriceConst;
-import lotto.domain.Price;
-import lotto.domain.WinningNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,32 +14,24 @@ public class InputView {
         sc = new Scanner(System.in);
     }
 
-    public Price getPrice() {
+    public void printPriceMessage() {
         System.out.println("구입 금액을 입력해 주세요. 최소 금액은 " + PriceConst.LOTTO_PRICE + "원입니다.");
-        return inputPrice();
     }
 
-    private Price inputPrice() {
-        try {
-            return new Price(getNumber(sc.nextLine()));
-        } catch (Exception e) {
-            System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-            return inputPrice();
-        }
-    }
-
-    public WinningNumbers getWinningNumbers() {
+    public void printWinningLottoMessage() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        return inputWinningNumbers();
     }
 
-    private WinningNumbers inputWinningNumbers() {
-        try {
-            return new WinningNumbers(getNumbers(sc.nextLine()));
-        } catch (Exception e) {
-            System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-            return inputWinningNumbers();
-        }
+    public void printErrorMessage() {
+        System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+    }
+
+    public int inputPrice() {
+        return getNumber(sc.nextLine());
+    }
+
+    public List<Integer> inputWinningLotto() {
+        return getNumbers(sc.nextLine());
     }
 
     private int getNumber(String input) {

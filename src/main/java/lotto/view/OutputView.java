@@ -21,10 +21,10 @@ public class OutputView {
     public void printWinningStats(WinningStats winningStats) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoNumberConst.LOTTO_NUMBER_SIZE - 3, WinningEnum.FIFTH.getPrize(), winningStats.getWinningStats().get(WinningEnum.FIFTH.getRank()));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoNumberConst.LOTTO_NUMBER_SIZE - 2, WinningEnum.FOURTH.getPrize(), winningStats.getWinningStats().get(WinningEnum.FOURTH.getRank()));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoNumberConst.LOTTO_NUMBER_SIZE - 1, WinningEnum.THIRD.getPrize(), winningStats.getWinningStats().get(WinningEnum.THIRD.getRank()));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoNumberConst.LOTTO_NUMBER_SIZE, WinningEnum.FIRST.getPrize(), winningStats.getWinningStats().get(WinningEnum.FIRST.getRank()));
+        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoNumberConst.LOTTO_NUMBER_SIZE - 3, WinningEnum.FIFTH.getPrize(), winningStats.getWinningStats().get(WinningEnum.FIFTH));
+        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoNumberConst.LOTTO_NUMBER_SIZE - 2, WinningEnum.FOURTH.getPrize(), winningStats.getWinningStats().get(WinningEnum.FOURTH));
+        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoNumberConst.LOTTO_NUMBER_SIZE - 1, WinningEnum.THIRD.getPrize(), winningStats.getWinningStats().get(WinningEnum.THIRD));
+        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoNumberConst.LOTTO_NUMBER_SIZE, WinningEnum.FIRST.getPrize(), winningStats.getWinningStats().get(WinningEnum.FIRST));
     }
 
     public void printProfitRate(ProfitRate profitRate) {

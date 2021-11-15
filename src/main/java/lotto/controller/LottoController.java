@@ -15,13 +15,33 @@ public class LottoController {
     }
 
     public void start() {
-        Price price = inputView.getPrice();
+        inputView.printPriceMessage();
+        Price price = getPrice();
         Lottos lottos = new Lottos(price);
         outputView.printLottos(lottos);
-        WinningNumbers winningNumbers = inputView.getWinningNumbers();
-        WinningStats winningStats = new WinningStats(lottos, winningNumbers);
+        inputView.printWinningLottoMessage();
+        Lotto winningLotto = getWinningLotto();
+        WinningStats winningStats = new WinningStats(lottos, winningLotto);
         ProfitRate profitRate = price.getProfitRate(winningStats);
         outputView.printWinningStats(winningStats);
         outputView.printProfitRate(profitRate);
+    }
+
+    private Price getPrice() {
+        try {
+            return new Price(inputView.inputPrice());
+        } catch (Exception e) {
+            inputView.printErrorMessage();
+            return getPrice();
+        }
+    }
+
+    private Lotto getWinningLotto() {
+        try {
+            return new Lotto(inputView.inputWinningLotto());
+        } catch (Exception e) {
+            inputView.printErrorMessage();
+            return getWinningLotto();
+        }
     }
 }

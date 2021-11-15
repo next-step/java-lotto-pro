@@ -1,27 +1,29 @@
 package lotto.consts;
 
+import java.util.Arrays;
+
 public enum WinningEnum {
 
-    FIRST(1, 2000000000),
+    FIRST(2000000000, 6),
     // SECOND(),
-    THIRD(3, 1500000),
-    FOURTH(4, 50000),
-    FIFTH(5, 5000),
+    THIRD(1500000, 5),
+    FOURTH(50000, 4),
+    FIFTH(5000, 3),
     NONE(0, 0);
 
-    private final int rank;
     private final int prize;
+    private final int matched;
 
-    WinningEnum(int rank, int prize) {
-        this.rank = rank;
+    WinningEnum(int prize, int matched) {
         this.prize = prize;
-    }
-
-    public int getRank() {
-        return rank;
+        this.matched = matched;
     }
 
     public int getPrize() {
         return prize;
+    }
+
+    public static WinningEnum findByMatched(int matched) {
+        return Arrays.stream(values()).filter(winningEnum -> winningEnum.matched == matched).findAny().orElse(NONE);
     }
 }

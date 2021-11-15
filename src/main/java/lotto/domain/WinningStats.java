@@ -7,27 +7,27 @@ import java.util.Map;
 
 public class WinningStats {
 
-    private final Map<Integer, Integer> winningStats;
+    private final Map<WinningEnum, Integer> winningStats;
 
-    public WinningStats(Lottos lottos, WinningNumbers winningNumbers) {
+    public WinningStats(Lottos lottos, Lotto winningLotto) {
         winningStats = new HashMap<>();
-        winningStats.put(WinningEnum.FIRST.getRank(), 0);
-        winningStats.put(WinningEnum.THIRD.getRank(), 0);
-        winningStats.put(WinningEnum.FOURTH.getRank(), 0);
-        winningStats.put(WinningEnum.FIFTH.getRank(), 0);
+        winningStats.put(WinningEnum.FIRST, 0);
+        winningStats.put(WinningEnum.THIRD, 0);
+        winningStats.put(WinningEnum.FOURTH, 0);
+        winningStats.put(WinningEnum.FIFTH, 0);
 
         for (Lotto lotto : lottos.getLottos()) {
-            setResult(lotto.getWinningResult(winningNumbers));
+            setResult(lotto.getWinningResult(winningLotto));
         }
     }
 
-    private void setResult(int result) {
-        if (result != WinningEnum.NONE.getRank()) {
+    private void setResult(WinningEnum result) {
+        if (result != WinningEnum.NONE) {
             winningStats.put(result, winningStats.get(result) + 1);
         }
     }
 
-    public Map<Integer, Integer> getWinningStats() {
+    public Map<WinningEnum, Integer> getWinningStats() {
         return winningStats;
     }
 }

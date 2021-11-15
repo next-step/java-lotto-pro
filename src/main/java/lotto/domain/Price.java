@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.consts.PriceConst;
 import lotto.consts.WinningEnum;
+import lotto.exception.WrongPriceException;
 
 public class Price {
 
@@ -13,8 +14,9 @@ public class Price {
     }
 
     private void validationCheck(int price) {
-        if (price < PriceConst.LOTTO_PRICE)
-            throw new IllegalArgumentException();
+        if (price < PriceConst.LOTTO_PRICE) {
+            throw new WrongPriceException();
+        }
     }
 
     public int getNumberOfLotto() {
@@ -24,9 +26,6 @@ public class Price {
     public ProfitRate getProfitRate(WinningStats winningStats) {
         int totalPrize = 0;
         for (WinningEnum winningEnum : WinningEnum.values()) {
-            if (winningEnum == WinningEnum.NONE) {
-                continue;
-            }
             totalPrize += getPrize(winningEnum, winningStats);
         }
 
@@ -37,6 +36,6 @@ public class Price {
         if (winningEnum == WinningEnum.NONE) {
             return 0;
         }
-        return winningStats.getWinningStats().get(winningEnum.getRank()) * winningEnum.getPrize();
+        return winningStats.getWinningStats().get(winningEnum) * winningEnum.getPrize();
     }
 }
