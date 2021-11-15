@@ -40,8 +40,8 @@ public class WinningRecord {
 	}
 
 	public double profitRate(double standard) {
-		return new BigDecimal(revenue / standard)
-			.setScale(DECIMAL_POINT, RoundingMode.FLOOR)
+		return BigDecimal.valueOf(revenue)
+			.divide(BigDecimal.valueOf(standard), DECIMAL_POINT, RoundingMode.FLOOR)
 			.doubleValue();
 	}
 }

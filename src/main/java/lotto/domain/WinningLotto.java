@@ -1,29 +1,30 @@
 package lotto.domain;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class WinningLotto {
 
 	public static final String ERROR_BONUS_NUMBER_DUPLICATE = "보너스 볼이 중복되었습니다.";
 	private final Lotto winningLotto;
+	private final LottoNumber bonusNumber;
 
-	public WinningLotto(Set<LottoNumber> numbers) {
-		this.winningLotto = new Lotto(numbers);
+	public WinningLotto(Lotto lotto, LottoNumber bonusNo) {
+		this.winningLotto = lotto;
+		this.bonusNumber = bonusNo;
+		validation();
 	}
 
-	public WinningRecord match(Lottos lottos, LottoNumber bonusNumber) {
-		validation(bonusNumber);
-		return new WinningRecord(lottos.match(this.winningLotto, bonusNumber));
+	public WinningRecord match(Lottos lottos) {
+		return new WinningRecord(lottos.match(winningLotto, bonusNumber));
 	}
 
-	private void validation(LottoNumber bonusNumber) {
-		if(isBonusNumberDuplicate(bonusNumber)){
+	private void validation() {
+		if(isBonusNumberDuplicate()){
 			throw new IllegalArgumentException(ERROR_BONUS_NUMBER_DUPLICATE);
 		}
 	}
 
-	private boolean isBonusNumberDuplicate(LottoNumber bonusNumber) {
+	private boolean isBonusNumberDuplicate() {
 		return winningLotto.contains(bonusNumber);
 	}
 

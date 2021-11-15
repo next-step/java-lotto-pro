@@ -1,26 +1,21 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
 	private static final int LOTTO_SIZE = 6;
-	public static final String INVALID_NUMBER = "중복되지 않은 6개의 숫자를 입력해주세요.";
+	public static final String INVALID_NUMBER = "중복되지 않은 6개의 숫자를 입력해 주세요.";
 
-	private final List<LottoNumber> lottoNumbers;
+	private final Set<LottoNumber> lottoNumbers;
 
 	public Lotto(Set<LottoNumber> numbers) {
 
 		validationLotto(numbers);
 
-		this.lottoNumbers = Collections.unmodifiableList(numbers.stream()
-			.sorted()
-			.collect(Collectors.toList()));
-
+		this.lottoNumbers = Collections.unmodifiableSet(numbers);
 	}
 
 	private void validationLotto(Set<LottoNumber> numbers) {
@@ -40,7 +35,7 @@ public class Lotto {
 			lotto.contains(bonusNumber));
 	}
 
-	public List<LottoNumber> getLottoNumbers() {
+	public Set<LottoNumber> getLottoNumbers() {
 		return lottoNumbers;
 	}
 
