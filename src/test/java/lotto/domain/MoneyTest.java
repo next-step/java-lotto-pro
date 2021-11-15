@@ -26,7 +26,7 @@ class MoneyTest {
     void throwsError_whenInvalidMoney() {
         assertThatExceptionOfType(LottoException.class)
             .isThrownBy(() -> new Money(-1))
-            .withMessage("0 이상의 숫자를 입력해주세요.");
+            .withMessage("0 이상의 금액을 입력해주세요.");
     }
 
     @DisplayName("구입 가능한 로또 개수 계산")
