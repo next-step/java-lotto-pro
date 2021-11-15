@@ -12,7 +12,7 @@ public class RateOfReturnTest {
     void 객체_생성_시_유효성_검사() {
         assertThatIllegalArgumentException().isThrownBy(
             () -> new RateOfReturn(-0.1)
-        ).withMessageContaining(NEGATIVE_VALUE_ERR_MSG);
+        ).withMessageContaining(NEGATIVE_RATE_OF_RETURN_ERR_MSG);
     }
 
     @Test
@@ -28,6 +28,8 @@ public class RateOfReturnTest {
     @Test
     @DisplayName("동등성 검사")
     void equals() {
-        assertThat(new RateOfReturn(1.1)).isEqualTo(new RateOfReturn(1.1));
+        RateOfReturn expected = new RateOfReturn(1.1);
+        RateOfReturn actual = new RateOfReturn(1.1);
+        assertThat(actual).isEqualTo(expected);
     }
 }

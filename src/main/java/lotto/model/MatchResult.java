@@ -1,8 +1,8 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -16,19 +16,19 @@ public class MatchResult {
         this(payment, Arrays.asList(ranks));
     }
 
-    public MatchResult(Payment payment, List<Rank> ranks) {
+    public MatchResult(Payment payment, Collection<Rank> ranks) {
         Objects.requireNonNull(payment);
         Objects.requireNonNull(ranks);
 
         rankToCount = new HashMap<>();
         initialize();
 
-        int prizeMoney = 0;
+        int winningMoney = 0;
         for (Rank rank : ranks) {
             rankToCount.merge(rank, 1, Integer::sum);
-            prizeMoney += rank.getWinningMoney();
+            winningMoney += rank.getWinningMoney();
         }
-        rateOfReturn = payment.computeRateOfReturn(prizeMoney);
+        rateOfReturn = payment.computeRateOfReturn(winningMoney);
     }
 
     private void initialize() {
@@ -37,12 +37,12 @@ public class MatchResult {
         }
     }
 
-    public RateOfReturn getRateOfReturn() {
-        return rateOfReturn;
+    public int countRank(Rank rank) {
+        return rankToCount.get(Objects.requireNonNull(rank));
     }
 
-    public int countRank(Rank rank) {
-        return rankToCount.get(rank);
+    public RateOfReturn getRateOfReturn() {
+        return rateOfReturn;
     }
 
     @Override

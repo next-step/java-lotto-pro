@@ -13,15 +13,26 @@ public class PaymentTest {
     @DisplayName("지불 금액이 " + LOTTO_PRICE + "원 미만이거나 " + LOTTO_PRICE + "으로 나누어 떨어지지 않을 때 예외 발생")
     @ValueSource(ints = {LOTTO_PRICE - 1, LOTTO_PRICE + 1})
     void 객체_생성_시_유효성_검사(int payment) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Payment(payment));
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> new Payment(payment));
     }
 
     @Test
-    @DisplayName("구매금액이 주어졌을 때 적절한 로또의 갯수를 반환하는지 테스트")
-    void countLotto() {
+    @DisplayName("구매금액과 수동으로 구매할 로또의 수가 주어졌을 때 적절한 로또의 갯수를 반환하는지 테스트")
+    void computeLottoCount() {
         Payment payment = new Payment(14000);
-        int count = payment.countLotto();
-        assertThat(count).isEqualTo(14000 / LOTTO_PRICE);
+        LottoCount lottoCount = payment.computeLottoCount(3);
+        assertThat(lottoCount).isEqualTo(new LottoCount(3, 14000 / LOTTO_PRICE));
+    }
+
+    @Test
+    @DisplayName("수동으로 구매할 로또의 수가 음수로 주어졌을 때 예외 발생")
+    void computeLottoCountByNegativeManualCount() {
+        Payment payment = new Payment(14000);
+
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> payment.computeLottoCount(-1)
+        ).withMessageContaining(NEGATIVE_MANUAL_COUNT_ERR_MSG);
     }
 
     @Test
@@ -33,8 +44,20 @@ public class PaymentTest {
     }
 
     @Test
+    @DisplayName("당첨금이 음수로 주어졌을 때 예외 발생")
+    void computeRateOfReturnByNegativeWinningMoney() {
+        Payment payment = new Payment(14000);
+
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> payment.computeRateOfReturn(-1)
+        ).withMessageContaining(NEGATIVE_WINNING_MONEY_ERR_MSG);
+    }
+
+    @Test
     @DisplayName("동등성 검사")
     void equals() {
-        assertThat(new Payment(14000)).isEqualTo(new Payment(14000));
+        Payment expected = new Payment(14000);
+        Payment actual = new Payment(14000);
+        assertThat(actual).isEqualTo(expected);
     }
 }

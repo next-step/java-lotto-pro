@@ -1,15 +1,15 @@
 package lotto.view;
 
-import java.util.Collection;
 import java.util.StringJoiner;
 
-import lotto.model.LottoNumbers;
+import lotto.model.LottoCount;
+import lotto.model.Lottos;
 import lotto.model.MatchResult;
 import lotto.model.RateOfReturn;
 import lotto.model.enums.Rank;
 
 public class OutputView {
-    private static final String NUMBER_OF_LOTTO_STATEMENT_FORMAT = "%d개를 구매했습니다.";
+    private static final String NUMBER_OF_LOTTO_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String RESULT_HEADER = "당첨 통계" + System.lineSeparator() + "---------";
     private static final String NORMAL_MATCH_STATEMENT_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final String SECOND_MATCH_STATEMENT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
@@ -20,27 +20,28 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoPurchase(Collection<LottoNumbers> lottoNumbers) {
+    public static void printLottoPurchase(Lottos lottos, LottoCount lottoCount) {
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
-        stringJoiner.add(String.format(NUMBER_OF_LOTTO_STATEMENT_FORMAT, lottoNumbers.size()));
-        for (LottoNumbers numbers : lottoNumbers) {
-            stringJoiner.add(numbers.toString());
-        }
+        String numberOfLottoStatement = String.format(
+            NUMBER_OF_LOTTO_FORMAT, lottoCount.getManualCount(), lottoCount.getAutoCount());
+        stringJoiner.add(numberOfLottoStatement);
+        stringJoiner.add(lottos.toString());
         System.out.println(stringJoiner);
         System.out.println();
     }
 
     public static void printLottoResult(MatchResult matchResult) {
+        System.out.println();
         StringJoiner stringJoiner = new StringJoiner(System.lineSeparator());
         stringJoiner.add(RESULT_HEADER);
         for (Rank rank : Rank.getRanksHavingWinningMoney()) {
-            stringJoiner.add(
-                String.format(getMatchStatementFormat(rank), rank.getCountOfMatch(), rank.getWinningMoney(),
-                    matchResult.countRank(rank)));
+            int totalCount = matchResult.countRank(rank);
+            String matchStatement = String.format(
+                getMatchStatementFormat(rank), rank.getCountOfMatch(), rank.getWinningMoney(), totalCount);
+            stringJoiner.add(matchStatement);
         }
-        stringJoiner.add(String.format(RATE_OF_RETURN_STATEMENT_FORMAT, matchResult.getRateOfReturn()));
-        System.out.println();
-        System.out.println(stringJoiner + getTrailingStatement(matchResult.getRateOfReturn()));
+        stringJoiner.add(computeRateOfReturnStatement(matchResult.getRateOfReturn()));
+        System.out.println(stringJoiner);
     }
 
     private static String getMatchStatementFormat(Rank rank) {
@@ -48,6 +49,10 @@ public class OutputView {
             return SECOND_MATCH_STATEMENT_FORMAT;
         }
         return NORMAL_MATCH_STATEMENT_FORMAT;
+    }
+
+    private static String computeRateOfReturnStatement(RateOfReturn rateOfReturn) {
+        return String.format(RATE_OF_RETURN_STATEMENT_FORMAT, rateOfReturn) + getTrailingStatement(rateOfReturn);
     }
 
     private static String getTrailingStatement(RateOfReturn rateOfReturn) {

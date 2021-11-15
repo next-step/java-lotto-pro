@@ -3,6 +3,8 @@ package lotto.model.enums;
 import java.util.Arrays;
 import java.util.List;
 
+import lotto.model.Lotto;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -10,6 +12,8 @@ public enum Rank {
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
     MISS(0, 0);
+
+    private static final String COUNT_OF_MATCH_SIZE_ERR_MSG = "매칭된 숫자의 갯수가 0보다 작거나 6보다 클 수는 없습니다.";
 
     private final int countOfMatch;
     private final int winningMoney;
@@ -20,6 +24,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        validate(countOfMatch);
         if (countOfMatch == SECOND.getCountOfMatch() && matchBonus) {
             return SECOND;
         }
@@ -32,12 +37,10 @@ public enum Rank {
             .orElse(MISS);
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
-    public int getWinningMoney() {
-        return winningMoney;
+    private static void validate(int countOfMatch) {
+        if (countOfMatch < 0 || countOfMatch > Lotto.NUMBER_SIZE) {
+            throw new IllegalArgumentException(COUNT_OF_MATCH_SIZE_ERR_MSG);
+        }
     }
 
     public static List<Rank> getRanksHavingWinningMoney() {
@@ -46,5 +49,13 @@ public enum Rank {
 
     public boolean isSecond() {
         return this == SECOND;
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
     }
 }

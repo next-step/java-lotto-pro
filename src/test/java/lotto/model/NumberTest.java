@@ -20,18 +20,24 @@ public class NumberTest {
 
     @Test
     void 동일성_검사() {
-        assertThat(Number.of(1) == Number.of(1)).isTrue();
+        Number expected = Number.of(1);
+        Number actual = Number.of(1);
+        assertThat(actual).isSameAs(expected);
     }
 
     @Test
     @DisplayName("동등성 검사")
     void equals() {
-        assertThat(Number.of(1)).isEqualTo(Number.of(1));
+        Number expected = Number.of(1);
+        Number actual = Number.of(1);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("Comparable를 구현한 Number객체가 적절히 동작하는지 테스트")
     void compareTo() {
-        assertThat(Number.of(2)).isGreaterThan(Number.of(1));
+        Number greaterNumber = Number.of(2);
+        Number smallerNumber = Number.of(1);
+        assertThat(greaterNumber).isGreaterThan(smallerNumber);
     }
 }

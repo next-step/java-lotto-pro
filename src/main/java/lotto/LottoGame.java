@@ -2,9 +2,11 @@ package lotto;
 
 import java.util.function.Supplier;
 
+import lotto.model.Lotto;
+import lotto.model.LottoCount;
+import lotto.model.LottoGenerator;
 import lotto.model.LottoMatcher;
-import lotto.model.LottoNumberGenerator;
-import lotto.model.LottoNumbers;
+import lotto.model.Lottos;
 import lotto.model.MatchResult;
 import lotto.model.Number;
 import lotto.model.Payment;
@@ -19,13 +21,17 @@ public class LottoGame {
 
     public static void start() {
         Payment payment = handleException(InputView::readPayment);
-        OutputView.printLottoPurchase(new LottoNumberGenerator(payment).generate());
-        LottoNumbers winningNumbers = handleException(InputView::readWinningNumbers);
+        LottoCount lottoCount = handleException(() -> InputView.readLottoCount(payment));
+        Lottos manualLottos = handleException(() -> InputView.readManualLottos(lottoCount.getManualCount()));
+        Lottos autoLottos = LottoGenerator.generate(lottoCount.getAutoCount());
+        Lottos totalLottos = manualLottos.combine(autoLottos);
+        OutputView.printLottoPurchase(totalLottos, lottoCount);
+        Lotto winningLotto = handleException(InputView::readWinningLotto);
         LottoMatcher lottoMatcher = handleException(() -> {
             Number bonusNumber = InputView.readBonusNumber();
-            return new LottoMatcher(bonusNumber, winningNumbers);
+            return new LottoMatcher(bonusNumber, winningLotto);
         });
-        MatchResult matchResult = lottoMatcher.match(payment, new LottoNumberGenerator(payment).generate());
+        MatchResult matchResult = lottoMatcher.match(payment, totalLottos);
         OutputView.printLottoResult(matchResult);
     }
 

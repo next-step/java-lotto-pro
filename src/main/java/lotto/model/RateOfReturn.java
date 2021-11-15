@@ -3,8 +3,7 @@ package lotto.model;
 import java.util.Objects;
 
 public class RateOfReturn {
-    static final String NEGATIVE_VALUE_ERR_MSG = "수익률은 0보다 작은 값일 수 없습니다.";
-    private static final int MIN = 0;
+    static final String NEGATIVE_RATE_OF_RETURN_ERR_MSG = "수익률은 음수일 수 없습니다.";
     private static final int BREAK_EVEN_RATE = 1;
 
     private final double rateOfReturn;
@@ -15,8 +14,8 @@ public class RateOfReturn {
     }
 
     private void validate() {
-        if (rateOfReturn < MIN) {
-            throw new IllegalArgumentException(NEGATIVE_VALUE_ERR_MSG);
+        if (rateOfReturn < 0) {
+            throw new IllegalArgumentException(NEGATIVE_RATE_OF_RETURN_ERR_MSG);
         }
     }
 

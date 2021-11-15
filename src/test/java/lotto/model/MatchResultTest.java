@@ -4,7 +4,6 @@ import static java.util.Collections.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,26 +23,25 @@ public class MatchResultTest {
     }
 
     @Test
-    @DisplayName("로또 결과가 주어졌을 때 적절한 수익률을 반환하는지 테스트")
-    void getRateOfReturn() {
-        MatchResult matchResult = new MatchResult(new Payment(14000), Rank.FIFTH, Rank.SECOND);
-        int expectedWinningMoney = Stream.of(Rank.FIFTH, Rank.SECOND)
-            .mapToInt(Rank::getWinningMoney)
-            .sum();
-        RateOfReturn expectedRateOfReturn = new RateOfReturn((double)expectedWinningMoney / 14000);
-
-        RateOfReturn actualRateOfReturn = matchResult.getRateOfReturn();
-
-        assertThat(actualRateOfReturn).isEqualTo(expectedRateOfReturn);
+    @DisplayName("countRank가 적절한 값을 반환하는지 테스트")
+    void countRank() {
+        MatchResult matchResult = new MatchResult(new Payment(10000), Rank.FIFTH, Rank.FIFTH, Rank.SECOND);
+        int actual = matchResult.countRank(Rank.FIFTH);
+        assertThat(actual).isEqualTo(2);
     }
 
     @Test
-    @DisplayName("로또 결과가 주어졌을 때 적절한 등수(Rank)의 갯수를 반환하는지 테스트")
-    void countRank() {
-        MatchResult matchResult = new MatchResult(new Payment(14000), Rank.FIFTH, Rank.FIFTH);
+    @DisplayName("countRank 함수에 매개변수로 null이 전달될 때 예외 발생")
+    void countRankByNull() {
+        MatchResult matchResult = new MatchResult(new Payment(10000), Rank.FIFTH);
+        assertThatNullPointerException().isThrownBy(() -> matchResult.countRank(null));
+    }
 
-        int rankCount = matchResult.countRank(Rank.FIFTH);
-
-        assertThat(rankCount).isEqualTo(2);
+    @Test
+    @DisplayName("동등성 검사. 이 때 등수의 순서는 상관이 없고 각 등수의 갯수가 중요하다.")
+    void equals() {
+        MatchResult expected = new MatchResult(new Payment(10000), Rank.FIFTH, Rank.SECOND);
+        MatchResult actual = new MatchResult(new Payment(10000), Rank.SECOND, Rank.FIFTH);
+        assertThat(actual).isEqualTo(expected);
     }
 }
