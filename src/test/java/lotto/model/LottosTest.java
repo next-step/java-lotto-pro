@@ -5,9 +5,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottosTest {
     @Test
@@ -16,6 +18,12 @@ public class LottosTest {
         assertThat(lottos.getTotalCount()).isEqualTo(3);
         assertThat(lottos.getAutoCount()).isEqualTo(1);
         assertThat(lottos.getManualCount()).isEqualTo(2);
+    }
+
+    @Test
+    void create_실패() {
+        assertThatThrownBy(() -> new Lottos(3, 10))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -33,6 +41,24 @@ public class LottosTest {
                 LottoTicket.of(Arrays.asList(2, 3, 4, 5, 6, 7))
         );
         assertThat(lottos.hasEqualTickets(expected)).isTrue();
+    }
+
+    @Test
+    void generateManual_숫자순서다름() {
+        final Lottos lottos = new Lottos(3, 2);
+        lottos.generateManual(Collections.singletonList("6, 5, 4, 3, 2, 1"));
+
+        final List<LottoTicket> expected = Collections.singletonList(
+                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6))
+        );
+        assertThat(lottos.hasEqualTickets(expected)).isTrue();
+    }
+
+    @Test
+    void generateManual_invalid() {
+        final Lottos lottos = new Lottos(3, 2);
+        assertThatThrownBy(() -> lottos.generateManual(Collections.singletonList("dkekedl")))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

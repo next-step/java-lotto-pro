@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,18 +13,28 @@ public class Lottos {
     private final List<LottoTicket> lottos;
 
     public Lottos(int totalCount, int manualCount) {
-        // TODO: 2021/11/15 개수 예외처리
         this.totalCount = totalCount;
         this.manualCount = manualCount;
         this.autoCount = totalCount - manualCount;
+        validateCounts();
         lottos = new ArrayList<>();
+    }
+
+    private void validateCounts() {
+        if (totalCount > 0 && manualCount >= 0 && autoCount >= 0
+                && totalCount == manualCount + autoCount) {
+            return;
+        }
+
+        throw new IllegalArgumentException();
     }
 
     public void generateManual(List<String> numberInputs) {
         for (String numberInput : numberInputs) {
             final List<Integer> numbers = Arrays.stream(numberInput.split(","))
-                    .map(input -> input.replaceAll("\\s+",""))
+                    .map(input -> input.replaceAll("\\s+", ""))
                     .map(Integer::parseInt)
+                    .sorted()
                     .collect(Collectors.toList());
             final LottoTicket lotto = LottoTicket.of(numbers);
             lottos.add(lotto);
