@@ -33,7 +33,7 @@ public class LottoGenerator {
 			.mapToObj(i -> LottoGenerator.generateAuto())
 			.collect(Collectors.toList()));
 	}
-
+  
 	private LottoGenerator() {
 	}
 }

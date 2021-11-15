@@ -19,7 +19,6 @@ public class LottoMain {
 		ResultView.printPurchasedLottos(numberOfManualLotto, lottos);
 
 		WinLotto winLotto = InputView.getWinLotto();
-
 		ResultView.printResult(lottos.winPrize(winLotto), money);
 	}
 }

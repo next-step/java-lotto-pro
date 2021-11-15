@@ -53,7 +53,7 @@ public class Lottos {
 	public int hashCode() {
 		return Objects.hash(lottos);
 	}
-
+  
 	public Prize winPrize(WinLotto winLotto) {
 		List<Rank> ranks = new LinkedList<>();
 		for (Lotto lotto : lottos) {
