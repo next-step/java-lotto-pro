@@ -82,7 +82,7 @@ public class ResultView {
     }
 
     private static String makeRankMessage(Rank rank) {
-        if (Rank.isSecond(rank)) {
+        if (rank.isSecond()) {
             return String.format(OutputMessage.BONUS_RANK_FORMAT.getMessage(),
                 rank.getCorrectCount(), rank.getMoney().getMoney());
         }

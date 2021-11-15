@@ -31,13 +31,13 @@ class RankTest {
     @DisplayName("2등인지 확인")
     @Test
     void isSecond_true() {
-        assertThat(Rank.isSecond(SECOND)).isEqualTo(true);
+        assertThat(SECOND.isSecond()).isEqualTo(true);
     }
 
     @DisplayName("2등이 아닌 경우 확인")
     @ParameterizedTest
     @ValueSource(strings = {"MISS", "FIFTH", "FOURTH", "THIRD", "FIRST"})
     void isSecond_false(String rankName) {
-        assertThat(Rank.isSecond(Rank.valueOf(rankName))).isEqualTo(false);
+        assertThat(Rank.valueOf(rankName).isSecond()).isEqualTo(false);
     }
 }
