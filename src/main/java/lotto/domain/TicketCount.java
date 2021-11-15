@@ -49,4 +49,8 @@ public class TicketCount {
     public int hashCode() {
         return Objects.hash(count);
     }
+
+    public TicketCount minus(TicketCount ticketCount) {
+        return new TicketCount(this.count - ticketCount.count);
+    }
 }

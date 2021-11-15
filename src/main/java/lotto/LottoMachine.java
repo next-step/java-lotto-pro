@@ -26,7 +26,9 @@ public class LottoMachine {
         TicketCount manualTicketCount = getManualCount(totalTicketCount);
         Tickets manualTickets = getManualTickets(manualTicketCount);
 
-        Tickets tickets = TicketFactory.createRandomTickets(totalTicketCount);
+        TicketCount autoTicketCount = totalTicketCount.minus(manualTicketCount);
+
+        Tickets tickets = TicketFactory.createRandomTickets(autoTicketCount);
         ResultView.printTickets(tickets);
 
         ResultView.printAskWinnerTicket();

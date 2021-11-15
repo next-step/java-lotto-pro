@@ -41,4 +41,10 @@ public class TicketCountTest {
     void isBiggerThanCount(int count, boolean result) {
         assertThat(new TicketCount(2).isBiggerThan(new TicketCount(count))).isEqualTo(result);
     }
+
+    @DisplayName("티켓 갯수 빼기")
+    @Test
+    public void minus() {
+        assertThat(new TicketCount(3).minus(new TicketCount(2))).isEqualTo(new TicketCount(1));
+    }
 }
