@@ -5,12 +5,12 @@ import java.util.Objects;
 import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
 
-public class Count {
+public class TicketCount {
     private static final int MIN_COUNT = 0;
 
     private final long count;
 
-    public Count(long count) {
+    public TicketCount(long count) {
         validate(count);
         this.count = count;
     }
@@ -25,8 +25,8 @@ public class Count {
         return count;
     }
 
-    public boolean isBiggerThan(Count count) {
-        return isBiggerThan(count.count);
+    public boolean isBiggerThan(TicketCount ticketCount) {
+        return isBiggerThan(ticketCount.count);
     }
 
     public boolean isBiggerThan(long count) {
@@ -38,10 +38,10 @@ public class Count {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Count)) {
+        if (!(o instanceof TicketCount)) {
             return false;
         }
-        Count that = (Count)o;
+        TicketCount that = (TicketCount)o;
         return count == that.count;
     }
 

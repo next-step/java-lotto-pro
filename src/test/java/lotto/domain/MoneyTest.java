@@ -42,7 +42,7 @@ class MoneyTest {
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "0,0", "999,0", "1001,1"})
     void calculateCount(String money, int num) {
-        assertThat(new Money(money).calculateCount()).isEqualTo(new Count(num));
+        assertThat(new Money(money).calculateCount()).isEqualTo(new TicketCount(num));
     }
 
     @DisplayName("수익률 계산")

@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import lotto.domain.Ball;
-import lotto.domain.Count;
+import lotto.domain.TicketCount;
 import lotto.domain.Money;
 import lotto.domain.Ticket;
 import lotto.exception.LottoErrorCode;
@@ -26,9 +26,9 @@ public class InputView {
         return new Money(scanner.nextLine());
     }
 
-    public static Count readCount() {
+    public static TicketCount readCount() {
         long count = parseLong(scanner.nextLine());
-        return new Count(count);
+        return new TicketCount(count);
     }
 
     public static Ticket readTicket() {

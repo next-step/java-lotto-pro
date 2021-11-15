@@ -59,8 +59,8 @@ public class Money {
         return money;
     }
 
-    public Count calculateCount() {
-        return new Count(money / LOTTO_PRICE);
+    public TicketCount calculateCount() {
+        return new TicketCount(money / LOTTO_PRICE);
     }
 
     @Override
