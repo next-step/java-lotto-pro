@@ -1,8 +1,6 @@
 package study.lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,12 +10,8 @@ public class LottoNumbers {
     private static final int MINIMUM_MATCH_COUNT = 3;
     private static final int SECOND_RANK_OPPORTUNITY_COUNT = 5;
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_COUNT = 0;
     private static final int MAX_LOTTO_COUNT = 6;
-    private static final int INITIAL_MATCH_COUNT = 0;
-    private static final boolean INITIAL_MATCH_BONUS = false;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -38,32 +32,21 @@ public class LottoNumbers {
     }
 
     private List<LottoNumber> generateTotalLottoNumber() {
-        return IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1)
+        return IntStream.range(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER + 1)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public String makeLottoNumberPrintFormat() {
-        StringBuilder sb = new StringBuilder();
-        sb.append('[');
-        for(LottoNumber lottoNumber : lottoNumbers) {
-            sb.append(lottoNumber.getNumber() +", ");
-        }
-        sb.delete(sb.lastIndexOf(","), sb.length());
-        sb.append(']');
-        return sb.toString();
-    }
+    public Rank match(LottoNumbers thisWeekLottoNumbers, LottoNumber bonusBall) {
 
-    public void match(LottoNumbers thisWeekLottoNumbers, LottoNumber bonusBall) {
-
-        Match match = new Match(INITIAL_MATCH_COUNT, INITIAL_MATCH_BONUS);
-
+        Match match = new Match();
         for(LottoNumber lottoNumber : thisWeekLottoNumbers.getLottoNumbers()){
             matchAndIncreaseCount(lottoNumber, match);
         }
+
         checkBonusBall(match, bonusBall);
-        validateMatchCount(match);
-        Rank.valueOf(match.getCount(), match.getMatchBonus()).increaseCorrect();
+        checkMatchCount(match);
+        return Rank.valueOf(match.getCount(), match.getMatchBonus());
     }
 
     private void matchAndIncreaseCount(LottoNumber lottoNumber, Match match) {
@@ -82,13 +65,13 @@ public class LottoNumbers {
         }
     }
 
-    private void validateMatchCount(Match match) {
+    private void checkMatchCount(Match match) {
         if(match.getCount() < MINIMUM_MATCH_COUNT) {
             match.setCount(MISS);
         }
     }
 
-    protected List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return this.lottoNumbers;
     }
 }
