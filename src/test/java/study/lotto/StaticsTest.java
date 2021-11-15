@@ -2,9 +2,9 @@ package study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.lotto.domain.Money;
-import study.lotto.domain.Rank;
-import study.lotto.domain.Statics;
+import study.lotto.domain.*;
+
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,9 +15,10 @@ class StaticsTest {
     void calculrateProfit_test() {
         Statics statics = new Statics(new Money("50000"));
 
-        Rank.FOURTH.increaseCorrect();
-
+        Map<Rank, Count> matchCounter = statics.getMatchCounter();
+        matchCounter.put(Rank.FOURTH, new Count().increase());
         statics.calculateProfitRate();
+
         assertThat(statics.getProfitRate()).isEqualTo(1.00);
     }
 }
