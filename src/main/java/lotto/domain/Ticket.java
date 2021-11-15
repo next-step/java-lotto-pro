@@ -40,7 +40,7 @@ public class Ticket {
 
     public Rank calculateRank(Ticket winnerTicket, boolean containsBonus) {
         int correctCount = (int)this.balls.stream()
-            .filter(number -> winnerTicket.balls.contains(number))
+            .filter(winnerTicket.balls::contains)
             .count();
 
         return Rank.valueOf(correctCount, containsBonus);
