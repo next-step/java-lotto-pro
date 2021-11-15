@@ -3,7 +3,9 @@ package nextstep.lotto.constance;
 public class LottoDisplayMessage {
 
     public static final String PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해주세요.";
-    public static final String PURCHASE_LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
+    public static final String MANUAL_PURCHASE_AMOUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String INPUT_MANUAL_PURCHASE_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    public static final String PURCHASE_PREFIX_MESSAGE = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     public static final String LAST_WEEK_LOTTO_WIN_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     public static final String WINNING_STAT_MESSAGE = "당첨 통계";

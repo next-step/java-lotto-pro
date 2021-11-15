@@ -5,13 +5,19 @@ import java.math.BigDecimal;
 public class PurchaseLottoAmount {
 
     private final Long purchaseLottoAmount;
+    private final Long manualPurchaseLottoCount;
 
-    public PurchaseLottoAmount(Long purchaseLottoAmount) {
+    public PurchaseLottoAmount(Long purchaseLottoAmount, Long manualPurchaseLottoCount) {
         this.purchaseLottoAmount = purchaseLottoAmount;
+        this.manualPurchaseLottoCount = manualPurchaseLottoCount;
     }
 
-    public Long calculateLottoPurchaseCount(Long lottoPrice) {
-        return purchaseLottoAmount / lottoPrice;
+    public Long calculateAutoLottoPurchaseCount(Long lottoPrice) {
+        return purchaseLottoAmount / lottoPrice - manualPurchaseLottoCount;
+    }
+
+    public Long calculateManualLottoPurchaseCount(Long lottoPrice) {
+        return manualPurchaseLottoCount;
     }
 
     public BigDecimal calculateReturnRate(Long totalWinningAmount) {
