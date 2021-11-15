@@ -1,8 +1,12 @@
 package lotto.domain;
 
+import static lotto.domain.Rank.*;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -16,4 +20,11 @@ class RankTest {
         assertThat(Rank.valueOf(cnt, containsBonus)).isEqualTo(Rank.valueOf(rankName));
     }
 
+    @DisplayName("승리가 있는 값들")
+    @Test
+    void winningValues() {
+        assertThat(Rank.winningValues())
+            .isEqualTo(Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST));
+
+    }
 }

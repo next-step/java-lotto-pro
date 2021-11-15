@@ -1,6 +1,5 @@
 package view;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -59,8 +58,7 @@ public class ResultView {
     }
 
     private static String makeRanksMessage(Map<Rank, Long> rankCounts) {
-        return Arrays.stream(Rank.values())
-            .filter(rank -> rank != Rank.MISS)
+        return Rank.winningValues().stream()
             .map(rank -> String.format(OutputMessage.RANKS_FORMAT.getMessage(),
                 makeRankMessage(rank), rankCounts.getOrDefault(rank, ZERO_COUNT)))
             .collect(Collectors.joining(NEW_LINE));
