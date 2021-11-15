@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import static lotto.Rank.*;
@@ -7,7 +8,7 @@ import static lotto.Rank.*;
 public class LotteryResult {
     private final Map<Rank, Integer> results;
 
-    public LotteryResult(Map<Rank, Integer> results) {
+    private LotteryResult(Map<Rank, Integer> results) {
         this.results = results;
     }
 
@@ -20,10 +21,7 @@ public class LotteryResult {
     }
 
     public int calculateTotalWinningMoney() {
-        return results.getOrDefault(FIFTH, 0) * FIFTH.getWinningMoney()
-                + results.getOrDefault(FOURTH, 0) * FOURTH.getWinningMoney()
-                + results.getOrDefault(THIRD, 0) * THIRD.getWinningMoney()
-                + results.getOrDefault(SECOND, 0) * SECOND.getWinningMoney()
-                + results.getOrDefault(FIRST, 0) * FIRST.getWinningMoney();
+        return Arrays.stream(values())
+                .mapToInt(value -> results.getOrDefault(value, 0) * value.getWinningMoney()).sum();
     }
 }

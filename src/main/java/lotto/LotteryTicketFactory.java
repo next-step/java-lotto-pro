@@ -10,14 +10,14 @@ public class LotteryTicketFactory {
     public static final int FIRST_NUMBER_IN_LOTTERY_TICKET = 1;
     public static final int NUMBER_OF_CHOICES_IN_LOTTERY_TICKET = 6;
 
-    public static LotteryTicket createLotteryTicket() {
+    public static LotteryNumbers createLotteryTicket() {
         List<Integer> ticketAllNumber = createLotteryTicketAllNumber();
         Collections.shuffle(ticketAllNumber);
         List<Integer> pickedSixLotteryNo = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_CHOICES_IN_LOTTERY_TICKET; i++) {
             pickedSixLotteryNo.add(ticketAllNumber.get(i));
         }
-        return LotteryTicket.createAutoLotteryNumber(pickedSixLotteryNo);
+        return LotteryNumbers.createAutoLotteryNumber(pickedSixLotteryNo);
     }
 
     private static List<Integer> createLotteryTicketAllNumber() {
