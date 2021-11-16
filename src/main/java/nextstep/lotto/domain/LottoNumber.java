@@ -7,10 +7,9 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    public static final String INVALID_LOTTO_NUMBER_MESSAGE = "로또 번호는 1~9까지의 수입니다.";
-
     private static final Integer LOTTO_MIN_NUMBER = 1;
     private static final Integer LOTTO_MAX_NUMBER = 45;
+    private static final String INVALID_LOTTO_NUMBER_MESSAGE = "로또 번호는 " + LOTTO_MIN_NUMBER + "~" + LOTTO_MAX_NUMBER + "까지의 수입니다.";
 
     private final Integer lottoNumber;
 

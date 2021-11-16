@@ -73,7 +73,7 @@ public class LottoTest {
                                 ))
                         ),
                         new BonusBall(new LottoNumber(7), winningLotto2),
-                        4
+                        3
                 )
         );
     }

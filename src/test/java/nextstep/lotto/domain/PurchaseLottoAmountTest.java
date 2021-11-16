@@ -17,11 +17,15 @@ public class PurchaseLottoAmountTest {
         Long lottoPrice = 1_000L;
 
         // when
-        PurchaseLottoAmount amount = new PurchaseLottoAmount(purchaseLottoAmount);
-        Long count = amount.calculateLottoPurchaseCount(lottoPrice);
+        PurchaseLottoAmount purchaseLottoAmount1 = new PurchaseLottoAmount(purchaseLottoAmount, 0L);
+        Long count1 = purchaseLottoAmount1.calculateAutoLottoPurchaseCount(lottoPrice);
+
+        PurchaseLottoAmount purchaseLottoAmount2 = new PurchaseLottoAmount(purchaseLottoAmount, 1L);
+        Long count2 = purchaseLottoAmount2.calculateManualLottoPurchaseCount(lottoPrice);
 
         // then
-        Assertions.assertThat(count).isEqualTo(14);
+        Assertions.assertThat(count1).isEqualTo(14);
+        Assertions.assertThat(count2).isEqualTo(1);
     }
 
     @DisplayName("당첨에 따른 수익률 계산 테스트")
@@ -33,7 +37,7 @@ public class PurchaseLottoAmountTest {
         Long totalWinningAmount = 5_000L;
 
         // when
-        PurchaseLottoAmount amount = new PurchaseLottoAmount(purchaseLottoAmount);
+        PurchaseLottoAmount amount = new PurchaseLottoAmount(purchaseLottoAmount, 0L);
         BigDecimal result = amount.calculateReturnRate(totalWinningAmount);
 
         // then

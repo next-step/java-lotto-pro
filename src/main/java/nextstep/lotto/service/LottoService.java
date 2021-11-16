@@ -16,8 +16,8 @@ public class LottoService {
 
         PurchaseLottoAmount purchaseLottoAmount = LottoDisplay.inputPurchaseAmount();
         LottoCount lottoCount = new LottoCount(purchaseLottoAmount);
-        PurchaseLotto purchaseLotto = lottoCount.purchaseLottoByLottoCount();
 
+        PurchaseLotto purchaseLotto = LottoDisplay.inputManualPurchaseLotto(lottoCount);
         LottoDisplay.printLottoCountResult(lottoCount);
         LottoDisplay.printAutoLottoResult(purchaseLotto);
 

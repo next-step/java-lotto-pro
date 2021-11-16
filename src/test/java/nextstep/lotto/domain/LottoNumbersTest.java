@@ -37,6 +37,8 @@ public class LottoNumbersTest {
         for (LottoNumber lottoNumber : lottoNumbers) {
             Assertions.assertThat(lottoNumber).isEqualTo(expected.get(index++));
         }
+
+        mockRandoms.close();
     }
 
     private static Stream<Arguments> provide() {

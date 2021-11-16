@@ -14,6 +14,7 @@ import nextstep.lotto.exception.LottoRuntimeException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -84,12 +85,30 @@ public class LottoDisplay {
         }
     }
 
-    public static Lotto inputManualPurchaseLotto(Boolean showMessage) {
+    public static PurchaseLotto inputManualPurchaseLotto(LottoCount lottoCount) {
 
-        if (showMessage) {
-            System.out.println("");
+        Long manualLottoCount = lottoCount.getManualLottoCount();
+        Long autoLottoCount = lottoCount.getAutoLottoCount();
+
+        if (manualLottoCount > 0L) {
             System.out.println(INPUT_MANUAL_PURCHASE_LOTTO_MESSAGE);
         }
+
+        List<Lotto> purchaseLotto = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            Lotto lotto = inputLotto();
+            purchaseLotto.add(lotto);
+        }
+
+        for (int i = 0; i < autoLottoCount; i++) {
+            Lotto lotto = new Lotto(new LottoNumbers());
+            purchaseLotto.add(lotto);
+        }
+
+        return new PurchaseLotto(purchaseLotto);
+    }
+
+    public static Lotto inputLotto() {
 
         try {
             String inputManualPurchaseLotto = scanner.nextLine();
@@ -101,10 +120,10 @@ public class LottoDisplay {
 
         } catch (NumberFormatException e) {
             System.out.println(ERROR + INVALID_WINNING_LOTTO_NUMBER_MESSAGE);
-            return inputManualPurchaseLotto(Boolean.TRUE);
+            return inputLotto();
         } catch (LottoRuntimeException e) {
             System.out.println(ERROR + e.getMessage());
-            return inputManualPurchaseLotto(Boolean.TRUE);
+            return inputLotto();
         }
     }
 

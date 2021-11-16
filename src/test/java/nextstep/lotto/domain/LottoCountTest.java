@@ -1,7 +1,6 @@
 package nextstep.lotto.domain;
 
 import nextstep.lotto.util.LottoRandomGenerator;
-import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,32 +22,10 @@ public class LottoCountTest {
         ).thenReturn(1, 2, 3, 4, 5, 6);
 
         // then
-        PurchaseLotto purchaseLotto = new LottoCount(new PurchaseLottoAmount(1000L)).purchaseLottoByLottoCount();
+        LottoCount lottoCount = new LottoCount(new PurchaseLottoAmount(14000L, 3L));
 
         // return
-        Assertions.assertThat(purchaseLotto.size()).isEqualTo(1);
-        for (Lotto lotto : purchaseLotto) {
-            Assertions.assertThat(StringUtils.join(lotto.getLottoNumbers().getLottoNumbers(), ", ")).isEqualTo("1, 2, 3, 4, 5, 6");
-        }
-
-        mockRandoms.close();
-    }
-
-    @DisplayName("수량에 따라서 자동으로 로또 생성되는지 테스트")
-    @Test
-    public void purchaseLottoByLottoCountTest() {
-
-        // when
-        MockedStatic<LottoRandomGenerator> mockRandoms = Mockito.mockStatic(LottoRandomGenerator.class);
-        mockRandoms.when(() ->
-                LottoRandomGenerator.pickNumberInRange(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
-        ).thenReturn(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-
-        // then
-        PurchaseLotto purchaseLotto = new LottoCount(new PurchaseLottoAmount(2000L)).purchaseLottoByLottoCount();
-
-        // return
-        Assertions.assertThat(purchaseLotto.size()).isEqualTo(2);
+        Assertions.assertThat(lottoCount.getAutoLottoCount()).isEqualTo(11);
 
         mockRandoms.close();
     }
