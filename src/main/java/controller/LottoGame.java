@@ -12,13 +12,12 @@ import view.InputView;
 import view.ResultView;
 
 public class LottoGame {
-	private final InputView inputView = new InputView();
 	private final ResultView resultView = new ResultView();
 
 	public void start() {
 		LottoPurchaseCount lottoPurchaseCount = requestPurchasingPrice();
 		Lottos purchasedLottos = buyLotto(lottoPurchaseCount);
-		inputView.showResponseInputOfPurchaseLottos(purchasedLottos);
+		InputView.showResponseInputOfPurchaseLottos(purchasedLottos);
 
 		Lotto winningLotto = requestWinningLotto();
 		LottoNumber bonusNumber = requestBonusNumber();
@@ -30,7 +29,7 @@ public class LottoGame {
 	private LottoNumber requestBonusNumber() {
 		LottoNumber bonusNumber = null;
 		while (Objects.isNull(bonusNumber)) {
-			inputView.showRequestInputOfBonusNumber();
+			InputView.showRequestInputOfBonusNumber();
 			bonusNumber = parseInputOfBonusNumber();
 		}
 		return bonusNumber;
@@ -39,7 +38,7 @@ public class LottoGame {
 	private Lotto requestWinningLotto() {
 		Lotto winningLotto = null;
 		while (Objects.isNull(winningLotto)) {
-			inputView.showRequestInputOfWinningNumbers();
+			InputView.showRequestInputOfWinningNumbers();
 			winningLotto = parseInputOfWinningLotto();
 		}
 		return winningLotto;
@@ -47,9 +46,9 @@ public class LottoGame {
 
 	private Lotto parseInputOfWinningLotto() {
 		try {
-			return new Lotto(inputView.pollInput());
+			return new Lotto(InputView.pollInput());
 		} catch (RuntimeException e) {
-			inputView.showRequestInputExceptionOfWinningNumbers();
+			InputView.showRequestInputExceptionOfWinningNumbers();
 			return null;
 		}
 	}
@@ -61,7 +60,7 @@ public class LottoGame {
 	private LottoPurchaseCount requestPurchasingPrice() {
 		LottoPurchaseCount lottoPurchaseCount = null;
 		while (Objects.isNull(lottoPurchaseCount)) {
-			inputView.showRequestInputOfPurchasePrice();
+			InputView.showRequestInputOfPurchasePrice();
 			lottoPurchaseCount = parseInputOfPurchasePrice();
 		}
 		return lottoPurchaseCount;
@@ -69,18 +68,18 @@ public class LottoGame {
 
 	private LottoPurchaseCount parseInputOfPurchasePrice() {
 		try {
-			return new LottoPurchaseCount(inputView.pollInput());
+			return new LottoPurchaseCount(InputView.pollInput());
 		} catch (RuntimeException e) {
-			inputView.showRequestInputExceptionOfPurchasedPrice();
+			InputView.showRequestInputExceptionOfPurchasedPrice();
 			return null;
 		}
 	}
 
 	private LottoNumber parseInputOfBonusNumber() {
 		try {
-			return new LottoNumber(inputView.pollInput());
+			return new LottoNumber(InputView.pollInput());
 		} catch (RuntimeException e) {
-			inputView.showRequestInputExceptionOfBonusNumber();
+			InputView.showRequestInputExceptionOfBonusNumber();
 			return null;
 		}
 	}
