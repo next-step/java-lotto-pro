@@ -15,7 +15,7 @@ public enum Ranking {
 
     private final int lottoNumberMatch;
     private final boolean bonusMatch;
-    private final long amount;
+    private final Long amount;
     private final String message;
 
     Ranking(int lottoNumberMatch, boolean bonusMatch, long amount, String message) {
