@@ -32,7 +32,7 @@ public class WinningStatistics {
     }
 
     public double calculatePrizeMoney() {
-        int totalPrize = 0;
+        Long totalPrize = 0L;
         int lottoCount = 0;
 
         for (Ranking ranking : winningStatisticsResult.keySet()) {
