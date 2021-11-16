@@ -16,7 +16,7 @@ public class RewardCalculator {
 	private RewardCalculator(Map<Rank, Integer> rankMatchingCounts) {
 		this();
 		for (Rank key : rankMatchingCounts.keySet()) {
-			addCount(key);
+			addCount(key, rankMatchingCounts.get(key));
 		}
 	}
 
@@ -40,9 +40,13 @@ public class RewardCalculator {
 	public RewardCalculator sum(RewardCalculator other) {
 		RewardCalculator rewardCalculator = new RewardCalculator(this.rankMatchingCounts);
 		for (Rank key : other.rankMatchingCounts.keySet()) {
-			rewardCalculator.addCount(key);
+			rewardCalculator.addCount(key, other.rankMatchingCounts.get(key));
 		}
 		return rewardCalculator;
+	}
+
+	public void addCount(Rank key, int value) {
+		rankMatchingCounts.put(key, value);
 	}
 
 	@Override

@@ -79,13 +79,13 @@ public class RewardCalculatorTest {
 	@Test
 	void test_두개의Calculator합() {
 		RewardCalculator rewardCalculator1 = new RewardCalculator();
-		rewardCalculator1.addCount(Rank.FIRST);
+		rewardCalculator1.addCount(Rank.FIRST, 2);
 		RewardCalculator rewardCalculator2 = new RewardCalculator();
-		rewardCalculator2.addCount(Rank.SECOND);
+		rewardCalculator2.addCount(Rank.SECOND, 2);
 
 		RewardCalculator rewardCalculatorResult = new RewardCalculator();
-		rewardCalculatorResult.addCount(Rank.FIRST);
-		rewardCalculatorResult.addCount(Rank.SECOND);
+		rewardCalculatorResult.addCount(Rank.FIRST, 2);
+		rewardCalculatorResult.addCount(Rank.SECOND, 2);
 
 		assertThat(rewardCalculator1.sum(rewardCalculator2)).isEqualTo(rewardCalculatorResult);
 	}
