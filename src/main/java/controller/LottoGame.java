@@ -12,8 +12,6 @@ import view.InputView;
 import view.ResultView;
 
 public class LottoGame {
-	private final ResultView resultView = new ResultView();
-
 	public void start() {
 		LottoPurchaseCount lottoPurchaseCount = requestPurchasingPrice();
 		Lottos purchasedLottos = buyLotto(lottoPurchaseCount);
@@ -23,7 +21,7 @@ public class LottoGame {
 		LottoNumber bonusNumber = requestBonusNumber();
 
 		RewardCalculator rewardCalculator = purchasedLottos.calcReward(winningLotto, bonusNumber);
-		resultView.showResult(lottoPurchaseCount, rewardCalculator);
+		ResultView.showResult(lottoPurchaseCount, rewardCalculator);
 	}
 
 	private LottoNumber requestBonusNumber() {
