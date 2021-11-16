@@ -21,11 +21,11 @@ public class LottoResultResponse {
     }
 
     private String prizesAsString() {
-        return prizeString(Prize.FIFTH, result.getNumberOfFifthPrizes()) + NEWLINE
-            + prizeString(Prize.FOURTH, result.getNumberOfFourthPrizes()) + NEWLINE
-            + prizeString(Prize.THIRD, result.getNumberOfThirdPrizes()) + NEWLINE
-            + secondPrizeString(result.getNumberOfSecondPrizes()) + NEWLINE
-            + prizeString(Prize.FIRST, result.getNumberOfFirstPrizes());
+        return prizeString(Prize.FIFTH, result.getNumberOfPrizes(Prize.FIFTH)) + NEWLINE
+            + prizeString(Prize.FOURTH, result.getNumberOfPrizes(Prize.FOURTH)) + NEWLINE
+            + prizeString(Prize.THIRD, result.getNumberOfPrizes(Prize.THIRD)) + NEWLINE
+            + secondPrizeString(result.getNumberOfPrizes(Prize.SECOND)) + NEWLINE
+            + prizeString(Prize.FIRST, result.getNumberOfPrizes(Prize.FIRST));
     }
 
     private String prizeString(final Prize prize, final int numberOfPrizes) {

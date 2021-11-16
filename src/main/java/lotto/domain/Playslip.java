@@ -10,15 +10,32 @@ public class Playslip {
         this.pickedNumbers = pickedNumbers;
     }
 
-    public boolean contains(PickedNumbers winningNumbers, int x) {
-        return pickedNumbers.contains(winningNumbers, x);
-    }
-
-    public boolean contains(Number bonusNumber) {
-        return pickedNumbers.contains(bonusNumber) == NUMBER_CONTAINED;
-    }
-
     public String asString() {
         return pickedNumbers.asString();
+    }
+
+    public Prize checkResult(PickedNumbers winningNumbers, Number bonusNumber) {
+        Prize result = Prize.NONE;
+        for (Prize prize : Prize.values()) {
+            result = checkResult(winningNumbers, bonusNumber, prize);
+            if (result != Prize.NONE) {
+                break;
+            }
+        }
+        return result;
+    }
+
+    private Prize checkResult(
+        final PickedNumbers winningNumbers,
+        final Number bonusNumber,
+        final Prize prize
+    ) {
+        if (prize == Prize.SECOND && pickedNumbers.contains(bonusNumber) == NUMBER_CONTAINED) {
+            return Prize.SECOND;
+        }
+        if (pickedNumbers.contains(winningNumbers, prize.getMatchCount())) {
+            return prize;
+        }
+        return Prize.NONE;
     }
 }
