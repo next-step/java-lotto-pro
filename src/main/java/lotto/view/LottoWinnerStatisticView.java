@@ -18,6 +18,6 @@ public class LottoWinnerStatisticView {
         System.out.printf("5개 일치 (1500000원) - %d개%n", winningResult.winnerPerRank(Rank.SECOND_PLACE));
         System.out.printf("5개 일치, 보너스 볼 일치(30000000원) - %d개%n", winningResult.winnerPerRank(Rank.BONUS_SECOND_PLACE));
         System.out.printf("6개 일치 (2000000000원) - %d개%n", winningResult.winnerPerRank(Rank.FIRST_PLACE));
-        System.out.printf("총 수익률은 %s 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임) %n", money.profitRate(winningResult));
+        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임) %n", money.rate(winningResult.prizeMoneyStatistics().getAmount()));
     }
 }

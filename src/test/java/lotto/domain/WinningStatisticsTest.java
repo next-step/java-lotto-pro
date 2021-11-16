@@ -77,7 +77,7 @@ class WinningStatisticsTest {
         Money money = new Money(purchaseAmount);
 
         //when
-        double profitRateResult = money.profitRate(winningResult);
+        double profitRateResult = money.rate(winningResult.prizeMoneyStatistics().getAmount());
 
         //then
         assertThat(profitRateResult).isEqualTo(profitRate);

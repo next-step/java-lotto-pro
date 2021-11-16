@@ -19,18 +19,18 @@ public class WinningResult {
         return winnerPerRank;
     }
 
-    public PrizeMoney prizeMoneyStatistics() {
+    public Money prizeMoneyStatistics() {
         Set<Map.Entry<Rank, Integer>> resultEntrySet = this.result.entrySet();
-        PrizeMoney prizeMoney = null;
+        Money accumulatePrizeMoney = new Money(0);
 
         for (Map.Entry<Rank, Integer> winningRanks : resultEntrySet) {
             Rank rank = winningRanks.getKey();
             Integer winningCount = winningRanks.getValue();
 
-            prizeMoney = rank.getPrizeMoney();
-            prizeMoney.prizeMoneyAccumulate(winningCount);
+            long rankPrizeMoney = rank.getPrizeMoney().getAmount();
+            accumulatePrizeMoney.add(rankPrizeMoney * winningCount);
         }
 
-        return prizeMoney;
+        return accumulatePrizeMoney;
     }
 }

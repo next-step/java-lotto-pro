@@ -1,17 +1,20 @@
 package lotto;
 
-import lotto.domain.LottoStore;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.view.*;
+
+import java.util.List;
 
 public class LottoController {
     public static void main(String[] args) {
         Money money = new Money(LottoPurchaseView.input());
-        Lottos lottos = LottoStore.purchase(money);
+        final int lottoManualPurchaseCount = LottoManualPurchaseCountView.input();
 
-        LottoPurchaseListView.print(lottos);
+        List<List<Integer>> manualLottoNumbers = LottoManualPurchaseView.input(lottoManualPurchaseCount);
+
+        Lottos lottos = LottoStore.purchase(money, lottoManualPurchaseCount, manualLottoNumbers);
+
+        LottoPurchaseListView.print(lottos, manualLottoNumbers.size());
 
         WinningLotto winningLotto = new WinningLotto(LottoWinningNumberView.input(), LottoWinningBonusNumberView.input());
 

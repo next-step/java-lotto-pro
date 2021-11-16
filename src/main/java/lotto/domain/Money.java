@@ -1,32 +1,35 @@
 package lotto.domain;
 
-import lotto.exception.ErrorMessage;
-
 import java.util.Objects;
 
 public class Money {
 
-    public static final int LOTTO_PRICE = 1000;
-    private int purchaseAmount;
+    private long amount;
 
-    public Money(int purchaseAmount) {
-        purchaseAmountOneThousandWonUnitValid(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
+    public Money(long amount) {
+        this.amount = amount;
     }
 
-    public double profitRate(WinningResult winningResult) {
-        PrizeMoney prizeMoney = winningResult.prizeMoneyStatistics();
-        return prizeMoney.profitRate(this.purchaseAmount);
-    }
-
-    public int divide() {
-        return purchaseAmount / LOTTO_PRICE;
-    }
-
-    private void purchaseAmountOneThousandWonUnitValid(int purchaseAmount) {
-        if (purchaseAmount < LOTTO_PRICE || purchaseAmount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(ErrorMessage.PURCHASE_AMOUNT_NOT_ONE_THOUSAND_WON.getMessage());
+    public long divide(long amount) {
+        if (amount <= 0 ) {
+            throw new ArithmeticException("금액은 0원 이상이여야 합니다.");
         }
+        return this.amount / amount;
+    }
+
+    public double rate(long amount) {
+        if (amount == 0) {
+            return 0;
+        }
+        return (double) amount / this.amount;
+    }
+
+    public void add(long amount) {
+        this.amount += amount;
+    }
+
+    public long getAmount() {
+        return amount;
     }
 
     @Override
@@ -34,11 +37,11 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
-        return purchaseAmount == money.purchaseAmount;
+        return amount == money.amount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(purchaseAmount);
+        return Objects.hash(amount);
     }
 }
