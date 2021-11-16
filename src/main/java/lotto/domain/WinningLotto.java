@@ -3,56 +3,38 @@ package lotto.domain;
 import lotto.domain.common.Constant;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
 
-    private static final String THE_LOTTERY_MUST_CONSIST_OF_6_DIGITS = "The lottery must consist of 6 digits.";
-    private static final String THE_LOTTERY_MUST_NOT_HAVE_DUPLICATE_NUMBERS = "The lottery must not have duplicate numbers.";
     public static final String BONUS_NUMBERS_ARE_DUPLICATED_IN_LOTTERY_NUMBERS = "Bonus numbers are duplicated in lottery numbers.";
     public static final int MATCH_ONE = 1;
     public static final int MIS_MATCH_ZERO = 0;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Lotto lottoNumbers;
     private final LottoNumber bonusNumber;
 
-    private WinningLotto(final List<Integer> lottoNumbers, final int bonusNumber) {
-        this.lottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::from)
-                .collect(Collectors.toList());
-        this.bonusNumber = LottoNumber.from(bonusNumber);
+    private WinningLotto(final Lotto lottoNumbers, final LottoNumber bonusNumber) {
+        validateBonus(lottoNumbers, bonusNumber);
+        this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
     public static WinningLotto from(final List<Integer> winningLottoNumbers, final int bonusBall) {
-        validate(winningLottoNumbers);
-        validateBonus(winningLottoNumbers, bonusBall);
-        return new WinningLotto(winningLottoNumbers, bonusBall);
+        return new WinningLotto(Lotto.from(winningLottoNumbers), LottoNumber.from(bonusBall));
     }
 
     public static WinningLotto from(final String inputWinningLottoNumbers, final String inputBonusBall) {
         List<Integer> winningLottoNumbers = Arrays.stream(inputWinningLottoNumbers.split(Constant.SEPERATOR))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        validate(winningLottoNumbers);
-        int bonusBall = Integer.parseInt(inputBonusBall);
-        validateBonus(winningLottoNumbers, bonusBall);
-        return new WinningLotto(winningLottoNumbers, bonusBall);
+        return new WinningLotto(Lotto.from(winningLottoNumbers), LottoNumber.from(Integer.parseInt(inputBonusBall)));
     }
 
-    private static void validate(final List<Integer> winningLottoNumbers) {
-        if( winningLottoNumbers.size() != Constant.LOTTO_LIMIT_SIZE) {
-            throw new IllegalArgumentException(THE_LOTTERY_MUST_CONSIST_OF_6_DIGITS);
-        }
-        if( new HashSet<>(winningLottoNumbers).size() != Constant.LOTTO_LIMIT_SIZE ) {
-            throw new IllegalArgumentException(THE_LOTTERY_MUST_NOT_HAVE_DUPLICATE_NUMBERS);
-        }
-    }
-
-    private static void validateBonus(final List<Integer> winningLottoNumbers, final int bonusBall) {
-        if( winningLottoNumbers.contains(bonusBall) ) {
+    private static void validateBonus(final Lotto winningLottoNumbers, final LottoNumber bonusBall) {
+        if( winningLottoNumbers.getLottoNumbers().contains(bonusBall) ) {
             throw new IllegalArgumentException(BONUS_NUMBERS_ARE_DUPLICATED_IN_LOTTERY_NUMBERS);
         }
     }
@@ -71,7 +53,7 @@ public class WinningLotto {
     }
 
     public int matchOfCount(final LottoNumber lottoNumber) {
-        if( this.lottoNumbers.contains(lottoNumber) ) {
+        if( this.lottoNumbers.getLottoNumbers().contains(lottoNumber) ) {
             return MATCH_ONE;
         }
         return MIS_MATCH_ZERO;
