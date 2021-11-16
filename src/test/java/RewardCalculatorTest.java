@@ -3,6 +3,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -73,5 +74,19 @@ public class RewardCalculatorTest {
 			Arguments.of(Rank.FIFTH, Rank.NONE),
 			Arguments.of(Rank.NONE, Rank.FIRST)
 		);
+	}
+
+	@Test
+	void test_두개의Calculator합() {
+		RewardCalculator rewardCalculator1 = new RewardCalculator();
+		rewardCalculator1.addCount(Rank.FIRST);
+		RewardCalculator rewardCalculator2 = new RewardCalculator();
+		rewardCalculator2.addCount(Rank.SECOND);
+
+		RewardCalculator rewardCalculatorResult = new RewardCalculator();
+		rewardCalculatorResult.addCount(Rank.FIRST);
+		rewardCalculatorResult.addCount(Rank.SECOND);
+
+		assertThat(rewardCalculator1.sum(rewardCalculator2)).isEqualTo(rewardCalculatorResult);
 	}
 }
