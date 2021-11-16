@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import exception.OutOfRangeException;
 import model.LottoPurchaseCount;
+import model.LottoPurchasePrice;
 
 public class LottoPurchasePriceTest {
 	@Test
@@ -16,6 +17,11 @@ public class LottoPurchasePriceTest {
 	@Test
 	void test_1000원이상_정상() {
 		assertThat(new LottoPurchasePrice(1000)).isEqualTo(new LottoPurchasePrice(1000));
+	}
+
+	@Test
+	void test_가격반환() {
+		assertThat(new LottoPurchasePrice(2500).get()).isEqualTo(2500);
 	}
 
 	@Test
