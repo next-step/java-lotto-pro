@@ -7,3 +7,11 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 기능 목록
+* 구입 금액 입력[O]
+* 로또 발급[O]
+* 당첨 번호 입력[O]
+* 당첨된 로또 찾기[O]
+* 총 수익률 구하기[O]
+* 당첨 통계 및 총 수익률 출력[O]
