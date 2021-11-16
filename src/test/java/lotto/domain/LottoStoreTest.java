@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,5 +81,25 @@ class LottoStoreTest {
 
         //then
         assertThat(lottos).isEqualTo(new Lottos(manualLottos));
+    }
+
+    @DisplayName("1000원당 로또 1장")
+    @ParameterizedTest
+    @CsvSource(value = {"1000:1", "10000:10", "100000:100"}, delimiter = ':')
+    void oneLottoPerOneThousandWon(int purchaseAmount, int lottoIssuanceCount) {
+        Money money = new Money(purchaseAmount);
+        assertThat(money.divide(LottoStore.LOTTO_PRICE)).isEqualTo(lottoIssuanceCount);
+    }
+
+    @DisplayName("구매금액이 1000원 단위가 아닐 시 예외")
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1230, 3500, 5700, 13400})
+    void purchaseAmountNotOneThousandWonUnitExceptionTest(int invalidPurchaseAmount) {
+        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
+        manualLottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            LottoStore.purchase(new Money(invalidPurchaseAmount), 2, manualLottoNumbers);
+        });
     }
 }
