@@ -9,9 +9,13 @@ import step2.domain.Text;
 import step2.domain.TextSplitter;
 
 public class StringAddCalculator {
-	public static int splitAndSum(String text) {
 
-		TextSplitter textSplitter = new TextSplitter(new Text(text));
+	private StringAddCalculator() {
+	}
+
+	public static int splitAndSum(String splitTargetText) {
+
+		TextSplitter textSplitter = new TextSplitter(new Text(splitTargetText));
 
 		NumberList numberList = new NumberList(
 			Arrays.stream(textSplitter.getSplitResult())
