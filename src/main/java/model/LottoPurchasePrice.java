@@ -1,7 +1,8 @@
+package model;
+
 import java.util.Objects;
 
 import exception.OutOfRangeException;
-import model.LottoPurchaseCount;
 
 public class LottoPurchasePrice {
 	public static final String MESSAGE_PRICE_MUST_BE_LARGER_THAN_999 = "PRICE_MUST_BE_LARGER_THAN_999";
