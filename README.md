@@ -69,11 +69,10 @@
 * LottoPurchasePrice
   * 1000원 미만을 제공하면 예외
   * LottoPurchaseCount로 변환
-
+  
 * LottoPurchaseCount
   * 0번을 제공하면 예외 
   * 로또 산 횟수 반환
-  * 처음에 소모한 비용 반환
   
 * Lotto
   * List<Integer> 주입 생성자
