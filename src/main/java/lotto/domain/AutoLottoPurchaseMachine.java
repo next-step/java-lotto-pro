@@ -15,12 +15,15 @@ public final class AutoLottoPurchaseMachine {
                     .boxed()
                     .collect(Collectors.toList());
 
-    public List<Integer> generateLottoNumbers() {
-        Collections.shuffle(lottoNumber);
-        List<Integer> lottoNumberSubList = new ArrayList<>(lottoNumber.subList(0, 6));
-        Collections.sort(lottoNumberSubList);
+    public List<Lotto> generateLottoNumbers(final int autoLottoCount) {
+        List<Lotto> lottosList = new ArrayList<>();
+        for( int i = 0; i < autoLottoCount; i++ ) {
+            Collections.shuffle(lottoNumber);
+            List<Integer> lottoNumberSubList = new ArrayList<>(lottoNumber.subList(0, 6));
+            Collections.sort(lottoNumberSubList);
+            lottosList.add(Lotto.from(lottoNumberSubList));
+        }
 
-        return lottoNumberSubList;
+        return lottosList;
     }
-
 }
