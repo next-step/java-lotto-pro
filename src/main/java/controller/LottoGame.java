@@ -66,7 +66,7 @@ public class LottoGame {
 
 	private LottoPurchaseCount parseInputOfPurchasePrice() {
 		try {
-			return new LottoPurchaseCount(InputView.pollInput());
+			return new LottoPurchaseCount(Integer.parseInt(InputView.pollInput()));
 		} catch (RuntimeException e) {
 			InputView.showRequestInputExceptionOfPurchasedPrice();
 			return null;
