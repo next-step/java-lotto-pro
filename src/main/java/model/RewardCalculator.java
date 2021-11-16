@@ -29,10 +29,10 @@ public class RewardCalculator {
 		return rankMatchingCounts.getOrDefault(rank, DEFAULT_COUNT);
 	}
 
-	public int sumReward() {
-		int sum = 0;
+	public long sumReward() {
+		long sum = 0;
 		for (Rank rank : rankMatchingCounts.keySet()) {
-			sum += rankMatchingCounts.get(rank) * rank.getReward();
+			sum += (long)rankMatchingCounts.get(rank) * rank.getReward();
 		}
 		return sum;
 	}
