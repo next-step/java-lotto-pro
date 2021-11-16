@@ -11,14 +11,12 @@ public class Application {
 
     public static void main(String[] args) throws IOException {
 
-        Payment payment = Payment.from(InputView.inputAmount());
+        Payment payment = Payment.from(InputView.inputAmount(), InputView.inputManualPurchaseLotto());
 
-        ManualLottoPurchase manualLottoPurchase = ManualLottoPurchase.from(InputView.inputManualPurchaseLotto());
-        ManualLottoPurchaseMachine manualLottoPurchaseMachine = manualLottoPurchase.from(payment, InputView.inputManualLottoNumbers());
+        ManualLottoPurchaseMachine manualLottoPurchaseMachine = payment.from(InputView.inputManualLottoNumbers());
 
-        int manualPurchaseCount = manualLottoPurchase.getPurchase();
-        Lottos lottos = Lottos.buy(payment.getAutoPurchaseCount(manualPurchaseCount));
-        ResultView.printPurchaseLotto(payment.getAutoPurchaseCount(manualPurchaseCount), manualPurchaseCount);
+        Lottos lottos = Lottos.buy(payment.getAutoPurchaseCount());
+        ResultView.printPurchaseLotto(payment.getAutoPurchaseCount(), payment.getManualLottoPurchase());
         lottos.addManualLottoNumbers(manualLottoPurchaseMachine);
         ResultView.printLottos(lottos);
 
