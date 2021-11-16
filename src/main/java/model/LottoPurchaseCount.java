@@ -20,6 +20,10 @@ public class LottoPurchaseCount {
 		return purchaseCount;
 	}
 
+	public boolean isLessThan(int other) {
+		return this.purchaseCount < other;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

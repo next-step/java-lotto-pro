@@ -21,6 +21,12 @@ public class LottoPurchaseCountTest {
 	}
 
 	@Test
+	void 더_작으면_true() {
+		assertThat(new LottoPurchaseCount(1).isLessThan(2)).isTrue();
+		assertThat(new LottoPurchaseCount(1).isLessThan(0)).isFalse();
+	}
+
+	@Test
 	@DisplayName("호출시 구매한 횟수 반환")
 	void test_get1() {
 		assertThat(new LottoPurchaseCount(1).get()).isEqualTo(1);
