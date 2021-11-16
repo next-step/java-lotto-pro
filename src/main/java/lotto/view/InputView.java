@@ -2,9 +2,11 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.model.BonusNumber;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.PurchaseMoney;
@@ -15,12 +17,30 @@ public class InputView {
 
 	public static PurchaseMoney getMoney() {
 		System.out.println("구입금액을 입력해 주세요.");
-		return new PurchaseMoney(scanner.nextLine());
+		return repeatWhenException(() -> new PurchaseMoney(getInteger()), IllegalArgumentException.class);
+	}
+
+	private static <T> T repeatWhenException(Supplier<T> supplier,
+		Class<? extends Throwable> exceptionClass) {
+		while (true) {
+			try {
+				return supplier.get();
+			} catch (Exception e) {
+				checkException(exceptionClass, e);
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	private static void checkException(Class<? extends Throwable> exceptionClass, Exception e) {
+		if (!exceptionClass.isInstance(e)) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public static WinLotto getWinLotto() {
 		final Lotto winLotto = getWinLottoWithoutBonusNumber();
-		final Integer bonusNumber = getBonusNumber();
+		final BonusNumber bonusNumber = getBonusNumber();
 		return new WinLotto(winLotto, bonusNumber);
 	}
 
@@ -36,14 +56,16 @@ public class InputView {
 			.collect(Collectors.toList()));
 	}
 
-	private static Integer getBonusNumber() {
+	private static BonusNumber getBonusNumber() {
 		System.out.println("보너스 볼을 입력해 주세요.");
-		return getInteger();
+		return repeatWhenException(() -> new BonusNumber(getInteger()), IllegalArgumentException.class);
 	}
 
 	private static int getInteger() {
-		String number = scanner.nextLine();
-		return Integer.parseInt(number);
+		return repeatWhenException(() -> {
+			String number = scanner.nextLine();
+			return Integer.parseInt(number);
+		}, NumberFormatException.class);
 	}
 
 	private static Lotto getWinLottoWithoutBonusNumber() {
@@ -52,11 +74,13 @@ public class InputView {
 	}
 
 	private static Lotto getLotto() {
-		String numbers = scanner.nextLine();
-		String[] splittedByComma = numbers.split(",");
-		return new Lotto(Arrays.stream(splittedByComma)
-			.map(String::trim)
-			.map(Integer::parseInt)
-			.collect(Collectors.toList()));
+		return repeatWhenException(() -> {
+			String numbers = scanner.nextLine();
+			String[] splittedByComma = numbers.split(",");
+			return new Lotto(Arrays.stream(splittedByComma)
+				.map(String::trim)
+				.map(Integer::parseInt)
+				.collect(Collectors.toList()));
+		}, IllegalArgumentException.class);
 	}
 }

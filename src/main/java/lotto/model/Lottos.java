@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +24,7 @@ public class Lottos {
 	}
 
 	public Lottos merge(Lottos lottos) {
-		List<Lotto> merged = new LinkedList<>(this.lottos);
+		List<Lotto> merged = new ArrayList<>(this.lottos);
 		merged.addAll(lottos.lottos);
 		return new Lottos(merged);
 	}
@@ -53,7 +54,7 @@ public class Lottos {
 	public int hashCode() {
 		return Objects.hash(lottos);
 	}
-  
+
 	public Prize winPrize(WinLotto winLotto) {
 		List<Rank> ranks = new LinkedList<>();
 		for (Lotto lotto : lottos) {
