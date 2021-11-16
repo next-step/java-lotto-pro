@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class Money {
 
-    public static final int LOTTO_PRICE = 1000;
     private int purchaseAmount;
 
     public Money(int purchaseAmount) {
@@ -20,11 +19,11 @@ public class Money {
     }
 
     public int divide() {
-        return purchaseAmount / LOTTO_PRICE;
+        return purchaseAmount / LottoStore.LOTTO_PRICE;
     }
 
     private void purchaseAmountOneThousandWonUnitValid(int purchaseAmount) {
-        if (purchaseAmount < LOTTO_PRICE || purchaseAmount % LOTTO_PRICE != 0) {
+        if (purchaseAmount < LottoStore.LOTTO_PRICE || purchaseAmount % LottoStore.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_AMOUNT_NOT_ONE_THOUSAND_WON.getMessage());
         }
     }

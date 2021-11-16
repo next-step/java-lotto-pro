@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 //구매 금액만큼 로또를 발급하는 역할을 가진 클래스
 public class LottoStore {
 
+    public static final int LOTTO_PRICE = 1000;
+
     private LottoStore() {
     }
 
