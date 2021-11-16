@@ -62,7 +62,7 @@ public class RewardCalculatorTest {
 		rewardCalculator.addCount(rank1);
 		rewardCalculator.addCount(rank2);
 
-		assertThat(rewardCalculator.sum()).isEqualTo(rank1.getReward() + rank2.getReward());
+		assertThat(rewardCalculator.sumReward()).isEqualTo(rank1.getReward() + rank2.getReward());
 	}
 
 	private static Stream<Arguments> test_sum1() {
