@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import exception.OutOfRangeException;
 import model.Lotto;
 import model.LottoNumber;
 import model.LottoNumberChoiceRandom;
@@ -28,7 +29,7 @@ public class LottosTest {
 				public List<Integer> choose() {
 					return Arrays.asList(1, 2);
 				}
-			}, new LottoPurchaseCount("1000")))
+			}, new LottoPurchaseCount(1000)))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(Lotto.MESSAGE_NOT_ALLOW_LENGTH);
 	}
@@ -43,7 +44,7 @@ public class LottosTest {
 					public List<Integer> choose() {
 						return Arrays.asList(1, 1, 3, 4, 5, 7);
 					}
-				}, new LottoPurchaseCount("1000")))
+				}, new LottoPurchaseCount(1000)))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(Lotto.MESSAGE_NOT_ALLOW_DUPLICATION);
 	}
@@ -59,7 +60,7 @@ public class LottosTest {
 						public List<Integer> choose() {
 							return Arrays.asList(1, 2, 3, 4, 5, 6);
 						}
-					}, new LottoPurchaseCount("10000"));
+					}, new LottoPurchaseCount(10000));
 			});
 	}
 
@@ -73,9 +74,9 @@ public class LottosTest {
 					public List<Integer> choose() {
 						return Arrays.asList(1, 2, 3, 4, 5, 6);
 					}
-				}, new LottoPurchaseCount("0"));
-		}).isInstanceOf(IllegalArgumentException.class)
-			.hasMessage(LottoPurchaseCount.MESSAGE_PRICE_MUST_BE_LARGER_THAN_ZERO);
+				}, new LottoPurchaseCount(0));
+		}).isInstanceOf(OutOfRangeException.class)
+			.hasMessage(LottoPurchaseCount.MESSAGE_COUNT_MUST_BE_LARGER_THAN_ZERO);
 	}
 
 	@ParameterizedTest
@@ -88,7 +89,7 @@ public class LottosTest {
 				public List<Integer> choose() {
 					return userLotto;
 				}
-			}, new LottoPurchaseCount("1000"));
+			}, new LottoPurchaseCount(1));
 		RewardCalculator rewardCalculator = lottos.calcReward(new Lotto(winningLotto), new LottoNumber(bonusNumber));
 		RewardCalculator expectedRewardCalculator = new RewardCalculator();
 		expectedRewardCalculator.addCount(expectedRank);
@@ -121,7 +122,7 @@ public class LottosTest {
 				public List<Integer> choose() {
 					return Arrays.asList(1, 2, 3, 4, 5, 6);
 				}
-			}, new LottoPurchaseCount("2000"));
+			}, new LottoPurchaseCount(2));
 
 		assertThat(lottos.toString())
 			.matches("(\\[\\d+, \\d+, \\d+, \\d+, \\d+, \\d+]\\n)+");

@@ -1,15 +1,17 @@
 package model;
 
+import java.util.Objects;
+
+import exception.OutOfRangeException;
+
 public class LottoPurchaseCount {
-	public static final int LOTTO_PRICE = 1000;
-	public static final String MESSAGE_PRICE_MUST_BE_LARGER_THAN_ZERO = "PRICE_MUST_BE_LARGER_THAN_ZERO";
+	public static final String MESSAGE_COUNT_MUST_BE_LARGER_THAN_ZERO = "COUNT_MUST_BE_LARGER_THAN_ZERO";
 
 	private final int purchaseCount;
 
-	public LottoPurchaseCount(String purchasePriceString) {
-		int purchaseCount = Integer.parseInt(purchasePriceString) / LOTTO_PRICE;
+	public LottoPurchaseCount(int purchaseCount) {
 		if (purchaseCount == 0) {
-			throw new IllegalArgumentException(MESSAGE_PRICE_MUST_BE_LARGER_THAN_ZERO);
+			throw new OutOfRangeException(MESSAGE_COUNT_MUST_BE_LARGER_THAN_ZERO);
 		}
 		this.purchaseCount = purchaseCount;
 	}
@@ -18,7 +20,18 @@ public class LottoPurchaseCount {
 		return purchaseCount;
 	}
 
-	public int getTotalPrice() {
-		return purchaseCount * LOTTO_PRICE;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		LottoPurchaseCount that = (LottoPurchaseCount)o;
+		return purchaseCount == that.purchaseCount;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(purchaseCount);
 	}
 }
