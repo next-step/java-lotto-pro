@@ -50,6 +50,6 @@ public class Lottos {
 			sb.append(lotto.toString());
 			sb.append("\n");
 		}
-		return sb.toString();
+		return sb.toString().trim();
 	}
 }

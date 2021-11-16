@@ -125,6 +125,6 @@ public class LottosTest {
 			}, new LottoPurchaseCount(2));
 
 		assertThat(lottos.toString())
-			.matches("(\\[\\d+, \\d+, \\d+, \\d+, \\d+, \\d+]\\n)+");
+			.matches("(\\[\\d+, \\d+, \\d+, \\d+, \\d+, \\d+]\\n?)+");
 	}
 }
