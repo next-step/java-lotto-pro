@@ -8,15 +8,7 @@ import model.LottoPurchaseCount;
 
 public class LottoPurchaseCountTest {
 	@Test
-	@DisplayName("0번을 제공하면 예외")
-	void test_constructor() {
-		assertThatThrownBy(() -> new LottoPurchaseCount(0))
-			.isInstanceOf(OutOfRangeException.class)
-			.hasMessage(LottoPurchaseCount.MESSAGE_COUNT_MUST_BE_LARGER_THAN_ZERO);
-	}
-
-	@Test
-	void test_0이아니면_정상() {
+	void test_정상생성() {
 		assertThat(new LottoPurchaseCount(1)).isEqualTo(new LottoPurchaseCount(1));
 	}
 

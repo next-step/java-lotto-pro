@@ -64,21 +64,6 @@ public class LottosTest {
 			});
 	}
 
-	@Test
-	@DisplayName("0원을 이용해 로또를 구매하려하면 예외")
-	void test_constructor4() {
-		assertThatThrownBy(() -> {
-			new Lottos(
-				new LottoNumberChoiceRandom() {
-					@Override
-					public List<Integer> choose() {
-						return Arrays.asList(1, 2, 3, 4, 5, 6);
-					}
-				}, new LottoPurchaseCount(0));
-		}).isInstanceOf(OutOfRangeException.class)
-			.hasMessage(LottoPurchaseCount.MESSAGE_COUNT_MUST_BE_LARGER_THAN_ZERO);
-	}
-
 	@ParameterizedTest
 	@DisplayName("당첨 번호를 제공하면 해당하는 RewardCalculator 반환")
 	@MethodSource("test_calcReward1_parameter")

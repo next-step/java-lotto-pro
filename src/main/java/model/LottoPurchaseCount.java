@@ -10,9 +10,6 @@ public class LottoPurchaseCount {
 	private final int purchaseCount;
 
 	public LottoPurchaseCount(int purchaseCount) {
-		if (purchaseCount == 0) {
-			throw new OutOfRangeException(MESSAGE_COUNT_MUST_BE_LARGER_THAN_ZERO);
-		}
 		this.purchaseCount = purchaseCount;
 	}
 
