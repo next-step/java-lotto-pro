@@ -20,7 +20,7 @@ public class PurchaseMoney {
 		return money / LottoConstants.PRICE;
 	}
 
-	public int purchaseWithoutManual(int numberOfManual) {
+	public int countAutoLottoSize(int numberOfManual) {
 		int numberOfLottos = purchase();
 		if (numberOfLottos < numberOfManual) {
 			throw new IllegalArgumentException("money is scarce.");

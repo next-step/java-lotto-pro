@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.constants.Rank;
+import lotto.model.BonusNumber;
 import lotto.model.Lotto;
 import lotto.model.WinLotto;
 
@@ -17,7 +18,7 @@ public class LottoTest {
 
 	@BeforeEach
 	void setUp() {
-		winlotto = new WinLotto(new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)), 10);
+		winlotto = new WinLotto(new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)), new BonusNumber(10));
 	}
 
 	@Test
