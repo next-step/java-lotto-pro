@@ -1,13 +1,13 @@
-package study.lotto.auto;
+package study.lotto.domain;
 
 import java.util.Objects;
 
-import static study.lotto.auto.MessageUtil.INVALID_LOTTO_NUMBER_ERR_MSG;
+import static study.lotto.view.MessageUtil.INVALID_LOTTO_NUMBER_ERR_MSG;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private final int MIN_LOTTO_NUMBER = 1;
-    private final int MAX_LOTTO_NUMBER = 45;
+    protected static final int MIN_LOTTO_NUMBER = 1;
+    protected static final int MAX_LOTTO_NUMBER = 45;
 
     private final int number;
 

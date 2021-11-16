@@ -1,11 +1,11 @@
-package study.lotto.auto;
+package study.lotto.view;
 
 import study.StringAddCalculator;
 
 import java.util.IllegalFormatException;
 import java.util.Scanner;
 
-import static study.lotto.auto.MessageUtil.*;
+import static study.lotto.view.MessageUtil.NEGATIVE_NUMBER_ERR_MSG;
 
 public class InputView {
 
@@ -14,26 +14,19 @@ public class InputView {
     public static String readMoney() {
         String line = sc.nextLine();
         try {
-            validateMoney(line);
+            validateNegativeNumber(line);
         } catch (IllegalStateException | IllegalFormatException e) {
             line = readMoney();
         }
         return line;
     }
 
-    private static void validateMoney(final String line) {
-        int money = Integer.parseInt(line);
-        if(money < 0) {
-            throw new IllegalStateException(NEGATIVE_NUMBER_ERR_MSG);
-        }
-    }
-
-    public static String readLastLottoNumbers() {
+    public static String readWinningLottoNumbers() {
         String line = removeSpace(sc.nextLine());
         try {
             validateInputLottoNumbers(line);
         } catch (RuntimeException e) {
-            line = readLastLottoNumbers();
+            line = readWinningLottoNumbers();
         }
         return line;
     }
@@ -49,6 +42,23 @@ public class InputView {
     private static void validateDelimeter(final String line) {
         if(line.matches(".*\\d[^,]\\d.*")) {
             throw new IllegalArgumentException(StringAddCalculator.INVALID_CUSTOM_PATTERN_ERR_MSG);
+        }
+    }
+
+    public static String readBonusBallNumber() {
+        String line = sc.nextLine();
+        try {
+            validateNegativeNumber(line);
+        } catch (RuntimeException e) {
+            line = readBonusBallNumber();
+        }
+        return line;
+    }
+
+    private static void validateNegativeNumber(final String line) {
+        int number = Integer.parseInt(line);
+        if(number < 0) {
+            throw new IllegalStateException(NEGATIVE_NUMBER_ERR_MSG);
         }
     }
 }

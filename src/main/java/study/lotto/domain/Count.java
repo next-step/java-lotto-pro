@@ -1,10 +1,11 @@
-package study.lotto.auto;
+package study.lotto.domain;
 
 public class Count {
     private int count;
 
-    public void increase() {
+    public Count increase() {
         this.count++;
+        return this;
     }
 
     public int getCount() {

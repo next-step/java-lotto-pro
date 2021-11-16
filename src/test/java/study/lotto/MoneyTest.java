@@ -1,14 +1,15 @@
-package study.lotto.auto;
+package study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import study.lotto.domain.Money;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static study.lotto.auto.MessageUtil.MINIMUM_MONEY_INPUT_ERR_MSG;
-import static study.lotto.auto.MessageUtil.NEGATIVE_NUMBER_ERR_MSG;
+import static study.lotto.view.MessageUtil.MINIMUM_MONEY_INPUT_ERR_MSG;
+import static study.lotto.view.MessageUtil.NEGATIVE_NUMBER_ERR_MSG;
 
 class MoneyTest {
 
