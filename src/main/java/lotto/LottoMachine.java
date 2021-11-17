@@ -8,9 +8,9 @@ import lotto.domain.Money;
 import lotto.domain.Ranks;
 import lotto.domain.Ticket;
 import lotto.domain.TicketCount;
+import lotto.domain.TicketCounts;
 import lotto.domain.Tickets;
 import lotto.domain.WinnerBall;
-import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
 import lotto.factory.TicketFactory;
 import view.InputView;
@@ -43,33 +43,25 @@ public class LottoMachine {
     }
 
     private Tickets getTickets(TicketCount totalTicketCount) {
-        TicketCount manualTicketCount = getManualCount(totalTicketCount);
-        Tickets manualTickets = getManualTickets(manualTicketCount);
+        TicketCounts ticketCounts = getTicketCounts(totalTicketCount);
 
-        TicketCount autoTicketCount = totalTicketCount.minus(manualTicketCount);
+        Tickets manualTickets = getManualTickets(ticketCounts.getManualCount());
+        Tickets autoTickets = TicketFactory.createRandomTickets(ticketCounts.getAutoCount());
 
-        Tickets autoTickets = TicketFactory.createRandomTickets(autoTicketCount);
         Tickets tickets = Tickets.combineTickets(manualTickets, autoTickets);
-        ResultView.printNumberOfPurchasedLotto(manualTicketCount.getCount(), autoTicketCount.getCount());
+        ResultView.printNumberOfPurchasedLotto(ticketCounts);
 
         return tickets;
     }
 
-    private TicketCount getManualCount(TicketCount totalTicketCount) {
+    private TicketCounts getTicketCounts(TicketCount totalTicketCount) {
         ResultView.printAskManualCount();
         try {
-            TicketCount manualTicketCount = InputView.readCount();
-            checkManualCountIsSmallerThanTotalCount(manualTicketCount, totalTicketCount);
-            return manualTicketCount;
+            TicketCount manualCount = InputView.readCount();
+            return new TicketCounts(manualCount, totalTicketCount.minus(manualCount));
         } catch (LottoException lottoException) {
             ResultView.printErrorMessage(lottoException);
-            return getManualCount(totalTicketCount);
-        }
-    }
-
-    private void checkManualCountIsSmallerThanTotalCount(TicketCount manualTicketCount, TicketCount totalTicketCount) {
-        if (manualTicketCount.isBiggerThan(totalTicketCount)) {
-            throw new LottoException(LottoErrorCode.INVALID_MANUAL_COUNT);
+            return getTicketCounts(totalTicketCount);
         }
     }
 

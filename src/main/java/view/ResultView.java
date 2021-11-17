@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import lotto.domain.Rank;
 import lotto.domain.Statistics;
 import lotto.domain.Ticket;
+import lotto.domain.TicketCounts;
 import lotto.domain.Tickets;
 import lotto.exception.LottoException;
 
@@ -17,9 +18,10 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printNumberOfPurchasedLotto(long manual, long auto) {
+    public static void printNumberOfPurchasedLotto(TicketCounts ticketCounts) {
         System.out.println();
-        System.out.println(String.format(OutputMessage.NUMBER_OF_PURCHASED_LOTTO_FORMAT.getMessage(), manual, auto));
+        System.out.println(String.format(OutputMessage.NUMBER_OF_PURCHASED_LOTTO_FORMAT.getMessage(),
+            ticketCounts.getManualCount().getCount(), ticketCounts.getAutoCount().getCount()));
     }
 
     public static void printTickets(Tickets tickets) {

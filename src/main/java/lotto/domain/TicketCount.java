@@ -33,6 +33,13 @@ public class TicketCount {
         return count < this.count;
     }
 
+    public TicketCount minus(TicketCount ticketCount) {
+        if (ticketCount.isBiggerThan(count)) {
+            throw new LottoException(LottoErrorCode.INVALID_BIGGER_COUNT);
+        }
+        return new TicketCount(this.count - ticketCount.count);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -48,9 +55,5 @@ public class TicketCount {
     @Override
     public int hashCode() {
         return Objects.hash(count);
-    }
-
-    public TicketCount minus(TicketCount ticketCount) {
-        return new TicketCount(this.count - ticketCount.count);
     }
 }

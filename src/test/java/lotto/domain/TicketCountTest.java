@@ -45,6 +45,14 @@ public class TicketCountTest {
     @DisplayName("티켓 갯수 빼기")
     @Test
     public void minus() {
-        assertThat(new TicketCount(3).minus(new TicketCount(2))).isEqualTo(new TicketCount(1));
+        assertThat(new TicketCount(3).minus(new TicketCount(3))).isEqualTo(new TicketCount(0));
+    }
+
+    @DisplayName("티켓 갯수 빼기 에러")
+    @Test
+    public void throwsError_whenInValidMinus() {
+        assertThatExceptionOfType(LottoException.class)
+            .isThrownBy(() -> new TicketCount(3).minus(new TicketCount(4)))
+            .withMessage("전체 갯수보다 큰 갯수입니다.");
     }
 }
