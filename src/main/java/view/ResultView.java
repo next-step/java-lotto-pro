@@ -34,6 +34,7 @@ public class ResultView {
     private static String makeTicketMessage(Ticket ticket) {
         return String.format(OutputMessage.TICKET_FORMAT.getMessage(),
             ticket.getBalls().stream()
+                .sorted()
                 .map(ball -> String.valueOf(ball.getNumber()))
                 .collect(Collectors.joining(COMMA_SPACE)));
     }

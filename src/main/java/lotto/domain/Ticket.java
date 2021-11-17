@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import lotto.exception.LottoErrorCode;
@@ -10,16 +11,16 @@ import lotto.exception.LottoException;
 public class Ticket {
     public static final int SIZE = 6;
 
-    private final List<Ball> balls;
+    private final Set<Ball> balls;
 
     public Ticket(List<Integer> numbers) {
         checkValidSize(numbers);
-        checkNoDuplicate(numbers);
 
         this.balls = numbers.stream()
             .map(Ball::of)
-            .sorted()
-            .collect(Collectors.toList());
+            .collect(Collectors.toSet());
+
+        checkNoDuplicate();
     }
 
     private void checkValidSize(List<Integer> numbers) {
@@ -28,19 +29,13 @@ public class Ticket {
         }
     }
 
-    private void checkNoDuplicate(List<Integer> numbers) {
-        if (containsDuplicate(numbers)) {
+    private void checkNoDuplicate() {
+        if (balls.size() != SIZE) {
             throw new LottoException(LottoErrorCode.INVALID_TICKET);
         }
     }
 
-    private boolean containsDuplicate(List<Integer> numbers) {
-        return SIZE != numbers.stream()
-            .distinct()
-            .count();
-    }
-
-    public List<Ball> getBalls() {
+    public Set<Ball> getBalls() {
         return balls;
     }
 
