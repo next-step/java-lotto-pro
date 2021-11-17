@@ -1,9 +1,6 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static lotto.model.LottoNumber.MAX_VALUE;
 import static lotto.model.LottoNumber.MIN_VALUE;
@@ -11,6 +8,14 @@ import static lotto.model.LottoNumber.MIN_VALUE;
 public class LottoTicket {
     public static final Money SELLING_PRICE = new Money(1000);
     public static final int LOTTO_SIZE = 6;
+    private static final Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
+
+    static {
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
+            lottoNumberMap.put(i, new LottoNumber(i));
+        }
+    }
+
     private final List<LottoNumber> numbers;
 
     private LottoTicket(List<LottoNumber> numbers) {
@@ -34,22 +39,17 @@ public class LottoTicket {
     public static LottoTicket of(List<Integer> numbers) {
         final List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(lottoNumberMap.get(number));
         }
         return new LottoTicket(lottoNumbers);
     }
 
     public static LottoTicket ofRandomNumbers() {
-        final List<Integer> numbers = LottoTicket.getRandomNumbers();
-        return LottoTicket.of(numbers);
-    }
-
-    private static List<Integer> getRandomNumbers() {
         final List<Integer> allNumbers = getAllNumbers();
         Collections.shuffle(allNumbers);
         final List<Integer> pickedNumbers = new ArrayList<>(allNumbers.subList(0, LOTTO_SIZE));
         Collections.sort(pickedNumbers);
-        return pickedNumbers;
+        return LottoTicket.of(pickedNumbers);
     }
 
     private static List<Integer> getAllNumbers() {

@@ -24,15 +24,18 @@ public class LottosTest {
     void create_실패() {
         assertThatThrownBy(() -> new Lottos(3, 10))
                 .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lottos(3, -1))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lottos(-3, 2))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void generateManual() {
-        final Lottos lottos = new Lottos(3, 2);
-        lottos.generateManual(
+        final Lottos lottos = new Lottos(2, 2,
                 Arrays.asList(
-                        "1, 2, 3, 4, 5, 6",
-                        "2, 3, 4, 5, 6, 7"
+                        Arrays.asList(1, 2, 3, 4, 5, 6),
+                        Arrays.asList(2, 3, 4, 5, 6, 7)
                 )
         );
 
@@ -45,8 +48,8 @@ public class LottosTest {
 
     @Test
     void generateManual_숫자순서다름() {
-        final Lottos lottos = new Lottos(3, 2);
-        lottos.generateManual(Collections.singletonList("6, 5, 4, 3, 2, 1"));
+        final Lottos lottos = new Lottos(1, 1,
+                Collections.singletonList(Arrays.asList(6, 5, 4, 3, 2, 1)));
 
         final List<LottoTicket> expected = Collections.singletonList(
                 LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6))
@@ -55,16 +58,8 @@ public class LottosTest {
     }
 
     @Test
-    void generateManual_invalid() {
-        final Lottos lottos = new Lottos(3, 2);
-        assertThatThrownBy(() -> lottos.generateManual(Collections.singletonList("dkekedl")))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     void generateAuto() {
         final Lottos lottos = new Lottos(3, 0);
-        lottos.generateAuto();
         assertThat(lottos.getManualCount()).isEqualTo(0);
         assertThat(lottos.getAutoCount()).isEqualTo(3);
         assertThat(lottos.size()).isEqualTo(3);
@@ -73,14 +68,14 @@ public class LottosTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 4, 5, 14, 50})
     void generateAllAuto(int size) {
-        final Lottos lottos = Lottos.generateAllAuto(size);
+        final Lottos lottos = Lottos.ofAllAuto(size);
         assertThat(lottos).isNotNull();
         assertThat(lottos.size()).isEqualTo(size);
     }
 
     @Test
     void calculateWinning() {
-        final Lottos lottos = Lottos.generateAllAuto(5);
+        final Lottos lottos = Lottos.ofAllAuto(5);
         final WinTicket winTicket = WinTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         final LottoResult lottoResult = lottos.calculateWinning(winTicket);
@@ -90,7 +85,7 @@ public class LottosTest {
 
     @Test
     void getSellingPrice() {
-        final Lottos lottos = Lottos.generateAllAuto(5);
+        final Lottos lottos = Lottos.ofAllAuto(5);
         final Money price = lottos.calculateTotalSellingPrice();
         assertThat(price).isEqualTo(new Money(5 * 1000));
     }

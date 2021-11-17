@@ -1,10 +1,8 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lottos {
     private final int totalCount;
@@ -12,45 +10,51 @@ public class Lottos {
     private final int autoCount;
     private final List<LottoTicket> lottos;
 
+    public Lottos(int totalCount, int manualCount, List<List<Integer>> numbers) {
+        this.totalCount = totalCount;
+        this.manualCount = manualCount;
+        this.autoCount = totalCount - manualCount;
+        validateCounts();
+        lottos = new ArrayList<>();
+        generateManual(numbers);
+        generateAuto();
+    }
+
     public Lottos(int totalCount, int manualCount) {
         this.totalCount = totalCount;
         this.manualCount = manualCount;
         this.autoCount = totalCount - manualCount;
         validateCounts();
         lottos = new ArrayList<>();
+        generateAuto();
     }
 
     private void validateCounts() {
-        if (totalCount > 0 && manualCount >= 0 && autoCount >= 0
-                && totalCount == manualCount + autoCount) {
+        if (totalCount >= manualCount
+                && totalCount > 0
+                && manualCount >= 0) {
             return;
         }
 
         throw new IllegalArgumentException();
     }
 
-    public void generateManual(List<String> numberInputs) {
-        for (String numberInput : numberInputs) {
-            final List<Integer> numbers = Arrays.stream(numberInput.split(","))
-                    .map(input -> input.replaceAll("\\s+", ""))
-                    .map(Integer::parseInt)
-                    .sorted()
-                    .collect(Collectors.toList());
+    private void generateManual(List<List<Integer>> numberInputs) {
+        for (List<Integer> numbers : numberInputs) {
+            Collections.sort(numbers);
             final LottoTicket lotto = LottoTicket.of(numbers);
             lottos.add(lotto);
         }
     }
 
-    public void generateAuto() {
+    private void generateAuto() {
         for (int i = 0; i < autoCount; i++) {
             lottos.add(LottoTicket.ofRandomNumbers());
         }
     }
 
-    public static Lottos generateAllAuto(int count) {
-        final Lottos lottos = new Lottos(count, 0);
-        lottos.generateAuto();
-        return lottos;
+    public static Lottos ofAllAuto(int count) {
+        return new Lottos(count, 0);
     }
 
     public List<LottoTicket> getLottos() {

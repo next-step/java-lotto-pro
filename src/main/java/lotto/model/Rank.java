@@ -3,12 +3,12 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST_PRIZE(6, new Money(2_000_000_000), false),
-    SECOND_PRIZE(5, new Money(3_000_000), true),
-    THIRD_PRIZE(5, new Money(1_500_000), false),
-    FOURTH_PRIZE(4, new Money(50_000), false),
-    FIFTH_PRIZE(3, new Money(5_000), false),
-    NONE(0, new Money(0), false),
+    FIRST_PRIZE(6, new Money(2_000_000_000L), false),
+    SECOND_PRIZE(5, new Money(3_000_000L), true),
+    THIRD_PRIZE(5, new Money(1_500_000L), false),
+    FOURTH_PRIZE(4, new Money(50_000L), false),
+    FIFTH_PRIZE(3, new Money(5_000L), false),
+    NONE(0, new Money(0L), false),
     ;
 
     private static final int MIN_MATCH_COUNT = 0;

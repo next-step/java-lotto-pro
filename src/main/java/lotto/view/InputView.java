@@ -27,7 +27,7 @@ public class InputView {
         return getInteger();
     }
 
-    public List<String> getManualLottoNumbers(int count) {
+    public List<List<Integer>> getManualLottoNumbers(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         final List<String> inputs = new ArrayList<>();
 
@@ -35,7 +35,20 @@ public class InputView {
             inputs.add(scanner.nextLine());
         }
 
-        return inputs;
+        return mapLottoNumbers(inputs);
+    }
+
+    private List<List<Integer>> mapLottoNumbers(List<String> numberInputs) {
+        final List<List<Integer>> result = new ArrayList<>();
+        for (String numberInput : numberInputs) {
+            final List<Integer> numbers = Arrays.stream(numberInput.split(","))
+                    .map(input -> input.replaceAll("\\s+", ""))
+                    .map(Integer::parseInt)
+                    .sorted()
+                    .collect(Collectors.toList());
+            result.add(numbers);
+        }
+        return result;
     }
 
     public void showLottoBoughtMessage(Lottos lottos) {

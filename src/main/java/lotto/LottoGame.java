@@ -18,12 +18,10 @@ public class LottoGame {
     public void run() {
         final int buyMoney = inputView.getBuyMoney();
         final int manualCount = inputView.getManualCount();
-        final List<String> manualLottoNumbers = inputView.getManualLottoNumbers(manualCount);
+        final List<List<Integer>> manualLottoNumbers = inputView.getManualLottoNumbers(manualCount);
 
         final int totalCount = LottoTicket.countPurchasable(new Money(buyMoney));
-        final Lottos lottos = new Lottos(totalCount, manualCount);
-        lottos.generateManual(manualLottoNumbers);
-        lottos.generateAuto();
+        final Lottos lottos = new Lottos(totalCount, manualCount, manualLottoNumbers);
         inputView.showLottoBoughtMessage(lottos);
 
         final WinTicket winTicket = inputView.getWinLottoTicket();
