@@ -15,7 +15,7 @@ public class LottoWinningProfit {
 
   private void validate(float profit) {
     if (profit < 0) {
-      throw new RuntimeException(
+      throw new IllegalArgumentException(
           "[ERROR] winning price profit cannot be negative. profit =" + profit);
     }
   }

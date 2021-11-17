@@ -9,18 +9,18 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class NumberElementTest {
 	@Test
-	@DisplayName("음수일 때 RuntimeException 발생")
+	@DisplayName("음수일 때 IllegalArgumentException 발생")
 	void checkNegativeNumber() {
 		int negativeNumber = -1;
 		assertThatThrownBy(() -> new NumberElement(negativeNumber))
-			.isInstanceOf(RuntimeException.class);
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@ParameterizedTest
-	@DisplayName("integer 가 아닌 text 일 때 RuntimeException 발생")
+	@DisplayName("integer 가 아닌 text 일 때 IllegalArgumentException 발생")
 	@ValueSource(strings = {"a", "1.1"})
 	void checkNotAInteger(String input) {
 		assertThatThrownBy(() -> NumberElement.of(input))
-			.isInstanceOf(RuntimeException.class);
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 }

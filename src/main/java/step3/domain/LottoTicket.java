@@ -16,24 +16,39 @@ public class LottoTicket {
       .collect(Collectors.toList());
 
   private final List<LottoNumber> numbers;
+  private final LottoNumber bonusNumber;
 
   // 랜덤 티켓
   public LottoTicket() {
     this.numbers = generateRandomLottoNumbers();
+    this.bonusNumber = null;
   }
 
   // 번호를 입력 받는 티켓
   public LottoTicket(List<LottoNumber> numbers) {
     validate(numbers);
     this.numbers = numbers;
+    this.bonusNumber = null;
+  }
+
+  // 번호 + 보너스 번호를 입력 받는 티켓
+  public LottoTicket(List<LottoNumber> numbers, LottoNumber bonusNumber) {
+    validate(numbers, bonusNumber);
+    this.numbers = numbers;
+    this.bonusNumber = bonusNumber;
   }
 
   public List<LottoNumber> getNumbers() {
     return this.numbers;
   }
 
+  public LottoNumber getBonusNumber() {
+    return bonusNumber;
+  }
+
   public boolean contains(LottoNumber number) {
-    return this.numbers.stream()
+    return number != null &&
+        this.numbers.stream()
         .map(LottoNumber::getNumber)
         .collect(Collectors.toList())
         .contains(number.getNumber());
@@ -49,7 +64,19 @@ public class LottoTicket {
   private void validate(List<LottoNumber> numbers) {
     if (numbers == null || numbers.size() != NUMBERS_COUNT
         || numbers.stream().distinct().count() != NUMBERS_COUNT) {
-      throw new RuntimeException("[ERROR] not valid lotto numbers. numbers = " + numbers);
+      throw new IllegalArgumentException("[ERROR] not valid lotto numbers. numbers = " + numbers);
+    }
+  }
+
+  private void validate(List<LottoNumber> numbers, LottoNumber bonusNumber) {
+    validate(numbers);
+
+    if (bonusNumber != null && numbers.stream()
+        .map(LottoNumber::getNumber)
+        .collect(Collectors.toList())
+        .contains(bonusNumber.getNumber())) {
+      throw new IllegalArgumentException(
+          "[ERROR] not valid bonus number. bonusNumber = " + bonusNumber);
     }
   }
 }

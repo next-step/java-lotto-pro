@@ -1,8 +1,6 @@
 package step3.domain;
 
 public class Money {
-
-  private final int UNIT_TICKET_PRICE = 1000;
   private Long price;
 
   public Money() {
@@ -19,12 +17,8 @@ public class Money {
 
   private void validate(Long price) {
     if (price < 0) {
-      throw new RuntimeException("[ERROR] price cannot be negative. price =" + price);
+      throw new IllegalArgumentException("[ERROR] price cannot be negative. price =" + price);
     }
-  }
-
-  public int getTicketCount() {
-    return (int) (this.price / UNIT_TICKET_PRICE);
   }
 
   public LottoWinningProfit getProfitOf(Money money) {

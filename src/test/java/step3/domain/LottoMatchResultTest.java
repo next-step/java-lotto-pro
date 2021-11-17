@@ -29,6 +29,8 @@ public class LottoMatchResultTest {
         .of(Arrays.asList(1, 2, 9, 11, 28, 41), LottoMatchCaseEnum.ONE_NUMBER_MATCH));
     listOfArguments.add(Arguments
         .of(Arrays.asList(4, 15, 26, 27, 38, 40), LottoMatchCaseEnum.FIVE_NUMBERS_MATCH));
+    listOfArguments.add(Arguments
+        .of(Arrays.asList(4, 26, 27, 38, 40, 45), LottoMatchCaseEnum.FIVE_NUMBERS_AND_BONUS_MATCH));
     return listOfArguments.stream();
   }
 
@@ -36,7 +38,8 @@ public class LottoMatchResultTest {
   void setUp() {
     winningTicket = new LottoTicket(Stream.of(1, 4, 26, 27, 38, 40)
         .map(LottoNumber::new)
-        .collect(Collectors.toList()));
+        .collect(Collectors.toList()),
+        new LottoNumber(45));
   }
 
   @ParameterizedTest

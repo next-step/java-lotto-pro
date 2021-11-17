@@ -17,7 +17,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   public void validate(int number) {
     if (number > MAX_NUMBER || number < MIN_NUMBER) {
-      throw new RuntimeException(
+      throw new IllegalArgumentException(
           String.format("[ERROR] LottoNumber should be between (%d, %d)", MIN_NUMBER, MAX_NUMBER));
     }
   }

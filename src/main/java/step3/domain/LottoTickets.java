@@ -19,10 +19,13 @@ public class LottoTickets {
 
   public static LottoMatchCaseEnum calculateMatchCase(LottoTicket sourceTicket,
       LottoTicket winningTicket) {
+    final int bonusMatchCount = 5;
     int matchCount = (int) sourceTicket.getNumbers().stream()
         .filter(winningTicket::contains)
         .count();
-    return LottoMatchCaseEnum.value(matchCount);
+    boolean matchBonus =
+        matchCount == bonusMatchCount && sourceTicket.contains(winningTicket.getBonusNumber());
+    return LottoMatchCaseEnum.valueOf(matchCount, matchBonus);
   }
 
   public List<LottoTicket> getLottoTickets() {

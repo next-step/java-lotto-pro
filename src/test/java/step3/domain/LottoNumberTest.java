@@ -22,6 +22,6 @@ public class LottoNumberTest {
   @DisplayName("로또 숫자가 범위(1~45) 안에 있는지 확인 - 실패")
   void checkLottoNumberBetween1And45_fail(int number) {
     assertThatThrownBy(() -> new LottoNumber(number))
-        .isInstanceOf(RuntimeException.class);
+        .isInstanceOf(IllegalArgumentException.class);
   }
 }

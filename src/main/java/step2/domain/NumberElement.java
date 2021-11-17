@@ -20,14 +20,14 @@ public class NumberElement {
 		try {
 			return Integer.parseInt(strElement);
 		} catch (Exception e) {
-			throw new RuntimeException(
+			throw new IllegalArgumentException(
 				String.format("[ERROR] strElement is not Integer format. strElement = %s", strElement));
 		}
 	}
 
 	public static void validate(int number) {
 		if (number <= 0) {
-			throw new RuntimeException(String.format("[ERROR] Number is negative. number = %d", number));
+			throw new IllegalArgumentException(String.format("[ERROR] Number is negative. number = %d", number));
 		}
 	}
 }
