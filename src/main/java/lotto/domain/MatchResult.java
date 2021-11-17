@@ -17,17 +17,11 @@ public class MatchResult {
     }
 
     public boolean isResultMatch(final int matchOfCount) {
-        if( this.matchCount == matchOfCount ) {
-            return true;
-        }
-        return false;
+        return this.matchCount == matchOfCount;
     }
 
     public boolean isBonusMatch(boolean bonusMatch) {
-        if( this.matchBonus == bonusMatch ) {
-            return true;
-        }
-        return false;
+        return this.matchBonus == bonusMatch;
     }
 
     @Override

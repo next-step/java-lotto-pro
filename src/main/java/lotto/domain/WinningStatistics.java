@@ -8,13 +8,13 @@ import java.util.List;
 
 public class WinningStatistics {
 
-    private final EnumMap<Ranking, Integer> result;
+    private final EnumMap<Ranking, Integer> winningStatisticsResult;
 
-    private WinningStatistics(EnumMap<Ranking, Integer> result) {
-        this.result = result;
+    private WinningStatistics(EnumMap<Ranking, Integer> winningStatisticsResult) {
+        this.winningStatisticsResult = winningStatisticsResult;
     }
 
-    public static WinningStatistics statistics(final Lotto winningLotto, final Lottos lottos)  {
+    public static WinningStatistics statistics(final WinningLotto winningLotto, final Lottos lottos)  {
         EnumMap<Ranking, Integer> result = new EnumMap<>(Ranking.class);
         for (Ranking ranking : Ranking.values()) {
             result.put(ranking, 0);
@@ -32,18 +32,18 @@ public class WinningStatistics {
     }
 
     public double calculatePrizeMoney() {
-        int totalPrize = 0;
+        Long totalPrize = 0L;
         int lottoCount = 0;
 
-        for (Ranking ranking : result.keySet()) {
-            totalPrize += ranking.totalWinningMoney(result.get(ranking));
-            lottoCount += result.get(ranking);
+        for (Ranking ranking : winningStatisticsResult.keySet()) {
+            totalPrize += ranking.totalWinningMoney(winningStatisticsResult.get(ranking));
+            lottoCount += winningStatisticsResult.get(ranking);
         }
 
         return (double) totalPrize / (lottoCount * Constant.LOTTO_PURCHASE_PRICE);
     }
 
     public int getRankHitsCount(final Ranking ranking) {
-        return result.get(ranking);
+        return winningStatisticsResult.get(ranking);
     }
 }

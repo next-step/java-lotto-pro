@@ -8,19 +8,19 @@ public class LottoNumber {
 
     private static final String LOTTO_NUMBERS_RANGE_FROM_1_TO_45 = "Lotto numbers range from 1 to 45.";
 
-    private final int num;
+    private final int lottoNumber;
 
-    private LottoNumber(final int num) {
-        this.num = num;
+    private LottoNumber(final int lottoNumber) {
+        this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber from(final int num) {
-        validate(num);
-        return new LottoNumber(num);
+    public static LottoNumber from(final int lottoNumber) {
+        validate(lottoNumber);
+        return new LottoNumber(lottoNumber);
     }
 
     public int getValue() {
-        return num;
+        return lottoNumber;
     }
 
     private static void validate(final int num) {
@@ -34,11 +34,11 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return num == that.num;
+        return lottoNumber == that.lottoNumber;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(num);
+        return Objects.hash(lottoNumber);
     }
 }

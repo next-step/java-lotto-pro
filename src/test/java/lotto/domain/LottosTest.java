@@ -26,14 +26,14 @@ class LottosTest {
 
     @Test
     void getMatchingCounts_복수_로또_생성_중_1등당첨() {
-        Lotto winningLotto = Lotto.from("3,4,5,9,10,20", "1");
+        WinningLotto winningLotto = WinningLotto.from("3,4,5,9,10,20", "1");
         List<MatchResult> matchList = lottos.getMatchingCounts(winningLotto);
         assertThat(matchList.contains(MatchResult.from(6, false))).isTrue();
     }
 
     @Test
     void getMatchingBonus_복수_로또_생성_보너스번호_일치() {
-        Lotto winningLotto = Lotto.from("3,4,5,9,10,45", "20");
+        WinningLotto winningLotto = WinningLotto.from("3,4,5,9,10,45", "20");
         List<MatchResult> matchList = lottos.getMatchingCounts(winningLotto);
         assertThat(matchList.contains(MatchResult.from(5, true))).isTrue();
 
@@ -43,5 +43,17 @@ class LottosTest {
     void buy_로또구매_생성() {
         Lottos lottos = Lottos.buy(10);
         assertThat(lottos.count()).isEqualTo(10);
+    }
+
+    @Test
+    void buy_자동_수동_로또구매_생성() {
+        Lottos autoLottos = Lottos.buy(7);
+        List<List<Integer>> manualLottos = Arrays.asList(
+                Arrays.asList(1,2,3,4,5,6),
+                Arrays.asList(10,20,30,40,41,44),
+                Arrays.asList(18,20,23,25,32,33)
+        );
+        ManualLottoPurchaseMachine manualLottoPurchaseMachine = ManualLottoPurchaseMachine.from(10, 3, manualLottos);
+        assertThat(autoLottos.addManualLottoNumbers(manualLottoPurchaseMachine)).hasSize(10);
     }
 }

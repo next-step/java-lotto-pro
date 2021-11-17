@@ -9,6 +9,8 @@ import java.util.List;
 
 public class ResultView {
 
+    private ResultView(){}
+
     private static final String RIGHT_SQUARE_BRACKET = "[";
     private static final String LEFT_SQUARE_BRACKET = "]";
 
@@ -17,12 +19,16 @@ public class ResultView {
     }
 
     public static void printLottos(final Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
+        for (Lotto lotto : lottos.getLottosList()) {
             System.out.print(RIGHT_SQUARE_BRACKET);
             printLotto(lotto);
             System.out.println(LEFT_SQUARE_BRACKET);
         }
         lineBreak();
+    }
+
+    public static void printPurchaseLotto(final int autoLottoCount, final int manualLottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.%n", autoLottoCount, manualLottoCount);
     }
 
     public static void printLotto(final Lotto lotto) {

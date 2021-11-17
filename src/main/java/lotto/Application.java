@@ -1,26 +1,27 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Payment;
-import lotto.domain.WinningStatistics;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Payment payment = new Payment(InputView.inputAmount());
-        ResultView.printPurchaseConfirmation(payment);
+        Payment payment = Payment.from(InputView.inputAmount(), InputView.inputManualPurchaseLotto());
 
-        Lottos lottos = Lottos.buy(payment.getPurchaseCount());
+        ManualLottoPurchaseMachine manualLottoPurchaseMachine = payment.from(InputView.inputManualLottoNumbers());
+
+        Lottos lottos = Lottos.buy(payment.getAutoPurchaseCount());
+        ResultView.printPurchaseLotto(payment.getAutoPurchaseCount(), payment.getManualLottoPurchase());
+        lottos.addManualLottoNumbers(manualLottoPurchaseMachine);
         ResultView.printLottos(lottos);
+
         List<Integer> winningLottoNumber = InputView.inputWinningNumbers();
-        int bonusNumber = InputView.inputWinningBonusNumbers();
-        Lotto winningLotto = Lotto.from(winningLottoNumber, bonusNumber);
+        WinningLotto winningLotto = WinningLotto.from(winningLottoNumber, InputView.inputWinningBonusNumbers());
 
         WinningStatistics winningStatistics = WinningStatistics.statistics(winningLotto, lottos);
         ResultView.printStatistics(winningStatistics);

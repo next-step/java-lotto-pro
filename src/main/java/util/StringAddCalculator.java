@@ -8,7 +8,7 @@ public class StringAddCalculator {
     private static final Pattern PATTERN_DELIMITERS = Pattern.compile("[,:]");
     private static final Pattern PATTERN_CUSTOM = Pattern.compile("//(.)\n(.*)");
     private static final int ZERO = 0;
-    private static final String MESSAGE_INVALID_CHARACTER_FORMAT = "Invalid character format.";
+    private static final String MESSAGE_NOT_POSITIVE_INT = "For input only positive integers.";
 
     public static int splitAndSum(String str) {
         if( str == null || str.isEmpty() ) {
@@ -45,18 +45,16 @@ public class StringAddCalculator {
     private static int addStringArray(String[] strs) {
         int result = ZERO;
         for(String str : strs) {
-            checkNumberFormat(str);
-            result += Integer.parseInt(str);
+            result += checkInt(Integer.parseInt(str));
         }
         return result;
     }
 
-    private static void checkNumberFormat(String str) {
-        for( int i = 0; i < str.length(); i++) {
-            if( !Character.isDigit(str.charAt(i)) ) {
-                throw new NumberFormatException(MESSAGE_INVALID_CHARACTER_FORMAT);
-            }
+    private static int checkInt(int number) {
+        if( number < ZERO ) {
+            throw new IllegalArgumentException(MESSAGE_NOT_POSITIVE_INT);
         }
+        return number;
     }
 
     private StringAddCalculator(){}
