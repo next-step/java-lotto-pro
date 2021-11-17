@@ -17,7 +17,7 @@ public class Ticket {
         checkNoDuplicate(numbers);
 
         this.balls = numbers.stream()
-            .map(Ball::new)
+            .map(Ball::of)
             .sorted()
             .collect(Collectors.toList());
     }

@@ -44,7 +44,7 @@ public class InputView {
     public static Ball readBall() {
         String number = removeAllSpaces(scanner.nextLine());
         int validNumber = parseInt(number);
-        return new Ball(validNumber);
+        return Ball.of(validNumber);
     }
 
     private static long parseLong(String number) {
