@@ -31,6 +31,8 @@ public class PlayslipsTest {
     @Test
     @DisplayName("로또 당첨 결과를 생성할 수 있다.")
     void checkResult() {
-        assertThat(playslips.checkResult(Fixtures.winningNumbers)).isNotNull();
+        assertThat(
+            playslips.checkResult(Fixtures.winningNumbers, Fixtures.bonusNumber)
+        ).isNotNull();
     }
 }

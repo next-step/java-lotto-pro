@@ -1,82 +1,48 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Result {
 
-    private final List<Prize> prizes = new ArrayList<>();
-    private final int numberOfPlayslips;
+    private static final int PRIZE_COUNT_UNIT = 1;
+    private static final int NO_PRIZE = 0;
 
-    public Result(
-        final int numberOfPlayslips,
-        final int numberOfFirstPrizes,
-        final int numberOfSecondPrizes,
-        final int numberOfThirdPrizes,
-        final int numberOfFourthPrizes
-    ) {
-        this.numberOfPlayslips = numberOfPlayslips;
-        for (int i = 0; i < numberOfFirstPrizes; i++) {
-            prizes.add(Prize.FIRST);
-        }
-        for (int i = 0; i < numberOfSecondPrizes; i++) {
-            prizes.add(Prize.SECOND);
-        }
-        for (int i = 0; i < numberOfThirdPrizes; i++) {
-            prizes.add(Prize.THIRD);
-        }
-        for (int i = 0; i < numberOfFourthPrizes; i++) {
-            prizes.add(Prize.FOURTH);
+    private final Map<Prize, Integer> prizes = new EnumMap<>(Prize.class);
+
+    public Result(List<Prize> resultPrizes) {
+        for (Prize prize : resultPrizes) {
+            putPrize(prize);
         }
     }
 
-    public int getNumberOfFirstPrizes() {
-        return getNumberOfWinningPrizes(Prize.FIRST);
+    private void putPrize(final Prize prize) {
+        if (this.prizes.containsKey(prize)) {
+            final Integer prizeCount = this.prizes.get(prize);
+            this.prizes.put(prize, prizeCount + PRIZE_COUNT_UNIT);
+        }
+        this.prizes.putIfAbsent(prize, PRIZE_COUNT_UNIT);
     }
 
-    public int getNumberOfSecondPrizes() {
-        return getNumberOfWinningPrizes(Prize.SECOND);
-    }
-
-    public int getNumberOfThirdPrizes() {
-        return getNumberOfWinningPrizes(Prize.THIRD);
-    }
-
-    public int getNumberOfFourthPrizes() {
-        return getNumberOfWinningPrizes(Prize.FOURTH);
-    }
-
-    private int getNumberOfWinningPrizes(final Prize prize) {
-        return Collections.frequency(prizes, prize);
+    public int getNumberOfPrizes(final Prize prize) {
+        return prizes.getOrDefault(prize, NO_PRIZE);
     }
 
     public double calculateReturnOnInvestment() {
         final long totalPrize = calculateTotalPrizeAmount().getValue();
+        final int numberOfPlayslips = prizes.values().stream().mapToInt(Integer::intValue).sum();
         final long investedAmount = new Price(numberOfPlayslips).getValue();
         return (double) totalPrize / investedAmount;
     }
 
     private Price calculateTotalPrizeAmount() {
-        return calculateFirstPrizeAmount()
-            .add(calculateSecondPrizeAmount())
-            .add(calculateThirdPrizeAmount())
-            .add(calculateFourthPrizeAmount());
-    }
-
-    private Price calculateFirstPrizeAmount() {
-        return Prize.FIRST.getAmount().multiply(getNumberOfFirstPrizes());
-    }
-
-    private Price calculateSecondPrizeAmount() {
-        return Prize.SECOND.getAmount().multiply(getNumberOfSecondPrizes());
-    }
-
-    private Price calculateThirdPrizeAmount() {
-        return Prize.THIRD.getAmount().multiply(getNumberOfThirdPrizes());
-    }
-
-    private Price calculateFourthPrizeAmount() {
-        return Prize.FOURTH.getAmount().multiply(getNumberOfFourthPrizes());
+        Price p = new Price(0L);
+        for (Map.Entry<Prize, Integer> entry : prizes.entrySet()) {
+            final Prize prize = entry.getKey();
+            final Integer numberOfPrizes = entry.getValue();
+            p = p.add(prize.getAmount().multiply(numberOfPrizes));
+        }
+        return p;
     }
 }

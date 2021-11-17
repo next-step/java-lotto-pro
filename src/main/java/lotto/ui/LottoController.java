@@ -13,8 +13,12 @@ public class LottoController {
         ResultView.printPlayslips(playslipsResponse.asString());
 
         final String pastWinningNumbers = InputView.askPastWinningNumbers();
-        final LottoResultResponse resultResponse =
-            LottoResultChecker.check(playslipsResponse.getPlayslips(), pastWinningNumbers);
+        final String bonusNumber = InputView.askBonusNumber();
+        final LottoResultResponse resultResponse = LottoResultChecker.check(
+            playslipsResponse.getPlayslips(),
+            pastWinningNumbers,
+            bonusNumber
+        );
         ResultView.printStats(resultResponse.asString());
     }
 }
