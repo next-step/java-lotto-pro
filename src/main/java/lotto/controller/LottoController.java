@@ -2,7 +2,6 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.exception.*;
-import lotto.service.LottoService;
 import lotto.utility.ParseUtility;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -12,10 +11,8 @@ import java.util.ArrayList;
 public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
-    private final LottoService lottoService;
 
     public LottoController(InputView inputView, ResultView resultView) {
-        this.lottoService = new LottoService();
         this.inputView = inputView;
         this.resultView = resultView;
     }
@@ -29,7 +26,7 @@ public class LottoController {
         WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbers();
 
         // 결과 출력
-        GameResult gameResult = lottoService.getGameResult(lottoTickets, winningLottoNumbers);
+        GameResult gameResult = lottoTickets.getGameResult(winningLottoNumbers);
         resultView.printGameResult(gameResult);
         resultView.printEarningRatio(inputMoney.toDTO(), new Money(gameResult.getPrize()).toDTO());
     }
@@ -59,7 +56,7 @@ public class LottoController {
 
         // 자동 구입
         TicketAmount countsOfAutoTickets = getCountsOfAutoTickets(inputMoney, countsOfManualTickets);
-        LottoTickets autoLottoTickets = lottoService.buyAutoLottoTickets(countsOfAutoTickets);
+        LottoTickets autoLottoTickets = LottoTickets.generateRandomLottoTickets(countsOfAutoTickets);
         LottoTickets lottoTickets = autoLottoTickets.addAll(manualLottoTickets);
         resultView.printCountOfLottoTickets(countsOfManualTickets.getTicketAmount(), countsOfAutoTickets);
         resultView.printBuyResult(lottoTickets.toDTO());
@@ -67,13 +64,17 @@ public class LottoController {
     }
 
     private TicketAmount getCountsOfAutoTickets(Money inputMoney, TicketAmount countsOfManualTickets) {
-        return lottoService.getCountsOfAutoTickets(inputMoney, countsOfManualTickets);
+        int countsOfAutoTickets = inputMoney.getLottoAmount(LottoTicket.LOTTO_PRICE) - countsOfManualTickets.getTicketAmount();
+        if (countsOfAutoTickets < 0) {
+            throw new NotEnoughMoneyException();
+        }
+        return new TicketAmount(countsOfAutoTickets);
     }
 
     private TicketAmount getManualTicketAmount(Money inputMoney) {
         try {
             TicketAmount ticketAmount = TicketAmount.from(inputView.inputCountsOfManualTickets());
-            lottoService.checkEnoughMoney(inputMoney, ticketAmount);
+            checkEnoughMoney(inputMoney, ticketAmount);
             return ticketAmount;
         } catch (NotANumberException | IllegalTicketAmountException | NotEnoughMoneyException e) {
             System.out.println(e.getMessage());
@@ -95,6 +96,13 @@ public class LottoController {
         } catch (IllegalLottoNumberException | IllegalLottoNumberSizeException | NotANumberException | NumberDuplicationException e) {
             System.out.println(e.getMessage());
             getManualLottoTicket(manualLottoTickets);
+        }
+    }
+
+    public void checkEnoughMoney(Money inputMoney, TicketAmount countsOfManualTickets) {
+        int countsOfAutoTickets = inputMoney.getLottoAmount(LottoTicket.LOTTO_PRICE) - countsOfManualTickets.getTicketAmount();
+        if (countsOfAutoTickets < 0) {
+            throw new NotEnoughMoneyException();
         }
     }
 }
