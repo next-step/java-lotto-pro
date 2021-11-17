@@ -10,12 +10,12 @@ import lotto.domain.TicketCounts;
 import lotto.domain.Tickets;
 import lotto.exception.LottoException;
 
-public class ResultView {
+public class OutputView {
     private static final String NEW_LINE = "\n";
     private static final String COMMA_SPACE = ", ";
     private static final long ZERO_COUNT = 0L;
 
-    private ResultView() {
+    private OutputView() {
     }
 
     public static void printNumberOfPurchasedLotto(TicketCounts ticketCounts) {
@@ -27,7 +27,7 @@ public class ResultView {
     public static void printTickets(Tickets tickets) {
         System.out.println(tickets.getTickets()
             .stream()
-            .map(ResultView::makeTicketMessage)
+            .map(OutputView::makeTicketMessage)
             .collect(Collectors.joining(NEW_LINE)));
     }
 

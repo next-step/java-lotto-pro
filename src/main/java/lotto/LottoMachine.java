@@ -14,7 +14,7 @@ import lotto.domain.WinnerBall;
 import lotto.exception.LottoException;
 import lotto.factory.TicketFactory;
 import view.InputView;
-import view.ResultView;
+import view.OutputView;
 
 public class LottoMachine {
     public void start() {
@@ -22,51 +22,50 @@ public class LottoMachine {
         TicketCount totalTicketCount = money.calculateCount();
 
         Tickets tickets = getTickets(totalTicketCount);
-        ResultView.printTickets(tickets);
+        OutputView.printTickets(tickets);
 
-        ResultView.printAskWinnerTicket();
+        OutputView.printAskWinnerTicket();
         Ticket winnerTicket = getTicket();
         WinnerBall winnerBall = getWinnerBall(winnerTicket);
 
         Ranks ranks = winnerBall.calculateRank(tickets);
-        ResultView.printWinningStatistics(ranks.makeStatistics());
+        OutputView.printWinningStatistics(ranks.makeStatistics());
     }
 
     private Money getMoney() {
-        ResultView.printAskPurchaseAmount();
+        OutputView.printAskPurchaseAmount();
         try {
             return InputView.readMoney();
         } catch (LottoException lottoException) {
-            ResultView.printErrorMessage(lottoException);
+            OutputView.printErrorMessage(lottoException);
             return getMoney();
         }
     }
 
     private Tickets getTickets(TicketCount totalTicketCount) {
         TicketCounts ticketCounts = getTicketCounts(totalTicketCount);
-
         Tickets manualTickets = getManualTickets(ticketCounts.getManualCount());
-        Tickets autoTickets = TicketFactory.createRandomTickets(ticketCounts.getAutoCount());
 
+        Tickets autoTickets = TicketFactory.createRandomTickets(ticketCounts.getAutoCount());
         Tickets tickets = Tickets.combineTickets(manualTickets, autoTickets);
-        ResultView.printNumberOfPurchasedLotto(ticketCounts);
+        OutputView.printNumberOfPurchasedLotto(ticketCounts);
 
         return tickets;
     }
 
     private TicketCounts getTicketCounts(TicketCount totalTicketCount) {
-        ResultView.printAskManualCount();
+        OutputView.printAskManualCount();
         try {
             TicketCount manualCount = InputView.readCount();
             return new TicketCounts(manualCount, totalTicketCount.minus(manualCount));
         } catch (LottoException lottoException) {
-            ResultView.printErrorMessage(lottoException);
+            OutputView.printErrorMessage(lottoException);
             return getTicketCounts(totalTicketCount);
         }
     }
 
     private Tickets getManualTickets(TicketCount manualTicketCount) {
-        ResultView.printAskManualTicket();
+        OutputView.printAskManualTicket();
         List<Ticket> tickets = new ArrayList<>();
 
         for (int i = 0; manualTicketCount.isBiggerThan(i); i++) {
@@ -80,19 +79,19 @@ public class LottoMachine {
         try {
             return InputView.readTicket();
         } catch (LottoException lottoException) {
-            ResultView.printErrorMessage(lottoException);
+            OutputView.printErrorMessage(lottoException);
             return getTicket();
         }
     }
 
     private WinnerBall getWinnerBall(Ticket ticket) {
-        ResultView.printAskBonusNumber();
+        OutputView.printAskBonusNumber();
 
         try {
             Ball ball = InputView.readBall();
             return new WinnerBall(ticket, ball);
         } catch (LottoException lottoException) {
-            ResultView.printErrorMessage(lottoException);
+            OutputView.printErrorMessage(lottoException);
             return getWinnerBall(ticket);
         }
 
