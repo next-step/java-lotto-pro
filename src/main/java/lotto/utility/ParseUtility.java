@@ -35,4 +35,7 @@ public class ParseUtility {
             throw new NotANumberException();
         }
     }
+
+    private ParseUtility() {
+    }
 }
