@@ -11,7 +11,7 @@ public class WinningLottoNumbers {
     public static final int LOTTO_NUMBER_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
-    private LottoNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningLottoNumbers(List<Integer> lottoNumbers, int bonusNumber) {
         checkLottoNumberSize(lottoNumbers);

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class TicketAmount {
     public static final int ZERO = 0;
-    private int ticketAmount;
+    private final int ticketAmount;
 
     public TicketAmount(int ticketAmount) {
         validateTicketAmount(ticketAmount);
