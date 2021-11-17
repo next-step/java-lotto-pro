@@ -1,37 +1,27 @@
 package lotto;
 
 import lotto.generator.AutoLottoGenerator;
-import lotto.generator.LottoGenerator;
 import lotto.model.*;
 import lotto.view.InputView;
-
-import static lotto.view.InputView.*;
-import static lotto.view.OutputView.*;
-import static lotto.view.OutputView.printBuyCount;
+import lotto.view.OutputView;
 
 public class LottoController {
   public static void run() {
-    LottoGenerator lottoGenerator = getAutoLottoGenerator();
-    PurchaseAmount purchaseAmount = inputPurchaseAmount();
-    printBuyCount(purchaseAmount);
+    InputView inputView = new InputView();
 
-    LottoTicket lottoTicket = purchaseAmount.buyLottoTicket(lottoGenerator);
-    printGeneratedLottos(lottoTicket);
+    PurchaseAmount purchaseAmount = inputView.inputPurchaseAmount();
+    LottoQuantity lottoQuantity = purchaseAmount.countOfPurchaseLotto();
+    OutputView.printPurchasedLottoQuantity(lottoQuantity);
 
-    LottoNumbers drawnLottoNumbers = InputView.inputWinningLottoNumbers();
-    int bonusNumber = InputView.inputBonusNumber();
+    LottoTicket lottoTicket = new LottoTicket(lottoQuantity.makeLottoNumbersAsQuantity(getAutoLottoGenerator()));
+    OutputView.printLottoTicket(lottoTicket);
 
-    processStatistics(purchaseAmount, lottoTicket, drawnLottoNumbers, bonusNumber);
-  }
+    WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber());
 
-  private static void processStatistics(PurchaseAmount purchaseAmount,
-                                        LottoTicket lottoTicket,
-                                        LottoNumbers drawnLottoNumbers,
-                                        int bonusNumber) {
-    printStatisticsGuideMessage();
-    MatchResults matchResults = lottoTicket.totalWinningResults(drawnLottoNumbers, bonusNumber);
-    printMatches(matchResults.getMatchResults());
-    printYield(matchResults.calculateYield(purchaseAmount));
+    WinningResult winningResult = lottoTicket.match(winningLottoNumbers);
+    OutputView.printWinningResult(winningResult);
+
+    OutputView.printYield(winningResult.calculateYield(purchaseAmount));
   }
 
   private static AutoLottoGenerator getAutoLottoGenerator() {

@@ -1,65 +1,40 @@
 package lotto.model;
 
-import lotto.constants.Lotto;
-
-import java.util.LinkedHashSet;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-
-import static lotto.constants.ErrorMessage.*;
 
 public class LottoNumbers {
-  private final List<Integer> lottoNumbers;
+  private static final int ZERO = 0;
 
-  public LottoNumbers(List<Integer> lottoNumbers) {
-    checkLottoNumbers(lottoNumbers);
+  private final List<LottoNumber> lottoNumbers;
+
+  public LottoNumbers(List<LottoNumber> lottoNumbers) {
     this.lottoNumbers = lottoNumbers;
   }
 
-  private void checkLottoNumbers(List<Integer> lottoNumbers) {
-    checkLottoNumbersRange(lottoNumbers);
-    for (Integer lottoNumber : lottoNumbers) {
-      checkLottoNumberValidation(lottoNumber);
-    }
-    checkLottoNumbersDuplicate(lottoNumbers);
+  public List<LottoNumber> getLottoNumbers() {
+    return lottoNumbers;
   }
 
-  private void checkLottoNumbersDuplicate(List<Integer> lottoNumbers) {
-    Set<Integer> set = new LinkedHashSet<>(lottoNumbers);
-    if (set.size() != Lotto.LOTTO_NUMBER_RANGE) {
-      throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATE_ERROR);
-    }
+  public void sort() {
+    lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getLottoNumber));
   }
 
-  private void checkLottoNumbersRange(List<Integer> lottoNumbers) {
-    if (lottoNumbers.size() != Lotto.LOTTO_NUMBER_RANGE) {
-      throw new IllegalArgumentException(LOTTO_NUMBERS_RANGE_ERROR);
+  public int countNumberOfMatches(LottoNumbers toCompareLottoNumbers) {
+    int count = ZERO;
+    for (LottoNumber lottoNumber : lottoNumbers) {
+      if (toCompareLottoNumbers.hasMatchNumber(lottoNumber)) count++;
     }
-  }
 
-  private void checkLottoNumberValidation(Integer lottoNumber) {
-    if (!(lottoNumber >= Lotto.MIN_LOTTO_NUMBER && lottoNumber <= Lotto.MAX_LOTTO_NUMBER)) {
-      throw new IllegalArgumentException(ILLEGAL_LOTTO_NUMBER_ERROR);
-    }
-  }
-
-  public int countOfMatch(LottoNumbers targetLottoNumbers) {
-    int count = 0;
-    for (Integer lottoNumber : targetLottoNumbers.lottoNumbers) {
-      count += matchCount(lottoNumber);
-    }
     return count;
   }
 
-  private int matchCount(Integer lottoNumber) {
-    if (lottoNumbers.contains(lottoNumber)) {
-      return 1;
-    }
-    return 0;
+  public boolean hasBonusNumber(LottoNumber bonusNumber) {
+    return lottoNumbers.contains(bonusNumber);
   }
 
-  public boolean hasBonusNumber(int bonusNumber) {
-    return lottoNumbers.contains(bonusNumber);
+  private boolean hasMatchNumber(LottoNumber lottoNumber) {
+    return lottoNumbers.contains(lottoNumber);
   }
 
   @Override
