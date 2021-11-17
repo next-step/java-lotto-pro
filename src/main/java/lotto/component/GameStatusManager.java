@@ -1,7 +1,7 @@
-package step3.component;
+package lotto.component;
 
 import java.util.Objects;
-import step3.enums.GameStatus;
+import lotto.enums.GameStatus;
 
 public final class GameStatusManager implements GameStatusChangeable {
 

@@ -1,6 +1,6 @@
-package step3.domain;
+package lotto.domain;
 
-import step3.component.LottoShuffleable;
+import lotto.component.LottoShuffleable;
 
 public class LottoShop {
 

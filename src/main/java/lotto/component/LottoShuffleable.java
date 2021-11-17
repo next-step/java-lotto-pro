@@ -1,11 +1,11 @@
-package step3.component;
+package lotto.component;
 
-import static step3.domain.LottoNumber.*;
+import static lotto.domain.LottoNumber.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import step3.domain.Lotto;
-import step3.domain.LottoNumber;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 @FunctionalInterface
 public interface LottoShuffleable {

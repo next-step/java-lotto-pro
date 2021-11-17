@@ -1,8 +1,8 @@
-package step3.view;
+package lotto.view;
 
 import static java.text.MessageFormat.*;
-import step3.domain.LottoTicket;
-import step3.domain.Money;
+import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 
 public class ConsoleOutputView {
 

@@ -1,4 +1,4 @@
-package step3.domain;
+package lotto.domain;
 
 import static java.text.MessageFormat.*;
 import static util.NumberUtils.*;

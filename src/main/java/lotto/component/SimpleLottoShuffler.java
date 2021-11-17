@@ -1,10 +1,10 @@
-package step3.component;
+package lotto.component;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import step3.domain.Lotto;
-import step3.domain.LottoNumber;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 public class SimpleLottoShuffler implements LottoShuffleable {
 

@@ -1,6 +1,6 @@
-package step3.component;
+package lotto.component;
 
-import step3.domain.Lotto;
+import lotto.domain.Lotto;
 
 @FunctionalInterface
 public interface LottoGeneratorable {

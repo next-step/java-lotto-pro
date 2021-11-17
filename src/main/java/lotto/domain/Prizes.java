@@ -1,10 +1,10 @@
-package step3.domain;
+package lotto.domain;
 
 import static java.text.MessageFormat.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
-import step3.enums.Prize;
+import lotto.enums.Prize;
 
 public class Prizes {
     private static long totalReward;

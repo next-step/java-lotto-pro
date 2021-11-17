@@ -1,9 +1,9 @@
-package step3.view;
+package lotto.view;
 
 import java.util.Scanner;
-import step3.component.LottoGeneratorable;
-import step3.domain.Lotto;
-import step3.domain.Money;
+import lotto.component.LottoGeneratorable;
+import lotto.domain.Lotto;
+import lotto.domain.Money;
 import util.NumberUtils;
 
 public class ConsoleInputView {

@@ -1,9 +1,9 @@
-package step3.enums;
+package lotto.enums;
 
 import static util.NumberUtils.*;
 import java.text.MessageFormat;
-import step3.domain.Lotto;
-import step3.domain.Money;
+import lotto.domain.Lotto;
+import lotto.domain.Money;
 
 public enum Prize {
     FIRST_PLACE(Lotto.LOTTO_LENGTH, new Money(2000000000)),

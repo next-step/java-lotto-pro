@@ -1,12 +1,12 @@
-package step3.domain;
+package lotto.domain;
 
 import static util.NumberUtils.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
-import step3.component.LottoShuffleable;
-import step3.enums.Prize;
+import lotto.component.LottoShuffleable;
+import lotto.enums.Prize;
 
 public class LottoTicket {
 

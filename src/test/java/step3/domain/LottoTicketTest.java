@@ -5,11 +5,16 @@ import static java.lang.String.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
+import lotto.component.SimpleLottoShuffler;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.Money;
+import lotto.domain.Prizes;
+import lotto.enums.Prize;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step3.component.SimpleLottoShuffler;
-import step3.enums.Prize;
 
 class LottoTicketTest {
 

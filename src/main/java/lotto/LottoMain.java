@@ -1,13 +1,13 @@
-package step3;
+package lotto;
 
-import step3.component.GameStatusChangeable;
-import step3.component.GameStatusManager;
-import step3.component.LottoGeneratorable;
-import step3.component.LottoShuffleable;
-import step3.component.SimpleLottoShuffler;
-import step3.component.StringSplitLottoGenerator;
-import step3.view.ConsoleInputView;
-import step3.view.ConsoleOutputView;
+import lotto.component.GameStatusChangeable;
+import lotto.component.GameStatusManager;
+import lotto.component.LottoGeneratorable;
+import lotto.component.LottoShuffleable;
+import lotto.component.SimpleLottoShuffler;
+import lotto.component.StringSplitLottoGenerator;
+import lotto.view.ConsoleInputView;
+import lotto.view.ConsoleOutputView;
 
 public class LottoMain {
 

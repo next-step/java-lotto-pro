@@ -1,4 +1,4 @@
-package step3.component;
+package lotto.component;
 
 public interface GameStatusChangeable {
 

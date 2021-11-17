@@ -3,6 +3,8 @@ package step3.domain;
 import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

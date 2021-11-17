@@ -1,10 +1,10 @@
-package step3.view;
+package lotto.view;
 
 import java.util.StringJoiner;
-import step3.domain.Lotto;
-import step3.domain.LottoTicket;
-import step3.domain.Money;
-import step3.domain.Prizes;
+import lotto.domain.Lotto;
+import lotto.domain.LottoTicket;
+import lotto.domain.Money;
+import lotto.domain.Prizes;
 
 public final class LottoResult {
 

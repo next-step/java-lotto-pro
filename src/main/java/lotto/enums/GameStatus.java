@@ -1,4 +1,4 @@
-package step3.enums;
+package lotto.enums;
 
 public enum GameStatus {
     START,
