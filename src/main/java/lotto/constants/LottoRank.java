@@ -3,31 +3,40 @@ package lotto.constants;
 import java.util.Arrays;
 
 public enum LottoRank {
-  THREE_MATCHES(3, 5000),
-  FOUR_MATCHES(4, 50000),
-  FIVE_MATCHES(5, 1500000),
-  SIX_MATCHES(6, 2000000000);
+  FIRST(6, 2_000_000_000),
+  SECOND(5, 30_000_000),
+  THIRD(5, 1_500_000),
+  FOURTH(4, 50_000),
+  FIFTH(3, 5_000),
+  MISS(0, 0);
 
-  private final int rank;
-  private final int money;
+  private final int matchCount;
+  private final int reward;
 
-  LottoRank(int rank, int money) {
-    this.rank = rank;
-    this.money = money;
+  LottoRank(int matchCount, int reward) {
+    this.matchCount = matchCount;
+    this.reward = reward;
   }
 
-  public int getRank() {
-    return rank;
+  public static LottoRank getMinWinningRank() {
+    return FIFTH;
   }
 
-  public int getMoney() {
-    return money;
-  }
+  public static LottoRank valueOf(int matchCount, boolean matchBonus) {
+    if (matchCount == SECOND.matchCount && matchBonus) return SECOND;
 
-  public static LottoRank valueOf(int rank) {
-    return Arrays.stream(LottoRank.values())
-      .filter(lottoRank -> lottoRank.rank == rank)
+    return Arrays.stream(values())
+      .filter(lottoRank -> lottoRank.matchCount == matchCount)
+      .filter(lottoRank -> !lottoRank.equals(SECOND))
       .findAny()
-      .orElseThrow(NullPointerException::new);
+      .orElse(MISS);
+  }
+
+  public int getMatchCount() {
+    return matchCount;
+  }
+
+  public int getReward() {
+    return reward;
   }
 }

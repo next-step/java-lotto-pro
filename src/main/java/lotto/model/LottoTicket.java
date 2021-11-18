@@ -1,49 +1,39 @@
 package lotto.model;
 
-import lotto.constants.LottoRank;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
-  private final List<LottoNumbers> lottoTicket;
+  private static final int ADD_COUNT = 1;
 
-  public LottoTicket(List<LottoNumbers> lottoTicket) {
-    this.lottoTicket = lottoTicket;
+  private final List<LottoNumbers> lottoNumbers;
+
+  public LottoTicket(List<LottoNumbers> lottoNumbers) {
+    this.lottoNumbers = lottoNumbers;
   }
 
-  public MatchResults totalWinningResults(LottoNumbers winningLottoNumbers) {
-    List<MatchResult> matchResults = new ArrayList<>();
-    for (int i = LottoRank.THREE_MATCHES.getRank(); i <= LottoRank.SIX_MATCHES.getRank(); i++) {
-      MatchResult matchResult = new MatchResult(LottoRank.valueOf(i), new MatchCount(0));
-      countingWinningResultsByOrder(winningLottoNumbers, matchResult);
-      matchResults.add(matchResult);
-    }
-
-    return new MatchResults(matchResults);
+  public List<LottoNumbers> getLottoNumbers() {
+    return lottoNumbers;
   }
 
-  private void countingWinningResultsByOrder(LottoNumbers winningLottoNumbers, MatchResult matchResult) {
-    for (LottoNumbers lottoNumbers : lottoTicket) {
-      countMatching(winningLottoNumbers, matchResult, lottoNumbers);
-    }
-  }
+  public WinningResult match(WinningLottoNumbers winningLottoNumbers) {
+    WinningResult winningResult = WinningResult.init();
 
-  private void countMatching(LottoNumbers winningLottoNumbers, MatchResult matchResult, LottoNumbers lottoNumbers) {
-    if (matchResult.isWin(lottoNumbers.countMatchNumber(winningLottoNumbers))) {
-      matchResult.addCount();
+    for (LottoNumbers lottoNumber : lottoNumbers) {
+      winningResult.addResult(winningLottoNumbers.getRankCompareTo(lottoNumber), ADD_COUNT);
     }
+
+    return winningResult;
   }
 
   @Override
   public String toString() {
-    StringBuilder stringBuilder = new StringBuilder();
+    StringBuilder sb = new StringBuilder();
 
-    for (LottoNumbers lottoNumbers : lottoTicket) {
-      stringBuilder.append(lottoNumbers.toString());
-      stringBuilder.append("\n");
+    for (LottoNumbers lottoNumber : lottoNumbers) {
+      sb.append(lottoNumber);
+      sb.append("\n");
     }
 
-    return stringBuilder.toString();
+    return sb.toString();
   }
 }

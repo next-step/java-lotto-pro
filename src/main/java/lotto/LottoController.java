@@ -1,37 +1,27 @@
 package lotto;
 
 import lotto.generator.AutoLottoGenerator;
-import lotto.generator.LottoGenerator;
-import lotto.model.LottoBuyer;
-import lotto.model.LottoNumbers;
-import lotto.model.MatchResults;
-import lotto.model.PurchaseAmount;
+import lotto.model.*;
 import lotto.view.InputView;
-
-import static lotto.view.InputView.*;
-import static lotto.view.OutputView.*;
-import static lotto.view.OutputView.printBuyCount;
-import static lotto.view.OutputView.printInputWinningLottoNumbersGuideMessage;
+import lotto.view.OutputView;
 
 public class LottoController {
   public static void run() {
-    LottoGenerator lottoGenerator = getAutoLottoGenerator();
-    PurchaseAmount purchaseAmount = inputPurchaseAmount();
-    printBuyCount(purchaseAmount);
+    InputView inputView = new InputView();
 
-    LottoBuyer lottoBuyer = LottoBuyer.buy(purchaseAmount, lottoGenerator);
-    printGeneratedLottos(lottoBuyer.getLottoTicket());
+    PurchaseAmount purchaseAmount = inputView.inputPurchaseAmount();
+    LottoQuantity lottoQuantity = purchaseAmount.countOfPurchaseLotto();
+    OutputView.printPurchasedLottoQuantity(lottoQuantity);
 
-    LottoNumbers drawnLottoNumbers = InputView.inputWinningLottoNumbers();
+    LottoTicket lottoTicket = new LottoTicket(lottoQuantity.makeLottoNumbersAsQuantity(getAutoLottoGenerator()));
+    OutputView.printLottoTicket(lottoTicket);
 
-    processStatistics(lottoBuyer, drawnLottoNumbers);
-  }
+    WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber());
 
-  private static void processStatistics(LottoBuyer lottoBuyer, LottoNumbers drawnLottoNumbers) {
-    printStatisticsGuideMessage();
-    MatchResults matchResults = lottoBuyer.matchWithWinningLotto(drawnLottoNumbers);
-    printMatches(matchResults.getMatchResults());
-    printYield(matchResults.calculateYield(lottoBuyer.getPurchaseAmount()));
+    WinningResult winningResult = lottoTicket.match(winningLottoNumbers);
+    OutputView.printWinningResult(winningResult);
+
+    OutputView.printYield(winningResult.calculateYield(purchaseAmount));
   }
 
   private static AutoLottoGenerator getAutoLottoGenerator() {

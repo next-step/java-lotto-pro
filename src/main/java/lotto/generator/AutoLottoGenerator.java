@@ -1,31 +1,38 @@
 package lotto.generator;
 
 import lotto.constants.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.constants.Lotto.*;
+
 public class AutoLottoGenerator implements LottoGenerator {
   private static final int ZERO = 0;
 
   @Override
   public LottoNumbers generate() {
-    List<Integer> orderedLottoNumbers = getOrderedLottoNumbers();
-    Collections.shuffle(orderedLottoNumbers);
-    List<Integer> lottoNumbers = peakLottoNumbers(orderedLottoNumbers);
-    return new LottoNumbers(lottoNumbers);
+    List<LottoNumber> lottoNumberCandidates = getLottoNumberCandidates();
+    Collections.shuffle(lottoNumberCandidates);
+
+    LottoNumbers lottoNumbers = new LottoNumbers(peakLottoNumbers(lottoNumberCandidates));
+
+    lottoNumbers.sort();
+
+    return lottoNumbers;
   }
 
-  private List<Integer> peakLottoNumbers(List<Integer> lottoNumbers) {
-    return lottoNumbers.subList(ZERO, Lotto.LOTTO_NUMBER_RANGE);
+  private List<LottoNumber> peakLottoNumbers(List<LottoNumber> lottoNumbers) {
+    return lottoNumbers.subList(ZERO, LOTTO_NUMBER_RANGE);
   }
 
-  List<Integer> getOrderedLottoNumbers() {
-    List<Integer> lottoNumbers = new ArrayList<>();
-    for (int i = Lotto.MIN_LOTTO_NUMBER; i <= Lotto.MAX_LOTTO_NUMBER; i++) {
-      lottoNumbers.add(i);
+  List<LottoNumber> getLottoNumberCandidates() {
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
+    for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+      lottoNumbers.add(new LottoNumber(i));
     }
 
     return lottoNumbers;
