@@ -13,6 +13,7 @@ import lotto.domain.Tickets;
 import lotto.domain.WinnerBall;
 import lotto.exception.LottoException;
 import lotto.factory.TicketFactory;
+import lotto.utils.Parser;
 import view.InputView;
 import view.OutputView;
 
@@ -35,7 +36,7 @@ public class LottoMachine {
     private Money getMoney() {
         OutputView.printAskPurchaseAmount();
         try {
-            return InputView.readMoney();
+            return Parser.parseMoney(InputView.readLine());
         } catch (LottoException lottoException) {
             OutputView.printErrorMessage(lottoException);
             return getMoney();
@@ -56,7 +57,7 @@ public class LottoMachine {
     private TicketCounts getTicketCounts(TicketCount totalTicketCount) {
         OutputView.printAskManualCount();
         try {
-            TicketCount manualCount = InputView.readCount();
+            TicketCount manualCount = Parser.parseCount(InputView.readLine());
             return new TicketCounts(manualCount, totalTicketCount.minus(manualCount));
         } catch (LottoException lottoException) {
             OutputView.printErrorMessage(lottoException);
@@ -77,7 +78,7 @@ public class LottoMachine {
 
     private Ticket getTicket() {
         try {
-            return InputView.readTicket();
+            return Parser.parseTicket(InputView.readLine());
         } catch (LottoException lottoException) {
             OutputView.printErrorMessage(lottoException);
             return getTicket();
@@ -88,7 +89,7 @@ public class LottoMachine {
         OutputView.printAskBonusNumber();
 
         try {
-            Ball ball = InputView.readBall();
+            Ball ball = Parser.parseBall(InputView.readLine());
             return new WinnerBall(ticket, ball);
         } catch (LottoException lottoException) {
             OutputView.printErrorMessage(lottoException);
