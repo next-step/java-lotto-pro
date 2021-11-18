@@ -52,7 +52,7 @@ class BonusBallTest {
         final BonusBall bonusBall = new BonusBall(winningLotto, bonusLottoNumber);
 
         //when
-        final boolean isMatchedByBonusBall = bonusBall.matchBy(purchasedLotto);
+        final boolean isMatchedByBonusBall = bonusBall.isMatchedBy(purchasedLotto);
 
         //then
         assertThat(isMatchedByBonusBall).isTrue();

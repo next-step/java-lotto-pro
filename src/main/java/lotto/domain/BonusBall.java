@@ -20,7 +20,7 @@ public class BonusBall {
         }
     }
 
-    public boolean matchBy(final Lotto purchasedLotto) {
+    public boolean isMatchedBy(final Lotto purchasedLotto) {
         return purchasedLotto.contains(this.bonusLottoNumber);
     }
 

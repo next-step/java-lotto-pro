@@ -29,7 +29,7 @@ public class LottoTicket {
 
         for (Lotto lotto : this.lotteries) {
             final int winningCount = lotto.findWinningCount(winningLotto);
-            final Rank rank = Rank.valueOf(winningCount, bonusBall.matchBy(lotto));
+            final Rank rank = Rank.valueOf(winningCount, bonusBall.isMatchedBy(lotto));
 
             ranks.put(rank, rank.exchangeCorrectCount(winningCount));
         }
