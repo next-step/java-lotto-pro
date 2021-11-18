@@ -17,26 +17,24 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoMatchResultTest {
 
-  private LottoTicket winningTicket;
+  private LottoWinningTicket winningTicket;
 
   private static Stream<Arguments> generateNumberList() {
     List<Arguments> listOfArguments = new LinkedList<>();
     listOfArguments.add(Arguments
-        .of(Arrays.asList(1, 4, 27, 38, 40, 41), LottoMatchCaseEnum.FIVE_NUMBERS_MATCH));
+        .of(Arrays.asList(1, 4, 27, 38, 40, 41), LottoMatchCaseEnum.THIRD));
     listOfArguments.add(Arguments
-        .of(Arrays.asList(3, 4, 26, 27, 38, 45), LottoMatchCaseEnum.FOUR_NUMBERS_MATCH));
+        .of(Arrays.asList(3, 4, 26, 27, 38, 45), LottoMatchCaseEnum.FOURTH));
     listOfArguments.add(Arguments
-        .of(Arrays.asList(1, 2, 9, 11, 28, 41), LottoMatchCaseEnum.ONE_NUMBER_MATCH));
+        .of(Arrays.asList(1, 2, 9, 11, 28, 41), LottoMatchCaseEnum.MISS));
     listOfArguments.add(Arguments
-        .of(Arrays.asList(4, 15, 26, 27, 38, 40), LottoMatchCaseEnum.FIVE_NUMBERS_MATCH));
-    listOfArguments.add(Arguments
-        .of(Arrays.asList(4, 26, 27, 38, 40, 45), LottoMatchCaseEnum.FIVE_NUMBERS_AND_BONUS_MATCH));
+        .of(Arrays.asList(4, 26, 27, 38, 40, 45), LottoMatchCaseEnum.SECOND));
     return listOfArguments.stream();
   }
 
   @BeforeEach
   void setUp() {
-    winningTicket = new LottoTicket(Stream.of(1, 4, 26, 27, 38, 40)
+    winningTicket = new LottoWinningTicket(Stream.of(1, 4, 26, 27, 38, 40)
         .map(LottoNumber::new)
         .collect(Collectors.toList()),
         new LottoNumber(45));
@@ -62,10 +60,10 @@ public class LottoMatchResultTest {
     LottoTickets myLottoTickets = new LottoTickets(Collections.singletonList(myTicket));
     LottoMatchResult lottoMatchResult = myLottoTickets.matchWinningNumbers(winningTicket);
 
-    assertEquals(0, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.THREE_NUMBERS_MATCH));
-    assertEquals(1, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.FOUR_NUMBERS_MATCH));
-    assertEquals(0, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.FIVE_NUMBERS_MATCH));
-    assertEquals(0, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.SIX_NUMBERS_MATCH));
+    assertEquals(0, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.FIFTH));
+    assertEquals(1, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.FOURTH));
+    assertEquals(0, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.THIRD));
+    assertEquals(0, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.FIRST));
   }
 
   @Test
@@ -83,9 +81,9 @@ public class LottoMatchResultTest {
     LottoTickets myLottoTickets = new LottoTickets(Arrays.asList(myTicket1, myTicket2, myTicket3));
     LottoMatchResult lottoMatchResult = myLottoTickets.matchWinningNumbers(winningTicket);
 
-    assertEquals(0, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.THREE_NUMBERS_MATCH));
-    assertEquals(2, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.FOUR_NUMBERS_MATCH));
-    assertEquals(0, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.FIVE_NUMBERS_MATCH));
-    assertEquals(0, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.SIX_NUMBERS_MATCH));
+    assertEquals(0, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.FIFTH));
+    assertEquals(2, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.FOURTH));
+    assertEquals(0, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.SECOND));
+    assertEquals(0, lottoMatchResult.getMatchCountNum(LottoMatchCaseEnum.FIRST));
   }
 }

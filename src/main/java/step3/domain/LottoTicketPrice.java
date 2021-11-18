@@ -2,7 +2,7 @@ package step3.domain;
 
 public class LottoTicketPrice {
 
-    Money totalPrice;
+    private final Money totalPrice;
 
     public LottoTicketPrice(Money totalPrice) {
         this.totalPrice = totalPrice;

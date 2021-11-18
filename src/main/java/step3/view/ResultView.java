@@ -35,7 +35,7 @@ public class ResultView {
     }
     return String.format("%d개 일치 %s(%d원)- %d\n",
         matchCaseEnum.getMatchCount(),
-        matchCaseEnum.isMatchBonus()?", 보너스 볼 일치":"",
+        matchCaseEnum == LottoMatchCaseEnum.SECOND?", 보너스 볼 일치":"",
         matchCaseEnum.getPrice(),
         lottoMatchResult.getMatchCountNum(matchCaseEnum));
   }

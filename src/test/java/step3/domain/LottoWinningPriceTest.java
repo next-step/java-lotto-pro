@@ -18,33 +18,31 @@ public class LottoWinningPriceTest {
     List<Arguments> listOfArguments = new LinkedList<>();
     // matchCount number, price
     listOfArguments.add(Arguments.of(new HashMap<LottoMatchCaseEnum, Integer>() {{
-        put(ZERO_NUMBER_MATCH, 1);
-        put(ONE_NUMBER_MATCH, 1);
-        put(TWO_NUMBERS_MATCH, 1);
+        put(MISS, 3);
     }}, 0));
     listOfArguments.add(Arguments.of(new HashMap<LottoMatchCaseEnum, Integer>() {{
-        put(THREE_NUMBERS_MATCH, 1);
+        put(FIFTH, 1);
     }}, 5000));
     listOfArguments.add(Arguments.of(new HashMap<LottoMatchCaseEnum, Integer>() {{
-        put(FOUR_NUMBERS_MATCH, 1);
+        put(FOURTH, 1);
     }}, 50_000));
     listOfArguments.add(Arguments.of(new HashMap<LottoMatchCaseEnum, Integer>() {{
-        put(FIVE_NUMBERS_MATCH, 1);
+        put(THIRD, 1);
     }}, 1_500_000));
     listOfArguments.add(Arguments.of(new HashMap<LottoMatchCaseEnum, Integer>() {{
-        put(FIVE_NUMBERS_AND_BONUS_MATCH, 1);
+        put(SECOND, 1);
     }}, 30_000_000));
     listOfArguments.add(Arguments.of(new HashMap<LottoMatchCaseEnum, Integer>() {{
-        put(SIX_NUMBERS_MATCH, 1);
+        put(FIRST, 1);
     }}, 2_000_000_000));
     listOfArguments.add(Arguments.of(new HashMap<LottoMatchCaseEnum, Integer>() {{
-        put(THREE_NUMBERS_MATCH, 3);
-        put(FOUR_NUMBERS_MATCH, 2);
+        put(FIFTH, 3);
+        put(FOURTH, 2);
     }}, 115_000));
     listOfArguments.add(Arguments.of(new HashMap<LottoMatchCaseEnum, Integer>() {{
-        put(FOUR_NUMBERS_MATCH, 1);
-        put(FIVE_NUMBERS_MATCH, 1);
-        put(SIX_NUMBERS_MATCH, 1);
+        put(FOURTH, 1);
+        put(THIRD, 1);
+        put(FIRST, 1);
     }}, 2_001_550_000));
     return listOfArguments.stream();
   }

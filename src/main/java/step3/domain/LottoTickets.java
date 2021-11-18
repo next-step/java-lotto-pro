@@ -18,13 +18,11 @@ public class LottoTickets {
   }
 
   public static LottoMatchCaseEnum calculateMatchCase(LottoTicket sourceTicket,
-      LottoTicket winningTicket) {
-    final int bonusMatchCount = 5;
+      LottoWinningTicket winningTicket) {
     int matchCount = (int) sourceTicket.getNumbers().stream()
         .filter(winningTicket::contains)
         .count();
-    boolean matchBonus =
-        matchCount == bonusMatchCount && sourceTicket.contains(winningTicket.getBonusNumber());
+    boolean matchBonus = sourceTicket.contains(winningTicket.getBonusNumber());
     return LottoMatchCaseEnum.valueOf(matchCount, matchBonus);
   }
 
@@ -32,7 +30,7 @@ public class LottoTickets {
     return this.lottoTickets;
   }
 
-  public LottoMatchResult matchWinningNumbers(LottoTicket winningTicket) {
+  public LottoMatchResult matchWinningNumbers(LottoWinningTicket winningTicket) {
     LottoMatchResult lottoMatchResult = new LottoMatchResult();
     this.lottoTickets.forEach(lottoTicket -> {
       LottoMatchCaseEnum matchCaseEnum = calculateMatchCase(lottoTicket, winningTicket);

@@ -5,6 +5,7 @@ import step3.domain.LottoTicket;
 import step3.domain.LottoTicketPrice;
 import step3.domain.LottoTickets;
 import step3.domain.LottoWinningProfit;
+import step3.domain.LottoWinningTicket;
 import step3.domain.Money;
 import step3.view.InputView;
 import step3.view.ResultView;
@@ -24,7 +25,7 @@ public class ManualLottoApplication {
     ResultView.printTickets(lottoTickets);
 
     // 당첨 번호 입력
-    LottoTicket winningTicket = new LottoTicket(InputView.getWinningNumbersInput(), InputView.getBonusNumberInput());
+    LottoWinningTicket winningTicket = new LottoWinningTicket(InputView.getWinningNumbersInput(), InputView.getBonusNumberInput());
 
     // 당첨 결과 출력
     LottoMatchResult lottoMatchResult = lottoTickets.matchWinningNumbers(winningTicket);
