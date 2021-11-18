@@ -8,19 +8,11 @@ public class Playslip {
         this.pickedNumbers = pickedNumbers;
     }
 
+    public Prize checkResult(final WinningNumbers winningNumbers) {
+        return winningNumbers.checkNumbers(pickedNumbers);
+    }
+
     public String asString() {
         return pickedNumbers.asString();
-    }
-
-    public Prize checkResult(final PickedNumbers winningNumbers, final Number bonusNumber) {
-        final int matchingNumbersCount = pickedNumbers.count(winningNumbers);
-        if (isSecondPrize(matchingNumbersCount, bonusNumber)) {
-            return Prize.SECOND;
-        }
-        return Prize.matchCountOf(matchingNumbersCount);
-    }
-
-    private boolean isSecondPrize(final int matchingNumbersCount, final Number bonusNumber) {
-        return Prize.isSecond(matchingNumbersCount) && pickedNumbers.contains(bonusNumber);
     }
 }

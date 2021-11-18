@@ -33,7 +33,7 @@ public class PlayslipTest {
             )
         );
         assertThat(
-            playslip.checkResult(Fixtures.winningNumbers, Fixtures.bonusNumber).getMatchCount()
+            playslip.checkResult(Fixtures.winningNumbers).getMatchCount()
         ).isEqualTo(expected);
     }
 }
