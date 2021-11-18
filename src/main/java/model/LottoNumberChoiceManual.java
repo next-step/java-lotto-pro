@@ -3,11 +3,16 @@ package model;
 import java.util.List;
 
 import calculator.StringSplitParser;
-import view.InputView;
 
 public class LottoNumberChoiceManual implements LottoNumberChoiceStrategy {
+	InputPollable inputPollable;
+
+	public LottoNumberChoiceManual(InputPollable inputPollable) {
+		this.inputPollable = inputPollable;
+	}
+
 	@Override
 	public List<Integer> choose() {
-		return StringSplitParser.parse(InputView.pollInput());
+		return StringSplitParser.parse(inputPollable.pollInput());
 	}
 }

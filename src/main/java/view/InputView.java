@@ -2,10 +2,11 @@ package view;
 
 import java.util.Scanner;
 
+import model.InputPollable;
 import model.LottoPurchaseCount;
 import model.Lottos;
 
-public class InputView {
+public class InputView implements InputPollable {
 	private static final String MESSAGE_REQUEST_INPUT_OF_PURCHASE_PRICE = "구입금액을 입력해 주세요.";
 	private static final String MESSAGE_REQUEST_EXCEPTION_INPUT_OF_PURCHASE_PRICE = "잘못된 형식의 구매금액입니다.";
 	private static final String MESSAGE_REQUEST_INPUT_OF_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
@@ -59,7 +60,7 @@ public class InputView {
 		System.out.println(lottos.toString());
 	}
 
-	public static String pollInput() {
+	public String pollInput() {
 		return new Scanner(System.in).nextLine();
 	}
 
