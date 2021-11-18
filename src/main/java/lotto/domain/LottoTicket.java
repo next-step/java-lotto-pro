@@ -24,12 +24,12 @@ public class LottoTicket {
         return this.lotteries.size();
     }
 
-    public Ranks toWinningRanks(final Lotto winningLotto) {
+    public Ranks toWinningRanks(final Lotto winningLotto, final BonusBall bonusBall) {
         final Ranks ranks = new Ranks();
 
         for (Lotto lotto : this.lotteries) {
             final int winningCount = lotto.findWinningCount(winningLotto);
-            final Rank rank = Rank.of(winningCount);
+            final Rank rank = Rank.valueOf(winningCount, bonusBall.matchBy(lotto));
 
             ranks.put(rank, rank.exchangeCorrectCount(winningCount));
         }

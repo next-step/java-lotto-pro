@@ -16,7 +16,7 @@ public class BonusBall {
 
     private void verifyBonusBall(final Lotto winningLotto, final LottoNumber lottoNumber) {
         if (winningLotto.contains(lottoNumber)) {
-            throw new IllegalArgumentException("지난 주 당첨 번호를 이미 있는 번호입니다.");
+            throw new IllegalArgumentException("지난 주 당첨 번호에 이미 있는 번호입니다.");
         }
     }
 

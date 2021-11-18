@@ -1,19 +1,16 @@
 package lotto.domain;
 
-import static java.text.MessageFormat.*;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringJoiner;
+import java.util.stream.Collectors;
 import lotto.enums.Rank;
 
 public class Ranks {
     private static long totalReward;
 
     private final Map<Rank, Integer> ranks = new HashMap<Rank, Integer>() {{
-        put(Rank.FIRST_PLACE, 0);
-        put(Rank.SECOND_PLACE, 0);
-        put(Rank.THIRD_PLACE, 0);
-        put(Rank.FORTH_PLACE, 0);
+        Rank.REWARDING_GROUP.forEach(rank -> put(rank, 0));
     }};
 
     Ranks() {
@@ -24,12 +21,10 @@ public class Ranks {
     }
 
     public String getResults() {
-        return new StringJoiner(System.lineSeparator())
-            .add(getResultBy(Rank.FORTH_PLACE))
-            .add(getResultBy(Rank.THIRD_PLACE))
-            .add(getResultBy(Rank.SECOND_PLACE))
-            .add(getResultBy(Rank.FIRST_PLACE))
-            .toString();
+        return Rank.REWARDING_GROUP.stream()
+            .sorted(Comparator.reverseOrder())
+            .map(this::getResultBy)
+            .collect(Collectors.joining(System.lineSeparator()));
     }
 
     public String averageYield(final Money money) {
@@ -40,10 +35,7 @@ public class Ranks {
     private String getResultBy(final Rank rank) {
         final int ranksCount = this.ranks.get(rank);
 
-        return new StringJoiner("- ")
-            .add(rank.message())
-            .add(format("{0}개", ranksCount))
-            .toString();
+        return rank.message(ranksCount);
     }
 
     private void accumulateRewards() {

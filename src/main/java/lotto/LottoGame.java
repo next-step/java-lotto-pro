@@ -3,6 +3,7 @@ package lotto;
 import lotto.component.GameStatusChangeable;
 import lotto.component.LottoGeneratorable;
 import lotto.component.LottoShuffleable;
+import lotto.domain.BonusBall;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
@@ -42,9 +43,11 @@ public class LottoGame {
             final LottoTicket lottoTicket = prepareLottoTicket(money, lottoShuffleable);
 
             final Lotto winningLotto = prepareWinningLotto();
+            final BonusBall bonusBall = prepareBonusBall(winningLotto);
+
             consoleOutputView.lineSeparator();
 
-            final String result = LottoResult.checkout(winningLotto, lottoTicket, money);
+            final String result = LottoResult.checkout(winningLotto, bonusBall, lottoTicket, money);
             consoleOutputView.print(result);
 
             gameStatusManager.end();
@@ -76,5 +79,11 @@ public class LottoGame {
         consoleOutputView.print("지난 주 당첨 번호를 입력해 주세요.");
 
         return consoleInputView.inputWinningLotto(lottoGeneratorable);
+    }
+
+    private BonusBall prepareBonusBall(final Lotto winningLotto) {
+        consoleOutputView.print("보너스 볼을 입력해 주세요.");
+
+        return consoleInputView.inputBonusBall(winningLotto);
     }
 }
