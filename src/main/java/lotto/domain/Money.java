@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.dto.MoneyDTO;
 import lotto.exception.NegativeMoneyException;
+import lotto.exception.NotANumberException;
 
 public class Money {
     public static final int ZERO = 0;
@@ -11,6 +12,14 @@ public class Money {
     public Money(int money) {
         checkMoneyNegative(money);
         this.money = money;
+    }
+
+    public static Money from(String inputMoney) {
+        try {
+            return new Money(Integer.parseInt(inputMoney));
+        } catch (NumberFormatException e) {
+            throw new NotANumberException();
+        }
     }
 
     private void checkMoneyNegative(int money) {

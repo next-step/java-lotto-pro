@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Optional;
+
 public enum Prize {
     MISS(0, 0),
     FIFTH(3, 5_000),
@@ -17,25 +19,25 @@ public enum Prize {
     }
 
     public static Prize valueOf(int countOfMatch, boolean matchBonus) {
-        Prize prizeResult = null;
+        Optional<Prize> prizeResult = Optional.empty();
         prizeResult = getSecondPrize(countOfMatch, matchBonus, prizeResult);
         for (Prize prize : values()) {
             prizeResult = getPrize(countOfMatch, prizeResult, prize);
         }
-        return prizeResult;
+        return prizeResult.get();
     }
 
-    private static Prize getSecondPrize(int countOfMatch, boolean matchBonus, Prize prizeResult) {
+    private static Optional<Prize> getSecondPrize(int countOfMatch, boolean matchBonus, Optional<Prize> prizeResult) {
         if (countOfMatch == SECOND.countOfMatch && matchBonus) {
-            prizeResult = SECOND;
+            prizeResult = Optional.of(SECOND);
         }
         return prizeResult;
     }
 
-    private static Prize getPrize(int countOfMatch, Prize prizeResult, Prize prize) {
+    private static Optional<Prize> getPrize(int countOfMatch, Optional<Prize> prizeResult, Prize prize) {
         boolean matchCondition = countOfMatch == prize.countOfMatch;
-        if (matchCondition && prize != SECOND && prizeResult != SECOND) {
-            prizeResult = prize;
+        if (matchCondition && prize != SECOND && !prizeResult.isPresent()) {
+            prizeResult = Optional.of(prize);
         }
         return prizeResult;
     }

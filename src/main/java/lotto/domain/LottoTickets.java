@@ -13,9 +13,9 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets generateRandomLottoTickets(int amount) {
+    public static LottoTickets generateRandomLottoTickets(TicketAmount amount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < amount.getTicketAmount(); i++) {
             lottoTickets.add(LottoTicket.generateRandomLottoTicket());
         }
         return new LottoTickets(lottoTickets);
@@ -25,7 +25,7 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public GameResult getGameResult(LottoTicket winningNumber) {
+    public GameResult getGameResult(WinningLottoNumbers winningNumber) {
         GameResult gameResult = new GameResult();
         for (LottoTicket lottoTicket : lottoTickets) {
             Prize prize = lottoTicket.getPrize(winningNumber);
@@ -38,5 +38,14 @@ public class LottoTickets {
         return new LottoTicketsDTO(lottoTickets.stream()
                 .map(LottoTicket::toDTO)
                 .collect(Collectors.toList()));
+    }
+
+    public LottoTickets addAll(LottoTickets anotherLottoTickets) {
+        anotherLottoTickets.lottoTickets.addAll(this.lottoTickets);
+        return anotherLottoTickets;
+    }
+
+    public void add(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
     }
 }
