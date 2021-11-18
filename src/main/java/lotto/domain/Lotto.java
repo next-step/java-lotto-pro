@@ -29,6 +29,10 @@ public class Lotto {
         return winningCount;
     }
 
+    public boolean contains(final LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     List<LottoNumber> get() {
         return Collections.unmodifiableList(this.lottoNumbers);
     }

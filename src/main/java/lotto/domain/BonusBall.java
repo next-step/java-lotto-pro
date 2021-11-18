@@ -8,8 +8,16 @@ public class BonusBall {
     private final LottoNumber lottoNumber;
 
     public BonusBall(final Lotto winningLotto, final LottoNumber lottoNumber) {
+        verifyBonusBall(winningLotto, lottoNumber);
+
         this.winningLotto = winningLotto;
         this.lottoNumber = lottoNumber;
+    }
+
+    private void verifyBonusBall(final Lotto winningLotto, final LottoNumber lottoNumber) {
+        if (winningLotto.contains(lottoNumber)) {
+            throw new IllegalArgumentException("지난 주 당첨 번호를 이미 있는 번호입니다.");
+        }
     }
 
     @Override
