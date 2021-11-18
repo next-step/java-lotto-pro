@@ -6,8 +6,8 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import lotto.model.BonusNumber;
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.PurchaseMoney;
 import lotto.model.WinLotto;
@@ -40,8 +40,8 @@ public class InputView {
 
 	public static WinLotto getWinLotto() {
 		final Lotto winLotto = getWinLottoWithoutBonusNumber();
-		final BonusNumber bonusNumber = getBonusNumber();
-		return new WinLotto(winLotto, bonusNumber);
+		final LottoNumber lottoNumber = getBonusNumber();
+		return new WinLotto(winLotto, lottoNumber);
 	}
 
 	public static int getNumberManualLotto() {
@@ -56,9 +56,9 @@ public class InputView {
 			.collect(Collectors.toList()));
 	}
 
-	private static BonusNumber getBonusNumber() {
+	private static LottoNumber getBonusNumber() {
 		System.out.println("보너스 볼을 입력해 주세요.");
-		return repeatWhenException(() -> new BonusNumber(getInteger()), IllegalArgumentException.class);
+		return repeatWhenException(() -> new LottoNumber(getInteger()), IllegalArgumentException.class);
 	}
 
 	private static int getInteger() {
@@ -80,6 +80,7 @@ public class InputView {
 			return new Lotto(Arrays.stream(splittedByComma)
 				.map(String::trim)
 				.map(Integer::parseInt)
+				.map(LottoNumber::new)
 				.collect(Collectors.toList()));
 		}, IllegalArgumentException.class);
 	}

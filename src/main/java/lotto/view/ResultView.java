@@ -21,9 +21,9 @@ public class ResultView {
 		System.out.println("---------");
 		Arrays.stream(Rank.values())
 			.filter(rank -> rank != Rank.MISS)
-			.sorted(Comparator.comparingInt(Rank::getCountOfMatch))
+			.sorted(Comparator.comparingInt(Rank::getCountOfMatch).thenComparingInt(Rank::getWinningMoney))
 			.forEach(rank -> printPrizeStatistics(prize, rank));
-		System.out.printf("총 수익률은 %.2f입니다.%n", Math.floor(prize.rateReturn(money) * 100) / 100);
+		System.out.printf("총 수익률은 %s입니다.%n", prize.rateReturn(money));
 	}
 
 	private static void printPrizeStatistics(Prize prize, Rank rank) {

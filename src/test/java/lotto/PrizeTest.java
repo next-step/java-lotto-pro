@@ -20,9 +20,9 @@ public class PrizeTest {
 
 	@BeforeEach
 	void setUp() {
-		lotto1 = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
-		lotto2 = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 10));
-		winLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
+		lotto1 = new Lotto(4, 5, 6, 7, 8, 9);
+		lotto2 = new Lotto(4, 5, 6, 7, 8, 10);
+		winLotto = new Lotto(4, 5, 6, 7, 8, 9);
 	}
 
 	@Test

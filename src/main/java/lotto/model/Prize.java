@@ -22,8 +22,8 @@ public class Prize {
 		return new Prize(winCount);
 	}
 
-	public double rateReturn(PurchaseMoney money) {
-		return money.divided(winMoney());
+	public Rate rateReturn(PurchaseMoney money) {
+		return new Rate(money.divided(winMoney()));
 	}
 
 	public int winMoney() {
