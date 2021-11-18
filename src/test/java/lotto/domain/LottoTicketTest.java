@@ -1,28 +1,19 @@
-package step3.domain;
+package lotto.domain;
 
-import static helper.Constants.*;
 import static java.lang.String.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import lotto.component.SimpleLottoShuffler;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.Money;
-import lotto.domain.Prizes;
 import lotto.enums.Prize;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTicketTest {
 
-    @ParameterizedTest(name = DISPLAY_NAME)
-    @ValueSource(ints = {1000, 2000, 3000, 4000, 5000})
-    void 돈을지불하면_로또티켓을_얻을_수_있다(final long moneyOfThousand) {
+    @Test
+    void 돈을지불하면_로또티켓을_얻을_수_있다() {
         //given
-        final Money money = new Money(moneyOfThousand);
+        final Money money = new Money(30000);
 
         //when
         final LottoTicket lottoTicket = new LottoTicket();

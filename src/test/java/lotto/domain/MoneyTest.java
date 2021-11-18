@@ -1,19 +1,15 @@
-package step3.domain;
+package lotto.domain;
 
-import static helper.Constants.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
-import lotto.domain.Money;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class MoneyTest {
 
-    @ParameterizedTest(name = DISPLAY_NAME)
-    @ValueSource(ints = {1000, 2000, 3000, 4000, 5000})
-    void _1000원권으로_로또를_할_수_있는_횟수를_얻을수있다(final long moneyOfThousand) {
+    @Test
+    void _1000원권으로_로또를_할_수_있는_횟수를_얻을수있다() {
         //given
+        final long moneyOfThousand = 30000;
         final Money money = new Money(moneyOfThousand);
 
         //when
@@ -26,11 +22,13 @@ class MoneyTest {
         );
     }
 
-    @ParameterizedTest(name = DISPLAY_NAME)
-    @ValueSource(ints = {1000, 2000, 3000, 4000, 5000})
-    void 추가로돈이생기게되면_소지하고있는_돈은_늘어난다(final long additionalMoney) {
+    @Test
+    void 추가로돈이생기게되면_소지하고있는_돈은_늘어난다() {
         //given
-        final Money money = new Money(1000);
+        final long moneyOfThousand = 1000;
+        final Money money = new Money(moneyOfThousand);
+
+        final long additionalMoney = 30000;
 
         //when
         money.earn(new Money(additionalMoney));
@@ -38,7 +36,7 @@ class MoneyTest {
         //then
         assertAll(
             () -> assertThat(money).isNotNull(),
-            () -> assertThat(money.get()).isEqualTo(1000 + additionalMoney)
+            () -> assertThat(money.get()).isEqualTo(moneyOfThousand + additionalMoney)
         );
     }
 
