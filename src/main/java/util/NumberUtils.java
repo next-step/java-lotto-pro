@@ -8,11 +8,11 @@ public final class NumberUtils {
     }
 
     public static boolean isZero(final Number number) {
-        return number.intValue() == ZERO;
+        return number.longValue() == ZERO;
     }
 
     public static boolean isNegative(final Number number) {
-        return number.intValue() < ZERO;
+        return number.longValue() < ZERO;
     }
 
     public static int parseInt(final String text) {
