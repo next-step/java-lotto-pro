@@ -2,8 +2,6 @@ package lotto.domain;
 
 public class Playslip {
 
-    private static final int NUMBER_CONTAINED = 1;
-
     private final PickedNumbers pickedNumbers;
 
     public Playslip(final PickedNumbers pickedNumbers) {
@@ -14,28 +12,15 @@ public class Playslip {
         return pickedNumbers.asString();
     }
 
-    public Prize checkResult(PickedNumbers winningNumbers, Number bonusNumber) {
-        Prize result = Prize.NONE;
-        for (Prize prize : Prize.values()) {
-            result = checkResult(winningNumbers, bonusNumber, prize);
-            if (result != Prize.NONE) {
-                break;
-            }
-        }
-        return result;
-    }
-
-    private Prize checkResult(
-        final PickedNumbers winningNumbers,
-        final Number bonusNumber,
-        final Prize prize
-    ) {
-        if (prize == Prize.SECOND && pickedNumbers.contains(bonusNumber) == NUMBER_CONTAINED) {
+    public Prize checkResult(final PickedNumbers winningNumbers, final Number bonusNumber) {
+        final int matchingNumbersCount = pickedNumbers.count(winningNumbers);
+        if (isSecondPrize(matchingNumbersCount, bonusNumber)) {
             return Prize.SECOND;
         }
-        if (pickedNumbers.contains(winningNumbers, prize.getMatchCount())) {
-            return prize;
-        }
-        return Prize.NONE;
+        return Prize.matchCountOf(matchingNumbersCount);
+    }
+
+    private boolean isSecondPrize(final int matchingNumbersCount, final Number bonusNumber) {
+        return Prize.isSecond(matchingNumbersCount) && pickedNumbers.contains(bonusNumber);
     }
 }

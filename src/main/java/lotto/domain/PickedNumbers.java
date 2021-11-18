@@ -43,16 +43,20 @@ public class PickedNumbers {
         return pickedNumbers.size();
     }
 
-    public boolean contains(PickedNumbers other, int x) {
+    public int count(final PickedNumbers other) {
         int numberOfMatchingNumbers = 0;
         for (int i = 0; i < pickedNumbers.size(); i++) {
-            numberOfMatchingNumbers += contains(other.pickedNumbers.get(i));
+            numberOfMatchingNumbers += countHelper(other.pickedNumbers.get(i));
         }
-        return numberOfMatchingNumbers == x;
+        return numberOfMatchingNumbers;
     }
 
-    public int contains(Number number) {
-        return pickedNumbers.contains(number) ? NUMBER_CONTAINED : NUMBER_NOT_CONTAINED;
+    private int countHelper(final Number number) {
+        return contains(number) ? NUMBER_CONTAINED : NUMBER_NOT_CONTAINED;
+    }
+
+    public boolean contains(final Number number) {
+        return pickedNumbers.contains(number);
     }
 
     public String asString() {

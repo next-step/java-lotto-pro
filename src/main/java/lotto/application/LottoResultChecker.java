@@ -7,8 +7,6 @@ import lotto.domain.Result;
 
 public class LottoResultChecker {
 
-    private static final int NUMBER_CONTAINED = 1;
-
     public static LottoResultResponse check(
         final Playslips playslips,
         final String pastWinningNumbers,
@@ -25,7 +23,7 @@ public class LottoResultChecker {
         final PickedNumbers pastWinningNumbers,
         final Number bonusNumber
     ) {
-        if (pastWinningNumbers.contains(bonusNumber) == NUMBER_CONTAINED) {
+        if (pastWinningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호와 보너스 볼은 일치할 수 없습니다.");
         }
     }
