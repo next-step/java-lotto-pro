@@ -29,4 +29,32 @@ class BonusBallTest {
         assertThatThrownBy(() -> new BonusBall(winningLotto, new LottoNumber(12)))
             .isExactlyInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 구입한_로또에_보너스볼과_일치하는_것이_있는지_확인한다() {
+        //given
+        final LottoNumber sameLottoNumberOne = new LottoNumber(3);
+        final LottoNumber sameLottoNumberTwo = new LottoNumber(12);
+        final LottoNumber sameLottoNumberThree = new LottoNumber(11);
+
+        final LottoNumber bonusLottoNumber = new LottoNumber(9);
+
+        final Lotto purchasedLotto = new Lotto(Arrays.asList(
+            sameLottoNumberOne, sameLottoNumberTwo, sameLottoNumberThree,
+            new LottoNumber(1), new LottoNumber(40), bonusLottoNumber
+        ));
+
+        final Lotto winningLotto = new Lotto(Arrays.asList(
+            sameLottoNumberOne, new LottoNumber(2), new LottoNumber(42),
+            sameLottoNumberTwo, new LottoNumber(43), sameLottoNumberThree
+        ));
+
+        final BonusBall bonusBall = new BonusBall(winningLotto, bonusLottoNumber);
+
+        //when
+        final boolean isMatchedByBonusBall = bonusBall.matchBy(purchasedLotto);
+
+        //then
+        assertThat(isMatchedByBonusBall).isTrue();
+    }
 }
