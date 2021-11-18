@@ -1,7 +1,6 @@
 package lotto.utils;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 
@@ -41,7 +40,7 @@ class ParserTest {
     @DisplayName("ticket 변환")
     @Test
     void parseTicket() {
-        assertThat(Parser.parseTicket("1,2,3,4,5,6")).isEqualTo(new Ticket(Arrays.asList(1,2,3,4,5,6)));
+        assertThat(Parser.parseTicket("1,2,3,4,5,6")).isEqualTo(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @DisplayName("ticket 변환 에러")

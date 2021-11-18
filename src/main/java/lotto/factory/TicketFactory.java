@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import lotto.domain.TicketCount;
 import lotto.domain.Ticket;
+import lotto.domain.TicketCount;
 import lotto.domain.Tickets;
 
 public class TicketFactory {
