@@ -22,6 +22,10 @@ public class LottoPurchasePrice {
 		return price;
 	}
 
+	public LottoPurchaseCount toPurchaseCount() {
+		return new LottoPurchaseCount(this.price / LOTTO_TICKET_PRICE);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -35,9 +39,5 @@ public class LottoPurchasePrice {
 	@Override
 	public int hashCode() {
 		return Objects.hash(price);
-	}
-
-	public LottoPurchaseCount toPurchaseCount() {
-		return new LottoPurchaseCount(this.price / LOTTO_TICKET_PRICE);
 	}
 }
