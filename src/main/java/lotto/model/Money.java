@@ -3,9 +3,12 @@ package lotto.model;
 import java.util.Objects;
 
 public class Money {
-    private final int money;
+    private final long money;
 
-    public Money(int money) {
+    public Money(long money) {
+        if (money < 0) {
+            throw new IllegalArgumentException();
+        }
         this.money = money;
     }
 

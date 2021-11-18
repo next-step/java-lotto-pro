@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,10 +27,10 @@ public class LottoTicketTest {
     }
 
     @Test
-    void countPurchasable_3000원() {
-        final Money price = new Money(3_000);
+    void countPurchasable_1장() {
+        final Money price = new Money(1_000);
         final int count = LottoTicket.countPurchasable(price);
-        assertThat(count).isEqualTo(3);
+        assertThat(count).isEqualTo(1);
     }
 
     @Test
@@ -37,6 +38,13 @@ public class LottoTicketTest {
         final Money price = new Money(0);
         final int count = LottoTicket.countPurchasable(price);
         assertThat(count).isEqualTo(0);
+    }
+
+    @Test
+    void countPurchasable_딱떨어지지않음() {
+        final Money price = new Money(1_500);
+        final int count = LottoTicket.countPurchasable(price);
+        assertThat(count).isEqualTo(1);
     }
 
     @ParameterizedTest
@@ -54,5 +62,18 @@ public class LottoTicketTest {
                 Arguments.of(LottoTicket.of(Arrays.asList(11, 12, 13, 14, 15, 16)), 0),
                 Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 13, 14, 15, 16)), 2)
         );
+    }
+
+    @Test
+    void equals() {
+        final List<LottoTicket> expected = Arrays.asList(
+                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                LottoTicket.of(Arrays.asList(2, 3, 4, 5, 6, 7))
+        );
+        final List<LottoTicket> expected1 = Arrays.asList(
+                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                LottoTicket.of(Arrays.asList(2, 3, 4, 5, 6, 7))
+        );
+        assertThat(expected.equals(expected1)).isTrue();
     }
 }

@@ -13,12 +13,12 @@ public class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        final List<Winning> winnings = new ArrayList<>();
-        winnings.add(Winning.FOURTH_PRIZE);
-        winnings.add(Winning.THIRD_PRIZE);
-        winnings.add(Winning.THIRD_PRIZE);
-        winnings.add(Winning.NONE);
-        this.lottoResult = new LottoResult(winnings);
+        final List<Rank> ranks = new ArrayList<>();
+        ranks.add(Rank.FOURTH_PRIZE);
+        ranks.add(Rank.THIRD_PRIZE);
+        ranks.add(Rank.THIRD_PRIZE);
+        ranks.add(Rank.NONE);
+        this.lottoResult = new LottoResult(ranks);
     }
 
     @Test

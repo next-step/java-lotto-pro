@@ -3,6 +3,7 @@ package lotto.model;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
     @Test
@@ -31,5 +32,11 @@ public class MoneyTest {
         assertThat(money.isZero()).isTrue();
         money = new Money(2_000);
         assertThat(money.isZero()).isFalse();
+    }
+
+    @Test
+    void negative() {
+        assertThatThrownBy(() -> new Money(-1000))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

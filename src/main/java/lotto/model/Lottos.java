@@ -4,31 +4,73 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.model.LottoNumber.MAX_VALUE;
-import static lotto.model.LottoNumber.MIN_VALUE;
-import static lotto.model.LottoTicket.LOTTO_SIZE;
-
 public class Lottos {
+    private final int totalCount;
+    private final int manualCount;
+    private final int autoCount;
     private final List<LottoTicket> lottos;
 
-    private Lottos(List<LottoTicket> lottos) {
-        this.lottos = lottos;
+    public Lottos(int totalCount, int manualCount, List<List<Integer>> numbers) {
+        this.totalCount = totalCount;
+        this.manualCount = manualCount;
+        this.autoCount = totalCount - manualCount;
+        validateCounts();
+        lottos = new ArrayList<>();
+        generateManual(numbers);
+        generateAuto();
     }
 
-    public static Lottos generateAuto(int count) {
-        final List<LottoTicket> lottos = new ArrayList<>();
+    public Lottos(int totalCount, int manualCount) {
+        this.totalCount = totalCount;
+        this.manualCount = manualCount;
+        this.autoCount = totalCount - manualCount;
+        validateCounts();
+        lottos = new ArrayList<>();
+        generateAuto();
+    }
 
-        for (int i = 0; i < count; i++) {
-            final List<Integer> numbers = Lottos.getRandomNumbers();
+    private void validateCounts() {
+        if (totalCount >= manualCount
+                && totalCount > 0
+                && manualCount >= 0) {
+            return;
+        }
+
+        throw new IllegalArgumentException();
+    }
+
+    private void generateManual(List<List<Integer>> numberInputs) {
+        for (List<Integer> numbers : numberInputs) {
+            Collections.sort(numbers);
             final LottoTicket lotto = LottoTicket.of(numbers);
             lottos.add(lotto);
         }
+    }
 
-        return new Lottos(lottos);
+    private void generateAuto() {
+        for (int i = 0; i < autoCount; i++) {
+            lottos.add(LottoTicket.ofRandomNumbers());
+        }
+    }
+
+    public static Lottos ofAllAuto(int count) {
+        return new Lottos(count, 0);
     }
 
     public List<LottoTicket> getLottos() {
         return lottos;
+    }
+
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public int getManualCount() {
+        return manualCount;
+    }
+
+    public int getAutoCount() {
+        return autoCount;
     }
 
     public int size() {
@@ -36,30 +78,25 @@ public class Lottos {
     }
 
     public LottoResult calculateWinning(WinTicket winTicket) {
-        final List<Winning> winnings = new ArrayList<>();
+        final List<Rank> ranks = new ArrayList<>();
         for (LottoTicket lotto : lottos) {
-            winnings.add(lotto.calculateWinning(winTicket));
+            ranks.add(lotto.calculateWinning(winTicket));
         }
-        return new LottoResult(winnings);
+        return new LottoResult(ranks);
     }
 
-    public Money getSellingPrice() {
+    public Money calculateTotalSellingPrice() {
         return LottoTicket.SELLING_PRICE.multiplyBy(lottos.size());
     }
 
-    private static List<Integer> getRandomNumbers() {
-        final List<Integer> allNumbers = getAllNumbers();
-        Collections.shuffle(allNumbers);
-        final List<Integer> pickedNumbers = new ArrayList<>(allNumbers.subList(0, LOTTO_SIZE));
-        Collections.sort(pickedNumbers);
-        return pickedNumbers;
+    @Override
+    public String toString() {
+        return "Lottos{" +
+                "lottos=" + lottos +
+                '}';
     }
 
-    private static List<Integer> getAllNumbers() {
-        final List<Integer> numbers = new ArrayList<>();
-        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
-            numbers.add(i);
-        }
-        return numbers;
+    public boolean hasEqualTickets(List<LottoTicket> tickets) {
+        return this.lottos.equals(tickets);
     }
 }

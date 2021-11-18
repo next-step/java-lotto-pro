@@ -27,6 +27,13 @@ public class WinTicketTest {
     }
 
     @Test
+    void of_중복보너스번호실패() {
+        assertThatThrownBy(() -> {
+            WinTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void matchBonusNumber() {
         final WinTicket ticket = WinTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), 20);
         assertThat(ticket.matchBonusNumber(Collections.singletonList(new LottoNumber(20))))

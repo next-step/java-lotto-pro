@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.model.LottoResult;
-import lotto.model.Winning;
+import lotto.model.Rank;
 
 public class ResultView {
     public void printResult(LottoResult result, double roi) {
@@ -12,20 +12,20 @@ public class ResultView {
     private void showWinningStatistics(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(getWinningMessage(lottoResult, Winning.FIFTH_PRIZE));
-        System.out.println(getWinningMessage(lottoResult, Winning.FOURTH_PRIZE));
-        System.out.println(getWinningMessage(lottoResult, Winning.THIRD_PRIZE));
-        System.out.println(getWinningMessage(lottoResult, Winning.SECOND_PRIZE));
-        System.out.println(getWinningMessage(lottoResult, Winning.FIRST_PRIZE));
+        System.out.println(getWinningMessage(lottoResult, Rank.FIFTH_PRIZE));
+        System.out.println(getWinningMessage(lottoResult, Rank.FOURTH_PRIZE));
+        System.out.println(getWinningMessage(lottoResult, Rank.THIRD_PRIZE));
+        System.out.println(getWinningMessage(lottoResult, Rank.SECOND_PRIZE));
+        System.out.println(getWinningMessage(lottoResult, Rank.FIRST_PRIZE));
     }
 
-    private String getWinningMessage(LottoResult lottoResult, Winning winning) {
-        final long winningCount = lottoResult.getCountOf(winning);
-        final String bonusBallMessage = winning.needBonus() ? ", 보너스 볼 일치" : "";
+    private String getWinningMessage(LottoResult lottoResult, Rank rank) {
+        final long winningCount = lottoResult.getCountOf(rank);
+        final String bonusBallMessage = rank.needBonus() ? ", 보너스 볼 일치" : "";
         return String.format("%d개 일치%s (%s원)- %d개",
-                winning.getMatchCount(),
+                rank.getMatchCount(),
                 bonusBallMessage,
-                winning.getReward(),
+                rank.getReward(),
                 winningCount);
     }
 
