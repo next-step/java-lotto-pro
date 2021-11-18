@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import lotto.component.SimpleLottoShuffler;
-import lotto.enums.Prize;
+import lotto.enums.Rank;
 import org.junit.jupiter.api.Test;
 
 class LottoTicketTest {
@@ -67,19 +67,19 @@ class LottoTicketTest {
         )));
 
         //when
-        final Prizes firstPrizes = firstPlaceLottoTicket.toWinningPrizes(winningLotto);
-        final Prizes secondPrizes = secondPlaceLottoTicket.toWinningPrizes(winningLotto);
-        final Prizes thirdPrizes = thirdPlaceLottoTicket.toWinningPrizes(winningLotto);
-        final Prizes forthPrizes = forthPlaceLottoTicket.toWinningPrizes(winningLotto);
+        final Ranks firstRanks = firstPlaceLottoTicket.toWinningRanks(winningLotto);
+        final Ranks secondRanks = secondPlaceLottoTicket.toWinningRanks(winningLotto);
+        final Ranks thirdRanks = thirdPlaceLottoTicket.toWinningRanks(winningLotto);
+        final Ranks forthRanks = forthPlaceLottoTicket.toWinningRanks(winningLotto);
 
         //then
         final String formatResult = "%s- 1개";
 
         assertAll(
-            () -> assertThat(firstPrizes.getResults()).contains(format(formatResult, Prize.FIRST_PLACE.message())),
-            () -> assertThat(secondPrizes.getResults()).contains(format(formatResult, Prize.SECOND_PLACE.message())),
-            () -> assertThat(thirdPrizes.getResults()).contains(format(formatResult, Prize.THIRD_PLACE.message())),
-            () -> assertThat(forthPrizes.getResults()).contains(format(formatResult, Prize.FORTH_PLACE.message()))
+            () -> assertThat(firstRanks.getResults()).contains(format(formatResult, Rank.FIRST_PLACE.message())),
+            () -> assertThat(secondRanks.getResults()).contains(format(formatResult, Rank.SECOND_PLACE.message())),
+            () -> assertThat(thirdRanks.getResults()).contains(format(formatResult, Rank.THIRD_PLACE.message())),
+            () -> assertThat(forthRanks.getResults()).contains(format(formatResult, Rank.FORTH_PLACE.message()))
         );
     }
 }

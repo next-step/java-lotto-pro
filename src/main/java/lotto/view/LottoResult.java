@@ -4,7 +4,7 @@ import java.util.StringJoiner;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
-import lotto.domain.Prizes;
+import lotto.domain.Ranks;
 
 public final class LottoResult {
 
@@ -17,10 +17,10 @@ public final class LottoResult {
         result.add("당첨 통계");
         result.add("---------");
 
-        final Prizes prizes = lottoTicket.toWinningPrizes(winningLotto);
+        final Ranks ranks = lottoTicket.toWinningRanks(winningLotto);
 
-        result.add(prizes.getResults());
-        result.add(prizes.averageYield(money));
+        result.add(ranks.getResults());
+        result.add(ranks.averageYield(money));
 
         return result.toString();
     }

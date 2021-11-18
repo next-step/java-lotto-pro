@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 import lotto.component.LottoShuffleable;
-import lotto.enums.Prize;
+import lotto.enums.Rank;
 
 public class LottoTicket {
 
@@ -24,17 +24,17 @@ public class LottoTicket {
         return this.lotteries.size();
     }
 
-    public Prizes toWinningPrizes(final Lotto winningLotto) {
-        final Prizes prizes = new Prizes();
+    public Ranks toWinningRanks(final Lotto winningLotto) {
+        final Ranks ranks = new Ranks();
 
         for (Lotto lotto : this.lotteries) {
             final int winningCount = lotto.findWinningCount(winningLotto);
-            final Prize prize = Prize.of(winningCount);
+            final Rank rank = Rank.of(winningCount);
 
-            prizes.put(prize, prize.exchangeCorrectCount(winningCount));
+            ranks.put(rank, rank.exchangeCorrectCount(winningCount));
         }
 
-        return prizes;
+        return ranks;
     }
 
     @Override

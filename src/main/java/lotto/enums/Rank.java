@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
 
-public enum Prize {
+public enum Rank {
     FIRST_PLACE(Lotto.LOTTO_LENGTH, new Money(2000000000)),
     SECOND_PLACE(5, new Money(1500000)),
     THIRD_PLACE(4, new Money(50000)),
@@ -15,37 +15,37 @@ public enum Prize {
     private final int correct;
     private final Money reward;
 
-    Prize(final int correct, final Money reward) {
+    Rank(final int correct, final Money reward) {
         this.correct = correct;
         this.reward = reward;
     }
 
-    public static Prize of(final int correct) {
+    public static Rank of(final int correct) {
         if (isLessThanCorrect(correct)) {
             return OUT_OF_RANKING;
         }
 
-        if (isPrizePlace(FIRST_PLACE, correct)) {
+        if (isRankPlace(FIRST_PLACE, correct)) {
             return FIRST_PLACE;
         }
 
-        if (isPrizePlace(SECOND_PLACE, correct)) {
+        if (isRankPlace(SECOND_PLACE, correct)) {
             return SECOND_PLACE;
         }
 
-        if (isPrizePlace(THIRD_PLACE, correct)) {
+        if (isRankPlace(THIRD_PLACE, correct)) {
             return THIRD_PLACE;
         }
 
-        if (isPrizePlace(FORTH_PLACE, correct)) {
+        if (isRankPlace(FORTH_PLACE, correct)) {
             return FORTH_PLACE;
         }
 
         return OUT_OF_RANKING;
     }
 
-    private static boolean isPrizePlace(final Prize prize, final int correct) {
-        return prize.correct == correct;
+    private static boolean isRankPlace(final Rank rank, final int correct) {
+        return rank.correct == correct;
     }
 
     private static boolean isLessThanCorrect(final int correct) {
