@@ -14,32 +14,40 @@ import nextstep.lotto.exception.LottoRuntimeException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import static nextstep.lotto.constance.LottoConstance.LOTTO_PRICE;
 import static nextstep.lotto.constance.LottoDisplayMessage.BONUS_BALL_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.DIVIDE_MESSAGE;
+import static nextstep.lotto.constance.LottoDisplayMessage.INPUT_MANUAL_PURCHASE_LOTTO_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.LAST_WEEK_LOTTO_WIN_NUMBERS_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.LOSS_STAT_MESSAGE;
+import static nextstep.lotto.constance.LottoDisplayMessage.MANUAL_PURCHASE_AMOUNT_MESSAGE;
+import static nextstep.lotto.constance.LottoDisplayMessage.MATCH_COUNT_POSTFIX_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PROFIT_STAT_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_AMOUNT_MESSAGE;
-import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_COUNT_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_MIDDLE;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_POSTFIX;
 import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_LOTTO_VIEW_PREFIX;
+import static nextstep.lotto.constance.LottoDisplayMessage.PURCHASE_PREFIX_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.WINNING_STAT_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.WINNING_STAT_RESULT_POSTFIX_MESSAGE;
 import static nextstep.lotto.constance.LottoDisplayMessage.WINNING_STAT_RESULT_PREFIX_MESSAGE;
-import static nextstep.lotto.constance.LottoExceptionMessage.ERROR;
-import static nextstep.lotto.constance.LottoExceptionMessage.INVALID_LOTTO_PURCHASE_AMOUNT_MESSAGE;
-import static nextstep.lotto.constance.LottoExceptionMessage.INVALID_WINNING_LOTTO_NUMBER_MESSAGE;
+
 
 public class LottoDisplay {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    public static final String ERROR = "[ERROR]";
+    public static final String INVALID_LOTTO_PURCHASE_AMOUNT_MESSAGE = "구입 금액은 숫자만 입력이 가능합니다.";
+    public static final String INVALID_WINNING_LOTTO_NUMBER_MESSAGE = "당첨 번호는 숫자만 입력이 가능합니다.";
+    public static final String INVALID_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 개수가 구입 금액을 초과하였습니다.";
 
+
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static PurchaseLottoAmount inputPurchaseAmount() {
 
@@ -48,15 +56,79 @@ public class LottoDisplay {
         try {
             String inputPurchaseAmount = scanner.nextLine();
             Long purchaseAmount = Long.valueOf(inputPurchaseAmount);
-            return new PurchaseLottoAmount(purchaseAmount);
+            Long manualPurchaseCount = inputManualPurchaseCount(purchaseAmount);
+            return new PurchaseLottoAmount(purchaseAmount, manualPurchaseCount);
         } catch (NumberFormatException e) {
             System.out.println(ERROR + INVALID_LOTTO_PURCHASE_AMOUNT_MESSAGE);
             return inputPurchaseAmount();
         }
     }
 
+    public static Long inputManualPurchaseCount(Long purchaseAmount) {
+
+        System.out.println(MANUAL_PURCHASE_AMOUNT_MESSAGE);
+
+        try {
+            String inputManualPurchaseCount = scanner.nextLine();
+            Long manualPurchaseCount = Long.valueOf(inputManualPurchaseCount);
+            validateUpperThanAmount(purchaseAmount, manualPurchaseCount);
+            return manualPurchaseCount;
+        } catch (NumberFormatException e) {
+            System.out.println(ERROR + INVALID_LOTTO_PURCHASE_AMOUNT_MESSAGE);
+            return inputManualPurchaseCount(purchaseAmount);
+        }
+    }
+
+    public static void validateUpperThanAmount(Long purchaseAmount, Long manualPurchaseCount) {
+        if (purchaseAmount < manualPurchaseCount * LOTTO_PRICE) {
+            throw new LottoRuntimeException(INVALID_MANUAL_LOTTO_COUNT_MESSAGE);
+        }
+    }
+
+    public static PurchaseLotto inputManualPurchaseLotto(LottoCount lottoCount) {
+
+        Long manualLottoCount = lottoCount.getManualLottoCount();
+        Long autoLottoCount = lottoCount.getAutoLottoCount();
+
+        if (manualLottoCount > 0L) {
+            System.out.println(INPUT_MANUAL_PURCHASE_LOTTO_MESSAGE);
+        }
+
+        List<Lotto> purchaseLotto = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            Lotto lotto = inputLotto();
+            purchaseLotto.add(lotto);
+        }
+
+        for (int i = 0; i < autoLottoCount; i++) {
+            Lotto lotto = new Lotto(new LottoNumbers());
+            purchaseLotto.add(lotto);
+        }
+
+        return new PurchaseLotto(purchaseLotto);
+    }
+
+    public static Lotto inputLotto() {
+
+        try {
+            String inputManualPurchaseLotto = scanner.nextLine();
+            List<LottoNumber> manualPurchaseLottoNumbers = Arrays.stream(StringUtils.split(inputManualPurchaseLotto, PURCHASE_LOTTO_VIEW_MIDDLE))
+                    .map(i -> new LottoNumber(Integer.parseInt(i)))
+                    .collect(Collectors.toList());
+
+            return new Lotto(new LottoNumbers(manualPurchaseLottoNumbers));
+
+        } catch (NumberFormatException e) {
+            System.out.println(ERROR + INVALID_WINNING_LOTTO_NUMBER_MESSAGE);
+            return inputLotto();
+        } catch (LottoRuntimeException e) {
+            System.out.println(ERROR + e.getMessage());
+            return inputLotto();
+        }
+    }
+
     public static void printLottoCountResult(LottoCount lottoCount) {
-        System.out.println(lottoCount + PURCHASE_LOTTO_COUNT_MESSAGE);
+        System.out.println(String.format(PURCHASE_PREFIX_MESSAGE, lottoCount.getManualLottoCount(), lottoCount.getAutoLottoCount()));
     }
 
     public static void printAutoLottoResult(PurchaseLotto purchaseLotto) {
@@ -114,7 +186,9 @@ public class LottoDisplay {
         System.out.println(WINNING_STAT_MESSAGE);
         System.out.println(DIVIDE_MESSAGE);
         for (MatchCount matchCount : matchCountCollection) {
-            System.out.println(matchCount);
+            System.out.print(matchCount.getLottoWinningPrice());
+            System.out.print(matchCount);
+            System.out.println(MATCH_COUNT_POSTFIX_MESSAGE);
         }
     }
 

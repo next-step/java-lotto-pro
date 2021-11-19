@@ -5,10 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static nextstep.lotto.constance.LottoDisplayMessage.MATCH_COUNT_MIDDLE_MESSAGE;
-import static nextstep.lotto.constance.LottoDisplayMessage.MATCH_COUNT_POSTFIX_MESSAGE;
-import static nextstep.lotto.constance.LottoDisplayMessage.MATCH_COUNT_PREFIX_MESSAGE;
-
 public class MatchCount implements Comparable<MatchCount> {
 
     private final LottoWinningPrice lottoWinningPrice;
@@ -44,19 +40,22 @@ public class MatchCount implements Comparable<MatchCount> {
         }
     }
 
+    public LottoWinningPrice getLottoWinningPrice() {
+        return lottoWinningPrice;
+    }
+
+    public Integer getMatchCount() {
+        return matchCount;
+    }
+
     @Override
     public int compareTo(MatchCount that) {
-        return this.lottoWinningPrice.matchCount - that.lottoWinningPrice.matchCount;
+        return Long.compare(this.lottoWinningPrice.price, that.lottoWinningPrice.price);
     }
 
     @Override
     public String toString() {
-        return lottoWinningPrice.matchCount +
-                MATCH_COUNT_PREFIX_MESSAGE +
-                lottoWinningPrice.price +
-                MATCH_COUNT_MIDDLE_MESSAGE +
-                matchCount +
-                MATCH_COUNT_POSTFIX_MESSAGE;
+        return Integer.toString(matchCount);
     }
 
     @Override
@@ -74,25 +73,66 @@ public class MatchCount implements Comparable<MatchCount> {
 
     enum LottoWinningPrice {
 
-        MATCH_3_COUNT(3, 5000L),
-        MATCH_4_COUNT(4, 50_000L),
-        MATCH_5_COUNT(5, 1_500_000L),
-        MATCH_6_COUNT(6, 2_000_000_000L),
-        NONE(Integer.MIN_VALUE, Long.MIN_VALUE);
+        MATCH_3_COUNT(3, 5000L, "3개 일치 (5000원)- ") {
+            @Override
+            public Integer processMatchCount(Integer matchCount, Boolean bonusBallContains) {
+                return bonusBallContains ? matchCount + 1 : matchCount;
+            }
+        },
+        MATCH_4_COUNT(4, 50_000L, "4개 일치 (50000원)- ") {
+            @Override
+            public Integer processMatchCount(Integer matchCount, Boolean bonusBallContains) {
+                return bonusBallContains ? matchCount + 1 : matchCount;
+            }
+        },
+        MATCH_5_COUNT(5, 1_500_000L, "5개 일치 (1500000원)- ") {
+            @Override
+            public Integer processMatchCount(Integer matchCount, Boolean bonusBallContains) {
+                return bonusBallContains ? matchCount + 1 : matchCount;
+            }
+        },
+        MATCH_5_BONUS_COUNT(5, 30_000_000L, "5개 일치, 보너스 볼 일치(30000000원)- ") {
+            @Override
+            public Integer processMatchCount(Integer matchCount, Boolean bonusBallContains) {
+                return matchCount;
+            }
+        },
+        MATCH_6_COUNT(6, 2_000_000_000L, "6개 일치 (2000000000원)- ") {
+            @Override
+            public Integer processMatchCount(Integer matchCount, Boolean bonusBallContains) {
+                return matchCount;
+            }
+        },
+        NONE(Integer.MIN_VALUE, Long.MIN_VALUE, "NONE") {
+            @Override
+            public Integer processMatchCount(Integer matchCount, Boolean bonusBallContains) {
+                return Integer.MIN_VALUE;
+            }
+        };
 
         private final Integer matchCount;
         private final Long price;
+        private final String description;
 
-        LottoWinningPrice(Integer matchCount, Long price) {
+        LottoWinningPrice(Integer matchCount, Long price, String description) {
             this.matchCount = matchCount;
             this.price = price;
+            this.description = description;
         }
 
-        public static LottoWinningPrice winningPrice(Integer matchCount) {
+        public static LottoWinningPrice winningPrice(Integer matchCount, Boolean bonusBallContains) {
+
             return Arrays.stream(LottoWinningPrice.values())
-                    .filter(i -> i.matchCount.equals(matchCount))
+                    .filter(i -> i.processMatchCount(matchCount, bonusBallContains).equals(i.matchCount))
                     .findFirst()
                     .orElse(NONE);
+        }
+
+        public abstract Integer processMatchCount(Integer matchCount, Boolean bonusBallContains);
+
+        @Override
+        public String toString() {
+            return description;
         }
     }
 }
