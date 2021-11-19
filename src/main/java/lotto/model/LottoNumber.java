@@ -19,7 +19,7 @@ public class LottoNumber {
 
   private void checkLottoNumberRange(int lottoNumber) {
     if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
-      throw new NumberOutOfRangeException(ErrorMessage.NUMBER_OUT_OF_RANGE_ERROR);
+      throw new NumberOutOfRangeException(ErrorMessage.NUMBER_OUT_OF_RANGE_ERROR_MESSAGE);
     }
   }
 

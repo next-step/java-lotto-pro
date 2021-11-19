@@ -3,6 +3,7 @@ package lotto.generator;
 import lotto.constants.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
+import lotto.model.LottoQuantity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,14 +15,23 @@ public class AutoLottoGenerator implements LottoGenerator {
   private static final int ZERO = 0;
 
   @Override
-  public LottoNumbers generate() {
+  public List<LottoNumbers> generate(LottoQuantity lottoQuantity) {
+    List<LottoNumbers> lottoNumbers = new ArrayList<>();
+
+    for (int i = 0; i < lottoQuantity.getLottoQuantity(); i++) {
+      lottoNumbers.add(makeLottoNumbers());
+    }
+
+    return lottoNumbers;
+  }
+
+  private LottoNumbers makeLottoNumbers() {
     List<LottoNumber> lottoNumberCandidates = getLottoNumberCandidates();
     Collections.shuffle(lottoNumberCandidates);
 
     LottoNumbers lottoNumbers = new LottoNumbers(peakLottoNumbers(lottoNumberCandidates));
 
     lottoNumbers.sort();
-
     return lottoNumbers;
   }
 

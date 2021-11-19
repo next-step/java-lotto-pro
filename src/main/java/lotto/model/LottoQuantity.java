@@ -1,26 +1,29 @@
 package lotto.model;
 
+import lotto.constants.ErrorMessage;
+import lotto.exception.InvalidInputException;
 import lotto.generator.LottoGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static lotto.constants.ErrorMessage.*;
+
 public class LottoQuantity {
+  private static final int MIN_LOTTO_QUANTITY = 1;
   private final int lottoQuantity;
 
   public LottoQuantity(int lottoQuantity) {
+    checkLottoQuantity(lottoQuantity);
+
     this.lottoQuantity = lottoQuantity;
   }
 
-  public List<LottoNumbers> makeLottoNumbersAsQuantity(LottoGenerator lottoGenerator) {
-    List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-
-    for (int i = 0; i < lottoQuantity; i++) {
-      lottoNumbersList.add(lottoGenerator.generate());
+  private void checkLottoQuantity(int lottoQuantity) {
+    if (lottoQuantity < MIN_LOTTO_QUANTITY) {
+      throw new InvalidInputException(LOTTO_QUANTITY_LOWER_ERROR_MESSAGE);
     }
-
-    return lottoNumbersList;
   }
 
   public int getLottoQuantity() {

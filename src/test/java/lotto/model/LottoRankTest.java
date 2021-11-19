@@ -8,12 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoRankTest {
-  @DisplayName("최소 반환할 로또 등수를 반환한다.")
-  @Test
-  void 최소_로또_등수() {
-    assertThat(LottoRank.getMinWinningRank()).isEqualTo(LottoRank.FIFTH);
-  }
-
   @DisplayName("일치 정보를 입력 받아 해당되는 랭킹을 반환")
   @Test
   void 로또_랭킹_생성() {

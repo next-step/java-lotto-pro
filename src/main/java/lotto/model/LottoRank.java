@@ -18,8 +18,8 @@ public enum LottoRank {
     this.reward = reward;
   }
 
-  public static LottoRank getMinWinningRank() {
-    return FIFTH;
+  public long calculateReward(RankCount rankCount) {
+    return (long) matchCount * rankCount.getRankCount();
   }
 
   public static LottoRank valueOf(int matchCount, boolean matchBonus) {
@@ -39,5 +39,4 @@ public enum LottoRank {
   public int getReward() {
     return reward;
   }
-
 }

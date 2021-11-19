@@ -28,7 +28,7 @@ public class LottoNumberTest {
 
     assertThat(thrown)
       .isInstanceOf(NumberOutOfRangeException.class)
-      .hasMessage(ErrorMessage.NUMBER_OUT_OF_RANGE_ERROR);
+      .hasMessage(ErrorMessage.NUMBER_OUT_OF_RANGE_ERROR_MESSAGE);
   }
 
 }

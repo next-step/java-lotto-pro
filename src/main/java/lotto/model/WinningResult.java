@@ -16,7 +16,7 @@ public class WinningResult {
     Map<LottoRank, RankCount> winningResult = new EnumMap<>(LottoRank.class);
 
     for (LottoRank lottoRank : LottoRank.values()) {
-      winningResult.put(lottoRank, new RankCount(ZERO));
+      winningResult.put(lottoRank, RankCount.ZERO);
     }
 
     return new WinningResult(winningResult);
@@ -33,8 +33,12 @@ public class WinningResult {
   public double calculateYield(PurchaseAmount purchaseAmount) {
     return winningResult.keySet()
       .stream()
-      .mapToLong(key -> (long) key.getReward() * winningResult.get(key).getRankCount())
+      .mapToLong(this::calculateRewardOfRank)
       .sum() / (double) purchaseAmount.getPurchaseAmount();
+  }
+
+  private long calculateRewardOfRank(LottoRank rank) {
+    return rank.calculateReward(winningResult.get(rank));
   }
 
 }

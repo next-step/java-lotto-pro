@@ -57,6 +57,8 @@ public class OutputView {
     Collections.reverse(lottoRanks);
 
     for (LottoRank lottoRank : lottoRanks) {
+      if (lottoRank.equals(LottoRank.MISS)) continue;
+
       String message = MATCH_RESULT_MESSAGE;
       message = getSecondRankMessage(lottoRank, message);
 
