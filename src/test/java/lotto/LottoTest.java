@@ -108,12 +108,15 @@ public class LottoTest {
         lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 44, 45, 6)));
         lottoList.add(new Lotto(Arrays.asList(1, 2, 43, 44, 45, 6)));
         lottoList.add(new Lotto(Arrays.asList(1, 42, 43, 44, 45, 6)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
         Lottos lottos = new Lottos(lottoList);
         Lotto winningLotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        WinningStats winningStats = new WinningStats(lottos, winningLotto);
+        BonusNumber bonusNumber = new BonusNumber(7, winningLotto);
+        WinningStats winningStats = new WinningStats(lottos, winningLotto, bonusNumber);
 
         Map<WinningEnum, Integer> winningStatsMap = winningStats.getWinningStats();
         assertThat(winningStatsMap.get(WinningEnum.FIRST)).isEqualTo(1);
+        assertThat(winningStatsMap.get(WinningEnum.SECOND)).isEqualTo(1);
         assertThat(winningStatsMap.get(WinningEnum.THIRD)).isEqualTo(1);
         assertThat(winningStatsMap.get(WinningEnum.FOURTH)).isEqualTo(2);
         assertThat(winningStatsMap.get(WinningEnum.FIFTH)).isEqualTo(1);
@@ -127,7 +130,8 @@ public class LottoTest {
         lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 43, 44, 45)));
         Lottos lottos = new Lottos(lottoList);
         Lotto winningLotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        WinningStats winningStats = new WinningStats(lottos, winningLotto);
+        BonusNumber bonusNumber = new BonusNumber(7, winningLotto);
+        WinningStats winningStats = new WinningStats(lottos, winningLotto, bonusNumber);
         ProfitRate profitRate = price.getProfitRate(winningStats);
 
         assertThat(profitRate.getProfitRate()).isEqualTo(0.35);

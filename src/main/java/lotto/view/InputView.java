@@ -22,11 +22,15 @@ public class InputView {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
     }
 
+    public void printBonusNumberMessage() {
+        System.out.println("\n보너스 볼을 입력해 주세요.");
+    }
+
     public void printErrorMessage() {
         System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
     }
 
-    public int inputPrice() {
+    public int inputNumber() {
         return getNumber(sc.nextLine());
     }
 

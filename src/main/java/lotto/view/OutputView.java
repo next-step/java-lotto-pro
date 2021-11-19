@@ -23,6 +23,7 @@ public class OutputView {
                         String.format("%d개 일치 (%d원)- %d개\n", WinningEnum.FIFTH.getMatched(), WinningEnum.FIFTH.getPrize(), winningStats.getWinningStats().get(WinningEnum.FIFTH)) +
                         String.format("%d개 일치 (%d원)- %d개\n", WinningEnum.FOURTH.getMatched(), WinningEnum.FOURTH.getPrize(), winningStats.getWinningStats().get(WinningEnum.FOURTH)) +
                         String.format("%d개 일치 (%d원)- %d개\n", WinningEnum.THIRD.getMatched(), WinningEnum.THIRD.getPrize(), winningStats.getWinningStats().get(WinningEnum.THIRD)) +
+                        String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", WinningEnum.SECOND.getMatched(), WinningEnum.SECOND.getPrize(), winningStats.getWinningStats().get(WinningEnum.SECOND)) +
                         String.format("%d개 일치 (%d원)- %d개\n", WinningEnum.FIRST.getMatched(), WinningEnum.FIRST.getPrize(), winningStats.getWinningStats().get(WinningEnum.FIRST)));
     }
 
