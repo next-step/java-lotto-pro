@@ -1,4 +1,4 @@
-package lotto.constants;
+package lotto.model;
 
 import java.util.Arrays;
 
@@ -39,4 +39,5 @@ public enum LottoRank {
   public int getReward() {
     return reward;
   }
+
 }

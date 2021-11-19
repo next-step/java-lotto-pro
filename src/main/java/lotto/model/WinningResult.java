@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.constants.LottoRank;
-
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -38,4 +36,5 @@ public class WinningResult {
       .mapToLong(key -> (long) key.getReward() * winningResult.get(key).getRankCount())
       .sum() / (double) purchaseAmount.getPurchaseAmount();
   }
+
 }

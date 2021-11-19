@@ -14,4 +14,5 @@ public class ErrorMessage {
     ERROR_PREFIX + "로또 숫자를 중복되어 입력할 수 없습니다.";
   public static final String NUMBER_OUT_OF_RANGE_ERROR =
     ERROR_PREFIX + "유효한 범위 밖의 숫자 입니다.";
+
 }

@@ -19,5 +19,4 @@ public class LottoTicketTest {
     assertThat(lottoTicket.getLottoNumbers().size()).isEqualTo(4);
   }
 
-
 }

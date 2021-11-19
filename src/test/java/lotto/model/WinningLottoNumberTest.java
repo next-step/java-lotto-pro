@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.constants.LottoRank;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -42,4 +41,5 @@ public class WinningLottoNumberTest {
 
     assertThat(lottoRank).isEqualTo(LottoRank.FOURTH);
   }
+
 }

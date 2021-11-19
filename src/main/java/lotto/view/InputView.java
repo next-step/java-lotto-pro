@@ -14,7 +14,7 @@ import static lotto.view.OutputView.*;
 
 public class InputView {
   private static final String SPLIT_DELIMITER = ",";
-  private static final Pattern numberPattern = Pattern.compile("\\d+");
+  private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
   private static final Scanner SCANNER = new Scanner(System.in);
 
   public PurchaseAmount inputPurchaseAmount() {
@@ -99,7 +99,7 @@ public class InputView {
   }
 
   private void checkStringIsNumber(String string) {
-    if (!numberPattern.matcher(string).matches()) {
+    if (!NUMBER_PATTERN.matcher(string).matches()) {
       throw new NumberFormatException();
     }
   }
@@ -109,4 +109,5 @@ public class InputView {
       throw new IllegalArgumentException();
     }
   }
+
 }

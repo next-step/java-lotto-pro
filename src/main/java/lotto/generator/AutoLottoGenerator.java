@@ -37,4 +37,5 @@ public class AutoLottoGenerator implements LottoGenerator {
 
     return lottoNumbers;
   }
+
 }

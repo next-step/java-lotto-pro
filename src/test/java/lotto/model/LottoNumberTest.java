@@ -30,4 +30,5 @@ public class LottoNumberTest {
       .isInstanceOf(NumberOutOfRangeException.class)
       .hasMessage(ErrorMessage.NUMBER_OUT_OF_RANGE_ERROR);
   }
+
 }

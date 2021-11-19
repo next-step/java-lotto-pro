@@ -11,4 +11,5 @@ public class LottoQuantityTest {
 
     assertThat(lottoQuantity.getLottoQuantity()).isEqualTo(14);
   }
+
 }

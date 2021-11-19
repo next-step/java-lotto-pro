@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.constants.LottoRank;
-
 public class WinningLottoNumbers {
   private final LottoNumbers winningLottoNumbers;
   private final LottoNumber bonusNumber;
@@ -25,4 +23,5 @@ public class WinningLottoNumbers {
   public LottoNumber getBonusNumber() {
     return bonusNumber;
   }
+
 }

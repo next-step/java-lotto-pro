@@ -27,4 +27,5 @@ public class LottoController {
   private static AutoLottoGenerator getAutoLottoGenerator() {
     return new AutoLottoGenerator();
   }
+
 }

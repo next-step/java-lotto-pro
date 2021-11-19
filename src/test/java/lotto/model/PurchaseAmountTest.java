@@ -18,4 +18,5 @@ public class PurchaseAmountTest {
 
     assertThat(purchaseAmount.countOfPurchaseLotto()).isEqualTo(new LottoQuantity(14));
   }
+
 }

@@ -34,4 +34,5 @@ public class RankCount {
   public int hashCode() {
     return Objects.hash(rankCount);
   }
+
 }

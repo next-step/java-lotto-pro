@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.constants.LottoRank;
+import lotto.model.LottoRank;
 import lotto.model.LottoQuantity;
 import lotto.model.LottoTicket;
 import lotto.model.RankCount;
@@ -76,4 +76,5 @@ public class OutputView {
     System.out.printf(YIELD_MESSAGE, yield);
     System.out.println();
   }
+
 }

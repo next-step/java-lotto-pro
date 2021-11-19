@@ -1,5 +1,6 @@
-package lotto.constants;
+package lotto.model;
 
+import lotto.model.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,4 +30,5 @@ public class LottoRankTest {
       () -> assertThat(LottoRank.valueOf(4, true)).isEqualTo(LottoRank.FOURTH)
     );
   }
+
 }

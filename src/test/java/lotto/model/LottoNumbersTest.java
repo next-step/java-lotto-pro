@@ -66,4 +66,5 @@ public class LottoNumbersTest {
       .mapToObj(LottoNumber::new)
       .collect(Collectors.toList());
   }
+
 }

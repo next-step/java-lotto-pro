@@ -36,4 +36,5 @@ public class LottoTicket {
 
     return sb.toString();
   }
+
 }
