@@ -18,5 +18,9 @@ public class ErrorMessage {
     ERROR_PREFIX + "로또 숫자를 중복되어 입력할 수 없습니다.";
   public static final String NUMBER_OUT_OF_RANGE_ERROR_MESSAGE =
     ERROR_PREFIX + "유효한 범위 밖의 숫자 입니다.";
+  public static final String MANUAL_LOTTO_QUANTITY_OVER_ERROR_MESSAGE =
+    ERROR_PREFIX + "수동 로또 수량이 총 수량보다 초과하였습니다.";
+  public static final String MANUAL_LOTTO_QUANTITY_LOWER_ERROR_MESSAGE =
+    ERROR_PREFIX + "수동 로또 수량을 -1 이하로 입력할 수 없습니다.";
 
 }

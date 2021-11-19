@@ -5,6 +5,7 @@ import lotto.model.LottoNumbers;
 import lotto.model.PurchaseAmount;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -79,7 +80,9 @@ public class InputView {
   private String[] getSplitedString(String input) {
     checkNullOrEmpty(input);
     checkSplitByComma(input);
-    return input.split(SPLIT_DELIMITER);
+
+    String[] splitedString = input.split(SPLIT_DELIMITER);
+    return Arrays.stream(splitedString).map(String::trim).toArray(String[]::new);
   }
 
   private void checkSplitedStringIsNumber(String[] splitedString) {
