@@ -6,33 +6,31 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
-	private final List<Integer> numbers;
+	private final List<LottoNumber> numbers;
 
-	public Lotto(List<Integer> numbers) {
+	public Lotto(List<LottoNumber> numbers) {
 		validate(numbers);
 		this.numbers = numbers;
 	}
 
-	private void validate(List<Integer> numbers) {
+	public Lotto(int... numbers) {
+		this(IntStream.of(numbers)
+			.mapToObj(LottoNumber::new)
+			.collect(Collectors.toList()));
+	}
+
+	private void validate(List<LottoNumber> numbers) {
 		if (numbers.size() != LOTTO_NUMBER_SIZE) {
 			throw new IllegalArgumentException("The number of lotto must be 6");
 		}
 
-		Set<Integer> numberSet = new HashSet<>(numbers);
+		Set<LottoNumber> numberSet = new HashSet<>(numbers);
 		if (numberSet.size() != LOTTO_NUMBER_SIZE) {
 			throw new IllegalArgumentException("Lotto number must be distinct");
-		}
-
-		for (Integer number : numbers) {
-			lottoNumberRangeValidate(number);
-		}
-	}
-
-	private void lottoNumberRangeValidate(Integer number) {
-		if (!(number >= LOTTO_START_NUMBER && number <= LOTTO_END_NUMBER)) {
-			throw new IllegalArgumentException("Lotto number must be between 1 and 45");
 		}
 	}
 
@@ -47,8 +45,8 @@ public class Lotto {
 	}
 
 	@Override
-	public String toString() {
-		return numbers.toString();
+	public int hashCode() {
+		return Objects.hash(numbers);
 	}
 
 	public int compareNumbers(Lotto lotto) {
@@ -57,7 +55,12 @@ public class Lotto {
 			.count();
 	}
 
-	public boolean contains(int number) {
+	public boolean contains(LottoNumber number) {
 		return numbers.contains(number);
+	}
+
+	@Override
+	public String toString() {
+		return numbers.toString();
 	}
 }

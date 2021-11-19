@@ -1,7 +1,9 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.StringJoiner;
 
 import lotto.constants.Rank;
@@ -21,6 +23,12 @@ public class Lottos {
 		return lottos.size();
 	}
 
+	public Lottos merge(Lottos lottos) {
+		List<Lotto> merged = new ArrayList<>(this.lottos);
+		merged.addAll(lottos.lottos);
+		return new Lottos(merged);
+	}
+
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
@@ -30,6 +38,21 @@ public class Lottos {
 		}
 
 		return joiner.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lottos lottos1 = (Lottos)o;
+		return Objects.equals(lottos, lottos1.lottos);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottos);
 	}
 
 	public Prize winPrize(WinLotto winLotto) {

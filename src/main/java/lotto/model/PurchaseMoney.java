@@ -16,11 +16,19 @@ public class PurchaseMoney {
 		this(Integer.parseInt(money));
 	}
 
-	public int getMoney() { // getter를 없앨 좋을 방법이 있을까요?
-		return money;
-	}
-
 	public int purchase() {
 		return money / LottoConstants.PRICE;
+	}
+
+	public int countAutoLottoSize(int numberOfManual) {
+		int numberOfLottos = purchase();
+		if (numberOfLottos < numberOfManual) {
+			throw new IllegalArgumentException("money is scarce.");
+		}
+		return numberOfLottos - numberOfManual;
+	}
+
+	public double divided(double winMoney) {
+		return winMoney / money;
 	}
 }

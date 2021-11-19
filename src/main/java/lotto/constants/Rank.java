@@ -40,4 +40,8 @@ public enum Rank {
 			.findFirst()
 			.orElse(MISS);
 	}
+
+	public Integer calculateWinningMoney(int count) {
+		return winningMoney * count;
+	}
 }
