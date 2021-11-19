@@ -12,6 +12,7 @@ public class PickedNumbers {
 
     private static final int NUMBER_NOT_CONTAINED = 0;
     private static final int NUMBER_CONTAINED = 1;
+    private static final String DELIMITER = ",";
 
     private final List<Number> pickedNumbers;
 
@@ -22,7 +23,7 @@ public class PickedNumbers {
     }
 
     public static PickedNumbers of(final String winningNumbers) {
-        return Arrays.stream(winningNumbers.split(","))
+        return Arrays.stream(winningNumbers.split(DELIMITER))
             .map(Number::new)
             .collect(Collectors.collectingAndThen(Collectors.toList(), PickedNumbers::new));
     }

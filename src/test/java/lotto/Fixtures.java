@@ -9,6 +9,11 @@ import lotto.domain.WinningNumbers;
 
 public class Fixtures {
 
+    public static final List<PickedNumbers> manuallyPickedNumbers = Arrays.asList(
+        Fixtures.createNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
+        Fixtures.createNumbers(Arrays.asList(40, 41, 42, 43, 44, 45))
+    );
+
     public static final PickedNumbers winningNumbersWithoutBonusNumber = Fixtures.createNumbers(
         Arrays.asList(1, 2, 3, 4, 5, 6)
     );
