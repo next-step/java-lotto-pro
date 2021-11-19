@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import lotto.exception.LottoErrorCode;
@@ -10,22 +11,16 @@ import lotto.exception.LottoException;
 public class Ticket {
     public static final int SIZE = 6;
 
-    private final List<Ball> balls;
+    private final Set<Ball> balls;
 
     public Ticket(List<Integer> numbers) {
         checkValidSize(numbers);
-        checkNoDuplicate(numbers);
 
         this.balls = numbers.stream()
-            .map(Ball::new)
-            .sorted()
-            .collect(Collectors.toList());
-    }
+            .map(Ball::of)
+            .collect(Collectors.toSet());
 
-    private void checkNoDuplicate(List<Integer> numbers) {
-        if (SIZE != numbers.stream().distinct().count()) {
-            throw new LottoException(LottoErrorCode.INVALID_TICKET);
-        }
+        checkNoDuplicate();
     }
 
     private void checkValidSize(List<Integer> numbers) {
@@ -34,13 +29,19 @@ public class Ticket {
         }
     }
 
-    public List<Ball> getBalls() {
+    private void checkNoDuplicate() {
+        if (balls.size() != SIZE) {
+            throw new LottoException(LottoErrorCode.INVALID_TICKET);
+        }
+    }
+
+    public Set<Ball> getBalls() {
         return balls;
     }
 
     public Rank calculateRank(Ticket winnerTicket, boolean containsBonus) {
         int correctCount = (int)this.balls.stream()
-            .filter(number -> winnerTicket.balls.contains(number))
+            .filter(winnerTicket.balls::contains)
             .count();
 
         return Rank.valueOf(correctCount, containsBonus);

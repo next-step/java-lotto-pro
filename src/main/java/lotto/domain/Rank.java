@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -14,8 +15,8 @@ public enum Rank {
     FIRST(6, new Money(2_000_000_000));
 
     private static final Map<Integer, Rank> countToRank =
-        Arrays.stream(values())
-            .filter(rank -> rank != MISS && rank != SECOND)
+        winningValues().stream()
+            .filter(rank -> !rank.isSecond())
             .collect(Collectors.toMap(rank -> rank.correctCount, Function.identity()));
 
     private final int correctCount;
@@ -33,6 +34,16 @@ public enum Rank {
         }
 
         return rank;
+    }
+
+    public static List<Rank> winningValues() {
+        return Arrays.stream(values())
+            .filter(rank -> rank != MISS)
+            .collect(Collectors.toList());
+    }
+
+    public boolean isSecond() {
+        return this == SECOND;
     }
 
     public Money getMoney() {

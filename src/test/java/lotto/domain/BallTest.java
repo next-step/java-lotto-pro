@@ -9,12 +9,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 import lotto.exception.LottoException;
 
 public class BallTest {
-
-    @DisplayName("로또 숫자 생성 성공")
+    @DisplayName("로또 숫자 캐시 적용")
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
-    public void constructBall_success(int number) {
-        assertThat(new Ball(number)).isEqualTo(new Ball(number));
+    public void ballHasSameAddress(int number) {
+        assertThat(Ball.of(1)).isSameAs(Ball.of(1));
     }
 
     @DisplayName("로또 숫자 생성 에러")
@@ -22,7 +21,7 @@ public class BallTest {
     @ValueSource(ints = {0, 46, -1})
     public void throwsError_whenInvalidBall(int number) {
         assertThatExceptionOfType(LottoException.class)
-            .isThrownBy(() -> new Ball(number))
+            .isThrownBy(() -> Ball.of(number))
             .withMessage("1 ~ 45 사이의 숫자를 입력해주세요.");
     }
 }

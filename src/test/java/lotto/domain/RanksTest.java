@@ -28,6 +28,7 @@ public class RanksTest {
         Map<Rank, Long> rankCounts = new HashMap<>();
         rankCounts.put(Rank.FIFTH, 2L);
         rankCounts.put(Rank.MISS, 2L);
+
         assertThat(ranks.makeStatistics()).isEqualTo(
             new Statistics(rankCounts, new EarningRate(BigDecimal.valueOf(2.5))));
     }

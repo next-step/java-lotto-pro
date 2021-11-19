@@ -1,87 +1,100 @@
 package lotto;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import lotto.domain.Count;
-import lotto.domain.Money;
 import lotto.domain.Ball;
+import lotto.domain.Money;
+import lotto.domain.Ranks;
 import lotto.domain.Ticket;
+import lotto.domain.TicketCount;
+import lotto.domain.TicketCounts;
 import lotto.domain.Tickets;
 import lotto.domain.WinnerBall;
-import lotto.exception.LottoErrorCode;
 import lotto.exception.LottoException;
 import lotto.factory.TicketFactory;
+import lotto.utils.Parser;
 import view.InputView;
-import view.ResultView;
+import view.OutputView;
 
 public class LottoMachine {
-    private static final String COMMA = ",";
-    private static final String ALL_SPACES_PATTERN = "\\s";
-    private static final String EMPTY = "";
-
     public void start() {
         Money money = getMoney();
+        TicketCount totalTicketCount = money.calculateCount();
 
-        Count count = money.calculateCount();
-        ResultView.printNumberOfPurchasedLotto(count.getCount());
+        Tickets tickets = getTickets(totalTicketCount);
+        OutputView.printTickets(tickets);
 
-        Tickets tickets = TicketFactory.createRandomTickets(count);
-        ResultView.printTickets(tickets);
-
+        OutputView.printAskWinnerTicket();
         Ticket winnerTicket = getTicket();
-        WinnerBall winnerBall = getWinnerTicket(winnerTicket);
+        WinnerBall winnerBall = getWinnerBall(winnerTicket);
 
-        ResultView.printWinningStatistics(winnerBall.calculateRank(tickets).makeStatistics());
+        Ranks ranks = winnerBall.calculateRank(tickets);
+        OutputView.printWinningStatistics(ranks.makeStatistics());
     }
 
     private Money getMoney() {
-        ResultView.printAskPurchaseAmount();
+        OutputView.printAskPurchaseAmount();
         try {
-            return new Money(InputView.readLine());
+            return Parser.parseMoney(InputView.readLine());
         } catch (LottoException lottoException) {
-            ResultView.printErrorMessage(lottoException);
+            OutputView.printErrorMessage(lottoException);
             return getMoney();
         }
     }
 
-    private Ticket getTicket() {
-        ResultView.printAskWinnerTicket();
-        try {
-            List<Integer> numbers = Arrays.stream(removeAllSpaces(InputView.readLine()).split(COMMA))
-                .map(this::parseInt)
-                .collect(Collectors.toList());
+    private Tickets getTickets(TicketCount totalTicketCount) {
+        TicketCounts ticketCounts = getTicketCounts(totalTicketCount);
+        Tickets manualTickets = getManualTickets(ticketCounts.getManualCount());
 
-            return new Ticket(numbers);
+        Tickets autoTickets = TicketFactory.createRandomTickets(ticketCounts.getAutoCount());
+        Tickets tickets = Tickets.combineTickets(manualTickets, autoTickets);
+        OutputView.printNumberOfPurchasedLotto(ticketCounts);
+
+        return tickets;
+    }
+
+    private TicketCounts getTicketCounts(TicketCount totalTicketCount) {
+        OutputView.printAskManualCount();
+        try {
+            TicketCount manualCount = Parser.parseCount(InputView.readLine());
+            return new TicketCounts(manualCount, totalTicketCount.minus(manualCount));
         } catch (LottoException lottoException) {
-            ResultView.printErrorMessage(lottoException);
+            OutputView.printErrorMessage(lottoException);
+            return getTicketCounts(totalTicketCount);
+        }
+    }
+
+    private Tickets getManualTickets(TicketCount manualTicketCount) {
+        OutputView.printAskManualTicket();
+        List<Ticket> tickets = new ArrayList<>();
+
+        for (int i = 0; manualTicketCount.isBiggerThan(i); i++) {
+            tickets.add(getTicket());
+        }
+
+        return new Tickets(tickets);
+    }
+
+    private Ticket getTicket() {
+        try {
+            return Parser.parseTicket(InputView.readLine());
+        } catch (LottoException lottoException) {
+            OutputView.printErrorMessage(lottoException);
             return getTicket();
         }
     }
 
-    private WinnerBall getWinnerTicket(Ticket ticket) {
-        ResultView.printAskBonusNumber();
+    private WinnerBall getWinnerBall(Ticket ticket) {
+        OutputView.printAskBonusNumber();
 
         try {
-            Ball ball = new Ball(parseInt(removeAllSpaces(InputView.readLine())));
+            Ball ball = Parser.parseBall(InputView.readLine());
             return new WinnerBall(ticket, ball);
         } catch (LottoException lottoException) {
-            ResultView.printErrorMessage(lottoException);
-            return getWinnerTicket(ticket);
+            OutputView.printErrorMessage(lottoException);
+            return getWinnerBall(ticket);
         }
 
-    }
-
-    private String removeAllSpaces(String numbers) {
-        return numbers.replaceAll(ALL_SPACES_PATTERN, EMPTY);
-    }
-
-    private int parseInt(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new LottoException(LottoErrorCode.INVALID_NUMBER);
-        }
     }
 }

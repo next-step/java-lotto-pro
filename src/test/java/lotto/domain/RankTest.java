@@ -1,10 +1,15 @@
 package lotto.domain;
 
+import static lotto.domain.Rank.*;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class RankTest {
 
@@ -16,4 +21,23 @@ class RankTest {
         assertThat(Rank.valueOf(cnt, containsBonus)).isEqualTo(Rank.valueOf(rankName));
     }
 
+    @DisplayName("상금이 있는 등수만 가져옴")
+    @Test
+    void winningValues() {
+        assertThat(Rank.winningValues())
+            .isEqualTo(Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST));
+    }
+
+    @DisplayName("2등인지 확인")
+    @Test
+    void isSecond_true() {
+        assertThat(SECOND.isSecond()).isEqualTo(true);
+    }
+
+    @DisplayName("2등이 아닌 경우 확인")
+    @ParameterizedTest
+    @ValueSource(strings = {"MISS", "FIFTH", "FOURTH", "THIRD", "FIRST"})
+    void isSecond_false(String rankName) {
+        assertThat(Rank.valueOf(rankName).isSecond()).isEqualTo(false);
+    }
 }
