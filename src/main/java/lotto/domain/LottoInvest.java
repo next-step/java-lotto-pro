@@ -9,10 +9,12 @@ import lotto.view.Machine;
 
 public class LottoInvest {
 	private List<LottoTicket> holdLottoTickets = new ArrayList<>();
+	private LottoTicket lastWinningTicket;
 
 	public LottoInvest() {
 		buyTickets();
 		showHoldings();
+		findLastWinningTicket();
 	}
 
 	private void buyTickets() {
@@ -24,5 +26,9 @@ public class LottoInvest {
 
 	private void showHoldings() {
 		Machine.showLottoTickets(this.holdLottoTickets);
+	}
+
+	private void findLastWinningTicket() {
+		this.lastWinningTicket = Customer.askLastWinningTicket();
 	}
 }

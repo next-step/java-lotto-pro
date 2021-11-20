@@ -13,4 +13,8 @@ public class CustomerConsole {
 			return ask(errorMessage);
 		}
 	}
+
+	protected static String withErrorPrefix(String errorMessage) {
+		return ERROR_PREFIX + errorMessage;
+	}
 }

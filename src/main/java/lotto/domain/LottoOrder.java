@@ -53,6 +53,8 @@ public class LottoOrder {
 			return validateOrderPrice(convertedPrice);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(MESSAGE_WRONG_ORDER_TYPE);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(MESSAGE_WRONG_MIN_ORDER);
 		}
 	}
 
