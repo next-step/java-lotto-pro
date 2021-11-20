@@ -55,6 +55,7 @@ public class PickedNumbersTest {
                     .map(Integer::parseInt)
                     .collect(Collectors.toList())
             );
-        assertThat(pickedNumbers.contains(Fixtures.winningNumbers, expected)).isTrue();
+        assertThat(pickedNumbers.count(Fixtures.winningNumbersWithoutBonusNumber)).isEqualTo(
+            expected);
     }
 }

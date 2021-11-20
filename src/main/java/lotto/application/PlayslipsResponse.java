@@ -9,9 +9,11 @@ public class PlayslipsResponse {
     private static final String NEWLINE = "\n";
 
     private final Playslips playslips;
+    private final int numberOfManuals;
 
-    public PlayslipsResponse(final Playslips playslips) {
+    public PlayslipsResponse(final Playslips playslips, final int numberOfManuals) {
         this.playslips = playslips;
+        this.numberOfManuals = numberOfManuals;
     }
 
     public Playslips getPlayslips() {
@@ -23,6 +25,11 @@ public class PlayslipsResponse {
             .stream()
             .map(Playslip::asString)
             .collect(Collectors.joining(NEWLINE));
-        return this.playslips.size() + "개를 구매했습니다." + NEWLINE + numbers + NEWLINE;
+        return "수동으로 "
+            + numberOfManuals
+            + "장, 자동으로 "
+            + (playslips.size() - numberOfManuals)
+            + " 개를 구매했습니다."
+            + NEWLINE + numbers + NEWLINE;
     }
 }

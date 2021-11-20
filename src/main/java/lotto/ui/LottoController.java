@@ -9,7 +9,11 @@ public class LottoController {
 
     public static void run() {
         final String purchaseAmount = InputView.askPurchaseAmount();
-        final PlayslipsResponse playslipsResponse = LottoPurchaseService.purchase(purchaseAmount);
+        final int numberOfManualPlayslips = getNumberOfManualPlayslips();
+        final PlayslipsResponse playslipsResponse = LottoPurchaseService.purchase(
+            purchaseAmount,
+            InputView.askEnterNumbers(numberOfManualPlayslips)
+        );
         ResultView.printPlayslips(playslipsResponse.asString());
 
         final String pastWinningNumbers = InputView.askPastWinningNumbers();
@@ -20,5 +24,15 @@ public class LottoController {
             bonusNumber
         );
         ResultView.printStats(resultResponse.asString());
+    }
+
+    private static int getNumberOfManualPlayslips() {
+        int numberOfManualPlayslips;
+        try {
+            numberOfManualPlayslips = Integer.parseInt(InputView.askNumberOfManuals());
+        } catch (NumberFormatException nfe) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수를 올바르게 입력해주세요.");
+        }
+        return numberOfManualPlayslips;
     }
 }

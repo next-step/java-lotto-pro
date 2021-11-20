@@ -12,6 +12,7 @@ public class PickedNumbers {
 
     private static final int NUMBER_NOT_CONTAINED = 0;
     private static final int NUMBER_CONTAINED = 1;
+    private static final String DELIMITER = ",";
 
     private final List<Number> pickedNumbers;
 
@@ -22,7 +23,7 @@ public class PickedNumbers {
     }
 
     public static PickedNumbers of(final String winningNumbers) {
-        return Arrays.stream(winningNumbers.split(","))
+        return Arrays.stream(winningNumbers.split(DELIMITER))
             .map(Number::new)
             .collect(Collectors.collectingAndThen(Collectors.toList(), PickedNumbers::new));
     }
@@ -43,16 +44,20 @@ public class PickedNumbers {
         return pickedNumbers.size();
     }
 
-    public boolean contains(PickedNumbers other, int x) {
+    public int count(final PickedNumbers other) {
         int numberOfMatchingNumbers = 0;
         for (int i = 0; i < pickedNumbers.size(); i++) {
-            numberOfMatchingNumbers += contains(other.pickedNumbers.get(i));
+            numberOfMatchingNumbers += countHelper(other.pickedNumbers.get(i));
         }
-        return numberOfMatchingNumbers == x;
+        return numberOfMatchingNumbers;
     }
 
-    public int contains(Number number) {
-        return pickedNumbers.contains(number) ? NUMBER_CONTAINED : NUMBER_NOT_CONTAINED;
+    private int countHelper(final Number number) {
+        return contains(number) ? NUMBER_CONTAINED : NUMBER_NOT_CONTAINED;
+    }
+
+    public boolean contains(final Number number) {
+        return pickedNumbers.contains(number);
     }
 
     public String asString() {
