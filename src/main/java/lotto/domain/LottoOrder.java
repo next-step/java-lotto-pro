@@ -2,30 +2,35 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import lotto.domain.wrapper.LottoTicket;
+
 public class LottoOrder {
-	public static final int LOTTO_PRICE = 1000;
+	public static final int DEFAULT_CHANGES = 0;
 	private static final String MESSAGE_WRONG_MIN_ORDER = "로또의 금액은 1,000원으로, 최소 1개 이상 구매하셔야합니다.";
 	private static final String MESSAGE_WRONG_ORDER_TYPE = "올바르지 않는 구매 요청입니다.";
-	private static final int EMPTY_BALANCE = 0;
 	private final int price;
 	private final int count;
-	private final int balance;
+	private final int changes;
 
-	private LottoOrder(int price, int count, int balance) {
+	private LottoOrder(int price, int count, int changes) {
 		this.price = price;
 		this.count = count;
-		this.balance = balance;
+		this.changes = changes;
 	}
 
 	public int getCount() {
 		return this.count;
 	}
 
+	public int getChanges() {
+		return this.changes;
+	}
+
 	public static LottoOrder byPrice(int orderPrice) {
-		int count = orderPrice / LOTTO_PRICE;
-		int price = count * LOTTO_PRICE;
-		int balance = orderPrice - price;
-		return new LottoOrder(price, count, balance);
+		int count = orderPrice / LottoTicket.PRICE;
+		int price = count * LottoTicket.PRICE;
+		int changes = orderPrice - price;
+		return new LottoOrder(price, count, changes);
 	}
 
 	public static LottoOrder byPrice(String orderPrice) {
@@ -33,9 +38,9 @@ public class LottoOrder {
 	}
 
 	public static LottoOrder byOrderCount(int orderCount) {
-		int price = orderCount * LOTTO_PRICE;
-		int balance = EMPTY_BALANCE;
-		return new LottoOrder(price, orderCount, balance);
+		int price = orderCount * LottoTicket.PRICE;
+		int changes = DEFAULT_CHANGES;
+		return new LottoOrder(price, orderCount, changes);
 	}
 
 	public static LottoOrder byOrderCount(String orderCount) {
@@ -52,7 +57,7 @@ public class LottoOrder {
 	}
 
 	private static int validateOrderPrice(int orderPrice) {
-		if (orderPrice < 1000) {
+		if (orderPrice < LottoTicket.PRICE) {
 			throw new IllegalArgumentException(MESSAGE_WRONG_MIN_ORDER);
 		}
 		return orderPrice;
