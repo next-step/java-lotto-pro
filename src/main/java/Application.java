@@ -1,7 +1,7 @@
-import lotto.domain.LottoInvest;
+import lotto.domain.LottoInvestment;
 
 public class Application {
 	public static void main(String[] args) {
-		LottoInvest lottoInvest = new LottoInvest();
+		LottoInvestment lottoInvestment = new LottoInvestment();
 	}
 }
