@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.wrapper.LottoOrder;
+import lotto.domain.LottoOrder;
 
 public class Customer extends CustomerConsole {
 	private static final String MESSAGE_WRITE_ORDER_PRICE = "구매금액을 입력해주세요.";

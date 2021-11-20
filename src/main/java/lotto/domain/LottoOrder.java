@@ -1,17 +1,20 @@
-package lotto.domain.wrapper;
+package lotto.domain;
 
 import java.util.Objects;
 
 public class LottoOrder {
+	public static final int LOTTO_PRICE = 1000;
 	private static final String MESSAGE_WRONG_MIN_ORDER = "로또의 금액은 1,000원으로, 최소 1개 이상 구매하셔야합니다.";
 	private static final String MESSAGE_WRONG_ORDER_TYPE = "올바르지 않는 구매 요청입니다.";
-	public static final int LOTTO_PRICE = 1000;
+	private static final int EMPTY_BALANCE = 0;
 	private final int price;
 	private final int count;
+	private final int balance;
 
-	private LottoOrder(int price, int count) {
+	private LottoOrder(int price, int count, int balance) {
 		this.price = price;
 		this.count = count;
+		this.balance = balance;
 	}
 
 	public int getCount() {
@@ -21,7 +24,8 @@ public class LottoOrder {
 	public static LottoOrder byPrice(int orderPrice) {
 		int count = orderPrice / LOTTO_PRICE;
 		int price = count * LOTTO_PRICE;
-		return new LottoOrder(price, count);
+		int balance = orderPrice - price;
+		return new LottoOrder(price, count, balance);
 	}
 
 	public static LottoOrder byPrice(String orderPrice) {
@@ -30,7 +34,8 @@ public class LottoOrder {
 
 	public static LottoOrder byOrderCount(int orderCount) {
 		int price = orderCount * LOTTO_PRICE;
-		return new LottoOrder(price, orderCount);
+		int balance = EMPTY_BALANCE;
+		return new LottoOrder(price, orderCount, balance);
 	}
 
 	public static LottoOrder byOrderCount(String orderCount) {
