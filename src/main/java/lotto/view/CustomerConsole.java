@@ -5,7 +5,7 @@ import utils.Console;
 public class CustomerConsole {
 	private static final String ERROR_PREFIX = "[ERROR] ";
 
-	public static String ask(String errorMessage) {
+	protected static String ask(String errorMessage) {
 		try {
 			return Console.read();
 		} catch (Exception e) {
