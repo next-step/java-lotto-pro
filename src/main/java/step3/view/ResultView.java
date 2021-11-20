@@ -33,8 +33,9 @@ public class ResultView {
     if (matchCaseEnum.getMatchCount() < PRINT_MATCH_COUNT_LIMIT) {
       return "";
     }
-    return String.format("%d개 일치 (%d원)- %d\n",
+    return String.format("%d개 일치 %s(%d원)- %d\n",
         matchCaseEnum.getMatchCount(),
+        matchCaseEnum == LottoMatchCaseEnum.SECOND?", 보너스 볼 일치":"",
         matchCaseEnum.getPrice(),
         lottoMatchResult.getMatchCountNum(matchCaseEnum));
   }
@@ -52,6 +53,10 @@ public class ResultView {
 
   public static void printWinningNumberRequest() {
     System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+  }
+
+  public static void printBonusNumberRequest() {
+    System.out.println("보너스 볼을 입력해 주세요.");
   }
 
   public static void printPurchasePriceRequest() {

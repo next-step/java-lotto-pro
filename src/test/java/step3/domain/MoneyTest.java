@@ -13,7 +13,7 @@ public class MoneyTest {
   @CsvSource(value = {"14000 : 14", "1000 : 1", "4300 : 4"}, delimiter = ':')
   @DisplayName("구입 금액에 따른 로또 티켓 갯수 테스트")
   void lottoTicketCountTest(Long purchasePrice, int ticketCount) {
-    Money money = new Money(purchasePrice);
+    LottoTicketPrice money = new LottoTicketPrice(new Money(purchasePrice));
     assertThat(money.getTicketCount()).isEqualTo(ticketCount);
   }
 

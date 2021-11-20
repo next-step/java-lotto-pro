@@ -25,6 +25,13 @@ public class InputView {
         .collect(Collectors.toList());
   }
 
+  public static LottoNumber getBonusNumberInput() {
+    ResultView.printBonusNumberRequest();
+    String bonusNumberInput = sc.nextLine();
+
+    return new LottoNumber(Integer.parseInt(bonusNumberInput));
+  }
+
   public static Long getPurchasePriceInput() {
     ResultView.printPurchasePriceRequest();
     return Long.parseLong(sc.nextLine());

@@ -1,23 +1,16 @@
 package step3.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoTicketTest {
-
-  private List<Integer> winningNumbers;
 
   private static Stream<Arguments> generateNumberList() {
     List<Arguments> listOfArguments = new LinkedList<>();
@@ -26,12 +19,6 @@ public class LottoTicketTest {
     listOfArguments
         .add(Arguments.of(Arrays.asList(-1, 3, 5, 7, 8, 10))); // 6 개 숫자 with invalid number
     return listOfArguments.stream();
-  }
-
-  @BeforeEach
-  void setUp() {
-    // 유효한 로또 숫자 목록 (당첨 번호)
-    winningNumbers = Arrays.asList(1, 2, 3, 4, 20, 45);
   }
 
   @Test
@@ -47,27 +34,5 @@ public class LottoTicketTest {
     LottoTicket lottoTicket = new LottoTicket();
     assertThat(lottoTicket.getNumbers().stream().distinct().count())
         .isEqualTo(LottoTicket.NUMBERS_COUNT);
-  }
-
-  @Test
-  @DisplayName("입력 받은 (당첨)번호가 유효한지 확인 _ 성공")
-  void checkWinningLottoNumbersValid() {
-    LottoTicket lottoTicket = new LottoTicket(winningNumbers.stream()
-        .map(LottoNumber::new)
-        .collect(Collectors.toList()));
-
-    assertThat(lottoTicket.getNumbers().size()).isEqualTo(LottoTicket.NUMBERS_COUNT);
-    assertThat(lottoTicket.getNumbers().stream().distinct().count())
-        .isEqualTo(LottoTicket.NUMBERS_COUNT);
-  }
-
-  @ParameterizedTest
-  @MethodSource("generateNumberList")
-  @DisplayName("입력 받은 (당첨)번호가 유효한지 확인 _ 실패")
-  void checkWinningLottoNumbersValid_Fail(List<Integer> inputWinningNumbers) {
-
-    assertThatThrownBy(() -> new LottoTicket(inputWinningNumbers.stream()
-        .map(LottoNumber::new)
-        .collect(Collectors.toList()))).isInstanceOf(RuntimeException.class);
   }
 }

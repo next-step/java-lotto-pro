@@ -33,7 +33,8 @@ public class LottoTicket {
   }
 
   public boolean contains(LottoNumber number) {
-    return this.numbers.stream()
+    return number != null &&
+        this.numbers.stream()
         .map(LottoNumber::getNumber)
         .collect(Collectors.toList())
         .contains(number.getNumber());
@@ -46,10 +47,10 @@ public class LottoTicket {
     return lottoNumbers;
   }
 
-  private void validate(List<LottoNumber> numbers) {
+  void validate(List<LottoNumber> numbers) {
     if (numbers == null || numbers.size() != NUMBERS_COUNT
         || numbers.stream().distinct().count() != NUMBERS_COUNT) {
-      throw new RuntimeException("[ERROR] not valid lotto numbers. numbers = " + numbers);
+      throw new IllegalArgumentException("[ERROR] not valid lotto numbers. numbers = " + numbers);
     }
   }
 }
