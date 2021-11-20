@@ -25,23 +25,31 @@ public class InputView {
 
   public LottoNumbers inputWinningLottoNumbers() {
     printInputWinningLottoNumbersGuideMessage();
-    return inputWinningLottoNumbersAndVerify();
+    return inputLottoNumbersAndVerify();
+  }
+
+  public int inputManualLottoQuantity() {
+    printInputManualLottoQuantityGuideMessage();
+    return inputNumberAndVerify();
+  }
+
+  public LottoNumbers inputManualLottoNumbers() {
+    return inputLottoNumbersAndVerify();
   }
 
   public LottoNumber inputBonusNumber() {
-    OutputView.printInputBonusNumberGuideMessage();
-
-    return inputBonusNumberAndVerify();
+    printInputBonusNumberGuideMessage();
+    return new LottoNumber(inputNumberAndVerify());
   }
 
-  private LottoNumber inputBonusNumberAndVerify() {
+  private int inputNumberAndVerify() {
     String input = SCANNER.nextLine();
     try {
       checkStringIsNumber(input);
-      return new LottoNumber(parseInt(input));
+      return parseInt(input);
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      return inputBonusNumberAndVerify();
+      return inputNumberAndVerify();
     }
   }
 
@@ -55,19 +63,19 @@ public class InputView {
     }
   }
 
-  private LottoNumbers inputWinningLottoNumbersAndVerify() {
+  private LottoNumbers inputLottoNumbersAndVerify() {
     String input = SCANNER.nextLine();
     try {
-      String[] splitedString = getSplitedString(input);
+      String[] splitedString = splitAndTrim(input);
       return makeLottoNumbers(splitedString);
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      return inputWinningLottoNumbersAndVerify();
+      return inputLottoNumbersAndVerify();
     }
   }
 
   private LottoNumbers makeLottoNumbers(String[] splitedString) {
-    checkSplitedStringIsNumber(splitedString);
+    checkElementsIsNumber(splitedString);
 
     List<LottoNumber> lottoNumbers = new ArrayList<>();
     for (String numberString : splitedString) {
@@ -77,15 +85,15 @@ public class InputView {
     return new LottoNumbers(lottoNumbers);
   }
 
-  private String[] getSplitedString(String input) {
+  private String[] splitAndTrim(String input) {
     checkNullOrEmpty(input);
     checkSplitByComma(input);
 
-    String[] splitedString = input.split(SPLIT_DELIMITER);
-    return Arrays.stream(splitedString).map(String::trim).toArray(String[]::new);
+    String[] strings = input.split(SPLIT_DELIMITER);
+    return Arrays.stream(strings).map(String::trim).toArray(String[]::new);
   }
 
-  private void checkSplitedStringIsNumber(String[] splitedString) {
+  private void checkElementsIsNumber(String[] splitedString) {
     for (String numberString : splitedString) {
       checkStringIsNumber(numberString);
     }

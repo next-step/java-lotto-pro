@@ -19,7 +19,7 @@ public enum LottoRank {
   }
 
   public long calculateReward(RankCount rankCount) {
-    return (long) matchCount * rankCount.getRankCount();
+    return (long) reward * rankCount.getRankCount();
   }
 
   public static LottoRank valueOf(int matchCount, boolean matchBonus) {

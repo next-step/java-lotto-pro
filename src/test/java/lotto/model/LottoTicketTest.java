@@ -12,8 +12,8 @@ public class LottoTicketTest {
   @Test
   void 로또_갯수_만큼_로또를_발급한다(){
     LottoGenerator lottoGenerator = new AutoLottoGenerator();
-    LottoQuantity lottoQuantity = new LottoQuantity(4);
-    List<LottoNumbers> lottoNumbersList = lottoGenerator.generate(lottoQuantity);
+    TotalLottoQuantity totalLottoQuantity = new TotalLottoQuantity(4);
+    List<LottoNumbers> lottoNumbersList = lottoGenerator.generate(totalLottoQuantity);
     LottoTicket lottoTicket = new LottoTicket(lottoNumbersList);
 
     assertThat(lottoTicket.getLottoNumbers().size()).isEqualTo(4);

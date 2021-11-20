@@ -1,6 +1,5 @@
 package lotto.generator;
 
-import lotto.constants.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoQuantity;
@@ -18,7 +17,7 @@ public class AutoLottoGenerator implements LottoGenerator {
   public List<LottoNumbers> generate(LottoQuantity lottoQuantity) {
     List<LottoNumbers> lottoNumbers = new ArrayList<>();
 
-    for (int i = 0; i < lottoQuantity.getLottoQuantity(); i++) {
+    for (int i = 0; i < lottoQuantity.getQuantity(); i++) {
       lottoNumbers.add(makeLottoNumbers());
     }
 

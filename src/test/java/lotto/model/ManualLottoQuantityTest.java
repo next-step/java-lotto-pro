@@ -14,9 +14,9 @@ public class ManualLottoQuantityTest {
   @Test
   void 수동_로또_수량과_전체_수량_간_예외_검증() {
     PurchaseAmount purchaseAmount = new PurchaseAmount(14000);
-    LottoQuantity lottoQuantity = purchaseAmount.countOfPurchaseLotto();
+    TotalLottoQuantity totalLottoQuantity = purchaseAmount.countOfPurchaseLotto();
 
-    assertThatThrownBy(() -> lottoQuantity.ofManualLottoQuantity(15))
+    assertThatThrownBy(() -> totalLottoQuantity.ofManualLottoQuantity(15))
       .isInstanceOf(InvalidInputException.class)
       .hasMessage(ErrorMessage.MANUAL_LOTTO_QUANTITY_OVER_ERROR_MESSAGE);
   }
