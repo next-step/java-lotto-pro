@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import model.Lotto;
@@ -77,7 +79,15 @@ public class LottoGame {
 
 	private Lottos buyLotto(LottoNumberChoiceStrategy lottoNumberChoiceStrategy,
 		LottoPurchaseCount lottoPurchaseCount) {
-		return new Lottos(lottoNumberChoiceStrategy, lottoPurchaseCount);
+		return new Lottos(chooseNumbers(lottoNumberChoiceStrategy, lottoPurchaseCount));
+	}
+
+	private List<List<Integer>> chooseNumbers(LottoNumberChoiceStrategy lottoNumberChoiceStrategy, LottoPurchaseCount lottoPurchaseCount) {
+		List<List<Integer>> lottosNumbers = new ArrayList<>();
+		for (int i = 0; i < lottoPurchaseCount.get(); ++i) {
+			lottosNumbers.add(lottoNumberChoiceStrategy.choose());
+		}
+		return lottosNumbers;
 	}
 
 	private LottoPurchaseCount requestPurchasingManualLottoCount(LottoPurchaseCount totalLottoPurchaseCount) {

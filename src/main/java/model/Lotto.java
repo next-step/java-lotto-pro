@@ -27,10 +27,6 @@ public class Lotto {
 		sortLottoNumbers(this.lottoNumbers);
 	}
 
-	public Lotto(LottoNumberChoiceStrategy lottoNumberChoiceStrategy) {
-		this(lottoNumberChoiceStrategy.choose());
-	}
-
 	public Lotto(String lottoNumbersString) {
 		this(parse(lottoNumbersString));
 	}

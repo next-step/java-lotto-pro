@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lottos {
-	private final List<Lotto> lottos;
+	private final List<Lotto> lottos = new ArrayList<>();
 
-	public Lottos(LottoNumberChoiceStrategy lottoNumberChoiceStrategy, LottoPurchaseCount lottoPurchaseCount) {
-		lottos = new ArrayList<>();
-		for (int i = 0; i < lottoPurchaseCount.get(); ++i) {
-			Lotto lotto = new Lotto(lottoNumberChoiceStrategy);
+	public Lottos(List<List<Integer>> nestedLottoNumbers) {
+		for (List<Integer> nestedLottoNumber : nestedLottoNumbers) {
+			Lotto lotto = new Lotto(nestedLottoNumber);
 			lottos.add(lotto);
 		}
 	}
