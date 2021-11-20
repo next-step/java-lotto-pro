@@ -19,7 +19,7 @@ public class PurchaseAmountTest {
   void 금액_만큼_구매한_로또_갯수_반환() {
     PurchaseAmount purchaseAmount = new PurchaseAmount(14000);
 
-    assertThat(purchaseAmount.countOfPurchaseLotto()).isEqualTo(new LottoQuantity(14));
+    assertThat(purchaseAmount.countOfPurchaseLotto()).isEqualTo(new TotalLottoQuantity(14));
   }
 
   @Test

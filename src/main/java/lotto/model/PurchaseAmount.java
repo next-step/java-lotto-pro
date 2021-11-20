@@ -19,8 +19,8 @@ public class PurchaseAmount {
     }
   }
 
-  public LottoQuantity countOfPurchaseLotto() {
-    return new LottoQuantity(purchaseAmount / Lotto.LOTTO_PRICE);
+  public TotalLottoQuantity countOfPurchaseLotto() {
+    return new TotalLottoQuantity(purchaseAmount / Lotto.LOTTO_PRICE);
   }
 
   public int getPurchaseAmount() {

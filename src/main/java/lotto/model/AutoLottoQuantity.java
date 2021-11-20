@@ -2,11 +2,16 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class AutoLottoQuantity {
+public class AutoLottoQuantity implements LottoQuantity {
   private final int autoLottoQuantity;
 
   public AutoLottoQuantity(int autoLottoQuantity) {
     this.autoLottoQuantity = autoLottoQuantity;
+  }
+
+  @Override
+  public int getQuantity() {
+    return autoLottoQuantity;
   }
 
   @Override
@@ -21,4 +26,10 @@ public class AutoLottoQuantity {
   public int hashCode() {
     return Objects.hash(autoLottoQuantity);
   }
+
+  @Override
+  public String toString() {
+    return String.valueOf(autoLottoQuantity);
+  }
+
 }
