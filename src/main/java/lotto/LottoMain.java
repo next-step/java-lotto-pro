@@ -18,8 +18,13 @@ public class LottoMain {
         final ConsoleInputView consoleInputView = new ConsoleInputView();
         final ConsoleOutputView consoleOutputView = new ConsoleOutputView();
 
-        final LottoGame lottoGame =
-            new LottoGame(lottoGeneratorable, lottoShuffleable, gameStatusManager, consoleInputView, consoleOutputView);
+        final LottoGame lottoGame = new LottoGame(
+            lottoGeneratorable,
+            lottoShuffleable,
+            gameStatusManager,
+            consoleInputView,
+            consoleOutputView
+        );
         lottoGame.start();
     }
 }
