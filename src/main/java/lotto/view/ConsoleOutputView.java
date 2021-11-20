@@ -1,0 +1,33 @@
+package lotto.view;
+
+import static java.text.MessageFormat.*;
+import lotto.domain.LottoTicket;
+import lotto.domain.Money;
+
+public class ConsoleOutputView {
+
+    public void print(final String message) {
+        System.out.println(message);
+    }
+
+    public void lineSeparator() {
+        System.out.println();
+    }
+
+    public void error(final Throwable cause) {
+        if (cause instanceof RuntimeException) {
+            print(cause.getMessage());
+            return;
+        }
+
+        print("오류가 발생했습니다.");
+    }
+
+    public void printMoney(final Money money) {
+        print(format("{0}개를 구매했습니다.", money.exchangeLottoPurchasableCount()));
+    }
+
+    public void printLottoTicket(final LottoTicket lottoTicket) {
+        print(lottoTicket.toString());
+    }
+}
