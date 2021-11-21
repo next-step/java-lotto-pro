@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class MoneyTest {
 	@DisplayName("금액 생성")
 	@Test
-	public void lottoNumberCountIsSix() {
+	public void createMoneyTest() {
 		double given = 5000;
 		Money money = new Money(given);
 		assertThat(money.get()).isEqualTo(given);
