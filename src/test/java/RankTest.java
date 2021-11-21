@@ -38,13 +38,19 @@ public class RankTest {
 	static Stream<Arguments> test_getByMatchingCount1_parameter() {
 		return Stream.of(
 			Arguments.of(6, Rank.FIRST, true),
+			Arguments.of(6, Rank.FIRST, false),
 			Arguments.of(5, Rank.SECOND, true),
 			Arguments.of(5, Rank.THIRD, false),
 			Arguments.of(4, Rank.FOURTH, true),
+			Arguments.of(4, Rank.FOURTH, false),
 			Arguments.of(3, Rank.FIFTH, true),
+			Arguments.of(3, Rank.FIFTH, false),
 			Arguments.of(2, Rank.NONE, true),
+			Arguments.of(2, Rank.NONE, false),
 			Arguments.of(1, Rank.NONE, true),
-			Arguments.of(0, Rank.NONE, true)
+			Arguments.of(1, Rank.NONE, false),
+			Arguments.of(0, Rank.NONE, true),
+			Arguments.of(0, Rank.NONE, false)
 		);
 	}
 }

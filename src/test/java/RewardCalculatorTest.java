@@ -3,6 +3,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -62,7 +63,7 @@ public class RewardCalculatorTest {
 		rewardCalculator.addCount(rank1);
 		rewardCalculator.addCount(rank2);
 
-		assertThat(rewardCalculator.sum()).isEqualTo(rank1.getReward() + rank2.getReward());
+		assertThat(rewardCalculator.sumReward()).isEqualTo(rank1.getReward() + rank2.getReward());
 	}
 
 	private static Stream<Arguments> test_sum1() {
@@ -73,5 +74,19 @@ public class RewardCalculatorTest {
 			Arguments.of(Rank.FIFTH, Rank.NONE),
 			Arguments.of(Rank.NONE, Rank.FIRST)
 		);
+	}
+
+	@Test
+	void test_두개의Calculator합() {
+		RewardCalculator rewardCalculator1 = new RewardCalculator();
+		rewardCalculator1.addCount(Rank.FIRST, 2);
+		RewardCalculator rewardCalculator2 = new RewardCalculator();
+		rewardCalculator2.addCount(Rank.SECOND, 2);
+
+		RewardCalculator rewardCalculatorResult = new RewardCalculator();
+		rewardCalculatorResult.addCount(Rank.FIRST, 2);
+		rewardCalculatorResult.addCount(Rank.SECOND, 2);
+
+		assertThat(rewardCalculator1.sum(rewardCalculator2)).isEqualTo(rewardCalculatorResult);
 	}
 }

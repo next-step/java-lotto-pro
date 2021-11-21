@@ -27,22 +27,16 @@ public class Lotto {
 		sortLottoNumbers(this.lottoNumbers);
 	}
 
-	public Lotto(LottoNumberChoiceStrategy lottoNumberChoiceStrategy) {
-		this(lottoNumberChoiceStrategy.choose());
-	}
-
 	public Lotto(String lottoNumbersString) {
 		this(parse(lottoNumbersString));
 	}
 
 	public Rank calcLottoResult(Lotto winningLotto, LottoNumber bonusNumber) {
 		LottoResult lottoResult = new LottoResult();
-		boolean isMatchBonusNumber = false;
 		for (LottoNumber winningLottoNumber : winningLotto.lottoNumbers) {
 			containWinningLottoNumber(winningLottoNumber, lottoResult);
-			isMatchBonusNumber = lottoNumbers.contains(bonusNumber);
 		}
-		return lottoResult.getRank(isMatchBonusNumber);
+		return lottoResult.getRank(lottoNumbers.contains(bonusNumber));
 	}
 
 	private void containWinningLottoNumber(LottoNumber winningLottoNumber, LottoResult lottoResult) {

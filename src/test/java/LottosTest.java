@@ -1,6 +1,8 @@
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -12,8 +14,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import model.Lotto;
 import model.LottoNumber;
-import model.LottoNumberChoiceRandom;
-import model.LottoPurchaseCount;
 import model.Lottos;
 import model.Rank;
 import model.RewardCalculator;
@@ -22,14 +22,12 @@ public class LottosTest {
 	@Test
 	@DisplayName("로또 숫자가 6개가 주어지지 않으면 예외")
 	void test_constructor1() {
-		assertThatThrownBy(() -> new Lottos(
-			new LottoNumberChoiceRandom() {
-				@Override
-				public List<Integer> choose() {
-					return Arrays.asList(1, 2);
-				}
-			}, new LottoPurchaseCount("1000")))
-			.isInstanceOf(IllegalArgumentException.class)
+		assertThatThrownBy(() ->
+			new Lottos(
+				Collections.singletonList(
+					Arrays.asList(1, 2)
+				)
+			)).isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(Lotto.MESSAGE_NOT_ALLOW_LENGTH);
 	}
 
@@ -38,13 +36,10 @@ public class LottosTest {
 	void test_constructor2() {
 		assertThatThrownBy(() ->
 			new Lottos(
-				new LottoNumberChoiceRandom() {
-					@Override
-					public List<Integer> choose() {
-						return Arrays.asList(1, 1, 3, 4, 5, 7);
-					}
-				}, new LottoPurchaseCount("1000")))
-			.isInstanceOf(IllegalArgumentException.class)
+				Collections.singletonList(
+					Arrays.asList(1, 1, 3, 4, 5, 7)
+				)
+			)).isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(Lotto.MESSAGE_NOT_ALLOW_DUPLICATION);
 	}
 
@@ -54,41 +49,30 @@ public class LottosTest {
 		assertThatNoException()
 			.isThrownBy(() -> {
 				new Lottos(
-					new LottoNumberChoiceRandom() {
-						@Override
-						public List<Integer> choose() {
-							return Arrays.asList(1, 2, 3, 4, 5, 6);
-						}
-					}, new LottoPurchaseCount("10000"));
+					Collections.singletonList(
+						Arrays.asList(1, 2, 3, 4, 5, 6)
+					)
+				);
 			});
 	}
 
 	@Test
-	@DisplayName("0원을 이용해 로또를 구매하려하면 예외")
+	@DisplayName("List<List<Integer>>를 이용해 Lottos 생성")
 	void test_constructor4() {
-		assertThatThrownBy(() -> {
-			new Lottos(
-				new LottoNumberChoiceRandom() {
-					@Override
-					public List<Integer> choose() {
-						return Arrays.asList(1, 2, 3, 4, 5, 6);
-					}
-				}, new LottoPurchaseCount("0"));
-		}).isInstanceOf(IllegalArgumentException.class)
-			.hasMessage(LottoPurchaseCount.MESSAGE_PRICE_MUST_BE_LARGER_THAN_ZERO);
+		List<List<Integer>> nestedLottoNumbers = new ArrayList<>();
+		List<Integer> lottoNumbers1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+		List<Integer> lottoNumbers2 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
+		nestedLottoNumbers.add(lottoNumbers1);
+		nestedLottoNumbers.add(lottoNumbers2);
+
+		assertThat(new Lottos(nestedLottoNumbers)).isEqualTo(new Lottos(nestedLottoNumbers));
 	}
 
 	@ParameterizedTest
 	@DisplayName("당첨 번호를 제공하면 해당하는 RewardCalculator 반환")
 	@MethodSource("test_calcReward1_parameter")
 	void test_calcReward1(List<Integer> userLotto, List<Integer> winningLotto, Rank expectedRank, int bonusNumber) {
-		Lottos lottos = new Lottos(
-			new LottoNumberChoiceRandom() {
-				@Override
-				public List<Integer> choose() {
-					return userLotto;
-				}
-			}, new LottoPurchaseCount("1000"));
+		Lottos lottos = new Lottos(Collections.singletonList(userLotto));
 		RewardCalculator rewardCalculator = lottos.calcReward(new Lotto(winningLotto), new LottoNumber(bonusNumber));
 		RewardCalculator expectedRewardCalculator = new RewardCalculator();
 		expectedRewardCalculator.addCount(expectedRank);
@@ -101,9 +85,11 @@ public class LottosTest {
 		int bonusNumberNotHit = 45;
 
 		return Stream.of(
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), Rank.FIRST, bonusNumberNotHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), Rank.FIRST,
+				bonusNumberNotHit),
 			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7), Rank.SECOND, bonusNumberHit),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7), Rank.THIRD, bonusNumberNotHit),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 7), Rank.THIRD,
+				bonusNumberNotHit),
 			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 7, 8), Rank.FOURTH, bonusNumberHit),
 			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 7, 8, 9), Rank.FIFTH, bonusNumberHit),
 			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 7, 8, 9, 10), Rank.NONE, bonusNumberHit),
@@ -116,14 +102,13 @@ public class LottosTest {
 	@DisplayName("원하는 형태의 문자열이 반환되는지 확인")
 	void test_toString() {
 		Lottos lottos = new Lottos(
-			new LottoNumberChoiceRandom() {
-				@Override
-				public List<Integer> choose() {
-					return Arrays.asList(1, 2, 3, 4, 5, 6);
-				}
-			}, new LottoPurchaseCount("2000"));
+			Arrays.asList(
+				Arrays.asList(1, 2, 3, 4, 5, 6),
+				Arrays.asList(1, 2, 3, 4, 5, 7)
+			)
+		);
 
 		assertThat(lottos.toString())
-			.matches("(\\[\\d+, \\d+, \\d+, \\d+, \\d+, \\d+]\\n)+");
+			.matches("(\\[\\d+, \\d+, \\d+, \\d+, \\d+, \\d+]\\n?)+");
 	}
 }

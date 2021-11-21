@@ -41,30 +41,38 @@
 ## 로또 (자동) 기능 요구사항
 * InputView 클래스
   * 금액 입력 요청 문구 출력
+  * 수동 구입 갯수 입력 요청 문구 출력
   * 당첨번호 입력 요청 문구 출력
   * 보너스볼 입력 요청 문구 출력
-  * 당첨번호 입력, 구입 금액 입력
+  * 당첨번호 입력
+  * 구입 금액 입력
+  * 수동 구입 갯수 입력
   * 보너스볼 입력
 
 * ResultView
   * 당첨 통계
 
 * LottoGame 클래스
-  * 번호 생성
+  * 수동 번호 생성
+  * 자동 번호 생성
 
 * LottoNumberChoiceStrategy 인터페이스
   * choose
     * RandomClass
+    * ManualClass
 
 * LottoNumber
   * 숫자 주입 생성자
   * 문자열 생성자
-  * 주입된 숫자 반환 
+  * 주입된 숫자 반환
 
+* LottoPurchasePrice
+  * 1000원 미만을 제공하면 예외
+  * LottoPurchaseCount로 변환
+  
 * LottoPurchaseCount
-  * 0원을 제공하면 예외 
+  * 0번을 제공하면 예외 
   * 로또 산 횟수 반환
-  * 처음에 소모한 비용 반환
   
 * Lotto
   * List<Integer> 주입 생성자
@@ -91,3 +99,4 @@
   * 무엇이 당첨되었는지 추가
   * 특정 등수가 당첨된 횟수 반환
   * 모든 등수의 상금과 횟수를 곱한 값을 반환
+  * 다른 RewardCalculator와 합친 결과인 새로운 RewardCalculator 반환

@@ -13,6 +13,13 @@ public class RewardCalculator {
 		this.rankMatchingCounts = new HashMap<>();
 	}
 
+	private RewardCalculator(Map<Rank, Integer> rankMatchingCounts) {
+		this();
+		for (Rank key : rankMatchingCounts.keySet()) {
+			addCount(key, rankMatchingCounts.get(key));
+		}
+	}
+
 	public void addCount(Rank rank) {
 		int rankCount = rankMatchingCounts.getOrDefault(rank, DEFAULT_COUNT);
 		rankMatchingCounts.put(rank, rankCount + 1);
@@ -22,12 +29,24 @@ public class RewardCalculator {
 		return rankMatchingCounts.getOrDefault(rank, DEFAULT_COUNT);
 	}
 
-	public int sum() {
-		int sum = 0;
+	public long sumReward() {
+		long sum = 0;
 		for (Rank rank : rankMatchingCounts.keySet()) {
-			sum += rankMatchingCounts.get(rank) * rank.getReward();
+			sum += (long)rankMatchingCounts.get(rank) * rank.getReward();
 		}
 		return sum;
+	}
+
+	public RewardCalculator sum(RewardCalculator other) {
+		RewardCalculator rewardCalculator = new RewardCalculator(this.rankMatchingCounts);
+		for (Rank key : other.rankMatchingCounts.keySet()) {
+			rewardCalculator.addCount(key, other.rankMatchingCounts.get(key));
+		}
+		return rewardCalculator;
+	}
+
+	public void addCount(Rank key, int value) {
+		rankMatchingCounts.put(key, value);
 	}
 
 	@Override

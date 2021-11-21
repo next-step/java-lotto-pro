@@ -1,16 +1,16 @@
 package view;
 
-import model.LottoPurchaseCount;
+import model.LottoPurchasePrice;
 import model.Rank;
 import model.RewardCalculator;
 
 public class ResultView {
-	public void showResult(LottoPurchaseCount lottoPurchaseCount, RewardCalculator rewardCalculator) {
-		System.out.println(getMessage(lottoPurchaseCount, rewardCalculator));
+	public static void showResult(LottoPurchasePrice lottoPurchasePrice, RewardCalculator rewardCalculator) {
+		System.out.println(getMessage(lottoPurchasePrice, rewardCalculator));
 	}
 
-	private String getMessage(LottoPurchaseCount lottoPurchaseCount, RewardCalculator rewardCalculator) {
-		float revenueRate = rewardCalculator.sum() / (float)lottoPurchaseCount.getTotalPrice();
+	private static String getMessage(LottoPurchasePrice lottoPurchasePrice, RewardCalculator rewardCalculator) {
+		float revenueRate = rewardCalculator.sumReward() / (float)lottoPurchasePrice.get();
 		return new StringBuilder()
 			.append("당첨 통계\n")
 			.append("---------\n")
