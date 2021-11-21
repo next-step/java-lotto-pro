@@ -10,29 +10,35 @@ import lotto.domain.wrapper.LottoWinningMoney;
 import lotto.domain.wrapper.Money;
 
 public class Machine {
+	private static final String MESSAGE_WINNING_INFO = "당첨 통계\n" + "---------";
+	private static final String MESSAGE_MATCHED_STATUS = "%d개 일치(%d)원 - %d개";
+	private static final String MESSAGE_LOTTO_TICKET_NUMBERS = "[%s]";
+	private static final String MESSAGE_TOTAL_PROFIT = "총 수익률은 %f입니다. 기준은 1입니다.";
+
 	public static void showLottoTickets(List<LottoTicket> tickets) {
 		tickets.stream()
-			.forEach(ticket -> System.out.println(
-				'['
-					+ ticket.getNumbers().stream()
+			.forEach(ticket -> System.out.println(String.format(MESSAGE_LOTTO_TICKET_NUMBERS
+				, ticket.getNumbers().stream()
 					.map(x -> x.toString())
-					.collect(joining(","))
-					+ ']'
+					.collect(joining(",")))
 				)
 			);
 	}
 
 	public static void showAnalysis(HitsByMatchedNumberCount hitsByMatchedNumberCount, Money investment,
 		Money winnings) {
-		System.out.println("당첨 통계\n" + "---------");
-		LottoWinningMoney.get().forEach((matchedNumberCount, money) -> {
-			System.out.println(matchedNumberCount + "개 일치(" + money + "원)- " +
-				hitsByMatchedNumberCount.getHitsByMatchedNumberCount(matchedNumberCount) + "개");
-		});
+		System.out.println(MESSAGE_WINNING_INFO);
+		LottoWinningMoney.get().forEach((matchedNumberCount, money) ->
+			System.out.println(
+				String.format(MESSAGE_MATCHED_STATUS
+					, matchedNumberCount
+					, money
+					, hitsByMatchedNumberCount.getHitsByMatchedNumberCount(matchedNumberCount)))
+		);
 
 		double profit = winnings.get() - investment.get();
 		double profitPercent = profit / investment.get();
 
-		System.out.println("총 수익률은 " + profitPercent + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+		System.out.println(String.format(MESSAGE_TOTAL_PROFIT, profitPercent));
 	}
 }
