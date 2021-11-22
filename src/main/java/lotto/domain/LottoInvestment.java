@@ -17,7 +17,7 @@ public class LottoInvestment {
 	public LottoInvestment() {
 		buyTickets(Customer.askOrder());
 		findLastWinningTicket(Customer.askLastWinningTicket());
-		analysis();
+		analysisProfit();
 	}
 
 	protected void buyTickets(LottoOrder order) {
@@ -45,7 +45,11 @@ public class LottoInvestment {
 		return new Money(winnings);
 	}
 
-	protected void analysis() {
+	protected double analysisProfit() {
+		if (holdLottoTickets.isEmpty() || lastWinningTicket == null) {
+			showBeforeInvestment();
+			return new Money().get();
+		}
 		Money investment = totalInvestment();
 		HitsByMatchedNumberCount hitsByMatchedNumberCount = new HitsByMatchedNumberCount();
 		for (LottoTicket ticket : holdLottoTickets) {
@@ -56,6 +60,7 @@ public class LottoInvestment {
 		}
 		Money winnings = totalWinnings(hitsByMatchedNumberCount);
 		showAnalysis(hitsByMatchedNumberCount, investment, winnings);
+		return winnings.get() - investment.get();
 	}
 
 	private void showAnalysis(HitsByMatchedNumberCount hitsByMatchedNumberCount, Money investment, Money winnings) {
@@ -64,5 +69,9 @@ public class LottoInvestment {
 
 	private void showHoldings() {
 		Machine.showLottoTickets(this.holdLottoTickets);
+	}
+
+	private void showBeforeInvestment() {
+		Machine.showBeforeInvestment();
 	}
 }
