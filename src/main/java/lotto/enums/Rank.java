@@ -59,13 +59,7 @@ public enum Rank {
             return new Money(ZERO);
         }
 
-        final Money accumulateReward = new Money(ZERO);
-
-        for (int count = 0; count < correctCount; count++) {
-            accumulateReward.earn(this.reward);
-        }
-
-        return accumulateReward;
+        return new Money(this.reward.get() * correctCount);
     }
 
     public String message(final int ranksCount) {
