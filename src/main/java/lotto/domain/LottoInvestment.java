@@ -15,32 +15,27 @@ public class LottoInvestment {
 	private LottoTicket lastWinningTicket;
 
 	public LottoInvestment() {
-		buyTickets();
-		findLastWinningTicket();
+		buyTickets(Customer.askOrder());
+		findLastWinningTicket(Customer.askLastWinningTicket());
 		analysis();
 	}
 
-	private void buyTickets() {
-		LottoOrder order = Customer.askOrder();
+	protected void buyTickets(LottoOrder order) {
 		for (int i = 0; i < order.getCount(); i++) {
 			this.holdLottoTickets.add(new LottoTicket());
 		}
 		showHoldings();
 	}
 
-	private void showHoldings() {
-		Machine.showLottoTickets(this.holdLottoTickets);
+	protected void findLastWinningTicket(LottoTicket lottoTicket) {
+		this.lastWinningTicket = lottoTicket;
 	}
 
-	private void findLastWinningTicket() {
-		this.lastWinningTicket = Customer.askLastWinningTicket();
-	}
-
-	private Money totalInvestment() {
+	protected Money totalInvestment() {
 		return new Money(holdLottoTickets.size() * LottoTicket.PRICE);
 	}
 
-	private Money totalWinnings(HitsByMatchedNumberCount hitsByMatchedNumberCount) {
+	protected Money totalWinnings(HitsByMatchedNumberCount hitsByMatchedNumberCount) {
 		int winnings = 0;
 		for (Integer matchedNumberCount : hitsByMatchedNumberCount.get().keySet()) {
 			winnings +=
@@ -50,7 +45,7 @@ public class LottoInvestment {
 		return new Money(winnings);
 	}
 
-	private void analysis() {
+	protected void analysis() {
 		Money investment = totalInvestment();
 		HitsByMatchedNumberCount hitsByMatchedNumberCount = new HitsByMatchedNumberCount();
 		for (LottoTicket ticket : holdLottoTickets) {
@@ -60,6 +55,14 @@ public class LottoInvestment {
 			hitsByMatchedNumberCount.hit(matchedNumberCount);
 		}
 		Money winnings = totalWinnings(hitsByMatchedNumberCount);
+		showAnalysis(hitsByMatchedNumberCount, investment, winnings);
+	}
+
+	private void showAnalysis(HitsByMatchedNumberCount hitsByMatchedNumberCount, Money investment, Money winnings) {
 		Machine.showAnalysis(hitsByMatchedNumberCount, investment, winnings);
+	}
+
+	private void showHoldings() {
+		Machine.showLottoTickets(this.holdLottoTickets);
 	}
 }
