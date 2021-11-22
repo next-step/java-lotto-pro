@@ -49,9 +49,9 @@ public class Lotto {
         return numbers;
     }
 
-    public WinningEnum getWinningResult(Lotto winningLotto, BonusNumber bonusNumber) {
+    public WinningEnum getWinningResult(Lotto winningLotto, LottoNumber bonusNumber) {
         int matched = getMatched(winningLotto.getNumbers());
-        int bonusNumberMatched = matched == WinningEnum.SECOND.getMatched() ? isContain(bonusNumber.getBonusNumber(), numbers) : 0;
+        int bonusNumberMatched = matched == WinningEnum.SECOND.getMatched() ? isContain(bonusNumber.getNumber(), numbers) : 0;
         return WinningEnum.findByMatched(matched, bonusNumberMatched);
     }
 

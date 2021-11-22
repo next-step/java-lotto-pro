@@ -22,7 +22,7 @@ public class LottoController {
         inputView.printWinningLottoMessage();
         Lotto winningLotto = getWinningLotto();
         inputView.printBonusNumberMessage();
-        BonusNumber bonusNumber = getBonusNumber(winningLotto);
+        LottoNumber bonusNumber = getBonusNumber(winningLotto);
         WinningStats winningStats = new WinningStats(lottos, winningLotto, bonusNumber);
         ProfitRate profitRate = price.getProfitRate(winningStats);
         outputView.printWinningStats(winningStats);
@@ -47,9 +47,9 @@ public class LottoController {
         }
     }
 
-    private BonusNumber getBonusNumber(Lotto winningLotto) {
+    private LottoNumber getBonusNumber(Lotto winningLotto) {
         try {
-            return new BonusNumber(inputView.inputNumber(), winningLotto);
+            return new LottoNumber(inputView.inputNumber(), winningLotto);
         } catch (Exception e) {
             inputView.printErrorMessage();
             return getBonusNumber(winningLotto);

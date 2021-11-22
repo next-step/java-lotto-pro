@@ -9,7 +9,7 @@ public class WinningStats {
 
     private final Map<WinningEnum, Integer> winningStats;
 
-    public WinningStats(Lottos lottos, Lotto winningLotto, BonusNumber bonusNumber) {
+    public WinningStats(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
         winningStats = new HashMap<>();
         winningStats.put(WinningEnum.FIRST, 0);
         winningStats.put(WinningEnum.SECOND, 0);

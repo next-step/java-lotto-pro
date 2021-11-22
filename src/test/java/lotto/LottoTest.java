@@ -111,7 +111,7 @@ public class LottoTest {
         lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
         Lottos lottos = new Lottos(lottoList);
         Lotto winningLotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        BonusNumber bonusNumber = new BonusNumber(7, winningLotto);
+        LottoNumber bonusNumber = new LottoNumber(7, winningLotto);
         WinningStats winningStats = new WinningStats(lottos, winningLotto, bonusNumber);
 
         Map<WinningEnum, Integer> winningStatsMap = winningStats.getWinningStats();
@@ -130,7 +130,7 @@ public class LottoTest {
         lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 43, 44, 45)));
         Lottos lottos = new Lottos(lottoList);
         Lotto winningLotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        BonusNumber bonusNumber = new BonusNumber(7, winningLotto);
+        LottoNumber bonusNumber = new LottoNumber(7, winningLotto);
         WinningStats winningStats = new WinningStats(lottos, winningLotto, bonusNumber);
         ProfitRate profitRate = price.getProfitRate(winningStats);
 
