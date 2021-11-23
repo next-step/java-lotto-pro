@@ -1,71 +1,55 @@
 package lotto.domain;
 
-import lotto.consts.ContainConst;
 import lotto.consts.LottoNumberConst;
-import lotto.consts.WinningEnum;
-import lotto.exception.WrongLottoSizeException;
+import lotto.exception.DuplicateLottoNumberException;
+import lotto.exception.WrongLottoNumberSizeException;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
-        validationCheck(numbers);
+        checkNull(numbers);
+        checkLottoNumberSize(numbers);
+        checkDuplicate(numbers);
         Collections.sort(numbers);
-        this.numbers = numbers;
+        this.lottoNumbers = toLottoNumber(numbers);
     }
 
-    private void validationCheck(List<Integer> numbers) {
+    private void checkNull(List<Integer> numbers) {
         if (numbers == null) {
             throw new NullPointerException();
         }
+    }
 
-        numbers = getDistinctNumbers(numbers);
-
+    private void checkLottoNumberSize(List<Integer> numbers) {
         if (numbers.size() != LottoNumberConst.LOTTO_NUMBER_SIZE) {
-            throw new WrongLottoSizeException();
+            throw new WrongLottoNumberSizeException();
         }
+    }
 
+    private void checkDuplicate(List<Integer> numbers) {
+        boolean notDuplicate = numbers.stream().allMatch(new HashSet<>()::add);
+
+        if (!notDuplicate) {
+            throw new DuplicateLottoNumberException();
+        }
+    }
+
+    private List<LottoNumber> toLottoNumber(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (Integer number : numbers) {
-            validationCheck(number);
+            lottoNumbers.add(new LottoNumber(number));
         }
+        return lottoNumbers;
     }
 
-    private List<Integer> getDistinctNumbers(List<Integer> numbers) {
-        return numbers.stream().distinct().collect(Collectors.toList());
-    }
-
-    private void validationCheck(Integer number) {
-        if (number == null || number < LottoNumberConst.START_NUMBER || number > LottoNumberConst.END_NUMBER) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
-    public WinningEnum getWinningResult(Lotto winningLotto, LottoNumber bonusNumber) {
-        int matched = getMatched(winningLotto.getNumbers());
-        int bonusNumberMatched = matched == WinningEnum.SECOND.getMatched() ? isContain(bonusNumber.getNumber(), numbers) : 0;
-        return WinningEnum.findByMatched(matched, bonusNumberMatched);
-    }
-
-    private int getMatched(List<Integer> winningNumbers) {
-        int matched = 0;
-        for (int number : numbers) {
-            matched += isContain(number, winningNumbers);
-        }
-        return matched;
-    }
-
-    private int isContain(int number, List<Integer> numbers) {
-        if (numbers.contains(number))
-            return ContainConst.TRUE;
-        return ContainConst.FALSE;
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

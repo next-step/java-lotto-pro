@@ -9,7 +9,7 @@ public class WinningStats {
 
     private final Map<WinningEnum, Integer> winningStats;
 
-    public WinningStats(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
+    public WinningStats(Lottos lottos, WinningLotto winningLotto, BonusNumber bonusNumber) {
         winningStats = new HashMap<>();
         winningStats.put(WinningEnum.FIRST, 0);
         winningStats.put(WinningEnum.SECOND, 0);
@@ -18,7 +18,7 @@ public class WinningStats {
         winningStats.put(WinningEnum.FIFTH, 0);
 
         for (Lotto lotto : lottos.getLottos()) {
-            setResult(lotto.getWinningResult(winningLotto, bonusNumber));
+            setResult(winningLotto.getWinningResult(lotto, bonusNumber));
         }
     }
 

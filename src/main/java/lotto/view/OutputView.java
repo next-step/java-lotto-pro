@@ -1,10 +1,7 @@
 package lotto.view;
 
 import lotto.consts.WinningEnum;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.ProfitRate;
-import lotto.domain.WinningStats;
+import lotto.domain.*;
 
 import java.util.Arrays;
 
@@ -13,7 +10,7 @@ public class OutputView {
     public void printLottos(Lottos lottos) {
         System.out.println(lottos.getLottos().size() + "개를 구매했습니다.");
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(Arrays.toString(lotto.getNumbers().toArray()));
+            System.out.println(Arrays.toString(lotto.getLottoNumbers().stream().map(LottoNumber::getNumber).toArray()));
         }
     }
 

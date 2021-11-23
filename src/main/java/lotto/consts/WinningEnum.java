@@ -4,18 +4,18 @@ import java.util.Arrays;
 
 public enum WinningEnum {
 
-    FIRST(2_000_000_000, 6, 0),
-    SECOND(30_000_000, 5, 1),
-    THIRD(1_500_000, 5, 0),
-    FOURTH(50_000, 4, 0),
-    FIFTH(5_000, 3, 0),
-    NONE(0, 0, 0);
+    FIRST(2_000_000_000, 6, false),
+    SECOND(30_000_000, 5, true),
+    THIRD(1_500_000, 5, false),
+    FOURTH(50_000, 4, false),
+    FIFTH(5_000, 3, false),
+    NONE(0, 0, false);
 
     private final int prize;
     private final int matched;
-    private final int bonusNumberMatched;
+    private final boolean bonusNumberMatched;
 
-    WinningEnum(int prize, int matched, int bonusNumberMatched) {
+    WinningEnum(int prize, int matched, boolean bonusNumberMatched) {
         this.prize = prize;
         this.matched = matched;
         this.bonusNumberMatched = bonusNumberMatched;
@@ -29,7 +29,7 @@ public enum WinningEnum {
         return matched;
     }
 
-    public static WinningEnum findByMatched(int matched, int bonusNumberMatched) {
+    public static WinningEnum findByMatched(int matched, boolean bonusNumberMatched) {
         return Arrays.stream(values()).filter(winningEnum -> winningEnum.matched == matched && winningEnum.bonusNumberMatched == bonusNumberMatched).findAny().orElse(NONE);
     }
 }

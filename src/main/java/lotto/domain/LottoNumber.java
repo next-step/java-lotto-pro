@@ -4,32 +4,27 @@ import lotto.consts.LottoNumberConst;
 
 public class LottoNumber {
 
-    private final int number;
+    private final Integer number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(Integer number) {
+        checkNull(number);
         checkNumberRange(number);
         this.number = number;
     }
 
-    public LottoNumber(int number, Lotto winningLotto) {
-        checkNumberRange(number);
-        checkDuplicate(number, winningLotto);
-        this.number = number;
+    private void checkNull(Integer number) {
+        if (number == null) {
+            throw new NullPointerException();
+        }
     }
 
-    private void checkNumberRange(int number) {
+    private void checkNumberRange(Integer number) {
         if (number < LottoNumberConst.START_NUMBER || number > LottoNumberConst.END_NUMBER) {
             throw new IllegalArgumentException();
         }
     }
 
-    private void checkDuplicate(int number, Lotto winningLotto) {
-        if (winningLotto.getNumbers().contains(number)) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 }
