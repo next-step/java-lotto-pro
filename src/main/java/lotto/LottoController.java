@@ -1,8 +1,6 @@
 package lotto;
 
 import lotto.generator.AutoLottoGenerator;
-import lotto.generator.LottoGenerator;
-import lotto.generator.ManualLottoGenerator;
 import lotto.model.*;
 import lotto.model.TotalLottoQuantity;
 import lotto.view.InputView;
@@ -11,19 +9,15 @@ import lotto.view.OutputView;
 public class LottoController {
   public static void run() {
     InputView inputView = new InputView();
-    LottoGenerator autoLottoGenerator = new AutoLottoGenerator();
-    LottoGenerator manualLottoGenerator = new ManualLottoGenerator();
+    AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator();
 
     PurchaseAmount purchaseAmount = inputView.inputPurchaseAmount();
-    TotalLottoQuantity totalLottoQuantity = purchaseAmount.countOfPurchaseLotto();
+    TotalLottoQuantity totalLottoQuantity = TotalLottoQuantity.of(purchaseAmount, inputView.inputManualLottoQuantity());
 
-    ManualLottoQuantity manualLottoQuantity = totalLottoQuantity.ofManualLottoQuantity(inputView.inputManualLottoQuantity());
-    AutoLottoQuantity autoLottoQuantity = totalLottoQuantity.calculateAutoLottoQuantity(manualLottoQuantity);
+    LottoTicket lottoTicket = inputView.inputManualLottoNumbers(totalLottoQuantity.toManualQuantity());
+    lottoTicket.appendLottoNumbers(autoLottoGenerator.generate(totalLottoQuantity.toAutoQuantity()));
 
-    LottoTicket lottoTicket = new LottoTicket(manualLottoGenerator.generate(manualLottoQuantity));
-    lottoTicket.appendLottoNumbers(autoLottoGenerator.generate(autoLottoQuantity));
-
-    OutputView.printPurchasedLottoQuantity(manualLottoQuantity, autoLottoQuantity);
+    OutputView.printPurchasedLottoQuantity(totalLottoQuantity);
     OutputView.printLottoTicket(lottoTicket);
 
     WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber());

@@ -1,8 +1,6 @@
 package lotto.view;
 
-import lotto.model.LottoNumber;
-import lotto.model.LottoNumbers;
-import lotto.model.PurchaseAmount;
+import lotto.model.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,8 +31,22 @@ public class InputView {
     return inputNumberAndVerify();
   }
 
-  public LottoNumbers inputManualLottoNumbers() {
-    return inputLottoNumbersAndVerify();
+  public LottoTicket inputManualLottoNumbers(LottoQuantity lottoQuantity) {
+    if (!lottoQuantity.isZero()) {
+      printInputManualLottoNumbersGuideMessage();
+    }
+
+    return makeLottoTicket(lottoQuantity);
+  }
+
+  private LottoTicket makeLottoTicket(LottoQuantity lottoQuantity) {
+    List<LottoNumbers> lottoNumbers = new ArrayList<>();
+
+    for (int i = 0; i < lottoQuantity.getQuantity(); i++) {
+      lottoNumbers.add(inputLottoNumbersAndVerify());
+    }
+
+    return new LottoTicket(lottoNumbers);
   }
 
   public LottoNumber inputBonusNumber() {

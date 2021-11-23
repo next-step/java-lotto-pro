@@ -32,8 +32,8 @@ public class OutputView {
     System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
   }
 
-  public static void printPurchasedLottoQuantity(ManualLottoQuantity manualLottoQuantity, AutoLottoQuantity autoLottoQuantity) {
-    System.out.printf(OUTPUT_PURCHASED_LOTTO_QUANTITY_MESSAGE, manualLottoQuantity, autoLottoQuantity);
+  public static void printPurchasedLottoQuantity(TotalLottoQuantity totalLottoQuantity) {
+    System.out.printf(OUTPUT_PURCHASED_LOTTO_QUANTITY_MESSAGE, totalLottoQuantity.toManualQuantity(), totalLottoQuantity.toAutoQuantity());
     System.out.println();
   }
 

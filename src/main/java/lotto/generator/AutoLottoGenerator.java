@@ -10,10 +10,9 @@ import java.util.List;
 
 import static lotto.constants.Lotto.*;
 
-public class AutoLottoGenerator implements LottoGenerator {
+public class AutoLottoGenerator {
   private static final int ZERO = 0;
 
-  @Override
   public List<LottoNumbers> generate(LottoQuantity lottoQuantity) {
     List<LottoNumbers> lottoNumbers = new ArrayList<>();
 
