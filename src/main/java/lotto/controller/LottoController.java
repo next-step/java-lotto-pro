@@ -47,7 +47,7 @@ public class LottoController {
         }
     }
 
-    private BonusNumber getBonusNumber(Lotto winningLotto) {
+    private BonusNumber getBonusNumber(WinningLotto winningLotto) {
         try {
             return new BonusNumber(inputView.inputNumber(), winningLotto);
         } catch (Exception e) {
