@@ -3,7 +3,7 @@ package lotto.model;
 import org.junit.jupiter.api.Test;
 
 
-import static lotto.constants.LottoRank.*;
+import static lotto.model.LottoRank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningResultTest {
@@ -28,4 +28,5 @@ public class WinningResultTest {
       .containsEntry(MISS, new RankCount(9))
       .containsEntry(FIFTH, new RankCount(3));
   }
+
 }

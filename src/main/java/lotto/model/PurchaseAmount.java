@@ -19,11 +19,12 @@ public class PurchaseAmount {
     }
   }
 
-  public LottoQuantity countOfPurchaseLotto() {
-    return new LottoQuantity(purchaseAmount / Lotto.LOTTO_PRICE);
+  public int countOfPurchaseLotto() {
+    return purchaseAmount / Lotto.LOTTO_PRICE;
   }
 
   public int getPurchaseAmount() {
     return purchaseAmount;
   }
+
 }

@@ -1,7 +1,13 @@
 package lotto.model;
 
+import lotto.constants.ErrorMessage;
+import lotto.constants.Lotto;
+import lotto.exception.DuplicateNumberException;
+
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoNumbers {
   private static final int ZERO = 0;
@@ -9,7 +15,16 @@ public class LottoNumbers {
   private final List<LottoNumber> lottoNumbers;
 
   public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    checkLottoNumbers(lottoNumbers);
     this.lottoNumbers = lottoNumbers;
+  }
+
+  private void checkLottoNumbers(List<LottoNumber> lottoNumbers) {
+    Set<LottoNumber> lottoNumbersSet = new HashSet<>(lottoNumbers);
+
+    if (lottoNumbersSet.size() < Lotto.LOTTO_NUMBER_RANGE) {
+      throw new DuplicateNumberException(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR_MESSAGE);
+    }
   }
 
   public List<LottoNumber> getLottoNumbers() {
@@ -41,4 +56,5 @@ public class LottoNumbers {
   public String toString() {
     return lottoNumbers.toString();
   }
+
 }

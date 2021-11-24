@@ -1,10 +1,9 @@
 package lotto.view;
 
-import lotto.model.LottoNumber;
-import lotto.model.LottoNumbers;
-import lotto.model.PurchaseAmount;
+import lotto.model.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -14,7 +13,7 @@ import static lotto.view.OutputView.*;
 
 public class InputView {
   private static final String SPLIT_DELIMITER = ",";
-  private static final Pattern numberPattern = Pattern.compile("\\d+");
+  private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
   private static final Scanner SCANNER = new Scanner(System.in);
 
   public PurchaseAmount inputPurchaseAmount() {
@@ -24,23 +23,45 @@ public class InputView {
 
   public LottoNumbers inputWinningLottoNumbers() {
     printInputWinningLottoNumbersGuideMessage();
-    return inputWinningLottoNumbersAndVerify();
+    return inputLottoNumbersAndVerify();
+  }
+
+  public int inputManualLottoQuantity() {
+    printInputManualLottoQuantityGuideMessage();
+    return inputNumberAndVerify();
+  }
+
+  public LottoTicket inputManualLottoNumbers(LottoQuantity lottoQuantity) {
+    if (!lottoQuantity.isZero()) {
+      printInputManualLottoNumbersGuideMessage();
+    }
+
+    return makeLottoTicket(lottoQuantity);
+  }
+
+  private LottoTicket makeLottoTicket(LottoQuantity lottoQuantity) {
+    List<LottoNumbers> lottoNumbers = new ArrayList<>();
+
+    for (int i = 0; i < lottoQuantity.getQuantity(); i++) {
+      lottoNumbers.add(inputLottoNumbersAndVerify());
+    }
+
+    return new LottoTicket(lottoNumbers);
   }
 
   public LottoNumber inputBonusNumber() {
-    OutputView.printInputBonusNumberGuideMessage();
-
-    return inputBonusNumberAndVerify();
+    printInputBonusNumberGuideMessage();
+    return new LottoNumber(inputNumberAndVerify());
   }
 
-  private LottoNumber inputBonusNumberAndVerify() {
+  private int inputNumberAndVerify() {
     String input = SCANNER.nextLine();
     try {
       checkStringIsNumber(input);
-      return new LottoNumber(parseInt(input));
+      return parseInt(input);
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      return inputBonusNumberAndVerify();
+      return inputNumberAndVerify();
     }
   }
 
@@ -54,19 +75,19 @@ public class InputView {
     }
   }
 
-  private LottoNumbers inputWinningLottoNumbersAndVerify() {
+  private LottoNumbers inputLottoNumbersAndVerify() {
     String input = SCANNER.nextLine();
     try {
-      String[] splitedString = getSplitedString(input);
+      String[] splitedString = splitAndTrim(input);
       return makeLottoNumbers(splitedString);
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      return inputWinningLottoNumbersAndVerify();
+      return inputLottoNumbersAndVerify();
     }
   }
 
   private LottoNumbers makeLottoNumbers(String[] splitedString) {
-    checkSplitedStringIsNumber(splitedString);
+    checkElementsIsNumber(splitedString);
 
     List<LottoNumber> lottoNumbers = new ArrayList<>();
     for (String numberString : splitedString) {
@@ -76,13 +97,15 @@ public class InputView {
     return new LottoNumbers(lottoNumbers);
   }
 
-  private String[] getSplitedString(String input) {
+  private String[] splitAndTrim(String input) {
     checkNullOrEmpty(input);
     checkSplitByComma(input);
-    return input.split(SPLIT_DELIMITER);
+
+    String[] strings = input.split(SPLIT_DELIMITER);
+    return Arrays.stream(strings).map(String::trim).toArray(String[]::new);
   }
 
-  private void checkSplitedStringIsNumber(String[] splitedString) {
+  private void checkElementsIsNumber(String[] splitedString) {
     for (String numberString : splitedString) {
       checkStringIsNumber(numberString);
     }
@@ -99,7 +122,7 @@ public class InputView {
   }
 
   private void checkStringIsNumber(String string) {
-    if (!numberPattern.matcher(string).matches()) {
+    if (!NUMBER_PATTERN.matcher(string).matches()) {
       throw new NumberFormatException();
     }
   }
@@ -109,4 +132,5 @@ public class InputView {
       throw new IllegalArgumentException();
     }
   }
+
 }

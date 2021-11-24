@@ -1,10 +1,6 @@
 package lotto.view;
 
-import lotto.constants.LottoRank;
-import lotto.model.LottoQuantity;
-import lotto.model.LottoTicket;
-import lotto.model.RankCount;
-import lotto.model.WinningResult;
+import lotto.model.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +9,9 @@ import java.util.Map;
 
 public class OutputView {
   private static final String INPUT_PURCHASE_AMOUNT_GUIDE_MESSAGE = "구입금액을 입력해 주세요.";
-  private static final String OUTPUT_PURCHASED_LOTTO_QUANTITY_MESSAGE = "%s개를 구매했습니다.";
+  private static final String OUTPUT_PURCHASED_LOTTO_QUANTITY_MESSAGE = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
+  private static final String INPUT_MANUAL_LOTTO_QUANTITY_GUIDE_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+  private static final String INPUT_MANUAL_LOTTO_NUMBERS_GUIDE_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
   private static final String INPUT_LAST_WEEK_DRAWN_LOTTO_GUIDE_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
   private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
   private static final String STATISTICS_GUIDE_MESSAGE = "당첨 통계";
@@ -34,9 +32,17 @@ public class OutputView {
     System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
   }
 
-  public static void printPurchasedLottoQuantity(LottoQuantity lottoQuantity) {
-    System.out.printf(OUTPUT_PURCHASED_LOTTO_QUANTITY_MESSAGE, lottoQuantity);
+  public static void printPurchasedLottoQuantity(TotalLottoQuantity totalLottoQuantity) {
+    System.out.printf(OUTPUT_PURCHASED_LOTTO_QUANTITY_MESSAGE, totalLottoQuantity.toManualQuantity(), totalLottoQuantity.toAutoQuantity());
     System.out.println();
+  }
+
+  public static void printInputManualLottoQuantityGuideMessage() {
+    System.out.println(INPUT_MANUAL_LOTTO_QUANTITY_GUIDE_MESSAGE);
+  }
+
+  public static void printInputManualLottoNumbersGuideMessage() {
+    System.out.println(INPUT_MANUAL_LOTTO_NUMBERS_GUIDE_MESSAGE);
   }
 
   public static void printLottoTicket(LottoTicket lottoTicket) {
@@ -57,6 +63,8 @@ public class OutputView {
     Collections.reverse(lottoRanks);
 
     for (LottoRank lottoRank : lottoRanks) {
+      if (lottoRank.equals(LottoRank.MISS)) continue;
+
       String message = MATCH_RESULT_MESSAGE;
       message = getSecondRankMessage(lottoRank, message);
 
@@ -76,4 +84,5 @@ public class OutputView {
     System.out.printf(YIELD_MESSAGE, yield);
     System.out.println();
   }
+
 }

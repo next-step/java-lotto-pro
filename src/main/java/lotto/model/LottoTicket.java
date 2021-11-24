@@ -25,6 +25,10 @@ public class LottoTicket {
     return winningResult;
   }
 
+  public void appendLottoNumbers(List<LottoNumbers> lottoNumbers) {
+    this.lottoNumbers.addAll(lottoNumbers);
+  }
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -36,4 +40,5 @@ public class LottoTicket {
 
     return sb.toString();
   }
+
 }

@@ -1,6 +1,7 @@
 package lotto.model;
 
-import lotto.constants.Lotto;
+import lotto.constants.ErrorMessage;
+import lotto.exception.DuplicateNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumbersTest {
   private static List<LottoNumber> lottoNumberList;
@@ -60,10 +62,20 @@ public class LottoNumbersTest {
     assertThat(matchCount).isEqualTo(4);
   }
 
+  @Test
+  void 하나의_로또는_중복된_숫자를_포함할_수_없다() {
+    int[] expectedNumbers = {1, 2, 3, 4, 5, 5};
+
+    assertThatThrownBy(() -> new LottoNumbers(getLottoNumberList(expectedNumbers)))
+      .isInstanceOf(DuplicateNumberException.class)
+      .hasMessage(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR_MESSAGE);
+  }
+
   private List<LottoNumber> getLottoNumberList(int[] numbers) {
     return Arrays
       .stream(numbers)
       .mapToObj(LottoNumber::new)
       .collect(Collectors.toList());
   }
+
 }

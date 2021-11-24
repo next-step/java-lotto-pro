@@ -3,6 +3,8 @@ package lotto.model;
 import java.util.Objects;
 
 public class RankCount {
+  public static final RankCount ZERO = new RankCount(0);
+
   private final int rankCount;
 
   public RankCount(int rankCount) {
@@ -34,4 +36,5 @@ public class RankCount {
   public int hashCode() {
     return Objects.hash(rankCount);
   }
+
 }

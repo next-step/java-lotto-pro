@@ -1,8 +1,11 @@
 package lotto.model;
 
+import lotto.constants.ErrorMessage;
+import lotto.exception.InvalidInputException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PurchaseAmountTest {
   @Test
@@ -16,6 +19,14 @@ public class PurchaseAmountTest {
   void 금액_만큼_구매한_로또_갯수_반환() {
     PurchaseAmount purchaseAmount = new PurchaseAmount(14000);
 
-    assertThat(purchaseAmount.countOfPurchaseLotto()).isEqualTo(new LottoQuantity(14));
+    assertThat(purchaseAmount.countOfPurchaseLotto()).isEqualTo(14);
   }
+
+  @Test
+  void 구매_수량_음수_예외_처리() {
+    assertThatThrownBy(() -> new PurchaseAmount(-1000))
+      .isInstanceOf(InvalidInputException.class)
+      .hasMessage(ErrorMessage.PURCHASE_AMOUNT_LOWER_ERROR_MESSAGE);
+  }
+
 }
