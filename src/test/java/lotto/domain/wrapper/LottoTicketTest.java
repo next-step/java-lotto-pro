@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.domain.LottoOrder;
-
 public class LottoTicketTest {
 	public static int LOTTO_NUMBER_COUNT = 6;
 

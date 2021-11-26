@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import utils.IntegerParser;
 
@@ -28,6 +29,10 @@ public class LottoTicket {
 		this.numbers = validatedNumbers(IntegerParser.toInteger(lottoNumbers, DELIMITER));
 	}
 
+	public LottoTicket(List<Integer> lottoNumbers) {
+		this.numbers = validatedNumbers(lottoNumbers);
+	}
+
 	private static List<Integer> makeDefaultNumbers() {
 		List<Integer> defaultNumbers = new ArrayList<>();
 		for (int number = START_NUMBER; number < END_NUMBER; number++) {
@@ -36,7 +41,7 @@ public class LottoTicket {
 		return defaultNumbers;
 	}
 
-	private static List<Integer> getDefaultNumbers() {
+	public static List<Integer> getDefaultNumbers() {
 		return new ArrayList<>(DEFAULT_NUMBERS);
 	}
 
