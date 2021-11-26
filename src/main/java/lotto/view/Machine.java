@@ -4,10 +4,10 @@ import static java.util.stream.Collectors.*;
 
 import java.util.List;
 
-import lotto.domain.wrapper.HitsByMatchedNumberCount;
+import lotto.domain.wrapper.HitsByRank;
 import lotto.domain.wrapper.LottoTicket;
-import lotto.domain.wrapper.LottoWinningMoney;
 import lotto.domain.wrapper.Money;
+import lotto.domain.wrapper.Rank;
 
 public class Machine {
 	private static final String MESSAGE_WINNING_INFO = "당첨 통계\n" + "---------";
@@ -26,15 +26,15 @@ public class Machine {
 			);
 	}
 
-	public static void showAnalysis(HitsByMatchedNumberCount hitsByMatchedNumberCount, Money investment, Money winnings) {
+	public static void showAnalysis(HitsByRank hitsByRank, Money investment, Money winnings) {
 		System.out.println(MESSAGE_WINNING_INFO);
-		LottoWinningMoney.get().forEach((matchedNumberCount, money) ->
+		for (Rank rank : Rank.values()) {
 			System.out.println(
 				String.format(MESSAGE_MATCHED_STATUS
-					, matchedNumberCount
-					, money
-					, hitsByMatchedNumberCount.getHitsByMatchedNumberCount(matchedNumberCount)))
-		);
+					, rank.getCountOfMatch()
+					, rank.getWinningMoney()
+					, hitsByRank.getHitsByRank(rank)));
+		}
 
 		double profit = winnings.get() - investment.get();
 		double profitPercent = profit / investment.get();

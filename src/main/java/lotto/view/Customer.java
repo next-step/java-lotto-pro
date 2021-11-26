@@ -35,7 +35,7 @@ public class Customer extends CustomerConsole {
 		return makeLastWinningTicket();
 	}
 
-	public static LottoTicket makeLastWinningTicket() {
+	private static LottoTicket makeLastWinningTicket() {
 		try {
 			LottoTicket lottoTicket = new LottoTicket(ask(MESSAGE_WRONG_LAST_WINNING_TICKET));
 			return lottoTicket;

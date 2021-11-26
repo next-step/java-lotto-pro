@@ -3,10 +3,10 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.domain.wrapper.HitsByMatchedNumberCount;
+import lotto.domain.wrapper.HitsByRank;
 import lotto.domain.wrapper.LottoTicket;
-import lotto.domain.wrapper.LottoWinningMoney;
 import lotto.domain.wrapper.Money;
+import lotto.domain.wrapper.Rank;
 import lotto.view.Customer;
 import lotto.view.Machine;
 
@@ -39,12 +39,11 @@ public class LottoInvestment {
 		return new Money(holdLottoTickets.size() * LottoTicket.PRICE);
 	}
 
-	protected Money totalWinnings(HitsByMatchedNumberCount hitsByMatchedNumberCount) {
+	protected Money totalWinnings(HitsByRank hitsByRank) {
 		int winnings = 0;
-		for (Integer matchedNumberCount : hitsByMatchedNumberCount.get().keySet()) {
-			winnings +=
-				LottoWinningMoney.getMoneyByMatchedNumberCount(matchedNumberCount) * hitsByMatchedNumberCount.get()
-					.get(matchedNumberCount);
+
+		for (Rank rank : hitsByRank.get().keySet()) {
+			winnings += rank.getWinningMoney() * hitsByRank.getHitsByRank(rank);
 		}
 		return new Money(winnings);
 	}
@@ -55,15 +54,15 @@ public class LottoInvestment {
 			return new Money().get();
 		}
 		Money investment = totalInvestment();
-		HitsByMatchedNumberCount hitsByMatchedNumberCount = new HitsByMatchedNumberCount();
+		HitsByRank hitsByRank = new HitsByRank();
 		for (LottoTicket ticket : holdLottoTickets) {
 			int matchedNumberCount = (int)ticket.getNumbers().stream()
 				.filter(lastWinningTicket.getNumbers()::contains)
 				.count();
-			hitsByMatchedNumberCount.hit(matchedNumberCount);
+			hitsByRank.hit(Rank.valueOf(matchedNumberCount, false)); //todo 보너스번호
 		}
-		Money winnings = totalWinnings(hitsByMatchedNumberCount);
-		showAnalysis(hitsByMatchedNumberCount, investment, winnings);
+		Money winnings = totalWinnings(hitsByRank);
+		showAnalysis(hitsByRank, investment, winnings);
 		return (winnings.get() - investment.get()) / investment.get();
 	}
 
@@ -75,8 +74,8 @@ public class LottoInvestment {
 		return this.holdLottoTickets;
 	}
 
-	private void showAnalysis(HitsByMatchedNumberCount hitsByMatchedNumberCount, Money investment, Money winnings) {
-		Machine.showAnalysis(hitsByMatchedNumberCount, investment, winnings);
+	private void showAnalysis(HitsByRank hitsByRank, Money investment, Money winnings) {
+		Machine.showAnalysis(hitsByRank, investment, winnings);
 	}
 
 	private void showHoldings() {
