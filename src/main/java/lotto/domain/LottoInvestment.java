@@ -14,10 +14,13 @@ public class LottoInvestment {
 	private List<LottoTicket> holdLottoTickets = new ArrayList<>();
 	private LottoTicket lastWinningTicket;
 
-	public LottoInvestment() {
-		buyTickets(Customer.askOrder());
-		findLastWinningTicket(Customer.askLastWinningTicket());
-		analysisProfit();
+	public LottoInvestment() { }
+
+	public static void start() {
+		LottoInvestment lottoInvestment = new LottoInvestment();
+		lottoInvestment.buyTickets(Customer.askOrder());
+		lottoInvestment.findLastWinningTicket(Customer.askLastWinningTicket());
+		lottoInvestment.analysisProfit();
 	}
 
 	protected void buyTickets(LottoOrder order) {
@@ -61,6 +64,10 @@ public class LottoInvestment {
 		Money winnings = totalWinnings(hitsByMatchedNumberCount);
 		showAnalysis(hitsByMatchedNumberCount, investment, winnings);
 		return winnings.get() - investment.get();
+	}
+
+	protected int getHoldLottoCount() {
+		return this.holdLottoTickets.size();
 	}
 
 	private void showAnalysis(HitsByMatchedNumberCount hitsByMatchedNumberCount, Money investment, Money winnings) {
