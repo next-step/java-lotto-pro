@@ -17,13 +17,17 @@ public class LottoController {
     public void start() {
         inputView.printPriceMessage();
         Price price = getPrice();
-        Lottos lottos = new Lottos(price);
-        outputView.printLottos(lottos);
+        inputView.printManualLottoMessage();
+        ManualLottos manualLottos = getManualLottos(price);
+        inputView.printManualLottoNumberMessage();
+        setManualLottos(manualLottos);
+        Lottos lottos = new Lottos(price, manualLottos);
+        outputView.printLottos(manualLottos, lottos);
         inputView.printWinningLottoMessage();
         WinningLotto winningLotto = getWinningLotto();
         inputView.printBonusNumberMessage();
         BonusNumber bonusNumber = getBonusNumber(winningLotto);
-        WinningStats winningStats = new WinningStats(lottos, winningLotto, bonusNumber);
+        WinningStats winningStats = new WinningStats(manualLottos, lottos, winningLotto, bonusNumber);
         ProfitRate profitRate = price.getProfitRate(winningStats);
         outputView.printWinningStats(winningStats);
         outputView.printProfitRate(profitRate);
@@ -38,9 +42,33 @@ public class LottoController {
         }
     }
 
+    private ManualLottos getManualLottos(Price price) {
+        try {
+           return new ManualLottos(price, inputView.inputNumber());
+        } catch (Exception e) {
+            inputView.printErrorMessage();
+            return getManualLottos(price);
+        }
+    }
+
+    private void setManualLottos(ManualLottos manualLottos) {
+        for (int i = 0; i < manualLottos.getSize(); i++) {
+            addManualLotto(manualLottos);
+        }
+    }
+
+    private void addManualLotto(ManualLottos manualLottos) {
+        try {
+            manualLottos.addLotto(inputView.inputLotto());
+        } catch (Exception e) {
+            inputView.printErrorMessage();
+            addManualLotto(manualLottos);
+        }
+    }
+
     private WinningLotto getWinningLotto() {
         try {
-            return new WinningLotto(inputView.inputWinningLotto());
+            return new WinningLotto(inputView.inputLotto());
         } catch (Exception e) {
             inputView.printErrorMessage();
             return getWinningLotto();

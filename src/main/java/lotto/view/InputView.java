@@ -15,7 +15,15 @@ public class InputView {
     }
 
     public void printPriceMessage() {
-        System.out.println("구입 금액을 입력해 주세요. 최소 금액은 " + PriceConst.LOTTO_PRICE + "원입니다.");
+        System.out.println("\n구입 금액을 입력해 주세요. 최소 금액은 " + PriceConst.LOTTO_PRICE + "원입니다.");
+    }
+
+    public void printManualLottoMessage() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public void printManualLottoNumberMessage() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
     }
 
     public void printWinningLottoMessage() {
@@ -23,7 +31,7 @@ public class InputView {
     }
 
     public void printBonusNumberMessage() {
-        System.out.println("\n보너스 볼을 입력해 주세요.");
+        System.out.println("보너스 볼을 입력해 주세요.");
     }
 
     public void printErrorMessage() {
@@ -34,7 +42,7 @@ public class InputView {
         return getNumber(sc.nextLine());
     }
 
-    public List<Integer> inputWinningLotto() {
+    public List<Integer> inputLotto() {
         return getNumbers(sc.nextLine());
     }
 
