@@ -11,6 +11,10 @@ public class Customer extends CustomerConsole {
 	private static final String MESSAGE_WRITE_LAST_WINNING_TICKET = "지난 주 당첨 번호를 입력해 주세요. (각 숫자는 , 로 구분)";
 	private static final String MESSAGE_WRONG_LAST_WINNING_TICKET = "당첨 번호를 다시 입력해주세요.";
 
+	private Customer() {
+		throw new AssertionError();
+	}
+
 	public static LottoOrder askOrder() {
 		System.out.println(MESSAGE_WRITE_ORDER_PRICE);
 		return makeOrder();
