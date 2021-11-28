@@ -2,6 +2,7 @@ package lotto.view;
 
 import static java.util.stream.Collectors.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import lotto.domain.wrapper.HitsByRank;
@@ -36,8 +37,8 @@ public class Machine {
 					, hitsByRank.getHitsByRank(rank)));
 		}
 
-		double profit = winnings.get() - investment.get();
-		double profitPercent = profit / investment.get();
+		BigDecimal profit = winnings.get().subtract(investment.get());
+		BigDecimal profitPercent = profit.divide(investment.get());
 
 		System.out.println(String.format(MESSAGE_TOTAL_PROFIT, profitPercent));
 	}

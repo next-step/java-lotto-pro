@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class LottoInvestmentTest extends LottoInvestment {
 		"5,1499",
 		"6,1999999",
 	})
-	void analysisProfitTest(int matchedNumberCount, double expectedProfit) {
+	void analysisProfitTest(int matchedNumberCount, BigDecimal expectedProfit) {
 		final int ORDER_COUNT = 1;
 		final int FIRST = 0;
 		final List<LottoNumber> defaultNumbers = LottoTicket.getDefaultNumbers();

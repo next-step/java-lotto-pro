@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class LottoInvestment {
 		return new Money(winnings);
 	}
 
-	protected double analysisProfit() {
+	protected BigDecimal analysisProfit() {
 		if (holdLottoTickets.isEmpty() || lastWinningTicket == null) {
 			showBeforeInvestment();
 			return new Money().get();
@@ -60,11 +61,11 @@ public class LottoInvestment {
 			int matchedNumberCount = (int)ticket.getNumbers().stream()
 				.filter(lastWinningTicket.getNumbers()::contains)
 				.count();
-			hitsByRank.hit(Rank.valueOf(matchedNumberCount, false)); //todo 보너스번호
+			hitsByRank.hit(Rank.valueOf(matchedNumberCount, false));
 		}
 		Money winnings = totalWinnings(hitsByRank);
 		showAnalysis(hitsByRank, investment, winnings);
-		return (winnings.get() - investment.get()) / investment.get();
+		return winnings.get().subtract(investment.get()).divide(investment.get());
 	}
 
 	protected int getHoldLottoCount() {

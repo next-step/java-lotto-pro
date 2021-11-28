@@ -1,20 +1,24 @@
 package lotto.domain.wrapper;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money {
-	private static final int ZERO = 0;
-	private final double money;
+	private final BigDecimal money;
 
 	public Money() {
-		this.money = ZERO;
+		this.money = BigDecimal.ZERO;
 	}
 
 	public Money(double money) {
+		this.money = new BigDecimal(money);
+	}
+
+	public Money(BigDecimal money) {
 		this.money = money;
 	}
 
-	public double get() {
+	public BigDecimal get() {
 		return this.money;
 	}
 
@@ -25,7 +29,7 @@ public class Money {
 		if (!(o instanceof Money))
 			return false;
 		Money money1 = (Money)o;
-		return Double.compare(money1.money, money) == 0;
+		return money.equals(money1.money);
 	}
 
 	@Override
