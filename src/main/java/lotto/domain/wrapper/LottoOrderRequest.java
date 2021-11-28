@@ -1,10 +1,8 @@
-package lotto.dto;
+package lotto.domain.wrapper;
 
 import java.util.Objects;
 
-import lotto.domain.wrapper.LottoTicket;
-
-public class LottoOrder {
+public class LottoOrderRequest {
 	public static final int DEFAULT_CHANGES = 0;
 	private static final String MESSAGE_WRONG_MIN_ORDER = "로또의 금액은 1,000원으로, 최소 1개 이상 구매하셔야합니다.";
 	private static final String MESSAGE_WRONG_ORDER_TYPE = "올바르지 않는 구매 요청입니다.";
@@ -12,7 +10,7 @@ public class LottoOrder {
 	private final int count;
 	private final int changes;
 
-	private LottoOrder(int price, int count, int changes) {
+	private LottoOrderRequest(int price, int count, int changes) {
 		this.price = price;
 		this.count = count;
 		this.changes = changes;
@@ -26,24 +24,24 @@ public class LottoOrder {
 		return this.changes;
 	}
 
-	public static LottoOrder byPrice(int orderPrice) {
+	public static LottoOrderRequest byPrice(int orderPrice) {
 		int count = orderPrice / LottoTicket.PRICE;
 		int price = count * LottoTicket.PRICE;
 		int changes = orderPrice - price;
-		return new LottoOrder(price, count, changes);
+		return new LottoOrderRequest(price, count, changes);
 	}
 
-	public static LottoOrder byPrice(String orderPrice) {
+	public static LottoOrderRequest byPrice(String orderPrice) {
 		return byPrice(validateOrderPrice(orderPrice));
 	}
 
-	public static LottoOrder byOrderCount(int orderCount) {
+	public static LottoOrderRequest byOrderCount(int orderCount) {
 		int price = orderCount * LottoTicket.PRICE;
 		int changes = DEFAULT_CHANGES;
-		return new LottoOrder(price, orderCount, changes);
+		return new LottoOrderRequest(price, orderCount, changes);
 	}
 
-	public static LottoOrder byOrderCount(String orderCount) {
+	public static LottoOrderRequest byOrderCount(String orderCount) {
 		return byOrderCount(validateOrderCount(orderCount));
 	}
 
@@ -85,9 +83,9 @@ public class LottoOrder {
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
-		if (!(o instanceof LottoOrder))
+		if (!(o instanceof LottoOrderRequest))
 			return false;
-		LottoOrder that = (LottoOrder)o;
+		LottoOrderRequest that = (LottoOrderRequest)o;
 		return price == that.price &&
 			count == that.count;
 	}

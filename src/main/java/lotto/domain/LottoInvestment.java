@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.dto.LottoOrder;
+import lotto.domain.wrapper.LottoOrderRequest;
 import lotto.domain.wrapper.HitsByRank;
 import lotto.domain.wrapper.LottoTicket;
 import lotto.domain.wrapper.Money;
@@ -16,7 +16,7 @@ public class LottoInvestment {
 	private List<LottoTicket> holdLottoTickets = new ArrayList<>();
 	private LottoTicket lastWinningTicket;
 
-	public LottoInvestment() {
+	protected LottoInvestment() {
 	}
 
 	public static void start() {
@@ -26,7 +26,7 @@ public class LottoInvestment {
 		lottoInvestment.analysisProfit();
 	}
 
-	protected void buyTickets(LottoOrder order) {
+	protected void buyTickets(LottoOrderRequest order) {
 		for (int i = 0; i < order.getCount(); i++) {
 			this.holdLottoTickets.add(new LottoTicket());
 		}

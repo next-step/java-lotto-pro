@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.dto.LottoOrder;
+import lotto.domain.wrapper.LottoOrderRequest;
 import lotto.domain.wrapper.LottoTicket;
 
 public class Customer extends CustomerConsole {
@@ -15,28 +15,26 @@ public class Customer extends CustomerConsole {
 		throw new AssertionError();
 	}
 
-	public static LottoOrder askOrder() {
+	public static LottoOrderRequest askOrder() {
 		System.out.println(MESSAGE_WRITE_ORDER_PRICE);
 		return makeOrder();
-	}
-
-	private static LottoOrder makeOrder() {
-		try {
-			LottoOrder lottoOrder = LottoOrder.byPrice(ask(MESSAGE_WRONG_ORDER_PRICE));
-			String message = lottoOrder.getChanges() > LottoOrder.DEFAULT_CHANGES ?
-				lottoOrder.getCount() + MESSAGE_ORDERED_PRICE + lottoOrder.getChanges() + MESSAGE_CHANGES :
-				lottoOrder.getCount() + MESSAGE_ORDERED_PRICE;
-			System.out.println(message);
-			return lottoOrder;
-		} catch (IllegalArgumentException e) {
-			System.out.println(withErrorPrefix(e.getMessage()));
-			return makeOrder();
-		}
 	}
 
 	public static LottoTicket askLastWinningTicket() {
 		System.out.println(MESSAGE_WRITE_LAST_WINNING_TICKET);
 		return makeLastWinningTicket();
+	}
+
+	private static LottoOrderRequest makeOrder() {
+		try {
+			LottoOrderRequest lottoOrderRequest = LottoOrderRequest.byPrice(ask(MESSAGE_WRONG_ORDER_PRICE));
+			String message = getMessageOrderedPrice(lottoOrderRequest.getCount(), lottoOrderRequest.getChanges());
+			System.out.println(message);
+			return lottoOrderRequest;
+		} catch (IllegalArgumentException e) {
+			System.out.println(withErrorPrefix(e.getMessage()));
+			return makeOrder();
+		}
 	}
 
 	private static LottoTicket makeLastWinningTicket() {
@@ -47,5 +45,11 @@ public class Customer extends CustomerConsole {
 			System.out.println(withErrorPrefix(e.getMessage()));
 			return makeLastWinningTicket();
 		}
+	}
+
+	private static String getMessageOrderedPrice(int count, int changes) {
+		return changes > LottoOrderRequest.DEFAULT_CHANGES ?
+			count + MESSAGE_ORDERED_PRICE + changes + MESSAGE_CHANGES :
+			count + MESSAGE_ORDERED_PRICE;
 	}
 }

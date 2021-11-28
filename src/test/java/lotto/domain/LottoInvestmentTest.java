@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.dto.LottoOrder;
+import lotto.domain.wrapper.LottoOrderRequest;
 import lotto.domain.wrapper.LottoNumber;
 import lotto.domain.wrapper.LottoTicket;
 import lotto.domain.wrapper.Money;
@@ -26,7 +26,7 @@ public class LottoInvestmentTest extends LottoInvestment {
 		final int ORDER_COUNT = 5;
 
 		// when
-		lottoInvestment.buyTickets(LottoOrder.byOrderCount(ORDER_COUNT));
+		lottoInvestment.buyTickets(LottoOrderRequest.byOrderCount(ORDER_COUNT));
 
 		// then
 		assertThat(lottoInvestment.getHoldLottoCount()).isEqualTo(ORDER_COUNT);
@@ -39,7 +39,7 @@ public class LottoInvestmentTest extends LottoInvestment {
 		final int ORDER_COUNT = 5;
 
 		// when
-		lottoInvestment.buyTickets(LottoOrder.byOrderCount(ORDER_COUNT));
+		lottoInvestment.buyTickets(LottoOrderRequest.byOrderCount(ORDER_COUNT));
 
 		// then
 		assertThat(lottoInvestment.totalInvestment()).isEqualTo(new Money(LottoTicket.PRICE * ORDER_COUNT));
@@ -60,7 +60,7 @@ public class LottoInvestmentTest extends LottoInvestment {
 		final int FIRST = 0;
 		final List<LottoNumber> defaultNumbers = LottoTicket.getDefaultNumbers();
 
-		lottoInvestment.buyTickets(LottoOrder.byOrderCount(ORDER_COUNT));
+		lottoInvestment.buyTickets(LottoOrderRequest.byOrderCount(ORDER_COUNT));
 		List<LottoNumber> holdLottoNumbers = lottoInvestment.getHoldLottoTickets().get(FIRST).getNumbers();
 		defaultNumbers.removeAll(holdLottoNumbers);
 		List<LottoNumber> matchedNumbersInHoldTicket = holdLottoNumbers.subList(FIRST, matchedNumberCount);
