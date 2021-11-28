@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import lotto.domain.wrapper.AnalysisResult;
@@ -33,7 +34,7 @@ public class LottoAnalysis {
 		}
 		BigDecimal profitPercent = totalWinnings(hitsByRank).get()
 			.subtract(investment.get())
-			.divide(investment.get());
+			.divide(investment.get(), RoundingMode.CEILING);
 		return new AnalysisResult(hitsByRank, profitPercent, holdings);
 	}
 
