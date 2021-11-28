@@ -20,7 +20,7 @@ public class Machine {
 		tickets.stream()
 			.forEach(ticket -> System.out.println(String.format(MESSAGE_LOTTO_TICKET_NUMBERS
 				, ticket.getNumbers().stream()
-					.map(x -> x.toString())
+					.map(number -> number.toString())
 					.collect(joining(",")))
 				)
 			);
