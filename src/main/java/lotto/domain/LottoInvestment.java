@@ -1,11 +1,10 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
-import lotto.domain.wrapper.LottoOrderRequest;
 import lotto.domain.wrapper.HitsByRank;
+import lotto.domain.wrapper.LottoOrderRequest;
 import lotto.domain.wrapper.LottoTicket;
 import lotto.domain.wrapper.Money;
 import lotto.domain.wrapper.Rank;
@@ -13,24 +12,29 @@ import lotto.view.Customer;
 import lotto.view.Machine;
 
 public class LottoInvestment {
-	private List<LottoTicket> holdLottoTickets = new ArrayList<>();
+	private LottoOrder lottoOrder;
 	private LottoTicket lastWinningTicket;
 
-	protected LottoInvestment() {
+	public LottoInvestment() {
+		this.lottoOrder = new LottoOrder();
 	}
 
-	public static void start() {
-		LottoInvestment lottoInvestment = new LottoInvestment();
-		lottoInvestment.buyTickets(Customer.askOrder());
-		lottoInvestment.findLastWinningTicket(Customer.askLastWinningTicket());
-		lottoInvestment.analysisProfit();
+	public void start() {
+		buyTicket();
+		findLastWinningTicket(Customer.askLastWinningTicket());
+		analysisProfit();
 	}
 
-	protected void buyTickets(LottoOrderRequest order) {
-		for (int i = 0; i < order.getCount(); i++) {
-			this.holdLottoTickets.add(new LottoTicket());
-		}
-		showHoldings();
+	protected List<LottoTicket> holdings() {
+		return lottoOrder.holdings();
+	}
+
+	protected void buyTicket(LottoOrderRequest request) {
+		Machine.showLottoTickets(this.lottoOrder.buyTickets(request));
+	}
+
+	protected void buyTicket() {
+		Machine.showLottoTickets(this.lottoOrder.buyTickets(Customer.askOrder()));
 	}
 
 	protected void findLastWinningTicket(LottoTicket lottoTicket) {
@@ -38,7 +42,7 @@ public class LottoInvestment {
 	}
 
 	protected Money totalInvestment() {
-		return new Money(holdLottoTickets.size() * LottoTicket.PRICE);
+		return new Money(this.lottoOrder.holdCount() * LottoTicket.PRICE);
 	}
 
 	protected Money totalWinnings(HitsByRank hitsByRank) {
@@ -51,15 +55,15 @@ public class LottoInvestment {
 	}
 
 	protected BigDecimal analysisProfit() {
-		if (holdLottoTickets.isEmpty() || lastWinningTicket == null) {
+		if (this.lottoOrder.notYetOrdered() || this.lastWinningTicket == null) {
 			showBeforeInvestment();
 			return new Money().get();
 		}
 		Money investment = totalInvestment();
 		HitsByRank hitsByRank = new HitsByRank();
-		for (LottoTicket ticket : holdLottoTickets) {
+		for (LottoTicket ticket : this.lottoOrder.holdings()) {
 			int matchedNumberCount = (int)ticket.getNumbers().stream()
-				.filter(lastWinningTicket.getNumbers()::contains)
+				.filter(this.lastWinningTicket.getNumbers()::contains)
 				.count();
 			hitsByRank.hit(Rank.valueOf(matchedNumberCount, false));
 		}
@@ -70,20 +74,8 @@ public class LottoInvestment {
 		return profitPercent;
 	}
 
-	protected int getHoldLottoCount() {
-		return this.holdLottoTickets.size();
-	}
-
-	protected List<LottoTicket> getHoldLottoTickets() {
-		return this.holdLottoTickets;
-	}
-
 	private void showAnalysis(HitsByRank hitsByRank, BigDecimal profitPercent) {
 		Machine.showAnalysis(hitsByRank, profitPercent);
-	}
-
-	private void showHoldings() {
-		Machine.showLottoTickets(this.holdLottoTickets);
 	}
 
 	private void showBeforeInvestment() {

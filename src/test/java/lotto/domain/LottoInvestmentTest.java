@@ -19,18 +19,6 @@ import lotto.domain.wrapper.Money;
 public class LottoInvestmentTest extends LottoInvestment {
 	private final LottoInvestment lottoInvestment = new LottoInvestment();
 
-	@DisplayName("로또 5장 구입 시 보유하게 된 로또 개수 검증")
-	@Test
-	void buyTicketsTest() {
-		// given
-		final int ORDER_COUNT = 5;
-
-		// when
-		lottoInvestment.buyTickets(LottoOrderRequest.byOrderCount(ORDER_COUNT));
-
-		// then
-		assertThat(lottoInvestment.getHoldLottoCount()).isEqualTo(ORDER_COUNT);
-	}
 
 	@DisplayName("로또 5장 구입 시 투자금 검증")
 	@Test
@@ -39,10 +27,10 @@ public class LottoInvestmentTest extends LottoInvestment {
 		final int ORDER_COUNT = 5;
 
 		// when
-		lottoInvestment.buyTickets(LottoOrderRequest.byOrderCount(ORDER_COUNT));
+		this.lottoInvestment.buyTicket(LottoOrderRequest.byOrderCount(ORDER_COUNT));
 
 		// then
-		assertThat(lottoInvestment.totalInvestment()).isEqualTo(new Money(LottoTicket.PRICE * ORDER_COUNT));
+		assertThat(this.lottoInvestment.totalInvestment()).isEqualTo(new Money(LottoTicket.PRICE * ORDER_COUNT));
 	}
 
 	@DisplayName("로또번호 적중 개수별 투자수익율")
@@ -60,8 +48,8 @@ public class LottoInvestmentTest extends LottoInvestment {
 		final int FIRST = 0;
 		final List<LottoNumber> defaultNumbers = LottoTicket.getDefaultNumbers();
 
-		lottoInvestment.buyTickets(LottoOrderRequest.byOrderCount(ORDER_COUNT));
-		List<LottoNumber> holdLottoNumbers = lottoInvestment.getHoldLottoTickets().get(FIRST).getNumbers();
+		this.lottoInvestment.buyTicket(LottoOrderRequest.byOrderCount(ORDER_COUNT));
+		List<LottoNumber> holdLottoNumbers = lottoInvestment.holdings().get(FIRST).getNumbers();
 		defaultNumbers.removeAll(holdLottoNumbers);
 		List<LottoNumber> matchedNumbersInHoldTicket = holdLottoNumbers.subList(FIRST, matchedNumberCount);
 		List<LottoNumber> lastWeekWinningNumbers = new ArrayList<>(matchedNumbersInHoldTicket);
