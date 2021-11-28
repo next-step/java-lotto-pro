@@ -7,7 +7,6 @@ import java.util.List;
 
 import lotto.domain.wrapper.HitsByRank;
 import lotto.domain.wrapper.LottoTicket;
-import lotto.domain.wrapper.Money;
 import lotto.domain.wrapper.Rank;
 
 public class Machine {
@@ -27,7 +26,7 @@ public class Machine {
 			);
 	}
 
-	public static void showAnalysis(HitsByRank hitsByRank, Money investment, Money winnings) {
+	public static void showAnalysis(HitsByRank hitsByRank, BigDecimal profitPercent) {
 		System.out.println(MESSAGE_WINNING_INFO);
 		for (Rank rank : Rank.values()) {
 			System.out.println(
@@ -36,9 +35,6 @@ public class Machine {
 					, rank.getWinningMoney()
 					, hitsByRank.getHitsByRank(rank)));
 		}
-
-		BigDecimal profit = winnings.get().subtract(investment.get());
-		BigDecimal profitPercent = profit.divide(investment.get());
 
 		System.out.println(String.format(MESSAGE_TOTAL_PROFIT, profitPercent));
 	}

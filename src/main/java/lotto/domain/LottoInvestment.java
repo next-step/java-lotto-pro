@@ -63,9 +63,11 @@ public class LottoInvestment {
 				.count();
 			hitsByRank.hit(Rank.valueOf(matchedNumberCount, false));
 		}
-		Money winnings = totalWinnings(hitsByRank);
-		showAnalysis(hitsByRank, investment, winnings);
-		return winnings.get().subtract(investment.get()).divide(investment.get());
+		BigDecimal profitPercent = totalWinnings(hitsByRank).get()
+			.subtract(investment.get())
+			.divide(investment.get());
+		showAnalysis(hitsByRank, profitPercent);
+		return profitPercent;
 	}
 
 	protected int getHoldLottoCount() {
@@ -76,8 +78,8 @@ public class LottoInvestment {
 		return this.holdLottoTickets;
 	}
 
-	private void showAnalysis(HitsByRank hitsByRank, Money investment, Money winnings) {
-		Machine.showAnalysis(hitsByRank, investment, winnings);
+	private void showAnalysis(HitsByRank hitsByRank, BigDecimal profitPercent) {
+		Machine.showAnalysis(hitsByRank, profitPercent);
 	}
 
 	private void showHoldings() {
