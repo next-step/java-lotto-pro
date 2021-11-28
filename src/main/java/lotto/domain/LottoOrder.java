@@ -17,7 +17,6 @@ public class LottoOrder {
 		for (int i = 0; i < order.getCount(); i++) {
 			this.holdLottoTickets.add(new LottoTicket());
 		}
-		showHoldings(this.holdLottoTickets);
 		return this.holdLottoTickets;
 	}
 
@@ -31,9 +30,5 @@ public class LottoOrder {
 
 	public List<LottoTicket> holdings() {
 		return this.holdLottoTickets;
-	}
-
-	private void showHoldings(List<LottoTicket> holdLottoTickets) {
-		Machine.showLottoTickets(holdLottoTickets);
 	}
 }

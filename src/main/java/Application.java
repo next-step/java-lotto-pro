@@ -1,7 +1,7 @@
-import lotto.domain.LottoInvestment;
+import lotto.application.LottoInvestment;
 
 public class Application {
 	public static void main(String[] args) {
-		new LottoInvestment().start();
+		LottoInvestment.start();
 	}
 }

@@ -1,8 +1,9 @@
-package lotto.domain;
+package lotto.application;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+import lotto.domain.LottoOrder;
 import lotto.domain.wrapper.HitsByRank;
 import lotto.domain.wrapper.LottoOrderRequest;
 import lotto.domain.wrapper.LottoTicket;
@@ -15,14 +16,15 @@ public class LottoInvestment {
 	private LottoOrder lottoOrder;
 	private LottoTicket lastWinningTicket;
 
-	public LottoInvestment() {
+	protected LottoInvestment() {
 		this.lottoOrder = new LottoOrder();
 	}
 
-	public void start() {
-		buyTicket();
-		findLastWinningTicket(Customer.askLastWinningTicket());
-		analysisProfit();
+	public static void start() {
+		LottoInvestment lottoInvestment = new LottoInvestment();
+		lottoInvestment.buyTicket();
+		lottoInvestment.findLastWinningTicket(Customer.askLastWinningTicket());
+		lottoInvestment.analysisProfit();
 	}
 
 	protected List<LottoTicket> holdings() {
