@@ -5,6 +5,7 @@ import java.util.List;
 
 import lotto.domain.wrapper.LottoOrderRequest;
 import lotto.domain.wrapper.LottoTicket;
+import lotto.domain.wrapper.Money;
 import lotto.view.Machine;
 
 public class LottoOrder {
@@ -30,5 +31,9 @@ public class LottoOrder {
 
 	public List<LottoTicket> holdings() {
 		return this.holdLottoTickets;
+	}
+
+	public Money totalInvestment() {
+		return new Money(this.holdLottoTickets.size() * LottoTicket.PRICE);
 	}
 }

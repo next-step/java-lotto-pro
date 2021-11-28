@@ -1,23 +1,23 @@
 package lotto.application;
 
 import java.math.BigDecimal;
-import java.util.List;
 
+import lotto.domain.LottoAnalysis;
 import lotto.domain.LottoOrder;
+import lotto.domain.wrapper.AnalysisResult;
 import lotto.domain.wrapper.HitsByRank;
-import lotto.domain.wrapper.LottoOrderRequest;
 import lotto.domain.wrapper.LottoTicket;
 import lotto.domain.wrapper.Money;
-import lotto.domain.wrapper.Rank;
 import lotto.view.Customer;
 import lotto.view.Machine;
 
 public class LottoInvestment {
 	private LottoOrder lottoOrder;
-	private LottoTicket lastWinningTicket;
+	private LottoAnalysis lottoAnalysis;
 
 	protected LottoInvestment() {
 		this.lottoOrder = new LottoOrder();
+		this.lottoAnalysis = new LottoAnalysis();
 	}
 
 	public static void start() {
@@ -27,53 +27,22 @@ public class LottoInvestment {
 		lottoInvestment.analysisProfit();
 	}
 
-	protected List<LottoTicket> holdings() {
-		return lottoOrder.holdings();
-	}
-
-	protected void buyTicket(LottoOrderRequest request) {
-		Machine.showLottoTickets(this.lottoOrder.buyTickets(request));
-	}
-
 	protected void buyTicket() {
 		Machine.showLottoTickets(this.lottoOrder.buyTickets(Customer.askOrder()));
 	}
 
 	protected void findLastWinningTicket(LottoTicket lottoTicket) {
-		this.lastWinningTicket = lottoTicket;
-	}
-
-	protected Money totalInvestment() {
-		return new Money(this.lottoOrder.holdCount() * LottoTicket.PRICE);
-	}
-
-	protected Money totalWinnings(HitsByRank hitsByRank) {
-		int winnings = 0;
-
-		for (Rank rank : hitsByRank.get().keySet()) {
-			winnings += rank.getWinningMoney() * hitsByRank.getHitsByRank(rank);
-		}
-		return new Money(winnings);
+		this.lottoAnalysis.setLastWinningTicket(lottoTicket);
 	}
 
 	protected BigDecimal analysisProfit() {
-		if (this.lottoOrder.notYetOrdered() || this.lastWinningTicket == null) {
+		if (this.lottoOrder.notYetOrdered() || !lottoAnalysis.hasLastWinningTicket()) {
 			showBeforeInvestment();
 			return new Money().get();
 		}
-		Money investment = totalInvestment();
-		HitsByRank hitsByRank = new HitsByRank();
-		for (LottoTicket ticket : this.lottoOrder.holdings()) {
-			int matchedNumberCount = (int)ticket.getNumbers().stream()
-				.filter(this.lastWinningTicket.getNumbers()::contains)
-				.count();
-			hitsByRank.hit(Rank.valueOf(matchedNumberCount, false));
-		}
-		BigDecimal profitPercent = totalWinnings(hitsByRank).get()
-			.subtract(investment.get())
-			.divide(investment.get());
-		showAnalysis(hitsByRank, profitPercent);
-		return profitPercent;
+		AnalysisResult result = lottoAnalysis.analysis(lottoOrder.totalInvestment() ,lottoOrder.holdings());
+		showAnalysis(result.getHitsByRank(), result.getProfitPercent());
+		return result.getProfitPercent();
 	}
 
 	private void showAnalysis(HitsByRank hitsByRank, BigDecimal profitPercent) {
