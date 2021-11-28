@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.dto.LottoOrder;
 import lotto.domain.wrapper.HitsByRank;
 import lotto.domain.wrapper.LottoTicket;
 import lotto.domain.wrapper.Money;

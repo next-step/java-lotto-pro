@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoOrder;
+import lotto.dto.LottoOrder;
 import lotto.domain.wrapper.LottoTicket;
 
 public class Customer extends CustomerConsole {

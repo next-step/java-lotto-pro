@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import lotto.dto.LottoOrder;
 import lotto.domain.wrapper.LottoNumber;
 import lotto.domain.wrapper.LottoTicket;
 import lotto.domain.wrapper.Money;
