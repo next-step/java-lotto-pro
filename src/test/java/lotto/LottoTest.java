@@ -4,7 +4,8 @@ import lotto.consts.LottoNumberConst;
 import lotto.consts.PriceConst;
 import lotto.consts.WinningEnum;
 import lotto.domain.*;
-import lotto.exception.WrongLottoSizeException;
+import lotto.exception.DuplicateLottoNumberException;
+import lotto.exception.WrongLottoNumberSizeException;
 import lotto.exception.WrongPriceException;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.DisplayName;
@@ -34,7 +35,8 @@ public class LottoTest {
     @DisplayName("발급한 로또 개수가 올바른지에 대한 테스트")
     void lotto_size_test() {
         Price price = new Price(PriceConst.LOTTO_PRICE * 15);
-        Lottos lottos = new Lottos(price);
+        ManualLottos manualLottos = new ManualLottos(price, 0);
+        Lottos lottos = new Lottos(price, manualLottos);
 
         assertThat(lottos.getLottos())
                 .isNotNull()
@@ -47,52 +49,66 @@ public class LottoTest {
     @DisplayName("발급한 로또 번호가 올바른지에 대한 테스트")
     void lotto_numbers_test() {
         Price price = new Price(PriceConst.LOTTO_PRICE);
-        Lottos lottos = new Lottos(price);
+        ManualLottos manualLottos = new ManualLottos(price, 0);
+        Lottos lottos = new Lottos(price, manualLottos);
         Lotto lotto = lottos.getLottos().get(0);
-        List<Integer> lottoNumbers = lotto.getNumbers();
+        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
         assertThat(lottoNumbers)
                 .isNotNull()
                 .isNotEmpty()
                 .doesNotContainNull()
                 .doesNotHaveDuplicates()
+                .map(LottoNumber::getNumber)
                 .doNotHave(new Condition<>(lottoNumber -> lottoNumber < LottoNumberConst.START_NUMBER, "시작 번호보다 작습니다."))
                 .doNotHave(new Condition<>(lottoNumber -> lottoNumber > LottoNumberConst.END_NUMBER, "끝 번호보다 큽니다."));
         assertThat(lottoNumbers.size()).isEqualTo(LottoNumberConst.LOTTO_NUMBER_SIZE);
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("winning_numbers_test_data_1")
     @DisplayName("입력한 당첨 번호에 대한 테스트1")
-    void winning_numbers_test_1() {
-        assertThatNullPointerException().isThrownBy(() -> new Lotto(null));
+    void winning_numbers_test_1(List<Integer> numbers) {
+        assertThatNullPointerException().isThrownBy(() -> new Lotto(numbers));
     }
 
     @ParameterizedTest
     @MethodSource("winning_numbers_test_data_2")
     @DisplayName("입력한 당첨 번호에 대한 테스트2")
     void winning_numbers_test_2(List<Integer> numbers) {
-        assertThatExceptionOfType(WrongLottoSizeException.class).isThrownBy(() -> new Lotto(numbers));
+        assertThatExceptionOfType(WrongLottoNumberSizeException.class).isThrownBy(() -> new Lotto(numbers));
+    }
+
+    @Test
+    @DisplayName("입력한 당첨 번호에 대한 테스트3")
+    void winning_numbers_test_3() {
+        assertThatExceptionOfType(DuplicateLottoNumberException.class).isThrownBy(() -> new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 1))));
+    }
+
+    @ParameterizedTest
+    @MethodSource("winning_numbers_test_data_4")
+    @DisplayName("입력한 당첨 번호에 대한 테스트4")
+    void winning_numbers_test_3(List<Integer> numbers) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(new ArrayList<>(numbers)));
+    }
+
+    static Stream<Arguments> winning_numbers_test_data_1() {
+        return Stream.of(
+                null,
+                Arguments.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, null)))
+        );
     }
 
     static Stream<Arguments> winning_numbers_test_data_2() {
         return Stream.of(
                 Arguments.of(new ArrayList<>()),
                 Arguments.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5))),
-                Arguments.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 1))),
                 Arguments.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("winning_numbers_test_data_3")
-    @DisplayName("입력한 당첨 번호에 대한 테스트3")
-    void winning_numbers_test_3(List<Integer> numbers) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(new ArrayList<>(numbers)));
-    }
-
-    static Stream<Arguments> winning_numbers_test_data_3() {
+    static Stream<Arguments> winning_numbers_test_data_4() {
         return Stream.of(
-                Arguments.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, null))),
                 Arguments.of(new ArrayList<>(Arrays.asList(LottoNumberConst.START_NUMBER - 1, 2, 3, 4, 5, 6))),
                 Arguments.of(new ArrayList<>(Arrays.asList(LottoNumberConst.END_NUMBER + 1, 2, 3, 4, 5, 6)))
         );
@@ -110,9 +126,10 @@ public class LottoTest {
         lottoList.add(new Lotto(Arrays.asList(1, 42, 43, 44, 45, 6)));
         lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
         Lottos lottos = new Lottos(lottoList);
-        Lotto winningLotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        ManualLottos manualLottos = new ManualLottos(new ArrayList<>());
+        WinningLotto winningLotto = new WinningLotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         BonusNumber bonusNumber = new BonusNumber(7, winningLotto);
-        WinningStats winningStats = new WinningStats(lottos, winningLotto, bonusNumber);
+        WinningStats winningStats = new WinningStats(manualLottos, lottos, winningLotto, bonusNumber);
 
         Map<WinningEnum, Integer> winningStatsMap = winningStats.getWinningStats();
         assertThat(winningStatsMap.get(WinningEnum.FIRST)).isEqualTo(1);
@@ -129,11 +146,35 @@ public class LottoTest {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 43, 44, 45)));
         Lottos lottos = new Lottos(lottoList);
-        Lotto winningLotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        ManualLottos manualLottos = new ManualLottos(price, 0);
+        WinningLotto winningLotto = new WinningLotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         BonusNumber bonusNumber = new BonusNumber(7, winningLotto);
-        WinningStats winningStats = new WinningStats(lottos, winningLotto, bonusNumber);
+        WinningStats winningStats = new WinningStats(manualLottos, lottos, winningLotto, bonusNumber);
         ProfitRate profitRate = price.getProfitRate(winningStats);
 
         assertThat(profitRate.getProfitRate()).isEqualTo(0.35);
+    }
+
+    @Test
+    @DisplayName("로또(수동)에 대한 테스트")
+    void manual_lotto_test() {
+        Price price = new Price(PriceConst.LOTTO_PRICE * 4);
+        ManualLottos manualLottos = new ManualLottos(price, 3);
+        manualLottos.addLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        manualLottos.addLotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        manualLottos.addLotto(Arrays.asList(1, 2, 3, 4, 5, 8));
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 9)));
+        Lottos lottos = new Lottos(lottoList);
+        WinningLotto winningLotto = new WinningLotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        BonusNumber bonusNumber = new BonusNumber(7, winningLotto);
+        WinningStats winningStats = new WinningStats(manualLottos, lottos, winningLotto, bonusNumber);
+
+        Map<WinningEnum, Integer> winningStatsMap = winningStats.getWinningStats();
+        assertThat(winningStatsMap.get(WinningEnum.FIRST)).isEqualTo(1);
+        assertThat(winningStatsMap.get(WinningEnum.SECOND)).isEqualTo(1);
+        assertThat(winningStatsMap.get(WinningEnum.THIRD)).isEqualTo(2);
+        assertThat(winningStatsMap.get(WinningEnum.FOURTH)).isEqualTo(0);
+        assertThat(winningStatsMap.get(WinningEnum.FIFTH)).isEqualTo(0);
     }
 }

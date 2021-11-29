@@ -1,19 +1,19 @@
 package lotto.view;
 
 import lotto.consts.WinningEnum;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.ProfitRate;
-import lotto.domain.WinningStats;
+import lotto.domain.*;
 
 import java.util.Arrays;
 
 public class OutputView {
 
-    public void printLottos(Lottos lottos) {
-        System.out.println(lottos.getLottos().size() + "개를 구매했습니다.");
+    public void printLottos(ManualLottos manualLottos, Lottos lottos) {
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottos.getSize(), lottos.getLottos().size());
+        for (Lotto lotto : manualLottos.getLottos()) {
+            System.out.println(Arrays.toString(lotto.getLottoNumbers().stream().map(LottoNumber::getNumber).toArray()));
+        }
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(Arrays.toString(lotto.getNumbers().toArray()));
+            System.out.println(Arrays.toString(lotto.getLottoNumbers().stream().map(LottoNumber::getNumber).toArray()));
         }
     }
 

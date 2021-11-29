@@ -1,27 +1,23 @@
 package lotto.domain;
 
-import lotto.consts.LottoNumberConst;
+import lotto.exception.DuplicateLottoNumberException;
 
-public class BonusNumber {
+public class BonusNumber extends LottoNumber {
 
-    private final int bonusNumber;
-
-    public BonusNumber(int bonusNumber, Lotto winningLotto) {
-        validationCheck(bonusNumber, winningLotto);
-        this.bonusNumber = bonusNumber;
+    public BonusNumber(Integer number, Lotto winningLotto) {
+        super(number);
+        checkDuplicate(number, winningLotto);
     }
 
-    private void validationCheck(int bonusNumber, Lotto winningLotto) {
-        if (bonusNumber < LottoNumberConst.START_NUMBER || bonusNumber > LottoNumberConst.END_NUMBER) {
-            throw new IllegalArgumentException();
-        }
-
-        if (winningLotto.getNumbers().contains(bonusNumber)) {
-            throw new IllegalArgumentException();
+    private void checkDuplicate(Integer number, Lotto winningLotto) {
+        for (LottoNumber winningNumber : winningLotto.getLottoNumbers()) {
+            checkDuplicate(number, winningNumber);
         }
     }
 
-    public int getBonusNumber() {
-        return bonusNumber;
+    private void checkDuplicate(Integer number, LottoNumber winningNumber) {
+        if (number.equals(winningNumber.getNumber())) {
+            throw new DuplicateLottoNumberException();
+        }
     }
 }

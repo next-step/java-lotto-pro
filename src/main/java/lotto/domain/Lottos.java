@@ -6,14 +6,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 public class Lottos {
 
-    private final List<Lotto> lottos;
+    protected final List<Lotto> lottos;
 
-    public Lottos(Price price) {
-        lottos = new ArrayList<>();
-        for (int i = 0; i < price.getNumberOfLotto(); i++) {
+    public Lottos(Price price, ManualLottos manualLottos) {
+        this.lottos = new ArrayList<>();
+        for (int i = 0; i < price.getNumberOfLotto() - manualLottos.getSize(); i++) {
             Collections.shuffle(LottoNumberConst.lottoNumbers);
             lottos.add(new Lotto(new ArrayList<>(LottoNumberConst.lottoNumbers.subList(0, LottoNumberConst.LOTTO_NUMBER_SIZE))));
         }
