@@ -3,6 +3,7 @@ package lotto.view;
 import static java.util.stream.Collectors.*;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 import lotto.domain.wrapper.HitsByRank;
@@ -28,13 +29,13 @@ public class Machine {
 
 	public static void showAnalysis(HitsByRank hitsByRank, BigDecimal profitPercent) {
 		System.out.println(MESSAGE_WINNING_INFO);
-		for (Rank rank : Rank.values()) {
-			System.out.println(
-				String.format(MESSAGE_MATCHED_STATUS
-					, rank.getCountOfMatch()
-					, rank.getWinningMoney()
-					, hitsByRank.getHitsByRank(rank)));
-		}
+		Arrays.stream(Rank.values()).filter(rank -> rank.getWinningMoney() > 0)
+			.forEach(rank ->
+				System.out.println(
+					String.format(MESSAGE_MATCHED_STATUS
+						, rank.getCountOfMatch()
+						, rank.getWinningMoney()
+						, hitsByRank.getHitsByRank(rank))));
 
 		System.out.println(String.format(MESSAGE_TOTAL_PROFIT, profitPercent));
 	}

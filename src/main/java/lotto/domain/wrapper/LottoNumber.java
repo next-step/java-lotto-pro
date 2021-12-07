@@ -15,6 +15,14 @@ public class LottoNumber {
 		this.number = number;
 	}
 
+	public LottoNumber(String number) {
+		int num = Integer.valueOf(number);
+		if(num < START_NUMBER || num > END_NUMBER) {
+			throw new IllegalArgumentException(MESSAGE_WRONG_NUMBER_RANGE);
+		}
+		this.number = num;
+	}
+
 	public int get() {
 		return this.number;
 	}
