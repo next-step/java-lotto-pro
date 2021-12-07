@@ -62,6 +62,10 @@ public class LottoTicket {
 		return this;
 	}
 
+	public LottoNumber getBonus() {
+		return this.bonus;
+	}
+
 	public List<LottoNumber> getNumbers() {
 		return this.numbers;
 	}

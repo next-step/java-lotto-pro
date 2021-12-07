@@ -30,7 +30,7 @@ public class LottoAnalysis {
 			int matchedNumberCount = (int)ticket.getNumbers().stream()
 				.filter(this.lastWinningTicket.getNumbers()::contains)
 				.count();
-			hitsByRank.hit(Rank.valueOf(matchedNumberCount, false));
+			hitsByRank.hit(Rank.valueOf(matchedNumberCount, ticket.getNumbers().contains(lastWinningTicket.getBonus())));
 		}
 		BigDecimal profitPercent = totalWinnings(hitsByRank).get()
 			.subtract(investment.get())
