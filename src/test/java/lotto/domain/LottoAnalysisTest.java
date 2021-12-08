@@ -20,25 +20,36 @@ public class LottoAnalysisTest extends LottoAnalysis {
 	@DisplayName("로또번호 적중 개수별 투자수익율")
 	@ParameterizedTest
 	@CsvSource(value = {
-		"1,-1",
-		"2,-1",
-		"3,4",
-		"4,49",
-		"5,1499",
-		"6,1999999",
+		"1,false,-1",
+		"2,false,-1",
+		"3,false,4",
+		"4,false,49",
+		"5,false,1499",
+		"5,true,29999",
+		"6,false,1999999",
 	})
-	void analysisProfitTest(int matchedNumberCount, BigDecimal expectedProfit) {
+	void analysisProfitTest(int matchedNumberCount, boolean matchBonus, BigDecimal expectedProfit) {
 		final int ORDER_COUNT = 1;
 		final int FIRST = 0;
 		final List<LottoNumber> defaultNumbers = LottoTicket.getDefaultNumbers();
 
+		// get Lotto Ticket
 		LottoOrder lottoOrder = new LottoOrder();
 		LottoTicket holdingTicket = lottoOrder.buyTickets(LottoOrderRequest.byOrderCount(ORDER_COUNT)).get(FIRST);
+
+		// make winningTicket
 		defaultNumbers.removeAll(holdingTicket.getNumbers());
 		List<LottoNumber> matchedNumbersInHoldTicket = holdingTicket.getNumbers().subList(FIRST, matchedNumberCount);
 		List<LottoNumber> lastWeekWinningNumbers = new ArrayList<>(matchedNumbersInHoldTicket);
 		lastWeekWinningNumbers.addAll(defaultNumbers.subList(FIRST, LottoTicket.NUMBER_COUNT - lastWeekWinningNumbers.size()));
-		lottoAnalysis.setLastWinningTicket(new LottoTicket(lastWeekWinningNumbers));
+		LottoTicket lastWeekWinningTicket = new LottoTicket(lastWeekWinningNumbers);
+		// bonus number
+		if(matchBonus) {
+			List<LottoNumber> holdLottoNumbersExceptWinningNumbers = new ArrayList<>(holdingTicket.getNumbers());
+			holdLottoNumbersExceptWinningNumbers.removeAll(lastWeekWinningNumbers);
+			lastWeekWinningTicket.addBonus(holdLottoNumbersExceptWinningNumbers.get(FIRST).get());
+		}
+		lottoAnalysis.setLastWinningTicket(lastWeekWinningTicket);
 
 		assertThat(lottoAnalysis.analysis(lottoOrder.totalInvestment(), lottoOrder.holdings()).getProfitPercent()).isEqualTo(expectedProfit);
 	}
