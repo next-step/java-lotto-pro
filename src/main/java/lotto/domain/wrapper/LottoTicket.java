@@ -16,11 +16,9 @@ public class LottoTicket {
 	public static final int PRICE = 1000;
 	public static final String DELIMITER = ",";
 	private static final String MESSAGE_WRONG_NUMBER_COUNT = "개의 로또 번호를 중복없이 입력하세요.";
-	private static final String MESSAGE_WRONG_BONUS_NUMBER = "보너스 볼을 다시 입력해 주세요.";
 	private static final List<LottoNumber> DEFAULT_NUMBERS = makeDefaultNumbers();
 
 	private final List<LottoNumber> numbers;
-	private LottoNumber bonus;
 
 	public LottoTicket() {
 		this.numbers = validatedNumbers(makeLottoNumbers());
@@ -47,32 +45,13 @@ public class LottoTicket {
 		return new ArrayList<>(DEFAULT_NUMBERS);
 	}
 
-	public LottoTicket addBonus(String bonus) {
-		try {
-			return addBonus(Integer.valueOf(bonus));
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(MESSAGE_WRONG_BONUS_NUMBER);
-		}
-	}
-
-	public LottoTicket addBonus(int bonus) {
-		LottoNumber bonusNumber = new LottoNumber(bonus);
-		validateBonus(bonusNumber);
-		initBonus(bonusNumber);
-		return this;
-	}
-
-	public LottoNumber getBonus() {
-		return this.bonus;
-	}
-
 	public List<LottoNumber> getNumbers() {
 		return this.numbers;
 	}
 
 	private List<LottoNumber> makeLottoNumbers() {
 		List<LottoNumber> defaultNumbers = getDefaultNumbers();
-		Collections.shuffle(defaultNumbers);
+		Collections.shuffle(defaultNumbers);  
 		List<LottoNumber> lottoNumbers = defaultNumbers.subList(START_NUMBER - 1, NUMBER_COUNT);
 		lottoNumbers.sort(Comparator.comparingInt(num -> num.get()));
 		return lottoNumbers;
@@ -83,15 +62,5 @@ public class LottoTicket {
 			throw new IllegalArgumentException(NUMBER_COUNT + MESSAGE_WRONG_NUMBER_COUNT);
 		}
 		return inputNumbers;
-	}
-
-	private void initBonus(LottoNumber bonus) {
-		this.bonus = bonus;
-	}
-
-	private void validateBonus(LottoNumber bonus) {
-		if (!getDefaultNumbers().contains(bonus) || this.numbers.contains(bonus)) {
-			throw new IllegalArgumentException(MESSAGE_WRONG_BONUS_NUMBER);
-		}
 	}
 }

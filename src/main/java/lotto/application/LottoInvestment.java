@@ -1,6 +1,7 @@
 package lotto.application;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import lotto.domain.LottoAnalysis;
 import lotto.domain.LottoOrder;
@@ -15,24 +16,29 @@ public class LottoInvestment {
 	private LottoOrder lottoOrder;
 	private LottoAnalysis lottoAnalysis;
 
-	protected LottoInvestment() {
-		this.lottoOrder = new LottoOrder();
-		this.lottoAnalysis = new LottoAnalysis();
+	protected LottoInvestment(LottoOrder lottoOrder, LottoAnalysis lottoAnalysis) {
+		this.lottoOrder = lottoOrder;
+		this.lottoAnalysis = lottoAnalysis;
 	}
 
 	public static void start() {
-		LottoInvestment lottoInvestment = new LottoInvestment();
-		lottoInvestment.buyTicket();
-		lottoInvestment.findLastWinningTicket(Customer.askLastWinningTicket());
+		LottoOrder lottoOrder = new LottoOrder(Customer.askOrder());
+		buyTicket(lottoOrder.holdings());
+		LottoAnalysis lottoAnalysis = new LottoAnalysis(Customer.askLastWinningTicket(), Customer.askBonusNumber());
+		LottoInvestment lottoInvestment = new LottoInvestment(lottoOrder, lottoAnalysis);
 		lottoInvestment.analysisProfit();
 	}
 
-	protected void buyTicket() {
-		Machine.showLottoTickets(this.lottoOrder.buyTickets(Customer.askOrder()));
+	protected static void buyTicket(List<LottoTicket> lottoTickets) {
+		Machine.showLottoTickets(lottoTickets);
 	}
 
-	protected void findLastWinningTicket(LottoTicket lottoTicket) {
-		this.lottoAnalysis.setLastWinningTicket(lottoTicket);
+	private static void showAnalysis(HitsByRank hitsByRank, BigDecimal profitPercent) {
+		Machine.showAnalysis(hitsByRank, profitPercent);
+	}
+
+	private static void showBeforeInvestment() {
+		Machine.showBeforeInvestment();
 	}
 
 	protected BigDecimal analysisProfit() {
@@ -43,13 +49,5 @@ public class LottoInvestment {
 		AnalysisResult result = lottoAnalysis.analysis(lottoOrder.totalInvestment() ,lottoOrder.holdings());
 		showAnalysis(result.getHitsByRank(), result.getProfitPercent());
 		return result.getProfitPercent();
-	}
-
-	private void showAnalysis(HitsByRank hitsByRank, BigDecimal profitPercent) {
-		Machine.showAnalysis(hitsByRank, profitPercent);
-	}
-
-	private void showBeforeInvestment() {
-		Machine.showBeforeInvestment();
 	}
 }

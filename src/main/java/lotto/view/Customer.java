@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.wrapper.LottoNumber;
 import lotto.domain.wrapper.LottoOrderRequest;
 import lotto.domain.wrapper.LottoTicket;
 
@@ -21,8 +22,14 @@ public class Customer extends CustomerConsole {
 
 	public static LottoTicket askLastWinningTicket() {
 		System.out.println(MESSAGE_WRITE_LAST_WINNING_TICKET);
-		return askBonusNumber(makeLastWinningTicket());
+		return makeLastWinningTicket();
 	}
+
+	public static LottoNumber askBonusNumber() {
+		System.out.println(MESSAGE_WRITE_BONUS_NUMBER);
+		return addBonusNumber();
+	}
+
 
 	private static LottoOrderRequest makeOrder() {
 		try {
@@ -51,17 +58,12 @@ public class Customer extends CustomerConsole {
 			count + MESSAGE_ORDERED_PRICE;
 	}
 
-	private static LottoTicket askBonusNumber(LottoTicket lastWinningTicket) {
-		System.out.println(MESSAGE_WRITE_BONUS_NUMBER);
-		return addBonusNumber(lastWinningTicket);
-	}
-
-	private static LottoTicket addBonusNumber(LottoTicket lastWinningTicket) {
+	private static LottoNumber addBonusNumber() {
 		try {
-			return lastWinningTicket.addBonus(ask());
+			return new LottoNumber(ask());
 		} catch (IllegalArgumentException e) {
 			System.out.println(withErrorPrefix(e.getMessage()));
-			return addBonusNumber(lastWinningTicket);
+			return addBonusNumber();
 		}
 	}
 }

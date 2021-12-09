@@ -9,8 +9,7 @@ import lotto.domain.wrapper.LottoOrderRequest;
 import lotto.domain.wrapper.LottoTicket;
 import lotto.domain.wrapper.Money;
 
-public class LottoOrderTest extends LottoOrder {
-	private final LottoOrder lottoOrder = new LottoOrder();
+public class LottoOrderTest {
 
 	@DisplayName("로또 5장 구입 시 투자금 검증")
 	@Test
@@ -19,7 +18,7 @@ public class LottoOrderTest extends LottoOrder {
 		final int ORDER_COUNT = 5;
 
 		// when
-		lottoOrder.buyTickets(LottoOrderRequest.byOrderCount(ORDER_COUNT));
+		LottoOrder lottoOrder = new LottoOrder(LottoOrderRequest.byOrderCount(ORDER_COUNT));
 
 		// then
 		assertThat(lottoOrder.totalInvestment()).isEqualTo(new Money(LottoTicket.PRICE * ORDER_COUNT));
@@ -32,8 +31,7 @@ public class LottoOrderTest extends LottoOrder {
 		final int ORDER_COUNT = 5;
 
 		// when
-		LottoOrder lottoOrder = new LottoOrder();
-		lottoOrder.buyTickets(LottoOrderRequest.byOrderCount(ORDER_COUNT));
+		LottoOrder lottoOrder = new LottoOrder(LottoOrderRequest.byOrderCount(ORDER_COUNT));
 
 		// then
 		assertThat(lottoOrder.holdCount()).isEqualTo(ORDER_COUNT);

@@ -6,12 +6,12 @@ import java.util.List;
 import lotto.domain.wrapper.LottoOrderRequest;
 import lotto.domain.wrapper.LottoTicket;
 import lotto.domain.wrapper.Money;
-import lotto.view.Machine;
 
 public class LottoOrder {
 	private List<LottoTicket> holdLottoTickets = new ArrayList<>();
 
-	public LottoOrder() {
+	public LottoOrder(LottoOrderRequest order) {
+		buyTickets(order);
 	}
 
 	public List<LottoTicket> buyTickets(LottoOrderRequest order) {

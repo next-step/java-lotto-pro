@@ -14,8 +14,7 @@ import lotto.domain.wrapper.LottoNumber;
 import lotto.domain.wrapper.LottoOrderRequest;
 import lotto.domain.wrapper.LottoTicket;
 
-public class LottoAnalysisTest extends LottoAnalysis {
-	private static final LottoAnalysis lottoAnalysis = new LottoAnalysis();
+public class LottoAnalysisTest {
 
 	@DisplayName("로또번호 적중 개수별 투자수익율")
 	@ParameterizedTest
@@ -34,8 +33,8 @@ public class LottoAnalysisTest extends LottoAnalysis {
 		final List<LottoNumber> defaultNumbers = LottoTicket.getDefaultNumbers();
 
 		// get Lotto Ticket
-		LottoOrder lottoOrder = new LottoOrder();
-		LottoTicket holdingTicket = lottoOrder.buyTickets(LottoOrderRequest.byOrderCount(ORDER_COUNT)).get(FIRST);
+		LottoOrder lottoOrder = new LottoOrder(LottoOrderRequest.byOrderCount(ORDER_COUNT));
+		LottoTicket holdingTicket = lottoOrder.holdings().get(FIRST);
 
 		// make winningTicket
 		defaultNumbers.removeAll(holdingTicket.getNumbers());
@@ -43,14 +42,14 @@ public class LottoAnalysisTest extends LottoAnalysis {
 		List<LottoNumber> lastWeekWinningNumbers = new ArrayList<>(matchedNumbersInHoldTicket);
 		lastWeekWinningNumbers.addAll(defaultNumbers.subList(FIRST, LottoTicket.NUMBER_COUNT - lastWeekWinningNumbers.size()));
 		LottoTicket lastWeekWinningTicket = new LottoTicket(lastWeekWinningNumbers);
+		LottoNumber bonus = defaultNumbers.get(defaultNumbers.size()-1);
 		// bonus number
 		if(matchBonus) {
 			List<LottoNumber> holdLottoNumbersExceptWinningNumbers = new ArrayList<>(holdingTicket.getNumbers());
 			holdLottoNumbersExceptWinningNumbers.removeAll(lastWeekWinningNumbers);
-			lastWeekWinningTicket.addBonus(holdLottoNumbersExceptWinningNumbers.get(FIRST).get());
+			bonus = holdLottoNumbersExceptWinningNumbers.get(FIRST);
 		}
-		lottoAnalysis.setLastWinningTicket(lastWeekWinningTicket);
-
+		LottoAnalysis lottoAnalysis = new LottoAnalysis(lastWeekWinningTicket, bonus);
 		assertThat(lottoAnalysis.analysis(lottoOrder.totalInvestment(), lottoOrder.holdings()).getProfitPercent()).isEqualTo(expectedProfit);
 	}
 }
