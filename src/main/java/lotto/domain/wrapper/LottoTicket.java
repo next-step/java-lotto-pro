@@ -48,6 +48,11 @@ public class LottoTicket {
 	public List<LottoNumber> getNumbers() {
 		return this.numbers;
 	}
+	public int countMatchNumbers(LottoTicket otherLottoTicket) {
+		return (int) this.numbers.stream()
+			.filter(lottoNumber -> otherLottoTicket.getNumbers().contains(lottoNumber))
+			.count();
+	}
 
 	private List<LottoNumber> makeLottoNumbers() {
 		List<LottoNumber> defaultNumbers = getDefaultNumbers();
