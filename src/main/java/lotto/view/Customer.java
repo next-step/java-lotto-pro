@@ -1,13 +1,13 @@
 package lotto.view;
 
+import lotto.domain.wrapper.LottoMoney;
 import lotto.domain.wrapper.LottoNumber;
-import lotto.domain.wrapper.LottoOrderRequest;
+import lotto.domain.wrapper.LottoOrderCount;
 import lotto.domain.wrapper.LottoTicket;
 
 public class Customer extends CustomerConsole {
 	private static final String MESSAGE_WRITE_ORDER_PRICE = "구매금액을 입력해주세요.";
 	private static final String MESSAGE_ORDERED_PRICE = "개를 구매했습니다. ";
-	private static final String MESSAGE_CHANGES = "원의 잔돈을 돌려드립니다.";
 	private static final String MESSAGE_WRITE_LAST_WINNING_TICKET = "지난 주 당첨 번호를 입력해 주세요. (각 숫자는 , 로 구분)";
 	private static final String MESSAGE_WRITE_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
@@ -15,7 +15,7 @@ public class Customer extends CustomerConsole {
 		throw new AssertionError();
 	}
 
-	public static LottoOrderRequest askOrder() {
+	public static LottoOrderCount askOrder() {
 		System.out.println(MESSAGE_WRITE_ORDER_PRICE);
 		return makeOrder();
 	}
@@ -31,12 +31,12 @@ public class Customer extends CustomerConsole {
 	}
 
 
-	private static LottoOrderRequest makeOrder() {
+	private static LottoOrderCount makeOrder() {
 		try {
-			LottoOrderRequest lottoOrderRequest = LottoOrderRequest.byPrice(ask());
-			String message = getMessageOrderedPrice(lottoOrderRequest.getCount(), lottoOrderRequest.getChanges());
+			LottoOrderCount lottoOrderCount = new LottoOrderCount(new LottoMoney(ask()));
+			String message = getMessageOrderedPrice(lottoOrderCount);
 			System.out.println(message);
-			return lottoOrderRequest;
+			return lottoOrderCount;
 		} catch (IllegalArgumentException e) {
 			System.out.println(withErrorPrefix(e.getMessage()));
 			return makeOrder();
@@ -52,10 +52,8 @@ public class Customer extends CustomerConsole {
 		}
 	}
 
-	private static String getMessageOrderedPrice(int count, int changes) {
-		return changes > LottoOrderRequest.DEFAULT_CHANGES ?
-			count + MESSAGE_ORDERED_PRICE + changes + MESSAGE_CHANGES :
-			count + MESSAGE_ORDERED_PRICE;
+	private static String getMessageOrderedPrice(LottoOrderCount lottoOrderCount) {
+		return lottoOrderCount.get() + MESSAGE_ORDERED_PRICE;
 	}
 
 	private static LottoNumber addBonusNumber() {

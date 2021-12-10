@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.wrapper.LottoOrderRequest;
+import lotto.domain.wrapper.LottoOrderCount;
 import lotto.domain.wrapper.LottoTicket;
 import lotto.domain.wrapper.Money;
 
@@ -18,7 +18,7 @@ public class LottoOrderTest {
 		final int ORDER_COUNT = 5;
 
 		// when
-		LottoOrder lottoOrder = new LottoOrder(LottoOrderRequest.byOrderCount(ORDER_COUNT));
+		LottoOrder lottoOrder = new LottoOrder(new LottoOrderCount(ORDER_COUNT));
 
 		// then
 		assertThat(lottoOrder.totalInvestment()).isEqualTo(new Money(LottoTicket.PRICE * ORDER_COUNT));
@@ -31,7 +31,7 @@ public class LottoOrderTest {
 		final int ORDER_COUNT = 5;
 
 		// when
-		LottoOrder lottoOrder = new LottoOrder(LottoOrderRequest.byOrderCount(ORDER_COUNT));
+		LottoOrder lottoOrder = new LottoOrder(new LottoOrderCount(ORDER_COUNT));
 
 		// then
 		assertThat(lottoOrder.holdCount()).isEqualTo(ORDER_COUNT);

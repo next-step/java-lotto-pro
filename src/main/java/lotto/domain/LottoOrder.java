@@ -3,19 +3,19 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.domain.wrapper.LottoOrderRequest;
+import lotto.domain.wrapper.LottoOrderCount;
 import lotto.domain.wrapper.LottoTicket;
 import lotto.domain.wrapper.Money;
 
 public class LottoOrder {
 	private List<LottoTicket> holdLottoTickets = new ArrayList<>();
 
-	public LottoOrder(LottoOrderRequest order) {
+	public LottoOrder(LottoOrderCount order) {
 		buyTickets(order);
 	}
 
-	public List<LottoTicket> buyTickets(LottoOrderRequest order) {
-		for (int i = 0; i < order.getCount(); i++) {
+	public List<LottoTicket> buyTickets(LottoOrderCount order) {
+		for (int i = 0; i < order.get(); i++) {
 			this.holdLottoTickets.add(new LottoTicket());
 		}
 		return this.holdLottoTickets;

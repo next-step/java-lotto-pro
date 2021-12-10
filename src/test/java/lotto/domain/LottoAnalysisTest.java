@@ -11,7 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.domain.wrapper.LottoNumber;
-import lotto.domain.wrapper.LottoOrderRequest;
+import lotto.domain.wrapper.LottoOrderCount;
 import lotto.domain.wrapper.LottoTicket;
 
 public class LottoAnalysisTest {
@@ -33,7 +33,7 @@ public class LottoAnalysisTest {
 		final List<LottoNumber> defaultNumbers = LottoTicket.getDefaultNumbers();
 
 		// get Lotto Ticket
-		LottoOrder lottoOrder = new LottoOrder(LottoOrderRequest.byOrderCount(ORDER_COUNT));
+		LottoOrder lottoOrder = new LottoOrder(new LottoOrderCount(ORDER_COUNT));
 		LottoTicket holdingTicket = lottoOrder.holdings().get(FIRST);
 
 		// make winningTicket

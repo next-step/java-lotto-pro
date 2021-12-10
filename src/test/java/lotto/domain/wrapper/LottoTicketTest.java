@@ -29,6 +29,7 @@ public class LottoTicketTest {
 		assertThat(lottoTicket.getNumbers().size())
 			.isEqualTo(LOTTO_NUMBER_COUNT);
 	}
+
 	@DisplayName("로또번호 중복없이 6개 입력하지 않을 경우 예외")
 	@ParameterizedTest
 	@CsvSource(value = {
