@@ -23,14 +23,15 @@ public class LottoInvestment {
 
 	public static void start() {
 		LottoOrder lottoOrder = new LottoOrder(Customer.askOrder());
-		buyTicket(lottoOrder.holdings());
+		lottoOrder.buyManualTickets(Customer.askManualLottoTickets(Customer.askManualOrderCount()));
+		showHoldLottoTickets(lottoOrder.holdings(), lottoOrder.holdManualCount());
 		LottoAnalysis lottoAnalysis = new LottoAnalysis(Customer.askLastWinningTicket(), Customer.askBonusNumber());
 		LottoInvestment lottoInvestment = new LottoInvestment(lottoOrder, lottoAnalysis);
 		lottoInvestment.analysisProfit();
 	}
 
-	protected static void buyTicket(List<LottoTicket> lottoTickets) {
-		Machine.showLottoTickets(lottoTickets);
+	protected static void showHoldLottoTickets(List<LottoTicket> lottoTickets, int manualCount) {
+		Machine.showLottoTickets(lottoTickets, manualCount);
 	}
 
 	private static void showAnalysis(HitsByRank hitsByRank, BigDecimal profitPercent) {

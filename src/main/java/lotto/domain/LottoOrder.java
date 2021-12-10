@@ -9,6 +9,7 @@ import lotto.domain.wrapper.Money;
 
 public class LottoOrder {
 	private List<LottoTicket> holdLottoTickets = new ArrayList<>();
+	private LottoOrderCount manualLottoOrderCount = new LottoOrderCount();
 
 	public LottoOrder(LottoOrderCount order) {
 		buyTickets(order);
@@ -19,6 +20,16 @@ public class LottoOrder {
 			this.holdLottoTickets.add(new LottoTicket());
 		}
 		return this.holdLottoTickets;
+	}
+
+	public List<LottoTicket> buyManualTickets(List<LottoTicket> tickets) {
+		this.holdLottoTickets.addAll(tickets);
+		this.manualLottoOrderCount = new LottoOrderCount(tickets.size());
+		return this.holdLottoTickets;
+	}
+
+	public int holdManualCount() {
+		return this.manualLottoOrderCount.get();
 	}
 
 	public int holdCount() {
