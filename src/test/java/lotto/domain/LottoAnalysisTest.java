@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import lotto.domain.wrapper.LottoNumber;
 import lotto.domain.wrapper.LottoOrderCount;
 import lotto.domain.wrapper.LottoTicket;
+import lotto.domain.wrapper.WinningLottoTicket;
 
 public class LottoAnalysisTest {
 
@@ -32,24 +33,32 @@ public class LottoAnalysisTest {
 		final int FIRST = 0;
 		final List<LottoNumber> defaultNumbers = LottoTicket.getDefaultNumbers();
 
-		// get Lotto Ticket
+		// make Lotto Ticket
 		LottoOrder lottoOrder = new LottoOrder(new LottoOrderCount(ORDER_COUNT));
 		LottoTicket holdingTicket = lottoOrder.holdings().get(FIRST);
 
-		// make winningTicket
+		// get winning lotto numbers
 		defaultNumbers.removeAll(holdingTicket.getNumbers());
 		List<LottoNumber> matchedNumbersInHoldTicket = holdingTicket.getNumbers().subList(FIRST, matchedNumberCount);
 		List<LottoNumber> lastWeekWinningNumbers = new ArrayList<>(matchedNumbersInHoldTicket);
-		lastWeekWinningNumbers.addAll(defaultNumbers.subList(FIRST, LottoTicket.NUMBER_COUNT - lastWeekWinningNumbers.size()));
-		LottoTicket lastWeekWinningTicket = new LottoTicket(lastWeekWinningNumbers);
-		LottoNumber bonus = defaultNumbers.get(defaultNumbers.size()-1);
-		// bonus number
-		if(matchBonus) {
+		lastWeekWinningNumbers.addAll(
+			defaultNumbers.subList(FIRST, LottoTicket.NUMBER_COUNT - lastWeekWinningNumbers.size()));
+		LottoNumber bonus = defaultNumbers.get(defaultNumbers.size() - 1); // get any number
+
+		// get bonus number
+		if (matchBonus) {
 			List<LottoNumber> holdLottoNumbersExceptWinningNumbers = new ArrayList<>(holdingTicket.getNumbers());
 			holdLottoNumbersExceptWinningNumbers.removeAll(lastWeekWinningNumbers);
 			bonus = holdLottoNumbersExceptWinningNumbers.get(FIRST);
 		}
-		LottoAnalysis lottoAnalysis = new LottoAnalysis(lastWeekWinningTicket, bonus);
-		assertThat(lottoAnalysis.analysis(lottoOrder.totalInvestment(), lottoOrder.holdings()).getProfitPercent()).isEqualTo(expectedProfit);
+
+		// make winning lotto ticket with bonus
+		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket(lastWeekWinningNumbers), bonus);
+		LottoAnalysis lottoAnalysis = new LottoAnalysis(winningLottoTicket.getTicket(), winningLottoTicket.getBonus());
+
+		// then
+		assertThat(
+			lottoAnalysis.analysis(lottoOrder.totalInvestment(), lottoOrder.holdings()).getProfitPercent()).isEqualTo(
+			expectedProfit);
 	}
 }

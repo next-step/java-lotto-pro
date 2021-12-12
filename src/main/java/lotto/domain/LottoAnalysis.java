@@ -10,27 +10,21 @@ import lotto.domain.wrapper.LottoNumber;
 import lotto.domain.wrapper.LottoTicket;
 import lotto.domain.wrapper.Money;
 import lotto.domain.wrapper.Rank;
+import lotto.domain.wrapper.WinningLottoTicket;
 
 public class LottoAnalysis {
-	private static final String MESSAGE_WRONG_BONUS_NUMBER = "보너스 볼을 다시 입력해 주세요.";
 
-	private final LottoTicket lastWinningTicket;
-	private final LottoNumber bonus;
+	private final WinningLottoTicket winningLottoTicket;
 
 	public LottoAnalysis(LottoTicket lastWinningTicket, LottoNumber bonus) {
-		this.lastWinningTicket = lastWinningTicket;
-		this.bonus = validatedBonus(bonus);
-	}
-
-	public boolean hasLastWinningTicket() {
-		return this.lastWinningTicket != null;
+		this.winningLottoTicket = new WinningLottoTicket(lastWinningTicket, bonus);
 	}
 
 	public AnalysisResult analysis(Money investment, List<LottoTicket> holdings) {
 		HitsByRank hitsByRank = new HitsByRank();
 		for (LottoTicket ticket : holdings) {
-			int matchedNumberCount = ticket.countMatchNumbers(this.lastWinningTicket);
-			hitsByRank.hit(Rank.valueOf(matchedNumberCount, ticket.getNumbers().contains(bonus)));
+			int matchedNumberCount = ticket.countMatchNumbers(this.winningLottoTicket.getTicket());
+			hitsByRank.hit(Rank.valueOf(matchedNumberCount, ticket.getNumbers().contains(this.winningLottoTicket.getBonus())));
 		}
 		BigDecimal profitPercent = totalWinnings(hitsByRank).get()
 			.subtract(investment.get())
@@ -45,20 +39,5 @@ public class LottoAnalysis {
 			winnings += rank.getWinningMoney() * hitsByRank.getHitsByRank(rank);
 		}
 		return new Money(winnings);
-	}
-
-	public LottoNumber validatedBonus(LottoNumber bonus) {
-		try {
-			return validatedBonusNumber(bonus);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(MESSAGE_WRONG_BONUS_NUMBER);
-		}
-	}
-
-	public LottoNumber validatedBonusNumber(LottoNumber bonus) {
-		if (!LottoTicket.getDefaultNumbers().contains(bonus) || this.lastWinningTicket.getNumbers().contains(bonus)) {
-			throw new IllegalArgumentException(MESSAGE_WRONG_BONUS_NUMBER);
-		}
-		return bonus;
 	}
 }

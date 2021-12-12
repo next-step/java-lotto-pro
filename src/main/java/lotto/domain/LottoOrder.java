@@ -36,10 +36,6 @@ public class LottoOrder {
 		return this.holdLottoTickets.size();
 	}
 
-	public boolean notYetOrdered() {
-		return this.holdLottoTickets.isEmpty();
-	}
-
 	public List<LottoTicket> holdings() {
 		return this.holdLottoTickets;
 	}

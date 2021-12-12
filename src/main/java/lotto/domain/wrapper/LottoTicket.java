@@ -33,6 +33,10 @@ public final class LottoTicket {
 		this.numbers = validatedNumbers(lottoNumbers);
 	}
 
+	public LottoTicket(LottoTicket lottoTicket) {
+		this.numbers = lottoTicket.getNumbers();
+	}
+
 	private static List<LottoNumber> makeDefaultNumbers() {
 		List<LottoNumber> defaultNumbers = new ArrayList<>();
 		for (int number = START_NUMBER; number < END_NUMBER; number++) {

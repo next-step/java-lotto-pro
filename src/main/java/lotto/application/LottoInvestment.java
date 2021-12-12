@@ -43,11 +43,11 @@ public class LottoInvestment {
 	}
 
 	protected BigDecimal analysisProfit() {
-		if (this.lottoOrder.notYetOrdered() || !lottoAnalysis.hasLastWinningTicket()) {
+		if (lottoOrder != null || lottoAnalysis != null) {
 			showBeforeInvestment();
 			return new Money().get();
 		}
-		AnalysisResult result = lottoAnalysis.analysis(lottoOrder.totalInvestment() ,lottoOrder.holdings());
+		AnalysisResult result = lottoAnalysis.analysis(lottoOrder.totalInvestment(), lottoOrder.holdings());
 		showAnalysis(result.getHitsByRank(), result.getProfitPercent());
 		return result.getProfitPercent();
 	}
