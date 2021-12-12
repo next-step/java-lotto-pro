@@ -2,7 +2,7 @@ package lotto.domain.wrapper;
 
 import java.math.BigDecimal;
 
-public class LottoMoney {
+public final class LottoMoney {
 	private static final String MESSAGE_WRONG_MIN_ORDER = "로또의 금액은 1,000원으로, 최소 1개 이상 구매하셔야합니다.";
 	private static final String MESSAGE_WRONG_ORDER_TYPE = "올바르지 않는 구매 요청입니다.";
 

@@ -2,7 +2,7 @@ package lotto.domain.wrapper;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public final class LottoNumber {
 	public static final int START_NUMBER = 1;
 	public static final int END_NUMBER = 45;
 	private static final String MESSAGE_WRONG_NUMBER_RANGE = "로또 번호의 범위를 벗어났습니다.";

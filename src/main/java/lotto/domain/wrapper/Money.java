@@ -3,7 +3,7 @@ package lotto.domain.wrapper;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Money {
+public final class Money {
 	private final BigDecimal money;
 
 	public Money() {
