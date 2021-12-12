@@ -96,7 +96,7 @@ public class Customer extends CustomerConsole {
 
 	private static LottoNumber addBonusNumber() {
 		try {
-			return new LottoNumber(ask());
+			return LottoNumber.of(ask());
 		} catch (IllegalArgumentException e) {
 			System.out.println(withErrorPrefix(e.getMessage()));
 			return addBonusNumber();

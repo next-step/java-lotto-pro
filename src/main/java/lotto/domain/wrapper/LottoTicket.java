@@ -26,7 +26,7 @@ public final class LottoTicket {
 
 	public LottoTicket(String lottoNumbers) {
 		this.numbers = validatedNumbers(IntegerParser.toInteger(lottoNumbers, DELIMITER).stream()
-			.map(num -> new LottoNumber(num)).collect(Collectors.toList()));
+			.map(num -> LottoNumber.of(num)).collect(Collectors.toList()));
 	}
 
 	public LottoTicket(List<LottoNumber> lottoNumbers) {
@@ -36,7 +36,7 @@ public final class LottoTicket {
 	private static List<LottoNumber> makeDefaultNumbers() {
 		List<LottoNumber> defaultNumbers = new ArrayList<>();
 		for (int number = START_NUMBER; number < END_NUMBER; number++) {
-			defaultNumbers.add(new LottoNumber(number));
+			defaultNumbers.add(LottoNumber.of(number));
 		}
 		return defaultNumbers;
 	}
