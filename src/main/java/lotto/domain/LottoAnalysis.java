@@ -14,8 +14,8 @@ import lotto.domain.wrapper.Rank;
 public class LottoAnalysis {
 	private static final String MESSAGE_WRONG_BONUS_NUMBER = "보너스 볼을 다시 입력해 주세요.";
 
-	private LottoTicket lastWinningTicket;
-	private LottoNumber bonus;
+	private final LottoTicket lastWinningTicket;
+	private final LottoNumber bonus;
 
 	public LottoAnalysis(LottoTicket lastWinningTicket, LottoNumber bonus) {
 		this.lastWinningTicket = lastWinningTicket;
