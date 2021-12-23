@@ -26,6 +26,10 @@ public class WinningLottoTicket {
 		return bonus;
 	}
 
+	public boolean hasBonusWithin(LottoTicket undisclosedTicket) {
+		return undisclosedTicket.getNumbers().contains(this.bonus);
+	}
+
 	public LottoTicket getTicket() {
 		return this.ticket;
 	}

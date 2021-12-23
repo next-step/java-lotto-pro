@@ -24,7 +24,7 @@ public class LottoAnalysis {
 		HitsByRank hitsByRank = new HitsByRank();
 		for (LottoTicket ticket : holdings) {
 			int matchedNumberCount = ticket.countMatchNumbers(this.winningLottoTicket.getTicket());
-			hitsByRank.hit(Rank.valueOf(matchedNumberCount, ticket.getNumbers().contains(this.winningLottoTicket.getBonus())));
+			hitsByRank.hit(Rank.valueOf(matchedNumberCount, winningLottoTicket.hasBonusWithin(ticket)));
 		}
 		BigDecimal profitPercent = totalWinnings(hitsByRank).get()
 			.subtract(investment.get())
