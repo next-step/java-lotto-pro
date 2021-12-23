@@ -37,6 +37,10 @@ public final class LottoTicket {
 		this.numbers = lottoTicket.getNumbers();
 	}
 
+	public static List<LottoNumber> getDefaultNumbers() {
+		return new ArrayList<>(DEFAULT_NUMBERS);
+	}
+
 	private static List<LottoNumber> makeDefaultNumbers() {
 		List<LottoNumber> defaultNumbers = new ArrayList<>();
 		for (int number = START_NUMBER; number < END_NUMBER; number++) {
@@ -45,13 +49,6 @@ public final class LottoTicket {
 		return defaultNumbers;
 	}
 
-	public static List<LottoNumber> getDefaultNumbers() {
-		return new ArrayList<>(DEFAULT_NUMBERS);
-	}
-
-	public List<LottoNumber> getNumbers() {
-		return this.numbers;
-	}
 	public int countMatchNumbers(LottoTicket otherLottoTicket) {
 		return (int) this.numbers.stream()
 			.filter(lottoNumber -> otherLottoTicket.getNumbers().contains(lottoNumber))
@@ -60,7 +57,7 @@ public final class LottoTicket {
 
 	private List<LottoNumber> makeLottoNumbers() {
 		List<LottoNumber> defaultNumbers = getDefaultNumbers();
-		Collections.shuffle(defaultNumbers);  
+		Collections.shuffle(defaultNumbers);
 		List<LottoNumber> lottoNumbers = defaultNumbers.subList(START_NUMBER - 1, NUMBER_COUNT);
 		lottoNumbers.sort(Comparator.comparingInt(num -> num.get()));
 		return lottoNumbers;
@@ -71,5 +68,9 @@ public final class LottoTicket {
 			throw new IllegalArgumentException(NUMBER_COUNT + MESSAGE_WRONG_NUMBER_COUNT);
 		}
 		return inputNumbers;
+	}
+
+	public List<LottoNumber> getNumbers() {
+		return this.numbers;
 	}
 }

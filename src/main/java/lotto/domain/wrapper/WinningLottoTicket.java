@@ -11,14 +11,6 @@ public class WinningLottoTicket {
 		this.bonus = validatedBonus(ticket, bonus);
 	}
 
-	public LottoTicket getTicket() {
-		return this.ticket;
-	}
-
-	public LottoNumber getBonus() {
-		return this.bonus;
-	}
-
 	private LottoNumber validatedBonus(LottoTicket ticket, LottoNumber bonus) {
 		try {
 			return validatedBonusNumber(ticket, bonus);
@@ -32,5 +24,13 @@ public class WinningLottoTicket {
 			throw new IllegalArgumentException(MESSAGE_WRONG_BONUS_NUMBER);
 		}
 		return bonus;
+	}
+
+	public LottoTicket getTicket() {
+		return this.ticket;
+	}
+
+	public LottoNumber getBonus() {
+		return this.bonus;
 	}
 }
