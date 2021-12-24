@@ -16,7 +16,7 @@ public class LottoNumberTest {
 	})
 	public void throwExceptionWhenNumberOutOfRange(int number) {
 		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> new LottoNumber(number))
+			.isThrownBy(() -> LottoNumber.of(number))
 			.withMessage("로또 번호의 범위를 벗어났습니다.");
 	}
 }

@@ -3,7 +3,7 @@ package lotto.domain.wrapper;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class AnalysisResult {
+public final class AnalysisResult {
 	private final HitsByRank hitsByRank;
 	private final BigDecimal profitPercent;
 	private final List<LottoTicket> holdings;

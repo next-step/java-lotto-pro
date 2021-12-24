@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import lotto.domain.wrapper.HitsByRank;
+import lotto.domain.wrapper.LottoOrderCount;
 import lotto.domain.wrapper.LottoTicket;
 import lotto.domain.wrapper.Rank;
 
@@ -17,8 +18,10 @@ public class Machine {
 	private static final String MESSAGE_LOTTO_TICKET_NUMBERS = "[%s]";
 	private static final String MESSAGE_TOTAL_PROFIT = "총 수익률은 %f입니다. 기준은 1입니다.";
 	private static final String MESSAGE_NO_PROFIT_BEFORE_INVESTMENT = "투자 혹은 당첨 발표 전에는 수익 분석을 할 수 없습니다.";
+	private static final String MESSAGE_ORDERED_PRICE = "수동으로 %d개, 자동으로 %d개를 구매했습니다.";
 
-	public static void showLottoTickets(List<LottoTicket> tickets) {
+	public static void showLottoTickets(List<LottoTicket> tickets, int manualCount) {
+		System.out.println(String.format(MESSAGE_ORDERED_PRICE, manualCount, tickets.size() - manualCount));
 		tickets.stream()
 			.forEach(ticket -> System.out.println(String.format(MESSAGE_LOTTO_TICKET_NUMBERS
 				, ticket.getNumbers().stream()

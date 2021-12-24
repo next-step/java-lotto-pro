@@ -3,7 +3,7 @@ package lotto.domain.wrapper;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HitsByRank {
+public final class HitsByRank {
 	private static final Map<Rank, Integer> DEFAULT;
 	private static final int ZERO_TIMES = 0;
 
