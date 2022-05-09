@@ -18,4 +18,10 @@ public class StringTest {
 		assertThat(actual).contains("1");
 		assertThat(actual).containsExactly("1");
 	}
+
+	@Test
+	void substring() {
+		String actual = "(1,2)".substring(1, 4);
+		assertThat(actual).isEqualTo("1,2");
+	}
 }
