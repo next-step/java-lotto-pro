@@ -1,10 +1,12 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class StringTest {
     @Test
-    void split_메서드를_사용했을_때_1과_2로_문자열이_분리되어야_한다() {
+    @DisplayName("문자열 '1,2'를 ','로 split 했을 때 '1'과 '2'로 문자열이 분리되어야 한다")
+    void when_split_string_should_return_array_with_two_elements() {
         // given
         final String given = "1,2";
 
@@ -16,7 +18,8 @@ public class StringTest {
     }
     
     @Test
-    void split_메서드를_사용했을_때_1만을_포함하는_배열이_반환되어야_한다() {
+    @DisplayName("문자열 '1'을 ','로 split 했을 때 1만을 포함하는 배열이 반환되어야 한다")
+    void when_split_string_should_return_array_with_only_one_element() {
         // given
         final String given = "1";
         
@@ -28,7 +31,8 @@ public class StringTest {
     }
     
     @Test
-    void substring_메서드를_사용했을_문자열_양_끝의_괄호가_제거되어야_한다() {
+    @DisplayName("문자열 '(1,2)를 substring 했을 떄 문자열 양 끝의 괄호가 제거되어야 한다")
+    void when_substring_string_should_return_string_without_braces() {
         // given
         final String given = "(1,2)";
 
