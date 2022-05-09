@@ -1,6 +1,10 @@
 package step2;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
+
+    public static final String DEFAULT_DELIMETER = ",";
 
     public static int splitAndSum(String input) {
         if (input == null) {
@@ -15,7 +19,7 @@ public class StringAddCalculator {
             return Integer.valueOf(input);
         }
 
-        return -1;
+        return getSumWithDelimiter(input);
     }
 
     static boolean isSingleDigitNumber(String input) {
@@ -25,5 +29,12 @@ public class StringAddCalculator {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    private static int getSumWithDelimiter(String input) {
+        String[] numbers = input.split(DEFAULT_DELIMETER);
+        return Arrays.stream(numbers)
+                .map(Integer::valueOf)
+                .reduce(0, (num1, num2) -> num1 + num2);
     }
 }
