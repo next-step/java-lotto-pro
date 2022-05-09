@@ -2,7 +2,7 @@ package step2;
 
 public class StringAddCalculator {
 
-    public int calculate(String input) {
+    public static int splitAndSum(String input) {
         if (input == null) {
             return 0;
         }
@@ -18,7 +18,7 @@ public class StringAddCalculator {
         return -1;
     }
 
-    boolean isSingleDigitNumber(String input) {
+    static boolean isSingleDigitNumber(String input) {
         try {
             Integer.valueOf(input);
             return input.length() == 1;
