@@ -11,6 +11,19 @@ public class StringAddCalculator {
             return 0;
         }
 
+        if (isSingleDigitNumber(input)) {
+            return Integer.valueOf(input);
+        }
+
         return -1;
+    }
+
+    boolean isSingleDigitNumber(String input) {
+        try {
+            Integer.valueOf(input);
+            return input.length() == 1;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
