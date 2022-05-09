@@ -6,9 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
+    private static final String TRUE_STRING = "true";
     private Set<Integer> numbers;
 
     @BeforeEach
@@ -33,5 +35,18 @@ public class SetTest {
     void when_call_contains_for_elements_in_Set_should_return_true(final int element) {
         // when and then
         assertThat(numbers.contains(element)).isTrue();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+    @DisplayName("1, 2, 3이 들어있는 Set 객체에 contains 메서드를 호출하였을 때 파라미터에 따라 올바른 결과가 반환되어야 한다")
+    void when_call_contains_for_elements_in_Set_should_return_correct_result(final String input, final String expected) {
+        // when and then
+        assertThat(numbers.contains(Integer.parseInt(input))).isEqualTo(convertStringToBoolean(expected));
+    }
+
+    private boolean convertStringToBoolean(final String booleanString) {
+        if (booleanString.equals(TRUE_STRING)) return true;
+        return false;
     }
 }
