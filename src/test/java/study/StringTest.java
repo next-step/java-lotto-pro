@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class StringTest {
     @Test
@@ -29,5 +30,25 @@ public class StringTest {
         int toIndex = string.length() - 1;
 
         assertThat(string.substring(fromIndex, toIndex)).isEqualTo("1,2");
+    }
+
+    @Test
+    @DisplayName("\"abc\" 값이 주어졌을 때 String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져오는 학습 테스트를 구현한다.")
+    void char_at() {
+        String string = "abc";
+
+        assertThat(string.charAt(0)).isEqualTo('a');
+        assertThat(string.charAt(1)).isEqualTo('b');
+        assertThat(string.charAt(2)).isEqualTo('c');
+    }
+
+    @Test
+    @DisplayName("String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져올 때 위치 값을 벗어나면 StringIndexOutOfBoundsException 발생한다.")
+    void char_at_index_out_of_bounds_exception() {
+        String string = "abc";
+
+        assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+                .isThrownBy(() -> string.charAt(string.length()))
+                .withMessageMatching("String index out of range: \\d+");
     }
 }
