@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -29,24 +32,20 @@ public class StringTest {
         assertThat(result).isEqualTo("1,2");
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"0:a", "1:b", "2:c"}, delimiter = ':')
     @DisplayName("문자열에서 문자 가져오기")
-    public void Get_character_from_string() {
+    public void Get_character_from_string(int index, char expected) {
         String input = "abc";
-        assertThat(input.charAt(0)).isEqualTo('a');
-        assertThat(input.charAt(1)).isEqualTo('b');
-        assertThat(input.charAt(2)).isEqualTo('c');
+        assertThat(input.charAt(index)).isEqualTo(expected);
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {-10, -1, 3, 4, 5, 10})
     @DisplayName("문자열에서 문자 가져오기 인덱스 예외")
-    public void Get_character_from_string_with_index_exception() {
+    public void Get_character_from_string_with_index_exception(int index) {
         assertThatThrownBy(() -> {
-            "abc".charAt(-1);
-        }).isInstanceOf(StringIndexOutOfBoundsException.class);
-
-        assertThatThrownBy(() -> {
-            "abc".charAt(4);
+            "abc".charAt(index);
         }).isInstanceOf(StringIndexOutOfBoundsException.class);
     }
 }
