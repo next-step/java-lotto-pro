@@ -55,9 +55,8 @@ public class StringTest {
 
         assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
                 .isThrownBy(() -> {
-                            input.charAt(outOfIndex);
-                        }).withMessageMatching("String index out of range: \\d+");
+                    input.charAt(outOfIndex);
+                }).withMessageMatching("String index out of range: \\d+");
     }
-
 
 }
