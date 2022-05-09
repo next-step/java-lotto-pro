@@ -3,6 +3,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,11 +14,8 @@ public class StringTest {
         // given
         final String given = "1,2";
 
-        // when
-        final String[] result = given.split(",");
-
-        // then
-        assertThat(result).contains("1", "2");
+        // when and then
+        assertThat(given.split(",")).contains("1", "2");
     }
 
     @Test
@@ -26,11 +24,8 @@ public class StringTest {
         // given
         final String given = "1";
 
-        // when
-        final String[] result = given.split(",");
-
-        // then
-        assertThat(result).containsExactly("1");
+        // when and then
+        assertThat(given.split(",")).containsExactly("1");
     }
 
     @Test
@@ -39,11 +34,8 @@ public class StringTest {
         // given
         final String given = "(1,2)";
 
-        // when
-        final String result = given.substring(1, 4);
-
-        // then
-        assertThat(result).isEqualTo("1,2");
+        // when and then
+        assertThat(given.substring(1, 4)).isEqualTo("1,2");
     }
 
     @Test
@@ -57,8 +49,8 @@ public class StringTest {
         indexValueMap.put(2, 'c');
 
         // when and then
-        for (final int index : indexValueMap.keySet()) {
-            assertThat(given.charAt(index)).isEqualTo(indexValueMap.get(index));
+        for (final Entry<Integer, Character> entry : indexValueMap.entrySet()) {
+            assertThat(given.charAt(entry.getKey())).isEqualTo(entry.getValue());
         }
     }
 
@@ -67,10 +59,9 @@ public class StringTest {
     void when_call_charAt_with_parameter_exceeding_length_should_throw_StringIndexOutOfBoundsException() {
         // given
         final String given = "abc";
-        final int indexExceedingLength = 3;
 
         // when and then
-        assertThatThrownBy(() -> given.charAt(indexExceedingLength))
+        assertThatThrownBy(() -> given.charAt(3))
                 .isInstanceOf(StringIndexOutOfBoundsException.class);
     }
 }
