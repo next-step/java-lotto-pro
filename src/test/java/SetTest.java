@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("Set 클래스 학습 테스트")
@@ -53,6 +54,17 @@ public class SetTest {
             void it_Returns_True(final int input) {
 
                 assertThat(numbers.contains(input)).isTrue();
+
+            }
+
+            @DisplayName("1,2,3 각 값에 대하여 true, 이외의 값은 false를 반환한다.")
+            @ParameterizedTest
+            @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+            void it_Returns_Boolean(final int input, final boolean expected) {
+
+                final boolean result = numbers.contains(input);
+
+                assertThat(result).isEqualTo(expected);
 
             }
 
