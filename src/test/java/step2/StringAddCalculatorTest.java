@@ -38,8 +38,8 @@ class StringAddCalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"a", "11", "123", "&", "*", "1234", "1a2a3a"})
-    @DisplayName("단일 숫자가 아니라면 예외를 리턴")
-    public void Return_exception_if_not_single_digit_number(String input) {
+    @DisplayName("단일 숫자가 아니라면 false를 리턴")
+    public void Return_false_if_not_single_digit_number(String input) {
         assertThat(calculator.isSingleDigitNumber(input)).isFalse();
     }
 
