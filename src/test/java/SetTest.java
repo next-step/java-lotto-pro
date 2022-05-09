@@ -1,0 +1,46 @@
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.HashSet;
+import java.util.Set;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
+@DisplayName("Set 클래스 학습 테스트")
+public class SetTest {
+
+    @DisplayName("Set 클래스의 size() 메서드는")
+    @Nested
+    class Describe_size {
+
+        @DisplayName("1, 2, 3을 값으로 가지고 있을 때")
+        @Nested
+        class Context_One_Two_Three {
+
+            private Set<Integer> numbers;
+
+            @BeforeEach
+            void setUp() {
+                numbers = new HashSet<>();
+                numbers.add(1);
+                numbers.add(1);
+                numbers.add(2);
+                numbers.add(3);
+            }
+
+            @DisplayName("3을 반환한다.")
+            @Test
+            void it_Returns_Three() {
+
+                final int size = numbers.size();
+
+                assertThat(size).isEqualTo(3);
+
+            }
+
+        }
+
+    }
+
+}
