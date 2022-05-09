@@ -19,4 +19,13 @@ class StringTest {
         assertThat(strings).contains("1");
         assertThat(strings).containsExactly("1");
     }
+
+    @Test
+    void split_1_2_brace() {
+        final String s = "(1,2)";
+        String[] strings = s.substring(1, s.length() - 1)
+                .split(",");
+        assertThat(strings).contains("1", "2");
+        assertThat(strings).containsExactly("1", "2");
+    }
 }
