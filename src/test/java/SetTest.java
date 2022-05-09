@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("Set Collection에 대한 학습 테스트")
@@ -34,12 +35,23 @@ public class SetTest {
 
     @Nested
     @DisplayName("요구사항 2")
-    class Contains_테스트 {
+    class Contains_테스트1 {
         @ParameterizedTest
         @ValueSource(ints = {1, 2, 3})
         @DisplayName("ParameterizedTest를 활용해 Set에 1, 2, 3의 값이 존재하는지 확인한다.")
         void contains(int number) {
             assertThat(numbers.contains(number)).isTrue();
+        }
+    }
+
+    @Nested
+    @DisplayName("요구사항 3")
+    class Contains_테스트2 {
+        @ParameterizedTest
+        @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+        @DisplayName("ParameterizedTest를 활용해 입력 값에 따라 결과 값이 다른 경우에 대한 테스트도 가능하도록 구현한다.")
+        void contains(String input, String expected) {
+            assertThat(numbers.contains(Integer.valueOf(input))).isEqualTo(Boolean.valueOf(expected));
         }
     }
 }
