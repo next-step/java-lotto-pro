@@ -52,10 +52,10 @@ public class SetTest {
     void containsTrueFalse(String input, String expected) {
         Integer number = convertStringToInteger(input);
         Boolean result = convertStringToBoolean(expected);
-        assertEqualsExpectedAndNumber(number, result);
+        assertWithExpectedAndNumber(number, result);
     }
 
-    private void assertEqualsExpectedAndNumber(Integer number, Boolean expected) {
+    private void assertWithExpectedAndNumber(Integer number, Boolean expected) {
         assertThat(numbers.contains(number)).isEqualTo(expected);
     }
 
