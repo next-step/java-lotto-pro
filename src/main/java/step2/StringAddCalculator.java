@@ -21,10 +21,6 @@ public class StringAddCalculator {
             return Integer.valueOf(input);
         }
 
-        if (input.startsWith("//")) {
-            return getSumWithCustomDelimiter(input);
-        }
-
         return getSumWithDelimiter(input);
     }
 
@@ -37,10 +33,13 @@ public class StringAddCalculator {
         }
     }
 
-    private static int getSumWithCustomDelimiter(String input) {
-        String customDelimiter = findCustomDelimeter(input);
-        input = input.substring(input.indexOf(REAR_CUSTOM_DELIMITER) + 1);
-        String[] numbers = input.split(customDelimiter);
+    private static int getSumWithDelimiter(String input) {
+        String delimiter = DEFAULT_DELIMITER;
+        if (input.startsWith(FRONT_CUSTOM_DELIMITER)) {
+            delimiter = findCustomDelimeter(input);
+            input = input.substring(input.indexOf(REAR_CUSTOM_DELIMITER) + 1);
+        }
+        String[] numbers = input.split(delimiter);
         return Arrays.stream(numbers)
                 .map(Integer::valueOf)
                 .reduce(0, (num1, num2) -> num1 + num2);
@@ -48,12 +47,5 @@ public class StringAddCalculator {
 
     private static String findCustomDelimeter(String input) {
         return input.substring(FRONT_CUSTOM_DELIMITER.length(), input.indexOf(REAR_CUSTOM_DELIMITER));
-    }
-
-    static int getSumWithDelimiter(String input) {
-        String[] numbers = input.split(DEFAULT_DELIMITER);
-        return Arrays.stream(numbers)
-                .map(Integer::valueOf)
-                .reduce(0, (num1, num2) -> num1 + num2);
     }
 }
