@@ -21,5 +21,13 @@ public class StringTest {
         assertThat("1".split(",")).containsExactly("1");
     }
 
+    @Test
+    @DisplayName("\"(1,2)\" 값이 주어졌을 때 String의 substring() 메소드를 활용해 ()을 제거하고 \"1,2\"를 반환하도록 구현한다.")
+    void substring_remove_bracket() {
+        String string = "(1,2)";
+        int fromIndex = 1;
+        int toIndex = string.length() - 1;
 
+        assertThat(string.substring(fromIndex, toIndex)).isEqualTo("1,2");
+    }
 }
