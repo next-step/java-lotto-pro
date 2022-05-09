@@ -2,6 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringTest {
     @Test
@@ -26,5 +27,26 @@ public class StringTest {
         String input = "(1,2)";
         String result = input.substring(1, input.length() - 1);
         assertThat(result).isEqualTo("1,2");
+    }
+
+    @Test
+    @DisplayName("문자열에서 문자 가져오기")
+    public void Get_character_from_string() {
+        String input = "abc";
+        assertThat(input.charAt(0)).isEqualTo('a');
+        assertThat(input.charAt(1)).isEqualTo('b');
+        assertThat(input.charAt(2)).isEqualTo('c');
+    }
+
+    @Test
+    @DisplayName("문자열에서 문자 가져오기 인덱스 예외")
+    public void Get_character_from_string_with_index_exception() {
+        assertThatThrownBy(() -> {
+            "abc".charAt(-1);
+        }).isInstanceOf(StringIndexOutOfBoundsException.class);
+
+        assertThatThrownBy(() -> {
+            "abc".charAt(4);
+        }).isInstanceOf(StringIndexOutOfBoundsException.class);
     }
 }
