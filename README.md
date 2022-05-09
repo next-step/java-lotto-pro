@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 1단계 - 학습 테스트 실습
+* 실습 환경 구축
+* String 클래스에 대한 학습 테스트
+* Set Collection에 대한 학습 테스트
+* assertj 활용
+* 코드리뷰 요청 및 피드백
