@@ -24,4 +24,4 @@
 - [x] JUnit의 ParameterizedTest를 활용해 중복 코드를 제거해 본다.
 
 ## 요구사항 3
-- [ ] 1, 2, 3 값은 contains 메소드 실행결과 true, 4, 5 값을 넣으면 false 가 반환되는 테스트를 하나의 Test Case로 구현한다.
+- [x] 1, 2, 3 값은 contains 메소드 실행결과 true, 4, 5 값을 넣으면 false 가 반환되는 테스트를 하나의 Test Case로 구현한다.

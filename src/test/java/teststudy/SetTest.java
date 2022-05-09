@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
@@ -43,5 +44,26 @@ public class SetTest {
     @ValueSource(ints = {1, 2, 3})
     void contains(int number) {
         assertThat(numbers.contains(number)).isTrue();
+    }
+
+    @DisplayName("ParameterizedTest, CsvSource를 이용하여 테스트에 필요한 입력값과 기대값을 여러개 인자로 넘길 수 있다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+    void containsTrueFalse(String input, String expected) {
+        Integer number = convertStringToInteger(input);
+        Boolean result = convertStringToBoolean(expected);
+        assertEqualsExpectedAndNumber(number, result);
+    }
+
+    private void assertEqualsExpectedAndNumber(Integer number, Boolean expected) {
+        assertThat(numbers.contains(number)).isEqualTo(expected);
+    }
+
+    private Boolean convertStringToBoolean(String expected) {
+        return Boolean.valueOf(expected);
+    }
+
+    private Integer convertStringToInteger(String input) {
+        return Integer.valueOf(input);
     }
 }
