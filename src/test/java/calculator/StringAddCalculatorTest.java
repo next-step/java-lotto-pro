@@ -46,7 +46,7 @@ class StringAddCalculatorTest {
 
     @DisplayName("“//”와 “\\n” 문자 사이에 커스텀 구분자로 숫자합을 반환한다")
     @Test
-    public void splitAndSum_custom_구분자() throws Exception {
+    void splitAndSum_custom_구분자() throws Exception {
         assertAll(
                 () -> assertThat(StringAddCalculator.splitAndSum("//;\n1;2;3")).isEqualTo(6),
                 () -> assertThat(StringAddCalculator.splitAndSum("//q\n1q3q3")).isEqualTo(7)
@@ -56,7 +56,7 @@ class StringAddCalculatorTest {
     @DisplayName("음수를 포함한 문자열을 전달하면 RuntimeException 예외가 발생한다.")
     @ParameterizedTest(name = "음수를 포함한 {0}를 전달하면 RuntimeException 예외가 발생한다.")
     @ValueSource(strings = {"3,-1", "-1:-1", "1:2:-3"})
-    public void splitAndSum_negative(String input) throws Exception {
+    void splitAndSum_negative(String input) throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("음수가 입력되었습니다. 0 이상 값을 입력해주세요.");
@@ -65,7 +65,7 @@ class StringAddCalculatorTest {
     @DisplayName("숫자가 아닌 값이 포함된 문자열을 전달하면 RuntimeException 예외가 발생한다.")
     @ParameterizedTest(name = "숫자가 아닌 값이 포함된 문자열 {0}를 전달하면 RuntimeException 예외가 발생한다.")
     @ValueSource(strings = {"3,p", ":3", "1::3", "e:rr:or"})
-    public void splitAndSum_not_number(String input) throws Exception {
+    void splitAndSum_not_number(String input) throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("숫자 이외의 값이 입력되었습니다. 숫자를 입력해주세요.");
