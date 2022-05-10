@@ -1,9 +1,13 @@
 package step1;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class StringTest {
 
@@ -91,5 +95,65 @@ public class StringTest {
 
         // then
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("\"abc\" 값이 주어졌을 때 String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져오는 학습 테스트")
+    @Test
+    public void charAtTest() {
+        // given
+        String input = "abc";
+        char expected = 'a';
+
+        // when
+        char actual = input.charAt(0);
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("\"abc\" 값이 주어졌을 때 String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져오는 학습 테스트_ParameterizedTest")
+    @ParameterizedTest
+    @CsvSource(value = {"a:0", "b:1", "c:2"}, delimiter = ':')
+    public void charAtTest_ParameterizedTest(char expected, int index) {
+        // given
+        String input = "abc";
+
+        // when
+        char actual = input.charAt(index);
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("특정 위치의 문자를 가져올 때 위치 값을 벗어나면 StringIndexOutOfBoundsException")
+    @Test
+    public void exceptionTest() {
+        // given
+        String input = "abc";
+
+        // when & then
+        assertThatThrownBy(() -> input.charAt(5)).isInstanceOf(StringIndexOutOfBoundsException.class);
+    }
+
+    @DisplayName("StringIndexOutOfBoundsException에 hasMessageContaining 추가")
+    @Test
+    public void exceptionTest_hasMessageContaining() {
+        // given
+        String input = "abc";
+
+        // when & then
+        assertThatThrownBy(() -> input.charAt(5)).isInstanceOf(StringIndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: 5");
+    }
+
+    @DisplayName("StringIndexOutOfBoundsException에 withMessageMatching 추가")
+    @Test
+    public void exceptionTest_withMessageMatching() {
+        // given
+        String input = "abc";
+
+        // when & then
+        assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+                .isThrownBy(() -> input.charAt(5)).withMessageMatching("String index out of range: 5");
     }
 }
