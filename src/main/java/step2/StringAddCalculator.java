@@ -11,6 +11,9 @@ public class StringAddCalculator {
     private static final String DELIMITER_PIPE = "|";
     private static final String REGEX_CUSTOM_DELIMITER = "//(.)\n(.*)";
 
+    private StringAddCalculator() {
+    }
+
     public static int splitAndSum(String inputString) {
         if (isEmpty(inputString)) {
             return 0;
