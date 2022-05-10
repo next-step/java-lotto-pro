@@ -41,6 +41,6 @@ public class StringAddCalculator {
         if (number.matches("\\p{Digit}")) {
             return Integer.parseInt(number);
         }
-        throw new IllegalArgumentException("[ERROR] 숫자가 아닙니다.");
+        throw new IllegalArgumentException("[ERROR] 0~9 사이의 숫자가 아닙니다.");
     }
 }
