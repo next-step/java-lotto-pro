@@ -20,4 +20,10 @@ public class StringTest {
         assertThat(underTest).containsExactly("1");
     }
 
+    @Test
+    @DisplayName("(1,2)을 substring 했을 때 시작, 끝 index를 지정해주면 ()을 제거하고 1,2를 반환하는지 확인")
+    public void test_substring() {
+        assertThat("(1,2)".substring(1, 4)).isEqualTo("1,2");
+    }
+
 }
