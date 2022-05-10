@@ -10,8 +10,18 @@ public class InputView {
     private InputView() {}
 
     public static StringCalculator enterCalculateValue() {
-        System.out.println("양수를 구분자와 함께 입력해 주세요. (기본 구분자는 :, 이며 // \\n 로 시작되면 해당 문자 사이의 값으로 구분하여 계산합니다.)");
+        System.out.println("양수를 구분자와 함께 입력해 주세요.");
+        System.out.println("기본 구분자는 :, 입니다.");
+        System.out.println("//로 시작된 문자를 입력하 후 계산할 값을 입력하면, // 뒤의 문자로 구분하여 계산합니다.");
 
-        return new StringCalculator(scanner.nextLine());
+        StringBuilder sb = new StringBuilder();
+        sb.append(scanner.nextLine());
+
+        if (sb.toString().startsWith("//")) {
+            sb.append("\n");
+            sb.append(scanner.nextLine());
+        }
+
+        return new StringCalculator(sb.toString());
     }
 }
