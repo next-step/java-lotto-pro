@@ -27,7 +27,7 @@ class SplitUtilsTest {
             ,"a;,3,4=,"
             ,"a3,3,4=,"
             ,"a3,3,4=:"}, delimiterString = "=")
-    @DisplayName("숫자로 이루어져 있지 않은 문자열인 경우 RuntimeException이 발생한다.")
+    @DisplayName("숫자로 이루어져 있지 않은 문자열인 경우 RuntimeException 발생한다.")
     void splitToIntError(String word, String separator) {
         assertThatThrownBy(() -> SplitUtils.splitToInt(word, separator))
                 .isInstanceOf(RuntimeException.class);
