@@ -2,8 +2,10 @@ package calculator;
 
 import calculator.constants.ErrorMessage;
 import calculator.utils.StringSplitter;
+import calculator.utils.StringToIntegerParser;
 import calculator.utils.StringUtils;
 import java.util.Arrays;
+import java.util.List;
 
 public class StringAddCalculator {
 
@@ -17,7 +19,8 @@ public class StringAddCalculator {
         String[] splitText = StringSplitter.split(text);
         validateConsistOfPositiveNumbers(splitText);
 
-        return DEFAULT_RESULT;
+        List<Integer> numbers = StringToIntegerParser.parseNumbers(splitText);
+        return numbers.stream().reduce(0, Integer::sum);
     }
 
     private static void validateConsistOfPositiveNumbers(String[] texts) {
