@@ -15,16 +15,14 @@ public class StringAddCalculator {
             return ZERO;
         }
 
-        final String[] splitTexts = splitText(text);
-        final int[] numbers = parsingNumbers(splitTexts);
-
-        return sumNumbers(numbers);
+        return sumNumbers(parsingNumbers(splitText(text)));
     }
 
     private static boolean validateNullOrEmpty(final String text) {
         if (text == null) {
             return true;
         }
+
         return text.isEmpty();
     }
 
