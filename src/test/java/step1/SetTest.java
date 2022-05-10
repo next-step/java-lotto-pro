@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class SetTest {
@@ -50,5 +51,16 @@ class SetTest {
 
         // then
         assertThat(actual).isTrue();
+    }
+
+    @DisplayName("입력 값에 따라 결과 값이 다른 경우에 대한 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+    void contains_ParameterizedTest2(int value, boolean expected) {
+        // given & when
+        boolean actual = numbers.contains(value);
+
+        // then
+        assertThat(actual).isEqualTo(expected);
     }
 }
