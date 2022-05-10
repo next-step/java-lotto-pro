@@ -7,7 +7,7 @@ public class StringAddCalculator {
         if (numberWords == null || numberWords.isEmpty()) {
             return sum;
         }
-        String[] splitNumbers = numberWords.split(",");
+        String[] splitNumbers = numberWords.split(",|:");
         sum = sumNumbers(sum, splitNumbers);
         return sum;
     }
