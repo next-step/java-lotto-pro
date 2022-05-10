@@ -52,6 +52,14 @@ public class StringAddCalculatorTest {
     @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생")
     void if_enter_negative_number_then_error_occur() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("음수는 입력할 수 없습니다.");
+    }
+    @Test
+    @DisplayName("숫자가 아닌 문자를 입력하는 경우 RuntimeException 예외가 발생")
+    void if_enter_non_numeric_character_then_error_occur() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("A,2,3"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("숫자가 아닙니다.");
     }
 }
