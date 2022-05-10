@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private final static String DEFAULT_DELIMITER = ",|:";
     private final static String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private final static int CUSTOM_PATTERN_DELIMITER_INDEX = 1;
+    private final static int CUSTOM_SPLIT_DELIMITER_INDEX = 2;
     private final static Pattern CUSTOM_PATTERN = Pattern.compile(CUSTOM_DELIMITER);
 
     public static int splitAndSum(String text) {
@@ -33,8 +35,8 @@ public class StringAddCalculator {
     private static String[] stringToNumberStrings(String text) {
         Matcher m = CUSTOM_PATTERN.matcher(text);
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            return m.group(2).split(customDelimiter);
+            String customDelimiter = m.group(CUSTOM_PATTERN_DELIMITER_INDEX);
+            return m.group(CUSTOM_SPLIT_DELIMITER_INDEX).split(customDelimiter);
         }
 
         return text.split(DEFAULT_DELIMITER);
