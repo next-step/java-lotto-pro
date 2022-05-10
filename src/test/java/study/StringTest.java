@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("1단계 학습 테스트 실습")
+@DisplayName("String 클래스에 대한 학습 테스트")
 public class StringTest {
     @DisplayName("요구사항 1")
     @Nested
