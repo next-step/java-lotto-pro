@@ -1,15 +1,30 @@
 package study;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
+
+    private static final int DELIMITER = 1;
+    private static final int NUMBER_WORDS = 2;
 
     public static int splitAndSum(String numberWords) {
         int sum = 0;
         if (numberWords == null || numberWords.isEmpty()) {
             return sum;
         }
-        String[] splitNumbers = numberWords.split(",|:");
+        String[] splitNumbers = splitNumberWords(numberWords);
         sum = sumNumbers(sum, splitNumbers);
         return sum;
+    }
+
+    private static String[] splitNumberWords(String numberWords) {
+        Matcher matcher = Pattern.compile("//(.)\\n(.*)").matcher(numberWords);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(DELIMITER);
+            return matcher.group(NUMBER_WORDS).split(customDelimiter);
+        }
+        return numberWords.split(",|:");
     }
 
     private static int sumNumbers(int sum, String[] splitNumbers) {
