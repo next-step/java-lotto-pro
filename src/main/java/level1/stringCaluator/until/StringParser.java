@@ -1,9 +1,14 @@
 package level1.stringCaluator.until;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringParser {
     private final static String DEFAULT_SPLIT_SEPARATOR_REGEX = "[:,]";
-    private final static String  SPECIAL_SPLIT_LEFT_SEPARATOR = "//";
-    private final static String  SPECIAL_SPLIT_RIGHT_SEPARATOR = "\n";
+    private final static String SPECIAL_SPLIT_LEFT_SEPARATOR = "//";
+    private final static String SPECIAL_SPLIT_RIGHT_SEPARATOR = "\n";
+    private final static Pattern SPECIAL_SPLIT_SEPARATOR_REGEX =
+            Pattern.compile("[^" + SPECIAL_SPLIT_LEFT_SEPARATOR + "].*" + "(?=" + SPECIAL_SPLIT_RIGHT_SEPARATOR + ")");
 
     private StringParser() {}
 
@@ -20,16 +25,19 @@ public class StringParser {
 
     private static String parseSplitSeparator(String target) {
         String separator = DEFAULT_SPLIT_SEPARATOR_REGEX;
-        int specialSplitLeftSeparatorIndex = target.indexOf(SPECIAL_SPLIT_LEFT_SEPARATOR);
-        int specialSplitRightSeparatorIndex = target.indexOf(SPECIAL_SPLIT_RIGHT_SEPARATOR);
+        Matcher regexResult = SPECIAL_SPLIT_SEPARATOR_REGEX.matcher(target);
 
-        if (specialSplitLeftSeparatorIndex == 0 && specialSplitRightSeparatorIndex > 0) {
-            separator = target.substring(
-                specialSplitLeftSeparatorIndex + SPECIAL_SPLIT_LEFT_SEPARATOR.length(),
-                specialSplitRightSeparatorIndex
-            );
+        if (regexResult.find()) {
+            checkStartBySpecialSeparator(regexResult);
+            separator = regexResult.group();
         }
 
         return separator;
+    }
+
+    private static void checkStartBySpecialSeparator(Matcher matcher) {
+        if (matcher.start() !=  SPECIAL_SPLIT_LEFT_SEPARATOR.length()) {
+            throw new RuntimeException("구분자는 문자열 시작에 위치해야 합니다.");
+        }
     }
 }

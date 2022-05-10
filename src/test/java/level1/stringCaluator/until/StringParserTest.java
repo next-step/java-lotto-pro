@@ -3,7 +3,7 @@ package level1.stringCaluator.until;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 class StringParserTest {
 
@@ -33,5 +33,14 @@ class StringParserTest {
         for (String s: result) {
             assertThat(s).doesNotContain(specialSeparator);
         }
+    }
+
+    @DisplayName("특수 구분자를 포함하고 있으나, 시작점에 없을 경우 예외가 발생해야 한다")
+    @Test
+    void somewhereOtherThanStartingSpecialSeparatorParserTest() {
+        String specialSeparator = "//#\n";
+        String target = "a" + specialSeparator + "3#4#abc";
+
+        assertThatThrownBy(() -> StringParser.parseAndSplit(target)).isInstanceOf(RuntimeException.class);
     }
 }
