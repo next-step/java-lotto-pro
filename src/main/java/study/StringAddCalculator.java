@@ -10,12 +10,15 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String numberWords) {
         int sum = 0;
-        if (numberWords == null || numberWords.isEmpty()) {
+        if (isNullOrEmpty(numberWords)) {
             return sum;
         }
         String[] splitNumbers = splitNumberWords(numberWords);
-        sum = sumNumbers(sum, splitNumbers);
-        return sum;
+        return sumNumbers(sum, splitNumbers);
+    }
+
+    private static boolean isNullOrEmpty(String numberWords) {
+        return numberWords == null || numberWords.isEmpty();
     }
 
     private static String[] splitNumberWords(String numberWords) {
