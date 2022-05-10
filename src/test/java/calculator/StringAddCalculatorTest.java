@@ -15,8 +15,8 @@ class StringAddCalculatorTest {
     @Test
     void splitAndSum_null_또는_빈문자() {
         assertAll(
-                () -> assertThat(StringAddCalculator.splitAndSum("")).isEqualTo(0),
-                () -> assertThat(StringAddCalculator.splitAndSum(null)).isEqualTo(0)
+                () -> assertThat(StringAddCalculator.splitAndSum("")).isZero(),
+                () -> assertThat(StringAddCalculator.splitAndSum(null)).isZero()
         );
     }
 
