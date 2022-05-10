@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class StringAddCalculatorTest {
 
@@ -58,5 +60,40 @@ class StringAddCalculatorTest {
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("[ERROR]")
                 .hasMessageContaining("-1, 2, 3");
+    }
+
+    @Test
+    @DisplayName("문자열 계산기 합산 테스트")
+    void sumTest01(){
+        // given
+        String text = "1,2:3";
+
+        // when
+        Integer sum = StringAddCalculator.splitAndSum(text);
+
+        // then
+        assertThat(sum).isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
+    @DisplayName("문자열 계산기 합산 테스트 (기본 구분자) ParameterizedTest 활용")
+    void sumTest02(String input){
+        // given & when
+        Integer sum = StringAddCalculator.splitAndSum(input);
+
+        // then
+        assertThat(sum).isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "//_\n1_2_3"})
+    @DisplayName("문자열 계산기 합산 테스트 (커스텀 구분자) ParameterizedTest 활용")
+    void sumTest03(String input){
+        // given & when
+        Integer sum = StringAddCalculator.splitAndSum(input);
+
+        // then
+        assertThat(sum).isEqualTo(6);
     }
 }
