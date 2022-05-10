@@ -9,10 +9,10 @@ public class SplitUtils {
     private static final String CUSTOM_PATTERN = "//(.)\n(.*)";
 
     public String[] splitByDelimiter(String input) {
-        Matcher m = Pattern.compile(CUSTOM_PATTERN).matcher(input);
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            return split(m.group(2), customDelimiter);
+        Matcher matcher = Pattern.compile(CUSTOM_PATTERN).matcher(input);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            return split(matcher.group(2), customDelimiter);
         }
         return splitByDefaultDelimiter(input);
     }
