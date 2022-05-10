@@ -27,9 +27,9 @@ public class StringAddCalculator {
     private static List<Integer> splitToNumberArray(String input) {
 
         List<Integer> numbers = new ArrayList<>();
-        for (String numericString : split(input)) {
-            validateSplitInput(numericString);
-            numbers.add(Integer.parseInt(numericString));
+        for (String splitInput : split(input)) {
+            validateSplitInput(splitInput);
+            numbers.add(Integer.parseInt(splitInput));
         }
         return numbers;
     }
