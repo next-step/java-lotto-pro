@@ -33,11 +33,4 @@ public class Number {
 			return false;
 		}
 	}
-	
-	public static void main(String[] args) {
-		new Number("1");
-		new Number("10");
-		new Number("20");
-		new Number("aa");
-	}
 }
