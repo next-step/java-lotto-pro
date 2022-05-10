@@ -57,7 +57,8 @@ public class StringTest {
     void charAt_2_exception() {
         String input = "abc";
 
-        assertThatThrownBy(() -> input.charAt(3)).isInstanceOf(StringIndexOutOfBoundsException.class);
+        assertThatThrownBy(() -> input.charAt(3)).isInstanceOf(StringIndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: 3");
     }
 
 }
