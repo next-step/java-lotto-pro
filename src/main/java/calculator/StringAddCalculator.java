@@ -1,9 +1,12 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
     public static final String INVALID_NUMBER_FORMAT_MESSAGE = "올바르지 않는 숫자 형식입니다.";
     public static final String INVALID_NUMBER_RANGE_MESSAGE = "올바르지 않는 숫자 범위입니다. 가능한 범위는 0부터 2147483647입니다.";
     private static final String NUMBER_FORMAT_REGEX = "^(0|[1-9]+[0-9]*)$";
+    private static final String DELIMITER_REGEX = ",|;";
 
     private StringAddCalculator() {
     }
@@ -12,7 +15,14 @@ public class StringAddCalculator {
         if (isNotValidNumber(number)) {
             return 0;
         }
-        return parsePositiveOrZeroNumber(number);
+
+        return Arrays.stream(split(number))
+                .mapToInt(StringAddCalculator::parsePositiveOrZeroNumber)
+                .sum();
+    }
+
+    private static String[] split(String number) {
+        return number.split(DELIMITER_REGEX);
     }
 
     private static int parsePositiveOrZeroNumber(String number) {

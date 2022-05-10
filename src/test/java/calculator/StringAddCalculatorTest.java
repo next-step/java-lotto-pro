@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class StringAddCalculatorTest {
@@ -55,5 +56,13 @@ class StringAddCalculatorTest {
         assertThatThrownBy(() -> StringAddCalculator.input(longNumber))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage(StringAddCalculator.INVALID_NUMBER_RANGE_MESSAGE);
+    }
+
+    @ParameterizedTest(name = "숫자({0})를 구분자를 포함해 입력 받았을 경우 숫자의 합({1})을 반환")
+    @CsvSource(value = {"2,3|5", "3;6|9", "1;2,3|6"}, delimiter = '|')
+    void inputTwoNumberContainDelimiter(String inputNumber, int expected) {
+        int result = StringAddCalculator.input(inputNumber);
+
+        assertEquals(expected, result);
     }
 }
