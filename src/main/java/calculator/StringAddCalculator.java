@@ -1,6 +1,5 @@
 package calculator;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +29,26 @@ public class StringAddCalculator {
     }
 
     private static int sumNumbers(String[] split) {
-        return Arrays.stream(split).mapToInt(Integer::parseInt).sum();
+        int sum = 0;
+        for (String str : split) {
+            int number = getNumber(str);
+            validNegativeNumber(number);
+            sum += number;
+        }
+        return sum;
+    }
+
+    private static void validNegativeNumber(int number) {
+        if (number < 0) {
+            throw new RuntimeException("음수는 입력할 수 없습니다.");
+        }
+    }
+
+    private static int getNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("숫자가 아닙니다.");
+        }
     }
 }
