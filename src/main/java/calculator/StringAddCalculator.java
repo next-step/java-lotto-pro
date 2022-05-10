@@ -18,7 +18,6 @@ public class StringAddCalculator {
         if (isNotValidNumber(number)) {
             return 0;
         }
-
         return Arrays.stream(split(number))
                 .mapToLong(StringAddCalculator::parsePositiveOrZeroNumber)
                 .sum();
@@ -29,7 +28,6 @@ public class StringAddCalculator {
         if (matcher.find()) {
             return splitCustomDelimiter(matcher);
         }
-
         return number.split(NORMAL_DELIMITER_REGEX);
     }
 
