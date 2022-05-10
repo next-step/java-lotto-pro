@@ -3,12 +3,16 @@ package calculator;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
     private static final int ZERO = 0;
     private static final String REGEX_DELIMITER = "|";
     private static final List<String> STANDARD_DELIMISTERS = Arrays.asList(",", ":");
+    private static final String CUSTOM_DELIMITER_START = "//";
+    private static final String CUSTOM_DELIMITER_END = "\n";
 
     public static int splitAndSum(final String expression) {
         if (isNullOrEmpty(expression)) {
@@ -25,6 +29,12 @@ public class StringAddCalculator {
     }
 
     private static List<String> split(final String expression) {
+        Matcher m = Pattern.compile(CUSTOM_DELIMITER_START + "(.)" + CUSTOM_DELIMITER_END + "(.*)").matcher(expression);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return Arrays.asList(m.group(2).split(customDelimiter));
+        }
+
         String regex = makeStandardDelimiterRegex();
         return Arrays.asList(expression.split(regex));
     }
