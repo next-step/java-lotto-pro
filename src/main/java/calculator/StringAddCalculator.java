@@ -9,7 +9,7 @@ public class StringAddCalculator {
     public static final String INVALID_NUMBER_RANGE_MESSAGE = "올바르지 않는 숫자 범위입니다. 가능한 범위는 0부터 2147483647입니다.";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
     private static final String NUMBER_FORMAT_REGEX = "^(0|[1-9]+[0-9]*)$";
-    private static final String NORMAL_DELIMITER_REGEX = ",|;";
+    private static final String NORMAL_DELIMITER_REGEX = "[,;]";
 
     private StringAddCalculator() {
     }
