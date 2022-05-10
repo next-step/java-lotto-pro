@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringAddCalculator {
+    private static final String DELIMITER = ",";
+
     static int splitAndSum(String input) {
 
         if (isNullOrEmptyInput(input)) {
@@ -25,7 +27,7 @@ public class StringAddCalculator {
     }
 
     private static List<Integer> splitToNumberArray(String input) {
-        String[] numericStrings = input.split(",");
+        String[] numericStrings = input.split(DELIMITER);
 
         List<Integer> numbers = new ArrayList<>();
         for (String numericString : numericStrings) {
