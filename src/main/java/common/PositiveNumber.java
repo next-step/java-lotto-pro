@@ -7,13 +7,18 @@ public class PositiveNumber {
 
     public PositiveNumber(Integer value) {
         checkPositiveNumber(value);
+
         this.value = value;
     }
 
     public PositiveNumber(String value) {
-        checkValidNumberByString(value);
-        Integer convertValue = Integer.parseInt(value);
+        String convertEmptyOrNull = convertEmptyOrNullToZero(value);
+
+        checkValidNumberByString(convertEmptyOrNull);
+
+        Integer convertValue = Integer.parseInt(convertEmptyOrNull);
         checkPositiveNumber(convertValue);
+
         this.value = convertValue;
     }
 
@@ -27,5 +32,12 @@ public class PositiveNumber {
         if (!value.matches(NUMBER_CHECK_REGEX)) {
             throw new RuntimeException("숫자만 허용됩니다.");
         }
+    }
+
+    private String convertEmptyOrNullToZero(String value) {
+        if (value.isEmpty()) {
+            return "0";
+        }
+        return value;
     }
 }

@@ -15,8 +15,8 @@ public class StringParser {
     private StringParser() {}
 
     public static List<String> parseAndSplit(String target) {
-        String splitTarget = target;
-        String separator = parseSplitSeparator(target);
+        String splitTarget = convertIfNullToEmpty(target);
+        String separator = parseSplitSeparator(splitTarget);
 
         if (!separator.equals(DEFAULT_SPLIT_SEPARATOR_REGEX)) {
             splitTarget = splitTarget.substring(splitTarget.indexOf(SPECIAL_SPLIT_RIGHT_SEPARATOR) + 1);
@@ -41,5 +41,12 @@ public class StringParser {
         if (matcher.start() !=  SPECIAL_SPLIT_LEFT_SEPARATOR.length()) {
             throw new RuntimeException("구분자는 문자열 시작에 위치해야 합니다.");
         }
+    }
+
+    private static String convertIfNullToEmpty(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value;
     }
 }

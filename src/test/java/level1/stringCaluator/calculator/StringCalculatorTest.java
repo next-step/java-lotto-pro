@@ -25,6 +25,18 @@ class StringCalculatorTest {
     }
 
     @Test
+    void 문자열_계산기에_null_또는_빈_문자열을_입력_할_경우_계산_결과가_0_이어야_한다() {
+        String inputEmpty = "";
+        String inputNull = null;
+
+        StringCalculator emptyCalculator = new StringCalculator(inputEmpty);
+        StringCalculator nullCalculator = new StringCalculator(inputNull);
+
+        assertThat(emptyCalculator.sum()).isEqualTo(0);
+        assertThat(nullCalculator.sum()).isEqualTo(0);
+    }
+
+    @Test
     void 음수가_포함된_문자열을_문자열_계산기에_입력하면_예외가_발생해야_한다() {
         String inputDefault = "1:2,-10:3,-7";
         String inputSpecialDelimiter = "//&!\n1&!-7&!10";
