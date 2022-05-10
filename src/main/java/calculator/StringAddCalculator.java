@@ -10,7 +10,9 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
     private static final String DEFAULT_SEPARATOR = ",|:";
-    private static final String CUSTOM_SEPARATOR_REGEX = "/(.)\n(.*)";
+    private static final Pattern CUSTOM_SEPARATOR_PATTERN = Pattern.compile("/(.)\n(.*)");
+    private static final int PATTERN_TEXT_INDEX = 2;
+    private static final int PATTERN_SEPARATOR_INDEX = 1;
     private static final int ZERO = 0;
 
     private StringAddCalculator() {
@@ -21,10 +23,18 @@ public class StringAddCalculator {
         if (StringUtils.isEmptyString(text)) {
             return 0;
         }
-
         int[] numberArray = calculatorNumberArray(text);
         validNegativeArray(numberArray);
         return sum(numberArray);
+    }
+
+    private static int[] calculatorNumberArray(String text) {
+        Matcher matcher = CUSTOM_SEPARATOR_PATTERN.matcher(text);
+        if (matcher.find()) {
+            return SplitUtils.splitToInt(matcher.group(PATTERN_TEXT_INDEX),
+                    matcher.group(PATTERN_SEPARATOR_INDEX));
+        }
+        return SplitUtils.splitToInt(text, DEFAULT_SEPARATOR);
     }
 
     private static void validNegativeArray(int[] array) {
@@ -33,14 +43,6 @@ public class StringAddCalculator {
                 .findFirst().isPresent()) {
             throw new RuntimeException("문자열 계산기에는 음수를 전달할 수 없습니다.");
         }
-    }
-
-    private static int[] calculatorNumberArray(String text) {
-        Matcher matcher = Pattern.compile(CUSTOM_SEPARATOR_REGEX).matcher(text);
-        if (matcher.find()) {
-            return SplitUtils.splitToInt(matcher.group(2), matcher.group(1));
-        }
-        return SplitUtils.splitToInt(text, DEFAULT_SEPARATOR);
     }
 
     private static int sum(int[] array) {
