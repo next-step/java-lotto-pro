@@ -14,7 +14,7 @@ public class StringCalculator {
         if (isValid(input)) {
             return 0;
         }
-        String[] split = splitUtils.splitByDefaultDelimiter(input);
+        String[] split = splitUtils.splitByDelimiter(input);
         return Arrays.stream(split).mapToInt(Integer::parseInt).sum();
     }
 
