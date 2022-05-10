@@ -30,7 +30,7 @@ public class StringAddCalculator {
 
         String[] tokens = text.split(",|:");
 
-        return Arrays.stream(tokens).mapToInt(Integer::parseInt).sum();
+        return getSum(tokens);
     }
 
     private static Integer customDelimiterAddCalculator(String text) {
@@ -39,9 +39,13 @@ public class StringAddCalculator {
             String customDelimiter = m.group(1);
             String[] tokens = m.group(2).split(customDelimiter);
 
-            return Arrays.stream(tokens).mapToInt(Integer::parseInt).sum();
+            return getSum(tokens);
         }
 
         return null;
+    }
+
+    private static int getSum(String[] tokens) {
+        return Arrays.stream(tokens).mapToInt(Integer::parseInt).sum();
     }
 }
