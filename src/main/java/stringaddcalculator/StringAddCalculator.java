@@ -6,7 +6,10 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return Integer.parseInt(text);
+        final String[] splitTexts = splitText(text);
+        final int[] numbers = parsingNumbers(splitTexts);
+
+        return sumNumbers(numbers);
     }
 
     private static boolean validateNullOrEmpty(final String text) {
@@ -14,6 +17,35 @@ public class StringAddCalculator {
             return true;
         }
         return text.isEmpty();
+    }
+
+    private static String[] splitText(final String text) {
+        return text.split(",");
+    }
+
+    private static int[] parsingNumbers(final String[] splitTexts) {
+        final int length = splitTexts.length;
+        int[] numbers = new int[length];
+
+        for (int i = 0; i < length; i++) {
+            numbers[i] = parseInteger(splitTexts[i]);
+        }
+
+        return numbers;
+    }
+
+    private static int parseInteger(final String splitTexts) {
+        return Integer.parseInt(splitTexts);
+    }
+
+    private static int sumNumbers(final int[] numbers) {
+        int sum = 0;
+
+        for (final int number : numbers) {
+            sum += number;
+        }
+
+        return sum;
     }
 
 }
