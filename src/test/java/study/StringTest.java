@@ -26,6 +26,22 @@ public class StringTest {
         String exampleString = "abc";
         int index = 3;
 
+        assertThatThrownBy(() -> exampleString.charAt(index))
+                .isInstanceOf(StringIndexOutOfBoundsException.class)
+                .hasMessageContaining("index out of range");
+
+        assertThatThrownBy(() -> exampleString.charAt(index))
+                .isInstanceOf(StringIndexOutOfBoundsException.class)
+                .hasMessageContaining("%d", index);
+
+        assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+                .isThrownBy(() -> exampleString.charAt(index))
+                .withMessageMatching("String index out of range: " + index);
+
+        assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+                .isThrownBy(() -> exampleString.charAt(index))
+                .withMessageMatching("String index out of range: \\d");
+
         /* hasMessageContaining: 포함된 문자 여부 확인 */
         assertThatThrownBy(() -> {
             try {
