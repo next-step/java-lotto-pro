@@ -1,13 +1,26 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
+    public static final String DELIMITER_COMMA = ",";
+
     public static int splitAndSum(String input) {
-        int sum = 0;
         if (isNullOrEmpty(input)) {
-            return sum;
+            return 0;
         }
-        sum = Integer.parseInt(input);
-        return sum;
+        return getSum(split(input));
+    }
+
+    private static int getSum(String[] splits) {
+        return Arrays.stream(splits)
+                .mapToInt(Integer::parseInt)
+                .sum();
+
+    }
+
+    private static String[] split(String input) {
+        return input.split(DELIMITER_COMMA);
     }
 
     private static boolean isNullOrEmpty(String input) {
