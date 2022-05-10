@@ -2,6 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringTest {
     @Test
@@ -34,6 +35,20 @@ public class StringTest {
         assertThat(underTest.charAt(0)).isEqualTo('a').isExactlyInstanceOf(Character.class);
         assertThat(underTest.charAt(1)).isEqualTo('b').isExactlyInstanceOf(Character.class);
         assertThat(underTest.charAt(2)).isEqualTo('c').isExactlyInstanceOf(Character.class);
+    }
+
+    @Test
+    @DisplayName("abc 값이 주어졌을 때 charAt 위치 값을 벗어나면 StringIndexOutOfBoundsException이 발생하는지 확인")
+    public void test_charAt_range() {
+        String underTest = "abc";
+        String exceptionMessage = "String index out of range:";
+
+        assertThatThrownBy(() -> underTest.charAt(4)).isExactlyInstanceOf(StringIndexOutOfBoundsException.class)
+                .hasMessageContaining(exceptionMessage);
+        assertThatThrownBy(() -> underTest.charAt(-1)).isExactlyInstanceOf(StringIndexOutOfBoundsException.class)
+                .hasMessageContaining(exceptionMessage);
+        assertThatThrownBy(() -> underTest.charAt(Integer.MAX_VALUE)).isExactlyInstanceOf(
+                StringIndexOutOfBoundsException.class).hasMessageContaining(exceptionMessage);
     }
 
 }
