@@ -15,38 +15,25 @@ public class StringAddCalculator {
             throw new RuntimeException("음수 값은 입력할 수 없습니다.");
         }
 
-        Integer result = customDelimiterAddCalculator(text);
-        if (result != null) {
-            return result;
-        }
-
-        return standardStringAddCalculator(text);
+        return getSum(stringToNumberStrings(text));
     }
 
     private static boolean isValidationCheckNullOrEmpty(String text) {
         return text == null || text.isEmpty();
     }
 
-    private static int standardStringAddCalculator(String text) {
-        String[] tokens = text.split(",|:");
-
-        return getSum(tokens);
-    }
-
     private static boolean isNegativeNumbers(String text) {
         return text.contains("-");
     }
 
-    private static Integer customDelimiterAddCalculator(String text) {
+    private static String[] stringToNumberStrings(String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
-            String[] tokens = m.group(2).split(customDelimiter);
-
-            return getSum(tokens);
+            return m.group(2).split(customDelimiter);
         }
 
-        return null;
+        return text.split(",|:");
     }
 
     private static int getSum(String[] tokens) {
