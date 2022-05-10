@@ -78,4 +78,18 @@ public class StringTest {
         // then
         assertThat(actual).containsExactly(expected);
     }
+
+    @DisplayName("\"(1,2)\" 값이 주어졌을 때 String의 substring() 메소드를 활용해 ()을 제거하고 \"1,2\"를 반환하도록 구현")
+    @Test
+    public void substringTest() {
+        // given
+        String input = "(1,2)";
+        String expected = "1,2";
+
+        // when
+        String actual = input.substring(1, input.length() - 1);
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
 }
