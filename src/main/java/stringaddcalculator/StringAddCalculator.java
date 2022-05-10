@@ -8,6 +8,7 @@ public class StringAddCalculator {
     public static final int ZERO = 0;
     public static final String COMMA_AND_COLON = ",|:";
     public static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+    public static final String NUMERIC_PATTERN = "\\d";
 
     public static int splitAndSum(final String text) {
         if (validateNullOrEmpty(text)) {
@@ -49,8 +50,19 @@ public class StringAddCalculator {
         return numbers;
     }
 
-    private static int parseInteger(final String splitTexts) {
-        return Integer.parseInt(splitTexts);
+    private static int parseInteger(final String text) {
+        validateNumeric(text);
+        return parsePositiveInteger(text);
+    }
+
+    private static int parsePositiveInteger(final String text) {
+        final int i = Integer.parseInt(text);
+
+        if (isMinus(i)) {
+            throw new RuntimeException("음수를 입력할 수 없습니다.");
+        }
+
+        return i;
     }
 
     private static int sumNumbers(final int[] numbers) {
@@ -61,6 +73,16 @@ public class StringAddCalculator {
         }
 
         return sum;
+    }
+
+    private static void validateNumeric(final String text) {
+        if (!text.matches(NUMERIC_PATTERN)) {
+            throw new RuntimeException("숫자가 아닙니다.");
+        }
+    }
+
+    private static boolean isMinus(final int i) {
+        return i < 0;
     }
 
 }
