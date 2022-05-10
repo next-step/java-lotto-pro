@@ -13,7 +13,7 @@ public class StringAddCalculator {
             return 0;
         }
         List<String> numbers = splitToNumbers(input);
-        return 1;
+        return calculateSum(numbers);
     }
 
     private static List<String> splitToNumbers(String input) {
@@ -23,6 +23,15 @@ public class StringAddCalculator {
             return Arrays.asList(m.group(2).split(customDelimiter));
         }
         return Arrays.asList(input.split(DEFAULT_DELIMITER));
+    }
+
+    private static int calculateSum(List<String> numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            validateNumberCheck(number);
+            sum += Integer.parseInt(number);
+        }
+        return sum;
     }
 
     private static boolean isNullOrEmpty(String input) {
