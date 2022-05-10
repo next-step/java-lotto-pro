@@ -79,7 +79,7 @@ class StringAddCalculatorTest {
 
     @ParameterizedTest(name = "커스텀 구분자({0})가 포함된 수를 입력 받았을 경우 결과({1})가 정상적으로 반환")
     @MethodSource("parameterCustomDelimiter")
-    void inputTwoNumberContainCustomDelimiter(String inputNumber, long expected) {
+    void inputNumbersContainCustomDelimiter(String inputNumber, long expected) {
         long result = StringAddCalculator.input(inputNumber);
 
         assertEquals(expected, result);
