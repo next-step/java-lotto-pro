@@ -11,19 +11,11 @@ public class StringAddCalculator {
         if (isNullOrEmptyInput(input)) {
             return 0;
         }
-        if (isNumeric(input)) {
-            return Integer.parseInt(input);
-        }
-
         return sumNumbers(splitToNumberArray(input));
     }
 
     private static boolean isNullOrEmptyInput(String input) {
         return input == null || input.isEmpty();
-    }
-
-    private static boolean isNumeric(String input) {
-        return input.matches("\\p{Digit}");
     }
 
     private static List<Integer> splitToNumberArray(String input) {
