@@ -11,13 +11,13 @@ public class StringAddCalculator {
     private StringAddCalculator() {
     }
 
-    public static int input(String number) {
+    public static long input(String number) {
         if (isNotValidNumber(number)) {
             return 0;
         }
 
         return Arrays.stream(split(number))
-                .mapToInt(StringAddCalculator::parsePositiveOrZeroNumber)
+                .mapToLong(StringAddCalculator::parsePositiveOrZeroNumber)
                 .sum();
     }
 
@@ -25,7 +25,7 @@ public class StringAddCalculator {
         return number.split(DELIMITER_REGEX);
     }
 
-    private static int parsePositiveOrZeroNumber(String number) {
+    private static long parsePositiveOrZeroNumber(String number) {
         validatePositiveOrZeroNumber(number);
         try {
             return Integer.parseInt(number);

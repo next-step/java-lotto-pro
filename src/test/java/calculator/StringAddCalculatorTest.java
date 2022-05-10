@@ -17,9 +17,9 @@ class StringAddCalculatorTest {
     @Test
     @DisplayName("입력값이 null이거나 빈 문자열일 경우 0을 반환")
     void inputNullOrBlank() {
-        int blankString1 = StringAddCalculator.input("");
-        int blankString2 = StringAddCalculator.input(" ");
-        int nullString = StringAddCalculator.input(null);
+        long blankString1 = StringAddCalculator.input("");
+        long blankString2 = StringAddCalculator.input(" ");
+        long nullString = StringAddCalculator.input(null);
 
         assertAll(
                 () -> assertThat(blankString1).isZero(),
@@ -31,12 +31,12 @@ class StringAddCalculatorTest {
     @Test
     @DisplayName("입력값이 0 또는 양수인 경우 해당 숫자를 반환")
     void inputOnlyPositiveOrZeroNumber() {
-        int three = StringAddCalculator.input("3");
-        int zero = StringAddCalculator.input("0");
+        long three = StringAddCalculator.input("3");
+        long zero = StringAddCalculator.input("0");
 
         assertAll(
-                () -> assertEquals(3, three),
-                () -> assertEquals(0, zero)
+                () -> assertEquals(3L, three),
+                () -> assertThat(zero).isZero()
         );
     }
 
@@ -60,9 +60,17 @@ class StringAddCalculatorTest {
 
     @ParameterizedTest(name = "숫자({0})를 구분자를 포함해 입력 받았을 경우 숫자의 합({1})을 반환")
     @CsvSource(value = {"2,3|5", "3;6|9", "1;2,3|6"}, delimiter = '|')
-    void inputTwoNumberContainDelimiter(String inputNumber, int expected) {
-        int result = StringAddCalculator.input(inputNumber);
+    void inputTwoNumberContainDelimiter(String inputNumber, long expected) {
+        long result = StringAddCalculator.input(inputNumber);
 
         assertEquals(expected, result);
+    }
+
+    @Test
+    @DisplayName("극값(2147483647)을 포함한 수를 입력 받았을 경우 결과가 정상적으로 반환")
+    void inputTwoNumberContainLocalExtremumNumber() {
+        long result = StringAddCalculator.input("2147483647;3");
+
+        assertEquals(2147483650L, result);
     }
 }
