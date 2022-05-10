@@ -1,8 +1,12 @@
 package study;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringTest {
 
@@ -33,6 +37,22 @@ public class StringTest {
         String result = input.substring(1, input.length() - 1);
 
         assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0,a", "1,b", "2,c"})
+    void charAt_1(int index, char expected) {
+        String input = "abc";
+
+        char result = input.charAt(index);
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void charAt_2_exception() {
+        String input = "abc";
+
+        assertThatThrownBy(() -> input.charAt(3)).isInstanceOf(StringIndexOutOfBoundsException.class);
     }
 
 }
