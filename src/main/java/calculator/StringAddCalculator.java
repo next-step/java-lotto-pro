@@ -6,6 +6,7 @@ public class StringAddCalculator {
         if (isNullOrEmpty(input)) {
             return sum;
         }
+        sum = Integer.parseInt(input);
         return sum;
     }
 
