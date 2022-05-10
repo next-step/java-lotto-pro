@@ -9,7 +9,7 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## 기능 구현 목록
-- 숫자 및 문자를 입력 받는다.
+- 0, null 인경우, 0을 반환한다.
 - , : 으로 숫자들을 구분한다.
 - 구분한 숫자들을 더한값을 구한다.
 - 구분자를 커스텀한다.
