@@ -3,7 +3,9 @@ package study;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StringAddCalculatorTest {
 
@@ -44,5 +46,16 @@ class StringAddCalculatorTest {
     void splitAndSum_negative() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void splitAndSum_not_number() {
+        assertAll(
+                () -> assertThatIllegalArgumentException()
+                        .isThrownBy(() -> StringAddCalculator.splitAndSum("M,W,Y"))
+                        .withMessage("[ERROR] 0~9 사이의 숫자가 아닙니다."),
+                () -> assertThatIllegalArgumentException()
+                        .isThrownBy(() -> StringAddCalculator.splitAndSum("%,$,*"))
+        );
     }
 }
