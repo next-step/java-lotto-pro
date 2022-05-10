@@ -17,10 +17,6 @@ public class StringAddCalculator {
             return 0;
         }
 
-        if (isNegativeNumbers(text)) {
-            throw new RuntimeException("음수 값은 입력할 수 없습니다.");
-        }
-
         return getSum(stringToNumberStrings(text));
     }
 
@@ -28,8 +24,8 @@ public class StringAddCalculator {
         return text == null || text.isEmpty();
     }
 
-    private static boolean isNegativeNumbers(String text) {
-        return text.contains("-");
+    private static boolean isNegativeNumbers(int number) {
+        return number < 0;
     }
 
     private static String[] stringToNumberStrings(String text) {
@@ -44,11 +40,19 @@ public class StringAddCalculator {
 
     private static int getSum(String[] tokens) {
         return Arrays.stream(tokens).mapToInt(token -> {
-            try {
-                return Integer.parseInt(token);
-            }catch (NumberFormatException e) {
-                throw new RuntimeException("숫자 값만 계산이 가능합니다.");
+            int number = stringToNumber(token);
+            if(!isNegativeNumbers(number)){
+                return number;
             }
+            throw new RuntimeException("음수 값은 입력할 수 없습니다.");
         }).sum();
+    }
+
+    private static int stringToNumber(String token) {
+        try {
+            return Integer.parseInt(token);
+        }catch (NumberFormatException e) {
+            throw new RuntimeException("숫자 값만 계산이 가능합니다.");
+        }
     }
 }
