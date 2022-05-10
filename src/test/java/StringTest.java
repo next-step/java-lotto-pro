@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -27,28 +30,24 @@ public class StringTest {
         assertThat("(1,2)".substring(1, 4)).isEqualTo("1,2");
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("abc 값이 주어졌을 때 charAt 하여 특정 위치의 Character 타입 문자를 가져올 수 있는지 확인")
-    public void test_charAt() {
+    @CsvSource(value = { "0:a", "1:b", "2:c" }, delimiterString = ":")
+    public void test_charAt(Integer index, Character character) {
         String underTest = "abc";
 
-        assertThat(underTest.charAt(0)).isEqualTo('a').isExactlyInstanceOf(Character.class);
-        assertThat(underTest.charAt(1)).isEqualTo('b').isExactlyInstanceOf(Character.class);
-        assertThat(underTest.charAt(2)).isEqualTo('c').isExactlyInstanceOf(Character.class);
+        assertThat(underTest.charAt(index)).isEqualTo(character);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("abc 값이 주어졌을 때 charAt 위치 값을 벗어나면 StringIndexOutOfBoundsException이 발생하는지 확인")
-    public void test_charAt_range() {
+    @ValueSource(ints = { 3, -1, Integer.MAX_VALUE })
+    public void test_charAt_throw_StringIndexOutOfBoundsException(Integer index) {
         String underTest = "abc";
         String exceptionMessage = "String index out of range:";
 
-        assertThatThrownBy(() -> underTest.charAt(4)).isExactlyInstanceOf(StringIndexOutOfBoundsException.class)
+        assertThatThrownBy(() -> underTest.charAt(index)).isExactlyInstanceOf(StringIndexOutOfBoundsException.class)
                 .hasMessageContaining(exceptionMessage);
-        assertThatThrownBy(() -> underTest.charAt(-1)).isExactlyInstanceOf(StringIndexOutOfBoundsException.class)
-                .hasMessageContaining(exceptionMessage);
-        assertThatThrownBy(() -> underTest.charAt(Integer.MAX_VALUE)).isExactlyInstanceOf(
-                StringIndexOutOfBoundsException.class).hasMessageContaining(exceptionMessage);
     }
 
 }
