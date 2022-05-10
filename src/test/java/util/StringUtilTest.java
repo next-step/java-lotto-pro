@@ -1,5 +1,6 @@
 package util;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -24,12 +25,16 @@ public class StringUtilTest {
 	@Test
 	@DisplayName("문자열에서 입력한 자릿수에 해당하는 문자를 반환하는 함수 테스트")
 	public void findCharacter_test() {
-		assertThat(StringUtil.findCharacter("abc", 0)).isEqualTo('a');
-		assertThat(StringUtil.findCharacter("abc", 1)).isEqualTo('b');
-		assertThat(StringUtil.findCharacter("abc", 2)).isEqualTo('c');
-		assertThatThrownBy(() -> {
-			StringUtil.findCharacter("abc", 3);
-		}).isInstanceOf(StringIndexOutOfBoundsException.class)
-		.hasMessageStartingWith("Index: 3, Value Length: 3");
+		String value = "abc";
+		
+		assertAll(
+			() -> assertThat(StringUtil.findCharacter(value, 0)).isEqualTo('a'),
+			() -> assertThat(StringUtil.findCharacter(value, 1)).isEqualTo('b'),
+			() -> assertThat(StringUtil.findCharacter(value, 2)).isEqualTo('c'),
+			() -> assertThatThrownBy(() -> {
+				StringUtil.findCharacter(value, 3);
+			}).isInstanceOf(StringIndexOutOfBoundsException.class)
+			.hasMessageStartingWith("Index: 3, Value Length: 3")
+		);
 	}
 }
