@@ -8,14 +8,21 @@ public class StringAddCalculator {
     public static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
 
     public static int splitAndSum(String text) {
-        if (isEmpty(text)) {
+        if (isNullOrEmpty(text)) {
             return 0;
+        }
+        if (hasNegative(text)) {
+            throw new RuntimeException("[ERROR] 숫자는 0보다 커야 합니다.");
         }
         return calculateSum(parseToInts(splitWithDelimiter(text)));
     }
 
-    private static boolean isEmpty(String text) {
+    private static boolean isNullOrEmpty(String text) {
         return text == null || text.isEmpty();
+    }
+
+    private static boolean hasNegative(String text) {
+        return text.contains("-");
     }
 
     private static String[] splitWithDelimiter(String text) {
@@ -38,11 +45,7 @@ public class StringAddCalculator {
     private static int[] parseToInts(String[] values) {
         int[] numbers = new int[values.length];
         for (int index = 0; index < values.length; index++) {
-            int number = Integer.parseInt(values[index]);
-            if (number < 0) {
-                throw new RuntimeException("[ERROR] 숫자는 0보다 커야 합니다.");
-            }
-            numbers[index] = number;
+            numbers[index] = Integer.parseInt(values[index]);
         }
         return numbers;
     }
