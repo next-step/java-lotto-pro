@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class StringTest {
+class StringTest {
 
     private static final String SPLIT_REGEX = ",";
 
     @DisplayName("\"1,2\"를 ,로 split 했을 때 1과 2로 잘 분리되는지 확인하는 학습 테스트_contains")
     @Test
-    public void splitTest_contains() {
+    void splitTest_contains() {
         // given
         String input = "1,2";
         String[] expected = {"1", "2"};
@@ -29,7 +29,7 @@ public class StringTest {
 
     @DisplayName("\"1,2\"를 ,로 split 했을 때 1과 2로 잘 분리되는지 확인하는 학습 테스트_containsExactly")
     @Test
-    public void splitTest_containsExactly() {
+    void splitTest_containsExactly() {
         // given
         String input = "1,2";
         String[] expected = {"1", "2"};
@@ -43,7 +43,7 @@ public class StringTest {
 
     @DisplayName("\"1,2\"를 ,로 split 했을 때 1과 2로 잘 분리되는지 확인하는 학습 테스트_containsExactlyInAnyOrder")
     @Test
-    public void splitTest_containsExactlyInAnyOrder() {
+    void splitTest_containsExactlyInAnyOrder() {
         // given
         String input = "1,2";
         String[] expected = {"2", "1"};
@@ -57,7 +57,7 @@ public class StringTest {
 
     @DisplayName("\"1\"을 ,로 split 했을 때 1만을 포함하는 배열이 반환되는지에 대한 학습 테스트_contains")
     @Test
-    public void splitTest2_contains() {
+    void splitTest2_contains() {
         // given
         String input = "1";
         String[] expected = {"1"};
@@ -71,7 +71,7 @@ public class StringTest {
 
     @DisplayName("\"1\"을 ,로 split 했을 때 1만을 포함하는 배열이 반환되는지에 대한 학습 테스트_containsExactly")
     @Test
-    public void splitTest2_containsExactly() {
+    void splitTest2_containsExactly() {
         // given
         String input = "1";
         String[] expected = {"1"};
@@ -85,7 +85,7 @@ public class StringTest {
 
     @DisplayName("\"(1,2)\" 값이 주어졌을 때 String의 substring() 메소드를 활용해 ()을 제거하고 \"1,2\"를 반환하도록 구현")
     @Test
-    public void substringTest() {
+    void substringTest() {
         // given
         String input = "(1,2)";
         String expected = "1,2";
@@ -99,7 +99,7 @@ public class StringTest {
 
     @DisplayName("\"abc\" 값이 주어졌을 때 String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져오는 학습 테스트")
     @Test
-    public void charAtTest() {
+    void charAtTest() {
         // given
         String input = "abc";
         char expected = 'a';
@@ -114,7 +114,7 @@ public class StringTest {
     @DisplayName("\"abc\" 값이 주어졌을 때 String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져오는 학습 테스트_ParameterizedTest")
     @ParameterizedTest
     @CsvSource(value = {"a:0", "b:1", "c:2"}, delimiter = ':')
-    public void charAtTest_ParameterizedTest(char expected, int index) {
+    void charAtTest_ParameterizedTest(char expected, int index) {
         // given
         String input = "abc";
 
@@ -127,7 +127,7 @@ public class StringTest {
 
     @DisplayName("특정 위치의 문자를 가져올 때 위치 값을 벗어나면 StringIndexOutOfBoundsException")
     @Test
-    public void exceptionTest() {
+    void exceptionTest() {
         // given
         String input = "abc";
 
@@ -137,7 +137,7 @@ public class StringTest {
 
     @DisplayName("StringIndexOutOfBoundsException에 hasMessageContaining 추가")
     @Test
-    public void exceptionTest_hasMessageContaining() {
+    void exceptionTest_hasMessageContaining() {
         // given
         String input = "abc";
 
@@ -148,7 +148,7 @@ public class StringTest {
 
     @DisplayName("StringIndexOutOfBoundsException에 withMessageMatching 추가")
     @Test
-    public void exceptionTest_withMessageMatching() {
+    void exceptionTest_withMessageMatching() {
         // given
         String input = "abc";
 
