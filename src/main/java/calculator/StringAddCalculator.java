@@ -17,7 +17,7 @@ public class StringAddCalculator {
 
         List<String> stringNumbers = split(expression);
 
-        return sum(stringNumbers);
+        return sumPositiveNumbers(stringNumbers);
     }
 
     private static boolean isNullOrEmpty(final String expression) {
@@ -29,9 +29,14 @@ public class StringAddCalculator {
         return Arrays.asList(expression.split(regex));
     }
 
-    private static int sum(final List<String> stringNumbers) {
+    private static int sumPositiveNumbers(final List<String> stringNumbers) {
         return stringNumbers.stream()
                 .mapToInt(Integer::parseInt)
+                .peek(number -> {
+                    if (number < 0) {
+                        throw new RuntimeException("음수는 허용하지 않습니다. number=" + number);
+                    }
+                })
                 .sum();
     }
 
