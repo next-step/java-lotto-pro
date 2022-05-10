@@ -43,6 +43,12 @@ public class StringAddCalculator {
     }
 
     private static int getSum(String[] tokens) {
-        return Arrays.stream(tokens).mapToInt(Integer::parseInt).sum();
+        return Arrays.stream(tokens).mapToInt(token -> {
+            try {
+                return Integer.parseInt(token);
+            }catch (NumberFormatException e) {
+                throw new RuntimeException("숫자 값만 계산이 가능합니다.");
+            }
+        }).sum();
     }
 }
