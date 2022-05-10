@@ -9,6 +9,9 @@ public class StringAddCalculator {
     private static final String DELIMITER = ",|:";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
+    private static final String MSG_NOT_NUMBER = "숫자 이외의 값을 입력으로 받을 수 없습니다.";
+    private static final String MSG_NEGATIVE = "음수를 입력으로 받을 수 없습니다";
+
     static int splitAndSum(String input) {
 
         if (isNullOrEmptyInput(input)) {
@@ -25,6 +28,7 @@ public class StringAddCalculator {
 
         List<Integer> numbers = new ArrayList<>();
         for (String numericString : split(input)) {
+            validateSplitInput(numericString);
             numbers.add(Integer.parseInt(numericString));
         }
         return numbers;
@@ -45,6 +49,16 @@ public class StringAddCalculator {
             sum = sum + number;
         }
         return sum;
+    }
+
+
+    private static void validateSplitInput(String splitInput) {
+        if (!splitInput.matches("\\p{Digit}")) {
+            throw new RuntimeException(MSG_NOT_NUMBER);
+        }
+        if (Integer.parseInt(splitInput) < 0) {
+            throw new RuntimeException(MSG_NEGATIVE);
+        }
     }
 
 }
