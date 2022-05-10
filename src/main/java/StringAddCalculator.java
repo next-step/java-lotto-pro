@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final String DEFAULT_DELIMITER = "[,:]";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final String NUMBER_REGEX = "^[1-9]*$";
 
     public static int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
@@ -26,5 +27,11 @@ public class StringAddCalculator {
 
     private static boolean isNullOrEmpty(String input) {
         return input == null || input.isEmpty();
+    }
+
+    private static void validateNumberCheck(String number) {
+        if (!Pattern.matches(NUMBER_REGEX, number)) {
+            throw new RuntimeException("0 이상의 양수만 입력 가능합니다.");
+        }
     }
 }
