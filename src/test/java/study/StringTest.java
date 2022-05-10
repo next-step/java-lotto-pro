@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class StringTest {
     @Test
@@ -26,26 +27,23 @@ public class StringTest {
         String exampleString = "abc";
         int index = 3;
 
-        /* hasMessageContaining: 포함된 문자 여부 확인 */
-        assertThatThrownBy(() -> {
-            try {
-                exampleString.charAt(index);
-            }catch (Exception e){
-                throw new StringIndexOutOfBoundsException("Index: " + (exampleString.length()-1) + ", Size: " + exampleString.length());
-            }
-            exampleString.charAt(index);
-        }).isInstanceOf(StringIndexOutOfBoundsException.class)
-                .hasMessageContaining("Index: 2, Size: 3");
+        assertAll(
+                () -> assertThatThrownBy(() -> exampleString.charAt(index))
+                        .isInstanceOf(StringIndexOutOfBoundsException.class)
+                        .hasMessageContaining("index out of range"),
 
+                () -> assertThatThrownBy(() -> exampleString.charAt(index))
+                        .isInstanceOf(StringIndexOutOfBoundsException.class)
+                        .hasMessageContaining("%d", index),
 
-        /* withMessageMatching: 모든 문자 일치 여부 확인 */
-        assertThatExceptionOfType(StringIndexOutOfBoundsException.class).isThrownBy(() -> {
-            try {
-                exampleString.charAt(index);
-            }catch (Exception e){
-                throw new StringIndexOutOfBoundsException("Index: " + (exampleString.length()-1) + ", Size: " + exampleString.length());
-            }
-        }).withMessageMatching("Index: \\d+, Size: \\d+");
+                () ->  assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+                        .isThrownBy(() -> exampleString.charAt(index))
+                        .withMessageMatching("String index out of range: " + index),
+
+                () -> assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+                        .isThrownBy(() -> exampleString.charAt(index))
+                        .withMessageMatching("String index out of range: \\d")
+        );
 
     }
 }
