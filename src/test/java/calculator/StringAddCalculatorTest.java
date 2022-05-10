@@ -2,6 +2,7 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -48,5 +49,13 @@ public class StringAddCalculatorTest {
                 .isInstanceOf(RuntimeException.class);
     }
 
+
+    @Test
+    void splitAndSum_custom_구분자() throws Exception {
+        assertAll(()-> {
+            assertThat(StringAddCalculator.splitAndSum("//;\n1;2;3")).isEqualTo(6);
+            assertThat(StringAddCalculator.splitAndSum("//,\n1,2,3")).isEqualTo(6);
+        });
+    }
 
 }

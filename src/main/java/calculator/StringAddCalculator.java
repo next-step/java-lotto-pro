@@ -3,18 +3,28 @@ package calculator;
 import calculator.util.SplitUtils;
 import calculator.util.StringUtils;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class StringAddCalculator {
 
-    private static final String BASIC_SEPERATER = ",|:";
+    private static final String DEFAULT_SEPARATOR = ",|:";
+    private static final String CUSTOM_SEPARATOR_REGEX = "/(.)\n(.*)";
     private static final int ZERO = 0;
+
+    private StringAddCalculator() {
+
+    }
 
     public static int splitAndSum(String text) {
         if (StringUtils.isEmptyString(text)) {
             return 0;
         }
-        return sum(text);
+
+        int[] numberArray = calculatorNumberArray(text);
+        validNegativeArray(numberArray);
+        return sum(numberArray);
     }
 
     private static void validNegativeArray(int[] array) {
@@ -25,10 +35,16 @@ public class StringAddCalculator {
         }
     }
 
-    private static int sum(String text) {
-        int[] intArray = SplitUtils.splitToInt(text, BASIC_SEPERATER);
-        validNegativeArray(intArray);
-        return Arrays.stream(intArray).sum();
+    private static int[] calculatorNumberArray(String text) {
+        Matcher matcher = Pattern.compile(CUSTOM_SEPARATOR_REGEX).matcher(text);
+        if (matcher.find()) {
+            return SplitUtils.splitToInt(matcher.group(2), matcher.group(1));
+        }
+        return SplitUtils.splitToInt(text, DEFAULT_SEPARATOR);
+    }
+
+    private static int sum(int[] array) {
+        return Arrays.stream(array).sum();
     }
 
 }
