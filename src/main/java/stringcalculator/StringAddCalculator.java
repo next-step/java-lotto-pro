@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    private static final String DEFAULT_DELIMITERS = "[,:]";
+    private static final String DEFAULT_DELIMITERS_REGEX = "[,:]";
+    public static final String INTEGER_TYPE_REGEX = "-?\\d+";
     public static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     public static final int CUSTOM_DELIMITER_GROUP = 1;
     public static final int NUMBERS_GROUP = 2;
@@ -30,7 +31,7 @@ public class StringAddCalculator {
             String customDelimiter = m.group(CUSTOM_DELIMITER_GROUP);
             return m.group(NUMBERS_GROUP).split(customDelimiter);
         }
-        return input.split(DEFAULT_DELIMITERS);
+        return input.split(DEFAULT_DELIMITERS_REGEX);
     }
 
     private static List<Integer> convertToIntegers(String[] values) {
@@ -42,11 +43,22 @@ public class StringAddCalculator {
     }
 
     private static int checkPositiveNumber(String value) {
-        int number = Integer.parseInt(value);
+        int number = checkInteger(value);
         if (number < 0) {
             throw new RuntimeException();
         }
         return number;
+    }
+
+    private static int checkInteger(String value) {
+        if (isNotInteger(value)) {
+            throw new IllegalArgumentException("정수 타입을 입력 하세요");
+        }
+        return Integer.parseInt(value);
+    }
+
+    private static boolean isNotInteger(String value) {
+        return !value.matches(INTEGER_TYPE_REGEX);
     }
 
     private static int sum(List<Integer> numbers) {
