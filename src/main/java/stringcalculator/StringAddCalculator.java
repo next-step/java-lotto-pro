@@ -1,21 +1,39 @@
 package stringcalculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringAddCalculator {
     public static int splitAndSum(String input) {
-        if (isNull(input) || input.isEmpty()) {
+        if (isBlank(input)) {
             return 0;
         }
 
-        if (input.contains(",")) {
-            String[] values = input.split(",");
-            int result = 0;
-            for (String value : values) {
-                result += Integer.parseInt(value);
-            }
-            return result;
-        }
+        return sum(convertToIntegers(split(input)));
+    }
 
-        return Integer.parseInt(input);
+    private static boolean isBlank(String input) {
+        return isNull(input) || input.isEmpty();
+    }
+
+    private static String[] split(String input) {
+        return input.split(",");
+    }
+
+    private static List<Integer> convertToIntegers(String[] values) {
+        List<Integer> numbers = new ArrayList<>();
+        for (String value : values) {
+            numbers.add(Integer.parseInt(value));
+        }
+        return numbers;
+    }
+
+    private static int sum(List<Integer> numbers) {
+        int result = 0;
+        for (Integer number : numbers) {
+            result += number;
+        }
+        return result;
     }
 
     private static boolean isNull(String input) {
