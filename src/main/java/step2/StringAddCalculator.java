@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
-    private static final String DELEMETER = ",";
+    private static final String DELEMETER = ",|:";
 
     public static int splitAndSum(String inputString) {
         if (isEmpty(inputString)) {
