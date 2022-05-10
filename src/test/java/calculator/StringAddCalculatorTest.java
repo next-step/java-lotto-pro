@@ -91,4 +91,20 @@ class StringAddCalculatorTest {
                 Arguments.of("//-\n5-8", 13L)
         );
     }
+
+    @ParameterizedTest(name = "올바르지 않는 숫자 및 문자({0})를 포함한 수가 들어오면 RuntimeException을 발생")
+    @MethodSource("parameterInvalidNumber")
+    void inputNumbersContainInvalidNumber(String invalidNumber) {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> StringAddCalculator.input(invalidNumber))
+                .withMessage(StringAddCalculator.INVALID_NUMBER_FORMAT_MESSAGE);
+    }
+
+    public static Stream<Arguments> parameterInvalidNumber() {
+        return Stream.of(
+                Arguments.of("1;5,-8"),
+                Arguments.of("//;\n1;-9;3"),
+                Arguments.of("1;5;A")
+        );
+    }
 }
