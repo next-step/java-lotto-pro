@@ -7,6 +7,7 @@ public class StringAddCalculator {
     private static final String DEFAULT_DELIMITER = "[,:]";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final String NUMBER_REGEX = "^[1-9]*$";
+    private static final String ERROR_MSG_NOT_NUMBER = "0 이상의 정수만 입력 가능합니다.";
 
     public static int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
@@ -40,7 +41,7 @@ public class StringAddCalculator {
 
     private static void validateNumberCheck(String number) {
         if (!Pattern.matches(NUMBER_REGEX, number)) {
-            throw new RuntimeException("0 이상의 양수만 입력 가능합니다.");
+            throw new RuntimeException(ERROR_MSG_NOT_NUMBER);
         }
     }
 }
