@@ -6,10 +6,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringTest {
 
+    private static final String SEPARATOR = ",";
+
     @Test
-    void split() {
-        String[] result = "1,2".split(",");
+    void split_1() {
+        String[] result = "1,2".split(SEPARATOR);
+
+        assertThat(result).contains("1");
+        assertThat(result).contains("2");
         assertThat(result).containsExactly("1", "2");
+    }
+
+    @Test
+    void split_2() {
+        String[] result = "1".split(SEPARATOR);
+
+        assertThat(result).contains("1");
+        assertThat(result).containsExactly("1");
     }
 
 }
