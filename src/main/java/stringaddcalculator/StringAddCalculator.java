@@ -3,7 +3,7 @@ package stringaddcalculator;
 public class StringAddCalculator {
 
     public static final int ZERO = 0;
-    public static final String COMMA = ",";
+    public static final String COMMA_AND_COLON = ",|:";
 
     public static int splitAndSum(final String text) {
         if (validateNullOrEmpty(text)) {
@@ -24,7 +24,7 @@ public class StringAddCalculator {
     }
 
     private static String[] splitText(final String text) {
-        return text.split(COMMA);
+        return text.split(COMMA_AND_COLON);
     }
 
     private static int[] parsingNumbers(final String[] splitTexts) {
