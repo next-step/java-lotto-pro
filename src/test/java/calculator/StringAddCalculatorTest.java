@@ -6,10 +6,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class StringAddCalculatorTest {
@@ -72,5 +75,20 @@ class StringAddCalculatorTest {
         long result = StringAddCalculator.input("2147483647;3");
 
         assertEquals(2147483650L, result);
+    }
+
+    @ParameterizedTest(name = "커스텀 구분자({0})가 포함된 수를 입력 받았을 경우 결과({1})가 정상적으로 반환")
+    @MethodSource("parameterCustomDelimiter")
+    void inputTwoNumberContainCustomDelimiter(String inputNumber, long expected) {
+        long result = StringAddCalculator.input(inputNumber);
+
+        assertEquals(expected, result);
+    }
+
+    public static Stream<Arguments> parameterCustomDelimiter() {
+        return Stream.of(
+                Arguments.of("//;\n1;2;3", 6L),
+                Arguments.of("//-\n5-8", 13L)
+        );
     }
 }
