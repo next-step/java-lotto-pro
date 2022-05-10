@@ -2,9 +2,12 @@ package study;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     private static final String DELIMITER = ",|:";
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     static int splitAndSum(String input) {
 
@@ -19,13 +22,21 @@ public class StringAddCalculator {
     }
 
     private static List<Integer> splitToNumberArray(String input) {
-        String[] numericStrings = input.split(DELIMITER);
 
         List<Integer> numbers = new ArrayList<>();
-        for (String numericString : numericStrings) {
+        for (String numericString : split(input)) {
             numbers.add(Integer.parseInt(numericString));
         }
         return numbers;
+    }
+
+    private static String[] split(String input) {
+        Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(input);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return m.group(2).split(customDelimiter);
+        }
+        return input.split(DELIMITER);
     }
 
     private static int sumNumbers(List<Integer> numbers) {
