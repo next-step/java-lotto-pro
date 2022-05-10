@@ -36,9 +36,17 @@ public class StringAddCalculator {
     private static List<Integer> convertToIntegers(String[] values) {
         List<Integer> numbers = new ArrayList<>();
         for (String value : values) {
-            numbers.add(Integer.parseInt(value));
+            numbers.add(checkPositiveNumber(value));
         }
         return numbers;
+    }
+
+    private static int checkPositiveNumber(String value) {
+        int number = Integer.parseInt(value);
+        if (number < 0) {
+            throw new RuntimeException();
+        }
+        return number;
     }
 
     private static int sum(List<Integer> numbers) {
