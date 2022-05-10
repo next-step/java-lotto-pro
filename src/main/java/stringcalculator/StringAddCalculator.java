@@ -44,10 +44,14 @@ public class StringAddCalculator {
 
     private static int checkPositiveNumber(String value) {
         int number = checkInteger(value);
-        if (number < 0) {
+        if (isNegativeNumber(number)) {
             throw new RuntimeException();
         }
         return number;
+    }
+
+    private static boolean isNegativeNumber(int number) {
+        return number < 0;
     }
 
     private static int checkInteger(String value) {
