@@ -6,7 +6,7 @@ public class StringAddCalculator {
             return 0;
         }
 
-        throw new RuntimeException("문자열 계산을 할 수 없습니다.");
+        return Integer.parseInt(text);
     }
 
     private static boolean validateNullOrEmpty(final String text) {
