@@ -34,4 +34,19 @@ class StringTest {
             assertThat(values).containsExactly("1");
         }
     }
+
+    @Nested
+    @DisplayName("문자열 substring 테스트")
+    class SubstringTest {
+        private static final int START_INDEX = 0;
+
+        @Test
+        @DisplayName("문자열 \"(1,2)\" 를 substring() 을 이용해 () 를 제거하면 \"1,2\" 가 반환되어야 한다")
+        void string_substring_test() {
+            String given = "(1,2)";
+            String result = given.substring(START_INDEX + 1, given.length() - 1);
+
+            assertThat(result).isEqualTo("1,2");
+        }
+    }
 }
