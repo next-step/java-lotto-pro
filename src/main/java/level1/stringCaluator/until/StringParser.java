@@ -1,5 +1,7 @@
 package level1.stringCaluator.until;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +14,7 @@ public class StringParser {
 
     private StringParser() {}
 
-    public static String[] parseAndSplit(String target) {
+    public static List<String> parseAndSplit(String target) {
         String splitTarget = target;
         String separator = parseSplitSeparator(target);
 
@@ -20,7 +22,7 @@ public class StringParser {
             splitTarget = splitTarget.substring(splitTarget.indexOf(SPECIAL_SPLIT_RIGHT_SEPARATOR) + 1);
         }
 
-        return splitTarget.split(separator);
+        return Arrays.asList(splitTarget.split(separator));
     }
 
     private static String parseSplitSeparator(String target) {
@@ -29,7 +31,7 @@ public class StringParser {
 
         if (regexResult.find()) {
             checkStartBySpecialSeparator(regexResult);
-            separator = regexResult.group();
+            separator = "\\" + String.join( "\\", regexResult.group().split(""));
         }
 
         return separator;

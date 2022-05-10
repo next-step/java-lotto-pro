@@ -3,6 +3,8 @@ package level1.stringCaluator.until;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 class StringParserTest {
@@ -12,9 +14,9 @@ class StringParserTest {
     void defaultParserTest() {
         String target = "a:b,c:d";
 
-        String[] result = StringParser.parseAndSplit(target);
+        List<String> result = StringParser.parseAndSplit(target);
 
-        assertThat(result.length).isEqualTo(4);
+        assertThat(result.size()).isEqualTo(4);
         for (String s: result) {
             assertThat(s).doesNotContain(":");
             assertThat(s).doesNotContain(",");
@@ -24,12 +26,12 @@ class StringParserTest {
     @DisplayName("//XXX\n 형태의 문자가 시작되면 XXX 가 구분자로 문자가 정상적으로 구분되어야 한다")
     @Test
     void specialSeparatorParserTest() {
-        String specialSeparator = "//#\n";
-        String target = specialSeparator + "3#4#abc";
+        String specialSeparator = "//#*^&\n";
+        String target = specialSeparator + "3#*^&4#*^&abc";
 
-        String[] result = StringParser.parseAndSplit(target);
+        List<String> result = StringParser.parseAndSplit(target);
 
-        assertThat(result.length).isEqualTo(3);
+        assertThat(result.size()).isEqualTo(3);
         for (String s: result) {
             assertThat(s).doesNotContain(specialSeparator);
         }
