@@ -26,4 +26,14 @@ public class StringTest {
         assertThat("(1,2)".substring(1, 4)).isEqualTo("1,2");
     }
 
+    @Test
+    @DisplayName("abc 값이 주어졌을 때 charAt 하여 특정 위치의 Character 타입 문자를 가져올 수 있는지 확인")
+    public void test_charAt() {
+        String underTest = "abc";
+
+        assertThat(underTest.charAt(0)).isEqualTo('a').isExactlyInstanceOf(Character.class);
+        assertThat(underTest.charAt(1)).isEqualTo('b').isExactlyInstanceOf(Character.class);
+        assertThat(underTest.charAt(2)).isEqualTo('c').isExactlyInstanceOf(Character.class);
+    }
+
 }
