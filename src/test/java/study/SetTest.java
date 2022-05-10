@@ -7,6 +7,8 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
 
@@ -27,4 +29,10 @@ public class SetTest {
         assertThat(numbers.size()).isEqualTo(3);
     }
 
+    @DisplayName("Set 에 속한 원소를 확인한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void findElement(int input) {
+        assertThat(numbers.contains(input)).isTrue();
+    }
 }
