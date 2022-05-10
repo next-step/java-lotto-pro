@@ -1,8 +1,11 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("String 클래스에 대한 학습 테스트")
 class StringTest {
@@ -47,6 +50,40 @@ class StringTest {
             String result = given.substring(START_INDEX + 1, given.length() - 1);
 
             assertThat(result).isEqualTo("1,2");
+        }
+    }
+
+    @Nested
+    @DisplayName("문자열 charAt 테스트")
+    class CharAtTest {
+        private static final String GIVEN = "abc";
+
+        @DisplayName("charAt 메소드 사용시 문자열 길이 이내의 값이 오면 정상적으로 문자열의 해당 위치의 값을 반환해야 한다")
+        @Test
+        void charAt_test() {
+            assertThat(String.valueOf(GIVEN.charAt(0))).isEqualTo("a");
+            assertThat(String.valueOf(GIVEN.charAt(1))).isEqualTo("b");
+            assertThat(String.valueOf(GIVEN.charAt(2))).isEqualTo("c");
+        }
+
+        @DisplayName("charAt 메소드 사용시 문자열 길이 이상의 값이 오면 StringIndexOutOfBoundsException 이 발생하여야 한다")
+        @ParameterizedTest
+        @ValueSource(ints = {4, 5, 6, 7, 8, 9})
+        void charAt_exception_test(int param) {
+            assertThatThrownBy(() -> {
+                GIVEN.charAt(param);
+            }).isInstanceOf(StringIndexOutOfBoundsException.class)
+                    .hasMessageContaining("String index out of range: " + param);
+        }
+
+        @DisplayName("charAt 메소드 사용시 음수가 오면 StringIndexOutOfBoundsException 이 발생하여야 한다")
+        @ParameterizedTest
+        @ValueSource(ints = {-1, -2, -3, -4, -5})
+        void charAt_exception_test2(int param) {
+            assertThatThrownBy(() -> {
+                GIVEN.charAt(param);
+            }).isInstanceOf(StringIndexOutOfBoundsException.class)
+                    .hasMessageContaining("String index out of range: " + param);
         }
     }
 }
