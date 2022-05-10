@@ -44,12 +44,14 @@ public class StringAddCalculator {
     private static int sumPositiveNumbers(final List<String> stringNumbers) {
         return stringNumbers.stream()
                 .mapToInt(Integer::parseInt)
-                .peek(number -> {
-                    if (number < 0) {
-                        throw new RuntimeException("음수는 허용하지 않습니다. number=" + number);
-                    }
-                })
+                .peek(StringAddCalculator::checkNegativeNumber)
                 .sum();
+    }
+    
+    private static void checkNegativeNumber(final int number) {
+        if (number < 0) {
+            throw new RuntimeException("음수는 허용하지 않습니다. number=" + number);
+        }
     }
 
     private static String makeStandardDelimiterRegex() {
