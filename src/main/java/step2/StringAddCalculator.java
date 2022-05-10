@@ -9,27 +9,39 @@ class StringAddCalculator {
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
 
     static int splitAndSum(String value) {
-        if (value == null || value.isEmpty()) {
+        if (isEmpty(value)) {
             return 0;
         }
+        final String[] maybeNumbers = split(value);
+        return sum(maybeNumbers);
+    }
 
-        final String[] maybeNumbers;
+    private static boolean isEmpty(String value) {
+        return value == null || value.isEmpty();
+    }
+
+    private static String[] split(String value) {
         final Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(value);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            maybeNumbers = matcher.group(2).split(customDelimiter);
-        } else {
-            maybeNumbers = DEFAULT_DELIMITER_PATTERN.split(value);
+            final String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(customDelimiter);
         }
+        return DEFAULT_DELIMITER_PATTERN.split(value);
+    }
 
+    private static int sum(String[] maybeNumbers) {
         int total = 0;
         for (String maybeNumber : maybeNumbers) {
-            int number = Integer.parseInt(maybeNumber);
-            if (number < 0) {
-                throw new RuntimeException("음수는 가질 수 없습니다.");
-            }
-            total += number;
+            total += parseUnsignedInt(maybeNumber);
         }
         return total;
+    }
+
+    private static int parseUnsignedInt(String maybeNumber) {
+        int number = Integer.parseInt(maybeNumber);
+        if (number < 0) {
+            throw new RuntimeException("음수가 될 수 없습니다");
+        }
+        return number;
     }
 }
