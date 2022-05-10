@@ -43,4 +43,8 @@ public class StringAddCalculator {
         }
         throw new IllegalArgumentException("[ERROR] 0~9 사이의 숫자가 아닙니다.");
     }
+
+    private StringAddCalculator() {
+        throw new IllegalStateException("Utility class");
+    }
 }
