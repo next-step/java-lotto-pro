@@ -11,6 +11,10 @@ public class StringAddCalculator {
             return 0;
         }
 
+        if (isNegativeNumbers(text)) {
+            throw new RuntimeException("음수 값은 입력할 수 없습니다.");
+        }
+
         Integer result = customDelimiterAddCalculator(text);
         if (result != null) {
             return result;
@@ -24,13 +28,13 @@ public class StringAddCalculator {
     }
 
     private static int standardStringAddCalculator(String text) {
-        if (text.contains("-")){
-            throw new RuntimeException("음수 값은 입력할 수 없습니다.");
-        }
-
         String[] tokens = text.split(",|:");
 
         return getSum(tokens);
+    }
+
+    private static boolean isNegativeNumbers(String text) {
+        return text.contains("-");
     }
 
     private static Integer customDelimiterAddCalculator(String text) {
