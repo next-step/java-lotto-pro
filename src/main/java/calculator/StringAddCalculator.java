@@ -12,7 +12,10 @@ public class StringAddCalculator {
     private static final String REGEX_DELIMITER = "|";
     private static final List<String> STANDARD_DELIMISTERS = Arrays.asList(",", ":");
     private static final String CUSTOM_REGEX = "//(.)\n(.*)";
-    
+
+    private StringAddCalculator() {
+    }
+
     public static int splitAndSum(final String expression) {
         if (isNullOrEmpty(expression)) {
             return ZERO;
