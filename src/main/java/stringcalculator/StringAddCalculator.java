@@ -5,7 +5,7 @@ public class StringAddCalculator {
         if (isNull(input) || input.isEmpty()) {
             return 0;
         }
-        return 0;
+        return Integer.parseInt(input);
     }
 
     private static boolean isNull(String input) {
