@@ -1,4 +1,4 @@
-package level1.stringCaluator.calculator;
+package camp.nextstep.edu.level1.stringCaluator.calculator;
 
 import org.junit.jupiter.api.Test;
 

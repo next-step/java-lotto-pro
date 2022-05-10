@@ -1,4 +1,4 @@
-package common;
+package camp.nextstep.edu.common;
 
 import org.junit.jupiter.api.Test;
 

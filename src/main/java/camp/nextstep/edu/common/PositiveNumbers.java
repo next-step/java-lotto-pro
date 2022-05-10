@@ -1,4 +1,4 @@
-package common;
+package camp.nextstep.edu.common;
 
 import java.util.ArrayList;
 import java.util.List;
