@@ -7,6 +7,8 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class SetTest {
     private Set<Integer> numbers;
@@ -20,13 +22,33 @@ class SetTest {
         numbers.add(3);
     }
 
-    @Test
     @DisplayName("size() 메소드를 활용해 Set의 크기를 확인하는 학습테스트")
+    @Test
     void setTest_size() {
         // given & when
         int size = numbers.size();
 
         // then
         assertThat(size).isEqualTo(3);
+    }
+
+    @DisplayName("contains() 메소드를 활용해 1,2,3의 값이 존재하는지를 확인하는 학습테스트")
+    @Test
+    void setTest_contains() {
+        // given & when & then
+        assertThat(numbers.contains(1)).isTrue();
+        assertThat(numbers.contains(2)).isTrue();
+        assertThat(numbers.contains(3)).isTrue();
+    }
+
+    @DisplayName("ParameterizedTest를 활용해 중복 코드를 제거")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void contains_ParameterizedTest(int value) {
+        // given & when
+        boolean actual = numbers.contains(value);
+
+        // then
+        assertThat(actual).isTrue();
     }
 }
