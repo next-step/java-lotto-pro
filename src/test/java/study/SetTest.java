@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
@@ -34,5 +35,13 @@ public class SetTest {
     @ValueSource(ints = {1, 2, 3})
     void findElement(int input) {
         assertThat(numbers.contains(input)).isTrue();
+    }
+
+
+    @DisplayName("Set 에 속한 원소와 없는 원소에 대한 확인한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1,true", "2,true", "3,true", "4,false", "5,false"})
+    void findElementWithNotExist(int input, boolean expected) {
+        assertThat(numbers.contains(input)).isEqualTo(expected);
     }
 }
