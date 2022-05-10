@@ -46,6 +46,12 @@ public class StringAddCalculatorTest {
     }
 
     @Test
+    void splitAndSum_두자리_이상_숫자() {
+        int result = StringAddCalculator.splitAndSum("11,22,33");
+        assertThat(result).isEqualTo(66);
+    }
+
+    @Test
     void checkIntegerType() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("a,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
