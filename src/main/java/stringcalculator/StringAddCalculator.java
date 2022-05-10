@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringAddCalculator {
+
+    private static final String DEFAULT_DELIMITERS = "[,:]";
+
     public static int splitAndSum(String input) {
         if (isBlank(input)) {
             return 0;
@@ -17,7 +20,7 @@ public class StringAddCalculator {
     }
 
     private static String[] split(String input) {
-        return input.split(",");
+        return input.split(DEFAULT_DELIMITERS);
     }
 
     private static List<Integer> convertToIntegers(String[] values) {
