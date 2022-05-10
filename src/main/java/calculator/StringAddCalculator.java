@@ -24,6 +24,10 @@ public class StringAddCalculator {
     }
 
     private static int standardStringAddCalculator(String text) {
+        if (text.contains("-")){
+            throw new RuntimeException("음수 값은 입력할 수 없습니다.");
+        }
+
         String[] tokens = text.split(",|:");
 
         return Arrays.stream(tokens).mapToInt(Integer::parseInt).sum();
