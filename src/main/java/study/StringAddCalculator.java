@@ -7,6 +7,10 @@ public class StringAddCalculator {
 
     private static final int DELIMITER = 1;
     private static final int NUMBER_WORDS = 2;
+    private static final String CUSTOM_REGEX = "//(.)\\n(.*)";
+    private static final String COMMA_OR_COLON_REGEX = ",|:";
+
+    private static final Pattern customPattern = Pattern.compile(CUSTOM_REGEX);
 
     public static int splitAndSum(String numberWords) {
         int sum = 0;
@@ -22,12 +26,12 @@ public class StringAddCalculator {
     }
 
     private static String[] splitNumberWords(String numberWords) {
-        Matcher matcher = Pattern.compile("//(.)\\n(.*)").matcher(numberWords);
+        Matcher matcher = customPattern.matcher(numberWords);
         if (matcher.find()) {
             String customDelimiter = matcher.group(DELIMITER);
             return matcher.group(NUMBER_WORDS).split(customDelimiter);
         }
-        return numberWords.split(",|:");
+        return numberWords.split(COMMA_OR_COLON_REGEX);
     }
 
     private static int sumNumbers(int sum, String[] splitNumbers) {
