@@ -40,4 +40,10 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum("1,2:3");
         assertThat(result).isEqualTo(6);
     }
+    @Test
+    @DisplayName("'//'와 '\\n' 문자 사이에 커스텀 구분자를 쓸 수 있다.")
+    void can_use_custom_delimiter() {
+        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
 }
