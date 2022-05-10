@@ -41,4 +41,13 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(expect);
     }
+
+    @DisplayName("“//”와 “\\n” 문자 사이에 커스텀 구분자로 숫자합을 반환한다")
+    @Test
+    public void splitAndSum_custom_구분자() throws Exception {
+        assertAll(
+                () -> assertThat(StringAddCalculator.splitAndSum("//;\n1;2;3")).isEqualTo(6),
+                () -> assertThat(StringAddCalculator.splitAndSum("//q\n1q3q3")).isEqualTo(7)
+        );
+    }
 }
