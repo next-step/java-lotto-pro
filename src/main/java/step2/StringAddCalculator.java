@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
-    private static final String DELEMETER = ",|:";
+    private static final String DELIMITER = ",|:";
 
     public static int splitAndSum(String inputString) {
         if (isEmpty(inputString)) {
@@ -32,7 +32,7 @@ public class StringAddCalculator {
     }
 
     private static String[] splitString(String inputString) {
-        return inputString.split(DELEMETER);
+        return inputString.split(DELIMITER);
     }
 
     private static int sum(String[] numbers) {
