@@ -14,23 +14,32 @@ public class StringAddCalculator {
         if (isEmpty(inputString)) {
             return 0;
         }
-        if (isNumber(inputString)) {
+        if (isPositiveNumber(inputString)) {
             return Integer.parseInt(inputString);
         }
         String[] numbers = split(inputString);
+        validatePositiveNumbers(numbers);
         return sum(numbers);
     }
+
 
     private static boolean isEmpty(String source) {
         return source == null || source.isEmpty();
     }
 
-    private static boolean isNumber(String source) {
+    private static boolean isPositiveNumber(String source) {
         try {
-            Integer.parseInt(source);
-            return true;
+            return Integer.parseInt(source) > 0;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    private static void validatePositiveNumbers(String[] source) {
+        boolean isPositiveNumbers = Arrays.stream(source)
+                                        .allMatch(StringAddCalculator::isPositiveNumber);
+        if (!isPositiveNumbers) {
+            throw new RuntimeException(ErrorMessage.ERROR_NOT_POSITIVE_NUMBER.getMessage());
         }
     }
 
