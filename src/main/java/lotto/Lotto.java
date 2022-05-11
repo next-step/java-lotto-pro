@@ -29,14 +29,14 @@ public class Lotto {
 	
 	private static void buyAutoLotto(List<LottoNumbers> lottos) {
 		System.out.println(lottoNumbersTitleStringFormat(lottos));
-		for(int i=0;i<lottos.size();++i) {
+		for (int i=0; i<lottos.size(); ++i) {
 			System.out.println(lottoNumbersStringFormat(lottos.get(i)));
 		}
 	}
 	
 	private static List<LottoNumber> lastWinLottoNumbers(String lastLottoNumbers) {
 		List<LottoNumber> lottoNumbers = new ArrayList<LottoNumber>();
-		for(String lottoNumber: lastLottoNumbers.split(", ")) {
+		for (String lottoNumber: lastLottoNumbers.split(", ")) {
 			lottoNumbers.add(new LottoNumber(lottoNumber));
 		}
 		return lottoNumbers;

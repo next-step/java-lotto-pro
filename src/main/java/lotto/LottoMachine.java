@@ -22,6 +22,7 @@ public class LottoMachine {
 		for (int i=0; i<times; ++i) {
 			lottos.add(new LottoNumbers(LottoUtil.randomLottoNumbers()));
 		}
+		
 		return lottos;
 	}
 	
