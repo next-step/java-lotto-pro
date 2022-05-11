@@ -1,10 +1,11 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
-    private final static int LOTTO_NUMBERS_SIZE = 6;
+    public final static int LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> numbers;
 
@@ -15,6 +16,8 @@ public class LottoNumbers {
         for (int number : numbers) {
             this.numbers.add(new LottoNumber(number));
         }
+
+        Collections.sort(this.numbers);
     }
 
     private void validateNumbers(List<Integer> numbers) {
