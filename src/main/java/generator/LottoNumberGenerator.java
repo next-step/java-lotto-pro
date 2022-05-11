@@ -1,5 +1,7 @@
 package generator;
 
+import static calculator.constants.LottoNumberConstants.*;
+
 import calculator.constants.LottoNumberConstants;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +17,7 @@ public class LottoNumberGenerator implements NumberGenerator{
 
     private List<Integer> initializeLottoBaseNumbers() {
         List<Integer> initializeLottoNumbers = new ArrayList<>();
-        for (int i = LottoNumberConstants.LOTTO_NUMBER_MIN; i <= LottoNumberConstants.LOTTO_NUMBER_MAX; i++) {
+        for (int i = LOTTO_NUMBER_MIN; i <= LOTTO_NUMBER_MAX; i++) {
             initializeLottoNumbers.add(i);
         }
         return initializeLottoNumbers;
@@ -25,7 +27,7 @@ public class LottoNumberGenerator implements NumberGenerator{
     public List<Integer> generate() {
         Collections.shuffle(this.lottoBaseNumbers);
         List<Integer> generateLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < LottoNumberConstants.LOTTO_NUMBER_SIZE; i++) {
+        for (int i = 0; i < LOTTO_NUMBER_SIZE; i++) {
             generateLottoNumbers.add(this.lottoBaseNumbers.get(i));
         }
         Collections.sort(generateLottoNumbers);

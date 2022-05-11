@@ -1,5 +1,6 @@
 package generator;
 
+import static calculator.constants.LottoNumberConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import calculator.constants.LottoNumberConstants;
@@ -19,6 +20,6 @@ class LottoNumberGeneratorTest {
         List<Integer> generateLottoNumbers = numberGenerator.generate();
 
         // then
-        assertThat(generateLottoNumbers).hasSize(LottoNumberConstants.LOTTO_NUMBER_SIZE);
+        assertThat(generateLottoNumbers).hasSize(LOTTO_NUMBER_SIZE);
     }
 }
