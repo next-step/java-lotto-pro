@@ -52,4 +52,12 @@ public class LottoNumbers {
     public boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
+
+    @Override
+    public String toString() {
+        return this.lottoNumbers.stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList())
+            .toString();
+    }
 }
