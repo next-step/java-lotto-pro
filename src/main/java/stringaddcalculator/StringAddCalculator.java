@@ -5,14 +5,14 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    private static final int ZERO = 0;
-    private static final String COMMA_AND_COLON = ",|:";
+    private static final int EMPTY_SUMMARY = 0;
+    private static final String DEFAULT_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
     private static final String NUMERIC_PATTERN = "\\d";
 
     public static int splitAndSum(final String text) {
         if (isNullOrEmpty(text)) {
-            return ZERO;
+            return EMPTY_SUMMARY;
         }
 
         return sumNumbers(parsingNumbers(splitText(text)));
@@ -80,7 +80,7 @@ public class StringAddCalculator {
             return matcher.group(2).split(customDelimiter);
         }
 
-        return text.split(COMMA_AND_COLON);
+        return text.split(DEFAULT_DELIMITER);
     }
 
 }
