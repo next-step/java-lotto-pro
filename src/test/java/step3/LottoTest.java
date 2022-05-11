@@ -1,7 +1,6 @@
 package step3;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
@@ -27,5 +26,11 @@ class LottoTest {
             Lotto newLotto = new Lotto(Arrays.asList(1, 2, 3, 55, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1~45의 숫자만 입력해주세요.");
+    }
+
+    @Test
+    void 자동번호_로또_1개_생성() {
+        Lotto autoLotto = new Lotto();
+        assertThat(autoLotto).isInstanceOf(Lotto.class);
     }
 }
