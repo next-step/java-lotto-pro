@@ -37,7 +37,7 @@ public class LottoMachine {
 		return winList;
 	}
 	
-	public int profitRate() {
+	public double profitRate() {
 		if(winList == null) {
 			return 0;
 		}
@@ -47,6 +47,6 @@ public class LottoMachine {
 			sum += winList[i]*LottoUtil.WIN_MONEYS[i];
 		}
 		
-		return sum/money.getNumber();
+		return (double)sum/money.getNumber();
 	}
 }
