@@ -6,7 +6,9 @@ public class StringAddCalculator {
 			return 0;
 		}
 
-		return 8282;
+		int number = Integer.parseInt(strNumbers);
+
+		return number;
 	}
 
 	private static boolean isNullOrEmpty(String strNumbers) {
