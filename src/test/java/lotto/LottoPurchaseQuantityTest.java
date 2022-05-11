@@ -1,11 +1,13 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import lotto.constants.LottoErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -41,5 +43,13 @@ class LottoPurchaseQuantityTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoPurchaseQuantity("900"))
                 .withMessage(LottoErrorMessage.MONEY_LESS_THAN_PRICE);
+    }
+
+    @ParameterizedTest(name = "입력받은 금액{0}은 로또 {1}장으로 반환")
+    @CsvSource(value = {"1500:1", "20000:20", "35100:35"}, delimiter = ':')
+    void inputValidValue(String input, int expected) {
+        LottoPurchaseQuantity lottoPurchaseQuantity = new LottoPurchaseQuantity(input);
+
+        assertEquals(expected, lottoPurchaseQuantity.getQuantity());
     }
 }

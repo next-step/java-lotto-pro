@@ -5,10 +5,16 @@ import lotto.constants.LottoErrorMessage;
 public class LottoPurchaseQuantity {
     private static final String MONEY_FORMAT_REGEX = "^[1-9]+[0-9]*$";
     private static final int LOTTO_PRICE = 1000;
+    private final int quantity;
 
     public LottoPurchaseQuantity(String money) {
         validateFormat(money);
         validateAmount(money);
+        quantity = calculateQuantity(Integer.parseInt(money));
+    }
+
+    private int calculateQuantity(int money) {
+        return money / LOTTO_PRICE;
     }
 
     private void validateAmount(String money) {
@@ -37,5 +43,9 @@ public class LottoPurchaseQuantity {
 
     private boolean isInvalidFormat(String money) {
         return !money.matches(MONEY_FORMAT_REGEX);
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }
