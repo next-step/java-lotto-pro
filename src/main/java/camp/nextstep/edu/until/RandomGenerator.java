@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class RandomGenerator {
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public static Set<Integer> createNonDuplicatedIntegerSet(int from, int to, int range) {
         checkValidRange(from, to, range);

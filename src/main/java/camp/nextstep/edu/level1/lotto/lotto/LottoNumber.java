@@ -1,0 +1,23 @@
+package camp.nextstep.edu.level1.lotto.lotto;
+
+public class LottoNumber {
+    private final int LOTTO_START_NUMBER = 1;
+    private final int LOTTO_END_NUMBER = 45;
+
+    private final int value;
+
+    public LottoNumber(int value) {
+        checkValidLottoNumber(value);
+        this.value = value;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
+
+    private void checkValidLottoNumber(int value) {
+        if (value < LOTTO_START_NUMBER || value > LOTTO_END_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45 만 허용됩니다.");
+        }
+    }
+}
