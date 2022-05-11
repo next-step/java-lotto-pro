@@ -8,7 +8,7 @@ class StringAddCalculator {
     private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile("[,:]");
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
 
-    static int splitAndSum(String value) {
+    static int calculate(String value) {
         if (isEmpty(value)) {
             return 0;
         }
@@ -40,7 +40,7 @@ class StringAddCalculator {
     private static int parseUnsignedInt(String maybeNumber) {
         int number = Integer.parseInt(maybeNumber);
         if (number < 0) {
-            throw new RuntimeException("음수가 될 수 없습니다");
+            throw new NumberFormatException("음수가 될 수 없습니다");
         }
         return number;
     }
