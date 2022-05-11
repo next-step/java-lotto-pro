@@ -5,10 +5,10 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    public static final int ZERO = 0;
-    public static final String COMMA_AND_COLON = ",|:";
-    public static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
-    public static final String NUMERIC_PATTERN = "\\d";
+    private static final int ZERO = 0;
+    private static final String COMMA_AND_COLON = ",|:";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+    private static final String NUMERIC_PATTERN = "\\d";
 
     public static int splitAndSum(final String text) {
         if (isNullOrEmpty(text)) {
