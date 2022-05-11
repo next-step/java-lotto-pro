@@ -17,7 +17,7 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return getSum(stringToNumberStrings(text));
+        return getSum(splitText(text));
     }
 
     private static boolean isValidationCheckNullOrEmpty(String text) {
@@ -28,7 +28,7 @@ public class StringAddCalculator {
         return number < 0;
     }
 
-    private static String[] stringToNumberStrings(String text) {
+    private static String[] splitText(String text) {
         Matcher m = CUSTOM_PATTERN.matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(CUSTOM_PATTERN_DELIMITER_INDEX);
