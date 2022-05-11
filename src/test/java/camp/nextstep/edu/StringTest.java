@@ -15,6 +15,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 public class StringTest {
     private static final String regex = ",";
+    private static final int NO_SEARCH = -1;
 
     @DisplayName("String 의 split 를 이용 하여 분리 작업")
     @ParameterizedTest
@@ -80,10 +81,10 @@ public class StringTest {
     }
 
     private int findStartParenthesis(final String source) {
-        return Objects.equals(source.indexOf("("), -1) ? 0 : source.indexOf("(") + 1;
+        return Objects.equals(source.indexOf("("), NO_SEARCH) ? 0 : source.indexOf("(") + 1;
     }
 
     private int findEndParenthesis(final String source) {
-        return Objects.equals(source.lastIndexOf(")"), -1) ? source.length() : source.lastIndexOf(")");
+        return Objects.equals(source.lastIndexOf(")"), NO_SEARCH) ? source.length() : source.lastIndexOf(")");
     }
 }
