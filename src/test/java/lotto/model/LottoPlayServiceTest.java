@@ -2,10 +2,8 @@ package lotto.model;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import lotto.vo.Lotto;
 import lotto.vo.Lottos;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -71,7 +69,7 @@ class LottoPlayServiceTest {
     @ParameterizedTest
     @ValueSource(ints = {10, 15, 5})
     void playLottoByCount(int playCount){
-        Lottos lottos = lottoPlayService.playLottoByCount(playCount);
+        Lottos lottos = lottoPlayService.generateLottosByPlayCount(playCount);
         List<Lotto> lottoList = lottos.getLottoList();
         assertThat(lottoList).hasSize(playCount);
     }

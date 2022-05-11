@@ -50,7 +50,7 @@ public class LottoPlayService {
         }
     }
 
-    public Lottos playLottoByCount(int playCount) {
+    public Lottos generateLottosByPlayCount(int playCount) {
         Lottos lottos = new Lottos(playCount);
         for (int play = 0; play < lottos.getPlayCount(); play++) {
             Lotto lotto = lottoGeneratorService.generateLotto();
