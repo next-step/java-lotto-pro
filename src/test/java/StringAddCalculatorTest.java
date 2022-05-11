@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,5 +36,12 @@ public class StringAddCalculatorTest {
     public void splitAndSum_custom_구분자() throws Exception {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("기본 구분자 + Custom 구분자 같이 입력되는 경우")
+    public void splitAndSum_custom_구분자_쉼표구분자() throws Exception {
+        int result = StringAddCalculator.splitAndSum("//;\n1;2;3,4:5");
+        assertThat(result).isEqualTo(15);
     }
 }
