@@ -1,5 +1,8 @@
 package lotto.vo;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Lottos {
 
     private final int playCount;
@@ -10,5 +13,9 @@ public class Lottos {
 
     public int getPlayCount() {
         return playCount;
+    }
+
+    public List<Lotto> getLottoList() {
+        return Collections.emptyList();
     }
 }

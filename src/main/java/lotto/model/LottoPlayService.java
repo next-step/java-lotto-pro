@@ -40,5 +40,7 @@ public class LottoPlayService {
         }
     }
 
-
+    public Lottos playLottoByCount(int playCount) {
+        return new Lottos(0);
+    }
 }

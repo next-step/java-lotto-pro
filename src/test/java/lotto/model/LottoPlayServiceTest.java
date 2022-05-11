@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.List;
+import lotto.vo.Lotto;
 import lotto.vo.Lottos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -57,5 +59,15 @@ class LottoPlayServiceTest {
                 .isThrownBy(() -> lottoPlayService.convertMoneyToLottos(money))
                 .withMessage("[ERROR] 구매 금액은 1000원 단위로 입력해주세요.");
     }
+
+    @DisplayName("로또 구매개수만큼 로또게임을 진행하고 로또목록에 등록한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {10, 15, 5})
+    void playLottoByCount(int playCount){
+        Lottos lottos = lottoPlayService.playLottoByCount(playCount);
+        List<Lotto> lottoList = lottos.getLottoList();
+        assertThat(lottoList).hasSize(playCount);
+    }
+
 
 }
