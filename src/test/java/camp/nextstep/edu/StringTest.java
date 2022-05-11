@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -47,7 +48,22 @@ public class StringTest {
     @ParameterizedTest
     @CsvSource(value = {"(1,2):1,2", "(1):1"}, delimiter = ':')
     void substringTest(final String source, final String expectedStr) {
-        final String subStringStr = source.substring(source.indexOf("(") + 1, source.lastIndexOf(")"));
+        final String subStringStr = source.substring(findStartParenthesis(source), findEndParenthesis(source));
         assertThat(subStringStr).isEqualTo(expectedStr);
+    }
+
+    @DisplayName("\"(\" or \")\" 중 하나라도 있는 경우 제거 하기")
+    @ParameterizedTest
+    @CsvSource(value = {"(1,2:1,2", "1,2):1,2", "1,2:1,2"}, delimiter = ':')
+    void noPairs(final String source, final String expectedResult) {
+        substringTest(source, expectedResult);
+    }
+    
+    private int findStartParenthesis(final String source) {
+        return Objects.equals(source.indexOf("("), -1) ? 0 : source.indexOf("(") + 1;
+    }
+
+    private int findEndParenthesis(final String source) {
+        return Objects.equals(source.lastIndexOf(")"), -1) ? source.length() : source.lastIndexOf(")");
     }
 }
