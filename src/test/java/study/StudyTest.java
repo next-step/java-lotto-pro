@@ -28,4 +28,12 @@ public class StudyTest {
                 .hasSize(1)
                 .containsExactly("1");
     }
+
+    @Test
+    @DisplayName("요구사항 2. \"(1,2)\"이 주어졌을 때 substring()을 활용해 \"1,2\"를 반환한다.")
+    void substringTest() {
+        String value = "(1,2)";
+        assertThat(value.substring(1, value.length() - 1))
+                .isEqualTo("1,2");
+    }
 }
