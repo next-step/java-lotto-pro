@@ -39,8 +39,9 @@
 - [ ] 총수익률 출력하는 기능
 
 ### 리팩토링 작업(클래스)
-- [ ] 로또 숫자 하나를 의미하는 LottoNo
+- [X] 로또 숫자 하나를 의미하는 LottoNo
 - [ ] 로또를 의미하는 Lotto
 - [ ] 로또 통계를 의미하는 LottoStatistics
 - [ ] 게임 정보를 입력받는 InputView
 - [ ] 게임 정보를 출력하는 ResultView
+- [X] 로또 게임의 정보를 관리하는 LottoConstant
