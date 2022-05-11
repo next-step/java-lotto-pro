@@ -6,9 +6,7 @@ import java.util.stream.Collectors;
 
 public class StringToIntegerParser {
 
-    private StringToIntegerParser(){
-        throw new AssertionError();
-    }
+    private StringToIntegerParser() {}
 
     public static List<Integer> parseNumbers(String[] strings) {
         return Arrays.stream(strings)
