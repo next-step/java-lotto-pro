@@ -1,6 +1,7 @@
 package lotto.constant;
 
 import java.util.EnumSet;
+import java.util.Set;
 
 public enum LottoMatchNumber {
 
@@ -16,7 +17,7 @@ public enum LottoMatchNumber {
         this.winningAmount = winningAmount;
     }
 
-    public static EnumSet<LottoMatchNumber> allMatchNumber() {
+    public static Set<LottoMatchNumber> allMatchNumber() {
         return matchNumbers;
     }
 

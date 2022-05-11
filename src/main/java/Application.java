@@ -59,8 +59,7 @@ public class Application {
     private String getInputMoney(LottoGameController lottoGameController) throws IOException {
         LottoGameDTO lottoGameDTO = lottoGameController.inputMoney();
         printMessage(lottoGameDTO);
-        String moneyWord = BUFFERED_READER.readLine();
-        return moneyWord;
+        return BUFFERED_READER.readLine();
     }
 
     private void printMessage(LottoGameDTO lottoGameDTO) {
