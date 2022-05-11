@@ -8,8 +8,9 @@ public class StringAddCalculator {
         if (isEmpty(input)) {
             return ZERO;
         }
+        Numbers numbers = Splitter.split(input);
 
-        return Integer.parseInt(input);
+        return numbers.sum();
     }
 
     private static boolean isEmpty(String input) {
