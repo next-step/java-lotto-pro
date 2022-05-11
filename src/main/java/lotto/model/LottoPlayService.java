@@ -10,6 +10,8 @@ public class LottoPlayService {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_MAX_PURCHASE_PRICE = 10_000_000;
+    private static final int LOW_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
 
     private final LottoGeneratorService lottoGeneratorService;
 
@@ -58,11 +60,24 @@ public class LottoPlayService {
     }
 
     public void playLottoGame(Lottos lottos, List<Integer> winningNumberList) {
+        validateNumber(winningNumberList);
         for (Lotto lotto : lottos.getLottoList()){
             int matchNumberCount = calcMatchNumberCount(winningNumberList, lotto);
             lottos.updateResultCountMap(matchNumberCount);
         }
         calculateProfitRate(lottos);
+    }
+
+    private void validateNumber(List<Integer> winningNumberList) {
+        for (int winningNumber : winningNumberList) {
+            validateLottoNumber(winningNumber);
+        }
+    }
+
+    private void validateLottoNumber(int winningNumber) {
+        if(winningNumber < LOW_NUMBER || winningNumber > MAX_NUMBER){
+            throw new IllegalArgumentException(ErrorMessage.NOT_LOTTO_NUMBER);
+        }
     }
 
     private int calcMatchNumberCount(List<Integer> winningNumberList, Lotto lotto) {
