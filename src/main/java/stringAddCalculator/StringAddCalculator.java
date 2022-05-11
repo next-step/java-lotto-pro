@@ -14,6 +14,14 @@ public class StringAddCalculator {
             result = 0;
         }
 
+        if (isNumberAndSizeOne(input)) {
+            result = Integer.parseInt(input);
+        }
+
+        if (result == -1 ) {
+            throw new RuntimeException();
+        }
+
         return result;
     }
 

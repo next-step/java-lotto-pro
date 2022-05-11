@@ -11,4 +11,11 @@ public class Validation {
         }
         return false;
     }
+
+    public static boolean isNumberAndSizeOne(String input) {
+        if (input.matches("^[0-9]")) {
+            return true;
+        }
+        return false;
+    }
 }
