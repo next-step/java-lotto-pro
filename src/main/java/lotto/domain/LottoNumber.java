@@ -2,7 +2,7 @@ package lotto.domain;
 
 import static calculator.constants.LottoNumberConstants.*;
 
-import calculator.constants.LottoErrorMessage;
+import lotto.constants.LottoErrorMessage;
 import java.util.Objects;
 
 public class LottoNumber {

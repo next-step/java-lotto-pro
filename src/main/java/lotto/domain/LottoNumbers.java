@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static calculator.constants.LottoErrorMessage.MUST_BE_UNIQUE_NUMBER;
+import static lotto.constants.LottoErrorMessage.MUST_BE_UNIQUE_NUMBER;
 import static calculator.constants.LottoNumberConstants.LOTTO_NUMBER_SIZE;
 
 import generator.NumberGenerator;
