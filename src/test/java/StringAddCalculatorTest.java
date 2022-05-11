@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -41,11 +42,10 @@ public class StringAddCalculatorTest {
     }
 
     @DisplayName("정해진 포맷에 지정한 구분자로 나눈 문자열을 변환한 숫자의 합을 반환하는지 확인")
-    @ParameterizedTest
-    @CsvSource(value = { "//;\n1;1;1?3", "//*\n1*2*3?6" }, delimiterString = "?")
-    public void splitAndSum_custom_구분자(String text, int expected) {
-        int sum = StringAddCalculator.splitAndSum(text);
-        assertThat(sum).isEqualTo(expected);
+    @Test
+    public void splitAndSum_custom_구분자() {
+        int result = StringAddCalculator.splitAndSum("//=\n1=2=3");
+        assertThat(result).isEqualTo(6);
     }
 
     @DisplayName("구분자 사이에 음수가 나온 경우 RuntimeException 을 반환하는지 확인")
