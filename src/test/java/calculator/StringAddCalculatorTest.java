@@ -48,7 +48,7 @@ public class StringAddCalculatorTest {
     @Test
     @DisplayName("음수값 입력시 RuntimeException을 발생시킨다")
     public void splitAndSum_negative() throws Exception {
-        assertThatExceptionOfType(RuntimeException.class)
+        assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .withMessageMatching("0보다 작은 수는 허용을 하지 않습니다.");
     }
@@ -56,7 +56,7 @@ public class StringAddCalculatorTest {
     @ParameterizedTest(name = "숫자가 아닌값 {0} 을 입력시 RuntimeException을 발생시킨다")
     @ValueSource(strings = {"a;b;c", "1:2:a", "a:1:a"})
     public void splitAndSum_숫자아닌값() throws Exception {
-        assertThatExceptionOfType(RuntimeException.class)
+        assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> StringAddCalculator.splitAndSum("a;b;c"))
                 .withMessageMatching("올바르지 않는 숫자 입니다.");
     }

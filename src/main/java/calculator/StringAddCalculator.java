@@ -45,11 +45,11 @@ public class StringAddCalculator {
         try {
             number = Integer.parseInt(input);
         } catch (NumberFormatException ex) {
-            throw new RuntimeException(INVALID_NUMBER);
+            throw new IllegalArgumentException(INVALID_NUMBER);
         }
 
         if (number < 0) {
-            throw new RuntimeException(INVALID_POSITIVE_NUMBER);
+            throw new IllegalArgumentException(INVALID_POSITIVE_NUMBER);
         }
 
         return number;
