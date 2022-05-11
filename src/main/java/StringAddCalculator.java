@@ -42,10 +42,7 @@ public class StringAddCalculator {
     }
 
     private static List<String> basicDetermiterSplit(String number) {
-        Matcher matcher = BASIC_PATTERN.matcher(number);
-        if(matcher.find())
-            return Arrays.asList(matcher.group(2).split(BASIC_DELIMITER));
-        return Arrays.asList(number);
+        return Arrays.asList(number.split(BASIC_DELIMITER));
     }
 
     private static int sum(List<String> numbers) {
