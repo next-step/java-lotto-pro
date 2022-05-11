@@ -3,6 +3,8 @@ package lotto.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -24,6 +26,22 @@ class LottoMachineTest {
             arguments(0, 0),
             arguments(1000, 1),
             arguments(1001, 1)
+        );
+    }
+
+    @MethodSource(value = "calculateProfitTestParameter")
+    @ParameterizedTest
+    void calculateProfit(int cost, List<Result> results, double expectedProfit) {
+        double profit = lottoMachine.calculateProfit(cost, results);
+        assertEquals(expectedProfit, profit);
+    }
+
+    static Stream<Arguments> calculateProfitTestParameter() {
+        List<Result> results = Arrays.asList(Result.FOURTH, Result.LOSE, Result.LOSE, Result.LOSE, Result.LOSE);
+        return Stream.of(
+            arguments(5000, results, 1.00),
+            arguments(10000, results, 0.50),
+            arguments(1000, results, 5.00)
         );
     }
 }

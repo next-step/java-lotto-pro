@@ -16,9 +16,14 @@ public class LottoGame {
         int cost = InputView.inputMoney();
         Lottos lottos = lottoMachine.buy(cost);
         ResultView.printLottos(lottos);
+
         Lotto winner = InputView.inputWinnerNumber();
+
         List<Result> results = lottos.getResults(winner);
         ResultView.printResults(results);
+
+        double profit = lottoMachine.calculateProfit(cost, results);
+        ResultView.printProfit(profit);
     }
 
 }

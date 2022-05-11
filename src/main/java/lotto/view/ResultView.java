@@ -12,6 +12,8 @@ public class ResultView {
     private static final String DELIMITER = ", ";
     private static final String LOTTO_MESSAGE_START_CHAR = "[";
     private static final String LOTTO_MESSAGE_END_CHAR = "]";
+    private static final String PROFIT_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
+    private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public static void printLottos(Lottos lottos) {
         printQuantity(lottos.getQuantity());
@@ -55,4 +57,11 @@ public class ResultView {
         return count;
     }
 
+    public static void printProfit(double profit) {
+        String message = String.format(PROFIT_MESSAGE_FORMAT, profit);
+        System.out.print(message);
+        if (profit < 1) {
+            System.out.println(LOSS_MESSAGE);
+        }
+    }
 }
