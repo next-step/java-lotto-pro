@@ -19,7 +19,7 @@ public class InputStringUtils {
     }
 
     private static int wordToNumber(String numberWord) {
-        if (numberWord.matches("\\p{Digit}")) {
+        if (numberWord.matches("\\p{Digit}+")) {
             return Integer.parseInt(numberWord);
         }
         throw new IllegalArgumentException(ErrorMessage.NOT_NUMBER);
