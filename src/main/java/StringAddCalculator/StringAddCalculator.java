@@ -2,6 +2,8 @@ package StringAddCalculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     public static int splitAndSum(String text) {
@@ -9,12 +11,20 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] split = text.split(",|:");
-        List<Integer> numbers = parseInts(split);
+        List<Integer> numbers = parseInts(split(text));
         return numbers.stream()
                 .reduce(0, Integer::sum);
     }
 
+    private static String[] split(String text) {
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return m.group(2).split(",|:|" + customDelimiter);
+        }
+
+        return text.split(",|:");
+    }
 
     private static List<Integer> parseInts(String[] split) {
         List<Integer> numbers = new ArrayList<>();
