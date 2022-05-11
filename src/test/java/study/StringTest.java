@@ -12,11 +12,8 @@ public class StringTest {
 		// given
 		String value = "1,2";
 
-		// when
-		String[] result = value.split(",");
-
-		// then
-		assertThat(result).containsExactly("1", "2");
+		// when, then
+		assertThat(value.split(",")).containsExactly("1", "2");
 	}
 
 	@DisplayName("'1'을 ,로 split")
@@ -25,11 +22,8 @@ public class StringTest {
 		// given
 		String value = "1";
 
-		// when
-		String[] result = value.split(",");
-
-		// then
-		assertThat(result).containsExactly("1");
+		// when, then
+		assertThat(value.split(",")).containsExactly("1");
 	}
 
 	@DisplayName("substring 테스트")
@@ -38,11 +32,8 @@ public class StringTest {
 		// given
 		String value = "(1,2)";
 
-		// when
-		String result = value.substring(1, 4);
-
-		// then
-		assertThat(result).isEqualTo("1,2");
+		// when, then
+		assertThat(value.substring(1, 4)).isEqualTo("1,2");
 	}
 
 	@DisplayName("chartAt 테스트")
