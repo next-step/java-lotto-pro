@@ -8,6 +8,10 @@ public class PlusStrategyFactory {
             return new EmptyPlusStrategy();
         }
 
+        if (ExpressionUtils.isSingleNumberExpression(expressionStr)) {
+            return new SingleNumberPlusStrategy();
+        }
+
         throw new RuntimeException(ExceptionType.INVALID_EXPRESSION.getMessage());
     }
 }
