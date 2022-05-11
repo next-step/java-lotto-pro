@@ -82,11 +82,11 @@ class LottoPlayServiceTest {
         lottos.addLotto(new Lotto(Arrays.asList(3,7,20,35,43,45)));
 
         lottoPlayService.playLottoGame(lottos,winningNumberList);
-        Map<Integer,Integer> winingCountMap = lottos.getWiningCountMap();
 
-        assertEquals(2,winingCountMap.get(3));
-        assertEquals(0,winingCountMap.get(4));
-        assertEquals(1,winingCountMap.get(5));
-        assertEquals(0,winingCountMap.get(6));
+        assertEquals(2,lottos.getResultCount(3));
+        assertEquals(0,lottos.getResultCount(4));
+        assertEquals(1,lottos.getResultCount(5));
+        assertEquals(0,lottos.getResultCount(6));
+
     }
 }

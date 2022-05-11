@@ -57,6 +57,25 @@ public class LottoPlayService {
     }
 
     public void playLottoGame(Lottos lottos, List<Integer> winningNumberList) {
-
+        for (Lotto lotto : lottos.getLottoList()){
+            int matchNumberCount = calcMatchNumberCount(winningNumberList, lotto);
+            lottos.updateResultCountMap(matchNumberCount);
+        }
     }
+
+    private int calcMatchNumberCount(List<Integer> winningNumberList, Lotto lotto) {
+        int matchNumberCount = 0;
+        for (int lottoNumber : lotto.getNumberList()){
+            matchNumberCount = countMatchNumber(winningNumberList,lottoNumber, matchNumberCount );
+        }
+        return matchNumberCount;
+    }
+
+    private int countMatchNumber(List<Integer> winningNumberList, int lottoNumber, int matchNumberCount) {
+        if(winningNumberList.contains(lottoNumber)) {
+            matchNumberCount++;
+        }
+        return matchNumberCount;
+    }
+
 }
