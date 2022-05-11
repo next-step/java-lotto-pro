@@ -1,20 +1,30 @@
 package camp.nextstep.edu;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class StringTest  {
+public class StringTest {
 
     @DisplayName("String 의 split 를 이용 하여 분리 작업")
-    @Test
-    void splitTest() {
-        final String[] splittingStrArray = "1,2".split(",");
-        assertThat(splittingStrArray).hasSize(2)
-                .contains("1","2").containsExactly("1","2");
+    @ParameterizedTest
+    @MethodSource("providerSourceAndExpectedResult")
+    void splitTest(final String source, final String[] expectedResult) {
+        final String regex = ",";
+        assertThat(source.split(regex)).hasSize(expectedResult.length)
+                .contains(expectedResult)
+                .containsExactly(expectedResult);
+    }
 
-        final String[] splittingCommaFreeStrArray = "1".split(",");
-        assertThat(splittingCommaFreeStrArray).hasSize(1).contains("1");
+    private static Stream<Arguments> providerSourceAndExpectedResult() {
+        return Stream.of(
+                Arguments.of("1,2", new String[]{"1", "2"}),
+                Arguments.of("1", new String[]{"1"})
+        );
     }
 }
