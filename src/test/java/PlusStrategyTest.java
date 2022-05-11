@@ -1,4 +1,5 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import domain.CustomDelimiterPlusStrategy;
@@ -7,6 +8,7 @@ import domain.EmptyPlusStrategy;
 import domain.PlusStrategy;
 import domain.PlusStrategyFactory;
 import domain.SingleNumberPlusStrategy;
+import exception.ExceptionType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -143,5 +145,23 @@ class PlusStrategyTest {
         assertThat(plusStrategy.result(given_1)).isEqualTo(expected_1);
         assertThat(plusStrategy_2.result(given_2)).isEqualTo(expected_2);
         assertThat(plusStrategy_3.result(given_3)).isEqualTo(expected_3);
+    }
+
+    @DisplayName("음수가 포함된 식을 전달할 경우 정상적으로 IllegalArgumentException 이 발생해야 힌다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1:2:-3", "-2:5:1,0", "3:4,2,-8", "7:-7,9"})
+    void negative_number_test(String input) {
+        assertThatThrownBy(() -> factory.getStrategy(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionType.INVALID_EXPRESSION.getMessage());
+    }
+
+    @DisplayName("알 수 없는 형식의 식을 전달할 경우 IllegalArgumentException 이 발생해야 한다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,", "asdgg", "ee2,q"})
+    void invalid_expression_test(String input) {
+        assertThatThrownBy(() -> factory.getStrategy(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionType.INVALID_EXPRESSION.getMessage());
     }
 }

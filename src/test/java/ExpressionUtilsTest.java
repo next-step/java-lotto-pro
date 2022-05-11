@@ -1,3 +1,4 @@
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import domain.ExpressionUtils;
@@ -46,8 +47,28 @@ class ExpressionUtilsTest {
 
     @DisplayName("Default 인지 체크하는 로직에 숫자 세개 이상을 콜론/컴마 구분자로 넘기면 정상적으로 통과되어야 한다")
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;2;3", "//]\n3]2]3", "//*\n4_5_3"})
+    @ValueSource(strings = {"//;\n1;2;3", "//]\n3]2]3", "//_\n4_5_3"})
     void custom_number_expression_test(String input) {
         assertTrue(ExpressionUtils.isCustomExpression(input));
+    }
+
+    @DisplayName("음수가 포함된 식에 대해서는 모두 false 가 반환되어야 한다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1:2:-3", "-2:5:1,0", "3:4,2,-8", "7:-7,9"})
+    void negative_number_expression_test(String input) {
+        assertFalse(ExpressionUtils.isEmptyExpression(input));
+        assertFalse(ExpressionUtils.isSingleNumberExpression(input));
+        assertFalse(ExpressionUtils.isDefaultExpression(input));
+        assertFalse(ExpressionUtils.isCustomExpression(input));
+    }
+
+    @DisplayName("알 수 없는 형식의 식에 대해서는 모두 false 가 반환되어야 한다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,", "asdgg", "ee2,q"})
+    void invalid_number_expression_test_2(String input) {
+        assertFalse(ExpressionUtils.isEmptyExpression(input));
+        assertFalse(ExpressionUtils.isSingleNumberExpression(input));
+        assertFalse(ExpressionUtils.isDefaultExpression(input));
+        assertFalse(ExpressionUtils.isCustomExpression(input));
     }
 }
