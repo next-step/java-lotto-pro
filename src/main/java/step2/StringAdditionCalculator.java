@@ -9,7 +9,7 @@ public class StringAdditionCalculator {
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
 
     public static int addAllDelimiterString(final String numberWithDelimiter) {
-        if(hasCustomDelimiter(numberWithDelimiter)){
+        if (hasCustomDelimiter(numberWithDelimiter)) {
             return addAllCustomDelimiterString(numberWithDelimiter);
         }
         return splitAndAddAllString(DEFAULT_DELIMITER, numberWithDelimiter);
@@ -21,7 +21,7 @@ public class StringAdditionCalculator {
 
     private static int addAllCustomDelimiterString(final String numberWithCustomDelimiter) {
         final Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(numberWithCustomDelimiter);
-        if(matcher.find()){
+        if (matcher.find()) {
             final String delimiter = matcher.group(1);
             final String numberWithDelimiter = matcher.group(2);
             return splitAndAddAllString(delimiter, numberWithDelimiter);
@@ -33,8 +33,16 @@ public class StringAdditionCalculator {
         final String[] numbers = numberWithDelimiter.split(delimiter);
         int sum = 0;
         for (final String number : numbers) {
-            sum += Integer.parseInt(number);
+            final int parsedNumber = Integer.parseInt(number);
+            checkNumberIsMinus(parsedNumber);
+            sum += parsedNumber;
         }
         return sum;
+    }
+
+    private static void checkNumberIsMinus(final int parsedNumber) {
+        if (parsedNumber < 0) {
+            throw new RuntimeException("cannot enter minus number.");
+        }
     }
 }

@@ -1,6 +1,7 @@
 package step2;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,12 @@ public class StringAdditionCalculatorTest {
     void addAllDelimiterString_With_Custom_Delimiter() {
         final int result = StringAdditionCalculator.addAllDelimiterString("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void addAllDelimiterString_Throw_RuntimeException_When_Number_Is_Minus() {
+        assertThatThrownBy(() -> StringAdditionCalculator.addAllDelimiterString("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
     }
 
 }
