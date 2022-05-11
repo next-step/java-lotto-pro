@@ -3,7 +3,6 @@ package stringAddCalculator;
 import utils.CustomStringUtils;
 
 public class StringAddCalculator {
-
     private static final int DEFAULT_INT = 0;
 
     public static int splitAndSum(String text) {
