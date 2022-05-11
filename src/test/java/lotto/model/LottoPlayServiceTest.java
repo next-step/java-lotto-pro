@@ -38,4 +38,14 @@ class LottoPlayServiceTest {
                 .withMessage("[ERROR] 로또 최소 가격은 1000원 입니다.");
     }
 
+    @DisplayName("구매 금액이 10_000_000원 이상인 경우")
+    @ParameterizedTest
+    @ValueSource(ints = {10_000_000, Integer.MAX_VALUE})
+    void convertMoneyToLottos_over_money(int money) {
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoPlayService.convertMoneyToLottos(money))
+                .withMessage("[ERROR] 로또 구매 최대 가격은 10_000_000원 입니다.");
+    }
+
 }
