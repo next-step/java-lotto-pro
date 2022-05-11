@@ -1,6 +1,7 @@
-package util;
+package model;
 
 public class Number {
+	private static final int MIN_NUMBER = 0;
 	private int number;
 	
 	public Number(String number) {
@@ -22,7 +23,7 @@ public class Number {
 	}
 	
 	private boolean isNatural(int number){
-		return number > 0;
+		return number > MIN_NUMBER;
 	}
 	
 	private boolean isNumber(String number) {

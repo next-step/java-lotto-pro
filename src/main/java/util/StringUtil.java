@@ -4,6 +4,8 @@ public class StringUtil {
 	public static final String COMMA = ",";
 	public static final char LEFT_PARENTHESIS = '(';
 	public static final char RIGHT_PARENTHESIS = ')';
+	public static final int PARENTHESIS_START_NO = 0;
+	public static final int LAST_INDEX_DIFFERENCE = 1;
 	
 	public static String[] splitComma(String value) {
 		return value.split(COMMA);
@@ -11,13 +13,17 @@ public class StringUtil {
 
 	public static String removeParentheses(String value) {
 		if (isEitherEndParenthesis(value)) {
-			return value.substring(1, value.length()-1);
+			return value.substring(PARENTHESIS_START_NO + 1, getLastIndex(value));
 		}
 		return value;
 	}
 	
 	private static boolean isEitherEndParenthesis(String value) {
-		return value.charAt(0) == LEFT_PARENTHESIS && value.charAt(value.length()-1) == RIGHT_PARENTHESIS;
+		return value.charAt(PARENTHESIS_START_NO) == LEFT_PARENTHESIS && value.charAt(getLastIndex(value)) == RIGHT_PARENTHESIS;
+	}
+	
+	private static int getLastIndex(String value) {
+		return value.length() - LAST_INDEX_DIFFERENCE;
 	}
 	
 	public static char findCharacter(String value, int index) {
