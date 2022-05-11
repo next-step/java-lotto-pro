@@ -6,7 +6,7 @@ import java.util.Objects;
 public class StringAddCalculator {
     private static final int ZERO = 0;
 
-    private static final String DELIMITERS = ",";
+    private static final String DELIMITERS = ",|:";
 
     public static int splitAndSum(String numberString) {
         if (isNullOrEmptyString(numberString)) {
@@ -21,6 +21,4 @@ public class StringAddCalculator {
     private static boolean isNullOrEmptyString(String numbers) {
         return Objects.isNull(numbers) || numbers.isEmpty();
     }
-
-
 }
