@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringAddCalculatorTest {
     @Test
@@ -19,6 +20,13 @@ public class StringAddCalculatorTest {
     public void splitAndSum_숫자하나() throws Exception {
         int result = StringAddCalculator.splitAndSum("1");
         assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    public void splitAndSum_숫자하나초과() throws Exception{
+        assertThrows(RuntimeException.class, () -> {
+            int result = StringAddCalculator.splitAndSum("12");
+        });
     }
 
     @Test
