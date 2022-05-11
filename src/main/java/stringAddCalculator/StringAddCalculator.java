@@ -3,6 +3,8 @@ package stringAddCalculator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static stringAddCalculator.Utils.Validation.*;
 
@@ -17,12 +19,23 @@ public class StringAddCalculator {
         if (!input.startsWith("//")) {
             return splitSumNormal(input);
         }
-        return -1;
+
+        return splicSumCustom(input);
     }
     
     public static int splitSumNormal(String input) {
         String[] numbers = input.split(",|:");
         return addArr(numbers);
+    }
+
+    public static int splicSumCustom(String input) {
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            String[] tokens= m.group(2).split(customDelimiter);
+            return addArr(tokens);
+        }
+        throw new RuntimeException();
     }
     
     public static int addArr(String[] tokens) {
