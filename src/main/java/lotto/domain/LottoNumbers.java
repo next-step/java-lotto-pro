@@ -25,6 +25,12 @@ public class LottoNumbers {
         return new LottoNumbers(parsedLottoNumbers);
     }
 
+    public static LottoNumbers generateBy(List<Integer> numbers) {
+        List<LottoNumber> parsedLottoNumbers = parseIntegerToLottoNumber(numbers);
+        validateLottoNumbers(parsedLottoNumbers);
+        return new LottoNumbers(parsedLottoNumbers);
+    }
+
     private static void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
         if(lottoNumberSet.size() != LOTTO_NUMBER_SIZE){
