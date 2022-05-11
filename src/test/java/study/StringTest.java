@@ -3,13 +3,24 @@ package study;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * 스트링 클래스 학습 테스트
  * */
 public class StringTest {
+    private String data;
+
+    @BeforeEach
+    void setUp() {
+        data = "abc";
+    }
+
 
     @Test
     @DisplayName("문자열 split 테스트")
@@ -29,18 +40,19 @@ public class StringTest {
         assertThat(result).isEqualTo("1,2");
     }
 
-    @Test
-    @DisplayName("특정위치의 문자열을 가져오고 벗어난 문자를 찾으면 StringIndexOutOfBoundsException 발생한다.")
-    void charAt(){
-        String data = "abc";
-        //각 값의 경계 값
-        int[] boundary = {-1, 4};
-        assertThat(data.charAt(0)).isEqualTo('a');
+    @ParameterizedTest
+    @CsvSource(value = {"0:a","1:b", "2:c"}, delimiter = ':')
+    @DisplayName("특정위치의 문자열을 가져온다.")
+    void charAt(int index, char result){
+        assertThat(data.charAt(index)).isEqualTo(result);
+    }
 
-        for (int boundaryValue : boundary) {
-            assertThatThrownBy(() -> data.charAt(boundaryValue))
-                    .isInstanceOf(StringIndexOutOfBoundsException.class)
-                    .hasMessageContaining("String index out of range");
-        }
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 4})
+    @DisplayName("chatAt 메서드의 벗어난 문자를 찾으면 StringIndexOutOfBoundsException 발생한다.")
+    void charAtNoSearch(int index) {
+        assertThatThrownBy(() -> data.charAt(index))
+                .isInstanceOf(StringIndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range");
     }
 }
