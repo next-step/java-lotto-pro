@@ -1,25 +1,15 @@
 package lotto;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 public class LottoMachine {
-    private final int count;
-    private List<AutomaticNumber> lottoList;
+    private final LottoPurchaseQuantity lottoPurchaseQuantity;
+    private final LottoTicket lottoTicket;
 
-    public LottoMachine(int repeatNumber) {
-        count = repeatNumber;
-        generateLotto(count);
+    public LottoMachine(String money) {
+        lottoPurchaseQuantity = new LottoPurchaseQuantity(money);
+        lottoTicket = new LottoTicket(lottoPurchaseQuantity);
     }
 
-    private void generateLotto(int count) {
-        lottoList = Stream.generate(AutomaticNumber::new)
-                .limit(count)
-                .collect(Collectors.toList());
-    }
-
-    public List<AutomaticNumber> getLottoList() {
-        return lottoList;
+    public LottoTicket getLottoTicket() {
+        return lottoTicket;
     }
 }
