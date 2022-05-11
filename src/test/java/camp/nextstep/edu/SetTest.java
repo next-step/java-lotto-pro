@@ -3,6 +3,8 @@ package camp.nextstep.edu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,10 +31,9 @@ public class SetTest {
     }
 
     @DisplayName("Set 의 contains 메소드를 이용하여 값을 확인")
-    @Test
-    void containsTest() {
-        assertThat(numbers.contains(1)).isTrue();
-        assertThat(numbers.contains(2)).isTrue();
-        assertThat(numbers.contains(3)).isTrue();
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void containsTest(final int index) {
+        assertThat(numbers.contains(index)).isTrue();
     }
 }
