@@ -41,4 +41,12 @@ public class StringTest {
         assertThatExceptionOfType(AssertionError.class)
                 .isThrownBy(() -> assertThat(source.split(regex)).containsExactly(compareStrArray));
     }
+
+    @DisplayName("substring 를 통해서 \"(\",\")\" 제거 하기")
+    @Test
+    void substringTest() {
+        final String source = "(1,2)";
+        final String subStringStr = source.substring(1, 4);
+        assertThat(subStringStr).isEqualTo("1,2");
+    }
 }
