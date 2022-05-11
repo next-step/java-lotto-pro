@@ -1,6 +1,7 @@
 package calculator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -27,5 +28,13 @@ class NumbersTest {
 	@CsvSource(value = {"1:2,3=6", "4,5:6=15"}, delimiter = '=')
 	void sum_values(String given, String expected) {
 		assertThat(Numbers.from(given).sum()).isEqualTo(Number.from(expected));
+	}
+
+	@DisplayName("커스텀 구분자를 지정하면 해당 구분자로 구분된 숫자들의 합을 반환한다")
+	@Test
+	void sum_values_by_custom() {
+		Numbers given = Numbers.from("//;\n1;2;3");
+		Number expected = Number.from("6");
+		assertThat(given.sum()).isEqualTo(expected);
 	}
 }
