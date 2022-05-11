@@ -2,8 +2,11 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import static lotto.domain.LottoConstant.LOTTO_END_NUMBER;
+import static lotto.domain.LottoConstant.LOTTO_START_NUMBER;
+
 public class LottoNo implements Comparable<LottoNo> {
-    private int number;
+    private final int number;
 
     public LottoNo(int number) {
         if (isInvalidNumber(number)) {
@@ -13,7 +16,7 @@ public class LottoNo implements Comparable<LottoNo> {
     }
 
     private boolean isInvalidNumber(int number) {
-        if (number < LottoConstant.LOTTO_START_NUMBER || number > LottoConstant.LOTTO_END_NUMBER) {
+        if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             return true;
         }
         return false;
