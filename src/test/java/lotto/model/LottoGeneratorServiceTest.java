@@ -14,12 +14,12 @@ class LottoGeneratorServiceTest {
 
     @DisplayName("로또를 생성한다.(번호 6개)")
     @Test
-    void generateLotto(){
+    void generateLotto() {
         Lotto lotto = lottoGeneratorService.generateLotto();
         List<Integer> numberList = lotto.getNumberList();
 
         assertThat(numberList).hasSize(6);
-        for (int number : numberList){
+        for (int number : numberList) {
             assertThat(number).isGreaterThanOrEqualTo(1);
             assertThat(number).isLessThanOrEqualTo(45);
         }

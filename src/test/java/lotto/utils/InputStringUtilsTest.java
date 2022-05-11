@@ -14,18 +14,18 @@ class InputStringUtilsTest {
 
     @DisplayName("입력된 문자열을 구분자로 split 하고 숫자 리스트로 반환한다.")
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:,:6","1-2-3:-:3"},delimiter = ':')
-    void splitToNumberListByDelimiter(String inputString, String delimiter, int expectedSize){
+    @CsvSource(value = {"1,2,3,4,5,6:,:6", "1-2-3:-:3"}, delimiter = ':')
+    void splitToNumberListByDelimiter(String inputString, String delimiter, int expectedSize) {
         List<Integer> numberList = InputStringUtils.splitToNumberListByDelimiter(inputString, delimiter);
         assertThat(numberList).hasSize(expectedSize);
     }
 
     @DisplayName("숫자가 아닌 경우 검증")
     @ParameterizedTest
-    @CsvSource(value = {"%,2,3,4,5,6:,","M-2-3:-"},delimiter = ':')
-    void splitToNumberListByDelimiter_not_number(String inputString, String delimiter){
+    @CsvSource(value = {"%,2,3,4,5,6:,", "M-2-3:-"}, delimiter = ':')
+    void splitToNumberListByDelimiter_not_number(String inputString, String delimiter) {
         assertThatIllegalArgumentException()
-                .isThrownBy(()->  InputStringUtils.splitToNumberListByDelimiter(inputString, delimiter))
+                .isThrownBy(() -> InputStringUtils.splitToNumberListByDelimiter(inputString, delimiter))
                 .withMessage("[ERROR] 숫자가 아닙니다.");
     }
 
