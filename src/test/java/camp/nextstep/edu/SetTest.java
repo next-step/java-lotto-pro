@@ -27,4 +27,12 @@ public class SetTest {
     void sizeTest() {
         assertThat(numbers.size()).isEqualTo(3);
     }
+
+    @DisplayName("Set 의 contains 메소드를 이용하여 값을 확인")
+    @Test
+    void containsTest() {
+        assertThat(numbers.contains(1)).isTrue();
+        assertThat(numbers.contains(2)).isTrue();
+        assertThat(numbers.contains(3)).isTrue();
+    }
 }
