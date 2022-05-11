@@ -10,6 +10,6 @@ public class CalculatorController {
 
     public static void executeStringCalculator() {
         StringCalculator calculator = InputView.enterCalculateValue();
-        OutputView.enterCalculateValue(calculator);
+        OutputView.showCalculateResult(calculator);
     }
 }
