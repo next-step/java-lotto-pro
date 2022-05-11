@@ -74,7 +74,7 @@ public class StringTest {
         // when
         // then
         assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
-                .isThrownBy(() -> input.charAt(input.length()))
-                .withMessageMatching("String index out of range: " + input.length());
+            .isThrownBy(() -> input.charAt(input.length()))
+            .withMessageMatching("String index out of range: " + input.length());
     }
 }

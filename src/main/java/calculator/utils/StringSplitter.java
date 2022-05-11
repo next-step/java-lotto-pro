@@ -15,7 +15,7 @@ public class StringSplitter {
     }
 
     public static String[] split(String text){
-        if(StringUtils.isEmpty(text)){
+        if (StringUtils.isEmpty(text)) {
             return new String[]{};
         }
         return splitDefaultOrCustomDelimiter(text);
@@ -24,7 +24,7 @@ public class StringSplitter {
     private static String[] splitDefaultOrCustomDelimiter(String text) {
         Pattern customDelimiterPattern = Pattern.compile(CUSTOM_SPLIT_DELIMITER_REGEX);
         Matcher matcher = customDelimiterPattern.matcher(text);
-        if(matcher.find()){
+        if (matcher.find()) {
             return splitByDelimiter(matcher.group(VALUE_IDX), matcher.group(CUSTOM_SPLIT_DELIMITER_IDX));
         }
         return splitByDelimiter(text, DEFAULT_SPLIT_DELIMITER_REGEX);

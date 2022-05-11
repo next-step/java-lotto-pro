@@ -21,9 +21,9 @@ class StringSplitterTest {
 
         // then
         assertAll(
-                () -> assertThat(splitText).contains("1"),
-                () -> assertThat(splitText).contains("2"),
-                () -> assertThat(splitText).contains("3")
+            () -> assertThat(splitText).contains("1"),
+            () -> assertThat(splitText).contains("2"),
+            () -> assertThat(splitText).contains("3")
         );
     }
 
@@ -38,9 +38,9 @@ class StringSplitterTest {
 
         // then
         assertAll(
-                () -> assertThat(splitText).contains("1"),
-                () -> assertThat(splitText).contains("2"),
-                () -> assertThat(splitText).contains("3")
+            () -> assertThat(splitText).contains("1"),
+            () -> assertThat(splitText).contains("2"),
+            () -> assertThat(splitText).contains("3")
         );
     }
 
@@ -53,10 +53,10 @@ class StringSplitterTest {
 
         // then
         assertAll(
-                () -> assertThat(splitText).contains("1"),
-                () -> assertThat(splitText).contains("2"),
-                () -> assertThat(splitText).contains("3"),
-                () -> assertThat(splitText.length).isEqualTo(3)
+            () -> assertThat(splitText).contains("1"),
+            () -> assertThat(splitText).contains("2"),
+            () -> assertThat(splitText).contains("3"),
+            () -> assertThat(splitText.length).isEqualTo(3)
         );
     }
 }

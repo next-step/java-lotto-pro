@@ -12,7 +12,7 @@ public class StringToIntegerParser {
 
     public static List<Integer> parseNumbers(String[] strings) {
         return Arrays.stream(strings)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 }

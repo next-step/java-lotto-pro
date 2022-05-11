@@ -44,9 +44,9 @@ class StringAddCalculatorTest {
 
         // when & then
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(text))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("[ERROR]")
-                .hasMessageContaining("a, f, !");
+            .isInstanceOf(RuntimeException.class)
+            .hasMessageContaining("[ERROR]")
+            .hasMessageContaining("a, f, !");
     }
 
     @Test
@@ -57,9 +57,9 @@ class StringAddCalculatorTest {
 
         // when & then
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(text))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("[ERROR]")
-                .hasMessageContaining("-1, 2, 3");
+            .isInstanceOf(RuntimeException.class)
+            .hasMessageContaining("[ERROR]")
+            .hasMessageContaining("-1, 2, 3");
     }
 
     @Test
@@ -134,6 +134,6 @@ class StringAddCalculatorTest {
     @Test
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+            .isInstanceOf(RuntimeException.class);
     }
 }
