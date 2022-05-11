@@ -2,13 +2,13 @@ package lotto.dto;
 
 import lotto.vo.Lottos;
 
-public class LottoGameResponseDTO {
+public class LottoGameDTO {
 
     private final Lottos lottos;
     private final String view;
     private final boolean isInputError;
 
-    public LottoGameResponseDTO(Lottos lottos,String view,boolean isInputError) {
+    public LottoGameDTO(Lottos lottos, String view, boolean isInputError) {
         this.view = view;
         this.lottos = lottos;
         this.isInputError = isInputError;
