@@ -22,7 +22,7 @@ public class StringAddCalculator {
 
     private static int getSum(String[] splits) {
         return Arrays.stream(splits)
-                .map(ParseNumber::parseNotNegativeInt)
+                .map(ParseNumber::parseNotNegativeNumber)
                 .mapToInt(ParseNumber::getParseNumber)
                 .sum();
     }

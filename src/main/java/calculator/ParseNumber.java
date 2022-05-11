@@ -9,7 +9,7 @@ public class ParseNumber {
         this.parseNumber = parseNumber;
     }
 
-    public static ParseNumber parseNotNegativeInt(String input) {
+    public static ParseNumber parseNotNegativeNumber(String input) {
         try {
             int parseInt = Integer.parseInt(input);
             validNotNegativeNumber(parseInt);
