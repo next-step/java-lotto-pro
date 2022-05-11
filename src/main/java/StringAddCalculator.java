@@ -31,6 +31,7 @@ public class StringAddCalculator {
     private static int sumNumbers(final List<Integer> numbers) {
         int sum = 0;
         for (int number : numbers) {
+            validateNumber(number);
             sum += number;
         }
         return sum;
@@ -42,5 +43,11 @@ public class StringAddCalculator {
             return matcher.group(2).split(matcher.group(1));
         }
         return input.split(DEFAULT_SEPARATORS);
+    }
+
+    private static void validateNumber(final int number) {
+        if (number < 0) {
+            throw new RuntimeException();
+        }
     }
 }
