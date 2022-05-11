@@ -64,10 +64,11 @@ public class StringAddCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"1,b,3", "1:2,-"})
     @DisplayName("숫자 이외의 값을 전달한 경우")
-    void splitAndSum_숫자_이외() {
-        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1,b,3"))
+    void splitAndSum_숫자_이외(String input) {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

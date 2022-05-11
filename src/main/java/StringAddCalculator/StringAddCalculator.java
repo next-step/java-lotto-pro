@@ -30,6 +30,24 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return Integer.parseInt(s);
+        if (!isNumeric(s)) {
+            throw new IllegalArgumentException("숫자(정수 형태) 이외의 값입니다.");
+        }
+
+        int result = Integer.parseInt(s);
+        if (result < 0) {
+            throw new IllegalArgumentException("음수입니다.");
+        }
+
+        return result;
+    }
+
+    private static boolean isNumeric(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
