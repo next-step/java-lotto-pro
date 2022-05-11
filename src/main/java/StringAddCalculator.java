@@ -3,10 +3,10 @@ public class StringAddCalculator {
         if (!validateInput(input)) {
             return 0;
         }
-        return 0;
+        return 1;
     }
 
     private static boolean validateInput(final String input) {
-        return input == null || input.isEmpty();
+        return input != null && !input.isEmpty();
     }
 }
