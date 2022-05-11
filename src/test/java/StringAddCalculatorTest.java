@@ -44,4 +44,16 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3,4:5");
         assertThat(result).isEqualTo(15);
     }
+
+    @Test
+    public void splitAndSum_negative() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+            .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    public void splitAndSum_notNumber() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1,2,a"))
+            .isInstanceOf(RuntimeException.class);
+    }
 }

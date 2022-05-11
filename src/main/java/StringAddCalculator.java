@@ -48,8 +48,18 @@ public class StringAddCalculator {
     private static int sum(List<String> numbers) {
         int sum = 0;
         for(String number : numbers) {
-            sum += Integer.parseInt(number);
+            sum += integerWithValidator(number);
         }
         return sum;
+    }
+
+    public static int integerWithValidator (String input) {
+        //NumberFormatException 발생
+        int number = Integer.parseInt(input);
+
+        if(number < 0)
+            throw new IllegalArgumentException("parameter is Not a Number");
+
+        return number;
     }
 }
