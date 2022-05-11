@@ -6,6 +6,9 @@ public class Number {
 	private final int value;
 
 	private Number(int value) {
+		if (value < 0) {
+			throw new IllegalArgumentException("음수는 입력할 수 없습니다");
+		}
 		this.value = value;
 	}
 

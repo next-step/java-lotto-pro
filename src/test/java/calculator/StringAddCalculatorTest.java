@@ -1,10 +1,12 @@
 package calculator;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,5 +38,13 @@ class StringAddCalculatorTest {
 		String given = "//;\n1;2;3";
 		int expected = 6;
 		assertThat(StringAddCalculator.splitAndSum(given)).isEqualTo(expected);
+	}
+
+	@DisplayName("숫자 이외의 값 또는 음수를 입력할 경우 RuntimeException이 발생한다")
+	@ParameterizedTest
+	@ValueSource(strings = {"a", "#", "-1"})
+	void invalid_number(String invalidString) {
+		Assertions.assertThatThrownBy(() -> StringAddCalculator.splitAndSum(invalidString))
+				.isInstanceOf(RuntimeException.class);
 	}
 }
