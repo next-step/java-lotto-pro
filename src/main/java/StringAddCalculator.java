@@ -18,9 +18,13 @@ public class StringAddCalculator {
     private static int sum(String[] tokens) {
         int sum = 0;
         for (String s : tokens)
-            sum += Integer.parseUnsignedInt(s);
+            sum += getUnsignedInt(s);
 
         return sum;
+    }
+
+    private static int getUnsignedInt(String token) {
+        return Integer.parseUnsignedInt(token);
     }
 
     private static boolean isNotNumericString(String text) {
