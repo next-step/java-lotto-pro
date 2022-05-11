@@ -3,12 +3,10 @@ package study;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class StudyTest {
+public class StringTest {
 
     @Test
     @DisplayName("요구사항 1-1. \"1,2\"을 ,로 split 했을 때 1과 2로 잘 분리되는지 확인한다.")
