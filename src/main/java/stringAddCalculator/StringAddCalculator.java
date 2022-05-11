@@ -8,7 +8,7 @@ import static stringAddCalculator.Utils.Validation.*;
 
 public class StringAddCalculator {
     public static int splitAndSum(String input) {
-        int result = 0;
+        int result = -1;
 
         if (isNotNullAndEmpty(input)){
             result = 0;
