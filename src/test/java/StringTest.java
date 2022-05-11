@@ -1,3 +1,5 @@
+import static org.junit.jupiter.api.Assertions.assertAll;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -6,13 +8,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class StringTest {
     @Test
     @DisplayName("1,2를 ,로 split 했을 때 1과 2로 잘 분리되는지 확인")
     void split_1_2() {
         String[] result = "1,2".split(",");
-        assertThat(result).containsExactly("1","2");
+        assertThat(result).containsExactly("1", "2");
     }
 
     @Test
@@ -41,9 +44,15 @@ public class StringTest {
     @DisplayName("charAt() 메소드를 활용해 특정 위치 값 벗어났을 때 Exception 발생 확인")
     @ValueSource(ints = {-1, 4})
     void charAtException(int index) {
-        assertThatThrownBy(() -> {
-            "abc".charAt(index);
-        }).isInstanceOf(IndexOutOfBoundsException.class)
-                .hasMessageContaining("String index out of range: %d", index);
+        assertAll(
+                () -> assertThatThrownBy(() -> {
+                    "abc".charAt(index);
+                }).isInstanceOf(IndexOutOfBoundsException.class)
+                        .hasMessageContaining("String index out of range: %d", index),
+                () -> assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                        .isThrownBy(() -> {
+                            "abc".charAt(index);
+                        }).withMessageContaining("String index out of range: %d", index)
+        );
     }
 }
