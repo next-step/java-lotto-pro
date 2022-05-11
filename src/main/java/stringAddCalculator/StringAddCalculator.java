@@ -8,21 +8,13 @@ import static stringAddCalculator.Utils.Validation.*;
 
 public class StringAddCalculator {
     public static int splitAndSum(String input) {
-        int result = -1;
-
         if (isNotNullAndEmpty(input)){
-            result = 0;
+            return 0;
         }
-
         if (isNumberAndSizeOne(input)) {
-            result = Integer.parseInt(input);
+            return Integer.parseInt(input);
         }
-
-        if (result == -1 ) {
-            throw new RuntimeException();
-        }
-
-        return result;
+        return -1;
     }
 
     public static void main(String[] args) throws IOException {
