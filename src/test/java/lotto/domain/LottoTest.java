@@ -20,7 +20,7 @@ class LottoTest {
                 new LottoNo(27),
                 new LottoNo(35),
                 new LottoNo(45));
-        Lotto lotto = new Lotto(lottoNoList);
+        new Lotto(lottoNoList);
     }
 
     @Test
@@ -35,7 +35,7 @@ class LottoTest {
                 new LottoNo(40),
                 new LottoNo(45));
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(lottoNoList);
+            new Lotto(lottoNoList);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("유효하지 않은 로또입니다.");
     }

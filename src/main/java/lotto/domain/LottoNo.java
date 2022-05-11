@@ -16,10 +16,7 @@ public class LottoNo implements Comparable<LottoNo> {
     }
 
     private boolean isInvalidNumber(int number) {
-        if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
-            return true;
-        }
-        return false;
+        return number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER;
     }
 
     @Override
