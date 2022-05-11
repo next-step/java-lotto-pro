@@ -1,6 +1,7 @@
 package stringcalculator;
 
 import static stringcalculator.utils.PositiveIntegerConverter.convertToPositiveIntegers;
+import static stringcalculator.utils.StringBlankChecker.isBlank;
 import static stringcalculator.utils.StringSplitter.split;
 
 import java.util.List;
@@ -15,19 +16,11 @@ public class StringAddCalculator {
         return sum(convertToPositiveIntegers(split(input)));
     }
 
-    private static boolean isBlank(String input) {
-        return isNull(input) || input.isEmpty();
-    }
-
     private static int sum(List<Integer> numbers) {
         int result = 0;
         for (Integer number : numbers) {
             result += number;
         }
         return result;
-    }
-
-    private static boolean isNull(String input) {
-        return input == null;
     }
 }
