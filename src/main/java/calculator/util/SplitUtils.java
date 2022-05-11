@@ -3,9 +3,9 @@ package calculator.util;
 import java.util.Arrays;
 
 public class SplitUtils {
-    public static int[] splitToInt(String string, String separator) {
+    public static int[] splitToInt(String text, String separator) {
         try {
-            return Arrays.stream(string.split(separator))
+            return Arrays.stream(text.split(separator))
                     .mapToInt(Integer::parseInt)
                     .toArray();
         } catch (NumberFormatException e) {

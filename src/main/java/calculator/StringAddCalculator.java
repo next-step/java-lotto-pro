@@ -23,9 +23,9 @@ public class StringAddCalculator {
         if (StringUtils.isEmptyString(text)) {
             return 0;
         }
-        int[] numberArray = calculatorNumberArray(text);
-        validNegativeArray(numberArray);
-        return sum(numberArray);
+        int[] numbers = calculatorNumberArray(text);
+        validNegative(numbers);
+        return sum(numbers);
     }
 
     private static int[] calculatorNumberArray(String text) {
@@ -37,16 +37,19 @@ public class StringAddCalculator {
         return SplitUtils.splitToInt(text, DEFAULT_SEPARATOR);
     }
 
-    private static void validNegativeArray(int[] array) {
-        if (Arrays.stream(array)
-                .filter((v) -> v < ZERO)
-                .findFirst().isPresent()) {
+    private static void validNegative(int[] numbers) {
+        if (isNegativeContain(numbers)) {
             throw new RuntimeException("문자열 계산기에는 음수를 전달할 수 없습니다.");
         }
     }
 
-    private static int sum(int[] array) {
-        return Arrays.stream(array).sum();
+    private static boolean isNegativeContain(int[] validSource) {
+        return Arrays.stream(validSource)
+                .anyMatch((value -> value < ZERO));
+    }
+
+    private static int sum(int[] sumSource) {
+        return Arrays.stream(sumSource).sum();
     }
 
 }
