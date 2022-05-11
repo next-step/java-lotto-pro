@@ -25,6 +25,7 @@ public class StringTest {
 
     private static Stream<Arguments> providerSourceAndExpectedResult() {
         return Stream.of(
+                Arguments.of("2,3,4", new String[]{"2", "3", "4"}),
                 Arguments.of("1,2", new String[]{"1", "2"}),
                 Arguments.of("1", new String[]{"1"})
         );
