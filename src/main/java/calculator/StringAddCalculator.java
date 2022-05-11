@@ -49,7 +49,7 @@ public class StringAddCalculator {
     }
 
     private static void checkNegativeNumber(final int number) {
-        if (number < 0) {
+        if (number < MIN_NUMBER) {
             throw new RuntimeException("음수는 허용하지 않습니다. number=" + number);
         }
     }
