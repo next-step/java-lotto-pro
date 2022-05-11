@@ -34,4 +34,12 @@ class LottoPurchaseQuantityTest {
                 .isThrownBy(() -> new LottoPurchaseQuantity("-5"))
                 .withMessage(LottoErrorMessage.INVALID_MONEY_FORMAT);
     }
+
+    @Test
+    @DisplayName("로또 가격보다 작은 값을 입력받으면 IllegalArgumentException이 발생")
+    void inputValueLessThanLottoPrice() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoPurchaseQuantity("900"))
+                .withMessage(LottoErrorMessage.MONEY_LESS_THAN_PRICE);
+    }
 }

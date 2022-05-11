@@ -4,9 +4,21 @@ import lotto.constants.LottoErrorMessage;
 
 public class LottoPurchaseQuantity {
     private static final String MONEY_FORMAT_REGEX = "^[1-9]+[0-9]*$";
+    private static final int LOTTO_PRICE = 1000;
 
     public LottoPurchaseQuantity(String money) {
         validateFormat(money);
+        validateAmount(money);
+    }
+
+    private void validateAmount(String money) {
+        if (isLessThanLottoPrice(money)) {
+            throw new IllegalArgumentException(LottoErrorMessage.MONEY_LESS_THAN_PRICE);
+        }
+    }
+
+    private boolean isLessThanLottoPrice(String money) {
+        return Integer.parseInt(money) < LOTTO_PRICE;
     }
 
     private void validateFormat(String money) {
