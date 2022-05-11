@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 기능 구현 목록
+- 0, null 인경우, 0을 반환한다.
+- , : 으로 숫자들을 구분한다.
+- 구분한 숫자들을 더한값을 구한다.
+- 구분자를 커스텀한다.
+- 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 발생시킨다.
