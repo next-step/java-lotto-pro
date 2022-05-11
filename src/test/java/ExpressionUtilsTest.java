@@ -43,4 +43,11 @@ class ExpressionUtilsTest {
     void default_number_expression_test_3(String input) {
         assertTrue(ExpressionUtils.isDefaultExpression(input));
     }
+
+    @DisplayName("Default 인지 체크하는 로직에 숫자 세개 이상을 콜론/컴마 구분자로 넘기면 정상적으로 통과되어야 한다")
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "//]\n3]2]3", "//*\n4_5_3"})
+    void custom_number_expression_test(String input) {
+        assertTrue(ExpressionUtils.isCustomExpression(input));
+    }
 }

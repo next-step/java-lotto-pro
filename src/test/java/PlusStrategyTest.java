@@ -1,6 +1,7 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import domain.CustomDelimiterPlusStrategy;
 import domain.DefaultDelimiterPlusStrategy;
 import domain.EmptyPlusStrategy;
 import domain.PlusStrategy;
@@ -112,5 +113,35 @@ class PlusStrategyTest {
         PlusStrategy plusStrategy = factory.getStrategy(input);
 
         assertThat(plusStrategy.result(input)).isEqualTo(Integer.parseInt(result));
+    }
+
+    @DisplayName("팩토리 클래스에 커스텀 식을 전달할 경우 CustomDelimiterPlusStrategy 가 반환되어야 한다")
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "//]\n3]2]3", "//*\n4*5*3"})
+    void custom_number_test(String input) {
+        PlusStrategy plusStrategy = factory.getStrategy(input);
+
+        assertThat(plusStrategy.getClass()).isEqualTo(CustomDelimiterPlusStrategy.class);
+    }
+
+    @DisplayName("팩토리 클래스에 커스텀 식을 전달할 경우 정상적으로 모든 수의 합이 반환되어야 한다")
+    @Test
+    void custom_number_test_2() {
+        String given_1 = "//;\n1;2;3";
+        int expected_1 = 6;
+
+        String given_2 = "//]\n3]2]3";
+        int expected_2 = 8;
+
+        String given_3 = "//_\n4_5_3";
+        int expected_3 = 12;
+
+        PlusStrategy plusStrategy = factory.getStrategy(given_1);
+        PlusStrategy plusStrategy_2 = factory.getStrategy(given_2);
+        PlusStrategy plusStrategy_3 = factory.getStrategy(given_3);
+
+        assertThat(plusStrategy.result(given_1)).isEqualTo(expected_1);
+        assertThat(plusStrategy_2.result(given_2)).isEqualTo(expected_2);
+        assertThat(plusStrategy_3.result(given_3)).isEqualTo(expected_3);
     }
 }
