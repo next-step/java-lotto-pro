@@ -11,11 +11,20 @@ public class StringAddCalculator {
         }
 
         List<Integer> numbers = MatcherUtils.extractNumber(str);
+        validateNegative(numbers);
+
         return sum(numbers);
     }
 
     private static boolean isNullOrEmpty(String str) {
         return str == null || str.isEmpty();
+    }
+
+    private static void validateNegative(List<Integer> numbers) {
+        numbers.stream()
+                .filter(number -> number < 0)
+                .findAny()
+                .orElseThrow(RuntimeException::new);
     }
 
     private static int sum(List<Integer> numbers) {
