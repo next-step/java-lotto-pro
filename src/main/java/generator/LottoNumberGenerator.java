@@ -1,8 +1,7 @@
 package generator;
 
-import static calculator.constants.LottoNumberConstants.*;
+import static lotto.constants.LottoNumberConstants.*;
 
-import calculator.constants.LottoNumberConstants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

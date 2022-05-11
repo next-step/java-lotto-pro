@@ -1,4 +1,4 @@
-package calculator.constants;
+package lotto.constants;
 
 public class LottoNumberConstants {
     public static final Integer LOTTO_NUMBER_MIN = 1;

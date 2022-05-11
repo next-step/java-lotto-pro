@@ -1,9 +1,8 @@
 package generator;
 
-import static calculator.constants.LottoNumberConstants.*;
+import static lotto.constants.LottoNumberConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.constants.LottoNumberConstants;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
