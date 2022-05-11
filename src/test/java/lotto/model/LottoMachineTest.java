@@ -15,8 +15,8 @@ class LottoMachineTest {
     @MethodSource(value = "buyTestParameters")
     @ParameterizedTest(name = "1000원짜리 로또 구매가능한 수량을 구한다. {0}")
     void buy(int cost, int expectedQuantity) {
-        int quantity = lottoMachine.buy(cost);
-        assertEquals(expectedQuantity, quantity);
+        Lottos lottos = lottoMachine.buy(cost);
+        assertEquals(expectedQuantity, lottos.getQuantity());
     }
 
     static Stream<Arguments> buyTestParameters() {
