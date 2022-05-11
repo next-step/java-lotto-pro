@@ -25,8 +25,9 @@ public class SetTest {
 
     @Test
     void size() {
-        int size = numbers.size();
-        assertThat(size).isEqualTo(3);
+        assertThat(numbers)
+                .size()
+                .isEqualTo(3);
     }
 
     @ParameterizedTest
