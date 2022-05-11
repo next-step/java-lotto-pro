@@ -60,10 +60,10 @@ public class StringTest {
     }
 
     @DisplayName("charAt 를 이용하여 특정 위치 문자 가져오기")
-    @Test
-    void charAtTest() {
-        final char indexChar = "abc".charAt(0);
-        assertThat(indexChar).isEqualTo('a');
+    @ParameterizedTest
+    @CsvSource(value = {"abc:0:a", "abc:1:b"}, delimiter = ':')
+    void charAtTest(final String source, final int index, final char expectedIndexChar) {
+        assertThat(source.charAt(index)).isEqualTo(expectedIndexChar);
     }
 
     private int findStartParenthesis(final String source) {
