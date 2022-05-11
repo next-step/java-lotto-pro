@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import study.step2.exception.NumberConversionException;
 
 public class StringAddCalculator {
     private static final int ZERO = 0;
@@ -42,7 +43,26 @@ public class StringAddCalculator {
 
     private static int add(List<String> numberList) {
         return numberList.stream()
-                .map(Integer::valueOf)
+                .map(StringAddCalculator::toPositiveInteger)
                 .reduce(ZERO, (num1, num2) -> num1 + num2);
     }
+
+    private static Integer toPositiveInteger(String number) {
+        Integer integer = toInteger(number);
+        if (integer < ZERO) {
+            throw new NumberConversionException("양수만 계산 가능합니다.");
+        }
+
+        return integer;
+    }
+
+    private static Integer toInteger(String number) {
+        try {
+            return Integer.valueOf(number);
+        } catch (NumberFormatException e) {
+            throw new NumberConversionException(String.format("%s 는 숫자가 아닙니다.", number));
+        }
+    }
 }
+
+
