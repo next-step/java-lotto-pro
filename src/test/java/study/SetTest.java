@@ -28,7 +28,7 @@ class SetTest {
     @Test
     @DisplayName("Set 에서 중복 항목이 비포함 된 size 확인")
     void size() {
-        assertThat(numbers.size()).isEqualTo(3);
+        assertThat(numbers).hasSize(3);
     }
 
     @ParameterizedTest
