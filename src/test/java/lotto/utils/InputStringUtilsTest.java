@@ -1,6 +1,7 @@
 package lotto.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
@@ -17,6 +18,15 @@ class InputStringUtilsTest {
     void splitToNumberListByDelimiter(String inputString, String delimiter, int expectedSize){
         List<Integer> numberList = InputStringUtils.splitToNumberListByDelimiter(inputString, delimiter);
         assertThat(numberList).hasSize(expectedSize);
+    }
+
+    @DisplayName("숫자가 아닌 경우 검증")
+    @ParameterizedTest
+    @CsvSource(value = {"%,2,3,4,5,6:,","M-2-3:-"},delimiter = ':')
+    void splitToNumberListByDelimiter_not_number(String inputString, String delimiter){
+        assertThatIllegalArgumentException()
+                .isThrownBy(()->  InputStringUtils.splitToNumberListByDelimiter(inputString, delimiter))
+                .withMessage("[ERROR] 0~9 사이의 숫자가 아닙니다.");
     }
 
 }
