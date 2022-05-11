@@ -26,15 +26,14 @@ public class StringAddCalculator {
         return text.isEmpty();
     }
 
-    private static String[] splitText(final String text) {
-        final Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(text);
+    private static int sumNumbers(final int[] numbers) {
+        int sum = 0;
 
-        if (matcher.find()) {
-            final String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
+        for (final int number : numbers) {
+            sum += number;
         }
 
-        return text.split(COMMA_AND_COLON);
+        return sum;
     }
 
     private static int[] parsingNumbers(final String[] splitTexts) {
@@ -53,6 +52,12 @@ public class StringAddCalculator {
         return parsePositiveInteger(text);
     }
 
+    private static void validateNumeric(final String text) {
+        if (!text.matches(NUMERIC_PATTERN)) {
+            throw new RuntimeException("숫자가 아닙니다.");
+        }
+    }
+
     private static int parsePositiveInteger(final String text) {
         final int i = Integer.parseInt(text);
 
@@ -63,24 +68,19 @@ public class StringAddCalculator {
         return i;
     }
 
-    private static int sumNumbers(final int[] numbers) {
-        int sum = 0;
-
-        for (final int number : numbers) {
-            sum += number;
-        }
-
-        return sum;
-    }
-
-    private static void validateNumeric(final String text) {
-        if (!text.matches(NUMERIC_PATTERN)) {
-            throw new RuntimeException("숫자가 아닙니다.");
-        }
-    }
-
     private static boolean isMinus(final int i) {
         return i < 0;
+    }
+
+    private static String[] splitText(final String text) {
+        final Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(text);
+
+        if (matcher.find()) {
+            final String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(customDelimiter);
+        }
+
+        return text.split(COMMA_AND_COLON);
     }
 
 }
