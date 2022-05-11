@@ -55,7 +55,7 @@ class LottoPlayServiceTest {
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> lottoPlayService.convertMoneyToLottos(money))
-                .withMessage("[ERROR] 구매 금액은 1000원 단위로 입력해주세요");
+                .withMessage("[ERROR] 구매 금액은 1000원 단위로 입력해주세요.");
     }
 
 }

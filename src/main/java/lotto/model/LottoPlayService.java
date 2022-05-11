@@ -19,6 +19,7 @@ public class LottoPlayService {
     private void validateMoney(int money) {
         validateLackMoney(money);
         validateOverMoney(money);
+        validateUnitMoney(money);
     }
 
     private void validateLackMoney(int money) {
@@ -32,5 +33,12 @@ public class LottoPlayService {
             throw new IllegalArgumentException(ErrorMessage.OVER_MONEY);
         }
     }
+
+    private void validateUnitMoney(int money) {
+        if(money % LOTTO_PRICE != 0){
+            throw new IllegalArgumentException(ErrorMessage.INCORRECT_UNIT_MONEY);
+        }
+    }
+
 
 }
