@@ -1,7 +1,7 @@
 package camp.nextstep.edu.level1.stringCaluator.calculator;
 
 import camp.nextstep.edu.common.PositiveNumbers;
-import camp.nextstep.edu.level1.stringCaluator.until.StringParser;
+import camp.nextstep.edu.until.StringParser;
 
 public class StringCalculator {
     private final PositiveNumbers positiveNumbers;
