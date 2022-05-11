@@ -3,7 +3,7 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     public static int splitAndSum(String text) {
-        if (isNotNumericString(text))
+        if (isNotNumeric(text))
             return 0;
 
         String[] tokens = split(text);
@@ -32,7 +32,7 @@ public class StringAddCalculator {
         return Integer.parseUnsignedInt(token);
     }
 
-    private static boolean isNotNumericString(String text) {
+    private static boolean isNotNumeric(String text) {
         return text == null || text.isEmpty();
     }
 }
