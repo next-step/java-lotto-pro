@@ -76,7 +76,7 @@ class LottoPlayServiceTest {
         assertThat(lottoList).hasSize(playCount);
     }
 
-    @DisplayName("지난 주 당첨 번호와 구매한 로또 일치 개수 계산(로또 게임 진행)")
+    @DisplayName("로또 게임 결과(일치한 개수, 수익률)를 확인한다.")
     @Test
     void playLottoGame(){
         List<Integer> winningNumberList = Arrays.asList(3,7,10,35,43,45);
@@ -86,14 +86,6 @@ class LottoPlayServiceTest {
         assertEquals(0,lottos.getResultCount(4));
         assertEquals(1,lottos.getResultCount(5));
         assertEquals(0,lottos.getResultCount(6));
-
-    }
-
-    @DisplayName("구매금액과 총 당첨금액에 대한 수익률을 계산")
-    @Test
-    void calculateProfitRate(){
-        lottoPlayService.calculateProfitRate(lottos);
-        double resultProfitRate = lottos.getResultProfitRate();
-        assertEquals(1510,resultProfitRate);
+        assertEquals((double) 1_510_000 / 3000 ,lottos.getResultProfitRate());
     }
 }
