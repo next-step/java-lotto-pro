@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.util.SplitUtils;
 import calculator.util.StringUtils;
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -41,7 +40,7 @@ public class StringAddCalculator {
 
     private static int[] patternNumbers(String text, String separator) {
         try {
-            return SplitUtils.splitToInt(text, separator);
+            return StringUtils.splitToInt(text, separator);
         } catch (NumberFormatException e) {
             throw new NumberFormatException(Message.ONLY_NUMBER_TEXT.getMessage());
         }
