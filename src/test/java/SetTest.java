@@ -5,6 +5,7 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
@@ -33,5 +34,12 @@ public class SetTest {
         //assertThat(numbers.contains(2)).isTrue();
         //assertThat(numbers.contains(3)).isTrue();
         assertThat(numbers.contains(input)).isTrue();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,true", "2,true", "3,true", "4,false", "5,false"}, delimiter = ',')
+    void containsValidation(int input, boolean flag) {
+        // 요구사항 3번
+        assertThat(numbers.contains(input)).isEqualTo(flag);
     }
 }
