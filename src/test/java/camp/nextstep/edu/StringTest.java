@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -43,10 +44,10 @@ public class StringTest {
     }
 
     @DisplayName("substring 를 통해서 \"(\",\")\" 제거 하기")
-    @Test
-    void substringTest() {
-        final String source = "(1,2)";
-        final String subStringStr = source.substring(1, 4);
-        assertThat(subStringStr).isEqualTo("1,2");
+    @ParameterizedTest
+    @CsvSource(value = {"(1,2):1,2", "(1):1"}, delimiter = ':')
+    void substringTest(final String source, final String expectedStr) {
+        final String subStringStr = source.substring(source.indexOf("(") + 1, source.lastIndexOf(")"));
+        assertThat(subStringStr).isEqualTo(expectedStr);
     }
 }
