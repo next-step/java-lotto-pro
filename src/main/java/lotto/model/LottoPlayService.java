@@ -9,6 +9,7 @@ import lotto.vo.Lottos;
 public class LottoPlayService {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_NUMBER_LIST_SIZE = 6;
     private static final int LOTTO_MAX_PURCHASE_PRICE = 10_000_000;
     private static final int LOW_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
@@ -60,7 +61,7 @@ public class LottoPlayService {
     }
 
     public void playLottoGame(Lottos lottos, List<Integer> winningNumberList) {
-        validateNumber(winningNumberList);
+        validateWinningNumberList(winningNumberList);
         for (Lotto lotto : lottos.getLottoList()){
             int matchNumberCount = calcMatchNumberCount(winningNumberList, lotto);
             lottos.updateResultCountMap(matchNumberCount);
@@ -68,9 +69,16 @@ public class LottoPlayService {
         calculateProfitRate(lottos);
     }
 
-    private void validateNumber(List<Integer> winningNumberList) {
+    private void validateWinningNumberList(List<Integer> winningNumberList) {
+        validateNumberSize(winningNumberList);
         for (int winningNumber : winningNumberList) {
             validateLottoNumber(winningNumber);
+        }
+    }
+
+    private void validateNumberSize(List<Integer> winningNumberList) {
+        if(winningNumberList.size() != LOTTO_NUMBER_LIST_SIZE){
+            throw new IllegalArgumentException(ErrorMessage.NON_SIX_NUMBERS);
         }
     }
 
