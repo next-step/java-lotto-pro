@@ -19,3 +19,7 @@
 ### Set Collection 테스트
 #### 요구 사항1
 - Set 의 size 메소드를 활용해 크기를 확인 
+
+#### 요구 사항2
+- contains 메소드로 Set 의 값을 다 확인하면 중복된 코드가 발생
+- ParameterizedTest 를 이용하여 중복을 제거 해라
