@@ -13,7 +13,7 @@ public class LottoGame {
         int cost = InputView.inputMoney();
         Lottos lottos = lottoMachine.buy(cost);
         ResultView.printLottos(lottos);
-
+        InputView.inputWinnerNumber();
 
 
 
