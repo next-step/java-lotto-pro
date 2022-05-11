@@ -1,18 +1,13 @@
 package lotto.model;
 
 import java.util.List;
-import lotto.constant.ErrorMessage;
 import lotto.constant.LottoMatchNumber;
+import lotto.constant.LottoRoleConst;
+import lotto.utils.LottoGameValidateUtils;
 import lotto.vo.Lotto;
 import lotto.vo.Lottos;
 
 public class LottoPlayService {
-
-    private static final int LOTTO_PRICE = 1000;
-    private static final int LOTTO_NUMBER_LIST_SIZE = 6;
-    private static final int LOTTO_MAX_PURCHASE_PRICE = 10_000_000;
-    private static final int LOW_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
 
     private final LottoGeneratorService lottoGeneratorService;
 
@@ -21,34 +16,9 @@ public class LottoPlayService {
     }
 
     public Lottos convertMoneyToLottos(int money) {
-        validateMoney(money);
-
-        int playCount = money / LOTTO_PRICE;
+        LottoGameValidateUtils.validateMoney(money);
+        int playCount = money / LottoRoleConst.LOTTO_PRICE;
         return new Lottos(playCount);
-    }
-
-    private void validateMoney(int money) {
-        validateLackMoney(money);
-        validateOverMoney(money);
-        validateUnitMoney(money);
-    }
-
-    private void validateLackMoney(int money) {
-        if(money < LOTTO_PRICE){
-            throw new IllegalArgumentException(ErrorMessage.LACK_MONEY);
-        }
-    }
-
-    private void validateOverMoney(int money) {
-        if(money >= LOTTO_MAX_PURCHASE_PRICE){
-            throw new IllegalArgumentException(ErrorMessage.OVER_MONEY);
-        }
-    }
-
-    private void validateUnitMoney(int money) {
-        if(money % LOTTO_PRICE != 0){
-            throw new IllegalArgumentException(ErrorMessage.INCORRECT_UNIT_MONEY);
-        }
     }
 
     public Lottos generateLottosByPlayCount(int playCount) {
@@ -61,31 +31,12 @@ public class LottoPlayService {
     }
 
     public void playLottoGame(Lottos lottos, List<Integer> winningNumberList) {
-        validateWinningNumberList(winningNumberList);
+        LottoGameValidateUtils.validateWinningNumberList(winningNumberList);
         for (Lotto lotto : lottos.getLottoList()){
             int matchNumberCount = calcMatchNumberCount(winningNumberList, lotto);
             lottos.updateResultCountMap(matchNumberCount);
         }
         calculateProfitRate(lottos);
-    }
-
-    private void validateWinningNumberList(List<Integer> winningNumberList) {
-        validateNumberSize(winningNumberList);
-        for (int winningNumber : winningNumberList) {
-            validateLottoNumber(winningNumber);
-        }
-    }
-
-    private void validateNumberSize(List<Integer> winningNumberList) {
-        if(winningNumberList.size() != LOTTO_NUMBER_LIST_SIZE){
-            throw new IllegalArgumentException(ErrorMessage.NON_SIX_NUMBERS);
-        }
-    }
-
-    private void validateLottoNumber(int winningNumber) {
-        if(winningNumber < LOW_NUMBER || winningNumber > MAX_NUMBER){
-            throw new IllegalArgumentException(ErrorMessage.NOT_LOTTO_NUMBER);
-        }
     }
 
     private int calcMatchNumberCount(List<Integer> winningNumberList, Lotto lotto) {
@@ -104,7 +55,7 @@ public class LottoPlayService {
     }
 
     private void calculateProfitRate(Lottos lottos) {
-        int money = lottos.getPlayCount() * LOTTO_PRICE;
+        int money = lottos.getPlayCount() * LottoRoleConst.LOTTO_PRICE;
         int totalWinningAmount = 0;
         for (LottoMatchNumber lottoMatchNumber : LottoMatchNumber.allMatchNumber()){
             totalWinningAmount += lottos.getResultCount(lottoMatchNumber.getMatchNumberCount()) * lottoMatchNumber.getWinningAmount();
