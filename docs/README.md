@@ -14,3 +14,8 @@
 #### 요구 사항3
 - String 값이 주어질때 charAt 메소드를 이용하여 특정 위치의 문자를 가져온다.
 - 특정 위치의 값은 String 길이보다 작으며, 큰 값을 입력시 StringIndexOutOfBoundsException 이 발생
+
+
+### Set Collection 테스트
+#### 요구 사항1
+- Set 의 size 메소드를 활용해 크기를 확인 
