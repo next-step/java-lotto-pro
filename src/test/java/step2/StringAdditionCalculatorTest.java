@@ -26,4 +26,10 @@ public class StringAdditionCalculatorTest {
         assertThat(result).isEqualTo(16);
     }
 
+    @Test
+    void addAllDelimiterString_With_Custom_Delimiter() {
+        final int result = StringAdditionCalculator.addAllDelimiterString("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
+
 }
