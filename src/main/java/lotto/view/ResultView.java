@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
+import lotto.model.Result;
 
 public class ResultView {
 
@@ -28,6 +29,30 @@ public class ResultView {
         List<String> stringNumbers = lotto.getNumbers().stream().map(Object::toString).collect(Collectors.toList());
         String lottoMessage = LOTTO_MESSAGE_START_CHAR + String.join(DELIMITER, stringNumbers) + LOTTO_MESSAGE_END_CHAR;
         System.out.println(lottoMessage);
+    }
+
+    public static void printResults(List<Result> results) {
+        printResult(results, Result.WINNER);
+        printResult(results, Result.SECOND);
+        printResult(results, Result.THIRD);
+        printResult(results, Result.FOURTH);
+    }
+
+    private static void printResult(List<Result> results, Result printTarget) {
+        int count = 0;
+        for (final Result result : results) {
+            count = checkCount(printTarget, count, result);
+        }
+        String message = String.format("%d개 일치 (%d원)- %d개", printTarget.getContainsCount(),
+            printTarget.getPrizeMoney(), count);
+        System.out.println(message);
+    }
+
+    private static int checkCount(Result printTarget, int count, Result result) {
+        if (printTarget.equals(result)) {
+            count++;
+        }
+        return count;
     }
 
 }

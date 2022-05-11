@@ -24,4 +24,19 @@ public class Lotto {
     public List<Integer> getNumbers() {
         return numbers.stream().sorted().collect(Collectors.toList());
     }
+
+    public Result getResult(Lotto winner) {
+        int count = 0;
+        for (Integer number : winner.numbers) {
+            count = checkContains(count, number);
+        }
+        return Result.from(count);
+    }
+
+    private int checkContains(int count, int number) {
+        if (numbers.contains(number)) {
+            count++;
+        }
+        return count;
+    }
 }

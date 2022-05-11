@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -19,5 +20,9 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public List<Result> getResults(Lotto winner) {
+        return lottos.stream().map(lotto -> lotto.getResult(winner)).collect(Collectors.toList());
     }
 }
