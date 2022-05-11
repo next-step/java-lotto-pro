@@ -1,7 +1,9 @@
 package lotto.vo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
 
@@ -23,5 +25,9 @@ public class Lottos {
 
     public void addLotto(Lotto lotto) {
         lottoList.add(lotto);
+    }
+
+    public Map<Integer, Integer> getWiningCountMap() {
+        return new HashMap<>();
     }
 }

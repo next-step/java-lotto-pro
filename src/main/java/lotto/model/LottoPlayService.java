@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.List;
 import lotto.constant.ErrorMessage;
 import lotto.vo.Lotto;
 import lotto.vo.Lottos;
@@ -53,5 +54,9 @@ public class LottoPlayService {
             lottos.addLotto(lotto);
         }
         return lottos;
+    }
+
+    public void playLottoGame(Lottos lottos, List<Integer> winningNumberList) {
+
     }
 }

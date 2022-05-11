@@ -1,6 +1,8 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import lotto.vo.Lotto;
 import lotto.vo.Lottos;
 import org.junit.jupiter.api.BeforeEach;
@@ -69,5 +71,22 @@ class LottoPlayServiceTest {
         assertThat(lottoList).hasSize(playCount);
     }
 
+    @DisplayName("지난 주 당첨 번호와 구매한 로또 일치 개수 계산(로또 게임 진행)")
+    @Test
+    void playLottoGame(){
+        Lottos lottos = new Lottos(3);
+        List<Integer> winningNumberList = Arrays.asList(3,7,10,35,43,45);
 
+        lottos.addLotto(new Lotto(Arrays.asList(1,3,5,7,9,10)));
+        lottos.addLotto(new Lotto(Arrays.asList(7,10,15,20,25,35)));
+        lottos.addLotto(new Lotto(Arrays.asList(3,7,20,35,43,45)));
+
+        lottoPlayService.playLottoGame(lottos,winningNumberList);
+        Map<Integer,Integer> winingCountMap = lottos.getWiningCountMap();
+
+        assertEquals(2,winingCountMap.get(3));
+        assertEquals(0,winingCountMap.get(4));
+        assertEquals(1,winingCountMap.get(5));
+        assertEquals(0,winingCountMap.get(6));
+    }
 }
