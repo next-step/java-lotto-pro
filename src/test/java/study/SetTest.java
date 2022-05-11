@@ -25,13 +25,13 @@ public class SetTest {
     }
 
     @Test
-    @DisplayName("numbers size는 3이다.")
+    @DisplayName("Set은 중복된 데이터를 허용하지 않는다.")
     void size_test() {
         // given - when - then
-        assertThat(numbers.size()).isEqualTo(3);
+        assertThat(numbers).hasSize(3);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "numbers {0} 값이 담겨져 있다.")
     @ValueSource(strings = {"1", "2", "3"})
     @DisplayName("numbers 1,2,3 값이 담겨져 있다.")
     void contains_test(int input) {
