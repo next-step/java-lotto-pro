@@ -16,6 +16,10 @@ public class PlusStrategyFactory {
             return new DefaultDelimiterPlusStrategy();
         }
 
+        if (ExpressionUtils.isCustomExpression(expressionStr)) {
+            return new CustomDelimiterPlusStrategy();
+        }
+
         throw new RuntimeException(ExceptionType.INVALID_EXPRESSION.getMessage());
     }
 }
