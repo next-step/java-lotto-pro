@@ -66,6 +66,14 @@ public class StringTest {
         assertThat(source.charAt(index)).isEqualTo(expectedIndexChar);
     }
 
+    @DisplayName("charAt 사용시 입력 길이 보다 크면 StringIndexOutOfBoundsException 이 발생")
+    @Test
+    void charAtOutOfBoundTest() {
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(() -> "123".charAt(4))
+                .withMessageMatching("String index out of range: \\d+");
+    }
+
     private int findStartParenthesis(final String source) {
         return Objects.equals(source.indexOf("("), -1) ? 0 : source.indexOf("(") + 1;
     }
