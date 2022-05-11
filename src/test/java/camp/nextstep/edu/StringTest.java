@@ -12,12 +12,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 public class StringTest {
+    private static final String regex = ",";
 
     @DisplayName("String 의 split 를 이용 하여 분리 작업")
     @ParameterizedTest
     @MethodSource("providerSourceAndExpectedResult")
     void splitTest(final String source, final String[] expectedResult) {
-        final String regex = ",";
         assertThat(source.split(regex)).hasSize(expectedResult.length)
                 .contains(expectedResult)
                 .containsExactly(expectedResult);
@@ -33,9 +33,11 @@ public class StringTest {
     @DisplayName("contains 와 containsExactly 차이를 알아 보기 위한 테스트")
     @Test
     void isDifference() {
-        final String[] splittingStrArray = "3,4,5".split(",");
-        assertThat(splittingStrArray).hasSize(3).contains("4","3","5");
+        final String source = "3,4,5";
+        final String[] compareStrArray = {"4", "3", "5"};
+
+        assertThat(source.split(regex)).hasSize(3).contains(compareStrArray);
         assertThatExceptionOfType(AssertionError.class)
-                .isThrownBy(() -> assertThat(splittingStrArray).containsExactly("4","3","5"));
+                .isThrownBy(() -> assertThat(source.split(regex)).containsExactly(compareStrArray));
     }
 }
