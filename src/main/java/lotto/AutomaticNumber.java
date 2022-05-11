@@ -18,12 +18,17 @@ public class AutomaticNumber implements LottoNumber {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Integer> getLottoNumbers() {
+        sort();
+        return lottoNumbers;
+    }
+
     private void shuffle() {
         Collections.shuffle(NUMBER_RANGE);
     }
 
-    @Override
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    private void sort() {
+        Collections.sort(lottoNumbers);
     }
 }
