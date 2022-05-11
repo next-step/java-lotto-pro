@@ -33,7 +33,7 @@ public class StringAdditionCalculator {
         final String[] numbers = numberWithDelimiter.split(delimiter);
         int sum = 0;
         for (final String number : numbers) {
-            final int parsedNumber = Integer.parseInt(number);
+            final int parsedNumber = parseStringToInt(number);
             checkNumberIsMinus(parsedNumber);
             sum += parsedNumber;
         }
@@ -43,6 +43,14 @@ public class StringAdditionCalculator {
     private static void checkNumberIsMinus(final int parsedNumber) {
         if (parsedNumber < 0) {
             throw new RuntimeException("cannot enter minus number.");
+        }
+    }
+
+    private static int parseStringToInt(final String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("cannot enter not a number.");
         }
     }
 }

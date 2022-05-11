@@ -39,4 +39,10 @@ public class StringAdditionCalculatorTest {
                 .isInstanceOf(RuntimeException.class);
     }
 
+    @Test
+    void addAllDelimiterString_Throw_RuntimeException_When_Not_A_Number() {
+        assertThatThrownBy(() -> StringAdditionCalculator.addAllDelimiterString("a,2,3"))
+                .isInstanceOf(RuntimeException.class);
+    }
+
 }
