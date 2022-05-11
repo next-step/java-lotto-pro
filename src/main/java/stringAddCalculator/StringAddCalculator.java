@@ -11,7 +11,7 @@ public class StringAddCalculator {
     }
 
     private static String[] splitString(String str) {
-        return str.split(",");
+        return str.split(",|:");
     }
 
     private static int calculateStringSum(String[] strs) {
