@@ -9,14 +9,17 @@
 
 ## 구현 기능 목록
 
+### Numbers
+- 덧셈을 위한 숫자 리스트를 가지는 클래스 
+- sum 기능
+- 음수 포함하는지 체크하는 기능
+
 ### Separator
 - delimiter에 따라 text를 split하는 기능
 
 ### StringPattern
 - text가 fixed, custom, nothing으로 나뉘어짐
-
-### StringPatternRegex
-- text가 fixed인지 custom인지 구별하는 Regex를 모아둠
+- patternValue에 매칭을 위한 regex 정의
 
 ### StringAddCalculator
 - string list의 요소들을 sum하는 기능
