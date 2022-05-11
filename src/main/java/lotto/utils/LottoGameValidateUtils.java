@@ -1,5 +1,6 @@
 package lotto.utils;
 
+import java.util.HashSet;
 import java.util.List;
 import lotto.constant.ErrorMessage;
 import lotto.constant.LottoRoleConst;
@@ -36,6 +37,7 @@ public class LottoGameValidateUtils {
 
     public static void validateWinningNumberList(List<Integer> winningNumberList) {
         validateNumberSize(winningNumberList);
+        validateDuplication(winningNumberList);
         for (int winningNumber : winningNumberList) {
             validateLottoNumber(winningNumber);
         }
@@ -44,6 +46,13 @@ public class LottoGameValidateUtils {
     private static void validateNumberSize(List<Integer> winningNumberList) {
         if (winningNumberList.size() != LottoRoleConst.LOTTO_NUMBER_LIST_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.NON_SIX_NUMBERS);
+        }
+    }
+
+    private static void validateDuplication(List<Integer> winningNumberList) {
+        HashSet<Integer> deleteDuplicationNumber = new HashSet<>(winningNumberList);
+        if(winningNumberList.size() != deleteDuplicationNumber.size()){
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATION);
         }
     }
 
