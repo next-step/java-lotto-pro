@@ -6,19 +6,17 @@ public class StringAddCalculator {
         if (isNotNumericString(text))
             return 0;
 
-        int sum = 0;
-        String[] tokens;
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
-            tokens = m.group(2).split(customDelimiter);
-            for (String s : tokens)
-                sum += Integer.parseUnsignedInt(s);
-
-            return sum;
+            return sum(m.group(2).split(customDelimiter));
         }
 
-        tokens = text.split(",|:");
+        return sum(text.split(",|:"));
+    }
+
+    private static int sum(String[] tokens) {
+        int sum = 0;
         for (String s : tokens)
             sum += Integer.parseUnsignedInt(s);
 
