@@ -20,6 +20,6 @@ public class PlusStrategyFactory {
             return new CustomDelimiterPlusStrategy();
         }
 
-        throw new RuntimeException(ExceptionType.INVALID_EXPRESSION.getMessage());
+        throw new IllegalArgumentException(ExceptionType.INVALID_EXPRESSION.getMessage());
     }
 }

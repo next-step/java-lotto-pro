@@ -16,7 +16,7 @@ public class CustomDelimiterPlusStrategy implements PlusStrategy {
             return numbers.stream().mapToInt(x -> x).sum();
         }
 
-        throw new RuntimeException(ExceptionType.INVALID_EXPRESSION.getMessage());
+        throw new IllegalStateException(ExceptionType.INVALID_EXPRESSION.getMessage());
     }
 
     private List<Integer> getSplitNumbers(Matcher matcher) {
