@@ -72,7 +72,43 @@ class PlusStrategyTest {
     @DisplayName("팩토리 클래스에 숫자 두개를 컴마 구분자로 입력해 전달할 경우 두 수의 합이 반환되어야 한다")
     @ParameterizedTest
     @CsvSource(value = {"1,2:3", "2,5:7", "3,4:7", "7,7:14"}, delimiter = ':')
-    void default_number_test2(String input, String result) {
+    void default_number_test_2(String input, String result) {
+        PlusStrategy plusStrategy = factory.getStrategy(input);
+
+        assertThat(plusStrategy.result(input)).isEqualTo(Integer.parseInt(result));
+    }
+
+    @DisplayName("팩토리 클래스에 숫자 두개를 콜론 구분자로 입력해 전달할 경우 DefaultDelimiterPlusStrategy 가 반환되어야 한다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1:2", "2:5", "3:4", "7:7"})
+    void default_number_test_3(String input) {
+        PlusStrategy plusStrategy = factory.getStrategy(input);
+
+        assertThat(plusStrategy.getClass()).isEqualTo(DefaultDelimiterPlusStrategy.class);
+    }
+
+    @DisplayName("팩토리 클래스에 숫자 두개를 컴마 구분자로 입력해 전달할 경우 두 수의 합이 반환되어야 한다")
+    @ParameterizedTest
+    @CsvSource(value = {"1:2|3", "2:5|7", "3:4|7", "7:7|14"}, delimiter = '|')
+    void default_number_test_4(String input, String result) {
+        PlusStrategy plusStrategy = factory.getStrategy(input);
+
+        assertThat(plusStrategy.result(input)).isEqualTo(Integer.parseInt(result));
+    }
+
+    @DisplayName("팩토리 클래스에 숫자 세개 이상을 콜론/컴마 구분자로 입력해 전달할 경우 DefaultDelimiterPlusStrategy 가 반환되어야 한다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1:2:3", "2:5:1,0", "3:4,2,8", "7:7,9"})
+    void default_number_test_5(String input) {
+        PlusStrategy plusStrategy = factory.getStrategy(input);
+
+        assertThat(plusStrategy.getClass()).isEqualTo(DefaultDelimiterPlusStrategy.class);
+    }
+
+    @DisplayName("팩토리 클래스에 숫자 세개 이상을 콜론/컴마 구분자로 입력해 전달할 경우 모든 수의 합이 반환되어야 한다")
+    @ParameterizedTest
+    @CsvSource(value = {"1:2:3|6", "2:5:1,0|8", "3:4,2,8|17", "7:7,9|23"}, delimiter = '|')
+    void default_number_test_6(String input, String result) {
         PlusStrategy plusStrategy = factory.getStrategy(input);
 
         assertThat(plusStrategy.result(input)).isEqualTo(Integer.parseInt(result));
