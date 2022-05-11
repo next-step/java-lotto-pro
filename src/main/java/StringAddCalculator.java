@@ -7,9 +7,10 @@ public class StringAddCalculator {
         if (strs.length == 1)
             return Integer.parseInt(strs[0]);
 
-        if (strs.length == 2)
-            return Integer.parseInt(strs[0]) + Integer.parseInt(strs[1]);
+        int sum = 0;
+        for(String s : strs)
+            sum += Integer.parseInt(s);
 
-        return 0;
+        return sum;
     }
 }
