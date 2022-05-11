@@ -15,6 +15,7 @@ public class StringAddCalculator {
     private static final int PATTERN_SEPARATOR_INDEX = 1;
     private static final int ZERO = 0;
 
+
     private StringAddCalculator() {
 
     }
@@ -30,16 +31,25 @@ public class StringAddCalculator {
 
     private static int[] calculatorNumberArray(String text) {
         Matcher matcher = CUSTOM_SEPARATOR_PATTERN.matcher(text);
+        String separator = DEFAULT_SEPARATOR;
         if (matcher.find()) {
-            return SplitUtils.splitToInt(matcher.group(PATTERN_TEXT_INDEX),
-                    matcher.group(PATTERN_SEPARATOR_INDEX));
+            text = matcher.group(PATTERN_TEXT_INDEX);
+            separator = matcher.group(PATTERN_SEPARATOR_INDEX);
         }
-        return SplitUtils.splitToInt(text, DEFAULT_SEPARATOR);
+        return patternNumbers(text, separator);
+    }
+
+    private static int[] patternNumbers(String text, String separator) {
+        try {
+            return SplitUtils.splitToInt(text, separator);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(Message.ONLY_NUMBER_TEXT.getMessage());
+        }
     }
 
     private static void validNegative(int[] numbers) {
         if (isNegativeContain(numbers)) {
-            throw new RuntimeException("문자열 계산기에는 음수를 전달할 수 없습니다.");
+            throw new RuntimeException(Message.ONLY_POSITIVE_NUMBER_TEXT.getMessage());
         }
     }
 
