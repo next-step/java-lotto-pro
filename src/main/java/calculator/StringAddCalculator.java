@@ -9,7 +9,7 @@ public class StringAddCalculator {
             return ZERO;
         }
 
-        return 1;
+        return Integer.parseInt(input);
     }
 
     private static boolean isEmpty(String input) {
