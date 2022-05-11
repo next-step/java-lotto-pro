@@ -45,4 +45,13 @@ public class StringAdditionCalculatorTest {
                 .isInstanceOf(RuntimeException.class);
     }
 
+    @Test
+    void addAllDelimiterString_With_Empty() {
+        final int nullResult = StringAdditionCalculator.addAllDelimiterString(null);
+        assertThat(nullResult).isEqualTo(0);
+
+        final int emptyStringResult = StringAdditionCalculator.addAllDelimiterString("");
+        assertThat(emptyStringResult).isEqualTo(0);
+    }
+
 }

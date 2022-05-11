@@ -9,6 +9,12 @@ public class StringAdditionCalculator {
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
 
     public static int addAllDelimiterString(final String numberWithDelimiter) {
+        if (numberWithDelimiter == null) {
+            return 0;
+        }
+        if (numberWithDelimiter.equals("")) {
+            return 0;
+        }
         if (hasCustomDelimiter(numberWithDelimiter)) {
             return addAllCustomDelimiterString(numberWithDelimiter);
         }
