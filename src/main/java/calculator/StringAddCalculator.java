@@ -20,7 +20,9 @@ public class StringAddCalculator {
         validateConsistOfPositiveNumbers(splitText);
 
         List<Integer> numbers = StringToIntegerParser.parseNumbers(splitText);
-        return numbers.stream().reduce(0, Integer::sum);
+        return numbers.stream()
+            .mapToInt(Integer::intValue)
+            .sum();
     }
 
     private static void validateConsistOfPositiveNumbers(String[] texts) {
