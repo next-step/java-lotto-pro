@@ -11,10 +11,27 @@ public class StringAddCalculator {
         if (isNotNullAndEmpty(input)){
             return 0;
         }
-        if (isNumberAndSizeOne(input)) {
+        if (isNumber(input)) {
             return Integer.parseInt(input);
         }
+        if (!input.startsWith("//")) {
+            return splitSumNormal(input);
+        }
         return -1;
+    }
+    
+    public static int splitSumNormal(String input) {
+        String[] numbers = input.split(",|:");
+        return addArr(numbers);
+    }
+    
+    public static int addArr(String[] tokens) {
+        int result = 0;
+        for (String s : tokens) {
+            isNumberAndSizeOne(s);
+            result += Integer.parseInt(s);
+        }
+        return result;
     }
 
     public static void main(String[] args) throws IOException {

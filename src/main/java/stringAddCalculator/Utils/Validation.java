@@ -18,4 +18,11 @@ public class Validation {
         }
         return true;
     }
+
+    public static boolean isNumber(String input) {
+        if (!input.matches("^[0-9]")) {
+            return false;
+        }
+        return true;
+    }
 }
