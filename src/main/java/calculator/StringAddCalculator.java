@@ -20,7 +20,7 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return Arrays.stream(splitText(text)).mapToInt(i -> getPositiveInteger(i)).sum();
+        return Arrays.stream(splitText(text)).mapToInt(StringAddCalculator::getPositiveInteger).sum();
     }
 
     public static String[] splitText(String text) {
