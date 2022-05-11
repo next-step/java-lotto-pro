@@ -1,14 +1,16 @@
 package calculator;
 
 import java.util.Arrays;
-import java.util.StringJoiner;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     private static final String JOINER_PIPE = "|";
-    private static final String DELIMITER_COMMA = ",";
-    private static final String DELIMITER_COLON = ":";
+    private static final Set<String> DELIMITER_GROUP = Collections.unmodifiableSet(
+            new HashSet<>(Arrays.asList(",", ":")));
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int SPLIT_DELIMITER_GROUP = 1;
     private static final int SPLIT_TARGET_GROUP = 2;
@@ -33,10 +35,7 @@ public class StringAddCalculator {
             String customDelimiter = matcher.group(SPLIT_DELIMITER_GROUP);
             return matcher.group(SPLIT_TARGET_GROUP).split(customDelimiter);
         }
-        StringJoiner stringJoiner = new StringJoiner(JOINER_PIPE);
-        stringJoiner.add(DELIMITER_COMMA);
-        stringJoiner.add(DELIMITER_COLON);
-        return input.split(stringJoiner.toString());
+        return input.split(String.join(JOINER_PIPE, DELIMITER_GROUP));
     }
 
     private static boolean isNullOrEmpty(String input) {
