@@ -48,4 +48,8 @@ public class LottoNumbers {
     public List<LottoNumber> getReadOnlyLottoNumbers() {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
 }
