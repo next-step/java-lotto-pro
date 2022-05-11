@@ -2,12 +2,18 @@ package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class LottoNumbersTest {
 
@@ -20,12 +26,19 @@ public class LottoNumbersTest {
     }
 
     @DisplayName("숫자 값이 6개가 아닐 경우, 중복 값이 있을 경우")
-    @Test
-    void createNumbers_예외처리() {
+    @ParameterizedTest
+    @MethodSource("numbersParametersProvider")
+    void createNumbers_예외처리(List<Integer> numbers) {
         assertAll(
-                () -> assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(1,2,3,4,5,6,7))).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(1,2,3,4,5))).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(1,2,3,4,5,5))).isInstanceOf(IllegalArgumentException.class)
+            () -> assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    static Stream<Arguments> numbersParametersProvider() {
+        return Stream.of(
+            arguments(Arrays.asList(1,2,3,4,5,6,7)),
+            arguments(Arrays.asList(1,2,3,4,5)),
+            arguments(Arrays.asList(1,2,3,4,5,5))
         );
     }
 
