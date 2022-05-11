@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
     private static final Pattern CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
-    private static final Pattern DELIMITER = Pattern.compile(",|:");
+    private static final Pattern DEFAULT_DELIMITER = Pattern.compile(",|:");
 
     private static final int CUSTOM_DELIMITER_MATCHER_GROUP = 1;
     private static final int TEXT_MATCHER_GROUP = 2;
@@ -26,7 +26,7 @@ public class StringAddCalculator {
             return m.group(TEXT_MATCHER_GROUP).split(customDelimiter);
         }
 
-        return text.split(String.valueOf(DELIMITER));
+        return text.split(String.valueOf(DEFAULT_DELIMITER));
     }
 
     private static int sum(String[] tokens) {
