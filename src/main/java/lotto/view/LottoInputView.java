@@ -1,11 +1,21 @@
 package lotto.view;
 
+import static lotto.constants.LottoErrorMessage.*;
 import static lotto.constants.LottoErrorMessage.INVALID_INPUT_MONEY;
 import static lotto.constants.LottoGuideMessage.INPUT_MONEY;
+import static lotto.constants.LottoNumberConstants.*;
 
 import calculator.utils.StringUtils;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import lotto.constants.LottoConstants;
+import lotto.constants.LottoErrorMessage;
+import lotto.constants.LottoNumberConstants;
 import lotto.domain.Money;
+import lotto.utils.LottoNumberStringSplitter;
 import lotto.utils.LottoNumberStringToIntegerParser;
 
 public class LottoInputView {
@@ -27,6 +37,49 @@ public class LottoInputView {
     private Money convertToMoney(String money) {
         int parseMoney = LottoNumberStringToIntegerParser.parse(money);
         return Money.from(parseMoney);
+    }
+
+    public List<Integer> inputLottoNumbers(String inputGuideMessage) {
+        String[] splitInputNumbers = LottoNumberStringSplitter.split(readLine());
+        if (isValidateSplitInputNumbers(splitInputNumbers)) {
+            return LottoNumberStringToIntegerParser.parse(splitInputNumbers);
+        }
+
+        System.out.printf((INVALID_LOTTO_NUMBER) + "%n", Arrays.asList(splitInputNumbers));
+        System.out.println(inputGuideMessage);
+
+        return this.inputLottoNumbers(inputGuideMessage);
+    }
+
+    private boolean isValidateSplitInputNumbers(String[] splitInputNumbers) {
+        List<String> numbers = Arrays.stream(splitInputNumbers).map(String::format).collect(Collectors.toList());
+        return isValidateNumbers(numbers)
+            && isValidateLottoNumbers(numbers)
+            && isValidateLottoNumberSize(numbers);
+    }
+
+    private boolean isValidateLottoNumberSize(List<String> numbers) {
+        return numbers.size() == LOTTO_NUMBER_SIZE;
+    }
+
+    private boolean isValidateLottoNumbers(List<String> numbers) {
+        return numbers.stream()
+            .filter(nonEmptyAndNumberMatch())
+            .map(LottoNumberStringToIntegerParser::parse)
+            .allMatch(this::isValidateLottoNumber);
+    }
+
+    private boolean isValidateLottoNumber(Integer number) {
+        return LOTTO_NUMBER_MIN <= number && number <= LOTTO_NUMBER_MAX;
+    }
+
+    private Predicate<String> nonEmptyAndNumberMatch() {
+        return number -> !StringUtils.isEmpty(number) && number.matches(INPUT_NUMBER_0_TO_9_REG_EXP);
+    }
+
+    private boolean isValidateNumbers(List<String> numbers) {
+        return numbers.stream()
+            .allMatch(number -> number.matches(INPUT_NUMBER_0_TO_9_REG_EXP));
     }
 
     private boolean isValidMoney(String money) {

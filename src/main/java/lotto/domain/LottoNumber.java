@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static calculator.constants.LottoNumberConstants.*;
+import static lotto.constants.LottoNumberConstants.*;
 
 import lotto.constants.LottoErrorMessage;
 import java.util.Objects;

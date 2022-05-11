@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import static lotto.constants.LottoErrorMessage.MUST_BE_UNIQUE_NUMBER;
-import static calculator.constants.LottoNumberConstants.LOTTO_NUMBER_SIZE;
+import static lotto.constants.LottoNumberConstants.LOTTO_NUMBER_SIZE;
 
 import generator.NumberGenerator;
 import java.util.Collections;
