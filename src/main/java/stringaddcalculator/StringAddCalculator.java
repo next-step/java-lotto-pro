@@ -54,7 +54,7 @@ public class StringAddCalculator {
 
     private static void validateNumeric(final String text) {
         if (!text.matches(NUMERIC_PATTERN)) {
-            throw new RuntimeException("숫자가 아닙니다.");
+            throw new IllegalArgumentException("숫자가 아닙니다.");
         }
     }
 
@@ -62,7 +62,7 @@ public class StringAddCalculator {
         final int i = Integer.parseInt(text);
 
         if (isMinus(i)) {
-            throw new RuntimeException("음수를 입력할 수 없습니다.");
+            throw new IllegalArgumentException("음수를 입력할 수 없습니다.");
         }
 
         return i;
