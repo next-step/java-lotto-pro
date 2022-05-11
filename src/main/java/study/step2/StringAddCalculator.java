@@ -14,6 +14,13 @@ public class StringAddCalculator {
     private static final String DEFAULT_DELIMITERS = ",|:";
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
 
+    private static final String NEGATIVE_INTEGER_EXCEPTION = "양수만 계산 가능합니다.";
+    private static final String NON_INTEGER_EXCEPTION = "%s 는 숫자가 아닙니다.";
+
+    private StringAddCalculator() {
+        throw new IllegalStateException("StringAddCalculator class");
+    }
+
     public static int splitAndSum(String numberString) {
         if (isNullOrEmptyString(numberString)) {
             return ZERO;
@@ -50,7 +57,7 @@ public class StringAddCalculator {
     private static Integer toPositiveInteger(String number) {
         Integer integer = toInteger(number);
         if (integer < ZERO) {
-            throw new NumberConversionException("양수만 계산 가능합니다.");
+            throw new NumberConversionException(NEGATIVE_INTEGER_EXCEPTION);
         }
 
         return integer;
@@ -60,7 +67,7 @@ public class StringAddCalculator {
         try {
             return Integer.valueOf(number);
         } catch (NumberFormatException e) {
-            throw new NumberConversionException(String.format("%s 는 숫자가 아닙니다.", number));
+            throw new NumberConversionException(String.format(NON_INTEGER_EXCEPTION, number));
         }
     }
 }
