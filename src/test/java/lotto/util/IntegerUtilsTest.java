@@ -1,10 +1,11 @@
 package lotto.util;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class IntegerUtilsTest {
 
@@ -15,7 +16,7 @@ class IntegerUtilsTest {
     public void createIntegersBetween_갯수() {
         List<Integer> integers = IntegerUtils.createIntegersBetween(MIN_NUMBER, MAX_NUMBER);
 
-        Assertions.assertThat(integers.size()).isEqualTo(MAX_NUMBER - MIN_NUMBER + 1);
+        assertThat(integers.size()).isEqualTo(MAX_NUMBER - MIN_NUMBER + 1);
     }
 
     @Test
@@ -24,7 +25,7 @@ class IntegerUtilsTest {
 
         Integer maxNumber = Collections.max(integers);
 
-        Assertions.assertThat(maxNumber).isEqualTo(Integer.valueOf(MAX_NUMBER));
+        assertThat(maxNumber).isEqualTo(Integer.valueOf(MAX_NUMBER));
     }
 
     @Test
@@ -33,6 +34,6 @@ class IntegerUtilsTest {
 
         Integer minNumber = Collections.min(integers);
 
-        Assertions.assertThat(minNumber).isEqualTo(Integer.valueOf(MIN_NUMBER));
+        assertThat(minNumber).isEqualTo(Integer.valueOf(MIN_NUMBER));
     }
 }
