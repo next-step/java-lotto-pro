@@ -7,7 +7,7 @@ public class StringAddCalculator {
     private static final int DEFAULT_INT = 0;
 
     public static int splitAndSum(String text) {
-        if (text == null || text.isEmpty()) {
+        if (CustomStringUtils.isNullOrEmpty(text)) {
             return DEFAULT_INT;
         }
         String[] splitText = CustomStringUtils.splitString(text);

@@ -9,6 +9,13 @@ public class CustomStringUtils {
     private static final String ERROR_MESSAGE_INVALID_NEGATIVE_NUMBER = "[Error] 음수는 입력할 수 없습니다.";
     private static final String ERROR_MESSAGE_INVALID_NUMBER_FORMAT = "[Error] 올바른 숫자가 아닙니다.";
 
+    public static boolean isNullOrEmpty(String str) {
+        if (str == null || str.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
     public static String[] splitString(String str) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(str);
         if (matcher.find()) {
