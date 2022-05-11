@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final String BASIC_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
-    private static final Pattern BASIC_PATTERN = Pattern.compile(BASIC_DELIMITER);
     private static final Pattern CUSTOM_PATTERN = Pattern.compile(CUSTOM_DELIMITER);
 
     public static int splitAndSum(String actual) {
