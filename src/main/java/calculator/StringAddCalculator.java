@@ -6,6 +6,11 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+    public static final String INVALID_NUMBER = "올바르지 않는 숫자 입니다.";
+    public static final String INVALID_POSITIVE_NUMBER = "0보다 작은 수는 허용을 하지 않습니다.";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\n(.*)";
+    private static final String DEFAULT_DELIMITER_PATTERN = ",|:";
+
     /**
      * 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.(예 : “1”)
      * 숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.(예 : “1,2”)
@@ -24,14 +29,14 @@ public class StringAddCalculator {
     }
 
     public static String[] splitText(String text) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(text);
 
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
 
-        return text.split(",|:");
+        return text.split(DEFAULT_DELIMITER_PATTERN);
     }
 
     public static int getPositiveInteger(String input) {
@@ -40,11 +45,11 @@ public class StringAddCalculator {
         try {
             number = Integer.parseInt(input);
         } catch (NumberFormatException ex) {
-            throw new RuntimeException();
+            throw new RuntimeException(INVALID_NUMBER);
         }
 
         if (number < 0) {
-            throw new RuntimeException();
+            throw new RuntimeException(INVALID_POSITIVE_NUMBER);
         }
 
         return number;
