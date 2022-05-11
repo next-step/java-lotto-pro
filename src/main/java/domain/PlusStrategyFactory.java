@@ -12,6 +12,10 @@ public class PlusStrategyFactory {
             return new SingleNumberPlusStrategy();
         }
 
+        if (ExpressionUtils.isDefaultExpression(expressionStr)) {
+            return new DefaultDelimiterPlusStrategy();
+        }
+
         throw new RuntimeException(ExceptionType.INVALID_EXPRESSION.getMessage());
     }
 }
