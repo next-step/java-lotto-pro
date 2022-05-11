@@ -13,14 +13,14 @@ public class StringAddCalculator {
             String customDelimiter = m.group(1);
             strs = m.group(2).split(customDelimiter);
             for (String s : strs)
-                sum += Integer.parseInt(s);
+                sum += Integer.parseUnsignedInt(s);
 
             return sum;
         }
 
         strs = str.split(",|:");
         for (String s : strs)
-            sum += Integer.parseInt(s);
+            sum += Integer.parseUnsignedInt(s);
 
         return sum;
     }
