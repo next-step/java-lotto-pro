@@ -1,6 +1,6 @@
-package stringcalculator;
+package stringcalculator.utils;
 
-import static stringcalculator.PositiveIntegerChecker.isPositiveInteger;
+import static stringcalculator.utils.PositiveIntegerChecker.isPositiveInteger;
 
 import java.util.ArrayList;
 import java.util.List;

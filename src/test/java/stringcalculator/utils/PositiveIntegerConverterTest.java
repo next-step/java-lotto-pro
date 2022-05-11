@@ -1,7 +1,7 @@
-package stringcalculator;
+package stringcalculator.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static stringcalculator.PositiveIntegerConverter.convertToPositiveIntegers;
+import static stringcalculator.utils.PositiveIntegerConverter.convertToPositiveIntegers;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;

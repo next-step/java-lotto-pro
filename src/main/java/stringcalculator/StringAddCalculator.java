@@ -1,7 +1,7 @@
 package stringcalculator;
 
-import static stringcalculator.PositiveIntegerConverter.convertToPositiveIntegers;
-import static stringcalculator.StringSplitter.split;
+import static stringcalculator.utils.PositiveIntegerConverter.convertToPositiveIntegers;
+import static stringcalculator.utils.StringSplitter.split;
 
 import java.util.List;
 

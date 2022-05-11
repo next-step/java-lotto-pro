@@ -1,4 +1,4 @@
-package stringcalculator;
+package stringcalculator.constants;
 
 public class ErrorMessageConstants {
 

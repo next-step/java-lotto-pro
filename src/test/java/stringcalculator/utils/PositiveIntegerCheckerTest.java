@@ -1,8 +1,8 @@
-package stringcalculator;
+package stringcalculator.utils;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static stringcalculator.ErrorMessageConstants.NON_POSITIVE_INTEGER_INPUT_ERROR;
-import static stringcalculator.PositiveIntegerChecker.isPositiveInteger;
+import static stringcalculator.constants.ErrorMessageConstants.NON_POSITIVE_INTEGER_INPUT_ERROR;
+import static stringcalculator.utils.PositiveIntegerChecker.isPositiveInteger;
 
 import org.junit.jupiter.api.Test;
 

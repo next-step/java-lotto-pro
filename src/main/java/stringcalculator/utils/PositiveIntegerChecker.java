@@ -1,6 +1,6 @@
-package stringcalculator;
+package stringcalculator.utils;
 
-import static stringcalculator.ErrorMessageConstants.NON_POSITIVE_INTEGER_INPUT_ERROR;
+import static stringcalculator.constants.ErrorMessageConstants.NON_POSITIVE_INTEGER_INPUT_ERROR;
 
 public class PositiveIntegerChecker {
 

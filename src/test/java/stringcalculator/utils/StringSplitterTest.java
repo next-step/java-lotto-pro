@@ -1,8 +1,8 @@
-package stringcalculator;
+package stringcalculator.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import static stringcalculator.StringSplitter.split;
+import static stringcalculator.utils.StringSplitter.split;
 
 import org.junit.jupiter.api.Test;
 
