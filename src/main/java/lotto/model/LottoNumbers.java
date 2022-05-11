@@ -41,4 +41,13 @@ public class LottoNumbers {
 				.distinct()
 				.count() == LottoUtil.LOTTO_NUMBERS_COUNT;
 	}
+	
+	//반환값이 count가 좋을지 list로 반환하여 처리하는게 좋을지 고민해볼것
+	public int countEqualsLottoNumber(LottoNumbers lottoNumbers) {
+		return (int)lottoNumbers
+				.getLottoNumbers()
+				.stream()
+				.filter(lottoNumber->getLottoNumbers().contains(lottoNumber))
+				.count();
+	}
 }

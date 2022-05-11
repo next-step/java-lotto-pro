@@ -1,6 +1,7 @@
 package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
@@ -52,5 +53,18 @@ public class LottoNumbersTest {
 		LottoNumbers.remove(0);
 		LottoNumbers.add(new LottoNumber(17));
 		assertThat(new LottoNumbers(LottoNumbers).getLottoNumbers()).hasSize(6);
+	}
+	
+	@Test
+	@DisplayName("당첨여부를 확인하는 테스트")
+	void test() {
+		List<LottoNumber> LottoNumbers2 = new ArrayList<>();
+		LottoNumbers2.add(new LottoNumber(43));
+		LottoNumbers2.add(new LottoNumber(31));
+		LottoNumbers2.add(new LottoNumber(1));
+		LottoNumbers2.add(new LottoNumber(16));
+		LottoNumbers2.add(new LottoNumber(10));
+		LottoNumbers2.add(new LottoNumber(21));
+        assertEquals(new LottoNumbers(LottoNumbers).countEqualsLottoNumber(new LottoNumbers(LottoNumbers2)), 5);
 	}
 }
