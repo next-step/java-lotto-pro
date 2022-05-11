@@ -7,25 +7,25 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class StringAddCalculatorTest {
+class NumbersTest {
 	@DisplayName("빈 문자열 또는 null을 입력할 경우 0을 반환한다")
 	@ParameterizedTest
 	@NullAndEmptySource
-	void calculate_empty_null(String string) {
-		assertThat(StringAddCalculator.splitAndSum(string)).isZero();
+	void sum_empty_null(String string) {
+		assertThat(Numbers.from(string).sum().getValue()).isZero();
 	}
 
 	@DisplayName("숫자 하나를 입력할 경우 해당 숫자를 반환한다")
 	@ParameterizedTest
 	@CsvSource(value = {"0,0", "1,1"})
-	void calculate_1_value(String given, int expected) {
-		assertThat(StringAddCalculator.splitAndSum(given)).isEqualTo(expected);
+	void sum_1_value(String given, String expected) {
+		assertThat(Numbers.from(given).sum()).isEqualTo(Number.from(expected));
 	}
 
 	@DisplayName("기본 구분자(, 또는 :)로 구분된 숫자들을 입력할 경우 숫자들의 합을 반환한다")
 	@ParameterizedTest
 	@CsvSource(value = {"1:2,3=6", "4,5:6=15"}, delimiter = '=')
-	void calculate_values(String given, int expected) {
-		assertThat(StringAddCalculator.splitAndSum(given)).isEqualTo(expected);
+	void sum_values(String given, String expected) {
+		assertThat(Numbers.from(given).sum()).isEqualTo(Number.from(expected));
 	}
 }
