@@ -1,11 +1,11 @@
 package util;
 
 public class StringUtil {
-	public static final String COMMA = ",";
-	public static final char LEFT_PARENTHESIS = '(';
-	public static final char RIGHT_PARENTHESIS = ')';
-	public static final int PARENTHESIS_START_NO = 0;
-	public static final int LAST_INDEX_DIFFERENCE = 1;
+	private static final String COMMA = ",";
+	private static final char LEFT_PARENTHESIS = '(';
+	private static final char RIGHT_PARENTHESIS = ')';
+	private static final int PARENTHESIS_START_NO = 0;
+	private static final int LAST_INDEX_DIFFERENCE = 1;
 	
 	public static String[] splitComma(String value) {
 		return value.split(COMMA);
