@@ -24,12 +24,13 @@ public class Separator {
     }
 
     private void initFixedPattern(String text) {
-        this.delimiter = ",|:";
+        String commaOrColonDelimiter = ",|:";
+        this.delimiter = commaOrColonDelimiter;
         this.text = text;
     }
 
     private void initCustomPattern(String text) {
-        Matcher customPatternMatcher = Pattern.compile(StringPatternRegex.CUSTOMPATTERN).matcher(text);
+        Matcher customPatternMatcher = Pattern.compile(StringPattern.CUSTOM.pattern()).matcher(text);
         customPatternMatcher.find();
         this.delimiter = customPatternMatcher.group(1);
         this.text = customPatternMatcher.group(2);
