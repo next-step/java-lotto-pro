@@ -35,7 +35,13 @@ public class StringAddCalculator {
     }
 
     public static int getPositiveInteger(String input) {
-        int number = Integer.parseInt(input);
+        int number;
+
+        try {
+            number = Integer.parseInt(input);
+        } catch (NumberFormatException ex) {
+            throw new RuntimeException();
+        }
 
         if (number < 0) {
             throw new RuntimeException();
