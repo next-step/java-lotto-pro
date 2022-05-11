@@ -1,6 +1,6 @@
 package study;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +29,7 @@ public class SetTest {
 	@Test
 	void set_size() {
 		// when, then
-		assertThat(numbers.size()).isEqualTo(3);
+		assertThat(numbers).hasSize(3);
 	}
 
 	@DisplayName("Parameter 이용한 contains 검증")
