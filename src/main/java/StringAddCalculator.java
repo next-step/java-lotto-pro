@@ -12,8 +12,9 @@ public class StringAddCalculator {
     private static final int DEFAULT_SUM = 0;
 
     public static int splitAndSum(String text) {
-        if (isNotNumeric(text))
+        if (isNotNumeric(text)) {
             return DEFAULT_SUM;
+        }
 
         String[] tokens = split(text);
         return sum(tokens);
@@ -31,8 +32,9 @@ public class StringAddCalculator {
 
     private static int sum(String[] tokens) {
         int sum = DEFAULT_SUM;
-        for (String s : tokens)
+        for (String s : tokens) {
             sum += getUnsignedInt(s);
+        }
 
         return sum;
     }
