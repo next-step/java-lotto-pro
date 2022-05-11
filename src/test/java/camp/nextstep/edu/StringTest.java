@@ -11,8 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 public class StringTest {
     private static final String regex = ",";
@@ -74,6 +73,10 @@ public class StringTest {
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> source.charAt(source.length() + 1))
                 .withMessageMatching("String index out of range: \\d+");
+
+        assertThatThrownBy(() -> source.charAt(source.length() + 1))
+                .isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageMatching("String index out of range: \\d+");
     }
 
     private int findStartParenthesis(final String source) {
