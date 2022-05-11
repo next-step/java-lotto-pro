@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class Separator {
     private String delimiter;
     private String text;
+    private static final String commaOrColonDelimiter = "[,:]";
 
     Separator(StringPattern pattern, String text) throws RuntimeException {
         if (pattern == StringPattern.FIXED) {
@@ -24,7 +25,6 @@ public class Separator {
     }
 
     private void initFixedPattern(String text) {
-        String commaOrColonDelimiter = ",|:";
         this.delimiter = commaOrColonDelimiter;
         this.text = text;
     }
