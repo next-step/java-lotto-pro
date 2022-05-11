@@ -17,13 +17,14 @@ public class StringAddCalculator {
         Matcher matcher = CUSTOM_PATTERN.matcher(actual);
 
         if(matcher.find()) {
-            return sum(CustomDetermiterSplit(actual));
+            return sum(customDetermiterSplit(actual));
         }
 
         return sum(basicDetermiterSplit(actual));
     }
 
-    private static List<String> CustomDetermiterSplit(String number) {
+    //Custom 구분자로 Split
+    private static List<String> customDetermiterSplit(String number) {
         Matcher matcher = CUSTOM_PATTERN.matcher(number);
         List<String> numbersToCustomPattern = new ArrayList<>();
         List<String> results = new ArrayList<>();
@@ -40,6 +41,7 @@ public class StringAddCalculator {
         return results;
     }
 
+    //기본 구분자로 Split
     private static List<String> basicDetermiterSplit(String number) {
         return Arrays.asList(number.split(BASIC_DELIMITER));
     }
@@ -52,6 +54,7 @@ public class StringAddCalculator {
         return sum;
     }
 
+    //음수 또는 숫자가 아닌 값 Check
     public static int integerWithValidator (String input) {
         //NumberFormatException 발생
         int number = Integer.parseInt(input);
