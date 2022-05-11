@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.List;
 import lotto.constant.ErrorMessage;
+import lotto.constant.LottoMatchNumber;
 import lotto.vo.Lotto;
 import lotto.vo.Lottos;
 
@@ -61,6 +62,7 @@ public class LottoPlayService {
             int matchNumberCount = calcMatchNumberCount(winningNumberList, lotto);
             lottos.updateResultCountMap(matchNumberCount);
         }
+        calculateProfitRate(lottos);
     }
 
     private int calcMatchNumberCount(List<Integer> winningNumberList, Lotto lotto) {
@@ -78,6 +80,13 @@ public class LottoPlayService {
         return matchNumberCount;
     }
 
-    public void calculateProfitRate(Lottos lottos) {
+    private void calculateProfitRate(Lottos lottos) {
+        int money = lottos.getPlayCount() * LOTTO_PRICE;
+        int totalWinningAmount = 0;
+        for (LottoMatchNumber lottoMatchNumber : LottoMatchNumber.allMatchNumber()){
+            totalWinningAmount += lottos.getResultCount(lottoMatchNumber.getMatchNumberCount()) * lottoMatchNumber.getWinningAmount();
+        }
+        double resultProfitRate = (double) totalWinningAmount / money;
+        lottos.setResultProfitRate(resultProfitRate);
     }
 }

@@ -12,6 +12,7 @@ public class Lottos {
     private final int playCount;
     private final List<Lotto> lottoList;
     private final Map<Integer,Integer> resultCountMap;
+    private double resultProfitRate;
 
     public Lottos(int playCount) {
         this.playCount = playCount;
@@ -40,6 +41,9 @@ public class Lottos {
     }
 
     public double getResultProfitRate() {
-        return 0;
+        return resultProfitRate;
+    }
+    public void setResultProfitRate(double resultProfitRate) {
+        this.resultProfitRate = resultProfitRate;
     }
 }
