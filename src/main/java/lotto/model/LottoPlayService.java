@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.constant.ErrorMessage;
+import lotto.vo.Lotto;
 import lotto.vo.Lottos;
 
 public class LottoPlayService {
@@ -8,6 +9,11 @@ public class LottoPlayService {
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_MAX_PURCHASE_PRICE = 10_000_000;
 
+    private final LottoGeneratorService lottoGeneratorService;
+
+    public LottoPlayService() {
+        lottoGeneratorService = new LottoGeneratorService();
+    }
 
     public Lottos convertMoneyToLottos(int money) {
         validateMoney(money);
@@ -41,6 +47,11 @@ public class LottoPlayService {
     }
 
     public Lottos playLottoByCount(int playCount) {
-        return new Lottos(0);
+        Lottos lottos = new Lottos(playCount);
+        for (int play = 0; play < lottos.getPlayCount(); play++) {
+            Lotto lotto = lottoGeneratorService.generateLotto();
+            lottos.addLotto(lotto);
+        }
+        return lottos;
     }
 }
