@@ -15,12 +15,12 @@ public class Application {
     public void startLottoGame() throws IOException {
         LottoGameController lottoGameController = new LottoGameController();
         LottoGameDTO lottoGameDTO = purchaseLotto(lottoGameController);
-        lottoGameDTO = generateLotto(lottoGameController, lottoGameDTO.getLottos());
+        lottoGameDTO = generateLotto(lottoGameController, lottoGameDTO);
 
     }
 
-    private LottoGameDTO generateLotto(LottoGameController lottoGameController, Lottos lottos) {
-        LottoGameDTO lottoGameDTO = lottoGameController.generateLottos(lottos);
+    private LottoGameDTO generateLotto(LottoGameController lottoGameController, LottoGameDTO requestLottoGameDTO) {
+        LottoGameDTO lottoGameDTO = lottoGameController.generateLottos(requestLottoGameDTO);
         printMessage(lottoGameDTO);
         return lottoGameDTO;
     }

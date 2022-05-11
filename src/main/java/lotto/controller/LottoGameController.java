@@ -36,8 +36,8 @@ public class LottoGameController {
         }
     }
 
-    public LottoGameDTO generateLottos(Lottos requestLottos){
-        Lottos lottos = lottoPlayService.generateLottosByPlayCount(requestLottos.getPlayCount());
+    public LottoGameDTO generateLottos(LottoGameDTO lottoGameDTO){
+        Lottos lottos = lottoPlayService.generateLottosByPlayCount(lottoGameDTO.getLottos().getPlayCount());
         String generatedLottosView = resultView.generatedLottosView(lottos);
         return new LottoGameDTO(lottos,generatedLottosView,false);
     }
