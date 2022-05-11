@@ -44,11 +44,11 @@ public class StringAddCalculatorTest {
     public void splitAndSum_negative() throws Exception {
         assertAll(
                 () -> assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                        .isInstanceOf(RuntimeException.class)
+                        .isInstanceOf(IllegalArgumentException.class)
                         .hasMessageContaining("음수 값은 입력할 수 없습니다."),
 
                 () -> assertThatThrownBy(() -> StringAddCalculator.splitAndSum("A,2,3"))
-                        .isInstanceOf(RuntimeException.class)
+                        .isInstanceOf(IllegalArgumentException.class)
                         .hasMessageContaining("숫자 값만 계산이 가능합니다.")
         );
     }
