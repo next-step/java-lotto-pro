@@ -1,5 +1,9 @@
 package calculator;
 
+import exception.ExceptionMessage;
+
+import static calculator.StringAddCalculator.ZERO;
+
 public class Number {
 
     private final int number;
@@ -7,12 +11,19 @@ public class Number {
     public Number(String number) {
         try {
             this.number = Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("숫자만 입력 가능합니다.");
+            validatePositiveNumber();
+        } catch (NumberFormatException | IllegalStateException e) {
+            throw new RuntimeException(ExceptionMessage.NOT_POSITIVE_NUMBER.message());
         }
     }
 
     public int value() {
         return number;
+    }
+
+    private void validatePositiveNumber() {
+        if (number < ZERO) {
+            throw new IllegalStateException();
+        }
     }
 }

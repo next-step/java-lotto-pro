@@ -1,5 +1,6 @@
 package calculator;
 
+import exception.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringAddCalculatorTest {
 
@@ -67,6 +69,15 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.add("//;\n1;2;7");
         // then
         assertThat(result).isEqualTo(10);
+    }
+
+    @DisplayName("문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외가 발생한다")
+    @Test
+    void negative() {
+        // when and then
+        assertThatThrownBy(() -> StringAddCalculator.add("-1,2"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage(ExceptionMessage.NOT_POSITIVE_NUMBER.message());
     }
 
 }
