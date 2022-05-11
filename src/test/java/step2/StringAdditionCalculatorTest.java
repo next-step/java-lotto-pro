@@ -54,4 +54,10 @@ public class StringAdditionCalculatorTest {
         assertThat(emptyStringResult).isEqualTo(0);
     }
 
+    @Test
+    void addAllDelimiterString_With_One_Number() {
+        final int result = StringAdditionCalculator.addAllDelimiterString("3");
+        assertThat(result).isEqualTo(3);
+    }
+
 }
