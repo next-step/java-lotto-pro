@@ -26,6 +26,7 @@
           |---|---|
           | 지난주 로또 번호가 1~45 숫자 사이가 아닌 경우 |IllegalArgumentException|
           | 지난주 로또 번호가 6개가 아닌 경우 |IllegalArgumentException|
+          | 지난주 로또 번호가 중복이 있는 경우 |IllegalArgumentException|
     
     - [X] 구매금액과 총 당첨금액에 대한 수익률을 계산
         * 3개[5000원], 4개[50000원], 5개[1500000원], 6개[2000000000원]
