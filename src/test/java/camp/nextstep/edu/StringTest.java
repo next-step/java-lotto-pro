@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -67,10 +68,11 @@ public class StringTest {
     }
 
     @DisplayName("charAt 사용시 입력 길이 보다 크면 StringIndexOutOfBoundsException 이 발생")
-    @Test
-    void charAtOutOfBoundTest() {
+    @ParameterizedTest
+    @ValueSource(strings = {"123", "1"})
+    void charAtOutOfBoundTest(final String source) {
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
-                .isThrownBy(() -> "123".charAt(4))
+                .isThrownBy(() -> source.charAt(source.length() + 1))
                 .withMessageMatching("String index out of range: \\d+");
     }
 
