@@ -58,7 +58,14 @@ public class StringTest {
     void noPairs(final String source, final String expectedResult) {
         substringTest(source, expectedResult);
     }
-    
+
+    @DisplayName("charAt 를 이용하여 특정 위치 문자 가져오기")
+    @Test
+    void charAtTest() {
+        final char indexChar = "abc".charAt(0);
+        assertThat(indexChar).isEqualTo('a');
+    }
+
     private int findStartParenthesis(final String source) {
         return Objects.equals(source.indexOf("("), -1) ? 0 : source.indexOf("(") + 1;
     }
