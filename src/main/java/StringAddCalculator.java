@@ -3,7 +3,7 @@ public class StringAddCalculator {
         if (str == null || str.isEmpty())
             return 0;
 
-        String[] strs = str.split(",");
+        String[] strs = str.split(",|:");
         if (strs.length == 1)
             return Integer.parseInt(strs[0]);
 
