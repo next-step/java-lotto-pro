@@ -26,7 +26,7 @@ class InputStringUtilsTest {
     void splitToNumberListByDelimiter_not_number(String inputString, String delimiter){
         assertThatIllegalArgumentException()
                 .isThrownBy(()->  InputStringUtils.splitToNumberListByDelimiter(inputString, delimiter))
-                .withMessage("[ERROR] 0~9 사이의 숫자가 아닙니다.");
+                .withMessage("[ERROR] 숫자가 아닙니다.");
     }
 
 }
