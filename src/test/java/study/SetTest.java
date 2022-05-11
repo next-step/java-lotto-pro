@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
@@ -37,4 +38,13 @@ public class SetTest {
         assertThat(numbers.contains(input))
                 .isTrue();
     }
+
+    @DisplayName("요구사항 3. Set에 입력 값이 없으면 contains()가 false를 반환하는지 확인한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true","3:true", "4:false", "5:false"}, delimiter = ':')
+    void setContainsReturnFalseTest(int input, boolean expected) {
+        assertThat(numbers.contains(input))
+                .isEqualTo(expected);
+    }
+
 }
