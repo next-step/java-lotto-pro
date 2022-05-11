@@ -8,6 +8,7 @@ public class StringAddCalculator {
     private static final int MIN_VALUE = 0;
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private static final String NEGATIVE_NUMBER_ERROR_MESSAGE = "음수는 입력할 수 없습니다.";
 
     public static int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
@@ -33,6 +34,16 @@ public class StringAddCalculator {
     }
 
     private static int calculateSum(String[] inputs) {
-        return Arrays.stream(inputs).mapToInt(Integer::parseInt).sum();
+        int[] numbers = Arrays.stream(inputs).mapToInt(Integer::parseInt).toArray();
+        for (int number : numbers) {
+            negativeNumberCheck(number);
+        }
+        return Arrays.stream(numbers).sum();
+    }
+
+    private static void negativeNumberCheck(int number) {
+        if (number < MIN_VALUE) {
+            throw new RuntimeException(NEGATIVE_NUMBER_ERROR_MESSAGE);
+        }
     }
 }
