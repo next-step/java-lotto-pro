@@ -10,7 +10,7 @@ public class StringAddCalculator {
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
     private static final String NUMERIC_PATTERN = "\\d";
 
-    public static int splitAndSum(final String text) {
+    public static int sumNumberTexts(final String text) {
         if (isNullOrEmpty(text)) {
             return EMPTY_SUMMARY;
         }
