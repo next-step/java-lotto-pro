@@ -1,6 +1,7 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import domain.DefaultDelimiterPlusStrategy;
 import domain.EmptyPlusStrategy;
 import domain.PlusStrategy;
 import domain.PlusStrategyFactory;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("더하기 식에 대한 테스트 코드")
@@ -56,5 +58,23 @@ class PlusStrategyTest {
         PlusStrategy plusStrategy = factory.getStrategy(input);
 
         assertThat(plusStrategy.result(input)).isEqualTo(Integer.parseInt(input));
+    }
+
+    @DisplayName("팩토리 클래스에 숫자 두개를 컴마 구분자로 입력해 전달할 경우 DefaultDelimiterPlusStrategy 가 반환되어야 한다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2", "2,5", "3,4", "7,7"})
+    void default_number_test(String input) {
+        PlusStrategy plusStrategy = factory.getStrategy(input);
+
+        assertThat(plusStrategy.getClass()).isEqualTo(DefaultDelimiterPlusStrategy.class);
+    }
+
+    @DisplayName("팩토리 클래스에 숫자 두개를 컴마 구분자로 입력해 전달할 경우 두 수의 합이 반환되어야 한다")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3", "2,5:7", "3,4:7", "7,7:14"}, delimiter = ':')
+    void default_number_test2(String input, String result) {
+        PlusStrategy plusStrategy = factory.getStrategy(input);
+
+        assertThat(plusStrategy.result(input)).isEqualTo(Integer.parseInt(result));
     }
 }

@@ -22,4 +22,11 @@ class ExpressionUtilsTest {
     void single_number_expression_test(String input) {
         assertTrue(ExpressionUtils.isSingleNumberExpression(input));
     }
+
+    @DisplayName("Default 인지 체크하는 로직에 숫자 두개를 컴마 구분자로 넘기면 정상적으로 통과되어야 한다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2", "2,5", "3,4", "7,7"})
+    void default_number_expression_test(String input) {
+        assertTrue(ExpressionUtils.isDefaultExpression(input));
+    }
 }
