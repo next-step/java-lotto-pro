@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    private static final int NUMBER_ZERO = 0;
+    private static final int MIN = 0;
     private static final String DELIMITER_DEFAULT = ",|:";
     private static final String DELIMITER_PIPE = "|";
     private static final String REGEX_CUSTOM_DELIMITER = "//(.)\n(.*)";
@@ -16,7 +16,7 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String inputString) {
         if (isEmpty(inputString)) {
-            return 0;
+            return MIN;
         }
         if (isPositiveNumber(inputString)) {
             return Integer.parseInt(inputString);
@@ -33,7 +33,7 @@ public class StringAddCalculator {
 
     private static boolean isPositiveNumber(String source) {
         try {
-            return Integer.parseInt(source) > NUMBER_ZERO;
+            return Integer.parseInt(source) > MIN;
         } catch (NumberFormatException e) {
             return false;
         }
