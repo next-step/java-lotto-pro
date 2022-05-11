@@ -3,39 +3,39 @@ package calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class StringAddCalculatorTest {
 
-    @ParameterizedTest()
+    @ParameterizedTest(name = "null 또는 빈문자 입력시, 0값을 반환한다")
     @ValueSource(strings = {"",})
-    @DisplayName("null 또는 빈문자 입력시, 0값을 반환한다")
     public void splitAndSum_null_또는_빈문자(String input) {
         int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isZero();
     }
 
-    @Test
-    @DisplayName("숫자하나 입력시, 입력숫자를 반환한다")
-    public void splitAndSum_숫자하나() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1");
-        assertThat(result).isEqualTo(1);
+    @ParameterizedTest(name = "숫자하나 {0} 입력시, 입력숫자 {1}를 반환한다")
+    @CsvSource(value = {"1|1", "3|3", "5|5"}, delimiter = '|')
+    public void splitAndSum_숫자하나(String input, int output) throws Exception {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(output);
     }
 
-    @Test
-    @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다")
-    public void splitAndSum_쉼표구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2");
-        assertThat(result).isEqualTo(3);
+    @ParameterizedTest(name = "숫자 두개를 컴마(,) 구분자로 {0} 입력할 경우 두 숫자의 합 {1}을 반환한다")
+    @CsvSource(value = {"1,2|3", "3,4|7", "5,6|11"}, delimiter = '|')
+    public void splitAndSum_쉼표구분자(String input, int output) throws Exception {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(output);
     }
 
-    @Test
-    @DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있으며 숫자의 합을 반환한다")
-    public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2:3");
-        assertThat(result).isEqualTo(6);
+    @ParameterizedTest(name = "구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있으며, {0} 입력할 경우 두 숫자의 합 {1}을 반환한다")
+    @CsvSource(value = {"1,2:3|6", "1,1:2|4", "3,3:3|9"}, delimiter = '|')
+    public void splitAndSum_쉼표_또는_콜론_구분자(String input, int output) throws Exception {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(output);
     }
 
     @Test
