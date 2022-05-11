@@ -12,8 +12,8 @@ public class StringAddCalculator {
     private static final Set<String> DELIMITER_GROUP = Collections.unmodifiableSet(
             new HashSet<>(Arrays.asList(",", ":")));
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
-    private static final int SPLIT_DELIMITER_GROUP = 1;
-    private static final int SPLIT_TARGET_GROUP = 2;
+    private static final int CUSTOM_SPLIT_DELIMITER_NUMBER = 1;
+    private static final int CUSTOM_SPLIT_TARGET_NUMBER = 2;
 
     public static int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
@@ -32,8 +32,8 @@ public class StringAddCalculator {
     private static String[] split(String input) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(SPLIT_DELIMITER_GROUP);
-            return matcher.group(SPLIT_TARGET_GROUP).split(customDelimiter);
+            String customDelimiter = matcher.group(CUSTOM_SPLIT_DELIMITER_NUMBER);
+            return matcher.group(CUSTOM_SPLIT_TARGET_NUMBER).split(customDelimiter);
         }
         return input.split(String.join(JOINER_PIPE, DELIMITER_GROUP));
     }
