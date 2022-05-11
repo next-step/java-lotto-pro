@@ -1,4 +1,4 @@
-package study;
+package study.step1;
 
 public class StringUtil {
     private static final String BRACKET_START_CHAR = "(";
