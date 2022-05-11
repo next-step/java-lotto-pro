@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import lotto.controller.LottoGameController;
 import lotto.dto.LottoGameDTO;
-import lotto.vo.Lottos;
 
 public class Application {
     public static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
@@ -16,7 +15,25 @@ public class Application {
         LottoGameController lottoGameController = new LottoGameController();
         LottoGameDTO lottoGameDTO = purchaseLotto(lottoGameController);
         lottoGameDTO = generateLotto(lottoGameController, lottoGameDTO);
+        playLotto(lottoGameController, lottoGameDTO);
+    }
 
+    private void playLotto(LottoGameController lottoGameController, LottoGameDTO requestLottoGameDTO) throws IOException {
+        boolean isInputError;
+        LottoGameDTO lottoGameDTO;
+        do {
+            String winningNumbersWord = getInputWinningNumbers(lottoGameController);
+            lottoGameDTO = lottoGameController.playLottoGame(requestLottoGameDTO, winningNumbersWord);
+            printMessage(lottoGameDTO);
+            isInputError = lottoGameDTO.isInputError();
+        } while (isInputError);
+    }
+
+    private String getInputWinningNumbers(LottoGameController lottoGameController) throws IOException {
+        LottoGameDTO lottoGameDTO;
+        lottoGameDTO = lottoGameController.inputWinningNumbers();
+        printMessage(lottoGameDTO);
+        return BUFFERED_READER.readLine();
     }
 
     private LottoGameDTO generateLotto(LottoGameController lottoGameController, LottoGameDTO requestLottoGameDTO) {
