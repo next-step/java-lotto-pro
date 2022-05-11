@@ -43,7 +43,7 @@
 ### 리팩토링 작업(클래스)
 - [X] 로또 숫자 하나를 표현하는 LottoNo 클래스
 - [X] 로또를 표현하는 Lotto 클래스
-- [ ] 로또 게임 기능을 표현하는 LottoGame 클래스
+- [X] 로또 게임 기능을 표현하는 LottoGame 클래스
 - [ ] 로또 통계를 표현하는 LottoStatistics 클래스
 - [ ] 게임 정보를 표현하는 InputView 클래스 
 - [ ] 게임 정보를 표현하는 ResultView 클래스
