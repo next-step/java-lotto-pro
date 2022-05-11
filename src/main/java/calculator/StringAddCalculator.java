@@ -9,8 +9,10 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     private static final String JOINER_PIPE = "|";
+    private static final String DELIMITER_COMMA = ",";
+    private static final String DELIMITER_COLON = ":";
     private static final Set<String> DELIMITER_GROUP = Collections.unmodifiableSet(
-            new HashSet<>(Arrays.asList(",", ":")));
+            new HashSet<>(Arrays.asList(DELIMITER_COMMA, DELIMITER_COLON)));
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int CUSTOM_SPLIT_DELIMITER_NUMBER = 1;
     private static final int CUSTOM_SPLIT_TARGET_NUMBER = 2;
