@@ -8,7 +8,7 @@ import lotto.constant.ErrorMessage;
 public class RandomNumberUtils {
 
     public static List<Integer> generateRandomNumberToList(int low, int max, int count) {
-        List<Integer> numberList = createNumberList(low,max);
+        List<Integer> numberList = createNumberList(low, max);
         Collections.shuffle(numberList);
         return createRandomNumberList(count, numberList);
     }

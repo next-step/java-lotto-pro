@@ -23,42 +23,43 @@ public class LottoGameController {
         this.lottoPlayService = new LottoPlayService();
     }
 
-    public LottoGameDTO inputMoney(){
-        return new LottoGameDTO(null,inputView.inputMoneyView(),false);
+    public LottoGameDTO inputMoney() {
+        return new LottoGameDTO(null, inputView.inputMoneyView(), false);
     }
 
-    public LottoGameDTO purchaseLotto(String moneyWord){
+    public LottoGameDTO purchaseLotto(String moneyWord) {
         try {
             int money = Integer.parseInt(moneyWord);
             Lottos lottos = lottoPlayService.convertMoneyToLottos(money);
             String purchaseView = resultView.resultPurchaseView(lottos);
-            return new LottoGameDTO(lottos,purchaseView,false);
+            return new LottoGameDTO(lottos, purchaseView, false);
         } catch (NumberFormatException e) {
-            return new LottoGameDTO(null, ErrorMessage.NOT_CONVERT_MONEY,true);
+            return new LottoGameDTO(null, ErrorMessage.NOT_CONVERT_MONEY, true);
         } catch (IllegalArgumentException e) {
             return new LottoGameDTO(null, e.getMessage(), true);
         }
     }
 
-    public LottoGameDTO generateLottos(LottoGameDTO lottoGameDTO){
+    public LottoGameDTO generateLottos(LottoGameDTO lottoGameDTO) {
         Lottos lottos = lottoPlayService.generateLottosByPlayCount(lottoGameDTO.getLottos().getPlayCount());
         String generatedLottosView = resultView.generatedLottosView(lottos);
-        return new LottoGameDTO(lottos,generatedLottosView,false);
+        return new LottoGameDTO(lottos, generatedLottosView, false);
     }
 
     public LottoGameDTO inputWinningNumbers() {
         String inputWinningNumbersView = inputView.inputWinningNumbersView();
-        return new LottoGameDTO(null,inputWinningNumbersView,false);
+        return new LottoGameDTO(null, inputWinningNumbersView, false);
     }
 
     public LottoGameDTO playLottoGame(LottoGameDTO lottoGameDTO, String winningNumbersWord) {
         try {
             Lottos lottos = lottoGameDTO.getLottos();
-            List<Integer> winningNumberList = InputStringUtils.splitToNumberListByDelimiter(winningNumbersWord, DELIMITER_COMMA);
-            lottoPlayService.playLottoGame(lottos,winningNumberList);
+            List<Integer> winningNumberList = InputStringUtils
+                    .splitToNumberListByDelimiter(winningNumbersWord, DELIMITER_COMMA);
+            lottoPlayService.playLottoGame(lottos, winningNumberList);
             String totalResultView = resultView.totalResultView(lottos);
-            return new LottoGameDTO(lottos,totalResultView,false);
-        }catch (IllegalArgumentException e){
+            return new LottoGameDTO(lottos, totalResultView, false);
+        } catch (IllegalArgumentException e) {
             return new LottoGameDTO(null, e.getMessage(), true);
         }
     }

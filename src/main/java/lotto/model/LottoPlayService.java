@@ -32,7 +32,7 @@ public class LottoPlayService {
 
     public void playLottoGame(Lottos lottos, List<Integer> winningNumberList) {
         LottoGameValidateUtils.validateWinningNumberList(winningNumberList);
-        for (Lotto lotto : lottos.getLottoList()){
+        for (Lotto lotto : lottos.getLottoList()) {
             int matchNumberCount = calcMatchNumberCount(winningNumberList, lotto);
             lottos.updateResultCountMap(matchNumberCount);
         }
@@ -41,14 +41,14 @@ public class LottoPlayService {
 
     private int calcMatchNumberCount(List<Integer> winningNumberList, Lotto lotto) {
         int matchNumberCount = 0;
-        for (int lottoNumber : lotto.getNumberList()){
-            matchNumberCount = countMatchNumber(winningNumberList,lottoNumber, matchNumberCount );
+        for (int lottoNumber : lotto.getNumberList()) {
+            matchNumberCount = countMatchNumber(winningNumberList, lottoNumber, matchNumberCount);
         }
         return matchNumberCount;
     }
 
     private int countMatchNumber(List<Integer> winningNumberList, int lottoNumber, int matchNumberCount) {
-        if(winningNumberList.contains(lottoNumber)) {
+        if (winningNumberList.contains(lottoNumber)) {
             matchNumberCount++;
         }
         return matchNumberCount;
@@ -57,8 +57,9 @@ public class LottoPlayService {
     private void calculateProfitRate(Lottos lottos) {
         int money = lottos.getPlayCount() * LottoRoleConst.LOTTO_PRICE;
         int totalWinningAmount = 0;
-        for (LottoMatchNumber lottoMatchNumber : LottoMatchNumber.allMatchNumber()){
-            totalWinningAmount += lottos.getResultCount(lottoMatchNumber.getMatchNumberCount()) * lottoMatchNumber.getWinningAmount();
+        for (LottoMatchNumber lottoMatchNumber : LottoMatchNumber.allMatchNumber()) {
+            totalWinningAmount +=
+                    lottos.getResultCount(lottoMatchNumber.getMatchNumberCount()) * lottoMatchNumber.getWinningAmount();
         }
         double resultProfitRate = (double) totalWinningAmount / money;
         lottos.setResultProfitRate(resultProfitRate);

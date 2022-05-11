@@ -37,7 +37,7 @@ public class ResultView {
                     lottoMatchNumber.getWinningAmount(), resultCount);
             resultView.append(resultMatchMessage);
         }
-        setProfitRate(lottos,resultView);
+        setProfitRate(lottos, resultView);
         return resultView.toString();
     }
 

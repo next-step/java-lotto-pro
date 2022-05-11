@@ -18,7 +18,8 @@ public class Application {
         playLotto(lottoGameController, lottoGameDTO);
     }
 
-    private void playLotto(LottoGameController lottoGameController, LottoGameDTO requestLottoGameDTO) throws IOException {
+    private void playLotto(LottoGameController lottoGameController, LottoGameDTO requestLottoGameDTO)
+            throws IOException {
         boolean isInputError;
         LottoGameDTO lottoGameDTO;
         do {
@@ -50,7 +51,7 @@ public class Application {
             lottoGameDTO = lottoGameController.purchaseLotto(moneyWord);
             isInputError = lottoGameDTO.isInputError();
             printMessage(lottoGameDTO);
-        }while (isInputError);
+        } while (isInputError);
 
         return lottoGameDTO;
     }

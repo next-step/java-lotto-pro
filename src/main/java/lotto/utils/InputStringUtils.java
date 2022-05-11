@@ -12,7 +12,7 @@ public class InputStringUtils {
 
     public static List<Integer> splitToNumberListByDelimiter(String inputString, String delimiter) {
         List<Integer> numberList = new ArrayList<>();
-        for (String numberWord : inputString.split(delimiter)){
+        for (String numberWord : inputString.split(delimiter)) {
             numberList.add(wordToNumber(numberWord));
         }
         return numberList;

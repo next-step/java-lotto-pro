@@ -9,7 +9,8 @@ public class LottoGeneratorService {
 
     public Lotto generateLotto() {
         List<Integer> randomNumberToList = RandomNumberUtils
-                .generateRandomNumberToList(LottoRoleConst.LOW_NUMBER, LottoRoleConst.MAX_NUMBER, LottoRoleConst.LOTTO_NUMBER_LIST_SIZE);
+                .generateRandomNumberToList(LottoRoleConst.LOW_NUMBER, LottoRoleConst.MAX_NUMBER,
+                        LottoRoleConst.LOTTO_NUMBER_LIST_SIZE);
         return new Lotto(randomNumberToList);
     }
 }
