@@ -2,6 +2,7 @@ package stringcalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static stringcalculator.ErrorMessageConstants.NON_POSITIVE_INTEGER_INPUT_ERROR;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +43,8 @@ public class StringAddCalculatorTest {
     @Test
     public void splitAndSum_negative() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage(NON_POSITIVE_INTEGER_INPUT_ERROR);
     }
 
     @Test
@@ -55,6 +57,6 @@ public class StringAddCalculatorTest {
     void checkIntegerType() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("a,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("정수 타입을 입력 하세요");
+                .hasMessage(NON_POSITIVE_INTEGER_INPUT_ERROR);
     }
 }
