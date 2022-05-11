@@ -14,6 +14,7 @@ public class ResultView {
     private static final String LOTTO_MESSAGE_END_CHAR = "]";
     private static final String PROFIT_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개";
 
     public static void printLottos(Lottos lottos) {
         printQuantity(lottos.getQuantity());
@@ -45,7 +46,7 @@ public class ResultView {
         for (final Result result : results) {
             count = checkCount(printTarget, count, result);
         }
-        String message = String.format("%d개 일치 (%d원)- %d개", printTarget.getContainsCount(),
+        String message = String.format(RESULT_MESSAGE_FORMAT, printTarget.getContainsCount(),
             printTarget.getPrizeMoney(), count);
         System.out.println(message);
     }
