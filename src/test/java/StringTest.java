@@ -17,4 +17,13 @@ public class StringTest {
         assertThat(arraysForOneAndTwo).contains("1", "2");
         assertThat(arraysForOneAndTwo).containsExactly("1", "2"); // 순서 포함해서 정확하게 일치
     }
+
+
+    @Test
+    void substring() {
+        //요구사항 2번
+        String example = "(1,2)";
+        example = example.substring(1, 4);
+        assertThat(example).isEqualTo("1,2");
+    }
 }
