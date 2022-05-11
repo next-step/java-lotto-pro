@@ -7,3 +7,19 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 1단계 - 학습 테스트 실습
+* String 클래스 학습
+  * split()
+  * contains()
+  * containsExactly()
+  * substring()
+  * charAt()
+  * StringIndexOutOfBoundsException
+  * Junit @DisplayName 활용
+    
+
+* Set Collection 학습
+  * size()
+  * contains()
+  * Junit ParameterizedTest 활용
