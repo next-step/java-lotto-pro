@@ -12,6 +12,9 @@ public class StringAddCalculator {
 
     private static final int DEFAULT_SUM = 0;
 
+    private StringAddCalculator() {
+    }
+
     public static int splitAndSum(String text) {
         if (isNotNumeric(text)) {
             return DEFAULT_SUM;
