@@ -1,4 +1,4 @@
-package level1;
+package camp.nextstep.edu.level1;
 
 import org.junit.jupiter.api.Test;
 
