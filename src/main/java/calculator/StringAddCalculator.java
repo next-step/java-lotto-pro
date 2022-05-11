@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    private static final int ZERO = 0;
+    private static final int MIN_NUMBER = 0;
     private static final String REGEX_DELIMITER = "|";
     private static final List<String> STANDARD_DELIMISTERS = Arrays.asList(",", ":");
     private static final String CUSTOM_REGEX = "//(.)\n(.*)";
@@ -18,7 +18,7 @@ public class StringAddCalculator {
 
     public static int splitAndSum(final String expression) {
         if (isNullOrEmpty(expression)) {
-            return ZERO;
+            return MIN_NUMBER;
         }
 
         List<String> stringNumbers = split(expression);
@@ -47,7 +47,7 @@ public class StringAddCalculator {
                 .peek(StringAddCalculator::checkNegativeNumber)
                 .sum();
     }
-    
+
     private static void checkNegativeNumber(final int number) {
         if (number < 0) {
             throw new RuntimeException("음수는 허용하지 않습니다. number=" + number);
