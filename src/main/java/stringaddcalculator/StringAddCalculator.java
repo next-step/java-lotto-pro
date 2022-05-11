@@ -11,14 +11,14 @@ public class StringAddCalculator {
     public static final String NUMERIC_PATTERN = "\\d";
 
     public static int splitAndSum(final String text) {
-        if (validateNullOrEmpty(text)) {
+        if (isNullOrEmpty(text)) {
             return ZERO;
         }
 
         return sumNumbers(parsingNumbers(splitText(text)));
     }
 
-    private static boolean validateNullOrEmpty(final String text) {
+    private static boolean isNullOrEmpty(final String text) {
         if (text == null) {
             return true;
         }
