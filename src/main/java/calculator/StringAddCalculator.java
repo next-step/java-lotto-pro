@@ -21,11 +21,7 @@ public class StringAddCalculator {
     }
 
     private static String[] splitValue(String input) {
-        if (isSingleDigit(input)) {
-            return new String[]{input};
-        }
-
-        if (isCommaInput(input)) {
+        if (isSingleDigit(input) || isCommaInput(input)) {
             return input.split(COMMA_DELIMITER);
         }
         return input.split(COMMA_DELIMITER);
