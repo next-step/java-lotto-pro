@@ -78,4 +78,6 @@ public class LottoPlayService {
         return matchNumberCount;
     }
 
+    public void calculateProfitRate(Lottos lottos) {
+    }
 }

@@ -38,4 +38,8 @@ public class Lottos {
     public void updateResultCountMap(int matchNumberCount) {
         resultCountMap.put(matchNumberCount,resultCountMap.getOrDefault(matchNumberCount,0)+1);
     }
+
+    public double getResultProfitRate() {
+        return 0;
+    }
 }
