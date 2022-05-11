@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,12 +32,7 @@ public class StringAddCalculator {
     }
 
     private static int sum(String[] tokens) {
-        int sum = DEFAULT_SUM;
-        for (String s : tokens) {
-            sum += getUnsignedInt(s);
-        }
-
-        return sum;
+        return Arrays.stream(tokens).map(StringAddCalculator::getUnsignedInt).reduce(DEFAULT_SUM, Integer::sum);
     }
 
     private static int getUnsignedInt(String token) {
