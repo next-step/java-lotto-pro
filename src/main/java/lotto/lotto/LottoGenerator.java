@@ -6,5 +6,9 @@ public interface LottoGenerator {
         return new RandomLottoGenerator();
     }
 
+    static LottoGenerator commaSplitting(String value) {
+        return new StringSplittingLottoGenerator(value, ",");
+    }
+
     Lotto generate();
 }
