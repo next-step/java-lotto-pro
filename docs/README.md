@@ -27,3 +27,33 @@
 #### 요구 사항3
 - contains 메소드를 사용하여 내부값이 아닌 경우에도 false 를 반환
 - 내부 값인 경우에는 true 를 반환
+
+---------
+
+## STEP 2
+### 문자열 덧셈 계산기
+### 기능 요구 사항 
+- 쉼표(,), 콜론(:), 커스텀 으로 구분자를 구별 한다.
+- 입력 값을 구분자 기준으로 분리하여 숫자의 합을 반환 한다.
+- 커스텀 구분자는 "//" 와 "\n" 사이에 있어야 한다.
+- 숫자 이외의 값 또는 음수 전달시 ***RuntimeException*** 예외를 throw 한다.
+
+### 프로그래밍 요구 사항
+- depth 는 1 이다.
+- 메소드는 10 라인 안으로 작성 한다.
+- method 는 한가지 역할만 한다.
+- no else 이다.
+
+### class 역할
+- Separator
+  - static class 이며 differentiate 함수를 통하여 입력 값을 구분자로 구별하여 String 배열 값을 반환한다.
+- StringAddCalculator
+    - static class 이며 splitAndSum 함수를 가지고 있으며 String 값을 인수로 받아서 int 값을 반환한다.
+- WholeNumber
+  - VO 이며 , 정수 값만 가질수 있다.
+  - 정수 가 아닌 다른 값이 입력으로 들어오면 RuntimeException 예외를 throw 한다.
+- WholeNumberGenerator 
+  - static class 로서 create 를 통해서 WholeNumbers 를 반환한다.
+- WholeNumbers 
+  - sum 메소드를 통해서 WholeNumber 들을 계산하여 int 값을 반환한다.
+
