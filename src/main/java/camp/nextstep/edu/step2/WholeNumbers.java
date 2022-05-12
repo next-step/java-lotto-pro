@@ -17,6 +17,6 @@ public class WholeNumbers {
     public int sum() {
         return numbers.stream()
                 .reduce(new WholeNumber("0"), WholeNumber::add)
-                .of();
+                .value();
     }
 }

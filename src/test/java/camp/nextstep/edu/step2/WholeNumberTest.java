@@ -47,6 +47,6 @@ public class WholeNumberTest {
     @ParameterizedTest
     @CsvSource(value = {"1:1", "2:2"}, delimiter = ':')
     void ofTest(final String strNumber, final int expectedInteger) {
-        assertThat(new WholeNumber(strNumber).of()).isEqualTo(expectedInteger);
+        assertThat(new WholeNumber(strNumber).value()).isEqualTo(expectedInteger);
     }
 }
