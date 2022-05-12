@@ -16,7 +16,7 @@ class SumNumbersTest {
         SumNumbers sumNumbers = new SumNumbers(positiveNumbers);
 
         //when
-        int sumResult = sumNumbers.getSumResult();
+        int sumResult = sumNumbers.sumResult();
 
         //then
         assertThat(sumResult).isEqualTo(6);
@@ -31,7 +31,7 @@ class SumNumbersTest {
         SumNumbers sumNumbers = new SumNumbers(positiveNumbers);
 
         //when
-        int sumResult = sumNumbers.getSumResult();
+        int sumResult = sumNumbers.sumResult();
 
         //then
         assertThat(sumResult).isEqualTo(0);

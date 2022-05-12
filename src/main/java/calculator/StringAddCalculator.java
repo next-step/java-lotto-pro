@@ -7,6 +7,6 @@ public class StringAddCalculator {
     public static int splitAndSum(String text) {
         PositiveNumbers positiveNumbers = PositiveNumbers.newInstance(text);
         SumNumbers sumNumbers = new SumNumbers(positiveNumbers);
-        return sumNumbers.getSumResult();
+        return sumNumbers.sumResult();
     }
 }

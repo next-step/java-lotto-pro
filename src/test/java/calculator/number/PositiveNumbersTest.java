@@ -1,6 +1,5 @@
 package calculator.number;
 
-import calculator.split.StringSplitter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +21,7 @@ class PositiveNumbersTest {
 
         //then
         assertThat(positiveNumberList.size()).isEqualTo(1);
-        assertThat(positiveNumberList.get(0).getNumber()).isEqualTo(0);
+        assertThat(positiveNumberList.get(0).parseNumber()).isEqualTo(0);
     }
 
     @DisplayName("null 이 입력될 경우 0 반환")
@@ -37,7 +36,7 @@ class PositiveNumbersTest {
 
         //then
         assertThat(positiveNumberList.size()).isEqualTo(1);
-        assertThat(positiveNumberList.get(0).getNumber()).isEqualTo(0);
+        assertThat(positiveNumberList.get(0).parseNumber()).isEqualTo(0);
     }
 
     @DisplayName("기본 구분자인 쉼표(,)와 콜론(:)으로 PositiveNumber 배열 반환")

@@ -18,7 +18,7 @@ public class PositiveNumber {
         }
     }
 
-    public Integer getNumber() {
+    public int parseNumber() {
         StringToIntegerParser parser = new StringToIntegerParser(numberStr);
         return parser.parseInt();
     }

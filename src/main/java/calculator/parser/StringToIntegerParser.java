@@ -10,7 +10,7 @@ public class StringToIntegerParser {
         this.str = str;
     }
 
-    public Integer parseInt() {
+    public int parseInt() {
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException ne) {
