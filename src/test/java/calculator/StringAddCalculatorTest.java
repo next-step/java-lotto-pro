@@ -13,14 +13,14 @@ class StringAddCalculatorTest {
     @DisplayName("Calculator는 null을 받을 경우 0을 반환한다")
     void calculator_on_null() {
         Integer sum = StringAddCalculator.splitAndSum(null);
-        assertThat(sum).isEqualTo(0);
+        assertThat(sum).isZero();
     }
 
     @Test
     @DisplayName("Calculator는 빈 값을 받을 경우 0을 반환한다")
     void calculator_on_empty() {
         Integer sum = StringAddCalculator.splitAndSum("");
-        assertThat(sum).isEqualTo(0);
+        assertThat(sum).isZero();
     }
 
     @Test

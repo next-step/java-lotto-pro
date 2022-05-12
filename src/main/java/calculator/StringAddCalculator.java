@@ -11,6 +11,10 @@ import java.util.stream.Collectors;
 public class StringAddCalculator {
     private static final Integer DEFAULT_RESULT_VALUE = 0;
 
+    private StringAddCalculator() {
+        throw new AssertionError();
+    }
+
     public static Integer splitAndSum(String string) {
         if (StringUtil.isNullOrEmpty(string)) {
             return DEFAULT_RESULT_VALUE;
