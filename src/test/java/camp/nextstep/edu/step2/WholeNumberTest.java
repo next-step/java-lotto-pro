@@ -15,7 +15,7 @@ public class WholeNumberTest {
     @DisplayName("정수를 입력받고 VO 객체이다")
     @ParameterizedTest
     @CsvSource(value = {"1:1:true", "1:2:false"}, delimiter = ':')
-    void createTest(final int source, final int destination, final boolean expectedResult) {
+    void createTest(final String source, final String destination, final boolean expectedResult) {
         assertThat(Objects.equals(new WholeNumber(source), new WholeNumber(destination))).isEqualTo(expectedResult);
     }
 

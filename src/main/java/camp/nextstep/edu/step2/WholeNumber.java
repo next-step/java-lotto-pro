@@ -5,11 +5,7 @@ import java.util.Objects;
 public class WholeNumber {
     private final int number;
 
-    public WholeNumber(final int number) {
-        this.number = number;
-    }
-
-    public WholeNumber (final String input) {
+    public WholeNumber(final String input) {
         this.number = wholeIntegerBy(input);
     }
 
