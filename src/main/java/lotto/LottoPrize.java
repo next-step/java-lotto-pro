@@ -23,6 +23,9 @@ public enum LottoPrize {
     }
 
     public static LottoPrize valueOf(int matchCount) {
-        return null;
+        return Arrays.stream(values())
+                     .filter(it -> it.matchCondition.test(matchCount))
+                     .findFirst()
+                     .orElse(MISS);
     }
 }
