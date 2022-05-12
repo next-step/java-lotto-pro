@@ -32,11 +32,22 @@ public class StringAddCalculator {
     }
 
     private static int sum(int[] inputs) {
+        if (isNegativeNumber(inputs)) {
+            throw new RuntimeException();
+        }
         return Arrays.stream(inputs).sum();
     }
 
     private static int[] changeNumbers(String[] inputs) {
-        return Arrays.stream(inputs).mapToInt(Integer::parseInt).toArray();
+        try {
+            return Arrays.stream(inputs).mapToInt(Integer::parseInt).toArray();
+        } catch (NumberFormatException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    private static boolean isNegativeNumber(int[] inputs) {
+        return Arrays.stream(inputs).anyMatch(input -> input < ZERO);
     }
 
 }
