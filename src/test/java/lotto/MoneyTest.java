@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("Money 클래스 테스트")
 class MoneyTest {
 
-    private static final Purchasable PRICE_IS_ONE_THOUSAND = () -> Money.ONE_THOUSAND;
+    private static final Purchasable PRICE_IS_ONE_THOUSAND = () -> Money.of("1000");
     private static final Purchasable PRICE_IS_TEN = () -> Money.of("10");
     private static final Purchasable PRICE_IS_ONE = () -> Money.of("1");
 
@@ -66,8 +66,9 @@ class MoneyTest {
     @ParameterizedTest
     @ArgumentsSource(SuccessfulPurchaseArgumentsProvider.class)
     void successfulPurchase(Purchasable purchasable) {
+        Money oneThousand = Money.of("1000");
         assertThatNoException().isThrownBy(() -> {
-            Money.ONE_THOUSAND.purchase(purchasable);
+            oneThousand.purchase(purchasable);
         });
     }
 
@@ -89,7 +90,9 @@ class MoneyTest {
     void failurePurchase(Purchasable purchasable) {
         assertThatThrownBy(() -> {
             Money.of("1").purchase(purchasable);
-        });
+        })
+        .isInstanceOf(CanNotPurchaseException.class)
+        .hasMessageContaining("구매가 불가능 합니다.");
     }
 
     static class FailurePurchaseArgumentsProvider implements ArgumentsProvider {

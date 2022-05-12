@@ -1,13 +1,13 @@
 package lotto;
 
-public class Money {
+public class Money implements Comparable<Money> {
 
     public static final Money ONE_THOUSAND = of("1000");
 
-    private final int value;
+    private int value;
 
     protected Money(String value) {
-        throw new RuntimeException("create");
+        this.value = validate(value);
     }
 
     public static Money of(String value) {
@@ -15,10 +15,40 @@ public class Money {
     }
 
     public boolean canPurchase(Purchasable purchasable) {
-        throw new RuntimeException("canPurchase");
+        if (purchasable == null) {
+            return false;
+        }
+        final Money money = purchasable.price();
+        int i = compareTo(money);
+        return i >= 0;
     }
 
     public void purchase(Purchasable purchasable) {
-        throw new RuntimeException("purchase");
+        if (!canPurchase(purchasable)) {
+            throw new CanNotPurchaseException(this, purchasable);
+        }
+        final Money money = purchasable.price();
+        value -= money.value;
+    }
+
+    private static int validate(String value) {
+        if (value == null || value.isEmpty()) {
+            throw new MoneyFormatException(value);
+        }
+        int number = Integer.parseInt(value);
+        if (number <= 0) {
+            throw new MoneyFormatException(value);
+        }
+        return number;
+    }
+
+    @Override
+    public int compareTo(Money other) {
+        return Integer.compare(this.value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }
