@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class LottoNumber {
     private final int number;
+    private static final int MIN = 1;
+    private static final int MAX = 45;
 
     public LottoNumber(final int number) {
         validation(number);
@@ -11,7 +13,7 @@ public class LottoNumber {
     }
 
     private void validation(final int number) {
-        if (number < 1 || number > 45) {
+        if (MIN > number || number > MAX) {
             throw new IllegalArgumentException(String.format("invalid input : %d", number));
         }
     }
