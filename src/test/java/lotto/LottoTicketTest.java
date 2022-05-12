@@ -14,7 +14,7 @@ class LottoTicketTest {
     void getLottoNumber(String money, int expected) {
         LottoPurchaseQuantity lottoPurchaseQuantity = new LottoPurchaseQuantity(money);
         LottoTicket lottoTickets = new LottoTicket(lottoPurchaseQuantity);
-        List<LottoNumberInterface> lottoNumbers = lottoTickets.getLottoNumbers();
+        List<LottoNumber> lottoNumbers = lottoTickets.getLottoNumbers();
 
         assertAll(
                 () -> assertThat(lottoNumbers).isNotNull(),

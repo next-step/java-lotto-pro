@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoTicket {
-    private final List<LottoNumberInterface> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(LottoPurchaseQuantity lottoPurchaseQuantity) {
         lottoNumbers = Stream.generate(AutomaticLottoNumber::new)
@@ -13,7 +13,7 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumberInterface> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 }
