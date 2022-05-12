@@ -1,6 +1,7 @@
 package camp.nextstep.edu.step3;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,6 +10,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoTest {
 
@@ -19,6 +21,13 @@ public class LottoTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(createLottoNumberArray(numbers)))
                 .withMessageContaining("LottoNumberArray invalid size : ");
+    }
+
+    @DisplayName("로또는 입력값을 정렬해서 저장한다.")
+    @Test
+    void inputSortTest() {
+        assertThat(new Lotto(createLottoNumberArray(new int[] {4,5,6,1,2,3})))
+                .isEqualTo(new Lotto(createLottoNumberArray(new int[] {1,2,3,5,4,6})));
     }
 
     private static Stream<Arguments> provideIntegerArrays() {
