@@ -6,11 +6,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step2.ArgumentResolver.DefaultResolver;
+import step2.ArgumentResolver.EmptyStringResolver;
 import step2.ArgumentResolver.Resolver;
 
 public class ResolverTest {
 
     Resolver defaultResolver = new DefaultResolver();
+    Resolver emptyStringResolver = new EmptyStringResolver();
 
     @ParameterizedTest
     @CsvSource(value = {"1,2,3&,&3", "1,2,3&:&1", "1:2:3&:&3", "1:2:3&,&1"}, delimiter = '&')
@@ -29,8 +31,19 @@ public class ResolverTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1,2,3&3", "1,2,3&3", "1:2:3&3", "1:2,3&3"}, delimiter = '&')
-    public void defaultResolverTest(String source, String expectedSize) {
+    public void defaultResolverTest(String source, int expectedSize) {
         assertThat(defaultResolver.canResolve(source)).isTrue();
-        assertThat(defaultResolver.resolve(source)).hasSize(3).containsExactly("1", "2", "3");
+        assertThat(defaultResolver.resolve(source))
+            .hasSize(expectedSize)
+            .containsExactly("1", "2", "3");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {" &1", "   &1"}, delimiter = '&')
+    public void emptyStringResolverTest(String source, int expectedSize) {
+        assertThat(emptyStringResolver.canResolve(source)).isTrue();
+        assertThat(emptyStringResolver.resolve(source))
+            .hasSize(expectedSize)
+            .containsExactly("0");
     }
 }
