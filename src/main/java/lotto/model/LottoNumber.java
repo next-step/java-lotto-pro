@@ -95,19 +95,12 @@ public class LottoNumber implements LottoNumberInterface {
 
     @Override
     public List<Integer> getLottoNumber() {
-        return lottoNumber;
+        return Collections.unmodifiableList(lottoNumber);
     }
 
     @Override
     public void sortLottoNumber(List<Integer> lottoNumber) {
         Collections.sort(lottoNumber);
-    }
-
-    @Override
-    public String toString() {
-        return "LottoNumber{" +
-                "lottoNumber=" + lottoNumber +
-                '}';
     }
 
     @Override
