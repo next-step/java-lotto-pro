@@ -48,7 +48,7 @@ public class StringAddCalculator {
 
     private static void validNegativeNumber(int number) {
         if (number < MIN_VALUE) {
-            throw new RuntimeException("음수는 입력할 수 없습니다.");
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
     }
 
