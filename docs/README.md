@@ -87,7 +87,8 @@
   - 음수 등 잘못된 값이 입력되면 RuntimeException 예외가 발생한다.
 
 - Lotto
-  - 로또는 LottoNumber 숫자 6개 를 가진다.
+  - 로또는 LottoNumber 숫자 6개 를 가지며, 6개가 아니면 RuntimeException 을 발생한다.
+  - 로또는 입력한 LottoNumber 숫자들이 정렬 한 후 저장한다.
   - 로또는 check 메소드는 당첨 번호 Lotto 를 입력으로 받고 입력된 값을 통해서 일치한 갯수를 반환한다.
 
 - Hit
