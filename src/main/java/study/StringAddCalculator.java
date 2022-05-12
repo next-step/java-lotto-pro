@@ -2,6 +2,8 @@ package study;
 
 public class StringAddCalculator {
 
+    private static final String SEPARATOR = ",|:";
+
     public static int splitAndSum(String text) {
         if (isNullOrEmpty(text)) {
             return 0;
@@ -10,7 +12,7 @@ public class StringAddCalculator {
     }
 
     private static String[] splitText(String text) {
-        return text.split(",");
+        return text.split(SEPARATOR);
     }
 
     private static int[] convertStringArrayToIntArray(String[] stringNumbers) {
