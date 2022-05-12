@@ -5,8 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoConstant.LOTTO_END_NUMBER;
-import static lotto.domain.LottoConstant.LOTTO_START_NUMBER;
+import static lotto.domain.LottoConstant.*;
 
 public class LottoGame {
     private static final List<LottoNo> lottoNumbers = new ArrayList<>();
@@ -23,5 +22,18 @@ public class LottoGame {
                 .limit(LottoConstant.LOTTO_SIZE)
                 .collect(Collectors.toList());
         return new Lotto(lottoNoList);
+    }
+
+    public static MyLotto purchaseLotto(int totalPrice) {
+        int lottoQuantity = getLottoQuantity(totalPrice);
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < lottoQuantity; i++) {
+            lottoList.add(generateLotto());
+        }
+        return new MyLotto(lottoList);
+    }
+
+    private static int getLottoQuantity(int totalPrice) {
+        return totalPrice / LOTTO_PRICE;
     }
 }
