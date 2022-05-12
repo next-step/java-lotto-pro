@@ -31,7 +31,8 @@ class LottoNumbersTest {
         LottoNumber winningLottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoPurchaseQuantity lottoPurchaseQuantity = new LottoPurchaseQuantity("10000");
         LottoNumbers lottoNumbers = new LottoNumbers(lottoPurchaseQuantity);
+        LottoRanks lottoRanks = lottoNumbers.getLottoRanks(winningLottoNumber);
 
-        assertThat(lottoNumbers.getLottoRanks(winningLottoNumber)).hasSize(lottoPurchaseQuantity.getQuantity());
+        assertThat(lottoRanks.getLottoRanks()).hasSize(lottoPurchaseQuantity.getQuantity());
     }
 }

@@ -17,9 +17,11 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public List<LottoRank> getLottoRanks(LottoNumber winningLottoNumber) {
-        return lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.getLottoRank(winningLottoNumber))
-                .collect(Collectors.toList());
+    public LottoRanks getLottoRanks(LottoNumber winningLottoNumber) {
+        return LottoRanks.of(
+                lottoNumbers.stream()
+                        .map(lottoNumber -> lottoNumber.getLottoRank(winningLottoNumber))
+                        .collect(Collectors.toList())
+        );
     }
 }
