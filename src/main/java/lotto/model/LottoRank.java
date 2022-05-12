@@ -21,6 +21,14 @@ public enum LottoRank {
         this.cashPrize = cashPrize;
     }
 
+    public int getHits() {
+        return hits;
+    }
+
+    public int getCashPrize() {
+        return cashPrize;
+    }
+
     public static LottoRank findByHits(int hits) {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.hits == hits)

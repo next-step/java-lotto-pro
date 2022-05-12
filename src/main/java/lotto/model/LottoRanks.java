@@ -1,6 +1,9 @@
 package lotto.model;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoRanks {
     private List<LottoRank> lottoRanks;
@@ -13,7 +16,8 @@ public class LottoRanks {
         return new LottoRanks(lottoRanks);
     }
 
-    public List<LottoRank> getLottoRanks() {
-        return lottoRanks;
+    public Map<LottoRank, Long> resultLottoRanks() {
+        return lottoRanks.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }
