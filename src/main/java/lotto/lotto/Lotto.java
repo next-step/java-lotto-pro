@@ -35,9 +35,16 @@ public class Lotto implements Purchasable {
     public int countMatches(Lotto other) {
         int count = 0;
         for (LottoNumber lottoNumber : other.lottoNumbers) {
-            count += this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
+            count += matches(lottoNumber);
         }
         return count;
+    }
+
+    private int matches(LottoNumber lottoNumber) {
+        if (this.lottoNumbers.contains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
     }
 
     List<LottoNumber> getLottoNumbers() {
