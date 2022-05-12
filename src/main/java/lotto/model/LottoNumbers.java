@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.Collections;
 import java.util.List;
 
+import lotto.LottoMachine;
 import lotto.LottoUtil;
 
 public class LottoNumbers {
@@ -36,12 +37,12 @@ public class LottoNumbers {
 	private void validationCount(List<LottoNumber> lottoNumbers) {
 		if (!isLottoCount(lottoNumbers)) {
 			throw new IllegalArgumentException("size:" + lottoNumbers.stream().distinct().count() + " LottoSize: "
-					+ LottoUtil.LOTTO_NUMBERS_COUNT);
+					+ LottoMachine.LOTTO_NUMBERS_COUNT);
 		}
 	}
 
 	private boolean isLottoCount(List<LottoNumber> lottoNumbers) {
-		return lottoNumbers.stream().distinct().count() == LottoUtil.LOTTO_NUMBERS_COUNT;
+		return lottoNumbers.stream().distinct().count() == LottoMachine.LOTTO_NUMBERS_COUNT;
 	}
 
 	// 반환값이 count가 좋을지 list로 반환하여 처리하는게 좋을지 고민해볼것
