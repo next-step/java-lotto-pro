@@ -11,12 +11,10 @@ public class NumberTest {
 	@Test
 	@DisplayName("숫자가 아닌 값이나 음수가 입력된 경우 예외발생 테스트")
 	void number_test_예외테스트() {
-		assertAll(
-				() -> assertThrows(RuntimeException.class, () -> new Number("a")),
-				() -> assertThrows(RuntimeException.class, () -> new Number("-1"))
-		);
+		assertAll(() -> assertThrows(RuntimeException.class, () -> new Number("a")),
+				() -> assertThrows(RuntimeException.class, () -> new Number("-1")));
 	}
-	
+
 	@Test
 	@DisplayName("생성 테스트")
 	void number_test() {

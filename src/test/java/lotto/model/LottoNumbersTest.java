@@ -27,34 +27,34 @@ public class LottoNumbersTest {
 
 	@Test
 	@DisplayName("List의 크기가 6보다 작은 경우 예외 테스트")
-	void create_lottoNumbers_size_down_예외(){
+	void create_lottoNumbers_size_down_예외() {
 		LottoNumbers.remove(0);
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(LottoNumbers));
+		assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(LottoNumbers));
 	}
-	
+
 	@Test
 	@DisplayName("List의 크기가 6보다 큰 경우 예외 테스트")
-	void create_lottoNumbers_size_over_예외(){
+	void create_lottoNumbers_size_over_예외() {
 		LottoNumbers.add(new LottoNumber(17));
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(LottoNumbers));
+		assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(LottoNumbers));
 	}
-	
+
 	@Test
 	@DisplayName("중복된 값이 제거되었을 때 사이즈가 6이 아닌경우 예외 테스트")
-	void create_lottoNumbers_distinct_예외(){
+	void create_lottoNumbers_distinct_예외() {
 		LottoNumbers.remove(0);
 		LottoNumbers.add(new LottoNumber(22));
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(LottoNumbers));
+		assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(LottoNumbers));
 	}
-	
+
 	@Test
 	@DisplayName("List의 크기가 6인 lotto생성")
-	void create_lottoNumbers(){
+	void create_lottoNumbers() {
 		LottoNumbers.remove(0);
 		LottoNumbers.add(new LottoNumber(17));
 		assertThat(new LottoNumbers(LottoNumbers).getLottoNumbers()).hasSize(6);
 	}
-	
+
 	@Test
 	@DisplayName("당첨여부를 확인하는 테스트")
 	void test() {
@@ -65,6 +65,6 @@ public class LottoNumbersTest {
 		LottoNumbers2.add(new LottoNumber(16));
 		LottoNumbers2.add(new LottoNumber(10));
 		LottoNumbers2.add(new LottoNumber(21));
-        assertEquals(new LottoNumbers(LottoNumbers).countEqualsLottoNumber(new LottoNumbers(LottoNumbers2)), 5);
+		assertEquals(new LottoNumbers(LottoNumbers).countEqualsLottoNumber(new LottoNumbers(LottoNumbers2)), 5);
 	}
 }

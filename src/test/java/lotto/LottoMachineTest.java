@@ -24,24 +24,22 @@ public class LottoMachineTest {
 
 	@Test
 	@DisplayName("로또 구입 테스트")
-	void buy_lotto(){
-        assertThat(lottoMachine.buyAutoLottos()).hasSize(1);
+	void buy_lotto() {
+		assertThat(lottoMachine.buyAutoLottos()).hasSize(1);
 	}
 
 	@Test
 	@DisplayName("당첨금액과 수익률을 구하는 기능 테스트")
-	void create_lottoNumber_int(){
+	void create_lottoNumber_int() {
 		LottoNumbers lottoNumbers = lottoMachine.buyAutoLottos().get(0);
-		
+
 		List<LottoNumber> lottoNumbers2 = new ArrayList<>();
-		for (int i=0; i<lottoNumbers.getLottoNumbers().size(); ++i) {
+		for (int i = 0; i < lottoNumbers.getLottoNumbers().size(); ++i) {
 			lottoNumbers2.add(lottoNumbers.getLottoNumbers().get(i));
 		}
 		int[] winList = lottoMachine.winList(new LottoNumbers(lottoNumbers2));
 
-		assertAll(
-				() -> assertEquals(winList[6], 1),
-				() -> assertEquals(lottoMachine.profitRate(), 2000000.00)
-		);
+		assertAll(() -> assertEquals(winList[6], 1), 
+				() -> assertEquals(lottoMachine.profitRate(), 2000000.00));
 	}
 }
