@@ -18,6 +18,15 @@ public class InputString {
     }
 
     private void setNumbers() {
+        if (input == null || input.isEmpty()) {
+            numbers.add(0);
+            return;
+        }
+
+        splitBasicDelimiter();
+    }
+
+    private void splitBasicDelimiter() {
         String[] split = input.split(BASIC_DELIMITER);
         for (String numberString : split) {
             numbers.add(Integer.parseInt(numberString));
