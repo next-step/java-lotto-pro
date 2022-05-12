@@ -13,4 +13,11 @@ public class WholeNumbersTest {
         WholeNumbers numbers = new WholeNumbers(new WholeNumber("1"), new WholeNumber("2"));
         assertThat(numbers).isNotNull();
     }
+
+    @DisplayName("sum 메소드를 통해서 더한 결과 값을 알수 있다.")
+    @Test
+    void sumTest() {
+        WholeNumbers numbers = new WholeNumbers(new WholeNumber("1"), new WholeNumber("2"));
+        assertThat(numbers.sum()).isEqualTo(3);
+    }
 }

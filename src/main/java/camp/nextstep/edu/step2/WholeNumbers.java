@@ -10,4 +10,8 @@ public class WholeNumbers {
     public WholeNumbers(final WholeNumber... wholeNumbers) {
         numbers.addAll(Arrays.asList(wholeNumbers));
     }
+
+    public int sum() {
+        return numbers.stream().mapToInt(WholeNumber::of).sum();
+    }
 }
