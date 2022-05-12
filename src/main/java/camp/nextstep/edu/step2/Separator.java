@@ -6,7 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Separator {
-    private static final String regex = "//(.)\n(.*)";
+    private static final String REGEX = "//(.)\n(.*)";
+    private static final Pattern customPattern = Pattern.compile(REGEX);
 
     public static String[] differentiate(final String input) {
         validation(input);
@@ -21,10 +22,9 @@ public class Separator {
     }
 
     private static Optional<String[]> splitByCustomDelimiter(String input) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher m = customPattern.matcher(input);
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            return Optional.of(m.group(2).split(customDelimiter));
+            return Optional.of(m.group(2).split(m.group(1)));
         }
         return Optional.empty();
     }
