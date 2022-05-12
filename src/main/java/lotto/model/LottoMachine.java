@@ -9,7 +9,11 @@ public class LottoMachine {
         lottoNumbers = new LottoNumbers(lottoPurchaseQuantity);
     }
 
-    public LottoNumbers getLottoTicket() {
+    public LottoPurchaseQuantity getLottoPurchaseQuantity() {
+        return lottoPurchaseQuantity;
+    }
+
+    public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
     }
 }

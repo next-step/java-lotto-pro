@@ -8,5 +8,5 @@ interface LottoNumberInterface {
     int NUMBER_SIZE = 6;
 
     List<Integer> getLottoNumber();
-    void sortLottoNumber();
+    void sortLottoNumber(List<Integer> lottoNumber);
 }

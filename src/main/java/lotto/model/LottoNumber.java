@@ -21,6 +21,7 @@ public class LottoNumber implements LottoNumberInterface {
 
     public LottoNumber(List<Integer> lottoNumber) {
         validateDuplicate(lottoNumber);
+        sortLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
@@ -28,6 +29,7 @@ public class LottoNumber implements LottoNumberInterface {
         validateFormat(lottoNumber);
         List<Integer> convertLottoNumber = convertList(lottoNumber);
         validateDuplicate(convertLottoNumber);
+        sortLottoNumber(convertLottoNumber);
         this.lottoNumber = convertLottoNumber;
     }
 
@@ -93,12 +95,11 @@ public class LottoNumber implements LottoNumberInterface {
 
     @Override
     public List<Integer> getLottoNumber() {
-        sortLottoNumber();
         return lottoNumber;
     }
 
     @Override
-    public void sortLottoNumber() {
+    public void sortLottoNumber(List<Integer> lottoNumber) {
         Collections.sort(lottoNumber);
     }
 

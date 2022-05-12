@@ -12,6 +12,6 @@ class LottoMachineTest {
     void getLottoList() {
         LottoMachine lottoMachine = new LottoMachine("1000");
 
-        assertThat(lottoMachine.getLottoTicket()).isNotNull();
+        assertThat(lottoMachine.getLottoNumbers()).isNotNull();
     }
 }
