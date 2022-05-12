@@ -9,14 +9,18 @@ public class LottoNumbers {
 	private List<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(List<LottoNumber> lottoNumbers) {
-		validationEmpty(lottoNumbers);
-		validationCount(lottoNumbers);
+		validation(lottoNumbers);
 		Collections.sort(lottoNumbers);
 		this.lottoNumbers = lottoNumbers;
 	}
 
 	public List<LottoNumber> getLottoNumbers() {
 		return this.lottoNumbers;
+	}
+
+	public void validation(List<LottoNumber> lottoNumbers) {
+		validationEmpty(lottoNumbers);
+		validationCount(lottoNumbers);
 	}
 
 	private void validationEmpty(List<LottoNumber> lottoNumbers) {
