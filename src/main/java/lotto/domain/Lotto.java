@@ -8,11 +8,15 @@ public class Lotto {
     private static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> numbers;
 
-    public Lotto(List<LottoNumber> numbers) {
+    protected Lotto(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
         this.numbers = numbers;
+    }
+
+    public static Lotto create(LottoNumberStrategy lottoNumberStrategy) {
+        return new Lotto(lottoNumberStrategy.create());
     }
 
     @Override
