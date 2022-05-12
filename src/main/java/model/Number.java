@@ -1,5 +1,7 @@
 package model;
 
+import util.NumberUtil;
+
 public class Number {
 	private static final int MIN_NUMBER = 0;
 	private int number;
@@ -13,7 +15,7 @@ public class Number {
 	}
 
 	private void validation(String number) {
-		if (!isNumber(number)) {
+		if (!NumberUtil.isNumber(number)) {
 			throw new RuntimeException(String.format("nubmer: %d 숫자가 아닙니다.", number));
 		}
 
@@ -24,14 +26,5 @@ public class Number {
 
 	private boolean isNatural(int number) {
 		return number > MIN_NUMBER;
-	}
-
-	private boolean isNumber(String number) {
-		try {
-			this.number = Integer.parseInt(number);
-			return true;
-		} catch (NumberFormatException e) {
-			return false;
-		}
 	}
 }

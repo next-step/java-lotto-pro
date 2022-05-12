@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.LottoUtil;
+import util.NumberUtil;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 	private int lottoNumber;
@@ -33,19 +34,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	private void validationNumber(String lottoNumber) {
-		if (!isNumber(lottoNumber)) {
+		if (!NumberUtil.isNumber(lottoNumber)) {
 			throw new IllegalArgumentException(String.format("nubmer: %d 숫자가 아닙니다.", lottoNumber));
 		}
-	}
-
-	private boolean isNumber(String lottoNumber) {
-		try {
-			Integer.parseInt(lottoNumber);
-		} catch (NumberFormatException e) {
-			return false;
-		}
-
-		return true;
 	}
 
 	@Override
