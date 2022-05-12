@@ -1,12 +1,21 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 import static lotto.domain.LottoConstant.LOTTO_SIZE;
 
 public class Lotto {
     private final List<LottoNo> lottoNoList;
+
+    public Lotto(int... values) {
+        this(Arrays.stream(values)
+                .mapToObj(LottoNo::new)
+                .collect(toList()));
+    }
 
     public Lotto(List<LottoNo> lottoNoList) {
         if (isInvalidLotto(lottoNoList)) {

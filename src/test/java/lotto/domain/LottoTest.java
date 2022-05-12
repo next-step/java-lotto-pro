@@ -11,7 +11,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LottoTest {
 
     @Test
-    @DisplayName("로또 생성 테스트(정상)")
     public void 로또_생성_테스트_정상() {
         List<LottoNo> lottoNoList = Arrays.asList(
                 new LottoNo(1),
@@ -24,7 +23,11 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 생성 테스트(비정상)")
+    public void 로또_생성_테스트_파라미터() {
+        new Lotto(1, 10, 15, 27, 35, 45);
+    }
+
+    @Test
     public void 로또_생성_테스트_비정상() {
         List<LottoNo> lottoNoList = Arrays.asList(
                 new LottoNo(1),
