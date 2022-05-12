@@ -1,4 +1,5 @@
 package study;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -6,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     @Test
-    public void splitAndSum_null_또는_빈문자() {
+    public void splitAndSum_null_또는_빈문자_0반환() {
         int result = StringAddCalculator.splitAndSum(null);
         assertThat(result).isEqualTo(0);
 
