@@ -37,4 +37,8 @@ public class WholeNumber {
     private WholeNumber add(int number) {
         return new WholeNumber(String.valueOf(this.number + number));
     }
+
+    int of() {
+        return this.number;
+    }
 }

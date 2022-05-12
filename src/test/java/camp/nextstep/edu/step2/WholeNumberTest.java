@@ -42,4 +42,11 @@ public class WholeNumberTest {
         assertThat(new WholeNumber(first).add(new WholeNumber(second)))
                 .isEqualTo(new WholeNumber(expectedNumber));
     }
+
+    @DisplayName("of 메소드를 통해서 현재 상태 값을 리턴한다")
+    @ParameterizedTest
+    @CsvSource(value = {"1:1", "2:2"}, delimiter = ':')
+    void ofTest(final String strNumber, final int expectedInteger) {
+        assertThat(new WholeNumber(strNumber).of()).isEqualTo(expectedInteger);
+    }
 }
