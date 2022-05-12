@@ -13,6 +13,6 @@ class PositiveIntegerConverterTest {
     void convertTest() {
         String[] input = new String[]{"1", "2", "3"};
         List<PositiveNumber> result = convertToPositiveNumbers(input);
-        assertThat(result).containsExactly(PositiveNumber.from("1"), PositiveNumber.from("2"), PositiveNumber.from("3"));
+        assertThat(result).containsExactly(PositiveNumber.from(1), PositiveNumber.from(2), PositiveNumber.from(3));
     }
 }

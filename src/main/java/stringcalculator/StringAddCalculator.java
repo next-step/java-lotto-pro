@@ -18,10 +18,10 @@ public class StringAddCalculator {
     }
 
     private static int sum(List<PositiveNumber> numbers) {
-        int result = 0;
+        PositiveNumber result = PositiveNumber.from(0);
         for (PositiveNumber number : numbers) {
-            result += number.getPositiveNumber();
+            result.add(number);
         }
-        return result;
+        return result.getPositiveNumber();
     }
 }

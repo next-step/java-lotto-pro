@@ -24,8 +24,17 @@ public class PositiveNumber {
         return new PositiveNumber(Integer.parseInt(input));
     }
 
+    public static PositiveNumber from(int number) {
+        return new PositiveNumber(number);
+    }
+
     private static boolean isNotPositiveInteger(String input) {
         return !input.matches(POSITIVE_INTEGER_TYPE_REGEX);
+    }
+
+    public PositiveNumber add(PositiveNumber number) {
+        this.positiveNumber += number.positiveNumber;
+        return this;
     }
 
     public int getPositiveNumber() {
