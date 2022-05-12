@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class StringTest {
+class StringTest {
     @Test
     @DisplayName("요구사항_1: '1,2' 을 , 로 split 했을 때 1 과 2 로 분리되는지")
     void split_by_comma_test() {
         String givenString = "1,2";
         String[] split = givenString.split(",");
-        assertThat(split).hasSize(2).contains("1", "2");
+        assertThat(split).hasSize(2).containsExactly("1", "2");
     }
 
     @Test
