@@ -4,8 +4,10 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.IntStream;
 import lotto.constants.LottoErrorMessage;
 
@@ -18,12 +20,15 @@ public class LottoNumber implements LottoNumberInterface {
     private final List<Integer> lottoNumber;
 
     public LottoNumber(List<Integer> lottoNumber) {
+        validateDuplicate(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
     public LottoNumber(String lottoNumber) {
         validateFormat(lottoNumber);
-        this.lottoNumber = convertList(lottoNumber);
+        List<Integer> convertLottoNumber = convertList(lottoNumber);
+        validateDuplicate(convertLottoNumber);
+        this.lottoNumber = convertLottoNumber;
     }
 
     public LottoRank getLottoRank(LottoNumber winningLottoNumber) {
@@ -49,6 +54,13 @@ public class LottoNumber implements LottoNumberInterface {
         int number = Integer.parseInt(stringNumber);
         validateNumberRange(number);
         return number;
+    }
+
+    private void validateDuplicate(List<Integer> lottoNumber) {
+        Set<Integer> numberSet = new HashSet<>(lottoNumber);
+        if (numberSet.size() != NUMBER_SIZE) {
+            throw new IllegalArgumentException(LottoErrorMessage.DUPLICATE_LOTTO_NUMBER);
+        }
     }
 
     private static void validateNumberRange(int number) {

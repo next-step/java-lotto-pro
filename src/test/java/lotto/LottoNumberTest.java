@@ -1,6 +1,7 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
@@ -39,6 +40,19 @@ class LottoNumberTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoNumber("1, 2, 3, 4, 5, 100"))
                 .withMessage(LottoErrorMessage.OUT_OF_RANGE_LOTTO_NUMBER);
+    }
+
+    @Test
+    @DisplayName("로또 번호를 중복된 값을 입력받을 때 IllegalArgumentException가 발생")
+    void inputDuplicateLottoNumberString() {
+        assertAll(
+                () -> assertThatIllegalArgumentException()
+                        .isThrownBy(() -> new LottoNumber("1, 2, 5, 4, 5, 10"))
+                        .withMessage(LottoErrorMessage.DUPLICATE_LOTTO_NUMBER),
+                () -> assertThatIllegalArgumentException()
+                        .isThrownBy(() -> new LottoNumber(Arrays.asList(1, 2, 5, 4, 5, 10)))
+                        .withMessage(LottoErrorMessage.DUPLICATE_LOTTO_NUMBER)
+        );
     }
 
     @ParameterizedTest(name = "로또 번호({0})와 당첨 번호({1})의 {2} 등수 확인")
