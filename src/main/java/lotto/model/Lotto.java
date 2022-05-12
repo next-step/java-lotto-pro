@@ -14,7 +14,7 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> getNumbers() {
+    public List<LottoNumber> getLottoNumber() {
         return this.lottoNumber;
     }
 
