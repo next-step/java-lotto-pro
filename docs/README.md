@@ -85,6 +85,7 @@
 - LottoNumber
   - LottoNumber 는 VO 객체이며, 1 ~ 45 까지 정수 값만 가진다.
   - 음수 등 잘못된 값이 입력되면 RuntimeException 예외가 발생한다.
+  - LottoNumber 는 비교 할수 있다.
 
 - Lotto
   - 로또는 LottoNumber 숫자 6개 를 가지며, 6개가 아니면 RuntimeException 을 발생한다.
