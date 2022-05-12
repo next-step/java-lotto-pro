@@ -5,7 +5,19 @@ public class StringAddCalculator {
     }
 
     public static int splitAndSum(String input) {
-        return 1;
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+        Integer[] splitNumbers = splitForNumber(input);
+        return sum(splitNumbers);
+    }
+
+    static int sum(Integer[] integers) {
+        int result = 0;
+        for (Integer integer : integers) {
+            result += integer;
+        }
+        return result;
     }
 
     static Integer[] splitForNumber(String input) {

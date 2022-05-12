@@ -51,4 +51,16 @@ public class StringAddCalculatorTest2 {
             Integer[] numbers = StringAddCalculator.splitForNumber(input);
         }).isInstanceOf(RuntimeException.class);
     }
+
+    @DisplayName("sum 함수가 잘 작동하는가?")
+    @ParameterizedTest
+    @CsvSource(delimiter = '^', value = {
+            "1#2^3",
+            "1#3#5^9",
+    })
+    public void splitForNumberTest02(@ConvertWith(IntegerArrayConverter.class) Integer[] input, int expected) {
+        int sum = StringAddCalculator.sum(input);
+        assertThat(sum)
+                .isEqualTo(expected);
+    }
 }
