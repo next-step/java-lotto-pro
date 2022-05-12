@@ -12,7 +12,8 @@
 - [x] LottoNumber는 1 이상 45 이하이다.
   - [x] 1이상 45이하가 아니라면 예외를 던진다.
 - [x] LottoNumbers는 6개의 LottoNumber로 구성된다.
-- [ ] LottoNumberGenerator는 6개의 숫자를 만든다.
+- [x] LottoGenerator는 6개의 숫자를 만든다.
+  - [x] 6개가 아니라면 예외를 던진다.
 - [ ] LottoMachine은 사용자에게 금액을 입력받는다.
   - [ ] 1~9를 제외한 문자가 입려되면 예외를 던진다.
 - [ ] LottoCalculator는 금액에 따른 갯수를 계산한다.
