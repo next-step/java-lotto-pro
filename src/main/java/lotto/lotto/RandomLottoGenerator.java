@@ -20,13 +20,7 @@ class RandomLottoGenerator implements LottoGenerator {
     }
 
     RandomLottoGenerator(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers == null || lottoNumbers.isEmpty()) {
-            throw new FailureCreatingLottoGeneratorException();
-        }
-        if (lottoNumbers.size() < Lotto.SIZE) {
-            throw new FailureCreatingLottoGeneratorException();
-        }
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = validated(lottoNumbers);
     }
 
     @Override
@@ -34,5 +28,15 @@ class RandomLottoGenerator implements LottoGenerator {
         final List<LottoNumber> copiedLottoNumbers = new ArrayList<>(lottoNumbers);
         Collections.shuffle(copiedLottoNumbers);
         return new Lotto(copiedLottoNumbers.subList(0, 6));
+    }
+
+    private static List<LottoNumber> validated(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers == null || lottoNumbers.isEmpty()) {
+            throw new FailureCreatingLottoGeneratorException(lottoNumbers);
+        }
+        if (lottoNumbers.size() < Lotto.SIZE) {
+            throw new FailureCreatingLottoGeneratorException(lottoNumbers);
+        }
+        return lottoNumbers;
     }
 }
