@@ -94,7 +94,7 @@
 - [x] LottoGenerator/RandomLottoGenerator 구현
 - [x] LottoExchanger 구현
 - [x] CommaSplittingLottoGenerator 구현
-- [ ] LottoPrize 구현
+- [x] LottoPrize 구현
 - [ ] WinningResult 구현
 - [ ] LottoAnalyzer 구현
 - [ ] LottoMachine 구현
