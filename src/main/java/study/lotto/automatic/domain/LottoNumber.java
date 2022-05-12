@@ -1,8 +1,8 @@
 package study.lotto.automatic.domain;
 
 public class LottoNumber {
-    private static final int MINIMUM_NUMBER = 1;
-    private static final int MAXIMUM_NUMBER = 45;
+    static final int MINIMUM_NUMBER = 1;
+    static final int MAXIMUM_NUMBER = 45;
 
     private int lottoNumber;
 

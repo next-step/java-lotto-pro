@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private static final int LOTTO_NUMBER_SIZE = 6;
+    static final int LOTTO_NUMBER_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
