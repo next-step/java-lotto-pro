@@ -9,6 +9,10 @@ public class WholeNumber {
         this.number = number;
     }
 
+    public WholeNumber (final String input) {
+        this.number = wholeIntegerBy(input);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -20,5 +24,9 @@ public class WholeNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    private int wholeIntegerBy(final String input) {
+        return Integer.parseInt(input);
     }
 }
