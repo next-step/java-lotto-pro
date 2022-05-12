@@ -48,4 +48,8 @@ public class LottoPurchaseQuantity {
     public int getQuantity() {
         return quantity;
     }
+
+    public int getPurchasePrice() {
+        return quantity * LOTTO_PRICE;
+    }
 }

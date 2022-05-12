@@ -4,14 +4,16 @@ import java.util.Scanner;
 import lotto.model.LottoMachine;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
+import lotto.model.LottoPurchaseQuantity;
 import lotto.model.LottoRanks;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
 public class LottoController {
     private final Scanner scanner;
-    private LottoMachine lottoMachine;
+    private LottoPurchaseQuantity lottoPurchaseQuantity;
     private LottoNumbers lottoNumbers;
+    private LottoRanks lottoRanks;
 
     public LottoController() {
         scanner = new Scanner(System.in);
@@ -20,14 +22,16 @@ public class LottoController {
     public void start() {
         buy();
         inputWinningNumber();
+        profitRate();
     }
 
     private void buy() {
         try {
             LottoInputView.printPurchase();
-            lottoMachine = new LottoMachine(scanner.nextLine());
+            LottoMachine lottoMachine = new LottoMachine(scanner.nextLine());
+            lottoPurchaseQuantity = lottoMachine.getLottoPurchaseQuantity();
             lottoNumbers = lottoMachine.getLottoNumbers();
-            LottoOutputView.printPurchaseQuantity(lottoMachine.getLottoPurchaseQuantity());
+            LottoOutputView.printPurchaseQuantity(lottoPurchaseQuantity);
             LottoOutputView.printPurchaseLottoNumbers(lottoNumbers);
         } catch (IllegalArgumentException iae) {
             LottoOutputView.printErrorMessage(iae);
@@ -39,11 +43,15 @@ public class LottoController {
         try {
             LottoInputView.printWinningNumber();
             LottoNumber winningNumber = new LottoNumber(scanner.nextLine());
-            LottoRanks lottoRanks = lottoNumbers.getLottoRanks(winningNumber);
+            lottoRanks = lottoNumbers.getLottoRanks(winningNumber);
             LottoOutputView.printRankResult(lottoRanks);
         } catch (IllegalArgumentException iae) {
             LottoOutputView.printErrorMessage(iae);
             inputWinningNumber();
         }
+    }
+
+    private void profitRate() {
+        LottoOutputView.printProfitRate(lottoPurchaseQuantity, lottoRanks);
     }
 }

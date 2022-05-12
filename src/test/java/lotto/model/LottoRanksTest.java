@@ -13,22 +13,23 @@ import org.junit.jupiter.api.Test;
 
 class LottoRanksTest {
     private List<LottoRank> lottoRankList;
+    private LottoRanks lottoRanks;
 
     @BeforeEach
     void setUp() {
         lottoRankList = Arrays.asList(LottoRank.FIRST, LottoRank.SECOND, LottoRank.FIFTH, LottoRank.FIRST);
+        lottoRanks = LottoRanks.of(lottoRankList);
     }
 
     @Test
     @DisplayName("입력 받은 로또 등급들을 설정")
     void setLottoRanks() {
-        assertThat(LottoRanks.of(lottoRankList)).isNotNull();
+        assertThat(lottoRanks).isNotNull();
     }
 
     @Test
     @DisplayName("입력 받은 로또 등급들을 결과 반환")
     void getResultLottoRanks() {
-        LottoRanks lottoRanks = LottoRanks.of(lottoRankList);
         Map<LottoRank, Long> result = lottoRanks.resultLottoRanks();
 
         assertAll(
@@ -36,5 +37,16 @@ class LottoRanksTest {
                 () -> assertEquals(1, result.get(LottoRank.SECOND)),
                 () -> assertEquals(1, result.get(LottoRank.FIFTH))
         );
+    }
+
+    @Test
+    @DisplayName("총 우승 상금을 일치하나 확인")
+    void verifyTotalCashPrize() {
+        Long totalCashPrize = lottoRanks.totalCashPrize();
+        Long expected = lottoRankList.stream()
+                .mapToLong(LottoRank::getCashPrize)
+                .sum();
+
+        assertEquals(expected, totalCashPrize);
     }
 }

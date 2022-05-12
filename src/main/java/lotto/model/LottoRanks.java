@@ -20,4 +20,10 @@ public class LottoRanks {
         return lottoRanks.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
+
+    public Long totalCashPrize() {
+        return lottoRanks.stream()
+                .mapToLong(LottoRank::getCashPrize)
+                .sum();
+    }
 }
