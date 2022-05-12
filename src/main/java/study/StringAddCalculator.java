@@ -1,5 +1,6 @@
 package study;
 
+<<<<<<< HEAD
 import static study.StringUtil.convertStringArrayToIntArray;
 
 
@@ -29,5 +30,21 @@ public class StringAddCalculator {
             sum += number;
         }
         return sum;
+=======
+public class StringAddCalculator {
+
+    public static int splitAndSum(String text) {
+        if (isNullOrEmpty(text)) {
+            return 0;
+        }
+        return 1;
+    }
+
+    private static boolean isNullOrEmpty(String text) {
+        if (text == null || text.isEmpty()) {
+            return true;
+        }
+        return false;
+>>>>>>> 37e5d9a (feat: 빈 문자열 또는 null 값을 입력할 경우 0을 반환)
     }
 }
