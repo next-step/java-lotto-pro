@@ -21,6 +21,13 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("복수의 구분자를 통해 문자열을 split하기")
+    void splitWithMultiDelimiter(){
+        String input = "1,2:3";
+        assertThat(input.split(",|:")).contains("1","2","3");
+    }
+
+    @Test
     @DisplayName("substring 테스트")
     void substringTest(){
         String input = "(1,2)";
