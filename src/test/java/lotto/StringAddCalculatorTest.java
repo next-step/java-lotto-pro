@@ -14,6 +14,7 @@ public class StringAddCalculatorTest {
 //    @CsvSource(value = {"'':0", "null:0"}, delimiter = ':')
     @CsvSource(value = {"'':0"}, delimiter = ':')
     void validateLottoInputNumber_null_또는_빈문자(String input, String expected) {
-        assertThat(StringAddCalculator.sumValue(input)).isEqualTo(Integer.parseInt(expected));
+        Sum sum = new Sum(StringAddCalculator.sumValue(input));
+        assertThat(sum).isEqualTo(new Sum(StringAddCalculator.stringToIntValue(expected)));
     }
 }
