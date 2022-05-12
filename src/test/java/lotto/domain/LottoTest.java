@@ -15,31 +15,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoTest {
-
+    private static final List<LottoNumber> LOTTO_NUMBERS = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
     @Test
     void 로또_생성_성공() {
-        List<LottoNumber> numbers = Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-
         LottoNumberStrategy strategy = () -> IntStream.rangeClosed(1, 6)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        Lotto lotto = new Lotto(numbers);
+        Lotto lotto = new Lotto(LOTTO_NUMBERS);
 
         assertThat(lotto).isNotNull();
-        assertThat(Lotto.create(strategy)).isEqualTo(new Lotto(numbers));
+        assertThat(Lotto.create(strategy)).isEqualTo(new Lotto(LOTTO_NUMBERS));
     }
 
     @Test
     void 로또_생성_실패() {
-        List<LottoNumber> numbers = Arrays.asList(
+        List<LottoNumber> invalidNumbers = Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5));
 
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new Lotto(numbers)
+                () -> new Lotto(invalidNumbers)
         ).withMessageContaining("로또 번호는 6개여야 합니다.");
     }
 
@@ -53,15 +49,15 @@ class LottoTest {
     private static Stream<Arguments> match() {
         return Stream.of(
                 Arguments.of(
-                        Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)),
-                        Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)),
+                        LOTTO_NUMBERS,
+                        LOTTO_NUMBERS,
                         Rank.FIRST),
                 Arguments.of(
-                        Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)),
+                        LOTTO_NUMBERS,
                         Arrays.asList(new LottoNumber(1), new LottoNumber(13), new LottoNumber(14), new LottoNumber(15), new LottoNumber(16), new LottoNumber(17)),
                         Rank.NONE),
                 Arguments.of(
-                        Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)),
+                        LOTTO_NUMBERS,
                         Arrays.asList(new LottoNumber(13), new LottoNumber(14), new LottoNumber(15), new LottoNumber(16), new LottoNumber(17), new LottoNumber(18)),
                         Rank.NONE)
         );
