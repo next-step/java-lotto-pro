@@ -38,17 +38,10 @@ public class SetTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:1", "2:1", "3:1", "4:0", "5:0"}, delimiter = ':')
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
     @DisplayName("1, 2, 3이 들어있는 Set 객체에 contains 메서드를 호출하였을 때 파라미터에 따라 올바른 결과가 반환되어야 한다")
-    void when_call_contains_for_elements_in_Set_should_return_correct_result(final int input, final int expected) {
+    void when_call_contains_for_elements_in_Set_should_return_correct_result(final int input, final boolean expected) {
         // when and then
-        assertThat(numbers.contains(input)).isEqualTo(convertIntegerToBoolean(expected));
-    }
-
-    private boolean convertIntegerToBoolean(final int booleanInteger) {
-        if (booleanInteger == 1) {
-            return true;
-        }
-        return false;
+        assertThat(numbers.contains(input)).isEqualTo(expected);
     }
 }
