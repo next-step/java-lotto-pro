@@ -7,6 +7,10 @@ import lotto.constant.ErrorMessage;
 
 public class RandomNumberUtils {
 
+    private RandomNumberUtils() {
+        throw new IllegalStateException(ErrorMessage.UTILITY_CLASS);
+    }
+
     public static List<Integer> generateRandomNumberToList(int low, int max, int count) {
         List<Integer> numberList = createNumberList(low, max);
         Collections.shuffle(numberList);
@@ -29,8 +33,4 @@ public class RandomNumberUtils {
         return randomNumberList;
     }
 
-
-    private RandomNumberUtils() {
-        throw new IllegalStateException(ErrorMessage.UTILITY_CLASS);
-    }
 }
