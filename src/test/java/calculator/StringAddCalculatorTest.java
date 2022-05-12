@@ -1,4 +1,4 @@
-package study;
+package calculator;
 
 import org.junit.jupiter.api.Test;
 
