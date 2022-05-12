@@ -9,21 +9,21 @@ public class Lotto {
     private final LottoNumbers lottoNumbers;
 
     public Lotto() {
-        this.lottoNumbers = new LottoNumbers(createLottoNumbers());
+        this.lottoNumbers = createLottoNumbers();
     }
 
-    private List<Integer> createLottoNumbers() {
-        List<Integer> shuffleLottoNumbers = getShuffleLottoNumbers();
+    private LottoNumbers createLottoNumbers() {
+        List<Integer> shuffleLottoNumbers = getShuffleNumbers();
 
         List<Integer> resultLottoNumbers = new ArrayList<>();
         for (int i = 0; i < LottoNumbers.LOTTO_NUMBERS_SIZE; i++) {
             resultLottoNumbers.add(shuffleLottoNumbers.get(i));
         }
 
-        return resultLottoNumbers;
+        return new LottoNumbers(resultLottoNumbers);
     }
 
-    private List<Integer> getShuffleLottoNumbers() {
+    private List<Integer> getShuffleNumbers() {
         List<Integer> shuffleLottoNumbers = new ArrayList<>();
 
         for (int i = LottoNumber.MIN_LOTTO_NUMBER; i < LottoNumber.MAX_LOTTO_NUMBER; i++) {
