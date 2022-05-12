@@ -35,7 +35,7 @@ public class Lotto {
 	}
 	
 	private static List<LottoNumber> lastWinLottoNumbers(String lastLottoNumbers) {
-		List<LottoNumber> lottoNumbers = new ArrayList<LottoNumber>();
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
 		for (String lottoNumber: lastLottoNumbers.split(", ")) {
 			lottoNumbers.add(new LottoNumber(lottoNumber));
 		}

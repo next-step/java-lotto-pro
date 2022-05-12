@@ -18,7 +18,7 @@ public class LottoMachine {
 	public List<LottoNumbers> buyAutoLottos() {
 		int times = money.getNumber()/LottoUtil.LOTTO_PRICE;
 		
-		lottos = new ArrayList<LottoNumbers>();
+		lottos = new ArrayList<>();
 		for (int i=0; i<times; ++i) {
 			lottos.add(new LottoNumbers(LottoUtil.randomLottoNumbers()));
 		}
