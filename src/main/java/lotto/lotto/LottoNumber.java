@@ -1,5 +1,7 @@
 package lotto.lotto;
 
+import java.util.Objects;
+
 class LottoNumber {
 
     static final int MIN_VALUE = 1;
@@ -8,11 +10,11 @@ class LottoNumber {
     private final int value;
 
     protected LottoNumber(String value) {
-        throw new RuntimeException("create");
+        this(parse(value));
     }
 
     protected LottoNumber(int value) {
-        throw new RuntimeException("create");
+        this.value = validated(value);
     }
 
     public static LottoNumber of(String value) {
@@ -21,5 +23,45 @@ class LottoNumber {
 
     public static LottoNumber of(int value) {
         return new LottoNumber(value);
+    }
+
+    private static int parse(String value) {
+        if (value == null || value.isEmpty()) {
+            throw new LottoNumberFormatException(value);
+        }
+        try {
+            return Integer.parseInt(value);
+        } catch (Exception e) {
+            throw new LottoNumberFormatException(value);
+        }
+    }
+
+    private static int validated(int value) {
+        if (value < MIN_VALUE || value > MAX_VALUE) {
+            throw new LottoNumberOutOfBoundsException(value);
+        }
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        LottoNumber lottoNumber = (LottoNumber) other;
+        return value == lottoNumber.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

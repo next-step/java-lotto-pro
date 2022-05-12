@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,13 +22,24 @@ class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = { LottoNumber.MIN_VALUE - 1, LottoNumber.MAX_VALUE + 1 })
-    void failureCreate(int value) {
+    @NullAndEmptySource
+    @ValueSource(strings = { "l" })
+    void failureCreateThrownLottoNumberFormatException(String value) {
         assertThatThrownBy(() -> {
             LottoNumber.of(value);
         })
         .isInstanceOf(LottoNumberFormatException.class)
         .hasMessageContaining("LottoNumber 형식에 어긋납니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { LottoNumber.MIN_VALUE - 1, LottoNumber.MAX_VALUE + 1 })
+    void failureCreateThrownLottoNumberOutOfBoundsException(int value) {
+        assertThatThrownBy(() -> {
+            LottoNumber.of(value);
+        })
+        .isInstanceOf(LottoNumberOutOfBoundsException.class)
+        .hasMessageContaining("LottoNumber 범위가 아닙니다.");
     }
 
     @ParameterizedTest
@@ -41,7 +53,7 @@ class LottoNumberTest {
         public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
             return Stream.of(
                     Arguments.of(LottoNumber.of(LottoNumber.MIN_VALUE), LottoNumber.of(1), true),
-                    Arguments.of(LottoNumber.of(LottoNumber.MIN_VALUE), LottoNumber.of(1), false),
+                    Arguments.of(LottoNumber.of(LottoNumber.MIN_VALUE), LottoNumber.of(2), false),
                     Arguments.of(LottoNumber.of(LottoNumber.MAX_VALUE), LottoNumber.of(45), true),
                     Arguments.of(LottoNumber.of(LottoNumber.MAX_VALUE), LottoNumber.of(44), false),
                     Arguments.of(LottoNumber.of(31), LottoNumber.of(31), true),
