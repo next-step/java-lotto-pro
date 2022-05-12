@@ -47,13 +47,19 @@
 ### class 역할
 - Separator
   - static class 이며 differentiate 함수를 통하여 입력 값을 구분자로 구별하여 String 배열 값을 반환한다.
+
 - StringAddCalculator
     - static class 이며 splitAndSum 함수를 가지고 있으며 String 값을 인수로 받아서 int 값을 반환한다.
+
 - WholeNumber
   - VO 이며 , 정수 값만 가질수 있다.
   - 정수 가 아닌 다른 값이 입력으로 들어오면 RuntimeException 예외를 throw 한다.
+  - add 메소드를 통해서 WholeNumber 끼리 더하기를 할수 있다.
+  - of 메소드를 통해서 int 값으로 변환할수 있다.
+  
 - WholeNumberGenerator 
   - static class 로서 create 를 통해서 WholeNumbers 를 반환한다.
+
 - WholeNumbers 
   - sum 메소드를 통해서 WholeNumber 들을 계산하여 int 값을 반환한다.
 
