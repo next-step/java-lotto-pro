@@ -24,17 +24,19 @@ public class LottoExchanger {
     public List<Lotto> exchange(Money money) {
         final List<Lotto> purchasedLottoes = new ArrayList<>();
         Money remainMoney = money;
-        while (true) {
-            final Lotto lotto = lottoGenerator.generate();
-            if (!remainMoney.canPurchase(lotto)) {
-                break;
-            }
+        Lotto lotto = lottoGenerator.generate();
+        while (remainMoney.canPurchase(lotto)) {
             remainMoney = remainMoney.purchase(lotto);
             purchasedLottoes.add(lotto);
+            lotto = lottoGenerator.generate();
         }
-        if (purchasedLottoes.isEmpty()) {
-            throw new NothingToPurchasedLottoException();
-        }
+        validateSize(purchasedLottoes, money, lotto);
         return purchasedLottoes;
+    }
+
+    private void validateSize(List<Lotto> purchasedLottoes, Money money, Lotto lotto) {
+        if (purchasedLottoes.isEmpty()) {
+            throw new NothingToPurchasedLottoException(money, lotto);
+        }
     }
 }
