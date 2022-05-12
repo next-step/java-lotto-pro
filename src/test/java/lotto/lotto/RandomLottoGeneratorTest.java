@@ -23,11 +23,13 @@ class RandomLottoGeneratorTest {
                                                                  LottoNumber.of(3), LottoNumber.of(4),
                                                                  LottoNumber.of(5), LottoNumber.of(6));
 
+    @DisplayName("RandomLottoGenerator 생성 성공")
     @Test
     void successfulCreate() {
         assertThat(new RandomLottoGenerator(lottoNumbers)).isNotNull();
     }
 
+    @DisplayName("RandomLottoGenerator 생성 실패")
     @ParameterizedTest
     @NullAndEmptySource
     @ArgumentsSource(FailureCreateArgumentsProvider.class)
@@ -50,10 +52,20 @@ class RandomLottoGeneratorTest {
         }
     }
 
+    @DisplayName("LottoNumber(1~6)이 포함된 LottoNumber 리스트를 주입하여 Lotto 생성")
     @Test
     void generate() {
+        final Lotto expected = Lotto.of(1, 2, 3, 4, 5, 6);
         final LottoGenerator fixedLottoGenerator = new RandomLottoGenerator(lottoNumbers);
         final Lotto lotto = fixedLottoGenerator.generate();
-        assertThat(lotto).isEqualTo(Lotto.of(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.getLottoNumbers()).isEqualTo(expected.getLottoNumbers());
+    }
+
+    @DisplayName("LottoNumber(1~45)이 포함된 LottoNumber 리스트를 주입하여 Lotto 생성")
+    @Test
+    void randomGenerate() {
+        final LottoGenerator lottoGenerator = LottoGenerator.random();
+        final Lotto lotto = lottoGenerator.generate();
+        assertThat(lotto).isNotNull();
     }
 }
