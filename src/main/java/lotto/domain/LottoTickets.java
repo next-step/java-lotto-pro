@@ -22,8 +22,15 @@ public class LottoTickets {
 
     private static LottoTicket createTicketAutomatically() {
         Collections.shuffle(LOTTO_NUMBER_CANDIDATES);
-        List<Integer> numbers = LOTTO_NUMBER_CANDIDATES.subList(0, 7);
+        List<Integer> numbers = new ArrayList<>(LOTTO_NUMBER_CANDIDATES.subList(0, LottoTicket.AMOUNT_OF_NUMBERS));
         Collections.sort(numbers);
         return new LottoTicket(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoTickets{" +
+                "lottoTickets=" + lottoTickets +
+                '}';
     }
 }
