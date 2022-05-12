@@ -90,7 +90,7 @@
 
 - [x] Money/Purchasable 구현
 - [x] LottoNumber 구현
-- [ ] Lotto 구현
+- [x] Lotto 구현
 - [ ] LottoGenerator/RandomLottoGenerator 구현
 - [ ] LottoExchanger 구현
 - [ ] StringSplittingLottoGenerator 구현
