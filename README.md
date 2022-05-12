@@ -9,8 +9,8 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## 기능 목록
-- [ ] LottoNumber는 1이상 45이하 이다.
-  - [ ] 1이상 45이하가 아니라면 예외를 던진다.
+- [x] LottoNumber는 1 이상 45 이하이다.
+  - [x] 1이상 45이하가 아니라면 예외를 던진다.
 - [ ] LottoNumbers는 6개의 LottoNumber로 구성된다.
 - [ ] LottoNumberGenerator는 6개의 숫자를 만든다.
 - [ ] LottoMachine은 사용자에게 금액을 입력받는다.
