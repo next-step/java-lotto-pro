@@ -20,7 +20,7 @@ class PositiveNumberTest {
     @DisplayName("음수를 문자열로 초기화하면 RuntimeException 예외가 발생한다.")
     @ParameterizedTest(name = "음수 {0}를 문자열로 초기화하면 RuntimeException 예외가 발생한다.")
     @ValueSource(strings = {"-1", "-3", "-5"})
-    void parseNotNegativeInt_negative(String input) {
+    void parseNotNegativeIntNegative(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> PositiveNumber.parseNotNegativeNumber(input))
                 .withMessage("음수가 입력되어 유효하지 않습니다.");
@@ -29,7 +29,7 @@ class PositiveNumberTest {
     @DisplayName("숫자가 아닌 문자열로 초기화하면 RuntimeException 예외가 발생한다.")
     @ParameterizedTest(name = "숫자가 아닌 문자열 {0}로 초기화하면 RuntimeException 예외가 발생한다.")
     @ValueSource(strings = {"!", ":", "e", "rr"})
-    void parseNotNegativeInt_number(String input) {
+    void parseNotNegativeIntNumber(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> PositiveNumber.parseNotNegativeNumber(input))
                 .withMessage("유효하지 않은 입력값입니다.");
