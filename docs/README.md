@@ -57,9 +57,6 @@
   - 정수 가 아닌 다른 값이 입력으로 들어오면 RuntimeException 예외를 throw 한다.
   - add 메소드를 통해서 WholeNumber 끼리 더하기를 할수 있다.
   - of 메소드를 통해서 int 값으로 변환할수 있다.
-  
-- WholeNumberGenerator 
-  - static class 로서 create 를 통해서 WholeNumbers 를 반환한다.
 
 - WholeNumbers 
   - sum 메소드를 통해서 WholeNumber 들을 계산하여 int 값을 반환한다.
