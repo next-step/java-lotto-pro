@@ -1,8 +1,8 @@
 package calculator;
 
 public class PositiveNumber {
-    private static final String NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "음수가 입력되었습니다. 0 이상 값을 입력해주세요.";
-    private static final String NOT_NUMBER_EXCEPTION_MESSAGE = "숫자 이외의 값이 입력되었습니다. 숫자를 입력해주세요.";
+    private static final String NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "음수가 입력되어 유효하지 않습니다.";
+    private static final String CANNOT_CONVERT_NUMBER_EXCEPTION_MESSAGE = "유효하지 않은 입력값입니다.";
     private final int positiveNumber;
 
     private PositiveNumber(int parseNumber) {
@@ -15,13 +15,13 @@ public class PositiveNumber {
             validNotNegativeNumber(number);
             return new PositiveNumber(number);
         } catch (NumberFormatException e) {
-            throw new RuntimeException(NOT_NUMBER_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(CANNOT_CONVERT_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
     private static void validNotNegativeNumber(int number) {
         if (isNegativeNumber(number)) {
-            throw new RuntimeException(NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
