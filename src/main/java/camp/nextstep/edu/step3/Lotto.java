@@ -15,7 +15,7 @@ public class Lotto {
     }
 
     public Hit checkTo(final Lotto prizeLotto) {
-       return Hit.valueOf(prizeLotto.checkBy(this.lottoNumbers));
+        return Hit.valueOf(prizeLotto.checkBy(this.lottoNumbers));
     }
 
     private int checkBy(List<LottoNumber> userLottoNumbers) {

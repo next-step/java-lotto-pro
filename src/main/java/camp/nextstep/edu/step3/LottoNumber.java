@@ -2,7 +2,7 @@ package camp.nextstep.edu.step3;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
     private static final int MIN = 1;
     private static final int MAX = 45;

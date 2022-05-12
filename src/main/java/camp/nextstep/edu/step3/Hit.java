@@ -1,7 +1,7 @@
 package camp.nextstep.edu.step3;
 
 public enum Hit {
-    ZERO(0 ,0),
+    ZERO(0, 0),
     ONE(1, 0),
     TWO(2, 0),
     THREE(3, 5000),
