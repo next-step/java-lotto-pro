@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class Payment {
     private final int money;
 
@@ -17,5 +19,29 @@ public class Payment {
         if (money <= 0 || money % 1000 != 0) {
             throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "money=" + money +
+                '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Payment payment = (Payment) o;
+        return money == payment.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }

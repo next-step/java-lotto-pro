@@ -17,6 +17,7 @@ public class PaymentTest {
 
         // when and then
         assertThat(new Payment(money)).isInstanceOf(Payment.class);
+        assertThat(new Payment(money)).isEqualTo(new Payment(money));
     }
 
     @Test
