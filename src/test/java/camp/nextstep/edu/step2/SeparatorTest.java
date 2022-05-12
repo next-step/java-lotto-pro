@@ -23,7 +23,8 @@ public class SeparatorTest {
         return Stream.of(
                 Arguments.of("1,2", new String[]{"1", "2"}),
                 Arguments.of("1:2", new String[]{"1", "2"}),
-                Arguments.of("1,2:3", new String[]{"1","2","3"})
+                Arguments.of("1,2:3", new String[]{"1", "2", "3"}),
+                Arguments.of("//;\n1;2;3", new String[]{"1", "2", "3"})
         );
     }
 }
