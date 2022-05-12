@@ -21,11 +21,28 @@ public class StringAddCalculator {
     }
 
     static Integer[] splitForNumber(String input) {
-        String[] split = input.split(",|:");
+        if (input.startsWith("//") && input.contains("\n")) {
+            return splitCustomDelimiter(input);
+        }
+        return splitFormalDelimiter(input);
+    }
+
+    private static Integer[] splitFormalDelimiter(String input) {
+        return splitWithDelimiter(input, ",|:");
+    }
+
+    private static Integer[] splitCustomDelimiter(String input) {
+        String[] split = input.split("\n");
+        String customDelimiter = split[0].substring(2);
+        return splitWithDelimiter(split[1], customDelimiter);
+    }
+
+    private static Integer[] splitWithDelimiter(String input, String delimiter) {
+        String[] split = input.split(delimiter);
         return mapStringArrayToIntegerArray(split);
     }
 
-    static Integer[] mapStringArrayToIntegerArray(String[] strings) {
+    private static Integer[] mapStringArrayToIntegerArray(String[] strings) {
         Integer[] integers = new Integer[strings.length];
         for (int i = 0; i < strings.length; i++) {
             integers[i] = mapStringToPositiveInteger(strings[i]);

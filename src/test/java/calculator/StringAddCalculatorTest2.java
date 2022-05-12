@@ -58,7 +58,7 @@ public class StringAddCalculatorTest2 {
             "1#2^3",
             "1#3#5^9",
     })
-    public void splitForNumberTest02(@ConvertWith(IntegerArrayConverter.class) Integer[] input, int expected) {
+    public void sumTest01(@ConvertWith(IntegerArrayConverter.class) Integer[] input, int expected) {
         int sum = StringAddCalculator.sum(input);
         assertThat(sum)
                 .isEqualTo(expected);
