@@ -2,14 +2,14 @@ package lotto;
 
 public class LottoMachine {
     private final LottoPurchaseQuantity lottoPurchaseQuantity;
-    private final LottoTicket lottoTicket;
+    private final LottoNumbers lottoNumbers;
 
     public LottoMachine(String money) {
         lottoPurchaseQuantity = new LottoPurchaseQuantity(money);
-        lottoTicket = new LottoTicket(lottoPurchaseQuantity);
+        lottoNumbers = new LottoNumbers(lottoPurchaseQuantity);
     }
 
-    public LottoTicket getLottoTicket() {
-        return lottoTicket;
+    public LottoNumbers getLottoTicket() {
+        return lottoNumbers;
     }
 }
