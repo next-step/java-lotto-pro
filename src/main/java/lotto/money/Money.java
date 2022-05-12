@@ -1,5 +1,6 @@
-package lotto;
+package lotto.money;
 
+import lotto.Purchasable;
 import java.util.Objects;
 
 public class Money implements Comparable<Money> {

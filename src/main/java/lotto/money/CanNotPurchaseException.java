@@ -1,4 +1,6 @@
-package lotto;
+package lotto.money;
+
+import lotto.Purchasable;
 
 public class CanNotPurchaseException extends RuntimeException {
     public CanNotPurchaseException(Money money, Purchasable purchasable) {
