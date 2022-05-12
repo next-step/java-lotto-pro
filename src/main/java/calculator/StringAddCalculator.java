@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    public static final int NUMBER_ZERO = 0;
     private static final String JOINER_PIPE = "|";
     private static final String DELIMITER_COMMA = ",";
     private static final String DELIMITER_COLON = ":";
@@ -19,7 +20,7 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
-            return 0;
+            return NUMBER_ZERO;
         }
         return getSum(split(input));
     }
