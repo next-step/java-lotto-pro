@@ -28,10 +28,8 @@ public class SetTest {
     @DisplayName("size() 메소드를 호출하면 set의 크기를 반환한다")
     @Test
     public void size() {
-        // when
-        int size = numbers.size();
-        // then
-        assertThat(size).isEqualTo(3);
+        // when and then
+        assertThat(numbers).hasSize(3);
     }
 
     @DisplayName("numbers에 1, 2, 3의 값이 존재하는지 확인한다")
