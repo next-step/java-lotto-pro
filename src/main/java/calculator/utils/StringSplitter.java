@@ -13,7 +13,7 @@ public class StringSplitter {
 
     private StringSplitter() {}
 
-    public static String[] split(String text){
+    public static String[] split(String text) {
         if (StringUtils.isEmpty(text)) {
             return new String[]{};
         }

@@ -7,7 +7,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto from(LottoNumbers lottoNumbers){
+    public static Lotto from(LottoNumbers lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 

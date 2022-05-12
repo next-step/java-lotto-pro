@@ -12,7 +12,7 @@ public class StringAddCalculator {
     private static final Integer DEFAULT_RESULT = 0;
     private static final String POSITIVE_NUMBER_REGEX = "^[0-9]+$";
 
-    public static Integer splitAndSum(String text){
+    public static Integer splitAndSum(String text) {
         if (StringUtils.isEmpty(text)) {
             return DEFAULT_RESULT;
         }

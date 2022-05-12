@@ -11,7 +11,7 @@ class LottoNumberStringToIntegerParserTest {
 
     @Test
     @DisplayName("분리된 문자열을 인자로 받아 Integer List Collection을 반환한다.")
-    void parse01(){
+    void parse01() {
         // given
         String text = "1, 2, 3, 4, 5, 6";
         String[] splitText = LottoNumberStringSplitter.split(text);

@@ -29,7 +29,7 @@ class LottoWinningRankMatcherTest {
     @ParameterizedTest
     @MethodSource("lottoNumbersProvider")
     @DisplayName("지난 주 당첨 번호와 생성된 로또 번호를 비교하여 당첨결과를 확인할 수 있다. (1등)")
-    void match01(WinningRank expectWinningRank, List<Integer> lottoNumbers){
+    void match01(WinningRank expectWinningRank, List<Integer> lottoNumbers) {
         // given
         LottoNumbers generateLottoNumbers = LottoNumbers.generateBy(
             new TestNumberGenerator(lottoNumbers)
@@ -43,7 +43,7 @@ class LottoWinningRankMatcherTest {
         assertThat(winningRank).isEqualTo(expectWinningRank);
     }
 
-    static Stream<Arguments> lottoNumbersProvider(){
+    static Stream<Arguments> lottoNumbersProvider() {
         return Stream.of(
             arguments(WinningRank.WIN_1, Arrays.asList(1, 2, 3, 4, 5, 6)),
             arguments(WinningRank.WIN_2, Arrays.asList(1, 2, 3, 4, 5, 7)),

@@ -12,7 +12,7 @@ class StringSplitterTest {
 
     @Test
     @DisplayName("문자열을 기본구분자를 이용해 Split 할 수 있다. (기본 구분자 : , or :)")
-    void split01(){
+    void split01() {
         // given
         String text = "1,2:3";
 
@@ -29,7 +29,7 @@ class StringSplitterTest {
 
     @Test
     @DisplayName("문자열을 커스텀 구분자를 이용해 Split 할 수 있다.")
-    void customSplit01(){
+    void customSplit01() {
         // given
         String text = "//;\n1;2;3";
 
@@ -47,7 +47,7 @@ class StringSplitterTest {
     @ParameterizedTest
     @ValueSource(strings = {"//-\n1-2-3", "///\n1/2/3"})
     @DisplayName("문자열을 커스텀 구분자를 이용해 Split 할 수 있다. (여러 케이스 테스트)")
-    void customSplit02(String text){
+    void customSplit02(String text) {
         // given & when
         String[] splitText = StringSplitter.split(text);
 

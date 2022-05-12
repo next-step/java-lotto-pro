@@ -10,13 +10,13 @@ public class Money {
         this.money = money;
     }
 
-    public static Money from(int money){
+    public static Money from(int money) {
         validateMoney(money);
         return new Money(money);
     }
 
     private static void validateMoney(int money) {
-        if(money >= MONEY_MIN){
+        if (money >= MONEY_MIN) {
             return;
         }
 

@@ -20,7 +20,7 @@ public class WinningRecord {
     }
 
     public void recording(WinningRank winningRank) {
-        if(!validateRecordingWinningRank(winningRank)){
+        if (!validateRecordingWinningRank(winningRank)) {
             return;
         }
 

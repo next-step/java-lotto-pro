@@ -10,7 +10,7 @@ class LottoNumberStringSplitterTest {
 
     @Test
     @DisplayName("문자열로 전달된 로또 번호를 콤마(,)를 기준으로 분리한다.")
-    void split01(){
+    void split01() {
         // given
         String text = "1,2,3,4,5,6";
 

@@ -1,13 +1,12 @@
 package lotto.controller;
 
-import static lotto.constants.LottoGuideMessage.*;
+import static lotto.constants.LottoGuideMessage.LAST_WINNING_INPUT;
 
 import generator.LottoNumberGenerator;
 import generator.NumberGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.constants.LottoConstants;
-import lotto.constants.LottoGuideMessage;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;

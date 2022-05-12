@@ -1,17 +1,18 @@
 package lotto.view;
 
-import static lotto.constants.LottoConstants.*;
-import static lotto.constants.LottoGuideMessage.*;
+import static lotto.constants.LottoConstants.PROFIT_CRITERIA;
 import static lotto.constants.LottoGuideMessage.DIVIDE_LINE;
+import static lotto.constants.LottoGuideMessage.PROFIT;
+import static lotto.constants.LottoGuideMessage.PROFIT_LOSS;
+import static lotto.constants.LottoGuideMessage.PROFIT_NO_CHANGE;
 import static lotto.constants.LottoGuideMessage.PURCHASE_COUNT;
 import static lotto.constants.LottoGuideMessage.TOTAL_PROFIT_RATE;
+import static lotto.constants.LottoGuideMessage.TOTAL_PROFIT_RATE_ADDITIONAL_DESCRIPTION;
 import static lotto.constants.LottoGuideMessage.WINNING_STATISTICS;
 import static lotto.constants.LottoGuideMessage.WINNING_STATISTICS_GUIDE;
 
 import java.util.Map;
 import java.util.Map.Entry;
-import lotto.constants.LottoConstants;
-import lotto.constants.LottoGuideMessage;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.WinningRecord;
@@ -22,7 +23,7 @@ public class LottoResultView {
 
     public void printLottos(Lottos lottos) {
         System.out.printf((PURCHASE_COUNT) + "%n", lottos.getCount());
-        for (Lotto lotto : lottos.getReadOnlyLottos()){
+        for (Lotto lotto : lottos.getReadOnlyLottos()) {
             System.out.println(lotto.getLottoNumbers());
         }
         newLine();

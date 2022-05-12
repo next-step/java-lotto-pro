@@ -5,8 +5,8 @@ public class LottoNumberStringSplitter {
 
     private LottoNumberStringSplitter() {}
 
-    public static String[] split(String text){
-        if(LottoNumberStringUtils.isEmpty(text)){
+    public static String[] split(String text) {
+        if (LottoNumberStringUtils.isEmpty(text)) {
             return new String[]{};
         }
         return text.split(DELIMITER_REGEX);

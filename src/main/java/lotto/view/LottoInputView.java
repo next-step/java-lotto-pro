@@ -16,7 +16,6 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import lotto.constants.LottoConstants;
 import lotto.domain.Money;
 import lotto.utils.LottoNumberStringSplitter;
 import lotto.utils.LottoNumberStringToIntegerParser;
@@ -25,7 +24,7 @@ public class LottoInputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String INPUT_NUMBER_0_TO_9_REG_EXP = "^[0-9]+$";
 
-    public Money inputMoney(){
+    public Money inputMoney() {
         System.out.println(INPUT_MONEY);
         String inputMoney = readLine();
 

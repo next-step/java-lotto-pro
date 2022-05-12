@@ -33,7 +33,7 @@ public class LottoNumbers {
 
     private static void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
-        if(lottoNumberSet.size() != LOTTO_NUMBER_SIZE){
+        if (lottoNumberSet.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(String.format(MUST_BE_UNIQUE_NUMBER, lottoNumbers));
         }
     }

@@ -15,7 +15,7 @@ public class LottoNumberStringToIntegerParser {
             .collect(Collectors.toList());
     }
 
-    public static Integer parse(String number){
+    public static Integer parse(String number) {
         return Integer.parseInt(number.trim());
     }
 }

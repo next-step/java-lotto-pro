@@ -11,7 +11,7 @@ class LottoNumberGeneratorTest {
 
     @Test
     @DisplayName("LottoNumberGenerate를 이용해 6개 로또번호를 생성하는 테스트")
-    void generate01(){
+    void generate01() {
         // given
         NumberGenerator numberGenerator = new LottoNumberGenerator();
 
