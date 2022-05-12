@@ -17,6 +17,12 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
+    public int collect(List<Integer> winNumbers) {
+        return Math.toIntExact(winNumbers.stream()
+                .filter(number -> numbers.contains(new LottoNumber(number)))
+                .count());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
