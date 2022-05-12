@@ -32,9 +32,9 @@ public class ExpressionInterpretor {
         return m.find();
     }
 
-    public List<Integer> getNumbers () {
+    public List<Integer> getNumbers() {
         List<Integer> numberList = new ArrayList<>();
-        for(String numberString : numbers){
+        for (String numberString : numbers) {
             int number = Integer.parseInt(numberString);
             checkNagative(number);
             numberList.add(number);
@@ -42,8 +42,8 @@ public class ExpressionInterpretor {
         return numberList;
     }
 
-    private void checkNagative(int number){
-        if(number < 0 ){
+    private void checkNagative(int number) {
+        if (number < 0) {
             throw new RuntimeException();
         }
     }
