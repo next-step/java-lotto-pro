@@ -1,25 +1,23 @@
 package lottoauto;
 
+import lottoauto.domain.LottoMaker;
+import lottoauto.util.InputUtil;
 import lottoauto.wrapper.Lotto;
 import lottoauto.wrapper.LottoList;
 import lottoauto.wrapper.Price;
 
+import java.util.Scanner;
+
 public class LottoStarter {
-    Price price = new Price();
-    Lotto lotto = new Lotto();
-    LottoList lottoList = new LottoList();
+    private static LottoMaker lottoMaker;
     public void startLotto() {
         System.out.println("구입금액을 입력해 주세요.");
-        price.setInput();
-        System.out.println(price.getCount()+"개를 구매했습니다.");
+        InputUtil inputUtil = new InputUtil();
+        lottoMaker = new LottoMaker(inputUtil.getInput());
 
-        for (int i = 0; i < price.getCount(); i++) {
-            lottoList.addLotto(lotto.getLotto());
-        }
-
-        lottoList.printAllLottos();
-
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        inputUtil = new InputUtil();
+        System.out.println(inputUtil.getInput());
+        Lotto lotto = new Lotto(inputUtil.checkRegex());
     }
-
-
 }

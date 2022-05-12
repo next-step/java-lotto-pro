@@ -1,26 +1,23 @@
 package lottoauto.wrapper;
 
 import org.junit.jupiter.api.Test;
-import java.util.NoSuchElementException;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-
-class PriceTest {
-    Price price = new Price();
-
+public class PriceTest {
     @Test
-    void 숫자가_아닌_입력() {
-        assertThatThrownBy(() -> price.setInput("test")).isInstanceOf(NumberFormatException.class);
+    void 입력값_계산() {
+        assertThat(new Price("14000").getTryTimes()).isEqualTo(14);
     }
 
     @Test
-    void 입력_없음() {
-        assertThatThrownBy(() -> price.setInput()).isInstanceOf(NoSuchElementException.class);
+    void 입력값_오류() {
+        assertThatThrownBy(() -> new Price("poibi")).isInstanceOf(NumberFormatException.class).hasMessage("숫자만 입력 가능합니다.");
     }
 
     @Test
-    void 음수_입력() {
-        assertThatThrownBy(() -> price.setInput("-1000")).isInstanceOf(NumberFormatException.class);
+    void 입력값_음수() {
+        assertThatThrownBy(() -> new Price("-14")).isInstanceOf(NumberFormatException.class).hasMessage("양수만 입력 가능합니다.");
     }
 }

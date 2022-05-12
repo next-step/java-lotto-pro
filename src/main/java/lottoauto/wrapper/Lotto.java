@@ -1,30 +1,28 @@
 package lottoauto.wrapper;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class Lotto {
+    List<Integer> numbers;
 
-    private static List<Integer> numbers;
-
-    public Lotto() {
-        makeDefaultArray();
+    public Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
-    public ArrayList<Integer> getLotto() {
-        Collections.shuffle(numbers);
-        ArrayList<Integer> newLotto = new ArrayList<>();
-        for(int i = 0 ; i < 6 ; i++) {
-            newLotto.add(numbers.get(i));
-        }
-        return newLotto;
+    public Lotto(String[] checkRegex) {
+        numbers = new ArrayList<>();
+        IntStream.range(0, checkRegex.length).forEach(i -> numbers.add(Integer.parseInt(checkRegex[i])));
     }
 
-    private void makeDefaultArray() {
-        IntStream intStream = IntStream.range(1, 45);
-        numbers = intStream.boxed().collect(Collectors.toList());
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
+
+    public int size() {
+        return numbers.size();
     }
 }

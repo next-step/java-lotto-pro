@@ -1,25 +1,28 @@
 package lottoauto.wrapper;
 
+import lottoauto.util.SixRandomNumberUtil;
+
 import java.util.ArrayList;
 
 public class LottoList {
-    private Lotto lotto;
-    private ArrayList<ArrayList<Integer>> lottos = new ArrayList<>();
+    ArrayList<Lotto> lottoList = new ArrayList<>();
+    int tryTimes;
+    SixRandomNumberUtil sixRandomNumberUtil = new SixRandomNumberUtil();
 
-    public ArrayList<Integer> getLotto(int index) {
-        return lottos.get(index);
-    }
-
-    public void addLotto(ArrayList<Integer> lotto) {
-        lottos.add(lotto);
-    }
-
-    public void printAllLottos() {
-        lottos.stream().forEach(System.out::println);
+    public LottoList(int tryTimes) {
+        this.tryTimes = tryTimes;
+        for(int i = 0 ; i < tryTimes ; i++) {
+            Lotto lotto = new Lotto(sixRandomNumberUtil.makeRandomNumbers());
+            lottoList.add(lotto);
+        }
     }
 
     public int size() {
-        return lottos.size();
+        return lottoList.size();
+    }
+
+    public Lotto get(int index) {
+        return lottoList.get(index);
     }
 
 }
