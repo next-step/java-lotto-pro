@@ -9,11 +9,11 @@ import java.io.InputStreamReader;
 import static stringAddCalculator.utils.Validation.*;
 
 public class StringAddCalculator {
-    public static final int ZERO = 0;
+    public static final int NULL_OR_EMPTY = 0;
     public static int splitAndSum(String input) throws IllegalAccessException {
         Numbers numbers;
         if (isNotNullAndEmpty(input)){
-            return ZERO;
+            return NULL_OR_EMPTY;
         }
         if (isNumber(input)) {
             return Integer.parseInt(input);
