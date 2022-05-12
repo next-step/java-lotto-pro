@@ -12,6 +12,8 @@ public class WholeNumbers {
     }
 
     public int sum() {
-        return numbers.stream().mapToInt(WholeNumber::of).sum();
+        return numbers.stream()
+                .reduce(new WholeNumber("0"), WholeNumber::add)
+                .of();
     }
 }
