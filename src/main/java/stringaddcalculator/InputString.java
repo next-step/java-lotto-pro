@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InputString {
-    public static final String BASIC_DELIMITER = ",|:";
     private final String input;
     private final List<Integer> numbers = new ArrayList<>();
 
@@ -22,12 +21,11 @@ public class InputString {
             numbers.add(0);
             return;
         }
-
-        splitBasicDelimiter();
+        split();
     }
 
-    private void splitBasicDelimiter() {
-        String[] split = input.split(BASIC_DELIMITER);
+    private void split() {
+        String[] split = new SplitString(input).getSplitString();
         for (String numberString : split) {
             numbers.add(Integer.parseInt(numberString));
         }
