@@ -1,10 +1,11 @@
 package lotto.view;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.Result;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -44,14 +45,14 @@ public class ResultView {
     private static void printResult(List<Result> results, Result printTarget) {
         int count = 0;
         for (final Result result : results) {
-            count = checkCount(printTarget, count, result);
+            count = plusCountIfEquals(printTarget, count, result);
         }
         String message = String.format(RESULT_MESSAGE_FORMAT, printTarget.getContainsCount(),
             printTarget.getPrizeMoney(), count);
         System.out.println(message);
     }
 
-    private static int checkCount(Result printTarget, int count, Result result) {
+    private static int plusCountIfEquals(Result printTarget, int count, Result result) {
         if (printTarget.equals(result)) {
             count++;
         }

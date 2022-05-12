@@ -1,14 +1,15 @@
 package lotto.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class LottoMachineTest {
 
@@ -30,7 +31,7 @@ class LottoMachineTest {
     }
 
     @MethodSource(value = "calculateProfitTestParameter")
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}원을 주고 로또를 구매하고, 5000원 1개가 당첨된다고 했을때, 수익률을 구한다.")
     void calculateProfit(int cost, List<Result> results, double expectedProfit) {
         double profit = lottoMachine.calculateProfit(cost, results);
         assertEquals(expectedProfit, profit);

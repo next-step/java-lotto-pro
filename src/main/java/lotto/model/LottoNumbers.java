@@ -7,10 +7,10 @@ import java.util.stream.IntStream;
 
 public class LottoNumbers {
 
-    private static final List<Integer> LOTTO_NUMBERS =
-        IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+    private static final List<Number> LOTTO_NUMBERS =
+        IntStream.rangeClosed(1, 45).mapToObj(Number::new).collect(Collectors.toList());
 
-    public static List<Integer> pick() {
+    public static List<Number> pick() {
         Collections.shuffle(LOTTO_NUMBERS);
         return LOTTO_NUMBERS.subList(0, 6);
     }

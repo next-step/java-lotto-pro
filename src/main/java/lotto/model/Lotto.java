@@ -7,33 +7,35 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final String ERROR_MESSAGE_MUST_BE_SIX_NUMBER = "로또는 서로 다른 6개의 숫자여야 합니다.";
-    private final Set<Integer> numbers = new HashSet<>();
+    private static final String ERROR_MESSAGE_MUST_BE_SIX_NUMBER = "로또는 서로 다른 6개의 숫자여야 합니다.";
+    private static final int SIZE = 6;
+
+    private final Set<Number> numbers = new HashSet<>();
 
     public Lotto() {
         this(LottoNumbers.pick());
     }
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<Number> numbers) {
         this.numbers.addAll(numbers);
-        if (this.numbers.size() != 6) {
+        if (this.numbers.size() != SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_MUST_BE_SIX_NUMBER);
         }
     }
 
     public List<Integer> getNumbers() {
-        return numbers.stream().sorted().collect(Collectors.toList());
+        return numbers.stream().map(Number::getNumber).sorted().collect(Collectors.toList());
     }
 
     public Result getResult(Lotto winner) {
         int count = 0;
-        for (Integer number : winner.numbers) {
-            count = checkContains(count, number);
+        for (Number number : winner.numbers) {
+            count = plusCountIfContains(count, number);
         }
         return Result.from(count);
     }
 
-    private int checkContains(int count, int number) {
+    private int plusCountIfContains(int count, Number number) {
         if (numbers.contains(number)) {
             count++;
         }

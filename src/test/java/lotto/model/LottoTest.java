@@ -1,16 +1,17 @@
 package lotto.model;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class LottoTest {
 
@@ -27,7 +28,7 @@ class LottoTest {
     }
 
     @MethodSource(value = "getResultParameter")
-    @ParameterizedTest
+    @ParameterizedTest(name = "로또와 당첨이 주어질 때, 결과를 반환한다.")
     void getResult(Lotto lotto, Lotto winner, Result expectedResult) {
         Result result = lotto.getResult(winner);
         assertEquals(expectedResult, result);
@@ -47,7 +48,8 @@ class LottoTest {
     }
 
     private static Lotto getLotto(int first, int second, int third, int fourth, int fifth, int sixth) {
-        List<Integer> numbers = Arrays.asList(first, second, third, fourth, fifth, sixth);
+        List<Number> numbers = Arrays.asList(new Number(first), new Number(second), new Number(third), new Number(fourth),
+                new Number(fifth), new Number(sixth));
         return new Lotto(numbers);
     }
 }

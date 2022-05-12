@@ -10,8 +10,8 @@ public enum Result {
     FOURTH(3, 5000),
     LOSE(0, 0);
 
-    private int containsCount;
-    private int prizeMoney;
+    private final int containsCount;
+    private final int prizeMoney;
 
     Result(int containsCount, int prizeMoney) {
         this.containsCount = containsCount;
