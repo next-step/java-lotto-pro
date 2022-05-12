@@ -7,13 +7,13 @@ public class Money implements Comparable<Money> {
 
     public static final Money ONE_THOUSAND = of("1000");
 
-    private final int value;
+    private final long value;
 
     protected Money(String value) {
         this(parse(value));
     }
 
-    protected Money(int value) {
+    protected Money(long value) {
         this.value = validated(value);
     }
 
@@ -21,7 +21,7 @@ public class Money implements Comparable<Money> {
         return new Money(value);
     }
 
-    public static Money of(int value) {
+    public static Money of(long value) {
         return new Money(value);
     }
 
@@ -49,7 +49,7 @@ public class Money implements Comparable<Money> {
         return Integer.parseInt(value);
     }
 
-    private static int validated(int value) {
+    private static long validated(long value) {
         if (value < 0) {
             throw new MoneyFormatException(value);
         }
@@ -75,7 +75,7 @@ public class Money implements Comparable<Money> {
 
     @Override
     public int compareTo(Money other) {
-        return Integer.compare(this.value, other.value);
+        return Long.compare(this.value, other.value);
     }
 
     @Override
