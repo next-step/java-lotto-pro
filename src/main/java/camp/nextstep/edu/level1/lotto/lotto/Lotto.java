@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lotto {
-    private final static int LOTTO_PRICE = 1000;
+    private final static long LOTTO_PRICE = 1000;
     private final static int WINNING_NUMBER_COUNT = 6;
     private final static String WINNING_NUMBER_DELIMITER = ",";
     private final static Pattern POSITIVE_NUMBER_REGEX = Pattern.compile("^[1-9]\\d*$");
@@ -20,7 +20,7 @@ public class Lotto {
         checkValidLottoPurchaseMoney(value);
 
         this.money = new Money(value);
-        int availablePurchaseCount = money.getAvailablePurchaseCount(LOTTO_PRICE);
+        long availablePurchaseCount = money.getAvailablePurchaseCount(LOTTO_PRICE);
 
         this.purchaseLotto(availablePurchaseCount);
     }
@@ -51,7 +51,7 @@ public class Lotto {
         }
     }
 
-    private void purchaseLotto(int count) {
+    private void purchaseLotto(long count) {
         for (int i = 0; i < count; i++) {
             this.items.add(new LottoNumbers());
         }

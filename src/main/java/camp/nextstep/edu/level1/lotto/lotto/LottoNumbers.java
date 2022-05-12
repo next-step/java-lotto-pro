@@ -15,7 +15,7 @@ public class LottoNumbers {
     private final static String TO_STRING_PREFIX = "[";
     private final static String TO_STRING_SUFFIX = "]";
 
-    private List<LottoNumber> value = new ArrayList<>();
+    private final List<LottoNumber> value = new ArrayList<>();
 
     public LottoNumbers() {
         Set<Integer> numbers = RandomGenerator
@@ -33,7 +33,15 @@ public class LottoNumbers {
                 .collect(Collectors.joining(PRINT_JOIN_DELIMITER)) + TO_STRING_SUFFIX;
     }
 
+    public long matchedCountByWinnerNumbers(LottoNumbers winnerNumbers) {
+        return winnerNumbers.value.stream().filter(this::hasContainLottoNumber).count();
+    }
+
     private void add(int value) {
         this.value.add(new LottoNumber(value));
+    }
+
+    private boolean hasContainLottoNumber(LottoNumber value) {
+        return this.value.stream().anyMatch(lottoNumber -> lottoNumber.getValue() == value.getValue());
     }
 }
