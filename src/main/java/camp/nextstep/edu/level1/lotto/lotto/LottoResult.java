@@ -15,7 +15,7 @@ public class LottoResult {
         });
     }
 
-    public Money getWinningAmount() {
+    public Money winningAmount() {
         Money amount = new Money(0);
 
         for (Map.Entry<LottoRank, Integer> lottoRankIntegerEntry : result.entrySet()) {

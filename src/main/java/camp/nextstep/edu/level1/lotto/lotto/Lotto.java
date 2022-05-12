@@ -18,7 +18,7 @@ public class Lotto {
         checkValidLottoPurchaseMoney(value);
 
         this.money = new Money(value);
-        long availablePurchaseCount = money.getAvailablePurchaseCount(LOTTO_PRICE);
+        long availablePurchaseCount = money.availablePurchaseCount(LOTTO_PRICE);
 
         this.purchaseLotto(availablePurchaseCount);
     }

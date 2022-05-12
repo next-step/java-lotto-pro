@@ -18,21 +18,21 @@ public enum LottoRank {
 
     public static LottoRank checkLottoRank(LottoNumbers source, LottoNumbers winningNumbers) {
         long matchedCount = source.matchedCountByWinnerNumbers(winningNumbers);
-        return getByMatchedCount(matchedCount);
+        return findLottoRankByMatchedCount(matchedCount);
     }
 
     public Money rankPrice() {
         return this.price;
     }
 
-    private static LottoRank getByMatchedCount(long matchedCount) {
+    private static LottoRank findLottoRankByMatchedCount(long matchedCount) {
         return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.getMatchCount() == matchedCount)
+                .filter(rank -> rank.rankMatchCount() == matchedCount)
                 .findFirst()
                 .orElse(null);
     }
 
-    private long getMatchCount() {
+    private long rankMatchCount() {
         return this.matchCount;
     }
 }

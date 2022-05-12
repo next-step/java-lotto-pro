@@ -49,6 +49,6 @@ class LottoResultTest {
             expectedAmount = expectedAmount.add(expectedRank);
         }
 
-        assertThat(result.getWinningAmount()).isEqualTo(expectedAmount);
+        assertThat(result.winningAmount()).isEqualTo(expectedAmount);
     }
 }

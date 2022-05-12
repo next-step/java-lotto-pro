@@ -12,7 +12,7 @@ public class Money {
         this.value = value;
     }
 
-    public long getAvailablePurchaseCount(long price) {
+    public long availablePurchaseCount(long price) {
         if (price == 0) {
             return 0;
         }
