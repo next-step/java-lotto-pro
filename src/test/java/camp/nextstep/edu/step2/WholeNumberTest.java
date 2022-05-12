@@ -32,7 +32,7 @@ public class WholeNumberTest {
     void negativeInputTest() {
         assertThatThrownBy(() -> new WholeNumber("-1"))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageMatching("input is negative value");
+                .hasMessageContaining("negative input is");
     }
 
     @DisplayName("add 함수를 통해서 WholeNumber 끼리 더할수 있다")

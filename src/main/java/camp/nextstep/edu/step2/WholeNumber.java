@@ -25,7 +25,7 @@ public class WholeNumber {
     private int wholeIntegerBy(final String input) {
         final int value = Integer.parseInt(input);
         if (0 > value) {
-            throw new RuntimeException("input is negative value");
+            throw new IllegalArgumentException("negative input is "+input);
         }
         return value;
     }
