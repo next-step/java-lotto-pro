@@ -1,8 +1,6 @@
 package stringaddcalc;
 
 import org.junit.jupiter.api.Test;
-import stringaddcalc.StringAddCalculator;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
