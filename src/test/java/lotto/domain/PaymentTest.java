@@ -16,9 +16,12 @@ public class PaymentTest {
         // given
         final String money = "1000";
 
+        // when
+        final Payment payment = new Payment(money);
+
         // when and then
-        assertThat(new Payment(money)).isInstanceOf(Payment.class);
-        assertThat(new Payment(money)).isEqualTo(new Payment(money));
+        assertThat(payment).isInstanceOf(Payment.class);
+        assertThat(payment).isEqualTo(new Payment(money));
     }
 
     @Test

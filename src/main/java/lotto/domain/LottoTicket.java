@@ -1,27 +1,28 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoTicket {
-    private static final int AMOUNT_OF_NUMBERS = 6;
-    private static final int MINIMUM_NUMBER = 1;
-    private static final int MAXIMUM_NUMBER = 45;
-    private final int[] numbers;
+    public static final int AMOUNT_OF_NUMBERS = 6;
+    public static final int MINIMUM_NUMBER = 1;
+    public static final int MAXIMUM_NUMBER = 45;
+    private final List<Integer> numbers;
 
-    public LottoTicket(final int[] numbers) {
+    public LottoTicket(final List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
     }
 
-    private static void validateNumbers(final int[] numbers) {
+    private static void validateNumbers(final List<Integer> numbers) {
         checkAmountOfNumbers(numbers);
         for (final int number : numbers) {
             checkRangeOfNumber(number);
         }
     }
 
-    private static void checkAmountOfNumbers(final int[] numbers) {
-        if (numbers.length != AMOUNT_OF_NUMBERS) {
+    private static void checkAmountOfNumbers(final List<Integer> numbers) {
+        if (numbers.size() != AMOUNT_OF_NUMBERS) {
             throw new IllegalArgumentException();
         }
     }
@@ -35,7 +36,7 @@ public class LottoTicket {
     @Override
     public String toString() {
         return "LottoTicket{" +
-                "numbers=" + Arrays.toString(numbers) +
+                "numbers=" + numbers +
                 '}';
     }
 
@@ -48,11 +49,11 @@ public class LottoTicket {
             return false;
         }
         final LottoTicket that = (LottoTicket) o;
-        return Arrays.equals(numbers, that.numbers);
+        return Objects.equals(numbers, that.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(numbers);
+        return Objects.hash(numbers);
     }
 }
