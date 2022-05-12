@@ -49,6 +49,27 @@ public class LottoTest {
         );
     }
 
+    @DisplayName("checkTo 메소드에 당첨 Lotto 를 입력하면 일치한 정보를 반환한다.")
+    @ParameterizedTest
+    @MethodSource("provideUserLottoAndPrizeLotto")
+    void checkTest(final Lotto myLotto, final Lotto prizeLotto, final Hit expectedHit) {
+        assertThat(myLotto.checkTo(prizeLotto)).isEqualTo(expectedHit);
+    }
+
+    private static Stream<Arguments> provideUserLottoAndPrizeLotto() {
+        return Stream.of(
+                Arguments.of(
+                        new Lotto(createLottoNumberArray(new int[]{1, 2, 4, 3, 5, 6})),
+                        new Lotto(createLottoNumberArray(new int[]{2, 1, 3, 4, 6, 5})),
+                        Hit.ALL
+                ),
+                Arguments.of(
+                        new Lotto(createLottoNumberArray(new int[]{1, 2, 4, 9, 10, 11})),
+                        new Lotto(createLottoNumberArray(new int[]{2, 1, 3, 4, 6, 5})),
+                        Hit.THREE
+                )
+        );
+    }
 
     private static LottoNumber[] createLottoNumberArray(final int[] numbers) {
         return Arrays.stream(numbers).mapToObj(LottoNumber::new).toArray(LottoNumber[]::new);

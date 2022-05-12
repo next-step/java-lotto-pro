@@ -14,6 +14,17 @@ public class Lotto {
         sortedLottoNumbers(lottoNumbers);
     }
 
+    public Hit checkTo(final Lotto prizeLotto) {
+       return Hit.valueOf(prizeLotto.checkBy(this.lottoNumbers));
+    }
+
+    private int checkBy(List<LottoNumber> userLottoNumbers) {
+        return userLottoNumbers.stream()
+                .filter(this.lottoNumbers::contains)
+                .toArray().length;
+    }
+
+
     private void sortedLottoNumbers(final LottoNumber[] lottoNumbers) {
         this.lottoNumbers = Arrays.asList(lottoNumbers);
         Collections.sort(this.lottoNumbers);
