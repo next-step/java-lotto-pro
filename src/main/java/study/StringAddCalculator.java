@@ -36,7 +36,7 @@ public class StringAddCalculator {
         if (isNullOrEmpty(text)) {
             return 0;
         }
-        return 1;
+       return Integer.parseInt(text);
     }
 
     private static boolean isNullOrEmpty(String text) {
