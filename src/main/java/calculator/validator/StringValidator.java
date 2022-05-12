@@ -13,6 +13,14 @@ public class StringValidator {
         return isNumber(input) && isPositiveNumber(input);
     }
 
+    public static boolean isEmpty(String given) {
+        return given == null || isBlank(given);
+    }
+
+    private static boolean isBlank(String given) {
+        return given.trim().length() == 0;
+    }
+
     private static boolean isNumber(String input) {
         try {
             numberValidation(input);
