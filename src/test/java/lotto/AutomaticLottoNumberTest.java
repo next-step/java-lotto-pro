@@ -12,18 +12,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class AutomaticNumberTest {
-    private LottoNumber automaticNumber;
+class AutomaticLottoNumberTest {
+    private LottoNumberInterface automaticNumber;
 
     @BeforeEach
     void setUp() {
-        automaticNumber = new AutomaticNumber();
+        automaticNumber = new AutomaticLottoNumber();
     }
 
     @Test
     @DisplayName("자등으로 중복되지 않는 로또 한 세트 뽑기")
     void pickAutomaticNumber() {
-        List<Integer> lottoNumbers = automaticNumber.getLottoNumbers();
+        List<Integer> lottoNumbers = automaticNumber.getLottoNumber();
 
         assertAll(
                 () -> assertThat(lottoNumbers).hasSize(6),
@@ -34,7 +34,7 @@ class AutomaticNumberTest {
     @Test
     @DisplayName("자동으로 뽑은 로또가 정렬되어있는지 확인")
     void verifySortedAutomaticNumber() {
-        List<Integer> lottoNumbers = automaticNumber.getLottoNumbers();
+        List<Integer> lottoNumbers = automaticNumber.getLottoNumber();
         List<Integer> copy = new ArrayList<>(lottoNumbers);
         Collections.sort(copy);
 
