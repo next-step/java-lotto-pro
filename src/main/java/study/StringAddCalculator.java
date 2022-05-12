@@ -56,8 +56,15 @@ public class StringAddCalculator {
         int[] numbers = new int[stringNumbers.length];
         for (int i = 0; i < stringNumbers.length; i++) {
             numbers[i] = Integer.parseInt(stringNumbers[i]);
+            checkNegativeNumber(numbers[i]);
         }
         return numbers;
+    }
+
+    private static void checkNegativeNumber(int number) {
+        if(number < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
     }
 
     private static String[] splitText(String text, String delimiter) {
