@@ -1,27 +1,27 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
 
+import static lotto.domain.LottoConstant.LOTTO_END_NUMBER;
+import static lotto.domain.LottoConstant.LOTTO_START_NUMBER;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNoTest {
-
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 5, 10, 20, 30, 40, 45})
-    @DisplayName("유효한 로또 숫자 확인")
-    public void Check_valid_lotto_number(int number) {
-        new LottoNo(number);
+    @Test
+    public void 문제없는_로또_번호() {
+        new LottoNo(LOTTO_START_NUMBER);
+        new LottoNo((LOTTO_START_NUMBER + LOTTO_END_NUMBER) / 2);
+        new LottoNo(LOTTO_END_NUMBER);
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {-10, 0, 46, 50})
-    @DisplayName("문제가 있는 로또 숫자 확인")
-    public void Check_invalid_lotto_number(int number) {
+    @Test
+    public void 문제있는_로또_번호() {
         assertThatThrownBy(() -> {
-            new LottoNo(number);
-        }).isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("유효하지 않은 로또 번호입니다.");
+            new LottoNo(LOTTO_START_NUMBER - 1);
+        }).isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> {
+            new LottoNo(LOTTO_END_NUMBER + 1);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
