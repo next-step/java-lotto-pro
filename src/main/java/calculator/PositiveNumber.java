@@ -1,19 +1,19 @@
 package calculator;
 
-public class ParseNumber {
+public class PositiveNumber {
     private static final String NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "음수가 입력되었습니다. 0 이상 값을 입력해주세요.";
     private static final String NOT_NUMBER_EXCEPTION_MESSAGE = "숫자 이외의 값이 입력되었습니다. 숫자를 입력해주세요.";
-    private final int parseNumber;
+    private final int positiveNumber;
 
-    private ParseNumber(int parseNumber) {
-        this.parseNumber = parseNumber;
+    private PositiveNumber(int parseNumber) {
+        this.positiveNumber = parseNumber;
     }
 
-    public static ParseNumber parseNotNegativeNumber(String input) {
+    public static PositiveNumber parseNotNegativeNumber(String input) {
         try {
-            int parseInt = Integer.parseInt(input);
-            validNotNegativeNumber(parseInt);
-            return new ParseNumber(parseInt);
+            int number = Integer.parseInt(input);
+            validNotNegativeNumber(number);
+            return new PositiveNumber(number);
         } catch (NumberFormatException e) {
             throw new RuntimeException(NOT_NUMBER_EXCEPTION_MESSAGE);
         }
@@ -29,7 +29,7 @@ public class ParseNumber {
         return number < 0;
     }
 
-    public int getParseNumber() {
-        return this.parseNumber;
+    public int getPositiveNumber() {
+        return this.positiveNumber;
     }
 }

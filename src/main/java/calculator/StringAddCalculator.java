@@ -26,8 +26,8 @@ public class StringAddCalculator {
 
     private static int getSum(String[] splits) {
         return Arrays.stream(splits)
-                .map(ParseNumber::parseNotNegativeNumber)
-                .mapToInt(ParseNumber::getParseNumber)
+                .map(PositiveNumber::parseNotNegativeNumber)
+                .mapToInt(PositiveNumber::getPositiveNumber)
                 .sum();
     }
 
