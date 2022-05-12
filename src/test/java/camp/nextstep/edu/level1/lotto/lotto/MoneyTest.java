@@ -15,32 +15,25 @@ class MoneyTest {
 
     @Test
     void 금액을_더하면_해당_금액만큼_증가되어야_한다() {
-        long original = 10000;
-        long addMoney = 5000;
-        Money money = new Money(original);
+        Money originalMoney = new Money(10000);
+        Money addMoney = new Money(5000);
 
-        money.add(addMoney);
-
-        assertThat(money.getValue()).isEqualTo(original + addMoney);
+        assertThat(originalMoney.add(addMoney)).isEqualTo(new Money(15000));
     }
 
     @Test
     void 금액을_빼면_해당_금액만큼_차감되어야_한다() {
-        long original = 10000;
-        long subMoney = 5000;
-        Money money = new Money(original);
+        Money originalMoney = new Money(10000);
+        Money subMoney = new Money(5000);
 
-        money.sub(subMoney);
-
-        assertThat(money.getValue()).isEqualTo(original - subMoney);
+        assertThat(originalMoney.sub(subMoney)).isEqualTo(new Money(10000 - 5000));
     }
 
     @Test
     void 금액을_차감한_결과가_0_미만이면_예외가_발생해야_한다() {
-        long original = 5000;
-        long subMoney = 10000;
-        Money money = new Money(original);
+        Money originalMoney = new Money(5000);
+        Money subMoney = new Money(10000);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> money.sub(subMoney));
+        assertThatIllegalArgumentException().isThrownBy(() -> originalMoney.sub(subMoney));
     }
 }

@@ -1,36 +1,27 @@
 package camp.nextstep.edu.level1.lotto.lotto;
 
-import camp.nextstep.edu.until.RandomGenerator;
-import helper.LottoNumbersGenerator;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mockStatic;
 
 class LottoRankTest {
 
-    static MockedStatic<RandomGenerator> util;
-
-    @BeforeAll
-    static void beforeAll() {
-        util = mockStatic(RandomGenerator.class);
-    }
-
-    @AfterAll
-    static void afterAll() {
-        util.close();
-    }
-
     @Test
     void 일치하는_수에_해당하는_로또_랭크를_반환해야_한다() {
-        LottoNumbers winnerLottoNumbers = LottoNumbersGenerator.createLottoNumbersHasValue(1, 2, 3, 4, 5, 6);
-        LottoNumbers firstLottoNumbers = LottoNumbersGenerator.createLottoNumbersHasValue(1, 2, 3, 4, 5, 6);
-        LottoNumbers secondLottoNumbers = LottoNumbersGenerator.createLottoNumbersHasValue(1, 2, 3, 4, 5, 7);
-        LottoNumbers thirdLottoNumbers = LottoNumbersGenerator.createLottoNumbersHasValue(1, 2, 3, 4, 7, 8);
-        LottoNumbers forthLottoNumbers = LottoNumbersGenerator.createLottoNumbersHasValue(1, 2, 3, 7, 8, 9);
+        List<Integer> winnerNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> firstNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> secondNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
+        List<Integer> thirdNumbers = Arrays.asList(1, 2, 3, 4, 7, 8);
+        List<Integer> forthNumbers = Arrays.asList(1, 2, 3, 7, 8, 9);
+
+        LottoNumbers winnerLottoNumbers = new LottoNumbers(winnerNumbers);
+        LottoNumbers firstLottoNumbers = new LottoNumbers(firstNumbers);
+        LottoNumbers secondLottoNumbers = new LottoNumbers(secondNumbers);
+        LottoNumbers thirdLottoNumbers = new LottoNumbers(thirdNumbers);
+        LottoNumbers forthLottoNumbers = new LottoNumbers(forthNumbers);
 
         assertThat(LottoRank.checkLottoRank(firstLottoNumbers, winnerLottoNumbers)).isEqualTo(LottoRank.FIRST);
         assertThat(LottoRank.checkLottoRank(secondLottoNumbers, winnerLottoNumbers)).isEqualTo(LottoRank.SECOND);

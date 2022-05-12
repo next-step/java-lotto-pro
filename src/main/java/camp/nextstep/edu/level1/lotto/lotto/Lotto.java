@@ -5,7 +5,6 @@ import camp.nextstep.edu.until.CollectionHelper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private final static long LOTTO_PRICE = 1000;
@@ -51,20 +50,12 @@ public class Lotto {
     }
 
     private void purchaseLotto(long count) {
+        Money purchaseTotalAmount = new Money(count * LOTTO_PRICE);
+
         for (int i = 0; i < count; i++) {
             this.items.add(new LottoNumbers());
         }
 
-        this.money.sub(count * LOTTO_PRICE);
-
-        System.out.printf("%d개를 구입했습니다.%n", count);
-        System.out.println(this);
-    }
-
-    @Override
-    public String toString() {
-        return this.items.stream()
-                .map(LottoNumbers::toString)
-                .collect(Collectors.joining("\n"));
+        this.money = this.money.sub(purchaseTotalAmount);
     }
 }

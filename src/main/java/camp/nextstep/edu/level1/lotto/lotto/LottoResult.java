@@ -18,10 +18,13 @@ public class LottoResult {
     public Money getWinningAmount() {
         Money amount = new Money(0);
 
-        result.forEach((key, value) -> {
-            long rankTotalAmount = key.getPrice().getValue() * value;
-            amount.add(rankTotalAmount);
-        });
+        for (Map.Entry<LottoRank, Integer> lottoRankIntegerEntry : result.entrySet()) {
+            Money rankMoney = lottoRankIntegerEntry.getKey().rankPrice();
+            Integer count = lottoRankIntegerEntry.getValue();
+            Money rankTotalAmount = rankMoney.mul(count);
+
+            amount = amount.add(rankTotalAmount);
+        }
 
         return amount;
     }

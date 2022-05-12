@@ -17,9 +17,7 @@ class LottoNumberTest {
                 .findFirst()
                 .getAsInt();
 
-        LottoNumber lottoNumber = new LottoNumber(randomValueBetweenValidInt);
-
-        assertThat(lottoNumber.getValue()).isBetween(LOTTO_START_NUMBER, LOTTO_END_NUMBER);
+        assertThatNoException().isThrownBy(() -> new LottoNumber(randomValueBetweenValidInt));
     }
 
     @Test

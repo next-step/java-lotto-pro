@@ -11,13 +11,13 @@ public class LottoNumber {
         this.value = value;
     }
 
-    public int getValue() {
-        return this.value;
-    }
-
     private void checkValidLottoNumber(int value) {
         if (value < LOTTO_START_NUMBER || value > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45 만 허용됩니다.");
         }
+    }
+
+    public boolean hasSameValue(LottoNumber value) {
+        return this.value == value.value;
     }
 }

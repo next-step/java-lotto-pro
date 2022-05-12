@@ -21,7 +21,7 @@ public enum LottoRank {
         return getByMatchedCount(matchedCount);
     }
 
-    public Money getPrice() {
+    public Money rankPrice() {
         return this.price;
     }
 
