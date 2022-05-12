@@ -1,14 +1,17 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 import lotto.constants.LottoErrorMessage;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberTest {
@@ -19,7 +22,7 @@ class LottoNumberTest {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoNumber lottoNumber = new LottoNumber(list);
 
-        Assertions.assertEquals(lottoNumber, new LottoNumber(list));
+        assertEquals(lottoNumber, new LottoNumber(list));
     }
 
     @ParameterizedTest(name = "잘못된 문자열({0}) 로또 번호를 입력받을 때 IllegalArgumentException가 발생")
@@ -36,5 +39,34 @@ class LottoNumberTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoNumber("1, 2, 3, 4, 5, 100"))
                 .withMessage(LottoErrorMessage.OUT_OF_RANGE_LOTTO_NUMBER);
+    }
+
+    @ParameterizedTest(name = "로또 번호({0})와 당첨 번호({1})의 {2} 등수 확인")
+    @MethodSource("parameterGetLottoRank")
+    void getLottoRank(List<Integer> pickNumber, List<Integer> winningNumber, LottoRank expected) {
+        LottoNumber pickLottoNumber = new LottoNumber(pickNumber);
+        LottoNumber winningLottoNumber = new LottoNumber(winningNumber);
+
+        assertEquals(expected, pickLottoNumber.getLottoRank(winningLottoNumber));
+    }
+
+    public static Stream<Arguments> parameterGetLottoRank() {
+        return Stream.of(
+                Arguments.of(
+                        Arrays.asList(1, 2, 3, 4, 5, 6),
+                        Arrays.asList(1, 2, 3, 4, 5, 6),
+                        LottoRank.FIRST
+                ),
+                Arguments.of(
+                        Arrays.asList(1, 2, 3, 4, 5, 6),
+                        Arrays.asList(1, 2, 3, 4, 5, 7),
+                        LottoRank.SECOND
+                ),
+                Arguments.of(
+                        Arrays.asList(1, 2, 3, 4, 5, 6),
+                        Arrays.asList(1, 2, 3, 4, 7, 8),
+                        LottoRank.THIRD
+                )
+        );
     }
 }

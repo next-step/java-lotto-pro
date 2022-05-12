@@ -26,6 +26,17 @@ public class LottoNumber implements LottoNumberInterface {
         this.lottoNumber = convertList(lottoNumber);
     }
 
+    public LottoRank getLottoRank(LottoNumber winningLottoNumber) {
+        int count = (int) lottoNumber.stream()
+                .filter(winningLottoNumber::isContainNumber)
+                .count();
+        return LottoRank.findByHits(count);
+    }
+
+    private boolean isContainNumber(int number) {
+        return this.lottoNumber.contains(number);
+    }
+
     private List<Integer> convertList(String lottoNumber) {
         List<String> numberList = split(lottoNumber);
         return numberList.stream()
