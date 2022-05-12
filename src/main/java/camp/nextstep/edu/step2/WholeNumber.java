@@ -29,4 +29,12 @@ public class WholeNumber {
         }
         return value;
     }
+
+    public WholeNumber add(final WholeNumber wholeNumber) {
+        return wholeNumber.add(this.number);
+    }
+
+    private WholeNumber add(int number) {
+        return new WholeNumber(String.valueOf(this.number + number));
+    }
 }

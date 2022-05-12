@@ -34,4 +34,12 @@ public class WholeNumberTest {
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageMatching("input is negative value");
     }
+
+    @DisplayName("add 함수를 통해서 WholeNumber 끼리 더할수 있다")
+    @ParameterizedTest
+    @CsvSource(value = {"2:2:4", "4:2:6"}, delimiter = ':')
+    void addTest(final String first, final String second, final String expectedNumber) {
+        assertThat(new WholeNumber(first).add(new WholeNumber(second)))
+                .isEqualTo(new WholeNumber(expectedNumber));
+    }
 }
