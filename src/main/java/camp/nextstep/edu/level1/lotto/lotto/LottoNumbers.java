@@ -3,6 +3,7 @@ package camp.nextstep.edu.level1.lotto.lotto;
 import camp.nextstep.edu.until.RandomGenerator;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,9 +22,15 @@ public class LottoNumbers {
         Set<Integer> numbers = RandomGenerator
                 .createNonDuplicatedIntegerSet(LOTTO_START_NUMBER, LOTTO_END_NUMBER, LOTTO_RANGE);
 
-        for (Integer number : numbers) {
-            this.add(number);
-        }
+        addAll(numbers);
+    }
+
+    public LottoNumbers(List<Integer> numbers) {
+        addAll(numbers);
+    }
+
+    public long matchedCountByWinnerNumbers(LottoNumbers winnerNumbers) {
+        return winnerNumbers.value.stream().filter(this::hasContainLottoNumber).count();
     }
 
     @Override
@@ -33,12 +40,10 @@ public class LottoNumbers {
                 .collect(Collectors.joining(PRINT_JOIN_DELIMITER)) + TO_STRING_SUFFIX;
     }
 
-    public long matchedCountByWinnerNumbers(LottoNumbers winnerNumbers) {
-        return winnerNumbers.value.stream().filter(this::hasContainLottoNumber).count();
-    }
-
-    private void add(int value) {
-        this.value.add(new LottoNumber(value));
+    private void addAll(Collection<Integer> numbers) {
+        for (Integer number : numbers) {
+            this.value.add(new LottoNumber(number));
+        }
     }
 
     private boolean hasContainLottoNumber(LottoNumber value) {
