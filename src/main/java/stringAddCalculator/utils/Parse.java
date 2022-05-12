@@ -7,6 +7,13 @@ public class Parse {
     public static final String CUSTOM_PATTERN = "//(.)\n(.*)";
     public static final String INPUT_ERROR = "잘못된 값을 입력하였습니다.";
 
+    public static String[] checkTypeAndSplit(String input) throws IllegalAccessException {
+        if (!input.startsWith("//")) {
+            return splitNormal(input);
+        }
+        return splitCustom(input);
+    }
+
     public static String[] splitNormal(String input) {
         return input.split(",|:");
     }

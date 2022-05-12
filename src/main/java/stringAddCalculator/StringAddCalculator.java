@@ -18,11 +18,7 @@ public class StringAddCalculator {
         if (isNumber(input)) {
             return Integer.parseInt(input);
         }
-        if (!input.startsWith("//")) {
-            numbers = new Numbers(Parse.splitNormal(input));
-            return numbers.sumNumbers();
-        }
-        numbers = new Numbers(Parse.splitCustom(input));
+        numbers = new Numbers(Parse.checkTypeAndSplit(input));
         return numbers.sumNumbers();
     }
 
