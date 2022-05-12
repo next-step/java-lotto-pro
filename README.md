@@ -92,7 +92,7 @@
 - [x] LottoNumber 구현
 - [x] Lotto 구현
 - [x] LottoGenerator/RandomLottoGenerator 구현
-- [ ] LottoExchanger 구현
+- [x] LottoExchanger 구현
 - [ ] StringSplittingLottoGenerator 구현
 - [ ] LottoPrize 구현
 - [ ] WinningResult 구현
