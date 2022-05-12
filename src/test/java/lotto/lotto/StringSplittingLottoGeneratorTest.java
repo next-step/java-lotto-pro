@@ -44,7 +44,7 @@ class StringSplittingLottoGeneratorTest {
     @DisplayName("구분자(,)를 이용하여 문자열을 잘라 Lotto 생성")
     @Test
     void commaSplitting() {
-        final LottoGenerator lottoGenerator = LottoGenerator.commaSplitting("1,2,3,4,5");
+        final LottoGenerator lottoGenerator = LottoGenerator.commaSplitting("1,2,3,4,5,6");
         final Lotto lotto = lottoGenerator.generate();
         assertThat(lotto).isNotNull();
     }

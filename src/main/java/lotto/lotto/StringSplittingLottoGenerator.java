@@ -1,16 +1,26 @@
 package lotto.lotto;
 
+import java.util.regex.Pattern;
+
 class StringSplittingLottoGenerator implements LottoGenerator {
 
     private final String value;
-    private final String delimiter;
+    private final Pattern pattern;
 
     StringSplittingLottoGenerator(String value, String delimiter) {
-        throw new RuntimeException("create");
+        if (value == null || value.isEmpty()) {
+            throw new FailureCreatingLottoGeneratorException(value, delimiter);
+        }
+        if (delimiter == null || delimiter.isEmpty()) {
+            throw new FailureCreatingLottoGeneratorException(value, delimiter);
+        }
+        this.value = value;
+        this.pattern = Pattern.compile(String.format("[%s]", delimiter));
     }
 
     @Override
     public Lotto generate() {
-        return null;
+        final String[] maybeNumbers = pattern.split(value);
+        return Lotto.of(maybeNumbers);
     }
 }

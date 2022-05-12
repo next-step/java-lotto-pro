@@ -27,6 +27,13 @@ public class Lotto implements Purchasable {
         return new Lotto(lottoNumbers);
     }
 
+    public static Lotto of(String... maybeNumbers) {
+        final List<LottoNumber> lottoNumbers = Arrays.stream(maybeNumbers)
+                                                     .map(LottoNumber::new)
+                                                     .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
+    }
+
     @Override
     public Money price() {
         return Money.ONE_THOUSAND;
