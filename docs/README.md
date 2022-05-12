@@ -47,6 +47,7 @@
 ### class 역할
 - Separator
   - static class 이며 differentiate 함수를 통하여 입력 값을 구분자로 구별하여 String 배열 값을 반환한다.
+  - 입력값이 null 이거나 size 가 0 이면 RuntimeException 예외를 발생시킨다.
 
 - StringAddCalculator
     - static class 이며 splitAndSum 함수를 가지고 있으며 String 값을 인수로 받아서 int 값을 반환한다.
