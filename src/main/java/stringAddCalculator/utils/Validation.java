@@ -1,4 +1,4 @@
-package stringAddCalculator.Utils;
+package stringAddCalculator.utils;
 
 public class Validation {
     public static boolean isNotNullAndEmpty(String input) {

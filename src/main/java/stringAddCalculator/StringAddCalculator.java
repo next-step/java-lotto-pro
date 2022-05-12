@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static stringAddCalculator.Utils.Validation.*;
+import static stringAddCalculator.utils.Validation.*;
 
 public class StringAddCalculator {
     public static int splitAndSum(String input) {
