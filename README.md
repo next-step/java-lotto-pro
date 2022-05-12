@@ -89,7 +89,7 @@
 ## 기능 목록
 
 - [x] Money/Purchasable 구현
-- [ ] LottoNumber 구현
+- [x] LottoNumber 구현
 - [ ] Lotto 구현
 - [ ] LottoGenerator/RandomLottoGenerator 구현
 - [ ] LottoExchanger 구현
