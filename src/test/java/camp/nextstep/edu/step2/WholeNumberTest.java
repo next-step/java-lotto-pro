@@ -1,14 +1,14 @@
 package camp.nextstep.edu.step2;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Objects;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 public class WholeNumberTest {
 
@@ -25,5 +25,13 @@ public class WholeNumberTest {
     void invalidInputTest(final String input) {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> new WholeNumber(input));
+    }
+
+    @DisplayName("String 숫자가 음수인 경우 RuntimeException 이 발생")
+    @Test
+    void negativeInputTest() {
+        assertThatThrownBy(() -> new WholeNumber("-1"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageMatching("input is negative value");
     }
 }
