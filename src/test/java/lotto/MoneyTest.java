@@ -13,19 +13,18 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("Money 클래스 테스트")
 class MoneyTest {
 
-    private static final Purchasable PRICE_IS_ONE_THOUSAND = () -> Money.of("1000");
+    private static final Purchasable PRICE_IS_ONE_THOUSAND = () -> Money.ONE_THOUSAND;
     private static final Purchasable PRICE_IS_TEN = () -> Money.of("10");
     private static final Purchasable PRICE_IS_ONE = () -> Money.of("1");
 
     @DisplayName("Money 생성 성공")
     @ParameterizedTest
-    @ValueSource(strings = {"1","10", "100", "1000"})
+    @ValueSource(strings = {"0", "1","10", "100", "1000"})
     void successfulCreate(String value) {
         assertThat(Money.of(value)).isNotNull();
     }
@@ -33,7 +32,7 @@ class MoneyTest {
     @DisplayName("Money 생성 실패")
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource(strings = {"-1","0"})
+    @ValueSource(strings = {"-1"})
     void failureCreate(String value) {
         assertThatThrownBy(() -> {
             Money.of(value);
@@ -65,20 +64,17 @@ class MoneyTest {
     @DisplayName("Money로 Purchasable을 구매 성공")
     @ParameterizedTest
     @ArgumentsSource(SuccessfulPurchaseArgumentsProvider.class)
-    void successfulPurchase(Purchasable purchasable) {
-        Money oneThousand = Money.of("1000");
-        assertThatNoException().isThrownBy(() -> {
-            oneThousand.purchase(purchasable);
-        });
+    void successfulPurchase(Purchasable purchasable, Money expected) {
+        assertThat(Money.ONE_THOUSAND.purchase(purchasable)).isEqualTo(expected);
     }
 
     static class SuccessfulPurchaseArgumentsProvider implements ArgumentsProvider {
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
             return Stream.of(
-                    Arguments.of(PRICE_IS_ONE_THOUSAND),
-                    Arguments.of(PRICE_IS_TEN),
-                    Arguments.of(PRICE_IS_ONE)
+                    Arguments.of(PRICE_IS_ONE_THOUSAND, Money.of(0)),
+                    Arguments.of(PRICE_IS_TEN, Money.of(990)),
+                    Arguments.of(PRICE_IS_ONE, Money.of(999))
             );
         }
     }

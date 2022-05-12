@@ -1,16 +1,26 @@
 package lotto;
 
+import java.util.Objects;
+
 public class Money implements Comparable<Money> {
 
     public static final Money ONE_THOUSAND = of("1000");
 
-    private int value;
+    private final int value;
 
     protected Money(String value) {
-        this.value = validate(value);
+        this(parse(value));
+    }
+
+    protected Money(int value) {
+        this.value = validated(value);
     }
 
     public static Money of(String value) {
+        return new Money(value);
+    }
+
+    public static Money of(int value) {
         return new Money(value);
     }
 
@@ -23,23 +33,43 @@ public class Money implements Comparable<Money> {
         return i >= 0;
     }
 
-    public void purchase(Purchasable purchasable) {
+    public Money purchase(Purchasable purchasable) {
         if (!canPurchase(purchasable)) {
             throw new CanNotPurchaseException(this, purchasable);
         }
         final Money money = purchasable.price();
-        value -= money.value;
+        return of(value - money.value);
     }
 
-    private static int validate(String value) {
+    private static int parse(String value) {
         if (value == null || value.isEmpty()) {
             throw new MoneyFormatException(value);
         }
-        int number = Integer.parseInt(value);
-        if (number <= 0) {
+        return Integer.parseInt(value);
+    }
+
+    private static int validated(int value) {
+        if (value < 0) {
             throw new MoneyFormatException(value);
         }
-        return number;
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        Money money = (Money) other;
+        return value == money.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 
     @Override
