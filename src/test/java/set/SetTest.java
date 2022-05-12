@@ -12,7 +12,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SetTest {
+class SetTest {
 	private Set<Integer> numbers;
 
 	@BeforeEach
@@ -27,7 +27,7 @@ public class SetTest {
 	@DisplayName("Set의 크기를 확인한다")
 	@Test
 	void size() {
-		assertThat(numbers.size()).isEqualTo(3);
+		assertThat(numbers).hasSize(3);
 	}
 
 	@DisplayName("Set에 1, 2, 3의 값이 존재하는 지 확인한다")
