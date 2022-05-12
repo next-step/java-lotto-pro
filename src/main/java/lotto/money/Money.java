@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Money implements Comparable<Money> {
 
-    public static final Money ONE_THOUSAND = of("1000");
+    public static final Money ONE_THOUSAND = of(1000);
 
     private final long value;
 
@@ -30,8 +30,7 @@ public class Money implements Comparable<Money> {
             return false;
         }
         final Money money = purchasable.price();
-        int i = compareTo(money);
-        return i >= 0;
+        return compareTo(money) >= 0;
     }
 
     public Money purchase(Purchasable purchasable) {
