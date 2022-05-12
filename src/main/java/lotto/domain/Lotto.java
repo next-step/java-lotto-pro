@@ -9,10 +9,14 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     protected Lotto(List<LottoNumber> numbers) {
+        validateLottoSize(numbers);
+        this.numbers = numbers;
+    }
+
+    private void validateLottoSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
-        this.numbers = numbers;
     }
 
     public static Lotto create(LottoNumberStrategy lottoNumberStrategy) {
