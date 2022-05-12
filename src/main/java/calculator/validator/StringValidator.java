@@ -8,21 +8,12 @@ import static calculator.constants.ErrorMessage.NEGATIVE_NUMBER_ERROR_MESSAGE;
  * @date : 2022/05/12 3:42 오후
  */
 public class StringValidator {
-    public static void numberValidation(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_NUMBER_ERROR_MESSAGE);
-        }
+
+    public static boolean isValidNumber(String input) {
+        return isNumber(input) && isPositiveNumber(input);
     }
 
-    public static void positiveNumberValidation(String input) {
-        if (Integer.parseInt(input) < 0) {
-            throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR_MESSAGE);
-        }
-    }
-
-    public static boolean isNumber(String input) {
+    private static boolean isNumber(String input) {
         try {
             numberValidation(input);
         } catch (IllegalArgumentException exception) {
@@ -32,7 +23,7 @@ public class StringValidator {
         return true;
     }
 
-    public static boolean isPositiveNumber(String input) {
+    private static boolean isPositiveNumber(String input) {
         try {
             positiveNumberValidation(input);
         } catch (IllegalArgumentException exception) {
@@ -40,5 +31,19 @@ public class StringValidator {
             return false;
         }
         return true;
+    }
+
+    private static void numberValidation(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_NUMBER_ERROR_MESSAGE);
+        }
+    }
+
+    private static void positiveNumberValidation(String input) {
+        if (Integer.parseInt(input) < 0) {
+            throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR_MESSAGE);
+        }
     }
 }
