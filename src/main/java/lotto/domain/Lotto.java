@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
 
@@ -21,6 +23,19 @@ public class Lotto {
 
     public static Lotto create(LottoNumberStrategy lottoNumberStrategy) {
         return new Lotto(lottoNumberStrategy.create());
+    }
+
+    public Rank match(Lotto winningLotto) {
+        int matchCount = 0;
+        Set<LottoNumber> collect = new HashSet<>(winningLotto.numbers);
+
+        for (LottoNumber number : this.numbers) {
+            if (collect.contains(number)) {
+                matchCount++;
+            }
+        }
+
+        return Rank.matchResult(matchCount);
     }
 
     @Override
