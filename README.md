@@ -14,8 +14,9 @@
 - [x] LottoNumbers는 6개의 LottoNumber로 구성된다.
 - [x] LottoGenerator는 6개의 숫자를 만든다.
   - [x] 6개가 아니라면 예외를 던진다.
-- [ ] LottoMachine은 사용자에게 금액을 입력받는다.
-  - [ ] 1~9를 제외한 문자가 입려되면 예외를 던진다.
-- [ ] LottoCalculator는 금액에 따른 갯수를 계산한다.
+- [x] LottoQuantityChecker 금액에 따른 로또 수량을 계산한다.
+  - [x] 1000원 단위가 아니라면 예외를 던진다.
 - [ ] LottoStatics는 금액 별 당첨 갯수를 계산한다.
   - [ ] 총 수익률을 계산한다.
+- [ ] LottoMachine은 사용자에게 금액을 입력받는다.
+  - [ ] 1~9를 제외한 문자가 입려되면 예외를 던진다.
