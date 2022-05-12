@@ -2,7 +2,7 @@ package camp.nextstep.edu.step3;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber>{
     private final int number;
     private static final int MIN = 1;
     private static final int MAX = 45;
@@ -16,6 +16,15 @@ public class LottoNumber {
         if (MIN > number || number > MAX) {
             throw new IllegalArgumentException(String.format("invalid input : %d", number));
         }
+    }
+
+    @Override
+    public int compareTo(final LottoNumber target) {
+        return target.compareBy(this.number);
+    }
+
+    private int compareBy(final int source) {
+        return source - this.number;
     }
 
     @Override

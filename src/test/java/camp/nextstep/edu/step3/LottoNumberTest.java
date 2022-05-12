@@ -1,6 +1,7 @@
 package camp.nextstep.edu.step3;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -22,5 +23,11 @@ public class LottoNumberTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoNumber(invalidInput))
                 .withMessageContaining("invalid input : ");
+    }
+
+    @DisplayName("LottoNumber 는 서로 비교 할수 있다.")
+    @Test
+    void compareTest() {
+        assertThat(new LottoNumber(1).compareTo(new LottoNumber(2))).isEqualTo(-1);
     }
 }
