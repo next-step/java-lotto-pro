@@ -2,6 +2,7 @@ package lotto.lotto;
 
 import lotto.Purchasable;
 import lotto.money.Money;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -10,17 +11,18 @@ import java.util.stream.Collectors;
 
 public class Lotto implements Purchasable {
 
-    private static final int SIZE = 6;
+    static final int SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
 
     protected Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = validated(lottoNumbers);
     }
 
+    public static Lotto of(Integer... numbers) {
+        return of(Arrays.asList(numbers));
+    }
+
     public static Lotto of(List<Integer> numbers) {
-        if (numbers == null || numbers.isEmpty()) {
-            throw new IncorrectLottoNumberSizeException();
-        }
         final List<LottoNumber> lottoNumbers = toLottoNumbers(numbers);
         return new Lotto(lottoNumbers);
     }
@@ -43,17 +45,25 @@ public class Lotto implements Purchasable {
     }
 
     private static List<LottoNumber> validated(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers == null || lottoNumbers.isEmpty()) {
-            throw new IncorrectLottoNumberSizeException();
-        }
-        if (lottoNumbers.size() != SIZE) {
-            throw new IncorrectLottoNumberSizeException();
-        }
-        if (hasDuplicate(lottoNumbers)) {
-            throw new AlreadyExistsLottoNumberException();
-        }
+        validateSize(lottoNumbers);
+        validateDuplicated(lottoNumbers);
         Collections.sort(lottoNumbers);
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    private static void validateSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers == null || lottoNumbers.isEmpty()) {
+            throw new IncorrectLottoNumberSizeException(lottoNumbers);
+        }
+        if (lottoNumbers.size() != SIZE) {
+            throw new IncorrectLottoNumberSizeException(lottoNumbers);
+        }
+    }
+
+    private static void validateDuplicated(List<LottoNumber> lottoNumbers) {
+        if (hasDuplicate(lottoNumbers)) {
+            throw new AlreadyExistsLottoNumberException(lottoNumbers);
+        }
     }
 
     private static boolean hasDuplicate(List<LottoNumber> lottoNumbers) {
@@ -62,6 +72,9 @@ public class Lotto implements Purchasable {
     }
 
     private static List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
+        if (numbers == null || numbers.isEmpty()) {
+            return Collections.emptyList();
+        }
         return numbers.stream()
                       .map(LottoNumber::new)
                       .collect(Collectors.toList());

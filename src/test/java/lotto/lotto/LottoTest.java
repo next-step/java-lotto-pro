@@ -1,5 +1,6 @@
 package lotto.lotto;
 
+import lotto.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -18,11 +19,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("Lotto 클래스 테스트")
 class LottoTest {
 
+    @DisplayName("로또는 1000원이다.")
+    @Test
+    void lottoPrice() {
+        final Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
+        assertThat(lotto.price()).isEqualTo(Money.ONE_THOUSAND);
+    }
+
     @DisplayName("생성된 Lotto 클래스는 LottoNumber가 정렬된 상태로 존재")
     @ParameterizedTest
     @ArgumentsSource(CreateAndSortedArgumentsProvider.class)
     void createAndSorted(List<Integer> numbers) {
-        Lotto lotto = Lotto.of(numbers);
+        final Lotto lotto = Lotto.of(numbers);
         assertThat(lotto.getLottoNumbers()).isSorted();
     }
 
@@ -40,7 +48,7 @@ class LottoTest {
     @DisplayName("생성시 중복되는 로또 번호가 존재하여 `AlreadyExistsLottoNumberException` 발생")
     @Test
     void duplicatedLottoNumber() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 6, 6);
+        final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 6, 6);
         assertThatThrownBy(() -> {
             Lotto.of(numbers);
         })
