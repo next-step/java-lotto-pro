@@ -18,6 +18,10 @@ public enum LottoPrizeRank {
         this.prize = prize;
     }
 
+    public int getPrize() {
+        return prize;
+    }
+
     public static LottoPrizeRank find(int numberOfMatch) {
         return Stream.of(values())
                 .filter(rank -> rank.numberOfMatch == numberOfMatch)

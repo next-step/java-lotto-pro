@@ -12,12 +12,12 @@ public class LottoStatics {
         this.winNumbers = winNumbers;
     }
 
-    public List<LottoPrizeRank> collect() {
-        List<LottoPrizeRank> lottoPrizeRanks = new ArrayList<>();
+    public LottoPrizeRanks collect() {
+        List<LottoPrizeRank> lottoPrizeRankList = new ArrayList<>();
         for (LottoNumbers lottoNumbers : this.lottoNumbers){
             LottoPrizeRank lottoPrizeRank = LottoPrizeRank.find(lottoNumbers.collect(winNumbers));
-            lottoPrizeRanks.add(lottoPrizeRank);
+            lottoPrizeRankList.add(lottoPrizeRank);
         }
-        return lottoPrizeRanks;
+        return new LottoPrizeRanks(lottoPrizeRankList);
     }
 }

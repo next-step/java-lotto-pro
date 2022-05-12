@@ -17,6 +17,10 @@
 - [x] LottoQuantityChecker 금액에 따른 로또 수량을 계산한다.
   - [x] 1000원 단위가 아니라면 예외를 던진다.
 - [x] LottoStatics는 금액 별 당첨 갯수를 계산한다.
-- [ ] LottoCalculator는 수익률을 계산한다.
+- [x] LottoPrizeRank는 일치 갯수 별 상금을 가지고 있다.
+- [x] LottoPrizeRanks는 LottoPrizeRank로 구성된다.
+  - [x] 총 당첨금액을 계산한다.
+- [ ] LottoCalculator는 총 수익률을 계산한다.
 - [ ] LottoMachine은 사용자에게 금액을 입력받는다.
   - [ ] 1~9를 제외한 문자가 입려되면 예외를 던진다.
+

@@ -22,8 +22,8 @@ public class LottoStaticsTest {
 
         LottoStatics lottoStatics = new LottoStatics(lottoNumbers, winNumbers);
 
-        List<LottoPrizeRank> lottoPrizeRanks = lottoStatics.collect();
-        assertThat(lottoPrizeRanks).containsExactly(THREE, NONE);
+        LottoPrizeRanks lottoPrizeRanks = lottoStatics.collect();
+        assertThat(lottoPrizeRanks).isEqualTo(new LottoPrizeRanks(Arrays.asList(THREE, NONE)));
     }
 
     @DisplayName("5000원 2개를 가진다")
@@ -36,7 +36,7 @@ public class LottoStaticsTest {
 
         LottoStatics lottoStatics = new LottoStatics(lottoNumbers, winNumbers);
 
-        List<LottoPrizeRank> lottoPrizeRanks = lottoStatics.collect();
-        assertThat(lottoPrizeRanks).containsExactly(THREE, THREE);
+        LottoPrizeRanks lottoPrizeRanks = lottoStatics.collect();
+        assertThat(lottoPrizeRanks).isEqualTo(new LottoPrizeRanks(Arrays.asList(THREE, THREE)));
     }
 }
