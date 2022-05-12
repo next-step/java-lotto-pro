@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -55,13 +56,16 @@ public class Lotto {
 	}
 	
 	private static String lottoNumbersStringFormat(LottoNumbers lottoNumbers) {
-		return String.format("[%d, %d, %d, %d, %d, %d]", 
-				lottoNumbers.getLottoNumbers().get(0).getLottoNumber(),
-				lottoNumbers.getLottoNumbers().get(1).getLottoNumber(),
-				lottoNumbers.getLottoNumbers().get(2).getLottoNumber(),
-				lottoNumbers.getLottoNumbers().get(3).getLottoNumber(),
-				lottoNumbers.getLottoNumbers().get(4).getLottoNumber(),
-				lottoNumbers.getLottoNumbers().get(5).getLottoNumber());
+		StringBuffer lottoNumbersMessage = new StringBuffer();
+		lottoNumbersMessage.append("[");
+		for (int i = 0; i < lottoNumbers.getLottoNumbers().size(); ++i) {
+			lottoNumbersMessage.append(lottoNumbers.getLottoNumbers().get(i).getLottoNumber());
+			if (i != lottoNumbers.getLottoNumbers().size()-1) {
+				lottoNumbersMessage.append(", ");
+			}
+		}
+		lottoNumbersMessage.append("]");
+		return lottoNumbersMessage.toString();
 	}
 	
 	private static String winLottoCountStringFormat(int index, int count) {
