@@ -1,6 +1,7 @@
 package camp.nextstep.edu.step3;
 
 public enum Hit {
+    ZERO(0 ,0),
     ONE(1, 0),
     TWO(2, 0),
     THREE(3, 5000),
@@ -14,6 +15,10 @@ public enum Hit {
     Hit(int count, int prizeMoney) {
         this.count = count;
         this.prizeMoney = prizeMoney;
+    }
+
+    static Hit valueOf(final int hitCount) {
+        return Hit.values()[hitCount];
     }
 
     @Override
