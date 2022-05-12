@@ -6,21 +6,22 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private final List<LottoNumber> lottoNumbers;
+    private static final int VALID_SIZE = 6;
+    private List<LottoNumber> lottoNumbers;
+
     public Lotto(LottoNumber[] lottoNumbers) {
         validationInputSize(lottoNumbers.length);
-        this.lottoNumbers = sortedLottoNumbers(lottoNumbers);
+        sortedLottoNumbers(lottoNumbers);
     }
 
-    private List<LottoNumber> sortedLottoNumbers(final LottoNumber[] lottoNumbers) {
-        List<LottoNumber> lottoNumberList = Arrays.asList(lottoNumbers);
-        Collections.sort(lottoNumberList);
-        return lottoNumberList;
+    private void sortedLottoNumbers(final LottoNumber[] lottoNumbers) {
+        this.lottoNumbers = Arrays.asList(lottoNumbers);
+        Collections.sort(this.lottoNumbers);
     }
 
     private void validationInputSize(final int inputSize) {
-        if (inputSize != 6) {
-            throw new IllegalArgumentException("LottoNumberArray invalid size : "+inputSize);
+        if (!Objects.equals(VALID_SIZE, inputSize)) {
+            throw new IllegalArgumentException("LottoNumberArray invalid size : " + inputSize);
         }
     }
 
