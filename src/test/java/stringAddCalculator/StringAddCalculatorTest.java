@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringAddCalculatorTest {
     @Test
-    public void splitAndSum_null_또는_빈문자() {
+    public void splitAndSum_null_또는_빈문자() throws IllegalAccessException {
         int result = StringAddCalculator.splitAndSum(null);
         assertThat(result).isEqualTo(0);
 
@@ -23,8 +23,8 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    public void splitAndSum_숫자하나초과() throws Exception{
-        assertThrows(RuntimeException.class, () -> {
+    public void splitAndSum_숫자하나초과() throws IllegalAccessException{
+        assertThrows(IllegalAccessException.class, () -> {
             int result = StringAddCalculator.splitAndSum("12");
         });
     }
@@ -48,8 +48,8 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    public void splitAndSum_negative() throws Exception {
+    public void splitAndSum_negative() throws IllegalAccessException {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalAccessException.class);
     }
 }
