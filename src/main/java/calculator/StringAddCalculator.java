@@ -35,14 +35,13 @@ public class StringAddCalculator {
 
     private static int calculateSum(String[] inputs) {
         int[] numbers = Arrays.stream(inputs).mapToInt(Integer::parseInt).toArray();
-        for (int number : numbers) {
-            negativeNumberCheck(number);
-        }
+        negativeNumberCheck(numbers);
         return Arrays.stream(numbers).sum();
     }
 
-    private static void negativeNumberCheck(int number) {
-        if (number < MIN_VALUE) {
+    private static void negativeNumberCheck(int[] numbers) {
+        boolean isNegative = Arrays.stream(numbers).anyMatch(number -> number < MIN_VALUE);
+        if(isNegative) {
             throw new RuntimeException(NEGATIVE_NUMBER_ERROR_MESSAGE);
         }
     }
