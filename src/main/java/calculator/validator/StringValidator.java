@@ -8,17 +8,37 @@ import static calculator.constants.ErrorMessage.NEGATIVE_NUMBER_ERROR_MESSAGE;
  * @date : 2022/05/12 3:42 오후
  */
 public class StringValidator {
-    public static void numberValidation(String given) {
+    public static void numberValidation(String input) {
         try {
-            Integer.parseInt(given);
+            Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_NUMBER_ERROR_MESSAGE);
         }
     }
 
-    public static void positiveNumberValidation(String given) {
-        if (Integer.parseInt(given) < 0) {
+    public static void positiveNumberValidation(String input) {
+        if (Integer.parseInt(input) < 0) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR_MESSAGE);
         }
+    }
+
+    public static boolean isNumber(String input) {
+        try {
+            numberValidation(input);
+        } catch (IllegalArgumentException exception) {
+            System.err.println(exception.getLocalizedMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isPositiveNumber(String input) {
+        try {
+            positiveNumberValidation(input);
+        } catch (IllegalArgumentException exception) {
+            System.err.println(exception.getLocalizedMessage());
+            return false;
+        }
+        return true;
     }
 }
