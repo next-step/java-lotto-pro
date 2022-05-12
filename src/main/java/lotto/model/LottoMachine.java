@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 public class LottoMachine {
     private final LottoPurchaseQuantity lottoPurchaseQuantity;

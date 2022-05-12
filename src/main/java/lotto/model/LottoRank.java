@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import static lotto.constants.LottoErrorMessage.OUT_OF_RANGE_LOTTO_RANK;
 
