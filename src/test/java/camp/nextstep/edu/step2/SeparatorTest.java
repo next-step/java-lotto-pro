@@ -1,6 +1,7 @@
 package camp.nextstep.edu.step2;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -8,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 public class SeparatorTest {
 
@@ -17,6 +19,16 @@ public class SeparatorTest {
     void differentiateTest(final String input, final String[] expectedResult) {
         String[] strNumbers = Separator.differentiate(input);
         assertThat(strNumbers).containsExactly(expectedResult);
+    }
+
+    @DisplayName("입력 값이 잘못된 경우 RuntimeException 이 발생한다.")
+    @Test
+    void invalidInputTest() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> Separator.differentiate(null));
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> Separator.differentiate(""));
     }
 
     private static Stream<Arguments> provideInputAndExpectedResult() {
