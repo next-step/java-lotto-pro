@@ -3,6 +3,7 @@ package camp.nextstep.edu.step3;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
@@ -26,8 +27,9 @@ public class LottoNumberTest {
     }
 
     @DisplayName("LottoNumber 는 서로 비교 할수 있다.")
-    @Test
-    void compareTest() {
-        assertThat(new LottoNumber(1).compareTo(new LottoNumber(2))).isEqualTo(-1);
+    @ParameterizedTest
+    @CsvSource(value = {"1:2:-1", "2:2:0"}, delimiter = ':')
+    void compareTest(final int source, final int destination, final int expectedResult) {
+        assertThat(new LottoNumber(source).compareTo(new LottoNumber(destination))).isEqualTo(expectedResult);
     }
 }
