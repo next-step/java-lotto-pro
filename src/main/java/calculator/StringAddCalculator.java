@@ -4,13 +4,21 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
+    private static final int ZERO = 0;
     private static final String DELIMITER = "[,:]";
 
     public static int splitAndSum(String input) {
-        return sum(changeNumbers(splitString(input)));
+        if (isNullOrEmpty(input)) {
+            return ZERO;
+        }
+        return sum(changeNumbers(split(input)));
     }
 
-    private static String[] splitString(String input) {
+    private static boolean isNullOrEmpty(String input) {
+        return input == null || input.isEmpty();
+    }
+
+    private static String[] split(String input) {
         return input.split(DELIMITER);
     }
 

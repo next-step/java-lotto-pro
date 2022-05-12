@@ -21,4 +21,22 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
+    @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
+    @Test
+    public void splitAndSum_null_또는_빈문자() {
+        int result = StringAddCalculator.splitAndSum(null);
+        assertThat(result).isEqualTo(0);
+
+        result = StringAddCalculator.splitAndSum("");
+        assertThat(result).isEqualTo(0);
+    }
+
+    @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
+    @Test
+    public void splitAndSum_숫자하나() throws Exception {
+        int result = StringAddCalculator.splitAndSum("1");
+        assertThat(result).isEqualTo(1);
+    }
+
+
 }
