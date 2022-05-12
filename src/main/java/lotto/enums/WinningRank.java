@@ -1,6 +1,7 @@
 package lotto.enums;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum WinningRank {
     WIN_1(6, 2_000_000_000),
@@ -24,7 +25,19 @@ public enum WinningRank {
             .orElse(NO_WIN);
     }
 
-    private int getWinningCount() {
+    public static List<WinningRank> winningValues() {
+        return Arrays.asList(WIN_4, WIN_3, WIN_2, WIN_1);
+    }
+
+    public static boolean isWinningRank(WinningRank winningRank) {
+        return winningValues().contains(winningRank);
+    }
+
+    public int getWinningCount() {
         return this.winningCount;
+    }
+
+    public int getPrizeMoney() {
+        return this.prizeMoney;
     }
 }

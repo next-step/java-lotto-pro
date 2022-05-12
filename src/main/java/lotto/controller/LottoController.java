@@ -13,6 +13,7 @@ import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.WinningStatistics;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
@@ -30,8 +31,12 @@ public class LottoController {
     public void play() {
         Money money = lottoInputView.inputMoney();
         Lottos lottos = purchaseLottos(money);
+        LottoNumbers lastWinningLottoNumbers = LottoNumbers.generateBy(inputLastWinningLottoNumbers());
 
-        inputLastWinningLottoNumbers();
+        WinningStatistics winningStatistics = WinningStatistics.of(lottos, lastWinningLottoNumbers, money);
+        winningStatistics.statistics();
+
+        resultView.printWinningStatistics(winningStatistics);
     }
 
     private List<Integer> inputLastWinningLottoNumbers() {

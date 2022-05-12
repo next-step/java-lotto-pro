@@ -1,19 +1,22 @@
 package lotto.view;
 
-import static lotto.constants.LottoErrorMessage.*;
+import static lotto.constants.LottoConstants.LOTTO_PRICE;
+import static lotto.constants.LottoErrorMessage.INVALID_INPUT_LOTTO_NUMBER;
 import static lotto.constants.LottoErrorMessage.INVALID_INPUT_MONEY;
 import static lotto.constants.LottoGuideMessage.INPUT_MONEY;
-import static lotto.constants.LottoNumberConstants.*;
+import static lotto.constants.LottoNumberConstants.LOTTO_NUMBER_MAX;
+import static lotto.constants.LottoNumberConstants.LOTTO_NUMBER_MIN;
+import static lotto.constants.LottoNumberConstants.LOTTO_NUMBER_SIZE;
 
 import calculator.utils.StringUtils;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import lotto.constants.LottoConstants;
-import lotto.constants.LottoErrorMessage;
-import lotto.constants.LottoNumberConstants;
 import lotto.domain.Money;
 import lotto.utils.LottoNumberStringSplitter;
 import lotto.utils.LottoNumberStringToIntegerParser;
@@ -26,12 +29,12 @@ public class LottoInputView {
         System.out.println(INPUT_MONEY);
         String inputMoney = readLine();
 
-        if (isValidMoney(inputMoney)) {
-            return convertToMoney(inputMoney);
+        if (!isValidMoney(inputMoney)) {
+            System.out.printf((INVALID_INPUT_MONEY) + "%n", inputMoney);
+            return inputMoney();
         }
 
-        System.out.printf((INVALID_INPUT_MONEY) + "%n", inputMoney);
-        return inputMoney();
+        return convertToMoney(inputMoney);
     }
 
     private Money convertToMoney(String money) {
@@ -45,21 +48,22 @@ public class LottoInputView {
             return LottoNumberStringToIntegerParser.parse(splitInputNumbers);
         }
 
-        System.out.printf((INVALID_LOTTO_NUMBER) + "%n", Arrays.asList(splitInputNumbers));
+        System.out.printf((INVALID_INPUT_LOTTO_NUMBER) + "%n", Arrays.asList(splitInputNumbers));
         System.out.println(inputGuideMessage);
 
         return this.inputLottoNumbers(inputGuideMessage);
     }
 
     private boolean isValidateSplitInputNumbers(String[] splitInputNumbers) {
-        List<String> numbers = Arrays.stream(splitInputNumbers).map(String::format).collect(Collectors.toList());
+        List<String> numbers = Arrays.stream(splitInputNumbers).map(String::trim).collect(Collectors.toList());
         return isValidateNumbers(numbers)
             && isValidateLottoNumbers(numbers)
             && isValidateLottoNumberSize(numbers);
     }
 
     private boolean isValidateLottoNumberSize(List<String> numbers) {
-        return numbers.size() == LOTTO_NUMBER_SIZE;
+        Set<String> numbersSet = new HashSet<>(numbers);
+        return numbersSet.size() == LOTTO_NUMBER_SIZE;
     }
 
     private boolean isValidateLottoNumbers(List<String> numbers) {
@@ -87,7 +91,8 @@ public class LottoInputView {
             return false;
         }
 
-        return money.matches(INPUT_NUMBER_0_TO_9_REG_EXP);
+        return money.matches(INPUT_NUMBER_0_TO_9_REG_EXP)
+            && Integer.parseInt(money) >= LOTTO_PRICE;
     }
 
     private String readLine() {
