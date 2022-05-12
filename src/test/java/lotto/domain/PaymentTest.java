@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class PaymentTest {
@@ -38,5 +39,16 @@ public class PaymentTest {
         // when and then
         assertThatThrownBy(() -> new Payment(money))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1000:1", "2000:2", "5000:5", "14000:14", "90000:90"}, delimiter = ':')
+    @DisplayName("getPurchasableAmount 메서드 호출 시 구매 금액에 맞는 로또 티켓 수량이 반환되어야 한다")
+    void when_call_getPurchasableAmount_should_return_correct_purchasable_amount_of_lotto_tickets(final String money, final int expected) {
+        // given
+        final Payment payment = new Payment(money);
+
+        // when and then
+        assertThat(payment.getPurchasableAmount()).isEqualTo(expected);
     }
 }
