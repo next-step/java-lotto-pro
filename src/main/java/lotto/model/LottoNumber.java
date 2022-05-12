@@ -6,6 +6,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
 	private int lottoNumber;
 
 	public LottoNumber(String lottoNumber) {
+		lottoNumber = lottoNumber.trim();
 		validationNumber(lottoNumber);
 		validationRange(getLottoNumber());
 	}

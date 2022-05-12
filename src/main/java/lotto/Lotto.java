@@ -8,6 +8,7 @@ import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 
 public class Lotto {
+	private static final String LOTTO_INPUT_LIST_REGEX = ",";
 	private static Scanner scan = new Scanner(System.in);
 	public static void main(String[] args) {
 		String money = inputMessage("구입금액을 입력해 주세요.");
@@ -36,7 +37,7 @@ public class Lotto {
 	
 	private static List<LottoNumber> lastWinLottoNumbers(String lastLottoNumbers) {
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
-		for (String lottoNumber: lastLottoNumbers.split(", ")) {
+		for (String lottoNumber: lastLottoNumbers.split(LOTTO_INPUT_LIST_REGEX)) {
 			lottoNumbers.add(new LottoNumber(lottoNumber));
 		}
 		return lottoNumbers;
