@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import step2.ArgumentResolver.CustomResolver;
 import step2.ArgumentResolver.DefaultResolver;
 import step2.ArgumentResolver.EmptyStringResolver;
 import step2.ArgumentResolver.InputSingleNumberResolver;
@@ -16,6 +17,8 @@ public class ResolverTest {
     Resolver defaultResolver = new DefaultResolver();
     Resolver emptyStringResolver = new EmptyStringResolver();
     Resolver inputSingleNumberResolver = new InputSingleNumberResolver();
+    Resolver customResolver = new CustomResolver();
+
 
     @ParameterizedTest
     @CsvSource(value = {"1,2,3&,&3", "1,2,3&:&1", "1:2:3&:&3", "1:2:3&,&1"}, delimiter = '&')
@@ -57,5 +60,14 @@ public class ResolverTest {
         assertThat(inputSingleNumberResolver.resolve(source))
             .hasSize(1)
             .containsExactly(source);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "//:\n1:2:3", "//!\n1!2!3"})
+    public void customResolverTest(String source) {
+        assertThat(customResolver.canResolve(source)).isTrue();
+        assertThat(customResolver.resolve(source))
+            .hasSize(3)
+            .containsExactly("1", "2", "3");
     }
 }
