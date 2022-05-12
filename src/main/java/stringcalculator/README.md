@@ -12,6 +12,5 @@
 
 ## 리팩토링
 - [x] 문자열 구분자로 분리 하는 클래스 분리 - StringSplitter
-- [x] 양수의 정수로 전환 하는 클래스 분리 - PositiveIntegerConverter
-- [x] 양수의 정수인지 체크 하는 클래스 분리 - PositiveIntegerChecker
 - [x] 입력 받은 문자열을 더하는 클래스 분리 - StringAddCalculator
+- [x] PositiveNumber 클래스를 분리 함으로써 객체 생성 시에 양의 정수 인지 확인 
