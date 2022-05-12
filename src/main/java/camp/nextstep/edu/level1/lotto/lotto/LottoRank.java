@@ -8,10 +8,12 @@ public enum LottoRank {
     SECOND("5개 일치", 5, new Money(50000)),
     THIRD("4개 일치", 4, new Money(5000));
 
+    private String description;
     private long matchCount;
     private Money price;
 
     LottoRank(String description, long matchCount, Money price) {
+        this.description = description;
         this.matchCount = matchCount;
         this.price = price;
     }
@@ -19,6 +21,10 @@ public enum LottoRank {
     public static LottoRank checkLottoRank(LottoNumbers source, LottoNumbers winningNumbers) {
         long matchedCount = source.matchedCountByWinnerNumbers(winningNumbers);
         return findLottoRankByMatchedCount(matchedCount);
+    }
+
+    public String rankDescription() {
+        return this.description;
     }
 
     public Money rankPrice() {

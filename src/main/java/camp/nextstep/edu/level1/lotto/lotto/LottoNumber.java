@@ -20,4 +20,9 @@ public class LottoNumber {
     public boolean hasSameValue(LottoNumber value) {
         return this.value == value.value;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.value);
+    }
 }

@@ -1,5 +1,7 @@
 package camp.nextstep.edu.view;
 
+import camp.nextstep.edu.level1.lotto.lotto.Lotto;
+import camp.nextstep.edu.level1.lotto.lotto.LottoResult;
 import camp.nextstep.edu.level1.stringCaluator.calculator.StringCalculator;
 
 import java.util.Scanner;
@@ -23,5 +25,17 @@ public class InputView {
         }
 
         return new StringCalculator(sb.toString());
+    }
+
+    public static Lotto enterLottoValue() {
+        System.out.println("구입금액을 입력해 주세요.");
+
+        return new Lotto(scanner.nextLine());
+    }
+
+    public static LottoResult enterLottoWinningNumbers(Lotto lotto) {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+
+        return lotto.compareWinningNumber(scanner.nextLine());
     }
 }

@@ -36,4 +36,12 @@ class MoneyTest {
 
         assertThatIllegalArgumentException().isThrownBy(() -> originalMoney.sub(subMoney));
     }
+
+    @Test
+    void 금액의_비율을_구하면_정상_동작해야_한다() {
+        Money sourceMoney = new Money(10000);
+        Money targetMoney = new Money(5000);
+
+        assertThat(sourceMoney.calculateRateByOtherMoney(targetMoney)).isEqualTo(2.0);
+    }
 }

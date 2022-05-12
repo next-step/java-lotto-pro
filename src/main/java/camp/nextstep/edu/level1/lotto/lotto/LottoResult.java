@@ -9,9 +9,7 @@ public class LottoResult {
 
     public LottoResult(List<LottoNumbers> purchaseLotto, LottoNumbers winnerLottoNumbers) {
         purchaseLotto.forEach(lotto -> {
-            LottoRank rank = LottoRank.checkLottoRank(lotto, winnerLottoNumbers);
-            result.putIfAbsent(rank, 0);
-            result.replace(rank, result.get(rank) + 1);
+            addLottoRankCountIfRankIsNotNull(LottoRank.checkLottoRank(lotto, winnerLottoNumbers));
         });
     }
 
@@ -27,5 +25,27 @@ public class LottoResult {
         }
 
         return amount;
+    }
+
+    private void addLottoRankCountIfRankIsNotNull(LottoRank rank) {
+        if (rank != null) {
+            result.putIfAbsent(rank, 0);
+            result.replace(rank, result.get(rank) + 1);
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        result.forEach((rank, count) -> sb.append(rank.rankDescription())
+                .append(" (")
+                .append(rank.rankPrice())
+                .append(")- ")
+                .append(count)
+                .append("개")
+                .append("\n"));
+
+        return sb.toString();
     }
 }

@@ -33,6 +33,10 @@ public class Money {
         return new Money(this.value * multipleValue);
     }
 
+    public double calculateRateByOtherMoney(Money target) {
+        return (double)this.value / target.value;
+    }
+
     private void checkValidateMoney(long value) {
         if (value < MIN_VALUE) {
             throw new IllegalArgumentException("금액은 양수 값이어야 합니다.");
@@ -56,5 +60,10 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(MIN_VALUE, value);
+    }
+
+    @Override
+    public String toString() {
+        return this.value + "원";
     }
 }

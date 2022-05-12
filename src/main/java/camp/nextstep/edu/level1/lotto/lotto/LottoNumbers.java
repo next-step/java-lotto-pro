@@ -5,14 +5,15 @@ import camp.nextstep.edu.until.RandomGenerator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private final static int LOTTO_START_NUMBER = 1;
     private final static int LOTTO_END_NUMBER = 45;
     private final static int LOTTO_RANGE = 6;
-//    private final static String PRINT_JOIN_DELIMITER = ", ";
-//    private final static String TO_STRING_PREFIX = "[";
-//    private final static String TO_STRING_SUFFIX = "]";
+    private final static String PRINT_JOIN_DELIMITER = ", ";
+    private final static String TO_STRING_PREFIX = "[";
+    private final static String TO_STRING_SUFFIX = "]";
 
     private final List<LottoNumber> value = new ArrayList<>();
 
@@ -54,5 +55,12 @@ public class LottoNumbers {
         if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 에서 45 사이의 값만 허용합니다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return TO_STRING_PREFIX + this.value.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(PRINT_JOIN_DELIMITER)) + TO_STRING_SUFFIX;
     }
 }
