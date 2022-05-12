@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoNumbers {
     public final static int LOTTO_NUMBERS_SIZE = 6;
@@ -28,5 +29,9 @@ public class LottoNumbers {
         if (numbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("중복된 값이 있습니다.");
         }
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return this.numbers;
     }
 }
