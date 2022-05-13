@@ -34,4 +34,8 @@ public enum Prize {
     public int getPrize() {
         return prize;
     }
+
+    public String resultMessage(final int matches) {
+        return String.format("%d개 일치 (%d원)- %d", matchCount, prize, matches);
+    }
 }

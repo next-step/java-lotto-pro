@@ -1,22 +1,54 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 
 public class LottoResult {
-    private final Map<Prize, Integer> resultMap = new HashMap<>();
-    private final double returnOfRatio;
+    private static final int[] PRINTABLE_MATCH_COUNTS = {3, 4, 5, 6};
+    private static final String WIN_MESSAGE = "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+    private static final String LOSE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public LottoResult(final LottoTickets lottoTickets, final LottoNumbers winningNumbers) {
-        returnOfRatio = 0;
+    private final int investment;
+    private final Map<Prize, Integer> prizeMap;
+
+    public LottoResult(final int investment, final Map<Prize, Integer> prizeMap) {
+        this.investment = investment;
+        this.prizeMap = prizeMap;
+    }
+
+    public void printResult() {
+        printPrizes();
+        final int income = sumPrizes();
+        printReturnOfRatio(income);
+    }
+
+    private void printPrizes() {
+        for (final int matchCount : PRINTABLE_MATCH_COUNTS) {
+            final Prize prize = Prize.findPrizeByMatchCount(matchCount);
+            System.out.println(prize.resultMessage(prizeMap.get(prize)));
+        }
+    }
+
+    private int sumPrizes() {
+        int sum = 0;
+        for (Entry<Prize, Integer> entry : prizeMap.entrySet()) {
+            sum += entry.getKey().getPrize() * entry.getValue();
+        }
+        return sum;
+    }
+
+    private void printReturnOfRatio(final int income) {
+        final double returnOfRatio = Double.valueOf(income) / Double.valueOf(investment);
+        String message = "총 수익률은 " + String.format("%.2f", returnOfRatio) + "입니다.";
+        System.out.println(message + (returnOfRatio > 1 ? WIN_MESSAGE : LOSE_MESSAGE));
     }
 
     @Override
     public String toString() {
         return "LottoResult{" +
-                "resultMap=" + resultMap +
-                ", returnOfRatio=" + returnOfRatio +
+                "investment=" + investment +
+                ", prizeMap=" + prizeMap +
                 '}';
     }
 
@@ -29,12 +61,11 @@ public class LottoResult {
             return false;
         }
         final LottoResult that = (LottoResult) o;
-        return Double.compare(that.returnOfRatio, returnOfRatio) == 0 && Objects.equals(resultMap,
-                that.resultMap);
+        return investment == that.investment && Objects.equals(prizeMap, that.prizeMap);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resultMap, returnOfRatio);
+        return Objects.hash(investment, prizeMap);
     }
 }

@@ -25,6 +25,10 @@ public class Payment {
         }
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     public int getPurchasableAmount() {
         return purchasableAmount;
     }
