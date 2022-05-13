@@ -24,8 +24,8 @@ public class Numbers {
     }
 
     private void negativeNumberCheck() {
-        boolean isNegative = Arrays.stream(numbers).anyMatch(number -> number < MIN_VALUE);
-        if (isNegative) {
+        boolean hasNegative = Arrays.stream(numbers).anyMatch(number -> number < MIN_VALUE);
+        if (hasNegative) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
     }
