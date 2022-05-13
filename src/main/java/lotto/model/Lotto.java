@@ -42,4 +42,8 @@ public class Lotto {
     public int compareLottoAndReturnMatchCount(Lotto winningLotto) {
         return this.lottoNumbers.compareLottoNumbersAndReturnMatchCount(winningLotto.lottoNumbers);
     }
+
+    public String numbersToString() {
+        return this.lottoNumbers.numbersToString();
+    }
 }

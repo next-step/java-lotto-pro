@@ -3,7 +3,6 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class LottoNumbers {
     public final static int LOTTO_NUMBERS_SIZE = 6;
@@ -51,5 +50,9 @@ public class LottoNumbers {
 
     private boolean compareNumber(LottoNumber number) {
         return this.numbers.contains(number);
+    }
+
+    public String numbersToString() {
+        return this.numbers.toString();
     }
 }

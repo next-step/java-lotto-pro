@@ -50,4 +50,15 @@ public class Lottos {
             winningLotto.compareWinningLotto(lotto);
         }
     }
+
+    public String numbersToString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (Lotto lotto : this.lottos) {
+            sb.append(lotto.numbersToString());
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
 }
