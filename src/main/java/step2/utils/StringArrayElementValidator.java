@@ -1,6 +1,6 @@
 package step2.utils;
 
-public class StringArrayElementUtil {
+public class StringArrayElementValidator {
 
     public static void validateSplitResult(String[] sources) {
         try {

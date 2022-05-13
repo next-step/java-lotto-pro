@@ -7,7 +7,7 @@ import step2.argumentresolver.DefaultDelimiterStringArrayResolver;
 import step2.argumentresolver.EmptyInputStringArrayResolver;
 import step2.argumentresolver.SingleNumberStringArrayResolver;
 import step2.argumentresolver.StringArrayResolver;
-import step2.utils.StringArrayElementUtil;
+import step2.utils.StringArrayElementValidator;
 
 public class StringAdderCalculator {
 
@@ -18,7 +18,7 @@ public class StringAdderCalculator {
         init();
         getSplitArrayByInput(source);
         try {
-            StringArrayElementUtil.validateSplitResult(splitArray);
+            StringArrayElementValidator.validateSplitResult(splitArray);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
