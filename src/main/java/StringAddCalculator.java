@@ -6,8 +6,8 @@ public class StringAddCalculator {
         if (isEmpty(expression)) {
             return 0;
         }
-        StringSplitter stringSplitter = new StringSplitter(expression);
-        return sum(stringSplitter.getNumbers());
+        List<Integer> numbers =  StringSplitter.getNumbers(expression);
+        return sum(numbers);
     }
 
     private static boolean isEmpty(String expression) {

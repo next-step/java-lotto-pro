@@ -24,3 +24,4 @@
 - [X] customDelimiter Matcher 중복 제거, 상수화 작업 
 - [X] 클래스명 변경 (StringSplitter -> StringSplitter)
 - [X] 메서드명 변경 (isEmptyExpression -> isEmpty)
+- [X] StringSplitter를 유틸성 클래스로 변경 
