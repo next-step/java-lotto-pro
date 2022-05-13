@@ -1,5 +1,6 @@
 package lotto.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -9,14 +10,15 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class WinningLottoTest {
 
-    @Test
-    void createWinningLotto() {
-        assertThat(new WinningLotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)))).isNotEqualTo(new WinningLotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6))));
+    private WinningLotto winningLotto;
+
+    @BeforeEach
+    void setUp() {
+        winningLotto = new WinningLotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
     }
 
     @Test
     void compareWinningLottos() {
-        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
         winningLotto.compareWinningLotto(new Lotto(new LottoNumbers(Arrays.asList(1,2,3,9,10,11))));
 
         assertAll(
@@ -29,8 +31,6 @@ public class WinningLottoTest {
 
     @Test
     void findEarningsRate() {
-        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
-
         Lottos lottos = new Lottos(Arrays.asList(
                 new Lotto(new LottoNumbers(Arrays.asList(8, 21, 23, 41, 42, 43))),
                 new Lotto(new LottoNumbers(Arrays.asList(3, 5, 11, 16, 32, 38))),
