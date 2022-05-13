@@ -15,6 +15,12 @@ class LottoNoTest {
     }
 
     @Test
+    public void 문자열_생성자_로또_생성() {
+        new LottoNo(String.valueOf(LOTTO_START_NUMBER));
+        new LottoNo(String.valueOf(LOTTO_END_NUMBER));
+    }
+
+    @Test
     public void 문제있는_로또_번호() {
         assertThatThrownBy(() -> {
             new LottoNo(LOTTO_START_NUMBER - 1);

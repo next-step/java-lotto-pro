@@ -15,6 +15,10 @@ public class LottoNo implements Comparable<LottoNo> {
         this.number = number;
     }
 
+    public LottoNo(String number) {
+        this(Integer.parseInt(number));
+    }
+
     private boolean isInvalidNumber(int number) {
         return number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER;
     }
