@@ -9,22 +9,20 @@ public class StringSplitter {
     private static final String CUSTOM_SPLIT_DELIMITER_REGEX = "//(.)\n(.*)";
     private static final Integer VALUE_IDX = 2;
     private static final Integer CUSTOM_SPLIT_DELIMITER_IDX = 1;
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_SPLIT_DELIMITER_REGEX);
 
-    private StringSplitter(){
-        throw new AssertionError();
-    }
+    private StringSplitter() {}
 
-    public static String[] split(String text){
-        if(StringUtils.isEmpty(text)){
+    public static String[] split(String text) {
+        if (StringUtils.isEmpty(text)) {
             return new String[]{};
         }
         return splitDefaultOrCustomDelimiter(text);
     }
 
     private static String[] splitDefaultOrCustomDelimiter(String text) {
-        Pattern customDelimiterPattern = Pattern.compile(CUSTOM_SPLIT_DELIMITER_REGEX);
-        Matcher matcher = customDelimiterPattern.matcher(text);
-        if(matcher.find()){
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
+        if (matcher.find()) {
             return splitByDelimiter(matcher.group(VALUE_IDX), matcher.group(CUSTOM_SPLIT_DELIMITER_IDX));
         }
         return splitByDelimiter(text, DEFAULT_SPLIT_DELIMITER_REGEX);

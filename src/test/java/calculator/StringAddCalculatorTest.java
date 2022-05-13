@@ -12,7 +12,7 @@ class StringAddCalculatorTest {
 
     @Test
     @DisplayName("문자열 계산기에 전달된 값이 null인 경우 0이 반환된다.")
-    void emptyCase01(){
+    void emptyCase01() {
         // given
         String text = null;
 
@@ -25,7 +25,7 @@ class StringAddCalculatorTest {
 
     @Test
     @DisplayName("문자열 계산기에 전달된 값이 공백인 경우 0이 반환된다.")
-    void emptyCase02(){
+    void emptyCase02() {
         // given
         String text = "";
 
@@ -38,33 +38,33 @@ class StringAddCalculatorTest {
 
     @Test
     @DisplayName("문자열 계산기에 전달된 값이 숫자가 아닌경우 RuntimeException이 발생된다.")
-    void exceptionTest01(){
+    void exceptionTest01() {
         // given
         String text = "a,f,!";
 
         // when & then
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(text))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("[ERROR]")
-                .hasMessageContaining("a, f, !");
+            .isInstanceOf(RuntimeException.class)
+            .hasMessageContaining("[ERROR]")
+            .hasMessageContaining("a, f, !");
     }
 
     @Test
     @DisplayName("문자열 계산기에 전달된 값이 음수 인 경우 RuntimeException이 발생된다.")
-    void exceptionTest02(){
+    void exceptionTest02() {
         // given
         String text = "-1,2,3";
 
         // when & then
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(text))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("[ERROR]")
-                .hasMessageContaining("-1, 2, 3");
+            .isInstanceOf(RuntimeException.class)
+            .hasMessageContaining("[ERROR]")
+            .hasMessageContaining("-1, 2, 3");
     }
 
     @Test
     @DisplayName("문자열 계산기 합산 테스트")
-    void sumTest01(){
+    void sumTest01() {
         // given
         String text = "1,2:3";
 
@@ -78,7 +78,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
     @DisplayName("문자열 계산기 합산 테스트 (기본 구분자) ParameterizedTest 활용")
-    void sumTest02(String input){
+    void sumTest02(String input) {
         // given & when
         Integer sum = StringAddCalculator.splitAndSum(input);
 
@@ -89,7 +89,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2;3", "//_\n1_2_3"})
     @DisplayName("문자열 계산기 합산 테스트 (커스텀 구분자) ParameterizedTest 활용")
-    void sumTest03(String input){
+    void sumTest03(String input) {
         // given & when
         Integer sum = StringAddCalculator.splitAndSum(input);
 
@@ -134,6 +134,6 @@ class StringAddCalculatorTest {
     @Test
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+            .isInstanceOf(RuntimeException.class);
     }
 }

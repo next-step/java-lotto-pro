@@ -46,14 +46,14 @@ public class SetTest {
 
     @ParameterizedTest
     @CsvSource(
-            value = {
-                    "1:true",
-                    "2:true",
-                    "3:true",
-                    "4:false",
-                    "5:false"
-            },
-            delimiter = ':'
+        value = {
+            "1:true",
+            "2:true",
+            "3:true",
+            "4:false",
+            "5:false"
+        },
+        delimiter = ':'
     )
     @DisplayName("Set의 contains() 메소드를 활용해 1, 2, 3의 값이 존재하는지를 확인하는 학습테스트를 구현한다. ParameterizedTest, CsvSource 활용")
     void containsTest03(int input, boolean result) {
