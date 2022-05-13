@@ -1,11 +1,12 @@
 package lotto;
 
+import lotto.model.LottoPrizeRanks;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static lotto.LottoPrizeRank.*;
+import static lotto.model.LottoPrizeRank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("LottoPrizeRanks는 ")

@@ -1,16 +1,16 @@
 package lotto.view;
 
-import lotto.LottoNumber;
-import lotto.LottoNumbers;
-import lotto.LottoPrizeMap;
-import lotto.LottoPrizeRank;
-import lotto.LottoPrizeRanks;
+import lotto.model.LottoNumber;
+import lotto.model.LottoNumbers;
+import lotto.model.LottoPrizeMap;
+import lotto.model.LottoPrizeRank;
+import lotto.model.LottoPrizeRanks;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.LottoPrizeRank.*;
+import static lotto.model.LottoPrizeRank.*;
 
 public class ResultView {
     private static final String QUANTITY_MESSAGE = "%d개를 구매했습니다.\n";

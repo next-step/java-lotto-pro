@@ -1,5 +1,11 @@
-package lotto;
+package lotto.controller;
 
+import lotto.model.LottoGenerator;
+import lotto.model.LottoNumbers;
+import lotto.model.LottoPrizeRanks;
+import lotto.model.LottoQuantityChecker;
+import lotto.model.LottoStatics;
+import lotto.model.RandomNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

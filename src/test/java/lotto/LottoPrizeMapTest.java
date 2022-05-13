@@ -1,13 +1,15 @@
 package lotto;
 
+import lotto.model.LottoPrizeMap;
+import lotto.model.LottoPrizeRanks;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static lotto.LottoPrizeRank.FOUR;
-import static lotto.LottoPrizeRank.THREE;
-import static lotto.LottoPrizeRank.NONE;
+import static lotto.model.LottoPrizeRank.FOUR;
+import static lotto.model.LottoPrizeRank.THREE;
+import static lotto.model.LottoPrizeRank.NONE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("LottoPrizeMap은 ")

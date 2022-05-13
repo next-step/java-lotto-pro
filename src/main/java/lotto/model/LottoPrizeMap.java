@@ -1,10 +1,10 @@
-package lotto;
+package lotto.model;
 
 import java.util.Map;
 
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
-import static lotto.LottoPrizeRank.NONE;
+import static lotto.model.LottoPrizeRank.NONE;
 
 public class LottoPrizeMap {
     public static Map<Integer, Long> of(LottoPrizeRanks lottoPrizeRanks) {
