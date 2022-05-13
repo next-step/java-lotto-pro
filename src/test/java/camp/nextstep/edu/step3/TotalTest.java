@@ -1,6 +1,7 @@
 package camp.nextstep.edu.step3;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -25,4 +26,11 @@ public class TotalTest {
         );
     }
 
+    @DisplayName("result 메소드 호출시 총 수익률을 반환한다.")
+    @Test
+    void resultTest() {
+        final int userBuyAmount = 14000;
+        assertThat(new Total(Hit.ONE, Hit.TWO, Hit.THREE, Hit.FOUR).result(userBuyAmount))
+                .isEqualTo(new EarningsRate((Hit.THREE.cost(1) + Hit.FOUR.cost(1)), userBuyAmount));
+    }
 }

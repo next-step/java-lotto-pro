@@ -4,18 +4,29 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Total{
+public class Total {
     private final Map<Hit, Integer> totalHitMap = new HashMap<>();
-    public Total(Hit ... hits) {
+
+    public Total(Hit... hits) {
         for (Hit hit : hits) {
             increase(hit);
         }
+    }
+
+    public EarningsRate result(final int amount) {
+        return new EarningsRate(totalPrizeAmount(), amount);
     }
 
     private void increase(final Hit hit) {
         if (Hit.TWO.isLow(hit)) {
             totalHitMap.put(hit, totalHitMap.getOrDefault(hit, 0) + 1);
         }
+    }
+
+    private double totalPrizeAmount() {
+        return totalHitMap.keySet().stream()
+                .mapToDouble((hit) -> hit.cost(totalHitMap.get(hit)))
+                .sum();
     }
 
     @Override
