@@ -8,6 +8,7 @@ public class Number {
 
 	public Number(String number) {
 		validation(number);
+		this.number = Integer.parseInt(number);
 	}
 
 	public int getNumber() {
@@ -19,8 +20,9 @@ public class Number {
 			throw new RuntimeException(String.format("nubmer: %d 숫자가 아닙니다.", number));
 		}
 
-		if (!isNatural(this.number)) {
-			throw new RuntimeException(String.format("nubmer: %d %d보다 작은 수가 입력되었습니다.", number, MIN_NUMBER));
+		if (!isNatural(Integer.parseInt(number))) {
+			throw new RuntimeException(
+					String.format("nubmer: %d %d보다 작은 수가 입력되었습니다.", Integer.parseInt(number), MIN_NUMBER));
 		}
 	}
 

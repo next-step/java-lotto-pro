@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
+import lotto.model.UserMoney;
 
 public class Lotto {
 	private static final String LOTTO_INPUT_LIST_REGEX = ",";
@@ -13,8 +14,7 @@ public class Lotto {
 	private LottoMachine lottoMachine;
 
 	public Lotto() {
-		String money = inputMessage("구입금액을 입력해 주세요.");
-		lottoMachine = new LottoMachine(money);
+		lottoMachine = new LottoMachine();
 	}
 
 	public void printWinningData() {
@@ -23,17 +23,17 @@ public class Lotto {
 		printWinStatistics(lottoMachine.winList(new LottoNumbers(lottoNumbers)));
 	}
 
-	public void printProfitRate() {
-		System.out.println(profitRateStringFormat(lottoMachine.profitRate()));
+	public void printProfitRate(UserMoney userMoney) {
+		System.out.println(profitRateStringFormat(lottoMachine.profitRate(userMoney)));
 	}
 
-	private String inputMessage(String message) {
+	public String inputMessage(String message) {
 		System.out.println(message);
 		return scan.nextLine();
 	}
 
-	public void buyAutoLotto() {
-		List<LottoNumbers> lottos = lottoMachine.buyAutoLottos();
+	public void buyAutoLotto(UserMoney userMoney) {
+		List<LottoNumbers> lottos = lottoMachine.buyAutoLottos(userMoney);
 		System.out.println(lottoNumbersTitleStringFormat(lottos));
 		for (int i = 0; i < lottos.size(); ++i) {
 			System.out.println(lottoNumbersStringFormat(lottos.get(i)));

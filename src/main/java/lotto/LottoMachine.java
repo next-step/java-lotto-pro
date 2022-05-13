@@ -7,26 +7,24 @@ import java.util.List;
 
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
+import lotto.model.UserMoney;
 
 public class LottoMachine {
-	private static final int LOTTO_PRICE = 1000;
 	public static final int MIN_LOTTO_NUMBER = 1;
 	public static final int MAX_LOTTO_NUMBER = 45;
 	public static final int LOTTO_NUMBERS_COUNT = 6;
-	
+
 	private List<LottoNumbers> lottos;
-	private model.Number money;
 	private int[] winList;
 
-	public LottoMachine(String money) {
-		this.money = new model.Number(money);
+	public LottoMachine() {
 	}
 
-	public List<LottoNumbers> buyAutoLottos() {
-		int times = money.getNumber() / LOTTO_PRICE;
-
-		lottos = new ArrayList<>();
-		for (int i = 0; i < times; ++i) {
+	public List<LottoNumbers> buyAutoLottos(UserMoney money) {
+		if (lottos == null) {
+			lottos = new ArrayList<>();
+		}
+		for (int i = 0; i < money.canBuyLotto(); ++i) {
 			lottos.add(randomLottoNumbers());
 		}
 
@@ -50,20 +48,19 @@ public class LottoMachine {
 			int count = winLottoNumbers.countEqualsLottoNumber(lottoNumbers);
 			++winList[count];
 		}
-
 		return winList;
 	}
 
-	public double profitRate() {
+	public double profitRate(UserMoney money) {
 		if (winList == null) {
 			return 0;
 		}
 
-		int sum = 0;
+		int winningMoney = 0;
 		for (int i = 1; i < LOTTO_NUMBERS_COUNT + 1; ++i) {
-			sum += winList[i] * LottoUtil.WIN_MONEYS[i];
+			winningMoney += winList[i] * LottoUtil.WIN_MONEYS[i];
 		}
 
-		return (double) sum / money.getNumber();
+		return money.profitRate(winningMoney);
 	}
 }
