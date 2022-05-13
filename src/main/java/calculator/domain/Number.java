@@ -42,4 +42,8 @@ public class Number {
 	public int getNumber() {
 		return number;
 	}
+
+	public static Number sum(Number a, Number b) {
+		return new Number(a.number + b.number);
+	}
 }

@@ -14,7 +14,8 @@ public class Numbers {
 
 	public int total() {
 		return numbers.stream()
-				.mapToInt(Number::getNumber)
-			.sum();
+			.reduce(Number::sum)
+			.orElse(new Number(0))
+			.getNumber();
 	}
 }

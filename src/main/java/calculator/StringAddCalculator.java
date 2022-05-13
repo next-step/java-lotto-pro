@@ -7,9 +7,10 @@ import calculator.domain.Numbers;
 
 public class StringAddCalculator {
 	private static final String DEFAULT_DELIMITER = "[,:]";
-	private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\n(.*)";
 	private static final int DELIMITER_MATCHER_GROUP = 1;
 	private static final int VALUE_MATCHER_GROUP = 2;
+
+	private final static Pattern pattern = Pattern.compile("//(.)\n(.*)");
 
 	public static int splitAndSum(String strNumbers) {
 		String[] numbers = split(strNumbers);
@@ -24,7 +25,7 @@ public class StringAddCalculator {
 	}
 
 	private static String[] split(String strNumbers) {
-		Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(strNumbers);
+		Matcher matcher = pattern.matcher(strNumbers);
 
 		if (matcher.find()) {
 			String customDelimiter = matcher.group(DELIMITER_MATCHER_GROUP);
