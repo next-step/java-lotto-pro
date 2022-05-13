@@ -10,15 +10,14 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
     private static final int MAX_VALUE = 45;
     private static final int LOTTO_SIZE = 6;
 
+    private static final List<LottoNumber> LOTTO_NUMBER_POOL = IntStream.rangeClosed(MIN_VALUE, MAX_VALUE)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
+
     @Override
     public List<LottoNumber> create() {
-        List<LottoNumber> lottoNumberPool = IntStream.rangeClosed(MIN_VALUE, MAX_VALUE)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
-
-        Collections.shuffle(lottoNumberPool);
-
-        return lottoNumberPool.stream()
+        Collections.shuffle(LOTTO_NUMBER_POOL);
+        return LOTTO_NUMBER_POOL.stream()
                 .limit(LOTTO_SIZE)
                 .collect(Collectors.toList());
     }

@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Lotto {
 
-    private static final int LOTTO_SIZE = 6;
+    private static final int SIZE = 6;
     private final List<LottoNumber> numbers;
 
     protected Lotto(List<LottoNumber> numbers) {
@@ -16,8 +16,8 @@ public class Lotto {
     }
 
     private void validateLottoSize(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        if (numbers.size() != SIZE) {
+            throw new IllegalArgumentException(String.format("로또 번호는 %d개여야 합니다.", SIZE));
         }
     }
 
@@ -26,14 +26,11 @@ public class Lotto {
     }
 
     public Rank match(Lotto winningLotto) {
-        int matchCount = 0;
         Set<LottoNumber> collect = new HashSet<>(winningLotto.numbers);
 
-        for (LottoNumber number : this.numbers) {
-            if (collect.contains(number)) {
-                matchCount++;
-            }
-        }
+        int matchCount = (int) this.numbers.stream()
+                .filter(collect::contains)
+                .count();
 
         return Rank.matchResult(matchCount);
     }
