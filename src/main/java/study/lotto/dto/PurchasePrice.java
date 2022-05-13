@@ -22,9 +22,9 @@ public class PurchasePrice {
         return validateNumber(price);
     }
 
-    private BigDecimal validateNumber(String price) {
+    private BigDecimal validateNumber(String priceString) {
         try {
-            return BigDecimal.valueOf(Long.parseLong(price));
+            return parseNumber(priceString);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("금액은 숫자여야 합니다.");
         }
@@ -40,5 +40,13 @@ public class PurchasePrice {
         if (price.isEmpty()) {
             throw new IllegalArgumentException(NOTNULL_ERROR);
         }
+    }
+
+    private BigDecimal parseNumber(String priceString) {
+        BigDecimal price = BigDecimal.valueOf(Long.parseLong(priceString));
+        if (BigDecimal.ZERO.compareTo(price) >= 0) {
+            throw new IllegalArgumentException("구입 금액은 0보다 커야 합니다.");
+        }
+        return price;
     }
 }

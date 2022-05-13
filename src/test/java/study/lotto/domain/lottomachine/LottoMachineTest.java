@@ -1,6 +1,7 @@
 package study.lotto.domain.lottomachine;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,16 +36,15 @@ class LottoMachineTest {
     }
 
     @Test
-    @DisplayName("돈이 부족하면 0개의 로또를 발급한다.")
+    @DisplayName("돈이 부족하면 IllegalArgumentException 를 발생시킨다.")
     void 로또금액_부족() {
-        Lottos lottos = lottoMachine.issueLotto(new BigDecimal(900)).getLottos();
-        assertThat(lottos.getLottoList()).isEmpty();
+        assertThatThrownBy(() -> lottoMachine.issueLotto(new BigDecimal(900))).isInstanceOf(
+                IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("금액이 null이면 0개의 로또를 발급한다.")
+    @DisplayName("금액이 null이면 IllegalArgumentException 를 발생시킨다.")
     void 로또금액_null() {
-        Lottos lottos = lottoMachine.issueLotto(null).getLottos();
-        assertThat(lottos.getLottoList()).isEmpty();
+        assertThatThrownBy(() -> lottoMachine.issueLotto(null)).isInstanceOf(IllegalArgumentException.class);
     }
 }

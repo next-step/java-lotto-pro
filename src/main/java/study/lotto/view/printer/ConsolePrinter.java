@@ -5,4 +5,9 @@ public class ConsolePrinter implements Printer {
     public void info(String message) {
         System.out.print(message);
     }
+
+    @Override
+    public void error(String errorMessage) {
+        System.out.print("[ERROR] " + errorMessage);
+    }
 }
