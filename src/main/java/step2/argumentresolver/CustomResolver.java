@@ -1,4 +1,4 @@
-package step2.ArgumentResolver;
+package step2.argumentresolver;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,7 +24,7 @@ public class CustomResolver implements Resolver {
         Matcher delimiterMatcher = extractMatcher(source, REGEX_DELIMITER);
 
         if (delimiterMatcher.find()) {
-            delimiter = delimiterMatcher.group(1);
+            delimiter = delimiterMatcher.toMatchResult().group(1);
         }
         String splitSource = extractMatcher(source, REGEX_SPLIT_SOURCE).replaceAll("");
         return splitSource.split(delimiter);

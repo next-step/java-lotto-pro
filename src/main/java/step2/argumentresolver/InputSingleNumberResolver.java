@@ -1,4 +1,4 @@
-package step2.ArgumentResolver;
+package step2.argumentresolver;
 
 public class InputSingleNumberResolver implements Resolver {
 
