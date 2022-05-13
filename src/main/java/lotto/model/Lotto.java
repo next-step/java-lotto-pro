@@ -21,7 +21,7 @@ public class Lotto {
 
     private void validateLotto(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호는 6개로 구성되어 있어야합니다.");
         }
     }
 }
