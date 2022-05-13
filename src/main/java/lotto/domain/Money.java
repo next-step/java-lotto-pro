@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.common.Messages.NOT_NUMBER;
+import static lotto.common.Messages.MONEY_NOT_NUMBER;
 import static lotto.common.Messages.POSITIVE_MONEY;
 
 public class Money {
@@ -20,7 +20,7 @@ public class Money {
 
     private void validateNumber(String money) {
         if (!isNumber(money)) {
-            throw new IllegalArgumentException(NOT_NUMBER);
+            throw new IllegalArgumentException(MONEY_NOT_NUMBER);
         }
     }
 
@@ -39,7 +39,7 @@ public class Money {
         return true;
     }
 
-    public int getMoney() {
+    public int currentMoney() {
         return money;
     }
 

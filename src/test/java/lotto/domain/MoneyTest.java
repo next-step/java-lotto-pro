@@ -2,7 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static lotto.common.Messages.NOT_NUMBER;
+import static lotto.common.Messages.MONEY_NOT_NUMBER;
 import static lotto.common.Messages.POSITIVE_MONEY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
@@ -15,7 +15,7 @@ class MoneyTest {
         Money money = new Money("14000");
 
         // when
-        int currentMoney = money.getMoney();
+        int currentMoney = money.currentMoney();
 
         // then
         assertThat(currentMoney).isEqualTo(14000);
@@ -34,7 +34,7 @@ class MoneyTest {
         Money money = new Money("14000");
 
         // when
-        int currentMoney = money.getMoney();
+        int currentMoney = money.currentMoney();
 
         // then
         assertThat(currentMoney).isEqualTo(14000);
@@ -44,6 +44,6 @@ class MoneyTest {
     void 문자열_형태의_숫자가_아닌_금액_입금() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Money("asd"))
-                .withMessageContaining(NOT_NUMBER);
+                .withMessageContaining(MONEY_NOT_NUMBER);
     }
 }
