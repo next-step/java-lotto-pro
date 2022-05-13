@@ -21,6 +21,11 @@ public class LottosTest {
     }
 
     @Test
+    void createLottos_잔돈발생() {
+        assertThatThrownBy(() -> new Lottos(1010)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void compareLottos() {
         WinningLotto winningLotto = new WinningLotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
 
