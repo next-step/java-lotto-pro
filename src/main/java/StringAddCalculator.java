@@ -3,14 +3,14 @@ import java.util.List;
 public class StringAddCalculator {
 
     public static int splitAndSum(String expression) {
-        if (isEmptyExpression(expression)) {
+        if (isEmpty(expression)) {
             return 0;
         }
         StringSplitter stringSplitter = new StringSplitter(expression);
         return sum(stringSplitter.getNumbers());
     }
 
-    private static boolean isEmptyExpression(String expression) {
+    private static boolean isEmpty(String expression) {
         return expression == null || "".equals(expression);
     }
 

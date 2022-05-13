@@ -23,3 +23,4 @@
 - [X] IntStream을 통해 sum 기능 리팩토링
 - [X] customDelimiter Matcher 중복 제거, 상수화 작업 
 - [X] 클래스명 변경 (StringSplitter -> StringSplitter)
+- [X] 메서드명 변경 (isEmptyExpression -> isEmpty)
