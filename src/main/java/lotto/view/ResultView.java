@@ -14,12 +14,14 @@ public class ResultView {
     private static final String RESULT_PROFIT_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String ENTER = "\n";
 
-    public String resultPurchaseView(Lottos lottos) {
-        return String.format(PURCHASE_MESSAGE, lottos.getPlayCount());
+    private String resultPurchaseView(Lottos lottos) {
+        return String.format(PURCHASE_MESSAGE, lottos.lottoCount());
     }
 
     public String generatedLottosView(Lottos lottos) {
         StringBuilder totalLottoNumberView = new StringBuilder();
+        totalLottoNumberView.append(resultPurchaseView(lottos));
+        totalLottoNumberView.append(ENTER);
         for (Lotto lotto : lottos.getLottoList()) {
             totalLottoNumberView.append(Arrays.toString(lotto.numberListToArray()));
             totalLottoNumberView.append(ENTER);

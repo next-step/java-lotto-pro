@@ -26,21 +26,15 @@ public class LottoGameController {
         return new LottoGameDTO(null, inputView.inputMoneyView(), false);
     }
 
-    public LottoGameDTO purchaseLotto(String moneyWord) {
+    public LottoGameDTO generateLottoByMoney(String moneyWord) {
         try {
             int buyLottoCount = lottoPlayService.buyLottoCount(moneyWord);
             Lottos lottos = lottoPlayService.generateLottoByCount(buyLottoCount);
-            String purchaseView = resultView.resultPurchaseView(lottos);
-            return new LottoGameDTO(lottos, purchaseView, false);
+            String generatedLottosView = resultView.generatedLottosView(lottos);
+            return new LottoGameDTO(lottos, generatedLottosView, false);
         } catch (IllegalArgumentException e) {
             return new LottoGameDTO(null, e.getMessage(), true);
         }
-    }
-
-    public LottoGameDTO generateLottos(LottoGameDTO lottoGameDTO) {
-        Lottos lottos = lottoPlayService.generateLottoByCount(lottoGameDTO.getLottos().getPlayCount());
-        String generatedLottosView = resultView.generatedLottosView(lottos);
-        return new LottoGameDTO(lottos, generatedLottosView, false);
     }
 
     public LottoGameDTO inputWinningNumbers() {
