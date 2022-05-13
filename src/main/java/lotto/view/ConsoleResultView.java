@@ -4,6 +4,8 @@ import lotto.LottoPrize;
 import lotto.WinningResult;
 import lotto.lotto.Lotto;
 import lotto.money.Money;
+
+import java.math.BigDecimal;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 
@@ -50,7 +52,10 @@ class ConsoleResultView implements ResultView {
     }
 
     private static void printRateOfReturn(WinningResult winningResult, Money money) {
-        System.out.printf("총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n",
-                          winningResult.rateOfReturn(money));
+        final BigDecimal rateOfReturn = winningResult.rateOfReturn(money);
+        System.out.printf("총 수익률은 %s입니다.", rateOfReturn);
+        if (rateOfReturn.compareTo(BigDecimal.ONE) < 0) {
+            System.out.printf("(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n");
+        }
     }
 }
