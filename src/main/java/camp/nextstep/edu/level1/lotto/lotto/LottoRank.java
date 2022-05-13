@@ -8,9 +8,9 @@ public enum LottoRank {
     THIRD("4개 일치", 4, new Money(50000)),
     FORTH("3개 일치", 3, new Money(5000));
 
-    private String description;
-    private long matchCount;
-    private Money price;
+    private final String description;
+    private final long matchCount;
+    private final Money price;
 
     LottoRank(String description, long matchCount, Money price) {
         this.description = description;

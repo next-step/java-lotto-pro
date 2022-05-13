@@ -5,34 +5,34 @@ import java.util.Objects;
 public class Money {
     private final int MIN_VALUE = 0;
 
-    private long value;
+    private final long amount;
 
-    public Money(long value) {
-        checkValidateMoney(value);
-        this.value = value;
+    public Money(long amount) {
+        checkValidateMoney(amount);
+        this.amount = amount;
     }
 
     public long availablePurchaseCount(long price) {
         checkPurchasePrice(price);
-        return this.value / price;
+        return this.amount / price;
     }
 
     public Money add(Money target) {
-        return new Money(this.value + target.value);
+        return new Money(this.amount + target.amount);
     }
 
     public Money sub(Money target) {
-        checkSubValidate(target.value);
+        checkSubValidate(target.amount);
 
-        return new Money(this.value - target.value);
+        return new Money(this.amount - target.amount);
     }
 
     public Money mul(int multipleValue) {
-        return new Money(this.value * multipleValue);
+        return new Money(this.amount * multipleValue);
     }
 
     public double calculateRateByOtherMoney(Money target) {
-        return (double)this.value / target.value;
+        return (double)this.amount / target.amount;
     }
 
     private void checkValidateMoney(long value) {
@@ -42,7 +42,7 @@ public class Money {
     }
 
     private void checkSubValidate(long value) {
-        if (this.value - value < MIN_VALUE) {
+        if (this.amount - value < MIN_VALUE) {
             throw new IllegalArgumentException("0원 미만으로 만들 수 없습니다.");
         }
     }
@@ -58,16 +58,16 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
-        return value == money.value;
+        return amount == money.amount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(MIN_VALUE, value);
+        return Objects.hash(MIN_VALUE, amount);
     }
 
     @Override
     public String toString() {
-        return this.value + "원";
+        return this.amount + "원";
     }
 }

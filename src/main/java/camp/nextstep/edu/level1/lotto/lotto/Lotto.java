@@ -13,17 +13,17 @@ public class Lotto {
     private final static String WINNING_NUMBER_DELIMITER = ",";
 
     private Money purchaseOriginalMoney;
-    private List<LottoNumbers> items = new ArrayList<>();
+    private final List<LottoNumbers> items = new ArrayList<>();
 
-    public Lotto(int value) {
-        checkValidLottoPurchaseMoney(value);
+    public Lotto(int purchaseMoney) {
+        checkValidLottoPurchaseMoney(purchaseMoney);
 
-        this.purchaseLotto(value);
+        this.purchaseLotto(purchaseMoney);
     }
 
-    public Lotto(String value) {
-        checkValueIsInteger(value);
-        Integer convertedValue = Integer.parseInt(value);
+    public Lotto(String purchaseStringMoney) {
+        checkValueIsInteger(purchaseStringMoney);
+        int convertedValue = Integer.parseInt(purchaseStringMoney);
         checkValidLottoPurchaseMoney(convertedValue);
 
         this.purchaseLotto(convertedValue);
@@ -54,8 +54,8 @@ public class Lotto {
         }
     }
 
-    private void checkValidLottoPurchaseMoney(int value) {
-        if (value < LOTTO_PRICE) {
+    private void checkValidLottoPurchaseMoney(int money) {
+        if (money < LOTTO_PRICE) {
             String message = String.format("로또 구입시 최소 %d 원 이상이 있어야 합니다.", LOTTO_PRICE);
             throw new IllegalArgumentException(message);
         }
@@ -67,14 +67,14 @@ public class Lotto {
         }
     }
 
-    private void checkValueIsInteger(String value) {
-        if (!TypeCheckHelper.isPossibleStringToInteger(value)) {
+    private void checkValueIsInteger(String money) {
+        if (!TypeCheckHelper.isPossibleStringToInteger(money)) {
             throw new IllegalArgumentException("로또 구입 금액은 숫자만 가능합니다.");
         }
     }
 
-    private void purchaseLotto(Integer value) {
-        this.purchaseOriginalMoney = new Money(value);
+    private void purchaseLotto(int purchaseMoney) {
+        this.purchaseOriginalMoney = new Money(purchaseMoney);
         long availablePurchaseCount = purchaseOriginalMoney.availablePurchaseCount(LOTTO_PRICE);
 
         for (int i = 0; i < availablePurchaseCount; i++) {

@@ -15,7 +15,7 @@ public class LottoNumbers {
     private final static String TO_STRING_PREFIX = "[";
     private final static String TO_STRING_SUFFIX = "]";
 
-    private final List<LottoNumber> value = new ArrayList<>();
+    private final List<LottoNumber> lottoNumberList = new ArrayList<>();
 
     public LottoNumbers() {
         this(RandomGenerator.createNonDuplicatedIntegerSet(LOTTO_START_NUMBER, LOTTO_END_NUMBER, LOTTO_RANGE));
@@ -28,17 +28,17 @@ public class LottoNumbers {
     }
 
     public long matchedCountByWinnerNumbers(LottoNumbers winnerNumbers) {
-        return winnerNumbers.value.stream().filter(this::hasContainLottoNumber).count();
+        return winnerNumbers.lottoNumberList.stream().filter(this::hasContainLottoNumber).count();
     }
 
     private void addAll(Collection<Integer> numbers) {
         for (Integer number : numbers) {
-            this.value.add(new LottoNumber(number));
+            this.lottoNumberList.add(new LottoNumber(number));
         }
     }
 
     private boolean hasContainLottoNumber(LottoNumber value) {
-        return this.value.stream().anyMatch(lottoNumber -> lottoNumber.hasSameValue(value));
+        return this.lottoNumberList.stream().anyMatch(lottoNumber -> lottoNumber.hasSameValue(value));
     }
 
     private void checkLottoNumbers(Collection<Integer> numbers) {
@@ -59,7 +59,7 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
-        return TO_STRING_PREFIX + this.value.stream()
+        return TO_STRING_PREFIX + this.lottoNumberList.stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(PRINT_JOIN_DELIMITER)) + TO_STRING_SUFFIX;
     }
