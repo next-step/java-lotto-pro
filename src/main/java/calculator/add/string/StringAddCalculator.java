@@ -1,9 +1,9 @@
 package calculator.add.string;
 
-import static calculator.add.string.utils.StringInputValidator.isBlank;
-import static calculator.add.string.utils.StringInputValidator.validateIsPositiveInteger;
+import static calculator.add.string.utils.StringInputUtil.isBlank;
+import static calculator.add.string.utils.StringInputUtil.split;
 
-import calculator.add.string.utils.StringInputSplit;
+import calculator.add.string.model.Numbers;
 
 public class StringAddCalculator {
 
@@ -12,20 +12,9 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] inputNumbers = StringInputSplit.split(input);
+        Numbers numbers = new Numbers(split(input));
 
-        return sum(inputNumbers);
-    }
-
-    private static int sum(String[] inputNumbers) {
-        int total = 0;
-
-        for (String number : inputNumbers) {
-            validateIsPositiveInteger(number);
-            total += Integer.parseInt(number);
-        }
-
-        return total;
+        return numbers.sumTotal();
     }
 
 }

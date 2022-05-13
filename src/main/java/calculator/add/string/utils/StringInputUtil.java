@@ -1,12 +1,18 @@
 package calculator.add.string.utils;
 
+import static calculator.add.string.constant.RegexConst.CUSTOM_DELIMITER_PATTERN;
+import static calculator.add.string.constant.RegexConst.DEFAULT_DELIMITERS;
+
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class StringInputSplit {
+public class StringInputUtil {
 
-    private static final String DEFAULT_DELIMITERS = "[,:]";
-    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private StringInputUtil() {
+    }
+
+    public static boolean isBlank(String input) {
+        return input == null || input.isEmpty();
+    }
 
     public static String[] split(String input) {
         Matcher customDelimiterMatcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
