@@ -1,6 +1,8 @@
 package step2;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -38,36 +40,45 @@ public class StringArrayResolverTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3&3", "1,2,3&3", "1:2:3&3", "1:2,3&3"}, delimiter = '&')
     public void defaultResolverTest(String source, int expectedSize) {
-        assertThat(defaultStringArrayResolver.canResolve(source)).isTrue();
-        assertThat(defaultStringArrayResolver.resolve(source))
-            .hasSize(expectedSize)
-            .containsExactly("1", "2", "3");
+        assertAll(
+            () -> assertTrue(defaultStringArrayResolver.canResolve(source)),
+            () -> assertThat(defaultStringArrayResolver.resolve(source))
+                .hasSize(expectedSize)
+                .containsExactly("1", "2", "3")
+        );
     }
 
     @ParameterizedTest
     @CsvSource(value = {" &1", "   &1"}, delimiter = '&')
     public void emptyStringResolverTest(String source, int expectedSize) {
-        assertThat(emptyStringStringArrayResolver.canResolve(source)).isTrue();
-        assertThat(emptyStringStringArrayResolver.resolve(source))
-            .hasSize(expectedSize)
-            .containsExactly("0");
+        assertAll(
+            () -> assertTrue(emptyStringStringArrayResolver.canResolve(source)),
+            () -> assertThat(emptyStringStringArrayResolver.resolve(source))
+                .hasSize(expectedSize)
+                .containsExactly("0")
+        );
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1", "2", "3"})
     public void inputSingleNumberResolverTest(String source) {
-        assertThat(inputSingleNumberStringArrayResolver.canResolve(source)).isTrue();
-        assertThat(inputSingleNumberStringArrayResolver.resolve(source))
-            .hasSize(1)
-            .containsExactly(source);
+        assertAll(
+            () -> assertTrue(inputSingleNumberStringArrayResolver.canResolve(source)),
+            () -> assertThat(inputSingleNumberStringArrayResolver.resolve(source))
+                .hasSize(1)
+                .containsExactly(source)
+        );
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2;3", "//:\n1:2:3", "//!\n1!2!3"})
     public void customResolverTest(String source) {
-        assertThat(customStringArrayResolver.canResolve(source)).isTrue();
-        assertThat(customStringArrayResolver.resolve(source))
-            .hasSize(3)
-            .containsExactly("1", "2", "3");
+        assertAll(
+            () -> assertTrue(customStringArrayResolver.canResolve(source)),
+            () -> assertThat(customStringArrayResolver.resolve(source))
+                .hasSize(3)
+                .containsExactly("1", "2", "3")
+
+        );
     }
 }
