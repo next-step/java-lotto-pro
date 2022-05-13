@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final String DELIMITER = ",|:";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
-
+    private static final int EMPTY_OUTPUT = 0;
 
     private static final StringSplitter splitter = new StringSplitter(DELIMITER, CUSTOM_DELIMITER_PATTERN);
 
@@ -15,7 +15,7 @@ public class StringAddCalculator {
     static int splitAndSum(String input) {
 
         if (isNullOrEmptyInput(input)) {
-            return 0;
+            return EMPTY_OUTPUT;
         }
         return ArrayCalculator.sum(StringUtils.toPositiveNumbers(splitter.split(input)));
     }
