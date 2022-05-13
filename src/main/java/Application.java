@@ -6,32 +6,32 @@ import lotto.view.InputConsole;
 
 public class Application {
 
+    private static final LottoGameController lottoGameController = new LottoGameController();
+
     public static void main(String[] args) throws IOException {
         new Application().startLottoGame();
     }
 
     public void startLottoGame() throws IOException {
-        LottoGameController lottoGameController = new LottoGameController();
-        LottoGameDTO lottoGameDTO = generateLottos(lottoGameController);
-        playLotto(lottoGameController, lottoGameDTO);
+        LottoGameDTO lottoGameDTO = generateLottos();
+        playLotto(lottoGameDTO);
     }
 
-    private void playLotto(LottoGameController lottoGameController, LottoGameDTO requestLottoGameDTO)
-            throws IOException {
+    private void playLotto(LottoGameDTO requestLottoGameDTO) throws IOException {
         boolean isInputError;
         LottoGameDTO lottoGameDTO;
         do {
-            String winningNumbersWord = InputConsole.readStringForMessage(LottoGameMessage.INPUT_WINNING_NUMBERS_MESSAGE);
+            String winningNumbersWord = InputConsole.readLineForMessage(LottoGameMessage.INPUT_WINNING_NUMBERS_MESSAGE);
             lottoGameDTO = lottoGameController.playLottoGame(requestLottoGameDTO, winningNumbersWord);
             isInputError = lottoGameDTO.isInputError();
         } while (isInputError);
     }
 
-    private LottoGameDTO generateLottos(LottoGameController lottoGameController) throws IOException {
+    private LottoGameDTO generateLottos() throws IOException {
         boolean isInputError;
         LottoGameDTO lottoGameDTO;
         do {
-            String moneyWord = InputConsole.readStringForMessage(LottoGameMessage.INPUT_MONEY_MESSAGE);
+            String moneyWord = InputConsole.readLineForMessage(LottoGameMessage.INPUT_MONEY_MESSAGE);
             lottoGameDTO = lottoGameController.generateLottoByMoney(moneyWord);
             isInputError = lottoGameDTO.isInputError();
         } while (isInputError);
