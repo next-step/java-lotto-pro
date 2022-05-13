@@ -5,7 +5,7 @@ import lotto.vo.Lotto;
 
 public class LottoGenerator {
 
-    public Lotto generateLotto(List<Integer> numberList) {
-        return null;
+    public static Lotto generateLotto(List<Integer> numberList) {
+        return new Lotto(numberList);
     }
 }

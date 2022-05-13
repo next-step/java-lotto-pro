@@ -15,8 +15,7 @@ class LottoGeneratorTest {
     @DisplayName("로또를 생성한다.")
     @Test
     void generateLotto(){
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        Lotto lotto = lottoGenerator.generateLotto(Arrays.asList(1, 3, 15, 25, 30, 45));
+        Lotto lotto = LottoGenerator.generateLotto(Arrays.asList(1, 3, 15, 25, 30, 45));
         assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1, 3, 15, 25, 30, 45)));
     }
 }
