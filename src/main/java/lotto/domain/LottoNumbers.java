@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.constants.LottoConstants.MAX_LOTTO_NUMBER_SIZE;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +11,6 @@ import lotto.generator.NumberGenerateStrategy;
 
 public class LottoNumbers {
 
-    private static final int MAX_LOTTO_NUMBER_SIZE = 6;
     private final List<LottoNumber> numbers;
 
     private LottoNumbers(List<LottoNumber> numbers) {
