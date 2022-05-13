@@ -13,7 +13,7 @@ public class LottoNumber {
     }
 
     private void validLottoRange(int lottoNumber) {
-        if(isNotLottoNumberRange(lottoNumber)) {
+        if (isNotLottoNumberRange(lottoNumber)) {
             throw new IllegalArgumentException("로또 숫자 범위가 아닙니다.");
         }
     }

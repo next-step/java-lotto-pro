@@ -20,7 +20,7 @@ class LottoNumberTest {
                 .withMessage("로또 숫자 범위가 아닙니다.");
     }
 
-    @DisplayName("로또 초기화 테스트")
+    @DisplayName("로또번호 초기화 테스트")
     @Test
     void lotto() {
         assertThat(new LottoNumber(10)).isEqualTo(lottoNumber);
