@@ -21,6 +21,10 @@ public enum LottoPrize {
         this.prize = prize;
     }
 
+    public String description() {
+        return description;
+    }
+
     public Money prize() {
         return prize;
     }
