@@ -18,7 +18,7 @@ public enum LottoRank {
         this.price = price;
     }
 
-    public static LottoRank checkLottoRank(LottoNumbers source, LottoNumbers winningNumbers) {
+    public static LottoRank findLottoRank(LottoNumbers source, LottoNumbers winningNumbers) {
         long matchedCount = source.matchedCountByWinnerNumbers(winningNumbers);
         return findLottoRankByMatchedCount(matchedCount);
     }

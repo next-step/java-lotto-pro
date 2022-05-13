@@ -23,9 +23,9 @@ class LottoRankTest {
         LottoNumbers thirdLottoNumbers = new LottoNumbers(thirdNumbers);
         LottoNumbers forthLottoNumbers = new LottoNumbers(forthNumbers);
 
-        assertThat(LottoRank.checkLottoRank(firstLottoNumbers, winnerLottoNumbers)).isEqualTo(LottoRank.FIRST);
-        assertThat(LottoRank.checkLottoRank(secondLottoNumbers, winnerLottoNumbers)).isEqualTo(LottoRank.SECOND);
-        assertThat(LottoRank.checkLottoRank(thirdLottoNumbers, winnerLottoNumbers)).isEqualTo(LottoRank.THIRD);
-        assertThat(LottoRank.checkLottoRank(forthLottoNumbers, winnerLottoNumbers)).isEqualTo(LottoRank.FORTH);
+        assertThat(LottoRank.findLottoRank(firstLottoNumbers, winnerLottoNumbers)).isEqualTo(LottoRank.FIRST);
+        assertThat(LottoRank.findLottoRank(secondLottoNumbers, winnerLottoNumbers)).isEqualTo(LottoRank.SECOND);
+        assertThat(LottoRank.findLottoRank(thirdLottoNumbers, winnerLottoNumbers)).isEqualTo(LottoRank.THIRD);
+        assertThat(LottoRank.findLottoRank(forthLottoNumbers, winnerLottoNumbers)).isEqualTo(LottoRank.FORTH);
     }
 }

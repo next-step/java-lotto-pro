@@ -9,7 +9,7 @@ public class LottoResult {
 
     public LottoResult(List<LottoNumbers> purchaseLotto, LottoNumbers winnerLottoNumbers) {
         purchaseLotto.forEach(lotto -> {
-            addLottoRankCountIfRankIsNotNull(LottoRank.checkLottoRank(lotto, winnerLottoNumbers));
+            addLottoRankCountIfRankIsNotNull(LottoRank.findLottoRank(lotto, winnerLottoNumbers));
         });
     }
 
@@ -17,11 +17,11 @@ public class LottoResult {
         Money amount = new Money(0);
 
         for (Map.Entry<LottoRank, Integer> lottoRankIntegerEntry : result.entrySet()) {
-            Money rankMoney = lottoRankIntegerEntry.getKey().rankPrice();
+            Money rankPrice = lottoRankIntegerEntry.getKey().rankPrice();
             Integer count = lottoRankIntegerEntry.getValue();
-            Money rankTotalAmount = rankMoney.mul(count);
+            Money rankTotalPrice = rankPrice.mul(count);
 
-            amount = amount.add(rankTotalAmount);
+            amount = amount.add(rankTotalPrice);
         }
 
         return amount;

@@ -30,7 +30,7 @@ public class RandomGenerator {
             throw new IllegalArgumentException(message);
         }
         if (range < 0) {
-            String message = String.format("번위는 음수일 수 없습니다. range: %d", range);
+            String message = String.format("범위는 음수일 수 없습니다. range: %d", range);
 
             throw new IllegalArgumentException(message);
         }
