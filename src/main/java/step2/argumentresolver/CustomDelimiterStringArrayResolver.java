@@ -20,13 +20,12 @@ public class CustomDelimiterStringArrayResolver implements StringArrayResolver {
 
     @Override
     public String[] resolve(String source) {
-        String delimiter = "";
         Matcher delimiterMatcher = extractMatcher(source, REGEX_DELIMITER);
 
-        if (delimiterMatcher.find()) {
-            delimiter = delimiterMatcher.toMatchResult().group(1);
-        }
+        delimiterMatcher.find();
+        String delimiter = delimiterMatcher.toMatchResult().group(1);
         String splitSource = extractMatcher(source, REGEX_SPLIT_SOURCE).replaceAll("");
+
         return splitSource.split(delimiter);
     }
 }
