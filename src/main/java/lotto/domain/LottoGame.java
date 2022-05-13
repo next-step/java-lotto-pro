@@ -47,6 +47,15 @@ public class LottoGame {
         this.lastWinningNumbers = lastWinningNumbers;
     }
 
+    public void play() {
+        readMoney();
+        purchaseLotto();
+        printMyLotto();
+        readLastWinningNumbers();
+        showLottoStatistics();
+        showLottoProfit();
+    }
+
     public void readMoney() {
         String input = InputView.readUserInput(REQUEST_MONEY);
         money = new Money(input);
