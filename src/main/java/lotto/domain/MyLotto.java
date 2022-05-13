@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,5 +22,13 @@ public class MyLotto {
             sb.append(lotto.toString() + "\r\n");
         }
         return sb.toString();
+    }
+
+    public List<Ranking> compareLottos(Lotto target) {
+        List<Ranking> result = new ArrayList<>();
+        for (Lotto lotto : lottoList) {
+            result.add(lotto.compareLotto(target));
+        }
+        return result;
     }
 }
