@@ -1,5 +1,6 @@
 package lotto;
 
+import generator.LottoNumberGenerator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +11,7 @@ public class Lotto {
     public static final int LOTTO_SIZE_NUM = 6;
     private final List<LottoNumber> lotto;
 
-    private Lotto(List<LottoNumber> lotto) {
+    public Lotto(List<LottoNumber> lotto) {
         validLotto(lotto);
         this.lotto = lotto;
     }
@@ -19,6 +20,14 @@ public class Lotto {
         List<LottoNumber> lotto = new ArrayList<>();
         for (int lottoNumber : lottoNumbers) {
             lotto.add(new LottoNumber(lottoNumber));
+        }
+        return new Lotto(lotto);
+    }
+
+    public static Lotto draw(LottoNumberGenerator lottoNumberGenerator) {
+        List<LottoNumber> lotto = new ArrayList<>();
+        for (LottoNumber lottoNumber : lottoNumberGenerator.generate()) {
+            lotto.add(lottoNumber);
         }
         return new Lotto(lotto);
     }
