@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
-    private int number;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
+    private final int number;
+    static final int MIN_NUMBER = 1;
+    static final int MAX_NUMBER = 45;
 
     public LottoNumber(int number) {
         valid(number);
@@ -19,5 +21,22 @@ public class LottoNumber {
 
     private boolean isNotNumberRange(int number) {
         return number < MIN_NUMBER || number > MAX_NUMBER;
+    }
+
+    @Override
+    public boolean equals(Object target) {
+        if (this == target) {
+            return true;
+        }
+        if (target == null || getClass() != target.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) target;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
