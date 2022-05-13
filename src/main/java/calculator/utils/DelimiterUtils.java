@@ -10,38 +10,38 @@ public class DelimiterUtils {
     public static final String COLON = ":";
     public static final String CUSTOM_DELIMITER_PREFIX = "//";
     public static final String LINE_SEPARATOR = System.lineSeparator();
+    public static final String REGEX_FORMAT = String.format("%s%s%s", COMMA, "|", COLON);
 
     public static boolean hasDelimiter(String input) {
         return hasComma(input) || hasColon(input);
     }
 
-    public static String[] splitByCommaOrColon(String given) {
-        if (hasComma(given) && hasColon(given)) {
-            String regexFormat = String.format("%s%s%s", COMMA, "|", COLON);
-            return given.split(regexFormat);
+    public static String[] splitByCommaOrColon(String input) {
+        if (hasComma(input) && hasColon(input)) {
+            return input.split(REGEX_FORMAT);
         }
-        if (hasComma(given)) {
-            return given.split(COMMA);
+        if (hasComma(input)) {
+            return input.split(COMMA);
         }
-        return given.split(COLON);
+        return input.split(COLON);
     }
 
     public static boolean hasCustomDelimiter(String input) {
         return hasCustomDelimiterPrefix(input) && hasLineSeparator(input);
     }
 
-    public static String[] splitByCustomDelimiter(String given) {
-        String customDelimiter = extractCustomDelimiter(given);
-        return removeCustomDelimiterArea(given).split(customDelimiter);
+    public static String[] splitByCustomDelimiter(String input) {
+        String customDelimiter = extractCustomDelimiter(input);
+        return removeCustomDelimiterArea(input).split(customDelimiter);
     }
 
     private static String extractCustomDelimiter(String input) {
         return input.split(LINE_SEPARATOR)[0].split(CUSTOM_DELIMITER_PREFIX)[1];
     }
 
-    private static String removeCustomDelimiterArea(String given) {
-        int LINE_SEPARATOR_INDEX = given.indexOf(LINE_SEPARATOR) + 1;
-        return given.substring(LINE_SEPARATOR_INDEX);
+    private static String removeCustomDelimiterArea(String inpu) {
+        int LINE_SEPARATOR_INDEX = inpu.indexOf(LINE_SEPARATOR) + 1;
+        return inpu.substring(LINE_SEPARATOR_INDEX);
     }
 
     private static boolean hasComma(String input) {

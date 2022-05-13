@@ -15,12 +15,12 @@ public class StringUtils {
         return isNumber(input) && isPositiveNumber(input);
     }
 
-    public static boolean isEmpty(String given) {
-        return given == null || isBlank(given);
+    public static boolean isEmpty(String input) {
+        return input == null || isBlank(input);
     }
 
-    private static boolean isBlank(String given) {
-        return given.trim().length() == 0;
+    private static boolean isBlank(String input) {
+        return input.trim().length() == 0;
     }
 
     private static boolean isNumber(String input) {
