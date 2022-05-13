@@ -26,6 +26,16 @@ public class DelimiterUtils {
         return input.split(COLON);
     }
 
+    public static String extractDelimiterRegex(String given) {
+        if (hasComma(given) && hasColon(given)) {
+            return REGEX_FORMAT;
+        }
+        if (hasComma(given)) {
+            return COMMA;
+        }
+        return COLON;
+    }
+
     public static boolean hasCustomDelimiter(String input) {
         return hasCustomDelimiterPrefix(input) && hasLineSeparator(input);
     }
@@ -35,7 +45,7 @@ public class DelimiterUtils {
         return removeCustomDelimiterArea(input).split(customDelimiter);
     }
 
-    private static String extractCustomDelimiter(String input) {
+    public static String extractCustomDelimiter(String input) {
         return input.split(LINE_SEPARATOR)[0].split(CUSTOM_DELIMITER_PREFIX)[1];
     }
 
