@@ -40,8 +40,7 @@ public class Lotto {
     }
 
     public Ranking compareLotto(Lotto target) {
-        List<LottoNo> result = new ArrayList<>();
-        result.addAll(lottoNoList);
+        List<LottoNo> result = new ArrayList<>(lottoNoList);
         result.retainAll(target.getLottoNoList());
         int matchingCount = result.size();
         return Ranking.findRank(matchingCount);

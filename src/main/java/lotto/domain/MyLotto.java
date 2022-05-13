@@ -7,6 +7,9 @@ import java.util.List;
 public class MyLotto {
     private List<Lotto> lottoList;
 
+    public MyLotto() {
+    }
+
     public MyLotto(final List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }

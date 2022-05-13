@@ -2,21 +2,18 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static lotto.domain.LottoConstant.LOTTO_PRICE;
-import static org.assertj.core.api.Assertions.assertThat;
-
 class LottoGameTest {
 
     @Test
-    public void 로또_생성하기() {
-        LottoGame.generateLotto();
+    void 로또_구매하기() {
+        LottoGame game = new LottoGame(15000);
+        game.purchaseLotto();
     }
 
     @Test
-    public void 로또_구매하기() {
-        int TOTAL_PRICE = 15000;
-        LottoGame game = new LottoGame(TOTAL_PRICE);
-        MyLotto myLotto = LottoGame.purchaseLotto(TOTAL_PRICE);
-        assertThat(myLotto.getLottoList()).hasSize(TOTAL_PRICE / LOTTO_PRICE);
+    void 구매_로또_출력하기() {
+        LottoGame game = new LottoGame(15000);
+        game.purchaseLotto();
+        game.printMyLotto();
     }
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +13,8 @@ import static lotto.view.InputView.REQUEST_MONEY;
 
 public class LottoGame {
     private static final List<LottoNo> lottoNumbers = new ArrayList<>();
-    private Money money;
+    private Money money = new Money(0);
+    private MyLotto myLotto = new MyLotto();
 
     static {
         for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
@@ -36,7 +38,7 @@ public class LottoGame {
         money = new Money(input);
     }
 
-    public static Lotto generateLotto() {
+    private Lotto generateLotto() {
         Collections.shuffle(lottoNumbers);
         List<LottoNo> lottoNoList = lottoNumbers.stream()
                 .limit(LottoConstant.LOTTO_SIZE)
@@ -44,16 +46,25 @@ public class LottoGame {
         return new Lotto(lottoNoList);
     }
 
-    public static MyLotto purchaseLotto(int totalPrice) {
-        int lottoQuantity = getLottoQuantity(totalPrice);
+    public void purchaseLotto() {
+        long lottoQuantity = getLottoQuantity(money.getMoney());
+        OutputView.printMessage((money.getMoney()/LOTTO_PRICE) + "개를 구매했습니다.");
+
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoQuantity; i++) {
             lottoList.add(generateLotto());
         }
-        return new MyLotto(lottoList);
+        myLotto = new MyLotto(lottoList);
     }
 
-    private static int getLottoQuantity(int totalPrice) {
+    public void printMyLotto() {
+        List<Lotto> lottoList = myLotto.getLottoList();
+        for (Lotto lotto : lottoList) {
+            OutputView.printMessage(lotto.toString());
+        }
+    }
+
+    private static long getLottoQuantity(long totalPrice) {
         return totalPrice / LOTTO_PRICE;
     }
 }
