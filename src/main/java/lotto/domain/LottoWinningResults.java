@@ -1,31 +1,14 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import lotto.enums.LottoRank;
 
 public class LottoWinningResults {
 
-    private static final int INIT_COUNT_VALUE = 0;
-
-    private final Map<LottoRank, Integer> resultMap = new HashMap<>();
+    private final List<LottoRank> results;
 
     private LottoWinningResults(List<LottoRank> resultRanks) {
-        initResultMap();
-        makeResultsOnMap(resultRanks);
-    }
-
-    private void makeResultsOnMap(List<LottoRank> resultRanks) {
-        resultRanks.stream().
-                filter(rank -> rank.isPrized(rank)).
-                forEach(rank ->
-                        this.resultMap.put(rank, this.resultMap.get(rank) + 1));
-    }
-
-    private void initResultMap() {
-        LottoRank.getPrizedRanks().stream().
-                forEach(r -> resultMap.put(r, INIT_COUNT_VALUE));
+        this.results = resultRanks;
     }
 
     public static LottoWinningResults from(List<LottoRank> resultRanks) {
@@ -34,13 +17,15 @@ public class LottoWinningResults {
 
     public double prizedMoney() {
         double result = 0;
-        for (LottoRank lottoRank : resultMap.keySet()) {
-            result += lottoRank.getWinningMoney() * resultMap.get(lottoRank);
+        for (LottoRank lottoRank : results) {
+            result += lottoRank.getWinningMoney();
         }
         return result;
     }
 
     public int winingRankCount(LottoRank lottoRank) {
-        return resultMap.get(lottoRank);
+        return (int) results.stream().
+                filter(result -> result.equals(lottoRank)).
+                count();
     }
 }
