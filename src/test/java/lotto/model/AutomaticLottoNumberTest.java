@@ -13,7 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class AutomaticLottoNumberTest {
-    private LottoNumberInterface automaticNumber;
+    private LottoNumber automaticNumber;
 
     @BeforeEach
     void setUp() {

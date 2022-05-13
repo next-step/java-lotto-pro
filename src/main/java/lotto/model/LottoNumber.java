@@ -11,10 +11,13 @@ import java.util.Set;
 import java.util.stream.IntStream;
 import lotto.constants.LottoErrorMessage;
 
-public class LottoNumber implements LottoNumberInterface {
+public class LottoNumber {
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     protected static final List<Integer> NUMBER_RANGE = IntStream.range(MIN_NUMBER, MAX_NUMBER + 1)
             .boxed()
             .collect(toList());
+    protected static final int NUMBER_SIZE = 6;
     private static final String LOTTO_NUMBER_FORMAT = "^([1-9]+[0-9]*,(\\s)*){5}[1-9]+[0-9]*$";
     private static final String DELIMITER = ",";
     private final List<Integer> lottoNumber;
@@ -93,12 +96,10 @@ public class LottoNumber implements LottoNumberInterface {
         return winningNumber == null;
     }
 
-    @Override
     public List<Integer> getLottoNumber() {
         return Collections.unmodifiableList(lottoNumber);
     }
 
-    @Override
     public void sortLottoNumber(List<Integer> lottoNumber) {
         Collections.sort(lottoNumber);
     }
