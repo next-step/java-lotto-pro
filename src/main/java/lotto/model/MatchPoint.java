@@ -1,13 +1,13 @@
 package lotto.model;
 
 public enum MatchPoint {
-    SIX(6, 2_000_000_000),
-    FIVE(5, 1_500_000),
+    THREE(3, 5_000),
     FOUR(4, 50_000),
-    THREE(3, 5_000);
+    FIVE(5, 1_500_000),
+    SIX(6, 2_000_000_000);
 
-    private int matchPointCount;
-    private int cashPrize;
+    private final int matchPointCount;
+    private final int cashPrize;
 
     MatchPoint(int matchPointCount, int cashPrize) {
         this.matchPointCount = matchPointCount;
@@ -16,5 +16,13 @@ public enum MatchPoint {
 
     public long sumCashPrizeByMatchPoint(int count) {
         return (long) this.cashPrize * count;
+    }
+
+    public int getMatchPointCount() {
+        return matchPointCount;
+    }
+
+    public int getCashPrize() {
+        return cashPrize;
     }
 }
