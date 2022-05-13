@@ -21,16 +21,16 @@ class LottoNumberTest {
     @DisplayName("리스트 형식의 로또 번호를 입력받을 때 값이 동일한지 검증")
     void inputLottoNumberList() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoNumber lottoNumber = new LottoNumber(list);
+        LottoNumber lottoNumber = LottoNumber.of(list);
 
-        assertEquals(lottoNumber, new LottoNumber(list));
+        assertEquals(lottoNumber, LottoNumber.of(list));
     }
 
     @ParameterizedTest(name = "잘못된 문자열({0}) 로또 번호를 입력받을 때 IllegalArgumentException가 발생")
     @ValueSource(strings = {"1,2,3,4,5", "5, 8, 10, 12, 16, 18, 20", "1, 2, 3, 4, 5, a"})
     void inputInvalidLottoNumberString(String invalidLottoNumber) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(invalidLottoNumber))
+                .isThrownBy(() -> LottoNumber.of(invalidLottoNumber))
                 .withMessage(LottoErrorMessage.INVALID_LOTTO_NUMBER_FORMAT);
     }
 
@@ -38,7 +38,7 @@ class LottoNumberTest {
     @DisplayName("로또 번호를 벗어난 값을 입력받을 때 IllegalArgumentException가 발생")
     void inputOutOfRangeLottoNumberString() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber("1, 2, 3, 4, 5, 100"))
+                .isThrownBy(() -> LottoNumber.of("1, 2, 3, 4, 5, 100"))
                 .withMessage(LottoErrorMessage.OUT_OF_RANGE_LOTTO_NUMBER);
     }
 
@@ -47,10 +47,10 @@ class LottoNumberTest {
     void inputDuplicateLottoNumberString() {
         assertAll(
                 () -> assertThatIllegalArgumentException()
-                        .isThrownBy(() -> new LottoNumber("1, 2, 5, 4, 5, 10"))
+                        .isThrownBy(() -> LottoNumber.of("1, 2, 5, 4, 5, 10"))
                         .withMessage(LottoErrorMessage.DUPLICATE_LOTTO_NUMBER),
                 () -> assertThatIllegalArgumentException()
-                        .isThrownBy(() -> new LottoNumber(Arrays.asList(1, 2, 5, 4, 5, 10)))
+                        .isThrownBy(() -> LottoNumber.of(Arrays.asList(1, 2, 5, 4, 5, 10)))
                         .withMessage(LottoErrorMessage.DUPLICATE_LOTTO_NUMBER)
         );
     }
@@ -58,8 +58,8 @@ class LottoNumberTest {
     @ParameterizedTest(name = "로또 번호({0})와 당첨 번호({1})의 {2} 등수 확인")
     @MethodSource("parameterGetLottoRank")
     void getLottoRank(List<Integer> pickNumber, List<Integer> winningNumber, LottoRank expected) {
-        LottoNumber pickLottoNumber = new LottoNumber(pickNumber);
-        LottoNumber winningLottoNumber = new LottoNumber(winningNumber);
+        LottoNumber pickLottoNumber = LottoNumber.of(pickNumber);
+        LottoNumber winningLottoNumber = LottoNumber.of(winningNumber);
 
         assertEquals(expected, pickLottoNumber.getLottoRank(winningLottoNumber));
     }

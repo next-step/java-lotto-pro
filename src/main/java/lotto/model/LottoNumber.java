@@ -22,18 +22,19 @@ public class LottoNumber {
     private static final String DELIMITER = ",";
     private final List<Integer> lottoNumber;
 
-    public LottoNumber(List<Integer> lottoNumber) {
+    protected LottoNumber(List<Integer> lottoNumber) {
         validateDuplicate(lottoNumber);
         sortLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
-    public LottoNumber(String lottoNumber) {
+    public static LottoNumber of(List<Integer> lottoNumber) {
+        return new LottoNumber(lottoNumber);
+    }
+
+    public static LottoNumber of(String lottoNumber) {
         validateFormat(lottoNumber);
-        List<Integer> convertLottoNumber = convertList(lottoNumber);
-        validateDuplicate(convertLottoNumber);
-        sortLottoNumber(convertLottoNumber);
-        this.lottoNumber = convertLottoNumber;
+        return new LottoNumber(convertList(lottoNumber));
     }
 
     public LottoRank getLottoRank(LottoNumber winningLottoNumber) {
@@ -47,7 +48,7 @@ public class LottoNumber {
         return this.lottoNumber.contains(number);
     }
 
-    private List<Integer> convertList(String lottoNumber) {
+    private static List<Integer> convertList(String lottoNumber) {
         List<String> numberList = split(lottoNumber);
         return numberList.stream()
                 .map(String::trim)
@@ -61,7 +62,7 @@ public class LottoNumber {
         return number;
     }
 
-    private void validateDuplicate(List<Integer> lottoNumber) {
+    private static void validateDuplicate(List<Integer> lottoNumber) {
         Set<Integer> numberSet = new HashSet<>(lottoNumber);
         if (numberSet.size() != NUMBER_SIZE) {
             throw new IllegalArgumentException(LottoErrorMessage.DUPLICATE_LOTTO_NUMBER);
@@ -74,7 +75,7 @@ public class LottoNumber {
         }
     }
 
-    private List<String> split(String lottoNumber) {
+    private static List<String> split(String lottoNumber) {
         return Arrays.asList(lottoNumber.split(DELIMITER));
     }
 
@@ -100,7 +101,7 @@ public class LottoNumber {
         return Collections.unmodifiableList(lottoNumber);
     }
 
-    public void sortLottoNumber(List<Integer> lottoNumber) {
+    public static void sortLottoNumber(List<Integer> lottoNumber) {
         Collections.sort(lottoNumber);
     }
 
