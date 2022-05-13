@@ -96,7 +96,7 @@
 - [x] CommaSplittingLottoGenerator 구현
 - [x] LottoPrize 구현
 - [x] WinningResult 구현
-- [ ] LottoAnalyzer 구현
+- [x] LottoAnalyzer 구현
 - [ ] LottoMachine 구현
 - [ ] InputView/ResultView 구현
 - [ ] LottoApplication 구현
