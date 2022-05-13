@@ -7,6 +7,7 @@ public class StringAddCalculator {
     private static final int MIN_VALUE = 0;
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private static final Pattern CUSTOM_PATTERN_MATCHER = Pattern.compile(CUSTOM_DELIMITER);
 
     public static int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
@@ -14,7 +15,7 @@ public class StringAddCalculator {
         }
 
         Numbers numbers = new Numbers(splitValue(input));
-        return calculateSum(numbers);
+        return numbers.sumNumbers();
     }
 
     private static boolean isNullOrEmpty(String input) {
@@ -22,16 +23,12 @@ public class StringAddCalculator {
     }
 
     private static String[] splitValue(String input) {
-        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(input);
+        Matcher matcher = CUSTOM_PATTERN_MATCHER.matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             return matcher.group(2).split(customDelimiter);
         }
 
         return input.split(DEFAULT_DELIMITER);
-    }
-
-    private static int calculateSum(Numbers numbers) {
-        return numbers.sumNumbers();
     }
 }
