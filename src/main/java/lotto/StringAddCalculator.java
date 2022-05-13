@@ -10,11 +10,10 @@ public class StringAddCalculator {
 
     private static final String NULL_VALUE = null;
     private static final String EMPTY_VALUE = "";
-    private static final String PIPE_VALUE = "";
+    private static final String PIPE_VALUE = "|";
     private static final int DIRECT_RETURN_VALUE = 1;
     private static final String[] SPLIT_DELIMITER_LIST_VALUE = {",", ":"};
     private static final String CUSTOM_SPLIT_DELIMITER_REGEX_VALUE = "//(.)\n(.*)";
-
 
     private static final String ERROR_NOT_ALLOW_VALUE_MESSAGE = "[ERROR] 허용하지 않은 값 입니다.";
 
@@ -32,7 +31,7 @@ public class StringAddCalculator {
     }
 
     private static int splitSumValue(String text) {
-        String [] numbers = text.split(splitDelimiterList(text));
+        String [] numbers = text.split(splitDelimiters(text));
         return Arrays.stream(numbers)
                 .mapToInt(StringAddCalculator::stringToIntValue)
                 .sum();
@@ -61,13 +60,13 @@ public class StringAddCalculator {
         return number < 0;
     }
 
-    private static String splitDelimiterList(String text) {
+    private static String splitDelimiters(String text) {
         Matcher m = Pattern.compile(CUSTOM_SPLIT_DELIMITER_REGEX_VALUE).matcher(text);
         if (!m.find())
             return stringListToString(PIPE_VALUE, Arrays.asList(SPLIT_DELIMITER_LIST_VALUE));
 
         String customDelimiter = m.group(1);
-        return String.join(PIPE_VALUE, m.group(2).split(customDelimiter));
+        return stringListToString(PIPE_VALUE, Arrays.asList(m.group(2).split(customDelimiter)));
     }
 
     private static String stringListToString(String division, List<String> stringList) {
