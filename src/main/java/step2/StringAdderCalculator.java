@@ -7,32 +7,24 @@ import step2.argumentresolver.DefaultDelimiterStringArrayResolver;
 import step2.argumentresolver.EmptyInputStringArrayResolver;
 import step2.argumentresolver.SingleNumberStringArrayResolver;
 import step2.argumentresolver.StringArrayResolver;
-import step2.validator.NotNumberValidator;
-import step2.validator.PositiveNumberValidator;
-import step2.validator.Validator;
+import step2.utils.StringArrayElementUtil;
 
 public class StringAdderCalculator {
 
     private static final ArrayList<StringArrayResolver> STRING_ARRAY_RESOLVERS = new ArrayList<StringArrayResolver>();
-    private static final ArrayList<Validator> validators = new ArrayList<Validator>();
     private static String[] splitArray = null;
 
     public static int splitAndSum(String source) {
         init();
         getSplitArrayByInput(source);
-        validateInput();
+        try {
+            StringArrayElementUtil.validateSplitResult(splitArray);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
         return sumNumbers();
     }
 
-    private static void validateInput() {
-        boolean validateResult = true;
-        for (int i = 0; i < validators.size() && validateResult; i++) {
-            validateResult = validators.get(i).validate(splitArray);
-        }
-        if (!validateResult) {
-            throw new RuntimeException();
-        }
-    }
 
     private static void getSplitArrayByInput(String source) {
         for (int i = 0; i < STRING_ARRAY_RESOLVERS.size() && splitArray == null; i++) {
@@ -59,9 +51,6 @@ public class StringAdderCalculator {
         STRING_ARRAY_RESOLVERS.add(new SingleNumberStringArrayResolver());
         STRING_ARRAY_RESOLVERS.add(new DefaultDelimiterStringArrayResolver());
         STRING_ARRAY_RESOLVERS.add(new CustomDelimiterStringArrayResolver());
-
-        validators.add(new NotNumberValidator());
-        validators.add(new PositiveNumberValidator());
     }
 
 
