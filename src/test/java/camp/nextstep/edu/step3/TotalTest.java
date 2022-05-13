@@ -27,11 +27,18 @@ public class TotalTest {
     }
 
     @DisplayName("result 메소드 호출시 총 수익률을 반환한다.")
-    @Test
-    void resultTest() {
+    @ParameterizedTest
+    @MethodSource("provideResultInputAndToTalAmount")
+    void resultTest(final Hit[] input, final int totalAmount) {
         final int userBuyAmount = 14000;
-        assertThat(new Total(Hit.ONE, Hit.TWO, Hit.THREE, Hit.FOUR).result(userBuyAmount))
-                .isEqualTo(new EarningsRate((Hit.THREE.cost(1) + Hit.FOUR.cost(1)), userBuyAmount));
+        assertThat(new Total(input).result(userBuyAmount)).isEqualTo(new EarningsRate(totalAmount, userBuyAmount));
+    }
+
+    private static Stream<Arguments> provideResultInputAndToTalAmount() {
+        return Stream.of(
+                Arguments.of(new Hit[]{Hit.ONE, Hit.TWO, Hit.THREE, Hit.FOUR}, (Hit.THREE.cost(1) + Hit.FOUR.cost(1)),
+                        Arguments.of(new Hit[]{Hit.ZERO}, Hit.ZERO.cost(1)))
+        );
     }
 
     @DisplayName("출력 테스트")
