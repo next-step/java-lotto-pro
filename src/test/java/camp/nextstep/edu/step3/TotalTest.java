@@ -7,15 +7,15 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class StatisticsTest {
+public class TotalTest {
 
     @DisplayName("Hit Three 부터 값을 저장하고 있다.")
     @ParameterizedTest
     @MethodSource("provideParametersFromCreateTest")
     void createTest(final Hit[] input, final Hit[] other) {
-        assertThat(new Statistics(input)).isEqualTo(new Statistics(other));
+        assertThat(new Total(input)).isEqualTo(new Total(other));
     }
 
     private static Stream<Arguments> provideParametersFromCreateTest() {
@@ -24,4 +24,5 @@ public class StatisticsTest {
                 Arguments.of(new Hit[]{Hit.ONE, Hit.TWO, Hit.THREE, Hit.FOUR}, new Hit[]{Hit.THREE, Hit.FOUR})
         );
     }
+
 }
