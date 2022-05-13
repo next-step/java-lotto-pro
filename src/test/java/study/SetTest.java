@@ -1,6 +1,7 @@
-package step1;
+package study;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,24 +27,23 @@ class SetTest {
     @DisplayName("size() 메소드를 활용해 Set의 크기를 확인하는 학습테스트")
     @Test
     void setTest_size() {
-        // given & when
-        int size = numbers.size();
-
-        // then
-        assertThat(size).isEqualTo(3);
+        // given & when & then
+        assertThat(numbers).hasSize(3);
     }
 
     @DisplayName("contains() 메소드를 활용해 1,2,3의 값이 존재하는지를 확인하는 학습테스트")
     @Test
     void setTest_contains() {
         // given & when & then
-        assertThat(numbers.contains(1)).isTrue();
-        assertThat(numbers.contains(2)).isTrue();
-        assertThat(numbers.contains(3)).isTrue();
+        assertAll(
+                () -> assertThat(numbers.contains(1)).isTrue(),
+                () -> assertThat(numbers.contains(2)).isTrue(),
+                () -> assertThat(numbers.contains(3)).isTrue()
+        );
     }
 
     @DisplayName("ParameterizedTest를 활용해 중복 코드를 제거")
-    @ParameterizedTest
+    @ParameterizedTest(name = "numbers가 {0}을 가지고 있으면 참을 반환")
     @ValueSource(ints = {1, 2, 3})
     void contains_ParameterizedTest(int value) {
         // given & when
@@ -54,7 +54,7 @@ class SetTest {
     }
 
     @DisplayName("입력 값에 따라 결과 값이 다른 경우에 대한 테스트")
-    @ParameterizedTest
+    @ParameterizedTest(name = "numbers가 {0}을 가지고 있는지 확인하여 {1}를 반환")
     @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
     void contains_ParameterizedTest2(int value, boolean expected) {
         // given & when

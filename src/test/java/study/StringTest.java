@@ -1,4 +1,4 @@
-package step1;
+package study;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class StringTest {
 
-    private static final String SPLIT_REGEX = ",";
+    private static final String SPLIT_SEPARATOR = ",";
 
     @DisplayName("\"1,2\"를 ,로 split 했을 때 1과 2로 잘 분리되는지 확인하는 학습 테스트_contains")
     @Test
@@ -21,7 +21,7 @@ class StringTest {
         String[] expected = {"1", "2"};
 
         // when
-        String[] actual = input.split(SPLIT_REGEX);
+        String[] actual = input.split(SPLIT_SEPARATOR);
 
         // then
         assertThat(actual).contains(expected);    // 순서 상관 없음
@@ -35,10 +35,10 @@ class StringTest {
         String[] expected = {"1", "2"};
 
         // when
-        String[] actual = input.split(SPLIT_REGEX);
+        String[] actual = input.split(SPLIT_SEPARATOR);
 
         // then
-        assertThat(actual).containsExactly(expected);    // containsExactly : 순서 상관 있음
+        assertThat(actual).as("일부 문자열을 찾을 수 없습니다").containsExactly(expected);    // containsExactly : 순서 상관 있음
     }
 
     @DisplayName("\"1,2\"를 ,로 split 했을 때 1과 2로 잘 분리되는지 확인하는 학습 테스트_containsExactlyInAnyOrder")
@@ -49,7 +49,7 @@ class StringTest {
         String[] expected = {"2", "1"};
 
         // when
-        String[] actual = input.split(SPLIT_REGEX);
+        String[] actual = input.split(SPLIT_SEPARATOR);
 
         // then
         assertThat(actual).containsExactlyInAnyOrder(expected);    // containsExactlyInAnyOrder : 순서 상관 없음
@@ -63,7 +63,7 @@ class StringTest {
         String[] expected = {"1"};
 
         // when
-        String[] actual = input.split(SPLIT_REGEX);
+        String[] actual = input.split(SPLIT_SEPARATOR);
 
         // then
         assertThat(actual).contains(expected);
@@ -77,7 +77,7 @@ class StringTest {
         String[] expected = {"1"};
 
         // when
-        String[] actual = input.split(SPLIT_REGEX);
+        String[] actual = input.split(SPLIT_SEPARATOR);
 
         // then
         assertThat(actual).containsExactly(expected);
