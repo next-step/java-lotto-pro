@@ -24,4 +24,12 @@ public class LottoGroups {
     public int size() {
         return lottoGroups.size();
     }
+    
+    public List<Rank> matchResults(Lotto winLotto) {
+        List<Rank> matchResult = new ArrayList<>();
+        for (Lotto lotto : lottoGroups) {
+            matchResult.add(lotto.match(winLotto));
+        }
+        return matchResult;
+    }
 }
