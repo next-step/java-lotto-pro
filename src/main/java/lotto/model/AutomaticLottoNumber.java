@@ -6,11 +6,16 @@ import java.util.stream.Collectors;
 
 public class AutomaticLottoNumber extends LottoNumber {
 
-    public AutomaticLottoNumber() {
-        super(createAutomaticNumber());
+    private AutomaticLottoNumber(List<Integer> lottoNumber) {
+        super(lottoNumber);
     }
 
-    private static List<Integer> createAutomaticNumber() {
+    public static AutomaticLottoNumber generate() {
+        List<Integer> automaticLottoNumber = generateAutomaticLottoNumber();
+        return new AutomaticLottoNumber(automaticLottoNumber);
+    }
+
+    private static List<Integer> generateAutomaticLottoNumber() {
         shuffleNumberRange();
         return NUMBER_RANGE.stream()
                 .limit(NUMBER_SIZE)

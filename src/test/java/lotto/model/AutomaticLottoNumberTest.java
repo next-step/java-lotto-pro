@@ -17,7 +17,7 @@ class AutomaticLottoNumberTest {
 
     @BeforeEach
     void setUp() {
-        automaticNumber = new AutomaticLottoNumber();
+        automaticNumber = AutomaticLottoNumber.generate();
     }
 
     @Test

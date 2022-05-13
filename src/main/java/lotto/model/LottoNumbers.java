@@ -8,7 +8,7 @@ public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(LottoPurchaseQuantity lottoPurchaseQuantity) {
-        lottoNumbers = Stream.generate(AutomaticLottoNumber::new)
+        lottoNumbers = Stream.generate(AutomaticLottoNumber::generate)
                 .limit(lottoPurchaseQuantity.getQuantity())
                 .collect(Collectors.toList());
     }
