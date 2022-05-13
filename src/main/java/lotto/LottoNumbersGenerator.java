@@ -7,13 +7,13 @@ import java.util.stream.IntStream;
 
 public class LottoNumbersGenerator {
 
-    public static List<Integer> generate() {
-        List<Integer> numbers = IntStream.range(1, 46)
+    public static List<Integer> generate(int min, int max, int count) {
+        List<Integer> numbers = IntStream.range(min, max)
                 .boxed()
                 .collect(Collectors.toList());
 
         Collections.shuffle(numbers);
-        List<Integer> lottoNumbers = numbers.subList(0, 6);
+        List<Integer> lottoNumbers = numbers.subList(0, count);
         Collections.sort(lottoNumbers);
 
         return lottoNumbers;
