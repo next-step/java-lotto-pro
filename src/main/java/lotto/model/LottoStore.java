@@ -39,4 +39,9 @@ public class LottoStore {
             throw new IllegalArgumentException(ErrorMessage.INCORRECT_UNIT_MONEY);
         }
     }
+
+    public LottoPaper issueLottoPaper() {
+        int gameCount = money / LottoRoleConst.LOTTO_PRICE;
+        return new LottoPaper(gameCount);
+    }
 }
