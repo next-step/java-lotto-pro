@@ -13,4 +13,11 @@ public class EarningsRateTest {
         assertThat(new EarningsRate(5000, 14000))
                 .isEqualTo(new EarningsRate(5000, 14000));
     }
+
+    @DisplayName("rate 값이 같으면 동일한 객체이다.")
+    @Test
+    void sameTest() {
+        assertThat(new EarningsRate(10000, 2000))
+                .isEqualTo(new EarningsRate(50000, 10000));
+    }
 }
