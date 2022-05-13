@@ -9,6 +9,9 @@ public class StringAddCalculator {
 
     private static final StringSplitter splitter = new StringSplitter(DELIMITER, CUSTOM_DELIMITER_PATTERN);
 
+    private StringAddCalculator() {
+    }
+
     static int splitAndSum(String input) {
 
         if (isNullOrEmptyInput(input)) {
