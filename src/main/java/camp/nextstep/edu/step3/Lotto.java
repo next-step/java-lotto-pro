@@ -9,6 +9,10 @@ public class Lotto {
     private static final int VALID_SIZE = 6;
     private List<LottoNumber> lottoNumbers;
 
+    public Lotto(final int[] numbers) {
+        this(Arrays.stream(numbers).mapToObj(LottoNumber::new).toArray(LottoNumber[]::new));
+    }
+
     public Lotto(LottoNumber[] lottoNumbers) {
         validationInputSize(lottoNumbers.length);
         sortedLottoNumbers(lottoNumbers);
