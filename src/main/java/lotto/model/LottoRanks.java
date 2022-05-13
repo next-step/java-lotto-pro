@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoRanks {
-    private List<LottoRank> lottoRanks;
+    private final List<LottoRank> lottoRanks;
 
     private LottoRanks(List<LottoRank> lottoRanks) {
         this.lottoRanks = lottoRanks;

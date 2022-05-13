@@ -6,19 +6,22 @@ import java.util.List;
 import java.util.Map;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
+import lotto.model.LottoProfit;
 import lotto.model.LottoPurchaseQuantity;
 import lotto.model.LottoRank;
 import lotto.model.LottoRanks;
+import lotto.model.ProfitResult;
 
 public final class LottoOutputView {
     private static final DecimalFormat formatter = new DecimalFormat("###,###");
     private static final Long RESULT_DEFAULT_VALUE = 0L;
-    private static final int PROFIT_RATE_STANDARD = 1;
     private static final String PURCHASE_QUANTITY_MESSAGE = "%s개를 구매했습니다.\n";
     private static final String RESULT_START_MESSAGE = "당첨 통계\n---------\n";
     private static final String RANK_RESULT_MESSAGE = "%d개 일치 (%s)원 - %d개\n";
-    private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f입니다.(기준이 %d이기 때문에 결과적으로 %s라는 의미임)";
+    private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
+    private LottoOutputView() {
+    }
 
     public static void printPurchaseQuantity(LottoPurchaseQuantity lottoPurchaseQuantity) {
         System.out.printf(PURCHASE_QUANTITY_MESSAGE, lottoPurchaseQuantity.getQuantity());
@@ -48,14 +51,16 @@ public final class LottoOutputView {
         );
     }
 
-    public static void printProfitRate(LottoPurchaseQuantity lottoPurchaseQuantity, LottoRanks lottoRanks) {
-        double profitRate = lottoRanks.totalCashPrize() / (double) lottoPurchaseQuantity.getPurchasePrice();
-        String result = profitRate > PROFIT_RATE_STANDARD ? "이득" : "손해";
-        System.out.printf(PROFIT_RATE_MESSAGE, profitRate, PROFIT_RATE_STANDARD, result);
-    }
-
     private static String convertDecimalFormat(int number) {
         return formatter.format(number);
+    }
+
+    public static void printProfitRate(LottoProfit lottoProfit) {
+        double profitRate = lottoProfit.getProfitRate();
+        System.out.printf(PROFIT_RATE_MESSAGE,
+                profitRate,
+                ProfitResult.of(profitRate).getTitle()
+        );
     }
 
     public static void printErrorMessage(RuntimeException re) {

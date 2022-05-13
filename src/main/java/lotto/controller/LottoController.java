@@ -4,6 +4,7 @@ import java.util.Scanner;
 import lotto.model.LottoMachine;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
+import lotto.model.LottoProfit;
 import lotto.model.LottoPurchaseQuantity;
 import lotto.model.LottoRanks;
 import lotto.view.LottoInputView;
@@ -52,6 +53,7 @@ public class LottoController {
     }
 
     private void profitRate() {
-        LottoOutputView.printProfitRate(lottoPurchaseQuantity, lottoRanks);
+        LottoProfit lottoProfit = LottoProfit.calculate(lottoPurchaseQuantity, lottoRanks);
+        LottoOutputView.printProfitRate(lottoProfit);
     }
 }
