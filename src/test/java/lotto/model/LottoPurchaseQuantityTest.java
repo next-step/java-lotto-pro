@@ -3,7 +3,6 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import lotto.constants.LottoErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,7 +17,7 @@ class LottoPurchaseQuantityTest {
     void inputNullAndEmptyValue(String invalidValue) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoPurchaseQuantity(invalidValue))
-                .withMessage(LottoErrorMessage.INVALID_MONEY_FORMAT);
+                .withMessage("올바른 금액 양식이 아닙니다.");
     }
 
     @ParameterizedTest(name = "숫자가 아닌 값({0})을 입력받으면 IllegalArgumentException이 발생")
@@ -26,7 +25,7 @@ class LottoPurchaseQuantityTest {
     void inputStringValue(String invalidValue) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoPurchaseQuantity(invalidValue))
-                .withMessage(LottoErrorMessage.INVALID_MONEY_FORMAT);
+                .withMessage("올바른 금액 양식이 아닙니다.");
     }
 
     @Test
@@ -34,7 +33,7 @@ class LottoPurchaseQuantityTest {
     void inputNegativeValue() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoPurchaseQuantity("-5"))
-                .withMessage(LottoErrorMessage.INVALID_MONEY_FORMAT);
+                .withMessage("올바른 금액 양식이 아닙니다.");
     }
 
     @Test
@@ -42,7 +41,7 @@ class LottoPurchaseQuantityTest {
     void inputValueLessThanLottoPrice() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoPurchaseQuantity("900"))
-                .withMessage(LottoErrorMessage.MONEY_LESS_THAN_PRICE);
+                .withMessage("로또 한 장의 금액보다 입력한 금액이 적습니다.");
     }
 
     @ParameterizedTest(name = "입력받은 금액{0}은 로또 {1}장으로 반환")

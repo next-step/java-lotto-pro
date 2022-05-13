@@ -1,7 +1,5 @@
 package lotto.model;
 
-import static lotto.constants.LottoErrorMessage.OUT_OF_RANGE_LOTTO_RANK;
-
 import java.util.Arrays;
 
 public enum LottoRank {
@@ -33,6 +31,6 @@ public enum LottoRank {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.hits == hits)
                 .findAny()
-                .orElseThrow(() -> new IllegalStateException(OUT_OF_RANGE_LOTTO_RANK));
+                .orElseThrow(() -> new IllegalStateException("로또 등수의 범위가 아닙니다."));
     }
 }

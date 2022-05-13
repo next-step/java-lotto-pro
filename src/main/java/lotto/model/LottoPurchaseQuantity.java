@@ -1,10 +1,9 @@
 package lotto.model;
 
-import lotto.constants.LottoErrorMessage;
-
 public class LottoPurchaseQuantity {
     private static final String MONEY_FORMAT_REGEX = "^[1-9]+[0-9]*$";
     private static final int LOTTO_PRICE = 1000;
+
     private final int quantity;
 
     public LottoPurchaseQuantity(String money) {
@@ -19,7 +18,7 @@ public class LottoPurchaseQuantity {
 
     private void validateAmount(String money) {
         if (isLessThanLottoPrice(money)) {
-            throw new IllegalArgumentException(LottoErrorMessage.MONEY_LESS_THAN_PRICE);
+            throw new IllegalArgumentException("로또 한 장의 금액보다 입력한 금액이 적습니다.");
         }
     }
 
@@ -29,7 +28,7 @@ public class LottoPurchaseQuantity {
 
     private void validateFormat(String money) {
         if (isNotValid(money)) {
-            throw new IllegalArgumentException(LottoErrorMessage.INVALID_MONEY_FORMAT);
+            throw new IllegalArgumentException("올바른 금액 양식이 아닙니다.");
         }
     }
 

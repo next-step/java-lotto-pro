@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.constants.LottoErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,7 +30,7 @@ class LottoNumberTest {
     void inputInvalidLottoNumberString(String invalidLottoNumber) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoNumber.of(invalidLottoNumber))
-                .withMessage(LottoErrorMessage.INVALID_LOTTO_NUMBER_FORMAT);
+                .withMessage("올바른 로또 번호 양식이 아닙니다.");
     }
 
     @Test
@@ -39,7 +38,7 @@ class LottoNumberTest {
     void inputOutOfRangeLottoNumberString() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoNumber.of("1, 2, 3, 4, 5, 100"))
-                .withMessage(LottoErrorMessage.OUT_OF_RANGE_LOTTO_NUMBER);
+                .withMessage("로또 숫자 범위를 벗어났습니다.");
     }
 
     @Test
@@ -48,10 +47,10 @@ class LottoNumberTest {
         assertAll(
                 () -> assertThatIllegalArgumentException()
                         .isThrownBy(() -> LottoNumber.of("1, 2, 5, 4, 5, 10"))
-                        .withMessage(LottoErrorMessage.DUPLICATE_LOTTO_NUMBER),
+                        .withMessage("로또 숫자의 중복은 허용되지 않습니다."),
                 () -> assertThatIllegalArgumentException()
                         .isThrownBy(() -> LottoNumber.of(Arrays.asList(1, 2, 5, 4, 5, 10)))
-                        .withMessage(LottoErrorMessage.DUPLICATE_LOTTO_NUMBER)
+                        .withMessage("로또 숫자의 중복은 허용되지 않습니다.")
         );
     }
 

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.IntStream;
-import lotto.constants.LottoErrorMessage;
 
 public class LottoNumber {
     private static final String LOTTO_NUMBER_FORMAT = "^([1-9]+[0-9]*,(\\s)*){5}[1-9]+[0-9]*$";
@@ -20,6 +19,7 @@ public class LottoNumber {
             .boxed()
             .collect(toList());
     protected static final int NUMBER_SIZE = 6;
+
     private final List<Integer> lottoNumber;
 
     protected LottoNumber(List<Integer> lottoNumber) {
@@ -65,13 +65,13 @@ public class LottoNumber {
     private static void validateDuplicate(List<Integer> lottoNumber) {
         Set<Integer> numberSet = new HashSet<>(lottoNumber);
         if (numberSet.size() != NUMBER_SIZE) {
-            throw new IllegalArgumentException(LottoErrorMessage.DUPLICATE_LOTTO_NUMBER);
+            throw new IllegalArgumentException("로또 숫자의 중복은 허용되지 않습니다.");
         }
     }
 
     private static void validateNumberRange(int number) {
         if (!NUMBER_RANGE.contains(number)) {
-            throw new IllegalArgumentException(LottoErrorMessage.OUT_OF_RANGE_LOTTO_NUMBER);
+            throw new IllegalArgumentException("로또 숫자 범위를 벗어났습니다.");
         }
     }
 
@@ -81,7 +81,7 @@ public class LottoNumber {
 
     private static void validateFormat(String winningNumber) {
         if (isNotValid(winningNumber)) {
-            throw new IllegalArgumentException(LottoErrorMessage.INVALID_LOTTO_NUMBER_FORMAT);
+            throw new IllegalArgumentException("올바른 로또 번호 양식이 아닙니다.");
         }
     }
 
