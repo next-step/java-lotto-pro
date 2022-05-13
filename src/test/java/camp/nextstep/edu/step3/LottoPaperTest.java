@@ -43,4 +43,11 @@ public class LottoPaperTest {
         Lotto result = new Lotto(LottoTest.createLottoNumberArray(new int[] {1,2,3,10,11,12}));
         assertThat(new LottoPaper(basicLottoArray).checkAll(result)).isEqualTo(new Total(Hit.THREE, Hit.THREE));
     }
+
+    @DisplayName("checkAll 메소드 호출시 null 을 입력할수 없다.")
+    @Test
+    void parameterIsNotNull() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoPaper(basicLottoArray).checkAll(null));
+    }
 }

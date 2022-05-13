@@ -13,14 +13,18 @@ public class LottoPaper {
     }
 
     public Total checkAll(final Lotto answerLotto) {
+        if (Objects.isNull(answerLotto)) {
+            throw new IllegalArgumentException("invalid check all input");
+        }
+
         return new Total(userLottoList.stream()
                 .map((lotto) -> lotto.checkTo(answerLotto))
                 .toArray(Hit[]::new));
     }
 
     private void validation(Lotto[] lottoArray) {
-        if (Objects.isNull(lottoArray) || lottoArray.length < 1 ) {
-            throw new IllegalArgumentException("invalid input");
+        if (Objects.isNull(lottoArray) || lottoArray.length < 1) {
+            throw new IllegalArgumentException("invalid construct input");
         }
     }
 
