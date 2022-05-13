@@ -26,13 +26,13 @@ public class StringUtils {
         try {
             Integer.parseInt(input);
         } catch (Exception exception) {
-            throw new RuntimeException(MSG_NOT_NUMBER);
+            throw new IllegalArgumentException(MSG_NOT_NUMBER);
         }
     }
 
     private static void validatePositive(String input) {
         if (Integer.parseInt(input) < 0) {
-            throw new RuntimeException(MSG_NEGATIVE);
+            throw new IllegalArgumentException(MSG_NEGATIVE);
         }
 
     }

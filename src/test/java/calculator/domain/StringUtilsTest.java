@@ -18,13 +18,13 @@ class StringUtilsTest {
     @DisplayName("음수값 예외 테스트")
     void 음수_예외() {
         String[] inputs = {"-1", "9"};
-        assertThatThrownBy(() -> StringUtils.toPositiveNumbers(inputs)).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> StringUtils.toPositiveNumbers(inputs)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("숫자가 아닌 값 예외 테스트")
     void 숫자가_아닌_값_예외() {
         String[] inputs = {"a", "9"};
-        assertThatThrownBy(() -> StringUtils.toPositiveNumbers(inputs)).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> StringUtils.toPositiveNumbers(inputs)).isInstanceOf(IllegalArgumentException.class);
     }
 }
