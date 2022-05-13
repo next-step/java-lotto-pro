@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +17,7 @@ class WinningResultTest {
     @Test
     void emptyWinningResult() {
         final WinningResult winningResult = new WinningResult();
-        assertThat(winningResult.rateOfReturn()).isEqualTo(BigDecimal.ZERO);
+        assertThat(winningResult.rateOfReturn(Money.of(1000))).isEqualByComparingTo(BigDecimal.ZERO);
         for (LottoPrize lottoPrize : LottoPrize.values()) {
             assertThat(winningResult.find(lottoPrize)).isEqualTo(0);
         }
@@ -53,6 +54,6 @@ class WinningResultTest {
         final Map<LottoPrize, Integer> map = new EnumMap<>(LottoPrize.class);
         map.put(lottoPrize, matchCount);
         final WinningResult winningResult = new WinningResult(map);
-        assertThat(winningResult.rateOfReturn()).isEqualTo(expected);
+        assertThat(winningResult.rateOfReturn(Money.of(1000))).isEqualByComparingTo(expected);
     }
 }

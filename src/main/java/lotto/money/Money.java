@@ -1,6 +1,8 @@
 package lotto.money;
 
 import lotto.Purchasable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Money implements Comparable<Money> {
@@ -39,6 +41,10 @@ public class Money implements Comparable<Money> {
         }
         final Money money = purchasable.price();
         return of(value - money.value);
+    }
+
+    public BigDecimal divide(Money money) {
+        return BigDecimal.valueOf(value).divide(BigDecimal.valueOf(money.value), 2, RoundingMode.DOWN);
     }
 
     private static int parse(String value) {
