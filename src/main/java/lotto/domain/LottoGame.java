@@ -9,12 +9,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.domain.LottoConstant.*;
+import static lotto.view.InputView.REQUEST_LAST_WINNING_NUMBERS;
 import static lotto.view.InputView.REQUEST_MONEY;
 
 public class LottoGame {
     private static final List<LottoNo> lottoNumbers = new ArrayList<>();
     private Money money = new Money(0);
     private MyLotto myLotto = new MyLotto();
+    private LottoResult result = new LottoResult();
+    private String lastWinningNumbers = "";
 
     static {
         for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
@@ -36,6 +39,10 @@ public class LottoGame {
     public void readMoney() {
         String input = InputView.readUserInput(REQUEST_MONEY);
         money = new Money(input);
+    }
+
+    public void readLastWinningNumbers() {
+        lastWinningNumbers = InputView.readUserInput(REQUEST_LAST_WINNING_NUMBERS);
     }
 
     private Lotto generateLotto() {
@@ -62,6 +69,7 @@ public class LottoGame {
         for (Lotto lotto : lottoList) {
             OutputView.printMessage(lotto.toString());
         }
+        OutputView.printLine();
     }
 
     private static long getLottoQuantity(long totalPrice) {

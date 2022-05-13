@@ -6,6 +6,10 @@ import java.util.List;
 public class LottoResult {
     private List<Ranking> rankingList;
 
+    public LottoResult() {
+        rankingList = new ArrayList<>();
+    }
+
     public LottoResult(List<Ranking> rankingList) {
         this.rankingList = rankingList;
     }
