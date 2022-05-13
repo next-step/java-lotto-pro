@@ -21,7 +21,7 @@ public class ResultView {
     public String generatedLottosView(Lottos lottos) {
         StringBuilder totalLottoNumberView = new StringBuilder();
         for (Lotto lotto : lottos.getLottoList()) {
-            totalLottoNumberView.append(Arrays.toString(lotto.getNumberList().toArray()));
+            totalLottoNumberView.append(Arrays.toString(lotto.numberListToArray()));
             totalLottoNumberView.append(ENTER);
         }
         return totalLottoNumberView.toString();

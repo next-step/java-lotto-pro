@@ -12,14 +12,15 @@ public class Lotto {
         this.numberList = numberList;
     }
 
-    public List<Integer> getNumberList() {
-        return numberList;
-    }
-
-
     public int matchNumberCount(List<Integer> winningNumberList) {
         return Math.toIntExact(winningNumberList.stream()
                 .filter(numberList::contains)
                 .count());
+    }
+
+    public int[] numberListToArray() {
+        return numberList.stream()
+                .mapToInt(Integer::intValue)
+                .toArray();
     }
 }
