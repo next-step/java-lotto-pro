@@ -46,12 +46,4 @@ public class LottoResult {
 		}
 		return winningList;
 	}
-
-	public double profitRate(WinningList winningList, UserMoney money) {
-		if (winningList == null) {
-			return 0;
-		}
-
-		return winningList.profitRate(money);
-	}
 }

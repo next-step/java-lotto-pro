@@ -14,7 +14,7 @@ public class UserMoney {
 	public int getMoney() {
 		return this.money;
 	}
-	
+
 	public int useMoney() {
 		return canBuyLotto() * LOTTO_PRICE;
 	}

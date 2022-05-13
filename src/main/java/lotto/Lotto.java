@@ -20,11 +20,7 @@ public class Lotto {
 		List<LottoNumber> lottoNumbers = lastWinLottoNumbers(lastWinLotto);
 		return lottoResult.winningList(new LottoNumbers(lottoNumbers));
 	}
-
-	public double printProfitRate(WinningList winningList, UserMoney userMoney) {
-		return lottoResult.profitRate(winningList, userMoney);
-	}
-
+	
 	public List<LottoNumbers> buyAutoLotto(UserMoney userMoney) {
 		return lottoResult.buyAutoLottos(userMoney);
 	}

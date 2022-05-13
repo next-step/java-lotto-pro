@@ -1,7 +1,6 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -14,32 +13,45 @@ import org.junit.jupiter.api.Test;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import lotto.model.UserMoney;
+import lotto.model.WinningList;
 
 public class LottoResultTest {
-	private LottoResult lottoMachine;
+	private LottoResult lottoResult;
+	private int sum = 0;
 
 	@BeforeEach
 	void setUp() {
-		lottoMachine = new LottoResult();
+		lottoResult = new LottoResult();
 	}
 
 	@Test
 	@DisplayName("로또 구입 테스트")
 	void buy_lotto() {
-		assertThat(lottoMachine.buyAutoLottos(new UserMoney("1000"))).hasSize(1);
+		assertThat(lottoResult.buyAutoLottos(new UserMoney("1000"))).hasSize(1);
 	}
 
 	@Test
-	@DisplayName("당첨금액과 수익률을 구하는 기능 테스트")
-	void create_lottoNumber_int() {
-//		LottoNumbers lottoNumbers = lottoMachine.buyAutoLottos(new UserMoney("1000")).get(0);
-//
-//		List<LottoNumber> lottoNumbers2 = new ArrayList<>();
-//		for (int i = 0; i < lottoNumbers.getLottoNumbers().size(); ++i) {
-//			lottoNumbers2.add(lottoNumbers.getLottoNumbers().get(i));
-//		}
-//		int[] winList = lottoMachine.winList(new LottoNumbers(lottoNumbers2));
-//		assertAll(() -> assertEquals(winList[6], 1),
-//				() -> assertEquals(lottoMachine.profitRate(new UserMoney("1000")), 2000000.00));
+	@DisplayName("당첨 리스트 생성 테스트")
+	void lotto_profitRate() {
+		// given
+		sum = 0;
+		UserMoney userMoney = new UserMoney("1000");
+
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		lottoNumbers.add(new LottoNumber(1));
+		lottoNumbers.add(new LottoNumber(2));
+		lottoNumbers.add(new LottoNumber(3));
+		lottoNumbers.add(new LottoNumber(4));
+		lottoNumbers.add(new LottoNumber(5));
+		lottoNumbers.add(new LottoNumber(6));
+		LottoNumbers winningLottoNumbers = new LottoNumbers(lottoNumbers);
+
+		// when
+		lottoResult.buyAutoLottos(userMoney);
+		WinningList winningList = lottoResult.winningList(winningLottoNumbers);
+		winningList.getWinningList().entrySet().forEach((entry) -> sum += entry.getValue());
+
+		// then
+		assertEquals(sum, 1);
 	}
 }

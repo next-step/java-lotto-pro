@@ -7,16 +7,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum WinningMoney {
-	OTHER(0, 0),
-	THREE(3, 5000),
+	OTHER(0, 0), 
+	THREE(3, 5000), 
 	FOUR(4, 50000), 
 	FIVE(5, 1500000), 
-	SIX(6, 2000000000); 
+	SIX(6, 2000000000);
 
 	private static final Map<Integer, WinningMoney> WINNING_MONEY_MAP = Collections.unmodifiableMap(
 			Stream.of(values()).collect(Collectors.toMap(WinningMoney::getMatchCount, Function.identity())));
 	private static final int DEFAULT_WINNING_MONEY_KEY = 0;
-	
+
 	private final int matchCount;
 	private final int winningMoney;
 
@@ -42,6 +42,5 @@ public enum WinningMoney {
 			return WINNING_MONEY_MAP.get(matchCount);
 		}
 		return WINNING_MONEY_MAP.get(DEFAULT_WINNING_MONEY_KEY);
-//		throw new IllegalArgumentException("matchCount: " + matchCount + " WinningMoney Enum에 등록되어있지 않습니다.");
 	}
 }

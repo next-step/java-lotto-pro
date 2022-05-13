@@ -17,7 +17,7 @@ public class ResultView {
 			System.out.println(lottoNumbersStringFormat(lottos.get(i)));
 		}
 	}
-	
+
 	public static void printWinStatistics(WinningList winningList) {
 		System.out.println("\n당첨 통계\n---------");
 		winningList.getWinningList().remove(WinningMoney.OTHER);
@@ -25,7 +25,7 @@ public class ResultView {
 				.forEach((winningMoney, count) -> System.out.println(winLottoCountStringFormat(winningMoney, count)));
 
 	}
-	
+
 	public static void printProfitRate(double profitRate) {
 		System.out.println(profitRateStringFormat(profitRate));
 	}

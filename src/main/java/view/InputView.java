@@ -7,7 +7,7 @@ public class InputView {
 	public static String inputMoney() {
 		return inputView(inputMoneyMessage);
 	}
-	
+
 	public static String inputLastWinLotto() {
 		return inputView(inputLastWinLottoMessage);
 	}

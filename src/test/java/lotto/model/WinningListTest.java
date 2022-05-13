@@ -22,13 +22,22 @@ public class WinningListTest {
 		winningList.increase(WinningMoney.SIX);
 		assertEquals(winningList.getWinningList().get(WinningMoney.SIX), 3);
 	}
-	
+
 	@Test
 	@DisplayName("당첨금액 테스트")
-	void total_winningMoney() {
+	void totalWinningMoney() {
 		WinningList winningList = new WinningList();
 		winningList.increase(WinningMoney.SIX);
 		winningList.increase(WinningMoney.FIVE);
 		assertEquals(winningList.totalWinningMoney(), 1500000 + 2000000000);
+	}
+
+	@Test
+	@DisplayName("수익률 테스트")
+	void profitRate() {
+		WinningList winningList = new WinningList();
+		winningList.increase(WinningMoney.SIX);
+		winningList.increase(WinningMoney.FIVE);
+		assertEquals(winningList.profitRate(new UserMoney("2000")), (1500000 + 2000000000) / 2000);
 	}
 }
