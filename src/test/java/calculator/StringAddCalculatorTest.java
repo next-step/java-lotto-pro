@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StringAddCalculatorTest {
@@ -33,5 +34,16 @@ public class StringAddCalculatorTest {
         assertFalse(StringAddCalculator.hasDelimiter(hasIncorrectDelimiter));
     }
 
+    @Test
+    public void splitAndSum_숫자하나() {
+        int result = StringAddCalculator.splitAndSum("1");
+        assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    public void 유효하지_않은_숫자하나() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("d"))
+                .isInstanceOf(RuntimeException.class);
+    }
 
 }
