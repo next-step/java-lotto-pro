@@ -16,7 +16,7 @@ public class WinningLotto {
         winningStatus.recordResults(count);
     }
 
-    protected int findWinningCount(MatchPoint matchPoint) {
+    public int findWinningCount(MatchPoint matchPoint) {
         return winningStatus.findWinningCount(matchPoint);
     }
 
