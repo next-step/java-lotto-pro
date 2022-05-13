@@ -18,6 +18,8 @@ public class Lotto {
 
 
     public int matchNumberCount(List<Integer> winningNumberList) {
-        return 0;
+        return Math.toIntExact(winningNumberList.stream()
+                .filter(numberList::contains)
+                .count());
     }
 }
