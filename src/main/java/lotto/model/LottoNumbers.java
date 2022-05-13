@@ -1,16 +1,15 @@
 package lotto.model;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(LottoPurchaseQuantity lottoPurchaseQuantity) {
-        lottoNumbers = Stream.generate(AutomaticLottoNumber::generate)
-                .limit(lottoPurchaseQuantity.getQuantity())
-                .collect(Collectors.toList());
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -18,10 +17,8 @@ public class LottoNumbers {
     }
 
     public LottoRanks getLottoRanks(LottoNumber winningLottoNumber) {
-        return LottoRanks.of(
-                lottoNumbers.stream()
-                        .map(lottoNumber -> lottoNumber.getLottoRank(winningLottoNumber))
-                        .collect(Collectors.toList())
-        );
+        return lottoNumbers.stream()
+                .map(lottoNumber -> lottoNumber.getLottoRank(winningLottoNumber))
+                .collect(collectingAndThen(toList(), LottoRanks::of));
     }
 }
