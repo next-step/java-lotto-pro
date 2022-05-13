@@ -17,6 +17,10 @@ public enum Ranking {
         this.reward = reward;
     }
 
+    public int getReward() {
+        return reward;
+    }
+
     public static Ranking findRank(int count) {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchingCount == count)

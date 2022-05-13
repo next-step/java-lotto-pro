@@ -24,4 +24,12 @@ public class LottoResult {
             result.add(ranking);
         }
     }
+
+    public int calculateWinningMoney() {
+        int winningMoney = 0;
+        for (Ranking ranking : rankingList) {
+            winningMoney += ranking.getReward();
+        }
+        return winningMoney;
+    }
 }
