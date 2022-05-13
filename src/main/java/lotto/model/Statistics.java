@@ -6,10 +6,11 @@ import java.util.Map;
 
 public class Statistics {
     private Map<Rank, Integer> resultMap = new HashMap() {{
-        put(new Rank(3L), 0);
-        put(new Rank(4L), 0);
-        put(new Rank(5L), 0);
-        put(new Rank(6L), 0);
+        put(Rank.getRank(6), 0);
+        put(Rank.getRank(5), 0);
+        put(Rank.getRank(4), 0);
+        put(Rank.getRank(3), 0);
+        put(Rank.getRank(0), 0);
     }};
 
     public Map<Rank, Integer> getResultMap() {
@@ -25,6 +26,22 @@ public class Statistics {
                 .filter(lottoNumber -> win.getLottoNumber().contains(lottoNumber))
                 .count();
 
-        resultMap.computeIfPresent(new Rank(count), (k, v) -> Math.toIntExact(v + 1));
+        resultMap.computeIfPresent(Rank.getRank(count), (k, v) -> Math.toIntExact(v + 1));
+    }
+
+    public long getTotalPrize() {
+        return resultMap.entrySet().stream()
+                .mapToLong(rank -> rank.getKey().getPrize() * rank.getValue())
+                .sum();
+    }
+
+    public double getTotalCount() {
+        return resultMap.entrySet().stream()
+                .mapToLong(rank -> rank.getValue())
+                .sum();
+    }
+
+    public double getProfit() {
+        return Math.floor((getTotalPrize() / (getTotalCount() * 1000)) * 100) / 100;
     }
 }

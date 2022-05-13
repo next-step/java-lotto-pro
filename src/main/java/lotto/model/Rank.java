@@ -1,32 +1,40 @@
 package lotto.model;
 
-import java.util.Objects;
+import java.util.stream.Stream;
 
-public class Rank {
-    Long rank;
+public enum Rank {
+    FIRST("1등", 6, 2_000_000_000),
+    SECOND("2등", 5, 1_500_000),
+    THIRD("3등", 4, 50_000),
+    FOURTH("4등", 3, 5_000),
+    NOTHING("꽝", 0, 0);
 
-    public Rank(Long rank) {
-        this.rank = rank;
+    private final String name;
+    private final int matchedCount;
+    private final long prize;
+
+    Rank(String name, int matchedCount, int prize) {
+        this.name = name;
+        this.matchedCount = matchedCount;
+        this.prize = prize;
     }
 
-    public Long getRank() {
-        return rank;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Rank that = (Rank) o;
-        return getRank() == that.getRank();
+    public long getPrize() {
+        return prize;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getRank());
+    public static Rank getRank(int matchedCount) {
+        return Stream.of(Rank.values())
+                .filter(rank -> rank.matchedCount == matchedCount)
+                .findFirst()
+                .orElse(Rank.NOTHING);
+    }
+
+    public static Rank getRank(Long matchedCount) {
+        return getRank(matchedCount.intValue());
     }
 }
