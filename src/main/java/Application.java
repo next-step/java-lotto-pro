@@ -1,11 +1,10 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import lotto.constant.LottoGameMessage;
 import lotto.controller.LottoGameController;
 import lotto.dto.LottoGameDTO;
+import lotto.view.InputConsole;
 
 public class Application {
-    public static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
         new Application().startLottoGame();
@@ -22,37 +21,24 @@ public class Application {
         boolean isInputError;
         LottoGameDTO lottoGameDTO;
         do {
-            String winningNumbersWord = getInputWinningNumbers(lottoGameController);
+            String winningNumbersWord = InputConsole.readStringForMessage(LottoGameMessage.INPUT_WINNING_NUMBERS_MESSAGE);
             lottoGameDTO = lottoGameController.playLottoGame(requestLottoGameDTO, winningNumbersWord);
             printMessage(lottoGameDTO);
             isInputError = lottoGameDTO.isInputError();
         } while (isInputError);
     }
 
-    private String getInputWinningNumbers(LottoGameController lottoGameController) throws IOException {
-        LottoGameDTO lottoGameDTO;
-        lottoGameDTO = lottoGameController.inputWinningNumbers();
-        printMessage(lottoGameDTO);
-        return BUFFERED_READER.readLine();
-    }
-
     private LottoGameDTO generateLottos(LottoGameController lottoGameController) throws IOException {
         boolean isInputError;
         LottoGameDTO lottoGameDTO;
         do {
-            String moneyWord = getInputMoney(lottoGameController);
+            String moneyWord = InputConsole.readStringForMessage(LottoGameMessage.INPUT_MONEY_MESSAGE);
             lottoGameDTO = lottoGameController.generateLottoByMoney(moneyWord);
             isInputError = lottoGameDTO.isInputError();
             printMessage(lottoGameDTO);
         } while (isInputError);
 
         return lottoGameDTO;
-    }
-
-    private String getInputMoney(LottoGameController lottoGameController) throws IOException {
-        LottoGameDTO lottoGameDTO = lottoGameController.inputMoney();
-        printMessage(lottoGameDTO);
-        return BUFFERED_READER.readLine();
     }
 
     private void printMessage(LottoGameDTO lottoGameDTO) {

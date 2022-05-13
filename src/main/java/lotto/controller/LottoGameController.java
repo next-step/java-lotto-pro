@@ -4,7 +4,6 @@ import java.util.List;
 import lotto.dto.LottoGameDTO;
 import lotto.model.LottoPlayService;
 import lotto.utils.InputStringUtils;
-import lotto.view.InputView;
 import lotto.view.ResultView;
 import lotto.vo.Lottos;
 
@@ -12,18 +11,12 @@ public class LottoGameController {
 
     private static final String DELIMITER_COMMA = ",";
 
-    private final InputView inputView;
     private final ResultView resultView;
     private final LottoPlayService lottoPlayService;
 
     public LottoGameController() {
-        this.inputView = new InputView();
         this.resultView = new ResultView();
         this.lottoPlayService = new LottoPlayService();
-    }
-
-    public LottoGameDTO inputMoney() {
-        return new LottoGameDTO(null, inputView.inputMoneyView(), false);
     }
 
     public LottoGameDTO generateLottoByMoney(String moneyWord) {
@@ -35,11 +28,6 @@ public class LottoGameController {
         } catch (IllegalArgumentException e) {
             return new LottoGameDTO(null, e.getMessage(), true);
         }
-    }
-
-    public LottoGameDTO inputWinningNumbers() {
-        String inputWinningNumbersView = inputView.inputWinningNumbersView();
-        return new LottoGameDTO(null, inputWinningNumbersView, false);
     }
 
     public LottoGameDTO playLottoGame(LottoGameDTO lottoGameDTO, String winningNumbersWord) {
