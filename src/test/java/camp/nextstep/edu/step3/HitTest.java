@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -48,6 +47,12 @@ public class HitTest {
                 Arguments.of(TWO,THREE,true),
                 Arguments.of(THREE,TWO,false)
         );
+    }
+
+    @DisplayName("동일한 당첨금액의 갯수만큼 비용을 반환한다.")
+    @Test
+    void costTest() {
+        assertThat(Hit.THREE.cost(3)).isEqualTo(15000);
     }
 
     private String expectedMessage(final int count, final int prizeMoney) {

@@ -27,6 +27,10 @@ public enum Hit {
         return target.isHigh(this.count);
     }
 
+    int cost(final int count) {
+        return this.prizeMoney * count;
+    }
+
     private boolean isHigh(final int destinationCount) {
         return this.count > destinationCount;
     }
