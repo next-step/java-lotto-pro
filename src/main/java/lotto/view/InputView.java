@@ -28,7 +28,6 @@ public class InputView {
 
     public List<Integer> inputWinningLottoNumbers() throws IOException {
         message.printMessage(INPUT_WINNING_LOTTO_NUMBERS_MESSAGE);
-        message.printMessage();
         return Arrays.stream(br.readLine().split(",")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
     }
 }

@@ -20,8 +20,10 @@ public class LottoController {
 
     public void playing() throws IOException {
         long purchasePrice = purchaseLottos();
-        createPurchaseLottos(purchasePrice);
+        Lottos lottos = createPurchaseLottos(purchasePrice);
         WinningLotto winningLotto = createWinningLotto();
+
+        lottos.compareLottos(winningLotto);
         winningStatistics(purchasePrice, winningLotto);
     }
 
@@ -35,8 +37,11 @@ public class LottoController {
         return inputView.inputPurchasePrice();
     }
 
-    private void createPurchaseLottos(long purchasePrice) {
-        resultView.printPurchaseLottos(new Lottos(purchasePrice));
+    private Lottos createPurchaseLottos(long purchasePrice) {
+        Lottos lottos = new Lottos(purchasePrice);
+        resultView.printPurchaseLottos(lottos);
+
+        return lottos;
     }
 
     private WinningLotto createWinningLotto() throws IOException {

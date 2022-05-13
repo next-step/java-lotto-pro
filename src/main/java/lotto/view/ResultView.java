@@ -9,7 +9,7 @@ public class ResultView {
     private final static String PURCHASE_LOTTOS_COUNT_MESSAGE = "%d개를 구매했습니다.";
     private final static String WINNING_STATISTICS_TITLE_MESSAGE = "당첨 통계\n---------";
     private final static String WINNING_STATISTICS_MESSAGE = "%d개 일치 (%d원)- %d개";
-    private final static String TOTAL_EARNINGS_RATE_MESSAGE = "총 수익률은 %f입니다.";
+    private final static String TOTAL_EARNINGS_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
 
     private final MessageUtil message;
 
@@ -23,6 +23,7 @@ public class ResultView {
     }
 
     public void printWinningStatisticsTitle() {
+        message.printMessage();
         message.printMessage(WINNING_STATISTICS_TITLE_MESSAGE);
     }
 
