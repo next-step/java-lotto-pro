@@ -2,7 +2,6 @@ package lotto.money;
 
 import lotto.Purchasable;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Money implements Comparable<Money> {
@@ -43,8 +42,16 @@ public class Money implements Comparable<Money> {
         return of(value - money.value);
     }
 
-    public BigDecimal divide(Money money) {
-        return BigDecimal.valueOf(value).divide(BigDecimal.valueOf(money.value), 2, RoundingMode.DOWN);
+    public BigDecimal percentage(Money money) {
+        return null;
+    }
+
+    public Money multiple(long multiple) {
+        return null;
+    }
+
+    public Money add(Money money) {
+        return null;
     }
 
     private static int parse(String value) {

@@ -7,10 +7,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -100,5 +102,47 @@ class MoneyTest {
                     Arguments.of(PRICE_IS_TEN)
             );
         }
+    }
+
+    @DisplayName("Money와 또 다른 Money를 더한다")
+    @ParameterizedTest
+    @CsvSource({
+            "1,1,2",
+            "1,0,1",
+            "0,1,1"
+    })
+    void add(long moneyValue, long otherMoneyValue, long expectedValue) {
+        final Money money = Money.of(moneyValue);
+        final Money otherMoney = Money.of(otherMoneyValue);
+        assertThat(money.add(otherMoney)).isEqualTo(Money.of(expectedValue));
+    }
+
+    @DisplayName("Money와 특정 수 만큼 곱한다")
+    @ParameterizedTest
+    @CsvSource({
+            "1,1,1",
+            "1,2,2",
+            "2,2,4",
+            "0,1,0",
+    })
+    void multiple(long moneyValue, long multiple, long expectedValue) {
+        final Money money = Money.of(moneyValue);
+        assertThat(money.multiple(multiple)).isEqualTo(Money.of(expectedValue));
+    }
+
+    @DisplayName("Money와 또 다른 Money의 퍼센티지를 반환")
+    @ParameterizedTest
+    @CsvSource({
+            "0, 0, 0.00",
+            "1, 0, 0.00",
+            "0, 1, 0.00",
+            "1, 1, 1.00",
+            "1, 2, 0.50",
+            "2, 1, 2.00",
+    })
+    void percentage(long moneyValue, long otherMoneyValue, BigDecimal expected) {
+        final Money money = Money.of(moneyValue);
+        final Money otherMoney = Money.of(otherMoneyValue);
+        assertThat(money.percentage(otherMoney)).isEqualByComparingTo(expected);
     }
 }
