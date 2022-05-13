@@ -4,9 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Splitter {
-    private final static String DEFAULT_DELIMITERS = ",|:";
-    private final static String CUSTOM_DELIMITER_REGEX = "^//(.)\n(.*)";
-    private final static Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+    private static final String DEFAULT_DELIMITERS = ",|:";
+    private static final String CUSTOM_DELIMITER_REGEX = "^//(.)\n(.*)";
+    private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
     private static Matcher matcher;
 
     public static String[] splitString(String input) {
