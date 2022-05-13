@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.constants.LottoConstants.MAX_LOTTO_NUM;
 import static lotto.constants.LottoConstants.MIN_LOTTO_NUM;
+import static lotto.messages.ErrorMessages.LOTTO_NUMBER_ERROR;
 
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class LottoNumber {
 
     private void validateNumber(int number) {
         if (MIN_LOTTO_NUM > number || number > MAX_LOTTO_NUM) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(LOTTO_NUMBER_ERROR);
         }
     }
 

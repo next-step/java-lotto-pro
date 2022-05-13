@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import static lotto.constants.LottoConstants.MAX_LOTTO_NUMBER_SIZE;
+import static lotto.messages.ErrorMessages.LOTTO_NUMBERS_DUPLICATION_ERROR;
+import static lotto.messages.ErrorMessages.LOTTO_NUMBERS_SIZE_ERROR;
 
 import java.util.HashSet;
 import java.util.List;
@@ -34,14 +36,14 @@ public class LottoNumbers {
 
     private void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != MAX_LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(LOTTO_NUMBERS_SIZE_ERROR);
         }
     }
 
     private void validateDuplication(List<LottoNumber> numbers) {
         Set<LottoNumber> numbersSet = new HashSet<>(numbers);
         if (numbersSet.size() != MAX_LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(LOTTO_NUMBERS_DUPLICATION_ERROR);
         }
     }
 
