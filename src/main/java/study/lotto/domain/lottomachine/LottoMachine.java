@@ -1,7 +1,6 @@
 package study.lotto.domain.lottomachine;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -17,16 +16,17 @@ public class LottoMachine {
         this.lottoPrice = lottoPrice;
     }
 
-    public List<Lotto> issueLotto(BigDecimal money) {
+    public LottoPurchaseHistory issueLotto(BigDecimal money) {
         if (Objects.isNull(money)) {
-            return new ArrayList<>();
+            return new LottoPurchaseHistory();
         }
         return issue(money);
     }
 
-    private List<Lotto> issue(BigDecimal money) {
+    private LottoPurchaseHistory issue(BigDecimal money) {
         int count = lottoPrice.maximumIssuableCount(money);
-        return IntStream.range(0, count).mapToObj(i -> generateLotto()).collect(Collectors.toList());
+        List<Lotto> lottoList = IntStream.range(0, count).mapToObj(i -> generateLotto()).collect(Collectors.toList());
+        return new LottoPurchaseHistory(lottoList, lottoPrice.total(count));
     }
 
     private Lotto generateLotto() {

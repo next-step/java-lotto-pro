@@ -23,6 +23,10 @@ public class LottoPrice {
         return money.divideAndRemainder(price)[0].intValue();
     }
 
+    public BigDecimal total(int numberOfLotto) {
+        return price.multiply(new BigDecimal(numberOfLotto));
+    }
+
     private boolean isGreaterThan(BigDecimal money) {
         return price.compareTo(money) > 0;
     }

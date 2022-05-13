@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import study.lotto.domain.draw.Division;
 
 @DisplayName("로또 테스트")
 class LottoTest {
@@ -20,9 +21,9 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("입력받은 번호와 현재 번호를 비교하여 같은 숫자의 개수를 반환한다.")
+    @DisplayName("입력받은 번호와 현재 번호를 비교하여 등수를 반환한다.")
     void 로또번호_비교() {
-        Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 4, 7, 8, 9, 10)));
-        assertThat(lotto.match(lottoNumbers)).isEqualTo(2);
+        Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 4, 5, 8, 9, 10)));
+        assertThat(lotto.match(lottoNumbers)).isEqualTo(Division.DIVISION_FOUR);
     }
 }

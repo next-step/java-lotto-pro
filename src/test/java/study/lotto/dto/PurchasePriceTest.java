@@ -3,6 +3,7 @@ package study.lotto.dto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ class PurchasePriceTest {
     @Test
     void 유효한_숫자() {
         PurchasePrice purchasePrice = new PurchasePrice("14000");
-        assertThat(purchasePrice.get()).isEqualTo(14000);
+        assertThat(purchasePrice.getPrice()).isEqualTo(new BigDecimal(14000));
     }
 
     @Nested

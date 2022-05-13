@@ -1,11 +1,15 @@
 package study.lotto.dto;
 
 import java.util.List;
-import java.util.Objects;
+import study.lotto.domain.Lotto;
 
 public class PurchasedLotto {
 
     private final List<Integer> lottoNumbers;
+
+    public PurchasedLotto(Lotto lotto) {
+        this(lotto.numbers());
+    }
 
     public PurchasedLotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;

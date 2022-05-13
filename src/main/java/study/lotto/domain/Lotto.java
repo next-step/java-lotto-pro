@@ -1,6 +1,8 @@
 package study.lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
+import study.lotto.domain.draw.Division;
 
 public class Lotto {
     private final LottoNumbers lottoNumbers;
@@ -12,7 +14,11 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int match(LottoNumbers lottoNumbers) {
-        return this.lottoNumbers.match(lottoNumbers).size();
+    public Division match(LottoNumbers lottoNumbers) {
+        return Division.valueOfMatchCount(this.lottoNumbers.match(lottoNumbers).size());
+    }
+
+    public List<Integer> numbers() {
+        return lottoNumbers.numbers();
     }
 }

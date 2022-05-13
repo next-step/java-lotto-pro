@@ -1,6 +1,8 @@
 package study.lotto.dto;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import study.lotto.domain.Lottos;
 
 public class PurchasedLottos {
 
@@ -8,6 +10,11 @@ public class PurchasedLottos {
 
     public PurchasedLottos(List<PurchasedLotto> lottoList) {
         this.lottoList = lottoList;
+    }
+
+    public static PurchasedLottos from(Lottos lottos) {
+        return new PurchasedLottos(
+                lottos.getLottoList().stream().map(PurchasedLotto::new).collect(Collectors.toList()));
     }
 
     public List<PurchasedLotto> getLottoList() {

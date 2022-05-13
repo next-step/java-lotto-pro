@@ -1,29 +1,30 @@
 package study.lotto.dto;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class PurchasePrice {
     private static final String NOTNULL_ERROR = "구입금액을 입력해 주세요.";
 
-    private final int price;
+    private final BigDecimal price;
 
     public PurchasePrice(String price) {
         this.price = validate(price);
     }
 
-    public int get() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    private int validate(String price) {
+    private BigDecimal validate(String price) {
         validateNonNull(price);
         validateNonEmpty(price);
         return validateNumber(price);
     }
 
-    private int validateNumber(String price) {
+    private BigDecimal validateNumber(String price) {
         try {
-            return Integer.parseInt(price);
+            return BigDecimal.valueOf(Long.parseLong(price));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("금액은 숫자여야 합니다.");
         }

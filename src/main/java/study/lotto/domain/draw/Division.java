@@ -29,6 +29,10 @@ public enum Division {
         return BY_MATCH_COUNT.get(matchCount);
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public BigDecimal getPrize() {
         return prize;
     }
