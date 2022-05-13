@@ -16,6 +16,6 @@ public class LottoPrizeRanksTest {
         LottoPrizeRanks lottoPrizeRanks = new LottoPrizeRanks(Arrays.asList(
                 THREE, FOUR, NONE));
 
-        assertThat(lottoPrizeRanks.calculate()).isEqualTo(1550000);
+        assertThat(lottoPrizeRanks.calculate()).isEqualTo(55000.0f);
     }
 }

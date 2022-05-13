@@ -10,7 +10,11 @@ public class LottoPrizeRanks {
         this.lottoPrizeRanks = lottoPrizeRankList;
     }
 
-    public int calculate() {
+    public List<LottoPrizeRank> getLottoPrizeRanks() {
+        return lottoPrizeRanks;
+    }
+
+    public float calculate() {
         return lottoPrizeRanks.stream()
                 .map(LottoPrizeRank::getPrize)
                 .mapToInt(i -> i)
@@ -28,5 +32,12 @@ public class LottoPrizeRanks {
     @Override
     public int hashCode() {
         return Objects.hash(lottoPrizeRanks);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoPrizeRanks{" +
+                "lottoPrizeRanks=" + lottoPrizeRanks +
+                '}';
     }
 }
