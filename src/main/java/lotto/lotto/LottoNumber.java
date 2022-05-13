@@ -15,7 +15,7 @@ class LottoNumber implements Comparable<LottoNumber> {
     }
 
     protected LottoNumber(int value) {
-        this.value = validated(value);
+        this.value = validate(value);
     }
 
     public static LottoNumber of(String value) {
@@ -37,7 +37,7 @@ class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    private static int validated(int value) {
+    private static int validate(int value) {
         if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new LottoNumberOutOfBoundsException(value);
         }

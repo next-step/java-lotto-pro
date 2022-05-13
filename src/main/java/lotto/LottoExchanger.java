@@ -25,18 +25,18 @@ public class LottoExchanger {
         final List<Lotto> purchasedLottoes = new ArrayList<>();
         Money remainMoney = money;
         Lotto lotto = lottoGenerator.generate();
-        while (remainMoney.canPurchase(lotto)) {
-            remainMoney = remainMoney.purchase(lotto);
+        validateMoney(remainMoney, lotto);
+        while (remainMoney.canDeduct(lotto)) {
+            remainMoney = remainMoney.deduct(lotto);
             purchasedLottoes.add(lotto);
             lotto = lottoGenerator.generate();
         }
-        validateSize(purchasedLottoes, money, lotto);
         return purchasedLottoes;
     }
 
-    private void validateSize(List<Lotto> purchasedLottoes, Money money, Lotto lotto) {
-        if (purchasedLottoes.isEmpty()) {
-            throw new NothingToPurchasedLottoException(money, lotto);
+    private void validateMoney(Money remainMoney, Lotto lotto) {
+        if (!remainMoney.canDeduct(lotto)) {
+            throw new NotEnoughMoneyException(remainMoney, lotto);
         }
     }
 }

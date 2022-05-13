@@ -26,14 +26,14 @@ class LottoExchangerTest {
         assertThat(lottoExchanger).isNotNull();
     }
 
-    @DisplayName("Money가 부족하여 구매한 Lotto가 없어 `NothingToPurchasedLottoException`가 발생")
+    @DisplayName("Money가 부족하여 Lotto를 구매할 수 없어 `NotEnoughMoneyException`가 발생")
     @Test
     void failureExchange() {
         assertThatThrownBy(() -> {
             lottoExchanger.exchange(Money.of(999));
         })
-        .isInstanceOf(NothingToPurchasedLottoException.class)
-        .hasMessageContaining("구매한 Lotto가 없습니다.");
+        .isInstanceOf(NotEnoughMoneyException.class)
+        .hasMessageContaining("Money가 충분하지 않습니다.");
     }
 
     @DisplayName("Money를 지불하여 n개의 Lotto를 구매")

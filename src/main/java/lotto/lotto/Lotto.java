@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 public class Lotto implements Purchasable {
 
     static final int SIZE = 6;
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     protected Lotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = validated(lottoNumbers);
+        this.lottoNumbers = validate(lottoNumbers);
     }
 
     public static Lotto of(Integer... numbers) {
@@ -56,15 +56,10 @@ public class Lotto implements Purchasable {
         return 0;
     }
 
-    List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
-    private static List<LottoNumber> validated(List<LottoNumber> lottoNumbers) {
+    private static Set<LottoNumber> validate(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicated(lottoNumbers);
-        Collections.sort(lottoNumbers);
-        return Collections.unmodifiableList(lottoNumbers);
+        return Collections.unmodifiableSet(new HashSet<>(lottoNumbers));
     }
 
     private static void validateSize(List<LottoNumber> lottoNumbers) {

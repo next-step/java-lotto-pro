@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 
 class RandomLottoGenerator implements LottoGenerator {
 
+    private static final String INVALID_MESSAGE = "LottoGenerator 생성 실패했습니다. (입력값: %s, 최소 갯수: %d)";
     private static final List<LottoNumber> CACHED_LOTTO_NUMBERS =
             IntStream.rangeClosed(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
                      .mapToObj(LottoNumber::of)
@@ -21,7 +22,7 @@ class RandomLottoGenerator implements LottoGenerator {
     }
 
     RandomLottoGenerator(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = validated(lottoNumbers);
+        this.lottoNumbers = validate(lottoNumbers);
     }
 
     @Override
@@ -31,12 +32,12 @@ class RandomLottoGenerator implements LottoGenerator {
         return new Lotto(copiedLottoNumbers.subList(0, 6));
     }
 
-    private static List<LottoNumber> validated(List<LottoNumber> lottoNumbers) {
+    private static List<LottoNumber> validate(List<LottoNumber> lottoNumbers) {
         if (CollectionUtils.isEmpty(lottoNumbers)) {
-            throw new FailureCreatingLottoGeneratorException(lottoNumbers);
+            throw new FailureCreatingLottoGeneratorException(String.format(INVALID_MESSAGE, lottoNumbers, Lotto.SIZE));
         }
         if (lottoNumbers.size() < Lotto.SIZE) {
-            throw new FailureCreatingLottoGeneratorException(lottoNumbers);
+            throw new FailureCreatingLottoGeneratorException(String.format(INVALID_MESSAGE, lottoNumbers, Lotto.SIZE));
         }
         return lottoNumbers;
     }

@@ -17,7 +17,7 @@ public class Money implements Comparable<Money> {
     }
 
     protected Money(long value) {
-        this.value = validated(value);
+        this.value = validate(value);
     }
 
     public static Money of(String value) {
@@ -28,7 +28,7 @@ public class Money implements Comparable<Money> {
         return new Money(value);
     }
 
-    public boolean canPurchase(Purchasable purchasable) {
+    public boolean canDeduct(Purchasable purchasable) {
         if (purchasable == null) {
             return false;
         }
@@ -36,9 +36,9 @@ public class Money implements Comparable<Money> {
         return compareTo(money) >= 0;
     }
 
-    public Money purchase(Purchasable purchasable) {
-        if (!canPurchase(purchasable)) {
-            throw new CanNotPurchaseException(this, purchasable);
+    public Money deduct(Purchasable purchasable) {
+        if (!canDeduct(purchasable)) {
+            throw new CanNotDeductException(this, purchasable);
         }
         final Money money = purchasable.price();
         return of(value - money.value);
@@ -69,7 +69,7 @@ public class Money implements Comparable<Money> {
         return Integer.parseInt(value);
     }
 
-    private static long validated(long value) {
+    private static long validate(long value) {
         if (value < 0) {
             throw new MoneyFormatException(value);
         }

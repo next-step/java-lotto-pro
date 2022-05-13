@@ -49,7 +49,7 @@ class MoneyTest {
     @ArgumentsSource(CanPurchaseArgumentsProvider.class)
     void canPurchase(Purchasable purchasable, boolean expected) {
         Money ten = Money.of("10");
-        assertThat(ten.canPurchase(purchasable)).isEqualTo(expected);
+        assertThat(ten.canDeduct(purchasable)).isEqualTo(expected);
     }
 
     static class CanPurchaseArgumentsProvider implements ArgumentsProvider {
@@ -68,7 +68,7 @@ class MoneyTest {
     @ParameterizedTest
     @ArgumentsSource(SuccessfulPurchaseArgumentsProvider.class)
     void successfulPurchase(Purchasable purchasable, Money expected) {
-        assertThat(Money.ONE_THOUSAND.purchase(purchasable)).isEqualTo(expected);
+        assertThat(Money.ONE_THOUSAND.deduct(purchasable)).isEqualTo(expected);
     }
 
     static class SuccessfulPurchaseArgumentsProvider implements ArgumentsProvider {
@@ -88,9 +88,9 @@ class MoneyTest {
     @ArgumentsSource(FailurePurchaseArgumentsProvider.class)
     void failurePurchase(Purchasable purchasable) {
         assertThatThrownBy(() -> {
-            Money.of("1").purchase(purchasable);
+            Money.of("1").deduct(purchasable);
         })
-        .isInstanceOf(CanNotPurchaseException.class)
+        .isInstanceOf(CanNotDeductException.class)
         .hasMessageContaining("구매가 불가능 합니다.");
     }
 

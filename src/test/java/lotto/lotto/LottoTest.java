@@ -26,25 +26,6 @@ class LottoTest {
         assertThat(lotto.price()).isEqualTo(Money.ONE_THOUSAND);
     }
 
-    @DisplayName("생성된 Lotto 클래스는 LottoNumber가 정렬된 상태로 존재")
-    @ParameterizedTest
-    @ArgumentsSource(CreateAndSortedArgumentsProvider.class)
-    void createAndSorted(List<Integer> numbers) {
-        final Lotto lotto = Lotto.of(numbers);
-        assertThat(lotto.getLottoNumbers()).isSorted();
-    }
-
-    static class CreateAndSortedArgumentsProvider implements ArgumentsProvider {
-        @Override
-        public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
-            return Stream.of(
-                    Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                    Arguments.of(Arrays.asList(2, 1, 4, 3, 6, 5)),
-                    Arguments.of(Arrays.asList(6, 5, 4, 3, 2, 1))
-            );
-        }
-    }
-
     @DisplayName("생성시 중복되는 로또 번호가 존재하여 `AlreadyExistsLottoNumberException` 발생")
     @Test
     void duplicatedLottoNumber() {
@@ -53,7 +34,7 @@ class LottoTest {
             Lotto.of(numbers);
         })
         .isInstanceOf(AlreadyExistsLottoNumberException.class)
-        .hasMessageContaining("이미 존재하는 로또 번호가 있습니다.");
+        .hasMessageContaining("이미 존재하는 로또 번호입니다.");
     }
 
     @DisplayName("생성시 로또 번호의 갯수가 올바르지 않아 `IncorrectLottoNumberSizeException` 발생")
