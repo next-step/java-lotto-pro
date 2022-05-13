@@ -29,8 +29,11 @@ public class InputView {
 
     public static Lotto enterLottoValue() {
         System.out.println("구입금액을 입력해 주세요.");
+        Lotto lotto = new Lotto(scanner.nextLine());
+        lotto.printPurchaseLottoNumbers();;
+        System.out.println();
 
-        return new Lotto(scanner.nextLine());
+        return lotto;
     }
 
     public static LottoResult enterLottoWinningNumbers(Lotto lotto) {

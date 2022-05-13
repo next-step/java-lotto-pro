@@ -48,6 +48,12 @@ public class Lotto {
         return Math.floor(earnRateResult * 100) / 100;
     }
 
+    public void printPurchaseLottoNumbers() {
+        for (LottoNumbers item : this.items) {
+            System.out.println(item.toString());
+        }
+    }
+
     private void checkValidLottoPurchaseMoney(int value) {
         if (value < LOTTO_PRICE) {
             String message = String.format("로또 구입시 최소 %d 원 이상이 있어야 합니다.", LOTTO_PRICE);
@@ -76,9 +82,5 @@ public class Lotto {
         }
 
         System.out.println(availablePurchaseCount + "개를 구매했습니다.");
-        for (LottoNumbers item : this.items) {
-            System.out.println(item.toString());
-        }
-        System.out.println();
     }
 }

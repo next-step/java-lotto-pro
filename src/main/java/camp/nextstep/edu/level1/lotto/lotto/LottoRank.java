@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public enum LottoRank {
     FIRST("6개 일치", 6, new Money(2000000000)),
-    FORTH("3개 일치", 3, new Money(1500000)),
-    SECOND("5개 일치", 5, new Money(50000)),
-    THIRD("4개 일치", 4, new Money(5000));
+    SECOND("5개 일치", 5, new Money(1500000)),
+    THIRD("4개 일치", 4, new Money(50000)),
+    FORTH("3개 일치", 3, new Money(5000));
 
     private String description;
     private long matchCount;
