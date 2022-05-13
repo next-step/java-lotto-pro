@@ -2,10 +2,10 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class LottoNumber {
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+import static lotto.constant.Config.LOTTO_MAX_NUMBER;
+import static lotto.constant.Config.LOTTO_MIN_NUMBER;
 
+public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
@@ -18,7 +18,7 @@ public class LottoNumber {
     }
 
     private void validateNumber(int number) {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException();
         }
     }

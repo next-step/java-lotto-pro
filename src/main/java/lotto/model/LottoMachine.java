@@ -7,14 +7,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoMachine {
-    private static final int LOTTO_PRICE = 1000;
-    private static final int LIMIT_SIZE = 6;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
+import static lotto.constant.Config.*;
 
+public class LottoMachine {
     private static final List<Integer> lottoNumber =
-            IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+            IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
                     .boxed()
                     .collect(Collectors.toList());
 
@@ -22,7 +19,7 @@ public class LottoMachine {
         Collections.shuffle(lottoNumber);
         List<Integer> pickedNumber = new ArrayList<>();
 
-        for (int i = 0; i < LIMIT_SIZE; i++) {
+        for (int i = 0; i < LOTTO_SIZE; i++) {
             pickedNumber.add(lottoNumber.get(i));
         }
 
