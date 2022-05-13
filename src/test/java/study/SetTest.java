@@ -27,25 +27,21 @@ public class SetTest {
     @Test
     @DisplayName("Set_Size_확인하기")
     public void checkSetSize() {
-        assertThat(numbers.size())
-            .isEqualTo(3);
+        assertThat(numbers).hasSize(3);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     @DisplayName("Set에저장된값확인")
     public void setContains(int isExist) {
-        assertThat(numbers)
-            .contains(isExist);
+        assertThat(numbers).contains(isExist);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"4:false", "3:true", "1:true", "5:false", "6:false",
         "2:true"}, delimiter = ':')
     @DisplayName("CsvSource를 통해 중복코드를 제거해보자")
-    public void setContainsDualCheck(String input, String expected) {
-        boolean expectedResult = Boolean.parseBoolean(expected);
-        assertThat(numbers.contains(Integer.parseInt(input)))
-            .isEqualTo(expectedResult);
+    public void setContainsDualCheck(int input, Boolean expected) {
+        assertThat(numbers.contains(input)).isEqualTo(expected);
     }
 }

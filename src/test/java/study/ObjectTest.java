@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,10 +50,7 @@ public class ObjectTest {
     @Test
     @DisplayName("List 테스트")
     public void listTest() {
-        ArrayList<String> lists = new ArrayList<>();
-        lists.add("1");
-        lists.add("2");
-        lists.add("3");
+        List<String> lists = Arrays.asList("1", "2", "3");
 
         assertThat(lists)
             .isNotEmpty()
