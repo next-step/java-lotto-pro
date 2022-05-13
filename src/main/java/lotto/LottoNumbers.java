@@ -11,16 +11,21 @@ public class LottoNumbers {
         this.numbers = mapLottoNumber(numbers);
     }
 
-    private List<LottoNumber> mapLottoNumber(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+    public List<LottoNumber> getNumbers() {
+        return numbers;
     }
 
     public int collect(List<Integer> winNumbers) {
         return Math.toIntExact(winNumbers.stream()
                 .filter(number -> numbers.contains(new LottoNumber(number)))
                 .count());
+    }
+
+    private List<LottoNumber> mapLottoNumber(List<Integer> numbers) {
+        return numbers.stream()
+                .sorted()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -22,7 +22,8 @@
   - [x] 총 당첨금액을 계산한다.
 - [x] RandomNumberGenerator는 여러개의 LottoNumbers를 만든다.
   - [x] 중복된 LottoNumber를 갖지 않는다.
-- [ ] LottoCalculator는 총 수익률을 계산한다.
-- [ ] LottoMachine은 사용자에게 금액을 입력받는다.
-  - [ ] 1~9를 제외한 문자가 입려되면 예외를 던진다.
+- [x] LottoPrizeMap은 금액 별 당첨 갯수를 만든다.
+- [x] LottoMachine은 사용자에게 금액을 입력받는다.
+  - [x] 숫자가 아닌 값을 입력 받으면 예외를 던진다.
+  - [x] 총 수익률을 계산한다.
 
