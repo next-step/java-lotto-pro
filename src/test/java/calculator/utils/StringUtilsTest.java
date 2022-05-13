@@ -1,12 +1,16 @@
 package calculator.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
+import calculator.validator.DelimiterValidator;
+import calculator.validator.StringValidator;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 /**
@@ -41,5 +45,44 @@ class StringUtilsTest {
 
         // When & Then
         assertThat(StringUtils.processNotExistDelimiterString(given)).isEqualTo(Integer.parseInt(given));
+    }
+
+    @Test
+    @DisplayName("',' 혹은 ':'을 구분자로 문자열 분리")
+    public void splitByCommaOrColonTest() {
+        // Given
+        final String given = "1,2:3";
+
+        // When
+        String[] actual = DelimiterValidator.splitByCommaOrColon(given);
+
+        // Then
+        assertAll(
+            () -> assertThat(actual).hasSize(3),
+            () -> assertThat(actual).containsExactly("1", "2", "3")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    @DisplayName("“//”와 “\\n” 사이에 Custom 구분자로 문자열 분리")
+    public void splitByCustomDelimiterTest(String given, String[] expected) {
+        // When
+        System.out.println(given);
+        String[] actual = DelimiterValidator.splitByCustomDelimiter(given);
+
+        // Then
+        assertThat(actual).containsExactly(expected);
+    }
+
+    // todo 예외 케이스 : 실패 케이스 -> "//|\n1|2|3", 성공 -> "//\\|\n1|2|3",
+    private static Stream splitByCustomDelimiterTest() {
+        final String[] expected = new String[]{"1", "2", "3"};
+        return Stream.of(
+            Arguments.of("//;\n1;2;3", expected),
+            Arguments.of("//\\|\n1|2|3", expected),
+            Arguments.of("//a\n1a2a3", expected),
+            Arguments.of("//;\n1:2:3", new String[]{"1:2:3"})
+        );
     }
 }
