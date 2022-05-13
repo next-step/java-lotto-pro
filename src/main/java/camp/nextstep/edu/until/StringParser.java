@@ -6,10 +6,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringParser {
-    private final static String DEFAULT_SPLIT_SEPARATOR_REGEX = "[:,]";
-    private final static String SPECIAL_SPLIT_LEFT_SEPARATOR = "//";
-    private final static String SPECIAL_SPLIT_RIGHT_SEPARATOR = "\n";
-    private final static Pattern SPECIAL_SPLIT_SEPARATOR_REGEX =
+    private static final String DEFAULT_SPLIT_SEPARATOR_REGEX = "[:,]";
+    private static final String SPECIAL_SPLIT_LEFT_SEPARATOR = "//";
+    private static final String SPECIAL_SPLIT_RIGHT_SEPARATOR = "\n";
+    private static final Pattern SPECIAL_SPLIT_SEPARATOR_REGEX =
             Pattern.compile("[^" + SPECIAL_SPLIT_LEFT_SEPARATOR + "].*" + "(?=" + SPECIAL_SPLIT_RIGHT_SEPARATOR + ")");
 
     private StringParser() {}

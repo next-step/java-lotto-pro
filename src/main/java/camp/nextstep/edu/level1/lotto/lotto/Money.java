@@ -3,7 +3,7 @@ package camp.nextstep.edu.level1.lotto.lotto;
 import java.util.Objects;
 
 public class Money {
-    private final int MIN_VALUE = 0;
+    private static final int MIN_VALUE = 0;
 
     private final long amount;
 
@@ -18,16 +18,19 @@ public class Money {
     }
 
     public Money add(Money target) {
+        if (target.amount == 0) {
+            return this;
+        }
         return new Money(this.amount + target.amount);
     }
 
-    public Money sub(Money target) {
+    public Money subtract(Money target) {
         checkSubValidate(target.amount);
 
         return new Money(this.amount - target.amount);
     }
 
-    public Money mul(int multipleValue) {
+    public Money multiply(int multipleValue) {
         return new Money(this.amount * multipleValue);
     }
 

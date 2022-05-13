@@ -8,9 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Lotto {
-    private final static long LOTTO_PRICE = 1000;
-    private final static int WINNING_NUMBER_COUNT = 6;
-    private final static String WINNING_NUMBER_DELIMITER = ",";
+    private static final long LOTTO_PRICE = 1000;
+    private static final int WINNING_NUMBER_COUNT = 6;
+    private static final String WINNING_NUMBER_DELIMITER = ",";
 
     private Money purchaseOriginalMoney;
     private final List<LottoNumbers> items = new ArrayList<>();

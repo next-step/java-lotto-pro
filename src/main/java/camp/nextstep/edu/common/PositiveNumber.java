@@ -1,7 +1,7 @@
 package camp.nextstep.edu.common;
 
 public class PositiveNumber {
-    private final String NUMBER_CHECK_REGEX = "-?\\d+";
+    private static final String NUMBER_CHECK_REGEX = "-?\\d+";
 
     public final Integer value;
 

@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
 
 class LottoTest {
-    private final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     @Test
     void 로또_가격보다_작거나_음수_금액을_입력하면_예외가_발생한다() {

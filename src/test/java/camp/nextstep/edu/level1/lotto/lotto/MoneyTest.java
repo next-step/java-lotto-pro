@@ -26,7 +26,7 @@ class MoneyTest {
         Money originalMoney = new Money(10000);
         Money subMoney = new Money(5000);
 
-        assertThat(originalMoney.sub(subMoney)).isEqualTo(new Money(10000 - 5000));
+        assertThat(originalMoney.subtract(subMoney)).isEqualTo(new Money(10000 - 5000));
     }
 
     @Test
@@ -34,7 +34,7 @@ class MoneyTest {
         Money originalMoney = new Money(5000);
         Money subMoney = new Money(10000);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> originalMoney.sub(subMoney));
+        assertThatIllegalArgumentException().isThrownBy(() -> originalMoney.subtract(subMoney));
     }
 
     @Test

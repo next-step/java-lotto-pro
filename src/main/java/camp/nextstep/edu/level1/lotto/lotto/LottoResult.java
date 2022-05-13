@@ -19,7 +19,7 @@ public class LottoResult {
         for (Map.Entry<LottoRank, Integer> lottoRankIntegerEntry : result.entrySet()) {
             Money rankPrice = lottoRankIntegerEntry.getKey().rankPrice();
             Integer count = lottoRankIntegerEntry.getValue();
-            Money rankTotalPrice = rankPrice.mul(count);
+            Money rankTotalPrice = rankPrice.multiply(count);
 
             amount = amount.add(rankTotalPrice);
         }

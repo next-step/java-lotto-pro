@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -16,6 +17,13 @@ class LottoNumbersTest {
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 9, 13, 24, 35, 45));
 
         assertThatNoException().isThrownBy(() -> new LottoNumbers(numbers));
+    }
+
+    @Test
+    void 중복된_숫자가_포함된_1_에서_45_사이의_숫자로_생성하면_예외가_발생한다() {
+        List<Integer> numbers = Arrays.asList(1, 2, 2, 3, 3, 4);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(numbers));
     }
 
     @Test

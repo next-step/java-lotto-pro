@@ -1,8 +1,10 @@
 package camp.nextstep.edu.level1.lotto.lotto;
 
+import java.util.Objects;
+
 public class LottoNumber {
-    private final int LOTTO_START_NUMBER = 1;
-    private final int LOTTO_END_NUMBER = 45;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
 
     private final int number;
 
@@ -24,5 +26,18 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(this.number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

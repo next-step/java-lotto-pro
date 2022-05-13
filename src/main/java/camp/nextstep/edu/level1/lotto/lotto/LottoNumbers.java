@@ -1,24 +1,27 @@
 package camp.nextstep.edu.level1.lotto.lotto;
 
-import camp.nextstep.edu.until.RandomGenerator;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final static int LOTTO_START_NUMBER = 1;
-    private final static int LOTTO_END_NUMBER = 45;
-    private final static int LOTTO_RANGE = 6;
-    private final static String PRINT_JOIN_DELIMITER = ", ";
-    private final static String TO_STRING_PREFIX = "[";
-    private final static String TO_STRING_SUFFIX = "]";
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
+    private static final int LOTTO_RANGE = 6;
+    private static final String PRINT_JOIN_DELIMITER = ", ";
+    private static final String TO_STRING_PREFIX = "[";
+    private static final String TO_STRING_SUFFIX = "]";
+    private static final List<Integer> lottoNumberPreset = new ArrayList<>();
 
-    private final List<LottoNumber> lottoNumberList = new ArrayList<>();
+    static {
+        for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
+            lottoNumberPreset.add(number);
+        }
+    }
+
+    private final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     public LottoNumbers() {
-        this(RandomGenerator.createNonDuplicatedIntegerSet(LOTTO_START_NUMBER, LOTTO_END_NUMBER, LOTTO_RANGE));
+        this(createRandomLottoNumbers());
     }
 
     public LottoNumbers(Collection<Integer> numbers) {
@@ -28,21 +31,23 @@ public class LottoNumbers {
     }
 
     public long matchedCountByWinnerNumbers(LottoNumbers winnerNumbers) {
-        return winnerNumbers.lottoNumberList.stream().filter(this::hasContainLottoNumber).count();
+        return winnerNumbers.lottoNumbers.stream().filter(this::hasContainLottoNumber).count();
     }
 
     private void addAll(Collection<Integer> numbers) {
         for (Integer number : numbers) {
-            this.lottoNumberList.add(new LottoNumber(number));
+            System.out.println(this.lottoNumbers.contains(new LottoNumber(number)));
+            this.lottoNumbers.add(new LottoNumber(number));
         }
     }
 
     private boolean hasContainLottoNumber(LottoNumber value) {
-        return this.lottoNumberList.stream().anyMatch(lottoNumber -> lottoNumber.hasSameValue(value));
+        return this.lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.hasSameValue(value));
     }
 
     private void checkLottoNumbers(Collection<Integer> numbers) {
-        if (numbers.size() != LOTTO_RANGE) {
+        Set<Integer> convertedCollectionToSet = new HashSet<>(numbers);
+        if (convertedCollectionToSet.size() != LOTTO_RANGE) {
             throw new IllegalArgumentException("로또는 6 자리의 숫자만 허용됩니다.");
         }
 
@@ -57,9 +62,15 @@ public class LottoNumbers {
         }
     }
 
+    private static List<Integer> createRandomLottoNumbers() {
+        Collections.shuffle(lottoNumberPreset);
+
+        return lottoNumberPreset.subList(0, LOTTO_RANGE);
+    }
+
     @Override
     public String toString() {
-        return TO_STRING_PREFIX + this.lottoNumberList.stream()
+        return TO_STRING_PREFIX + this.lottoNumbers.stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(PRINT_JOIN_DELIMITER)) + TO_STRING_SUFFIX;
     }

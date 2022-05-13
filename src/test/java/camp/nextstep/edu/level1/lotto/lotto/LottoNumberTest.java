@@ -7,8 +7,8 @@ import java.util.Random;
 import static org.assertj.core.api.Assertions.*;
 
 class LottoNumberTest {
-    private final int LOTTO_START_NUMBER = 1;
-    private final int LOTTO_END_NUMBER = 45;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
 
     @Test
     void _1_에서_45_사이의_숫자로_로또_번호가_생성되어야_한다() {
