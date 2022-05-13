@@ -17,10 +17,14 @@ public class LottoNumber {
 
     private final List<Number> lottoNumber;
 
-    protected LottoNumber(List<Number> lottoNumber) {
+    private LottoNumber(List<Number> lottoNumber) {
         validateDuplicate(lottoNumber);
         sortLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber auto() {
+        return new LottoNumber(LottoNumberGenerator.generate());
     }
 
     public static LottoNumber of(List<Integer> lottoNumber) {
@@ -69,22 +73,22 @@ public class LottoNumber {
         return Arrays.asList(lottoNumber.split(DELIMITER));
     }
 
-    private static void validateFormat(String winningNumber) {
-        if (isNotValid(winningNumber)) {
+    private static void validateFormat(String lottoNumber) {
+        if (isNotValid(lottoNumber)) {
             throw new IllegalArgumentException("올바른 로또 번호 양식이 아닙니다.");
         }
     }
 
-    private static boolean isNotValid(String winningNumber) {
-        return isNull(winningNumber) || isInvalidFormat(winningNumber);
+    private static boolean isNotValid(String lottoNumber) {
+        return isNull(lottoNumber) || isInvalidFormat(lottoNumber);
     }
 
-    private static boolean isInvalidFormat(String winningNumber) {
-        return !winningNumber.matches(LOTTO_NUMBER_FORMAT);
+    private static boolean isInvalidFormat(String lottoNumber) {
+        return !lottoNumber.matches(LOTTO_NUMBER_FORMAT);
     }
 
-    private static boolean isNull(String winningNumber) {
-        return winningNumber == null;
+    private static boolean isNull(String lottoNumber) {
+        return lottoNumber == null;
     }
 
     public List<Number> getLottoNumber() {

@@ -1,5 +1,7 @@
 package lotto.model;
 
+import static lotto.constants.LottoConstant.NUMBER_SIZE;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -80,6 +82,17 @@ class LottoNumberTest {
                         Arrays.asList(1, 2, 3, 4, 7, 8),
                         LottoRank.THIRD
                 )
+        );
+    }
+
+    @Test
+    @DisplayName("자동으로 로또 번호를 하나 뽑기")
+    void getAutoLottoNumber() {
+        LottoNumber lottoNumber = LottoNumber.auto();
+
+        assertAll(
+                () -> assertThat(lottoNumber).isNotNull(),
+                () -> assertThat(lottoNumber.getLottoNumber()).hasSize(NUMBER_SIZE)
         );
     }
 }
