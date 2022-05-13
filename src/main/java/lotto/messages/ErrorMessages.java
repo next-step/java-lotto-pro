@@ -9,6 +9,7 @@ public class ErrorMessages {
     public static final String LOTTO_NUMBERS_DUPLICATION_ERROR = "[ERROR] 중복된 숫자는 불가 합니다.";
 
     public static final String MONEY_NEGATIVE_ERROR = "[ERROR] 금액은 양수여야 합니다.";
+    public static final String MONEY_UNDER_PRICE_ERROR = "[ERROR] 금액이 로또 가격보다 낮습니다.";
     public static final String ZERO_DIVIDE_ERROR = "[ERROR] 0으로 나눌수 없습니다.";
 
 }
