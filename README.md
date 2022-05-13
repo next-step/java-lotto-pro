@@ -99,4 +99,4 @@
 - [x] LottoAnalyzer 구현
 - [x] InputView/ResultView 구현
 - [x] LottoMachine 구현
-- [ ] LottoApplication 구현
+- [x] LottoApplication 구현
