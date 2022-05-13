@@ -1,17 +1,16 @@
 package lotto.model;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
 
@@ -48,8 +47,8 @@ class LottoTest {
     }
 
     private static Lotto getLotto(int first, int second, int third, int fourth, int fifth, int sixth) {
-        List<Number> numbers = Arrays.asList(new Number(first), new Number(second), new Number(third), new Number(fourth),
-                new Number(fifth), new Number(sixth));
-        return new Lotto(numbers);
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(first), new LottoNumber(second), new LottoNumber(third), new LottoNumber(fourth),
+                new LottoNumber(fifth), new LottoNumber(sixth));
+        return new Lotto(lottoNumbers);
     }
 }

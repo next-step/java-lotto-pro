@@ -1,11 +1,10 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.Number;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 
 public class InputView {
 
@@ -29,12 +28,12 @@ public class InputView {
         String removeBlankStringNumbers = stringNumbers.replace(BLANK, "");
         String[] split = removeBlankStringNumbers.split(DELIMITER);
 
-        List<Number> winnerNumbers = new ArrayList<>();
+        List<LottoNumber> winnerLottoNumbers = new ArrayList<>();
         for (String stringNumber : split) {
             int number = Integer.parseInt(stringNumber);
-            winnerNumbers.add(new Number(number));
+            winnerLottoNumbers.add(new LottoNumber(number));
         }
-        Lotto winnerLotto = new Lotto(winnerNumbers);
+        Lotto winnerLotto = new Lotto(winnerLottoNumbers);
         return winnerLotto;
     }
 
