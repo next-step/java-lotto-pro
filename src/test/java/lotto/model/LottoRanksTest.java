@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import lotto.constants.LottoConstant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,13 +41,15 @@ class LottoRanksTest {
     }
 
     @Test
-    @DisplayName("총 우승 상금을 일치하나 확인")
+    @DisplayName("수익률이 일치하는지 확인")
     void verifyTotalCashPrize() {
-        Long totalCashPrize = lottoRanks.totalCashPrize();
-        Long expected = lottoRankList.stream()
+        double profitRate = lottoRanks.getProfitRate();
+
+        long totalCashPrize = lottoRankList.stream()
                 .mapToLong(LottoRank::getCashPrize)
                 .sum();
+        int purchaseAmount = lottoRankList.size() * LottoConstant.LOTTO_PRICE;
 
-        assertEquals(expected, totalCashPrize);
+        assertEquals((double) totalCashPrize / purchaseAmount, profitRate);
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lotto.constants.LottoConstant;
 
 public class LottoRanks {
     private final List<LottoRank> lottoRanks;
@@ -21,7 +22,15 @@ public class LottoRanks {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
-    public Long totalCashPrize() {
+    public double getProfitRate() {
+        return (double) totalCashPrize() / totalPurchaseAmount();
+    }
+
+    private int totalPurchaseAmount() {
+        return lottoRanks.size() * LottoConstant.LOTTO_PRICE;
+    }
+
+    private Long totalCashPrize() {
         return lottoRanks.stream()
                 .mapToLong(LottoRank::getCashPrize)
                 .sum();

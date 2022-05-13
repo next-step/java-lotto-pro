@@ -16,6 +16,10 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
+    public int getQuantity() {
+        return lottoNumbers.size();
+    }
+
     public LottoRanks getLottoRanks(LottoNumber winningLottoNumber) {
         return lottoNumbers.stream()
                 .map(lottoNumber -> lottoNumber.getLottoRank(winningLottoNumber))

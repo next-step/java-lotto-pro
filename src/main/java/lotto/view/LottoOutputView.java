@@ -2,12 +2,9 @@ package lotto.view;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
-import lotto.model.LottoProfit;
-import lotto.model.LottoPurchaseQuantity;
 import lotto.model.LottoRank;
 import lotto.model.LottoRanks;
 import lotto.model.ProfitResult;
@@ -23,13 +20,14 @@ public final class LottoOutputView {
     private LottoOutputView() {
     }
 
-    public static void printPurchaseQuantity(LottoPurchaseQuantity lottoPurchaseQuantity) {
-        System.out.printf(PURCHASE_QUANTITY_MESSAGE, lottoPurchaseQuantity.getQuantity());
+    public static void printPurchaseResult(LottoNumbers lottoNumbers) {
+        printPurchaseQuantity(lottoNumbers.getQuantity());
+        lottoNumbers.getLottoNumbers()
+                .forEach(LottoOutputView::printLottoNumber);
     }
 
-    public static void printPurchaseLottoNumbers(LottoNumbers lottoNumbers) {
-        List<LottoNumber> lottoNumberList = lottoNumbers.getLottoNumbers();
-        lottoNumberList.forEach(LottoOutputView::printLottoNumber);
+    private static void printPurchaseQuantity(int quantity) {
+        System.out.printf(PURCHASE_QUANTITY_MESSAGE, quantity);
     }
 
     private static void printLottoNumber(LottoNumber lottoNumber) {
@@ -55,8 +53,8 @@ public final class LottoOutputView {
         return formatter.format(number);
     }
 
-    public static void printProfitRate(LottoProfit lottoProfit) {
-        double profitRate = lottoProfit.getProfitRate();
+    public static void printProfitRate(LottoRanks lottoRanks) {
+        double profitRate = lottoRanks.getProfitRate();
         System.out.printf(PROFIT_RATE_MESSAGE,
                 profitRate,
                 ProfitResult.of(profitRate).getTitle()

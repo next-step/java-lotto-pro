@@ -2,6 +2,7 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +21,7 @@ class LottoNumbersTest {
 
         assertAll(
                 () -> assertThat(lottoNumbers).isNotNull(),
-                () -> assertThat(lottoNumbers.getLottoNumbers()).hasSize(2),
+                () -> assertEquals(2, lottoNumbers.getQuantity()),
                 () -> assertThat(lottoNumbers.getLottoNumbers()).containsExactly(lottoNumberOf1st, lottoNumberOf2nd)
         );
     }
