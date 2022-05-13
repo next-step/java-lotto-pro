@@ -17,6 +17,13 @@ public class Lotto {
                 .collect(toList()));
     }
 
+    public Lotto(String values) {
+        this(Arrays.stream(values.split(","))
+                .map(String::trim)
+                .map(LottoNo::new)
+                .collect(toList()));
+    }
+
     public Lotto(List<LottoNo> lottoNoList) {
         if (isInvalidLotto(lottoNoList)) {
             throw new IllegalArgumentException("유효하지 않은 로또입니다.");
