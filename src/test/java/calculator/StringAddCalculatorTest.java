@@ -1,7 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -67,14 +67,16 @@ class StringAddCalculatorTest {
     @Test
     void splitAndSum_negative() {
         // given & when & then
-        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> StringAddCalculator.splitAndSum("-1,2,3"))
+                .withMessageContaining("음수는 입력할 수 없습니다.");
     }
 
     @Test
     void splitAndSum_invalidValue() {
         // given & when & then
-        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("a,2,3"))
-                .isInstanceOf(RuntimeException.class);
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> StringAddCalculator.splitAndSum("a,2,3"))
+                .withMessageContaining("유효한 숫자를 입력하세요.");
     }
 }
