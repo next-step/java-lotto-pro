@@ -9,39 +9,7 @@ import static calculator.constants.ErrorMessage.NEGATIVE_NUMBER_ERROR_MESSAGE;
  */
 public class StringValidator {
 
-    public static boolean isValidNumber(String input) {
-        return isNumber(input) && isPositiveNumber(input);
-    }
-
-    public static boolean isEmpty(String given) {
-        return given == null || isBlank(given);
-    }
-
-    private static boolean isBlank(String given) {
-        return given.trim().length() == 0;
-    }
-
-    private static boolean isNumber(String input) {
-        try {
-            numberValidation(input);
-        } catch (IllegalArgumentException exception) {
-            System.err.println(exception.getLocalizedMessage());
-            return false;
-        }
-        return true;
-    }
-
-    private static boolean isPositiveNumber(String input) {
-        try {
-            positiveNumberValidation(input);
-        } catch (IllegalArgumentException exception) {
-            System.err.println(exception.getLocalizedMessage());
-            return false;
-        }
-        return true;
-    }
-
-    private static void numberValidation(String input) {
+    public static void numberValidation(String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -49,7 +17,7 @@ public class StringValidator {
         }
     }
 
-    private static void positiveNumberValidation(String input) {
+    public static void positiveNumberValidation(String input) {
         if (Integer.parseInt(input) < 0) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR_MESSAGE);
         }
