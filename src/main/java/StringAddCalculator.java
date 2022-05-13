@@ -15,10 +15,7 @@ public class StringAddCalculator {
     }
 
     private static int sum(List<Integer> numbers) {
-        int sum = 0;
-        for (int number : numbers) {
-            sum += number;
-        }
-        return sum;
+        Integer sum = 0;
+        return numbers.stream().reduce(sum,(acc,number) -> acc+number );
     }
 }

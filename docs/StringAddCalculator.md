@@ -20,3 +20,5 @@
 
 # 리뷰 반영
 - [X] 한가지 기능은 테스트 한개로 테스트(ParameterizedTest 사용)
+- [X] IntStream을 통해 sum 기능 리팩토링
+ 
