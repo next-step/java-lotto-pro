@@ -31,7 +31,25 @@ public class LottoNumbers {
         }
     }
 
-    public List<LottoNumber> getNumbers() {
-        return this.numbers;
+    public int compareLottoNumbersAndReturnMatchCount(LottoNumbers winningLottoNumbers) {
+        int count = 0;
+
+        for (LottoNumber number : winningLottoNumbers.numbers) {
+            count = count + compareNumberAndReturnAddCount(number);
+        }
+
+        return count;
+    }
+
+    private int compareNumberAndReturnAddCount(LottoNumber number) {
+        if(compareNumber(number)) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    private boolean compareNumber(LottoNumber number) {
+        return this.numbers.contains(number);
     }
 }
