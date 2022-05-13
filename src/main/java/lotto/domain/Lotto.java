@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -37,6 +38,13 @@ public class Lotto {
             return true;
         }
         return lottoNoList.size() != LOTTO_SIZE;
+    }
+
+    public Ranking compareLotto(Lotto target) {
+        List<LottoNo> result = new ArrayList<>();
+        result.addAll(lottoNoList);
+        result.retainAll(target.getLottoNoList());
+        return Ranking.findRankByMatchingCount(result.size());
     }
 
     public List<LottoNo> getLottoNoList() {
