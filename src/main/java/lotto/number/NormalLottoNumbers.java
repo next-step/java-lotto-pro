@@ -1,15 +1,23 @@
 package lotto.number;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class NormalLottoNumbers implements LottoNumbers {
-    private List<LottoNumber> lottoNumberList = new ArrayList<>();
+    public static final int LOTTO_NUMBERS_SIZE = 6;
+
+    private List<LottoNumber> lottoNumberList;
+
+    public NormalLottoNumbers(List<LottoNumber> lottoNumbers){
+        this.lottoNumberList = Collections.unmodifiableList(lottoNumbers);
+    }
 
     @Override
-    public void add(LottoNumber number) {
-
+    public String toString() {
+        return "NormalLottoNumbers{" +
+                "lottoNumberList=" + lottoNumberList +
+                '}';
     }
 
     @Override
