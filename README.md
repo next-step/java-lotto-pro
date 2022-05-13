@@ -20,6 +20,8 @@
 - [x] LottoPrizeRank는 일치 갯수 별 상금을 가지고 있다.
 - [x] LottoPrizeRanks는 LottoPrizeRank로 구성된다.
   - [x] 총 당첨금액을 계산한다.
+- [x] RandomNumberGenerator는 여러개의 LottoNumbers를 만든다.
+  - [x] 중복된 LottoNumber를 갖지 않는다.
 - [ ] LottoCalculator는 총 수익률을 계산한다.
 - [ ] LottoMachine은 사용자에게 금액을 입력받는다.
   - [ ] 1~9를 제외한 문자가 입려되면 예외를 던진다.
