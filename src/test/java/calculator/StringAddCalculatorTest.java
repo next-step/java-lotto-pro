@@ -1,47 +1,47 @@
 package calculator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
-    @Test
-    public void splitAndSum_null_또는_빈문자() {
-        int result = StringAddCalculator.splitAndSum(null);
-        assertThat(result).isEqualTo(0);
-
-        result = StringAddCalculator.splitAndSum("");
-        assertThat(result).isEqualTo(0);
+    @DisplayName("숫자_하나만_입력_결과")
+    @ParameterizedTest
+    @MethodSource("숫자_하나만_입력")
+    void 숫자_하나만_입력_결과(String input) throws Exception {
+        assertThat(Integer.parseInt(input)).isEqualTo(StringAddCalculator.splitAndSum(input));
     }
 
-    @Test
-    public void splitAndSum_숫자하나() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1");
-        assertThat(result).isEqualTo(1);
+    static Stream<Arguments> 숫자_하나만_입력() {
+        return Stream.of(
+                Arguments.of("0"),
+                Arguments.of("10"),
+                Arguments.of("999")
+        );
     }
 
+    @DisplayName("쉼표_구분자로_숫자_분리_결과")
     @Test
-    public void splitAndSum_쉼표구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2");
-        assertThat(result).isEqualTo(3);
+    void 쉼표_구분자로_숫자_분리_결과() throws Exception {
+        assertThat(3).isEqualTo(StringAddCalculator.splitAndSum("1,2"));
     }
 
+    @DisplayName("쉼표_또는_콜론_구분자로_숫자_분리_결과")
     @Test
-    public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2:3");
-        assertThat(result).isEqualTo(6);
+    void 쉼표_또는_콜론_구분자로_숫자_분리_결과() throws Exception {
+        assertThat(6).isEqualTo(StringAddCalculator.splitAndSum("1,2:3"));
     }
 
+    @DisplayName("커스텀_구분자로_숫자_분리_결과")
     @Test
-    public void splitAndSum_custom_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
-        assertThat(result).isEqualTo(6);
-    }
-
-    @Test
-    public void splitAndSum_negative() throws Exception {
-        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+    void 커스텀_구분자로_숫자_분리_결과() throws Exception {
+        Numbers numbers = new Numbers();
+        assertThat(6).isEqualTo(StringAddCalculator.splitAndSum("//;\n1;2;3"));
     }
 }
