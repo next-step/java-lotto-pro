@@ -36,5 +36,4 @@ class LottoResultTest {
         int winningMoney = result.calculateWinningMoney();
         assertThat(winningMoney).isEqualTo(2000010000);
     }
-
 }
