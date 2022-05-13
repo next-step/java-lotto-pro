@@ -37,7 +37,7 @@ public class Lottos {
         }
     }
 
-    public int lottosSize() {
+    public int lottosCount() {
         return this.lottos.size();
     }
 

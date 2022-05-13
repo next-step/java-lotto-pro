@@ -12,7 +12,7 @@ public class LottosTest {
 
     @Test
     void createLottos() {
-        assertThat(new Lottos(10000).lottosSize()).isEqualTo(10);
+        assertThat(new Lottos(10000).lottosCount()).isEqualTo(10);
     }
 
     @Test
