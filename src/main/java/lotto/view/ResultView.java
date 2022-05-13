@@ -1,11 +1,10 @@
 package lotto.view;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.Result;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -40,6 +39,7 @@ public class ResultView {
         printResult(results, Result.SECOND);
         printResult(results, Result.THIRD);
         printResult(results, Result.FOURTH);
+        printResult(results, Result.FIFTH);
     }
 
     private static void printResult(List<Result> results, Result printTarget) {

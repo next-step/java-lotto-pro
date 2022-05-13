@@ -29,7 +29,8 @@ class LottoTest {
     @MethodSource(value = "getResultParameter")
     @ParameterizedTest(name = "로또와 당첨이 주어질 때, 결과를 반환한다.")
     void getResult(Lotto lotto, Lotto winner, Result expectedResult) {
-        Result result = lotto.getResult(winner);
+        LottoNumber bonusNumber = new LottoNumber(7);
+        Result result = lotto.getResult(winner, bonusNumber);
         assertEquals(expectedResult, result);
     }
 
@@ -38,8 +39,9 @@ class LottoTest {
         return Stream.of(
             arguments(lotto, getLotto(1, 2, 3, 4, 5, 6), Result.WINNER),
             arguments(lotto, getLotto(1, 2, 3, 4, 5, 7), Result.SECOND),
-            arguments(lotto, getLotto(1, 2, 3, 4, 7, 8), Result.THIRD),
-            arguments(lotto, getLotto(1, 2, 3, 7, 8, 9), Result.FOURTH),
+            arguments(lotto, getLotto(1, 2, 3, 4, 5, 8), Result.THIRD),
+            arguments(lotto, getLotto(1, 2, 3, 4, 7, 8), Result.FOURTH),
+            arguments(lotto, getLotto(1, 2, 3, 7, 8, 9), Result.FIFTH),
             arguments(lotto, getLotto(1, 2, 7, 8, 9, 10), Result.LOSE),
             arguments(lotto, getLotto(1, 7, 8, 9, 10, 11), Result.LOSE),
             arguments(lotto, getLotto(7, 8, 9, 10, 11, 12), Result.LOSE)

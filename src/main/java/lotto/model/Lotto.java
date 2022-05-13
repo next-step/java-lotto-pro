@@ -27,12 +27,21 @@ public class Lotto {
         return lottoNumbers.stream().map(LottoNumber::getNumber).sorted().collect(Collectors.toList());
     }
 
-    public Result getResult(Lotto winner) {
+    public Result getResult(Lotto winner, LottoNumber bonusNumber) {
         int count = 0;
+        boolean containsBonus = false;
         for (LottoNumber lottoNumber : winner.lottoNumbers) {
             count = plusCountIfContains(count, lottoNumber);
+            containsBonus = isContainsBonus(bonusNumber, containsBonus, lottoNumber);
         }
-        return Result.from(count);
+        return Result.from(count, containsBonus);
+    }
+
+    private boolean isContainsBonus(LottoNumber bonusNumber, boolean isContainsBonus, LottoNumber lottoNumber) {
+        if (lottoNumber.equals(bonusNumber)) {
+            isContainsBonus = true;
+        }
+        return isContainsBonus;
     }
 
     private int plusCountIfContains(int count, LottoNumber lottoNumber) {
