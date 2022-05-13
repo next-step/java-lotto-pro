@@ -41,20 +41,8 @@ public class LottoGame {
         money = new Money(input);
     }
 
-    public void readLastWinningNumbers() {
-        lastWinningNumbers = InputView.readUserInput(REQUEST_LAST_WINNING_NUMBERS);
-    }
-
-    private Lotto generateLotto() {
-        Collections.shuffle(lottoNumbers);
-        List<LottoNo> lottoNoList = lottoNumbers.stream()
-                .limit(LottoConstant.LOTTO_SIZE)
-                .collect(Collectors.toList());
-        return new Lotto(lottoNoList);
-    }
-
     public void purchaseLotto() {
-        long lottoQuantity = getLottoQuantity(money.getMoney());
+        long lottoQuantity = getLottoQuantity(money);
         OutputView.printMessage((money.getMoney()/LOTTO_PRICE) + "개를 구매했습니다.");
 
         List<Lotto> lottoList = new ArrayList<>();
@@ -72,7 +60,19 @@ public class LottoGame {
         OutputView.printLine();
     }
 
-    private static long getLottoQuantity(long totalPrice) {
-        return totalPrice / LOTTO_PRICE;
+    public void readLastWinningNumbers() {
+        lastWinningNumbers = InputView.readUserInput(REQUEST_LAST_WINNING_NUMBERS);
+    }
+
+    private Lotto generateLotto() {
+        Collections.shuffle(lottoNumbers);
+        List<LottoNo> lottoNoList = lottoNumbers.stream()
+                .limit(LottoConstant.LOTTO_SIZE)
+                .collect(Collectors.toList());
+        return new Lotto(lottoNoList);
+    }
+
+    private static long getLottoQuantity(Money money) {
+        return money.getMoney() / LOTTO_PRICE;
     }
 }
