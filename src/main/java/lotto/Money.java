@@ -3,7 +3,6 @@ package lotto;
 import java.util.Objects;
 
 public class Money {
-    private static final String NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "음수가 입력되어 유효하지 않습니다.";
     public static final int ZERO_NUM = 0;
     private final int money;
 
@@ -18,7 +17,7 @@ public class Money {
 
     private void validMoney(int money) {
         if(money < ZERO_NUM) {
-            throw new IllegalArgumentException(NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException("음수가 입력되어 유효하지 않습니다.");
         }
     }
 

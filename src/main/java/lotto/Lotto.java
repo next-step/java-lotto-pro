@@ -1,15 +1,17 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
     public static final int LOTTO_SIZE_NUM = 6;
     private final List<LottoNumber> lotto;
 
     private Lotto(List<LottoNumber> lotto) {
-        validLottoSize(lotto);
+        validLotto(lotto);
         this.lotto = lotto;
     }
 
@@ -21,6 +23,22 @@ public class Lotto {
         return new Lotto(lotto);
     }
 
+    private void validLotto(List<LottoNumber> lotto) {
+        validLottoSize(lotto);
+        validLottoUnique(lotto);
+    }
+
+    private void validLottoUnique(List<LottoNumber> lotto) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>(lotto);
+        if (isNotUniqueLottoNumber(lottoNumbers.size())) {
+            throw new IllegalArgumentException("로또 번호가 중복되었습니다.");
+        }
+    }
+
+    private boolean isNotUniqueLottoNumber(int size) {
+        return size != LOTTO_SIZE_NUM;
+    }
+
     private void validLottoSize(List<LottoNumber> lotto) {
         if (isNotLottoSize(lotto.size())) {
             throw new IllegalArgumentException("로또 번호 갯수가 올바르지 않습니다.");
@@ -28,7 +46,7 @@ public class Lotto {
     }
 
     private boolean isNotLottoSize(int size) {
-         return size != LOTTO_SIZE_NUM;
+        return size != LOTTO_SIZE_NUM;
     }
 
     @Override
