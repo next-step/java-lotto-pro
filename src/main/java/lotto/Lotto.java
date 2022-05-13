@@ -28,6 +28,10 @@ public class Lotto {
 				.collect(Collectors.toList()));
 	}
 
+	public static Lotto auto() {
+		return new Lotto(new ShuffledNumbers().get(LOTTO_SIZE));
+	}
+
 	private boolean isUnique(List<Number> numbers) {
 		List<Number> distinctNumbers = numbers.stream()
 				.distinct()
@@ -37,8 +41,6 @@ public class Lotto {
 
 	@Override
 	public String toString() {
-		return String.format("[%s]", numbers.stream()
-				.map(Number::toString)
-				.collect(Collectors.joining(", ")));
+		return numbers.toString();
 	}
 }
