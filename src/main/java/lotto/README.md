@@ -25,13 +25,14 @@
 
 ### LottoTickets
 - [x] LottoVendingMachine에서 구입한 만큼의 LottoNumbers 리스트를 가지고 있다.
+- [x] 우승 로또 번호를 입력 하여 구입한 로또들로 LottoWinningResults를 만들 수 있다.
 
 ### LottoRank
 - [x] 맞은 숫자 개수에 따라서 등수 & 포상금 책정
 
 ### LottoWinningResults
-- [ ] 등수 , 개수 맵을 가짐
-- [ ] 구입한 LottoTickets로 부터 등수 별 개수 결과를 구한다.
+- [x] 등수 , 개수 맵을 가짐
+- [x] 구입한 LottoTickets로 부터 등수 별 개수 결과를 구한다.
 
 
 
