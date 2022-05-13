@@ -1,8 +1,5 @@
-package calculator;
+package calculator.domain;
 
-import calculator.domain.ArrayCalculator;
-import calculator.domain.StringSplitter;
-import calculator.domain.StringUtils;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
@@ -23,5 +20,5 @@ public class StringAddCalculator {
     private static boolean isNullOrEmptyInput(String input) {
         return input == null || input.isEmpty();
     }
-    
+
 }
