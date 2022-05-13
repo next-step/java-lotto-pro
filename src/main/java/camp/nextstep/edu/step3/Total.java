@@ -3,6 +3,7 @@ package camp.nextstep.edu.step3;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class Total {
     private final Map<Hit, Integer> totalHitMap = new HashMap<>();
@@ -45,10 +46,14 @@ public class Total {
     @Override
     public String toString() {
         StringBuilder message = new StringBuilder();
-        for(Hit hit : totalHitMap.keySet()) {
+        for(Hit hit : sortedKey()) {
             message.append(printFormat(hit));
         }
         return message.toString();
+    }
+
+    private Hit[] sortedKey() {
+        return totalHitMap.keySet().stream().sorted().toArray(Hit[]::new);
     }
 
     private String printFormat(final Hit hit) {
