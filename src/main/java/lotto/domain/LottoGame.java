@@ -37,6 +37,11 @@ public class LottoGame {
     }
 
     public LottoGame(MyLotto myLotto, String lastWinningNumbers) {
+        this.myLotto = myLotto;
+        this.lastWinningNumbers = lastWinningNumbers;
+    }
+
+    public LottoGame(Money money, MyLotto myLotto, String lastWinningNumbers) {
         this.money = money;
         this.myLotto = myLotto;
         this.lastWinningNumbers = lastWinningNumbers;
@@ -80,6 +85,11 @@ public class LottoGame {
             Ranking rank = Ranking.findRank(matching);
             OutputView.printMessage(matching + "개 일치 (" + rank.getReward() + ")- " + result.findRankings(matching).size() + "개");
         }
+    }
+
+    public void showLottoProfit() {
+        long profit = result.calculateWinningMoney() / money.getMoney();
+        System.out.println("총 수익률은 " + profit + "입니다.");
     }
 
     private Lotto generateLotto() {

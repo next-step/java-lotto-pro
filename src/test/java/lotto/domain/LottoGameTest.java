@@ -30,4 +30,14 @@ class LottoGameTest {
         LottoGame game = new LottoGame(myLotto, "1, 2, 3, 4, 5, 6");
         game.showLottoStatistics();
     }
+
+    @Test
+    public void 로또_총_수익률_출력하기() {
+        List<Lotto> lottoList = Arrays.asList(
+                new Lotto(1, 2, 3, 4, 5, 6));
+        MyLotto myLotto = new MyLotto(lottoList);
+        LottoGame game = new LottoGame(new Money(1000), myLotto, "1, 2, 3, 4, 5, 6");
+        game.showLottoStatistics();
+        game.showLottoProfit();
+    }
 }
