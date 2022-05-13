@@ -5,8 +5,12 @@ import java.util.Objects;
 public class LottoTicket {
     private final LottoNumbers lottoNumbers;
 
-    public LottoTicket(LottoNumbers lottoNumbers) {
+    public LottoTicket(final LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public Prize prize(final LottoNumbers winningNumbers) {
+        return Prize.findPrizeByMatchCount(lottoNumbers.matches(winningNumbers));
     }
 
     @Override

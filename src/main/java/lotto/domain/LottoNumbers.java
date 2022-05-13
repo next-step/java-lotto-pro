@@ -33,6 +33,14 @@ public class LottoNumbers {
         }
     }
 
+    public int matches(final LottoNumbers winningNumbers) {
+        int matches = 0;
+        for (final int number : winningNumbers.numbers) {
+            matches += numbers.contains(number) ? 1 : 0;
+        }
+        return matches < 3 ? 0 : matches;
+    }
+
     @Override
     public String toString() {
         return "LottoTicket{" +

@@ -61,4 +61,63 @@ public class LottoNumbersTest {
                     .isInstanceOf(IllegalArgumentException.class);
         }
     }
+
+    @Test
+    @DisplayName("주어진 번호가 3개 미만으로 일치하면 0이 반환되어야 한다")
+    void when_no_matches_should_return_0() {
+        // given
+        final LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoNumbers noMatchesNumbers = new LottoNumbers(Arrays.asList(13, 21, 34, 37, 41, 44));
+        final LottoNumbers oneMatchesNumbers = new LottoNumbers(Arrays.asList(3, 21, 34, 37, 41, 44));
+        final LottoNumbers twoMatchesNumbers = new LottoNumbers(Arrays.asList(2, 5, 34, 37, 41, 44));
+
+        // when and then
+        assertThat(noMatchesNumbers.matches(winningNumbers)).isEqualTo(0);
+        assertThat(oneMatchesNumbers.matches(winningNumbers)).isEqualTo(0);
+        assertThat(twoMatchesNumbers.matches(winningNumbers)).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("주어진 번호가 3개 일치하면 3이 반환되어야 한다")
+    void when_three_matches_should_return_3() {
+        // given
+        final LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoNumbers numbers = new LottoNumbers(Arrays.asList(2, 3, 6, 37, 41, 44));
+
+        // when and then
+        assertThat(numbers.matches(winningNumbers)).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("주어진 번호가 4개 일치하면 4가 반환되어야 한다")
+    void when_four_matches_should_return_4() {
+        // given
+        final LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoNumbers numbers = new LottoNumbers(Arrays.asList(1, 3, 5, 6, 41, 44));
+
+        // when and then
+        assertThat(numbers.matches(winningNumbers)).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("주어진 번호가 5개 일치하면 5가 반환되어야 한다")
+    void when_five_matches_should_return_5() {
+        // given
+        final LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoNumbers numbers = new LottoNumbers(Arrays.asList(1, 3, 4, 5, 6, 44));
+
+        // when and then
+        assertThat(numbers.matches(winningNumbers)).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("주어진 번호가 6개 일치하면 6이 반환되어야 한다")
+    void when_six_matches_should_return_6() {
+        // given
+        final LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoNumbers numbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        // when and then
+        assertThat(numbers.matches(winningNumbers)).isEqualTo(6);
+    }
 }
