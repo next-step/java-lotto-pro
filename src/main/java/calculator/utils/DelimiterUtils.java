@@ -1,4 +1,4 @@
-package calculator.validator;
+package calculator.utils;
 
 import java.util.Arrays;
 
@@ -6,7 +6,7 @@ import java.util.Arrays;
  * @author : choi-ys
  * @date : 2022/05/12 6:41 오후
  */
-public class DelimiterValidator {
+public class DelimiterUtils {
 
     public static final String COMMA = ",";
     public static final String COLON = ":";

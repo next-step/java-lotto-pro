@@ -3,14 +3,11 @@ package calculator.utils;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import calculator.validator.DelimiterValidator;
-import calculator.validator.StringValidator;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 /**
@@ -54,7 +51,7 @@ class StringUtilsTest {
         final String given = "1,2:3";
 
         // When
-        String[] actual = DelimiterValidator.splitByCommaOrColon(given);
+        String[] actual = DelimiterUtils.splitByCommaOrColon(given);
 
         // Then
         assertAll(
@@ -69,7 +66,7 @@ class StringUtilsTest {
     public void splitByCustomDelimiterTest(String given, String[] expected) {
         // When
         System.out.println(given);
-        String[] actual = DelimiterValidator.splitByCustomDelimiter(given);
+        String[] actual = DelimiterUtils.splitByCustomDelimiter(given);
 
         // Then
         assertThat(actual).containsExactly(expected);
