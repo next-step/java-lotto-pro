@@ -14,13 +14,13 @@ public class UserMoney {
 	public int getMoney() {
 		return this.money;
 	}
+	
+	public int useMoney() {
+		return canBuyLotto() * LOTTO_PRICE;
+	}
 
 	public int canBuyLotto() {
 		return this.money / LOTTO_PRICE;
-	}
-
-	public double profitRate(int winningMoney) {
-		return (double) winningMoney / canBuyLotto() / LOTTO_PRICE;
 	}
 
 	private void validation(String money) {

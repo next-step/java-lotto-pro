@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.LottoMachine;
+import lotto.LottoResult;
 import util.NumberUtil;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -25,12 +25,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	private void validationRange(int lottoNumber) {
 		if (!isRange(lottoNumber)) {
 			throw new IllegalArgumentException(String.format("nubmer: %d %d~%d 범의의 숫자만 입력이 가능합니다.", lottoNumber,
-					LottoMachine.MIN_LOTTO_NUMBER, LottoMachine.MAX_LOTTO_NUMBER));
+					LottoResult.MIN_LOTTO_NUMBER, LottoResult.MAX_LOTTO_NUMBER));
 		}
 	}
 
 	private boolean isRange(int lottoNumber) {
-		return lottoNumber >= LottoMachine.MIN_LOTTO_NUMBER && lottoNumber <= LottoMachine.MAX_LOTTO_NUMBER;
+		return lottoNumber >= LottoResult.MIN_LOTTO_NUMBER && lottoNumber <= LottoResult.MAX_LOTTO_NUMBER;
 	}
 
 	private void validationNumber(String lottoNumber) {
