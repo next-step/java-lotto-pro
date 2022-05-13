@@ -1,6 +1,6 @@
 package lotto.dto;
 
-import lotto.vo.Lottos;
+import lotto.model.Lottos;
 
 public class LottoGameDTO {
 

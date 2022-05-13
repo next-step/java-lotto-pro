@@ -5,7 +5,7 @@ import lotto.dto.LottoGameDTO;
 import lotto.model.LottoPlayService;
 import lotto.utils.InputStringUtils;
 import lotto.view.ResultView;
-import lotto.vo.Lottos;
+import lotto.model.Lottos;
 
 public class LottoGameController {
 

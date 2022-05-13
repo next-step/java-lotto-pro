@@ -2,9 +2,8 @@ package lotto.view;
 
 import java.util.Arrays;
 import lotto.constant.LottoMatchNumber;
-import lotto.dto.LottoGameDTO;
-import lotto.vo.Lotto;
-import lotto.vo.Lottos;
+import lotto.model.Lotto;
+import lotto.model.Lottos;
 
 public class ResultView {
 

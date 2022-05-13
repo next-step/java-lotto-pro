@@ -3,7 +3,6 @@ package lotto.model;
 import java.util.List;
 import lotto.constant.LottoRoleConst;
 import lotto.utils.RandomNumberUtils;
-import lotto.vo.Lotto;
 
 public class LottoGeneratorService {
 

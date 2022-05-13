@@ -2,8 +2,6 @@ package lotto.model;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.vo.Lotto;
-import lotto.vo.Lottos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

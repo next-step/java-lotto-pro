@@ -6,8 +6,6 @@ import lotto.constant.ErrorMessage;
 import lotto.constant.LottoMatchNumber;
 import lotto.constant.LottoRoleConst;
 import lotto.utils.LottoGameValidateUtils;
-import lotto.vo.Lotto;
-import lotto.vo.Lottos;
 
 public class LottoPlayService {
 
