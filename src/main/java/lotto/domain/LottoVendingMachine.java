@@ -1,12 +1,14 @@
 package lotto.domain;
 
+import static lotto.constants.LottoConstants.LOTTO_TICKET_PRICE;
+import static lotto.messages.ErrorMessages.MONEY_UNDER_PRICE_ERROR;
+
 import java.util.ArrayList;
 import java.util.List;
 import lotto.generator.LottoRandomNumberGenerateStrategy;
 import lotto.generator.NumberGenerateStrategy;
 
 public class LottoVendingMachine {
-    private static final int LOTTO_TICKET_PRICE = 1_000;
 
     private final NumberGenerateStrategy strategy;
 
@@ -14,9 +16,16 @@ public class LottoVendingMachine {
         this.strategy = new LottoRandomNumberGenerateStrategy();
     }
 
-    public LottoTickets purchase(Money from) {
-        int quantity = from.divide(LOTTO_TICKET_PRICE);
+    public LottoTickets purchase(Money money) {
+        validatePurchaseMoney(money);
+        int quantity = money.divide(LOTTO_TICKET_PRICE);
         return generateLottoTickets(quantity);
+    }
+
+    private void validatePurchaseMoney(Money money) {
+        if (money.isUnderPrice()) {
+            throw new IllegalArgumentException(MONEY_UNDER_PRICE_ERROR);
+        }
     }
 
     private LottoTickets generateLottoTickets(int quantity) {

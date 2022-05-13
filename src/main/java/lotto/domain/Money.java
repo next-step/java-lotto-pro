@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.constants.LottoConstants.LOTTO_TICKET_PRICE;
 import static lotto.messages.ErrorMessages.MONEY_NEGATIVE_ERROR;
 import static lotto.messages.ErrorMessages.ZERO_DIVIDE_ERROR;
 
@@ -25,5 +26,9 @@ public class Money {
     public int divide(int divisor) {
         if (divisor == 0) throw new IllegalArgumentException(ZERO_DIVIDE_ERROR);
         return money/divisor;
+    }
+
+    public boolean isUnderPrice() {
+        return this.money < LOTTO_TICKET_PRICE;
     }
 }
