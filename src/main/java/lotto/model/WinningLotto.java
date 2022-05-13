@@ -19,4 +19,8 @@ public class WinningLotto {
     protected int findWinningCount(MatchPoint matchPoint) {
         return winningStatus.findWinningCount(matchPoint);
     }
+
+    public double findEarningsRate(long lottosTotalPrice) {
+        return  winningStatus.findEarningsRate(lottosTotalPrice);
+    }
 }

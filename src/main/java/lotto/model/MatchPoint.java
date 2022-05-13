@@ -13,4 +13,8 @@ public enum MatchPoint {
         this.matchPointCount = matchPointCount;
         this.cashPrize = cashPrize;
     }
+
+    public long sumCashPrizeByMatchPoint(int count) {
+        return (long) this.cashPrize * count;
+    }
 }

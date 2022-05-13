@@ -33,6 +33,10 @@ public class Lottos {
         return this.lottos.size();
     }
 
+    public long lottosTotalPrice() {
+        return (long) this.lottos.size() * LOTTO_PRICE;
+    }
+
     public void compareLottos(WinningLotto winningLotto) {
         for (Lotto lotto : this.lottos) {
             winningLotto.compareWinningLotto(lotto);
