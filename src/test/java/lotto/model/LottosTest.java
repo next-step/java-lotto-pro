@@ -2,8 +2,11 @@ package lotto.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottosTest {
 
@@ -15,5 +18,27 @@ public class LottosTest {
     @Test
     void createLottos_금액부족() {
         assertThatThrownBy(() -> new Lottos(999)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void compareLottos() {
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
+
+        Lottos lottos = new Lottos(Arrays.asList(
+                new Lotto(new LottoNumbers(Arrays.asList(1,2,3,7,8,9))),
+                new Lotto(new LottoNumbers(Arrays.asList(1,2,3,4,8,9))),
+                new Lotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,9))),
+                new Lotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6))),
+                new Lotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)))
+        ));
+
+        lottos.compareLottos(winningLotto);
+
+        assertAll(
+                () -> assertThat(winningLotto.getWinningCount(MatchPoint.THREE)).isEqualTo(1),
+                () -> assertThat(winningLotto.getWinningCount(MatchPoint.FOUR)).isEqualTo(1),
+                () -> assertThat(winningLotto.getWinningCount(MatchPoint.FIVE)).isEqualTo(1),
+                () -> assertThat(winningLotto.getWinningCount(MatchPoint.SIX)).isEqualTo(2)
+        );
     }
 }

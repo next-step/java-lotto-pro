@@ -17,6 +17,10 @@ public class Lottos {
         }
     }
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     private int getPurchaseLottoCount(long purchasePrice) {
         if(purchasePrice < LOTTO_PRICE){
             throw new IllegalArgumentException("금액이 적어 구입할 수 없습니다.");
@@ -27,5 +31,11 @@ public class Lottos {
 
     public int getLottosSize() {
         return this.lottos.size();
+    }
+
+    public void compareLottos(WinningLotto winningLotto) {
+        for (Lotto lotto : this.lottos) {
+            winningLotto.compareWinningLotto(lotto);
+        }
     }
 }
