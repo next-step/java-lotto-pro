@@ -15,7 +15,7 @@ public class LottoTickets {
         return new LottoTickets(lottoNumbers);
     }
 
-    public int getCount() {
+    public int purchasedTicketsCount() {
         return this.lottoNumbers.size();
     }
 
@@ -23,6 +23,7 @@ public class LottoTickets {
         List<LottoRank> resultRanks = lottoNumbers.stream().
                 map(ln -> ln.hitCounts(winningLottoNumbers)).
                 map(LottoRank::valueOf).
+                filter(LottoRank::isPrized).
                 collect(Collectors.toList());
         return LottoWinningResults.from(resultRanks);
     }

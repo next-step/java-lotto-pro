@@ -10,6 +10,6 @@ class LottoVendingMachineTest {
     void 자판기에서_금액을_입력하면_로또를_살_수_있다() {
         LottoVendingMachine vendingMachine = new LottoVendingMachine();
         LottoTickets tickets = vendingMachine.purchase(Money.from(10_000));
-        assertThat(tickets.ticketsCount()).isEqualTo(10);
+        assertThat(tickets.purchasedTicketsCount()).isEqualTo(10);
     }
 }
