@@ -42,10 +42,23 @@ class LottoNumbersTest {
         }
     }
 
-    @Test
-    @DisplayName("로또번호가 6개가 아니면 IllegalArgumentException 를 발생시킨다.")
-    void 무효한_로또번호() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-        assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(IllegalArgumentException.class);
+    @Nested
+    @DisplayName("무효한 로또번호")
+    class 무효한_로또번호 {
+        @Test
+        @DisplayName("로또번호가 6개가 아니면 IllegalArgumentException 를 발생시킨다.")
+        void 무효한_로또번호() {
+            List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+            assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(IllegalArgumentException.class);
+        }
+
+        @Test
+        @DisplayName("로또번호가 중복된 경우 IllegalArgumentException 를 발생시킨다.")
+        void 중복된_로또번호() {
+            List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
+            assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(IllegalArgumentException.class);
+        }
     }
+
+
 }
