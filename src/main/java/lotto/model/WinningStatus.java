@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class WinningStatus {
 
-    private Map<MatchPoint, Integer> winningStatus;
+    private final Map<MatchPoint, Integer> winningStatus;
 
     public WinningStatus() {
         winningStatus = new HashMap<>();
@@ -35,7 +35,7 @@ public class WinningStatus {
         }
     }
 
-    protected int findWinningCount(MatchPoint matchPoint) {
+    public int findWinningCount(MatchPoint matchPoint) {
         return winningStatus.get(matchPoint);
     }
 
