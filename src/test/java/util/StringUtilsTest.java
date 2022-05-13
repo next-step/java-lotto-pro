@@ -1,4 +1,4 @@
-package calculator;
+package util;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
