@@ -2,8 +2,10 @@ package lotto.model;
 
 import static java.util.stream.Collectors.toList;
 import static lotto.constants.LottoConstant.NUMBER_SIZE;
+import static lotto.utils.StringUtil.isInvalidFormat;
+import static lotto.utils.StringUtil.isNullOrEmpty;
+import static lotto.utils.StringUtil.splitToList;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -42,22 +44,19 @@ public class LottoNumberGenerator {
 
     public static LottoNumber of(String numbers) {
         validateFormat(numbers);
-        List<Integer> unwrapNumber = split(numbers).stream()
+        List<String> stringNumberList = splitToList(numbers, DELIMITER);
+        List<Integer> unwrapNumberList = stringNumberList.stream()
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(toList());
-        validateDuplicate(unwrapNumber);
-        return new LottoNumber(wrapIntegerToNumber(unwrapNumber));
+        validateDuplicate(unwrapNumberList);
+        return new LottoNumber(wrapIntegerToNumber(unwrapNumberList));
     }
 
     private static List<Number> wrapIntegerToNumber(List<Integer> numbers) {
         return numbers.stream()
                 .map(Number::of)
                 .collect(toList());
-    }
-
-    private static List<String> split(String lottoNumber) {
-        return Arrays.asList(lottoNumber.split(DELIMITER));
     }
 
     private static void validateFormat(String lottoNumber) {
@@ -67,15 +66,7 @@ public class LottoNumberGenerator {
     }
 
     private static boolean isNotValid(String lottoNumber) {
-        return isNull(lottoNumber) || isInvalidFormat(lottoNumber);
-    }
-
-    private static boolean isNull(String lottoNumber) {
-        return lottoNumber == null;
-    }
-
-    private static boolean isInvalidFormat(String lottoNumber) {
-        return !lottoNumber.matches(LOTTO_NUMBER_FORMAT);
+        return isNullOrEmpty(lottoNumber) || isInvalidFormat(lottoNumber, LOTTO_NUMBER_FORMAT);
     }
 
     private static void validateDuplicate(List<Integer> lottoNumber) {

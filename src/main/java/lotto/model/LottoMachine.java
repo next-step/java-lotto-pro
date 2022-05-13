@@ -2,6 +2,8 @@ package lotto.model;
 
 import static java.util.stream.Collectors.toList;
 import static lotto.constants.LottoConstant.LOTTO_PRICE;
+import static lotto.utils.StringUtil.isInvalidFormat;
+import static lotto.utils.StringUtil.isNullOrEmpty;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -34,15 +36,7 @@ public class LottoMachine {
     }
 
     private boolean isNotValid(String money) {
-        return isNull(money) || isInvalidFormat(money);
-    }
-
-    private boolean isNull(String money) {
-        return money == null;
-    }
-
-    private boolean isInvalidFormat(String money) {
-        return !money.matches(MONEY_FORMAT_REGEX);
+        return isNullOrEmpty(money) || isInvalidFormat(money, MONEY_FORMAT_REGEX);
     }
 
     private void validateAmount(int money) {
