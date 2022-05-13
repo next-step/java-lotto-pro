@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.constant.ErrorMessage;
 import lotto.dto.LottoGameDTO;
 import lotto.model.LottoPlayService;
 import lotto.utils.InputStringUtils;
@@ -29,19 +28,17 @@ public class LottoGameController {
 
     public LottoGameDTO purchaseLotto(String moneyWord) {
         try {
-            int money = Integer.parseInt(moneyWord);
-            Lottos lottos = lottoPlayService.convertMoneyToLottos(money);
+            int buyLottoCount = lottoPlayService.buyLottoCount(moneyWord);
+            Lottos lottos = lottoPlayService.generateLottosByCount(buyLottoCount);
             String purchaseView = resultView.resultPurchaseView(lottos);
             return new LottoGameDTO(lottos, purchaseView, false);
-        } catch (NumberFormatException e) {
-            return new LottoGameDTO(null, ErrorMessage.NOT_CONVERT_MONEY, true);
         } catch (IllegalArgumentException e) {
             return new LottoGameDTO(null, e.getMessage(), true);
         }
     }
 
     public LottoGameDTO generateLottos(LottoGameDTO lottoGameDTO) {
-        Lottos lottos = lottoPlayService.generateLottosByPlayCount(lottoGameDTO.getLottos().getPlayCount());
+        Lottos lottos = lottoPlayService.generateLottosByCount(lottoGameDTO.getLottos().getPlayCount());
         String generatedLottosView = resultView.generatedLottosView(lottos);
         return new LottoGameDTO(lottos, generatedLottosView, false);
     }

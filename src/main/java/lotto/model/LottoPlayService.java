@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.constant.ErrorMessage;
 import lotto.constant.LottoMatchNumber;
@@ -16,12 +17,6 @@ public class LottoPlayService {
         lottoGeneratorService = new LottoGeneratorService();
     }
 
-    public Lottos convertMoneyToLottos(int money) {
-        LottoGameValidateUtils.validateMoney(money);
-        int playCount = money / LottoRoleConst.LOTTO_PRICE;
-        return new Lottos(playCount);
-    }
-
     public int buyLottoCount(String moneyWord) {
         try {
             int money = Integer.parseInt(moneyWord);
@@ -32,8 +27,8 @@ public class LottoPlayService {
         }
     }
 
-    public Lottos generateLottosByPlayCount(int playCount) {
-        Lottos lottos = new Lottos(playCount);
+    public Lottos generateLottosByCount(int count) {
+        Lottos lottos = new Lottos(count);
         for (int play = 0; play < lottos.getPlayCount(); play++) {
             Lotto lotto = lottoGeneratorService.generateLotto();
             lottos.addLotto(lotto);

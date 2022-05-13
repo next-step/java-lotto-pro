@@ -30,53 +30,55 @@ class LottoPlayServiceTest {
     @DisplayName("입력받은 구매금액을 로또 개수로 변환한다.")
     @ParameterizedTest(name = "[{0}]원 -> [{1}]게임")
     @CsvSource(value = {"10000:10", "5000:5", "3000:3"}, delimiter = ':')
-    void convertMoneyToLottos(int money, int expectedPlayCount) {
-        Lottos lottos = lottoPlayService.convertMoneyToLottos(money);
-        assertEquals(expectedPlayCount, lottos.getPlayCount());
-    }
-
-    @DisplayName("입력받은 구매금액을 로또 개수로 변환한다.")
-    @ParameterizedTest(name = "[{0}]원 -> [{1}]게임")
-    @CsvSource(value = {"10000:10", "5000:5", "3000:3"}, delimiter = ':')
     void buyLottoCount(String moneyWord, int expectedPlayCount) {
         assertEquals(expectedPlayCount, lottoPlayService.buyLottoCount(moneyWord));
     }
 
     @DisplayName("구매 금액이 1000원 미만(로또 최소 금액)인 경우")
     @ParameterizedTest
-    @ValueSource(ints = {100, 0, 900})
-    void convertMoneyToLottos_low_money(int money) {
+    @ValueSource(strings = {"100", "0", "900"})
+    void buyLottoCount_low_money(String moneyWord) {
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoPlayService.convertMoneyToLottos(money))
+                .isThrownBy(() -> lottoPlayService.buyLottoCount(moneyWord))
                 .withMessage("[ERROR] 로또 최소 가격은 1000원 입니다.");
     }
 
     @DisplayName("구매 금액이 10_000_000원 이상인 경우")
     @ParameterizedTest
-    @ValueSource(ints = {10_000_000, Integer.MAX_VALUE})
-    void convertMoneyToLottos_over_money(int money) {
+    @ValueSource(strings = {"10001000","100000000"})
+    void buyLottoCount_over_money(String moneyWord) {
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoPlayService.convertMoneyToLottos(money))
+                .isThrownBy(() -> lottoPlayService.buyLottoCount(moneyWord))
                 .withMessage("[ERROR] 로또 구매 최대 가격은 10_000_000원 입니다.");
     }
 
     @DisplayName("구매 금액이 1000원 단위가 아닌 경우")
     @ParameterizedTest
-    @ValueSource(ints = {1500, 1200, 59900})
-    void convertMoneyToLottos_incorrect_unit(int money) {
+    @ValueSource(strings = {"1500", "1200", "59900"})
+    void buyLottoCount_incorrect_unit(String moneyWord) {
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoPlayService.convertMoneyToLottos(money))
+                .isThrownBy(() -> lottoPlayService.buyLottoCount(moneyWord))
                 .withMessage("[ERROR] 구매 금액은 1000원 단위로 입력해주세요.");
+    }
+
+    @DisplayName("잘못된 구매금액을 입력하는 경우")
+    @ParameterizedTest
+    @ValueSource(strings = {"천원", "2dollars", "$2"})
+    void buyLottoCount_incorrect_input_money(String moneyWord) {
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoPlayService.buyLottoCount(moneyWord))
+                .withMessage("[ERROR] 구매금액 변환에 오류가 발생했습니다.");
     }
 
     @DisplayName("로또 구매개수만큼 로또게임을 진행하고 로또목록에 등록한다.")
     @ParameterizedTest
     @ValueSource(ints = {10, 15, 5})
     void playLottoByCount(int playCount) {
-        Lottos lottos = lottoPlayService.generateLottosByPlayCount(playCount);
+        Lottos lottos = lottoPlayService.generateLottosByCount(playCount);
         List<Lotto> lottoList = lottos.getLottoList();
         assertThat(lottoList).hasSize(playCount);
     }
@@ -123,44 +125,4 @@ class LottoPlayServiceTest {
     }
 
 
-
-    @DisplayName("구매 금액이 1000원 미만(로또 최소 금액)인 경우")
-    @ParameterizedTest
-    @ValueSource(strings = {"100", "0", "900"})
-    void buyLottoCount_low_money(String moneyWord) {
-
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoPlayService.buyLottoCount(moneyWord))
-                .withMessage("[ERROR] 로또 최소 가격은 1000원 입니다.");
-    }
-
-    @DisplayName("구매 금액이 10_000_000원 이상인 경우")
-    @ParameterizedTest
-    @ValueSource(strings = {"10001000","100000000"})
-    void buyLottoCount_over_money(String moneyWord) {
-
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoPlayService.buyLottoCount(moneyWord))
-                .withMessage("[ERROR] 로또 구매 최대 가격은 10_000_000원 입니다.");
-    }
-
-    @DisplayName("구매 금액이 1000원 단위가 아닌 경우")
-    @ParameterizedTest
-    @ValueSource(strings = {"1500", "1200", "59900"})
-    void buyLottoCount_incorrect_unit(String moneyWord) {
-
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoPlayService.buyLottoCount(moneyWord))
-                .withMessage("[ERROR] 구매 금액은 1000원 단위로 입력해주세요.");
-    }
-
-    @DisplayName("잘못된 구매금액을 입력하는 경우")
-    @ParameterizedTest
-    @ValueSource(strings = {"천원", "2dollars", "$2"})
-    void buyLottoCount_incorrect_input_money(String moneyWord) {
-
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoPlayService.buyLottoCount(moneyWord))
-                .withMessage("[ERROR] 구매금액 변환에 오류가 발생했습니다.");
-    }
 }
