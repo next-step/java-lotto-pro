@@ -16,14 +16,15 @@
 - [x] 구현체 LottoRandomNumberGenerateStrategy -> Random으로 6개의 숫자를 발생
 
 ### LottoVendingMachine
-- [ ] 입력한 금액에 따라 로또 매수 산정
-- [ ] 구입한 로또 매수 만큼 LottoNumbers 를 생성 하여 LottoTickets에 add
-
-### LottoTickets
-- [ ] LottoVendingMachine에서 구입한 만큼의 LottoNumbers 리스트를 가지고 있다.
+- [x] 입력한 금액에 따라 로또 매수 산정
+- [x] 구입한 로또 매수 만큼 LottoNumbers 를 생성 하여 LottoTickets에 add
 
 ### Money
-- [ ] 음수 체크
+- [x] 음수 체크
+- [x] 정수로 나눌수 있다.
+
+### LottoTickets
+- [x] LottoVendingMachine에서 구입한 만큼의 LottoNumbers 리스트를 가지고 있다.
 
 ### LottoRank
 - [x] 맞은 숫자 개수에 따라서 등수 & 포상금 책정
