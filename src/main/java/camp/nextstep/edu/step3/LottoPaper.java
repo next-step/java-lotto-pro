@@ -44,4 +44,13 @@ public class LottoPaper {
     public int hashCode() {
         return Objects.hash(userLottoList);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Lotto lotto : userLottoList) {
+            stringBuilder.append(String.format("%s\n",lotto));
+        }
+        return stringBuilder.toString();
+    }
 }
