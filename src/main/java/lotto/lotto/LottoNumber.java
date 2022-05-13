@@ -1,5 +1,6 @@
 package lotto.lotto;
 
+import lotto.util.StringUtils;
 import java.util.Objects;
 
 class LottoNumber implements Comparable<LottoNumber> {
@@ -26,7 +27,7 @@ class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static int parse(String value) {
-        if (value == null || value.isEmpty()) {
+        if (StringUtils.isEmpty(value)) {
             throw new LottoNumberFormatException(value);
         }
         try {

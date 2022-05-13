@@ -1,5 +1,6 @@
 package lotto.lotto;
 
+import lotto.util.StringUtils;
 import java.util.regex.Pattern;
 
 class CommaSplittingLottoGenerator implements LottoGenerator {
@@ -8,7 +9,7 @@ class CommaSplittingLottoGenerator implements LottoGenerator {
     private final Pattern pattern = Pattern.compile(",");
 
     CommaSplittingLottoGenerator(String value) {
-        if (value == null || value.isEmpty()) {
+        if (StringUtils.isEmpty(value)) {
             throw new FailureCreatingLottoGeneratorException(value);
         }
         this.value = value;

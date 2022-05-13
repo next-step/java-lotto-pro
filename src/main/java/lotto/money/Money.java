@@ -1,6 +1,7 @@
 package lotto.money;
 
 import lotto.Purchasable;
+import lotto.util.StringUtils;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
@@ -62,7 +63,7 @@ public class Money implements Comparable<Money> {
     }
 
     private static int parse(String value) {
-        if (value == null || value.isEmpty()) {
+        if (StringUtils.isEmpty(value)) {
             throw new MoneyFormatException(value);
         }
         return Integer.parseInt(value);
