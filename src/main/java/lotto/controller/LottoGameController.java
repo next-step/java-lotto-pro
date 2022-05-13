@@ -23,8 +23,8 @@ public class LottoGameController {
         try {
             int buyLottoCount = lottoPlayService.buyLottoCount(moneyWord);
             Lottos lottos = lottoPlayService.generateLottoByCount(buyLottoCount);
-            String generatedLottosView = resultView.generatedLottosView(lottos);
-            return new LottoGameDTO(lottos, generatedLottosView, false);
+            resultView.generatedLottosView(lottos);
+            return new LottoGameDTO(lottos, null, false);
         } catch (IllegalArgumentException e) {
             return new LottoGameDTO(null, e.getMessage(), true);
         }
@@ -36,8 +36,8 @@ public class LottoGameController {
             List<Integer> winningNumberList = InputStringUtils
                     .splitToNumberListByDelimiter(winningNumbersWord, DELIMITER_COMMA);
             lottoPlayService.playLottoGame(lottos, winningNumberList);
-            String totalResultView = resultView.totalResultView(lottos);
-            return new LottoGameDTO(lottos, totalResultView, false);
+            resultView.totalResultView(lottos);
+            return new LottoGameDTO(lottos, null, false);
         } catch (IllegalArgumentException e) {
             return new LottoGameDTO(null, e.getMessage(), true);
         }

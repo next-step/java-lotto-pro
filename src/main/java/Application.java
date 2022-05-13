@@ -23,7 +23,6 @@ public class Application {
         do {
             String winningNumbersWord = InputConsole.readStringForMessage(LottoGameMessage.INPUT_WINNING_NUMBERS_MESSAGE);
             lottoGameDTO = lottoGameController.playLottoGame(requestLottoGameDTO, winningNumbersWord);
-            printMessage(lottoGameDTO);
             isInputError = lottoGameDTO.isInputError();
         } while (isInputError);
     }
@@ -35,13 +34,9 @@ public class Application {
             String moneyWord = InputConsole.readStringForMessage(LottoGameMessage.INPUT_MONEY_MESSAGE);
             lottoGameDTO = lottoGameController.generateLottoByMoney(moneyWord);
             isInputError = lottoGameDTO.isInputError();
-            printMessage(lottoGameDTO);
         } while (isInputError);
 
         return lottoGameDTO;
     }
 
-    private void printMessage(LottoGameDTO lottoGameDTO) {
-        System.out.println(lottoGameDTO.getView());
-    }
 }

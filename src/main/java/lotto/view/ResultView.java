@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.Arrays;
 import lotto.constant.LottoMatchNumber;
+import lotto.dto.LottoGameDTO;
 import lotto.vo.Lotto;
 import lotto.vo.Lottos;
 
@@ -18,7 +19,7 @@ public class ResultView {
         return String.format(PURCHASE_MESSAGE, lottos.lottoCount());
     }
 
-    public String generatedLottosView(Lottos lottos) {
+    public void generatedLottosView(Lottos lottos) {
         StringBuilder totalLottoNumberView = new StringBuilder();
         totalLottoNumberView.append(resultPurchaseView(lottos));
         totalLottoNumberView.append(ENTER);
@@ -26,10 +27,10 @@ public class ResultView {
             totalLottoNumberView.append(Arrays.toString(lotto.numberListToArray()));
             totalLottoNumberView.append(ENTER);
         }
-        return totalLottoNumberView.toString();
+        printView(totalLottoNumberView.toString());
     }
 
-    public String totalResultView(Lottos lottos) {
+    public void totalResultView(Lottos lottos) {
         StringBuilder resultView = new StringBuilder();
         setHeader(resultView);
         for (LottoMatchNumber lottoMatchNumber : LottoMatchNumber.allMatchNumber()) {
@@ -40,7 +41,7 @@ public class ResultView {
             resultView.append(resultMatchMessage);
         }
         setProfitRate(lottos, resultView);
-        return resultView.toString();
+        printView(resultView.toString());
     }
 
     private void setHeader(StringBuilder resultView) {
@@ -54,5 +55,9 @@ public class ResultView {
         resultView.append(ENTER);
         String profitRate = String.format(RESULT_PROFIT_MESSAGE, lottos.getResultProfitRate());
         resultView.append(profitRate);
+    }
+
+    private void printView(String view) {
+        System.out.println(view);
     }
 }
