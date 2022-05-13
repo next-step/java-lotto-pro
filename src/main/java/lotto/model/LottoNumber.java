@@ -1,40 +1,46 @@
 package lotto.model;
 
 import static java.util.stream.Collectors.toList;
+import static lotto.constants.LottoConstant.NUMBER_SIZE;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.IntStream;
 
 public class LottoNumber {
     private static final String LOTTO_NUMBER_FORMAT = "^([1-9]+[0-9]*,(\\s)*){5}[1-9]+[0-9]*$";
     private static final String DELIMITER = ",";
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
-    protected static final List<Integer> NUMBER_RANGE = IntStream.range(MIN_NUMBER, MAX_NUMBER + 1)
-            .boxed()
-            .collect(toList());
-    protected static final int NUMBER_SIZE = 6;
 
-    private final List<Integer> lottoNumber;
+    private final List<Number> lottoNumber;
 
-    protected LottoNumber(List<Integer> lottoNumber) {
+    protected LottoNumber(List<Number> lottoNumber) {
         validateDuplicate(lottoNumber);
         sortLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
     public static LottoNumber of(List<Integer> lottoNumber) {
-        return new LottoNumber(lottoNumber);
+        List<Number> parseNumberList = lottoNumber.stream()
+                .map(Number::of)
+                .collect(toList());
+        return new LottoNumber(parseNumberList);
     }
 
     public static LottoNumber of(String lottoNumber) {
         validateFormat(lottoNumber);
-        return new LottoNumber(convertList(lottoNumber));
+        return new LottoNumber(convertNumberList(lottoNumber));
+    }
+
+    private static List<Number> convertNumberList(String lottoNumber) {
+        return split(lottoNumber).stream()
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(Number::of)
+                .collect(toList());
     }
 
     public LottoRank getLottoRank(LottoNumber winningLottoNumber) {
@@ -44,35 +50,19 @@ public class LottoNumber {
         return LottoRank.findByHits(count);
     }
 
-    private boolean isContainNumber(int number) {
+    private boolean isContainNumber(Number number) {
         return this.lottoNumber.contains(number);
     }
 
-    private static List<Integer> convertList(String lottoNumber) {
-        List<String> numberList = split(lottoNumber);
-        return numberList.stream()
-                .map(String::trim)
-                .map(LottoNumber::parseLottoNumber)
-                .collect(toList());
-    }
-
-    private static int parseLottoNumber(String stringNumber) {
-        int number = Integer.parseInt(stringNumber);
-        validateNumberRange(number);
-        return number;
-    }
-
-    private static void validateDuplicate(List<Integer> lottoNumber) {
-        Set<Integer> numberSet = new HashSet<>(lottoNumber);
+    private static void validateDuplicate(List<Number> lottoNumber) {
+        Set<Number> numberSet = new HashSet<>(lottoNumber);
         if (numberSet.size() != NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 숫자의 중복은 허용되지 않습니다.");
         }
     }
 
-    private static void validateNumberRange(int number) {
-        if (!NUMBER_RANGE.contains(number)) {
-            throw new IllegalArgumentException("로또 숫자 범위를 벗어났습니다.");
-        }
+    public static void sortLottoNumber(List<Number> lottoNumber) {
+        lottoNumber.sort(Comparator.comparing(Number::getNumber));
     }
 
     private static List<String> split(String lottoNumber) {
@@ -97,12 +87,8 @@ public class LottoNumber {
         return winningNumber == null;
     }
 
-    public List<Integer> getLottoNumber() {
+    public List<Number> getLottoNumber() {
         return Collections.unmodifiableList(lottoNumber);
-    }
-
-    public static void sortLottoNumber(List<Integer> lottoNumber) {
-        Collections.sort(lottoNumber);
     }
 
     @Override
