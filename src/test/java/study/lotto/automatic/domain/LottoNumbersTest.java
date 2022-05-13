@@ -12,6 +12,14 @@ import org.junit.jupiter.api.Test;
 
 class LottoNumbersTest {
 
+    @Test
+    @DisplayName("로또번호를 비교하여 같은 번호의 리스트를 반환한다.")
+    void 같은_번호_반환() {
+        LottoNumbers lottoNumbers1 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers2 = new LottoNumbers(Arrays.asList(3, 5, 1, 6, 9, 10));
+        assertThat(lottoNumbers1.match(lottoNumbers2)).containsExactlyInAnyOrderElementsOf(Arrays.asList(1, 3, 5, 6));
+    }
+
     @Nested
     @DisplayName("유효한 로또번호")
     class 유효한_로또번호 {

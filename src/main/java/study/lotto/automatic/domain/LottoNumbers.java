@@ -1,5 +1,6 @@
 package study.lotto.automatic.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -56,5 +57,11 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumberList);
+    }
+
+    public List<Integer> match(LottoNumbers lottoNumbers) {
+        List<Integer> duplicates = new ArrayList<>(numbers());
+        duplicates.retainAll(lottoNumbers.numbers());
+        return duplicates;
     }
 }

@@ -1,6 +1,7 @@
 package study.lotto.automatic.domain;
 
 import java.util.Objects;
+import study.lotto.automatic.domain.draw.Division;
 
 public class LottoDraw {
     private final LottoNumbers winningNumber;
@@ -11,6 +12,10 @@ public class LottoDraw {
 
     public LottoDraw(LottoGenerator lottoGenerator) {
         winningNumber = lottoGenerator.generate();
+    }
+
+    public Division match(Lotto lotto) {
+        return Division.valueOfMatchCount(lotto.match(winningNumber));
     }
 
     @Override
