@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
+import static lotto.constant.Config.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -29,6 +30,7 @@ public class LottoMachineTest {
     @ValueSource(ints = {-5, 0, 1200})
     void 로또_구매_예외_test(int money) {
         assertThatThrownBy(() -> lottoMachine.purchase(money))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .withFailMessage("금액은 " + LOTTO_PRICE + "단위이어야 합니다.");
     }
 }

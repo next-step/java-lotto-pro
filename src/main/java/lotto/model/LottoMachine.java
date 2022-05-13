@@ -38,7 +38,7 @@ public class LottoMachine {
 
     public List<Lotto> purchase(int money) {
         if (money < LOTTO_PRICE || money % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("금액은 " + LOTTO_PRICE + "단위이어야 합니다.");
         }
         return generateLottos(money / LOTTO_PRICE);
     }
