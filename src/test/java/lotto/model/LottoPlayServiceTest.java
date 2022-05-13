@@ -136,7 +136,7 @@ class LottoPlayServiceTest {
 
     @DisplayName("구매 금액이 10_000_000원 이상인 경우")
     @ParameterizedTest
-    @ValueSource(strings = {"10_001_000","100_000_000"})
+    @ValueSource(strings = {"10001000","100000000"})
     void buyLottoCount_over_money(String moneyWord) {
 
         assertThatIllegalArgumentException()
