@@ -50,17 +50,4 @@ public class LottoPaperTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoPaper(basicLottoArray).checkAll(null));
     }
-
-    @DisplayName("isIssuedLottoCount 통해 로또 발급 갯수를 확인할수 있다")
-    @Test
-    void isIssuedLottoCountTest() {
-        assertThat(new LottoPaper(basicLottoArray).isIssuedLottoCount(2)).isTrue();
-    }
-
-    @DisplayName("isIssuedLottoCount 입력값은 0보다 작을수는 없다")
-    @Test
-    void invalidIsIssuedLottoCountParameterTest() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoPaper(basicLottoArray).isIssuedLottoCount(-1));
-    }
 }

@@ -22,13 +22,6 @@ public class LottoPaper {
                 .toArray(Hit[]::new));
     }
 
-    public boolean isIssuedLottoCount(final int count) {
-        if (0 > count) {
-            throw new IllegalArgumentException("invalid isIssuedLottoCount input : "+count);
-        }
-        return Objects.equals(userLottoList.size(),count);
-    }
-
     private void validation(Lotto[] lottoArray) {
         if (Objects.isNull(lottoArray) || lottoArray.length < 1) {
             throw new IllegalArgumentException("invalid construct input");
