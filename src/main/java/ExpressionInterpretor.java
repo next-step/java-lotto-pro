@@ -5,22 +5,23 @@ import java.util.regex.Pattern;
 
 public class ExpressionInterpretor {
     private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String CUSTOM_DELIMIT_REGEX = "//(.)\n(.*)";
+    private static final int ZERO = 0;
 
     private String expression;
-
+    private Matcher customDelimitMatcher;
     private String[] numbers;
 
     public ExpressionInterpretor(String expression) {
         this.expression = expression;
+        this.customDelimitMatcher = Pattern.compile(CUSTOM_DELIMIT_REGEX).matcher(expression);
         interpret();
     }
 
     private void interpret() {
         if (hasCustomDelimitPart()) {
-            Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
-            m.find();
-            String customDelimiter = m.group(1);
-            numbers = m.group(2).split(customDelimiter);
+            String customDelimiter = customDelimitMatcher.group(1);
+            numbers = customDelimitMatcher.group(2).split(customDelimiter);
             return;
         }
         numbers = expression.split(DEFAULT_DELIMITER);
@@ -28,8 +29,7 @@ public class ExpressionInterpretor {
     }
 
     private boolean hasCustomDelimitPart() {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
-        return m.find();
+        return customDelimitMatcher.find();
     }
 
     public List<Integer> getNumbers() {
@@ -43,8 +43,8 @@ public class ExpressionInterpretor {
     }
 
     private void checkNagative(int number) {
-        if (number < 0) {
-            throw new RuntimeException();
+        if (number < ZERO) {
+            throw new IllegalArgumentException("양수만 계산 가능합니다.");
         }
     }
 }
