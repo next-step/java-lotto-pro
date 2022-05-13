@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Money {
     public static final int ZERO_NUM = 0;
+    public static final int LOTTO_PRICE = 1000;
     private final int money;
 
     private Money(int money) {
@@ -16,9 +17,13 @@ public class Money {
     }
 
     private void validMoney(int money) {
-        if(money < ZERO_NUM) {
+        if (money < ZERO_NUM) {
             throw new IllegalArgumentException("음수가 입력되어 유효하지 않습니다.");
         }
+    }
+
+    public int maxLottoCount() {
+        return money / LOTTO_PRICE;
     }
 
     @Override
