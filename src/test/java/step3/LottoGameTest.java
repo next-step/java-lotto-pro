@@ -3,34 +3,35 @@ package step3;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-class LottoTest {
-    @Test
-    void valid_로또_1개_생성() {
-        Lotto userLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(userLotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+class LottoGameTest {
+    private LottoGame lottoGame;
+
+    @BeforeEach
+    void beforeEach() {
+        lottoGame = new LottoGame();
+    }
+
+    @ParameterizedTest(name = "구입가능개수 반환 ({0} : {1})")
+    @CsvSource(value = {"1000:1", "5000:5", "100:0"}, delimiter = ':')
+    void 구입가능개수_반환(int money, int expected) {
+        assertThat(LottoGame.ableToBuyLottoCount(money)).isEqualTo(expected);
     }
 
     @Test
-    void invalid_로또_1개_생성_숫자개수() {
-        assertThatThrownBy(() -> {
-            Lotto newLotto = new Lotto(Arrays.asList(1, 2, 3));
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("중복되지 않은 6개의 숫자를 입력해주세요.");
+    void 구입가능개수만큼_로또_생성() {
+        List<Lotto> lottos = lottoGame.buy(5);
+        assertThat(lottos.size()).isEqualTo(5);
     }
 
     @Test
-    void invalid_로또_1개_생성_숫자범위() {
-        assertThatThrownBy(() -> {
-            Lotto newLotto = new Lotto(Arrays.asList(1, 2, 3, 55, 4, 5));
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("1~45의 숫자만 입력해주세요.");
-    }
-
-    @Test
-    void 자동번호_로또_1개_생성() {
-        Lotto autoLotto = new Lotto();
-        assertThat(autoLotto).isInstanceOf(Lotto.class);
+    void 지난주_당첨번호로_로또_생성() {
+        Lotto winnerLotto = lottoGame.winnerLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(winnerLotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 }
