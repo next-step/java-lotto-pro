@@ -22,15 +22,16 @@ public class WinningResult {
     }
 
     public BigDecimal rateOfReturn(Money money) {
-        return Money.of(calculateTotalPrizeMoneyValue()).divide(money);
+        return calculateTotalPrize().percentage(money);
     }
 
-    private long calculateTotalPrizeMoneyValue() {
-        long totalPrize = 0L;
+    private Money calculateTotalPrize() {
+        Money totalPrize = Money.of(0);
         for (Map.Entry<LottoPrize, Integer> entry : results.entrySet()) {
             final LottoPrize lottoPrize = entry.getKey();
             final long count = entry.getValue().longValue();
-            totalPrize += Math.multiplyExact(lottoPrize.prizeMoneyValue(), count);
+            Money prize = lottoPrize.prize().multiple(count);
+            totalPrize = totalPrize.add(prize);
         }
         return totalPrize;
     }
