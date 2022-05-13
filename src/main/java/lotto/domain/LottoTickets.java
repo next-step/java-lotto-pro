@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import lotto.enums.LottoRank;
 
@@ -17,6 +18,12 @@ public class LottoTickets {
 
     public int purchasedTicketsCount() {
         return this.lottoNumbers.size();
+    }
+
+    public String purchasedTicketNumberString() {
+        return lottoNumbers.stream().
+                map(LottoNumbers::numberStrings).
+                collect(Collectors.joining("\n"));
     }
 
     public LottoWinningResults match(LottoNumbers winningLottoNumbers) {

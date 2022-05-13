@@ -13,6 +13,9 @@ import lotto.generator.NumberGenerateStrategy;
 
 public class LottoNumbers {
 
+    private static final String NUMBERS_DELIMITER = ", ";
+    private static final String NUMBERS_PREFIX = "[";
+    private static final String NUMBERS_SUFFIX = "]";
     private final List<LottoNumber> numbers;
 
     private LottoNumbers(List<LottoNumber> numbers) {
@@ -58,6 +61,12 @@ public class LottoNumbers {
                 stream().
                 filter(lottoNumber -> numbers.contains(lottoNumber)).
                 count();
+    }
+
+    public String numberStrings() {
+        return numbers.stream().
+                map(LottoNumber::numberString).
+                collect(Collectors.joining(NUMBERS_DELIMITER, NUMBERS_PREFIX, NUMBERS_SUFFIX));
     }
 
     public List<LottoNumber> getNumbers() {

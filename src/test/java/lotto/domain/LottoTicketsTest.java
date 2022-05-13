@@ -33,4 +33,12 @@ class LottoTicketsTest {
         LottoWinningResults results = tickets.match(LottoNumbers.from(() -> Arrays.asList(1,2,3,11,22,33)));
         assertThat(results.winingRankCount(LottoRank.FOURTH)).isEqualTo(2);
     }
+
+    @Test
+    void 구입한_티켓의_번호를_출력() {
+        String string = tickets.purchasedTicketNumberString();
+        assertThat(string).
+                contains("[1, 2, 3, 4, 5, 6]").
+                contains("[11, 22, 33, 44, 5, 6]");
+    }
 }
