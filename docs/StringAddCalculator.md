@@ -22,3 +22,4 @@
 - [X] 한가지 기능은 테스트 한개로 테스트(ParameterizedTest 사용)
 - [X] IntStream을 통해 sum 기능 리팩토링
 - [X] customDelimiter Matcher 중복 제거, 상수화 작업 
+- [X] 클래스명 변경 (StringSplitter -> StringSplitter)

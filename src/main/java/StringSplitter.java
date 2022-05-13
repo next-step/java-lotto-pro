@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ExpressionInterpretor {
+public class StringSplitter {
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMIT_REGEX = "//(.)\n(.*)";
     private static final int ZERO = 0;
@@ -12,7 +12,7 @@ public class ExpressionInterpretor {
     private Matcher customDelimitMatcher;
     private String[] numbers;
 
-    public ExpressionInterpretor(String expression) {
+    public StringSplitter(String expression) {
         this.expression = expression;
         this.customDelimitMatcher = Pattern.compile(CUSTOM_DELIMIT_REGEX).matcher(expression);
         interpret();

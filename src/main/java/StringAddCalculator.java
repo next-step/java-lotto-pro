@@ -6,8 +6,8 @@ public class StringAddCalculator {
         if (isEmptyExpression(expression)) {
             return 0;
         }
-        ExpressionInterpretor expressionInterpretor = new ExpressionInterpretor(expression);
-        return sum(expressionInterpretor.getNumbers());
+        StringSplitter stringSplitter = new StringSplitter(expression);
+        return sum(stringSplitter.getNumbers());
     }
 
     private static boolean isEmptyExpression(String expression) {
