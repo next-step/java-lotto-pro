@@ -1,5 +1,7 @@
 package camp.nextstep.edu.step3;
 
+import java.util.Objects;
+
 public enum Hit {
     ZERO(0, 0),
     ONE(1, 0),
@@ -19,6 +21,14 @@ public enum Hit {
 
     static Hit valueOf(final int hitCount) {
         return Hit.values()[hitCount];
+    }
+
+    public boolean isLow(final Hit target) {
+        return target.isHigh(this.count);
+    }
+
+    private boolean isHigh(final int destinationCount) {
+        return this.count > destinationCount;
     }
 
     @Override

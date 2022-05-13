@@ -1,8 +1,10 @@
 package camp.nextstep.edu.step3;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -31,6 +33,20 @@ public class HitTest {
         return Stream.of(
                 Arguments.of(0, ZERO),
                 Arguments.of(6, ALL)
+        );
+    }
+
+    @DisplayName("비교 테스트")
+    @ParameterizedTest
+    @MethodSource("비교대상_예상결과값_제공함수")
+    void compareTest(final Hit source, final Hit destination, final boolean expectedResult) {
+        assertThat(TWO.isLow(THREE)).isTrue();
+    }
+
+    private static Stream<Arguments> 비교대상_예상결과값_제공함수() {
+        return Stream.of(
+                Arguments.of(TWO,THREE,true),
+                Arguments.of(THREE,TWO,false)
         );
     }
 
