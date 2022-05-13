@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
     static final int LOTTO_NUMBER_SIZE = 6;
+    static final String TO_STRING_DELIMITER = ", ";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -16,11 +17,14 @@ public class LottoNumbers {
         lottoNumbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
     }
 
+    public List<Integer> numbers() {
+        return lottoNumbers.stream().map(LottoNumber::toString).map(Integer::valueOf).collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
-        return "LottoNumbers{" +
-                "lottoNumbers=" + lottoNumbers +
-                '}';
+        return String.join(TO_STRING_DELIMITER,
+                lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.toList()));
     }
 
     @Override

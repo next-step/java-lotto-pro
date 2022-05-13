@@ -4,15 +4,34 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import study.lotto.automatic.domain.sorter.IntegerAscendingSorter;
+import study.lotto.automatic.domain.sorter.IntegerSorter;
 
 public class AutomaticLottoGenerator implements LottoGenerator {
+
+    private final IntegerSorter integerSorter;
+
+    public AutomaticLottoGenerator() {
+        this(new IntegerAscendingSorter());
+    }
+
+    public AutomaticLottoGenerator(IntegerSorter integerSorter) {
+        this.integerSorter = integerSorter;
+    }
+
     @Override
     public LottoNumbers generate() {
         return new LottoNumbers(generateRandomLottoNumbers());
     }
 
     private List<Integer> generateRandomLottoNumbers() {
-        return shuffledLottoNumbers().subList(0, LottoNumbers.LOTTO_NUMBER_SIZE);
+        List<Integer> lottoNumbers = shuffledLottoNumbers().subList(0, LottoNumbers.LOTTO_NUMBER_SIZE);
+        sortLottoNumbers(lottoNumbers);
+        return lottoNumbers;
+    }
+
+    private void sortLottoNumbers(List<Integer> lottoNumbers) {
+        integerSorter.sort(lottoNumbers);
     }
 
     private List<Integer> shuffledLottoNumbers() {
