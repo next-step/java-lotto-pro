@@ -35,7 +35,7 @@ public class WinningStatus {
         }
     }
 
-    protected int getWinningCount(MatchPoint matchPoint) {
+    protected int findWinningCount(MatchPoint matchPoint) {
         return winningStatus.get(matchPoint);
     }
 }

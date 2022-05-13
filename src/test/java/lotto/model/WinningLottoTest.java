@@ -20,10 +20,10 @@ public class WinningLottoTest {
         winningLotto.compareWinningLotto(new Lotto(new LottoNumbers(Arrays.asList(1,2,3,9,10,11))));
 
         assertAll(
-                () -> assertThat(winningLotto.getWinningCount(MatchPoint.THREE)).isEqualTo(1),
-                () -> assertThat(winningLotto.getWinningCount(MatchPoint.FOUR)).isEqualTo(0),
-                () -> assertThat(winningLotto.getWinningCount(MatchPoint.FIVE)).isEqualTo(0),
-                () -> assertThat(winningLotto.getWinningCount(MatchPoint.SIX)).isEqualTo(0)
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.THREE)).isEqualTo(1),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FOUR)).isEqualTo(0),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FIVE)).isEqualTo(0),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.SIX)).isEqualTo(0)
         );
     }
 }

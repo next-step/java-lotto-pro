@@ -11,7 +11,7 @@ public class Lottos {
     public Lottos(long purchasePrice) {
         this.lottos = new ArrayList<>();
 
-        int count = getPurchaseLottoCount(purchasePrice);
+        int count = purchaseLottoCount(purchasePrice);
         for (int i = 0; i < count; i++) {
             this.lottos.add(new Lotto());
         }
@@ -21,7 +21,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    private int getPurchaseLottoCount(long purchasePrice) {
+    private int purchaseLottoCount(long purchasePrice) {
         if(purchasePrice < LOTTO_PRICE){
             throw new IllegalArgumentException("금액이 적어 구입할 수 없습니다.");
         }
@@ -29,7 +29,7 @@ public class Lottos {
         return (int) (purchasePrice / LOTTO_PRICE);
     }
 
-    public int getLottosSize() {
+    public int lottosSize() {
         return this.lottos.size();
     }
 

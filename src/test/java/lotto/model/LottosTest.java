@@ -12,7 +12,7 @@ public class LottosTest {
 
     @Test
     void createLottos() {
-        assertThat(new Lottos(10000).getLottosSize()).isEqualTo(10);
+        assertThat(new Lottos(10000).lottosSize()).isEqualTo(10);
     }
 
     @Test
@@ -35,10 +35,10 @@ public class LottosTest {
         lottos.compareLottos(winningLotto);
 
         assertAll(
-                () -> assertThat(winningLotto.getWinningCount(MatchPoint.THREE)).isEqualTo(1),
-                () -> assertThat(winningLotto.getWinningCount(MatchPoint.FOUR)).isEqualTo(1),
-                () -> assertThat(winningLotto.getWinningCount(MatchPoint.FIVE)).isEqualTo(1),
-                () -> assertThat(winningLotto.getWinningCount(MatchPoint.SIX)).isEqualTo(2)
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.THREE)).isEqualTo(1),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FOUR)).isEqualTo(1),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FIVE)).isEqualTo(1),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.SIX)).isEqualTo(2)
         );
     }
 }
