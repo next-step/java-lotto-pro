@@ -93,4 +93,9 @@ public class Lotto implements Purchasable {
                       .map(LottoNumber::new)
                       .collect(Collectors.toList());
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
