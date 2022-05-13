@@ -25,4 +25,15 @@ public class StringCalculatorTest {
             stringCalculator.sum("@");
         }).isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    @DisplayName("주어진 문자열을 쪼개어 덧셈한다.")
+    void checkSumNumbers() {
+        StringCalculator stringCalculator = new StringCalculator();
+        assertThat(stringCalculator.sum("1,2,3")).isEqualTo(6);
+        assertThat(stringCalculator.sum("1:2")).isEqualTo(3);
+        assertThat(stringCalculator.sum("1:2,3:4")).isEqualTo(10);
+        assertThat(stringCalculator.sum("//-\n1-2-3")).isEqualTo(6);
+        assertThat(stringCalculator.sum("//#\n1#2#3")).isEqualTo(6);
+    }
 }
