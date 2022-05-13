@@ -1,6 +1,7 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -20,7 +21,13 @@ public class LottoPrizeTest {
             "5,FIVE_MATCH",
             "6,SIX_MATCH"
     })
-    void test(int matchCount, LottoPrize lottoPrize) {
+    void valueOf(int matchCount, LottoPrize lottoPrize) {
         assertThat(LottoPrize.valueOf(matchCount)).isEqualTo(lottoPrize);
+    }
+
+    @DisplayName("MISS를 제외한 LottoPrize 리스트 반환")
+    @Test
+    void exclusiveMiss() {
+        assertThat(LottoPrize.exclusiveMiss()).doesNotContain(LottoPrize.MISS);
     }
 }
