@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import static lotto.constants.LottoConstants.MAX_LOTTO_NUMBER_SIZE;
+import static lotto.constants.LottoConstants.NUMBERS_DELIMITER;
+import static lotto.constants.LottoConstants.NUMBERS_PREFIX;
+import static lotto.constants.LottoConstants.NUMBERS_SUFFIX;
 import static lotto.messages.ErrorMessages.LOTTO_NUMBERS_DUPLICATION_ERROR;
 import static lotto.messages.ErrorMessages.LOTTO_NUMBERS_SIZE_ERROR;
 
@@ -13,9 +16,6 @@ import lotto.generator.NumberGenerateStrategy;
 
 public class LottoNumbers {
 
-    private static final String NUMBERS_DELIMITER = ", ";
-    private static final String NUMBERS_PREFIX = "[";
-    private static final String NUMBERS_SUFFIX = "]";
     private final List<LottoNumber> numbers;
 
     private LottoNumbers(List<LottoNumber> numbers) {
