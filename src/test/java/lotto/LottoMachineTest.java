@@ -17,6 +17,7 @@ class LottoMachineTest {
     private final LottoGenerator lottoGenerator = () -> Lotto.of(1, 2, 3, 4, 5, 6);
     private final LottoExchanger lottoExchanger = new LottoExchanger(lottoGenerator);
 
+    @DisplayName("LottoMachine 실행시 ResultView에 결과 주입")
     @Test
     void run() {
         final InputView stubInputView = new InputView() {

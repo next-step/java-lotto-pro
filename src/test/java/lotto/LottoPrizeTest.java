@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("LottoPrize 클래스 테스트")
 public class LottoPrizeTest {
 
+    @DisplayName("맞춘 갯수에 따른 LottoPrize 반환")
     @ParameterizedTest
     @CsvSource({
             "0,MISS",

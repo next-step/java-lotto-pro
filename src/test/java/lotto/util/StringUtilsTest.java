@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("StringUtils 클래스 테스트")
 class StringUtilsTest {
 
+    @DisplayName("isEmpty시 비었는지 여부 반환")
     @ParameterizedTest
     @CsvSource({
             ",true",
