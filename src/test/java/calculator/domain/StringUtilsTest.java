@@ -10,8 +10,8 @@ class StringUtilsTest {
     @Test
     @DisplayName("문자열 배열을 숫자배열로 반환 테스트")
     void to_Integers() {
-        String[] inputs = {"1", "9"};
-        assertThat(StringUtils.toPositiveNumbers(inputs)).containsExactly(1, 9);
+        String[] inputs = {"1", "9", "100"};
+        assertThat(StringUtils.toPositiveNumbers(inputs)).containsExactly(1, 9, 100);
     }
 
     @Test

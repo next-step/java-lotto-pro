@@ -17,16 +17,23 @@ public class StringUtils {
     }
 
     private static String validateAndReturn(String input) {
-        validatePositiveNumber(input);
+        validateNumber(input);
+        validatePositive(input);
         return input;
     }
 
-    private static void validatePositiveNumber(String input) {
-        if (!input.matches("\\p{Digit}")) {
+    private static void validateNumber(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (Exception exception) {
             throw new RuntimeException(MSG_NOT_NUMBER);
         }
+    }
+
+    private static void validatePositive(String input) {
         if (Integer.parseInt(input) < 0) {
             throw new RuntimeException(MSG_NEGATIVE);
         }
+
     }
 }
