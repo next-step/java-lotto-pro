@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static lotto.domain.LottoConstant.LOTTO_SIZE;
 
@@ -44,7 +43,8 @@ public class Lotto {
         List<LottoNo> result = new ArrayList<>();
         result.addAll(lottoNoList);
         result.retainAll(target.getLottoNoList());
-        return Ranking.findRankByMatchingCount(result.size());
+        int matchingCount = result.size();
+        return Ranking.findRank(matchingCount);
     }
 
     public List<LottoNo> getLottoNoList() {
