@@ -58,7 +58,7 @@ class RandomLottoGeneratorTest {
         final Lotto expected = Lotto.of(1, 2, 3, 4, 5, 6);
         final LottoGenerator fixedLottoGenerator = new RandomLottoGenerator(lottoNumbers);
         final Lotto lotto = fixedLottoGenerator.generate();
-        assertThat(lotto.getLottoNumbers()).isEqualTo(expected.getLottoNumbers());
+        assertThat(lotto).isEqualTo(expected);
     }
 
     @DisplayName("LottoNumber(1~45)이 포함된 LottoNumber 리스트를 주입하여 Lotto 생성")

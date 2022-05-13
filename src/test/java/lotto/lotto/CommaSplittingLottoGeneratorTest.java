@@ -34,6 +34,6 @@ class CommaSplittingLottoGeneratorTest {
         final Lotto expected = Lotto.of(1, 2, 3, 4, 5, 6);
         final LottoGenerator lottoGenerator = new CommaSplittingLottoGenerator("1,2,3,4,5,6");
         final Lotto lotto = lottoGenerator.generate();
-        assertThat(lotto.getLottoNumbers()).isEqualTo(expected.getLottoNumbers());
+        assertThat(lotto).isEqualTo(expected);
     }
 }

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -92,6 +93,23 @@ public class Lotto implements Purchasable {
         return numbers.stream()
                       .map(LottoNumber::new)
                       .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
