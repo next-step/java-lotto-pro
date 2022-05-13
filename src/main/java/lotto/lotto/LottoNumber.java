@@ -31,7 +31,7 @@ class LottoNumber implements Comparable<LottoNumber> {
             throw new LottoNumberFormatException(value);
         }
         try {
-            return Integer.parseInt(value);
+            return Integer.parseInt(value.trim());
         } catch (Exception e) {
             throw new LottoNumberFormatException(value);
         }
