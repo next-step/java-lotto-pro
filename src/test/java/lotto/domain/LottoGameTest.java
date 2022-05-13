@@ -1,24 +1,33 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 class LottoGameTest {
-    private LottoGame game;
-
-    @BeforeEach
-    public void beforeEach() {
-        game = new LottoGame(15000);
-    }
-
     @Test
-    void 로또_구매하기() {
+    public void 로또_구매하기() {
+        LottoGame game = new LottoGame(5000);
         game.purchaseLotto();
     }
 
     @Test
-    void 구매_로또_출력하기() {
+    public void 구매_로또_출력하기() {
+        LottoGame game = new LottoGame(5000);
         game.purchaseLotto();
         game.printMyLotto();
+    }
+
+    @Test
+    public void 로또_당첨통계_출력하기() {
+        List<Lotto> lottoList = Arrays.asList(
+                new Lotto(1, 2, 3, 4, 5, 6),
+                new Lotto(1, 2, 3, 4, 5, 7),
+                new Lotto(1, 2, 3, 4, 7, 8),
+                new Lotto(1, 2, 3, 7, 8, 9));
+        MyLotto myLotto = new MyLotto(lottoList);
+        LottoGame game = new LottoGame(myLotto, "1, 2, 3, 4, 5, 6");
+        game.showLottoStatistics();
     }
 }

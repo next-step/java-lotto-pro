@@ -36,6 +36,12 @@ public class LottoGame {
         this(Long.parseLong(money));
     }
 
+    public LottoGame(MyLotto myLotto, String lastWinningNumbers) {
+        this.money = money;
+        this.myLotto = myLotto;
+        this.lastWinningNumbers = lastWinningNumbers;
+    }
+
     public void readMoney() {
         String input = InputView.readUserInput(REQUEST_MONEY);
         money = new Money(input);
@@ -43,7 +49,7 @@ public class LottoGame {
 
     public void purchaseLotto() {
         long lottoQuantity = getLottoQuantity(money);
-        OutputView.printMessage((money.getMoney()/LOTTO_PRICE) + "개를 구매했습니다.");
+        OutputView.printMessage(lottoQuantity + "개를 구매했습니다.");
 
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoQuantity; i++) {
@@ -62,6 +68,18 @@ public class LottoGame {
 
     public void readLastWinningNumbers() {
         lastWinningNumbers = InputView.readUserInput(REQUEST_LAST_WINNING_NUMBERS);
+        OutputView.printLine();
+    }
+
+    public void showLottoStatistics() {
+        List<Ranking> rankings = myLotto.compareLottos(new Lotto(lastWinningNumbers));
+        result = new LottoResult(rankings);
+        OutputView.printMessage("당첨 통계");
+        OutputView.printMessage("---------");
+        for (int matching = 3; matching <= LOTTO_SIZE; matching++) {
+            Ranking rank = Ranking.findRank(matching);
+            OutputView.printMessage(matching + "개 일치 (" + rank.getReward() + ")- " + result.findRankings(matching).size() + "개");
+        }
     }
 
     private Lotto generateLotto() {
