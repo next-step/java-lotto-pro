@@ -13,4 +13,18 @@
 
 ### NumberGenerateStrategy
 - [x] 전략 패턴을 사용하여 LottoNumbers 외부에서 숫자 리스트를 주입 하기 위해 사용
-- [ ] 구현체 RandomNumberGenerateStrategy 
+- [x] 구현체 LottoRandomNumberGenerateStrategy -> Random으로 6개의 숫자를 발생
+
+### LottoWinningResults
+- [ ] 등수 , 개수 맵을 가짐
+- [ ] 구입한 LottoNumbers로 부터 등수 별 개수 결과를 구한다.
+
+### LottoRank
+- [ ] 맞은 숫자 개수에 따라서 등수 & 포상금 책정
+
+### Money
+- [ ] 음수 체크
+
+### LottoVendingMachine
+- [ ] 입력한 값에 따라 로또 매수 산정
+- [ ] 구입한 로또 매수 만큼 
