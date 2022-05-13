@@ -32,12 +32,12 @@ class ConsoleResultView implements ResultView {
     }
 
     private static  void printHeaderOfResult() {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
     }
 
     private static void printResult(WinningResult winningResult) {
-        for (LottoPrize lottoPrize : LottoPrize.values()) {
+        for (LottoPrize lottoPrize : LottoPrize.exclusiveMiss()) {
             final Integer count = winningResult.find(lottoPrize);
             System.out.printf("%s (%s원)- %s개%n", lottoPrize.description(), lottoPrize.prize(), count);
         }
