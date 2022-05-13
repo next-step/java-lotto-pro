@@ -92,13 +92,13 @@ public class LottoGame {
         OutputView.printMessage("---------");
         for (int matching = 3; matching <= LOTTO_SIZE; matching++) {
             Ranking rank = Ranking.findRank(matching);
-            OutputView.printMessage(matching + "개 일치 (" + rank.getReward() + ")- " + result.findRankings(matching).size() + "개");
+            OutputView.printMessage("%d개 일치 (%d원)- %d개\r\n", matching, rank.getReward(), result.findRankings(matching).size());
         }
     }
 
     public void showLottoProfit() {
-        long profit = result.calculateWinningMoney() / money.getMoney();
-        System.out.println("총 수익률은 " + profit + "입니다.");
+        double profit = (double)result.calculateWinningMoney() / money.getMoney();
+        OutputView.printMessage("총 수익률은 %.2f입니다.", profit);
     }
 
     private Lotto generateLotto() {

@@ -5,6 +5,10 @@ public class OutputView {
         System.out.println(message);
     }
 
+    public static void printMessage(String format, Object... args) {
+        System.out.printf(format, args);
+    }
+
     public static void printLine() {
         System.out.println();
     }
