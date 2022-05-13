@@ -52,6 +52,6 @@
 - [X] 로또 순위를 표현하는 Ranking 클래스
 - [X] 로또 비교 결과를 표현하는 LottoResult 클래스
 - [X] 돈을 표현하는 Money 클래스
-- [ ] 게임 정보를 표현하는 InputView 클래스 
-- [ ] 게임 정보를 표현하는 ResultView 클래스
+- [X] 게임 정보를 입력받는 InputView 클래스 
+- [ ] 게임 정보를 출력하는 ResultView 클래스
 - [X] 로또 게임의 정보를 표현하는 LottoConstant 클래스
