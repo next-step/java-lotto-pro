@@ -41,4 +41,17 @@ public class Total {
     public int hashCode() {
         return Objects.hash(totalHitMap);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder message = new StringBuilder();
+        for(Hit hit : totalHitMap.keySet()) {
+            message.append(printFormat(hit));
+        }
+        return message.toString();
+    }
+
+    private String printFormat(final Hit hit) {
+        return String.format(hit+"- %d개\n",totalHitMap.getOrDefault(hit, 0));
+    }
 }

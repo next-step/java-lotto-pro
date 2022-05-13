@@ -33,4 +33,11 @@ public class TotalTest {
         assertThat(new Total(Hit.ONE, Hit.TWO, Hit.THREE, Hit.FOUR).result(userBuyAmount))
                 .isEqualTo(new EarningsRate((Hit.THREE.cost(1) + Hit.FOUR.cost(1)), userBuyAmount));
     }
+
+    @DisplayName("출력 테스트")
+    @Test
+    void printTest() {
+        assertThat(new Total(Hit.THREE, Hit.FOUR).toString())
+                .isEqualTo("3개 일치 (5000원)- 1개\n" + "4개 일치 (50000원)- 1개\n");
+    }
 }
