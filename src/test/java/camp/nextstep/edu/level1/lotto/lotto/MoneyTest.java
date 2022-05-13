@@ -44,4 +44,20 @@ class MoneyTest {
 
         assertThat(sourceMoney.calculateRateByOtherMoney(targetMoney)).isEqualTo(2.0);
     }
+
+    @Test
+    void 가지고_있는_돈으로_특정_가격의_물건을_구입할_수_있는_수량을_요청하면_정상_동작해야_한다() {
+        Money money = new Money(10000);
+        long price = 3333;
+
+        assertThat(money.availablePurchaseCount(price)).isEqualTo(3);
+    }
+
+    @Test
+    void _0원_이하의_물건은_구입하면_예외가_발생해야_한다() {
+        Money money = new Money(10000);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> money.availablePurchaseCount(0));
+        assertThatIllegalArgumentException().isThrownBy(() -> money.availablePurchaseCount(-1));
+    }
 }

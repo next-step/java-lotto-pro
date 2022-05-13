@@ -13,9 +13,7 @@ public class Money {
     }
 
     public long availablePurchaseCount(long price) {
-        if (price == 0) {
-            return 0;
-        }
+        checkPurchasePrice(price);
         return this.value / price;
     }
 
@@ -46,6 +44,12 @@ public class Money {
     private void checkSubValidate(long value) {
         if (this.value - value < MIN_VALUE) {
             throw new IllegalArgumentException("0원 미만으로 만들 수 없습니다.");
+        }
+    }
+
+    private void checkPurchasePrice(long price) {
+        if (price <= 0) {
+            throw new IllegalArgumentException("0원 초과의 물건만 구입할 수 있습니다.");
         }
     }
 
