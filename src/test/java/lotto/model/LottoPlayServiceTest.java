@@ -35,6 +35,13 @@ class LottoPlayServiceTest {
         assertEquals(expectedPlayCount, lottos.getPlayCount());
     }
 
+    @DisplayName("입력받은 구매금액을 로또 개수로 변환한다.")
+    @ParameterizedTest(name = "[{0}]원 -> [{1}]게임")
+    @CsvSource(value = {"10000:10", "5000:5", "3000:3"}, delimiter = ':')
+    void buyLottoCount(String moneyWord, int expectedPlayCount) {
+        assertEquals(expectedPlayCount, lottoPlayService.buyLottoCount(moneyWord));
+    }
+
     @DisplayName("구매 금액이 1000원 미만(로또 최소 금액)인 경우")
     @ParameterizedTest
     @ValueSource(ints = {100, 0, 900})

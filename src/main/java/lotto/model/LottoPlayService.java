@@ -21,6 +21,10 @@ public class LottoPlayService {
         return new Lottos(playCount);
     }
 
+    public int buyLottoCount(String moneyWord) {
+        return 0;
+    }
+
     public Lottos generateLottosByPlayCount(int playCount) {
         Lottos lottos = new Lottos(playCount);
         for (int play = 0; play < lottos.getPlayCount(); play++) {
