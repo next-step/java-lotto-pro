@@ -1,8 +1,10 @@
 package study.lotto.automatic.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -61,6 +63,23 @@ class LottoDrawTest {
         void 당첨번호_6개_일치() {
             Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
             assertThat(lottoDraw.match(lotto)).isEqualTo(Division.DIVISION_ONE);
+        }
+
+        @Test
+        void 다수의_로또_당첨확인() {
+            List<Lotto> lottoList = Arrays.asList(
+                    new Lotto(new LottoNumbers(Arrays.asList(8, 21, 23, 41, 42, 43))),
+                    new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 38))),
+                    new Lotto(new LottoNumbers(Arrays.asList(7, 11, 16, 35, 36, 44))),
+                    new Lotto(new LottoNumbers(Arrays.asList(13, 14, 16, 38, 42, 45))),
+                    new Lotto(new LottoNumbers(Arrays.asList(1, 3, 5, 14, 22, 45))));
+
+            assertThat(lottoDraw.match(lottoList)).hasSize(4)
+                    .containsExactly(
+                            entry(Division.DIVISION_ONE, 0L),
+                            entry(Division.DIVISION_TWO, 1L),
+                            entry(Division.DIVISION_THREE, 0L),
+                            entry(Division.DIVISION_FOUR, 1L));
         }
     }
 }
