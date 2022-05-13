@@ -3,9 +3,9 @@ package stringaddcalculator;
 public class StringAddCalculator {
     public static Integer calculate(String value) {
         Integer result = 0;
-        InputString inputString = new InputString(value);
+        Numbers numbers = new Numbers(value);
 
-        for (Integer number : inputString.getNumbers()) {
+        for (Integer number : numbers.getNumbers()) {
             result += number;
         }
 
