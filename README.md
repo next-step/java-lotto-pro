@@ -51,6 +51,5 @@
     [X] 3~6개 맞춘 로또번호의 갯수, 등수별 금액, 수익률을 출력한다.
 
 ### 남은 리뷰사항
-    [ ] UI ResultView, InputView 클래스분할
     [ ] 테스트 코드 given-when-then 패턴 사용
     
