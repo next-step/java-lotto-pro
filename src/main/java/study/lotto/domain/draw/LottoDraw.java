@@ -1,4 +1,4 @@
-package study.lotto.automatic.domain;
+package study.lotto.domain.draw;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import study.lotto.automatic.domain.draw.Division;
+import study.lotto.domain.Lotto;
+import study.lotto.domain.LottoNumbers;
+import study.lotto.domain.lottomachine.LottoGenerator;
 
 public class LottoDraw {
     private final LottoNumbers winningNumber;

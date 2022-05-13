@@ -1,4 +1,4 @@
-package study.lotto.automatic.domain.draw;
+package study.lotto.domain.draw;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

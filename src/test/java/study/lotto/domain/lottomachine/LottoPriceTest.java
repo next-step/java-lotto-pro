@@ -1,10 +1,11 @@
-package study.lotto.automatic.domain;
+package study.lotto.domain.lottomachine;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import study.lotto.domain.lottomachine.LottoPrice;
 
 class LottoPriceTest {
     private final LottoPrice lottoPrice = new LottoPrice();

@@ -1,11 +1,12 @@
-package study.lotto.automatic.domain;
+package study.lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import study.lotto.automatic.domain.sorter.IntegerAscendingSorter;
-import study.lotto.automatic.domain.sorter.IntegerSorter;
+import study.lotto.domain.lottomachine.LottoGenerator;
+import study.lotto.domain.sorter.IntegerAscendingSorter;
+import study.lotto.domain.sorter.IntegerSorter;
 
 public class AutomaticLottoGenerator implements LottoGenerator {
 

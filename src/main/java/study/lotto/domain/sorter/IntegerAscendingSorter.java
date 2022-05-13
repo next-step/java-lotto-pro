@@ -1,4 +1,4 @@
-package study.lotto.automatic.domain.sorter;
+package study.lotto.domain.sorter;
 
 import java.util.Collections;
 import java.util.List;

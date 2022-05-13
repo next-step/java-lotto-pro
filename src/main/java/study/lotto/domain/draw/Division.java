@@ -1,4 +1,4 @@
-package study.lotto.automatic.domain.draw;
+package study.lotto.domain.draw;
 
 import java.math.BigDecimal;
 import java.util.Arrays;

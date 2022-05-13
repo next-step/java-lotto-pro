@@ -1,4 +1,4 @@
-package study.lotto.automatic.domain;
+package study.lotto.domain.draw;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
@@ -9,7 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import study.lotto.automatic.domain.draw.Division;
+import study.lotto.domain.AutomaticLottoGenerator;
+import study.lotto.domain.Lotto;
+import study.lotto.domain.LottoNumbers;
 
 class LottoDrawTest {
     @Test

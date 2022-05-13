@@ -1,4 +1,4 @@
-package study.lotto.automatic.domain;
+package study.lotto.domain.lottomachine;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,6 +7,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import study.lotto.domain.AutomaticLottoGenerator;
+import study.lotto.domain.Lotto;
+import study.lotto.domain.lottomachine.LottoMachine;
+import study.lotto.domain.lottomachine.LottoPrice;
 
 class LottoMachineTest {
     private static final BigDecimal LOTTO_PRICE = new BigDecimal(1000);

@@ -1,9 +1,10 @@
-package study.lotto.automatic.domain;
+package study.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import study.lotto.domain.lottomachine.LottoGenerator;
 
 class AutomaticLottoGeneratorTest {
     private final LottoGenerator lottoGenerator = new AutomaticLottoGenerator();

@@ -1,4 +1,4 @@
-package study.lotto.automatic.domain;
+package study.lotto.domain;
 
 import java.util.ArrayList;
 import java.util.HashSet;
