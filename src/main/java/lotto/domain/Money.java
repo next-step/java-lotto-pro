@@ -19,6 +19,10 @@ public class Money {
         }
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     public static Money from(int money) {
         return new Money(money);
     }

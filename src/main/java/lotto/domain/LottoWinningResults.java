@@ -28,4 +28,8 @@ public class LottoWinningResults {
                 filter(result -> result.equals(lottoRank)).
                 count();
     }
+
+    public double profitRate(Money purchaseMoney) {
+        return prizedMoney() / purchaseMoney.getMoney();
+    }
 }
