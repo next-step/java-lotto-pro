@@ -3,6 +3,7 @@ package camp.nextstep.edu.step3;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoGeneratorTest {
@@ -19,5 +20,12 @@ public class LottoGeneratorTest {
     void manualTest() {
         assertThat(new LottoGenerator().manual(new int[] {1,2,3,4,5,6}))
                 .isEqualTo(new Lotto(LottoTest.createLottoNumberArray(new int[] {1,2,3,4,5,6})));
+    }
+
+    @DisplayName("Lotto 수동 생성시 중복숫자 입력시 에러를 발생한다.")
+    @Test
+    void distinctTest() {
+        assertThatThrownBy(() -> new LottoGenerator().manual(new int[] {1,2,3,4,5,5}))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

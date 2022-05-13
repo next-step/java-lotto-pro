@@ -7,6 +7,7 @@ import java.util.List;
 
 public class LottoGenerator {
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+
     public LottoGenerator() {
         initLottoNumbers();
     }
@@ -29,6 +30,6 @@ public class LottoGenerator {
     }
 
     public Lotto manual(final int[] numbers) {
-        return new Lotto(Arrays.stream(numbers).mapToObj(LottoNumber::new).toArray(LottoNumber[]::new));
+        return new Lotto(Arrays.stream(numbers).mapToObj(LottoNumber::new).distinct().toArray(LottoNumber[]::new));
     }
 }
