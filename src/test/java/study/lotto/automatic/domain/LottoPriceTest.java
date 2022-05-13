@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoPriceTest {
+class LottoPriceTest {
     private final LottoPrice lottoPrice = new LottoPrice();
 
     @Test

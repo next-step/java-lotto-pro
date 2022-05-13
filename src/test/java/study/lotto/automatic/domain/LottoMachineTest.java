@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoMachineTest {
+class LottoMachineTest {
     private static final BigDecimal LOTTO_PRICE = new BigDecimal(1000);
 
     private LottoMachine lottoMachine;

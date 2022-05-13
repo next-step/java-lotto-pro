@@ -46,7 +46,7 @@ class LottoNumbersTest {
         @Test
         @DisplayName("toString을 하면 로또번호를 (, )로 연결하여 스트링으로 반환한다.")
         void toString_로또번호_콤마로_연결하여_스트링_변환() {
-            assertThat(validLottoNumbers.toString()).isEqualTo("1, 2, 3, 4, 5, 6");
+            assertThat(validLottoNumbers).hasToString("1, 2, 3, 4, 5, 6");
         }
     }
 

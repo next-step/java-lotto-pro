@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class LottoNumberTest {
+class LottoNumberTest {
     @ParameterizedTest(name = "로또 번호 {0}")
     @ValueSource(ints = {1, 45})
     @DisplayName("로또 번호는 1부터 45의 숫자만 허용한다.")
