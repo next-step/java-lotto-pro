@@ -4,6 +4,7 @@ import lotto.money.Money;
 import java.math.BigDecimal;
 import java.util.EnumMap;
 import java.util.Map;
+import static java.util.Objects.requireNonNull;
 
 public class WinningResult {
 
@@ -14,7 +15,7 @@ public class WinningResult {
     }
 
     protected WinningResult(Map<LottoPrize, Integer> results) {
-        this.results = results;
+        this.results = requireNonNull(results, "results");
     }
 
     public Integer find(LottoPrize lottoPrize) {

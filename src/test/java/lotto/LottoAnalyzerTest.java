@@ -30,7 +30,7 @@ class LottoAnalyzerTest {
         .isInstanceOf(NullPointerException.class);
     }
 
-    @DisplayName("오직 하나만 포함된 Lotto 리스트를 전달하여 결과 반환")
+    @DisplayName("다양한 Lotto 리스트를 전달하여 결과 반환")
     @ParameterizedTest
     @ArgumentsSource(AnalyzeArgumentsProvider.class)
     void analyzeWhenVariousLottoes(List<Lotto> lottoes, Map<LottoPrize, Integer> expectedMap) {

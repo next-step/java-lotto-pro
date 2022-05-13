@@ -45,7 +45,7 @@ class LottoExchangerTest {
     })
     void successfulExchange(long moneyValue, int expected) {
         final Money money = Money.of(moneyValue);
-        final List<Lotto> lottos = lottoExchanger.exchange(money);
-        assertThat(lottos).hasSize(expected);
+        final List<Lotto> lottoes = lottoExchanger.exchange(money);
+        assertThat(lottoes).hasSize(expected);
     }
 }
