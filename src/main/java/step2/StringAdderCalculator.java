@@ -2,18 +2,18 @@ package step2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import step2.ArgumentResolver.CustomResolver;
-import step2.ArgumentResolver.DefaultResolver;
-import step2.ArgumentResolver.EmptyStringResolver;
-import step2.ArgumentResolver.InputSingleNumberResolver;
-import step2.ArgumentResolver.Resolver;
+import step2.argumentresolver.CustomDelimiterStringArrayResolver;
+import step2.argumentresolver.DefaultDelimiterStringArrayResolver;
+import step2.argumentresolver.EmptyInputStringArrayResolver;
+import step2.argumentresolver.SingleNumberStringArrayResolver;
+import step2.argumentresolver.StringArrayResolver;
 import step2.validator.NotNumberValidator;
 import step2.validator.PositiveNumberValidator;
 import step2.validator.Validator;
 
 public class StringAdderCalculator {
 
-    private static final ArrayList<Resolver> resolvers = new ArrayList<Resolver>();
+    private static final ArrayList<StringArrayResolver> STRING_ARRAY_RESOLVERS = new ArrayList<StringArrayResolver>();
     private static final ArrayList<Validator> validators = new ArrayList<Validator>();
     private static String[] splitArray = null;
 
@@ -35,14 +35,14 @@ public class StringAdderCalculator {
     }
 
     private static void getSplitArrayByInput(String source) {
-        for (int i = 0; i < resolvers.size() && splitArray == null; i++) {
-            executeResolver(source, resolvers.get(i));
+        for (int i = 0; i < STRING_ARRAY_RESOLVERS.size() && splitArray == null; i++) {
+            executeResolver(source, STRING_ARRAY_RESOLVERS.get(i));
         }
     }
 
-    private static void executeResolver(String source, Resolver resolver) {
-        if (resolver.canResolve(source)) {
-            splitArray = resolver.resolve(source);
+    private static void executeResolver(String source, StringArrayResolver stringArrayResolver) {
+        if (stringArrayResolver.canResolve(source)) {
+            splitArray = stringArrayResolver.resolve(source);
         }
     }
 
@@ -55,10 +55,10 @@ public class StringAdderCalculator {
     private static void init() {
         splitArray = null;
 
-        resolvers.add(new EmptyStringResolver());
-        resolvers.add(new InputSingleNumberResolver());
-        resolvers.add(new DefaultResolver());
-        resolvers.add(new CustomResolver());
+        STRING_ARRAY_RESOLVERS.add(new EmptyInputStringArrayResolver());
+        STRING_ARRAY_RESOLVERS.add(new SingleNumberStringArrayResolver());
+        STRING_ARRAY_RESOLVERS.add(new DefaultDelimiterStringArrayResolver());
+        STRING_ARRAY_RESOLVERS.add(new CustomDelimiterStringArrayResolver());
 
         validators.add(new NotNumberValidator());
         validators.add(new PositiveNumberValidator());

@@ -6,18 +6,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.ArgumentResolver.CustomResolver;
-import step2.ArgumentResolver.DefaultResolver;
-import step2.ArgumentResolver.EmptyStringResolver;
-import step2.ArgumentResolver.InputSingleNumberResolver;
-import step2.ArgumentResolver.Resolver;
+import step2.argumentresolver.CustomDelimiterStringArrayResolver;
+import step2.argumentresolver.DefaultDelimiterStringArrayResolver;
+import step2.argumentresolver.EmptyInputStringArrayResolver;
+import step2.argumentresolver.SingleNumberStringArrayResolver;
+import step2.argumentresolver.StringArrayResolver;
 
-public class ResolverTest {
+public class StringArrayResolverTest {
 
-    Resolver defaultResolver = new DefaultResolver();
-    Resolver emptyStringResolver = new EmptyStringResolver();
-    Resolver inputSingleNumberResolver = new InputSingleNumberResolver();
-    Resolver customResolver = new CustomResolver();
+    StringArrayResolver defaultStringArrayResolver = new DefaultDelimiterStringArrayResolver();
+    StringArrayResolver emptyStringStringArrayResolver = new EmptyInputStringArrayResolver();
+    StringArrayResolver inputSingleNumberStringArrayResolver = new SingleNumberStringArrayResolver();
+    StringArrayResolver customStringArrayResolver = new CustomDelimiterStringArrayResolver();
 
 
     @ParameterizedTest
@@ -38,8 +38,8 @@ public class ResolverTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3&3", "1,2,3&3", "1:2:3&3", "1:2,3&3"}, delimiter = '&')
     public void defaultResolverTest(String source, int expectedSize) {
-        assertThat(defaultResolver.canResolve(source)).isTrue();
-        assertThat(defaultResolver.resolve(source))
+        assertThat(defaultStringArrayResolver.canResolve(source)).isTrue();
+        assertThat(defaultStringArrayResolver.resolve(source))
             .hasSize(expectedSize)
             .containsExactly("1", "2", "3");
     }
@@ -47,8 +47,8 @@ public class ResolverTest {
     @ParameterizedTest
     @CsvSource(value = {" &1", "   &1"}, delimiter = '&')
     public void emptyStringResolverTest(String source, int expectedSize) {
-        assertThat(emptyStringResolver.canResolve(source)).isTrue();
-        assertThat(emptyStringResolver.resolve(source))
+        assertThat(emptyStringStringArrayResolver.canResolve(source)).isTrue();
+        assertThat(emptyStringStringArrayResolver.resolve(source))
             .hasSize(expectedSize)
             .containsExactly("0");
     }
@@ -56,8 +56,8 @@ public class ResolverTest {
     @ParameterizedTest
     @ValueSource(strings = {"1", "2", "3"})
     public void inputSingleNumberResolverTest(String source) {
-        assertThat(inputSingleNumberResolver.canResolve(source)).isTrue();
-        assertThat(inputSingleNumberResolver.resolve(source))
+        assertThat(inputSingleNumberStringArrayResolver.canResolve(source)).isTrue();
+        assertThat(inputSingleNumberStringArrayResolver.resolve(source))
             .hasSize(1)
             .containsExactly(source);
     }
@@ -65,8 +65,8 @@ public class ResolverTest {
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2;3", "//:\n1:2:3", "//!\n1!2!3"})
     public void customResolverTest(String source) {
-        assertThat(customResolver.canResolve(source)).isTrue();
-        assertThat(customResolver.resolve(source))
+        assertThat(customStringArrayResolver.canResolve(source)).isTrue();
+        assertThat(customStringArrayResolver.resolve(source))
             .hasSize(3)
             .containsExactly("1", "2", "3");
     }

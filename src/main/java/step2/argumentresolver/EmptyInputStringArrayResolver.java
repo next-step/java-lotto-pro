@@ -1,6 +1,6 @@
 package step2.argumentresolver;
 
-public class EmptyStringResolver implements Resolver {
+public class EmptyInputStringArrayResolver implements StringArrayResolver {
 
     @Override
     public boolean canResolve(String source) {

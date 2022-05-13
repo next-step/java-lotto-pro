@@ -1,6 +1,6 @@
 package step2.argumentresolver;
 
-public class DefaultResolver implements Resolver {
+public class DefaultDelimiterStringArrayResolver implements StringArrayResolver {
 
     private final String DELIMITER_COMMA = ",";
     private final String DELIMITER_COLON = ":";

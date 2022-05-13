@@ -3,7 +3,7 @@ package step2.argumentresolver;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomResolver implements Resolver {
+public class CustomDelimiterStringArrayResolver implements StringArrayResolver {
 
     private final String REGEX_DELIMITER = "//(.)\n(.*)";
     private final String REGEX_SPLIT_SOURCE = "//(.)\n";
