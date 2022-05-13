@@ -29,10 +29,16 @@ class ConsoleResultView implements ResultView {
         for (Lotto lotto : lottoes) {
             System.out.println(lotto);
         }
+        printBlankLine();
+    }
+
+    private static void printBlankLine() {
+        System.out.println();
     }
 
     private static  void printHeaderOfResult() {
-        System.out.println("\n당첨 통계");
+        printBlankLine();
+        System.out.println("당첨 통계");
         System.out.println("---------");
     }
 
