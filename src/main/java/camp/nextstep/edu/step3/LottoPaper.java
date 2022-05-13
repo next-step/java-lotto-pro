@@ -22,6 +22,10 @@ public class LottoPaper {
                 .toArray(Hit[]::new));
     }
 
+    public int numberOfPurchases() {
+        return this.userLottoList.size();
+    }
+
     private void validation(Lotto[] lottoArray) {
         if (Objects.isNull(lottoArray) || lottoArray.length < 1) {
             throw new IllegalArgumentException("invalid construct input");

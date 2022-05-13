@@ -12,11 +12,12 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoPaperTest {
     private Lotto[] basicLottoArray;
+
     @BeforeEach
     void setUp() {
         basicLottoArray = Arrays.array(
-                new Lotto(LottoTest.createLottoNumberArray(new int[] {1,2,3,4,5,6})),
-                new Lotto(LottoTest.createLottoNumberArray(new int[] {1,2,3,4,5,7}))
+                new Lotto(LottoTest.createLottoNumberArray(new int[]{1, 2, 3, 4, 5, 6})),
+                new Lotto(LottoTest.createLottoNumberArray(new int[]{1, 2, 3, 4, 5, 7}))
         );
     }
 
@@ -40,7 +41,7 @@ public class LottoPaperTest {
     @DisplayName("당첨번호 인 Lotto 를 입력하고 결과로 Total 를 반환한다.")
     @Test
     void checkAllTest() {
-        Lotto result = new Lotto(LottoTest.createLottoNumberArray(new int[] {1,2,3,10,11,12}));
+        Lotto result = new Lotto(LottoTest.createLottoNumberArray(new int[]{1, 2, 3, 10, 11, 12}));
         assertThat(new LottoPaper(basicLottoArray).checkAll(result)).isEqualTo(new Total(Hit.THREE, Hit.THREE));
     }
 
@@ -49,5 +50,11 @@ public class LottoPaperTest {
     void parameterIsNotNull() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoPaper(basicLottoArray).checkAll(null));
+    }
+
+    @DisplayName("로또를 구매했으면 구매장수를 알수있다.")
+    @Test
+    void numberOfPurchasesTest() {
+        assertThat(new LottoPaper(basicLottoArray).numberOfPurchases()).isEqualTo(2);
     }
 }
