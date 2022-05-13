@@ -1,6 +1,6 @@
 package camp.nextstep.edu.step3;
 
-import java.util.Objects;
+import java.util.Arrays;
 
 public enum Hit {
     ZERO(0, 0),
@@ -21,6 +21,10 @@ public enum Hit {
 
     static Hit valueOf(final int hitCount) {
         return Hit.values()[hitCount];
+    }
+
+    public static Hit[] winningList() {
+        return Arrays.stream(Hit.values()).filter(Hit.TWO::isLow).toArray(Hit[]::new);
     }
 
     public boolean isLow(final Hit target) {

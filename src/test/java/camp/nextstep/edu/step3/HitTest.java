@@ -59,6 +59,12 @@ public class HitTest {
         return String.format("%d개 일치 (%d원)", count, prizeMoney);
     }
 
+    @DisplayName("당첨금이 있는 값만 반환한다.")
+    @Test
+    void getPrizeMoneyListTest() {
+        assertThat(Hit.winningList()).isEqualTo(new Hit[] {THREE,FOUR,FIVE,ALL});
+    }
+
     private static Stream<Arguments> provideHitAndCountAndPrizeMoney() {
         return Stream.of(
                 Arguments.of(ZERO, 0, 0),
