@@ -2,6 +2,7 @@ package lotto.lotto;
 
 import lotto.Purchasable;
 import lotto.money.Money;
+import lotto.util.CollectionUtils;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -67,7 +68,7 @@ public class Lotto implements Purchasable {
     }
 
     private static void validateSize(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers == null || lottoNumbers.isEmpty()) {
+        if (CollectionUtils.isEmpty(lottoNumbers)) {
             throw new IncorrectLottoNumberSizeException(lottoNumbers);
         }
         if (lottoNumbers.size() != SIZE) {
@@ -87,7 +88,7 @@ public class Lotto implements Purchasable {
     }
 
     private static List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
-        if (numbers == null || numbers.isEmpty()) {
+        if (CollectionUtils.isEmpty(numbers)) {
             return Collections.emptyList();
         }
         return numbers.stream()

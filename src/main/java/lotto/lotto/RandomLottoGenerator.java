@@ -1,5 +1,6 @@
 package lotto.lotto;
 
+import lotto.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +32,7 @@ class RandomLottoGenerator implements LottoGenerator {
     }
 
     private static List<LottoNumber> validated(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers == null || lottoNumbers.isEmpty()) {
+        if (CollectionUtils.isEmpty(lottoNumbers)) {
             throw new FailureCreatingLottoGeneratorException(lottoNumbers);
         }
         if (lottoNumbers.size() < Lotto.SIZE) {
