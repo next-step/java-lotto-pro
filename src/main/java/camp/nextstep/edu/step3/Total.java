@@ -1,6 +1,5 @@
 package camp.nextstep.edu.step3;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -9,16 +8,9 @@ public class Total {
     private final Map<Hit, Integer> totalHitMap = new HashMap<>();
 
     public Total(Hit... hits) {
-        initMap();
         for (Hit hit : hits) {
             increase(hit);
         }
-    }
-
-    private void initMap() {
-        Arrays.stream(Hit.values())
-                .filter(Hit.TWO::isLow)
-                .forEach(hit -> totalHitMap.put(hit, 0));
     }
 
     public EarningsRate result(final int amount) {
@@ -27,7 +19,7 @@ public class Total {
 
     private void increase(final Hit hit) {
         if (Hit.TWO.isLow(hit)) {
-            totalHitMap.put(hit, totalHitMap.get(hit) + 1);
+            totalHitMap.put(hit, totalHitMap.getOrDefault(hit, 0) + 1);
         }
     }
 
@@ -53,14 +45,10 @@ public class Total {
     @Override
     public String toString() {
         StringBuilder message = new StringBuilder();
-        for (Hit hit : sortedKey()) {
+        for (Hit hit : Hit.winningList()) {
             message.append(printFormat(hit));
         }
         return message.toString();
-    }
-
-    private Hit[] sortedKey() {
-        return totalHitMap.keySet().stream().sorted().toArray(Hit[]::new);
     }
 
     private String printFormat(final Hit hit) {
