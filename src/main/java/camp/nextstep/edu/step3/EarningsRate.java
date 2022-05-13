@@ -13,7 +13,7 @@ import java.util.stream.LongStream;
 public class EarningsRate {
     private final double rate;
 
-    public EarningsRate(final int totalPrizeAmount, final int userBuyAmount) {
+    public EarningsRate(final double totalPrizeAmount, final int userBuyAmount) {
         this.rate =  Math.floor((totalPrizeAmount / userBuyAmount) * 100) / 100.0;
     }
 
@@ -28,5 +28,20 @@ public class EarningsRate {
     @Override
     public int hashCode() {
         return Objects.hash(rate);
+    }
+
+    @Override
+    public String toString() {
+       return String.format("총 수익률은 %.2f입니다.%s",this.rate, messageType());
+    }
+
+    private String messageType() {
+        if (this.rate == 1) {
+            return "(기준이 1이기 때문에 결과적으로 같다라는 의미임)";
+        }
+        if (this.rate < 1) {
+            return "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+        }
+        return "(기준이 1이기 때문에 결과적으로 이익이라는 의미임)";
     }
 }
