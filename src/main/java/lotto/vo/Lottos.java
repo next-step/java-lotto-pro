@@ -20,6 +20,12 @@ public class Lottos {
         this.resultCountMap = new HashMap<>();
     }
 
+    public Lottos(final List<Lotto> lottoList){
+        this.lottoList = lottoList;
+        this.playCount = 0;
+        this.resultCountMap = new HashMap<>();
+    }
+
     public int getPlayCount() {
         return playCount;
     }
@@ -46,5 +52,9 @@ public class Lottos {
 
     public void setResultProfitRate(double resultProfitRate) {
         this.resultProfitRate = resultProfitRate;
+    }
+
+    public int lottoCount() {
+        return lottoList.size();
     }
 }

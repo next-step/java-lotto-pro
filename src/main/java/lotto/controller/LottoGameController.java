@@ -29,7 +29,7 @@ public class LottoGameController {
     public LottoGameDTO purchaseLotto(String moneyWord) {
         try {
             int buyLottoCount = lottoPlayService.buyLottoCount(moneyWord);
-            Lottos lottos = lottoPlayService.generateLottosByCount(buyLottoCount);
+            Lottos lottos = lottoPlayService.generateLottoByCount(buyLottoCount);
             String purchaseView = resultView.resultPurchaseView(lottos);
             return new LottoGameDTO(lottos, purchaseView, false);
         } catch (IllegalArgumentException e) {
@@ -38,7 +38,7 @@ public class LottoGameController {
     }
 
     public LottoGameDTO generateLottos(LottoGameDTO lottoGameDTO) {
-        Lottos lottos = lottoPlayService.generateLottosByCount(lottoGameDTO.getLottos().getPlayCount());
+        Lottos lottos = lottoPlayService.generateLottoByCount(lottoGameDTO.getLottos().getPlayCount());
         String generatedLottosView = resultView.generatedLottosView(lottos);
         return new LottoGameDTO(lottos, generatedLottosView, false);
     }

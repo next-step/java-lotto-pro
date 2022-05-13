@@ -27,13 +27,13 @@ public class LottoPlayService {
         }
     }
 
-    public Lottos generateLottosByCount(int count) {
-        Lottos lottos = new Lottos(count);
-        for (int play = 0; play < lottos.getPlayCount(); play++) {
+    public Lottos generateLottoByCount(int count) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int play = 0; play < count; play++) {
             Lotto lotto = lottoGeneratorService.generateLotto();
-            lottos.addLotto(lotto);
+            lottoList.add(lotto);
         }
-        return lottos;
+        return new Lottos(lottoList);
     }
 
     public void playLottoGame(Lottos lottos, List<Integer> winningNumberList) {
