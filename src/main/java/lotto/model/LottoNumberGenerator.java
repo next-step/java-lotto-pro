@@ -37,20 +37,23 @@ public class LottoNumberGenerator {
 
     public static LottoNumber of(List<Integer> numbers) {
         validateDuplicate(numbers);
-        List<Number> lottoNumber = numbers.stream()
-                .map(Number::of)
-                .collect(toList());
-        return new LottoNumber(lottoNumber);
+        return new LottoNumber(wrapIntegerToNumber(numbers));
     }
 
     public static LottoNumber of(String numbers) {
         validateFormat(numbers);
-        List<Number> lottoNumber = split(numbers).stream()
+        List<Integer> unwrapNumber = split(numbers).stream()
                 .map(String::trim)
                 .map(Integer::parseInt)
+                .collect(toList());
+        validateDuplicate(unwrapNumber);
+        return new LottoNumber(wrapIntegerToNumber(unwrapNumber));
+    }
+
+    private static List<Number> wrapIntegerToNumber(List<Integer> numbers) {
+        return numbers.stream()
                 .map(Number::of)
                 .collect(toList());
-        return new LottoNumber(lottoNumber);
     }
 
     private static List<String> split(String lottoNumber) {
