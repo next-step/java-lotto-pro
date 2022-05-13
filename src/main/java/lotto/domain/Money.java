@@ -22,4 +22,8 @@ public class Money {
     private boolean isInvalidMoney(long money) {
         return money < 0;
     }
+
+    public long getMoney() {
+        return money;
+    }
 }

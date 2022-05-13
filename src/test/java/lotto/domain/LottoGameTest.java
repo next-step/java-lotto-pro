@@ -14,7 +14,8 @@ class LottoGameTest {
 
     @Test
     public void 로또_구매하기() {
-        final int TOTAL_PRICE = 15000;
+        int TOTAL_PRICE = 15000;
+        LottoGame game = new LottoGame(TOTAL_PRICE);
         MyLotto myLotto = LottoGame.purchaseLotto(TOTAL_PRICE);
         assertThat(myLotto.getLottoList()).hasSize(TOTAL_PRICE / LOTTO_PRICE);
     }
