@@ -26,7 +26,6 @@ public class StringAddCalculator {
         final String[] stringNumbers = split(input);
         final List<Integer> numbers = new ArrayList<>();
         for (final String stringNumber : stringNumbers) {
-            System.out.println(stringNumber);
             numbers.add(Integer.parseInt(stringNumber));
         }
         return numbers;
