@@ -15,4 +15,9 @@ public class Lotto {
     public List<Integer> getNumberList() {
         return numberList;
     }
+
+
+    public int matchNumberCount(List<Integer> winningNumberList) {
+        return 0;
+    }
 }
