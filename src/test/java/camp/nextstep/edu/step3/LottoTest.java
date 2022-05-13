@@ -71,7 +71,7 @@ public class LottoTest {
         );
     }
 
-    private static LottoNumber[] createLottoNumberArray(final int[] numbers) {
+     static LottoNumber[] createLottoNumberArray(final int[] numbers) {
         return Arrays.stream(numbers).mapToObj(LottoNumber::new).toArray(LottoNumber[]::new);
     }
 }
