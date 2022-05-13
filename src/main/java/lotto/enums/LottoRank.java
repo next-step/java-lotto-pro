@@ -1,6 +1,7 @@
 package lotto.enums;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum LottoRank {
     FIRST(6, 2_000_000_000),
@@ -22,6 +23,14 @@ public enum LottoRank {
                 filter(lr -> lr.getCountOfMatch() == countOfMatch).
                 findAny().
                 orElse(MISS);
+    }
+
+    public static List<LottoRank> getPrizedRanks() {
+        return Arrays.asList(FIRST, SECOND, THIRD, FOURTH);
+    }
+
+    public static boolean isPrized(LottoRank rank) {
+        return getPrizedRanks().contains(rank);
     }
 
     public int getCountOfMatch() {
