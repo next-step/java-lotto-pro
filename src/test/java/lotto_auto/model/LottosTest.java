@@ -3,6 +3,8 @@ package lotto_auto.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -12,8 +14,7 @@ public class LottosTest {
 
     @BeforeEach
     public void 로또들_초기화() {
-        lottos = new Lottos();
-        lottos.appendLotto(new Lotto("1, 2, 3, 4, 5, 6"));
+        lottos = new Lottos(Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6))));
     }
 
     @Test
