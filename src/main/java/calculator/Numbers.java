@@ -9,6 +9,7 @@ public class Numbers {
 
     public Numbers(String[] inputs) {
         this.numbers = convertToNumbers(inputs);
+        checkNumbersRange();
     }
 
     private List<Integer> convertToNumbers(String[] inputs) {
@@ -17,5 +18,11 @@ public class Numbers {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 숫자 이외의 값은 입력할 수 없습니다!");
         }
+    }
+
+    private void checkNumbersRange() {
+        boolean hasNegative = this.numbers.stream().anyMatch(number -> number < 0);
+        if (hasNegative)
+            throw new IllegalArgumentException ("[ERROR] 0 이상의 숫자를 입력해 주세요!");
     }
 }
