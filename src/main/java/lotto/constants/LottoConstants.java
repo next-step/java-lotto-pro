@@ -10,7 +10,7 @@ public class LottoConstants {
 
     public static final int LOTTO_TICKET_PRICE = 1_000;
 
-    public static final String NUMBERS_DELIMITER = ", ";
+    public static final String NUMBERS_DELIMITER = ",";
     public static final String NUMBERS_PREFIX = "[";
     public static final String NUMBERS_SUFFIX = "]";
 }

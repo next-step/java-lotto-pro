@@ -30,7 +30,7 @@ public class InputView {
     }
 
     private String[] splitLottoNumbers(String inputLottoNumbers) {
-        return inputLottoNumbers.split(",");
+        return inputLottoNumbers.split(NUMBERS_DELIMITER);
     }
 
     private String readLine() {
