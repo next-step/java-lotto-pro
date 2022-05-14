@@ -7,9 +7,7 @@ public enum LottoRank {
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
-    FIFTH(2, 0),
-    SIXTH(1, 0),
-    SEVENTH(0, 0);
+    MISS(0, 0);
 
     private final int hits;
     private final int cashPrize;
@@ -31,6 +29,6 @@ public enum LottoRank {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.hits == hits)
                 .findAny()
-                .orElseThrow(() -> new IllegalStateException("로또 등수의 범위가 아닙니다."));
+                .orElse(MISS);
     }
 }

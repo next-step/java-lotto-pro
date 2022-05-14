@@ -21,9 +21,9 @@ class LottoRankTest {
                 Arguments.of(5, LottoRank.SECOND),
                 Arguments.of(4, LottoRank.THIRD),
                 Arguments.of(3, LottoRank.FOURTH),
-                Arguments.of(2, LottoRank.FIFTH),
-                Arguments.of(1, LottoRank.SIXTH),
-                Arguments.of(0, LottoRank.SEVENTH)
+                Arguments.of(2, LottoRank.MISS),
+                Arguments.of(1, LottoRank.MISS),
+                Arguments.of(0, LottoRank.MISS)
         );
     }
 }

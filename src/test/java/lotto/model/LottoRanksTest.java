@@ -18,7 +18,7 @@ class LottoRanksTest {
 
     @BeforeEach
     void setUp() {
-        lottoRankList = Arrays.asList(LottoRank.FIRST, LottoRank.SECOND, LottoRank.FIFTH, LottoRank.FIRST);
+        lottoRankList = Arrays.asList(LottoRank.FIRST, LottoRank.SECOND, LottoRank.MISS, LottoRank.FIRST);
         lottoRanks = LottoRanks.of(lottoRankList);
     }
 
@@ -36,7 +36,7 @@ class LottoRanksTest {
         assertAll(
                 () -> assertEquals(2, result.get(LottoRank.FIRST)),
                 () -> assertEquals(1, result.get(LottoRank.SECOND)),
-                () -> assertEquals(1, result.get(LottoRank.FIFTH))
+                () -> assertEquals(1, result.get(LottoRank.MISS))
         );
     }
 
