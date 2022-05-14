@@ -98,23 +98,29 @@
   - 비교 메소드를 통해서 값을 비교할수 있다.
   - 동일한 당첨금에 갯수를 입력 시 당첨금 * 갯수 에 대한 금액을 반환한다. 
   
-- Total
-  - Hit[] 입력을 받고 result 메소드를 통해서 EarningsRate 를 반환한다.
+- LottoResult
+  - HitList 입력을 받고 earningRate 메소드를 통해서 EarningsRate 를 반환한다.
   - Total 은 Hit 의 THREE 부터 정보를 저장한다.
 
 - LottoPaper
-  - 일급 객체로써 Lotto[] 를 입력 받는다.
-  - checkAll 메소드를 통해서 정중한 통계 정보를 반환한다.
+  - 일급 객체로써 LottoList 를 입력 받는다.
+  - checkAll 메소드를 통해서 총 당청금을 반환한다.
 
 - EarningsRate
-  - 통계 정보로써 총당첨금 과 사용자 구매 금액 정보를 입력 받는다.
   - rate 정보를 멤버 변수로 가진다.
 
 - LottoVendingMachine
   - 사용자가 로또 구매할 금액을 입력하면 LottoPaper 를 반환한다.
-  - 로또 한장의 가격은 1000 원이며 1000원 단위로 Lotto 가 발급된다.
+  - 사용자가 구매한 금액만큼 Lotto 가 발급된다.
 
 - LottoGenerator
-  - create 메소드를 통해서 숫자가 6개인 Lotto 를 생성한다. 
+  - 로또를 자동과 수동 모드를 제공한다.
 
+- LottoNumbers
+  - 로또 숫자 1부터 45까지 정보를 가지고 있다.
+  - 섞는 방법을 입력하여 로또를 추출한다.
+  
+- LottoMoney
+  - 사용자가 로또 구매할 금액을 가지고 있다.
+  - 총 당청금액을 입력하면 총 수익률을 반환한다.
 
