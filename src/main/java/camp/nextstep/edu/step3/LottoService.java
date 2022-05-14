@@ -12,10 +12,10 @@ public class LottoService {
     }
 
     public void task() {
-        final int purchaseAmount = presenter.askPurchaseAmount();
+        final LottoMoney purchaseAmount = presenter.askPurchaseAmount();
         final LottoPaper lottoPaper = machine.issued(purchaseAmount);
         presenter.printLottoList(lottoPaper);
-        final LottoResult result = lottoPaper.checkAll(generator.manual(presenter.askLastWeekWinningNumber()));
-        presenter.printResult(result, result.result(purchaseAmount));
+        final LottoResult winningResult = lottoPaper.checkAll(generator.manual(presenter.askLastWeekWinningNumber()));
+        presenter.printResult(winningResult, winningResult.earningRate(purchaseAmount));
     }
 }
