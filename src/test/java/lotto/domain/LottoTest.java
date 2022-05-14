@@ -46,4 +46,12 @@ public class LottoTest {
             Lotto lotto = new Lotto(numbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("Lotto의 LottoNumber List는 정렬되어있다.")
+    void Lotto_정렬_테스트(){
+        List<Integer> numbers = new ArrayList<>(Arrays.asList(6, 5, 4, 3, 2, 1));
+        Lotto lotto = new Lotto(numbers);
+        assertThat(lotto.lottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+    }
 }

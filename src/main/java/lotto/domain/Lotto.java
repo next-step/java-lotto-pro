@@ -15,6 +15,7 @@ public class Lotto {
             validateNumberUnique(lottoNumber);
             lottoNumbers.add(lottoNumber);
         }
+        Collections.sort(lottoNumbers);
     }
 
     private void validateNumberSize(List<Integer> numbers) {
