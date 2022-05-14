@@ -6,6 +6,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class WinningStatus {
+    private static final long DEFAULT_WINNING_COUNT = 0L;
     private final Map<Rank, Long> value;
 
     public WinningStatus(List<Rank> ranks) {
@@ -18,7 +19,7 @@ public class WinningStatus {
     }
 
     public long numberOfWinning(Rank rank) {
-        return this.value.getOrDefault(rank, 0L);
+        return this.value.getOrDefault(rank, DEFAULT_WINNING_COUNT);
     }
 
     public Money getWinningReward() {

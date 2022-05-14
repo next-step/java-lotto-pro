@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
+    private static final int ZERO = 0;
     private final int value;
 
     private Money(int value) {
@@ -11,8 +12,8 @@ public class Money {
     }
 
     private void validate(int value) {
-        if (value < 0) {
-            throw new IllegalArgumentException("돈은 0보다 작을 수 없습니다.");
+        if (value < ZERO) {
+            throw new IllegalArgumentException(String.format("돈은 %d보다 작을 수 없습니다.",ZERO));
         }
     }
 
