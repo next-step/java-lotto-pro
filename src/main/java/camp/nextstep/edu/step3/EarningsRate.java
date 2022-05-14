@@ -1,20 +1,12 @@
 package camp.nextstep.edu.step3;
 
-import java.math.BigDecimal;
-import java.nio.file.Path;
 import java.util.Objects;
-import java.util.function.DoublePredicate;
-import java.util.function.IntPredicate;
-import java.util.function.LongPredicate;
-import java.util.stream.DoubleStream;
-import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 
 public class EarningsRate {
     private final double rate;
 
-    public EarningsRate(final double totalPrizeAmount, final int userBuyAmount) {
-        this.rate =  Math.floor((totalPrizeAmount / userBuyAmount) * 100) / 100.0;
+    public EarningsRate(final double rate) {
+        this.rate = rate;
     }
 
     @Override
