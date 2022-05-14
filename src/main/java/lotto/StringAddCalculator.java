@@ -45,11 +45,11 @@ public class StringAddCalculator {
 
     public static int stringToIntValue(String text) {
         int number = Integer.parseInt(text);
-        validationNumber(number);
+        checkThrowNumber(number);
         return number;
     }
 
-    private static void validationNumber(int number) {
+    private static void checkThrowNumber(int number) {
         if (isNegative(number))
             throw new IllegalArgumentException(ERROR_NOT_ALLOW_VALUE_MESSAGE);
     }
