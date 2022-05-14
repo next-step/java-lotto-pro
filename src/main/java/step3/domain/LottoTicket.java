@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    private final List<LottoElement> lottoElements = new ArrayList();
+    private final ArrayList<LottoElement> lottoElements = new ArrayList();
 
 
     protected LottoTicket(List<Integer> lottoElementsSource) {
@@ -43,5 +43,25 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또는 숫자로만 이루어져 있습니다");
         }
     }
+
+    public int getMatchCountWith(LottoTicket lottoTicket) {
+        return lottoTicket.match(lottoElements);
+    }
+
+    public int match(ArrayList<LottoElement> compareLottoElements) {
+        int matchCount = 0;
+        for (int i = 0; i < LottoElementSize; i++) {
+            matchCount = matchCount + compare(compareLottoElements.get(i));
+        }
+        return matchCount;
+    }
+
+    private int compare(LottoElement lottoElement) {
+        if (lottoElements.contains(lottoElement)) {
+            return 1;
+        }
+        return 0;
+    }
+
 
 }
