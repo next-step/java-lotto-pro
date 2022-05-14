@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum MatchPoint {
     FIRST(6, 2_000_000_000),
-    //SECOND(5, 30_000_000),
+    SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
@@ -23,14 +23,20 @@ public enum MatchPoint {
     }
 
     public static MatchPoint[] findValues() {
-        return new MatchPoint[] {FIFTH, FOURTH, THIRD, FIRST};
+        return new MatchPoint[] {FIFTH, FOURTH, THIRD, SECOND, FIRST};
     }
 
-    public static MatchPoint findMatchPointByMatchPointCount(int count){
-        return Arrays.stream(MatchPoint.findValues())
+    public static MatchPoint findMatchPointByMatchPointCount(int count, boolean matchBonus){
+        MatchPoint resultMatchPoint = Arrays.stream(MatchPoint.findValues())
                 .filter(matchPoint -> matchPoint.matchPointCount == count)
                 .findFirst()
                 .orElse(MISS);
+
+        if(resultMatchPoint.getMatchPointCount() == 5 && matchBonus){
+            return MatchPoint.SECOND;
+        }
+
+        return resultMatchPoint;
     }
 
     public int getMatchPointCount() {

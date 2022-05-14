@@ -37,6 +37,19 @@ public class WinningLottoTest {
     }
 
     @Test
+    void compareWinningLottos_2등당첨() {
+        winningLotto.compareWinningLotto(new Lotto(Arrays.asList(1,2,3,4,5,7)));
+
+        assertAll(
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FIFTH)).isEqualTo(0),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FOURTH)).isEqualTo(0),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.THIRD)).isEqualTo(0),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.SECOND)).isEqualTo(1),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FIRST)).isEqualTo(0)
+        );
+    }
+
+    @Test
     void findEarningsRate() {
         Lottos lottos = new Lottos(Arrays.asList(
                 new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43)),

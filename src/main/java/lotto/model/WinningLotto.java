@@ -28,7 +28,7 @@ public class WinningLotto {
         int count = lotto.findMatchCount(this.lotto);
         boolean matchBonus = lotto.isMatchBonus(this.bonusBall);
 
-        winningStatus.recordResults(count);
+        winningStatus.recordResults(count, matchBonus);
     }
 
     public int findWinningCount(MatchPoint matchPoint) {
