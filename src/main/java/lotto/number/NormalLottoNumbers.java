@@ -1,5 +1,6 @@
 package lotto.number;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -10,8 +11,9 @@ public class NormalLottoNumbers implements LottoNumbers {
 
     private List<LottoNumber> lottoNumberList;
 
-    public NormalLottoNumbers(List<LottoNumber> lottoNumbers){
-        this.lottoNumberList = Collections.unmodifiableList(lottoNumbers);
+    public NormalLottoNumbers(List<LottoNumber> lottoNumberList){
+        Collections.sort(lottoNumberList);
+        this.lottoNumberList = Collections.unmodifiableList(lottoNumberList);
     }
 
     public List<LottoNumber> getLottoNumberList() {
@@ -36,9 +38,7 @@ public class NormalLottoNumbers implements LottoNumbers {
 
     @Override
     public String toString() {
-        return "NormalLottoNumbers{" +
-                "lottoNumberList=" + lottoNumberList +
-                '}';
+        return Arrays.toString(lottoNumberList.toArray());
     }
 
     @Override
