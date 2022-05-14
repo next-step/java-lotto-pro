@@ -1,10 +1,10 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
+import lotto.domain.Money;
 import lotto.view.InputView;
 
 public class LottoController {
     public static void simulateLotto(){
-        InputView.readMoney();
+        Money money = new Money(InputView.readMoney());
     }
 }
