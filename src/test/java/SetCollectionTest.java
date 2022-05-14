@@ -38,7 +38,7 @@ public class SetCollectionTest {
     @DisplayName("Set에 값이 있으면 true, 값이 없으면 false를 응답한다.")
     @ParameterizedTest
     @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
-    void checkHasValue(String input, String expected) {
-        assertThat(numbers.contains(Integer.parseInt(input))).isEqualTo(Boolean.parseBoolean(expected));
+    void checkHasValue(int input, boolean expected) {
+        assertThat(numbers.contains(input)).isEqualTo(expected);
     }
 }
