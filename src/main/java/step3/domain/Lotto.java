@@ -9,6 +9,9 @@ public class Lotto {
     public final static int LOTTO_MAX_NUMBER = 45;
     public final static int LOTTO_FIRST_INDEX = 0;
     public final static int LOTTO_SIZE = 6;
+    public static final int LOTTO_FIXED_PRICE = 1000;
+    private static final int IS_MATCHES = 1;
+    private static final int IS_NOT_MATCHES = 0;
 
     private final List<Integer> numbers;
 
@@ -38,6 +41,21 @@ public class Lotto {
 
     public Integer get(int index) {
         return numbers.get(index);
+    }
+
+    public int matches(final LottoWinningNumbers winningNumbers) {
+        int matchesCount = 0;
+        for (int i = 0; i < winningNumbers.size(); i++) {
+            matchesCount += matchesThenOneElseZero(winningNumbers.get(i));
+        }
+        return matchesCount;
+    }
+
+    private int matchesThenOneElseZero(final Integer winningNumber) {
+        if(this.numbers.contains(winningNumber)) {
+            return IS_MATCHES;
+        }
+        return IS_NOT_MATCHES;
     }
 
     @Override

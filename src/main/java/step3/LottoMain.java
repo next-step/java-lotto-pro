@@ -3,6 +3,7 @@ package step3;
 import step3.domain.LottoWinningNumbers;
 import step3.domain.Lottos;
 import step3.domain.LottosGenerator;
+import step3.domain.LottosWinningStatistics;
 import step3.viewer.LottoViewer;
 
 public class LottoMain {
@@ -20,5 +21,7 @@ public class LottoMain {
         LottoViewer.printLottos(lottos);
         final String inputWinningNumbers = LottoViewer.inputWinningNumbers();
         final LottoWinningNumbers winningNumbers = new LottoWinningNumbers(inputWinningNumbers);
+        final LottosWinningStatistics lottosWinningStatistics = new LottosWinningStatistics(lottos, winningNumbers);
+        LottoViewer.printStatistics(lottosWinningStatistics);
     }
 }

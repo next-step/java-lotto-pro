@@ -59,4 +59,12 @@ public class LottoWinningNumbers {
             throw new IllegalArgumentException(WINNING_NUMBER_DUPLICATE_ERROR_MESSAGE);
         }
     }
+
+    public int size() {
+        return winningNumbers.size();
+    }
+
+    public Integer get(final int index) {
+        return winningNumbers.get(index);
+    }
 }

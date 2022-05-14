@@ -2,6 +2,7 @@ package step3.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private static final int DEFAULT_LOTTO_COUNT = 1;
@@ -31,5 +32,15 @@ public class Lottos {
         return lottos.stream()
                 .map(Lotto::toString)
                 .toArray(String[]::new);
+    }
+
+    public List<Integer> match(final LottoWinningNumbers winningNumbers) {
+        return lottos.stream()
+                .map(lotto ->
+                        lotto.matches(winningNumbers)
+                )
+                .collect(
+                        Collectors.toList()
+                );
     }
 }
