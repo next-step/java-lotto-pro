@@ -1,10 +1,13 @@
 package camp.nextstep.edu.step3;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
     private static final int VALID_SIZE = 6;
-    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validationSize(lottoNumbers);
@@ -26,18 +29,6 @@ public class Lotto {
         return userLottoNumbers.stream()
                 .filter(this.lottoNumbers::contains)
                 .toArray().length;
-    }
-
-
-    private void sortedLottoNumbers(final LottoNumber[] lottoNumbers) {
-        this.lottoNumbers = Arrays.asList(lottoNumbers);
-        Collections.sort(this.lottoNumbers);
-    }
-
-    private void validationInputSize(final int inputSize) {
-        if (!Objects.equals(VALID_SIZE, inputSize)) {
-            throw new IllegalArgumentException("LottoNumberArray invalid size : " + inputSize);
-        }
     }
 
     @Override

@@ -15,6 +15,9 @@ public class LottoResult {
     }
 
     public EarningsRate earningRate(final LottoMoney money) {
+        if (Objects.isNull(money)) {
+            throw new IllegalArgumentException("invalid input");
+        }
         return money.calculate(totalPrizeAmount());
     }
 

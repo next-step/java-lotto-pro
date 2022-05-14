@@ -2,6 +2,7 @@ package camp.nextstep.edu.step3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class LottoNumbers {
@@ -19,12 +20,21 @@ public class LottoNumbers {
         this.numbers.addAll(numbers);
     }
 
-    public boolean isContains(LottoNumber lottoNumber) {
-        return this.numbers.contains(lottoNumber);
-    }
-
     public Lotto extract(Consumer<List<LottoNumber>> consumer)  {
         consumer.accept(numbers);
         return new Lotto(numbers.subList(0, 6));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

@@ -33,7 +33,7 @@ public class LottoGeneratorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    private LottoNumbers testLottoNumbers() {
+    static LottoNumbers testLottoNumbers() {
         return new LottoNumbers(Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).mapToObj(LottoNumber::new).collect(Collectors.toList()));
     }
 }
