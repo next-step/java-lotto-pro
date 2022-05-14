@@ -28,6 +28,10 @@ public class LottoNumbers {
         return result;
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
     private List<Integer> initNumbers() {
         randomShuffle.shuffle(ALL_NUMBERS);
         List<Integer> result = ALL_NUMBERS.subList(0, LOTTO_SIZE);
@@ -36,7 +40,18 @@ public class LottoNumbers {
         return result;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public WinningRank matchWinningNumbers(List<Integer> winningNumbers) {
+        int matchCount = 0;
+        for (Integer winningNumber : winningNumbers) {
+            matchCount += matchWinningNumber(winningNumber);
+        }
+        return WinningRank.getWinningRank(matchCount);
+    }
+
+    private Integer matchWinningNumber(Integer winningNumber) {
+        if (numbers.contains(winningNumber)) {
+            return 1;
+        }
+        return 0;
     }
 }
