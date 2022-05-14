@@ -79,4 +79,25 @@ public class LottoNumbersTest {
 
         assertThat(lottoNumbers.contains(new LottoNumber(number))).isEqualTo(expected);
     }
+
+    @Test
+    void LottoNumbers는_Iterable_객체이다() {
+        LottoNumbers lottoNumbers = new LottoNumbers(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        );
+
+        assertThat(lottoNumbers).containsExactlyInAnyOrder(
+                new LottoNumber(6),
+                new LottoNumber(5),
+                new LottoNumber(4),
+                new LottoNumber(3),
+                new LottoNumber(2),
+                new LottoNumber(1)
+        );
+    }
 }

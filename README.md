@@ -47,6 +47,7 @@ LottoNumbers
 - [X] 6개의 LottoNumber 를 가질 수 있다.
 - [X] 중복된 LottoNumber 를 포함할 수 없다.
 - [X] LottoNumber를 포함하고 있는지 여부를 확인할 수 있다.
+- [X] Iterable 한 객체이다.
 
 Prize
 - [X] 당첨 번호를 포함한 갯수를 확인하여 당첨정보를 확인할 수 있다.
@@ -54,6 +55,9 @@ Prize
 ContainCount
 - [X] 음수가 될 수 없고, LottoNumbers 의 최대 길이를 초과할 수 없다.
 - [X] 값 객체이다.
+
+Lottery
+- [X] 당첨 번호와 로또번호를 비교할 수 있다. 
 
 
 
