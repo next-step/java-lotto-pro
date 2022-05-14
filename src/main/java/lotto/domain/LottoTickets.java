@@ -25,4 +25,13 @@ public class LottoTickets {
     public int size() {
         return this.lottoTickets.size();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (LottoTicket lottoTicket : this.lottoTickets) {
+            sb.append(lottoTicket.toString()).append("\n");
+        }
+        return sb.toString();
+    }
 }

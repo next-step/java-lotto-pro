@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.constants.Constants;
 import lotto.constants.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

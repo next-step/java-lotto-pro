@@ -14,11 +14,19 @@ public class Money {
         this.money = money;
     }
 
+    public boolean isLessThenLottoPrice() {
+        return money < Constants.LOTTO_PRICE;
+    }
+
     public int purchaseCount() {
         int purchaseCount = this.money / Constants.LOTTO_PRICE;
         if (purchaseCount > Constants.MAX_PURCHASE_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.MAX_PURCHASE_LOTTO);
         }
         return purchaseCount;
+    }
+
+    public int getMoney() {
+        return money;
     }
 }

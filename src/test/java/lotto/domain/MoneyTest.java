@@ -17,6 +17,16 @@ class MoneyTest {
                 .hasMessage(ErrorMessage.LESS_THEN_MIN_MONEY);
     }
 
+    @DisplayName("로또 구입 가능한 최소 금액이 아닌경우 체크")
+    @Test
+    void test_로또_구입_최소_금액_아닌경우() {
+        //given
+        int inputMoney = 500;
+        Money money = new Money(inputMoney);
+        //when & then
+        assertThat(money.isLessThenLottoPrice()).isTrue();
+    }
+
     @DisplayName("최대 구입 가능한 개수 확인")
     @Test
     void test_최대_구입_개수() {

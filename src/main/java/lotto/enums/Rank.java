@@ -4,6 +4,7 @@ import lotto.domain.MatchCount;
 import lotto.domain.Money;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
     FIRST(6, 2000000000),
@@ -28,7 +29,19 @@ public enum Rank {
                 .orElse(Rank.LOSE);
     }
 
+    public static List<Rank> winningRanks() {
+        return Arrays.asList(Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
+    }
+
     public static boolean isWinning(Rank rank) {
         return rank != Rank.LOSE;
+    }
+
+    public int getMatchCount() {
+        return matchCount.getMatchCount();
+    }
+
+    public int getMoney() {
+        return money.getMoney();
     }
 }

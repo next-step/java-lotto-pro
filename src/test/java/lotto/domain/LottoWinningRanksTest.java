@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.constants.DisplayMessage;
 import lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,13 +17,14 @@ class LottoWinningRanksTest {
     @BeforeEach
     void setUp() {
         //given
-        List<Integer> first = Arrays.asList(1, 2, 3, 4, 5, 6);
+        LottoTicket winningNumbers = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        List<Integer> first = Arrays.asList(1, 2, 3, 7, 8, 9);
         LottoTicket userNumbers = new LottoTicket(first);
-        LottoTicket winningNumbers = new LottoTicket(first);
         lottoWinningRanks = new LottoWinningRanks();
         lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers));
 
-        List<Integer> second = Arrays.asList(1, 2, 3, 4, 5, 7);
+        List<Integer> second = Arrays.asList(4, 5, 6, 10, 11, 12);
         userNumbers = new LottoTicket(second);
         lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers));
 
@@ -42,6 +44,45 @@ class LottoWinningRanksTest {
     @Test
     void test_순위_개수() {
         //when & then
-        assertThat(lottoWinningRanks.rankCount(Rank.FIRST)).isEqualTo(1);
+        assertThat(lottoWinningRanks.rankCount(Rank.FOURTH)).isEqualTo(2);
+    }
+
+    @DisplayName("로또 수익률 조회")
+    @Test
+    void test_로또_수익률() {
+        //given
+        Money purchaseMoney = new Money(14000);
+        //when & then
+        assertThat(lottoWinningRanks.returnRate(purchaseMoney)).isEqualTo(0.71d);
+    }
+
+    @DisplayName("수익 결과 손해")
+    @Test
+    void test_수익_결과_손해() {
+        //given
+        Money purchaseMoney = new Money(14000);
+        //when & then
+        assertThat(lottoWinningRanks.resultDescription(purchaseMoney))
+                .isEqualTo(DisplayMessage.LOSS);
+    }
+
+    @DisplayName("수익 결과 원금")
+    @Test
+    void test_수익_결과_원금() {
+        //given
+        Money purchaseMoney = new Money(10000);
+        //when & then
+        assertThat(lottoWinningRanks.resultDescription(purchaseMoney))
+                .isEqualTo(DisplayMessage.PRINCIPAL_AND_POST_POSITION);
+    }
+
+    @DisplayName("수익 결과 이득")
+    @Test
+    void test_수익_결과_이득() {
+        //given
+        Money purchaseMoney = new Money(5000);
+        //when & then
+        assertThat(lottoWinningRanks.resultDescription(purchaseMoney))
+                .isEqualTo(DisplayMessage.GAIN_AND_POST_POSITION);
     }
 }

@@ -10,11 +10,15 @@ import java.util.stream.IntStream;
 public class LottoSeller {
     private final Money receivedMoney;
 
-    public LottoSeller(int receivedMoney) {
-        if (receivedMoney < Constants.LOTTO_PRICE) {
+    public LottoSeller(Money receivedMoney) {
+        if (receivedMoney.isLessThenLottoPrice()) {
             throw new IllegalArgumentException(ErrorMessage.LESS_THEN_PRICE_MONEY);
         }
-        this.receivedMoney = new Money(receivedMoney);
+        this.receivedMoney = receivedMoney;
+    }
+
+    public LottoSeller(int receivedMoney) {
+        this(new Money(receivedMoney));
     }
 
     public LottoTickets autoLottoTickets() {

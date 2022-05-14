@@ -16,6 +16,10 @@ public class MatchCount {
         this.matchCount = matchCount;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
