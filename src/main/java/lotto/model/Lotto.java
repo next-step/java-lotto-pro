@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import lotto.constant.LottoRank;
 
 public class Lotto {
 
@@ -23,6 +24,10 @@ public class Lotto {
         return numberList.stream()
                 .mapToInt(Integer::intValue)
                 .toArray();
+    }
+
+    public LottoRank matchRank(List<Integer> winningNumberList) {
+        return LottoRank.of(matchNumberCount(winningNumberList));
     }
 
     @Override
