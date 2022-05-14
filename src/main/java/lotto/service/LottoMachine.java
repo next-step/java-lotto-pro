@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.service;
 
 import lotto.model.LottoGenerator;
 import lotto.model.LottoNumbers;
