@@ -83,7 +83,7 @@ public class GameModel {
 
     private void initStatistics() {
         statistics = new HashMap<>();
-        for (int i = 1; i <= LOTTO_ELEMENTS_SIZE; i++) {
+        for (int i = 0; i <= LOTTO_ELEMENTS_SIZE; i++) {
             statistics.put(i, 0);
         }
     }
