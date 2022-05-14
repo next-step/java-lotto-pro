@@ -26,7 +26,11 @@ public class StringCalculator {
     }
 
     private int[] stringArrayToIntArray(String[] stringNumbers) {
-        return Arrays.stream(stringNumbers).mapToInt(Integer::parseInt).toArray();
+        int[] numbers = new int[stringNumbers.length];
+        for (int i = 0; i < stringNumbers.length; i++) {
+            numbers[i] = Integer.parseInt(stringNumbers[i]);
+        }
+        return numbers;
     }
 
     private void validate(String[] inputStrings) {
