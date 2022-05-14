@@ -86,7 +86,7 @@ class MoneyTest {
             Money.of("1").deduct(money);
         })
         .isInstanceOf(CanNotDeductException.class)
-        .hasMessageContaining("구매가 불가능 합니다.");
+        .hasMessageContaining("차감이 불가능 합니다.");
     }
 
     static class FailureDeductArgumentsProvider implements ArgumentsProvider {
@@ -94,7 +94,7 @@ class MoneyTest {
         public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
             return Stream.of(
                     Arguments.of(Money.ONE_THOUSAND),
-                    Arguments.of(Money.of(1))
+                    Arguments.of(Money.of(10))
             );
         }
     }
