@@ -1,6 +1,6 @@
-package domain;
+package calculator.domain;
 
-import exception.ExceptionType;
+import calculator.exception.ExceptionType;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;

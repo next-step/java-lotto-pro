@@ -1,14 +1,16 @@
+package calculator;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import domain.CustomDelimiterPlusStrategy;
-import domain.DefaultDelimiterPlusStrategy;
-import domain.EmptyPlusStrategy;
-import domain.PlusStrategy;
-import domain.PlusStrategyFactory;
-import domain.SingleNumberPlusStrategy;
-import exception.ExceptionType;
+import calculator.domain.CustomDelimiterPlusStrategy;
+import calculator.domain.DefaultDelimiterPlusStrategy;
+import calculator.domain.EmptyPlusStrategy;
+import calculator.domain.PlusStrategy;
+import calculator.domain.PlusStrategyFactory;
+import calculator.domain.SingleNumberPlusStrategy;
+import calculator.exception.ExceptionType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

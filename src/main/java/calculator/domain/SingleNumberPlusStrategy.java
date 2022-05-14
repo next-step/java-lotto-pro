@@ -1,4 +1,4 @@
-package domain;
+package calculator.domain;
 
 public class SingleNumberPlusStrategy implements PlusStrategy {
     @Override

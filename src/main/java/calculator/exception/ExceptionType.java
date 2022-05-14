@@ -1,4 +1,4 @@
-package exception;
+package calculator.exception;
 
 public enum ExceptionType {
     INVALID_EXPRESSION("잘못된 식입니다.");
