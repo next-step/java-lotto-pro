@@ -39,4 +39,15 @@ public class Lotto {
     public Integer get(int index) {
         return numbers.get(index);
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        for (Integer number : numbers) {
+            builder.append(" ")
+                    .append(number)
+                    .append(",");
+        }
+        return "[" + builder.substring(1, builder.length() - 1) + "]";
+    }
 }

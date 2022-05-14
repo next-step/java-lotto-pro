@@ -26,4 +26,10 @@ public class Lottos {
     public int size() {
         return lottos.size();
     }
+
+    public String[] toStringArray() {
+        return lottos.stream()
+                .map(Lotto::toString)
+                .toArray(String[]::new);
+    }
 }

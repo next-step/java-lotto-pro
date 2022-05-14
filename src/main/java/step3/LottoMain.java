@@ -1,5 +1,7 @@
 package step3;
 
+import step3.domain.Lottos;
+import step3.domain.LottosGenerator;
 import step3.viewer.LottoViewer;
 
 public class LottoMain {
@@ -14,5 +16,7 @@ public class LottoMain {
     private static void startLotto() {
         final LottoViewer lottoViewer = new LottoViewer();
         final int price = lottoViewer.inputPrice();
+        final Lottos lottos = LottosGenerator.generateLottos(price);
+        lottoViewer.printLottos(lottos);
     }
 }
