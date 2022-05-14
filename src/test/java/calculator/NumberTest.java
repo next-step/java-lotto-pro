@@ -28,7 +28,7 @@ class NumberTest {
 
 	@DisplayName("숫자 이외의 값을 전달하면 예외 발생")
 	@ParameterizedTest
-	@ValueSource(strings = {"a", "#"})
+	@ValueSource(strings = {"a", "#", "", "1-1"})
 	void not_number(String notNumber) {
 		assertThatThrownBy(() -> Number.from(notNumber))
 				.isInstanceOf(RuntimeException.class);

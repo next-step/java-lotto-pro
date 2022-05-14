@@ -1,9 +1,11 @@
 package calculator;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Number {
 	private final int value;
+	private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+");
 
 	private Number(int value) {
 		if (value < 0) {
@@ -17,11 +19,15 @@ public class Number {
 	}
 
 	public static Number from(String string) {
-		try {
-			return new Number(Integer.parseInt(string));
-		} catch (NumberFormatException e) {
+		if (!isNumber(string)) {
 			throw new IllegalArgumentException("숫자만 입력할 수 있습니다");
 		}
+		return new Number(Integer.parseInt(string));
+	}
+
+	private static boolean isNumber(String string) {
+		return NUMBER_PATTERN.matcher(string)
+				.matches();
 	}
 
 	public static Number zero() {
