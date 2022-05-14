@@ -10,19 +10,8 @@ public class LottoNumbers {
     private static final String PRINT_JOIN_DELIMITER = ", ";
     private static final String TO_STRING_PREFIX = "[";
     private static final String TO_STRING_SUFFIX = "]";
-    private static final List<Integer> lottoNumberPreset = new ArrayList<>();
-
-    static {
-        for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
-            lottoNumberPreset.add(number);
-        }
-    }
 
     private final Set<LottoNumber> lottoNumbers = new HashSet<>();
-
-    public LottoNumbers() {
-        this(createRandomLottoNumbers());
-    }
 
     public LottoNumbers(Collection<Integer> numbers) {
         checkLottoNumbers(numbers);
@@ -31,12 +20,13 @@ public class LottoNumbers {
     }
 
     public long matchedCountByWinnerNumbers(LottoNumbers winnerNumbers) {
-        return winnerNumbers.lottoNumbers.stream().filter(this::hasContainLottoNumber).count();
+        return winnerNumbers.lottoNumbers.stream()
+                .filter(this::hasContainLottoNumber)
+                .count();
     }
 
     private void addAll(Collection<Integer> numbers) {
         for (Integer number : numbers) {
-            System.out.println(this.lottoNumbers.contains(new LottoNumber(number)));
             this.lottoNumbers.add(new LottoNumber(number));
         }
     }
@@ -60,12 +50,6 @@ public class LottoNumbers {
         if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 에서 45 사이의 값만 허용합니다.");
         }
-    }
-
-    private static List<Integer> createRandomLottoNumbers() {
-        Collections.shuffle(lottoNumberPreset);
-
-        return lottoNumberPreset.subList(0, LOTTO_RANGE);
     }
 
     @Override

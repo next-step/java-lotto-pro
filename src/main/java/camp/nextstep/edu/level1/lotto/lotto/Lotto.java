@@ -5,12 +5,23 @@ import camp.nextstep.edu.until.TypeCheckHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
+    private static final int LOTTO_RANGE = 6;
     private static final long LOTTO_PRICE = 1000;
     private static final int WINNING_NUMBER_COUNT = 6;
     private static final String WINNING_NUMBER_DELIMITER = ",";
+    private static final List<Integer> LOTTO_NUMBER_PRESET = new ArrayList<>();
+
+    static {
+        for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
+            LOTTO_NUMBER_PRESET.add(number);
+        }
+    }
 
     private Money purchaseOriginalMoney;
     private final List<LottoNumbers> items = new ArrayList<>();
@@ -78,9 +89,16 @@ public class Lotto {
         long availablePurchaseCount = purchaseOriginalMoney.availablePurchaseCount(LOTTO_PRICE);
 
         for (int i = 0; i < availablePurchaseCount; i++) {
-            this.items.add(new LottoNumbers());
+
+            this.items.add(new LottoNumbers(createRandomLottoNumbers()));
         }
 
         System.out.println(availablePurchaseCount + "개를 구매했습니다.");
+    }
+
+    private static List<Integer> createRandomLottoNumbers() {
+        Collections.shuffle(LOTTO_NUMBER_PRESET);
+
+        return LOTTO_NUMBER_PRESET.subList(0, LOTTO_RANGE);
     }
 }
