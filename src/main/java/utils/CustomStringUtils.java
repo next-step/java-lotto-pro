@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,13 +18,13 @@ public class CustomStringUtils {
         return false;
     }
 
-    public static String[] splitString(String str) {
+    public static List<String> splitString(String str) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(str);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
+            return Arrays.asList(matcher.group(2).split(customDelimiter));
         }
-        return str.split(DEFAULT_DELIMITER_TEXT);
+        return Arrays.asList(str.split(DEFAULT_DELIMITER_TEXT));
     }
 
     public static int parseStringToPositiveInteger(String str) {
