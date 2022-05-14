@@ -31,11 +31,8 @@ public class SetTest {
         // given
         int expected = 3;
 
-        // when
-        int actual = numbers.size();
-
         // then
-        assertThat(actual).isEqualTo(expected);
+        assertThat(numbers).hasSize(expected);
     }
 
     @DisplayName("SET 값 존재 테스트")
