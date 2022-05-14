@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import utils.Splitter;
+import calculator.utils.Splitter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
