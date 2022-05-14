@@ -24,7 +24,9 @@ public enum Hit {
     }
 
     public static Hit[] winningList() {
-        return Arrays.stream(Hit.values()).filter(Hit.TWO::isLow).toArray(Hit[]::new);
+        return Arrays.stream(Hit.values())
+                .filter(Hit.TWO::isLow)
+                .toArray(Hit[]::new);
     }
 
     public boolean isLow(final Hit target) {

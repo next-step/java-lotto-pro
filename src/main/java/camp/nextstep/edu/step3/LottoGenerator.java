@@ -30,6 +30,13 @@ public class LottoGenerator {
     }
 
     public Lotto manual(final int[] numbers) {
-        return new Lotto(Arrays.stream(numbers).mapToObj(LottoNumber::new).distinct().toArray(LottoNumber[]::new));
+        return new Lotto(removeDuplicatesAndCreateBy(numbers));
+    }
+
+    private LottoNumber[] removeDuplicatesAndCreateBy(int[] numbers) {
+        return Arrays.stream(numbers)
+                .mapToObj(LottoNumber::new)
+                .distinct()
+                .toArray(LottoNumber[]::new);
     }
 }
