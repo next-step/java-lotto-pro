@@ -41,4 +41,15 @@ class NumbersTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 0 이상의 숫자를 입력해 주세요!");
     }
+
+    @Test
+    @DisplayName("필드의 모든 요소를 더한 값을 정상적으로 리턴하는지 확인한다.")
+    void sum_전체_합() {
+        String[] inputs = new String[] {"1", "2", "3"};
+        Numbers numbers = new Numbers(inputs);
+
+        assertThat(numbers.sum())
+                .isInstanceOf(Integer.class)
+                .isEqualTo(6);
+    }
 }
