@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -12,7 +14,7 @@ public class LottoNumbers {
     }
 
     public List<LottoNumber> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 
     public int collect(List<Integer> winNumbers) {
