@@ -2,13 +2,14 @@ package lotto;
 
 import static generic.Money.wons;
 import static lotto.Lotto.LottoType.AUTO;
+import static lotto.Lotto.LottoType.MANUAL;
 
 import generic.Money;
 
 public class Lotto {
 
     public enum LottoType {
-        AUTO;
+        AUTO, MANUAL;
 
         public boolean isAuto() {
             return this == AUTO;
@@ -17,8 +18,8 @@ public class Lotto {
     }
     public static final Money PURCHASE_PRICE = wons(1000);
     private final LottoNumbers pickLottoNumbers;
-
     private final LottoType type;
+
     private Lotto() {
         this(LottoNumbers.ALL_NUMBERS.pickNumbers(), AUTO);
     }
@@ -29,6 +30,10 @@ public class Lotto {
 
     public static Lotto auto() {
         return new Lotto();
+    }
+
+    public static Lotto manual(final LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers, MANUAL);
     }
 
     public LottoWinResult confirm(final LottoNumbers winNumbers) {
