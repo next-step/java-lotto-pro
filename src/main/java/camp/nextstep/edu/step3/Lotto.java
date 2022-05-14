@@ -1,17 +1,21 @@
 package camp.nextstep.edu.step3;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
     private static final int VALID_SIZE = 6;
-    private List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public Lotto(LottoNumber[] lottoNumbers) {
-        validationInputSize(lottoNumbers.length);
-        sortedLottoNumbers(lottoNumbers);
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validationSize(lottoNumbers);
+        this.lottoNumbers.addAll(lottoNumbers);
+        Collections.sort(this.lottoNumbers);
+    }
+
+    private void validationSize(List<LottoNumber> lottoNumbers) {
+        if (Objects.isNull(lottoNumbers) || lottoNumbers.size() < VALID_SIZE) {
+            throw new IllegalArgumentException("invalid LottoNumbers");
+        }
     }
 
     public Hit checkTo(final Lotto prizeLotto) {

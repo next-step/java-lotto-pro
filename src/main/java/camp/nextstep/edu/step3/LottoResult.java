@@ -1,13 +1,14 @@
 package camp.nextstep.edu.step3;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class LottoResult {
     private final Map<Hit, Integer> resultMap = new HashMap<>();
 
-    public LottoResult(Hit[] hits) {
+    public LottoResult(List<Hit> hits) {
         for (Hit hit : hits) {
             increase(hit);
         }

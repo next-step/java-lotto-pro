@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,8 +17,8 @@ public class LottoPaperTest {
 
     @BeforeEach
     void setUp() {
-        printList.add(new Lotto(LottoTest.createLottoNumberArray(new int[]{1, 2, 3, 4, 5, 6})));
-        printList.add(new Lotto(LottoTest.createLottoNumberArray(new int[]{1, 2, 3, 4, 5, 7})));
+        printList.add(new Lotto(LottoTest.createLottoNumberList(new int[]{1, 2, 3, 4, 5, 6})));
+        printList.add(new Lotto(LottoTest.createLottoNumberList(new int[]{1, 2, 3, 4, 5, 7})));
     }
 
     @DisplayName("생성시 Lotto[] 를 입력 받는다.")
@@ -40,8 +41,8 @@ public class LottoPaperTest {
     @DisplayName("당첨번호 인 Lotto 를 입력하고 결과로 Total 를 반환한다.")
     @Test
     void checkAllTest() {
-        Lotto result = new Lotto(LottoTest.createLottoNumberArray(new int[]{1, 2, 3, 10, 11, 12}));
-        assertThat(new LottoPaper(printList).checkAll(result)).isEqualTo(new LottoResult(new Hit[] {Hit.THREE, Hit.THREE}));
+        Lotto result = new Lotto(LottoTest.createLottoNumberList(new int[]{1, 2, 3, 10, 11, 12}));
+        assertThat(new LottoPaper(printList).checkAll(result)).isEqualTo(new LottoResult(Arrays.asList(Hit.THREE, Hit.THREE)));
     }
 
     @DisplayName("checkAll 메소드 호출시 null 을 입력할수 없다.")

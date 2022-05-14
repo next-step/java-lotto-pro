@@ -16,14 +16,14 @@ public class LottoGeneratorTest {
     void autoTest() {
 
         assertThat(new LottoGenerator(testLottoNumbers()).auto())
-                .isEqualTo(new Lotto(LottoTest.createLottoNumberArray(new int[] {1,2,3,4,5,6})));
+                .isEqualTo(new Lotto(LottoTest.createLottoNumberList(new int[] {1,2,3,4,5,6})));
     }
 
     @DisplayName("Lotto 를 수동으로 생성한다.")
     @Test
     void manualTest() {
         assertThat(new LottoGenerator().manual(new int[] {1,2,3,4,5,6}))
-                .isEqualTo(new Lotto(LottoTest.createLottoNumberArray(new int[] {1,2,3,4,5,6})));
+                .isEqualTo(new Lotto(LottoTest.createLottoNumberList(new int[] {1,2,3,4,5,6})));
     }
 
     @DisplayName("Lotto 수동 생성시 중복숫자 입력시 에러를 발생한다.")

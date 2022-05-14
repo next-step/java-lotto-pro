@@ -2,6 +2,7 @@ package camp.nextstep.edu.step3;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoPaper {
     private final List<Lotto> purchaseList;
@@ -20,17 +21,11 @@ public class LottoPaper {
 
         return new LottoResult(purchaseList.stream()
                 .map((lotto) -> lotto.checkTo(answerLotto))
-                .toArray(Hit[]::new));
+                .collect(Collectors.toList()));
     }
 
     public int numberOfPurchases() {
         return this.purchaseList.size();
-    }
-
-    private void validation(Lotto[] lottoArray) {
-        if (Objects.isNull(lottoArray) || lottoArray.length < 1) {
-            throw new IllegalArgumentException("invalid construct input");
-        }
     }
 
     @Override

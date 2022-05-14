@@ -1,6 +1,5 @@
 package camp.nextstep.edu.step3;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,10 +19,6 @@ public class LottoNumbersTest {
     @Test
     void extractTest() {
         Lotto lotto = new LottoNumbers().extract((lottoNumbers)->{});
-        assertThat(lotto).isEqualTo(new Lotto(createLottoBy(new int[] {1,2,3,4,5,6})));
-    }
-
-    private LottoNumber[] createLottoBy(final int[] numbers) {
-        return Arrays.stream(numbers).mapToObj(LottoNumber::new).toArray(LottoNumber[]::new);
+        assertThat(lotto).isEqualTo(new Lotto(LottoTest.createLottoNumberList(new int[]{1,2,3,4,5,6})));
     }
 }

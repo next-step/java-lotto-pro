@@ -25,6 +25,6 @@ public class LottoNumbers {
 
     public Lotto extract(Consumer<List<LottoNumber>> consumer)  {
         consumer.accept(numbers);
-        return new Lotto(numbers.subList(0, 6).toArray(new LottoNumber[0]));
+        return new Lotto(numbers.subList(0, 6));
     }
 }
