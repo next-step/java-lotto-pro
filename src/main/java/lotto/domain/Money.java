@@ -37,7 +37,7 @@ public class Money {
     }
 
     public double calculateLottoYield(Money winningReward) {
-        return (double) this.value/ winningReward.value;
+        return (double) this.value / winningReward.value;
     }
 
     @Override

@@ -37,7 +37,7 @@ public enum Rank {
         return this.matchCount == matchCount;
     }
 
-    public Money getWinningReward(int count){
+    public Money getWinningReward(int count) {
         return this.money.multiply(count);
     }
 }

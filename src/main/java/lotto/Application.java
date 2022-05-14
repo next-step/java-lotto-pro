@@ -15,7 +15,7 @@ public class Application {
         Lotto winningLotto = Lotto.create(InputView.getWinningLotto());
         WinningStatus winningStatus = myLotties.getWinningStatus(winningLotto);
         ResultView.printWinningStatus(winningStatus);
-        ResultView.printLottoYield(purchaseAmount,winningStatus);
+        ResultView.printLottoYield(purchaseAmount, winningStatus);
 
     }
 }

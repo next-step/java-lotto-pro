@@ -33,8 +33,7 @@ public class Lotto {
     }
 
     private static List<LottoNumber> lottoParser(String winningLotto) {
-        String[] split = winningLotto.split(",");
-        return Arrays.stream(split)
+        return Arrays.stream(winningLotto.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
