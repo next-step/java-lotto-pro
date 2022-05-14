@@ -19,14 +19,14 @@ public enum Hit {
         this.prizeMoney = prizeMoney;
     }
 
-    static Hit valueOf(final int hitCount) {
-        return Hit.values()[hitCount];
-    }
-
     public static Hit[] winningList() {
         return Arrays.stream(Hit.values())
                 .filter(Hit.TWO::isLow)
                 .toArray(Hit[]::new);
+    }
+
+    static Hit valueOf(final int hitCount) {
+        return Hit.values()[hitCount];
     }
 
     public boolean isLow(final Hit target) {

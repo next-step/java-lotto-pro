@@ -21,6 +21,14 @@ public class LottoMoney {
         return new LottoMoney(this.money - LOTTO_PRICE);
     }
 
+    public EarningsRate calculate(final long totalMoney) {
+        if (0 >= this.money) {
+            throw new IllegalStateException("invalid money");
+        }
+        double rate = Double.longBitsToDouble(totalMoney) / Double.longBitsToDouble(this.money);
+        return  new EarningsRate(Math.floor(rate * 100) / 100.0);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -34,15 +42,4 @@ public class LottoMoney {
         return Objects.hash(money);
     }
 
-    public int getMoney() {
-        return money;
-    }
-
-    public EarningsRate calculate(final long totalMoney) {
-        if (0 >= this.money) {
-            throw new IllegalStateException("invalid money");
-        }
-        double rate = Double.longBitsToDouble(totalMoney) / Double.longBitsToDouble(this.money);
-        return  new EarningsRate(Math.floor(rate * 100) / 100.0);
-    }
 }
