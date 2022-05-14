@@ -54,6 +54,10 @@ public class Lotto implements Purchasable {
         return count;
     }
 
+    boolean contains(LottoNumber lottoNumber) {
+        return false;
+    }
+
     private static Set<LottoNumber> validate(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicated(lottoNumbers);
