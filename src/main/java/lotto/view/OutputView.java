@@ -14,26 +14,26 @@ public class OutputView {
 
     private static final int BENEFIT_STANDARD = 1;
 
-    public void printPurchasedTicketsCount(int ticketCount) {
+    public static void printPurchasedTicketsCount(int ticketCount) {
         System.out.printf(PURCHASED_TICKETS_NUMBER, ticketCount);
         System.out.println();
     }
 
-    public void printTicketsNumbers(String numberString) {
+    public static void printTicketsNumbers(String numberString) {
         System.out.println(numberString);
     }
 
-    public void printTotalString() {
+    public static void printTotalString() {
         System.out.println(RESULT_PRIZED_RATE);
         System.out.println(LINE_STRING);
     }
 
-    public void printTotalWinningCount(int countOfMatch, int winningMoney, int winningCount) {
+    public static void printTotalWinningCount(int countOfMatch, int winningMoney, int winningCount) {
         System.out.printf(TOTAL_WINNING_COUNT,countOfMatch, winningMoney, winningCount);
         System.out.println();
     }
 
-    public void printTotalProfitRate(double profitRate) {
+    public static void printTotalProfitRate(double profitRate) {
         System.out.printf(TOTAL_PROFIT_RATE,profitRate, profitRate > BENEFIT_STANDARD ? BENEFIT:LOSS);
         System.out.println();
     }

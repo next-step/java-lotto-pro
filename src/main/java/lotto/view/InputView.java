@@ -15,13 +15,13 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public Money inputMoney() {
+    public static Money inputMoney() {
         System.out.println(INPUT_MONEY);
         String inputMoney = readLine();
         return Money.from(Integer.parseInt(inputMoney));
     }
 
-    public List<Integer> inputWinningLottoNumbers() {
+    public static List<Integer> inputWinningLottoNumbers() {
         System.out.println(INPUT_WINNING_LOTTO);
         String inputLottoNumbers = readLine();
         String[] strings = splitLottoNumbers(inputLottoNumbers);
@@ -31,11 +31,11 @@ public class InputView {
                 collect(Collectors.toList());
     }
 
-    private String[] splitLottoNumbers(String inputLottoNumbers) {
+    private static String[] splitLottoNumbers(String inputLottoNumbers) {
         return inputLottoNumbers.split(NUMBERS_DELIMITER);
     }
 
-    private String readLine() {
+    private static String readLine() {
         return scanner.nextLine();
     }
 

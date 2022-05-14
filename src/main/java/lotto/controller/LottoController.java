@@ -15,13 +15,9 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    private final InputView inputView;
-    private final OutputView outputView;
     private final LottoVendingMachine vendingMachine;
 
     public LottoController() {
-        this.inputView = new InputView();
-        this.outputView = new OutputView();
         this.vendingMachine = new LottoVendingMachine();
     }
 
@@ -39,8 +35,8 @@ public class LottoController {
     }
 
     private void reportingLottoTicketsInformation(LottoTickets lottoTickets, int purchasedTicketsCount) {
-        outputView.printPurchasedTicketsCount(purchasedTicketsCount);
-        outputView.printTicketsNumbers(lottoTickets.toString());
+        OutputView.printPurchasedTicketsCount(purchasedTicketsCount);
+        OutputView.printTicketsNumbers(lottoTickets.toString());
     }
 
     private void reportingLottoResult(int purchasedTicketsCount, LottoWinningResults winningResults) {
@@ -48,30 +44,30 @@ public class LottoController {
 
         prizedRanks.sort(Collections.reverseOrder());
 
-        outputView.printTotalString();
+        OutputView.printTotalString();
         for (LottoRank prizedRank : prizedRanks) {
             printWinningStatistics(winningResults, prizedRank);
         }
 
         int usedMoney = purchasedTicketsCount * LOTTO_TICKET_PRICE;
-        outputView.printTotalProfitRate(winningResults.profitRate(Money.from(usedMoney)));
+        OutputView.printTotalProfitRate(winningResults.profitRate(Money.from(usedMoney)));
     }
 
     private void printWinningStatistics(LottoWinningResults winningResults, LottoRank prizedRank) {
-        outputView.printTotalWinningCount(
+        OutputView.printTotalWinningCount(
                 prizedRank.getCountOfMatch(),
                 prizedRank.getWinningMoney(),
                 winningResults.winingRankCount(prizedRank));
     }
 
     private LottoWinningResults checkWinningLotto(LottoTickets lottoTickets) {
-        List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumbers();
+        List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
         List<LottoRank> ranks = lottoTickets.match(LottoNumbers.from(() -> winningLottoNumbers));
         return LottoWinningResults.from(ranks);
     }
 
     private LottoTickets buyLottoTickets() {
-        Money inputMoney = inputView.inputMoney();
+        Money inputMoney = InputView.inputMoney();
         return vendingMachine.purchase(inputMoney);
     }
 }
