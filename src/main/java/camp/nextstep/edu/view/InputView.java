@@ -38,7 +38,11 @@ public class InputView {
 
     public static LottoResult enterLottoWinningNumbers(Lotto lotto) {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String enteredWinningNumbers = scanner.nextLine();
 
-        return lotto.compareWinningNumber(scanner.nextLine());
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String enteredBonusNumber = scanner.nextLine();
+
+        return lotto.compareWinningNumber(enteredWinningNumbers, enteredBonusNumber);
     }
 }
