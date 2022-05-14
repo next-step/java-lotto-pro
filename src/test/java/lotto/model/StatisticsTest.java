@@ -46,7 +46,6 @@ public class StatisticsTest {
     void 로또숫자비교_test() {
         // when
         Statistics statistics = new Statistics(win, lottos);
-        lottos.add( new Lotto(Arrays.asList(1, 21, 23, 41, 42, 43)));
 
         // then
         assertThat(statistics.getResultMap().get(Rank.FIRST)).isEqualTo(0);
@@ -57,8 +56,8 @@ public class StatisticsTest {
     }
 
     @MethodSource(value = "lottoTestParameters")
-    @ParameterizedTest(name = "1000원짜리 로또 구매가능한 수량을 구한다. {0}")
-    void 로또숫자비교2_test(Lotto lotto, int fisrt, int second, int third, int fourth, int nothing) {
+    @ParameterizedTest(name = "로또 당첨번호 는 {2}개이다")
+    void 로또숫자비교2_test(Lotto lotto, Rank rank, int result) {
         // given
         lottos = Arrays.asList(lotto);
 
@@ -66,20 +65,16 @@ public class StatisticsTest {
         Statistics statistics = new Statistics(win, lottos);
 
         // then
-        assertThat(statistics.getResultMap().get(Rank.FIRST)).isEqualTo(fisrt);
-        assertThat(statistics.getResultMap().get(Rank.SECOND)).isEqualTo(second);
-        assertThat(statistics.getResultMap().get(Rank.THIRD)).isEqualTo(third);
-        assertThat(statistics.getResultMap().get(Rank.FOURTH)).isEqualTo(fourth);
-        assertThat(statistics.getResultMap().get(Rank.NOTHING)).isEqualTo(nothing);
+        assertThat(statistics.getResultMap().get(rank)).isEqualTo(result);
     }
 
     @MethodSource(value = "lottoTestParameters")
     static Stream<Arguments> lottoTestParameters() {
         return Stream.of(
-                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 1, 0, 0, 0, 0, 0),
-                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)), 0, 1, 0, 0, 0, 0),
-                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 9, 10)), 0, 0, 1, 0, 0, 0),
-                arguments(new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10)), 0, 0, 0, 1, 0, 0)
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Rank.FIRST, 1),
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)), Rank.SECOND, 1),
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 9, 10)), Rank.THIRD, 1),
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10)), Rank.FOURTH, 1)
         );
     }
 
