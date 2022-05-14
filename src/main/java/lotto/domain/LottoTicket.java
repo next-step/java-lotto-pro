@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.constants.Constants;
 import lotto.constants.ErrorMessage;
 import lotto.enums.Rank;
 
@@ -10,7 +11,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<Integer> lottoNumbers) {
@@ -46,14 +46,14 @@ public class LottoTicket {
     }
 
     private void validateSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers == null || lottoNumbers.size() != LOTTO_SIZE) {
+        if (lottoNumbers == null || lottoNumbers.size() != Constants.LOTTO_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.OUT_OF_SIZE_LOTTO);
         }
     }
 
     private void validateDuplication(List<Integer> lottoNumbers) {
         Set<Integer> numberSet = new HashSet<>(lottoNumbers);
-        if (numberSet.size() != LOTTO_SIZE) {
+        if (numberSet.size() != Constants.LOTTO_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER);
         }
     }

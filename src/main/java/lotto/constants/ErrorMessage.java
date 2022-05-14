@@ -8,4 +8,5 @@ public class ErrorMessage {
     public static final String OUT_OF_RANGE_MATCH = "0개부터 6개 까지만 매칭 가능합니다.";
     public static final String LESS_THEN_MIN_MONEY = "0원 이상의 금액만 입력 가능합니다.";
     public static final String LESS_THEN_PRICE_MONEY = "최소 1000원부터 구매 가능합니다.";
+    public static final String MAX_PURCHASE_LOTTO = "구입 가능한 최대 개수는 100개 입니다.";
 }
