@@ -17,7 +17,7 @@ public class Lottos {
 
     private List<Lotto> createLottos(final int lottoCount) {
         final List<Lotto> lottos = new ArrayList<>();
-        for(int i= 0; i < lottoCount; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto());
         }
         return lottos;
