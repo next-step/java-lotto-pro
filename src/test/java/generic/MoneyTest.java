@@ -54,4 +54,26 @@ class MoneyTest {
         assertThat(Money.wons(number1).count(Money.wons(number2)))
                 .isEqualTo(result);
     }
+
+    @Test
+    @DisplayName("1000원 값만 문자열로 반환")
+    void toStringValue() {
+        // when & then
+        assertThat(Money.wons(1000).toStringValue()).isEqualTo("1000");
+    }
+
+    @Test
+    @DisplayName("0원 인지 확인")
+    void isZero() {
+        // when & then
+        assertThat(Money.ZERO).isEqualTo(Money.wons(0));
+        assertThat(Money.ZERO.isZero()).isTrue();
+    }
+
+    @Test
+    @DisplayName("원을 비교하여 작인지 확인")
+    void isLessThan() {
+        // when & then
+        assertThat(Money.ZERO.isLessThan(Money.wons("1000"))).isTrue();
+    }
 }
