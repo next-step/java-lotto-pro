@@ -52,7 +52,7 @@ public class HitTest {
     @DisplayName("동일한 당첨금액의 갯수만큼 비용을 반환한다.")
     @Test
     void costTest() {
-        assertThat(Hit.THREE.cost(3)).isEqualTo(15000);
+        assertThat(Hit.THREE.winningAmount(3)).isEqualTo(15000);
     }
 
     private String expectedMessage(final int count, final int prizeMoney) {
