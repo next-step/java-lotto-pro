@@ -18,4 +18,16 @@ class LottoWinningResultsTest {
         double profitRate = lottoWinningResults.profitRate(Money.from(14000));
         assertThat(String.format("%.2f", profitRate)).isEqualTo("0.36");
     }
+
+    @Test
+    void 우승상금을_구할수_있다() {
+        List<LottoRank> ranks = new ArrayList<>();
+        ranks.add(LottoRank.FIRST);
+        ranks.add(LottoRank.SECOND);
+
+        LottoWinningResults lottoWinningResults = LottoWinningResults.from(ranks);
+
+        double prizedMoney = lottoWinningResults.prizedMoney();
+        assertThat(prizedMoney).isEqualTo(2_001_500_000);
+    }
 }

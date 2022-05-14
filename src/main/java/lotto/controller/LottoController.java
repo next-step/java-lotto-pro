@@ -65,7 +65,8 @@ public class LottoController {
 
     private LottoWinningResults checkWinningLotto(LottoTickets lottoTickets) {
         List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumbers();
-        return lottoTickets.match(LottoNumbers.from(() -> winningLottoNumbers));
+        List<LottoRank> ranks = lottoTickets.match(LottoNumbers.from(() -> winningLottoNumbers));
+        return LottoWinningResults.from(ranks);
     }
 
     private LottoTickets buyLottoTickets() {

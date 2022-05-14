@@ -22,16 +22,9 @@ class LottoTicketsTest {
     }
 
     @Test
-    void 구입한_티켓들_에서_당첨_금액을를_알수_있다() {
-        LottoWinningResults results = tickets.match(LottoNumbers.from(() -> Arrays.asList(7,8,9,10,11,45)));
-        double prizedMoney = results.prizedMoney();
-        assertThat(prizedMoney).isEqualTo(0);
-    }
-
-    @Test
-    void 순위별_개수를_구할수_있다() {
-        LottoWinningResults results = tickets.match(LottoNumbers.from(() -> Arrays.asList(1,2,3,11,22,33)));
-        assertThat(results.winingRankCount(LottoRank.FOURTH)).isEqualTo(2);
+    void 당첨된_등급의_리스트를_얻을수_있다() {
+        List<LottoRank> lottoRanks = tickets.match(LottoNumbers.from(() -> Arrays.asList(7, 8, 9, 10, 11, 45)));
+        assertThat(lottoRanks).hasSize(0);
     }
 
     @Test
