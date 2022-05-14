@@ -6,11 +6,9 @@ import Lotto.utils.StringSplitUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Lotto {
-    private static final ArrayList<Integer> rangeNumbers = IntStream.range(1, 45)
-                                                                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+    private static final ArrayList<Integer> rangeNumbers = RangeNumbers.getRangeNumbers();
     private List<Integer> numbers;
 
     public List<Integer> getNumbers() {

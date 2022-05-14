@@ -16,5 +16,4 @@ public class LottoGame {
         lottos.calculation(winLotto);
         ResultView.result(lottos.getResult());
     }
-
 }
