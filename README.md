@@ -56,8 +56,11 @@ ContainCount
 - [X] 음수가 될 수 없고, LottoNumbers 의 최대 길이를 초과할 수 없다.
 - [X] 값 객체이다.
 
+ContainCounts
+
 Lottery
 - [X] 당첨 번호와 로또번호를 비교할 수 있다.
+- [X] 당첨 번호와 로또 번호 여러개(Lottos) 를 비교할 수 있다.
 
 Lottos
 - [X] 로또를 여러개 추가하거나, 총 로또 개수를 알 수 있다.
