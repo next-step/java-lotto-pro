@@ -13,11 +13,21 @@ public class Numbers {
         this.numbers = new LinkedList<>();
     }
 
-    public void add(Number number) {
-        if (number == null) {
+    public void makeNumbers(String[] integers) {
+        if (integers == null) {
             throw new NullPointerException(NULL_WAS_ENTERED);
         }
-        this.numbers.add(number);
+        for (String integer : integers) {
+            numbers.add(new Number(integer));
+        }
+    }
+
+    public int sum() {
+        int sum = 0;
+        for (Number number : numbers) {
+            sum += number.value();
+        }
+        return sum;
     }
 
     public List<Number> list() {
