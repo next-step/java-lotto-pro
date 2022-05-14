@@ -40,10 +40,10 @@ public class LottosTest {
         lottos.compareLottos(winningLotto);
 
         assertAll(
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.THREE)).isEqualTo(1),
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FOUR)).isEqualTo(1),
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FIVE)).isEqualTo(1),
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.SIX)).isEqualTo(2)
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FIFTH)).isEqualTo(1),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FOURTH)).isEqualTo(1),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.THIRD)).isEqualTo(1),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FIRST)).isEqualTo(2)
         );
     }
 }

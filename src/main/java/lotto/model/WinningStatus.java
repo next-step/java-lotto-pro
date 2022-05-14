@@ -9,7 +9,7 @@ public class WinningStatus {
 
     public WinningStatus() {
         winningStatus = new HashMap<>();
-        for (MatchPoint value : MatchPoint.values()) {
+        for (MatchPoint value : MatchPoint.findValues()) {
             winningStatus.put(value, 0);
         }
     }
@@ -17,7 +17,7 @@ public class WinningStatus {
     protected void recordResults(int count) {
 
         MatchPoint matchPoint = MatchPoint.findMatchPointByMatchPointCount(count);
-        if(matchPoint != null){
+        if(matchPoint != MatchPoint.MISS){
             winningStatus.put(matchPoint, winningStatus.get(matchPoint) + 1);
         }
     }
@@ -29,7 +29,7 @@ public class WinningStatus {
     public double findEarningsRate(long lottosTotalPrice) {
         long sum = 0;
 
-        for (MatchPoint matchPoint : MatchPoint.values()) {
+        for (MatchPoint matchPoint : MatchPoint.findValues()) {
             sum = sum + matchPoint.sumCashPrizeByMatchPoint(winningStatus.get(matchPoint));
         }
 

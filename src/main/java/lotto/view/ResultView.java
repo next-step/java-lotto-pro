@@ -30,7 +30,7 @@ public class ResultView {
     }
 
     public void printWinningStatistics(WinningLotto winningLotto) {
-        for (MatchPoint matchPoint : MatchPoint.values()) {
+        for (MatchPoint matchPoint : MatchPoint.findValues()) {
             message.printMessage(String.format(WINNING_STATISTICS_MESSAGE, matchPoint.getMatchPointCount(), matchPoint.getCashPrize(), winningLotto.findWinningCount(matchPoint)));
         }
     }
