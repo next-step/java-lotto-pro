@@ -31,7 +31,7 @@ class LottoGameTest {
 
     @Test
     void 지난주_당첨번호로_로또_생성() {
-        Lotto winnerLotto = lottoGame.winnerLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(winnerLotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto winnerLotto = lottoGame.createWinnerLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(winnerLotto).isInstanceOf(Lotto.class);
     }
 }

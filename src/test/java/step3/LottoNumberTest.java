@@ -9,14 +9,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class LottoNumberTest {
     @Test
     void 로또번호_생성() {
-        assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
+        assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
     }
 
     @ParameterizedTest(name = "invalid_로또번호_생성")
     @ValueSource(ints = {-1, 100, 0})
-    void invalid_로또번호_생성() {
+    void invalid_로또번호_범위() {
         assertThatThrownBy(() -> {
-            LottoNumber lottoNumber = new LottoNumber(-1);
+            LottoNumber lottoNumber = LottoNumber.of(-1);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1~45의 숫자만 입력해주세요.");
     }

@@ -2,6 +2,7 @@ package step3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
     private static final int PRICE_LOTTO = 1000;
@@ -13,12 +14,15 @@ public class LottoGame {
     public List<Lotto> buy(int ableToBuyLottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < ableToBuyLottoCount; i++) {
-            lottos.add(new Lotto());
+            lottos.add(LottoFactory.createAutoLotto());
         }
         return lottos;
     }
 
-    public Lotto winnerLotto(List<Integer> winnerLottoNumbers) {
-        return new Lotto(winnerLottoNumbers);
+    public Lotto createWinnerLotto(List<Integer> winnerNumbers) {
+        return new Lotto(winnerNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList())
+        );
     }
 }
