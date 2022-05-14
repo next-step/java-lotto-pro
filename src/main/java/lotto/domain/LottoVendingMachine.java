@@ -5,8 +5,8 @@ import static lotto.messages.ErrorMessages.MONEY_UNDER_PRICE_ERROR;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.generator.LottoRandomNumberGenerateStrategy;
-import lotto.generator.NumberGenerateStrategy;
+import lotto.domain.generator.LottoRandomNumberGenerateStrategy;
+import lotto.domain.generator.NumberGenerateStrategy;
 
 public class LottoVendingMachine {
 

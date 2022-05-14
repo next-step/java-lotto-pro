@@ -1,4 +1,4 @@
-package lotto.generator;
+package lotto.domain.generator;
 
 import static lotto.constants.LottoConstants.MAX_LOTTO_NUM;
 import static lotto.constants.LottoConstants.MIN_LOTTO_NUM;
