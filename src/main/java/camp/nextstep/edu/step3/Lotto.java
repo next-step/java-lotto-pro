@@ -15,18 +15,19 @@ public class Lotto {
         this.lottoNumbers.addAll(lottoNumbers);
         Collections.sort(this.lottoNumbers);
     }
+
     public Hit checkTo(final Lotto prizeLotto) {
         return Hit.valueOf(prizeLotto.checkBy(this.lottoNumbers));
     }
 
     private void validationSize(List<LottoNumber> lottoNumbers) {
-        if (Objects.isNull(lottoNumbers) || removeOverlap(lottoNumbers).size() < VALID_SIZE) {
+        if (Objects.isNull(lottoNumbers) || lottoNumbers.isEmpty() || isInsufficient(lottoNumbers)) {
             throw new IllegalArgumentException("invalid LottoNumbers");
         }
     }
 
-    private List<LottoNumber> removeOverlap(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream().distinct().collect(Collectors.toList());
+    private boolean isInsufficient(final List<LottoNumber> numbers) {
+        return VALID_SIZE > numbers.stream().distinct().count();
     }
 
     private int checkBy(List<LottoNumber> userLottoNumbers) {
