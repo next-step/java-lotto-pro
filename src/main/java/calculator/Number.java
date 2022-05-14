@@ -5,7 +5,7 @@ public class Number {
     private final int number;
 
     Number(int number) {
-        this.isNegativeNumber(number);
+        this.ensureZeroOrPositiveNumber(number);
         this.number = number;
     }
 
@@ -17,7 +17,7 @@ public class Number {
             throw new RuntimeException("Input is not a number.");
         }
 
-        this.isNegativeNumber(number);
+        this.ensureZeroOrPositiveNumber(number);
         this.number = number;
     }
 
@@ -25,7 +25,7 @@ public class Number {
         return this.number;
     }
 
-    private void isNegativeNumber(int num) {
+    private void ensureZeroOrPositiveNumber(int num) {
         if (num < 0) {
             throw new RuntimeException("Input is not a positive number.");
         }
