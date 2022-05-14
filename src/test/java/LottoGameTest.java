@@ -31,7 +31,9 @@ public class LottoGameTest {
     @ValueSource(ints = {1, 3, 22, 40})
     void 번호_일치(int input) {
         LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 10, 22, 40));
+
         boolean result = lottoGame.has(new LottoNumber(input));
+
         assertThat(result).isTrue();
     }
 
@@ -39,7 +41,24 @@ public class LottoGameTest {
     @ValueSource(ints = {4, 7, 20, 45})
     void 번호_불일치(int input) {
         LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 10, 22, 40));
+
         boolean result = lottoGame.has(new LottoNumber(input));
+
         assertThat(result).isFalse();
+    }
+
+    @Test
+    void 당첨_번호_일치_개수() {
+        LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 10, 22, 40));
+
+        Long result = lottoGame.check(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(3),
+                new LottoNumber(5),
+                new LottoNumber(14),
+                new LottoNumber(22),
+                new LottoNumber(44)));
+
+        assertThat(result).isEqualTo(3);
     }
 }

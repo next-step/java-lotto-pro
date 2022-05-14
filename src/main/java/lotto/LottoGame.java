@@ -32,6 +32,13 @@ public class LottoGame {
         }
     }
 
+    public Long check(List<LottoNumber> winningNumbers) {
+        return winningNumbers.stream()
+                .map(n -> has(n))
+                .filter(b -> b == true)
+                .count();
+    }
+
     public boolean has(LottoNumber lottoNumber) {
         return numbers.stream()
                 .anyMatch(n -> n.equals(lottoNumber));
