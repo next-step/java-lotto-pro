@@ -80,7 +80,7 @@
 
 ### 🔖 TDD를 위한 기능 목록 List
 - 로또 번호 생성기(LottoNumberGenerator) 리팩토링
-  - [ ] 로또 번호(LottoNumber) 객체 반환이 아닌 List<Number>로 반환 수정
+  - [x] 로또 번호(LottoNumber) 객체 반환이 아닌 List<Number>로 반환 수정
 - 지난주 당첨 번호(WinningLottoNumber) 클래스 추가
   - [ ] 당첨 번호 입력 받기
   - [ ] 보너스 번호를 입력 받기

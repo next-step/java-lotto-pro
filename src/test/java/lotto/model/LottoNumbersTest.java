@@ -13,8 +13,16 @@ class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호를 입력받아 생성된 객체가 올바른지 검증")
     void verifyLottoNumbers() {
-        LottoNumber lottoNumberOf1st = LottoNumberGenerator.of("1, 2, 3, 4, 5, 6");
-        LottoNumber lottoNumberOf2nd = LottoNumberGenerator.of("1, 5, 7, 9, 11, 15");
+        LottoNumber lottoNumberOf1st = new LottoNumber(
+                Arrays.asList(
+                        Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6)
+                )
+        );
+        LottoNumber lottoNumberOf2nd = new LottoNumber(
+                Arrays.asList(
+                        Number.of(1), Number.of(5), Number.of(7), Number.of(8), Number.of(11), Number.of(15)
+                )
+        );
         LottoNumbers lottoNumbers = new LottoNumbers(
                 Arrays.asList(lottoNumberOf1st, lottoNumberOf2nd)
         );

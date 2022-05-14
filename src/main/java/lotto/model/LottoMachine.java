@@ -17,6 +17,7 @@ public class LottoMachine {
 
     private List<LottoNumber> generateAutomaticLottoNumber(int count) {
         return Stream.generate(LottoNumberGenerator::auto)
+                .map(LottoNumber::new)
                 .limit(count)
                 .collect(toList());
     }
