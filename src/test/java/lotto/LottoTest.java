@@ -12,7 +12,7 @@ class LottoTest {
     void Integer_list_size가_6이_아닐경우_에러가_발생한다() {
         // when and then
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5));
+            Lotto lotto = Lotto.create(Arrays.asList(1,2,3,4,5));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

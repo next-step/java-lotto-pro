@@ -2,7 +2,9 @@ package lotto;
 
 public class LottoNumber {
 
-    public LottoNumber(Integer number) {
+    private final int number;
 
+    public LottoNumber(Integer number) {
+        this.number = number;
     }
 }

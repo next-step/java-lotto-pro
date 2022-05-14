@@ -9,7 +9,7 @@ public class Lotto {
 
     private List<LottoNumber> lotto = new ArrayList<>();
 
-    public Lotto(List<Integer> lottoNumbers) {
+    private Lotto(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
@@ -18,5 +18,7 @@ public class Lotto {
         }
     }
 
-
+    public static Lotto create(List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
 }
