@@ -1,6 +1,7 @@
 package lotto.view;
 
 import static lotto.constants.LottoConstants.LOTTO_PRICE;
+import static lotto.constants.LottoErrorMessage.INVALID_INPUT_BONUS_LOTTO_NUMBER;
 import static lotto.constants.LottoErrorMessage.INVALID_INPUT_LOTTO_NUMBER;
 import static lotto.constants.LottoErrorMessage.INVALID_INPUT_MONEY;
 import static lotto.constants.LottoGuideMessage.INPUT_MONEY;
@@ -8,6 +9,7 @@ import static lotto.constants.LottoNumberConstants.LOTTO_NUMBER_MAX;
 import static lotto.constants.LottoNumberConstants.LOTTO_NUMBER_MIN;
 import static lotto.constants.LottoNumberConstants.LOTTO_NUMBER_SIZE;
 
+import calculator.utils.StringToIntegerParser;
 import calculator.utils.StringUtils;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -16,6 +18,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 import lotto.utils.LottoNumberStringSplitter;
 import lotto.utils.LottoNumberStringToIntegerParser;
@@ -53,6 +57,29 @@ public class LottoInputView {
         return this.inputLottoNumbers(inputGuideMessage);
     }
 
+    public LottoNumber inputBonusBall(LottoNumbers lastWinningLottoNumbers, String inputGuideMessage) {
+        String inputBonusBall = readLine();
+        if (isValidateInputBonusBallNumber(lastWinningLottoNumbers, inputBonusBall)) {
+            return LottoNumber.from(Integer.parseInt(inputBonusBall));
+        }
+
+        System.out.printf((INVALID_INPUT_BONUS_LOTTO_NUMBER) + "%n", inputBonusBall, lastWinningLottoNumbers.toString());
+        System.out.println(inputGuideMessage);
+
+        return this.inputBonusBall(lastWinningLottoNumbers, inputGuideMessage);
+    }
+
+    private boolean isValidateInputBonusBallNumber(LottoNumbers lastWinningLottoNumbers, String inputBonusBall) {
+        return isValidateNumber(inputBonusBall)
+            && isValidateLottoNumber(StringToIntegerParser.parseNumber(inputBonusBall))
+            && isValidateBonusBallInLastWinningLottoNumbers(lastWinningLottoNumbers, inputBonusBall);
+    }
+
+    private boolean isValidateBonusBallInLastWinningLottoNumbers(
+        LottoNumbers lastWinningLottoNumbers, String inputBonusBall) {
+        return !lastWinningLottoNumbers.contains(inputBonusBall);
+    }
+
     private boolean isValidateSplitInputNumbers(String[] splitInputNumbers) {
         List<String> numbers = Arrays.stream(splitInputNumbers).map(String::trim).collect(Collectors.toList());
         return isValidateNumbers(numbers)
@@ -80,6 +107,10 @@ public class LottoInputView {
         return number -> !StringUtils.isEmpty(number) && number.matches(INPUT_NUMBER_0_TO_9_REG_EXP);
     }
 
+    private boolean isValidateNumber(String number) {
+        return number.matches(INPUT_NUMBER_0_TO_9_REG_EXP);
+    }
+
     private boolean isValidateNumbers(List<String> numbers) {
         return numbers.stream()
             .allMatch(number -> number.matches(INPUT_NUMBER_0_TO_9_REG_EXP));
@@ -97,5 +128,4 @@ public class LottoInputView {
     private String readLine() {
         return scanner.nextLine();
     }
-
 }
