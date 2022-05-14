@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,63 +26,48 @@ class LottoTest {
     }
 
     @Test
-    public void 로또_생성자_가변_인자() {
-        new Lotto(1, 10, 15, 27, 35, 45);
-    }
-
-    @Test
-    public void 로또_생성자_문자열_인자() {
-        new Lotto("1, 10, 15, 27, 35, 45");
-    }
-
-    @Test
-    public void 로또_생성_테스트_비정상() {
+    public void 로또_가변_인자로_생성_테스트() {
         List<LottoNo> lottoNoList = Arrays.asList(
                 new LottoNo(1),
                 new LottoNo(10),
                 new LottoNo(15),
                 new LottoNo(27),
                 new LottoNo(35),
-                new LottoNo(40),
                 new LottoNo(45));
+
+        Lotto actual = new Lotto(lottoNoList);
+        Lotto expected = new Lotto(1, 10, 15, 27, 35, 45);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void 로또_문자열_인자로_생성_테스트() {
+        List<LottoNo> lottoNoList = Arrays.asList(
+                new LottoNo(1),
+                new LottoNo(10),
+                new LottoNo(15),
+                new LottoNo(27),
+                new LottoNo(35),
+                new LottoNo(45));
+
+        Lotto actual = new Lotto(lottoNoList);
+        Lotto expected = new Lotto("1, 10, 15, 27, 35, 45");
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 10, 20, 30, 40, 50", "-1, 10, 20, 30, 40, 45"})
+    public void 로또_생성_테스트_비정상(String lottoNumbers) {
         assertThatThrownBy(() -> {
-            new Lotto(lottoNoList);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("유효하지 않은 로또입니다.");
+            new Lotto(lottoNumbers);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void 로또_번호_비교하기_꽝() {
+    @ParameterizedTest
+    @CsvSource(value = {"7, 8, 9, 10, 11, 12:NONE", "4, 5, 6, 7, 8, 9:FOURTH", "3, 4, 5, 6, 7, 8:THIRD", "2, 3, 4, 5, 6, 7:SECOND", "1, 2, 3, 4, 5, 6:FIRST"}, delimiter = ':')
+    public void 로또_번호_비교_테스트(String lottoNumbers, Ranking expected) {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Ranking ranking = lotto.compareLotto(new Lotto("7, 8, 9, 10, 11, 12"));
-        assertThat(ranking).isEqualTo(Ranking.NONE);
-    }
-
-    @Test
-    void 로또_번호_비교하기_3개() {
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Ranking ranking = lotto.compareLotto(new Lotto("4, 5, 6, 7, 8, 9"));
-        assertThat(ranking).isEqualTo(Ranking.FOURTH);
-    }
-
-    @Test
-    void 로또_번호_비교하기_4개() {
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Ranking ranking = lotto.compareLotto(new Lotto("3, 4, 5, 6, 7, 8"));
-        assertThat(ranking).isEqualTo(Ranking.THIRD);
-    }
-
-    @Test
-    void 로또_번호_비교하기_5개() {
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Ranking ranking = lotto.compareLotto(new Lotto("2, 3, 4, 5, 6, 7"));
-        assertThat(ranking).isEqualTo(Ranking.SECOND);
-    }
-
-    @Test
-    void 로또_번호_비교하기_6개() {
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Ranking ranking = lotto.compareLotto(new Lotto("1, 2, 3, 4, 5, 6"));
-        assertThat(ranking).isEqualTo(Ranking.FIRST);
+        Ranking ranking = lotto.compareLotto(new Lotto(lottoNumbers));
+        assertThat(ranking).isEqualTo(expected);
     }
 }

@@ -7,6 +7,7 @@ import static lotto.domain.LottoConstant.LOTTO_START_NUMBER;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNoTest {
+
     @Test
     public void 문제없는_로또_번호() {
         new LottoNo(LOTTO_START_NUMBER);

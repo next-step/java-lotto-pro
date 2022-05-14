@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 import static lotto.domain.LottoConstant.LOTTO_SIZE;
@@ -48,6 +45,19 @@ public class Lotto {
 
     public List<LottoNo> getLottoNoList() {
         return Collections.unmodifiableList(lottoNoList);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNoList, lotto.lottoNoList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNoList);
     }
 
     @Override
