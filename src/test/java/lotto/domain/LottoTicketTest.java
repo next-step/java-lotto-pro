@@ -11,16 +11,16 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-class LottoNumbersTest {
-    @DisplayName("로또 번호의 목록을 가진 LottoNumbers 생성")
+class LottoTicketTest {
+    @DisplayName("로또 번호의 목록을 가진 LottoTicket 생성")
     @Test
     void test_로또_번호_목록_생성() {
         //given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         //when
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        LottoTicket lottoTicket = new LottoTicket(numbers);
         //then
-        assertThat(lottoNumbers).isEqualTo(new LottoNumbers(numbers));
+        assertThat(lottoTicket).isEqualTo(new LottoTicket(numbers));
     }
 
     @DisplayName("로또 번호가 비어있는 경우 예외 처리")
@@ -29,7 +29,7 @@ class LottoNumbersTest {
         //given
         List<Integer> numbers = Collections.emptyList();
         //when & then
-        assertThatThrownBy(() -> new LottoNumbers(numbers))
+        assertThatThrownBy(() -> new LottoTicket(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.NOT_EMPTY_LOTTO);
     }
@@ -40,7 +40,7 @@ class LottoNumbersTest {
         //given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         //when & then
-        assertThatThrownBy(() -> new LottoNumbers(numbers))
+        assertThatThrownBy(() -> new LottoTicket(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.OUT_OF_SIZE_LOTTO);
     }
@@ -51,7 +51,7 @@ class LottoNumbersTest {
         //given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
         //when & then
-        assertThatThrownBy(() -> new LottoNumbers(numbers))
+        assertThatThrownBy(() -> new LottoTicket(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.DUPLICATE_NUMBER);
     }
@@ -62,10 +62,10 @@ class LottoNumbersTest {
         //given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         //when
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-        LottoNumbers winningNumbers = new LottoNumbers(numbers);
+        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoTicket winningNumbers = new LottoTicket(numbers);
         //then
-        assertThat(lottoNumbers.matchCount(winningNumbers)).isEqualTo(6);
+        assertThat(lottoTicket.matchCount(winningNumbers)).isEqualTo(6);
     }
 
     @DisplayName("당첨 순위 확인")
@@ -74,9 +74,9 @@ class LottoNumbersTest {
         //given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         //when
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-        LottoNumbers winningNumbers = new LottoNumbers(numbers);
+        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoTicket winningNumbers = new LottoTicket(numbers);
         //then
-        assertThat(lottoNumbers.rank(winningNumbers)).isEqualTo(Rank.FIRST);
+        assertThat(lottoTicket.rank(winningNumbers)).isEqualTo(Rank.FIRST);
     }
 }

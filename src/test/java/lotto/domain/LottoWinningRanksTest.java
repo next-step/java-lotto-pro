@@ -17,17 +17,17 @@ class LottoWinningRanksTest {
     void setUp() {
         //given
         List<Integer> first = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoNumbers userNumbers = new LottoNumbers(first);
-        LottoNumbers winningNumbers = new LottoNumbers(first);
+        LottoTicket userNumbers = new LottoTicket(first);
+        LottoTicket winningNumbers = new LottoTicket(first);
         lottoWinningRanks = new LottoWinningRanks();
         lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers));
 
         List<Integer> second = Arrays.asList(1, 2, 3, 4, 5, 7);
-        userNumbers = new LottoNumbers(second);
+        userNumbers = new LottoTicket(second);
         lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers));
 
         List<Integer> lose = Arrays.asList(7, 8, 9, 10, 11, 12);
-        userNumbers = new LottoNumbers(lose);
+        userNumbers = new LottoTicket(lose);
         lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers));
     }
 

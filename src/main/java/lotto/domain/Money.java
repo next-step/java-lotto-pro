@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.constants.ErrorMessage;
 
 public class Money {
-    private static final int MIN_MONEY = 1000;
+    private static final int MIN_MONEY = 0;
     private final int money;
 
     public Money(int money) {

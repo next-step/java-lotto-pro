@@ -5,19 +5,19 @@ import lotto.constants.ErrorMessage;
 import java.util.List;
 
 public class LottoTickets {
-    private final List<LottoNumbers> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoNumbers> lottoTickets) {
+    public LottoTickets(List<LottoTicket> lottoTickets) {
         if (lottoTickets == null || lottoTickets.isEmpty()) {
             throw new IllegalArgumentException(ErrorMessage.NOT_EMPTY_LOTTO);
         }
         this.lottoTickets = lottoTickets;
     }
 
-    public LottoWinningRanks match(LottoNumbers winningNumbers) {
+    public LottoWinningRanks match(LottoTicket winningNumbers) {
         LottoWinningRanks lottoWinningRanks = new LottoWinningRanks();
-        lottoTickets.forEach(lottoNumbers -> {
-            lottoWinningRanks.addWinningRank(lottoNumbers.rank(winningNumbers));
+        lottoTickets.forEach(lottoTicket -> {
+            lottoWinningRanks.addWinningRank(lottoTicket.rank(winningNumbers));
         });
         return lottoWinningRanks;
     }

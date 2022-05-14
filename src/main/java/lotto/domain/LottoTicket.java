@@ -9,21 +9,21 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class LottoTicket {
     private static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
+    public LottoTicket(List<Integer> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::new).collect(Collectors.toList());
     }
 
-    public Rank rank(LottoNumbers winningNumbers) {
+    public Rank rank(LottoTicket winningNumbers) {
         return Rank.rank(matchCount(winningNumbers));
     }
 
-    public int matchCount(LottoNumbers winningNumbers) {
+    public int matchCount(LottoTicket winningNumbers) {
         return (int) this.lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
@@ -62,7 +62,7 @@ public class LottoNumbers {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumbers that = (LottoNumbers) o;
+        LottoTicket that = (LottoTicket) o;
         return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
