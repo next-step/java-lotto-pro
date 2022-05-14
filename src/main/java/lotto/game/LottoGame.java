@@ -1,13 +1,11 @@
 package lotto.game;
 
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import lotto.dto.LottoGameResultDTO;
 import lotto.factory.LottoNumbersFactory;
 import lotto.number.LottoNumbers;
@@ -58,11 +56,9 @@ public class LottoGame {
     }
 
     private List<LottoRank> matchLottos(List<LottoNumbers> lottoNumbersList, LottoNumbers winNumbers) {
-        List<LottoRank> ranks = new ArrayList<>();
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            ranks.add(lottoNumbers.matchWithWinNumbers(winNumbers));
-        }
-        return ranks;
+        return lottoNumbersList.stream()
+                .map(lottoNumbers->lottoNumbers.matchWithWinNumbers(winNumbers))
+                .collect(toList());
     }
 
     private LottoGameResultDTO calculateStatisticsAndYield(List<LottoRank> lottoRanks) {
@@ -72,13 +68,8 @@ public class LottoGame {
     }
 
     private Map<LottoRank, Integer> calculateStatistics(List<LottoRank> lottoRanks) {
-        Map<LottoRank, Integer> statistics = lottoRanks.stream().collect(
-                groupingBy(
-                        lottoRank -> lottoRank
-                        , () -> new EnumMap<>(LottoRank.class)
-                        , collectingAndThen(toList(), list -> list.size())
-                )
-        );
+        Map<LottoRank, Integer> statistics = lottoRanks.stream().collect(toMap(lottoRank -> lottoRank
+                ,(lottoRank)-> 1,Math::addExact,TreeMap::new));
         statistics.remove(LottoRank.NO_PRIZE);
         return statistics;
     }

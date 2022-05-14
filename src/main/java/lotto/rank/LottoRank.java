@@ -1,8 +1,7 @@
 package lotto.rank;
 
 import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 
 public enum LottoRank {
 
@@ -26,20 +25,15 @@ public enum LottoRank {
         if (isNoPrize(matchNumberCount)) {
             return NO_PRIZE;
         }
-        Map<Integer, LottoRank> rankMap = makeRankMap();
-        return rankMap.get(matchNumberCount);
+        Optional<LottoRank> foundRank = EnumSet.allOf(LottoRank.class)
+                .stream()
+                .filter(rank->rank.matchNumberCount == matchNumberCount)
+                .findFirst();
+        return foundRank.orElse(NO_PRIZE);
     }
 
     private static boolean isNoPrize(int matchNumberCount) {
         return matchNumberCount < MIN_MATCH_COUNT_FOR_PRIZE;
-    }
-
-    private static Map<Integer, LottoRank> makeRankMap() {
-        Map<Integer, LottoRank> map = new HashMap<>();
-        for (LottoRank rank : EnumSet.allOf(LottoRank.class)) {
-            map.put(rank.matchNumberCount, rank);
-        }
-        return map;
     }
 
     public int getMatchNumberCount() {
