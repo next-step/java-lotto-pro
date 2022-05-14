@@ -1,6 +1,7 @@
 package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
@@ -28,6 +29,17 @@ class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber(numberList);
 
         assertThat(lottoNumber).isEqualTo(new LottoNumber(numberList));
+    }
+
+    @Test
+    @DisplayName("로또 번호를 중복된 값을 입력받을 때 IllegalArgumentException가 발생")
+    void inputDuplicateLottoNumberString() {
+        List<Number> duplicateNumberList = Arrays.asList(
+                Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(1), Number.of(6)
+        );
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoNumber(duplicateNumberList))
+                .withMessage("로또 숫자의 중복은 허용되지 않습니다.");
     }
 
     @ParameterizedTest(name = "로또 번호와 당첨 번호의 {2} 등수 확인")

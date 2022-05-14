@@ -1,15 +1,19 @@
 package lotto.model;
 
+import static lotto.constants.LottoConstant.NUMBER_SIZE;
+
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class LottoNumber {
     private final List<Number> lottoNumber;
 
     public LottoNumber(List<Number> lottoNumber) {
-        sortLottoNumber(lottoNumber);
+        validateDuplicate(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
@@ -24,11 +28,15 @@ public class LottoNumber {
         return this.lottoNumber.contains(number);
     }
 
-    public static void sortLottoNumber(List<Number> lottoNumber) {
-        lottoNumber.sort(Comparator.comparing(Number::getNumber));
+    public void validateDuplicate(List<Number> lottoNumber) {
+        Set<Number> numberSet = new HashSet<>(lottoNumber);
+        if (numberSet.size() != NUMBER_SIZE) {
+            throw new IllegalArgumentException("로또 숫자의 중복은 허용되지 않습니다.");
+        }
     }
 
     public List<Number> getLottoNumber() {
+        lottoNumber.sort(Comparator.comparing(Number::getNumber));
         return Collections.unmodifiableList(lottoNumber);
     }
 
