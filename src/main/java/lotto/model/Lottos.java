@@ -27,6 +27,12 @@ public class Lottos {
         this.resultCountMap = new HashMap<>();
     }
 
+    public Lottos() {
+        this.lottoList = new ArrayList<>();
+        this.playCount = 0;
+        this.resultCountMap = new HashMap<>();
+    }
+
     public int getPlayCount() {
         return playCount;
     }

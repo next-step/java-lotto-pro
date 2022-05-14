@@ -10,6 +10,10 @@ public class LottoPaper {
         this.gameCount = gameCount;
     }
 
+    public int getGameCount() {
+        return gameCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -13,7 +13,7 @@ public class Application {
     }
 
     public void startLottoGame() throws IOException {
-        LottoGameDTO lottoGameDTO = generateLottos();
+        LottoGameDTO lottoGameDTO = generateLottosByInputMoney();
         playLotto(lottoGameDTO);
     }
 
@@ -27,15 +27,14 @@ public class Application {
         } while (isInputError);
     }
 
-    private LottoGameDTO generateLottos() throws IOException {
+    private LottoGameDTO generateLottosByInputMoney() throws IOException {
         boolean isInputError;
         LottoGameDTO lottoGameDTO;
         do {
             String moneyWord = InputConsole.readLineForMessage(LottoGameMessage.INPUT_MONEY_MESSAGE);
-            lottoGameDTO = lottoGameController.generateLottoByMoney(moneyWord);
+            lottoGameDTO = lottoGameController.generateLottos(moneyWord);
             isInputError = lottoGameDTO.isInputError();
         } while (isInputError);
-
         return lottoGameDTO;
     }
 
