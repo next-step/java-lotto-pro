@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoRandomNumbers {
+    private static final int SIZE = 6;
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
@@ -24,8 +25,15 @@ public class LottoRandomNumbers {
         this.lottoNumbers = numList;
     }
 
-    public List<LottoNumber> generate() {
+    public void LottoNumberShuffle() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, 6);
+    }
+
+    public List<LottoNumber> generate() {
+        LottoNumberShuffle();
+
+        return lottoNumbers.stream()
+                .limit(SIZE)
+                .collect(Collectors.toList());
     }
 }
