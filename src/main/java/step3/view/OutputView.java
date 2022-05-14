@@ -15,22 +15,19 @@ import static step3.LottoConstant.THREE_NUMBER_MATCH;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Scanner;
 import step3.LottoConstant;
 
 public class OutputView {
 
-    private final Scanner scanOut;
     private final HashMap<Integer, Integer> rewardPerMatch = new HashMap<>();
     private final String isLoss = "손해";
     private final String isBenefit = "이득";
 
-    public OutputView(Scanner scan) {
-        this.scanOut = scan;
+    public OutputView() {
         init();
     }
 
-    public void printOutput(HashMap<String, Integer> statistics, int lottoNumber) {
+    public void printOutput(HashMap<Integer, Integer> statistics, int lottoNumber) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -54,7 +51,7 @@ public class OutputView {
         return isBenefit;
     }
 
-    private long printOverview(HashMap<String, Integer> statistics) {
+    private long printOverview(HashMap<Integer, Integer> statistics) {
         long reward = 0;
         for (Entry<Integer, Integer> lottoRewardInfo : rewardPerMatch.entrySet()) {
             reward += printOverViewPerEntry(lottoRewardInfo.getKey(), lottoRewardInfo.getValue(), statistics);
@@ -62,7 +59,7 @@ public class OutputView {
         return reward;
     }
 
-    private long printOverViewPerEntry(int matchCount, int matchReward, HashMap<String, Integer> statistics) {
+    private long printOverViewPerEntry(int matchCount, int matchReward, HashMap<Integer, Integer> statistics) {
         System.out.println(String.format(OVERVIEW_FORMAT, matchCount, matchReward, statistics.get(matchCount)));
         return matchReward * statistics.get(matchCount);
     }
