@@ -24,8 +24,8 @@ public class LottoGameController {
                     .splitToNumberListByDelimiter(winningNumbersWord, DELIMITER_COMMA);
             WinningLotto winningLotto = new WinningLotto(winningNumberList);
             LottoGameResult lottoGameResult = winningLotto.compareLottos(lottos);
-            ResultView.printFinalResultView(lottoGameResult,lottos);
-            return new LottoGameDTO(lottos,false);
+            ResultView.printFinalResultView(lottoGameResult, lottos);
+            return new LottoGameDTO(lottos, false);
         } catch (IllegalArgumentException e) {
             ResultView.printConsole(e.getMessage());
             return new LottoGameDTO(true);

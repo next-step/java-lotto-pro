@@ -32,7 +32,7 @@ public class WinningLotto {
 
     private static void validateDuplication(List<Integer> winningNumberList) {
         HashSet<Integer> deleteDuplicationNumber = new HashSet<>(winningNumberList);
-        if(winningNumberList.size() != deleteDuplicationNumber.size()){
+        if (winningNumberList.size() != deleteDuplicationNumber.size()) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATION);
         }
     }
@@ -45,7 +45,7 @@ public class WinningLotto {
 
     public LottoGameResult compareLottos(Lottos lottos) {
         EnumMap<LottoRank, Integer> resultRankMap = new EnumMap<>(LottoRank.class);
-        for (Lotto lotto : lottos.getLottoList()){
+        for (Lotto lotto : lottos.getLottoList()) {
             LottoRank lottoRank = lotto.matchRank(winningNumberList);
             resultRankMap.put(lottoRank, resultRankMap.getOrDefault(lottoRank, 0) + 1);
         }

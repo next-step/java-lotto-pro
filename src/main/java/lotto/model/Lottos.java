@@ -18,7 +18,8 @@ public class Lottos {
     public int lottoCount() {
         return lottoList.size();
     }
-    private int purchaseMoney(){
+
+    private int purchaseMoney() {
         return lottoCount() * LottoRoleConst.LOTTO_PRICE;
     }
 

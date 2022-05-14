@@ -40,7 +40,7 @@ public enum LottoRank {
         return matchCountRankMap.getOrDefault(matchNumberCount, NONE);
     }
 
-    public static Set<LottoRank> valuesExcludeNone(){
-        return EnumSet.of(FIRST,SECOND,THIRD,FOURTH);
+    public static Set<LottoRank> valuesExcludeNone() {
+        return EnumSet.of(FIRST, SECOND, THIRD, FOURTH);
     }
 }

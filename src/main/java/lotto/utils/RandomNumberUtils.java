@@ -28,7 +28,7 @@ public class RandomNumberUtils {
         if (numberListMap.containsKey(cacheKey)) {
             return numberListMap.get(cacheKey);
         }
-        List<Integer>  numberList= createNumberList(low, max);
+        List<Integer> numberList = createNumberList(low, max);
         numberListMap.put(cacheKey, numberList);
         return numberList;
     }

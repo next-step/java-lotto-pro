@@ -11,7 +11,7 @@ public class LottoStore {
         try {
             this.money = Integer.parseInt(moneyWord);
             validateMoney(money);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.CANT_CONVERT_MONEY);
         }
     }

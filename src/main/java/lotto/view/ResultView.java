@@ -45,7 +45,7 @@ public class ResultView {
             resultView.append(matchMessage);
             resultView.append(ENTER);
         }
-        setProfitRateView(resultView,lottos.calcProfitRate(lottoGameResult.totalWinningAmount()));
+        setProfitRateView(resultView, lottos.calcProfitRate(lottoGameResult.totalWinningAmount()));
         printConsole(resultView.toString());
     }
 
@@ -62,6 +62,6 @@ public class ResultView {
     }
 
     public static void setProfitRateView(StringBuilder resultView, double calcProfitRate) {
-        resultView.append(String.format(RESULT_PROFIT_MESSAGE,calcProfitRate));
+        resultView.append(String.format(RESULT_PROFIT_MESSAGE, calcProfitRate));
     }
 }
