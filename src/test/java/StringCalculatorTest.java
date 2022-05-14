@@ -15,15 +15,15 @@ public class StringCalculatorTest {
     }
 
     @Test
-    @DisplayName("음수 혹은 숫자가 아닐 경우 RuntimeException 이 발생한다.")
+    @DisplayName("음수 혹은 숫자가 아닐 경우 IllegalArgumentException 이 발생한다.")
     void checkInvalidInput() {
         StringCalculator stringCalculator = new StringCalculator();
         assertThatThrownBy(() -> {
             stringCalculator.sum("-3");
-        }).isInstanceOf(RuntimeException.class);
+        }).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> {
             stringCalculator.sum("@");
-        }).isInstanceOf(RuntimeException.class);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

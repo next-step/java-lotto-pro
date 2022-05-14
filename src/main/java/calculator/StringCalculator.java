@@ -37,7 +37,7 @@ public class StringCalculator {
 
     private void validateNumberType(String input) {
         if (!input.matches(NUMBER_TYPE_REGEX)) {
-            throw new RuntimeException("숫자만 입력할 수 있습니다.");
+            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
         }
     }
 }
