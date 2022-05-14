@@ -12,6 +12,7 @@ public class Lotto {
         validateNumberSize(numbers);
         for (int number : numbers) {
             LottoNumber lottoNumber = new LottoNumber(number);
+            validateNumberUnique(lottoNumber);
             lottoNumbers.add(lottoNumber);
         }
     }
@@ -19,6 +20,12 @@ public class Lotto {
     private void validateNumberSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("[ERROR] Lotto의 숫자는 6개여야 합니다.");
+        }
+    }
+
+    private void validateNumberUnique(LottoNumber number) {
+        if(lottoNumbers.contains(number)){
+            throw new IllegalArgumentException("[ERROR] Lotto의 숫자는 중복이 불가합니다.");
         }
     }
 

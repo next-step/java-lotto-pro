@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
     private int number;
 
@@ -17,5 +19,15 @@ public class LottoNumber {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getNumber());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return ((LottoNumber)o).getNumber() == number;
     }
 }

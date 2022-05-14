@@ -37,4 +37,13 @@ public class LottoTest {
         }).isInstanceOf(IllegalArgumentException.class);
 
     }
+
+    @Test
+    @DisplayName("Lotto의 LottoNumber List는 중복이 불가하다.")
+    void Lotto_중복불가_테스트(){
+        assertThatThrownBy(() -> {
+            List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 5));
+            Lotto lotto = new Lotto(numbers);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }
