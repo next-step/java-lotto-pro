@@ -2,9 +2,11 @@ package lotto.view.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static lotto.view.constants.LottoConstant.LOTTO_PRICE;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MoneyTest {
@@ -25,6 +27,16 @@ class MoneyTest {
         assertThatThrownBy(() -> Money.of(input))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 구매금액은 %s원 단위만 가능합니다! : 입력금액 [%d]", LOTTO_PRICE, input);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"10000:10", "13000:13", "5000:5", "0:0"}, delimiter = ':')
+    @DisplayName("입력받은 구매금액으로 로또 구매 개수를 계산하여 리턴한다.")
+    void purchaseCount_구매개수(int input, int expected) {
+        Money money = Money.of(input);
+        assertThat(money.purchaseCount())
+                .isExactlyInstanceOf(Integer.class)
+                .isEqualTo(expected);
     }
 
 }
