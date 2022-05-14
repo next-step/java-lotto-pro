@@ -1,6 +1,5 @@
 package lotto.money;
 
-import lotto.Purchasable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -40,7 +39,7 @@ class MoneyTest {
         .hasMessageContaining("Money 형식에 어긋납니다.");
     }
 
-    @DisplayName("Money로 Purchasable 차감 여부 반환")
+    @DisplayName("Money로 다른 Money 차감 여부 반환")
     @ParameterizedTest
     @ArgumentsSource(CanDeductArgumentsProvider.class)
     void canDeduct(Money money, boolean expected) {
