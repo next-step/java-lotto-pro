@@ -11,18 +11,11 @@ public class Money {
     }
 
     public static Money from(int money) {
-        validateMoney(money);
-        return new Money(money);
-    }
-
-    private static void validateMoney(int money) {
-        if (money >= MONEY_MIN) {
-            return;
+        if (money < MONEY_MIN) {
+            throw new IllegalArgumentException(String.format(INVALID_INPUT_MONEY, money));
         }
 
-        throw new IllegalArgumentException(
-            String.format(INVALID_INPUT_MONEY, money)
-        );
+        return new Money(money);
     }
 
     public int getMoney() {
