@@ -6,7 +6,6 @@ import generator.LottoNumberGenerator;
 import generator.NumberGenerator;
 import java.util.ArrayList;
 import java.util.List;
-import lotto.constants.LottoConstants;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;
@@ -44,7 +43,7 @@ public class LottoController {
     }
 
     private Lottos purchaseLottos(Money money) {
-        LottoCount lottoCount = calculateLottoCountByMoney(money);
+        LottoCount lottoCount = LottoCount.calculateBy(money);
         Lottos lottos = Lottos.from(generateAutoLottoNumbers(lottoCount));
         resultView.printLottos(lottos);
 
@@ -58,9 +57,5 @@ public class LottoController {
             lottos.add(Lotto.from(lottoNumbers));
         }
         return lottos;
-    }
-
-    private LottoCount calculateLottoCountByMoney(Money money) {
-        return LottoCount.from(money.getMoney() / LottoConstants.LOTTO_PRICE);
     }
 }
