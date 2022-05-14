@@ -24,8 +24,20 @@ public class Money {
         return this.value >= money.value;
     }
 
+    public Money plus(Money money) {
+        return new Money(this.value + money.value);
+    }
+
     public Money minus(Money money) {
         return new Money(this.value - money.value);
+    }
+
+    public Money multiply(int count) {
+        return new Money(this.value * count);
+    }
+
+    public double calculateLottoYield(Money winningReward) {
+        return (double) this.value/ winningReward.value;
     }
 
     @Override

@@ -19,6 +19,14 @@ public class WinningStatus {
     }
 
     public long numberOfWinning(Rank rank) {
-        return this.value.getOrDefault(rank,0L);
+        return this.value.getOrDefault(rank, 0L);
+    }
+
+    public Money getWinningReward() {
+        return this.value.entrySet()
+                .stream()
+                .map(entry -> entry.getKey().getWinningReward(Math.toIntExact(entry.getValue())))
+                .reduce(Money::plus)
+                .get();
     }
 }

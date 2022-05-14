@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotties;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.WinningStatus;
 
@@ -21,5 +22,10 @@ public class ResultView {
         System.out.println("---------");
         WINNING_LIST.forEach(rank -> System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getMoney() + "원)-" + winningStatus.numberOfWinning(rank) + "개"));
 
+    }
+
+    public static void printLottoYield(Money purchaseAmount, WinningStatus winningStatus) {
+        Money winningReward = winningStatus.getWinningReward();
+        System.out.println("총 수익률은 " + (winningReward.calculateLottoYield(purchaseAmount)) + "입니다.");
     }
 }
