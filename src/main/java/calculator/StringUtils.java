@@ -1,9 +1,9 @@
 package calculator;
 
-public class StringReader {
+public class StringUtils {
     private static final String NON_NUMERIC_VALUE_IS_NOT_ALLOWED = "숫자 이외의 값은 허용되지 않습니다.";
 
-    private StringReader() {
+    private StringUtils() {
     }
 
     public static String readString(String input) {
