@@ -29,10 +29,10 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
  else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
 
 ## 구현 요소 목록
-### Lottery - 딩첨번호 일치 비교 
-### Lotto - 당첨번호 지정
+### Lottery - 딩첨번호 일치 비교
+### Prize - 당첨 상세정보
 ### LottoNumber - 로또 번호
-### Lottos - Lotto 를 여러 개 구매할 경우 대응
+### LottoNumbers - 로또 번호 여러개 대응
 ### Vendor - 구매, 총 구매량에 대한 통계, 수익률 처리 
 
 
@@ -47,8 +47,6 @@ LottoNumbers
 - [X] 중복된 LottoNumber 를 포함할 수 없다.
 - [X] LottoNumber를 포함하고 있는지 여부를 확인할 수 있다.
 
-Lotto
-- [ ] LottoNumbers 를 확인하여 당첨정보를 확인할 수 있다.
-
-
+Prize
+- [X] 당첨 번호를 포함한 갯수를 확인하여 당첨정보를 확인할 수 있다.
 
