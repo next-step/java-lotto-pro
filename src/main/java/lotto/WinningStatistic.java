@@ -16,4 +16,18 @@ public class WinningStatistic {
     public void collect(Rank rank) {
         statistic.put(rank, count(rank) + 1);
     }
+
+    public double calculateRateOfReturn(double purchaseAmount) {
+        int totalPrizeMoney = 0;
+
+        for (Rank rank : statistic.keySet()) {
+            totalPrizeMoney += rank.prizeMoney(statistic.get(rank));
+        }
+        return makeTwoDecimalPlace(totalPrizeMoney / purchaseAmount);
+    }
+
+    private double makeTwoDecimalPlace(double late) {
+        return Math.floor(late * 100) / 100.0;
+    }
+
 }

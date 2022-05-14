@@ -23,4 +23,8 @@ public enum Rank {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("해당 숫자와 일치하는 당첨 순위가 없습니다."));
     }
+
+    public int prizeMoney(int count) {
+        return this.prize * count;
+    }
 }

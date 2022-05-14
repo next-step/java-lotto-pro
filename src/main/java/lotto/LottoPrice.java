@@ -10,4 +10,8 @@ public class LottoPrice {
         }
         return money / PRICE;
     }
+
+    public static int calculatePurchaseAmount(int count) {
+        return count * PRICE;
+    }
 }

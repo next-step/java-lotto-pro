@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoPriceTest {
 
@@ -25,5 +24,13 @@ class LottoPriceTest {
         assertThatThrownBy(() ->
             LottoPrice.purchase(money)
         ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 구매금액을_계산한다() {
+        // when
+        int price = LottoPrice.calculatePurchaseAmount(10);
+        // then
+        assertThat(price).isEqualTo(10000);
     }
 }

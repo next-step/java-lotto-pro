@@ -15,4 +15,15 @@ class WinningStatisticTest {
         // then
         assertThat(winningStatistic.count(Rank.FIRST)).isEqualTo(1);
     }
+
+    @Test
+    void 수익률을_계산한다() {
+        // given
+        WinningStatistic winningStatistic = new WinningStatistic();
+        winningStatistic.collect(Rank.FOUR);
+        // when
+        double rate = winningStatistic.calculateRateOfReturn(14000);
+        // then
+        assertThat(rate).isEqualTo(0.35);
+    }
 }
