@@ -44,8 +44,7 @@ public class LottoGameController {
 
     public LottoGameDTO resultWinningGame(Lottos lottos, String winningNumbersWord) {
         try {
-            List<Integer> winningNumberList = InputStringUtils
-                    .splitToNumberListByDelimiter(winningNumbersWord, DELIMITER_COMMA);
+            List<Integer> winningNumberList = InputStringUtils.splitToNumberList(winningNumbersWord, DELIMITER_COMMA);
             WinningLotto winningLotto = new WinningLotto(winningNumberList);
             LottoGameResult lottoGameResult = winningLotto.compareLottos(lottos);
             ResultView.printFinalResultView(lottoGameResult, lottos);

@@ -13,7 +13,7 @@ public class InputStringUtils {
         throw new IllegalStateException(ErrorMessage.UTILITY_CLASS);
     }
 
-    public static List<Integer> splitToNumberListByDelimiter(String inputString, String delimiter) {
+    public static List<Integer> splitToNumberList(String inputString, String delimiter) {
         inputString = inputString.replaceAll(WHITE_SPACE, NONE_SPACE);
         List<Integer> numberList = new ArrayList<>();
         for (String numberWord : inputString.split(delimiter)) {

@@ -2,11 +2,9 @@ package lotto.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -16,7 +14,7 @@ class InputStringUtilsTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:,:6", "1-2-3:-:3"}, delimiter = ':')
     void splitToNumberListByDelimiter(String inputString, String delimiter, int expectedSize) {
-        List<Integer> numberList = InputStringUtils.splitToNumberListByDelimiter(inputString, delimiter);
+        List<Integer> numberList = InputStringUtils.splitToNumberList(inputString, delimiter);
         assertThat(numberList).hasSize(expectedSize);
     }
 
@@ -25,7 +23,7 @@ class InputStringUtilsTest {
     @CsvSource(value = {"%,2,3,4,5,6:,", "M-2-3:-"}, delimiter = ':')
     void splitToNumberListByDelimiter_not_number(String inputString, String delimiter) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> InputStringUtils.splitToNumberListByDelimiter(inputString, delimiter))
+                .isThrownBy(() -> InputStringUtils.splitToNumberList(inputString, delimiter))
                 .withMessage("[ERROR] 숫자가 아닙니다.");
     }
 
