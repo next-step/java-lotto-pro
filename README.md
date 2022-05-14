@@ -181,8 +181,8 @@ public enum Rank {
 ## 기능 목록
 
 - [x] 이전 리뷰 내용 반영
+- [x] LottoPrize 수정
 - [ ] WinningLotto 구현
-- [ ] LottoPrize 수정
 - [ ] LottoAnalyzer 수정
 - [ ] LottoMachine 수정
 - [ ] InputView/ResultView 수정 
