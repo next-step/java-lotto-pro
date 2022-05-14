@@ -7,3 +7,23 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 기능 목록
+- [x] LottoNumber는 1 이상 45 이하이다.
+  - [x] 1이상 45이하가 아니라면 예외를 던진다.
+- [x] LottoNumbers는 6개의 LottoNumber로 구성된다.
+- [x] LottoGenerator는 6개의 숫자를 만든다.
+  - [x] 6개가 아니라면 예외를 던진다.
+- [x] LottoQuantityChecker 금액에 따른 로또 수량을 계산한다.
+  - [x] 1000원 단위가 아니라면 예외를 던진다.
+- [x] LottoStatics는 금액 별 당첨 갯수를 계산한다.
+- [x] LottoPrizeRank는 일치 갯수 별 상금을 가지고 있다.
+- [x] LottoPrizeRanks는 LottoPrizeRank로 구성된다.
+  - [x] 총 당첨금액을 계산한다.
+- [x] RandomNumberGenerator는 여러개의 LottoNumbers를 만든다.
+  - [x] 중복된 LottoNumber를 갖지 않는다.
+- [x] LottoPrizeMap은 금액 별 당첨 갯수를 만든다.
+- [x] LottoMachine은 사용자에게 금액을 입력받는다.
+  - [x] 숫자가 아닌 값을 입력 받으면 예외를 던진다.
+  - [x] 총 수익률을 계산한다.
+
