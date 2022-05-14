@@ -9,7 +9,7 @@ public class Numbers {
 
     private static final Pattern CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
 
-    List<ZeroOrPositiveNumber> numberList;
+    private List<ZeroOrPositiveNumber> numberList;
 
     public Numbers() {
         this.numberList = new ArrayList<>();
