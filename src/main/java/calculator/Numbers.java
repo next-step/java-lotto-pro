@@ -7,13 +7,12 @@ import java.util.Objects;
 public class Numbers {
     private static String NULL_WAS_ENTERED = "정수가 입력되지 않았습니다.";
 
-    private final List<Number> numbers;
+    private final List<Number> numbers = new LinkedList<>();
 
     public Numbers() {
-        this.numbers = new LinkedList<>();
     }
 
-    public void makeNumbers(String[] integers) {
+    public Numbers(String[] integers) {
         if (integers == null) {
             throw new NullPointerException(NULL_WAS_ENTERED);
         }
