@@ -9,7 +9,7 @@ public class Numbers {
 
     private static final Pattern CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
 
-    List<Number> numberList;
+    List<ZeroOrPositiveNumber> numberList;
 
     public Numbers() {
         this.numberList = new ArrayList<>();
@@ -33,7 +33,7 @@ public class Numbers {
 
     public int sum() {
         int answer = 0;
-        for (Number number : numberList) {
+        for (ZeroOrPositiveNumber number : numberList) {
             answer += number.getNumber();
         }
         return answer;
@@ -54,17 +54,17 @@ public class Numbers {
 
     private void addNumbers(String[] tokens) {
         for (String token : tokens) {
-            this.numberList.add(new Number(token));
+            this.numberList.add(new ZeroOrPositiveNumber(token));
         }
     }
 
     private void createOneNumber(String input) {
         if (input == null || input.trim().isEmpty()) {
-            this.numberList.add(new Number(0));
+            this.numberList.add(new ZeroOrPositiveNumber(0));
             return ;
         }
 
-        this.numberList.add(new Number(input));
+        this.numberList.add(new ZeroOrPositiveNumber(input));
     }
 
     private boolean hasDefaultDelimiter(String input) {

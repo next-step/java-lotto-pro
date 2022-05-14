@@ -1,15 +1,15 @@
 package calculator;
 
-public class Number {
+public class ZeroOrPositiveNumber {
 
     private final int number;
 
-    Number(int number) {
+    ZeroOrPositiveNumber(int number) {
         this.ensureZeroOrPositiveNumber(number);
         this.number = number;
     }
 
-    Number(String input) {
+    ZeroOrPositiveNumber(String input) {
         int number;
         try {
             number = Integer.parseInt(input);
