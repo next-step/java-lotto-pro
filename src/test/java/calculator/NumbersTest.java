@@ -30,4 +30,15 @@ class NumbersTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 숫자 이외의 값은 입력할 수 없습니다!");
     }
+
+    @Test
+    @DisplayName("필드에 음수가 포함되는 경우 IllegalArgumentException 예외를 발생시킨다.")
+    void Numbers_음수포함() {
+        String[] inputs = new String[] {"1", "-2", "3"};
+
+        assertThatThrownBy(() -> {
+            new Numbers(inputs);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 0 이상의 숫자를 입력해 주세요!");
+    }
 }
