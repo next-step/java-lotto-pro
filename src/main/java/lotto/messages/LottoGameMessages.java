@@ -12,7 +12,7 @@ public class LottoGameMessages {
     public static final String TOTAL_WINNING_COUNT = "%s개 일치 (%s원)- %s개";
     public static final String TOTAL_PROFIT_RATE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
-    public static final String BENEFIT = "이익";
+    public static final String BENEFIT = "이익이";
     public static final String LOSS = "손해";
 
 
