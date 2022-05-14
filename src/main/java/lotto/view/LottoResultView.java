@@ -14,16 +14,16 @@ import static lotto.constants.LottoGuideMessage.WINNING_STATISTICS_GUIDE;
 import java.util.Map;
 import java.util.Map.Entry;
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.LottoTicket;
 import lotto.domain.WinningRecord;
 import lotto.domain.WinningStatistics;
 import lotto.enums.WinningRank;
 
 public class LottoResultView {
 
-    public void printLottos(Lottos lottos) {
-        System.out.printf((PURCHASE_COUNT) + "%n", lottos.getCount());
-        for (Lotto lotto : lottos.getReadOnlyLottos()) {
+    public void printLottos(LottoTicket lottoTicket) {
+        System.out.printf((PURCHASE_COUNT) + "%n", lottoTicket.getCount());
+        for (Lotto lotto : lottoTicket.getReadOnlyLottos()) {
             System.out.println(lotto.getLottoNumbers());
         }
         newLine();

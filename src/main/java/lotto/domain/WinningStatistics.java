@@ -5,24 +5,24 @@ import lotto.utils.LottoWinningRankMatcher;
 
 public class WinningStatistics {
     private static final int PERCENT_CALCULATE_CRITERIA = 100;
-    private final Lottos lottos;
+    private final LottoTicket lottoTicket;
     private final LottoNumbers lastWinningLottoNumbers;
     private final WinningRecord winningRecord;
     private final Money money;
 
-    private WinningStatistics(Lottos lottos, LottoNumbers lastWinningLottoNumbers, Money money) {
-        this.lottos = lottos;
+    private WinningStatistics(LottoTicket lottoTicket, LottoNumbers lastWinningLottoNumbers, Money money) {
+        this.lottoTicket = lottoTicket;
         this.lastWinningLottoNumbers = lastWinningLottoNumbers;
         this.money = money;
         this.winningRecord = WinningRecord.createEmpty();
     }
 
-    public static WinningStatistics of(Lottos lottos, LottoNumbers lastWinningLottoNumbers, Money money) {
-        return new WinningStatistics(lottos, lastWinningLottoNumbers, money);
+    public static WinningStatistics of(LottoTicket lottoTicket, LottoNumbers lastWinningLottoNumbers, Money money) {
+        return new WinningStatistics(lottoTicket, lastWinningLottoNumbers, money);
     }
 
     public void statistics() {
-        for (Lotto lotto : lottos.getReadOnlyLottos()) {
+        for (Lotto lotto : lottoTicket.getReadOnlyLottos()) {
             WinningRank winningRank = LottoWinningRankMatcher.match(lastWinningLottoNumbers,
                 lotto.getLottoNumbers());
 
