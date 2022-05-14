@@ -56,7 +56,7 @@ public class Lottos {
 
         for (Lotto lotto : this.lottos) {
             sb.append(lotto.numbersToString());
-            sb.append("\n");
+            sb.append(System.lineSeparator());
         }
 
         return sb.toString();
