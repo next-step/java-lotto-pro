@@ -1,6 +1,9 @@
 import java.util.Objects;
 
 public class LottoNumber {
+    public static final int LOWER_BOUND = 1;
+    public static final int UPPER_BOUND = 45;
+
     private final int number;
 
     public LottoNumber(int number) {
@@ -9,7 +12,7 @@ public class LottoNumber {
     }
 
     private void check(int number) {
-        if (number < 1 || number > 45)
+        if (number < LOWER_BOUND || number > UPPER_BOUND)
             throw new RuntimeException();
     }
 
