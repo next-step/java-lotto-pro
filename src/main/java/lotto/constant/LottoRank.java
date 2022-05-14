@@ -1,7 +1,9 @@
 package lotto.constant;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public enum LottoRank {
 
@@ -14,6 +16,7 @@ public enum LottoRank {
     private final int matchNumberCount;
     private final int winningAmount;
     private static final Map<Integer, LottoRank> matchCountRankMap = new HashMap<>();
+
     static {
         for (LottoRank lottoRank : values()) {
             matchCountRankMap.put(lottoRank.matchNumberCount, lottoRank);
@@ -33,7 +36,11 @@ public enum LottoRank {
         return winningAmount;
     }
 
-    public static LottoRank of(int matchNumberCount){
-        return matchCountRankMap.getOrDefault(matchNumberCount,NONE);
+    public static LottoRank of(int matchNumberCount) {
+        return matchCountRankMap.getOrDefault(matchNumberCount, NONE);
+    }
+
+    public static Set<LottoRank> valuesExcludeNone(){
+        return EnumSet.of(FIRST,SECOND,THIRD,FOURTH);
     }
 }
