@@ -40,6 +40,10 @@ public enum LottoRank {
         return matchNumberCount;
     }
 
+    public long getPrize() {
+        return prize;
+    }
+
     public long calculatePrize(int count) {
         return this.prize * count;
     }

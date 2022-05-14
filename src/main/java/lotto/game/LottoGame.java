@@ -14,7 +14,7 @@ import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 public class LottoGame {
-    private final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private final LottoNumbersFactory lottoNumbersFactory;
     private final InputView inputView;
@@ -32,7 +32,7 @@ public class LottoGame {
         List<LottoNumbers> lottoNumbersList = buyLotto();
         LottoNumbers winNumbers = drawWinNumbers();
         List<LottoRank> lottoRanks = matchLottos(lottoNumbersList, winNumbers);
-        LottoGameResultDTO gameResult = calculateStatisticsAndYield(lottoRanks);
+        LottoGameResultDTO gameResult = gameResult(lottoRanks);
         resultView.printGameResult(gameResult);
     }
 
@@ -61,25 +61,8 @@ public class LottoGame {
                 .collect(toList());
     }
 
-    private LottoGameResultDTO calculateStatisticsAndYield(List<LottoRank> lottoRanks) {
-        Map<LottoRank, Integer> statistics = calculateStatistics(lottoRanks);
-        double yield = calculateYield(statistics);
-        return new LottoGameResultDTO(statistics, yield);
-    }
-
-    private Map<LottoRank, Integer> calculateStatistics(List<LottoRank> lottoRanks) {
-        Map<LottoRank, Integer> statistics = lottoRanks.stream().collect(toMap(lottoRank -> lottoRank
-                ,(lottoRank)-> 1,Math::addExact,TreeMap::new));
-        statistics.remove(LottoRank.NO_PRIZE);
-        return statistics;
-    }
-
-    private double calculateYield(Map<LottoRank, Integer> statistics) {
-        long prize = 0;
-        for (LottoRank rank : statistics.keySet()) {
-            int count = statistics.get(rank);
-            prize += rank.calculatePrize(count);
-        }
-        return prize / (double) budget;
+    private LottoGameResultDTO gameResult(List<LottoRank> lottoRanks) {
+        LottoGameResult gameResult = new LottoGameResult(lottoRanks);
+        return new LottoGameResultDTO(gameResult.statistics(), gameResult.yield());
     }
 }
