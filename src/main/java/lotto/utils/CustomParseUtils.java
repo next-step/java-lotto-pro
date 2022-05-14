@@ -13,9 +13,9 @@ public class CustomParseUtils {
         return result;
     }
 
-    private static Integer stringToInteger(String s) {
+    public static int stringToInteger(String s) {
         try {
-            return Integer.valueOf(s);
+            return Integer.parseInt(s);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[Error] 정상 숫자가 아닙니다.");
         }

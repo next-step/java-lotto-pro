@@ -4,16 +4,8 @@ public class Money {
     public static final int LOTTO_PRICE = 1000;
     private int amount;
 
-    public Money(String amount){
-        this.amount = stringToValidMoney(amount);
-    }
-
-    private int stringToValidMoney(String amount) {
-        try {
-            return validateMoney(Integer.parseInt(amount));
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[Error] 올바른 숫자 형식이 아닙니다.");
-        }
+    public Money(int amount){
+        this.amount = validateMoney(amount);
     }
 
     private int validateMoney(int amount) {

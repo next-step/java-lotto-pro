@@ -12,7 +12,7 @@ import java.util.List;
 
 public class LottoController {
     public static void simulateLotto(){
-        Money money = new Money(InputView.readMoney());
+        Money money = new Money(CustomParseUtils.stringToInteger(InputView.readMoney()));
         Lottos lottos = purchaseLottos(money.lottoCountToBuy());
         OutputView.printPurchasedLottos(lottos);
 
