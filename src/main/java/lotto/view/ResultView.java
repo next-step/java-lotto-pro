@@ -1,8 +1,9 @@
 package lotto.view;
 
 import java.util.Arrays;
-import lotto.constant.LottoMatchNumber;
+import lotto.constant.LottoRank;
 import lotto.model.Lotto;
+import lotto.model.LottoGameResult;
 import lotto.model.Lottos;
 
 public class ResultView {
@@ -26,37 +27,34 @@ public class ResultView {
             totalLottoNumberView.append(Arrays.toString(lotto.numberListToArray()));
             totalLottoNumberView.append(ENTER);
         }
-        printConsle(totalLottoNumberView.toString());
+        printConsole(totalLottoNumberView.toString());
     }
 
-    public void totalResultView(Lottos lottos) {
+    public static void printFinalResultView(LottoGameResult lottoGameResult, Lottos lottos) {
         StringBuilder resultView = new StringBuilder();
         setHeader(resultView);
-        for (LottoMatchNumber lottoMatchNumber : LottoMatchNumber.allMatchNumber()) {
-            resultView.append(ENTER);
-            int resultCount = lottos.getResultCount(lottoMatchNumber.getMatchNumberCount());
-            String resultMatchMessage = String.format(RESULT_MATCH_MESSAGE, lottoMatchNumber.getMatchNumberCount(),
-                    lottoMatchNumber.getWinningAmount(), resultCount);
-            resultView.append(resultMatchMessage);
+        for (LottoRank lottoRank : LottoRank.values()) {
+            String matchMessage = String
+                    .format(RESULT_MATCH_MESSAGE, lottoRank.getMatchNumberCount(), lottoRank.getWinningAmount(),
+                            lottoGameResult.rankCount(lottoRank));
+            resultView.append(matchMessage);
         }
-        setProfitRate(lottos, resultView);
-        printConsle(resultView.toString());
+        setProfitRateView(resultView,lottos.calcProfitRate(lottoGameResult.totalWinningAmount()));
+        printConsole(resultView.toString());
     }
 
-    private void setHeader(StringBuilder resultView) {
+    private static void setHeader(StringBuilder resultView) {
         resultView.append(ENTER);
         resultView.append(TOTAL_RESULT_HEADER_MESSAGE);
         resultView.append(ENTER);
         resultView.append(TOTAL_RESULT_UNDER_LINE);
     }
 
-    private void setProfitRate(Lottos lottos, StringBuilder resultView) {
-        resultView.append(ENTER);
-        String profitRate = String.format(RESULT_PROFIT_MESSAGE, lottos.getResultProfitRate());
-        resultView.append(profitRate);
+    public static void printConsole(String view) {
+        System.out.println(view);
     }
 
-    public static void printConsle(String view) {
-        System.out.println(view);
+    public static void setProfitRateView(StringBuilder resultView, double calcProfitRate) {
+        resultView.append(String.format(RESULT_PROFIT_MESSAGE,calcProfitRate));
     }
 }

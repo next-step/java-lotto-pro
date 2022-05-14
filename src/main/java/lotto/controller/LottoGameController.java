@@ -4,9 +4,10 @@ import java.util.List;
 import lotto.constant.LottoRoleConst;
 import lotto.dto.LottoGameDTO;
 import lotto.model.Lotto;
+import lotto.model.LottoGameResult;
 import lotto.model.LottoPaper;
-import lotto.model.LottoPlayService;
 import lotto.model.LottoStore;
+import lotto.model.WinningLotto;
 import lotto.utils.InputStringUtils;
 import lotto.utils.RandomNumberUtils;
 import lotto.view.ResultView;
@@ -16,21 +17,13 @@ public class LottoGameController {
 
     private static final String DELIMITER_COMMA = ",";
 
-    private final ResultView resultView;
-    private final LottoPlayService lottoPlayService;
-
-    public LottoGameController() {
-        this.resultView = new ResultView();
-        this.lottoPlayService = new LottoPlayService();
-    }
-
-    public LottoGameDTO playLottoGame(LottoGameDTO lottoGameDTO, String winningNumbersWord) {
+    public LottoGameDTO playLotto(Lottos lottos, String winningNumbersWord) {
         try {
-            Lottos lottos = lottoGameDTO.getLottos();
             List<Integer> winningNumberList = InputStringUtils
                     .splitToNumberListByDelimiter(winningNumbersWord, DELIMITER_COMMA);
-            lottoPlayService.playLottoGame(lottos, winningNumberList);
-            resultView.totalResultView(lottos);
+            WinningLotto winningLotto = new WinningLotto(winningNumberList);
+            LottoGameResult lottoGameResult = winningLotto.compareLottos(lottos);
+            ResultView.printFinalResultView(lottoGameResult,lottos);
             return new LottoGameDTO(lottos, null, false);
         } catch (IllegalArgumentException e) {
             return new LottoGameDTO(null, e.getMessage(), true);
@@ -41,16 +34,16 @@ public class LottoGameController {
         try {
             LottoStore lottoStore = new LottoStore(moneyWord);
             LottoPaper lottoPaper = lottoStore.issueLottoPaper();
-            Lottos lottos = generateLotto(lottoPaper);
+            Lottos lottos = generateLottos(lottoPaper);
             ResultView.printLottosView(lottos);
             return new LottoGameDTO(lottos, null, false);
         } catch (IllegalArgumentException e) {
-            ResultView.printConsle(e.getMessage());
+            ResultView.printConsole(e.getMessage());
             return new LottoGameDTO(null, null, true);
         }
     }
 
-    private Lottos generateLotto(LottoPaper lottoPaper) {
+    private Lottos generateLottos(LottoPaper lottoPaper) {
         Lottos lottos = new Lottos();
         for (int gameCount = 0; gameCount < lottoPaper.getGameCount(); gameCount++) {
             List<Integer> randomNumberToList = RandomNumberUtils
