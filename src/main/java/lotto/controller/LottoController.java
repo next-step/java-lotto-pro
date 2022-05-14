@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
 import lotto.view.InputView;
@@ -45,6 +44,6 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto() throws IOException {
-        return new WinningLotto(new LottoNumbers(inputView.inputWinningLottoNumbers()));
+        return new WinningLotto(inputView.inputWinningLottoNumbers());
     }
 }

@@ -27,14 +27,14 @@ public class LottosTest {
 
     @Test
     void compareLottos() {
-        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6));
 
         Lottos lottos = new Lottos(Arrays.asList(
-                new Lotto(new LottoNumbers(Arrays.asList(1,2,3,7,8,9))),
-                new Lotto(new LottoNumbers(Arrays.asList(1,2,3,4,8,9))),
-                new Lotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,9))),
-                new Lotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6))),
-                new Lotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)))
+                new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)),
+                new Lotto(Arrays.asList(1,2,3,4,8,9)),
+                new Lotto(Arrays.asList(1,2,3,4,5,9)),
+                new Lotto(Arrays.asList(1,2,3,4,5,6)),
+                new Lotto(Arrays.asList(1,2,3,4,5,6))
         ));
 
         lottos.compareLottos(winningLotto);

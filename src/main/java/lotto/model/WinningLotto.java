@@ -1,12 +1,14 @@
 package lotto.model;
 
+import java.util.List;
+
 public class WinningLotto {
 
     private final Lotto lotto;
     private final WinningStatus winningStatus;
 
-    public WinningLotto(LottoNumbers lottoNumbers) {
-        this.lotto = new Lotto(lottoNumbers);
+    public WinningLotto(List<Integer> numbers) {
+        this.lotto = new Lotto(numbers);
         this.winningStatus = new WinningStatus();
     }
 
