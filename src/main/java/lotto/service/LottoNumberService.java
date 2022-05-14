@@ -7,12 +7,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoLogicService {
-    private final List<Integer> allLottoNumbers;
-    private static final int LOTTO_GAME_NUMBER_COUNT = 6;
-    private static final int LOTTO_GAME_MAXIMUM_NUMBER = 45;
+import static lotto.config.LottoGameConfig.*;
 
-    public LottoLogicService() {
+public class LottoNumberService {
+    private final List<Integer> allLottoNumbers;
+
+    public LottoNumberService() {
         allLottoNumbers = makeAllLottoNumbers();
     }
 
