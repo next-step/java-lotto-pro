@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.model.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -18,7 +17,7 @@ class MoneyTest {
     void Money_구매금액_음수(int input) {
         assertThatThrownBy(() -> Money.of(input))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 구매금액은 음수일 수 없습니다! : [%s]", input);
+                .hasMessageContaining("[ERROR] 구매금액은 음수일 수 없습니다! : 입력금액 [%s]", input);
     }
 
     @ParameterizedTest
