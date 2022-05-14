@@ -33,8 +33,8 @@ public class NormalLottoNumbersFactory implements LottoNumbersFactory {
     }
 
     private void checkNumbers(List<Integer> numbers) {
-        Set<Integer> distinctNubers = new HashSet<>(numbers);
-        if (distinctNubers.size() != NormalLottoNumbers.LOTTO_NUMBERS_SIZE) {
+        Set<Integer> distinctNumbers = new HashSet<>(numbers);
+        if (distinctNumbers.size() != NormalLottoNumbers.LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("서로 다른 " + NormalLottoNumbers.LOTTO_NUMBERS_SIZE + "개의 숫자가 필요합니다.");
         }
     }

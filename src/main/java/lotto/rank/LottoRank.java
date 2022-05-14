@@ -6,13 +6,16 @@ import java.util.Map;
 
 public enum LottoRank {
 
-    NO_PRIZE(0, -1), FOURTH_PLACE(5000, 3), THIRD_PLACE(50000, 4), SECOND_PLACE(1500000, 5), FIRST_PLACE(2000000000, 6);
+    NO_PRIZE(0, -1)
+    , FOURTH_PLACE(5000, 3)
+    , THIRD_PLACE(50000, 4)
+    , SECOND_PLACE(1500000, 5)
+    , FIRST_PLACE(2000000000, 6);
 
     public static final int MIN_MATCH_COUNT_FOR_PRIZE = 3;
 
-    private final long prize;
-
     private final int matchNumberCount;
+    private final long prize;
 
     LottoRank(long prize, int matchNumberCount) {
         this.prize = prize;
