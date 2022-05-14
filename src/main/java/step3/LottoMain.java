@@ -18,5 +18,6 @@ public class LottoMain {
         final int price = lottoViewer.inputPrice();
         final Lottos lottos = LottosGenerator.generateLottos(price);
         lottoViewer.printLottos(lottos);
+        final String winningNumbers = lottoViewer.inputWinningNumbers();
     }
 }
