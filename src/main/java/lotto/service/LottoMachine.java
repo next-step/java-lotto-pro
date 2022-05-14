@@ -25,7 +25,7 @@ public class LottoMachine {
         LottoStatics lottoStatics = new LottoStatics(lottoNumbers, winNumbers);
         LottoPrizeRanks lottoPrizeRanks = lottoStatics.collect();
         ResultView.statics(lottoPrizeRanks);
-        ResultView.ratio(calculateRatio(price, lottoPrizeRanks));
+        ResultView.showRatio(calculateRatio(price, lottoPrizeRanks));
     }
 
     private float calculateRatio(String price, LottoPrizeRanks lottoPrizeRanks) {

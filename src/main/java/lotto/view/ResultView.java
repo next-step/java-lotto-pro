@@ -49,7 +49,7 @@ public class ResultView {
         }
     }
 
-    public static void ratio(Float ratio) {
+    public static void showRatio(Float ratio) {
         System.out.printf(RATIO_MESSAGE, ratio);
     }
 }
