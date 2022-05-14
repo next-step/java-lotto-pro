@@ -14,11 +14,11 @@ public class ResultView {
     private static final String RESULT_PROFIT_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String ENTER = "\n";
 
-    private String resultPurchaseView(Lottos lottos) {
+    private static String resultPurchaseView(Lottos lottos) {
         return String.format(PURCHASE_MESSAGE, lottos.lottoCount());
     }
 
-    public void generatedLottosView(Lottos lottos) {
+    public static void printLottosView(Lottos lottos) {
         StringBuilder totalLottoNumberView = new StringBuilder();
         totalLottoNumberView.append(resultPurchaseView(lottos));
         totalLottoNumberView.append(ENTER);
@@ -26,7 +26,7 @@ public class ResultView {
             totalLottoNumberView.append(Arrays.toString(lotto.numberListToArray()));
             totalLottoNumberView.append(ENTER);
         }
-        printView(totalLottoNumberView.toString());
+        printConsle(totalLottoNumberView.toString());
     }
 
     public void totalResultView(Lottos lottos) {
@@ -40,7 +40,7 @@ public class ResultView {
             resultView.append(resultMatchMessage);
         }
         setProfitRate(lottos, resultView);
-        printView(resultView.toString());
+        printConsle(resultView.toString());
     }
 
     private void setHeader(StringBuilder resultView) {
@@ -56,7 +56,7 @@ public class ResultView {
         resultView.append(profitRate);
     }
 
-    private void printView(String view) {
+    public static void printConsle(String view) {
         System.out.println(view);
     }
 }
