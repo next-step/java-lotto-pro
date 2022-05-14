@@ -27,7 +27,7 @@ public class LottoGameController {
             return new LottoGameDTO(lottos,false);
         } catch (IllegalArgumentException e) {
             ResultView.printConsole(e.getMessage());
-            return new LottoGameDTO(null,true);
+            return new LottoGameDTO(true);
         }
     }
 
@@ -40,7 +40,7 @@ public class LottoGameController {
             return new LottoGameDTO(lottos, false);
         } catch (IllegalArgumentException e) {
             ResultView.printConsole(e.getMessage());
-            return new LottoGameDTO(null,true);
+            return new LottoGameDTO(true);
         }
     }
 
