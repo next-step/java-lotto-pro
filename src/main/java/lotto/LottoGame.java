@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.ui.InputView;
+import lotto.ui.ResultView;
 
 public class LottoGame {
 
@@ -11,15 +12,16 @@ public class LottoGame {
     LottoGame(int purchasePrice) {
         isValidPurchasePrice(purchasePrice);
         this.purchasePrice = purchasePrice;
+        ResultView.printTicketCount(this.getTicketCount());
+    }
+
+    public int getTicketCount() {
+        return this.purchasePrice / TICKET_UNIT_PRICE;
     }
 
     private static void isValidPurchasePrice(int purchasePrice) {
         if (purchasePrice < TICKET_UNIT_PRICE) {
             throw new RuntimeException("Can't buy ticket. Game will exit.");
         }
-    }
-
-    public int getTicketCount() {
-        return this.purchasePrice / TICKET_UNIT_PRICE;
     }
 }
