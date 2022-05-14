@@ -42,6 +42,9 @@ LottoNumber
 - [X] 1~45 범위의 숫자를 가진다.
 - [X] 값 객체이다.
 
+LottoNumbers
+- [X] 6개의 LottoNumber 를 가질 수 있다.
+
 Lotto
 - [ ] LottoNumber를 6개 가지고 있다. 
 
