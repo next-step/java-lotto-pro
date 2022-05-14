@@ -1,10 +1,12 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -22,8 +24,21 @@ public class Lotto {
         }
     }
 
+    public static Lotto create(String winningLotto) {
+        return new Lotto(lottoParser(winningLotto));
+    }
+
     public static Lotto create(LottoNumberStrategy lottoNumberStrategy) {
         return new Lotto(lottoNumberStrategy.create());
+    }
+
+    private static List<LottoNumber> lottoParser(String winningLotto) {
+        String[] split = winningLotto.split(",");
+        return Arrays.stream(split)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public Rank match(Lotto winningLotto) {
