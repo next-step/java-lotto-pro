@@ -1,5 +1,7 @@
 package Lotto;
 
+import Lotto.utils.StringSplitUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +23,12 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
-    public static List<Integer> generate() {
+    public Lotto(String customNumbers) {
+        List<Integer> customNumbersToInt = StringSplitUtils.basicDetermiterSplit(customNumbers);
+        this.numbers = customNumbersToInt;
+    }
+
+    private List<Integer> generate() {
         return rangeNumbers.subList(0, 6);
     }
 
@@ -40,8 +47,11 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "Lotto{" +
-                "numbers=" + numbers +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        for(int number : numbers) {
+            sb.append(number + ", ");
+        }
+        sb.deleteCharAt(sb.lastIndexOf(", "));
+        return "[" + sb + "]";
     }
 }
