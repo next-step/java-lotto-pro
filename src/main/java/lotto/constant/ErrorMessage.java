@@ -8,7 +8,6 @@ public class ErrorMessage {
     public static final String INCORRECT_UNIT_MONEY = ERROR_HEAD + "구매 금액은 1000원 단위로 입력해주세요.";
     public static final String NOT_NUMBER = ERROR_HEAD + "숫자가 아닙니다.";
     public static final String NOT_LOTTO_NUMBER = ERROR_HEAD + "로또 번호는 1~45 사이의 숫자여야합니다.";
-    public static final String NOT_CONVERT_MONEY = ERROR_HEAD + "구매금액을 확인해주세요";
     public static final String CANT_CONVERT_MONEY = ERROR_HEAD + "구매금액 변환에 오류가 발생했습니다.";
     public static final String NON_SIX_NUMBERS = ERROR_HEAD + "로또 번호는 6개여야 합니다.";
     public static final String DUPLICATION = ERROR_HEAD + "6개의 로또 번호에 중복이 있습니다.";
