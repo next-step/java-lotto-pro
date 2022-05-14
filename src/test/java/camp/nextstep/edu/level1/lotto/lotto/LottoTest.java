@@ -18,8 +18,9 @@ class LottoTest {
     void 로또_구입_후_당첨_여부를_확인하면_결과가_반환된어야_한다() {
         Lotto lotto = new Lotto(10000);
         String correctWinningNumbers = "1, 2, 3, 4, 5, 6";
+        String bonusNumber = "7";
 
-        assertThatNoException().isThrownBy(() -> lotto.compareWinningNumber(correctWinningNumbers));
+        assertThatNoException().isThrownBy(() -> lotto.compareWinningNumber(correctWinningNumbers, bonusNumber));
     }
 
     @Test
@@ -28,9 +29,10 @@ class LottoTest {
         String invalidWinningNumbers = "1, 2, 3, abc4, 5!@# 6";
         String includeMinusWinningNumbers = "1, -2, 3, 4, -5, 6";
         String invalidWinningNumberCount = "1, 2, 3, 4, 5";
+        String bonusNumber = "7";
 
-        assertThatIllegalArgumentException().isThrownBy(() -> lotto.compareWinningNumber(invalidWinningNumbers));
-        assertThatIllegalArgumentException().isThrownBy(() -> lotto.compareWinningNumber(includeMinusWinningNumbers));
-        assertThatIllegalArgumentException().isThrownBy(() -> lotto.compareWinningNumber(invalidWinningNumberCount));
+        assertThatIllegalArgumentException().isThrownBy(() -> lotto.compareWinningNumber(invalidWinningNumbers, bonusNumber));
+        assertThatIllegalArgumentException().isThrownBy(() -> lotto.compareWinningNumber(includeMinusWinningNumbers, bonusNumber));
+        assertThatIllegalArgumentException().isThrownBy(() -> lotto.compareWinningNumber(invalidWinningNumberCount, bonusNumber));
     }
 }

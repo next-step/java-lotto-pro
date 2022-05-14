@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
 
 class LottoNumbersTest {
@@ -40,5 +41,14 @@ class LottoNumbersTest {
 
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(overCountNumbers));
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(lackCountNumbers));
+    }
+
+    @Test
+    void 로또_번호에_포함된_번호를_찾는_메소드는_정상_동작해야_한다() {
+        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 9, 13, 24, 35, 45));
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        LottoNumber lottoNumber = new LottoNumber(1);
+
+        assertThat(lottoNumbers.isContainLottoNumber(lottoNumber)).isTrue();
     }
 }

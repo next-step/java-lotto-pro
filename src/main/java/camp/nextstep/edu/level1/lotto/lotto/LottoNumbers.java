@@ -25,6 +25,10 @@ public class LottoNumbers {
                 .count();
     }
 
+    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     private void addAll(Collection<Integer> numbers) {
         for (Integer number : numbers) {
             this.lottoNumbers.add(new LottoNumber(number));

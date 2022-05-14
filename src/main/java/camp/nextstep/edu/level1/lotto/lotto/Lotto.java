@@ -40,7 +40,7 @@ public class Lotto {
         this.purchaseLotto(convertedValue);
     }
 
-    public LottoResult compareWinningNumber(String winningNumbers) {
+    public LottoResult compareWinningNumber(String winningNumbers, String bonusNumber) {
         String[] splitResult = Arrays.stream(winningNumbers.split(WINNING_NUMBER_DELIMITER))
                 .map(String::trim)
                 .toArray(String[]::new);
@@ -49,8 +49,9 @@ public class Lotto {
         LottoNumbers winnerLottoNumbers = new LottoNumbers(
                 CollectionHelper.arrayStringToIntegerList(splitResult)
         );
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
-        return new LottoResult(this.items, winnerLottoNumbers);
+        return new LottoResult(this.items, winnerLottoNumbers, bonusLottoNumber);
     }
 
     public double calculateReturnValue(Money earnedMoney) {

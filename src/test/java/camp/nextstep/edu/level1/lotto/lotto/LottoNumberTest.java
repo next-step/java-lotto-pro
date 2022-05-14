@@ -21,6 +21,15 @@ class LottoNumberTest {
     }
 
     @Test
+    void _1_에서_45_사이의_문자열_숫자로_로또_번호가_생성되어야_한다() {
+        String randomValidStartInt = "1";
+        String randomValidEndInt = "45";
+
+        assertThatNoException().isThrownBy(() -> new LottoNumber(randomValidStartInt));
+        assertThatNoException().isThrownBy(() -> new LottoNumber(randomValidEndInt));
+    }
+
+    @Test
     void _1_에서_45_사이의_숫자가_아닌_값으로_로또_번호를_생성하면_예외가_발생한다() {
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(LOTTO_START_NUMBER - 1));
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(LOTTO_END_NUMBER + 1));
