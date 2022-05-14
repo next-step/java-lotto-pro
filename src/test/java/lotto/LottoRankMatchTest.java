@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.factory.LottoNumbersFactory;
-import lotto.factory.NormalLottoNumbersFactory;
-import lotto.number.LottoNumbers;
+
 import static org.assertj.core.api.Assertions.*;
 
+import lotto.number.LottoNumbers;
 import lotto.rank.LottoRank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,7 +18,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class LottoRankMatchTest {
 
     private LottoNumbers winLottoNumbers;
-    private LottoNumbersFactory factory = new NormalLottoNumbersFactory();
+    private LottoNumbersFactory factory = new LottoNumbersFactory();
 
     @BeforeEach
     void setUp(){

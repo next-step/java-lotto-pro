@@ -2,10 +2,7 @@ package lotto.game;
 
 import static java.util.stream.Collectors.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.IntStream;
 import lotto.dto.LottoGameResultDTO;
 import lotto.factory.LottoNumbersFactory;

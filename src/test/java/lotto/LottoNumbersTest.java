@@ -2,7 +2,6 @@ package lotto;
 
 import java.util.List;
 import lotto.factory.LottoNumbersFactory;
-import lotto.factory.NormalLottoNumbersFactory;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,9 +9,9 @@ import converter.IntegerListConverter;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class NormalLottoNumbersTest {
+public class LottoNumbersTest {
 
-    private LottoNumbersFactory lottoNumbersFactory = new NormalLottoNumbersFactory();
+    private LottoNumbersFactory lottoNumbersFactory = new LottoNumbersFactory();
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3","1,2,3,4,5,6,7"})
