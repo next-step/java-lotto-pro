@@ -19,12 +19,8 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public long getPrize() {
-        return prize;
+    public static Rank getRank(Long matchedCount) {
+        return getRank(matchedCount.intValue());
     }
 
     public static Rank getRank(int matchedCount) {
@@ -34,7 +30,11 @@ public enum Rank {
                 .orElse(Rank.NOTHING);
     }
 
-    public static Rank getRank(Long matchedCount) {
-        return getRank(matchedCount.intValue());
+    public String getName() {
+        return name;
+    }
+
+    public long getPrize() {
+        return prize;
     }
 }

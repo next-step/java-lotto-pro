@@ -15,6 +15,14 @@ public class LottoMachine {
                     .boxed()
                     .collect(Collectors.toList());
 
+    public List<Lotto> generateLottos(int count) {
+        List<Lotto> lottos = new LinkedList<>();
+        for (int i = 0; i < count; i++) {
+            lottos.add(new Lotto(generateRandomNumbers()));
+        }
+        return lottos;
+    }
+
     private List<Integer> generateRandomNumbers() {
         Collections.shuffle(lottoNumber);
         List<Integer> pickedNumber = new ArrayList<>();
@@ -26,14 +34,6 @@ public class LottoMachine {
         Collections.sort(pickedNumber);
 
         return pickedNumber;
-    }
-
-    public List<Lotto> generateLottos(int count) {
-        List<Lotto> lottos = new LinkedList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(generateRandomNumbers()));
-        }
-        return lottos;
     }
 
     public List<Lotto> purchase(int money) {
