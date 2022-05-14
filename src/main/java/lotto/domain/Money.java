@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.domain.LottoConstant.LOTTO_PRICE;
+
 public class Money {
     private long money;
 
@@ -20,10 +22,10 @@ public class Money {
     }
 
     private boolean isInvalidMoney(long money) {
-        return money < 0;
+        return money < LOTTO_PRICE;
     }
 
-    public long getMoney() {
-        return money;
+    public long getAvailableLottoNumbersForPurchase() {
+        return money / LOTTO_PRICE;
     }
 }

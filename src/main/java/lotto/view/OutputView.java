@@ -25,7 +25,7 @@ public class OutputView {
     }
 
     public static void showLottoProfit(LottoResult result, Money money) {
-        double profit = (double) result.calculateWinningMoney() / money.getMoney();
+        double profit = result.calculateWinningMoney() / money.getAvailableLottoNumbersForPurchase();
         OutputView.printMessage("총 수익률은 %.2f입니다.", profit);
     }
 
