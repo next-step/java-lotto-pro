@@ -12,7 +12,7 @@ class MoneyTest {
     @Test
     void test_최소값_보다_작을때() {
         //given & when & then
-        assertThatThrownBy(() -> new Money(-1))
+        assertThatThrownBy(() -> Money.from(-1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.LESS_THEN_MIN_MONEY);
     }
@@ -22,7 +22,7 @@ class MoneyTest {
     void test_로또_구입_최소_금액_아닌경우() {
         //given
         int inputMoney = 500;
-        Money money = new Money(inputMoney);
+        Money money = Money.from(inputMoney);
         //when & then
         assertThat(money.isLessThenLottoPrice()).isTrue();
     }
@@ -32,7 +32,7 @@ class MoneyTest {
     void test_최대_구입_개수() {
         //given
         int inputMoney = 100500;
-        Money money = new Money(inputMoney);
+        Money money = Money.from(inputMoney);
         //when & then
         assertThat(money.purchaseCount()).isEqualTo(Constants.MAX_PURCHASE_COUNT);
     }
@@ -42,7 +42,7 @@ class MoneyTest {
     void test_최대_구입_개수_오류() {
         //given
         int inputMoney = 101000;
-        Money money = new Money(inputMoney);
+        Money money = Money.from(inputMoney);
         //when & then
         assertThatThrownBy(() -> money.purchaseCount())
                 .isInstanceOf(IllegalArgumentException.class)

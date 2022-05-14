@@ -18,9 +18,9 @@ class LottoTicketTest {
         //given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         //when
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoTicket lottoTicket = LottoTicket.from(numbers);
         //then
-        assertThat(lottoTicket).isEqualTo(new LottoTicket(numbers));
+        assertThat(lottoTicket).isEqualTo(LottoTicket.from(numbers));
     }
 
     @DisplayName("로또 번호가 비어있는 경우 예외 처리")
@@ -29,7 +29,7 @@ class LottoTicketTest {
         //given
         List<Integer> numbers = Collections.emptyList();
         //when & then
-        assertThatThrownBy(() -> new LottoTicket(numbers))
+        assertThatThrownBy(() -> LottoTicket.from(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.NOT_EMPTY_LOTTO);
     }
@@ -40,7 +40,7 @@ class LottoTicketTest {
         //given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         //when & then
-        assertThatThrownBy(() -> new LottoTicket(numbers))
+        assertThatThrownBy(() -> LottoTicket.from(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.OUT_OF_SIZE_LOTTO);
     }
@@ -51,7 +51,7 @@ class LottoTicketTest {
         //given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
         //when & then
-        assertThatThrownBy(() -> new LottoTicket(numbers))
+        assertThatThrownBy(() -> LottoTicket.from(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.DUPLICATE_NUMBER);
     }
@@ -62,8 +62,8 @@ class LottoTicketTest {
         //given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         //when
-        LottoTicket lottoTicket = new LottoTicket(numbers);
-        LottoTicket winningNumbers = new LottoTicket(numbers);
+        LottoTicket lottoTicket = LottoTicket.from(numbers);
+        LottoTicket winningNumbers = LottoTicket.from(numbers);
         //then
         assertThat(lottoTicket.matchCount(winningNumbers)).isEqualTo(6);
     }
@@ -74,8 +74,8 @@ class LottoTicketTest {
         //given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         //when
-        LottoTicket lottoTicket = new LottoTicket(numbers);
-        LottoTicket winningNumbers = new LottoTicket(numbers);
+        LottoTicket lottoTicket = LottoTicket.from(numbers);
+        LottoTicket winningNumbers = LottoTicket.from(numbers);
         //then
         assertThat(lottoTicket.rank(winningNumbers)).isEqualTo(Rank.FIRST);
     }

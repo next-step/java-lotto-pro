@@ -7,11 +7,15 @@ public class Money {
     private static final int MIN_MONEY = 0;
     private final int money;
 
-    public Money(int money) {
+    private Money(int money) {
+        this.money = money;
+    }
+
+    public static Money from(int money) {
         if (money < MIN_MONEY) {
             throw new IllegalArgumentException(ErrorMessage.LESS_THEN_MIN_MONEY);
         }
-        this.money = money;
+        return new Money(money);
     }
 
     public boolean isLessThenLottoPrice() {

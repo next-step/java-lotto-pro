@@ -11,7 +11,7 @@ class MatchCountTest {
     @Test
     void test_범위_벗어난_매칭() {
         //given & when & then
-        assertThatThrownBy(() -> new MatchCount(7))
+        assertThatThrownBy(() -> MatchCount.from(7))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.OUT_OF_RANGE_MATCH);
     }

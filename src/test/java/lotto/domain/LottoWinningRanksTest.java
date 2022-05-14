@@ -17,19 +17,19 @@ class LottoWinningRanksTest {
     @BeforeEach
     void setUp() {
         //given
-        LottoTicket winningNumbers = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket winningNumbers = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         List<Integer> first = Arrays.asList(1, 2, 3, 7, 8, 9);
-        LottoTicket userNumbers = new LottoTicket(first);
-        lottoWinningRanks = new LottoWinningRanks();
+        LottoTicket userNumbers = LottoTicket.from(first);
+        lottoWinningRanks = LottoWinningRanks.create();
         lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers));
 
         List<Integer> second = Arrays.asList(4, 5, 6, 10, 11, 12);
-        userNumbers = new LottoTicket(second);
+        userNumbers = LottoTicket.from(second);
         lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers));
 
         List<Integer> lose = Arrays.asList(7, 8, 9, 10, 11, 12);
-        userNumbers = new LottoTicket(lose);
+        userNumbers = LottoTicket.from(lose);
         lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers));
     }
 
@@ -51,7 +51,7 @@ class LottoWinningRanksTest {
     @Test
     void test_로또_수익률() {
         //given
-        Money purchaseMoney = new Money(14000);
+        Money purchaseMoney = Money.from(14000);
         //when & then
         assertThat(lottoWinningRanks.returnRate(purchaseMoney)).isEqualTo(0.71d);
     }
@@ -60,7 +60,7 @@ class LottoWinningRanksTest {
     @Test
     void test_수익_결과_손해() {
         //given
-        Money purchaseMoney = new Money(14000);
+        Money purchaseMoney = Money.from(14000);
         //when & then
         assertThat(lottoWinningRanks.resultDescription(purchaseMoney))
                 .isEqualTo(DisplayMessage.LOSS);
@@ -70,7 +70,7 @@ class LottoWinningRanksTest {
     @Test
     void test_수익_결과_원금() {
         //given
-        Money purchaseMoney = new Money(10000);
+        Money purchaseMoney = Money.from(10000);
         //when & then
         assertThat(lottoWinningRanks.resultDescription(purchaseMoney))
                 .isEqualTo(DisplayMessage.PRINCIPAL_AND_POST_POSITION);
@@ -80,7 +80,7 @@ class LottoWinningRanksTest {
     @Test
     void test_수익_결과_이득() {
         //given
-        Money purchaseMoney = new Money(5000);
+        Money purchaseMoney = Money.from(5000);
         //when & then
         assertThat(lottoWinningRanks.resultDescription(purchaseMoney))
                 .isEqualTo(DisplayMessage.GAIN_AND_POST_POSITION);

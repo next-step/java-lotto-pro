@@ -3,16 +3,30 @@ package lotto.domain;
 import lotto.constants.Constants;
 import lotto.constants.ErrorMessage;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
+    private static Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
     private final int lottoNumber;
 
-    public LottoNumber(int number) {
-        if (number < Constants.MIN_LOTTO_NUMBER || number > Constants.MAX_LOTTO_NUMBER) {
+    static {
+        for (int i = Constants.MIN_LOTTO_NUMBER; i <= Constants.MAX_LOTTO_NUMBER; i++) {
+            lottoNumberMap.put(i, new LottoNumber(i));
+        }
+    }
+
+    private LottoNumber(int number) {
+        this.lottoNumber = number;
+    }
+
+    public static LottoNumber from(int number) {
+        LottoNumber lottoNumber = lottoNumberMap.get(number);
+        if (lottoNumber == null) {
             throw new IllegalArgumentException(ErrorMessage.OUT_OF_RANGE_NUMBER);
         }
-        this.lottoNumber = number;
+        return lottoNumber;
     }
 
     @Override

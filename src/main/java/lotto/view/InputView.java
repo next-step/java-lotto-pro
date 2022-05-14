@@ -13,7 +13,7 @@ public class InputView {
     public Money inputPurchaseMoney() {
         System.out.println(DisplayMessage.INPUT_PURCHASE_MONEY);
         String inputPurchaseMoney = readLine();
-        return new Money(StringToIntegerParser.parseInt(inputPurchaseMoney));
+        return Money.from(StringToIntegerParser.parseInt(inputPurchaseMoney));
     }
 
     public List<Integer> inputWinningNumbers() {

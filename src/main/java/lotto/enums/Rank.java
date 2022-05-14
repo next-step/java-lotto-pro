@@ -17,12 +17,12 @@ public enum Rank {
     private Money money;
 
     Rank(int matchCount, int money) {
-        this.matchCount = new MatchCount(matchCount);
-        this.money = new Money(money);
+        this.matchCount = MatchCount.from(matchCount);
+        this.money = Money.from(money);
     }
 
     public static Rank rank(int matchCount) {
-        MatchCount inputMatchCount = new MatchCount(matchCount);
+        MatchCount inputMatchCount = MatchCount.from(matchCount);
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount.equals(inputMatchCount))
                 .findFirst()

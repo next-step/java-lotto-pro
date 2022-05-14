@@ -17,9 +17,9 @@ class LottoTicketsTest {
     void setUp() {
         //given
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoTicketList.add(new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)));
-        lottoTickets = new LottoTickets(lottoTicketList);
+        lottoTicketList.add(LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoTicketList.add(LottoTicket.from(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        lottoTickets = LottoTickets.from(lottoTicketList);
     }
 
     @DisplayName("여러 장의 로또 생성")
@@ -33,7 +33,7 @@ class LottoTicketsTest {
     @Test
     void test_로또_매칭() {
         //when
-        LottoWinningRanks lottoWinningRanks = lottoTickets.match(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoWinningRanks lottoWinningRanks = lottoTickets.match(LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
         //then
         assertThat(lottoWinningRanks.size()).isEqualTo(1);
     }

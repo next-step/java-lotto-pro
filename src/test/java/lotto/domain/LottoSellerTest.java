@@ -13,7 +13,7 @@ class LottoSellerTest {
     void test_자동_로또_구입_개수() {
         //given
         int money = 5500;
-        LottoSeller lottoSeller = new LottoSeller(money);
+        LottoSeller lottoSeller = LottoSeller.from(money);
         //when
         LottoTickets lottoTickets = lottoSeller.autoLottoTickets();
         //then
@@ -26,7 +26,7 @@ class LottoSellerTest {
         //given
         int money = 500;
         //when & then
-        assertThatThrownBy(() -> new LottoSeller(money))
+        assertThatThrownBy(() -> LottoSeller.from(money))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.LESS_THEN_PRICE_MONEY);
     }

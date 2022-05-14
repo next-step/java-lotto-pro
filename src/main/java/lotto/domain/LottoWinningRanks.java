@@ -11,6 +11,12 @@ public class LottoWinningRanks {
     private final double MATH_ROUND_DIGIT = 100d;
     private final List<Rank> winningRanks = new ArrayList<>();
 
+    private LottoWinningRanks() {}
+
+    public static LottoWinningRanks create() {
+        return new LottoWinningRanks();
+    }
+
     public void addWinningRank(Rank rank) {
         if (Rank.isWinning(rank)) {
             this.winningRanks.add(rank);
@@ -49,7 +55,7 @@ public class LottoWinningRanks {
         int totalPrizeMoney = this.winningRanks.stream()
                 .map(Rank::getMoney)
                 .reduce(0, Integer::sum);
-        return new Money(totalPrizeMoney);
+        return Money.from(totalPrizeMoney);
     }
 
     @Override

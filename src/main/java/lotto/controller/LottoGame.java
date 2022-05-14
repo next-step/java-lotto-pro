@@ -22,7 +22,7 @@ public class LottoGame {
     private void purchase() {
         try {
             Money purchaseMoney = inputView.inputPurchaseMoney();
-            LottoSeller lottoSeller = new LottoSeller(purchaseMoney);
+            LottoSeller lottoSeller = LottoSeller.from(purchaseMoney);
             LottoTickets lottoTickets = lottoSeller.autoLottoTickets();
             outputView.printLottoTickets(lottoTickets);
 
@@ -36,7 +36,7 @@ public class LottoGame {
     private void winningResult(Money purchaseMoney, LottoTickets lottoTickets) {
         try {
             List<Integer> winningNumbers = inputView.inputWinningNumbers();
-            LottoWinningRanks lottoWinningRanks = lottoTickets.match(new LottoTicket(winningNumbers));
+            LottoWinningRanks lottoWinningRanks = lottoTickets.match(LottoTicket.from(winningNumbers));
             outputView.printWinningRanks(lottoWinningRanks, purchaseMoney);
         } catch (IllegalArgumentException ie) {
             outputView.printExceptionMessage(ie);

@@ -7,15 +7,19 @@ import java.util.List;
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        if (lottoTickets == null || lottoTickets.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_EMPTY_LOTTO);
-        }
+    private LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
+    public static LottoTickets from(List<LottoTicket> lottoTickets) {
+        if (lottoTickets == null || lottoTickets.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.NOT_EMPTY_LOTTO);
+        }
+        return new LottoTickets(lottoTickets);
+    }
+
     public LottoWinningRanks match(LottoTicket winningNumbers) {
-        LottoWinningRanks lottoWinningRanks = new LottoWinningRanks();
+        LottoWinningRanks lottoWinningRanks = LottoWinningRanks.create();
         lottoTickets.forEach(lottoTicket -> {
             lottoWinningRanks.addWinningRank(lottoTicket.rank(winningNumbers));
         });

@@ -13,10 +13,14 @@ import java.util.stream.Collectors;
 public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers) {
+    private LottoTicket(List<Integer> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::new).collect(Collectors.toList());
+                .map(LottoNumber::from).collect(Collectors.toList());
+    }
+
+    public static LottoTicket from(List<Integer> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
     }
 
     public Rank rank(LottoTicket winningNumbers) {

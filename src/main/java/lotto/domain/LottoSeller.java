@@ -10,15 +10,19 @@ import java.util.stream.IntStream;
 public class LottoSeller {
     private final Money receivedMoney;
 
-    public LottoSeller(Money receivedMoney) {
-        if (receivedMoney.isLessThenLottoPrice()) {
-            throw new IllegalArgumentException(ErrorMessage.LESS_THEN_PRICE_MONEY);
-        }
+    private LottoSeller(Money receivedMoney) {
         this.receivedMoney = receivedMoney;
     }
 
-    public LottoSeller(int receivedMoney) {
-        this(new Money(receivedMoney));
+    public static LottoSeller from(Money receivedMoney) {
+        if (receivedMoney.isLessThenLottoPrice()) {
+            throw new IllegalArgumentException(ErrorMessage.LESS_THEN_PRICE_MONEY);
+        }
+        return new LottoSeller(receivedMoney);
+    }
+
+    public static LottoSeller from(int receivedMoney) {
+        return from(Money.from(receivedMoney));
     }
 
     public LottoTickets autoLottoTickets() {
@@ -26,11 +30,11 @@ public class LottoSeller {
         for (int i = 0; i < receivedMoney.purchaseCount(); i++) {
             lottoTicketList.add(lottoTicket());
         }
-        return new LottoTickets(lottoTicketList);
+        return LottoTickets.from(lottoTicketList);
     }
 
     private LottoTicket lottoTicket() {
-        return new LottoTicket(shuffleAndSortNumbers());
+        return LottoTicket.from(shuffleAndSortNumbers());
     }
 
     private List<Integer> shuffleAndSortNumbers() {
