@@ -8,8 +8,12 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Number {
-    private static final Map<Integer, Number> NUMBER_CACHE = new HashMap<>();
+    private static final Map<Integer, Number> NUMBER_CACHE;
     private final int number;
+
+    static {
+        NUMBER_CACHE = new HashMap<>();
+    }
 
     private Number(int number) {
         this.number = number;
