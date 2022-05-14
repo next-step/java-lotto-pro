@@ -7,6 +7,8 @@ import static lotto.constants.LottoConstants.NUMBERS_SUFFIX;
 import static lotto.messages.ErrorMessages.LOTTO_NUMBERS_DUPLICATION_ERROR;
 import static lotto.messages.ErrorMessages.LOTTO_NUMBERS_SIZE_ERROR;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -64,7 +66,7 @@ public class LottoNumbers {
     }
 
     public List<LottoNumber> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 
     @Override
