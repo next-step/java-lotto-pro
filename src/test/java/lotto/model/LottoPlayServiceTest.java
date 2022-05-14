@@ -25,14 +25,6 @@ class LottoPlayServiceTest {
         lottos.addLotto(new Lotto(Arrays.asList(3, 7, 20, 35, 43, 45)));
     }
 
-    @DisplayName("입력받은 구매금액을 로또 개수로 변환한다.")
-    @ParameterizedTest(name = "[{0}]원 -> [{1}]게임")
-    @CsvSource(value = {"10000:10", "5000:5", "3000:3"}, delimiter = ':')
-    void buyLottoCount(String moneyWord, int expectedPlayCount) {
-        assertEquals(expectedPlayCount, lottoPlayService.buyLottoCount(moneyWord));
-    }
-
-
     @DisplayName("로또 게임 결과(일치한 개수, 수익률)를 확인한다.")
     @Test
     void playLottoGame() {
