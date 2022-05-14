@@ -24,10 +24,10 @@ public class EarningsRate {
 
     @Override
     public String toString() {
-       return String.format("총 수익률은 %.2f입니다.%s",this.rate, messageType());
+       return String.format("총 수익률은 %.2f입니다.%s",this.rate, explanation());
     }
 
-    private String messageType() {
+    private String explanation() {
         if (this.rate == 1) {
             return "(기준이 1이기 때문에 결과적으로 같다라는 의미임)";
         }
