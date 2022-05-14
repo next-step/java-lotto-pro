@@ -1,5 +1,7 @@
 package lotto;
 
+import static java.lang.Integer.parseInt;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -15,6 +17,10 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(final int number) {
         return new LottoNumber(number);
+    }
+
+    public static LottoNumber valueOf(final String numberString) {
+        return valueOf(parseInt(numberString));
     }
 
     public int getNumber() {
