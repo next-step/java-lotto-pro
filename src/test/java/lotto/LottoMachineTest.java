@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoGenerator;
+import lotto.lotto.LottoNumber;
+import lotto.lotto.WinningLotto;
 import lotto.money.Money;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -27,8 +29,8 @@ class LottoMachineTest {
             }
 
             @Override
-            public Lotto readPreviousWinningLotto() {
-                return Lotto.of(1, 2, 3, 4, 5, 6);
+            public WinningLotto readPreviousWinningLotto() {
+                return WinningLotto.of(Lotto.of(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
             }
         };
         final ResultView stubResultView = new ResultView() {

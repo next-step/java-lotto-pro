@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.lotto.Lotto;
+import lotto.lotto.LottoNumber;
+import lotto.lotto.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -19,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("LottoAnalyzer 클래스 테스트")
 class LottoAnalyzerTest {
 
-    private final Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
+    private final WinningLotto winningLotto = WinningLotto.of(Lotto.of(1, 2, 3, 4, 5, 6), LottoNumber.of(45));
 
     @DisplayName("lotto가 null이기 떄문에 생성 실패")
     @Test
@@ -34,7 +36,7 @@ class LottoAnalyzerTest {
     @ParameterizedTest
     @ArgumentsSource(AnalyzeArgumentsProvider.class)
     void analyzeWhenVariousLottoes(List<Lotto> lottoes, Map<LottoPrize, Integer> expectedMap) {
-        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto);
+        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(winningLotto);
         final WinningResult winningResult = lottoAnalyzer.analyze(lottoes);
         for (LottoPrize lottoPrize : LottoPrize.values()) {
             final Integer actual = winningResult.find(lottoPrize);
@@ -50,6 +52,10 @@ class LottoAnalyzerTest {
                     Arguments.of(Arrays.asList(Lotto.of(1, 2, 3, 4, 5, 6)),
                                  new EnumMap<LottoPrize, Integer>(LottoPrize.class) {{
                                      put(LottoPrize.SIX_MATCH, 1);
+                                 }}),
+                    Arguments.of(Arrays.asList(Lotto.of(1, 2, 3, 4, 5, 45)),
+                                 new EnumMap<LottoPrize, Integer>(LottoPrize.class) {{
+                                     put(LottoPrize.FIVE_MATCH_WITH_BONUS, 1);
                                  }}),
                     Arguments.of(Arrays.asList(Lotto.of(1, 2, 3, 4, 5, 7)),
                                  new EnumMap<LottoPrize, Integer>(LottoPrize.class) {{

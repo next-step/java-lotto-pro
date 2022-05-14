@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.lotto.Lotto;
+import lotto.lotto.WinningLotto;
 import lotto.money.Money;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -27,7 +28,7 @@ public class LottoMachine {
     }
 
     private void runAnalyze(InputView inputView, ResultView resultView, List<Lotto> lottoes) {
-        final Lotto previousWinningLotto = inputView.readPreviousWinningLotto();
+        final WinningLotto previousWinningLotto = inputView.readPreviousWinningLotto();
         final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(previousWinningLotto);
         final WinningResult winningResult = lottoAnalyzer.analyze(lottoes);
         resultView.printResult(winningResult, sumTotalMoney(lottoes));
