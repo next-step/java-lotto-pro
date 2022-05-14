@@ -3,18 +3,18 @@ package camp.nextstep.edu.step3;
 import java.util.Arrays;
 
 public enum Hit {
-    ZERO(0, 0),
-    ONE(1, 0),
-    TWO(2, 0),
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    ALL(6, 2_000_000_000);
+    ZERO(0, 0L),
+    ONE(1, 0L),
+    TWO(2, 0L),
+    THREE(3, 5000L),
+    FOUR(4, 50000L),
+    FIVE(5, 1500000L),
+    ALL(6, 2_000_000_000L);
 
     private final int count;
-    private final int prizeMoney;
+    private final long prizeMoney;
 
-    Hit(int count, int prizeMoney) {
+    Hit(final int count, final long prizeMoney) {
         this.count = count;
         this.prizeMoney = prizeMoney;
     }
@@ -33,8 +33,8 @@ public enum Hit {
         return target.isHigh(this.count);
     }
 
-    int cost(final int count) {
-        return this.prizeMoney * count;
+    long winningAmount(final int perSheet) {
+        return this.prizeMoney * perSheet;
     }
 
     private boolean isHigh(final int destinationCount) {
