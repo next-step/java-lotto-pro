@@ -1,11 +1,11 @@
 package Lotto;
 
+import Lotto.enums.CompareEnum;
 import Lotto.utils.StringSplitUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class Lotto {
@@ -25,6 +25,7 @@ public class Lotto {
 
     public Lotto(String customNumbers) {
         List<Integer> customNumbersToInt = StringSplitUtils.basicDetermiterSplit(customNumbers);
+        Collections.sort(customNumbersToInt);
         this.numbers = customNumbersToInt;
     }
 
@@ -32,17 +33,22 @@ public class Lotto {
         return rangeNumbers.subList(0, 6);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
-    }
+    public CompareEnum compare(Lotto lotto) {
+        long hitCount = lotto.getNumbers()
+                        .stream()
+                        .filter(num -> this.numbers.contains(num))
+                        .count();
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(numbers);
+        if(hitCount == 6)
+            return CompareEnum.First;
+
+        if(hitCount == 5)
+            return CompareEnum.Second;
+
+        if(hitCount == 4)
+            return CompareEnum.Third;
+
+        return CompareEnum.Fail;
     }
 
     @Override
@@ -54,4 +60,6 @@ public class Lotto {
         sb.deleteCharAt(sb.lastIndexOf(", "));
         return "[" + sb + "]";
     }
+
+
 }
