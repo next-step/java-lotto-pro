@@ -14,6 +14,10 @@ public class DelimiterUtils {
     private static final String COMMA_AND_COLON_DELIMITERS_REGEX = ",|:";
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
 
+    public static boolean hasAnyDelimiters(String input) {
+        return hasCommaOrColonDelimiters(input) || hasCustomDelimiter(input);
+    }
+
     public static boolean hasCommaOrColonDelimiters(String input) {
         return hasCommaDelimiter(input) || hasColonDelimiter(input);
     }
