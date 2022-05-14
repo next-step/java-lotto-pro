@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
 
 public class Lotto implements Purchasable {
 
+    public static final Money PRICE = Money.ONE_THOUSAND;
     static final int SIZE = 6;
+
     private final Set<LottoNumber> lottoNumbers;
 
     protected Lotto(List<LottoNumber> lottoNumbers) {
@@ -38,7 +40,7 @@ public class Lotto implements Purchasable {
 
     @Override
     public Money price() {
-        return Money.ONE_THOUSAND;
+        return PRICE;
     }
 
     public int countMatches(Lotto other) {

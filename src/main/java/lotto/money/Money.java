@@ -1,6 +1,5 @@
 package lotto.money;
 
-import lotto.Purchasable;
 import lotto.util.StringUtils;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -28,19 +27,17 @@ public class Money implements Comparable<Money> {
         return new Money(value);
     }
 
-    public boolean canDeduct(Purchasable purchasable) {
-        if (purchasable == null) {
+    public boolean canDeduct(Money money) {
+        if (money == null) {
             return false;
         }
-        final Money money = purchasable.price();
         return compareTo(money) >= 0;
     }
 
-    public Money deduct(Purchasable purchasable) {
-        if (!canDeduct(purchasable)) {
-            throw new CanNotDeductException(this, purchasable);
+    public Money deduct(Money money) {
+        if (!canDeduct(money)) {
+            throw new CanNotDeductException(this, money);
         }
-        final Money money = purchasable.price();
         return of(value - money.value);
     }
 

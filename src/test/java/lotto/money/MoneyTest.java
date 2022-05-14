@@ -21,10 +21,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("Money 클래스 테스트")
 class MoneyTest {
 
-    private static final Purchasable PRICE_IS_ONE_THOUSAND = () -> Money.ONE_THOUSAND;
-    private static final Purchasable PRICE_IS_TEN = () -> Money.of("10");
-    private static final Purchasable PRICE_IS_ONE = () -> Money.of("1");
-
     @DisplayName("Money 생성 성공")
     @ParameterizedTest
     @ValueSource(strings = {"0", "1","10", "100", "1000"})
@@ -44,62 +40,62 @@ class MoneyTest {
         .hasMessageContaining("Money 형식에 어긋납니다.");
     }
 
-    @DisplayName("Money로 Purchasable 구매가능 여부 반환")
+    @DisplayName("Money로 Purchasable 차감 여부 반환")
     @ParameterizedTest
-    @ArgumentsSource(CanPurchaseArgumentsProvider.class)
-    void canPurchase(Purchasable purchasable, boolean expected) {
-        Money ten = Money.of("10");
-        assertThat(ten.canDeduct(purchasable)).isEqualTo(expected);
+    @ArgumentsSource(CanDeductArgumentsProvider.class)
+    void canDeduct(Money money, boolean expected) {
+        final Money ten = Money.of(10);
+        assertThat(ten.canDeduct(money)).isEqualTo(expected);
     }
 
-    static class CanPurchaseArgumentsProvider implements ArgumentsProvider {
+    static class CanDeductArgumentsProvider implements ArgumentsProvider {
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
             return Stream.of(
-                    Arguments.of(PRICE_IS_ONE_THOUSAND, false),
-                    Arguments.of(PRICE_IS_TEN, true),
-                    Arguments.of(PRICE_IS_ONE, true),
+                    Arguments.of(Money.ONE_THOUSAND, false),
+                    Arguments.of(Money.of(10), true),
+                    Arguments.of(Money.of(1), true),
                     Arguments.of(null, false)
             );
         }
     }
 
-    @DisplayName("Money로 Purchasable을 구매 성공")
+    @DisplayName("Money로 다른 Money를 차감")
     @ParameterizedTest
-    @ArgumentsSource(SuccessfulPurchaseArgumentsProvider.class)
-    void successfulPurchase(Purchasable purchasable, Money expected) {
-        assertThat(Money.ONE_THOUSAND.deduct(purchasable)).isEqualTo(expected);
+    @ArgumentsSource(SuccessfulDeductArgumentsProvider.class)
+    void successfulPurchase(Money money, Money expected) {
+        assertThat(Money.ONE_THOUSAND.deduct(money)).isEqualTo(expected);
     }
 
-    static class SuccessfulPurchaseArgumentsProvider implements ArgumentsProvider {
+    static class SuccessfulDeductArgumentsProvider implements ArgumentsProvider {
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
             return Stream.of(
-                    Arguments.of(PRICE_IS_ONE_THOUSAND, Money.of(0)),
-                    Arguments.of(PRICE_IS_TEN, Money.of(990)),
-                    Arguments.of(PRICE_IS_ONE, Money.of(999))
+                    Arguments.of(Money.ONE_THOUSAND, Money.of(0)),
+                    Arguments.of(Money.of(10), Money.of(990)),
+                    Arguments.of(Money.of(1), Money.of(999))
             );
         }
     }
 
-    @DisplayName("Money로 Purchasable을 구매 실패")
+    @DisplayName("Money로 다른 Money를 차감 실패")
     @ParameterizedTest
     @NullSource
-    @ArgumentsSource(FailurePurchaseArgumentsProvider.class)
-    void failurePurchase(Purchasable purchasable) {
+    @ArgumentsSource(FailureDeductArgumentsProvider.class)
+    void failureDeduct(Money money) {
         assertThatThrownBy(() -> {
-            Money.of("1").deduct(purchasable);
+            Money.of("1").deduct(money);
         })
         .isInstanceOf(CanNotDeductException.class)
         .hasMessageContaining("구매가 불가능 합니다.");
     }
 
-    static class FailurePurchaseArgumentsProvider implements ArgumentsProvider {
+    static class FailureDeductArgumentsProvider implements ArgumentsProvider {
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
             return Stream.of(
-                    Arguments.of(PRICE_IS_ONE_THOUSAND),
-                    Arguments.of(PRICE_IS_TEN)
+                    Arguments.of(Money.ONE_THOUSAND),
+                    Arguments.of(Money.of(1))
             );
         }
     }
