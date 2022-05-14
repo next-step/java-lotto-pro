@@ -23,7 +23,7 @@ class NumberTest {
 	@DisplayName("숫자 0 생성")
 	@Test
 	void zero() {
-		assertThat(Number.zero().getValue()).isZero();
+		assertThat(Number.ZERO.getValue()).isZero();
 	}
 
 	@DisplayName("숫자 이외의 값을 전달하면 예외 발생")

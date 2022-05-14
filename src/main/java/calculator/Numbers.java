@@ -47,6 +47,6 @@ public class Numbers {
 	public Number sum() {
 		return numbers.stream()
 				.reduce(Number::add)
-				.orElse(Number.zero());
+				.orElse(Number.ZERO);
 	}
 }

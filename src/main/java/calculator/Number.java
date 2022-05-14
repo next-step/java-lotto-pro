@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class Number {
 	private final int value;
 	private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+");
+	public static Number ZERO = new Number(0);
 
 	private Number(int value) {
 		if (value < 0) {
@@ -28,10 +29,6 @@ public class Number {
 	private static boolean isNumber(String string) {
 		return NUMBER_PATTERN.matcher(string)
 				.matches();
-	}
-
-	public static Number zero() {
-		return new Number(0);
 	}
 
 	public Number add(Number other) {
