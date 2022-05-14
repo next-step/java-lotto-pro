@@ -1,8 +1,9 @@
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class LottoNumbers {
+public class LottoNumbers implements Iterable<LottoNumber> {
     public static final int SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
 
@@ -26,6 +27,11 @@ public class LottoNumbers {
     }
 
     public boolean contains(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    @Override
+    public Iterator<LottoNumber> iterator() {
+        return this.lottoNumbers.iterator();
     }
 }
