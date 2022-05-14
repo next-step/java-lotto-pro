@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+public class LottoNumber {
     public final static int MIN_LOTTO_NUMBER = 1;
     public final static int MAX_LOTTO_NUMBER = 45;
 
@@ -17,15 +17,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if(MIN_LOTTO_NUMBER > number || MAX_LOTTO_NUMBER < number){
             throw new IllegalArgumentException("1~45 숫자만 유효합니다.");
         }
-    }
-
-    @Override
-    public int compareTo(LottoNumber lottoNumber) {
-        if(lottoNumber.number < this.number) {
-            return 1;
-        }
-
-        return -1;
     }
 
     @Override
