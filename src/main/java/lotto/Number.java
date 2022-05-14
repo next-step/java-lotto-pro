@@ -7,11 +7,27 @@ public class Number implements Comparable<Number> {
 	private static final int MAXIMUM_VALUE = 45;
 	private final int value;
 
-	public Number(int value) {
+	private Number(int value) {
 		if (value < MINIMUM_VALUE || value > MAXIMUM_VALUE) {
 			throw new IllegalArgumentException("숫자는 1~45만 가능합니다.");
 		}
 		this.value = value;
+	}
+
+	public static Number from(int value) {
+		return new Number(value);
+	}
+
+	public static Number from(String value) {
+		if (!isNumber(value)) {
+			throw new IllegalArgumentException("양수만 입력 가능합니다");
+		}
+		return new Number(Integer.parseInt(value));
+	}
+
+	private static boolean isNumber(String value) {
+		return value.chars()
+				.allMatch(Character::isDigit);
 	}
 
 	@Override

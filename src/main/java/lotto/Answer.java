@@ -7,29 +7,25 @@ import java.util.stream.Collectors;
 import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
 
-public class Lotto {
-	private static final int LOTTO_SIZE = 6;
+public class Answer {
+	private static final int ANSWER_SIZE = 6;
 	private final List<Number> numbers;
 
-	public Lotto(List<Number> numbers) {
-		if (numbers.size() != LOTTO_SIZE) {
-			throw new IllegalArgumentException("로또 번호는 6개여야 합니다");
+	public Answer(List<Number> numbers) {
+		if (numbers.size() != ANSWER_SIZE) {
+			throw new IllegalArgumentException("당첨 번호는 6개여야 합니다");
 		}
 		if (!isUnique(numbers)) {
-			throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다");
+			throw new IllegalArgumentException("당첨 번호는 중복되지 않아야 합니다");
 		}
 		sort(numbers);
 		this.numbers = unmodifiableList(numbers);
 	}
 
-	public Lotto(int... numbers) {
-		this(Arrays.stream(numbers)
-				.mapToObj(Number::from)
+	public Answer(String numbers) {
+		this(Arrays.stream(numbers.split(","))
+				.map(number -> Number.from(number.trim()))
 				.collect(Collectors.toList()));
-	}
-
-	public static Lotto auto() {
-		return new Lotto(new ShuffledNumbers().get(LOTTO_SIZE));
 	}
 
 	private boolean isUnique(List<Number> numbers) {
@@ -37,10 +33,5 @@ public class Lotto {
 				.distinct()
 				.collect(Collectors.toList());
 		return distinctNumbers.size() == numbers.size();
-	}
-
-	@Override
-	public String toString() {
-		return numbers.toString();
 	}
 }

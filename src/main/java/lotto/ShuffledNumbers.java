@@ -12,7 +12,7 @@ public class ShuffledNumbers {
 
 	public ShuffledNumbers() {
 		numbers = IntStream.range(RANGE_FROM, RANGE_TO)
-				.mapToObj(Number::new)
+				.mapToObj(Number::from)
 				.collect(Collectors.toList());
 		Collections.shuffle(numbers);
 	}
