@@ -1,10 +1,18 @@
 package lotto.lotto;
 
 import lotto.util.StringUtils;
-import java.util.Objects;
 
-//todo(heowc): 캐싱 고려
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class LottoNumber implements Comparable<LottoNumber> {
+
+    private static final List<LottoNumber> CACHED_LOTTO_NUMBERS =
+            IntStream.rangeClosed(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
+                     .mapToObj(LottoNumber::new)
+                     .collect(Collectors.toList());
 
     static final int MIN_VALUE = 1;
     static final int MAX_VALUE = 45;
@@ -20,11 +28,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(String value) {
-        return new LottoNumber(value);
+        return of(parse(value));
     }
 
     public static LottoNumber of(int value) {
-        return new LottoNumber(value);
+        return CACHED_LOTTO_NUMBERS.get(validate(value) - 1);
     }
 
     private static int parse(String value) {
