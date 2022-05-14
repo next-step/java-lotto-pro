@@ -6,7 +6,7 @@ public enum WinningRank {
     THIRD(50000),
     FOURTH(5000);
 
-    private final Integer price;
+    public final Integer price;
 
     WinningRank(Integer price) {
         this.price = price;

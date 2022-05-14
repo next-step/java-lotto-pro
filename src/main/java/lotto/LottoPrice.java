@@ -19,4 +19,8 @@ public class LottoPrice {
     public Integer getCount() {
         return price / LOTTO_PRICE;
     }
+
+    public int getPrice() {
+        return price;
+    }
 }
