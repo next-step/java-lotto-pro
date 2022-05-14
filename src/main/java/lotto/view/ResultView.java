@@ -2,25 +2,21 @@ package lotto.view;
 
 import java.util.List;
 
+import lotto.common.ViewMessage;
 import lotto.domain.LottoGroups;
 import lotto.domain.Money;
 import lotto.domain.Rank;
 
 public class ResultView {
-    private static final String BUY_MESSAGE_FORMAT = "%d개를 구매했습니다.%n";
-    private static final String MATCH_RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원) - %d개";
-    private static final String STATISTICS_MESSAGE_HEADER = "당첨 통계";
-    private static final String STATISTICS_MESSAGE_DELIMITER = "---------";
-    private static final String PROFIT_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
-    private static final String LOSS_MESSAGE_FORMAT = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final int PROFIT_STANDARD_VALUE = 1;
 
     public static void printCount(int count) {
-        System.out.printf(BUY_MESSAGE_FORMAT, count);
+        System.out.printf(ViewMessage.BUY_MESSAGE.getMessage(), count);
     }
 
     public static void printLottoGroups(LottoGroups lottoGroups) {
         lottoGroups.printLottoGroups();
+        System.out.println();
     }
 
     public static void printStatistics(List<Rank> matchResults, Money money) {
@@ -34,13 +30,12 @@ public class ResultView {
 
     private static void printStatisticsHeader() {
         System.out.println();
-        System.out.println(STATISTICS_MESSAGE_HEADER);
-        System.out.println(STATISTICS_MESSAGE_DELIMITER);
+        System.out.println(ViewMessage.STATISTICS_MESSAGE_HEADER.getMessage());
     }
 
     private static void printMatchResult(List<Rank> matchResults, Rank rank) {
         int count = calculateMatchCount(matchResults, rank);
-        String format = String.format(MATCH_RESULT_MESSAGE_FORMAT, rank.getMatchCount(), rank.getWinningPrize(), count);
+        String format = String.format(ViewMessage.MATCH_RESULT_MESSAGE.getMessage(), rank.getMatchCount(), rank.getWinningPrize(), count);
         System.out.println(format);
     }
 
@@ -52,9 +47,9 @@ public class ResultView {
 
     private static void printProfitRate(List<Rank> matchResults, Money money) {
         double profitRate = calculateProfitRate(matchResults, money);
-        System.out.printf(PROFIT_RATE_MESSAGE_FORMAT, profitRate);
+        System.out.printf(ViewMessage.PROFIT_RATE_MESSAGE.getMessage(), profitRate);
         if (profitRate < PROFIT_STANDARD_VALUE) {
-            System.out.println(LOSS_MESSAGE_FORMAT);
+            System.out.println(ViewMessage.LOSS_MESSAGE.getMessage());
         }
     }
 
