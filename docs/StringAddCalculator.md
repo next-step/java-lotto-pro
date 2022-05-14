@@ -25,3 +25,6 @@
 - [X] 클래스명 변경 (StringSplitter -> StringSplitter)
 - [X] 메서드명 변경 (isEmptyExpression -> isEmpty)
 - [X] StringSplitter를 유틸성 클래스로 변경 
+
+# 2차 리뷰 반영
+- [ ] mapToInt로 가독성 높이기
