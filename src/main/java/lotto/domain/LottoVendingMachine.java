@@ -23,7 +23,7 @@ public class LottoVendingMachine {
     }
 
     private void validatePurchaseMoney(Money money) {
-        if (money.isUnderPrice()) {
+        if (money.isSmallerThan(LOTTO_TICKET_PRICE)) {
             throw new IllegalArgumentException(MONEY_UNDER_PRICE_ERROR);
         }
     }
