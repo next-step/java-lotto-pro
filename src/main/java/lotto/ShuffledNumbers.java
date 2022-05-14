@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 public class ShuffledNumbers {
 	private static final int RANGE_FROM = 1;
 	private static final int RANGE_TO = 46;
+	private static final int MINIMUM_SIZE = 0;
+	private static final int MAXIMUM_SIZE = 45;
 	private final List<Number> numbers;
 
 	public ShuffledNumbers() {
@@ -18,6 +20,9 @@ public class ShuffledNumbers {
 	}
 
 	public List<Number> get(int size) {
+		if (size < MINIMUM_SIZE || size > MAXIMUM_SIZE) {
+			throw new IllegalArgumentException("0개 이상 45개 이하만 선택할 수 있습니다");
+		}
 		return numbers.subList(0, size);
 	}
 }
