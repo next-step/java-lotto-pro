@@ -6,13 +6,16 @@ import java.util.List;
 public class Numbers {
     private final List<Number> numbers;
 
-    public Numbers(String[] values) {
+    private Numbers(List<Number> numbers) {
+        this.numbers = numbers;
+    }
+
+    public static Numbers of(String[] values) {
         List<Number> numbers = new ArrayList<>();
         for (String value : values) {
-            Number number = new Number(value);
-            numbers.add(number);
+            numbers.add(new Number(value));
         }
-        this.numbers = numbers;
+        return new Numbers(numbers);
     }
 
     public int getTotalSum() {

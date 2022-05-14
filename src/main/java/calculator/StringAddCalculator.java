@@ -5,7 +5,7 @@ public class StringAddCalculator {
         if (isNullOrEmpty(text)) {
             return 0;
         }
-        Numbers numbers = new Numbers(SplitGenerator.splitWithDelimiter(text));
+        Numbers numbers = Numbers.of(SplitGenerator.splitWithDelimiter(text));
         return calculateSum(numbers);
     }
 
