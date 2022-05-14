@@ -22,7 +22,7 @@ public class Application {
         LottoGameDTO lottoGameDTO;
         do {
             String winningNumbersWord = InputConsole.readLineForMessage(LottoGameMessage.INPUT_WINNING_NUMBERS_MESSAGE);
-            lottoGameDTO = lottoGameController.playLotto(requestLottoGameDTO.getLottos(), winningNumbersWord);
+            lottoGameDTO = lottoGameController.resultWinningGame(requestLottoGameDTO.getLottos(), winningNumbersWord);
             isInputError = lottoGameDTO.isInputError();
         } while (isInputError);
     }
@@ -32,7 +32,7 @@ public class Application {
         LottoGameDTO lottoGameDTO;
         do {
             String moneyWord = InputConsole.readLineForMessage(LottoGameMessage.INPUT_MONEY_MESSAGE);
-            lottoGameDTO = lottoGameController.generateLottos(moneyWord);
+            lottoGameDTO = lottoGameController.generateLottosByMoney(moneyWord);
             isInputError = lottoGameDTO.isInputError();
         } while (isInputError);
         return lottoGameDTO;

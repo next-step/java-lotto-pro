@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.constant.LottoRoleConst;
 import lotto.dto.LottoGameDTO;
@@ -17,7 +18,7 @@ public class LottoGameController {
 
     private static final String DELIMITER_COMMA = ",";
 
-    public LottoGameDTO playLotto(Lottos lottos, String winningNumbersWord) {
+    public LottoGameDTO resultWinningGame(Lottos lottos, String winningNumbersWord) {
         try {
             List<Integer> winningNumberList = InputStringUtils
                     .splitToNumberListByDelimiter(winningNumbersWord, DELIMITER_COMMA);
@@ -31,7 +32,7 @@ public class LottoGameController {
         }
     }
 
-    public LottoGameDTO generateLottos(String moneyWord) {
+    public LottoGameDTO generateLottosByMoney(String moneyWord) {
         try {
             LottoStore lottoStore = new LottoStore(moneyWord);
             LottoPaper lottoPaper = lottoStore.issueLottoPaper();
@@ -45,13 +46,13 @@ public class LottoGameController {
     }
 
     private Lottos generateLottos(LottoPaper lottoPaper) {
-        Lottos lottos = new Lottos();
+        List<Lotto> lottoList = new ArrayList<>();
         for (int gameCount = 0; gameCount < lottoPaper.getGameCount(); gameCount++) {
             List<Integer> randomNumberToList = RandomNumberUtils
                     .generateRandomNumberToList(LottoRoleConst.LOW_NUMBER, LottoRoleConst.MAX_NUMBER,
                             LottoRoleConst.LOTTO_NUMBER_LIST_SIZE);
-            lottos.addLotto(new Lotto(randomNumberToList));
+            lottoList.add(new Lotto(randomNumberToList));
         }
-        return lottos;
+        return new Lottos(lottoList);
     }
 }
