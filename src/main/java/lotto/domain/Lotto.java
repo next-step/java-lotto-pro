@@ -11,6 +11,7 @@ public class Lotto {
     public Lotto(int... values) {
         this(Arrays.stream(values)
                 .mapToObj(LottoNo::new)
+                .distinct()
                 .collect(toList()));
     }
 
@@ -18,6 +19,7 @@ public class Lotto {
         this(Arrays.stream(values.split(","))
                 .map(String::trim)
                 .map(LottoNo::new)
+                .distinct()
                 .collect(toList()));
     }
 
