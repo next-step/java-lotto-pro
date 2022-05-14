@@ -15,7 +15,6 @@ import static lotto.view.InputView.REQUEST_MONEY;
 public class LottoGame {
     private static final List<LottoNo> lottoNumbers = new ArrayList<>();
 
-    private PurchasedLottos purchasedLottos = new PurchasedLottos();
     private LottoResult result = new LottoResult();
     private String lastWinningNumbers = "";
 
@@ -25,19 +24,17 @@ public class LottoGame {
         }
     }
 
-    public LottoGame() {
-
-    }
+    public LottoGame() { }
 
     public void play() {
         Money money = readMoney();
         OutputView.printMessage(getLottoQuantity(money) + "개를 구매했습니다.");
-        purchaseLotto(money);
-        OutputView.printMyLotto(purchasedLottos);
+        PurchasedLottos lottos = purchaseLotto(money);
+        OutputView.printMyLotto(lottos);
         readLastWinningNumbers();
         OutputView.printLine();
-        OutputView.showLottoStatistics(purchasedLottos, lastWinningNumbers);
-        OutputView.showLottoProfit(purchasedLottos, lastWinningNumbers, money);
+        OutputView.showLottoStatistics(lottos, lastWinningNumbers);
+        OutputView.showLottoProfit(lottos, lastWinningNumbers, money);
     }
 
     public Money readMoney() {
@@ -45,13 +42,13 @@ public class LottoGame {
         return new Money(input);
     }
 
-    public void purchaseLotto(Money money) {
+    public PurchasedLottos purchaseLotto(Money money) {
         long lottoQuantity = getLottoQuantity(money);
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoQuantity; i++) {
             lottoList.add(generateLotto());
         }
-        purchasedLottos = new PurchasedLottos(lottoList);
+        return new PurchasedLottos(lottoList);
     }
 
     public void readLastWinningNumbers() {
@@ -68,9 +65,5 @@ public class LottoGame {
 
     private static long getLottoQuantity(Money money) {
         return money.getMoney() / LOTTO_PRICE;
-    }
-
-    public PurchasedLottos getPurchasedLottos() {
-        return purchasedLottos;
     }
 }
