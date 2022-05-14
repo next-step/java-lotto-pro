@@ -1,4 +1,4 @@
-package study;
+package calculator;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,6 +17,7 @@ public class StringAddCalculator {
     }
 
     public static int splitAndSum(final String text) {
+
         if (StringUtil.isEmpty(text)) {
             return 0;
         }
