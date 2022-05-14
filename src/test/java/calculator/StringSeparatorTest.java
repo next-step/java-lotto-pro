@@ -13,14 +13,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 class StringSeparatorTest {
     @DisplayName("숫자_하나만_분리")
     @ParameterizedTest
-    @MethodSource("숫자_하나만_입력")
-    void 숫자_하나만_분리(String input) throws Exception {
+    @MethodSource("ONE_NUMBER")
+    void ONE_NUMBER_TO_ONE_NUMBER(String input) throws Exception {
         Numbers numbers = new Numbers();
         numbers.add(new Number(input));
         assertThat(numbers).isEqualTo(StringSeparator.split(input));
     }
 
-    static Stream<Arguments> 숫자_하나만_입력() {
+    static Stream<Arguments> ONE_NUMBER() {
         return Stream.of(
                 Arguments.of("0"),
                 Arguments.of("10"),
@@ -30,7 +30,7 @@ class StringSeparatorTest {
 
     @DisplayName("쉼표_구분자로_숫자_분리")
     @Test
-    void 쉼표_구분자로_숫자_분리() throws Exception {
+    void COMMA_SPLIT() throws Exception {
         Numbers numbers = new Numbers();
         numbers.add(new Number("1"));
         numbers.add(new Number("2"));
@@ -39,7 +39,7 @@ class StringSeparatorTest {
 
     @DisplayName("쉼표_또는_콜론_구분자로_숫자_분리")
     @Test
-    void 쉼표_또는_콜론_구분자로_숫자_분리() throws Exception {
+    void COMMA_OR_COLON_SPLIT() throws Exception {
         Numbers numbers = new Numbers();
         numbers.add(new Number("1"));
         numbers.add(new Number("2"));
@@ -49,7 +49,7 @@ class StringSeparatorTest {
 
     @DisplayName("커스텀_구분자로_숫자_분리")
     @Test
-    void 커스텀_구분자로_숫자_분리() throws Exception {
+    void CUSTOM_SPLIT() throws Exception {
         Numbers numbers = new Numbers();
         numbers.add(new Number("1"));
         numbers.add(new Number("2"));
