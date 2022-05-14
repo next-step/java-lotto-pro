@@ -1,7 +1,9 @@
 package camp.nextstep.edu.step3;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Presenter {
 
@@ -16,12 +18,18 @@ public class Presenter {
         System.out.println(paper);
     }
 
-    public int[] askLastWeekWinningNumber() {
+    public List<LottoNumber> askLastWeekWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        int[] ints = Arrays.stream(scanner.nextLine().replace(" ", "").split(",")).mapToInt(Integer::parseInt).toArray();
+        List<LottoNumber> numbers = userLottoNumbers(new Scanner(System.in));
         System.out.println();
-        return ints;
+        return numbers;
+    }
+
+    private List<LottoNumber> userLottoNumbers(Scanner scanner) {
+        return Arrays.stream(scanner.nextLine().replace(" ", "").split(","))
+                .mapToInt(Integer::parseInt)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public void printResult(final LottoResult result, final EarningsRate earningsRate) {
