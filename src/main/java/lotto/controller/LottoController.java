@@ -46,7 +46,7 @@ public class LottoController {
             Number number = Number.of(scanner.nextInt());
             WinningLottoNumber winningLottoNumber = new WinningLottoNumber(lottoNumber, number);
 
-            lottoRanks = lottoNumbers.resultLottoRanks(lottoNumber);
+            lottoRanks = lottoNumbers.resultLottoRanks(winningLottoNumber);
             LottoOutputView.printRankResult(lottoRanks);
         } catch (IllegalArgumentException iae) {
             LottoOutputView.printErrorMessage(iae);

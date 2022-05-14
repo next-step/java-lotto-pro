@@ -92,4 +92,4 @@
   - [x] 로또 등수를 반환하는 resultLottoRank 메소드 삭제 
   - [x] 로또 번호를 비교하는 countMatchLottoNumber 메소드 추가
 - 로또 번호 일급 컬렉션(LottoNumbers) 수정
-  - [ ] 로또 등수들을 반환하는 resultLottoRanks 메소드 수정
+  - [x] 로또 등수들을 반환하는 resultLottoRanks 메소드 수정

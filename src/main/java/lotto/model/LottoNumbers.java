@@ -20,9 +20,13 @@ public class LottoNumbers {
         return lottoNumbers.size();
     }
 
-    public LottoRanks resultLottoRanks(LottoNumber winningLottoNumber) {
+    public LottoRanks resultLottoRanks(WinningLottoNumber winningLottoNumber) {
         return lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.resultLottoRank(winningLottoNumber))
+                .map(lottoNumber -> {
+                    int matchLottoNumber = winningLottoNumber.countMatchLottoNumber(lottoNumber);
+                    boolean hasBonusNumber = winningLottoNumber.hasBonusNumber(lottoNumber);
+                    return LottoRank.findByHits(matchLottoNumber, hasBonusNumber);
+                })
                 .collect(collectingAndThen(toList(), LottoRanks::of));
     }
 }
