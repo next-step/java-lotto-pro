@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class WinningLottoTest {
@@ -14,7 +15,13 @@ public class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6));
+        winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6), 7);
+    }
+
+    @Test
+    void createWinningLotto_보너스번호_중복_예외발생() {
+        assertThatThrownBy(() -> new WinningLotto(Arrays.asList(1,2,3,4,5,6), 6))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.view.ResultView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,7 +45,7 @@ public class Lotto {
         }
 
         if (numbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("중복된 값이 있습니다.");
+            throw new IllegalArgumentException(ResultView.ERROR_DUPLICATION_NUMBER);
         }
     }
 

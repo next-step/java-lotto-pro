@@ -1,15 +1,27 @@
 package lotto.model;
 
+import lotto.view.ResultView;
+
 import java.util.List;
 
 public class WinningLotto {
 
     private final Lotto lotto;
+    private final LottoNumber bonusBall;
     private final WinningStatus winningStatus;
 
-    public WinningLotto(List<Integer> numbers) {
+    public WinningLotto(List<Integer> numbers, int bonusBall) {
         this.lotto = new Lotto(numbers);
         this.winningStatus = new WinningStatus();
+
+        if(isDuplicationNumber(numbers, bonusBall)) {
+            throw new IllegalArgumentException(ResultView.ERROR_DUPLICATION_NUMBER);
+        }
+        this.bonusBall = new LottoNumber(bonusBall);
+    }
+
+    private boolean isDuplicationNumber(List<Integer> numbers, int bonusBall) {
+        return numbers.stream().anyMatch(number -> number == bonusBall);
     }
 
     public void compareWinningLotto(Lotto lotto) {

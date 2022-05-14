@@ -6,6 +6,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.io.IOException;
+import java.util.List;
 
 public class LottoController {
 
@@ -44,6 +45,9 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto() throws IOException {
-        return new WinningLotto(inputView.inputWinningLottoNumbers());
+        List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumbers();
+        int bonusBall = inputView.inputBonusBall();
+
+        return new WinningLotto(winningLottoNumbers, bonusBall);
     }
 }

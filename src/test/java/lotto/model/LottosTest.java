@@ -27,7 +27,7 @@ public class LottosTest {
 
     @Test
     void compareLottos() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6), 9);
 
         Lottos lottos = new Lottos(Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)),

@@ -11,6 +11,8 @@ public class ResultView {
     private final static String WINNING_STATISTICS_MESSAGE = "%d개 일치 (%d원)- %d개";
     private final static String TOTAL_EARNINGS_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
 
+    public final static String ERROR_DUPLICATION_NUMBER = "중복된 값이 있습니다.";
+
     private final MessageUtil message;
 
     public ResultView() {
