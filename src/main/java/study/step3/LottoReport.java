@@ -15,14 +15,7 @@ public class LottoReport {
 
     public LottoResultMap analyze() {
         LottoResultMap lottoResultMap = new LottoResultMap();
-
-        for (Lotto lotto : lottos) {
-            lottoResultMap.append(
-                    LottoWinningType.valueOf(lotto.matchCount(winningLotto)),
-                    lotto
-            );
-        }
-
+        lottos.forEach(lotto -> lottoResultMap.append(LottoWinningType.valueOf(lotto.matchCount(winningLotto)), lotto));
         return lottoResultMap;
     }
 
@@ -37,11 +30,10 @@ public class LottoReport {
     }
 
     private int calcTotalWinnings(LottoResultMap lottoResultMap) {
-        int totalWinnins = 0;
-        for (LottoWinningType lottoWinningType : lottoResultMap.keySet()) {
-            totalWinnins += lottoResultMap.matchCount(lottoWinningType) * lottoWinningType.getWinnings();
-        }
-        return totalWinnins;
+        return lottoResultMap.keySet().stream()
+                .mapToInt(
+                        lottoWinningType -> lottoResultMap.matchCount(lottoWinningType) * lottoWinningType.getWinnings()
+                ).sum();
     }
 
     private void validate(List<Lotto> myLottos, Lotto winningLotto) {

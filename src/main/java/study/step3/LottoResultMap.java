@@ -7,7 +7,7 @@ import java.util.Set;
 import study.step3.enumtype.LottoWinningType;
 
 public class LottoResultMap {
-    private static final int NOT_EXIST_RESULT_SIZE = 0;
+    private static final int EMPTY_SIZE = 0;
     private final EnumMap<LottoWinningType, List<Lotto>> resultMap;
 
     public LottoResultMap() {
@@ -21,7 +21,7 @@ public class LottoResultMap {
 
     public int matchCount(LottoWinningType lottoWinningType) {
         if (!resultMap.containsKey(lottoWinningType)) {
-            return NOT_EXIST_RESULT_SIZE;
+            return EMPTY_SIZE;
         }
         return resultMap.get(lottoWinningType).size();
     }
