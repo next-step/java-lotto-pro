@@ -22,6 +22,13 @@ class LottoNumberTest {
         assertThat(result).isEqualTo(new LottoNumber(5));
     }
 
+    @DisplayName("같은 숫자를 가진 로또 숫자 객체가 같은 hashCode를 갖는지 확인")
+    @Test
+    void lottoNumberWithSameHashCode() {
+        LottoNumber result = new LottoNumber(5);
+        assertThat(result.hashCode()).isEqualTo(new LottoNumber(5).hashCode());
+    }
+
     @DisplayName("범위를 벗어난 로또 숫자 지정시 Exception 발생 확인")
     @Test
     void lottoNumberWithExceedNumber() {
