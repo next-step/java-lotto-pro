@@ -55,7 +55,7 @@ public class Lotto implements Purchasable {
     }
 
     boolean contains(LottoNumber lottoNumber) {
-        return false;
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     private static Set<LottoNumber> validate(List<LottoNumber> lottoNumbers) {
