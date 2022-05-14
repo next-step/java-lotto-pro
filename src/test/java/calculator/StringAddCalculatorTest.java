@@ -9,6 +9,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StringAddCalculatorTest {
     @DisplayName("숫자_하나만_입력_결과")
@@ -43,5 +45,14 @@ public class StringAddCalculatorTest {
     void 커스텀_구분자로_숫자_분리_결과() throws Exception {
         Numbers numbers = new Numbers();
         assertThat(6).isEqualTo(StringAddCalculator.splitAndSum("//;\n1;2;3"));
+    }
+
+    @DisplayName("빈_문자열_입력_결과")
+    @Test
+    void 빈_문자열_NULL_입력_결과() throws Exception {
+        assertAll(
+                () -> assertThat(0).isEqualTo(StringAddCalculator.splitAndSum("")),
+                () -> assertThat(0).isEqualTo(StringAddCalculator.splitAndSum(null))
+        );
     }
 }
