@@ -34,28 +34,28 @@ class LottoTest {
 	@Test
 	void 당첨금_6개_일치() {
 		Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-		Winnings winnings = lotto.winnings(answer123456);
-		assertThat(winnings.getMoney()).isEqualTo(2000000000);
+		Winning winning = lotto.winning(answer123456);
+		assertThat(winning.getMoney()).isEqualTo(2000000000);
 	}
 
 	@Test
 	void 당첨금_5개_일치() {
 		Lotto lotto = new Lotto(1, 2, 3, 4, 5, 7);
-		Winnings winnings = lotto.winnings(answer123456);
-		assertThat(winnings.getMoney()).isEqualTo(1500000);
+		Winning winning = lotto.winning(answer123456);
+		assertThat(winning.getMoney()).isEqualTo(1500000);
 	}
 
 	@Test
 	void 당첨금_4개_일치() {
 		Lotto lotto = new Lotto(1, 2, 3, 4, 7, 8);
-		Winnings winnings = lotto.winnings(answer123456);
-		assertThat(winnings.getMoney()).isEqualTo(50000);
+		Winning winning = lotto.winning(answer123456);
+		assertThat(winning.getMoney()).isEqualTo(50000);
 	}
 
 	@Test
 	void 당첨금_3개_일치() {
 		Lotto lotto = new Lotto(1, 2, 3, 7, 8, 9);
-		Winnings winnings = lotto.winnings(answer123456);
-		assertThat(winnings.getMoney()).isEqualTo(5000);
+		Winning winning = lotto.winning(answer123456);
+		assertThat(winning.getMoney()).isEqualTo(5000);
 	}
 }

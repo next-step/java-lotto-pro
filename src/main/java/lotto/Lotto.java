@@ -39,8 +39,8 @@ public class Lotto {
 		return distinctNumbers.size() == numbers.size();
 	}
 
-	public Winnings winnings(Answer answer) {
-		return Winnings.from(answer.match(numbers));
+	public Winning winning(Answer answer) {
+		return Winning.from(answer.match(numbers));
 	}
 
 	@Override
