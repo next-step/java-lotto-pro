@@ -1,6 +1,6 @@
 package calculator.model;
 
-import exception.IllegalArgument;
+import calculator.exception.IllegalArgument;
 import java.util.Arrays;
 
 public class Numbers {
@@ -12,6 +12,7 @@ public class Numbers {
         } catch(NumberFormatException e) {
             throw IllegalArgument.NEGATIVE_OR_NOT_NUMBER;
         }
+
 
         if (isContainNegativeNumber()) {
             throw IllegalArgument.NEGATIVE_OR_NOT_NUMBER;
