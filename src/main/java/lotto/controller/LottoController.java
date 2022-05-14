@@ -6,6 +6,8 @@ import lotto.model.LottoNumber;
 import lotto.model.LottoNumberGenerator;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoRanks;
+import lotto.model.Number;
+import lotto.model.WinningLottoNumber;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
@@ -39,8 +41,12 @@ public class LottoController {
     private void inputWinningNumber() {
         try {
             LottoInputView.printWinningNumber();
-            LottoNumber winningNumber = new LottoNumber(LottoNumberGenerator.of(scanner.nextLine()));
-            lottoRanks = lottoNumbers.resultLottoRanks(winningNumber);
+            LottoNumber lottoNumber = new LottoNumber(LottoNumberGenerator.of(scanner.nextLine()));
+            LottoInputView.printBonusNumber();
+            Number number = Number.of(scanner.nextInt());
+            WinningLottoNumber winningLottoNumber = new WinningLottoNumber(lottoNumber, number);
+
+            lottoRanks = lottoNumbers.resultLottoRanks(lottoNumber);
             LottoOutputView.printRankResult(lottoRanks);
         } catch (IllegalArgumentException iae) {
             LottoOutputView.printErrorMessage(iae);

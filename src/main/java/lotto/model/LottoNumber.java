@@ -24,7 +24,7 @@ public class LottoNumber {
         return LottoRank.findByHits(count);
     }
 
-    private boolean isContainNumber(Number number) {
+    public boolean isContainNumber(Number number) {
         return this.lottoNumber.contains(number);
     }
 
