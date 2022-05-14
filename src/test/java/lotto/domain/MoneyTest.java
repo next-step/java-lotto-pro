@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.constants.LottoConstants.LOTTO_TICKET_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -16,13 +15,15 @@ class MoneyTest {
     }
 
     @Test
-    void 나눗셈_테스트() {
-        int result = Money.from(1000).divide(100);
-        assertThat(result).isEqualTo(10);
+    void 돈에따_가능한_수량을_구할_수_있다() {
+        int result = Money.from(1000).getQuantityFromMoney();
+        assertThat(result).isEqualTo(1);
     }
 
     @Test
     void 표가격보다_낮은지_체크() {
-        assertThat(Money.from(900).isSmallerThan(LOTTO_TICKET_PRICE)).isTrue();
+        assertThatThrownBy(
+                () -> Money.from(900)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }

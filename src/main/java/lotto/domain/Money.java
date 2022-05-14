@@ -1,9 +1,11 @@
 package lotto.domain;
 
-import static lotto.messages.ErrorMessages.MONEY_NEGATIVE_ERROR;
-import static lotto.messages.ErrorMessages.ZERO_DIVIDE_ERROR;
+import static lotto.constants.LottoConstants.LOTTO_TICKET_PRICE;
 
 public class Money {
+
+    private static final String MONEY_NEGATIVE_ERROR = "[ERROR] 금액은 양수여야 합니다.";
+    private static final String MONEY_UNDER_PRICE_ERROR = "[ERROR] 금액이 로또 가격보다 낮습니다.";
 
     private int money;
 
@@ -16,6 +18,9 @@ public class Money {
         if (money <= 0) {
             throw new IllegalArgumentException(MONEY_NEGATIVE_ERROR);
         }
+        if (money < LOTTO_TICKET_PRICE) {
+            throw new IllegalArgumentException(MONEY_UNDER_PRICE_ERROR);
+        }
     }
 
     public int getMoney() {
@@ -26,12 +31,7 @@ public class Money {
         return new Money(money);
     }
 
-    public int divide(int divisor) {
-        if (divisor == 0) throw new IllegalArgumentException(ZERO_DIVIDE_ERROR);
-        return money/divisor;
-    }
-
-    public boolean isSmallerThan(int target) {
-        return this.money < target;
+    public int getQuantityFromMoney() {
+        return money/LOTTO_TICKET_PRICE;
     }
 }
