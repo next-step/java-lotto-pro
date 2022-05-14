@@ -22,10 +22,8 @@ public class WinningStatistics {
     }
 
     public void statistics() {
-        for (Lotto lotto : lottoTicket.getReadOnlyLottos()) {
-            WinningRank winningRank = LottoWinningRankMatcher.match(lastWinningLottoNumbers,
-                lotto.getLottoNumbers());
-
+        for (LottoNumbers lottoNumbers : lottoTicket.getReadOnlyLottoNumbers()) {
+            WinningRank winningRank = LottoWinningRankMatcher.match(lastWinningLottoNumbers, lottoNumbers);
             this.winningRecord.recording(winningRank);
         }
     }

@@ -17,11 +17,10 @@ public class LottoMarket {
         return LottoTicket.from(generateAutoLottoNumbers(lottoCount));
     }
 
-    private List<Lotto> generateAutoLottoNumbers(LottoCount lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
+    private List<LottoNumbers> generateAutoLottoNumbers(LottoCount lottoCount) {
+        List<LottoNumbers> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount.getCount(); i++) {
-            LottoNumbers lottoNumbers = LottoNumbers.generateBy(this.numberGenerator);
-            lottos.add(Lotto.from(lottoNumbers));
+            lottos.add(LottoNumbers.generateBy(this.numberGenerator));
         }
         return lottos;
     }

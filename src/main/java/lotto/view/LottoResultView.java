@@ -13,7 +13,7 @@ import static lotto.constants.LottoGuideMessage.WINNING_STATISTICS_GUIDE;
 
 import java.util.Map;
 import java.util.Map.Entry;
-import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningRecord;
 import lotto.domain.WinningStatistics;
@@ -23,8 +23,8 @@ public class LottoResultView {
 
     public void printLottos(LottoTicket lottoTicket) {
         System.out.printf((PURCHASE_COUNT) + "%n", lottoTicket.getCount());
-        for (Lotto lotto : lottoTicket.getReadOnlyLottos()) {
-            System.out.println(lotto.getLottoNumbers());
+        for (LottoNumbers lottoNumbers : lottoTicket.getReadOnlyLottoNumbers()) {
+            System.out.println(lottoNumbers);
         }
         newLine();
     }
