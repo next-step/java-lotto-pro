@@ -46,7 +46,7 @@ class StringUtilTest {
     @DisplayName("커스텀 Delimiter '\t'로 숫자열 문자를 split")
     @Test
     public void splitNumbersStringWithCustomDelimiter() {
-        assertThat(StringUtil.splitNumbersString("1\t2\t3")).containsExactly(1, 2, 3);
+        assertThat(StringUtil.splitNumbersString("1\t2\t3", "\t")).containsExactly(1, 2, 3);
     }
 
     @DisplayName("기본 Delimiter로 빈 문자열을 split")
