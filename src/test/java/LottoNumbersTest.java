@@ -37,6 +37,31 @@ public class LottoNumbersTest {
                 .isInstanceOf(RuntimeException.class);
     }
 
+    @Test
+    void LottoNumbers_는_중복된_LottoNumber_를_포함할_수_없다() {
+        assertThatThrownBy(
+                () -> new LottoNumbers(
+                        new LottoNumber(1),
+                        new LottoNumber(1),
+                        new LottoNumber(1),
+                        new LottoNumber(1),
+                        new LottoNumber(1),
+                        new LottoNumber(1)
+                )
+        ).isInstanceOf(RuntimeException.class);
+
+        assertThatThrownBy(
+                () -> new LottoNumbers(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(1)
+                )
+        ).isInstanceOf(RuntimeException.class);
+    }
+
     @ParameterizedTest
     @CsvSource(
             value = { "1:true", "2:true", "3:true", "4:true", "5:true", "6:true", "7:false", "45:false" },
