@@ -10,7 +10,10 @@ public class Splitter {
     private static final int CUSTOM_DELIMITER_INDEX = 1;
     private static final int CUSTOM_TARGET_INDEX = 2;
     private static Matcher matcher;
-private Splitter() {}
+
+    private Splitter() {
+    }
+
     public static String[] splitString(String input) {
         boolean isExist = hasCustomDelimiter(input);
         String delimiter = isExist ? matcher.group(CUSTOM_DELIMITER_INDEX) : DEFAULT_DELIMITERS;
