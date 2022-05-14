@@ -34,7 +34,11 @@ public class LottoNumbers {
 
     private List<Integer> initNumbers() {
         randomShuffle.shuffle(ALL_NUMBERS);
-        List<Integer> result = ALL_NUMBERS.subList(0, LOTTO_SIZE);
+
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < LOTTO_SIZE; i++) {
+            result.add(ALL_NUMBERS.get(i));
+        }
         result.sort(Integer::compareTo);
 
         return result;
