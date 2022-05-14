@@ -1,12 +1,10 @@
 import java.io.IOException;
 import lotto.constant.LottoInputMessage;
-import lotto.controller.LottoGameController;
+import lotto.controller.LottoGame;
 import lotto.dto.LottoGameDTO;
 import lotto.utils.InputConsoleUtils;
 
 public class Application {
-
-    private static final LottoGameController lottoGameController = new LottoGameController();
 
     public static void main(String[] args) throws IOException {
         new Application().startLottoGame();
@@ -22,7 +20,7 @@ public class Application {
         LottoGameDTO lottoGameDTO;
         do {
             String moneyWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.MONEY_MESSAGE);
-            lottoGameDTO = lottoGameController.generateLottosByMoney(moneyWord);
+            lottoGameDTO = LottoGame.generateLottosByMoney(moneyWord);
             isInputError = lottoGameDTO.isInputError();
         } while (isInputError);
         return lottoGameDTO;
@@ -33,7 +31,7 @@ public class Application {
         LottoGameDTO lottoGameDTO;
         do {
             String winningNumbersWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.WINNING_NUMBERS_MESSAGE);
-            lottoGameDTO = lottoGameController.resultWinningGame(requestLottoGameDTO.getLottos(), winningNumbersWord);
+            lottoGameDTO = LottoGame.resultWinningGame(requestLottoGameDTO.getLottos(), winningNumbersWord);
             isInputError = lottoGameDTO.isInputError();
         } while (isInputError);
     }

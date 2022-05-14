@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.constant.ErrorMessage;
 import lotto.constant.LottoRoleConst;
 import lotto.dto.LottoGameDTO;
 import lotto.model.Lotto;
@@ -14,11 +15,15 @@ import lotto.utils.RandomNumberUtils;
 import lotto.view.ResultView;
 import lotto.model.Lottos;
 
-public class LottoGameController {
+public class LottoGame {
 
     private static final String DELIMITER_COMMA = ",";
 
-    public LottoGameDTO generateLottosByMoney(String moneyWord) {
+    private LottoGame() {
+        throw new IllegalStateException(ErrorMessage.UTILITY_CLASS);
+    }
+
+    public static LottoGameDTO generateLottosByMoney(String moneyWord) {
         try {
             LottoStore lottoStore = new LottoStore(moneyWord);
             LottoPaper lottoPaper = lottoStore.issueLottoPaper();
@@ -31,7 +36,7 @@ public class LottoGameController {
         }
     }
 
-    private Lottos generateLottos(LottoPaper lottoPaper) {
+    private static Lottos generateLottos(LottoPaper lottoPaper) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int gameCount = 0; gameCount < lottoPaper.getGameCount(); gameCount++) {
             List<Integer> randomNumberToList = RandomNumberUtils
@@ -42,7 +47,7 @@ public class LottoGameController {
         return new Lottos(lottoList);
     }
 
-    public LottoGameDTO resultWinningGame(Lottos lottos, String winningNumbersWord) {
+    public static LottoGameDTO resultWinningGame(Lottos lottos, String winningNumbersWord) {
         try {
             List<Integer> winningNumberList = InputStringUtils.splitToNumberList(winningNumbersWord, DELIMITER_COMMA);
             WinningLotto winningLotto = new WinningLotto(winningNumberList);
