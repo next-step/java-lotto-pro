@@ -2,6 +2,7 @@ package lotto.domain;
 
 public class Lotto {
     private final LottoNumbers lottoNumbers;
+    public static final int LOTTO_MONEY = 1000;
 
     public Lotto() {
         this(LottoNumbers.autoLottoNumbers());

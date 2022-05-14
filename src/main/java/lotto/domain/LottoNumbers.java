@@ -38,6 +38,7 @@ public class LottoNumbers {
         }
     }
 
+
     private boolean isLottoOverSize(List<Integer> numbers) {
         return numbers.size() != MAX_LOTTO_NUMBER_QTY;
     }
