@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListUtils {
 
@@ -26,5 +27,11 @@ public class ListUtils {
         final ArrayList<T> copyList = new ArrayList<>(list);
         copyList.sort(comparator);
         return copyList;
+    }
+
+    public static <T> List<T> distinct(final List<T> list) {
+        return new ArrayList<>(list).stream()
+                .distinct()
+                .collect(Collectors.toList());
     }
 }

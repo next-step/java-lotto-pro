@@ -1,6 +1,9 @@
 package lotto;
 
+import static java.lang.String.valueOf;
 import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.joining;
+import static util.ListUtils.distinct;
 import static util.ListUtils.randomPickCount;
 import static util.ListUtils.sort;
 
@@ -19,7 +22,19 @@ public class LottoNumbers {
         this.lottoNumbers = sort(lottoNumbers, comparing(LottoNumber::getNumber));
     }
 
-    public LottoNumbers pickNumbers() {
+    public static LottoNumbers pickNumbers(List<LottoNumber> lottoNumbers) {
+        validatePickNumbers(lottoNumbers);
+        return new LottoNumbers(lottoNumbers);
+    }
+
+    private static void validatePickNumbers(final List<LottoNumber> lottoNumbers) {
+        final int count = distinct(lottoNumbers).size();
+        if (count != DEFAULT_PICK_COUNT) {
+            throw new IllegalArgumentException("당첨 번호 숫자들이 6개가 이닙니다.(" + count +")개");
+        }
+    }
+
+    public LottoNumbers pickNumbersRandom() {
         return new LottoNumbers(randomPickCount(this.lottoNumbers, DEFAULT_PICK_COUNT));
     }
 
@@ -54,6 +69,12 @@ public class LottoNumbers {
 
     public boolean contains(final LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public String toStringPickNumbers() {
+        return this.lottoNumbers.stream()
+                .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
+                .collect(joining(", "));
     }
 
     @Override
