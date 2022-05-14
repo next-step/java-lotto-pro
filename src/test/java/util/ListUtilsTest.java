@@ -71,4 +71,20 @@ class ListUtilsTest {
         // then
         assertThat(randomPickList).containsExactly(3, 2, 1);
     }
+
+    @Test
+    @DisplayName("리스트를 복사하여 중복제거 하기")
+    void distinct() {
+        // given
+        final List<Integer> integerList = IntStream.of(1, 1, 1, 2, 2, 3)
+                .boxed()
+                .collect(Collectors.toList());
+
+        // when
+        final List<Integer> distinctList = ListUtils.distinct(integerList);
+
+        // then
+        assertThat(distinctList).hasSize(3);
+        assertThat(distinctList).contains(1, 2, 3);
+    }
 }
