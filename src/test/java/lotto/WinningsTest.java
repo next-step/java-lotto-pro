@@ -1,14 +1,20 @@
 package lotto;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningsTest {
-	@ParameterizedTest
-	@CsvSource(value = {"6,2000000000", "5,1500000", "4,50000", "3,5000"})
-	void 일치개수_당첨금(int match, int expected) {
-		assertThat(Winning.from(match).getMoney()).isEqualTo(expected);
+	@Test
+	void 당첨금의합() {
+		Winnings winnings = new Winnings(Arrays.asList(
+				Winning.MATCH6,
+				Winning.MATCH5,
+				Winning.MATCH4,
+				Winning.MATCH3
+		));
+		assertThat(winnings.totalMoney()).isEqualTo(2000000000 + 1500000 + 50000 + 5000);
 	}
 }

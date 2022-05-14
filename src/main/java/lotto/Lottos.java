@@ -25,6 +25,12 @@ public class Lottos {
 		return lottos.size();
 	}
 
+	public Winnings winnigs(Answer answer) {
+		return new Winnings(lottos.stream()
+				.map(lotto -> lotto.winning(answer))
+				.collect(Collectors.toList()));
+	}
+
 	@Override
 	public String toString() {
 		return lottos.stream()
