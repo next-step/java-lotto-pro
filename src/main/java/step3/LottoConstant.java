@@ -9,7 +9,9 @@ public class LottoConstant {
     public static String LOTTO_DELIMITER = ",";
     public static int LOTTO_ELEMENTS_SIZE = 6;
     public static int LOTTO_PRICE = 1000;
-    public static List<Integer> LOTTO_VALID_ELEMENTS = IntStream.rangeClosed(1, 46).boxed().collect(Collectors.toList());
+    public static int LOTTO_MIN = 1;
+    public static int LOTTO_MAX = 46;
+    public static List<Integer> LOTTO_VALID_ELEMENTS = IntStream.rangeClosed(LOTTO_MIN, LOTTO_MAX).boxed().collect(Collectors.toList());
     public static int LOTTO_SIX_NUMBER_REWARD = 2000000000;
     public static int SIX_NUMBER_MATCH = 6;
     public static int LOTTO_FIVE_NUMBER_REWARD = 1500000;

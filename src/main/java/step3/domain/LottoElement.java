@@ -1,5 +1,8 @@
 package step3.domain;
 
+import static step3.LottoConstant.LOTTO_MAX;
+import static step3.LottoConstant.LOTTO_MIN;
+
 import java.util.Objects;
 
 public class LottoElement {
@@ -16,7 +19,7 @@ public class LottoElement {
     }
 
     private static void validElement(int element) throws IllegalArgumentException {
-        if (element <= 0) {
+        if (element < LOTTO_MIN || element > LOTTO_MAX) {
             throw new IllegalArgumentException("로또 번호는 0 이상의 숫자여야합니다");
         }
     }
