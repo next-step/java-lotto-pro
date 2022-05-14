@@ -15,4 +15,11 @@ public class Lottery {
         ));
     }
 
+    public ContainCounts get(Lottos lottos) {
+        ContainCounts containCounts = new ContainCounts();
+        StreamSupport.stream(lottos.spliterator(), false)
+                .forEach(lottoNumbers -> containCounts.add(get(lottoNumbers)));
+        return containCounts;
+    }
+
 }

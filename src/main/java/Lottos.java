@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Lottos {
+public class Lottos implements Iterable<LottoNumbers> {
     private final List<LottoNumbers> lottos;
 
     public Lottos() {
@@ -14,5 +15,10 @@ public class Lottos {
 
     public int size() {
         return this.lottos.size();
+    }
+
+    @Override
+    public Iterator<LottoNumbers> iterator() {
+        return this.lottos.iterator();
     }
 }
