@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int VALID_SIZE = 6;
@@ -14,15 +15,18 @@ public class Lotto {
         this.lottoNumbers.addAll(lottoNumbers);
         Collections.sort(this.lottoNumbers);
     }
+    public Hit checkTo(final Lotto prizeLotto) {
+        return Hit.valueOf(prizeLotto.checkBy(this.lottoNumbers));
+    }
 
     private void validationSize(List<LottoNumber> lottoNumbers) {
-        if (Objects.isNull(lottoNumbers) || lottoNumbers.size() < VALID_SIZE) {
+        if (Objects.isNull(lottoNumbers) || removeOverlap(lottoNumbers).size() < VALID_SIZE) {
             throw new IllegalArgumentException("invalid LottoNumbers");
         }
     }
 
-    public Hit checkTo(final Lotto prizeLotto) {
-        return Hit.valueOf(prizeLotto.checkBy(this.lottoNumbers));
+    private List<LottoNumber> removeOverlap(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream().distinct().collect(Collectors.toList());
     }
 
     private int checkBy(List<LottoNumber> userLottoNumbers) {
