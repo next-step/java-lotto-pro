@@ -25,4 +25,9 @@ class LottoChargeTest {
 		assertThatThrownBy(() -> new LottoCharge(500))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@Test
+	void 수익률_계산() {
+		assertThat(new LottoCharge(14000).revenueRate(5000)).isEqualTo(0.35);
+	}
 }
