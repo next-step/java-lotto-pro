@@ -4,22 +4,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parse {
-    public static final String CUSTOM_PATTERN = "//(.)\n(.*)";
+    private final Pattern pattern = Pattern.compile("//(.)\n(.*)");
     public static final String INPUT_ERROR = "잘못된 값을 입력하였습니다.";
 
-    public static String[] checkTypeAndSplit(String input) throws IllegalAccessException {
+    public String[] checkTypeAndSplit(String input) throws IllegalAccessException {
         if (!input.startsWith("//")) {
             return splitNormal(input);
         }
         return splitCustom(input);
     }
 
-    public static String[] splitNormal(String input) {
+    public String[] splitNormal(String input) {
         return input.split(",|:");
     }
 
-    public static String[] splitCustom(String input) throws IllegalAccessException {
-        Matcher m = Pattern.compile(CUSTOM_PATTERN).matcher(input);
+    public String[] splitCustom(String input) throws IllegalAccessException {
+        Matcher m = pattern.matcher(input);
         if (m.find()) {
             String customDelimiter = m.group(1);
             String[] tokens= m.group(2).split(customDelimiter);

@@ -18,7 +18,7 @@ public class StringAddCalculator {
         if (isNumber(input)) {
             return Integer.parseInt(input);
         }
-        numbers = new Numbers(Parse.checkTypeAndSplit(input));
+        numbers = new Numbers(new Parse().checkTypeAndSplit(input));
         return numbers.sumNumbers();
     }
 
