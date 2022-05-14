@@ -28,6 +28,7 @@ public class OutputView {
     }
 
     public void printOutput(HashMap<Integer, Integer> statistics, int lottoNumber) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -39,7 +40,7 @@ public class OutputView {
         System.out.println(
             String.format(
                 LottoConstant.REWARDRATE_FORMAT,
-                reward / lottoCount * LOTTO_PRICE,
+                reward / (lottoCount * 1.0 * LOTTO_PRICE),
                 checkBenefit(reward, lottoCount)
             ));
     }
