@@ -70,7 +70,7 @@ public class Lotto {
         return shuffleLottoNumbers;
     }
 
-    public int compareLottoAndReturnMatchCount(Lotto winningLotto) {
+    public int findMatchCount(Lotto winningLotto) {
         int count = 0;
 
         for (LottoNumber number : winningLotto.numbers) {
@@ -81,14 +81,14 @@ public class Lotto {
     }
 
     private int compareNumberAndReturnAddCount(LottoNumber number) {
-        if(compareNumber(number)) {
+        if(isContainsNumber(number)) {
             return 1;
         }
 
         return 0;
     }
 
-    private boolean compareNumber(LottoNumber number) {
+    private boolean isContainsNumber(LottoNumber number) {
         return this.numbers.contains(number);
     }
 

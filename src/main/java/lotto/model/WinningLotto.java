@@ -13,7 +13,7 @@ public class WinningLotto {
     }
 
     public void compareWinningLotto(Lotto lotto) {
-        int count = lotto.compareLottoAndReturnMatchCount(this.lotto);
+        int count = lotto.findMatchCount(this.lotto);
 
         winningStatus.recordResults(count);
     }
