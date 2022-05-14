@@ -34,4 +34,10 @@ public class Answer {
 				.collect(Collectors.toList());
 		return distinctNumbers.size() == numbers.size();
 	}
+
+	public int match(List<Number> numbers) {
+		return (int) numbers.stream()
+				.filter(this.numbers::contains)
+				.count();
+	}
 }
