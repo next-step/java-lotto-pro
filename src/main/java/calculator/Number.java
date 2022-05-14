@@ -12,6 +12,10 @@ public class Number {
 		this.value = value;
 	}
 
+	public static Number from(int value) {
+		return new Number(value);
+	}
+
 	public static Number from(String string) {
 		try {
 			return new Number(Integer.parseInt(string));
