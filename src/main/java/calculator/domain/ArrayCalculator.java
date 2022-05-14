@@ -1,12 +1,15 @@
 package calculator.domain;
 
-import java.util.Arrays;
 
 public class ArrayCalculator {
     private ArrayCalculator() {
     }
-
-    public static int sum(int[] numbers) {
-        return Arrays.stream(numbers).sum();
+    
+    public static int sum(PositiveNumber[] numbers) {
+        PositiveNumber result = PositiveNumber.of(0);
+        for (PositiveNumber number : numbers) {
+            result = result.add(number);
+        }
+        return result.toNumber();
     }
 }
