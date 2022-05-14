@@ -17,4 +17,10 @@ public class Winnings {
 				.reduce(Integer::sum)
 				.orElse(0);
 	}
+
+	public int countOf(Winning winning) {
+		return (int) winnings.stream()
+				.filter(winning::equals)
+				.count();
+	}
 }
