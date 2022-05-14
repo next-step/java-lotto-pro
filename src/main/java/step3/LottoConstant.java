@@ -6,6 +6,7 @@ import java.util.stream.IntStream;
 
 public class LottoConstant {
 
+    public static String LOTTO_DELIMITER = ",";
     public static int LOTTO_ELEMENTS_SIZE = 6;
     public static int LOTTO_PRICE = 1000;
     public static List<Integer> LOTTO_VALID_ELEMENTS = IntStream.rangeClosed(1, 46).boxed().collect(Collectors.toList());

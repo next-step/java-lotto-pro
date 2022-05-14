@@ -1,6 +1,7 @@
 package step3.model;
 
 import static java.util.Collections.shuffle;
+import static step3.LottoConstant.LOTTO_DELIMITER;
 import static step3.LottoConstant.LOTTO_ELEMENTS_SIZE;
 import static step3.LottoConstant.LOTTO_PRICE;
 import static step3.LottoConstant.LOTTO_VALID_ELEMENTS;
@@ -16,7 +17,6 @@ import step3.domain.LottoTicket;
 public class GameModel {
 
     private List<LottoTicket> tickets = new ArrayList<>();
-    private final String LOTTO_DELIMITER = ",";
     private HashMap<Integer, Integer> statistics;
 
     public GameModel(List<LottoTicket> tickets) {
