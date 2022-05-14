@@ -32,6 +32,11 @@ public class LottoNumberSet {
         }
     }
 
+    public boolean has(LottoNumber lottoNumber) {
+        return numbers.stream()
+                .anyMatch(n -> n.equals(lottoNumber));
+    }
+
     @Override
     public String toString() {
         return "LottoNumberSet{" +
