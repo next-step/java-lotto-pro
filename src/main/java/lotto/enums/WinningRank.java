@@ -36,6 +36,25 @@ public enum WinningRank {
         return winningValues().contains(winningRank);
     }
 
+    public static WinningRank valueOf(int matchCount, boolean hasBonusBallNumber) {
+        if (isSecondWinningRank(matchCount, hasBonusBallNumber)) {
+            return SECOND;
+        }
+        if(isThirdWinningRank(matchCount, hasBonusBallNumber)) {
+            return THIRD;
+        }
+
+        return valueOf(matchCount);
+    }
+
+    private static boolean isThirdWinningRank(int matchCount, boolean hasBonusBallNumber) {
+        return matchCount == THIRD.getWinningCount() && !hasBonusBallNumber;
+    }
+
+    private static boolean isSecondWinningRank(int matchCount, boolean hasBonusBallNumber) {
+        return matchCount == SECOND.getWinningCount() && hasBonusBallNumber;
+    }
+
     public int getWinningCount() {
         return this.winningCount;
     }

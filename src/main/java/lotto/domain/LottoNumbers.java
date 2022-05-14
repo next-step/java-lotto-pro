@@ -67,4 +67,8 @@ public class LottoNumbers {
             .collect(Collectors.toList())
             .toString();
     }
+
+    public boolean hasBonusBallNumber(LottoNumber bonusBallNumber) {
+        return this.lottoNumbers.contains(bonusBallNumber);
+    }
 }

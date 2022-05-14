@@ -1,10 +1,9 @@
 package lotto.controller;
 
-import static lotto.constants.LottoGuideMessage.*;
+import static lotto.constants.LottoGuideMessage.BONUS_BALL_INPUT;
 import static lotto.constants.LottoGuideMessage.LAST_WINNING_INPUT;
 
 import java.util.List;
-import lotto.constants.LottoGuideMessage;
 import lotto.domain.LottoMarket;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
@@ -31,9 +30,9 @@ public class LottoController {
         resultView.printLottos(lottoTicket);
 
         LottoNumbers lastWinningLottoNumbers = LottoNumbers.generateBy(inputLastWinningLottoNumbers());
-        LottoNumber bonusBall = inputBonusBall(lastWinningLottoNumbers);
+        LottoNumber bonusBallNumber = inputBonusBall(lastWinningLottoNumbers);
 
-        WinningStatistics winningStatistics = WinningStatistics.of(lottoTicket, lastWinningLottoNumbers, money);
+        WinningStatistics winningStatistics = WinningStatistics.of(lottoTicket, money, lastWinningLottoNumbers, bonusBallNumber);
         winningStatistics.statistics();
 
         resultView.printWinningStatistics(winningStatistics);
