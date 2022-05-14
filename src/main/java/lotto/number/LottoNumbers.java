@@ -6,5 +6,6 @@ import lotto.rank.LottoRank;
 
 public interface LottoNumbers {
     LottoRank matchWithWinNumbers(LottoNumbers winNumbers);
+
     List<LottoNumber> getLottoNumberList();
 }

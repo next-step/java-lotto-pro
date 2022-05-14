@@ -11,7 +11,7 @@ public class NormalLottoNumbers implements LottoNumbers {
 
     private List<LottoNumber> lottoNumberList;
 
-    public NormalLottoNumbers(List<LottoNumber> lottoNumberList){
+    public NormalLottoNumbers(List<LottoNumber> lottoNumberList) {
         Collections.sort(lottoNumberList);
         this.lottoNumberList = Collections.unmodifiableList(lottoNumberList);
     }
@@ -22,15 +22,15 @@ public class NormalLottoNumbers implements LottoNumbers {
 
     @Override
     public LottoRank matchWithWinNumbers(LottoNumbers winNumbers) {
-        int matchCount=0;
-        for(LottoNumber number : winNumbers.getLottoNumberList()){
-            matchCount+=contains(number);
+        int matchCount = 0;
+        for (LottoNumber number : winNumbers.getLottoNumberList()) {
+            matchCount += contains(number);
         }
         return LottoRank.getRank(matchCount);
     }
 
     private int contains(LottoNumber number) {
-        if(lottoNumberList.contains(number)){
+        if (lottoNumberList.contains(number)) {
             return 1;
         }
         return 0;

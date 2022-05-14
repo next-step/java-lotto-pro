@@ -6,7 +6,7 @@ public class StringAddCalculator {
         if (isEmpty(expression)) {
             return 0;
         }
-        List<Integer> numbers =  StringSplitter.getNumbers(expression);
+        List<Integer> numbers = StringSplitter.getNumbers(expression);
         return sum(numbers);
     }
 
@@ -16,6 +16,6 @@ public class StringAddCalculator {
 
     private static int sum(List<Integer> numbers) {
         Integer sum = 0;
-        return numbers.stream().reduce(sum,(acc,number) -> acc+number );
+        return numbers.stream().reduce(sum, (acc, number) -> acc + number);
     }
 }

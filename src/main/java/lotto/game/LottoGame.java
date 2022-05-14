@@ -1,13 +1,13 @@
 package lotto.game;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import static java.util.stream.Collectors.*;
-
-import java.util.TreeMap;
 import lotto.dto.LottoGameResultDTO;
 import lotto.factory.LottoNumbersFactory;
 import lotto.number.LottoNumbers;
@@ -29,61 +29,63 @@ public class LottoGame {
         this.resultView = resultView;
     }
 
-    public void start(){
+    public void start() {
         takeBudget();
         List<LottoNumbers> lottoNumbersList = buyLotto();
         LottoNumbers winNumbers = drawWinNumbers();
-        List<LottoRank> lottoRanks = matchLottos(lottoNumbersList,winNumbers);
+        List<LottoRank> lottoRanks = matchLottos(lottoNumbersList, winNumbers);
         LottoGameResultDTO gameResult = calculateStatisticsAndYield(lottoRanks);
         resultView.printGameResult(gameResult);
     }
-    private void takeBudget(){
+
+    private void takeBudget() {
         budget = inputView.takeBudget();
     }
-    private List<LottoNumbers> buyLotto(){
-        int drawCount = budget/LOTTO_PRICE;
+
+    private List<LottoNumbers> buyLotto() {
+        int drawCount = budget / LOTTO_PRICE;
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for(int i=0; i< drawCount; i++){
+        for (int i = 0; i < drawCount; i++) {
             lottoNumbersList.add(lottoNumbersFactory.createRandomLottoNumbers());
         }
         resultView.printBoughtLottos(lottoNumbersList);
         return lottoNumbersList;
     }
 
-    private LottoNumbers drawWinNumbers(){
+    private LottoNumbers drawWinNumbers() {
         List<Integer> numbers = inputView.takeWinNumbers();
         return lottoNumbersFactory.createLottoNumbers(numbers);
     }
 
-    private List<LottoRank> matchLottos(List<LottoNumbers> lottoNumbersList, LottoNumbers winNumbers){
-       List<LottoRank> ranks = new ArrayList<>();
-        for(LottoNumbers lottoNumbers: lottoNumbersList){
-           ranks.add(lottoNumbers.matchWithWinNumbers(winNumbers));
-       }
+    private List<LottoRank> matchLottos(List<LottoNumbers> lottoNumbersList, LottoNumbers winNumbers) {
+        List<LottoRank> ranks = new ArrayList<>();
+        for (LottoNumbers lottoNumbers : lottoNumbersList) {
+            ranks.add(lottoNumbers.matchWithWinNumbers(winNumbers));
+        }
         return ranks;
     }
 
     private LottoGameResultDTO calculateStatisticsAndYield(List<LottoRank> lottoRanks) {
-        Map<LottoRank,Integer> statistics = calculateStatistics(lottoRanks);
+        Map<LottoRank, Integer> statistics = calculateStatistics(lottoRanks);
         double yield = calculateYield(statistics);
-        return new LottoGameResultDTO(statistics,yield);
+        return new LottoGameResultDTO(statistics, yield);
     }
 
-    private Map<LottoRank,Integer> calculateStatistics(List<LottoRank> lottoRanks){
-        Map<LottoRank,Integer> statistics = lottoRanks.stream().collect(
+    private Map<LottoRank, Integer> calculateStatistics(List<LottoRank> lottoRanks) {
+        Map<LottoRank, Integer> statistics = lottoRanks.stream().collect(
                 groupingBy(
                         lottoRank -> lottoRank
                         , () -> new EnumMap<>(LottoRank.class)
-                        ,collectingAndThen(toList(),list->list.size())
+                        , collectingAndThen(toList(), list -> list.size())
                 )
         );
         statistics.remove(LottoRank.NO_PRIZE);
         return statistics;
     }
 
-    private double calculateYield(Map<LottoRank,Integer> statistics){
+    private double calculateYield(Map<LottoRank, Integer> statistics) {
         long prize = 0;
-        for(LottoRank rank :statistics.keySet()){
+        for (LottoRank rank : statistics.keySet()) {
             int count = statistics.get(rank);
             prize += rank.calculatePrize(count);
         }

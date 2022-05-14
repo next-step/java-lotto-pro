@@ -9,12 +9,13 @@ public class StringSplitter {
     private static final int ZERO = 0;
 
     //유틸성 클래스로만 사용하기 위한 조치
-    private StringSplitter(){}
+    private StringSplitter() {
+    }
 
     public static List<Integer> getNumbers(String expression) {
         Matcher customDelimitMatcher = Pattern.compile(CUSTOM_DELIMIT_REGEX).matcher(expression);
         String[] numbers = null;
-        if(customDelimitMatcher.find()){
+        if (customDelimitMatcher.find()) {
             String customDelimiter = customDelimitMatcher.group(1);
             numbers = customDelimitMatcher.group(2).split(customDelimiter);
             return convertNumbers(numbers);
@@ -23,7 +24,7 @@ public class StringSplitter {
         return convertNumbers(numbers);
     }
 
-    private static List<Integer> convertNumbers(String[] numbers){
+    private static List<Integer> convertNumbers(String[] numbers) {
         List<Integer> numberList = new ArrayList<>();
         for (String numberString : numbers) {
             int number = Integer.parseInt(numberString);
