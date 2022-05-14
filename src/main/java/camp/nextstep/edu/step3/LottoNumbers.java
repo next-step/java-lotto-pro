@@ -1,6 +1,7 @@
 package camp.nextstep.edu.step3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -16,13 +17,13 @@ public class LottoNumbers {
         }
     }
 
-    public LottoNumbers(List<LottoNumber> numbers) {
+    public LottoNumbers(final List<LottoNumber> numbers) {
         this.numbers.addAll(numbers);
     }
 
-    public List<LottoNumber> extract(Consumer<List<LottoNumber>> consumer)  {
+    public final List<LottoNumber> extract(Consumer<List<LottoNumber>> consumer)  {
         consumer.accept(numbers);
-        return numbers.subList(0, 6);
+        return Collections.unmodifiableList(numbers.subList(0, 6));
     }
 
     @Override
