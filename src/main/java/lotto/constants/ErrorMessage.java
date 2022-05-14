@@ -6,4 +6,5 @@ public class ErrorMessage {
     public static final String OUT_OF_SIZE_LOTTO = "로또의 번호는 6개만 가능합니다.";
     public static final String DUPLICATE_NUMBER = "중복된 번호는 포함될 수 없습니다.";
     public static final String OUT_OF_RANGE_MATCH = "0개부터 6개 까지만 매칭 가능합니다.";
+    public static final String LESS_THEN_MIN_MONEY = "최소 1000원부터 입력 가능합니다.";
 }

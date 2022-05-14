@@ -1,7 +1,7 @@
 package lotto.enums;
 
 import lotto.domain.MatchCount;
-import lotto.domain.PrizeMoney;
+import lotto.domain.Money;
 
 import java.util.Arrays;
 
@@ -13,11 +13,11 @@ public enum Rank {
     LOSE(2, 0);
 
     private MatchCount matchCount;
-    private PrizeMoney prizeMoney;
+    private Money money;
 
-    Rank(int matchCount, int prizeMoney) {
+    Rank(int matchCount, int money) {
         this.matchCount = new MatchCount(matchCount);
-        this.prizeMoney = new PrizeMoney(prizeMoney);
+        this.money = new Money(money);
     }
 
     public static Rank rank(int matchCount) {
@@ -26,5 +26,9 @@ public enum Rank {
                 .filter(rank -> rank.matchCount.equals(inputMatchCount))
                 .findFirst()
                 .orElse(Rank.LOSE);
+    }
+
+    public static boolean isWinning(Rank rank) {
+        return rank != Rank.LOSE;
     }
 }

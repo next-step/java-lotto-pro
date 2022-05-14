@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.constants.ErrorMessage;
+import lotto.enums.Rank;
 
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +17,20 @@ public class LottoNumbers {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::new).collect(Collectors.toList());
+    }
+
+    public Rank rank(LottoNumbers winningNumbers) {
+        return Rank.rank(matchCount(winningNumbers));
+    }
+
+    public int matchCount(LottoNumbers winningNumbers) {
+        return (int) this.lottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     private void validate(List<Integer> lottoNumbers) {
