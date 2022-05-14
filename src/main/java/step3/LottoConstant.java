@@ -19,5 +19,5 @@ public class LottoConstant {
     public static int THREE_NUMBER_MATCH = 3;
     public static String OVERVIEW_FORMAT = "%s개 일치 (%s)- %s개";
     public static String REWARDRATE_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %라는 의미임)";
-
+    public static String LOTTOS_INFO_FORMAT = "%s개를 구매했습니다.";
 }

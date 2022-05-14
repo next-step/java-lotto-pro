@@ -2,6 +2,7 @@ package step3.view;
 
 import static step3.LottoConstant.FIVE_NUMBER_MATCH;
 import static step3.LottoConstant.FOUR_NUMBER_MATCH;
+import static step3.LottoConstant.LOTTOS_INFO_FORMAT;
 import static step3.LottoConstant.LOTTO_FIVE_NUMBER_REWARD;
 import static step3.LottoConstant.LOTTO_FOUR_NUMBER_REWARD;
 import static step3.LottoConstant.LOTTO_PRICE;
@@ -12,6 +13,7 @@ import static step3.LottoConstant.SIX_NUMBER_MATCH;
 import static step3.LottoConstant.THREE_NUMBER_MATCH;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import step3.LottoConstant;
@@ -63,6 +65,13 @@ public class OutputView {
     private long printOverViewPerEntry(int matchCount, int matchReward, HashMap<String, Integer> statistics) {
         System.out.println(String.format(OVERVIEW_FORMAT, matchCount, matchReward, statistics.get(matchCount)));
         return matchReward * statistics.get(matchCount);
+    }
+
+    public void printLottoInfo(List<List<String>> lottoNumbers) {
+        System.out.println(String.format(LOTTOS_INFO_FORMAT, lottoNumbers.size()));
+        for (int i = 0; i < lottoNumbers.size(); i++) {
+            System.out.println(lottoNumbers.get(i).toString());
+        }
     }
 
     private void init() {
