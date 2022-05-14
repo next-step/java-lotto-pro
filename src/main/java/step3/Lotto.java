@@ -1,5 +1,7 @@
 package step3;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -48,8 +50,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "Lotto{" +
-                "lotto=" + lotto +
-                '}';
+        List<LottoNumber> lottoNumbers = new ArrayList<>(lotto);
+        Collections.sort(lottoNumbers);
+        return lottoNumbers.toString();
     }
 }
