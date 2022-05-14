@@ -15,7 +15,7 @@ public class LottoGenerator {
     }
 
     public Lotto auto() {
-        return numbers.extract(Collections::shuffle);
+        return new Lotto(numbers.extract(Collections::shuffle));
     }
 
     public Lotto manual(final List<LottoNumber> numbers) {

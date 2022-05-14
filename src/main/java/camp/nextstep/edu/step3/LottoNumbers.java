@@ -20,9 +20,9 @@ public class LottoNumbers {
         this.numbers.addAll(numbers);
     }
 
-    public Lotto extract(Consumer<List<LottoNumber>> consumer)  {
+    public List<LottoNumber> extract(Consumer<List<LottoNumber>> consumer)  {
         consumer.accept(numbers);
-        return new Lotto(numbers.subList(0, 6));
+        return numbers.subList(0, 6);
     }
 
     @Override

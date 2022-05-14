@@ -13,17 +13,17 @@ public class LottoNumbersTest {
     @DisplayName("1부터45까지 숫자를 가지고 있다.")
     @Test
     void createTest() {
-        assertThat(new LottoNumbers()).isEqualTo(new LottoNumbers(defaultLottoNumbers()));
+        assertThat(new LottoNumbers()).isEqualTo(new LottoNumbers(default45LottoNumbers()));
     }
 
-    @DisplayName("섞는 방법은 입력받아서 로또를 추출한다.")
+    @DisplayName("섞는 방법은 입력받아서 로또숫자를 추출한다.")
     @Test
     void extractTest() {
-        Lotto lotto = new LottoNumbers().extract((lottoNumbers)->{});
-        assertThat(lotto).isEqualTo(new Lotto(LottoTest.createLottoNumberList(new int[]{1,2,3,4,5,6})));
+        assertThat(new LottoNumbers().extract((lottoNumbers) -> {}))
+                .isEqualTo(LottoTest.createLottoNumberList(new int[]{1,2,3,4,5,6}));
     }
 
-    private List<LottoNumber> defaultLottoNumbers() {
+    private List<LottoNumber> default45LottoNumbers() {
         List<LottoNumber> numbers = new ArrayList<>();
         for (int i=1; i <= 45; i++) {
             numbers.add(new LottoNumber(i));
