@@ -11,23 +11,23 @@ class LottoChargeTest {
 	@ParameterizedTest
 	@CsvSource(value = {"5000,5", "14000,14"})
 	void 구입금액_개수(int charge, int expected) {
-		assertThat(new LottoCharge(charge).count()).isEqualTo(expected);
+		assertThat(LottoCharge.from(charge).count()).isEqualTo(expected);
 	}
 
 	@Test
 	void 구입금액_0보다큰수() {
-		assertThatThrownBy(() -> new LottoCharge(-1))
+		assertThatThrownBy(() -> LottoCharge.from(-1))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	void 구입금액_1000의배수() {
-		assertThatThrownBy(() -> new LottoCharge(500))
+		assertThatThrownBy(() -> LottoCharge.from(500))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	void 수익률_계산() {
-		assertThat(new LottoCharge(14000).revenueRate(5000)).isEqualTo(0.35);
+		assertThat(LottoCharge.from(14000).revenueRate(5000)).isEqualTo(0.35);
 	}
 }
