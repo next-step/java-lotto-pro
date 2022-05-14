@@ -43,4 +43,11 @@ class LottoMoneyTest {
         LottoMoney lottoMoney = new LottoMoney(LottoMoney.LOTTO_TICKET_PRICE * amount);
         assertThat(lottoMoney.maxLottoTicketCount()).isEqualTo(amount);
     }
+
+    @Test
+    @DisplayName("티켓 개수로 구매 금액 확인")
+    void countAmount() {
+        int amount = LottoMoney.countAmount(1);
+        assertThat(amount).isEqualTo(1000);
+    }
 }

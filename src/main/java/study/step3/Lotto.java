@@ -58,4 +58,9 @@ public class Lotto {
             throw new IllegalArgumentException("입력에 중복된 수가 있습니다.");
         }
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

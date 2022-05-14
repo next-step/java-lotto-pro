@@ -22,4 +22,8 @@ public class LottoMoney {
     public int maxLottoTicketCount() {
         return amount / LOTTO_TICKET_PRICE;
     }
+
+    public static int countAmount(int ticketCount) {
+        return ticketCount * LOTTO_TICKET_PRICE;
+    }
 }
