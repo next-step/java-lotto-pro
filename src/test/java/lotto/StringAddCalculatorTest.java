@@ -13,7 +13,6 @@ public class StringAddCalculatorTest {
 
     @ParameterizedTest
     @DisplayName("숫자합 계산을 위한 입력값이 null 혹은 빈문자 인지 검증한다.")
-//    @CsvSource(value = {"'':0", "null:0"}, delimiter = ':')
     @CsvSource(value = {"''|0"}, delimiter = '|')
     void validateNumbersSplitAndSum_null_또는_빈문자(String input, String expected) {
         Sum sum = new Sum(StringAddCalculator.sumValue(input));
@@ -41,16 +40,15 @@ public class StringAddCalculatorTest {
         assertThat(sum).isEqualTo(new Sum(StringAddCalculator.stringToIntValue(expected)));
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"'//;\\n1;2;3''|6"}, delimiter = '|')
-    public void validateNumbersSplitAndSum_custom_구분자(String input, String expected) {
-        Sum sum = new Sum(StringAddCalculator.sumValue(input));
-        assertThat(sum).isEqualTo(new Sum(StringAddCalculator.stringToIntValue(expected)));
+    @Test
+    public void validateNumbersSplitAndSum_custom_구분자() {
+        Sum sum = new Sum(StringAddCalculator.sumValue("//;\n1;2;3"));
+        assertThat(sum).isEqualTo(new Sum(6));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1,-2,3|6"}, delimiter = '|')
-    public void validateNumbersSplitAndSum_negative(String input, String expected) {
+    public void validateNumbersSplitAndSum_negative(String input) {
         Throwable thrown = catchThrowable(() -> new Sum(StringAddCalculator.sumValue(input)));
         assertThat(thrown)
                 .isInstanceOf(RuntimeException.class)
