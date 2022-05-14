@@ -10,19 +10,18 @@ public class CustomStringUtils {
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final String ERROR_MESSAGE_INVALID_NEGATIVE_NUMBER = "[Error] 음수는 입력할 수 없습니다.";
     private static final String ERROR_MESSAGE_INVALID_NUMBER_FORMAT = "[Error] 올바른 숫자가 아닙니다.";
+    public static final int MATCHER_DELIMITER_INDEX = 1;
+    public static final int MATCHER_INPUTTEXT_INDEX = 2;
 
     public static boolean isNullOrEmpty(String str) {
-        if (str == null || str.isEmpty()) {
-            return true;
-        }
-        return false;
+        return (str == null || str.isEmpty());
     }
 
     public static List<String> splitString(String str) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(str);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return Arrays.asList(matcher.group(2).split(customDelimiter));
+            String customDelimiter = matcher.group(MATCHER_DELIMITER_INDEX);
+            return Arrays.asList(matcher.group(MATCHER_INPUTTEXT_INDEX).split(customDelimiter));
         }
         return Arrays.asList(str.split(DEFAULT_DELIMITER_TEXT));
     }
