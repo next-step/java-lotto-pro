@@ -1,17 +1,19 @@
 package lotto.model;
 
+import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
 import lotto.constant.ErrorMessage;
+import lotto.constant.LottoRank;
 import lotto.constant.LottoRoleConst;
 
 public class WinningLotto {
 
-    private final List<Integer> numberList;
+    private final List<Integer> winningNumberList;
 
-    public WinningLotto(List<Integer> numberList) {
-        validateWinningNumberList(numberList);
-        this.numberList = numberList;
+    public WinningLotto(List<Integer> winningNumberList) {
+        validateWinningNumberList(winningNumberList);
+        this.winningNumberList = winningNumberList;
     }
 
     public static void validateWinningNumberList(List<Integer> winningNumberList) {
@@ -42,6 +44,11 @@ public class WinningLotto {
     }
 
     public LottoGameResult compareLottos(Lottos lottos) {
-        return new LottoGameResult();
+        EnumMap<LottoRank, Integer> resultRankMap = new EnumMap<>(LottoRank.class);
+        for (Lotto lotto : lottos.getLottoList()){
+            LottoRank lottoRank = lotto.matchRank(winningNumberList);
+            resultRankMap.put(lottoRank, resultRankMap.getOrDefault(lottoRank, 0) + 1);
+        }
+        return new LottoGameResult(resultRankMap);
     }
 }

@@ -4,37 +4,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.model.Lotto;
 
 public class Lottos {
 
     private static final int NOT_MATCHED = 0;
 
-    private final int playCount;
+    private final int gameCount;
     private final List<Lotto> lottoList;
     private final Map<Integer, Integer> resultCountMap;
     private double resultProfitRate;
 
     public Lottos(int playCount) {
-        this.playCount = playCount;
+        this.gameCount = playCount;
         this.lottoList = new ArrayList<>();
         this.resultCountMap = new HashMap<>();
     }
 
     public Lottos(final List<Lotto> lottoList){
         this.lottoList = lottoList;
-        this.playCount = 0;
+        this.gameCount = lottoList.size();
         this.resultCountMap = new HashMap<>();
     }
 
     public Lottos() {
         this.lottoList = new ArrayList<>();
-        this.playCount = 0;
+        this.gameCount = lottoList.size();
         this.resultCountMap = new HashMap<>();
     }
 
-    public int getPlayCount() {
-        return playCount;
+    public int getGameCount() {
+        return gameCount;
     }
 
     public List<Lotto> getLottoList() {

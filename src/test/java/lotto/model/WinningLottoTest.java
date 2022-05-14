@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
-import java.util.List;
+import lotto.constant.LottoRank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,16 +49,16 @@ class WinningLottoTest {
                 .withMessage("[ERROR] 6개의 로또 번호에 중복이 있습니다.");
     }
 
-    @DisplayName("로또 게임 결과(일치한 개수, 수익률)를 확인한다.")
+    @DisplayName("로또 게임 결과(일치한 개수, 총 상금)를 확인한다.")
     @Test
     void playLottoGame() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(3, 10, 15, 25, 35, 40));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(3, 7, 10, 35, 43, 45));
         LottoGameResult resultLottoGame = winningLotto.compareLottos(lottos);
-        assertEquals(2, resultLottoGame.matchNumberCount(3));
-        assertEquals(0, resultLottoGame.matchNumberCount(4));
-        assertEquals(1, resultLottoGame.matchNumberCount(5));
-        assertEquals(0, resultLottoGame.matchNumberCount(6));
-        assertEquals((double) 1_510_000 / 3000, resultLottoGame.calcResultProfitRate());
+        assertEquals(2, resultLottoGame.rankCount(LottoRank.FOURTH));
+        assertEquals(0, resultLottoGame.rankCount(LottoRank.THIRD));
+        assertEquals(1, resultLottoGame.rankCount(LottoRank.SECOND));
+        assertEquals(0, resultLottoGame.rankCount(LottoRank.FIRST));
+        assertEquals(1_510_000,resultLottoGame.totalWinningAmount());
     }
 
 
