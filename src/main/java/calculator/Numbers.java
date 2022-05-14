@@ -18,17 +18,11 @@ public class Numbers {
     public Numbers(String input) {
         this();
 
-        if (!hasDefaultDelimiter(input) && !hasCustomDelimiter(input)) {
-            this.createOneNumber(input);
-            return ;
+        if (hasDefaultDelimiter(input) && hasCustomDelimiter((input))) {
+            throw new RuntimeException("Invalid Delimiter.");
         }
 
-        if (hasDefaultDelimiter(input) || hasCustomDelimiter(input)) {
-            this.createNumbersWithDelimiter(input);
-            return ;
-        }
-
-        throw new RuntimeException("Invalid input.");
+        createNumber(input);
     }
 
     public int sum() {
@@ -37,6 +31,26 @@ public class Numbers {
             answer += number.getNumber();
         }
         return answer;
+    }
+
+    private void createNumber(String input) {
+        if (!hasDefaultDelimiter(input) && !hasCustomDelimiter(input)) {
+            this.createOneNumber(input);
+            return;
+        }
+
+        if (hasDefaultDelimiter(input) || hasCustomDelimiter(input)) {
+            this.createNumbersWithDelimiter(input);
+        }
+    }
+
+    private void createOneNumber(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            this.numberList.add(new ZeroOrPositiveNumber(0));
+            return ;
+        }
+
+        this.numberList.add(new ZeroOrPositiveNumber(input));
     }
 
     private void createNumbersWithDelimiter(String input) {
@@ -56,15 +70,6 @@ public class Numbers {
         for (String token : tokens) {
             this.numberList.add(new ZeroOrPositiveNumber(token));
         }
-    }
-
-    private void createOneNumber(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            this.numberList.add(new ZeroOrPositiveNumber(0));
-            return ;
-        }
-
-        this.numberList.add(new ZeroOrPositiveNumber(input));
     }
 
     private boolean hasDefaultDelimiter(String input) {
