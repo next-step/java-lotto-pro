@@ -40,7 +40,7 @@ public class LottoController {
         try {
             LottoInputView.printWinningNumber();
             LottoNumber winningNumber = LottoNumberGenerator.of(scanner.nextLine());
-            lottoRanks = lottoNumbers.getLottoRanks(winningNumber);
+            lottoRanks = lottoNumbers.resultLottoRanks(winningNumber);
             LottoOutputView.printRankResult(lottoRanks);
         } catch (IllegalArgumentException iae) {
             LottoOutputView.printErrorMessage(iae);

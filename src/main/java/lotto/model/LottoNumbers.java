@@ -20,7 +20,7 @@ public class LottoNumbers {
         return lottoNumbers.size();
     }
 
-    public LottoRanks getLottoRanks(LottoNumber winningLottoNumber) {
+    public LottoRanks resultLottoRanks(LottoNumber winningLottoNumber) {
         return lottoNumbers.stream()
                 .map(lottoNumber -> lottoNumber.getLottoRank(winningLottoNumber))
                 .collect(collectingAndThen(toList(), LottoRanks::of));
