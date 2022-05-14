@@ -5,10 +5,10 @@ import java.util.Scanner;
 
 public class Presenter {
 
-    public int askPurchaseAmount() {
+    public LottoMoney askPurchaseAmount() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return new LottoMoney(scanner.nextInt());
     }
 
     public void printLottoList(final LottoPaper paper) {
