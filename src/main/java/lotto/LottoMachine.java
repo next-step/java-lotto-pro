@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.lotto.Lotto;
+import lotto.lotto.LottoGenerator;
+import lotto.lotto.WinningLotto;
 import lotto.money.Money;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -11,12 +13,12 @@ public class LottoMachine {
 
     private final LottoExchanger lottoExchanger;
 
-    LottoMachine(LottoExchanger lottoExchanger) {
-        this.lottoExchanger = requireNonNull(lottoExchanger, "lottoExchanger");
+    public LottoMachine(LottoGenerator lottoGenerator) {
+        this.lottoExchanger = new LottoExchanger(requireNonNull(lottoGenerator, "lottoGenerator"));
     }
 
-    public LottoMachine() {
-        this(new LottoExchanger());
+    LottoMachine() {
+        this(LottoGenerator.random());
     }
 
     public void run(InputView inputView, ResultView resultView) {
@@ -27,7 +29,7 @@ public class LottoMachine {
     }
 
     private void runAnalyze(InputView inputView, ResultView resultView, List<Lotto> lottoes) {
-        final Lotto previousWinningLotto = inputView.readPreviousWinningLotto();
+        final WinningLotto previousWinningLotto = inputView.readPreviousWinningLotto();
         final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(previousWinningLotto);
         final WinningResult winningResult = lottoAnalyzer.analyze(lottoes);
         resultView.printResult(winningResult, sumTotalMoney(lottoes));

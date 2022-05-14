@@ -3,12 +3,8 @@ package lotto.lotto;
 import lotto.Purchasable;
 import lotto.money.Money;
 import lotto.util.CollectionUtils;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto implements Purchasable {
@@ -33,7 +29,7 @@ public class Lotto implements Purchasable {
 
     public static Lotto of(String... maybeNumbers) {
         final List<LottoNumber> lottoNumbers = Arrays.stream(maybeNumbers)
-                                                     .map(LottoNumber::new)
+                                                     .map(LottoNumber::of)
                                                      .collect(Collectors.toList());
         return new Lotto(lottoNumbers);
     }
@@ -46,22 +42,26 @@ public class Lotto implements Purchasable {
     public int countMatches(Lotto other) {
         int count = 0;
         for (LottoNumber lottoNumber : other.lottoNumbers) {
-            count += matches(lottoNumber);
+            count = increaseIfMatches(lottoNumber, count);
         }
         return count;
     }
 
-    private int matches(LottoNumber lottoNumber) {
+    private int increaseIfMatches(LottoNumber lottoNumber, int count) {
         if (this.lottoNumbers.contains(lottoNumber)) {
-            return 1;
+            return count + 1;
         }
-        return 0;
+        return count;
+    }
+
+    boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     private static Set<LottoNumber> validate(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicated(lottoNumbers);
-        return Collections.unmodifiableSet(new HashSet<>(lottoNumbers));
+        return Collections.unmodifiableSet(new TreeSet<>(lottoNumbers));
     }
 
     private static void validateSize(List<LottoNumber> lottoNumbers) {
@@ -89,7 +89,7 @@ public class Lotto implements Purchasable {
             return Collections.emptyList();
         }
         return numbers.stream()
-                      .map(LottoNumber::new)
+                      .map(LottoNumber::of)
                       .collect(Collectors.toList());
     }
 

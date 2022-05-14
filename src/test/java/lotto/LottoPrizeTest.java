@@ -13,16 +13,17 @@ public class LottoPrizeTest {
     @DisplayName("맞춘 갯수에 따른 LottoPrize 반환")
     @ParameterizedTest
     @CsvSource({
-            "0,MISS",
-            "1,MISS",
-            "2,MISS",
-            "3,THREE_MATCH",
-            "4,FOUR_MATCH",
-            "5,FIVE_MATCH",
-            "6,SIX_MATCH"
+            "MISS, 0, false",
+            "MISS, 1, false",
+            "MISS, 2, false",
+            "THREE_MATCH, 3,false",
+            "FOUR_MATCH, 4, false",
+            "FIVE_MATCH, 5, false",
+            "FIVE_MATCH_WITH_BONUS, 5, true",
+            "SIX_MATCH,6, false"
     })
-    void valueOf(int matchCount, LottoPrize lottoPrize) {
-        assertThat(LottoPrize.valueOf(matchCount)).isEqualTo(lottoPrize);
+    void valueOf(LottoPrize lottoPrize, int matchCount, boolean matchBonus) {
+        assertThat(LottoPrize.valueOf(matchCount, matchBonus)).isEqualTo(lottoPrize);
     }
 
     @DisplayName("MISS를 제외한 LottoPrize 리스트 반환")

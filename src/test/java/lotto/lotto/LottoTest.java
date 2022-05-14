@@ -5,10 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.ArgumentsProvider;
-import org.junit.jupiter.params.provider.ArgumentsSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.*;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -96,5 +94,20 @@ class LottoTest {
                                  6)
             );
         }
+    }
+
+    @DisplayName("Lotto에 특정 LottoNumber가 존재하는지 확인")
+    @ParameterizedTest
+    @CsvSource({
+            "1,true",
+            "2,true",
+            "3,true",
+            "4,true",
+            "5,true",
+            "45,false"
+    })
+    void contains(int lottoNumberValue, boolean expected) {
+        final Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
+        assertThat(lotto.contains(LottoNumber.of(lottoNumberValue))).isEqualTo(expected);
     }
 }

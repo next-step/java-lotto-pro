@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoGenerator;
+import lotto.lotto.LottoNumber;
+import lotto.lotto.WinningLotto;
 import lotto.money.Money;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -15,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoMachineTest {
 
     private final LottoGenerator lottoGenerator = () -> Lotto.of(1, 2, 3, 4, 5, 6);
-    private final LottoExchanger lottoExchanger = new LottoExchanger(lottoGenerator);
 
     @DisplayName("LottoMachine 실행시 ResultView에 결과 주입")
     @Test
@@ -27,8 +28,8 @@ class LottoMachineTest {
             }
 
             @Override
-            public Lotto readPreviousWinningLotto() {
-                return Lotto.of(1, 2, 3, 4, 5, 6);
+            public WinningLotto readPreviousWinningLotto() {
+                return WinningLotto.of(Lotto.of(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
             }
         };
         final ResultView stubResultView = new ResultView() {
@@ -45,7 +46,7 @@ class LottoMachineTest {
                 assertThat(winningResult.rateOfReturn(money)).isEqualByComparingTo(BigDecimal.valueOf(2_000_000));
             }
         };
-        final LottoMachine lottoMachine = new LottoMachine(lottoExchanger);
+        final LottoMachine lottoMachine = new LottoMachine(lottoGenerator);
         lottoMachine.run(stubInputView, stubResultView);
     }
 }

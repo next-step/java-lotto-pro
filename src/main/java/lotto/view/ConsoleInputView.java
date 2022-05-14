@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoGenerator;
+import lotto.lotto.LottoNumber;
+import lotto.lotto.WinningLotto;
 import lotto.money.Money;
 import java.util.Scanner;
 
@@ -16,9 +18,18 @@ class ConsoleInputView implements InputView {
     }
 
     @Override
-    public Lotto readPreviousWinningLotto() {
+    public WinningLotto readPreviousWinningLotto() {
+        return WinningLotto.of(readLotto(), readBonusLottoNumber());
+    }
+
+    private Lotto readLotto() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
         return LottoGenerator.commaSplitting(scanner.nextLine())
                              .generate();
+    }
+
+    private LottoNumber readBonusLottoNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return LottoNumber.of(scanner.nextLine());
     }
 }

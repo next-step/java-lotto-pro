@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.lotto.Lotto;
+import lotto.lotto.WinningLotto;
 import lotto.money.Money;
 
 public interface InputView {
@@ -11,5 +11,5 @@ public interface InputView {
 
     Money readMoney();
 
-    Lotto readPreviousWinningLotto();
+    WinningLotto readPreviousWinningLotto();
 }
