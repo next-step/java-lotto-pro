@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-
 public class StringAddCalculatorTest {
 
     @ParameterizedTest
@@ -51,7 +50,7 @@ public class StringAddCalculatorTest {
     public void validateNumbersSplitAndSum_negative(String input) {
         Throwable thrown = catchThrowable(() -> new Sum(StringAddCalculator.sumValue(input)));
         assertThat(thrown)
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 허용하지 않은 값 입니다.");
     }
 }

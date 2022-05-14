@@ -51,7 +51,7 @@ public class StringAddCalculator {
 
     private static void validationNumber(int number) {
         if (isNegative(number))
-            throw new RuntimeException(ERROR_NOT_ALLOW_VALUE_MESSAGE);
+            throw new IllegalArgumentException(ERROR_NOT_ALLOW_VALUE_MESSAGE);
     }
 
     private static boolean isNegative(int number) {
