@@ -49,11 +49,13 @@ public class LottoGame {
 
     public void play() {
         readMoney();
+        OutputView.printMessage(getLottoQuantity(money) + "개를 구매했습니다.");
         purchaseLotto();
-        printMyLotto();
+        OutputView.printMyLotto(purchasedLottos);
         readLastWinningNumbers();
-        showLottoStatistics();
-        showLottoProfit();
+        OutputView.printLine();
+        OutputView.showLottoStatistics(purchasedLottos, lastWinningNumbers);
+        OutputView.showLottoProfit(purchasedLottos, lastWinningNumbers, money);
     }
 
     public void readMoney() {
@@ -63,8 +65,6 @@ public class LottoGame {
 
     public void purchaseLotto() {
         long lottoQuantity = getLottoQuantity(money);
-        OutputView.printMessage(lottoQuantity + "개를 구매했습니다.");
-
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoQuantity; i++) {
             lottoList.add(generateLotto());
@@ -72,33 +72,8 @@ public class LottoGame {
         purchasedLottos = new PurchasedLottos(lottoList);
     }
 
-    public void printMyLotto() {
-        List<Lotto> lottoList = purchasedLottos.getLottoList();
-        for (Lotto lotto : lottoList) {
-            OutputView.printMessage(lotto.toString());
-        }
-        OutputView.printLine();
-    }
-
     public void readLastWinningNumbers() {
         lastWinningNumbers = InputView.readUserInput(REQUEST_LAST_WINNING_NUMBERS);
-        OutputView.printLine();
-    }
-
-    public void showLottoStatistics() {
-        List<Ranking> rankings = purchasedLottos.compareLottos(new Lotto(lastWinningNumbers));
-        result = new LottoResult(rankings);
-        OutputView.printMessage("당첨 통계");
-        OutputView.printMessage("---------");
-        for (int matching = 3; matching <= LOTTO_SIZE; matching++) {
-            Ranking rank = Ranking.findRank(matching);
-            OutputView.printMessage("%d개 일치 (%d원)- %d개\r\n", matching, rank.getReward(), result.findRankings(matching).size());
-        }
-    }
-
-    public void showLottoProfit() {
-        double profit = (double)result.calculateWinningMoney() / money.getMoney();
-        OutputView.printMessage("총 수익률은 %.2f입니다.", profit);
     }
 
     private Lotto generateLotto() {
@@ -111,5 +86,9 @@ public class LottoGame {
 
     private static long getLottoQuantity(Money money) {
         return money.getMoney() / LOTTO_PRICE;
+    }
+
+    public PurchasedLottos getPurchasedLottos() {
+        return purchasedLottos;
     }
 }
