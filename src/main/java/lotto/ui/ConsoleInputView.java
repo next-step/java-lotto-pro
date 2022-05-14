@@ -18,7 +18,7 @@ public class ConsoleInputView implements InputView {
     }
 
     @Override
-    public List<Integer> takeWinNumbers() {
+    public List<Integer> takeWinMainNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = Console.readLine();
         String[] inputNumbers = input.split(",");
@@ -26,5 +26,12 @@ public class ConsoleInputView implements InputView {
                 .mapToInt((number) -> Integer.parseInt(number.trim()))
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public int takeBonusNumbers() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String input = Console.readLine();
+        return Integer.parseInt(input);
     }
 }
