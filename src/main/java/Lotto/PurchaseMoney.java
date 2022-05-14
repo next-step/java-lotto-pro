@@ -10,16 +10,15 @@ public class PurchaseMoney {
     }
 
     public PurchaseMoney(int money) {
-        if(!validation(money)) {
-            throw new IllegalArgumentException(ErrorMessage.PurchaseMoneyMinimum.getErrorMsg());
-        }
-
+        validation(money);
         this.money = money;
     }
 
-    private boolean validation(int money) {
+    private void validation(int money) {
         if (money < 1000)
-            return false;
-        return true;
+            throw new IllegalArgumentException(ErrorMessage.PurchaseMoneyMinimum.getErrorMsg());
+
+        if (money % 1000 != 0)
+            throw new IllegalArgumentException(ErrorMessage.PurchaseMoney1000NotLeft.getErrorMsg());
     }
 }

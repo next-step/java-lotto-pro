@@ -30,7 +30,7 @@ public class Lotto {
     }
 
     private List<Integer> generate() {
-        return rangeNumbers.subList(0, 6);
+        return new ArrayList<>(rangeNumbers.subList(0, 6));
     }
 
     public CompareEnum compare(Lotto lotto) {
@@ -48,6 +48,9 @@ public class Lotto {
         if(hitCount == 4)
             return CompareEnum.Third;
 
+        if(hitCount == 3)
+            return CompareEnum.Fourth;
+
         return CompareEnum.Fail;
     }
 
@@ -57,9 +60,7 @@ public class Lotto {
         for(int number : numbers) {
             sb.append(number + ", ");
         }
-        sb.deleteCharAt(sb.lastIndexOf(", "));
+        sb.delete(sb.length() - 2, sb.length());
         return "[" + sb + "]";
     }
-
-
 }
