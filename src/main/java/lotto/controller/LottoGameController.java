@@ -24,9 +24,10 @@ public class LottoGameController {
             WinningLotto winningLotto = new WinningLotto(winningNumberList);
             LottoGameResult lottoGameResult = winningLotto.compareLottos(lottos);
             ResultView.printFinalResultView(lottoGameResult,lottos);
-            return new LottoGameDTO(lottos, null, false);
+            return new LottoGameDTO(lottos,false);
         } catch (IllegalArgumentException e) {
-            return new LottoGameDTO(null, e.getMessage(), true);
+            ResultView.printConsole(e.getMessage());
+            return new LottoGameDTO(null,true);
         }
     }
 
@@ -36,10 +37,10 @@ public class LottoGameController {
             LottoPaper lottoPaper = lottoStore.issueLottoPaper();
             Lottos lottos = generateLottos(lottoPaper);
             ResultView.printLottosView(lottos);
-            return new LottoGameDTO(lottos, null, false);
+            return new LottoGameDTO(lottos, false);
         } catch (IllegalArgumentException e) {
             ResultView.printConsole(e.getMessage());
-            return new LottoGameDTO(null, null, true);
+            return new LottoGameDTO(null,true);
         }
     }
 
