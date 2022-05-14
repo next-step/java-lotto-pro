@@ -10,16 +10,19 @@ public class StringUtils {
     }
 
     public static int[] toPositiveNumbers(String[] inputs) {
-        return Arrays.asList(inputs).stream()
-                .map(input -> validateAndReturn(input))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+
+        int[] result = new int[inputs.length];
+        for (int index = 0; index < inputs.length; index++) {
+            String input = inputs[index];
+            validate(input);
+            result[index] = Integer.parseInt(input);
+        }
+        return result;
     }
 
-    private static String validateAndReturn(String input) {
+    private static void validate(String input) {
         validateNumber(input);
         validatePositive(input);
-        return input;
     }
 
     private static void validateNumber(String input) {
