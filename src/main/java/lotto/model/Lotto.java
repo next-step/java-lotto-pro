@@ -10,28 +10,28 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto() {
-
         List<Integer> numbers = createLottoNumbers();
 
         validateNumbers(numbers);
 
-        this.numbers = new ArrayList<>();
-        for (int number : numbers) {
-            this.numbers.add(new LottoNumber(number));
-        }
-
-        Collections.sort(this.numbers);
+        this.numbers = integerArraysToLottoNumbers(numbers);
     }
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
 
-        this.numbers = new ArrayList<>();
+        this.numbers = integerArraysToLottoNumbers(numbers);
+    }
+
+    private List<LottoNumber> integerArraysToLottoNumbers(List<Integer> numbers) {
+        List<LottoNumber> resultNumbers = new ArrayList<>();
+
         for (int number : numbers) {
-            this.numbers.add(new LottoNumber(number));
+            resultNumbers.add(new LottoNumber(number));
         }
 
-        Collections.sort(this.numbers);
+        Collections.sort(resultNumbers);
+        return resultNumbers;
     }
 
     private void validateNumbers(List<Integer> numbers) {
