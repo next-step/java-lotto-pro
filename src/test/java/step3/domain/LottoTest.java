@@ -1,10 +1,11 @@
-package step3;
+package step3.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ class LottoTest {
 
     @Test
     void valid_로또_생성() {
-        assertThat(new Lotto(lottoNumbers)).isEqualTo(new Lotto(lottoNumbers));
+        Assertions.assertThat(new Lotto(lottoNumbers)).isEqualTo(new Lotto(lottoNumbers));
     }
 
     @Test
