@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotties {
 
@@ -23,5 +24,12 @@ public class Lotties {
 
     public void printLotties() {
         lotties.forEach(System.out::println);
+    }
+
+    public WinningStatus getWinningStatus(Lotto winningLotto) {
+        List<Rank> ranks = this.lotties.stream()
+                .map(winningLotto::match)
+                .collect(Collectors.toList());
+        return  WinningStatus.from(ranks);
     }
 }

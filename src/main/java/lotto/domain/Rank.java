@@ -18,6 +18,14 @@ public enum Rank {
         this.money = money;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public Money getMoney() {
+        return money;
+    }
+
     public static Rank matchResult(int matchCount) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isEqualMatchCount(matchCount))

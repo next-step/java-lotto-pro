@@ -43,8 +43,6 @@ public class Money {
 
     @Override
     public String toString() {
-        return "Money{" +
-                "value=" + value +
-                '}';
+        return String.valueOf(value);
     }
 }
