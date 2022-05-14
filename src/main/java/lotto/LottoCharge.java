@@ -1,5 +1,8 @@
 package lotto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class LottoCharge {
 	private static final int LOTTO_PRICE = 1000;
 	private final int value;
@@ -16,5 +19,11 @@ public class LottoCharge {
 
 	public int count() {
 		return value / LOTTO_PRICE;
+	}
+
+	public double revenueRate(double revenue) {
+		return BigDecimal.valueOf(revenue / value)
+				.setScale(2, RoundingMode.FLOOR)
+				.doubleValue();
 	}
 }
