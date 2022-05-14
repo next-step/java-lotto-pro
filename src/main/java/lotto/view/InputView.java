@@ -23,17 +23,17 @@ public class InputView {
     }
 
     public long inputPurchasePrice() throws IOException {
-        message.printMessage(INPUT_PURCHASE_PRICE_MESSAGE);
+        message.printlnMessage(INPUT_PURCHASE_PRICE_MESSAGE);
         return Long.parseLong(br.readLine());
     }
 
     public List<Integer> inputWinningLottoNumbers() throws IOException {
-        message.printMessage(INPUT_WINNING_LOTTO_NUMBERS_MESSAGE);
+        message.printlnMessage(INPUT_WINNING_LOTTO_NUMBERS_MESSAGE);
         return Arrays.stream(br.readLine().split(",")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
     }
 
     public int inputBonusBall() throws IOException {
-        message.printMessage(INPUT_BONUS_BALL_MESSAGE);
+        message.printlnMessage(INPUT_BONUS_BALL_MESSAGE);
         return Integer.parseInt(br.readLine());
     }
 }
