@@ -12,8 +12,8 @@ import java.util.List;
 class OutputViewTest {
     @Test
     public void 구매_로또_출력하기() {
-        LottoGame game = new LottoGame(5000);
-        game.purchaseLotto();
+        LottoGame game = new LottoGame();
+        game.purchaseLotto(new Money(5000));
         OutputView.printMyLotto(game.getPurchasedLottos());
     }
 

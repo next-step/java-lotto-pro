@@ -14,7 +14,7 @@ import static lotto.view.InputView.REQUEST_MONEY;
 
 public class LottoGame {
     private static final List<LottoNo> lottoNumbers = new ArrayList<>();
-    private Money money = new Money(0);
+
     private PurchasedLottos purchasedLottos = new PurchasedLottos();
     private LottoResult result = new LottoResult();
     private String lastWinningNumbers = "";
@@ -26,31 +26,13 @@ public class LottoGame {
     }
 
     public LottoGame() {
-    }
 
-    public LottoGame(long money) {
-        this.money = new Money(money);
-    }
-
-    public LottoGame(String money) {
-        this(Long.parseLong(money));
-    }
-
-    public LottoGame(PurchasedLottos purchasedLottos, String lastWinningNumbers) {
-        this.purchasedLottos = purchasedLottos;
-        this.lastWinningNumbers = lastWinningNumbers;
-    }
-
-    public LottoGame(Money money, PurchasedLottos purchasedLottos, String lastWinningNumbers) {
-        this.money = money;
-        this.purchasedLottos = purchasedLottos;
-        this.lastWinningNumbers = lastWinningNumbers;
     }
 
     public void play() {
-        readMoney();
+        Money money = readMoney();
         OutputView.printMessage(getLottoQuantity(money) + "개를 구매했습니다.");
-        purchaseLotto();
+        purchaseLotto(money);
         OutputView.printMyLotto(purchasedLottos);
         readLastWinningNumbers();
         OutputView.printLine();
@@ -58,12 +40,12 @@ public class LottoGame {
         OutputView.showLottoProfit(purchasedLottos, lastWinningNumbers, money);
     }
 
-    public void readMoney() {
+    public Money readMoney() {
         String input = InputView.readUserInput(REQUEST_MONEY);
-        money = new Money(input);
+        return new Money(input);
     }
 
-    public void purchaseLotto() {
+    public void purchaseLotto(Money money) {
         long lottoQuantity = getLottoQuantity(money);
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoQuantity; i++) {
