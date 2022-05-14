@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    private final static int LOTTO_MIN_NUMBER = 1;
-    private final static int LOTTO_MAX_NUMBER = 45;
+    public final static int LOTTO_MIN_NUMBER = 1;
+    public final static int LOTTO_MAX_NUMBER = 45;
     public final static int LOTTO_FIRST_INDEX = 0;
     public final static int LOTTO_SIZE = 6;
 
