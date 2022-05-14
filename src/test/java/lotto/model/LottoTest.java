@@ -24,4 +24,12 @@ public class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .withFailMessage("로또 번호는 6개로 구성되어 있어야합니다");
     }
+
+    @Test
+    @DisplayName("로또 번호가 중복되면  IllegalArgumentException을 발생시킨다.")
+    void 로또중복_test() {
+        assertThatThrownBy(() -> new Lotto(Arrays.asList(2, 3, 4, 5, 6, 6)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .withFailMessage("로또 각 번호는 중복될수 없습니다.");
+    }
 }
