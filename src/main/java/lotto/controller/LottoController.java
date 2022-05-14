@@ -29,18 +29,29 @@ public class LottoController {
         LottoTickets lottoTickets = buyLottoTickets();
 
         int purchasedTicketsCount = lottoTickets.purchasedTicketsCount();
-        outputView.printPurchasedTicketsCount(purchasedTicketsCount);
-        outputView.printTicketsNumbers(lottoTickets.purchasedTicketNumberString());
+
+        reportingLottoTicketsInformation(lottoTickets, purchasedTicketsCount);
 
         LottoWinningResults winningResults = checkWinningLotto(lottoTickets);
 
+        reportingLottoResult(purchasedTicketsCount, winningResults);
+
+    }
+
+    private void reportingLottoTicketsInformation(LottoTickets lottoTickets, int purchasedTicketsCount) {
+        outputView.printPurchasedTicketsCount(purchasedTicketsCount);
+        outputView.printTicketsNumbers(lottoTickets.purchasedTicketNumberString());
+    }
+
+    private void reportingLottoResult(int purchasedTicketsCount, LottoWinningResults winningResults) {
         List<LottoRank> prizedRanks = LottoRank.getPrizedRanks();
 
         for (LottoRank prizedRank : prizedRanks) {
             printWinningStatistics(winningResults, prizedRank);
         }
-        outputView.printTotalProfitRate(winningResults.profitRate(Money.from(purchasedTicketsCount * LOTTO_TICKET_PRICE)));
 
+        int usedMoney = purchasedTicketsCount * LOTTO_TICKET_PRICE;
+        outputView.printTotalProfitRate(winningResults.profitRate(Money.from(usedMoney)));
     }
 
     private void printWinningStatistics(LottoWinningResults winningResults, LottoRank prizedRank) {
@@ -52,13 +63,11 @@ public class LottoController {
 
     private LottoWinningResults checkWinningLotto(LottoTickets lottoTickets) {
         List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumbers();
-        LottoWinningResults winningResults = lottoTickets.match(LottoNumbers.from(() -> winningLottoNumbers));
-        return winningResults;
+        return lottoTickets.match(LottoNumbers.from(() -> winningLottoNumbers));
     }
 
     private LottoTickets buyLottoTickets() {
         Money inputMoney = inputView.inputMoney();
-        LottoTickets lottoTickets = vendingMachine.purchase(inputMoney);
-        return lottoTickets;
+        return vendingMachine.purchase(inputMoney);
     }
 }
