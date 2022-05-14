@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import lotto.constant.ErrorMessage;
 import lotto.constant.LottoMatchNumber;
@@ -8,12 +7,6 @@ import lotto.constant.LottoRoleConst;
 import lotto.utils.LottoGameValidateUtils;
 
 public class LottoPlayService {
-
-    private final LottoGeneratorService lottoGeneratorService;
-
-    public LottoPlayService() {
-        lottoGeneratorService = new LottoGeneratorService();
-    }
 
     public int buyLottoCount(String moneyWord) {
         try {
@@ -23,15 +16,6 @@ public class LottoPlayService {
         }catch (NumberFormatException e){
             throw new IllegalArgumentException(ErrorMessage.CANT_CONVERT_MONEY);
         }
-    }
-
-    public Lottos generateLottoByCount(int count) {
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int play = 0; play < count; play++) {
-            Lotto lotto = lottoGeneratorService.generateLotto();
-            lottoList.add(lotto);
-        }
-        return new Lottos(lottoList);
     }
 
     public void playLottoGame(Lottos lottos, List<Integer> winningNumberList) {

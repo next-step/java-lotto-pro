@@ -32,13 +32,6 @@ class LottoPlayServiceTest {
         assertEquals(expectedPlayCount, lottoPlayService.buyLottoCount(moneyWord));
     }
 
-    @DisplayName("로또 구매개수만큼 로또게임을 진행하고 로또목록에 등록한다.")
-    @ParameterizedTest
-    @ValueSource(ints = {10, 15, 5})
-    void generateLottoByCount(int buyLottoCount) {
-        Lottos lottos = lottoPlayService.generateLottoByCount(buyLottoCount);
-        assertThat(lottos.lottoCount()).isEqualTo(buyLottoCount);
-    }
 
     @DisplayName("로또 게임 결과(일치한 개수, 수익률)를 확인한다.")
     @Test
