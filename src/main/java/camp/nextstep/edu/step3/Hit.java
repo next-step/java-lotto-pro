@@ -9,7 +9,7 @@ public enum Hit {
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
-    ALL(6, 2000000000);
+    ALL(6, 2_000_000_000);
 
     private final int count;
     private final int prizeMoney;
