@@ -1,10 +1,10 @@
 package calculator;
 
-import calculator.StringAddCalculator;
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class StringAddCalculatorTest {
     @Test
@@ -44,5 +44,19 @@ public class StringAddCalculatorTest {
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @DisplayName("숫자가 아닌 문자가 포함되어 있을 경우 Exception 확인")
+    @Test
+    public void splitAndSum_noneNumber() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1,B,3"))
+                .isInstanceOf(NumberFormatException.class);
+    }
+
+    @DisplayName("Custom Delimiter 정규식을 제대로 따르지 못한 문자열일 경우 Exception 확인")
+    @Test
+    public void splitAndSum_wrongCustomDelimiterFormat() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("/;\n1;2;3"))
+                .isInstanceOf(NumberFormatException.class);
     }
 }
