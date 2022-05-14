@@ -3,11 +3,16 @@ package lotto.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class StatisticsTest {
     private List<Lotto> lottos;
@@ -41,6 +46,7 @@ public class StatisticsTest {
     void 로또숫자비교_test() {
         // when
         Statistics statistics = new Statistics(win, lottos);
+        lottos.add( new Lotto(Arrays.asList(1, 21, 23, 41, 42, 43)));
 
         // then
         assertThat(statistics.getResultMap().get(Rank.FIRST)).isEqualTo(0);
@@ -48,6 +54,33 @@ public class StatisticsTest {
         assertThat(statistics.getResultMap().get(Rank.THIRD)).isEqualTo(0);
         assertThat(statistics.getResultMap().get(Rank.FOURTH)).isEqualTo(1);
         assertThat(statistics.getResultMap().get(Rank.NOTHING)).isEqualTo(13);
+    }
+
+    @MethodSource(value = "lottoTestParameters")
+    @ParameterizedTest(name = "1000원짜리 로또 구매가능한 수량을 구한다. {0}")
+    void 로또숫자비교2_test(Lotto lotto, int fisrt, int second, int third, int fourth, int nothing) {
+        // given
+        lottos = Arrays.asList(lotto);
+
+        // when
+        Statistics statistics = new Statistics(win, lottos);
+
+        // then
+        assertThat(statistics.getResultMap().get(Rank.FIRST)).isEqualTo(fisrt);
+        assertThat(statistics.getResultMap().get(Rank.SECOND)).isEqualTo(second);
+        assertThat(statistics.getResultMap().get(Rank.THIRD)).isEqualTo(third);
+        assertThat(statistics.getResultMap().get(Rank.FOURTH)).isEqualTo(fourth);
+        assertThat(statistics.getResultMap().get(Rank.NOTHING)).isEqualTo(nothing);
+    }
+
+    @MethodSource(value = "lottoTestParameters")
+    static Stream<Arguments> lottoTestParameters() {
+        return Stream.of(
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 1, 0, 0, 0, 0, 0),
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)), 0, 1, 0, 0, 0, 0),
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 9, 10)), 0, 0, 1, 0, 0, 0),
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10)), 0, 0, 0, 1, 0, 0)
+        );
     }
 
     @Test
