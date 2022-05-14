@@ -28,7 +28,8 @@ public class LottoTest {
     private static Stream<Arguments> provideIntegerArrays() {
         return Stream.of(
                 Arguments.of(createLottoNumberList(new int[]{1})),
-                Arguments.of(createLottoNumberList(new int[]{1, 2, 3, 4, 5}))
+                Arguments.of(createLottoNumberList(new int[]{1, 2, 3, 4, 5})),
+                Arguments.of(createLottoNumberList(new int[]{1, 2, 3, 4, 5,5}))
         );
     }
 

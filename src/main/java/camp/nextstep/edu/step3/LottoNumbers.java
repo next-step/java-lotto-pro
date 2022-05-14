@@ -9,9 +9,9 @@ public class LottoNumbers {
     private final List<LottoNumber> numbers = new ArrayList<>();
 
     public LottoNumbers() {
-        final int START_NUMBER = 1;
-        final int END_NUMBER = 45;
-        for (int i = START_NUMBER; i <= END_NUMBER; i++) {
+        final int minNumber = 1;
+        final int maxNumber = 45;
+        for (int i = minNumber; i <= maxNumber; i++) {
             numbers.add(new LottoNumber(i));
         }
     }
