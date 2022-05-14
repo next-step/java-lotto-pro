@@ -20,4 +20,8 @@ public class Lotties {
     public int count() {
         return lotties.size();
     }
+
+    public void printLotties() {
+        lotties.forEach(System.out::println);
+    }
 }

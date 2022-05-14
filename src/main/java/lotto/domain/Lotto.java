@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -50,8 +51,7 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "Lotto{" +
-                "numbers=" + numbers +
-                '}';
+        numbers.sort(Comparator.comparingInt(LottoNumber::getValue));
+        return numbers.toString();
     }
 }
