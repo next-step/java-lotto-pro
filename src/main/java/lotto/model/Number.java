@@ -3,9 +3,12 @@ package lotto.model;
 import static lotto.constants.LottoConstant.MAX_NUMBER;
 import static lotto.constants.LottoConstant.MIN_NUMBER;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Number {
+    private static final Map<Integer, Number> NUMBER_CACHE = new HashMap<>();
     private final int number;
 
     private Number(int number) {
@@ -14,7 +17,14 @@ public class Number {
 
     public static Number of(int number) {
         validateRange(number);
-        return new Number(number);
+        if (isNotContainCache(number)) {
+            NUMBER_CACHE.put(number, new Number(number));
+        }
+        return NUMBER_CACHE.get(number);
+    }
+
+    private static boolean isNotContainCache(int number) {
+        return !NUMBER_CACHE.containsKey(number);
     }
 
     private static void validateRange(int number) {
