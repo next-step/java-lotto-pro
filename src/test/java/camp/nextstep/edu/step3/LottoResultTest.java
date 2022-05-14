@@ -29,15 +29,14 @@ public class LottoResultTest {
     @DisplayName("result 메소드 호출시 총 수익률을 반환한다.")
     @ParameterizedTest
     @MethodSource("provideResultInputAndToTalAmount")
-    void resultTest(final Hit[] input, final int totalAmount) {
-        final int userBuyAmount = 14000;
-        assertThat(new LottoResult(input).result(userBuyAmount)).isEqualTo(new EarningsRate(totalAmount, userBuyAmount));
+    void resultTest(final Hit[] input, final EarningsRate expectedEarningRate) {
+        assertThat(new LottoResult(input).earningRate(new LottoMoney(14000))).isEqualTo(expectedEarningRate);
     }
 
     private static Stream<Arguments> provideResultInputAndToTalAmount() {
         return Stream.of(
-                Arguments.of(new Hit[]{Hit.ONE, Hit.TWO, Hit.THREE, Hit.FOUR}, (Hit.THREE.cost(1) + Hit.FOUR.cost(1)),
-                        Arguments.of(new Hit[]{Hit.ZERO}, Hit.ZERO.cost(1)))
+                Arguments.of(new Hit[]{Hit.ONE, Hit.TWO, Hit.THREE, Hit.FOUR}, new LottoMoney(14000).calculate(Hit.THREE.winningAmount(1) + Hit.FOUR.winningAmount(1)),
+                        Arguments.of(new Hit[]{Hit.ZERO}, new LottoMoney(14000).calculate(Hit.ZERO.winningAmount(1))))
         );
     }
 
