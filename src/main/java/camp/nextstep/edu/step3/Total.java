@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Total {
     private final Map<Hit, Integer> totalHitMap = new HashMap<>();
 
-    public Total(Hit... hits) {
+    public Total(Hit[] hits) {
         for (Hit hit : hits) {
             increase(hit);
         }

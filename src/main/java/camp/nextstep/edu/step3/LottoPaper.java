@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoPaper {
-    private final List<Lotto> userLottoList;
+    private final List<Lotto> purchaseList;
 
-    public LottoPaper(Lotto... lottoArray) {
+    public LottoPaper(Lotto[] lottoArray) {
         validation(lottoArray);
-        this.userLottoList = Arrays.asList(lottoArray);
+        this.purchaseList = Arrays.asList(lottoArray);
     }
 
     public Total checkAll(final Lotto answerLotto) {
@@ -17,13 +17,13 @@ public class LottoPaper {
             throw new IllegalArgumentException("invalid check all input");
         }
 
-        return new Total(userLottoList.stream()
+        return new Total(purchaseList.stream()
                 .map((lotto) -> lotto.checkTo(answerLotto))
                 .toArray(Hit[]::new));
     }
 
     public int numberOfPurchases() {
-        return this.userLottoList.size();
+        return this.purchaseList.size();
     }
 
     private void validation(Lotto[] lottoArray) {
@@ -37,18 +37,18 @@ public class LottoPaper {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoPaper that = (LottoPaper) o;
-        return Objects.equals(userLottoList, that.userLottoList);
+        return Objects.equals(purchaseList, that.purchaseList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userLottoList);
+        return Objects.hash(purchaseList);
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Lotto lotto : userLottoList) {
+        for (Lotto lotto : purchaseList) {
             stringBuilder.append(String.format("%s\n",lotto));
         }
         return stringBuilder.toString();
