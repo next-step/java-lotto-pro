@@ -37,4 +37,14 @@ public class Lotto {
     public static Lotto create(String numbers) {
         return new Lotto(numbers);
     }
+
+    public int match(Lotto winningLotto) {
+        return (int) this.lotto.stream()
+                .filter(winningLotto::match)
+                .count();
+    }
+
+    private boolean match(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
 }
