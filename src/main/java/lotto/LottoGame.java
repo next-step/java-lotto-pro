@@ -4,14 +4,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumberSet {
+public class LottoGame {
 
     public static final int SIZE = 6;
     public static final String ILLEGAL_SIZE_EXCEPTION_MESSAGE = "로또 번호는 " + SIZE + "개여야 합니다.";
     public static final String NUMBER_DUPLICATE_EXCEPTION_MESSAGE = "번호는 중복되면 안 됩니다.";
     private final List<LottoNumber> numbers;
 
-    public LottoNumberSet(List<Integer> numbers) {
+    public LottoGame(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
         this.numbers = numbers.stream()
@@ -39,7 +39,7 @@ public class LottoNumberSet {
 
     @Override
     public String toString() {
-        return "LottoNumberSet{" +
+        return "LottoGame{" +
                 "numbers=" + numbers +
                 '}';
     }

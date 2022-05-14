@@ -6,19 +6,19 @@ import java.util.List;
 public class LottoTicket {
 
     public static final int PRICE = 1000;
-    private final List<LottoNumberSet> numberSets;
+    private final List<LottoGame> lottoGames;
 
     public LottoTicket(final int money) {
         validate(money);
-        List<LottoNumberSet> numberSets = new ArrayList<>();
+        List<LottoGame> lottoGames = new ArrayList<>();
         for (int i = 0; i < money / PRICE; i++) {
-            numberSets.add(new LottoNumberSet(LottoNumbersGenerator.generate(1, 45, 6)));
+            lottoGames.add(new LottoGame(LottoNumbersGenerator.generate(1, 45, 6)));
         }
-        this.numberSets = numberSets;
+        this.lottoGames = lottoGames;
     }
 
     public int size() {
-        return numberSets.size();
+        return lottoGames.size();
     }
 
     private void validate(final int money) {
