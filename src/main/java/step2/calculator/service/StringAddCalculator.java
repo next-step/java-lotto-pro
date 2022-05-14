@@ -1,5 +1,8 @@
 package step2.calculator.service;
 
+import static step2.calculator.utils.DelimiterUtils.extractDelimiter;
+import static step2.calculator.utils.DelimiterUtils.hasCommaOrColonDelimiters;
+import static step2.calculator.utils.DelimiterUtils.splitByDelimiterRegex;
 import static step2.calculator.validator.StringValidator.numericValidation;
 import static step2.calculator.validator.StringValidator.positiveNumberValidation;
 
@@ -16,8 +19,22 @@ public class StringAddCalculator {
             return 0;
         }
 
-        numericValidation(input);
-        positiveNumberValidation(input);
-        return Integer.parseInt(input);
+        if (!hasCommaOrColonDelimiters(input)) {
+            numericValidation(input);
+            positiveNumberValidation(input);
+            return Integer.parseInt(input);
+        }
+
+        String delimiter = extractDelimiter(input);
+        return sum(splitByDelimiterRegex(input, delimiter));
+    }
+
+    private static int sum(String[] values) {
+        int total = 0;
+        for (String value : values) {
+            positiveNumberValidation(value);
+            total += Integer.parseInt(value);
+        }
+        return total;
     }
 }

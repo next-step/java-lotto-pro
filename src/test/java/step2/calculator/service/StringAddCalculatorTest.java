@@ -70,4 +70,34 @@ class StringAddCalculatorTest {
             .isThrownBy(() -> StringAddCalculator.splitAndSum(given))
             .withMessageMatching(NON_NUMERIC_INPUT_ERROR);
     }
+
+    @Test
+    @DisplayName("','로만 구분된 입력 문자열의 덧셈")
+    public void returnSum_WhenDelimiterIsOnlyComma() {
+        // Given
+        final String given = "1,2,3";
+
+        // When & Then
+        assertThat(StringAddCalculator.splitAndSum(given)).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("':'로만 구분된 입력 문자열의 덧셈")
+    public void returnSum_WhenDelimiterIsOnlyColon() {
+        // Given
+        final String given = "1:2:3";
+
+        // When & Then
+        assertThat(StringAddCalculator.splitAndSum(given)).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("','와 ':'이 혼합된 입력 문자열의 덧셈")
+    public void returnSum_WhenDelimiterContainsCommaAndColon() {
+        // Given
+        final String given = "1,2:3";
+
+        // When & Then
+        assertThat(StringAddCalculator.splitAndSum(given)).isEqualTo(6);
+    }
 }
