@@ -1,9 +1,6 @@
 package lotto.model;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LottoRank {
@@ -16,7 +13,6 @@ public enum LottoRank {
 
     private final int hits;
     private final int cashPrize;
-//    Predicate<LottoRank> isPositive
 
     LottoRank(int hits, int cashPrize) {
         this.hits = hits;
