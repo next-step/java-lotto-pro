@@ -29,6 +29,16 @@ public class LottoResult {
         return yield;
     }
 
+    public LottoResult() {
+    }
+
+    public LottoResult(int firstCount, int secondCount, int thirdCount, int fourthCount) {
+        this.firstCount = firstCount;
+        this.secondCount = secondCount;
+        this.thirdCount = thirdCount;
+        this.fourthCount = fourthCount;
+    }
+
     void counting(CompareEnum result) {
         if(result == CompareEnum.First)
             firstCount++;

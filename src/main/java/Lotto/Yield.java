@@ -7,6 +7,10 @@ public class Yield {
     int investment;
     double yield;
 
+    public BigDecimal getSumMoney() {
+        return sumMoney;
+    }
+
     public double getYield() {
         return yield;
     }
