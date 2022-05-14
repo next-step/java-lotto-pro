@@ -1,4 +1,5 @@
 import lotto.LottoMachine;
+import lotto.LottoResult;
 import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
 import lotto.model.UserMoney;
@@ -10,12 +11,15 @@ public class ApplicationMain {
 
 	public static void main(String[] args) {
 		UserMoney userMoney = InputView.inputMoney();
-		Lottos lottos = new LottoMachine().buyAutoLottos(userMoney);
+		
+		LottoMachine lottoMachine = new LottoMachine();
+		Lottos lottos = lottoMachine.buyAutoLottos(userMoney);
 		ResultView.printLottos(lottos);
 
 		LottoNumbers lastWinningLotto = InputView.inputLastWinLotto();
-		WinningList winningList = new WinningList(lottos, lastWinningLotto);
+		LottoResult lottoResult = new LottoResult(lottos, lastWinningLotto);
+		WinningList winningList = lottoResult.winningList();
 		ResultView.printWinStatistics(winningList);
-//		ResultView.printProfitRate(winningList.profitRate(userMoney));
+		ResultView.printProfitRate(lottoResult.profitRate(winningList, lottoMachine.lottoPrice()));
 	}
 }
