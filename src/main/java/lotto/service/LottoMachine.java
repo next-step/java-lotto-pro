@@ -15,7 +15,7 @@ public class LottoMachine {
     public void pay() {
         String price = InputView.inputPrice();
 
-        int quantity = LottoQuantityChecker.check(price);
+        int quantity = LottoQuantityChecker.calculate(price);
         ResultView.quantity(quantity);
 
         List<LottoNumbers> lottoNumbers = RandomNumberGenerator.generate(quantity);
