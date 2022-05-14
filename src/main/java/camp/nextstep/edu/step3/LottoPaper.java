@@ -1,15 +1,16 @@
 package camp.nextstep.edu.step3;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class LottoPaper {
     private final List<Lotto> purchaseList;
 
-    public LottoPaper(Lotto[] lottoArray) {
-        validation(lottoArray);
-        this.purchaseList = Arrays.asList(lottoArray);
+    public LottoPaper(List<Lotto> purchaseList) {
+        if (purchaseList.isEmpty()) {
+            throw new IllegalArgumentException("invalid construct input");
+        }
+        this.purchaseList = purchaseList;
     }
 
     public LottoResult checkAll(final Lotto answerLotto) {
