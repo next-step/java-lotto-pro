@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.factory.LottoNumbersFactory;
 import lotto.number.LottoNumbers;
+import lotto.rank.LottoRank;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -21,13 +22,14 @@ public class LottoGame {
     }
 
     public void start(){
-
         List<LottoNumbers> lottoNumbersList = buyLotto();
-//        takeWinNumbers;
-//        calculatePrize;
-//            printprize
-//        calculateYield;
-//            printyield
+        LottoNumbers winNumbers = drawWinNumbers();
+        List<LottoRank> gameResult = matchLottos(lottoNumbersList,winNumbers);
+        System.out.println(gameResult);
+        // calculateStatistics
+            // printStatistics
+        // calculateYield
+            // printyield;
     }
 
     private List<LottoNumbers> buyLotto(){
@@ -39,5 +41,18 @@ public class LottoGame {
         }
         resultView.printBoughtLottos(lottoNumbersList);
         return lottoNumbersList;
+    }
+
+    private LottoNumbers drawWinNumbers(){
+        List<Integer> numbers = inputView.takeWinNumbers();
+        return lottoNumbersFactory.createLottoNumbers(numbers);
+    }
+
+    private List<LottoRank> matchLottos(List<LottoNumbers> lottoNumbersList, LottoNumbers winNumbers){
+       List<LottoRank> ranks = new ArrayList<>();
+        for(LottoNumbers lottoNumbers: lottoNumbersList){
+           ranks.add(lottoNumbers.matchWithWinNumbers(winNumbers));
+       }
+        return ranks;
     }
 }
