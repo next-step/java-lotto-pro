@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.IntStream;
 import lotto.dto.LottoGameResultDTO;
 import lotto.factory.LottoNumbersFactory;
 import lotto.number.LottoNumbers;
@@ -30,6 +31,7 @@ public class LottoGame {
     public void start() {
         takeBudget();
         List<LottoNumbers> lottoNumbersList = buyLotto();
+        resultView.printBoughtLottos(lottoNumbersList);
         LottoNumbers winNumbers = drawWinNumbers();
         List<LottoRank> lottoRanks = matchLottos(lottoNumbersList, winNumbers);
         LottoGameResultDTO gameResult = gameResult(lottoRanks);
@@ -42,12 +44,7 @@ public class LottoGame {
 
     private List<LottoNumbers> buyLotto() {
         int drawCount = budget / LOTTO_PRICE;
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for (int i = 0; i < drawCount; i++) {
-            lottoNumbersList.add(lottoNumbersFactory.createRandomLottoNumbers());
-        }
-        resultView.printBoughtLottos(lottoNumbersList);
-        return lottoNumbersList;
+        return IntStream.range(0,drawCount).mapToObj(i->lottoNumbersFactory.createRandomLottoNumbers()).collect(toList());
     }
 
     private LottoNumbers drawWinNumbers() {
