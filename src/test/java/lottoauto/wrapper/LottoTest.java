@@ -1,7 +1,6 @@
 package lottoauto.wrapper;
 
-import lottoauto.LottoStarter;
-import lottoauto.wrapper.Lotto;
+import lottoauto.domain.LottoList;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

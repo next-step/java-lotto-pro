@@ -1,6 +1,7 @@
-package lottoauto.wrapper;
+package lottoauto.domain;
 
 import lottoauto.util.SixRandomNumberUtil;
+import lottoauto.wrapper.Lotto;
 
 import java.util.ArrayList;
 

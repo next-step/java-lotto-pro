@@ -25,4 +25,12 @@ public class Lotto {
     public int size() {
         return numbers.size();
     }
+
+    public int get(int index) {
+        return numbers.get(index);
+    }
+
+    public boolean contains(Object o) {
+        return numbers.contains(o);
+    }
 }
