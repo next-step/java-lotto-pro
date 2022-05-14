@@ -1,4 +1,4 @@
-package camp.nextstep.edu.level1.stringCaluator.until;
+package camp.nextstep.edu.until;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
