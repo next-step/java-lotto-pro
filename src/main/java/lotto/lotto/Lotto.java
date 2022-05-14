@@ -51,6 +51,7 @@ public class Lotto implements Purchasable {
         return count;
     }
 
+    //todo(heowc): 네이밍 변경
     private int matches(LottoNumber lottoNumber) {
         if (this.lottoNumbers.contains(lottoNumber)) {
             return 1;
@@ -58,6 +59,7 @@ public class Lotto implements Purchasable {
         return 0;
     }
 
+    //todo(heowc): 구현체 변경
     private static Set<LottoNumber> validate(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicated(lottoNumbers);

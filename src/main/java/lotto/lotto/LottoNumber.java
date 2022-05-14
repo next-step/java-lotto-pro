@@ -3,7 +3,8 @@ package lotto.lotto;
 import lotto.util.StringUtils;
 import java.util.Objects;
 
-class LottoNumber implements Comparable<LottoNumber> {
+//todo(heowc): 캐싱 고려
+public class LottoNumber implements Comparable<LottoNumber> {
 
     static final int MIN_VALUE = 1;
     static final int MAX_VALUE = 45;
