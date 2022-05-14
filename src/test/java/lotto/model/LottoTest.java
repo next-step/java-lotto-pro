@@ -46,4 +46,12 @@ public class LottoTest {
                 arguments(Arrays.asList(1,2,3,4,5,5))
         );
     }
+
+    @Test
+    void isMatchBonus() {
+        assertAll(
+                () -> assertThat(new Lotto(Arrays.asList(1,2,3,4,5,6)).isMatchBonus(new LottoNumber(5))).isEqualTo(true),
+                () -> assertThat(new Lotto(Arrays.asList(1,2,3,4,5,6)).isMatchBonus(new LottoNumber(8))).isEqualTo(false)
+        );
+    }
 }

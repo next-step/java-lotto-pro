@@ -26,6 +26,7 @@ public class WinningLotto {
 
     public void compareWinningLotto(Lotto lotto) {
         int count = lotto.findMatchCount(this.lotto);
+        boolean matchBonus = lotto.isMatchBonus(this.bonusBall);
 
         winningStatus.recordResults(count);
     }

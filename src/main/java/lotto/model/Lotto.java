@@ -76,13 +76,13 @@ public class Lotto {
         int count = 0;
 
         for (LottoNumber number : winningLotto.numbers) {
-            count = count + compareNumberAndReturnAddCount(number);
+            count = count + getAddCount(number);
         }
 
         return count;
     }
 
-    private int compareNumberAndReturnAddCount(LottoNumber number) {
+    private int getAddCount(LottoNumber number) {
         if(isContainsNumber(number)) {
             return 1;
         }
@@ -96,5 +96,9 @@ public class Lotto {
 
     public String numbersToString() {
         return this.numbers.toString();
+    }
+
+    public boolean isMatchBonus(LottoNumber bonusBall) {
+        return isContainsNumber(bonusBall);
     }
 }
