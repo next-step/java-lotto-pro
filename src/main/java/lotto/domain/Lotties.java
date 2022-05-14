@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Lotties {
 
-    private List<Lotto> lotties;
+    private final List<Lotto> lotties;
 
     public Lotties(List<Lotto> lotties) {
         validate(lotties);
@@ -15,5 +15,9 @@ public class Lotties {
         if (lotties.isEmpty()) {
             throw new IllegalArgumentException("로또는 1개 이상 구매해야 합니다.");
         }
+    }
+
+    public int count() {
+        return lotties.size();
     }
 }
