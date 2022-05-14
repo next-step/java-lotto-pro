@@ -3,10 +3,10 @@ package camp.nextstep.edu.step3;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private final int number;
     private static final int MIN = 1;
     private static final int MAX = 45;
-
+    private final int number;
+    
     public LottoNumber(final int number) {
         validation(number);
         this.number = number;
