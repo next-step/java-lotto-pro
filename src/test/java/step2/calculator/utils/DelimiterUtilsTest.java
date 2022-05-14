@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -30,8 +31,17 @@ class DelimiterUtilsTest {
             Arguments.of("1,2:3", true),
             Arguments.of("1;2;3", false),
             Arguments.of("123", false),
-            Arguments.of("\\;\n1;2;3", false)
+            Arguments.of("//;\n1;2;3", false)
         );
+    }
+
+    @Test
+    @DisplayName("“//”와 “\n” 사이에 위치하는 Custom 구분자 포함 여부")
+    public void hasCustomDelimiterTest() {
+        final String given = "//;\n1;2;3";
+
+        // When & Then
+        assertThat(DelimiterUtils.hasCustomDelimiter(given)).isTrue();
     }
 
     @ParameterizedTest
@@ -46,8 +56,20 @@ class DelimiterUtilsTest {
         return Stream.of(
             Arguments.of("1,2,3", ","),
             Arguments.of("1:2:3", ":"),
-            Arguments.of("1,2:3", ",|:")
+            Arguments.of("1,2:3", ",|:"),
+            Arguments.of("//;\n1;2;3", ";")
         );
+    }
+
+    @Test
+    @DisplayName("Custom 구분자인 경우, Custom 구분자 영역을 제외한 연산 대상 문자열 추출")
+    public void extractSplitTargetTest() {
+        // Given
+        final String given = "//;\n1;2;3";
+        final String expected = "1;2;3";
+
+        // When & Then
+        assertThat(DelimiterUtils.extractSplitTarget(given)).isEqualTo(expected);
     }
 
     @ParameterizedTest

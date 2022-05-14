@@ -100,4 +100,14 @@ class StringAddCalculatorTest {
         // When & Then
         assertThat(StringAddCalculator.splitAndSum(given)).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("문자열 앞부분의 “//”와 “\n” 사이에 위치하는 Custom 구분자로 이루어진 문자열의 덧셈")
+    public void returnSum_WhenContainsCustomDelimiter() {
+        // Given
+        final String given = "//;\n1;2;3";
+
+        // When & Then
+        assertThat(StringAddCalculator.splitAndSum(given)).isEqualTo(6);
+    }
 }
