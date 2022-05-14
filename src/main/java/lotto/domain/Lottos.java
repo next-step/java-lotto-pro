@@ -3,9 +3,10 @@ package lotto.domain;
 import lotto.utils.RandomLottoNumbersGenerator;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Lottos {
+public class Lottos implements Iterable<Lotto>{
     List<Lotto> lottoList = new ArrayList<>();
 
     public void addRandomLotto(){
@@ -14,5 +15,10 @@ public class Lottos {
 
     public int size() {
         return lottoList.size();
+    }
+
+    @Override
+    public Iterator<Lotto> iterator() {
+        return lottoList.iterator();
     }
 }
