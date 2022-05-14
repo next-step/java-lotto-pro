@@ -9,7 +9,7 @@ import lotto.model.WinningMoney;
 public class ResultView {
 	private static final String LEFT_SQUARE_BRACKET = "[";
 	private static final String RIGHT_SQUARE_BRACKET = "]";
-	private static final String commaOwnSpace = ", ";
+	private static final String COMMA_OWN_SPACE = ", ";
 
 	public static void printLottos(List<LottoNumbers> lottos) {
 		System.out.println(lottoNumbersTitleStringFormat(lottos));
@@ -40,7 +40,7 @@ public class ResultView {
 	}
 
 	private static String lottoNumbersTitleStringFormat(List<LottoNumbers> lottos) {
-		return String.format("%d%s", lottos.size(), "개를 구매했습니다.");
+		return String.format("%d개를 구매했습니다.", lottos.size());
 	}
 
 	private static String lottoNumbersStringFormat(LottoNumbers lottoNumbers) {
@@ -57,7 +57,7 @@ public class ResultView {
 
 	private static String lottoNumbersStringFormatAddComma(int index, int maxSize, int value) {
 		if (index != maxSize) {
-			return value + commaOwnSpace;
+			return value + COMMA_OWN_SPACE;
 		}
 		return value + "";
 	}

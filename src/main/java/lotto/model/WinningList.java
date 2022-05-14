@@ -26,15 +26,15 @@ public class WinningList {
 		winningList.put(winningMoney, winningList.get(winningMoney) + 1);
 	}
 
-	public long totalWinningMoney() {
+	public double profitRate(UserMoney userMoney) {
+		return (double) totalWinningMoney() / userMoney.useMoney();
+	}
+	
+	private long totalWinningMoney() {
 		sum = 0;
 		winningList.forEach((winningMoney, count) -> {
 			sum += winningMoney.winningMoney(count);
 		});
 		return sum;
-	}
-
-	public double profitRate(UserMoney userMoney) {
-		return (double) totalWinningMoney() / userMoney.useMoney();
 	}
 }

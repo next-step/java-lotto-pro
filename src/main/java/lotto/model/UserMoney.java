@@ -2,13 +2,13 @@ package lotto.model;
 
 import util.NumberUtil;
 
-public class UserMoney {
+public final class UserMoney {
 	private static final int LOTTO_PRICE = 1000;
 	private int money;
 
 	public UserMoney(String money) {
 		validation(money);
-		this.money = Integer.valueOf(money);
+		this.money = Integer.parseInt(money);
 	}
 
 	public int getMoney() {

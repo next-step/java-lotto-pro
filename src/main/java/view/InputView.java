@@ -1,15 +1,15 @@
 package view;
 
 public class InputView {
-	private static final String inputMoneyMessage = "구입금액을 입력해 주세요.";
-	private static final String inputLastWinLottoMessage = "\n지난 주 당첨 번호를 입력해 주세요.";
+	private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
+	private static final String INPUT_WIN_LOTTO_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
 	
 	public static String inputMoney() {
-		return inputView(inputMoneyMessage);
+		return inputView(INPUT_MONEY_MESSAGE);
 	}
 
 	public static String inputLastWinLotto() {
-		return inputView(inputLastWinLottoMessage);
+		return inputView(INPUT_WIN_LOTTO_MESSAGE);
 	}
 
 	private static String inputView(String message) {
