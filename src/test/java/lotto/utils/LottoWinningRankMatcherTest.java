@@ -45,13 +45,13 @@ class LottoWinningRankMatcherTest {
 
     static Stream<Arguments> lottoNumbersProvider() {
         return Stream.of(
-            arguments(WinningRank.WIN_1, Arrays.asList(1, 2, 3, 4, 5, 6)),
-            arguments(WinningRank.WIN_2, Arrays.asList(1, 2, 3, 4, 5, 7)),
-            arguments(WinningRank.WIN_3, Arrays.asList(1, 2, 3, 4, 7, 8)),
-            arguments(WinningRank.WIN_4, Arrays.asList(1, 2, 3, 7, 8, 9)),
-            arguments(WinningRank.NO_WIN, Arrays.asList(1, 2, 7, 8, 9, 10)),
-            arguments(WinningRank.NO_WIN, Arrays.asList(1, 7, 8, 9, 10, 11)),
-            arguments(WinningRank.NO_WIN,Arrays.asList(7, 8, 9, 10, 11, 12))
+            arguments(WinningRank.FIRST, Arrays.asList(1, 2, 3, 4, 5, 6)),
+            arguments(WinningRank.THIRD, Arrays.asList(1, 2, 3, 4, 5, 7)),
+            arguments(WinningRank.FOURTH, Arrays.asList(1, 2, 3, 4, 7, 8)),
+            arguments(WinningRank.FIFTH, Arrays.asList(1, 2, 3, 7, 8, 9)),
+            arguments(WinningRank.MISS, Arrays.asList(1, 2, 7, 8, 9, 10)),
+            arguments(WinningRank.MISS, Arrays.asList(1, 7, 8, 9, 10, 11)),
+            arguments(WinningRank.MISS,Arrays.asList(7, 8, 9, 10, 11, 12))
         );
     }
 }

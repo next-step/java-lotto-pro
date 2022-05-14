@@ -56,6 +56,7 @@ public class LottoResultView {
         for (Entry<WinningRank, Integer> entry : record.entrySet()) {
             System.out.printf((WINNING_STATISTICS) + "%n",
                     entry.getKey().getWinningCount(),
+                    entry.getKey().additionalWinningRankDescription(),
                     entry.getKey().getPrizeMoney(),
                     entry.getValue());
         }

@@ -7,7 +7,8 @@ public class LottoGuideMessage {
     public static final String BONUS_BALL_INPUT = "보너스 볼을 입력해 주세요.";
     public static final String WINNING_STATISTICS_GUIDE = "당첨 통계";
     public static final String DIVIDE_LINE = "---------";
-    public static final String WINNING_STATISTICS = "%s개 일치(%s원)- %s개";
+    public static final String WINNING_STATISTICS = "%s개 일치%s(%s원)- %s개";
+    public static final String WINNING_STATISTICS_BONUS_BALL = ", 보너스 볼 일치";
     public static final String TOTAL_PROFIT_RATE = "총 수익률은 %2.2f입니다.%s";
     public static final String TOTAL_PROFIT_RATE_ADDITIONAL_DESCRIPTION = "(기준이 1이기 때문에 결과적으로는 %s라는 의미임)";
     public static final String PROFIT_NO_CHANGE = "변동없음";
