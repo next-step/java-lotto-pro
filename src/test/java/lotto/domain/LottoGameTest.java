@@ -26,8 +26,8 @@ class LottoGameTest {
                 new Lotto(1, 2, 3, 4, 5, 7),
                 new Lotto(1, 2, 3, 4, 7, 8),
                 new Lotto(1, 2, 3, 7, 8, 9));
-        MyLotto myLotto = new MyLotto(lottoList);
-        LottoGame game = new LottoGame(myLotto, "1, 2, 3, 4, 5, 6");
+        PurchasedLottos purchasedLottos = new PurchasedLottos(lottoList);
+        LottoGame game = new LottoGame(purchasedLottos, "1, 2, 3, 4, 5, 6");
         game.showLottoStatistics();
     }
 
@@ -35,8 +35,8 @@ class LottoGameTest {
     public void 로또_총_수익률_출력하기() {
         List<Lotto> lottoList = Arrays.asList(
                 new Lotto(1, 2, 3, 4, 5, 6));
-        MyLotto myLotto = new MyLotto(lottoList);
-        LottoGame game = new LottoGame(new Money(1000), myLotto, "1, 2, 3, 4, 5, 6");
+        PurchasedLottos purchasedLottos = new PurchasedLottos(lottoList);
+        LottoGame game = new LottoGame(new Money(1000), purchasedLottos, "1, 2, 3, 4, 5, 6");
         game.showLottoStatistics();
         game.showLottoProfit();
     }

@@ -8,8 +8,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class MyLottoTest {
-    private MyLotto myLotto;
+class PurchasedLottosTest {
+    private PurchasedLottos purchasedLottos;
 
     @BeforeEach
     public void beforeEach() {
@@ -17,12 +17,12 @@ class MyLottoTest {
                 new Lotto(1, 2, 3, 4, 5, 6),
                 new Lotto(1, 3, 5, 7, 9, 11),
                 new Lotto(2, 4, 6, 8, 10, 12));
-        myLotto = new MyLotto(lottoList);
+        purchasedLottos = new PurchasedLottos(lottoList);
     }
 
     @Test
     void 로또_전체_비교_랭킹_개수_찾기() {
-        List<Ranking> rankings = myLotto.compareLottos(new Lotto(1, 2, 3, 4, 5, 6));
+        List<Ranking> rankings = purchasedLottos.compareLottos(new Lotto(1, 2, 3, 4, 5, 6));
 
         long firstRankingCount = rankings.stream()
                 .filter(rank -> rank == Ranking.FIRST)

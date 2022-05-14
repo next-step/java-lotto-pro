@@ -15,7 +15,7 @@ import static lotto.view.InputView.REQUEST_MONEY;
 public class LottoGame {
     private static final List<LottoNo> lottoNumbers = new ArrayList<>();
     private Money money = new Money(0);
-    private MyLotto myLotto = new MyLotto();
+    private PurchasedLottos purchasedLottos = new PurchasedLottos();
     private LottoResult result = new LottoResult();
     private String lastWinningNumbers = "";
 
@@ -36,14 +36,14 @@ public class LottoGame {
         this(Long.parseLong(money));
     }
 
-    public LottoGame(MyLotto myLotto, String lastWinningNumbers) {
-        this.myLotto = myLotto;
+    public LottoGame(PurchasedLottos purchasedLottos, String lastWinningNumbers) {
+        this.purchasedLottos = purchasedLottos;
         this.lastWinningNumbers = lastWinningNumbers;
     }
 
-    public LottoGame(Money money, MyLotto myLotto, String lastWinningNumbers) {
+    public LottoGame(Money money, PurchasedLottos purchasedLottos, String lastWinningNumbers) {
         this.money = money;
-        this.myLotto = myLotto;
+        this.purchasedLottos = purchasedLottos;
         this.lastWinningNumbers = lastWinningNumbers;
     }
 
@@ -69,11 +69,11 @@ public class LottoGame {
         for (int i = 0; i < lottoQuantity; i++) {
             lottoList.add(generateLotto());
         }
-        myLotto = new MyLotto(lottoList);
+        purchasedLottos = new PurchasedLottos(lottoList);
     }
 
     public void printMyLotto() {
-        List<Lotto> lottoList = myLotto.getLottoList();
+        List<Lotto> lottoList = purchasedLottos.getLottoList();
         for (Lotto lotto : lottoList) {
             OutputView.printMessage(lotto.toString());
         }
@@ -86,7 +86,7 @@ public class LottoGame {
     }
 
     public void showLottoStatistics() {
-        List<Ranking> rankings = myLotto.compareLottos(new Lotto(lastWinningNumbers));
+        List<Ranking> rankings = purchasedLottos.compareLottos(new Lotto(lastWinningNumbers));
         result = new LottoResult(rankings);
         OutputView.printMessage("당첨 통계");
         OutputView.printMessage("---------");
