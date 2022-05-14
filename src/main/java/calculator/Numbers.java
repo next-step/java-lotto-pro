@@ -12,6 +12,10 @@ public class Numbers {
         checkNumbersRange();
     }
 
+    public int sum() {
+        return numbers.stream().reduce(0, Integer::sum);
+    }
+
     private List<Integer> convertToNumbers(String[] inputs) {
         try {
             return Arrays.stream(inputs).map(Integer::valueOf).collect(Collectors.toList());
