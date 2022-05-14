@@ -40,7 +40,7 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
 
 LottoNumber
 - [X] 1~45 범위의 숫자를 가진다.
-- [ ] 값 객체이다.
+- [X] 값 객체이다.
 
 Lotto
 - [ ] LottoNumber를 6개 가지고 있다. 
