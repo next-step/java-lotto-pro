@@ -3,13 +3,17 @@ package lotto.model;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class WinningList {
+public final class WinningList {
 	private Map<WinningMoney, Integer> winningList;
-	private long sum;
 
 	public WinningList() {
 		winningList = new LinkedHashMap<>();
 		initWinningList();
+	}
+
+	public WinningList(Lottos lottos, LottoNumbers winningLottoNumbers) {
+		this();
+		match(lottos, winningLottoNumbers);
 	}
 
 	public Map<WinningMoney, Integer> getWinningList() {
@@ -22,19 +26,15 @@ public class WinningList {
 		}
 	}
 
-	public void increase(WinningMoney winningMoney) {
+	private void match(Lottos lottos, LottoNumbers winningLottoNumbers) {
+		for (LottoNumbers lottoNumbers : lottos.getLottos()) {
+			int count = winningLottoNumbers.countEqualsLottoNumber(lottoNumbers);
+			increase(WinningMoney.find(count));
+		}
+	}
+
+	private void increase(WinningMoney winningMoney) {
 		winningList.put(winningMoney, winningList.get(winningMoney) + 1);
 	}
 
-	public double profitRate(UserMoney userMoney) {
-		return (double) totalWinningMoney() / userMoney.useMoney();
-	}
-	
-	private long totalWinningMoney() {
-		sum = 0;
-		winningList.forEach((winningMoney, count) -> {
-			sum += winningMoney.winningMoney(count);
-		});
-		return sum;
-	}
 }

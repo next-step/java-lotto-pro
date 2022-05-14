@@ -3,6 +3,7 @@ package view;
 import java.util.List;
 
 import lotto.model.LottoNumbers;
+import lotto.model.Lottos;
 import lotto.model.WinningList;
 import lotto.model.WinningMoney;
 
@@ -14,10 +15,10 @@ public class ResultView {
 	private ResultView() {
 	}
 
-	public static void printLottos(List<LottoNumbers> lottos) {
-		System.out.println(lottoNumbersTitleStringFormat(lottos));
-		for (int i = 0; i < lottos.size(); ++i) {
-			System.out.println(lottoNumbersStringFormat(lottos.get(i)));
+	public static void printLottos(Lottos lottos) {
+		System.out.println(lottoNumbersTitleStringFormat(lottos.getLottos()));
+		for (int i = 0; i < lottos.getLottos().size(); ++i) {
+			System.out.println(lottoNumbersStringFormat(lottos.getLottos().get(i)));
 		}
 	}
 

@@ -3,7 +3,7 @@ package lotto.model;
 import util.NumberUtil;
 
 public final class UserMoney {
-	private static final int LOTTO_PRICE = 1000;
+	private static final int MIN_MONEY = 0;
 	private int money;
 
 	public UserMoney(String money) {
@@ -15,14 +15,6 @@ public final class UserMoney {
 		return this.money;
 	}
 
-	public int useMoney() {
-		return canBuyLotto() * LOTTO_PRICE;
-	}
-
-	public int canBuyLotto() {
-		return this.money / LOTTO_PRICE;
-	}
-
 	private void validation(String money) {
 		if (!NumberUtil.isNumber(money)) {
 			throw new IllegalArgumentException(String.format("nubmer: %d 숫자가 아닙니다.", money));
@@ -30,11 +22,11 @@ public final class UserMoney {
 
 		if (!isRange(Integer.parseInt(money))) {
 			throw new IllegalArgumentException(
-					String.format("nubmer: %d %d보다 작은 수가 입력되었습니다.", Integer.parseInt(money), LOTTO_PRICE));
+					String.format("nubmer: %d %d보다 작은 수가 입력되었습니다.", Integer.parseInt(money), MIN_MONEY));
 		}
 	}
 
 	private boolean isRange(int money) {
-		return money >= LOTTO_PRICE;
+		return money >= MIN_MONEY;
 	}
 }

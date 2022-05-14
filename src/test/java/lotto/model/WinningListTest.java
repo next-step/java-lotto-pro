@@ -2,6 +2,9 @@ package lotto.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,21 +17,13 @@ public class WinningListTest {
 	}
 
 	@Test
-	@DisplayName("당첨내역 증가 테스트")
-	void increase_winningMoney() {
-		WinningList winningList = new WinningList();
-		winningList.increase(WinningMoney.SIX);
-		winningList.increase(WinningMoney.SIX);
-		winningList.increase(WinningMoney.SIX);
-		assertEquals(winningList.getWinningList().get(WinningMoney.SIX), 3);
-	}
+	@DisplayName("당첨내역 생성 테스트")
+	void create_winningList_data() {
+		List<LottoNumbers> lottos = new ArrayList<>();
+		lottos.add(new LottoNumbers("1,2,3,4,5,6"));
+		Lottos tempLottos = new Lottos(lottos);
 
-	@Test
-	@DisplayName("수익률 테스트")
-	void profitRate() {
-		WinningList winningList = new WinningList();
-		winningList.increase(WinningMoney.SIX);
-		winningList.increase(WinningMoney.FIVE);
-		assertEquals(winningList.profitRate(new UserMoney("2000")), (1500000 + 2000000000) / 2000);
+		assertEquals(
+				new WinningList(tempLottos, new LottoNumbers("1,2,3,4,5,6")).getWinningList().get(WinningMoney.SIX), 1);
 	}
 }
