@@ -32,7 +32,7 @@ public class LottoPaperTest {
     @Test
     void invalidInputTest() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoPaper((Lotto[]) null));
+                .isThrownBy(() -> new LottoPaper(null));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoPaper(Collections.emptyList().toArray(new Lotto[0])));
@@ -42,7 +42,7 @@ public class LottoPaperTest {
     @Test
     void checkAllTest() {
         Lotto result = new Lotto(LottoTest.createLottoNumberArray(new int[]{1, 2, 3, 10, 11, 12}));
-        assertThat(new LottoPaper(basicLottoArray).checkAll(result)).isEqualTo(new Total(Hit.THREE, Hit.THREE));
+        assertThat(new LottoPaper(basicLottoArray).checkAll(result)).isEqualTo(new LottoResult(new Hit[] {Hit.THREE, Hit.THREE}));
     }
 
     @DisplayName("checkAll 메소드 호출시 null 을 입력할수 없다.")

@@ -12,12 +12,12 @@ public class LottoPaper {
         this.purchaseList = Arrays.asList(lottoArray);
     }
 
-    public Total checkAll(final Lotto answerLotto) {
+    public LottoResult checkAll(final Lotto answerLotto) {
         if (Objects.isNull(answerLotto)) {
             throw new IllegalArgumentException("invalid check all input");
         }
 
-        return new Total(purchaseList.stream()
+        return new LottoResult(purchaseList.stream()
                 .map((lotto) -> lotto.checkTo(answerLotto))
                 .toArray(Hit[]::new));
     }

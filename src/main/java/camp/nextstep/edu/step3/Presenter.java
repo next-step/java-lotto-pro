@@ -24,10 +24,10 @@ public class Presenter {
         return ints;
     }
 
-    public void printResult(final Total total, final EarningsRate earningsRate) {
+    public void printResult(final LottoResult result, final EarningsRate earningsRate) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.print(total);
+        System.out.print(result);
         System.out.println(earningsRate);
     }
 }

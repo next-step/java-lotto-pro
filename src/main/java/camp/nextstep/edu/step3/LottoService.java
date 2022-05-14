@@ -15,7 +15,7 @@ public class LottoService {
         final int purchaseAmount = presenter.askPurchaseAmount();
         final LottoPaper lottoPaper = machine.issued(purchaseAmount);
         presenter.printLottoList(lottoPaper);
-        final Total total = lottoPaper.checkAll(generator.manual(presenter.askLastWeekWinningNumber()));
-        presenter.printResult(total, total.result(purchaseAmount));
+        final LottoResult result = lottoPaper.checkAll(generator.manual(presenter.askLastWeekWinningNumber()));
+        presenter.printResult(result, result.result(purchaseAmount));
     }
 }

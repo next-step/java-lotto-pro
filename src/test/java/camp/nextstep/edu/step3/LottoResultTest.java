@@ -10,13 +10,13 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class TotalTest {
+public class LottoResultTest {
 
     @DisplayName("Hit Three 부터 값을 저장하고 있다.")
     @ParameterizedTest
     @MethodSource("provideParametersFromCreateTest")
     void createTest(final Hit[] input, final Hit[] other) {
-        assertThat(new Total(input)).isEqualTo(new Total(other));
+        assertThat(new LottoResult(input)).isEqualTo(new LottoResult(other));
     }
 
     private static Stream<Arguments> provideParametersFromCreateTest() {
@@ -31,7 +31,7 @@ public class TotalTest {
     @MethodSource("provideResultInputAndToTalAmount")
     void resultTest(final Hit[] input, final int totalAmount) {
         final int userBuyAmount = 14000;
-        assertThat(new Total(input).result(userBuyAmount)).isEqualTo(new EarningsRate(totalAmount, userBuyAmount));
+        assertThat(new LottoResult(input).result(userBuyAmount)).isEqualTo(new EarningsRate(totalAmount, userBuyAmount));
     }
 
     private static Stream<Arguments> provideResultInputAndToTalAmount() {
@@ -44,7 +44,7 @@ public class TotalTest {
     @DisplayName("출력 테스트")
     @Test
     void printTest() {
-        assertThat(new Total(Hit.THREE, Hit.FOUR).toString())
+        assertThat(new LottoResult(new Hit[] {Hit.THREE, Hit.FOUR}).toString())
                 .isEqualTo("3개 일치 (5000원)- 1개\n" + "4개 일치 (50000원)- 1개\n" + "5개 일치 (1500000원)- 0개\n" + "6개 일치 (2000000000원)- 0개\n");
     }
 }

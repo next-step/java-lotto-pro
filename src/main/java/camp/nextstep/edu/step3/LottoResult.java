@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Total {
-    private final Map<Hit, Integer> totalHitMap = new HashMap<>();
+public class LottoResult {
+    private final Map<Hit, Integer> resultMap = new HashMap<>();
 
-    public Total(Hit[] hits) {
+    public LottoResult(Hit[] hits) {
         for (Hit hit : hits) {
             increase(hit);
         }
@@ -19,13 +19,13 @@ public class Total {
 
     private void increase(final Hit hit) {
         if (Hit.TWO.isLow(hit)) {
-            totalHitMap.put(hit, totalHitMap.getOrDefault(hit, 0) + 1);
+            resultMap.put(hit, resultMap.getOrDefault(hit, 0) + 1);
         }
     }
 
     private double totalPrizeAmount() {
-        return totalHitMap.keySet().stream()
-                .mapToDouble((hit) -> hit.cost(totalHitMap.get(hit)))
+        return resultMap.keySet().stream()
+                .mapToDouble((hit) -> hit.cost(resultMap.get(hit)))
                 .sum();
     }
 
@@ -33,13 +33,13 @@ public class Total {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Total total = (Total) o;
-        return Objects.equals(totalHitMap, total.totalHitMap);
+        LottoResult result = (LottoResult) o;
+        return Objects.equals(resultMap, result.resultMap);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalHitMap);
+        return Objects.hash(resultMap);
     }
 
     @Override
@@ -52,6 +52,6 @@ public class Total {
     }
 
     private String printFormat(final Hit hit) {
-        return String.format(hit + "- %d개\n", totalHitMap.getOrDefault(hit, 0));
+        return String.format(hit + "- %d개\n", resultMap.getOrDefault(hit, 0));
     }
 }
