@@ -41,4 +41,7 @@ public class WinningLotto {
         }
     }
 
+    public LottoGameResult compareLottos(Lottos lottos) {
+        return new LottoGameResult();
+    }
 }
