@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public enum WinningRank {
     FIRST(2000000000),

@@ -1,5 +1,6 @@
-package lotto;
+package lotto.domain;
 
+import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static lotto.WinningRank.FIRST;
+import static lotto.domain.WinningRank.FIRST;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoNumbersTest {

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.utils;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
