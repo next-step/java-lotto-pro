@@ -2,6 +2,7 @@ package lotto.controller;
 
 import static lotto.constants.LottoConstants.LOTTO_TICKET_PRICE;
 
+import java.util.Collections;
 import java.util.List;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTickets;
@@ -44,6 +45,8 @@ public class LottoController {
 
     private void reportingLottoResult(int purchasedTicketsCount, LottoWinningResults winningResults) {
         List<LottoRank> prizedRanks = LottoRank.getPrizedRanks();
+
+        Collections.sort(prizedRanks,Collections.reverseOrder());
 
         for (LottoRank prizedRank : prizedRanks) {
             printWinningStatistics(winningResults, prizedRank);
