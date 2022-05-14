@@ -50,4 +50,12 @@ public class LottoTicketTest {
             Arguments.of(Arrays.asList("11", "23", "41", "9", "8", "7"), 0)
         );
     }
+
+    @Test
+    @DisplayName("로또 번호를 가져올수 있어야한다")
+    public void getLottoNumbersTest(){
+        List<String> lottoSource = Arrays.asList("1", "2", "3", "4", "5", "6");
+        LottoTicket lotto = LottoTicket.create(lottoSource);
+        assertThat(lotto.getLottoNumbers()).containsExactly("1", "2", "3", "4", "5", "6");
+    }
 }

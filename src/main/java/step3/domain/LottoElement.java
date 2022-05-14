@@ -21,6 +21,10 @@ public class LottoElement {
         }
     }
 
+    public String getElement() {
+        return String.valueOf(element);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

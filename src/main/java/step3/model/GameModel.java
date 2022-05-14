@@ -87,4 +87,9 @@ public class GameModel {
             statistics.put(i, 0);
         }
     }
+
+    public List<List<String>> getLottoNumbers() {
+        return tickets.stream().map(LottoTicket::getLottoNumbers)
+            .collect(Collectors.toList());
+    }
 }

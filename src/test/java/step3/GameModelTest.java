@@ -63,17 +63,38 @@ public class GameModelTest {
     @Test
     @DisplayName("각 로또별 매칭 갯수를 HashMap으로 반환한다")
     public void testCheckWin() {
-        List<LottoTicket> tickets = new ArrayList<>();
-        tickets.add(LottoTicket.create(Arrays.asList("1", "2", "3", "4", "5", "6")));
-        tickets.add(LottoTicket.create(Arrays.asList("1", "2", "3", "4", "8", "7")));
-        tickets.add(LottoTicket.create(Arrays.asList("1", "2", "3", "9", "8", "7")));
-        tickets.add(LottoTicket.create(Arrays.asList("1", "2", "3", "9", "8", "7")));
-        tickets.add(LottoTicket.create(Arrays.asList("1", "2", "10", "9", "8", "7")));
-        GameModel testModel = new GameModel(tickets);
+        GameModel testModel = initTestModel();
 
         assertThat(testModel.checkWin("1,2,3,4,5,6"))
             .containsEntry(THREE_NUMBER_MATCH, 2)
             .containsEntry(FOUR_NUMBER_MATCH, 1)
             .containsEntry(SIX_NUMBER_MATCH, 1);
     }
+
+    @Test
+    @DisplayName("로또 번호를 가져올수 있어야한다")
+    public void getLottoNumbersTest() {
+        GameModel testModel = initTestModel();
+        assertThat(testModel.getLottoNumbers().toString())
+            .isEqualTo("[[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 7, 8], [1, 2, 3, 7, 8, 9], [1, 2, 3, 7, 8, 9], [1, 2, 7, 8, 9, 10]]");
+
+    }
+
+    private GameModel initTestModel() {
+        List<LottoTicket> tickets = new ArrayList<>();
+        List<List<String>> lottoSources = new ArrayList<>();
+        lottoSources.add(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        lottoSources.add(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        lottoSources.add(Arrays.asList("1", "2", "3", "4", "7", "8"));
+        lottoSources.add(Arrays.asList("1", "2", "3", "7", "8", "9"));
+        lottoSources.add(Arrays.asList("1", "2", "3", "7", "8", "9"));
+        lottoSources.add(Arrays.asList("1", "2", "7", "8", "9", "10"));
+
+        for (int i = 0; i < lottoSources.size(); i++) {
+            tickets.add(LottoTicket.create(lottoSources.get(i)));
+        }
+
+        return new GameModel(tickets);
+    }
+
 }
