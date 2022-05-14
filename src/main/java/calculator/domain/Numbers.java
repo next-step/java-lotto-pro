@@ -12,7 +12,7 @@ public class Numbers {
 		}
 	}
 
-	public int total() {
+	public int totalSum() {
 		return numbers.stream()
 			.reduce(Number::sum)
 			.orElse(new Number(0))

@@ -16,6 +16,6 @@ class NumbersTest {
 	@DisplayName("총합을 계산한다.")
 	void total(String csvValue, int expected) {
 		Numbers numbers = new Numbers(csvValue.split(","));
-		assertThat(numbers.total()).isEqualTo(expected);
+		assertThat(numbers.totalSum()).isEqualTo(expected);
 	}
 }

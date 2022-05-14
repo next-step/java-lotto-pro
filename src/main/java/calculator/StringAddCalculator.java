@@ -21,7 +21,7 @@ public class StringAddCalculator {
 	private static int sum(String[] strNumbers) {
 		Numbers numbers = new Numbers(strNumbers);
 
-		return numbers.total();
+		return numbers.totalSum();
 	}
 
 	private static String[] split(String strNumbers) {
