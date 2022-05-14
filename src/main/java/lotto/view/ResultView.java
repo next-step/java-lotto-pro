@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Arrays;
+import lotto.constant.ErrorMessage;
 import lotto.constant.LottoRank;
 import lotto.model.Lotto;
 import lotto.model.LottoGameResult;
@@ -14,6 +15,10 @@ public class ResultView {
     private static final String RESULT_MATCH_MESSAGE = "%d개 일치 (%d원)- %d개";
     private static final String RESULT_PROFIT_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String ENTER = "\n";
+
+    private ResultView() {
+        throw new IllegalStateException(ErrorMessage.CONSTANT_CLASS);
+    }
 
     private static String resultPurchaseView(Lottos lottos) {
         return String.format(PURCHASE_MESSAGE, lottos.lottoCount());
@@ -33,11 +38,12 @@ public class ResultView {
     public static void printFinalResultView(LottoGameResult lottoGameResult, Lottos lottos) {
         StringBuilder resultView = new StringBuilder();
         setHeader(resultView);
-        for (LottoRank lottoRank : LottoRank.values()) {
+        for (LottoRank lottoRank : LottoRank.valuesExcludeNone()) {
             String matchMessage = String
                     .format(RESULT_MATCH_MESSAGE, lottoRank.getMatchNumberCount(), lottoRank.getWinningAmount(),
                             lottoGameResult.rankCount(lottoRank));
             resultView.append(matchMessage);
+            resultView.append(ENTER);
         }
         setProfitRateView(resultView,lottos.calcProfitRate(lottoGameResult.totalWinningAmount()));
         printConsole(resultView.toString());
@@ -48,6 +54,7 @@ public class ResultView {
         resultView.append(TOTAL_RESULT_HEADER_MESSAGE);
         resultView.append(ENTER);
         resultView.append(TOTAL_RESULT_UNDER_LINE);
+        resultView.append(ENTER);
     }
 
     public static void printConsole(String view) {
