@@ -17,16 +17,6 @@ public class Application {
         playLotto(lottoGameDTO);
     }
 
-    private void playLotto(LottoGameDTO requestLottoGameDTO) throws IOException {
-        boolean isInputError;
-        LottoGameDTO lottoGameDTO;
-        do {
-            String winningNumbersWord = InputConsoleUtils.readLineForMessage(LottoGameMessage.INPUT_WINNING_NUMBERS_MESSAGE);
-            lottoGameDTO = lottoGameController.resultWinningGame(requestLottoGameDTO.getLottos(), winningNumbersWord);
-            isInputError = lottoGameDTO.isInputError();
-        } while (isInputError);
-    }
-
     private LottoGameDTO generateLottosByInputMoney() throws IOException {
         boolean isInputError;
         LottoGameDTO lottoGameDTO;
@@ -37,5 +27,17 @@ public class Application {
         } while (isInputError);
         return lottoGameDTO;
     }
+
+    private void playLotto(LottoGameDTO requestLottoGameDTO) throws IOException {
+        boolean isInputError;
+        LottoGameDTO lottoGameDTO;
+        do {
+            String winningNumbersWord = InputConsoleUtils
+                    .readLineForMessage(LottoGameMessage.INPUT_WINNING_NUMBERS_MESSAGE);
+            lottoGameDTO = lottoGameController.resultWinningGame(requestLottoGameDTO.getLottos(), winningNumbersWord);
+            isInputError = lottoGameDTO.isInputError();
+        } while (isInputError);
+    }
+
 
 }

@@ -18,20 +18,6 @@ public class LottoGameController {
 
     private static final String DELIMITER_COMMA = ",";
 
-    public LottoGameDTO resultWinningGame(Lottos lottos, String winningNumbersWord) {
-        try {
-            List<Integer> winningNumberList = InputStringUtils
-                    .splitToNumberListByDelimiter(winningNumbersWord, DELIMITER_COMMA);
-            WinningLotto winningLotto = new WinningLotto(winningNumberList);
-            LottoGameResult lottoGameResult = winningLotto.compareLottos(lottos);
-            ResultView.printFinalResultView(lottoGameResult, lottos);
-            return new LottoGameDTO(lottos, false);
-        } catch (IllegalArgumentException e) {
-            ResultView.printConsole(e.getMessage());
-            return new LottoGameDTO(true);
-        }
-    }
-
     public LottoGameDTO generateLottosByMoney(String moneyWord) {
         try {
             LottoStore lottoStore = new LottoStore(moneyWord);
@@ -54,5 +40,19 @@ public class LottoGameController {
             lottoList.add(new Lotto(randomNumberToList));
         }
         return new Lottos(lottoList);
+    }
+
+    public LottoGameDTO resultWinningGame(Lottos lottos, String winningNumbersWord) {
+        try {
+            List<Integer> winningNumberList = InputStringUtils
+                    .splitToNumberListByDelimiter(winningNumbersWord, DELIMITER_COMMA);
+            WinningLotto winningLotto = new WinningLotto(winningNumberList);
+            LottoGameResult lottoGameResult = winningLotto.compareLottos(lottos);
+            ResultView.printFinalResultView(lottoGameResult, lottos);
+            return new LottoGameDTO(lottos, false);
+        } catch (IllegalArgumentException e) {
+            ResultView.printConsole(e.getMessage());
+            return new LottoGameDTO(true);
+        }
     }
 }
