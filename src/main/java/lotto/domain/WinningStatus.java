@@ -11,7 +11,6 @@ public class WinningStatus {
     public WinningStatus(List<Rank> ranks) {
         this.value = ranks.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
     }
 
     public static WinningStatus from(List<Rank> ranks) {
