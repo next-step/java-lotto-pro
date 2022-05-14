@@ -8,11 +8,11 @@ public class IntegerArrayConverter extends SimpleArgumentConverter {
 
     @Override
     protected Object convert(Object source, Class<?> targetType) throws ArgumentConversionException {
-        if (source instanceof String && Integer[].class.isAssignableFrom(targetType)) {
+        if (source instanceof String && int[].class.isAssignableFrom(targetType)) {
             String[] split = ((String) source).split("\\s*#\\s*");
-            Integer[] numbers = new Integer[split.length];
+            int[] numbers = new int[split.length];
             for (int i = 0; i < split.length; i++) {
-                numbers[i] = Integer.valueOf(split[i]);
+                numbers[i] = Integer.parseInt(split[i]);
             }
             return numbers;
         } else {

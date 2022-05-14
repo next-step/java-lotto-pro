@@ -18,8 +18,8 @@ public class StringAddCalculatorTest2 {
             "1,2^1#2",
             "1,3,5^1#3#5",
     })
-    public void splitForNumberTest01(String input, @ConvertWith(IntegerArrayConverter.class) Integer[] expected) {
-        Integer[] numbers = StringAddCalculator.splitForNumber(input);
+    public void splitForNumberTest01(String input, @ConvertWith(IntegerArrayConverter.class) int[] expected) {
+        int[] numbers = StringAddCalculator.splitForNumber(input);
         assertThat(numbers)
                 .hasSize(expected.length)
                 .isEqualTo(expected);
@@ -31,8 +31,8 @@ public class StringAddCalculatorTest2 {
             "1:2^1#2",
             "1:3:5^1#3#5",
     })
-    public void splitForNumberTest02(String input, @ConvertWith(IntegerArrayConverter.class) Integer[] expected) {
-        Integer[] numbers = StringAddCalculator.splitForNumber(input);
+    public void splitForNumberTest02(String input, @ConvertWith(IntegerArrayConverter.class) int[] expected) {
+        int[] numbers = StringAddCalculator.splitForNumber(input);
         assertThat(numbers)
                 .hasSize(expected.length)
                 .isEqualTo(expected);
@@ -48,7 +48,7 @@ public class StringAddCalculatorTest2 {
     })
     public void splitForNumberTest03(String input) {
         assertThatThrownBy(() -> {
-            Integer[] numbers = StringAddCalculator.splitForNumber(input);
+            int[] numbers = StringAddCalculator.splitForNumber(input);
         }).isInstanceOf(RuntimeException.class);
     }
 
@@ -58,7 +58,7 @@ public class StringAddCalculatorTest2 {
             "1#2^3",
             "1#3#5^9",
     })
-    public void sumTest01(@ConvertWith(IntegerArrayConverter.class) Integer[] input, int expected) {
+    public void sumTest01(@ConvertWith(IntegerArrayConverter.class) int[] input, int expected) {
         int sum = StringAddCalculator.sum(input);
         assertThat(sum)
                 .isEqualTo(expected);

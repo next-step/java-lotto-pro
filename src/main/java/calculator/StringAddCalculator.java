@@ -1,6 +1,9 @@
 package calculator;
 
 public class StringAddCalculator {
+    private final static int CUSTOM_DELIMITER_INDEX = 0;
+    private final static int CUSTOM_INPUT_INDEX = 1;
+
     private StringAddCalculator() {
     }
 
@@ -8,11 +11,11 @@ public class StringAddCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        Integer[] splitNumbers = splitForNumber(input);
+        int[] splitNumbers = splitForNumber(input);
         return sum(splitNumbers);
     }
 
-    static int sum(Integer[] integers) {
+    static int sum(int[] integers) {
         int result = 0;
         for (Integer integer : integers) {
             result += integer;
@@ -20,30 +23,30 @@ public class StringAddCalculator {
         return result;
     }
 
-    static Integer[] splitForNumber(String input) {
-        if (input.startsWith("//") && input.contains("\n")) {
+    static int[] splitForNumber(String input) {
+        if (input.startsWith("//") && input.contains(System.lineSeparator())) {
             return splitCustomDelimiter(input);
         }
         return splitFormalDelimiter(input);
     }
 
-    private static Integer[] splitFormalDelimiter(String input) {
+    private static int[] splitFormalDelimiter(String input) {
         return splitWithDelimiter(input, ",|:");
     }
 
-    private static Integer[] splitCustomDelimiter(String input) {
+    private static int[] splitCustomDelimiter(String input) {
         String[] split = input.split("\n");
-        String customDelimiter = split[0].substring(2);
-        return splitWithDelimiter(split[1], customDelimiter);
+        String customDelimiter = split[CUSTOM_DELIMITER_INDEX].substring(2);
+        return splitWithDelimiter(split[CUSTOM_INPUT_INDEX], customDelimiter);
     }
 
-    private static Integer[] splitWithDelimiter(String input, String delimiter) {
+    private static int[] splitWithDelimiter(String input, String delimiter) {
         String[] split = input.split(delimiter);
         return mapStringArrayToIntegerArray(split);
     }
 
-    private static Integer[] mapStringArrayToIntegerArray(String[] strings) {
-        Integer[] integers = new Integer[strings.length];
+    private static int[] mapStringArrayToIntegerArray(String[] strings) {
+        int[] integers = new int[strings.length];
         for (int i = 0; i < strings.length; i++) {
             integers[i] = mapStringToPositiveInteger(strings[i]);
         }
@@ -59,10 +62,6 @@ public class StringAddCalculator {
     }
 
     private static Integer mapStringToInteger(String string) {
-        try {
-            return Integer.valueOf(string);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException(e);
-        }
+        return Integer.valueOf(string);
     }
 }
