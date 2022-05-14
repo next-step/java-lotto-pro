@@ -26,4 +26,8 @@ public class Money {
     public int getAmount() {
         return amount;
     }
+
+    public int lottoCountToBuy() {
+        return amount/ LOTTO_PRICE;
+    }
 }
