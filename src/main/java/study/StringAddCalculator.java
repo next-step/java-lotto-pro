@@ -12,17 +12,17 @@ public class StringAddCalculator {
         if (StringUtil.isNullOrEmpty(text)) {
             return 0;
         }
-        if (CalculatorInputUtil.hasCustomDelimiter(text)) {
-            return sumNumbers(convertStringArrayToIntArray(
-                CalculatorInputUtil.splitTextWithCustomDelimiter(text)));
-        }
-        return sumNumbers(convertStringArrayToIntArray(StringUtil.splitText(text, CalculatorInputUtil.DELIMITER)));
+        return sumNumbers(checkNegativeNumberOrThrow(
+            convertStringArrayToIntArray(CalculatorInputUtil.splitTextWithDelimiter(text))));
     }
 
-    public static void checkNegativeNumber(int number) {
-        if (number < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+    private static int[] checkNegativeNumberOrThrow(int[] numbers) {
+        for (int number : numbers) {
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
         }
+        return numbers;
     }
 
     private static int sumNumbers(int[] numbers) {
