@@ -9,6 +9,7 @@ import java.util.Set;
 
 public class Lotto {
     public static final int LOTTO_SIZE_NUM = 6;
+    public static final int MATCH_COUNT_ZERO = 0;
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
@@ -25,11 +26,21 @@ public class Lotto {
     }
 
     public static Lotto draw(LottoNumberGenerator lottoNumberGenerator) {
-        List<LottoNumber> lotto = new ArrayList<>();
-        for (LottoNumber lottoNumber : lottoNumberGenerator.generate()) {
-            lotto.add(lottoNumber);
+        return new Lotto(new ArrayList<>(lottoNumberGenerator.generate()));
+    }
+
+    public LottoRanking lottoRanking(Lotto winningLotto) {
+        int matchCount = MATCH_COUNT_ZERO;
+        for (LottoNumber lottoNumber : this.lotto) {
+            if (winningLotto.containLottoNumber(lottoNumber)) {
+                matchCount++;
+            }
         }
-        return new Lotto(lotto);
+        return LottoRanking.findLottoRankingByMatchCount(matchCount);
+    }
+
+    private boolean containLottoNumber(LottoNumber lottoNumber) {
+        return this.lotto.contains(lottoNumber);
     }
 
     private void validLotto(List<LottoNumber> lotto) {

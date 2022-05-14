@@ -33,4 +33,11 @@ class LottoTest {
                         .withMessage("로또 번호가 중복되었습니다.")
         );
     }
+
+    @DisplayName("당첨 로또 번호와 비교했을때 랭킹에따른 상금(돈) 비교 테스트")
+    @Test
+    void lottoLottoRanking() {
+        Lotto winningLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 7));
+        assertThat(this.lotto.lottoRanking(winningLotto).money()).isEqualTo(Money.from(1500000));
+    }
 }
