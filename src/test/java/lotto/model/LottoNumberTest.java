@@ -48,7 +48,7 @@ class LottoNumberTest {
         LottoNumber pickLottoNumber = new LottoNumber(pickNumber);
         LottoNumber winningLottoNumber = new LottoNumber(winningNumber);
 
-        assertEquals(expected, pickLottoNumber.getLottoRank(winningLottoNumber));
+        assertEquals(expected, pickLottoNumber.resultLottoRank(winningLottoNumber));
     }
 
     public static Stream<Arguments> parameterGetLottoRank() {

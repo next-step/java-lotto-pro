@@ -17,7 +17,7 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public LottoRank getLottoRank(LottoNumber winningLottoNumber) {
+    public LottoRank resultLottoRank(LottoNumber winningLottoNumber) {
         int count = (int) lottoNumber.stream()
                 .filter(winningLottoNumber::isContainNumber)
                 .count();

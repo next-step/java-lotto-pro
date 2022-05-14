@@ -22,7 +22,7 @@ public class LottoNumbers {
 
     public LottoRanks resultLottoRanks(LottoNumber winningLottoNumber) {
         return lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.getLottoRank(winningLottoNumber))
+                .map(lottoNumber -> lottoNumber.resultLottoRank(winningLottoNumber))
                 .collect(collectingAndThen(toList(), LottoRanks::of));
     }
 }
