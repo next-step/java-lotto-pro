@@ -75,9 +75,8 @@ public class LottoInputView {
             && isValidateBonusBallInLastWinningLottoNumbers(lastWinningLottoNumbers, inputBonusBall);
     }
 
-    private boolean isValidateBonusBallInLastWinningLottoNumbers(
-        LottoNumbers lastWinningLottoNumbers, String inputBonusBall) {
-        return !lastWinningLottoNumbers.contains(inputBonusBall);
+    private boolean isValidateBonusBallInLastWinningLottoNumbers(LottoNumbers lastWinningLottoNumbers, String inputBonusBall) {
+        return !lastWinningLottoNumbers.contains(LottoNumber.from(StringToIntegerParser.parseNumber(inputBonusBall)));
     }
 
     private boolean isValidateSplitInputNumbers(String[] splitInputNumbers) {

@@ -53,13 +53,6 @@ public class LottoNumbers {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    public boolean contains(String number) {
-        return this.lottoNumbers
-            .stream()
-            .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
-            .anyMatch(lottoNumber -> lottoNumber.equals(number));
-    }
-
     @Override
     public String toString() {
         return this.lottoNumbers.stream()
