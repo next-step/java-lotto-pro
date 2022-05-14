@@ -9,7 +9,8 @@ public class Lottos implements Iterable<Lotto> {
     private List<Lotto> lottoList;
 
     public Lottos(List<Lotto> list) {
-        this.lottoList = list;
+        this.lottoList = new ArrayList<>();
+        this.lottoList.addAll(list);
     }
 
     public Lottos() {
