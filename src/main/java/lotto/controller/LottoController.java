@@ -46,8 +46,9 @@ public class LottoController {
     private void reportingLottoResult(int purchasedTicketsCount, LottoWinningResults winningResults) {
         List<LottoRank> prizedRanks = LottoRank.getPrizedRanks();
 
-        Collections.sort(prizedRanks,Collections.reverseOrder());
+        prizedRanks.sort(Collections.reverseOrder());
 
+        outputView.printTotalString();
         for (LottoRank prizedRank : prizedRanks) {
             printWinningStatistics(winningResults, prizedRank);
         }
