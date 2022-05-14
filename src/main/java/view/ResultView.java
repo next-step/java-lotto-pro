@@ -11,6 +11,9 @@ public class ResultView {
 	private static final String RIGHT_SQUARE_BRACKET = "]";
 	private static final String COMMA_OWN_SPACE = ", ";
 
+	private ResultView() {
+	}
+
 	public static void printLottos(List<LottoNumbers> lottos) {
 		System.out.println(lottoNumbersTitleStringFormat(lottos));
 		for (int i = 0; i < lottos.size(); ++i) {
