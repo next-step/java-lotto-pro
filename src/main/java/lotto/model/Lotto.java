@@ -1,12 +1,13 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.constant.Config.LOTTO_SIZE;
 
 public class Lotto {
-    private List<LottoNumber> lottoNumber;
+    private final List<LottoNumber> lottoNumber;
 
     public Lotto(List<Integer> numbers) {
         this.validateLotto(numbers);
@@ -16,7 +17,7 @@ public class Lotto {
     }
 
     public List<LottoNumber> getLottoNumber() {
-        return this.lottoNumber;
+        return new ArrayList(this.lottoNumber);
     }
 
     private void validateLotto(List<Integer> numbers) {

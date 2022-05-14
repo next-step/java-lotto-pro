@@ -14,6 +14,7 @@ public class LottoTest {
     @DisplayName("로또 번호는 6개의 수로 이루어져 있다.")
     void 로또_test() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lotto.getLottoNumber().clear();
         assertThat(lotto.getLottoNumber()).hasSize(6);
     }
 
