@@ -8,7 +8,7 @@ public class Splitter {
     private static final String CUSTOM_DELIMITER_REGEX = "^//(.)\n(.*)";
     private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
     private static Matcher matcher;
-
+private Splitter() {}
     public static String[] splitString(String input) {
         boolean isExist = hasCustomDelimiter(input);
         String delimiter = isExist ? matcher.group(1) : DEFAULT_DELIMITERS;
