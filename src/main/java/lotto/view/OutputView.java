@@ -4,6 +4,7 @@ import lotto.domain.*;
 
 import java.util.List;
 
+import static lotto.domain.LottoConstant.LOTTO_MINIMUM_MATCHING_COUNT;
 import static lotto.domain.LottoConstant.LOTTO_SIZE;
 
 public class OutputView {
@@ -15,17 +16,22 @@ public class OutputView {
         OutputView.printLine();
     }
 
+    public static void showLottoResult(LottoResult result, Money money) {
+        showLottoStatistics(result);
+        showLottoProfit(result, money);
+    }
+
     public static void showLottoStatistics(LottoResult result) {
         OutputView.printMessage("당첨 통계");
         OutputView.printMessage("---------");
-        for (int matching = 3; matching <= LOTTO_SIZE; matching++) {
+        for (int matching = LOTTO_MINIMUM_MATCHING_COUNT; matching <= LOTTO_SIZE; matching++) {
             Ranking rank = Ranking.findRank(matching);
             OutputView.printMessage("%d개 일치 (%d원)- %d개\r\n", matching, rank.getReward(), result.findRankings(matching).size());
         }
     }
 
     public static void showLottoProfit(LottoResult result, Money money) {
-        double profit = result.calculateWinningMoney() / money.getAvailableLottoNumbersForPurchase();
+        double profit = result.calculateWinningMoney() / money.getAvailableLottosForPurchase();
         OutputView.printMessage("총 수익률은 %.2f입니다.", profit);
     }
 

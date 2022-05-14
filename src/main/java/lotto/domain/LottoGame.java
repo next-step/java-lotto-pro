@@ -26,7 +26,7 @@ public class LottoGame {
 
     public void play() {
         Money money = readMoney();
-        OutputView.printMessage(money.getAvailableLottoNumbersForPurchase() + "개를 구매했습니다.");
+        OutputView.printMessage(money.getAvailableLottosForPurchase() + "개를 구매했습니다.");
 
         PurchasedLottos purchasedLottos = purchaseLotto(money);
         OutputView.printMyLotto(purchasedLottos);
@@ -35,31 +35,16 @@ public class LottoGame {
         OutputView.printLine();
 
         LottoResult result = matchLottoNumbers(purchasedLottos, lastWinningNumbers);
-        OutputView.showLottoStatistics(result);
-        OutputView.showLottoProfit(result, money);
-    }
-
-    public Money readMoney() {
-        String input = InputView.readUserInput(REQUEST_MONEY);
-        return new Money(input);
+        OutputView.showLottoResult(result, money);
     }
 
     public PurchasedLottos purchaseLotto(Money money) {
-        long lottoQuantity = money.getAvailableLottoNumbersForPurchase();
+        long lottoQuantity = money.getAvailableLottosForPurchase();
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoQuantity; i++) {
             lottoList.add(generateLotto());
         }
         return new PurchasedLottos(lottoList);
-    }
-
-    public LottoResult matchLottoNumbers(PurchasedLottos lottos, String lastWinningNumbers) {
-        List<Ranking> rankings = lottos.compareLottos(new Lotto(lastWinningNumbers));
-        return new LottoResult(rankings);
-    }
-
-    private String readLastWinningNumbers() {
-        return InputView.readUserInput(REQUEST_LAST_WINNING_NUMBERS);
     }
 
     private Lotto generateLotto() {
@@ -68,5 +53,19 @@ public class LottoGame {
                 .limit(LottoConstant.LOTTO_SIZE)
                 .collect(Collectors.toList());
         return new Lotto(lottoNoList);
+    }
+
+    public LottoResult matchLottoNumbers(PurchasedLottos lottos, String lastWinningNumbers) {
+        List<Ranking> rankings = lottos.compareLottos(new Lotto(lastWinningNumbers));
+        return new LottoResult(rankings);
+    }
+
+    private Money readMoney() {
+        String input = InputView.readUserInput(REQUEST_MONEY);
+        return new Money(input);
+    }
+
+    private String readLastWinningNumbers() {
+        return InputView.readUserInput(REQUEST_LAST_WINNING_NUMBERS);
     }
 }

@@ -12,7 +12,7 @@ class MoneyTest {
     @ValueSource(longs = { LOTTO_PRICE, 2 * LOTTO_PRICE, 100 * LOTTO_PRICE })
     void 구매_가능한_로또_개수(long price) {
         Money money = new Money(price);
-        assertThat(money.getAvailableLottoNumbersForPurchase()).isEqualTo(price / LOTTO_PRICE);
+        assertThat(money.getAvailableLottosForPurchase()).isEqualTo(price / LOTTO_PRICE);
     }
 
     @ParameterizedTest
