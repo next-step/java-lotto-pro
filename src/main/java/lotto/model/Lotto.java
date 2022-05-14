@@ -2,7 +2,6 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
@@ -28,7 +27,8 @@ public class Lotto {
         List<LottoNumber> resultNumbers = new ArrayList<>();
 
         //numbers.sort((o1, o2) -> Integer.compare(o1, o2));
-        numbers.sort(Comparator.comparingInt(o -> o));
+        //numbers.sort(Comparator.comparingInt(o -> o));
+        numbers.sort(Integer::compareTo);
 
         for (int number : numbers) {
             resultNumbers.add(new LottoNumber(number));
