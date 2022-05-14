@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.util.RandomUtils;
-
 public class LottoGroups {
     private final List<Lotto> lottoGroups;
 
@@ -15,8 +13,7 @@ public class LottoGroups {
     private List<Lotto> generateLottoGroups(int count) {
         List<Lotto> lottoGroups = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            Lotto lotto = new Lotto(RandomUtils.generateNonDuplicateNumbers());
-            lottoGroups.add(lotto);
+            lottoGroups.add(new Lotto());
         }
         return lottoGroups;
     }
