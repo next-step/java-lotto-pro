@@ -19,7 +19,7 @@ public class LottoAnalyzer {
         final Map<LottoPrize, Integer> results = new EnumMap<>(LottoPrize.class);
         for (Lotto lotto : lottoes) {
             final int matchCount = this.lotto.countMatches(lotto);
-            final LottoPrize lottoPrize = LottoPrize.valueOf(matchCount);
+            final LottoPrize lottoPrize = LottoPrize.valueOf(matchCount, false);
             results.merge(lottoPrize, INIT_VALUE, Integer::sum);
         }
         return new WinningResult(results);
