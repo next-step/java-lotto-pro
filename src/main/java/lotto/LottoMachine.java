@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.lotto.Lotto;
+import lotto.lotto.LottoGenerator;
 import lotto.lotto.WinningLotto;
 import lotto.money.Money;
 import lotto.view.InputView;
@@ -12,12 +13,12 @@ public class LottoMachine {
 
     private final LottoExchanger lottoExchanger;
 
-    LottoMachine(LottoExchanger lottoExchanger) {
-        this.lottoExchanger = requireNonNull(lottoExchanger, "lottoExchanger");
+    public LottoMachine(LottoGenerator lottoGenerator) {
+        this.lottoExchanger = new LottoExchanger(requireNonNull(lottoGenerator, "lottoGenerator"));
     }
 
-    public LottoMachine() {
-        this(new LottoExchanger());
+    LottoMachine() {
+        this(LottoGenerator.random());
     }
 
     public void run(InputView inputView, ResultView resultView) {

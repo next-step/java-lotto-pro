@@ -17,10 +17,6 @@ public class LottoExchanger {
         this.lottoGenerator = requireNonNull(lottoGenerator, "lottoGenerator");
     }
 
-    LottoExchanger() {
-        this(LottoGenerator.random());
-    }
-
     public List<Lotto> exchange(Money money) {
         final List<Lotto> purchasedLottoes = new ArrayList<>();
         Money remainMoney = money;
