@@ -44,9 +44,10 @@ LottoNumber
 
 LottoNumbers
 - [X] 6개의 LottoNumber 를 가질 수 있다.
+- [X] LottoNumber를 포함하고 있는지 여부를 확인할 수 있다.
 
 Lotto
-- [ ] LottoNumber를 6개 가지고 있다. 
+- [ ] LottoNumbers 를 포함한다.
 
 
 

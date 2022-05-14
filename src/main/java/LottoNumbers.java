@@ -15,4 +15,8 @@ public class LottoNumbers {
             throw new RuntimeException();
         }
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }
