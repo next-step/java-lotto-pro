@@ -21,7 +21,7 @@ public class Lotto {
     private final LottoType type;
 
     private Lotto() {
-        this(LottoNumbers.ALL_NUMBERS.pickNumbers(), AUTO);
+        this(LottoNumbers.ALL_NUMBERS.pickNumbersRandom(), AUTO);
     }
     private Lotto(final LottoNumbers pickLottoNumbers, final LottoType type) {
         this.pickLottoNumbers = pickLottoNumbers;

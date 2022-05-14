@@ -27,9 +27,20 @@ class LottoNumbersTest {
     }
 
     @Test
-    void 로또_번호_6개를_선택() {
+    void 로또_번호_6개를_랜덤으로_선택() {
         // when
-        LottoNumbers lottoNumbers = LottoNumbers.ALL_NUMBERS.pickNumbers();
+        LottoNumbers lottoNumbers = LottoNumbers.ALL_NUMBERS.pickNumbersRandom();
+
+        // then
+        assertThat(lottoNumbers.isPicked()).isTrue();
+    }
+
+    @Test
+    void 로또_번호_6개_선택() {
+        // when
+        final LottoNumbers lottoNumbers = LottoNumbers.pickNumbers(range(1, 7)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toList()));
 
         // then
         assertThat(lottoNumbers.isPicked()).isTrue();
