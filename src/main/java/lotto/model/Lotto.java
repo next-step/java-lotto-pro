@@ -14,16 +14,16 @@ public class Lotto {
 
         validateNumbers(numbers);
 
-        this.numbers = integerArraysToLottoNumbers(numbers);
+        this.numbers = toLottoNumbers(numbers);
     }
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
 
-        this.numbers = integerArraysToLottoNumbers(numbers);
+        this.numbers = toLottoNumbers(numbers);
     }
 
-    private List<LottoNumber> integerArraysToLottoNumbers(List<Integer> numbers) {
+    private List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> resultNumbers = new ArrayList<>();
 
         //numbers.sort((o1, o2) -> Integer.compare(o1, o2));
