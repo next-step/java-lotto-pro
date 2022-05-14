@@ -1,6 +1,6 @@
-package lotto.view.model;
+package lotto.model;
 
-import static lotto.view.constants.LottoConstant.LOTTO_PRICE;
+import static lotto.constants.LottoConstant.LOTTO_PRICE;
 
 public class Money {
     private final int amount;
