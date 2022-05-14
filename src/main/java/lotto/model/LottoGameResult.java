@@ -16,10 +16,6 @@ public class LottoGameResult {
         return resultCountMap.getOrDefault(lottoRank,NONE);
     }
 
-    public double calcResultProfitRate() {
-        return 0;
-    }
-
     public int totalWinningAmount() {
         int totalAmount = 0;
         for (LottoRank lottoRank : LottoRank.values()){

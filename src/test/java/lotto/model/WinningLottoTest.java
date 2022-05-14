@@ -15,7 +15,7 @@ class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        lottos = new Lottos(3);
+        lottos = new Lottos();
         lottos.addLotto(new Lotto(Arrays.asList(1, 3, 5, 7, 9, 10)));
         lottos.addLotto(new Lotto(Arrays.asList(7, 10, 15, 20, 25, 35)));
         lottos.addLotto(new Lotto(Arrays.asList(3, 7, 20, 35, 43, 45)));
