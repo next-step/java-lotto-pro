@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public enum Winning {
 	MATCH6(6, 2000000000),

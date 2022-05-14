@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.*;
+import lotto.domain.*;
 import lotto.view.LottoView;
 
 public class LottoController {
