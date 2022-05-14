@@ -2,7 +2,7 @@ package generator;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.LottoNumber;
+import lotto.model.LottoNumber;
 import util.StringToIntegerConverter;
 import util.StringUtils;
 
