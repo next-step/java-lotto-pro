@@ -19,5 +19,7 @@ public class LottoGame {
         }
     }
 
-
+    public int getTicketCount() {
+        return this.purchasePrice / TICKET_UNIT_PRICE;
+    }
 }
