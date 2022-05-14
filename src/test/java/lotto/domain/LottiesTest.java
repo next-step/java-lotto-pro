@@ -13,9 +13,7 @@ class LottiesTest {
 
     @Test
     void Lotties_생성() {
-        LottoNumberStrategy strategy = () -> IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+        LottoNumberStrategy strategy = getLottoNumberStrategy();
 
         Lotties lotties = new Lotties(Arrays.asList(Lotto.create(strategy)));
 
@@ -27,5 +25,19 @@ class LottiesTest {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> new Lotties(Arrays.asList())
         ).withMessageContaining("로또는 1개 이상 구매해야 합니다.");
+    }
+
+    @Test
+    void 로또_개수_조회(){
+        LottoNumberStrategy strategy = getLottoNumberStrategy();
+
+        Lotties lotties = new Lotties(Arrays.asList(Lotto.create(strategy)));
+        assertThat(lotties.count()).isOne();
+    }
+
+    private LottoNumberStrategy getLottoNumberStrategy() {
+        return () -> IntStream.rangeClosed(1, 6)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }
