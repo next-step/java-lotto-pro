@@ -40,7 +40,7 @@ public class LottoController {
 
     private void reportingLottoTicketsInformation(LottoTickets lottoTickets, int purchasedTicketsCount) {
         outputView.printPurchasedTicketsCount(purchasedTicketsCount);
-        outputView.printTicketsNumbers(lottoTickets.purchasedTicketNumberString());
+        outputView.printTicketsNumbers(lottoTickets.toString());
     }
 
     private void reportingLottoResult(int purchasedTicketsCount, LottoWinningResults winningResults) {

@@ -59,18 +59,19 @@ public class LottoNumbers {
     public int hitCounts(LottoNumbers otherNumbers) {
         return (int) otherNumbers.getNumbers().
                 stream().
-                filter(lottoNumber -> numbers.contains(lottoNumber)).
+                filter(numbers::contains).
                 count();
-    }
-
-    public String numberStrings() {
-        return numbers.stream().
-                map(LottoNumber::numberString).
-                collect(Collectors.joining(NUMBERS_DELIMITER, NUMBERS_PREFIX, NUMBERS_SUFFIX));
     }
 
     public List<LottoNumber> getNumbers() {
         return numbers;
+    }
+
+    @Override
+    public String toString() {
+        return numbers.stream().
+                map(LottoNumber::toString).
+                collect(Collectors.joining(NUMBERS_DELIMITER + " ", NUMBERS_PREFIX, NUMBERS_SUFFIX));
     }
 
     @Override

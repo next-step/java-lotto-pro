@@ -24,15 +24,9 @@ public class LottoNumber {
         return new LottoNumber(number);
     }
 
-    public String numberString() {
-        return String.valueOf(number);
-    }
-
     @Override
     public String toString() {
-        return "LottoNumber{" +
-                "number=" + number +
-                '}';
+        return String.valueOf(number);
     }
 
     @Override

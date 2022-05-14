@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import lotto.enums.LottoRank;
 
 public class LottoTickets {
-    private List<LottoNumbers> lottoNumbers;
+    private final List<LottoNumbers> lottoNumbers;
 
     private LottoTickets(List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -20,12 +20,6 @@ public class LottoTickets {
         return this.lottoNumbers.size();
     }
 
-    public String purchasedTicketNumberString() {
-        return lottoNumbers.stream().
-                map(LottoNumbers::numberStrings).
-                collect(Collectors.joining("\n"));
-    }
-
     public LottoWinningResults match(LottoNumbers winningLottoNumbers) {
         List<LottoRank> resultRanks = lottoNumbers.stream().
                 map(ln -> ln.hitCounts(winningLottoNumbers)).
@@ -33,5 +27,12 @@ public class LottoTickets {
                 filter(LottoRank::isPrized).
                 collect(Collectors.toList());
         return LottoWinningResults.from(resultRanks);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream().
+                map(LottoNumbers::toString).
+                collect(Collectors.joining("\n"));
     }
 }

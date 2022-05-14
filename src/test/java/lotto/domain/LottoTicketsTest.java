@@ -36,7 +36,7 @@ class LottoTicketsTest {
 
     @Test
     void 구입한_티켓의_번호를_출력() {
-        String string = tickets.purchasedTicketNumberString();
+        String string = tickets.toString();
         assertThat(string).
                 contains("[1, 2, 3, 4, 5, 6]").
                 contains("[11, 22, 33, 44, 5, 6]");
