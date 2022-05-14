@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.Arrays;
+
 public enum MatchPoint {
     THREE(3, 5_000),
     FOUR(4, 50_000),
@@ -16,6 +18,13 @@ public enum MatchPoint {
 
     public long sumCashPrizeByMatchPoint(int count) {
         return (long) this.cashPrize * count;
+    }
+
+    public static MatchPoint findMatchPointByMatchPointCount(int count){
+        return Arrays.stream(MatchPoint.values())
+                .filter(matchPoint -> matchPoint.matchPointCount == count)
+                .findFirst()
+                .orElse(null);
     }
 
     public int getMatchPointCount() {

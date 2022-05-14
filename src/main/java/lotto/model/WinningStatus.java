@@ -15,23 +15,10 @@ public class WinningStatus {
     }
 
     protected void recordResults(int count) {
-        if(count == 3){
-            winningStatus.put(MatchPoint.THREE, winningStatus.get(MatchPoint.THREE) + 1);
-            return;
-        }
 
-        if(count == 4){
-            winningStatus.put(MatchPoint.FOUR, winningStatus.get(MatchPoint.FOUR) + 1);
-            return;
-        }
-
-        if(count == 5){
-            winningStatus.put(MatchPoint.FIVE, winningStatus.get(MatchPoint.FIVE) + 1);
-            return;
-        }
-
-        if(count == 6){
-            winningStatus.put(MatchPoint.SIX, winningStatus.get(MatchPoint.SIX) + 1);
+        MatchPoint matchPoint = MatchPoint.findMatchPointByMatchPointCount(count);
+        if(matchPoint != null){
+            winningStatus.put(matchPoint, winningStatus.get(matchPoint) + 1);
         }
     }
 
