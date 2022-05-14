@@ -1,7 +1,7 @@
 package step3.domain;
 
 import static java.util.Collections.sort;
-import static step3.LottoConstant.LottoElementSize;
+import static step3.LottoConstant.LOTTO_ELEMENTS_SIZE;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,7 +14,7 @@ public class LottoTicket {
 
 
     protected LottoTicket(List<Integer> lottoElementsSource) {
-        for (int i = 0; i < LottoElementSize; i++) {
+        for (int i = 0; i < LOTTO_ELEMENTS_SIZE; i++) {
             lottoElements.add(LottoElement.create(lottoElementsSource.get(i)));
         }
     }
@@ -25,10 +25,10 @@ public class LottoTicket {
     }
 
     private static void validElements(List<String> lottoElementsSource) {
-        if (lottoElementsSource.size() != LottoElementSize) {
+        if (lottoElementsSource.size() != LOTTO_ELEMENTS_SIZE) {
             throw new IllegalArgumentException("로또는 6개의 숫자로 이루어져있습니다");
         }
-        if (new HashSet<>(lottoElementsSource).size() != LottoElementSize) {
+        if (new HashSet<>(lottoElementsSource).size() != LOTTO_ELEMENTS_SIZE) {
             throw new IllegalArgumentException("로또는 중복되지 않은 6개의 숫자로 이루어져있습니다");
         }
     }
@@ -50,7 +50,7 @@ public class LottoTicket {
 
     public int match(ArrayList<LottoElement> compareLottoElements) {
         int matchCount = 0;
-        for (int i = 0; i < LottoElementSize; i++) {
+        for (int i = 0; i < LOTTO_ELEMENTS_SIZE; i++) {
             matchCount = matchCount + compare(compareLottoElements.get(i));
         }
         return matchCount;
