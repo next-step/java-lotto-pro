@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringAddCalculatorTest {
 
@@ -45,7 +46,23 @@ class StringAddCalculatorTest {
     @DisplayName("커스텀 구분자로 구분하여 모두 합한 값을 반환하는지 확인한다.")
     public void splitAndSum_custom_구분자() throws Exception {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
-        
+
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("입력값에 음수가 존재할 경우 예외를 발생시키는지 확인한다.")
+    public void splitAndSum_negative() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+                .isInstanceOf(RuntimeException.class)
+                .isExactlyInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("입력값에 문자가 존재할 경우 예외를 발생시키는지 확인한다.")
+    public void splitAndSum_character() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1,2,Z"))
+                .isInstanceOf(RuntimeException.class)
+                .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 }
