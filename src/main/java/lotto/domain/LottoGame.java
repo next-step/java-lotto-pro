@@ -16,7 +16,6 @@ public class LottoGame {
     private static final List<LottoNo> lottoNumbers = new ArrayList<>();
 
     private LottoResult result = new LottoResult();
-    private String lastWinningNumbers = "";
 
     static {
         for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
@@ -29,10 +28,13 @@ public class LottoGame {
     public void play() {
         Money money = readMoney();
         OutputView.printMessage(getLottoQuantity(money) + "개를 구매했습니다.");
+
         PurchasedLottos lottos = purchaseLotto(money);
         OutputView.printMyLotto(lottos);
-        readLastWinningNumbers();
+
+        String lastWinningNumbers = readLastWinningNumbers();
         OutputView.printLine();
+        
         OutputView.showLottoStatistics(lottos, lastWinningNumbers);
         OutputView.showLottoProfit(lottos, lastWinningNumbers, money);
     }
@@ -51,8 +53,8 @@ public class LottoGame {
         return new PurchasedLottos(lottoList);
     }
 
-    public void readLastWinningNumbers() {
-        lastWinningNumbers = InputView.readUserInput(REQUEST_LAST_WINNING_NUMBERS);
+    public String readLastWinningNumbers() {
+        return InputView.readUserInput(REQUEST_LAST_WINNING_NUMBERS);
     }
 
     private Lotto generateLotto() {
