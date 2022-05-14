@@ -20,19 +20,19 @@ public class ResultView {
 
     private static final List<LottoPrizeRank> table = Arrays.asList(THREE, FOUR, FIVE, SIX);
 
-    public static void quantity(int quantity){
+    public static void quantity(int quantity) {
         System.out.printf(QUANTITY_MESSAGE, quantity);
     }
 
     public static void table(List<LottoNumbers> source) {
-        for (LottoNumbers lottoNumbers : source){
+        for (LottoNumbers lottoNumbers : source) {
             formatLottoNumber(lottoNumbers);
         }
     }
 
     private static void formatLottoNumber(LottoNumbers lottoNumbers) {
         System.out.print("[");
-        for (LottoNumber lottoNumber : lottoNumbers.getNumbers()){
+        for (LottoNumber lottoNumber : lottoNumbers.getNumbers()) {
             System.out.print(lottoNumber + " ");
         }
         System.out.println("]");
@@ -41,7 +41,7 @@ public class ResultView {
     public static void statics(LottoPrizeRanks lottoPrizeRanks) {
         Map<Integer, Long> lottoRankMap = LottoPrizeMap.of(lottoPrizeRanks);
         System.out.println(STATICS_TITLE);
-        for (LottoPrizeRank lottoPrizeRank : table){
+        for (LottoPrizeRank lottoPrizeRank : table) {
             System.out.printf(STATICS_BODY,
                     lottoPrizeRank.getNumberOfMatch(),
                     lottoPrizeRank.getPrize(),
@@ -50,6 +50,6 @@ public class ResultView {
     }
 
     public static void ratio(Float ratio) {
-        System.out.printf(RATIO_MESSAGE,  ratio);
+        System.out.printf(RATIO_MESSAGE, ratio);
     }
 }

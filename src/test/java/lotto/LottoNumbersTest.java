@@ -14,7 +14,7 @@ public class LottoNumbersTest {
     @DisplayName("6개의 LottoNumber로 구성된다.")
     @Test
     void validLottoNumber() {
-        List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
 

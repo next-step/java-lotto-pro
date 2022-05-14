@@ -14,7 +14,7 @@ public class LottoStatics {
 
     public LottoPrizeRanks collect() {
         List<LottoPrizeRank> lottoPrizeRankList = new ArrayList<>();
-        for (LottoNumbers lottoNumbers : this.lottoNumbers){
+        for (LottoNumbers lottoNumbers : this.lottoNumbers) {
             LottoPrizeRank lottoPrizeRank = LottoPrizeRank.find(lottoNumbers.collect(winNumbers));
             lottoPrizeRankList.add(lottoPrizeRank);
         }

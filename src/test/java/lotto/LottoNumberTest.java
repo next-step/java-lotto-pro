@@ -13,7 +13,7 @@ public class LottoNumberTest {
     @DisplayName("1 이상 45 이하이다")
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
-    void validateLotto(int number){
+    void validateLotto(int number) {
         LottoNumber lottoNumber = new LottoNumber(number);
         assertThat(lottoNumber).isEqualTo(new LottoNumber(number));
     }
@@ -21,8 +21,8 @@ public class LottoNumberTest {
     @DisplayName("1 이상 45 이하가 아니라면 예외를 던진다")
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
-    void invalidateLotto(int number){
+    void invalidateLotto(int number) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() ->  new LottoNumber(number));
+                .isThrownBy(() -> new LottoNumber(number));
     }
 }

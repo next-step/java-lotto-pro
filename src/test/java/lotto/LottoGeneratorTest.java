@@ -13,16 +13,16 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoGeneratorTest {
     @DisplayName("6개의 숫자를 만든다")
     @Test
-    void validGenerate(){
+    void validGenerate() {
         String source = "1,2,3,4,5,6";
         List<Integer> numbers = LottoGenerator.generate(source);
 
-        assertThat(numbers).containsExactly(1,2,3,4,5,6);
+        assertThat(numbers).containsExactly(1, 2, 3, 4, 5, 6);
     }
 
     @DisplayName("6개가 아니면 예외를 던진다")
     @Test
-    void invalidGenerate(){
+    void invalidGenerate() {
         String source = "1,2,3,4,5";
 
         assertThatIllegalArgumentException()

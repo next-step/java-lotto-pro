@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoQuantityCheckerTest {
     @DisplayName("금액에 따른 로또 수량을 계산한다")
     @Test
-    void validCheck(){
+    void validCheck() {
         String price = "14000";
         assertThat(LottoQuantityChecker.check(price)).isEqualTo(14);
     }
@@ -21,7 +21,7 @@ public class LottoQuantityCheckerTest {
     @DisplayName("1000원 단위가 아니라면 예외를 던진다")
     @ParameterizedTest
     @ValueSource(strings = {"1", "10", "100"})
-    void invalidCheck(String price){
+    void invalidCheck(String price) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoQuantityChecker.check(price));
     }

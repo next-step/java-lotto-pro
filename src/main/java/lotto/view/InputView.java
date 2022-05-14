@@ -23,7 +23,7 @@ public class InputView {
     }
 
     private static void validateNumber(String price) {
-        if (!price.matches(REGEX)){
+        if (!price.matches(REGEX)) {
             throw new IllegalArgumentException(NUMBER_ERROR_MESSAGE);
         }
     }

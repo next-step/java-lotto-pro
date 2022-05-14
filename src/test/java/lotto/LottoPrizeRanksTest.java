@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoPrizeRanksTest {
     @DisplayName("총 당첨금액을 계산한다")
     @Test
-    void calculate(){
+    void calculate() {
         LottoPrizeRanks lottoPrizeRanks = new LottoPrizeRanks(Arrays.asList(
                 THREE, FOUR, NONE));
 
