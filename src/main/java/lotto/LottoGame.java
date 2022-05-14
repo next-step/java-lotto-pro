@@ -46,8 +46,6 @@ public class LottoGame {
 
     @Override
     public String toString() {
-        return "LottoGame{" +
-                "numbers=" + numbers +
-                '}';
+        return numbers.toString();
     }
 }

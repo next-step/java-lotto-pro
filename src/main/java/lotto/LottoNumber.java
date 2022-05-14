@@ -19,9 +19,7 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return "LottoNumber{" +
-                "value=" + value +
-                '}';
+        return Integer.toString(value);
     }
 
     @Override

@@ -45,4 +45,11 @@ public class LottoTicket {
 
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        lottoGames.forEach(g -> builder.append(g.toString() + "\n"));
+        return builder.toString();
+    }
 }
