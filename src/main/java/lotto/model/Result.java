@@ -1,8 +1,6 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public enum Result {
 
@@ -30,18 +28,17 @@ public enum Result {
     }
 
     public static Result from(int count, boolean containsBonus) {
-        List<Result> values = getValues(containsBonus);
-        return values.stream()
+        return Arrays.stream(values())
             .filter(value -> value.getContainsCount() == count)
+            .filter(value -> checkBonus(value, containsBonus))
             .findFirst().orElse(Result.LOSE);
     }
 
-    private static List<Result> getValues(boolean containsBonus) {
-        List<Result> results = new ArrayList<>(Arrays.asList(values()));
-        if (!containsBonus) {
-            results.remove(SECOND);
+    private static boolean checkBonus(Result value, boolean containsBonus) {
+        if (SECOND.equals(value)) {
+            return containsBonus;
         }
-        return results;
+        return true;
     }
 
 }

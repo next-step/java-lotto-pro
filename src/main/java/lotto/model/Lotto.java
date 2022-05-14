@@ -28,26 +28,14 @@ public class Lotto {
     }
 
     public Result getResult(Lotto winner, LottoNumber bonusNumber) {
-        int count = 0;
-        boolean containsBonus = false;
-        for (LottoNumber lottoNumber : winner.lottoNumbers) {
-            count = plusCountIfContains(count, lottoNumber);
-            containsBonus = isContainsBonus(bonusNumber, containsBonus, lottoNumber);
-        }
-        return Result.from(count, containsBonus);
+        int count = (int) lottoNumbers.stream()
+            .filter(winner.lottoNumbers::contains)
+            .count();
+        return Result.from(count, isContainsBonus(bonusNumber));
     }
 
-    private boolean isContainsBonus(LottoNumber bonusNumber, boolean isContainsBonus, LottoNumber lottoNumber) {
-        if (lottoNumber.equals(bonusNumber)) {
-            isContainsBonus = true;
-        }
-        return isContainsBonus;
+    private boolean isContainsBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
-    private int plusCountIfContains(int count, LottoNumber lottoNumber) {
-        if (lottoNumbers.contains(lottoNumber)) {
-            count++;
-        }
-        return count;
-    }
 }

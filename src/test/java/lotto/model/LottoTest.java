@@ -37,14 +37,14 @@ class LottoTest {
     static Stream<Arguments> getResultParameter() {
         Lotto lotto = getLotto(1, 2, 3, 4, 5, 6);
         return Stream.of(
-            arguments(lotto, getLotto(1, 2, 3, 4, 5, 6), Result.WINNER),
-            arguments(lotto, getLotto(1, 2, 3, 4, 5, 7), Result.SECOND),
-            arguments(lotto, getLotto(1, 2, 3, 4, 5, 8), Result.THIRD),
-            arguments(lotto, getLotto(1, 2, 3, 4, 7, 8), Result.FOURTH),
-            arguments(lotto, getLotto(1, 2, 3, 7, 8, 9), Result.FIFTH),
-            arguments(lotto, getLotto(1, 2, 7, 8, 9, 10), Result.LOSE),
-            arguments(lotto, getLotto(1, 7, 8, 9, 10, 11), Result.LOSE),
-            arguments(lotto, getLotto(7, 8, 9, 10, 11, 12), Result.LOSE)
+            arguments(getLotto(1, 2, 3, 4, 5, 6), lotto, Result.WINNER),
+            arguments(getLotto(1, 2, 3, 4, 5, 7), lotto, Result.SECOND),
+            arguments(getLotto(1, 2, 3, 4, 5, 8), lotto, Result.THIRD),
+            arguments(getLotto(1, 2, 3, 4, 7, 8), lotto, Result.FOURTH),
+            arguments(getLotto(1, 2, 3, 7, 8, 9), lotto, Result.FIFTH),
+            arguments(getLotto(1, 2, 7, 8, 9, 10), lotto, Result.LOSE),
+            arguments(getLotto(1, 7, 8, 9, 10, 11), lotto, Result.LOSE),
+            arguments(getLotto(7, 8, 9, 10, 11, 12), lotto, Result.LOSE)
         );
     }
 
