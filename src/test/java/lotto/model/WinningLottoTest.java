@@ -3,7 +3,9 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import lotto.constant.LottoRank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,10 +17,11 @@ class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        lottos = new Lottos();
-        lottos.addLotto(new Lotto(Arrays.asList(1, 3, 5, 7, 9, 10)));
-        lottos.addLotto(new Lotto(Arrays.asList(7, 10, 15, 20, 25, 35)));
-        lottos.addLotto(new Lotto(Arrays.asList(3, 7, 20, 35, 43, 45)));
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(new Lotto(Arrays.asList(1, 3, 5, 7, 9, 10)));
+        lottoList.add(new Lotto(Arrays.asList(7, 10, 15, 20, 25, 35)));
+        lottoList.add(new Lotto(Arrays.asList(3, 7, 20, 35, 43, 45)));
+        lottos = new Lottos(lottoList);
     }
 
     @DisplayName("당첨로또 번호가 1~45 사이가 아닌 경우 검증")

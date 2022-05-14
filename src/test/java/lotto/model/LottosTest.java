@@ -2,7 +2,9 @@ package lotto.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,10 +15,11 @@ class LottosTest {
 
     @BeforeEach
     void setUp() {
-        lottos = new Lottos();
-        lottos.addLotto(new Lotto(Arrays.asList(1, 3, 5, 7, 9, 10)));
-        lottos.addLotto(new Lotto(Arrays.asList(7, 10, 15, 20, 25, 35)));
-        lottos.addLotto(new Lotto(Arrays.asList(3, 7, 20, 35, 43, 45)));
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(new Lotto(Arrays.asList(1, 3, 5, 7, 9, 10)));
+        lottoList.add(new Lotto(Arrays.asList(7, 10, 15, 20, 25, 35)));
+        lottoList.add(new Lotto(Arrays.asList(3, 7, 20, 35, 43, 45)));
+        lottos = new Lottos(lottoList);
     }
 
     @DisplayName("로또 게임 수익률을 계산한다.")

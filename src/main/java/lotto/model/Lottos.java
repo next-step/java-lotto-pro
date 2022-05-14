@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import lotto.constant.LottoRoleConst;
 
@@ -8,16 +7,12 @@ public class Lottos {
 
     private final List<Lotto> lottoList;
 
-    public Lottos() {
-        this.lottoList = new ArrayList<>();
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
     }
 
     public List<Lotto> getLottoList() {
         return lottoList;
-    }
-
-    public void addLotto(Lotto lotto) {
-        lottoList.add(lotto);
     }
 
     public int lottoCount() {
