@@ -14,10 +14,9 @@ public class LottoMain {
     }
 
     private static void startLotto() {
-        final LottoViewer lottoViewer = new LottoViewer();
-        final int price = lottoViewer.inputPrice();
+        final int price = LottoViewer.inputPrice();
         final Lottos lottos = LottosGenerator.generateLottos(price);
-        lottoViewer.printLottos(lottos);
-        final String winningNumbers = lottoViewer.inputWinningNumbers();
+        LottoViewer.printLottos(lottos);
+        final String winningNumbers = LottoViewer.inputWinningNumbers();
     }
 }
