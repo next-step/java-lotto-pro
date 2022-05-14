@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
-import lotto.domain.Money;
-import lotto.domain.PurchasedLottos;
+import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -24,8 +21,10 @@ class OutputViewTest {
                 new Lotto(1, 2, 3, 4, 5, 7),
                 new Lotto(1, 2, 3, 4, 7, 8),
                 new Lotto(1, 2, 3, 7, 8, 9));
+        LottoGame game = new LottoGame();
         PurchasedLottos purchasedLottos = new PurchasedLottos(lottoList);
-        OutputView.showLottoStatistics(purchasedLottos, "1, 2, 3, 4, 5, 6");
+        LottoResult result = game.matchLottoNumbers(purchasedLottos, "1, 2, 3, 4, 5, 6");
+        OutputView.showLottoStatistics(result);
     }
 
 
@@ -34,8 +33,9 @@ class OutputViewTest {
         Money money = new Money(5000);
         List<Lotto> lottoList = Arrays.asList(
                 new Lotto(1, 2, 3, 4, 5, 6));
+        LottoGame game = new LottoGame();
         PurchasedLottos purchasedLottos = new PurchasedLottos(lottoList);
-        String lastWinningNumbers = "1, 2, 3, 4, 5, 6";
-        OutputView.showLottoProfit(purchasedLottos, lastWinningNumbers, money);
+        LottoResult result = game.matchLottoNumbers(purchasedLottos, "1, 2, 3, 4, 5, 6");
+        OutputView.showLottoProfit(result, money);
     }
 }

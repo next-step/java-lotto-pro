@@ -15,9 +15,7 @@ public class OutputView {
         OutputView.printLine();
     }
 
-    public static void showLottoStatistics(PurchasedLottos lottos, String lastWinningNumbers) {
-        List<Ranking> rankings = lottos.compareLottos(new Lotto(lastWinningNumbers));
-        LottoResult result = new LottoResult(rankings);
+    public static void showLottoStatistics(LottoResult result) {
         OutputView.printMessage("당첨 통계");
         OutputView.printMessage("---------");
         for (int matching = 3; matching <= LOTTO_SIZE; matching++) {
@@ -26,9 +24,7 @@ public class OutputView {
         }
     }
 
-    public static void showLottoProfit(PurchasedLottos lottos, String lastWinningNumbers, Money money) {
-        List<Ranking> rankings = lottos.compareLottos(new Lotto(lastWinningNumbers));
-        LottoResult result = new LottoResult(rankings);
+    public static void showLottoProfit(LottoResult result, Money money) {
         double profit = (double) result.calculateWinningMoney() / money.getMoney();
         OutputView.printMessage("총 수익률은 %.2f입니다.", profit);
     }

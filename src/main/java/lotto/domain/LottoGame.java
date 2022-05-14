@@ -23,20 +23,22 @@ public class LottoGame {
         }
     }
 
-    public LottoGame() { }
+    public LottoGame() {
+    }
 
     public void play() {
         Money money = readMoney();
         OutputView.printMessage(getLottoQuantity(money) + "개를 구매했습니다.");
 
-        PurchasedLottos lottos = purchaseLotto(money);
-        OutputView.printMyLotto(lottos);
+        PurchasedLottos purchasedLottos = purchaseLotto(money);
+        OutputView.printMyLotto(purchasedLottos);
 
         String lastWinningNumbers = readLastWinningNumbers();
         OutputView.printLine();
-        
-        OutputView.showLottoStatistics(lottos, lastWinningNumbers);
-        OutputView.showLottoProfit(lottos, lastWinningNumbers, money);
+
+        LottoResult result = matchLottoNumbers(purchasedLottos, lastWinningNumbers);
+        OutputView.showLottoStatistics(result);
+        OutputView.showLottoProfit(result, money);
     }
 
     public Money readMoney() {
@@ -53,7 +55,12 @@ public class LottoGame {
         return new PurchasedLottos(lottoList);
     }
 
-    public String readLastWinningNumbers() {
+    public LottoResult matchLottoNumbers(PurchasedLottos lottos, String lastWinningNumbers) {
+        List<Ranking> rankings = lottos.compareLottos(new Lotto(lastWinningNumbers));
+        return new LottoResult(rankings);
+    }
+
+    private String readLastWinningNumbers() {
         return InputView.readUserInput(REQUEST_LAST_WINNING_NUMBERS);
     }
 
