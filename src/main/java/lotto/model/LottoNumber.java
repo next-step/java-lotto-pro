@@ -17,11 +17,11 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public LottoRank resultLottoRank(LottoNumber winningLottoNumber) {
-        int count = (int) lottoNumber.stream()
-                .filter(winningLottoNumber::isContainNumber)
+    public int countMatchLottoNumber(LottoNumber lottoNumber) {
+        return (int) this.lottoNumber
+                .stream()
+                .filter(lottoNumber::isContainNumber)
                 .count();
-        return LottoRank.findByHits(count);
     }
 
     public boolean isContainNumber(Number number) {
