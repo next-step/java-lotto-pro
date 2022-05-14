@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 import static lotto.constant.Config.*;
 
 public class LottoMachine {
-    private static final List<Integer> lottoNumber =
+    private final List<Integer> lottoNumber =
             IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
                     .boxed()
                     .collect(Collectors.toList());
