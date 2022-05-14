@@ -13,8 +13,8 @@ public class LottoResult {
         }
     }
 
-    public EarningsRate result(final int amount) {
-        return new EarningsRate(totalPrizeAmount(), amount);
+    public EarningsRate earningRate(final LottoMoney money) {
+        return money.calculate(totalPrizeAmount());
     }
 
     private void increase(final Hit hit) {
@@ -23,9 +23,9 @@ public class LottoResult {
         }
     }
 
-    private double totalPrizeAmount() {
+    private long totalPrizeAmount() {
         return resultMap.keySet().stream()
-                .mapToDouble((hit) -> hit.cost(resultMap.get(hit)))
+                .mapToLong((hit) -> hit.winningAmount(resultMap.get(hit)))
                 .sum();
     }
 
