@@ -1,6 +1,8 @@
 package study.step3;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,11 +17,13 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto() {
-        numbers = StringUtil.shuffleAndSlice(WHOLE_LOTTO_NUMBERS, 6);
+        numbers = StringUtil.shuffleAndSlice(new ArrayList<>(WHOLE_LOTTO_NUMBERS), 6);
+        Collections.sort(numbers);
     }
 
     public Lotto(String numbersString) {
         numbers = validate(StringUtil.splitAndParseInt(numbersString, NUMBER_DELIMITER));
+        Collections.sort(numbers);
     }
 
     public int matchCount(Lotto winningLotto) {

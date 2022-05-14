@@ -18,6 +18,10 @@ public enum LottoWinningType {
         this.winnings = winnings;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public int getWinnings() {
         return winnings;
     }

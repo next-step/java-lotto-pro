@@ -53,31 +53,4 @@ class LottoReportTest {
         assertThat(lottoResultMap.matchCount(LottoWinningType.MATCH_COUNT_5)).isEqualTo(1);
         assertThat(lottoResultMap.matchCount(LottoWinningType.MATCH_COUNT_0)).isZero();
     }
-
-    @Test
-    @DisplayName("수익률 계산 - 0")
-    void calcLottoYield_0() {
-        LottoReport lottoReport = new LottoReport(Arrays.asList(
-                new Lotto("1,2,3,4,5,6"),
-                new Lotto("1,2,3,4,5,6"),
-                new Lotto("1,2,3,4,5,7"),
-                new Lotto("1,2,3,4,7,8"),
-                new Lotto("1,2,3,7,8,9"),
-                new Lotto("1,2,3,7,8,9")
-        ), new Lotto("11,12,13,14,15,16"));
-
-        LottoResultMap lottoResultMap = lottoReport.analyze();
-
-        assertThat(lottoReport.calcLottoYield(lottoResultMap)).isEqualTo(0f);
-    }
-
-    @Test
-    @DisplayName("수익률 계산 - 1등")
-    void calcLottoYield_1등() {
-        LottoReport lottoReport = new LottoReport(Collections.singletonList(
-                new Lotto("1,2,3,4,5,6")
-        ), new Lotto("1,2,3,4,5,6"));
-        LottoResultMap lottoResultMap = lottoReport.analyze();
-        assertThat(lottoReport.calcLottoYield(lottoResultMap)).isEqualTo(200000000f);
-    }
 }

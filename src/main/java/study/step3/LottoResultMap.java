@@ -35,4 +35,21 @@ public class LottoResultMap {
                 .mapToInt(lottoWinningType -> resultMap.get(lottoWinningType).size())
                 .sum();
     }
+
+    public float calcLottoYield() {
+        int totalWinnings = calcTotalWinnings();
+        if (totalWinnings == 0) {
+            return 0f;
+        }
+
+        int cost = LottoMoney.countAmount(allItemSize());
+        return (float) totalWinnings / cost * 100f;
+    }
+
+    private int calcTotalWinnings() {
+        return this.resultMap.keySet().stream()
+                .mapToInt(
+                        lottoWinningType -> matchCount(lottoWinningType) * lottoWinningType.getWinnings()
+                ).sum();
+    }
 }

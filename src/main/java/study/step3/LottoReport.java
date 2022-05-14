@@ -19,23 +19,6 @@ public class LottoReport {
         return lottoResultMap;
     }
 
-    public float calcLottoYield(LottoResultMap lottoResultMap) {
-        int totalWinnings = calcTotalWinnings(lottoResultMap);
-        if (totalWinnings == 0) {
-            return 0f;
-        }
-
-        int cost = LottoMoney.countAmount(lottoResultMap.allItemSize());
-        return (float) totalWinnings / cost * 100f;
-    }
-
-    private int calcTotalWinnings(LottoResultMap lottoResultMap) {
-        return lottoResultMap.keySet().stream()
-                .mapToInt(
-                        lottoWinningType -> lottoResultMap.matchCount(lottoWinningType) * lottoWinningType.getWinnings()
-                ).sum();
-    }
-
     private void validate(List<Lotto> myLottos, Lotto winningLotto) {
         validateLottos(myLottos);
         validteWinningLotto(winningLotto);
