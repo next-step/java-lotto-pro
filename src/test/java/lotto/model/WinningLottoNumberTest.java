@@ -2,6 +2,8 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,8 +15,12 @@ class WinningLottoNumberTest {
     void verifyWinningLottoNumber() {
         LottoNumber lottoNumber = new LottoNumber(LottoNumberGenerator.of("1,2,3,4,5,6"));
         Number number = Number.of(9);
+        WinningLottoNumber winningLottoNumber = new WinningLottoNumber(lottoNumber, number);
 
-        assertThat(new WinningLottoNumber(lottoNumber, number)).isNotNull();
+        assertAll(
+                () -> assertThat(winningLottoNumber).isNotNull(),
+                () -> assertEquals(new WinningLottoNumber(lottoNumber, number), winningLottoNumber)
+        );
     }
 
     @Test

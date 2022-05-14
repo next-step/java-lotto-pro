@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class WinningLottoNumber {
@@ -26,5 +27,23 @@ public class WinningLottoNumber {
 
     public boolean hasBonusNumber(LottoNumber lottoNumber) {
         return lottoNumber.isContainNumber(this.bonusNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        WinningLottoNumber that = (WinningLottoNumber) o;
+        return Objects.equals(lottoNumber, that.lottoNumber) && Objects.equals(bonusNumber,
+                that.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber, bonusNumber);
     }
 }
