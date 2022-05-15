@@ -18,13 +18,11 @@ public enum WinningRank {
         this.matchCount = matchCount;
     }
 
-    public static WinningRank getWinningRank(int matchCount) {
-        for (WinningRank value : WinningRank.values()) {
-            if (value.matchCount == matchCount) {
-                return value;
-            }
-        }
-        return NONE;
+    public static WinningRank of(int matchCount) {
+        return Arrays.stream(WinningRank.values())
+                .filter(r -> r.matchCount == matchCount)
+                .findFirst()
+                .orElse(NONE);
     }
 
     public static List<WinningRank> getPrintWinningRanks() {

@@ -49,7 +49,7 @@ public class LottoNumbers {
         for (Integer winningNumber : winningNumbers) {
             matchCount += matchWinningNumber(winningNumber);
         }
-        return WinningRank.getWinningRank(matchCount);
+        return WinningRank.of(matchCount);
     }
 
     private Integer matchWinningNumber(Integer winningNumber) {
