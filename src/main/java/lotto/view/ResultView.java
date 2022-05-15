@@ -18,7 +18,7 @@ public class ResultView {
     private static final String STATICS_BODY = "%d개 일치 (%d원)- %d개\n";
     private static final String RATIO_MESSAGE = "총 수익률은 %.2f입니다\n";
 
-    private static final List<LottoPrizeRank> table = Arrays.asList(THREE, FOUR, FIVE, SIX);
+    private static final List<LottoPrizeRank> table = Arrays.asList(FIFTH, FOURTH, THIRD, FIRST);
 
     public static void quantity(int quantity) {
         System.out.printf(QUANTITY_MESSAGE, quantity);

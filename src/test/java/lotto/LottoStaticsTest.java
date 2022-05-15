@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.model.LottoPrizeRank.THREE;
-import static lotto.model.LottoPrizeRank.NONE;
+import static lotto.model.LottoPrizeRank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("LottoStatics는 ")
@@ -26,6 +25,6 @@ public class LottoStaticsTest {
         LottoStatics lottoStatics = new LottoStatics(lottoNumbers, winNumbers);
 
         LottoPrizeRanks lottoPrizeRanks = lottoStatics.collect();
-        assertThat(lottoPrizeRanks).isEqualTo(new LottoPrizeRanks(Arrays.asList(THREE, NONE)));
+        assertThat(lottoPrizeRanks).isEqualTo(new LottoPrizeRanks(Arrays.asList(FIFTH, MISS)));
     }
 }
