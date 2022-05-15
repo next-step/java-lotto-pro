@@ -1,57 +1,56 @@
 package camp.nextstep.edu.level1.lotto.lotto;
 
+import camp.nextstep.edu.common.PositiveNumber;
+
 import java.util.Objects;
 
 public class Money {
     private static final int MIN_VALUE = 0;
 
-    private final long amount;
+    private final PositiveNumber amount;
 
-    public Money(long amount) {
-        checkValidateMoney(amount);
+    public Money(PositiveNumber amount) {
         this.amount = amount;
     }
 
-    public long availablePurchaseCount(long price) {
+    public Money (long amount) {
+        this(new PositiveNumber(amount));
+    }
+
+    public Money (String amount) {
+        this(new PositiveNumber(amount, false));
+    }
+
+    public long availablePurchaseCount(Money price) {
         checkPurchasePrice(price);
-        return this.amount / price;
+        return this.amount.getValue() / price.amount.getValue();
     }
 
     public Money add(Money target) {
-        if (target.amount == 0) {
+        if (target.amount.getValue() == 0) {
             return this;
         }
-        return new Money(this.amount + target.amount);
+        return new Money(this.amount.add(target.amount));
     }
 
     public Money subtract(Money target) {
-        checkSubValidate(target.amount);
-
-        return new Money(this.amount - target.amount);
+        return new Money(this.amount.subtract(target.amount));
     }
 
-    public Money multiply(int multipleValue) {
-        return new Money(this.amount * multipleValue);
+    public Money multiply(PositiveNumber multipleValue) {
+        return new Money(this.amount.multiply(multipleValue));
     }
 
     public double calculateRateByOtherMoney(Money target) {
-        return (double)this.amount / target.amount;
+        return (double)this.amount.getValue() / target.amount.getValue();
     }
 
-    private void checkValidateMoney(long value) {
-        if (value < MIN_VALUE) {
-            throw new IllegalArgumentException("금액은 양수 값이어야 합니다.");
-        }
+    public boolean isSameOrGreater(Money target) {
+        return this.amount.getValue() >= target.amount.getValue();
     }
 
-    private void checkSubValidate(long value) {
-        if (this.amount - value < MIN_VALUE) {
-            throw new IllegalArgumentException("0원 미만으로 만들 수 없습니다.");
-        }
-    }
-
-    private void checkPurchasePrice(long price) {
-        if (price <= 0) {
+    private void checkPurchasePrice(Money price) {
+        if (price.amount.getValue() <= 0) {
             throw new IllegalArgumentException("0원 초과의 물건만 구입할 수 있습니다.");
         }
     }
@@ -61,7 +60,7 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
-        return amount == money.amount;
+        return amount.equals(money.amount);
     }
 
     @Override

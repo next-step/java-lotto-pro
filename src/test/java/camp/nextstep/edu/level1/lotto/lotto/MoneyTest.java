@@ -2,15 +2,14 @@ package camp.nextstep.edu.level1.lotto.lotto;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 
 class MoneyTest {
 
     @Test
     void 금액은_음수일_수_없다() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Money(-1));
+        assertThatThrownBy(() -> new Money(-1)).isInstanceOf(RuntimeException.class);
     }
 
     @Test
@@ -34,7 +33,7 @@ class MoneyTest {
         Money originalMoney = new Money(5000);
         Money subMoney = new Money(10000);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> originalMoney.subtract(subMoney));
+        assertThatThrownBy(() -> originalMoney.subtract(subMoney)).isInstanceOf(RuntimeException.class);
     }
 
     @Test
@@ -50,14 +49,14 @@ class MoneyTest {
         Money money = new Money(10000);
         long price = 3333;
 
-        assertThat(money.availablePurchaseCount(price)).isEqualTo(3);
+        assertThat(money.availablePurchaseCount(new Money(price))).isEqualTo(3);
     }
 
     @Test
     void _0원_이하의_물건은_구입하면_예외가_발생해야_한다() {
         Money money = new Money(10000);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> money.availablePurchaseCount(0));
-        assertThatIllegalArgumentException().isThrownBy(() -> money.availablePurchaseCount(-1));
+        assertThatThrownBy(() -> money.availablePurchaseCount(new Money(0))).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> money.availablePurchaseCount(new Money(-1))).isInstanceOf(RuntimeException.class);
     }
 }

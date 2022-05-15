@@ -1,7 +1,6 @@
 package camp.nextstep.edu.level1.lotto.lotto;
 
 import camp.nextstep.edu.common.PositiveNumber;
-import camp.nextstep.edu.until.TypeCheckHelper;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,7 +11,7 @@ public class Lotto {
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
     private static final int LOTTO_RANGE = 6;
-    private static final long LOTTO_PRICE = 1_000;
+    private static final Money LOTTO_PRICE = new Money(1_000);
     private static final List<LottoNumber> LOTTO_NUMBER_PRESET = new ArrayList<>();
 
     static {
@@ -26,18 +25,10 @@ public class Lotto {
     private PositiveNumber manualPurchaseCount;
     private PositiveNumber autoPurchaseCount;
 
-    public Lotto(int purchaseMoney) {
+    public Lotto(Money purchaseMoney) {
         checkValidLottoPurchaseMoney(purchaseMoney);
 
-        this.purchaseOriginalMoney = new Money(purchaseMoney);
-    }
-
-    public Lotto(String purchaseStringMoney) {
-        checkValueIsInteger(purchaseStringMoney);
-        int convertedValue = Integer.parseInt(purchaseStringMoney);
-        checkValidLottoPurchaseMoney(convertedValue);
-
-        this.purchaseOriginalMoney = new Money(convertedValue);
+        this.purchaseOriginalMoney = purchaseMoney;
     }
 
     public void manualLottoPurchase(Collection<LottoNumbers> manualLottoPurchaseNumbers) {
@@ -79,16 +70,9 @@ public class Lotto {
         }
     }
 
-    private void checkValidLottoPurchaseMoney(int money) {
-        if (money < LOTTO_PRICE) {
-            String message = String.format("로또 구입시 최소 %d 원 이상이 있어야 합니다.", LOTTO_PRICE);
-            throw new IllegalArgumentException(message);
-        }
-    }
-
-    private void checkValueIsInteger(String money) {
-        if (!TypeCheckHelper.isPossibleStringToInteger(money)) {
-            throw new IllegalArgumentException("로또 구입 금액은 숫자만 가능합니다.");
+    private void checkValidLottoPurchaseMoney(Money money) {
+        if (LOTTO_PRICE.isSameOrGreater(money)) {
+            throw new IllegalArgumentException("로또 구입시 최소 " + LOTTO_PRICE + " 이상이 있어야 합니다.");
         }
     }
 
@@ -105,7 +89,7 @@ public class Lotto {
     }
 
     private void autoPurchaseLottoByRemainMoney() {
-        Money manualPurchaseMoney = new Money(manualPurchaseCount.getValue() * LOTTO_PRICE);
+        Money manualPurchaseMoney = LOTTO_PRICE.multiply(manualPurchaseCount);
         Money remainMoney = purchaseOriginalMoney.subtract(manualPurchaseMoney);
         long availablePurchaseCount = remainMoney.availablePurchaseCount(LOTTO_PRICE);
 

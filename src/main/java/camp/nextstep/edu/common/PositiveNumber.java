@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class PositiveNumber {
     private static final String NUMBER_CHECK_REGEX = "-?\\d+";
+    private static final long MIN_VALUE = 0L;
 
     private final long value;
 
@@ -29,6 +30,27 @@ public class PositiveNumber {
         this.value = convertValue;
     }
 
+    public PositiveNumber add(PositiveNumber target) {
+        if (target.getValue() == 0) {
+            return this;
+        }
+
+        return new PositiveNumber(this.value + target.value);
+    }
+
+    public PositiveNumber subtract(PositiveNumber target) {
+        if (target.getValue() == 0) {
+            return this;
+        }
+        checkSubtractable(target);
+
+        return new PositiveNumber(this.value - target.value);
+    }
+
+    public PositiveNumber multiply(PositiveNumber target) {
+        return new PositiveNumber(this.value * target.value);
+    }
+
     public long getValue() {
         return this.value;
     }
@@ -42,6 +64,12 @@ public class PositiveNumber {
     private void checkValidNumberByString(String value) {
         if (!value.matches(NUMBER_CHECK_REGEX)) {
             throw new RuntimeException("숫자만 허용됩니다.");
+        }
+    }
+
+    private void checkSubtractable(PositiveNumber target) {
+        if (this.value - target.value < MIN_VALUE) {
+            throw new RuntimeException(this.value + "보다 더 큰 값을 뺄 수 없습니다.");
         }
     }
 

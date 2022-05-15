@@ -1,10 +1,7 @@
 package camp.nextstep.edu.view;
 
 import camp.nextstep.edu.common.PositiveNumber;
-import camp.nextstep.edu.level1.lotto.lotto.Lotto;
-import camp.nextstep.edu.level1.lotto.lotto.LottoNumber;
-import camp.nextstep.edu.level1.lotto.lotto.LottoNumbers;
-import camp.nextstep.edu.level1.lotto.lotto.LottoResult;
+import camp.nextstep.edu.level1.lotto.lotto.*;
 import camp.nextstep.edu.level1.stringCaluator.calculator.StringCalculator;
 
 import java.util.ArrayList;
@@ -36,7 +33,7 @@ public class InputView {
 
     public static Lotto enterLottoValue() {
         System.out.println("구입금액을 입력해 주세요.");
-        Lotto lotto = untilEnterValidValue(() -> new Lotto(scanner.nextLine()));
+        Lotto lotto = untilEnterValidValue(() -> new Lotto(new Money(scanner.nextLine())));
         lotto.printPurchaseLottoNumbers();;
         System.out.println();
 
@@ -46,7 +43,7 @@ public class InputView {
     public static LottoResult enterLottoWinningNumbers(Lotto lotto) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         PositiveNumber manualPurchaseCount = untilEnterValidValue(() -> {
-            PositiveNumber inputNumber = new PositiveNumber(scanner.nextLine());
+            PositiveNumber inputNumber = new PositiveNumber(scanner.nextLine(), false);
             lotto.checkPossibleManualLottoPurchaseCount(inputNumber);
 
             return inputNumber;

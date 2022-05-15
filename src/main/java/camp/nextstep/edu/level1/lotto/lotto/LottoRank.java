@@ -3,11 +3,11 @@ package camp.nextstep.edu.level1.lotto.lotto;
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIRST("6개 일치", 6, false, new Money(2000000000)),
-    SECOND("5개 일치, 보너스 볼 일치", 5, true, new Money(30000000)),
-    THIRD("5개 일치", 5, false, new Money(1500000)),
-    FORTH("4개 일치", 4, false, new Money(50000)),
-    FIFTH("3개 일치", 3, false, new Money(5000));
+    FIRST("6개 일치", 6, false, new Money(2_000_000_000)),
+    SECOND("5개 일치, 보너스 볼 일치", 5, true, new Money(30_000_000)),
+    THIRD("5개 일치", 5, false, new Money(1_500_000)),
+    FORTH("4개 일치", 4, false, new Money(50_000)),
+    FIFTH("3개 일치", 3, false, new Money(5_000));
 
     private final String description;
     private final long matchCount;
