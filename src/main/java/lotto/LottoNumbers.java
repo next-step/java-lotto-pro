@@ -14,6 +14,16 @@ public class LottoNumbers {
         this.numbers = new ArrayList<>();
         this.initWithRandomNumber();
     }
+    
+    public LottoNumbers(String numbersWithComma) {
+        try {
+            String[] winnerNumbers = numbersWithComma.split(",");
+            this.setNumbersWithInput(winnerNumbers);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Winner number is not valid.");
+        }
+        
+    }
 
     public Object[] getNumbersAsArray() {
         return numbers.toArray();
@@ -35,4 +45,20 @@ public class LottoNumbers {
         }
         return numberPool;
     }
+
+
+    private void setNumbersWithInput(String[] winnerNumbers) {
+        this.validateNumbers(winnerNumbers);
+
+        for (int i = 1; i <= MAX_COUNT; i++) {
+            this.numbers.add(Integer.parseInt(winnerNumbers[i-1]));
+        }
+    }
+
+    private void validateNumbers(String[] winnerNumbers) {
+        if (winnerNumbers.length != MAX_COUNT) {
+            throw new IllegalArgumentException(String.format("The number of winner's number should be %d", MAX_COUNT));
+        }
+    }
+
 }
