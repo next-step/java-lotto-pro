@@ -1,23 +1,33 @@
 package lotto.auto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoNumber {
+public class LottoNumbers {
     private final static int LOTTO_NUMBER_SIZE_VALUE = 6;
+    private final static int LOTTO_NUMBER_MIN_VALUE = 1;
+    private final static int LOTTO_NUMBER_MAX_VALUE = 45;
 
     private List<Integer> numbers;
 
-    public LottoNumber() {
-        this.numbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_NUMBER_SIZE_VALUE; i++) {
-            this.numbers.add(i+1);
+    public LottoNumbers() {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < LOTTO_NUMBER_MAX_VALUE; i++) {
+            numbers.add(i+1);
         }
+        shuffleNumberList(numbers);
+        this.numbers = divideNumberList(numbers);
     }
 
-    public LottoNumber(List<Integer> numbers) {
+    private void shuffleNumberList(List<Integer> numbers) {
+        Collections.shuffle(numbers);
+    }
+
+    private List<Integer> divideNumberList(List<Integer> numbers) {
+        return numbers.subList(0, LOTTO_NUMBER_SIZE_VALUE);
+    }
+
+    public LottoNumbers(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
@@ -31,11 +41,15 @@ public class LottoNumber {
                 .collect(Collectors.toList());
     }
 
+    public int winningCount(List<Integer> answerNumberList) {
+        return 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
+        LottoNumbers that = (LottoNumbers) o;
         return Objects.equals(numbers, that.numbers);
     }
 
@@ -47,10 +61,6 @@ public class LottoNumber {
     @Override
     public String toString() {
         return this.numbers.toString();
-    }
-
-    public int winningCount(List<Integer> answerNumberList) {
-        return 0;
     }
 }
 
