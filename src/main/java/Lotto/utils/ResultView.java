@@ -26,12 +26,10 @@ public class ResultView {
         System.out.println("총 수익률은 " + result.getYield().getYield() + "입니다.");
     }
 
-    public static void printPurchaseInfo(PurchaseCount purchaseCount) {
-        System.out.println(purchaseCount.getCount() + "개를 구매했습니다.");
-    }
+    public static void printPurchaseLottos(Lottos lottos) {
+        System.out.println(lottos.getPurchaseCount().getCount() + "개를 구매했습니다.");
 
-    public static void printLottoNumbers(List<Lotto> lottos) {
-        for(Lotto lotto : lottos)
+        for(Lotto lotto : lottos.getLottos())
             System.out.println(lotto.toString());
     }
 }

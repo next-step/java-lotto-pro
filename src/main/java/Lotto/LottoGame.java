@@ -9,6 +9,7 @@ public class LottoGame {
 
     public LottoGame() {
         lottos = new Lottos(InputView.inputMoney());
+        ResultView.printPurchaseLottos(lottos);
         winLotto = new Lotto(InputView.inputLastWinNumber());
     }
 

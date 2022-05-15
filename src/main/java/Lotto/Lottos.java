@@ -26,7 +26,6 @@ public class Lottos {
     public Lottos(int money) {
         purchaseMoney = new PurchaseMoney(money);
         purchaseCount = new PurchaseCount(purchaseMoney);
-        ResultView.printPurchaseInfo(purchaseCount);
         lottos = draw(purchaseCount);
     }
 
@@ -37,7 +36,6 @@ public class Lottos {
             lotto = new Lotto();
             drawLottos.add(lotto);
         }
-        ResultView.printLottoNumbers(drawLottos);
         return drawLottos;
     }
 
