@@ -10,6 +10,8 @@ public class TotalLotto {
 
     private Lottos lottoList;
 
+    private Lotto winningLotto;
+
     public TotalLotto() {
     }
 
@@ -47,6 +49,10 @@ public class TotalLotto {
     }
 
     private int calculatorCount(int amount) throws IllegalArgumentException {
+        if (amount < 0) {
+            throw new IllegalArgumentException(INPUT_ERROR);
+        }
+
         if (amount % LOTTO_PRICE > 0) {
             throw new IllegalArgumentException(INPUT_ERROR);
         }
