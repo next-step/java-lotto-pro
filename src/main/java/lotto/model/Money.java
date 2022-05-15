@@ -1,9 +1,11 @@
 package lotto.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Money {
-    public static final int ZERO_NUM = 0;
+    private static final int ZERO_NUM = 0;
     public static final int LOTTO_PRICE = 1000;
     private final int money;
 
@@ -26,6 +28,25 @@ public class Money {
         return money / LOTTO_PRICE;
     }
 
+    public Money multiply(int count) {
+        return Money.from(Math.multiplyExact(this.money, count));
+    }
+
+    public Money add(Money money) {
+        return Money.from(Math.addExact(this.money, money.money));
+    }
+
+    public BigDecimal divideBy(Money money) {
+        if (isZero(money)) {
+            throw new IllegalArgumentException("0원으로 나눌 수 없습니다.");
+        }
+        return BigDecimal.valueOf(this.money).divide(BigDecimal.valueOf(money.money), 2, RoundingMode.DOWN);
+    }
+
+    private boolean isZero(Money money) {
+        return money.money == ZERO_NUM;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -41,5 +62,10 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(money);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(money);
     }
 }

@@ -3,10 +3,10 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum LottoRanking {
-    FIRST(6, "6개 일치", Money.from(2000000000)),
-    THIRD(5, "5개 일치", Money.from(1500000)),
-    FORTH(4, "4개 일치", Money.from(50000)),
     FIFTH(3, "3개 일치", Money.from(5000)),
+    FORTH(4, "4개 일치", Money.from(50000)),
+    THIRD(5, "5개 일치", Money.from(1500000)),
+    FIRST(6, "6개 일치", Money.from(2000000000)),
     MISS(0, "꽝", Money.from(0));
 
     public static final int MATCH_COUNT_MAX_NUM = 6;
@@ -45,5 +45,9 @@ public enum LottoRanking {
 
     public Money money() {
         return this.money;
+    }
+
+    public String text() {
+        return this.text;
     }
 }
