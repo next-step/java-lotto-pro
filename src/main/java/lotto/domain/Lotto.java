@@ -31,6 +31,12 @@ public class Lotto {
 		return new Lotto(numbers);
 	}
 
+	public Rank match(Lotto winningLotto) {
+		int matchCount = numbers.match(winningLotto.numbers);
+
+		return Rank.matchPrize(matchCount);
+	}
+
 	private static void validNumber(String number) {
 		Matcher matcher = pattern.matcher(number);
 
