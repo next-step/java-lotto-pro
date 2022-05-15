@@ -13,7 +13,9 @@ public class LottoGame {
 
     private double earningRate;
 
-    Map<Integer, Integer> scoreMap;
+    private Map<Integer, Integer> scoreMap;
+
+    private Map<Integer, Integer> earningMap;
 
     private LottoNumbers winnerNumbers;
 
@@ -21,6 +23,16 @@ public class LottoGame {
 
     LottoGame() {
         this.scoreMap = new HashMap<>();
+        this.scoreMap.put(3, 0);
+        this.scoreMap.put(4, 0);
+        this.scoreMap.put(5, 0);
+        this.scoreMap.put(6, 0);
+
+        this.earningMap = new HashMap<>();
+        this.earningMap.put(3, 5000);
+        this.earningMap.put(4, 50000);
+        this.earningMap.put(5, 1500000);
+        this.earningMap.put(6, 2000000000);
     }
 
     LottoGame(int purchasePrice) {
@@ -49,21 +61,37 @@ public class LottoGame {
         generateGameResult();
     }
 
+    public double getEarningRate() {
+        return this.earningRate;
+    }
+
     private void generateGameResult() {
-        this.scoreMap = new HashMap<>();
         for (LottoNumbers ticket : this.ticketNumbers) {
             setGameScore(ticket);
         }
+
+        setEarningRate();
+    }
+
+    private void setEarningRate() {
+        long totalEarning = 0;
+        for (Map.Entry<Integer, Integer> entry : scoreMap.entrySet()) {
+            totalEarning += (long) this.earningMap.get(entry.getKey()) * entry.getValue();
+        }
+
+        if (totalEarning == 0) {
+            this.earningRate = 0;
+            return ;
+        }
+
+        this.earningRate = (double) Math.round((double) totalEarning / this.purchasePrice * 100) / 100;
     }
 
     private void setGameScore(LottoNumbers ticket) {
         int score = equalNumberCount(ticket);
         if (this.scoreMap.containsKey(score)) {
             this.scoreMap.replace(score, this.scoreMap.get(score) + 1);
-            return ;
         }
-
-        this.scoreMap.put(score, 1);
     }
 
     public int getTicketCount() {
