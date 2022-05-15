@@ -9,8 +9,8 @@ import java.util.Set;
 
 public class Lotto {
     public static final int LOTTO_SIZE_NUM = 6;
-    private static final int MATCH_COUNT_ZERO = 0;
-    private static final int MATCH_COUNT_ONE = 1;
+    private static final int COUNT_OF_MATCH_ZERO = 0;
+    private static final int COUNT_OF_MATCH_ONE = 1;
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
@@ -31,7 +31,7 @@ public class Lotto {
     }
 
     public LottoRanking lottoRanking(Lotto winningLotto) {
-        int countOfMatch = MATCH_COUNT_ZERO;
+        int countOfMatch = COUNT_OF_MATCH_ZERO;
         for (LottoNumber lottoNumber : this.lotto) {
             countOfMatch += countIfContainLottoNumber(winningLotto, lottoNumber);
         }
@@ -40,9 +40,9 @@ public class Lotto {
 
     private int countIfContainLottoNumber(Lotto winningLotto, LottoNumber lottoNumber) {
         if (winningLotto.containLottoNumber(lottoNumber)) {
-            return MATCH_COUNT_ONE;
+            return COUNT_OF_MATCH_ONE;
         }
-        return MATCH_COUNT_ZERO;
+        return COUNT_OF_MATCH_ZERO;
     }
 
     private boolean containLottoNumber(LottoNumber lottoNumber) {

@@ -9,8 +9,8 @@ public enum LottoRanking {
     FIRST(6, "6개 일치", Money.from(2000000000)),
     MISS(0, "꽝", Money.from(0));
 
-    private static final int MATCH_COUNT_MAX_NUM = 6;
-    private static final int MATCH_COUNT_MIN_NUM = 0;
+    private static final int COUNT_OF_MATCH_MAX_NUM = 6;
+    private static final int COUNT_OF_MATCH_MIN_NUM = 0;
     private final int countOfMatch;
     private final String text;
     private final Money money;
@@ -44,7 +44,7 @@ public enum LottoRanking {
     }
 
     private static boolean isNotLottoCountOfMatchRange(int countOfMatch) {
-        return countOfMatch < MATCH_COUNT_MIN_NUM || countOfMatch > MATCH_COUNT_MAX_NUM;
+        return countOfMatch < COUNT_OF_MATCH_MIN_NUM || countOfMatch > COUNT_OF_MATCH_MAX_NUM;
     }
 
     private int countOfMatch() {
