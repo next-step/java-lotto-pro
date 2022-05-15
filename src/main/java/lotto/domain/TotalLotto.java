@@ -68,6 +68,7 @@ public class TotalLotto {
         for (Lotto lotto : this.lottoList.getLottoList()) {
             lottoStatistic.calculatorCount(MatchesLottoNumber(lotto));
         }
+        lottoStatistic.calculatorProfitLate(this.count * LOTTO_PRICE);
         return lottoStatistic;
     }
 

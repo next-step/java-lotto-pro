@@ -46,6 +46,21 @@ public class LottoStatistic {
         this.profitLate = profitLate;
     }
 
+    public String toResultString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("3개 일치 (" + THREE_WINNING_AMOUNT + "원)- " + this.three + "개");
+        sb.append("\n4개 일치 (" + FOUR_WINNING_AMOUNT +"원)- " + this.four + "개");
+        sb.append("\n5개 일치 (" + FIVE_WINNING_AMOUNT + "원)- " + this.five + "개");
+        sb.append("\n6개 일치 (" + SIX_WINNING_AMOUNT + "원)- " + this.six + "개");
+        sb.append("\n총 수익률은 " + this.profitLate + "입니다.");
+
+        if (this.profitLate < 1) {
+            sb.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+
+        return sb.toString();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

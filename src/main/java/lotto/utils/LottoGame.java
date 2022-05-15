@@ -1,5 +1,6 @@
 package lotto.utils;
 
+import lotto.domain.LottoStatistic;
 import lotto.domain.TotalLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -19,5 +20,7 @@ public class LottoGame {
     private void winningLotto(TotalLotto totalLotto) throws IOException {
         String winningLotto = new InputView().printWinningLotto();
         totalLotto.winningLotto(winningLotto);
+        LottoStatistic lottoStatistic = totalLotto.calculatorLottoStatic();
+        OutputView.printLottoStatistic(lottoStatistic);
     }
 }
