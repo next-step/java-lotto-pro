@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class LottoNumbersTest {
     @Test
     @DisplayName("6개의 숫자 배열을 파라미터로 로또 번호가 생성되어야 한다")
-    void create() {
+    void create_by_number_list() {
         // given
         final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
@@ -22,6 +23,35 @@ public class LottoNumbersTest {
         // then
         assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
         assertThat(lottoNumbers).isEqualTo(new LottoNumbers(numbers));
+    }
+
+    @Test
+    @DisplayName("6개의 컴마로 구분된 숫자가 담기 문자열을 파라미터로 로또 번확 생성되야 한다")
+    void create_by_string() {
+        // given
+        final String numbersString = "1, 2, 3, 4, 5, 6";
+
+        // when
+        final LottoNumbers lottoNumbers = new LottoNumbers(numbersString);
+
+        // then
+        assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
+        assertThat(lottoNumbers).isEqualTo(new LottoNumbers(numbersString));
+    }
+
+    @Test
+    @DisplayName("숫자, 컴마, 공백 외의 문자를 가진 문자열이 파라미터로 들어오면 IllegalArgumentException을 발생시킨다")
+    void when_numbersString_cannot_be_converted_to_list_should_throw_IllegalArgumentException() {
+        // given
+        final List<String> invalidNumbersStrings = Arrays.asList("1 ! 2 a 3 가 4 @ 5 # 6",
+                "a, b,c,d,e ,f",
+                "1 , 2 , 3 , 4, 5 , a");
+
+        // when and then
+        for (final String invalidNumbersString : invalidNumbersStrings) {
+            assertThatThrownBy(() -> new LottoNumbers(invalidNumbersString))
+                    .isInstanceOf(IllegalArgumentException.class);
+        }
     }
 
     @Test

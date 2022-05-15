@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import lotto.service.LottoNumbersStringConverter;
 
 public class LottoNumbers {
     public static final int AMOUNT_OF_NUMBERS = 6;
@@ -12,6 +13,10 @@ public class LottoNumbers {
     public LottoNumbers(final List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
+    }
+
+    public LottoNumbers(final String numbersString) {
+        this(LottoNumbersStringConverter.convert(numbersString));
     }
 
     private static void validateNumbers(final List<Integer> numbers) {
