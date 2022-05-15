@@ -21,15 +21,7 @@ public class LottoWinning {
     private double calculateProfit(int winningPrice, int purchasePrice) {
         return Math.round(((double) winningPrice / (double) purchasePrice) * ROUNDING_DIGIT_VALUE) / ROUNDING_DIGIT_VALUE;
     }
-
-    public int getPurchasePrice() {
-        return purchasePrice;
-    }
-
-    public int getWinningPrice() {
-        return winningPrice;
-    }
-
+    
     public double getProfit() {
         return profit;
     }
