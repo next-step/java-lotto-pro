@@ -6,11 +6,11 @@ import lotto.constant.LottoRoleConst;
 
 public class BonusNumber {
 
-    private final int bounsNumber;
+    private final int number;
 
-    public BonusNumber(int bonusNumber) {
-        validateLottoNumber(bonusNumber);
-        this.bounsNumber = bonusNumber;
+    public BonusNumber(int number) {
+        validateLottoNumber(number);
+        this.number = number;
     }
 
     private static void validateLottoNumber(int bonusNumber) {
@@ -19,11 +19,11 @@ public class BonusNumber {
         }
     }
 
-    public int getBounsNumber() {
-        return bounsNumber;
+    public int getNumber() {
+        return number;
     }
 
     public boolean matchBonusNumber(List<Integer> numberList) {
-        return numberList.contains(bounsNumber);
+        return numberList.contains(number);
     }
 }

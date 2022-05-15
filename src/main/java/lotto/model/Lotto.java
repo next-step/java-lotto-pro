@@ -19,11 +19,7 @@ public class Lotto {
                 .mapToInt(Integer::intValue)
                 .toArray();
     }
-
-    public LottoRank matchRank(List<Integer> winningNumberList) {
-        return LottoRank.of(matchNumberCount(winningNumberList),false);
-    }
-
+    
     public LottoRank matchRank(List<Integer> winningNumberList, BonusNumber bonusNumber) {
         return LottoRank.of(matchNumberCount(winningNumberList),bonusNumber.matchBonusNumber(numberList));
     }

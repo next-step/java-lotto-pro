@@ -44,7 +44,7 @@ public class WinningLotto {
         }
     }
     private void validateDuplication(List<Integer> winningNumberList, BonusNumber bonusNumber) {
-        if(winningNumberList.contains(bonusNumber.getBounsNumber())){
+        if(winningNumberList.contains(bonusNumber.getNumber())){
             throw new IllegalArgumentException(ErrorMessage.DUPLICATION_BONUS);
         }
     }

@@ -24,13 +24,7 @@ public class LottoGame {
         LottoPaper lottoPaper = lottoStore.issueLottoPaper();
         return lottoGenerator.generateLottos(lottoPaper);
     }
-
-    public static LottoGameResult resultWinningGame(Lottos lottos, String winningNumbersWord) {
-        List<Integer> winningNumberList = InputStringUtils.splitToNumberList(winningNumbersWord, DELIMITER_COMMA);
-        WinningLotto winningLotto = new WinningLotto(winningNumberList);
-        return winningLotto.compareLottos(lottos);
-    }
-
+    
     public static LottoGameResult resultWinningGame(Lottos lottos, String winningNumbersWord, String bonusNumberWord) {
         List<Integer> winningNumberList = InputStringUtils.splitToNumberList(winningNumbersWord, DELIMITER_COMMA);
         int bonusNumber = InputStringUtils.wordToNumber(bonusNumberWord);
