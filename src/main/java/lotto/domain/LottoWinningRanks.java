@@ -8,7 +8,6 @@ import java.util.List;
 
 public class LottoWinningRanks {
     private final double RETURN_RATE_CRITERIA = 1d;
-    private final double MATH_ROUND_DIGIT = 100d;
     private final List<Rank> winningRanks = new ArrayList<>();
 
     private LottoWinningRanks() {}
@@ -34,10 +33,7 @@ public class LottoWinningRanks {
     }
 
     public double returnRate(Money purchaseMoney) {
-        double totalPrizeMoneyDouble = totalPrizeMoney().getMoney();
-        double purchaseMoneyDouble = purchaseMoney.getMoney();
-        double returnRate = totalPrizeMoneyDouble / purchaseMoneyDouble;
-        return Math.round(returnRate * MATH_ROUND_DIGIT) / MATH_ROUND_DIGIT;
+        return purchaseMoney.returnRate(totalPrizeMoney());
     }
 
     public String resultDescription(Money purchaseMoney) {

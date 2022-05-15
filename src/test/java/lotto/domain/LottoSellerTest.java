@@ -12,10 +12,9 @@ class LottoSellerTest {
     @Test
     void test_자동_로또_구입_개수() {
         //given
-        int money = 5500;
-        LottoSeller lottoSeller = LottoSeller.from(money);
+        Money money = Money.from(5500);
         //when
-        LottoTickets lottoTickets = lottoSeller.autoLottoTickets();
+        LottoTickets lottoTickets = LottoSeller.create().autoLottoTickets(money);
         //then
         assertThat(lottoTickets.size()).isEqualTo(5);
     }
@@ -24,9 +23,9 @@ class LottoSellerTest {
     @Test
     void test_최소_구입_금액_오류() {
         //given
-        int money = 500;
+        Money money = Money.from(500);
         //when & then
-        assertThatThrownBy(() -> LottoSeller.from(money))
+        assertThatThrownBy(() -> LottoSeller.create().autoLottoTickets(money))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.LESS_THEN_PRICE_MONEY);
     }

@@ -22,8 +22,7 @@ public class LottoGame {
     private void purchase() {
         try {
             Money purchaseMoney = inputView.inputPurchaseMoney();
-            LottoSeller lottoSeller = LottoSeller.from(purchaseMoney);
-            LottoTickets lottoTickets = lottoSeller.autoLottoTickets();
+            LottoTickets lottoTickets = LottoSeller.create().autoLottoTickets(purchaseMoney);
             outputView.printLottoTickets(lottoTickets);
 
             winningResult(purchaseMoney, lottoTickets);
