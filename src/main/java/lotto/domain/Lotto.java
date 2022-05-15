@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
 

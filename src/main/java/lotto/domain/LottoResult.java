@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    Map<LottoRank, Integer> winningCount = new HashMap<>();
+    private Map<LottoRank, Integer> winningCount = new HashMap<>();
     double profitRate;
 
     public LottoResult(Lottos lottos, Lotto winningLotto) {
