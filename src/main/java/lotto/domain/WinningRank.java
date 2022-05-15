@@ -10,6 +10,8 @@ public enum WinningRank {
     FOURTH(5000, 3),
     NONE(0, 0);
 
+    public static final List<WinningRank> PRINT_WINNING_RANKS = Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
+
     public final Integer price;
     public final Integer matchCount;
 
@@ -26,6 +28,6 @@ public enum WinningRank {
     }
 
     public static List<WinningRank> getPrintWinningRanks() {
-        return Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
+        return PRINT_WINNING_RANKS;
     }
 }
