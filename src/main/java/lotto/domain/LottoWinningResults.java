@@ -1,14 +1,21 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.enums.LottoRank;
 
 public class LottoWinningResults {
 
-    private final List<LottoRank> results;
+    private final List<LottoRank> prizedRanks;
 
     private LottoWinningResults(List<LottoRank> resultRanks) {
-        this.results = resultRanks;
+        this.prizedRanks = pickPrizedRanks(resultRanks);;
+    }
+
+    private List<LottoRank> pickPrizedRanks(List<LottoRank> resultRanks) {
+        return resultRanks.stream().
+                filter(r -> r != LottoRank.MISS).
+                collect(Collectors.toList());
     }
 
     public static LottoWinningResults from(List<LottoRank> resultRanks) {
@@ -17,14 +24,14 @@ public class LottoWinningResults {
 
     public double prizedMoney() {
         double result = 0;
-        for (LottoRank lottoRank : results) {
-            result += lottoRank.getWinningMoney();
+        for (LottoRank prizedRank : prizedRanks) {
+            result += prizedRank.getWinningMoney();
         }
         return result;
     }
 
     public int winingRankCount(LottoRank lottoRank) {
-        return (int) results.stream().
+        return (int) prizedRanks.stream().
                 filter(result -> result.equals(lottoRank)).
                 count();
     }

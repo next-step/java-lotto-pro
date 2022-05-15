@@ -29,10 +29,6 @@ public enum LottoRank {
         return Arrays.asList(FIRST, SECOND, THIRD, FOURTH);
     }
 
-    public static boolean isPrized(LottoRank rank) {
-        return rank != MISS;
-    }
-
     public int getCountOfMatch() {
         return countOfMatch;
     }
