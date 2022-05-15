@@ -13,7 +13,7 @@ public class OutputView {
 
     private final String isLoss = "손해";
     private final String isBenefit = "이득";
-
+    private final int MATCH_COUNT_LIMIT = 3;
     public OutputView() {
     }
 
@@ -46,7 +46,7 @@ public class OutputView {
     }
 
     private long printOverViewPerEntry(LottoReward lottoReward, int matchCount) {
-        if (lottoReward.ordinal() < 3) {
+        if (lottoReward.ordinal() < MATCH_COUNT_LIMIT) {
             return 0;
         }
         System.out.println(String.format(OVERVIEW_FORMAT, matchCount, lottoReward.getReward(), matchCount));
