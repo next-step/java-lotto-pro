@@ -20,6 +20,8 @@ public class Lotto {
     }
 
     public static final Money PURCHASE_PRICE = wons(1000);
+
+    private static final int PICK_COUNT_NUMBER = 6;
     private final LottoNumbers pickLottoNumbers;
     private final LottoType type;
 
@@ -42,7 +44,7 @@ public class Lotto {
 
     private static LottoNumbers pickNumbersRandom() {
         return new LottoNumbers(
-                randomPickCount(new ArrayList<>(LottoNumber.ALL_LOTTO_NUMBERS), LottoNumbers.DEFAULT_PICK_COUNT));
+                randomPickCount(new ArrayList<>(LottoNumber.ALL_LOTTO_NUMBERS), PICK_COUNT_NUMBER));
     }
 
     public LottoWinResult confirm(final LottoNumbers winNumbers) {

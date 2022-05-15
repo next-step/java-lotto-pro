@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class LottoNumbers {
-    public static final int DEFAULT_PICK_COUNT = 6;
+    private static final int PICK_COUNT = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -24,13 +24,13 @@ public class LottoNumbers {
 
     private static void validatePickNumbers(final List<LottoNumber> lottoNumbers) {
         final int count = distinct(lottoNumbers).size();
-        if (count != DEFAULT_PICK_COUNT) {
+        if (count != PICK_COUNT) {
             throw new IllegalArgumentException("로또 번호들이 6개가 이닙니다.(" + count +")개");
         }
     }
 
     public boolean isPicked() {
-        return this.lottoNumbers.size() == DEFAULT_PICK_COUNT;
+        return this.lottoNumbers.size() == PICK_COUNT;
     }
 
     public int compareCount(final LottoNumbers lottoNumbers) {
