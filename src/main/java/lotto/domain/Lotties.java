@@ -18,6 +18,10 @@ public class Lotties {
         }
     }
 
+    public List<Lotto> getLotties() {
+        return lotties;
+    }
+
     public int count() {
         return lotties.size();
     }
@@ -27,7 +31,7 @@ public class Lotties {
     }
 
     public WinningStatus getWinningStatus(Lotto winningLotto) {
-        List<Rank> ranks = this.lotties.stream()
+        List<Rank> ranks = lotties.stream()
                 .map(winningLotto::match)
                 .collect(Collectors.toList());
         return  WinningStatus.from(ranks);

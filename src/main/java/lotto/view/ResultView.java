@@ -13,7 +13,7 @@ public class ResultView {
 
     public static void printPurchaseLotties(Lotties myLotties) {
         System.out.printf("%d개를 구매했습니다.%n", myLotties.count());
-        myLotties.printLotties();
+        myLotties.getLotties().forEach(System.out::println);
         System.out.println();
     }
 
