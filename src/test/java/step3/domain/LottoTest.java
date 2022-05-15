@@ -28,4 +28,11 @@ class LottoTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복되지 않은 6개의 숫자를 입력해주세요.");
     }
+
+    @Test
+    void 구매한_로또와_당첨번호_비교() {
+        Lotto buyLotto = LottoFactory.createManualLotto(numbers);
+        int matchCount = buyLotto.match(Arrays.asList(1, 2, 3, 11, 23, 44, 45));
+        assertThat(matchCount).isEqualTo(3);
+    }
 }

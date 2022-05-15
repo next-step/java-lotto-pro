@@ -33,6 +33,13 @@ public class Lotto {
         return LOTTO_SIZE;
     }
 
+    int match(List<Integer> winnerNumbers) {
+        return (int) winnerNumbers.stream()
+                .map(LottoNumber::of)
+                .filter(lotto::contains)
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
