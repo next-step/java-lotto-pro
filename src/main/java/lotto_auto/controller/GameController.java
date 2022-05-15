@@ -10,10 +10,9 @@ public class GameController {
     private final Output output = new Output();
 
     public void run() {
-
         Money money = getMoney();
-        Lottos purchasedLottos = new Lottos(money.canBuyLottoCount());
 
+        Lottos purchasedLottos = buyLottos(money);
         output.showPurchasedLottos(purchasedLottos);
         Lotto winingLotto = getWinningLotto();
 
@@ -70,6 +69,11 @@ public class GameController {
             output.showError(e);
             return false;
         }
+    }
+
+    private Lottos buyLottos(Money money) {
+        output.showPurchaseLottoCountNotice(money.canBuyLottoCount());
+        return new Lottos(money.canBuyLottoCount());
     }
 
 

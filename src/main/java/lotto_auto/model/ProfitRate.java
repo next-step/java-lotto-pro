@@ -17,6 +17,7 @@ public class ProfitRate {
     private boolean isZero(Money money, Profit profit) {
         return money.getMoney() == ZERO_VALUE || profit.getProfit() == ZERO_VALUE;
     }
+
     public String printRate() {
         return String.format("%.2f",rateFloor());
     }
