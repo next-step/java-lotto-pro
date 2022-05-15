@@ -5,6 +5,7 @@ import java.util.List;
 
 import static lotto.utils.InputUtils.convertToInteger;
 import static lotto.view.InputView.readPurchaseAmount;
+import static lotto.view.ResultView.printPurchaseCountView;
 
 public class Purchase {
     private final Money money;
@@ -26,5 +27,9 @@ public class Purchase {
             lottoNumbers.add(LottoNumbers.createLottoNumbers());
         }
         return Lottos.from(lottoNumbers);
+    }
+
+    public void printPurchaseCount() {
+        printPurchaseCountView(count);
     }
 }
