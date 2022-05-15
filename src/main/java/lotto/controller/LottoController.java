@@ -16,6 +16,7 @@ import lotto.view.LottoOutputView;
 
 public class LottoController {
     private final Scanner scanner;
+    private Count manualCount;
     private LottoMachine lottoMachine;
     private LottoNumbers lottoNumbers;
     private LottoRanks lottoRanks;
@@ -45,13 +46,13 @@ public class LottoController {
     private void inputManualNumber() {
         try {
             LottoInputView.printManualPurchaseCount();
-            Count manualCount = Count.of(scanner.nextLine());
+            manualCount = Count.of(scanner.nextLine());
+
             LottoInputView.printManualNumber();
             List<LottoNumber> manualLottoNumbers = new ArrayList<>();
-            while (!manualCount.isZero()) {
+            for (int count = manualCount.getValue(); count > 0; count--) {
                 List<Number> numbers = LottoNumberGenerator.of(scanner.nextLine());
                 manualLottoNumbers.add(new LottoNumber(numbers));
-                manualCount.decrease();
             }
             lottoMachine.submitManualLottoNumber(manualLottoNumbers);
         } catch (IllegalArgumentException iae) {
@@ -62,7 +63,7 @@ public class LottoController {
 
     private void printBuyingLottoNumbers() {
         lottoNumbers = lottoMachine.getLottoNumbers();
-        LottoOutputView.printPurchaseResult(lottoNumbers);
+        LottoOutputView.printPurchaseResult(manualCount, lottoNumbers);
     }
 
     private void inputWinningNumber() {

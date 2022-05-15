@@ -42,6 +42,10 @@ public class Count implements Comparable<Count> {
         return this.count == 0;
     }
 
+    public int getValue() {
+        return this.count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
