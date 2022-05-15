@@ -4,7 +4,7 @@ import static java.lang.Integer.parseInt;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int START_NUM = 1;
     public static final int LAST_NUM = 45;
@@ -55,5 +55,10 @@ public class LottoNumber {
         return "LottoNumber{" +
                 "number=" + number +
                 '}';
+    }
+
+    @Override
+    public int compareTo(final LottoNumber o) {
+        return this.number - o.number;
     }
 }

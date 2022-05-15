@@ -1,24 +1,24 @@
 package lotto;
 
-import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.joining;
 import static util.ListUtils.distinct;
 import static util.ListUtils.randomPickCount;
-import static util.ListUtils.sort;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoNumbers {
 
     public static final LottoNumbers ALL_NUMBERS = new LottoNumbers(totalLottoNumberList());
     private static final int DEFAULT_PICK_COUNT = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     protected LottoNumbers(final List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = sort(lottoNumbers, comparing(LottoNumber::getNumber));
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
     }
 
     public static LottoNumbers pickNumbers(List<LottoNumber> lottoNumbers) {
@@ -34,7 +34,7 @@ public class LottoNumbers {
     }
 
     public LottoNumbers pickNumbersRandom() {
-        return new LottoNumbers(randomPickCount(this.lottoNumbers, DEFAULT_PICK_COUNT));
+        return new LottoNumbers(randomPickCount(new ArrayList<>(lottoNumbers), DEFAULT_PICK_COUNT));
     }
 
     private static List<LottoNumber> totalLottoNumberList() {
