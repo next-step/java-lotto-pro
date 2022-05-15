@@ -12,6 +12,7 @@ public class InputView {
 
     private static final String INPUT_MONEY = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_LOTTO = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -29,6 +30,13 @@ public class InputView {
                 map(String::trim).
                 map(Integer::parseInt).
                 collect(Collectors.toList());
+    }
+
+    public static int inputBonusBallNumber() {
+        System.out.println(INPUT_BONUS_NUMBER);
+        String inputBonusNumbers = readLine();
+        return Integer.parseInt(inputBonusNumbers);
+
     }
 
     private static String[] splitLottoNumbers(String inputLottoNumbers) {
