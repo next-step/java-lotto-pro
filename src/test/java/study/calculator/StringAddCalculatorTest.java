@@ -1,4 +1,4 @@
-package study.step2;
+package study.calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -9,13 +9,15 @@ import org.junit.jupiter.api.Test;
 @DisplayName("문자열 덧셈 계산기")
 class StringAddCalculatorTest {
     @Test
-    @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
-    void splitAndSum_null_또는_빈문자() {
-        int result = StringAddCalculator.splitAndSum(null);
-        assertThat(result).isZero();
+    @DisplayName("빈 문자열을 입력할 경우 0을 반환해야 한다.")
+    void splitAndSum_빈문자() {
+        assertThat(StringAddCalculator.splitAndSum("")).isZero();
+    }
 
-        result = StringAddCalculator.splitAndSum("");
-        assertThat(result).isZero();
+    @Test
+    @DisplayName("null 값을 입력할 경우 0을 반환해야 한다.")
+    void splitAndSum_null() {
+        assertThat(StringAddCalculator.splitAndSum(null)).isZero();
     }
 
     @Test

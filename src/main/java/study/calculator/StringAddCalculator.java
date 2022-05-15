@@ -1,4 +1,4 @@
-package study.step2;
+package study.calculator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import study.step2.exception.NumberConversionException;
+import study.calculator.exception.NumberConversionException;
 
 public class StringAddCalculator {
     private static final int ZERO = 0;
 
     private static final String DEFAULT_DELIMITERS = ",|:";
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     private static final String NEGATIVE_INTEGER_EXCEPTION = "양수만 계산 가능합니다.";
     private static final String NON_INTEGER_EXCEPTION = "%s 는 숫자가 아닙니다.";
@@ -26,18 +26,31 @@ public class StringAddCalculator {
             return ZERO;
         }
 
-        List<String> numberByCustomDelimiter = splitByCustomDelimiter(numberString);
-        return numberByCustomDelimiter.isEmpty() ? add(splitNumberString(numberString, DEFAULT_DELIMITERS))
-                : add(numberByCustomDelimiter);
+        List<String> numbersByDelimiter = split(numberString);
+        return add(numbersByDelimiter);
+    }
+
+    private static List<String> split(String numberString) {
+        return hasCustomDelimiter(numberString) ? splitByCustomDelimiter(numberString)
+                : splitNumberString(numberString, DEFAULT_DELIMITERS);
     }
 
     private static List<String> splitByCustomDelimiter(String numberString) {
-        Matcher matcher = getMatcher(CUSTOM_DELIMITER_PATTERN, numberString);
-        return matcher.find() ? splitNumberString(matcher.group(2), matcher.group(1)) : new ArrayList<>();
+        return hasCustomDelimiter(numberString) ? getNumbersByCustomDelimiter(numberString) : new ArrayList<>();
     }
 
-    private static Matcher getMatcher(String pattern, String text) {
-        return Pattern.compile(pattern).matcher(text);
+    private static List<String> getNumbersByCustomDelimiter(String numberString) {
+        Matcher matcher = customDelimiterMatcher(numberString);
+        matcher.find();
+        return splitNumberString(matcher.group(2), matcher.group(1));
+    }
+
+    private static boolean hasCustomDelimiter(String numberString) {
+        return customDelimiterMatcher(numberString).find();
+    }
+
+    private static Matcher customDelimiterMatcher(String numberString) {
+        return CUSTOM_DELIMITER_PATTERN.matcher(numberString);
     }
 
     private static List<String> splitNumberString(String numberString, String delimiter) {
@@ -59,7 +72,6 @@ public class StringAddCalculator {
         if (integer < ZERO) {
             throw new NumberConversionException(NEGATIVE_INTEGER_EXCEPTION);
         }
-
         return integer;
     }
 
@@ -71,5 +83,3 @@ public class StringAddCalculator {
         }
     }
 }
-
-
