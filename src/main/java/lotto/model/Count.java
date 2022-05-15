@@ -6,14 +6,22 @@ public class Count implements Comparable<Count> {
     private int count;
 
     private Count(int count) {
+        if (count <= 0) {
+            throw new IllegalArgumentException("횟수는 음수가 될 수 없습니다.");
+        }
         this.count = count;
     }
 
     public static Count of(int count) {
-        if (count <= 0) {
-            throw new IllegalArgumentException("횟수는 음수가 될 수 없습니다.");
-        }
         return new Count(count);
+    }
+
+    public static Count of(String count) {
+        try {
+            return new Count(Integer.parseInt(count));
+        } catch (NumberFormatException nfe) {
+            throw new IllegalArgumentException("횟수는 Integer 값만 올 수 있습니다.");
+        }
     }
 
     public void decrease() {

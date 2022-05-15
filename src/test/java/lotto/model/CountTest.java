@@ -29,6 +29,14 @@ class CountTest {
     }
 
     @Test
+    @DisplayName("문자값이 들어오면 IllegalArgumentException이 발생")
+    void inputCharacterValue() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Count.of("abc"))
+                .withMessage("횟수는 Integer 값만 올 수 있습니다.");
+    }
+
+    @Test
     @DisplayName("카운트를 1회 감소")
     void decreaseCount() {
         Count count = Count.of(2);
