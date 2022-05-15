@@ -9,14 +9,14 @@ import study.lotto.domain.draw.DivisionResult;
 import study.lotto.domain.draw.DivisionResults;
 
 public class Lottos {
-    private final List<Lotto> lottoList;
+    private final List<Lotto> value;
 
-    public Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    public Lottos(List<Lotto> lottos) {
+        this.value = lottos.stream().map(Lotto::new).collect(Collectors.toList());
     }
 
     public List<LottoNumbers> lottoNumbers() {
-        return lottoList.stream().map(Lotto::numbers).map(LottoNumbers::new).collect(Collectors.toList());
+        return value.stream().map(Lotto::numbers).map(LottoNumbers::new).collect(Collectors.toList());
     }
 
     public DivisionResults findWinnings(LottoNumbers winningNumber) {
@@ -24,7 +24,7 @@ public class Lottos {
     }
 
     private List<DivisionResult> createDivisionResultList(LottoNumbers winningNumber) {
-        Map<Division, Long> divisionResults = lottoList.stream()
+        Map<Division, Long> divisionResults = value.stream()
                 .map(lotto -> lotto.checkResult(winningNumber))
                 .filter(Objects::nonNull)
                 .collect(Collectors.groupingBy(division -> division, Collectors.counting()));

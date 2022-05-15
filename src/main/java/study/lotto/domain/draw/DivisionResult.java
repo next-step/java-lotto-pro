@@ -11,6 +11,10 @@ public class DivisionResult {
         this(division, 0L);
     }
 
+    public DivisionResult(DivisionResult divisionResult) {
+        this(divisionResult.getDivision(), divisionResult.count);
+    }
+
     public DivisionResult(Division division, Long count) {
         this.division = division;
         this.count = count;
@@ -24,7 +28,7 @@ public class DivisionResult {
         return count;
     }
 
-    public boolean isDivisionSame(Division division) {
+    public boolean hasDivisionSame(Division division) {
         return this.division == division;
     }
 

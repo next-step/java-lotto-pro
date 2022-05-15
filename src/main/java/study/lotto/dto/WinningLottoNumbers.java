@@ -13,10 +13,14 @@ public class WinningLottoNumbers {
     private static final Pattern LOTTO_PATTERN = Pattern.compile(
             "^(\\d|\\s)*,(\\d|\\s)*,(\\d|\\s)*,(\\d|\\s)*,(\\d|\\s)*,(\\d|\\s)*$");
 
-    private List<Integer> lottoNubmers;
+    private List<Integer> value;
 
     public WinningLottoNumbers(String lottoNumberString) {
-        lottoNubmers = validate(lottoNumberString);
+        value = validate(lottoNumberString);
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return value;
     }
 
     private List<Integer> validate(String lottoNumberString) {
@@ -43,9 +47,5 @@ public class WinningLottoNumbers {
         if (!LOTTO_PATTERN.matcher(lottoNumberString).find()) {
             throw new IllegalArgumentException("로또 번호는 6개의 숫자가 쉼표로 연결되어 있는 형태여야 합니다.");
         }
-    }
-
-    public List<Integer> getLottoNumbers() {
-        return lottoNubmers;
     }
 }

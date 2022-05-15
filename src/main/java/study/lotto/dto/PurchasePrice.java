@@ -6,14 +6,14 @@ import java.util.Objects;
 public class PurchasePrice {
     private static final String NOTNULL_ERROR = "구입금액을 입력해 주세요.";
 
-    private final BigDecimal price;
+    private final BigDecimal value;
 
-    public PurchasePrice(String price) {
-        this.price = validate(price);
+    public PurchasePrice(String value) {
+        this.value = validate(value);
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal value() {
+        return value;
     }
 
     private BigDecimal validate(String price) {
@@ -43,10 +43,10 @@ public class PurchasePrice {
     }
 
     private BigDecimal parseNumber(String priceString) {
-        BigDecimal price = BigDecimal.valueOf(Long.parseLong(priceString));
-        if (BigDecimal.ZERO.compareTo(price) >= 0) {
+        BigDecimal parsedPrice = BigDecimal.valueOf(Long.parseLong(priceString));
+        if (BigDecimal.ZERO.compareTo(parsedPrice) >= 0) {
             throw new IllegalArgumentException("구입 금액은 0보다 커야 합니다.");
         }
-        return price;
+        return parsedPrice;
     }
 }

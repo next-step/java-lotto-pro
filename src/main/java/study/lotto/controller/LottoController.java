@@ -38,8 +38,8 @@ public class LottoController {
 
     private LottoPurchaseHistory purchaseLotto() {
         LottoMachine machine = new LottoMachine(new AutomaticLottoGenerator(), new LottoPrice());
-        LottoPurchaseHistory lottoPurchaseHistory = machine.issueLotto(view.getPurchasePrice().getPrice());
-        view.showPurchaseResult(PurchasedLottos.from(lottoPurchaseHistory.getLottos()));
+        LottoPurchaseHistory lottoPurchaseHistory = machine.issueLotto(view.getPurchasePrice().value());
+        view.showPurchaseResult(PurchasedLottos.from(lottoPurchaseHistory.getLottos().lottoNumbers()));
         return lottoPurchaseHistory;
     }
 }

@@ -26,6 +26,6 @@ class DivisionResultsTest {
     @Test
     @DisplayName("전체 당첨금액 합계를 구한다.")
     void 전체_당첨금액_반환() {
-        assertThat(divisionResults.getAllPrize()).isEqualTo(new BigDecimal(1_520_000));
+        assertThat(divisionResults.totalPrize()).isEqualTo(new BigDecimal(1_520_000));
     }
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import study.lotto.domain.draw.Division;
 import study.lotto.domain.draw.DivisionResult;
-import study.lotto.domain.draw.DivisionResults;
 import study.lotto.domain.draw.DrawResult;
 
 public class DivisionDetails {
@@ -24,7 +23,7 @@ public class DivisionDetails {
     }
 
     public static List<DivisionDetails> from(DrawResult drawResult) {
-        return drawResult.getDivisionResults().stream()
+        return drawResult.get().stream()
                 .map(DivisionDetails::from)
                 .collect(Collectors.toList());
     }

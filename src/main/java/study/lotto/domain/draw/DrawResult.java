@@ -15,11 +15,11 @@ public class DrawResult {
         if (BigDecimal.ZERO.equals(lottoExpense)) {
             return BigDecimal.ONE;
         }
-        return divisionResult.getAllPrize().divide(lottoExpense, 2, BigDecimal.ROUND_DOWN);
+        return divisionResult.totalPrize().divide(lottoExpense, 2, BigDecimal.ROUND_DOWN);
     }
 
-    public List<DivisionResult> getDivisionResults() {
-        return divisionResult.getDivisionResultList();
+    public List<DivisionResult> get() {
+        return divisionResult.get();
     }
 
     @Override

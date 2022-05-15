@@ -6,35 +6,35 @@ import java.util.Objects;
 public class LottoPrice {
     private static final BigDecimal DEFAULT_LOTTO_PRICE = BigDecimal.valueOf(1000);
 
-    private final BigDecimal price;
+    private final BigDecimal value;
 
     public LottoPrice() {
         this(DEFAULT_LOTTO_PRICE);
     }
 
-    public LottoPrice(BigDecimal price) {
-        this.price = price;
+    public LottoPrice(BigDecimal value) {
+        this.value = value;
     }
 
     public int maximumIssuableCount(BigDecimal money) {
         if (isGreaterThan(money)) {
             return 0;
         }
-        return money.divideAndRemainder(price)[0].intValue();
+        return money.divideAndRemainder(value)[0].intValue();
     }
 
     public BigDecimal totalPrice(int numberOfLotto) {
-        return price.multiply(new BigDecimal(numberOfLotto));
+        return value.multiply(new BigDecimal(numberOfLotto));
     }
 
     private boolean isGreaterThan(BigDecimal money) {
-        return price.compareTo(money) > 0;
+        return value.compareTo(money) > 0;
     }
 
     @Override
     public String toString() {
         return "LottoPrice{" +
-                "price=" + price +
+                "value=" + value +
                 '}';
     }
 
@@ -47,11 +47,11 @@ public class LottoPrice {
             return false;
         }
         LottoPrice that = (LottoPrice) o;
-        return Objects.equals(price, that.price);
+        return Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(price);
+        return Objects.hash(value);
     }
 }

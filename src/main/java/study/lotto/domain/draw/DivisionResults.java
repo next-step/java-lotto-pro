@@ -7,35 +7,36 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class DivisionResults {
-    private final List<DivisionResult> divisionResultList;
+    private final List<DivisionResult> value;
 
     public DivisionResults(List<DivisionResult> divisionResultList) {
-        this.divisionResultList = Arrays.asList(Division.values()).stream()
+        this.value = Arrays.asList(Division.values()).stream()
                 .map(division -> findDivisionResult(division, divisionResultList))
                 .collect(Collectors.toList());
     }
 
-    public List<DivisionResult> getDivisionResultList() {
-        return divisionResultList;
+    public List<DivisionResult> get() {
+        return value;
     }
 
-    public BigDecimal getAllPrize() {
-        return divisionResultList.stream()
+    public BigDecimal totalPrize() {
+        return value.stream()
                 .map(DivisionResult::calculatePrize)
                 .reduce(BigDecimal.ZERO, (prizeTotal1, prizeTotal2) -> prizeTotal1.add(prizeTotal2));
     }
 
     private DivisionResult findDivisionResult(Division division, List<DivisionResult> divisionResultList) {
         return divisionResultList.stream()
-                .filter(divisionResult -> divisionResult.isDivisionSame(division))
+                .filter(divisionResult -> divisionResult.hasDivisionSame(division))
                 .findFirst()
+                .map(DivisionResult::new)
                 .orElse(new DivisionResult(division));
     }
 
     @Override
     public String toString() {
         return "DivisionResults{" +
-                "divisionResultList=" + divisionResultList +
+                "value=" + value +
                 '}';
     }
 
@@ -48,11 +49,11 @@ public class DivisionResults {
             return false;
         }
         DivisionResults that = (DivisionResults) o;
-        return Objects.equals(divisionResultList, that.divisionResultList);
+        return Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(divisionResultList);
+        return Objects.hash(value);
     }
 }

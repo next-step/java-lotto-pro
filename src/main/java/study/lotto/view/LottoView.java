@@ -22,7 +22,7 @@ public class LottoView {
     }
 
     public void showPurchaseResult(PurchasedLottos purchasedLottos) {
-        List<PurchasedLotto> lottoList = purchasedLottos.getLottoList();
+        List<PurchasedLotto> lottoList = purchasedLottos.get();
         userInterface.show(String.format("%d개 구매했습니다.\n", lottoList.size()));
         userInterface.show(lottoListString(lottoList));
         userInterface.show("\n");
@@ -64,7 +64,7 @@ public class LottoView {
 
     private String lottoString(PurchasedLotto purchasedLotto) {
         String purchasedLottoNumberString = String.join(", ",
-                purchasedLotto.getLottoNumbers()
+                purchasedLotto.get()
                         .stream()
                         .map(Objects::toString)
                         .collect(Collectors.toList()));

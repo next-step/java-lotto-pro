@@ -7,6 +7,10 @@ import study.lotto.domain.draw.Division;
 public class Lotto {
     private final LottoNumbers lottoNumbers;
 
+    public Lotto(Lotto lotto) {
+        this(new LottoNumbers(lotto.numbers()));
+    }
+
     public Lotto(LottoNumbers lottoNumbers) {
         if (Objects.isNull(lottoNumbers)) {
             throw new IllegalArgumentException("lottoNumbers 는 null 이 될 수 없습니다.");

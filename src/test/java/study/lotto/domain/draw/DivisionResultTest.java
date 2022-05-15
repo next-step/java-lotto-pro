@@ -24,12 +24,12 @@ class DivisionResultTest {
     @Test
     @DisplayName("입력한 등수와 같은 등수인지 확인한다.")
     void 등수_확인_성공() {
-        assertThat(divisionResult.isDivisionSame(Division.DIVISION_THREE)).isTrue();
+        assertThat(divisionResult.hasDivisionSame(Division.DIVISION_THREE)).isTrue();
     }
 
     @Test
     @DisplayName("입력한 등수와 다른지 확인한다.")
     void 등수_확인_실패() {
-        assertThat(divisionResult.isDivisionSame(Division.DIVISION_ONE)).isFalse();
+        assertThat(divisionResult.hasDivisionSame(Division.DIVISION_ONE)).isFalse();
     }
 }

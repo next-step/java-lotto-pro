@@ -6,13 +6,13 @@ public class LottoNumber {
     static final int MINIMUM_NUMBER = 1;
     static final int MAXIMUM_NUMBER = 45;
 
-    private int number;
+    private int value;
 
-    public LottoNumber(int number) {
-        if (validate(number)) {
+    public LottoNumber(int value) {
+        if (validate(value)) {
             throw new IllegalArgumentException("로또 번호는 1부터 45사이의 숫자만 허용합니다.");
         }
-        this.number = number;
+        this.value = value;
     }
 
     private boolean validate(int lottoNumber) {
@@ -21,7 +21,7 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return String.valueOf(number);
+        return String.valueOf(value);
     }
 
     @Override
@@ -33,11 +33,11 @@ public class LottoNumber {
             return false;
         }
         LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        return value == that.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(value);
     }
 }

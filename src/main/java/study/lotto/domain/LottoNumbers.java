@@ -11,12 +11,12 @@ public class LottoNumbers {
     static final int LOTTO_NUMBER_SIZE = 6;
     static final String TO_STRING_DELIMITER = ", ";
 
-    private final List<LottoNumber> lottoNumberList;
+    private final List<LottoNumber> value;
 
     public LottoNumbers(List<Integer> numbers) {
         checkLottoNumberSize(numbers);
         checkDuplicates(numbers);
-        lottoNumberList = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+        value = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
     }
 
     public List<Integer> match(LottoNumbers lottoNumbers) {
@@ -26,7 +26,7 @@ public class LottoNumbers {
     }
 
     public List<Integer> numbers() {
-        return lottoNumberList.stream().map(LottoNumber::toString).map(Integer::valueOf).collect(Collectors.toList());
+        return value.stream().map(LottoNumber::toString).map(Integer::valueOf).collect(Collectors.toList());
     }
 
     private void checkLottoNumberSize(List<Integer> numbers) {
@@ -45,7 +45,7 @@ public class LottoNumbers {
     @Override
     public String toString() {
         return String.join(TO_STRING_DELIMITER,
-                lottoNumberList.stream().map(LottoNumber::toString).collect(Collectors.toList()));
+                value.stream().map(LottoNumber::toString).collect(Collectors.toList()));
     }
 
     @Override
@@ -57,11 +57,11 @@ public class LottoNumbers {
             return false;
         }
         LottoNumbers that = (LottoNumbers) o;
-        return Objects.equals(lottoNumberList, that.lottoNumberList);
+        return Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumberList);
+        return Objects.hash(value);
     }
 }
