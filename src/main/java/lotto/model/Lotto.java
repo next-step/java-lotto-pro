@@ -7,26 +7,26 @@ import lotto.constant.LottoRank;
 
 public class Lotto {
 
-    private final List<Integer> numberList;
+    private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numberList) {
-        Collections.sort(numberList);
-        this.numberList = numberList;
+    public Lotto(List<Integer> numbers) {
+        Collections.sort(numbers);
+        this.numbers = numbers;
     }
 
     public int[] convertNumbers() {
-        return numberList.stream()
+        return numbers.stream()
                 .mapToInt(Integer::intValue)
                 .toArray();
     }
-    
+
     public LottoRank matchRank(List<Integer> winningNumberList, BonusNumber bonusNumber) {
-        return LottoRank.of(matchNumberCount(winningNumberList),bonusNumber.matchBonusNumber(numberList));
+        return LottoRank.of(matchNumberCount(winningNumberList),bonusNumber.matchBonusNumber(numbers));
     }
 
     private int matchNumberCount(List<Integer> winningNumberList) {
         return Math.toIntExact(winningNumberList.stream()
-                .filter(numberList::contains)
+                .filter(numbers::contains)
                 .count());
     }
 
@@ -39,11 +39,11 @@ public class Lotto {
             return false;
         }
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numberList, lotto.numberList);
+        return Objects.equals(numbers, lotto.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberList);
+        return Objects.hash(numbers);
     }
 }

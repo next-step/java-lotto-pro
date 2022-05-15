@@ -16,11 +16,11 @@ public enum LottoRank {
 
     private final int matchNumberCount;
     private final int winningAmount;
-    private static final Map<Integer, LottoRank> matchCountRankMap = new HashMap<>();
+    private static final Map<Integer, LottoRank> matchCountRank = new HashMap<>();
 
     static {
         for (LottoRank lottoRank : EnumSet.of(FIRST,SECOND,THIRD,FOURTH,NONE)) {
-            matchCountRankMap.put(lottoRank.matchNumberCount, lottoRank);
+            matchCountRank.put(lottoRank.matchNumberCount, lottoRank);
         }
     }
 
@@ -38,7 +38,7 @@ public enum LottoRank {
     }
 
     public static LottoRank of(int matchNumberCount, boolean isBonusMatch) {
-        LottoRank lottoRank = matchCountRankMap.getOrDefault(matchNumberCount, NONE);
+        LottoRank lottoRank = matchCountRank.getOrDefault(matchNumberCount, NONE);
         if(SECOND.equals(lottoRank) && isBonusMatch){
             return SECOND_BONUS;
         }

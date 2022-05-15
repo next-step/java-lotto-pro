@@ -9,42 +9,42 @@ import lotto.constant.LottoRoleConst;
 
 public class WinningLotto {
 
-    private final List<Integer> winningNumberList;
+    private final List<Integer> winningNumbers;
     private BonusNumber bonusNumber;
 
-    public WinningLotto(List<Integer> winningNumberList) {
-        validateWinningNumberList(winningNumberList);
-        this.winningNumberList = winningNumberList;
+    public WinningLotto(List<Integer> winningNumbers) {
+        validateWinningNumbers(winningNumbers);
+        this.winningNumbers = winningNumbers;
     }
 
-    public WinningLotto(List<Integer> winningNumberList, BonusNumber bonusNumber) {
-        this(winningNumberList);
-        validateDuplication(winningNumberList,bonusNumber);
+    public WinningLotto(List<Integer> winningNumbers, BonusNumber bonusNumber) {
+        this(winningNumbers);
+        validateDuplication(winningNumbers,bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    public static void validateWinningNumberList(List<Integer> winningNumberList) {
-        validateNumberSize(winningNumberList);
-        validateDuplication(winningNumberList);
-        for (int winningNumber : winningNumberList) {
+    public static void validateWinningNumbers(List<Integer> winningNumbers) {
+        validateNumberSize(winningNumbers);
+        validateDuplication(winningNumbers);
+        for (int winningNumber : winningNumbers) {
             validateLottoNumber(winningNumber);
         }
     }
 
-    private static void validateNumberSize(List<Integer> winningNumberList) {
-        if (winningNumberList.size() != LottoRoleConst.LOTTO_NUMBER_LIST_SIZE) {
+    private static void validateNumberSize(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != LottoRoleConst.LOTTO_NUMBER_LIST_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.NON_SIX_NUMBERS);
         }
     }
 
-    private static void validateDuplication(List<Integer> winningNumberList) {
-        HashSet<Integer> deleteDuplicationNumber = new HashSet<>(winningNumberList);
-        if (winningNumberList.size() != deleteDuplicationNumber.size()) {
+    private static void validateDuplication(List<Integer> winningNumbers) {
+        HashSet<Integer> deleteDuplicationNumber = new HashSet<>(winningNumbers);
+        if (winningNumbers.size() != deleteDuplicationNumber.size()) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATION);
         }
     }
-    private void validateDuplication(List<Integer> winningNumberList, BonusNumber bonusNumber) {
-        if(winningNumberList.contains(bonusNumber.getNumber())){
+    private void validateDuplication(List<Integer> winningNumbers, BonusNumber bonusNumber) {
+        if(winningNumbers.contains(bonusNumber.getNumber())){
             throw new IllegalArgumentException(ErrorMessage.DUPLICATION_BONUS);
         }
     }
@@ -56,11 +56,11 @@ public class WinningLotto {
     }
 
     public LottoGameResult compareLottos(Lottos lottos) {
-        EnumMap<LottoRank, Integer> resultRankMap = new EnumMap<>(LottoRank.class);
-        for (Lotto lotto : lottos.getLottoList()) {
-            LottoRank lottoRank = lotto.matchRank(winningNumberList,bonusNumber);
-            resultRankMap.put(lottoRank, resultRankMap.getOrDefault(lottoRank, 0) + 1);
+        EnumMap<LottoRank, Integer> resultRank = new EnumMap<>(LottoRank.class);
+        for (Lotto lotto : lottos.getLottos()) {
+            LottoRank lottoRank = lotto.matchRank(winningNumbers,bonusNumber);
+            resultRank.put(lottoRank, resultRank.getOrDefault(lottoRank, 0) + 1);
         }
-        return new LottoGameResult(resultRankMap);
+        return new LottoGameResult(resultRank);
     }
 }

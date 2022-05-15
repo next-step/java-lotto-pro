@@ -14,10 +14,10 @@ public class LottoGeneratorRandomImpl implements LottoGenerator{
     public Lottos generateLottos(LottoPaper lottoPaper) {
         List<Lotto> lottos = new ArrayList<>();
         for (int gameCount = 0; gameCount < lottoPaper.getGameCount(); gameCount++) {
-            List<Integer> randomNumberToList = RandomNumberUtils
+            List<Integer> randomNumbers = RandomNumberUtils
                     .generateRandomNumbers(LottoRoleConst.LOW_NUMBER, LottoRoleConst.MAX_NUMBER,
                             LottoRoleConst.LOTTO_NUMBER_LIST_SIZE);
-            lottos.add(new Lotto(randomNumberToList));
+            lottos.add(new Lotto(randomNumbers));
         }
         return new Lottos(lottos);
     }
