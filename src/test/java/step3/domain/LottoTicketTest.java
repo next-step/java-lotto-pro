@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoTicketTest {
 
-    LottoTicket lottoTicket = LottoTicket.create(Arrays.asList("1", "2", "3", "4", "5", "6"));
+    LottoTicket lottoTicket = new LottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6"));
 
     @Test
     @DisplayName("String값들과 Int값들을 통해 ticket을 발행할때 검증")
@@ -27,10 +27,10 @@ public class LottoTicketTest {
         List<String> 문자티켓 = Arrays.asList("a", "2", "3", "4", "5", "6");
         //when
         assertAll(
-            () -> assertThat(LottoTicket.create(정상티켓)).isNotInstanceOf(IllegalArgumentException.class).as("정상동작"),
-            () -> assertThatThrownBy(() -> LottoTicket.create(숫자5개티켓)).isInstanceOf(IllegalArgumentException.class).as("Throw동작"),
-            () -> assertThatThrownBy(() -> LottoTicket.create(음수티켓)).isInstanceOf(IllegalArgumentException.class).as("Throw동작"),
-            () -> assertThatThrownBy(() -> LottoTicket.create(문자티켓)).isInstanceOf(IllegalArgumentException.class).as("Throw동작")
+            () -> assertThat(new LottoTicket(정상티켓)).isNotInstanceOf(IllegalArgumentException.class).as("정상동작"),
+            () -> assertThatThrownBy(() -> new LottoTicket(숫자5개티켓)).isInstanceOf(IllegalArgumentException.class).as("Throw동작"),
+            () -> assertThatThrownBy(() -> new LottoTicket(음수티켓)).isInstanceOf(IllegalArgumentException.class).as("Throw동작"),
+            () -> assertThatThrownBy(() -> new LottoTicket(문자티켓)).isInstanceOf(IllegalArgumentException.class).as("Throw동작")
         );
     }
 
@@ -38,7 +38,7 @@ public class LottoTicketTest {
     @MethodSource("generateLottoData")
     @DisplayName("로또 정답 갯수를 확인한다.")
     public void checkLottoWin(List<String> lottoInfo, int expected) {
-        LottoTicket winnerLotto = LottoTicket.create(lottoInfo);
+        LottoTicket winnerLotto = new LottoTicket(lottoInfo);
         assertThat(lottoTicket.getMatchCountWith(winnerLotto)).isEqualTo(expected);
     }
 
@@ -53,9 +53,9 @@ public class LottoTicketTest {
 
     @Test
     @DisplayName("로또 번호를 가져올수 있어야한다")
-    public void getLottoNumbersTest(){
+    public void getLottoNumbersTest() {
         List<String> lottoSource = Arrays.asList("1", "2", "3", "4", "5", "6");
-        LottoTicket lotto = LottoTicket.create(lottoSource);
+        LottoTicket lotto = new LottoTicket(lottoSource);
         assertThat(lotto.getLottoNumbers()).containsExactly("1", "2", "3", "4", "5", "6");
     }
 }

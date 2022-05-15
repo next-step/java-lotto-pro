@@ -1,9 +1,10 @@
 package step3.domain;
 
-import static java.util.Collections.sort;
+import static step3.LottoConstant.LOTTO_DELIMITER;
 import static step3.LottoConstant.LOTTO_ELEMENTS_SIZE;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,19 +13,18 @@ public class LottoTicket {
 
     private final ArrayList<LottoElement> lottoElements = new ArrayList();
 
-
-    protected LottoTicket(List<Integer> lottoElementsSource) {
+    public LottoTicket(List<String> lottoNumbers) {
+        validInnerSource(lottoNumbers);
         for (int i = 0; i < LOTTO_ELEMENTS_SIZE; i++) {
-            lottoElements.add(LottoElement.create(lottoElementsSource.get(i)));
+            lottoElements.add(new LottoElement(lottoNumbers.get(i)));
         }
     }
 
-    public static LottoTicket create(List<String> lottoElementsSource) {
-        validElements(lottoElementsSource);
-        return new LottoTicket(parseElements(lottoElementsSource));
+    public LottoTicket(String lottoElementsSource) {
+        this(Arrays.asList(lottoElementsSource.split(LOTTO_DELIMITER)));
     }
 
-    private static void validElements(List<String> lottoElementsSource) {
+    private void validInnerSource(List<String> lottoElementsSource) {
         if (lottoElementsSource.size() != LOTTO_ELEMENTS_SIZE) {
             throw new IllegalArgumentException("로또는 6개의 숫자로 이루어져있습니다");
         }
@@ -33,16 +33,6 @@ public class LottoTicket {
         }
     }
 
-    private static List<Integer> parseElements(List<String> lottoElementsSource) {
-        try {
-            List<Integer> sourceToInt = lottoElementsSource.stream().mapToInt(Integer::parseInt)
-                .boxed().collect(Collectors.toList());
-            sort(sourceToInt);
-            return sourceToInt;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("로또는 숫자로만 이루어져 있습니다");
-        }
-    }
 
     public int getMatchCountWith(LottoTicket lottoTicket) {
         return lottoTicket.match(lottoElements);
