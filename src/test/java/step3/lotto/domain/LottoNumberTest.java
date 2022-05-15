@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static step3.lotto.domain.LottoNumber.INVALID_LOTTO_NUMBER_RANGE_ERROR;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -21,6 +22,16 @@ class LottoNumberTest {
     public void createLottoNumberTest(final int given) {
         // When & Then
         assertThat(LottoNumber.of(given).getLottoNumber()).isEqualTo(given);
+    }
+
+    @Test
+    @DisplayName("단일 로또 번호 객체의 일치 여부 판별")
+    public void equalsTest() {
+        // Given
+        LottoNumber given = LottoNumber.of(1);
+
+        // When
+        assertThat(given.equals(LottoNumber.of(1))).isTrue();
     }
 
     @ParameterizedTest
