@@ -27,9 +27,6 @@ public class LottoTicket {
     }
 
     private void validInnerSource(List<String> lottoElementsSource) {
-        if (lottoElementsSource.size() != LOTTO_ELEMENTS_SIZE) {
-            throw new IllegalArgumentException("로또는 6개의 숫자로 이루어져있습니다");
-        }
         if (new HashSet<>(lottoElementsSource).size() != LOTTO_ELEMENTS_SIZE) {
             throw new IllegalArgumentException("로또는 중복되지 않은 6개의 숫자로 이루어져있습니다");
         }
