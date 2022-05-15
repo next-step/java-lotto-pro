@@ -7,6 +7,7 @@ public class Splitter {
 
     public static final Pattern DEFAULT_PATTERN = Pattern.compile("[,:]");
     public static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
+
     public static final int DELIMITER_INDEX = 1;
     public static final int TEXT_INDEX= 2;
 
@@ -16,6 +17,7 @@ public class Splitter {
         if (matcher.find()) {
             String customDelimiter = matcher.group(DELIMITER_INDEX);
             input = matcher.group(TEXT_INDEX);
+
             return new Numbers(input.split(customDelimiter));
         }
         return new Numbers(DEFAULT_PATTERN.split(input));
