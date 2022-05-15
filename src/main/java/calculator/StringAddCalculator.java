@@ -3,6 +3,7 @@ package calculator;
 public class StringAddCalculator {
     private final static int CUSTOM_DELIMITER_INDEX = 0;
     private final static int CUSTOM_INPUT_INDEX = 1;
+    private final static String FORMAL_DELIMITER = ",|:";
 
     private StringAddCalculator() {
     }
@@ -31,7 +32,7 @@ public class StringAddCalculator {
     }
 
     private static int[] splitFormalDelimiter(String input) {
-        return splitWithDelimiter(input, ",|:");
+        return splitWithDelimiter(input, FORMAL_DELIMITER);
     }
 
     private static int[] splitCustomDelimiter(String input) {
