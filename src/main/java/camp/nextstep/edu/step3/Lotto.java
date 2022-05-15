@@ -15,8 +15,8 @@ public class Lotto {
         this.numbers.addAll(numbers);
     }
 
-    public Hit checkTo(final Lotto prizeLotto) {
-        return Hit.valueOf(prizeLotto.checkBy(this.numbers), false);
+    public Hit checkTo(final Lotto prizeLotto, final LottoNumber bonus) {
+        return Hit.valueOf(prizeLotto.checkBy(this.numbers), this.numbers.contains(bonus));
     }
 
     private void validationSize(Set<LottoNumber> lottoNumbers) {

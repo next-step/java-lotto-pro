@@ -20,7 +20,7 @@ public class LottoPaper {
         }
 
         return new LottoResult(purchase.stream()
-                .map((lotto) -> lotto.checkTo(answerLotto))
+                .map((lotto) -> lotto.checkTo(answerLotto, new LottoNumber(1)))
                 .collect(Collectors.toList()));
     }
 
