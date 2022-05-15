@@ -13,7 +13,7 @@ public class LottoMarket {
     }
 
     public LottoTicket purchaseLottoTicket(Money money) {
-        LottoCount lottoCount = LottoCount.calculateBy(money);
+        LottoCount lottoCount = money.calculateLottoCount();
         return LottoTicket.from(generateAutoLottoNumbers(lottoCount));
     }
 
