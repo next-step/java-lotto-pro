@@ -36,11 +36,15 @@ public class LottoTicket {
         }
     }
 
-    public Map<Long, Integer> check(final List<LottoNumber> winningNumbers) {
-        Map<Long, Integer> result = new HashMap<>();
+    public Map<Integer, Integer> check(final List<LottoNumber> winningNumbers) {
+        Map<Integer, Integer> result = new HashMap<>();
+        for (int i = 0; i <= LottoGame.SIZE; i++) {
+            result.put(i, 0);
+        }
+
         lottoGames.forEach(lottoGame -> {
-            Long match = lottoGame.check(winningNumbers);
-            result.put(match, result.getOrDefault(match, 0) + 1);
+            int match = lottoGame.check(winningNumbers);
+            result.put(match, result.get(match) + 1);
         });
 
         return result;

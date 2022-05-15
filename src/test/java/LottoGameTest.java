@@ -1,5 +1,5 @@
-import lotto.LottoNumber;
 import lotto.LottoGame;
+import lotto.LottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -51,7 +51,7 @@ public class LottoGameTest {
     void 당첨_번호_일치_개수() {
         LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 10, 22, 40));
 
-        Long result = lottoGame.check(Arrays.asList(
+        int result = lottoGame.check(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(3),
                 new LottoNumber(5),

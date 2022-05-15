@@ -32,8 +32,8 @@ public class LottoGame {
         }
     }
 
-    public Long check(List<LottoNumber> winningNumbers) {
-        return winningNumbers.stream()
+    public int check(List<LottoNumber> winningNumbers) {
+        return (int)winningNumbers.stream()
                 .map(n -> has(n))
                 .filter(b -> b == true)
                 .count();

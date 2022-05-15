@@ -27,7 +27,7 @@ public class LottoTicketTest {
 
     @ParameterizedTest
     @CsvSource(value = {"0:1", "1:3", "2:1", "3:2", "6:1"}, delimiter = ':')
-    void 당첨_확인(long input, int expected) {
+    void 당첨_확인(int input, int expected) {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
                 Arrays.asList(10, 11, 12, 13, 14, 15),
                 Arrays.asList(6, 10, 11, 12, 13, 14),
@@ -38,7 +38,7 @@ public class LottoTicketTest {
                 Arrays.asList(1, 2, 4, 10, 11, 12),
                 Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        Map<Long, Integer> result = lottoTicket.check(Arrays.asList(
+        Map<Integer, Integer> result = lottoTicket.check(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
