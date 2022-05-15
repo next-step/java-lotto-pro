@@ -37,14 +37,14 @@ public class LottosTest {
                 new Lotto(Arrays.asList(1,2,3,4,5,6))
         ));
 
-        lottos.compareLottos(winningLotto);
+        WinningStatus winningStatus = lottos.compareLottos(winningLotto);
 
         assertAll(
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FIFTH)).isEqualTo(1),
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FOURTH)).isEqualTo(1),
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.THIRD)).isEqualTo(0),
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.SECOND)).isEqualTo(1),
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FIRST)).isEqualTo(2)
+                () -> assertThat(winningStatus.findWinningCount(MatchPoint.FIFTH)).isEqualTo(1),
+                () -> assertThat(winningStatus.findWinningCount(MatchPoint.FOURTH)).isEqualTo(1),
+                () -> assertThat(winningStatus.findWinningCount(MatchPoint.THIRD)).isEqualTo(0),
+                () -> assertThat(winningStatus.findWinningCount(MatchPoint.SECOND)).isEqualTo(1),
+                () -> assertThat(winningStatus.findWinningCount(MatchPoint.FIRST)).isEqualTo(2)
         );
     }
 }

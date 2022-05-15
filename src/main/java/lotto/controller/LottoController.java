@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
+import lotto.model.WinningStatus;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -23,14 +24,14 @@ public class LottoController {
         Lottos lottos = createPurchaseLottos(purchasePrice);
         WinningLotto winningLotto = createWinningLotto();
 
-        lottos.compareLottos(winningLotto);
-        winningStatistics(purchasePrice, winningLotto);
+        WinningStatus winningStatus = lottos.compareLottos(winningLotto);
+        winningStatistics(purchasePrice, winningStatus);
     }
 
-    private void winningStatistics(long purchasePrice, WinningLotto winningLotto) {
+    private void winningStatistics(long purchasePrice, WinningStatus winningStatus) {
         resultView.printWinningStatisticsTitle();
-        resultView.printWinningStatistics(winningLotto);
-        resultView.printTotalEarningsRate(winningLotto, purchasePrice);
+        resultView.printWinningStatistics(winningStatus);
+        resultView.printTotalEarningsRate(winningStatus, purchasePrice);
     }
 
     private long purchaseLottos() throws IOException {

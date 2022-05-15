@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.model.Lottos;
 import lotto.model.MatchPoint;
-import lotto.model.WinningLotto;
+import lotto.model.WinningStatus;
 import lotto.util.MessageUtil;
 
 import java.util.Arrays;
@@ -37,12 +37,12 @@ public class ResultView {
         message.printlnMessage(WINNING_STATISTICS_LINE_MESSAGE);
     }
 
-    public void printWinningStatistics(WinningLotto winningLotto) {
+    public void printWinningStatistics(WinningStatus winningStatus) {
         List<MatchPoint> targetMatchPoints = Arrays.stream(MatchPoint.values()).filter(matchPoint -> matchPoint != MatchPoint.MISS).collect(Collectors.toList());
         for (MatchPoint matchPoint : targetMatchPoints) {
             message.printMessage(String.format(WINNING_STATISTICS_MESSAGE, matchPoint.getMatchPointCount()));
             printBonusBall(matchPoint);
-            message.printlnMessage(String.format(WINNING_STATISTICS_RESULT_MESSAGE, matchPoint.getCashPrize(), winningLotto.findWinningCount(matchPoint)));
+            message.printlnMessage(String.format(WINNING_STATISTICS_RESULT_MESSAGE, matchPoint.getCashPrize(), winningStatus.findWinningCount(matchPoint)));
         }
     }
 
@@ -52,7 +52,7 @@ public class ResultView {
         }
     }
 
-    public void printTotalEarningsRate(WinningLotto winningLotto, long lottosTotalPrice) {
-        message.printlnMessage(String.format(TOTAL_EARNINGS_RATE_MESSAGE, winningLotto.findEarningsRate(lottosTotalPrice)));
+    public void printTotalEarningsRate(WinningStatus winningStatus, long lottosTotalPrice) {
+        message.printlnMessage(String.format(TOTAL_EARNINGS_RATE_MESSAGE, winningStatus.findEarningsRate(lottosTotalPrice)));
     }
 }
