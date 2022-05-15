@@ -9,6 +9,6 @@ class WinningStatusTest {
     @Test
     void recordResults() {
         WinningStatus winningStatus = new WinningStatus();
-        assertThat(winningStatus.findWinningCount(MatchPoint.THREE)).isEqualTo(0);
+        assertThat(winningStatus.findWinningCount(MatchPoint.FIFTH)).isEqualTo(0);
     }
 }

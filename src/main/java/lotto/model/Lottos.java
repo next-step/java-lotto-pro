@@ -45,10 +45,17 @@ public class Lottos {
         return (long) this.lottos.size() * LOTTO_PRICE;
     }
 
-    public void compareLottos(WinningLotto winningLotto) {
+    public WinningStatus compareLottos(WinningLotto winningLotto) {
+        WinningStatus winningStatus = new WinningStatus();
+
         for (Lotto lotto : this.lottos) {
-            winningLotto.compareWinningLotto(lotto);
+            int count = winningLotto.compareMatchPointCount(lotto);
+            boolean matchBonus = winningLotto.isMatchBonus(lotto);
+
+            winningStatus.recordResults(count, matchBonus);
         }
+
+        return winningStatus;
     }
 
     public String numbersToString() {

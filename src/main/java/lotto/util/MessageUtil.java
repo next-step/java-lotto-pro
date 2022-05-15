@@ -2,10 +2,14 @@ package lotto.util;
 
 public class MessageUtil {
     public void printMessage(String msg) {
+        System.out.print(msg);
+    }
+
+    public void printlnMessage(String msg) {
         System.out.println(msg);
     }
 
-    public void printMessage() {
+    public void printlnMessage() {
         System.out.println();
     }
 }

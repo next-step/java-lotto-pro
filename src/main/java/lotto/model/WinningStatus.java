@@ -14,10 +14,10 @@ public class WinningStatus {
         }
     }
 
-    protected void recordResults(int count) {
+    protected void recordResults(int count, boolean matchBonus) {
 
-        MatchPoint matchPoint = MatchPoint.findMatchPointByMatchPointCount(count);
-        if(matchPoint != null){
+        MatchPoint matchPoint = MatchPoint.findMatchPointByMatchPointCount(count, matchBonus);
+        if(matchPoint != MatchPoint.MISS){
             winningStatus.put(matchPoint, winningStatus.get(matchPoint) + 1);
         }
     }

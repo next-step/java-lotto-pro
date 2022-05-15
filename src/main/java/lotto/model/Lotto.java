@@ -1,8 +1,9 @@
 package lotto.model;
 
+import lotto.view.ResultView;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
@@ -15,20 +16,19 @@ public class Lotto {
 
         validateNumbers(numbers);
 
-        this.numbers = integerArraysToLottoNumbers(numbers);
+        this.numbers = toLottoNumbers(numbers);
     }
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
 
-        this.numbers = integerArraysToLottoNumbers(numbers);
+        this.numbers = toLottoNumbers(numbers);
     }
 
-    private List<LottoNumber> integerArraysToLottoNumbers(List<Integer> numbers) {
+    private List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> resultNumbers = new ArrayList<>();
 
-        //numbers.sort((o1, o2) -> Integer.compare(o1, o2));
-        numbers.sort(Comparator.comparingInt(o -> o));
+        numbers.sort(Integer::compareTo);
 
         for (int number : numbers) {
             resultNumbers.add(new LottoNumber(number));
@@ -43,7 +43,7 @@ public class Lotto {
         }
 
         if (numbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("중복된 값이 있습니다.");
+            throw new IllegalArgumentException(ResultView.ERROR_DUPLICATION_NUMBER);
         }
     }
 
@@ -70,29 +70,33 @@ public class Lotto {
         return shuffleLottoNumbers;
     }
 
-    public int compareLottoAndReturnMatchCount(Lotto winningLotto) {
+    public int findMatchCount(Lotto winningLotto) {
         int count = 0;
 
         for (LottoNumber number : winningLotto.numbers) {
-            count = count + compareNumberAndReturnAddCount(number);
+            count = count + getAddCount(number);
         }
 
         return count;
     }
 
-    private int compareNumberAndReturnAddCount(LottoNumber number) {
-        if(compareNumber(number)) {
+    private int getAddCount(LottoNumber number) {
+        if(isContainsNumber(number)) {
             return 1;
         }
 
         return 0;
     }
 
-    private boolean compareNumber(LottoNumber number) {
+    private boolean isContainsNumber(LottoNumber number) {
         return this.numbers.contains(number);
     }
 
     public String numbersToString() {
         return this.numbers.toString();
+    }
+
+    public boolean isMatchBonus(LottoNumber bonusBall) {
+        return isContainsNumber(bonusBall);
     }
 }

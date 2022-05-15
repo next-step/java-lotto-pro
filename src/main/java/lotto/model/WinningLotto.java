@@ -1,28 +1,32 @@
 package lotto.model;
 
+import lotto.view.ResultView;
+
 import java.util.List;
 
 public class WinningLotto {
 
     private final Lotto lotto;
-    private final WinningStatus winningStatus;
+    private final LottoNumber bonusBall;
 
-    public WinningLotto(List<Integer> numbers) {
+    public WinningLotto(List<Integer> numbers, int bonusBall) {
         this.lotto = new Lotto(numbers);
-        this.winningStatus = new WinningStatus();
+
+        if(isDuplicationNumber(numbers, bonusBall)) {
+            throw new IllegalArgumentException(ResultView.ERROR_DUPLICATION_NUMBER);
+        }
+        this.bonusBall = new LottoNumber(bonusBall);
     }
 
-    public void compareWinningLotto(Lotto lotto) {
-        int count = lotto.compareLottoAndReturnMatchCount(this.lotto);
-
-        winningStatus.recordResults(count);
+    private boolean isDuplicationNumber(List<Integer> numbers, int bonusBall) {
+        return numbers.stream().anyMatch(number -> number == bonusBall);
     }
 
-    public int findWinningCount(MatchPoint matchPoint) {
-        return winningStatus.findWinningCount(matchPoint);
+    public int compareMatchPointCount(Lotto lotto) {
+        return lotto.findMatchCount(this.lotto);
     }
 
-    public double findEarningsRate(long lottosTotalPrice) {
-        return  winningStatus.findEarningsRate(lottosTotalPrice);
+    public boolean isMatchBonus(Lotto lotto) {
+        return lotto.isMatchBonus(this.bonusBall);
     }
 }

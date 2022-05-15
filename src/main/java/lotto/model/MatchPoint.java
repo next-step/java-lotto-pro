@@ -3,10 +3,12 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum MatchPoint {
-    THREE(3, 5_000),
-    FOUR(4, 50_000),
-    FIVE(5, 1_500_000),
-    SIX(6, 2_000_000_000);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
     private final int matchPointCount;
     private final int cashPrize;
@@ -20,11 +22,17 @@ public enum MatchPoint {
         return (long) this.cashPrize * count;
     }
 
-    public static MatchPoint findMatchPointByMatchPointCount(int count){
-        return Arrays.stream(MatchPoint.values())
+    public static MatchPoint findMatchPointByMatchPointCount(int count, boolean matchBonus){
+        MatchPoint resultMatchPoint = Arrays.stream(MatchPoint.values())
                 .filter(matchPoint -> matchPoint.matchPointCount == count)
                 .findFirst()
-                .orElse(null);
+                .orElse(MISS);
+
+        if(resultMatchPoint.getMatchPointCount() == 5 && matchBonus){
+            return MatchPoint.SECOND;
+        }
+
+        return resultMatchPoint;
     }
 
     public int getMatchPointCount() {

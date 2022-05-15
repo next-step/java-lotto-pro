@@ -2,11 +2,13 @@ package lotto.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningLottoTest {
 
@@ -14,19 +16,13 @@ public class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6));
+        winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6), 7);
     }
 
     @Test
-    void compareWinningLottos() {
-        winningLotto.compareWinningLotto(new Lotto(Arrays.asList(1,2,3,9,10,11)));
-
-        assertAll(
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.THREE)).isEqualTo(1),
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FOUR)).isEqualTo(0),
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.FIVE)).isEqualTo(0),
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.SIX)).isEqualTo(0)
-        );
+    void createWinningLotto_보너스번호_중복_예외발생() {
+        assertThatThrownBy(() -> new WinningLotto(Arrays.asList(1,2,3,4,5,6), 6))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -48,8 +44,24 @@ public class WinningLottoTest {
                 new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44))
         ));
 
-        lottos.compareLottos(winningLotto);
+        WinningStatus winningStatus = lottos.compareLottos(winningLotto);
 
-        assertThat(winningLotto.findEarningsRate(lottos.lottosTotalPrice())).isEqualTo(0.35);
+        assertThat(winningStatus.findEarningsRate(lottos.lottosTotalPrice())).isEqualTo(0.35);
+    }
+
+    @Test
+    void compareMatchPointCount() {
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,8,9), 10);
+
+        assertThat(winningLotto.compareMatchPointCount(lotto)).isEqualTo(4);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"6:true", "10:false"}, delimiter = ':')
+    void isMatchBonus(int bonusBall, boolean result) {
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+
+        assertThat(new WinningLotto(Arrays.asList(1,2,3,4,8,9), bonusBall).isMatchBonus(lotto)).isEqualTo(result);
     }
 }
