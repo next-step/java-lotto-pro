@@ -14,13 +14,13 @@ public class LottoPaper {
         this.purchase = purchase;
     }
 
-    public LottoResult checkAll(final Lotto answerLotto) {
-        if (Objects.isNull(answerLotto)) {
+    public LottoResult checkAll(final Lotto answerLotto, final LottoNumber bonus) {
+        if (Objects.isNull(answerLotto) || Objects.isNull(bonus)) {
             throw new IllegalArgumentException("invalid check all input");
         }
 
         return new LottoResult(purchase.stream()
-                .map((lotto) -> lotto.checkTo(answerLotto, new LottoNumber(1)))
+                .map((lotto) -> lotto.checkTo(answerLotto, bonus))
                 .collect(Collectors.toList()));
     }
 
@@ -45,7 +45,7 @@ public class LottoPaper {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Lotto lotto : purchase) {
-            stringBuilder.append(String.format("%s\n",lotto));
+            stringBuilder.append(String.format("%s\n", lotto));
         }
         return stringBuilder.toString();
     }
