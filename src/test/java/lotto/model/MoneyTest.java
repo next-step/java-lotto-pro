@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.math.BigDecimal;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,7 +12,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class MoneyTest {
-    private final Money money = Money.from(10000);
+    Money money;
+
+    @BeforeEach
+    void setUp() {
+        money = Money.from(10000);
+    }
 
     @DisplayName("돈 초기화 테스트")
     @Test
@@ -24,7 +30,7 @@ class MoneyTest {
     @ValueSource(ints = {-1, -100, -10000})
     void moneyNegativeNumber(int input) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Money.from(input))
+                .isThrownBy(() -> this.money = Money.from(input))
                 .withMessage("음수가 입력되어 유효하지 않습니다.");
     }
 

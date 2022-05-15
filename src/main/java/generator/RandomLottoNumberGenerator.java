@@ -1,6 +1,5 @@
 package generator;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,7 +7,7 @@ import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 
 public class RandomLottoNumberGenerator implements LottoNumberGenerator {
-    private static final List<LottoNumber> LOTTO_NUMBERS = initLottoNumbers();
+    private static final List<LottoNumber> lottoNumbers = initLottoNumbers();
 
     private static List<LottoNumber> initLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -20,10 +19,10 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
 
     @Override
     public List<LottoNumber> generate() {
-        Collections.shuffle(LOTTO_NUMBERS);
+        Collections.shuffle(lottoNumbers);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < Lotto.LOTTO_SIZE_NUM; i++) {
-            lottoNumbers.add(LOTTO_NUMBERS.get(i));
+            lottoNumbers.add(RandomLottoNumberGenerator.lottoNumbers.get(i));
         }
         Collections.sort(lottoNumbers);
         return lottoNumbers;

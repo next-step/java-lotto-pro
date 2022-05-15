@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
-    private final Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+    final Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 
     @DisplayName("로또 초기화 테스트")
     @Test

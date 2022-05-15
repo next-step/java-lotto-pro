@@ -7,31 +7,33 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.model.LottoNumber;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class InputLottoNumberGeneratorTest {
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    static final List<LottoNumber> lottoNumbers = initLottoNumbers();
 
-    @BeforeEach
-    void setUp() {
+    static List<LottoNumber> initLottoNumbers() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumber(2));
         lottoNumbers.add(new LottoNumber(4));
         lottoNumbers.add(new LottoNumber(5));
         lottoNumbers.add(new LottoNumber(7));
+        lottoNumbers.add(new LottoNumber(9));
+        lottoNumbers.add(new LottoNumber(30));
+        return lottoNumbers;
     }
 
     @DisplayName("입력받은 문자열을 콤마(,)로 구분하여 trim 한 값으로 Integer List 를 생성한다.")
     @Test
     void inputLottoNumberGenerator() {
-        InputLottoNumberGenerator inputLottoNumberGenerator = new InputLottoNumberGenerator(" 2, 4 ,5 ,  7  ");
+        InputLottoNumberGenerator inputLottoNumberGenerator = new InputLottoNumberGenerator(" 2, 4 ,5 ,  7  ,9,30");
         List<LottoNumber> lottoNumbers = inputLottoNumberGenerator.generate();
         assertAll(
-                () -> assertThat(lottoNumbers).hasSize(4),
-                () -> assertThat(lottoNumbers).isEqualTo(this.lottoNumbers)
+                () -> assertThat(lottoNumbers).hasSize(6),
+                () -> assertThat(lottoNumbers).isEqualTo(InputLottoNumberGeneratorTest.lottoNumbers)
         );
     }
 

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottosTest {
-    private final String[] input = {
+    final String[] input = {
             "1,2,3,4,5,6",
             "1,3,5,7,9,11",
             "2,4,6,8,10,12"
