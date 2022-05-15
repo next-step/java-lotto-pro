@@ -1,7 +1,6 @@
 package calculator;
 
-import calculator.util.SplitUtils;
-import calculator.util.StringUtils;
+import utils.StringUtils;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,6 +14,7 @@ public class StringAddCalculator {
     private static final int PATTERN_SEPARATOR_INDEX = 1;
     private static final int ZERO = 0;
 
+
     private StringAddCalculator() {
 
     }
@@ -23,30 +23,42 @@ public class StringAddCalculator {
         if (StringUtils.isEmptyString(text)) {
             return 0;
         }
-        int[] numberArray = calculatorNumberArray(text);
-        validNegativeArray(numberArray);
-        return sum(numberArray);
+        int[] numbers = calculatorNumberArray(text);
+        validNegative(numbers);
+        return sum(numbers);
     }
 
     private static int[] calculatorNumberArray(String text) {
         Matcher matcher = CUSTOM_SEPARATOR_PATTERN.matcher(text);
+        String separator = DEFAULT_SEPARATOR;
         if (matcher.find()) {
-            return SplitUtils.splitToInt(matcher.group(PATTERN_TEXT_INDEX),
-                    matcher.group(PATTERN_SEPARATOR_INDEX));
+            text = matcher.group(PATTERN_TEXT_INDEX);
+            separator = matcher.group(PATTERN_SEPARATOR_INDEX);
         }
-        return SplitUtils.splitToInt(text, DEFAULT_SEPARATOR);
+        return patternNumbers(text, separator);
     }
 
-    private static void validNegativeArray(int[] array) {
-        if (Arrays.stream(array)
-                .filter((v) -> v < ZERO)
-                .findFirst().isPresent()) {
-            throw new RuntimeException("문자열 계산기에는 음수를 전달할 수 없습니다.");
+    private static int[] patternNumbers(String text, String separator) {
+        try {
+            return StringUtils.splitToInt(text, separator);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(Message.ONLY_NUMBER_TEXT.getMessage());
         }
     }
 
-    private static int sum(int[] array) {
-        return Arrays.stream(array).sum();
+    private static void validNegative(int[] numbers) {
+        if (isNegativeContain(numbers)) {
+            throw new RuntimeException(Message.ONLY_POSITIVE_NUMBER_TEXT.getMessage());
+        }
+    }
+
+    private static boolean isNegativeContain(int[] validSource) {
+        return Arrays.stream(validSource)
+                .anyMatch((value -> value < ZERO));
+    }
+
+    private static int sum(int[] sumSource) {
+        return Arrays.stream(sumSource).sum();
     }
 
 }

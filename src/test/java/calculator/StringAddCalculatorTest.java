@@ -44,14 +44,17 @@ public class StringAddCalculatorTest {
     @DisplayName("splitAndSum_문자열이 숫자가 아닐경우 RuntimeException을 발생시킨다.")
     void splitAndSumIsNotNumberError() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1a,2:3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage(Message.ONLY_NUMBER_TEXT.getMessage());
     }
 
     @Test
     @DisplayName("splitAndSum_문자열이 음수가 아닐경우 RuntimeException을 발생시킨다.")
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage(Message.ONLY_POSITIVE_NUMBER_TEXT.getMessage())
+        ;
     }
 
 
