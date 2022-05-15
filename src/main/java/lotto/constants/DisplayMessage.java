@@ -8,6 +8,7 @@ public class DisplayMessage {
     public static final String WINNING_STATISTICS = "%n당첨 통계%n";
     public static final String DIVIDE_LINE = "---------";
     public static final String WINNING_RANK_INFO = "%s개 일치(%s원)- %s개%n";
+    public static final String WINNING_RANK_SECOND_INFO = "%s개 일치, 보너스 볼 일치(%s원)- %s개%n";
     public static final String RETURN_RATE = "총 수익률은 %.2f입니다.";
     public static final String RETURN_RATE_DESCRIPTION = "(기준이 1이기 때문에 결과적으로는 %s라는 의미임)";
     public static final String LOSS = "손해";
