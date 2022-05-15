@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.enums.Rank;
 import lotto.domain.WinningStatistic;
 
@@ -19,9 +20,11 @@ public class ResultView {
             Collections.sort(lotto.getLotto());
             System.out.println(lotto.getLotto());
         }
+        System.out.println();
     }
 
     public static void printWinningStatistic(WinningStatistic statistic) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -33,12 +36,12 @@ public class ResultView {
     }
 
     private static void printWinningStatistic(Rank rank, WinningStatistic statistic) {
-        String format = String.format("%d개 일치 (%d원) - %d개"
+        String format = String.format("%d개 일치 (%s원) - %d개"
                 , rank.matchingCount(), rank.prize(), statistic.count(rank));
         System.out.println(format);
     }
 
-    public static void printRateOfReturn(WinningStatistic statistic, double purchaseAmount) {
+    public static void printRateOfReturn(WinningStatistic statistic, Money purchaseAmount) {
         double rate = statistic.calculateRateOfReturn(purchaseAmount);
         System.out.print("총 수익률은 " + rate + "입니다.");
     }
