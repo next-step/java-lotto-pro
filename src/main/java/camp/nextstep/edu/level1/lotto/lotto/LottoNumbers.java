@@ -14,22 +14,25 @@ public class LottoNumbers {
     private final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     public LottoNumbers(Collection<Integer> numbers) {
-        checkLottoNumberSize(numbers.size());
         addAll(numbers);
+
+        checkLottoNumberSize();
     }
 
     public LottoNumbers(List<LottoNumber> numbers) {
-        checkLottoNumberSize(numbers.size());
         lottoNumbers.addAll(numbers);
+
+        checkLottoNumberSize();
     }
 
     public LottoNumbers(String lottoNumbersWithDelimiter) {
         String[] splitResult = Arrays.stream(lottoNumbersWithDelimiter.split(LOTTO_NUMBER_DELIMITER))
                 .map(String::trim)
                 .toArray(String[]::new);
-        checkLottoNumberSize(splitResult.length);
 
         addAll(CollectionHelper.arrayStringToIntegerList(splitResult));
+
+        checkLottoNumberSize();
     }
 
     public long matchedCountByWinnerNumbers(LottoNumbers winnerNumbers) {
@@ -52,8 +55,8 @@ public class LottoNumbers {
         return this.lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.hasSameValue(value));
     }
 
-    private void checkLottoNumberSize(int count) {
-        if (count != LOTTO_RANGE) {
+    private void checkLottoNumberSize() {
+        if (lottoNumbers.size() != LOTTO_RANGE) {
             throw new IllegalArgumentException("로또는 6 자리의 숫자만 허용됩니다.");
         }
     }
