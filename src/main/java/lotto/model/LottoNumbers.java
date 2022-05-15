@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,13 +14,6 @@ public class LottoNumbers {
 		validation(lottoNumbers);
 		Collections.sort(lottoNumbers);
 		this.lottoNumbers = lottoNumbers;
-	}
-
-	public LottoNumbers(LottoNumber[] lottoNumbers) {
-		List<LottoNumber> tempLottoNumbers = Arrays.asList(lottoNumbers);
-		validation(tempLottoNumbers);
-		Collections.sort(tempLottoNumbers);
-		this.lottoNumbers = tempLottoNumbers;
 	}
 
 	public LottoNumbers(String lottoNumbers) {

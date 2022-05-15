@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -53,14 +54,6 @@ public class LottoNumbersTest {
 		lottoNumbers.remove(0);
 		lottoNumbers.add(new LottoNumber(17));
 		assertThat(new LottoNumbers(lottoNumbers).getLottoNumbers()).hasSize(6);
-	}
-
-	@Test
-	@DisplayName("lottonumber 배열로 List의 크기가 6인 lotto생성")
-	void create_lottonumbers_lottoNumbers() {
-		LottoNumber[] LottoNumbers2 = { new LottoNumber(43), new LottoNumber(31), new LottoNumber(1),
-				new LottoNumber(16), new LottoNumber(10), new LottoNumber(22) };
-		assertThat(new LottoNumbers(LottoNumbers2).getLottoNumbers()).hasSize(6);
 	}
 
 	@Test

@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
@@ -30,11 +31,16 @@ public class LottoMachine {
 	}
 
 	private LottoNumbers randomLottoNumbers() {
-		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		return new LottoNumbers(randomNumberList());
+	}
+
+	private List<LottoNumber> randomNumberList() {
+		List<Integer> numberList = new ArrayList<>();
 		for (int i = LottoNumber.minLottoNumber(); i <= LottoNumber.maxLottoNumber(); ++i) {
-			lottoNumbers.add(new LottoNumber(i));
+			numberList.add(i);
 		}
-		Collections.shuffle(lottoNumbers);
-		return new LottoNumbers(lottoNumbers.subList(0, LottoNumbers.lottoNumbersCount()));
+		Collections.shuffle(numberList);
+		return numberList.subList(0, LottoNumbers.lottoNumbersCount()).stream().map(a -> new LottoNumber(a))
+				.collect(Collectors.toList());
 	}
 }
