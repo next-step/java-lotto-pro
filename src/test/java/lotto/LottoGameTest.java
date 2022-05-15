@@ -32,9 +32,17 @@ public class LottoGameTest {
 
     @Test
     void 지난주_당첨_번호_공백_입력() {
+        List<LottoNumbers> tickets = new ArrayList<>();
+        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
+        LottoGame game = new LottoGame(tickets, "4, 5, 6, 7, 8, 9");
+        assertThat(game.getScore().get(3)).isEqualTo(1);
+    }
+
+    @Test
+    void 지난주_당첨_번호_콤마_뒤_공백() {
         LottoGame game = new LottoGame(14000);
-        assertThatThrownBy(() -> game.setWinnerNumbers("1,2,3,,5,6"))
-                .isInstanceOf(IllegalArgumentException.class);
+        game.setWinnerNumbers("1, 2, 3, 4, 5, 6");
+
     }
 
     @Test

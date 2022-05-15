@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         int purchasePrice = InputView.getPurchasePrice();
         LottoGame game = new LottoGame(purchasePrice);
-        ResultView.printTicketCount(game.getTicketCount());
-        String winnerNumbers = InputView.getWinnerNumbers();
+
+
     }
 }

@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.ui.InputView;
+import lotto.ui.ResultView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +43,7 @@ public class LottoGame {
 
         isValidPurchasePrice(purchasePrice);
         this.purchasePrice = purchasePrice;
+        ResultView.printTicketCount(this.getTicketCount());
 
         this.ticketNumbers = new ArrayList<>();
         int ticketCount = this.getTicketCount();
@@ -47,6 +51,12 @@ public class LottoGame {
             this.ticketNumbers.add(new LottoNumbers());
         }
 
+        printTicketNumbers();
+        System.out.println();
+
+        String winnerNumbers = InputView.getWinnerNumbers();
+
+        setWinnerNumbers(winnerNumbers);
         generateGameResult();
     }
 
@@ -63,6 +73,12 @@ public class LottoGame {
 
     public double getEarningRate() {
         return this.earningRate;
+    }
+
+    public void printTicketNumbers() {
+        for (LottoNumbers ticket : this.ticketNumbers) {
+            ResultView.printTicketLottoNumbers(ticket.toString());
+        }
     }
 
     private void generateGameResult() {
