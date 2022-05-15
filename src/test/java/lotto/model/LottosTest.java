@@ -12,10 +12,17 @@ class LottosTest {
             "2,4,6,8,10,12"
     };
 
-    @DisplayName("로또들 구매 이후 로또들 사이즈 테스트")
+    @DisplayName("로또들 Input 구매 이후 로또들 사이즈 테스트")
     @Test
-    void lottosSize() {
+    void lottosInputSize() {
         Lottos lottos = Lottos.buy(input);
+        assertThat(lottos.readOnlyLottos()).hasSize(3);
+    }
+
+    @DisplayName("로또들 Random 구매 이후 로또들 사이즈 테스트")
+    @Test
+    void lottosRandomSize() {
+        Lottos lottos = Lottos.buy(Money.from(3333));
         assertThat(lottos.readOnlyLottos()).hasSize(3);
     }
 }
