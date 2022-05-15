@@ -17,6 +17,7 @@ import lotto.view.LottoOutputView;
 public class LottoController {
     private final Scanner scanner;
     private LottoMachine lottoMachine;
+    private LottoNumbers lottoNumbers;
     private LottoRanks lottoRanks;
 
     public LottoController() {
@@ -26,6 +27,7 @@ public class LottoController {
     public void start() {
         lottoPurchaseAmount();
         inputManualNumber();
+        printBuyingLottoNumbers();
         inputWinningNumber();
         profitRate();
     }
@@ -58,6 +60,11 @@ public class LottoController {
         }
     }
 
+    private void printBuyingLottoNumbers() {
+        lottoNumbers = lottoMachine.getLottoNumbers();
+        LottoOutputView.printPurchaseResult(lottoNumbers);
+    }
+
     private void inputWinningNumber() {
         try {
             LottoInputView.printWinningNumber();
@@ -66,7 +73,6 @@ public class LottoController {
             LottoInputView.printBonusNumber();
             Number number = Number.of(scanner.nextInt());
 
-            LottoNumbers lottoNumbers = lottoMachine.getLottoNumbers();
             lottoRanks = lottoNumbers.resultLottoRanks(new WinningLottoNumber(lottoNumber, number));
             LottoOutputView.printRankResult(lottoRanks);
         } catch (IllegalArgumentException iae) {
