@@ -1,10 +1,11 @@
 package stringcalculator;
 
-import static stringcalculator.utils.PositiveIntegerConverter.convertToPositiveIntegers;
+import static stringcalculator.utils.PositiveNumberConverter.convertToPositiveNumbers;
 import static stringcalculator.utils.StringBlankChecker.isBlank;
 import static stringcalculator.utils.StringSplitter.split;
 
 import java.util.List;
+import stringcalculator.vo.PositiveNumber;
 
 public class StringAddCalculator {
 
@@ -13,14 +14,14 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return sum(convertToPositiveIntegers(split(input)));
+        return sum(convertToPositiveNumbers(split(input)));
     }
 
-    private static int sum(List<Integer> numbers) {
-        int result = 0;
-        for (Integer number : numbers) {
-            result += number;
+    private static int sum(List<PositiveNumber> numbers) {
+        PositiveNumber result = PositiveNumber.from(0);
+        for (PositiveNumber number : numbers) {
+            result.add(number);
         }
-        return result;
+        return result.getPositiveNumber();
     }
 }
