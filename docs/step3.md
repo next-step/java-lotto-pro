@@ -15,6 +15,7 @@
    - Money
    - LottoNumber
    - WinningLotto
+   - LottoAutoFactory
    - PurchasedLotto
    - PurchasedLottos
    - LottoStatistics

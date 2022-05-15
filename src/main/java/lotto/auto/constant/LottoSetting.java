@@ -7,5 +7,6 @@ public class LottoSetting {
 
     public static final int LOTTO_NUMBER_RANGE_MIN = 1;
     public static final int LOTTO_NUMBER_RANGE_MAX = 45;
+    public static final int LOTTO_SIZE = 6;
 
 }
