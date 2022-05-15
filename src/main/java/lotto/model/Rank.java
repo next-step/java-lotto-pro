@@ -3,38 +3,43 @@ package lotto.model;
 import java.util.stream.Stream;
 
 public enum Rank {
-    FIRST("1등", 6, 2_000_000_000),
-    SECOND("2등", 5, 1_500_000),
-    THIRD("3등", 4, 50_000),
-    FOURTH("4등", 3, 5_000),
-    NOTHING("꽝", 0, 0);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
-    private final String name;
-    private final int matchedCount;
-    private final long prize;
+    private final int countOfMatch;
+    private final int winningMoney;
 
-    Rank(String name, int matchedCount, int prize) {
-        this.name = name;
-        this.matchedCount = matchedCount;
-        this.prize = prize;
+    private Rank(int countOfMatch, int winningMoney) {
+        this.countOfMatch = countOfMatch;
+        this.winningMoney = winningMoney;
     }
 
-    public static Rank getRank(Long matchedCount) {
-        return getRank(matchedCount.intValue());
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
-    public static Rank getRank(int matchedCount) {
-        return Stream.of(Rank.values())
-                .filter(rank -> rank.matchedCount == matchedCount)
+    public int getWinningMoney() {
+        return winningMoney;
+    }
+
+    public static Rank valueOf(Long countOfMatch, boolean matchBonus) {
+        return valueOf(countOfMatch.intValue(), matchBonus);
+    }
+
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        Rank rank = Stream.of(Rank.values())
+                .filter(value -> value.countOfMatch == countOfMatch)
                 .findFirst()
-                .orElse(Rank.NOTHING);
-    }
+                .orElse(Rank.MISS);
 
-    public String getName() {
-        return name;
-    }
+        if (rank == Rank.SECOND && !matchBonus) {
+            return Rank.THIRD;
+        }
 
-    public long getPrize() {
-        return prize;
+        return rank;
     }
 }

@@ -6,11 +6,12 @@ import java.util.Map;
 
 public class Statistics {
     private Map<Rank, Integer> resultMap = new HashMap() {{
-        put(Rank.getRank(6), 0);
-        put(Rank.getRank(5), 0);
-        put(Rank.getRank(4), 0);
-        put(Rank.getRank(3), 0);
-        put(Rank.getRank(0), 0);
+        put(Rank.valueOf(6, false), 0);
+        put(Rank.valueOf(5, true), 0);
+        put(Rank.valueOf(5, false), 0);
+        put(Rank.valueOf(4, false), 0);
+        put(Rank.valueOf(3, false), 0);
+        put(Rank.valueOf(0, false), 0);
     }};
 
     public Map<Rank, Integer> getResultMap() {
@@ -18,20 +19,26 @@ public class Statistics {
     }
 
     public Statistics(Lotto win, List<Lotto> lottos) {
-        lottos.forEach(lotto -> compareNumber(win, lotto));
+        lottos.forEach(lotto -> compareNumber(win, lotto, null));
     }
 
-    private void compareNumber(Lotto win, Lotto lotto) {
+    public Statistics(Lotto win, LottoNumber bonus, List<Lotto> lottos) {
+        lottos.forEach(lotto -> compareNumber(win, lotto, bonus));
+    }
+
+    private void compareNumber(Lotto win, Lotto lotto, LottoNumber bonus) {
         long count = lotto.getLottoNumber().stream()
                 .filter(lottoNumber -> win.getLottoNumber().contains(lottoNumber))
                 .count();
 
-        resultMap.computeIfPresent(Rank.getRank(count), (k, v) -> Math.toIntExact(v + 1));
+        boolean matchBonus = lotto.getLottoNumber().contains(bonus);
+
+        resultMap.computeIfPresent(Rank.valueOf(count, matchBonus), (k, v) -> Math.toIntExact(v + 1));
     }
 
     public long getTotalPrize() {
         return resultMap.entrySet().stream()
-                .mapToLong(rank -> rank.getKey().getPrize() * rank.getValue())
+                .mapToLong(rank -> rank.getKey().getWinningMoney() * rank.getValue())
                 .sum();
     }
 
