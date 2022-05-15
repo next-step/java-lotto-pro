@@ -32,9 +32,6 @@ public class Lotto {
     }
 
     private boolean isInvalidLotto(List<LottoNo> lottoNoList) {
-        if (lottoNoList == null) {
-            return true;
-        }
         return lottoNoList.size() != LOTTO_SIZE;
     }
 
