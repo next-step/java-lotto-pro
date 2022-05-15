@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoResult {
-    private final Map<Hit, Integer> resultMap = new HashMap<>();
+    private final Map<Hit, Integer> resultStorage = new HashMap<>();
 
     public LottoResult(List<Hit> hits) {
         for (Hit hit : hits) {
@@ -23,13 +23,13 @@ public class LottoResult {
 
     private void increase(final Hit hit) {
         if (hit.isWin(Hit.TWO)) {
-            resultMap.put(hit, resultMap.getOrDefault(hit, 0) + 1);
+            resultStorage.put(hit, resultStorage.getOrDefault(hit, 0) + 1);
         }
     }
 
     private long totalPrizeAmount() {
-        return resultMap.keySet().stream()
-                .mapToLong((hit) -> hit.winningAmount(resultMap.get(hit)))
+        return resultStorage.keySet().stream()
+                .mapToLong((hit) -> hit.winningAmount(resultStorage.get(hit)))
                 .sum();
     }
 
@@ -38,12 +38,12 @@ public class LottoResult {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResult result = (LottoResult) o;
-        return Objects.equals(resultMap, result.resultMap);
+        return Objects.equals(resultStorage, result.resultStorage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resultMap);
+        return Objects.hash(resultStorage);
     }
 
     @Override
@@ -56,6 +56,6 @@ public class LottoResult {
     }
 
     private String printFormat(final Hit hit) {
-        return String.format(hit + "- %d개\n", resultMap.getOrDefault(hit, 0));
+        return String.format(hit + "- %d개\n", resultStorage.getOrDefault(hit, 0));
     }
 }
