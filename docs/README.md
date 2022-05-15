@@ -61,3 +61,66 @@
 - WholeNumbers 
   - sum 메소드를 통해서 WholeNumber 들을 계산하여 int 값을 반환한다.
 
+-----
+
+## STEP 3
+### 로또(자동)
+### 기본 정보 
+- 사용자는 로또 구입 금액을 입력 해야 하며, 금액 만큼 로또가 자동 구매된다.
+- 로또 1장 가격은 1000 원이다.
+- 로또 자동 생성은 Collections.shuffle() 메소드를 활용
+
+### 프로그래밍 요구 사항
+- TDD 로 구현
+- depth 는 1 이다.
+- 함수는 15 라인 안으로 구현 하고 한가지 역할만 한다.
+- else 사용 금지
+
+### class 역할
+- Presenter 
+  - 입력과 출력을 담당한다.
+  - 입력은 로또 구매 금액 , 지난 주 당첨 번호 
+  - 출력은 입력 멘트 , 금액에 따른 로또 장수, 구매한 로또 번호 , 지난 주 당첨 번호 멘트, 당첨 통계 정보
+
+- LottoNumber
+  - LottoNumber 는 VO 객체이며, 1 ~ 45 까지 정수 값만 가진다.
+  - 음수 등 잘못된 값이 입력되면 RuntimeException 예외가 발생한다.
+  - LottoNumber 는 비교 할수 있다.
+
+- Lotto
+  - 로또는 LottoNumber 숫자 6개 를 가지며, 6개가 아니면 RuntimeException 을 발생한다.
+  - 로또는 입력한 LottoNumber 숫자들이 정렬 한 후 저장한다.
+  - 로또는 check 메소드는 당첨 번호 Lotto 를 입력으로 받고 입력된 값을 통해서 일치한 갯수를 반환한다.
+
+- Hit
+  - Enum 으로써 일치한 갯수 값과 그에 맞는 금액 정보를 가진다.
+  - Hit 의 일치한 갯수 값은 0 과 6 사이 값을 가진다.
+  - 비교 메소드를 통해서 값을 비교할수 있다.
+  - 동일한 당첨금에 갯수를 입력 시 당첨금 * 갯수 에 대한 금액을 반환한다. 
+  
+- LottoResult
+  - HitList 입력을 받고 earningRate 메소드를 통해서 EarningsRate 를 반환한다.
+  - Total 은 Hit 의 THREE 부터 정보를 저장한다.
+
+- LottoPaper
+  - 일급 객체로써 LottoList 를 입력 받는다.
+  - checkAll 메소드를 통해서 총 당청금을 반환한다.
+
+- EarningsRate
+  - rate 정보를 멤버 변수로 가진다.
+
+- LottoVendingMachine
+  - 사용자가 로또 구매할 금액을 입력하면 LottoPaper 를 반환한다.
+  - 사용자가 구매한 금액만큼 Lotto 가 발급된다.
+
+- LottoGenerator
+  - 로또를 자동과 수동 모드를 제공한다.
+
+- LottoNumbers
+  - 로또 숫자 1부터 45까지 정보를 가지고 있다.
+  - 섞는 방법을 입력하여 로또를 추출한다.
+  
+- LottoMoney
+  - 사용자가 로또 구매할 금액을 가지고 있다.
+  - 총 당청금액을 입력하면 총 수익률을 반환한다.
+
