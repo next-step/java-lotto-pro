@@ -17,14 +17,14 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public LottoRank getLottoRank(LottoNumber winningLottoNumber) {
-        int count = (int) lottoNumber.stream()
-                .filter(winningLottoNumber::isContainNumber)
+    public int countMatchLottoNumber(LottoNumber lottoNumber) {
+        return (int) this.lottoNumber
+                .stream()
+                .filter(lottoNumber::isContainNumber)
                 .count();
-        return LottoRank.findByHits(count);
     }
 
-    private boolean isContainNumber(Number number) {
+    public boolean isContainNumber(Number number) {
         return this.lottoNumber.contains(number);
     }
 

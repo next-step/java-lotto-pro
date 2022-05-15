@@ -3,10 +3,11 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIRST(6, 200_0000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
     private final int hits;
@@ -25,9 +26,10 @@ public enum LottoRank {
         return cashPrize;
     }
 
-    public static LottoRank findByHits(int hits) {
+    public static LottoRank findByHits(int hits, boolean hasBonus) {
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.hits == hits)
+                .filter(it -> it.hits == hits)
+                .filter(it -> !it.equals(SECOND) || hasBonus)
                 .findAny()
                 .orElse(MISS);
     }

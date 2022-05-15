@@ -6,11 +6,14 @@ import lotto.model.LottoNumber;
 import lotto.model.LottoNumberGenerator;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoRanks;
+import lotto.model.Number;
+import lotto.model.WinningLottoNumber;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
 public class LottoController {
     private final Scanner scanner;
+    private LottoMachine lottoMachine;
     private LottoNumbers lottoNumbers;
     private LottoRanks lottoRanks;
 
@@ -27,7 +30,7 @@ public class LottoController {
     private void buy() {
         try {
             LottoInputView.printPurchase();
-            LottoMachine lottoMachine = new LottoMachine(scanner.nextLine());
+            lottoMachine = new LottoMachine(scanner.nextLine());
             lottoNumbers = lottoMachine.getLottoNumbers();
             LottoOutputView.printPurchaseResult(lottoNumbers);
         } catch (IllegalArgumentException iae) {
@@ -39,8 +42,12 @@ public class LottoController {
     private void inputWinningNumber() {
         try {
             LottoInputView.printWinningNumber();
-            LottoNumber winningNumber = LottoNumberGenerator.of(scanner.nextLine());
-            lottoRanks = lottoNumbers.resultLottoRanks(winningNumber);
+            LottoNumber lottoNumber = new LottoNumber(LottoNumberGenerator.of(scanner.nextLine()));
+
+            LottoInputView.printBonusNumber();
+            Number number = Number.of(scanner.nextInt());
+
+            lottoRanks = lottoNumbers.resultLottoRanks(new WinningLottoNumber(lottoNumber, number));
             LottoOutputView.printRankResult(lottoRanks);
         } catch (IllegalArgumentException iae) {
             LottoOutputView.printErrorMessage(iae);

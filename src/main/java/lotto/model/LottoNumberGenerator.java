@@ -27,26 +27,25 @@ public class LottoNumberGenerator {
     private LottoNumberGenerator() {
     }
 
-    public static LottoNumber auto() {
+    public static List<Number> auto() {
         Collections.shuffle(LOTTO_NUMBER_RANGE);
-        List<Number> lottoNumber = LOTTO_NUMBER_RANGE.stream()
+        return LOTTO_NUMBER_RANGE.stream()
                 .limit(NUMBER_SIZE)
                 .collect(toList());
-        return new LottoNumber(lottoNumber);
     }
 
-    public static LottoNumber of(List<Integer> numbers) {
-        return new LottoNumber(wrapIntegerToNumber(numbers));
+    public static List<Number> of(List<Integer> numbers) {
+        return wrapIntegerToNumber(numbers);
     }
 
-    public static LottoNumber of(String numbers) {
+    public static List<Number> of(String numbers) {
         validateFormat(numbers);
         List<String> stringNumberList = splitToList(numbers, DELIMITER);
         List<Integer> unwrapNumberList = stringNumberList.stream()
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(toList());
-        return new LottoNumber(wrapIntegerToNumber(unwrapNumberList));
+        return wrapIntegerToNumber(unwrapNumberList);
     }
 
     private static List<Number> wrapIntegerToNumber(List<Integer> numbers) {

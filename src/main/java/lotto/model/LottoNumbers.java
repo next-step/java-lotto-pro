@@ -20,9 +20,9 @@ public class LottoNumbers {
         return lottoNumbers.size();
     }
 
-    public LottoRanks resultLottoRanks(LottoNumber winningLottoNumber) {
+    public LottoRanks resultLottoRanks(WinningLottoNumber winningLottoNumber) {
         return lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.getLottoRank(winningLottoNumber))
+                .map(winningLottoNumber::matchLottoRank)
                 .collect(collectingAndThen(toList(), LottoRanks::of));
     }
 }
