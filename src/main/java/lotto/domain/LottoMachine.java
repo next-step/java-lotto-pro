@@ -27,7 +27,7 @@ public class LottoMachine {
         int count = price / LottoShop.LOTTO_PRICE;
 
         List<Lotto> lottos = new ArrayList<>();
-        for (int i=0; i<count; i++) {
+        for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(generate()));
         }
 

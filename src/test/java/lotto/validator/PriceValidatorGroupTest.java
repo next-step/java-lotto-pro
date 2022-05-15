@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("구매금액 validator group 에 대한 테스트")
 class PriceValidatorGroupTest {
+
     private final PriceValidatorGroup priceValidatorGroup = PriceValidatorGroup.getInstance();
 
     @DisplayName("싱글톤 테스트 - 싱글톤 객체는 여러번 생성해도 같은 객체이어야 한다")
@@ -22,7 +23,7 @@ class PriceValidatorGroupTest {
         assertEquals(validatorGroup, validatorGroup_3);
         assertEquals(validatorGroup_2, validatorGroup_3);
     }
-    
+
     @DisplayName("로또금액 이하의 금액을 전달하면 금액에 대한 에러메시지가 발생해야 한다")
     @Test
     void price_less_than_test() {

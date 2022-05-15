@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("로또 머신 테스트")
 class LottoMachineTest {
+
     private List<Integer> 로또_번호_목록;
 
     @BeforeEach
