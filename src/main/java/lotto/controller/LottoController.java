@@ -19,6 +19,7 @@ public class LottoController {
 
         Lotto winningLotto = generateWinningLotto();
         LottoResult result = new LottoResult(lottos, winningLotto);
+        OutputView.printLottoResult(result);
     }
 
     private static Lottos purchaseLottos(int count) {
