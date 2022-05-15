@@ -1,15 +1,37 @@
 package lotto;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoWinning {
-    private double profit;
+    private final static double ROUNDING_DIGIT_VALUE = 100d;
 
-    public LottoWinning() {
+    private final LottoPurchase lottoPurchase;
+    private final int purchasePrice;
+    private final int winningPrice;
+    private final double profit;
+
+    public LottoWinning(LottoPurchase lottoPurchase, List<Integer> answerList) {
+        this.lottoPurchase = lottoPurchase;
+        this.purchasePrice = this.lottoPurchase.issueLottoPurchasePrice();
+        this.winningPrice = this.lottoPurchase.calculateWinningLottoTotalPrice(answerList);
+        this.profit = calculateProfit(this.winningPrice, this.purchasePrice);
     }
 
-    public LottoWinning(double profit) {
-        this.profit = profit;
+    private double calculateProfit(int winningPrice, int purchasePrice) {
+        return Math.round(((double) winningPrice / (double) purchasePrice) * ROUNDING_DIGIT_VALUE) / ROUNDING_DIGIT_VALUE;
+    }
+
+    public int getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public int getWinningPrice() {
+        return winningPrice;
+    }
+
+    public double getProfit() {
+        return profit;
     }
 
     @Override

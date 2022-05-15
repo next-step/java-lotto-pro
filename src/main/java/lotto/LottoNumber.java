@@ -3,22 +3,22 @@ package lotto;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class LottoNumber {
     private final static int LOTTO_NUMBER_SIZE_VALUE = 6;
     private final static int LOTTO_NUMBER_MIN_VALUE = 1;
     private final static int LOTTO_NUMBER_MAX_VALUE = 45;
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
-    public LottoNumbers() {
+    public LottoNumber() {
         List<Integer> randomNumbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_NUMBER_MAX_VALUE; i++) {
-            randomNumbers.add(i+1);
+        for (int i = LOTTO_NUMBER_MIN_VALUE; i <= LOTTO_NUMBER_MAX_VALUE; i++) {
+            randomNumbers.add(i);
         }
         this.numbers = issueLottoNumber(randomNumbers);
     }
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoNumber(List<Integer> numbers) {
         shuffleNumbers(numbers);
         this.numbers = issueLottoNumber(numbers);
     }
@@ -56,7 +56,7 @@ public class LottoNumbers {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumbers that = (LottoNumbers) o;
+        LottoNumber that = (LottoNumber) o;
         return Objects.equals(numbers, that.numbers);
     }
 
