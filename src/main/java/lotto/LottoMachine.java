@@ -30,7 +30,7 @@ public class LottoMachine {
     }
 
     private boolean isCorrect(int price) {
-        return price <= ZERO || price%SALE_PRICE != ZERO;
+        return price > ZERO && price % SALE_PRICE == ZERO;
     }
 
 }
