@@ -1,5 +1,6 @@
 package camp.nextstep.edu.level1.lotto.lotto;
 
+import camp.nextstep.edu.common.PositiveNumber;
 import camp.nextstep.edu.until.CollectionHelper;
 
 import java.util.Arrays;
@@ -32,10 +33,12 @@ public class LottoNumbers {
         checkLottoNumberSize();
     }
 
-    public long matchedCountByWinnerNumbers(LottoNumbers winnerNumbers) {
-        return winnerNumbers.lottoNumbers.stream()
-                .filter(this::hasContainLottoNumber)
-                .count();
+    public PositiveNumber matchedCountByWinnerNumbers(LottoNumbers winnerNumbers) {
+        return new PositiveNumber(
+                winnerNumbers.lottoNumbers.stream()
+                        .filter(this::hasContainLottoNumber)
+                        .count()
+        );
     }
 
     public boolean hasContainLottoNumber(LottoNumber target) {
