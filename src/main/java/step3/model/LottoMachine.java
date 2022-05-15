@@ -5,11 +5,11 @@ import java.util.List;
 import step3.domain.LottoManager;
 import step3.domain.LottoTicket;
 
-public class GameModel {
+public class LottoMachine {
 
     private final LottoManager lottoManager;
 
-    public GameModel(LottoManager lottoManager) {
+    public LottoMachine(LottoManager lottoManager) {
         this.lottoManager = lottoManager;
     }
 
