@@ -56,4 +56,13 @@ class CountTest {
 
         assertThat(count.isZero()).isTrue();
     }
+
+    @Test
+    @DisplayName("카운트 두 객체 비교 검증")
+    void verifyCompareCount() {
+        Count one = Count.of(1);
+        Count two = Count.of(2);
+
+        assertThat(one.compareTo(two)).isNegative();
+    }
 }

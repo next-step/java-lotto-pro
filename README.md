@@ -124,7 +124,6 @@
 ### 🔖 TDD를 위한 기능 목록 List
 - 사용자로부터 수동으로 구매할 로또 수, 번호 입력 받기
   - [x] 시도 횟수인 Count 객체 추가
-  - [ ] 입력받은 개수 구매 가능여부 isAvailableBuyingCount 메소드 추가
   - [ ] 로또 수 입력받는 InputView 분리
   - [ ] 로또 갯수만큼 로또 번호 입력
-  - [ ] 수동으로 생성한 로또 번호들 넘겨 받는 inputManualLottoNumber 메소드 추가
+  - [ ] 수동으로 생성한 로또 번호들 넘겨 받는 submitManualLottoNumber 메소드 추가

@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class Count {
+public class Count implements Comparable<Count> {
     private int count;
 
     private Count(int count) {
@@ -27,6 +27,10 @@ public class Count {
         return this.count == 0;
     }
 
+    public int getCount() {
+        return count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -42,5 +46,10 @@ public class Count {
     @Override
     public int hashCode() {
         return Objects.hash(count);
+    }
+
+    @Override
+    public int compareTo(Count inputCount) {
+        return this.count - inputCount.count;
     }
 }
