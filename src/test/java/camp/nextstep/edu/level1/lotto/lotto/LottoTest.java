@@ -50,19 +50,6 @@ class LottoTest {
     }
 
     @Test
-    void 로또_당첨_번호_입력_시_숫자와_구분자를_제외한_문자나_음수나_숫자_6개_를_입력하지_않으면_예외가_발생한다() {
-        Lotto lotto = new Lotto(10000);
-        LottoNumbers invalidWinningNumbers = new LottoNumbers("1, 2, 3, abc4, 5!@# 6");
-        LottoNumbers includeMinusWinningNumbers = new LottoNumbers("1, -2, 3, 4, -5, 6");
-        LottoNumbers invalidWinningNumberCount = new LottoNumbers("1, 2, 3, 4, 5");
-        LottoNumber bonusNumber = new LottoNumber("7");
-
-        assertThatIllegalArgumentException().isThrownBy(() -> lotto.compareWinningNumber(invalidWinningNumbers, bonusNumber));
-        assertThatIllegalArgumentException().isThrownBy(() -> lotto.compareWinningNumber(includeMinusWinningNumbers, bonusNumber));
-        assertThatIllegalArgumentException().isThrownBy(() -> lotto.compareWinningNumber(invalidWinningNumberCount, bonusNumber));
-    }
-
-    @Test
     void 로또의_당첨본호에_보너스_번호가_포함되어_있으면_예외가_발생한다() {
         Lotto lotto = new Lotto(10000);
         LottoNumbers winningNumbersWithDuplicatedBonusNumber = new LottoNumbers("1, 2, 3, 4, 5, 6");
