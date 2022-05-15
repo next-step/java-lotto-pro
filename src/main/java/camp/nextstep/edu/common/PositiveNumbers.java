@@ -15,12 +15,12 @@ public class PositiveNumbers {
         }
     }
 
-    public PositiveNumbers(List<String> stringNumbers, String ...numbers) {
+    public PositiveNumbers(List<String> stringNumbers, boolean isConvertEmptyOrNullToZero, String ...numbers) {
         for (String number: stringNumbers) {
-            this.numbers.add(new PositiveNumber(number));
+            this.numbers.add(new PositiveNumber(number, isConvertEmptyOrNullToZero));
         }
         for (String number: numbers) {
-            this.numbers.add(new PositiveNumber(number));
+            this.numbers.add(new PositiveNumber(number, isConvertEmptyOrNullToZero));
         }
     }
 

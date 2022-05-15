@@ -1,5 +1,7 @@
 package camp.nextstep.edu.common;
 
+import java.util.Objects;
+
 public class PositiveNumber {
     private static final String NUMBER_CHECK_REGEX = "-?\\d+";
 
@@ -16,12 +18,12 @@ public class PositiveNumber {
         this.value = value;
     }
 
-    public PositiveNumber(String value) {
-        String convertEmptyOrNull = convertEmptyOrNullToZero(value);
+    public PositiveNumber(String value, boolean isConvertEmptyOrNullToZero) {
+        String convertedValue = convertEmptyOrNullToZero(value, isConvertEmptyOrNullToZero);
 
-        checkValidNumberByString(convertEmptyOrNull);
+        checkValidNumberByString(convertedValue);
 
-        long convertValue = Long.parseLong(convertEmptyOrNull);
+        long convertValue = Long.parseLong(convertedValue);
         checkPositiveNumber(convertValue);
 
         this.value = convertValue;
@@ -43,8 +45,8 @@ public class PositiveNumber {
         }
     }
 
-    private String convertEmptyOrNullToZero(String value) {
-        if (value.isEmpty()) {
+    private String convertEmptyOrNullToZero(String value, boolean convertedValue) {
+        if (convertedValue && value.isEmpty()) {
             return "0";
         }
         return value;
@@ -53,5 +55,18 @@ public class PositiveNumber {
     @Override
     public String toString() {
         return String.valueOf(this.value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PositiveNumber that = (PositiveNumber) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

@@ -15,7 +15,7 @@ class PositiveNumbersTest {
         List<String> stringNumbers = Arrays.asList("1", "2", "3", "4", "5");
 
         PositiveNumbers positiveNumbersByNumber = new PositiveNumbers(numbers);
-        PositiveNumbers positiveNumbersByStringNumbers = new PositiveNumbers(stringNumbers);
+        PositiveNumbers positiveNumbersByStringNumbers = new PositiveNumbers(stringNumbers, false);
 
         assertThat(positiveNumbersByNumber.sum()).isEqualTo(numbers.stream().reduce(0L, Long::sum));
         assertThat(positiveNumbersByStringNumbers.sum())
@@ -34,7 +34,9 @@ class PositiveNumbersTest {
         List<String> containMinusStringNumbers = Arrays.asList("-1", "3", "-4", "5", "2");
         List<String> invalidStringNumbers = Arrays.asList("1", "abc", "3", "!@#");
 
-        assertThatThrownBy(() -> new PositiveNumbers(containMinusStringNumbers)).isInstanceOf(RuntimeException.class);
-        assertThatThrownBy(() -> new PositiveNumbers(invalidStringNumbers)).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> new PositiveNumbers(containMinusStringNumbers, false))
+                .isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> new PositiveNumbers(invalidStringNumbers, false))
+                .isInstanceOf(RuntimeException.class);
     }
 }
