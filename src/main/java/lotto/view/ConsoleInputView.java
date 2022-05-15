@@ -25,9 +25,9 @@ class ConsoleInputView implements InputView {
     }
 
     private ManualLottoes generateLottoes(int countOfPurchases) {
-        final List<Lotto> lottoes = new ArrayList<>(countOfPurchases);
+        final List<String> lottoes = new ArrayList<>(countOfPurchases);
         for (int i = 0; i < countOfPurchases; i++) {
-            lottoes.add(generateLotto(scanner.nextLine()));
+            lottoes.add(scanner.nextLine());
         }
         return ManualLottoes.of(lottoes);
     }

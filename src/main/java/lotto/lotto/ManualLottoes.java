@@ -1,7 +1,5 @@
 package lotto.lotto;
 
-import lotto.Purchasable;
-import lotto.money.Money;
 import lotto.util.CollectionUtils;
 
 import java.util.Collections;
@@ -9,19 +7,17 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class ManualLottoes implements Purchasable {
+public class ManualLottoes {
 
     private static final ManualLottoes EMPTY = new ManualLottoes(Collections.emptyList());
 
-    private final List<Lotto> lottoes;
-    private final Money totalMoney;
+    private final List<String> rawLottoes;
 
-    private ManualLottoes(List<Lotto> lottoes) {
-        this.lottoes = requireNonNull(lottoes, "lottoes");
-        this.totalMoney = calculateMoney(lottoes);
+    private ManualLottoes(List<String> lottoes) {
+        this.rawLottoes = requireNonNull(lottoes, "lottoes");
     }
 
-    public static ManualLottoes of(List<Lotto> lottoes) {
+    public static ManualLottoes of(List<String> lottoes) {
         return CollectionUtils.isEmpty(lottoes) ? EMPTY : new ManualLottoes(lottoes);
     }
 
@@ -29,22 +25,15 @@ public class ManualLottoes implements Purchasable {
         return EMPTY;
     }
 
-    @Override
-    public Money price() {
-        return totalMoney;
-    }
-
-    public List<Lotto> lottoes() {
-        return Collections.unmodifiableList(lottoes);
+    public List<String> lottoes() {
+        return Collections.unmodifiableList(rawLottoes);
     }
 
     public int size() {
-        return lottoes.size();
+        return rawLottoes.size();
     }
 
-    private static Money calculateMoney(List<Lotto> lottoes) {
-        return lottoes.stream()
-                      .map(Lotto::price)
-                      .reduce(Money.of(0L), Money::add);
+    public boolean isPurchase() {
+        return rawLottoes.isEmpty();
     }
 }

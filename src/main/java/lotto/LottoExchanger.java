@@ -26,11 +26,19 @@ public class LottoExchanger {
     }
 
     private Money exchangeManualLottoes(Money money, ManualLottoes manualLottoes, List<Lotto> purchasedLottoes) {
-        if (!money.canDeduct(manualLottoes.price())) {
-            throw new NotEnoughMoneyException(money, manualLottoes.price());
+        if (!manualLottoes.isPurchase()) {
+            return money;
         }
-        final Money remainMoney = money.deduct(manualLottoes.price());
-        purchasedLottoes.addAll(manualLottoes.lottoes());
+        final Money totalMoney = Lotto.PRICE.multiple(manualLottoes.size());
+        if (!money.canDeduct(totalMoney)) {
+            throw new NotEnoughMoneyException(money, totalMoney);
+        }
+        Money remainMoney = money;
+        for (String maybeLottoNumbers : manualLottoes.lottoes()) {
+            final Lotto lotto = Lotto.of(maybeLottoNumbers);
+            remainMoney = money.deduct(lotto.price());
+            purchasedLottoes.add(lotto);
+        }
         return remainMoney;
     }
 
