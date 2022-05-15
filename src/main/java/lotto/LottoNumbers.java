@@ -16,17 +16,22 @@ public class LottoNumbers {
     }
     
     public LottoNumbers(String numbersWithComma) {
+        this.numbers = new ArrayList<>();
         try {
             String[] winnerNumbers = numbersWithComma.split(",");
             this.setNumbersWithInput(winnerNumbers);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Winner number is not valid.");
+            throw new IllegalArgumentException(String.format("String input is not valid. input: %s", numbersWithComma));
         }
-        
+        Collections.sort(this.numbers);
     }
 
-    public Object[] getNumbersAsArray() {
-        return numbers.toArray();
+    public int[] getNumbersAsArray() {
+        return this.numbers.stream().mapToInt(i -> i).toArray();
+    }
+
+    public boolean contains(int number) {
+        return this.numbers.contains(number);
     }
 
     private void initWithRandomNumber() {
@@ -50,8 +55,8 @@ public class LottoNumbers {
     private void setNumbersWithInput(String[] winnerNumbers) {
         this.validateNumbers(winnerNumbers);
 
-        for (int i = 1; i <= MAX_COUNT; i++) {
-            int oneNumber = Integer.parseInt(winnerNumbers[i-1]);
+        for (String number : winnerNumbers) {
+            int oneNumber = Integer.parseInt(number);
             validateLottoNumber(oneNumber);
             this.numbers.add(oneNumber);
         }
@@ -60,6 +65,10 @@ public class LottoNumbers {
     private void validateLottoNumber(int oneNumber) {
         if (oneNumber < 1 || oneNumber > 45) {
             throw new IllegalArgumentException("Lotto number should be from 1 to 45.");
+        }
+
+        if (this.contains(oneNumber)) {
+            throw new IllegalArgumentException("Lotto number should not be the same.");
         }
     }
 
