@@ -18,7 +18,7 @@ public class LottoMarket {
         return LottoTicket.from(generateAutoLottoNumbers(lottoCount.minus(manualLottoCount)));
     }
 
-    public LottoTicket purchaseManualLottoTicket(List<LottoNumbers> manualLottoNumbers){
+    public LottoTicket purchaseManualLottoTicket(List<LottoNumbers> manualLottoNumbers) {
         return LottoTicket.from(manualLottoNumbers);
     }
 
