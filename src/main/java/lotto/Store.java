@@ -9,22 +9,26 @@ public class Store {
         this.lottoOneGamePrice = lottoPrice;
     }
 
-    public void receiveMoney(int money) {
-        this.receiveMoney = checkMoney(money);
+    public void receiveAmount(int amount) {
+        this.receiveMoney = checkAmount(amount);
     }
 
     public Lottos giveLotto() {
         return new Lottos(this.receiveMoney / lottoOneGamePrice);
     }
 
-    private int checkMoney(int money) {
-        if (money < 1000) {
+    public String inputAmountText() {
+        return "구입금액을 입력해 주세요";
+    }
+
+    private int checkAmount(int amount) {
+        if (amount < 1000) {
             throw new IllegalArgumentException(String.format("최소 금액은 %d원 이상입니다.", this.lottoOneGamePrice));
         }
 
-        if (money % 1000 != 0) {
+        if (amount % 1000 != 0) {
             throw new IllegalArgumentException(String.format("금액은 %s원 단위로 입력해주세요.", this.lottoOneGamePrice));
         }
-        return money;
+        return amount;
     }
 }
