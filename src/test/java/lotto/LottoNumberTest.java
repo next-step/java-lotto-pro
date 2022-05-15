@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -26,5 +27,11 @@ class LottoNumberTest {
     void 로또_번호_유효하지_않은_번호가_입력될떄(int number) {
         assertThatThrownBy(() -> LottoNumber.valueOf(number))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또 전체 번호가 1 ~ 45 인지 확인")
+    void 로또_전체_번호가_1_4인지확인() {
+        assertThat(LottoNumber.ALL_LOTTO_NUMBERS).hasSize(45);
     }
 }

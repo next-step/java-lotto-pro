@@ -1,13 +1,17 @@
 package lotto;
 
 import static java.lang.Integer.parseInt;
+import static java.util.stream.IntStream.range;
 
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    public static final int START_NUM = 1;
-    public static final int LAST_NUM = 45;
+    public static final Set<LottoNumber> ALL_LOTTO_NUMBERS = allLottoNumbers();
+    private static final int START_NUM = 1;
+    private static final int LAST_NUM = 45;
     private final int number;
 
     private LottoNumber(final int number) {
@@ -31,6 +35,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (number > LAST_NUM || number < START_NUM) {
             throw new IllegalArgumentException("잘못된 로또 번호 입니다.");
         }
+    }
+
+    private static Set<LottoNumber> allLottoNumbers() {
+        return range(LottoNumber.START_NUM, LottoNumber.LAST_NUM + 1)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toSet());
     }
 
     @Override

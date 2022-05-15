@@ -2,18 +2,14 @@ package lotto;
 
 import static java.util.stream.Collectors.joining;
 import static util.ListUtils.distinct;
-import static util.ListUtils.randomPickCount;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class LottoNumbers {
-
-    public static final LottoNumbers ALL_NUMBERS = new LottoNumbers(totalLottoNumberList());
-    private static final int DEFAULT_PICK_COUNT = 6;
+    public static final int DEFAULT_PICK_COUNT = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -29,20 +25,8 @@ public class LottoNumbers {
     private static void validatePickNumbers(final List<LottoNumber> lottoNumbers) {
         final int count = distinct(lottoNumbers).size();
         if (count != DEFAULT_PICK_COUNT) {
-            throw new IllegalArgumentException("당첨 번호 숫자들이 6개가 이닙니다.(" + count +")개");
+            throw new IllegalArgumentException("로또 번호들이 6개가 이닙니다.(" + count +")개");
         }
-    }
-
-    public LottoNumbers pickNumbersRandom() {
-        return new LottoNumbers(randomPickCount(new ArrayList<>(lottoNumbers), DEFAULT_PICK_COUNT));
-    }
-
-    private static List<LottoNumber> totalLottoNumberList() {
-        List<LottoNumber> allNumbers = new ArrayList<>();
-        for (int i = LottoNumber.START_NUM; i <= LottoNumber.LAST_NUM; i++) {
-            allNumbers.add(LottoNumber.valueOf(i));
-        }
-        return allNumbers;
     }
 
     public boolean isPicked() {

@@ -16,26 +16,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoNumbersTest {
 
     @Test
-    void 전체_기본_로또번호_1_45_확인() {
-        // given
-        List<LottoNumber> lottoNumberList = range(1, 46)
-                .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.toList());
-
-        // when & then
-        assertThat(LottoNumbers.ALL_NUMBERS).isEqualTo(new LottoNumbers(lottoNumberList));
-    }
-
-    @Test
-    void 로또_번호_6개를_랜덤으로_선택() {
-        // when
-        LottoNumbers lottoNumbers = LottoNumbers.ALL_NUMBERS.pickNumbersRandom();
-
-        // then
-        assertThat(lottoNumbers.isPicked()).isTrue();
-    }
-
-    @Test
     void 로또_번호_6개_선택() {
         // when
         final LottoNumbers lottoNumbers = LottoNumbers.pickNumbers(range(1, 7)
