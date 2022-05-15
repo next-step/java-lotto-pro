@@ -42,7 +42,8 @@ public class LottosTest {
         assertAll(
                 () -> assertThat(winningLotto.findWinningCount(MatchPoint.FIFTH)).isEqualTo(1),
                 () -> assertThat(winningLotto.findWinningCount(MatchPoint.FOURTH)).isEqualTo(1),
-                () -> assertThat(winningLotto.findWinningCount(MatchPoint.THIRD)).isEqualTo(1),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.THIRD)).isEqualTo(0),
+                () -> assertThat(winningLotto.findWinningCount(MatchPoint.SECOND)).isEqualTo(1),
                 () -> assertThat(winningLotto.findWinningCount(MatchPoint.FIRST)).isEqualTo(2)
         );
     }
