@@ -10,6 +10,7 @@ public class Application {
 
     public static void main(String[] args) {
         Player player = createPlayer();
+        ResultView.playerHasLotto(player);
         Lotto winnerLotto = lastWeekWinnerLotto();
         LottoReport lottoReport = player.matchWinnerLotto(winnerLotto);
         ResultView.winnerReport(lottoReport);
@@ -17,9 +18,7 @@ public class Application {
     }
 
     private static Player createPlayer() {
-        Player player = new Player(InputView.userPriceInput());
-        ResultView.createLotto(player);
-        return player;
+        return new Player(InputView.userPriceInput());
     }
 
     private static Lotto lastWeekWinnerLotto() {

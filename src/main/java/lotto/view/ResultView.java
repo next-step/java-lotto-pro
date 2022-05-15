@@ -14,7 +14,7 @@ public class ResultView {
     private static final String YILELD_BENEFIT_MESSAGE = "(기준이 1이기 때문에 이익이라는 의미)";
     private static final String YILELD_LOSS_MESSAGE = "(기준이 1이기 때문에 이익이라는 의미)";
 
-    public static void createLotto(Player player) {
+    public static void playerHasLotto(Player player) {
         List<Lotto> lottos = player.getLottos();
         System.out.println(lottos.size() + "를 구매했습니다.");
 
