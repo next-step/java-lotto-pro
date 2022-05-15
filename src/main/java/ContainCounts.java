@@ -1,6 +1,9 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 
-public class ContainCounts {
+public class ContainCounts implements Iterable<ContainCount> {
     private final List<ContainCount> containCounts;
 
     public ContainCounts() {
@@ -24,5 +27,10 @@ public class ContainCounts {
     @Override
     public int hashCode() {
         return Objects.hash(containCounts);
+    }
+
+    @Override
+    public Iterator<ContainCount> iterator() {
+        return this.containCounts.iterator();
     }
 }

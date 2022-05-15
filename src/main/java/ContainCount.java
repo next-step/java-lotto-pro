@@ -3,6 +3,10 @@ import java.util.Objects;
 public class ContainCount {
     private final int containCount;
 
+    public Prize find() {
+        return Prize.find(this.containCount);
+    }
+
     public ContainCount(int containCount) {
         if (containCount < 0)
             throw new RuntimeException();
