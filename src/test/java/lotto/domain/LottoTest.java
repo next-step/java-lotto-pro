@@ -17,20 +17,23 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoTest {
 
     private Lotto winLotto;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     void setUp() {
         winLotto = Lotto.createCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        bonusNumber = LottoNumber.createBonusNumber(winLotto, 7);
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("provideLottoResult")
     @DisplayName("로또의 결과를 맞춰 본다")
-    void LottoMatch() {
-        Lotto lotto = Lotto.createCustomLotto(Arrays.asList(1, 3, 4, 5, 7, 9));
-        LottoRank lottoRank = lotto.match(winLotto);
+    void LottoMatch(List<Integer> lottoNumbers, LottoRank result) {
+        Lotto lotto = Lotto.createCustomLotto(lottoNumbers);
+        LottoRank lottoRank = lotto.match(winLotto, bonusNumber);
 
-        assertThat(lottoRank).isEqualTo(LottoRank.THIRD);
-        assertThat(lottoRank.rewordMoney()).isEqualTo(LottoRank.THIRD.rewordMoney());
+        assertThat(lottoRank).isEqualTo(result);
+        assertThat(lottoRank.rewordMoney()).isEqualTo(result.rewordMoney());
     }
 
     @ParameterizedTest
@@ -75,10 +78,22 @@ class LottoTest {
 
     private static Stream<Arguments> provideLottoSize() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 3, 4, 5, 6, 7, 8)),
+                Arguments.of(Arrays.asList(1, 4, 3, 5, 6, 7, 8)),
                 Arguments.of(Arrays.asList(1, 2)),
                 Arguments.of(new ArrayList<>()),
                 Arguments.of((Object) null)
+        );
+    }
+
+    private static Stream<Arguments> provideLottoResult() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoRank.FIRST),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), LottoRank.SECOND),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 9), LottoRank.THIRD),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 9, 7), LottoRank.FOURTH),
+                Arguments.of(Arrays.asList(1, 2, 3, 11, 12, 7), LottoRank.FIFTH),
+                Arguments.of(Arrays.asList(1, 2, 42, 11, 12, 7), LottoRank.FAIL)
+
         );
     }
 

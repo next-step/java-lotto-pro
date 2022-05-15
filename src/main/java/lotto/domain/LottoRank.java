@@ -7,10 +7,11 @@ import java.util.stream.Collectors;
 
 public enum LottoRank implements Comparator<LottoRank> {
     FIRST(6, 2_000_000_000, 1),
-    SECOND(5, 1_500_000, 2),
-    THIRD(4, 50_000, 3),
-    FOURTH(3, 5_000, 4),
-    FAIL(0, 0, 5);
+    SECOND(5, 30_000_000, 2),
+    THIRD(5, 1_500_000, 3),
+    FOURTH(4, 50_000, 4),
+    FIFTH(3, 5_000, 5),
+    FAIL(0, 0, 6);
 
     private final int matchCount;
     private final int money;
@@ -30,8 +31,12 @@ public enum LottoRank implements Comparator<LottoRank> {
         return this.matchCount;
     }
 
-    public static LottoRank reword(int matchCount) {
+    public static LottoRank reword(int matchCount, boolean bonusContain) {
+        if (matchCount == LottoRank.SECOND.matchCount && bonusContain) {
+            return LottoRank.SECOND;
+        }
         return Arrays.stream(LottoRank.values())
+                .filter((LottoRank.SECOND::notEquals))
                 .filter((lottoRank -> sameMatchCount(matchCount, lottoRank)))
                 .findFirst()
                 .orElse(LottoRank.FAIL);
@@ -41,6 +46,10 @@ public enum LottoRank implements Comparator<LottoRank> {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> !lottoRank.equals(LottoRank.FAIL))
                 .collect(Collectors.toList());
+    }
+
+    private boolean notEquals(LottoRank lottoRank) {
+        return !this.equals(lottoRank);
     }
 
     @Override

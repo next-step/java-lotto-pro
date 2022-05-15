@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoReport;
 import lotto.domain.Player;
 import lotto.view.InputView;
@@ -14,7 +15,7 @@ public class Application {
         ResultView.playerHasLotto(player);
 
         Lotto winnerLotto = lastWeekWinnerLotto();
-        LottoReport lottoReport = player.matchWinnerLotto(winnerLotto);
+        LottoReport lottoReport = player.matchWinnerLotto(winnerLotto, new LottoNumber(3));
 
         ResultView.winnerReport(lottoReport);
 

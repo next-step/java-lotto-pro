@@ -42,13 +42,13 @@ public class LottoReportTest {
     @DisplayName("로또 결과에 금액의 합계를 구한다.")
     void rewordTotalMoney() {
         assertThat(lottoReport.rewordTotalMoney())
-                .isEqualTo(1_605_000);
+                .isEqualTo(33_050_000);
     }
 
     @Test
     @DisplayName("로또 결과의 수익률을 구한다.")
     void lottoYield(){
-        assertThat(lottoReport.yield()).isEqualTo(321);
+        assertThat(lottoReport.yield()).isEqualTo(6610);
     }
 
     @Test

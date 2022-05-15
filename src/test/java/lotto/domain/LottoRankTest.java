@@ -15,8 +15,8 @@ class LottoRankTest {
     @ParameterizedTest
     @MethodSource("lottoRankFilterProvideCount")
     @DisplayName("맞춘 갯수에 따른 LottoRank를 반환한다.")
-    void lottoRankFilter(int matchCount, LottoRank result) {
-        LottoRank reword = LottoRank.reword(matchCount);
+    void lottoRankFilter(int matchCount,boolean bonus,LottoRank result) {
+        LottoRank reword = LottoRank.reword(matchCount, bonus);
 
         assertThat(reword).isEqualTo(result);
     }
@@ -33,12 +33,13 @@ class LottoRankTest {
 
     private static Stream<Arguments> lottoRankFilterProvideCount() {
         return Stream.of(
-                Arguments.of(1, LottoRank.FAIL)
-                , Arguments.of(0, LottoRank.FAIL)
-                , Arguments.of(3, LottoRank.FOURTH)
-                , Arguments.of(4, LottoRank.THIRD)
-                , Arguments.of(5, LottoRank.SECOND)
-                , Arguments.of(6, LottoRank.FIRST)
+                 Arguments.of(0, true, LottoRank.FAIL)
+                , Arguments.of(3, false, LottoRank.FIFTH)
+                , Arguments.of(3, true, LottoRank.FIFTH)
+                , Arguments.of(4, true, LottoRank.FOURTH)
+                , Arguments.of(5, false, LottoRank.THIRD)
+                , Arguments.of(5, true, LottoRank.SECOND)
+                , Arguments.of(6, false, LottoRank.FIRST)
         );
     }
 
