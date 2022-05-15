@@ -2,13 +2,13 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Payment {
+public class LottoPayment {
     private static final int LOTTO_TICKET_COST = 1000;
 
     private final int money;
     private final int purchasableAmount;
 
-    public Payment(final String money) {
+    public LottoPayment(final String money) {
         this.money = validateMoney(money);
         purchasableAmount = this.money / LOTTO_TICKET_COST;
     }
@@ -49,8 +49,8 @@ public class Payment {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        final Payment payment = (Payment) o;
-        return money == payment.money && purchasableAmount == payment.purchasableAmount;
+        final LottoPayment lottoPayment = (LottoPayment) o;
+        return money == lottoPayment.money && purchasableAmount == lottoPayment.purchasableAmount;
     }
 
     @Override
