@@ -1,8 +1,11 @@
 import java.io.IOException;
 import lotto.constant.LottoInputMessage;
 import lotto.controller.LottoGame;
-import lotto.dto.LottoGameDTO;
+import lotto.wrapper.LottosResultWrapper;
+import lotto.model.LottoGameResult;
+import lotto.model.Lottos;
 import lotto.utils.InputConsoleUtils;
+import lotto.view.ResultView;
 
 public class Application {
 
@@ -11,30 +14,49 @@ public class Application {
     }
 
     public void startLottoGame() throws IOException {
-        LottoGameDTO lottoGameDTO = generateLottosByInputMoney();
-        playLotto(lottoGameDTO);
+        playLotto(generateLottosByInputMoney());
     }
 
-    private LottoGameDTO generateLottosByInputMoney() throws IOException {
-        boolean isInputError;
-        LottoGameDTO lottoGameDTO;
+    private Lottos generateLottosByInputMoney() throws IOException {
+        LottosResultWrapper lottosResultWrapper;
         do {
             String moneyWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.MONEY_MESSAGE);
-            lottoGameDTO = LottoGame.generateLottosByMoney(moneyWord);
-            isInputError = lottoGameDTO.isInputError();
-        } while (isInputError);
-        return lottoGameDTO;
+            lottosResultWrapper = fetchLottos(moneyWord);
+        } while (lottosResultWrapper.isInputError());
+
+        return lottosResultWrapper.getLottos();
     }
 
-    private void playLotto(LottoGameDTO requestLottoGameDTO) throws IOException {
-        boolean isInputError;
-        LottoGameDTO lottoGameDTO;
+    private LottosResultWrapper fetchLottos(String moneyWord) {
+        Lottos lottos = null;
+        boolean isInputError = false;
+        try {
+            lottos = LottoGame.generateLottosByMoney(moneyWord);
+            ResultView.printLottosView(lottos);
+        } catch (IllegalArgumentException e) {
+            ResultView.printConsole(e.getMessage());
+            isInputError = true;
+        }
+        return new LottosResultWrapper(lottos, isInputError);
+    }
+
+    private void playLotto(Lottos lottos) throws IOException {
+        LottosResultWrapper lottosResultWrapper;
         do {
             String winningNumbersWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.WINNING_NUMBERS_MESSAGE);
-            lottoGameDTO = LottoGame.resultWinningGame(requestLottoGameDTO.getLottos(), winningNumbersWord);
-            isInputError = lottoGameDTO.isInputError();
-        } while (isInputError);
+            lottosResultWrapper = fetchResult(lottos, winningNumbersWord);
+        } while (lottosResultWrapper.isInputError());
     }
 
-
+    private LottosResultWrapper fetchResult(Lottos lottos, String winningNumbersWord) {
+        boolean isInputError = false;
+        try {
+            LottoGameResult lottoGameResult = LottoGame.resultWinningGame(lottos, winningNumbersWord);
+            ResultView.printFinalResultView(lottoGameResult, lottos);
+        } catch (IllegalArgumentException e) {
+            ResultView.printConsole(e.getMessage());
+            isInputError = true;
+        }
+        return new LottosResultWrapper(lottos, isInputError);
+    }
 }

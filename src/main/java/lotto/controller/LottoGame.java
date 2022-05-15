@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.constant.ErrorMessage;
 import lotto.constant.LottoRoleConst;
-import lotto.dto.LottoGameDTO;
 import lotto.model.Lotto;
 import lotto.model.LottoGameResult;
 import lotto.model.LottoPaper;
@@ -12,7 +11,6 @@ import lotto.model.LottoStore;
 import lotto.model.WinningLotto;
 import lotto.utils.InputStringUtils;
 import lotto.utils.RandomNumberUtils;
-import lotto.view.ResultView;
 import lotto.model.Lottos;
 
 public class LottoGame {
@@ -23,17 +21,10 @@ public class LottoGame {
         throw new IllegalStateException(ErrorMessage.UTILITY_CLASS);
     }
 
-    public static LottoGameDTO generateLottosByMoney(String moneyWord) {
-        try {
-            LottoStore lottoStore = new LottoStore(moneyWord);
-            LottoPaper lottoPaper = lottoStore.issueLottoPaper();
-            Lottos lottos = generateLottos(lottoPaper);
-            ResultView.printLottosView(lottos);
-            return new LottoGameDTO(lottos, false);
-        } catch (IllegalArgumentException e) {
-            ResultView.printConsole(e.getMessage());
-            return new LottoGameDTO(true);
-        }
+    public static Lottos generateLottosByMoney(String moneyWord) {
+        LottoStore lottoStore = new LottoStore(moneyWord);
+        LottoPaper lottoPaper = lottoStore.issueLottoPaper();
+        return generateLottos(lottoPaper);
     }
 
     private static Lottos generateLottos(LottoPaper lottoPaper) {
@@ -47,16 +38,9 @@ public class LottoGame {
         return new Lottos(lottoList);
     }
 
-    public static LottoGameDTO resultWinningGame(Lottos lottos, String winningNumbersWord) {
-        try {
-            List<Integer> winningNumberList = InputStringUtils.splitToNumberList(winningNumbersWord, DELIMITER_COMMA);
-            WinningLotto winningLotto = new WinningLotto(winningNumberList);
-            LottoGameResult lottoGameResult = winningLotto.compareLottos(lottos);
-            ResultView.printFinalResultView(lottoGameResult, lottos);
-            return new LottoGameDTO(lottos, false);
-        } catch (IllegalArgumentException e) {
-            ResultView.printConsole(e.getMessage());
-            return new LottoGameDTO(true);
-        }
+    public static LottoGameResult resultWinningGame(Lottos lottos, String winningNumbersWord) {
+        List<Integer> winningNumberList = InputStringUtils.splitToNumberList(winningNumbersWord, DELIMITER_COMMA);
+        WinningLotto winningLotto = new WinningLotto(winningNumberList);
+        return winningLotto.compareLottos(lottos);
     }
 }
