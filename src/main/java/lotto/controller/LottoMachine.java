@@ -5,6 +5,7 @@ import static lotto.util.LottoUtil.splitInputWinningNumber;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.model.money.Money;
 import lotto.model.number.LottoNumber;
@@ -33,13 +34,13 @@ public class LottoMachine {
         OutputView.OutputLottoResult(lottoStatistics);
     }
 
-    private List<LottoNumber> getInputWinningNumberArr() {
+    private Set<LottoNumber> getInputWinningNumberArr() {
         String inputWinningNumber = InputView.inputWinningNumber();
         String[] inputWinningNumbers = splitInputWinningNumber(inputWinningNumber);
 
         return Arrays.stream(inputWinningNumbers)
             .map(LottoNumber::new)
-            .collect(Collectors.toList());
+            .collect(Collectors.toSet());
     }
 
 }

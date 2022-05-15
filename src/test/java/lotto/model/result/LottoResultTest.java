@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import lotto.model.money.Money;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
@@ -32,14 +34,14 @@ class LottoResultTest {
 
     private List<PurchasedLotto> generatePurchasedLotto(int[] numbers) {
         List<PurchasedLotto> purchasedLottos = new ArrayList<>();
-        List<LottoNumber> lottoNumberList = generateLottoNumberList(numbers);
+        Set<LottoNumber> lottoNumberList = generateLottoNumberList(numbers);
 
         purchasedLottos.add(PurchasedLotto.createManual(new LottoNumbers(lottoNumberList)));
         return purchasedLottos;
     }
 
-    private List<LottoNumber> generateLottoNumberList(int[] numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private Set<LottoNumber> generateLottoNumberList(int[] numbers) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
