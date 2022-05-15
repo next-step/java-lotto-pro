@@ -45,14 +45,15 @@ public class Application {
         LottosResultWrapper lottosResultWrapper;
         do {
             String winningNumbersWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.WINNING_NUMBERS_MESSAGE);
-            lottosResultWrapper = fetchResult(lottos, winningNumbersWord);
+            String bonusNumberWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.BONUS_NUMBER_MESSAGE);
+            lottosResultWrapper = fetchResult(lottos, winningNumbersWord,bonusNumberWord);
         } while (lottosResultWrapper.isInputError());
     }
 
-    private LottosResultWrapper fetchResult(Lottos lottos, String winningNumbersWord) {
+    private LottosResultWrapper fetchResult(Lottos lottos, String winningNumbersWord, String bonusNumberWord) {
         boolean isInputError = false;
         try {
-            LottoGameResult lottoGameResult = LottoGame.resultWinningGame(lottos, winningNumbersWord);
+            LottoGameResult lottoGameResult = LottoGame.resultWinningGame(lottos, winningNumbersWord, bonusNumberWord);
             ResultView.printFinalResultView(lottoGameResult, lottos);
         } catch (IllegalArgumentException e) {
             ResultView.printConsole(e.getMessage());
