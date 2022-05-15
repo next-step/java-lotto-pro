@@ -1,6 +1,7 @@
 package lotto.enums;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public enum LottoRank {
@@ -26,7 +27,7 @@ public enum LottoRank {
     }
 
     public static List<LottoRank> rankListWithReverseOrder() {
-        return Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
+        return Collections.unmodifiableList(Arrays.asList(FOURTH, THIRD, SECOND, FIRST));
     }
 
     public int getMatchedCount() {
