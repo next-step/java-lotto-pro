@@ -9,7 +9,7 @@ class LottoRankTest {
     @ParameterizedTest
     @CsvSource(value = {"6:FIRST", "5:SECOND", "4:THIRD", "3:FOURTH", "0:MISS"}, delimiter = ':')
     void 로또_등수_가져오기(int input, LottoRank expected) {
-        LottoRank lottoRank = LottoRank.valueOf(input);
+        LottoRank lottoRank = LottoRank.valueOf(input, false);
         Assertions.assertThat(lottoRank).isEqualTo(expected);
     }
 }
