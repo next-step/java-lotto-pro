@@ -60,10 +60,10 @@ ContainCount
 ContainCounts
 
 Lottery
-- [X] 당첨 번호와 로또 번호 여러개(Lottos) 를 비교할 수 있다.
+- [X] 당첨 번호와 로또 번호를 비교할 수 있다. 여러 개도 가능하다.
 
-Lottos
-- [X] 로또를 여러개 추가하거나, 총 로또 개수를 알 수 있다.
+Lotto
+- [X] 로또를 추가하거나, 총 로또 개수를 알 수 있다.
 
 Vendor
 - [X] 로또를 판매할 수 있다.
