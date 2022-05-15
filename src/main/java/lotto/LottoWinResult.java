@@ -26,23 +26,10 @@ public enum LottoWinResult {
     }
 
     public static LottoWinResult confirm(final int count) {
-        if (count == FIRST.winningCount) {
-            return FIRST;
-        }
-
-        if (count == SECOND.winningCount) {
-            return SECOND;
-        }
-
-        if (count == THIRD.winningCount) {
-            return THIRD;
-        }
-
-        if (count == FOURTH.winningCount) {
-            return FOURTH;
-        }
-
-        return NO_WIN;
+        return WIN_RESULTS.stream()
+                .filter(winResult -> winResult.winningCount == count)
+                .findFirst()
+                .orElse(NO_WIN);
     }
 
     public Money price(final Long value) {
