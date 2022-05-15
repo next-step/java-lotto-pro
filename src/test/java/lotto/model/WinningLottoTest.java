@@ -74,11 +74,19 @@ class WinningLottoTest {
     }
 
   
-    @DisplayName("보너스볼이 추가된 로또 게임 결과를 확인한다.")
+    @DisplayName("보너스볼이 추가된 로또 게임 결과(일치한 개수, 총 상금)를 확인한다.")
     @Test
     void playLottoGame_bonus_number() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(3, 7, 10, 35, 43, 45),new BonusNumber(9));
-        
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(3, 7, 10, 35, 43, 45),new BonusNumber(20));
+        LottoGameResult resultLottoGame = winningLotto.compareLottos(lottos);
+        assertAll(
+                ()-> assertEquals(2, resultLottoGame.rankCount(LottoRank.FOURTH)),
+                ()-> assertEquals(0, resultLottoGame.rankCount(LottoRank.THIRD)),
+                ()-> assertEquals(0, resultLottoGame.rankCount(LottoRank.SECOND)),
+                ()-> assertEquals(1, resultLottoGame.rankCount(LottoRank.SECOND_BONUS)),
+                ()-> assertEquals(0, resultLottoGame.rankCount(LottoRank.FIRST)),
+                ()-> assertEquals(30_010_000,resultLottoGame.totalWinningAmount())
+        );
     }
 
 
