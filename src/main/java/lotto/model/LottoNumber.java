@@ -9,14 +9,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOTTO_MAX_NUMBER = 45;
     private static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = initLottoNumberCache();
 
-    private static Map<Integer, LottoNumber> initLottoNumberCache() {
-        Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
-        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
-            lottoNumberCache.put(i, new LottoNumber(i));
-        }
-        return lottoNumberCache;
-    }
-
     private final int lottoNumber;
 
     private LottoNumber(int lottoNumber) {
@@ -29,6 +21,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
             return LOTTO_NUMBER_CACHE.get(lottoNumber);
         }
         return new LottoNumber(lottoNumber);
+    }
+
+    private static Map<Integer, LottoNumber> initLottoNumberCache() {
+        Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
+        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
+            lottoNumberCache.put(i, new LottoNumber(i));
+        }
+        return lottoNumberCache;
     }
 
     private void validLottoRange(int lottoNumber) {
