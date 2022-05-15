@@ -1,5 +1,7 @@
 package camp.nextstep.edu.level1.lotto.lotto;
 
+import camp.nextstep.edu.until.TypeCheckHelper;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -13,14 +15,28 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public LottoNumber(String stringNumber) {
+        checkPossibleParseNumber(stringNumber);
+        int convertedNumber = Integer.parseInt(stringNumber);
+        checkValidLottoNumber(convertedNumber);
+
+        this.number = convertedNumber;
+    }
+
+    public boolean hasSameValue(LottoNumber number) {
+        return this.number == number.number;
+    }
+
     private void checkValidLottoNumber(int number) {
         if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45 만 허용됩니다.");
         }
     }
 
-    public boolean hasSameValue(LottoNumber number) {
-        return this.number == number.number;
+    private void checkPossibleParseNumber(String stringNumber) {
+        if (!TypeCheckHelper.isPossibleStringToInteger(stringNumber)) {
+            throw new IllegalArgumentException("로또 번호는 숫자만 가능합니다.");
+        }
     }
 
     @Override

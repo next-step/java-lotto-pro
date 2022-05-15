@@ -7,9 +7,9 @@ import java.util.Map;
 public class LottoResult {
     private final Map<LottoRank, Integer> result = new HashMap<>();
 
-    public LottoResult(List<LottoNumbers> purchaseLotto, LottoNumbers winnerLottoNumbers) {
+    public LottoResult(List<LottoNumbers> purchaseLotto, LottoNumbers winnerLottoNumbers, LottoNumber bonusNumber) {
         purchaseLotto.forEach(lotto -> {
-            addLottoRankCountIfRankIsNotNull(LottoRank.findLottoRank(lotto, winnerLottoNumbers));
+            addLottoRankCountIfRankIsNotNull(LottoRank.findLottoRank(lotto, winnerLottoNumbers, bonusNumber));
         });
     }
 
