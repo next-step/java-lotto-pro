@@ -23,24 +23,24 @@ public class SetUtilTest {
 		numbers.add(2);
 		numbers.add(3);
 	}
-	
+
 	@Test
 	@DisplayName("Set Collection의 사이즈를 확인하는 테스트")
 	void setSize_test() {
 		assertThat(numbers).hasSize(3);
 	}
-	
+
 	@ParameterizedTest
-	@ValueSource(ints = {1, 2, 3})
+	@ValueSource(ints = { 1, 2, 3 })
 	@DisplayName("Set Collection의 존재하는 요소를 확인하는 테스트")
-	void contains_test(int number){
-        assertThat(numbers.contains(number)).isTrue();
+	void contains_test(int number) {
+		assertThat(numbers.contains(number)).isTrue();
 	}
-	
+
 	@ParameterizedTest
-	@CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+	@CsvSource(value = { "1:true", "2:true", "3:true", "4:false", "5:false" }, delimiter = ':')
 	@DisplayName("Set Collection의 요소가 존재하는지 확인하는 테스트")
-	void contains_test(int number, boolean isExists){
-        assertThat(numbers.contains(number)).isEqualTo(isExists);
+	void contains_test(int number, boolean isExists) {
+		assertThat(numbers.contains(number)).isEqualTo(isExists);
 	}
 }
