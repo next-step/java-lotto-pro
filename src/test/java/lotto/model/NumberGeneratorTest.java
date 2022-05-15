@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class NumberGeneratorTest {
 
-    private static final int SIZE = 6;
+    private static final int LOTTO_SIZE = 6;
 
     @DisplayName("1부터 45사이의 로또 번호 6개가 랜덤으로 생성된다")
     @Test
@@ -29,6 +29,19 @@ class NumberGeneratorTest {
     @ParameterizedTest(name = "1부터 45사이의 로또 번호 6개가 수동으로 생성된다")
     @ValueSource(strings = {"1,2,3,4,5,6", "1, 11, 15, 20, 25, 45"})
     void inputNumberGeneratorTest(String input) {
+        // given
+        InputNumberGenerator inputNumberGenerator = new InputNumberGenerator(input);
+
+        // when
+        List<Number> inputLottoList = inputNumberGenerator.pickNumbers();
+
+        // then
+        assertThat(inputLottoList).hasSize(6);
+    }
+
+    @ParameterizedTest(name = "1부터 45사이의 번호를 중복으로 입력해도 로또 번호 6개가 생성된다")
+    @ValueSource(strings = {"1,2,3,4,5,6,6", "1, 1, 11, 11, 15, 20, 25, 45"})
+    void inputDupNumberGeneratorTest(String input) {
         // given
         InputNumberGenerator inputNumberGenerator = new InputNumberGenerator(input);
 
@@ -57,12 +70,21 @@ class NumberGeneratorTest {
                 .withMessageContaining("유효하지 않은 범위의 숫자입니다.");
     }
 
-    @ParameterizedTest(name = "중복을 제외한 숫자의 갯수가 6개가 아니면 오류가 발생한다")
+    @ParameterizedTest(name = "입력된 로또 번호가 6개가 아니면 오류가 발생한다")
     @ValueSource(strings = {"1,2,3,4,5,6,7", "1, 11, 15, 20, 25"})
     void invalidSizeInputNumberGeneratorTest(String input) {
         // given & when & then
         assertThatIllegalArgumentException().isThrownBy(
                         () -> new InputNumberGenerator(input))
-                .withMessageContaining("당첨 번호는 중복이 없는 " + SIZE + "개의 숫자입니다.");
+                .withMessageContaining("당첨 번호는 중복이 없는 " + LOTTO_SIZE + "개의 숫자입니다.");
+    }
+
+    @ParameterizedTest(name = "중복을 처리한 뒤 로또 번호가 6개가 아니면 오류가 발생한다")
+    @ValueSource(strings = {"1,2,3,4,5,6,7", "1, 11, 15, 20, 25", "1, 11, 15, 20, 25, 25"})
+    void invalidDupInputNumberGeneratorTest(String input) {
+        // given & when & then
+        assertThatIllegalArgumentException().isThrownBy(
+                        () -> new InputNumberGenerator(input))
+                .withMessageContaining("당첨 번호는 중복이 없는 " + LOTTO_SIZE + "개의 숫자입니다.");
     }
 }
