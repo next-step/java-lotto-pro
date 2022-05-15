@@ -12,6 +12,10 @@ public class Lotto {
         Collections.sort(this.numbers);
     }
 
+    public Integer lottoNumber(int index) {
+        return numbers.get(index);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
