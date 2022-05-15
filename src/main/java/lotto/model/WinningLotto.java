@@ -4,15 +4,14 @@ import lotto.view.ResultView;
 
 import java.util.List;
 
-public class WinningLotto {
+public class WinningLotto extends WinningStatus {
 
     private final Lotto lotto;
     private final LottoNumber bonusBall;
-    private final WinningStatus winningStatus;
 
     public WinningLotto(List<Integer> numbers, int bonusBall) {
+        super();
         this.lotto = new Lotto(numbers);
-        this.winningStatus = new WinningStatus();
 
         if(isDuplicationNumber(numbers, bonusBall)) {
             throw new IllegalArgumentException(ResultView.ERROR_DUPLICATION_NUMBER);
@@ -28,14 +27,6 @@ public class WinningLotto {
         int count = lotto.findMatchCount(this.lotto);
         boolean matchBonus = lotto.isMatchBonus(this.bonusBall);
 
-        winningStatus.recordResults(count, matchBonus);
-    }
-
-    public int findWinningCount(MatchPoint matchPoint) {
-        return winningStatus.findWinningCount(matchPoint);
-    }
-
-    public double findEarningsRate(long lottosTotalPrice) {
-        return  winningStatus.findEarningsRate(lottosTotalPrice);
+        recordResults(count, matchBonus);
     }
 }
