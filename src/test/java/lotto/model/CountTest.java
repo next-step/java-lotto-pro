@@ -37,35 +37,6 @@ class CountTest {
     }
 
     @Test
-    @DisplayName("카운트를 1회 감소")
-    void decreaseCount() {
-        Count count = Count.of(2);
-        count.decrease();
-
-        assertEquals(Count.of(1), count);
-    }
-
-    @Test
-    @DisplayName("0인 횟수에서 카운트 감소시 IllegalStateException이 발생")
-    void invalidDecreaseCount() {
-        Count count = Count.of(1);
-        count.decrease();
-
-        assertThatIllegalStateException()
-                .isThrownBy(count::decrease)
-                .withMessage("현재 횟수가 0이라 감소할 수 없습니다.");
-    }
-
-    @Test
-    @DisplayName("카운트가 0인지 확인")
-    void isZeroCount() {
-        Count count = Count.of(1);
-        count.decrease();
-
-        assertThat(count.isZero()).isTrue();
-    }
-
-    @Test
     @DisplayName("카운트 두 객체 비교 검증")
     void verifyCompareCount() {
         Count one = Count.of(1);
