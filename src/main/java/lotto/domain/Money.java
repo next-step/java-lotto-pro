@@ -12,10 +12,23 @@ public class Money {
     }
 
     private int validateMoney(int amount) {
+        validateMoneyPositive(amount);
+        validateMoneyExceedLottoPrice(amount);
+        return amount;
+    }
+
+    private void validateMoneyPositive(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException(ErrorMessageConst.ERROR_INVALID_NEGATIVE_INTEGER);
         }
-        return amount;
+    }
+
+    private void validateMoneyExceedLottoPrice(int amount) {
+        if (amount < LOTTO_PRICE) {
+            throw new IllegalArgumentException(
+                    String.format(ErrorMessageConst.ERROR_INVALID_MONEY_MINIMUM_VALUE, LOTTO_PRICE)
+            );
+        }
     }
 
     public int getAmount() {

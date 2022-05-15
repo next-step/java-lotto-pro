@@ -19,9 +19,17 @@ public class MoneyTest {
 
     @Test
     @DisplayName("Money 비정상 생성: 음수값")
-    void Money_비정상_생성(){
+    void Money_비정상_생성_음수값(){
         assertThatThrownBy(() -> {
             Money money = new Money(-10000);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("Money 비정상 생성: 1000원 미만")
+    void Money_비정상_생성_1000원_미만(){
+        assertThatThrownBy(() -> {
+            Money money = new Money(100);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
