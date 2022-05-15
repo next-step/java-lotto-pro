@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Money {
     private static final int ZERO_NUM = 0;
     public static final int LOTTO_PRICE = 1000;
+    private static final int SCALE = 2;
     private final int money;
 
     private Money(int money) {
@@ -34,7 +35,7 @@ public class Money {
         if (isZero(money)) {
             throw new IllegalArgumentException("0원으로 나눌 수 없습니다.");
         }
-        return BigDecimal.valueOf(this.money).divide(BigDecimal.valueOf(money.money), 2, RoundingMode.DOWN);
+        return BigDecimal.valueOf(this.money).divide(BigDecimal.valueOf(money.money), SCALE, RoundingMode.DOWN);
     }
 
     private void validMoney(int money) {

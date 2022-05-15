@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Lottos {
+    private static final int EXTRA_NUM = 1;
+    private static final int ZERO_NUM = 0;
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
@@ -18,7 +20,7 @@ public class Lottos {
     public static Lottos buy(Money money) {
         List<Lotto> lottos = new ArrayList<>();
         int count = money.maxLottoCount();
-        for (int i = 0; i < count; i++) {
+        for (int i = ZERO_NUM; i < count; i++) {
             lottos.add(Lotto.draw(new RandomLottoNumberGenerator()));
         }
         return new Lottos(lottos);
@@ -36,7 +38,7 @@ public class Lottos {
         Map<LottoRanking, Integer> lottoStatistics = new EnumMap<>(LottoRanking.class);
         for (Lotto lotto : this.lottos) {
             LottoRanking lottoRanking = lotto.lottoRanking(winningLotto);
-            lottoStatistics.put(lottoRanking, lottoStatistics.getOrDefault(lottoRanking, 0) + 1);
+            lottoStatistics.put(lottoRanking, lottoStatistics.getOrDefault(lottoRanking, ZERO_NUM) + EXTRA_NUM);
         }
         return new LottoStatistics(lottoStatistics);
     }

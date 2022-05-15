@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 public class LottoStatistics {
+    private static final int ZERO_NUM = 0;
     private final Map<LottoRanking, Integer> lottoStatistics;
 
     public LottoStatistics(Map<LottoRanking, Integer> lottoStatistics) {
@@ -11,7 +12,7 @@ public class LottoStatistics {
     }
 
     public int get(LottoRanking lottoRanking) {
-        return lottoStatistics.getOrDefault(lottoRanking, 0);
+        return lottoStatistics.getOrDefault(lottoRanking, ZERO_NUM);
     }
 
     public BigDecimal yield(Money money) {
@@ -19,7 +20,7 @@ public class LottoStatistics {
     }
 
     private Money sumTotalPrize() {
-        Money totalPrize = Money.from(0);
+        Money totalPrize = Money.from(ZERO_NUM);
         for (Map.Entry<LottoRanking, Integer> entry : lottoStatistics.entrySet()) {
             LottoRanking lottoRanking = entry.getKey();
             Money prize = lottoRanking.money()
