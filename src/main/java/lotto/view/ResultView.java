@@ -31,7 +31,7 @@ public class ResultView {
         StringBuilder totalLottoNumberView = new StringBuilder();
         totalLottoNumberView.append(resultPurchaseView(lottos));
         totalLottoNumberView.append(ENTER);
-        for (Lotto lotto : lottos.getLottos()) {
+        for (Lotto lotto : lottos.getLottoz()) {
             totalLottoNumberView.append(Arrays.toString(lotto.convertNumbers()));
             totalLottoNumberView.append(ENTER);
         }

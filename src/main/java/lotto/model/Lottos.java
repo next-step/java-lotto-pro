@@ -6,18 +6,18 @@ import lotto.constant.LottoRoleConst;
 
 public class Lottos {
 
-    private final List<Lotto> lottos;
+    private final List<Lotto> lottoz;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos(List<Lotto> lottoz) {
+        this.lottoz = lottoz;
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public List<Lotto> getLottoz() {
+        return lottoz;
     }
 
     public int lottoCount() {
-        return lottos.size();
+        return lottoz.size();
     }
 
     private int purchaseMoney() {
@@ -37,11 +37,11 @@ public class Lottos {
             return false;
         }
         Lottos lottos = (Lottos) o;
-        return Objects.equals(this.lottos, lottos.lottos);
+        return Objects.equals(this.lottoz, lottos.lottoz);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottos);
+        return Objects.hash(lottoz);
     }
 }
