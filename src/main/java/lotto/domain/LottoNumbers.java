@@ -1,10 +1,11 @@
 package lotto.domain;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
-
 import utils.CollectionsUtil;
 
 public class LottoNumbers {
@@ -33,8 +34,20 @@ public class LottoNumbers {
     }
 
     private void valid(List<Integer> numbers) {
+        lottoNumberSizeValid(numbers);
+        distinctLottoNumberValid(numbers);
+    }
+
+    private void lottoNumberSizeValid(List<Integer> numbers) {
         if (Objects.isNull(numbers) || isLottoOverSize(numbers)) {
             throw new IllegalArgumentException("로또 번호는" + MAX_LOTTO_NUMBER_QTY + "자리 이어야 합니다.");
+        }
+    }
+
+    private void distinctLottoNumberValid(List<Integer> numbers) {
+        Set<Integer> distinctSet = new HashSet<>(numbers);
+        if (distinctSet.size() != numbers.size()) {
+            throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
         }
     }
 

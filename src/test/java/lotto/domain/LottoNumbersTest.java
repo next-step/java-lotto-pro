@@ -41,6 +41,13 @@ public class LottoNumbersTest {
         assertThat(result.matchCount(match)).isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("로또 숫자들이 중복 되지 않아야 한다")
+    void isNotDuplicated() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoNumbers(Arrays.asList(1, 3, 5, 40, 44, 44)));
+    }
+
     private static Stream<Arguments> provideLottoSize() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 3, 4, 5, 6, 7, 8)),
