@@ -68,7 +68,7 @@ public class GameModelTest {
         assertThat(testModel.checkWin("1,2,3,4,5,6"))
             .containsEntry(THREE_NUMBER_MATCH, 2)
             .containsEntry(FOUR_NUMBER_MATCH, 1)
-            .containsEntry(SIX_NUMBER_MATCH, 1);
+            .containsEntry(SIX_NUMBER_MATCH, 2);
     }
 
     @Test
