@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -29,6 +30,7 @@ class LottoTest {
     }
 
     @Test
+    @DisplayName("로또 번호가 6개 이하이면 생성할 수 없다.")
     void 로또_생성_실패() {
         List<LottoNumber> invalidNumbers = Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),

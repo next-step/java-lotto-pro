@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoNumberTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {1, 44})
+    @ValueSource(ints = {1, 45})
     void 유효한_범위의_숫자생성(int validNumber) {
         LottoNumber number = new LottoNumber(validNumber);
 
@@ -21,7 +21,7 @@ public class LottoNumberTest {
     void 유효하지_않은_범위의_숫자생성(int invalidNumber) {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> new LottoNumber(invalidNumber)
-        ).withMessageContaining("유효현 범위의 숫자가 아닙니다.");
+        ).withMessageContaining("유효한 범위의 숫자가 아닙니다.");
     }
     @ParameterizedTest
     @ValueSource(ints = {1, 44})

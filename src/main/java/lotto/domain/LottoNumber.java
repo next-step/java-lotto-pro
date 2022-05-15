@@ -14,7 +14,7 @@ public class LottoNumber {
 
     private void validateLottoNumber(int value) {
         if (value < MIN_NUMBER || value > MAX_NUMBER) {
-            throw new IllegalArgumentException("유효현 범위의 숫자가 아닙니다.");
+            throw new IllegalArgumentException("유효한 범위의 숫자가 아닙니다.");
         }
     }
 
