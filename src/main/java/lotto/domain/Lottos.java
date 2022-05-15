@@ -15,6 +15,10 @@ public class Lottos {
         this.lottoList = list;
     }
 
+    public List<Lotto> getLottoList() {
+        return lottoList;
+    }
+
     private List<Integer> generateNumbers() {
         List<Integer> list = new ArrayList<>();
         for (int i=1; i<=45; i++) {

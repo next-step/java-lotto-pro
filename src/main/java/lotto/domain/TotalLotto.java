@@ -63,6 +63,30 @@ public class TotalLotto {
         return amount/LOTTO_PRICE;
     }
 
+    public LottoStatic calculatorLottoStatic() {
+        LottoStatic lottoStatic = new LottoStatic();
+        for (Lotto lotto : this.lottoList.getLottoList()) {
+            int count = MatchesLottoNumber(lotto);
+            lottoStatic.calculator(count);
+        }
+        return lottoStatic;
+    }
+
+    public int MatchesLottoNumber(Lotto lotto) {
+        int count = 0;
+        for (int i=0; i<lotto.getLottoNumber().size(); i++) {
+            count = countMatchesWinner(count, lotto.getLottoNumber().get(i));
+        }
+        return count;
+    }
+
+    private int countMatchesWinner(int count, int target) {
+        if (this.winningLotto.getLottoNumber().contains(target)) {
+            return ++count;
+        }
+        return count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
