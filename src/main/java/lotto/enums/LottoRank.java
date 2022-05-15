@@ -30,7 +30,7 @@ public enum LottoRank {
     }
 
     public static boolean isPrized(LottoRank rank) {
-        return getPrizedRanks().contains(rank);
+        return rank != MISS;
     }
 
     public int getCountOfMatch() {
