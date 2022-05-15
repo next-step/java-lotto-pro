@@ -21,4 +21,9 @@ public class LottoNumber {
             throw new IllegalArgumentException(message);
         }
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }

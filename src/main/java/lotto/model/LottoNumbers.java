@@ -20,4 +20,9 @@ public class LottoNumbers {
         List<Integer> randomNumbers = createRandomNumbers(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_PICK_COUNT);
         return new LottoNumbers(randomNumbers);
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
