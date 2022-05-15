@@ -51,8 +51,11 @@ public class LottoView {
     private void printDivisionResult(WinningStatistics winningStatistics) {
         winningStatistics.getDivisionResultList().stream()
                 .map(divisionResult ->
-                        String.format("%d개 일치 (%s원)- %d개\n", divisionResult.getMatchCount(), divisionResult.getPrize(),
-                                divisionResult.getWinningCount())).forEach(userInterface::show);
+                        String.format("%d개 일치 (%s원)- %d개\n",
+                                divisionResult.getMatchCount(),
+                                divisionResult.getPrize(),
+                                divisionResult.getWinningCount()))
+                .forEach(userInterface::show);
     }
 
     private String lottoListString(List<PurchasedLotto> lottoList) {
@@ -61,8 +64,10 @@ public class LottoView {
 
     private String lottoString(PurchasedLotto purchasedLotto) {
         String purchasedLottoNumberString = String.join(", ",
-                purchasedLotto.getLottoNumbers().stream().map(Objects::toString).collect(
-                        Collectors.toList()));
+                purchasedLotto.getLottoNumbers()
+                        .stream()
+                        .map(Objects::toString)
+                        .collect(Collectors.toList()));
         return String.format("[%s]\n", purchasedLottoNumberString);
     }
 }

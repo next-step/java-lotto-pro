@@ -24,11 +24,13 @@ public class Lottos {
     }
 
     private List<DivisionResult> createDivisionResultList(LottoNumbers winningNumber) {
-        Map<Division, Long> divisionResults = lottoList.stream().map(lotto -> lotto.checkResult(winningNumber))
+        Map<Division, Long> divisionResults = lottoList.stream()
+                .map(lotto -> lotto.checkResult(winningNumber))
                 .filter(Objects::nonNull)
                 .collect(Collectors.groupingBy(division -> division, Collectors.counting()));
 
         return divisionResults.entrySet().stream()
-                .map(entry -> new DivisionResult(entry.getKey(), entry.getValue())).collect(Collectors.toList());
+                .map(entry -> new DivisionResult(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
     }
 }

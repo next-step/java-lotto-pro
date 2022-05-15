@@ -26,7 +26,9 @@ public class DivisionResults {
     }
 
     private DivisionResult findDivisionResult(Division division, List<DivisionResult> divisionResultList) {
-        return divisionResultList.stream().filter(divisionResult -> divisionResult.isDivisionSame(division)).findFirst()
+        return divisionResultList.stream()
+                .filter(divisionResult -> divisionResult.isDivisionSame(division))
+                .findFirst()
                 .orElse(new DivisionResult(division));
     }
 

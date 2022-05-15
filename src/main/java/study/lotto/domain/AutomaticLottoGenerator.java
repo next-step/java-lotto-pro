@@ -42,7 +42,8 @@ public class AutomaticLottoGenerator implements LottoGenerator {
     }
 
     private List<Integer> possibleLottoNumber() {
-        return IntStream.range(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER + 1).boxed()
+        return IntStream.range(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER + 1)
+                .boxed()
                 .collect(Collectors.toList());
     }
 }

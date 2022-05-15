@@ -42,5 +42,4 @@ public class LottoController {
         view.showPurchaseResult(PurchasedLottos.from(lottoPurchaseHistory.getLottos()));
         return lottoPurchaseHistory;
     }
-
 }
