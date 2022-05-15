@@ -13,4 +13,8 @@ public class StringToIntegerParser {
             .map(Integer::parseInt)
             .collect(Collectors.toList());
     }
+
+    public static Integer parseNumber(String inputBonusBall) {
+        return Integer.parseInt(inputBonusBall);
+    }
 }

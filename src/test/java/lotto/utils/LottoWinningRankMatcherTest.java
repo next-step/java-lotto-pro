@@ -7,6 +7,7 @@ import generator.TestNumberGenerator;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.enums.WinningRank;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,12 +19,15 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoWinningRankMatcherTest {
 
     private LottoNumbers lastWeekWinningNumbers;
+    private LottoNumber bonusBallNumber;
 
     @BeforeEach
     void lastWeekWinningNumbersSetUp() {
         lastWeekWinningNumbers = LottoNumbers.generateBy(
             new TestNumberGenerator(Arrays.asList(1, 2, 3, 4, 5, 6))
         );
+
+        bonusBallNumber = LottoNumber.from(45);
     }
 
     @ParameterizedTest
@@ -36,7 +40,8 @@ class LottoWinningRankMatcherTest {
         );
 
         // when
-        WinningRank winningRank = LottoWinningRankMatcher.match(lastWeekWinningNumbers,
+        WinningRank winningRank = LottoWinningRankMatcher.match(this.lastWeekWinningNumbers,
+            this.bonusBallNumber,
             generateLottoNumbers);
 
         // then
@@ -45,13 +50,14 @@ class LottoWinningRankMatcherTest {
 
     static Stream<Arguments> lottoNumbersProvider() {
         return Stream.of(
-            arguments(WinningRank.WIN_1, Arrays.asList(1, 2, 3, 4, 5, 6)),
-            arguments(WinningRank.WIN_2, Arrays.asList(1, 2, 3, 4, 5, 7)),
-            arguments(WinningRank.WIN_3, Arrays.asList(1, 2, 3, 4, 7, 8)),
-            arguments(WinningRank.WIN_4, Arrays.asList(1, 2, 3, 7, 8, 9)),
-            arguments(WinningRank.NO_WIN, Arrays.asList(1, 2, 7, 8, 9, 10)),
-            arguments(WinningRank.NO_WIN, Arrays.asList(1, 7, 8, 9, 10, 11)),
-            arguments(WinningRank.NO_WIN,Arrays.asList(7, 8, 9, 10, 11, 12))
+            arguments(WinningRank.FIRST, Arrays.asList(1, 2, 3, 4, 5, 6)),
+            arguments(WinningRank.SECOND, Arrays.asList(1, 2, 3, 4, 5, 45)),
+            arguments(WinningRank.THIRD, Arrays.asList(1, 2, 3, 4, 5, 7)),
+            arguments(WinningRank.FOURTH, Arrays.asList(1, 2, 3, 4, 7, 8)),
+            arguments(WinningRank.FIFTH, Arrays.asList(1, 2, 3, 7, 8, 9)),
+            arguments(WinningRank.MISS, Arrays.asList(1, 2, 7, 8, 9, 10)),
+            arguments(WinningRank.MISS, Arrays.asList(1, 7, 8, 9, 10, 11)),
+            arguments(WinningRank.MISS,Arrays.asList(7, 8, 9, 10, 11, 12))
         );
     }
 }

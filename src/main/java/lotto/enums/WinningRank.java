@@ -1,14 +1,17 @@
 package lotto.enums;
 
+import calculator.utils.StringUtils;
 import java.util.Arrays;
 import java.util.List;
+import lotto.constants.LottoGuideMessage;
 
 public enum WinningRank {
-    WIN_1(6, 2_000_000_000),
-    WIN_2(5, 1_500_000),
-    WIN_3(4, 50_000),
-    WIN_4(3, 5_000),
-    NO_WIN(0, 0);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
     private final int winningCount;
     private final int prizeMoney;
@@ -22,15 +25,34 @@ public enum WinningRank {
         return Arrays.stream(WinningRank.values())
             .filter(wr -> wr.getWinningCount() == winningCount)
             .findAny()
-            .orElse(NO_WIN);
+            .orElse(MISS);
     }
 
     public static List<WinningRank> winningValues() {
-        return Arrays.asList(WIN_4, WIN_3, WIN_2, WIN_1);
+        return Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST);
     }
 
     public static boolean isWinningRank(WinningRank winningRank) {
         return winningValues().contains(winningRank);
+    }
+
+    public static WinningRank valueOf(int matchCount, boolean hasBonusBallNumber) {
+        if (isSecondWinningRank(matchCount, hasBonusBallNumber)) {
+            return SECOND;
+        }
+        if(isThirdWinningRank(matchCount, hasBonusBallNumber)) {
+            return THIRD;
+        }
+
+        return valueOf(matchCount);
+    }
+
+    private static boolean isThirdWinningRank(int matchCount, boolean hasBonusBallNumber) {
+        return matchCount == THIRD.getWinningCount() && !hasBonusBallNumber;
+    }
+
+    private static boolean isSecondWinningRank(int matchCount, boolean hasBonusBallNumber) {
+        return matchCount == SECOND.getWinningCount() && hasBonusBallNumber;
     }
 
     public int getWinningCount() {
@@ -39,5 +61,9 @@ public enum WinningRank {
 
     public int getPrizeMoney() {
         return this.prizeMoney;
+    }
+
+    public String additionalWinningRankDescription() {
+        return this == SECOND ? LottoGuideMessage.WINNING_STATISTICS_BONUS_BALL : StringUtils.EMPTY;
     }
 }

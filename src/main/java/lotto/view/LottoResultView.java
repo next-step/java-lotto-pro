@@ -13,18 +13,18 @@ import static lotto.constants.LottoGuideMessage.WINNING_STATISTICS_GUIDE;
 
 import java.util.Map;
 import java.util.Map.Entry;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoTicket;
 import lotto.domain.WinningRecord;
 import lotto.domain.WinningStatistics;
 import lotto.enums.WinningRank;
 
 public class LottoResultView {
 
-    public void printLottos(Lottos lottos) {
-        System.out.printf((PURCHASE_COUNT) + "%n", lottos.getCount());
-        for (Lotto lotto : lottos.getReadOnlyLottos()) {
-            System.out.println(lotto.getLottoNumbers());
+    public void printLottos(LottoTicket lottoTicket) {
+        System.out.printf((PURCHASE_COUNT) + "%n", lottoTicket.getCount());
+        for (LottoNumbers lottoNumbers : lottoTicket.getReadOnlyLottoNumbers()) {
+            System.out.println(lottoNumbers);
         }
         newLine();
     }
@@ -56,6 +56,7 @@ public class LottoResultView {
         for (Entry<WinningRank, Integer> entry : record.entrySet()) {
             System.out.printf((WINNING_STATISTICS) + "%n",
                     entry.getKey().getWinningCount(),
+                    entry.getKey().additionalWinningRankDescription(),
                     entry.getKey().getPrizeMoney(),
                     entry.getValue());
         }

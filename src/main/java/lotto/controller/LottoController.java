@@ -1,16 +1,13 @@
 package lotto.controller;
 
+import static lotto.constants.LottoGuideMessage.BONUS_BALL_INPUT;
 import static lotto.constants.LottoGuideMessage.LAST_WINNING_INPUT;
 
-import generator.LottoNumberGenerator;
-import generator.NumberGenerator;
-import java.util.ArrayList;
 import java.util.List;
-import lotto.constants.LottoConstants;
-import lotto.domain.Lotto;
-import lotto.domain.LottoCount;
+import lotto.domain.LottoMarket;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.domain.Lottos;
+import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 import lotto.domain.WinningStatistics;
 import lotto.view.LottoInputView;
@@ -19,48 +16,35 @@ import lotto.view.LottoResultView;
 public class LottoController {
     private final LottoInputView lottoInputView;
     private final LottoResultView resultView;
-    private final NumberGenerator numberGenerator;
+    private final LottoMarket lottoMarket;
 
     public LottoController() {
         this.lottoInputView = new LottoInputView();
         this.resultView = new LottoResultView();
-        this.numberGenerator = new LottoNumberGenerator();
+        this.lottoMarket = new LottoMarket();
     }
 
     public void play() {
         Money money = lottoInputView.inputMoney();
-        Lottos lottos = purchaseLottos(money);
-        LottoNumbers lastWinningLottoNumbers = LottoNumbers.generateBy(inputLastWinningLottoNumbers());
+        LottoTicket lottoTicket = lottoMarket.purchaseLottoTicket(money);
+        resultView.printLottos(lottoTicket);
 
-        WinningStatistics winningStatistics = WinningStatistics.of(lottos, lastWinningLottoNumbers, money);
+        LottoNumbers lastWinningLottoNumbers = LottoNumbers.generateBy(inputLastWinningLottoNumbers());
+        LottoNumber bonusBallNumber = inputBonusBall(lastWinningLottoNumbers);
+
+        WinningStatistics winningStatistics = WinningStatistics.of(lottoTicket, money, lastWinningLottoNumbers, bonusBallNumber);
         winningStatistics.statistics();
 
         resultView.printWinningStatistics(winningStatistics);
     }
 
+    private LottoNumber inputBonusBall(LottoNumbers lastWinningLottoNumbers) {
+        System.out.println(BONUS_BALL_INPUT);
+        return lottoInputView.inputBonusBall(lastWinningLottoNumbers, BONUS_BALL_INPUT);
+    }
+
     private List<Integer> inputLastWinningLottoNumbers() {
         System.out.println(LAST_WINNING_INPUT);
         return lottoInputView.inputLottoNumbers(LAST_WINNING_INPUT);
-    }
-
-    private Lottos purchaseLottos(Money money) {
-        LottoCount lottoCount = calculateLottoCountByMoney(money);
-        Lottos lottos = Lottos.from(generateAutoLottoNumbers(lottoCount));
-        resultView.printLottos(lottos);
-
-        return lottos;
-    }
-
-    private List<Lotto> generateAutoLottoNumbers(LottoCount lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount.getCount(); i++) {
-            LottoNumbers lottoNumbers = LottoNumbers.generateBy(this.numberGenerator);
-            lottos.add(Lotto.from(lottoNumbers));
-        }
-        return lottos;
-    }
-
-    private LottoCount calculateLottoCountByMoney(Money money) {
-        return LottoCount.from(money.getMoney() / LottoConstants.LOTTO_PRICE);
     }
 }
