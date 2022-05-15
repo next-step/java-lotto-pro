@@ -12,13 +12,7 @@ class LottoTest {
         int[] numbers = {1, 3, 5, 7, 9, 23};
         Lotto lotto = new Lotto(numbers);
 
-        assertThat(lotto.getNumbers()).contains(
-                new Number(1),
-                new Number(3),
-                new Number(5),
-                new Number(7),
-                new Number(9),
-                new Number(23));
+        assertThat(lotto.getNumbers()).contains(1, 3, 5, 7, 9, 23);
     }
 
     @Test

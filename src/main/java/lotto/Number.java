@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Number {
 
-    private static final int MIN_RANGE_NUMBER = 1;
-    private static final int MAX_RANGE_NUMBER = 45;
+    public static final int MIN_RANGE_NUMBER = 1;
+    public static final int MAX_RANGE_NUMBER = 45;
 
     private final int value;
 
@@ -18,6 +18,10 @@ public class Number {
 
     private boolean isRange(int input) {
         return input >= MIN_RANGE_NUMBER && input <= MAX_RANGE_NUMBER;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     @Override

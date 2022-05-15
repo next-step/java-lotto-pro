@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -36,8 +37,12 @@ public class Lotto {
         return numbers.contains(new Number(number));
     }
 
-    public List<Number> getNumbers() {
-        return numbers;
+    public List<Integer> getNumbers() {
+        return numbers.stream().map(Number::getValue).sorted().collect(Collectors.toList());
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(getNumbers());
+    }
 }
