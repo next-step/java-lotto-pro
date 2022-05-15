@@ -11,24 +11,26 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.model.number.LottoNumber;
+import lotto.model.number.LottoNumbers;
 
-public class LottoAutoFactory {
+public class LottoAutoFactory implements ILottoFactory {
 
-    private static final List<LottoNumber> rangeLottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> rangeLottoNumbers = new ArrayList<>();
 
-    static {
+    private LottoAutoFactory() {
         IntStream.rangeClosed(LOTTO_NUMBER_RANGE_MIN, LOTTO_NUMBER_RANGE_MAX)
             .forEach(i -> rangeLottoNumbers.add(new LottoNumber(i)));
     }
 
-    private LottoAutoFactory() {
+    public static LottoAutoFactory create() {
+        return new LottoAutoFactory();
     }
 
-    public static Set<LottoNumber> randomLottoNumberByLottoSize() {
+    public LottoNumbers generate() {
         Collections.shuffle(rangeLottoNumbers);
-        return rangeLottoNumbers.stream()
+        return LottoNumbers.fromLottoNumberSet(rangeLottoNumbers.stream()
             .limit(LOTTO_SIZE)
-            .collect(Collectors.toSet());
+            .collect(Collectors.toSet()));
     }
 
 }

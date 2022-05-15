@@ -12,6 +12,7 @@ import lotto.model.money.Money;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 import lotto.model.purchased.PurchasedLotto;
+import lotto.type.LottoGeneratorType;
 import lotto.type.LottoWinningPriceType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,8 @@ class LottoResultTest {
         List<PurchasedLotto> purchasedLottos = new ArrayList<>();
         Set<LottoNumber> lottoNumberList = generateLottoNumberList(numbers);
 
-        purchasedLottos.add(PurchasedLotto.createManual(new LottoNumbers(lottoNumberList)));
+        purchasedLottos.add(
+            new PurchasedLotto(LottoNumbers.fromLottoNumberSet(lottoNumberList), LottoGeneratorType.AUTO));
         return purchasedLottos;
     }
 

@@ -2,16 +2,31 @@ package lotto.model.number;
 
 import static lotto.constant.LottoSetting.LOTTO_SIZE;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     private Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
-        validateSize(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+    private LottoNumbers(Set<LottoNumber> lottoNumberSet) {
+        validateSize(lottoNumberSet);
+        this.lottoNumbers = lottoNumberSet;
+    }
+
+    public static LottoNumbers fromLottoNumberSet(Set<LottoNumber> lottoNumberSet) {
+        return new LottoNumbers(lottoNumberSet);
+    }
+
+    public static LottoNumbers fromInputLottoNumbers(String inputLottoNumbers) {
+        String[] inputLottoNumberArr = inputLottoNumbers.replace(" ", "").split(",");
+        Set<LottoNumber> lottoNumberSet = Arrays.stream(inputLottoNumberArr)
+            .map(LottoNumber::new)
+            .collect(Collectors.toSet());
+
+        return new LottoNumbers(lottoNumberSet);
     }
 
     public String toLottoNumbersString() {
@@ -30,6 +45,10 @@ public class LottoNumbers {
 
     private boolean existLottoNumber(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
 }

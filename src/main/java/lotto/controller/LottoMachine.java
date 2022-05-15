@@ -1,14 +1,9 @@
 package lotto.controller;
 
-import static lotto.util.LottoUtil.splitInputWinningNumber;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import lotto.model.factory.LottoAutoFactory;
 import lotto.model.money.Money;
-import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 import lotto.model.purchased.PurchasedInfo;
 import lotto.model.purchased.PurchasedLotto;
@@ -22,25 +17,16 @@ public class LottoMachine {
     public void start() {
         Money purchasedMoney = new Money(InputView.inputPurchasedMoney());
 
-        PurchasedInfo purchasedInfo = new PurchasedInfo(purchasedMoney);
+        PurchasedInfo purchasedInfo = new PurchasedInfo(purchasedMoney, LottoAutoFactory.create());
         OutputView.OutputPurchaseResult(purchasedInfo);
 
-        LottoNumbers winningNumbers = new LottoNumbers(getInputWinningNumberArr());
+        LottoNumbers winningNumbers = LottoNumbers.fromInputLottoNumbers(InputView.inputWinningNumber());
 
         Map<LottoWinningPriceType, List<PurchasedLotto>> lottoWinningPriceTypeListMap =
             purchasedInfo.winningLotto(winningNumbers);
 
         LottoResult lottoStatistics = new LottoResult(lottoWinningPriceTypeListMap, purchasedMoney);
         OutputView.OutputLottoResult(lottoStatistics);
-    }
-
-    private Set<LottoNumber> getInputWinningNumberArr() {
-        String inputWinningNumber = InputView.inputWinningNumber();
-        String[] inputWinningNumbers = splitInputWinningNumber(inputWinningNumber);
-
-        return Arrays.stream(inputWinningNumbers)
-            .map(LottoNumber::new)
-            .collect(Collectors.toSet());
     }
 
 }

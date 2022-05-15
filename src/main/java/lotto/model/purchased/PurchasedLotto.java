@@ -14,29 +14,9 @@ public class PurchasedLotto {
     private LottoGeneratorType lottoGeneratorType;
     private LottoNumbers lottoNumbers;
 
-    private PurchasedLotto() {
-        generatedAutoLottoNumber();
-    }
-
-    private PurchasedLotto(LottoNumbers lottoNumbers) {
+    public PurchasedLotto(LottoNumbers lottoNumbers, LottoGeneratorType lottoGeneratorType) {
         this.lottoNumbers = lottoNumbers;
-    }
-
-    private void generatedAutoLottoNumber() {
-        this.lottoNumbers = new LottoNumbers(LottoAutoFactory.randomLottoNumberByLottoSize());
-        this.lottoGeneratorType = LottoGeneratorType.AUTO;
-    }
-
-    public static PurchasedLotto createAuto() {
-        return new PurchasedLotto();
-    }
-
-    public static PurchasedLotto createManual(LottoNumbers lottoNumbers) {
-        return new PurchasedLotto(lottoNumbers);
-    }
-
-    public LottoGeneratorType getLottoGeneratorType() {
-        return lottoGeneratorType;
+        this.lottoGeneratorType = lottoGeneratorType;
     }
 
     public Optional<LottoWinningPriceType> checkWinning(LottoNumbers winningLottos) {

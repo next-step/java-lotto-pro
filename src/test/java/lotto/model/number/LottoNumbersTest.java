@@ -16,7 +16,7 @@ public class LottoNumbersTest {
         Set<LottoNumber> lottoNumbers = generateLottoNumberList(new int[]{1, 2, 2, 3, 4, 5});
 
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new LottoNumbers(lottoNumbers));
+            .isThrownBy(() -> LottoNumbers.fromLottoNumberSet(lottoNumbers));
     }
 
     @Test
@@ -25,7 +25,7 @@ public class LottoNumbersTest {
         Set<LottoNumber> lottoNumbers = generateLottoNumberList(new int[]{1, 2});
 
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new LottoNumbers(lottoNumbers));
+            .isThrownBy(() -> LottoNumbers.fromLottoNumberSet(lottoNumbers));
     }
 
     @Test
@@ -33,8 +33,8 @@ public class LottoNumbersTest {
     void 로또숫자를_포함하는지_확인한다() {
         Set<LottoNumber> lottoNumberList = generateLottoNumberList(new int[]{1, 2, 3, 4, 5, 6});
         Set<LottoNumber> winningNumberList = generateLottoNumberList(new int[]{1, 2, 3, 7, 8, 9});
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
-        LottoNumbers winningNumbers = new LottoNumbers(winningNumberList);
+        LottoNumbers lottoNumbers = LottoNumbers.fromLottoNumberSet(lottoNumberList);
+        LottoNumbers winningNumbers = LottoNumbers.fromLottoNumberSet(winningNumberList);
 
         int countContainLottoNumber = lottoNumbers.countContainLottoNumber(winningNumbers);
         assertEquals(countContainLottoNumber, 3);
