@@ -32,7 +32,7 @@ public class GameModel {
         for (int i = 0; i < LOTTO_ELEMENTS_SIZE; i++) {
             lottoElements.add(LOTTO_VALID_ELEMENTS.get(i));
         }
-        return LottoTicket.create(lottoElements.stream().map(String::valueOf).collect(Collectors.toList()));
+        return new LottoTicket(lottoElements.stream().map(String::valueOf).collect(Collectors.toList()));
     }
 
     public int buyTicket(int money) {
@@ -73,7 +73,7 @@ public class GameModel {
 
     public HashMap<Integer, Integer> checkWin(String winLottoSource) {
         initStatistics();
-        LottoTicket winLotto = LottoTicket.create(Arrays.asList(winLottoSource.split(LOTTO_DELIMITER)));
+        LottoTicket winLotto = new LottoTicket(Arrays.asList(winLottoSource.split(LOTTO_DELIMITER)));
         for (int i = 0; i < tickets.size(); i++) {
             int matchCount = winLotto.getMatchCountWith(tickets.get(i));
             statistics.replace(matchCount, statistics.get(matchCount) + 1);

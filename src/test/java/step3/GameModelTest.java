@@ -8,7 +8,6 @@ import static step3.LottoConstant.SIX_NUMBER_MATCH;
 import static step3.LottoConstant.THREE_NUMBER_MATCH;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -82,16 +81,16 @@ public class GameModelTest {
 
     private GameModel initTestModel() {
         List<LottoTicket> tickets = new ArrayList<>();
-        List<List<String>> lottoSources = new ArrayList<>();
-        lottoSources.add(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        lottoSources.add(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        lottoSources.add(Arrays.asList("1", "2", "3", "4", "7", "8"));
-        lottoSources.add(Arrays.asList("1", "2", "3", "7", "8", "9"));
-        lottoSources.add(Arrays.asList("1", "2", "3", "7", "8", "9"));
-        lottoSources.add(Arrays.asList("1", "2", "7", "8", "9", "10"));
+        List<String> lottoSources = new ArrayList<>();
+        lottoSources.add("1,2,3,4,5,6");
+        lottoSources.add("1,2,3,4,5,6");
+        lottoSources.add("1,2,3,4,7,8");
+        lottoSources.add("1,2,3,7,8,9");
+        lottoSources.add("1,2,3,7,8,9");
+        lottoSources.add("1,2,7,8,9,10");
 
         for (int i = 0; i < lottoSources.size(); i++) {
-            tickets.add(LottoTicket.create(lottoSources.get(i)));
+            tickets.add(new LottoTicket(lottoSources.get(i)));
         }
 
         return new GameModel(tickets);
