@@ -60,20 +60,6 @@ class WinningLottoTest {
                 .withMessage("[ERROR] 보너스 번호가 이미 로또 번호에 존재합니다.");
     }
 
-
-    @DisplayName("로또 게임 결과(일치한 개수, 총 상금)를 확인한다.")
-    @Test
-    void playLottoGame() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(3, 7, 10, 35, 43, 45));
-        LottoGameResult resultLottoGame = winningLotto.compareLottos(lottos);
-        assertEquals(2, resultLottoGame.rankCount(LottoRank.FOURTH));
-        assertEquals(0, resultLottoGame.rankCount(LottoRank.THIRD));
-        assertEquals(1, resultLottoGame.rankCount(LottoRank.SECOND));
-        assertEquals(0, resultLottoGame.rankCount(LottoRank.FIRST));
-        assertEquals(1_510_000,resultLottoGame.totalWinningAmount());
-    }
-
-  
     @DisplayName("보너스볼이 추가된 로또 게임 결과(일치한 개수, 총 상금)를 확인한다.")
     @Test
     void playLottoGame_bonus_number() {
@@ -88,6 +74,4 @@ class WinningLottoTest {
                 ()-> assertEquals(30_010_000,resultLottoGame.totalWinningAmount())
         );
     }
-
-
 }

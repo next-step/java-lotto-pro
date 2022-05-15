@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.List;
 import lotto.constant.ErrorMessage;
 import lotto.constant.LottoRoleConst;
 
@@ -20,5 +21,9 @@ public class BonusNumber {
 
     public int getBounsNumber() {
         return bounsNumber;
+    }
+
+    public boolean matchBonusNumber(List<Integer> numberList) {
+        return numberList.contains(bounsNumber);
     }
 }

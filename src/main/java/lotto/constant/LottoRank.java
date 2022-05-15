@@ -8,7 +8,7 @@ import java.util.Set;
 public enum LottoRank {
 
     FIRST(6, 2_000_000_000),
-    SECOND_BONUS(6, 30_000_000),
+    SECOND_BONUS(5, 30_000_000),
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
@@ -19,7 +19,7 @@ public enum LottoRank {
     private static final Map<Integer, LottoRank> matchCountRankMap = new HashMap<>();
 
     static {
-        for (LottoRank lottoRank : values()) {
+        for (LottoRank lottoRank : EnumSet.of(FIRST,SECOND,THIRD,FOURTH,NONE)) {
             matchCountRankMap.put(lottoRank.matchNumberCount, lottoRank);
         }
     }
@@ -37,8 +37,12 @@ public enum LottoRank {
         return winningAmount;
     }
 
-    public static LottoRank of(int matchNumberCount) {
-        return matchCountRankMap.getOrDefault(matchNumberCount, NONE);
+    public static LottoRank of(int matchNumberCount, boolean isBonusMatch) {
+        LottoRank lottoRank = matchCountRankMap.getOrDefault(matchNumberCount, NONE);
+        if(SECOND.equals(lottoRank) && isBonusMatch){
+            return SECOND_BONUS;
+        }
+        return lottoRank;
     }
 
     public static Set<LottoRank> valuesExcludeNone() {

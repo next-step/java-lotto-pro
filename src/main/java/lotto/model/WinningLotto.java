@@ -58,7 +58,7 @@ public class WinningLotto {
     public LottoGameResult compareLottos(Lottos lottos) {
         EnumMap<LottoRank, Integer> resultRankMap = new EnumMap<>(LottoRank.class);
         for (Lotto lotto : lottos.getLottoList()) {
-            LottoRank lottoRank = lotto.matchRank(winningNumberList);
+            LottoRank lottoRank = lotto.matchRank(winningNumberList,bonusNumber);
             resultRankMap.put(lottoRank, resultRankMap.getOrDefault(lottoRank, 0) + 1);
         }
         return new LottoGameResult(resultRankMap);

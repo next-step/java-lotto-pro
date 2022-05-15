@@ -21,7 +21,11 @@ public class Lotto {
     }
 
     public LottoRank matchRank(List<Integer> winningNumberList) {
-        return LottoRank.of(matchNumberCount(winningNumberList));
+        return LottoRank.of(matchNumberCount(winningNumberList),false);
+    }
+
+    public LottoRank matchRank(List<Integer> winningNumberList, BonusNumber bonusNumber) {
+        return LottoRank.of(matchNumberCount(winningNumberList),bonusNumber.matchBonusNumber(numberList));
     }
 
     private int matchNumberCount(List<Integer> winningNumberList) {

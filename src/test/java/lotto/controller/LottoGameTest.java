@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import lotto.constant.LottoRank;
+import lotto.model.BonusNumber;
 import lotto.model.Lotto;
 import lotto.model.LottoGameResult;
 import lotto.model.generator.LottoGenerator;
@@ -38,7 +39,7 @@ class LottoGameTest {
     @DisplayName("로또 결과 생성 테스트")
     @Test
     void resultWinningGame() {
-        LottoGameResult lottoGameResult = LottoGame.resultWinningGame(new Lottos(lottos), "3,7,10,20,35,45");
+        LottoGameResult lottoGameResult = LottoGame.resultWinningGame(new Lottos(lottos), "3,7,10,20,35,45",new BonusNumber(40));
         assertThat(lottoGameResult.rankCount(LottoRank.THIRD)).isEqualTo(1);
         assertThat(lottoGameResult.rankCount(LottoRank.SECOND)).isEqualTo(1);
         assertThat(lottoGameResult.totalWinningAmount()).isEqualTo(1_555_000);
