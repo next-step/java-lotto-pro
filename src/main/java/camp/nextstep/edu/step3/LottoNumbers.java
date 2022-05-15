@@ -7,11 +7,13 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class LottoNumbers {
+    private static final int minNumber = 1;
+    private static final int maxNumber = 45;
+    private static final int min = 0;
+    private static final int max = 6;
     private final List<LottoNumber> numbers = new ArrayList<>();
 
     public LottoNumbers() {
-        final int minNumber = 1;
-        final int maxNumber = 45;
         for (int i = minNumber; i <= maxNumber; i++) {
             numbers.add(new LottoNumber(i));
         }
@@ -19,7 +21,7 @@ public class LottoNumbers {
 
     public final List<LottoNumber> extract(Consumer<List<LottoNumber>> consumer) {
         consumer.accept(numbers);
-        return Collections.unmodifiableList(numbers.subList(0, 6));
+        return Collections.unmodifiableList(numbers.subList(min, max));
     }
 
     public boolean isSize(final int size) {
