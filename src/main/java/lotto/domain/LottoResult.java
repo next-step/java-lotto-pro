@@ -13,7 +13,7 @@ public class LottoResult {
     }
 
     private void updateWinningCount(Lottos lottos, Lotto winningLotto) {
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getLottosAsUnmodifiableList()) {
             LottoRank rank = LottoRank.matchRank(lotto.countMatchedNumbers(winningLotto));
             winningCount.put(rank, winningCount.getOrDefault(rank, 0) + 1);
         }

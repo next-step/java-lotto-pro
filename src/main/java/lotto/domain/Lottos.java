@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.List;
 
-public class Lottos implements Iterable<Lotto>{
+public class Lottos{
     List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottoList){
@@ -14,8 +14,7 @@ public class Lottos implements Iterable<Lotto>{
         return lottos.size();
     }
 
-    @Override
-    public Iterator<Lotto> iterator() {
-        return lottos.iterator();
+    public List<Lotto> getLottosAsUnmodifiableList(){
+        return Collections.unmodifiableList(lottos);
     }
 }
