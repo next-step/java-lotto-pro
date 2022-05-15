@@ -1,14 +1,14 @@
 package study.lotto.dto;
 
 import java.util.List;
-import study.lotto.domain.Lotto;
+import study.lotto.domain.LottoNumbers;
 
 public class PurchasedLotto {
 
     private final List<Integer> lottoNumbers;
 
-    public PurchasedLotto(Lotto lotto) {
-        this(lotto.numbers());
+    public PurchasedLotto(LottoNumbers lottoNumbers) {
+        this(lottoNumbers.numbers());
     }
 
     public PurchasedLotto(List<Integer> lottoNumbers) {

@@ -24,6 +24,6 @@ class LottoPriceTest {
     @Test
     @DisplayName("발행한 로또 가격 합을 구한다.")
     void 발행한_로또_가격() {
-        assertThat(lottoPrice.total(5)).isEqualTo(new BigDecimal(5000));
+        assertThat(lottoPrice.totalPrice(5)).isEqualTo(new BigDecimal(5000));
     }
 }

@@ -24,6 +24,6 @@ class LottoTest {
     @DisplayName("입력받은 번호와 현재 번호를 비교하여 등수를 반환한다.")
     void 로또번호_비교() {
         Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 4, 5, 8, 9, 10)));
-        assertThat(lotto.match(lottoNumbers)).isEqualTo(Division.DIVISION_FOUR);
+        assertThat(lotto.checkResult(lottoNumbers)).isEqualTo(Division.DIVISION_FOUR);
     }
 }

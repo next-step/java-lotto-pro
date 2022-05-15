@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import study.lotto.domain.Lotto;
 
 public class LottoMachine {
@@ -25,8 +25,8 @@ public class LottoMachine {
 
     private LottoPurchaseHistory issue(BigDecimal money) {
         int count = numberOfLottos(money);
-        List<Lotto> lottoList = IntStream.range(0, count).mapToObj(i -> generateLotto()).collect(Collectors.toList());
-        return new LottoPurchaseHistory(lottoList, lottoPrice.total(count));
+        List<Lotto> lottos = Stream.generate(this::generateLotto).limit(count).collect(Collectors.toList());
+        return new LottoPurchaseHistory(lottos, lottoPrice.totalPrice(count));
     }
 
     private int numberOfLottos(BigDecimal money) {

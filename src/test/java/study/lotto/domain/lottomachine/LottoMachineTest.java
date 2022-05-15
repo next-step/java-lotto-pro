@@ -25,20 +25,21 @@ class LottoMachineTest {
     @DisplayName("1000원으로 1장을 발급한다.")
     void 로또_1장_발급() {
         Lottos lottos = lottoMachine.issueLotto(new BigDecimal(1000)).getLottos();
-        assertThat(lottos.getLottoList()).hasSize(1);
+        assertThat(lottos.lottoNumbers()).hasSize(1);
     }
 
     @Test
     @DisplayName("1장에 1000원씩 돈이 가능한만큼 발급한다.")
     void 로또_5장_발급() {
         Lottos lottos = lottoMachine.issueLotto(new BigDecimal(5500)).getLottos();
-        assertThat(lottos.getLottoList()).hasSize(5);
+        assertThat(lottos.lottoNumbers()).hasSize(5);
     }
 
     @Test
     @DisplayName("돈이 부족하면 IllegalArgumentException 를 발생시킨다.")
     void 로또금액_부족() {
-        assertThatThrownBy(() -> lottoMachine.issueLotto(new BigDecimal(900))).isInstanceOf(
+        final BigDecimal notEnoughMonth = new BigDecimal(900);
+        assertThatThrownBy(() -> lottoMachine.issueLotto(notEnoughMonth)).isInstanceOf(
                 IllegalArgumentException.class);
     }
 

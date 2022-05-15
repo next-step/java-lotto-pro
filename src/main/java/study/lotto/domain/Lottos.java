@@ -15,8 +15,8 @@ public class Lottos {
         this.lottoList = lottoList;
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public List<LottoNumbers> lottoNumbers() {
+        return lottoList.stream().map(Lotto::numbers).map(LottoNumbers::new).collect(Collectors.toList());
     }
 
     public DivisionResults findWinnings(LottoNumbers winningNumber) {
@@ -24,7 +24,7 @@ public class Lottos {
     }
 
     private List<DivisionResult> createDivisionResultList(LottoNumbers winningNumber) {
-        Map<Division, Long> divisionResults = lottoList.stream().map(lotto -> lotto.match(winningNumber))
+        Map<Division, Long> divisionResults = lottoList.stream().map(lotto -> lotto.checkResult(winningNumber))
                 .filter(Objects::nonNull)
                 .collect(Collectors.groupingBy(division -> division, Collectors.counting()));
 

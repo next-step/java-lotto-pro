@@ -23,7 +23,7 @@ public class LottoPrice {
         return money.divideAndRemainder(price)[0].intValue();
     }
 
-    public BigDecimal total(int numberOfLotto) {
+    public BigDecimal totalPrice(int numberOfLotto) {
         return price.multiply(new BigDecimal(numberOfLotto));
     }
 

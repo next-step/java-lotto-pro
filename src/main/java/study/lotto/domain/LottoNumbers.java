@@ -19,6 +19,16 @@ public class LottoNumbers {
         lottoNumberList = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
     }
 
+    public List<Integer> match(LottoNumbers lottoNumbers) {
+        List<Integer> duplicates = new ArrayList<>(numbers());
+        duplicates.retainAll(lottoNumbers.numbers());
+        return duplicates;
+    }
+
+    public List<Integer> numbers() {
+        return lottoNumberList.stream().map(LottoNumber::toString).map(Integer::valueOf).collect(Collectors.toList());
+    }
+
     private void checkLottoNumberSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
@@ -30,10 +40,6 @@ public class LottoNumbers {
         if (lottoNumberSet.size() != numbers.size()) {
             throw new IllegalArgumentException("중복된 로또 번호를 가질 수 없습니다.");
         }
-    }
-
-    public List<Integer> numbers() {
-        return lottoNumberList.stream().map(LottoNumber::toString).map(Integer::valueOf).collect(Collectors.toList());
     }
 
     @Override
@@ -57,11 +63,5 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumberList);
-    }
-
-    public List<Integer> match(LottoNumbers lottoNumbers) {
-        List<Integer> duplicates = new ArrayList<>(numbers());
-        duplicates.retainAll(lottoNumbers.numbers());
-        return duplicates;
     }
 }

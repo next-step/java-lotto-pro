@@ -14,8 +14,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Division match(LottoNumbers lottoNumbers) {
-        return Division.valueOfMatchCount(this.lottoNumbers.match(lottoNumbers).size());
+    public Division checkResult(LottoNumbers winningLottoNumbers) {
+        return Division.valueOfMatchCount(this.lottoNumbers.match(winningLottoNumbers).size());
     }
 
     public List<Integer> numbers() {
