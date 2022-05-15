@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class Numbers {
@@ -31,5 +31,20 @@ public class Numbers {
 		if(numberSet.size() != numbers.size()) {
 			throw new IllegalArgumentException(VALID_DUPLICATION);
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Numbers numbers1 = (Numbers)o;
+		return Objects.equals(numbers, numbers1.numbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(numbers);
 	}
 }
