@@ -15,7 +15,7 @@ public enum LottoPrize {
     FIVE_MATCH("5개 일치",
                (matchCount, matchBonus) -> matchCount == 5 && !matchBonus, Money.of(1_500_000)),
     FIVE_MATCH_WITH_BONUS("5개 일치, 보너스 볼 일치",
-                          (matchCount, matchBonus) -> matchCount == 5 && matchBonus, Money.of(1_500_000)),
+                          (matchCount, matchBonus) -> matchCount == 5 && matchBonus, Money.of(3_000_000)),
     SIX_MATCH("6개 일치", (matchCount, matchBonus) -> matchCount == 6, Money.of(2_000_000_000));
 
     private final String description;
