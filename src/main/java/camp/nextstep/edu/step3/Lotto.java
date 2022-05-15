@@ -1,36 +1,31 @@
 package camp.nextstep.edu.step3;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class Lotto {
     private static final int VALID_SIZE = 6;
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final Set<LottoNumber> lottoNumbers = new TreeSet<>();
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(final List<LottoNumber> lottoNumbers) {
+        this(new HashSet<>(lottoNumbers));
+    }
+
+    public Lotto(final Set<LottoNumber> lottoNumbers) {
         validationSize(lottoNumbers);
         this.lottoNumbers.addAll(lottoNumbers);
-        Collections.sort(this.lottoNumbers);
     }
 
     public Hit checkTo(final Lotto prizeLotto) {
         return Hit.valueOf(prizeLotto.checkBy(this.lottoNumbers));
     }
 
-    private void validationSize(List<LottoNumber> lottoNumbers) {
-        if (Objects.isNull(lottoNumbers) || lottoNumbers.isEmpty() || isInsufficient(lottoNumbers)) {
+    private void validationSize(Set<LottoNumber> lottoNumbers) {
+        if (Objects.isNull(lottoNumbers) || lottoNumbers.isEmpty() || lottoNumbers.size() < VALID_SIZE) {
             throw new IllegalArgumentException("invalid LottoNumbers");
         }
     }
 
-    private boolean isInsufficient(final List<LottoNumber> numbers) {
-        return VALID_SIZE > numbers.stream().distinct().count();
-    }
-
-    private int checkBy(List<LottoNumber> userLottoNumbers) {
+    private int checkBy(Set<LottoNumber> userLottoNumbers) {
         return userLottoNumbers.stream()
                 .filter(this.lottoNumbers::contains)
                 .toArray().length;
