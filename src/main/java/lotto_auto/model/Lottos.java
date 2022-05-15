@@ -1,39 +1,25 @@
 package lotto_auto.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-public class Lottos implements Iterable<Lotto> {
 
-    private List<Lotto> lottoList;
+public class Lottos{
+    private final List<Lotto> lottoList;
 
     public Lottos(List<Lotto> list) {
-        this.lottoList = new ArrayList<>();
-        this.lottoList.addAll(list);
+        this.lottoList = list;
     }
 
-    public Lottos() {
+    public Lottos(int count) {
         lottoList = new ArrayList<>();
-    }
-
-    public void appendLotto(Lotto lotto) {
-        this.lottoList.add(lotto);
-    }
-
-    @Override
-    public Iterator<Lotto> iterator() {
-        return lottoList.iterator();
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        String newLine = "\n";
-
-        for(Lotto lotto : lottoList) {
-            result.append(lotto.toString()).append(newLine);
+        for (int i=0; i< count; i++) {
+            lottoList.add(new Lotto(new LottoNumbers()));
         }
-        return result.toString();
     }
+
+    public List<Lotto> getLottoList() {
+        return lottoList;
+    }
+
 }
