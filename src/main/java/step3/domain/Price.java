@@ -18,4 +18,8 @@ public class Price {
     public int calculateLottoCount() {
         return price / Lotto.LOTTO_FIXED_PRICE;
     }
+
+    public double calculateYield(final int totalReward) {
+        return totalReward / (double) price;
+    }
 }
