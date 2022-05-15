@@ -1,3 +1,6 @@
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class Lottery {
@@ -7,19 +10,24 @@ public class Lottery {
 
     private final LottoNumbers winner;
 
-    public ContainCount get(LottoNumbers lottoNumbers) {
-        return new ContainCount(Math.toIntExact(
-                StreamSupport.stream(lottoNumbers.spliterator(), false)
-                        .filter(winner::contains)
-                        .count()
-        ));
-    }
-
-    public ContainCounts get(Lottos lottos) {
+    public Map<Prize, Long> get(Lottos lottos) {
         ContainCounts containCounts = new ContainCounts();
         StreamSupport.stream(lottos.spliterator(), false)
                 .forEach(lottoNumbers -> containCounts.add(get(lottoNumbers)));
-        return containCounts;
+        return aggregateByPrize(containCounts);
     }
 
+    private ContainCount get(LottoNumbers lottoNumbers) {
+        return new ContainCount(Math.toIntExact(
+                StreamSupport.stream(lottoNumbers.spliterator(), false)
+                        .filter(winner::contains)
+                        .count()));
+    }
+
+    private Map<Prize, Long> aggregateByPrize(ContainCounts containCounts) {
+        return StreamSupport.stream(containCounts.spliterator(), false).collect(
+                Collectors.groupingBy(ContainCount::find,
+                        TreeMap::new,
+                        Collectors.counting()));
+    }
 }
