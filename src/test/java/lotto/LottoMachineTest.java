@@ -40,8 +40,9 @@ class LottoMachineTest {
         };
         final ResultView stubResultView = new ResultView() {
             @Override
-            public void printLottoes(List<Lotto> lottoes) {
+            public void printLottoes(List<Lotto> lottoes, int sizeOfManualLottoes) {
                 assertThat(lottoes).hasSize(1);
+                assertThat(sizeOfManualLottoes).isEqualTo(0);
                 assertThat(lottoes).containsExactly(Lotto.of(1, 2, 3, 4, 5, 6));
             }
 
