@@ -26,9 +26,10 @@ public class Lotto {
     }
 
     private int checkBy(Set<LottoNumber> userLottoNumbers) {
-        return userLottoNumbers.stream()
+        return Long.valueOf(userLottoNumbers.stream()
                 .filter(this.lottoNumbers::contains)
-                .toArray().length;
+                .count())
+                .intValue();
     }
 
     @Override
