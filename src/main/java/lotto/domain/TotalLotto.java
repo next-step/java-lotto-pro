@@ -67,7 +67,7 @@ public class TotalLotto {
         LottoStatic lottoStatic = new LottoStatic();
         for (Lotto lotto : this.lottoList.getLottoList()) {
             int count = MatchesLottoNumber(lotto);
-            lottoStatic.calculator(count);
+            lottoStatic.calculatorCount(count);
         }
         return lottoStatic;
     }
