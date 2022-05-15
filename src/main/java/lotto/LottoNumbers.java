@@ -56,7 +56,7 @@ public class LottoNumbers {
         this.validateNumbers(winnerNumbers);
 
         for (String number : winnerNumbers) {
-            int oneNumber = Integer.parseInt(number);
+            int oneNumber = Integer.parseInt(number.trim());
             validateLottoNumber(oneNumber);
             this.numbers.add(oneNumber);
         }
@@ -78,4 +78,8 @@ public class LottoNumbers {
         }
     }
 
+    @Override
+    public String toString() {
+        return this.numbers.toString();
+    }
 }
