@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers implements Iterable<LottoNumber> {
     public static final int SIZE = 6;
@@ -37,5 +38,14 @@ public class LottoNumbers implements Iterable<LottoNumber> {
     @Override
     public Iterator<LottoNumber> iterator() {
         return this.lottoNumbers.iterator();
+    }
+
+    @Override
+    public String toString() {
+        return "[" +
+                this.lottoNumbers.stream()
+                        .map(LottoNumber::toString)
+                        .collect(Collectors.joining(", ")) +
+                "]";
     }
 }
