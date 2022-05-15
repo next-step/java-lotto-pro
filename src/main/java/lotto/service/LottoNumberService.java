@@ -1,9 +1,6 @@
 package lotto.service;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,8 +19,8 @@ public class LottoNumberService {
                 .collect(Collectors.toList());
     }
 
-    Set<Integer> makeLottoNumbers() {
+    public List<Integer> makeLottoNumbers() {
         Collections.shuffle(allLottoNumbers);
-        return new HashSet<>(allLottoNumbers.subList(0, LOTTO_GAME_NUMBER_COUNT));
+        return new ArrayList<>(allLottoNumbers.subList(0, LOTTO_GAME_NUMBER_COUNT));
     }
 }

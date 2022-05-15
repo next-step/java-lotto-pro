@@ -25,7 +25,7 @@ class LottoNumberServiceTest {
     @DisplayName("makeLottoNumbers 함수가 6개의 랜덤한 숫자를 리턴하는지 체크")
     @Test
     void makeLottoNumbersTest() {
-        Set<Integer> result = lottoNumberService.makeLottoNumbers();
+        List<Integer> result = lottoNumberService.makeLottoNumbers();
         assertThat(result)
                 .hasSize(6);
         System.out.println(result);

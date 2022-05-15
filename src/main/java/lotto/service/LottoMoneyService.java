@@ -3,7 +3,7 @@ package lotto.service;
 public class LottoMoneyService {
     private static final int PURCHASE_MONEY = 1000;
 
-    int calculatePurchasingCount(int money) {
+    public int calculatePurchasingCount(int money) {
         validateMoney(money);
         return money / PURCHASE_MONEY;
     }
