@@ -22,7 +22,7 @@ public class LottoResult {
     }
 
     private void increase(final Hit hit) {
-        if (hit.isHigh(Hit.TWO)) {
+        if (hit.isWin(Hit.TWO)) {
             resultMap.put(hit, resultMap.getOrDefault(hit, 0) + 1);
         }
     }
