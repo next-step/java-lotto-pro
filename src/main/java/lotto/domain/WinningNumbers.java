@@ -13,8 +13,13 @@ public class WinningNumbers {
     private static final WinningNumberValidatorGroup validatorGroup = WinningNumberValidatorGroup.getInstance();
 
     public WinningNumbers(String winningNumbersInput) {
+        winningNumbersInput = replaceBlank(winningNumbersInput);
         validatorGroup.validate(winningNumbersInput);
         this.winningNumbers = splitWinningNumbers(winningNumbersInput);
+    }
+
+    private String replaceBlank(String winningNumbersInput) {
+        return winningNumbersInput.replace(" ", "");
     }
 
     private List<Integer> splitWinningNumbers(String winningNumbersInput) {
