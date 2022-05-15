@@ -7,13 +7,22 @@ class LottosTest {
     @Test
     void Lotto를_추가할_수_있다() {
         Lottos lottos = new Lottos();
-        assertDoesNotThrow(() -> lottos.add(new LottoNumbers()));
+        assertDoesNotThrow(() -> {
+            lottos.add(new LottoNumbers(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(6)
+            ));
+        });
     }
 
     @Test
     void Lottos_의_크기를_알_수_있다() {
         Lottos lottos = new Lottos();
-        assertThat(lottos.size()).isEqualTo(2);
+        assertThat(lottos.size()).isEqualTo(0);
     }
 
 }
