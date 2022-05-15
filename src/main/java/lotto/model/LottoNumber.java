@@ -5,7 +5,7 @@ import util.NumberUtil;
 public class LottoNumber implements Comparable<LottoNumber> {
 	private static final int MIN_LOTTO_NUMBER = 1;
 	private static final int MAX_LOTTO_NUMBER = 45;
-	private int lottoNumber;
+	private final int lottoNumber;
 
 	public LottoNumber(String lottoNumber) {
 		lottoNumber = lottoNumber.trim();

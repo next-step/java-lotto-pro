@@ -7,7 +7,6 @@ import lotto.model.WinningList;
 public class LottoResult {
 	private Lottos lottos;
 	private LottoNumbers lastWinningLotto;
-	private long sum;
 
 	public LottoResult(Lottos lottos, LottoNumbers lastWinningLotto) {
 		this.lottos = lottos;
@@ -23,10 +22,7 @@ public class LottoResult {
 	}
 
 	private long totalWinningMoney(WinningList winningList) {
-		sum = 0;
-		winningList.getWinningList().forEach((winningMoney, count) -> {
-			sum += winningMoney.winningMoney(count);
-		});
-		return sum;
+		return winningList.getWinningList().entrySet().stream()
+				.mapToLong(entry -> entry.getKey().winningMoney(entry.getValue())).sum();
 	}
 }
