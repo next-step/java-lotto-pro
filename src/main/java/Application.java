@@ -3,28 +3,38 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Application {
+    private static final ConsoleInputView consoleInputView = new ConsoleInputView();
+    private static final ConsoleOutputView consoleOutputView = new ConsoleOutputView();
+    private static final Vendor vendor = new Vendor();
+
     public static void main(String[] args) {
-        ConsoleInputView consoleInputView = new ConsoleInputView();
-        ConsoleOutputView consoleOutputView = new ConsoleOutputView();
+        Lotto lotto = getLotto();
+        Lottery lottery = getLottery();
+        ContainCounts containCounts = lottery.get(lotto);
+        aggregate(containCounts);
+    }
 
-        long inputLong = consoleInputView.inputLong(() -> "구입금액을 입력해 주세요.");
+    private static void aggregate(ContainCounts containCounts) {
+        Aggregator aggregator = vendor.aggregate(containCounts);
+        consoleOutputView.view(aggregator);
+    }
 
-        Vendor vendor = new Vendor();
-        Lottos lottos = vendor.buy(inputLong);
-
-        consoleOutputView.view(lottos);
-
+    private static Lottery getLottery() {
         String inputString = consoleInputView.inputString(() -> "지난 주 당첨 번호를 입력해 주세요.");
         List<Integer> input = Arrays.stream(inputString.split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        Lottery lottery = new Lottery(
+        return new Lottery(
                 new LottoNumbers(input.stream()
                                 .map(LottoNumber::new)
                                 .collect(Collectors.toList())));
-        Aggregator aggregator = vendor.aggregate(lottery.get(lottos));
+    }
 
-        consoleOutputView.view(aggregator);
+    private static Lotto getLotto() {
+        long inputLong = consoleInputView.inputLong(() -> "구입금액을 입력해 주세요.");
+        Lotto lotto = vendor.buy(inputLong);
+        consoleOutputView.view(lotto);
+        return lotto;
     }
 }
