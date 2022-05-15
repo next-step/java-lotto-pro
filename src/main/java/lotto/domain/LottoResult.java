@@ -31,14 +31,14 @@ public class LottoResult {
 
     private int calculateTotalPrice() {
         int price = 0;
-        for (LottoRank type : LottoRank.values()) {
-            price += winningCount.getOrDefault(type, 0) * type.getPrice();
+        for (LottoRank rank : LottoRank.values()) {
+            price += winningCount.getOrDefault(rank, 0) * rank.getPrice();
         }
         return price;
     }
 
-    public int winningCountByRank(LottoRank type) {
-        return winningCount.getOrDefault(type, 0);
+    public int winningCountByRank(LottoRank rank) {
+        return winningCount.getOrDefault(rank, 0);
     }
 
     public double getProfitRate() {
