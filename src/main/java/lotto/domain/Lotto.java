@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -20,22 +22,15 @@ public class Lotto {
         }
     }
 
-    private Lotto(String lottoNumbers) {
-        String[] numbers = lottoNumbers.split(COMMA);
-        if (numbers.length != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_MUST_SIX);
-        }
-        for (String number : numbers) {
-            lotto.add(new LottoNumber(number));
-        }
-    }
-
     public static Lotto create(List<Integer> numbers) {
         return new Lotto(numbers);
     }
 
     public static Lotto create(String numbers) {
-        return new Lotto(numbers);
+        return new Lotto(Arrays.stream(numbers.split(COMMA))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
     }
 
     public int match(Lotto winningLotto) {
