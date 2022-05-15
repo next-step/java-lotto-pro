@@ -14,6 +14,10 @@ public class ContainCounts implements Iterable<ContainCount> {
         this.containCounts.add(containCount);
     }
 
+    public int size() {
+        return this.containCounts.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)

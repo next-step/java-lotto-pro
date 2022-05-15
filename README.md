@@ -34,7 +34,8 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
 ### LottoNumber - 로또 번호
 ### LottoNumbers - 로또 번호 여러개 대응
 ### ContainCount - 로또 번호가 포함하고 있는 당첨번호 총 개수 
-### Vendor - 구매, 총 구매량에 대한 통계, 수익률 처리 
+### Vendor - 구매, 총 구매량에 대한 통계, 수익률 처리
+### Aggregator - Vendor 에게 위임받아 집계 관련된 기능 처리 수행  
 
 
 ## 구현 요소별 TDD 로 기능을 완성해 본다. 
@@ -67,6 +68,11 @@ Lottos
 
 Vendor
 - [X] 로또를 판매할 수 있다.
+- [X] 집계할 수 있다.
+
+Aggregator 
+- [X] 수익률을 계산할 수 있다.
+- [X] 등수별 당첨 갯수를 집계할 수 있다.
 
 
 
