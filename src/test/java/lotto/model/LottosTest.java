@@ -25,4 +25,11 @@ class LottosTest {
         Lottos lottos = Lottos.buy(Money.from(3333));
         assertThat(lottos.readOnlyLottos()).hasSize(3);
     }
+
+    @DisplayName("로또들은 구입할 때 사용한 총 금액을 반환")
+    @Test
+    void lottosTotalPrice() {
+        Lottos lottos = Lottos.buy(Money.from(3333));
+        assertThat(lottos.totalPrice()).isEqualTo(Money.from(3000));
+    }
 }

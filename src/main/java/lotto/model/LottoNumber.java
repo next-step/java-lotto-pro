@@ -2,10 +2,10 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOTTO_MIN_NUMBER = 1;
     public static final int LOTTO_MAX_NUMBER = 45;
-    int lottoNumber;
+    private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
         validLottoRange(lottoNumber);
@@ -37,5 +37,15 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return Integer.compare(this.lottoNumber, other.lottoNumber);
     }
 }

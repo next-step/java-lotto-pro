@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class Lotto {
     public static final int LOTTO_SIZE_NUM = 6;
-    public static final int MATCH_COUNT_ZERO = 0;
+    private static final int MATCH_COUNT_ZERO = 0;
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
@@ -84,5 +84,10 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lotto);
+    }
+
+    @Override
+    public String toString() {
+        return lotto.toString();
     }
 }

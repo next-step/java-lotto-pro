@@ -4,7 +4,9 @@ import generator.InputLottoNumberGenerator;
 import generator.RandomLottoNumberGenerator;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -24,10 +26,23 @@ public class Lottos {
 
     public static Lottos buy(String[] input) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < input.length; i++) {
-            lottos.add(Lotto.draw(new InputLottoNumberGenerator(input[i])));
+        for (String s : input) {
+            lottos.add(Lotto.draw(new InputLottoNumberGenerator(s)));
         }
         return new Lottos(lottos);
+    }
+
+    public LottoStatistics lottoStatistics(Lotto winningLotto) {
+        Map<LottoRanking, Integer> lottoStatistics = new EnumMap<>(LottoRanking.class);
+        for (Lotto lotto : this.lottos) {
+            LottoRanking lottoRanking = lotto.lottoRanking(winningLotto);
+            lottoStatistics.put(lottoRanking, lottoStatistics.getOrDefault(lottoRanking, 0) + 1);
+        }
+        return new LottoStatistics(lottoStatistics);
+    }
+
+    public Money totalPrice() {
+        return Money.from(Math.multiplyExact(lottos.size(), Money.LOTTO_PRICE));
     }
 
     public List<Lotto> readOnlyLottos() {
