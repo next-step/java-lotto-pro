@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoGenerator;
+import lotto.lotto.ManualLottoes;
 import lotto.money.Money;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class LottoExchanger {
         this.lottoGenerator = requireNonNull(lottoGenerator, "lottoGenerator");
     }
 
-    public List<Lotto> exchange(Money money) {
+    public List<Lotto> exchange(Money money, ManualLottoes manualLottoes) {
         final List<Lotto> purchasedLottoes = new ArrayList<>();
         Money remainMoney = money;
         validateMoney(remainMoney, Lotto.PRICE);

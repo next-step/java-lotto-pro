@@ -23,7 +23,7 @@ public class LottoMachine {
 
     public void run(InputView inputView, ResultView resultView) {
         final Money money = inputView.readMoney();
-        final List<Lotto> lottoes = lottoExchanger.exchange(money);
+        final List<Lotto> lottoes = lottoExchanger.exchange(money, null);
         resultView.printLottoes(lottoes, -1);
         runAnalyze(inputView, resultView, lottoes);
     }
