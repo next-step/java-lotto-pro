@@ -9,10 +9,10 @@ public class ContainCount {
 
     public ContainCount(int containCount) {
         if (containCount < 0)
-            throw new RuntimeException();
+            throw new RuntimeException("당첨 번호의 수는 음수가 될 수 없습니다.");
 
         if (containCount > LottoNumbers.SIZE)
-            throw new RuntimeException();
+            throw new RuntimeException("당첨 번호의 수는 로또 번호 자리수 이상이 될 수 없습니다.");
 
         this.containCount = containCount;
     }
