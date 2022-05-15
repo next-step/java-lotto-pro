@@ -13,16 +13,16 @@ public class LottoVendingMachine {
         this.strategy = new LottoRandomNumberGenerateStrategy();
     }
 
-    public LottoTickets purchase(Money money) {
+    public PurchasedLottoTickets purchase(Money money) {
         int quantity = money.getQuantityFromMoney();
         return generateLottoTickets(quantity);
     }
 
-    private LottoTickets generateLottoTickets(int quantity) {
+    private PurchasedLottoTickets generateLottoTickets(int quantity) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             lottoNumbers.add(LottoNumbers.from(strategy));
         }
-        return LottoTickets.from(lottoNumbers);
+        return PurchasedLottoTickets.from(lottoNumbers);
     }
 }

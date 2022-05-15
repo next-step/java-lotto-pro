@@ -26,7 +26,7 @@
 ### LottoRank
 - [x] 맞은 숫자 개수에 따라서 등수 & 포상금 책정
 
-### LottoTickets
+### PurchasedLottoTickets
 - [x] LottoVendingMachine에서 구입한 만큼의 LottoNumbers 리스트를 가지고 있다.
 - [x] 우승 로또 번호를 입력 하여 구입한 로또들로 당첨된 LottoRank 리스트를 만들 수 있다.(구입한 로또들을 이용하여 우승 로또와 비교 해보기 때문)
 

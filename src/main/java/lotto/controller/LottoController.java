@@ -5,7 +5,7 @@ import static lotto.domain.Money.LOTTO_TICKET_PRICE;
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoTickets;
+import lotto.domain.PurchasedLottoTickets;
 import lotto.domain.LottoVendingMachine;
 import lotto.domain.LottoWinningResults;
 import lotto.domain.Money;
@@ -22,7 +22,7 @@ public class LottoController {
     }
 
     public void run() {
-        LottoTickets lottoTickets = buyLottoTickets();
+        PurchasedLottoTickets lottoTickets = buyLottoTickets();
 
         int purchasedTicketsCount = lottoTickets.purchasedTicketsCount();
 
@@ -34,7 +34,7 @@ public class LottoController {
 
     }
 
-    private void reportingLottoTicketsInformation(LottoTickets lottoTickets, int purchasedTicketsCount) {
+    private void reportingLottoTicketsInformation(PurchasedLottoTickets lottoTickets, int purchasedTicketsCount) {
         OutputView.printPurchasedTicketsCount(purchasedTicketsCount);
         OutputView.printTicketsNumbers(lottoTickets.toString());
     }
@@ -60,13 +60,13 @@ public class LottoController {
                 winningResults.winingRankCount(prizedRank));
     }
 
-    private LottoWinningResults checkWinningLotto(LottoTickets lottoTickets) {
+    private LottoWinningResults checkWinningLotto(PurchasedLottoTickets lottoTickets) {
         List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
         List<LottoRank> ranks = lottoTickets.match(LottoNumbers.from(() -> winningLottoNumbers));
         return LottoWinningResults.from(ranks);
     }
 
-    private LottoTickets buyLottoTickets() {
+    private PurchasedLottoTickets buyLottoTickets() {
         Money inputMoney = InputView.inputMoney();
         return vendingMachine.purchase(inputMoney);
     }

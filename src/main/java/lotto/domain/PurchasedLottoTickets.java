@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.enums.LottoRank;
 
-public class LottoTickets {
+public class PurchasedLottoTickets {
     private final List<LottoNumbers> lottoNumbers;
 
-    private LottoTickets(List<LottoNumbers> lottoNumbers) {
+    private PurchasedLottoTickets(List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoTickets from(List<LottoNumbers> lottoNumbers) {
-        return new LottoTickets(lottoNumbers);
+    public static PurchasedLottoTickets from(List<LottoNumbers> lottoNumbers) {
+        return new PurchasedLottoTickets(lottoNumbers);
     }
 
     public int purchasedTicketsCount() {
