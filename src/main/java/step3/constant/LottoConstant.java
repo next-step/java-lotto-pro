@@ -1,4 +1,4 @@
-package step3;
+package step3.constant;
 
 import java.util.List;
 import java.util.stream.Collectors;

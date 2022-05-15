@@ -1,7 +1,7 @@
 package step3.domain;
 
-import static step3.LottoConstant.LOTTO_MAX;
-import static step3.LottoConstant.LOTTO_MIN;
+import static step3.constant.LottoConstant.LOTTO_MAX;
+import static step3.constant.LottoConstant.LOTTO_MIN;
 
 import java.util.Objects;
 

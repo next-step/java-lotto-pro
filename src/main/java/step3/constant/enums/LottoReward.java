@@ -1,4 +1,4 @@
-package step3.constant;
+package step3.constant.enums;
 
 import java.util.Collections;
 import java.util.Map;

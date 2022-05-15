@@ -1,13 +1,13 @@
 package step3.view;
 
-import static step3.LottoConstant.LOTTOS_INFO_FORMAT;
-import static step3.LottoConstant.OVERVIEW_FORMAT;
+import static step3.constant.LottoConstant.LOTTOS_INFO_FORMAT;
+import static step3.constant.LottoConstant.OVERVIEW_FORMAT;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import step3.LottoConstant;
-import step3.constant.LottoReward;
+import step3.constant.LottoConstant;
+import step3.constant.enums.LottoReward;
 
 public class OutputView {
 

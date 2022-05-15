@@ -1,7 +1,7 @@
 package step3.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static step3.LottoConstant.LOTTO_PRICE;
+import static step3.constant.LottoConstant.LOTTO_PRICE;
 
 import java.util.ArrayList;
 import java.util.List;
