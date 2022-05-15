@@ -8,7 +8,7 @@ import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 
 public class RandomLottoNumberGenerator implements LottoNumberGenerator {
-    private static final List<LottoNumber> LOTTO_NUMBERS_CACHE = initLottoNumbers();
+    private static final List<LottoNumber> LOTTO_NUMBERS = initLottoNumbers();
 
     private static List<LottoNumber> initLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -18,22 +18,12 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
         return lottoNumbers;
     }
 
-    private final List<LottoNumber> lottoNumbers;
-
-    public RandomLottoNumberGenerator(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    public RandomLottoNumberGenerator() {
-        this(LOTTO_NUMBERS_CACHE);
-    }
-
     @Override
     public List<LottoNumber> generate() {
-        Collections.shuffle(this.lottoNumbers);
+        Collections.shuffle(LOTTO_NUMBERS);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < Lotto.LOTTO_SIZE_NUM; i++) {
-            lottoNumbers.add(this.lottoNumbers.get(i));
+            lottoNumbers.add(LOTTO_NUMBERS.get(i));
         }
         Collections.sort(lottoNumbers);
         return lottoNumbers;

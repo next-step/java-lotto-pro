@@ -9,8 +9,8 @@ public enum LottoRanking {
     FIRST(6, "6개 일치", Money.from(2000000000)),
     MISS(0, "꽝", Money.from(0));
 
-    public static final int MATCH_COUNT_MAX_NUM = 6;
-    public static final int MATCH_COUNT_MIN_NUM = 0;
+    private static final int MATCH_COUNT_MAX_NUM = 6;
+    private static final int MATCH_COUNT_MIN_NUM = 0;
     private final int matchCount;
     private final String text;
     private final Money money;
@@ -29,6 +29,14 @@ public enum LottoRanking {
                 .orElse(LottoRanking.MISS);
     }
 
+    public Money money() {
+        return this.money;
+    }
+
+    public String text() {
+        return this.text;
+    }
+
     private static void validMatchCount(int matchCount) {
         if (isNotLottoMatchCountRange(matchCount)) {
             throw new IllegalArgumentException("로또번호 일치 갯수가 유효하지 않습니다.");
@@ -41,13 +49,5 @@ public enum LottoRanking {
 
     private int matchCount() {
         return this.matchCount;
-    }
-
-    public Money money() {
-        return this.money;
-    }
-
-    public String text() {
-        return this.text;
     }
 }

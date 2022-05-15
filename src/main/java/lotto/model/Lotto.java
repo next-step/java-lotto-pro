@@ -10,6 +10,7 @@ import java.util.Set;
 public class Lotto {
     public static final int LOTTO_SIZE_NUM = 6;
     private static final int MATCH_COUNT_ZERO = 0;
+    private static final int MATCH_COUNT_ONE = 1;
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
@@ -32,11 +33,16 @@ public class Lotto {
     public LottoRanking lottoRanking(Lotto winningLotto) {
         int matchCount = MATCH_COUNT_ZERO;
         for (LottoNumber lottoNumber : this.lotto) {
-            if (winningLotto.containLottoNumber(lottoNumber)) {
-                matchCount++;
-            }
+            matchCount += matchCountIfContainLottoNumber(winningLotto, lottoNumber);
         }
         return LottoRanking.findLottoRankingByMatchCount(matchCount);
+    }
+
+    private int matchCountIfContainLottoNumber(Lotto winningLotto, LottoNumber lottoNumber) {
+        if (winningLotto.containLottoNumber(lottoNumber)) {
+            return MATCH_COUNT_ONE;
+        }
+        return MATCH_COUNT_ZERO;
     }
 
     private boolean containLottoNumber(LottoNumber lottoNumber) {
@@ -55,10 +61,6 @@ public class Lotto {
         }
     }
 
-    private boolean isNotUniqueLottoNumber(int size) {
-        return size != LOTTO_SIZE_NUM;
-    }
-
     private void validLottoSize(List<LottoNumber> lotto) {
         if (isNotLottoSize(lotto.size())) {
             throw new IllegalArgumentException("로또 번호 갯수가 올바르지 않습니다.");
@@ -66,6 +68,10 @@ public class Lotto {
     }
 
     private boolean isNotLottoSize(int size) {
+        return size != LOTTO_SIZE_NUM;
+    }
+
+    private boolean isNotUniqueLottoNumber(int size) {
         return size != LOTTO_SIZE_NUM;
     }
 

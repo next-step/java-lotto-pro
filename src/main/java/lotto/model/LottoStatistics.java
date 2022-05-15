@@ -10,6 +10,10 @@ public class LottoStatistics {
         this.lottoStatistics = lottoStatistics;
     }
 
+    public int get(LottoRanking lottoRanking) {
+        return lottoStatistics.getOrDefault(lottoRanking, 0);
+    }
+
     public BigDecimal yield(Money money) {
         return sumTotalPrize().divideBy(money);
     }
@@ -23,9 +27,5 @@ public class LottoStatistics {
             totalPrize = totalPrize.add(prize);
         }
         return totalPrize;
-    }
-
-    public int get(LottoRanking lottoRanking) {
-        return lottoStatistics.getOrDefault(lottoRanking, 0);
     }
 }

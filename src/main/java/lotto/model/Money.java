@@ -18,12 +18,6 @@ public class Money {
         return new Money(money);
     }
 
-    private void validMoney(int money) {
-        if (money < ZERO_NUM) {
-            throw new IllegalArgumentException("음수가 입력되어 유효하지 않습니다.");
-        }
-    }
-
     public int maxLottoCount() {
         return money / LOTTO_PRICE;
     }
@@ -41,6 +35,12 @@ public class Money {
             throw new IllegalArgumentException("0원으로 나눌 수 없습니다.");
         }
         return BigDecimal.valueOf(this.money).divide(BigDecimal.valueOf(money.money), 2, RoundingMode.DOWN);
+    }
+
+    private void validMoney(int money) {
+        if (money < ZERO_NUM) {
+            throw new IllegalArgumentException("음수가 입력되어 유효하지 않습니다.");
+        }
     }
 
     private boolean isZero(Money money) {
