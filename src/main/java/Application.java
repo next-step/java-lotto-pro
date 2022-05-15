@@ -1,6 +1,7 @@
 import java.io.IOException;
 import lotto.constant.LottoInputMessage;
 import lotto.controller.LottoGame;
+import lotto.model.LottoGeneratorRandomImpl;
 import lotto.wrapper.LottosResultWrapper;
 import lotto.model.LottoGameResult;
 import lotto.model.Lottos;
@@ -31,7 +32,7 @@ public class Application {
         Lottos lottos = null;
         boolean isInputError = false;
         try {
-            lottos = LottoGame.generateLottosByMoney(moneyWord);
+            lottos = LottoGame.generateLottosByMoney(moneyWord,new LottoGeneratorRandomImpl());
             ResultView.printLottosView(lottos);
         } catch (IllegalArgumentException e) {
             ResultView.printConsole(e.getMessage());
