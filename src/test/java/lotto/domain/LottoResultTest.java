@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoResultTest {
     Lottos lottos;
@@ -29,9 +30,11 @@ public class LottoResultTest {
     @Test
     @DisplayName("LottoResult 당첨 개수 테스트")
     void LottoResult_당첨_개수_테스트(){
-        assertThat(result.winningCountByRank(LottoRank.FIRST)).isEqualTo(1);
-        assertThat(result.winningCountByRank(LottoRank.SECOND)).isEqualTo(1);
-        assertThat(result.winningCountByRank(LottoRank.THIRD)).isEqualTo(1);
-        assertThat(result.winningCountByRank(LottoRank.FOURTH)).isEqualTo(1);
+        assertAll(
+                () -> assertThat(result.winningCountByRank(LottoRank.FIRST)).isEqualTo(1),
+                () -> assertThat(result.winningCountByRank(LottoRank.SECOND)).isEqualTo(1),
+                () -> assertThat(result.winningCountByRank(LottoRank.THIRD)).isEqualTo(1),
+                () -> assertThat(result.winningCountByRank(LottoRank.FOURTH)).isEqualTo(1)
+        );
     }
 }
