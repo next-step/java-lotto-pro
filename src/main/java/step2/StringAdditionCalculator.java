@@ -31,6 +31,6 @@ public class StringAdditionCalculator {
 
     private static int splitAndAddAllString(final String delimiter, final String numberWithDelimiter) {
         final String[] stringNumbers = StringSplitter.split(delimiter, numberWithDelimiter);
-        return new Numbers(stringNumbers).total();
+        return new Numbers(stringNumbers).getTotal();
     }
 }

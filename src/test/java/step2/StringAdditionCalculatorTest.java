@@ -43,14 +43,14 @@ public class StringAdditionCalculatorTest {
     @Test
     void addAllDelimiterString_Throw_RuntimeException_When_Number_Is_Minus() {
         assertThatThrownBy(() -> StringAdditionCalculator.addAllDelimiterString("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("숫자가 아닌 값 입력 시 예외 발생 테스트")
     @Test
     void addAllDelimiterString_Throw_RuntimeException_When_Not_A_Number() {
         assertThatThrownBy(() -> StringAdditionCalculator.addAllDelimiterString("a,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(NumberFormatException.class);
     }
 
     @DisplayName("빈 스트링 혹은 null 입력 시 0 반환 테스트")

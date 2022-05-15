@@ -3,7 +3,10 @@ package step2;
 import java.util.Arrays;
 
 public class Numbers {
-    final int[] numbers;
+    private final int[] numbers;
+    private static final int MINUS_STANDARD = 0;
+    private static final String MINUS_ERROR_MESSAGE = "cannot enter minus number.";
+    private static final String NOT_A_NUMBER_ERROR_MESSAGE = "cannot enter not a number.";
 
     Numbers(final String[] numbers) {
         this.numbers = Arrays.stream(numbers)
@@ -15,13 +18,13 @@ public class Numbers {
                 .toArray();
     }
 
-    public int total() {
+    public int getTotal() {
         return Arrays.stream(this.numbers).sum();
     }
 
     private void checkNumberIsMinus(final int parsedNumber) {
-        if (parsedNumber < 0) {
-            throw new RuntimeException("cannot enter minus number.");
+        if (parsedNumber < MINUS_STANDARD) {
+            throw new IllegalArgumentException(MINUS_ERROR_MESSAGE);
         }
     }
 
@@ -29,7 +32,7 @@ public class Numbers {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new RuntimeException("cannot enter not a number.");
+            throw new NumberFormatException(NOT_A_NUMBER_ERROR_MESSAGE);
         }
     }
 }
