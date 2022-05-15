@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PurchasedLottos {
+public class PurchasedLotto {
     private List<Lotto> lottoList;
 
-    public PurchasedLottos() {
+    public PurchasedLotto() {
     }
 
-    public PurchasedLottos(final List<Lotto> lottoList) {
+    public PurchasedLotto(final List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }
 

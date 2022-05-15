@@ -10,7 +10,7 @@ class OutputViewTest {
     @Test
     public void 구매_로또_출력하기() {
         LottoGame game = new LottoGame();
-        PurchasedLottos lottos = game.purchaseLotto(new Money(5000));
+        PurchasedLotto lottos = game.purchaseLotto(new Money(5000));
         OutputView.printMyLotto(lottos);
     }
 
@@ -22,8 +22,8 @@ class OutputViewTest {
                 new Lotto(1, 2, 3, 4, 7, 8),
                 new Lotto(1, 2, 3, 7, 8, 9));
         LottoGame game = new LottoGame();
-        PurchasedLottos purchasedLottos = new PurchasedLottos(lottoList);
-        LottoResult result = game.matchLottoNumbers(purchasedLottos, "1, 2, 3, 4, 5, 6");
+        PurchasedLotto purchasedLotto = new PurchasedLotto(lottoList);
+        LottoResult result = game.matchLottoNumbers(purchasedLotto, "1, 2, 3, 4, 5, 6");
         OutputView.showLottoStatistics(result);
     }
 
@@ -34,8 +34,8 @@ class OutputViewTest {
         List<Lotto> lottoList = Arrays.asList(
                 new Lotto(1, 2, 3, 4, 5, 6));
         LottoGame game = new LottoGame();
-        PurchasedLottos purchasedLottos = new PurchasedLottos(lottoList);
-        LottoResult result = game.matchLottoNumbers(purchasedLottos, "1, 2, 3, 4, 5, 6");
+        PurchasedLotto purchasedLotto = new PurchasedLotto(lottoList);
+        LottoResult result = game.matchLottoNumbers(purchasedLotto, "1, 2, 3, 4, 5, 6");
         OutputView.showLottoProfit(result, money);
     }
 }

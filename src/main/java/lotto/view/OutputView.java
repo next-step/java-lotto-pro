@@ -8,7 +8,7 @@ import static lotto.domain.LottoConstant.LOTTO_MINIMUM_MATCHING_COUNT;
 import static lotto.domain.LottoConstant.LOTTO_SIZE;
 
 public class OutputView {
-    public static void printMyLotto(PurchasedLottos lottos) {
+    public static void printMyLotto(PurchasedLotto lottos) {
         List<Lotto> lottoList = lottos.getLottoList();
         for (Lotto lotto : lottoList) {
             OutputView.printMessage(lotto.toString());
