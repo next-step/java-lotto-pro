@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottosWinningStatistics {
-    private final static int THREE_MATCHED_COUNT = 3;
-    private final static int FOUR_MATCHED_COUNT = 4;
-    private final static int FIVE_MATCHED_COUNT = 5;
-    private final static int SIX_MATCHED_COUNT = 6;
-    private final static int NOT_MATCHED_REWARD = 0;
-    private final static int THREE_MATCHED_REWARD = 5000;
-    private final static int FOUR_MATCHED_REWARD = 50000;
-    private final static int FIVE_MATCHED_REWARD = 1500000;
-    private final static int SIX_MATCHED_REWARD = 2000000000;
+    private static final int THREE_MATCHED_COUNT = 3;
+    private static final int FOUR_MATCHED_COUNT = 4;
+    private static final int FIVE_MATCHED_COUNT = 5;
+    private static final int SIX_MATCHED_COUNT = 6;
+    private static final int NOT_MATCHED_REWARD = 0;
+    private static final int THREE_MATCHED_REWARD = 5000;
+    private static final int FOUR_MATCHED_REWARD = 50000;
+    private static final int FIVE_MATCHED_REWARD = 1500000;
+    private static final int SIX_MATCHED_REWARD = 2000000000;
 
     private final List<Integer> matches;
     private final int price;

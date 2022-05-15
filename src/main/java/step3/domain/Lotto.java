@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    public final static int LOTTO_MIN_NUMBER = 1;
-    public final static int LOTTO_MAX_NUMBER = 45;
-    public final static int LOTTO_FIRST_INDEX = 0;
-    public final static int LOTTO_SIZE = 6;
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
+    public static final int LOTTO_FIRST_INDEX = 0;
+    public static final int LOTTO_SIZE = 6;
     public static final int LOTTO_FIXED_PRICE = 1000;
     private static final int IS_MATCHES = 1;
     private static final int IS_NOT_MATCHES = 0;

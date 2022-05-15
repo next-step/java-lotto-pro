@@ -20,8 +20,7 @@ public class LottoMain {
         final Price price = LottoViewer.inputPrice();
         final Lottos lottos = LottosGenerator.generateLottos(price);
         LottoViewer.printLottos(lottos);
-        final String inputWinningNumbers = LottoViewer.inputWinningNumbers();
-        final LottoWinningNumbers winningNumbers = new LottoWinningNumbers(inputWinningNumbers);
+        final LottoWinningNumbers winningNumbers = new LottoWinningNumbers(LottoViewer.inputWinningNumbers());
         final LottosWinningStatistics lottosWinningStatistics = new LottosWinningStatistics(lottos, winningNumbers);
         LottoViewer.printStatistics(lottosWinningStatistics);
     }
