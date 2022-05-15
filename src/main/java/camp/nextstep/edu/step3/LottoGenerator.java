@@ -11,11 +11,13 @@ public class LottoGenerator {
     }
 
     public LottoGenerator(LottoNumbers numbers) {
+        System.out.println(numbers);
         this.numbers = numbers;
     }
 
     public Lotto auto() {
-        return new Lotto(numbers.extract(Collections::shuffle));
+        List<LottoNumber> extract = numbers.extract(Collections::shuffle);
+        return new Lotto(extract);
     }
 
     public Lotto manual(final List<LottoNumber> numbers) {
