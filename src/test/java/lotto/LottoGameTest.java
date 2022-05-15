@@ -122,4 +122,29 @@ public class LottoGameTest {
         LottoGame game = new LottoGame(tickets, "1,2,3,4,5,6");
         assertThat(game.getScore().get(6)).isEqualTo(2);
     }
+
+    @Test
+    void 총_수익률_5() {
+        List<LottoNumbers> tickets = new ArrayList<>();
+        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
+        LottoGame game = new LottoGame(tickets, "4,5,6,7,8,9");
+        assertThat(game.getEarningRate()).isEqualTo(5.00);
+    }
+
+    @Test
+    void 총_수익률_1보다_작은_경우() {
+        List<LottoNumbers> tickets = new ArrayList<>();
+        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
+        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
+        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
+        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
+        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
+        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
+        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
+        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
+        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
+        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
+        LottoGame game = new LottoGame(tickets, "4,5,6,7,8,9");
+        assertThat(game.getEarningRate()).isEqualTo(0.50);
+    }
 }
