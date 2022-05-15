@@ -23,7 +23,14 @@ public class Statistics {
     }
 
     public Statistics(Lotto win, LottoNumber bonus, List<Lotto> lottos) {
+        validateBonus(win, bonus);
         lottos.forEach(lotto -> compareNumber(win, lotto, bonus));
+    }
+
+    private void validateBonus(Lotto win, LottoNumber bonus) {
+        if(win.getLottoNumber().contains(bonus)) {
+            throw new IllegalArgumentException("보너스번호가 지난당첨번호안에 중복이 될수 없습니다.");
+        }
     }
 
     private void compareNumber(Lotto win, Lotto lotto, LottoNumber bonus) {

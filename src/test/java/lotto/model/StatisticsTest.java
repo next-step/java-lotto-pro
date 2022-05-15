@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class StatisticsTest {
@@ -108,5 +109,17 @@ public class StatisticsTest {
 
         // then
         assertThat(statistics.getProfit()).isEqualTo(0.35);
+    }
+
+    @Test
+    @DisplayName("보너스번호가 당첨번호에 존재하면 IllegalArgumentException을 발생시킨다.")
+    void 보너스번호_예외_test() {
+        //given
+        bonus = new LottoNumber(1);
+
+        // when - then
+        assertThatThrownBy(() -> new Statistics(win, bonus, lottos))
+                .isInstanceOf(IllegalArgumentException.class)
+                .withFailMessage("보너스번호가 지난당첨번호안에 중복이 될수 없습니다.");
     }
 }
