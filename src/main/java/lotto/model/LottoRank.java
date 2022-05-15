@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 public enum LottoRank {
     FIRST(6, 2_000_000_000),
@@ -28,14 +27,10 @@ public enum LottoRank {
     }
 
     public static LottoRank findByHits(int hits, boolean hasBonus) {
-        return filterBonusLottoRank(hasBonus)
-                .filter(lottoRank -> lottoRank.hits == hits)
+        return Arrays.stream(LottoRank.values())
+                .filter(it -> it.hits == hits)
+                .filter(it -> !it.equals(SECOND) || hasBonus)
                 .findAny()
                 .orElse(MISS);
-    }
-
-    private static Stream<LottoRank> filterBonusLottoRank(boolean hasBonus) {
-        return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> (hasBonus && lottoRank != THIRD) || (!hasBonus && lottoRank != SECOND));
     }
 }
