@@ -11,15 +11,15 @@ public class LottoNumbers {
     private List<Integer> numbers;
 
     public LottoNumbers() {
-        List<Integer> numbers = new ArrayList<>();
+        List<Integer> randomNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUMBER_MAX_VALUE; i++) {
-            numbers.add(i+1);
+            randomNumbers.add(i+1);
         }
-        shuffleNumberList(numbers);
-        this.numbers = divideNumberList(numbers);
+        shuffleNumbers(randomNumbers);
+        this.numbers = sortedLottoNumber(divideNumberList(randomNumbers));
     }
 
-    private void shuffleNumberList(List<Integer> numbers) {
+    private void shuffleNumbers(List<Integer> numbers) {
         Collections.shuffle(numbers);
     }
 
@@ -35,8 +35,8 @@ public class LottoNumbers {
         return LOTTO_NUMBER_SIZE_VALUE;
     }
 
-    public void sortLottoNumber() {
-        this.numbers= this.numbers.stream()
+    public List<Integer> sortedLottoNumber(List<Integer> numbers) {
+        return numbers.stream()
                 .sorted()
                 .collect(Collectors.toList());
     }

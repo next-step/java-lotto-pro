@@ -20,7 +20,6 @@ public class LottoNumbersTest {
     @DisplayName("로또 번호를 오름차순 정렬한다.")
     void 테스트_로또번호_오름차순() {
         LottoNumbers lottoNumbers = new LottoNumbers();
-        lottoNumbers.sortLottoNumber();
         assertThat(lottoNumbers.equals(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(true);
     }
 
