@@ -3,7 +3,6 @@ package study.step3.util;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,13 +43,5 @@ class StringUtilTest {
     void split_withSpace() {
         assertThatThrownBy(() -> StringUtil.splitAndParseInt(" 1, , 4 ", DELIMITER))
                 .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    @DisplayName("주어진 리스트 섞은 후, 지정된 사이즈로 잘라서 반환")
-    void suffleAndSlice() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        List<Integer> result = StringUtil.shuffleAndSlice(numbers, 3);
-        assertThat(numbers).containsAll(result);
     }
 }

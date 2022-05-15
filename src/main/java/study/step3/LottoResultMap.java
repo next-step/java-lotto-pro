@@ -1,33 +1,26 @@
 package study.step3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Set;
 import study.step3.enumtype.LottoWinningType;
 
 public class LottoResultMap {
-    private static final int EMPTY_SIZE = 0;
     private final EnumMap<LottoWinningType, List<Lotto>> resultMap;
 
     public LottoResultMap() {
         this.resultMap = new EnumMap<>(LottoWinningType.class);
     }
 
-    public void append(LottoWinningType lottoWinningType, Lotto lotto) {
-        resultMap.computeIfAbsent(lottoWinningType, key -> (new ArrayList<>()));
-        resultMap.get(lottoWinningType).add(lotto);
+    public void addLotto(LottoWinningType lottoWinningType, Lotto lotto) {
+        List<Lotto> lottos = resultMap.getOrDefault(lottoWinningType, new ArrayList<>());
+        lottos.add(lotto);
+        resultMap.put(lottoWinningType, lottos);
     }
 
     public int matchCount(LottoWinningType lottoWinningType) {
-        if (!resultMap.containsKey(lottoWinningType)) {
-            return EMPTY_SIZE;
-        }
-        return resultMap.get(lottoWinningType).size();
-    }
-
-    public Set<LottoWinningType> keySet() {
-        return resultMap.keySet();
+        return resultMap.getOrDefault(lottoWinningType, Collections.emptyList()).size();
     }
 
     public int allItemSize() {

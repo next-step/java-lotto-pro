@@ -1,7 +1,7 @@
 package study.step3;
 
+import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
-import study.step3.io.Console;
 import study.step3.io.Printer;
 import study.step3.util.LottoGenerator;
 

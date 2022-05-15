@@ -51,6 +51,6 @@ class LottoReportTest {
 
         assertThat(lottoResultMap.matchCount(LottoWinningType.MATCH_COUNT_6)).isEqualTo(2);
         assertThat(lottoResultMap.matchCount(LottoWinningType.MATCH_COUNT_5)).isEqualTo(1);
-        assertThat(lottoResultMap.matchCount(LottoWinningType.MATCH_COUNT_0)).isZero();
+        assertThat(lottoResultMap.matchCount(LottoWinningType.MATCH_NOT_COUNT)).isZero();
     }
 }

@@ -1,28 +1,28 @@
 package study.step3;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import study.step3.util.StringUtil;
 
 public class Lotto {
-    static final List<Integer> WHOLE_LOTTO_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
-            42, 43, 44, 45);
+    static final List<Integer> WHOLE_LOTTO_NUMBERS = IntStream.range(1, 46).boxed().collect(Collectors.toList());
     private static final String NUMBER_DELIMITER = ",";
     private static final int LOTTO_NUMBER_SIZE = 6;
     private final List<Integer> numbers;
 
     public Lotto() {
-        numbers = StringUtil.shuffleAndSlice(new ArrayList<>(WHOLE_LOTTO_NUMBERS), 6);
+        numbers = shuffleAndSlice(new ArrayList<>(WHOLE_LOTTO_NUMBERS), 6);
         Collections.sort(numbers);
     }
 
     public Lotto(String numbersString) {
-        numbers = validate(StringUtil.splitAndParseInt(numbersString, NUMBER_DELIMITER));
+        numbers = StringUtil.splitAndParseInt(numbersString, NUMBER_DELIMITER);
+        validate(numbers);
         Collections.sort(numbers);
     }
 
@@ -37,11 +37,10 @@ public class Lotto {
         return numbers;
     }
 
-    private List<Integer> validate(List<Integer> numbers) {
+    private void validate(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
         validateRange(numbers);
-        return numbers;
     }
 
     private void validateSize(List<Integer> numbers) {
@@ -61,6 +60,11 @@ public class Lotto {
         if (numberSet.size() != numbers.size()) {
             throw new IllegalArgumentException("입력에 중복된 수가 있습니다.");
         }
+    }
+
+    public static List<Integer> shuffleAndSlice(List<Integer> numbers, int count) {
+        Collections.shuffle(numbers);
+        return numbers.subList(0, count);
     }
 
     @Override

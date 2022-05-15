@@ -15,7 +15,7 @@ public class LottoReport {
 
     public LottoResultMap analyze() {
         LottoResultMap lottoResultMap = new LottoResultMap();
-        lottos.forEach(lotto -> lottoResultMap.append(LottoWinningType.valueOf(lotto.matchCount(winningLotto)), lotto));
+        lottos.forEach(lotto -> lottoResultMap.addLotto(LottoWinningType.valueOf(lotto.matchCount(winningLotto)), lotto));
         return lottoResultMap;
     }
 

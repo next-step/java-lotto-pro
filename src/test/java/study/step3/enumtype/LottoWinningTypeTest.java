@@ -1,7 +1,7 @@
 package study.step3.enumtype;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,6 @@ class LottoWinningTypeTest {
     @Test
     @DisplayName("enum 변환 테스트 - 범위 초과 예외")
     void valueOf_exceededRange() {
-        assertThatThrownBy(() -> LottoWinningType.valueOf(MATCH_COUNT_9999))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThat(LottoWinningType.valueOf(MATCH_COUNT_9999)).isEqualTo(LottoWinningType.MATCH_NOT_COUNT);
     }
 }

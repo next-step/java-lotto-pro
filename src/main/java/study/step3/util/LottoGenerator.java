@@ -10,11 +10,11 @@ public class LottoGenerator {
 
     public static List<Lotto> generate(int genSize) {
         validate(genSize);
-        List<Lotto> result = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < genSize; i++) {
-            result.add(new Lotto());
+            lottos.add(new Lotto());
         }
-        return result;
+        return lottos;
     }
 
     private static void validate(int genSize) {
