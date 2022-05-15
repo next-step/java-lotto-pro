@@ -1,21 +1,23 @@
-package lotto.auto.model;
-
-import static lotto.auto.constant.LottoSetting.LOTTO_NUMBER_RANGE_MAX;
-import static lotto.auto.constant.LottoSetting.LOTTO_NUMBER_RANGE_MIN;
+package lotto.model.number;
 
 import java.util.Objects;
+import lotto.constant.LottoSetting;
 
 public class LottoNumber {
 
     private final int lottoNumber;
 
     public LottoNumber(int number) {
-        if (number < LOTTO_NUMBER_RANGE_MIN || number > LOTTO_NUMBER_RANGE_MAX) {
+        if (number < LottoSetting.LOTTO_NUMBER_RANGE_MIN || number > LottoSetting.LOTTO_NUMBER_RANGE_MAX) {
             throw new IllegalArgumentException(
-                String.format("로또 숫자는 %d ~ %d 사이값만 가능합니다.", LOTTO_NUMBER_RANGE_MIN, LOTTO_NUMBER_RANGE_MAX));
+                String.format("로또 숫자는 %d ~ %d 사이값만 가능합니다.", LottoSetting.LOTTO_NUMBER_RANGE_MIN, LottoSetting.LOTTO_NUMBER_RANGE_MAX));
         }
 
         this.lottoNumber = number;
+    }
+
+    public LottoNumber(String stringNumber) {
+        this(Integer.parseInt(stringNumber));
     }
 
     @Override
@@ -33,6 +35,11 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.lottoNumber);
     }
 
 }

@@ -1,9 +1,10 @@
-package lotto.auto.model;
+package lotto.model.factory;
 
-import static lotto.auto.constant.LottoSetting.LOTTO_SIZE;
+import static lotto.constant.LottoSetting.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import lotto.model.number.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

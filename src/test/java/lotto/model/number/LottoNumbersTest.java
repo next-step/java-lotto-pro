@@ -1,6 +1,7 @@
-package lotto.auto.model;
+package lotto.model.number;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,18 @@ public class LottoNumbersTest {
 
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new LottoNumbers(lottoNumbers));
+    }
+
+    @Test
+    @DisplayName("로또숫자 안에 당첨번호가 포함되는지 확인한다.")
+    void 로또숫자를_포함하는지_확인한다() {
+        List<LottoNumber> lottoNumberList = generateLottoNumberList(new int[]{1, 2, 3, 4, 5, 6});
+        List<LottoNumber> winningNumberList = generateLottoNumberList(new int[]{1, 2, 3, 7, 8, 9});
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        LottoNumbers winningNumbers = new LottoNumbers(winningNumberList);
+
+        int countContainLottoNumber = lottoNumbers.countContainLottoNumber(winningNumbers);
+        assertEquals(countContainLottoNumber, 3);
     }
 
     private List<LottoNumber> generateLottoNumberList(int[] numbers) {

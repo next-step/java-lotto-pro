@@ -1,4 +1,4 @@
-package lotto.auto.type;
+package lotto.type;
 
 public enum LottoGeneratorType {
     AUTO,

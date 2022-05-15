@@ -1,6 +1,6 @@
-package lotto.auto.model;
+package lotto.model.number;
 
-import static lotto.auto.constant.LottoSetting.LOTTO_SIZE;
+import static lotto.constant.LottoSetting.LOTTO_SIZE;
 
 import java.util.List;
 
@@ -14,6 +14,10 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public String toLottoNumbersString() {
+        return lottoNumbers.toString();
+    }
+
     private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(String.format("로또 숫자는 %d가 필요합니다.", LOTTO_SIZE));
@@ -25,6 +29,14 @@ public class LottoNumbers {
         if (lottoNumbers.size() != lottoNumbersDistinctSize) {
             throw new IllegalArgumentException("중복된 숫자는 사용할 수 없습니다.");
         }
+    }
+
+    public int countContainLottoNumber(LottoNumbers winningLottoNumbers) {
+        return (int) this.lottoNumbers.stream().filter(winningLottoNumbers::existLottoNumber).count();
+    }
+
+    private boolean existLottoNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
 }

@@ -1,4 +1,4 @@
-package lotto.auto.model;
+package lotto.model.money;
 
 import java.util.Objects;
 
@@ -15,6 +15,10 @@ public class Money {
 
     public Money(String money) {
         this(Integer.parseInt(money));
+    }
+
+    public int getMoney() {
+        return this.money;
     }
 
     @Override

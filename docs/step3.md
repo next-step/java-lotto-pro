@@ -14,11 +14,11 @@
  - Model
    - Money
    - LottoNumber
-   - WinningLotto
+   - LottoNumbers
    - LottoAutoFactory
    - PurchasedLotto
-   - PurchasedLottos
-   - LottoStatistics
+   - PurchasedInfo
+   - LottoResult
  - Controller
    - LottoMachine
  - View
