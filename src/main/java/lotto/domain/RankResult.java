@@ -43,4 +43,17 @@ public class RankResult {
 
 		return prizes;
 	}
+
+	public double compileStatistics(int cost) {
+		int divisionNumber = cost > 0 ? cost : 1;
+		int totalPrize = firstCount * Rank.FIRST.getPrizeMoney()
+			+ secondCount * Rank.SECOND.getPrizeMoney()
+			+ thirdCount * Rank.THIRD.getPrizeMoney()
+			+ fourthCount * Rank.FOURTH.getPrizeMoney();
+
+		double rate = totalPrize / (double)divisionNumber;
+
+		double DECIMAL = 100.0;
+		return Math.floor(rate * DECIMAL) / DECIMAL;
+	}
 }
