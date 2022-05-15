@@ -8,6 +8,8 @@ public class TotalLotto {
 
     private int count;
 
+    private Lottos lottoList;
+
     public TotalLotto() {
     }
 
@@ -15,9 +17,25 @@ public class TotalLotto {
         this.count = count;
     }
 
+    public int getCount() {
+        return this.count;
+    }
+
+    public Lottos getLottoList() {
+        return this.lottoList;
+    }
+
     public void count(String input) throws IllegalArgumentException {
         int amount = amountStringToInt(input);
         this.count = calculatorCount(amount);
+    }
+
+    public void countAndLottos(String input) throws IllegalArgumentException {
+        int amount = amountStringToInt(input);
+        this.count = calculatorCount(amount);
+
+        Lottos lottos = new Lottos(this.count);
+        this.lottoList = lottos;
     }
 
     private int amountStringToInt(String input) throws IllegalArgumentException {
