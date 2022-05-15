@@ -12,7 +12,7 @@ import lotto.view.OutputView;
 public class LottoController {
     public static void play() {
         int purchaseAmount = InputView.inputPurchaseAmount();
-        Lottos lottos = LottoShop.sale(InputView.inputPurchaseAmount());
+        Lottos lottos = LottoShop.sale(purchaseAmount);
         OutputView.printPurchaseCount(lottos.getLottos().size());
         OutputView.printLottoNumbers(lottos.getLottos());
 

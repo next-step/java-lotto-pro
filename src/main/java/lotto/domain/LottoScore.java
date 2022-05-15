@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +13,8 @@ public class LottoScore {
     }
 
     public Map<LottoWinnings, Integer> getLottoScoreMap() {
+        Object[] mapkey = lottoScoreMap.keySet().toArray();
+        Arrays.sort(mapkey);
         return Collections.unmodifiableMap(lottoScoreMap);
     }
 

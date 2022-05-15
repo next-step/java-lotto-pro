@@ -10,5 +10,5 @@ public final class MessageConstants {
     public static final String OUTPUT_LOTTO_NUMBER_COUNT = "%d 개 일치";
     public static final String OUTPUT_LOTTO_WINNINGS = " (%d원) - ";
     public static final String OUTPUT_LOTTO_SCORE_COUNT = "%d개";
-    public static final String OUTPUT_PROFIT_RATE = "총 수익률은 %d 입니다.";
+    public static final String OUTPUT_PROFIT_RATE = "총 수익률은 %s 입니다.";
 }
