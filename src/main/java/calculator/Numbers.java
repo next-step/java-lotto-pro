@@ -9,7 +9,7 @@ public class Numbers {
 
     private static final Pattern CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
 
-    List<Number> numberList;
+    private List<ZeroOrPositiveNumber> numberList;
 
     public Numbers() {
         this.numberList = new ArrayList<>();
@@ -18,25 +18,39 @@ public class Numbers {
     public Numbers(String input) {
         this();
 
-        if (!hasDefaultDelimiter(input) && !hasCustomDelimiter(input)) {
-            this.createOneNumber(input);
-            return ;
+        if (hasDefaultDelimiter(input) && hasCustomDelimiter((input))) {
+            throw new RuntimeException("Invalid Delimiter.");
         }
 
-        if (hasDefaultDelimiter(input) || hasCustomDelimiter(input)) {
-            this.createNumbersWithDelimiter(input);
-            return ;
-        }
-
-        throw new RuntimeException("Invalid input.");
+        createNumber(input);
     }
 
     public int sum() {
         int answer = 0;
-        for (Number number : numberList) {
+        for (ZeroOrPositiveNumber number : numberList) {
             answer += number.getNumber();
         }
         return answer;
+    }
+
+    private void createNumber(String input) {
+        if (!hasDefaultDelimiter(input) && !hasCustomDelimiter(input)) {
+            this.createOneNumber(input);
+            return;
+        }
+
+        if (hasDefaultDelimiter(input) || hasCustomDelimiter(input)) {
+            this.createNumbersWithDelimiter(input);
+        }
+    }
+
+    private void createOneNumber(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            this.numberList.add(new ZeroOrPositiveNumber(0));
+            return ;
+        }
+
+        this.numberList.add(new ZeroOrPositiveNumber(input));
     }
 
     private void createNumbersWithDelimiter(String input) {
@@ -54,17 +68,8 @@ public class Numbers {
 
     private void addNumbers(String[] tokens) {
         for (String token : tokens) {
-            this.numberList.add(new Number(token));
+            this.numberList.add(new ZeroOrPositiveNumber(token));
         }
-    }
-
-    private void createOneNumber(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            this.numberList.add(new Number(0));
-            return ;
-        }
-
-        this.numberList.add(new Number(input));
     }
 
     private boolean hasDefaultDelimiter(String input) {
