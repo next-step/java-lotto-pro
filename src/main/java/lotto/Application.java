@@ -10,12 +10,13 @@ import lotto.view.ResultView;
 public class Application {
 
     public static void main(String[] args) {
-
         Player player = Player.buyAutoLotto(autoLottoDeposit());
         ResultView.playerHasLotto(player);
 
         Lotto winnerLotto = lastWeekWinnerLotto();
-        LottoReport lottoReport = player.matchWinnerLotto(winnerLotto, new LottoNumber(3));
+        LottoNumber bonusNumber = bonusNumberInput(winnerLotto);
+
+        LottoReport lottoReport = player.matchWinnerLotto(winnerLotto, bonusNumber);
 
         ResultView.winnerReport(lottoReport);
 
@@ -27,6 +28,15 @@ public class Application {
             return InputView.retryPriceInput();
         }
         return despotMoney;
+    }
+
+    private static LottoNumber bonusNumberInput(Lotto winnerLotto) {
+        try {
+            return LottoNumber.createBonusNumber(winnerLotto, InputView.bonusNumberInput());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return bonusNumberInput(winnerLotto);
+        }
     }
 
     private static Lotto lastWeekWinnerLotto() {
