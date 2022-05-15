@@ -26,7 +26,7 @@ class LottoTest {
         int[] numbers = {1, 3, 5, 7, 9, 23};
         Lotto lotto = new Lotto(numbers);
 
-        assertThat(lotto.size()).isEqualTo(numbers.length);
+        assertThat(lotto.getNumbers()).hasSize(numbers.length);
     }
 
     @Test
