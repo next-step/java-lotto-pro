@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LottoMachine {
 
-    public static Lottos buy(int money) {
+    public static Lottos buy(Money money) {
         int purchaseCount = LottoPrice.purchase(money);
 
         Lottos lottos = new Lottos();

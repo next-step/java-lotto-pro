@@ -19,20 +19,14 @@ public class WinningStatistic {
         statistic.put(rank, count(rank) + 1);
     }
 
-    public double calculateRateOfReturn(double purchaseAmount) {
-        int totalPrizeMoney = 0;
+    public double calculateRateOfReturn(Money purchaseAmount) {
+        Money totalPrizeMoney = Money.zero();
 
         for (Rank rank : statistic.keySet()) {
-            totalPrizeMoney += rank.prizeMoney(statistic.get(rank));
+            Money prizeMoney = rank.prizeMoney(statistic.get(rank));
+            totalPrizeMoney = totalPrizeMoney.plus(prizeMoney);
         }
-        return makeTwoDecimalPlace(totalPrizeMoney / purchaseAmount);
+        return totalPrizeMoney.divideDecimal(purchaseAmount);
     }
 
-    private double makeTwoDecimalPlace(double late) {
-        return Math.floor(late * 100) / 100.0;
-    }
-
-    public Map<Rank, Integer> getStatistic() {
-        return statistic;
-    }
 }

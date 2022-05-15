@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Money;
 import lotto.domain.WinningStatistic;
 import lotto.enums.Rank;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ class WinningStatisticTest {
         WinningStatistic winningStatistic = new WinningStatistic();
         winningStatistic.collect(Rank.FOUR);
         // when
-        double rate = winningStatistic.calculateRateOfReturn(14000);
+        double rate = winningStatistic.calculateRateOfReturn(Money.of(14000));
         // then
         assertThat(rate).isEqualTo(0.35);
     }

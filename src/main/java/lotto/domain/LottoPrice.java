@@ -2,16 +2,16 @@ package lotto.domain;
 
 public class LottoPrice {
 
-    private static final int PRICE = 1_000;
+    private static final Money PRICE = Money.of(1000);
 
-    public static int purchase(int money) {
-        if (money < PRICE) {
+    public static int purchase(Money money) {
+        if (money.isLessThan(PRICE)) {
             throw new IllegalArgumentException("로또 1개 가격은 1000원입니다.");
         }
-        return money / PRICE;
+        return money.divide(PRICE);
     }
 
-    public static int calculatePurchaseAmount(int count) {
-        return count * PRICE;
+    public static Money calculatePurchaseAmount(int count) {
+        return PRICE.multiply(count);
     }
 }
