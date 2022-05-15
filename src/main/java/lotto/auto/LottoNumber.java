@@ -44,5 +44,9 @@ public class LottoNumber {
     public String toString() {
         return this.numbers.toString();
     }
+
+    public int winningCount(List<Integer> answerNumberList) {
+        return 0;
+    }
 }
 
