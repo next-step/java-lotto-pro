@@ -1,10 +1,10 @@
 package camp.nextstep.edu.level1.lotto.lotto;
 
-import camp.nextstep.edu.until.CollectionHelper;
+import camp.nextstep.edu.common.PositiveNumber;
 import camp.nextstep.edu.until.TypeCheckHelper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,9 +12,7 @@ public class Lotto {
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
     private static final int LOTTO_RANGE = 6;
-    private static final long LOTTO_PRICE = 1000;
-    private static final int WINNING_NUMBER_COUNT = 6;
-    private static final String WINNING_NUMBER_DELIMITER = ",";
+    private static final long LOTTO_PRICE = 1_000;
     private static final List<LottoNumber> LOTTO_NUMBER_PRESET = new ArrayList<>();
 
     static {
@@ -25,11 +23,13 @@ public class Lotto {
 
     private Money purchaseOriginalMoney;
     private final List<LottoNumbers> items = new ArrayList<>();
+    private PositiveNumber manualPurchaseCount;
+    private PositiveNumber autoPurchaseCount;
 
     public Lotto(int purchaseMoney) {
         checkValidLottoPurchaseMoney(purchaseMoney);
 
-        this.purchaseLotto(purchaseMoney);
+        this.purchaseOriginalMoney = new Money(purchaseMoney);
     }
 
     public Lotto(String purchaseStringMoney) {
@@ -37,23 +37,20 @@ public class Lotto {
         int convertedValue = Integer.parseInt(purchaseStringMoney);
         checkValidLottoPurchaseMoney(convertedValue);
 
-        this.purchaseLotto(convertedValue);
+        this.purchaseOriginalMoney = new Money(convertedValue);
     }
 
-    public LottoResult compareWinningNumber(String winningNumbers, String bonusNumber) {
-        String[] splitResult = Arrays.stream(winningNumbers.split(WINNING_NUMBER_DELIMITER))
-                .map(String::trim)
-                .toArray(String[]::new);
-        checkValidWinningNumber(splitResult);
+    public void manualLottoPurchase(Collection<LottoNumbers> manualLottoPurchaseNumbers) {
+        items.addAll(manualLottoPurchaseNumbers);
+        manualPurchaseCount = new PositiveNumber(manualLottoPurchaseNumbers.size());;
 
-        LottoNumbers winnerLottoNumbers = new LottoNumbers(
-                CollectionHelper.arrayStringToIntegerList(splitResult)
-        );
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        autoPurchaseLottoByRemainMoney();
+    }
 
-        checkWinningNumberAndBonusNumberDuplicated(winnerLottoNumbers, bonusLottoNumber);
+    public LottoResult compareWinningNumber(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        checkWinningNumberAndBonusNumberDuplicated(winningNumbers, bonusNumber);
 
-        return new LottoResult(this.items, winnerLottoNumbers, bonusLottoNumber);
+        return new LottoResult(this.items, winningNumbers, bonusNumber);
     }
 
     public double calculateReturnValue(Money earnedMoney) {
@@ -62,9 +59,23 @@ public class Lotto {
         return Math.floor(earnRateResult * 100) / 100;
     }
 
+    public void printPurchaseResult() {
+        String message = "수동으로 " + manualPurchaseCount + "장, 자동으로 " + autoPurchaseCount + "개를 구매했습니다.";
+        System.out.println(message);
+    }
+
     public void printPurchaseLottoNumbers() {
         for (LottoNumbers item : this.items) {
             System.out.println(item.toString());
+        }
+    }
+
+    public void checkPossibleManualLottoPurchaseCount(PositiveNumber count) {
+        long availablePurchaseCount = purchaseOriginalMoney.availablePurchaseCount(LOTTO_PRICE);
+        if (availablePurchaseCount < count.getValue()) {
+            throw new IllegalArgumentException(
+                    "구입 가능한 로또 수 보다 많이 구입할 수 없습니다. 구입 가능한 최대수: " + availablePurchaseCount
+            );
         }
     }
 
@@ -72,12 +83,6 @@ public class Lotto {
         if (money < LOTTO_PRICE) {
             String message = String.format("로또 구입시 최소 %d 원 이상이 있어야 합니다.", LOTTO_PRICE);
             throw new IllegalArgumentException(message);
-        }
-    }
-
-    private void checkValidWinningNumber(String[] winningNumbers) {
-        if (winningNumbers.length != WINNING_NUMBER_COUNT) {
-            throw new IllegalArgumentException("당첨 번호는 6개 이어야 합니다.");
         }
     }
 
@@ -93,15 +98,19 @@ public class Lotto {
         }
     }
 
-    private void purchaseLotto(int purchaseMoney) {
-        this.purchaseOriginalMoney = new Money(purchaseMoney);
-        long availablePurchaseCount = purchaseOriginalMoney.availablePurchaseCount(LOTTO_PRICE);
-
-        for (int i = 0; i < availablePurchaseCount; i++) {
+    private void purchaseLotto(long purchaseCount) {
+        for (int i = 0; i < purchaseCount; i++) {
             this.items.add(createRandomLottoNumbers());
         }
+    }
 
-        System.out.println(availablePurchaseCount + "개를 구매했습니다.");
+    private void autoPurchaseLottoByRemainMoney() {
+        Money manualPurchaseMoney = new Money(manualPurchaseCount.getValue() * LOTTO_PRICE);
+        Money remainMoney = purchaseOriginalMoney.subtract(manualPurchaseMoney);
+        long availablePurchaseCount = remainMoney.availablePurchaseCount(LOTTO_PRICE);
+
+        purchaseLotto(availablePurchaseCount);
+        autoPurchaseCount = new PositiveNumber(availablePurchaseCount);
     }
 
     private static LottoNumbers createRandomLottoNumbers() {

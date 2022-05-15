@@ -3,11 +3,16 @@ package camp.nextstep.edu.common;
 public class PositiveNumber {
     private static final String NUMBER_CHECK_REGEX = "-?\\d+";
 
-    public final Integer value;
+    private final long value;
 
-    public PositiveNumber(Integer value) {
+    public PositiveNumber(int value) {
         checkPositiveNumber(value);
 
+        this.value = value;
+    }
+
+    public PositiveNumber(long value) {
+        checkPositiveNumber(value);
         this.value = value;
     }
 
@@ -16,13 +21,17 @@ public class PositiveNumber {
 
         checkValidNumberByString(convertEmptyOrNull);
 
-        Integer convertValue = Integer.parseInt(convertEmptyOrNull);
+        long convertValue = Long.parseLong(convertEmptyOrNull);
         checkPositiveNumber(convertValue);
 
         this.value = convertValue;
     }
 
-    private void checkPositiveNumber(Integer value) {
+    public long getValue() {
+        return this.value;
+    }
+
+    private void checkPositiveNumber(long value) {
         if (value < 0) {
             throw new RuntimeException("양수만 허용됩니다.");
         }
@@ -39,5 +48,10 @@ public class PositiveNumber {
             return "0";
         }
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.value);
     }
 }

@@ -14,7 +14,7 @@ class PositiveNumberTest {
     @Test
     void 문자열_타입의_양수로_생성하면_정상_생성된다() {
         PositiveNumber positiveNumber = new PositiveNumber("123");
-        assertThat(positiveNumber.value).isEqualTo(123);
+        assertThat(positiveNumber.getValue()).isEqualTo(123);
     }
 
     @Test
