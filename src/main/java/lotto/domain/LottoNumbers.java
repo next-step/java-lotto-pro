@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.domain.generator.NumberGenerateStrategy;
+import lotto.domain.generator.LottoNumbersGenerateStrategy;
 
 public class LottoNumbers {
 
@@ -16,7 +16,7 @@ public class LottoNumbers {
     private static final int MAX_LOTTO_NUMBER_SIZE = 6;
 
     private static final String LOTTO_NUMBERS_SIZE_ERROR =
-            String.format("[ERROR] 로또는 &s개의 숫자야 합니다.", MAX_LOTTO_NUMBER_SIZE);
+            String.format("[ERROR] 로또는 %s개의 숫자야 합니다.", MAX_LOTTO_NUMBER_SIZE);
     private static final String LOTTO_NUMBERS_DUPLICATION_ERROR = "[ERROR] 중복된 숫자는 불가 합니다.";
 
     private final List<LottoNumber> numbers;
@@ -26,7 +26,7 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public static LottoNumbers from(NumberGenerateStrategy strategy) {
+    public static LottoNumbers from(LottoNumbersGenerateStrategy strategy) {
         return strategy.generate();
     }
 

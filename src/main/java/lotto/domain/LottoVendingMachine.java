@@ -2,15 +2,15 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.generator.LottoRandomNumberGenerateStrategy;
-import lotto.domain.generator.NumberGenerateStrategy;
+import lotto.domain.generator.RandomLottoNumbersGenerateStrategy;
+import lotto.domain.generator.LottoNumbersGenerateStrategy;
 
 public class LottoVendingMachine {
 
-    private final NumberGenerateStrategy strategy;
+    private final LottoNumbersGenerateStrategy strategy;
 
     public LottoVendingMachine() {
-        this.strategy = new LottoRandomNumberGenerateStrategy();
+        this.strategy = new RandomLottoNumbersGenerateStrategy();
     }
 
     public PurchasedLottoTickets purchase(Money money) {

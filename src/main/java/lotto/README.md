@@ -18,9 +18,9 @@
 - [x] LottoNumbers에 입력한 LottoNumber 하나가 존재 하는지 확인
 - [x] LottoNumbers 끼리 몇개의 숫자가 일치 하는 지 확인
 
-### NumberGenerateStrategy
+### LottoNumbersGenerateStrategy
 - [x] 전략 패턴을 사용하여 LottoNumbers 외부에서 숫자 리스트를 주입 하기 위해 사용
-- [x] 구현체 LottoRandomNumberGenerateStrategy -> Random으로 6개의 숫자를 발생
+- [x] 구현체 RandomLottoNumberGenerateStrategy -> Random으로 6개의 숫자를 발생
 
 ### LottoVendingMachine
 - [x] 구입한 로또 매수 만큼 LottoNumbers 를 가지는 PurchasedLottoTickets 생성

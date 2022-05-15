@@ -3,6 +3,6 @@ package lotto.domain.generator;
 import lotto.domain.LottoNumbers;
 
 @FunctionalInterface
-public interface NumberGenerateStrategy {
+public interface LottoNumbersGenerateStrategy {
     LottoNumbers generate();
 }

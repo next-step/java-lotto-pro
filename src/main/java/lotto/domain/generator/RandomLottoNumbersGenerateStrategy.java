@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import lotto.domain.LottoNumbers;
 
-public class LottoRandomNumberGenerateStrategy implements NumberGenerateStrategy{
+public class RandomLottoNumbersGenerateStrategy implements LottoNumbersGenerateStrategy {
 
     private static final List<Integer> lottoNos = new ArrayList<>();
     static {
