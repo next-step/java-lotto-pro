@@ -22,8 +22,10 @@ public class LottoMachine {
         List<LottoNumbers> lottoNumbers = RandomNumberGenerator.generate(quantity);
         ResultView.table(lottoNumbers);
 
-        List<Integer> winNumbers = LottoGenerator.generate(InputView.inputLottoNumbers());
-        LottoStatics lottoStatics = new LottoStatics(lottoNumbers, winNumbers);
+        List<Integer> winNumbers = LottoGenerator.generateNumbers(InputView.inputLottoNumbers());
+        int bonusNumber = LottoGenerator.generateNumber(InputView.inputBonusNumber());
+
+        LottoStatics lottoStatics = new LottoStatics(lottoNumbers, winNumbers, bonusNumber);
         LottoPrizeRanks lottoPrizeRanks = lottoStatics.collect();
         ResultView.statics(lottoPrizeRanks);
         ResultView.showRatio(calculateRatio(money, lottoPrizeRanks));
