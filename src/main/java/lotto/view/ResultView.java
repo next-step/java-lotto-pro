@@ -51,7 +51,7 @@ public class ResultView {
     }
 
     private static String formatMatchMassage(LottoGameResult lottoGameResult, LottoRank lottoRank) {
-        if(LottoRank.SECOND_BONUS.equals(lottoRank)){
+        if (LottoRank.SECOND_BONUS.equals(lottoRank)) {
             return String
                     .format(RESULT_MATCH_BONUS_MESSAGE, lottoRank.getMatchNumberCount(), lottoRank.getWinningAmount(),
                             lottoGameResult.rankCount(lottoRank));
@@ -75,7 +75,7 @@ public class ResultView {
 
     public static void setProfitRateView(StringBuilder resultView, double calcProfitRate) {
         resultView.append(String.format(RESULT_PROFIT_MESSAGE, calcProfitRate));
-        if(calcProfitRate < BREAK_EVEN_POINT ){
+        if (calcProfitRate < BREAK_EVEN_POINT) {
             resultView.append(LOSS_PROFIT_MESSAGE);
         }
     }

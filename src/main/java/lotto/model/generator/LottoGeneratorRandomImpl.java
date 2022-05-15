@@ -8,7 +8,7 @@ import lotto.model.LottoPaper;
 import lotto.model.Lottos;
 import lotto.utils.RandomNumberUtils;
 
-public class LottoGeneratorRandomImpl implements LottoGenerator{
+public class LottoGeneratorRandomImpl implements LottoGenerator {
 
     @Override
     public Lottos generateLottos(LottoPaper lottoPaper) {

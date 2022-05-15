@@ -19,7 +19,7 @@ public enum LottoRank {
     private static final Map<Integer, LottoRank> matchCountRank = new HashMap<>();
 
     static {
-        for (LottoRank lottoRank : EnumSet.of(FIRST,SECOND,THIRD,FOURTH,NONE)) {
+        for (LottoRank lottoRank : EnumSet.of(FIRST, SECOND, THIRD, FOURTH, NONE)) {
             matchCountRank.put(lottoRank.matchNumberCount, lottoRank);
         }
     }
@@ -39,13 +39,13 @@ public enum LottoRank {
 
     public static LottoRank of(int matchNumberCount, boolean isBonusMatch) {
         LottoRank lottoRank = matchCountRank.getOrDefault(matchNumberCount, NONE);
-        if(SECOND.equals(lottoRank) && isBonusMatch){
+        if (SECOND.equals(lottoRank) && isBonusMatch) {
             return SECOND_BONUS;
         }
         return lottoRank;
     }
 
     public static Set<LottoRank> valuesExcludeNone() {
-        return EnumSet.of(FIRST,SECOND_BONUS, SECOND, THIRD, FOURTH);
+        return EnumSet.of(FIRST, SECOND_BONUS, SECOND, THIRD, FOURTH);
     }
 }

@@ -19,7 +19,7 @@ public class LottoGame {
         throw new IllegalStateException(ErrorMessage.UTILITY_CLASS);
     }
 
-    public static Lottos generateLottosByMoney(String moneyWord,LottoGenerator lottoGenerator) {
+    public static Lottos generateLottosByMoney(String moneyWord, LottoGenerator lottoGenerator) {
         LottoStore lottoStore = new LottoStore(moneyWord);
         LottoPaper lottoPaper = lottoStore.issueLottoPaper();
         return lottoGenerator.generateLottos(lottoPaper);
@@ -28,7 +28,7 @@ public class LottoGame {
     public static LottoGameResult resultWinningGame(Lottos lottos, String winningNumbersWord, String bonusNumberWord) {
         List<Integer> winningNumbers = InputStringUtils.splitToNumberList(winningNumbersWord, DELIMITER_COMMA);
         int bonusNumber = InputStringUtils.wordToNumber(bonusNumberWord);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers,new BonusNumber(bonusNumber));
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, new BonusNumber(bonusNumber));
         return winningLotto.compareLottos(lottos);
     }
 }

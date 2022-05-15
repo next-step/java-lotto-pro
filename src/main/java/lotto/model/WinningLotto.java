@@ -19,7 +19,7 @@ public class WinningLotto {
 
     public WinningLotto(List<Integer> winningNumbers, BonusNumber bonusNumber) {
         this(winningNumbers);
-        validateDuplication(winningNumbers,bonusNumber);
+        validateDuplication(winningNumbers, bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
@@ -43,8 +43,9 @@ public class WinningLotto {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATION);
         }
     }
+
     private void validateDuplication(List<Integer> winningNumbers, BonusNumber bonusNumber) {
-        if(winningNumbers.contains(bonusNumber.getNumber())){
+        if (winningNumbers.contains(bonusNumber.getNumber())) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATION_BONUS);
         }
     }
@@ -58,7 +59,7 @@ public class WinningLotto {
     public LottoGameResult compareLottos(Lottos lottos) {
         EnumMap<LottoRank, Integer> resultRank = new EnumMap<>(LottoRank.class);
         for (Lotto lotto : lottos.getLottoz()) {
-            LottoRank lottoRank = lotto.matchRank(winningNumbers,bonusNumber);
+            LottoRank lottoRank = lotto.matchRank(winningNumbers, bonusNumber);
             resultRank.put(lottoRank, resultRank.getOrDefault(lottoRank, 0) + 1);
         }
         return new LottoGameResult(resultRank);
