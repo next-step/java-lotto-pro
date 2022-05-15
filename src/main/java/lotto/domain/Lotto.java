@@ -17,12 +17,12 @@ public class Lotto {
 	private Numbers numbers;
 
 	public Lotto(List<Number> numbers) {
-		validSize(numbers);
+		validSize(numbers.size());
 		this.numbers = new Numbers(numbers);
 	}
 
 	public static Lotto getInstanceByString(List<String> strNumbers) {
-		validSize(strNumbers);
+		validSize(strNumbers.size());
 		List<Number> numbers = new ArrayList<>();
 
 		for(String number: strNumbers) {
@@ -51,8 +51,8 @@ public class Lotto {
 		}
 	}
 
-	private static void validSize(List numbers) {
-		if(numbers.size() != LOTTO_SIZE) {
+	private static void validSize(int size) {
+		if(size != LOTTO_SIZE) {
 			throw new IllegalArgumentException(INVALID_SIZE);
 		}
 	}
