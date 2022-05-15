@@ -1,3 +1,5 @@
+package study;
+
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.junit.jupiter.api.DisplayName;
