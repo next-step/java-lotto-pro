@@ -10,35 +10,32 @@ public class Lotto {
     private static final String ERROR_MESSAGE_MUST_BE_SIX_NUMBER = "로또는 서로 다른 6개의 숫자여야 합니다.";
     private static final int SIZE = 6;
 
-    private final Set<Number> numbers = new HashSet<>();
+    private final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     public Lotto() {
         this(LottoNumbers.pick());
     }
 
-    public Lotto(List<Number> numbers) {
-        this.numbers.addAll(numbers);
-        if (this.numbers.size() != SIZE) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers.addAll(lottoNumbers);
+        if (this.lottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_MUST_BE_SIX_NUMBER);
         }
     }
 
     public List<Integer> getNumbers() {
-        return numbers.stream().map(Number::getNumber).sorted().collect(Collectors.toList());
+        return lottoNumbers.stream().map(LottoNumber::getNumber).sorted().collect(Collectors.toList());
     }
 
-    public Result getResult(Lotto winner) {
-        int count = 0;
-        for (Number number : winner.numbers) {
-            count = plusCountIfContains(count, number);
-        }
-        return Result.from(count);
+    public Result getResult(Lotto winner, LottoNumber bonusNumber) {
+        int count = (int) lottoNumbers.stream()
+            .filter(winner.lottoNumbers::contains)
+            .count();
+        return Result.from(count, isContainsBonus(bonusNumber));
     }
 
-    private int plusCountIfContains(int count, Number number) {
-        if (numbers.contains(number)) {
-            count++;
-        }
-        return count;
+    private boolean isContainsBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
+
 }

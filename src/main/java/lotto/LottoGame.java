@@ -3,6 +3,7 @@ package lotto;
 import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.LottoMachine;
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.Result;
 import lotto.view.InputView;
@@ -18,8 +19,9 @@ public class LottoGame {
         ResultView.printLottos(lottos);
 
         Lotto winner = InputView.inputWinnerNumber();
+        LottoNumber bonusNumber = InputView.inputBonusNumber();
 
-        List<Result> results = lottos.getResults(winner);
+        List<Result> results = lottos.getResults(winner, bonusNumber);
         ResultView.printResults(results);
 
         double profit = lottoMachine.calculateProfit(cost, results);

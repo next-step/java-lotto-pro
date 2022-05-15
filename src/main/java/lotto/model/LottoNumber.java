@@ -1,6 +1,6 @@
 package lotto.model;
 
-public class Number {
+public class LottoNumber {
 
     private static final int MIN = 1;
     private static final int MAX = 45;
@@ -8,7 +8,7 @@ public class Number {
 
     private final int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         if (number < MIN || number > MAX) {
             throw new IllegalArgumentException(ERROR_OUT_OF_RANGE_MESSAGE);
         }
@@ -24,9 +24,9 @@ public class Number {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Number number1 = (Number) o;
+        LottoNumber lottoNumber1 = (LottoNumber) o;
 
-        return number == number1.number;
+        return number == lottoNumber1.number;
     }
 
     @Override

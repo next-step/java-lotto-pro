@@ -1,15 +1,14 @@
 package lotto.model;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoMachineTest {
 
@@ -38,7 +37,7 @@ class LottoMachineTest {
     }
 
     static Stream<Arguments> calculateProfitTestParameter() {
-        List<Result> results = Arrays.asList(Result.FOURTH, Result.LOSE, Result.LOSE, Result.LOSE, Result.LOSE);
+        List<Result> results = Arrays.asList(Result.FIFTH, Result.LOSE, Result.LOSE, Result.LOSE, Result.LOSE);
         return Stream.of(
             arguments(5000, results, 1.00),
             arguments(10000, results, 0.50),

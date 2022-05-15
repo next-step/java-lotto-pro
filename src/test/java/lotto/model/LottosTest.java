@@ -16,7 +16,7 @@ class LottosTest {
     @Test
     void getResults() {
         Lottos lottos = new Lottos(5);
-        List<Result> results = lottos.getResults(new Lotto());
+        List<Result> results = lottos.getResults(new Lotto(), new LottoNumber(1));
         assertEquals(5, results.size());
     }
 }
