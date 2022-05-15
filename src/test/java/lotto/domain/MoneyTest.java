@@ -13,8 +13,8 @@ public class MoneyTest {
     @Test
     @DisplayName("Money 정상 생성")
     void Money_정상_생성(){
-        Money money = new Money(10000);
-        assertThat(money.getAmount()).isEqualTo(10000);
+        Money money = new Money(1000);
+        assertThat(money.getAmount()).isEqualTo(1000);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class MoneyTest {
     }
 
     @ParameterizedTest(name="금액으로 구매 가능한 로또 개수 반환: {0}원 - {1}개")
-    @CsvSource(value = {"0:0", "999:0", "1000:1", "1001:1", "1999:1"}, delimiter = ':')
+    @CsvSource(value = {"1000:1", "1001:1", "1999:1"}, delimiter = ':')
     void Money_구매가능_로또_개수(int amount, int count){
         Money money = new Money(amount);
         assertThat(money.lottoCountToBuy()).isEqualTo(count);
