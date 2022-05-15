@@ -25,6 +25,14 @@ public class Presenter {
         return numbers;
     }
 
+    public LottoNumber askLottoBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        LottoNumber bonusNumber = new LottoNumber(scanner.nextInt());
+        System.out.println();
+        return bonusNumber;
+    }
+
     private List<LottoNumber> userLottoNumbers(Scanner scanner) {
         return Arrays.stream(scanner.nextLine().replace(" ", "").split(","))
                 .mapToInt(Integer::parseInt)
