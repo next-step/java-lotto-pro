@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Player {
-    private final List<Lotto> lottos = new ArrayList<>();
     private static final int ZERO = 0;
+    private final List<Lotto> lottos = new ArrayList<>();
 
     public Player(List<Lotto> customLottos) {
         buyCustomLotto(customLottos);

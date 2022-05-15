@@ -3,9 +3,10 @@ package lotto.domain;
 import java.util.List;
 
 public class Lotto {
-    private final LottoNumbers lottoNumbers;
     public static final int LOTTO_MONEY = 1000;
 
+    private final LottoNumbers lottoNumbers;
+    
     public Lotto() {
         this(LottoNumbers.autoLottoNumbers());
     }
