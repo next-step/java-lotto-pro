@@ -17,17 +17,61 @@ public class LottoPurchase {
     private final static int LOTTO_THREE_RANK_COUNT_VALUE = 4;
     private final static int LOTTO_FOUR_RANK_COUNT_VALUE = 3;
 
+    public static final String ERROR_INVALID_PURCHASE_PRICE_MESSAGE = "[ERROR] 숫자만 입력가능합니다.";
+    public static final String ERROR_NEGATIVE_PURCHASE_PRICE_MESSAGE = "[ERROR] 양수만 입력가능합니다.";
+    public static final String ERROR_UNIT_PURCHASE_PRICE_MESSAGE = "[ERROR] 1,000원 단위로 입력가능합니다.";
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoPurchase(int purchaseCount) {
-        this.lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < purchaseCount; i++) {
-            this.lottoNumbers.add(new LottoNumber());
-        }
+        this.lottoNumbers = createRandomLottoNumber(purchaseCount);
     }
 
     public LottoPurchase(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public LottoPurchase(String purchasePriceText) {
+        int purchasePrice = parsePurchasePrice(purchasePriceText);
+        int purchaseCount = calculatePurchaseCount(purchasePrice);
+        this.lottoNumbers = createRandomLottoNumber(purchaseCount);
+    }
+
+    private List<LottoNumber> createRandomLottoNumber(int purchaseCount) {
+        List<LottoNumber> randomNumbers = new ArrayList<>();
+        for (int i = 0; i < purchaseCount; i++)
+            randomNumbers.add(new LottoNumber());
+
+        return randomNumbers;
+    }
+
+    private int parsePurchasePrice(String purchasePriceText) {
+        int purchasePrice = 0;
+        try {
+            purchasePrice = Integer.parseInt(purchasePriceText);
+            checkValidationPurchasePrice(purchasePrice);
+            return purchasePrice;
+        } catch (NumberFormatException numberFormatException) {
+            throw new IllegalArgumentException(ERROR_INVALID_PURCHASE_PRICE_MESSAGE);
+        }
+    }
+
+    private int calculatePurchaseCount(int purchasePrice) {
+        return purchasePrice / LOTTO_PURCHASE_PRICE_VALUE;
+    }
+
+    private void checkValidationPurchasePrice(int purchasePrice) {
+        if (isNegative(purchasePrice)) {
+            throw new IllegalArgumentException(ERROR_NEGATIVE_PURCHASE_PRICE_MESSAGE);
+        }
+
+        if (purchasePrice % LOTTO_PURCHASE_PRICE_VALUE != 0) {
+            throw new IllegalArgumentException(ERROR_UNIT_PURCHASE_PRICE_MESSAGE);
+        }
+    }
+
+    private boolean isNegative(int purchasePrice) {
+        return purchasePrice < 0;
     }
 
     public int issuedLottoCount() {
@@ -35,6 +79,10 @@ public class LottoPurchase {
             return 0;
         }
         return this.lottoNumbers.size();
+    }
+
+    public List<LottoNumber> issuedLottoNumbers() {
+        return this.lottoNumbers;
     }
 
     public int issuedLottoPurchasePrice() {

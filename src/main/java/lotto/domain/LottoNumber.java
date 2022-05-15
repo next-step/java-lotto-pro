@@ -12,27 +12,31 @@ public class LottoNumber {
     private final List<Integer> numbers;
 
     public LottoNumber() {
-        List<Integer> randomNumbers = new ArrayList<>();
-        for (int i = LOTTO_NUMBER_MIN_VALUE; i <= LOTTO_NUMBER_MAX_VALUE; i++) {
-            randomNumbers.add(i);
-        }
-        this.numbers = issueLottoNumber(randomNumbers);
+        this.numbers = issueLottoNumber(createRandomLottoNumber());
     }
 
     public LottoNumber(List<Integer> numbers) {
         this.numbers = issueLottoNumber(numbers);
     }
 
+    private List<Integer> createRandomLottoNumber() {
+        List<Integer> randomNumbers = new ArrayList<>();
+        for (int i = LOTTO_NUMBER_MIN_VALUE; i <= LOTTO_NUMBER_MAX_VALUE; i++) {
+            randomNumbers.add(i);
+        }
+        return randomNumbers;
+    }
+
     private List<Integer> issueLottoNumber(List<Integer> numbers) {
-        if (isValidRangeLottoNumber()) {
+        if (isValidRangeLottoNumber(numbers)) {
            throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_OUT_OF_RANGE_MESSAGE);
         }
         shuffleNumbers(numbers);
         return sortedLottoNumber(divideNumberList(numbers));
     }
 
-    private boolean isValidRangeLottoNumber() {
-        return this.numbers.stream()
+    private boolean isValidRangeLottoNumber(List<Integer> numbers) {
+        return numbers.stream()
                 .anyMatch(number -> number < LOTTO_NUMBER_MIN_VALUE || number > LOTTO_NUMBER_MAX_VALUE);
     }
 
