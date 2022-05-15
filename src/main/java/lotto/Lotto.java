@@ -47,4 +47,8 @@ public class Lotto {
     private boolean match(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
     }
+
+    public List<LottoNumber> getLotto() {
+        return lotto;
+    }
 }

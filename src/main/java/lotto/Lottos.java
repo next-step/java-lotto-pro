@@ -26,4 +26,8 @@ public class Lottos {
         }
         return statistic;
     }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }
