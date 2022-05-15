@@ -6,16 +6,24 @@ public class Lotto {
     public static final int LOTTO_MONEY = 1000;
 
     private final LottoNumbers lottoNumbers;
-    
-    public Lotto() {
+
+    private Lotto() {
         this(LottoNumbers.autoLottoNumbers());
     }
 
-    public Lotto(LottoNumbers lottoNumbers) {
+    public static Lotto createAutoLotto() {
+        return new Lotto(LottoNumbers.autoLottoNumbers());
+    }
+
+    public static Lotto createCustomLotto(List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
+
+    private Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
+    private Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 

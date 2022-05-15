@@ -18,7 +18,7 @@ class PlayerTest {
             ,delimiterString = ",")
     @DisplayName("금액이 가능한 만큼 구매를 한다.")
     void buyLotto(int money, int qty) {
-        Player player = new Player(money);
+        Player player = Player.buyAutoLotto(money);
         assertThat(player.getLottos()).hasSize(qty);
     }
 
@@ -26,13 +26,13 @@ class PlayerTest {
     @DisplayName("로또를 맞춰본 결과")
     void matchWinnerLotto() {
         List<Lotto> lottoList = Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))  // three
-                , new Lotto(Arrays.asList(1, 15, 20, 30, 40, 41)) //fail
-                , new Lotto(Arrays.asList(1, 3, 4, 5, 20, 21)) //fail
-                , new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))); // three
+                Lotto.createCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6))  // three
+                , Lotto.createCustomLotto(Arrays.asList(1, 15, 20, 30, 40, 41)) //fail
+                , Lotto.createCustomLotto(Arrays.asList(1, 3, 4, 5, 20, 21)) //fail
+                , Lotto.createCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6))); // three
 
-        Player player = new Player(lottoList);
-        LottoReport lottoReport = player.matchWinnerLotto(new Lotto(Arrays.asList(1, 2, 3, 42, 43, 44)));
+        Player player = Player.buyCustomLottos(lottoList);
+        LottoReport lottoReport = player.matchWinnerLotto(Lotto.createCustomLotto(Arrays.asList(1, 2, 3, 42, 43, 44)));
 
         assertAll(() -> {
             assertThat(lottoReport.rewordTotalMoney()).isEqualTo(10000);

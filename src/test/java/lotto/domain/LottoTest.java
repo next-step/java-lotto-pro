@@ -13,13 +13,13 @@ class LottoTest {
 
     @BeforeEach
     void setUp() {
-        winLotto = new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        winLotto = Lotto.createCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     @DisplayName("로또의 결과를 맞춰 본다")
     void LottoMatch() {
-        Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 3, 4, 5, 7, 9)));
+        Lotto lotto = Lotto.createCustomLotto(Arrays.asList(1, 3, 4, 5, 7, 9));
         LottoRank lottoRank = lotto.match(winLotto);
 
         assertThat(lottoRank).isEqualTo(LottoRank.THIRD);
