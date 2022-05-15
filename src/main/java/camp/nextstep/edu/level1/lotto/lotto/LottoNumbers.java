@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final int LOTTO_RANGE = 6;
-    private static final String LOTTO_NUMBER_DELIMITER = ", ";
+    private static final String LOTTO_NUMBER_DELIMITER = ",";
     private static final String TO_STRING_PREFIX = "[";
     private static final String TO_STRING_SUFFIX = "]";
 

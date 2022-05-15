@@ -19,10 +19,16 @@ class LottoNumbersTest {
     }
 
     @Test
+    void 로또_번호_생성_시_comma_를_기준으로_6개의_1_에서_45_사이의_문자열_숫자로_생성하면_정상_생성된다() {
+        assertThatNoException().isThrownBy(() -> new LottoNumbers("1, 2, 3, 4, 5, 45"));
+    }
+
+    @Test
     void 중복된_숫자가_포함된_1_에서_45_사이의_숫자로_생성하면_예외가_발생한다() {
         List<LottoNumber> numbers = createLottoNumbers(1, 2, 2, 3, 3, 4);
 
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(numbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers("1, 2, 2, 3, 3, 4"));
     }
 
     @Test
@@ -32,6 +38,8 @@ class LottoNumbersTest {
 
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(overCountNumbers));
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(lackCountNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers("1, 2, 3, 4, 5"));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers("1, 2, 3, 4, 5, 6, 7"));
     }
 
     @Test
