@@ -5,6 +5,7 @@ import lotto.model.LottoNumbers;
 import lotto.model.LottoPrizeRanks;
 import lotto.model.LottoQuantityChecker;
 import lotto.model.LottoStatics;
+import lotto.model.Money;
 import lotto.model.RandomNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -13,22 +14,24 @@ import java.util.List;
 
 public class LottoMachine {
     public void pay() {
-        String price = InputView.inputPrice();
+        Money money = new Money(InputView.inputPrice());
 
-        int quantity = LottoQuantityChecker.calculate(price);
+        int quantity = LottoQuantityChecker.calculate(money);
         ResultView.quantity(quantity);
 
         List<LottoNumbers> lottoNumbers = RandomNumberGenerator.generate(quantity);
         ResultView.table(lottoNumbers);
 
-        List<Integer> winNumbers = LottoGenerator.generate(InputView.inputLottoNumbers());
-        LottoStatics lottoStatics = new LottoStatics(lottoNumbers, winNumbers);
+        List<Integer> winNumbers = LottoGenerator.generateNumbers(InputView.inputLottoNumbers());
+        int bonusNumber = LottoGenerator.generateNumber(InputView.inputBonusNumber());
+
+        LottoStatics lottoStatics = new LottoStatics(lottoNumbers, winNumbers, bonusNumber);
         LottoPrizeRanks lottoPrizeRanks = lottoStatics.collect();
-        ResultView.statics(lottoPrizeRanks);
-        ResultView.showRatio(calculateRatio(price, lottoPrizeRanks));
+        ResultView.showStatics(lottoPrizeRanks);
+        ResultView.showRatio(calculateRatio(money, lottoPrizeRanks));
     }
 
-    private float calculateRatio(String price, LottoPrizeRanks lottoPrizeRanks) {
-        return lottoPrizeRanks.calculate() / Integer.parseInt(price);
+    private float calculateRatio(Money money, LottoPrizeRanks lottoPrizeRanks) {
+        return lottoPrizeRanks.calculate() / money.getMoney();
     }
 }

@@ -15,7 +15,7 @@ public class LottoPrizeRanksTest {
     @Test
     void calculate() {
         LottoPrizeRanks lottoPrizeRanks = new LottoPrizeRanks(Arrays.asList(
-                THREE, FOUR, NONE));
+                FIFTH, FOURTH, MISS));
 
         assertThat(lottoPrizeRanks.calculate()).isEqualTo(55000.0f);
     }

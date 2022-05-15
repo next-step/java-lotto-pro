@@ -15,7 +15,7 @@ public class LottoGeneratorTest {
     @Test
     void validGenerate() {
         String source = "1,2,3,4,5,6";
-        List<Integer> numbers = LottoGenerator.generate(source);
+        List<Integer> numbers = LottoGenerator.generateNumbers(source);
 
         assertThat(numbers).containsExactly(1, 2, 3, 4, 5, 6);
     }
@@ -26,6 +26,6 @@ public class LottoGeneratorTest {
         String source = "1,2,3,4,5";
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoGenerator.generate(source));
+                .isThrownBy(() -> LottoGenerator.generateNumbers(source));
     }
 }
