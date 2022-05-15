@@ -18,4 +18,7 @@ public class BonusNumber {
         }
     }
 
+    public int getBounsNumber() {
+        return bounsNumber;
+    }
 }

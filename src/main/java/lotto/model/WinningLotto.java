@@ -10,6 +10,7 @@ import lotto.constant.LottoRoleConst;
 public class WinningLotto {
 
     private final List<Integer> winningNumberList;
+    private BonusNumber bonusNumber;
 
     public WinningLotto(List<Integer> winningNumberList) {
         validateWinningNumberList(winningNumberList);
@@ -18,6 +19,8 @@ public class WinningLotto {
 
     public WinningLotto(List<Integer> winningNumberList, BonusNumber bonusNumber) {
         this(winningNumberList);
+        validateDuplication(winningNumberList,bonusNumber);
+        this.bonusNumber = bonusNumber;
     }
 
     public static void validateWinningNumberList(List<Integer> winningNumberList) {
@@ -38,6 +41,11 @@ public class WinningLotto {
         HashSet<Integer> deleteDuplicationNumber = new HashSet<>(winningNumberList);
         if (winningNumberList.size() != deleteDuplicationNumber.size()) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATION);
+        }
+    }
+    private void validateDuplication(List<Integer> winningNumberList, BonusNumber bonusNumber) {
+        if(winningNumberList.contains(bonusNumber.getBounsNumber())){
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATION_BONUS);
         }
     }
 
