@@ -2,8 +2,10 @@ package lotto;
 
 import lotto.domain.TotalLotto;
 import org.junit.jupiter.api.Test;
+import stringAddCalculator.StringAddCalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TotalLottoTest {
     @Test
@@ -15,5 +17,12 @@ public class TotalLottoTest {
 
         TotalLotto expectedFalse = new TotalLotto(20);
         assertThat(totalLotto.equals(expectedFalse)).isEqualTo(false);
+    }
+
+    @Test
+    public void 구매금액_negative() throws IllegalArgumentException {
+        TotalLotto totalLotto = new TotalLotto();
+        assertThatThrownBy(() -> totalLotto.count("-14000"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
