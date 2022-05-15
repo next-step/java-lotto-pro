@@ -3,11 +3,11 @@ package Lotto;
 import Lotto.enums.CompareEnum;
 
 public class LottoResult {
-    int firstCount;
-    int secondCount;
-    int thirdCount;
-    int fourthCount;
-    Yield yield;
+    private int firstCount;
+    private int secondCount;
+    private int thirdCount;
+    private int fourthCount;
+    private Yield yield;
 
     public int getFirstCount() {
         return firstCount;

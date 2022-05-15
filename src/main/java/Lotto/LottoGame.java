@@ -13,7 +13,7 @@ public class LottoGame {
     }
 
     public void calculation() {
-        lottos.calculation(winLotto);
-        ResultView.result(lottos.getResult());
+        LottoResult result = lottos.calculation(winLotto);
+        ResultView.result(result);
     }
 }

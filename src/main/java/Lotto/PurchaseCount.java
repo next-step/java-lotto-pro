@@ -9,7 +9,6 @@ public class PurchaseCount {
 
     public PurchaseCount(PurchaseMoney money) {
         this.count = money.getMoney() / 1000;
-        toString();
     }
 
     @Override
