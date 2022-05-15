@@ -23,8 +23,8 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers);
     }
 
-    public Rank rank(LottoTicket winningNumbers) {
-        return Rank.rank(matchCount(winningNumbers));
+    public Rank rank(LottoTicket winningNumbers, LottoNumber bonusBall) {
+        return Rank.rank(matchCount(winningNumbers), contains(bonusBall));
     }
 
     public int matchCount(LottoTicket winningNumbers) {

@@ -76,7 +76,19 @@ class LottoTicketTest {
         //when
         LottoTicket lottoTicket = LottoTicket.from(numbers);
         LottoTicket winningNumbers = LottoTicket.from(numbers);
+        LottoNumber bonusBall = LottoNumber.from(7);
         //then
-        assertThat(lottoTicket.rank(winningNumbers)).isEqualTo(Rank.FIRST);
+        assertThat(lottoTicket.rank(winningNumbers, bonusBall)).isEqualTo(Rank.FIRST);
+    }
+
+    @DisplayName("2등 당첨 순위 확인")
+    @Test
+    void test_2등_당첨_순위() {
+        //given
+        LottoTicket lottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 7, 5, 6));
+        LottoTicket winningNumbers = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusBall = LottoNumber.from(7);
+        //when & then
+        assertThat(lottoTicket.rank(winningNumbers, bonusBall)).isEqualTo(Rank.SECOND);
     }
 }

@@ -35,7 +35,9 @@ public class LottoGame {
     private void winningResult(Money purchaseMoney, LottoTickets lottoTickets) {
         try {
             List<Integer> winningNumbers = inputView.inputWinningNumbers();
-            LottoWinningRanks lottoWinningRanks = lottoTickets.match(LottoTicket.from(winningNumbers));
+            // TODO 임시
+            LottoNumber bonusBall = LottoNumber.from(1);
+            LottoWinningRanks lottoWinningRanks = lottoTickets.match(LottoTicket.from(winningNumbers), bonusBall);
             outputView.printWinningRanks(lottoWinningRanks, purchaseMoney);
         } catch (IllegalArgumentException ie) {
             outputView.printExceptionMessage(ie);
