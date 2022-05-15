@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.enums.LottoRankType;
+import lotto.enums.LottoRank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,10 +29,10 @@ public class LottoResultTest {
     @Test
     @DisplayName("LottoResult 당첨 개수 테스트")
     void LottoResult_당첨_개수_테스트(){
-        assertThat(result.winningCountByWinningType(LottoRankType.FIRST)).isEqualTo(1);
-        assertThat(result.winningCountByWinningType(LottoRankType.SECOND)).isEqualTo(1);
-        assertThat(result.winningCountByWinningType(LottoRankType.THIRD)).isEqualTo(1);
-        assertThat(result.winningCountByWinningType(LottoRankType.FOURTH)).isEqualTo(1);
+        assertThat(result.winningCountByRank(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(result.winningCountByRank(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(result.winningCountByRank(LottoRank.THIRD)).isEqualTo(1);
+        assertThat(result.winningCountByRank(LottoRank.FOURTH)).isEqualTo(1);
 
     }
 
@@ -41,10 +41,10 @@ public class LottoResultTest {
     void LottoResult_수익률_테스트(){
         System.out.println();
         assertThat(result.getProfitRate()).isEqualTo(
-                (double) (LottoRankType.FIRST.getPrice()
-                        + LottoRankType.SECOND.getPrice()
-                        + LottoRankType.THIRD.getPrice()
-                        + LottoRankType.FOURTH.getPrice()) / (lottos.size() * 1000)
+                (double) (LottoRank.FIRST.getPrice()
+                        + LottoRank.SECOND.getPrice()
+                        + LottoRank.THIRD.getPrice()
+                        + LottoRank.FOURTH.getPrice()) / (lottos.size() * 1000)
         );
 
     }

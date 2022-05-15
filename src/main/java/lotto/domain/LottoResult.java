@@ -1,12 +1,12 @@
 package lotto.domain;
 
-import lotto.enums.LottoRankType;
+import lotto.enums.LottoRank;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    Map<LottoRankType, Integer> winningCount = new HashMap<>();
+    Map<LottoRank, Integer> winningCount = new HashMap<>();
     double profitRate;
 
     public LottoResult(Lottos lottos, Lotto winningLotto) {
@@ -16,8 +16,8 @@ public class LottoResult {
 
     private void updateWinningCount(Lottos lottos, Lotto winningLotto) {
         for (Lotto lotto : lottos) {
-            LottoRankType winningType = LottoRankType.matchRankType(lotto, winningLotto);
-            winningCount.put(winningType, winningCount.getOrDefault(winningType, 0) + 1);
+            LottoRank rank = LottoRank.matchRank(lotto.countMatchedNumbers(winningLotto));
+            winningCount.put(rank, winningCount.getOrDefault(rank, 0) + 1);
         }
     }
 
@@ -31,13 +31,13 @@ public class LottoResult {
 
     private int calculateTotalPrice() {
         int price = 0;
-        for (LottoRankType type : LottoRankType.values()) {
+        for (LottoRank type : LottoRank.values()) {
             price += winningCount.getOrDefault(type, 0) * type.getPrice();
         }
         return price;
     }
 
-    public int winningCountByWinningType(LottoRankType type) {
+    public int winningCountByRank(LottoRank type) {
         return winningCount.getOrDefault(type, 0);
     }
 

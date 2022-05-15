@@ -30,7 +30,7 @@
    * LottoNumber는 오름차순으로 정렬한다.
 3. Lottos
    * Lotto의 일급컬렉션이다.
-4. LottoWinningType
+4. LottoRank
    * 1~4등까지 결과이다.
    * 각 결과마다 우승상금이 다르다.
 5. LottoResult
