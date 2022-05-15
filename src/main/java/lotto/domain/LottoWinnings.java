@@ -17,6 +17,10 @@ public enum LottoWinnings {
         return count;
     }
 
+    public int getWinnings() {
+        return winnings;
+    }
+
     public static LottoWinnings getWinningsByCount(int count) {
         return Arrays.stream(LottoWinnings.values()).filter(x -> x.count == count).findFirst()
             .orElse(null);
