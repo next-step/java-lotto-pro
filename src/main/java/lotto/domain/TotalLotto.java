@@ -63,13 +63,12 @@ public class TotalLotto {
         return amount/LOTTO_PRICE;
     }
 
-    public LottoStatic calculatorLottoStatic() {
-        LottoStatic lottoStatic = new LottoStatic();
+    public LottoStatistic calculatorLottoStatic() {
+        LottoStatistic lottoStatistic = new LottoStatistic();
         for (Lotto lotto : this.lottoList.getLottoList()) {
-            int count = MatchesLottoNumber(lotto);
-            lottoStatic.calculatorCount(count);
+            lottoStatistic.calculatorCount(MatchesLottoNumber(lotto));
         }
-        return lottoStatic;
+        return lottoStatistic;
     }
 
     public int MatchesLottoNumber(Lotto lotto) {

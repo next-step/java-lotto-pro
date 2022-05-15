@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoStatic;
+import lotto.domain.LottoStatistic;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -8,20 +8,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoStaticTest {
     @Test
     public void calculatorCount() {
-        LottoStatic lottoStatic = new LottoStatic();
-        lottoStatic.calculatorCount(3);
-        lottoStatic.calculatorCount(4);
-        lottoStatic.calculatorCount(5);
-        lottoStatic.calculatorCount(6);
-        LottoStatic targetLottoStatic = new LottoStatic(1, 1, 1, 1);
-        assertThat(lottoStatic.equals(targetLottoStatic)).isEqualTo(true);
+        LottoStatistic lottoStatistic = new LottoStatistic();
+        lottoStatistic.calculatorCount(3);
+        lottoStatistic.calculatorCount(4);
+        lottoStatistic.calculatorCount(5);
+        lottoStatistic.calculatorCount(6);
+        LottoStatistic targetLottoStatistic = new LottoStatistic(1, 1, 1, 1);
+        assertThat(lottoStatistic.equals(targetLottoStatistic)).isEqualTo(true);
     }
 
     @Test
     public void calculatorProfitLate() {
-        LottoStatic lottoStatic = new LottoStatic();
-        lottoStatic.calculatorCount(3);
-        lottoStatic.calculatorProfitLate(14000);
-        assertThat(lottoStatic.getProfitLate()).isEqualTo(0.35);
+        LottoStatistic lottoStatistic = new LottoStatistic();
+        lottoStatistic.calculatorCount(3);
+        lottoStatistic.calculatorProfitLate(14000);
+        assertThat(lottoStatistic.getProfitLate()).isEqualTo(0.35);
     }
 }

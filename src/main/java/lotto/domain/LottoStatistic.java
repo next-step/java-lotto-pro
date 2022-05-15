@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoStatic {
+public class LottoStatistic {
     private static final int THREE_WINNING_AMOUNT = 5000;
     private static final int FOUR_WINNING_AMOUNT = 50000;
     private static final int FIVE_WINNING_AMOUNT = 1500000;
@@ -14,10 +14,10 @@ public class LottoStatic {
     private int six;
     private double profitLate;
 
-    public LottoStatic() {
+    public LottoStatistic() {
     }
 
-    public LottoStatic(int three, int four, int five, int six) {
+    public LottoStatistic(int three, int four, int five, int six) {
         this.three = three;
         this.four = four;
         this.five = five;
@@ -50,12 +50,12 @@ public class LottoStatic {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoStatic lottoStatic = (LottoStatic) o;
+        LottoStatistic lottoStatistic = (LottoStatistic) o;
 
-        if (three != lottoStatic.three) return false;
-        if (four != lottoStatic.four) return false;
-        if (five != lottoStatic.five) return false;
-        if (six != lottoStatic.six) return false;
+        if (three != lottoStatistic.three) return false;
+        if (four != lottoStatistic.four) return false;
+        if (five != lottoStatistic.five) return false;
+        if (six != lottoStatistic.six) return false;
         return true;
     }
 
