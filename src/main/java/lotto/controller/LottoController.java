@@ -5,6 +5,7 @@ import static lotto.domain.Money.LOTTO_TICKET_PRICE;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.PurchasedLottoTickets;
 import lotto.domain.LottoVendingMachine;
@@ -56,6 +57,13 @@ public class LottoController {
     }
 
     private void printWinningStatistics(LottoWinningResults winningResults, LottoRank prizedRank) {
+        if (prizedRank.equals(LottoRank.SECOND)) {
+            OutputView.printSecondWinningCount(
+                    prizedRank.getCountOfMatch(),
+                    prizedRank.getWinningMoney(),
+                    winningResults.winingRankCount(prizedRank));
+            return;
+        }
         OutputView.printTotalWinningCount(
                 prizedRank.getCountOfMatch(),
                 prizedRank.getWinningMoney(),
@@ -64,7 +72,11 @@ public class LottoController {
 
     private LottoWinningResults checkWinningLotto(PurchasedLottoTickets lottoTickets) {
         List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
-        WinningLotto winningLotto = WinningLotto.from(LottoNumbers.from(winningLottoNumbers));
+        int bonusBallNumber = InputView.inputBonusBallNumber();
+        WinningLotto winningLotto = WinningLotto.of(
+                LottoNumbers.from(winningLottoNumbers),
+                LottoNumber.from(bonusBallNumber)
+        );
         List<LottoNumbers> lottoNumbers = lottoTickets.getLottoNumbers();
         List<LottoRank> ranks = lottoNumbers.stream().
                 map(ln -> winningLotto.match(ln)).
