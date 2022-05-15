@@ -10,7 +10,7 @@ class WinningsTest {
 
     @DisplayName("당첨스코어를 전달하면 스코어의 당첨상금의 합이 반환되어야 한다")
     @Test
-    void z(LottoWinnings input) {
+    void winnings_test() {
         LottoScore lottoScore = new LottoScore();
         lottoScore.addScore(LottoWinnings.THREE);
         lottoScore.addScore(LottoWinnings.FOUR);
