@@ -21,4 +21,8 @@ public class LottoTicket {
     public int getCount() {
         return this.lottos.size();
     }
+
+    public void merge(LottoTicket lottoTicket) {
+        this.lottos.addAll(lottoTicket.getReadOnlyLottoNumbers());
+    }
 }

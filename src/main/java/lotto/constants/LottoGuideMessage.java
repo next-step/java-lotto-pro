@@ -15,4 +15,5 @@ public class LottoGuideMessage {
     public static final String PROFIT = "이익";
     public static final String PROFIT_LOSS = "손해";
     public static final String INPUT_MANUAL_LOTTO_PURCHASE_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
 }
