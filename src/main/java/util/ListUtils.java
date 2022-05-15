@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 public class ListUtils {
 
+    private ListUtils() {
+    }
+
     public static <T> List<T> shuffle(final List<T> list) {
         final List<T> copyList = new ArrayList<>(list);
         Collections.shuffle(copyList);
@@ -28,7 +31,6 @@ public class ListUtils {
         copyList.sort(comparator);
         return copyList;
     }
-
     public static <T> List<T> distinct(final List<T> list) {
         return new ArrayList<>(list).stream()
                 .distinct()
