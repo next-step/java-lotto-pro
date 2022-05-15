@@ -2,6 +2,10 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -45,6 +49,24 @@ public class LottoGameTest {
         LottoGame game = new LottoGame(14000);
         assertThatThrownBy(() -> game.setWinnerNumbers("-1,2,3,4,5,6"))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 번호_3개_일치() {
+        List<LottoNumbers> tickets = new ArrayList<>();
+        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
+        LottoGame game = new LottoGame(tickets, "4,5,6,7,8,9");
+        assertThat(game.getScore().get(3)).isEqualTo(1);
+    }
+
+    @Test
+    void 번호_3개_일치_2건() {
+        List<LottoNumbers> tickets = new ArrayList<>();
+        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
+        tickets.add(new LottoNumbers("1,10,11,4,5,6"));
+        tickets.add(new LottoNumbers("1,12,13,14,5,6"));
+        LottoGame game = new LottoGame(tickets, "4,5,6,7,8,9");
+        assertThat(game.getScore().get(3)).isEqualTo(2);
     }
 
 }
