@@ -12,7 +12,7 @@ public interface ResultView {
         return new ConsoleResultView();
     }
 
-    void printLottoes(List<Lotto> lottoes, int size);
+    void printLottoes(List<Lotto> lottoes, int sizeOfManualLottoes);
 
     void printResult(WinningResult winningResult, Money money);
 }
