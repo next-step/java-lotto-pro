@@ -1,4 +1,4 @@
-package lotto.study;
+package study;
 
 public class StringParser {
     private static final String ERROR_NOT_ALLOW_VALUE_MESSAGE = "[ERROR] 허용하지 않은 값 입니다.";

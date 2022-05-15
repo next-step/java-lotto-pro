@@ -1,7 +1,5 @@
 package study;
 
-import lotto.study.StringParser;
-import lotto.study.Sum;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

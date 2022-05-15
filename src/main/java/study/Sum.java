@@ -1,4 +1,4 @@
-package lotto.study;
+package study;
 
 import java.util.Arrays;
 import java.util.Objects;

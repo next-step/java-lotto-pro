@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +21,7 @@ public class LottoWinning {
     private double calculateProfit(int winningPrice, int purchasePrice) {
         return Math.round(((double) winningPrice / (double) purchasePrice) * ROUNDING_DIGIT_VALUE) / ROUNDING_DIGIT_VALUE;
     }
-    
+
     public double getProfit() {
         return profit;
     }
