@@ -10,7 +10,7 @@ public class OutputView {
     public static void printPurchasedLottos(Lottos lottos) {
         System.out.println(String.format(ViewMessageConst.OUTPUT_MESSAGE_PURCHASED_SIZE, lottos.size()));
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.toString());
+            System.out.println(lotto.lottoNumbers());
         }
     }
 

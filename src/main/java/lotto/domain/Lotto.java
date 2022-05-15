@@ -52,10 +52,4 @@ public class Lotto {
         }
         return result;
     }
-
-    @Override
-    public String toString() {
-        List<Integer> integers = lottoNumbersToIntegerList(lottoNumbers);
-        return integers.toString();
-    }
 }
