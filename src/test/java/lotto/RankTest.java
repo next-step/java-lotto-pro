@@ -1,9 +1,9 @@
 package lotto;
 
+import lotto.enums.Rank;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class RankTest {
 
@@ -16,10 +16,8 @@ class RankTest {
     }
 
     @Test
-    void 당첨순위에_없는_숫자를_입력하면_예외가_발생한다() {
-        // when
-        assertThatThrownBy(() ->
-                Rank.of(2)
-        ).isInstanceOf(IllegalArgumentException.class);
+    void 당첨순위에_없는_숫자를_입력하면_NO_RANK를_반환한다() {
+        // when and then
+        assertThat(Rank.of(2)).isEqualTo(Rank.NO_RANK);
     }
 }

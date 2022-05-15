@@ -1,11 +1,11 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.Lotto.LOTTO_NUMBER_SIZE;
+import static lotto.domain.Lotto.LOTTO_NUMBER_SIZE;
 
 public class LottoGenerator {
 

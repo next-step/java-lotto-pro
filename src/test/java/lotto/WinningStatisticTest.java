@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.WinningStatistic;
+import lotto.enums.Rank;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
