@@ -12,7 +12,7 @@ public class LottosTest {
     @DisplayName("생성자에 입력한 수만큼 로또 객체를 갖는 리스트를 생성한다.")
     @ParameterizedTest
     @ValueSource(ints = {5, 3, 8})
-    void has_Input_Size(final int input) {
+    void hasInputSize(final int input) {
         final Lottos lottos = new Lottos(input);
         assertThat(lottos.getLottosCount()).isEqualTo(input);
     }
