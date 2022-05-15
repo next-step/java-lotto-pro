@@ -1,4 +1,4 @@
-package calculator.util;
+package utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -49,5 +49,16 @@ public class StringUtilsTest {
         assertThatThrownBy(() -> StringUtils.splitToInt(word, separator))
                 .isInstanceOf(RuntimeException.class);
 
+
+    }
+
+    @Test
+    @DisplayName("문자 사이의 공백을 제거하고 숫자에 대한 리스트를 반환한다.")
+    void splitTextTrimToList(){
+        assertAll(() -> {
+            assertThat(StringUtils.splitTextTrimToInt("1 ,3 ,4", ",")).containsExactly(1,3,4);
+            assertThat(StringUtils.splitTextTrimToInt("1 ;3 ;4", ";")).containsExactly(1,3,4);
+            assertThat(StringUtils.splitTextTrimToInt("1 ;3 ,4", ";|,")).containsExactly(1,3,4);
+        });
     }
 }

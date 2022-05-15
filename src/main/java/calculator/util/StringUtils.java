@@ -1,6 +1,8 @@
-package calculator.util;
+package utils;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class StringUtils {
 
@@ -16,5 +18,13 @@ public class StringUtils {
         return Arrays.stream(text.split(separator))
                 .mapToInt(Integer::parseInt)
                 .toArray();
+    }
+
+    public static List<Integer> splitTextTrimToInt(String text, String separator) {
+        return Arrays.stream(text.split(separator))
+                .map(String::trim)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }
