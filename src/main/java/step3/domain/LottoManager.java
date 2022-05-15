@@ -33,6 +33,7 @@ public class LottoManager {
         return lottoTickets.size();
     }
 
+
     private boolean validMoney(String money) {
         boolean validResult = true;
         try {
@@ -53,9 +54,11 @@ public class LottoManager {
         return new LottoTicket(lottoElements.stream().map(String::valueOf).collect(Collectors.toList()));
     }
 
-    public HashMap<Integer, Integer> checkWin(String winLottoSource) {
+    public LottoTicket makeManualLottoTicket(String manualLottoSource){
+        return new LottoTicket(manualLottoSource);
+    }
+    public HashMap<Integer, Integer> checkWin(LottoTicket winLotto) {
         initStatistics();
-        LottoTicket winLotto = new LottoTicket(Arrays.asList(winLottoSource.split(LOTTO_DELIMITER)));
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = winLotto.getMatchCountWith(lottoTicket);
             statistics.replace(matchCount, statistics.get(matchCount) + 1);

@@ -1,8 +1,5 @@
 package step3.model;
 
-import static step3.LottoConstant.INPUT_IS_NOT_VALID;
-import static step3.LottoConstant.INPUT_IS_VALID;
-
 import java.util.HashMap;
 import java.util.List;
 import step3.domain.LottoManager;
@@ -16,25 +13,17 @@ public class GameModel {
         this.lottoManager = lottoManager;
     }
 
-    public boolean validInput(String input, InputStatus inputStatus) {
-        boolean validResult = true;
 
-        if (inputStatus == InputStatus.LOTTO) {
-            validResult = validLottoSource(input);
-        }
-        if (!validResult) {
-            throw new IllegalArgumentException();
-        }
-        return validResult;
+    public HashMap<Integer, Integer> checkWin(LottoTicket winnerLotto) {
+        return lottoManager.checkWin(winnerLotto);
     }
 
-    private boolean validLottoSource(String input) {
-        return input.split(LOTTO_DELIMITER).length == LOTTO_ELEMENTS_SIZE;
-    }
-
-
-    public HashMap<Integer, Integer> checkWin(String winnerLottoSource) {
-        return lottoManager.checkWin(winnerLottoSource);
+    public LottoTicket makeManualLottoTicket(String manualLottoSource) {
+        try {
+            return lottoManager.makeManualLottoTicket(manualLottoSource);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 
     public String buyTicket(String money) {
@@ -49,4 +38,5 @@ public class GameModel {
     public List<List<String>> getLottoNumbers() {
         return lottoManager.getLottoNumbers();
     }
+
 }
