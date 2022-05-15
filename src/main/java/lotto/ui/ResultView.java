@@ -10,10 +10,6 @@ import java.util.Map;
 
 public class ResultView {
 
-    public void printInputPrice() {
-        System.out.println("구입금액을 입력해 주세요.");
-    }
-
     public void printLottoCount(LottoPrice lottoPrice) {
         System.out.println(lottoPrice.getCount() + "개를 구매했습니다.");
     }

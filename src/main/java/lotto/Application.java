@@ -21,7 +21,6 @@ public class Application {
     }
 
     private static void initLotto(InputView inputView, ResultView resultView, LottoApplication lottoApplication) {
-        resultView.printInputPrice();
         Integer price = inputView.inputPrice();
         LottoPrice lottoPrice = lottoApplication.purchase(price);
         resultView.printLottoCount(lottoPrice);
