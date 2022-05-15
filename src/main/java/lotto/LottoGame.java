@@ -32,11 +32,12 @@ public class LottoGame {
         }
     }
 
-    public int check(List<LottoNumber> winningNumbers) {
-        return (int)winningNumbers.stream()
-                .map(n -> has(n))
-                .filter(b -> b == true)
-                .count();
+    public Match check(List<LottoNumber> winningNumbers) {
+        return new Match(
+                (int) winningNumbers.stream()
+                        .map(winningNumber -> this.has(winningNumber))
+                        .filter(b -> b == true)
+                        .count());
     }
 
     public boolean has(LottoNumber lottoNumber) {

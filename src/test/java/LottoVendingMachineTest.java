@@ -1,6 +1,7 @@
 import lotto.LottoNumber;
 import lotto.LottoTicket;
 import lotto.LottoVendingMachine;
+import lotto.Match;
 import lotto.dto.LottoResult;
 import lotto.dto.LottoResultItem;
 import lotto.dto.LottoWin;
@@ -29,11 +30,11 @@ public class LottoVendingMachineTest {
 
     @Test
     void 당첨_확인_결과() {
-        Map<Integer, Integer> prizeMoneyByMatch = new HashMap<>();
-        prizeMoneyByMatch.put(3, 5000);
-        prizeMoneyByMatch.put(4, 50000);
-        prizeMoneyByMatch.put(5, 1500000);
-        prizeMoneyByMatch.put(6, 2000000000);
+        Map<Match, Integer> matchingPrizes = new HashMap<>();
+        matchingPrizes.put(new Match(3), 5000);
+        matchingPrizes.put(new Match(4), 50000);
+        matchingPrizes.put(new Match(5), 1500000);
+        matchingPrizes.put(new Match(6), 2000000000);
 
         LottoTicket ticket = new LottoTicket(
                 Arrays.asList(
@@ -61,15 +62,15 @@ public class LottoVendingMachineTest {
                 new LottoNumber(6));
 
         LottoVendingMachine machine = new LottoVendingMachine();
-        LottoResult result = machine.check(ticket, new LottoWin(winningNumbers, prizeMoneyByMatch));
+        LottoResult result = machine.check(ticket, new LottoWin(winningNumbers, matchingPrizes));
 
         assertThat(result).isEqualTo(
                 new LottoResult(
                         "0.36",
                         Arrays.asList(
-                                new LottoResultItem(3, 5000, 1),
-                                new LottoResultItem(4, 50000, 0),
-                                new LottoResultItem(5, 1500000, 0),
-                                new LottoResultItem(6, 2000000000, 0))));
+                                new LottoResultItem(new Match(3), 5000, 1),
+                                new LottoResultItem(new Match(4), 50000, 0),
+                                new LottoResultItem(new Match(5), 1500000, 0),
+                                new LottoResultItem(new Match(6), 2000000000, 0))));
     }
 }

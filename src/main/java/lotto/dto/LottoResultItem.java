@@ -1,19 +1,21 @@
 package lotto.dto;
 
+import lotto.Match;
+
 import java.util.Objects;
 
 public class LottoResultItem {
-    private final int match;
+    private final Match match;
     private final int prizeMoney;
     private final int count;
 
-    public LottoResultItem(int match, int prizeMoney, int count) {
+    public LottoResultItem(Match match, int prizeMoney, int count) {
         this.match = match;
         this.prizeMoney = prizeMoney;
         this.count = count;
     }
 
-    public int getMatch() {
+    public Match getMatch() {
         return match;
     }
 
@@ -30,7 +32,7 @@ public class LottoResultItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResultItem that = (LottoResultItem) o;
-        return match == that.match && prizeMoney == that.prizeMoney && count == that.count;
+        return prizeMoney == that.prizeMoney && count == that.count && match.equals(that.match);
     }
 
     @Override

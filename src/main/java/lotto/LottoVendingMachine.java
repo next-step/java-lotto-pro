@@ -26,7 +26,7 @@ public class LottoVendingMachine {
     }
 
     public LottoResult check(LottoTicket ticket, LottoWin lottoWin) {
-        Map<Integer, Integer> result = ticket.check(lottoWin.getWinningNumbers());
+        Map<Match, Integer> result = ticket.check(lottoWin.getWinningNumbers());
         List<LottoResultItem> items = result.entrySet().stream()
                 .filter(m -> lottoWin.getPrizeMoneyByMatch().get(m.getKey()) != null)
                 .map(e -> new LottoResultItem(

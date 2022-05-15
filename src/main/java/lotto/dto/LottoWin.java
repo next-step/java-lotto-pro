@@ -1,6 +1,7 @@
 package lotto.dto;
 
 import lotto.LottoNumber;
+import lotto.Match;
 
 import java.util.List;
 import java.util.Map;
@@ -8,9 +9,9 @@ import java.util.Map;
 public final class LottoWin {
 
     private final List<LottoNumber> winningNumbers;
-    private final Map<Integer, Integer> prizeMoneyByMatch;
+    private final Map<Match, Integer> prizeMoneyByMatch;
 
-    public LottoWin(List<LottoNumber> winningNumbers, Map<Integer, Integer> prizeMoneyByMatch) {
+    public LottoWin(List<LottoNumber> winningNumbers, Map<Match, Integer> prizeMoneyByMatch) {
         this.winningNumbers = winningNumbers;
         this.prizeMoneyByMatch = prizeMoneyByMatch;
     }
@@ -19,7 +20,7 @@ public final class LottoWin {
         return winningNumbers;
     }
 
-    public Map<Integer, Integer> getPrizeMoneyByMatch() {
+    public Map<Match, Integer> getPrizeMoneyByMatch() {
         return prizeMoneyByMatch;
     }
 }
