@@ -24,7 +24,10 @@ public class ResultView {
         System.out.println("---------");
         WIN_RESULTS.forEach(
                 lottoWinResult -> printLottoWinStatistics(lottoWinResult, round.countByWinResult(lottoWinResult)));
-        System.out.println("총 수익률은 " + round.totalReturnRate().toStringValue() + "입니다.");
+        System.out.print("총 수익률은 " + round.totalReturnRate().toStringValue() + "입니다.");
+        if (round.isLoss()) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
     }
 
     private void printLottoWinStatistics(final LottoWinResult winResult, final long count) {

@@ -1,6 +1,5 @@
 package lotto;
 
-import static java.lang.String.valueOf;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.joining;
 import static util.ListUtils.distinct;

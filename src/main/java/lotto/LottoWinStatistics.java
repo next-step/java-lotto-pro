@@ -32,6 +32,10 @@ public class LottoWinStatistics {
         return winResultGroup.countByWinResult(lottoWinResult);
     }
 
+    public boolean isLoss() {
+        return returnRate.getValue() < 1.0;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {

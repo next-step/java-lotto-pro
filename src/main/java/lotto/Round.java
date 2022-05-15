@@ -5,8 +5,9 @@ import static java.util.Objects.requireNonNull;
 import generic.Rate;
 
 public class Round {
-    private enum RoundStatus {PLAYING, END}
 
+
+    private enum RoundStatus {PLAYING, END;}
     private final Lottos lottos;
 
     private LottoNumbers winningNumbers;
@@ -70,5 +71,9 @@ public class Round {
 
     public boolean isEnd() {
         return this.status == RoundStatus.END;
+    }
+
+    public boolean isLoss() {
+        return this.statics.isLoss();
     }
 }
