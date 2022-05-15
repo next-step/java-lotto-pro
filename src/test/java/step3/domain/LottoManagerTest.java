@@ -37,7 +37,7 @@ public class LottoManagerTest {
     public void testCheckWin() {
         LottoManager testLottoManager = initTestManager();
 
-        assertThat(testLottoManager.checkWin("1,2,3,4,5,6"))
+        assertThat(testLottoManager.checkWin(new LottoTicket("1,2,3,4,5,6")))
             .containsEntry(THREE_NUMBER_MATCH, 2)
             .containsEntry(FOUR_NUMBER_MATCH, 1)
             .containsEntry(SIX_NUMBER_MATCH, 2);
