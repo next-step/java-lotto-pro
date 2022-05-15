@@ -23,7 +23,7 @@ public enum LottoRank {
 
     public static LottoRank findLottoRank(LottoNumbers source, LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         long matchedCount = source.matchedCountByWinnerNumbers(winningNumbers);
-        boolean isMatchedBonusBall = source.isContainLottoNumber(bonusNumber);
+        boolean isMatchedBonusBall = source.hasContainLottoNumber(bonusNumber);
         return findLottoRankByMatchedCount(matchedCount, isMatchedBonusBall);
     }
 

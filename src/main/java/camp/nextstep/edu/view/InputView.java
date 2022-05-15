@@ -66,7 +66,9 @@ public class InputView {
             LottoNumbers enteredWinningNumbers = untilEnterValidValue(() -> new LottoNumbers(scanner.nextLine()));
 
             System.out.println("보너스 볼을 입력해 주세요.");
-            LottoNumber enteredBonusNumber = untilEnterValidValue(() -> new LottoNumber(scanner.nextLine()));
+            LottoNumber enteredBonusNumber = untilEnterValidValue(() -> {
+                return new LottoNumber(new PositiveNumber(scanner.nextLine(), false));
+            });
 
             return lotto.compareWinningNumber(enteredWinningNumbers, enteredBonusNumber);
         });

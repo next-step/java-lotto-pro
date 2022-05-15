@@ -2,7 +2,10 @@ package camp.nextstep.edu.level1.lotto.lotto;
 
 import camp.nextstep.edu.until.CollectionHelper;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -13,13 +16,7 @@ public class LottoNumbers {
 
     private final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-    public LottoNumbers(Collection<Integer> numbers) {
-        addAll(numbers);
-
-        checkLottoNumberSize();
-    }
-
-    public LottoNumbers(List<LottoNumber> numbers) {
+    public LottoNumbers(Collection<LottoNumber> numbers) {
         lottoNumbers.addAll(numbers);
 
         checkLottoNumberSize();
@@ -41,18 +38,14 @@ public class LottoNumbers {
                 .count();
     }
 
-    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+    public boolean hasContainLottoNumber(LottoNumber target) {
+        return this.lottoNumbers.contains(target);
     }
 
     private void addAll(Collection<Integer> numbers) {
         for (Integer number : numbers) {
             this.lottoNumbers.add(new LottoNumber(number));
         }
-    }
-
-    private boolean hasContainLottoNumber(LottoNumber value) {
-        return this.lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.hasSameValue(value));
     }
 
     private void checkLottoNumberSize() {

@@ -1,10 +1,12 @@
 package camp.nextstep.edu.level1.lotto.lotto;
 
+import camp.nextstep.edu.common.PositiveNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 class LottoNumberTest {
     private static final int LOTTO_START_NUMBER = 1;
@@ -25,13 +27,17 @@ class LottoNumberTest {
         String randomValidStartInt = "1";
         String randomValidEndInt = "45";
 
-        assertThatNoException().isThrownBy(() -> new LottoNumber(randomValidStartInt));
-        assertThatNoException().isThrownBy(() -> new LottoNumber(randomValidEndInt));
+        assertThatNoException()
+                .isThrownBy(() -> new LottoNumber(new PositiveNumber(randomValidStartInt, false)));
+        assertThatNoException()
+                .isThrownBy(() -> new LottoNumber(new PositiveNumber(randomValidEndInt, false)));
     }
 
     @Test
     void _1_에서_45_사이의_숫자가_아닌_값으로_로또_번호를_생성하면_예외가_발생한다() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(LOTTO_START_NUMBER - 1));
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(LOTTO_END_NUMBER + 1));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoNumber(LOTTO_START_NUMBER - 1));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoNumber(LOTTO_END_NUMBER + 1));
     }
 }

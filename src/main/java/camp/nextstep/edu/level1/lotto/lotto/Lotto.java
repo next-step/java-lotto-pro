@@ -77,7 +77,7 @@ public class Lotto {
     }
 
     private void checkWinningNumberAndBonusNumberDuplicated(LottoNumbers winningNumber, LottoNumber bonusNumber) {
-        if (winningNumber.isContainLottoNumber(bonusNumber)) {
+        if (winningNumber.hasContainLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 볼은 당첨 번호에 포함되지 않은 숫자만 허용됩니다.");
         }
     }
