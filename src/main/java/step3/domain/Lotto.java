@@ -12,6 +12,7 @@ public class Lotto {
     public static final int LOTTO_FIXED_PRICE = 1000;
     private static final int IS_MATCHES = 1;
     private static final int IS_NOT_MATCHES = 0;
+    private static final List<Integer> candidates = createLottoNumbers();
 
     private final List<Integer> numbers;
 
@@ -20,14 +21,13 @@ public class Lotto {
     }
 
     private List<Integer> createSixRandomNumbers() {
-        final List<Integer> candidates = createLottoNumbers();
         Collections.shuffle(candidates);
         final List<Integer> sixNumbers = new ArrayList<>(candidates.subList(LOTTO_FIRST_INDEX, LOTTO_SIZE));
         Collections.sort(sixNumbers);
         return sixNumbers;
     }
 
-    private List<Integer> createLottoNumbers() {
+    private static List<Integer> createLottoNumbers() {
         final List<Integer> candidates = new ArrayList<>();
         for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
             candidates.add(i);
