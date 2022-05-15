@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -21,5 +24,11 @@ public class InputView {
         return Arrays.stream(scanner.next().trim().split(SEPARATOR))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public static LottoNumber inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        return new LottoNumber(scanner.nextInt());
     }
 }

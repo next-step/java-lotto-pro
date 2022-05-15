@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.model.Lotto;
 import lotto.model.LottoMachine;
+import lotto.model.LottoNumber;
 import lotto.model.Statistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -21,8 +22,11 @@ public class LottoApp {
         List<Integer> numbers = InputView.inputWinningLotto();
         Lotto winLotto = new Lotto(numbers);
 
+        // 보너스 번호 입력
+        LottoNumber bonus = InputView.inputBonusNumber();
+
         // 결과 출력
-        Statistics statistics = new Statistics(winLotto, lottos);
+        Statistics statistics = new Statistics(winLotto, bonus, lottos);
         OutputView.outputResult(statistics.getResultMap());
         OutputView.outputResultProfit(statistics.getProfit());
     }
