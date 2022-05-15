@@ -1,4 +1,7 @@
-package lotto;
+package lotto.view;
+
+import lotto.model.Lotto;
+import lotto.model.Lottos;
 
 public class ResultView {
 
