@@ -33,7 +33,7 @@ public class LottoController {
         Money money = lottoInputView.inputMoney();
         LottoCount manualLottoCount = lottoInputView.inputManualLottoPurchaseCount(money.calculateLottoCount());
         LottoTicket lottoTicket = purchaseLottoTicket(money, manualLottoCount);
-        resultView.printLottos(lottoTicket);
+        resultView.printLottos(lottoTicket, manualLottoCount);
 
         LottoNumbers lastWinningLottoNumbers = LottoNumbers.generateBy(inputLastWinningLottoNumbers());
         LottoNumber bonusBallNumber = inputBonusBall(lastWinningLottoNumbers);
