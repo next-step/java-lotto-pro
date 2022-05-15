@@ -52,6 +52,15 @@ class WinningLottoTest {
                 .withMessage("[ERROR] 6개의 로또 번호에 중복이 있습니다.");
     }
 
+    @DisplayName("당첨로또 6개의 번호와 보너스 번호에 중복이 있는지 검증")
+    @Test
+    void playLottoGame_duplication_bonus_number() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new WinningLotto(Arrays.asList(3, 7, 10, 15, 25, 35),new BonusNumber(7)))
+                .withMessage("[ERROR] 보너스 번호가 이미 로또 번호에 존재합니다.");
+    }
+
+
     @DisplayName("로또 게임 결과(일치한 개수, 총 상금)를 확인한다.")
     @Test
     void playLottoGame() {
@@ -62,6 +71,14 @@ class WinningLottoTest {
         assertEquals(1, resultLottoGame.rankCount(LottoRank.SECOND));
         assertEquals(0, resultLottoGame.rankCount(LottoRank.FIRST));
         assertEquals(1_510_000,resultLottoGame.totalWinningAmount());
+    }
+
+  
+    @DisplayName("보너스볼이 추가된 로또 게임 결과를 확인한다.")
+    @Test
+    void playLottoGame_bonus_number() {
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(3, 7, 10, 35, 43, 45),new BonusNumber(9));
+        
     }
 
 
