@@ -40,6 +40,10 @@ public class TotalLotto {
         this.lottoList = lottos;
     }
 
+    public void winningLotto(String input) {
+        this.winningLotto = new Lotto(input);
+    }
+
     private int amountStringToInt(String input) throws IllegalArgumentException {
         try {
             return Integer.parseInt(input);
