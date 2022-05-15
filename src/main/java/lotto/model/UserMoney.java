@@ -2,7 +2,7 @@ package lotto.model;
 
 import util.NumberUtil;
 
-public final class UserMoney {
+public class UserMoney {
 	private static final int MIN_MONEY = 0;
 	private int money;
 

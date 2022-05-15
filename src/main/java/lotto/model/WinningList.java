@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public final class WinningList {
+public class WinningList {
 	private Map<WinningMoney, Integer> winningList;
 
 	public WinningList() {

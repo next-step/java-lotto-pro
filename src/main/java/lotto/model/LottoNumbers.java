@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public final class LottoNumbers {
+public class LottoNumbers {
 	private static final int LOTTO_NUMBERS_COUNT = 6;
 	private static final String LOTTO_INPUT_LIST_REGEX = ",";
 

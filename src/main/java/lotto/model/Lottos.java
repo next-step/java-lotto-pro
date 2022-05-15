@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.List;
 
-public final class Lottos {
+public class Lottos {
 	private List<LottoNumbers> lottos;
 
 	public Lottos(List<LottoNumbers> lottos) {
