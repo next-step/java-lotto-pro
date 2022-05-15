@@ -48,6 +48,13 @@ public enum LottoRank implements Comparator<LottoRank> {
                 .collect(Collectors.toList());
     }
 
+    public String message() {
+        if (this.equals(LottoRank.SECOND)) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원)", this.matchCount, this.money);
+        }
+        return String.format("%d개 일치 (%d원)", this.matchCount, this.money);
+    }
+
     private boolean notEquals(LottoRank lottoRank) {
         return !this.equals(lottoRank);
     }

@@ -31,6 +31,13 @@ class LottoRankTest {
                 .contains(LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD, LottoRank.FOURTH);
     }
 
+    @Test
+    @DisplayName("상태에 대한 메시지 반환")
+    public void message() {
+        assertThat(LottoRank.SECOND.message()).isEqualTo("5개 일치, 보너스 볼 일치 (30000000원)");
+        assertThat(LottoRank.FIRST.message()).isEqualTo("6개 일치 (2000000000원)");
+    }
+
     private static Stream<Arguments> lottoRankFilterProvideCount() {
         return Stream.of(
                  Arguments.of(0, true, LottoRank.FAIL)
