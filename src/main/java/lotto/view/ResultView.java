@@ -37,4 +37,9 @@ public class ResultView {
                 , rank.matchingCount(), rank.prize(), statistic.count(rank));
         System.out.println(format);
     }
+
+    public static void printRateOfReturn(WinningStatistic statistic, double purchaseAmount) {
+        double rate = statistic.calculateRateOfReturn(purchaseAmount);
+        System.out.print("총 수익률은 " + rate + "입니다.");
+    }
 }
