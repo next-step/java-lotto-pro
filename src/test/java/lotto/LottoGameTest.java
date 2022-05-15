@@ -87,4 +87,22 @@ public class LottoGameTest {
         assertThat(game.getScore().get(4)).isEqualTo(2);
     }
 
+    @Test
+    void 번호_5개_일치() {
+        List<LottoNumbers> tickets = new ArrayList<>();
+        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
+        LottoGame game = new LottoGame(tickets, "1,2,3,4,5,9");
+        assertThat(game.getScore().get(5)).isEqualTo(1);
+    }
+
+    @Test
+    void 번호_5개_일치_2건() {
+        List<LottoNumbers> tickets = new ArrayList<>();
+        tickets.add(new LottoNumbers("1,2,3,4,5,16"));
+        tickets.add(new LottoNumbers("11,2,3,4,5,6"));
+        tickets.add(new LottoNumbers("21,32,3,4,5,6"));
+        LottoGame game = new LottoGame(tickets, "1,2,3,4,5,6");
+        assertThat(game.getScore().get(5)).isEqualTo(2);
+    }
+
 }
