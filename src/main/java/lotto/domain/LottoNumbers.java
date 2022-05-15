@@ -27,12 +27,11 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers from(NumberGenerateStrategy strategy) {
-        List<Integer> generatedNumbers = strategy.generate();
-        return new LottoNumbers(convertToLottoNumber(generatedNumbers));
+        return strategy.generate();
     }
 
-    public static LottoNumbers from(List<LottoNumber> numbers) {
-        return new LottoNumbers(numbers);
+    public static LottoNumbers from(List<Integer> numbers) {
+        return new LottoNumbers(convertToLottoNumber(numbers));
     }
 
     private void validateNumbers(List<LottoNumber> numbers) {

@@ -6,6 +6,7 @@ import static lotto.domain.LottoNumber.MIN_LOTTO_NUM;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.LottoNumbers;
 
 public class LottoRandomNumberGenerateStrategy implements NumberGenerateStrategy{
 
@@ -17,10 +18,10 @@ public class LottoRandomNumberGenerateStrategy implements NumberGenerateStrategy
     }
 
     @Override
-    public List<Integer> generate() {
+    public LottoNumbers generate() {
         Collections.shuffle(lottoNos);
         List<Integer> result = lottoNos.subList(0, 6);
         Collections.sort(result);
-        return result;
+        return LottoNumbers.from(result);
     }
 }

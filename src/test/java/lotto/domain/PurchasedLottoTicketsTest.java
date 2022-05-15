@@ -15,8 +15,8 @@ class PurchasedLottoTicketsTest {
     @BeforeEach
     void before() {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(LottoNumbers.from(() -> Arrays.asList(1,2,3,4,5,6)));
-        lottoNumbers.add(LottoNumbers.from(() -> Arrays.asList(11,22,33,44,5,6)));
+        lottoNumbers.add(LottoNumbers.from(Arrays.asList(1,2,3,4,5,6)));
+        lottoNumbers.add(LottoNumbers.from(Arrays.asList(11,22,33,44,5,6)));
         tickets = PurchasedLottoTickets.from(lottoNumbers);
     }
 

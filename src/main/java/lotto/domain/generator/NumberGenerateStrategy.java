@@ -1,8 +1,8 @@
 package lotto.domain.generator;
 
-import java.util.List;
+import lotto.domain.LottoNumbers;
 
 @FunctionalInterface
 public interface NumberGenerateStrategy {
-    List<Integer> generate();
+    LottoNumbers generate();
 }

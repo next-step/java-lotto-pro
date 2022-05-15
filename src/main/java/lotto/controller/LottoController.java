@@ -64,7 +64,7 @@ public class LottoController {
 
     private LottoWinningResults checkWinningLotto(PurchasedLottoTickets lottoTickets) {
         List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
-        WinningLotto winningLotto = WinningLotto.from(LottoNumbers.from(() -> winningLottoNumbers));
+        WinningLotto winningLotto = WinningLotto.from(LottoNumbers.from(winningLottoNumbers));
         List<LottoNumbers> lottoNumbers = lottoTickets.getLottoNumbers();
         List<LottoRank> ranks = lottoNumbers.stream().
                 map(ln -> winningLotto.match(ln)).
