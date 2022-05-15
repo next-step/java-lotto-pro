@@ -39,7 +39,7 @@ public class LottoResult {
         this.fourthCount = fourthCount;
     }
 
-    void counting(CompareEnum result) {
+    public void counting(CompareEnum result) {
         if(result == CompareEnum.First)
             firstCount++;
 
@@ -53,7 +53,7 @@ public class LottoResult {
             fourthCount++;
     }
 
-    void calculationYield(PurchaseMoney purchaseMoney) {
+    public void calculationYield(PurchaseMoney purchaseMoney) {
         yield = new Yield(purchaseMoney.getMoney());
         yield.yieldCalcution(this);
     }

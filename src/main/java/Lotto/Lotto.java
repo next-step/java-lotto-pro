@@ -8,7 +8,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    private static final ArrayList<Integer> rangeNumbers = RangeNumbers.getRangeNumbers();
+    private static final ArrayList<Integer> RANGE_NUMBERS = RangeNumbers.getRangeNumbers();
+    private static int RANGE_NUMBERS_START_INDEX = 0;
+    private static int RANGE_NUMBERS_END_INDEX = 6;
     private List<Integer> numbers;
 
     public List<Integer> getNumbers() {
@@ -16,7 +18,7 @@ public class Lotto {
     }
 
     public Lotto() {
-        Collections.shuffle(rangeNumbers);
+        Collections.shuffle(RANGE_NUMBERS);
         this.numbers = generate();
         Collections.sort(numbers);
     }
@@ -28,7 +30,7 @@ public class Lotto {
     }
 
     private List<Integer> generate() {
-        return new ArrayList<>(rangeNumbers.subList(0, 6));
+        return new ArrayList<>(RANGE_NUMBERS.subList(RANGE_NUMBERS_START_INDEX, RANGE_NUMBERS_END_INDEX));
     }
 
     public CompareEnum compare(Lotto lotto) {
@@ -37,19 +39,7 @@ public class Lotto {
                         .filter(num -> this.numbers.contains(num))
                         .count();
 
-        if(hitCount == 6)
-            return CompareEnum.First;
-
-        if(hitCount == 5)
-            return CompareEnum.Second;
-
-        if(hitCount == 4)
-            return CompareEnum.Third;
-
-        if(hitCount == 3)
-            return CompareEnum.Fourth;
-
-        return CompareEnum.Fail;
+        return CompareEnum.of(hitCount);
     }
 
     @Override
