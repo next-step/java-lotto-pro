@@ -4,11 +4,13 @@ import static lotto.domain.Money.LOTTO_TICKET_PRICE;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.LottoNumbers;
 import lotto.domain.PurchasedLottoTickets;
 import lotto.domain.LottoVendingMachine;
 import lotto.domain.LottoWinningResults;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.enums.LottoRank;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -62,7 +64,11 @@ public class LottoController {
 
     private LottoWinningResults checkWinningLotto(PurchasedLottoTickets lottoTickets) {
         List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
-        List<LottoRank> ranks = lottoTickets.match(LottoNumbers.from(() -> winningLottoNumbers));
+        WinningLotto winningLotto = WinningLotto.from(LottoNumbers.from(() -> winningLottoNumbers));
+        List<LottoNumbers> lottoNumbers = lottoTickets.getLottoNumbers();
+        List<LottoRank> ranks = lottoNumbers.stream().
+                map(ln -> winningLotto.match(ln)).
+                collect(Collectors.toList());
         return LottoWinningResults.from(ranks);
     }
 
