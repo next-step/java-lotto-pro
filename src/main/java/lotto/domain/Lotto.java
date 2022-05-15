@@ -17,4 +17,8 @@ public class Lotto {
             .filter(numbers::contains)
             .count();
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }

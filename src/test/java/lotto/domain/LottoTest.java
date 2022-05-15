@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -30,5 +31,14 @@ class LottoTest {
         return Stream.of(input.split(WinningNumbers.SPLIT_SYMBOL)).mapToInt(Integer::parseInt)
             .boxed()
             .collect(Collectors.toList());
+    }
+
+    @DisplayName("로또에 번호를 전달하면 정렬되어야 한다")
+    @Test
+    void lotto_sort_test() {
+        List<Integer> given = Arrays.asList(11, 15, 28, 43, 12, 7);
+        Lotto lotto = new Lotto(given);
+
+        assertThat(lotto.getNumbers()).containsExactly(7, 11, 12, 15, 28, 43);
     }
 }
