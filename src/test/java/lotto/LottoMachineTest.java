@@ -4,6 +4,7 @@ import lotto.lotto.Lotto;
 import lotto.lotto.LottoGenerator;
 import lotto.lotto.LottoNumber;
 import lotto.lotto.WinningLotto;
+import lotto.lotto.ManualLottoes;
 import lotto.money.Money;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -25,6 +26,11 @@ class LottoMachineTest {
             @Override
             public Money readMoney() {
                 return Money.ONE_THOUSAND;
+            }
+
+            @Override
+            public ManualLottoes readManualLottoes() {
+                return ManualLottoes.empty();
             }
 
             @Override
