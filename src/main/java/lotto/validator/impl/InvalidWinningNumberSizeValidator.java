@@ -1,19 +1,19 @@
 package lotto.validator.impl;
 
+import static lotto.constants.LottoConstants.MAX;
+import static lotto.constants.LottoConstants.MIN;
+import static lotto.constants.LottoConstants.SPLIT_SYMBOL;
+
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.WinningNumbers;
 import lotto.exception.ExceptionType;
 import lotto.validator.WinningNumbersValidator;
 
 public class InvalidWinningNumberSizeValidator implements WinningNumbersValidator {
 
-    private static final int MAX = 45;
-    private static final int MIN = 1;
-
     @Override
     public void validate(String winningNumbers) {
-        List<String> list = Arrays.asList(winningNumbers.split(WinningNumbers.SPLIT_SYMBOL));
+        List<String> list = Arrays.asList(winningNumbers.split(SPLIT_SYMBOL));
         long invalidNumberCount = list.stream().filter(x -> isLottoNumberSize(Integer.parseInt(x)))
             .count();
 

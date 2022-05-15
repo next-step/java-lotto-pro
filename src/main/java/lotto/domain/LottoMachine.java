@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import static lotto.constants.LottoConstants.LOTTO_NUMBER_SIZE;
+import static lotto.constants.LottoConstants.MAX;
+import static lotto.constants.LottoConstants.MIN;
+import static lotto.constants.LottoConstants.START_INDEX;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,10 +13,6 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
 
-    private static final int START_INDEX = 0;
-    private static final int MIN = 1;
-    private static final int MAX = 45;
-    private static final int LOTTO_NUMBER_SIZE = 6;
     public static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(MIN, MAX).boxed()
         .collect(Collectors.toList());
 

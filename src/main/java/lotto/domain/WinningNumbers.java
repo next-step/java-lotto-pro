@@ -1,12 +1,13 @@
 package lotto.domain;
 
+import static lotto.constants.LottoConstants.SPLIT_SYMBOL;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.validator.WinningNumberValidatorGroup;
 
 public class WinningNumbers {
-    public static final String SPLIT_SYMBOL = ",";
 
     private final List<Integer> winningNumbers;
     private static final WinningNumberValidatorGroup validatorGroup = WinningNumberValidatorGroup.getInstance();

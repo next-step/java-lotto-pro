@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.constants.LottoConstants.SPLIT_SYMBOL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
@@ -28,7 +29,7 @@ class LottoTest {
     }
 
     private List<Integer> convert(String input) {
-        return Stream.of(input.split(WinningNumbers.SPLIT_SYMBOL)).mapToInt(Integer::parseInt)
+        return Stream.of(input.split(SPLIT_SYMBOL)).mapToInt(Integer::parseInt)
             .boxed()
             .collect(Collectors.toList());
     }
