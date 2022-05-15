@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.constants.DisplayMessage;
+import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.util.StringCommaSplitter;
 import lotto.util.StringToIntegerParser;
@@ -20,6 +21,12 @@ public class InputView {
         System.out.println(DisplayMessage.INPUT_WINNING_NUMBERS);
         String inputNumbers = readLine();
         return StringCommaSplitter.splitNumbers(inputNumbers);
+    }
+
+    public LottoNumber inputBonusBall() {
+        System.out.println(DisplayMessage.INPUT_BONUS_BALL);
+        String bonusBall = readLine();
+        return LottoNumber.from(StringToIntegerParser.parseInt(bonusBall));
     }
 
     private String readLine() {
