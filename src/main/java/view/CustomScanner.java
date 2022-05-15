@@ -6,7 +6,6 @@ public class CustomScanner {
 	private static Scanner scanner;
 
 	private CustomScanner() {
-		scanner.close();
 	}
 
 	public static String readLine() {
