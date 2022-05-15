@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.text.DecimalFormat;
 import java.util.Collections;
 
+import static lotto.domain.LottoResult.isCriterionRate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
@@ -39,5 +40,29 @@ class LottoResultTest {
 
         // then
         assertThat(decimalFormat.format(earningsRate)).isEqualTo("0.36");
+    }
+
+    @Test
+    void 로또_수익률_기준계산() {
+        // given
+        Money money = new Money("14000");
+        LottoRanks lottoRanks = new LottoRanks(Collections.singletonList(
+                LottoRank.FOURTH
+        ));
+
+        double earningsRate = LottoResult.lottoGameEarningsRate(money.currentMoney(), lottoRanks);
+        assertThat(isCriterionRate(earningsRate)).isFalse();
+    }
+
+    @Test
+    void 로또_수익률_기준계산2() {
+        // given
+        Money money = new Money("1000");
+        LottoRanks lottoRanks = new LottoRanks(Collections.singletonList(
+                LottoRank.FOURTH
+        ));
+
+        double earningsRate = LottoResult.lottoGameEarningsRate(money.currentMoney(), lottoRanks);
+        assertThat(isCriterionRate(earningsRate)).isTrue();
     }
 }
