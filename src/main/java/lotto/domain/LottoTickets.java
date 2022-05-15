@@ -11,9 +11,9 @@ public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(final int amountOfTickets) {
+    public LottoTickets(final LottoPayment payment) {
         lottoTickets = new ArrayList<>();
-        for (int i = 0; i < amountOfTickets; i++) {
+        for (int i = 0; i < payment.getPurchasableAmount(); i++) {
             lottoTickets.add(new LottoTicket(AutoLottoNumbersIssuer.issueLottoNumbers()));
         }
     }

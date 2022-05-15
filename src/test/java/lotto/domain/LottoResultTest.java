@@ -12,7 +12,7 @@ class LottoResultTest {
     void create() {
         // given
         final LottoPayment payment = new LottoPayment("10000");
-        final LottoTickets tickets = new LottoTickets(payment.getPurchasableAmount());
+        final LottoTickets tickets = new LottoTickets(payment);
         final LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when

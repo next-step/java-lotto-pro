@@ -12,10 +12,10 @@ class LottoTicketsTest {
     @DisplayName("티켓 개수를 파라미터로 LottoTickets 객체가 생성되어야 한다")
     void create() {
         // given
-        final int amountOfTickets = 5;
+        final LottoPayment payment = new LottoPayment("5000");
 
         // when
-        final LottoTickets lottoTickets = new LottoTickets(amountOfTickets);
+        final LottoTickets lottoTickets = new LottoTickets(payment);
 
         // when and then
         assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
@@ -25,8 +25,8 @@ class LottoTicketsTest {
     @DisplayName("prizeMap 호출 시 올바른 구조의 당첨 결과 Map 객체가 반환되어야 한다")
     void prizeMap() {
         // given
-        final int amountOfTickets = 5;
-        final LottoTickets lottoTickets = new LottoTickets(amountOfTickets);
+        final LottoPayment payment = new LottoPayment("5000");
+        final LottoTickets lottoTickets = new LottoTickets(payment);
         final LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when
