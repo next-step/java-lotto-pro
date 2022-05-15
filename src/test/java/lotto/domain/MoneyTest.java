@@ -16,7 +16,7 @@ class MoneyTest {
 
     @Test
     void 돈에따_가능한_수량을_구할_수_있다() {
-        int result = Money.from(1000).getQuantityFromMoney();
+        int result = Money.from(1000).calculatePurchasableCount();
         assertThat(result).isEqualTo(1);
     }
 
