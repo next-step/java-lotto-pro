@@ -29,7 +29,7 @@ public class ResultView {
         totalLottoNumberView.append(resultPurchaseView(lottos));
         totalLottoNumberView.append(ENTER);
         for (Lotto lotto : lottos.getLottoList()) {
-            totalLottoNumberView.append(Arrays.toString(lotto.numberListToArray()));
+            totalLottoNumberView.append(Arrays.toString(lotto.convertNumbers()));
             totalLottoNumberView.append(ENTER);
         }
         printConsole(totalLottoNumberView.toString());

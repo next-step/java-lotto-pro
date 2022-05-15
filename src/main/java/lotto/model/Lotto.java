@@ -14,7 +14,7 @@ public class Lotto {
         this.numberList = numberList;
     }
 
-    public int[] numberListToArray() {
+    public int[] convertNumbers() {
         return numberList.stream()
                 .mapToInt(Integer::intValue)
                 .toArray();

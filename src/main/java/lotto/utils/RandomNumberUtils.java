@@ -16,7 +16,7 @@ public class RandomNumberUtils {
         throw new IllegalStateException(ErrorMessage.UTILITY_CLASS);
     }
 
-    public static List<Integer> generateRandomNumberToList(int low, int max, int count) {
+    public static List<Integer> generateRandomNumbers(int low, int max, int count) {
         List<Integer> numberList;
         numberList = getNumberList(low, max);
         Collections.shuffle(numberList);

@@ -31,7 +31,7 @@ public class LottoGame {
         List<Lotto> lottoList = new ArrayList<>();
         for (int gameCount = 0; gameCount < lottoPaper.getGameCount(); gameCount++) {
             List<Integer> randomNumberToList = RandomNumberUtils
-                    .generateRandomNumberToList(LottoRoleConst.LOW_NUMBER, LottoRoleConst.MAX_NUMBER,
+                    .generateRandomNumbers(LottoRoleConst.LOW_NUMBER, LottoRoleConst.MAX_NUMBER,
                             LottoRoleConst.LOTTO_NUMBER_LIST_SIZE);
             lottoList.add(new Lotto(randomNumberToList));
         }
