@@ -39,7 +39,7 @@ public class HitTest {
     @ParameterizedTest
     @MethodSource("비교대상_예상결과값_제공함수")
     void compareTest(final Hit source, final Hit destination, final boolean expectedResult) {
-        assertThat(TWO.isLow(THREE)).isTrue();
+        assertThat(THREE.isHigh(TWO)).isTrue();
     }
 
     private static Stream<Arguments> 비교대상_예상결과값_제공함수() {

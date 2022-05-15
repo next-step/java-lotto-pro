@@ -21,7 +21,7 @@ public enum Hit {
 
     public static Hit[] winningList() {
         return Arrays.stream(Hit.values())
-                .filter(Hit.TWO::isLow)
+                .filter((hit) -> hit.isHigh(TWO))
                 .toArray(Hit[]::new);
     }
 
@@ -29,16 +29,16 @@ public enum Hit {
         return Hit.values()[hitCount];
     }
 
-    public boolean isLow(final Hit target) {
-        return target.isHigh(this.count);
-    }
-
     long winningAmount(final int perSheet) {
         return this.prizeMoney * perSheet;
     }
 
-    private boolean isHigh(final int destinationCount) {
-        return this.count > destinationCount;
+    public boolean isHigh(final Hit destination) {
+        return destination.isLow(this.count);
+    }
+
+    private boolean isLow(final int count) {
+        return this.count < count;
     }
 
     @Override
