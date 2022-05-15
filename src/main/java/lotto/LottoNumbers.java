@@ -51,7 +51,15 @@ public class LottoNumbers {
         this.validateNumbers(winnerNumbers);
 
         for (int i = 1; i <= MAX_COUNT; i++) {
-            this.numbers.add(Integer.parseInt(winnerNumbers[i-1]));
+            int oneNumber = Integer.parseInt(winnerNumbers[i-1]);
+            validateLottoNumber(oneNumber);
+            this.numbers.add(oneNumber);
+        }
+    }
+
+    private void validateLottoNumber(int oneNumber) {
+        if (oneNumber < 1 || oneNumber > 45) {
+            throw new IllegalArgumentException("Lotto number should be from 1 to 45.");
         }
     }
 
