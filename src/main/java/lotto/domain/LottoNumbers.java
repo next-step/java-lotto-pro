@@ -55,12 +55,12 @@ public class LottoNumbers {
         return ALL_NUMBERS.get(BONUS_NUMBER_INDEX);
     }
 
-    public WinningRank matchWinningNumbers(List<Integer> winningNumbers) {
+    public WinningRank matchWinningNumbers(List<Integer> winningNumbers, Integer winningBonusNumber) {
         int matchCount = 0;
         for (Integer winningNumber : winningNumbers) {
             matchCount += matchWinningNumber(winningNumber);
         }
-        return WinningRank.of(matchCount);
+        return WinningRank.of(matchCount, bonusNumber.equals(winningBonusNumber));
     }
 
     private Integer matchWinningNumber(Integer winningNumber) {

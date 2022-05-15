@@ -16,7 +16,7 @@ public class Application {
 
         initLotto(inputView, resultView, lottoApplication);
         generateLottoNumber(resultView, lottoApplication);
-        generateWinningNumber(inputView, resultView, lottoApplication);
+        generateWinningNumber(inputView, lottoApplication);
         statistics(resultView, lottoApplication);
     }
 
@@ -31,10 +31,10 @@ public class Application {
         resultView.printLottoNumbers(lottoNumbers);
     }
 
-    private static void generateWinningNumber(InputView inputView, ResultView resultView, LottoApplication lottoApplication) {
-        resultView.printInputWinningNumbers();
+    private static void generateWinningNumber(InputView inputView, LottoApplication lottoApplication) {
         List<Integer> winningNumbers = inputView.inputWinningNumbers();
-        lottoApplication.setWinningNumbers(winningNumbers);
+        Integer winningBonusNumbers = inputView.inputWinningBonusNumber();
+        lottoApplication.setWinningNumbers(winningNumbers, winningBonusNumbers);
     }
 
     private static void statistics(ResultView resultView, LottoApplication lottoApplication) {
