@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteryTest {
     @Test
-    void 비교_결과_를_당첨별로_집계할_수_있다() {
+    void 당첨번호와_비교하여_몇_개의_번호가_일치하는지_확인할_수_있다() {
         LottoNumbers winner = new LottoNumbers(
                 new LottoNumber(1),
                 new LottoNumber(2),
@@ -38,8 +38,8 @@ class LotteryTest {
         lottos.add(lottoNumbers2);
 
         assertThat(new Lottery(winner).get(lottos))
-                .containsEntry(Prize.FIRST, 1L)
-                .containsEntry(Prize.FOURTH, 1L);
+                .contains(new ContainCount(6))
+                .contains(new ContainCount(3));
     }
 
 }
