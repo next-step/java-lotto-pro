@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.List;
+import java.util.Objects;
 import lotto.constant.LottoRoleConst;
 
 public class Lottos {
@@ -25,5 +26,22 @@ public class Lottos {
 
     public double calcProfitRate(int totalWinningMount) {
         return (double) totalWinningMount / purchaseMoney();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lottos lottos = (Lottos) o;
+        return Objects.equals(lottoList, lottos.lottoList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoList);
     }
 }
