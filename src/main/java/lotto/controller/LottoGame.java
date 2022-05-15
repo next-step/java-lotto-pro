@@ -31,9 +31,10 @@ public class LottoGame {
         return winningLotto.compareLottos(lottos);
     }
 
-    public static LottoGameResult resultWinningGame(Lottos lottos, String winningNumbersWord, BonusNumber bonusNumber) {
+    public static LottoGameResult resultWinningGame(Lottos lottos, String winningNumbersWord, String bonusNumberWord) {
         List<Integer> winningNumberList = InputStringUtils.splitToNumberList(winningNumbersWord, DELIMITER_COMMA);
-        WinningLotto winningLotto = new WinningLotto(winningNumberList,bonusNumber);
+        int bonusNumber = InputStringUtils.wordToNumber(bonusNumberWord);
+        WinningLotto winningLotto = new WinningLotto(winningNumberList,new BonusNumber(bonusNumber));
         return winningLotto.compareLottos(lottos);
     }
 }

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -26,5 +27,11 @@ class InputStringUtilsTest {
                 .isThrownBy(() -> InputStringUtils.splitToNumberList(inputString, delimiter))
                 .withMessage("[ERROR] 숫자가 아닙니다.");
     }
-
+    @DisplayName("숫자가 아닌경우 검증(wordToNumber)")
+    @Test
+    void wordToNumber() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> InputStringUtils.wordToNumber("%%@"))
+                .withMessage("[ERROR] 숫자가 아닙니다.");
+    }
 }

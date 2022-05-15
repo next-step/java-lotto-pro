@@ -22,7 +22,7 @@ public class InputStringUtils {
         return numberList;
     }
 
-    private static int wordToNumber(String numberWord) {
+    public static int wordToNumber(String numberWord) {
         if (numberWord.matches("\\p{Digit}+")) {
             return Integer.parseInt(numberWord);
         }
