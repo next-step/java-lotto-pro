@@ -19,11 +19,11 @@ public class LottoNumbers implements Iterable<LottoNumber> {
 
     private void check(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != SIZE) {
-            throw new RuntimeException();
+            throw new RuntimeException("로또 번호의 수는 총 6자리여야 합니다. ");
         }
 
         if (hasDuplicate(lottoNumbers)) {
-            throw new RuntimeException();
+            throw new RuntimeException("로또 번호의 수는 중복될 수 없습니다.");
         }
     }
 

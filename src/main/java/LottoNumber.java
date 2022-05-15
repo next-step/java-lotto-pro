@@ -13,7 +13,7 @@ public class LottoNumber {
 
     private void check(int number) {
         if (number < LOWER_BOUND || number > UPPER_BOUND)
-            throw new RuntimeException();
+            throw new RuntimeException("로또 번호 숫자의 범위는 " + LOWER_BOUND + "과 " + UPPER_BOUND + " 사이여야 합니다.");
     }
 
     @Override
