@@ -7,25 +7,35 @@ import java.util.Objects;
 
 public class LottoElement {
 
-    private final int element;
+    private final String element;
 
-    protected LottoElement(int element) {
-        this.element = element;
+    public LottoElement(String element) {
+        this.element = validElement(element);
     }
 
-    public static LottoElement create(int element) {
-        validElement(element);
-        return new LottoElement(element);
+    private String validElement(String element) throws IllegalArgumentException {
+        element = element.replace(" ", "");
+        int parseElement = parseNumber(element);
+        validNumberRange(parseElement);
+        return element;
     }
 
-    private static void validElement(int element) throws IllegalArgumentException {
-        if (element < LOTTO_MIN || element > LOTTO_MAX) {
+    private void validNumberRange(int parseElement) {
+        if (parseElement < LOTTO_MIN || parseElement > LOTTO_MAX) {
+            throw new IllegalArgumentException("로또 번호는 0 이상의 숫자여야합니다");
+        }
+    }
+
+    private int parseNumber(String element) {
+        try {
+            return Integer.parseInt(element);
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("로또 번호는 0 이상의 숫자여야합니다");
         }
     }
 
     public String getElement() {
-        return String.valueOf(element);
+        return element;
     }
 
     @Override
@@ -37,7 +47,7 @@ public class LottoElement {
             return false;
         }
         LottoElement that = (LottoElement) o;
-        return element == that.element;
+        return Objects.equals(element, that.element);
     }
 
     @Override
