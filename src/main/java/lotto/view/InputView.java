@@ -17,7 +17,7 @@ public class InputView {
         return new Money(inputString);
     }
 
-    public static String lastWeekWinningNumber() {
+    public static String lastWeekWinningNumberString() {
         System.out.println(LAST_WEEK_WINNING_NUMBER);
         return scanner.nextLine();
     }
