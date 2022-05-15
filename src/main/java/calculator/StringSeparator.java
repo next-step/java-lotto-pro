@@ -7,23 +7,17 @@ public class StringSeparator {
     private static final String BASIC_SPLIT = ",|:";
     private static final Pattern CUSTOM_SPLIT = Pattern.compile("//(.)\n(.*)");
 
+    private static final int ELEMENTS = 2;
+    private static final int CUSTOM_DELIMITER = 1;
+
     private StringSeparator() {
     }
 
-    public static Numbers split(String input) {
+    public static String[] split(String input) {
         Matcher custom = CUSTOM_SPLIT.matcher(input);
         if (custom.find()) {
-            return makeNumbers(custom.group(2).split(custom.group(1)));
+            return custom.group(ELEMENTS).split(custom.group(CUSTOM_DELIMITER));
         }
-
-        return makeNumbers(input.split(BASIC_SPLIT));
-    }
-
-    private static Numbers makeNumbers(String[] integers) {
-        Numbers numbers = new Numbers();
-        for (String integer : integers) {
-            numbers.add(new Number(integer));
-        }
-        return numbers;
+        return input.split(BASIC_SPLIT);
     }
 }
