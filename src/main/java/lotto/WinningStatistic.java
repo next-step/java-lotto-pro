@@ -30,4 +30,7 @@ public class WinningStatistic {
         return Math.floor(late * 100) / 100.0;
     }
 
+    public Map<Rank, Integer> getStatistic() {
+        return statistic;
+    }
 }
