@@ -3,6 +3,7 @@ package lotto;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoGenerator;
 import lotto.lotto.WinningLotto;
+import lotto.lotto.ManualLottoes;
 import lotto.money.Money;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -23,8 +24,9 @@ public class LottoMachine {
 
     public void run(InputView inputView, ResultView resultView) {
         final Money money = inputView.readMoney();
-        final List<Lotto> lottoes = lottoExchanger.exchange(money, null);
-        resultView.printLottoes(lottoes, -1);
+        final ManualLottoes manualLottoes = inputView.readManualLottoes();
+        final List<Lotto> lottoes = lottoExchanger.exchange(money, manualLottoes);
+        resultView.printLottoes(lottoes, manualLottoes.size());
         runAnalyze(inputView, resultView, lottoes);
     }
 
