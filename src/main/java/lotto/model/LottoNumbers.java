@@ -22,11 +22,7 @@ public class LottoNumbers {
 
     public LottoRanks resultLottoRanks(WinningLottoNumber winningLottoNumber) {
         return lottoNumbers.stream()
-                .map(lottoNumber -> {
-                    int matchLottoNumber = winningLottoNumber.countMatchLottoNumber(lottoNumber);
-                    boolean hasBonusNumber = winningLottoNumber.hasBonusNumber(lottoNumber);
-                    return LottoRank.findByHits(matchLottoNumber, hasBonusNumber);
-                })
+                .map(winningLottoNumber::matchLottoRank)
                 .collect(collectingAndThen(toList(), LottoRanks::of));
     }
 }

@@ -21,12 +21,10 @@ public class WinningLottoNumber {
         }
     }
 
-    public int countMatchLottoNumber(LottoNumber lottoNumber) {
-        return lottoNumber.countMatchLottoNumber(this.lottoNumber);
-    }
-
-    public boolean hasBonusNumber(LottoNumber lottoNumber) {
-        return lottoNumber.isContainNumber(this.bonusNumber);
+    public LottoRank matchLottoRank(LottoNumber lottoNumber) {
+        int matchLottoNumber = lottoNumber.countMatchLottoNumber(this.lottoNumber);
+        boolean hasBonusNumber = lottoNumber.isContainNumber(this.bonusNumber);
+        return LottoRank.findByHits(matchLottoNumber, hasBonusNumber);
     }
 
     @Override
