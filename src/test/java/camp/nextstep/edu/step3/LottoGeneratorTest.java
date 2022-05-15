@@ -4,11 +4,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.function.Consumer;
+
 import static camp.nextstep.edu.step3.LottoTest.createLottoNumberList;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 public class LottoGeneratorTest {
 
@@ -16,9 +19,10 @@ public class LottoGeneratorTest {
     @Test
     void autoTest() {
         LottoNumbers spyLottoNumbers = spy(new LottoNumbers());
-        Mockito.doReturn(createLottoNumberList(new int[] {1,2,3,4,5,6})).when(spyLottoNumbers).extract(any());
+        Mockito.doReturn(createLottoNumberList(new int[] {1,2,3,4,5,6})).when(spyLottoNumbers).extract(any(Consumer.class));
         assertThat(new LottoGenerator(spyLottoNumbers).auto())
                 .isEqualTo(new Lotto(createLottoNumberList(new int[] {1,2,3,4,5,6})));
+        verify(spyLottoNumbers).extract(any(Consumer.class));
     }
 
     @DisplayName("Lotto 를 수동으로 생성한다.")
