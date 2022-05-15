@@ -17,6 +17,10 @@ public class LottoNumber {
         }
     }
 
+    public LottoNumber(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
     public int lottoNumberCount() {
         return LOTTO_NUMBER_SIZE_VALUE;
     }

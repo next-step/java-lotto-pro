@@ -21,7 +21,7 @@ public class LottoNumberTest {
     void 테스트_로또번호_오름차순() {
         LottoNumber lottoNumber = new LottoNumber();
         lottoNumber.sortLottoNumber();
-        assertThat(lottoNumber.equals(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(true);
+        assertThat(lottoNumber.equals(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(true);
     }
 
     @Test
