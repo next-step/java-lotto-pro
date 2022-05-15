@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-    private static final int ZERO = 0;
+    private static final int MIN = 0;
     private final int value;
 
     private Money(int value) {
@@ -12,8 +12,8 @@ public class Money {
     }
 
     private void validate(int value) {
-        if (value < ZERO) {
-            throw new IllegalArgumentException(String.format("돈은 %d보다 작을 수 없습니다.",ZERO));
+        if (value < MIN) {
+            throw new IllegalArgumentException(String.format("돈은 %d보다 작을 수 없습니다.", MIN));
         }
     }
 
@@ -35,6 +35,10 @@ public class Money {
 
     public Money multiply(int count) {
         return new Money(this.value * count);
+    }
+
+    public double divide(Money money) {
+        return (double) this.value / money.value;
     }
 
     public double calculateLottoYield(Money winningReward) {

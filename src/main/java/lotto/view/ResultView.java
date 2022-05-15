@@ -25,8 +25,7 @@ public class ResultView {
     }
 
     public static void printLottoYield(Money purchaseAmount, WinningStatus winningStatus) {
-        Money winningReward = winningStatus.getWinningReward();
-        System.out.printf("총 수익률은 %.02f입니다.%n", Math.floor(winningReward.calculateLottoYield(purchaseAmount) * 100) / 100.0);
+        System.out.printf("총 수익률은 %.02f입니다.%n", winningStatus.getWinningYield(purchaseAmount));
 
     }
 }

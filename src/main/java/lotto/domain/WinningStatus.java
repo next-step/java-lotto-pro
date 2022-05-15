@@ -29,4 +29,9 @@ public class WinningStatus {
                 .reduce(Money::plus)
                 .get();
     }
+
+    public double getWinningYield(Money purchaseAmount) {
+        return Math.floor(getWinningReward().divide(purchaseAmount) * 100) / 100.0;
+    }
+
 }
