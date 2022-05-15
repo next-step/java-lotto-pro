@@ -259,7 +259,7 @@ public enum Rank {
 
 ## 기능 목록
 
-- [ ] 이전 리뷰 내용 반영
+- [x] 이전 리뷰 내용 반영
 - [ ] ManualLottoes 구현
 - [ ] InputView/ResultView 수정
 - [ ] LottoExchange/LottoMachine 수정
