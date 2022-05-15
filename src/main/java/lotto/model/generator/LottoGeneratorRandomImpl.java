@@ -1,8 +1,11 @@
-package lotto.model;
+package lotto.model.generator;
 
 import java.util.ArrayList;
 import java.util.List;
 import lotto.constant.LottoRoleConst;
+import lotto.model.Lotto;
+import lotto.model.LottoPaper;
+import lotto.model.Lottos;
 import lotto.utils.RandomNumberUtils;
 
 public class LottoGeneratorRandomImpl implements LottoGenerator{

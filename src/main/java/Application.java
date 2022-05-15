@@ -1,7 +1,7 @@
 import java.io.IOException;
 import lotto.constant.LottoInputMessage;
 import lotto.controller.LottoGame;
-import lotto.model.LottoGeneratorRandomImpl;
+import lotto.model.generator.LottoGeneratorRandomImpl;
 import lotto.wrapper.LottosResultWrapper;
 import lotto.model.LottoGameResult;
 import lotto.model.Lottos;

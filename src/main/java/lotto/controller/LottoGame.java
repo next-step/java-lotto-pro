@@ -3,7 +3,7 @@ package lotto.controller;
 import java.util.List;
 import lotto.constant.ErrorMessage;
 import lotto.model.LottoGameResult;
-import lotto.model.LottoGenerator;
+import lotto.model.generator.LottoGenerator;
 import lotto.model.LottoPaper;
 import lotto.model.LottoStore;
 import lotto.model.WinningLotto;
