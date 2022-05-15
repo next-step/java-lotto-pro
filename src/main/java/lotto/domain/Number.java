@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Number {
+	public static final int MIN_NUMBER = 1;
+	public static final int MAX_NUMBER = 45;
 	private final String INVALID_VALUE = "1~45 사이의 숫자만 가능합니다.";
-	private final int MIN_NUMBER = 1;
-	private final int MAX_NUMBER = 45;
 
 	private int number;
 
