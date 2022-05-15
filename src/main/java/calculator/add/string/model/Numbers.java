@@ -10,7 +10,9 @@ public class Numbers {
     private final List<Number> numbers;
 
     public Numbers(String[] numbers) {
-        this.numbers = Arrays.stream(numbers).map(Number::new).collect(Collectors.toCollection(ArrayList::new));
+        this.numbers = Arrays.stream(numbers)
+            .map(Number::new)
+            .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public int sumTotal() {
