@@ -1,6 +1,7 @@
 package lotto.dto;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LottoResult {
     private final String earningRatio;
@@ -17,5 +18,18 @@ public class LottoResult {
 
     public List<LottoResultItem> getItems() {
         return items;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResult that = (LottoResult) o;
+        return earningRatio.equals(that.earningRatio) && items.equals(that.items);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(earningRatio, items);
     }
 }
