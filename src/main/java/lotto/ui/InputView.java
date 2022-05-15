@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public static final String WINNING_NUMBERS_DELIMITER = ", ";
+    public static final String WINNING_NUMBERS_DELIMITER = ",";
     private final Scanner scanner;
 
     public InputView() {

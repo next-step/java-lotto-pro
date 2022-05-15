@@ -13,7 +13,7 @@ public class StringUtils {
 
         List<Integer> result = new ArrayList<>();
         for (String stringNumber : splitValue) {
-            result.add(Integer.parseInt(stringNumber));
+            result.add(Integer.parseInt(stringNumber.trim()));
         }
         return result;
     }
