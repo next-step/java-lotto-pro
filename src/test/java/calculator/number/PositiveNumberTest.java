@@ -18,7 +18,7 @@ class PositiveNumberTest {
         PositiveNumber positiveNumber = new PositiveNumber(numberStr);
 
         //then
-        assertThat(positiveNumber.getNumber()).isEqualTo(0);
+        assertThat(positiveNumber.parseNumber()).isEqualTo(0);
     }
 
     @DisplayName("음수 입력 시 예외 처리")

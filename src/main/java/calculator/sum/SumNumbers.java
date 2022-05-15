@@ -15,11 +15,11 @@ public class SumNumbers {
     private void sum() {
         sumResult = 0;
         for (PositiveNumber positiveNumber : positiveNumbers.getPositiveNumbers()) {
-            sumResult += positiveNumber.getNumber();
+            sumResult += positiveNumber.parseNumber();
         }
     }
 
-    public int getSumResult() {
+    public int sumResult() {
         sum();
         return sumResult;
     }

@@ -1,16 +1,9 @@
-package calculator.parser;
+package lotto.util;
 
-import calculator.common.ErrorMessage;
+import lotto.constants.ErrorMessage;
 
 public class StringToIntegerParser {
-
-    private final String str;
-
-    public StringToIntegerParser(String str) {
-        this.str = str;
-    }
-
-    public int parseInt() {
+    public static int parseInt(String str) {
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException ne) {
