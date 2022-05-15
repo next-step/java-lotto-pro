@@ -1,10 +1,5 @@
 package lotto.domain;
 
-import static lotto.constants.LottoConstants.MAX_LOTTO_NUMBER_SIZE;
-import static lotto.constants.LottoConstants.NUMBERS_DELIMITER;
-import static lotto.constants.LottoConstants.NUMBERS_PREFIX;
-import static lotto.constants.LottoConstants.NUMBERS_SUFFIX;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +9,11 @@ import java.util.stream.Collectors;
 import lotto.domain.generator.NumberGenerateStrategy;
 
 public class LottoNumbers {
+
+    public static final String NUMBERS_DELIMITER = ",";
+    private static final String NUMBERS_PREFIX = "[";
+    private static final String NUMBERS_SUFFIX = "]";
+    private static final int MAX_LOTTO_NUMBER_SIZE = 6;
 
     private static final String LOTTO_NUMBERS_SIZE_ERROR = "[ERROR] 로또는 6개의 숫자야 합니다.";
     private static final String LOTTO_NUMBERS_DUPLICATION_ERROR = "[ERROR] 중복된 숫자는 불가 합니다.";

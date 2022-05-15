@@ -1,7 +1,7 @@
 package lotto.domain.generator;
 
-import static lotto.constants.LottoConstants.MAX_LOTTO_NUM;
-import static lotto.constants.LottoConstants.MIN_LOTTO_NUM;
+import static lotto.domain.LottoNumber.MAX_LOTTO_NUM;
+import static lotto.domain.LottoNumber.MIN_LOTTO_NUM;
 
 import java.util.ArrayList;
 import java.util.Collections;

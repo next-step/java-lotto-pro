@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import static lotto.constants.LottoConstants.LOTTO_TICKET_PRICE;
+import static lotto.domain.Money.LOTTO_TICKET_PRICE;
 
 import java.util.Collections;
 import java.util.List;

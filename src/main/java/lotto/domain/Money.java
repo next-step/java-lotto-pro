@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import static lotto.constants.LottoConstants.LOTTO_TICKET_PRICE;
-
 public class Money {
+
+    public static final int LOTTO_TICKET_PRICE = 1_000;
 
     private static final String MONEY_NEGATIVE_ERROR = "[ERROR] 금액은 양수여야 합니다.";
     private static final String MONEY_UNDER_PRICE_ERROR = "[ERROR] 금액이 로또 가격보다 낮습니다.";
 
-    private int money;
+    private final int money;
 
     private Money(int money) {
         validateMoney(money);

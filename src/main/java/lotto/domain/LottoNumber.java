@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import static lotto.constants.LottoConstants.MAX_LOTTO_NUM;
-import static lotto.constants.LottoConstants.MIN_LOTTO_NUM;
-
 import java.util.Objects;
 
 public class LottoNumber {
+
+    public static final int MIN_LOTTO_NUM = 1;
+    public static final int MAX_LOTTO_NUM = 45;
 
     private static final String LOTTO_NUMBER_ERROR = "[ERROR] 로또 숫자는 1 ~ 45 사이의 숫자야 합니다.";
 
