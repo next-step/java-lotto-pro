@@ -14,7 +14,6 @@ public class LottoElement {
     }
 
     private String validElement(String element) throws IllegalArgumentException {
-        element = element.replace(" ", "");
         int parseElement = parseNumber(element);
         validNumberRange(parseElement);
         return element;

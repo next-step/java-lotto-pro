@@ -12,6 +12,7 @@ public class InputView {
     }
 
     public String getInput(InputStatus inputStatus) {
+
         if (inputStatus == InputStatus.MONEY) {
             return getMoney();
         }
@@ -23,11 +24,11 @@ public class InputView {
 
     private String getMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanIn.nextLine();
+        return scanIn.nextLine().replace(" ", "");
     }
 
     private String getWinnerLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanIn.nextLine();
+        return scanIn.nextLine().replace(" ", "");
     }
 }
