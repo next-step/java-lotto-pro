@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
+    public static final int NUMBER_ZERO = 0;
     private Map<LottoRank, Integer> winningCount = new HashMap<>();
     double profitRate;
 
@@ -22,7 +23,7 @@ public class LottoResult {
     }
 
     private void updateProfitRate(int lottoCount) {
-        if(lottoCount == 0){
+        if (lottoCount == NUMBER_ZERO) {
             profitRate = 0;
             return;
         }
