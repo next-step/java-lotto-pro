@@ -9,7 +9,7 @@ public class Lotto {
     public static final int LOTTO_MAX_NUMBER = 45;
     public static final int LOTTO_FIRST_INDEX = 0;
     public static final int LOTTO_SIZE = 6;
-    public static final int LOTTO_FIXED_PRICE = 1000;
+    public static final int LOTTO_FIXED_PRICE = 1_000;
     private static final int IS_MATCHES = 1;
     private static final int IS_NOT_MATCHES = 0;
     private static final List<Integer> candidates = createLottoNumbers();

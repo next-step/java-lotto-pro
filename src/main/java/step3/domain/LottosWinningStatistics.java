@@ -9,10 +9,10 @@ public class LottosWinningStatistics {
     private static final int FIVE_MATCHED_COUNT = 5;
     private static final int SIX_MATCHED_COUNT = 6;
     private static final int NOT_MATCHED_REWARD = 0;
-    private static final int THREE_MATCHED_REWARD = 5000;
-    private static final int FOUR_MATCHED_REWARD = 50000;
-    private static final int FIVE_MATCHED_REWARD = 1500000;
-    private static final int SIX_MATCHED_REWARD = 2000000000;
+    private static final int THREE_MATCHED_REWARD = 5_000;
+    private static final int FOUR_MATCHED_REWARD = 50_000;
+    private static final int FIVE_MATCHED_REWARD = 1_500_000;
+    private static final int SIX_MATCHED_REWARD = 2_000_000_000;
 
     private final List<Integer> matches;
     private final int price;
