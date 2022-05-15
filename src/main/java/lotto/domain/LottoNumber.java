@@ -16,7 +16,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
@@ -39,7 +39,7 @@ public class LottoNumber {
         if (!(obj instanceof LottoNumber)) {
             return false;
         }
-        return this.number == ((LottoNumber) obj).getNumber();
+        return this.number.equals(((LottoNumber) obj).getNumber());
     }
 
     @Override
