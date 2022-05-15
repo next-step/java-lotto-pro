@@ -21,7 +21,15 @@ public enum Prize {
         return Arrays.stream(values())
                 .filter(it -> it.count == count)
                 .findAny()
-                .orElseThrow(RuntimeException::new);
+                .orElse(NONE);
+    }
+
+    public boolean win() {
+        return !NONE.equals(this);
+    }
+
+    public static long prizeMoney(Aggregator aggregator) {
+        return Arrays.stream(values()).filter(aggregator::has).mapToLong(prize -> prize.money).sum();
     }
 
     @Override

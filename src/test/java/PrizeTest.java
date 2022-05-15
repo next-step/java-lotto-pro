@@ -26,9 +26,37 @@ public class PrizeTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = { 2, 1, 0 })
+    @ValueSource(ints = { 2, 1, 0, -1 })
     void 같은_숫자_3개_미만을_포함하고_있으면_당첨되지_않는다(int count) {
         assertThat(Prize.find(count)).isEqualTo(Prize.NONE);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { Integer.MAX_VALUE, LottoNumbers.SIZE + 1 })
+    void 등수에_적절하지_않은_값이_들어가면_당첨되지_않는다(int count) {
+        assertThat(Prize.find(count)).isEqualTo(Prize.NONE);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "FIRST", "SECOND", "THIRD", "FOURTH" })
+    void 당첨되면_winner_이다(Prize prize) {
+        assertThat(prize.win()).isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "NONE" })
+    void 당첨되지_않으면_winner_가_아니다(Prize prize) {
+        assertThat(prize.win()).isFalse();
+    }
+
+    @Test
+    void 당첨_되면_받을_상금을_계산할_수_있다() {
+        ContainCounts containCounts = new ContainCounts();
+        containCounts.add(new ContainCount(5));
+        containCounts.add(new ContainCount(5));
+        containCounts.add(new ContainCount(5));
+        Aggregator aggregator = new Aggregator(containCounts);
+        assertThat(Prize.prizeMoney(aggregator)).isEqualTo(1500000);
     }
 
 }
