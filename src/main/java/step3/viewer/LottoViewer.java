@@ -3,6 +3,7 @@ package step3.viewer;
 import java.util.Scanner;
 import step3.domain.Lottos;
 import step3.domain.LottosWinningStatistics;
+import step3.domain.Price;
 
 public class LottoViewer {
     private static final String INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
@@ -16,7 +17,7 @@ public class LottoViewer {
     private LottoViewer() {
     }
 
-    public static int inputPrice() {
+    public static Price inputPrice() {
         printMessage(INPUT_PRICE_MESSAGE);
         int price;
         try {
@@ -24,7 +25,7 @@ public class LottoViewer {
         } catch (NumberFormatException e) {
             throw new NumberFormatException(INPUT_PRICE_ERROR_MESSAGE);
         }
-        return price;
+        return new Price(price);
     }
 
     public static String inputWinningNumbers() {
