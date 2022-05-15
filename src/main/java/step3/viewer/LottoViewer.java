@@ -34,7 +34,7 @@ public class LottoViewer {
     }
 
     public static void printLottos(final Lottos lottos) {
-        printFormatMessage(PURCHASE_NOTICE_MESSAGE, lottos.size());
+        printFormatMessage(PURCHASE_NOTICE_MESSAGE, lottos.getLottosCount());
         final String[] lottosString = lottos.toStringArray();
         for (final String lottoString : lottosString) {
             printMessage(lottoString);

@@ -14,6 +14,6 @@ public class LottosTest {
     @ValueSource(ints = {5, 3, 8})
     void has_Input_Size(final int input) {
         final Lottos lottos = new Lottos(input);
-        assertThat(lottos.size()).isEqualTo(input);
+        assertThat(lottos.getLottosCount()).isEqualTo(input);
     }
 }

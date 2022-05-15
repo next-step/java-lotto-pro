@@ -25,14 +25,14 @@ public class LottoTest {
         @DisplayName("총 6개의 숫자를 갖는다.")
         @Test
         void has_Six_Numbers() {
-            assertThat(lotto.size()).isEqualTo(6);
+            assertThat(lotto.getNumbersCount()).isEqualTo(6);
         }
 
         @DisplayName("각 숫자는 1부터 45까지 숫자여야 한다.")
         @Test
         void has_One_to_FourtyFive_Range() {
             for (int i = Lotto.LOTTO_FIRST_INDEX; i < Lotto.LOTTO_SIZE; i++) {
-                final Integer number = lotto.get(i);
+                final Integer number = lotto.getNumberByIndex(i);
                 assertThat(number).isGreaterThanOrEqualTo(1);
                 assertThat(number).isLessThanOrEqualTo(45);
             }
@@ -42,13 +42,13 @@ public class LottoTest {
         @Test
         void cannot_Be_Duplicated() {
             final Set<Integer> lottoSet = createNewSetUsingLotto(lotto);
-            assertThat(lottoSet.size()).isEqualTo(lotto.size());
+            assertThat(lottoSet.size()).isEqualTo(lotto.getNumbersCount());
         }
 
         private Set<Integer> createNewSetUsingLotto(final Lotto lotto) {
             final Set<Integer> lottoSet = new HashSet<>();
-            for(int i= 0; i < lotto.size(); i++){
-                lottoSet.add(lotto.get(i));
+            for(int i = 0; i < lotto.getNumbersCount(); i++){
+                lottoSet.add(lotto.getNumberByIndex(i));
             }
             return lottoSet;
         }

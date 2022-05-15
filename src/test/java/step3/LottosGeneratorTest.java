@@ -18,7 +18,7 @@ public class LottosGeneratorTest {
     @CsvSource(value = {"15000:15", "12000:12", "8000:8"}, delimiter = ':')
     void generate_Per_Price(final int inputPrice, final int size) {
         final Lottos lottos = LottosGenerator.generateLottos(new Price(inputPrice));
-        assertThat(lottos.size()).isEqualTo(size);
+        assertThat(lottos.getLottosCount()).isEqualTo(size);
     }
 
     @DisplayName("입력한 금액이 0 혹은 음수면 IllegalArgumentException을 발생시킨다.")

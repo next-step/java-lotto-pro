@@ -21,7 +21,7 @@ public class LottosWinningStatistics {
 
     public LottosWinningStatistics(final Lottos lottos, final LottoWinningNumbers winningNumbers) {
         this.matches = lottos.match(winningNumbers);
-        this.price = lottos.size() * Lotto.LOTTO_FIXED_PRICE;
+        this.price = lottos.getLottosCount() * Lotto.LOTTO_FIXED_PRICE;
         this.totalReward = calculateTotalReward(matches);
         this.yield = totalReward / (double) price;
     }

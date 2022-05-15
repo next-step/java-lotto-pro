@@ -35,11 +35,11 @@ public class Lotto {
         return candidates;
     }
 
-    public int size() {
+    public int getNumbersCount() {
         return numbers.size();
     }
 
-    public Integer get(int index) {
+    public Integer getNumberByIndex(int index) {
         return numbers.get(index);
     }
 
