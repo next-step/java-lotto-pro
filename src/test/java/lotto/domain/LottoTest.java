@@ -25,7 +25,7 @@ class LottoTest {
         Lotto lotto = new Lotto(LOTTO_NUMBERS);
 
         assertThat(lotto).isNotNull();
-        assertThat(Lotto.create(strategy)).isEqualTo(new Lotto(LOTTO_NUMBERS));
+        assertThat(Lotto.from(strategy)).isEqualTo(new Lotto(LOTTO_NUMBERS));
     }
 
     @Test

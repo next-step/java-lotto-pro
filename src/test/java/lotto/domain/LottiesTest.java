@@ -15,7 +15,7 @@ class LottiesTest {
     void Lotties_생성() {
         LottoNumberStrategy strategy = getLottoNumberStrategy();
 
-        Lotties lotties = new Lotties(Arrays.asList(Lotto.create(strategy)));
+        Lotties lotties = new Lotties(Arrays.asList(Lotto.from(strategy)));
 
         assertThat(lotties).isNotNull();
     }
@@ -31,7 +31,7 @@ class LottiesTest {
     void 로또_개수_조회(){
         LottoNumberStrategy strategy = getLottoNumberStrategy();
 
-        Lotties lotties = new Lotties(Arrays.asList(Lotto.create(strategy)));
+        Lotties lotties = new Lotties(Arrays.asList(Lotto.from(strategy)));
         assertThat(lotties.count()).isOne();
     }
 

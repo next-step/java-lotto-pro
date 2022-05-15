@@ -17,7 +17,7 @@ public class LottoGame {
         List<Lotto> lotties = new ArrayList<>();
 
         while (purchaseAmount.isMoreThanOrEqual(LOTTO_PRICE)) {
-            lotties.add(Lotto.create(LOTTO_NUMBER_STRATEGY));
+            lotties.add(Lotto.from(LOTTO_NUMBER_STRATEGY));
             purchaseAmount = purchaseAmount.minus(LOTTO_PRICE);
         }
 

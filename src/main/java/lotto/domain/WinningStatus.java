@@ -9,7 +9,7 @@ public class WinningStatus {
     private static final long DEFAULT_WINNING_COUNT = 0L;
     private final Map<Rank, Long> value;
 
-    public WinningStatus(List<Rank> ranks) {
+    private WinningStatus(List<Rank> ranks) {
         this.value = ranks.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }

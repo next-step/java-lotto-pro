@@ -24,11 +24,11 @@ public class Lotto {
         }
     }
 
-    public static Lotto create(String winningLotto) {
+    public static Lotto from(String winningLotto) {
         return new Lotto(lottoParser(winningLotto));
     }
 
-    public static Lotto create(LottoNumberStrategy lottoNumberStrategy) {
+    public static Lotto from(LottoNumberStrategy lottoNumberStrategy) {
         return new Lotto(lottoNumberStrategy.create());
     }
 
