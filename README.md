@@ -28,8 +28,8 @@
           | 당첨 로또 번호가 6개가 아닌 경우 |IllegalArgumentException|
           | 당첨 로또 번호가 중복이 있는 경우 |IllegalArgumentException|
           
-    - [ ] 보너스볼 포함하여 등수 계산 추가
-        * [ ] 예외 상황
+    - [X] 보너스볼 포함하여 등수 계산 추가
+        * [X] 예외 상황
 
           |내용   |Exception|
           |---|---|
@@ -42,7 +42,7 @@
 - View
     - [X] 로또 구입금액 입력 Message 
     - [X] 당첨 로또 번호 입력 Message
-    - [ ] 보너스 볼 입력 Message
+    - [X] 보너스 볼 입력 Message
     - [X] 로또 개수 구매 View
     - [X] 로또 번호뷰 View
     - [X] 당첨 통계 View 
