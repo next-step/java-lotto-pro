@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumber {
     private static final int MIN_NUMBER = 1;
@@ -16,6 +19,13 @@ public class LottoNumber {
         if (value < MIN_NUMBER || value > MAX_NUMBER) {
             throw new IllegalArgumentException("유효한 범위의 숫자가 아닙니다.");
         }
+    }
+    protected static List<LottoNumber> parse(String numbers) {
+        return Arrays.stream(numbers.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public int getValue() {

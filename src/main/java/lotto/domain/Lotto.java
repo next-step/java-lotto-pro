@@ -24,8 +24,8 @@ public class Lotto {
         }
     }
 
-    public static Lotto from(String winningLotto) {
-        return new Lotto(lottoParser(winningLotto));
+    public static Lotto from(String numbers) {
+        return new Lotto(LottoNumber.parse(numbers));
     }
 
     public static Lotto from(LottoNumberStrategy lottoNumberStrategy) {

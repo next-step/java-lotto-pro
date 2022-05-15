@@ -23,6 +23,7 @@ public class LottoNumberTest {
                 () -> new LottoNumber(invalidNumber)
         ).withMessageContaining("유효한 범위의 숫자가 아닙니다.");
     }
+
     @ParameterizedTest
     @ValueSource(ints = {1, 44})
     void 숫자_동등성_비교(int validNumber) {
