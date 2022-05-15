@@ -22,12 +22,8 @@ public enum MatchPoint {
         return (long) this.cashPrize * count;
     }
 
-    public static MatchPoint[] findValues() {
-        return new MatchPoint[] {FIFTH, FOURTH, THIRD, SECOND, FIRST};
-    }
-
     public static MatchPoint findMatchPointByMatchPointCount(int count, boolean matchBonus){
-        MatchPoint resultMatchPoint = Arrays.stream(MatchPoint.findValues())
+        MatchPoint resultMatchPoint = Arrays.stream(MatchPoint.values())
                 .filter(matchPoint -> matchPoint.matchPointCount == count)
                 .findFirst()
                 .orElse(MISS);

@@ -5,6 +5,10 @@ import lotto.model.MatchPoint;
 import lotto.model.WinningLotto;
 import lotto.util.MessageUtil;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ResultView {
     private final static String PURCHASE_LOTTOS_COUNT_MESSAGE = "%d개를 구매했습니다.";
     private final static String WINNING_STATISTICS_TITLE_MESSAGE = "당첨 통계";
@@ -34,7 +38,8 @@ public class ResultView {
     }
 
     public void printWinningStatistics(WinningLotto winningLotto) {
-        for (MatchPoint matchPoint : MatchPoint.findValues()) {
+        List<MatchPoint> targetMatchPoints = Arrays.stream(MatchPoint.values()).filter(matchPoint -> matchPoint != MatchPoint.MISS).collect(Collectors.toList());
+        for (MatchPoint matchPoint : targetMatchPoints) {
             message.printMessage(String.format(WINNING_STATISTICS_MESSAGE, matchPoint.getMatchPointCount()));
             printBonusBall(matchPoint);
             message.printlnMessage(String.format(WINNING_STATISTICS_RESULT_MESSAGE, matchPoint.getCashPrize(), winningLotto.findWinningCount(matchPoint)));
