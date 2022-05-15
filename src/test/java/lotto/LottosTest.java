@@ -23,7 +23,7 @@ class LottosTest {
     @Test
     void 로또_콜렉션_생성() {
         // when
-        final Lottos lottos = Lottos.of(Lotto.auto(), Lotto.auto());
+        final Lottos lottos = Lottos.of(Lotto.generate(), Lotto.generate());
 
         // then
         assertThat(lottos).extracting(Lottos::size).isEqualTo(2);
@@ -69,7 +69,7 @@ class LottosTest {
     @Test
     void 로또_갯수_만큼_반복() {
         // given
-        final Lottos lottos = lottos(Lotto.auto(), Lotto.auto(), Lotto.auto(), Lotto.auto());
+        final Lottos lottos = lottos(Lotto.generate(), Lotto.generate(), Lotto.generate(), Lotto.generate());
         AtomicInteger atomicInteger = new AtomicInteger();
 
         // when

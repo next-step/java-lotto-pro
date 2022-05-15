@@ -33,7 +33,7 @@ public class Lottos {
     private static List<Lotto> buyLottoList(final Money purchaseMoney, final LottoType lottoType) {
         if (lottoType.isAuto()) {
             return range(0, purchaseMoney.divide(Lotto.PURCHASE_PRICE).getIntValue())
-                    .mapToObj(value -> Lotto.auto())
+                    .mapToObj(value -> Lotto.generate())
                     .collect(Collectors.toList());
         }
 

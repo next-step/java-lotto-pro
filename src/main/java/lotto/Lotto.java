@@ -28,11 +28,11 @@ public class Lotto {
         this.type = type;
     }
 
-    public static Lotto auto() {
+    public static Lotto generate() {
         return new Lotto();
     }
 
-    public static Lotto manual(final LottoNumbers lottoNumbers) {
+    public static Lotto generate(final LottoNumbers lottoNumbers) {
         return new Lotto(lottoNumbers, MANUAL);
     }
 

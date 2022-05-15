@@ -13,7 +13,7 @@ public class LottoTestUtils {
     }
 
     public static Lotto lotto(int... numbers) {
-        return Lotto.manual(lottoNumbers(numbers));
+        return Lotto.generate(lottoNumbers(numbers));
     }
 
     public static Lottos lottos(Lotto... lottos) {

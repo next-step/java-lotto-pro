@@ -2,7 +2,6 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,14 +13,14 @@ class LottoTest {
     @Test
     void 로또_생성_테스트() {
         // when & then
-        assertThat(Lotto.auto()).isNotNull();
+        assertThat(Lotto.generate()).isNotNull();
     }
 
     @ParameterizedTest
     @MethodSource("compareNumbers")
     void 로또_당첨_번호와_비교하여_갯수가_맞는지(LottoNumbers lottoNumbers, LottoNumbers winNumbers, LottoWinResult winResult) {
         // given
-        final Lotto auto = Lotto.manual(lottoNumbers);
+        final Lotto auto = Lotto.generate(lottoNumbers);
 
         // when & then
         assertThat(auto.confirm(winNumbers)).isEqualByComparingTo(winResult);
