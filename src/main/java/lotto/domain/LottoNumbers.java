@@ -17,6 +17,10 @@ public class LottoNumbers {
         validate();
     }
 
+    public LottoNumbers(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     private void validate() {
         validateDigits(this.lottoNumbers);
         validateUnique(this.lottoNumbers);
@@ -43,5 +47,14 @@ public class LottoNumbers {
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int calculateMatchCount(HashSet<Integer> winningNumberSet) {
+        HashSet<Integer> copyWinningNumber = new HashSet<>(winningNumberSet);
+        for (int lottoNumber : lottoNumbers) {
+            copyWinningNumber.remove(lottoNumber);
+        }
+
+        return LOTTO_DIGITS - copyWinningNumber.size();
     }
 }
