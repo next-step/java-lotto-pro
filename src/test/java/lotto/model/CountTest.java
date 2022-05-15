@@ -71,6 +71,26 @@ class CountTest {
         Count one = Count.of(1);
         Count two = Count.of(2);
 
-        assertThat(one.compareTo(two)).isNegative();
+        assertThat(one).isLessThan(two);
+    }
+
+    @Test
+    @DisplayName("두 카운트를 뺀 결과를 검증")
+    void verifySubtractCount() {
+        Count two = Count.of(2);
+        Count one = Count.of(1);
+
+        assertEquals(1, two.subtract(one));
+    }
+
+    @Test
+    @DisplayName("현재 카운트보다 큰 카운트를 빼면 IllegalStateException이 발생")
+    void subtractBiggerCount() {
+        Count one = Count.of(1);
+        Count two = Count.of(2);
+
+        assertThatIllegalStateException()
+                .isThrownBy(() -> one.subtract(two))
+                .withMessage("현재 횟수보다 큰 값으로 뺄 수 없습니다.");
     }
 }

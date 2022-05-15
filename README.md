@@ -126,4 +126,4 @@
   - [x] 시도 횟수인 Count 객체 추가
   - [ ] 로또 수 입력받는 InputView 분리
   - [ ] 로또 갯수만큼 로또 번호 입력
-  - [ ] 수동으로 생성한 로또 번호들 넘겨 받는 submitManualLottoNumber 메소드 추가
+  - [x] 수동으로 생성한 로또 번호들 넘겨 받는 submitManualLottoNumber 메소드 추가

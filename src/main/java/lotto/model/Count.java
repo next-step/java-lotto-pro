@@ -31,12 +31,15 @@ public class Count implements Comparable<Count> {
         this.count--;
     }
 
-    public boolean isZero() {
-        return this.count == 0;
+    public int subtract(Count otherCount) {
+        if (compareTo(otherCount) < 0) {
+            throw new IllegalStateException("현재 횟수보다 큰 값으로 뺄 수 없습니다.");
+        }
+        return this.count - otherCount.count;
     }
 
-    public int getCount() {
-        return count;
+    public boolean isZero() {
+        return this.count == 0;
     }
 
     @Override
