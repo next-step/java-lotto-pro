@@ -14,7 +14,6 @@ public enum LottoReward {
     FIVE(1_500_000),
     SIX(2_000_000_000);
 
-
     private final int reward;
 
     private LottoReward(int reward) {
@@ -27,7 +26,7 @@ public enum LottoReward {
 
     public static final Map<Integer, String> numberToLottoReward =
         Collections.unmodifiableMap(Stream.of(values())
-            .collect(Collectors.toMap(LottoReward::ordinal,LottoReward::name)));
+            .collect(Collectors.toMap(LottoReward::ordinal, LottoReward::name)));
 
 
 }

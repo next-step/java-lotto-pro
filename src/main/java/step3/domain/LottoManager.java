@@ -19,11 +19,9 @@ public class LottoManager {
 
 
     public LottoManager() {
-
     }
 
     public LottoManager(List<LottoTicket> lottoTickets) {
-
         this.lottoTickets = lottoTickets;
     }
 
