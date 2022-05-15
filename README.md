@@ -261,5 +261,5 @@ public enum Rank {
 
 - [x] 이전 리뷰 내용 반영
 - [x] ManualLottoes 구현
-- [ ] InputView/ResultView 수정
+- [x] InputView/ResultView 수정
 - [ ] LottoExchange/LottoMachine 수정
