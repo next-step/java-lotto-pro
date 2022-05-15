@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import lotto.dto.LottoNumber;
+
 public class Numbers {
 	private final String VALID_DUPLICATION = "중복된 숫자가 존재합니다.";
 
@@ -19,6 +21,10 @@ public class Numbers {
 		return (int)numbers.stream()
 						.filter(comparisonNumbers::isContainNumber)
 						.count();
+	}
+
+	public LottoNumber getNumbers() {
+		return LottoNumber.convertTo(numbers);
 	}
 
 	private boolean isContainNumber(Number number) {

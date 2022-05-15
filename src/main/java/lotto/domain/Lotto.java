@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import lotto.dto.LottoNumber;
+
 public class Lotto {
 	public static final int LOTTO_SIZE = 6;
 	private static final String INVALID_SIZE = "로또 번호는 6개를 입력해야 합니다.";
@@ -35,6 +37,10 @@ public class Lotto {
 		int matchCount = numbers.match(winningLotto.numbers);
 
 		return Rank.matchPrize(matchCount);
+	}
+
+	public LottoNumber getLotto() {
+		return numbers.getNumbers();
 	}
 
 	private static void validNumber(String number) {
