@@ -11,6 +11,8 @@ import static java.util.Objects.requireNonNull;
 
 public class ManualLottoes implements Purchasable {
 
+    private static final ManualLottoes EMPTY = new ManualLottoes(Collections.emptyList());
+
     private final List<Lotto> lottoes;
     private final Money totalMoney;
 
@@ -20,11 +22,11 @@ public class ManualLottoes implements Purchasable {
     }
 
     public static ManualLottoes of(List<Lotto> lottoes) {
-        return new ManualLottoes(lottoes);
+        return CollectionUtils.isEmpty(lottoes) ? EMPTY : new ManualLottoes(lottoes);
     }
 
     public static ManualLottoes empty() {
-        return of(Collections.emptyList());
+        return EMPTY;
     }
 
     @Override
