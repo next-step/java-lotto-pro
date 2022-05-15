@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static lotto.domain.LottoConstant.LOTTO_MINIMUM_MATCHING_COUNT;
@@ -31,8 +32,8 @@ public class OutputView {
     }
 
     public static void showLottoProfit(LottoResult result, Money money) {
-        double profit = result.calculateWinningMoney() / money.getAvailableLottosForPurchase();
-        OutputView.printMessage("총 수익률은 %.2f입니다.", profit);
+        BigDecimal profit = result.calculateWinningProfit(money);
+        OutputView.printMessage("총 수익률은 " + profit + "입니다.");
     }
 
     public static void printMessage(String message) {

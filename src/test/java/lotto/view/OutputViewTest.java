@@ -27,16 +27,4 @@ class OutputViewTest {
         LottoResult result = game.matchLottoNumbers(purchasedLotto, new Lotto("1, 2, 3, 4, 5, 6"));
         OutputView.showLottoStatistics(result);
     }
-
-
-    @Test
-    public void 로또_총_수익률_출력하기() {
-        Money money = new Money(5000);
-        List<Lotto> lottoList = Arrays.asList(
-                new Lotto(1, 2, 3, 4, 5, 6));
-        LottoGame game = new LottoGame();
-        PurchasedLotto purchasedLotto = new PurchasedLotto(lottoList);
-        LottoResult result = game.matchLottoNumbers(purchasedLotto, new Lotto("1, 2, 3, 4, 5, 6"));
-        OutputView.showLottoProfit(result, money);
-    }
 }

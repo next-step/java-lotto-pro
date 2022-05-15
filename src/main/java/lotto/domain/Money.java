@@ -25,6 +25,10 @@ public class Money {
         return money < LOTTO_PRICE;
     }
 
+    public long getMoney() {
+        return money;
+    }
+
     public long getAvailableLottosForPurchase() {
         return money / LOTTO_PRICE;
     }
