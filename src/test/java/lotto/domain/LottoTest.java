@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     @Test
-    @DisplayName("Lotto는 6개의 LottoNumber로 이루어져있다.")
+    @DisplayName("Lotto는 6개의 LottoNumber로 구성")
     void Lotto_정상_테스트(){
         List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = new Lotto(numbers);
@@ -20,7 +20,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("Lotto는 6개의 LottoNumber로 이루어져있다 : 6개 초과시 오류")
+    @DisplayName("Lotto는 6개의 LottoNumber로 구성: 6개 초과시 오류")
     void Lotto_6개초과_테스트(){
         assertThatThrownBy(() -> {
             List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
@@ -29,7 +29,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("Lotto는 6개의 LottoNumber로 이루어져있다 : 6개 미달시 오류")
+    @DisplayName("Lotto는 6개의 LottoNumber로 구성: 6개 미달시 오류")
     void Lotto_6개미달_테스트(){
         assertThatThrownBy(() -> {
             List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
@@ -39,7 +39,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("Lotto의 LottoNumber List는 중복이 불가하다.")
+    @DisplayName("Lotto의 LottoNumber List는 중복 불가")
     void Lotto_중복불가_테스트(){
         assertThatThrownBy(() -> {
             List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 5));
@@ -48,7 +48,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("Lotto의 LottoNumber List는 정렬되어있다.")
+    @DisplayName("Lotto의 LottoNumber List는 오름차순 정렬")
     void Lotto_정렬_테스트(){
         List<Integer> numbers = new ArrayList<>(Arrays.asList(6, 5, 4, 3, 2, 1));
         Lotto lotto = new Lotto(numbers);

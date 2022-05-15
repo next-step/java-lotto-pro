@@ -16,7 +16,7 @@ public class RandomLottoNumbersGeneratorTest {
     }
 
     @Test
-    @DisplayName("RandomLottoNumbersGenerator의 BaseNumber는 1~45임")
+    @DisplayName("RandomLottoNumbersGenerator의 BaseNumber는 1~45로 구성")
     void RandomLottoNumbersGenerator_baseNumbers(){
         RandomLottoNumbersGenerator.generate();
         List<Integer> baseLottoNumbers = RandomLottoNumbersGenerator.getBaseLottoNumbers();

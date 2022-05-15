@@ -18,7 +18,7 @@ public class LottoNumberTest {
 
     @ParameterizedTest(name="LottoNumber 비정상 생성: {0}")
     @ValueSource(ints = {0,46})
-    void LottoNumber_Invalid_생성(int num){
+    void LottoNumber_비정상_생성(int num){
         assertThatThrownBy(() -> {
             LottoNumber lottoNumber = new LottoNumber(num);
         }).isInstanceOf(IllegalArgumentException.class);
