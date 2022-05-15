@@ -8,12 +8,6 @@ public class PositiveNumber {
 
     private final long value;
 
-    public PositiveNumber(int value) {
-        checkPositiveNumber(value);
-
-        this.value = value;
-    }
-
     public PositiveNumber(long value) {
         checkPositiveNumber(value);
         this.value = value;
