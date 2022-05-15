@@ -25,7 +25,7 @@ public class HitTest {
     @ParameterizedTest
     @MethodSource("provideHitCountAndExpectedHit")
     void valueOfTest(final int hitCount, Hit expectedHit) {
-        assertThat(Hit.valueOf(hitCount)).isEqualTo(expectedHit);
+        assertThat(Hit.valueOf(hitCount, false)).isEqualTo(expectedHit);
     }
 
     private static Stream<Arguments> provideHitCountAndExpectedHit() {
@@ -62,7 +62,7 @@ public class HitTest {
     @DisplayName("당첨금이 있는 값만 반환한다.")
     @Test
     void getPrizeMoneyListTest() {
-        assertThat(Hit.winningList()).isEqualTo(new Hit[] {THREE,FOUR,FIVE,ALL});
+        assertThat(Hit.winningList()).isEqualTo(new Hit[] {THREE,FOUR,FIVE,FIVE_BONUS,ALL});
     }
 
     private static Stream<Arguments> provideHitAndCountAndPrizeMoney() {
