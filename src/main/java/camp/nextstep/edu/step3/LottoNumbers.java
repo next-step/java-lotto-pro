@@ -21,6 +21,7 @@ public class LottoNumbers {
 
     public final List<LottoNumber> extract(Consumer<List<LottoNumber>> consumer) {
         consumer.accept(numbers);
+        validation();
         return Collections.unmodifiableList(numbers.subList(min, max));
     }
 
@@ -30,6 +31,12 @@ public class LottoNumbers {
 
     public boolean hasRange(final LottoNumber minNumber, final LottoNumber maxNumber) {
         return isMinNumber(minNumber) && isMaxNumber(maxNumber);
+    }
+
+    private void validation() {
+        if (!isSize(maxNumber)) {
+            throw new IllegalStateException("LottoNumbers is invalid");
+        }
     }
 
     private boolean isMinNumber(final LottoNumber min) {
