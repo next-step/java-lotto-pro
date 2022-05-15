@@ -10,7 +10,7 @@ public class LottoMain {
     }
 
     private static LottoMachine purchase(final InputView inputView, final ResultView resultView) {
-        inputView.purchase();
+        inputView.inputPurchase();
         final LottoMachine lottoMachine = new LottoMachine(inputView.getPurchaseMoneyAmount());
         resultView.purchase(lottoMachine.round());
         return lottoMachine;
@@ -18,7 +18,7 @@ public class LottoMain {
 
     private static void drawingOfLots(final LottoMachine lottoMachine, final InputView inputView,
                                       final ResultView resultView) {
-        inputView.drawingOfLots();
+        inputView.inputDrawingOfLots();
         lottoMachine.end(inputView.getWinningNumber());
         resultView.drawingOfLots(lottoMachine.round());
     }

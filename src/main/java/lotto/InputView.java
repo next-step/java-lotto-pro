@@ -11,7 +11,7 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public void purchase() {
+    public void inputPurchase() {
         System.out.println("구입금액을 입력해 주세요.");
         this.purchaseMoneyAmount = scanner.nextLine();
     }
@@ -20,7 +20,7 @@ public class InputView {
         return purchaseMoneyAmount;
     }
 
-    public void drawingOfLots() {
+    public void inputDrawingOfLots() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         this.winningNumber = scanner.nextLine();
         System.out.println();
