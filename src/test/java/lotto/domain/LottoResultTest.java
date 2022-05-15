@@ -33,19 +33,5 @@ public class LottoResultTest {
         assertThat(result.winningCountByRank(LottoRank.SECOND)).isEqualTo(1);
         assertThat(result.winningCountByRank(LottoRank.THIRD)).isEqualTo(1);
         assertThat(result.winningCountByRank(LottoRank.FOURTH)).isEqualTo(1);
-
-    }
-
-    @Test
-    @DisplayName("LottoResult 수익률 테스트")
-    void LottoResult_수익률_테스트(){
-        System.out.println();
-        assertThat(result.getProfitRate()).isEqualTo(
-                (double) (LottoRank.FIRST.getPrice()
-                        + LottoRank.SECOND.getPrice()
-                        + LottoRank.THIRD.getPrice()
-                        + LottoRank.FOURTH.getPrice()) / (lottos.size() * 1000)
-        );
-
     }
 }

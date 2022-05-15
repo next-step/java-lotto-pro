@@ -31,11 +31,15 @@ public class Money {
         }
     }
 
-    public int getAmount() {
-        return amount;
+    public int lottoCountToBuy() {
+        return amount / LOTTO_PRICE;
     }
 
-    public int lottoCountToBuy() {
-        return amount/ LOTTO_PRICE;
+    public double calculateProfit(int changedAmount) {
+        return (double) changedAmount / (lottoCountToBuy() * LOTTO_PRICE);
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }

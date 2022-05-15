@@ -7,8 +7,6 @@ import lotto.domain.Money;
 import lotto.utils.CustomParseUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import java.io.IOException;
 import java.util.List;
 
 public class LottoController {
@@ -19,7 +17,7 @@ public class LottoController {
 
         Lotto winningLotto = generateWinningLotto();
         LottoResult result = new LottoResult(lottos, winningLotto);
-        OutputView.printLottoResult(result);
+        OutputView.printLottoResult(result, money.calculateProfit(result.winningPrice()));
     }
 
     private static Lottos purchaseLottos(int count) {

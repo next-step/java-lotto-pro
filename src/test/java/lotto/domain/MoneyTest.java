@@ -39,4 +39,11 @@ public class MoneyTest {
         Money money = new Money(amount);
         assertThat(money.lottoCountToBuy()).isEqualTo(count);
     }
+
+    @ParameterizedTest(name="수익률 계산")
+    @CsvSource(value = {"100000:5000:0.05", "100500:5000:0.05"}, delimiter = ':')
+    void Money_수익률_계산(int initialMoney, int winningPrice, double profit){
+        Money money = new Money(initialMoney);
+        assertThat(money.calculateProfit(winningPrice)).isEqualTo(profit);
+    }
 }

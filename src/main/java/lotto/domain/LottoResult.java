@@ -6,13 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    public static final int NUMBER_ZERO = 0;
     private Map<LottoRank, Integer> winningCount = new HashMap<>();
-    double profitRate;
 
     public LottoResult(Lottos lottos, Lotto winningLotto) {
         updateWinningCount(lottos, winningLotto);
-        updateProfitRate(lottos.size());
     }
 
     private void updateWinningCount(Lottos lottos, Lotto winningLotto) {
@@ -22,27 +19,15 @@ public class LottoResult {
         }
     }
 
-    private void updateProfitRate(int lottoCount) {
-        if (lottoCount == NUMBER_ZERO) {
-            profitRate = 0;
-            return;
-        }
-        profitRate = (double) calculateTotalPrice() / (lottoCount * Money.LOTTO_PRICE);
-    }
-
-    private int calculateTotalPrice() {
-        int price = 0;
+    public int winningPrice() {
+        int winningPrice = 0;
         for (LottoRank rank : LottoRank.values()) {
-            price += winningCount.getOrDefault(rank, 0) * rank.getPrice();
+            winningPrice += winningCount.getOrDefault(rank, 0) * rank.getPrice();
         }
-        return price;
+        return winningPrice;
     }
 
     public int winningCountByRank(LottoRank rank) {
         return winningCount.getOrDefault(rank, 0);
-    }
-
-    public double getProfitRate() {
-        return profitRate;
     }
 }

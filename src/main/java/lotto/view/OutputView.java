@@ -4,6 +4,7 @@ import lotto.constant.ViewMessageConst;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.enums.LottoRank;
 
 public class OutputView {
@@ -14,11 +15,11 @@ public class OutputView {
         }
     }
 
-    public static void printLottoResult(LottoResult result) {
+    public static void printLottoResult(LottoResult result, double profit) {
         System.out.println(ViewMessageConst.OUTPUT_MESSAGE_WINNING_STATISTIC);
         System.out.println(ViewMessageConst.OUTPUT_MESSAGE_DIVIDE_LINE);
         printWinningCount(result);
-        printProfitRate(result);
+        printProfitRate(profit);
     }
 
     private static void printWinningCount(LottoResult result) {
@@ -29,7 +30,7 @@ public class OutputView {
         }
     }
 
-    private static void printProfitRate(LottoResult result) {
-        System.out.println(String.format(ViewMessageConst.OUTPUT_MESSAGE_PROFIT_RESULT, result.getProfitRate()));
+    private static void printProfitRate(double profit) {
+        System.out.println(String.format(ViewMessageConst.OUTPUT_MESSAGE_PROFIT_RESULT, profit));
     }
 }
