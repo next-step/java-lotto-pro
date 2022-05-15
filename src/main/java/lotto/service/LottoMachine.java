@@ -27,7 +27,7 @@ public class LottoMachine {
 
         LottoStatics lottoStatics = new LottoStatics(lottoNumbers, winNumbers, bonusNumber);
         LottoPrizeRanks lottoPrizeRanks = lottoStatics.collect();
-        ResultView.statics(lottoPrizeRanks);
+        ResultView.showStatics(lottoPrizeRanks);
         ResultView.showRatio(calculateRatio(money, lottoPrizeRanks));
     }
 
