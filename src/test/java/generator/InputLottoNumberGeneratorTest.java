@@ -17,12 +17,12 @@ class InputLottoNumberGeneratorTest {
 
     static List<LottoNumber> initLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
-        lottoNumbers.add(new LottoNumber(7));
-        lottoNumbers.add(new LottoNumber(9));
-        lottoNumbers.add(new LottoNumber(30));
+        lottoNumbers.add(LottoNumber.valueOf(2));
+        lottoNumbers.add(LottoNumber.valueOf(4));
+        lottoNumbers.add(LottoNumber.valueOf(5));
+        lottoNumbers.add(LottoNumber.valueOf(7));
+        lottoNumbers.add(LottoNumber.valueOf(9));
+        lottoNumbers.add(LottoNumber.valueOf(30));
         return lottoNumbers;
     }
 

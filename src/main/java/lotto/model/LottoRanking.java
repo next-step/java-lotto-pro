@@ -3,11 +3,11 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum LottoRanking {
-    FIFTH(3, "3개 일치", Money.from(5000)),
-    FORTH(4, "4개 일치", Money.from(50000)),
-    THIRD(5, "5개 일치", Money.from(1500000)),
-    FIRST(6, "6개 일치", Money.from(2000000000)),
-    MISS(0, "꽝", Money.from(0));
+    FIFTH(3, "3개 일치", Money.valueOf(5000)),
+    FORTH(4, "4개 일치", Money.valueOf(50000)),
+    THIRD(5, "5개 일치", Money.valueOf(1500000)),
+    FIRST(6, "6개 일치", Money.valueOf(2000000000)),
+    MISS(0, "꽝", Money.valueOf(0));
 
     private static final int COUNT_OF_MATCH_MAX_NUM = 6;
     private static final int COUNT_OF_MATCH_MIN_NUM = 0;

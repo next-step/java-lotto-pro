@@ -29,6 +29,6 @@ class LottoStatisticsTest {
         map.put(LottoRanking.FIFTH, 2);
         map.put(LottoRanking.THIRD, 1);
         LottoStatistics lottoStatistics = new LottoStatistics(map);
-        assertThat(lottoStatistics.yield(Money.from(input))).isEqualTo(expect);
+        assertThat(lottoStatistics.yield(Money.valueOf(input))).isEqualTo(expect);
     }
 }

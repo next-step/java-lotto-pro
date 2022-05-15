@@ -15,7 +15,7 @@ public class Money {
         this.money = money;
     }
 
-    public static Money from(int money) {
+    public static Money valueOf(int money) {
         return new Money(money);
     }
 
@@ -24,11 +24,11 @@ public class Money {
     }
 
     public Money multiply(int count) {
-        return Money.from(Math.multiplyExact(this.money, count));
+        return Money.valueOf(Math.multiplyExact(this.money, count));
     }
 
     public Money add(Money money) {
-        return Money.from(Math.addExact(this.money, money.money));
+        return Money.valueOf(Math.addExact(this.money, money.money));
     }
 
     public BigDecimal divideBy(Money money) {

@@ -20,7 +20,7 @@ public class LottoStatistics {
     }
 
     private Money sumTotalPrize() {
-        Money totalPrize = Money.from(ZERO_NUM);
+        Money totalPrize = Money.valueOf(ZERO_NUM);
         for (Map.Entry<LottoRanking, Integer> entry : lottoStatistics.entrySet()) {
             LottoRanking lottoRanking = entry.getKey();
             Money prize = lottoRanking.money()

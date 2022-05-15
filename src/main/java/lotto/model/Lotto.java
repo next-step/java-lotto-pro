@@ -18,10 +18,10 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    public static Lotto from(List<Integer> lottoNumbers) {
+    public static Lotto valueOf(List<Integer> lottoNumbers) {
         List<LottoNumber> lotto = new ArrayList<>();
         for (int lottoNumber : lottoNumbers) {
-            lotto.add(new LottoNumber(lottoNumber));
+            lotto.add(LottoNumber.valueOf(lottoNumber));
         }
         return new Lotto(lotto);
     }

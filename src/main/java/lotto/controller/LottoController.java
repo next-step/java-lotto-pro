@@ -19,7 +19,7 @@ public class LottoController {
 
     public void start() {
         InputView.printPurchaseGuide();
-        Lottos lottos = Lottos.buy(Money.from(StringToIntegerConverter.parseInt(scanner.nextLine())));
+        Lottos lottos = Lottos.buy(Money.valueOf(StringToIntegerConverter.parseInt(scanner.nextLine())));
         ResultView.printPurchasedLottos(lottos);
         InputView.printWinningLottoInputGuide();
         Lotto winningLotto = Lotto.draw(new InputLottoNumberGenerator(scanner.nextLine()));

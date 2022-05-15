@@ -14,7 +14,7 @@ public class InputLottoNumberGenerator implements LottoNumberGenerator {
         for (String number : numbers) {
             number = number.trim();
             int lottoNumber = StringToIntegerConverter.parseInt(number);
-            lottoNumbers.add(new LottoNumber(lottoNumber));
+            lottoNumbers.add(LottoNumber.valueOf(lottoNumber));
         }
     }
 

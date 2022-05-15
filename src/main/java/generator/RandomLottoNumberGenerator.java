@@ -12,7 +12,7 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     private static List<LottoNumber> initLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = LottoNumber.LOTTO_MIN_NUMBER; i <= LottoNumber.LOTTO_MAX_NUMBER; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.valueOf(i));
         }
         return lottoNumbers;
     }
