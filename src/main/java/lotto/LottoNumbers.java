@@ -15,8 +15,17 @@ public class LottoNumbers {
         for (int i = 0; i < LOTTO_NUMBER_MAX_VALUE; i++) {
             randomNumbers.add(i+1);
         }
-        shuffleNumbers(randomNumbers);
-        this.numbers = sortedLottoNumber(divideNumberList(randomNumbers));
+        this.numbers = issueLottoNumber(randomNumbers);
+    }
+
+    public LottoNumbers(List<Integer> numbers) {
+        shuffleNumbers(numbers);
+        this.numbers = issueLottoNumber(numbers);
+    }
+
+    private List<Integer> issueLottoNumber(List<Integer> numbers) {
+        shuffleNumbers(numbers);
+        return sortedLottoNumber(divideNumberList(numbers));
     }
 
     private void shuffleNumbers(List<Integer> numbers) {
@@ -25,10 +34,6 @@ public class LottoNumbers {
 
     private List<Integer> divideNumberList(List<Integer> numbers) {
         return numbers.subList(0, LOTTO_NUMBER_SIZE_VALUE);
-    }
-
-    public LottoNumbers(List<Integer> numbers) {
-        this.numbers = numbers;
     }
 
     public int lottoNumberCount() {

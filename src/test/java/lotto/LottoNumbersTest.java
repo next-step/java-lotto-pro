@@ -19,7 +19,7 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호를 오름차순 정렬한다.")
     void 테스트_로또번호_오름차순() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 3, 5, 4, 2, 6));
         assertThat(lottoNumbers.equals(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(true);
     }
 
