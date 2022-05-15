@@ -30,6 +30,10 @@ public class LottoResult {
     }
 
     private void updateProfitRate(int lottoCount) {
+        if(lottoCount == 0){
+            profitRate = 0;
+            return;
+        }
         profitRate = (double) totalPrice / (lottoCount * Money.LOTTO_PRICE);
     }
 
