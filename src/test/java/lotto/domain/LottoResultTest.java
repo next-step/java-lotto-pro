@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.enums.LottoWinningType;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,10 +29,10 @@ public class LottoResultTest {
     @Test
     @DisplayName("LottoResult 당첨 개수 테스트")
     void LottoResult_당첨_개수_테스트(){
-        assertThat(result.getWinningCountByWinningType(LottoWinningType.FIRST)).isEqualTo(1);
-        assertThat(result.getWinningCountByWinningType(LottoWinningType.SECOND)).isEqualTo(1);
-        assertThat(result.getWinningCountByWinningType(LottoWinningType.THIRD)).isEqualTo(1);
-        assertThat(result.getWinningCountByWinningType(LottoWinningType.FOURTH)).isEqualTo(1);
+        assertThat(result.winningCountByWinningType(LottoWinningType.FIRST)).isEqualTo(1);
+        assertThat(result.winningCountByWinningType(LottoWinningType.SECOND)).isEqualTo(1);
+        assertThat(result.winningCountByWinningType(LottoWinningType.THIRD)).isEqualTo(1);
+        assertThat(result.winningCountByWinningType(LottoWinningType.FOURTH)).isEqualTo(1);
 
     }
 

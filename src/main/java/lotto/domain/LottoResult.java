@@ -33,7 +33,7 @@ public class LottoResult {
         profitRate = (double) totalPrice / (lottoCount * Money.LOTTO_PRICE);
     }
 
-    public int getWinningCountByWinningType(LottoWinningType type) {
+    public int winningCountByWinningType(LottoWinningType type) {
         return winningCount.getOrDefault(type, 0);
     }
 
