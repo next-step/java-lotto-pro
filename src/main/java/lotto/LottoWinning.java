@@ -1,4 +1,4 @@
-package lotto.auto;
+package lotto;
 
 import java.util.Objects;
 
