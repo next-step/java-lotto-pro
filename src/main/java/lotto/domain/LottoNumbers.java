@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import lotto.util.CollectionsUtil;
+import utils.CollectionsUtil;
 
 public class LottoNumbers {
     private static final int MAX_LOTTO_NUMBER_QTY = 6;
