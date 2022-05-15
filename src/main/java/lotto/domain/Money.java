@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.cons.ErrorMessageConst;
+
 public class Money {
     public static final int LOTTO_PRICE = 1000;
     private int amount;
@@ -10,7 +12,7 @@ public class Money {
 
     private int validateMoney(int amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("[Error] 음수는 불가합니다.");
+            throw new IllegalArgumentException(ErrorMessageConst.ERROR_INVALID_NEGATIVE_INTEGER);
         }
         return amount;
     }

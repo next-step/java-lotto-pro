@@ -30,7 +30,7 @@ public class LottoResult {
     }
 
     private void updateProfitRate(int lottoCount) {
-        profitRate = (double) totalPrice / (lottoCount * 1000);
+        profitRate = (double) totalPrice / (lottoCount * Money.LOTTO_PRICE);
     }
 
     public int getWinningCountByWinningType(LottoWinningType type) {
