@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static lotto.constants.LottoConstants.LOTTO_NUMBER_SIZE;
+import static lotto.constants.LottoConstants.LOTTO_PRICE;
 import static lotto.constants.LottoConstants.MAX;
 import static lotto.constants.LottoConstants.MIN;
 import static lotto.constants.LottoConstants.START_INDEX;
@@ -21,11 +22,11 @@ public class LottoMachine {
 
     public static List<Integer> generate() {
         Collections.shuffle(LOTTO_NUMBERS);
-        return Collections.unmodifiableList(LOTTO_NUMBERS.subList(START_INDEX, LOTTO_NUMBER_SIZE));
+        return new ArrayList<>(LOTTO_NUMBERS.subList(START_INDEX, LOTTO_NUMBER_SIZE));
     }
 
     public static Lottos createLottos(int price) {
-        int count = price / LottoShop.LOTTO_PRICE;
+        int count = price / LOTTO_PRICE;
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
