@@ -38,6 +38,17 @@ public class LottoGame {
         generateGameResult();
     }
 
+    LottoGame(List<LottoNumbers> ticketNumbers, String winnerNumbers) {
+        this();
+
+        this.purchasePrice = ticketNumbers.size() * TICKET_UNIT_PRICE;
+
+        this.ticketNumbers = ticketNumbers;
+
+        this.winnerNumbers = new LottoNumbers(winnerNumbers);
+        generateGameResult();
+    }
+
     private void generateGameResult() {
         this.scoreMap = new HashMap<>();
         for (LottoNumbers ticket : this.ticketNumbers) {
@@ -53,18 +64,6 @@ public class LottoGame {
         }
 
         this.scoreMap.put(score, 1);
-    }
-
-
-    LottoGame(List<LottoNumbers> ticketNumbers, String winnerNumbers) {
-        this();
-        
-        this.purchasePrice = ticketNumbers.size() * TICKET_UNIT_PRICE;
-
-        this.ticketNumbers = ticketNumbers;
-
-        this.winnerNumbers = new LottoNumbers(winnerNumbers);
-        generateGameResult();
     }
 
     public int getTicketCount() {
