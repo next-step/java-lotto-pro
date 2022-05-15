@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,7 +37,7 @@ public class LottoPurchase {
         return this.lottoNumbers.size();
     }
 
-    public int issueLottoPurchasePrice() {
+    public int issuedLottoPurchasePrice() {
         return issuedLottoCount() * LOTTO_PURCHASE_PRICE_VALUE;
     }
 

@@ -13,7 +13,7 @@ public class LottoWinning {
 
     public LottoWinning(LottoPurchase lottoPurchase, List<Integer> answerList) {
         this.lottoPurchase = lottoPurchase;
-        this.purchasePrice = this.lottoPurchase.issueLottoPurchasePrice();
+        this.purchasePrice = this.lottoPurchase.issuedLottoPurchasePrice();
         this.winningPrice = this.lottoPurchase.calculateWinningLottoTotalPrice(answerList);
         this.profit = calculateProfit(this.winningPrice, this.purchasePrice);
     }
