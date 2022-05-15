@@ -7,6 +7,7 @@ public class LottoNumber {
     private final static int LOTTO_NUMBER_SIZE_VALUE = 6;
     private final static int LOTTO_NUMBER_MIN_VALUE = 1;
     private final static int LOTTO_NUMBER_MAX_VALUE = 45;
+    public static final String ERROR_LOTTO_NUMBER_OUT_OF_RANGE_MESSAGE = "[ERROR] 로또 번호는 1 ~ 45 사이의 숫자로 구성되어야합니다.";
 
     private final List<Integer> numbers;
 
@@ -19,13 +20,20 @@ public class LottoNumber {
     }
 
     public LottoNumber(List<Integer> numbers) {
-        shuffleNumbers(numbers);
         this.numbers = issueLottoNumber(numbers);
     }
 
     private List<Integer> issueLottoNumber(List<Integer> numbers) {
+        if (isValidRangeLottoNumber()) {
+           throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_OUT_OF_RANGE_MESSAGE);
+        }
         shuffleNumbers(numbers);
         return sortedLottoNumber(divideNumberList(numbers));
+    }
+
+    private boolean isValidRangeLottoNumber() {
+        return this.numbers.stream()
+                .anyMatch(number -> number < LOTTO_NUMBER_MIN_VALUE || number > LOTTO_NUMBER_MAX_VALUE);
     }
 
     private void shuffleNumbers(List<Integer> numbers) {
