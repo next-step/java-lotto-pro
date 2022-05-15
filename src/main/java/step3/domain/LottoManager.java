@@ -23,7 +23,7 @@ public class LottoManager {
     }
 
 
-    public int buyTicket(String money) {
+    public int buyRandomTicket(String money) {
         if (!validMoney(money)) {
             throw new IllegalArgumentException("돈은 " + LOTTO_PRICE + "이상 입력하셔야합니다");
         }

@@ -47,7 +47,7 @@ public class LottoManagerTest {
     @ValueSource(strings = {"1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000", "12000"})
     @DisplayName("금액에 맞춰 로또를 생성한다")
     public void createTicketByMoney(String money) {
-        assertThat(lottoManager.buyTicket(money)).isEqualTo(Integer.parseInt(money) / LOTTO_PRICE);
+        assertThat(lottoManager.buyRandomTicket(money)).isEqualTo(Integer.parseInt(money) / LOTTO_PRICE);
     }
 
     private LottoManager initTestManager() {

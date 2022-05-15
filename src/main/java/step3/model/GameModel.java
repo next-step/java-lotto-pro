@@ -39,7 +39,7 @@ public class GameModel {
 
     public boolean buyTicket(String money) {
         try {
-            lottoManager.buyTicket(money);
+            lottoManager.buyRandomTicket(money);
         } catch (IllegalArgumentException e) {
             return INPUT_IS_NOT_VALID;
         }
