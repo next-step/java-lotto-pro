@@ -5,6 +5,7 @@ import static step3.constant.LottoInfoConstant.LOTTO_ELEMENTS_SIZE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ public class LottoTicket {
         for (int i = 0; i < LOTTO_ELEMENTS_SIZE; i++) {
             lottoElements.add(new LottoElement(lottoNumbers.get(i)));
         }
+        Collections.sort(lottoElements);
     }
 
     public LottoTicket(String lottoElementsSource) {

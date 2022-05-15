@@ -5,7 +5,7 @@ import static step3.constant.LottoInfoConstant.LOTTO_MIN;
 
 import java.util.Objects;
 
-public class LottoElement {
+public class LottoElement implements Comparable<LottoElement> {
 
     private final String element;
 
@@ -52,5 +52,19 @@ public class LottoElement {
     @Override
     public int hashCode() {
         return Objects.hash(element);
+    }
+
+    @Override
+    public int compareTo(LottoElement o) {
+        int source = Integer.parseInt(element);
+        int target = Integer.parseInt(o.getElement());
+        if (target < source) {
+            return 1;
+        } else if (target > source) {
+            return -1;
+        } else {
+            return 0;
+        }
+
     }
 }
