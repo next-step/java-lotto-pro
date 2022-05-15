@@ -44,8 +44,8 @@ class LottoExchangerTest {
         assertThatThrownBy(() -> {
             lottoExchanger.exchange(Money.of(999), ManualLottoes.of(Arrays.asList(Lotto.of(1, 2, 3, 4, 5, 6))));
         })
-                .isInstanceOf(NotEnoughMoneyException.class)
-                .hasMessageContaining("Money가 충분하지 않습니다.");
+        .isInstanceOf(NotEnoughMoneyException.class)
+        .hasMessageContaining("Money가 충분하지 않습니다.");
     }
 
     @DisplayName("Money를 지불하여 n개의 Lotto를 구매")
