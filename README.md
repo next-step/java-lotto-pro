@@ -33,7 +33,8 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
 ### Prize - 당첨 상세정보
 ### LottoNumber - 로또 번호
 ### LottoNumbers - 로또 번호 여러개 대응
-### ContainCount - 로또 번호가 포함하고 있는 당첨번호 총 개수 
+### ContainCount - 로또 번호가 포함하고 있는 당첨번호 총 개수
+### ContainCounts - ContainCount 여러개 대응
 ### Vendor - 구매, 총 구매량에 대한 통계, 수익률 처리
 ### Aggregator - Vendor 에게 위임받아 집계 관련된 기능 처리 수행  
 
@@ -58,6 +59,9 @@ ContainCount
 - [X] 값 객체이다.
 
 ContainCounts
+- [X] ContainCount 를 추가할 수 있다.
+- [X] 포함한 ContainCount 의 개수를 알려줄 수 있다.
+- [X] Iterable 한 객체이다.
 
 Lottery
 - [X] 당첨 번호와 로또 번호를 비교할 수 있다. 여러 개도 가능하다.
