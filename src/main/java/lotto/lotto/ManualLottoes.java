@@ -2,8 +2,12 @@ package lotto.lotto;
 
 import lotto.Purchasable;
 import lotto.money.Money;
+import lotto.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 public class ManualLottoes implements Purchasable {
 
@@ -11,16 +15,16 @@ public class ManualLottoes implements Purchasable {
     private final Money totalMoney;
 
     private ManualLottoes(List<Lotto> lottoes) {
-        this.lottoes = lottoes;
-        this.totalMoney = null;
+        this.lottoes = requireNonNull(lottoes, "lottoes");
+        this.totalMoney = calculateMoney(lottoes);
     }
 
     public static ManualLottoes of(List<Lotto> lottoes) {
-        return null;
+        return new ManualLottoes(lottoes);
     }
 
     public static ManualLottoes empty() {
-        return null;
+        return of(Collections.emptyList());
     }
 
     @Override
@@ -28,7 +32,17 @@ public class ManualLottoes implements Purchasable {
         return totalMoney;
     }
 
+    public List<Lotto> lottoes() {
+        return Collections.unmodifiableList(lottoes);
+    }
+
     public int size() {
         return lottoes.size();
+    }
+
+    private static Money calculateMoney(List<Lotto> lottoes) {
+        return lottoes.stream()
+                      .map(Lotto::price)
+                      .reduce(Money.of(0L), Money::add);
     }
 }
