@@ -4,6 +4,7 @@ import static lotto.constants.LottoGuideMessage.BONUS_BALL_INPUT;
 import static lotto.constants.LottoGuideMessage.LAST_WINNING_INPUT;
 
 import java.util.List;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoMarket;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
@@ -26,6 +27,8 @@ public class LottoController {
 
     public void play() {
         Money money = lottoInputView.inputMoney();
+        LottoCount manualLottoCount = lottoInputView.inputManualLottoPurchaseCount(money.calculateLottoCount());
+
         LottoTicket lottoTicket = lottoMarket.purchaseLottoTicket(money);
         resultView.printLottos(lottoTicket);
 
