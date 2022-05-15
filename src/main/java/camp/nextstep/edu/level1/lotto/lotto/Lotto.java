@@ -5,12 +5,23 @@ import camp.nextstep.edu.until.TypeCheckHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
+    private static final int LOTTO_RANGE = 6;
     private static final long LOTTO_PRICE = 1000;
     private static final int WINNING_NUMBER_COUNT = 6;
     private static final String WINNING_NUMBER_DELIMITER = ",";
+    private static final List<LottoNumber> LOTTO_NUMBER_PRESET = new ArrayList<>();
+
+    static {
+        for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
+            LOTTO_NUMBER_PRESET.add(new LottoNumber(number));
+        }
+    }
 
     private Money purchaseOriginalMoney;
     private final List<LottoNumbers> items = new ArrayList<>();
@@ -29,7 +40,7 @@ public class Lotto {
         this.purchaseLotto(convertedValue);
     }
 
-    public LottoResult compareWinningNumber(String winningNumbers) {
+    public LottoResult compareWinningNumber(String winningNumbers, String bonusNumber) {
         String[] splitResult = Arrays.stream(winningNumbers.split(WINNING_NUMBER_DELIMITER))
                 .map(String::trim)
                 .toArray(String[]::new);
@@ -38,8 +49,11 @@ public class Lotto {
         LottoNumbers winnerLottoNumbers = new LottoNumbers(
                 CollectionHelper.arrayStringToIntegerList(splitResult)
         );
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
-        return new LottoResult(this.items, winnerLottoNumbers);
+        checkWinningNumberAndBonusNumberDuplicated(winnerLottoNumbers, bonusLottoNumber);
+
+        return new LottoResult(this.items, winnerLottoNumbers, bonusLottoNumber);
     }
 
     public double calculateReturnValue(Money earnedMoney) {
@@ -73,14 +87,26 @@ public class Lotto {
         }
     }
 
+    private void checkWinningNumberAndBonusNumberDuplicated(LottoNumbers winningNumber, LottoNumber bonusNumber) {
+        if (winningNumber.isContainLottoNumber(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 볼은 당첨 번호에 포함되지 않은 숫자만 허용됩니다.");
+        }
+    }
+
     private void purchaseLotto(int purchaseMoney) {
         this.purchaseOriginalMoney = new Money(purchaseMoney);
         long availablePurchaseCount = purchaseOriginalMoney.availablePurchaseCount(LOTTO_PRICE);
 
         for (int i = 0; i < availablePurchaseCount; i++) {
-            this.items.add(new LottoNumbers());
+            this.items.add(createRandomLottoNumbers());
         }
 
         System.out.println(availablePurchaseCount + "개를 구매했습니다.");
+    }
+
+    private static LottoNumbers createRandomLottoNumbers() {
+        Collections.shuffle(LOTTO_NUMBER_PRESET);
+
+        return new LottoNumbers(LOTTO_NUMBER_PRESET.subList(0, LOTTO_RANGE));
     }
 }
