@@ -13,8 +13,8 @@ class LottoResultMapTest {
     @DisplayName("당첨개수 확인")
     void test() {
         LottoResultMap lottoResultMap = new LottoResultMap();
-        lottoResultMap.addLotto(LottoWinningType.MATCH_NOT_COUNT, new Lotto());
-        lottoResultMap.addLotto(LottoWinningType.MATCH_NOT_COUNT, new Lotto());
+        lottoResultMap.addLotto(LottoWinningType.MATCH_NOT_COUNT, new Lotto("1,2,3,4,5,7"));
+        lottoResultMap.addLotto(LottoWinningType.MATCH_NOT_COUNT, new Lotto("1,2,3,4,5,8"));
         assertThat(lottoResultMap.matchCount(LottoWinningType.MATCH_NOT_COUNT)).isEqualTo(2);
     }
 
@@ -22,12 +22,12 @@ class LottoResultMapTest {
     @DisplayName("전체 로또 개수")
     void allItemSize() {
         LottoResultMap lottoResultMap = new LottoResultMap();
-        lottoResultMap.addLotto(LottoWinningType.MATCH_NOT_COUNT, new Lotto());
-        lottoResultMap.addLotto(LottoWinningType.MATCH_NOT_COUNT, new Lotto());
-        lottoResultMap.addLotto(LottoWinningType.MATCH_NOT_COUNT, new Lotto());
-        lottoResultMap.addLotto(LottoWinningType.MATCH_NOT_COUNT, new Lotto());
-        lottoResultMap.addLotto(LottoWinningType.MATCH_COUNT_3, new Lotto());
-        lottoResultMap.addLotto(LottoWinningType.MATCH_COUNT_6, new Lotto());
+        lottoResultMap.addLotto(LottoWinningType.MATCH_NOT_COUNT, new Lotto("1,2,3,4,5,7"));
+        lottoResultMap.addLotto(LottoWinningType.MATCH_NOT_COUNT, new Lotto("1,2,3,4,5,12"));
+        lottoResultMap.addLotto(LottoWinningType.MATCH_NOT_COUNT, new Lotto("1,2,3,4,5,13"));
+        lottoResultMap.addLotto(LottoWinningType.MATCH_NOT_COUNT, new Lotto("1,2,3,4,5,14"));
+        lottoResultMap.addLotto(LottoWinningType.MATCH_COUNT_3, new Lotto("1,2,3,33,34,35"));
+        lottoResultMap.addLotto(LottoWinningType.MATCH_COUNT_6, new Lotto("33,34,35,36,37,38"));
         assertThat(lottoResultMap.allItemSize()).isEqualTo(6);
     }
 

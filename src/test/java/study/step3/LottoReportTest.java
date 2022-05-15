@@ -15,7 +15,7 @@ class LottoReportTest {
     @DisplayName("잘못된 초기값 - 리스트 크기 0")
     void constructor_listSize0() {
         List<Lotto> emptyLottos = Collections.emptyList();
-        Lotto winningLotto = new Lotto();
+        Lotto winningLotto = new Lotto("1,2,3,4,5,7");
 
         assertThatThrownBy(() -> new LottoReport(
                 emptyLottos,
@@ -26,7 +26,7 @@ class LottoReportTest {
     @Test
     @DisplayName("잘못된 초기값 - 당첨번호 널")
     void constructor_winningLottoIsNull() {
-        List<Lotto> emptyLottos = Collections.singletonList(new Lotto());
+        List<Lotto> emptyLottos = Collections.singletonList(new Lotto("1,2,3,4,5,7"));
         Lotto winningLotto = null;
 
         assertThatThrownBy(() -> new LottoReport(

@@ -3,40 +3,24 @@ package study.step3;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import study.step3.enumtype.LottoWinningType;
 
 class LottoTest {
-    @Test
-    @DisplayName("전체 로또 번호 확인 - 중복 체크")
-    void WholeLottoNumbers_checkDuplicateNumber() {
-        Set<Integer> lottoNumberSet = new HashSet<>(Lotto.WHOLE_LOTTO_NUMBERS);
-        assertThat(lottoNumberSet.size()).isEqualTo(Lotto.WHOLE_LOTTO_NUMBERS.size());
-    }
-
-    @Test
-    @DisplayName("전체 로또 번호 확인 - 숫자 범위 체크")
-    void WholeLottoNumbers_checkRange() {
-        for (Integer integer : Lotto.WHOLE_LOTTO_NUMBERS) {
-            assertThat(integer).isPositive();
-            assertThat(integer).isLessThanOrEqualTo(45);
-        }
-    }
-
-    @Test
-    @DisplayName("로또 생성 테스트 - 자동생성")
-    void createLotto_randomNumber() {
-        Lotto lotto = new Lotto();
-        assertThat(Lotto.WHOLE_LOTTO_NUMBERS.containsAll(lotto.getNumbers())).isTrue();
-    }
-
     @Test
     @DisplayName("로또 생성 테스트 - 수동생성")
     void createLotto_manualNumber() {
         Lotto lotto = new Lotto("1,2,22,30,35,45");
-        assertThat(Lotto.WHOLE_LOTTO_NUMBERS.containsAll(lotto.getNumbers())).isTrue();
+        Lotto winningLotto = new Lotto("1,2,22,30,35,45");
+        assertThat(lotto.matchCount(winningLotto)).isSameAs(LottoWinningType.MATCH_COUNT_6.getMatchCount());
+    }
+
+    @Test
+    @DisplayName("로또 생성 테스트 - 수동생성 - 중복 숫자")
+    void createLotto_manualNumber_duplicateNumber() {
+        assertThatThrownBy(() -> new Lotto("1,1,1,1,1,1"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

@@ -1,22 +1,18 @@
 package study.step3;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import study.step3.util.StringUtil;
 
 public class Lotto {
-    static final List<Integer> WHOLE_LOTTO_NUMBERS = IntStream.range(1, 46).boxed().collect(Collectors.toList());
     private static final String NUMBER_DELIMITER = ",";
     private static final int LOTTO_NUMBER_SIZE = 6;
     private final List<Integer> numbers;
 
-    public Lotto() {
-        numbers = shuffleAndSlice(new ArrayList<>(WHOLE_LOTTO_NUMBERS), 6);
+    public Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
         Collections.sort(numbers);
     }
 
@@ -40,7 +36,6 @@ public class Lotto {
     private void validate(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
-        validateRange(numbers);
     }
 
     private void validateSize(List<Integer> numbers) {
@@ -49,22 +44,11 @@ public class Lotto {
         }
     }
 
-    private void validateRange(List<Integer> numbers) {
-        if (!new HashSet<>(WHOLE_LOTTO_NUMBERS).containsAll(numbers)) {
-            throw new IllegalArgumentException("로또는 1-45 범위 내에서 입력해야 합니다.");
-        }
-    }
-
     private void validateDuplicate(List<Integer> numbers) {
         Set<Integer> numberSet = new HashSet<>(numbers);
         if (numberSet.size() != numbers.size()) {
             throw new IllegalArgumentException("입력에 중복된 수가 있습니다.");
         }
-    }
-
-    public static List<Integer> shuffleAndSlice(List<Integer> numbers, int count) {
-        Collections.shuffle(numbers);
-        return numbers.subList(0, count);
     }
 
     @Override
