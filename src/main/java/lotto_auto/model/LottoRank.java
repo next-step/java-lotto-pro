@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 public enum LottoRank {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
     FOURTH(3, 5000),
     NOTHING(0,0);
 
@@ -32,14 +32,6 @@ public enum LottoRank {
                 .filter(r -> r.matchedCount == count)
                 .findAny();
         return rank.orElse(NOTHING);
-    }
-
-    public static LottoRank matches(Lotto o1, Lotto o2) {
-        List<Integer> o1Numbers = o1.getLottoNumbers();
-        List<Integer> o2Numbers = o2.getLottoNumbers();
-        o1Numbers.retainAll(o2Numbers);
-
-        return LottoRank.getLottoRuleFromMatchedCount(o1Numbers.size());
     }
 
     public static List<LottoRank> valuesTheLowestOrder() {

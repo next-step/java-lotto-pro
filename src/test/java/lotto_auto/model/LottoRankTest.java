@@ -10,12 +10,4 @@ public class LottoRankTest {
         LottoRank rank = LottoRank.getLottoRuleFromMatchedCount(3);
         assertThat(rank).isEqualTo(LottoRank.FOURTH);
     }
-
-    @Test
-    void 로또_비교후_결과_랭크() {
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-
-        assertThat(LottoRank.matches(lotto, winningLotto)).isEqualTo(LottoRank.FIRST);
-    }
 }
