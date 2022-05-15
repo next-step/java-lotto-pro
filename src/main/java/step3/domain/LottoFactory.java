@@ -7,28 +7,28 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
-    private static final List<LottoNumber> allLottoNumbers = new ArrayList<>();
+    private static final List<Integer> allNumbers = new ArrayList<>();
 
     static {
         IntStream.rangeClosed(LottoNumber.getMinLottoNumber(), LottoNumber.getMaxLottoNumber())
-                .forEach(number -> allLottoNumbers.add(LottoNumber.of(number)));
+                .forEach(allNumbers::add);
     }
 
     private LottoFactory() {
     }
 
     public static Lotto createAutoLotto() {
-        return createManualLotto(randomLottoNumbers());
+        return createManualLotto(randomNumbers());
     }
 
-    private static List<LottoNumber> randomLottoNumbers() {
-        Collections.shuffle(allLottoNumbers);
-        return allLottoNumbers.stream()
+    private static List<Integer> randomNumbers() {
+        Collections.shuffle(allNumbers);
+        return allNumbers.stream()
                 .limit(Lotto.getLottoSize())
                 .collect(Collectors.toList());
     }
 
-    public static Lotto createManualLotto(List<LottoNumber> lottoNumbers) {
-        return new Lotto(lottoNumbers);
+    public static Lotto createManualLotto(List<Integer> numbers) {
+        return new Lotto(numbers);
     }
 }

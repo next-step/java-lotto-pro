@@ -2,18 +2,20 @@ package step3.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> lotto;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        this.lotto = new HashSet<>(lottoNumbers);
+    Lotto(List<Integer> numbers) {
+        this.lotto = numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
         validate();
     }
 

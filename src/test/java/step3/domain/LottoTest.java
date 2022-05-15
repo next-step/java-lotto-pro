@@ -2,34 +2,29 @@ package step3.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
-    private List<LottoNumber> lottoNumbers;
+    private List<Integer> numbers;
 
     @BeforeEach
     void beforeEach() {
-        lottoNumbers = IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList());
+        numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 
     @Test
     void valid_로또_생성() {
-        Assertions.assertThat(new Lotto(lottoNumbers)).isEqualTo(new Lotto(lottoNumbers));
+        Assertions.assertThat(new Lotto(numbers)).isEqualTo(new Lotto(numbers));
     }
 
     @Test
     void invalid_로또_생성_숫자개수() {
         assertThatThrownBy(() -> {
-            lottoNumbers.remove(0);
-            lottoNumbers.remove(1);
-            Lotto newLotto = new Lotto(lottoNumbers);
+            Lotto newLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복되지 않은 6개의 숫자를 입력해주세요.");
     }

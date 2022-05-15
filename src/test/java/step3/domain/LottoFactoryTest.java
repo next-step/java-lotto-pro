@@ -14,14 +14,7 @@ public class LottoFactoryTest {
 
     @Test
     void 수동_로또_생성() {
-        Lotto manualLotto = LottoFactory.createManualLotto(Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6)
-        ));
+        Lotto manualLotto = LottoFactory.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(manualLotto).isInstanceOf(Lotto.class);
     }
 }
