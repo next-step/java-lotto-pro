@@ -51,6 +51,11 @@ public class PositiveNumber {
         return new PositiveNumber(this.value * target.value);
     }
 
+    public PositiveNumber divideAndGetShare(PositiveNumber target) {
+        checkPossibleDevice(target);
+        return new PositiveNumber(this.value / target.value);
+    }
+
     public long getValue() {
         return this.value;
     }
@@ -70,6 +75,12 @@ public class PositiveNumber {
     private void checkSubtractable(PositiveNumber target) {
         if (this.value - target.value < MIN_VALUE) {
             throw new RuntimeException(this.value + "보다 더 큰 값을 뺄 수 없습니다.");
+        }
+    }
+
+    private void checkPossibleDevice(PositiveNumber target) {
+        if (target.value == 0) {
+            throw new RuntimeException("0 으로 나눌 수 없습니다.");
         }
     }
 

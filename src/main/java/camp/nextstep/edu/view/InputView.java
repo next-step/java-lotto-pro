@@ -61,17 +61,15 @@ public class InputView {
         lotto.printPurchaseResult();
         lotto.printPurchaseLottoNumbers();
 
-        return untilEnterValidValue(() -> {
-            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-            LottoNumbers enteredWinningNumbers = untilEnterValidValue(() -> new LottoNumbers(scanner.nextLine()));
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        LottoNumbers enteredWinningNumbers = untilEnterValidValue(() -> new LottoNumbers(scanner.nextLine()));
 
-            System.out.println("보너스 볼을 입력해 주세요.");
-            LottoNumber enteredBonusNumber = untilEnterValidValue(() -> {
-                return new LottoNumber(new PositiveNumber(scanner.nextLine(), false));
-            });
-
-            return lotto.compareWinningNumber(enteredWinningNumbers, enteredBonusNumber);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        LottoNumber enteredBonusNumber = untilEnterValidValue(() -> {
+            return new LottoNumber(new PositiveNumber(scanner.nextLine(), false));
         });
+
+        return untilEnterValidValue(() -> lotto.compareWinningNumber(enteredWinningNumbers, enteredBonusNumber));
     }
 
     private static <T> T untilEnterValidValue(Supplier<T> action) {
@@ -82,7 +80,7 @@ public class InputView {
             try {
                 result = action.get();
                 isSuccessInput = true;
-            } catch (IllegalArgumentException e) {
+            } catch (Exception e) {
                 System.out.println(PREFIX_ERROR_MESSAGE + " " + e.getMessage());
                 System.out.println("다시 입력해 주세요.");
             }

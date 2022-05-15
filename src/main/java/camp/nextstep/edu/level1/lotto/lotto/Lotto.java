@@ -62,8 +62,8 @@ public class Lotto {
     }
 
     public void checkPossibleManualLottoPurchaseCount(PositiveNumber count) {
-        long availablePurchaseCount = purchaseOriginalMoney.availablePurchaseCount(LOTTO_PRICE);
-        if (availablePurchaseCount < count.getValue()) {
+        PositiveNumber availablePurchaseCount = purchaseOriginalMoney.availablePurchaseCount(LOTTO_PRICE);
+        if (availablePurchaseCount.getValue() < count.getValue()) {
             throw new IllegalArgumentException(
                     "구입 가능한 로또 수 보다 많이 구입할 수 없습니다. 구입 가능한 최대수: " + availablePurchaseCount
             );
@@ -71,7 +71,7 @@ public class Lotto {
     }
 
     private void checkValidLottoPurchaseMoney(Money money) {
-        if (LOTTO_PRICE.isSameOrGreater(money)) {
+        if (LOTTO_PRICE.isGreater(money)) {
             throw new IllegalArgumentException("로또 구입시 최소 " + LOTTO_PRICE + " 이상이 있어야 합니다.");
         }
     }
@@ -82,8 +82,8 @@ public class Lotto {
         }
     }
 
-    private void purchaseLotto(long purchaseCount) {
-        for (int i = 0; i < purchaseCount; i++) {
+    private void purchaseLotto(PositiveNumber purchaseCount) {
+        for (int i = 0; i < purchaseCount.getValue(); i++) {
             this.items.add(createRandomLottoNumbers());
         }
     }
@@ -91,10 +91,10 @@ public class Lotto {
     private void autoPurchaseLottoByRemainMoney() {
         Money manualPurchaseMoney = LOTTO_PRICE.multiply(manualPurchaseCount);
         Money remainMoney = purchaseOriginalMoney.subtract(manualPurchaseMoney);
-        long availablePurchaseCount = remainMoney.availablePurchaseCount(LOTTO_PRICE);
+        PositiveNumber availablePurchaseCount = remainMoney.availablePurchaseCount(LOTTO_PRICE);
 
         purchaseLotto(availablePurchaseCount);
-        autoPurchaseCount = new PositiveNumber(availablePurchaseCount);
+        autoPurchaseCount = availablePurchaseCount;
     }
 
     private static LottoNumbers createRandomLottoNumbers() {

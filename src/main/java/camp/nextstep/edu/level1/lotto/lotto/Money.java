@@ -21,9 +21,8 @@ public class Money {
         this(new PositiveNumber(amount, false));
     }
 
-    public long availablePurchaseCount(Money price) {
-        checkPurchasePrice(price);
-        return this.amount.getValue() / price.amount.getValue();
+    public PositiveNumber availablePurchaseCount(Money price) {
+        return this.amount.divideAndGetShare(price.amount);
     }
 
     public Money add(Money target) {
@@ -45,14 +44,8 @@ public class Money {
         return (double)this.amount.getValue() / target.amount.getValue();
     }
 
-    public boolean isSameOrGreater(Money target) {
-        return this.amount.getValue() >= target.amount.getValue();
-    }
-
-    private void checkPurchasePrice(Money price) {
-        if (price.amount.getValue() <= 0) {
-            throw new IllegalArgumentException("0원 초과의 물건만 구입할 수 있습니다.");
-        }
+    public boolean isGreater(Money target) {
+        return this.amount.getValue() > target.amount.getValue();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package camp.nextstep.edu.level1.lotto.lotto;
 
+import camp.nextstep.edu.common.PositiveNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -49,7 +50,7 @@ class MoneyTest {
         Money money = new Money(10000);
         long price = 3333;
 
-        assertThat(money.availablePurchaseCount(new Money(price))).isEqualTo(3);
+        assertThat(money.availablePurchaseCount(new Money(price))).isEqualTo(new PositiveNumber(3));
     }
 
     @Test
