@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 import java.util.Objects;
 
 public class LottoResult {
-    private static final String RESULT_ANNOUNCEMENT_MESSAGE = "당첨 통계\r\n---------";
+    private static final String RESULT_ANNOUNCEMENT_MESSAGE = "\r\n당첨 통계\r\n---------";
     private static final String WIN_MESSAGE = "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
     private static final String LOSE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final int[] PRINTABLE_MATCH_COUNTS = {3, 4, 5, 6};

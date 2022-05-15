@@ -13,6 +13,10 @@ public class LottoTicket {
         return Prize.findPrizeByMatchCount(lottoNumbers.matches(winningNumbers));
     }
 
+    public void print() {
+        lottoNumbers.print();
+    }
+
     @Override
     public String toString() {
         return "LottoTicket{" +

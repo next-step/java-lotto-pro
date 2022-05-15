@@ -46,6 +46,10 @@ public class LottoNumbers {
         return matches < 3 ? 0 : matches;
     }
 
+    public void print() {
+        System.out.println(numbers);
+    }
+
     @Override
     public String toString() {
         return "LottoTicket{" +

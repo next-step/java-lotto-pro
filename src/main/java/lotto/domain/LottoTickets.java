@@ -28,6 +28,13 @@ public class LottoTickets {
         return prizeMap;
     }
 
+    public void print() {
+        for (final LottoTicket ticket : lottoTickets) {
+            ticket.print();
+        }
+        System.out.println();
+    }
+
     private Map<Prize, Integer> emptyPrizeMap() {
         final Map<Prize, Integer> emptyPrizeMap = new HashMap<>();
         for (Prize prize : Prize.values()) {
