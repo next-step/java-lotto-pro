@@ -1,13 +1,11 @@
 package step3.domain;
 
 import static java.util.Collections.shuffle;
-import static step3.LottoConstant.LOTTO_DELIMITER;
 import static step3.LottoConstant.LOTTO_ELEMENTS_SIZE;
 import static step3.LottoConstant.LOTTO_PRICE;
 import static step3.LottoConstant.LOTTO_VALID_ELEMENTS;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,11 +24,11 @@ public class LottoManager {
 
 
     public int buyTicket(String money) {
-        if(!validMoney(money)){
-            throw new IllegalArgumentException("돈은 "+LOTTO_PRICE+"이상 입력하셔야합니다");
+        if (!validMoney(money)) {
+            throw new IllegalArgumentException("돈은 " + LOTTO_PRICE + "이상 입력하셔야합니다");
         }
         for (int i = 0; i < Integer.parseInt(money) / LOTTO_PRICE; i++) {
-            lottoTickets.add(makeLottoTicket());
+            lottoTickets.add(makeRandomLottoTicket());
         }
         return lottoTickets.size();
     }
@@ -46,7 +44,7 @@ public class LottoManager {
         }
     }
 
-    private LottoTicket makeLottoTicket() {
+    private LottoTicket makeRandomLottoTicket() {
         List<Integer> lottoElements = new ArrayList<>();
         shuffle(LOTTO_VALID_ELEMENTS);
         for (int i = 0; i < LOTTO_ELEMENTS_SIZE; i++) {

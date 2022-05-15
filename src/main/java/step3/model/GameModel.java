@@ -1,12 +1,12 @@
 package step3.model;
 
-import static step3.LottoConstant.LOTTO_DELIMITER;
-import static step3.LottoConstant.LOTTO_ELEMENTS_SIZE;
+import static step3.LottoConstant.INPUT_IS_NOT_VALID;
+import static step3.LottoConstant.INPUT_IS_VALID;
 
 import java.util.HashMap;
 import java.util.List;
-import step3.InputStatus;
 import step3.domain.LottoManager;
+import step3.domain.LottoTicket;
 
 public class GameModel {
 
@@ -37,8 +37,13 @@ public class GameModel {
         return lottoManager.checkWin(winnerLottoSource);
     }
 
-    public void buyTicket(String money) {
-        lottoManager.buyTicket(money);
+    public boolean buyTicket(String money) {
+        try {
+            lottoManager.buyTicket(money);
+        } catch (IllegalArgumentException e) {
+            return INPUT_IS_NOT_VALID;
+        }
+        return INPUT_IS_VALID;
     }
 
     public List<List<String>> getLottoNumbers() {
