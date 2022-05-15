@@ -14,7 +14,7 @@ public class GameModel {
     }
 
 
-    public HashMap<Integer, Integer> checkWin(LottoTicket winnerLotto) {
+    public HashMap<String, Integer> checkWin(LottoTicket winnerLotto) {
         return lottoManager.checkWin(winnerLotto);
     }
 

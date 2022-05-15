@@ -1,10 +1,7 @@
 package step3.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static step3.LottoConstant.FOUR_NUMBER_MATCH;
 import static step3.LottoConstant.LOTTO_PRICE;
-import static step3.LottoConstant.SIX_NUMBER_MATCH;
-import static step3.LottoConstant.THREE_NUMBER_MATCH;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +24,8 @@ public class LottoManagerTest {
     @DisplayName("로또 번호를 가져올수 있어야한다")
     public void getLottoNumbersTest() {
         LottoManager testLottoManager = initTestManager();
-        assertThat(testLottoManager.getLottoNumbers().toString())
-            .isEqualTo("[[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 7, 8], [1, 2, 3, 7, 8, 9], [1, 2, 3, 7, 8, 9], [1, 2, 7, 8, 9, 10]]");
+        assertThat(testLottoManager.getLottoNumbers().toString()).isEqualTo(
+            "[[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 7, 8], [1, 2, 3, 7, 8, 9], [1, 2, 3, 7, 8, 9], [1, 2, 7, 8, 9, 10]]");
 
     }
 
@@ -36,11 +33,8 @@ public class LottoManagerTest {
     @DisplayName("각 로또별 매칭 갯수를 HashMap으로 반환한다")
     public void testCheckWin() {
         LottoManager testLottoManager = initTestManager();
-
-        assertThat(testLottoManager.checkWin(new LottoTicket("1,2,3,4,5,6")))
-            .containsEntry(THREE_NUMBER_MATCH, 2)
-            .containsEntry(FOUR_NUMBER_MATCH, 1)
-            .containsEntry(SIX_NUMBER_MATCH, 2);
+        assertThat(testLottoManager.checkWin(new LottoTicket("1,2,3,4,5,6"))).containsEntry("ZERO", 0).containsEntry("ONE", 0).containsEntry("TWO", 1)
+            .containsEntry("THREE", 2).containsEntry("FOUR", 1).containsEntry("FIVE", 0).containsEntry("SIX", 2);
     }
 
     @ParameterizedTest

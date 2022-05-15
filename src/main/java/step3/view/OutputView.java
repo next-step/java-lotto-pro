@@ -5,7 +5,6 @@ import static step3.LottoConstant.FOUR_NUMBER_MATCH;
 import static step3.LottoConstant.LOTTOS_INFO_FORMAT;
 import static step3.LottoConstant.LOTTO_FIVE_NUMBER_REWARD;
 import static step3.LottoConstant.LOTTO_FOUR_NUMBER_REWARD;
-import static step3.LottoConstant.LOTTO_PRICE;
 import static step3.LottoConstant.LOTTO_SIX_NUMBER_REWARD;
 import static step3.LottoConstant.LOTTO_THREE_NUMBER_REWARD;
 import static step3.LottoConstant.OVERVIEW_FORMAT;
@@ -16,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import step3.LottoConstant;
+import step3.constant.LottoReward;
 
 public class OutputView {
 
@@ -27,42 +27,45 @@ public class OutputView {
         init();
     }
 
-    public void printOutput(HashMap<Integer, Integer> statistics, int lottoNumber) {
+    public void printOutput(HashMap<String, Integer> statistics, int money) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         long reward = printOverview(statistics);
-        printRewardRate(reward, lottoNumber);
+        printRewardRate(reward, money);
     }
 
-    private void printRewardRate(long reward, int lottoCount) {
+    private void printRewardRate(long reward, int money) {
         System.out.println(
             String.format(
                 LottoConstant.REWARDRATE_FORMAT,
-                reward / (lottoCount * 1.0 * LOTTO_PRICE),
-                checkBenefit(reward, lottoCount)
+                reward * 1.0 / money,
+                checkBenefit(reward, money)
             ));
     }
 
-    private String checkBenefit(long reward, int lottoCount) {
-        if (lottoCount * LottoConstant.LOTTO_PRICE > reward) {
+    private String checkBenefit(long reward, int money) {
+        if (money > reward) {
             return isLoss;
         }
         return isBenefit;
     }
 
-    private long printOverview(HashMap<Integer, Integer> statistics) {
+    private long printOverview(HashMap<String, Integer> statistics) {
         long reward = 0;
-        for (Entry<Integer, Integer> lottoRewardInfo : rewardPerMatch.entrySet()) {
-            reward += printOverViewPerEntry(lottoRewardInfo.getKey(), lottoRewardInfo.getValue(), statistics);
+        for (Entry<String, Integer> lottoMatchEntry : statistics.entrySet()) {
+            reward += printOverViewPerEntry(LottoReward.valueOf(lottoMatchEntry.getKey()), lottoMatchEntry.getValue());
         }
         return reward;
     }
 
-    private long printOverViewPerEntry(int matchCount, int matchReward, HashMap<Integer, Integer> statistics) {
-        System.out.println(String.format(OVERVIEW_FORMAT, matchCount, matchReward, statistics.get(matchCount)));
-        return matchReward * statistics.get(matchCount);
+    private long printOverViewPerEntry(LottoReward lottoReward, int matchCount) {
+        if (lottoReward.ordinal() < 3) {
+            return 0;
+        }
+        System.out.println(String.format(OVERVIEW_FORMAT, matchCount, lottoReward.getReward(), matchCount));
+        return lottoReward.getReward() * matchCount;
     }
 
     public void printLottoInfo(List<List<String>> lottoNumbers) {
