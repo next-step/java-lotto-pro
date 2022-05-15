@@ -9,8 +9,8 @@ public class LottoMachine {
 
     private static final int ZERO = 0;
     private static final List<Number> NUMBERS = IntStream.rangeClosed(1, 45).mapToObj(Number::new).collect(Collectors.toList());
-
     private static final int SALE_PRICE = 1000;
+    private static final int DECIMAL_PLACES = 100;
 
     public static List<Number> getRandomNumbers() {
         Collections.shuffle(NUMBERS);
@@ -31,6 +31,15 @@ public class LottoMachine {
 
     private boolean isCorrect(int price) {
         return price > ZERO && price % SALE_PRICE == ZERO;
+    }
+
+    public double getProfitRate(int price, List<Rank> ranks) {
+        double profitRate = (double) getSum(ranks) / price;
+        return Math.floor(profitRate * DECIMAL_PLACES) / DECIMAL_PLACES;
+    }
+
+    private int getSum(List<Rank> ranks) {
+        return ranks.stream().mapToInt(Rank::getWinningMoney).sum();
     }
 
 }
