@@ -12,7 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class LottoRankingTest {
+class LottoRankingTest {
     @DisplayName("로또 일치 카운트로 구한 로또 랭킹 반환 테스트")
     @Test
     void lottoRanking() {
