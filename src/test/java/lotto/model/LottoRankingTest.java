@@ -15,9 +15,9 @@ class LottoRankingTest {
     @Test
     void lottoRanking() {
         assertAll(
-                () -> assertThat(LottoRanking.findLottoRankingByMatchCount(6)).isEqualTo(LottoRanking.FIRST),
-                () -> assertThat(LottoRanking.findLottoRankingByMatchCount(5)).isEqualTo(LottoRanking.THIRD),
-                () -> assertThat(LottoRanking.findLottoRankingByMatchCount(2)).isEqualTo(LottoRanking.MISS)
+                () -> assertThat(LottoRanking.findLottoRankingByCountOfMatch(6)).isEqualTo(LottoRanking.FIRST),
+                () -> assertThat(LottoRanking.findLottoRankingByCountOfMatch(5)).isEqualTo(LottoRanking.THIRD),
+                () -> assertThat(LottoRanking.findLottoRankingByCountOfMatch(2)).isEqualTo(LottoRanking.MISS)
         );
     }
 
@@ -25,15 +25,15 @@ class LottoRankingTest {
     @ParameterizedTest(name = "로또 일치 카운트 {0}로 구한 로또 랭킹 상금(돈) {1} 테스트")
     @CsvSource(value = {"2:0", "5:1500000", "6:2000000000"}, delimiter = ':')
     void lottoRankingMoney(int input, int expect) {
-        assertThat(LottoRanking.findLottoRankingByMatchCount(input).money()).isEqualTo(Money.from(expect));
+        assertThat(LottoRanking.findLottoRankingByCountOfMatch(input).money()).isEqualTo(Money.from(expect));
     }
 
     @DisplayName("로또번호 일치 갯수가 유효하지 유효하지 않을 때 IllegalArgumentException 예외")
     @ParameterizedTest(name = "로또번호 일치 갯수 {0}가 유효하지 유효하지 않을 때 IllegalArgumentException 예외")
     @ValueSource(strings = {"7", "-1", "10"})
-    void lottoRankingInvalidMatchCount(int input) {
+    void lottoRankingInvalidCountOfMatch(int input) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoRanking.findLottoRankingByMatchCount(input))
+                .isThrownBy(() -> LottoRanking.findLottoRankingByCountOfMatch(input))
                 .withMessage("로또번호 일치 갯수가 유효하지 않습니다.");
     }
 }

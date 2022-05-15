@@ -31,14 +31,14 @@ public class Lotto {
     }
 
     public LottoRanking lottoRanking(Lotto winningLotto) {
-        int matchCount = MATCH_COUNT_ZERO;
+        int countOfMatch = MATCH_COUNT_ZERO;
         for (LottoNumber lottoNumber : this.lotto) {
-            matchCount += matchCountIfContainLottoNumber(winningLotto, lottoNumber);
+            countOfMatch += countIfContainLottoNumber(winningLotto, lottoNumber);
         }
-        return LottoRanking.findLottoRankingByMatchCount(matchCount);
+        return LottoRanking.findLottoRankingByCountOfMatch(countOfMatch);
     }
 
-    private int matchCountIfContainLottoNumber(Lotto winningLotto, LottoNumber lottoNumber) {
+    private int countIfContainLottoNumber(Lotto winningLotto, LottoNumber lottoNumber) {
         if (winningLotto.containLottoNumber(lottoNumber)) {
             return MATCH_COUNT_ONE;
         }

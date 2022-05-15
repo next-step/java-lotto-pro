@@ -11,20 +11,20 @@ public enum LottoRanking {
 
     private static final int MATCH_COUNT_MAX_NUM = 6;
     private static final int MATCH_COUNT_MIN_NUM = 0;
-    private final int matchCount;
+    private final int countOfMatch;
     private final String text;
     private final Money money;
 
-    LottoRanking(int matchCount, String text, Money money) {
-        this.matchCount = matchCount;
+    LottoRanking(int countOfMatch, String text, Money money) {
+        this.countOfMatch = countOfMatch;
         this.text = text;
         this.money = money;
     }
 
-    public static LottoRanking findLottoRankingByMatchCount(int matchCount) {
-        validMatchCount(matchCount);
+    public static LottoRanking findLottoRankingByCountOfMatch(int countOfMatch) {
+        validCountOfMatch(countOfMatch);
         return Arrays.stream(LottoRanking.values())
-                .filter(ranking -> ranking.matchCount() == matchCount)
+                .filter(ranking -> ranking.countOfMatch() == countOfMatch)
                 .findFirst()
                 .orElse(LottoRanking.MISS);
     }
@@ -37,17 +37,17 @@ public enum LottoRanking {
         return this.text;
     }
 
-    private static void validMatchCount(int matchCount) {
-        if (isNotLottoMatchCountRange(matchCount)) {
+    private static void validCountOfMatch(int countOfMatch) {
+        if (isNotLottoCountOfMatchRange(countOfMatch)) {
             throw new IllegalArgumentException("로또번호 일치 갯수가 유효하지 않습니다.");
         }
     }
 
-    private static boolean isNotLottoMatchCountRange(int matchCount) {
-        return matchCount < MATCH_COUNT_MIN_NUM || matchCount > MATCH_COUNT_MAX_NUM;
+    private static boolean isNotLottoCountOfMatchRange(int countOfMatch) {
+        return countOfMatch < MATCH_COUNT_MIN_NUM || countOfMatch > MATCH_COUNT_MAX_NUM;
     }
 
-    private int matchCount() {
-        return this.matchCount;
+    private int countOfMatch() {
+        return this.countOfMatch;
     }
 }
