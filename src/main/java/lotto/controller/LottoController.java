@@ -1,6 +1,9 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import lotto.model.Count;
 import lotto.model.LottoMachine;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumberGenerator;
@@ -14,7 +17,6 @@ import lotto.view.LottoOutputView;
 public class LottoController {
     private final Scanner scanner;
     private LottoMachine lottoMachine;
-    private LottoNumbers lottoNumbers;
     private LottoRanks lottoRanks;
 
     public LottoController() {
@@ -22,20 +24,37 @@ public class LottoController {
     }
 
     public void start() {
-        buy();
+        lottoPurchaseAmount();
+        inputManualNumber();
         inputWinningNumber();
         profitRate();
     }
 
-    private void buy() {
+    private void lottoPurchaseAmount() {
         try {
-            LottoInputView.printPurchase();
+            LottoInputView.printLottoPurchaseAmount();
             lottoMachine = new LottoMachine(scanner.nextLine());
-            lottoNumbers = lottoMachine.getLottoNumbers();
-            LottoOutputView.printPurchaseResult(lottoNumbers);
         } catch (IllegalArgumentException iae) {
             LottoOutputView.printErrorMessage(iae);
-            buy();
+            lottoPurchaseAmount();
+        }
+    }
+
+    private void inputManualNumber() {
+        try {
+            LottoInputView.printManualPurchaseCount();
+            Count manualCount = Count.of(scanner.nextLine());
+            LottoInputView.printManualNumber();
+            List<LottoNumber> manualLottoNumbers = new ArrayList<>();
+            while (!manualCount.isZero()) {
+                List<Number> numbers = LottoNumberGenerator.of(scanner.nextLine());
+                manualLottoNumbers.add(new LottoNumber(numbers));
+                manualCount.decrease();
+            }
+            lottoMachine.submitManualLottoNumber(manualLottoNumbers);
+        } catch (IllegalArgumentException iae) {
+            LottoOutputView.printErrorMessage(iae);
+            inputManualNumber();
         }
     }
 
@@ -47,6 +66,7 @@ public class LottoController {
             LottoInputView.printBonusNumber();
             Number number = Number.of(scanner.nextInt());
 
+            LottoNumbers lottoNumbers = lottoMachine.getLottoNumbers();
             lottoRanks = lottoNumbers.resultLottoRanks(new WinningLottoNumber(lottoNumber, number));
             LottoOutputView.printRankResult(lottoRanks);
         } catch (IllegalArgumentException iae) {
