@@ -1,4 +1,4 @@
-package lotto.cons;
+package lotto.constant;
 
 public class ErrorMessageConst {
     public static final String ERROR_INVALID_LOTTO_SIZE = "[ERROR] Lotto의 숫자는 %d개여야 합니다.";

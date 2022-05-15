@@ -1,10 +1,11 @@
 package lotto.domain;
 
-import lotto.cons.ErrorMessageConst;
+import lotto.constant.ErrorMessageConst;
 
 public class Money {
-    public static final int LOTTO_PRICE = 1000;
     private int amount;
+
+    public static final int LOTTO_PRICE = 1000;
 
     public Money(int amount){
         this.amount = validateMoney(amount);

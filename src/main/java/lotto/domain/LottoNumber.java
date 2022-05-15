@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.cons.ErrorMessageConst;
+import lotto.constant.ErrorMessageConst;
 
 import java.util.Objects;
 
@@ -35,6 +35,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !(o instanceof  LottoNumber)) {
+            return false;
+        }
         return ((LottoNumber)o).getNumber() == number;
     }
 }

@@ -1,4 +1,4 @@
-package lotto.cons;
+package lotto.constant;
 
 public class ViewMessageConst {
     public static final String INPUT_MESSAGE_PURCHASE_MONEY = "구입금액을 입력해 주세요.";

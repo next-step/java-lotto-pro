@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.cons.ErrorMessageConst;
+import lotto.constant.ErrorMessageConst;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,6 +35,12 @@ public class Lotto {
         }
     }
 
+    public int countMatchedNumbers(Lotto anotherLotto) {
+        return (int) lottoNumbers.stream()
+                .filter(anotherLotto.lottoNumbers::contains)
+                .count();
+    }
+
     public List<Integer> lottoNumbers(){
         return lottoNumbersToIntegerList(lottoNumbers);
     }
@@ -45,12 +51,6 @@ public class Lotto {
             result.add(lottoNumber.getNumber());
         }
         return result;
-    }
-
-    public int countMatchedNumbers(Lotto anotherLotto) {
-        return (int) lottoNumbers.stream()
-                .filter(anotherLotto.lottoNumbers::contains)
-                .count();
     }
 
     @Override

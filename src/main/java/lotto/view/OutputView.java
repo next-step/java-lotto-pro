@@ -1,10 +1,10 @@
 package lotto.view;
 
-import lotto.cons.ViewMessageConst;
+import lotto.constant.ViewMessageConst;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
-import lotto.enums.LottoWinningType;
+import lotto.enums.LottoRankType;
 
 public class OutputView {
     public static void printPurchasedLottos(Lottos lottos) {
@@ -22,7 +22,7 @@ public class OutputView {
     }
 
     private static void printWinningCount(LottoResult result) {
-        for(LottoWinningType type : LottoWinningType.winningTypeListWithReverseOrder()){
+        for(LottoRankType type : LottoRankType.rankListWithReverseOrder()){
             System.out.println(String.format(ViewMessageConst.OUTPUT_MESSAGE_WINNING_COUNT_RESULT,
                     type.getMatchedCount(), type.getPrice(),
                     result.winningCountByWinningType(type)));

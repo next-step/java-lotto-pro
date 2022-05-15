@@ -5,7 +5,7 @@ import lotto.domain.Lotto;
 import java.util.Arrays;
 import java.util.List;
 
-public enum LottoWinningType {
+public enum LottoRankType {
     FIRST(6, 2000000000),
     SECOND(5, 1500000),
     THIRD(4, 50000),
@@ -15,17 +15,17 @@ public enum LottoWinningType {
     private int matchedCount;
     private int price;
 
-    LottoWinningType(int matchedCount, int price) {
+    LottoRankType(int matchedCount, int price) {
         this.matchedCount = matchedCount;
         this.price = price;
     }
 
-    public static LottoWinningType match(Lotto lotto, Lotto winningLotto) {
+    public static LottoRankType matchRankType(Lotto lotto, Lotto winningLotto) {
         int matchedCount = lotto.countMatchedNumbers(winningLotto);
-        return winningTypeByMatchedCount(matchedCount);
+        return rankTypeByMatchedCount(matchedCount);
     }
 
-    private static LottoWinningType winningTypeByMatchedCount(int matchedCount) {
+    private static LottoRankType rankTypeByMatchedCount(int matchedCount) {
         if(matchedCount == 6)
             return FIRST;
         if(matchedCount == 5)
@@ -37,7 +37,7 @@ public enum LottoWinningType {
         return LOSE;
     }
 
-    public static List<LottoWinningType> winningTypeListWithReverseOrder() {
+    public static List<LottoRankType> rankListWithReverseOrder() {
         return Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
     }
 

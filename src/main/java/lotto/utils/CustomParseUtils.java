@@ -1,12 +1,11 @@
 package lotto.utils;
 
-import lotto.cons.ErrorMessageConst;
+import lotto.constant.ErrorMessageConst;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomParseUtils {
-
     public static final String DELIMITER_COMMA = ",";
     public static final String EMPTY_SPACE = " ";
     public static final String EMPTY_STRING = "";

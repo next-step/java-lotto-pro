@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.cons.ViewMessageConst;
+import lotto.constant.ViewMessageConst;
 
 import java.util.Scanner;
 
