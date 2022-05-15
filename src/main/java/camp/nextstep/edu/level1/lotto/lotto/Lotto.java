@@ -15,11 +15,11 @@ public class Lotto {
     private static final long LOTTO_PRICE = 1000;
     private static final int WINNING_NUMBER_COUNT = 6;
     private static final String WINNING_NUMBER_DELIMITER = ",";
-    private static final List<Integer> LOTTO_NUMBER_PRESET = new ArrayList<>();
+    private static final List<LottoNumber> LOTTO_NUMBER_PRESET = new ArrayList<>();
 
     static {
         for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
-            LOTTO_NUMBER_PRESET.add(number);
+            LOTTO_NUMBER_PRESET.add(new LottoNumber(number));
         }
     }
 
@@ -50,6 +50,8 @@ public class Lotto {
                 CollectionHelper.arrayStringToIntegerList(splitResult)
         );
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+
+        checkWinningNumberAndBonusNumberDuplicated(winnerLottoNumbers, bonusLottoNumber);
 
         return new LottoResult(this.items, winnerLottoNumbers, bonusLottoNumber);
     }
@@ -85,21 +87,26 @@ public class Lotto {
         }
     }
 
+    private void checkWinningNumberAndBonusNumberDuplicated(LottoNumbers winningNumber, LottoNumber bonusNumber) {
+        if (winningNumber.isContainLottoNumber(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 볼은 당첨 번호에 포함되지 않은 숫자만 허용됩니다.");
+        }
+    }
+
     private void purchaseLotto(int purchaseMoney) {
         this.purchaseOriginalMoney = new Money(purchaseMoney);
         long availablePurchaseCount = purchaseOriginalMoney.availablePurchaseCount(LOTTO_PRICE);
 
         for (int i = 0; i < availablePurchaseCount; i++) {
-
-            this.items.add(new LottoNumbers(createRandomLottoNumbers()));
+            this.items.add(createRandomLottoNumbers());
         }
 
         System.out.println(availablePurchaseCount + "개를 구매했습니다.");
     }
 
-    private static List<Integer> createRandomLottoNumbers() {
+    private static LottoNumbers createRandomLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBER_PRESET);
 
-        return LOTTO_NUMBER_PRESET.subList(0, LOTTO_RANGE);
+        return new LottoNumbers(LOTTO_NUMBER_PRESET.subList(0, LOTTO_RANGE));
     }
 }

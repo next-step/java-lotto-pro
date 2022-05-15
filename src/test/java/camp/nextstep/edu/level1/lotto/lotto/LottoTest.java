@@ -35,4 +35,15 @@ class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> lotto.compareWinningNumber(includeMinusWinningNumbers, bonusNumber));
         assertThatIllegalArgumentException().isThrownBy(() -> lotto.compareWinningNumber(invalidWinningNumberCount, bonusNumber));
     }
+
+    @Test
+    void 로또의_당첨본호에_보너스_번호가_포함되어_있으면_예외가_발생한다() {
+        Lotto lotto = new Lotto(10000);
+        String winningNumbersWithDuplicatedBonusNumber = "1, 2, 3, 4, 5, 6";
+        String bonusNumberDuplicatedInWinningNumbers = "6";
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            lotto.compareWinningNumber(winningNumbersWithDuplicatedBonusNumber, bonusNumberDuplicatedInWinningNumbers);
+        });
+    }
 }
