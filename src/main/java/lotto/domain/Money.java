@@ -23,6 +23,10 @@ public class Money {
 		this.money = money;
 	}
 
+	public int divide(int number) {
+		return money / number;
+	}
+
 	private void validEmpty(String money) {
 		if(money == null || money.isEmpty()) {
 			throw new IllegalArgumentException(EMPTY_VALUE);

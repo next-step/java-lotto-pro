@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoMachine {
+public class AutoLottoMachine extends AbstractLottoMachine {
 	private static List<Number> numbers;
 
 	static {
@@ -14,11 +14,11 @@ public class LottoMachine {
 						.collect(Collectors.toList());
 	}
 
-	public Lotto generateAutoLotto() {
+	public Lotto generate() {
 		Collections.shuffle(numbers);
 
 		return new Lotto(numbers.stream()
-							.limit(Lotto.LOTTO_SIZE)
-							.collect(Collectors.toList()));
+			.limit(Lotto.LOTTO_SIZE)
+			.collect(Collectors.toList()));
 	}
 }
