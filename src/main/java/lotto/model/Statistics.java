@@ -18,10 +18,6 @@ public class Statistics {
         return resultMap;
     }
 
-    public Statistics(Lotto win, List<Lotto> lottos) {
-        lottos.forEach(lotto -> compareNumber(win, lotto, null));
-    }
-
     public Statistics(Lotto win, LottoNumber bonus, List<Lotto> lottos) {
         validateBonus(win, bonus);
         lottos.forEach(lotto -> compareNumber(win, lotto, bonus));
