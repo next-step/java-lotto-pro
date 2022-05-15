@@ -9,6 +9,13 @@ import java.util.List;
 public class Lottos implements Iterable<Lotto>{
     List<Lotto> lottoList = new ArrayList<>();
 
+    public Lottos(){
+    }
+
+    public Lottos(List<Lotto> lottoList){
+        this.lottoList = lottoList;
+    }
+
     public void addRandomLotto(){
         lottoList.add(new Lotto(RandomLottoNumbersGenerator.generate()));
     }

@@ -54,4 +54,14 @@ public class LottoTest {
         Lotto lotto = new Lotto(numbers);
         assertThat(lotto.lottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
     }
+
+    @Test
+    @DisplayName("Lotto는 다른 Lotto와 몇 개의 숫자가 일치하는지 비교할 수 있다.")
+    void Lotto_비교_테스트(){
+        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> numbers2 = new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9));
+        Lotto lotto = new Lotto(numbers);
+        Lotto lotto2 = new Lotto(numbers2);
+        assertThat(lotto.countMatchedNumbers(lotto2)).isEqualTo(3);
+    }
 }

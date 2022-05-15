@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.utils.CustomParseUtils;
@@ -17,6 +18,7 @@ public class LottoController {
         OutputView.printPurchasedLottos(lottos);
 
         Lotto winningLotto = generateWinningLotto();
+        LottoResult result = new LottoResult(lottos, winningLotto);
     }
 
     private static Lottos purchaseLottos(int count) {

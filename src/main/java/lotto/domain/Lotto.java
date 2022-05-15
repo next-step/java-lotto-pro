@@ -42,6 +42,12 @@ public class Lotto {
         return result;
     }
 
+    public int countMatchedNumbers(Lotto anotherLotto) {
+        return (int) lottoNumbers.stream()
+                .filter(anotherLotto.lottoNumbers::contains)
+                .count();
+    }
+
     @Override
     public String toString() {
         List<Integer> integers = lottoNumbersToIntegerList(lottoNumbers);

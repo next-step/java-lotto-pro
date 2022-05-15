@@ -1,5 +1,7 @@
 package lotto.enums;
 
+import lotto.domain.Lotto;
+
 public enum LottoWinningType {
     FIRST(6, 2000000000),
     SECOND(5, 1500000),
@@ -13,5 +15,26 @@ public enum LottoWinningType {
     LottoWinningType(int matchedCount, int price) {
         this.matchedCount = matchedCount;
         this.price = price;
+    }
+
+    public static LottoWinningType match(Lotto lotto, Lotto winningLotto) {
+        int matchedCount = lotto.countMatchedNumbers(winningLotto);
+        return getWinningTypeByMatchedCount(matchedCount);
+    }
+
+    private static LottoWinningType getWinningTypeByMatchedCount(int matchedCount) {
+        if(matchedCount == 6)
+            return FIRST;
+        if(matchedCount == 5)
+            return SECOND;
+        if(matchedCount == 4)
+            return THIRD;
+        if(matchedCount == 3)
+            return FOURTH;
+        return LOSE;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }
