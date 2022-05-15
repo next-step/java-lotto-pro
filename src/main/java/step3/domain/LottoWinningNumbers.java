@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class LottoWinningNumbers {
+    private static final String WINNING_NUMBER_FORMAT_ONLY_INTEGER_ERROR_MESSAGE = "당첨번호는 정수만 가능합니다.";
     private static final String WINNING_NUMBER_FORMAT_ERROR_MESSAGE = "당첨번호는 1이상 45이하의 정수만 가능합니다.";
     private static final String WINNING_NUMBER_LENGTH_ERROR_MESSAGE = "당첨번호는 6자리의 숫자여야만 합니다.";
     private static final String WINNING_NUMBER_DUPLICATE_ERROR_MESSAGE = "당첨번호는 중복이 불가능합니다.";
@@ -39,7 +40,7 @@ public class LottoWinningNumbers {
         try {
             number = Integer.parseInt(winningNumber);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(WINNING_NUMBER_FORMAT_ERROR_MESSAGE);
+            throw new IllegalArgumentException(WINNING_NUMBER_FORMAT_ONLY_INTEGER_ERROR_MESSAGE);
         }
         return number;
     }
