@@ -1,7 +1,5 @@
 package lotto;
 
-import lotto.ui.ResultView;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
