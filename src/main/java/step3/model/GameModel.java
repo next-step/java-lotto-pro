@@ -37,13 +37,13 @@ public class GameModel {
         return lottoManager.checkWin(winnerLottoSource);
     }
 
-    public boolean buyTicket(String money) {
+    public String buyTicket(String money) {
         try {
             lottoManager.buyRandomTicket(money);
         } catch (IllegalArgumentException e) {
-            return INPUT_IS_NOT_VALID;
+            return null;
         }
-        return INPUT_IS_VALID;
+        return money;
     }
 
     public List<List<String>> getLottoNumbers() {

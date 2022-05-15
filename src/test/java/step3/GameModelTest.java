@@ -18,8 +18,8 @@ public class GameModelTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1000:true", "999:false", "a:false", "-1:false"}, delimiter = ':')
-    public void buyTicketTest(String money, boolean expected) {
+    @CsvSource(value = {"1000:1000", "999:null", "a:null", "-1:null"}, delimiter = ':', nullValues = {"null"})
+    public void buyTicketTest(String money, String expected) {
         assertThat(gameModel.buyTicket(money)).isEqualTo(expected);
     }
 }
