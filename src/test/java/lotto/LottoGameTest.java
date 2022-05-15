@@ -40,4 +40,11 @@ public class LottoGameTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void 지난주_당첨_번호_숫자_범위_초과() {
+        LottoGame game = new LottoGame(14000);
+        assertThatThrownBy(() -> game.setWinnerNumbers("-1,2,3,4,5,6"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
