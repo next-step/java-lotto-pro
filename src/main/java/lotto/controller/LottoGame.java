@@ -32,10 +32,10 @@ public class LottoGame {
         PurchasedLotto purchasedLotto = purchaseLotto(money);
         OutputView.printMyLotto(purchasedLotto);
 
-        String lastWinningNumbers = readLastWinningNumbers();
+        Lotto lastWinningLotto = new Lotto(readLastWinningNumbers());
         OutputView.printLine();
 
-        LottoResult result = matchLottoNumbers(purchasedLotto, lastWinningNumbers);
+        LottoResult result = matchLottoNumbers(purchasedLotto, lastWinningLotto);
         OutputView.showLottoResult(result, money);
     }
 
@@ -56,8 +56,8 @@ public class LottoGame {
         return new Lotto(lottoNoList);
     }
 
-    public LottoResult matchLottoNumbers(PurchasedLotto lottos, String lastWinningNumbers) {
-        List<Ranking> rankings = lottos.compareLottos(new Lotto(lastWinningNumbers));
+    public LottoResult matchLottoNumbers(PurchasedLotto purchasedLotto, Lotto lastWinningLotto) {
+        List<Ranking> rankings = purchasedLotto.compareLottos(lastWinningLotto);
         return new LottoResult(rankings);
     }
 
