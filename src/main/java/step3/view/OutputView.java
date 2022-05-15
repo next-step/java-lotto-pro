@@ -1,12 +1,12 @@
 package step3.view;
 
-import static step3.constant.LottoConstant.LOTTOS_INFO_FORMAT;
-import static step3.constant.LottoConstant.OVERVIEW_FORMAT;
+import static step3.constant.LottoViewConstant.LOTTOS_INFO_FORMAT;
+import static step3.constant.LottoViewConstant.OVERVIEW_FORMAT;
+import static step3.constant.LottoViewConstant.REWARD_RATE_FORMAT;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import step3.constant.LottoConstant;
 import step3.constant.enums.LottoReward;
 
 public class OutputView {
@@ -27,7 +27,7 @@ public class OutputView {
     }
 
     private void printRewardRate(long reward, int money) {
-        System.out.println(String.format(LottoConstant.REWARDRATE_FORMAT, reward * 1.0 / money, checkBenefit(reward, money)));
+        System.out.println(String.format(REWARD_RATE_FORMAT, reward * 1.0 / money, checkBenefit(reward, money)));
     }
 
     private String checkBenefit(long reward, int money) {

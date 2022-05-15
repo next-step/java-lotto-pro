@@ -1,7 +1,7 @@
 package step3.domain;
 
-import static step3.constant.LottoConstant.LOTTO_DELIMITER;
-import static step3.constant.LottoConstant.LOTTO_ELEMENTS_SIZE;
+import static step3.constant.LottoInfoConstant.LOTTO_DELIMITER;
+import static step3.constant.LottoInfoConstant.LOTTO_ELEMENTS_SIZE;
 
 import java.util.ArrayList;
 import java.util.Arrays;

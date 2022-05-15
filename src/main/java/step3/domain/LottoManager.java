@@ -1,9 +1,9 @@
 package step3.domain;
 
 import static java.util.Collections.shuffle;
-import static step3.constant.LottoConstant.LOTTO_ELEMENTS_SIZE;
-import static step3.constant.LottoConstant.LOTTO_PRICE;
-import static step3.constant.LottoConstant.LOTTO_VALID_ELEMENTS;
+import static step3.constant.LottoInfoConstant.LOTTO_ELEMENTS_SIZE;
+import static step3.constant.LottoInfoConstant.LOTTO_PRICE;
+import static step3.constant.LottoInfoConstant.LOTTO_VALID_ELEMENTS;
 import static step3.constant.enums.LottoReward.numberToLottoReward;
 
 import java.util.ArrayList;
