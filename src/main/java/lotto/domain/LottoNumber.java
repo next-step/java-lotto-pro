@@ -5,12 +5,13 @@ import lotto.constants.LottoConstants;
 
 public class LottoNumber {
 
+    private static final String ERROR_MESSAGE_NUMBER_IS_NULL = "[ERROR] This number is null.";
     private static final String ERROR_MESSAGE_NUMBER_OUT_OF_RANGE = "[ERROR] This number is out of range.";
 
-    private final int number;
+    private final Integer number;
 
-    public LottoNumber(final int number) {
-        validateNumberRange(number);
+    public LottoNumber(final Integer number) {
+        validate(number);
 
         this.number = number;
     }
@@ -19,7 +20,15 @@ public class LottoNumber {
         return number;
     }
 
-    private void validateNumberRange(final int number) {
+    private void validate(final Integer number) {
+        if(number == null) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_NUMBER_IS_NULL);
+        }
+
+        validateNumberRange(number);
+    }
+
+    private void validateNumberRange(final Integer number) {
         if (number < LottoConstants.MIN_LOTTO_NUMBER || number > LottoConstants.MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NUMBER_OUT_OF_RANGE);
         }
