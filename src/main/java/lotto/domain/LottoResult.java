@@ -9,28 +9,31 @@ public class LottoResult {
     private static final String WIN_MESSAGE = "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
     private static final String LOSE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    private final int investment;
-    private final Map<Prize, Integer> prizeMap;
+    private final LottoPayment payment;
+    private final LottoTickets tickets;
+    private final LottoNumbers winningNumbers;
 
-    public LottoResult(final int investment, final Map<Prize, Integer> prizeMap) {
-        this.investment = investment;
-        this.prizeMap = prizeMap;
+    public LottoResult(final LottoPayment payment, final LottoTickets tickets, final LottoNumbers winningNumbers) {
+        this.payment = payment;
+        this.tickets = tickets;
+        this.winningNumbers = winningNumbers;
     }
 
     public void printResult() {
-        printPrizes();
-        final int income = sumPrizes();
+        final Map<Prize, Integer> prizeMap = tickets.prizeMap(winningNumbers);
+        printPrizes(prizeMap);
+        final int income = sumPrizes(prizeMap);
         printReturnOfRatio(income);
     }
 
-    private void printPrizes() {
+    private void printPrizes(final Map<Prize, Integer> prizeMap) {
         for (final int matchCount : PRINTABLE_MATCH_COUNTS) {
             final Prize prize = Prize.findPrizeByMatchCount(matchCount);
             System.out.println(prize.resultMessage(prizeMap.get(prize)));
         }
     }
 
-    private int sumPrizes() {
+    private int sumPrizes(final Map<Prize, Integer> prizeMap) {
         int sum = 0;
         for (Entry<Prize, Integer> entry : prizeMap.entrySet()) {
             sum += entry.getKey().getPrize() * entry.getValue();
@@ -39,7 +42,7 @@ public class LottoResult {
     }
 
     private void printReturnOfRatio(final int income) {
-        final double returnOfRatio = Double.valueOf(income) / Double.valueOf(investment);
+        final double returnOfRatio = Double.valueOf(income) / Double.valueOf(payment.getMoney());
         String message = "총 수익률은 " + String.format("%.2f", returnOfRatio) + "입니다.";
         System.out.println(message + (returnOfRatio > 1 ? WIN_MESSAGE : LOSE_MESSAGE));
     }
@@ -47,8 +50,9 @@ public class LottoResult {
     @Override
     public String toString() {
         return "LottoResult{" +
-                "investment=" + investment +
-                ", prizeMap=" + prizeMap +
+                "payment=" + payment +
+                ", tickets=" + tickets +
+                ", winningNumbers=" + winningNumbers +
                 '}';
     }
 
@@ -61,11 +65,12 @@ public class LottoResult {
             return false;
         }
         final LottoResult that = (LottoResult) o;
-        return investment == that.investment && Objects.equals(prizeMap, that.prizeMap);
+        return Objects.equals(payment, that.payment) && Objects.equals(tickets, that.tickets)
+                && Objects.equals(winningNumbers, that.winningNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(investment, prizeMap);
+        return Objects.hash(payment, tickets, winningNumbers);
     }
 }
