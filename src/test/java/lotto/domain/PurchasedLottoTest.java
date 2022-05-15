@@ -27,6 +27,6 @@ class PurchasedLottoTest {
         PurchasedLotto purchasedLotto = new PurchasedLotto(Arrays.asList(new Lotto(lottoNumbers)));
         String lastWinningLotto = "1,2,3,4,5,6";
         List<Ranking> rankings = purchasedLotto.compareLottos(new Lotto(lastWinningLotto));
-        assertThat(rankings.get(0)).isEqualTo(expected);
+        assertThat(rankings).containsExactly(expected);
     }
 }

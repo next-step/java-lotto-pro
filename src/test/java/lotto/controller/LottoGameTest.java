@@ -34,6 +34,6 @@ class LottoGameTest {
         Lotto lastWinningLotto = new Lotto("1,2,3,4,5,6");
         PurchasedLotto purchasedLotto = new PurchasedLotto(Arrays.asList(new Lotto(lottoNumbers)));
         LottoResult lottoResult = game.matchLottoNumbers(purchasedLotto, lastWinningLotto);
-        assertThat(lottoResult.findRankings(matchingCount).get(0)).isEqualTo(expected);
+        assertThat(lottoResult.findRankings(matchingCount)).containsExactly(expected);
     }
 }
