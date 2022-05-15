@@ -56,7 +56,7 @@ public class Lotto {
 
     private void validLottoUnique(List<LottoNumber> lotto) {
         Set<LottoNumber> lottoNumbers = new HashSet<>(lotto);
-        if (isNotUniqueLottoNumber(lottoNumbers.size())) {
+        if (isNotLottoSize(lottoNumbers.size())) {
             throw new IllegalArgumentException("로또 번호가 중복되었습니다.");
         }
     }
@@ -68,10 +68,6 @@ public class Lotto {
     }
 
     private boolean isNotLottoSize(int size) {
-        return size != LOTTO_SIZE_NUM;
-    }
-
-    private boolean isNotUniqueLottoNumber(int size) {
         return size != LOTTO_SIZE_NUM;
     }
 

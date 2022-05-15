@@ -38,8 +38,7 @@ class MoneyTest {
     @ParameterizedTest(name = "금액 {0}로 {1}의 최대 로또를 살 수 있다.")
     @CsvSource(value = {"1100:1", "3333:3", "10000:10"}, delimiter = ':')
     void moneyMaxLottoCount(int input, int expect) {
-        assertThat(Money.from(input)
-                .maxLottoCount()).isEqualTo(expect);
+        assertThat(Money.from(input).maxLottoCount()).isEqualTo(expect);
     }
 
     @DisplayName("금액 끼리는 더할 수 있다.")
