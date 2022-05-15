@@ -15,7 +15,8 @@ public class LottoNumbers {
     private static final String NUMBERS_SUFFIX = "]";
     private static final int MAX_LOTTO_NUMBER_SIZE = 6;
 
-    private static final String LOTTO_NUMBERS_SIZE_ERROR = "[ERROR] 로또는 6개의 숫자야 합니다.";
+    private static final String LOTTO_NUMBERS_SIZE_ERROR =
+            String.format("[ERROR] 로또는 &s개의 숫자야 합니다.", MAX_LOTTO_NUMBER_SIZE);
     private static final String LOTTO_NUMBERS_DUPLICATION_ERROR = "[ERROR] 중복된 숫자는 불가 합니다.";
 
     private final List<LottoNumber> numbers;

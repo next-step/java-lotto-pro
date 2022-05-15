@@ -7,7 +7,8 @@ public class LottoNumber {
     public static final int MIN_LOTTO_NUM = 1;
     public static final int MAX_LOTTO_NUM = 45;
 
-    private static final String LOTTO_NUMBER_ERROR = "[ERROR] 로또 숫자는 1 ~ 45 사이의 숫자야 합니다.";
+    private static final String LOTTO_NUMBER_ERROR =
+            String.format("[ERROR] 로또 숫자는 %s ~ %s 사이의 숫자야 합니다.", MIN_LOTTO_NUM, MAX_LOTTO_NUM);
 
     private final int number;
 
