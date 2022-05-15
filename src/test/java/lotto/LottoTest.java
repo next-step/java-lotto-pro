@@ -36,11 +36,4 @@ class LottoTest {
         assertThatThrownBy(() -> new Lotto(numbers)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void 예외테스트_로또는_1부터_45까지의_숫자로_이루어져_있다() {
-        int[] numbers = {1, 68, 5, 7, 9, 23};
-
-        assertThatThrownBy(() -> new Lotto(numbers)).isInstanceOf(IllegalArgumentException.class);
-    }
-
 }
