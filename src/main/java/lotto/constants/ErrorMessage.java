@@ -6,6 +6,7 @@ public class ErrorMessage {
     public static final String NOT_EMPTY_LOTTO = formatErrorMessage("로또 번호는 빈 값일 수 없습니다.");
     public static final String OUT_OF_SIZE_LOTTO = formatErrorMessage("로또의 번호는 6개만 가능합니다.");
     public static final String DUPLICATE_NUMBER = formatErrorMessage("중복된 번호는 포함될 수 없습니다.");
+    public static final String DUPLICATE_BONUS_BALL = formatErrorMessage("당첨 번호와 중복된 번호는 포함될 수 없습니다.");
     public static final String OUT_OF_RANGE_MATCH = formatErrorMessage("0개부터 6개 까지만 매칭 가능합니다.");
     public static final String LESS_THEN_MIN_MONEY = formatErrorMessage("0원 이상의 금액만 입력 가능합니다.");
     public static final String LESS_THEN_PRICE_MONEY = formatErrorMessage("최소 1000원부터 구매 가능합니다.");

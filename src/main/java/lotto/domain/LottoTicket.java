@@ -33,6 +33,12 @@ public class LottoTicket {
                 .count();
     }
 
+    public void duplicateBonusBall(LottoNumber bonusBall) {
+        if (contains(bonusBall)) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_BONUS_BALL);
+        }
+    }
+
     private boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
