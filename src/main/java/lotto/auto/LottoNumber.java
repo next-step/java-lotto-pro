@@ -11,9 +11,9 @@ public class LottoNumber {
     private List<Integer> numbers;
 
     public LottoNumber() {
+        this.numbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUMBER_SIZE_VALUE; i++) {
-            this.numbers = new ArrayList<>();
-            this.numbers.add(i);
+            this.numbers.add(i+1);
         }
     }
 
