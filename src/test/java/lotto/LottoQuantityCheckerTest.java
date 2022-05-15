@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.LottoQuantityChecker;
+import lotto.model.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ public class LottoQuantityCheckerTest {
     @DisplayName("금액에 따른 로또 수량을 계산한다")
     @Test
     void validCheck() {
-        String price = "14000";
-        assertThat(LottoQuantityChecker.calculate(price)).isEqualTo(14);
+        Money money = new Money("14000");
+        assertThat(LottoQuantityChecker.calculate(money)).isEqualTo(14);
     }
 }
