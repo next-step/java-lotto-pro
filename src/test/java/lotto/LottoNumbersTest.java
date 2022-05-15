@@ -26,8 +26,8 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호와 당첨 번호를 확인한다.")
     void 테스트_로또번호_당첨번호_확인() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(5, 8, 9, 10, 11, 12));
         int result = lottoNumbers.winningCount(Arrays.asList(7, 8, 9, 10, 11, 12));
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isEqualTo(5);
     }
 }

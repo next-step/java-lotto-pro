@@ -47,7 +47,9 @@ public class LottoNumbers {
     }
 
     public int winningCount(List<Integer> answerNumberList) {
-        return 0;
+        return (int) this.numbers.stream()
+                        .filter(answerNumberList::contains)
+                        .count();
     }
 
     @Override
