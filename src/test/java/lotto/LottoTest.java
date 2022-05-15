@@ -3,6 +3,7 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import lotto.ui.ResultView;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
@@ -20,7 +21,7 @@ public class LottoTest {
     @Test
     public void 금액_입력_로또_개수확인() {
         Lottos lottos = LottoMachine.createLottos(14000);
-        LottoMachine.printLottoPurchase();
+        ResultView.printLottoPurchase(lottos);
 
         assertThat(lottos.getLottosSize()).isEqualTo(14);
     }
