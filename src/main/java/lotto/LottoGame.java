@@ -11,6 +11,8 @@ public class LottoGame {
 
     private int purchasePrice;
 
+    private double earningRate;
+
     Map<Integer, Integer> scoreMap;
 
     private LottoNumbers winnerNumbers;
@@ -57,7 +59,7 @@ public class LottoGame {
     LottoGame(List<LottoNumbers> ticketNumbers, String winnerNumbers) {
         this();
         
-        this.purchasePrice = 1000;
+        this.purchasePrice = ticketNumbers.size() * TICKET_UNIT_PRICE;
 
         this.ticketNumbers = ticketNumbers;
 
