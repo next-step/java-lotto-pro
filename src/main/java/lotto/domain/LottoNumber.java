@@ -8,10 +8,17 @@ public class LottoNumber {
 
     private final int number;
 
-
     public LottoNumber(int number) {
         valid(number);
         this.number = number;
+    }
+
+    public static LottoNumber createBonusNumber(Lotto winnerLotto, int bonusNumber) {
+        LottoNumber lottoNumber = new LottoNumber(bonusNumber);
+        if (winnerLotto.isContain(lottoNumber)) {
+            throw new IllegalArgumentException("보너스 번호가 당첨로또 번호에 포함되어 있으면 안된다");
+        }
+        return lottoNumber;
     }
 
     private void valid(int number) {

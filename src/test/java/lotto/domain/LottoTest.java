@@ -64,6 +64,15 @@ class LottoTest {
                 .isThrownBy(() -> Lotto.createCustomLotto(Arrays.asList(1, 3, 5, 40, 44, 44)));
     }
 
+    @Test
+    @DisplayName("로또 숫자가 포함되어 있는지 여부")
+    void isHas(){
+        Lotto lottoNumbers = Lotto.createCustomLotto(Arrays.asList(1, 4, 3, 5, 6, 7));
+
+        assertThat(lottoNumbers.isContain(new LottoNumber(1))).isTrue();
+        assertThat(lottoNumbers.isContain(new LottoNumber(21))).isFalse();
+    }
+
     private static Stream<Arguments> provideLottoSize() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 3, 4, 5, 6, 7, 8)),

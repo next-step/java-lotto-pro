@@ -47,8 +47,12 @@ public class Lotto {
                 .subList(FIRST_INDEX, MAX_LOTTO_NUMBER_QTY);
     }
 
-    public LottoRank match(Lotto winLotto) {
-        return LottoRank.reword(matchCount(winLotto));
+    public boolean isContain(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public LottoRank match(Lotto winLotto, LottoNumber bonusBall) {
+        return LottoRank.reword(matchCount(winLotto), isContain(bonusBall));
     }
 
     private void valid(List<Integer> numbers) {
