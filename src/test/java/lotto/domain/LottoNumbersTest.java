@@ -21,8 +21,9 @@ class LottoNumbersTest {
     }
 
     @Test
-    void 로또_숫자들에서_오름차순으로_정렬된_로또_번호_6개를_생성할_수_있다() {
+    void 로또_숫자들에서_오름차순으로_정렬된_로또_번호_6개_및_보너스볼을_생성할_수_있다() {
         assertThat(lottoNumbers.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(lottoNumbers.getBonusNumber()).isEqualTo(7);
     }
 
     @ParameterizedTest
