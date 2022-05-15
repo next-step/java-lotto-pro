@@ -14,16 +14,16 @@ public class Vendor {
                 .collect(Collectors.toList());
     }
 
-    public Lottos buy(long money) {
+    public Lotto buy(long money) {
         final long maxCount = money / LOTTO_PRICE;
         if (maxCount < 1)
             throw new RuntimeException("이 돈으로는 로또를 구매할 수 없습니다.");
 
-        Lottos lottos = new Lottos();
+        Lotto lotto = new Lotto();
         for (int count = 1; count <= maxCount; count++) {
-            lottos.add(get());
+            lotto.add(get());
         }
-        return lottos;
+        return lotto;
     }
 
     private LottoNumbers get() {

@@ -33,11 +33,11 @@ class LotteryTest {
 
 
 
-        Lottos lottos = new Lottos();
-        lottos.add(lottoNumbers1);
-        lottos.add(lottoNumbers2);
+        Lotto lotto = new Lotto();
+        lotto.add(lottoNumbers1);
+        lotto.add(lottoNumbers2);
 
-        assertThat(new Lottery(winner).get(lottos))
+        assertThat(new Lottery(winner).get(lotto))
                 .contains(new ContainCount(6))
                 .contains(new ContainCount(3));
     }

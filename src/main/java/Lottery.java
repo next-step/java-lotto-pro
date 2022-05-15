@@ -7,9 +7,9 @@ public class Lottery {
 
     private final LottoNumbers winner;
 
-    public ContainCounts get(Lottos lottos) {
+    public ContainCounts get(Lotto lotto) {
         ContainCounts containCounts = new ContainCounts();
-        for (LottoNumbers lottoNumbers : lottos) {
+        for (LottoNumbers lottoNumbers : lotto) {
             containCounts.add(get(lottoNumbers));
         }
         return containCounts;

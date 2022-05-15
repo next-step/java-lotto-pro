@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class VendorTest {
     @Test
     void 로또를_구매할_수_있다() {
-        assertThat(new Vendor().buy(Vendor.LOTTO_PRICE)).isInstanceOf(Lottos.class);
+        assertThat(new Vendor().buy(Vendor.LOTTO_PRICE)).isInstanceOf(Lotto.class);
     }
 
     @Test
