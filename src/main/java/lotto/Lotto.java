@@ -17,6 +17,10 @@ public class Lotto {
         Arrays.stream(numbers).forEach(this::addNumber);
     }
 
+    public Lotto(List<Number> numbers) {
+        this.numbers.addAll(numbers);
+    }
+
     private boolean isEqualSize(int[] numbers) {
         return numbers.length == NUMBER_SIZE;
     }
@@ -30,10 +34,6 @@ public class Lotto {
 
     private boolean isContains(int number) {
         return numbers.contains(new Number(number));
-    }
-
-    public int size() {
-        return numbers.size();
     }
 
     public List<Number> getNumbers() {
