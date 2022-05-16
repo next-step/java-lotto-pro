@@ -15,6 +15,10 @@ public class LottoNumber {
         this.value = value;
     }
 
+    public boolean hasNumber(int number) {
+        return number == value;
+    }
+
     private boolean validate(int lottoNumber) {
         return lottoNumber < MINIMUM_NUMBER || lottoNumber > MAXIMUM_NUMBER;
     }

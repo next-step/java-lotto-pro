@@ -11,13 +11,32 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class LottoNumbersTest {
-
     @Test
     @DisplayName("로또번호를 비교하여 같은 번호의 리스트를 반환한다.")
     void 같은_번호_반환() {
         LottoNumbers lottoNumbers1 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumbers lottoNumbers2 = new LottoNumbers(Arrays.asList(3, 5, 1, 6, 9, 10));
         assertThat(lottoNumbers1.match(lottoNumbers2)).containsExactlyInAnyOrderElementsOf(Arrays.asList(1, 3, 5, 6));
+    }
+
+    @Nested
+    @DisplayName("입력된 번호 포함 여부")
+    class 번호_포함_여부 {
+        private final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        private final int inclusive = 1;
+        private final int exclusive = 10;
+
+        @Test
+        @DisplayName("입력된 번호가 로또번호에 있으면 true를 반환한다.")
+        void 번호_포함() {
+            assertThat(lottoNumbers.has(inclusive)).isTrue();
+        }
+
+        @Test
+        @DisplayName("입력된 번호가 로또번호에 없으면 false를 반환한다.")
+        void 번호_불포함() {
+            assertThat(lottoNumbers.has(exclusive)).isFalse();
+        }
     }
 
     @Nested
@@ -67,6 +86,4 @@ class LottoNumbersTest {
             assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(IllegalArgumentException.class);
         }
     }
-
-
 }

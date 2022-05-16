@@ -1,6 +1,7 @@
 package study.lotto.controller;
 
 import study.lotto.domain.AutomaticLottoGenerator;
+import study.lotto.domain.LottoNumber;
 import study.lotto.domain.draw.DrawResult;
 import study.lotto.domain.draw.LottoDraw;
 import study.lotto.domain.lottomachine.LottoMachine;
@@ -34,7 +35,7 @@ public class LottoController {
         WinningLottoNumbers winningLottoNumbers = view.getWinningLottoNumbers();
         BonusBall bonusBall = view.getBonusBall();
 
-        LottoDraw lottoDraw = new LottoDraw(winningLottoNumbers.getLottoNumbers());
+        LottoDraw lottoDraw = new LottoDraw(winningLottoNumbers.getLottoNumbers(), bonusBall.get());
         DrawResult drawResult = lottoDraw.match(lottoPurchaseHistory.getLottos());
         return drawResult;
     }

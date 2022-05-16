@@ -27,6 +27,11 @@ public class LottoNumbers {
         return duplicates;
     }
 
+    public boolean has(int number) {
+        return value.stream()
+                .anyMatch(lottoNumber -> lottoNumber.hasNumber(number));
+    }
+
     public List<Integer> numbers() {
         return value.stream()
                 .map(LottoNumber::toString)

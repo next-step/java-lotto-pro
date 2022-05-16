@@ -10,6 +10,10 @@ public class BonusBall {
         this.value = validate(stringValue);
     }
 
+    public int get() {
+        return value;
+    }
+
     private int validate(String stringValue) {
         int parsedNumber = parseNumber(stringValue);
 
