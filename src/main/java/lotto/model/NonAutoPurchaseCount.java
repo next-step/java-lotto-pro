@@ -1,9 +1,9 @@
 package lotto.model;
 
-public class NonAutoCount {
+public class NonAutoPurchaseCount {
     private int count;
 
-    public NonAutoCount(int count) {
+    public NonAutoPurchaseCount(int count) {
         this.count = count;
     }
 

@@ -3,13 +3,12 @@ package lotto.model;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class NonAutoCountTest {
+class NonAutoPurchaseCountTest {
 
     @Test
     void nonAutoPurchasePrice() {
-        assertThat(new NonAutoCount(3)
+        assertThat(new NonAutoPurchaseCount(3)
                 .nonAutoPurchasePrice())
                 .isEqualTo(3000);
     }
