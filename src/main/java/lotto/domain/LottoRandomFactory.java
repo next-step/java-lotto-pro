@@ -5,9 +5,9 @@ public class LottoRandomFactory {
     private final Money price;
     private final int numberSize;
 
-    public LottoRandomFactory(RandomNumberMachine randomNumberMachine, Money price, int numberSize) {
+    public LottoRandomFactory(RandomNumberMachine randomNumberMachine, double price, int numberSize) {
         this.randomNumberMachine = randomNumberMachine;
-        this.price = price;
+        this.price = Money.from(price);
         this.numberSize = numberSize;
     }
 

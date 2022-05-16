@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import calculator.domain.StringSplitter;
 import java.util.Objects;
 
 public class Money {
@@ -17,6 +18,9 @@ public class Money {
         return new Money(value);
     }
 
+    public static Money from(String value) {
+        return new Money(Double.parseDouble(value));
+    }
 
     public double divide(Money target) {
         return this.value / target.value;
