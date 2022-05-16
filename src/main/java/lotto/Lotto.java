@@ -14,6 +14,10 @@ public class Lotto {
 
     private List<Integer> lottoNumbers;
 
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     public Lotto() {
         createRandomLottoNumber();
     }
@@ -43,5 +47,13 @@ public class Lotto {
 
         System.out.print(lottoNumbers.get(LOTTO_COUNT - 1));
         System.out.println(LOTTO_PRINT_END_CHAR);
+    }
+
+    public int checkMatchCount(Lotto checkLotto) {
+        int countMatch = 0;
+        for (Integer lotto : checkLotto.getLottoNumbers()) {
+            countMatch = lottoNumbers.contains(lotto) ? countMatch + 1 : countMatch;
+        }
+        return countMatch;
     }
 }
