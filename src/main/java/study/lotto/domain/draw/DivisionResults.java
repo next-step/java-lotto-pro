@@ -1,5 +1,7 @@
 package study.lotto.domain.draw;
 
+import static study.lotto.domain.draw.Division.DIVISION_NONE;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +13,7 @@ public class DivisionResults {
 
     public DivisionResults(List<DivisionResult> divisionResultList) {
         this.value = Arrays.asList(Division.values()).stream()
+                .filter(division -> division != DIVISION_NONE)
                 .map(division -> findDivisionResult(division, divisionResultList))
                 .collect(Collectors.toList());
     }

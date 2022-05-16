@@ -56,8 +56,9 @@ public class LottoView {
     private void printDivisionResult(WinningStatistics winningStatistics) {
         winningStatistics.getDivisionResultList().stream()
                 .map(divisionResult ->
-                        String.format("%d개 일치 (%s원)- %d개\n",
+                        String.format("%d개 일치%s(%s원)- %d개\n",
                                 divisionResult.getMatchCount(),
+                                divisionResult.isBonusMatch() ? ", 보너스 볼 일치" : " ",
                                 divisionResult.getPrize(),
                                 divisionResult.getWinningCount()))
                 .forEach(userInterface::show);

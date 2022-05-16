@@ -30,7 +30,6 @@ public class Lottos {
     private List<DivisionResult> createDivisionResultList(LottoNumbers winningNumber, LottoNumber matchBonus) {
         Map<Division, Long> divisionResults = value.stream()
                 .map(lotto -> Division.valueOf(lotto.matchCount(winningNumber), lotto.hasNumber(matchBonus)))
-                .filter(division -> division != Division.DIVISION_NONE)
                 .collect(Collectors.groupingBy(division -> division, Collectors.counting()));
 
         return divisionResults.entrySet().stream()

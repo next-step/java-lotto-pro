@@ -9,16 +9,14 @@ import study.lotto.domain.draw.DrawResult;
 
 public class DivisionDetails {
     private final int matchCount;
+    private final boolean bonusMatch;
     private final BigDecimal prize;
     private final Long winningCount;
 
     public DivisionDetails(Division division, Long winningCount) {
-        this(division.getMatchCount(), division.getPrize(), winningCount);
-    }
-
-    public DivisionDetails(int matchCount, BigDecimal prize, Long winningCount) {
-        this.matchCount = matchCount;
-        this.prize = prize;
+        this.matchCount = division.getMatchCount();
+        this.bonusMatch = division.getBonusMandatory();
+        this.prize = division.getPrize();
         this.winningCount = winningCount;
     }
 
@@ -35,6 +33,8 @@ public class DivisionDetails {
     public int getMatchCount() {
         return matchCount;
     }
+
+    public boolean isBonusMatch() { return bonusMatch; }
 
     public BigDecimal getPrize() {
         return prize;
