@@ -27,6 +27,6 @@ class WinningStatisticTest {
         // when
         double rate = winningStatistic.calculateRateOfReturn(Money.of(14000));
         // then
-        assertThat(rate).isEqualTo(0.35);
+        assertThat(rate).isGreaterThan(0.35);
     }
 }

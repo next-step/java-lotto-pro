@@ -37,14 +37,14 @@ class MoneyTest {
     }
 
     @Test
-    void 나누기를_해서_두자리_소수점을_반환한다() {
+    void 나누기를_해서_소수점을_반환한다() {
         // given
         Money money = Money.of(5000);
         Money divide = Money.of(14000);
         // when
         double result = money.divideDecimal(divide);
         // then
-        assertThat(result).isEqualTo(0.35);
+        assertThat(result).isGreaterThan(0.35);
     }
 
     @Test

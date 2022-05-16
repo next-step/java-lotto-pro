@@ -4,8 +4,6 @@ import java.util.Objects;
 
 public class Money {
 
-    private static final int PERCENTAGE = 100;
-
     private final int won;
 
     private Money(String won) {
@@ -41,12 +39,7 @@ public class Money {
     }
 
     public double divideDecimal(Money money) {
-        double late = won / (double) money.won;
-        return makeTwoDecimalPlace(late);
-    }
-
-    private double makeTwoDecimalPlace(double late) {
-        return Math.floor(late * PERCENTAGE) / (double) PERCENTAGE;
+        return won / (double) money.won;
     }
 
     public Money multiply(int count) {
