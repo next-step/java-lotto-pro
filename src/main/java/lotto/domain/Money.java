@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.enums.LottoRank;
+
 import static lotto.common.Messages.MONEY_NOT_NUMBER;
 import static lotto.common.Messages.POSITIVE_MONEY;
 
@@ -35,6 +37,14 @@ public class Money {
             return false;
         }
         return true;
+    }
+
+    public double lottoGameEarningsRate(LottoRanks lottoRanks) {
+        return (double) totalPrizeMoney(lottoRanks) / money;
+    }
+
+    private int totalPrizeMoney(LottoRanks lottoRanks) {
+        return lottoRanks.getLottoRanks().stream().mapToInt(LottoRank::getPrizeMoney).sum();
     }
 
     public int currentMoney() {
