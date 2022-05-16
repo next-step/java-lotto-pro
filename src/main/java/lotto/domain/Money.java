@@ -4,20 +4,20 @@ import java.util.Objects;
 
 public class Money {
     private static final String DEFAULT_UNIT = "원";
-    private final int value;
+    private final double value;
     private final String unit;
 
-    private Money(int value) {
+    private Money(double value) {
         this.value = value;
         this.unit = DEFAULT_UNIT;
         validate();
     }
 
-    public static Money from(int value) {
+    public static Money from(double value) {
         return new Money(value);
     }
 
-    public int divide(Money target) {
+    public double divide(Money target) {
         return this.value / target.value;
     }
 

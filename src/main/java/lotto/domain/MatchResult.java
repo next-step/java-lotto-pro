@@ -10,7 +10,12 @@ public enum MatchResult {
     SIX(6, Money.from(2000000000));
 
 
+    private final int matchCount;
+    private final Money cashPrize;
+
     private MatchResult(int matchCount, Money cashPrize) {
+        this.matchCount = matchCount;
+        this.cashPrize = cashPrize;
     }
 
     public static MatchResult from(int matchCount) {
@@ -34,4 +39,9 @@ public enum MatchResult {
         }
         return MatchResult.ZERO;
     }
+
+    public Money getCashPrize() {
+        return cashPrize;
+    }
+
 }

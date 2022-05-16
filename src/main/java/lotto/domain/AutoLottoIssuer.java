@@ -15,11 +15,18 @@ public class AutoLottoIssuer {
     public List<Lotto> issue(Money orderPrice) {
         List<Lotto> lottoList = new ArrayList<>();
 
-        int lottoCount = orderPrice.divide(LOTTO_PRICE);
+        double lottoCount = orderPrice.divide(LOTTO_PRICE);
+        validate(lottoCount);
         for (int index = 0; index < lottoCount; index++) {
             lottoList.add(lottoRandomFactory.create());
         }
 
         return lottoList;
+    }
+
+    private void validate(double lottoCount) {
+        if (!(lottoCount == Math.floor(lottoCount)) || Double.isInfinite(lottoCount)) {
+            throw new IllegalArgumentException("로또 구매 금액은 로또 가격의 배수만 가능합니다.");
+        }
     }
 }
