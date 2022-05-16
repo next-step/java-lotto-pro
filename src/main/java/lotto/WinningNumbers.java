@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoNumber;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,20 +13,31 @@ public class WinningNumbers {
     private final List<LottoNumber> numbers;
 
     public WinningNumbers(String winningNumbers) {
-        String[] split = winningNumbers.split(",");
-        validateSize(split);
-        this.numbers = mapLottoNumbers(split);
+        List<String> trimmedWinningNumberList = Arrays.stream(winningNumbers.split(","))
+                .map(String::trim)
+                .collect(Collectors.toList());
+        validateSize(trimmedWinningNumberList);
+        List<LottoNumber> winningLottoNumbers = mapLottoNumbers(trimmedWinningNumberList);
+        validateDuplicate(winningLottoNumbers);
+        this.numbers = winningLottoNumbers;
     }
 
-    private List<LottoNumber> mapLottoNumbers(String[] numbers) {
-        return Arrays.stream(numbers)
-                .map(n -> new LottoNumber(Integer.parseInt(n.trim())))
+    private List<LottoNumber> mapLottoNumbers(List<String> numbers) {
+        return numbers.stream()
+                .map(n -> new LottoNumber(n))
                 .collect(Collectors.toList());
     }
 
-    private void validateSize(String[] numbers) {
-        if (numbers.length != SIZE) {
+    private void validateSize(List<String> numbers) {
+        if (numbers.size() != SIZE) {
             throw new IllegalArgumentException("당첨 번호는 " + SIZE + "개여야 합니다.");
+        }
+    }
+
+    private void validateDuplicate(List<LottoNumber> numbers) {
+        HashSet<LottoNumber> distinctNumbers = new HashSet<>(numbers);
+        if (distinctNumbers.size() != SIZE) {
+            throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
         }
     }
 
