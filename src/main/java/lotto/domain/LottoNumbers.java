@@ -1,12 +1,19 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
+import lotto.strategy.AutoPickNumberStrategy;
 import lotto.strategy.PickNumberStrategy;
 
 public class LottoNumbers {
 
+    private List<LottoNumber> values;
 
-    public List<LottoNumber> makeLottoNumbers(PickNumberStrategy pickNumberStrategy) {
-        return pickNumberStrategy.pickLottoNumbers();
+    public LottoNumbers(PickNumberStrategy pickNumberStrategy) {
+         values = pickNumberStrategy.pickLottoNumbers();
+    }
+
+    public List<LottoNumber> getValues() {
+        return Collections.unmodifiableList(values);
     }
 }

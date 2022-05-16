@@ -14,8 +14,8 @@ public class LottoNumbersTest {
 
     @Test
     public void differentSixNumbers() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        List<LottoNumber> lottoNumberList = lottoNumbers.makeLottoNumbers(new AutoPickNumberStrategy());
+        LottoNumbers lottoNumbers = new LottoNumbers(new AutoPickNumberStrategy());
+        List<LottoNumber> lottoNumberList = lottoNumbers.getValues();
         Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumberList);
         assertThat(lottoNumberSet).hasSize(6);
     }
