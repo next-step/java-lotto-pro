@@ -4,7 +4,6 @@ import lotto.constant.ErrorMessage;
 import lotto.constant.LottoRoleConst;
 
 public class Money {
-
     private final int money;
 
     public Money(String moneyWord) {
@@ -38,6 +37,10 @@ public class Money {
         if (money % LottoRoleConst.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ErrorMessage.INCORRECT_UNIT_MONEY);
         }
+    }
+
+    public int getMoney() {
+        return money;
     }
 
 }
