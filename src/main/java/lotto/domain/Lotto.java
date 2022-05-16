@@ -14,22 +14,68 @@ public class Lotto {
 
     private final List<LottoNumber> lotto;
 
+    public Lotto(final List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
+        this.lotto = lottoNumbers;
+    }
+
     private Lotto() {
         lotto = IntStream.range(MIN, MAX)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public static List<LottoNumber> autoLotto() {
+    public static Lotto auto() {
         shuffle();
-        return INSTANCE.lotto
-                .stream()
+        return new Lotto(generateAuto());
+    }
+
+    private static List<LottoNumber> generateAuto() {
+        return INSTANCE.lotto.stream()
                 .limit(LIMIT_LOTTO)
                 .collect(Collectors.toList());
     }
 
     private static void shuffle() {
         Collections.shuffle(INSTANCE.lotto);
+    }
+
+    public String printLotto() {
+        return lotto.stream()
+                .map(LottoNumber::getLottoNumber)
+                .map(Objects::toString)
+                .collect(Collectors.joining(", ", "[", "]"));
+    }
+
+    public int matches(final Lotto answer) {
+        int count = 0;
+        for (LottoNumber number : answer.lotto) {
+            count = contains(number) ? count + 1 : count;
+        }
+        return count;
+    }
+
+    private boolean contains(final LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
+    private void validate(final List<LottoNumber> lottoNumbers) {
+        validateLength(lottoNumbers);
+        validateOverlap(lottoNumbers);
+    }
+
+    private void validateLength(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LIMIT_LOTTO) {
+            throw new IllegalArgumentException("6자리의 번호를 입력 해야 합니다.");
+        }
+    }
+
+    private void validateOverlap(List<LottoNumber> lottoNumbers) {
+        long count = lottoNumbers.stream().distinct().count();
+
+        if (count != LIMIT_LOTTO) {
+            throw new IllegalArgumentException("중복된 숫자는 입력 불가능 합니다.");
+        }
     }
 
     @Override
@@ -47,8 +93,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "Lotto{" +
-                "lotto=" + lotto +
-                '}';
+        return "Lotto{" + "lotto=" + lotto + '}';
     }
 }
