@@ -18,14 +18,6 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
-    public int getWinningMoney() {
-        return winningMoney;
-    }
-
     public static Rank valueOf(Long countOfMatch, boolean matchBonus) {
         return valueOf(countOfMatch.intValue(), matchBonus);
     }
@@ -41,5 +33,13 @@ public enum Rank {
         }
 
         return rank;
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
     }
 }
