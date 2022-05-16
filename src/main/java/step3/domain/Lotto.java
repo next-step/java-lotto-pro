@@ -13,20 +13,17 @@ public class Lotto {
     private final Set<LottoNumber> lotto;
 
     Lotto(List<Integer> numbers) {
-        this.lotto = numbers.stream()
+        Set<LottoNumber> numberSet = numbers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet());
-        validate();
+        validate(numberSet);
+        this.lotto = numberSet;
     }
 
-    private void validate() {
-        if (isInvalidNumberCount()) {
+    private void validate(Set<LottoNumber> numberSet) {
+        if (numberSet.size() != SIZE) {
             throw new IllegalArgumentException(String.format("중복되지 않은 %d개의 숫자를 입력해주세요.", SIZE));
         }
-    }
-
-    private boolean isInvalidNumberCount() {
-        return lotto.size() != SIZE;
     }
 
     public static int getSize() {
