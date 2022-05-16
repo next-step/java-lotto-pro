@@ -44,7 +44,7 @@ public class Lotto {
 
     public Ranking compareLotto(Lotto target, LottoNo bonusNumber) {
         int matchingCount = getMatchingCount(target);
-        boolean matchBonus = isContainBonusNumber(target, bonusNumber);
+        boolean matchBonus = isContainBonusNumber(bonusNumber);
         return Ranking.findRank(matchingCount, matchBonus);
     }
 
@@ -54,8 +54,7 @@ public class Lotto {
         return intersection.size();
     }
 
-    private boolean isContainBonusNumber(Lotto target, LottoNo bonusLotto) {
-        List<LottoNo> lottoNoList = target.getLottoNoList();
+    private boolean isContainBonusNumber(LottoNo bonusLotto) {
         return lottoNoList.contains(bonusLotto);
     }
 
