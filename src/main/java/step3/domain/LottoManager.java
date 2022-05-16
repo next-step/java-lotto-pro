@@ -14,6 +14,7 @@ import step3.enums.LottoReward;
 public class LottoManager {
 
     private List<LottoTicket> lottoTickets = new ArrayList<>();
+    private final int MATCH_COUNT_BASE = 0;
     private final int LOTTO_MIN = 1;
     private final int LOTTO_MAX = 46;
     private final int LOTTO_ELEMENTS_SIZE = 6;
@@ -61,7 +62,7 @@ public class LottoManager {
 
     private void initStatistics(LinkedHashMap<String, Integer> statistics) {
         for (LottoReward lottoReward : LottoReward.values()) {
-            statistics.put(lottoReward.name(), 0);
+            statistics.put(lottoReward.name(), MATCH_COUNT_BASE);
         }
     }
 
