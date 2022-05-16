@@ -1,11 +1,10 @@
 package lotto_auto.model;
 
 public class Money {
-    int money;
-    public static final int LOTTO_PRICE = 1_000;
-    public static final int MIN_SIZE = 0;
+    private final int money;
+    public static final int MIN_SIZE = 1_000;
     public static final String NOT_NUMBER = "[ERROR] 구입 금액은 숫자 이외의 문자가 올 수 없습니다.";
-    public static final String LESS_THAN_MIN_SIZE = "[ERROR] 구입금액은 0보다 큰수이여야 합니다.";
+    public static final String LESS_THAN_MIN_SIZE = "[ERROR] 구입금액은 1000원 보다 큰수이여야 합니다.";
 
     public Money(String value) {
         try {
@@ -27,10 +26,7 @@ public class Money {
     }
 
     public int canBuyLottoCount() {
-        if (money < LOTTO_PRICE) {
-            return 0;
-        }
-        return money/LOTTO_PRICE;
+        return money/MIN_SIZE;
     }
 
 }
