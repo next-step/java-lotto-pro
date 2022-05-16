@@ -8,6 +8,6 @@ public class NonAutoPurchaseCount {
     }
 
     public long nonAutoPurchasePrice() {
-        return (long) this.count * PurchaseStatus.LOTTO_PRICE;
+        return (long) this.count * Lotto.LOTTO_PRICE;
     }
 }
