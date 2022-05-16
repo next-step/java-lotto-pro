@@ -1,11 +1,10 @@
 package domain;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public final class LottoNumber {
+public final class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int LOTTO_START_INCLUSIVE = 1;
     public static final int LOTTO_END_INCLUSIVE = 45;
@@ -13,6 +12,7 @@ public final class LottoNumber {
     private static final List<LottoNumber> CACHE = IntStream.rangeClosed(LOTTO_START_INCLUSIVE, LOTTO_END_INCLUSIVE)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toUnmodifiableList());
+    private static final List<LottoNumber> LOTTO_NUMBERS_POOL = new ArrayList<>(CACHE);
 
     private final int number;
 
@@ -28,6 +28,18 @@ public final class LottoNumber {
         }
     }
 
+    public static Set<LottoNumber> randomNumbers(int size) {
+        Collections.shuffle(LOTTO_NUMBERS_POOL);
+        return LOTTO_NUMBERS_POOL.stream()
+                        .limit(size)
+                        .collect(Collectors.toUnmodifiableSet());
+    }
+
+    public int value() {
+        return this.number;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,5 +51,10 @@ public final class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return this.number - other.number;
     }
 }
