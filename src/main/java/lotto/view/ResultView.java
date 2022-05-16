@@ -27,9 +27,9 @@ public class ResultView {
         message = new MessageUtil();
     }
 
-    public void printPurchaseLottos(int nonAutoPurchaseCount, Lottos lottos) {
+    public void printPurchaseLottos(int manualLottoPurchaseCount, Lottos lottos) {
         message.printlnMessage();
-        message.printlnMessage(String.format(PURCHASE_LOTTOS_COUNT_MESSAGE, nonAutoPurchaseCount, lottos.lottosCount() - nonAutoPurchaseCount));
+        message.printlnMessage(String.format(PURCHASE_LOTTOS_COUNT_MESSAGE, manualLottoPurchaseCount, lottos.lottosCount() - manualLottoPurchaseCount));
         message.printlnMessage(lottos.numbersToString());
     }
 

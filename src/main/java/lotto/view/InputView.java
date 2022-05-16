@@ -39,18 +39,18 @@ public class InputView {
         return Integer.parseInt(br.readLine());
     }
 
-    public int inputNonAutoPurchaseCount() throws IOException {
+    public int inputManualLottoPurchaseCount() throws IOException {
         message.printlnMessage();
         message.printlnMessage(INPUT_NON_AUTO_PURCHASE_COUNT_MESSAGE);
         return Integer.parseInt(br.readLine());
     }
 
-    public void inputNonAutoLottosTitle() {
+    public void inputManualLottosTitle() {
         message.printlnMessage();
         message.printlnMessage(INPUT_NON_AUTO_LOTTOS_MESSAGE);
     }
 
-    public List<Integer> inputNonAutoLottoNumbers() throws IOException {
+    public List<Integer> inputManualLottoNumbers() throws IOException {
         return Arrays.stream(br.readLine().split(",")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
     }
 }

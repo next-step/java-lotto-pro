@@ -19,9 +19,9 @@ public class LottoController {
 
     public void playing() throws IOException {
         PurchasePrice purchasePrice = new PurchasePrice(purchaseLottos());
-        int nonAutoPurchaseCount = nonAutoPurchaseCount();
+        int manualLottoPurchaseCount = manualLottoPurchaseCount();
 
-        Lottos lottos = createPurchaseLottos(purchasePrice, nonAutoPurchaseCount);
+        Lottos lottos = createPurchaseLottos(purchasePrice, manualLottoPurchaseCount);
         WinningLotto winningLotto = createWinningLotto();
 
         WinningStatus winningStatus = lottos.compareLottos(winningLotto);
@@ -32,18 +32,18 @@ public class LottoController {
         return inputView.inputPurchasePrice();
     }
 
-    private int nonAutoPurchaseCount() throws IOException {
-        return inputView.inputNonAutoPurchaseCount();
+    private int manualLottoPurchaseCount() throws IOException {
+        return inputView.inputManualLottoPurchaseCount();
     }
 
-    private Lottos createPurchaseLottos(PurchasePrice purchasePrice, int nonAutoPurchaseCount) throws IOException {
+    private Lottos createPurchaseLottos(PurchasePrice purchasePrice, int manualLottoPurchaseCount) throws IOException {
         Lottos lottos = new Lottos();
-        inputView.inputNonAutoLottosTitle();
-        for (int i = 0; i < nonAutoPurchaseCount; i++) {
-            lottos.addLotto(new Lotto(inputView.inputNonAutoLottoNumbers()));
+        inputView.inputManualLottosTitle();
+        for (int i = 0; i < manualLottoPurchaseCount; i++) {
+            lottos.addLotto(new Lotto(inputView.inputManualLottoNumbers()));
         }
-        lottos.addLottos(new Lottos(purchasePrice, nonAutoPurchaseCount));
-        resultView.printPurchaseLottos(nonAutoPurchaseCount, lottos);
+        lottos.addLottos(new Lottos(purchasePrice, manualLottoPurchaseCount));
+        resultView.printPurchaseLottos(manualLottoPurchaseCount, lottos);
 
         return lottos;
     }

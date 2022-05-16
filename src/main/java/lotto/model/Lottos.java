@@ -18,11 +18,11 @@ public class Lottos {
         createLottos(count);
     }
 
-    public Lottos(PurchasePrice purchasePrice, int nonAutoPurchaseCount) {
+    public Lottos(PurchasePrice purchasePrice, int manualLottoPurchaseCount) {
         this.lottos = new ArrayList<>();
 
-        purchasePrice.validatePurchasePrice(nonAutoPurchaseCount);
-        long autoPurchasePrice = purchasePrice.excludePrice((long) nonAutoPurchaseCount * Lotto.LOTTO_PRICE);
+        purchasePrice.validatePurchasePrice(manualLottoPurchaseCount);
+        long autoPurchasePrice = purchasePrice.excludePrice((long) manualLottoPurchaseCount * Lotto.LOTTO_PRICE);
 
         int count = new PurchasePrice(autoPurchasePrice).purchaseLottoCount();
         createLottos(count);
