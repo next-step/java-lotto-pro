@@ -9,12 +9,11 @@ public class LottoStatistic {
     private Lottos lottos;
     private List<LottoNumber> prizeNumbers;
     private Map<MatchResult, Integer> matchedCountMap;
-    
+
     public LottoStatistic(Lottos lottos, List<LottoNumber> prizeNumbers) {
         this.lottos = lottos;
         this.prizeNumbers = new ArrayList<>(prizeNumbers);
         initializePrizeLottoList();
-
     }
 
     private void initializePrizeLottoList() {
@@ -33,6 +32,7 @@ public class LottoStatistic {
         return totalPrize().divide(this.lottos.totalPrice());
     }
 
+
     private Money totalPrize() {
         Money result = Money.from(0);
         for (Map.Entry<MatchResult, Integer> entry : matchedCountMap.entrySet()) {
@@ -43,5 +43,41 @@ public class LottoStatistic {
         return result;
     }
 
+    @Override
+    public String toString() {
 
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("당첨 통계\n" + "---------\n");
+
+        builder.append(toMatchResultString(MatchResult.THREE));
+
+        builder.append(toMatchResultString(MatchResult.FOUR));
+
+        builder.append(toMatchResultString(MatchResult.FIVE));
+
+        builder.append(toMatchResultString(MatchResult.SIX));
+
+        builder.append(toEarningString());
+
+        return builder.toString();
+    }
+
+    private String toMatchResultString(MatchResult matchResult) {
+        return matchResult.getMatchCount() + "개 일치" + "(" + matchResult.getCashPrize().toString()
+                + ")- " + matchedCountMap.get(
+                matchResult) + "개\n";
+    }
+
+    private String toEarningString() {
+        String result;
+        double totalEarning = lottoEarning();
+        result = "총 수익률은 " + String.format("%.2f", totalEarning) + " 입니다.";
+        if (totalEarning > 1) {
+            result = result + "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+        }
+        result = result + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+
+        return result;
+    }
 }
