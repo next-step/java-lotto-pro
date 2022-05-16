@@ -13,11 +13,10 @@ public class MoneyTest {
     }
 
     @Test
-    public void 머니_음수_테스트() {
+    public void 머니_기준_값_이하_테스트() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new Money("-1"))
+                .isThrownBy(() -> new Money("900"))
                 .withMessage(Money.LESS_THAN_MIN_SIZE);
     }
-
 
 }
