@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.model.Lotto;
-import lotto.model.LottoMachine;
-import lotto.model.Statistics;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -12,16 +10,14 @@ public class LottoApp {
     public static void main(String[] args) {
         LottoMachine lottoMachine = new LottoMachine();
 
-        // 구매금액 입력 & 출력
         int money = InputView.inputMoney();
         List<Lotto> lottos = lottoMachine.purchase(money);
         OutputView.outputLottos(lottos);
 
-        // 지난 당첨 로또 입력
         List<Integer> numbers = InputView.inputWinningLotto();
-        Lotto winLotto = new Lotto(numbers);
+        int bonus = InputView.inputBonusNumber();
+        WinLotto winLotto = new WinLotto(numbers, bonus);
 
-        // 결과 출력
         Statistics statistics = new Statistics(winLotto, lottos);
         OutputView.outputResult(statistics.getResultMap());
         OutputView.outputResultProfit(statistics.getProfit());

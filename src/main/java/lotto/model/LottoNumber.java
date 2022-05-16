@@ -2,10 +2,10 @@ package lotto.model;
 
 import java.util.Objects;
 
-import static lotto.constant.Config.LOTTO_MAX_NUMBER;
-import static lotto.constant.Config.LOTTO_MIN_NUMBER;
-
 public class LottoNumber {
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
+
     private final int number;
 
     public LottoNumber(int number) {

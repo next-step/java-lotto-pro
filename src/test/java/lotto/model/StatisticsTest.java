@@ -12,11 +12,13 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class StatisticsTest {
     private List<Lotto> lottos;
-    private Lotto win;
+    private WinLotto winLotto;
+    private int bonus;
 
     @BeforeEach
     void setup() {
@@ -38,48 +40,46 @@ public class StatisticsTest {
                 new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44))
         );
 
-        win = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        bonus = 45;
+        winLotto = new WinLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonus);
     }
 
     @Test
     @DisplayName("로또 숫자리스트와 로또 당첨 번호를 비교하고 당첨된 숫자 갯수를 결과 맵에 count하여 담는다.")
     void 로또숫자비교_test() {
         // when
-        Statistics statistics = new Statistics(win, lottos);
-        lottos.add( new Lotto(Arrays.asList(1, 21, 23, 41, 42, 43)));
+        Statistics statistics = new Statistics(winLotto, lottos);
 
         // then
         assertThat(statistics.getResultMap().get(Rank.FIRST)).isEqualTo(0);
         assertThat(statistics.getResultMap().get(Rank.SECOND)).isEqualTo(0);
         assertThat(statistics.getResultMap().get(Rank.THIRD)).isEqualTo(0);
-        assertThat(statistics.getResultMap().get(Rank.FOURTH)).isEqualTo(1);
-        assertThat(statistics.getResultMap().get(Rank.NOTHING)).isEqualTo(13);
+        assertThat(statistics.getResultMap().get(Rank.FOURTH)).isEqualTo(0);
+        assertThat(statistics.getResultMap().get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(statistics.getResultMap().get(Rank.MISS)).isEqualTo(13);
     }
 
     @MethodSource(value = "lottoTestParameters")
-    @ParameterizedTest(name = "1000원짜리 로또 구매가능한 수량을 구한다. {0}")
-    void 로또숫자비교2_test(Lotto lotto, int fisrt, int second, int third, int fourth, int nothing) {
+    @ParameterizedTest(name = "로또 당첨 순위는 {1}이 {2}개 이다")
+    void 로또숫자비교2_test(Lotto lotto, Rank rank, int result) {
         // given
         lottos = Arrays.asList(lotto);
 
         // when
-        Statistics statistics = new Statistics(win, lottos);
+        Statistics statistics = new Statistics(winLotto, lottos);
 
         // then
-        assertThat(statistics.getResultMap().get(Rank.FIRST)).isEqualTo(fisrt);
-        assertThat(statistics.getResultMap().get(Rank.SECOND)).isEqualTo(second);
-        assertThat(statistics.getResultMap().get(Rank.THIRD)).isEqualTo(third);
-        assertThat(statistics.getResultMap().get(Rank.FOURTH)).isEqualTo(fourth);
-        assertThat(statistics.getResultMap().get(Rank.NOTHING)).isEqualTo(nothing);
+        assertThat(statistics.getResultMap().get(rank)).isEqualTo(result);
     }
 
     @MethodSource(value = "lottoTestParameters")
     static Stream<Arguments> lottoTestParameters() {
         return Stream.of(
-                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 1, 0, 0, 0, 0, 0),
-                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)), 0, 1, 0, 0, 0, 0),
-                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 9, 10)), 0, 0, 1, 0, 0, 0),
-                arguments(new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10)), 0, 0, 0, 1, 0, 0)
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Rank.FIRST, 1),
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45)), Rank.SECOND, 1),
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)), Rank.THIRD, 1),
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 4, 9, 10)), Rank.FOURTH, 1),
+                arguments(new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10)), Rank.FIFTH, 1)
         );
     }
 
@@ -87,7 +87,7 @@ public class StatisticsTest {
     @DisplayName("로또 총 구입 갯수는 14이다")
     void 로또_총갯수_test() {
         // when
-        Statistics statistics = new Statistics(win, lottos);
+        Statistics statistics = new Statistics(winLotto, lottos);
 
         // then
         assertThat(statistics.getTotalCount()).isEqualTo(14);
@@ -97,7 +97,7 @@ public class StatisticsTest {
     @DisplayName("로또 총 수익금액은 5000원이다.")
     void 로또_총수익_test() {
         // when
-        Statistics statistics = new Statistics(win, lottos);
+        Statistics statistics = new Statistics(winLotto, lottos);
         assertThat(statistics.getTotalPrize()).isEqualTo(5000);
     }
 
@@ -105,7 +105,7 @@ public class StatisticsTest {
     @DisplayName("로또 총 수익 5000원, 총구매금액 14000원이고 수익률은 0.35이다.")
     void 수익률_test() {
         // when
-        Statistics statistics = new Statistics(win, lottos);
+        Statistics statistics = new Statistics(winLotto, lottos);
 
         // then
         assertThat(statistics.getProfit()).isEqualTo(0.35);

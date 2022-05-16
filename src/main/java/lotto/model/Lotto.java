@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.constant.Config.LOTTO_SIZE;
-
 public class Lotto {
+    private static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lottoNumber;
 
     public Lotto(List<Integer> numbers) {
@@ -21,7 +20,7 @@ public class Lotto {
     }
 
     private void validateLotto(List<Integer> numbers) {
-        if(numbers.stream().distinct().count() != LOTTO_SIZE){
+        if (numbers.stream().distinct().count() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 각 번호는 중복될수 없습니다.");
         }
         if (numbers.size() != LOTTO_SIZE) {

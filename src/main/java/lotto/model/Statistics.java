@@ -6,32 +6,37 @@ import java.util.Map;
 
 public class Statistics {
     private Map<Rank, Integer> resultMap = new HashMap() {{
-        put(Rank.getRank(6), 0);
-        put(Rank.getRank(5), 0);
-        put(Rank.getRank(4), 0);
-        put(Rank.getRank(3), 0);
-        put(Rank.getRank(0), 0);
+        put(Rank.valueOf(6, false), 0);
+        put(Rank.valueOf(5, true), 0);
+        put(Rank.valueOf(5, false), 0);
+        put(Rank.valueOf(4, false), 0);
+        put(Rank.valueOf(3, false), 0);
+        put(Rank.valueOf(0, false), 0);
     }};
 
     public Map<Rank, Integer> getResultMap() {
         return resultMap;
     }
 
-    public Statistics(Lotto win, List<Lotto> lottos) {
-        lottos.forEach(lotto -> compareNumber(win, lotto));
+    public Statistics(WinLotto winLotto, List<Lotto> lottos) {
+        lottos.forEach(lotto -> compareNumber(winLotto, lotto));
     }
 
-    private void compareNumber(Lotto win, Lotto lotto) {
+    private void compareNumber(WinLotto winLotto, Lotto lotto) {
         long count = lotto.getLottoNumber().stream()
-                .filter(lottoNumber -> win.getLottoNumber().contains(lottoNumber))
+                .filter(lottoNumber -> winLotto.getLottoNumber().contains(lottoNumber))
                 .count();
 
-        resultMap.computeIfPresent(Rank.getRank(count), (k, v) -> Math.toIntExact(v + 1));
+        resultMap.computeIfPresent(Rank.valueOf(count, isMatchedBonus(winLotto, lotto)), (k, v) -> Math.toIntExact(v + 1));
+    }
+
+    private boolean isMatchedBonus(WinLotto winLotto, Lotto lotto) {
+        return lotto.getLottoNumber().contains(winLotto.getBonus());
     }
 
     public long getTotalPrize() {
         return resultMap.entrySet().stream()
-                .mapToLong(rank -> rank.getKey().getPrize() * rank.getValue())
+                .mapToLong(rank -> rank.getKey().getWinningMoney() * rank.getValue())
                 .sum();
     }
 
