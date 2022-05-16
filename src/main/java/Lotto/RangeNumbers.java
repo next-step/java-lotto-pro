@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.stream.IntStream;
 
 public final class RangeNumbers {
-    public static final ArrayList<Integer> rangeNumbers = IntStream.range(1, 45)
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+
+    public static final ArrayList<Integer> RANGE_NUMBERS = IntStream.range(MIN_NUMBER, MAX_NUMBER)
             .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
     public static ArrayList<Integer> getRangeNumbers() {
-        return rangeNumbers;
+        return RANGE_NUMBERS;
     }
 }

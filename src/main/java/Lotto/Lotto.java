@@ -1,6 +1,7 @@
 package Lotto;
 
 import Lotto.enums.CompareEnum;
+import Lotto.error.ErrorMessage;
 import Lotto.utils.StringSplitUtils;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class Lotto {
 
     public Lotto(String customNumbers) {
         List<Integer> customNumbersToInt = StringSplitUtils.basicDetermiterSplit(customNumbers);
+        if(!validCustomNumbers(customNumbersToInt))
+            throw new IllegalArgumentException(ErrorMessage.LastPrizeNumberGenerate.getErrorMsg());
         Collections.sort(customNumbersToInt);
         this.numbers = customNumbersToInt;
     }
@@ -40,6 +43,13 @@ public class Lotto {
                         .count();
 
         return CompareEnum.of(hitCount);
+    }
+
+    private boolean validCustomNumbers(List<Integer> customNumbers) {
+        return customNumbers.stream()
+                            .filter(num -> RANGE_NUMBERS.contains(num))
+                            .distinct()
+                            .count() == 6;
     }
 
     @Override

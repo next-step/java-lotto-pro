@@ -3,9 +3,9 @@ package Lotto;
 import java.math.BigDecimal;
 
 public class Yield {
-    BigDecimal sumMoney = BigDecimal.ZERO;
-    int investment;
-    double yield;
+    private BigDecimal sumMoney = BigDecimal.ZERO;
+    private int investment;
+    private double yield;
 
     public BigDecimal getSumMoney() {
         return sumMoney;
@@ -20,7 +20,7 @@ public class Yield {
     private static final int THIRD_WiNNING_AMOUNT = 50_000;
     private static final int FOURTH_WiNNING_AMOUNT = 5_000;
 
-    Yield(int money) {
+    public Yield(int money) {
         investment = money;
     }
 
