@@ -1,9 +1,12 @@
 package lottoauto.wrapper;
 
+import lottoauto.util.RandomNumberExtractor;
+
 import java.util.List;
 
 public class Lotto {
-    List<Integer> numbers;
+    private List<Integer> numbers;
+    private static final String DEFAULT_REGEX = ", ";
 
     public Lotto(List<Integer> numbers) {
         if(numbers.isEmpty()) {
@@ -23,14 +26,23 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public Lotto() {
+        RandomNumberExtractor randomNumberExtractor = new RandomNumberExtractor();
+        this.numbers = randomNumberExtractor.getRandomNumbers();
+    }
+
+    public Lotto(String input) {
+
+    }
+
     @Override
     public String toString() {
         return numbers.toString();
     }
 
     public int compareLotto(List<Integer> winners, List<Integer> numbers) {
-
         return 0;
     }
+
 
 }

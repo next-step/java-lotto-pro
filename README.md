@@ -41,5 +41,5 @@
 * [ ] Lotto 클래스 내에서 번호 생성 후 LottoTickets 클래스로 전달
 * [ ] 지난 주 당첨번호 입력 시 예외 상황 Lotto 클래스에서 처리
 * [ ] LottoTickets 일급 클래스 처리 (LottoTickets.java)
-* [ ] 랜덤한 6개의 숫자를 만드는 기능 생성 (RandomNumberExtractor.java)
+* [x] 랜덤한 6개의 숫자를 만드는 기능 생성 (RandomNumberExtractor.java)
 * [ ] 당첨 통계를 위한 LottoWinners.java 클래스 생성 후 당첨통계 확인

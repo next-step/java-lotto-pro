@@ -12,9 +12,9 @@ class LottoTest {
 
     @Test
     void 여섯개_숫자_입력_로또_생성() {
-        List<Integer> randomNumber = new ArrayList<>();
+        List<Integer> sampleNumbers = new ArrayList<>();
         for (int i = 1; i < 7; i++) {
-            randomNumber.add(i);
+            sampleNumbers.add(i);
         }
 
         List<Integer> numbers = new ArrayList<>();
@@ -22,23 +22,23 @@ class LottoTest {
             numbers.add(i);
         }
 
-        Lotto lotto = new Lotto(randomNumber);
+        Lotto lotto = new Lotto(sampleNumbers);
         assertThat(lotto.toString()).isEqualTo(numbers.toString());
     }
 
     @Test
     void 숫자_미_입력_로또_생성() {
-        List<Integer> randomNumber = new ArrayList<>();
-        assertThatThrownBy(() -> new Lotto(randomNumber)).isInstanceOf(NullPointerException.class);
+        List<Integer> sampleNumbers = new ArrayList<>();
+        assertThatThrownBy(() -> new Lotto(sampleNumbers)).isInstanceOf(NullPointerException.class);
     }
 
     @Test
     void 숫자_0_입력_로또_생성() {
-        List<Integer> randomNumber = new ArrayList<>();
+        List<Integer> sampleNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            randomNumber.add(i);
+            sampleNumbers.add(i);
         }
-        assertThatThrownBy(() -> new Lotto(randomNumber)).isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> new Lotto(sampleNumbers)).isInstanceOf(NumberFormatException.class);
     }
 
     @Test
@@ -47,6 +47,11 @@ class LottoTest {
         for (int i = 1 ; i < 4; i++) {
             randomNumber.add(i);
         }
-        assertThatThrownBy(() -> new Lotto(randomNumber)).isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> new Lotto(randomNumber)).isInstanceOf(ArrayIndexOutOfBoundsException.class);
+    }
+
+    @Test
+    void 로또_생성() {
+        assertThat((new Lotto()).toString()).contains("[", "]");
     }
 }

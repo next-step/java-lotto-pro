@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 public class RandomNumberExtractor {
 
     public List<Integer> getRandomNumbers() {
-        List<Integer> allNumbers = IntStream.range(0, 46).boxed().collect(Collectors.toList());
+        List<Integer> allNumbers = IntStream.range(1, 45).boxed().collect(Collectors.toList());
         Collections.shuffle(allNumbers);
         List<Integer> randomNumbers = new ArrayList<>();
         IntStream.range(0, 6).mapToObj(allNumbers::get).forEachOrdered(randomNumbers::add);
