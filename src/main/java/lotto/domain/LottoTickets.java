@@ -1,22 +1,23 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import lotto.view.ResultView;
+
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(int count) {
-        this.lottoTickets = generateLottoTickets(count);
+        this.lottoTickets = Collections.unmodifiableList(generateLottoTickets(count));
     }
 
     private List<LottoTicket> generateLottoTickets(int count) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottoTickets.add(new LottoTicket());
-        }
-
-        return lottoTickets;
+        return IntStream.rangeClosed(0, count - 1)
+                .mapToObj(i -> new LottoTicket())
+                .collect(Collectors.toList());
     }
 
     public int size() {
@@ -24,17 +25,14 @@ public class LottoTickets {
     }
 
     public List<LottoPrize> matchResults(LottoTicket lottoTicket) {
-        List<LottoPrize> matchResult = new ArrayList<>();
-        for (LottoTicket lotto : lottoTickets) {
-            matchResult.add(lotto.match(lottoTicket));
-        }
-
-        return matchResult;
+        return lottoTickets.stream()
+                .map(ticket -> ticket.match(lottoTicket))
+                .collect(Collectors.toList());
     }
 
     public void printLottoTickets() {
         for (LottoTicket lotto : lottoTickets) {
-            System.out.println(lotto.toString());
+            ResultView.printLottoTicket(lotto);
         }
     }
 }

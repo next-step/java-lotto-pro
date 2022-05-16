@@ -43,7 +43,7 @@ class StringParserTest {
         String string = "가";
 
         assertThatThrownBy(() -> StringParser.parseAsInteger(string))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
 }

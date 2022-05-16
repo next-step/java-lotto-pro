@@ -13,7 +13,7 @@ public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket() {
-        this(LottoNumbers.generateLottoNumbers());
+        this(LottoNumbers.generateLottoNumbers(new LottoNumbersGenerator()).getReadOnlyLottoNumbers());
     }
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
@@ -49,8 +49,6 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        Collections.sort(lottoNumbers);
-
         return String.valueOf(lottoNumbers);
     }
 }

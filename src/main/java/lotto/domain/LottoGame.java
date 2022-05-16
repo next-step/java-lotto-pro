@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
@@ -15,12 +14,15 @@ public class LottoGame {
     }
 
     public void play() {
+        System.out.println("print");
         ResultView.printCount(money.calculateLottoTicketCount());
         ResultView.printLottoTickets(lottoTickets);
 
-        String winLottoNumbers = InputView.inputLatestLottoResult();
+        List<Integer> lottoNumbers = LottoNumbers.getLottoNumbersFromInput();
 
-        List<LottoPrize> matchResults = lottoTickets.matchResults(new LottoTicket(LottoNumbers.of(winLottoNumbers)));
+        List<LottoPrize> matchResults = lottoTickets.matchResults(
+                new LottoTicket(LottoNumbers.generateLottoNumbers(lottoNumbers).getReadOnlyLottoNumbers())
+        );
         ResultView.printStatistics(matchResults, money);
     }
 }

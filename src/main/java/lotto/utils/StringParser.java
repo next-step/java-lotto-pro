@@ -9,7 +9,7 @@ public class StringParser {
     public static Integer parseAsInteger(String string) {
         String trimString = StringUtil.trim(string);
         if (!trimString.matches(POSITIVE_NUMBER_REGEX) || StringUtil.isNullOrEmpty(trimString)) {
-            throw new RuntimeException(UNAVAILABLE_TO_PARSE_AS_INTEGER);
+            throw new IllegalArgumentException(UNAVAILABLE_TO_PARSE_AS_INTEGER);
         }
 
         return Integer.parseInt(trimString);

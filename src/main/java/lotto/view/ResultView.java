@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoPrize;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 
@@ -10,6 +11,8 @@ import static lotto.constants.LottoGameConstant.PROFIT_CRITERIA;
 import static lotto.constants.LottoGameMessage.*;
 
 public class ResultView {
+    private ResultView() {}
+
     public static void printCount(int count) {
         System.out.printf(PURCHASED_LOTTO_COUNT_INFORMATION, count);
         System.out.println();
@@ -18,6 +21,10 @@ public class ResultView {
     public static void printLottoTickets(LottoTickets lottoTickets) {
         lottoTickets.printLottoTickets();
         System.out.println();
+    }
+
+    public static void printLottoTicket(LottoTicket lottoTicket) {
+        System.out.println(lottoTicket.toString());
     }
 
     public static void printStatistics(List<LottoPrize> matchResults, Money money) {

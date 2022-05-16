@@ -1,31 +1,48 @@
 package lotto.domain;
 
-import lotto.utils.StringSplitter;
+import lotto.view.InputView;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static lotto.constants.LottoNumberConstant.*;
 
 public class LottoNumbers {
-    private static final List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(LOTTO_NUMBER_MINIMUM_VALUE, LOTTO_NUMBER_MAXIMUM_VALUE)
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
+    private List<LottoNumber> lottoNumbers;
 
-    public static List<LottoNumber> generateLottoNumbers() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        return LOTTO_NUMBERS.stream()
-                .limit(LOTTO_NUMBER_SIZE)
-                .sorted()
-                .collect(Collectors.toList());
+    private LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public static List<LottoNumber> of(String lottoNumbers) {
-        return Arrays
-                .stream(StringSplitter.split(lottoNumbers))
-                .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::new)
+    public static LottoNumbers generateLottoNumbers(NumbersGenerator numbersGenerator) {
+        List<Integer> generateNumbers = numbersGenerator.generate();
+        Collections.sort(generateNumbers);
+        List<LottoNumber> parsedLottoNumbers = parseIntegerToLottoNumber(generateNumbers);
+
+        return new LottoNumbers(parsedLottoNumbers);
+    }
+
+    public static LottoNumbers generateLottoNumbers(List<Integer> numbers) {
+        Collections.sort(numbers);
+        List<LottoNumber> parsedLottoNumbers = parseIntegerToLottoNumber(numbers);
+
+        return new LottoNumbers(parsedLottoNumbers);
+    }
+
+    public List<LottoNumber> getReadOnlyLottoNumbers() {
+        return Collections.unmodifiableList(this.lottoNumbers);
+    }
+
+    public static List<Integer> getLottoNumbersFromInput() {
+        String lottoNumbers = InputView.inputLatestLottoResult();
+
+        return LottoNumbersGenerator.generate(lottoNumbers);
+    }
+
+    private static List<LottoNumber> parseIntegerToLottoNumber(List<Integer> generateNumbers) {
+        return generateNumbers.stream()
+                .filter(Objects::nonNull)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }

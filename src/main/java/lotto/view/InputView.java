@@ -5,6 +5,8 @@ import static lotto.constants.LottoGameMessage.*;
 import java.util.*;
 
 public class InputView {
+    private InputView() {}
+
     private static final Scanner scanner = new Scanner(System.in);
 
     public static String inputMoney() {
