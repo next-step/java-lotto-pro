@@ -7,7 +7,7 @@ public class LottoNumbers {
     public static final int LOTTO_SIZE = 6;
     public static final int MAX_NUMBER = 45;
     public static final int MIN_NUMBER = 1;
-    private static final List<Integer> ALL_NUMBERS = initAllNumbers();
+    protected static final List<Integer> ALL_NUMBERS = initAllNumbers();
     private final List<Integer> numbers;
     private final RandomShuffle randomShuffle;
 
@@ -45,12 +45,12 @@ public class LottoNumbers {
         return result;
     }
 
-    public WinningRank matchWinningNumbers(List<Integer> winningNumbers, Integer winningBonusNumber) {
+    public WinningRank matchWinningNumbers(WinningLottoNumber winningNumbers) {
         int matchCount = 0;
-        for (Integer winningNumber : winningNumbers) {
+        for (Integer winningNumber : winningNumbers.getNumbers()) {
             matchCount += matchWinningNumber(winningNumber);
         }
-        return WinningRank.of(matchCount, numbers.contains(winningBonusNumber));
+        return WinningRank.of(matchCount, numbers.contains(winningNumbers.getBonusNumber()));
     }
 
     private Integer matchWinningNumber(Integer winningNumber) {

@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
+import lotto.domain.WinningLottoNumber;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -33,8 +34,8 @@ public class Application {
 
     private static void generateWinningNumber(InputView inputView, LottoApplication lottoApplication) {
         List<Integer> winningNumbers = inputView.inputWinningNumbers();
-        Integer winningBonusNumbers = inputView.inputWinningBonusNumber();
-        lottoApplication.setWinningNumbers(winningNumbers, winningBonusNumbers);
+        Integer winningBonusNumber = inputView.inputWinningBonusNumber();
+        lottoApplication.setWinningNumbers(new WinningLottoNumber(winningNumbers, winningBonusNumber));
     }
 
     private static void statistics(ResultView resultView, LottoApplication lottoApplication) {

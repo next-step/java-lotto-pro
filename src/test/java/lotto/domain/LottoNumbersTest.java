@@ -39,6 +39,6 @@ class LottoNumbersTest {
     void 당첨번호를_통해_당첨결과를_계산할_수_있다(String stringNumbers, Integer bonusNumber, String stringWinningRank) {
         List<Integer> numbers = StringUtils.convertToList(stringNumbers, ",");
         WinningRank expected = WinningRank.valueOf(stringWinningRank);
-        assertThat(lottoNumbers.matchWinningNumbers(numbers, bonusNumber)).isEqualTo(expected);
+        assertThat(lottoNumbers.matchWinningNumbers(new WinningLottoNumber(numbers, bonusNumber))).isEqualTo(expected);
     }
 }
