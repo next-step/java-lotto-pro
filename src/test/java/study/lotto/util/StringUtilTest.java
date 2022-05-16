@@ -1,4 +1,4 @@
-package study.step3.util;
+package study.lotto.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

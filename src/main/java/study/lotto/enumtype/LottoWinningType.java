@@ -1,4 +1,4 @@
-package study.step3.enumtype;
+package study.lotto.enumtype;
 
 import java.util.stream.Stream;
 

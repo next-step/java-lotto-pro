@@ -1,4 +1,4 @@
-package study.step3;
+package study.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;

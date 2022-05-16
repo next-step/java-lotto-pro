@@ -1,4 +1,4 @@
-package study.step3;
+package study.lotto;
 
 public class LottoMoney {
     static final int LOTTO_TICKET_PRICE = 1000;

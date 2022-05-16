@@ -1,10 +1,11 @@
-package study.step3.util;
+package study.lotto.util;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import study.step3.Lotto;
-import study.step3.LottoNumber;
+
+import study.lotto.LottoNumber;
+import study.lotto.Lotto;
 
 public class LottoGenerator {
     private static final int LOTTO_NUMBER_SIZE = 6;

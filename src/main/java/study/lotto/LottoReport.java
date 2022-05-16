@@ -1,7 +1,7 @@
-package study.step3;
+package study.lotto;
 
 import java.util.List;
-import study.step3.enumtype.LottoWinningType;
+import study.lotto.enumtype.LottoWinningType;
 
 public class LottoReport {
     private final List<Lotto> lottos;
@@ -15,7 +15,8 @@ public class LottoReport {
 
     public LottoResultMap analyze() {
         LottoResultMap lottoResultMap = new LottoResultMap();
-        lottos.forEach(lotto -> lottoResultMap.addLotto(LottoWinningType.valueOf(lotto.matchCount(winningLotto)), lotto));
+        lottos.forEach(
+                lotto -> lottoResultMap.addLotto(LottoWinningType.valueOf(lotto.matchCount(winningLotto)), lotto));
         return lottoResultMap;
     }
 

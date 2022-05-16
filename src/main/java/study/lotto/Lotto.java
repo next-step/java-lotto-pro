@@ -1,10 +1,10 @@
-package study.step3;
+package study.lotto;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import study.step3.util.StringUtil;
+import study.lotto.util.StringUtil;
 
 public class Lotto {
     private static final String NUMBER_DELIMITER = ",";

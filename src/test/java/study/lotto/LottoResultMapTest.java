@@ -1,4 +1,4 @@
-package study.step3;
+package study.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.step3.enumtype.LottoWinningType;
+import study.lotto.enumtype.LottoWinningType;
 
 class LottoResultMapTest {
     @Test

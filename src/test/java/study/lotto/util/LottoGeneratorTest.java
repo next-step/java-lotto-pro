@@ -1,4 +1,4 @@
-package study.step3.util;
+package study.lotto.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.step3.Lotto;
+import study.lotto.Lotto;
 
 class LottoGeneratorTest {
     @Test

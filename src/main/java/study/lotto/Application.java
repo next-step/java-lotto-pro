@@ -1,6 +1,6 @@
-package study.step3;
+package study.lotto;
 
-import study.step3.io.ConsolePrinter;
+import study.lotto.io.ConsolePrinter;
 
 public class Application {
     public static void main(String[] args) {

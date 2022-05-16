@@ -1,10 +1,10 @@
-package study.step3;
+package study.lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
-import study.step3.enumtype.LottoWinningType;
+import study.lotto.enumtype.LottoWinningType;
 
 public class LottoResultMap {
     private final EnumMap<LottoWinningType, List<Lotto>> resultMap;

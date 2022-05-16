@@ -1,4 +1,4 @@
-package study.step3.util;
+package study.lotto.util;
 
 import java.util.Arrays;
 import java.util.List;

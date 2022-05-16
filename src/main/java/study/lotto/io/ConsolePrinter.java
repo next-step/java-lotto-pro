@@ -1,9 +1,9 @@
-package study.step3.io;
+package study.lotto.io;
 
 import java.util.List;
-import study.step3.Lotto;
-import study.step3.LottoResultMap;
-import study.step3.enumtype.LottoWinningType;
+import study.lotto.Lotto;
+import study.lotto.LottoResultMap;
+import study.lotto.enumtype.LottoWinningType;
 
 public class ConsolePrinter implements Printer {
     @Override

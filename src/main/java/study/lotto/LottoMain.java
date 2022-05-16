@@ -1,9 +1,9 @@
-package study.step3;
+package study.lotto;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
-import study.step3.io.Printer;
-import study.step3.util.LottoGenerator;
+import study.lotto.io.Printer;
+import study.lotto.util.LottoGenerator;
 
 public class LottoMain {
     private final Printer printer;

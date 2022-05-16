@@ -1,4 +1,4 @@
-package study.step3.enumtype;
+package study.lotto.enumtype;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
