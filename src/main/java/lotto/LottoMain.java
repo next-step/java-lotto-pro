@@ -1,9 +1,9 @@
 package lotto;
 
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoWinStatistics;
 import lotto.domain.Lottos;
+import lotto.domain.WinningNumbers;
 
 public class LottoMain {
 
@@ -22,8 +22,8 @@ public class LottoMain {
 
     private static void drawingOfLots(final Lottos lottos, final InputView inputView,
                                       final ResultView resultView) {
-        final LottoNumbers winningNumbers = LottoMachine.winningLottoNumbers(inputView.inputDrawingOfLots());
+        final WinningNumbers winningNumbers = LottoMachine.winningLottoNumbers(inputView.inputDrawingOfLots(), inputView.inputBonusNumber());
         resultView.drawingOfLots(
-                new LottoWinStatistics(lottos.purchasePrice(), lottos.end(winningNumbers)));
+                new LottoWinStatistics(lottos.purchasePrice(), lottos.draw(winningNumbers)));
     }
 }
