@@ -51,6 +51,6 @@ public class LottoTest {
     void match_test() {
         Lotto lotto = createLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto winLotto = createLotto(Arrays.asList(1, 2, 3, 7, 8, 9));
-        assertThat(lotto.match(winLotto)).isEqualTo(Rank.FIFTH);
+        assertThat(lotto.matchCounts(winLotto)).isEqualTo(3);
     }
 }

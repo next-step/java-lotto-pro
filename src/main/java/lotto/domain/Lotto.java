@@ -39,11 +39,14 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public Rank match(Lotto winLotto) {
-        int matchCount = (int) lottoNumbers.stream()
-                .filter(number -> winLotto.getLottoNumbers().contains(number))
+    public int matchCounts(Lotto lotto) {
+        return (int) lottoNumbers.stream()
+                .filter(number -> lotto.getLottoNumbers().contains(number))
                 .count();
-        return Rank.valueOf(matchCount);
+    }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
     }
 
     @Override
