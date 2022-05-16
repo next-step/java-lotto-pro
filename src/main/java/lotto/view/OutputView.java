@@ -26,7 +26,7 @@ public class OutputView {
         OutputView.printMessage("당첨 통계");
         OutputView.printMessage("---------");
         for (int matching = LOTTO_MINIMUM_MATCHING_COUNT; matching <= LOTTO_SIZE; matching++) {
-            Ranking rank = Ranking.findRank(matching);
+            Ranking rank = Ranking.findRank(matching, false);
             OutputView.printMessage("%d개 일치 (%d원)- %d개\r\n", matching, rank.getReward(), result.findRankings(matching).size());
         }
     }

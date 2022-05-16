@@ -22,7 +22,7 @@ class PurchasedLottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,4,5,7:SECOND", "1,2,3,4,7,8:THIRD", "1,2,3,7,8,9:FOURTH"}, delimiter = ':')
+    @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,4,5,7:THIRD", "1,2,3,4,7,8:FOURTH", "1,2,3,7,8,9:FIFTH"}, delimiter = ':')
     void 맞춘_개수에_따른_등수_확인(String lottoNumbers, Ranking expected) {
         PurchasedLotto purchasedLotto = new PurchasedLotto(Arrays.asList(new Lotto(lottoNumbers)));
         String lastWinningLotto = "1,2,3,4,5,6";

@@ -33,7 +33,7 @@ class LottoResultTest {
         BigDecimal expectedWinningMoney = new BigDecimal(0);
         for (int matchingCount = LOTTO_MINIMUM_MATCHING_COUNT; matchingCount <= LOTTO_SIZE; matchingCount++) {
             List<Ranking> list = result.findRankings(matchingCount);
-            Ranking ranking = Ranking.findRank(matchingCount);
+            Ranking ranking = Ranking.findRank(matchingCount, false);
             expectedWinningMoney = expectedWinningMoney.add(new BigDecimal(ranking.getReward() * list.size()));
         }
         assertThat(actualWinningMoney).isEqualTo(expectedWinningMoney);

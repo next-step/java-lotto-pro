@@ -39,7 +39,7 @@ public class Lotto {
         List<LottoNo> result = new ArrayList<>(lottoNoList);
         result.retainAll(target.getLottoNoList());
         int matchingCount = result.size();
-        return Ranking.findRank(matchingCount);
+        return Ranking.findRank(matchingCount, false);
     }
 
     public List<LottoNo> getLottoNoList() {

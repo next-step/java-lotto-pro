@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.controller.LottoGame;
 import lotto.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,7 +28,7 @@ class LottoGameTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:6:FIRST", "1,2,3,4,5,7:5:SECOND", "1,2,3,4,7,8:4:THIRD", "1,2,3,7,8,9:3:FOURTH"}, delimiter = ':')
+    @CsvSource(value = {"1,2,3,4,5,6:6:FIRST", "1,2,3,4,5,7:5:THIRD", "1,2,3,4,7,8:4:FOURTH", "1,2,3,7,8,9:3:FIFTH"}, delimiter = ':')
     public void 번호_맞춘_개수에_대한_등수_확인(String lottoNumbers, int matchingCount, Ranking expected) {
         Lotto lastWinningLotto = new Lotto("1,2,3,4,5,6");
         PurchasedLotto purchasedLotto = new PurchasedLotto(Arrays.asList(new Lotto(lottoNumbers)));

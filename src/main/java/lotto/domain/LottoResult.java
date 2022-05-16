@@ -18,7 +18,7 @@ public class LottoResult {
 
     public List<Ranking> findRankings(int matchingCount) {
         List<Ranking> result = new ArrayList<>();
-        Ranking target = Ranking.findRank(matchingCount);
+        Ranking target = Ranking.findRank(matchingCount, false);
         for (Ranking ranking : rankingList) {
             addRankingWhenSame(result, ranking, target);
         }
