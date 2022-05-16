@@ -40,6 +40,10 @@ public enum MatchResult {
         return MatchResult.ZERO;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public Money getCashPrize() {
         return cashPrize;
     }
