@@ -23,10 +23,6 @@ public class LottoNumber {
         this.number = convertedNumber;
     }
 
-    public boolean hasSameValue(LottoNumber number) {
-        return this.number == number.number;
-    }
-
     private void checkValidLottoNumber(int number) {
         if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45 만 허용됩니다.");

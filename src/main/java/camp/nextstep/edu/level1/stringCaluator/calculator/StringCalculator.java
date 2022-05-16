@@ -7,10 +7,10 @@ public class StringCalculator {
     private final PositiveNumbers positiveNumbers;
 
     public StringCalculator(String input) {
-        this.positiveNumbers = new PositiveNumbers(StringParser.parseAndSplit(input));
+        this.positiveNumbers = new PositiveNumbers(StringParser.parseAndSplit(input), true);
     }
 
-    public int sum() {
+    public long sum() {
         return this.positiveNumbers.sum();
     }
 }
