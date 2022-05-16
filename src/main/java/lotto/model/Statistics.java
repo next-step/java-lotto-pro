@@ -24,7 +24,7 @@ public class Statistics {
     }
 
     private void validateBonus(Lotto win, LottoNumber bonus) {
-        if(win.getLottoNumber().contains(bonus)) {
+        if (win.getLottoNumber().contains(bonus)) {
             throw new IllegalArgumentException("보너스번호가 지난당첨번호안에 중복이 될수 없습니다.");
         }
     }
