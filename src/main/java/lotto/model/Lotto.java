@@ -23,7 +23,7 @@ public class Lotto {
     }
 
     public LottoRank matchRank(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        return LottoRank.of(winningNumbers.matchCount(numbers), numbers.contains(bonusNumber) );
+        return LottoRank.of(winningNumbers.matchCount(numbers), numbers.contains(bonusNumber));
     }
 
     @Override

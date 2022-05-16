@@ -10,12 +10,12 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        validateDuplication(winningNumbers,bonusNumber);
+        validateDuplication(winningNumbers, bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateDuplication(LottoNumbers winningNumbers,LottoNumber bonusNumber) {
+    private void validateDuplication(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATION_BONUS);
         }
