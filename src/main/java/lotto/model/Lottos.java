@@ -4,45 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private final static int LOTTO_PRICE = 1000;
 
     private final List<Lotto> lottos;
 
-    public Lottos(long purchasePrice) {
+    public Lottos() {
+        this.lottos = new ArrayList<>();
+    }
+
+    public Lottos(PurchasePrice purchasePrice) {
         this.lottos = new ArrayList<>();
 
-        int count = purchaseLottoCount(purchasePrice);
-        for (int i = 0; i < count; i++) {
-            this.lottos.add(new Lotto());
-        }
+        int count = purchasePrice.purchaseLottoCount();
+        createLottos(count);
     }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    private int purchaseLottoCount(long purchasePrice) {
-        validatePurchasePrice(purchasePrice);
-
-        return (int) (purchasePrice / LOTTO_PRICE);
-    }
-
-    private void validatePurchasePrice(long purchasePrice) {
-        if(purchasePrice < LOTTO_PRICE){
-            throw new IllegalArgumentException("금액이 적어 구입할 수 없습니다.");
-        }
-
-        if(purchasePrice % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("잔돈이 발생합니다. 천 원단위로 나누어떨어지도록 금액을 입력해야 합니다.");
+    private void createLottos(int count) {
+        for (int i = 0; i < count; i++) {
+            this.lottos.add(new Lotto());
         }
     }
 
     public int lottosCount() {
         return this.lottos.size();
-    }
-
-    public long lottosTotalPrice() {
-        return (long) this.lottos.size() * LOTTO_PRICE;
     }
 
     public WinningStatus compareLottos(WinningLotto winningLotto) {
@@ -67,5 +54,13 @@ public class Lottos {
         }
 
         return sb.toString();
+    }
+
+    public void addLotto(Lotto lotto) {
+        this.lottos.add(lotto);
+    }
+
+    public void addLottos(Lottos lottos) {
+        this.lottos.addAll(lottos.lottos);
     }
 }

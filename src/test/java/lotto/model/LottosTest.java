@@ -12,17 +12,17 @@ public class LottosTest {
 
     @Test
     void createLottos() {
-        assertThat(new Lottos(10000).lottosCount()).isEqualTo(10);
+        assertThat(new Lottos(new PurchasePrice(10000)).lottosCount()).isEqualTo(10);
     }
 
     @Test
     void createLottos_금액부족() {
-        assertThatThrownBy(() -> new Lottos(999)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lottos(new PurchasePrice(999))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void createLottos_잔돈발생() {
-        assertThatThrownBy(() -> new Lottos(1010)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lottos(new PurchasePrice(1010))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

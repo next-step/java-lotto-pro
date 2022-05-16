@@ -26,13 +26,12 @@ public class WinningStatus {
         return winningStatus.get(matchPoint);
     }
 
-    public double findEarningsRate(long lottosTotalPrice) {
+    public double findEarningsRate(PurchasePrice purchasePrice) {
         long sum = 0;
 
         for (MatchPoint matchPoint : MatchPoint.values()) {
             sum = sum + matchPoint.sumCashPrizeByMatchPoint(winningStatus.get(matchPoint));
         }
-
-        return Math.floor(((double) sum/lottosTotalPrice) * 100) / 100.0;
+        return  purchasePrice.averageRate(sum);
     }
 }
