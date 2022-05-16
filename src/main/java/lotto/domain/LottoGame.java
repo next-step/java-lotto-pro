@@ -1,14 +1,13 @@
 package lotto.domain;
 
-import lotto.ConstantsKr;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoGame {
 
-    public static final String ILLEGAL_SIZE_EXCEPTION_MESSAGE = "로또 번호는 " + ConstantsKr.NUMBER_OF_LOTTO_NUMBERS + "개여야 합니다.";
+    public static final int SIZE = 6;
+    public static final String ILLEGAL_SIZE_EXCEPTION_MESSAGE = "로또 번호는 " + SIZE + "개여야 합니다.";
     public static final String NUMBER_DUPLICATE_EXCEPTION_MESSAGE = "번호는 중복되면 안 됩니다.";
     private final List<LottoNumber> numbers;
 
@@ -19,14 +18,14 @@ public class LottoGame {
     }
 
     private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != ConstantsKr.NUMBER_OF_LOTTO_NUMBERS) {
+        if (numbers.size() != SIZE) {
             throw new IllegalArgumentException(ILLEGAL_SIZE_EXCEPTION_MESSAGE);
         }
     }
 
     private void validateDuplicate(List<Integer> numbers) {
         HashSet<Integer> distinctNumbers = new HashSet<>(numbers);
-        if (distinctNumbers.size() != ConstantsKr.NUMBER_OF_LOTTO_NUMBERS) {
+        if (distinctNumbers.size() != SIZE) {
             throw new IllegalArgumentException(NUMBER_DUPLICATE_EXCEPTION_MESSAGE);
         }
     }

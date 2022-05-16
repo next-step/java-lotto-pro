@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.ConstantsKr;
-
 import java.util.Objects;
 
 public class Match {
@@ -13,8 +11,8 @@ public class Match {
     }
 
     private void validateBounds(int value) {
-        if (value < 0 || value > ConstantsKr.NUMBER_OF_LOTTO_NUMBERS) {
-            throw new IllegalArgumentException("당첨 번호 일치 개수는 0 ~ " + ConstantsKr.NUMBER_OF_LOTTO_NUMBERS + "입니다.");
+        if (value < 0 || value > LottoGame.SIZE) {
+            throw new IllegalArgumentException("당첨 번호 일치 개수는 0 ~ " + LottoGame.SIZE + "입니다.");
         }
     }
 

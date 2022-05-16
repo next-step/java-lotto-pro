@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.ConstantsKr;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +26,7 @@ public class LottoTicket {
 
     public TicketCheckResult check(final WinningNumbers winningNumbers) {
         Map<Match, Integer> result = new HashMap<>();
-        for (int i = 0; i <= ConstantsKr.NUMBER_OF_LOTTO_NUMBERS; i++) {
+        for (int i = 0; i <= LottoGame.SIZE; i++) {
             result.put(new Match(i), 0);
         }
 

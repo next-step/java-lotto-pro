@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.ConstantsKr;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -28,14 +26,14 @@ public class WinningNumbers {
     }
 
     private void validateSize(List<String> numbers) {
-        if (numbers.size() != ConstantsKr.NUMBER_OF_LOTTO_NUMBERS) {
-            throw new IllegalArgumentException("당첨 번호는 " + ConstantsKr.NUMBER_OF_LOTTO_NUMBERS + "개여야 합니다.");
+        if (numbers.size() != LottoGame.SIZE) {
+            throw new IllegalArgumentException("당첨 번호는 " + LottoGame.SIZE + "개여야 합니다.");
         }
     }
 
     private void validateDuplicate(List<LottoNumber> numbers) {
         HashSet<LottoNumber> distinctNumbers = new HashSet<>(numbers);
-        if (distinctNumbers.size() != ConstantsKr.NUMBER_OF_LOTTO_NUMBERS) {
+        if (distinctNumbers.size() != LottoGame.SIZE) {
             throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
         }
     }

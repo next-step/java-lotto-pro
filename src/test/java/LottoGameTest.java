@@ -1,5 +1,6 @@
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberBounds;
 import lotto.domain.Match;
 import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoGameTest {
+
+    @Test
+    void test() {
+        int value = LottoNumberBounds.MIN.getValue();
+        System.out.println("value = " + value);
+    }
 
     @Test
     void 생성_예외_개수() {

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.ConstantsKr;
-
 import java.util.Objects;
 
 public class LottoNumber {
@@ -29,7 +27,7 @@ public class LottoNumber {
     }
 
     private void validateBounds(int lottoNumber) {
-        if (lottoNumber < ConstantsKr.MIN || lottoNumber > ConstantsKr.MAX) {
+        if (lottoNumber < LottoNumberBounds.MIN.getValue() || lottoNumber > LottoNumberBounds.MAX.getValue()) {
             throw new IllegalArgumentException(LOTTO_NUMBER_OUT_OF_BOUNDS_EXCEPTION_MESSAGE);
         }
     }
