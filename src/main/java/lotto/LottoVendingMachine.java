@@ -13,15 +13,17 @@ import java.util.List;
 public class LottoVendingMachine {
 
     public static final int PRICE = 1000;
-    public static final int MIN = 1;
-    public static final int MAX = 45;
-    public static final int COUNT = 6;
+    private final LottoNumbersGenerator lottoNumbersGenerator;
+
+    public LottoVendingMachine(LottoNumbersGenerator lottoNumbersGenerator) {
+        this.lottoNumbersGenerator = lottoNumbersGenerator;
+    }
 
     public LottoTicket sellTicket(Money money) {
         List<List<Integer>> lottoGamesNumbers = new ArrayList<>();
         final int numberOfGames = money.numberOfGames(PRICE);
         for (int i = 0; i < numberOfGames; i++) {
-            lottoGamesNumbers.add(LottoNumbersGenerator.generate(MIN, MAX, COUNT));
+            lottoGamesNumbers.add(lottoNumbersGenerator.generate());
         }
 
         LottoTicket lottoTicket = new LottoTicket(lottoGamesNumbers);

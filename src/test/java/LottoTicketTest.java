@@ -1,7 +1,7 @@
+import lotto.domain.LottoTicket;
 import lotto.domain.Match;
 import lotto.domain.TicketCheckResult;
 import lotto.domain.WinningNumbers;
-import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -9,21 +9,17 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
 
     @Test
     void 생성() {
-        LottoTicket lottoTicket = new LottoTicket(14000);
-        assertThat(lottoTicket.size()).isEqualTo(14);
-    }
-
-    @Test
-    void 생성_예외() {
-        assertThatThrownBy(() -> {
-            LottoTicket lottoTicket = new LottoTicket(900);
-        }).isInstanceOf(IllegalArgumentException.class);
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
+                Arrays.asList(1,2,3,4,5,6),
+                Arrays.asList(7,8,9,10,11,12),
+                Arrays.asList(13,14,15,16,17,18)
+        ));
+        assertThat(lottoTicket.size()).isEqualTo(3);
     }
 
     @ParameterizedTest

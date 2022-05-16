@@ -22,7 +22,7 @@ public class Application {
         matchPrizes.put(new Match(5), 1500000);
         matchPrizes.put(new Match(6), 2000000000);
 
-        LottoVendingMachine machine = new LottoVendingMachine();
+        LottoVendingMachine machine = new LottoVendingMachine(new LottoNumbersGeneratorKor());
 
         LottoTicket lottoTicket = machine.sellTicket(money());
         ResultView.printTicket(lottoTicket);

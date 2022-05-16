@@ -1,3 +1,4 @@
+import lotto.LottoNumbersGeneratorKor;
 import lotto.LottoVendingMachine;
 import lotto.domain.Match;
 import lotto.domain.MatchPrizes;
@@ -22,7 +23,7 @@ public class LottoVendingMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"14000:14", "2900:2"}, delimiter = ':')
     void 구매(String money, int numberOfGames) {
-        LottoVendingMachine lottoVendingMachine = new LottoVendingMachine();
+        LottoVendingMachine lottoVendingMachine = new LottoVendingMachine(new LottoNumbersGeneratorKor());
 
         LottoTicket lottoTicket = lottoVendingMachine.sellTicket(new Money(money));
 
@@ -56,7 +57,7 @@ public class LottoVendingMachineTest {
 
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
 
-        LottoVendingMachine machine = new LottoVendingMachine();
+        LottoVendingMachine machine = new LottoVendingMachine(new LottoNumbersGeneratorKor());
         LottoResult result = machine.check(ticket, new LottoWin(winningNumbers, new MatchPrizes(matchingPrizes)));
 
         assertThat(result).isEqualTo(
