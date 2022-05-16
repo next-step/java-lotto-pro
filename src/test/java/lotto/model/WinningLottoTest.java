@@ -24,24 +24,6 @@ class WinningLottoTest {
         lottos = new Lottos(lottoList);
     }
 
-    @DisplayName("당첨로또 번호가 6개가 아닌 경우 검증")
-    @Test
-    void playLottoGame_non_six_number() {
-        LottoNumber bonusNumber = new LottoNumber(30);
-        assertThatIllegalArgumentException()
-                .isThrownBy(() ->  new WinningLotto(Arrays.asList("3", "7", "10", "35"),bonusNumber))
-                .withMessage("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
-
-    @DisplayName("당첨로또 6개의 번호에 중복이 있는지 검증")
-    @Test
-    void playLottoGame_duplication_number() {
-        LottoNumber bonusNumber = new LottoNumber(30);
-        assertThatIllegalArgumentException()
-                .isThrownBy(() ->  new WinningLotto( Arrays.asList("3", "7", "10", "10", "25", "35"),bonusNumber))
-                .withMessage("[ERROR] 6개의 로또 번호에 중복이 있습니다.");
-    }
-
     @DisplayName("당첨로또 6개의 번호와 보너스 번호에 중복이 있는지 검증")
     @Test
     void playLottoGame_duplication_bonus_number() {
