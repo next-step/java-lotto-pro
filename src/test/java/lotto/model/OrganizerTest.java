@@ -53,5 +53,15 @@ public class OrganizerTest {
     public void checkWinningMoney(int sameCount, int money) {
         assertThat(Organizer.winningMoney(sameCount)).isEqualTo(money);
     }
+
+    @Test
+    @DisplayName("로또 수익률 계산 정상 동작 확인")
+    public void checkRateOfReturn () {
+        Lottos lottos = new Lottos(
+                new Lotto[]{new Lotto(1, 12, 21, 3, 4, 5)}
+        );
+        organizer.winningResults(lottos);
+        assertThat(organizer.winningRate(15000)).isEqualTo("0.33");
+    }
 }
 
