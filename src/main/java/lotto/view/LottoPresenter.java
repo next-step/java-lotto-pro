@@ -8,8 +8,15 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPayment;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
+import lotto.service.LottoNumbersFactory;
 
 public class LottoPresenter {
+    private final LottoNumbersFactory lottoNumbersFactory;
+
+    public LottoPresenter(final LottoNumbersFactory lottoNumbersFactory) {
+        this.lottoNumbersFactory = lottoNumbersFactory;
+    }
+
     public void present() {
         final Scanner scanner = new Scanner(System.in);
         final LottoPayment payment = requestPayment(scanner);
@@ -38,7 +45,7 @@ public class LottoPresenter {
     private LottoNumbers requestWinningNumbers(final Scanner scanner) {
         System.out.println(WINNING_NUMBERS.getMessage());
         try {
-            return new LottoNumbers(scanner.nextLine());
+            return lottoNumbersFactory.convertAndCreate(scanner.nextLine());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return requestWinningNumbers(scanner);

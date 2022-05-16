@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class LottoNumbersStringConverter {
+public class StringToNumbersConverter {
     private static final Pattern INVALID_LOTTO_NUMBERS_STRING_PATTERN = Pattern.compile("[^-\\,0-9\\s]");
     private static final String SEPARATOR = ",";
 

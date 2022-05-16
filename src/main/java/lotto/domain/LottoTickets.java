@@ -7,8 +7,6 @@ import java.util.Map;
 import lotto.service.AutoLottoNumbersIssuer;
 
 public class LottoTickets {
-    public static final int[] MATCH_COUNTS = {3, 4, 5, 6};
-
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(final LottoPayment payment) {
