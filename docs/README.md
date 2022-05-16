@@ -167,3 +167,6 @@
 
 - IssuedHistory
   - IssuedInformation 정보들을 가지고 있다.
+
+- LottoMoney
+  - 사용자가 입력한 금액에 대한 발급할 예상 로또 장수를 알수 있다.
