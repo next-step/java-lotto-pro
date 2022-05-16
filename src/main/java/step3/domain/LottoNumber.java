@@ -5,15 +5,15 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
 
     private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
 
     private final int number;
 
     static {
-        IntStream.rangeClosed(MIN_LOTTO_NUMBER, getMaxLottoNumber())
+        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .forEach(number -> lottoNumberCache.put(number, new LottoNumber(number)));
     }
 

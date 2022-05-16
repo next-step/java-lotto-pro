@@ -10,7 +10,7 @@ public class LottoFactory {
     private static final List<Integer> allNumbers = new ArrayList<>();
 
     static {
-        IntStream.rangeClosed(LottoNumber.getMinLottoNumber(), LottoNumber.getMaxLottoNumber())
+        IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
                 .forEach(allNumbers::add);
     }
 
@@ -24,7 +24,7 @@ public class LottoFactory {
     private static List<Integer> randomNumbers() {
         Collections.shuffle(allNumbers);
         return allNumbers.stream()
-                .limit(Lotto.getSize())
+                .limit(Lotto.SIZE)
                 .collect(Collectors.toList());
     }
 
