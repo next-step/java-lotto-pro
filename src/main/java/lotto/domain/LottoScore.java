@@ -29,6 +29,12 @@ public class LottoScore {
     }
 
     public Winnings getWinnings() {
-        return new Winnings(this);
+        int winnings = 0;
+
+        for (Map.Entry<LottoWinnings, Integer> elem : lottoScoreMap.entrySet()) {
+            winnings += elem.getKey().getWinnings() * elem.getValue();
+        }
+
+        return new Winnings(winnings);
     }
 }

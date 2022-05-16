@@ -3,7 +3,6 @@ package lotto.controller;
 import lotto.domain.LottoScore;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
-import lotto.domain.ProfitRate;
 import lotto.domain.WinningNumbers;
 import lotto.domain.Winnings;
 import lotto.view.InputView;
@@ -21,7 +20,6 @@ public class LottoController {
         OutputView.printLottoStats(lottoScore.getLottoScoreMap());
 
         Winnings winnings = lottoScore.getWinnings();
-        ProfitRate profitRate = new ProfitRate(winnings, purchaseAmount);
-        OutputView.printProfitRate(profitRate.getRate());
+        OutputView.printProfitRate(winnings.profitRate(purchaseAmount));
     }
 }
