@@ -17,7 +17,8 @@ public class LottoGame {
         ResultView.printCount(money.calculateLottoCount());
         ResultView.printLottoGroups(lottoGroups);
         String winLottoNumbers = InputView.inputWinLotto();
-        List<Rank> matchResults = lottoGroups.matchResults(new Lotto(LottoNumbers.of(winLottoNumbers)));
+        int bonusNumber = InputView.inputBonusNumber();
+        List<Rank> matchResults = lottoGroups.matchResults(new WinningLotto(winLottoNumbers, bonusNumber));
         ResultView.printStatistics(matchResults, money);
     }
 }

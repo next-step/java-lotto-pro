@@ -22,10 +22,10 @@ public class LottoGroups {
         return lottoGroups.size();
     }
 
-    public List<Rank> matchResults(Lotto winLotto) {
+    public List<Rank> matchResults(WinningLotto winLotto) {
         List<Rank> matchResult = new ArrayList<>();
         for (Lotto lotto : lottoGroups) {
-            matchResult.add(lotto.match(winLotto));
+            matchResult.add(winLotto.match(lotto));
         }
         return matchResult;
     }

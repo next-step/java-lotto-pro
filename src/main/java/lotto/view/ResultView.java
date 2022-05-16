@@ -24,6 +24,7 @@ public class ResultView {
         printMatchResult(matchResults, Rank.FIFTH);
         printMatchResult(matchResults, Rank.FOURTH);
         printMatchResult(matchResults, Rank.THIRD);
+        printMatchResultWithBonus(matchResults);
         printMatchResult(matchResults, Rank.FIRST);
         printProfitRate(matchResults, money);
     }
@@ -36,6 +37,12 @@ public class ResultView {
     private static void printMatchResult(List<Rank> matchResults, Rank rank) {
         int count = calculateMatchCount(matchResults, rank);
         String format = String.format(ViewMessage.MATCH_RESULT_MESSAGE.getMessage(), rank.getMatchCount(), rank.getWinningPrize(), count);
+        System.out.println(format);
+    }
+
+    private static void printMatchResultWithBonus(List<Rank> matchResults) {
+        int count = calculateMatchCount(matchResults, Rank.SECOND);
+        String format = String.format(ViewMessage.MATCH_RESULT_WITH_BONUS_MESSAGE.getMessage(), Rank.SECOND.getMatchCount(), Rank.SECOND.getWinningPrize(), count);
         System.out.println(format);
     }
 

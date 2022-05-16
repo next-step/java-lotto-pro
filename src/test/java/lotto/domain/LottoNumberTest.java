@@ -11,8 +11,8 @@ public class LottoNumberTest {
     @Test
     @DisplayName("입력된 숫자로 로또번호를 생성한다.")
     void generate_test() {
-        LottoNumber lottoNumber = new LottoNumber(1);
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(1));
+        LottoNumber lottoNumber = LottoNumber.from(1);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.from(1));
     }
 
     @Test
@@ -20,10 +20,10 @@ public class LottoNumberTest {
     void range_test() {
         assertAll(
                 () -> assertThatThrownBy(() -> {
-                    LottoNumber lottoNumber = new LottoNumber(0);
+                    LottoNumber lottoNumber = LottoNumber.from(0);
                 }).isInstanceOf(IllegalArgumentException.class),
                 () -> assertThatThrownBy(() -> {
-                    LottoNumber lottoNumber = new LottoNumber(46);
+                    LottoNumber lottoNumber = LottoNumber.from(46);
                 }).isInstanceOf(IllegalArgumentException.class)
         );
 
