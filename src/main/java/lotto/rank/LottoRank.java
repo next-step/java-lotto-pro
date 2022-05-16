@@ -1,7 +1,6 @@
 package lotto.rank;
 
-import java.util.EnumSet;
-import java.util.Optional;
+import java.util.stream.Stream;
 
 public enum LottoRank {
 
@@ -41,11 +40,9 @@ public enum LottoRank {
     }
 
     private static LottoRank findRankByMatchNumberCount(int matchNumberCount){
-        Optional<LottoRank> foundRank = EnumSet.allOf(LottoRank.class)
-                .stream()
+        return Stream.of(LottoRank.values())
                 .filter(rank->rank.matchNumberCount == matchNumberCount)
-                .findFirst();
-        return foundRank.orElse(NO_PRIZE);
+                .findFirst().orElse(NO_PRIZE);
     }
 
     public int getMatchNumberCount() {

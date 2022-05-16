@@ -39,4 +39,4 @@
 - [X] 당첨 통계 및 수익률 계산을 위한 클래스 분리
 - [X] buyLotto 메서드 개선
 - [X] LottoGameResult 내 통계 기능 리팩토링 
-- [ ]
+- [X] LottoRank 리팩토링 
