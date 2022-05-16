@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Lottos {
@@ -8,6 +9,10 @@ public class Lottos {
 
     public Lottos(int count) {
         lottos = createLotto(count);
+    }
+
+    public Lottos(Lotto[] lottoArgs) {
+        lottos = Arrays.asList(lottoArgs);
     }
 
     public List<Lotto> allGames () {

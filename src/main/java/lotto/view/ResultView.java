@@ -10,4 +10,14 @@ public class ResultView {
             System.out.println(lotto.printText());
         }
     }
+
+    public static void printWinningResult(Lottos lottos) {
+        for (Lotto lotto : lottos.allGames()) {
+            System.out.println(lotto.printText());
+        }
+    }
+
+    public static void printRateOfReturn() {
+
+    }
 }
