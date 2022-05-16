@@ -15,4 +15,9 @@ public class InputView {
         System.out.println(ViewMessage.INPUT_WIN_LOTTO_MESSAGE.getMessage());
         return scanner.nextLine();
     }
+
+    public static int inputBonusNumber() {
+        System.out.println(ViewMessage.INPUT_BONUS_NUMBER_MESSAGE.getMessage());
+        return scanner.nextInt();
+    }
 }
