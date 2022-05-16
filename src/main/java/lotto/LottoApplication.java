@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.service.LottoNumbersFactory;
-import lotto.service.LottoPaymentFactory;
-import lotto.service.LottoTicketsFactory;
+import lotto.domain.LottoNumbersFactory;
+import lotto.domain.LottoPaymentFactory;
+import lotto.domain.LottoTicketsFactory;
 import lotto.view.LottoPresenter;
 
 public class LottoApplication {

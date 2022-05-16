@@ -5,12 +5,12 @@ import static lotto.domain.message.RequestMessage.WINNING_NUMBERS;
 
 import java.util.Scanner;
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoNumbersFactory;
 import lotto.domain.LottoPayment;
+import lotto.domain.LottoPaymentFactory;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
-import lotto.service.LottoNumbersFactory;
-import lotto.service.LottoPaymentFactory;
-import lotto.service.LottoTicketsFactory;
+import lotto.domain.LottoTicketsFactory;
 
 public class LottoPresenter {
     private final LottoPaymentFactory lottoPaymentFactory;

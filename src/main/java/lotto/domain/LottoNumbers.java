@@ -6,7 +6,7 @@ import java.util.Objects;
 public class LottoNumbers {
     private final List<Integer> numbers;
 
-    public LottoNumbers(final List<Integer> numbers) {
+    LottoNumbers(final List<Integer> numbers) {
         this.numbers = numbers;
     }
 

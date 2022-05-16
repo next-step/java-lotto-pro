@@ -1,9 +1,8 @@
-package lotto.service;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.service.AutoLottoNumbersIssuer;
 
 public class LottoTicketsFactory {
     public LottoTickets createAutomatically(final int count) {

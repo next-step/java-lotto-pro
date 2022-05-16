@@ -5,7 +5,7 @@ import java.util.Objects;
 public class LottoTicket {
     private final LottoNumbers lottoNumbers;
 
-    public LottoTicket(final LottoNumbers lottoNumbers) {
+    LottoTicket(final LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 

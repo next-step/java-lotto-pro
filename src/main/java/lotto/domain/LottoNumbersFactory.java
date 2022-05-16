@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.domain;
 
 import static lotto.domain.LottoNumbersCondition.AMOUNT_OF_NUMBERS;
 import static lotto.domain.LottoNumbersCondition.MAXIMUM_NUMBER;
@@ -6,7 +6,7 @@ import static lotto.domain.LottoNumbersCondition.MINIMUM_NUMBER;
 import static lotto.domain.message.ErrorMessage.INVALID_LOTTO_NUMBERS;
 
 import java.util.List;
-import lotto.domain.LottoNumbers;
+import lotto.service.StringToNumbersConverter;
 
 public class LottoNumbersFactory {
     public LottoNumbers create(final List<Integer> numbers) {

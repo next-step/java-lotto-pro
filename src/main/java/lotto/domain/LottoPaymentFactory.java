@@ -1,8 +1,6 @@
-package lotto.service;
+package lotto.domain;
 
 import static lotto.domain.message.ErrorMessage.INVALID_PAYMENT;
-
-import lotto.domain.LottoPayment;
 
 public class LottoPaymentFactory {
     private static final int LOTTO_TICKET_COST = 1000;

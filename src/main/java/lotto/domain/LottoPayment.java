@@ -6,7 +6,7 @@ public class LottoPayment {
     private final int money;
     private final int purchasableAmount;
 
-    public LottoPayment(final int money, final int purchasableAmount) {
+    LottoPayment(final int money, final int purchasableAmount) {
         this.money = money;
         this.purchasableAmount = purchasableAmount;
     }
