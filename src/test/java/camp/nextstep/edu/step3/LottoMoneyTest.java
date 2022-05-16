@@ -3,6 +3,10 @@ package camp.nextstep.edu.step3;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+import java.util.List;
+
+import static camp.nextstep.edu.step3.LottoTest.createLottoNumberList;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -47,9 +51,10 @@ public class LottoMoneyTest {
                 .isThrownBy(() -> new LottoMoney(0).calculate(1));
     }
 
-    @DisplayName("로또 금액을 입력하고 해당 금액에 따른 로또 예상 발급 장수를 알수있다.")
+    @DisplayName("구입 금액에서 구매한 로또 정보를 입력하면 나머지 금액을 반환한다.")
     @Test
     void expectedNumberOfIssuedTest() {
-        assertThat(new LottoMoney(3500).expectedNumberOfIssued()).isEqualTo(3);
+        List<Lotto> lottoList = Collections.singletonList(new Lotto(createLottoNumberList(new int[]{1, 2, 3, 4, 5, 6})));
+        assertThat(new LottoMoney(3500).excludingAmount(lottoList)).isEqualTo(new LottoMoney(2500));
     }
 }
