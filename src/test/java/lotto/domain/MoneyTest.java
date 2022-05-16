@@ -3,16 +3,30 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class MoneyTest {
 
+    private Money money1;
+    private Money money2;
+
+    @BeforeEach
+    void setUp() {
+        money1 = Money.from(10000);
+        money2 = Money.from(1000);
+
+    }
+
     @Test
     void 나누기() {
-        Money numerator = Money.from(10000);
-        Money denominator = Money.from(1000);
+        assertThat(money1.divide(money2)).isEqualTo(10);
+    }
 
-        assertThat(numerator.divide(denominator)).isEqualTo(10);
+    @Test
+    void 더하기() {
+
+        assertThat(money1.add(money2)).isEqualTo(Money.from(11000));
     }
 
     @Test

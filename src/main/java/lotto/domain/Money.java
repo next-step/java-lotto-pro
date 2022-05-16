@@ -21,6 +21,10 @@ public class Money {
         return this.value / target.value;
     }
 
+    public Money add(Money target) {
+        return Money.from(this.value + target.value);
+    }
+
     private void validate() {
         if (this.value < 0) {
             throw new IllegalArgumentException("돈은 음수 일 수 없습니다.");
