@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import lotto.generator.LottoNumberGenerator;
@@ -16,14 +15,6 @@ public class Lotto {
     private Lotto(Set<LottoNumber> lotto) {
         validateLotto(lotto);
         this.lotto = lotto;
-    }
-
-    public static Lotto valueOf(List<Integer> lottoNumbers) {
-        Set<LottoNumber> lotto = new HashSet<>();
-        for (int lottoNumber : lottoNumbers) {
-            lotto.add(LottoNumber.valueOf(lottoNumber));
-        }
-        return new Lotto(lotto);
     }
 
     public static Lotto draw(LottoNumberGenerator lottoNumberGenerator) {
