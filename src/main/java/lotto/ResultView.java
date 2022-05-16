@@ -4,8 +4,9 @@ import static lotto.Message.LOSS_STATISTICS_MESSAGE;
 import static lotto.Message.PRINT_LOTTO_NUMBERS;
 import static lotto.Message.PURCHASE_LOTTO_COUNT_MESSAGE;
 import static lotto.Message.RETURN_RATE_MESSAGE;
+import static lotto.Message.SECOND_RESULT_SUMMARY_MESSAGE;
 import static lotto.Message.STATISTICS_START_MESSAGE;
-import static lotto.Message.TOTAL_SUMMARY_MESSAGE;
+import static lotto.Message.WIN_RESULT_SUMMARY_MESSAGE;
 import static lotto.domain.LottoWinResult.WIN_RESULTS;
 
 import lotto.domain.Lotto;
@@ -40,6 +41,10 @@ public class ResultView {
     }
 
     private void printLottoWinStatistics(final LottoWinResult winResult, final long count) {
-        System.out.printf(TOTAL_SUMMARY_MESSAGE, winResult.getWinningCount(), winResult.getWinningMoney().toStringValue(), count);
+        if (winResult.isSecond()) {
+            System.out.printf(SECOND_RESULT_SUMMARY_MESSAGE, winResult.getWinningCount(), winResult.getWinningMoney().toStringValue(), count);
+            return;
+        }
+        System.out.printf(WIN_RESULT_SUMMARY_MESSAGE, winResult.getWinningCount(), winResult.getWinningMoney().toStringValue(), count);
     }
 }

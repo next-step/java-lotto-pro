@@ -53,4 +53,8 @@ public enum LottoWinResult {
     public Money getWinningMoney() {
         return winningMoney;
     }
+
+    public boolean isSecond() {
+        return this == SECOND;
+    }
 }
