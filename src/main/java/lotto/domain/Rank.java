@@ -27,19 +27,17 @@ public enum Rank {
     }
 
     public static Rank valueOf(int matchCount, boolean isBonusContains) {
-        if (matchCount == Rank.SECOND.matchCount) {
-            return rankByBonusContains(isBonusContains);
-        }
-        return Arrays.stream(values())
+        Rank result = Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
                 .orElse(Rank.MISS);
+        if (isThird(isBonusContains, result)) {
+            return Rank.THIRD;
+        }
+        return result;
     }
 
-    private static Rank rankByBonusContains(boolean isBonusContains) {
-        if (isBonusContains) {
-            return Rank.SECOND;
-        }
-        return Rank.THIRD;
+    private static boolean isThird(boolean isBonusContains, Rank result) {
+        return result == Rank.SECOND && !isBonusContains;
     }
 }
