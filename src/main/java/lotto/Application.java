@@ -23,14 +23,12 @@ public class Application {
     private static void initLotto() {
         Integer price = inputView.inputPrice();
         Integer manualCount = inputView.inputManualCount();
-
         LottoPrice lottoPrice = lottoApplication.purchase(price, manualCount);
 
         List<List<Integer>> manualLottoNumbers = inputView.inputManualLottoNumbers(manualCount);
-
         resultView.printLottoCount(lottoPrice);
-
         List<LottoNumbers> lottoNumbers = lottoApplication.generateLottoNumbers(manualLottoNumbers);
+
         resultView.printLottoNumbers(lottoNumbers);
     }
 
