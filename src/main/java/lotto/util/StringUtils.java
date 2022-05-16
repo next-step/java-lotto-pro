@@ -1,4 +1,4 @@
-package calculator;
+package lotto.util;
 
 import java.util.Arrays;
 import java.util.Collections;

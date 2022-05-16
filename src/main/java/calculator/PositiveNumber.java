@@ -12,14 +12,14 @@ public class PositiveNumber {
     public static PositiveNumber parseNotNegativeNumber(String input) {
         try {
             int number = Integer.parseInt(input);
-            validNotNegativeNumber(number);
+            validateNotNegativeNumber(number);
             return new PositiveNumber(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(CANNOT_CONVERT_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
-    private static void validNotNegativeNumber(int number) {
+    private static void validateNotNegativeNumber(int number) {
         if (isNegativeNumber(number)) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
         }
