@@ -11,8 +11,10 @@ class LottoGeneratorTest {
 
     @Test
     void 랜덤_숫자_6개를_발급한다() {
+        // given
+        LottoGenerator lottoGenerator = new LottoGenerator();
         // when
-        List<Integer> generated = LottoGenerator.generate();
+        List<Integer> generated = lottoGenerator.generate();
         // then
         assertThat(generated).hasSize(6);
     }

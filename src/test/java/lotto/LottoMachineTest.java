@@ -11,8 +11,10 @@ class LottoMachineTest {
 
     @Test
     void 로또_개수에_맞게_로또를_발급한다() {
+        // given
+        LottoMachine lottoMachine = new LottoMachine();
         // when
-        Lottos buy = LottoMachine.buy(Money.of(3000));
+        Lottos buy = lottoMachine.buy(Money.of(3000));
         // then
         assertThat(buy.count()).isEqualTo(3);
     }

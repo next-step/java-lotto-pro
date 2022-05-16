@@ -4,12 +4,18 @@ import java.util.List;
 
 public class LottoMachine {
 
-    public static Lottos buy(Money money) {
+    private final LottoGenerator lottoGenerator;
+
+    public LottoMachine() {
+        lottoGenerator = new LottoGenerator();
+    }
+
+    public Lottos buy(Money money) {
         int purchaseCount = LottoPrice.purchase(money);
 
         Lottos lottos = new Lottos();
         for (int i = 0; i < purchaseCount; i++) {
-            List<Integer> numbers = LottoGenerator.generate();
+            List<Integer> numbers = lottoGenerator.generate();
             lottos.add(Lotto.create(numbers));
         }
         return lottos;

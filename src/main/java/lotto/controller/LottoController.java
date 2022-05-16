@@ -6,9 +6,15 @@ import lotto.view.ResultView;
 
 public class LottoController {
 
+    private final LottoMachine lottoMachine;
+
+    public LottoController() {
+        this.lottoMachine = new LottoMachine();
+    }
+
     public Lottos buy() {
         Money purchaseAmount = Money.of(InputView.inputPurchaseAmount());
-        Lottos buy = LottoMachine.buy(purchaseAmount);
+        Lottos buy = lottoMachine.buy(purchaseAmount);
 
         ResultView.printPurchaseCount(buy);
         ResultView.printLottos(buy);
