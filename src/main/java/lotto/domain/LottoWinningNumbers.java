@@ -76,11 +76,11 @@ public class LottoWinningNumbers {
         }
     }
 
-    public int size() {
+    public int getWinningNumbersSize() {
         return winningNumbers.size();
     }
 
-    public Integer get(final int index) {
+    public Integer getWinningNumber(final int index) {
         return winningNumbers.get(index);
     }
 }

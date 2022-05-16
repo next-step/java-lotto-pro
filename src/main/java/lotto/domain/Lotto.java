@@ -56,8 +56,8 @@ public class Lotto {
 
     public int matches(final LottoWinningNumbers winningNumbers) {
         int matchesCount = 0;
-        for (int i = 0; i < winningNumbers.size(); i++) {
-            matchesCount += matchesThenOneElseZero(winningNumbers.get(i));
+        for (int i = 0; i < winningNumbers.getWinningNumbersSize(); i++) {
+            matchesCount += matchesThenOneElseZero(winningNumbers.getWinningNumber(i));
         }
         return matchesCount;
     }
