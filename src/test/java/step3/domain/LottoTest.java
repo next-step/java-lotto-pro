@@ -24,7 +24,7 @@ class LottoTest {
     @Test
     void invalid_로또_생성_숫자개수() {
         assertThatThrownBy(() -> {
-            Lotto newLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5));
+            new Lotto(Arrays.asList(1, 2, 3, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(String.format("중복되지 않은 %d개의 숫자를 입력해주세요.", Lotto.SIZE));
     }
