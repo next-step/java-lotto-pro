@@ -74,4 +74,8 @@ public class LottoNumbers {
 		return (int) lottoNumbers.getLottoNumbers().stream()
 				.filter(lottoNumber -> getLottoNumbers().contains(lottoNumber)).count();
 	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
 }

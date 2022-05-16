@@ -1,6 +1,7 @@
 package lotto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,5 +37,15 @@ public class LottoResultTest {
 		LottoResult lottoResult = new LottoResult(new Lottos(lottos), new LottoNumbers("1,2,3,4,5,8"), "7");
 		assertEquals(lottoResult.profitRate(1000),
 				(WinningMoney.THIRD.getWinningMoney() + WinningMoney.SECOND.getWinningMoney()) / 2000);
+	}
+
+	@Test
+	@DisplayName("보너스볼 번호가 로또번호에 포함된 값이 들어왔을 경우 테스트")
+	void lottoNumbers_contains_bonusLottoNumber() {
+		List<LottoNumbers> lottos = new ArrayList<>();
+		lottos.add(new LottoNumbers("1,2,3,4,5,6"));
+
+		assertThrows(IllegalArgumentException.class,
+				() -> new LottoResult(new Lottos(lottos), new LottoNumbers("1,2,3,4,5,8"), "8"));
 	}
 }
