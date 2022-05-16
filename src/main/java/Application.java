@@ -38,7 +38,6 @@ public class Application {
     }
 
     private static void aggregate(Ranks ranks) {
-        Aggregator aggregator = vendor.aggregate(ranks);
-        consoleOutputView.view(aggregator);
+        consoleOutputView.view(ranks, vendor.yield(ranks));
     }
 }

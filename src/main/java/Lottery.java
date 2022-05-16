@@ -1,11 +1,11 @@
 import java.util.stream.StreamSupport;
 
 public class Lottery {
-    private final LottoNumbers lottoNumbers;
+    private final LottoNumbers ranksLottoNumbers;
     private final BonusLottoNumber bonusLottoNumber;
 
-    public Lottery(LottoNumbers lottoNumbers, BonusLottoNumber bonusLottoNumber) {
-        this.lottoNumbers = lottoNumbers;
+    public Lottery(LottoNumbers ranksLottoNumbers, BonusLottoNumber bonusLottoNumber) {
+        this.ranksLottoNumbers = ranksLottoNumbers;
         this.bonusLottoNumber = bonusLottoNumber;
     }
 
@@ -23,7 +23,7 @@ public class Lottery {
         return Rank.valueOf(
                 Math.toIntExact(StreamSupport
                         .stream(lottoNumbers.spliterator(), false)
-                        .filter(this.lottoNumbers::contains)
+                        .filter(this.ranksLottoNumbers::contains)
                         .count()
                 ),
                 lottoNumbers.contains(this.bonusLottoNumber)

@@ -13,9 +13,4 @@ public class VendorTest {
     void 가격_미만이면_로또를_구매할_수_없다() {
         assertThatThrownBy(() -> new Vendor().buy(Vendor.LOTTO_PRICE - 1)).isInstanceOf(RuntimeException.class);
     }
-
-    @Test
-    void 집계할_수_있다() {
-        assertThat(new Vendor().aggregate(new Ranks())).isInstanceOf(Aggregator.class);
-    }
 }

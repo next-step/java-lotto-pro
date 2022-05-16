@@ -39,7 +39,6 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
 ### LottoNumbers - 로또 번호 여러개 대응
 ### Ranks - 당첨 상세정보 여러개 대응
 ### Vendor - 구매, 총 구매량에 대한 통계, 수익률 처리
-### Aggregator - Vendor 에게 위임받아 집계 관련된 기능 처리 수행
 ### BonusLottoNumber - 로또 번호 확장. 해당 번호 포함 여부를 2등 판별 지표로 사용
 
 
@@ -54,7 +53,7 @@ LottoNumbers
 - [X] 중복된 LottoNumber 를 포함할 수 없다.
 - [X] LottoNumber를 포함하고 있는지 여부를 확인할 수 있다.
 - [X] Iterable 한 객체이다.
-- [ ] BonusNumber 가 포함되어 있는지 확인할 수 있다.
+- [X] BonusNumber 가 포함되어 있는지 확인할 수 있다.
 
 Rank
 - [X] 음수가 될 수 없고, LottoNumbers 의 최대 길이를 초과할 수 없다.
@@ -65,6 +64,7 @@ Rank
 Ranks
 - [X] Rank 를 추가할 수 있다.
 - [X] 포함하고 있는 Rank 의 개수를 알려줄 수 있다.
+- [X] 받을 수 있는 총 상금의 갯수를 알려줄 수 있다.
 - [X] Iterable 한 객체이다.
 
 Lottery
@@ -75,11 +75,7 @@ Lotto
 
 Vendor
 - [X] 로또를 판매할 수 있다.
-- [X] 집계할 수 있다.
-
-Aggregator 
 - [X] 수익률을 계산할 수 있다.
-- [X] 등수별 당첨 갯수를 집계할 수 있다.
 
 BonusNumber
 - [X] LottoNumber 를 확장한 객체이다.

@@ -38,7 +38,7 @@ public enum Rank {
         return !NONE.equals(this);
     }
 
-    public long prize() {
+    public long money() {
         return this.money;
     }
 

@@ -48,7 +48,7 @@ public class RankTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { "FIRST", "SECOND", "THIRD", "FOURTH" })
+    @ValueSource(strings = { "FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH" })
     void 당첨되면_winner_이다(Rank rank) {
         assertThat(rank.win()).isTrue();
     }
@@ -57,15 +57,6 @@ public class RankTest {
     @ValueSource(strings = { "NONE" })
     void 당첨되지_않으면_winner_가_아니다(Rank rank) {
         assertThat(rank.win()).isFalse();
-    }
-
-    @Test
-    void 당첨_되면_받을_상금을_계산할_수_있다() {
-        Ranks ranks = new Ranks();
-        ranks.add(Rank.valueOf(5, true));
-        ranks.add(Rank.valueOf(5, true));
-        ranks.add(Rank.valueOf(5, true));
-        assertThat(ranks.totalPrize()).isEqualTo(30000000L);
     }
 
 }

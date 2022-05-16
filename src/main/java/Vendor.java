@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,11 +29,12 @@ public class Vendor {
 
     private LottoNumbers get() {
         Collections.shuffle(ALL_AVAILABLE_LOTTO_NUMBER_LIST);
+
         return new LottoNumbers(
                 ALL_AVAILABLE_LOTTO_NUMBER_LIST.stream().limit(LottoNumbers.SIZE).collect(Collectors.toList()));
     }
 
-    public Aggregator aggregate(Ranks ranks) {
-        return new Aggregator(ranks);
+    public BigDecimal yield(Ranks ranks) {
+        return BigDecimal.valueOf((double) ranks.totalMoney() / (double) (ranks.size() * LOTTO_PRICE));
     }
 }

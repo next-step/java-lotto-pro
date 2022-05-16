@@ -25,8 +25,8 @@ public class Ranks implements Iterable<Rank> {
         return this.ranks.stream().filter(rank::equals).count();
     }
 
-    public long totalPrize() {
-        return this.ranks.stream().distinct().mapToLong(Rank::prize).sum();
+    public long totalMoney() {
+        return this.ranks.stream().distinct().mapToLong(Rank::money).sum();
     }
 
     @Override
