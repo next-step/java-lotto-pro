@@ -1,7 +1,7 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
-import java.util.Set;
+import lotto.strategy.PickNumberStrategy;
 
 public class LottoNumbers {
 

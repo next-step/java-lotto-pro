@@ -1,8 +1,9 @@
-package lotto;
+package lotto.strategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.LottoNumber;
 
 public class AutoPickNumberStrategy implements PickNumberStrategy {
 
