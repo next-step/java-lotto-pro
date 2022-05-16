@@ -14,7 +14,11 @@ public class StringAddCalculator {
     }
 
     private static int[] checkNegativeNumberOrThrow(int[] numbers) {
+<<<<<<< HEAD
         for (int number : numbers) {
+=======
+    for (int number : numbers) {
+>>>>>>> a3c1c43 (docs: 기능 목록 정리)
 
             if (number < 0) {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
