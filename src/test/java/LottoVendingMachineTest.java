@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoVendingMachineTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"14000:14", "0:0", "2900:2"}, delimiter = ':')
+    @CsvSource(value = {"14000:14", "2900:2"}, delimiter = ':')
     void 구매(String money, int numberOfGames) {
         LottoVendingMachine lottoVendingMachine = new LottoVendingMachine();
 
