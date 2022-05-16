@@ -35,7 +35,7 @@ class LottoGameTest {
     public void 번호_맞춘_개수에_대한_등수_확인(String lottoNumbers, Ranking expected) {
         Lotto lastWinningLotto = new Lotto("1,2,3,4,5,6");
         PurchasedLotto purchasedLotto = new PurchasedLotto(Arrays.asList(new Lotto(lottoNumbers)));
-        LottoResult lottoResult = game.matchLottoNumbers(purchasedLotto, lastWinningLotto);
+        LottoResult lottoResult = game.matchLottoNumbers(purchasedLotto, lastWinningLotto, new LottoNo(45));
 
         assertThat(lottoResult.getRankingList()).containsExactly(expected);
     }

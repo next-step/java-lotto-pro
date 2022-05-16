@@ -9,9 +9,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoConstant.*;
-import static lotto.view.InputView.REQUEST_LAST_WINNING_NUMBERS;
-import static lotto.view.InputView.REQUEST_MONEY;
+import static lotto.domain.LottoConstant.LOTTO_END_NUMBER;
+import static lotto.domain.LottoConstant.LOTTO_START_NUMBER;
+import static lotto.view.InputView.*;
 
 public class LottoGame {
     private static final List<LottoNo> lottoNumbers = new ArrayList<>();
@@ -33,9 +33,10 @@ public class LottoGame {
         OutputView.printMyLotto(purchasedLotto);
 
         Lotto lastWinningLotto = new Lotto(readLastWinningNumbers());
+        LottoNo bonusNumber = new LottoNo(readBonusNumber());
         OutputView.printLine();
 
-        LottoResult result = matchLottoNumbers(purchasedLotto, lastWinningLotto);
+        LottoResult result = matchLottoNumbers(purchasedLotto, lastWinningLotto, bonusNumber);
         OutputView.showLottoResult(result, money);
     }
 
@@ -56,11 +57,6 @@ public class LottoGame {
         return new Lotto(lottoNoList);
     }
 
-    public LottoResult matchLottoNumbers(PurchasedLotto purchasedLotto, Lotto lastWinningLotto) {
-        List<Ranking> rankings = purchasedLotto.compareLottos(lastWinningLotto);
-        return new LottoResult(rankings);
-    }
-
     public LottoResult matchLottoNumbers(PurchasedLotto purchasedLotto, Lotto lastWinningLotto, LottoNo bonusNumber) {
         List<Ranking> rankings = purchasedLotto.compareLottos(lastWinningLotto, bonusNumber);
         return new LottoResult(rankings);
@@ -73,5 +69,9 @@ public class LottoGame {
 
     private String readLastWinningNumbers() {
         return InputView.readUserInput(REQUEST_LAST_WINNING_NUMBERS);
+    }
+
+    private String readBonusNumber() {
+        return InputView.readUserInput(REQUEST_BONUS_NUMBER);
     }
 }
