@@ -10,9 +10,10 @@ public class LottoController {
         LottoCharge charge = LottoCharge.from(view.inputCharge());
         Lottos lottos = Lottos.buy(charge);
         view.showLottos(lottos);
+
         Answer answer = new Answer(view.inputAnswer());
         Winnings winnings = lottos.winnigs(answer);
-        Statistics statistics = Statistics.of(charge, winnings);
-        view.showStatistics(statistics);
+
+        view.showStatistics(Statistics.of(charge, winnings));
     }
 }
