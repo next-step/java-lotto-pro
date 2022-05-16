@@ -11,9 +11,8 @@ public class LottoElementTest {
     @Test
     public void createLottoElementByNumber() {
         assertAll(
-            () -> assertThatThrownBy(() -> new LottoElement("-1")).isInstanceOf(IllegalArgumentException.class),
-            () -> assertThatThrownBy(() -> new LottoElement("a")).isInstanceOf(IllegalArgumentException.class),
-            () -> assertThatThrownBy(() -> new LottoElement("0")).isInstanceOf(IllegalArgumentException.class)
+            () -> assertThatThrownBy(() -> new LottoElement(-1)).isInstanceOf(IllegalArgumentException.class),
+            () -> assertThatThrownBy(() -> new LottoElement(0)).isInstanceOf(IllegalArgumentException.class)
         );
     }
 }

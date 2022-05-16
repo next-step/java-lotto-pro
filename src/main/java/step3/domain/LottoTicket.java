@@ -14,11 +14,12 @@ public class LottoTicket {
     private final int LOTTO_ELEMENTS_SIZE = 6;
     private static final String LOTTO_DELIMITER = ",";
     private final String CREATE_TICKET_EXCEPTION_MSG = "로또는 중복되지 않은 %s 개의 숫자로 이루어져있습니다";
+    private final String PARSE_INT_EXCEPTION_MSG = "로또는 숫자로 이루어져 있어야 합니다";
 
     public LottoTicket(List<String> lottoNumbers) {
-        validInnerSource(lottoNumbers);
-        for (int i = 0; i < LOTTO_ELEMENTS_SIZE; i++) {
-            lottoElements.add(new LottoElement(lottoNumbers.get(i)));
+        List<Integer> lottoSource = validInnerSource(lottoNumbers);
+        for (Integer lottoElement : lottoSource) {
+            lottoElements.add(new LottoElement(lottoElement));
         }
         Collections.sort(lottoElements);
     }
@@ -27,9 +28,14 @@ public class LottoTicket {
         this(Arrays.asList(lottoElementsSource.split(LOTTO_DELIMITER)));
     }
 
-    private void validInnerSource(List<String> lottoElementsSource) {
+    private List<Integer> validInnerSource(List<String> lottoElementsSource) {
         if (new HashSet<>(lottoElementsSource).size() != LOTTO_ELEMENTS_SIZE) {
             throw new IllegalArgumentException(String.format(CREATE_TICKET_EXCEPTION_MSG, LOTTO_ELEMENTS_SIZE));
+        }
+        try {
+            return lottoElementsSource.stream().map(Integer::parseInt).collect(Collectors.toList());
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException(PARSE_INT_EXCEPTION_MSG);
         }
     }
 

@@ -9,14 +9,13 @@ public class LottoElement implements Comparable<LottoElement> {
     private final int LOTTO_MAX = 46;
     private final String CREATE_ELEMENT_EXCEPTION_MSG = "로또 번호는 %s 이상 %s 이하의 숫자여야합니다";
 
-    public LottoElement(String element) {
+    public LottoElement(int element) {
         this.element = validElement(element);
     }
 
-    private int validElement(String element) {
-        int parseElement = parseNumber(element);
-        validNumberRange(parseElement);
-        return parseElement;
+    private int validElement(int element) {
+        validNumberRange(element);
+        return element;
     }
 
     private void validNumberRange(int parseElement) {
@@ -25,13 +24,6 @@ public class LottoElement implements Comparable<LottoElement> {
         }
     }
 
-    private int parseNumber(String element) {
-        try {
-            return Integer.parseInt(element);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(String.format(CREATE_ELEMENT_EXCEPTION_MSG, LOTTO_MIN, LOTTO_MAX));
-        }
-    }
 
     public int getElement() {
         return element;
@@ -57,14 +49,14 @@ public class LottoElement implements Comparable<LottoElement> {
     @Override
     public int compareTo(LottoElement o) {
         int source = element;
-        int target = o.getElement(); 
-        if (target < source) {
-            return 1;
-        } else if (target > source) {
-            return -1;
-        } else {
-            return 0;
-        }
+        int target = o.getElement();
+        return Integer.compare(source, target);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(element);
+    }
 
     }
 }
