@@ -27,12 +27,6 @@ public class LottoTicketTest {
         assertThat(lottoTicket).isEqualTo(new LottoTicket(lottoNumbers));
     }
 
-    private static Stream<Arguments> lottoTicketMatchingLessThanThreeNumbers() {
-        return Stream.of(Arguments.of(new LottoTicket(new LottoNumbers(Arrays.asList(13, 21, 34, 37, 41, 44)))),
-                Arguments.of(new LottoTicket(new LottoNumbers(Arrays.asList(3, 21, 34, 37, 41, 44)))),
-                Arguments.of(new LottoTicket(new LottoNumbers(Arrays.asList(2, 5, 34, 37, 41, 44)))));
-    }
-
     @Test
     @DisplayName("번호가 3개 일치하면 Prize.THREE_MATCHES이 반환되어야 한다")
     void when_three_matches() {
@@ -79,5 +73,11 @@ public class LottoTicketTest {
     void when_no_matches(final LottoTicket lottoTicket) {
         // when and then
         assertThat(lottoTicket.prize(winningNumbers)).isEqualTo(Prize.NO_MATCHES);
+    }
+
+    private static Stream<Arguments> lottoTicketMatchingLessThanThreeNumbers() {
+        return Stream.of(Arguments.of(new LottoTicket(new LottoNumbers(Arrays.asList(13, 21, 34, 37, 41, 44)))),
+                Arguments.of(new LottoTicket(new LottoNumbers(Arrays.asList(3, 21, 34, 37, 41, 44)))),
+                Arguments.of(new LottoTicket(new LottoNumbers(Arrays.asList(2, 5, 34, 37, 41, 44)))));
     }
 }

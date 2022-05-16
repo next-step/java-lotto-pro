@@ -60,24 +60,6 @@ public class LottoNumbersTest {
         }
     }
 
-    private static Stream<Arguments> numbersNotHavingSixNumbers() {
-        return Stream.of(Arguments.of(new ArrayList<>()),
-                Arguments.of(Arrays.asList(1)),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
-    }
-
-    private static Stream<Arguments> numbersHavingLessThanOneOrGreaterThanFortyFive() {
-        return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 0)),
-                Arguments.of(Arrays.asList(-1, 1, 2, 3, 4, 5)),
-                Arguments.of(Arrays.asList(1, 2, 46, 3, 4, 5)));
-    }
-
-    private static Stream<Arguments> lottoNumbersMatchingLessThanThreeNumbers() {
-        return Stream.of(Arguments.of(new LottoNumbers(Arrays.asList(13, 21, 34, 37, 41, 44))),
-                Arguments.of(new LottoNumbers(Arrays.asList(3, 21, 34, 37, 41, 44))),
-                Arguments.of(new LottoNumbers(Arrays.asList(2, 5, 34, 37, 41, 44))));
-    }
-
     @Test
     @DisplayName("주어진 번호가 3개 일치하면 3이 반환되어야 한다")
     void when_three_matches_should_return_3() {
@@ -142,5 +124,23 @@ public class LottoNumbersTest {
     void when_no_matches_should_return_0(final LottoNumbers lottoNumbers) {
         // when and then
         assertThat(lottoNumbers.matches(winningNumbers)).isEqualTo(0);
+    }
+
+    private static Stream<Arguments> numbersNotHavingSixNumbers() {
+        return Stream.of(Arguments.of(new ArrayList<>()),
+                Arguments.of(Arrays.asList(1)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+    }
+
+    private static Stream<Arguments> numbersHavingLessThanOneOrGreaterThanFortyFive() {
+        return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 0)),
+                Arguments.of(Arrays.asList(-1, 1, 2, 3, 4, 5)),
+                Arguments.of(Arrays.asList(1, 2, 46, 3, 4, 5)));
+    }
+
+    private static Stream<Arguments> lottoNumbersMatchingLessThanThreeNumbers() {
+        return Stream.of(Arguments.of(new LottoNumbers(Arrays.asList(13, 21, 34, 37, 41, 44))),
+                Arguments.of(new LottoNumbers(Arrays.asList(3, 21, 34, 37, 41, 44))),
+                Arguments.of(new LottoNumbers(Arrays.asList(2, 5, 34, 37, 41, 44))));
     }
 }
