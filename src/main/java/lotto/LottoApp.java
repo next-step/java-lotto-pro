@@ -13,19 +13,15 @@ public class LottoApp {
     public static void main(String[] args) {
         LottoMachine lottoMachine = new LottoMachine();
 
-        // 구매금액 입력 & 출력
         int money = InputView.inputMoney();
         List<Lotto> lottos = lottoMachine.purchase(money);
         OutputView.outputLottos(lottos);
 
-        // 지난 당첨 로또 입력
         List<Integer> numbers = InputView.inputWinningLotto();
         Lotto winLotto = new Lotto(numbers);
 
-        // 보너스 번호 입력
         LottoNumber bonus = InputView.inputBonusNumber();
 
-        // 결과 출력
         Statistics statistics = new Statistics(winLotto, bonus, lottos);
         OutputView.outputResult(statistics.getResultMap());
         OutputView.outputResultProfit(statistics.getProfit());
