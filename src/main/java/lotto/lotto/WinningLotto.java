@@ -1,7 +1,5 @@
 package lotto.lotto;
 
-import lotto.LottoPrize;
-
 import static java.util.Objects.requireNonNull;
 
 public class WinningLotto {
@@ -16,9 +14,7 @@ public class WinningLotto {
         return new WinningLotto(maybeLottoNumbers);
     }
 
-    public LottoPrize guess(Lotto lotto) {
-//        final int matcheCount = this.lotto.countMatches(lotto);
-//        final boolean matchBonus = lotto.contains(bonusLottoNumber);
-        return null;
+    public String getLottoNumbers() {
+        return maybeLottoNumbers;
     }
 }

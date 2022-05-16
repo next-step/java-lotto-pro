@@ -54,7 +54,7 @@ public class Lotto implements Purchasable {
         return count;
     }
 
-    boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
