@@ -4,6 +4,8 @@ import static lotto.constants.LottoConstants.LOTTO_PRICE;
 import static lotto.constants.LottoErrorMessage.INVALID_INPUT_BONUS_LOTTO_NUMBER;
 import static lotto.constants.LottoErrorMessage.INVALID_INPUT_LOTTO_NUMBER;
 import static lotto.constants.LottoErrorMessage.INVALID_INPUT_MONEY;
+import static lotto.constants.LottoErrorMessage.INVALID_MANUAL_LOTTO_PURCHASE_COUNT;
+import static lotto.constants.LottoGuideMessage.INPUT_MANUAL_LOTTO_PURCHASE_COUNT;
 import static lotto.constants.LottoGuideMessage.INPUT_MONEY;
 import static lotto.constants.LottoNumberConstants.LOTTO_NUMBER_MAX;
 import static lotto.constants.LottoNumberConstants.LOTTO_NUMBER_MIN;
@@ -18,6 +20,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
@@ -38,6 +41,25 @@ public class LottoInputView {
         }
 
         return convertToMoney(inputMoney);
+    }
+
+    public LottoCount inputManualLottoPurchaseCount(LottoCount availablePurchaseLottoCount) {
+        System.out.println(INPUT_MANUAL_LOTTO_PURCHASE_COUNT);
+        String manualLottoPurchaseCount = readLine();
+
+        if (isValidManualLottoPurchaseCount(manualLottoPurchaseCount, availablePurchaseLottoCount)) {
+            return LottoCount.from(StringToIntegerParser.parseNumber(manualLottoPurchaseCount));
+        }
+
+        System.out.printf((INVALID_MANUAL_LOTTO_PURCHASE_COUNT) + "%n", manualLottoPurchaseCount,
+            availablePurchaseLottoCount);
+        return this.inputManualLottoPurchaseCount(availablePurchaseLottoCount);
+    }
+
+    private boolean isValidManualLottoPurchaseCount(String manualLottoPurchaseCount,
+        LottoCount availablePurchaseLottoCount) {
+        return isValidateNumber(manualLottoPurchaseCount)
+            && StringToIntegerParser.parseNumber(manualLottoPurchaseCount) <= availablePurchaseLottoCount.getCount();
     }
 
     private Money convertToMoney(String money) {

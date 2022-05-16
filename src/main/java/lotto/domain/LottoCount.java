@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static lotto.constants.LottoConstants.LOTTO_PRICE;
-
 public class LottoCount {
     private final int count;
 
@@ -13,11 +11,11 @@ public class LottoCount {
         return new LottoCount(count);
     }
 
-    public static LottoCount calculateBy(Money money) {
-        return LottoCount.from(money.getMoney() / LOTTO_PRICE);
-    }
-
     public int getCount() {
         return this.count;
+    }
+
+    public LottoCount minus(LottoCount lottoCount) {
+        return LottoCount.from(this.count - lottoCount.getCount());
     }
 }

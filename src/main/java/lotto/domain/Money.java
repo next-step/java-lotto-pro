@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.constants.LottoConstants.LOTTO_PRICE;
 import static lotto.constants.LottoErrorMessage.INVALID_INPUT_MONEY;
 
 public class Money {
@@ -20,5 +21,9 @@ public class Money {
 
     public int getMoney() {
         return this.money;
+    }
+
+    public LottoCount calculateLottoCount() {
+        return LottoCount.from(this.money / LOTTO_PRICE);
     }
 }

@@ -2,7 +2,7 @@ package lotto.constants;
 
 public class LottoGuideMessage {
     public static final String INPUT_MONEY = "구입금액을 입력해 주세요.";
-    public static final String PURCHASE_COUNT = "%s개를 구매했습니다.";
+    public static final String PURCHASE_COUNT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     public static final String LAST_WINNING_INPUT = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String BONUS_BALL_INPUT = "보너스 볼을 입력해 주세요.";
     public static final String WINNING_STATISTICS_GUIDE = "당첨 통계";
@@ -14,4 +14,6 @@ public class LottoGuideMessage {
     public static final String PROFIT_NO_CHANGE = "변동없음";
     public static final String PROFIT = "이익";
     public static final String PROFIT_LOSS = "손해";
+    public static final String INPUT_MANUAL_LOTTO_PURCHASE_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
 }

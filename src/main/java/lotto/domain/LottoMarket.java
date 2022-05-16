@@ -12,9 +12,14 @@ public class LottoMarket {
         this.numberGenerator = new LottoNumberGenerator();
     }
 
-    public LottoTicket purchaseLottoTicket(Money money) {
-        LottoCount lottoCount = LottoCount.calculateBy(money);
-        return LottoTicket.from(generateAutoLottoNumbers(lottoCount));
+    public LottoTicket purchaseAutoLottoTicket(Money money,
+        LottoCount manualLottoCount) {
+        LottoCount lottoCount = money.calculateLottoCount();
+        return LottoTicket.from(generateAutoLottoNumbers(lottoCount.minus(manualLottoCount)));
+    }
+
+    public LottoTicket purchaseManualLottoTicket(List<LottoNumbers> manualLottoNumbers) {
+        return LottoTicket.from(manualLottoNumbers);
     }
 
     private List<LottoNumbers> generateAutoLottoNumbers(LottoCount lottoCount) {
