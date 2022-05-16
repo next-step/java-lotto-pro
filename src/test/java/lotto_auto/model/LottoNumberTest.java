@@ -2,6 +2,8 @@ package lotto_auto.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 public class LottoNumberTest {
