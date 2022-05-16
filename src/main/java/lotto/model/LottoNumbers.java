@@ -15,6 +15,13 @@ public class LottoNumbers {
         this.numbers = mapLottoNumber(numbers);
     }
 
+    public static List<LottoNumbers> toList(List<String> passiveNumbers) {
+        return passiveNumbers.stream()
+                .map(LottoGenerator::generateNumbers)
+                .map(LottoNumbers::new)
+                .collect(Collectors.toList());
+    }
+
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_STANDARD_SIZE) {
             throw new IllegalArgumentException(INVALID_SIZE);
