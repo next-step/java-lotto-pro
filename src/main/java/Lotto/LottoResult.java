@@ -2,27 +2,15 @@ package Lotto;
 
 import Lotto.enums.CompareEnum;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LottoResult {
-    private int firstCount;
-    private int secondCount;
-    private int thirdCount;
-    private int fourthCount;
+    private static final Map<CompareEnum, Integer> hitList = new HashMap<>();
     private Yield yield;
 
-    public int getFirstCount() {
-        return firstCount;
-    }
-
-    public int getSecondCount() {
-        return secondCount;
-    }
-
-    public int getThirdCount() {
-        return thirdCount;
-    }
-
-    public int getFourthCount() {
-        return fourthCount;
+    public Map<CompareEnum, Integer> getHitList() {
+        return hitList;
     }
 
     public Yield getYield() {
@@ -32,29 +20,15 @@ public class LottoResult {
     public LottoResult() {
     }
 
-    public LottoResult(int firstCount, int secondCount, int thirdCount, int fourthCount) {
-        this.firstCount = firstCount;
-        this.secondCount = secondCount;
-        this.thirdCount = thirdCount;
-        this.fourthCount = fourthCount;
-    }
-
     public void counting(CompareEnum result) {
-        if(result == CompareEnum.First)
-            firstCount++;
-
-        if(result == CompareEnum.Second)
-            secondCount++;
-
-        if(result == CompareEnum.Third)
-            thirdCount++;
-
-        if(result == CompareEnum.Fourth)
-            fourthCount++;
+       CompareEnum.valuesExcludeNone()
+                    .stream()
+                    .filter(compareEnum -> compareEnum == result)
+                    .forEach(compareEnum ->  hitList.put(compareEnum, hitList.getOrDefault(compareEnum, 0) + 1));
     }
 
     public void calculationYield(PurchaseMoney purchaseMoney) {
         yield = new Yield(purchaseMoney.getMoney());
-        yield.yieldCalcution(this);
+        yield.yieldCalcution(hitList);
     }
 }

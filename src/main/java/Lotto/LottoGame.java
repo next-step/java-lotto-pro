@@ -5,7 +5,6 @@ import Lotto.utils.ResultView;
 
 public class LottoGame {
     public LottoGame() {
-
     }
 
     public void calculation() {
