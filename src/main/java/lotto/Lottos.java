@@ -15,7 +15,7 @@ public class Lottos {
 
     public Lottos(int paperCount) {
         lottos = new ArrayList<>();
-        for (int i = 0; i < paperCount; i++) {
+        for (int i = 0; i < paperCount / 1000; i++) {
             lottos.add(new Lotto());
         }
     }
