@@ -17,6 +17,7 @@ public class Price {
         }
 
         this.tryTimes = this.price / 1000;
+        System.out.println(this.tryTimes+"개를 구매했습니다.");
     }
 
     @Override
@@ -25,5 +26,9 @@ public class Price {
                 "price=" + price +
                 ", tryTimes=" + tryTimes +
                 '}';
+    }
+
+    public int getTryTimes() {
+        return tryTimes;
     }
 }

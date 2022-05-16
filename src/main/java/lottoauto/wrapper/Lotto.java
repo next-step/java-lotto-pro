@@ -1,12 +1,12 @@
 package lottoauto.wrapper;
 
+import lottoauto.util.InputNumberValidator;
 import lottoauto.util.RandomNumberExtractor;
 
 import java.util.List;
 
 public class Lotto {
     private List<Integer> numbers;
-    private static final String DEFAULT_REGEX = ", ";
 
     public Lotto(List<Integer> numbers) {
         if(numbers.isEmpty()) {
@@ -32,7 +32,8 @@ public class Lotto {
     }
 
     public Lotto(String input) {
-
+        InputNumberValidator inputNumberValidator = new InputNumberValidator(input);
+        this.numbers = inputNumberValidator.getNumbers();
     }
 
     @Override
