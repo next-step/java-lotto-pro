@@ -8,6 +8,7 @@ import java.util.List;
 public class InputNumberValidator {
     private static final String DEFAULT_REGEX = ", ";
     private List<Integer> numbers = new ArrayList<>();
+
     public InputNumberValidator(String input) {
         String[] splitResult = input.split(DEFAULT_REGEX);
         Integer[] arrNumbers = new Integer[splitResult.length];

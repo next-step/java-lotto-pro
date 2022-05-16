@@ -3,7 +3,6 @@ package lottoauto.util;
 import lottoauto.service.LottoTicket;
 import lottoauto.wrapper.Lotto;
 
-import java.util.Collections;
 import java.util.Map;
 
 public class WinnerChecker {
@@ -12,7 +11,6 @@ public class WinnerChecker {
     private static final int THIRD = 4;
     private static final int SECOND = 5;
     private static final int FIRST = 6;
-    private static final int WIN_LIST = 4;
 
     public WinnerChecker(Lotto winnerLotto) {
         this.winnerLotto = winnerLotto;
@@ -29,22 +27,25 @@ public class WinnerChecker {
 
     public void makeWinnerMap(LottoTicket lottoTicket, Map<Integer, Integer> winnerMap) {
         for (int i = 0; i < lottoTicket.size(); i++) {
-            if (compareTickets(lottoTicket.get(i)) == FIRST) {
-                winnerMap.put(FIRST, winnerMap.get(FIRST) + 1);
-            }
+            addWinnerMapValueByKey(lottoTicket, winnerMap, i);
+        }
+    }
 
-            if (compareTickets(lottoTicket.get(i)) == SECOND) {
-                winnerMap.put(SECOND, winnerMap.get(SECOND) + 1);
-            }
+    private void addWinnerMapValueByKey(LottoTicket lottoTicket, Map<Integer, Integer> winnerMap, int i) {
+        if (compareTickets(lottoTicket.get(i)) == FIRST) {
+            winnerMap.put(FIRST, winnerMap.get(FIRST) + 1);
+        }
 
-            if (compareTickets(lottoTicket.get(i)) == THIRD) {
-                winnerMap.put(THIRD, winnerMap.get(THIRD) + 1);
-            }
+        if (compareTickets(lottoTicket.get(i)) == SECOND) {
+            winnerMap.put(SECOND, winnerMap.get(SECOND) + 1);
+        }
 
-            if (compareTickets(lottoTicket.get(i)) == FOURTH) {
-                winnerMap.put(FOURTH, winnerMap.get(FOURTH) + 1);
-            }
+        if (compareTickets(lottoTicket.get(i)) == THIRD) {
+            winnerMap.put(THIRD, winnerMap.get(THIRD) + 1);
+        }
 
+        if (compareTickets(lottoTicket.get(i)) == FOURTH) {
+            winnerMap.put(FOURTH, winnerMap.get(FOURTH) + 1);
         }
     }
 }

@@ -18,6 +18,7 @@ public class InputViewer {
     private static final int SECOND = 5;
     private static final int FIRST = 6;
     LottoTicket lottoTicket = new LottoTicket();
+    Map<Integer, Integer> winnerMap = new HashMap<>();
     Price price;
 
     public Price getInputPrice() {
@@ -28,7 +29,7 @@ public class InputViewer {
         return price;
     }
 
-    public void inputLottoPrint() {
+    public void inputLotto() {
         for (int i = 0; i < price.getTryTimes(); i++) {
             lottoTicket.add(new Lotto());
         }
@@ -36,14 +37,11 @@ public class InputViewer {
     }
 
     public Map<Integer, Integer> getWinNumbers() {
-
-
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
         InputNumberValidator inputNumberValidator = new InputNumberValidator(sc.nextLine());
         Lotto winNumbers = new Lotto(inputNumberValidator.getNumbers());
 
-        Map<Integer, Integer> winnerMap = new HashMap<>();
         makeDefaultWinnerMap(winnerMap);
 
         WinnerChecker winnerChecker = new WinnerChecker(winNumbers);
@@ -51,7 +49,6 @@ public class InputViewer {
 
         return winnerMap;
     }
-
 
     private void makeDefaultWinnerMap(Map<Integer, Integer> winnerMap) {
         winnerMap.put(FIRST, 0);

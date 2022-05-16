@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomNumberExtractor {
-
     public List<Integer> getRandomNumbers() {
         List<Integer> allNumbers = IntStream.range(1, 45).boxed().collect(Collectors.toList());
         Collections.shuffle(allNumbers);

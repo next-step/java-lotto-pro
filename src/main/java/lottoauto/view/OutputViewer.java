@@ -14,11 +14,16 @@ public class OutputViewer {
     private static final int THIRD = 4;
     private static final int SECOND = 5;
     private static final int FIRST = 6;
+
     public OutputViewer(Map<Integer, Integer> winNumbers, Price price) {
-        System.out.println(FIRST_STR+" "+winNumbers.get(FIRST));
-        System.out.println(SECOND_STR+" "+winNumbers.get(SECOND));
-        System.out.println(THIRD_STR+" "+winNumbers.get(THIRD));
-        System.out.println(FOURTH_STR+" "+winNumbers.get(THIRD));
-        System.out.println("총 수익률은 "+ YieldCalculator.getYield(price.getPrice(), FIRST, SECOND, THIRD, FOURTH) +"입니다.");
+        System.out.println();
+        System.out.println("당첨통계");
+        System.out.println("--------");
+        System.out.println(FIRST_STR + " " + winNumbers.get(FIRST));
+        System.out.println(SECOND_STR + " " + winNumbers.get(SECOND));
+        System.out.println(THIRD_STR + " " + winNumbers.get(THIRD));
+        System.out.println(FOURTH_STR + " " + winNumbers.get(FOURTH));
+        System.out.println("총 수익률은 " + YieldCalculator.getYield(price.getPrice(),
+                winNumbers.get(FIRST), winNumbers.get(SECOND), winNumbers.get(THIRD), winNumbers.get(FOURTH)) + "% 입니다.");
     }
 }
