@@ -1,25 +1,25 @@
 package lotto.view;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class InputView {
+    public static final Scanner SCANNER = new Scanner(System.in);
     private static final String START_LOTTO = "구입금액을 입력해주세요.";
     private static final String WINNING_LOTTO = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_ERROR = "잘못된 금액을 입력하셨습니다.";
 
-    public String printStart() throws IOException {
+    public int printRequestAmount() {
         System.out.println(START_LOTTO);
-        return input();
+        try {
+            return SCANNER.nextInt();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INPUT_ERROR);
+        }
     }
 
-    public String printWinningLotto() throws IOException {
+    public String printRequestWinningLotto() {
         System.out.println("\n" + WINNING_LOTTO);
-        return input();
-    }
-
-    private String input() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        return br.readLine();
+        return SCANNER.next();
     }
 }

@@ -27,13 +27,11 @@ public class TotalLotto {
         return this.lottoList;
     }
 
-    public void count(String input) throws IllegalArgumentException {
-        int amount = amountStringToInt(input);
+    public void count(int amount) {
         this.count = calculatorCount(amount);
     }
 
-    public void countAndLottos(String input) throws IllegalArgumentException {
-        int amount = amountStringToInt(input);
+    public void countAndLottos(int amount) throws IllegalArgumentException {
         this.count = calculatorCount(amount);
 
         Lottos lottos = new Lottos(this.count);
@@ -42,14 +40,6 @@ public class TotalLotto {
 
     public void winningLotto(String input) {
         this.winningLotto = new Lotto(input);
-    }
-
-    private int amountStringToInt(String input) throws IllegalArgumentException {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INPUT_ERROR);
-        }
     }
 
     private int calculatorCount(int amount) throws IllegalArgumentException {
