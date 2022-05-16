@@ -39,8 +39,6 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
 ### LottoNumbers - 로또 번호 여러개 대응
 ### Ranks - 당첨 상세정보 여러개 대응
 ### Vendor - 구매, 총 구매량에 대한 통계, 수익률 처리
-### BonusLottoNumber - 로또 번호 확장. 해당 번호 포함 여부를 2등 판별 지표로 사용
-
 
 ## 구현 요소별 TDD 로 기능을 완성해 본다. 
 
