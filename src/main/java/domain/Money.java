@@ -43,9 +43,8 @@ public final class Money {
     }
 
     public double calculateYield(Money investment) {
-        double yield = ((this.value - investment.value) / ((double) investment.value)) * 100;
-        double rounded = Math.round(yield * 100) / 100.0;
-        return rounded;
+        double yield = ((this.value - investment.value) / ((double) investment.value));
+        return Math.round(yield * 100) / 100.0;
     }
 
     @Override
