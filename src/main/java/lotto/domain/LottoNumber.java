@@ -1,20 +1,33 @@
 package lotto.domain;
 
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
-    private static final int MIN = 1;
-    private static final int MAX = 45;
+    private static final LottoNumber[] LOTTO_NUMBER;
+    private static final int BEGIN_NUMBER = 1;
+    private static final int END_NUMBER = 46;
+    private static final int ARRAY_MINUS = 1;
+
+    static {
+        LOTTO_NUMBER = IntStream.range(BEGIN_NUMBER, END_NUMBER)
+                .mapToObj(LottoNumber::new)
+                .toArray(LottoNumber[]::new);
+    }
 
     private final int lottoNumber;
 
-    public LottoNumber(final int inputNumber) {
+    public static LottoNumber of(final int inputNumber) {
         validate(inputNumber);
+        return LOTTO_NUMBER[inputNumber - ARRAY_MINUS];
+    }
+
+    private LottoNumber(final int inputNumber) {
         this.lottoNumber = inputNumber;
     }
 
-    private void validate(int inputNumber) {
-        if (inputNumber < MIN || inputNumber > MAX) {
+    private static void validate(int inputNumber) {
+        if (inputNumber < BEGIN_NUMBER || inputNumber >= END_NUMBER) {
             throw new IllegalArgumentException("범위 값오류");
         }
     }
