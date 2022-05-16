@@ -22,12 +22,12 @@ public class Lotto implements Purchasable {
         return of(Arrays.asList(numbers));
     }
 
-    public static Lotto of(List<Integer> numbers) {
+    static Lotto of(List<Integer> numbers) {
         final List<LottoNumber> lottoNumbers = toLottoNumbers(numbers);
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto of(String... maybeNumbers) {
+    static Lotto of(String... maybeNumbers) {
         final List<LottoNumber> lottoNumbers = Arrays.stream(maybeNumbers)
                                                      .map(LottoNumber::of)
                                                      .collect(Collectors.toList());

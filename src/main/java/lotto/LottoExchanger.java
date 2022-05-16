@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoGenerator;
+import lotto.lotto.ManualLottoToLottoConverter;
 import lotto.lotto.ManualLottoes;
 import lotto.money.Money;
 
@@ -29,7 +30,8 @@ public class LottoExchanger {
         }
         Money remainMoney = money;
         for (String maybeLottoNumbers : manualLottoes.lottoes()) {
-            final Lotto lotto = Lotto.of(maybeLottoNumbers);
+            LottoGenerator lottoGenerator = LottoGenerator.commaSplitting(maybeLottoNumbers);
+            final Lotto lotto = lottoGenerator.generate();
             remainMoney = money.deduct(lotto.price());
             purchasedLottoes.add(lotto);
         }
