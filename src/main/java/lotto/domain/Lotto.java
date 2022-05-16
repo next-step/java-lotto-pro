@@ -32,14 +32,6 @@ public class Lotto {
         return new Lotto(lottoNumberStrategy.create());
     }
 
-    private static List<LottoNumber> lottoParser(String winningLotto) {
-        return Arrays.stream(winningLotto.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
-
     public Rank match(Lotto winningLotto) {
         Set<LottoNumber> collect = new HashSet<>(winningLotto.numbers);
 
