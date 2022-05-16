@@ -14,25 +14,25 @@ import step1.utils.StringUtil;
 public class StringTest {
     @DisplayName("String 클래스의 split() 메서드는")
     @Nested
-    class Describe_split {
+    class Describesplit {
         @DisplayName("\"1,2\"을 값으로 가지고 있을 때")
         @Nested
-        class Context_One_And_Two {
+        class ContextOneAndTwo {
             final String input = "1,2";
             @DisplayName("1과 2를 원소로 가지는 String[]을 반환한다.")
             @Test
-            void it_Returns_String_Array() {
+            void itReturnsStringArray() {
                 final String[] result = input.split(",");
                 assertThat(result).containsExactly("1", "2");
             }
         }
         @DisplayName("\"1\"을 값으로 가지고 있을 때")
         @Nested
-        class Context_One {
+        class ContextOne {
             final String input = "1";
             @DisplayName("1을 원소로 가지는 String[]을 반환한다.")
             @Test
-            void it_Returns_String_Array() {
+            void itReturnsStringArray() {
                 final String[] result = input.split(",");
                 assertThat(result).containsExactly("1");
             }
@@ -40,14 +40,14 @@ public class StringTest {
     }
     @DisplayName("StringUtil 클래스의 substring() 메서드는")
     @Nested
-    class Describe_StringUtil_Substring {
+    class DescribeStringUtilSubstring {
         @DisplayName("\"(1,2)\"을 값을 전달받았을 때")
         @Nested
-        class Context_One_And_Two_With_Parentheses {
+        class ContextOneAndTwoWithParentheses {
             @DisplayName("\"1,2\"을 반환한다.")
             @ParameterizedTest
             @CsvSource(value = {"(1,2):1,2"}, delimiter = ':')
-            void it_Returns_String_Parentheses_Removed(final String input, final String expected) {
+            void itReturnsStringParenthesesRemoved(final String input, final String expected) {
                 final String result = StringUtil.substring(input);
                 assertThat(result).isEqualTo(expected);
             }
@@ -55,47 +55,47 @@ public class StringTest {
     }
     @DisplayName("String 클래스의 charAt() 메서드는")
     @Nested
-    class Describe_CharAt {
+    class DescribeCharAt {
         @DisplayName("\"abc\" 값을 전달받았을 때")
         @Nested
-        class Context_One_And_Two_With_Parentheses {
+        class ContextOneAndTwoWithParentheses {
             final String input = "abc";
             @DisplayName("charAt(0)을 하면")
             @Nested
-            class And_Char_At_Zero {
+            class AndCharAtZero {
                 @DisplayName("\"a\"를 반환한다.")
                 @Test
-                void it_Returns_A() {
+                void itReturnsA() {
                     final char result = input.charAt(0);
                     assertThat(result).isEqualTo('a');
                 }
             }
             @DisplayName("charAt(1)을 하면")
             @Nested
-            class And_Char_At_One {
+            class AndCharAtOne {
                 @DisplayName("\"b\"를 반환한다.")
                 @Test
-                void it_Returns_B() {
+                void itReturnsB() {
                     final char result = input.charAt(1);
                     assertThat(result).isEqualTo('b');
                 }
             }
             @DisplayName("charAt(2)을 하면")
             @Nested
-            class And_Char_At_Two {
+            class AndCharAtTwo {
                 @DisplayName("\"c\"를 반환한다.")
                 @Test
-                void it_Returns_C() {
+                void itReturnsC() {
                     final char result = input.charAt(2);
                     assertThat(result).isEqualTo('c');
                 }
             }
             @DisplayName("charAt(3)을 하면 (위치값을 벗어나면)")
             @Nested
-            class And_Char_At_Three {
+            class AndCharAtThree {
                 @DisplayName("StringIndexOutOfBoundsException이 발생한다.")
                 @Test
-                void it_Returns_StringIndexOutOfBoundsException() {
+                void itReturnsStringIndexOutOfBoundsException() {
                     assertThatThrownBy(() -> {
                         final char result = input.charAt(3);
                     }).isInstanceOf(StringIndexOutOfBoundsException.class)
