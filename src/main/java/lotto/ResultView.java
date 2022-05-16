@@ -20,6 +20,7 @@ public class ResultView {
     }
 
     public void drawingOfLots(final Round round) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
         WIN_RESULTS.forEach(
