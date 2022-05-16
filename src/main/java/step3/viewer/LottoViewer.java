@@ -1,6 +1,10 @@
 package step3.viewer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import step3.constants.Matched;
+import step3.domain.Lotto;
 import step3.domain.Lottos;
 import step3.domain.LottosWinningStatistics;
 import step3.domain.Price;
@@ -35,10 +39,23 @@ public class LottoViewer {
 
     public static void printLottos(final Lottos lottos) {
         printFormatMessage(PURCHASE_NOTICE_MESSAGE, lottos.getLottosCount());
-        final String[] lottosString = lottos.toStringArray();
+        final String[] lottosString = lottos.getLottos()
+                .stream()
+                .map(lotto -> makeLottoString(lotto.getNumbers()))
+                .toArray(String[]::new);
         for (final String lottoString : lottosString) {
             printMessage(lottoString);
         }
+    }
+
+    private static String makeLottoString(final List<Integer> numbers) {
+        final StringBuilder builder = new StringBuilder();
+        for (Integer number : numbers) {
+            builder.append(" ")
+                    .append(number)
+                    .append(",");
+        }
+        return "[" + builder.substring(1, builder.length() - 1) + "]";
     }
 
     public static void printMessage(final String message) {
@@ -53,7 +70,23 @@ public class LottoViewer {
     public static void printStatistics(final LottosWinningStatistics lottosWinningStatistics) {
         printMessage(WINNING_STATISTICS_TITLE_MESSAGE);
         printMessage(BOUNDARY_MESSAGE);
-        final String[] statisticsString = lottosWinningStatistics.toStringArray();
+
+        final List<String> stringList = new ArrayList<>();
+        final int threeMatchedCount = lottosWinningStatistics.getMatchedCount(Matched.THREE_MATCHED.getCount());
+        final int fourMatchedCount = lottosWinningStatistics.getMatchedCount(Matched.FOUR_MATCHED.getCount());
+        final int fiveMatchedCount = lottosWinningStatistics.getMatchedCount(Matched.FIVE_MATCHED.getCount());
+        final int sixMatchedCount = lottosWinningStatistics.getMatchedCount(Matched.SIX_MATCHED.getCount());
+        final int totalReward = lottosWinningStatistics.calculateTotalReward(lottosWinningStatistics.getMatches());
+        final Price price = lottosWinningStatistics.getPrice();
+
+        stringList.add("3개 일치 (5000원)- " + threeMatchedCount + "개");
+        stringList.add("4개 일치 (50000원)- " + fourMatchedCount + "개");
+        stringList.add("5개 일치 (1500000원)- " + fiveMatchedCount + "개");
+        stringList.add("6개 일치 (2000000000원)- " + sixMatchedCount + "개");
+        stringList.add("총 수익률은 " + String.format("%.2f", price.calculateYield(totalReward)) + "입니다.");
+
+        final String[] statisticsString =  stringList.toArray(new String[0]);
+
         for (final String statisticString : statisticsString) {
             printMessage(statisticString);
         }

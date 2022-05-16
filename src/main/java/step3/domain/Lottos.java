@@ -24,14 +24,12 @@ public class Lottos {
         return lottos;
     }
 
-    public int getLottosCount() {
-        return lottos.size();
+    public List<Lotto> getLottos() {
+        return this.lottos;
     }
 
-    public String[] toStringArray() {
-        return lottos.stream()
-                .map(Lotto::toString)
-                .toArray(String[]::new);
+    public int getLottosCount() {
+        return lottos.size();
     }
 
     public List<Integer> match(final LottoWinningNumbers winningNumbers) {

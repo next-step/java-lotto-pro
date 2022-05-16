@@ -35,6 +35,10 @@ public class Lotto {
         return candidates;
     }
 
+    public List<Integer> getNumbers() {
+        return this.numbers;
+    }
+
     public int getNumbersCount() {
         return numbers.size();
     }
@@ -56,16 +60,5 @@ public class Lotto {
             return IS_MATCHES;
         }
         return IS_NOT_MATCHES;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        for (Integer number : numbers) {
-            builder.append(" ")
-                    .append(number)
-                    .append(",");
-        }
-        return "[" + builder.substring(1, builder.length() - 1) + "]";
     }
 }
