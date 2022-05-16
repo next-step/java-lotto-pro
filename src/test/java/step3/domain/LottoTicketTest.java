@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -64,5 +65,19 @@ public class LottoTicketTest {
             new LottoElement(5),
             new LottoElement(6)
         );
+    }
+
+    @Test
+    @DisplayName("getLottoNumbers로 가져오는 객체에 대해 deep copy여부를 확인")
+    public void deepCopyTest (){
+        //given
+        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
+        List<LottoElement> lottoNumbers = lottoTicket.getLottoNumbers();
+        List<LottoElement> lottoNumbers_copy = new ArrayList<>();
+        for (LottoElement lottoNumber : lottoNumbers) {
+            lottoNumbers_copy.add(lottoNumber.clone());
+        }
+
+        assertThat(System.identityHashCode(lottoNumbers.get(0))).isNotEqualTo(System.identityHashCode(lottoNumbers_copy.get(0)));
     }
 }
