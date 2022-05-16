@@ -34,4 +34,14 @@ class PurchasedLottoTicketsTest {
         LottoWinningResults results = tickets.checkWinningLotto(winningLotto);
         assertThat(results.prizedMoney()).isEqualTo(30_000_000);
     }
+
+    @Test
+    void 두_로또티켓_리스트를_합칠_수_있다() {
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(LottoNumbers.from(Arrays.asList(7,8,9,10,11,12)));
+        lottoNumbersList.add(LottoNumbers.from(Arrays.asList(13,14,15,16,17,18)));
+        PurchasedLottoTickets allLottoTickets = tickets.merge(lottoNumbersList);
+
+        assertThat(allLottoTickets.purchasedTicketsCount()).isEqualTo(4);
+    }
 }
