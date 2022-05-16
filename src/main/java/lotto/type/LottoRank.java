@@ -3,7 +3,7 @@ package lotto.type;
 import java.util.Arrays;
 import java.util.Optional;
 
-public enum LottoWinningPriceType {
+public enum LottoRank {
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
@@ -12,14 +12,14 @@ public enum LottoWinningPriceType {
     private final int correctCount;
     private final int winningPrice;
 
-    LottoWinningPriceType(int correctCount, int winningPrice) {
+    LottoRank(int correctCount, int winningPrice) {
         this.correctCount = correctCount;
         this.winningPrice = winningPrice;
     }
 
-    public static Optional<LottoWinningPriceType> getByCorrectCount(int correctCount) {
-        return Arrays.stream(LottoWinningPriceType.values())
-            .filter(lottoWinningPriceType -> lottoWinningPriceType.correctCount == correctCount)
+    public static Optional<LottoRank> rankMatch(int matchCount) {
+        return Arrays.stream(LottoRank.values())
+            .filter(lottoRank -> lottoRank.correctCount == matchCount)
             .findFirst();
     }
 

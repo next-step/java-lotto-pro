@@ -1,4 +1,4 @@
-package lotto.model.number;
+package lotto.model.lotto;
 
 import java.util.Objects;
 import lotto.constant.LottoSetting;
@@ -10,7 +10,9 @@ public class LottoNumber {
     public LottoNumber(int number) {
         if (number < LottoSetting.LOTTO_NUMBER_RANGE_MIN || number > LottoSetting.LOTTO_NUMBER_RANGE_MAX) {
             throw new IllegalArgumentException(
-                String.format("로또 숫자는 %d ~ %d 사이값만 가능합니다.", LottoSetting.LOTTO_NUMBER_RANGE_MIN, LottoSetting.LOTTO_NUMBER_RANGE_MAX));
+                String.format("로또 숫자는 %d ~ %d 사이값만 가능합니다.",
+                    LottoSetting.LOTTO_NUMBER_RANGE_MIN,
+                    LottoSetting.LOTTO_NUMBER_RANGE_MAX));
         }
 
         this.lottoNumber = number;

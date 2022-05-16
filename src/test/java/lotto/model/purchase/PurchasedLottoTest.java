@@ -1,25 +1,24 @@
-package lotto.model.result;
+package lotto.model.purchase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import lotto.model.factory.LottoTestFactory;
 import lotto.model.lotto.Lotto;
-import lotto.model.money.Money;
-import lotto.model.purchase.PurchaseLotto;
+import lotto.model.result.LottoResult;
 import lotto.model.winning.WinningLotto;
+import lotto.type.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoResultTest {
+class PurchasedLottoTest {
 
     @Test
-    @DisplayName("구입한 로또의 수익률을 계산")
-    void 구입한_로또의_수익률을_계산한다() {
+    @DisplayName("구입한 로또가 몇등인지 확인한다.")
+    void 구입한_로또가_당첨인지_확인() {
         LottoResult lottoResult = generateLottoResult();
-        Money purchaseMoney = new Money(20_000);
 
-        assertEquals(lottoResult.winningRate(purchaseMoney), 0.5);
+        assertEquals(lottoResult.getLottoResultMap().get(LottoRank.THREE), 2);
     }
 
     private LottoResult generateLottoResult() {

@@ -1,5 +1,7 @@
 package lotto.model.money;
 
+import static lotto.constant.LottoSetting.LOTTO_UNIT_PRICE;
+
 import java.util.Objects;
 
 public class Money {
@@ -15,6 +17,10 @@ public class Money {
 
     public Money(String money) {
         this(Integer.parseInt(money));
+    }
+
+    public int possiblePurchaseLotto() {
+        return money / LOTTO_UNIT_PRICE;
     }
 
     public int getMoney() {
