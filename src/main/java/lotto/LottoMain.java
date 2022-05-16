@@ -5,19 +5,19 @@ public class LottoMain {
     public static void main(String[] args) {
         final InputView inputView = new InputView();
         final ResultView resultView = new ResultView();
-        final LottoMachine lottoMachine = purchase(inputView, resultView);
-        drawingOfLots(lottoMachine, inputView, resultView);
+        final Lottos lottos = purchase(inputView, resultView);
+        drawingOfLots(lottos, inputView, resultView);
     }
 
-    private static LottoMachine purchase(final InputView inputView, final ResultView resultView) {
-        final LottoMachine lottoMachine = new LottoMachine(inputView.inputPurchase());
-        resultView.purchase(lottoMachine.round());
-        return lottoMachine;
+    private static Lottos purchase(final InputView inputView, final ResultView resultView) {
+        final Lottos lottos = LottoMachine.purchase(inputView.inputPurchase());
+        resultView.purchase(lottos);
+        return lottos;
     }
 
-    private static void drawingOfLots(final LottoMachine lottoMachine, final InputView inputView,
+    private static void drawingOfLots(final Lottos lottos, final InputView inputView,
                                       final ResultView resultView) {
         resultView.drawingOfLots(
-                new LottoWinStatistics(lottoMachine.round().lottos(), lottoMachine.winningLottoNumbers(inputView.inputDrawingOfLots())));
+                new LottoWinStatistics(lottos, LottoMachine.winningLottoNumbers(inputView.inputDrawingOfLots())));
     }
 }

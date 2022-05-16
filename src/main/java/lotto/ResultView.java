@@ -4,14 +4,13 @@ import static lotto.LottoWinResult.WIN_RESULTS;
 
 public class ResultView {
 
-    public void purchase(final Round round) {
-        System.out.println(round.purchaseSize() + "개를 구매했습니다.");
-        printLottos(round);
-
+    public void purchase(final Lottos lottos) {
+        System.out.println(lottos.size() + "개를 구매했습니다.");
+        printLottos(lottos);
     }
 
-    private void printLottos(final Round round) {
-        round.lottos().each(this::printLotto);
+    private void printLottos(final Lottos lottos) {
+        lottos.each(this::printLotto);
         System.out.println();
     }
 
