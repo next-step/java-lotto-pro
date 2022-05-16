@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private final static String PURCHASE_LOTTOS_COUNT_MESSAGE = "%d개를 구매했습니다.";
+    private final static String PURCHASE_LOTTOS_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
     private final static String WINNING_STATISTICS_TITLE_MESSAGE = "당첨 통계";
     private final static String WINNING_STATISTICS_LINE_MESSAGE = "---------";
     private final static String WINNING_STATISTICS_MESSAGE = "%d개 일치 ";
@@ -27,8 +27,9 @@ public class ResultView {
         message = new MessageUtil();
     }
 
-    public void printPurchaseLottos(Lottos lottos) {
-        message.printlnMessage(String.format(PURCHASE_LOTTOS_COUNT_MESSAGE, lottos.lottosCount()));
+    public void printPurchaseLottos(int nonAutoPurchaseCount, Lottos lottos) {
+        message.printlnMessage();
+        message.printlnMessage(String.format(PURCHASE_LOTTOS_COUNT_MESSAGE, nonAutoPurchaseCount, lottos.lottosCount() - nonAutoPurchaseCount));
         message.printlnMessage(lottos.numbersToString());
     }
 

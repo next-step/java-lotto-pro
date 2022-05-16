@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.model.Lottos;
-import lotto.model.PurchasePrice;
-import lotto.model.WinningLotto;
-import lotto.model.WinningStatus;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -22,26 +19,31 @@ public class LottoController {
 
     public void playing() throws IOException {
         PurchasePrice purchasePrice = new PurchasePrice(purchaseLottos());
-        Lottos lottos = createPurchaseLottos(purchasePrice);
+        int nonAutoPurchaseCount = nonAutoPurchaseCount();
+
+        Lottos lottos = createPurchaseLottos(purchasePrice, nonAutoPurchaseCount);
         WinningLotto winningLotto = createWinningLotto();
 
         WinningStatus winningStatus = lottos.compareLottos(winningLotto);
         winningStatistics(purchasePrice, winningStatus);
     }
 
-    private void winningStatistics(PurchasePrice purchasePrice, WinningStatus winningStatus) {
-        resultView.printWinningStatisticsTitle();
-        resultView.printWinningStatistics(winningStatus);
-        resultView.printTotalEarningsRate(winningStatus, purchasePrice);
-    }
-
     private long purchaseLottos() throws IOException {
         return inputView.inputPurchasePrice();
     }
 
-    private Lottos createPurchaseLottos(PurchasePrice purchasePrice) {
-        Lottos lottos = new Lottos(purchasePrice);
-        resultView.printPurchaseLottos(lottos);
+    private int nonAutoPurchaseCount() throws IOException {
+        return inputView.inputNonAutoPurchaseCount();
+    }
+
+    private Lottos createPurchaseLottos(PurchasePrice purchasePrice, int nonAutoPurchaseCount) throws IOException {
+        Lottos lottos = new Lottos();
+        inputView.inputNonAutoLottosTitle();
+        for (int i = 0; i < nonAutoPurchaseCount; i++) {
+            lottos.addLotto(new Lotto(inputView.inputNonAutoLottoNumbers()));
+        }
+        lottos.addLottos(new Lottos(purchasePrice, nonAutoPurchaseCount));
+        resultView.printPurchaseLottos(nonAutoPurchaseCount, lottos);
 
         return lottos;
     }
@@ -51,5 +53,11 @@ public class LottoController {
         int bonusBall = inputView.inputBonusBall();
 
         return new WinningLotto(winningLottoNumbers, bonusBall);
+    }
+
+    private void winningStatistics(PurchasePrice purchasePrice, WinningStatus winningStatus) {
+        resultView.printWinningStatisticsTitle();
+        resultView.printWinningStatistics(winningStatus);
+        resultView.printTotalEarningsRate(winningStatus, purchasePrice);
     }
 }

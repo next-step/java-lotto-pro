@@ -7,6 +7,10 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
+    public Lottos() {
+        this.lottos = new ArrayList<>();
+    }
+
     public Lottos(PurchasePrice purchasePrice) {
         this.lottos = new ArrayList<>();
 
@@ -64,5 +68,9 @@ public class Lottos {
 
     public void addLotto(Lotto lotto) {
         this.lottos.add(lotto);
+    }
+
+    public void addLottos(Lottos lottos) {
+        this.lottos.addAll(lottos.lottos);
     }
 }

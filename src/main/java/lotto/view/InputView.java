@@ -40,11 +40,13 @@ public class InputView {
     }
 
     public int inputNonAutoPurchaseCount() throws IOException {
+        message.printlnMessage();
         message.printlnMessage(INPUT_NON_AUTO_PURCHASE_COUNT_MESSAGE);
         return Integer.parseInt(br.readLine());
     }
 
     public void inputNonAutoLottosTitle() {
+        message.printlnMessage();
         message.printlnMessage(INPUT_NON_AUTO_LOTTOS_MESSAGE);
     }
 
