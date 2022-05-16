@@ -48,8 +48,8 @@ public class OutputView {
 
     public void printLottoInfo(List<List<LottoElement>> lottoNumbers) {
         System.out.println(String.format(LOTTOS_INFO_FORMAT, lottoNumbers.size()));
-        for (int i = 0; i < lottoNumbers.size(); i++) {
-            System.out.println(lottoNumbers.get(i).toString());
+        for (List<LottoElement> lottoNumber : lottoNumbers) {
+            System.out.println(lottoNumber.toString());
         }
     }
 }
