@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class LottoStatistic {
     private Lottos lottos;
@@ -45,12 +46,19 @@ public class LottoStatistic {
     private Money totalPrize() {
         Money result = Money.from(0);
         for (Map.Entry<MatchResult, Integer> entry : matchedCountMap.entrySet()) {
-            for (int index = entry.getValue(); index > 0; index--) {
-                result = result.add(entry.getKey().getCashPrize());
-            }
+            result = result.add(calculatePrize(entry));
         }
         return result;
     }
+
+    private Money calculatePrize(Entry<MatchResult, Integer> entry) {
+        Money result = Money.from(0);
+        for (int index = entry.getValue(); index > 0; index--) {
+            result = result.add(entry.getKey().getCashPrize());
+        }
+        return result;
+    }
+
 
     @Override
     public String toString() {
