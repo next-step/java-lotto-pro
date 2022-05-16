@@ -32,10 +32,10 @@ public final class ConsoleView {
 
     public static void printRewards(Rewards rewards) {
         System.out.println("당첨 통계\n---------");
-        System.out.println("3개 일치(5000원)-" + rewards.count(Reward.FOURTH) + "개");
-        System.out.println("4개 일치(5000원)-" + rewards.count(Reward.THIRD) + "개");
-        System.out.println("5개 일치(5000원)-" + rewards.count(Reward.SECOND) + "개");
-        System.out.println("6개 일치(5000원)-" + rewards.count(Reward.FIRST) + "개");
+        System.out.println("3개 일치(5,000원)-" + rewards.count(Reward.FOURTH) + "개");
+        System.out.println("4개 일치(50,000원)-" + rewards.count(Reward.THIRD) + "개");
+        System.out.println("5개 일치(1,500,000원)-" + rewards.count(Reward.SECOND) + "개");
+        System.out.println("6개 일치(2,000,000,000원)-" + rewards.count(Reward.FIRST) + "개");
         System.out.println("총 수익률은 " + rewards.calculateRateOfReturn() + "입니다.");
     }
 
