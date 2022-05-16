@@ -2,10 +2,10 @@ package lotto;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+public class LottoNumber {
 
-    public static final int LOWER_BOUND = 0;
-    public static final int UPPER_BOUND = 45;
+    private static final int LOWER_BOUND = 0;
+    private static final int UPPER_BOUND = 45;
     private int number;
 
     public LottoNumber(int number) {
@@ -34,16 +34,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    @Override
-    public int compareTo(LottoNumber o) {
-        if (this.number > o.number) {
-            return 1;
-        }
-        if (this.number < o.number) {
-            return -1;
-        }
-        return 0;
     }
 }

@@ -3,7 +3,6 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,12 +11,8 @@ public class LottoNumberTest {
 
     @Test
     public void make_lottoNumber() {
-        //given
-        LottoNumber expectedLottoNumber = new LottoNumber(1);
-        //when
-        LottoNumber actualLottoNumber = new LottoNumber(1);
-        //then
-        assertThat(actualLottoNumber).isEqualTo(expectedLottoNumber);
+        LottoNumber lottoNumber = new LottoNumber(1);
+        assertThat(lottoNumber).isEqualTo(new LottoNumber(1));
     }
 
     @ParameterizedTest
