@@ -12,12 +12,12 @@ import java.util.Map;
 public class ResultView {
 
     public void printLottoCount(LottoPrice lottoPrice) {
-        System.out.println("수동으로 " + lottoPrice.getManualCount() + "장, 자동으로 " + lottoPrice.getAutoCount() + "개를 구매했습니다.");
+        System.out.println("\n수동으로 " + lottoPrice.getManualCount() + "장, 자동으로 " + lottoPrice.getAutoCount() + "개를 구매했습니다.");
     }
 
     public void printLottoNumbers(List<LottoNumbers> lottoNumbers) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            System.out.print(convertToSortedList(lottoNumber));
+            System.out.println(convertToSortedList(lottoNumber));
         }
     }
 
@@ -35,7 +35,7 @@ public class ResultView {
 
     private void printStatisticsInit() {
         System.out.println();
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
     }
 
