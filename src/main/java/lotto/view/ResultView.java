@@ -22,7 +22,7 @@ public class ResultView {
         });
     }
 
-    public static void printRateOfReturn() {
-
+    public static void printRateOfReturn(String rate) {
+        System.out.printf("총 수익률은 %s입니다.", rate);
     }
 }

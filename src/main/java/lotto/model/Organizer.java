@@ -17,6 +17,7 @@ public class Organizer {
 
     private final List<Integer> winnerNumbers;
     private Map<Integer, Integer> winningResults;
+    private long totalWinningMoney;
 
     public Organizer(String number) {
         winnerNumbers = Arrays.stream(number.split(","))
@@ -39,6 +40,10 @@ public class Organizer {
         return winningResults;
     }
 
+    public String winningRate(int buyAmount) {
+        return String.format("%.2f", this.totalWinningMoney / (double) buyAmount);
+    }
+
     private void initWinningResult() {
         this.winningResults = new HashMap<>();
         winningResults.put(SAME_COUNT_3, INIT_RESULT_COUNT);
@@ -51,6 +56,7 @@ public class Organizer {
         if (sameCount < SAME_COUNT_3) {
             return;
         }
+        this.totalWinningMoney += winningMoney(sameCount);
         this.winningResults.put(sameCount, this.winningResults.get(sameCount) + 1);
     }
 
