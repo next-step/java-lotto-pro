@@ -71,6 +71,6 @@ class MoneyTest {
     void calculateYield() {
         Money reward = new Money(10_000);
         Money investment = new Money(1_000);
-        assertThat(reward.calculateYield(investment)).isEqualTo(900.0);
+        assertThat(reward.calculateRateOfReturn(investment)).isEqualTo(900.0);
     }
 }

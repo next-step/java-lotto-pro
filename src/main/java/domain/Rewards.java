@@ -16,10 +16,10 @@ public final class Rewards {
                 .count();
     }
 
-    public double calculateYield() {
+    public double calculateRateOfReturn() {
         Money total = elements.stream()
                 .map(Reward::getPrize)
                 .reduce(new Money(0), Money::add);
-        return total.calculateYield(Lotto.PRICE.multiply(elements.size()));
+        return total.calculateRateOfReturn(Lotto.PRICE.multiply(elements.size()));
     }
 }

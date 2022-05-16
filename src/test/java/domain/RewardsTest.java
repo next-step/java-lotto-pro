@@ -25,7 +25,7 @@ class RewardsTest {
                 Reward.FOURTH,
                 Reward.MISS
         ));
-        assertThat(rewards.calculateYield()).isEqualTo(1.5);
+        assertThat(rewards.calculateRateOfReturn()).isEqualTo(1.5);
     }
 
 }

@@ -42,9 +42,9 @@ public final class Money {
         return new Money(this.value - other.value);
     }
 
-    public double calculateYield(Money investment) {
-        double yield = ((this.value - investment.value) / ((double) investment.value));
-        return Math.round(yield * 100) / 100.0;
+    public double calculateRateOfReturn(Money investment) {
+        double rateOfReturn = ((this.value - investment.value) / ((double) investment.value));
+        return Math.round(rateOfReturn * 100) / 100.0;
     }
 
     @Override
