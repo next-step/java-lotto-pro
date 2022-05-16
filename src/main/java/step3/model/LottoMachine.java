@@ -44,7 +44,7 @@ public class LottoMachine {
         }
     }
 
-    public List<List<String>> getLottoNumbers() {
+    public List<List<Integer>> getLottoNumbers() {
         return lottoManager.getLottoNumbers();
     }
 

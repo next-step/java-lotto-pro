@@ -56,6 +56,6 @@ public class LottoTicketTest {
     public void getLottoNumbersTest() {
         List<String> lottoSource = Arrays.asList("1", "2", "3", "4", "5", "6");
         LottoTicket lotto = new LottoTicket(lottoSource);
-        assertThat(lotto.getLottoNumbers()).containsExactly("1", "2", "3", "4", "5", "6");
+        assertThat(lotto.getLottoNumbers()).containsExactly(1,2,3,4,5,6);
     }
 }

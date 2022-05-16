@@ -52,7 +52,7 @@ public class LottoTicket {
         return 0;
     }
 
-    public List<String> getLottoNumbers() {
+    public List<Integer> getLottoNumbers() {
         return lottoElements.stream().map(LottoElement::getElement)
             .collect(Collectors.toList());
     }

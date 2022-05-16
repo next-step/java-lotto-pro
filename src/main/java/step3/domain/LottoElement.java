@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LottoElement implements Comparable<LottoElement> {
 
-    private final String element;
+    private final int element;
     private int LOTTO_MIN = 1;
     private int LOTTO_MAX = 46;
 
@@ -12,10 +12,10 @@ public class LottoElement implements Comparable<LottoElement> {
         this.element = validElement(element);
     }
 
-    private String validElement(String element) throws IllegalArgumentException {
+    private int validElement(String element) throws IllegalArgumentException {
         int parseElement = parseNumber(element);
         validNumberRange(parseElement);
-        return element;
+        return parseElement;
     }
 
     private void validNumberRange(int parseElement) {
@@ -32,7 +32,7 @@ public class LottoElement implements Comparable<LottoElement> {
         }
     }
 
-    public String getElement() {
+    public int getElement() {
         return element;
     }
 
@@ -55,8 +55,8 @@ public class LottoElement implements Comparable<LottoElement> {
 
     @Override
     public int compareTo(LottoElement o) {
-        int source = Integer.parseInt(element);
-        int target = Integer.parseInt(o.getElement());
+        int source = element;
+        int target = o.getElement();
         if (target < source) {
             return 1;
         } else if (target > source) {

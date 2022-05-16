@@ -46,7 +46,7 @@ public class OutputView {
         return lottoReward.getReward() * matchCount;
     }
 
-    public void printLottoInfo(List<List<String>> lottoNumbers) {
+    public void printLottoInfo(List<List<Integer>> lottoNumbers) {
         System.out.println(String.format(LOTTOS_INFO_FORMAT, lottoNumbers.size()));
         for (int i = 0; i < lottoNumbers.size(); i++) {
             System.out.println(lottoNumbers.get(i).toString());
