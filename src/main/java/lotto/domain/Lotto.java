@@ -42,6 +42,23 @@ public class Lotto {
         return Ranking.findRank(matchingCount, false);
     }
 
+    public Ranking compareLottoWithBonus(Lotto target, LottoNo bonusNumber) {
+        int matchingCount = getMatchingCount(target);
+        boolean matchBonus = isContainBonusNumber(target, bonusNumber);
+        return Ranking.findRank(matchingCount, matchBonus);
+    }
+
+    private int getMatchingCount(Lotto target) {
+        List<LottoNo> intersection = new ArrayList<>(lottoNoList);
+        intersection.retainAll(target.getLottoNoList());
+        return intersection.size();
+    }
+
+    private boolean isContainBonusNumber(Lotto target, LottoNo bonusLotto) {
+        List<LottoNo> lottoNoList = target.getLottoNoList();
+        return lottoNoList.contains(bonusLotto);
+    }
+
     public List<LottoNo> getLottoNoList() {
         return Collections.unmodifiableList(lottoNoList);
     }

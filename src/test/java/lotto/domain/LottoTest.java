@@ -73,9 +73,17 @@ class LottoTest {
 
     @ParameterizedTest
     @CsvSource(value = {"7, 8, 9, 10, 11, 12:NONE", "4, 5, 6, 7, 8, 9:FIFTH", "3, 4, 5, 6, 7, 8:FOURTH", "2, 3, 4, 5, 6, 7:THIRD", "1, 2, 3, 4, 5, 6:FIRST"}, delimiter = ':')
-    public void 로또_번호_비교_테스트(String lottoNumbers, Ranking expected) {
+    public void 로또_번호_비교_테스트_보너스_없음(String lottoNumbers, Ranking expected) {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         Ranking ranking = lotto.compareLotto(new Lotto(lottoNumbers));
+        assertThat(ranking).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2, 3, 4, 5, 40:THIRD", "1, 2, 3, 4, 5, 45:SECOND", "1, 2, 3, 4, 5, 6:FIRST"}, delimiter = ':')
+    public void 로또_번호_비교_테스트_보너스_유무(String lottoNumbers, Ranking expected) {
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+        Ranking ranking = lotto.compareLottoWithBonus(new Lotto(lottoNumbers), new LottoNo(45));
         assertThat(ranking).isEqualTo(expected);
     }
 }
