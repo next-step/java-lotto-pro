@@ -16,6 +16,15 @@ public class LottoStatistic {
         initializePrizeLottoList();
     }
 
+    public LottoStatistic(Lottos lottos, String[] prizeNumbers) {
+        this.lottos = lottos;
+        this.prizeNumbers = new ArrayList<>();
+        for (String prizeNumber : prizeNumbers) {
+            this.prizeNumbers.add(LottoNumber.from(prizeNumber));
+        }
+        initializePrizeLottoList();
+    }
+
     private void initializePrizeLottoList() {
         matchedCountMap = new HashMap<>();
         matchedCountMap.put(MatchResult.THREE, lottos.matchedLottoList(prizeNumbers, MatchResult.THREE).size());
