@@ -26,7 +26,7 @@ public class LottoGameTest {
     @Test
     void 지난주_당첨_번호_5개만_입력() {
         LottoGame game = new LottoGame(14000);
-        assertThatThrownBy(() -> game.setWinnerNumbers("1,2,3,4,5"))
+        assertThatThrownBy(() -> game.setWinnerTicket("1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -41,21 +41,21 @@ public class LottoGameTest {
     @Test
     void 지난주_당첨_번호_콤마_뒤_공백() {
         LottoGame game = new LottoGame(14000);
-        game.setWinnerNumbers("1, 2, 3, 4, 5, 6");
+        game.setWinnerTicket("1, 2, 3, 4, 5, 6");
 
     }
 
     @Test
     void 지난주_당첨_번호_중복_입력() {
         LottoGame game = new LottoGame(14000);
-        assertThatThrownBy(() -> game.setWinnerNumbers("1,2,3,4,6,6"))
+        assertThatThrownBy(() -> game.setWinnerTicket("1,2,3,4,6,6"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 지난주_당첨_번호_숫자_범위_초과() {
         LottoGame game = new LottoGame(14000);
-        assertThatThrownBy(() -> game.setWinnerNumbers("-1,2,3,4,5,6"))
+        assertThatThrownBy(() -> game.setWinnerTicket("-1,2,3,4,5,6"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

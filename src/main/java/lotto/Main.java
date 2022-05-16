@@ -9,11 +9,11 @@ public class Main {
         int purchasePrice = InputView.getPurchasePrice();
         LottoGame game = new LottoGame(purchasePrice);
         ResultView.printTicketCount(game.getTicketCount());
-        game.printTicketNumbers();
+        game.printTickets();
 
         System.out.println();
         String winnerNumbers = InputView.getWinnerNumbers();
-        game.setWinnerNumbers(winnerNumbers);
+        game.setWinnerTicket(winnerNumbers);
         game.generateGameResult();
 
         System.out.println();

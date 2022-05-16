@@ -7,7 +7,7 @@ public class ResultView {
         System.out.println(String.format("%d개를 구매했습니다.", purchasePrice));
     }
 
-    public static void printTicketLottoNumbers(String ticketLottoNumbers) {
+    public static void printTicket(String ticketLottoNumbers) {
         System.out.println(ticketLottoNumbers);
     }
 
