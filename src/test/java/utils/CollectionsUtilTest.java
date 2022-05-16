@@ -2,11 +2,13 @@ package utils;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,6 +24,14 @@ class CollectionsUtilTest {
 
     }
 
+    @Test
+    @DisplayName("start 값이 end 값 보다 작을 경우 에러를 발생한다")
+    void sequentialNumbers() {
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                CollectionsUtil.shuffleSequentialNumbers(1, -1));
+
+    }
+
     @ParameterizedTest
     @MethodSource("provideSequentialNumbers")
     @DisplayName("섞인 숫자로 채워진 리스트를 반환한다.")
@@ -31,8 +41,6 @@ class CollectionsUtilTest {
         assertThat(shuffleSequentialNumbers.containsAll(compare)).isTrue();
         assertThat(shuffleSequentialNumbers).isNotEqualTo(compare);
     }
-
-
 
     private static Stream<Arguments> provideSequentialNumbers() {
         return Stream.of(
