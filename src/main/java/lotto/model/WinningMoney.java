@@ -8,11 +8,11 @@ import java.util.stream.Stream;
 
 public enum WinningMoney {
 	OTHER(0, 0), 
-	THREE(3, 5_000), 
-	FOUR(4, 50_000), 
-	FIVE(5, 1_500_000), 
-	FIVE_BOUNS(5, 30_000_000), 
-	SIX(6, 2_000_000_000);
+	FIFTH(3, 5_000), 
+	FOURTH(4, 50_000), 
+	THIRD(5, 1_500_000), 
+	SECOND(5, 30_000_000), 
+	FIRST(6, 2_000_000_000);
 
 	private static final Map<Integer, WinningMoney> WINNING_MONEY_MAP = Collections
 			.unmodifiableMap(Stream.of(values()).filter(WinningMoney::isNotSecondPlace)
@@ -47,10 +47,10 @@ public enum WinningMoney {
 	}
 	
 	public boolean isSecondPlace() {
-		return this == FIVE_BOUNS;
+		return this == SECOND;
 	}
 
 	private boolean isNotSecondPlace() {
-		return this != FIVE_BOUNS;
+		return this != SECOND;
 	}
 }

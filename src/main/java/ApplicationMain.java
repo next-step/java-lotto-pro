@@ -17,8 +17,8 @@ public class ApplicationMain {
 		ResultView.printLottos(lottos);
 
 		LottoNumbers lastWinningLotto = InputView.inputLastWinLotto();
-		String bounsLottoNumber = InputView.inputBounsLottoNumber();
-		LottoResult lottoResult = new LottoResult(lottos, lastWinningLotto, bounsLottoNumber);
+		String bonusLottoNumber = InputView.inputBonusLottoNumber();
+		LottoResult lottoResult = new LottoResult(lottos, lastWinningLotto, bonusLottoNumber);
 		WinningList winningList = lottoResult.winningList();
 		ResultView.printWinStatistics(winningList);
 		ResultView.printProfitRate(lottoResult.profitRate(lottoMachine.lottoPrice()));

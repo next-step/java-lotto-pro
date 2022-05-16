@@ -8,9 +8,9 @@ public class LottoResult {
 	private final Lottos lottos;
 	private final WinningList winningList;
 
-	public LottoResult(Lottos lottos, LottoNumbers lastWinningLotto, String bounsLottoNumber) {
+	public LottoResult(Lottos lottos, LottoNumbers lastWinningLotto, String bonusLottoNumber) {
 		this.lottos = lottos;
-		this.winningList = new WinningList(lottos, lastWinningLotto, bounsLottoNumber);
+		this.winningList = new WinningList(lottos, lastWinningLotto, bonusLottoNumber);
 	}
 
 	public WinningList winningList() {

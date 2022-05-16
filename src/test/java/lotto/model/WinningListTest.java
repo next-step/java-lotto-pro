@@ -29,7 +29,7 @@ public class WinningListTest {
 	@DisplayName("당첨내역 생성 테스트")
 	void create_winningList_data() {
 		assertEquals(
-				new WinningList(lottos, new LottoNumbers("1,2,3,4,5,6"), "8").getWinningList().get(WinningMoney.SIX),
+				new WinningList(lottos, new LottoNumbers("1,2,3,4,5,6"), "8").getWinningList().get(WinningMoney.FIRST),
 				1);
 	}
 
@@ -37,6 +37,6 @@ public class WinningListTest {
 	@DisplayName("2등 당첨내역 생성 테스트")
 	void create_winningList_second_data() {
 		assertEquals(new WinningList(lottos, 
-				new LottoNumbers("1,2,3,4,5,8"), "6").getWinningList().get(WinningMoney.FIVE_BOUNS), 1);
+				new LottoNumbers("1,2,3,4,5,8"), "6").getWinningList().get(WinningMoney.SECOND), 1);
 	}
 }

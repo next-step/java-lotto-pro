@@ -12,9 +12,9 @@ public class WinningList {
 		initWinningList();
 	}
 
-	public WinningList(Lottos lottos, LottoNumbers winningLottoNumbers, String bounsLottoNumber) {
+	public WinningList(Lottos lottos, LottoNumbers winningLottoNumbers, String bonusLottoNumber) {
 		this();
-		match(lottos, winningLottoNumbers, bounsLottoNumber);
+		match(lottos, winningLottoNumbers, bonusLottoNumber);
 	}
 
 	public Map<WinningMoney, Integer> getWinningList() {
@@ -27,25 +27,25 @@ public class WinningList {
 		}
 	}
 
-	private void match(Lottos lottos, LottoNumbers winningLottoNumbers, String bounsLottoNumber) {
+	private void match(Lottos lottos, LottoNumbers winningLottoNumbers, String bonusLottoNumber) {
 		for (LottoNumbers lottoNumbers : lottos.getLottos()) {
 			int count = winningLottoNumbers.countEqualsLottoNumber(lottoNumbers);
-			increase(find(lottoNumbers, count, bounsLottoNumber));
+			increase(find(lottoNumbers, count, bonusLottoNumber));
 		}
 	}
 
-	private WinningMoney find(LottoNumbers lottoNumbers, int count, String bounsLottoNumber) {
-		if (isSecondPlace(lottoNumbers, count, bounsLottoNumber)) {
-			return WinningMoney.FIVE_BOUNS;
+	private WinningMoney find(LottoNumbers lottoNumbers, int count, String bonusLottoNumber) {
+		if (isSecondPlace(lottoNumbers, count, bonusLottoNumber)) {
+			return WinningMoney.SECOND;
 		}
 		return WinningMoney.find(count);
 	}
 
-	private boolean isSecondPlace(LottoNumbers lottoNumbers, int count, String bounsLottoNumber) {
+	private boolean isSecondPlace(LottoNumbers lottoNumbers, int count, String bonusLottoNumber) {
 		if (count != BOUNS_CHECK_NUMBER) {
 			return false;
 		}
-		return lottoNumbers.getLottoNumbers().contains(new LottoNumber(bounsLottoNumber));
+		return lottoNumbers.getLottoNumbers().contains(new LottoNumber(bonusLottoNumber));
 	}
 
 	private void increase(WinningMoney winningMoney) {

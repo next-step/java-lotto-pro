@@ -23,7 +23,7 @@ public class LottoResultTest {
 
 		LottoResult lottoResult = new LottoResult(new Lottos(lottos), new LottoNumbers("1,2,3,4,5,6"), "8");
 		assertEquals(lottoResult.profitRate(1000),
-				(WinningMoney.SIX.getWinningMoney() + WinningMoney.FIVE.getWinningMoney()) / 2000);
+				(WinningMoney.FIRST.getWinningMoney() + WinningMoney.THIRD.getWinningMoney()) / 2000);
 	}
 
 	@Test
@@ -35,6 +35,6 @@ public class LottoResultTest {
 
 		LottoResult lottoResult = new LottoResult(new Lottos(lottos), new LottoNumbers("1,2,3,4,5,8"), "7");
 		assertEquals(lottoResult.profitRate(1000),
-				(WinningMoney.FIVE.getWinningMoney() + WinningMoney.FIVE_BOUNS.getWinningMoney()) / 2000);
+				(WinningMoney.THIRD.getWinningMoney() + WinningMoney.SECOND.getWinningMoney()) / 2000);
 	}
 }
