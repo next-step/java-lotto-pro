@@ -1,6 +1,5 @@
 package step3.domain;
 
-import static step3.constant.LottoInfoConstant.LOTTO_PRICE;
 
 import java.util.Objects;
 
@@ -9,6 +8,7 @@ public class Money {
     private int money;
     private final String isLoss = "손해";
     private final String isBenefit = "이득";
+    private final int LOTTO_PRICE = 1_000;
 
     public Money(String money) {
         if (!validateMoneyRange(money)) {

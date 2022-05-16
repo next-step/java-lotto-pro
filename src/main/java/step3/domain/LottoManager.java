@@ -1,9 +1,6 @@
 package step3.domain;
 
 import static java.util.Collections.shuffle;
-import static step3.constant.LottoInfoConstant.LOTTO_ELEMENTS_SIZE;
-import static step3.constant.LottoInfoConstant.LOTTO_PRICE;
-import static step3.constant.LottoInfoConstant.LOTTO_VALID_ELEMENTS;
 import static step3.enums.LottoReward.numberToLottoReward;
 
 import java.util.ArrayList;
@@ -11,12 +8,16 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import step3.enums.LottoReward;
 
 public class LottoManager {
 
     private List<LottoTicket> lottoTickets = new ArrayList<>();
-
+    private final int LOTTO_MIN = 1;
+    private final int LOTTO_MAX = 46;
+    private final int LOTTO_ELEMENTS_SIZE = 6;
+    private List<Integer> LOTTO_VALID_ELEMENTS = IntStream.rangeClosed(LOTTO_MIN, LOTTO_MAX).boxed().collect(Collectors.toList());
 
     public LottoManager() {
     }
@@ -62,6 +63,7 @@ public class LottoManager {
             statistics.put(lottoReward.name(), 0);
         }
     }
+
 
     public List<List<String>> getLottoNumbers() {
         return lottoTickets.stream().map(LottoTicket::getLottoNumbers)

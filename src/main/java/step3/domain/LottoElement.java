@@ -1,13 +1,12 @@
 package step3.domain;
 
-import static step3.constant.LottoInfoConstant.LOTTO_MAX;
-import static step3.constant.LottoInfoConstant.LOTTO_MIN;
-
 import java.util.Objects;
 
 public class LottoElement implements Comparable<LottoElement> {
 
     private final String element;
+    private int LOTTO_MIN = 1;
+    private int LOTTO_MAX = 46;
 
     public LottoElement(String element) {
         this.element = validElement(element);
