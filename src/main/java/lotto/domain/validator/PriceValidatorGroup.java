@@ -1,9 +1,9 @@
-package lotto.validator;
+package lotto.domain.validator;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.validator.impl.PriceLessThanValidator;
-import lotto.validator.impl.PriceUnitMatchedValidator;
+import lotto.domain.validator.impl.PriceLessThanValidator;
+import lotto.domain.validator.impl.PriceUnitMatchedValidator;
 
 public class PriceValidatorGroup {
 

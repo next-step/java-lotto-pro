@@ -1,4 +1,4 @@
-package lotto.validator;
+package lotto.domain.validator;
 
 public interface WinningNumbersValidator {
 

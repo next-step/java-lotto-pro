@@ -4,10 +4,8 @@ import java.util.Map;
 
 public class Winnings {
     private int winningsPrice;
-    private final LottoScore lottoScore;
 
     public Winnings(LottoScore lottoScore) {
-        this.lottoScore = lottoScore;
         this.winningsPrice = calculatorWinnings(lottoScore);
     }
 

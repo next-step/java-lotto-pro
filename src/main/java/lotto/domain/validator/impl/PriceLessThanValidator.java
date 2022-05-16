@@ -1,9 +1,9 @@
-package lotto.validator.impl;
+package lotto.domain.validator.impl;
 
 import static lotto.constants.LottoConstants.LOTTO_PRICE;
 
+import lotto.domain.validator.PriceValidator;
 import lotto.exception.ExceptionType;
-import lotto.validator.PriceValidator;
 
 public class PriceLessThanValidator implements PriceValidator {
 

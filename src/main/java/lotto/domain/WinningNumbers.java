@@ -5,7 +5,7 @@ import static lotto.constants.LottoConstants.SPLIT_SYMBOL;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.validator.WinningNumberValidatorGroup;
+import lotto.domain.validator.WinningNumberValidatorGroup;
 
 public class WinningNumbers {
 

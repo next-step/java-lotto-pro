@@ -1,10 +1,10 @@
-package lotto.validator;
+package lotto.domain.validator;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.validator.impl.DefaultFormatWinningNumbersValidator;
-import lotto.validator.impl.InvalidWinningNumberSizeValidator;
-import lotto.validator.impl.OverlapWinningNumbersValidator;
+import lotto.domain.validator.impl.OverlapWinningNumbersValidator;
+import lotto.domain.validator.impl.DefaultFormatWinningNumbersValidator;
+import lotto.domain.validator.impl.InvalidWinningNumberSizeValidator;
 
 public class WinningNumberValidatorGroup {
 

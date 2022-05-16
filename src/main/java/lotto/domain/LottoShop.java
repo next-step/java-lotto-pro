@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.validator.PriceValidatorGroup;
+import lotto.domain.validator.PriceValidatorGroup;
 
 public class LottoShop {
 

@@ -1,8 +1,8 @@
-package lotto.validator.impl;
+package lotto.domain.validator.impl;
 
 import java.util.regex.Pattern;
 import lotto.exception.ExceptionType;
-import lotto.validator.WinningNumbersValidator;
+import lotto.domain.validator.WinningNumbersValidator;
 
 public class DefaultFormatWinningNumbersValidator implements WinningNumbersValidator {
 

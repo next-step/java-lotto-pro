@@ -1,4 +1,4 @@
-package lotto.validator.impl;
+package lotto.domain.validator.impl;
 
 import static lotto.constants.LottoConstants.SPLIT_SYMBOL;
 
@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.exception.ExceptionType;
-import lotto.validator.WinningNumbersValidator;
+import lotto.domain.validator.WinningNumbersValidator;
 
 public class OverlapWinningNumbersValidator implements WinningNumbersValidator {
 

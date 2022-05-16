@@ -1,4 +1,4 @@
-package lotto.validator.impl;
+package lotto.domain.validator.impl;
 
 import static lotto.constants.LottoConstants.MAX;
 import static lotto.constants.LottoConstants.MIN;
@@ -6,8 +6,8 @@ import static lotto.constants.LottoConstants.SPLIT_SYMBOL;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.domain.validator.WinningNumbersValidator;
 import lotto.exception.ExceptionType;
-import lotto.validator.WinningNumbersValidator;
 
 public class InvalidWinningNumberSizeValidator implements WinningNumbersValidator {
 

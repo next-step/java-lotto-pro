@@ -2,6 +2,7 @@ package lotto.validator;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.domain.validator.PriceValidatorGroup;
 import lotto.exception.ExceptionType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
