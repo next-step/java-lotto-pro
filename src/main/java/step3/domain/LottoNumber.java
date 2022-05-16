@@ -28,14 +28,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumberCache.get(number);
     }
 
-    public static int getMaxLottoNumber() {
-        return MAX_LOTTO_NUMBER;
-    }
-
-    public static int getMinLottoNumber() {
-        return MIN_LOTTO_NUMBER;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

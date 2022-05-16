@@ -26,7 +26,7 @@ public class LottoGame {
     }
 
     private List<Lotto> buy(int buyCount) {
-        System.out.printf("%d개를 구매했습니다.%n", buyCount);
+        OutputView.printBuyCount(buyCount);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < buyCount; i++) {
             lottos.add(LottoFactory.createAutoLotto());

@@ -33,6 +33,12 @@ public class Lotto {
                 .count();
     }
 
+    public List<LottoNumber> sortedLottoList() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(lotto);
+        Collections.sort(lottoNumbers);
+        return lottoNumbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -52,8 +58,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>(lotto);
-        Collections.sort(lottoNumbers);
-        return lottoNumbers.toString();
+        return "Lotto{" +
+                "lotto=" + lotto +
+                '}';
     }
 }

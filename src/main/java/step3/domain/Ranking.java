@@ -27,6 +27,10 @@ public enum Ranking {
                 .orElse(Ranking.NONE);
     }
 
+    public int getHitCount() {
+        return hitCount;
+    }
+
     public double getWinningMoney() {
         return winningMoney;
     }
@@ -39,6 +43,9 @@ public enum Ranking {
 
     @Override
     public String toString() {
-        return String.format("%d개 일치 (%d원)", hitCount, winningMoney);
+        return "Ranking{" +
+                "hitCount=" + hitCount +
+                ", winningMoney=" + winningMoney +
+                '}';
     }
 }

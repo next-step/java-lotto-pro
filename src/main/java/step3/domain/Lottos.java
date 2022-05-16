@@ -19,10 +19,14 @@ public class Lottos {
         return lottoResult;
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     @Override
     public String toString() {
-        StringBuffer stringBuffer = new StringBuffer();
-        lottos.forEach(lotto -> stringBuffer.append(lotto.toString()).append("\n"));
-        return stringBuffer.toString();
+        return "Lottos{" +
+                "lottos=" + lottos +
+                '}';
     }
 }

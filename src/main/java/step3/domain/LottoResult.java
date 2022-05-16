@@ -2,8 +2,6 @@ package step3.domain;
 
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoResult {
     private final EnumMap<Ranking, Integer> rankingMap;
@@ -31,16 +29,15 @@ public class LottoResult {
         return rankingMap.get(ranking);
     }
 
+    public double getYield() {
+        return yield;
+    }
+
     @Override
     public String toString() {
-        StringBuilder text = new StringBuilder();
-        List<Ranking> rankings = Arrays.stream(Ranking.values())
-                .filter(ranking -> ranking != Ranking.NONE)
-                .collect(Collectors.toList());
-        for (Ranking ranking : rankings) {
-            text.append(String.format("%s- %d개\n", ranking.toString(), rankingCount(ranking)));
-        }
-        text.append(String.format("총 수익률은 %.02f입니다.", yield));
-        return text.toString();
+        return "LottoResult{" +
+                "rankingMap=" + rankingMap +
+                ", winningAmount=" + winningAmount +
+                '}';
     }
 }
