@@ -1,12 +1,12 @@
 package lotto.model;
 
-import lotto.generator.InputLottoNumberGenerator;
-import lotto.generator.RandomLottoNumberGenerator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import lotto.generator.InputLottoNumberGenerator;
+import lotto.generator.RandomLottoNumberGenerator;
 
 public class Lottos {
     private static final int EXTRA_NUM = 1;

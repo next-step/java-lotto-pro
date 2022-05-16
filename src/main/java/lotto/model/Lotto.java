@@ -1,25 +1,24 @@
 package lotto.model;
 
-import lotto.generator.LottoNumberGenerator;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import lotto.generator.LottoNumberGenerator;
 
 public class Lotto {
     public static final int LOTTO_SIZE_NUM = 6;
     private static final int COUNT_OF_MATCH_ZERO = 0;
     private static final int COUNT_OF_MATCH_ONE = 1;
-    private final List<LottoNumber> lotto;
+    private final Set<LottoNumber> lotto;
 
-    public Lotto(List<LottoNumber> lotto) {
+    public Lotto(Set<LottoNumber> lotto) {
         validLotto(lotto);
         this.lotto = lotto;
     }
 
     public static Lotto valueOf(List<Integer> lottoNumbers) {
-        List<LottoNumber> lotto = new ArrayList<>();
+        Set<LottoNumber> lotto = new HashSet<>();
         for (int lottoNumber : lottoNumbers) {
             lotto.add(LottoNumber.valueOf(lottoNumber));
         }
@@ -27,7 +26,7 @@ public class Lotto {
     }
 
     public static Lotto draw(LottoNumberGenerator lottoNumberGenerator) {
-        return new Lotto(new ArrayList<>(lottoNumberGenerator.generate()));
+        return new Lotto(new HashSet<>(lottoNumberGenerator.generate()));
     }
 
     public LottoRanking lottoRanking(Lotto winningLotto) {
@@ -49,19 +48,11 @@ public class Lotto {
         return this.lotto.contains(lottoNumber);
     }
 
-    private void validLotto(List<LottoNumber> lotto) {
+    private void validLotto(Set<LottoNumber> lotto) {
         validLottoSize(lotto);
-        validLottoUnique(lotto);
     }
 
-    private void validLottoUnique(List<LottoNumber> lotto) {
-        Set<LottoNumber> lottoNumbers = new HashSet<>(lotto);
-        if (isNotLottoSize(lottoNumbers.size())) {
-            throw new IllegalArgumentException("로또 번호가 중복되었습니다.");
-        }
-    }
-
-    private void validLottoSize(List<LottoNumber> lotto) {
+    private void validLottoSize(Set<LottoNumber> lotto) {
         if (isNotLottoSize(lotto.size())) {
             throw new IllegalArgumentException("로또 번호 갯수가 올바르지 않습니다.");
         }

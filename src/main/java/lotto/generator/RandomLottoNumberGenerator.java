@@ -2,7 +2,9 @@ package lotto.generator;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 
@@ -18,13 +20,17 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public List<LottoNumber> generate() {
+    public Set<LottoNumber> generate() {
         Collections.shuffle(lottoNumbers);
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        List<LottoNumber> shuffledLottoNumbers = new ArrayList<>();
         for (int i = 0; i < Lotto.LOTTO_SIZE_NUM; i++) {
-            lottoNumbers.add(RandomLottoNumberGenerator.lottoNumbers.get(i));
+            shuffledLottoNumbers.add(RandomLottoNumberGenerator.lottoNumbers.get(i));
         }
-        Collections.sort(lottoNumbers);
+        Collections.sort(shuffledLottoNumbers);
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        for (int i = 0; i < Lotto.LOTTO_SIZE_NUM; i++) {
+            lottoNumbers.add(shuffledLottoNumbers.get(i));
+        }
         return lottoNumbers;
     }
 }

@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import lotto.model.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,10 +13,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class InputLottoNumberGeneratorTest {
-    static final List<LottoNumber> lottoNumbers = initLottoNumbers();
+    static final Set<LottoNumber> lottoNumbers = initLottoNumbers();
 
-    static List<LottoNumber> initLottoNumbers() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+    static Set<LottoNumber> initLottoNumbers() {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         lottoNumbers.add(LottoNumber.valueOf(2));
         lottoNumbers.add(LottoNumber.valueOf(4));
         lottoNumbers.add(LottoNumber.valueOf(5));
@@ -30,7 +30,7 @@ class InputLottoNumberGeneratorTest {
     @Test
     void inputLottoNumberGenerator() {
         InputLottoNumberGenerator inputLottoNumberGenerator = new InputLottoNumberGenerator(" 2, 4 ,5 ,  7  ,9,30");
-        List<LottoNumber> lottoNumbers = inputLottoNumberGenerator.generate();
+        Set<LottoNumber> lottoNumbers = inputLottoNumberGenerator.generate();
         assertAll(
                 () -> assertThat(lottoNumbers).hasSize(6),
                 () -> assertThat(lottoNumbers).isEqualTo(InputLottoNumberGeneratorTest.lottoNumbers)

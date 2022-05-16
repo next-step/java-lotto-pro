@@ -27,10 +27,7 @@ class LottoTest {
                         .withMessage("로또 번호 갯수가 올바르지 않습니다."),
                 () -> assertThatIllegalArgumentException()
                         .isThrownBy(() -> Lotto.valueOf(Arrays.asList(1, 2, 3, 4, 5)))
-                        .withMessage("로또 번호 갯수가 올바르지 않습니다."),
-                () -> assertThatIllegalArgumentException()
-                        .isThrownBy(() -> Lotto.valueOf(Arrays.asList(1, 2, 2, 1, 5, 3)))
-                        .withMessage("로또 번호가 중복되었습니다.")
+                        .withMessage("로또 번호 갯수가 올바르지 않습니다.")
         );
     }
 

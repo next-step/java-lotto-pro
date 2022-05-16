@@ -1,13 +1,13 @@
 package lotto.generator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import lotto.model.LottoNumber;
 import lotto.util.StringToIntegerConverter;
 import lotto.util.StringUtils;
 
 public class InputLottoNumberGenerator implements LottoNumberGenerator {
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     public InputLottoNumberGenerator(String input) {
         String[] numbers = StringUtils.split(input);
@@ -19,7 +19,7 @@ public class InputLottoNumberGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public List<LottoNumber> generate() {
+    public Set<LottoNumber> generate() {
         return lottoNumbers;
     }
 }

@@ -2,7 +2,7 @@ package lotto.generator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
+import java.util.Set;
 import lotto.model.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ class RandomLottoNumberGeneratorTest {
     @Test
     void randomLottoNumberGeneratorSize() {
         RandomLottoNumberGenerator randomLottoNumberGenerator = new RandomLottoNumberGenerator();
-        List<LottoNumber> lottoNumbers = randomLottoNumberGenerator.generate();
+        Set<LottoNumber> lottoNumbers = randomLottoNumberGenerator.generate();
         assertThat(lottoNumbers).hasSize(6);
     }
 }
