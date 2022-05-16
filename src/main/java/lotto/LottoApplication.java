@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.GenerateLottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
@@ -12,6 +13,7 @@ import java.util.List;
 public class LottoApplication {
 
     private final List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    private final GenerateLottoNumber GenerateLottoNumber = new GenerateLottoNumber();
     private LottoPrice lottoPrice;
     private WinningLottoNumber winningNumbers;
 
@@ -23,7 +25,7 @@ public class LottoApplication {
     public List<LottoNumbers> generateLottoNumbers() {
         Integer count = lottoPrice.getCount();
         for (int i = 0; i < count; i++) {
-            LottoNumbers numbers = new LottoNumbers();
+            LottoNumbers numbers = new LottoNumbers(GenerateLottoNumber.initNumbers());
             lottoNumbers.add(numbers);
         }
         return lottoNumbers;

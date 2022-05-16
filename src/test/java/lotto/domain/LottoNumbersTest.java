@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +17,7 @@ class LottoNumbersTest {
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = new LottoNumbers((list) -> Collections.swap(list, 0, 1));
+        lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test

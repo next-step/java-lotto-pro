@@ -1,48 +1,27 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import lotto.utils.LottoValidationUtils;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoNumbers {
     public static final int LOTTO_SIZE = 6;
     public static final int MAX_NUMBER = 45;
     public static final int MIN_NUMBER = 1;
-    protected static final List<Integer> ALL_NUMBERS = initAllNumbers();
-    private final List<Integer> numbers;
-    private final RandomShuffle randomShuffle;
+    private final Set<Integer> numbers;
 
-    public LottoNumbers() {
-        this(new RandomShuffleImpl());
+    public LottoNumbers(List<Integer> numbers) {
+        this.numbers = new HashSet<>(numbers);
     }
 
-    public LottoNumbers(RandomShuffle randomShuffle) {
-        this.randomShuffle = randomShuffle;
-        numbers = initNumbers();
-    }
-
-    private static List<Integer> initAllNumbers() {
-        List<Integer> result = new ArrayList<>();
-        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            result.add(i);
-        }
-        return result;
-    }
-
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return numbers;
     }
 
-
-    private List<Integer> initNumbers() {
-        randomShuffle.shuffle(ALL_NUMBERS);
-
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < LOTTO_SIZE; i++) {
-            result.add(ALL_NUMBERS.get(i));
-        }
-        result.sort(Integer::compareTo);
-
-        return result;
+    public boolean match(Integer number) {
+        return this.numbers.contains(number);
     }
 
     public WinningRank matchWinningNumbers(WinningLottoNumber winningNumbers) {
@@ -50,11 +29,11 @@ public class LottoNumbers {
         for (Integer winningNumber : winningNumbers.getNumbers()) {
             matchCount += matchWinningNumber(winningNumber);
         }
-        return WinningRank.of(matchCount, numbers.contains(winningNumbers.getBonusNumber()));
+        return WinningRank.of(matchCount, match(winningNumbers.getBonusNumber()));
     }
 
     private Integer matchWinningNumber(Integer winningNumber) {
-        if (numbers.contains(winningNumber)) {
+        if (match(winningNumber)) {
             return 1;
         }
         return 0;
