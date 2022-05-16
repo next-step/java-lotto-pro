@@ -42,7 +42,9 @@ public class LottoController {
         for (int i = 0; i < manualLottoPurchaseCount; i++) {
             lottos.addLotto(new Lotto(inputView.inputManualLottoNumbers()));
         }
-        lottos.addLottos(new Lottos(purchasePrice, manualLottoPurchaseCount));
+
+        long autoPurchasePrice = purchasePrice.excludePrice((long) manualLottoPurchaseCount * Lotto.LOTTO_PRICE);
+        lottos.addLottos(new Lottos(new PurchasePrice(autoPurchasePrice)));
         resultView.printPurchaseLottos(manualLottoPurchaseCount, lottos);
 
         return lottos;
