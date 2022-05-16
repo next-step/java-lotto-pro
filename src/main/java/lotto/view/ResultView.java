@@ -10,6 +10,7 @@ import java.util.Collections;
 
 import static lotto.common.Messages.*;
 import static lotto.domain.LottoResult.isCriterionRate;
+import static lotto.enums.LottoRank.SECOND_BONUS;
 
 public class ResultView {
     private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
@@ -28,7 +29,7 @@ public class ResultView {
 
         Arrays.stream(LottoRank.values()).forEach(
                 lottoRank -> System.out.printf(
-                        (GAME_RESULT_MESSAGE) + "%n",
+                        (lottoRank == SECOND_BONUS ? GAME_RESULT_BONUS_BALL_MESSAGE : GAME_RESULT_MESSAGE) + "%n",
                         lottoRank.getMatchingCount(),
                         lottoRank.getPrizeMoney(),
                         Collections.frequency(lottoRanks.getLottoRanks(), lottoRank)

@@ -21,7 +21,7 @@ public class LottoWiningNumbers {
 
     public LottoNumbers generate() {
         return new LottoNumbers(Arrays.stream(winingNumbers)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(value -> Integer.parseInt(value.trim()))
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList())
         );

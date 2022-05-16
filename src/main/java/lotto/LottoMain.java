@@ -6,8 +6,7 @@ import lotto.view.ResultView;
 import java.util.List;
 
 import static lotto.domain.Lotto.generateLottoGame;
-import static lotto.view.InputView.inputMoney;
-import static lotto.view.InputView.lastWeekWinningNumberString;
+import static lotto.view.InputView.*;
 import static lotto.view.ResultView.lottoGameResultMessage;
 import static lotto.view.ResultView.lottoGameStatisticsMessage;
 
@@ -22,7 +21,8 @@ public class LottoMain {
         Lotto lotto = new Lotto(lottoNumbers);
 
         LottoWiningNumbers lottoWiningNumbers = new LottoWiningNumbers(lastWeekWinningNumberString());
-        LottoRanks lottoRanks = new LottoRanks(lotto.gamePlay(lottoWiningNumbers.generate()));
+        BonusBall bonusBall = new BonusBall(bonusNumberString());
+        LottoRanks lottoRanks = new LottoRanks(lotto.gamePlay(lottoWiningNumbers.generate(), bonusBall));
 
         double lottoGameEarningsRate = LottoResult.lottoGameEarningsRate(money.currentMoney(), lottoRanks);
 

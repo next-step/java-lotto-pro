@@ -28,6 +28,10 @@ public class LottoNumbers {
                 .count();
     }
 
+    public boolean containsBonusBall(BonusBall bonusBall) {
+        return isContainsLottoNumber(bonusBall.getBonusBall());
+    }
+
     private boolean isContainsLottoNumber(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }

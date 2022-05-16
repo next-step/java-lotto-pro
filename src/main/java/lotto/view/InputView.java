@@ -2,8 +2,7 @@ package lotto.view;
 
 import java.util.Scanner;
 
-import static lotto.common.Messages.LAST_WEEK_WINNING_NUMBER;
-import static lotto.common.Messages.START_MESSAGE;
+import static lotto.common.Messages.*;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -15,6 +14,11 @@ public class InputView {
 
     public static String lastWeekWinningNumberString() {
         System.out.println(LAST_WEEK_WINNING_NUMBER);
+        return scanner.nextLine();
+    }
+
+    public static String bonusNumberString() {
+        System.out.println(BONUS_BALL_NUMBER);
         return scanner.nextLine();
     }
 }

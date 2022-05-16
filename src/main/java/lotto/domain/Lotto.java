@@ -42,10 +42,12 @@ public class Lotto {
         }
     }
 
-    public List<LottoRank> gamePlay(LottoNumbers lastWeekWinningNumber) {
+    public List<LottoRank> gamePlay(LottoNumbers lastWeekWinningNumber, BonusBall bonusBall) {
         return purchasedLotto.stream()
-                .mapToInt(lottoNumbers -> lottoNumbers.containsCount(lastWeekWinningNumber))
-                .mapToObj(LottoRank::find)
+                .map(lottoNumbers -> LottoRank.find(
+                        lottoNumbers.containsCount(lastWeekWinningNumber),
+                        lottoNumbers.containsBonusBall(bonusBall)
+                ))
                 .collect(Collectors.toList());
     }
 }

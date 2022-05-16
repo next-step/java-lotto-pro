@@ -10,11 +10,9 @@ public class Money {
 
     public Money(String money) {
         validateNumber(money);
-
         int validatedNumber = Integer.parseInt(money);
 
         validateMinimumMoney(validatedNumber);
-
         this.money = validatedNumber;
     }
 
