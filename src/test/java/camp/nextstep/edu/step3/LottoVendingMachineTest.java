@@ -62,7 +62,7 @@ public class LottoVendingMachineTest {
     @DisplayName("로또머신은 발급된 기록이 없을때 에러를 반환한다.")
     @Test
     void invalidPrintIssuedLottoInformation() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(IllegalStateException.class)
                 .isThrownBy(vendingMachine::printIssuedLotto);
     }
 
