@@ -22,11 +22,11 @@ class PurchasedLottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,4,5,7:THIRD", "1,2,3,4,7,8:FOURTH", "1,2,3,7,8,9:FIFTH"}, delimiter = ':')
-    void 맞춘_개수에_따른_등수_확인(String lottoNumbers, Ranking expected) {
+    @CsvSource(value = {"1,2,3,4,5,6:FIRST:45", "1,2,3,4,5,45:SECOND:6", "1,2,3,4,5,45:THIRD:40", "1,2,3,4,7,8:FOURTH:45", "1,2,3,7,8,9:FIFTH:45"}, delimiter = ':')
+    void 맞춘_개수에_따른_등수_확인_보너스_여부_포함(String lottoNumbers, Ranking expected, int bonusNumber) {
         PurchasedLotto purchasedLotto = new PurchasedLotto(Arrays.asList(new Lotto(lottoNumbers)));
         String lastWinningLotto = "1,2,3,4,5,6";
-        List<Ranking> rankings = purchasedLotto.compareLottos(new Lotto(lastWinningLotto));
+        List<Ranking> rankings = purchasedLotto.compareLottos(new Lotto(lastWinningLotto), new LottoNo(bonusNumber));
         assertThat(rankings).containsExactly(expected);
     }
 }

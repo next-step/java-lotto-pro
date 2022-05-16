@@ -34,4 +34,12 @@ public class PurchasedLotto {
         }
         return result;
     }
+
+    public List<Ranking> compareLottos(Lotto target, LottoNo bonusNumber) {
+        List<Ranking> result = new ArrayList<>();
+        for (Lotto lotto : lottoList) {
+            result.add(lotto.compareLotto(target, bonusNumber));
+        }
+        return result;
+    }
 }
