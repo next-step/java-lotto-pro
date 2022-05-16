@@ -1,19 +1,14 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.service.AutoLottoNumbersIssuer;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(final LottoPayment payment) {
-        lottoTickets = new ArrayList<>();
-        for (int i = 0; i < payment.getPurchasableAmount(); i++) {
-            lottoTickets.add(new LottoTicket(AutoLottoNumbersIssuer.issueLottoNumbers()));
-        }
+    public LottoTickets(final List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
     }
 
     public Map<Prize, Integer> prizeMap(final LottoNumbers winningNumbers) {
@@ -30,7 +25,6 @@ public class LottoTickets {
         for (final LottoTicket ticket : lottoTickets) {
             ticket.print();
         }
-        System.out.println();
     }
 
     private Map<Prize, Integer> emptyPrizeMap() {

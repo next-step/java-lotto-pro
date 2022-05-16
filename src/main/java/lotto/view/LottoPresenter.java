@@ -9,19 +9,24 @@ import lotto.domain.LottoPayment;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
 import lotto.service.LottoNumbersFactory;
+import lotto.service.LottoTicketsFactory;
 
 public class LottoPresenter {
     private final LottoNumbersFactory lottoNumbersFactory;
+    private final LottoTicketsFactory lottoTicketsFactory;
 
-    public LottoPresenter(final LottoNumbersFactory lottoNumbersFactory) {
+    public LottoPresenter(final LottoNumbersFactory lottoNumbersFactory,
+                          final LottoTicketsFactory lottoTicketsFactory) {
         this.lottoNumbersFactory = lottoNumbersFactory;
+        this.lottoTicketsFactory = lottoTicketsFactory;
     }
 
     public void present() {
         final Scanner scanner = new Scanner(System.in);
         final LottoPayment payment = requestPayment(scanner);
-        final LottoTickets tickets = new LottoTickets(payment);
+        final LottoTickets tickets = lottoTicketsFactory.createAutomatically(payment.getPurchasableAmount());
         tickets.print();
+        printLineSeparator();
         final LottoNumbers winningNumbers = requestWinningNumbers(scanner);
         new LottoResult(payment, tickets, winningNumbers).printResult();
     }
@@ -50,5 +55,9 @@ public class LottoPresenter {
             System.out.println(e.getMessage());
             return requestWinningNumbers(scanner);
         }
+    }
+
+    private void printLineSeparator() {
+        System.out.println();
     }
 }
