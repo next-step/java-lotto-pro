@@ -14,6 +14,7 @@ class LottosTest {
     private int NUMBER_COUNT = 6;
     private Money PRICE = Money.from(1000);
     private List<LottoNumber> prizeNumbers = new ArrayList<>();
+    private Lottos lottos;
 
     @BeforeEach
     void setUp() {
@@ -24,10 +25,7 @@ class LottosTest {
         prizeNumbers.add(LottoNumber.from(4));
         prizeNumbers.add(LottoNumber.from(5));
         prizeNumbers.add(LottoNumber.from(6));
-    }
 
-    @Test
-    void 당첨_로또_리스트() {
         List<Lotto> lottoList = new ArrayList<>();
 
         lottoList.add(createLotto(1, 2, 3, 4, 5, 6));
@@ -35,7 +33,12 @@ class LottosTest {
         lottoList.add(createLotto(1, 2, 3, 4, 7, 8));
         lottoList.add(createLotto(1, 2, 3, 7, 8, 9));
 
-        Lottos lottos = Lottos.from(lottoList);
+        lottos = Lottos.from(lottoList);
+    }
+
+    @Test
+    void 당첨_로또_리스트() {
+
         lottos.matchedLottoList(prizeNumbers, MatchResult.THREE);
 
         assertAll(
@@ -44,6 +47,12 @@ class LottosTest {
                 () -> assertThat(lottos.matchedLottoList(prizeNumbers, MatchResult.FIVE).size()).isEqualTo(1),
                 () -> assertThat(lottos.matchedLottoList(prizeNumbers, MatchResult.SIX).size()).isEqualTo(1)
         );
+    }
+
+    @Test
+    void 로또_총_금액() {
+        assertThat(lottos.totalPrice()).isEqualTo(Money.from(4000));
+
     }
 
     private Lotto createLotto(int input0, int input1, int input2, int input3, int input4, int input5) {

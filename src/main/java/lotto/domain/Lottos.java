@@ -25,5 +25,13 @@ public class Lottos {
         return Collections.unmodifiableList(result);
     }
 
+    public Money totalPrice() {
+        Money result = Money.from(0);
+        for (Lotto lotto : lottoList) {
+            result = result.add(lotto.price());
+        }
+
+        return result;
+    }
 
 }
