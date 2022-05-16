@@ -16,10 +16,11 @@ public class LottoController {
         Lottos lottos = store.giveLotto();
         ResultView.printLottoNumbers(lottos);
 
-        drawNumber();
+        LottoController.drawNumber(lottos);
     }
 
-    private static void drawNumber() {
+    private static void drawNumber(Lottos lottos) {
         Organizer organizer = new Organizer(InputView.inputWinningNumbers());
+        ResultView.printWinningResult(organizer.winningResults(lottos));
     }
 }
