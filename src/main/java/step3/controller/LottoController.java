@@ -1,8 +1,5 @@
 package step3.controller;
 
-import static step3.enums.InputStatus.LOTTO;
-import static step3.enums.InputStatus.MONEY;
-
 import step3.domain.LottoTicket;
 import step3.domain.Money;
 import step3.model.LottoMachine;
@@ -24,7 +21,7 @@ public class LottoController {
     public void startLotto() {
         Money money = null;
         while (money == null) {
-            String moneySource = inputView.getInput(MONEY);
+            String moneySource = inputView.getMoney();
             money = lottoMachine.createMoney(moneySource);
         }
 
@@ -33,7 +30,7 @@ public class LottoController {
 
         LottoTicket winnerTicket = null;
         while (winnerTicket == null) {
-            String manualLottoSource = inputView.getInput(LOTTO);
+            String manualLottoSource = inputView.getWinnerLotto();
             winnerTicket = lottoMachine.makeManualLottoTicket(manualLottoSource);
         }
 
