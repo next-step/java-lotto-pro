@@ -25,7 +25,7 @@ public class LottoResultTest {
 		assertEquals(lottoResult.profitRate(1000),
 				(WinningMoney.SIX.getWinningMoney() + WinningMoney.FIVE.getWinningMoney()) / 2000);
 	}
-	
+
 	@Test
 	@DisplayName("2등이 포함된 수익률 구하기")
 	void buy_lotto_auto_contains_second() {
