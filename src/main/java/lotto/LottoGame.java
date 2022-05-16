@@ -3,6 +3,7 @@ package lotto;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
+import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,21 +44,12 @@ public class LottoGame {
 
         isValidPurchasePrice(purchasePrice);
         this.purchasePrice = purchasePrice;
-        ResultView.printTicketCount(this.getTicketCount());
 
         this.ticketNumbers = new ArrayList<>();
         int ticketCount = this.getTicketCount();
         for (int i = 1; i <= ticketCount; i++) {
             this.ticketNumbers.add(new LottoNumbers());
         }
-
-        printTicketNumbers();
-        System.out.println();
-
-        String winnerNumbers = InputView.getWinnerNumbers();
-
-        setWinnerNumbers(winnerNumbers);
-        generateGameResult();
     }
 
     LottoGame(List<LottoNumbers> ticketNumbers, String winnerNumbers) {
@@ -81,7 +73,7 @@ public class LottoGame {
         }
     }
 
-    private void generateGameResult() {
+    public void generateGameResult() {
         for (LottoNumbers ticket : this.ticketNumbers) {
             setGameScore(ticket);
         }
@@ -126,6 +118,10 @@ public class LottoGame {
 
     public void setWinnerNumbers(String numbersWithComma) {
         this.winnerNumbers = new LottoNumbers(numbersWithComma);
+    }
+
+    public void printGameResult() {
+        ResultView.printGameResult(this.getScore(), this.earningRate);
     }
 
     private int equalNumberCount(LottoNumbers ticketNumbers) {
