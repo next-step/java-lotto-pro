@@ -25,8 +25,28 @@ public class Lotto {
         return numberList.size();
     }
 
+    public LottoMatchingResult match(Lotto lotto) {
+        LottoMatchingResult matchingResult = new LottoMatchingResult();
+
+        for (int index = 0; index < lotto.size(); index++) {
+            addMatchingCount(matchingResult, lotto.get(index));
+        }
+
+        return matchingResult;
+    }
+
+    private void addMatchingCount(LottoMatchingResult matchingResult, LottoNumber lottoNumber) {
+        if (hasNumber(lottoNumber)) {
+            matchingResult.addCountOfMatch();
+        }
+    }
+
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return numberList.contains(lottoNumber);
+    }
+
     private void validate(List<LottoNumber> list) {
-        if(list == null || list.isEmpty()) {
+        if (list == null || list.isEmpty()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NUMBER_LIST_NULL_OR_EMPTY);
         }
     }
