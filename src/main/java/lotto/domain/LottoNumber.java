@@ -6,7 +6,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int LOWER_BOUND = 0;
     public static final int UPPER_BOUND = 45;
-    private final int number;
+    private int number;
 
     public LottoNumber(int number) {
         validate(number);
@@ -17,11 +17,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (number < LOWER_BOUND || UPPER_BOUND < number) {
             throw new IllegalArgumentException("1이상 45 이하의 숫자를 입력해주세요");
         }
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(number);
     }
 
     @Override
