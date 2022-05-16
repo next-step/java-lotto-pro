@@ -14,10 +14,10 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest(name = "invalid_로또번호_생성")
-    @ValueSource(ints = {-1, 100, 0})
-    void invalid_로또번호_범위() {
+    @ValueSource(ints = {0, 46, -1})
+    void invalid_로또번호_범위(int source) {
         assertThatThrownBy(() -> {
-            LottoNumber lottoNumber = LottoNumber.of(-1);
+            LottoNumber.of(source);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1~45의 숫자만 입력해주세요.");
     }
