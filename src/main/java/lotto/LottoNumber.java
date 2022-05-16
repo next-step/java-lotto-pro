@@ -1,7 +1,7 @@
 package lotto;
 
 import static java.lang.Integer.parseInt;
-import static java.util.stream.IntStream.range;
+import static java.util.stream.IntStream.rangeClosed;
 
 import java.util.Objects;
 import java.util.Set;
@@ -38,7 +38,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static Set<LottoNumber> allLottoNumbers() {
-        return range(LottoNumber.START_NUM, LottoNumber.LAST_NUM + 1)
+        return rangeClosed(LottoNumber.START_NUM, LottoNumber.LAST_NUM)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
     }
