@@ -6,7 +6,10 @@ import java.util.List;
 public class Lottos {
     private List<Lotto> lottoList;
 
-    public Lottos(int count) {
+    public Lottos() {
+    }
+
+    public void autoGenerator(int count) {
         List<Lotto> list = new ArrayList<>();
         for (int i=0; i<count; i++) {
             list.add(new Lotto());
@@ -14,13 +17,23 @@ public class Lottos {
         this.lottoList = list;
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public void manualGenerator(String[] input) {
+        List<Lotto> list = new ArrayList<>();
+        for (String s : input) {
+            list.add(new Lotto(s));
+        }
+        this.lottoList = list;
     }
 
-    public void printLottoList() {
-        for (Lotto n : this.lottoList) {
-            n.printLottoNumber();
+    public List<Lotto> getLottoList() {
+        return this.lottoList;
+    }
+
+    public List<LottoStatistic> matchLottoStatic(Lotto winningLotto) {
+        List<LottoStatistic> lottoStatistics = new ArrayList<>();
+        for (Lotto lotto : this.lottoList) {
+            lottoStatistics.add(LottoStatistic.valueOf(winningLotto.match(lotto)));
         }
+        return lottoStatistics;
     }
 }

@@ -7,11 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
     private Lotto stringToLotto;
@@ -22,19 +18,14 @@ public class LottoTest {
         Lotto lotto = new Lotto(input);
         stringToLotto = lotto;
     }
-    @Test
-    public void 로또_생성_자동() {
-        Lotto lotto = new Lotto();
-        lotto.printLottoNumber();
-    }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     public void 로또_생성_입력(int input) {
-        List<LottoNumber> list = stringToLotto.getLottoNumber().stream()
-                .filter(lottoNumber -> lottoNumber.compareTo(new LottoNumber(input)) == 0)
-                .collect(Collectors.toList());
-        assertThat(list.size()).isEqualTo(1);
+        long count = stringToLotto.getLottoNumbers().stream()
+                .filter(lottoNumber -> lottoNumber.equals(new LottoNumber(input)))
+                .count();
+        assertThat(count).isEqualTo(1);
     }
 
     @Test

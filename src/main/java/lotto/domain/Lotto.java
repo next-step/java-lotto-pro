@@ -14,11 +14,11 @@ public class Lotto {
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
 
-    private final List<LottoNumber> lottoNumber;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto() {
         Collections.shuffle(LOTTO_NUMBERS);
-        this.lottoNumber = LOTTO_NUMBERS.stream()
+        this.lottoNumbers = LOTTO_NUMBERS.stream()
                 .limit(6)
                 .collect(Collectors.toList());
     }
@@ -31,15 +31,21 @@ public class Lotto {
             list.add(new LottoNumber(s));
         }
         Collections.sort(list);
-        this.lottoNumber = list;
+        this.lottoNumbers = list;
     }
 
-    public List<LottoNumber> getLottoNumber() {
-        return this.lottoNumber;
+    public List<LottoNumber> getLottoNumbers() {
+        return this.lottoNumbers;
     }
 
-    public void printLottoNumber() {
-        System.out.println(lottoNumber.toString());
+    public int match(Lotto target) {
+        int count = 0;
+        for (LottoNumber lottoNumber : target.getLottoNumbers()) {
+            if (this.lottoNumbers.contains(lottoNumber)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     private void vaildCount(String[] input) {
@@ -48,7 +54,8 @@ public class Lotto {
             set.add(s);
         }
         if (set.size() != 6) {
-            throw new IllegalArgumentException(OutputView.printErrorMessage());
+            OutputView.printErrorMessage();
+            throw new IllegalArgumentException();
         }
     }
 }
