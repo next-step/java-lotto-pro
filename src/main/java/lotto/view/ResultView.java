@@ -7,6 +7,7 @@ import lotto.enums.LottoRank;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static lotto.common.Messages.*;
 import static lotto.domain.LottoResult.isCriterionRate;
@@ -19,8 +20,8 @@ public class ResultView {
         System.out.printf((PURCHASES_COUNT_MESSAGE) + "%n", purchasesCount);
     }
 
-    public static void resultLottoNumbers(LottoNumbers lottoNumbers) {
-        System.out.println(lottoNumbers);
+    public static void resultLottoNumbers(List<LottoNumbers> lottoNumbers) {
+        lottoNumbers.forEach(System.out::println);
     }
 
     public static void lottoGameResultMessage(LottoRanks lottoRanks) {

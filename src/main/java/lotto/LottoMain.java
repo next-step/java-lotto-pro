@@ -7,8 +7,7 @@ import java.util.List;
 
 import static lotto.domain.Lotto.generateLottoGame;
 import static lotto.view.InputView.*;
-import static lotto.view.ResultView.lottoGameResultMessage;
-import static lotto.view.ResultView.lottoGameStatisticsMessage;
+import static lotto.view.ResultView.*;
 
 public class LottoMain {
 
@@ -18,8 +17,9 @@ public class LottoMain {
 
         ResultView.purchasesCountMessage(gameCount);
         List<LottoNumbers> lottoNumbers = generateLottoGame(gameCount);
-        Lotto lotto = new Lotto(lottoNumbers);
+        resultLottoNumbers(lottoNumbers);
 
+        Lotto lotto = new Lotto(lottoNumbers);
         LottoWiningNumbers lottoWiningNumbers = new LottoWiningNumbers(lastWeekWinningNumberString());
         BonusBall bonusBall = new BonusBall(bonusNumberString());
         LottoRanks lottoRanks = new LottoRanks(lotto.gamePlay(lottoWiningNumbers.generate(), bonusBall));

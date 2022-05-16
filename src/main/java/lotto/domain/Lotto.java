@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.common.Messages.LOTTO_MINIMUM_PRICE;
-import static lotto.view.ResultView.resultLottoNumbers;
 
 public class Lotto {
     private static final int PRICE = 1_000;
@@ -25,7 +24,6 @@ public class Lotto {
         for (int i = 0; i < gameCount; i++) {
             LottoNumbers lottoNumbers = new LottoNumbers(LOTTO_RANDOM_NUMBERS.generate());
             purchasedLotto.add(lottoNumbers);
-            resultLottoNumbers(lottoNumbers);
         }
 
         return purchasedLotto;
