@@ -3,6 +3,12 @@ package lotto;
 import static java.util.Arrays.stream;
 
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoWinResult;
+import lotto.domain.LottoWinResultGroup;
+import lotto.domain.Lottos;
 
 public class LottoTestUtils {
 

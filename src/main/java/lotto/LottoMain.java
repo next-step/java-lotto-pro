@@ -1,5 +1,10 @@
 package lotto;
 
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoWinStatistics;
+import lotto.domain.Lottos;
+
 public class LottoMain {
 
     public static void main(String[] args) {

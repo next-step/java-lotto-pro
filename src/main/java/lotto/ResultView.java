@@ -1,6 +1,11 @@
 package lotto;
 
-import static lotto.LottoWinResult.WIN_RESULTS;
+import static lotto.domain.LottoWinResult.WIN_RESULTS;
+
+import lotto.domain.Lotto;
+import lotto.domain.LottoWinResult;
+import lotto.domain.LottoWinStatistics;
+import lotto.domain.Lottos;
 
 public class ResultView {
 

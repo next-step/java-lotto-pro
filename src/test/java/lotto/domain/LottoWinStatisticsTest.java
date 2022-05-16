@@ -1,15 +1,16 @@
-package lotto;
+package lotto.domain;
 
 import static generic.Money.valueOf;
 import static lotto.LottoTestUtils.resultGroup;
-import static lotto.LottoWinResult.FOURTH;
-import static lotto.LottoWinResult.NO_WIN;
-import static lotto.LottoWinResult.THIRD;
+import static lotto.domain.LottoWinResult.FOURTH;
+import static lotto.domain.LottoWinResult.NO_WIN;
+import static lotto.domain.LottoWinResult.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import generic.Money;
 import generic.Rate;
 import java.util.stream.Stream;
+import lotto.domain.LottoWinStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

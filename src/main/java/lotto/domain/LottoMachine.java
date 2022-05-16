@@ -1,9 +1,13 @@
-package lotto;
+package lotto.domain;
 
 import generic.Money;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+import lotto.domain.Lottos;
 
 public class LottoMachine {
     private static final String SPLITTER = ",";

@@ -1,9 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,7 +15,7 @@ class LottoMachineTest {
     @DisplayName("발급 성공 테스트")
     void 발급_테스트() {
         // when & then
-        assertThat(LottoMachine.purchase("2000")).isInstanceOf(Lottos.class);
+        Assertions.assertThat(LottoMachine.purchase("2000")).isInstanceOf(Lottos.class);
     }
 
     @Test

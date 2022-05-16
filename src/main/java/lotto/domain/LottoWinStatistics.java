@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import generic.Money;
 import generic.Rate;
