@@ -1,44 +1,51 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Player {
-    private final List<Lotto> lottos = new ArrayList<>();
     private static final int ZERO = 0;
+    private List<Lotto> lottos = new ArrayList<>();
 
-    public Player(List<Lotto> customLottos) {
-        buyCustomLotto(customLottos);
+    private Player() {
+
     }
 
-    public Player(int money) {
-        buyAutoLotto(money);
+    private Player(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public LottoReport matchWinnerLotto(Lotto winnerLotto) {
-        return new LottoReport(lottoResult(winnerLotto));
+    public static Player buyCustomLottos(List<Lotto> customLottos) {
+        return new Player(customLottos);
+    }
+
+    public static Player buyAutoLotto(int money) {
+         return new Player(autoLottos(money));
+    }
+
+    public LottoReport matchWinnerLotto(Lotto winnerLotto, LottoNumber bonusNumber) {
+        return new LottoReport(lottoResult(winnerLotto, bonusNumber));
     }
 
     public List<Lotto> getLottos() {
-        return new ArrayList<>(lottos);
+        return Collections.unmodifiableList(lottos);
     }
 
-    private void buyCustomLotto(List<Lotto> customLottos) {
-        lottos.addAll(customLottos);
-    }
-
-    private void buyAutoLotto(int money) {
+    private static List<Lotto> autoLottos(int money) {
+        List<Lotto> lottos = new ArrayList<>();
         int buyLottoQty = money / Lotto.LOTTO_MONEY;
         for (int i = ZERO; i < buyLottoQty; i++) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.createAutoLotto());
         }
+        return lottos;
     }
 
-    private List<LottoRank> lottoResult(Lotto winnerLotto) {
+    private List<LottoRank> lottoResult(Lotto winnerLotto, LottoNumber bonusNumber) {
         return this.lottos
                 .stream()
-                .map((winnerLotto::match))
+                .map((lotto -> lotto.match(winnerLotto, bonusNumber)))
                 .collect(Collectors.toList());
     }
 

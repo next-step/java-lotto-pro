@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoReport {
-    private final List<LottoRank> lottoRanks;
     private static final int BREAK_EVEN_POINT = 1;
+    private final List<LottoRank> lottoRanks;
 
     public LottoReport(List<LottoRank> lottoRanks) {
         this.lottoRanks = lottoRanks;

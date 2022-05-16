@@ -8,13 +8,13 @@ import lotto.domain.Player;
 
 public class ResultView {
     private static final String WINNER_REPORT = "당첨 통계";
-    private static final String WINNER_REPORT_PATTERN = "%d개 일치 (%d원)- %d개\n";
+    private static final String WINNER_REPORT_PATTERN = "%s- %d개\n";
     private static final String LINE = "---------";
     private static final String YILELD_REPORT_PATTERN = "총수익률은 %.2f 입니다.";
     private static final String YILELD_BENEFIT_MESSAGE = "(기준이 1이기 때문에 이익이라는 의미)";
-    private static final String YILELD_LOSS_MESSAGE = "(기준이 1이기 때문에 이익이라는 의미)";
+    private static final String YILELD_LOSS_MESSAGE = "(기준이 1이기 때문에 손해이라는 의미)";
 
-    public static void createLotto(Player player) {
+    public static void playerHasLotto(Player player) {
         List<Lotto> lottos = player.getLottos();
         System.out.println(lottos.size() + "를 구매했습니다.");
 
@@ -27,8 +27,7 @@ public class ResultView {
 
         LottoRank.winnerRanks()
                 .forEach((lottoRank -> System.out.printf(WINNER_REPORT_PATTERN,
-                        lottoRank.getMatchCount(),
-                        lottoRank.rewordMoney(),
+                        lottoRank.message(),
                         lottoReport.lottoResultCount(lottoRank))));
 
         lottoYieldReport(lottoReport);

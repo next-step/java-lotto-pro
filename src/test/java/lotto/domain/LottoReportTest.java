@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -41,13 +42,23 @@ public class LottoReportTest {
     @DisplayName("로또 결과에 금액의 합계를 구한다.")
     void rewordTotalMoney() {
         assertThat(lottoReport.rewordTotalMoney())
-                .isEqualTo(1_605_000);
+                .isEqualTo(33_050_000);
     }
 
     @Test
     @DisplayName("로또 결과의 수익률을 구한다.")
     void lottoYield(){
-        assertThat(lottoReport.yield()).isEqualTo(321);
+        assertThat(lottoReport.yield()).isEqualTo(6610);
+    }
+
+    @Test
+    @DisplayName("로또 결과의 이익 여부를 구한다.")
+    void lottoBenfit(){
+        List<LottoRank> loosList = Collections.singletonList(LottoRank.FAIL);
+        LottoReport lossReport = new LottoReport(loosList);
+
+        assertThat(lossReport.isBenefit()).isFalse();
+        assertThat(lottoReport.isBenefit()).isTrue();
     }
 
 
