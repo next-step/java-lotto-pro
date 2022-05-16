@@ -1,9 +1,11 @@
-# 3단계 - 로또(자동)
+# 4단계 - 로또(2등)
 
 ## 기능 요구사항 및 사전 힌트
 
 - 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
 - 로또 1장의 가격은 1000원이다.
+- 2등을 위해 추가 번호를 하나 더 추첨한다.
+- 당첨 통계에 2등도 추가해야 한다.
 
 로또 자동 생성은 Collections.shuffle() 메소드 활용한다.
 Collections.sort() 메소드를 활용해 정렬 가능하다.
@@ -27,16 +29,18 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
 - else 예약어를 쓰지 않는다.
  힌트: if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
  else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
+- java enum을 적용해 프로그래밍을 구현한다.
+- 규칙 8: 일급 콜렉션을 쓴다.
 
 ## 구현 요소 목록
 ### Lottery - 딩첨번호 일치 비교
-### Prize - 당첨 상세정보
+### Rank - 당첨 상세정보
 ### LottoNumber - 로또 번호
 ### LottoNumbers - 로또 번호 여러개 대응
-### ContainCount - 로또 번호가 포함하고 있는 당첨번호 총 개수
-### ContainCounts - ContainCount 여러개 대응
+### Ranks - 당첨 상세정보 여러개 대응
 ### Vendor - 구매, 총 구매량에 대한 통계, 수익률 처리
-### Aggregator - Vendor 에게 위임받아 집계 관련된 기능 처리 수행  
+### Aggregator - Vendor 에게 위임받아 집계 관련된 기능 처리 수행
+### BonusLottoNumber - 로또 번호 확장. 해당 번호 포함 여부를 2등 판별 지표로 사용
 
 
 ## 구현 요소별 TDD 로 기능을 완성해 본다. 
@@ -50,17 +54,17 @@ LottoNumbers
 - [X] 중복된 LottoNumber 를 포함할 수 없다.
 - [X] LottoNumber를 포함하고 있는지 여부를 확인할 수 있다.
 - [X] Iterable 한 객체이다.
+- [ ] BonusNumber 가 포함되어 있는지 확인할 수 있다.
 
-Prize
-- [X] 당첨 번호를 포함한 갯수를 확인하여 당첨정보를 확인할 수 있다.
-
-ContainCount
+Rank
 - [X] 음수가 될 수 없고, LottoNumbers 의 최대 길이를 초과할 수 없다.
+- [X] 당첨 번호를 포함한 갯수와 보너스 일치 여부를 확인하여 당첨정보를 확인할 수 있다.
 - [X] 값 객체이다.
 
-ContainCounts
-- [X] ContainCount 를 추가할 수 있다.
-- [X] 포함한 ContainCount 의 개수를 알려줄 수 있다.
+
+Ranks
+- [X] Rank 를 추가할 수 있다.
+- [X] 포함하고 있는 Rank 의 개수를 알려줄 수 있다.
 - [X] Iterable 한 객체이다.
 
 Lottery
@@ -76,6 +80,9 @@ Vendor
 Aggregator 
 - [X] 수익률을 계산할 수 있다.
 - [X] 등수별 당첨 갯수를 집계할 수 있다.
+
+BonusNumber
+- [X] LottoNumber 를 확장한 객체이다.
 
 
 
