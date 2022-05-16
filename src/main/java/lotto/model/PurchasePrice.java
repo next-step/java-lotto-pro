@@ -29,4 +29,11 @@ public class PurchasePrice {
     public long excludePrice(long excludePrice) {
         return this.purchasePrice - excludePrice;
     }
+
+    public void validatePurchasePrice(int purchaseCount) {
+        long purchasePrice = (long) purchaseCount * Lotto.LOTTO_PRICE;
+        if(0 > this.purchasePrice - purchasePrice){
+            throw new IllegalArgumentException("구매할 수 있는 수동 로또의 개수를 초과하였습니다.");
+        }
+    }
 }

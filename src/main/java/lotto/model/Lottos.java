@@ -11,20 +11,27 @@ public class Lottos {
         this.lottos = new ArrayList<>();
 
         int count = purchasePrice.purchaseLottoCount();
-        for (int i = 0; i < count; i++) {
-            this.lottos.add(new Lotto());
-        }
+        createLottos(count);
     }
 
-    public Lottos(PurchasePrice purchasePrice, NonAutoPurchaseCount nonAutoPurchaseCount) {
+    public Lottos(PurchasePrice purchasePrice, int nonAutoPurchaseCount) {
         this.lottos = new ArrayList<>();
 
-        long autoPurchasePrice = purchasePrice.excludePrice(nonAutoPurchaseCount.nonAutoPurchasePrice());
-        new Lottos(new PurchasePrice(autoPurchasePrice));
+        purchasePrice.validatePurchasePrice(nonAutoPurchaseCount);
+        long autoPurchasePrice = purchasePrice.excludePrice((long) nonAutoPurchaseCount * Lotto.LOTTO_PRICE);
+
+        int count = new PurchasePrice(autoPurchasePrice).purchaseLottoCount();
+        createLottos(count);
     }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    private void createLottos(int count) {
+        for (int i = 0; i < count; i++) {
+            this.lottos.add(new Lotto());
+        }
     }
 
     public int lottosCount() {
