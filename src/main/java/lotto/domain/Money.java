@@ -5,6 +5,7 @@ import lotto.constants.ErrorMessage;
 
 public class Money {
     private static final int MIN_MONEY = 0;
+    private final double MATH_ROUND_DIGIT = 100d;
     private final int money;
 
     private Money(int money) {
@@ -28,6 +29,13 @@ public class Money {
             throw new IllegalArgumentException(ErrorMessage.MAX_PURCHASE_LOTTO);
         }
         return purchaseCount;
+    }
+
+    public double returnRate(Money totalPrizeMoney) {
+        double totalPrizeMoneyDouble = totalPrizeMoney.getMoney();
+        double purchaseMoneyDouble = this.money;
+        double returnRate = totalPrizeMoneyDouble / purchaseMoneyDouble;
+        return Math.round(returnRate * MATH_ROUND_DIGIT) / MATH_ROUND_DIGIT;
     }
 
     public int getMoney() {

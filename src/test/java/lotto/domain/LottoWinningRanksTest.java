@@ -18,19 +18,20 @@ class LottoWinningRanksTest {
     void setUp() {
         //given
         LottoTicket winningNumbers = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusBall = LottoNumber.from(7);
 
-        List<Integer> first = Arrays.asList(1, 2, 3, 7, 8, 9);
-        LottoTicket userNumbers = LottoTicket.from(first);
+        List<Integer> numbers1 = Arrays.asList(1, 2, 3, 7, 8, 9);
+        LottoTicket userNumbers = LottoTicket.from(numbers1);
         lottoWinningRanks = LottoWinningRanks.create();
-        lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers));
+        lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers, bonusBall));
 
-        List<Integer> second = Arrays.asList(4, 5, 6, 10, 11, 12);
-        userNumbers = LottoTicket.from(second);
-        lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers));
+        List<Integer> numbers2 = Arrays.asList(4, 5, 6, 10, 11, 12);
+        userNumbers = LottoTicket.from(numbers2);
+        lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers, bonusBall));
 
-        List<Integer> lose = Arrays.asList(7, 8, 9, 10, 11, 12);
-        userNumbers = LottoTicket.from(lose);
-        lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers));
+        List<Integer> missNumbers = Arrays.asList(7, 8, 9, 10, 11, 12);
+        userNumbers = LottoTicket.from(missNumbers);
+        lottoWinningRanks.addWinningRank(userNumbers.rank(winningNumbers, bonusBall));
     }
 
     @DisplayName("당첨된 로또 순위 추가")
@@ -44,7 +45,7 @@ class LottoWinningRanksTest {
     @Test
     void test_순위_개수() {
         //when & then
-        assertThat(lottoWinningRanks.rankCount(Rank.FOURTH)).isEqualTo(2);
+        assertThat(lottoWinningRanks.rankCount(Rank.FIFTH)).isEqualTo(2);
     }
 
     @DisplayName("로또 수익률 조회")

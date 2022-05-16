@@ -18,10 +18,10 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
-    public LottoWinningRanks match(LottoTicket winningNumbers) {
+    public LottoWinningRanks match(LottoTicket winningNumbers, LottoNumber bonusBall) {
         LottoWinningRanks lottoWinningRanks = LottoWinningRanks.create();
         lottoTickets.forEach(lottoTicket -> {
-            lottoWinningRanks.addWinningRank(lottoTicket.rank(winningNumbers));
+            lottoWinningRanks.addWinningRank(lottoTicket.rank(winningNumbers, bonusBall));
         });
         return lottoWinningRanks;
     }

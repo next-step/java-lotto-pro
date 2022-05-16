@@ -76,7 +76,32 @@ class LottoTicketTest {
         //when
         LottoTicket lottoTicket = LottoTicket.from(numbers);
         LottoTicket winningNumbers = LottoTicket.from(numbers);
+        LottoNumber bonusBall = LottoNumber.from(7);
         //then
-        assertThat(lottoTicket.rank(winningNumbers)).isEqualTo(Rank.FIRST);
+        assertThat(lottoTicket.rank(winningNumbers, bonusBall)).isEqualTo(Rank.FIRST);
+    }
+
+    @DisplayName("2등 당첨 순위 확인")
+    @Test
+    void test_2등_당첨_순위() {
+        //given
+        LottoTicket lottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 7, 5, 6));
+        LottoTicket winningNumbers = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusBall = LottoNumber.from(7);
+        //when & then
+        assertThat(lottoTicket.rank(winningNumbers, bonusBall)).isEqualTo(Rank.SECOND);
+    }
+
+    @DisplayName("보너스 번호가 당첨 번호와 중복된 번호가 포함된 경우 예외 처리")
+    @Test
+    void test_보너스_번호가_당첨번호와_중복된_번호가_포함된_경우() {
+        //given
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        LottoTicket winningLotto = LottoTicket.from(numbers);
+        LottoNumber bonusBall = LottoNumber.from(6);
+        //when & then
+        assertThatThrownBy(() -> winningLotto.duplicateBonusBall(bonusBall))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.DUPLICATE_BONUS_BALL);
     }
 }

@@ -23,14 +23,20 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers);
     }
 
-    public Rank rank(LottoTicket winningNumbers) {
-        return Rank.rank(matchCount(winningNumbers));
+    public Rank rank(LottoTicket winningNumbers, LottoNumber bonusBall) {
+        return Rank.rank(matchCount(winningNumbers), contains(bonusBall));
     }
 
     public int matchCount(LottoTicket winningNumbers) {
         return (int) this.lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
+    }
+
+    public void duplicateBonusBall(LottoNumber bonusBall) {
+        if (contains(bonusBall)) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_BONUS_BALL);
+        }
     }
 
     private boolean contains(LottoNumber lottoNumber) {

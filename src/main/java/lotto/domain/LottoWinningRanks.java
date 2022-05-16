@@ -5,10 +5,10 @@ import lotto.enums.Rank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoWinningRanks {
     private final double RETURN_RATE_CRITERIA = 1d;
-    private final double MATH_ROUND_DIGIT = 100d;
     private final List<Rank> winningRanks = new ArrayList<>();
 
     private LottoWinningRanks() {}
@@ -34,10 +34,7 @@ public class LottoWinningRanks {
     }
 
     public double returnRate(Money purchaseMoney) {
-        double totalPrizeMoneyDouble = totalPrizeMoney().getMoney();
-        double purchaseMoneyDouble = purchaseMoney.getMoney();
-        double returnRate = totalPrizeMoneyDouble / purchaseMoneyDouble;
-        return Math.round(returnRate * MATH_ROUND_DIGIT) / MATH_ROUND_DIGIT;
+        return purchaseMoney.returnRate(totalPrizeMoney());
     }
 
     public String resultDescription(Money purchaseMoney) {
@@ -58,11 +55,18 @@ public class LottoWinningRanks {
         return Money.from(totalPrizeMoney);
     }
 
+    private String winningRankInfoFormat(Rank rank) {
+        if (Objects.equals(Rank.SECOND, rank)) {
+            return DisplayMessage.WINNING_RANK_SECOND_INFO;
+        }
+        return DisplayMessage.WINNING_RANK_INFO;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Rank rank : Rank.winningRanks()) {
-            sb.append(String.format(DisplayMessage.WINNING_RANK_INFO,
+            sb.append(String.format(winningRankInfoFormat(rank),
                     rank.getMatchCount(), rank.getMoney(), rankCount(rank)));
         }
         return sb.toString();

@@ -3,9 +3,7 @@ package lotto.domain;
 import lotto.constants.Constants;
 import lotto.constants.ErrorMessage;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber {
     private static Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
@@ -27,6 +25,10 @@ public class LottoNumber {
             throw new IllegalArgumentException(ErrorMessage.OUT_OF_RANGE_NUMBER);
         }
         return lottoNumber;
+    }
+
+    public static Set<Integer> allLottoNumbers() {
+        return lottoNumberMap.keySet();
     }
 
     @Override
