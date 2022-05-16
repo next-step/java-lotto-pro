@@ -26,14 +26,10 @@ public class Lotties {
         return lotties.size();
     }
 
-    public void printLotties() {
-        lotties.forEach(System.out::println);
-    }
-
     public WinningStatus getWinningStatus(Lotto winningLotto) {
         List<Rank> ranks = lotties.stream()
                 .map(winningLotto::match)
                 .collect(Collectors.toList());
-        return  WinningStatus.from(ranks);
+        return WinningStatus.from(ranks);
     }
 }
