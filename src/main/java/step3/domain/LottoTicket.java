@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    private final ArrayList<LottoElement> lottoElements = new ArrayList();
+    private final List<LottoElement> lottoElements = new ArrayList();
     private final int LOTTO_ELEMENTS_SIZE = 6;
     private static final String LOTTO_DELIMITER = ",";
     private final String CREATE_TICKET_EXCEPTION_MSG = "로또는 중복되지 않은 %s 개의 숫자로 이루어져있습니다";
@@ -38,7 +38,7 @@ public class LottoTicket {
         return lottoTicket.match(lottoElements);
     }
 
-    public int match(ArrayList<LottoElement> compareLottoElements) {
+    public int match(List<LottoElement> compareLottoElements) {
         int matchCount = 0;
         for (int i = 0; i < LOTTO_ELEMENTS_SIZE; i++) {
             matchCount = matchCount + compare(compareLottoElements.get(i));
