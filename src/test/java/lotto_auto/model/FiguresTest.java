@@ -1,24 +1,35 @@
 package lotto_auto.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class FiguresTest {
-    @Test
-    void 당첨_통계_결과_테스트() {
+    private Figures figures;
+    @BeforeEach
+    void setUp() {
         Lottos lottos = new Lottos(Arrays.asList(new Lotto(new LottoNumbers("1, 2, 3, 4, 5, 6"))));
         Lotto winning = new Lotto(new LottoNumbers("1, 2, 3, 4, 5, 6"));
-        Figures figures = new Figures(lottos, winning);
+        figures = new Figures(lottos, winning);
+    }
+    @Test
+    void 당첨_통계_결과_테스트() {
+        assertAll(
+            () -> assertThat(figures.getCountBy(LottoRank.FIRST)).isEqualTo(1),
+            ()-> assertThat(figures.getCountBy(LottoRank.SECOND)).isEqualTo(0),
+            ()-> assertThat(figures.getCountBy(LottoRank.THIRD)).isEqualTo(0),
+            ()-> assertThat(figures.getCountBy(LottoRank.FOURTH)).isEqualTo(0)
+        );
+    }
 
-        assertThat(figures.printFigures())
-                .isEqualTo(
-                "3개 일치 (5000원)- 0개\n" +
-                "4개 일치 (50000원)- 0개\n" +
-                "5개 일치 (1500000원)- 0개\n" +
-                "6개 일치 (2000000000원)- 1개\n");
+    @Test
+    void 수익금_결과_테스트() {
+        assertThat(figures.getTotalWinning()).isEqualTo(LottoRank.FIRST.winnings());
     }
 }
