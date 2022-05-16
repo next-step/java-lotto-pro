@@ -18,9 +18,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketTest {
 
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
-    private static final int LOTTO_SIZE = 6;
     private final NumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
     private LottoTicket lottoTicket;
 
@@ -88,7 +85,7 @@ class LottoTicketTest {
 
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(String.format(LottoTicketErrorCode.INVALID_LOTTO_NUMBER_SIZE.getMessage(), LOTTO_SIZE));
+                .hasMessageContaining(String.format(LottoTicketErrorCode.INVALID_LOTTO_NUMBER_SIZE.getMessage(), LottoTicket.LOTTO_SIZE));
     }
 
     @Test
@@ -109,8 +106,8 @@ class LottoTicketTest {
                 .hasMessageContaining(
                         String.format(
                                 LottoTicketErrorCode.INVALID_LOTTO_NUMBER.getMessage(),
-                                LOTTO_MIN_NUMBER,
-                                LOTTO_MAX_NUMBER)
+                                LottoTicket.LOTTO_MIN_NUMBER,
+                                LottoTicket.LOTTO_MAX_NUMBER)
                 );
     }
 }
