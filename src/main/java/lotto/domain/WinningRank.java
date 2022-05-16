@@ -24,10 +24,24 @@ public enum WinningRank {
     }
 
     public static WinningRank of(int matchCount, boolean matchedBonus) {
+        if (matchCount < 3) {
+            return NONE;
+        }
+        if (matchCount == 5) {
+            return getSecondOrThird(matchedBonus);
+        }
+
         return Arrays.stream(WinningRank.values())
-                .filter(r -> r.matchCount == matchCount && (!r.matchedBonus || matchedBonus))
+                .filter(r -> r.matchCount == matchCount)
                 .findFirst()
-                .orElse(NONE);
+                .orElseThrow(() -> new IllegalArgumentException("매치카운트에 맞는 값이 없습니다."));
+    }
+
+    private static WinningRank getSecondOrThird(boolean matchedBonus) {
+        if (matchedBonus) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public static List<WinningRank> getPrintWinningRanks() {
