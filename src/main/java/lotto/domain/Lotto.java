@@ -58,7 +58,7 @@ public class Lotto {
                 .filter(collect::contains)
                 .count();
 
-        return Rank.matchResult(matchCount);
+        return Rank.matchResult(matchCount, isContainsBonusNumber(winningLotto.bonusNumber));
     }
 
     @Override
@@ -80,3 +80,4 @@ public class Lotto {
         return numbers.toString();
     }
 }
+

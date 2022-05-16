@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 public enum Rank {
     FIRST(6, Money.from(2_000_000_000)),
-    SECOND(5, Money.from(1_500_000)),
-    THIRD(4, Money.from(50_000)),
-    FOURTH(3, Money.from(5_000)),
+    SECOND(5, Money.from(30_000_000)),
+    THIRD(5, Money.from(1_500_000)),
+    FOURTH(4, Money.from(50_000)),
+    FIFTH(3, Money.from(5_000)),
     NONE(0, Money.from(0)),
     ;
 
@@ -26,9 +27,10 @@ public enum Rank {
         return money;
     }
 
-    public static Rank matchResult(int matchCount) {
+    public static Rank matchResult(int matchCount, boolean isContainsBonusNumber) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isEqualMatchCount(matchCount))
+                .filter(rank -> !rank.equals(SECOND) || isContainsBonusNumber)
                 .findAny()
                 .orElse(Rank.NONE);
     }
