@@ -2,16 +2,17 @@ package lotto.controller;
 
 import static lotto.domain.Money.LOTTO_TICKET_PRICE;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-import lotto.domain.LottoNumbers;
+import lotto.controller.converter.LottoResultDTOConverter;
+import lotto.controller.converter.MoneyConverter;
+import lotto.controller.converter.WinningLottoConverter;
+import lotto.controller.dto.LottoResultDTO;
+import lotto.controller.dto.MoneyDTO;
+import lotto.controller.dto.WinningLottoDTO;
 import lotto.domain.PurchasedLottoTickets;
 import lotto.domain.LottoVendingMachine;
 import lotto.domain.LottoWinningResults;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
-import lotto.enums.LottoRank;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -30,7 +31,7 @@ public class LottoController {
 
         reportingLottoTicketsInformation(lottoTickets, purchasedTicketsCount);
 
-        LottoWinningResults winningResults = checkWinningLotto(lottoTickets);
+        LottoWinningResults winningResults = getResultWithWinningLotto(lottoTickets);
 
         reportingLottoResult(purchasedTicketsCount, winningResults);
 
@@ -42,38 +43,21 @@ public class LottoController {
     }
 
     private void reportingLottoResult(int purchasedTicketsCount, LottoWinningResults winningResults) {
-        List<LottoRank> prizedRanks = LottoRank.getPrizedRanks();
-
-        prizedRanks.sort(Collections.reverseOrder());
-
-        OutputView.printTotalString();
-        for (LottoRank prizedRank : prizedRanks) {
-            printWinningStatistics(winningResults, prizedRank);
-        }
-
         int usedMoney = purchasedTicketsCount * LOTTO_TICKET_PRICE;
-        OutputView.printTotalProfitRate(winningResults.profitRate(Money.from(usedMoney)));
+        LottoResultDTO resultDTO = LottoResultDTOConverter.convert(winningResults);
+        resultDTO.setProfitRate(winningResults.profitRate(Money.from(usedMoney)));
+        OutputView.printResultReporting(resultDTO);
     }
 
-    private void printWinningStatistics(LottoWinningResults winningResults, LottoRank prizedRank) {
-        OutputView.printTotalWinningCount(
-                prizedRank.getCountOfMatch(),
-                prizedRank.getWinningMoney(),
-                winningResults.winingRankCount(prizedRank));
-    }
-
-    private LottoWinningResults checkWinningLotto(PurchasedLottoTickets lottoTickets) {
-        List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
-        WinningLotto winningLotto = WinningLotto.from(LottoNumbers.from(winningLottoNumbers));
-        List<LottoNumbers> lottoNumbers = lottoTickets.getLottoNumbers();
-        List<LottoRank> ranks = lottoNumbers.stream().
-                map(ln -> winningLotto.match(ln)).
-                collect(Collectors.toList());
-        return LottoWinningResults.from(ranks);
+    private LottoWinningResults getResultWithWinningLotto(PurchasedLottoTickets lottoTickets) {
+        WinningLottoDTO winningLottoDTO = InputView.inputLottoInformation();
+        WinningLotto winningLotto = WinningLottoConverter.convert(winningLottoDTO);
+        return lottoTickets.checkWinningLotto(winningLotto);
     }
 
     private PurchasedLottoTickets buyLottoTickets() {
-        Money inputMoney = InputView.inputMoney();
+        MoneyDTO moneyDTO = InputView.inputMoney();
+        Money inputMoney = MoneyConverter.convert(moneyDTO);
         return vendingMachine.purchase(inputMoney);
     }
 }

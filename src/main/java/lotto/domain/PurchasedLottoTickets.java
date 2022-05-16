@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.enums.LottoRank;
 
 public class PurchasedLottoTickets {
     private final List<LottoNumbers> lottoNumbers;
@@ -15,12 +15,15 @@ public class PurchasedLottoTickets {
         return new PurchasedLottoTickets(lottoNumbers);
     }
 
-    public List<LottoNumbers> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
-    }
-
     public int purchasedTicketsCount() {
         return this.lottoNumbers.size();
+    }
+
+    public LottoWinningResults checkWinningLotto(WinningLotto winningLotto) {
+        List<LottoRank> ranks = lottoNumbers.stream().
+                map(ln -> winningLotto.match(ln)).
+                collect(Collectors.toList());
+        return LottoWinningResults.from(ranks);
     }
 
     @Override

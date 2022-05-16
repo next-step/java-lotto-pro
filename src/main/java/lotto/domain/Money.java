@@ -31,7 +31,7 @@ public class Money {
         return new Money(money);
     }
 
-    public int getQuantityFromMoney() {
+    public int calculatePurchasableCount() {
         return money/LOTTO_TICKET_PRICE;
     }
 }

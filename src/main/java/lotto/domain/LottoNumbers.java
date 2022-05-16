@@ -65,6 +65,10 @@ public class LottoNumbers {
                 count();
     }
 
+    public boolean checkContains(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }

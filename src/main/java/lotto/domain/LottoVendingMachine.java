@@ -14,7 +14,7 @@ public class LottoVendingMachine {
     }
 
     public PurchasedLottoTickets purchase(Money money) {
-        int quantity = money.getQuantityFromMoney();
+        int quantity = money.calculatePurchasableCount();
         return generateLottoTickets(quantity);
     }
 
