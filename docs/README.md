@@ -157,10 +157,12 @@
 - LottoVendingMachine
   - 로또 구매할 금액과 수동으로 적힌 로또 list 를 입력하면 나머지는 자동 발급해서 로또 paper 를 반환한다.
   - 로또 구매할 금액 보다 수동으로 적은 로또 list 가 크면 에러가 발생한다.
-  -  LottoIssuedStorage 를 가지고 있다.
-
+  - LottoIssuedStorage 를 가지고 있다.
+- ManualIssuedInformation
+  - 수동으로 발급된 정보를 가진다.
+- AutoIssuedInformation
+  - 자동으로 발급된 정보를 가진다.
 - LottoIssuedInformation
-  - 로또 수동 장수와 자동 장수 에 대한 정보를 가진다.
-
+  - ManualIssuedInformation 와 AutoIssuedInformation 에 대한 정보를 가진다.
 - LottoHistoryStorage
   - LottoIssuedInformation 정보들을 가지고 있다.
