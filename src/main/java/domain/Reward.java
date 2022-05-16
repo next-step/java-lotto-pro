@@ -24,4 +24,8 @@ public enum Reward {
                 .findAny()
                 .orElse(MISS);
     }
+
+    public Money getPrize() {
+        return prize;
+    }
 }

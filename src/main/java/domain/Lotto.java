@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public final class Lotto {
-
+    public static final Money PRICE = new Money(1_000L);
     private static final int LOTTO_SELECTABLE_SIZE = 6;
 
     private final Set<LottoNumber> numbers;

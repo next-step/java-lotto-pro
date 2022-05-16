@@ -21,11 +21,31 @@ public final class Money {
         return this.value >= other.value;
     }
 
+    public Money add(Money other) {
+        if (other.value == 0) {
+            return this;
+        }
+        return new Money(this.value + other.value);
+    }
+
+    public Money multiply(int multiplicand) {
+        if (multiplicand == 1) {
+            return this;
+        }
+        return new Money(this.value * multiplicand);
+    }
+
     public Money subtract(Money other) {
         if (other.value == 0) {
             return this;
         }
         return new Money(this.value - other.value);
+    }
+
+    public double calculateYield(Money investment) {
+        double yield = ((this.value - investment.value) / ((double) investment.value)) * 100;
+        double rounded = Math.round(yield * 100) / 100.0;
+        return rounded;
     }
 
     @Override
@@ -40,4 +60,6 @@ public final class Money {
     public int hashCode() {
         return Objects.hash(value);
     }
+
+
 }

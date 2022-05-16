@@ -51,4 +51,26 @@ class MoneyTest {
         assertThatThrownBy(() -> money.subtract(new Money(1_000)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("돈을 덧셈한다.")
+    @Test
+    void add() {
+        Money money = new Money(10_000);
+        assertThat(money.add(new Money(1_000))).isEqualTo(new Money(11_000));
+    }
+
+    @DisplayName("돈을 곱셈한다.")
+    @Test
+    void multiply() {
+        Money money = new Money(10_000);
+        assertThat(money.multiply(2)).isEqualTo(new Money(20_000));
+    }
+
+    @DisplayName("수익률을 계산한다.")
+    @Test
+    void calculateYield() {
+        Money reward = new Money(10_000);
+        Money investment = new Money(1_000);
+        assertThat(reward.calculateYield(investment)).isEqualTo(900.0);
+    }
 }
