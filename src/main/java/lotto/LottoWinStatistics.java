@@ -17,12 +17,6 @@ public class LottoWinStatistics {
         this.returnRate = calculate();
     }
 
-    public LottoWinStatistics(final Lottos lottos, final LottoNumbers winningLottoNumbers) {
-        this.price = lottos.purchasePrice();
-        this.winResultGroup = lottos.end(winningLottoNumbers);
-        this.returnRate = calculate();
-    }
-
     private Rate calculate() {
         if (winResultGroup.totalWinningPrice().isZero()) {
             return Rate.valueOf(EMPTY_VALUE);

@@ -17,7 +17,8 @@ public class LottoMain {
 
     private static void drawingOfLots(final Lottos lottos, final InputView inputView,
                                       final ResultView resultView) {
+        final LottoNumbers winningNumbers = LottoMachine.winningLottoNumbers(inputView.inputDrawingOfLots());
         resultView.drawingOfLots(
-                new LottoWinStatistics(lottos, LottoMachine.winningLottoNumbers(inputView.inputDrawingOfLots())));
+                new LottoWinStatistics(lottos.purchasePrice(), lottos.end(winningNumbers)));
     }
 }
