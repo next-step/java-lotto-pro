@@ -34,19 +34,19 @@ public class LottoTicket {
     }
 
 
-    public int getMatchCountWith(LottoTicket lottoTicket) {
-        return lottoTicket.match(lottoElements);
+    public int getMatchCountWithMyTicket(LottoTicket lottoTicket) {
+        return lottoTicket.getMatchCountWithWinnerTicket(lottoElements);
     }
 
-    public int match(List<LottoElement> compareLottoElements) {
+    public int getMatchCountWithWinnerTicket(List<LottoElement> compareLottoElements) {
         int matchCount = 0;
         for (int i = 0; i < LOTTO_ELEMENTS_SIZE; i++) {
-            matchCount = matchCount + compare(compareLottoElements.get(i));
+            matchCount = matchCount + isMatch(compareLottoElements.get(i));
         }
         return matchCount;
     }
 
-    private int compare(LottoElement lottoElement) {
+    private int isMatch(LottoElement lottoElement) {
         if (lottoElements.contains(lottoElement)) {
             return 1;
         }

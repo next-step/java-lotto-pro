@@ -52,7 +52,7 @@ public class LottoManager {
         LinkedHashMap<String, Integer> statistics = new LinkedHashMap<>();
         initStatistics(statistics);
         for (LottoTicket lottoTicket : lottoTickets) {
-            int matchNumber = winLotto.getMatchCountWith(lottoTicket);
+            int matchNumber = winLotto.getMatchCountWithMyTicket(lottoTicket);
             String matchNumberToString = numberToLottoReward.get(matchNumber);
             statistics.replace(matchNumberToString, statistics.get(matchNumberToString) + 1);
         }
