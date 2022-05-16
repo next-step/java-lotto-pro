@@ -9,13 +9,25 @@ import java.util.List;
 import java.util.Map;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
+    static Lottos lottos;
+
+    @BeforeAll
+    public static void createLottosList() {
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
+        lottos = new Lottos(lottoList);
+    }
 
     @Test
-    public void 로또_생성() {
+    public void 로또_생성_리스트() {
         Lotto lotto = new Lotto();
         List<Integer> lottoNumbers = lotto.getLottoNumbers();
 
@@ -25,8 +37,14 @@ public class LottoTest {
     }
 
     @Test
+    public void 로또_생성_자동() {
+        Lottos autoLottos = new Lottos(14000);
+        assertThat(autoLottos.getLottosSize()).isEqualTo(14);
+    }
+
+    @Test
     public void 금액_입력_로또_개수확인() {
-        Lottos lottos = LottoMachine.createLottos(14000);
+        Lottos lottos = new Lottos(14000);
         ResultView.printLottoPurchase(lottos);
 
         assertThat(lottos.getLottosSize()).isEqualTo(14);
@@ -56,14 +74,6 @@ public class LottoTest {
     public void 전체로또_당첨순위_확인() {
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
-        Lottos lottos = new Lottos(lottoList);
-
         Map<Integer, Rank> winPriceMap = lottos.calculateWinPriceMap(winningLotto);
         assertThat(winPriceMap.get(3).getCount()).isEqualTo(1);
         assertThat(winPriceMap.get(4).getCount()).isEqualTo(1);
@@ -77,27 +87,47 @@ public class LottoTest {
     public void 전체로또_당첨금액_확인() {
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
-        Lottos lottos = new Lottos(lottoList);
-
         int winningPrice = lottos.winningPrice(winningLotto);
         assertThat(winningPrice).isEqualTo(2000000000 + 1500000 + 50000 + 5000);
     }
 
     @Test
-    @DisplayName("구입금액 숫자 아님 예외처리 확인")
     public void 구입금액_숫자_아님_예외처리() {
         assertThatThrownBy(() -> InputView.validateMoneyInput("NotNumber")).isInstanceOf(RuntimeException.class);
     }
 
     @Test
-    @DisplayName("구입금액 음수 시 예외처리 확인")
     public void 구입금액_음수_예외처리_확인() {
         assertThatThrownBy(() -> InputView.validateMoneyInput("-10000")).isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    public void 수익률_수익_확인() {
+        List<Lotto> lossLottoList = new ArrayList<>();
+        lossLottoList.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        lossLottoList.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
+        lossLottoList.add(new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)));
+        Lottos lossLottos = new Lottos(lossLottoList);
+
+        int winPrice = lossLottos.winningPrice(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        double profitRate = ResultView.printProfit(lossLottos.getLottosSize() * 1000, winPrice);
+        assertThat(profitRate).isGreaterThan(1);
+    }
+
+    @Test
+    public void 수익률_손해_확인() {
+        List<Lotto> winLottoList = new ArrayList<>();
+        winLottoList.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        winLottoList.add(new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10)));
+        winLottoList.add(new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)));
+        winLottoList.add(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        winLottoList.add(new Lotto(Arrays.asList(8, 9, 10, 11, 12, 13)));
+        winLottoList.add(new Lotto(Arrays.asList(9, 10, 11, 12, 13, 14)));
+        Lottos winLottos = new Lottos(winLottoList);
+
+        int winPrice = winLottos.winningPrice(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        double profitRate = ResultView.printProfit(winLottos.getLottosSize() * 1000, winPrice);
+        assertThat(profitRate).isLessThan(1);
+    }
+
 }
