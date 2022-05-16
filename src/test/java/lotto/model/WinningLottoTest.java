@@ -46,7 +46,7 @@ public class WinningLottoTest {
 
         WinningStatus winningStatus = lottos.compareLottos(winningLotto);
 
-        assertThat(winningStatus.findEarningsRate(lottos.lottosTotalPrice())).isEqualTo(0.35);
+        assertThat(winningStatus.findEarningsRate(new PurchasePrice(14000))).isEqualTo(0.35);
     }
 
     @Test

@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.model.Lottos;
 import lotto.model.MatchPoint;
+import lotto.model.PurchasePrice;
 import lotto.model.WinningStatus;
 import lotto.util.MessageUtil;
 
@@ -52,7 +53,7 @@ public class ResultView {
         }
     }
 
-    public void printTotalEarningsRate(WinningStatus winningStatus, long lottosTotalPrice) {
-        message.printlnMessage(String.format(TOTAL_EARNINGS_RATE_MESSAGE, winningStatus.findEarningsRate(lottosTotalPrice)));
+    public void printTotalEarningsRate(WinningStatus winningStatus, PurchasePrice purchasePrice) {
+        message.printlnMessage(String.format(TOTAL_EARNINGS_RATE_MESSAGE, winningStatus.findEarningsRate(purchasePrice)));
     }
 }
