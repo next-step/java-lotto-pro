@@ -79,6 +79,23 @@ public class LottoGame {
         setEarningRate();
     }
 
+    public int getTicketCount() {
+        return this.purchasePrice / TICKET_UNIT_PRICE;
+    }
+
+    public Map<Integer, Integer> getScore() {
+        return new HashMap<>(this.scoreMap);
+    }
+
+
+    public void setWinnerNumbers(String numbersWithComma) {
+        this.winnerNumbers = new LottoTicket(numbersWithComma);
+    }
+
+    public void printGameResult() {
+        ResultView.printGameResult(this.getScore(), this.earningRate);
+    }
+
     private void setEarningRate() {
         long totalEarning = 0;
         for (Map.Entry<Integer, Integer> entry : scoreMap.entrySet()) {
@@ -100,26 +117,10 @@ public class LottoGame {
         }
     }
 
-    public int getTicketCount() {
-        return this.purchasePrice / TICKET_UNIT_PRICE;
-    }
-
-    public Map<Integer, Integer> getScore() {
-        return new HashMap<>(this.scoreMap);
-    }
-
     private static void isValidPurchasePrice(int purchasePrice) {
         if (purchasePrice < TICKET_UNIT_PRICE) {
             throw new RuntimeException("Can't buy ticket. Game will exit.");
         }
-    }
-
-    public void setWinnerNumbers(String numbersWithComma) {
-        this.winnerNumbers = new LottoTicket(numbersWithComma);
-    }
-
-    public void printGameResult() {
-        ResultView.printGameResult(this.getScore(), this.earningRate);
     }
 
     private int equalNumberCount(LottoTicket ticketNumbers) {
