@@ -20,13 +20,47 @@ public class Application {
 
         LottoVendingMachine machine = new LottoVendingMachine();
 
-        LottoTicket lottoTicket = machine.sellTicket(new Money(InputView.readMoney()));
+        LottoTicket lottoTicket = machine.sellTicket(money());
         ResultView.printTicket(lottoTicket);
 
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.readWinningNumbers());
         LottoResult result = machine.check(
                 lottoTicket,
-                new LottoWin(winningNumbers, matchingPrize));
+                new LottoWin(winningNumbers(), matchingPrize));
         ResultView.printStats(result);
+    }
+
+    private static Money money() {
+        Money money = takeMoney();
+        while (money == null) {
+            money = takeMoney();
+        }
+        return money;
+    }
+
+    private static Money takeMoney() {
+        try {
+            return new Money(InputView.readMoney());
+        } catch (IllegalArgumentException e) {
+            ResultView.printExceptionMessage(e.getMessage());
+            return null;
+        }
+    }
+
+    private static WinningNumbers winningNumbers() {
+        WinningNumbers winningNumbers = getWinningNumbers();
+        while (winningNumbers == null) {
+            winningNumbers = getWinningNumbers();
+        }
+
+        return winningNumbers;
+    }
+
+    private static WinningNumbers getWinningNumbers() {
+        try {
+            return new WinningNumbers(InputView.readWinningNumbers());
+        } catch (IllegalArgumentException e) {
+            ResultView.printExceptionMessage(e.getMessage());
+            return null;
+        }
     }
 }

@@ -23,4 +23,8 @@ public class ResultView {
         }
         System.out.println("총 수익률은 " + result.getEarningRatio() + "입니다. (>1: 수익, <1: 손실)");
     }
+
+    public static void printExceptionMessage(String message) {
+        System.out.println("[ERROR] " + message);
+    }
 }
