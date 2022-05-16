@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
     @Test
-    void 로또번호_생성() {
+    void 로또번호_같은_객체_확인() {
         Assertions.assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
     }
 
