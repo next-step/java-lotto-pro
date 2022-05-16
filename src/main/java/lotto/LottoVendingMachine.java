@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoTicket;
 import lotto.dto.LottoResult;
 import lotto.dto.LottoResultItem;
 import lotto.dto.LottoWin;

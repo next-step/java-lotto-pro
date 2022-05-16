@@ -1,4 +1,6 @@
-package lotto;
+package lotto.domain;
+
+import lotto.Match;
 
 import java.util.HashSet;
 import java.util.List;

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public class LottoNumber {
     public static final String LOTTO_NUMBER_OUT_OF_BOUNDS_EXCEPTION_MESSAGE = "숫자가 정상적인 범위를 벗어납니다.";

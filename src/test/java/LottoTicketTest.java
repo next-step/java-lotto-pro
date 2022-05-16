@@ -1,5 +1,5 @@
-import lotto.LottoNumber;
-import lotto.LottoTicket;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.Match;
 import lotto.TicketCheckResult;
 import org.junit.jupiter.api.Test;

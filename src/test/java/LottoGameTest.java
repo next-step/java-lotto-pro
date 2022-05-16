@@ -1,5 +1,5 @@
-import lotto.LottoGame;
-import lotto.LottoNumber;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoNumber;
 import lotto.Match;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

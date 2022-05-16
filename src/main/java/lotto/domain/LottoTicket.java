@@ -1,4 +1,8 @@
-package lotto;
+package lotto.domain;
+
+import lotto.LottoNumbersGenerator;
+import lotto.Match;
+import lotto.TicketCheckResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
