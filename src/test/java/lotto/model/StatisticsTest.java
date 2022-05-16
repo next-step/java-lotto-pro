@@ -17,8 +17,8 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class StatisticsTest {
     private List<Lotto> lottos;
-    private Lotto win;
-    private LottoNumber bonus;
+    private WinLotto winLotto;
+    private int bonus;
 
     @BeforeEach
     void setup() {
@@ -40,15 +40,15 @@ public class StatisticsTest {
                 new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44))
         );
 
-        win = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        bonus = new LottoNumber(45);
+        bonus = 45;
+        winLotto = new WinLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonus);
     }
 
     @Test
     @DisplayName("로또 숫자리스트와 로또 당첨 번호를 비교하고 당첨된 숫자 갯수를 결과 맵에 count하여 담는다.")
     void 로또숫자비교_test() {
         // when
-        Statistics statistics = new Statistics(win, bonus, lottos);
+        Statistics statistics = new Statistics(winLotto, lottos);
 
         // then
         assertThat(statistics.getResultMap().get(Rank.FIRST)).isEqualTo(0);
@@ -66,7 +66,7 @@ public class StatisticsTest {
         lottos = Arrays.asList(lotto);
 
         // when
-        Statistics statistics = new Statistics(win, bonus, lottos);
+        Statistics statistics = new Statistics(winLotto, lottos);
 
         // then
         assertThat(statistics.getResultMap().get(rank)).isEqualTo(result);
@@ -87,7 +87,7 @@ public class StatisticsTest {
     @DisplayName("로또 총 구입 갯수는 14이다")
     void 로또_총갯수_test() {
         // when
-        Statistics statistics = new Statistics(win, bonus, lottos);
+        Statistics statistics = new Statistics(winLotto, lottos);
 
         // then
         assertThat(statistics.getTotalCount()).isEqualTo(14);
@@ -97,7 +97,7 @@ public class StatisticsTest {
     @DisplayName("로또 총 수익금액은 5000원이다.")
     void 로또_총수익_test() {
         // when
-        Statistics statistics = new Statistics(win, bonus, lottos);
+        Statistics statistics = new Statistics(winLotto, lottos);
         assertThat(statistics.getTotalPrize()).isEqualTo(5000);
     }
 
@@ -105,21 +105,9 @@ public class StatisticsTest {
     @DisplayName("로또 총 수익 5000원, 총구매금액 14000원이고 수익률은 0.35이다.")
     void 수익률_test() {
         // when
-        Statistics statistics = new Statistics(win, bonus, lottos);
+        Statistics statistics = new Statistics(winLotto, lottos);
 
         // then
         assertThat(statistics.getProfit()).isEqualTo(0.35);
-    }
-
-    @Test
-    @DisplayName("보너스번호가 당첨번호에 존재하면 IllegalArgumentException을 발생시킨다.")
-    void 보너스번호_예외_test() {
-        //given
-        bonus = new LottoNumber(1);
-
-        // when - then
-        assertThatThrownBy(() -> new Statistics(win, bonus, lottos))
-                .isInstanceOf(IllegalArgumentException.class)
-                .withFailMessage("보너스번호가 지난당첨번호안에 중복이 될수 없습니다.");
     }
 }

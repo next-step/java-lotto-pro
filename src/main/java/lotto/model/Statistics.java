@@ -18,25 +18,20 @@ public class Statistics {
         return resultMap;
     }
 
-    public Statistics(Lotto win, LottoNumber bonus, List<Lotto> lottos) {
-        validateBonus(win, bonus);
-        lottos.forEach(lotto -> compareNumber(win, lotto, bonus));
+    public Statistics(WinLotto winLotto, List<Lotto> lottos) {
+        lottos.forEach(lotto -> compareNumber(winLotto, lotto));
     }
 
-    private void validateBonus(Lotto win, LottoNumber bonus) {
-        if (win.getLottoNumber().contains(bonus)) {
-            throw new IllegalArgumentException("보너스번호가 지난당첨번호안에 중복이 될수 없습니다.");
-        }
-    }
-
-    private void compareNumber(Lotto win, Lotto lotto, LottoNumber bonus) {
+    private void compareNumber(WinLotto winLotto, Lotto lotto) {
         long count = lotto.getLottoNumber().stream()
-                .filter(lottoNumber -> win.getLottoNumber().contains(lottoNumber))
+                .filter(lottoNumber -> winLotto.getLottoNumber().contains(lottoNumber))
                 .count();
 
-        boolean matchBonus = lotto.getLottoNumber().contains(bonus);
+        resultMap.computeIfPresent(Rank.valueOf(count, isMatchedBonus(winLotto, lotto)), (k, v) -> Math.toIntExact(v + 1));
+    }
 
-        resultMap.computeIfPresent(Rank.valueOf(count, matchBonus), (k, v) -> Math.toIntExact(v + 1));
+    private boolean isMatchedBonus(WinLotto winLotto, Lotto lotto) {
+        return lotto.getLottoNumber().contains(winLotto.getBonus());
     }
 
     public long getTotalPrize() {
