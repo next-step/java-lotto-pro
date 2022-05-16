@@ -4,6 +4,10 @@ import lotto_auto.model.*;
 import lotto_auto.view.Output;
 import lotto_auto.view.UserInputView;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class GameController {
     private final Output output = new Output();
 
@@ -53,15 +57,16 @@ public class GameController {
         do {
             output.showWinningLottoNotice();
             userinput = UserInputView.getUserInput();
-            isValid = isValidLottoNumber(userinput);
+            isValid = isValidLottoNumbers(userinput);
         } while (!isValid);
-
-        return new Lotto(new LottoNumbers(userinput));
+        List<LottoNumber> numbers = getLottoNumberListFromStr(userinput);
+        return new Lotto(new LottoNumbers(numbers));
     }
 
-    private boolean isValidLottoNumber(String lottoString) {
+    private boolean isValidLottoNumbers(String lottoString) {
         try {
-            new LottoNumbers(lottoString);
+            List<LottoNumber> numbers = getLottoNumberListFromStr(lottoString);
+            new LottoNumbers(numbers);
             return true;
         } catch (IllegalArgumentException e) {
             output.showError(e);
@@ -72,6 +77,20 @@ public class GameController {
     private Lottos buyLottos(Money money) {
         output.showPurchaseLottoCountNotice(money.canBuyLottoCount());
         return LottoGenerator.createLottos(money.canBuyLottoCount());
+    }
+
+    private List<LottoNumber> getLottoNumberListFromStr(String lottoStr) {
+        try {
+            String delimiter = ", ";
+            return Arrays.stream(lottoStr.split(delimiter))
+                    .map(Integer::parseInt)
+                    .map(LottoNumber::new)
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            IllegalArgumentException error = new IllegalArgumentException(LottoNumber.NOT_NUMBER);
+            output.showError(error);
+            throw error;
+        }
     }
 
 }
