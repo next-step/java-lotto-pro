@@ -22,7 +22,7 @@ class LottoTest {
     @Test
     void Lotto_의_크기를_알_수_있다() {
         Lotto lotto = new Lotto();
-        assertThat(lotto.size()).isEqualTo(0);
+        assertThat(lotto.size()).isZero();
     }
 
 }

@@ -13,19 +13,21 @@ public class AggregatorTest {
 
     @BeforeEach
     void setUp() {
-        ContainCounts containCounts = new ContainCounts();
-        containCounts.add(new ContainCount(1));
-        containCounts.add(new ContainCount(2));
-        containCounts.add(new ContainCount(3));
-        containCounts.add(new ContainCount(3));
-        containCounts.add(new ContainCount(4));
-        containCounts.add(new ContainCount(5));
-        containCounts.add(new ContainCount(5));
-        containCounts.add(new ContainCount(6));
-        containCounts.add(new ContainCount(6));
-        containCounts.add(new ContainCount(6));
+        Ranks ranks = new Ranks();
+        ranks.add(Prize.FIRST);
+        ranks.add(Prize.FIRST);
+        ranks.add(Prize.FIRST);
+        ranks.add(Prize.SECOND);
+        ranks.add(Prize.SECOND);
+        ranks.add(Prize.THIRD);
+        ranks.add(Prize.FOURTH);
+        ranks.add(Prize.FOURTH);
+        ranks.add(Prize.FIFTH);
+        ranks.add(Prize.FIFTH);
+        ranks.add(Prize.NONE);
+        ranks.add(Prize.NONE);
 
-        aggregator = new Aggregator(containCounts);
+        aggregator = new Aggregator(ranks);
     }
 
     @ParameterizedTest
@@ -36,6 +38,6 @@ public class AggregatorTest {
 
     @Test
     void 총_구매금액에_대한_수익률_을_확인할_수_있다() {
-        assertThat(aggregator.yield().setScale(0, RoundingMode.DOWN)).isEqualTo(new BigDecimal(200155));
+        assertThat(aggregator.yield().setScale(0, RoundingMode.DOWN)).isEqualTo(new BigDecimal(169296));
     }
 }
