@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public enum Prize {
+public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
@@ -13,12 +13,12 @@ public enum Prize {
     private final int count;
     private final long money;
 
-    Prize(int count, long money) {
+    Rank(int count, long money) {
         this.count = count;
         this.money = money;
     }
 
-    public static Prize valueOf(int containCount, boolean containBonusNumber) {
+    public static Rank valueOf(int containCount, boolean containBonusNumber) {
         if (LottoNumbers.SIZE < containCount)
             return NONE;
 
@@ -29,7 +29,7 @@ public enum Prize {
             return containBonusNumber ? SECOND : THIRD;
         }
 
-        return Arrays.stream(new Prize[] { FIRST, FOURTH, FIFTH, NONE })
+        return Arrays.stream(new Rank[] { FIRST, FOURTH, FIFTH, NONE })
                 .filter(it -> it.count == containCount)
                 .findAny().orElse(NONE);
     }

@@ -9,11 +9,11 @@ public class Aggregator {
         this.ranks = ranks;
     }
 
-    public long countGroupBy(Prize prize) {
-        if (!this.ranks.contains(prize))
+    public long countGroupBy(Rank rank) {
+        if (!this.ranks.contains(rank))
             return 0;
 
-        return this.ranks.count(prize);
+        return this.ranks.count(rank);
     }
 
     public BigDecimal yield() {

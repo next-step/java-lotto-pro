@@ -16,7 +16,7 @@ public class ConsoleOutputView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        Arrays.stream(Prize.values()).sorted(Collections.reverseOrder()).filter(Prize::win).forEach(prize -> {
+        Arrays.stream(Rank.values()).sorted(Collections.reverseOrder()).filter(Rank::win).forEach(prize -> {
             System.out.println(prize + " - " + aggregator.countGroupBy(prize) + "개");
         });
         BigDecimal bd = aggregator.yield().setScale(2, RoundingMode.DOWN);

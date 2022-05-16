@@ -8,7 +8,7 @@ class RanksTest {
     void Ranks에_Rank를_추가할_수_있다() {
         Ranks ranks = new Ranks();
         assertDoesNotThrow(() -> {
-            ranks.add(Prize.NONE);
+            ranks.add(Rank.NONE);
         });
     }
 

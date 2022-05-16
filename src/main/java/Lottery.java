@@ -19,8 +19,8 @@ public class Lottery {
         return ranks;
     }
 
-    private Prize get(LottoNumbers lottoNumbers) {
-        return Prize.valueOf(
+    private Rank get(LottoNumbers lottoNumbers) {
+        return Rank.valueOf(
                 Math.toIntExact(StreamSupport
                         .stream(lottoNumbers.spliterator(), false)
                         .filter(this.lottoNumbers::contains)

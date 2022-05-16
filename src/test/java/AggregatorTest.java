@@ -14,26 +14,26 @@ public class AggregatorTest {
     @BeforeEach
     void setUp() {
         Ranks ranks = new Ranks();
-        ranks.add(Prize.FIRST);
-        ranks.add(Prize.FIRST);
-        ranks.add(Prize.FIRST);
-        ranks.add(Prize.SECOND);
-        ranks.add(Prize.SECOND);
-        ranks.add(Prize.THIRD);
-        ranks.add(Prize.FOURTH);
-        ranks.add(Prize.FOURTH);
-        ranks.add(Prize.FIFTH);
-        ranks.add(Prize.FIFTH);
-        ranks.add(Prize.NONE);
-        ranks.add(Prize.NONE);
+        ranks.add(Rank.FIRST);
+        ranks.add(Rank.FIRST);
+        ranks.add(Rank.FIRST);
+        ranks.add(Rank.SECOND);
+        ranks.add(Rank.SECOND);
+        ranks.add(Rank.THIRD);
+        ranks.add(Rank.FOURTH);
+        ranks.add(Rank.FOURTH);
+        ranks.add(Rank.FIFTH);
+        ranks.add(Rank.FIFTH);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
 
         aggregator = new Aggregator(ranks);
     }
 
     @ParameterizedTest
     @CsvSource(value = { "FIRST:3", "SECOND:2", "THIRD:1", "FOURTH:2", "NONE:2" }, delimiterString = ":")
-    void 로또별_당첨번호_포함_갯수_목록_중_Prize_별_집계_갯수를_확인할_수_있다(Prize prize, long count) {
-        assertThat(aggregator.countGroupBy(prize)).isEqualTo(count);
+    void 로또별_당첨번호_포함_갯수_목록_중_Prize_별_집계_갯수를_확인할_수_있다(Rank rank, long count) {
+        assertThat(aggregator.countGroupBy(rank)).isEqualTo(count);
     }
 
     @Test

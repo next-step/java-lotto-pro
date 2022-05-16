@@ -2,35 +2,35 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Ranks implements Iterable<Prize> {
-    private final List<Prize> prizes;
+public class Ranks implements Iterable<Rank> {
+    private final List<Rank> ranks;
 
     public Ranks() {
-        this.prizes = new ArrayList<>();
+        this.ranks = new ArrayList<>();
     }
 
-    public void add(Prize prize) {
-        this.prizes.add(prize);
+    public void add(Rank rank) {
+        this.ranks.add(rank);
     }
 
-    public boolean contains(Prize prize) {
-        return this.prizes.contains(prize);
+    public boolean contains(Rank rank) {
+        return this.ranks.contains(rank);
     }
 
     public int size() {
-        return this.prizes.size();
+        return this.ranks.size();
     }
 
-    public long count(Prize prize) {
-        return this.prizes.stream().filter(prize::equals).count();
+    public long count(Rank rank) {
+        return this.ranks.stream().filter(rank::equals).count();
     }
 
     public long totalPrize() {
-        return this.prizes.stream().distinct().mapToLong(Prize::prize).sum();
+        return this.ranks.stream().distinct().mapToLong(Rank::prize).sum();
     }
 
     @Override
-    public Iterator<Prize> iterator() {
-        return this.prizes.iterator();
+    public Iterator<Rank> iterator() {
+        return this.ranks.iterator();
     }
 }

@@ -45,8 +45,8 @@ class LotteryTest {
         lotto.add(lottoNumbers2);
 
         assertThat(lottery.get(lotto))
-                .contains(Prize.FIRST)
-                .contains(Prize.FIFTH);
+                .contains(Rank.FIRST)
+                .contains(Rank.FIFTH);
     }
 
 }
