@@ -1,14 +1,12 @@
 package lotto;
 
 import static java.util.stream.IntStream.range;
-import static lotto.Lotto.LottoType.AUTO;
 
 import generic.Money;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import lotto.Lotto.LottoType;
 
 public class Lottos {
 
@@ -23,21 +21,17 @@ public class Lottos {
     }
 
     public static Lottos purchaseAuto(final Money purchaseMoney) {
-        return purchase(purchaseMoney, AUTO);
+        return purchase(purchaseMoney);
     }
 
-    private static Lottos purchase(final Money purchaseMoney, final LottoType lottoType) {
-        return new Lottos(buyLottoList(purchaseMoney, lottoType));
+    private static Lottos purchase(final Money purchaseMoney) {
+        return new Lottos(buyLottoList(purchaseMoney));
     }
 
-    private static List<Lotto> buyLottoList(final Money purchaseMoney, final LottoType lottoType) {
-        if (lottoType.isAuto()) {
-            return range(0, purchaseMoney.divide(Lotto.PURCHASE_PRICE).getIntValue())
-                    .mapToObj(value -> Lotto.generate())
-                    .collect(Collectors.toList());
-        }
-
-        throw new IllegalArgumentException("잘못된 타입입니다.");
+    private static List<Lotto> buyLottoList(final Money purchaseMoney) {
+        return range(0, purchaseMoney.divide(Lotto.PURCHASE_PRICE).getIntValue())
+                .mapToObj(value -> Lotto.generate())
+                .collect(Collectors.toList());
     }
 
     public int size() {
