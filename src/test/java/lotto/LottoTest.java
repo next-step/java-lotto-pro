@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
@@ -86,5 +87,17 @@ public class LottoTest {
 
         int winningPrice = lottos.winningPrice(winningLotto);
         assertThat(winningPrice).isEqualTo(2000000000 + 1500000 + 50000 + 5000);
+    }
+
+    @Test
+    @DisplayName("구입금액 숫자 아님 예외처리 확인")
+    public void 구입금액_숫자_아님_예외처리() {
+        assertThatThrownBy(() -> InputView.validateMoneyInput("NotNumber")).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("구입금액 음수 시 예외처리 확인")
+    public void 구입금액_음수_예외처리_확인() {
+        assertThatThrownBy(() -> InputView.validateMoneyInput("-10000")).isInstanceOf(RuntimeException.class);
     }
 }
