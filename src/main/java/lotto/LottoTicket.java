@@ -36,18 +36,19 @@ public class LottoTicket {
         }
     }
 
-    public Map<Match, Integer> check(final List<LottoNumber> winningNumbers) {
+    public TicketCheckResult check(final List<LottoNumber> winningNumbers) {
         Map<Match, Integer> result = new HashMap<>();
         for (int i = 0; i <= LottoGame.SIZE; i++) {
             result.put(new Match(i), 0);
         }
 
-        lottoGames.forEach(lottoGame -> {
-            Match match = lottoGame.check(winningNumbers);
-            result.put(match, result.get(match) + 1);
-        });
+        List<Match> matches = lottoGames.stream()
+                .map(game -> game.check(winningNumbers))
+                .collect(Collectors.toList());
 
-        return result;
+        matches.forEach(match -> result.put(match, result.get(match) + 1));
+
+        return new TicketCheckResult(result);
     }
 
     @Override
