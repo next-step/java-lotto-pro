@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int LOTTO_SIZE = 6;
+    private static final int SIZE = 6;
 
     private final Set<LottoNumber> lotto;
 
@@ -21,16 +21,16 @@ public class Lotto {
 
     private void validate() {
         if (isInvalidNumberCount()) {
-            throw new IllegalArgumentException("중복되지 않은 6개의 숫자를 입력해주세요.");
+            throw new IllegalArgumentException(String.format("중복되지 않은 %d개의 숫자를 입력해주세요.", SIZE));
         }
     }
 
     private boolean isInvalidNumberCount() {
-        return lotto.size() != LOTTO_SIZE;
+        return lotto.size() != SIZE;
     }
 
-    public static int getLottoSize() {
-        return LOTTO_SIZE;
+    public static int getSize() {
+        return SIZE;
     }
 
     int match(List<Integer> winnerNumbers) {

@@ -26,7 +26,7 @@ class LottoTest {
         assertThatThrownBy(() -> {
             Lotto newLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("중복되지 않은 6개의 숫자를 입력해주세요.");
+                .hasMessageContaining(String.format("중복되지 않은 %d개의 숫자를 입력해주세요.", Lotto.getSize()));
     }
 
     @Test

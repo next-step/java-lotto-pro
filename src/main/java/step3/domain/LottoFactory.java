@@ -24,7 +24,7 @@ public class LottoFactory {
     private static List<Integer> randomNumbers() {
         Collections.shuffle(allNumbers);
         return allNumbers.stream()
-                .limit(Lotto.getLottoSize())
+                .limit(Lotto.getSize())
                 .collect(Collectors.toList());
     }
 
