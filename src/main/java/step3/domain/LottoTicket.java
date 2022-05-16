@@ -13,6 +13,7 @@ public class LottoTicket {
     private final ArrayList<LottoElement> lottoElements = new ArrayList();
     private final int LOTTO_ELEMENTS_SIZE = 6;
     private static final String LOTTO_DELIMITER = ",";
+    private final String CREATE_TICKET_EXCEPTION_MSG = "로또는 중복되지 않은 %s 개의 숫자로 이루어져있습니다";
 
     public LottoTicket(List<String> lottoNumbers) {
         validInnerSource(lottoNumbers);
@@ -28,7 +29,7 @@ public class LottoTicket {
 
     private void validInnerSource(List<String> lottoElementsSource) {
         if (new HashSet<>(lottoElementsSource).size() != LOTTO_ELEMENTS_SIZE) {
-            throw new IllegalArgumentException("로또는 중복되지 않은 " + LOTTO_ELEMENTS_SIZE + "개의 숫자로 이루어져있습니다");
+            throw new IllegalArgumentException(String.format(CREATE_TICKET_EXCEPTION_MSG, LOTTO_ELEMENTS_SIZE));
         }
     }
 

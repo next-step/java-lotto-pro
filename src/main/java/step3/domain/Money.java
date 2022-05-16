@@ -8,11 +8,12 @@ public class Money {
     private int money;
     private final String isLoss = "손해";
     private final String isBenefit = "이득";
+    private final String CREATE_MONEY_EXCEPTION_MSG = "돈은 로또가격보다 큰 숫자여야합니다.(%s원)";
     private final int LOTTO_PRICE = 1_000;
 
     public Money(String money) {
         if (!validateMoneyRange(money)) {
-            throw new IllegalArgumentException("돈은 로또가격보다 큰 숫자여야합니다");
+            throw new IllegalArgumentException(String.format(CREATE_MONEY_EXCEPTION_MSG,LOTTO_PRICE));
         }
         this.money = Integer.parseInt(money);
     }
