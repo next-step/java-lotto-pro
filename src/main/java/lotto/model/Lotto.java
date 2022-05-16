@@ -12,8 +12,8 @@ public class Lotto {
     private static final int COUNT_OF_MATCH_ONE = 1;
     private final Set<LottoNumber> lotto;
 
-    public Lotto(Set<LottoNumber> lotto) {
-        validLotto(lotto);
+    private Lotto(Set<LottoNumber> lotto) {
+        validateLotto(lotto);
         this.lotto = lotto;
     }
 
@@ -48,11 +48,11 @@ public class Lotto {
         return this.lotto.contains(lottoNumber);
     }
 
-    private void validLotto(Set<LottoNumber> lotto) {
-        validLottoSize(lotto);
+    private void validateLotto(Set<LottoNumber> lotto) {
+        validateLottoSize(lotto);
     }
 
-    private void validLottoSize(Set<LottoNumber> lotto) {
+    private void validateLottoSize(Set<LottoNumber> lotto) {
         if (isNotLottoSize(lotto.size())) {
             throw new IllegalArgumentException("로또 번호 갯수가 올바르지 않습니다.");
         }

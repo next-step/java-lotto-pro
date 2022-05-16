@@ -11,7 +11,7 @@ public class Money {
     private final int money;
 
     private Money(int money) {
-        validMoney(money);
+        validateMoney(money);
         this.money = money;
     }
 
@@ -38,7 +38,7 @@ public class Money {
         return BigDecimal.valueOf(this.money).divide(BigDecimal.valueOf(money.money), SCALE, RoundingMode.DOWN);
     }
 
-    private void validMoney(int money) {
+    private void validateMoney(int money) {
         if (money < ZERO_NUM) {
             throw new IllegalArgumentException("음수가 입력되어 유효하지 않습니다.");
         }

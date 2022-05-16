@@ -40,7 +40,7 @@ class InputLottoNumberGeneratorTest {
     @DisplayName("숫자 변환에 유효하지 않은 문자열에 대해 IllegalArgumentException 테스트")
     @ParameterizedTest(name = "숫자 변환에 유효하지 않은 문자열{0}에 대해 IllegalArgumentException 테스트")
     @ValueSource(strings = {"1 ,p,0", "1. 1, 2", ",#", "3,,3"})
-    void inputLottoNumberGeneratorInValid(String input) {
+    void inputLottoNumberGeneratorInValidate(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new InputLottoNumberGenerator(input))
                 .withMessage("유효하지 않은 입력값입니다.");

@@ -12,7 +12,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int lottoNumber;
 
     private LottoNumber(int lottoNumber) {
-        validLottoRange(lottoNumber);
+        validateLottoRange(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
@@ -31,7 +31,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumberCache;
     }
 
-    private void validLottoRange(int lottoNumber) {
+    private void validateLottoRange(int lottoNumber) {
         if (isNotLottoNumberRange(lottoNumber)) {
             throw new IllegalArgumentException("로또 숫자 범위가 아닙니다.");
         }

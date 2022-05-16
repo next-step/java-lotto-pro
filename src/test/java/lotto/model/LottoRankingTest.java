@@ -31,7 +31,7 @@ class LottoRankingTest {
     @DisplayName("로또번호 일치 갯수가 유효하지 유효하지 않을 때 IllegalArgumentException 예외")
     @ParameterizedTest(name = "로또번호 일치 갯수 {0}가 유효하지 유효하지 않을 때 IllegalArgumentException 예외")
     @ValueSource(strings = {"7", "-1", "10"})
-    void lottoRankingInvalidCountOfMatch(int input) {
+    void lottoRankingInvalidateCountOfMatch(int input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoRanking.findLottoRankingByCountOfMatch(input))
                 .withMessage("로또번호 일치 갯수가 유효하지 않습니다.");

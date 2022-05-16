@@ -22,7 +22,7 @@ public enum LottoRanking {
     }
 
     public static LottoRanking findLottoRankingByCountOfMatch(int countOfMatch) {
-        validCountOfMatch(countOfMatch);
+        validateCountOfMatch(countOfMatch);
         return Arrays.stream(LottoRanking.values())
                 .filter(ranking -> ranking.countOfMatch() == countOfMatch)
                 .findFirst()
@@ -37,7 +37,7 @@ public enum LottoRanking {
         return this.text;
     }
 
-    private static void validCountOfMatch(int countOfMatch) {
+    private static void validateCountOfMatch(int countOfMatch) {
         if (isNotLottoCountOfMatchRange(countOfMatch)) {
             throw new IllegalArgumentException("로또번호 일치 갯수가 유효하지 않습니다.");
         }
