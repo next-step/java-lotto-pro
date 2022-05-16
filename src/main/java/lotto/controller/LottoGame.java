@@ -4,6 +4,7 @@ import java.util.List;
 import lotto.constant.ErrorMessage;
 import lotto.model.LottoGameResult;
 import lotto.model.LottoNumber;
+import lotto.model.LottoNumbers;
 import lotto.model.generator.LottoGenerator;
 import lotto.model.LottoPaper;
 import lotto.model.LottoStore;
@@ -27,7 +28,8 @@ public class LottoGame {
 
     public static LottoGameResult resultWinningGame(Lottos lottos, String winningNumbersWord, String bonusNumberWord) {
         List<String> winningNumbers = InputStringUtils.nonSpaceSplit(winningNumbersWord, DELIMITER_COMMA);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, new LottoNumber(bonusNumberWord));
+        LottoNumber bonusNumber = new LottoNumber(bonusNumberWord);
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(winningNumbers), bonusNumber);
         return winningLotto.compareLottos(lottos);
     }
 }
