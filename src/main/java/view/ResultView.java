@@ -39,7 +39,7 @@ public class ResultView {
 	}
 
 	private static String winLottoCountStringFormat(WinningMoney winningMoney, int matchCount) {
-		if(winningMoney == WinningMoney.FIVE_BOUNS) {
+		if(winningMoney.isSecondPlace()) {
 			return String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개", winningMoney.getMatchCount(),
 					winningMoney.getWinningMoney(), matchCount);
 		}
