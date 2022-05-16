@@ -6,7 +6,7 @@ import step3.view.InputView;
 import step3.view.OutputView;
 
 public class LottoGame {
-    private static final int PRICE_LOTTO = 1000;
+    private static final int PRICE_LOTTO = 1_000;
 
     public void play() {
         int inputMoney = InputView.inputMoney();

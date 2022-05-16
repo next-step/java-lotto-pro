@@ -23,6 +23,6 @@ class LottoGameTest {
 
     @Test
     void 투자금액_계산() {
-        assertThat(lottoGame.investmentAmount(5)).isEqualTo(5000);
+        assertThat(lottoGame.investmentAmount(5)).isEqualTo(5_000);
     }
 }
