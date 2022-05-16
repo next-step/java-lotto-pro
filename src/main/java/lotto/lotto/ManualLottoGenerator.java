@@ -18,7 +18,7 @@ public class ManualLottoGenerator implements BatchLottoGenerator {
             throw new CanNotGenerateLottoException();
         }
         try {
-            final LottoGenerator lottoGenerator = LottoGenerator.commaSplitting(rawLottoes.get(tryCount));
+            final LottoGenerator lottoGenerator = new CommaSplittingLottoGenerator(rawLottoes.get(tryCount));
             return lottoGenerator.generate();
         } finally {
             tryCount++;

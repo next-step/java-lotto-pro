@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.lotto.Lotto;
-import lotto.lotto.LottoNumber;
 import lotto.lotto.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("LottoAnalyzer 클래스 테스트")
 class LottoAnalyzerTest {
 
-    private final WinningLotto winningLotto = WinningLotto.of(Lotto.of(1, 2, 3, 4, 5, 6), LottoNumber.of(45));
+    private final WinningLotto winningLotto = WinningLotto.of("1, 2, 3, 4, 5, 6");
 
     @DisplayName("lotto가 null이기 떄문에 생성 실패")
     @Test

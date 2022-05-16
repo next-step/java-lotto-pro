@@ -34,20 +34,16 @@ class ConsoleInputView implements InputView {
 
     @Override
     public WinningLotto readPreviousWinningLotto() {
-        return WinningLotto.of(readLotto(), readBonusLottoNumber());
+        return WinningLotto.of(readLottoNumbers());
     }
 
-    private Lotto readLotto() {
+    private String readLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
-        return generateLotto(scanner.nextLine());
+        return scanner.nextLine();
     }
 
-    private static Lotto generateLotto(String maybeLottoNumbers) {
-        return LottoGenerator.commaSplitting(maybeLottoNumbers)
-                             .generate();
-    }
-
-    private LottoNumber readBonusLottoNumber() {
+    @Override
+    public LottoNumber readBonusLottoNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return LottoNumber.of(scanner.nextLine());
     }
