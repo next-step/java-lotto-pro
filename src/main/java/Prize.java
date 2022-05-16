@@ -1,10 +1,14 @@
 import java.util.Arrays;
 
 public enum Prize {
-    FIRST(6, 2000000000), SECOND(5, 1500000), THIRD(4, 50000),
-    FOURTH(3, 5000), NONE(0, 0);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    NONE(0, 0);
 
-    private final static int PRIZE_LOWER_BOUND_COUNT = FOURTH.count;
+    private final static int PRIZE_LOWER_BOUND_COUNT = FIFTH.count;
 
     private final int count;
     private final long money;
@@ -14,26 +18,35 @@ public enum Prize {
         this.money = money;
     }
 
-    public static Prize find(int count) {
-        if (PRIZE_LOWER_BOUND_COUNT > count)
+    public static Prize valueOf(int containCount, boolean containBonusNumber) {
+        if (LottoNumbers.SIZE < containCount)
             return NONE;
 
-        return Arrays.stream(values())
-                .filter(it -> it.count == count)
-                .findAny()
-                .orElse(NONE);
+        if (PRIZE_LOWER_BOUND_COUNT > containCount)
+            return NONE;
+
+        if (SECOND.count == containCount) {
+            return containBonusNumber ? SECOND : THIRD;
+        }
+
+        return Arrays.stream(new Prize[] { FIRST, FOURTH, FIFTH, NONE })
+                .filter(it -> it.count == containCount)
+                .findAny().orElse(NONE);
     }
 
     public boolean win() {
         return !NONE.equals(this);
     }
 
-    public static long prizeMoney(Aggregator aggregator) {
-        return Arrays.stream(values()).filter(aggregator::has).mapToLong(prize -> prize.money).sum();
+    public long prize() {
+        return this.money;
     }
 
     @Override
     public String toString() {
+        if (this == SECOND)
+            return count + "개 일치, 보너스 볼 일치(" + money + "원)";
+
         return count + "개 일치 (" + money + "원)";
     }
 }
