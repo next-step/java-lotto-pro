@@ -10,6 +10,11 @@ public class LottoNumber {
     public LottoNumber(String numberWord) {
         this.number = parseLottoNumber(numberWord);
     }
+
+    public LottoNumber(int number) {
+        this.number = number;
+    }
+
     private int parseLottoNumber(String numberWord){
         return validateLottoNumber(parseNumber(numberWord));
     }
@@ -23,6 +28,10 @@ public class LottoNumber {
         if (number < LottoRoleConst.LOW_NUMBER || number > LottoRoleConst.MAX_NUMBER) {
             throw new IllegalArgumentException(ErrorMessage.NOT_LOTTO_NUMBER);
         }
+        return number;
+    }
+
+    public int getNumber() {
         return number;
     }
 }
