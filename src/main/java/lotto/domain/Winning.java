@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Winning {
     MATCH6(6, 2000000000),
     MATCH5(5, 1500000),
@@ -16,19 +18,10 @@ public enum Winning {
     }
 
     public static Winning from(int match) {
-        if (match == 6) {
-            return Winning.MATCH6;
-        }
-        if (match == 5) {
-            return Winning.MATCH5;
-        }
-        if (match == 4) {
-            return Winning.MATCH4;
-        }
-        if (match == 3) {
-            return Winning.MATCH3;
-        }
-        return Winning.NAN;
+        return Arrays.stream(values())
+                .filter(winning -> winning.match == match)
+                .findFirst()
+                .orElse(NAN);
     }
 
     public int getMoney() {
