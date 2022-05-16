@@ -32,7 +32,7 @@ class LottoTest {
     @Test
     void 구매한_로또와_당첨번호_비교() {
         Lotto buyLotto = LottoFactory.createManualLotto(numbers);
-        int matchCount = buyLotto.match(Arrays.asList(1, 2, 3, 11, 23, 44, 45));
+        int matchCount = buyLotto.match(new WinnerLotto(Arrays.asList(1, 2, 3, 11, 23, 44)));
         assertThat(matchCount).isEqualTo(3);
     }
 }

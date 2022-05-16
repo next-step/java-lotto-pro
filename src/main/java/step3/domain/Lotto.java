@@ -26,9 +26,8 @@ public class Lotto {
         }
     }
 
-    int match(List<Integer> winnerNumbers) {
-        return (int) winnerNumbers.stream()
-                .map(LottoNumber::of)
+    int match(WinnerLotto winnerLotto) {
+        return (int) winnerLotto.lottoNumbers().stream()
                 .filter(lotto::contains)
                 .count();
     }

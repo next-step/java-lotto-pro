@@ -19,7 +19,10 @@ public class OutputView {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         for (Ranking ranking : Ranking.winners()) {
-            System.out.printf("%d개 일치 (%f원)- %d개%n", ranking.getHitCount(), ranking.getWinningMoney(), lottoResult.rankingCount(ranking));
+            System.out.printf("%d개 일치 (%d원)- %d개%n"
+                    , ranking.getHitCount()
+                    , (int) ranking.getWinningMoney()
+                    , lottoResult.rankingCount(ranking));
         }
         System.out.printf("총 수익률은 %.02f입니다.%n", lottoResult.getYield());
     }

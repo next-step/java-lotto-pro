@@ -12,7 +12,7 @@ public class Lottos {
     public LottoResult allMatch(List<Integer> winnerNumbers) {
         LottoResult lottoResult = new LottoResult();
         lottos.forEach(lotto -> {
-            int matchCount = lotto.match(winnerNumbers);
+            int matchCount = lotto.match(new WinnerLotto(winnerNumbers));
             Ranking ranking = Ranking.findRanking(matchCount);
             lottoResult.update(ranking);
         });
