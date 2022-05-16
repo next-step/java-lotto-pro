@@ -14,16 +14,6 @@ public class LottoPaper {
         this.purchase = purchase;
     }
 
-    public LottoResult checkAll(final Lotto answerLotto, final LottoNumber bonus) {
-        if (Objects.isNull(answerLotto) || Objects.isNull(bonus)) {
-            throw new IllegalArgumentException("invalid check all input");
-        }
-
-        return new LottoResult(purchase.stream()
-                .map((lotto) -> lotto.checkTo(answerLotto, bonus))
-                .collect(Collectors.toList()));
-    }
-
     public LottoResult checkAll(final LottoAnswer answerLotto) {
         if (Objects.isNull(answerLotto)) {
             throw new IllegalArgumentException("invalid check all input");
@@ -34,6 +24,9 @@ public class LottoPaper {
                 .collect(Collectors.toList()));
     }
 
+    public boolean isContain(final Lotto lotto) {
+        return purchase.contains(lotto);
+    }
 
     public int numberOfPurchases() {
         return this.purchase.size();
