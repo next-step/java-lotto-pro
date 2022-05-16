@@ -25,4 +25,16 @@ public class LottoResultTest {
 		assertEquals(lottoResult.profitRate(1000),
 				(WinningMoney.SIX.getWinningMoney() + WinningMoney.FIVE.getWinningMoney()) / 2000);
 	}
+	
+	@Test
+	@DisplayName("2등이 포함된 수익률 구하기")
+	void buy_lotto_auto_contains_second() {
+		List<LottoNumbers> lottos = new ArrayList<>();
+		lottos.add(new LottoNumbers("1,2,3,4,5,6"));
+		lottos.add(new LottoNumbers("1,2,3,4,5,7"));
+
+		LottoResult lottoResult = new LottoResult(new Lottos(lottos), new LottoNumbers("1,2,3,4,5,8"), "7");
+		assertEquals(lottoResult.profitRate(1000),
+				(WinningMoney.FIVE.getWinningMoney() + WinningMoney.FIVE_BOUNS.getWinningMoney()) / 2000);
+	}
 }
