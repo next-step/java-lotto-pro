@@ -15,7 +15,7 @@ class RewardsTest {
     void count() {
         Rewards rewards = new Rewards(List.of(Reward.FIRST, Reward.MISS));
         assertThat(rewards.count(Reward.FIRST)).isEqualTo(1);
-        assertThat(rewards.count(Reward.SECOND)).isEqualTo(0);
+        assertThat(rewards.count(Reward.SECOND)).isZero();
     }
 
     @DisplayName("수익률을 계산한다.")
