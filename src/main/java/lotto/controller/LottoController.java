@@ -4,8 +4,10 @@ import static lotto.domain.Money.LOTTO_TICKET_PRICE;
 
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.controller.converter.MoneyConverter;
+import lotto.controller.converter.WinningLottoConverter;
+import lotto.controller.dto.MoneyDTO;
+import lotto.controller.dto.WinningLottoDTO;
 import lotto.domain.PurchasedLottoTickets;
 import lotto.domain.LottoVendingMachine;
 import lotto.domain.LottoWinningResults;
@@ -70,21 +72,14 @@ public class LottoController {
     }
 
     private LottoWinningResults getResultWithWinningLotto(PurchasedLottoTickets lottoTickets) {
-        WinningLotto winningLotto = inputLottoNumbersAndBonusNumber();
+        WinningLottoDTO winningLottoDTO = InputView.inputLottoInformation();
+        WinningLotto winningLotto = WinningLottoConverter.convert(winningLottoDTO);
         return lottoTickets.checkWinningLotto(winningLotto);
     }
 
-    private WinningLotto inputLottoNumbersAndBonusNumber() {
-        List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
-        int bonusBallNumber = InputView.inputBonusBallNumber();
-        return WinningLotto.of(
-                LottoNumbers.from(winningLottoNumbers),
-                LottoNumber.from(bonusBallNumber)
-        );
-    }
-
     private PurchasedLottoTickets buyLottoTickets() {
-        Money inputMoney = InputView.inputMoney();
+        MoneyDTO moneyDTO = InputView.inputMoney();
+        Money inputMoney = MoneyConverter.convert(moneyDTO);
         return vendingMachine.purchase(inputMoney);
     }
 }
