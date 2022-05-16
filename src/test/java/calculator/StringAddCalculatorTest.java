@@ -4,20 +4,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
-    @Test
+    @ParameterizedTest
     @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다")
-    void empty_or_null_should_be_return_zero() {
-        int result = StringAddCalculator.splitAndSum(null);
+    @NullAndEmptySource
+    void empty_or_null_should_be_return_zero(String input) {
+        int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isZero();
 
-        result = StringAddCalculator.splitAndSum("");
-        assertThat(result).isZero();
     }
 
     @ParameterizedTest
@@ -52,7 +52,7 @@ public class StringAddCalculatorTest {
     @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생")
     void if_enter_negative_number_then_error_occur() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("음수는 입력할 수 없습니다.");
     }
     @Test
