@@ -1,21 +1,19 @@
 package lotto_auto.model;
 
-import lotto_auto.dto.Profit;
-
 public class ProfitRate {
     private final double rate;
     private static final int ZERO_VALUE = 0;
 
-    public ProfitRate(Money money, Profit profit) {
+    public ProfitRate(Money money, int profit) {
         if (isZero(money, profit)) {
             this.rate = ZERO_VALUE;
             return;
         }
-        this.rate = (float) profit.getProfit() / money.getMoney();
+        this.rate = (double) profit / money.getMoney();
     }
 
-    private boolean isZero(Money money, Profit profit) {
-        return money.getMoney() == ZERO_VALUE || profit.getProfit() == ZERO_VALUE;
+    private boolean isZero(Money money, int profit) {
+        return money.getMoney() == ZERO_VALUE || profit == ZERO_VALUE;
     }
 
     public String printRate() {
