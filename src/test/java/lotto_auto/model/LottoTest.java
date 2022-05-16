@@ -1,22 +1,20 @@
 package lotto_auto.model;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
-
-    @Test
-    void 로또_비교후_결과_랭크() {
-        Lotto lotto = new Lotto(new LottoNumbers("1, 2, 3, 4, 5, 6"));
-        Lotto winningLotto = new Lotto(new LottoNumbers("1, 2, 3, 4, 5, 6"));
+    @ParameterizedTest
+    @ValueSource(strings = "1, 2, 3, 4, 5, 6")
+    void 로또_비교후_결과_랭크(String lottoNumbers) {
+        Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
+        Lotto winningLotto = new Lotto(new LottoNumbers(lottoNumbers));
 
         assertThat(lotto.matches(winningLotto)).isEqualTo(LottoRank.FIRST);
     }
 
-    @Test
-    void 로또_출력_테스트() {
-        Lotto lotto = new Lotto(new LottoNumbers("1, 2, 3, 4, 5, 6"));
-
-        assertThat(lotto.printLotto()).isEqualTo("[1, 2, 3, 4, 5, 6]");
-    }
 }
