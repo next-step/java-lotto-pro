@@ -60,6 +60,7 @@ public class OutputView {
         if (lottoRank.equals(LottoRank.SECOND)) {
             printSecondWinningCount(lottoRank.getCountOfMatch(), lottoRank.getWinningMoney(),
                     resultMap.get(lottoRank));
+            return;
         }
         printTotalWinningCount(lottoRank.getCountOfMatch(), lottoRank.getWinningMoney(), resultMap.get(lottoRank));
     }
