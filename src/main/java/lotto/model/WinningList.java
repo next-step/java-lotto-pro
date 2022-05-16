@@ -28,20 +28,20 @@ public class WinningList {
 
 	private void match(Lottos lottos, LottoNumbers winningLottoNumbers, String bonusLottoNumber) {
 		for (LottoNumbers lottoNumbers : lottos.getLottos()) {
-			int count = winningLottoNumbers.countEqualsLottoNumber(lottoNumbers);
-			increase(find(lottoNumbers, count, bonusLottoNumber));
+			int matchCount = winningLottoNumbers.countEqualsLottoNumber(lottoNumbers);
+			increase(find(lottoNumbers, matchCount, bonusLottoNumber));
 		}
 	}
 
-	private WinningMoney find(LottoNumbers lottoNumbers, int count, String bonusLottoNumber) {
-		if (isSecondPlace(lottoNumbers, count, bonusLottoNumber)) {
+	private WinningMoney find(LottoNumbers lottoNumbers, int matchCount, String bonusLottoNumber) {
+		if (isSecondPlace(lottoNumbers, matchCount, bonusLottoNumber)) {
 			return WinningMoney.SECOND;
 		}
-		return WinningMoney.find(count);
+		return WinningMoney.find(matchCount);
 	}
 
-	private boolean isSecondPlace(LottoNumbers lottoNumbers, int count, String bonusLottoNumber) {
-		if (count != WinningMoney.SECOND.getMatchCount()) {
+	private boolean isSecondPlace(LottoNumbers lottoNumbers, int matchCount, String bonusLottoNumber) {
+		if (matchCount != WinningMoney.SECOND.getMatchCount()) {
 			return false;
 		}
 		return lottoNumbers.contains(new LottoNumber(bonusLottoNumber));
