@@ -19,25 +19,9 @@ class WinningLottoNumberTest {
     }
 
     @Test
-    void 당첨번호는_중복되는_숫자가_될_수_없다() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 5), 7));
-    }
-
-    @Test
     void 보너스번호도_당첨번호와_중복될_수_없다() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new WinningLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 6));
-    }
-
-    @Test
-    void 당첨번호는_1부터_45_사이의_숫자만_가능하다() {
-        new WinningLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 45), 7);
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 46), 7));
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningLottoNumber(Arrays.asList(0, 2, 3, 4, 5, 6), 7));
     }
 
     @Test

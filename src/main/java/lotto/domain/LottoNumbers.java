@@ -14,6 +14,7 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> numbers) {
         this.numbers = new HashSet<>(numbers);
+        validateNumbers();
     }
 
     public Set<Integer> getNumbers() {
@@ -37,5 +38,15 @@ public class LottoNumbers {
             return 1;
         }
         return 0;
+    }
+
+    private void validateNumbers() {
+        for (Integer number : numbers) {
+            LottoValidationUtils.validateNumberRange(number);
+        }
+
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 중복되지 않는 6개의 숫자이여야 합니다.");
+        }
     }
 }

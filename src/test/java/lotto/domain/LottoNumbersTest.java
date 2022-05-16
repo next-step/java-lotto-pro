@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.utils.StringUtils;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,8 +22,17 @@ class LottoNumbersTest {
     }
 
     @Test
-    void 로또_숫자들에서_오름차순으로_정렬된_로또_번호_6개를_생성할_수_있다() {
-        assertThat(lottoNumbers.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+    void 로또번호는_중복되지_않는_6개의_숫자로_이뤄진다() {
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 5)));
+    }
+
+    @Test
+    void 로또번호는_1부터_45까지_숫자로만_이뤄진다() {
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoNumbers(Arrays.asList(0, 2, 3, 4, 5, 6)));
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 46)));
     }
 
     @ParameterizedTest
