@@ -1,6 +1,6 @@
 package calculator.model;
 
-import exception.IllegalArgument;
+import calculator.exception.IllegalArgument;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
