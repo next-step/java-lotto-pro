@@ -1,13 +1,13 @@
 package lotto;
 
+import lotto.controller.LottoController;
 import lotto.domain.*;
-import lotto.view.ResultView;
 
 import java.util.List;
 
-import static lotto.domain.Lotto.generateLottoGame;
-import static lotto.view.InputView.*;
-import static lotto.view.ResultView.*;
+import static lotto.view.InputView.inputMoney;
+import static lotto.view.ResultView.lottoGameResultMessage;
+import static lotto.view.ResultView.lottoGameStatisticsMessage;
 
 public class LottoMain {
 
@@ -15,18 +15,14 @@ public class LottoMain {
         Money money = new Money(inputMoney());
         int gameCount = Lotto.gameCount(money);
 
-        ResultView.purchasesCountMessage(gameCount);
-        List<LottoNumbers> lottoNumbers = generateLottoGame(gameCount);
-        resultLottoNumbers(lottoNumbers);
+        LottoController lottoController = new LottoController(gameCount);
+        List<LottoNumbers> lottoNumbers = lottoController.generateLottoGame();
+        LottoWiningNumbers lottoWiningNumbers = lottoController.generateLottoWiningNumbers();
+        BonusBall bonusBall = lottoController.generateBonusBall();
 
-        Lotto lotto = new Lotto(lottoNumbers);
-        LottoWiningNumbers lottoWiningNumbers = new LottoWiningNumbers(lastWeekWinningNumberString());
-        BonusBall bonusBall = new BonusBall(bonusNumberString());
-        LottoRanks lottoRanks = new LottoRanks(lotto.gamePlay(lottoWiningNumbers.generate(), bonusBall));
-
-        double lottoGameEarningsRate = LottoResult.lottoGameEarningsRate(money.currentMoney(), lottoRanks);
+        LottoRanks lottoRanks = lottoController.gamePlay(lottoNumbers, lottoWiningNumbers, bonusBall);
 
         lottoGameResultMessage(lottoRanks);
-        lottoGameStatisticsMessage(lottoGameEarningsRate);
+        lottoGameStatisticsMessage(money.lottoGameEarningsRate(lottoRanks));
     }
 }
