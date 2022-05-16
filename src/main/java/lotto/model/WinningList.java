@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WinningList {
-	private static final int BOUNS_CHECK_NUMBER = 5;
 	private final Map<WinningMoney, Integer> winningList;
 
 	public WinningList() {
@@ -42,10 +41,10 @@ public class WinningList {
 	}
 
 	private boolean isSecondPlace(LottoNumbers lottoNumbers, int count, String bonusLottoNumber) {
-		if (count != BOUNS_CHECK_NUMBER) {
+		if (count != WinningMoney.SECOND.getMatchCount()) {
 			return false;
 		}
-		return lottoNumbers.getLottoNumbers().contains(new LottoNumber(bonusLottoNumber));
+		return lottoNumbers.contains(new LottoNumber(bonusLottoNumber));
 	}
 
 	private void increase(WinningMoney winningMoney) {
