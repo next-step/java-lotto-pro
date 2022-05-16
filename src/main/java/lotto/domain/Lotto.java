@@ -19,6 +19,9 @@ public class Lotto {
         validateDuplicated();
     }
 
+    public Money price() {
+        return this.price;
+    }
 
     public MatchResult match(List<LottoNumber> prizeNumbers) {
         int matchCount = 0;
