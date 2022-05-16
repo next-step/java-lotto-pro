@@ -30,7 +30,7 @@ public class LottoWinningResults {
         return result;
     }
 
-    public int winingRankCount(LottoRank lottoRank) {
+    public int winningRankCount(LottoRank lottoRank) {
         return (int) prizedRanks.stream().
                 filter(result -> result.equals(lottoRank)).
                 count();

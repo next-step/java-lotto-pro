@@ -60,13 +60,13 @@ public class LottoController {
             OutputView.printSecondWinningCount(
                     prizedRank.getCountOfMatch(),
                     prizedRank.getWinningMoney(),
-                    winningResults.winingRankCount(prizedRank));
+                    winningResults.winningRankCount(prizedRank));
             return;
         }
         OutputView.printTotalWinningCount(
                 prizedRank.getCountOfMatch(),
                 prizedRank.getWinningMoney(),
-                winningResults.winingRankCount(prizedRank));
+                winningResults.winningRankCount(prizedRank));
     }
 
     private LottoWinningResults getResultWithWinningLotto(PurchasedLottoTickets lottoTickets) {
