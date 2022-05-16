@@ -15,10 +15,10 @@ public class Lottos {
         return new Lottos(lottoList);
     }
 
-    public List<Lotto> matchedLottoList(List<LottoNumber> prizeNumbers, MatchResult matchResult) {
+    public List<Lotto> matchedLottoList(WinningNumbers winningNumbers, MatchResult matchResult) {
         List<Lotto> result = new ArrayList<>();
         for (Lotto lotto : lottoList) {
-            if (lotto.match(prizeNumbers).equals(matchResult)) {
+            if (winningNumbers.matchWinningLotto(lotto).equals(matchResult)) {
                 result.add(lotto);
             }
         }

@@ -32,15 +32,9 @@ class LottoStatisticTest {
         Lottos lottos = Lottos.from(lottoList);
 
         List<LottoNumber> prizeNumbers = new ArrayList<>();
+        String[] winningNumbers = {"1", "2", "3", "4", "5", "6"};
 
-        prizeNumbers.add(LottoNumber.from(1));
-        prizeNumbers.add(LottoNumber.from(2));
-        prizeNumbers.add(LottoNumber.from(3));
-        prizeNumbers.add(LottoNumber.from(4));
-        prizeNumbers.add(LottoNumber.from(5));
-        prizeNumbers.add(LottoNumber.from(6));
-
-        lottoStatistic = new LottoStatistic(lottos, prizeNumbers);
+        lottoStatistic = new LottoStatistic(lottos, winningNumbers);
     }
 
 

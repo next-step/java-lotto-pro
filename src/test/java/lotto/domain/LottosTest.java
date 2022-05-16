@@ -13,18 +13,20 @@ class LottosTest {
 
     private int NUMBER_COUNT = 6;
     private Money PRICE = Money.from(1000);
-    private List<LottoNumber> prizeNumbers = new ArrayList<>();
+    private WinningNumbers winningNumbers;
     private Lottos lottos;
 
     @BeforeEach
     void setUp() {
-        prizeNumbers = new ArrayList<>();
-        prizeNumbers.add(LottoNumber.from(1));
-        prizeNumbers.add(LottoNumber.from(2));
-        prizeNumbers.add(LottoNumber.from(3));
-        prizeNumbers.add(LottoNumber.from(4));
-        prizeNumbers.add(LottoNumber.from(5));
-        prizeNumbers.add(LottoNumber.from(6));
+        LottoNumber[] winningNumberInputs = new LottoNumber[NUMBER_COUNT];
+        winningNumberInputs[0] = LottoNumber.from(1);
+        winningNumberInputs[1] = LottoNumber.from(2);
+        winningNumberInputs[2] = LottoNumber.from(3);
+        winningNumberInputs[3] = LottoNumber.from(4);
+        winningNumberInputs[4] = LottoNumber.from(5);
+        winningNumberInputs[5] = LottoNumber.from(6);
+
+        winningNumbers = new WinningNumbers(winningNumberInputs);
 
         List<Lotto> lottoList = new ArrayList<>();
 
@@ -39,13 +41,11 @@ class LottosTest {
     @Test
     void 당첨_로또_리스트() {
 
-        lottos.matchedLottoList(prizeNumbers, MatchResult.THREE);
-
         assertAll(
-                () -> assertThat(lottos.matchedLottoList(prizeNumbers, MatchResult.THREE).size()).isEqualTo(1),
-                () -> assertThat(lottos.matchedLottoList(prizeNumbers, MatchResult.FOUR).size()).isEqualTo(1),
-                () -> assertThat(lottos.matchedLottoList(prizeNumbers, MatchResult.FIVE).size()).isEqualTo(1),
-                () -> assertThat(lottos.matchedLottoList(prizeNumbers, MatchResult.SIX).size()).isEqualTo(1)
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.THREE).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.FOUR).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.FIVE).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.SIX).size()).isEqualTo(1)
         );
     }
 

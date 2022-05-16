@@ -41,7 +41,7 @@ public class Lotto {
 
     private void validateNumbersCount() {
         if (lottoNumberSize != this.lottoNumbers.size()) {
-            throw new IllegalArgumentException("로또는 6자리 숫자이어야 합니다.");
+            throw new IllegalArgumentException(String.format("로또는 %d자리 숫자이어야 합니다.", lottoNumberSize));
         }
     }
 

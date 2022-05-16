@@ -8,30 +8,33 @@ import java.util.Map.Entry;
 
 public class LottoStatistic {
     private Lottos lottos;
-    private List<LottoNumber> prizeNumbers;
+    private WinningNumbers winningNumbers;
     private Map<MatchResult, Integer> matchedCountMap;
 
-    public LottoStatistic(Lottos lottos, List<LottoNumber> prizeNumbers) {
+    public LottoStatistic(Lottos lottos, WinningNumbers winningNumbers) {
         this.lottos = lottos;
-        this.prizeNumbers = new ArrayList<>(prizeNumbers);
+        this.winningNumbers = winningNumbers;
         initializePrizeLottoList();
     }
 
-    public LottoStatistic(Lottos lottos, String[] prizeNumbers) {
+    public LottoStatistic(Lottos lottos, String[] winningNumbers) {
         this.lottos = lottos;
-        this.prizeNumbers = new ArrayList<>();
-        for (String prizeNumber : prizeNumbers) {
-            this.prizeNumbers.add(LottoNumber.from(prizeNumber));
+
+        LottoNumber[] numbers = new LottoNumber[winningNumbers.length];
+
+        for (int index = 0; index < winningNumbers.length; index++) {
+            numbers[index] = LottoNumber.from(winningNumbers[index]);
         }
+        this.winningNumbers = new WinningNumbers(numbers);
         initializePrizeLottoList();
     }
 
     private void initializePrizeLottoList() {
         matchedCountMap = new HashMap<>();
-        matchedCountMap.put(MatchResult.THREE, lottos.matchedLottoList(prizeNumbers, MatchResult.THREE).size());
-        matchedCountMap.put(MatchResult.FOUR, lottos.matchedLottoList(prizeNumbers, MatchResult.FOUR).size());
-        matchedCountMap.put(MatchResult.FIVE, lottos.matchedLottoList(prizeNumbers, MatchResult.FIVE).size());
-        matchedCountMap.put(MatchResult.SIX, lottos.matchedLottoList(prizeNumbers, MatchResult.SIX).size());
+        matchedCountMap.put(MatchResult.THREE, lottos.matchedLottoList(winningNumbers, MatchResult.THREE).size());
+        matchedCountMap.put(MatchResult.FOUR, lottos.matchedLottoList(winningNumbers, MatchResult.FOUR).size());
+        matchedCountMap.put(MatchResult.FIVE, lottos.matchedLottoList(winningNumbers, MatchResult.FIVE).size());
+        matchedCountMap.put(MatchResult.SIX, lottos.matchedLottoList(winningNumbers, MatchResult.SIX).size());
     }
 
     public int matchedCount(MatchResult matchResult) {
