@@ -32,9 +32,9 @@ public class Application {
         return new LottoNumbers(input.stream().map(LottoNumber::new).collect(Collectors.toList()));
     }
 
-    private static BonusLottoNumber getBonusLottoNumber() {
+    private static LottoNumber getBonusLottoNumber() {
         int input = consoleInputView.inputInt(() -> "보너스 볼을 입력해 주세요.");
-        return new BonusLottoNumber(input);
+        return new LottoNumber(input);
     }
 
     private static void aggregate(Ranks ranks) {

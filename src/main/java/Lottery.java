@@ -2,9 +2,9 @@ import java.util.stream.StreamSupport;
 
 public class Lottery {
     private final LottoNumbers ranksLottoNumbers;
-    private final BonusLottoNumber bonusLottoNumber;
+    private final LottoNumber bonusLottoNumber;
 
-    public Lottery(LottoNumbers ranksLottoNumbers, BonusLottoNumber bonusLottoNumber) {
+    public Lottery(LottoNumbers ranksLottoNumbers, LottoNumber bonusLottoNumber) {
         this.ranksLottoNumbers = ranksLottoNumbers;
         this.bonusLottoNumber = bonusLottoNumber;
     }

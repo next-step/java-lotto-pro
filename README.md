@@ -53,13 +53,10 @@ LottoNumbers
 - [X] 중복된 LottoNumber 를 포함할 수 없다.
 - [X] LottoNumber를 포함하고 있는지 여부를 확인할 수 있다.
 - [X] Iterable 한 객체이다.
-- [X] BonusNumber 가 포함되어 있는지 확인할 수 있다.
 
 Rank
-- [X] 음수가 될 수 없고, LottoNumbers 의 최대 길이를 초과할 수 없다.
 - [X] 당첨 번호를 포함한 갯수와 보너스 일치 여부를 확인하여 당첨정보를 확인할 수 있다.
 - [X] 값 객체이다.
-
 
 Ranks
 - [X] Rank 를 추가할 수 있다.
@@ -69,6 +66,7 @@ Ranks
 
 Lottery
 - [X] 당첨 번호와 로또 번호를 비교할 수 있다. 여러 개도 가능하다.
+- [X] 보너스 LottoNumber 가 포함되어 있는지 확인할 수 있다.
 
 Lotto
 - [X] 로또를 추가하거나, 총 로또 개수를 알 수 있다.
@@ -76,9 +74,6 @@ Lotto
 Vendor
 - [X] 로또를 판매할 수 있다.
 - [X] 수익률을 계산할 수 있다.
-
-BonusNumber
-- [X] LottoNumber 를 확장한 객체이다.
 
 
 

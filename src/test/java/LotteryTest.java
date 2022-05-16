@@ -17,7 +17,7 @@ class LotteryTest {
                 new LottoNumber(6)
         );
 
-        lottery = new Lottery(lottoNumbers, new BonusLottoNumber(7));
+        lottery = new Lottery(lottoNumbers, new LottoNumber(7));
     }
 
     @Test
