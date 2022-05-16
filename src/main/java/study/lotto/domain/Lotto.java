@@ -2,7 +2,6 @@ package study.lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
-import study.lotto.domain.draw.Division;
 
 public class Lotto {
     private final LottoNumbers lottoNumbers;
@@ -18,8 +17,12 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Division checkResult(LottoNumbers winningLottoNumbers) {
-        return Division.valueOfMatchCount(this.lottoNumbers.match(winningLottoNumbers).size());
+    public int matchCount(LottoNumbers winningLottoNumbers) {
+        return lottoNumbers.match(winningLottoNumbers).size();
+    }
+
+    public boolean hasNumber(LottoNumber number) {
+        return lottoNumbers.has(number);
     }
 
     public List<Integer> numbers() {

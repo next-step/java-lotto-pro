@@ -74,9 +74,10 @@ class LottoDrawTest {
 
             List<DivisionResult> divisionResultList = Arrays.asList(
                     new DivisionResult(Division.DIVISION_ONE, 0L),
-                    new DivisionResult(Division.DIVISION_TWO, 1L),
-                    new DivisionResult(Division.DIVISION_THREE, 0L),
-                    new DivisionResult(Division.DIVISION_FOUR, 1L));
+                    new DivisionResult(Division.DIVISION_TWO, 0L),
+                    new DivisionResult(Division.DIVISION_THREE, 1L),
+                    new DivisionResult(Division.DIVISION_FOUR, 0L),
+                    new DivisionResult(Division.DIVISION_FIVE, 1L));
 
             DivisionResults divisionResults = new DivisionResults(divisionResultList);
             DrawResult expected = new DrawResult(divisionResults);

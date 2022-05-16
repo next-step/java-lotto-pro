@@ -16,9 +16,10 @@ class DivisionResultsTest {
     void setUp() {
         List<DivisionResult> divisionResultsList = Arrays.asList(
                 new DivisionResult(Division.DIVISION_ONE, 0L),
-                new DivisionResult(Division.DIVISION_TWO, 1L),
-                new DivisionResult(Division.DIVISION_THREE, 0L),
-                new DivisionResult(Division.DIVISION_FOUR, 4L));
+                new DivisionResult(Division.DIVISION_TWO, 0L),
+                new DivisionResult(Division.DIVISION_THREE, 1L),
+                new DivisionResult(Division.DIVISION_FOUR, 0L),
+                new DivisionResult(Division.DIVISION_FIVE, 4L));
 
         divisionResults = new DivisionResults(divisionResultsList);
     }

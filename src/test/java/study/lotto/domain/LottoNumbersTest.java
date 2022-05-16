@@ -23,8 +23,8 @@ class LottoNumbersTest {
     @DisplayName("입력된 번호 포함 여부")
     class 번호_포함_여부 {
         private final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        private final int inclusive = 1;
-        private final int exclusive = 10;
+        private final LottoNumber inclusive = new LottoNumber(1);
+        private final LottoNumber exclusive = new LottoNumber(10);
 
         @Test
         @DisplayName("입력된 번호가 로또번호에 있으면 true를 반환한다.")

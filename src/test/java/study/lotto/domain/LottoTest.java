@@ -1,12 +1,12 @@
 package study.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.lotto.domain.draw.Division;
 
 @DisplayName("로또 테스트")
 class LottoTest {
@@ -21,9 +21,19 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("입력받은 번호와 현재 번호를 비교하여 등수를 반환한다.")
+    @DisplayName("입력받은 번호와 현재 번호를 비교하여 매치 카운트 수를 반환한다.")
     void 로또번호_비교() {
         Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 4, 5, 8, 9, 10)));
-        assertThat(lotto.checkResult(lottoNumbers)).isEqualTo(Division.DIVISION_FOUR);
+        assertThat(lotto.matchCount(lottoNumbers)).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("입력받은 로또번호가 로또에 있는지 확인한다.")
+    void 로또번호_존재_여부() {
+        Lotto lotto = new Lotto(lottoNumbers);
+        assertAll(
+                () -> assertThat(lotto.hasNumber(new LottoNumber(6))).isTrue(),
+                () -> assertThat(lotto.hasNumber(new LottoNumber(45))).isFalse()
+        );
     }
 }

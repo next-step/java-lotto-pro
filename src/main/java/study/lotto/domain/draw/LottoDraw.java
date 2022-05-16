@@ -12,15 +12,15 @@ public class LottoDraw {
 
     public LottoDraw(List<Integer> lottoNubmers, int bonusNumber) {
         this.winningNumber = new LottoNumbers(lottoNubmers);
-        this.bonusNumber = new LottoNumber(validateBonusDuplicates(winningNumber, bonusNumber));
+        this.bonusNumber = validateBonusDuplicates(winningNumber, new LottoNumber(bonusNumber));
     }
 
     public DrawResult match(Lottos lottos) {
-        DivisionResults divisionResults = lottos.findWinnings(winningNumber);
+        DivisionResults divisionResults = lottos.findWinnings(winningNumber, bonusNumber);
         return new DrawResult(divisionResults);
     }
 
-    private int validateBonusDuplicates(final LottoNumbers winningNumber, final int bonusNumber) {
+    private LottoNumber validateBonusDuplicates(final LottoNumbers winningNumber, final LottoNumber bonusNumber) {
         if (winningNumber.has(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
         }

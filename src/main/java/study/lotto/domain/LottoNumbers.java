@@ -27,9 +27,9 @@ public class LottoNumbers {
         return duplicates;
     }
 
-    public boolean has(int number) {
+    public boolean has(LottoNumber number) {
         return value.stream()
-                .anyMatch(lottoNumber -> lottoNumber.hasNumber(number));
+                .anyMatch(lottoNumber -> lottoNumber.equals(number));
     }
 
     public List<Integer> numbers() {

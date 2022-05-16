@@ -15,9 +15,9 @@ public class LottosTest {
     @DisplayName("당첨번호를 입력하면 당첨 결과를 받을 수 있다.")
     void 당첨결과_확인() {
         Lottos lottos = fixturesLotto();
+        LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 3, 5, 22, 44, 45));
         DivisionResults divisionResults = expectedDivisionResults();
-        assertThat(lottos.findWinnings(new LottoNumbers(Arrays.asList(1, 3, 5, 22, 44, 45)))).isEqualTo(
-                divisionResults);
+        assertThat(lottos.findWinnings(winningNumbers, new LottoNumber(14))).isEqualTo(divisionResults);
     }
 
     private DivisionResults expectedDivisionResults() {
@@ -25,7 +25,9 @@ public class LottosTest {
                 new DivisionResult(Division.DIVISION_ONE, 0L),
                 new DivisionResult(Division.DIVISION_TWO, 1L),
                 new DivisionResult(Division.DIVISION_THREE, 0L),
-                new DivisionResult(Division.DIVISION_FOUR, 1L));
+                new DivisionResult(Division.DIVISION_FOUR, 0L),
+                new DivisionResult(Division.DIVISION_FIVE, 1L)
+        );
 
         DivisionResults divisionResults = new DivisionResults(divisionResultList);
         return divisionResults;
