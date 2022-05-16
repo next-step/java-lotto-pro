@@ -13,6 +13,10 @@ public class PositiveInteger {
         return new PositiveInteger(value);
     }
 
+    public static PositiveInteger valueOf(final String text) {
+        return new PositiveInteger(Integer.parseInt(text));
+    }
+
     public int getValue() {
         return value;
     }

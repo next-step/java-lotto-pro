@@ -12,7 +12,7 @@ public class NumberText {
 
     public static NumberText parse(final String text) {
         validateInputText(text);
-        return new NumberText(PositiveInteger.valueOf(Integer.parseInt(text)));
+        return new NumberText(PositiveInteger.valueOf(text));
     }
 
     public NumberText add(final NumberText numberText) {
