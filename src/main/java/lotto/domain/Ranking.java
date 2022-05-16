@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 public enum Ranking {
     FIRST(6, false, 2_000_000_000),
@@ -21,11 +22,24 @@ public enum Ranking {
     }
 
     public static Ranking findRank(int count, boolean matchBonus) {
-        return Arrays.stream(values())
-                .filter(rank -> rank.matchingCount == count
-                        && rank.matchBonus == matchBonus)
+        Ranking ranking = Arrays.stream(values())
+                .filter(compareCountAndBonus(count, matchBonus))
                 .findFirst()
                 .orElse(NONE);
+
+        if (isNotExistRanking(ranking, matchBonus)) {
+            return findRank(count, false);
+        }
+        return ranking;
+    }
+
+    private static boolean isNotExistRanking(Ranking ranking, boolean matchBonus) {
+        return ranking == Ranking.NONE && matchBonus;
+    }
+
+    private static Predicate<Ranking> compareCountAndBonus(int count, boolean matchBonus) {
+        return rank -> rank.matchingCount == count
+                && rank.matchBonus == matchBonus;
     }
 
     public int getReward() {
