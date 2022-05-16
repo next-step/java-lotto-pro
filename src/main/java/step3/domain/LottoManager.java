@@ -31,7 +31,7 @@ public class LottoManager {
         for (int i = 0; i < tickets; i++) {
             lottoTickets.add(makeRandomLottoTicket());
         }
-        return lottoTickets.size();
+        return tickets;
     }
 
 
