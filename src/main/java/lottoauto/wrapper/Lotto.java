@@ -28,5 +28,9 @@ public class Lotto {
         return numbers.toString();
     }
 
+    public int compareLotto(List<Integer> winners, List<Integer> numbers) {
+
+        return 0;
+    }
 
 }
