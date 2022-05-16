@@ -56,14 +56,15 @@ public class LottoVendingMachineTest {
         LottoGenerator spyLottoGenerator = createMockLottoGenerator(autoLotto.get(0));
         LottoVendingMachine lottoVendingMachine = new LottoVendingMachine(spyLottoGenerator);
         lottoVendingMachine.issued(new LottoMoney(3000), manualLotto);
-        assertThat(lottoVendingMachine.printIssuedLotto()).isEqualTo(issuedHistory);
+        Optional<IssuedHistory> isIssuedHistory = lottoVendingMachine.printIssuedLotto();
+        assertThat(isIssuedHistory.isPresent()).isTrue();
+        assertThat(isIssuedHistory.get()).isEqualTo(issuedHistory);
     }
 
-    @DisplayName("로또머신은 발급된 기록이 없을때 에러를 반환한다.")
+    @DisplayName("로또머신은 발급된 기록이 없을때 빈 객체를 반환한다.")
     @Test
     void invalidPrintIssuedLottoInformation() {
-        assertThatExceptionOfType(IllegalStateException.class)
-                .isThrownBy(vendingMachine::printIssuedLotto);
+        assertThat(vendingMachine.printIssuedLotto()).isEqualTo(Optional.empty());
     }
 
     private static Stream<Arguments> provideIssuedHistory() {

@@ -37,11 +37,8 @@ public class LottoVendingMachine {
         return new LottoPaper(totalLotto(manualLotto, automaticallyIssuedLotto));
     }
 
-    public IssuedHistory printIssuedLotto() {
-        if (Objects.isNull(latestIssuedHistory)) {
-            throw new IllegalStateException("발급기록이 없습니다.");
-        }
-        return latestIssuedHistory;
+    public Optional<IssuedHistory> printIssuedLotto() {
+        return Objects.isNull(latestIssuedHistory) ? Optional.empty() : Optional.of(latestIssuedHistory);
     }
 
     private List<Lotto> totalLotto(final List<Lotto> manualLotto, final List<Lotto> automaticallyIssuedLotto) {
