@@ -34,4 +34,13 @@ public class Lottos {
         return result;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        for (Lotto lotto : lottoList) {
+            builder.append(lotto.toString() + "\n");
+        }
+        return builder.toString();
+    }
 }
