@@ -20,7 +20,7 @@ public class LottoController {
 
     public void startLotto() {
         Money money = null;
-        while (money == null) {
+        while (money == null) { //돈을 정상적으로 받아올때까지 반복한다
             String moneySource = inputView.getMoney();
             money = lottoMachine.createMoney(moneySource);
         }
@@ -29,7 +29,7 @@ public class LottoController {
         outputView.printLottoInfo(lottoMachine.getLottoNumbers());
 
         LottoTicket winnerTicket = null;
-        while (winnerTicket == null) {
+        while (winnerTicket == null) { //우승 티켓을 정상적으로 받아올때까지 반복한다
             String manualLottoSource = inputView.getWinnerLotto();
             winnerTicket = lottoMachine.makeManualLottoTicket(manualLottoSource);
         }
