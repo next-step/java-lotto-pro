@@ -2,6 +2,7 @@ package lotto.model;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,10 +25,18 @@ public class WinningMoneyTest {
 	@Test
 	@DisplayName("로또번호가 맞은 갯수에 대한 enum 반환 테스트")
 	void find_winning_money() {
-		assertAll(() -> assertEquals(WinningMoney.SIX.getWinningMoney(), 2000000000),
-				() -> assertEquals(WinningMoney.find(6), WinningMoney.SIX),
+		assertAll(() -> assertEquals(WinningMoney.find(6), WinningMoney.SIX),
 				() -> assertEquals(WinningMoney.find(5), WinningMoney.FIVE),
 				() -> assertEquals(WinningMoney.find(4), WinningMoney.FOUR),
 				() -> assertEquals(WinningMoney.find(3), WinningMoney.THREE));
+	}
+
+	@Test
+	@DisplayName("2등 추가 테스트")
+	void win_second_test() {
+		assertAll(() -> assertEquals(WinningMoney.FIVE_BOUNS.getWinningMoney(), 30000000),
+				() -> assertEquals(WinningMoney.FIVE_BOUNS.getMatchCount(), 5),
+				() -> assertEquals(WinningMoney.secondPlace(), WinningMoney.FIVE_BOUNS),
+				() -> assertTrue(WinningMoney.FIVE_BOUNS.isSecondPlace()));
 	}
 }

@@ -13,7 +13,7 @@ public class WinningListTest {
 	@Test
 	@DisplayName("당첨내역 생성 테스트")
 	void create_winningList() {
-		assertEquals(new WinningList().getWinningList().size(), 5);
+		assertEquals(new WinningList().getWinningList().size(), 6);
 	}
 
 	@Test
