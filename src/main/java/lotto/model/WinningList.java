@@ -4,16 +4,17 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WinningList {
-	private Map<WinningMoney, Integer> winningList;
+	private static final int BOUNS_CHECK_NUMBER = 5;
+	private final Map<WinningMoney, Integer> winningList;
 
 	public WinningList() {
 		winningList = new LinkedHashMap<>();
 		initWinningList();
 	}
 
-	public WinningList(Lottos lottos, LottoNumbers winningLottoNumbers) {
+	public WinningList(Lottos lottos, LottoNumbers winningLottoNumbers, String bounsLottoNumber) {
 		this();
-		match(lottos, winningLottoNumbers);
+		match(lottos, winningLottoNumbers, bounsLottoNumber);
 	}
 
 	public Map<WinningMoney, Integer> getWinningList() {
@@ -26,11 +27,25 @@ public class WinningList {
 		}
 	}
 
-	private void match(Lottos lottos, LottoNumbers winningLottoNumbers) {
+	private void match(Lottos lottos, LottoNumbers winningLottoNumbers, String bounsLottoNumber) {
 		for (LottoNumbers lottoNumbers : lottos.getLottos()) {
 			int count = winningLottoNumbers.countEqualsLottoNumber(lottoNumbers);
-			increase(WinningMoney.find(count));
+			increase(find(lottoNumbers, count, bounsLottoNumber));
 		}
+	}
+
+	private WinningMoney find(LottoNumbers lottoNumbers, int count, String bounsLottoNumber) {
+		if (isSecondPlace(lottoNumbers, count, bounsLottoNumber)) {
+			return WinningMoney.FIVE_BOUNS;
+		}
+		return WinningMoney.find(count);
+	}
+
+	private boolean isSecondPlace(LottoNumbers lottoNumbers, int count, String bounsLottoNumber) {
+		if (count != BOUNS_CHECK_NUMBER) {
+			return false;
+		}
+		return lottoNumbers.getLottoNumbers().contains(new LottoNumber(bounsLottoNumber));
 	}
 
 	private void increase(WinningMoney winningMoney) {

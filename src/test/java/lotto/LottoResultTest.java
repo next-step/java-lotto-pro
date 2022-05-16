@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
-import lotto.model.WinningList;
 import lotto.model.WinningMoney;
 
 public class LottoResultTest {
@@ -22,10 +21,8 @@ public class LottoResultTest {
 		lottos.add(new LottoNumbers("1,2,3,4,5,6"));
 		lottos.add(new LottoNumbers("1,2,3,4,5,7"));
 
-		LottoResult lottoResult = new LottoResult(new Lottos(lottos), new LottoNumbers("1,2,3,4,5,6"));
-		WinningList winningList = lottoResult.winningList();
-
-		assertEquals(lottoResult.profitRate(lottoResult.winningList(), 1000),
+		LottoResult lottoResult = new LottoResult(new Lottos(lottos), new LottoNumbers("1,2,3,4,5,6"), "8");
+		assertEquals(lottoResult.profitRate(1000),
 				(WinningMoney.SIX.getWinningMoney() + WinningMoney.FIVE.getWinningMoney()) / 2000);
 	}
 }

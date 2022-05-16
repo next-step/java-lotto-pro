@@ -14,9 +14,9 @@ public enum WinningMoney {
 	FIVE_BOUNS(5, 30_000_000), 
 	SIX(6, 2_000_000_000);
 
-	private static final Map<Integer, WinningMoney> WINNING_MONEY_MAP = Collections.unmodifiableMap(
-			Stream.of(values()).filter(WinningMoney::isNotSecondPlace)
-			.collect(Collectors.toMap(WinningMoney::getMatchCount, Function.identity())));
+	private static final Map<Integer, WinningMoney> WINNING_MONEY_MAP = Collections
+			.unmodifiableMap(Stream.of(values()).filter(WinningMoney::isNotSecondPlace)
+					.collect(Collectors.toMap(WinningMoney::getMatchCount, Function.identity())));
 	private static final int DEFAULT_WINNING_MONEY_KEY = 0;
 
 	private final int matchCount;
@@ -45,15 +45,11 @@ public enum WinningMoney {
 		}
 		return WINNING_MONEY_MAP.get(DEFAULT_WINNING_MONEY_KEY);
 	}
-
-	public static WinningMoney secondPlace() {
-		return FIVE_BOUNS;
-	}
 	
 	public boolean isSecondPlace() {
 		return this == FIVE_BOUNS;
 	}
-	
+
 	private boolean isNotSecondPlace() {
 		return this != FIVE_BOUNS;
 	}

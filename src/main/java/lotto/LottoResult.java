@@ -5,19 +5,19 @@ import lotto.model.Lottos;
 import lotto.model.WinningList;
 
 public class LottoResult {
-	private Lottos lottos;
-	private LottoNumbers lastWinningLotto;
+	private final Lottos lottos;
+	private final WinningList winningList;
 
-	public LottoResult(Lottos lottos, LottoNumbers lastWinningLotto) {
+	public LottoResult(Lottos lottos, LottoNumbers lastWinningLotto, String bounsLottoNumber) {
 		this.lottos = lottos;
-		this.lastWinningLotto = lastWinningLotto;
+		this.winningList = new WinningList(lottos, lastWinningLotto, bounsLottoNumber);
 	}
 
 	public WinningList winningList() {
-		return new WinningList(lottos, lastWinningLotto);
+		return winningList;
 	}
 
-	public double profitRate(WinningList winningList, int lottoPrice) {
+	public double profitRate(int lottoPrice) {
 		return (double) totalWinningMoney(winningList) / (lottos.getLottos().size() * lottoPrice);
 	}
 

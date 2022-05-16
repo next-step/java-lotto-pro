@@ -36,7 +36,7 @@ public class WinningMoneyTest {
 	void win_second_test() {
 		assertAll(() -> assertEquals(WinningMoney.FIVE_BOUNS.getWinningMoney(), 30000000),
 				() -> assertEquals(WinningMoney.FIVE_BOUNS.getMatchCount(), 5),
-				() -> assertEquals(WinningMoney.secondPlace(), WinningMoney.FIVE_BOUNS),
+				() -> assertEquals(WinningMoney.FIVE_BOUNS, WinningMoney.FIVE_BOUNS),
 				() -> assertTrue(WinningMoney.FIVE_BOUNS.isSecondPlace()));
 	}
 }
