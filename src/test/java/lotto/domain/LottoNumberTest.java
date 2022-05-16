@@ -26,4 +26,13 @@ public class LottoNumberTest {
             new LottoNumber(number);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "%", "0", "-1", "46"})
+    @DisplayName("string 타입의 로또 번호가 숫자가 아니거나 범위를 벗어났을 경우 Exception 발생 확인")
+    void validateStringNumber(String number) {
+        assertThatThrownBy(() -> {
+            new LottoNumber(number);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }
