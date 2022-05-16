@@ -15,11 +15,6 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-
-    private Lotto() {
-        this(autoLottoNumbers());
-    }
-
     private Lotto(List<Integer> lottoNumbers) {
         valid(lottoNumbers);
         Collections.sort(lottoNumbers);
@@ -80,7 +75,7 @@ public class Lotto {
 
     private List<LottoNumber> mapToLottoNumber(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

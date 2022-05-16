@@ -1,16 +1,32 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
     static final int MIN_NUMBER = 1;
     static final int MAX_NUMBER = 45;
+    private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
     private final int number;
 
-    public LottoNumber(int number) {
-        valid(number);
+    static {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
+
+    private LottoNumber(int number) {
         this.number = number;
+    }
+
+    public static LottoNumber of(int number) {
+        LottoNumber lottoNumber = lottoNumbers.get(number);
+        if (lottoNumber == null) {
+            throw new IllegalArgumentException("로또의 숫자는" + MIN_NUMBER + "~" + MAX_NUMBER + "까지만 허용합니다.");
+        }
+        return lottoNumber;
     }
 
     public static LottoNumber createBonusNumber(Lotto winnerLotto, int bonusNumber)
@@ -23,10 +39,9 @@ public class LottoNumber {
     }
 
     private void valid(int number) {
-        if (isNotNumberRange(number)) {
-            throw new IllegalArgumentException(
-                    "로또의 숫자는" + MIN_NUMBER + "~" + MAX_NUMBER + "까지만 허용합니다.");
-        }
+
+
+
     }
 
     private boolean isNotNumberRange(int number) {

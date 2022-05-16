@@ -72,8 +72,8 @@ class LottoTest {
     void isHas(){
         Lotto lottoNumbers = Lotto.createCustomLotto(Arrays.asList(1, 4, 3, 5, 6, 7));
 
-        assertThat(lottoNumbers.isContain(new LottoNumber(1))).isTrue();
-        assertThat(lottoNumbers.isContain(new LottoNumber(21))).isFalse();
+        assertThat(lottoNumbers.isContain(LottoNumber.of(1))).isTrue();
+        assertThat(lottoNumbers.isContain(LottoNumber.of(21))).isFalse();
     }
 
     private static Stream<Arguments> provideLottoSize() {
