@@ -2,11 +2,13 @@ package lotto.domain;
 
 import static lotto.constants.LottoConstants.SPLIT_SYMBOL;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.exception.ExceptionType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,5 +43,15 @@ class LottoTest {
         Lotto lotto = new Lotto(given);
 
         assertThat(lotto.getNumbers()).containsExactly(7, 11, 12, 15, 28, 43);
+    }
+
+    @DisplayName("로또의 길이가 6 이외의 값이 오면 예외가 발생해야 한다")
+    @Test
+    void lotto_number_size_test() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        assertThatThrownBy(() -> {
+            new Lotto(numbers);
+        }).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(ExceptionType.INVALID_LOTTO_NUMBER_SIZE.getMessage());
     }
 }
