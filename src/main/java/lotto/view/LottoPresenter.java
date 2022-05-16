@@ -9,14 +9,18 @@ import lotto.domain.LottoPayment;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
 import lotto.service.LottoNumbersFactory;
+import lotto.service.LottoPaymentFactory;
 import lotto.service.LottoTicketsFactory;
 
 public class LottoPresenter {
+    private final LottoPaymentFactory lottoPaymentFactory;
     private final LottoNumbersFactory lottoNumbersFactory;
     private final LottoTicketsFactory lottoTicketsFactory;
 
-    public LottoPresenter(final LottoNumbersFactory lottoNumbersFactory,
+    public LottoPresenter(final LottoPaymentFactory lottoPaymentFactory,
+                          final LottoNumbersFactory lottoNumbersFactory,
                           final LottoTicketsFactory lottoTicketsFactory) {
+        this.lottoPaymentFactory = lottoPaymentFactory;
         this.lottoNumbersFactory = lottoNumbersFactory;
         this.lottoTicketsFactory = lottoTicketsFactory;
     }
@@ -34,7 +38,7 @@ public class LottoPresenter {
     private LottoPayment requestPayment(final Scanner scanner) {
         System.out.println(PAYMENT.getMessage());
         try {
-            final LottoPayment payment = new LottoPayment(scanner.nextLine());
+            final LottoPayment payment = lottoPaymentFactory.create(scanner.nextLine());
             printPaymentResult(payment);
             return payment;
         } catch (IllegalArgumentException e) {

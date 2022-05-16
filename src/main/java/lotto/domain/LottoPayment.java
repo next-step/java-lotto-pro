@@ -1,30 +1,14 @@
 package lotto.domain;
 
-import static lotto.domain.message.ErrorMessage.INVALID_PAYMENT;
-
 import java.util.Objects;
 
 public class LottoPayment {
-    private static final int LOTTO_TICKET_COST = 1000;
-
     private final int money;
     private final int purchasableAmount;
 
-    public LottoPayment(final String money) {
-        this.money = validateMoney(money);
-        purchasableAmount = this.money / LOTTO_TICKET_COST;
-    }
-
-    private static int validateMoney(final String moneyString) {
-        final int money = Integer.parseInt(moneyString);
-        checkAmount(money);
-        return money;
-    }
-
-    private static void checkAmount(final int money) {
-        if (money <= 0 || money % LOTTO_TICKET_COST != 0) {
-            throw new IllegalArgumentException(INVALID_PAYMENT.getMessage());
-        }
+    public LottoPayment(final int money, final int purchasableAmount) {
+        this.money = money;
+        this.purchasableAmount = purchasableAmount;
     }
 
     public int getMoney() {
