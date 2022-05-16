@@ -4,10 +4,6 @@ import generic.Money;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.Lottos;
 
 public class LottoMachine {
     private static final String SPLITTER = ",";
@@ -30,8 +26,8 @@ public class LottoMachine {
         }
     }
 
-    public static LottoNumbers winningLottoNumbers(final String winningNumber) {
-        return LottoNumbers.pickNumbers(splitLottoNumbers(winningNumber));
+    public static WinningNumbers winningLottoNumbers(final String winningNumber, final String bonusNumber) {
+        return WinningNumbers.of(LottoNumbers.pickNumbers(splitLottoNumbers(winningNumber)), LottoNumber.valueOf(bonusNumber)) ;
     }
 
     private static List<LottoNumber> splitLottoNumbers(final String winningNumber) {

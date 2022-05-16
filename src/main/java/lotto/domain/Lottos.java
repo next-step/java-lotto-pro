@@ -42,7 +42,7 @@ public class Lottos {
         return Lotto.PURCHASE_PRICE.times(this.lottoList.size());
     }
 
-    public LottoWinResultGroup end(final LottoNumbers winningNumbers) {
+    public LottoWinResultGroup draw(final WinningNumbers winningNumbers) {
         return new LottoWinResultGroup(this.lottoList.stream()
                 .map(lotto -> lotto.confirm(winningNumbers))
                 .collect(Collectors.toList())

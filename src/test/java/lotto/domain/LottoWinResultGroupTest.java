@@ -3,6 +3,7 @@ package lotto.domain;
 import static generic.Money.valueOf;
 import static java.util.Arrays.asList;
 import static lotto.LottoTestUtils.resultGroup;
+import static lotto.domain.LottoWinResult.FIFTH;
 import static lotto.domain.LottoWinResult.FIRST;
 import static lotto.domain.LottoWinResult.FOURTH;
 import static lotto.domain.LottoWinResult.NO_WIN;
@@ -41,8 +42,8 @@ class LottoWinResultGroupTest {
     static Stream<Arguments> totalWinningPriceArgs() {
         return Stream.of(
                 Arguments.of(resultGroup(FIRST, NO_WIN, NO_WIN, NO_WIN), Money.valueOf(2000000000)),
-                Arguments.of(resultGroup(FOURTH, FOURTH, FOURTH), Money.valueOf(5000 + 5000 + 5000)),
-                Arguments.of(resultGroup(FIRST, THIRD, SECOND, NO_WIN), Money.valueOf(2000000000 + 1500000 + 50000))
+                Arguments.of(resultGroup(FIFTH, FIFTH, FIFTH), Money.valueOf(5000 + 5000 + 5000)),
+                Arguments.of(resultGroup(FIRST, THIRD, SECOND, NO_WIN), Money.valueOf(2000000000 + 1_500_000 + 30_000_000))
         );
     }
 

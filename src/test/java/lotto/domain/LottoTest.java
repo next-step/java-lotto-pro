@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.LottoTestUtils.lottoNumbers;
+import static lotto.LottoTestUtils.winningNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
@@ -22,7 +24,7 @@ class LottoTest {
 
     @ParameterizedTest
     @MethodSource("compareNumbers")
-    void 로또_당첨_번호와_비교하여_갯수가_맞는지(LottoNumbers lottoNumbers, LottoNumbers winNumbers, LottoWinResult winResult) {
+    void 로또_당첨_번호와_비교하여_갯수가_맞는지(LottoNumbers lottoNumbers, WinningNumbers winNumbers, LottoWinResult winResult) {
         // given
         final Lotto auto = Lotto.generate(lottoNumbers);
 
@@ -32,12 +34,12 @@ class LottoTest {
 
     static Stream<Arguments> compareNumbers() {
         return Stream.of(
-                Arguments.of(LottoTestUtils.lottoNumbers(1, 2, 3, 4, 5, 6),
-                        LottoTestUtils.lottoNumbers(1, 2, 3, 4, 5, 6), LottoWinResult.FIRST),
-                Arguments.of(LottoTestUtils.lottoNumbers(1, 2, 3, 4, 5, 6),
-                        LottoTestUtils.lottoNumbers(1, 2, 3, 4, 7, 8), LottoWinResult.THIRD),
-                Arguments.of(LottoTestUtils.lottoNumbers(1, 2, 3, 4, 5, 6),
-                        LottoTestUtils.lottoNumbers(7, 8, 9, 10, 11, 12), LottoWinResult.NO_WIN)
+                Arguments.of(lottoNumbers(1, 2, 3, 4, 5, 6),
+                        winningNumbers(1, 2, 3, 4, 5, 6, 7), LottoWinResult.FIRST),
+                Arguments.of(lottoNumbers(1, 2, 3, 4, 5, 6),
+                        winningNumbers(1, 2, 3, 4, 5, 7, 8), LottoWinResult.THIRD),
+                Arguments.of(lottoNumbers(1, 2, 3, 4, 5, 6),
+                        winningNumbers(7, 8, 9, 10, 11, 12, 13), LottoWinResult.NO_WIN)
         );
     }
 }

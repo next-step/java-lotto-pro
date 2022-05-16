@@ -33,8 +33,9 @@ public class Lotto {
                 randomPickCount(new ArrayList<>(LottoNumber.ALL_LOTTO_NUMBERS), PICK_COUNT_NUMBER));
     }
 
-    public LottoWinResult confirm(final LottoNumbers winNumbers) {
-        return LottoWinResult.confirm(pickLottoNumbers.compareCount(winNumbers));
+    public LottoWinResult confirm(final WinningNumbers winNumbers) {
+        return LottoWinResult.confirm(pickLottoNumbers.compareCount(winNumbers.getLottoNumbers()),
+                pickLottoNumbers.contains(winNumbers.getBonusNumber()));
     }
 
     public String toStringPickNumbers() {

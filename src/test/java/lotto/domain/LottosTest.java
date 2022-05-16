@@ -1,22 +1,17 @@
 package lotto.domain;
 
-import static generic.Money.valueOf;
 import static lotto.LottoTestUtils.lotto;
-import static lotto.LottoTestUtils.lottoNumbers;
 import static lotto.LottoTestUtils.lottos;
 import static lotto.LottoTestUtils.resultGroup;
+import static lotto.LottoTestUtils.winningNumbers;
+import static lotto.domain.LottoWinResult.FIFTH;
 import static lotto.domain.LottoWinResult.FIRST;
-import static lotto.domain.LottoWinResult.FOURTH;
 import static lotto.domain.LottoWinResult.NO_WIN;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import generic.Money;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoWinResultGroup;
-import lotto.domain.Lottos;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -56,9 +51,9 @@ class LottosTest {
 
     @ParameterizedTest
     @MethodSource("lottosEndArgs")
-    void 로또가_종료되어_당첨결과_확인(Lottos lottos, LottoNumbers winNumbers, LottoWinResultGroup lottoWinResultGroup) {
+    void 로또가_종료되어_당첨결과_확인(Lottos lottos, WinningNumbers winNumbers, LottoWinResultGroup lottoWinResultGroup) {
         // when & then
-        assertThat(lottos.end(winNumbers)).isEqualTo(lottoWinResultGroup);
+        assertThat(lottos.draw(winNumbers)).isEqualTo(lottoWinResultGroup);
     }
 
     static Stream<Arguments> lottosEndArgs() {
@@ -66,8 +61,8 @@ class LottosTest {
                 Arguments.of(lottos(lotto(1, 2, 3, 4, 5, 6),
                                 lotto(1, 2, 3, 7, 8, 9),
                                 lotto(7, 8, 9, 10, 11, 12)),
-                        lottoNumbers(1, 2, 3, 4, 5, 6),
-                        resultGroup(FIRST, FOURTH, NO_WIN))
+                        winningNumbers(1, 2, 3, 4, 5, 6, 7),
+                        resultGroup(FIRST, FIFTH, NO_WIN))
         );
     }
 

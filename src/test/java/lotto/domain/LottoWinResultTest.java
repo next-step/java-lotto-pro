@@ -12,15 +12,15 @@ import org.junit.jupiter.params.provider.CsvSource;
 class LottoWinResultTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"6;FIRST", "5;SECOND", "4;THIRD", "3;FOURTH", "2;NO_WIN", "0;NO_WIN"}, delimiterString = ";")
+    @CsvSource(value = {"6;FIRST;false", "5;SECOND;true", "5;THIRD;false", "4;FOURTH;false", "3;FIFTH;false", "2;NO_WIN;false", "0;NO_WIN;false"}, delimiterString = ";")
     @DisplayName("당첨 번호 갯수 별로 결과 생성")
-    void confirm(int count, LottoWinResult expected) {
+    void confirm(int count, LottoWinResult expected, boolean isCorrectBonusNumber) {
         // when & then
-        assertThat(LottoWinResult.confirm(count)).isEqualTo(expected);
+        assertThat(LottoWinResult.confirm(count, isCorrectBonusNumber)).isEqualTo(expected);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"FIRST;1;2000000000", "FOURTH;10;50000"}, delimiterString = ";")
+    @CsvSource(value = {"FIRST;1;2000000000", "FOURTH;10;500000"}, delimiterString = ";")
     @DisplayName("횟수 별로 당첨금 계산")
     void price(LottoWinResult winResult, long count, int price) {
         // when & then

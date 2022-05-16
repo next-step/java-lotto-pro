@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static generic.Money.valueOf;
 import static lotto.LottoTestUtils.resultGroup;
+import static lotto.domain.LottoWinResult.FIFTH;
 import static lotto.domain.LottoWinResult.FOURTH;
 import static lotto.domain.LottoWinResult.NO_WIN;
 import static lotto.domain.LottoWinResult.THIRD;
@@ -30,13 +31,13 @@ class LottoWinStatisticsTest {
     static Stream<Arguments> getReturnRateArgs() {
         return Stream.of(
                 Arguments.of(new LottoWinStatistics(
-                                Money.valueOf(5000), resultGroup(FOURTH, NO_WIN, NO_WIN, NO_WIN, NO_WIN)),
+                                Money.valueOf(5000), resultGroup(FIFTH, NO_WIN, NO_WIN, NO_WIN, NO_WIN)),
                         Rate.valueOf(1.0)),
                 Arguments.of(new LottoWinStatistics(
                                 Money.valueOf(5000), resultGroup(NO_WIN, NO_WIN, NO_WIN, NO_WIN, NO_WIN)),
                         Rate.valueOf(0.0)),
                 Arguments.of(new LottoWinStatistics(
-                                Money.valueOf(5000), resultGroup(THIRD, NO_WIN, NO_WIN, NO_WIN, NO_WIN)),
+                                Money.valueOf(5000), resultGroup(FOURTH, NO_WIN, NO_WIN, NO_WIN, NO_WIN)),
                         Rate.valueOf(10.0))
         );
     }
