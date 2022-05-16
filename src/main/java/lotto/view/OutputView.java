@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.Map;
 import lotto.controller.dto.LottoResultDTO;
+import lotto.domain.common.LottoQuantity;
 import lotto.enums.LottoRank;
 
 public class OutputView {
@@ -14,6 +15,8 @@ public class OutputView {
     private static final String TOTAL_PROFIT_RATE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
     private static final String BENEFIT = "이익이";
     private static final String LOSS = "손해";
+    private static final String MANUAL_AUTO_LOTTO_QUANTITY = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
+
 
 
     private static final int BENEFIT_STANDARD = 1;
@@ -63,5 +66,12 @@ public class OutputView {
             return;
         }
         printTotalWinningCount(lottoRank.getCountOfMatch(), lottoRank.getWinningMoney(), resultMap.get(lottoRank));
+    }
+
+    public static void printLottoQuantity(LottoQuantity quantity) {
+        System.out.println(String.format(MANUAL_AUTO_LOTTO_QUANTITY,
+                quantity.manualLottoQuantity().getManualLottoQuantity(),
+                quantity.totalLottoQuantity().getTotalLottoQuantity()
+        ));
     }
 }
