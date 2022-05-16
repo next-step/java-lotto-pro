@@ -1,7 +1,6 @@
 package step3.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static step3.constant.LottoInfoConstant.LOTTO_PRICE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,8 @@ public class LottoManagerTest {
     @ValueSource(strings = {"1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000", "12000"})
     @DisplayName("금액에 맞춰 로또를 생성한다")
     public void createTicketByMoney(String money) {
-        assertThat(lottoManager.buyRandomTicket(money)).isEqualTo(Integer.parseInt(money) / LOTTO_PRICE);
+        Money moneyEntity = new Money("1200");
+        assertThat(lottoManager.buyRandomTicket(moneyEntity.purchaseTicket())).isEqualTo(moneyEntity.purchaseTicket());
     }
 
     private LottoManager initTestManager() {

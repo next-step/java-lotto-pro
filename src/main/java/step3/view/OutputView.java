@@ -7,17 +7,18 @@ import static step3.constant.LottoViewConstant.REWARD_RATE_FORMAT;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import step3.domain.Money;
 import step3.enums.LottoReward;
 
 public class OutputView {
 
-    private final String isLoss = "손해";
-    private final String isBenefit = "이득";
+
     private final int MATCH_COUNT_LIMIT = 3;
+
     public OutputView() {
     }
 
-    public void printOutput(HashMap<String, Integer> statistics, int money) {
+    public void printOutput(HashMap<String, Integer> statistics, Money money) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -26,15 +27,8 @@ public class OutputView {
         printRewardRate(reward, money);
     }
 
-    private void printRewardRate(long reward, int money) {
-        System.out.println(String.format(REWARD_RATE_FORMAT, reward * 1.0 / money, checkBenefit(reward, money)));
-    }
-
-    private String checkBenefit(long reward, int money) {
-        if (money > reward) {
-            return isLoss;
-        }
-        return isBenefit;
+    private void printRewardRate(long reward, Money money) {
+        System.out.println(String.format(REWARD_RATE_FORMAT, money.getProfitRate(reward), money.isBenefit(reward)));
     }
 
     private long printOverview(HashMap<String, Integer> statistics) {

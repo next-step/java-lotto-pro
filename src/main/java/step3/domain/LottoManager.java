@@ -26,11 +26,8 @@ public class LottoManager {
     }
 
 
-    public int buyRandomTicket(String money) {
-        if (!validMoney(money)) {
-            throw new IllegalArgumentException("돈은 " + LOTTO_PRICE + "이상 입력하셔야합니다");
-        }
-        for (int i = 0; i < Integer.parseInt(money) / LOTTO_PRICE; i++) {
+    public int buyRandomTicket(int tickets) {
+        for (int i = 0; i < tickets; i++) {
             lottoTickets.add(makeRandomLottoTicket());
         }
         return lottoTickets.size();

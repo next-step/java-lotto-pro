@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step3.domain.LottoManager;
+import step3.domain.Money;
 import step3.model.LottoMachine;
 
 public class LottoMachineTest {
@@ -18,9 +19,10 @@ public class LottoMachineTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1000:1000", "999:null", "a:null", "-1:null"}, delimiter = ':', nullValues = {"null"})
-    public void buyTicketTest(String money, String expected) {
-        assertThat(lottoMachine.buyTicket(money)).isEqualTo(expected);
+    @CsvSource(value = {"1000:1", "1500:1", "3000:3", "10001:10"}, delimiter = ':')
+    public void buyTicketTest(String money, int expected) {
+        Money moneyEntity = new Money(money);
+        assertThat(lottoMachine.buyTicket(moneyEntity)).isEqualTo(expected);
     }
 }
 
