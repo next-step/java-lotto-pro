@@ -26,7 +26,7 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public static Lotto create(String numbers) {
+    public static Lotto createWithNumberLetter(String numbers) {
         return new Lotto(Arrays.stream(numbers.split(COMMA))
                 .map(String::trim)
                 .map(Integer::parseInt)

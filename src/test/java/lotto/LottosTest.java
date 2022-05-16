@@ -38,7 +38,7 @@ class LottosTest {
     @MethodSource
     void 구입한_로또를_입력받아_당첨금_통계를_낸다(Lottos lottos, Rank rank) {
         // given
-        Lotto winning = Lotto.create("1, 2, 3, 4, 5, 6");
+        Lotto winning = Lotto.createWithNumberLetter("1, 2, 3, 4, 5, 6");
         // when
         WinningStatistic statistic = lottos.checkWinnings(winning);
         // then
@@ -47,9 +47,9 @@ class LottosTest {
 
     static Stream<Arguments> 구입한_로또를_입력받아_당첨금_통계를_낸다() {
         // given
-        Lotto one = Lotto.create("1, 2, 3, 4, 5, 6");
-        Lotto two = Lotto.create("1, 2, 3, 4, 5, 10");
-        Lotto three = Lotto.create("1, 2, 3, 4, 10, 11");
+        Lotto one = Lotto.createWithNumberLetter("1, 2, 3, 4, 5, 6");
+        Lotto two = Lotto.createWithNumberLetter("1, 2, 3, 4, 5, 10");
+        Lotto three = Lotto.createWithNumberLetter("1, 2, 3, 4, 10, 11");
 
         Lottos first = new Lottos();
         first.add(one);

@@ -19,7 +19,7 @@ public class LottoController {
     public WinningStatistic checkWinning(Lottos buy) {
         String winningNumbers = InputView.inputWinningNumbers();
 
-        Lotto winnings = Lotto.create(winningNumbers);
+        Lotto winnings = Lotto.createWithNumberLetter(winningNumbers);
         return buy.checkWinnings(winnings);
     }
 
