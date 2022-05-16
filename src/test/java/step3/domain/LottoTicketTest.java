@@ -39,7 +39,7 @@ public class LottoTicketTest {
     @DisplayName("로또 정답 갯수를 확인한다.")
     public void checkLottoWin(List<String> lottoInfo, int expected) {
         LottoTicket winnerLotto = new LottoTicket(lottoInfo);
-        assertThat(lottoTicket.getMatchCountWithMyTicket(winnerLotto)).isEqualTo(expected);
+        assertThat(lottoTicket.getMatchCountWithWinnerTicket(winnerLotto.getLottoNumbers())).isEqualTo(expected);
     }
 
     static Stream<Arguments> generateLottoData() {
@@ -63,6 +63,6 @@ public class LottoTicketTest {
             new LottoElement(4),
             new LottoElement(5),
             new LottoElement(6)
-            );
+        );
     }
 }

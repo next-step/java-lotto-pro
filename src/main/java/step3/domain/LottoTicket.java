@@ -39,15 +39,10 @@ public class LottoTicket {
         }
     }
 
-
-    public int getMatchCountWithMyTicket(LottoTicket lottoTicket) {
-        return lottoTicket.getMatchCountWithWinnerTicket(lottoElements);
-    }
-
-    public int getMatchCountWithWinnerTicket(List<LottoElement> compareLottoElements) {
+    public int getMatchCountWithWinnerTicket(List<LottoElement> winnerLottoElements) {
         int matchCount = 0;
-        for (int i = 0; i < LOTTO_ELEMENTS_SIZE; i++) {
-            matchCount = matchCount + isMatch(compareLottoElements.get(i));
+        for (LottoElement winnerLottoElement : winnerLottoElements) {
+            matchCount = matchCount + isMatch(winnerLottoElement);
         }
         return matchCount;
     }
