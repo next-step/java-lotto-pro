@@ -13,17 +13,13 @@ public class LottoService {
 
     public void task() {
         final LottoMoney purchaseAmount = presenter.askPurchaseAmount();
-        final LottoPaper lottoPaper = machine.issued(
-                purchaseAmount, presenter.askManualPurchase(generator, presenter.askManualPurchaseCount()));
-
+        final LottoPaper lottoPaper = machine.issued(purchaseAmount, presenter.askManualPurchase(generator));
         machine.printIssuedLotto().ifPresent(issuedHistory -> {
             presenter.printIssuedHistory(issuedHistory);
             presenter.printLottoList(lottoPaper);
-
             final LottoResult winningResult = lottoPaper.checkAll(
                     new LottoAnswer(presenter.askLastWeekWinningNumber(), presenter.askLottoBonusNumber())
             );
-
             presenter.printResult(winningResult, winningResult.earningRate(purchaseAmount));
         });
     }
