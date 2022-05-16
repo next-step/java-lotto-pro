@@ -23,6 +23,10 @@ public class Money {
         return money < Constants.LOTTO_PRICE;
     }
 
+    public int autoPurchaseCount(int manualCount) {
+        return purchaseCount() - manualCount;
+    }
+
     public int purchaseCount() {
         int purchaseCount = this.money / Constants.LOTTO_PRICE;
         if (purchaseCount > Constants.MAX_PURCHASE_COUNT) {

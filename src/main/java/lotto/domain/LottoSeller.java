@@ -15,12 +15,22 @@ public class LottoSeller {
         return new LottoSeller();
     }
 
+    public LottoTickets lottoTickets(Money money, LottoTickets inputManualTickets) {
+        LottoTickets lottoTickets = inputManualTickets;
+        lottoTickets.addAll(autoLottoTickets(money, inputManualTickets.size()));
+        return lottoTickets;
+    }
+
     public LottoTickets autoLottoTickets(Money receivedMoney) {
+        return autoLottoTickets(receivedMoney, 0);
+    }
+
+    public LottoTickets autoLottoTickets(Money receivedMoney, int manualCount) {
         if (receivedMoney.isLessThenLottoPrice()) {
             throw new IllegalArgumentException(ErrorMessage.LESS_THEN_PRICE_MONEY);
         }
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        for (int i = 0; i < receivedMoney.purchaseCount(); i++) {
+        for (int i = 0; i < receivedMoney.autoPurchaseCount(manualCount); i++) {
             lottoTicketList.add(lottoTicket());
         }
         return LottoTickets.from(lottoTicketList);

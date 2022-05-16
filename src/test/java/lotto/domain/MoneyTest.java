@@ -44,8 +44,27 @@ class MoneyTest {
         int inputMoney = 101000;
         Money money = Money.from(inputMoney);
         //when & then
-        assertThatThrownBy(() -> money.purchaseCount())
+        assertThatThrownBy(money::purchaseCount)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.MAX_PURCHASE_LOTTO);
+    }
+
+    @DisplayName("구입 금액만큼 가능한 개수 확인")
+    @Test
+    void test_로또_구입_개수() {
+        //given
+        Money money = Money.from(5500);
+        //when & then
+        assertThat(money.purchaseCount()).isEqualTo(5);
+    }
+
+    @DisplayName("구입 금액만큼 수동 구입 후 자동 가능한 개수 확인")
+    @Test
+    void test_로또_수동_구입후_자동_개수() {
+        //given
+        Money money = Money.from(14000);
+        int manualCount = 3;
+        //when & then
+        assertThat(money.autoPurchaseCount(manualCount)).isEqualTo(11);
     }
 }

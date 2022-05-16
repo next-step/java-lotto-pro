@@ -26,8 +26,16 @@ public class LottoTickets {
         return lottoWinningRanks;
     }
 
+    public void addAll(LottoTickets addTickets) {
+        this.lottoTickets.addAll(addTickets.lottoTickets);
+    }
+
     public int size() {
         return this.lottoTickets.size();
+    }
+
+    public boolean contains(LottoTicket lottoTicket) {
+        return lottoTickets.contains(lottoTicket);
     }
 
     @Override
