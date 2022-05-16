@@ -12,6 +12,7 @@ public enum WinningRank {
     NONE(0, 0, false);
 
     private static final List<WinningRank> PRINT_WINNING_RANKS = Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST);
+    private static final Integer SECOND_OR_THIRD_MATCH_COUNT = 5;
 
     public final Integer price;
     public final Integer matchCount;
@@ -24,10 +25,10 @@ public enum WinningRank {
     }
 
     public static WinningRank of(int matchCount, boolean matchedBonus) {
-        if (matchCount < 3) {
+        if (matchCount < FIFTH.matchCount) {
             return NONE;
         }
-        if (matchCount == 5) {
+        if (matchCount == SECOND_OR_THIRD_MATCH_COUNT) {
             return getSecondOrThird(matchedBonus);
         }
 
