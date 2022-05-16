@@ -12,6 +12,7 @@ public class LottoViewer {
     private static final String INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_PRICE_ERROR_MESSAGE = "오직 정수만 입력할 수 있습니다.";
     private static final String INPUT_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String PURCHASE_NOTICE_MESSAGE = "%d개를 구매했습니다.";
     private static final String WINNING_STATISTICS_TITLE_MESSAGE = "당첨 통계";
     private static final String BOUNDARY_MESSAGE = "---------";
@@ -33,6 +34,11 @@ public class LottoViewer {
 
     public static String inputWinningNumbers() {
         printMessage(INPUT_WINNING_NUMBERS_MESSAGE);
+        return scanner.nextLine();
+    }
+
+    public static String inputBonusNumber() {
+        printMessage(INPUT_BONUS_NUMBER_MESSAGE);
         return scanner.nextLine();
     }
 
