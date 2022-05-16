@@ -11,7 +11,7 @@ public class Lotto {
     public static final String COMMA = ",";
     public static final String LOTTO_NUMBER_MUST_SIX = "로또 번호는 6개여야 합니다.";
 
-    private List<LottoNumber> lotto = new ArrayList<>();
+    private final List<LottoNumber> lotto = new ArrayList<>();
 
     private Lotto(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
