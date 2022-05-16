@@ -23,9 +23,10 @@ public class Application {
         LottoTicket lottoTicket = machine.sellTicket(new Money(InputView.readMoney()));
         ResultView.printTicket(lottoTicket);
 
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.readWinningNumbers());
         LottoResult result = machine.check(
                 lottoTicket,
-                new LottoWin(InputView.readWinningNumbers(), matchingPrize));
+                new LottoWin(winningNumbers, matchingPrize));
         ResultView.printStats(result);
     }
 }

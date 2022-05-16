@@ -1,3 +1,4 @@
+import lotto.WinningNumbers;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.Match;
@@ -52,13 +53,7 @@ public class LottoGameTest {
     void 당첨_번호_일치_개수() {
         LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 10, 22, 40));
 
-        Match result = lottoGame.check(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(3),
-                new LottoNumber(5),
-                new LottoNumber(14),
-                new LottoNumber(22),
-                new LottoNumber(44)));
+        Match result = lottoGame.check(new WinningNumbers("1,2,3, 4,5, 6"));
 
         assertThat(result).isEqualTo(new Match(3));
     }

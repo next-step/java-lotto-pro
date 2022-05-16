@@ -1,11 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -20,12 +15,9 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static List<LottoNumber> readWinningNumbers() {
+    public static String readWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        String input = scanner.nextLine();
-        return Arrays.stream(input.split(","))
-                .map(s -> new LottoNumber(Integer.parseInt(s.trim())))
-                .collect(Collectors.toList());
+        return scanner.nextLine();
     }
 }

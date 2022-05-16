@@ -1,7 +1,7 @@
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
 import lotto.Match;
 import lotto.TicketCheckResult;
+import lotto.WinningNumbers;
+import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -39,13 +39,7 @@ public class LottoTicketTest {
                 Arrays.asList(1, 2, 4, 10, 11, 12),
                 Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        TicketCheckResult result = lottoTicket.check(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
+        TicketCheckResult result = lottoTicket.check(new WinningNumbers("1,2,3,4,5,6"));
 
         assertThat(result.getCount(new Match(input))).isEqualTo(expected);
     }

@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.LottoNumbersGenerator;
 import lotto.Match;
 import lotto.TicketCheckResult;
+import lotto.WinningNumbers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +41,7 @@ public class LottoTicket {
         }
     }
 
-    public TicketCheckResult check(final List<LottoNumber> winningNumbers) {
+    public TicketCheckResult check(final WinningNumbers winningNumbers) {
         Map<Match, Integer> result = new HashMap<>();
         for (int i = 0; i <= LottoGame.SIZE; i++) {
             result.put(new Match(i), 0);

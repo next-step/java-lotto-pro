@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.Match;
+import lotto.WinningNumbers;
 
 import java.util.HashSet;
 import java.util.List;
@@ -34,10 +35,10 @@ public class LottoGame {
         }
     }
 
-    public Match check(List<LottoNumber> winningNumbers) {
+    public Match check(WinningNumbers winningNumbers) {
         return new Match(
-                (int) winningNumbers.stream()
-                        .map(winningNumber -> this.has(winningNumber))
+                (int) numbers.stream()
+                        .map(number -> winningNumbers.has(number))
                         .filter(b -> b == true)
                         .count());
     }

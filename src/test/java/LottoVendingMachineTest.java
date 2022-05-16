@@ -1,7 +1,7 @@
 import lotto.LottoVendingMachine;
 import lotto.Match;
 import lotto.Money;
-import lotto.domain.LottoNumber;
+import lotto.WinningNumbers;
 import lotto.domain.LottoTicket;
 import lotto.dto.LottoResult;
 import lotto.dto.LottoResultItem;
@@ -12,7 +12,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -54,13 +53,7 @@ public class LottoVendingMachineTest {
                         Arrays.asList(1, 2, 11, 12, 13, 14),
                         Arrays.asList(1, 2, 3, 12, 13, 14)));
 
-        List<LottoNumber> winningNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6));
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
 
         LottoVendingMachine machine = new LottoVendingMachine();
         LottoResult result = machine.check(ticket, new LottoWin(winningNumbers, matchingPrizes));
