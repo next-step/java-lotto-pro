@@ -20,7 +20,7 @@ public class Application {
 
         LottoVendingMachine machine = new LottoVendingMachine();
 
-        LottoTicket lottoTicket = machine.sellTicket(InputView.takeMoney());
+        LottoTicket lottoTicket = machine.sellTicket(new Money(InputView.readMoney()));
         ResultView.printTicket(lottoTicket);
 
         LottoResult result = machine.check(

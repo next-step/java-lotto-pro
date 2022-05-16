@@ -1,7 +1,8 @@
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
 import lotto.LottoVendingMachine;
 import lotto.Match;
+import lotto.Money;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.dto.LottoResult;
 import lotto.dto.LottoResultItem;
 import lotto.dto.LottoWin;
@@ -20,10 +21,10 @@ public class LottoVendingMachineTest {
 
     @ParameterizedTest
     @CsvSource(value = {"14000:14", "0:0", "2900:2"}, delimiter = ':')
-    void 구매(int money, int numberOfGames) {
+    void 구매(String money, int numberOfGames) {
         LottoVendingMachine lottoVendingMachine = new LottoVendingMachine();
 
-        LottoTicket lottoTicket = lottoVendingMachine.sellTicket(money);
+        LottoTicket lottoTicket = lottoVendingMachine.sellTicket(new Money(money));
 
         assertThat(lottoTicket.size()).isEqualTo(numberOfGames);
     }

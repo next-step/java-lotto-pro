@@ -15,9 +15,9 @@ public class LottoVendingMachine {
     public static final int MAX = 45;
     public static final int COUNT = 6;
 
-    public LottoTicket sellTicket(int money) {
+    public LottoTicket sellTicket(Money money) {
         List<List<Integer>> lottoGamesNumbers = new ArrayList<>();
-        final int numberOfGames = money / PRICE;
+        final int numberOfGames = money.numberOfGames(PRICE);
         for (int i = 0; i < numberOfGames; i++) {
             lottoGamesNumbers.add(LottoNumbersGenerator.generate(MIN, MAX, COUNT));
         }
