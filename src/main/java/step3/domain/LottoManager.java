@@ -34,14 +34,6 @@ public class LottoManager {
     }
 
 
-    private boolean validMoney(String money) {
-        try {
-            return Integer.parseInt(money) >= LOTTO_PRICE;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
     private LottoTicket makeRandomLottoTicket() {
         List<Integer> lottoElements = new ArrayList<>();
         shuffle(LOTTO_VALID_ELEMENTS);
