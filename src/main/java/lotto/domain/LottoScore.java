@@ -1,20 +1,29 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LottoScore {
-    private final Map<LottoWinnings, Integer> lottoScoreMap;
+
+    private static final Integer ZERO = 0;
+    private Map<LottoWinnings, Integer> lottoScoreMap;
 
     public LottoScore() {
+        lottoScoreMap = defaultLottoScoreMap();
+    }
+
+    private Map<LottoWinnings, Integer> defaultLottoScoreMap() {
         this.lottoScoreMap = new HashMap<>();
+
+        for (LottoWinnings lottoWinnings : LottoWinnings.scoreTypes()) {
+            lottoScoreMap.put(lottoWinnings, ZERO);
+        }
+
+        return lottoScoreMap;
     }
 
     public Map<LottoWinnings, Integer> getLottoScoreMap() {
-        Object[] mapkey = lottoScoreMap.keySet().toArray();
-        Arrays.sort(mapkey);
         return Collections.unmodifiableMap(lottoScoreMap);
     }
 

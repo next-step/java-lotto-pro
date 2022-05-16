@@ -15,10 +15,10 @@ public class OutputView {
         System.out.println(MessageConstants.OUTPUT_WINNING_STATS);
         System.out.println(MessageConstants.DASH_LIST);
 
-        for (Map.Entry<LottoWinnings, Integer> elem : lottoScoreMap.entrySet()) {
-            System.out.printf(MessageConstants.OUTPUT_LOTTO_NUMBER_COUNT, elem.getKey().getCount());
-            System.out.printf(MessageConstants.OUTPUT_LOTTO_WINNINGS, elem.getKey().getWinnings());
-            System.out.printf(MessageConstants.OUTPUT_LOTTO_SCORE_COUNT, elem.getValue());
+        for (LottoWinnings lottoWinnings : LottoWinnings.scoreTypes()) {
+            System.out.printf(MessageConstants.OUTPUT_LOTTO_NUMBER_COUNT, lottoWinnings.getCount());
+            System.out.printf(MessageConstants.OUTPUT_LOTTO_WINNINGS, lottoWinnings.getWinnings());
+            System.out.printf(MessageConstants.OUTPUT_LOTTO_SCORE_COUNT, lottoScoreMap.get(lottoWinnings));
             System.out.println();
         }
     }

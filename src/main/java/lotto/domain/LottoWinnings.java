@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum LottoWinnings {
     THREE(3, 5000), FOUR(4, 50000), FIVE(5, 1500000), ALL(6, 2000000000), NONE(0, 0);
@@ -28,5 +29,9 @@ public enum LottoWinnings {
 
     public boolean isNone() {
         return this == NONE;
+    }
+
+    public static List<LottoWinnings> scoreTypes() {
+        return Arrays.asList(THREE, FOUR, FIVE, ALL);
     }
 }
