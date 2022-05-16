@@ -1,27 +1,46 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
     public static final int SIZE = 6;
     private final List<LottoNumber> numbers;
+    private LottoNumber bonusNumber;
 
     protected Lotto(List<LottoNumber> numbers) {
         validateLottoSize(numbers);
         this.numbers = numbers;
     }
 
+    protected Lotto(List<LottoNumber> numbers, LottoNumber bonusNumber) {
+        this(numbers);
+        validateBonus(bonusNumber);
+        this.bonusNumber = bonusNumber;
+    }
+
+    private void validateBonus(LottoNumber bonusNumber) {
+        if (isContainsBonusNumber(bonusNumber)) {
+            throw new IllegalArgumentException("당첨번호에 보너스 번호가 포함될 수 없습니다.");
+        }
+    }
+
+    private boolean isContainsBonusNumber(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
     private void validateLottoSize(List<LottoNumber> numbers) {
         if (numbers.size() != SIZE) {
             throw new IllegalArgumentException(String.format("로또 번호는 %d개여야 합니다.", SIZE));
         }
+    }
+
+    public static Lotto of(String winningLottoNumber, int bonusNumber) {
+        return new Lotto(LottoNumber.parse(winningLottoNumber), new LottoNumber(bonusNumber));
     }
 
     public static Lotto from(String numbers) {
