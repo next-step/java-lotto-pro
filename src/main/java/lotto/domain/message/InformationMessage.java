@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.message;
 
 public enum InformationMessage {
     RESULT(System.lineSeparator() + "당첨 통계" + System.lineSeparator() + "---------"),

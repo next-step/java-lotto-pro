@@ -1,7 +1,7 @@
 package lotto.view;
 
-import static lotto.domain.RequestMessage.PAYMENT;
-import static lotto.domain.RequestMessage.WINNING_NUMBERS;
+import static lotto.domain.message.RequestMessage.PAYMENT;
+import static lotto.domain.message.RequestMessage.WINNING_NUMBERS;
 
 import java.util.Scanner;
 import lotto.domain.LottoNumbers;

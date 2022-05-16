@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import static lotto.domain.InformationMessage.LOSE;
-import static lotto.domain.InformationMessage.RESULT;
-import static lotto.domain.InformationMessage.WIN;
+import static lotto.domain.message.InformationMessage.LOSE;
+import static lotto.domain.message.InformationMessage.RESULT;
+import static lotto.domain.message.InformationMessage.WIN;
 
 import java.util.Map;
 import java.util.Map.Entry;

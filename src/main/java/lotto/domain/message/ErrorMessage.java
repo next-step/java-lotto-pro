@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.message;
 
 public enum ErrorMessage {
     INVALID_PAYMENT("구입금액은 1000원 단위로 입력이 가능합니다. 숫자만 입력해주세요."),

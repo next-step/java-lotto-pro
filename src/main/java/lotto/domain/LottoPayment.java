@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.domain.ErrorMessage.INVALID_PAYMENT;
+import static lotto.domain.message.ErrorMessage.INVALID_PAYMENT;
 
 import java.util.Objects;
 
