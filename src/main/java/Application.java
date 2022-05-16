@@ -37,8 +37,8 @@ public class Application {
         return new BonusLottoNumber(input);
     }
 
-    private static void aggregate(ContainCounts containCounts) {
-        Aggregator aggregator = vendor.aggregate(containCounts);
+    private static void aggregate(Ranks ranks) {
+        Aggregator aggregator = vendor.aggregate(ranks);
         consoleOutputView.view(aggregator);
     }
 }

@@ -16,6 +16,6 @@ public class VendorTest {
 
     @Test
     void 집계할_수_있다() {
-        assertThat(new Vendor().aggregate(new ContainCounts())).isInstanceOf(Aggregator.class);
+        assertThat(new Vendor().aggregate(new Ranks())).isInstanceOf(Aggregator.class);
     }
 }

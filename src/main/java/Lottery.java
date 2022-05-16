@@ -9,14 +9,14 @@ public class Lottery {
         this.bonusLottoNumber = bonusLottoNumber;
     }
 
-    public ContainCounts get(Lotto lotto) {
-        ContainCounts containCounts = new ContainCounts();
+    public Ranks get(Lotto lotto) {
+        Ranks ranks = new Ranks();
 
         for (LottoNumbers lottoNumbers : lotto) {
-            containCounts.add(get(lottoNumbers));
+            ranks.add(get(lottoNumbers));
         }
 
-        return containCounts;
+        return ranks;
     }
 
     private Prize get(LottoNumbers lottoNumbers) {

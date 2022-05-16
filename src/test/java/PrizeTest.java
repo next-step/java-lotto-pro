@@ -61,11 +61,11 @@ public class PrizeTest {
 
     @Test
     void 당첨_되면_받을_상금을_계산할_수_있다() {
-        ContainCounts containCounts = new ContainCounts();
-        containCounts.add(Prize.valueOf(5, true));
-        containCounts.add(Prize.valueOf(5, true));
-        containCounts.add(Prize.valueOf(5, true));
-        assertThat(containCounts.totalPrize()).isEqualTo(30000000L);
+        Ranks ranks = new Ranks();
+        ranks.add(Prize.valueOf(5, true));
+        ranks.add(Prize.valueOf(5, true));
+        ranks.add(Prize.valueOf(5, true));
+        assertThat(ranks.totalPrize()).isEqualTo(30000000L);
     }
 
 }

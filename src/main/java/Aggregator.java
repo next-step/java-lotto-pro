@@ -1,28 +1,22 @@
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 public class Aggregator {
     private final long totalPrice;
-    private final List<Prize> prizes;
+    private final Ranks ranks;
 
-    public Aggregator(ContainCounts containCounts) {
-        this.totalPrice = (long) containCounts.size() * Vendor.LOTTO_PRICE;
-        this.prizes = StreamSupport.stream(containCounts.spliterator(), false)
-                .map(ContainCount::find)
-                .collect(Collectors.toList());
+    public Aggregator(Ranks ranks) {
+        this.totalPrice = (long) ranks.size() * Vendor.LOTTO_PRICE;
+        this.ranks = ranks;
     }
 
     public long countGroupBy(Prize prize) {
-        return prizes.stream().filter(prize::equals).count();
-    }
+        if (!this.ranks.contains(prize))
+            return 0;
 
-    public boolean has(Prize prize) {
-        return prizes.contains(prize);
+        return this.ranks.count(prize);
     }
 
     public BigDecimal yield() {
-        return BigDecimal.valueOf((double) Prize.prizeMoney(this) / (double) totalPrice);
+        return BigDecimal.valueOf((double) this.ranks.totalPrize() / (double) totalPrice);
     }
 }

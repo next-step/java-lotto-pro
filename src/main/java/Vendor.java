@@ -32,7 +32,7 @@ public class Vendor {
                 ALL_AVAILABLE_LOTTO_NUMBER_LIST.stream().limit(LottoNumbers.SIZE).collect(Collectors.toList()));
     }
 
-    public Aggregator aggregate(ContainCounts containCounts) {
-        return new Aggregator(containCounts);
+    public Aggregator aggregate(Ranks ranks) {
+        return new Aggregator(ranks);
     }
 }
