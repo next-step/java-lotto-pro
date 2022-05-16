@@ -7,6 +7,7 @@ public class LottoNumber {
     public static final int MAX_NUMBER = 45;
 
     public static final String NOT_RANGE_NUMBER = "[ERROR] 로또 번호는 1~45의 숫자입니다.";
+    public static final String NOT_NUMBER = "[ERROR] 로또의 번호에 숫자 이외의 값이 존재합니다.";
 
     private final int number;
 
