@@ -25,12 +25,8 @@ public class LottoRandomNumbers {
         this.lottoNumbers = numList;
     }
 
-    public void LottoNumberShuffle() {
-        Collections.shuffle(lottoNumbers);
-    }
-
     public List<LottoNumber> generate() {
-        LottoNumberShuffle();
+        Collections.shuffle(lottoNumbers);
 
         return lottoNumbers.stream()
                 .limit(SIZE)
