@@ -1,4 +1,4 @@
-package step3.constant.enums;
+package step3.enums;
 
 public enum InputStatus {
     MONEY, LOTTO

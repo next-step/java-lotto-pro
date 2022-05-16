@@ -1,7 +1,7 @@
 package step3.view;
 
 import java.util.Scanner;
-import step3.constant.enums.InputStatus;
+import step3.enums.InputStatus;
 
 public class InputView {
 

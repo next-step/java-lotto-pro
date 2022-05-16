@@ -7,7 +7,7 @@ import static step3.constant.LottoViewConstant.REWARD_RATE_FORMAT;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import step3.constant.enums.LottoReward;
+import step3.enums.LottoReward;
 
 public class OutputView {
 

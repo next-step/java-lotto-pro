@@ -1,7 +1,7 @@
 package step3.controller;
 
-import static step3.constant.enums.InputStatus.LOTTO;
-import static step3.constant.enums.InputStatus.MONEY;
+import static step3.enums.InputStatus.LOTTO;
+import static step3.enums.InputStatus.MONEY;
 
 import step3.domain.LottoTicket;
 import step3.model.LottoMachine;
