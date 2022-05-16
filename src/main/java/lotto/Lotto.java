@@ -1,6 +1,6 @@
 package lotto;
 
-import static generic.Money.wons;
+import static generic.Money.valueOf;
 import static lotto.Lotto.LottoType.AUTO;
 import static lotto.Lotto.LottoType.MANUAL;
 import static util.ListUtils.randomPickCount;
@@ -19,7 +19,7 @@ public class Lotto {
 
     }
 
-    public static final Money PURCHASE_PRICE = wons(1000);
+    public static final Money PURCHASE_PRICE = Money.valueOf(1000);
 
     private static final int PICK_COUNT_NUMBER = 6;
     private final LottoNumbers pickLottoNumbers;

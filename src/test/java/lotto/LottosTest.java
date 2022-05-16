@@ -1,6 +1,6 @@
 package lotto;
 
-import static generic.Money.wons;
+import static generic.Money.valueOf;
 import static lotto.LottoTestUtils.lotto;
 import static lotto.LottoTestUtils.lottoNumbers;
 import static lotto.LottoTestUtils.lottos;
@@ -10,6 +10,7 @@ import static lotto.LottoWinResult.FOURTH;
 import static lotto.LottoWinResult.NO_WIN;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import generic.Money;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class LottosTest {
     @CsvSource(value = {"12000;12", "2000;2", "2500;2"}, delimiterString = ";")
     void 로또_자동_구매시_로또가_1000원일때_금액에_맞게_구매하는지(int purchase, int count) {
         // when
-        final Lottos lottos = Lottos.purchaseAuto(wons(purchase));
+        final Lottos lottos = Lottos.purchaseAuto(Money.valueOf(purchase));
 
         // then
         assertThat(lottos.size()).isEqualTo(count);
@@ -43,10 +44,10 @@ class LottosTest {
     @CsvSource(value = {"12000;12000", "2000;2000", "2500;2000"}, delimiterString = ";")
     void 로또를_구매한_금액이_맞는지(int purchase, int result) {
         // given
-        final Lottos lottos = Lottos.purchaseAuto(wons(purchase));
+        final Lottos lottos = Lottos.purchaseAuto(Money.valueOf(purchase));
 
         // when & then
-        assertThat(lottos.purchasePrice()).isEqualTo(wons(result));
+        assertThat(lottos.purchasePrice()).isEqualTo(Money.valueOf(result));
     }
 
     @ParameterizedTest

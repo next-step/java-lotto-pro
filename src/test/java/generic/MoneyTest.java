@@ -1,7 +1,6 @@
 package generic;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,8 +14,8 @@ class MoneyTest {
     @DisplayName("원 더하기 테스트")
     void plus(int number1, int number2, int result) {
         // when & then
-        assertThat(Money.wons(number1).plus(Money.wons(number2)))
-                .isEqualTo(Money.wons(result));
+        assertThat(Money.valueOf(number1).plus(Money.valueOf(number2)))
+                .isEqualTo(Money.valueOf(result));
     }
 
     @ParameterizedTest
@@ -24,8 +23,8 @@ class MoneyTest {
     @DisplayName("원 빼기 테스트")
     void minus(int number1, int number2, int result) {
         // when & then
-        assertThat(Money.wons(number1).minus(Money.wons(number2)))
-                .isEqualTo(Money.wons(result));
+        assertThat(Money.valueOf(number1).minus(Money.valueOf(number2)))
+                .isEqualTo(Money.valueOf(result));
     }
 
     @ParameterizedTest
@@ -33,8 +32,8 @@ class MoneyTest {
     @DisplayName("원 배수 테스트")
     void times(int number, int times, int result) {
         // when & then
-        assertThat(Money.wons(number).times(times))
-                .isEqualTo(Money.wons(result));
+        assertThat(Money.valueOf(number).times(times))
+                .isEqualTo(Money.valueOf(result));
     }
 
     @ParameterizedTest
@@ -42,8 +41,8 @@ class MoneyTest {
     @DisplayName("원 나누기 테스트(소수점은 버림)")
     void divide(int number, int times, int result) {
         // when & then
-        assertThat(Money.wons(number).divide(times))
-                .isEqualTo(Money.wons(result));
+        assertThat(Money.valueOf(number).divide(times))
+                .isEqualTo(Money.valueOf(result));
     }
 
     @ParameterizedTest
@@ -51,7 +50,7 @@ class MoneyTest {
     @DisplayName("원 나누기 원으로 수량 계산")
     void count(int number1, int number2, int result) {
         // when & then
-        assertThat(Money.wons(number1).count(Money.wons(number2)))
+        assertThat(Money.valueOf(number1).count(Money.valueOf(number2)))
                 .isEqualTo(result);
     }
 
@@ -59,14 +58,14 @@ class MoneyTest {
     @DisplayName("1000원 값만 문자열로 반환")
     void toStringValue() {
         // when & then
-        assertThat(Money.wons(1000).toStringValue()).isEqualTo("1000");
+        assertThat(Money.valueOf(1000).toStringValue()).isEqualTo("1000");
     }
 
     @Test
     @DisplayName("0원 인지 확인")
     void isZero() {
         // when & then
-        assertThat(Money.ZERO).isEqualTo(Money.wons(0));
+        assertThat(Money.ZERO).isEqualTo(Money.valueOf(0));
         assertThat(Money.ZERO.isZero()).isTrue();
     }
 
@@ -74,6 +73,6 @@ class MoneyTest {
     @DisplayName("원을 비교하여 작인지 확인")
     void isLessThan() {
         // when & then
-        assertThat(Money.ZERO.isLessThan(Money.wons("1000"))).isTrue();
+        assertThat(Money.ZERO.isLessThan(Money.valueOf("1000"))).isTrue();
     }
 }

@@ -6,22 +6,22 @@ import java.util.Objects;
 
 public class Money {
 
-    public static final Money ZERO = Money.wons(0L);
+    public static final Money ZERO = Money.valueOf(0L);
     private BigDecimal value;
 
     private Money(final BigDecimal value) {
         this.value = value;
     }
 
-    public static Money wons(final int wons) {
+    public static Money valueOf(final int wons) {
         return new Money(BigDecimal.valueOf(wons));
     }
 
-    public static Money wons(final long wons) {
+    public static Money valueOf(final long wons) {
         return new Money(BigDecimal.valueOf(wons));
     }
 
-    public static Money wons(final String wons) {
+    public static Money valueOf(final String wons) {
         return new Money(BigDecimal.valueOf(Long.parseLong(wons)));
     }
 

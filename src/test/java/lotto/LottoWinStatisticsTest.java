@@ -1,12 +1,13 @@
 package lotto;
 
-import static generic.Money.wons;
+import static generic.Money.valueOf;
 import static lotto.LottoTestUtils.resultGroup;
 import static lotto.LottoWinResult.FOURTH;
 import static lotto.LottoWinResult.NO_WIN;
 import static lotto.LottoWinResult.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import generic.Money;
 import generic.Rate;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -27,11 +28,14 @@ class LottoWinStatisticsTest {
 
     static Stream<Arguments> getReturnRateArgs() {
         return Stream.of(
-                Arguments.of(new LottoWinStatistics(wons(5000), resultGroup(FOURTH, NO_WIN, NO_WIN, NO_WIN, NO_WIN)),
+                Arguments.of(new LottoWinStatistics(
+                                Money.valueOf(5000), resultGroup(FOURTH, NO_WIN, NO_WIN, NO_WIN, NO_WIN)),
                         Rate.valueOf(1.0)),
-                Arguments.of(new LottoWinStatistics(wons(5000), resultGroup(NO_WIN, NO_WIN, NO_WIN, NO_WIN, NO_WIN)),
+                Arguments.of(new LottoWinStatistics(
+                                Money.valueOf(5000), resultGroup(NO_WIN, NO_WIN, NO_WIN, NO_WIN, NO_WIN)),
                         Rate.valueOf(0.0)),
-                Arguments.of(new LottoWinStatistics(wons(5000), resultGroup(THIRD, NO_WIN, NO_WIN, NO_WIN, NO_WIN)),
+                Arguments.of(new LottoWinStatistics(
+                                Money.valueOf(5000), resultGroup(THIRD, NO_WIN, NO_WIN, NO_WIN, NO_WIN)),
                         Rate.valueOf(10.0))
         );
     }
@@ -40,7 +44,7 @@ class LottoWinStatisticsTest {
     @DisplayName("당첨 결과별 당첨된 횟수 조회")
     void countByWinResult() {
         // given
-        final LottoWinStatistics lottoWinStatistics = new LottoWinStatistics(wons(5000),
+        final LottoWinStatistics lottoWinStatistics = new LottoWinStatistics(Money.valueOf(5000),
                 resultGroup(FOURTH, NO_WIN, NO_WIN, NO_WIN, NO_WIN));
 
         // when & then

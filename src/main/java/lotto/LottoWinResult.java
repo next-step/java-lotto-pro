@@ -1,6 +1,6 @@
 package lotto;
 
-import static generic.Money.wons;
+import static generic.Money.valueOf;
 
 import generic.Money;
 import java.util.Arrays;
@@ -8,11 +8,11 @@ import java.util.List;
 
 public enum LottoWinResult {
 
-    FIRST(6, wons(2000000000)),
-    SECOND(5, wons(1500000)),
-    THIRD(4, wons(50000)),
-    FOURTH(3, wons(5000)),
-    NO_WIN(-1, wons(0)),
+    FIRST(6, Money.valueOf(2000000000)),
+    SECOND(5, Money.valueOf(1500000)),
+    THIRD(4, Money.valueOf(50000)),
+    FOURTH(3, Money.valueOf(5000)),
+    NO_WIN(-1, Money.valueOf(0)),
     ;
 
     public static final List<LottoWinResult> WIN_RESULTS = Arrays.asList(FOURTH, THIRD, SECOND, FIRST);

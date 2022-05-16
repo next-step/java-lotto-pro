@@ -1,6 +1,6 @@
 package lotto;
 
-import static generic.Money.wons;
+import static generic.Money.valueOf;
 
 import generic.Money;
 import java.util.Arrays;
@@ -13,7 +13,7 @@ public class LottoMachine {
     private final Round round;
 
     public LottoMachine(final String purchaseMoneyString) {
-        this.round = Round.start(purchase(wons(purchaseMoneyString.trim())));
+        this.round = Round.start(purchase(valueOf(purchaseMoneyString.trim())));
     }
 
     private Lottos purchase(final Money purchaseMoney) {
