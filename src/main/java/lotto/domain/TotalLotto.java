@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.OutputView;
+
 import java.util.Objects;
 
 public class TotalLotto {
@@ -28,11 +30,11 @@ public class TotalLotto {
     }
 
     public void count(int amount) {
-        this.count = calculatorCount(amount);
+        this.count = isCalculatorCount(amount);
     }
 
-    public void countAndLottos(int amount) throws IllegalArgumentException {
-        this.count = calculatorCount(amount);
+    public void countAndLottos(int amount) {
+        this.count = isCalculatorCount(amount);
 
         Lottos lottos = new Lottos(this.count);
         this.lottoList = lottos;
@@ -42,14 +44,17 @@ public class TotalLotto {
         this.winningLotto = new Lotto(input);
     }
 
-    private int calculatorCount(int amount) throws IllegalArgumentException {
+    private int isCalculatorCount(int amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException(INPUT_ERROR);
+            OutputView.printErrorMessage();
+            throw new IllegalArgumentException();
         }
 
         if (amount % LOTTO_PRICE > 0) {
-            throw new IllegalArgumentException(INPUT_ERROR);
+            OutputView.printErrorMessage();
+            throw new IllegalArgumentException();
         }
+
         return amount/LOTTO_PRICE;
     }
 
@@ -70,7 +75,7 @@ public class TotalLotto {
         return count;
     }
 
-    private int countMatchesWinner(int count, int target) {
+    private int countMatchesWinner(int count, LottoNumber target) {
         if (this.winningLotto.getLottoNumber().contains(target)) {
             return ++count;
         }

@@ -1,34 +1,40 @@
 package lotto.domain;
 
-import java.util.*;
+import lotto.view.OutputView;
 
-import static stringAddCalculator.utils.Parse.INPUT_ERROR;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static lotto.domain.LottoNumber.LOTTO_MAX_NUMBER;
+import static lotto.domain.LottoNumber.LOTTO_MIN_NUMBER;
 
 public class Lotto {
-    private final List<Integer> lottoNumber;
+    private static final List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
 
-    public Lotto(List<Integer> numbers) {
-        List<Integer> list = new ArrayList<>();
-        Collections.shuffle(numbers);
-        for (int i=0; i<6; i++) {
-            list.add(numbers.get(i));
-        }
-        Collections.sort(list);
-        this.lottoNumber = list;
+    private final List<LottoNumber> lottoNumber;
+
+    public Lotto() {
+        Collections.shuffle(LOTTO_NUMBERS);
+        this.lottoNumber = LOTTO_NUMBERS.stream()
+                .limit(6)
+                .collect(Collectors.toList());
     }
 
     public Lotto(String input) {
         String[] inputArr = input.replace(" ", "").split(",");
         vaildCount(inputArr);
-        List<Integer> list = new ArrayList<>();
+        List<LottoNumber> list = new ArrayList<>();
         for (String s : inputArr) {
-            list.add(validNumber(s));
+            list.add(new LottoNumber(s));
         }
         Collections.sort(list);
         this.lottoNumber = list;
     }
 
-    public List<Integer> getLottoNumber() {
+    public List<LottoNumber> getLottoNumber() {
         return this.lottoNumber;
     }
 
@@ -42,27 +48,7 @@ public class Lotto {
             set.add(s);
         }
         if (set.size() != 6) {
-            throw new IllegalArgumentException(INPUT_ERROR);
-        }
-    }
-
-    private int validNumber(String input) {
-        try {
-            int num = Integer.parseInt(input);
-            validRangeLottoNumber(num);
-            return num;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INPUT_ERROR);
-        }
-    }
-
-    private void validRangeLottoNumber(int num) {
-        if (num < 1) {
-            throw new IllegalArgumentException(INPUT_ERROR);
-        }
-
-        if (num > 45) {
-            throw new IllegalArgumentException(INPUT_ERROR);
+            throw new IllegalArgumentException(OutputView.printErrorMessage());
         }
     }
 }

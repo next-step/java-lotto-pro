@@ -8,23 +8,14 @@ public class Lottos {
 
     public Lottos(int count) {
         List<Lotto> list = new ArrayList<>();
-        List<Integer> numbers = generateNumbers();
         for (int i=0; i<count; i++) {
-            list.add(new Lotto(numbers));
+            list.add(new Lotto());
         }
         this.lottoList = list;
     }
 
     public List<Lotto> getLottoList() {
         return lottoList;
-    }
-
-    private List<Integer> generateNumbers() {
-        List<Integer> list = new ArrayList<>();
-        for (int i=1; i<=45; i++) {
-            list.add(i);
-        }
-        return list;
     }
 
     public void printLottoList() {
