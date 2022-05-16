@@ -10,6 +10,7 @@ public class Lotto {
     public static final int LOTTO_SIZE_NUM = 6;
     private static final int COUNT_OF_MATCH_ZERO = 0;
     private static final int COUNT_OF_MATCH_ONE = 1;
+    public static final int LOTTO_PRICE = 1000;
     private final Set<LottoNumber> lotto;
 
     private Lotto(Set<LottoNumber> lotto) {

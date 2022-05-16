@@ -44,7 +44,7 @@ public class Lottos {
     }
 
     public Money totalPrice() {
-        return Money.valueOf(Math.multiplyExact(lottos.size(), Money.LOTTO_PRICE));
+        return Money.valueOf(Math.multiplyExact(lottos.size(), Lotto.LOTTO_PRICE));
     }
 
     public List<Lotto> readOnlyLottos() {

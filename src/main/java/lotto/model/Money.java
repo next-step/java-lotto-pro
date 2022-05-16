@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class Money {
     private static final int ZERO_NUM = 0;
-    public static final int LOTTO_PRICE = 1000;
     private static final int SCALE = 2;
     private final int money;
 
@@ -20,7 +19,7 @@ public class Money {
     }
 
     public int maxLottoCount() {
-        return money / LOTTO_PRICE;
+        return money / Lotto.LOTTO_PRICE;
     }
 
     public Money multiply(int count) {
