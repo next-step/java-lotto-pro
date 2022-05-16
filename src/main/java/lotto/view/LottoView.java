@@ -6,7 +6,7 @@ import lotto.domain.Statistics;
 import java.util.Scanner;
 
 public class LottoView {
-    private final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public String inputCharge() {
         System.out.println("구입금액을 입력해 주세요.");
