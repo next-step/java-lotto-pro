@@ -6,6 +6,7 @@ import lotto.model.LottoPrizeRanks;
 import lotto.model.LottoQuantityChecker;
 import lotto.model.LottoStatics;
 import lotto.model.Money;
+import lotto.model.PassiveQuantity;
 import lotto.model.RandomNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -15,6 +16,7 @@ import java.util.List;
 public class LottoMachine {
     public void pay() {
         Money money = new Money(InputView.inputPrice());
+        PassiveQuantity passiveQuantity = new PassiveQuantity(InputView.inputPassiveQuantity());
 
         int quantity = LottoQuantityChecker.calculate(money);
         ResultView.quantity(quantity);
