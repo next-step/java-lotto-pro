@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import static camp.nextstep.edu.step3.IssuedMode.Manual;
 
-public class IssuedInformation {
+public class IssuedInformation implements Comparable<IssuedInformation>{
     private final List<Lotto> issuedLotto;
     private final IssuedMode mode;
 
@@ -14,6 +14,16 @@ public class IssuedInformation {
         validation(mode, issuedLotto);
         this.mode = mode;
         this.issuedLotto = issuedLotto;
+    }
+
+
+    @Override
+    public int compareTo(IssuedInformation information) {
+        return information.compareBy(this.mode);
+    }
+
+    private int compareBy(final IssuedMode destination) {
+        return this.mode.compareTo(destination);
     }
 
     private void validation(IssuedMode mode, List<Lotto> issuedLotto) {
