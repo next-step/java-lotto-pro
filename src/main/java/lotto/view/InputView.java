@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.Money;
+import lotto.controller.dto.MoneyDTO;
+import lotto.controller.dto.WinningLottoDTO;
 
 public class InputView {
 
@@ -16,10 +17,10 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static Money inputMoney() {
+    public static MoneyDTO inputMoney() {
         System.out.println(INPUT_MONEY);
         String inputMoney = readLine();
-        return Money.from(Integer.parseInt(inputMoney));
+        return new MoneyDTO(Integer.parseInt(inputMoney));
     }
 
     public static List<Integer> inputWinningLottoNumbers() {
@@ -37,6 +38,12 @@ public class InputView {
         String inputBonusNumbers = readLine();
         return Integer.parseInt(inputBonusNumbers);
 
+    }
+
+    public static WinningLottoDTO inputLottoInformation() {
+        List<Integer> numbers = inputWinningLottoNumbers();
+        int bonusBallNumber = inputBonusBallNumber();
+        return new WinningLottoDTO(numbers, bonusBallNumber);
     }
 
     private static String[] splitLottoNumbers(String inputLottoNumbers) {
