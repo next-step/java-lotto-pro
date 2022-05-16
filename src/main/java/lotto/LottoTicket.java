@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumbers {
+public class LottoTicket {
 
     private final int MAX_COUNT = 6;
 
     private ArrayList<Integer> numbers;
 
-    public LottoNumbers() {
+    public LottoTicket() {
         this.numbers = new ArrayList<>();
         this.initWithRandomNumber();
     }
     
-    public LottoNumbers(String numbersWithComma) {
+    public LottoTicket(String numbersWithComma) {
         this.numbers = new ArrayList<>();
         try {
             String[] winnerNumbers = numbersWithComma.split(",");

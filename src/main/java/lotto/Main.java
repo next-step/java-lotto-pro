@@ -10,6 +10,7 @@ public class Main {
         LottoGame game = new LottoGame(purchasePrice);
         ResultView.printTicketCount(game.getTicketCount());
         game.printTicketNumbers();
+
         System.out.println();
         String winnerNumbers = InputView.getWinnerNumbers();
         game.setWinnerNumbers(winnerNumbers);

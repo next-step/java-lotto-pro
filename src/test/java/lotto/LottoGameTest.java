@@ -32,8 +32,8 @@ public class LottoGameTest {
 
     @Test
     void 지난주_당첨_번호_공백_입력() {
-        List<LottoNumbers> tickets = new ArrayList<>();
-        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.add(new LottoTicket("1,2,3,4,5,6"));
         LottoGame game = new LottoGame(tickets, "4, 5, 6, 7, 8, 9");
         assertThat(game.getScore().get(3)).isEqualTo(1);
     }
@@ -61,97 +61,97 @@ public class LottoGameTest {
 
     @Test
     void 번호_3개_일치() {
-        List<LottoNumbers> tickets = new ArrayList<>();
-        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.add(new LottoTicket("1,2,3,4,5,6"));
         LottoGame game = new LottoGame(tickets, "4,5,6,7,8,9");
         assertThat(game.getScore().get(3)).isEqualTo(1);
     }
 
     @Test
     void 번호_3개_일치_2건() {
-        List<LottoNumbers> tickets = new ArrayList<>();
-        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
-        tickets.add(new LottoNumbers("1,10,11,4,5,6"));
-        tickets.add(new LottoNumbers("1,12,13,14,5,6"));
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.add(new LottoTicket("1,2,3,4,5,6"));
+        tickets.add(new LottoTicket("1,10,11,4,5,6"));
+        tickets.add(new LottoTicket("1,12,13,14,5,6"));
         LottoGame game = new LottoGame(tickets, "4,5,6,7,8,9");
         assertThat(game.getScore().get(3)).isEqualTo(2);
     }
 
     @Test
     void 번호_4개_일치() {
-        List<LottoNumbers> tickets = new ArrayList<>();
-        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.add(new LottoTicket("1,2,3,4,5,6"));
         LottoGame game = new LottoGame(tickets, "1,2,3,4,8,9");
         assertThat(game.getScore().get(4)).isEqualTo(1);
     }
 
     @Test
     void 번호_4개_일치_2건() {
-        List<LottoNumbers> tickets = new ArrayList<>();
-        tickets.add(new LottoNumbers("1,2,3,4,15,16"));
-        tickets.add(new LottoNumbers("11,12,3,4,5,6"));
-        tickets.add(new LottoNumbers("21,22,23,4,5,6"));
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.add(new LottoTicket("1,2,3,4,15,16"));
+        tickets.add(new LottoTicket("11,12,3,4,5,6"));
+        tickets.add(new LottoTicket("21,22,23,4,5,6"));
         LottoGame game = new LottoGame(tickets, "1,2,3,4,5,6");
         assertThat(game.getScore().get(4)).isEqualTo(2);
     }
 
     @Test
     void 번호_5개_일치() {
-        List<LottoNumbers> tickets = new ArrayList<>();
-        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.add(new LottoTicket("1,2,3,4,5,6"));
         LottoGame game = new LottoGame(tickets, "1,2,3,4,5,9");
         assertThat(game.getScore().get(5)).isEqualTo(1);
     }
 
     @Test
     void 번호_5개_일치_2건() {
-        List<LottoNumbers> tickets = new ArrayList<>();
-        tickets.add(new LottoNumbers("1,2,3,4,5,16"));
-        tickets.add(new LottoNumbers("11,2,3,4,5,6"));
-        tickets.add(new LottoNumbers("21,32,3,4,5,6"));
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.add(new LottoTicket("1,2,3,4,5,16"));
+        tickets.add(new LottoTicket("11,2,3,4,5,6"));
+        tickets.add(new LottoTicket("21,32,3,4,5,6"));
         LottoGame game = new LottoGame(tickets, "1,2,3,4,5,6");
         assertThat(game.getScore().get(5)).isEqualTo(2);
     }
 
     @Test
     void 번호_6개_일치() {
-        List<LottoNumbers> tickets = new ArrayList<>();
-        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.add(new LottoTicket("1,2,3,4,5,6"));
         LottoGame game = new LottoGame(tickets, "1,2,3,4,5,6");
         assertThat(game.getScore().get(6)).isEqualTo(1);
     }
 
     @Test
     void 번호_6개_일치_2건() {
-        List<LottoNumbers> tickets = new ArrayList<>();
-        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
-        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
-        tickets.add(new LottoNumbers("21,32,3,4,5,6"));
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.add(new LottoTicket("1,2,3,4,5,6"));
+        tickets.add(new LottoTicket("1,2,3,4,5,6"));
+        tickets.add(new LottoTicket("21,32,3,4,5,6"));
         LottoGame game = new LottoGame(tickets, "1,2,3,4,5,6");
         assertThat(game.getScore().get(6)).isEqualTo(2);
     }
 
     @Test
     void 총_수익률_5() {
-        List<LottoNumbers> tickets = new ArrayList<>();
-        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.add(new LottoTicket("1,2,3,4,5,6"));
         LottoGame game = new LottoGame(tickets, "4,5,6,7,8,9");
         assertThat(game.getEarningRate()).isEqualTo(5.00);
     }
 
     @Test
     void 총_수익률_1보다_작은_경우() {
-        List<LottoNumbers> tickets = new ArrayList<>();
-        tickets.add(new LottoNumbers("1,2,3,4,5,6"));
-        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
-        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
-        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
-        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
-        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
-        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
-        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
-        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
-        tickets.add(new LottoNumbers("11,12,13,14,15,16"));
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.add(new LottoTicket("1,2,3,4,5,6"));
+        tickets.add(new LottoTicket("11,12,13,14,15,16"));
+        tickets.add(new LottoTicket("11,12,13,14,15,16"));
+        tickets.add(new LottoTicket("11,12,13,14,15,16"));
+        tickets.add(new LottoTicket("11,12,13,14,15,16"));
+        tickets.add(new LottoTicket("11,12,13,14,15,16"));
+        tickets.add(new LottoTicket("11,12,13,14,15,16"));
+        tickets.add(new LottoTicket("11,12,13,14,15,16"));
+        tickets.add(new LottoTicket("11,12,13,14,15,16"));
+        tickets.add(new LottoTicket("11,12,13,14,15,16"));
         LottoGame game = new LottoGame(tickets, "4,5,6,7,8,9");
         assertThat(game.getEarningRate()).isEqualTo(0.50);
     }

@@ -1,9 +1,7 @@
 package lotto;
 
-import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
-import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,9 +19,9 @@ public class LottoGame {
 
     private Map<Integer, Integer> earningMap;
 
-    private LottoNumbers winnerNumbers;
+    private LottoTicket winnerNumbers;
 
-    private List<LottoNumbers> ticketNumbers;
+    private List<LottoTicket> ticketNumbers;
 
     LottoGame() {
         this.scoreMap = new HashMap<>();
@@ -48,18 +46,18 @@ public class LottoGame {
         this.ticketNumbers = new ArrayList<>();
         int ticketCount = this.getTicketCount();
         for (int i = 1; i <= ticketCount; i++) {
-            this.ticketNumbers.add(new LottoNumbers());
+            this.ticketNumbers.add(new LottoTicket());
         }
     }
 
-    LottoGame(List<LottoNumbers> ticketNumbers, String winnerNumbers) {
+    LottoGame(List<LottoTicket> ticketNumbers, String winnerNumbers) {
         this();
 
         this.purchasePrice = ticketNumbers.size() * TICKET_UNIT_PRICE;
 
         this.ticketNumbers = ticketNumbers;
 
-        this.winnerNumbers = new LottoNumbers(winnerNumbers);
+        this.winnerNumbers = new LottoTicket(winnerNumbers);
         generateGameResult();
     }
 
@@ -68,13 +66,13 @@ public class LottoGame {
     }
 
     public void printTicketNumbers() {
-        for (LottoNumbers ticket : this.ticketNumbers) {
+        for (LottoTicket ticket : this.ticketNumbers) {
             ResultView.printTicketLottoNumbers(ticket.toString());
         }
     }
 
     public void generateGameResult() {
-        for (LottoNumbers ticket : this.ticketNumbers) {
+        for (LottoTicket ticket : this.ticketNumbers) {
             setGameScore(ticket);
         }
 
@@ -95,7 +93,7 @@ public class LottoGame {
         this.earningRate = (double) Math.round((double) totalEarning / this.purchasePrice * 100) / 100;
     }
 
-    private void setGameScore(LottoNumbers ticket) {
+    private void setGameScore(LottoTicket ticket) {
         int score = equalNumberCount(ticket);
         if (this.scoreMap.containsKey(score)) {
             this.scoreMap.replace(score, this.scoreMap.get(score) + 1);
@@ -117,14 +115,14 @@ public class LottoGame {
     }
 
     public void setWinnerNumbers(String numbersWithComma) {
-        this.winnerNumbers = new LottoNumbers(numbersWithComma);
+        this.winnerNumbers = new LottoTicket(numbersWithComma);
     }
 
     public void printGameResult() {
         ResultView.printGameResult(this.getScore(), this.earningRate);
     }
 
-    private int equalNumberCount(LottoNumbers ticketNumbers) {
+    private int equalNumberCount(LottoTicket ticketNumbers) {
         int equalNumberCount = 0;
         int[] winnerNumbers = this.winnerNumbers.getNumbersAsArray();
 
