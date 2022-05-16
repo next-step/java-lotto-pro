@@ -1,5 +1,11 @@
 package lotto;
 
+import static lotto.Message.LOSS_STATISTICS_MESSAGE;
+import static lotto.Message.PRINT_LOTTO_NUMBERS;
+import static lotto.Message.PURCHASE_LOTTO_COUNT_MESSAGE;
+import static lotto.Message.RETURN_RATE_MESSAGE;
+import static lotto.Message.STATISTICS_START_MESSAGE;
+import static lotto.Message.TOTAL_SUMMARY_MESSAGE;
 import static lotto.domain.LottoWinResult.WIN_RESULTS;
 
 import lotto.domain.Lotto;
@@ -10,7 +16,7 @@ import lotto.domain.Lottos;
 public class ResultView {
 
     public void purchase(final Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+        System.out.printf(PURCHASE_LOTTO_COUNT_MESSAGE, lottos.size());
         printLottos(lottos);
     }
 
@@ -20,23 +26,20 @@ public class ResultView {
     }
 
     private void printLotto(final Lotto lotto) {
-        System.out.println("[ " + lotto.toStringPickNumbers() + " ]");
+        System.out.printf(PRINT_LOTTO_NUMBERS, lotto.toStringPickNumbers());
     }
 
     public void drawingOfLots(final LottoWinStatistics statistics) {
-        System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.printf(STATISTICS_START_MESSAGE);
         WIN_RESULTS.forEach(
                 lottoWinResult -> printLottoWinStatistics(lottoWinResult, statistics.countByWinResult(lottoWinResult)));
-        System.out.print("총 수익률은 " + statistics.getReturnRate().toStringValue() + "입니다.");
+        System.out.printf(RETURN_RATE_MESSAGE, statistics.getReturnRate().getValue());
         if (statistics.isLoss()) {
-            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+            System.out.printf(LOSS_STATISTICS_MESSAGE);
         }
     }
 
     private void printLottoWinStatistics(final LottoWinResult winResult, final long count) {
-        System.out.println(winResult.getWinningCount() + "개 일치 (" + winResult.getWinningMoney().toStringValue() + "원)- "
-                + count + "개");
+        System.out.printf(TOTAL_SUMMARY_MESSAGE, winResult.getWinningCount(), winResult.getWinningMoney().toStringValue(), count);
     }
 }
