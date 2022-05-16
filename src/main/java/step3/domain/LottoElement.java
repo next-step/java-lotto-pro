@@ -13,7 +13,7 @@ public class LottoElement implements Comparable<LottoElement> {
         this.element = validElement(element);
     }
 
-    private int validElement(String element) throws IllegalArgumentException {
+    private int validElement(String element) {
         int parseElement = parseNumber(element);
         validNumberRange(parseElement);
         return parseElement;
