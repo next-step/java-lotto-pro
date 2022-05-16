@@ -71,15 +71,15 @@ public class LottoGameResultTest {
     @MethodSource("provideLottoRankList")
     void 당첨통계_계산(List<LottoRank> rankList){
         LottoGameResult lottoGameResult = new LottoGameResult(rankList);
-        Map<LottoRank,Integer> statistics = lottoGameResult.statistics();
+        Map<LottoRank,Long> statistics = lottoGameResult.statistics();
         assertThat(statistics.get(NO_PRIZE) == null).isTrue();
         for( LottoRank rank : EnumSet.of(FOURTH_PLACE,THIRD_PLACE,SECOND_PLACE,FIRST_PLACE)) {
             long count =rankList.stream().filter(item -> item == rank).collect(counting());
             assertLottoRankCount(statistics, rank, count);
         }
     }
-    private void assertLottoRankCount(Map<LottoRank,Integer> statistics, LottoRank rank, long count){
-        assertThat(statistics.getOrDefault(rank,0)).isEqualTo(count);
+    private void assertLottoRankCount(Map<LottoRank,Long> statistics, LottoRank rank, long count){
+        assertThat(statistics.getOrDefault(rank,0L)).isEqualTo(count);
     }
 
     private static Stream<List<LottoRank>> provideLottoRankList(){

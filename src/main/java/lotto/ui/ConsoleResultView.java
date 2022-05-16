@@ -36,12 +36,12 @@ public class ConsoleResultView implements ResultView {
     }
 
     private void printStatistics(LottoGameResultDTO gameResult) {
-        Map<LottoRank, Integer> statistics = gameResult.getStatistics();
+        Map<LottoRank, Long> statistics = gameResult.getStatistics();
         for (LottoRank rank : statistics.keySet()) {
             printRankResult(rank, statistics.get(rank));
         }
     }
-    private void printRankResult(LottoRank rank, int matchCount) {
+    private void printRankResult(LottoRank rank, long matchCount) {
         if(rank == LottoRank.SECOND_PLACE){
             System.out.format("%d개 일치, 보너스 볼 일치(%d원)- %d개\n"
                     , rank.getMatchNumberCount()
