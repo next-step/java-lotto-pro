@@ -14,6 +14,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(lottoNumber);
     }
 
+    public static LottoNumber from(String lottoNumber) {
+        return new LottoNumber(Integer.parseInt(lottoNumber));
+    }
+
     private void validate() {
         if (this.lottoNumber < 1 || this.lottoNumber > 45) {
             throw new IllegalArgumentException("로또 숫자는 1 이상 45 이하 입니다.");
@@ -46,5 +50,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
             return -1;
         }
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(lottoNumber);
     }
 }
