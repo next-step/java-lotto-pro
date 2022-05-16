@@ -1,7 +1,7 @@
 package lotto.model;
 
-import generator.InputLottoNumberGenerator;
-import generator.RandomLottoNumberGenerator;
+import lotto.generator.InputLottoNumberGenerator;
+import lotto.generator.RandomLottoNumberGenerator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;

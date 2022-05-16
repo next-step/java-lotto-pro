@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import generator.InputLottoNumberGenerator;
+import lotto.generator.InputLottoNumberGenerator;
 import java.util.Scanner;
 import lotto.model.Lotto;
 import lotto.model.LottoStatistics;
@@ -8,7 +8,7 @@ import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-import util.StringToIntegerConverter;
+import lotto.util.StringToIntegerConverter;
 
 public class LottoController {
     private final Scanner scanner;

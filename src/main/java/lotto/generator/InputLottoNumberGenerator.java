@@ -1,10 +1,10 @@
-package generator;
+package lotto.generator;
 
 import java.util.ArrayList;
 import java.util.List;
 import lotto.model.LottoNumber;
-import util.StringToIntegerConverter;
-import util.StringUtils;
+import lotto.util.StringToIntegerConverter;
+import lotto.util.StringUtils;
 
 public class InputLottoNumberGenerator implements LottoNumberGenerator {
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();

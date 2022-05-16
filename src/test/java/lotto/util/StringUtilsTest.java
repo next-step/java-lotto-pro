@@ -1,7 +1,8 @@
-package util;
+package lotto.util;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import lotto.util.StringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

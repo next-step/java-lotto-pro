@@ -1,4 +1,4 @@
-package util;
+package lotto.util;
 
 public class StringToIntegerConverter {
     public static int parseInt(String input) {
