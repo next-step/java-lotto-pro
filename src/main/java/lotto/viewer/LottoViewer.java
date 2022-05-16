@@ -77,16 +77,18 @@ public class LottoViewer {
         printMessage(BOUNDARY_MESSAGE);
 
         final List<String> stringList = new ArrayList<>();
-        final int threeMatchedCount = lottosWinningStatistics.getMatchedCount(Matched.THREE_MATCHED.getCount());
-        final int fourMatchedCount = lottosWinningStatistics.getMatchedCount(Matched.FOUR_MATCHED.getCount());
-        final int fiveMatchedCount = lottosWinningStatistics.getMatchedCount(Matched.FIVE_MATCHED.getCount());
-        final int sixMatchedCount = lottosWinningStatistics.getMatchedCount(Matched.SIX_MATCHED.getCount());
-        final int totalReward = lottosWinningStatistics.calculateTotalReward(lottosWinningStatistics.getMatches());
+        final int threeMatchedCount = lottosWinningStatistics.getWinningMatchedCount(Matched.THREE_MATCHED.getCount());
+        final int fourMatchedCount = lottosWinningStatistics.getWinningMatchedCount(Matched.FOUR_MATCHED.getCount());
+        final int onlyFiveMatchedCount = lottosWinningStatistics.getWinningMatchedCountUsingBonus(Matched.FIVE_MATCHED.getCount(), false);
+        final int fiveAndBonusMatchedCount = lottosWinningStatistics.getWinningMatchedCountUsingBonus(Matched.FIVE_MATCHED.getCount(), true);
+        final int sixMatchedCount = lottosWinningStatistics.getWinningMatchedCount(Matched.SIX_MATCHED.getCount());
+        final int totalReward = lottosWinningStatistics.calculateTotalReward(lottosWinningStatistics.getWinningMatches());
         final Price price = lottosWinningStatistics.getPrice();
 
         stringList.add("3개 일치 (5000원)- " + threeMatchedCount + "개");
         stringList.add("4개 일치 (50000원)- " + fourMatchedCount + "개");
-        stringList.add("5개 일치 (1500000원)- " + fiveMatchedCount + "개");
+        stringList.add("5개 일치 (1500000원)- " + onlyFiveMatchedCount + "개");
+        stringList.add("5개 일치, 보너스 볼 일치(30000000원)- " + fiveAndBonusMatchedCount + "개");
         stringList.add("6개 일치 (2000000000원)- " + sixMatchedCount + "개");
         stringList.add("총 수익률은 " + String.format("%.2f", price.calculateYield(totalReward)) + "입니다.");
 

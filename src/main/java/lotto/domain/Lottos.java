@@ -32,10 +32,20 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Integer> match(final LottoWinningNumbers winningNumbers) {
+    public List<Integer> matchWinningNumber(final LottoWinningNumbers winningNumbers) {
         return lottos.stream()
                 .map(lotto ->
-                        lotto.matches(winningNumbers)
+                        lotto.matchesWinningNumber(winningNumbers)
+                )
+                .collect(
+                        Collectors.toList()
+                );
+    }
+
+    public List<Integer> matchWinningNumberUsingBonus(final LottoWinningNumbers winningNumbers, final boolean isEqualBonus) {
+        return lottos.stream()
+                .map(lotto ->
+                        lotto.matchesWinningNumberUsingBonus(winningNumbers, isEqualBonus)
                 )
                 .collect(
                         Collectors.toList()

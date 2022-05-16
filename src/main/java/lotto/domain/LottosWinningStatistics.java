@@ -25,12 +25,22 @@ public class LottosWinningStatistics {
                 .getReward();
     }
 
-    public List<Integer> getMatches() {
-        return lottos.match(winningNumbers);
+    public List<Integer> getWinningMatches() {
+        return lottos.matchWinningNumber(winningNumbers);
     }
 
-    public int getMatchedCount(final int matchedCount) {
-        return (int) getMatches().stream()
+    public int getWinningMatchedCount(final int matchedCount) {
+        return (int) getWinningMatches().stream()
+                .filter(match -> match == matchedCount)
+                .count();
+    }
+
+    public List<Integer> getWinningMatchesUsingBonus(final boolean isEqualBonus) {
+        return lottos.matchWinningNumberUsingBonus(winningNumbers, isEqualBonus);
+    }
+
+    public int getWinningMatchedCountUsingBonus(final int matchedCount, final boolean isEqualBonus) {
+        return (int) getWinningMatchesUsingBonus(isEqualBonus).stream()
                 .filter(match -> match == matchedCount)
                 .count();
     }

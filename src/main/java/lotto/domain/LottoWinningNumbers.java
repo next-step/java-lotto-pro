@@ -83,4 +83,8 @@ public class LottoWinningNumbers {
     public Integer getWinningNumber(final int index) {
         return winningNumbers.get(index);
     }
+
+    public Integer getBonusNumber() {
+        return this.bonusNumber;
+    }
 }
