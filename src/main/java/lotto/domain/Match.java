@@ -1,9 +1,10 @@
 package lotto.domain;
 
+import lotto.ConstantsKr;
+
 import java.util.Objects;
 
 public class Match {
-    public static final int MAX_MATCH = 6;
     private final int value;
 
     public Match(int matchingCount) {
@@ -12,8 +13,8 @@ public class Match {
     }
 
     private void validateBounds(int value) {
-        if (value < 0 || value > MAX_MATCH) {
-            throw new IllegalArgumentException("당첨 번호 일치 개수는 0 ~ " + MAX_MATCH + "입니다.");
+        if (value < 0 || value > ConstantsKr.NUMBER_OF_LOTTO_NUMBERS) {
+            throw new IllegalArgumentException("당첨 번호 일치 개수는 0 ~ " + ConstantsKr.NUMBER_OF_LOTTO_NUMBERS + "입니다.");
         }
     }
 

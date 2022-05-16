@@ -7,17 +7,13 @@ import java.util.stream.IntStream;
 
 public class LottoNumbersGeneratorKr implements LottoNumbersGenerator {
 
-    private static final int MIN = 1;
-    private static final int MAX = 45;
-    private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
-
     public List<Integer> generate() {
-        List<Integer> numbers = IntStream.range(MIN, MAX + 1)
+        List<Integer> numbers = IntStream.range(ConstantsKr.MIN, ConstantsKr.MAX + 1)
                 .boxed()
                 .collect(Collectors.toList());
 
         Collections.shuffle(numbers);
-        List<Integer> lottoNumbers = numbers.subList(0, NUMBER_OF_LOTTO_NUMBERS);
+        List<Integer> lottoNumbers = numbers.subList(0, ConstantsKr.NUMBER_OF_LOTTO_NUMBERS);
         Collections.sort(lottoNumbers);
 
         return lottoNumbers;
