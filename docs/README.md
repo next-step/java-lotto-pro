@@ -144,3 +144,23 @@
 - LottoAnswer
   - 당첨 번호 로또 6자리 를 가지고 보너스 숫자도 가지고 있다.
   - 사용자의 로또 paper 를 입력받으면 결과값을 반환한다.
+
+------------
+
+## STEP 5
+### 로또(수동)
+### 기본 정보
+- 사용자가 수동으로 구매할 장수를 입력하고 해당 번호들을 입력한다.
+- 수동으로 구매한 장수 금액을 제외한 나머지 금액은 자동으로 구매된다.
+
+### class 역할
+- LottoVendingMachine
+  - 로또 구매할 금액과 수동으로 적힌 로또 list 를 입력하면 나머지는 자동 발급해서 로또 paper 를 반환한다.
+  - 로또 구매할 금액 보다 수동으로 적은 로또 list 가 크면 에러가 발생한다.
+  -  LottoIssuedStorage 를 가지고 있다.
+
+- LottoIssuedInformation
+  - 로또 수동 장수와 자동 장수 에 대한 정보를 가진다.
+
+- LottoHistoryStorage
+  - LottoIssuedInformation 정보들을 가지고 있다.
