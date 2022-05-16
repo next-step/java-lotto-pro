@@ -27,14 +27,6 @@ public class PurchasedLotto {
         return sb.toString();
     }
 
-    public List<Ranking> compareLottos(Lotto target) {
-        List<Ranking> result = new ArrayList<>();
-        for (Lotto lotto : lottoList) {
-            result.add(lotto.compareLotto(target));
-        }
-        return result;
-    }
-
     public List<Ranking> compareLottos(Lotto target, LottoNo bonusNumber) {
         List<Ranking> result = new ArrayList<>();
         for (Lotto lotto : lottoList) {

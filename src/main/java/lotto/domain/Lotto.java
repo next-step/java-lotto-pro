@@ -35,13 +35,6 @@ public class Lotto {
         return lottoNoList.size() != LOTTO_SIZE;
     }
 
-    public Ranking compareLotto(Lotto target) {
-        List<LottoNo> result = new ArrayList<>(lottoNoList);
-        result.retainAll(target.getLottoNoList());
-        int matchingCount = result.size();
-        return Ranking.findRank(matchingCount, false);
-    }
-
     public Ranking compareLotto(Lotto target, LottoNo bonusNumber) {
         int matchingCount = getMatchingCount(target);
         boolean matchBonus = isContainBonusNumber(bonusNumber);
