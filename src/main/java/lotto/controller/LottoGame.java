@@ -26,7 +26,7 @@ public class LottoGame {
     }
 
     public static LottoGameResult resultWinningGame(Lottos lottos, String winningNumbersWord, String bonusNumberWord) {
-        List<Integer> winningNumbers = InputStringUtils.splitToNumberList(winningNumbersWord, DELIMITER_COMMA);
+        List<String> winningNumbers = InputStringUtils.nonSpaceSplit(winningNumbersWord, DELIMITER_COMMA);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, new LottoNumber(bonusNumberWord));
         return winningLotto.compareLottos(lottos);
     }

@@ -24,46 +24,38 @@ class WinningLottoTest {
         lottos = new Lottos(lottoList);
     }
 
-    @DisplayName("당첨로또 번호가 1~45 사이가 아닌 경우 검증")
-    @Test
-    void playLottoGame_not_lotto_number() {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningLotto(Arrays.asList(3, 7, 10, 35, 43, 46)))
-                .withMessage("[ERROR] 로또 번호는 1~45 사이의 숫자여야합니다.");
-
-        assertThatIllegalArgumentException()
-                .isThrownBy(() ->  new WinningLotto(Arrays.asList(0, 7, 10, 35, 43, 46)))
-                .withMessage("[ERROR] 로또 번호는 1~45 사이의 숫자여야합니다.");
-    }
-
     @DisplayName("당첨로또 번호가 6개가 아닌 경우 검증")
     @Test
     void playLottoGame_non_six_number() {
+        LottoNumber bonusNumber = new LottoNumber(30);
         assertThatIllegalArgumentException()
-                .isThrownBy(() ->  new WinningLotto( Arrays.asList(3, 7, 10, 35)))
+                .isThrownBy(() ->  new WinningLotto(Arrays.asList("3", "7", "10", "35"),bonusNumber))
                 .withMessage("[ERROR] 로또 번호는 6개여야 합니다.");
     }
 
     @DisplayName("당첨로또 6개의 번호에 중복이 있는지 검증")
     @Test
     void playLottoGame_duplication_number() {
+        LottoNumber bonusNumber = new LottoNumber(30);
         assertThatIllegalArgumentException()
-                .isThrownBy(() ->  new WinningLotto( Arrays.asList(3, 7, 10, 10, 25, 35)))
+                .isThrownBy(() ->  new WinningLotto( Arrays.asList("3", "7", "10", "10", "25", "35"),bonusNumber))
                 .withMessage("[ERROR] 6개의 로또 번호에 중복이 있습니다.");
     }
 
     @DisplayName("당첨로또 6개의 번호와 보너스 번호에 중복이 있는지 검증")
     @Test
     void playLottoGame_duplication_bonus_number() {
+        LottoNumber bonusNumber = new LottoNumber(7);
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningLotto(Arrays.asList(3, 7, 10, 15, 25, 35),new LottoNumber(7)))
+                .isThrownBy(() -> new WinningLotto(Arrays.asList("3","7", "10", "15", "25", "35"), bonusNumber))
                 .withMessage("[ERROR] 보너스 번호가 이미 로또 번호에 존재합니다.");
     }
 
     @DisplayName("보너스볼이 추가된 로또 게임 결과(일치한 개수, 총 상금)를 확인한다.")
     @Test
     void playLottoGame_bonus_number() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(3, 7, 10, 35, 43, 45),new LottoNumber(20));
+        LottoNumber bonusNumber = new LottoNumber(20);
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList("3", "7", "10", "35", "43", "45"), bonusNumber);
         LottoGameResult resultLottoGame = winningLotto.compareLottos(lottos);
         assertAll(
                 ()-> assertEquals(2, resultLottoGame.rankCount(LottoRank.FOURTH)),

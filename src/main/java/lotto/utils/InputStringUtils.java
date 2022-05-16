@@ -1,6 +1,7 @@
 package lotto.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import lotto.constant.ErrorMessage;
 
@@ -13,19 +14,8 @@ public class InputStringUtils {
         throw new IllegalStateException(ErrorMessage.UTILITY_CLASS);
     }
 
-    public static List<Integer> splitToNumberList(String inputString, String delimiter) {
+    public static List<String> nonSpaceSplit(String inputString, String delimiter) {
         inputString = inputString.replaceAll(WHITE_SPACE, NONE_SPACE);
-        List<Integer> numberList = new ArrayList<>();
-        for (String numberWord : inputString.split(delimiter)) {
-            numberList.add(wordToNumber(numberWord));
-        }
-        return numberList;
-    }
-
-    public static int wordToNumber(String numberWord) {
-        if (numberWord.matches("\\p{Digit}+")) {
-            return Integer.parseInt(numberWord);
-        }
-        throw new IllegalArgumentException(ErrorMessage.NOT_NUMBER);
+        return new ArrayList<>(Arrays.asList(inputString.split(delimiter)));
     }
 }
