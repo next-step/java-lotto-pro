@@ -50,14 +50,14 @@ public class LottoGame {
         }
     }
 
-    LottoGame(List<LottoTicket> tickets, String winnerTicket) {
+    LottoGame(List<LottoTicket> tickets, LottoTicket winnerTicket) {
         this();
 
         this.purchasePrice = tickets.size() * TICKET_UNIT_PRICE;
 
         this.tickets = tickets;
 
-        this.winnerTicket = new LottoTicket(winnerTicket);
+        this.winnerTicket = winnerTicket;
         generateGameResult();
     }
 
@@ -123,12 +123,12 @@ public class LottoGame {
         }
     }
 
-    private int equalNumberCount(LottoTicket ticketNumbers) {
+    private int equalNumberCount(LottoTicket ticket) {
         int equalNumberCount = 0;
         int[] winnerNumbers = this.winnerTicket.getNumbersAsArray();
 
         for (int winnerNumber : winnerNumbers) {
-            equalNumberCount = ticketNumbers.contains(winnerNumber) ? (equalNumberCount + 1) : equalNumberCount;
+            equalNumberCount = ticket.contains(winnerNumber) ? (equalNumberCount + 1) : equalNumberCount;
         }
 
         return equalNumberCount;
