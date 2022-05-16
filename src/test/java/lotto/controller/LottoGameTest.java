@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import lotto.constant.LottoRank;
-import lotto.model.BonusNumber;
 import lotto.model.Lotto;
 import lotto.model.LottoGameResult;
 import lotto.model.generator.LottoGenerator;

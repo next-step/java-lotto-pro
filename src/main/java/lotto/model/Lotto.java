@@ -30,7 +30,7 @@ public class Lotto {
                 .toArray();
     }
 
-    public LottoRank matchRank(List<Integer> winningNumberList, BonusNumber bonusNumber) {
+    public LottoRank matchRank(List<Integer> winningNumberList, LottoNumber bonusNumber) {
         return LottoRank.of(matchNumberCount(winningNumberList), bonusNumber.matchBonusNumber(toList()));
     }
 

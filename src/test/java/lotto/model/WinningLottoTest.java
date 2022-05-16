@@ -56,14 +56,14 @@ class WinningLottoTest {
     @Test
     void playLottoGame_duplication_bonus_number() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningLotto(Arrays.asList(3, 7, 10, 15, 25, 35),new BonusNumber(7)))
+                .isThrownBy(() -> new WinningLotto(Arrays.asList(3, 7, 10, 15, 25, 35),new LottoNumber(7)))
                 .withMessage("[ERROR] 보너스 번호가 이미 로또 번호에 존재합니다.");
     }
 
     @DisplayName("보너스볼이 추가된 로또 게임 결과(일치한 개수, 총 상금)를 확인한다.")
     @Test
     void playLottoGame_bonus_number() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(3, 7, 10, 35, 43, 45),new BonusNumber(20));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(3, 7, 10, 35, 43, 45),new LottoNumber(20));
         LottoGameResult resultLottoGame = winningLotto.compareLottos(lottos);
         assertAll(
                 ()-> assertEquals(2, resultLottoGame.rankCount(LottoRank.FOURTH)),

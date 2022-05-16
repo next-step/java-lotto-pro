@@ -2,8 +2,8 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.constant.ErrorMessage;
-import lotto.model.BonusNumber;
 import lotto.model.LottoGameResult;
+import lotto.model.LottoNumber;
 import lotto.model.generator.LottoGenerator;
 import lotto.model.LottoPaper;
 import lotto.model.LottoStore;
@@ -27,8 +27,7 @@ public class LottoGame {
 
     public static LottoGameResult resultWinningGame(Lottos lottos, String winningNumbersWord, String bonusNumberWord) {
         List<Integer> winningNumbers = InputStringUtils.splitToNumberList(winningNumbersWord, DELIMITER_COMMA);
-        int bonusNumber = InputStringUtils.wordToNumber(bonusNumberWord);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, new BonusNumber(bonusNumber));
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, new LottoNumber(bonusNumberWord));
         return winningLotto.compareLottos(lottos);
     }
 }

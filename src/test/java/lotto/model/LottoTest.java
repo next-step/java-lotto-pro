@@ -15,11 +15,11 @@ class LottoTest {
     void matchRank() {
         Lotto lotto = new Lotto(Arrays.asList(1, 3, 15, 25, 36, 45));
         assertAll(
-                () -> assertEquals(LottoRank.FOURTH, lotto.matchRank(Arrays.asList(1, 10, 15, 40, 41, 45),new BonusNumber(39))),
-                () -> assertEquals(LottoRank.THIRD, lotto.matchRank(Arrays.asList(1, 3, 15, 25, 41, 43),new BonusNumber(39))),
-                () -> assertEquals(LottoRank.SECOND, lotto.matchRank(Arrays.asList(1, 10, 15, 25, 36, 45),new BonusNumber(39))),
-                () -> assertEquals(LottoRank.SECOND_BONUS, lotto.matchRank(Arrays.asList(1, 10, 15, 25, 36, 45),new BonusNumber(3))),
-                () -> assertEquals(LottoRank.FIRST, lotto.matchRank(Arrays.asList(1, 3, 15, 25, 36, 45),new BonusNumber(39)))
+                () -> assertEquals(LottoRank.FOURTH, lotto.matchRank(Arrays.asList(1, 10, 15, 40, 41, 45),new LottoNumber(39))),
+                () -> assertEquals(LottoRank.THIRD, lotto.matchRank(Arrays.asList(1, 3, 15, 25, 41, 43),new LottoNumber(39))),
+                () -> assertEquals(LottoRank.SECOND, lotto.matchRank(Arrays.asList(1, 10, 15, 25, 36, 45),new LottoNumber(39))),
+                () -> assertEquals(LottoRank.SECOND_BONUS, lotto.matchRank(Arrays.asList(1, 10, 15, 25, 36, 45),new LottoNumber(3))),
+                () -> assertEquals(LottoRank.FIRST, lotto.matchRank(Arrays.asList(1, 3, 15, 25, 36, 45),new LottoNumber(39)))
         );
     }
 
