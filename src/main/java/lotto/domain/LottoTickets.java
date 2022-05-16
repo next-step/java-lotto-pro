@@ -26,6 +26,10 @@ public class LottoTickets {
         return lottoWinningRanks;
     }
 
+    public void addTicket(LottoTicket lottoTicket) {
+        this.lottoTickets.add(lottoTicket);
+    }
+
     public void addAll(LottoTickets addTickets) {
         this.lottoTickets.addAll(addTickets.lottoTickets);
     }

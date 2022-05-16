@@ -3,11 +3,19 @@ package lotto.view;
 import lotto.constants.DisplayMessage;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoWinningRanks;
+import lotto.domain.ManualCount;
 import lotto.domain.Money;
 
 public class OutputView {
+    public void printPurchaseCount(ManualCount manualCount, Money purchaseMoney) {
+        System.out.printf(DisplayMessage.PURCHASE_LOTTO_COUNT, manualCount, manualCount.autoPurchaseCount(purchaseMoney));
+    }
+
+    public void printInputManualNumbers() {
+        System.out.printf(DisplayMessage.INPUT_MANUAL_NUMBERS);
+    }
+
     public void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.printf(DisplayMessage.PURCHASE_LOTTO_COUNT, lottoTickets.size());
         System.out.println(lottoTickets);
     }
 

@@ -5,6 +5,7 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -24,10 +25,10 @@ public class LottoGame {
         try {
             Money purchaseMoney = inputView.inputPurchaseMoney();
             ManualCount manualCount = manualCount(purchaseMoney);
+            LottoTickets inputManualTickets = manualTickets(LottoTickets.from(new ArrayList<>()), manualCount);
 
-            // TODO 수동 구매할 번호 입력 받기
-            LottoTickets inputManualTickets = null;
             LottoTickets lottoTickets = LottoSeller.create().lottoTickets(purchaseMoney, manualCount, inputManualTickets);
+            outputView.printPurchaseCount(manualCount, purchaseMoney);
             outputView.printLottoTickets(lottoTickets);
 
             winningResult(purchaseMoney, lottoTickets);
@@ -51,6 +52,31 @@ public class LottoGame {
             manualCount = ManualCount.create();
         }
         return manualCount;
+    }
+
+    private LottoTickets manualTickets(LottoTickets lottoTickets, ManualCount manualCount) {
+        try {
+            outputView.printInputManualNumbers();
+            while (manualCount.isRemainingCount(lottoTickets.size())) {
+                lottoTickets.addTicket(inputManualTicket());
+            }
+            return lottoTickets;
+        } catch (IllegalArgumentException ie) {
+            outputView.printExceptionMessage(ie);
+        }
+        return lottoTickets;
+    }
+
+    private LottoTicket inputManualTicket() {
+        LottoTicket lottoTicket = null;
+        try {
+            lottoTicket = LottoTicket.from(inputView.inputManualNumbers());
+            return lottoTicket;
+        } catch (IllegalArgumentException ie) {
+            outputView.printExceptionMessage(ie);
+            lottoTicket = inputManualTicket();
+        }
+        return lottoTicket;
     }
 
     private void winningResult(Money purchaseMoney, LottoTickets lottoTickets) {

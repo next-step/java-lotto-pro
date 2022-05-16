@@ -28,6 +28,14 @@ public class ManualCount {
         return purchaseMoney.purchaseCount() - count;
     }
 
+    public boolean isRemainingCount(int purchaseCount) {
+        if (purchaseCount > count) {
+            throw new IllegalArgumentException(String.format(ErrorMessage.GREATER_THEN_MANUAL_COUNT, count));
+        }
+        int remainingCount = count - purchaseCount;
+        return remainingCount > MIN_COUNT;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,5 +47,10 @@ public class ManualCount {
     @Override
     public int hashCode() {
         return Objects.hash(count);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(count);
     }
 }

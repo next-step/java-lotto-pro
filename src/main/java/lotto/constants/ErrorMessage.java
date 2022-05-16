@@ -14,6 +14,7 @@ public class ErrorMessage {
     public static final String NOT_NUMBER_FORMAT = formatErrorMessage("숫자 값만 입력할 수 있습니다.");
     public static final String LESS_THEN_MANUAL_COUNT = formatErrorMessage("최소 0부터 입력 가능합니다.");
     public static final String OUT_OF_RANGE_MANUAL_COUNT = formatErrorMessage("0부터 %s까지 수동으로 구매할 수 있습니다.");
+    public static final String GREATER_THEN_MANUAL_COUNT = formatErrorMessage("입력한 %s개 보다 더 많이 구매할 수 없습니다.");
     public static final String UNKNOWN_ERROR = formatErrorMessage("알 수 없는 오류가 발생 했습니다.");
 
     private static String formatErrorMessage(String message) {

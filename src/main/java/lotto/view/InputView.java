@@ -30,9 +30,14 @@ public class InputView {
     }
 
     public int inputManualCount() {
-        System.out.println(DisplayMessage.INPUT_MANUAL_COUNT);
+        System.out.printf(DisplayMessage.INPUT_MANUAL_COUNT);
         String manualCount = readLine();
         return StringToIntegerParser.parseInt(manualCount);
+    }
+
+    public List<Integer> inputManualNumbers() {
+        String inputNumbers = readLine();
+        return StringCommaSplitter.splitNumbers(inputNumbers);
     }
 
     private String readLine() {
