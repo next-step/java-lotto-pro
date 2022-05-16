@@ -24,6 +24,7 @@ public class LottoMachine {
         try {
             return lottoManager.makeManualLottoTicket(manualLottoSource);
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -32,6 +33,7 @@ public class LottoMachine {
         try {
             return lottoManager.buyRandomTicket(money.purchaseTicket());
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return BUY_TICKET_ERROR;
         }
     }
@@ -40,6 +42,7 @@ public class LottoMachine {
         try {
             return new Money(money);
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }
