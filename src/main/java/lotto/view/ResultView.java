@@ -21,6 +21,6 @@ public class ResultView {
         for (LottoResultItem item : result.getItems()) {
             System.out.println(item.getMatch() + "개 일치 (" + item.getPrizeMoney() + "원)- " + item.getCount() + "개");
         }
-        System.out.println("총 수익률은 " + result.getEarningRatio() + "입니다.");
+        System.out.println("총 수익률은 " + result.getEarningRatio() + "입니다. (>1: 수익, <1: 손실)");
     }
 }
