@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.domain.ErrorMessage.INVALID_LOTTO_NUMBERS;
+
 import java.util.List;
 import java.util.Objects;
 import lotto.service.LottoNumbersStringConverter;
@@ -28,13 +30,13 @@ public class LottoNumbers {
 
     private static void checkAmountOfNumbers(final List<Integer> numbers) {
         if (numbers.size() != AMOUNT_OF_NUMBERS) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS.getMessage());
         }
     }
 
     private static void checkRangeOfNumber(final int number) {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS.getMessage());
         }
     }
 

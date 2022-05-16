@@ -1,13 +1,14 @@
 package lotto.domain;
 
+import static lotto.domain.InformationMessage.LOSE;
+import static lotto.domain.InformationMessage.RESULT;
+import static lotto.domain.InformationMessage.WIN;
+
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 
 public class LottoResult {
-    private static final String RESULT_ANNOUNCEMENT_MESSAGE = "\r\n당첨 통계\r\n---------";
-    private static final String WIN_MESSAGE = "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
-    private static final String LOSE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final int[] PRINTABLE_MATCH_COUNTS = {3, 4, 5, 6};
 
     private final LottoPayment payment;
@@ -21,7 +22,7 @@ public class LottoResult {
     }
 
     public void printResult() {
-        System.out.println(RESULT_ANNOUNCEMENT_MESSAGE);
+        System.out.println(RESULT.getMessage());
         final Map<Prize, Integer> prizeMap = tickets.prizeMap(winningNumbers);
         printPrizes(prizeMap);
         final int income = sumPrizes(prizeMap);
@@ -46,7 +47,7 @@ public class LottoResult {
     private void printReturnOfRatio(final int income) {
         final double returnOfRatio = Double.valueOf(income) / Double.valueOf(payment.getMoney());
         String message = "총 수익률은 " + String.format("%.2f", returnOfRatio) + "입니다.";
-        System.out.println(message + (returnOfRatio > 1 ? WIN_MESSAGE : LOSE_MESSAGE));
+        System.out.println(message + (returnOfRatio > 1 ? WIN.getMessage() : LOSE.getMessage()));
     }
 
     @Override
