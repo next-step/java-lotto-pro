@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.constant.Config.LOTTO_SIZE;
-
 public class Lotto {
+    private static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lottoNumber;
 
     public Lotto(List<Integer> numbers) {

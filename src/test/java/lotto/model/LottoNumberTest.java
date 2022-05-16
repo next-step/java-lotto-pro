@@ -3,8 +3,8 @@ package lotto.model;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static lotto.constant.Config.LOTTO_MAX_NUMBER;
-import static lotto.constant.Config.LOTTO_MIN_NUMBER;
+import static lotto.model.LottoMachine.LOTTO_MAX_NUMBER;
+import static lotto.model.LottoMachine.LOTTO_MIN_NUMBER;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoNumberTest {
