@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import lotto.generator.InputLottoNumberGenerator;
 import lotto.generator.RandomLottoNumberGenerator;
 
 public class Lottos {
@@ -14,6 +15,10 @@ public class Lottos {
 
     private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Lottos valueOf(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
     public static Lottos buy(Money money) {
