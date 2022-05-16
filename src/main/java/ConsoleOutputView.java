@@ -20,7 +20,7 @@ public class ConsoleOutputView {
             System.out.println(prize + " - " + ranks.count(prize) + "개");
         });
 
-        yield.setScale(2, RoundingMode.DOWN);
-        System.out.println("총 수익률은 " + yield.doubleValue() + "입니다.");
+        BigDecimal scaledYield = yield.setScale(2, RoundingMode.DOWN);
+        System.out.println("총 수익률은 " + scaledYield.doubleValue() + "입니다.");
     }
 }
