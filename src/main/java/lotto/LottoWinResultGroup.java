@@ -12,7 +12,6 @@ import java.util.Objects;
 
 public class LottoWinResultGroup {
     private final List<LottoWinResult> winResultList;
-
     private final Map<LottoWinResult, Long> group;
 
     public LottoWinResultGroup(final List<LottoWinResult> winResultList) {

@@ -45,7 +45,7 @@ class LottoMachineTest {
         final LottoMachine lottoMachine = new LottoMachine("2000");
 
         // when & then
-        assertDoesNotThrow(() -> lottoMachine.end("1,2,3,4,5,6"));
+        assertDoesNotThrow(() -> lottoMachine.winningLottoNumbers("1,2,3,4,5,6"));
     }
 
     @Test
@@ -55,7 +55,7 @@ class LottoMachineTest {
         final LottoMachine lottoMachine = new LottoMachine("2000");
 
         // when & then
-        assertThatThrownBy(() -> lottoMachine.end("1,2,a,4,b,6"))
+        assertThatThrownBy(() -> lottoMachine.winningLottoNumbers("1,2,a,4,b,6"))
                 .isInstanceOf(NumberFormatException.class);
     }
 
@@ -67,7 +67,7 @@ class LottoMachineTest {
         final LottoMachine lottoMachine = new LottoMachine("2000");
 
         // when & then
-        assertThatThrownBy(() -> lottoMachine.end(winningNumber))
+        assertThatThrownBy(() -> lottoMachine.winningLottoNumbers(winningNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

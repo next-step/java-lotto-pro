@@ -27,8 +27,8 @@ public class LottoMachine {
         }
     }
 
-    public void end(final String winningNumber) {
-        round.end(LottoNumbers.pickNumbers(splitLottoNumbers(winningNumber)));
+    public LottoNumbers winningLottoNumbers(final String winningNumber) {
+        return LottoNumbers.pickNumbers(splitLottoNumbers(winningNumber));
     }
 
     private List<LottoNumber> splitLottoNumbers(final String winningNumber) {

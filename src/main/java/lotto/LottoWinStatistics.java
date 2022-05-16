@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class LottoWinStatistics {
     private static final double EMPTY_VALUE = 0.0;
+    private static final double LOSS_RETURN_RATE = 1.0;
     private final Money price;
     private final LottoWinResultGroup winResultGroup;
     private final Rate returnRate;
@@ -13,6 +14,12 @@ public class LottoWinStatistics {
     public LottoWinStatistics(final Money price, final LottoWinResultGroup winResultGroup) {
         this.price = price;
         this.winResultGroup = winResultGroup;
+        this.returnRate = calculate();
+    }
+
+    public LottoWinStatistics(final Lottos lottos, final LottoNumbers winningLottoNumbers) {
+        this.price = lottos.purchasePrice();
+        this.winResultGroup = lottos.end(winningLottoNumbers);
         this.returnRate = calculate();
     }
 
@@ -33,7 +40,7 @@ public class LottoWinStatistics {
     }
 
     public boolean isLoss() {
-        return returnRate.getValue() < 1.0;
+        return returnRate.getValue() < LOSS_RETURN_RATE;
     }
 
     @Override

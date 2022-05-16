@@ -19,14 +19,14 @@ public class ResultView {
         System.out.println("[ " + lotto.toStringPickNumbers() + " ]");
     }
 
-    public void drawingOfLots(final Round round) {
+    public void drawingOfLots(final LottoWinStatistics statistics) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
         WIN_RESULTS.forEach(
-                lottoWinResult -> printLottoWinStatistics(lottoWinResult, round.countByWinResult(lottoWinResult)));
-        System.out.print("총 수익률은 " + round.totalReturnRate().toStringValue() + "입니다.");
-        if (round.isLoss()) {
+                lottoWinResult -> printLottoWinStatistics(lottoWinResult, statistics.countByWinResult(lottoWinResult)));
+        System.out.print("총 수익률은 " + statistics.getReturnRate().toStringValue() + "입니다.");
+        if (statistics.isLoss()) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }
