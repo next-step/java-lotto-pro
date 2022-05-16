@@ -6,10 +6,10 @@ import lotto.enums.LottoRank;
 
 public class LottoWinningResults {
 
-    private final List<LottoRank> prizedRanks;
+    private final List<LottoRank> winningRanks;
 
     private LottoWinningResults(List<LottoRank> resultRanks) {
-        this.prizedRanks = pickPrizedRanks(resultRanks);;
+        this.winningRanks = pickPrizedRanks(resultRanks);
     }
 
     private List<LottoRank> pickPrizedRanks(List<LottoRank> resultRanks) {
@@ -24,14 +24,14 @@ public class LottoWinningResults {
 
     public double prizedMoney() {
         double result = 0;
-        for (LottoRank prizedRank : prizedRanks) {
+        for (LottoRank prizedRank : winningRanks) {
             result += prizedRank.getWinningMoney();
         }
         return result;
     }
 
     public int winningRankCount(LottoRank lottoRank) {
-        return (int) prizedRanks.stream().
+        return (int) winningRanks.stream().
                 filter(result -> result.equals(lottoRank)).
                 count();
     }

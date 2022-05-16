@@ -1,5 +1,9 @@
 package lotto.view;
 
+import java.util.Map;
+import lotto.controller.dto.LottoResultDTO;
+import lotto.enums.LottoRank;
+
 public class OutputView {
 
     private static final String PURCHASED_TICKETS_NUMBER = "%s개를 구매했습니다.";
@@ -29,16 +33,34 @@ public class OutputView {
     }
 
     public static void printTotalWinningCount(int countOfMatch, int winningMoney, int winningCount) {
-        System.out.printf(TOTAL_WINNING_COUNT,countOfMatch, winningMoney, winningCount);
+        System.out.printf(TOTAL_WINNING_COUNT, countOfMatch, winningMoney, winningCount);
         System.out.println();
     }
+
     public static void printSecondWinningCount(int countOfMatch, int winningMoney, int winningCount) {
-        System.out.printf(SECOND_WINNING_COUNT,countOfMatch, winningMoney, winningCount);
+        System.out.printf(SECOND_WINNING_COUNT, countOfMatch, winningMoney, winningCount);
         System.out.println();
     }
 
     public static void printTotalProfitRate(double profitRate) {
-        System.out.printf(TOTAL_PROFIT_RATE,profitRate, profitRate > BENEFIT_STANDARD ? BENEFIT:LOSS);
+        System.out.printf(TOTAL_PROFIT_RATE, profitRate, profitRate > BENEFIT_STANDARD ? BENEFIT : LOSS);
         System.out.println();
+    }
+
+    public static void printResultReporting(LottoResultDTO resultDTO) {
+        printTotalString();
+        Map<LottoRank, Integer> resultMap = resultDTO.getResultMap();
+        for (LottoRank lottoRank : resultMap.keySet()) {
+            printWinningStatistics(resultMap, lottoRank);
+        }
+        printTotalProfitRate(resultDTO.getProfitRate());
+    }
+
+    private static void printWinningStatistics(Map<LottoRank, Integer> resultMap, LottoRank lottoRank) {
+        if (lottoRank.equals(LottoRank.SECOND)) {
+            printSecondWinningCount(lottoRank.getCountOfMatch(), lottoRank.getWinningMoney(),
+                    resultMap.get(lottoRank));
+        }
+        printTotalWinningCount(lottoRank.getCountOfMatch(), lottoRank.getWinningMoney(), resultMap.get(lottoRank));
     }
 }
