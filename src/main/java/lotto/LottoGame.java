@@ -88,8 +88,8 @@ public class LottoGame {
     }
 
 
-    public void setWinnerTicket(String numbersWithComma) {
-        this.winnerTicket = new LottoTicket(numbersWithComma);
+    public void setWinnerTicket(String winnerNumbers) {
+        this.winnerTicket = new LottoTicket(winnerNumbers);
     }
 
     public void printGameResult() {
