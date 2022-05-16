@@ -22,6 +22,10 @@ public class Money {
         return this.money;
     }
 
+    public int findPurchaseTicketQuantity() {
+        return money / LOTTO_PRICE;
+    }
+
     private void validateNumber(String money) {
         try {
             Integer.parseInt(money);
