@@ -61,6 +61,11 @@ public class LottoGame {
         return new LottoResult(rankings);
     }
 
+    public LottoResult matchLottoNumbers(PurchasedLotto purchasedLotto, Lotto lastWinningLotto, LottoNo bonusNumber) {
+        List<Ranking> rankings = purchasedLotto.compareLottos(lastWinningLotto, bonusNumber);
+        return new LottoResult(rankings);
+    }
+
     private Money readMoney() {
         String input = InputView.readUserInput(REQUEST_MONEY);
         return new Money(input);
