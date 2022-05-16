@@ -20,6 +20,10 @@ public class LottoTicket {
         return lottoGames.size();
     }
 
+    public int moneyValue() {
+        return lottoGames.size() * PRICE;
+    }
+
     public TicketCheckResult check(final WinningNumbers winningNumbers) {
         Map<Match, Integer> result = new HashMap<>();
         for (int i = 0; i <= LottoGame.SIZE; i++) {

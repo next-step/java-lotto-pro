@@ -22,7 +22,7 @@ public class Application {
         matchPrizes.put(new Match(5), 1500000);
         matchPrizes.put(new Match(6), 2000000000);
 
-        LottoVendingMachine machine = new LottoVendingMachine(new LottoNumbersGeneratorKor());
+        LottoVendingMachine machine = new LottoVendingMachine(new LottoNumbersGeneratorKr());
 
         LottoTicket lottoTicket = machine.sellTicket(money());
         ResultView.printTicket(lottoTicket);
@@ -43,7 +43,7 @@ public class Application {
 
     private static Money takeMoney() {
         try {
-            return new Money(InputView.readMoney());
+            return new Money(InputView.readMoney(), LottoTicket.PRICE);
         } catch (IllegalArgumentException e) {
             ResultView.printExceptionMessage(e.getMessage());
             return null;

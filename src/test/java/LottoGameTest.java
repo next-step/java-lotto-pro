@@ -1,7 +1,7 @@
-import lotto.domain.WinningNumbers;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.Match;
+import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

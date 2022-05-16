@@ -12,7 +12,6 @@ import java.util.List;
 
 public class LottoVendingMachine {
 
-    public static final int PRICE = 1000;
     private final LottoNumbersGenerator lottoNumbersGenerator;
 
     public LottoVendingMachine(LottoNumbersGenerator lottoNumbersGenerator) {
@@ -21,7 +20,7 @@ public class LottoVendingMachine {
 
     public LottoTicket sellTicket(Money money) {
         List<List<Integer>> lottoGamesNumbers = new ArrayList<>();
-        final int numberOfGames = money.numberOfGames(PRICE);
+        final int numberOfGames = money.numberOfGames();
         for (int i = 0; i < numberOfGames; i++) {
             lottoGamesNumbers.add(lottoNumbersGenerator.generate());
         }
@@ -35,7 +34,7 @@ public class LottoVendingMachine {
         List<LottoResultItem> items = result.mapLottoResultItemList(lottoWin);
 
         return new LottoResult(
-                calculateRateOfReturn(ticket.size() * PRICE, items),
+                calculateRateOfReturn(ticket.moneyValue(), items),
                 items);
     }
 
