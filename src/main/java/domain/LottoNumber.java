@@ -16,11 +16,11 @@ public final class LottoNumber {
 
     private final int number;
 
-    private LottoNumber(int number) {
+    private LottoNumber(final int number) {
         this.number = number;
     }
 
-    public static LottoNumber of(int number) {
+    public static LottoNumber of(final int number) {
         try {
             return CACHE.get(number - 1);
         } catch (IndexOutOfBoundsException e) {
