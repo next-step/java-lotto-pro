@@ -1,2 +1,4 @@
-package lottoauto;public class LottoAuto {
+package lottoauto;
+
+public class LottoAuto {
 }
