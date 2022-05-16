@@ -8,7 +8,7 @@ public enum Rank {
     FIFTH(3, 5_000),
     NONE(0, 0);
 
-    private final static int PRIZE_LOWER_BOUND_COUNT = FIFTH.count;
+    private final static int LOWER_BOUND_COUNT = FIFTH.count;
 
     private final int count;
     private final long money;
@@ -19,17 +19,15 @@ public enum Rank {
     }
 
     public static Rank valueOf(int containCount, boolean containBonusNumber) {
-        if (LottoNumbers.SIZE < containCount)
+        if (LOWER_BOUND_COUNT > containCount) {
             return NONE;
-
-        if (PRIZE_LOWER_BOUND_COUNT > containCount)
-            return NONE;
+        }
 
         if (SECOND.count == containCount) {
             return containBonusNumber ? SECOND : THIRD;
         }
 
-        return Arrays.stream(new Rank[] { FIRST, FOURTH, FIFTH, NONE })
+        return Arrays.stream(values())
                 .filter(it -> it.count == containCount)
                 .findAny().orElse(NONE);
     }

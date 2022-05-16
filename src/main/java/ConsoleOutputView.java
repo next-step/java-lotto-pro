@@ -16,8 +16,8 @@ public class ConsoleOutputView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        Arrays.stream(Rank.values()).sorted(Collections.reverseOrder()).filter(Rank::win).forEach(prize -> {
-            System.out.println(prize + " - " + ranks.count(prize) + "개");
+        Arrays.stream(Rank.values()).sorted(Collections.reverseOrder()).filter(Rank::win).forEach(rank -> {
+            System.out.println(rank + " - " + ranks.count(rank) + "개");
         });
 
         BigDecimal scaledYield = yield.setScale(2, RoundingMode.DOWN);

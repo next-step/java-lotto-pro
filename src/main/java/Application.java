@@ -10,7 +10,8 @@ public class Application {
     public static void main(String[] args) {
         Lotto lotto = getLotto();
         Lottery lottery = getLottery();
-        aggregate(lottery.get(lotto));
+        Ranks ranks = lottery.get(lotto);
+        consoleOutputView.view(ranks, vendor.yield(ranks));
     }
 
     private static Lotto getLotto() {
@@ -35,9 +36,5 @@ public class Application {
     private static LottoNumber getBonusLottoNumber() {
         int input = consoleInputView.inputInt(() -> "보너스 볼을 입력해 주세요.");
         return new LottoNumber(input);
-    }
-
-    private static void aggregate(Ranks ranks) {
-        consoleOutputView.view(ranks, vendor.yield(ranks));
     }
 }
