@@ -1,9 +1,12 @@
 package lotto.constant;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
 
@@ -16,13 +19,9 @@ public enum LottoRank {
 
     private final int matchNumberCount;
     private final int winningAmount;
-    private static final Map<Integer, LottoRank> matchCountRank = new HashMap<>();
-
-    static {
-        for (LottoRank lottoRank : EnumSet.of(FIRST, SECOND, THIRD, FOURTH, NONE)) {
-            matchCountRank.put(lottoRank.matchNumberCount, lottoRank);
-        }
-    }
+    private static final Map<Integer, LottoRank> matchCountRankExcludeBonus = Collections
+            .unmodifiableMap(Arrays.stream(values()).filter(lottoRank -> !SECOND_BONUS.equals(lottoRank))
+                    .collect(Collectors.toMap(LottoRank::getMatchNumberCount, Function.identity())));
 
     LottoRank(int matchNumberCount, int winningAmount) {
         this.matchNumberCount = matchNumberCount;
@@ -38,7 +37,7 @@ public enum LottoRank {
     }
 
     public static LottoRank of(int matchNumberCount, boolean isBonusMatch) {
-        LottoRank lottoRank = matchCountRank.getOrDefault(matchNumberCount, NONE);
+        LottoRank lottoRank = matchCountRankExcludeBonus.getOrDefault(matchNumberCount, NONE);
         if (SECOND.equals(lottoRank) && isBonusMatch) {
             return SECOND_BONUS;
         }
