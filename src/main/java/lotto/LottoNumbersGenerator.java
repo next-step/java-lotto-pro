@@ -7,6 +7,9 @@ import java.util.stream.IntStream;
 
 public class LottoNumbersGenerator {
 
+    private LottoNumbersGenerator() {
+    }
+
     public static List<Integer> generate(int min, int max, int count) {
         List<Integer> numbers = IntStream.range(min, max)
                 .boxed()

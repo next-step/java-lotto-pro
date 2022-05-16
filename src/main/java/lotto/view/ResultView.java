@@ -6,6 +6,9 @@ import lotto.dto.LottoResult;
 
 public class ResultView {
 
+    private ResultView() {
+    }
+
     public static void printTicket(LottoTicket lottoTicket) {
         System.out.println(lottoTicket.size() + "개를 구매했습니다.");
         System.out.println(lottoTicket);
