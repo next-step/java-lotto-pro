@@ -2,7 +2,6 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.domain.LottoPrice;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
