@@ -47,6 +47,10 @@ public class LottoResultTest {
     @Test
     void printTest() {
         assertThat(new LottoResult(Arrays.asList(Hit.THREE, Hit.FOUR)).toString())
-                .isEqualTo("3개 일치 (5000원)- 1개\n" + "4개 일치 (50000원)- 1개\n" + "5개 일치 (1500000원)- 0개\n" + "6개 일치 (2000000000원)- 0개\n");
+                .isEqualTo("3개 일치 (5000원)- 1개\n" +
+                        "4개 일치 (50000원)- 1개\n" +
+                        "5개 일치 (1500000원)- 0개\n" +
+                        "5개 일치, 보너스 볼 일치(30000000원)- 0개\n" +
+                        "6개 일치 (2000000000원)- 0개\n");
     }
 }

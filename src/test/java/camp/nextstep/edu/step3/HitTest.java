@@ -23,15 +23,17 @@ public class HitTest {
 
     @DisplayName("일치한 갯수 값은 0 과 6 사이 값을 가진다.")
     @ParameterizedTest
-    @MethodSource("provideHitCountAndExpectedHit")
-    void valueOfTest(final int hitCount, Hit expectedHit) {
-        assertThat(Hit.valueOf(hitCount)).isEqualTo(expectedHit);
+    @MethodSource("provideHitCountAndHitBonusAndExpectedHit")
+    void valueOfTest(final int hitCount, final boolean isHitBonus, Hit expectedHit) {
+        assertThat(Hit.valueOf(hitCount, isHitBonus)).isEqualTo(expectedHit);
     }
 
-    private static Stream<Arguments> provideHitCountAndExpectedHit() {
+    private static Stream<Arguments> provideHitCountAndHitBonusAndExpectedHit() {
         return Stream.of(
-                Arguments.of(0, ZERO),
-                Arguments.of(6, ALL)
+                Arguments.of(0,true,ZERO),
+                Arguments.of(5,false,FIVE),
+                Arguments.of(5,true,FIVE_BONUS),
+                Arguments.of(6,true,ALL)
         );
     }
 
@@ -62,7 +64,7 @@ public class HitTest {
     @DisplayName("당첨금이 있는 값만 반환한다.")
     @Test
     void getPrizeMoneyListTest() {
-        assertThat(Hit.winningList()).isEqualTo(new Hit[] {THREE,FOUR,FIVE,ALL});
+        assertThat(Hit.winningList()).isEqualTo(new Hit[] {THREE,FOUR,FIVE,FIVE_BONUS,ALL});
     }
 
     private static Stream<Arguments> provideHitAndCountAndPrizeMoney() {

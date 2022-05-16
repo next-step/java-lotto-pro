@@ -19,6 +19,7 @@ public class LottoPaperTest {
     void setUp() {
         printList.add(new Lotto(LottoTest.createLottoNumberList(new int[]{1, 2, 3, 4, 5, 6})));
         printList.add(new Lotto(LottoTest.createLottoNumberList(new int[]{1, 2, 3, 4, 5, 7})));
+        printList.add(new Lotto(LottoTest.createLottoNumberList(new int[]{1, 2, 3, 9, 10, 11})));
     }
 
     @DisplayName("생성시 Lotto[] 를 입력 받는다.")
@@ -41,20 +42,23 @@ public class LottoPaperTest {
     @DisplayName("당첨번호 인 Lotto 를 입력하고 결과로 Total 를 반환한다.")
     @Test
     void checkAllTest() {
-        Lotto result = new Lotto(LottoTest.createLottoNumberList(new int[]{1, 2, 3, 10, 11, 12}));
-        assertThat(new LottoPaper(printList).checkAll(result)).isEqualTo(new LottoResult(Arrays.asList(Hit.THREE, Hit.THREE)));
+        Lotto result = new Lotto(LottoTest.createLottoNumberList(new int[]{1, 2, 3, 4, 6, 12}));
+        assertThat(new LottoPaper(printList).checkAll(result, new LottoNumber(5))).isEqualTo(new LottoResult(Arrays.asList(Hit.FOUR, Hit.FIVE_BONUS, Hit.THREE)));
     }
 
     @DisplayName("checkAll 메소드 호출시 null 을 입력할수 없다.")
     @Test
     void parameterIsNotNull() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoPaper(printList).checkAll(null));
+                .isThrownBy(() -> new LottoPaper(printList).checkAll(null, null));
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoPaper(printList).checkAll(new Lotto(LottoTest.createLottoNumberList(new int[]{1, 2, 3, 10, 11, 12})), null));
     }
 
     @DisplayName("로또를 구매했으면 구매장수를 알수있다.")
     @Test
     void numberOfPurchasesTest() {
-        assertThat(new LottoPaper(printList).numberOfPurchases()).isEqualTo(2);
+        assertThat(new LottoPaper(printList).numberOfPurchases()).isEqualTo(printList.size());
     }
 }
