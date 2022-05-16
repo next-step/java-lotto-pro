@@ -15,13 +15,13 @@ public class LottoTicket {
         this.initWithRandomNumber();
     }
     
-    public LottoTicket(String numbersWithComma) {
+    public LottoTicket(String numbers) {
         this.numbers = new ArrayList<>();
         try {
-            String[] winnerNumbers = numbersWithComma.split(",");
+            String[] winnerNumbers = numbers.split(",");
             this.setNumbersWithInput(winnerNumbers);
         } catch (Exception e) {
-            throw new IllegalArgumentException(String.format("String input is not valid. input: %s", numbersWithComma));
+            throw new IllegalArgumentException(String.format("String input is not valid. input: %s", numbers));
         }
         Collections.sort(this.numbers);
     }
