@@ -17,8 +17,8 @@ public class Lottos {
     public LottoScore calculateLottoScore(WinningNumbers winningNumbers) {
         LottoScore lottoScore = new LottoScore();
 
-        lottos.forEach(x -> {
-            int winningNumberCount = x.getWinningOfNumbersCount(winningNumbers.getWinningNumbers());
+        lottos.forEach(lotto -> {
+            int winningNumberCount = lotto.getWinningOfNumbersCount(winningNumbers.getWinningNumbers());
             addLottoScore(lottoScore, winningNumberCount);
         });
 
@@ -27,7 +27,7 @@ public class Lottos {
 
     private void addLottoScore(LottoScore lottoScore, int winningNumberCount) {
         LottoWinnings lottoWinnings = LottoWinnings.getWinningsByCount(winningNumberCount);
-        if (lottoWinnings != null) {
+        if (!lottoWinnings.isNone()) {
             lottoScore.addScore(lottoWinnings);
         }
     }
