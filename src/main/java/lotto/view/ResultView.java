@@ -35,7 +35,7 @@ public class ResultView {
         printNewLine();
         printWinningStatisticsSubject();
         for (LottoRanking lottoRanking : LottoRanking.values()) {
-            int count = lottoStatistics.get(lottoRanking);
+            int count = lottoStatistics.winningLottoCount(lottoRanking);
             printWinningStatisticsDetail(lottoRanking, count);
         }
         printWinningStatisticsYield(lottoStatistics, money);
