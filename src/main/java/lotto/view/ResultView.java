@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.WinningResult;
 import lotto.lotto.Lotto;
 import lotto.money.Money;
+
 import java.util.List;
 
 public interface ResultView {
@@ -11,7 +12,7 @@ public interface ResultView {
         return new ConsoleResultView();
     }
 
-    void printLottoes(List<Lotto> lottoes);
+    void printLottoes(List<Lotto> lottoes, int sizeOfManualLottoes);
 
     void printResult(WinningResult winningResult, Money money);
 }

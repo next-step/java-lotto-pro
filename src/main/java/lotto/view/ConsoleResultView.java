@@ -7,14 +7,16 @@ import lotto.money.Money;
 
 import java.math.BigDecimal;
 import java.util.List;
+
 import static java.util.Objects.requireNonNull;
 
 class ConsoleResultView implements ResultView {
 
     @Override
-    public void printLottoes(List<Lotto> lottoes) {
+    public void printLottoes(List<Lotto> lottoes, int sizeOfManualLotto) {
         requireNonNull(lottoes, "lottoes");
-        System.out.printf("%d개를 구매했습니다.%n", lottoes.size());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+                          sizeOfManualLotto, lottoes.size() - sizeOfManualLotto);
         printLottoesInformation(lottoes);
     }
 

@@ -21,13 +21,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("LottoAnalyzer 클래스 테스트")
 class LottoAnalyzerTest {
 
-    private final WinningLotto winningLotto = WinningLotto.of(Lotto.of(1, 2, 3, 4, 5, 6), LottoNumber.of(45));
+    private final WinningLotto winningLotto = WinningLotto.of("1, 2, 3, 4, 5, 6");
+    private final LottoNumber bonusLottoNumber = LottoNumber.of(45);
 
     @DisplayName("lotto가 null이기 떄문에 생성 실패")
     @Test
     void failureCreate() {
         assertThatThrownBy(() -> {
-            new LottoAnalyzer(null);
+            new LottoAnalyzer(null, null);
         })
         .isInstanceOf(NullPointerException.class);
     }
@@ -36,7 +37,7 @@ class LottoAnalyzerTest {
     @ParameterizedTest
     @ArgumentsSource(AnalyzeArgumentsProvider.class)
     void analyzeWhenVariousLottoes(List<Lotto> lottoes, Map<LottoPrize, Integer> expectedMap) {
-        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(winningLotto);
+        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(winningLotto, bonusLottoNumber);
         final WinningResult winningResult = lottoAnalyzer.analyze(lottoes);
         for (LottoPrize lottoPrize : LottoPrize.values()) {
             final Integer actual = winningResult.find(lottoPrize);

@@ -1,36 +1,34 @@
 package lotto;
 
 import lotto.lotto.Lotto;
-import lotto.lotto.LottoGenerator;
+import lotto.lotto.LottoNumber;
 import lotto.lotto.WinningLotto;
+import lotto.lotto.ManualLottoes;
 import lotto.money.Money;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 
 public class LottoMachine {
 
     private final LottoExchanger lottoExchanger;
 
-    public LottoMachine(LottoGenerator lottoGenerator) {
-        this.lottoExchanger = new LottoExchanger(requireNonNull(lottoGenerator, "lottoGenerator"));
-    }
-
-    LottoMachine() {
-        this(LottoGenerator.random());
+    public LottoMachine() {
+        this.lottoExchanger = new LottoExchanger();
     }
 
     public void run(InputView inputView, ResultView resultView) {
         final Money money = inputView.readMoney();
-        final List<Lotto> lottoes = lottoExchanger.exchange(money);
-        resultView.printLottoes(lottoes);
+        final ManualLottoes manualLottoes = inputView.readManualLottoes();
+        final List<Lotto> lottoes = lottoExchanger.exchange(money, manualLottoes);
+        resultView.printLottoes(lottoes, manualLottoes.size());
         runAnalyze(inputView, resultView, lottoes);
     }
 
     private void runAnalyze(InputView inputView, ResultView resultView, List<Lotto> lottoes) {
         final WinningLotto previousWinningLotto = inputView.readPreviousWinningLotto();
-        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(previousWinningLotto);
+        final LottoNumber bonusLottoNumber = inputView.readBonusLottoNumber();
+        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(previousWinningLotto, bonusLottoNumber);
         final WinningResult winningResult = lottoAnalyzer.analyze(lottoes);
         resultView.printResult(winningResult, sumTotalMoney(lottoes));
     }
