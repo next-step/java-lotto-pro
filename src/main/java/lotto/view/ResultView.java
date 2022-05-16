@@ -34,4 +34,52 @@ public class ResultView {
             System.out.println(lottoNumbers);
         });
     }
+
+    public void printLottoResult(LottoResult lottoResult) {
+        System.out.println(LOTTO_RESULT_MESSAGE);
+
+        Map<Lotto, LottoRank> lottoLottoRankMap = lottoResult.getLottoResultMap();
+        Map<LottoRank, Integer> lottoRankCountMap = new HashMap<>();
+
+        int purchaseLottoPrice = purchaseLottoPrice(lottoLottoRankMap.size());
+        int winningLottoPrice = 0;
+
+        for (Lotto lotto : lottoLottoRankMap.keySet())
+            putLottoRankCountMap(lottoRankCountMap, lottoLottoRankMap.get(lotto));
+        Arrays.sort(lottoRankCountMap.keySet().toArray());
+
+        for (LottoRank lottoRank : lottoRankCountMap.keySet()) {
+            Integer lottoRankCount = lottoRankCountMap.get(lottoRank);
+            printLottoRankCount(lottoRank.getMatchedCount(), lottoRank.getPrice(), lottoRankCountMap.get(lottoRank));
+            winningLottoPrice += (lottoRankCount * lottoRank.getPrice());
+        }
+
+        printLottoProfit(lottoProfit(winningLottoPrice, purchaseLottoPrice));
+    }
+
+    private void putLottoRankCountMap(Map<LottoRank, Integer> lottoRankCountMap, LottoRank lottoRank) {
+        if (isIncludeLottoRank(lottoRank)) {
+            lottoRankCountMap.put(lottoRank, lottoRankCountMap.getOrDefault(lottoRank, 0) + 1);
+        }
+    }
+
+    private boolean isIncludeLottoRank(LottoRank lottoRank) {
+        return lottoRank.getMatchedCount() >= LOTTO_RANK_MIN_VALUE;
+    }
+
+    private void printLottoRankCount(int matchedCount, int price, int rankCount) {
+        System.out.printf(LOTTO_RANK_MESSAGE, matchedCount, price, rankCount, NEW_LINE);
+    }
+
+    private int purchaseLottoPrice(int issuedLottoCount) {
+        return LOTTO_PURCHASE_PRICE * issuedLottoCount;
+    }
+
+    private double lottoProfit(int lottoWinningPrice, int lottoPurchasePrice) {
+        return NumberUtil.intToDouble(lottoWinningPrice) / NumberUtil.intToDouble(lottoPurchasePrice) ;
+    }
+
+    private void printLottoProfit(double lottoProfit) {
+        System.out.printf(LOTTO_PROFIT_MESSAGE, lottoProfit, NEW_LINE);
+    }
 }
