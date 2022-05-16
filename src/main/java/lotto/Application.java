@@ -12,7 +12,9 @@ public class Application {
         Money purchaseAmount = Money.from(InputView.getPurchaseAmount());
         Lotties myLotties = LottoGame.purchase(purchaseAmount);
         ResultView.printPurchaseLotties(myLotties);
-        Lotto winningLotto = Lotto.from(InputView.getWinningLotto());
+        String winningLottoNumber = InputView.getWinningLottoNumber();
+        int bonusNumber = InputView.getBonusNumber();
+        Lotto winningLotto = Lotto.of(winningLottoNumber,bonusNumber);
         WinningStatus winningStatus = myLotties.getWinningStatus(winningLotto);
         ResultView.printWinningStatus(winningStatus);
         ResultView.printLottoYield(purchaseAmount, winningStatus);
