@@ -15,6 +15,12 @@ public class InputUtils {
         }
     }
 
+    public static List<Integer> convertToIntegerList(List<String> input) {
+        return input.stream()
+                .map(InputUtils::convertToInteger)
+                .collect(Collectors.toList());
+    }
+
     public static List<String> splitWithDelimiter(String input) {
         return Arrays.stream(input.split(NUMBERS_DELIMITER))
                 .map(String::trim)
