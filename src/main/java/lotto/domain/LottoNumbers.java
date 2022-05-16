@@ -1,15 +1,15 @@
 package lotto.domain;
 
 import static lotto.domain.ErrorMessage.INVALID_LOTTO_NUMBERS;
+import static lotto.domain.LottoNumbersCondition.AMOUNT_OF_NUMBERS;
+import static lotto.domain.LottoNumbersCondition.MAXIMUM_NUMBER;
+import static lotto.domain.LottoNumbersCondition.MINIMUM_NUMBER;
 
 import java.util.List;
 import java.util.Objects;
 import lotto.service.LottoNumbersStringConverter;
 
 public class LottoNumbers {
-    public static final int AMOUNT_OF_NUMBERS = 6;
-    public static final int MINIMUM_NUMBER = 1;
-    public static final int MAXIMUM_NUMBER = 45;
     private final List<Integer> numbers;
 
     public LottoNumbers(final List<Integer> numbers) {
@@ -29,13 +29,13 @@ public class LottoNumbers {
     }
 
     private static void checkAmountOfNumbers(final List<Integer> numbers) {
-        if (numbers.size() != AMOUNT_OF_NUMBERS) {
+        if (numbers.size() != AMOUNT_OF_NUMBERS.getCondition()) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS.getMessage());
         }
     }
 
     private static void checkRangeOfNumber(final int number) {
-        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
+        if (number < MINIMUM_NUMBER.getCondition() || number > MAXIMUM_NUMBER.getCondition()) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS.getMessage());
         }
     }
