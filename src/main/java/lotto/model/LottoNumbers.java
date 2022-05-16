@@ -21,6 +21,10 @@ public class LottoNumbers {
         return new LottoNumbers(randomNumbers);
     }
 
+    public static LottoNumbers createLottoNumbers(List<Integer> numbers) {
+        return new LottoNumbers(numbers);
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.toString();
