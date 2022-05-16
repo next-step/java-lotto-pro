@@ -16,9 +16,9 @@ public class LottoResult {
         this.rankingList = rankingList;
     }
 
-    public List<Ranking> findRankings(int matchingCount) {
+    public List<Ranking> findRankings(int matchingCount, boolean matchBonus) {
         List<Ranking> result = new ArrayList<>();
-        Ranking target = Ranking.findRank(matchingCount, false);
+        Ranking target = Ranking.findRank(matchingCount, matchBonus);
         for (Ranking ranking : rankingList) {
             addRankingWhenSame(result, ranking, target);
         }
