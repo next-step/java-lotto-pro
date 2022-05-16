@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
-    Answer answer123456 = new Answer("1, 2, 3, 4, 5, 6");
+    Lotto answer123456 = new Lotto(1, 2, 3, 4, 5, 6);
 
     @Test
     void 로또_생성() {

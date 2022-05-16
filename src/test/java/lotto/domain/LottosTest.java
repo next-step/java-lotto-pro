@@ -9,7 +9,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
-    Answer answer123456 = new Answer("1, 2, 3, 4, 5, 6");
+    Lotto answer123456 = new Lotto(1, 2, 3, 4, 5, 6);
 
     @ParameterizedTest
     @CsvSource(value = {"5000,5", "14000,14"})

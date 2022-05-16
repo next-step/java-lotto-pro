@@ -11,7 +11,7 @@ public class Lotto {
     private static final int LOTTO_SIZE = 6;
     private final List<Number> numbers;
 
-    public Lotto(List<Number> numbers) {
+    private Lotto(List<Number> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다");
         }
@@ -28,6 +28,12 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
+    public Lotto(String numbers) {
+        this(Arrays.stream(numbers.split(","))
+                .map(number -> Number.from(number.trim()))
+                .collect(Collectors.toList()));
+    }
+
     public static Lotto auto() {
         return new Lotto(new ShuffledNumbers().get(LOTTO_SIZE));
     }
@@ -39,8 +45,14 @@ public class Lotto {
         return distinctNumbers.size() == numbers.size();
     }
 
-    public Winning winning(Answer answer) {
+    public Winning winning(Lotto answer) {
         return Winning.from(answer.match(numbers));
+    }
+
+    private int match(List<Number> numbers) {
+        return (int) numbers.stream()
+                .filter(this.numbers::contains)
+                .count();
     }
 
     @Override

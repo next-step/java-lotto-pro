@@ -11,7 +11,7 @@ public class LottoController {
         Lottos lottos = Lottos.buy(charge);
         view.showLottos(lottos);
 
-        Answer answer = new Answer(view.inputAnswer());
+        Lotto answer = new Lotto(view.inputAnswer());
         Winnings winnings = lottos.winnigs(answer);
 
         view.showStatistics(Statistics.of(charge, winnings));
