@@ -57,19 +57,19 @@
   * 로또 일치수 & 당첨금액 enum 클래스를 만든다
   * 
 
-* 구현클래스 리스트
-  * domain
-    * LottoNumber - 로또번호 1~45
-    * Lotto - 로또번호 6개를 저장
-    * LottoFactory - 자동 로또를 만드는 클래스
-    * Lottos - 구매한 로또 번호들을 가지는 클래스
-    * Money - 금액 관련 클래스 
-    * Quantity - 구매수량
-    * LottoGame - 로또를 구매하고 
-    * LottoResult - 당첨결과 클래스
-    * LottoRank - 금액, 일치수 상태 enum 클래스
-  * controller
-    * App - 입력받고 결과를 출력
+*[ ] 구현클래스 리스트
+  *[ ] domain
+    *[ ] LottoNumber - 로또번호 1~45 캐싱 및 유효성 체크
+    *[ ] Lotto - 로또번호 6개를 저장
+    *[ ] LottoFactory - 자동 로또를 만드는 클래스
+    *[ ] Lottos - 구매한 로또 번호들을 가지는 클래스
+    *[ ] Money - 금액 관련 클래스 
+    *[ ] Quantity - 구매수량
+    *[ ] LottoGame - 로또 상태를 가지는 클래스
+    *[ ] LottoResult - 당첨결과 클래스
+    *[ ] LottoRank - 금액, 일치수를 관리하는 enum 클래스
+  *[ ] controller
+    *[ ] App - 입력받고 결과를 출력
   * view
-    * InputView - 구매관련 값을 입력 받는 클래스
-    * ResultView - 결과를 출력하는 클래스
+    *[ ] InputView - 구매관련 값을 입력 받는 클래스
+    *[ ] ResultView - 결과를 출력하는 클래스
