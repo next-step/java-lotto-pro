@@ -2,7 +2,7 @@ package lotto;
 
 public class Rank {
     private final int key;
-    int price;
+    private final int price;
     int count;
 
     public Rank(int key, int price, int count) {
@@ -13,10 +13,6 @@ public class Rank {
 
     public void addCount() {
         count++;
-    }
-
-    public int getPrice() {
-        return price;
     }
 
     public int getCount() {

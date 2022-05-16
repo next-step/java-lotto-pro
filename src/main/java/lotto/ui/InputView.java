@@ -9,7 +9,7 @@ public class InputView {
     static final String PRINT_INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     static final String PRINT_INPUT_WINNING_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     static final String WINNING_LOTTO_DELIMITER = ",";
-    static Scanner scanner = new Scanner(System.in);
+    static final Scanner scanner = new Scanner(System.in);
 
     public static int getMoneyInput() {
         System.out.println(PRINT_INPUT_MONEY_MESSAGE);
@@ -35,12 +35,12 @@ public class InputView {
         System.out.println(PRINT_INPUT_WINNING_LOTTO_MESSAGE);
         String winningLottoString = scanner.nextLine();
 
-        String[] splitWinnigLottoString = winningLottoString.split(WINNING_LOTTO_DELIMITER);
+        String[] splitWinningLottoString = winningLottoString.split(WINNING_LOTTO_DELIMITER);
         List<Integer> lottoNumbers = new ArrayList<>();
 
-        validateWinningLottoNumberLength(splitWinnigLottoString);
+        validateWinningLottoNumberLength(splitWinningLottoString);
 
-        for (String s : splitWinnigLottoString) {
+        for (String s : splitWinningLottoString) {
             lottoNumbers.add(validateWinningLottoNumber(s.trim()));
         }
         return new Lotto(lottoNumbers);
