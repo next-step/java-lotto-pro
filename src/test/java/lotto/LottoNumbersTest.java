@@ -19,5 +19,4 @@ public class LottoNumbersTest {
         Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumberList);
         assertThat(lottoNumberSet).hasSize(6);
     }
-
 }
