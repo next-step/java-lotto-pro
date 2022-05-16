@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.lotto.Lotto;
-import lotto.lotto.LottoGenerator;
 import lotto.lotto.ManualLottoes;
 import lotto.money.Money;
 import org.junit.jupiter.api.DisplayName;
@@ -18,15 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("LottoExchanger 클래스 테스트")
 class LottoExchangerTest {
 
-    private final LottoGenerator fixedLottoGenerator = () -> Lotto.of(1, 2, 3, 4, 5, 6);
-    private final LottoExchanger lottoExchanger = new LottoExchanger(fixedLottoGenerator);
-
-    @DisplayName("LottoExchanger 생성")
-    @Test
-    void create() {
-        final LottoExchanger lottoExchanger = new LottoExchanger(fixedLottoGenerator);
-        assertThat(lottoExchanger).isNotNull();
-    }
+    private final LottoExchanger lottoExchanger = new LottoExchanger();
 
     @DisplayName("Money가 부족하여 Lotto를 구매할 수 없어 `NotEnoughMoneyException`가 발생")
     @Test

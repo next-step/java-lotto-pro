@@ -1,25 +1,19 @@
 package lotto;
 
 import lotto.lotto.Lotto;
-import lotto.lotto.LottoGenerator;
 import lotto.lotto.WinningLotto;
 import lotto.lotto.ManualLottoes;
 import lotto.money.Money;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 
 public class LottoMachine {
 
     private final LottoExchanger lottoExchanger;
 
-    public LottoMachine(LottoGenerator lottoGenerator) {
-        this.lottoExchanger = new LottoExchanger(requireNonNull(lottoGenerator, "lottoGenerator"));
-    }
-
-    LottoMachine() {
-        this(LottoGenerator.random());
+    public LottoMachine() {
+        this.lottoExchanger = new LottoExchanger();
     }
 
     public void run(InputView inputView, ResultView resultView) {

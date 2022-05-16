@@ -8,15 +8,9 @@ import lotto.money.Money;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-
 public class LottoExchanger {
 
-    private final LottoGenerator lottoGenerator;
-
-    public LottoExchanger(LottoGenerator lottoGenerator) {
-        this.lottoGenerator = requireNonNull(lottoGenerator, "lottoGenerator");
-    }
+    private final LottoGenerator lottoGenerator = LottoGenerator.random();
 
     public List<Lotto> exchange(Money money, ManualLottoes manualLottoes) {
         final List<Lotto> purchasedLottoes = new ArrayList<>();
