@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private static final int MIN = 1;
-    private static final int MAX = 45;
+    private static final int BEGIN_NUMBER = 1;
+    private static final int END_NUMBER = 46;
     private static final int LIMIT_LOTTO = 6;
     private static final Lotto INSTANCE = new Lotto();
 
@@ -20,8 +20,8 @@ public class Lotto {
     }
 
     private Lotto() {
-        lotto = IntStream.range(MIN, MAX)
-                .mapToObj(LottoNumber::new)
+        lotto = IntStream.range(BEGIN_NUMBER, END_NUMBER)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
@@ -47,12 +47,10 @@ public class Lotto {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    public int matches(final Lotto answer) {
-        int count = 0;
-        for (LottoNumber number : answer.lotto) {
-            count = contains(number) ? count + 1 : count;
-        }
-        return count;
+    public long matchCount(final Lotto answer) {
+        return answer.lotto.stream()
+                .filter(this::contains)
+                .count();
     }
 
     private boolean contains(final LottoNumber lottoNumber) {
