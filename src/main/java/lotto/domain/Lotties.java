@@ -28,7 +28,7 @@ public class Lotties {
 
     public WinningStatus getWinningStatus(Lotto winningLotto) {
         List<Rank> ranks = lotties.stream()
-                .map(winningLotto::match)
+                .map(lotto -> lotto.match(winningLotto))
                 .collect(Collectors.toList());
         return WinningStatus.from(ranks);
     }
