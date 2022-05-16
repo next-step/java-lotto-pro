@@ -59,8 +59,11 @@ public class LottoTicket {
         return 0;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoElements.stream().map(LottoElement::getElement)
-            .collect(Collectors.toList());
+    public List<LottoElement> getLottoNumbers() {
+        ArrayList<LottoElement> cloneLottoElement = new ArrayList<>();
+        for (LottoElement lottoElement : lottoElements) {
+            cloneLottoElement.add(lottoElement.clone());
+        }
+        return cloneLottoElement;
     }
 }

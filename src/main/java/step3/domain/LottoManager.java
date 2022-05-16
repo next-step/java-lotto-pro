@@ -67,8 +67,7 @@ public class LottoManager {
     }
 
 
-    public List<List<Integer>> getLottoNumbers() {
-        return lottoTickets.stream().map(LottoTicket::getLottoNumbers)
-            .collect(Collectors.toList());
+    public List<List<LottoElement>> getLottoNumbers() {
+        return lottoTickets.stream().map(LottoTicket::getLottoNumbers).collect(Collectors.toList());
     }
 }

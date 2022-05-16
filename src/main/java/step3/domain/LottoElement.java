@@ -2,12 +2,13 @@ package step3.domain;
 
 import java.util.Objects;
 
-public class LottoElement implements Comparable<LottoElement> {
+public class LottoElement implements Comparable<LottoElement>, Cloneable {
 
     private final int element;
     private final int LOTTO_MIN = 1;
     private final int LOTTO_MAX = 46;
     private final String CREATE_ELEMENT_EXCEPTION_MSG = "로또 번호는 %s 이상 %s 이하의 숫자여야합니다";
+    private final String COPY_ELEMENT_EXCEPTION_MSG = "LottoElement 복사중 에러가 발생하였습니다";
 
     public LottoElement(int element) {
         this.element = validElement(element);
@@ -58,5 +59,12 @@ public class LottoElement implements Comparable<LottoElement> {
         return String.valueOf(element);
     }
 
+    @Override
+    protected LottoElement clone() {
+        try {
+            return (LottoElement) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new IllegalArgumentException(COPY_ELEMENT_EXCEPTION_MSG);
+        }
     }
 }

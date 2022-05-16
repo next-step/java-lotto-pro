@@ -2,6 +2,7 @@ package step3.model;
 
 import java.util.HashMap;
 import java.util.List;
+import step3.domain.LottoElement;
 import step3.domain.LottoManager;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
@@ -42,7 +43,7 @@ public class LottoMachine {
         }
     }
 
-    public List<List<Integer>> getLottoNumbers() {
+    public List<List<LottoElement>> getLottoNumbers() {
         return lottoManager.getLottoNumbers();
     }
 
