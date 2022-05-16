@@ -50,4 +50,8 @@ public class Lotto {
         return this.lottoNumbers.size() != lottoNumberSet.size();
     }
 
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
