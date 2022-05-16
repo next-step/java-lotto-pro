@@ -5,8 +5,8 @@ import java.util.Objects;
 public class LottoElement implements Comparable<LottoElement> {
 
     private final int element;
-    private int LOTTO_MIN = 1;
-    private int LOTTO_MAX = 46;
+    private final int LOTTO_MIN = 1;
+    private final int LOTTO_MAX = 46;
 
     public LottoElement(String element) {
         this.element = validElement(element);
