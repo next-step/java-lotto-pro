@@ -21,12 +21,20 @@ class PurchasedLottoTest {
         assertThat(lottos.getLottoList()).hasSize(lottoList.size());
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:FIRST:45", "1,2,3,4,5,45:SECOND:6", "1,2,3,4,5,45:THIRD:40", "1,2,3,4,7,8:FOURTH:45", "1,2,3,7,8,9:FIFTH:45"}, delimiter = ':')
-    void 맞춘_개수에_따른_등수_확인_보너스_여부_포함(String lottoNumbers, Ranking expected, int bonusNumber) {
-        PurchasedLotto purchasedLotto = new PurchasedLotto(Arrays.asList(new Lotto(lottoNumbers)));
-        String lastWinningLotto = "1,2,3,4,5,6";
-        List<Ranking> rankings = purchasedLotto.compareLottos(new Lotto(lastWinningLotto), new LottoNo(bonusNumber));
-        assertThat(rankings).containsExactly(expected);
+    @Test
+    void 맞춘_개수에_따른_등수_확인_보너스_여부_포함() {
+        List<Lotto> lottos = Arrays.asList(
+                new Lotto("1, 2, 3, 4, 5, 6"),
+                new Lotto("1, 2, 3, 4, 5, 45"),
+                new Lotto("1, 2, 3, 4, 5, 40"));
+        PurchasedLotto myLotto = new PurchasedLotto(lottos);
+        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        LottoNo bonusNumber = new LottoNo(45);
+
+        List<Ranking> rankings = myLotto.compareLottos(winningLotto, bonusNumber);
+        assertThat(rankings)
+                .contains(Ranking.FIRST)
+                .contains(Ranking.SECOND)
+                .contains(Ranking.THIRD);
     }
 }

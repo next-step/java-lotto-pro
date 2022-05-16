@@ -43,4 +43,8 @@ public class LottoResult {
         BigDecimal divisor = new BigDecimal(money.getMoney());
         return winningMoney.divide(divisor).setScale(2, RoundingMode.HALF_UP);
     }
+
+    public List<Ranking> getRankingList() {
+        return rankingList;
+    }
 }

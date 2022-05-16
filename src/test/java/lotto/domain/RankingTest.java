@@ -19,8 +19,8 @@ class RankingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = { 0, 1, 2, 3, 4 })
-    public void 보너스_번호_4등_이하_의미_없음(int matchingCount) {
+    @ValueSource(ints = { 0, 1, 2, 3, 4, 6 })
+    public void 보너스_번호_2등_제외_의미_없음(int matchingCount) {
         Ranking rankingWithBonus = Ranking.findRank(matchingCount, true);
         Ranking rankingWithoutBonus = Ranking.findRank(matchingCount, false);
         assertThat(rankingWithBonus).isEqualTo(rankingWithoutBonus);
