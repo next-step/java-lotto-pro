@@ -1,6 +1,6 @@
 package camp.nextstep.edu.level1.lotto.lotto;
 
-import camp.nextstep.edu.common.PositiveNumber;
+import camp.nextstep.edu.until.TypeCheckHelper;
 
 import java.util.Objects;
 
@@ -8,20 +8,30 @@ public class LottoNumber {
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
 
-    private final PositiveNumber number;
+    private final int number;
 
-    public LottoNumber(PositiveNumber number) {
+    public LottoNumber(int number) {
         checkValidLottoNumber(number);
         this.number = number;
     }
 
-    public LottoNumber(long number) {
-        this(new PositiveNumber(number));
+    public LottoNumber(String stringNumber) {
+        checkPossibleParseNumber(stringNumber);
+        int convertedNumber = Integer.parseInt(stringNumber);
+        checkValidLottoNumber(convertedNumber);
+
+        this.number = convertedNumber;
     }
 
-    private void checkValidLottoNumber(PositiveNumber number) {
-        if (number.getValue() < LOTTO_START_NUMBER || number.getValue() > LOTTO_END_NUMBER) {
+    private void checkValidLottoNumber(int number) {
+        if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45 만 허용됩니다.");
+        }
+    }
+
+    private void checkPossibleParseNumber(String stringNumber) {
+        if (!TypeCheckHelper.isPossibleStringToInteger(stringNumber)) {
+            throw new IllegalArgumentException("로또 번호는 숫자만 가능합니다.");
         }
     }
 
@@ -35,7 +45,7 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return number.equals(that.number);
+        return number == that.number;
     }
 
     @Override

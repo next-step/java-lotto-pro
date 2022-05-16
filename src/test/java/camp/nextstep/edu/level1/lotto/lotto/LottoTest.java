@@ -23,7 +23,7 @@ class LottoTest {
     void 로또_구입_후_당첨_여부를_확인하면_결과가_반환된어야_한다() {
         Lotto lotto = new Lotto(new Money(10_000));
         LottoNumbers correctWinningNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
-        LottoNumber bonusNumber = new LottoNumber(new PositiveNumber("7", false));
+        LottoNumber bonusNumber = new LottoNumber("7");
 
         assertThat(lotto.compareWinningNumber(correctWinningNumbers, bonusNumber)).isInstanceOf(LottoResult.class);
     }
@@ -54,7 +54,7 @@ class LottoTest {
     void 로또의_당첨번호에_보너스_번호가_포함되어_있으면_예외가_발생한다() {
         Lotto lotto = new Lotto(new Money(10_000));
         LottoNumbers winningNumbersWithDuplicatedBonusNumber = new LottoNumbers("1, 2, 3, 4, 5, 6");
-        LottoNumber bonusNumberDuplicatedInWinningNumbers = new LottoNumber(new PositiveNumber("6", false));
+        LottoNumber bonusNumberDuplicatedInWinningNumbers = new LottoNumber("6");
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
             lotto.compareWinningNumber(winningNumbersWithDuplicatedBonusNumber, bonusNumberDuplicatedInWinningNumbers);

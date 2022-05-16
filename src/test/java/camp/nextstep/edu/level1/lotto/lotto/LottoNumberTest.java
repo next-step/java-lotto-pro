@@ -28,9 +28,9 @@ class LottoNumberTest {
         String randomValidEndInt = "45";
 
         assertThatNoException()
-                .isThrownBy(() -> new LottoNumber(new PositiveNumber(randomValidStartInt, false)));
+                .isThrownBy(() -> new LottoNumber(randomValidStartInt));
         assertThatNoException()
-                .isThrownBy(() -> new LottoNumber(new PositiveNumber(randomValidEndInt, false)));
+                .isThrownBy(() -> new LottoNumber(randomValidEndInt));
     }
 
     @Test
