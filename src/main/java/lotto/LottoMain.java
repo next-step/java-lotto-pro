@@ -14,7 +14,7 @@ import static lotto.view.ResultView.lottoGameStatisticsMessage;
 public class LottoMain {
 
     public static void main(String[] args) {
-        Money money = inputMoney();
+        Money money = new Money(inputMoney());
         int gameCount = Lotto.gameCount(money);
 
         ResultView.purchasesCountMessage(gameCount);
