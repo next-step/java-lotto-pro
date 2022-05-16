@@ -11,7 +11,7 @@ public class LottoStatistics {
         this.lottoStatistics = lottoStatistics;
     }
 
-    public int get(LottoRanking lottoRanking) {
+    public int winningLottoCount(LottoRanking lottoRanking) {
         return lottoStatistics.getOrDefault(lottoRanking, ZERO_NUM);
     }
 

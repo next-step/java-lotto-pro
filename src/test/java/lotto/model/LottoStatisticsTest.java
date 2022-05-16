@@ -18,7 +18,7 @@ class LottoStatisticsTest {
         Map<LottoRanking, Integer> map = new EnumMap<>(LottoRanking.class);
         map.put(lottoRanking, count);
         LottoStatistics lottoStatistics = new LottoStatistics(map);
-        assertThat(lottoStatistics.get(input)).isEqualTo(expect);
+        assertThat(lottoStatistics.winningLottoCount(input)).isEqualTo(expect);
     }
 
     @DisplayName("로또 결과 통계 생성 후 당첨 갯수 비교 테스트")
