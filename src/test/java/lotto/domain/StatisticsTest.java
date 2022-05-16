@@ -7,10 +7,10 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class StatisticsTest {
-	@Test
-	void 총수익율() {
-		LottoCharge charge = LottoCharge.from(14000);
-		Winnings winnings = new Winnings(Arrays.asList(Winning.MATCH3, Winning.MATCH3));
-		assertThat(Statistics.of(charge, winnings).revenueRate()).isEqualTo(0.71);
-	}
+    @Test
+    void 총수익율() {
+        LottoCharge charge = LottoCharge.from(14000);
+        Winnings winnings = new Winnings(Arrays.asList(Winning.MATCH3, Winning.MATCH3));
+        assertThat(Statistics.of(charge, winnings).revenueRate()).isEqualTo(0.71);
+    }
 }
