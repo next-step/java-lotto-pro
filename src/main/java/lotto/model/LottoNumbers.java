@@ -1,7 +1,9 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static lotto.constants.LottoConstant.*;
 import static lotto.utils.RandomUtils.createRandomNumbers;
@@ -22,7 +24,16 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers createLottoNumbers(List<Integer> numbers) {
+        checkNumberDuplicate(numbers);
         return new LottoNumbers(numbers);
+    }
+
+    private static void checkNumberDuplicate(List<Integer> numbers) {
+        Set<Integer> numberSet = new HashSet<>(numbers);
+        boolean hasDuplicate = numberSet.size() <  LOTTO_PICK_COUNT;
+        if (hasDuplicate) {
+            throw new IllegalArgumentException("[ERROR] 로또 번호에 중복 값이 존재합니다!");
+        }
     }
 
     @Override
