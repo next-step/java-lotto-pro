@@ -15,7 +15,7 @@ public class LottoResultTest {
 
     @Test
     void 순위별_당첨횟수_확인() {
-        assertThat(lottoResult.rankingCount(Ranking.FIRST)).isEqualTo(0);
+        assertThat(lottoResult.rankingCount(Ranking.FIRST)).isZero();
     }
 
     @Test
