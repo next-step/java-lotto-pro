@@ -24,14 +24,17 @@ public class LottoController {
     public void startLotto() {
         Money money = null;
         while (money == null) {
-            money = lottoMachine.createMoney(inputView.getInput(MONEY));
+            String moneySource = inputView.getInput(MONEY);
+            money = lottoMachine.createMoney(moneySource);
         }
+
         lottoMachine.buyTicket(money);
         outputView.printLottoInfo(lottoMachine.getLottoNumbers());
 
         LottoTicket winnerTicket = null;
         while (winnerTicket == null) {
-            winnerTicket = lottoMachine.makeManualLottoTicket(inputView.getInput(LOTTO));
+            String manualLottoSource = inputView.getInput(LOTTO);
+            winnerTicket = lottoMachine.makeManualLottoTicket(manualLottoSource);
         }
 
         outputView.printOutput(lottoMachine.checkWin(winnerTicket), money);
