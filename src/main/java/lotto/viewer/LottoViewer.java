@@ -46,21 +46,23 @@ public class LottoViewer {
         printFormatMessage(PURCHASE_NOTICE_MESSAGE, lottos.getLottosCount());
         final String[] lottosString = lottos.getLottos()
                 .stream()
-                .map(lotto -> makeLottoString(lotto.getNumbers()))
+                .map(lotto -> makeLottoString(lotto.getNumbers(), lotto.getBonusNumber()))
                 .toArray(String[]::new);
         for (final String lottoString : lottosString) {
             printMessage(lottoString);
         }
     }
 
-    private static String makeLottoString(final List<Integer> numbers) {
+    private static String makeLottoString(final List<Integer> numbers, final Integer bonusNumber) {
         final StringBuilder builder = new StringBuilder();
         for (Integer number : numbers) {
             builder.append(" ")
                     .append(number)
                     .append(",");
         }
-        return "[" + builder.substring(1, builder.length() - 1) + "]";
+        builder.append(" ")
+                .append(bonusNumber);
+        return "[" + builder.substring(1, builder.length()) + "]";
     }
 
     public static void printMessage(final String message) {
