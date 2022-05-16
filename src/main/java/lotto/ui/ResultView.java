@@ -17,7 +17,6 @@ public class ResultView {
     public void printLottoNumbers(List<LottoNumbers> lottoNumbers) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
             System.out.print(lottoNumber.getNumbers());
-            System.out.println(" 보너스볼: " + lottoNumber.getBonusNumber());
         }
     }
 

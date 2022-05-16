@@ -21,22 +21,20 @@ class LottoNumbersTest {
     }
 
     @Test
-    void 로또_숫자들에서_오름차순으로_정렬된_로또_번호_6개_및_보너스볼을_생성할_수_있다() {
+    void 로또_숫자들에서_오름차순으로_정렬된_로또_번호_6개를_생성할_수_있다() {
         assertThat(lottoNumbers.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(lottoNumbers.getBonusNumber()).isEqualTo(7);
     }
 
     @ParameterizedTest
     @CsvSource(value = {
             "1,2,3,4,5,6:7:FIRST",
-            "1,2,3,4,5,6:45:FIRST",
-            "1,2,3,4,5,8:7:SECOND",
+            "1,2,3,4,5,8:6:SECOND",
             "1,2,3,4,5,8:45:THIRD",
-            "1,2,3,4,8,9:7:FOURTH",
-            "1,2,3,8,9,10:7:FIFTH",
-            "1,2,7,8,9,10:7:NONE",
-            "1,7,8,9,10,11:7:NONE",
-            "7,8,9,10,11,12:7:NONE"
+            "1,2,3,4,8,9:6:FOURTH",
+            "1,2,3,8,9,10:6:FIFTH",
+            "1,2,7,8,9,10:6:NONE",
+            "1,7,8,9,10,11:6:NONE",
+            "7,8,9,10,11,12:6:NONE"
     }, delimiter = ':')
     void 당첨번호를_통해_당첨결과를_계산할_수_있다(String stringNumbers, Integer bonusNumber, String stringWinningRank) {
         List<Integer> numbers = StringUtils.convertToList(stringNumbers, ",");
