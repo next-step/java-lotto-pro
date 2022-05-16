@@ -9,7 +9,7 @@ import step3.domain.Money;
 public class LottoMachine {
 
     private final LottoManager lottoManager;
-    private final int BUY_TICKET_ERROR = -1;
+
 
     public LottoMachine(LottoManager lottoManager) {
         this.lottoManager = lottoManager;
@@ -30,12 +30,7 @@ public class LottoMachine {
     }
 
     public int buyTicket(Money money) {
-        try {
-            return lottoManager.buyRandomTicket(money.purchaseTicket());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return BUY_TICKET_ERROR;
-        }
+        return lottoManager.buyRandomTicket(money.purchaseTicket());
     }
 
     public Money createMoney(String money) {
