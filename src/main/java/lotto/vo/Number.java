@@ -14,6 +14,14 @@ public class Number {
         this.number = number;
     }
 
+    public Number(final String number) throws NumberFormatException {
+        this(readInt(number));
+    }
+
+    private static int readInt(String input) {
+        return Integer.parseInt(input);
+    }
+
     public int value() {
         return number;
     }
