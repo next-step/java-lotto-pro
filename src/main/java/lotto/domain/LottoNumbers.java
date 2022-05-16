@@ -32,6 +32,7 @@ public class LottoNumbers {
         return numbers;
     }
 
+
     private List<Integer> initNumbers() {
         randomShuffle.shuffle(ALL_NUMBERS);
 
@@ -44,12 +45,12 @@ public class LottoNumbers {
         return result;
     }
 
-    public WinningRank matchWinningNumbers(List<Integer> winningNumbers) {
+    public WinningRank matchWinningNumbers(List<Integer> winningNumbers, Integer winningBonusNumber) {
         int matchCount = 0;
         for (Integer winningNumber : winningNumbers) {
             matchCount += matchWinningNumber(winningNumber);
         }
-        return WinningRank.getWinningRank(matchCount);
+        return WinningRank.of(matchCount, numbers.contains(winningBonusNumber));
     }
 
     private Integer matchWinningNumber(Integer winningNumber) {

@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoPrice;
-import lotto.domain.LottoStatistics;
-import lotto.domain.WinningRank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +32,7 @@ class LottoStatisticsTest {
 
     @Test
     void 수익율을_계산할_수_있다() {
-        assertThat(lottoStatistics.calculateProfit()).isEqualTo(400150.5);
+        assertThat(lottoStatistics.calculateProfit()).isEqualTo(403005.0);
     }
 
 }

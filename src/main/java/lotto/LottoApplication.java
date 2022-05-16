@@ -13,6 +13,7 @@ public class LottoApplication {
     private final List<LottoNumbers> lottoNumbers = new ArrayList<>();
     private LottoPrice lottoPrice;
     private List<Integer> winningNumbers;
+    private Integer winningBonusNumber;
 
     public LottoPrice purchase(Integer price) {
         lottoPrice = new LottoPrice(price);
@@ -28,8 +29,9 @@ public class LottoApplication {
         return lottoNumbers;
     }
 
-    public void setWinningNumbers(List<Integer> winningNumbers) {
+    public void setWinningNumbers(List<Integer> winningNumbers, Integer winningBonusNumber) {
         this.winningNumbers = winningNumbers;
+        this.winningBonusNumber = winningBonusNumber;
     }
 
     public LottoStatistics calculateStatistics() {
@@ -39,7 +41,7 @@ public class LottoApplication {
     private List<WinningRank> calculateWinningRanks() {
         List<WinningRank> winningRanks = new ArrayList<>();
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            winningRanks.add(lottoNumber.matchWinningNumbers(winningNumbers));
+            winningRanks.add(lottoNumber.matchWinningNumbers(winningNumbers, winningBonusNumber));
         }
         return winningRanks;
     }

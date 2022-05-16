@@ -10,23 +10,14 @@ import java.util.Map;
 
 public class ResultView {
 
-    public void printInputPrice() {
-        System.out.println("구입금액을 입력해 주세요.");
-    }
-
     public void printLottoCount(LottoPrice lottoPrice) {
         System.out.println(lottoPrice.getCount() + "개를 구매했습니다.");
     }
 
     public void printLottoNumbers(List<LottoNumbers> lottoNumbers) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            System.out.println(lottoNumber.getNumbers());
+            System.out.print(lottoNumber.getNumbers());
         }
-        System.out.println();
-    }
-
-    public void printInputWinningNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
     public void printStatistics(LottoStatistics lottoStatistics) {
@@ -45,7 +36,7 @@ public class ResultView {
         Map<WinningRank, Integer> countByWinningRank = lottoStatistics.getCountByWinningRank();
         for (WinningRank value : WinningRank.getPrintWinningRanks()) {
             Integer count = countByWinningRank.getOrDefault(value, 0);
-            System.out.println(value.matchCount + "개 일치 (" + value.price + ") - " + count + "개");
+            System.out.println(value.matchCount + "개 일치" + printBonusInfo(value) + "(" + value.price + ") - " + count + "개");
         }
     }
 
@@ -55,5 +46,12 @@ public class ResultView {
         if (profit < 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
+    }
+
+    private String printBonusInfo(WinningRank value) {
+        if (Boolean.TRUE.equals(value.matchedBonus)) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
     }
 }

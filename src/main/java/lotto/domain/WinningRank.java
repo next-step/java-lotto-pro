@@ -4,30 +4,47 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum WinningRank {
-    FIRST(2000000000, 6),
-    SECOND(1500000, 5),
-    THIRD(50000, 4),
-    FOURTH(5000, 3),
-    NONE(0, 0);
+    FIRST(2_000_000_000, 6, false),
+    SECOND(30_000_000, 5, true),
+    THIRD(1_500_000, 5, false),
+    FOURTH(50_000, 4, false),
+    FIFTH(5_000, 3, false),
+    NONE(0, 0, false);
+
+    private static final List<WinningRank> PRINT_WINNING_RANKS = Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST);
 
     public final Integer price;
     public final Integer matchCount;
+    public final Boolean matchedBonus;
 
-    WinningRank(Integer price, Integer matchCount) {
+    WinningRank(Integer price, Integer matchCount, boolean matchedBonus) {
         this.price = price;
         this.matchCount = matchCount;
+        this.matchedBonus = matchedBonus;
     }
 
-    public static WinningRank getWinningRank(int matchCount) {
-        for (WinningRank value : WinningRank.values()) {
-            if (value.matchCount == matchCount) {
-                return value;
-            }
+    public static WinningRank of(int matchCount, boolean matchedBonus) {
+        if (matchCount < 3) {
+            return NONE;
         }
-        return NONE;
+        if (matchCount == 5) {
+            return getSecondOrThird(matchedBonus);
+        }
+
+        return Arrays.stream(WinningRank.values())
+                .filter(r -> r.matchCount == matchCount)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("매치카운트에 맞는 값이 없습니다."));
+    }
+
+    private static WinningRank getSecondOrThird(boolean matchedBonus) {
+        if (matchedBonus) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public static List<WinningRank> getPrintWinningRanks() {
-        return Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
+        return PRINT_WINNING_RANKS;
     }
 }
