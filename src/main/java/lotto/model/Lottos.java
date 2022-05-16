@@ -16,6 +16,13 @@ public class Lottos {
         }
     }
 
+    public Lottos(PurchasePrice purchasePrice, NonAutoPurchaseCount nonAutoPurchaseCount) {
+        this.lottos = new ArrayList<>();
+
+        long autoPurchasePrice = purchasePrice.excludePrice(nonAutoPurchaseCount.nonAutoPurchasePrice());
+        new Lottos(new PurchasePrice(autoPurchasePrice));
+    }
+
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
