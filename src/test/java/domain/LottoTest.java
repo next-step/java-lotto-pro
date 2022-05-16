@@ -37,7 +37,7 @@ class LottoTest {
     void compareTo() {
         Lotto lotto = new Lotto(Set.of(of(1),of(2),of(3),of(4),of(5),of(6)));
         Lotto other = new Lotto(Set.of(of(1),of(2),of(3),of(7),of(8),of(9)));
-        assertThat(lotto.compareTo(other)).isEqualTo(3);
+        assertThat(lotto.compareTo(other)).isEqualTo(Reward.FOURTH);
     }
 
 }
