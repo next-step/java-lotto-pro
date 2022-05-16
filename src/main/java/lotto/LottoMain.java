@@ -6,8 +6,7 @@ import lotto.domain.*;
 import java.util.List;
 
 import static lotto.view.InputView.inputMoney;
-import static lotto.view.ResultView.lottoGameResultMessage;
-import static lotto.view.ResultView.lottoGameStatisticsMessage;
+import static lotto.view.ResultView.*;
 
 public class LottoMain {
 
