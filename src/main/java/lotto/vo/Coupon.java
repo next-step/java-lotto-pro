@@ -19,6 +19,10 @@ public class Coupon {
         this.coupons = money.value() / LOTTERY_PURCHASE_UNIT;
     }
 
+    public int size() {
+        return coupons;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
