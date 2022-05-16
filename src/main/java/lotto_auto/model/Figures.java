@@ -5,7 +5,6 @@ import java.util.*;
 public class Figures {
     private Map<LottoRank, Integer> figures;
     private static final int DEFAULT_RANK_COUNT = 0;
-    public static final String FIGURES_FORMAT = "%d개 일치 (%d원)- %d개\n";
 
     public Figures(Lottos lottos, Lotto winningsLotto) {
         init();
@@ -34,12 +33,7 @@ public class Figures {
         return winningMoney;
     }
 
-    public String printFigures() {
-        StringBuilder result = new StringBuilder();
-        for (LottoRank rank : LottoRank.valuesTheLowestOrder()) {
-            result.append(String.format(FIGURES_FORMAT, rank.matchedCount(), rank.winnings(), figures.get(rank)));
-        }
-
-        return result.toString();
+    public int getCountBy(LottoRank rank) {
+        return figures.get(rank);
     }
 }
