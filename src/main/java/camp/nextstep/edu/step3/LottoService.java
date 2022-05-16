@@ -3,17 +3,28 @@ package camp.nextstep.edu.step3;
 public class LottoService {
     private final Presenter presenter;
     private final LottoVendingMachine machine;
+    private final LottoGenerator generator;
 
     public LottoService(Presenter presenter) {
         this.presenter = presenter;
-        this.machine = new LottoVendingMachine(new LottoGenerator());
+        this.generator = new LottoGenerator();
+        this.machine = new LottoVendingMachine(generator);
     }
 
     public void task() {
         final LottoMoney purchaseAmount = presenter.askPurchaseAmount();
-        final LottoPaper lottoPaper = machine.issued(purchaseAmount);
-        presenter.printLottoList(lottoPaper);
-        final LottoResult winningResult = lottoPaper.checkAll(new LottoAnswer(presenter.askLastWeekWinningNumber(),  presenter.askLottoBonusNumber()));
-        presenter.printResult(winningResult, winningResult.earningRate(purchaseAmount));
+        final LottoPaper lottoPaper = machine.issued(
+                purchaseAmount, presenter.askManualPurchase(generator, presenter.askManualPurchaseCount()));
+
+        machine.printIssuedLotto().ifPresent(issuedHistory -> {
+            presenter.printIssuedHistory(issuedHistory);
+            presenter.printLottoList(lottoPaper);
+
+            final LottoResult winningResult = lottoPaper.checkAll(
+                    new LottoAnswer(presenter.askLastWeekWinningNumber(), presenter.askLottoBonusNumber())
+            );
+
+            presenter.printResult(winningResult, winningResult.earningRate(purchaseAmount));
+        });
     }
 }
