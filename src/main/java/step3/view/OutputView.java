@@ -1,9 +1,5 @@
 package step3.view;
 
-import static step3.constant.LottoViewConstant.LOTTOS_INFO_FORMAT;
-import static step3.constant.LottoViewConstant.OVERVIEW_FORMAT;
-import static step3.constant.LottoViewConstant.REWARD_RATE_FORMAT;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -14,6 +10,9 @@ public class OutputView {
 
 
     private final int MATCH_COUNT_LIMIT = 3;
+    public final String OVERVIEW_FORMAT = "%s개 일치 (%s원)- %s개";
+    public final String REWARD_RATE_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+    public final String LOTTOS_INFO_FORMAT = "%s개를 구매했습니다.";
 
     public OutputView() {
     }
