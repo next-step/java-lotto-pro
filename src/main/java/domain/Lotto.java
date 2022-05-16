@@ -19,6 +19,7 @@ public final class Lotto {
             throw new IllegalArgumentException("로또 번호는 6개 보다 작거나 클수 없습니다.");
         }
     }
+
     public Reward compareTo(Lotto other) {
         Set<LottoNumber> copy = new HashSet<>(numbers);
         copy.retainAll(other.numbers);
