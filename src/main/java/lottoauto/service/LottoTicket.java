@@ -22,6 +22,10 @@ public class LottoTicket {
         }
     }
 
+    public Lotto get(int index) {
+        return listLotto.get(index);
+    }
+
     public int size() {
         return listLotto.size();
     }
