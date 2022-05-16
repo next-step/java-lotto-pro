@@ -6,13 +6,14 @@ public class LottoMachine {
 
     private static final int LOTTO_PRICE = 1000;
 
-    public Lottos buy(int cost) {
-        int quantity = getQuantity(cost);
+    public Lottos buyAuto(int cost, int manualQuantity) {
+        int quantity = getQuantity(cost, manualQuantity);
         return new Lottos(quantity);
     }
 
-    private int getQuantity(int cost) {
-        return cost / LOTTO_PRICE;
+    private int getQuantity(int cost, int manualQuantity) {
+        int quantityPurchase = cost / LOTTO_PRICE;
+        return quantityPurchase - manualQuantity;
     }
 
     public double calculateProfit(int cost, List<Result> results) {

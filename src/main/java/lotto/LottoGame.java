@@ -1,13 +1,10 @@
 package lotto;
 
-import java.util.List;
-import lotto.model.Lotto;
-import lotto.model.LottoMachine;
-import lotto.model.LottoNumber;
-import lotto.model.Lottos;
-import lotto.model.Result;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoGame {
 
@@ -15,7 +12,10 @@ public class LottoGame {
 
     public static void main(String[] args) {
         int cost = InputView.inputMoney();
-        Lottos lottos = lottoMachine.buy(cost);
+        int manualQuantity = InputView.inputManualQuantity();
+        Lottos manualLottos = InputView.inputManualLotto(manualQuantity);
+        Lottos autoLottos = lottoMachine.buyAuto(cost, manualQuantity);
+        Lottos lottos = manualLottos.add(autoLottos);
         ResultView.printLottos(lottos);
 
         Lotto winner = InputView.inputWinnerNumber();

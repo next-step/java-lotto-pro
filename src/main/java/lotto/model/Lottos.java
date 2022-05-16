@@ -14,6 +14,17 @@ public class Lottos {
         }
     }
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
+    }
+
+    public Lottos add(Lottos lottos) {
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.addAll(this.lottos);
+        lottoList.addAll(lottos.lottos);
+        return new Lottos(lottoList);
+    }
+
     public int getQuantity() {
         return lottos.size();
     }
