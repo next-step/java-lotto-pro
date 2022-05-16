@@ -1,25 +1,32 @@
 import java.util.stream.StreamSupport;
 
 public class Lottery {
-    public Lottery(LottoNumbers winner) {
-        this.winner = winner;
-    }
+    private final LottoNumbers lottoNumbers;
+    private final BonusLottoNumber bonusLottoNumber;
 
-    private final LottoNumbers winner;
+    public Lottery(LottoNumbers lottoNumbers, BonusLottoNumber bonusLottoNumber) {
+        this.lottoNumbers = lottoNumbers;
+        this.bonusLottoNumber = bonusLottoNumber;
+    }
 
     public ContainCounts get(Lotto lotto) {
         ContainCounts containCounts = new ContainCounts();
+
         for (LottoNumbers lottoNumbers : lotto) {
             containCounts.add(get(lottoNumbers));
         }
+
         return containCounts;
     }
 
-    private ContainCount get(LottoNumbers lottoNumbers) {
-        return new ContainCount(Math.toIntExact(
-                StreamSupport.stream(lottoNumbers.spliterator(), false)
-                        .filter(winner::contains)
+    private Prize get(LottoNumbers lottoNumbers) {
+        return Prize.valueOf(
+                Math.toIntExact(StreamSupport
+                        .stream(lottoNumbers.spliterator(), false)
+                        .filter(this.lottoNumbers::contains)
                         .count()
-        ));
+                ),
+                lottoNumbers.contains(this.bonusLottoNumber)
+        );
     }
 }

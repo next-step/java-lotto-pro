@@ -1,11 +1,14 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteryTest {
-    @Test
-    void 당첨번호와_비교하여_몇_개의_번호가_일치하는지_확인할_수_있다() {
-        LottoNumbers winner = new LottoNumbers(
+    private Lottery lottery;
+
+    @BeforeEach
+    void setUp() {
+        LottoNumbers lottoNumbers = new LottoNumbers(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -14,6 +17,11 @@ class LotteryTest {
                 new LottoNumber(6)
         );
 
+        lottery = new Lottery(lottoNumbers, new BonusLottoNumber(7));
+    }
+
+    @Test
+    void 당첨번호와_비교하여_몇_개의_번호가_일치하는지_확인할_수_있다() {
         LottoNumbers lottoNumbers1 = new LottoNumbers(
                 new LottoNumber(1),
                 new LottoNumber(2),
@@ -22,6 +30,7 @@ class LotteryTest {
                 new LottoNumber(5),
                 new LottoNumber(6)
         );
+
         LottoNumbers lottoNumbers2 = new LottoNumbers(
                 new LottoNumber(1),
                 new LottoNumber(2),
@@ -31,15 +40,13 @@ class LotteryTest {
                 new LottoNumber(45)
         );
 
-
-
         Lotto lotto = new Lotto();
         lotto.add(lottoNumbers1);
         lotto.add(lottoNumbers2);
 
-        assertThat(new Lottery(winner).get(lotto))
-                .contains(new ContainCount(6))
-                .contains(new ContainCount(3));
+        assertThat(lottery.get(lotto))
+                .contains(Prize.FIRST)
+                .contains(Prize.FIFTH);
     }
 
 }
