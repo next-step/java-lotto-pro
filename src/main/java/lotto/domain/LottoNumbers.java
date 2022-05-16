@@ -25,7 +25,7 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    public static List<LottoNumber> of(String lottoNumbers) {
+    public static List<LottoNumber> from(String lottoNumbers) {
         return Arrays
                 .stream(lottoNumbers.replace(BLANK_FORMAT, REPLACE_FORMAT).split(SPLIT_DELIMITER))
                 .mapToInt(Integer::parseInt)

@@ -5,13 +5,16 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String numbers, int bonus) {
-        Lotto winningLotto = new Lotto(LottoNumbers.of(numbers));
-        this.winningLotto = winningLotto;
+        this.winningLotto = new Lotto(LottoNumbers.from(numbers));
         LottoNumber bonusNumber = LottoNumber.from(bonus);
-        if (winningLotto.contains(bonusNumber)) {
+        validateDuplicate(bonusNumber);
+        this.bonusNumber = bonusNumber;
+    }
+
+    private void validateDuplicate(LottoNumber bonusNumber) {
+        if (this.winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨번호와 중복되면 안됩니다.");
         }
-        this.bonusNumber = bonusNumber;
     }
 
     public Rank match(Lotto lotto) {
