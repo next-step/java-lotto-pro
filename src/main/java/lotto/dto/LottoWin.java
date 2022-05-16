@@ -1,7 +1,7 @@
 package lotto.dto;
 
-import lotto.MatchPrizes;
-import lotto.WinningNumbers;
+import lotto.domain.MatchPrizes;
+import lotto.domain.WinningNumbers;
 
 public final class LottoWin {
 

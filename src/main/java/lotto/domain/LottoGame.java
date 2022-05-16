@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.Match;
-import lotto.WinningNumbers;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;

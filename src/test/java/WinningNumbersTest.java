@@ -1,4 +1,4 @@
-import lotto.WinningNumbers;
+import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

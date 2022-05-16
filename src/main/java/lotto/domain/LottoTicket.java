@@ -1,9 +1,6 @@
 package lotto.domain;
 
 import lotto.LottoNumbersGenerator;
-import lotto.Match;
-import lotto.TicketCheckResult;
-import lotto.WinningNumbers;
 
 import java.util.ArrayList;
 import java.util.HashMap;

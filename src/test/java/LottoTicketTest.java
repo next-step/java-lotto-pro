@@ -1,6 +1,6 @@
-import lotto.Match;
-import lotto.TicketCheckResult;
-import lotto.WinningNumbers;
+import lotto.domain.Match;
+import lotto.domain.TicketCheckResult;
+import lotto.domain.WinningNumbers;
 import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

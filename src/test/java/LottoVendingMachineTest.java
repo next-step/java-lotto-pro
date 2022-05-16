@@ -1,8 +1,8 @@
 import lotto.LottoVendingMachine;
-import lotto.Match;
-import lotto.MatchPrizes;
-import lotto.Money;
-import lotto.WinningNumbers;
+import lotto.domain.Match;
+import lotto.domain.MatchPrizes;
+import lotto.domain.Money;
+import lotto.domain.WinningNumbers;
 import lotto.domain.LottoTicket;
 import lotto.dto.LottoResult;
 import lotto.dto.LottoResultItem;

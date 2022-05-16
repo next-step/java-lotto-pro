@@ -1,6 +1,6 @@
 package lotto.dto;
 
-import lotto.Match;
+import lotto.domain.Match;
 
 import java.util.Objects;
 

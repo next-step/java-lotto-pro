@@ -1,5 +1,5 @@
-import lotto.Match;
-import lotto.MatchPrizes;
+import lotto.domain.Match;
+import lotto.domain.MatchPrizes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
