@@ -14,7 +14,7 @@ import static lotto.view.InputView.readWinningNumbers;
 public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
-    private LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(List<Integer> numbers) {
         lottoNumbers = new ArrayList<>();
         for (int number : numbers) {
             lottoNumbers.add(LottoNumber.of(number));
@@ -38,6 +38,16 @@ public class LottoNumbers {
         if (hasDuplicate) {
             throw new IllegalArgumentException("[ERROR] 로또 번호에 중복 값이 존재합니다!");
         }
+    }
+
+    public int matchCount(LottoNumbers winningNumbers) {
+        List<LottoNumber> copiedWinningNumbers = new ArrayList<>(winningNumbers.lottoNumbers);
+        copiedWinningNumbers.retainAll(lottoNumbers);
+        return copiedWinningNumbers.size();
+    }
+
+    public int size() {
+        return lottoNumbers.size();
     }
 
     @Override
