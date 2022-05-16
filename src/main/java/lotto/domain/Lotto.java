@@ -42,7 +42,7 @@ public class Lotto {
         return Ranking.findRank(matchingCount, false);
     }
 
-    public Ranking compareLottoWithBonus(Lotto target, LottoNo bonusNumber) {
+    public Ranking compareLotto(Lotto target, LottoNo bonusNumber) {
         int matchingCount = getMatchingCount(target);
         boolean matchBonus = isContainBonusNumber(target, bonusNumber);
         return Ranking.findRank(matchingCount, matchBonus);

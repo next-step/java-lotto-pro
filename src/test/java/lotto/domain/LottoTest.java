@@ -83,7 +83,7 @@ class LottoTest {
     @CsvSource(value = {"1, 2, 3, 4, 5, 40:THIRD", "1, 2, 3, 4, 5, 45:SECOND", "1, 2, 3, 4, 5, 6:FIRST"}, delimiter = ':')
     public void 로또_번호_비교_테스트_보너스_유무(String lottoNumbers, Ranking expected) {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Ranking ranking = lotto.compareLottoWithBonus(new Lotto(lottoNumbers), new LottoNo(45));
+        Ranking ranking = lotto.compareLotto(new Lotto(lottoNumbers), new LottoNo(45));
         assertThat(ranking).isEqualTo(expected);
     }
 }
