@@ -20,6 +20,7 @@ public class LottoController {
     public void playing() throws IOException {
         PurchasePrice purchasePrice = new PurchasePrice(purchaseLottos());
         int manualLottoPurchaseCount = manualLottoPurchaseCount();
+        purchasePrice.validatePurchasePrice(manualLottoPurchaseCount);
 
         Lottos lottos = createPurchaseLottos(purchasePrice, manualLottoPurchaseCount);
         WinningLotto winningLotto = createWinningLotto();
