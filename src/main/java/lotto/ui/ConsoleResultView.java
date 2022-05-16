@@ -30,6 +30,7 @@ public class ConsoleResultView implements ResultView {
     }
 
     private void printGameResultHeader() {
+        printBlankLine();
         System.out.println("당첨 통계");
         System.out.println("---------");
     }
@@ -37,12 +38,22 @@ public class ConsoleResultView implements ResultView {
     private void printStatistics(LottoGameResultDTO gameResult) {
         Map<LottoRank, Integer> statistics = gameResult.getStatistics();
         for (LottoRank rank : statistics.keySet()) {
-            System.out.format("%d개 일치 (%d원)- %d개\n", rank.getMatchNumberCount(), rank.calculatePrize(1),
-                    statistics.get(rank));
+            printRankResult(rank, statistics.get(rank));
         }
-
     }
-
+    private void printRankResult(LottoRank rank, int matchCount) {
+        if(rank == LottoRank.SECOND_PLACE){
+            System.out.format("%d개 일치, 보너스 볼 일치(%d원)- %d개\n"
+                    , rank.getMatchNumberCount()
+                    , rank.calculatePrize(1),
+                    matchCount);
+            return;
+        }
+        System.out.format("%d개 일치 (%d원)- %d개\n"
+                , rank.getMatchNumberCount()
+                , rank.calculatePrize(1),
+                matchCount);
+    }
     private void printYield(LottoGameResultDTO gameResult) {
         System.out.format("총 수익률은 %.2f입니다.\n", gameResult.getYield());
     }
