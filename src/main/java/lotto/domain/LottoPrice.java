@@ -4,20 +4,31 @@ public class LottoPrice {
     public static final int LOTTO_PRICE = 1_000;
 
     private final int price;
+    private final int manualCount;
 
-    public LottoPrice(int price) {
-        validatePrice(price);
+    public LottoPrice(int price, Integer manualCount) {
         this.price = price;
+        this.manualCount = manualCount;
+        validate();
     }
 
-    public static void validatePrice(int price) {
-        if (price % LOTTO_PRICE != 0) {
+    public void validate() {
+        if (this.price % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("로또는 1000원 단위로만 구매할 수 있습니다.");
+        }
+        int i = (getAutoCount() + manualCount) * LOTTO_PRICE;
+        if (i > price) {
+            throw new IllegalArgumentException("입력받은 구입금액으로는 수동로또를 구매할 금액이 부족합니다.");
         }
     }
 
-    public Integer getCount() {
-        return price / LOTTO_PRICE;
+    public Integer getAutoCount() {
+        int autoPrice = Math.max(price - manualCount * LOTTO_PRICE, 0);
+        return autoPrice / LOTTO_PRICE;
+    }
+
+    public Integer getManualCount() {
+        return manualCount;
     }
 
     public int getPrice() {

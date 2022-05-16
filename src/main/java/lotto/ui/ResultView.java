@@ -5,18 +5,19 @@ import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
 import lotto.domain.WinningRank;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
 
     public void printLottoCount(LottoPrice lottoPrice) {
-        System.out.println(lottoPrice.getCount() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + lottoPrice.getManualCount() + "장, 자동으로 " + lottoPrice.getAutoCount() + "개를 구매했습니다.");
     }
 
     public void printLottoNumbers(List<LottoNumbers> lottoNumbers) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            System.out.print(lottoNumber.getNumbers());
+            System.out.print(convertToSortedList(lottoNumber));
         }
     }
 
@@ -24,6 +25,12 @@ public class ResultView {
         printStatisticsInit();
         printLottoMatch(lottoStatistics);
         printLottoProfit(lottoStatistics);
+    }
+
+    private ArrayList<Integer> convertToSortedList(LottoNumbers lottoNumber) {
+        ArrayList<Integer> arrayNumbers = new ArrayList<>(lottoNumber.getNumbers());
+        arrayNumbers.sort(Integer::compareTo);
+        return arrayNumbers;
     }
 
     private void printStatisticsInit() {

@@ -17,7 +17,7 @@ class LottoStatisticsTest {
     @BeforeEach
     void setUp() {
         List<WinningRank> winningRanks = Arrays.asList(WinningRank.FIRST, WinningRank.FIRST, WinningRank.SECOND, WinningRank.FOURTH);
-        lottoStatistics = new LottoStatistics(winningRanks, new LottoPrice(10000));
+        lottoStatistics = new LottoStatistics(winningRanks, new LottoPrice(10000, 1));
     }
 
     @Test

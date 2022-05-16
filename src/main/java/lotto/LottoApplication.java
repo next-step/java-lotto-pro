@@ -13,20 +13,23 @@ import java.util.List;
 public class LottoApplication {
 
     private final List<LottoNumbers> lottoNumbers = new ArrayList<>();
-    private final GenerateLottoNumber GenerateLottoNumber = new GenerateLottoNumber();
+    private final GenerateLottoNumber generateLottoNumber = new GenerateLottoNumber();
     private LottoPrice lottoPrice;
     private WinningLottoNumber winningNumbers;
 
-    public LottoPrice purchase(Integer price) {
-        lottoPrice = new LottoPrice(price);
+    public LottoPrice purchase(Integer price, Integer manualCount) {
+        lottoPrice = new LottoPrice(price, manualCount);
         return lottoPrice;
     }
 
-    public List<LottoNumbers> generateLottoNumbers() {
-        Integer count = lottoPrice.getCount();
-        for (int i = 0; i < count; i++) {
-            LottoNumbers numbers = new LottoNumbers(GenerateLottoNumber.initNumbers());
-            lottoNumbers.add(numbers);
+    public List<LottoNumbers> generateLottoNumbers(List<List<Integer>> manualLottoNumbers) {
+        Integer manualCount = lottoPrice.getManualCount();
+        for (int i = 0; i < manualCount; i++) {
+            lottoNumbers.add(new LottoNumbers(manualLottoNumbers.get(i)));
+        }
+        Integer autoCount = lottoPrice.getAutoCount();
+        for (int i = 0; i < autoCount; i++) {
+            lottoNumbers.add(new LottoNumbers(generateLottoNumber.initNumbers()));
         }
         return lottoNumbers;
     }
