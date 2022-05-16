@@ -33,7 +33,7 @@ public class Presenter {
 
     private List<LottoNumber> userLottoNumbers(final String input) {
         return Arrays.stream(input.split(","))
-                .map((item) -> item.replace(" ",""))
+                .map((item) -> item.replace(" ", ""))
                 .mapToInt(Integer::parseInt)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
@@ -52,29 +52,30 @@ public class Presenter {
     }
 
     public List<Lotto> askManualPurchase(final LottoGenerator generator) {
-        final int manualCount = this.askManualPurchaseCount();
-        if (manualCount <= 0) {
+        final Count count = this.askManualPurchaseCount();
+        if (Objects.equals(new Count(0), count)) {
             return Collections.emptyList();
         }
-        return makeManualLotto(generator, manualCount);
+        return makeManualLotto(generator, count);
     }
 
-    private List<Lotto> makeManualLotto(final LottoGenerator generator, final int manualCount) {
+    private List<Lotto> makeManualLotto(final LottoGenerator generator, Count count) {
         System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         List<Lotto> answerLotto = new ArrayList<>();
-        for (int i = 1; i <= manualCount; i++) {
+        while (count.isDecrease()) {
             answerLotto.add(generator.manual(userLottoNumbers(scanner.next())));
+            count = count.decrease();
         }
         return answerLotto;
     }
 
-    private int  askManualPurchaseCount() {
+    private Count  askManualPurchaseCount() {
         System.out.println();
         Scanner scanner = new Scanner(System.in);
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextInt();
+        return new Count(scanner.nextInt());
     }
 
 }
