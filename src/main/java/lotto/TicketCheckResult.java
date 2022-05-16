@@ -16,12 +16,13 @@ public class TicketCheckResult {
     }
 
     public List<LottoResultItem> mapLottoResultItemList(LottoWin lottoWin) {
+        MatchPrizes matchPrizes = lottoWin.getMatchPrizes();
         return result.entrySet().stream()
-                .filter(map -> lottoWin.getPrizeMoneyByMatch().get(map.getKey()) != null)
-                .map(e -> new LottoResultItem(
-                        e.getKey(),
-                        lottoWin.getPrizeMoneyByMatch().get(e.getKey()),
-                        e.getValue()))
+                .filter(matchCountEntry -> matchPrizes.has(matchCountEntry.getKey()))
+                .map(matchCountEntry -> new LottoResultItem(
+                        matchCountEntry.getKey(),
+                        matchPrizes.prizeMoney(matchCountEntry.getKey()),
+                        matchCountEntry.getValue()))
                 .collect(Collectors.toList());
     }
 

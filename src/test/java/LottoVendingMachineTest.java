@@ -1,5 +1,6 @@
 import lotto.LottoVendingMachine;
 import lotto.Match;
+import lotto.MatchPrizes;
 import lotto.Money;
 import lotto.WinningNumbers;
 import lotto.domain.LottoTicket;
@@ -56,7 +57,7 @@ public class LottoVendingMachineTest {
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
 
         LottoVendingMachine machine = new LottoVendingMachine();
-        LottoResult result = machine.check(ticket, new LottoWin(winningNumbers, matchingPrizes));
+        LottoResult result = machine.check(ticket, new LottoWin(winningNumbers, new MatchPrizes(matchingPrizes)));
 
         assertThat(result).isEqualTo(
                 new LottoResult(

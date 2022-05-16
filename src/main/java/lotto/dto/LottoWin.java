@@ -1,25 +1,23 @@
 package lotto.dto;
 
-import lotto.Match;
+import lotto.MatchPrizes;
 import lotto.WinningNumbers;
-
-import java.util.Map;
 
 public final class LottoWin {
 
     private final WinningNumbers winningNumbers;
-    private final Map<Match, Integer> prizeMoneyByMatch;
+    private final MatchPrizes matchPrizes;
 
-    public LottoWin(WinningNumbers winningNumbers, Map<Match, Integer> prizeMoneyByMatch) {
+    public LottoWin(WinningNumbers winningNumbers, MatchPrizes matchPrizes) {
         this.winningNumbers = winningNumbers;
-        this.prizeMoneyByMatch = prizeMoneyByMatch;
+        this.matchPrizes = matchPrizes;
     }
 
     public WinningNumbers getWinningNumbers() {
         return winningNumbers;
     }
 
-    public Map<Match, Integer> getPrizeMoneyByMatch() {
-        return prizeMoneyByMatch;
+    public MatchPrizes getMatchPrizes() {
+        return matchPrizes;
     }
 }
