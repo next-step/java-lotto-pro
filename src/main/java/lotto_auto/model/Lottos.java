@@ -1,21 +1,13 @@
 package lotto_auto.model;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-
-public class Lottos{
+public class Lottos {
     private final List<Lotto> lottoList;
 
     public Lottos(List<Lotto> list) {
-        this.lottoList = list;
-    }
-
-    public Lottos(int count) {
-        lottoList = new ArrayList<>();
-        for (int i=0; i< count; i++) {
-            lottoList.add(new Lotto(new LottoNumbers()));
-        }
+        this.lottoList = Collections.unmodifiableList(list);
     }
 
     public List<Lotto> getLottoList() {
