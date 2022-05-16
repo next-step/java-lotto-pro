@@ -20,7 +20,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber valueOf(final int number) {
-        return new LottoNumber(number);
+        return ALL_LOTTO_NUMBERS.stream()
+                .filter(lottoNumber -> lottoNumber.number == number)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public static LottoNumber valueOf(final String numberString) {
@@ -39,7 +42,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static Set<LottoNumber> allLottoNumbers() {
         return rangeClosed(LottoNumber.START_NUM, LottoNumber.LAST_NUM)
-                .mapToObj(LottoNumber::valueOf)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 
