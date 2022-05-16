@@ -27,7 +27,9 @@ public class WinningLottoNumbers {
         validateNonNull(lottoNumberString);
         validateNonEmpty(lottoNumberString);
         validateLottoPattern(lottoNumberString);
-        return Arrays.stream(lottoNumberString.split(DELIMITER)).map(String::trim).map(Integer::new)
+        return Arrays.stream(lottoNumberString.split(DELIMITER))
+                .map(String::trim)
+                .map(Integer::new)
                 .collect(Collectors.toList());
     }
 

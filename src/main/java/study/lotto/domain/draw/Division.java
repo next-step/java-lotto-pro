@@ -14,7 +14,8 @@ public enum Division {
     private static final Map<Integer, Division> BY_MATCH_COUNT = new HashMap<>();
 
     static {
-        Arrays.stream(values()).forEach(division -> BY_MATCH_COUNT.put(division.matchCount, division));
+        Arrays.stream(values())
+                .forEach(division -> BY_MATCH_COUNT.put(division.matchCount, division));
     }
 
     private final int matchCount;

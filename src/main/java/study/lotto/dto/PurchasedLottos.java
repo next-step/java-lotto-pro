@@ -15,7 +15,10 @@ public class PurchasedLottos {
     }
 
     public static PurchasedLottos from(List<LottoNumbers> lottoNumbers) {
-        return new PurchasedLottos(lottoNumbers.stream().map(PurchasedLotto::new).collect(Collectors.toList()));
+        return new PurchasedLottos(
+                lottoNumbers.stream()
+                        .map(PurchasedLotto::new)
+                        .collect(Collectors.toList()));
     }
 
     public List<PurchasedLotto> get() {

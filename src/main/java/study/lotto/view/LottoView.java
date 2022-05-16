@@ -59,7 +59,9 @@ public class LottoView {
     }
 
     private String lottoListString(List<PurchasedLotto> lottoList) {
-        return lottoList.stream().map(this::lottoString).reduce("", (str1, str2) -> str1 + str2);
+        return lottoList.stream()
+                .map(this::lottoString)
+                .reduce("", (str1, str2) -> str1 + str2);
     }
 
     private String lottoString(PurchasedLotto purchasedLotto) {

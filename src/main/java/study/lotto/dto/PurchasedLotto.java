@@ -17,7 +17,9 @@ public class PurchasedLotto {
     }
 
     public PurchasedLotto(List<Integer> lottoNumbers) {
-        this.value = lottoNumbers.stream().map(Integer::new).collect(Collectors.toList());
+        this.value = lottoNumbers.stream()
+                .map(Integer::new)
+                .collect(Collectors.toList());
     }
 
     public List<Integer> get() {

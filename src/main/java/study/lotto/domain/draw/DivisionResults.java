@@ -16,7 +16,9 @@ public class DivisionResults {
     }
 
     public List<DivisionResult> get() {
-        return value;
+        return value.stream()
+                .map(DivisionResult::new)
+                .collect(Collectors.toList());
     }
 
     public BigDecimal totalPrize() {

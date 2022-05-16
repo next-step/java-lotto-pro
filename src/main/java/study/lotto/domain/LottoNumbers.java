@@ -16,7 +16,9 @@ public class LottoNumbers {
     public LottoNumbers(List<Integer> numbers) {
         checkLottoNumberSize(numbers);
         checkDuplicates(numbers);
-        value = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+        value = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public List<Integer> match(LottoNumbers lottoNumbers) {
@@ -26,7 +28,10 @@ public class LottoNumbers {
     }
 
     public List<Integer> numbers() {
-        return value.stream().map(LottoNumber::toString).map(Integer::valueOf).collect(Collectors.toList());
+        return value.stream()
+                .map(LottoNumber::toString)
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
     }
 
     private void checkLottoNumberSize(List<Integer> numbers) {
@@ -45,7 +50,9 @@ public class LottoNumbers {
     @Override
     public String toString() {
         return String.join(TO_STRING_DELIMITER,
-                value.stream().map(LottoNumber::toString).collect(Collectors.toList()));
+                value.stream()
+                        .map(LottoNumber::toString)
+                        .collect(Collectors.toList()));
     }
 
     @Override

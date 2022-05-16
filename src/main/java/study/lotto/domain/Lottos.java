@@ -12,11 +12,16 @@ public class Lottos {
     private final List<Lotto> value;
 
     public Lottos(List<Lotto> lottos) {
-        this.value = lottos.stream().map(Lotto::new).collect(Collectors.toList());
+        this.value = lottos.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
     }
 
     public List<LottoNumbers> lottoNumbers() {
-        return value.stream().map(Lotto::numbers).map(LottoNumbers::new).collect(Collectors.toList());
+        return value.stream()
+                .map(Lotto::numbers)
+                .map(LottoNumbers::new)
+                .collect(Collectors.toList());
     }
 
     public DivisionResults findWinnings(LottoNumbers winningNumber) {
