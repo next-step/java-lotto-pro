@@ -54,16 +54,16 @@ class WinningStatusTest {
     private static Stream<Arguments> winningReward() {
         return Stream.of(
                 Arguments.of(Arrays.asList(Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE), Money.from(0)),
-                Arguments.of(Arrays.asList(Rank.THIRD, Rank.NONE, Rank.NONE, Rank.NONE), Money.from(50_000)),
-                Arguments.of(Arrays.asList(Rank.THIRD, Rank.THIRD, Rank.SECOND, Rank.NONE), Money.from(1_600_000))
+                Arguments.of(Arrays.asList(Rank.THIRD, Rank.NONE, Rank.NONE, Rank.NONE), Money.from(1_500_000)),
+                Arguments.of(Arrays.asList(Rank.THIRD, Rank.THIRD, Rank.SECOND, Rank.NONE), Money.from(33_000_000))
         );
     }
 
     private static Stream<Arguments> winningYield() {
         return Stream.of(
                 Arguments.of(Arrays.asList(Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE), 0.0),
-                Arguments.of(Arrays.asList(Rank.THIRD, Rank.NONE, Rank.NONE, Rank.NONE), 12.5),
-                Arguments.of(Arrays.asList(Rank.FOURTH, Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE
+                Arguments.of(Arrays.asList(Rank.FOURTH, Rank.NONE, Rank.NONE, Rank.NONE), 12.5),
+                Arguments.of(Arrays.asList(Rank.FIFTH, Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE
                         , Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE), 0.5)
         );
     }
