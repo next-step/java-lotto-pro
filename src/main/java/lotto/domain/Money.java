@@ -5,7 +5,7 @@ import lotto.constants.ErrorMessage;
 
 public class Money {
     private static final int MIN_MONEY = 0;
-    private final double MATH_ROUND_DIGIT = 100d;
+    private static final double MATH_ROUND_DIGIT = 100d;
     private final int money;
 
     private Money(int money) {
@@ -19,12 +19,12 @@ public class Money {
         return new Money(money);
     }
 
-    public boolean isLessThenLottoPrice() {
-        return money < Constants.LOTTO_PRICE;
+    public static Money create() {
+        return from(MIN_MONEY);
     }
 
-    public int autoPurchaseCount(int manualCount) {
-        return purchaseCount() - manualCount;
+    public boolean isLessThenLottoPrice() {
+        return money < Constants.LOTTO_PRICE;
     }
 
     public int purchaseCount() {
@@ -45,4 +45,6 @@ public class Money {
     public int getMoney() {
         return money;
     }
+
+
 }

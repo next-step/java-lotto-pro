@@ -12,7 +12,7 @@ public class LottoTickets {
     }
 
     public static LottoTickets from(List<LottoTicket> lottoTickets) {
-        if (lottoTickets == null || lottoTickets.isEmpty()) {
+        if (lottoTickets == null) {
             throw new IllegalArgumentException(ErrorMessage.NOT_EMPTY_LOTTO);
         }
         return new LottoTickets(lottoTickets);

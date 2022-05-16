@@ -57,14 +57,4 @@ class MoneyTest {
         //when & then
         assertThat(money.purchaseCount()).isEqualTo(5);
     }
-
-    @DisplayName("구입 금액만큼 수동 구입 후 자동 가능한 개수 확인")
-    @Test
-    void test_로또_수동_구입후_자동_개수() {
-        //given
-        Money money = Money.from(14000);
-        int manualCount = 3;
-        //when & then
-        assertThat(money.autoPurchaseCount(manualCount)).isEqualTo(11);
-    }
 }

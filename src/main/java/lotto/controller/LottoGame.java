@@ -23,7 +23,11 @@ public class LottoGame {
     private void purchase() {
         try {
             Money purchaseMoney = inputView.inputPurchaseMoney();
-            LottoTickets lottoTickets = LottoSeller.create().autoLottoTickets(purchaseMoney);
+            ManualCount manualCount = manualCount(purchaseMoney);
+
+            // TODO 수동 구매할 번호 입력 받기
+            LottoTickets inputManualTickets = null;
+            LottoTickets lottoTickets = LottoSeller.create().lottoTickets(purchaseMoney, manualCount, inputManualTickets);
             outputView.printLottoTickets(lottoTickets);
 
             winningResult(purchaseMoney, lottoTickets);
@@ -31,6 +35,22 @@ public class LottoGame {
             outputView.printExceptionMessage(ie);
             purchase();
         }
+    }
+
+    private ManualCount manualCount(Money purchaseMoney) {
+        ManualCount manualCount;
+        try {
+            manualCount = ManualCount.from(inputView.inputManualCount(), purchaseMoney);
+            return manualCount;
+        } catch (IllegalArgumentException ie) {
+            outputView.printExceptionMessage(ie);
+            manualCount = manualCount(purchaseMoney);
+        }
+
+        if (manualCount == null) {
+            manualCount = ManualCount.create();
+        }
+        return manualCount;
     }
 
     private void winningResult(Money purchaseMoney, LottoTickets lottoTickets) {

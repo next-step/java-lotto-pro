@@ -20,6 +20,6 @@ public class OutputView {
     }
 
     public void printExceptionMessage(Exception e) {
-        System.out.println(e.getMessage());
+        System.out.printf(e.getMessage());
     }
 }
