@@ -24,6 +24,17 @@ public class LottoPaper {
                 .collect(Collectors.toList()));
     }
 
+    public LottoResult checkAll(final LottoAnswer answerLotto) {
+        if (Objects.isNull(answerLotto)) {
+            throw new IllegalArgumentException("invalid check all input");
+        }
+
+        return new LottoResult(purchase.stream()
+                .map(answerLotto::verify)
+                .collect(Collectors.toList()));
+    }
+
+
     public int numberOfPurchases() {
         return this.purchase.size();
     }
