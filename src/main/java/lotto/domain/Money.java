@@ -17,6 +17,7 @@ public class Money {
         return new Money(value);
     }
 
+
     public double divide(Money target) {
         return this.value / target.value;
     }
@@ -46,5 +47,10 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(value, unit);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d", (int) value) + unit;
     }
 }
