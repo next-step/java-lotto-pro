@@ -49,7 +49,7 @@ public class OutputView {
         if (lottoReward.ordinal() < MATCH_COUNT_LIMIT) {
             return 0;
         }
-        System.out.println(String.format(OVERVIEW_FORMAT, matchCount, lottoReward.getReward(), matchCount));
+        System.out.println(String.format(OVERVIEW_FORMAT, lottoReward.getMatchCount(), lottoReward.getReward(), matchCount));
         return lottoReward.getReward() * matchCount;
     }
 
