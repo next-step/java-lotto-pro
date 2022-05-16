@@ -12,7 +12,7 @@ public class AutoLottoIssuer {
         this.lottoRandomFactory = lottoRandomFactory;
     }
 
-    public List<Lotto> issue(Money orderPrice) {
+    public Lottos issue(Money orderPrice) {
         List<Lotto> lottoList = new ArrayList<>();
 
         double lottoCount = orderPrice.divide(LOTTO_PRICE);
@@ -21,8 +21,9 @@ public class AutoLottoIssuer {
             lottoList.add(lottoRandomFactory.create());
         }
 
-        return lottoList;
+        return Lottos.from(lottoList);
     }
+
 
     private void validate(double lottoCount) {
         if (!(lottoCount == Math.floor(lottoCount)) || Double.isInfinite(lottoCount)) {
