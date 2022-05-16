@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.*;
 import lotto.model.Lottos;
+import lotto.model.Organizer;
 import lotto.model.Store;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -14,6 +15,11 @@ public class LottoController {
         store.receiveAmount(amount);
         Lottos lottos = store.giveLotto();
         ResultView.printLottoNumbers(lottos);
+
+        drawNumber();
     }
 
+    private static void drawNumber() {
+        Organizer organizer = new Organizer(InputView.inputWinningNumbers());
+    }
 }

@@ -3,10 +3,18 @@ package lotto.view;
 import java.util.Scanner;
 
 public class InputView {
-    private final static Scanner view = new Scanner(System.in);
 
     public static int inputBuyAmount(String buyAmountText) {
         System.out.println(buyAmountText);
-        return view.nextInt();
+        return newScanner().nextInt();
+    }
+
+    public static String inputWinningNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return newScanner().nextLine();
+    }
+
+    private static Scanner newScanner() {
+        return new Scanner(System.in);
     }
 }
