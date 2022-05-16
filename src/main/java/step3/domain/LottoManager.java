@@ -38,13 +38,10 @@ public class LottoManager {
 
 
     private boolean validMoney(String money) {
-        boolean validResult = true;
         try {
-            validResult = Integer.parseInt(money) >= LOTTO_PRICE;
+            return Integer.parseInt(money) >= LOTTO_PRICE;
         } catch (NumberFormatException e) {
-            validResult = false;
-        } finally {
-            return validResult;
+            return false;
         }
     }
 
