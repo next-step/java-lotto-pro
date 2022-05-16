@@ -1,13 +1,12 @@
-package step3.viewer;
+package lotto.viewer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import step3.constants.Matched;
-import step3.domain.Lotto;
-import step3.domain.Lottos;
-import step3.domain.LottosWinningStatistics;
-import step3.domain.Price;
+import lotto.constants.Matched;
+import lotto.domain.Lottos;
+import lotto.domain.LottosWinningStatistics;
+import lotto.domain.Price;
 
 public class LottoViewer {
     private static final String INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요.";

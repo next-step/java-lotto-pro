@@ -1,7 +1,7 @@
-package step3.domain;
+package lotto.domain;
 
 import java.util.List;
-import step3.constants.Matched;
+import lotto.constants.Matched;
 
 public class LottosWinningStatistics {
     private final Lottos lottos;

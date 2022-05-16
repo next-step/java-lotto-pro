@@ -1,11 +1,11 @@
-package step3;
+package lotto;
 
-import step3.domain.LottoWinningNumbers;
-import step3.domain.Lottos;
-import step3.domain.LottosGenerator;
-import step3.domain.LottosWinningStatistics;
-import step3.domain.Price;
-import step3.viewer.LottoViewer;
+import lotto.domain.LottoWinningNumbers;
+import lotto.domain.Lottos;
+import lotto.domain.LottosGenerator;
+import lotto.domain.LottosWinningStatistics;
+import lotto.domain.Price;
+import lotto.viewer.LottoViewer;
 
 public class LottoMain {
     public static void main(String[] args) {

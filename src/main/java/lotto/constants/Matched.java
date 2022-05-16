@@ -1,4 +1,4 @@
-package step3.constants;
+package lotto.constants;
 
 import java.util.HashMap;
 import java.util.Map;
