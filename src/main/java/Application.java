@@ -10,25 +10,7 @@ public class Application {
     public static void main(String[] args) {
         Lotto lotto = getLotto();
         Lottery lottery = getLottery();
-        ContainCounts containCounts = lottery.get(lotto);
-        aggregate(containCounts);
-    }
-
-    private static void aggregate(ContainCounts containCounts) {
-        Aggregator aggregator = vendor.aggregate(containCounts);
-        consoleOutputView.view(aggregator);
-    }
-
-    private static Lottery getLottery() {
-        String inputString = consoleInputView.inputString(() -> "지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> input = Arrays.stream(inputString.split(", "))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
-        return new Lottery(
-                new LottoNumbers(input.stream()
-                                .map(LottoNumber::new)
-                                .collect(Collectors.toList())));
+        aggregate(lottery.get(lotto));
     }
 
     private static Lotto getLotto() {
@@ -36,5 +18,27 @@ public class Application {
         Lotto lotto = vendor.buy(inputLong);
         consoleOutputView.view(lotto);
         return lotto;
+    }
+
+    private static Lottery getLottery() {
+        return new Lottery(getTopRankLottoNumbers(), getBonusLottoNumber());
+    }
+
+    private static LottoNumbers getTopRankLottoNumbers() {
+        String inputString = consoleInputView.inputString(() -> "지난 주 당첨 번호를 입력해 주세요.");
+        List<Integer> input = Arrays.stream(inputString.split(", ")).map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        return new LottoNumbers(input.stream().map(LottoNumber::new).collect(Collectors.toList()));
+    }
+
+    private static BonusLottoNumber getBonusLottoNumber() {
+        int input = consoleInputView.inputInt(() -> "보너스 볼을 입력해 주세요.");
+        return new BonusLottoNumber(input);
+    }
+
+    private static void aggregate(ContainCounts containCounts) {
+        Aggregator aggregator = vendor.aggregate(containCounts);
+        consoleOutputView.view(aggregator);
     }
 }
