@@ -29,6 +29,10 @@ public class LottoMoney {
         return  new EarningsRate(Math.floor(rate * 100) / 100.0);
     }
 
+    public int expectedNumberOfIssued() {
+        return this.money / 1000;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,5 +45,4 @@ public class LottoMoney {
     public int hashCode() {
         return Objects.hash(money);
     }
-
 }

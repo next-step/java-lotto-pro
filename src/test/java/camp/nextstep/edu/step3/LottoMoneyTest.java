@@ -46,4 +46,10 @@ public class LottoMoneyTest {
         assertThatExceptionOfType(IllegalStateException.class)
                 .isThrownBy(() -> new LottoMoney(0).calculate(1));
     }
+
+    @DisplayName("로또 금액을 입력하고 해당 금액에 따른 로또 예상 발급 장수를 알수있다.")
+    @Test
+    void expectedNumberOfIssuedTest() {
+        assertThat(new LottoMoney(3500).expectedNumberOfIssued()).isEqualTo(3);
+    }
 }
