@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Set;
 
 import static lotto.constants.LottoConstant.*;
+import static lotto.utils.InputUtils.convertToIntegerList;
+import static lotto.utils.InputUtils.splitWithDelimiter;
 import static lotto.utils.RandomUtils.createRandomNumbers;
+import static lotto.view.InputView.readWinningNumbers;
 
 public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
@@ -23,7 +26,8 @@ public class LottoNumbers {
         return new LottoNumbers(randomNumbers);
     }
 
-    public static LottoNumbers createLottoNumbers(List<Integer> numbers) {
+    public static LottoNumbers createWinningNumbers() {
+        List<Integer> numbers = convertToIntegerList(splitWithDelimiter(readWinningNumbers()));
         checkNumberDuplicate(numbers);
         return new LottoNumbers(numbers);
     }
