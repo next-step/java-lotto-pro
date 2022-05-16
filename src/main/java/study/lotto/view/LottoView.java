@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import study.lotto.dto.BonusBall;
 import study.lotto.dto.PurchasePrice;
 import study.lotto.dto.PurchasedLotto;
 import study.lotto.dto.PurchasedLottos;
@@ -39,6 +40,10 @@ public class LottoView {
         userInterface.show(
                 String.format("총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 %s 의미임)\n", winningStatistics.getEarningsRate(),
                         getEarningResult(winningStatistics)));
+    }
+
+    public BonusBall getBonusBall() {
+        return new BonusBall(userInterface.getUserInput("보너스 볼을 입력해 주세요.\n"));
     }
 
     private String getEarningResult(WinningStatistics winningStatistics) {

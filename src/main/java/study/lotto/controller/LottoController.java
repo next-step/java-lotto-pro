@@ -6,6 +6,7 @@ import study.lotto.domain.draw.LottoDraw;
 import study.lotto.domain.lottomachine.LottoMachine;
 import study.lotto.domain.lottomachine.LottoPrice;
 import study.lotto.domain.lottomachine.LottoPurchaseHistory;
+import study.lotto.dto.BonusBall;
 import study.lotto.dto.PurchasedLottos;
 import study.lotto.dto.WinningLottoNumbers;
 import study.lotto.dto.WinningStatistics;
@@ -31,6 +32,8 @@ public class LottoController {
 
     private DrawResult draw(LottoPurchaseHistory lottoPurchaseHistory) {
         WinningLottoNumbers winningLottoNumbers = view.getWinningLottoNumbers();
+        BonusBall bonusBall = view.getBonusBall();
+
         LottoDraw lottoDraw = new LottoDraw(winningLottoNumbers.getLottoNumbers());
         DrawResult drawResult = lottoDraw.match(lottoPurchaseHistory.getLottos());
         return drawResult;
