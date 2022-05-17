@@ -9,16 +9,17 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class GameResultTest {
 
-    @ParameterizedTest(name = "사용자의 로또 번호와 당첨 번호를 비교하여 1등부터 4등까지의 갯수를 가진다")
+    @ParameterizedTest(name = "사용자의 로또 번호와 당첨 번호를 비교하여 {3}을 1개 가진다")
     @MethodSource("GameResultProvider")
-    void calculateRankTest(String winnersLotteryInput, String userLotteryInput, Rank rank) {
+    void calculateRankTest(String winnersLotteryInput, String userLotteryInput, String bonusInput, Rank rank) {
         // given
-        Lotto winnersLotto = new Lotto(new InputNumberGenerator(winnersLotteryInput));
         Lotto userLotto = new Lotto(new InputNumberGenerator(userLotteryInput));
+        Lotto winnersLotto = new Lotto(new InputNumberGenerator(winnersLotteryInput));
+        WinningLotto winningLotto = new WinningLotto(winnersLotto, new Number(bonusInput));
         GameResult gameResult = new GameResult();
 
         // when
-        gameResult.calculateRank(winnersLotto, userLotto);
+        gameResult.calculateRank(winningLotto, userLotto);
         long actual = gameResult.gameResult().get(rank);
 
         // then
@@ -27,14 +28,16 @@ class GameResultTest {
 
     @ParameterizedTest(name = "게임 결과 객체는 수익률을 반환한다")
     @MethodSource("benefitResultProvider")
-    void benefitResultTest(String winnersLotteryInput, String userLotteryInput, double deposit, double expected) {
+    void benefitResultTest(String winnersLotteryInput, String userLotteryInput, String bonusInput, double deposit,
+                           double expected) {
         // given
-        Lotto winnersLotto = new Lotto(new InputNumberGenerator(winnersLotteryInput));
         Lotto userLotto = new Lotto(new InputNumberGenerator(userLotteryInput));
+        Lotto winnersLotto = new Lotto(new InputNumberGenerator(winnersLotteryInput));
+        WinningLotto winningLotto = new WinningLotto(winnersLotto, new Number(bonusInput));
         GameResult gameResult = new GameResult();
 
         // when
-        gameResult.calculateRank(winnersLotto, userLotto);
+        gameResult.calculateRank(winningLotto, userLotto);
         double benefit = gameResult.benefitResult(deposit);
 
         // then
@@ -43,19 +46,22 @@ class GameResultTest {
 
     private static Stream<Arguments> GameResultProvider() {
         return Stream.of(
-                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,6", Rank.FIRST),
-                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,7", Rank.SECOND),
-                Arguments.of("1,2,3,4,5,6", "1,2,3,4,7,8", Rank.THIRD),
-                Arguments.of("1,2,3,4,5,6", "1,2,3,7,8,9", Rank.FOURTH)
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,6", "11", Rank.FIRST),
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,11", "11", Rank.SECOND),
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,7", "11", Rank.THIRD),
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,7,8", "11", Rank.FOURTH),
+                Arguments.of("1,2,3,4,5,6", "1,2,3,7,8,9", "11", Rank.FIFTH)
         );
     }
+
     private static Stream<Arguments> benefitResultProvider() {
         return Stream.of(
-                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,6", 1000, 2000000.00),
-                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,7", 1000, 1500.00),
-                Arguments.of("1,2,3,4,5,6", "1,2,3,4,7,8", 1000, 50.00),
-                Arguments.of("1,2,3,4,5,6", "1,2,3,7,8,9", 1000, 5.00),
-                Arguments.of("1,2,3,4,5,6", "1,2,7,8,9,10", 1000, 0.00)
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,6", "11", 1000, 2000000.00),
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,11", "11", 1000, 30000.00),
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,7", "11", 1000, 1500.00),
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,7,8", "11", 1000, 50.00),
+                Arguments.of("1,2,3,4,5,6", "1,2,3,7,8,9", "11", 1000, 5.00),
+                Arguments.of("1,2,3,4,5,6", "1,2,7,8,9,10", "11", 1000, 0.00)
         );
     }
 }

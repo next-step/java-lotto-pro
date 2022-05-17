@@ -70,6 +70,41 @@ class LottoGameTest {
         assertThat(actual).isFalse();
     }
 
+    @ParameterizedTest(name = "유효한 보너스 번호를 입력하면 참을 반환한다")
+    @CsvSource(value = {"1,2,3,4,5,6:7", "10, 15, 20, 25, 30, 35:9"}, delimiter = ':')
+    void bonusNumberTest(String input, String bonusNumber) {
+        // given & when
+        lottoGame.winnersNumber(input);
+        boolean actual = lottoGame.bonusNumber(bonusNumber);
+
+        // then
+        assertThat(actual).isTrue();
+    }
+
+    @ParameterizedTest(name = "이미 당첨번호에 존재하는 번호를 보너스 번호로 입력하면 거짓을 반환한다")
+    @CsvSource(value = {"1,2,3,4,5,6:1", "1,2,3,4,5,6:2", "1,2,3,4,5,6:3", "1,2,3,4,5,6:4", "1,2,3,4,5,6:5",
+            "1,2,3,4,5,6:6"}, delimiter = ':')
+    void dupBonusNumberTest(String input, String bonusNumber) {
+        // given & when
+        lottoGame.winnersNumber(input);
+        boolean actual = lottoGame.bonusNumber(bonusNumber);
+
+        // then
+        assertThat(actual).isFalse();
+    }
+
+    @ParameterizedTest(name = "유효하지 않은 보너스 번호를 입력하면 거짓을 반환한다")
+    @CsvSource(value = {"10, 15, 20, 25, 30, 35:-1", "1,2,3,4,5,6:46", "1,2,3,4,5,6:칠",
+            "1,2,3,4,5,6:&"}, delimiter = ':')
+    void invalidBonusNumberTest(String input, String bonusNumber) {
+        // given & when
+        lottoGame.winnersNumber(input);
+        boolean actual = lottoGame.bonusNumber(bonusNumber);
+
+        // then
+        assertThat(actual).isFalse();
+    }
+
     @Test
     @DisplayName("수익률의 이익/손해 기준은 1이다")
     void referenceValueTest() {
@@ -79,14 +114,15 @@ class LottoGameTest {
 
     @ParameterizedTest(name = "게임의 결과 미당첨을 제외한 각 등수가 몇개인지를 반환한다")
     @MethodSource("gameResultProvider")
-    void gameResultTest(String userInputs, String winnerInputs, HashMap<Rank, Long> expected) {
+    void gameResultTest(String userInputs, String winnerInputs, String bonusNumber, HashMap<Rank, Integer> expected) {
         // given
         lottoGame.insertMoney("1000");
         lottoGame.buyLottoTicket(new InputNumberGenerator(userInputs));
         lottoGame.winnersNumber(winnerInputs);
+        lottoGame.bonusNumber(bonusNumber);
 
         // when
-        Map<Rank, Long> actual = lottoGame.gameResult();
+        Map<Rank, Integer> actual = lottoGame.gameResult();
 
         // then
         assertThat(actual).isEqualTo(expected);
@@ -95,13 +131,15 @@ class LottoGameTest {
     // benefitResult
     @ParameterizedTest(name = "게임의 결과 수익률을 반환한다")
     @MethodSource("gameResultProvider")
-    void benefitResultTest(String userInputs, String winnerInputs, HashMap<Rank, Long> expectedGameResult,
+    void benefitResultTest(String userInputs, String winnerInputs, String bonusNumber,
+                           HashMap<Rank, Integer> expectedGameResult,
                            double expected) {
         // given
         lottoGame.insertMoney("1000");
         lottoGame.buyLottoTicket(new InputNumberGenerator(userInputs));
         lottoGame.winnersNumber(winnerInputs);
-        Map<Rank, Long> gameResult = lottoGame.gameResult();
+        lottoGame.bonusNumber(bonusNumber);
+        Map<Rank, Integer> gameResult = lottoGame.gameResult();
 
         // when
         double actual = lottoGame.benefitResult();
@@ -118,7 +156,7 @@ class LottoGameTest {
         lottoGame.buyLottoTicket(new RandomNumberGenerator());
 
         // when
-        List<Lotto> actual = lottoGame.getUserLottery();
+        List<Lotto> actual = lottoGame.getUserLotto();
 
         // then
         assertThat(actual).hasSize(expected);
@@ -126,60 +164,76 @@ class LottoGameTest {
 
     private static Stream<Arguments> gameResultProvider() {
         return Stream.of(
-                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,6", new HashMap<Rank, Long>() {
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,6", "7", new HashMap<Rank, Integer>() {
                     {
-                        put(Rank.FOURTH, 0L);
-                        put(Rank.THIRD, 0L);
-                        put(Rank.SECOND, 0L);
-                        put(Rank.FIRST, 1L);
+                        put(Rank.FIFTH, 0);
+                        put(Rank.FOURTH, 0);
+                        put(Rank.THIRD, 0);
+                        put(Rank.SECOND, 0);
+                        put(Rank.FIRST, 1);
                     }
                 }, 2000000.00),
-                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,7", new HashMap<Rank, Long>() {
+                Arguments.of("1,2,3,4,5,7", "1,2,3,4,5,6", "7", new HashMap<Rank, Integer>() {
                     {
-                        put(Rank.FOURTH, 0L);
-                        put(Rank.THIRD, 0L);
-                        put(Rank.SECOND, 1L);
-                        put(Rank.FIRST, 0L);
+                        put(Rank.FIFTH, 0);
+                        put(Rank.FOURTH, 0);
+                        put(Rank.THIRD, 0);
+                        put(Rank.SECOND, 1);
+                        put(Rank.FIRST, 0);
+                    }
+                }, 30000.00),
+                Arguments.of("1,2,3,4,5,8", "1,2,3,4,5,6", "7", new HashMap<Rank, Integer>() {
+                    {
+                        put(Rank.FIFTH, 0);
+                        put(Rank.FOURTH, 0);
+                        put(Rank.THIRD, 1);
+                        put(Rank.SECOND, 0);
+                        put(Rank.FIRST, 0);
                     }
                 }, 1500.00),
-                Arguments.of("1,2,3,4,5,6", "1,2,3,4,7,8", new HashMap<Rank, Long>() {
+                Arguments.of("1,2,3,4,8,9", "1,2,3,4,5,6", "7", new HashMap<Rank, Integer>() {
                     {
-                        put(Rank.FOURTH, 0L);
-                        put(Rank.THIRD, 1L);
-                        put(Rank.SECOND, 0L);
-                        put(Rank.FIRST, 0L);
+                        put(Rank.FIFTH, 0);
+                        put(Rank.FOURTH, 1);
+                        put(Rank.THIRD, 0);
+                        put(Rank.SECOND, 0);
+                        put(Rank.FIRST, 0);
                     }
                 }, 50.00),
-                Arguments.of("1,2,3,4,5,6", "1,2,3,7,8,9", new HashMap<Rank, Long>() {
+                Arguments.of("1,2,3,8,9,10", "1,2,3,4,5,6", "7", new HashMap<Rank, Integer>() {
                     {
-                        put(Rank.FOURTH, 1L);
-                        put(Rank.THIRD, 0L);
-                        put(Rank.SECOND, 0L);
-                        put(Rank.FIRST, 0L);
+                        put(Rank.FIFTH, 1);
+                        put(Rank.FOURTH, 0);
+                        put(Rank.THIRD, 0);
+                        put(Rank.SECOND, 0);
+                        put(Rank.FIRST, 0);
                     }
                 }, 5.00),
-                Arguments.of("1,2,3,4,5,6", "1,2,7,8,9,10", new HashMap<Rank, Long>() {
+                Arguments.of("1,2,8,9,10,11", "1,2,3,4,5,6", "7", new HashMap<Rank, Integer>() {
                     {
-                        put(Rank.FOURTH, 0L);
-                        put(Rank.THIRD, 0L);
-                        put(Rank.SECOND, 0L);
-                        put(Rank.FIRST, 0L);
+                        put(Rank.FIFTH, 0);
+                        put(Rank.FOURTH, 0);
+                        put(Rank.THIRD, 0);
+                        put(Rank.SECOND, 0);
+                        put(Rank.FIRST, 0);
                     }
                 }, 0.00),
-                Arguments.of("1,2,3,4,5,6", "1,7,8,9,10,11", new HashMap<Rank, Long>() {
+                Arguments.of("1,10,11,12,13,14", "1,2,3,4,5,6", "7", new HashMap<Rank, Integer>() {
                     {
-                        put(Rank.FOURTH, 0L);
-                        put(Rank.THIRD, 0L);
-                        put(Rank.SECOND, 0L);
-                        put(Rank.FIRST, 0L);
+                        put(Rank.FIFTH, 0);
+                        put(Rank.FOURTH, 0);
+                        put(Rank.THIRD, 0);
+                        put(Rank.SECOND, 0);
+                        put(Rank.FIRST, 0);
                     }
                 }, 0.00),
-                Arguments.of("1,2,3,4,5,6", "7,8,9,10,11,12", new HashMap<Rank, Long>() {
+                Arguments.of("8,9,10,11,12,13", "1,2,3,4,5,6", "7", new HashMap<Rank, Integer>() {
                     {
-                        put(Rank.FOURTH, 0L);
-                        put(Rank.THIRD, 0L);
-                        put(Rank.SECOND, 0L);
-                        put(Rank.FIRST, 0L);
+                        put(Rank.FIFTH, 0);
+                        put(Rank.FOURTH, 0);
+                        put(Rank.THIRD, 0);
+                        put(Rank.SECOND, 0);
+                        put(Rank.FIRST, 0);
                     }
                 }, 0.00)
         );
