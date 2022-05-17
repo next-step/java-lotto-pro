@@ -19,7 +19,7 @@ public class LottoMachineTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1000:1", "1500:1", "3000:3", "10001:10"}, delimiter = ':')
+    @CsvSource(value = {"1000:1", "1500:1", "3000:3", "10001:10","123:0"}, delimiter = ':')
     public void buyTicketTest(String money, int expected) {
         Money moneyEntity = new Money(money);
         assertThat(lottoMachine.buyTicket(moneyEntity)).isEqualTo(expected);

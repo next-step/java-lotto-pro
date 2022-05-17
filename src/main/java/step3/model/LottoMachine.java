@@ -10,6 +10,8 @@ import step3.domain.Money;
 public class LottoMachine {
 
     private final LottoManager lottoManager;
+    private final int LOTTO_PRICE = 1_000;
+    private final String CANT_BUY_LOTTO_EXCEPTION = "돈은 최소 " + LOTTO_PRICE + "이상 입력해야합니다";
 
 
     public LottoMachine(LottoManager lottoManager) {
@@ -31,10 +33,21 @@ public class LottoMachine {
     }
 
     public int buyTicket(Money money) {
-        return lottoManager.buyRandomTicket(money.purchaseTicket());
+        if(!validateTicketCount(money)){
+            System.out.println(CANT_BUY_LOTTO_EXCEPTION);
+            return 0;
+        }
+        int ticket = money.getMoney() / LOTTO_PRICE;
+        return lottoManager.buyRandomTicket(ticket);
     }
-
-    public Money createMoney(String money) {
+    private boolean validateTicketCount(Money money){
+        try {
+            return money.getMoney() / LOTTO_PRICE >= 1;
+        }catch (NullPointerException e){
+            return false;
+        }
+    }
+    public Money insertMoney(String money) {
         try {
             return new Money(money);
         } catch (IllegalArgumentException e) {
