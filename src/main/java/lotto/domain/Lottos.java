@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Lottos {
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos( LottoIssuedService lottoIssuedService, int lottoPurchaseCount) {
         this.lottos = new ArrayList<>();
@@ -31,13 +30,10 @@ public class Lottos {
     }
 
     public static int countMatchedNumber(Lotto lotto, Lotto answerLotto) {
-        List<Integer> answerLottoNumbers = answerLotto.getLottoNumbers().stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
+        List<Integer> answerLottoNumbers = new ArrayList<>(answerLotto.getLottoNumbers());
 
         return (int) lotto.getLottoNumbers().stream()
-                .filter(lottoNumber -> answerLottoNumbers.contains(lottoNumber.getNumber()))
-                .mapToInt(LottoNumber::getNumber)
+                .filter(answerLottoNumbers::contains)
                 .count();
     }
 }

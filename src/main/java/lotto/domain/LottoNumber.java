@@ -1,32 +1,28 @@
 package lotto.domain;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoNumber {
     private final static int LOTTO_NUMBER_MIN_VALUE = 1;
     private final static int LOTTO_NUMBER_MAX_VALUE = 45;
 
-    private static final String ERROR_LOTTO_NUMBER_OUT_OF_RANGE_MESSAGE = "[ERROR] 로또 번호는 1 ~ 45 사이의 숫자로 구성되어야합니다.";
-    private final Integer number;
+    private final List<Integer> numbers;
 
-    public LottoNumber(Integer number) {
-        if (!isValidRangeLottoNumber(number)) {
-            throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_OUT_OF_RANGE_MESSAGE);
-        }
-
-        this.number = number;
+    public LottoNumber() {
+        this.numbers = new ArrayList<>();
+        for (int i = LOTTO_NUMBER_MIN_VALUE; i <= LOTTO_NUMBER_MAX_VALUE; i++)
+            this.numbers.add(i);
     }
 
-    public Integer getNumber() {
-        return number;
-    }
-
-    private boolean isValidRangeLottoNumber(Integer number) {
-        return  number >= LOTTO_NUMBER_MIN_VALUE && number <= LOTTO_NUMBER_MAX_VALUE;
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 
     @Override
     public String toString() {
-        return number.toString();
+        return numbers.toString();
     }
 }
 
