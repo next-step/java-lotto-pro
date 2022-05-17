@@ -15,10 +15,11 @@ public class LottoNumbers {
         this.numbers = mapLottoNumber(numbers);
     }
 
-    private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_STANDARD_SIZE) {
-            throw new IllegalArgumentException(INVALID_SIZE);
-        }
+    public static List<LottoNumbers> toList(List<String> passiveNumbers) {
+        return passiveNumbers.stream()
+                .map(LottoGenerator::generateNumbers)
+                .map(LottoNumbers::new)
+                .collect(Collectors.toList());
     }
 
     public List<LottoNumber> getNumbers() {
@@ -29,6 +30,16 @@ public class LottoNumbers {
         return Math.toIntExact(winNumbers.stream()
                 .filter(number -> numbers.contains(new LottoNumber(number)))
                 .count());
+    }
+
+    public boolean hasBonus(int bonusNumber) {
+        return numbers.contains(new LottoNumber(bonusNumber));
+    }
+
+    private void validateSize(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_STANDARD_SIZE) {
+            throw new IllegalArgumentException(INVALID_SIZE);
+        }
     }
 
     private List<LottoNumber> mapLottoNumber(List<Integer> numbers) {
@@ -56,9 +67,5 @@ public class LottoNumbers {
         return "LottoNumbers{" +
                 "numbers=" + numbers +
                 '}';
-    }
-
-    public boolean hasBonus(int bonusNumber) {
-        return numbers.contains(new LottoNumber(bonusNumber));
     }
 }

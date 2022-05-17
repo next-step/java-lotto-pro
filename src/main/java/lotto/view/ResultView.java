@@ -5,6 +5,7 @@ import lotto.model.LottoNumbers;
 import lotto.model.LottoPrizeMap;
 import lotto.model.LottoPrizeRank;
 import lotto.model.LottoPrizeRanks;
+import lotto.model.PassiveQuantity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Map;
 import static lotto.model.LottoPrizeRank.*;
 
 public class ResultView {
-    private static final String QUANTITY_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String QUANTITY_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String STATICS_TITLE = "당첨통계\n---------";
     private static final String STATICS_BODY = "%d개 일치 (%d원)- %d개\n";
     private static final String STATICS_BODY_WITH_BONUS = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
@@ -21,8 +22,8 @@ public class ResultView {
 
     private static final List<LottoPrizeRank> table = Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST);
 
-    public static void quantity(int quantity) {
-        System.out.printf(QUANTITY_MESSAGE, quantity);
+    public static void quantity(PassiveQuantity passiveQuantity, int quantity) {
+        System.out.printf(QUANTITY_MESSAGE, passiveQuantity.getQuantity(), quantity);
     }
 
     public static void table(List<LottoNumbers> source) {

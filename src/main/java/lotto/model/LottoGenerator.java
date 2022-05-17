@@ -11,7 +11,7 @@ public class LottoGenerator {
     private static final String INVALID_NUMBER = "숫자만 입력해주세요.";
 
     public static List<Integer> generateNumbers(String source) {
-        String[] numbers = source.split(DELIMITER);
+        String[] numbers = toArray(source);
         validateSize(numbers);
         try {
             return Arrays.stream(numbers)
@@ -28,6 +28,10 @@ public class LottoGenerator {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_NUMBER);
         }
+    }
+
+    private static String[] toArray(String source) {
+        return source.replaceAll(" ", "").split(DELIMITER);
     }
 
     private static void validateSize(String[] numbers) {
