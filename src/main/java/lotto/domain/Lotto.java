@@ -9,10 +9,10 @@ public class Lotto {
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static final Money LOTTO_PRICE = Money.from(1000);
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(LottoNumber[] lottoNumbers) {
-        this.lottoNumbers = Arrays.asList(lottoNumbers);
+        this.lottoNumbers = new HashSet<>(Arrays.asList(lottoNumbers));
         validateNumbersCount();
         validateDuplicated();
     }
@@ -44,8 +44,7 @@ public class Lotto {
     }
 
     private boolean hasDuplicatedLottoNumber() {
-        Set<LottoNumber> lottoNumberSet = new HashSet<>(this.lottoNumbers);
-        return this.lottoNumbers.size() != lottoNumberSet.size();
+        return this.lottoNumbers.size() != LOTTO_NUMBER_SIZE;
     }
 
     @Override
