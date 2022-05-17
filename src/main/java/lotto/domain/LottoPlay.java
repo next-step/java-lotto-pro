@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.ui.InputView;
@@ -10,15 +9,17 @@ import util.StringUtil;
 public class LottoPlay {
     private final InputView inputView;
     private final ResultView resultView;
+    private final LottoNumberPool lottoNumberPool;
 
     public LottoPlay() {
         inputView = new InputView();
         resultView = new ResultView();
+        lottoNumberPool = new LottoNumberPool();
     }
 
     public void play() {
         PurchaseMoney purchaseMoney = getPurchaseMoney();
-        Lottos lottos = genLottos(purchaseMoney);
+        Lottos lottos = lottoNumberPool.generateLottos(purchaseMoney.getAmountOfLotto());
         resultView.printPurchasedLottos(lottos);
         Lotto referenceLotto = getReferenceLotto();
         LottosResults results = lottos.matchWithReference(referenceLotto);
@@ -28,18 +29,6 @@ public class LottoPlay {
     private PurchaseMoney getPurchaseMoney() {
         Integer money = inputView.inputMoneyForPurchase();
         return new PurchaseMoney(money);
-    }
-
-    private Lottos genLottos(PurchaseMoney purchaseMoney) {
-        int amountOfLotto = purchaseMoney.getAmountOfLotto();
-        LottoNumberPool pool = new LottoNumberPool();
-
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < amountOfLotto; i++) {
-            lottoList.add(pool.generateLotto());
-        }
-
-        return new Lottos(lottoList);
     }
 
     private Lotto getReferenceLotto() {
