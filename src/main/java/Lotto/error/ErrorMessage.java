@@ -9,7 +9,6 @@ public enum ErrorMessage {
     BonusNumberDuplicate("입력한 보너스 번호는 이미 뽑힌 번호입니다."),
     BonusNumberInputWrong("보너스 번호는 입력이 올바르지 않습니다.");
 
-
     private final String errorMsg;
 
     ErrorMessage(String errorMsg) {

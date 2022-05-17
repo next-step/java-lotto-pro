@@ -30,25 +30,6 @@ public enum CompareEnum implements Comparator<CompareEnum> {
         return order;
     }
 
-    public static CompareEnum of(long hitCount) {
-        if(hitCount == 6)
-            return CompareEnum.First;
-
-        if(hitCount == 5)
-            return CompareEnum.Second;
-
-        if(hitCount == 4)
-            return CompareEnum.Third;
-
-        if(hitCount == 3)
-            return CompareEnum.Fourth;
-
-        if(hitCount == 2)
-            return CompareEnum.Fifth;
-
-        return CompareEnum.Fail;
-    }
-
     public static Set<CompareEnum> valuesExcludeNone() {
         return EnumSet.of(First, Second, Third, Fourth, Fifth);
     }
