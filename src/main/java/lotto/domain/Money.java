@@ -11,8 +11,8 @@ public class Money {
     private final BigDecimal value;
 
     private Money(BigDecimal value) {
+        validate(value);
         this.value = value;
-        validate();
     }
 
     public static Money from(double value) {
@@ -35,8 +35,8 @@ public class Money {
         return Money.from(this.value.add(target.value));
     }
 
-    private void validate() {
-        if (this.value.compareTo(MIN_VALUE) == -1) {
+    private void validate(BigDecimal value) {
+        if (value.compareTo(MIN_VALUE) == -1) {
             throw new IllegalArgumentException("돈은 음수 일 수 없습니다.");
         }
     }
