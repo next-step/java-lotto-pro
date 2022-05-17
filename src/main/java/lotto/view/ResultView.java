@@ -24,6 +24,10 @@ public class ResultView {
         lottoNumbers.forEach(System.out::println);
     }
 
+    public static void resultGameCount(int gameCount, int passiveCount) {
+        System.out.printf((GAME_COUNT) + "%n", passiveCount, gameCount - passiveCount);
+    }
+
     public static void lottoGameResultMessage(LottoRanks lottoRanks) {
         System.out.println(WINNING_STATISTICS);
         System.out.println(SEPARATOR);

@@ -6,19 +6,21 @@ import java.util.List;
 
 import static lotto.view.InputView.bonusNumberString;
 import static lotto.view.InputView.lastWeekWinningNumberString;
-import static lotto.view.ResultView.purchasesCountMessage;
-import static lotto.view.ResultView.resultLottoNumbers;
+import static lotto.view.ResultView.*;
 
 public class LottoController {
     private final int gameCount;
+    private final List<LottoNumbers> passiveLottoNumbers;
 
-    public LottoController(int gameCount) {
+    public LottoController(int gameCount, List<LottoNumbers> passiveLottoNumbers) {
         this.gameCount = gameCount;
+        this.passiveLottoNumbers = passiveLottoNumbers;
     }
 
     public List<LottoNumbers> generateLottoGame() {
         purchasesCountMessage(gameCount);
-        List<LottoNumbers> lottoNumbers = Lotto.generateLottoGame(gameCount);
+        List<LottoNumbers> lottoNumbers = Lotto.generateLottoGame(gameCount, passiveLottoNumbers);
+        resultGameCount(gameCount, passiveLottoNumbers.size());
         resultLottoNumbers(lottoNumbers);
 
         return lottoNumbers;
