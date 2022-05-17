@@ -11,35 +11,42 @@ import lotto.view.View;
 
 public class LottoController {
     private final View view;
+    private final AutoLottoIssuer autoLottoIssuer;
 
     public LottoController(View view) {
         this.view = view;
+        LottoRandomFactory factory = new LottoRandomFactory(new RandomNumberMachine());
+        autoLottoIssuer = new AutoLottoIssuer(factory);
     }
 
     public void start() {
-        view.outputOrderPrice();
 
-        String orderPrice = view.inputOrderPrice();
+        LottoStatistic lottoStatistic = new LottoStatistic(issueLottos(), pickWinningNumbers());
 
-        LottoRandomFactory factory = new LottoRandomFactory(new RandomNumberMachine());
-        AutoLottoIssuer autoLottoIssuer = new AutoLottoIssuer(factory);
+        printStatistic(lottoStatistic);
+    }
 
-        Lottos lottos = autoLottoIssuer.issue(Money.from(orderPrice));
+    private void printStatistic(LottoStatistic lottoStatistic) {
+        view.outputWinningStatistic(lottoStatistic.winningMatchResultCount());
+        view.outputEarning(lottoStatistic.lottoEarning());
+    }
 
-        view.outputOrderLottoList(lottos);
-
+    private String[] pickWinningNumbers() {
         view.outputWinningNumbers();
 
         String winningNumbers = view.inputWinningNumbers();
 
-        StringSplitter.split(winningNumbers);
+        return StringSplitter.split(winningNumbers);
+    }
 
-        LottoStatistic lottoStatistic = new LottoStatistic(lottos, StringSplitter.split(winningNumbers));
+    private Lottos issueLottos() {
+        view.outputOrderPrice();
+        String orderPrice = view.inputOrderPrice();
 
-        view.outputWinningStatistic(lottoStatistic.winningMatchResultCount());
+        Lottos lottos = autoLottoIssuer.issue(Money.from(orderPrice));
 
-        view.outputEarning(lottoStatistic.lottoEarning());
-
+        view.outputOrderLottoList(lottos);
+        return lottos;
     }
 
 
