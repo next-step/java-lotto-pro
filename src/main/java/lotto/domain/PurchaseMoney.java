@@ -40,4 +40,8 @@ public class PurchaseMoney {
             throw new IllegalArgumentException(ERROR_MESSAGE_MONEY_LOWER_THAN_PRICE);
         }
     }
+
+    public double calculateEarningsRate(int resultMoney) {
+        return (double)resultMoney / money;
+    }
 }

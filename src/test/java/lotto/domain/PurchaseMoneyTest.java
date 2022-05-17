@@ -22,6 +22,13 @@ class PurchaseMoneyTest {
         assertThat(result.getAmountOfLotto()).isEqualTo(7);
     }
 
+    @DisplayName("수익률 계산이 정상적으로 동작하는지 확인")
+    @Test
+    void calculateEarningsRate() {
+        PurchaseMoney money = new PurchaseMoney(2000);
+        assertThat(money.calculateEarningsRate(1000)).isEqualTo(0.5);
+    }
+
     @DisplayName("음수 금액으로 PurchaseMoney 생성시 Exception 발생 확인")
     @Test
     void purchaseMoneyWithNegative() {
