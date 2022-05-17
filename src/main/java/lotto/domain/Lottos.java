@@ -5,19 +5,19 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-    private final List<Lotto> lottoList;
+    private final List<Lotto> lottos;
 
-    private Lottos(List<Lotto> lottoList) {
-        this.lottoList = new ArrayList<>(lottoList);
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
     }
 
-    public static Lottos from(List<Lotto> lottoList) {
-        return new Lottos(lottoList);
+    public static Lottos from(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
     public Lottos matchedLottoList(WinningNumbers winningNumbers, MatchResult matchResult) {
         List<Lotto> matchedLottos = new ArrayList<>();
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottos) {
             if (winningNumbers.matchWinningLotto(lotto).equals(matchResult)) {
                 matchedLottos.add(lotto);
             }
@@ -27,7 +27,7 @@ public class Lottos {
 
     public Money totalPrice() {
         Money result = Money.from(0);
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottos) {
             result = result.add(lotto.price());
         }
 
@@ -35,14 +35,14 @@ public class Lottos {
     }
 
     public int size() {
-        return this.lottoList.size();
+        return this.lottos.size();
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottos) {
             builder.append(lotto.toString() + "\n");
         }
         return builder.toString();
