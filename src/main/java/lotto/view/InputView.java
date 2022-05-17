@@ -11,6 +11,7 @@ import lotto.controller.dto.LottoNumbersDTO;
 import lotto.controller.dto.LottoTicketsDTO;
 import lotto.controller.dto.MoneyDTO;
 import lotto.controller.dto.WinningLottoDTO;
+import lotto.controller.validator.LottoNumbersDTOValidator;
 
 public class InputView {
 
@@ -56,13 +57,13 @@ public class InputView {
         for (int i = 0; i < manualLottoTicketQuantity; i++) {
             String inputLottoNumbers = readLine();
             String[] strings = splitLottoNumbers(inputLottoNumbers);
-            lottoNumbersDTOS.add(
-                    new LottoNumbersDTO(
+            LottoNumbersDTO lottoNumbersDTO = new LottoNumbersDTO(
                     Arrays.stream(strings).
                             map(String::trim).
                             map(Integer::parseInt).
-                            collect(Collectors.toList())
-            ));
+                            collect(Collectors.toList()));
+            LottoNumbersDTOValidator.validate(lottoNumbersDTO);
+            lottoNumbersDTOS.add(lottoNumbersDTO);
         }
         return new LottoTicketsDTO(lottoNumbersDTOS);
     }

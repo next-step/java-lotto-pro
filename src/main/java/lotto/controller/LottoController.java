@@ -11,6 +11,7 @@ import lotto.controller.dto.LottoResultDTO;
 import lotto.controller.dto.LottoTicketsDTO;
 import lotto.controller.dto.MoneyDTO;
 import lotto.controller.dto.WinningLottoDTO;
+import lotto.controller.validator.LottoNumbersDTOValidator;
 import lotto.domain.InputLottoInformation;
 import lotto.domain.LottoNumbers;
 import lotto.domain.PurchasedLottoTickets;
