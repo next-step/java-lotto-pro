@@ -3,10 +3,11 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
 import static lotto.domain.LottoConstant.LOTTO_MINIMUM_MATCHING_COUNT;
-import static lotto.domain.LottoConstant.LOTTO_SIZE;
 
 public class OutputView {
     public static void printMyLotto(PurchasedLotto lottos) {
@@ -25,15 +26,30 @@ public class OutputView {
     public static void showLottoStatistics(LottoResult result) {
         OutputView.printMessage("당첨 통계");
         OutputView.printMessage("---------");
-        for (int matching = LOTTO_MINIMUM_MATCHING_COUNT; matching <= LOTTO_SIZE; matching++) {
-            Ranking rank = Ranking.findRank(matching);
-            OutputView.printMessage("%d개 일치 (%d원)- %d개\r\n", matching, rank.getReward(), result.findRankings(matching).size());
+        List<Ranking> rankings = Arrays.stream(Ranking.values())
+                .filter(ranking -> ranking.getMatchingCount() >= LOTTO_MINIMUM_MATCHING_COUNT)
+                .collect(toList());
+
+        for (Ranking item : rankings) {
+            printMatchingMessage(result, item.getMatchingCount(), item.isMatchBonus(), item);
         }
+    }
+
+    private static void printMatchingMessage(LottoResult result, int matchCount, boolean matchBonus, Ranking rank) {
+        OutputView.printMessage("%d개 일치", matchCount, rank.getReward());
+        if (matchBonus) {
+            OutputView.printMessageWithoutNewLine(", 보너스 볼 일치");
+        }
+        OutputView.printMessage("(%d원)- %d개\r\n", rank.getReward(), result.findRankings(matchCount, matchBonus).size());
     }
 
     public static void showLottoProfit(LottoResult result, Money money) {
         BigDecimal profit = result.calculateWinningProfit(money);
         OutputView.printMessage("총 수익률은 " + profit + "입니다.");
+    }
+
+    public static void printMessageWithoutNewLine(String message) {
+        System.out.print(message);
     }
 
     public static void printMessage(String message) {

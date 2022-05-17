@@ -15,49 +15,46 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
 
-    @ParameterizedTest
-    @CsvSource(value = {"6|1", "5|0", "4|0", "3|2"}, delimiter = '|')
-    public void 로또_결과_조회_테스트(int matchingCount, int listSize) {
+    @Test
+    public void 로또_당첨_결과_조회_테스트() {
         PurchasedLotto purchasedLotto = createSamplePurchasedLotto();
-        LottoResult result = new LottoResult(purchasedLotto.compareLottos(new Lotto(1, 2, 3, 4, 5, 6)));
-        List<Ranking> firstRankings = result.findRankings(matchingCount);
-        assertThat(firstRankings).hasSize(listSize);
+        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        LottoNo bonusNumber = new LottoNo(7);
+
+        LottoResult result = new LottoResult(purchasedLotto.compareLottos(winningLotto, bonusNumber));
+
+        assertThat(result.getRankingList())
+                .contains(Ranking.FIRST)
+                .contains(Ranking.SECOND)
+                .contains(Ranking.THIRD)
+                .contains(Ranking.FOURTH);
     }
 
     @Test
     public void 로또_총수익_테스트1() {
         PurchasedLotto purchasedLotto = createSamplePurchasedLotto();
-        LottoResult result = new LottoResult(purchasedLotto.compareLottos(new Lotto(1, 2, 3, 4, 5, 6)));
-        BigDecimal actualWinningMoney = result.calculateWinningMoney();
+        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        LottoNo bonusNumber = new LottoNo(7);
 
-        BigDecimal expectedWinningMoney = new BigDecimal(0);
-        for (int matchingCount = LOTTO_MINIMUM_MATCHING_COUNT; matchingCount <= LOTTO_SIZE; matchingCount++) {
-            List<Ranking> list = result.findRankings(matchingCount);
-            Ranking ranking = Ranking.findRank(matchingCount);
-            expectedWinningMoney = expectedWinningMoney.add(new BigDecimal(ranking.getReward() * list.size()));
-        }
-        assertThat(actualWinningMoney).isEqualTo(expectedWinningMoney);
+        LottoResult result = new LottoResult(purchasedLotto.compareLottos(winningLotto, bonusNumber));
+        BigDecimal actual = result.calculateWinningMoney();
+
+        List<Ranking> rankings = Arrays.asList(Ranking.FIRST, Ranking.SECOND, Ranking.THIRD, Ranking.FOURTH);
+        BigDecimal expected = rankings.stream()
+                .mapToInt(Ranking::getReward)
+                .mapToObj(BigDecimal::new)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        assertThat(actual).isEqualTo(expected);
     }
 
     private PurchasedLotto createSamplePurchasedLotto() {
         List<Lotto> lottoList = Arrays.asList(
                 new Lotto(1, 2, 3, 4, 5, 6),
-                new Lotto(1, 3, 5, 7, 9, 11),
-                new Lotto(2, 4, 6, 8, 10, 12));
+                new Lotto(1, 2, 3, 4, 5, 7),
+                new Lotto(1, 2, 3, 4, 5, 8),
+                new Lotto(1, 2, 3, 4, 7, 8));
         return new PurchasedLotto(lottoList);
-    }
-
-    @Test
-    public void 로또_총수익_테스트2() {
-        List<Ranking> rankings = Arrays.asList(Ranking.FIRST, Ranking.SECOND, Ranking.THIRD, Ranking.FOURTH);
-        BigDecimal expectedWinningMoney = rankings.stream()
-                .mapToInt(Ranking::getReward)
-                .mapToObj(BigDecimal::new)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        LottoResult result = new LottoResult(rankings);
-        BigDecimal actualWinningMoney = result.calculateWinningMoney();
-        assertThat(actualWinningMoney).isEqualTo(expectedWinningMoney);
     }
 
     @Test
@@ -69,8 +66,8 @@ class LottoResultTest {
         BigDecimal expectedWinningMoney = result.calculateWinningMoney();
         BigDecimal divisor = new BigDecimal(money.getMoney());
         BigDecimal expectedProfit = expectedWinningMoney.divide(divisor).setScale(2, RoundingMode.HALF_UP);
-
         BigDecimal actualProfit = result.calculateWinningProfit(money);
+
         assertThat(actualProfit).isEqualTo(expectedProfit);
     }
 }

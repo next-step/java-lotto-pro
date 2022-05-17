@@ -35,11 +35,20 @@ public class Lotto {
         return lottoNoList.size() != LOTTO_SIZE;
     }
 
-    public Ranking compareLotto(Lotto target) {
-        List<LottoNo> result = new ArrayList<>(lottoNoList);
-        result.retainAll(target.getLottoNoList());
-        int matchingCount = result.size();
-        return Ranking.findRank(matchingCount);
+    public Ranking compareLotto(Lotto target, LottoNo bonusNumber) {
+        int matchingCount = getMatchingCount(target);
+        boolean matchBonus = isContainBonusNumber(bonusNumber);
+        return Ranking.findRank(matchingCount, matchBonus);
+    }
+
+    private int getMatchingCount(Lotto target) {
+        List<LottoNo> intersection = new ArrayList<>(lottoNoList);
+        intersection.retainAll(target.getLottoNoList());
+        return intersection.size();
+    }
+
+    private boolean isContainBonusNumber(LottoNo bonusLotto) {
+        return lottoNoList.contains(bonusLotto);
     }
 
     public List<LottoNo> getLottoNoList() {

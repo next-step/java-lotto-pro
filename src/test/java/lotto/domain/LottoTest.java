@@ -71,11 +71,36 @@ class LottoTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"7, 8, 9, 10, 11, 12:NONE", "4, 5, 6, 7, 8, 9:FOURTH", "3, 4, 5, 6, 7, 8:THIRD", "2, 3, 4, 5, 6, 7:SECOND", "1, 2, 3, 4, 5, 6:FIRST"}, delimiter = ':')
-    public void 로또_번호_비교_테스트(String lottoNumbers, Ranking expected) {
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Ranking ranking = lotto.compareLotto(new Lotto(lottoNumbers));
-        assertThat(ranking).isEqualTo(expected);
+    @Test
+    public void 로또_번호_비교_테스트_1등() {
+        Lotto myLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        LottoNo bonusNumber = new LottoNo(30);
+
+        Ranking ranking = myLotto.compareLotto(winningLotto, bonusNumber);
+
+        assertThat(ranking).isEqualTo(Ranking.FIRST);
+    }
+
+    @Test
+    public void 로또_번호_비교_테스트_보너스_미포함() {
+        Lotto myLotto = new Lotto("1, 2, 3, 4, 5, 45");
+        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        LottoNo bonusNumber = new LottoNo(10);
+
+        Ranking ranking = myLotto.compareLotto(winningLotto, bonusNumber);
+
+        assertThat(ranking).isEqualTo(Ranking.THIRD);
+    }
+
+    @Test
+    public void 로또_번호_비교_테스트_보너스_포함() {
+        Lotto myLotto = new Lotto("1, 2, 3, 4, 5, 45");
+        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        LottoNo bonusNumber = new LottoNo(45);
+
+        Ranking ranking = myLotto.compareLotto(winningLotto, bonusNumber);
+
+        assertThat(ranking).isEqualTo(Ranking.SECOND);
     }
 }
