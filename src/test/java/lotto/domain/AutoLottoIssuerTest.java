@@ -10,13 +10,11 @@ import org.junit.jupiter.api.Test;
 
 class AutoLottoIssuerTest {
 
-    private int numberSize;
     private AutoLottoIssuer issuer;
 
     @BeforeEach
     void setUp() {
-        numberSize = 6;
-        issuer = new AutoLottoIssuer(new LottoRandomFactory(new RandomNumberMachine(), numberSize));
+        issuer = new AutoLottoIssuer(new LottoRandomFactory(new RandomNumberMachine()));
     }
 
     @Test

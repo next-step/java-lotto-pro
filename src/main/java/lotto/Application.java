@@ -7,12 +7,11 @@ import lotto.domain.RandomNumberMachine;
 import lotto.view.View;
 
 public class Application {
-    static final int LOTTO_NUMBER_SIZE = 6;
 
     public static void main(String[] args) {
 
         AutoLottoIssuer autoLottoIssuer = new AutoLottoIssuer(
-                new LottoRandomFactory(new RandomNumberMachine(), LOTTO_NUMBER_SIZE));
+                new LottoRandomFactory(new RandomNumberMachine()));
 
         LottoController controller = new LottoController(new View(), autoLottoIssuer);
 
