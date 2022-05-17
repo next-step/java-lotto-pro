@@ -22,12 +22,6 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_STANDARD_SIZE) {
-            throw new IllegalArgumentException(INVALID_SIZE);
-        }
-    }
-
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
@@ -36,6 +30,16 @@ public class LottoNumbers {
         return Math.toIntExact(winNumbers.stream()
                 .filter(number -> numbers.contains(new LottoNumber(number)))
                 .count());
+    }
+
+    public boolean hasBonus(int bonusNumber) {
+        return numbers.contains(new LottoNumber(bonusNumber));
+    }
+
+    private void validateSize(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_STANDARD_SIZE) {
+            throw new IllegalArgumentException(INVALID_SIZE);
+        }
     }
 
     private List<LottoNumber> mapLottoNumber(List<Integer> numbers) {
@@ -63,9 +67,5 @@ public class LottoNumbers {
         return "LottoNumbers{" +
                 "numbers=" + numbers +
                 '}';
-    }
-
-    public boolean hasBonus(int bonusNumber) {
-        return numbers.contains(new LottoNumber(bonusNumber));
     }
 }
