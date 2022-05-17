@@ -25,13 +25,13 @@ public class Lottos {
         }
     }
 
-    public Map<Rank, Integer> rankCount(LottoNumbers winningNumbers) {
+    public RankCount rankCount(LottoNumbers winningNumbers) {
         Map<Rank, Integer> rankCount = new LinkedHashMap<>();
         lottos.forEach(lottoNumbers -> {
             int matchCount = lottoNumbers.matchCount(winningNumbers);
             Rank rank = Rank.getRank(matchCount);
             rankCount.put(rank, rankCount.getOrDefault(rank, 0) + 1);
         });
-        return rankCount;
+        return RankCount.from(rankCount);
     }
 }
