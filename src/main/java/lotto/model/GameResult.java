@@ -9,25 +9,27 @@ import java.util.Map;
 public class GameResult {
     private final List<Rank> gameResult = new ArrayList<>();
 
-    public void calculateRank(Lotto winnersLotto, Lotto userLotto) {
-        long matchCount = winnersLotto.getNumbers().stream()
-                .filter(lottoNumber -> userLotto.getNumbers().contains(lottoNumber))
+    public void calculateRank(WinningLotto winningLotto, Lotto userLotto) {
+        int countOfMatch = (int) userLotto.getNumbers().stream()
+                .filter(winningLotto::contains)
                 .count();
 
-        gameResult.add(Rank.getRank(matchCount));
+        boolean matchBonus = winningLotto.containsBonusNumber(userLotto);
+
+        gameResult.add(Rank.getRank(countOfMatch, matchBonus));
     }
 
-    public Map<Rank, Long> gameResult() {
-        Map<Rank, Long> mappedByRank = new LinkedHashMap<>();
+    public Map<Rank, Integer> gameResult() {
+        Map<Rank, Integer> mappedByRank = new LinkedHashMap<>();
         for (Rank value : Rank.values()) {
-            mappedByRank.put(value, gameResult.stream().filter(result -> result == value).count());
+            mappedByRank.put(value, (int) gameResult.stream().filter(result -> result == value).count());
         }
 
-        mappedByRank.remove(Rank.NONE);
+        mappedByRank.remove(Rank.MISS);
         return Collections.unmodifiableMap(mappedByRank);
     }
 
     public double benefitResult(double deposit) {
-        return gameResult.stream().mapToLong(Rank::getPrice).sum() / deposit;
+        return gameResult.stream().mapToInt(Rank::getWinningMoney).sum() / deposit;
     }
 }

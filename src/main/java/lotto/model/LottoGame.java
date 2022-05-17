@@ -7,6 +7,7 @@ import java.util.Map;
 public class LottoGame {
     private final List<Lotto> userLotto = new ArrayList<>();
     private Lotto winnersLotto;
+    private WinningLotto winningLotto;
     private Coin coin;
     private final GameResult gameResult = new GameResult();
     private static final double BENEFIT_REFERENCE_VALUE = 1;
@@ -44,9 +45,20 @@ public class LottoGame {
         return true;
     }
 
-    public Map<Rank, Long> gameResult() {
+    public boolean bonusNumber(String number) {
+        try {
+            final Number bonusNumber = new Number(number);
+            winningLotto = new WinningLotto(winnersLotto, bonusNumber);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public Map<Rank, Integer> gameResult() {
         for (Lotto lotto : userLotto) {
-            gameResult.calculateRank(winnersLotto, lotto);
+            gameResult.calculateRank(winningLotto, lotto);
         }
         return gameResult.gameResult();
     }
@@ -59,7 +71,7 @@ public class LottoGame {
         return BENEFIT_REFERENCE_VALUE;
     }
 
-    public List<Lotto> getUserLottery() {
+    public List<Lotto> getUserLotto() {
         return userLotto;
     }
 }
