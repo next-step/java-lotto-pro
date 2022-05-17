@@ -1,3 +1,5 @@
+package stringaddcalc;
+
 public class MakeArraySum {
 
     public static int getSum(String[] numbers) {

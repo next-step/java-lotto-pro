@@ -1,3 +1,6 @@
+package stringaddcalc;
+
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,22 +15,20 @@ public class NumberValidator {
         this.text = text;
     }
 
-    public int getNumber() {
+    public int checkNumberValidate() {
         int sum = 0;
         if (checkNull() == true) {
             return sum;
         }
         String[] numbers = checkRegex();
-        for (int i = 0; i < numbers.length; i++) {
-            checkNegative(numbers[i]);
-        }
+        Arrays.stream(numbers).forEach(number -> checkNegative(number));
         sum = MakeArraySum.getSum(numbers);
         return sum;
     }
 
     private void checkNegative(String s) {
         if (s.contains("-")) {
-            throw new RuntimeException("0이상의 숫자만 입력할 수 있습니다. (음수 입력 불가)");
+            throw new IndexOutOfBoundsException("0이상의 숫자만 입력할 수 있습니다. (음수 입력 불가)");
         }
     }
 
@@ -46,9 +47,6 @@ public class NumberValidator {
     }
 
     private boolean checkNull() {
-        if (text == null || text.equals("")) {
-            return true;
-        }
-        return false;
+        return text == null || text.equals("");
     }
 }
