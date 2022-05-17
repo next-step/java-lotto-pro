@@ -7,13 +7,11 @@ import java.util.Objects;
 public class Money {
 
     private static final BigDecimal MIN_VALUE = BigDecimal.ZERO;
-    private static final String DEFAULT_UNIT = "원";
+
     private final BigDecimal value;
-    private final String unit;
 
     private Money(BigDecimal value) {
         this.value = value;
-        this.unit = DEFAULT_UNIT;
         validate();
     }
 
@@ -52,16 +50,16 @@ public class Money {
             return false;
         }
         Money that = (Money) o;
-        return value.equals(that.value) && Objects.equals(unit, that.unit);
+        return value.equals(that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, unit);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
-        return String.format("%d", value.intValue()) + unit;
+        return String.format("%d", value.intValue());
     }
 }
