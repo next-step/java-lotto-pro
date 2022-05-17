@@ -1,27 +1,45 @@
 package lotto.utils;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoStatistic;
 import lotto.domain.TotalLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
 
 public class LottoGame {
     public void start() throws IOException {
-        int amount = new InputView().printRequestAmount();
-        Validation.isValidCount(amount);
         TotalLotto totalLotto = new TotalLotto();
-        totalLotto.countAndLottos(amount);
-        OutputView.printQuantity(totalLotto.getCount());
-        totalLotto.getLottoList().printLottoList();
-        winningLotto(totalLotto);
+        int amount = inputAmount();
+        totalLotto.of(amount);
+        OutputView.printQuantity(totalLotto);
+        Map<LottoStatistic, Integer> map = winningLotto(totalLotto);
+        OutputView.printLottoStatistic(map);
+        double profit = calculatorProfit(map, amount);
+        OutputView.printProfit(profit);
     }
 
-    private void winningLotto(TotalLotto totalLotto) throws IOException {
-        String winningLotto = new InputView().printRequestWinningLotto();
-        totalLotto.winningLotto(winningLotto);
-        LottoStatistic lottoStatistic = totalLotto.calculatorLottoStatic();
-        OutputView.printLottoStatistic(lottoStatistic);
+    private int inputAmount() {
+        int amount = new InputView().printRequestAmount();
+        Validation.isValidCount(amount);
+        return amount;
+    }
+
+    private Map<LottoStatistic, Integer> winningLotto(TotalLotto totalLotto) throws IOException {
+        String inputWinning = new InputView().printRequestWinningLotto();
+        Lotto winningLotto = new Lotto(inputWinning);
+        Map<LottoStatistic, Integer> map = totalLotto.getLottoList().matchLottoStaticToString(winningLotto);
+        return map;
+    }
+
+    private double calculatorProfit(Map<LottoStatistic, Integer> map, int amount) {
+        double result = 0;
+        for (LottoStatistic lottoStatistic : map.keySet()) {
+            result += lottoStatistic.calculatorProfit(map.get(lottoStatistic));
+        }
+        return result/amount;
     }
 }

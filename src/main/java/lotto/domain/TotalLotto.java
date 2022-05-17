@@ -26,18 +26,26 @@ public class TotalLotto {
         this.count = isCalculatorCount(amount);
     }
 
+    public Lottos getLottoList() {
+        return this.lottoList;
+    }
+
+    public void of(int amount) {
+        this.count = isCalculatorCount(amount);
+        Lottos lottos = new Lottos();
+        lottos.autoGenerator(this.count);
+        this.lottoList = lottos;
+    }
+
     private int isCalculatorCount(int amount) {
-        if (amount < 0) {
-            OutputView.printErrorMessage();
-            throw new IllegalArgumentException();
-        }
-
-        if (amount % LOTTO_PRICE > 0) {
-            OutputView.printErrorMessage();
-            throw new IllegalArgumentException();
-        }
-
         return amount/LOTTO_PRICE;
+    }
+
+    public String lottoListToString() {
+        StringBuilder sb = new StringBuilder();
+        this.lottoList.getLottoList().stream()
+                .forEach(lotto -> sb.append(lotto.toString() + "\n"));
+        return sb.toString();
     }
 
     @Override

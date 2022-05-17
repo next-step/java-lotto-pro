@@ -31,4 +31,13 @@ public enum LottoStatistic {
                 .findFirst()
                 .orElse(LottoStatistic.NOTHING);
     }
+
+    public double calculatorProfit(int n) {
+        return this.winningAmount * n;
+    }
+
+    public String toString(Integer n) {
+        if (n == null) n = 0;
+        return this.matchCount + "개 일치 (" + this.winningAmount + ")- " + n +"개";
+    }
 }

@@ -15,11 +15,14 @@ public class InputView {
             return SCANNER.nextInt();
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INPUT_ERROR);
+        } finally {
+            SCANNER.nextLine();
         }
     }
 
     public String printRequestWinningLotto() {
-        System.out.println("\n" + WINNING_LOTTO);
-        return SCANNER.next();
+        System.out.println(WINNING_LOTTO);
+        String input = SCANNER.nextLine();
+        return input;
     }
 }

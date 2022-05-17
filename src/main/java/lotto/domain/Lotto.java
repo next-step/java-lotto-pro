@@ -13,13 +13,15 @@ public class Lotto {
     private static final List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
+    private static final int LOTTO_NUMBERS_COUNT = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto() {
         Collections.shuffle(LOTTO_NUMBERS);
         this.lottoNumbers = LOTTO_NUMBERS.stream()
-                .limit(6)
+                .limit(LOTTO_NUMBERS_COUNT)
+                .sorted()
                 .collect(Collectors.toList());
     }
 
@@ -57,5 +59,10 @@ public class Lotto {
             OutputView.printErrorMessage();
             throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }
