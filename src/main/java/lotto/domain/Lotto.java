@@ -21,7 +21,7 @@ public class Lotto {
         return LOTTO_PRICE;
     }
 
-    public MatchResult match(List<LottoNumber> prizeNumbers) {
+    public MatchResult match(Set<LottoNumber> prizeNumbers) {
         int matchCount = 0;
         for (LottoNumber prizeNumber : prizeNumbers) {
             if (lottoNumbers.contains(prizeNumber)) {

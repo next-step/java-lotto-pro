@@ -5,22 +5,22 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoTest {
-    private List<LottoNumber> prizeNumbers;
-    private Money DEFAULT_PRICE;
+    private Set<LottoNumber> prizeNumbers;
     private int NUMBER_COUNT;
 
     @BeforeEach
     void setUp() {
         NUMBER_COUNT = 6;
-        DEFAULT_PRICE = Money.from(1000);
-        prizeNumbers = new ArrayList<>();
+        prizeNumbers = new HashSet<>();
         prizeNumbers.add(LottoNumber.from(1));
         prizeNumbers.add(LottoNumber.from(2));
         prizeNumbers.add(LottoNumber.from(3));
