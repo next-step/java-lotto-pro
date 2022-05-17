@@ -22,16 +22,16 @@ public class LottoGenerator {
         }
     }
 
-    private static String[] toArray(String source) {
-        return source.replaceAll(" ", "").split(DELIMITER);
-    }
-
     public static int generateNumber(String source) {
         try {
             return Integer.parseInt(source);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_NUMBER);
         }
+    }
+
+    private static String[] toArray(String source) {
+        return source.replaceAll(" ", "").split(DELIMITER);
     }
 
     private static void validateSize(String[] numbers) {
