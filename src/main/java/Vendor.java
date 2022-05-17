@@ -18,7 +18,7 @@ public class Vendor {
     public Lotto buy(long money) {
         final long maxCount = money / LOTTO_PRICE;
         if (maxCount < 1)
-            throw new RuntimeException("이 돈으로는 로또를 구매할 수 없습니다.");
+            throw new IllegalArgumentException("이 돈으로는 로또를 구매할 수 없습니다.");
 
         Lotto lotto = new Lotto();
         for (int count = 1; count <= maxCount; count++) {
