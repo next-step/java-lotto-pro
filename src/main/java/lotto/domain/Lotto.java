@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -12,13 +10,18 @@ public class Lotto {
     public static final String LOTTO_NUMBER_MUST_SIX = "로또 번호는 6개여야 합니다.";
 
     private final List<LottoNumber> lotto = new ArrayList<>();
+    private final Set<LottoNumber> lottos = new HashSet<>();
 
     protected Lotto(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_MUST_SIX);
-        }
         for (Integer number : lottoNumbers) {
-            lotto.add(new LottoNumber(number));
+            lottos.add(new LottoNumber(number));
+        }
+        validateSize();
+    }
+
+    private void validateSize() {
+        if (lottos.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_MUST_SIX);
         }
     }
 
