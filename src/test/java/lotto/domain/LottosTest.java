@@ -58,20 +58,6 @@ class LottosTest {
         LottosResults results = lottos.matchWithReference(referenceLotto);
 
         assertThat(results.getRankCount(LottoRank.FIRST)) .isEqualTo(1);
-
-
-        Lotto thirdLotto_1 = new Lotto(
-                Stream.of(1, 5, 10, 12, 20, 33).map(LottoNumber::new).collect(Collectors.toList()));
-        Lotto thirdLotto_2 = new Lotto(
-                Stream.of(1, 5, 2, 12, 20, 40).map(LottoNumber::new).collect(Collectors.toList()));
-
-        Lotto fourthLotto = new Lotto(
-                Stream.of(1, 5, 3, 12, 20, 29).map(LottoNumber::new).collect(Collectors.toList()));
-
-        Lotto fifthLo = new Lotto(
-                Stream.of(1, 5, 3, 12, 20, 29).map(LottoNumber::new).collect(Collectors.toList()));
-
-
     }
 
     @DisplayName("3등 로또 결과가 정상적으로 도출되는지 확인")
