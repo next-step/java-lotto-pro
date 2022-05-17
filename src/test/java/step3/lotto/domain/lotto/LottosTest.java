@@ -3,6 +3,7 @@ package step3.lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static step3.lotto.view.ResultView.printWinningStatistics;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
