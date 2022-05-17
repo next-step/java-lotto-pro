@@ -29,6 +29,19 @@ public class Lottos {
         return statistic;
     }
 
+    public WinningStatistic checkWinnings(WinningLotto winning) {
+        WinningStatistic statistic = new WinningStatistic();
+
+        for (Lotto lotto : lottos) {
+            int matchCount = lotto.match(winning);
+            Rank rank = Rank.of(matchCount);
+
+            boolean bonus = winning.matchBonus(lotto);
+            statistic.collect(rank.convertSecondPrize(bonus));
+        }
+        return statistic;
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }
