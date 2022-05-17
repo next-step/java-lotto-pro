@@ -3,6 +3,8 @@ package lotto.model;
 import lotto.enums.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.*;
 
@@ -25,9 +27,10 @@ class LottosTest {
                 .isInstanceOf(List.class);
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"LOSE:2", "FOURTH:1", "THIRD:1", "SECOND:2", "FIRST:1"}, delimiter = ':')
     @DisplayName("당첨번호와 비교하여 등수별로 카운트 한다.")
-    void rankCount_등수별_카운트() {
+    void rankCount_등수별_카운트(Rank rank, int expected) {
         List<LottoNumbers> lottoNumbersList = Arrays.asList(
                 new LottoNumbers(Arrays.asList(2, 4, 20, 27, 43, 45)),  // LOSE
                 new LottoNumbers(Arrays.asList(1, 3, 5, 27, 40, 45)),   // LOSE
@@ -41,11 +44,10 @@ class LottosTest {
 
         LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 5, 18, 25, 37, 42));
 
-        assertThat(lottos.rankCount(winningNumbers))
-                .isInstanceOf(Map.class)
-                .isExactlyInstanceOf(LinkedHashMap.class)
-                .containsKeys(Rank.values())
-                .extractingByKeys(Rank.values())
-                .containsExactly(1, 2, 1, 1, 2);
+        RankCount rankCount = lottos.rankCount(winningNumbers);
+        assertThat(rankCount)
+                .isExactlyInstanceOf(RankCount.class);
+        assertThat(rankCount.getCount(rank))
+                .isEqualTo(expected);
     }
 }
