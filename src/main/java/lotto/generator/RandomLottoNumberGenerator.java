@@ -9,11 +9,11 @@ import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 
 public class RandomLottoNumberGenerator implements LottoNumberGenerator {
-    private static final List<LottoNumber> lottoNumbers = initLottoNumbers();
+    private static final List<LottoNumber> LOTTO_NUMBERS = initLottoNumbers();
 
     private static List<LottoNumber> initLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = LottoNumber.LOTTO_MIN_NUMBER; i <= LottoNumber.LOTTO_MAX_NUMBER; i++) {
+        for (int i = LottoNumber.MIN; i <= LottoNumber.MAX; i++) {
             lottoNumbers.add(LottoNumber.valueOf(i));
         }
         return lottoNumbers;
@@ -21,15 +21,10 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
 
     @Override
     public Set<LottoNumber> generate() {
-        Collections.shuffle(lottoNumbers);
-        List<LottoNumber> shuffledLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < Lotto.SIZE; i++) {
-            shuffledLottoNumbers.add(RandomLottoNumberGenerator.lottoNumbers.get(i));
-        }
-        Collections.sort(shuffledLottoNumbers);
+        Collections.shuffle(LOTTO_NUMBERS);
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int i = 0; i < Lotto.SIZE; i++) {
-            lottoNumbers.add(shuffledLottoNumbers.get(i));
+            lottoNumbers.add(LOTTO_NUMBERS.get(i));
         }
         return lottoNumbers;
     }
