@@ -8,6 +8,10 @@ public class LottoTicket {
 
     private final int MAX_COUNT = 6;
 
+    private final int NUMBER_RANGE_FROM = 1;
+
+    private final int NUMBER_RANGE_TO = 45;
+
     private ArrayList<Integer> numbers;
 
     public LottoTicket() {
@@ -45,7 +49,7 @@ public class LottoTicket {
 
     private List<Integer> generateLottoNumberPool() {
         List<Integer> numberPool = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = NUMBER_RANGE_FROM; i <= NUMBER_RANGE_TO; i++) {
             numberPool.add(i);
         }
         return numberPool;
@@ -63,7 +67,7 @@ public class LottoTicket {
     }
 
     private void validateLottoNumber(int oneNumber) {
-        if (oneNumber < 1 || oneNumber > 45) {
+        if (oneNumber < NUMBER_RANGE_FROM || oneNumber > NUMBER_RANGE_TO) {
             throw new IllegalArgumentException("Lotto number should be from 1 to 45.");
         }
 
