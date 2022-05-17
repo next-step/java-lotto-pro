@@ -16,17 +16,17 @@ public class LottoMachine {
             .boxed()
             .collect(Collectors.toList());
 
-    public List<LottoTicket> buyLottoTicket(Money money) {
+    public LottoTickets buyLottoTicket(Money money) {
         return createLottoTickets(money.findPurchaseTicketQuantity());
     }
 
-    private List<LottoTicket> createLottoTickets(int ticketQuantity) {
+    private LottoTickets createLottoTickets(int ticketQuantity) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < ticketQuantity; i++) {
             LottoNumbers lottoNumbers = new LottoNumbers(generateLottoNumbers());
             lottoTickets.add(new LottoTicket(lottoNumbers));
         }
-        return lottoTickets;
+        return new LottoTickets(lottoTickets);
     }
 
     private List<LottoNumber> generateLottoNumbers() {

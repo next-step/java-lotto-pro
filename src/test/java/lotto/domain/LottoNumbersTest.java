@@ -1,13 +1,35 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumbersTest {
+    LottoNumbers lottoNumbers, winningNumbers;
+
+    @BeforeEach
+    void init() {
+        List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
+        numberList.forEach(number -> lottoNumberList.add(new LottoNumber(number)));
+        lottoNumbers = new LottoNumbers(lottoNumberList);
+
+        List<Integer> winningNumberList = Arrays.asList(6, 5, 4, 3, 2, 1);
+        List<LottoNumber> winningLottoNumberList = new ArrayList<>();
+        winningNumberList.forEach(number -> winningLottoNumberList.add(new LottoNumber(number)));
+        winningNumbers = new LottoNumbers(winningLottoNumberList);
+    }
+
     @ParameterizedTest
     @NullAndEmptySource
     @DisplayName("당첨 로또 번호 null 이거나 비어있을 경우 Exception 발생 확인")
@@ -42,5 +64,17 @@ public class LottoNumbersTest {
         assertThatThrownBy(() -> {
             new LottoNumbers(input);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("구매한 로또 번호와 당첨 번호의 매칭 개수 확인")
+    void matchCount() {
+        assertThat(lottoNumbers.matchCount(winningNumbers)).isEqualTo(6);
+    }
+
+    @DisplayName("당첨 순위 확인")
+    @Test
+    void rank() {
+        assertThat(lottoNumbers.rank(winningNumbers)).isEqualTo(LottoRank.FIRST);
     }
 }

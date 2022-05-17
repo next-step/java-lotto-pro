@@ -23,6 +23,20 @@ public class LottoNumbers {
         this.lottoNumbers = mapLottoNumbers(lottoNumberList);
     }
 
+    public LottoRank rank(LottoNumbers winningNumbers) {
+        return LottoRank.rank(matchCount(winningNumbers));
+    }
+
+    public int matchCount(LottoNumbers winningNumbers) {
+        return (int) this.lottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     private List<LottoNumber> mapLottoNumbers(List<String> lottoNumberList) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String number : lottoNumberList) {

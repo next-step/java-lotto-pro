@@ -15,7 +15,7 @@ public class LottoMachineTest {
     void size(int purchaseMoney, int expected) {
         Money money = new Money(purchaseMoney);
         LottoMachine lottoMachine = new LottoMachine();
-        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTicket(money);
+        LottoTickets lottoTickets = lottoMachine.buyLottoTicket(money);
         assertThat(lottoTickets.size()).isEqualTo(expected);
     }
 }
