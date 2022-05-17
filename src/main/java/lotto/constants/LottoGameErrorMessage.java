@@ -1,6 +1,8 @@
 package lotto.constants;
 
 public class LottoGameErrorMessage {
+    private LottoGameErrorMessage() {}
+
     public static final String INVALID_LOTTO_NUMBER_RANGE = "[ERROR] 로또 숫자는 1부터 45 사이의 값이어야 합니다.";
     public static final String INVALID_LOTTO_NUMBER_NOT_UNIQUE = "[ERROR] 로또 숫자는 중복될 수 없습니다.";
     public static final String INVALID_LOTTO_NUMBERS_SIZE = "[ERROR] 로또 숫자는 6개로 이루어져야 합니다.";

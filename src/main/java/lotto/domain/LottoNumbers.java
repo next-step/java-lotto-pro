@@ -33,10 +33,8 @@ public class LottoNumbers {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
 
-    public static List<Integer> getLottoNumbersFromInput() {
-        String lottoNumbers = InputView.inputLatestLottoResult();
-
-        return LottoNumbersGenerator.generate(lottoNumbers);
+    public static List<Integer> getLottoNumbersFromInput(String receivedLottoNumbers) {
+        return LottoNumbersGenerator.generate(receivedLottoNumbers);
     }
 
     private static List<LottoNumber> parseIntegerToLottoNumber(List<Integer> generateNumbers) {

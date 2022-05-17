@@ -1,6 +1,8 @@
 package lotto.constants;
 
 public class LottoGameMessage {
+    private LottoGameMessage() {}
+
     public static final String WAIT_FOR_USER_MONEY_INPUT = "구입금액을 입력해 주세요.";
     public static final String PURCHASED_LOTTO_COUNT_INFORMATION = "%s개를 구매했습니다.";
     public static final String WAIT_FOR_LATEST_LOTTO_RESULT_INPUT = "지난 주 당첨 번호를 입력해 주세요.";
