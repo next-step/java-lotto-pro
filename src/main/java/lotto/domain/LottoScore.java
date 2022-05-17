@@ -7,41 +7,42 @@ import java.util.Map;
 public class LottoScore {
 
     private static final Integer ZERO = 0;
-    private Map<LottoWinnings, Integer> lottoScoreMap;
+    private Map<Rank, Integer> rankMap;
 
     public LottoScore() {
-        lottoScoreMap = defaultLottoScoreMap();
+        rankMap = initRankMap();
     }
 
-    private Map<LottoWinnings, Integer> defaultLottoScoreMap() {
-        this.lottoScoreMap = new HashMap<>();
+    private Map<Rank, Integer> initRankMap() {
+        this.rankMap = new HashMap<>();
 
-        for (LottoWinnings lottoWinnings : LottoWinnings.scoreTypes()) {
-            lottoScoreMap.put(lottoWinnings, ZERO);
+        for (Rank rank : Rank.values()) {
+            rankMap.put(rank, ZERO);
         }
 
-        return lottoScoreMap;
+        rankMap.remove(Rank.MISS);
+        return rankMap;
     }
 
-    public Map<LottoWinnings, Integer> getLottoScoreMap() {
-        return Collections.unmodifiableMap(lottoScoreMap);
+    public Map<Rank, Integer> getRankMap() {
+        return Collections.unmodifiableMap(rankMap);
     }
 
-    public void addScore(LottoWinnings lottoWinnings) {
-        if (lottoScoreMap.get(lottoWinnings) != null) {
-            int count = lottoScoreMap.get(lottoWinnings);
-            lottoScoreMap.put(lottoWinnings, ++count);
+    public void addScore(Rank rank) {
+        if (rankMap.get(rank) != null) {
+            int count = rankMap.get(rank);
+            rankMap.put(rank, ++count);
             return;
         }
 
-        lottoScoreMap.put(lottoWinnings, 1);
+        rankMap.put(rank, 1);
     }
 
     public Winnings getWinnings() {
         int winnings = 0;
 
-        for (Map.Entry<LottoWinnings, Integer> elem : lottoScoreMap.entrySet()) {
-            winnings += elem.getKey().getWinnings() * elem.getValue();
+        for (Map.Entry<Rank, Integer> elem : rankMap.entrySet()) {
+            winnings += elem.getKey().getWinningsMoney() * elem.getValue();
         }
 
         return new Winnings(winnings);

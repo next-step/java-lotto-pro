@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.List;
+import lotto.domain.calculator.RankCalculationFactory;
+import lotto.domain.calculator.RankCalculator;
 
 public class Lottos {
 
@@ -18,17 +20,12 @@ public class Lottos {
         LottoScore lottoScore = new LottoScore();
 
         lottos.forEach(lotto -> {
-            int winningNumberCount = lotto.getWinningOfNumbersCount(winningNumbers.getWinningNumbers());
-            addLottoScore(lottoScore, winningNumberCount);
+            int countOfMatch = lotto.getWinningOfNumbersCount(winningNumbers);
+            RankCalculator rankCalculator = RankCalculationFactory.getRankCalculator(lotto, winningNumbers);
+            Rank rank = Rank.valueOf(countOfMatch, rankCalculator);
+            lottoScore.addScore(rank);
         });
 
         return lottoScore;
-    }
-
-    private void addLottoScore(LottoScore lottoScore, int winningNumberCount) {
-        LottoWinnings lottoWinnings = LottoWinnings.getWinningsByCount(winningNumberCount);
-        if (!lottoWinnings.isNone()) {
-            lottoScore.addScore(lottoWinnings);
-        }
     }
 }
