@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WinningTest {
+class SummaryTest {
     @Test
     void 로또_수익_금액() {
         Result result1 = new Result(3, 1, 5000);
@@ -19,8 +19,8 @@ class WinningTest {
         results.add(result2);
         results.add(result3);
         results.add(result4);
-        Winning winning = new Winning(results);
-        assertThat(winning.sum()).isEqualTo(2004605000);
-        assertThat(new Winning(new LinkedList<>()).sum()).isEqualTo(0);
+        Summary summary = new Summary(results);
+        assertThat(summary.sum()).isEqualTo(2004605000);
+        assertThat(new Summary(new LinkedList<>()).sum()).isEqualTo(0);
     }
 }
