@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step3.enums.LottoReward;
 
 public class LottoManagerTest {
 
@@ -30,8 +31,14 @@ public class LottoManagerTest {
     @DisplayName("각 로또별 매칭 갯수를 HashMap으로 반환한다")
     public void testCheckWin() {
         LottoManager testLottoManager = initTestManager();
-        assertThat(testLottoManager.checkWin(new LottoTicket("1,2,3,4,5,6"))).containsEntry("ZERO", 0).containsEntry("ONE", 0).containsEntry("TWO", 1)
-            .containsEntry("THREE", 2).containsEntry("FOUR", 1).containsEntry("FIVE", 0).containsEntry("SIX", 2);
+        LottoElement bonusNumber = new LottoElement(7);
+        assertThat(testLottoManager.checkWin(new LottoTicket("1,2,3,4,5,6"), bonusNumber))
+            .containsEntry(LottoReward.MISS, 0)
+            .containsEntry(LottoReward.THREE, 1)
+            .containsEntry(LottoReward.FOUR, 2)
+            .containsEntry(LottoReward.FIVE, 0)
+            .containsEntry(LottoReward.FIVE_BONUS, 1)
+            .containsEntry(LottoReward.SIX, 2);
     }
 
 

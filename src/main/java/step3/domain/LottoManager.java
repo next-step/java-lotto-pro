@@ -1,9 +1,9 @@
 package step3.domain;
 
 import static java.util.Collections.shuffle;
-import static step3.enums.LottoReward.numberToLottoReward;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -49,20 +49,21 @@ public class LottoManager {
         return new LottoTicket(manualLottoSource);
     }
 
-    public HashMap<String, Integer> checkWin(LottoTicket winLotto) {
-        LinkedHashMap<String, Integer> statistics = new LinkedHashMap<>();
+    public HashMap<LottoReward, Integer> checkWin(LottoTicket winLotto, LottoElement bonusNumber) {
+        LinkedHashMap<LottoReward, Integer> statistics = new LinkedHashMap<>();
         initStatistics(statistics);
         for (LottoTicket lottoTicket : lottoTickets) {
-            int matchNumber =lottoTicket.getMatchCountWithWinnerTicket(winLotto.getLottoNumbers());
-            String matchNumberToString = numberToLottoReward.get(matchNumber);
-            statistics.replace(matchNumberToString, statistics.get(matchNumberToString) + 1);
+            int matchNumber = lottoTicket.getMatchCountWith(winLotto.getLottoNumbers());
+            int matchBonus = lottoTicket.getMatchCountWith(Arrays.asList(bonusNumber));
+            LottoReward lottoReward = LottoReward.valueOf(matchNumber + matchBonus, matchBonus == 1);
+            statistics.replace(lottoReward, statistics.get(lottoReward) + 1);
         }
         return statistics;
     }
 
-    private void initStatistics(LinkedHashMap<String, Integer> statistics) {
+    private void initStatistics(LinkedHashMap<LottoReward, Integer> statistics) {
         for (LottoReward lottoReward : LottoReward.values()) {
-            statistics.put(lottoReward.name(), MATCH_COUNT_BASE);
+            statistics.put(lottoReward, MATCH_COUNT_BASE);
         }
     }
 

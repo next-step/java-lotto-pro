@@ -39,7 +39,7 @@ public class LottoTicket {
         }
     }
 
-    public int getMatchCountWithWinnerTicket(List<LottoElement> winnerLottoElements) {
+    public int getMatchCountWith(List<LottoElement> winnerLottoElements) {
         int matchCount = 0;
         for (LottoElement winnerLottoElement : winnerLottoElements) {
             matchCount = matchCount + isMatch(winnerLottoElement);
@@ -47,9 +47,6 @@ public class LottoTicket {
         return matchCount;
     }
 
-    public boolean checkMatchBonus(LottoElement bonusNumber){
-        return lottoElements.contains(bonusNumber);
-    }
     private int isMatch(LottoElement lottoElement) {
         if (lottoElements.contains(lottoElement)) {
             return 1;

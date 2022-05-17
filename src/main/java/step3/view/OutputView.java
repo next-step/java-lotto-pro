@@ -22,7 +22,7 @@ public class OutputView {
     public OutputView() {
     }
 
-    public void printOutput(HashMap<String, Integer> statistics, Money money) {
+    public void printOutput(HashMap<LottoReward, Integer> statistics, Money money) {
         System.out.println(OVERVIEW_INIT_MESSAGE);
         long reward = printOverview(statistics);
         printRewardRate(reward, money);
@@ -44,10 +44,10 @@ public class OutputView {
         return reward * 1.0 / money.getMoney();
     }
 
-    private long printOverview(HashMap<String, Integer> statistics) {
+    private long printOverview(HashMap<LottoReward, Integer> statistics) {
         long reward = 0;
-        for (Entry<String, Integer> lottoMatchEntry : statistics.entrySet()) {
-            reward += printOverViewPerEntry(LottoReward.valueOf(lottoMatchEntry.getKey()), lottoMatchEntry.getValue());
+        for (Entry<LottoReward, Integer> lottoMatchEntry : statistics.entrySet()) {
+            reward += printOverViewPerEntry(lottoMatchEntry.getKey(), lottoMatchEntry.getValue());
         }
         return reward;
     }

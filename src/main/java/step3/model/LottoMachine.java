@@ -7,6 +7,7 @@ import step3.domain.LottoManager;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
 import step3.domain.Ticket;
+import step3.enums.LottoReward;
 
 public class LottoMachine {
 
@@ -20,8 +21,8 @@ public class LottoMachine {
     }
 
 
-    public HashMap<String, Integer> checkWin(LottoTicket winnerLotto) {
-        return lottoManager.checkWin(winnerLotto);
+    public HashMap<LottoReward, Integer> checkWin(LottoTicket winnerLotto,LottoElement bonusNumber) {
+        return lottoManager.checkWin(winnerLotto,bonusNumber);
     }
 
     public LottoTicket makeManualLottoTicket(String manualLottoSource) {
