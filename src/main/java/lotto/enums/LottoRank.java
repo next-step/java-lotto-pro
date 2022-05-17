@@ -44,6 +44,10 @@ public enum LottoRank {
                 .orElse(LOSE);
     }
 
+    public boolean bonusBallMatched() {
+        return this == SECOND;
+    }
+
     public static List<LottoRank> rankListWithReverseOrder() {
         return Collections.unmodifiableList(Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST));
     }
