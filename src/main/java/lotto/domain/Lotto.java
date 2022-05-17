@@ -9,18 +9,17 @@ public class Lotto {
     public static final String COMMA = ",";
     public static final String LOTTO_NUMBER_MUST_SIX = "로또 번호는 6개여야 합니다.";
 
-    private final List<LottoNumber> lotto = new ArrayList<>();
-    private final Set<LottoNumber> lottos = new HashSet<>();
+    private final Set<LottoNumber> lotto = new HashSet<>();
 
     protected Lotto(List<Integer> lottoNumbers) {
         for (Integer number : lottoNumbers) {
-            lottos.add(new LottoNumber(number));
+            lotto.add(new LottoNumber(number));
         }
         validateSize();
     }
 
     private void validateSize() {
-        if (lottos.size() != LOTTO_NUMBER_SIZE) {
+        if (lotto.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBER_MUST_SIX);
         }
     }
@@ -41,16 +40,16 @@ public class Lotto {
     }
 
     public int match(Lotto winningLotto) {
-        return (int) this.lottos.stream()
+        return (int) this.lotto.stream()
                 .filter(winningLotto::match)
                 .count();
     }
 
     protected boolean match(LottoNumber lottoNumber) {
-        return lottos.contains(lottoNumber);
+        return lotto.contains(lottoNumber);
     }
 
     public List<LottoNumber> getLotto() {
-        return lotto;
+        return new ArrayList<>(lotto);
     }
 }
