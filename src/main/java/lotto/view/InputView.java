@@ -28,7 +28,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<List<Integer>> inputManualLottos() {
+    public static List<List<Integer>> inputManualLottoNumbers() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int count = validatetManualLottoCount(scanner.nextLine());
 
