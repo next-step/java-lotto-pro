@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money {
+
+    private static final BigDecimal MIN_VALUE = BigDecimal.ZERO;
     private static final String DEFAULT_UNIT = "원";
     private final BigDecimal value;
     private final String unit;
@@ -36,7 +38,7 @@ public class Money {
     }
 
     private void validate() {
-        if (this.value.compareTo(BigDecimal.ZERO) == -1) {
+        if (this.value.compareTo(MIN_VALUE) == -1) {
             throw new IllegalArgumentException("돈은 음수 일 수 없습니다.");
         }
     }
