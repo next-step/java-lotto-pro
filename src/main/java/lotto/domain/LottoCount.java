@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static lotto.common.ErrorMessage.EXCEED_MONEY_ERROR;
+import static lotto.common.ErrorMessage.NULL_OR_EMPTY_ERROR;
 import static lotto.common.ErrorMessage.NUMBER_FORMAT_ERROR;
 
 import java.util.Objects;
@@ -15,10 +16,21 @@ public class LottoCount {
     }
 
     public static LottoCount createValidLottoCount(String value, Money money) {
+        validateNullOrEmpty(value);
         validateFormat(value);
         int parsedCount = Integer.parseInt(value);
         validateExceedMoney(money, parsedCount);
         return new LottoCount(parsedCount);
+    }
+
+    public static LottoCount from(int count) {
+        return new LottoCount(count);
+    }
+
+    private static void validateNullOrEmpty(String value) {
+        if (value == null || value.isEmpty()) {
+            throw new IllegalArgumentException(NULL_OR_EMPTY_ERROR.getErrorMessage());
+        }
     }
 
     private static void validateExceedMoney(Money money, int parsedCount) {
@@ -31,10 +43,6 @@ public class LottoCount {
         if (!value.matches(NUMBER_FORMAT_REGEX)) {
             throw new IllegalArgumentException(NUMBER_FORMAT_ERROR.getErrorMessage());
         }
-    }
-
-    public static LottoCount from(int count) {
-        return new LottoCount(count);
     }
 
     public int calculateAutoLottoCount(Money money) {
