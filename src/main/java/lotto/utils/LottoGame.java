@@ -8,7 +8,6 @@ import lotto.view.OutputView;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 
 public class LottoGame {
     public void start() throws IOException {
@@ -37,8 +36,8 @@ public class LottoGame {
 
     private double calculatorProfit(Map<LottoStatistic, Integer> map, int amount) {
         double result = 0;
-        for (LottoStatistic lottoStatistic : map.keySet()) {
-            result += lottoStatistic.calculatorProfit(map.get(lottoStatistic));
+        for (Map.Entry<LottoStatistic, Integer> lottoStatistic : map.entrySet()) {
+            result += lottoStatistic.getKey().calculatorProfit(lottoStatistic.getValue());
         }
         return result/amount;
     }
