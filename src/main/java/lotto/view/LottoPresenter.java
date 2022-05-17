@@ -9,7 +9,6 @@ import static lotto.domain.message.RequestMessage.WINNING_NUMBERS;
 import java.util.Map;
 import java.util.Scanner;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoNumbersFactory;
 import lotto.domain.LottoPayment;
 import lotto.domain.LottoPaymentFactory;
 import lotto.domain.LottoTickets;
@@ -21,14 +20,11 @@ public class LottoPresenter {
     private static final int[] PRINTABLE_MATCH_COUNTS = {3, 4, 5, 6};
 
     private final LottoPaymentFactory lottoPaymentFactory;
-    private final LottoNumbersFactory lottoNumbersFactory;
     private final LottoTicketsFactory lottoTicketsFactory;
 
     public LottoPresenter(final LottoPaymentFactory lottoPaymentFactory,
-                          final LottoNumbersFactory lottoNumbersFactory,
                           final LottoTicketsFactory lottoTicketsFactory) {
         this.lottoPaymentFactory = lottoPaymentFactory;
-        this.lottoNumbersFactory = lottoNumbersFactory;
         this.lottoTicketsFactory = lottoTicketsFactory;
     }
 
@@ -65,7 +61,7 @@ public class LottoPresenter {
     private LottoNumbers requestWinningNumbers(final Scanner scanner) {
         System.out.println(WINNING_NUMBERS.getMessage());
         try {
-            return lottoNumbersFactory.convertAndCreate(scanner.nextLine());
+            return LottoNumbers.convertAndCreate(scanner.nextLine());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return requestWinningNumbers(scanner);

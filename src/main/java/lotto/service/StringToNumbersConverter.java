@@ -1,5 +1,7 @@
 package lotto.service;
 
+import static lotto.domain.message.ErrorMessage.INVALID_LOTTO_NUMBERS;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -19,7 +21,7 @@ public class StringToNumbersConverter {
 
     public static void validate(final String numbersString) {
         if (INVALID_LOTTO_NUMBERS_STRING_PATTERN.matcher(numbersString).find()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS.getMessage());
         }
     }
 }

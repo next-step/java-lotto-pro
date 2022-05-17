@@ -28,6 +28,20 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers).isEqualTo(new LottoNumbers(numbers));
     }
 
+    @Test
+    @DisplayName("컴마로 구분된 숫자 6개가 담긴 문자열을 파라미터로 로또 번호가 생성되야 한다")
+    void create_by_numbers_string() {
+        // given
+        final String numbersString = "1, 2, 3, 4, 5, 6";
+
+        // when
+        final LottoNumbers lottoNumbers = LottoNumbers.convertAndCreate(numbersString);
+
+        // then
+        assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
+        assertThat(lottoNumbers).isEqualTo(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    }
+
     @ParameterizedTest
     @MethodSource("lottoNumbersMatchingLessThanThreeNumbers")
     @DisplayName("주어진 번호가 3개 미만으로 일치하면 0이 반환되어야 한다")

@@ -2,12 +2,19 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import lotto.service.LottoNumbersValidator;
+import lotto.service.StringToNumbersConverter;
 
 public class LottoNumbers {
     private final List<Integer> numbers;
 
-    LottoNumbers(final List<Integer> numbers) {
+    public LottoNumbers(final List<Integer> numbers) {
+        LottoNumbersValidator.validateNumbers(numbers);
         this.numbers = numbers;
+    }
+
+    public static LottoNumbers convertAndCreate(final String numbersString) {
+        return new LottoNumbers(StringToNumbersConverter.convert(numbersString));
     }
 
     public int matches(final LottoNumbers winningNumbers) {
