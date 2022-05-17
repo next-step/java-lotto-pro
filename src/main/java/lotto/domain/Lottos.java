@@ -15,14 +15,14 @@ public class Lottos {
         return new Lottos(lottoList);
     }
 
-    public List<Lotto> matchedLottoList(WinningNumbers winningNumbers, MatchResult matchResult) {
-        List<Lotto> result = new ArrayList<>();
+    public Lottos matchedLottoList(WinningNumbers winningNumbers, MatchResult matchResult) {
+        List<Lotto> matchedLottos = new ArrayList<>();
         for (Lotto lotto : lottoList) {
             if (winningNumbers.matchWinningLotto(lotto).equals(matchResult)) {
-                result.add(lotto);
+                matchedLottos.add(lotto);
             }
         }
-        return Collections.unmodifiableList(result);
+        return Lottos.from(matchedLottos);
     }
 
     public Money totalPrice() {
