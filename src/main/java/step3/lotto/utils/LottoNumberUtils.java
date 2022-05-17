@@ -17,6 +17,17 @@ public class LottoNumberUtils {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int[] lottoRangeNumbers = initLottoRangeNumbers();
 
+    public static List<Integer> generateLottoNumbers() {
+        List<Integer> list = intArrayToList(lottoRangeNumbers);
+        return subList(shuffle(list));
+    }
+
+    public static List<Integer> intArrayToList(int[] numbers) {
+        return Arrays.stream(numbers)
+            .boxed()
+            .collect(Collectors.toList());
+    }
+
     private static int[] initLottoRangeNumbers() {
         final int[] numbers = new int[LOTTO_NUMBER_END_RANGE];
 
@@ -24,17 +35,6 @@ public class LottoNumberUtils {
             numbers[i] = i + 1;
         }
         return numbers;
-    }
-
-    public static List<Integer> generateLottoNumbers() {
-        List<Integer> list = intArrayToList(lottoRangeNumbers);
-        return subList(shuffle(list));
-    }
-
-    private static List<Integer> intArrayToList(int[] numbers) {
-        return Arrays.stream(numbers)
-            .boxed()
-            .collect(Collectors.toList());
     }
 
     private static List<Integer> shuffle(List<Integer> numbers) {

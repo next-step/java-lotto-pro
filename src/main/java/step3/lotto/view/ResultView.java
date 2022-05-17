@@ -19,6 +19,7 @@ public class ResultView {
     private static final StringBuffer stringBuffer = new StringBuffer();
 
     public static void printWinningStatistics(MatchStatistic matchStatistic) {
+        System.out.println();
         stringBuffer.append(WINNING_STATISTICS_TITLE_GUIDE_MESSAGE_FORMAT);
         addStatisticsContent(matchStatistic);
         stringBuffer.append(String.format(RATE_OF_PROFIT_GUIDE_MESSAGE, matchStatistic.getRateOfProfit()));

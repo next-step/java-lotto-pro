@@ -16,9 +16,9 @@ public class Price {
         this.price = price;
     }
 
-    public static step3.lotto.domain.customer.wrap.Price of(int price) {
+    public static Price of(int price) {
         validatePrice(price);
-        return new step3.lotto.domain.customer.wrap.Price(price);
+        return new Price(price);
     }
 
     private static void validatePrice(int price) {

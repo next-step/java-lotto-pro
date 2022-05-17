@@ -1,6 +1,7 @@
 package step3.lotto.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,7 @@ public class Lotto {
     public static Lotto of(List<Integer> numbers) {
         validateLottoNumberCount(numbers.size());
         validateLottoNumberDuplication(new HashSet<>(numbers).size());
+        Collections.sort(numbers);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int number : numbers) {
             lottoNumbers.add(LottoNumber.of(number));

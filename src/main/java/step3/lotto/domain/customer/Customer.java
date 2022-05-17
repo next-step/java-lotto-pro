@@ -36,4 +36,8 @@ public class Customer {
     public int getLottosSize() {
         return lottos.size();
     }
+
+    public Lottos getLottos() {
+        return this.lottos;
+    }
 }

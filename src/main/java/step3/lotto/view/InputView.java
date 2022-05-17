@@ -1,5 +1,6 @@
 package step3.lotto.view;
 
+import step3.lotto.domain.customer.Customer;
 import step3.lotto.domain.lotto.Lotto;
 import step3.lotto.domain.lotto.Lottos;
 
@@ -17,14 +18,20 @@ public class InputView {
         System.out.println(INPUT_PRICE_GUIDE_MESSAGE);
     }
 
-    public static void printPurchaseCompletionGuideMessage(int count) {
+    public static void printPurchaseCompletionAndPublishedLottosGuidMessage(Customer customer) {
+        printPurchaseCompletionGuideMessage(customer.getTryCount());
+        printLottos(customer.getLottos());
+    }
+
+    private static void printPurchaseCompletionGuideMessage(int count) {
         System.out.println(String.format(PURCHASE_COMPLETION_GUIDE_MESSAGE, count));
     }
 
-    public static void printLottos(Lottos lottos) {
+    private static void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto);
         }
+        System.out.println();
     }
 
     public static void printInputLastWinningLottoGuideMessage() {
