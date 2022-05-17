@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningResult {
-    private final double MATH_ROUND_DIGIT = 100d;
     private static final String MESSAGE_MATCHED_COUNT = "%d개 일치 (%d원)- %d개\n";
     private static final String TEXT_PROFIT = "이득이";
     private static final String TEXT_PRINCIPAL = "본전이";
@@ -29,10 +28,7 @@ public class WinningResult {
     }
 
     public double profitRate(Money purchaseMoney) {
-        double totalPrizeMoneyDouble = totalPrizeMoney();
-        double purchaseMoneyDouble = purchaseMoney.getMoney();
-        double profitRate = totalPrizeMoneyDouble / purchaseMoneyDouble;
-        return Math.round(profitRate * MATH_ROUND_DIGIT) / MATH_ROUND_DIGIT;
+        return purchaseMoney.profitRate(totalPrizeMoney());
     }
 
     public int totalPrizeMoney() {
