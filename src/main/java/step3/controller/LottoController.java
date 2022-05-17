@@ -2,6 +2,7 @@ package step3.controller;
 
 import step3.domain.LottoTicket;
 import step3.domain.Money;
+import step3.domain.Ticket;
 import step3.model.LottoMachine;
 import step3.view.InputView;
 import step3.view.OutputView;
@@ -20,13 +21,14 @@ public class LottoController {
 
     public void startLotto() {
         Money money = null;
-        int ticket = 0;
+        Ticket ticket = null;
         while (moneyAndTicketIsNotValid(money,ticket)) { //돈을 정상적으로 받아올때까지 반복한다
             String moneySource = inputView.getMoney();
             money = lottoMachine.insertMoney(moneySource);
             ticket = lottoMachine.buyTicket(money);
         }
 
+        lottoMachine.buyLotto(ticket);
         outputView.printLottoInfo(lottoMachine.getLottoNumbers());
 
         LottoTicket winnerTicket = null;
