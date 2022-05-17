@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import lotto.enums.LottoRank;
 
-public class LottoResults {
+public class LottosResults {
     private final Map<LottoRank, Integer> resultList;
 
-    public LottoResults() {
+    public LottosResults() {
         resultList = new HashMap<>();
 
         for (LottoRank rank : LottoRank.values()) {
