@@ -1,16 +1,18 @@
 package lotto.vo;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
-public class Winning {
+public class Summary {
     private List<Result> results;
 
-    public Winning(List<Result> results) {
-        this.results = results;
+    public Summary(List<Result> results) {
+        this.results = new LinkedList<>(results);
     }
 
     public List<Result> list() {
-        return results;
+        return Collections.unmodifiableList(results);
     }
 
     public long sum() {
