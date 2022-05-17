@@ -27,11 +27,11 @@ public class Lotto {
         for (LottoNumber lottoNumber : this.lotto) {
             countOfMatch += countIfContainLottoNumber(winningLotto, lottoNumber);
         }
-        boolean matchBonus = false;
+        boolean isBonusMatched = false;
         if (isSecondAndThirdCountOfMatch(countOfMatch)) {
-            matchBonus = containLottoNumber(bonusLottoNumber);
+            isBonusMatched = containLottoNumber(bonusLottoNumber);
         }
-        return LottoRanking.findLottoRankingByCountOfMatchAndMatchBonus(countOfMatch, matchBonus);
+        return LottoRanking.findLottoRankingByCountOfMatchAndBonusMatched(countOfMatch, isBonusMatched);
     }
 
     private boolean isSecondAndThirdCountOfMatch(int countOfMatch) {

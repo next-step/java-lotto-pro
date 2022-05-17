@@ -15,19 +15,19 @@ public enum LottoRanking {
     private final int countOfMatch;
     private final String text;
     private final Money money;
-    private final Boolean matchBonus;
+    private final Boolean isBonusMatched;
 
-    LottoRanking(int countOfMatch, String text, Money money, boolean matchBonus) {
+    LottoRanking(int countOfMatch, String text, Money money, boolean isBonusMatched) {
         this.countOfMatch = countOfMatch;
         this.text = text;
         this.money = money;
-        this.matchBonus = matchBonus;
+        this.isBonusMatched = isBonusMatched;
     }
 
-    public static LottoRanking findLottoRankingByCountOfMatchAndMatchBonus(int countOfMatch, boolean matchBonus) {
+    public static LottoRanking findLottoRankingByCountOfMatchAndBonusMatched(int countOfMatch, boolean isBonusMatched) {
         validateCountOfMatch(countOfMatch);
         return Arrays.stream(LottoRanking.values())
-                .filter(ranking -> ranking.countOfMatch() == countOfMatch && ranking.matchBonus() == matchBonus)
+                .filter(ranking -> ranking.countOfMatch() == countOfMatch && ranking.isBonusMatched() == isBonusMatched)
                 .findFirst()
                 .orElse(LottoRanking.MISS);
     }
@@ -54,7 +54,7 @@ public enum LottoRanking {
         return this.countOfMatch;
     }
 
-    private boolean matchBonus() {
-        return this.matchBonus;
+    private boolean isBonusMatched() {
+        return this.isBonusMatched;
     }
 }
