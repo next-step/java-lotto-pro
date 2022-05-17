@@ -2,25 +2,27 @@ package lotto.controller;
 
 import calculator.domain.StringSplitter;
 import lotto.domain.AutoLottoIssuer;
+import lotto.domain.LottoRandomFactory;
 import lotto.domain.LottoStatistic;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.RandomNumberMachine;
 import lotto.view.View;
 
 public class LottoController {
     private final View view;
-    private final AutoLottoIssuer autoLottoIssuer;
 
-
-    public LottoController(View view, AutoLottoIssuer autoLottoIssuer) {
+    public LottoController(View view) {
         this.view = view;
-        this.autoLottoIssuer = autoLottoIssuer;
     }
 
     public void start() {
         view.outputOrderPrice();
 
         String orderPrice = view.inputOrderPrice();
+
+        LottoRandomFactory factory = new LottoRandomFactory(new RandomNumberMachine());
+        AutoLottoIssuer autoLottoIssuer = new AutoLottoIssuer(factory);
 
         Lottos lottos = autoLottoIssuer.issue(Money.from(orderPrice));
 
