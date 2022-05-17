@@ -23,6 +23,10 @@ public class Lottos {
         return winningStatistics.calculateRateOfReturn(purchaseAmount);
     }
 
+    public List<Lotto> getElements() {
+        return elements;
+    }
+
     public WinningStatistics getWinningStatistics() {
         return winningStatistics;
     }

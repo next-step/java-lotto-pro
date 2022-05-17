@@ -2,7 +2,7 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoManager;
 import lotto.domain.LottoNumber;
@@ -12,22 +12,19 @@ import org.junit.jupiter.api.Test;
 public class LottoManagerTest {
 
     private Lotto lotto = new Lotto(
-        () -> Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+        () -> List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
             new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
 
     @Test
     public void calculateReturnRate() {
-        //given
-        Lottos lottos = new Lottos(Arrays.asList(lotto));
-        LottoManager lottoManager = new LottoManager(1);
-        lottoManager.makeWinningLotto(lotto, lottos);
-        double expectedReturnRate = 2_000_000;
+        Lottos lottos = new Lottos(List.of(lotto));
 
-        //when
-        double actualReturnRate = lottoManager.calculateRateOfReturn(1_000);
+        LottoManager lottoManager = new LottoManager(lottos);
 
-        //then
-        assertThat(actualReturnRate).isEqualTo(expectedReturnRate);
+        lottoManager.makeWinningLotto(lotto);
+        lottoManager.calculateRateOfReturn(1000);
+
+        assertThat(lottoManager.calculateRateOfReturn(20000)).isEqualTo(100000);
 
     }
 }
