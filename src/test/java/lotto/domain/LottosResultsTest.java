@@ -67,4 +67,17 @@ class LottosResultsTest {
         assertThat(lottosResults.getRankCount(LottoRank.MISS)).isEqualTo(1);
     }
 
+    @DisplayName("여러 등수의 카운트 증가 후 총 금액 확인")
+    @Test
+    void calculateTotalMoney() {
+        LottosResults lottosResults = new LottosResults();
+
+        lottosResults.increaseRankCount(LottoRank.FIRST);
+        lottosResults.increaseRankCount(LottoRank.FOURTH);
+        lottosResults.increaseRankCount(LottoRank.FOURTH);
+        lottosResults.increaseRankCount(LottoRank.MISS);
+
+        assertThat(lottosResults.calculateTotalMoney()).isEqualTo(2000100000);
+    }
+
 }

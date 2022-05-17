@@ -5,21 +5,32 @@ import java.util.Map;
 import lotto.enums.LottoRank;
 
 public class LottosResults {
-    private final Map<LottoRank, Integer> resultList;
+    private final Map<LottoRank, Integer> resultMap;
 
     public LottosResults() {
-        resultList = new HashMap<>();
+        resultMap = new HashMap<>();
 
         for (LottoRank rank : LottoRank.values()) {
-            resultList.put(rank, 0);
+            resultMap.put(rank, 0);
         }
     }
 
     public void increaseRankCount(LottoRank rank) {
-        resultList.put(rank, resultList.get(rank) + 1);
+        resultMap.put(rank, resultMap.get(rank) + 1);
     }
 
     public Integer getRankCount(LottoRank rank) {
-        return resultList.get(rank);
+        return resultMap.get(rank);
     }
+
+    public Integer calculateTotalMoney() {
+        int totalMoney = 0;
+
+        for(LottoRank key : resultMap.keySet()) {
+            totalMoney += key.getWinningMoney() * resultMap.get(key);
+        }
+
+        return totalMoney;
+    }
+
 }
