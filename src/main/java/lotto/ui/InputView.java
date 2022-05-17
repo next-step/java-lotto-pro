@@ -12,7 +12,7 @@ public class InputView {
         try {
             purchasePrice = sc.nextInt();
         } catch (Exception e) {
-            throw new RuntimeException("The purchase price should contain only numbers.");
+            throw new IllegalArgumentException("The purchase price should contain only numbers.");
         }
 
         return purchasePrice;
