@@ -1,5 +1,6 @@
 package lotto.model.factory;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -10,7 +11,7 @@ public class LottoTestFactory implements ILottoFactory {
     @Override
     public List<Lotto> generateAuto(int lottoCount) {
         return IntStream.rangeClosed(1, lottoCount)
-            .mapToObj(operand -> Lotto.of(new String[]{"1", "2", "3", "4", "5", "6"}))
+            .mapToObj(operand -> Lotto.of(Arrays.asList("1", "2", "3", "4", "5", "6")))
             .collect(Collectors.toList());
     }
 

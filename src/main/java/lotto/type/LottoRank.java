@@ -19,7 +19,7 @@ public enum LottoRank {
     }
 
     public static Optional<LottoRank> rankMatch(int matchCount, boolean bonusMatch) {
-        if(matchCount == 5 && bonusMatch) {
+        if(matchCount == 4 && bonusMatch) {
             return Optional.of(LottoRank.FIVE_BONUS);
         }
 

@@ -1,5 +1,7 @@
 package lotto.model.winning;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import lotto.model.lotto.Lotto;
@@ -11,9 +13,17 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(String[] lottoNumberArr, int bonusNumber) {
-        this.winningLotto = Lotto.of(lottoNumberArr);
+    public WinningLotto(List<String> lottoNumberList, String bonusNumber) {
+        if(lottoNumberList.contains(bonusNumber)) {
+            throw new IllegalArgumentException("당첨번호와 중복된 보너스 볼은 사용할 수 없습니다.");
+        }
+
+        this.winningLotto = Lotto.of(lottoNumberList);
         this.bonusNumber = new LottoNumber(bonusNumber);
+    }
+
+    public WinningLotto(String[] lottoNumberArr, String bonusNumber) {
+        this(Arrays.asList(lottoNumberArr), bonusNumber);
     }
 
     public Optional<LottoRank> match(Lotto lotto) {

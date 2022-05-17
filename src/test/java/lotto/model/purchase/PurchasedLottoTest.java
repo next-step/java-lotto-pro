@@ -2,6 +2,7 @@ package lotto.model.purchase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.List;
 import lotto.model.factory.LottoTestFactory;
 import lotto.model.lotto.Lotto;
@@ -25,7 +26,7 @@ class PurchasedLottoTest {
         List<Lotto> lottoList = new LottoTestFactory().generateAuto(2);
 
         PurchaseLotto purchaseLotto = new PurchaseLotto(lottoList);
-        WinningLotto winningLotto = new WinningLotto(new String[]{"1", "2", "3", "7", "8", "9"}, 10);
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList("1", "2", "3", "7", "8", "9"), "10");
 
         return purchaseLotto.rankMatch(winningLotto);
     }

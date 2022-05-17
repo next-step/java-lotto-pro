@@ -2,11 +2,10 @@ package lotto.model.lotto;
 
 import static lotto.constant.LottoSetting.LOTTO_SIZE;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.model.winning.WinningLotto;
 
 public class Lotto {
 
@@ -21,8 +20,8 @@ public class Lotto {
         return new Lotto(lottoNumberSet);
     }
 
-    public static Lotto of(String[] lottoStringArr) {
-        Set<LottoNumber> lottoNumberSet = Arrays.stream(lottoStringArr)
+    public static Lotto of(List<String> lottoStringList) {
+        Set<LottoNumber> lottoNumberSet =lottoStringList.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toSet());
 
