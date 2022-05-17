@@ -11,8 +11,8 @@ public enum LottoRanking {
     SECOND_PRIZE(5, 1_500_000),
     FIRST_PRIZE(6, 2_000_000_000);
 
-    public int matchingNumber;
-    public int winAmount;
+    private int matchingNumber;
+    private int winAmount;
 
     LottoRanking(int matchingNumber, int winAmount) {
         this.matchingNumber = matchingNumber;
@@ -29,5 +29,7 @@ public enum LottoRanking {
             .findFirst().orElse(LottoRanking.MISS);
     }
 
-
+    public int getWinAmount() {
+        return winAmount;
+    }
 }

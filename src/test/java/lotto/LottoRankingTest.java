@@ -10,11 +10,12 @@ import org.junit.jupiter.api.Test;
 
 public class LottoRankingTest {
 
+    private LottoNumbers lottoNumbers = new LottoNumbers(
+        List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+            new LottoNumber(5), new LottoNumber(6)));
+
     @Test
     public void findFirstRanking() {
-        LottoNumbers lottoNumbers = new LottoNumbers(
-            List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
         Lotto lotto = new Lotto(lottoNumbers);
         Lotto winningLotto = new Lotto(lottoNumbers);
         assertThat(LottoRanking.findLottoRaking(lotto, winningLotto)).isEqualTo(
@@ -23,9 +24,6 @@ public class LottoRankingTest {
 
     @Test
     public void findSecondRanking() {
-        LottoNumbers lottoNumbers = new LottoNumbers(
-            List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
         LottoNumbers winningNumbers = new LottoNumbers(
             List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
                 new LottoNumber(5), new LottoNumber(7)));
@@ -37,9 +35,6 @@ public class LottoRankingTest {
 
     @Test
     public void findThirdRanking() {
-        LottoNumbers lottoNumbers = new LottoNumbers(
-            List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
         LottoNumbers winningNumbers = new LottoNumbers(
             List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
                 new LottoNumber(7), new LottoNumber(8)));
@@ -51,9 +46,6 @@ public class LottoRankingTest {
 
     @Test
     public void findFourthRanking() {
-        LottoNumbers lottoNumbers = new LottoNumbers(
-            List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
         LottoNumbers winningNumbers = new LottoNumbers(
             List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7),
                 new LottoNumber(8), new LottoNumber(9)));
@@ -65,9 +57,6 @@ public class LottoRankingTest {
 
     @Test
     public void findMissRanking() {
-        LottoNumbers lottoNumbers = new LottoNumbers(
-            List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
         LottoNumbers winningNumbers = new LottoNumbers(
             List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(7), new LottoNumber(8),
                 new LottoNumber(9), new LottoNumber(10)));
