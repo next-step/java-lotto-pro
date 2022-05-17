@@ -13,7 +13,7 @@ class LottoStoreTest {
     @ParameterizedTest(name = "[{0}]원 -> [{1}]게임")
     @CsvSource(value = {"10000:10", "5000:5", "3000:3"}, delimiter = ':')
     void issueLottoPaper(String moneyWord, int expectedPlayCount) {
-        LottoStore lottoStore = new LottoStore(moneyWord);
+        LottoStore lottoStore = new LottoStore(new Money(moneyWord));
         assertEquals(new LottoPaper(expectedPlayCount),lottoStore.issueLottoPaper());
     }
 

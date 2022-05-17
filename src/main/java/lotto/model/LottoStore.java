@@ -6,8 +6,8 @@ public class LottoStore {
 
     private final Money money;
 
-    public LottoStore(String moneyWord) {
-        this.money = new Money(moneyWord);
+    public LottoStore(Money money) {
+        this.money = money;
     }
 
     public LottoPaper issueLottoPaper() {
