@@ -4,6 +4,7 @@ import lotto.enums.LottoRank;
 
 import static lotto.common.Messages.MONEY_NOT_NUMBER;
 import static lotto.common.Messages.POSITIVE_MONEY;
+import static lotto.utils.NumberUtil.isNumber;
 
 public class Money {
     private static final int MINIMUM_AMOUNT = 0;
@@ -28,15 +29,6 @@ public class Money {
         if (money < MINIMUM_AMOUNT) {
             throw new IllegalArgumentException(POSITIVE_MONEY);
         }
-    }
-
-    private boolean isNumber(String text) {
-        try {
-            Integer.parseInt(text);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
     }
 
     public double lottoGameEarningsRate(LottoRanks lottoRanks) {

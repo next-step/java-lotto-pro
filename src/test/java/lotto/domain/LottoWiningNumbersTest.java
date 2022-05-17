@@ -3,8 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static lotto.common.Messages.LOTTO_NUMBERS_SEPARATOR;
 import static lotto.common.Messages.LOTTO_NUMBERS_SIZE;
-import static lotto.common.Messages.LOTTO_WINING_SEPARATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
@@ -25,7 +25,7 @@ class LottoWiningNumbersTest {
     void 지난주_당첨_번호_입력시_구분자_오류(String string) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoWiningNumbers(string))
-                .withMessageContaining(LOTTO_WINING_SEPARATOR);
+                .withMessageContaining(LOTTO_NUMBERS_SEPARATOR);
     }
 
     @ParameterizedTest

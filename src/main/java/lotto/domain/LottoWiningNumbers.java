@@ -3,8 +3,8 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import static lotto.common.Messages.LOTTO_NUMBERS_SEPARATOR;
 import static lotto.common.Messages.LOTTO_NUMBERS_SIZE;
-import static lotto.common.Messages.LOTTO_WINING_SEPARATOR;
 
 public class LottoWiningNumbers {
     private static final int SIZE = 6;
@@ -35,7 +35,7 @@ public class LottoWiningNumbers {
 
     private void validateSeparator(String text) {
         if (!text.contains(SEPARATOR)) {
-            throw new IllegalArgumentException(LOTTO_WINING_SEPARATOR);
+            throw new IllegalArgumentException(LOTTO_NUMBERS_SEPARATOR);
         }
     }
 
