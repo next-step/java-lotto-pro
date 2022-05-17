@@ -37,6 +37,10 @@ public class LottoCount {
         return money.calculateLottoCount() - this.count;
     }
 
+    public int getCount() {
+        return count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
