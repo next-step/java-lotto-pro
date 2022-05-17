@@ -7,7 +7,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_END_NUMBER = 45;
     private static final String ERROR_MSG_NUMBER_RANGE = "로또 번호가 범위에서 벗어났습니다.";
     private static final String ERROR_MSG_NOT_NUMBER = "로또 번호는 숫자로만 입력해 주세요.";
-    private int lottoNumber;
+    private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
         validateRange(lottoNumber);

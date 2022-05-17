@@ -5,7 +5,7 @@ public class Money {
     private static final String ERROR_MESSAGE_NOT_NUMBER = "숫자만 입력 가능합니다.";
     private static final String ERROR_MESSAGE_MIN_PRICE = "로또 1장 가격(" + LOTTO_PRICE + ") 보다 금액이 적어 구입할 수 없습니다.";
 
-    private int money;
+    private final int money;
 
     public Money(String money) {
         validateNumber(money);

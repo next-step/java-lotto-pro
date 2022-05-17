@@ -11,7 +11,7 @@ public class LottoTicket {
     private static final String ERROR_MESSAGE_NUMBER_SIZE = LOTTO_NUMBER_SIZE + "개의 번호를 입력해주세요.";
     private static final String ERROR_MESSAGE_NOT_UNIQUE = "중복되는 번호가 존재합니다.";
 
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;

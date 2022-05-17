@@ -10,7 +10,7 @@ public class WinningResult {
     private static final String TEXT_PRINCIPAL = "본전이";
     private static final String TEXT_LOSS = "손해";
 
-    private List<LottoRank> winningRanks = new ArrayList<>();
+    private final List<LottoRank> winningRanks = new ArrayList<>();
 
     public int size() {
         return this.winningRanks.size();
