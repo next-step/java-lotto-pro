@@ -34,12 +34,13 @@ public class Lottos {
         Lotto lotto;
         for(int i = 0; i < purchaseCount.getCount(); i++) {
             lotto = new Lotto();
+            lotto.generate();
             drawLottos.add(lotto);
         }
         return drawLottos;
     }
 
-    public LottoResult calculation(Lotto winLotto) {
+    public LottoResult calculation(WinLotto winLotto) {
         LottoResult calcResult = new LottoResult();
         for (Lotto lotto : lottos) {
             calcResult.counting(lotto.compare(winLotto));
