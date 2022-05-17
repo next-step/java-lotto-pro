@@ -6,6 +6,9 @@ public class StringUtil {
 	private static final char RIGHT_PARENTHESIS = ')';
 	private static final int PARENTHESIS_START_NO = 0;
 	private static final int LAST_INDEX_DIFFERENCE = 1;
+	
+	private StringUtil() {
+	}
 
 	public static String[] splitComma(String value) {
 		return value.split(COMMA);

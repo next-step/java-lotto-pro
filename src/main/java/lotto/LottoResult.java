@@ -1,32 +1,36 @@
 package lotto;
 
+import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
 import lotto.model.WinningList;
 
 public class LottoResult {
-	private Lottos lottos;
-	private LottoNumbers lastWinningLotto;
-	private long sum;
+	private final Lottos lottos;
+	private final WinningList winningList;
 
-	public LottoResult(Lottos lottos, LottoNumbers lastWinningLotto) {
+	public LottoResult(Lottos lottos, LottoNumbers lastWinningLotto, String bonusLottoNumber) {
+		validationBonus(lastWinningLotto, bonusLottoNumber);
 		this.lottos = lottos;
-		this.lastWinningLotto = lastWinningLotto;
+		this.winningList = new WinningList(lottos, lastWinningLotto, bonusLottoNumber);
+	}
+
+	private void validationBonus(LottoNumbers lastWinningLotto, String bonusLottoNumber) {
+		if (lastWinningLotto.contains(new LottoNumber(bonusLottoNumber))) {
+			throw new IllegalArgumentException("입력된 보너스볼 숫자가 이미 로또번호에 포함되어 있습니다.");
+		}
 	}
 
 	public WinningList winningList() {
-		return new WinningList(lottos, lastWinningLotto);
+		return winningList;
 	}
 
-	public double profitRate(WinningList winningList, int lottoPrice) {
+	public double profitRate(int lottoPrice) {
 		return (double) totalWinningMoney(winningList) / (lottos.getLottos().size() * lottoPrice);
 	}
 
 	private long totalWinningMoney(WinningList winningList) {
-		sum = 0;
-		winningList.getWinningList().forEach((winningMoney, count) -> {
-			sum += winningMoney.winningMoney(count);
-		});
-		return sum;
+		return winningList.getWinningList().entrySet().stream()
+				.mapToLong(entry -> entry.getKey().winningMoney(entry.getValue())).sum();
 	}
 }

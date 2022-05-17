@@ -1,8 +1,8 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
@@ -11,6 +11,11 @@ import lotto.model.UserMoney;
 
 public class LottoMachine {
 	private static final int LOTTO_PRICE = 1000;
+	private Random random;
+
+	public LottoMachine() {
+		random = new Random();
+	}
 
 	public Lottos buyAutoLottos(UserMoney userMoney) {
 		List<LottoNumbers> lottos = new ArrayList<>();
@@ -30,11 +35,22 @@ public class LottoMachine {
 	}
 
 	private LottoNumbers randomLottoNumbers() {
-		List<LottoNumber> lottoNumbers = new ArrayList<>();
-		for (int i = LottoNumber.minLottoNumber(); i <= LottoNumber.maxLottoNumber(); ++i) {
-			lottoNumbers.add(new LottoNumber(i));
+		return new LottoNumbers(randomNumberList());
+	}
+
+	private List<LottoNumber> randomNumberList() {
+		List<LottoNumber> numberList = new ArrayList<>();
+		while (numberList.size() < LottoNumbers.lottoNumbersCount()) {
+			LottoNumber randomNumber = new LottoNumber(randomNumber());
+			if (!numberList.contains(randomNumber)) {
+				numberList.add(randomNumber);
+			}
 		}
-		Collections.shuffle(lottoNumbers);
-		return new LottoNumbers(lottoNumbers.subList(0, LottoNumbers.lottoNumbersCount()));
+		return numberList;
+	}
+
+	private int randomNumber() {
+		return random.nextInt(LottoNumber.maxLottoNumber() - LottoNumber.minLottoNumber())
+				+ LottoNumber.minLottoNumber();
 	}
 }

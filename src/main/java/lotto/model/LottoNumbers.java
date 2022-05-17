@@ -1,11 +1,10 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public final class LottoNumbers {
+public class LottoNumbers {
 	private static final int LOTTO_NUMBERS_COUNT = 6;
 	private static final String LOTTO_INPUT_LIST_REGEX = ",";
 
@@ -15,13 +14,6 @@ public final class LottoNumbers {
 		validation(lottoNumbers);
 		Collections.sort(lottoNumbers);
 		this.lottoNumbers = lottoNumbers;
-	}
-
-	public LottoNumbers(LottoNumber[] lottoNumbers) {
-		List<LottoNumber> tempLottoNumbers = Arrays.asList(lottoNumbers);
-		validation(tempLottoNumbers);
-		Collections.sort(tempLottoNumbers);
-		this.lottoNumbers = tempLottoNumbers;
 	}
 
 	public LottoNumbers(String lottoNumbers) {
@@ -81,5 +73,9 @@ public final class LottoNumbers {
 	public int countEqualsLottoNumber(LottoNumbers lottoNumbers) {
 		return (int) lottoNumbers.getLottoNumbers().stream()
 				.filter(lottoNumber -> getLottoNumbers().contains(lottoNumber)).count();
+	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
 	}
 }

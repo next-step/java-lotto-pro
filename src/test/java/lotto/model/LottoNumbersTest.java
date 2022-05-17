@@ -2,11 +2,13 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -56,17 +58,15 @@ public class LottoNumbersTest {
 	}
 
 	@Test
-	@DisplayName("lottonumber 배열로 List의 크기가 6인 lotto생성")
-	void create_lottonumbers_lottoNumbers() {
-		LottoNumber[] LottoNumbers2 = { new LottoNumber(43), new LottoNumber(31), new LottoNumber(1),
-				new LottoNumber(16), new LottoNumber(10), new LottoNumber(22) };
-		assertThat(new LottoNumbers(LottoNumbers2).getLottoNumbers()).hasSize(6);
-	}
-
-	@Test
 	@DisplayName("string으로 List의 크기가 6인 lotto생성")
 	void create_string_lottoNumbers() {
 		assertThat(new LottoNumbers("43, 31, 1, 16, 10, 22").getLottoNumbers()).hasSize(6);
+	}
+
+	@Test
+	@DisplayName("로또에 번호가 일치하는게 있는지 확인하는 테스트")
+	void contains_lottoNUmber() {
+		assertTrue(new LottoNumbers("43, 31, 1, 16, 10, 22").contains(new LottoNumber(22)));
 	}
 
 	@Test

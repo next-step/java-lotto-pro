@@ -14,6 +14,9 @@ public class Calculator {
 	private static final int GROUP_NUMBERS_NO = 2;
 
 	private static Pattern customRegexPattern;
+	
+	private Calculator() {
+	}
 
 	public static int sum(String value) {
 		if (isEmpty(value)) {
