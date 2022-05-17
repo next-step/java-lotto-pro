@@ -26,7 +26,7 @@ public class Lotto {
         }
     }
 
-    int match(WinnerLotto winnerLotto) {
+    public int match(WinnerLotto winnerLotto) {
         return (int) winnerLotto.lottoNumbers().stream()
                 .filter(lotto::contains)
                 .count();
