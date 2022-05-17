@@ -16,4 +16,8 @@ public class WinningLotto extends Lotto {
         }
     }
 
+    public boolean matchBonus(Lotto lotto) {
+        return lotto.match(bonusBall);
+    }
+
 }
