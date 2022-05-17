@@ -28,17 +28,11 @@ public class Money {
         } catch (NumberFormatException e) {
             return false;
         }
+
     }
 
-    public String isBenefit(long reward) {
-        if (money > reward) {
-            return isLoss;
-        }
-        return isBenefit;
-    }
-
-    public double getProfitRate(long reward) {
-        return reward * 1.0 / money;
+    public int getMoney() {
+        return money;
     }
 
     @Override
