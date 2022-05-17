@@ -16,16 +16,16 @@ public class ResultView {
     private static final String STATISTICS_GUIDE_MESSAGE = "%s개 일치 (%d원)- %d개\n";
     private static final String RATE_OF_PROFIT_GUIDE_MESSAGE = "총 수익률은 %.2f입니다.";
 
+    private static final StringBuffer stringBuffer = new StringBuffer();
+
     public static void printWinningStatistics(MatchStatistic matchStatistic) {
-        StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(WINNING_STATISTICS_TITLE_GUIDE_MESSAGE_FORMAT);
-        stringBuffer.append(statisticsContent(matchStatistic));
+        addStatisticsContent(matchStatistic);
         stringBuffer.append(String.format(RATE_OF_PROFIT_GUIDE_MESSAGE, matchStatistic.getRateOfProfit()));
         System.out.println(stringBuffer.toString());
     }
 
-    private static String statisticsContent(MatchStatistic matchStatistic) {
-        StringBuffer stringBuffer = new StringBuffer();
+    private static String addStatisticsContent(MatchStatistic matchStatistic) {
         stringBuffer.append(statisticsFormat(MatchResult.FORTH_PLACE, matchStatistic.getForthPlaceCount()));
         stringBuffer.append(statisticsFormat(MatchResult.THIRD_PLACE, matchStatistic.getThirdPlaceCount()));
         stringBuffer.append(statisticsFormat(MatchResult.SECOND_PLACE, matchStatistic.getSecondPlaceCount()));
