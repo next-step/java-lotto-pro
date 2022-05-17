@@ -38,4 +38,8 @@ public class InputView {
     public static String inputManualLottoNumber() {
         return scanner.nextLine();
     }
+
+    public static void printLine() {
+        System.out.println();
+    }
 }

@@ -9,7 +9,7 @@ public class ManualGeneratePolicy implements GeneratePolicy {
         InputView.printInputManualLottoNumberHeader();
         for (int i = 0; i < lottoCount.getCount(); i++) {
             String numbers = InputView.inputManualLottoNumber();
-            lottoGroups.add(new Lotto());
+            lottoGroups.add(new Lotto(LottoNumberGenerator.from(numbers)));
         }
     }
 }

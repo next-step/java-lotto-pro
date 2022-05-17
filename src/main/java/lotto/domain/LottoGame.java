@@ -7,14 +7,16 @@ import lotto.view.ResultView;
 public class LottoGame {
     private final LottoGroups lottoGroups;
     private final Money money;
+    private final LottoCount manualLottoCount;
 
-    public LottoGame(LottoGroups lottoGroups, Money money) {
+    public LottoGame(LottoGroups lottoGroups, Money money, LottoCount manualLottoCount) {
         this.lottoGroups = lottoGroups;
         this.money = money;
+        this.manualLottoCount = manualLottoCount;
     }
 
     public void playGame() {
-        ResultView.printCount(money.calculateLottoCount());
+        ResultView.printCount(manualLottoCount, money);
         ResultView.printLottoGroups(lottoGroups);
         String winLottoNumbers = InputView.inputWinLotto();
         int bonusNumber = InputView.inputBonusNumber();

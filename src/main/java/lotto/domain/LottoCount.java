@@ -33,6 +33,10 @@ public class LottoCount {
         }
     }
 
+    public static LottoCount from(int count) {
+        return new LottoCount(count);
+    }
+
     public int calculateAutoLottoCount(Money money) {
         return money.calculateLottoCount() - this.count;
     }
