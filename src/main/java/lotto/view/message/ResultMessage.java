@@ -1,5 +1,7 @@
 package lotto.view.message;
 
+import lotto.view.message.dto.MatchResultParameters;
+
 public enum ResultMessage {
 
     BUY_LOTTO("%d개를 구매했습니다.")
@@ -17,5 +19,13 @@ public enum ResultMessage {
 
     public String message() {
         return message;
+    }
+
+    public String of(MatchResultParameters dto) {
+        return String.format(this.message, dto.matchCount(), dto.prize(), dto.statisticCount());
+    }
+
+    public String ofRateResult(double rate) {
+        return String.format(this.message, rate);
     }
 }
