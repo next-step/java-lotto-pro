@@ -1,5 +1,7 @@
 package lotto.vo;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,7 +14,7 @@ public class Lotteries {
         if (isNull(lotteries)) {
             throw new NullPointerException(LOTTERIES_WERE_NOT_GENERATED);
         }
-        this.lotteries = lotteries;
+        this.lotteries = new LinkedList<>(lotteries);
     }
 
     private boolean isNull(List<Lottery> lotteries) {
@@ -20,7 +22,7 @@ public class Lotteries {
     }
 
     public List<Lottery> list() {
-        return lotteries;
+        return Collections.unmodifiableList(lotteries);
     }
 
     public int size() {
