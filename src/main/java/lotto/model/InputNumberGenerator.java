@@ -1,11 +1,14 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class InputNumberGenerator implements NumberGenerator {
 
-    private final List<Number> numberList = new ArrayList<>();
+    private final Set<Number> numberList = new HashSet<>();
     private static final int LOTTO_SIZE = 6;
     private static final String DEFAULT_DELIMITER = ",";
     private static final String WHITE_SPACE = "\\s";
@@ -14,20 +17,13 @@ public class InputNumberGenerator implements NumberGenerator {
     public InputNumberGenerator(String inputs) {
         String[] inputList = inputs.replaceAll(WHITE_SPACE, EMPTY_STRING).split(DEFAULT_DELIMITER);
         for (String input : inputList) {
-            insertNumber(input);
+            numberList.add(new Number(input));
         }
         invalidInputCheck();
     }
 
-    public void insertNumber(String input) {
-        Number number = new Number(input);
-        if (!numberList.contains(number)) {
-            numberList.add(number);
-        }
-    }
-
     public List<Number> pickNumbers() {
-        return numberList;
+        return Collections.unmodifiableList(new ArrayList<>(numberList));
     }
 
     private void invalidInputCheck() {
