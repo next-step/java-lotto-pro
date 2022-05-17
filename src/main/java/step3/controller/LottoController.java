@@ -22,7 +22,7 @@ public class LottoController {
     public void startLotto() {
         Money money = null;
         Ticket ticket = null;
-        while (moneyAndTicketIsNotValid(money,ticket)) { //돈을 정상적으로 받아올때까지 반복한다
+        while (moneyAndTicketIsNotValid(money, ticket)) { //돈을 정상적으로 받아올때까지 반복한다
             String moneySource = inputView.getMoney();
             money = lottoMachine.insertMoney(moneySource);
             ticket = lottoMachine.buyTicket(money);
@@ -32,7 +32,7 @@ public class LottoController {
         outputView.printLottoInfo(lottoMachine.getLottoNumbers());
 
         LottoTicket winnerTicket = null;
-        while (winnerTicket == null) { //우승 티켓을 정상적으로 받아올때까지 반복한다
+        while (winnerTicketIsNotValid(winnerTicket)) { //우승 티켓을 정상적으로 받아올때까지 반복한다
             String manualLottoSource = inputView.getWinnerLotto();
             winnerTicket = lottoMachine.makeManualLottoTicket(manualLottoSource);
         }
@@ -40,7 +40,11 @@ public class LottoController {
         outputView.printOutput(lottoMachine.checkWin(winnerTicket), money);
     }
 
-    private boolean moneyAndTicketIsNotValid(Money money,int ticket){
-        return money == null || ticket == 0;
+    private boolean moneyAndTicketIsNotValid(Money money, Ticket ticket) {
+        return money == null || ticket == null;
+    }
+
+    private boolean winnerTicketIsNotValid(LottoTicket winnerTicket) {
+        return winnerTicket == null;
     }
 }
