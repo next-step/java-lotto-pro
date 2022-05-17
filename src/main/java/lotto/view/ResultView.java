@@ -11,7 +11,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    public static final double ROUND_DIGIT_VALUE = 100d;
     private static final int LOTTO_RANK_MIN_VALUE = 3;
     private static final int LOTTO_PURCHASE_PRICE = 1000;
 
@@ -21,11 +20,11 @@ public class ResultView {
     private final static String LOTTO_RANK_MESSAGE = "%d개 일치 (%d원)- %d개%s";
     private final static String LOTTO_PROFIT_MESSAGE = "총 수익률은 %.2f입니다.%s";
 
-    public void printPurchaseLottoCount(int purchaseCount) {
+    public static void printPurchaseLottoCount(int purchaseCount) {
         System.out.printf(PURCHASE_LOTTO_COUNT_MESSAGE, purchaseCount);
     }
 
-    public void printIssuedLottoNumber(Lottos lottos) {
+    public static void printIssuedLottoNumber(Lottos lottos) {
         lottos.getLottos().forEach(lotto -> {
             final List<Integer> lottoNumbers = lotto.getLottoNumbers().stream()
                     .sorted()
@@ -34,7 +33,7 @@ public class ResultView {
         });
     }
 
-    public void printLottoResult(LottoResult lottoResult) {
+    public static void printLottoResult(LottoResult lottoResult) {
         System.out.println(LOTTO_RESULT_MESSAGE);
 
         Map<Lotto, LottoRank> lottoLottoRankMap = lottoResult.getLottoResultMap();
@@ -56,29 +55,29 @@ public class ResultView {
         printLottoProfit(lottoProfit(winningLottoPrice, purchaseLottoPrice));
     }
 
-    private void putLottoRankCountMap(Map<LottoRank, Integer> lottoRankCountMap, LottoRank lottoRank) {
+    private static void putLottoRankCountMap(Map<LottoRank, Integer> lottoRankCountMap, LottoRank lottoRank) {
         if (isIncludeLottoRank(lottoRank)) {
             lottoRankCountMap.put(lottoRank, lottoRankCountMap.getOrDefault(lottoRank, 0) + 1);
         }
     }
 
-    private boolean isIncludeLottoRank(LottoRank lottoRank) {
+    private static boolean isIncludeLottoRank(LottoRank lottoRank) {
         return lottoRank.getMatchedCount() >= LOTTO_RANK_MIN_VALUE;
     }
 
-    private void printLottoRankCount(int matchedCount, int price, int rankCount) {
+    private static void printLottoRankCount(int matchedCount, int price, int rankCount) {
         System.out.printf(LOTTO_RANK_MESSAGE, matchedCount, price, rankCount, NEW_LINE);
     }
 
-    private int purchaseLottoPrice(int issuedLottoCount) {
+    private static int purchaseLottoPrice(int issuedLottoCount) {
         return LOTTO_PURCHASE_PRICE * issuedLottoCount;
     }
 
-    private double lottoProfit(int lottoWinningPrice, int lottoPurchasePrice) {
+    private static double lottoProfit(int lottoWinningPrice, int lottoPurchasePrice) {
         return NumberUtil.intToDouble(lottoWinningPrice) / NumberUtil.intToDouble(lottoPurchasePrice) ;
     }
 
-    private void printLottoProfit(double lottoProfit) {
+    private static void printLottoProfit(double lottoProfit) {
         System.out.printf(LOTTO_PROFIT_MESSAGE, lottoProfit, NEW_LINE);
     }
 }
