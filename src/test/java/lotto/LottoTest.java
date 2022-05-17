@@ -37,6 +37,14 @@ class LottoTest {
         assertThat(matchCount).isEqualTo(3);
     }
 
+    @Test
+    void 중복되는_번호가_인자로_들어올_경우_예외가_발생한다() {
+        // when and then
+        assertThatThrownBy(() ->
+                Lotto.createWithNumberLetter("1 ,2 ,3 ,4 ,5 ,5")
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
 
 
 }

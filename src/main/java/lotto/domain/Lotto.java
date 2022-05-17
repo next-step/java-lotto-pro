@@ -41,13 +41,13 @@ public class Lotto {
     }
 
     public int match(Lotto winningLotto) {
-        return (int) this.lotto.stream()
+        return (int) this.lottos.stream()
                 .filter(winningLotto::match)
                 .count();
     }
 
     protected boolean match(LottoNumber lottoNumber) {
-        return lotto.contains(lottoNumber);
+        return lottos.contains(lottoNumber);
     }
 
     public List<LottoNumber> getLotto() {
