@@ -6,7 +6,8 @@ import java.util.EnumSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 public enum LottoRank {
 
@@ -19,9 +20,10 @@ public enum LottoRank {
 
     private final int matchNumberCount;
     private final int winningAmount;
-    private static final Map<Integer, LottoRank> matchCountRankExcludeBonus = Collections
-            .unmodifiableMap(Arrays.stream(values()).filter(lottoRank -> !SECOND_BONUS.equals(lottoRank))
-                    .collect(Collectors.toMap(LottoRank::getMatchNumberCount, Function.identity())));
+    private static final Map<Integer, LottoRank> matchCountRankExcludeBonus = Arrays.stream(values())
+            .filter(lottoRank -> !SECOND_BONUS.equals(lottoRank))
+            .collect(collectingAndThen(toMap(LottoRank::getMatchNumberCount, Function.identity()),
+                    Collections::unmodifiableMap));
 
     LottoRank(int matchNumberCount, int winningAmount) {
         this.matchNumberCount = matchNumberCount;
