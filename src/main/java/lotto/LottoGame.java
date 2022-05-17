@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class LottoGame {
 
-    final static int TICKET_UNIT_PRICE = 1000;
+    static final int TICKET_UNIT_PRICE = 1000;
 
     private int purchasePrice;
 
