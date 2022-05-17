@@ -27,7 +27,7 @@ public class InputView {
     }
 
     public List<List<Integer>> inputManualLottoNumbers(Integer manualCount) {
-        if (manualCount < 0) {
+        if (manualCount == 0) {
             return Collections.emptyList();
         }
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");

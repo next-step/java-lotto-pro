@@ -1,7 +1,7 @@
 package lotto.ui;
 
+import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
 import lotto.domain.WinningRank;
 
@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class ResultView {
 
-    public void printLottoCount(LottoPrice lottoPrice) {
-        System.out.println("\n수동으로 " + lottoPrice.getManualCount() + "장, 자동으로 " + lottoPrice.getAutoCount() + "개를 구매했습니다.");
+    public void printLottoCount(LottoCount lottoCount) {
+        System.out.println("\n수동으로 " + lottoCount.getManualCount() + "장, 자동으로 " + lottoCount.getAutoCount() + "개를 구매했습니다.");
     }
 
     public void printLottoNumbers(List<LottoNumbers> lottoNumbers) {

@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.GenerateLottoNumber;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
@@ -15,19 +16,21 @@ public class LottoApplication {
     private final List<LottoNumbers> lottoNumbers = new ArrayList<>();
     private final GenerateLottoNumber generateLottoNumber = new GenerateLottoNumber();
     private LottoPrice lottoPrice;
+    private LottoCount lottoCount;
     private WinningLottoNumber winningNumbers;
 
-    public LottoPrice purchase(Integer price, Integer manualCount) {
-        lottoPrice = new LottoPrice(price, manualCount);
-        return lottoPrice;
+    public LottoCount purchase(Integer price, Integer manualCount) {
+        lottoPrice = new LottoPrice(price);
+        lottoCount = new LottoCount(manualCount, lottoPrice);
+        return lottoCount;
     }
 
     public List<LottoNumbers> generateLottoNumbers(List<List<Integer>> manualLottoNumbers) {
-        Integer manualCount = lottoPrice.getManualCount();
+        Integer manualCount = lottoCount.getManualCount();
         for (int i = 0; i < manualCount; i++) {
             lottoNumbers.add(new LottoNumbers(manualLottoNumbers.get(i)));
         }
-        Integer autoCount = lottoPrice.getAutoCount();
+        Integer autoCount = lottoCount.getAutoCount();
         for (int i = 0; i < autoCount; i++) {
             lottoNumbers.add(new LottoNumbers(generateLottoNumber.initNumbers()));
         }

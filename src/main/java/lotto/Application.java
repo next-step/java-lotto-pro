@@ -1,7 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
 import lotto.domain.WinningLottoNumber;
 import lotto.ui.InputView;
@@ -23,10 +23,10 @@ public class Application {
     private static void initLotto() {
         Integer price = inputView.inputPrice();
         Integer manualCount = inputView.inputManualCount();
-        LottoPrice lottoPrice = lottoApplication.purchase(price, manualCount);
+        LottoCount lottoCount = lottoApplication.purchase(price, manualCount);
 
         List<List<Integer>> manualLottoNumbers = inputView.inputManualLottoNumbers(manualCount);
-        resultView.printLottoCount(lottoPrice);
+        resultView.printLottoCount(lottoCount);
         List<LottoNumbers> lottoNumbers = lottoApplication.generateLottoNumbers(manualLottoNumbers);
 
         resultView.printLottoNumbers(lottoNumbers);
