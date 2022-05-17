@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private static final Map<CompareEnum, Integer> hitList = new HashMap<>();
+    private Map<CompareEnum, Integer> hitList = new HashMap<>();
     private Yield yield;
 
     public Map<CompareEnum, Integer> getHitList() {
