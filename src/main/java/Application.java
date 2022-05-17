@@ -32,13 +32,12 @@ public class Application {
     }
 
     private Money inputMoney() throws IOException {
-        while (true) {
-            try {
-                String moneyWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.MONEY_MESSAGE);
-                return new Money(moneyWord);
-            } catch (IllegalArgumentException e) {
-                ResultView.printConsole(e.getMessage());
-            }
+        try {
+            String moneyWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.MONEY_MESSAGE);
+            return new Money(moneyWord);
+        } catch (IllegalArgumentException e) {
+            ResultView.printConsole(e.getMessage());
+            return inputMoney();
         }
     }
 
@@ -49,25 +48,23 @@ public class Application {
     }
 
     private LottoNumbers inputLottoNumbers(String message) throws IOException {
-        while (true) {
-            try {
-                String winningNumberWords = InputConsoleUtils.readLineForMessage(message);
-                List<String> winningNumbers = InputStringUtils.nonSpaceSplit(winningNumberWords, DELIMITER_COMMA);
-                return new LottoNumbers(winningNumbers);
-            } catch (IllegalArgumentException e) {
-                ResultView.printConsole(e.getMessage());
-            }
+        try {
+            String winningNumberWords = InputConsoleUtils.readLineForMessage(message);
+            List<String> winningNumbers = InputStringUtils.nonSpaceSplit(winningNumberWords, DELIMITER_COMMA);
+            return new LottoNumbers(winningNumbers);
+        } catch (IllegalArgumentException e) {
+            ResultView.printConsole(e.getMessage());
+            return inputLottoNumbers(message);
         }
     }
 
     private LottoNumber inputLottoNumber(String message) throws IOException {
-        while (true) {
-            try {
-                String numberWord = InputConsoleUtils.readLineForMessage(message);
-                return new LottoNumber(numberWord);
-            } catch (IllegalArgumentException e) {
-                ResultView.printConsole(e.getMessage());
-            }
+        try {
+            String numberWord = InputConsoleUtils.readLineForMessage(message);
+            return new LottoNumber(numberWord);
+        } catch (IllegalArgumentException e) {
+            ResultView.printConsole(e.getMessage());
+            return inputLottoNumber(message);
         }
     }
 }
