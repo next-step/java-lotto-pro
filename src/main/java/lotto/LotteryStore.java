@@ -12,11 +12,11 @@ public class LotteryStore {
     }
 
     public static Lotteries exchangeCouponToLotteries(Coupon coupon) {
-        LotteryUtils lotteryUtils = new LotteryUtils(Lottery.LOTTERY_MINIMUM_NUMBER, Lottery.LOTTERY_MAXIMUM_NUMBER);
+        LotteryUtils lotteryUtils = new LotteryUtils(Lottery.MINIMUM_NUMBER, Lottery.MAXIMUM_NUMBER);
         List<Lottery> lotteries = new LinkedList<>();
         int size = coupon.size();
         while (size-- > 0) {
-            lotteries.add(new Lottery(lotteryUtils.pickRandomNumbers(Lottery.LOTTERY_SIZE)));
+            lotteries.add(new Lottery(lotteryUtils.pickRandomNumbers(Lottery.SIZE)));
         }
         return new Lotteries(lotteries);
     }

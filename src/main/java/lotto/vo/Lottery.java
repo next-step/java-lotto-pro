@@ -3,17 +3,14 @@ package lotto.vo;
 import java.util.*;
 
 public class Lottery {
-    public final static int LOTTERY_MINIMUM_NUMBER = 1;
-    public final static int LOTTERY_MAXIMUM_NUMBER = 45;
-    public final static int LOTTERY_SIZE = 6;
+    public final static int MINIMUM_NUMBER = 1;
+    public final static int MAXIMUM_NUMBER = 45;
+    public final static int SIZE = 6;
 
     private final static String LOTTERY_NUMBERS_WERE_NOT_GENERATED = "로또 번호가 생성되지 않았습니다.";
     private final static String LOTTERY_NUMBERS_WERE_OUT_OF_RANGE = "로또 번호 범위에 벗어난 숫자입니다.";
 
     private List<Number> numbers;
-
-    public Lottery() {
-    }
 
     public Lottery(List<Number> numbers) {
         if (isNull(numbers)) {
@@ -34,7 +31,7 @@ public class Lottery {
 
     private boolean isInsufficientSize(List<Number> numbers) {
         Set<Number> set = new HashSet<>(numbers);
-        return set.size() < LOTTERY_SIZE || set.size() > LOTTERY_SIZE;
+        return set.size() < SIZE || set.size() > SIZE;
     }
 
     private boolean isOutOfRange(List<Number> numbers) {
@@ -48,7 +45,7 @@ public class Lottery {
     }
 
     private boolean isUnderFlowOrOverFlow(Number number) {
-        return number.value() < LOTTERY_MINIMUM_NUMBER || number.value() > LOTTERY_MAXIMUM_NUMBER;
+        return number.value() < MINIMUM_NUMBER || number.value() > MAXIMUM_NUMBER;
     }
 
     public List<Number> list() {

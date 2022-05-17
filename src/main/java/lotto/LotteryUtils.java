@@ -15,10 +15,10 @@ public class LotteryUtils {
     private final List<Number> numbers = new LinkedList<>();
 
     public LotteryUtils(int number, int creationCount) {
-        if (number < Lottery.LOTTERY_MINIMUM_NUMBER) {
+        if (number < Lottery.MINIMUM_NUMBER) {
             throw new IllegalArgumentException(LOTTERY_NUMBERS_MUST_BE_POSITIVE_INTEGERS);
         }
-        if (creationCount < Lottery.LOTTERY_SIZE) {
+        if (creationCount < Lottery.SIZE) {
             throw new IllegalArgumentException(LOTTERY_NUMBERS_COUNT_MUST_BE_AT_LEAST_SIX);
         }
         while (number <= creationCount) {
