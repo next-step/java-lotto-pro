@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public static int inputBuyAmount(String buyAmountText) {
-        System.out.println(buyAmountText);
+    public static int inputBuyAmount() {
+        System.out.println("구입금액을 입력해 주세요.");
         return newScanner().nextInt();
     }
 

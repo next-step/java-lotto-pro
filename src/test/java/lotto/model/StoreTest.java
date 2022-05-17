@@ -17,8 +17,7 @@ public class StoreTest {
     @Test
     @DisplayName("받은 금액 만큼 로또 반환")
     public void prepareLottos() {
-        store.receiveAmount(14000);
-        assertThat(store.giveLotto().allGames().size()).isEqualTo(14);
+        assertThat(store.giveLotto(14000).allGames().size()).isEqualTo(14);
     }
 
 }
