@@ -18,7 +18,11 @@ public enum LottoRank {
         this.winningPrice = winningPrice;
     }
 
-    public static Optional<LottoRank> rankMatch(int matchCount) {
+    public static Optional<LottoRank> rankMatch(int matchCount, boolean bonusMatch) {
+        if(matchCount == 5 && bonusMatch) {
+            return Optional.of(LottoRank.FIVE_BONUS);
+        }
+
         return Arrays.stream(LottoRank.values())
             .filter(lottoRank -> lottoRank.correctCount == matchCount)
             .findFirst();

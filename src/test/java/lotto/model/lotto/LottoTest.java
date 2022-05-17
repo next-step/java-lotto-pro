@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import lotto.model.winning.WinningLotto;
+import lotto.type.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +30,7 @@ public class LottoTest {
         Lotto lotto = Lotto.of(new String[]{"1", "2", "3", "4", "5", "6"});
         WinningLotto winningLotto = new WinningLotto(new String[]{"1", "2", "3", "7", "8", "9"}, 7);
 
-        assertEquals(lotto.match(winningLotto), 3);
+        assertEquals(winningLotto.match(lotto).get(), LottoRank.THREE);
     }
 
 }

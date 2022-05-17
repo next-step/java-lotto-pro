@@ -24,7 +24,7 @@ public class PurchaseLotto {
             .forEach(lottoRank -> rankMap.put(lottoRank, 0));
 
         lottoList.forEach(lotto -> {
-            Optional<LottoRank> lottoRank = LottoRank.rankMatch(lotto.match(winningLotto));
+            Optional<LottoRank> lottoRank =  winningLotto.match(lotto);
             lottoRank.ifPresent(rank -> rankMap.put(rank, rankMap.get(rank) + 1));
         });
 

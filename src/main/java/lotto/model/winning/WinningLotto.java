@@ -1,21 +1,25 @@
 package lotto.model.winning;
 
 import java.util.Objects;
+import java.util.Optional;
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoNumber;
+import lotto.type.LottoRank;
 
 public class WinningLotto {
 
-    private final Lotto lotto;
+    private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String[] lottoNumberArr, int bonusNumber) {
-        this.lotto = Lotto.of(lottoNumberArr);
+        this.winningLotto = Lotto.of(lottoNumberArr);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return lotto.contains(lottoNumber);
+    public Optional<LottoRank> match(Lotto lotto) {
+        int matchCount = this.winningLotto.match(lotto);
+        boolean matchBonus = lotto.contains(bonusNumber);
+        return LottoRank.rankMatch(matchCount, matchBonus);
     }
 
     @Override
@@ -27,12 +31,13 @@ public class WinningLotto {
             return false;
         }
         WinningLotto that = (WinningLotto) o;
-        return Objects.equals(lotto, that.lotto) && Objects.equals(bonusNumber, that.bonusNumber);
+        return Objects.equals(winningLotto, that.winningLotto) && Objects.equals(bonusNumber,
+            that.bonusNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto, bonusNumber);
+        return Objects.hash(winningLotto, bonusNumber);
     }
 
 }
