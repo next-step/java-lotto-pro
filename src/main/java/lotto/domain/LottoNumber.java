@@ -6,8 +6,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int lottoNumber;
 
     private LottoNumber(int lottoNumber) {
+        validate(lottoNumber);
         this.lottoNumber = lottoNumber;
-        validate();
     }
 
     public static LottoNumber from(int lottoNumber) {
@@ -18,8 +18,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(Integer.parseInt(lottoNumber));
     }
 
-    private void validate() {
-        if (this.lottoNumber < 1 || this.lottoNumber > 45) {
+    private void validate(int lottoNumber) {
+        if (lottoNumber < 1 || lottoNumber > 45) {
             throw new IllegalArgumentException("로또 숫자는 1 이상 45 이하 입니다.");
         }
     }
