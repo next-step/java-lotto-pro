@@ -86,6 +86,11 @@ public class Lotto {
     private static boolean isValidLottoCount(int size) {
         return size == LOTTO_NUMBER_COUNT;
     }
+
+    @Override
+    public String toString() {
+        return "" + lottoNumbers;
+    }
 }
 
 
