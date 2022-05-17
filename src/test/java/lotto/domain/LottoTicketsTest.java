@@ -27,6 +27,20 @@ class LottoTicketsTest {
     }
 
     @Test
+    @DisplayName("주어진 숫자 만큼의 로또 티켓들이 자동으로 생성되어야 한다.")
+    void create_automatically() {
+        // given
+        final int count = 10;
+
+        // when
+        final LottoTickets lottoTickets = LottoTickets.createAutomatically(count);
+
+        // then
+        assertThat(lottoTickets).isNotNull();
+        assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
+    }
+
+    @Test
     @DisplayName("prizeMap 호출 시 올바른 구조의 당첨 결과 Map 객체가 반환되어야 한다")
     void prizeMap() {
         // given

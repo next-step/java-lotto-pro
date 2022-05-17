@@ -1,14 +1,24 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.service.AutoNumbersIssuer;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
-    LottoTickets(final List<LottoTicket> lottoTickets) {
+    public LottoTickets(final List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
+    }
+
+    public static LottoTickets createAutomatically(final int count) {
+        final List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottoTickets.add(new LottoTicket(new LottoNumbers(AutoNumbersIssuer.issueNumbers())));
+        }
+        return new LottoTickets(lottoTickets);
     }
 
     public Map<Prize, Integer> prizeMap(final LottoNumbers winningNumbers) {

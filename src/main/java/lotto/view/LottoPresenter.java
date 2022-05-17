@@ -11,23 +11,16 @@ import java.util.Scanner;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPayment;
 import lotto.domain.LottoTickets;
-import lotto.domain.LottoTicketsFactory;
 import lotto.domain.Prize;
 import lotto.service.PrizeCalculator;
 
 public class LottoPresenter {
     private static final int[] PRINTABLE_MATCH_COUNTS = {3, 4, 5, 6};
 
-    private final LottoTicketsFactory lottoTicketsFactory;
-
-    public LottoPresenter(final LottoTicketsFactory lottoTicketsFactory) {
-        this.lottoTicketsFactory = lottoTicketsFactory;
-    }
-
     public void present() {
         final Scanner scanner = new Scanner(System.in);
         final LottoPayment payment = requestPayment(scanner);
-        final LottoTickets tickets = lottoTicketsFactory.createAutomatically(payment.getPurchasableAmount());
+        final LottoTickets tickets = LottoTickets.createAutomatically(payment.getPurchasableAmount());
         tickets.print();
         printLineSeparator();
         final LottoNumbers winningNumbers = requestWinningNumbers(scanner);
