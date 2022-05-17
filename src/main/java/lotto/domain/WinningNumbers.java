@@ -8,8 +8,8 @@ public class WinningNumbers {
     private final Set<LottoNumber> winningNumbers;
 
     public WinningNumbers(LottoNumber[] winningNumbers) {
-        this.winningNumbers = new HashSet<>(Arrays.asList(winningNumbers));
         validateDuplicated(winningNumbers);
+        this.winningNumbers = new HashSet<>(Arrays.asList(winningNumbers));
     }
 
     public MatchResult matchWinningLotto(Lotto lotto) {
