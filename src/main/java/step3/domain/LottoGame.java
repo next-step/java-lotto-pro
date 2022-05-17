@@ -17,8 +17,8 @@ public class LottoGame {
 
         List<Integer> winnerNumbers = InputView.inputWinnerNumbers();
         LottoResult lottoResult = lottos.allMatch(winnerNumbers);
-        lottoResult.calculateYield(investmentAmount(buyCount));
-        OutputView.printResult(lottoResult);
+        double yield = lottoResult.calculateYield(investmentAmount(buyCount));
+        OutputView.printResult(lottoResult, yield);
     }
 
     public static int buyCount(int money) {

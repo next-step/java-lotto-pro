@@ -15,7 +15,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printResult(LottoResult lottoResult) {
+    public static void printResult(LottoResult lottoResult, double yield) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         for (Ranking ranking : Ranking.winners()) {
@@ -24,6 +24,6 @@ public class OutputView {
                     , (int) ranking.getWinningMoney()
                     , lottoResult.rankingCount(ranking));
         }
-        System.out.printf("총 수익률은 %.02f입니다.%n", lottoResult.getYield());
+        System.out.printf("총 수익률은 %.02f입니다.%n", yield);
     }
 }

@@ -27,7 +27,7 @@ public class LottoResultTest {
     @Test
     void 수익률_계산() {
         lottoResult.update(Ranking.FIFTH);
-        lottoResult.calculateYield(10_000);
-        assertThat(lottoResult.getYield()).isEqualTo(0.50);
+        double yield = lottoResult.calculateYield(10_000);
+        assertThat(yield).isEqualTo(0.50);
     }
 }
