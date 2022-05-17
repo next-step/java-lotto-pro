@@ -9,6 +9,6 @@ public class LottoTicketTest {
     @Test
     void 로또_번호_6개_발급() {
         LottoTicket numbers = new LottoTicket();
-        assertThat(numbers.getNumbersAsArray().length).isEqualTo(6);
+        assertThat(numbers.getNumbersAsArray()).hasSize(6);
     }
 }
