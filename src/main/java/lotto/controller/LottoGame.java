@@ -23,14 +23,60 @@ public class LottoGame {
     private void purchase() {
         try {
             Money purchaseMoney = inputView.inputPurchaseMoney();
-            LottoTickets lottoTickets = LottoSeller.create().autoLottoTickets(purchaseMoney);
-            outputView.printLottoTickets(lottoTickets);
+            LottoCount lottoCount = lottoCount(purchaseMoney);
+            LottoTickets inputManualTickets = manualTickets(LottoTickets.empty(), lottoCount);
+            LottoTickets lottoTickets = buyLottoTickets(lottoCount, inputManualTickets);
 
             winningResult(purchaseMoney, lottoTickets);
         } catch (IllegalArgumentException ie) {
             outputView.printExceptionMessage(ie);
             purchase();
         }
+    }
+
+    private LottoCount lottoCount(Money purchaseMoney) {
+        LottoCount lottoCount;
+        try {
+            ManualCount manualCount = ManualCount.from(inputView.inputManualCount());
+            lottoCount = purchaseMoney.askCount(manualCount);
+            return lottoCount;
+        } catch (IllegalArgumentException ie) {
+            outputView.printExceptionMessage(ie);
+            lottoCount = lottoCount(purchaseMoney);
+        }
+        return lottoCount;
+    }
+
+    private LottoTickets manualTickets(LottoTickets lottoTickets, LottoCount lottoCount) {
+        try {
+            outputView.printInputManualNumbers();
+            while (lottoCount.isRemainingCount(lottoTickets.size())) {
+                lottoTickets.addTicket(inputManualTicket());
+            }
+            return lottoTickets;
+        } catch (IllegalArgumentException ie) {
+            outputView.printExceptionMessage(ie);
+        }
+        return lottoTickets;
+    }
+
+    private LottoTicket inputManualTicket() {
+        LottoTicket lottoTicket;
+        try {
+            lottoTicket = LottoTicket.from(inputView.inputManualNumbers());
+            return lottoTicket;
+        } catch (IllegalArgumentException ie) {
+            outputView.printExceptionMessage(ie);
+            lottoTicket = inputManualTicket();
+        }
+        return lottoTicket;
+    }
+
+    private LottoTickets buyLottoTickets(LottoCount lottoCount, LottoTickets inputManualTickets) {
+        LottoTickets lottoTickets = LottoSeller.create().lottoTickets(lottoCount, inputManualTickets);
+        outputView.printPurchaseCount(lottoCount);
+        outputView.printLottoTickets(lottoTickets);
+        return lottoTickets;
     }
 
     private void winningResult(Money purchaseMoney, LottoTickets lottoTickets) {
@@ -47,7 +93,7 @@ public class LottoGame {
     }
 
     private LottoNumber bonusBall(LottoTicket winningLotto) {
-        LottoNumber bonusBall = null;
+        LottoNumber bonusBall;
         try {
             bonusBall = inputView.inputBonusBall();
             winningLotto.duplicateBonusBall(bonusBall);

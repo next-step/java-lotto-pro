@@ -1,13 +1,18 @@
 package lotto.view;
 
 import lotto.constants.DisplayMessage;
-import lotto.domain.LottoTickets;
-import lotto.domain.LottoWinningRanks;
-import lotto.domain.Money;
+import lotto.domain.*;
 
 public class OutputView {
+    public void printPurchaseCount(LottoCount lottoCount) {
+        System.out.printf(DisplayMessage.PURCHASE_LOTTO_COUNT, lottoCount.manualCount(), lottoCount.autoCount());
+    }
+
+    public void printInputManualNumbers() {
+        System.out.printf(DisplayMessage.INPUT_MANUAL_NUMBERS);
+    }
+
     public void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.printf(DisplayMessage.PURCHASE_LOTTO_COUNT, lottoTickets.size());
         System.out.println(lottoTickets);
     }
 
@@ -20,6 +25,6 @@ public class OutputView {
     }
 
     public void printExceptionMessage(Exception e) {
-        System.out.println(e.getMessage());
+        System.out.printf(e.getMessage());
     }
 }

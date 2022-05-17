@@ -5,7 +5,7 @@ import lotto.constants.ErrorMessage;
 
 public class Money {
     private static final int MIN_MONEY = 0;
-    private final double MATH_ROUND_DIGIT = 100d;
+    private static final double MATH_ROUND_DIGIT = 100d;
     private final int money;
 
     private Money(int money) {
@@ -19,8 +19,15 @@ public class Money {
         return new Money(money);
     }
 
-    public boolean isLessThenLottoPrice() {
-        return money < Constants.LOTTO_PRICE;
+    public static Money create() {
+        return from(MIN_MONEY);
+    }
+
+    public LottoCount askCount(ManualCount manualCount) {
+        if (this.money < Constants.LOTTO_PRICE) {
+            throw new IllegalArgumentException(ErrorMessage.LESS_THEN_PRICE_MONEY);
+        }
+        return LottoCount.from(this, manualCount);
     }
 
     public int purchaseCount() {
@@ -33,12 +40,13 @@ public class Money {
 
     public double returnRate(Money totalPrizeMoney) {
         double totalPrizeMoneyDouble = totalPrizeMoney.getMoney();
-        double purchaseMoneyDouble = this.money;
-        double returnRate = totalPrizeMoneyDouble / purchaseMoneyDouble;
+        double returnRate = totalPrizeMoneyDouble / (double) this.money;
         return Math.round(returnRate * MATH_ROUND_DIGIT) / MATH_ROUND_DIGIT;
     }
 
     public int getMoney() {
         return money;
     }
+
+
 }

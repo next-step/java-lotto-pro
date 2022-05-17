@@ -38,4 +38,36 @@ class LottoTicketsTest {
         //then
         assertThat(lottoWinningRanks.size()).isEqualTo(2);
     }
+
+    @DisplayName("여러 장의 로또 생성 후 로또 티켓 1장 추가")
+    @Test
+    void test_여러장의_로또_생성후_1장_추가() {
+        //when
+        lottoTickets.addTicket(LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        //then
+        assertThat(lottoTickets.size()).isEqualTo(4);
+    }
+
+    @DisplayName("여러 장의 로또 생성 후 로또 티켓s 추가")
+    @Test
+    void test_여러장의_로또_생성후_추가() {
+        //when
+        lottoTickets.addAll(lottoTickets);
+        //then
+        assertThat(lottoTickets.size()).isEqualTo(6);
+    }
+
+    @DisplayName("로또 티켓이 포함되어 있는지 확인")
+    @Test
+    void test_로또_티켓_포함되어_있는지() {
+        //when & then
+        assertThat(lottoTickets.contains(LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6)))).isTrue();
+    }
+
+    @DisplayName("로또 티켓이 포함되지 않은 경우 확인")
+    @Test
+    void test_로또_티켓_포함되지_않은_경우() {
+        //when & then
+        assertThat(lottoTickets.contains(LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 7)))).isFalse();
+    }
 }

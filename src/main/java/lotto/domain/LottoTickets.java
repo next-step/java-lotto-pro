@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.constants.ErrorMessage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
@@ -12,10 +13,14 @@ public class LottoTickets {
     }
 
     public static LottoTickets from(List<LottoTicket> lottoTickets) {
-        if (lottoTickets == null || lottoTickets.isEmpty()) {
+        if (lottoTickets == null) {
             throw new IllegalArgumentException(ErrorMessage.NOT_EMPTY_LOTTO);
         }
         return new LottoTickets(lottoTickets);
+    }
+
+    public static LottoTickets empty() {
+        return new LottoTickets(new ArrayList<>());
     }
 
     public LottoWinningRanks match(LottoTicket winningNumbers, LottoNumber bonusBall) {
@@ -26,8 +31,20 @@ public class LottoTickets {
         return lottoWinningRanks;
     }
 
+    public void addTicket(LottoTicket lottoTicket) {
+        this.lottoTickets.add(lottoTicket);
+    }
+
+    public void addAll(LottoTickets addTickets) {
+        this.lottoTickets.addAll(addTickets.lottoTickets);
+    }
+
     public int size() {
         return this.lottoTickets.size();
+    }
+
+    public boolean contains(LottoTicket lottoTicket) {
+        return lottoTickets.contains(lottoTicket);
     }
 
     @Override

@@ -29,6 +29,17 @@ public class InputView {
         return LottoNumber.from(StringToIntegerParser.parseInt(bonusBall));
     }
 
+    public int inputManualCount() {
+        System.out.printf(DisplayMessage.INPUT_MANUAL_COUNT);
+        String manualCount = readLine();
+        return StringToIntegerParser.parseInt(manualCount);
+    }
+
+    public List<Integer> inputManualNumbers() {
+        String inputNumbers = readLine();
+        return StringCommaSplitter.splitNumbers(inputNumbers);
+    }
+
     private String readLine() {
         return scanner.nextLine();
     }
