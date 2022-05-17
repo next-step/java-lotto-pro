@@ -6,10 +6,10 @@ import java.util.Set;
 import lotto.generator.LottoNumberGenerator;
 
 public class Lotto {
-    public static final int LOTTO_SIZE_NUM = 6;
+    public static final int SIZE = 6;
     private static final int COUNT_OF_MATCH_ZERO = 0;
     private static final int COUNT_OF_MATCH_ONE = 1;
-    public static final int LOTTO_PRICE = 1000;
+    public static final int PRICE = 1000;
     private final Set<LottoNumber> lotto;
 
     private Lotto(Set<LottoNumber> lotto) {
@@ -51,7 +51,7 @@ public class Lotto {
     }
 
     private boolean isNotLottoSize(int size) {
-        return size != LOTTO_SIZE_NUM;
+        return size != SIZE;
     }
 
     @Override

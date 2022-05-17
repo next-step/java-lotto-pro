@@ -23,12 +23,12 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     public Set<LottoNumber> generate() {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> shuffledLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < Lotto.LOTTO_SIZE_NUM; i++) {
+        for (int i = 0; i < Lotto.SIZE; i++) {
             shuffledLottoNumbers.add(RandomLottoNumberGenerator.lottoNumbers.get(i));
         }
         Collections.sort(shuffledLottoNumbers);
         Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int i = 0; i < Lotto.LOTTO_SIZE_NUM; i++) {
+        for (int i = 0; i < Lotto.SIZE; i++) {
             lottoNumbers.add(shuffledLottoNumbers.get(i));
         }
         return lottoNumbers;

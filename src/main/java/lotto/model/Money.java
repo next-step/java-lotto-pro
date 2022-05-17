@@ -19,7 +19,7 @@ public class Money {
     }
 
     public int maxLottoCount() {
-        return money / Lotto.LOTTO_PRICE;
+        return money / Lotto.PRICE;
     }
 
     public Money multiply(int count) {

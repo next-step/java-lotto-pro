@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import lotto.generator.InputLottoNumberGenerator;
 import lotto.generator.RandomLottoNumberGenerator;
 
 public class Lottos {
@@ -40,7 +39,7 @@ public class Lottos {
     }
 
     public Money totalPrice() {
-        return Money.valueOf(Math.multiplyExact(lottos.size(), Lotto.LOTTO_PRICE));
+        return Money.valueOf(Math.multiplyExact(lottos.size(), Lotto.PRICE));
     }
 
     public List<Lotto> readOnlyLottos() {
