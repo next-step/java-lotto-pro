@@ -15,7 +15,7 @@ public class LottoGame {
         throw new IllegalStateException(ErrorMessage.UTILITY_CLASS);
     }
 
-    public static Lottos generateLottosByMoney(Money money, LottoGenerator lottoGenerator) {
+    public static Lottos generateLottosByGenerator(Money money, LottoGenerator lottoGenerator) {
         LottoStore lottoStore = new LottoStore(money);
         LottoPaper lottoPaper = lottoStore.issueLottoPaper();
         return lottoGenerator.generateLottos(lottoPaper);

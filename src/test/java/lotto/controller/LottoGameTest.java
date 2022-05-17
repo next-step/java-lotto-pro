@@ -36,7 +36,7 @@ class LottoGameTest {
         // 테스트를 위해 로또 게임 수는 3번 한정한다.
         String money = "3000";
         LottoGenerator lottoGenerator = (lottoPaper)->new Lottos(lottos);
-        assertThat(LottoGame.generateLottosByMoney(new Money(money), lottoGenerator)).isEqualTo(new Lottos(lottos));
+        assertThat(LottoGame.generateLottosByGenerator(new Money(money), lottoGenerator)).isEqualTo(new Lottos(lottos));
     }
 
     @DisplayName("로또 결과 생성 테스트")

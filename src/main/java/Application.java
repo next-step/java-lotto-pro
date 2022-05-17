@@ -23,7 +23,7 @@ public class Application {
 
     public void startLottoGame() throws IOException {
         Money money = inputMoney();
-        Lottos lottos = LottoGame.generateLottosByMoney(money, new LottoGeneratorRandomImpl());
+        Lottos lottos = LottoGame.generateLottosByGenerator(money, new LottoGeneratorRandomImpl());
         ResultView.printLottosView(lottos);
 
         WinningLotto winningLotto = createWinningLotto();
