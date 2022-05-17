@@ -22,6 +22,15 @@ public class LottoNumberPool {
         return new Lotto(drawLottoNumbers());
     }
 
+    public Lottos generateLottos(int size) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            lottoList.add(generateLotto());
+        }
+
+        return new Lottos(lottoList);
+    }
+
     private void shuffleLottoNumberList() {
         Collections.shuffle(numberList);
     }
