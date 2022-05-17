@@ -18,7 +18,7 @@ class AutoLottoIssuerTest {
     void setUp() {
         numberSize = 6;
         lottoPrice = 1000;
-        issuer = new AutoLottoIssuer(new LottoRandomFactory(new RandomNumberMachine(), lottoPrice, numberSize));
+        issuer = new AutoLottoIssuer(new LottoRandomFactory(new RandomNumberMachine(), numberSize));
     }
 
     @Test

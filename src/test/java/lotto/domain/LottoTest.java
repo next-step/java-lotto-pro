@@ -42,14 +42,14 @@ class LottoTest {
     void 매치_결과(int input0, int input1, int input2, int input3, int input4, int input5, int matchCount) {
         LottoNumber[] lottoNumbers = getLottoNumbers(input0, input1, input2, input3, input4, input5);
 
-        Lotto lotto = new Lotto(DEFAULT_PRICE, lottoNumbers);
+        Lotto lotto = new Lotto(lottoNumbers);
         MatchResult matchResult = lotto.match(prizeNumbers);
         assertThat(matchResult).isEqualTo(MatchResult.from(matchCount));
     }
 
     @Test
     void 중복_숫자_예외() {
-        assertThatThrownBy(() -> new Lotto(DEFAULT_PRICE, getLottoNumbers(1, 1, 2, 3, 4, 5))).isInstanceOf(
+        assertThatThrownBy(() -> new Lotto(getLottoNumbers(1, 1, 2, 3, 4, 5))).isInstanceOf(
                 IllegalArgumentException.class);
     }
 
@@ -66,7 +66,7 @@ class LottoTest {
         input[5] = LottoNumber.from(input5);
         input[6] = LottoNumber.from(numberCount);
 
-        assertThatThrownBy(() -> new Lotto(DEFAULT_PRICE, input)).isInstanceOf(
+        assertThatThrownBy(() -> new Lotto(input)).isInstanceOf(
                 IllegalArgumentException.class);
     }
 

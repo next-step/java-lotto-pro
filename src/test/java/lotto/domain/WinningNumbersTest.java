@@ -19,7 +19,7 @@ class WinningNumbersTest {
 
         LottoNumber[] lottoNumbers = createNumbers(1, 2, 3, 4, 5, 6);
 
-        lotto = new Lotto(Money.from(1000), lottoNumbers);
+        lotto = new Lotto(lottoNumbers);
     }
 
     @ParameterizedTest

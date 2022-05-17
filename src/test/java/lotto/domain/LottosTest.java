@@ -64,6 +64,6 @@ class LottosTest {
         lottoNumbers[4] = LottoNumber.from(input4);
         lottoNumbers[5] = LottoNumber.from(input5);
 
-        return new Lotto(PRICE, lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 }

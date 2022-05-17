@@ -6,21 +6,19 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    private static final int DEFAULT_NUMBER_SIZE = 6;
-    private final Money price;
-    private final List<LottoNumber> lottoNumbers;
-    private final int lottoNumberSize;
+    private static final int LOTTO_NUMBER_SIZE = 6;
+    private static final Money LOTTO_PRICE = Money.from(1000);
 
-    public Lotto(Money price, LottoNumber[] lottoNumbers) {
-        this.price = price;
-        this.lottoNumberSize = DEFAULT_NUMBER_SIZE;
+    private final List<LottoNumber> lottoNumbers;
+
+    public Lotto(LottoNumber[] lottoNumbers) {
         this.lottoNumbers = Arrays.asList(lottoNumbers);
         validateNumbersCount();
         validateDuplicated();
     }
 
     public Money price() {
-        return this.price;
+        return LOTTO_PRICE;
     }
 
     public MatchResult match(List<LottoNumber> prizeNumbers) {
@@ -40,8 +38,8 @@ public class Lotto {
     }
 
     private void validateNumbersCount() {
-        if (lottoNumberSize != this.lottoNumbers.size()) {
-            throw new IllegalArgumentException(String.format("로또는 %d자리 숫자이어야 합니다.", lottoNumberSize));
+        if (LOTTO_NUMBER_SIZE != this.lottoNumbers.size()) {
+            throw new IllegalArgumentException(String.format("로또는 %d자리 숫자이어야 합니다.", LOTTO_NUMBER_SIZE));
         }
     }
 
