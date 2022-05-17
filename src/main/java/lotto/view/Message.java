@@ -2,7 +2,11 @@ package lotto.view;
 
 import lotto.vo.Lotteries;
 import lotto.vo.Lottery;
+import lotto.vo.Number;
 import lotto.vo.Result;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Message {
     private Message() {
@@ -23,7 +27,13 @@ public class Message {
     }
 
     private static void printLotteryNumbers(Lottery lottery) {
-        System.out.println(lottery.customToString());
+        List<Number> numbers = lottery.list();
+        int[] array = new int[numbers.size()];
+        int idx = 0;
+        for (Number number : numbers) {
+            array[idx++] = number.value();
+        }
+        System.out.println(Arrays.toString(array));
     }
 
     public static void printLineFeed() {
