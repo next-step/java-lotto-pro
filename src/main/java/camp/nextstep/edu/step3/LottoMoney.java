@@ -1,5 +1,6 @@
 package camp.nextstep.edu.step3;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoMoney {
@@ -26,7 +27,12 @@ public class LottoMoney {
             throw new IllegalStateException("invalid money");
         }
         double rate = Double.longBitsToDouble(totalMoney) / Double.longBitsToDouble(this.money);
-        return  new EarningsRate(Math.floor(rate * 100) / 100.0);
+        return new EarningsRate(Math.floor(rate * 100) / 100.0);
+    }
+
+    public LottoMoney excludingAmount(final List<Lotto> lotto) {
+        int i = this.money - (LOTTO_PRICE * lotto.size());
+        return new LottoMoney(i);
     }
 
     @Override
@@ -41,5 +47,4 @@ public class LottoMoney {
     public int hashCode() {
         return Objects.hash(money);
     }
-
 }

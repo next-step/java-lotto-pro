@@ -14,14 +14,18 @@ public class LottoPaper {
         this.purchase = purchase;
     }
 
-    public LottoResult checkAll(final Lotto answerLotto, final LottoNumber bonus) {
-        if (Objects.isNull(answerLotto) || Objects.isNull(bonus)) {
+    public LottoResult checkAll(final LottoAnswer answerLotto) {
+        if (Objects.isNull(answerLotto)) {
             throw new IllegalArgumentException("invalid check all input");
         }
 
         return new LottoResult(purchase.stream()
-                .map((lotto) -> lotto.checkTo(answerLotto, bonus))
+                .map(answerLotto::verify)
                 .collect(Collectors.toList()));
+    }
+
+    public boolean isContain(final Lotto lotto) {
+        return purchase.contains(lotto);
     }
 
     public int numberOfPurchases() {

@@ -11,20 +11,14 @@ public enum Hit {
     THREE(3, 5_000L),
     FOUR(4, 50_000L),
     FIVE(5, 1_500_000L),
-    FIVE_BONUS(5, true, 30_000_000L),
+    FIVE_BONUS(5, 30_000_000L),
     ALL(6, 2_000_000_000L);
 
     private final int count;
-    private final boolean bonus;
     private final long prizeMoney;
 
     Hit(final int count, final long prizeMoney) {
-        this(count, false, prizeMoney);
-    }
-
-    Hit(final int count, final boolean bonus, final long prizeMoney) {
         this.count = count;
-        this.bonus = bonus;
         this.prizeMoney = prizeMoney;
     }
 

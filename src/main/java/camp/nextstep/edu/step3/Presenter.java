@@ -1,8 +1,6 @@
 package camp.nextstep.edu.step3;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Presenter {
@@ -14,13 +12,13 @@ public class Presenter {
     }
 
     public void printLottoList(final LottoPaper paper) {
-        System.out.printf("%d개를 구매했습니다.%n", paper.numberOfPurchases());
         System.out.println(paper);
     }
 
     public List<LottoNumber> askLastWeekWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        List<LottoNumber> numbers = userLottoNumbers(new Scanner(System.in));
+        Scanner scanner = new Scanner(System.in);
+        List<LottoNumber> numbers = userLottoNumbers(scanner.nextLine());
         System.out.println();
         return numbers;
     }
@@ -33,8 +31,9 @@ public class Presenter {
         return bonusNumber;
     }
 
-    private List<LottoNumber> userLottoNumbers(Scanner scanner) {
-        return Arrays.stream(scanner.nextLine().replace(" ", "").split(","))
+    private List<LottoNumber> userLottoNumbers(final String input) {
+        return Arrays.stream(input.split(","))
+                .map((item) -> item.replace(" ", ""))
                 .mapToInt(Integer::parseInt)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
@@ -46,4 +45,37 @@ public class Presenter {
         System.out.print(result);
         System.out.println(earningsRate);
     }
+
+    public void printIssuedHistory(IssuedHistory issuedHistory) {
+        System.out.println();
+        System.out.println(issuedHistory);
+    }
+
+    public List<Lotto> askManualPurchase(final LottoGenerator generator) {
+        final Count count = this.askManualPurchaseCount();
+        if (Objects.equals(new Count(0), count)) {
+            return Collections.emptyList();
+        }
+        return makeManualLotto(generator, count);
+    }
+
+    private List<Lotto> makeManualLotto(final LottoGenerator generator, Count count) {
+        System.out.println();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        List<Lotto> answerLotto = new ArrayList<>();
+        while (count.isDecrease()) {
+            answerLotto.add(generator.manual(userLottoNumbers(scanner.next())));
+            count = count.decrease();
+        }
+        return answerLotto;
+    }
+
+    private Count  askManualPurchaseCount() {
+        System.out.println();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return new Count(scanner.nextInt());
+    }
+
 }
