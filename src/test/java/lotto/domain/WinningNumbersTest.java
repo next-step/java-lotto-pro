@@ -46,23 +46,6 @@ class WinningNumbersTest {
                 IllegalArgumentException.class);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"1:2:3:4:5:6:7:7"}, delimiter = ':')
-    void 숫자_개수_예외(int input0, int input1, int input2, int input3, int input4, int input5, int numberCount) {
-
-        LottoNumber[] input = new LottoNumber[NUMBER_COUNT + 1];
-        input[0] = LottoNumber.from(input0);
-        input[1] = LottoNumber.from(input1);
-        input[2] = LottoNumber.from(input2);
-        input[3] = LottoNumber.from(input3);
-        input[4] = LottoNumber.from(input4);
-        input[5] = LottoNumber.from(input5);
-        input[6] = LottoNumber.from(numberCount);
-
-        assertThatThrownBy(() -> new WinningNumbers(input)).isInstanceOf(
-                IllegalArgumentException.class);
-    }
-
     private LottoNumber[] createNumbers(int input0, int input1, int input2, int input3, int input4, int input5) {
         LottoNumber[] lottoNumbers = new LottoNumber[NUMBER_COUNT];
         lottoNumbers[0] = LottoNumber.from(input0);
