@@ -14,7 +14,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 /**
@@ -76,34 +75,23 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:true", "7:false"}, delimiterString = ":")
-    @DisplayName("단일 로또 번호 포함 여부 판별")
-    public void containsTest(int given, boolean expected) {
-        // Given
-        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        // When & Then
-        assertThat(lotto.contains(LottoNumber.of(given))).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
     @MethodSource
-    @DisplayName("로또 당첨 번호와 일치하는 갯수 판별")
-    public void matchTest(Lotto lotto, Lotto winningLotto, int expected) {
+    @DisplayName("지난 주 로또 번호와 비교하여 반환된 당첨 여부 판별 객체 검증")
+    public void matchTest(Lotto lotto, Lotto winningLotto, MatchResult expected) {
         // When & Then
-        assertThat(lotto.matchCount(winningLotto)).isEqualTo(expected);
+        assertThat(lotto.match(winningLotto)).isEqualTo(expected);
     }
 
     private static Stream matchTest() {
         Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         return Stream.of(
-            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 6),
-            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7)), 5),
-            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 3, 4, 7, 8)), 4),
-            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 3, 7, 8, 9)), 3),
-            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 7, 8, 9, 10)), 2),
-            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 7, 8, 9, 10, 11)), 1),
-            Arguments.of(lotto, Lotto.of(Arrays.asList(7, 8, 9, 10, 11, 12)), 0)
+            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchResult.FIRST_PLACE),
+            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7)), MatchResult.SECOND_PLACE),
+            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 3, 4, 7, 8)), MatchResult.THIRD_PLACE),
+            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 3, 7, 8, 9)), MatchResult.FORTH_PLACE),
+            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 7, 8, 9, 10)), MatchResult.NOTHING),
+            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 7, 8, 9, 10, 11)), MatchResult.NOTHING),
+            Arguments.of(lotto, Lotto.of(Arrays.asList(7, 8, 9, 10, 11, 12)), MatchResult.NOTHING)
         );
     }
 }

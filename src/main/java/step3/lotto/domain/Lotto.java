@@ -35,6 +35,26 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
+    public MatchResult match(Lotto winningLotto) {
+        return matchResult(matchCount(winningLotto));
+    }
+
+    private MatchResult matchResult(int matchCount) {
+        if (matchCount == 3) {
+            return MatchResult.FORTH_PLACE;
+        }
+        if (matchCount == 4) {
+            return MatchResult.THIRD_PLACE;
+        }
+        if (matchCount == 5) {
+            return MatchResult.SECOND_PLACE;
+        }
+        if (matchCount == 6) {
+            return MatchResult.FIRST_PLACE;
+        }
+        return MatchResult.NOTHING;
+    }
+
     public int matchCount(Lotto answer) {
         int matchCount = 0;
         for (LottoNumber answerLottoNumber : answer.lottoNumbers) {
@@ -43,7 +63,7 @@ public class Lotto {
         return matchCount;
     }
 
-    public boolean contains(LottoNumber answerLottoNumber) {
+    private boolean contains(LottoNumber answerLottoNumber) {
         Set<Boolean> compareEqualsSet = new HashSet();
         for (LottoNumber lottoNumber : this.lottoNumbers) {
             compareEqualsSet.add(lottoNumber.equals(answerLottoNumber));
