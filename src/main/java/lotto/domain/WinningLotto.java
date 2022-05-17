@@ -7,7 +7,7 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String numbers, int bonus) {
-        this.winningLotto = new Lotto(LottoNumbers.from(numbers));
+        this.winningLotto = new Lotto(LottoNumberGenerator.from(numbers));
         LottoNumber bonusNumber = LottoNumber.from(bonus);
         validateDuplicate(bonusNumber);
         this.bonusNumber = bonusNumber;
