@@ -19,25 +19,12 @@ public enum MatchResult {
     }
 
     public static MatchResult from(int matchCount) {
-        if (matchCount == 1) {
-            return MatchResult.ONE;
+        for (MatchResult matchResult : MatchResult.values()) {
+            if (matchResult.matchCount == matchCount) {
+                return matchResult;
+            }
         }
-        if (matchCount == 2) {
-            return MatchResult.TWO;
-        }
-        if (matchCount == 3) {
-            return MatchResult.THREE;
-        }
-        if (matchCount == 4) {
-            return MatchResult.FOUR;
-        }
-        if (matchCount == 5) {
-            return MatchResult.FIVE;
-        }
-        if (matchCount == 6) {
-            return MatchResult.SIX;
-        }
-        return MatchResult.ZERO;
+        throw new IllegalArgumentException("당첨 번호와 일치하는 로또 숫자의 개수는 0과 6 범위이어야 합니다");
     }
 
     public int getMatchCount() {
