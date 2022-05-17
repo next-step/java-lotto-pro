@@ -8,13 +8,9 @@ public enum LottoRank {
     SECOND(5, 1500000),
     THIRD(4, 50000),
     FOURTH(3, 5000),
-    FIFTH(2, 0),
-    SIXTH(1, 0),
-    NONE(0, 5000);
-
-    public static final String ERROR_INVALID_MATCHED_COUNT_MESSAGE = "[ERROR] 번호 일치 갯수가 유효하지 않습니다.";
-    private int matchedCount;
-    private int price;
+    NONE(0, 0);
+    private final int matchedCount;
+    private final int price;
 
     LottoRank(int matchedCount, int price) {
         this.matchedCount = matchedCount;
