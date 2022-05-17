@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.vo.Coupon;
+import lotto.vo.Ticket;
 import lotto.vo.Lotteries;
 import lotto.vo.Lottery;
 
@@ -11,12 +11,12 @@ public class LotteryStore {
     private LotteryStore() {
     }
 
-    public static Lotteries exchangeCouponToLotteries(Coupon coupon) {
-        LotteryUtils lotteryUtils = new LotteryUtils(Lottery.MINIMUM_NUMBER, Lottery.MAXIMUM_NUMBER);
+    public static Lotteries exchangeTicketToLotteries(Ticket ticket) {
+        LotteryProducer lotteryProducer = new LotteryProducer();
         List<Lottery> lotteries = new LinkedList<>();
-        int size = coupon.size();
+        int size = ticket.size();
         while (size-- > 0) {
-            lotteries.add(new Lottery(lotteryUtils.pickRandomNumbers(Lottery.SIZE)));
+            lotteries.add(new Lottery(lotteryProducer.issue()));
         }
         return new Lotteries(lotteries);
     }

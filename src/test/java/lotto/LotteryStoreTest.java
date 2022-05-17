@@ -14,7 +14,7 @@ class LotteryStoreTest {
     @ParameterizedTest
     @MethodSource("로또_교환_쿠폰")
     void 로또_교환(Money money, int buyCount) {
-        Lotteries lotteries = LotteryStore.exchangeCouponToLotteries(LotteryClerk.exchangeCoupon(money));
+        Lotteries lotteries = LotteryStore.exchangeTicketToLotteries(LotteryClerk.exchangeTicket(money));
         assertThat(lotteries.list()).hasSize(buyCount);
     }
 
