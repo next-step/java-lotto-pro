@@ -32,7 +32,7 @@ public class LottoWinningNumbers {
     }
 
     private void checkWinningNumbersSize(final String[] splittedWinningNumbers) {
-        if (splittedWinningNumbers.length < Lotto.LOTTO_SIZE) {
+        if (splittedWinningNumbers.length != Lotto.LOTTO_SIZE) {
             throw new IllegalArgumentException(WINNING_NUMBER_LENGTH_ERROR_MESSAGE);
         }
     }
