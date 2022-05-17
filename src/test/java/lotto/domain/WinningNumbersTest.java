@@ -11,14 +11,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class WinningNumbersTest {
 
-    private int NUMBER_COUNT = 6;
     private Lotto lotto;
 
     @BeforeEach
     void setUp() {
-
-        LottoNumber[] lottoNumbers = createNumbers(1, 2, 3, 4, 5, 6);
-
+        LottoNumber[] lottoNumbers = createNumbers(new int[]{1, 2, 3, 4, 5, 6});
         lotto = new Lotto(lottoNumbers);
     }
 
@@ -32,8 +29,9 @@ class WinningNumbersTest {
             "1:7:8:9:10:11:1",
             "7:8:9:10:11:12:0"},
             delimiter = ':')
-    void 매치_결과(int input0, int input1, int input2, int input3, int input4, int input5, int matchCount) {
-        LottoNumber[] inputs = createNumbers(input0, input1, input2, input3, input4, input5);
+    void 로또번호와_당첨번호에_따른_매치결과_반환(int input0, int input1, int input2, int input3, int input4, int input5,
+                                int matchCount) {
+        LottoNumber[] inputs = createNumbers(new int[]{input0, input1, input2, input3, input4, input5});
         WinningNumbers winningNumbers = new WinningNumbers(inputs);
 
         MatchResult matchResult = winningNumbers.matchWinningLotto(lotto);
@@ -42,18 +40,15 @@ class WinningNumbersTest {
 
     @Test
     void 중복_숫자_예외() {
-        assertThatThrownBy(() -> new WinningNumbers(createNumbers(1, 1, 2, 3, 4, 5))).isInstanceOf(
+        assertThatThrownBy(() -> new WinningNumbers(createNumbers(new int[]{1, 1, 2, 3, 4, 5}))).isInstanceOf(
                 IllegalArgumentException.class);
     }
 
-    private LottoNumber[] createNumbers(int input0, int input1, int input2, int input3, int input4, int input5) {
-        LottoNumber[] lottoNumbers = new LottoNumber[NUMBER_COUNT];
-        lottoNumbers[0] = LottoNumber.from(input0);
-        lottoNumbers[1] = LottoNumber.from(input1);
-        lottoNumbers[2] = LottoNumber.from(input2);
-        lottoNumbers[3] = LottoNumber.from(input3);
-        lottoNumbers[4] = LottoNumber.from(input4);
-        lottoNumbers[5] = LottoNumber.from(input5);
+    private LottoNumber[] createNumbers(int[] inputs) {
+        LottoNumber[] lottoNumbers = new LottoNumber[inputs.length];
+        for (int index = 0; index < inputs.length; index++) {
+            lottoNumbers[index] = LottoNumber.from(inputs[index]);
+        }
         return lottoNumbers;
     }
 }

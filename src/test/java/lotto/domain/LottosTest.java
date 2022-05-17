@@ -11,35 +11,36 @@ import org.junit.jupiter.api.Test;
 
 class LottosTest {
 
-    private int NUMBER_COUNT = 6;
-    private Money PRICE = Money.from(1000);
     private WinningNumbers winningNumbers;
     private Lottos lottos;
 
     @BeforeEach
     void setUp() {
-        LottoNumber[] winningNumberInputs = new LottoNumber[NUMBER_COUNT];
-        winningNumberInputs[0] = LottoNumber.from(1);
-        winningNumberInputs[1] = LottoNumber.from(2);
-        winningNumberInputs[2] = LottoNumber.from(3);
-        winningNumberInputs[3] = LottoNumber.from(4);
-        winningNumberInputs[4] = LottoNumber.from(5);
-        winningNumberInputs[5] = LottoNumber.from(6);
-
-        winningNumbers = new WinningNumbers(winningNumberInputs);
+        int[] winningInputs = {1, 2, 3, 4, 5, 6};
+        winningNumbers = new WinningNumbers(createLottoNumbers(winningInputs));
 
         List<Lotto> lottoList = new ArrayList<>();
 
-        lottoList.add(createLotto(1, 2, 3, 4, 5, 6));
-        lottoList.add(createLotto(1, 2, 3, 4, 5, 7));
-        lottoList.add(createLotto(1, 2, 3, 4, 7, 8));
-        lottoList.add(createLotto(1, 2, 3, 7, 8, 9));
+        lottoList.add(createLotto(new int[]{1, 2, 3, 4, 5, 6}));
+        lottoList.add(createLotto(new int[]{1, 2, 3, 4, 5, 7}));
+        lottoList.add(createLotto(new int[]{1, 2, 3, 4, 7, 8}));
+        lottoList.add(createLotto(new int[]{1, 2, 3, 7, 8, 9}));
 
         lottos = Lottos.from(lottoList);
     }
 
+    private LottoNumber[] createLottoNumbers(int[] inputs) {
+        LottoNumber[] lottoNumbers = new LottoNumber[inputs.length];
+
+        for (int index = 0; index < inputs.length; index++) {
+            lottoNumbers[index] = LottoNumber.from(inputs[index]);
+        }
+
+        return lottoNumbers;
+    }
+
     @Test
-    void 당첨_로또_리스트() {
+    void 셋업에_맞는_당첨_로또_리스트_반환() {
 
         assertAll(
                 () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.THREE).size()).isEqualTo(1),
@@ -55,14 +56,12 @@ class LottosTest {
 
     }
 
-    private Lotto createLotto(int input0, int input1, int input2, int input3, int input4, int input5) {
-        LottoNumber[] lottoNumbers = new LottoNumber[NUMBER_COUNT];
-        lottoNumbers[0] = LottoNumber.from(input0);
-        lottoNumbers[1] = LottoNumber.from(input1);
-        lottoNumbers[2] = LottoNumber.from(input2);
-        lottoNumbers[3] = LottoNumber.from(input3);
-        lottoNumbers[4] = LottoNumber.from(input4);
-        lottoNumbers[5] = LottoNumber.from(input5);
+    private Lotto createLotto(int[] inputs) {
+        LottoNumber[] lottoNumbers = new LottoNumber[inputs.length];
+
+        for (int index = 0; index < inputs.length; index++) {
+            lottoNumbers[index] = LottoNumber.from(inputs[index]);
+        }
 
         return new Lotto(lottoNumbers);
     }

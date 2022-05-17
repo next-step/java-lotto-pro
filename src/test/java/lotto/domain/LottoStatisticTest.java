@@ -11,30 +11,20 @@ import org.junit.jupiter.api.Test;
 
 class LottoStatisticTest {
 
-    private int NUMBER_COUNT = 6;
-
     private LottoStatistic lottoStatistic;
 
     @BeforeEach
     void setUp() {
 
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(createLotto(7, 8, 9, 19, 20, 21));
-        lottoList.add(createLotto(7, 8, 9, 19, 20, 21));
-        lottoList.add(createLotto(7, 8, 9, 19, 20, 21));
-        lottoList.add(createLotto(7, 8, 9, 19, 20, 21));
-        lottoList.add(createLotto(7, 8, 9, 19, 20, 21));
-        lottoList.add(createLotto(7, 8, 9, 19, 20, 21));
-        lottoList.add(createLotto(7, 8, 9, 19, 20, 21));
-        lottoList.add(createLotto(7, 8, 9, 19, 20, 21));
-        lottoList.add(createLotto(7, 8, 9, 19, 20, 21));
-        lottoList.add(createLotto(1, 2, 3, 7, 8, 9));
-
-        Lottos lottos = Lottos.from(lottoList);
-
         String[] winningNumbers = {"1", "2", "3", "4", "5", "6"};
 
-        lottoStatistic = new LottoStatistic(lottos, winningNumbers);
+        int[] notWinningNumbers = {7, 8, 9, 19, 20, 21};
+        int[] threeWinningNumbers = {1, 2, 3, 7, 8, 9};
+
+        List<Lotto> lottoList = createNotWinningLottos(notWinningNumbers, 9);
+        lottoList.add(createLotto(threeWinningNumbers));
+
+        lottoStatistic = new LottoStatistic(Lottos.from(lottoList), winningNumbers);
     }
 
 
@@ -44,7 +34,7 @@ class LottoStatisticTest {
     }
 
     @Test
-    void 담청_결과를_반환() {
+    void 셋업에_맞는_담청_결과를_반환() {
 
         Map<MatchResult, Integer> winingResult = lottoStatistic.winningMatchResultCount();
 
@@ -54,15 +44,20 @@ class LottoStatisticTest {
         assertThat(winingResult.get(MatchResult.SIX)).isEqualTo(0);
     }
 
+    private List<Lotto> createNotWinningLottos(int[] notWinningNumbers, int size) {
+        List<Lotto> result = new ArrayList<>();
+        for (int index = 0; index < size; index++) {
+            result.add(createLotto(notWinningNumbers));
+        }
+        return result;
+    }
 
-    private Lotto createLotto(int input0, int input1, int input2, int input3, int input4, int input5) {
-        LottoNumber[] lottoNumbers = new LottoNumber[NUMBER_COUNT];
-        lottoNumbers[0] = LottoNumber.from(input0);
-        lottoNumbers[1] = LottoNumber.from(input1);
-        lottoNumbers[2] = LottoNumber.from(input2);
-        lottoNumbers[3] = LottoNumber.from(input3);
-        lottoNumbers[4] = LottoNumber.from(input4);
-        lottoNumbers[5] = LottoNumber.from(input5);
+    private Lotto createLotto(int[] inputs) {
+        LottoNumber[] lottoNumbers = new LottoNumber[inputs.length];
+
+        for (int index = 0; index < inputs.length; index++) {
+            lottoNumbers[index] = LottoNumber.from(inputs[index]);
+        }
 
         return new Lotto(lottoNumbers);
     }

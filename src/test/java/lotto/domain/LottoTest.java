@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
     private Set<LottoNumber> prizeNumbers;
@@ -39,34 +40,26 @@ class LottoTest {
             "1:7:8:9:10:11:1",
             "7:8:9:10:11:12:0"},
             delimiter = ':')
-    void 매치_결과(int input0, int input1, int input2, int input3, int input4, int input5, int matchCount) {
-        LottoNumber[] lottoNumbers = getLottoNumbers(input0, input1, input2, input3, input4, input5);
+    void 로또번호와_당첨번호에_따른_매치결과_반환(int input0, int input1, int input2, int input3, int input4, int input5,
+                                int matchCount) {
 
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = createLotto(new int[]{input0, input1, input2, input3, input4, input5});
         MatchResult matchResult = lotto.match(prizeNumbers);
         assertThat(matchResult).isEqualTo(MatchResult.from(matchCount));
     }
 
     @Test
     void 중복_숫자_예외() {
-        assertThatThrownBy(() -> new Lotto(getLottoNumbers(1, 1, 2, 3, 4, 5))).isInstanceOf(
+        assertThatThrownBy(() -> createLotto(new int[]{1, 1, 2, 3, 4, 5})).isInstanceOf(
                 IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1:2:3:4:5:6:7:7"}, delimiter = ':')
-    void 숫자_개수_예외(int input0, int input1, int input2, int input3, int input4, int input5, int numberCount) {
+    void 숫자_개수_예외(int input0, int input1, int input2, int input3, int input4, int input5, int input6) {
 
-        LottoNumber[] input = new LottoNumber[NUMBER_COUNT + 1];
-        input[0] = LottoNumber.from(input0);
-        input[1] = LottoNumber.from(input1);
-        input[2] = LottoNumber.from(input2);
-        input[3] = LottoNumber.from(input3);
-        input[4] = LottoNumber.from(input4);
-        input[5] = LottoNumber.from(input5);
-        input[6] = LottoNumber.from(numberCount);
-
-        assertThatThrownBy(() -> new Lotto(input)).isInstanceOf(
+        assertThatThrownBy(
+                () -> createLotto(new int[]{input0, input1, input2, input3, input4, input5, input6})).isInstanceOf(
                 IllegalArgumentException.class);
     }
 
@@ -79,6 +72,16 @@ class LottoTest {
         lottoNumbers[4] = LottoNumber.from(input4);
         lottoNumbers[5] = LottoNumber.from(input5);
         return lottoNumbers;
+    }
+
+    private Lotto createLotto(int[] inputs) {
+        LottoNumber[] lottoNumbers = new LottoNumber[inputs.length];
+
+        for (int index = 0; index < inputs.length; index++) {
+            lottoNumbers[index] = LottoNumber.from(inputs[index]);
+        }
+
+        return new Lotto(lottoNumbers);
     }
 
 }
