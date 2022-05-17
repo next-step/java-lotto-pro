@@ -38,7 +38,7 @@ public class Lotto {
     public int matchCount(Lotto answer) {
         int matchCount = 0;
         for (LottoNumber answerLottoNumber : answer.lottoNumbers) {
-            matchCount += compare(answerLottoNumber);
+            matchCount = contains(answerLottoNumber) ? matchCount + 1 : matchCount;
         }
         return matchCount;
     }
@@ -49,13 +49,6 @@ public class Lotto {
             compareEqualsSet.add(lottoNumber.equals(answerLottoNumber));
         }
         return compareEqualsSet.contains(true);
-    }
-
-    private int compare(LottoNumber answerLottoNumber) {
-        if (contains(answerLottoNumber)) {
-            return 1;
-        }
-        return 0;
     }
 
     private static void validateLottoNumberCount(int size) {
