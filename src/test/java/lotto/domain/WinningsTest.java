@@ -14,13 +14,13 @@ class WinningsTest {
     @Test
     void winnings_test() {
         LottoScore lottoScore = new LottoScore();
-        lottoScore.addScore(LottoWinnings.THREE);
-        lottoScore.addScore(LottoWinnings.FOUR);
-        lottoScore.addScore(LottoWinnings.ALL);
+        lottoScore.addScore(Rank.FIFTH);
+        lottoScore.addScore(Rank.FOURTH);
+        lottoScore.addScore(Rank.FIRST);
 
         Winnings winnings = lottoScore.getWinnings();
 
-        int expected = LottoWinnings.THREE.getWinnings() + LottoWinnings.FOUR.getWinnings() + LottoWinnings.ALL.getWinnings();
+        int expected = Rank.FIFTH.getWinningsMoney() + Rank.FOURTH.getWinningsMoney() + Rank.FIRST.getWinningsMoney();
         assertThat(winnings.getWinningsPrice()).isEqualTo(expected);
     }
 
