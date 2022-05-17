@@ -13,8 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LotteryStatisticsTest {
     @Test
     void 로또_결과() {
-        Result result1 = new Result(3, 5000, 1);
-        Result result2 = new Result(4, 50000, 1);
+        Result result1 = new Result(3, 1, 5000);
+        Result result2 = new Result(4, 1, 50000);
         List<Result> results = new LinkedList<>();
         results.add(result1);
         results.add(result2);
@@ -24,7 +24,7 @@ class LotteryStatisticsTest {
 
     @Test
     void 로또_수익률() {
-        Result result = new Result(3, 5000, 1);
+        Result result = new Result(3, 1, 5000);
         List<Result> results = new LinkedList<>();
         results.add(result);
         Winning winning = new Winning(results);

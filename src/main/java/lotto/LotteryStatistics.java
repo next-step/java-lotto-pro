@@ -6,12 +6,16 @@ import lotto.vo.Number;
 import java.util.*;
 
 public class LotteryStatistics {
-    private LotteryStatistics() {
-    }
+    private static final int MINIMUM_WIN_NUMBER = 3;
+    private static final int MAXIMUM_WIN_NUMBER = 6;
 
     private static int count;
     private static Map<Integer, Integer> matches;
     private static Map<Integer, Integer> rewards;
+    private static List<Result> results;
+
+    private LotteryStatistics() {
+    }
 
     public static void countMatches(Lottery winning, Lotteries lotteries) {
         initMatches();
@@ -24,7 +28,7 @@ public class LotteryStatistics {
 
     private static void initMatches() {
         matches = new HashMap<>();
-        for (int idx = 3; idx <= 6; idx++) {
+        for (int idx = MINIMUM_WIN_NUMBER; idx <= MAXIMUM_WIN_NUMBER; idx++) {
             matches.put(idx, 0);
         }
     }
@@ -51,11 +55,9 @@ public class LotteryStatistics {
 
     public static Winning result() {
         initRewards();
-        List<Result> results = new LinkedList<>();
+        results = new LinkedList<>();
         for (Map.Entry<Integer, Integer> entry : matches.entrySet()) {
-            if (entry.getKey() >= 3) {
-                results.add(new Result(entry.getKey(), entry.getValue(), rewards.get(entry.getKey())));
-            }
+            makeRewards(entry);
         }
         return new Winning(results);
     }
@@ -66,6 +68,12 @@ public class LotteryStatistics {
         rewards.put(4, 50000);
         rewards.put(5, 1500000);
         rewards.put(6, 2000000000);
+    }
+
+    private static void makeRewards(Map.Entry<Integer, Integer> entry) {
+        if (entry.getKey() >= MINIMUM_WIN_NUMBER) {
+            results.add(new Result(entry.getKey(), entry.getValue(), rewards.get(entry.getKey())));
+        }
     }
 
     public static double earningsRate(Winning winning, Money money) {
