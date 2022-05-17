@@ -2,7 +2,8 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.sun.tools.javac.util.List;
+import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRanking;
