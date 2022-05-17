@@ -24,10 +24,14 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public List<LottoPrize> matchResults(LottoTicket lottoTicket) {
+    public List<LottoPrize> matchResults(LottoTicket lastWinningLottoTicket, LottoNumber bonusLottoNumber) {
         return lottoTickets.stream()
-                .map(ticket -> ticket.match(lottoTicket))
+                .map(ticket -> ticket.match(lastWinningLottoTicket, hasBonusBallNumber(ticket, bonusLottoNumber)))
                 .collect(Collectors.toList());
+    }
+
+    public boolean hasBonusBallNumber(LottoTicket generatedLottoTicket, LottoNumber bonusBallNumber) {
+        return generatedLottoTicket.hasBonusBallNumber(bonusBallNumber);
     }
 
     public void printLottoTickets() {

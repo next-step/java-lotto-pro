@@ -32,6 +32,7 @@ public class ResultView {
         printMatchResult(matchResults, LottoPrize.WIN_WITH_3_MATCHES);
         printMatchResult(matchResults, LottoPrize.WIN_WITH_4_MATCHES);
         printMatchResult(matchResults, LottoPrize.WIN_WITH_5_MATCHES);
+        printMatchResult(matchResults, LottoPrize.WIN_WITH_5_MATCHES_AND_BONUS);
         printMatchResult(matchResults, LottoPrize.WIN_WITH_FULL_MATCHES);
         printProfitRate(matchResults, money);
     }
@@ -44,7 +45,7 @@ public class ResultView {
 
     private static void printMatchResult(List<LottoPrize> matchResults, LottoPrize rank) {
         int count = calculateMatchCount(matchResults, rank);
-        String format = String.format(STATISTICS_PER_NUMBER_OF_MATCH, rank.getNumberOfMatch(), rank.getPrize(), count);
+        String format = String.format(STATISTICS_PER_NUMBER_OF_MATCH, rank.getNumberOfMatch(), rank.additionalWinningStatistics(), rank.getPrize(), count);
         System.out.println(format);
     }
 

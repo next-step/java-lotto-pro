@@ -18,11 +18,15 @@ public class LottoGame {
         ResultView.printCount(money.calculateLottoTicketCount());
         ResultView.printLottoTickets(lottoTickets);
 
-        String receivedLottoNumbers = InputView.inputLatestLottoResult();
-        List<Integer> lottoNumbers = LottoNumbers.getLottoNumbersFromInput(receivedLottoNumbers);
+        String receivedNumbers = InputView.inputLatestLottoResult();
+        List<Integer> numberList = LottoNumbers.getLottoNumbersFromInput(receivedNumbers);
+        LottoNumbers lastWinningLottoNumbers = LottoNumbers.generateLottoNumbers(numberList);
+
+        LottoNumber receivedBonusLottoNumber = InputView.inputBonusLottoNumber(lastWinningLottoNumbers);
 
         List<LottoPrize> matchResults = lottoTickets.matchResults(
-                new LottoTicket(LottoNumbers.generateLottoNumbers(lottoNumbers).getReadOnlyLottoNumbers())
+                new LottoTicket(lastWinningLottoNumbers.getReadOnlyLottoNumbers()),
+                receivedBonusLottoNumber
         );
         ResultView.printStatistics(matchResults, money);
     }

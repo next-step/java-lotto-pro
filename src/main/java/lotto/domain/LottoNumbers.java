@@ -33,6 +33,10 @@ public class LottoNumbers {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     public static List<Integer> getLottoNumbersFromInput(String receivedLottoNumbers) {
         return LottoNumbersGenerator.generate(receivedLottoNumbers);
     }
