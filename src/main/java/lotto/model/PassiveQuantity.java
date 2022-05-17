@@ -15,8 +15,8 @@ public class PassiveQuantity {
         return quantity;
     }
 
-    private static void validateNumber(String price) {
-        if (!price.matches(REGEX)) {
+    private void validateNumber(String quantity) {
+        if (!quantity.matches(REGEX)) {
             throw new IllegalArgumentException(NUMBER_ERROR_MESSAGE);
         }
     }
