@@ -4,6 +4,7 @@ import static util.ListUtils.randomPickCount;
 
 import generic.Money;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Lotto {
 
@@ -38,7 +39,7 @@ public class Lotto {
                 pickLottoNumbers.contains(winNumbers.getBonusNumber()));
     }
 
-    public String toStringPickNumbers() {
-        return this.pickLottoNumbers.toStringPickNumbers();
+    public LottoNumbers numbers() {
+        return this.pickLottoNumbers;
     }
 }

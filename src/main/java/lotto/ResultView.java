@@ -9,12 +9,16 @@ import static lotto.Message.STATISTICS_START_MESSAGE;
 import static lotto.Message.WIN_RESULT_SUMMARY_MESSAGE;
 import static lotto.domain.LottoWinResult.WIN_RESULTS;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoWinResult;
 import lotto.domain.LottoWinStatistics;
 import lotto.domain.Lottos;
 
 public class ResultView {
+
+    private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     public void purchase(final Lottos lottos) {
         System.out.printf(PURCHASE_LOTTO_COUNT_MESSAGE, lottos.size());
@@ -27,7 +31,11 @@ public class ResultView {
     }
 
     private void printLotto(final Lotto lotto) {
-        System.out.printf(PRINT_LOTTO_NUMBERS, lotto.toStringPickNumbers());
+        System.out.printf(PRINT_LOTTO_NUMBERS, joinStringLottoNumbers(lotto.numbers().toValueArray()));
+    }
+
+    private String joinStringLottoNumbers(final int[] valueArray) {
+        return Arrays.stream(valueArray).mapToObj(String::valueOf).collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
     }
 
     public void drawingOfLots(final LottoWinStatistics statistics) {

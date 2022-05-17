@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static java.util.stream.Collectors.joining;
 import static util.ListUtils.distinct;
 
 import java.util.List;
@@ -54,10 +53,10 @@ public class LottoNumbers {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    public String toStringPickNumbers() {
+    public int[] toValueArray() {
         return this.lottoNumbers.stream()
-                .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
-                .collect(joining(", "));
+                .mapToInt(LottoNumber::getNumber)
+                .toArray();
     }
 
     @Override
