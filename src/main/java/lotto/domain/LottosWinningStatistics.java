@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import lotto.constants.Matched;
 
 public class LottosWinningStatistics {
@@ -12,37 +11,20 @@ public class LottosWinningStatistics {
         this.winningNumbers = winningNumbers;
     }
 
-    public int calculateTotalReward(final List<Integer> matches) {
+    public int calculateTotalReward(final LottoMatches matches) {
         int totalReward = 0;
-        for (final Integer match : matches) {
+        for (final Matched match : matches.getLottoMatches()) {
             totalReward += calculateReward(match);
         }
         return totalReward;
     }
 
-    private int calculateReward(final Integer match) {
-        return Matched.getByCount(match)
-                .getReward();
+    private int calculateReward(final Matched match) {
+        return match.getReward();
     }
 
-    public List<Integer> getWinningMatches() {
-        return lottos.matchWinningNumber(winningNumbers);
-    }
-
-    public int getWinningMatchedCount(final int matchedCount) {
-        return (int) getWinningMatches().stream()
-                .filter(match -> match == matchedCount)
-                .count();
-    }
-
-    public List<Integer> getWinningMatchesUsingBonus(final boolean isEqualBonus) {
-        return lottos.matchWinningNumberUsingBonus(winningNumbers, isEqualBonus);
-    }
-
-    public int getWinningMatchedCountUsingBonus(final int matchedCount, final boolean isEqualBonus) {
-        return (int) getWinningMatchesUsingBonus(isEqualBonus).stream()
-                .filter(match -> match == matchedCount)
-                .count();
+    public LottoMatches getWinningMatches() {
+        return new LottoMatches(lottos.matchWinningNumber(winningNumbers));
     }
 
     public Price getPrice() {

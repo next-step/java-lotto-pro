@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.constants.Matched;
 
 public class Lottos {
     private static final int DEFAULT_LOTTO_COUNT = 1;
@@ -32,20 +33,10 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Integer> matchWinningNumber(final LottoWinningNumbers winningNumbers) {
+    public List<Matched> matchWinningNumber(final LottoWinningNumbers winningNumbers) {
         return lottos.stream()
                 .map(lotto ->
                         lotto.matchesWinningNumber(winningNumbers)
-                )
-                .collect(
-                        Collectors.toList()
-                );
-    }
-
-    public List<Integer> matchWinningNumberUsingBonus(final LottoWinningNumbers winningNumbers, final boolean isEqualBonus) {
-        return lottos.stream()
-                .map(lotto ->
-                        lotto.matchesWinningNumberUsingBonus(winningNumbers, isEqualBonus)
                 )
                 .collect(
                         Collectors.toList()

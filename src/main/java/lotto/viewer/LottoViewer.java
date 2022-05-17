@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.constants.Matched;
+import lotto.domain.LottoMatches;
 import lotto.domain.Lottos;
 import lotto.domain.LottosWinningStatistics;
 import lotto.domain.Price;
@@ -79,12 +80,13 @@ public class LottoViewer {
         printMessage(BOUNDARY_MESSAGE);
 
         final List<String> stringList = new ArrayList<>();
-        final int threeMatchedCount = lottosWinningStatistics.getWinningMatchedCount(Matched.THREE_MATCHED.getCount());
-        final int fourMatchedCount = lottosWinningStatistics.getWinningMatchedCount(Matched.FOUR_MATCHED.getCount());
-        final int onlyFiveMatchedCount = lottosWinningStatistics.getWinningMatchedCountUsingBonus(Matched.FIVE_MATCHED.getCount(), false);
-        final int fiveAndBonusMatchedCount = lottosWinningStatistics.getWinningMatchedCountUsingBonus(Matched.FIVE_MATCHED.getCount(), true);
-        final int sixMatchedCount = lottosWinningStatistics.getWinningMatchedCount(Matched.SIX_MATCHED.getCount());
-        final int totalReward = lottosWinningStatistics.calculateTotalReward(lottosWinningStatistics.getWinningMatches());
+        final LottoMatches lottoMatches = lottosWinningStatistics.getWinningMatches();
+        final int threeMatchedCount = lottoMatches.matchedCount(Matched.THREE_MATCHED);
+        final int fourMatchedCount = lottoMatches.matchedCount(Matched.FOUR_MATCHED);
+        final int onlyFiveMatchedCount = lottoMatches.matchedCount(Matched.FIVE_MATCHED);
+        final int fiveAndBonusMatchedCount = lottoMatches.matchedCount(Matched.FIVE_AND_BONUS_MATCHED);
+        final int sixMatchedCount = lottoMatches.matchedCount(Matched.SIX_MATCHED);
+        final int totalReward = lottosWinningStatistics.calculateTotalReward(lottoMatches);
         final Price price = lottosWinningStatistics.getPrice();
 
         stringList.add("3개 일치 (5000원)- " + threeMatchedCount + "개");

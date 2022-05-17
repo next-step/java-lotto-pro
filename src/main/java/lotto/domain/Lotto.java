@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.constants.Matched;
 
 public class Lotto {
     public static final int LOTTO_MIN_NUMBER = 1;
@@ -58,12 +59,13 @@ public class Lotto {
         return numbers.get(index);
     }
 
-    public int matchesWinningNumber(final LottoWinningNumbers winningNumbers) {
+    public Matched matchesWinningNumber(final LottoWinningNumbers winningNumbers) {
         int matchesCount = 0;
+        boolean bonusMatched = isEqualBonusNumber(winningNumbers.getBonusNumber());
         for (int i = 0; i < winningNumbers.getWinningNumbersSize(); i++) {
             matchesCount += matchesWinningNumberThenOneElseZero(winningNumbers.getWinningNumber(i));
         }
-        return matchesCount;
+        return Matched.getByCountAndBonusMatched(matchesCount, bonusMatched);
     }
 
     private int matchesWinningNumberThenOneElseZero(final Integer winningNumber) {
@@ -73,46 +75,7 @@ public class Lotto {
         return IS_NOT_MATCHES;
     }
 
-    public int matchesWinningNumberUsingBonus(final LottoWinningNumbers winningNumbers, final boolean isEqualBonus) {
-        int matchesCount = 0;
-        for (int i = 0; i < winningNumbers.getWinningNumbersSize(); i++) {
-            matchesCount += matchesWinningNumberUsingBonusThenOneElseZero(winningNumbers.getWinningNumber(i),
-                    winningNumbers.getBonusNumber(), isEqualBonus);
-        }
-        return matchesCount;
-    }
-
-    private int matchesWinningNumberUsingBonusThenOneElseZero(final Integer winningNumber, final Integer bonusNumber,
-                                                              final boolean isEqualBonus) {
-        if (isEqualBonus) {
-            return matchesWinningNumberAndEqualBonusThenOneElseZero(winningNumber, bonusNumber);
-        }
-        return matchesWinningNumberAndNotEqualBonusThenOneElseZero(winningNumber, bonusNumber);
-    }
-
-    private int matchesWinningNumberAndEqualBonusThenOneElseZero(final Integer winningNumber,
-                                                                 final Integer bonusNumber) {
-        if (this.numbers.contains(winningNumber) &&
-                isEqualBonusNumber(bonusNumber)) {
-            return IS_MATCHES;
-        }
-        return IS_NOT_MATCHES;
-    }
-
-    private int matchesWinningNumberAndNotEqualBonusThenOneElseZero(final Integer winningNumber,
-                                                                    final Integer bonusNumber) {
-        if (this.numbers.contains(winningNumber) &&
-                isNotEqualBonusNumber(bonusNumber)) {
-            return IS_MATCHES;
-        }
-        return IS_NOT_MATCHES;
-    }
-
     private boolean isEqualBonusNumber(final Integer bonusNumber) {
         return this.bonusNumber.equals(bonusNumber);
-    }
-
-    private boolean isNotEqualBonusNumber(final Integer bonusNumber) {
-        return !this.bonusNumber.equals(bonusNumber);
     }
 }

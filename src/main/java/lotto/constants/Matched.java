@@ -1,41 +1,44 @@
 package lotto.constants;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public enum Matched {
-    NOT_MATCHED(0, 0),
-    ONE_MATCHED(1, 0),
-    TWO_MATCHED(2, 0),
-    THREE_MATCHED(3, 5_000),
-    FOUR_MATCHED(4, 50_000),
-    FIVE_MATCHED(5, 1_500_000),
-    SIX_MATCHED(6, 2_000_000_000);
+    NOT_MATCHED(0),
+    THREE_MATCHED(5_000),
+    FOUR_MATCHED(50_000),
+    FIVE_MATCHED(1_500_000),
+    FIVE_AND_BONUS_MATCHED(30_000_000),
+    SIX_MATCHED(2_000_000_000);
 
-    private final int count;
+    private static int THREE_MATCHED_COUNT = 3;
+    private static int FOUR_MATCHED_COUNT = 4;
+    private static int FIVE_MATCHED_COUNT = 5;
+    private static int SIX_MATCHED_COUNT = 6;
+
     private final int reward;
-    private static final Map<Integer, Matched> countMap = new HashMap<>();
 
-    static {
-        for (final Matched matched : Matched.values()) {
-            countMap.put(matched.count, matched);
-        }
-    }
-
-    Matched(final int count, final int reward) {
-        this.count = count;
+    Matched(final int reward) {
         this.reward = reward;
-    }
-
-    public int getCount() {
-        return this.count;
     }
 
     public int getReward() {
         return this.reward;
     }
 
-    public static Matched getByCount(final int count) {
-        return countMap.get(count);
+    public static Matched getByCountAndBonusMatched(final int count, final boolean bonusMatched) {
+        if(THREE_MATCHED_COUNT == count) {
+            return THREE_MATCHED;
+        }
+        if(FOUR_MATCHED_COUNT == count) {
+            return FOUR_MATCHED;
+        }
+        if(FIVE_MATCHED_COUNT == count && !bonusMatched) {
+            return FIVE_MATCHED;
+        }
+        if(FIVE_MATCHED_COUNT == count && bonusMatched) {
+            return FIVE_AND_BONUS_MATCHED;
+        }
+        if(SIX_MATCHED_COUNT == count) {
+            return SIX_MATCHED;
+        }
+        return NOT_MATCHED;
     }
 }
