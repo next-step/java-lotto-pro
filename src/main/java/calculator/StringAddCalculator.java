@@ -9,6 +9,7 @@ public class StringAddCalculator {
 
     private static final int GROUP_INDEX_CUSTOM_DELIMITER = 1;
     private static final int GROUP_INDEX_VALUE_TEXT = 2;
+    private static final String DEFAULT_DELIMITER = ",|:";
 
     private static final Pattern PATTERN_CUSTOM_DELIMITER_TEXT = Pattern.compile("//(.)\n(.*)");
     private static final String ERROR_MESSAGE_NEGATIVE_NUMBER = "[ERROR] Negative values not allowed.";
@@ -40,7 +41,7 @@ public class StringAddCalculator {
             return StringUtil.splitNumbersString(valueText, customDelimiter);
         }
 
-        return StringUtil.splitNumbersString(numbersString);
+        return StringUtil.splitNumbersString(numbersString, DEFAULT_DELIMITER);
     }
 
     private static int sumNumberList(final List<Integer> numberList) {

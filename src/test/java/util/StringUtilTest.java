@@ -28,19 +28,19 @@ class StringUtilTest {
     @DisplayName("기본 Delimiter로 단일 숫자 문자를 split")
     @Test
     public void splitNumbersStringWithSingleNumber() {
-        assertThat(StringUtil.splitNumbersString("1")).containsExactly(1);
+        assertThat(StringUtil.splitNumbersString("1", ",")).containsExactly(1);
     }
 
     @DisplayName("기본 Delimiter ','로 숫자열 문자를 split")
     @Test
     public void splitNumbersStringWithComma() {
-        assertThat(StringUtil.splitNumbersString("1,2,3")).containsExactly(1, 2, 3);
+        assertThat(StringUtil.splitNumbersString("1,2,3", ",")).containsExactly(1, 2, 3);
     }
 
     @DisplayName("기본 Delimiter ':'로 숫자열 문자를 split")
     @Test
     public void splitNumbersStringWithColon() {
-        assertThat(StringUtil.splitNumbersString("1:2:3")).containsExactly(1, 2, 3);
+        assertThat(StringUtil.splitNumbersString("1:2:3", ":")).containsExactly(1, 2, 3);
     }
 
     @DisplayName("커스텀 Delimiter '\t'로 숫자열 문자를 split")
@@ -52,19 +52,19 @@ class StringUtilTest {
     @DisplayName("기본 Delimiter로 빈 문자열을 split")
     @Test
     public void splitNumbersStringWithEmptyString() {
-        assertThat(StringUtil.splitNumbersString("")).isEmpty();
+        assertThat(StringUtil.splitNumbersString("", ",")).isEmpty();
     }
 
     @DisplayName("기본 Delimiter로 null을 split")
     @Test
     public void splitNumbersStringWithNull() {
-        assertThat(StringUtil.splitNumbersString(null)).isEmpty();
+        assertThat(StringUtil.splitNumbersString(null, ",")).isEmpty();
     }
 
     @DisplayName("숫자가 아닌 값이 들어있는 String split 시 Exception 확인")
     @Test
     public void splitNumbersStringWithNoneNumber() {
-        assertThatExceptionOfType(NumberFormatException.class).isThrownBy(() -> StringUtil.splitNumbersString("A,2,3"));
+        assertThatExceptionOfType(NumberFormatException.class).isThrownBy(() -> StringUtil.splitNumbersString("A,2,3", ","));
     }
 
 
