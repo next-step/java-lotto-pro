@@ -5,74 +5,65 @@ import lotto.view.Message;
 import lotto.vo.*;
 
 public class LotteryGame {
-    private static Money money;
-    private static Coupon coupon;
-    private static Lotteries lotteries;
-    private static Lottery winning;
-    private static Winning result;
-
     public static void main(String[] args) {
-        readMoney();
-
-        exchangeMoneyToCoupon();
-
-        exchangeCouponToLotteries();
-
-        printBuyingLotteriesCount();
-
-        printBuyingLotteries();
-
-        readLastWeeksWinningNumbers();
-
-        printWinningStatistics();
-
-        printDottedLine();
-
-        countMatches();
-
-        printLotteriesResult();
-
-        printLotteriesEarningsRate();
+        Money money = readMoney();
+        Lotteries lotteries = buyLotteries(money);
+        Lottery winning = readLastWeeksWinningNumbers();
+        printSummary(money, winning, lotteries);
     }
 
-    private static void readMoney(){
+    private static Lotteries buyLotteries(Money money) {
+        Lotteries lotteries = exchangeCouponToLotteries(exchangeMoneyToTicket(money));
+        printBuyingLotteriesCount(lotteries);
+        printBuyingLotteries(lotteries);
+        return lotteries;
+    }
+
+    private static Money readMoney(){
         try {
             Message.printEnterPurchaseAmount();
-            money = Console.readMoney();
+            return Console.readMoney();
         } catch (NumberFormatException ignored) {
-            readMoney();
+            return readMoney();
         }
     }
 
-    private static void exchangeMoneyToCoupon() {
+    private static Ticket exchangeMoneyToTicket(Money money) {
         try {
-            coupon = LotteryClerk.exchangeCoupon(money);
+            return LotteryClerk.exchangeTicket(money);
         } catch (IllegalArgumentException ignored) {
-            readMoney();
-            exchangeMoneyToCoupon();
+            return exchangeMoneyToTicket(readMoney());
         }
     }
 
-    private static void exchangeCouponToLotteries() {
-        lotteries = LotteryStore.exchangeCouponToLotteries(coupon);
+    private static Lotteries exchangeCouponToLotteries(Ticket ticket) {
+        return LotteryStore.exchangeTicketToLotteries(ticket);
     }
 
-    private static void printBuyingLotteriesCount() {
+    private static void printBuyingLotteriesCount(Lotteries lotteries) {
         Message.printBuyingLotteriesCount(lotteries);
     }
 
-    private static void printBuyingLotteries() {
+    private static void printBuyingLotteries(Lotteries lotteries) {
         Message.printBuyingLotteries(lotteries);
         Message.printLineFeed();
     }
 
-    private static void readLastWeeksWinningNumbers() {
+    private static Lottery readLastWeeksWinningNumbers() {
         try {
             Message.printEnterLastWeeksWinningNumbers();
-            winning = Console.readLastWeeksWinningNumbers();
+            return Console.readLastWeeksWinningNumbers();
         } catch (IllegalArgumentException ignored) {
-            readLastWeeksWinningNumbers();
+            return readLastWeeksWinningNumbers();
         }
+    }
+
+    private static void printSummary(Money money, Lottery winning, Lotteries lotteries) {
+        printWinningStatistics();
+        printDottedLine();
+        Summary summary = countMatches(winning, lotteries);
+        printLotteriesResult(summary);
+        printLotteriesEarningsRate(summary, money);
     }
 
     private static void printWinningStatistics() {
@@ -83,18 +74,18 @@ public class LotteryGame {
         Message.printDottedLine(9);
     }
 
-    private static void countMatches() {
+    private static Summary countMatches(Lottery winning, Lotteries lotteries) {
         LotteryStatistics.countMatches(winning, lotteries);
-        result = LotteryStatistics.result();
+        return LotteryStatistics.result();
     }
 
-    private static void printLotteriesResult() {
-        for (Result result : result.list()) {
+    private static void printLotteriesResult(Summary summary) {
+        for (Result result : summary.list()) {
             Message.printLotteriesResult(result);
         }
     }
 
-    private static void printLotteriesEarningsRate() {
-        Message.printLotteriesEarningsRate(LotteryStatistics.earningsRate(result, money));
+    private static void printLotteriesEarningsRate(Summary summary, Money money) {
+        Message.printLotteriesEarningsRate(LotteryStatistics.earningsRate(summary, money));
     }
 }
