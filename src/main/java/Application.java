@@ -10,7 +10,7 @@ public class Application {
     public static void main(String[] args) {
         Lotto lotto = getLotto();
         Lottery lottery = getLottery();
-        Ranks ranks = lottery.get(lotto);
+        Ranks ranks = lottery.aggregate(lotto);
         consoleOutputView.view(ranks, vendor.yield(ranks));
     }
 

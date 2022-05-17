@@ -9,17 +9,17 @@ public class Lottery {
         this.bonusLottoNumber = bonusLottoNumber;
     }
 
-    public Ranks get(Lotto lotto) {
+    public Ranks aggregate(Lotto lotto) {
         Ranks ranks = new Ranks();
 
         for (LottoNumbers lottoNumbers : lotto) {
-            ranks.add(get(lottoNumbers));
+            ranks.add(compare(lottoNumbers));
         }
 
         return ranks;
     }
 
-    private Rank get(LottoNumbers lottoNumbers) {
+    private Rank compare(LottoNumbers lottoNumbers) {
         return Rank.valueOf(
                 Math.toIntExact(StreamSupport
                         .stream(lottoNumbers.spliterator(), false)
