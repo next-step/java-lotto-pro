@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import lotto.Lotto;
 
 public enum LottoRanking {
     MISS(0, 0),
@@ -10,8 +11,8 @@ public enum LottoRanking {
     SECOND_PRIZE(5, 1_500_000),
     FIRST_PRIZE(6, 2_000_000_000);
 
-    private int matchingNumber;
-    private int winAmount;
+    public int matchingNumber;
+    public int winAmount;
 
     LottoRanking(int matchingNumber, int winAmount) {
         this.matchingNumber = matchingNumber;
@@ -28,11 +29,5 @@ public enum LottoRanking {
             .findFirst().orElse(LottoRanking.MISS);
     }
 
-    public int getWinAmount() {
-        return winAmount;
-    }
 
-    public int getMatchingNumber() {
-        return matchingNumber;
-    }
 }
