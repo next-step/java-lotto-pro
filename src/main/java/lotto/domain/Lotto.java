@@ -9,7 +9,7 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE)
+        if (lottoNumbers.stream().distinct().count() != LOTTO_NUMBER_SIZE)
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_SIZE);
 
         this.lottoNumbers = new ArrayList<>();
