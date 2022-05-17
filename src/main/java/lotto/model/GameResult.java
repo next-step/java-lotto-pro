@@ -9,9 +9,9 @@ import java.util.Map;
 public class GameResult {
     private final List<Rank> gameResult = new ArrayList<>();
 
-    public void calculateRank(Lottery winnersLottery, Lottery userLottery) {
-        long matchCount = winnersLottery.getNumbers().stream()
-                .filter(lottoNumber -> userLottery.getNumbers().contains(lottoNumber))
+    public void calculateRank(Lotto winnersLotto, Lotto userLotto) {
+        long matchCount = winnersLotto.getNumbers().stream()
+                .filter(lottoNumber -> userLotto.getNumbers().contains(lottoNumber))
                 .count();
 
         gameResult.add(Rank.getRank(matchCount));

@@ -8,15 +8,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class LotteryTest {
+class LottoTest {
     @ParameterizedTest(name = "로또 객체 수동 생성 결과 중복을 제외하고 6개의 로또 번호를 가진다")
     @ValueSource(strings = {"1,2,3,4,5,6", "1,2,3,4,5,6,6"})
     void lottoSizeTest(String input) {
         // given
-        Lottery lottery = new Lottery(new InputNumberGenerator(input));
+        Lotto lotto = new Lotto(new InputNumberGenerator(input));
 
         // when
-        List<Number> actual = lottery.getNumbers();
+        List<Number> actual = lotto.getNumbers();
 
         // then
         assertThat(actual).hasSize(6);
@@ -26,10 +26,10 @@ class LotteryTest {
     @Test
     void randomLottoSizeTest() {
         // given
-        Lottery lottery = new Lottery(new RandomNumberGenerator());
+        Lotto lotto = new Lotto(new RandomNumberGenerator());
 
         // when
-        List<Number> actual = lottery.getNumbers();
+        List<Number> actual = lotto.getNumbers();
 
         // then
         assertThat(actual).hasSize(6);

@@ -1,15 +1,10 @@
 package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Optional;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class GameResultTest {
@@ -18,12 +13,12 @@ class GameResultTest {
     @MethodSource("GameResultProvider")
     void calculateRankTest(String winnersLotteryInput, String userLotteryInput, Rank rank) {
         // given
-        Lottery winnersLottery = new Lottery(new InputNumberGenerator(winnersLotteryInput));
-        Lottery userLottery = new Lottery(new InputNumberGenerator(userLotteryInput));
+        Lotto winnersLotto = new Lotto(new InputNumberGenerator(winnersLotteryInput));
+        Lotto userLotto = new Lotto(new InputNumberGenerator(userLotteryInput));
         GameResult gameResult = new GameResult();
 
         // when
-        gameResult.calculateRank(winnersLottery, userLottery);
+        gameResult.calculateRank(winnersLotto, userLotto);
         long actual = gameResult.gameResult().get(rank);
 
         // then
@@ -34,12 +29,12 @@ class GameResultTest {
     @MethodSource("benefitResultProvider")
     void benefitResultTest(String winnersLotteryInput, String userLotteryInput, double deposit, double expected) {
         // given
-        Lottery winnersLottery = new Lottery(new InputNumberGenerator(winnersLotteryInput));
-        Lottery userLottery = new Lottery(new InputNumberGenerator(userLotteryInput));
+        Lotto winnersLotto = new Lotto(new InputNumberGenerator(winnersLotteryInput));
+        Lotto userLotto = new Lotto(new InputNumberGenerator(userLotteryInput));
         GameResult gameResult = new GameResult();
 
         // when
-        gameResult.calculateRank(winnersLottery, userLottery);
+        gameResult.calculateRank(winnersLotto, userLotto);
         double benefit = gameResult.benefitResult(deposit);
 
         // then

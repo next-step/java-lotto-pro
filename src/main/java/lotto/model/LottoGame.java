@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
-    private final List<Lottery> userLottery = new ArrayList<>();
-    private Lottery winnersLottery;
+    private final List<Lotto> userLotto = new ArrayList<>();
+    private Lotto winnersLotto;
     private Coin coin;
     private final GameResult gameResult = new GameResult();
     private static final double BENEFIT_REFERENCE_VALUE = 1;
@@ -29,14 +29,14 @@ public class LottoGame {
     public int buyLottoTicket(NumberGenerator numberGenerator) {
         int countOfLotto = coin.buyLottoTicket(Price.lottoPrice());
         for (int index = 0; index < countOfLotto; index++) {
-            userLottery.add(new Lottery(numberGenerator));
+            userLotto.add(new Lotto(numberGenerator));
         }
         return countOfLotto;
     }
 
     public boolean winnersNumber(String numbers) {
         try {
-            winnersLottery = new Lottery(new InputNumberGenerator(numbers));
+            winnersLotto = new Lotto(new InputNumberGenerator(numbers));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -45,8 +45,8 @@ public class LottoGame {
     }
 
     public Map<Rank, Long> gameResult() {
-        for (Lottery lottery : userLottery) {
-            gameResult.calculateRank(winnersLottery, lottery);
+        for (Lotto lotto : userLotto) {
+            gameResult.calculateRank(winnersLotto, lotto);
         }
         return gameResult.gameResult();
     }
@@ -59,7 +59,7 @@ public class LottoGame {
         return BENEFIT_REFERENCE_VALUE;
     }
 
-    public List<Lottery> getUserLottery() {
-        return userLottery;
+    public List<Lotto> getUserLottery() {
+        return userLotto;
     }
 }

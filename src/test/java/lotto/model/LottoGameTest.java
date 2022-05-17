@@ -118,7 +118,7 @@ class LottoGameTest {
         lottoGame.buyLottoTicket(new RandomNumberGenerator());
 
         // when
-        List<Lottery> actual = lottoGame.getUserLottery();
+        List<Lotto> actual = lottoGame.getUserLottery();
 
         // then
         assertThat(actual).hasSize(expected);

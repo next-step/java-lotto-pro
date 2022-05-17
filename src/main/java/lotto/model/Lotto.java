@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Lottery {
+public class Lotto {
 
     private List<Number> numbers = new ArrayList<>();
 
-    public Lottery(NumberGenerator numberGenerator) {
+    public Lotto(NumberGenerator numberGenerator) {
         createNumbers(numberGenerator);
     }
 

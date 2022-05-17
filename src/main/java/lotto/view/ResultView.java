@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Map;
-import lotto.model.Lottery;
+import lotto.model.Lotto;
 import lotto.model.Rank;
 
 public class ResultView {
@@ -12,10 +12,10 @@ public class ResultView {
     private static final String BENEFIT_MESSAGE = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 이익이라는 의미임)";
     private static final String DIS_BENEFIT_MESSAGE = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public void printGameStart(int amount, List<Lottery> userLottery) {
+    public void printGameStart(int amount, List<Lotto> userLotto) {
         System.out.println(amount + LOTTO_AMOUNT_MESSAGE);
-        for (Lottery lottery : userLottery) {
-            System.out.println(lottery.toString());
+        for (Lotto lotto : userLotto) {
+            System.out.println(lotto.toString());
         }
     }
 
