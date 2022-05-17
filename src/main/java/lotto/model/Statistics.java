@@ -3,8 +3,6 @@ package lotto.model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Statistics {
     private Map<Rank, Integer> resultMap = new HashMap() {{
@@ -31,7 +29,7 @@ public class Statistics {
 
     private void compareNumber(WinLotto winLotto, Lotto lotto) {
         long count = lotto.getLottoNumber().stream()
-                .filter(lottoNumber -> winLotto.getLottoNumber().contains(lottoNumber))
+                .filter(lottoNumber -> winLotto.getLotto().getLottoNumber().contains(lottoNumber))
                 .count();
 
         resultMap.computeIfPresent(Rank.valueOf(count, isMatchedBonus(winLotto, lotto)), (k, v) -> Math.toIntExact(v + 1));
