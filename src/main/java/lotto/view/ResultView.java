@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
-import lotto.model.Organizer;
+import lotto.model.WinningInfo;
 
 import java.util.Map;
 
@@ -18,7 +18,7 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         winningResults.forEach((k, v) -> {
-            System.out.printf("%d개 일치 (%d)- %d개%n", k, Organizer.winningMoney(k), v);
+            System.out.printf("%d개 일치 (%d)- %d개%n", k, WinningInfo.valueOfSameCount(k).winningMoney(), v);
         });
     }
 

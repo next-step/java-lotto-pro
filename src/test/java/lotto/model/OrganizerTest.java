@@ -47,13 +47,6 @@ public class OrganizerTest {
         assertThat(organizer.winningResults(lottos).get(3)).isEqualTo(1);
     }
 
-    @ParameterizedTest
-    @DisplayName("일치 개수별 우승 상금 검증")
-    @CsvSource(value = {"3:5000", "4:50000", "5:1500000", "6:2000000000"} , delimiter = ':')
-    public void checkWinningMoney(int sameCount, int money) {
-        assertThat(Organizer.winningMoney(sameCount)).isEqualTo(money);
-    }
-
     @Test
     @DisplayName("로또 수익률 계산 정상 동작 확인")
     public void checkRateOfReturn () {

@@ -9,10 +9,6 @@ import java.util.stream.Collectors;
 public class Organizer {
     private static final int COMPARE_TRUE = 1;
     private static final int COMPARE_FALSE = 0;
-    private static final int SAME_COUNT_3 = 3;
-    private static final int SAME_COUNT_4 = 4;
-    private static final int SAME_COUNT_5 = 5;
-    private static final int SAME_COUNT_6 = 6;
     private static final int INIT_RESULT_COUNT = 0;
 
     private final List<Integer> winnerNumbers;
@@ -46,33 +42,21 @@ public class Organizer {
 
     private void initWinningResult() {
         this.winningResults = new HashMap<>();
-        winningResults.put(SAME_COUNT_3, INIT_RESULT_COUNT);
-        winningResults.put(SAME_COUNT_4, INIT_RESULT_COUNT);
-        winningResults.put(SAME_COUNT_5, INIT_RESULT_COUNT);
-        winningResults.put(SAME_COUNT_6, INIT_RESULT_COUNT);
+        for (WinningInfo winningInfo : WinningInfo.values()) {
+            winningResults.put(winningInfo.sameCount(), INIT_RESULT_COUNT);
+        }
     }
 
     private void countWinning(int sameCount) {
-        if (sameCount < SAME_COUNT_3) {
+        if (sameCount < WinningInfo.SAME_COUNT_3.sameCount()) {
             return;
         }
         this.totalWinningMoney += winningMoney(sameCount);
         this.winningResults.put(sameCount, this.winningResults.get(sameCount) + 1);
     }
 
-    public static int winningMoney(int sameCount) {
-        switch (sameCount) {
-            case SAME_COUNT_3:
-                return 5000;
-            case SAME_COUNT_4:
-                return 50000;
-            case SAME_COUNT_5:
-                return 1500000;
-            case SAME_COUNT_6:
-                return 2000000000;
-            default:
-                return 0;
-        }
+    private int winningMoney(int sameCount) {
+        return WinningInfo.valueOfSameCount(sameCount).winningMoney();
     }
 
     private int compare(int number) {
