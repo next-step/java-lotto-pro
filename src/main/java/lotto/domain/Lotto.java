@@ -51,7 +51,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        Collections.sort(lottoNumbers);
         return String.valueOf(lottoNumbers);
     }
 }

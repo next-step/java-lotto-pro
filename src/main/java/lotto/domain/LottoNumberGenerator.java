@@ -22,6 +22,7 @@ public class LottoNumberGenerator {
         Collections.shuffle(LOTTO_NUMBERS);
         return LOTTO_NUMBERS.stream()
                 .limit(MAX_SIZE)
+                .sorted()
                 .collect(Collectors.toList());
     }
 
