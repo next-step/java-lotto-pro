@@ -16,7 +16,9 @@ public class LottoMain {
         int gameCount = Lotto.gameCount(money);
         LottoPassiveCount lottoPassiveCount = new LottoPassiveCount(gameCount, passiveCountString());
         LottoPassiveNumbers lottoPassiveNumbers = new LottoPassiveNumbers(lottoPassiveCount);
-        String[] lottoPassive = splitPassiveNumber(inputPassiveNumbersString());
+        String[] lottoPassive = lottoPassiveCount.getPassiveCount() > 0
+                ? splitPassiveNumber(inputPassiveNumbersString())
+                : new String[0];
 
         LottoController lottoController = new LottoController(gameCount, lottoPassiveNumbers.generatePassiveNumbers(lottoPassive));
         List<LottoNumbers> lottoNumbers = lottoController.generateLottoGame();

@@ -14,8 +14,11 @@ public class LottoPassiveNumbers {
     }
 
     public List<LottoNumbers> generatePassiveNumbers(String[] splitPassiveNumber) {
-        List<LottoNumbers> passiveNumbers = new ArrayList<>();
+        if (lottoPassiveCount.getPassiveCount() < 0) {
+            return new ArrayList<>();
+        }
 
+        List<LottoNumbers> passiveNumbers = new ArrayList<>();
         for (int i = 0; i < lottoPassiveCount.getPassiveCount(); i++) {
             List<LottoNumber> passiveInputLottoNumbers = passiveInputLottoNumbers(splitPassiveNumber);
             passiveNumbers.add(new LottoNumbers(passiveInputLottoNumbers));
