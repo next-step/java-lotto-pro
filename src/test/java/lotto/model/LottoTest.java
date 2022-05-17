@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
@@ -33,5 +34,18 @@ class LottoTest {
 
         // then
         assertThat(actual).hasSize(6);
+    }
+
+    @ParameterizedTest(name = "Lotto 객체에 Number 객체가 존재하면 참을, 객체가 존재하지 않으면 거짓을 반환한다")
+    @CsvSource(value = {"1,2,3,4,5,6:1:true", "1,2,3,4,5,6:7:false"}, delimiter = ':')
+    void containsTest(String inputs, Number number, boolean expected) {
+        // given
+        Lotto lotto = new Lotto(new InputNumberGenerator(inputs));
+
+        // when
+        boolean actual = lotto.contains(number);
+
+        // then
+        assertThat(actual).isEqualTo(expected);
     }
 }
