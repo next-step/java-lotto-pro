@@ -47,6 +47,9 @@ public class LottoTicket {
         return matchCount;
     }
 
+    public boolean checkMatchBonus(LottoElement bonusNumber){
+        return lottoElements.contains(bonusNumber);
+    }
     private int isMatch(LottoElement lottoElement) {
         if (lottoElements.contains(lottoElement)) {
             return 1;
