@@ -26,4 +26,8 @@ public class WinningStatistics {
         }
         return sumOfRankingAmount / purchaseAmount;
     }
+
+    public LinkedHashMap<LottoRanking, Integer> getLottoRankingCount() {
+        return lottoRankingCount;
+    }
 }
