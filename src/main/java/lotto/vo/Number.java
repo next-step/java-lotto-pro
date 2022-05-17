@@ -3,13 +3,13 @@ package lotto.vo;
 import java.util.Objects;
 
 public class Number {
-    private static String NEGATIVE_INTEGER_IS_NOT_ALLOWED = "음의 정수는 허용되지 않습니다.";
+    private static final String LOTTERY_NUMBERS_WERE_OUT_OF_RANGE = "로또 번호 범위에 벗어난 숫자입니다.";
 
     private int number;
 
     public Number(final int number) {
-        if (number < 1) {
-            throw new IllegalArgumentException(NEGATIVE_INTEGER_IS_NOT_ALLOWED);
+        if (number < Lottery.MINIMUM_NUMBER || number > Lottery.MAXIMUM_NUMBER) {
+            throw new IllegalArgumentException(LOTTERY_NUMBERS_WERE_OUT_OF_RANGE);
         }
         this.number = number;
     }

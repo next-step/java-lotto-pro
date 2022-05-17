@@ -8,21 +8,21 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class NumberTest {
     @ParameterizedTest
-    @ValueSource(ints = {112, 119, 1234567890})
-    void 양의_정수_입력(final int number) {
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 45})
+    void 로또_범위_숫자(final int number) {
         assertThatCode(() -> new Number(number)).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, -1, -2, -3, -1})
-    void 음의_정수_0_입력(final int number) {
+    @ValueSource(ints = {-1, 0, 46})
+    void 로또_범위_밖_숫자(final int number) {
         assertThatThrownBy(() -> new Number(number))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1", "100", "1000"})
-    void 문자열_양의_정수_입력(final String number) {
+    @ValueSource(strings = {"1", "2", "3", "10", "15", "30", "35", "41", "42", "45"})
+    void 문자열_로또_숫자(final String number) {
         assertThatCode(() -> new Number(number)).doesNotThrowAnyException();
     }
 }
