@@ -13,7 +13,7 @@ public class Lotto {
 
     private final List<LottoNumber> lotto = new ArrayList<>();
 
-    private Lotto(List<Integer> lottoNumbers) {
+    protected Lotto(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBER_MUST_SIX);
         }
@@ -27,10 +27,14 @@ public class Lotto {
     }
 
     public static Lotto createWithNumberLetter(String numbers) {
-        return new Lotto(Arrays.stream(numbers.split(COMMA))
+        return new Lotto(getLottoNumbers(numbers));
+    }
+
+    protected static List<Integer> getLottoNumbers(String numbers) {
+        return Arrays.stream(numbers.split(COMMA))
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     public int match(Lotto winningLotto) {
@@ -39,7 +43,7 @@ public class Lotto {
                 .count();
     }
 
-    private boolean match(LottoNumber lottoNumber) {
+    protected boolean match(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
     }
 
