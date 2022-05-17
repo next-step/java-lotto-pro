@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +14,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto() {
-        numbers = prepareNumbers();
+        numbers = createNumbers();
     }
 
     public Lotto(Integer... customNumbers) {
@@ -30,14 +29,11 @@ public class Lotto {
         return String.format(PRINT_FORM, String.join(PRINT_DELIMITER, this.numbers.toString()));
     }
 
-    private List<Integer> prepareNumbers() {
-        List<Integer> results = new ArrayList<>();
-        for (int i = 1; i <= MAX_NUMBER; i++) {
-            results.add(i);
-        }
-        Collections.shuffle(results);
-        results = results.subList(START_INDEX, END_INDEX);
-        Collections.sort(results);
-        return results;
+    private List<Integer> createNumbers() {
+        List<Integer> preparedNumbers = LottoNumbers.PREPARED_NUMBERS;
+        Collections.shuffle(preparedNumbers);
+        preparedNumbers = preparedNumbers.subList(START_INDEX, END_INDEX);
+        Collections.sort(preparedNumbers);
+        return preparedNumbers;
     }
 }
