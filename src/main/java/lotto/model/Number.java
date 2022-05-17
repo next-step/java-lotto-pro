@@ -27,7 +27,7 @@ public class Number {
     }
 
     private void invalidRangeCheck() {
-        if(lottoNumber < MIN_NUMBER || lottoNumber > MAX_NUMBER) {
+        if (lottoNumber < MIN_NUMBER || lottoNumber > MAX_NUMBER) {
             throw new IllegalArgumentException("유효하지 않은 범위의 숫자입니다.");
         }
     }
