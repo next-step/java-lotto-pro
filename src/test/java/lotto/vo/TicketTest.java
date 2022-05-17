@@ -10,11 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class CouponTest {
+class TicketTest {
     @ParameterizedTest
     @MethodSource("천원_미만_금액")
     void 쿠폰_교환_천원_미만_예외(Money money) {
-        assertThatThrownBy(() -> new Coupon(money)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> new Ticket(money)).isInstanceOf(IllegalArgumentException.class)
                                                    .hasMessageContaining("로또 구입 금액은 최소 1,000원 입니다.");
     }
 
@@ -30,7 +30,7 @@ class CouponTest {
     @MethodSource("천원_단위가_아닌_금액")
     void 쿠폰_교환_천원_단위_예외(Money money, String exceptionMessage) {
         IllegalArgumentException e = assertThrows(
-                IllegalArgumentException.class, () -> new Coupon(money));
+                IllegalArgumentException.class, () -> new Ticket(money));
         assertThat(e.getMessage()).isEqualTo(exceptionMessage);
     }
 
@@ -45,7 +45,7 @@ class CouponTest {
     @ParameterizedTest()
     @MethodSource("천원_단위_금액")
     void 쿠폰_교환(Money money, int size) {
-        assertThat(new Coupon(money).size()).isEqualTo(size);
+        assertThat(new Ticket(money).size()).isEqualTo(size);
     }
 
     static Stream<Arguments> 천원_단위_금액() {
