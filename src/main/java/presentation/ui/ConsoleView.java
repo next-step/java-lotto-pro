@@ -1,6 +1,7 @@
 package presentation.ui;
 
 import domain.*;
+import dto.CreateWinningCommand;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,12 +40,11 @@ public final class ConsoleView {
         System.out.println("총 수익률은 " + rewards.calculateRateOfReturn() + "입니다.");
     }
 
-    public static Set<LottoNumber> askWinning() {
+    public static CreateWinningCommand askWinning() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return Arrays.stream(SCANNER.nextLine().split(","))
                 .map(Integer::valueOf)
-                .map(LottoNumber::of)
-                .collect(Collectors.toUnmodifiableSet());
+                .collect(Collectors.collectingAndThen(Collectors.toSet(), CreateWinningCommand::new));
     }
 
     public static long askPurchaseAmount() {
