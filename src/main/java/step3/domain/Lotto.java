@@ -32,7 +32,7 @@ public class Lotto {
                 .count();
     }
 
-    public List<LottoNumber> sortedLotto() {
+    public List<LottoNumber> sortedLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>(lotto);
         Collections.sort(lottoNumbers);
         return lottoNumbers;
