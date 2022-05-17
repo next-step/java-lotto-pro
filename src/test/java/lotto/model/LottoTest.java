@@ -34,7 +34,13 @@ class LottoTest {
     @DisplayName("당첨 로또 번호와 비교했을때 랭킹에따른 상금(돈) 비교 테스트")
     @Test
     void lottoLottoRanking() {
-        Lotto winningLotto = Lotto.draw(new InputLottoNumberGenerator("1, 2, 3, 4, 5, 7"));
-        assertThat(this.lotto.lottoRanking(winningLotto).money()).isEqualTo(Money.valueOf(1500000));
+        Lotto winningLotto1 = Lotto.draw(new InputLottoNumberGenerator("1, 2, 3, 4, 5, 7"));
+        Lotto winningLotto2 = Lotto.draw(new InputLottoNumberGenerator("1, 2, 3, 4, 5, 7"));
+        assertAll(
+                () -> assertThat(this.lotto.lottoRanking(winningLotto1, LottoNumber.valueOf(45)).money()).isEqualTo(
+                        Money.valueOf(1500000)),
+                () -> assertThat(this.lotto.lottoRanking(winningLotto2, LottoNumber.valueOf(6)).money()).isEqualTo(
+                        Money.valueOf(30000000))
+        );
     }
 }

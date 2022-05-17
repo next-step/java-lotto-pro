@@ -21,8 +21,8 @@ class LottoStatisticsTest {
         assertThat(lottoStatistics.winningLottoCount(input)).isEqualTo(expect);
     }
 
-    @DisplayName("로또 결과 통계 생성 후 당첨 갯수 비교 테스트")
-    @ParameterizedTest(name = "로또 결과 {0} {1}개 통계 생성 후 {2}의 당첨 갯수 {3} 비교 테스트")
+    @DisplayName("로또 결과 통계 생성 후 수익률 테스트")
+    @ParameterizedTest(name = "로또 결과 통계 생성 후 {0} 금액사용으로 수익률 {1} 비교 테스트")
     @CsvSource({"1000, 1510.00", "20000000, 0.07", "10000000, 0.15"})
     void lottoStatisticsCount(int input, BigDecimal expect) {
         Map<LottoRanking, Integer> map = new EnumMap<>(LottoRanking.class);

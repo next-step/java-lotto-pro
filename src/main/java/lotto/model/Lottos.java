@@ -29,10 +29,10 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public LottoStatistics lottoStatistics(Lotto winningLotto) {
+    public LottoStatistics lottoStatistics(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         Map<LottoRanking, Integer> lottoStatistics = new EnumMap<>(LottoRanking.class);
         for (Lotto lotto : this.lottos) {
-            LottoRanking lottoRanking = lotto.lottoRanking(winningLotto);
+            LottoRanking lottoRanking = lotto.lottoRanking(winningLotto, bonusLottoNumber);
             lottoStatistics.put(lottoRanking, lottoStatistics.getOrDefault(lottoRanking, ZERO_NUM) + EXTRA_NUM);
         }
         return new LottoStatistics(lottoStatistics);

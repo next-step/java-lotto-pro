@@ -10,6 +10,7 @@ public class Lotto {
     private static final int COUNT_OF_MATCH_ZERO = 0;
     private static final int COUNT_OF_MATCH_ONE = 1;
     public static final int PRICE = 1000;
+    public static final int SECOND_AND_THIRD_COUNT_OF_MATCH = 5;
     private final Set<LottoNumber> lotto;
 
     private Lotto(Set<LottoNumber> lotto) {
@@ -21,12 +22,20 @@ public class Lotto {
         return new Lotto(new HashSet<>(lottoNumberGenerator.generate()));
     }
 
-    public LottoRanking lottoRanking(Lotto winningLotto) {
+    public LottoRanking lottoRanking(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         int countOfMatch = COUNT_OF_MATCH_ZERO;
         for (LottoNumber lottoNumber : this.lotto) {
             countOfMatch += countIfContainLottoNumber(winningLotto, lottoNumber);
         }
-        return LottoRanking.findLottoRankingByCountOfMatch(countOfMatch);
+        boolean matchBonus = false;
+        if (isSecondAndThirdCountOfMatch(countOfMatch)) {
+            matchBonus = containLottoNumber(bonusLottoNumber);
+        }
+        return LottoRanking.findLottoRankingByCountOfMatchAndMatchBonus(countOfMatch, matchBonus);
+    }
+
+    private boolean isSecondAndThirdCountOfMatch(int countOfMatch) {
+        return countOfMatch == SECOND_AND_THIRD_COUNT_OF_MATCH;
     }
 
     private int countIfContainLottoNumber(Lotto winningLotto, LottoNumber lottoNumber) {
