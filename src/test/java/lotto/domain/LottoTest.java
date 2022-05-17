@@ -9,6 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTest {
     @Test
@@ -63,5 +64,15 @@ public class LottoTest {
         Lotto lotto = new Lotto(numbers);
         Lotto lotto2 = new Lotto(numbers2);
         assertThat(lotto.countMatchedNumbers(lotto2)).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("Lotto는 LottoNumber를 포함하는지 비교할 수 있다.")
+    void Lotto_포함_테스트(){
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertAll(
+                () -> assertThat(lotto.match(new LottoNumber(1))).isTrue(),
+                () -> assertThat(lotto.match(new LottoNumber(10))).isFalse()
+        );
     }
 }
