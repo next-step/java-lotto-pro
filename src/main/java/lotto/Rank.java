@@ -15,10 +15,6 @@ public class Rank {
         count++;
     }
 
-    public int getCount() {
-        return count;
-    }
-
     public int calculateTotalPrice() {
         return price * count;
     }

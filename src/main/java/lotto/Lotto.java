@@ -8,9 +8,6 @@ public class Lotto {
     final int LOTTO_MIN_NUMBER = 1;
     final int LOTTO_MAX_NUMBER = 45;
     final int LOTTO_COUNT = 6;
-    final String LOTTO_PRINT_START_CHAR = "[";
-    final String LOTTO_PRINT_END_CHAR = "]";
-    final String LOTTO_PRINT_DELIMITER = ", ";
 
     private List<Integer> lottoNumbers;
 
@@ -35,18 +32,6 @@ public class Lotto {
         Collections.shuffle(list);
         lottoNumbers = list.subList(0, LOTTO_COUNT);
         Collections.sort(lottoNumbers);
-    }
-
-    public void printLotto() {
-        System.out.print(LOTTO_PRINT_START_CHAR);
-
-        for (int i = 0; i < LOTTO_COUNT - 1; i++) {
-            System.out.print(lottoNumbers.get(i));
-            System.out.print(LOTTO_PRINT_DELIMITER);
-        }
-
-        System.out.print(lottoNumbers.get(LOTTO_COUNT - 1));
-        System.out.println(LOTTO_PRINT_END_CHAR);
     }
 
     public int checkMatchCount(Lotto checkLotto) {

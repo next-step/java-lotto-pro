@@ -11,7 +11,8 @@ public class LottoPlay {
         ResultView.printLottoPurchase(lottos);
         Lotto winningLottoInput = InputView.getWinningLottoInput();
 
-        int winningPrice = lottos.winningPrice(winningLottoInput);
+        WinRanks winRanks = new WinRanks();
+        int winningPrice = winRanks.winningPrice(winningLottoInput, lottos);
         ResultView.printLottoResult(lottos, winningLottoInput);
         ResultView.printProfit(moneyInput, winningPrice);
     }
