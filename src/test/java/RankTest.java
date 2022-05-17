@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {
     @Test
-    void 같은_숫자_6개를_포함하고_있으면_2등이다() {
+    void 같은_숫자_6개를_포함하고_있으면_1등이다() {
         assertThat(Rank.valueOf(6, false)).isEqualTo(Rank.FIRST);
         assertThat(Rank.valueOf(6, true)).isEqualTo(Rank.FIRST);
     }
