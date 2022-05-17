@@ -3,6 +3,8 @@ package lotto.model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Statistics {
     private Map<Rank, Integer> resultMap = new HashMap() {{
@@ -14,12 +16,17 @@ public class Statistics {
         put(Rank.valueOf(0, false), 0);
     }};
 
-    public Map<Rank, Integer> getResultMap() {
-        return resultMap;
-    }
-
     public Statistics(WinLotto winLotto, List<Lotto> lottos) {
         lottos.forEach(lotto -> compareNumber(winLotto, lotto));
+    }
+
+    public Statistics(WinLotto winLotto, List<Lotto> autoLottos, List<Lotto> manualLottos) {
+        manualLottos.forEach(lotto -> compareNumber(winLotto, lotto));
+        autoLottos.forEach(lotto -> compareNumber(winLotto, lotto));
+    }
+
+    public Map<Rank, Integer> getResultMap() {
+        return resultMap;
     }
 
     private void compareNumber(WinLotto winLotto, Lotto lotto) {

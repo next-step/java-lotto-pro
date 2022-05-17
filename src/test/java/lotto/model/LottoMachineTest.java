@@ -1,6 +1,5 @@
 package lotto.model;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -23,13 +22,13 @@ public class LottoMachineTest {
     @ParameterizedTest(name = "구매금액이 {0}이면 {1}만큼의 로또가 생성된 리스트를 반환한다.")
     @CsvSource(value = {"1000|1", "10000|10", "20000|20"}, delimiter = '|')
     void 로또_구매_test(int money, int result) {
-        assertThat(lottoMachine.purchase(money)).hasSize(result);
+        assertThat(lottoMachine.purchaseAuto(money)).hasSize(result);
     }
 
     @ParameterizedTest(name = "구매금액이 1000단위가 아닌 숫자 {0}을 입력하면 IllegalArgumentException을 발생시킨다.")
     @ValueSource(ints = {-5, 0, 1200})
     void 로또_구매_예외_test(int money) {
-        assertThatThrownBy(() -> lottoMachine.purchase(money))
+        assertThatThrownBy(() -> lottoMachine.purchaseAuto(money))
                 .isInstanceOf(IllegalArgumentException.class)
                 .withFailMessage("금액은 " + LOTTO_PRICE + "단위이어야 합니다.");
     }
@@ -37,11 +36,8 @@ public class LottoMachineTest {
     @MethodSource(value = "lottoManualTestParameters")
     @ParameterizedTest(name = "로또수동 구매수는 {2}개 이다")
     void 로또_수동구매_test(List<List<Integer>> manualLottos, int count) {
-        //when
-        lottoMachine.purchaseManual(manualLottos);
-
-        //then
-        assertThat(lottoMachine.getLottos()).hasSize(count);
+        //when- then
+        assertThat(lottoMachine.purchaseManual(manualLottos)).hasSize(count);
     }
 
     @MethodSource(value = "lottoManualTestParameters")
