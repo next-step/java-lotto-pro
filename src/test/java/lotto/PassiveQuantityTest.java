@@ -1,5 +1,6 @@
-package lotto.model;
+package lotto;
 
+import lotto.model.PassiveQuantity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
