@@ -35,16 +35,16 @@ public class Lotto {
                 .count();
     }
 
+    public boolean isContain(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+
     private static List<Integer> autoLottoNumbers() {
         return CollectionsUtil
                 .shuffleSequentialNumbers(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
                 .subList(FIRST_INDEX, MAX_LOTTO_NUMBER_QTY);
     }
-
-    public boolean isContain(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
-    }
-
 
     private void valid(List<Integer> numbers) {
         lottoNumberSizeValid(numbers);
