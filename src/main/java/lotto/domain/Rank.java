@@ -26,4 +26,8 @@ public enum Rank {
     public static Rank valueOf(int countOfMatch, RankCalculator rankCalculator) {
         return rankCalculator.calculator(countOfMatch);
     }
+
+    public boolean isNotMiss() {
+        return this != MISS;
+    }
 }

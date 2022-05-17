@@ -1,8 +1,8 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class LottoScore {
 
@@ -14,7 +14,7 @@ public class LottoScore {
     }
 
     private Map<Rank, Integer> initRankMap() {
-        this.rankMap = new HashMap<>();
+        this.rankMap = new TreeMap<>((o1, o2) -> o2.getWinningsMoney() - o1.getWinningsMoney());
 
         for (Rank rank : Rank.values()) {
             rankMap.put(rank, ZERO);
@@ -29,13 +29,10 @@ public class LottoScore {
     }
 
     public void addScore(Rank rank) {
-        if (rankMap.get(rank) != null) {
+        if (rank.isNotMiss()) {
             int count = rankMap.get(rank);
             rankMap.put(rank, ++count);
-            return;
         }
-
-        rankMap.put(rank, 1);
     }
 
     public Winnings getWinnings() {
