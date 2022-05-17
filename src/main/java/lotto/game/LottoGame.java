@@ -28,17 +28,13 @@ public class LottoGame {
     }
 
     public void start() {
-        takeBudget();
+        budget = inputView.takeBudget();
         List<LottoNumbers> lottoNumbersList = buyLotto();
         resultView.printBoughtLottos(lottoNumbersList);
         WinLottoNumbers winNumbers = drawWinNumbers();
         List<LottoRank> lottoRanks = matchLottos(lottoNumbersList, winNumbers);
         LottoGameResultDTO gameResult = gameResult(lottoRanks);
         resultView.printGameResult(gameResult);
-    }
-
-    private void takeBudget() {
-        budget = inputView.takeBudget();
     }
 
     private List<LottoNumbers> buyLotto() {
