@@ -18,8 +18,20 @@ public class LottoMachine {
                     .boxed()
                     .collect(Collectors.toList());
 
-    public List<Lotto> generateLottos(int count) {
-        List<Lotto> lottos = new LinkedList<>();
+    private List<Lotto> lottos = new LinkedList<>();
+
+    public List<Lotto> getLottos() {
+        return new ArrayList(this.lottos);
+    }
+
+    public List<Lotto> purchase(int money) {
+        if (money < LOTTO_PRICE || money % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("금액은 " + LOTTO_PRICE + "단위이어야 합니다.");
+        }
+        return generateLottos(money / LOTTO_PRICE);
+    }
+
+    private List<Lotto> generateLottos(int count) {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(generateRandomNumbers()));
         }
@@ -39,10 +51,7 @@ public class LottoMachine {
         return pickedNumber;
     }
 
-    public List<Lotto> purchase(int money) {
-        if (money < LOTTO_PRICE || money % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("금액은 " + LOTTO_PRICE + "단위이어야 합니다.");
-        }
-        return generateLottos(money / LOTTO_PRICE);
+    public void purchaseManual(List<List<Integer>> manualLottos) {
+        manualLottos.forEach(lottoNumber -> lottos.add(new Lotto(lottoNumber)));
     }
 }
