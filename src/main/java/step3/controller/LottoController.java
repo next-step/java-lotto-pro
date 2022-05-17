@@ -20,12 +20,13 @@ public class LottoController {
 
     public void startLotto() {
         Money money = null;
-        while (money == null) { //돈을 정상적으로 받아올때까지 반복한다
+        int ticket = 0;
+        while (moneyAndTicketIsNotValid(money,ticket)) { //돈을 정상적으로 받아올때까지 반복한다
             String moneySource = inputView.getMoney();
-            money = lottoMachine.createMoney(moneySource);
+            money = lottoMachine.insertMoney(moneySource);
+            ticket = lottoMachine.buyTicket(money);
         }
 
-        lottoMachine.buyTicket(money);
         outputView.printLottoInfo(lottoMachine.getLottoNumbers());
 
         LottoTicket winnerTicket = null;
@@ -37,5 +38,7 @@ public class LottoController {
         outputView.printOutput(lottoMachine.checkWin(winnerTicket), money);
     }
 
-
+    private boolean moneyAndTicketIsNotValid(Money money,int ticket){
+        return money == null || ticket == 0;
+    }
 }
