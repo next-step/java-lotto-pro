@@ -10,6 +10,9 @@ public class LottoApp {
     public static void main(String[] args) {
         LottoMachine lottoMachine = new LottoMachine();
 
+        List<List<Integer>> manualLottos = InputView.inputManualLottos();
+        lottoMachine.purchaseManual(manualLottos);
+
         int money = InputView.inputMoney();
         List<Lotto> lottos = lottoMachine.purchase(money);
         OutputView.outputLottos(lottos);
