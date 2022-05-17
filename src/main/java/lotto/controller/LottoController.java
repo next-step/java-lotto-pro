@@ -14,7 +14,7 @@ public class LottoController {
         OutputView.printPurchasedLottos(lottos);
 
         Lotto winningLotto = generateWinningLotto();
-        LottoNumber bonusNumber = new LottoNumber(1);
+        LottoNumber bonusNumber = new LottoNumber(CustomParseUtils.stringToInteger(InputView.readBonusNumber()));
         LottoResult result = new LottoResult(lottos, winningLotto, bonusNumber);
         OutputView.printLottoResult(result, money.calculateProfit(result.winningPrice()));
     }
