@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.strategy.RankCalculationFactory;
-import lotto.domain.strategy.RankCalculator;
+import lotto.domain.calculator.RankCalculator;
 
 public enum Rank {
     FIRST(6, 2_000_000_000), SECOND(5, 30_000_000), THIRD(5, 1_500_000), FOURTH(4, 50_000), FIFTH(3,
@@ -24,8 +23,7 @@ public enum Rank {
     }
 
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        RankCalculator rankCalculator = RankCalculationFactory.getRankCalculator(matchBonus);
+    public static Rank valueOf(int countOfMatch, RankCalculator rankCalculator) {
         return rankCalculator.calculator(countOfMatch);
     }
 }
