@@ -10,23 +10,10 @@ public class Lotto {
 
     public static final int SIZE = 6;
     private final List<LottoNumber> numbers;
-    private LottoNumber bonusNumber;
 
     protected Lotto(List<LottoNumber> numbers) {
         validateLottoSize(numbers);
         this.numbers = numbers;
-    }
-
-    protected Lotto(List<LottoNumber> numbers, LottoNumber bonusNumber) {
-        this(numbers);
-        validateBonus(bonusNumber);
-        this.bonusNumber = bonusNumber;
-    }
-
-    private void validateBonus(LottoNumber bonusNumber) {
-        if (isContainsBonusNumber(bonusNumber)) {
-            throw new IllegalArgumentException("당첨번호에 보너스 번호가 포함될 수 없습니다.");
-        }
     }
 
     private boolean isContainsBonusNumber(LottoNumber bonusNumber) {
@@ -39,10 +26,6 @@ public class Lotto {
         }
     }
 
-    public static Lotto of(String winningLottoNumber, int bonusNumber) {
-        return new Lotto(LottoNumber.parse(winningLottoNumber), new LottoNumber(bonusNumber));
-    }
-
     public static Lotto from(String numbers) {
         return new Lotto(LottoNumber.parse(numbers));
     }
@@ -51,14 +34,18 @@ public class Lotto {
         return new Lotto(lottoNumberStrategy.create());
     }
 
-    public Rank match(Lotto winningLotto) {
-        Set<LottoNumber> collect = new HashSet<>(winningLotto.numbers);
+    public Rank match(WinningLotto winningLotto) {
+        Set<LottoNumber> collect = new HashSet<>(winningLotto.getLotto().numbers);
 
         int matchCount = (int) this.numbers.stream()
                 .filter(collect::contains)
                 .count();
 
-        return Rank.matchResult(matchCount, isContainsBonusNumber(winningLotto.bonusNumber));
+        return Rank.matchResult(matchCount, isContainsBonusNumber(winningLotto.getBonus()));
+    }
+
+    public boolean contains(LottoNumber number){
+        return numbers.contains(number);
     }
 
     @Override
