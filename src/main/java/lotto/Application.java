@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoReport;
 import lotto.domain.Player;
+import lotto.domain.WinnerLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -13,10 +14,9 @@ public class Application {
         Player player = Player.buyAutoLotto(autoLottoDeposit());
         ResultView.playerHasLotto(player);
 
-        Lotto winnerLotto = lastWeekWinnerLotto();
-        LottoNumber bonusNumber = bonusNumberInput(winnerLotto);
+        WinnerLotto winnerLotto = bonusNumberInput(lastWeekWinnerLotto());
 
-        LottoReport lottoReport = player.matchWinnerLotto(winnerLotto, bonusNumber);
+        LottoReport lottoReport = player.matchWinnerLotto(winnerLotto);
 
         ResultView.winnerReport(lottoReport);
 
@@ -30,9 +30,9 @@ public class Application {
         return despotMoney;
     }
 
-    private static LottoNumber bonusNumberInput(Lotto winnerLotto) {
+    private static WinnerLotto bonusNumberInput(Lotto winnerLotto) {
         try {
-            return LottoNumber.createBonusNumber(winnerLotto, InputView.bonusNumberInput());
+            return new WinnerLotto(winnerLotto, LottoNumber.of(InputView.bonusNumberInput()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return bonusNumberInput(winnerLotto);
@@ -40,7 +40,12 @@ public class Application {
     }
 
     private static Lotto lastWeekWinnerLotto() {
-        return Lotto.createCustomLotto(InputView.winnerNumberInput());
+        try {
+            return Lotto.createCustomLotto(InputView.winnerNumberInput());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return lastWeekWinnerLotto();
+        }
     }
 
 

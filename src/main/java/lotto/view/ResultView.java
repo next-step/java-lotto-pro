@@ -27,10 +27,18 @@ public class ResultView {
 
         LottoRank.winnerRanks()
                 .forEach((lottoRank -> System.out.printf(WINNER_REPORT_PATTERN,
-                        lottoRank.message(),
+                        lottoRankMessage(lottoRank),
                         lottoReport.lottoResultCount(lottoRank))));
 
         lottoYieldReport(lottoReport);
+    }
+
+    public static String lottoRankMessage(LottoRank lottoRank) {
+        if (lottoRank.isSecond()) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원)",
+                    lottoRank.getMatchCount(), lottoRank.rewordMoney());
+        }
+        return String.format("%d개 일치 (%d원)", lottoRank.getMatchCount(), lottoRank.rewordMoney());
     }
 
     private static void lottoYieldReport(LottoReport lottoReport) {

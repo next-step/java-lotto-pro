@@ -25,8 +25,8 @@ public class Player {
          return new Player(autoLottos(money));
     }
 
-    public LottoReport matchWinnerLotto(Lotto winnerLotto, LottoNumber bonusNumber) {
-        return new LottoReport(lottoResult(winnerLotto, bonusNumber));
+    public LottoReport matchWinnerLotto(WinnerLotto winnerLotto) {
+        return new LottoReport(lottoResult(winnerLotto));
     }
 
     public List<Lotto> getLottos() {
@@ -42,10 +42,10 @@ public class Player {
         return lottos;
     }
 
-    private List<LottoRank> lottoResult(Lotto winnerLotto, LottoNumber bonusNumber) {
+    private List<LottoRank> lottoResult(WinnerLotto winnerLotto) {
         return this.lottos
                 .stream()
-                .map((lotto -> lotto.match(winnerLotto, bonusNumber)))
+                .map((winnerLotto::match))
                 .collect(Collectors.toList());
     }
 

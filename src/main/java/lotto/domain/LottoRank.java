@@ -5,13 +5,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum LottoRank implements Comparator<LottoRank> {
-    FIRST(6, 2_000_000_000, 1),
-    SECOND(5, 30_000_000, 2),
-    THIRD(5, 1_500_000, 3),
-    FOURTH(4, 50_000, 4),
-    FIFTH(3, 5_000, 5),
-    FAIL(0, 0, 6);
+public enum LottoRank {
+
+    FIRST(6, 2_000_000_000, 6),
+    SECOND(5, 30_000_000, 5),
+    THIRD(5, 1_500_000, 4),
+    FOURTH(4, 50_000, 3),
+    FIFTH(3, 5_000, 2),
+    FAIL(0, 0, 1);
 
     private final int matchCount;
     private final int money;
@@ -23,12 +24,17 @@ public enum LottoRank implements Comparator<LottoRank> {
         this.order = order;
     }
 
+
     public int rewordMoney() {
         return this.money;
     }
 
     public int getMatchCount() {
         return this.matchCount;
+    }
+
+    public int getOrder() {
+        return order;
     }
 
     public static LottoRank reword(int matchCount, boolean bonusContain) {
@@ -45,27 +51,22 @@ public enum LottoRank implements Comparator<LottoRank> {
     public static List<LottoRank> winnerRanks() {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> !lottoRank.equals(LottoRank.FAIL))
+                .sorted((Comparator.comparingInt(o -> o.order)))
                 .collect(Collectors.toList());
     }
 
-    public String message() {
-        if (this.equals(LottoRank.SECOND)) {
-            return String.format("%d개 일치, 보너스 볼 일치 (%d원)", this.matchCount, this.money);
-        }
-        return String.format("%d개 일치 (%d원)", this.matchCount, this.money);
+    public boolean isSecond() {
+        return this.equals(LottoRank.SECOND);
     }
 
     private boolean notEquals(LottoRank lottoRank) {
         return !this.equals(lottoRank);
     }
 
-    @Override
-    public int compare(LottoRank o1, LottoRank o2) {
-        return Integer.compare(o1.order, o2.order);
-    }
 
     private static boolean sameMatchCount(int matchCount, LottoRank lottoRank) {
         return lottoRank.matchCount == matchCount;
     }
+
 
 }

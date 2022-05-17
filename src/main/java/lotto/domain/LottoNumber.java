@@ -29,25 +29,6 @@ public class LottoNumber {
         return lottoNumber;
     }
 
-    public static LottoNumber createBonusNumber(Lotto winnerLotto, int bonusNumber)
-            throws IllegalArgumentException {
-        LottoNumber lottoNumber = new LottoNumber(bonusNumber);
-        if (winnerLotto.isContain(lottoNumber)) {
-            throw new IllegalArgumentException("보너스 번호가 당첨로또 번호에 포함되어 있으면 안된다");
-        }
-        return lottoNumber;
-    }
-
-    private void valid(int number) {
-
-
-
-    }
-
-    private boolean isNotNumberRange(int number) {
-        return number < MIN_NUMBER || number > MAX_NUMBER;
-    }
-
     @Override
     public boolean equals(Object target) {
         if (this == target) {

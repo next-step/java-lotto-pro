@@ -37,10 +37,10 @@ class PlayerTest {
     @DisplayName("로또를 맞춰본 결과")
     void matchWinnerLotto() {
         Player player = Player.buyCustomLottos(userLottoList);
-        Lotto winnerLotto = Lotto.createCustomLotto(Arrays.asList(1, 2, 3, 42, 43, 44));
-        LottoNumber bonusNumber  = LottoNumber.createBonusNumber(winnerLotto, 45);
+        Lotto winnerLottoNumber = Lotto.createCustomLotto(Arrays.asList(1, 2, 3, 42, 43, 44));
+        WinnerLotto winnerLotto = new WinnerLotto(winnerLottoNumber, LottoNumber.of(45));
 
-        LottoReport lottoReport = player.matchWinnerLotto(winnerLotto, bonusNumber);
+        LottoReport lottoReport = player.matchWinnerLotto(winnerLotto);
 
         assertAll(() -> {
             assertThat(lottoReport.rewordTotalMoney()).isEqualTo(10000);

@@ -29,7 +29,6 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-
     public int matchCount(Lotto lotto) {
         return (int) this.lottoNumbers.stream()
                 .filter(lotto.lottoNumbers::contains)
@@ -46,9 +45,6 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public LottoRank match(Lotto winLotto, LottoNumber bonusBall) {
-        return LottoRank.reword(matchCount(winLotto), isContain(bonusBall));
-    }
 
     private void valid(List<Integer> numbers) {
         lottoNumberSizeValid(numbers);
