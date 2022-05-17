@@ -7,8 +7,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoManagerTest {
 
@@ -36,13 +34,6 @@ public class LottoManagerTest {
             .containsEntry("THREE", 2).containsEntry("FOUR", 1).containsEntry("FIVE", 0).containsEntry("SIX", 2);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000", "12000"})
-    @DisplayName("금액에 맞춰 로또를 생성한다")
-    public void createTicketByMoney(String money) {
-        Money moneyEntity = new Money("1200");
-        assertThat(lottoManager.buyRandomTicket(moneyEntity.purchaseTicket())).isEqualTo(moneyEntity.purchaseTicket());
-    }
 
     private LottoManager initTestManager() {
         List<LottoTicket> tickets = new ArrayList<>();
