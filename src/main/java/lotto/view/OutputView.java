@@ -2,12 +2,11 @@ package lotto.view;
 
 import java.util.Map;
 import lotto.controller.dto.LottoResultDTO;
-import lotto.domain.common.LottoQuantity;
+import lotto.domain.InputLottoInformation;
 import lotto.enums.LottoRank;
 
 public class OutputView {
 
-    private static final String PURCHASED_TICKETS_NUMBER = "%s개를 구매했습니다.";
     private static final String RESULT_PRIZED_RATE = "당첨 통계";
     private static final String LINE_STRING = "---------";
     private static final String TOTAL_WINNING_COUNT = "%s개 일치 (%s원)- %s개";
@@ -21,8 +20,8 @@ public class OutputView {
 
     private static final int BENEFIT_STANDARD = 1;
 
-    public static void printPurchasedTicketsCount(int ticketCount) {
-        System.out.printf(PURCHASED_TICKETS_NUMBER, ticketCount);
+    public static void printPurchasedTicketsCount(InputLottoInformation inputLottoInformation) {
+        System.out.printf(MANUAL_AUTO_LOTTO_QUANTITY, inputLottoInformation.manualLottoCount(), inputLottoInformation.autoLottoCount());
         System.out.println();
     }
 
@@ -66,12 +65,5 @@ public class OutputView {
             return;
         }
         printTotalWinningCount(lottoRank.getCountOfMatch(), lottoRank.getWinningMoney(), resultMap.get(lottoRank));
-    }
-
-    public static void printLottoQuantity(LottoQuantity quantity) {
-        System.out.println(String.format(MANUAL_AUTO_LOTTO_QUANTITY,
-                quantity.manualLottoQuantity().getManualLottoQuantity(),
-                quantity.totalLottoQuantity().getTotalLottoQuantity()
-        ));
     }
 }

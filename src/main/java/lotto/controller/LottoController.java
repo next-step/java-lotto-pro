@@ -11,15 +11,13 @@ import lotto.controller.dto.LottoResultDTO;
 import lotto.controller.dto.LottoTicketsDTO;
 import lotto.controller.dto.MoneyDTO;
 import lotto.controller.dto.WinningLottoDTO;
+import lotto.domain.InputLottoInformation;
 import lotto.domain.LottoNumbers;
 import lotto.domain.PurchasedLottoTickets;
 import lotto.domain.LottoVendingMachine;
 import lotto.domain.LottoWinningResults;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
-import lotto.domain.common.LottoQuantity;
-import lotto.domain.common.ManualLottoQuantity;
-import lotto.domain.common.TotalLottoQuantity;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -32,20 +30,21 @@ public class LottoController {
     }
 
     public void run() {
-        PurchasedLottoTickets lottoTickets = buyLottoTickets();
+        InputLottoInformation inputLottoInformation = getLottoInformation();
 
-        int purchasedTicketsCount = lottoTickets.purchasedTicketsCount();
+        PurchasedLottoTickets lottoTickets = buyLottoTickets(inputLottoInformation);
 
-        reportingLottoTicketsInformation(lottoTickets, purchasedTicketsCount);
+        reportingLottoTicketsInformation(lottoTickets, inputLottoInformation);
 
         LottoWinningResults winningResults = getResultWithWinningLotto(lottoTickets);
 
-        reportingLottoResult(purchasedTicketsCount, winningResults);
+        reportingLottoResult(inputLottoInformation.totalLottoCount(), winningResults);
 
     }
 
-    private void reportingLottoTicketsInformation(PurchasedLottoTickets lottoTickets, int purchasedTicketsCount) {
-        OutputView.printPurchasedTicketsCount(purchasedTicketsCount);
+    private void reportingLottoTicketsInformation(PurchasedLottoTickets lottoTickets,
+                                                  InputLottoInformation lottoInformation) {
+        OutputView.printPurchasedTicketsCount(lottoInformation);
         OutputView.printTicketsNumbers(lottoTickets.toString());
     }
 
@@ -62,23 +61,20 @@ public class LottoController {
         return lottoTickets.checkWinningLotto(winningLotto);
     }
 
-    private PurchasedLottoTickets buyLottoTickets() {
-        MoneyDTO moneyDTO = InputView.inputMoney();
-        Money inputMoney = MoneyConverter.convert(moneyDTO);
-        LottoQuantity lottoQuantity =
-                LottoQuantity.of(
-                        TotalLottoQuantity.from(inputMoney.calculatePurchasableCount()),
-                        ManualLottoQuantity.from(InputView.inputManualLottoQuantity())
-                );
-
-        List<LottoNumbers> manualLottoNumbersList = getManualLottoTicket(lottoQuantity);
-
-        return vendingMachine.purchase(lottoQuantity, manualLottoNumbersList);
+    private PurchasedLottoTickets buyLottoTickets(InputLottoInformation inputLottoInformation) {
+        return vendingMachine.purchase(inputLottoInformation);
     }
 
-    private List<LottoNumbers> getManualLottoTicket(LottoQuantity lottoQuantity) {
-        LottoTicketsDTO lottoTicketsDTO = InputView.inputManualLottoTickets(
-                lottoQuantity.manualLottoQuantity().getManualLottoQuantity());
+    private InputLottoInformation getLottoInformation() {
+        MoneyDTO moneyDTO = InputView.inputMoney();
+        Money inputMoney = MoneyConverter.convert(moneyDTO);
+        int inputManualLottoQuantity = InputView.inputManualLottoQuantity();
+        List<LottoNumbers> manualLottoNumbersList = getManualLottoTicket(inputManualLottoQuantity);
+        return InputLottoInformation.of(inputMoney, manualLottoNumbersList);
+    }
+
+    private List<LottoNumbers> getManualLottoTicket(int inputManualLottoQuantity) {
+        LottoTicketsDTO lottoTicketsDTO = InputView.inputManualLottoTickets(inputManualLottoQuantity);
         return LottoNumbersConverter.convert(lottoTicketsDTO);
     }
 }
