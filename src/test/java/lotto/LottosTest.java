@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
+
 import lotto.domain.WinningStatistic;
 import lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;

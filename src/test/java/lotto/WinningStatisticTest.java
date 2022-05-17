@@ -23,8 +23,7 @@ class WinningStatisticTest {
     void 수익률을_계산한다() {
         // given
         WinningStatistic winningStatistic = new WinningStatistic();
-        winningStatistic.collect(Rank.FIFTH
-        );
+        winningStatistic.collect(Rank.FIFTH);
         // when
         double rate = winningStatistic.calculateRateOfReturn(Money.of(14000));
         // then

@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -22,7 +25,6 @@ public class Lotto {
         if (lotto.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBER_MUST_SIX);
         }
-    }
 
     public static Lotto create(List<Integer> numbers) {
         return new Lotto(numbers);

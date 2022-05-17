@@ -27,6 +27,7 @@ public class LottoController {
         String bonusBall = InputView.inputBonusBall();
 
         WinningLotto winnings = new WinningLotto(winningNumbers, bonusBall);
+
         return buy.checkWinnings(winnings);
     }
 
