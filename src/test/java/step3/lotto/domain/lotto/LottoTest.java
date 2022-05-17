@@ -24,7 +24,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoTest {
 
     @Test
-    @DisplayName("1~45범위의 중복 없는 6개 숫자를 가지는 로또 객체 생성")
+    @DisplayName("1~45 범위의 중복 없는 6개 숫자를 가지는 로또 객체 생성")
     public void createLottoTest() {
         // Given
         final List<Integer> given = Arrays.asList(1, 2, 3, 4, 5, 6);

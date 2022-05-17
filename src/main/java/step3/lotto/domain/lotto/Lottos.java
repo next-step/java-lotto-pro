@@ -21,4 +21,8 @@ public class Lottos {
         }
         return matchStatistic;
     }
+
+    public int size() {
+        return this.lottos.size();
+    }
 }
