@@ -1,14 +1,11 @@
 package lotto.view;
 
 import lotto.constants.DisplayMessage;
-import lotto.domain.LottoTickets;
-import lotto.domain.LottoWinningRanks;
-import lotto.domain.ManualCount;
-import lotto.domain.Money;
+import lotto.domain.*;
 
 public class OutputView {
-    public void printPurchaseCount(ManualCount manualCount, Money purchaseMoney) {
-        System.out.printf(DisplayMessage.PURCHASE_LOTTO_COUNT, manualCount, manualCount.autoPurchaseCount(purchaseMoney));
+    public void printPurchaseCount(LottoCount lottoCount) {
+        System.out.printf(DisplayMessage.PURCHASE_LOTTO_COUNT, lottoCount.manualCount(), lottoCount.autoCount());
     }
 
     public void printInputManualNumbers() {

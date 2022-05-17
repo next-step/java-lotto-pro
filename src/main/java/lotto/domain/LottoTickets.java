@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.constants.ErrorMessage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
@@ -16,6 +17,10 @@ public class LottoTickets {
             throw new IllegalArgumentException(ErrorMessage.NOT_EMPTY_LOTTO);
         }
         return new LottoTickets(lottoTickets);
+    }
+
+    public static LottoTickets empty() {
+        return new LottoTickets(new ArrayList<>());
     }
 
     public LottoWinningRanks match(LottoTicket winningNumbers, LottoNumber bonusBall) {

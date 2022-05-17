@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoSeller {
-    private static List<Integer> allLottoNumbers = new ArrayList<>(LottoNumber.allLottoNumbers());
+    private static final List<Integer> allLottoNumbers = new ArrayList<>(LottoNumber.allLottoNumbers());
 
     private LottoSeller() {}
 
@@ -15,16 +15,10 @@ public class LottoSeller {
         return new LottoSeller();
     }
 
-    public LottoTickets lottoTickets(Money receivedMoney, ManualCount manualCount, LottoTickets inputManualTickets) {
-        receivedMoney = nullableElseGetReceivedMoney(receivedMoney);
-        if (receivedMoney.isLessThenLottoPrice()) {
-            throw new IllegalArgumentException(ErrorMessage.LESS_THEN_PRICE_MONEY);
-        }
-        manualCount = nullableElseGetManualCount(manualCount);
-        LottoTickets lottoTickets = nullableElseGetManualTickets(inputManualTickets);
-
-        lottoTickets.addAll(autoLottoTickets(manualCount.autoPurchaseCount(receivedMoney)));
-        return lottoTickets;
+    public LottoTickets lottoTickets(LottoCount lottoCount, LottoTickets inputManualTickets) {
+        lottoCount = nullableElseThrowLottoCount(lottoCount);
+        inputManualTickets.addAll(autoLottoTickets(lottoCount.autoCount()));
+        return inputManualTickets;
     }
 
     private LottoTickets autoLottoTickets(int autoPurchaseCount) {
@@ -35,19 +29,9 @@ public class LottoSeller {
         return LottoTickets.from(lottoTicketList);
     }
 
-    private Money nullableElseGetReceivedMoney(Money receivedMoney) {
-        return Optional.ofNullable(receivedMoney)
-                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.LESS_THEN_PRICE_MONEY));
-    }
-
-    private ManualCount nullableElseGetManualCount(ManualCount manualCount) {
-        return Optional.ofNullable(manualCount)
+    private LottoCount nullableElseThrowLottoCount(LottoCount lottoCount) {
+        return Optional.ofNullable(lottoCount)
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.LESS_THEN_MANUAL_COUNT));
-    }
-
-    private LottoTickets nullableElseGetManualTickets(LottoTickets inputManualTickets) {
-        return Optional.ofNullable(inputManualTickets)
-                .orElseGet(() -> LottoTickets.from(new ArrayList<>()));
     }
 
     private LottoTicket lottoTicket() {

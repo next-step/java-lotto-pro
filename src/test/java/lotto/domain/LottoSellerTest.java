@@ -17,9 +17,9 @@ class LottoSellerTest {
     void test_로또_자동_구입_개수() {
         //given
         Money money = Money.from(5500);
+        LottoCount lottoCount = money.askCount(ManualCount.create());
         //when
-        LottoTickets lottoTickets = LottoSeller.create()
-                .lottoTickets(money, ManualCount.create(), null);
+        LottoTickets lottoTickets = LottoSeller.create().lottoTickets(lottoCount, LottoTickets.empty());
         //then
         assertThat(lottoTickets.size()).isEqualTo(5);
     }
@@ -29,10 +29,10 @@ class LottoSellerTest {
     void test_로또_수동_구입후_자동_개수() {
         //given
         Money money = Money.from(14000);
-        ManualCount manualCount = ManualCount.from(3, money);
+        ManualCount manualCount = ManualCount.from(3);
+        LottoCount lottoCount = money.askCount(manualCount);
         //when
-        LottoTickets lottoTickets = LottoSeller.create()
-                .lottoTickets(money, manualCount, null);
+        LottoTickets lottoTickets = LottoSeller.create().lottoTickets(lottoCount, LottoTickets.empty());
         //then
         assertThat(lottoTickets.size()).isEqualTo(11);
     }
@@ -42,38 +42,26 @@ class LottoSellerTest {
     void test_로또_수동_구입후_자동_구입() {
         //given
         Money money = Money.from(14000);
-        int manualCount = 3;
+        int count = 3;
+        ManualCount manualCount = ManualCount.from(count);
+        LottoCount lottoCount = money.askCount(manualCount);
         LottoTicket lottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<LottoTicket> manualTickets = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
+        for (int i = 0; i < count; i++) {
             manualTickets.add(lottoTicket);
         }
         //when
-        LottoTickets lottoTickets = LottoSeller.create()
-                .lottoTickets(money, ManualCount.from(manualCount, money), LottoTickets.from(manualTickets));
+        LottoTickets lottoTickets = LottoSeller.create().lottoTickets(lottoCount, LottoTickets.from(manualTickets));
         //then
         assertThat(lottoTickets.size()).isEqualTo(14);
         assertThat(lottoTickets.contains(lottoTicket)).isTrue();
     }
 
-    @DisplayName("최소 구입 금액 미만의 값 입력 시 예외 처리")
-    @Test
-    void test_최소_구입_금액_오류() {
-        //given
-        Money money = Money.from(500);
-        //when & then
-        assertThatThrownBy(() -> LottoSeller.create().lottoTickets(money, ManualCount.create(), null))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.LESS_THEN_PRICE_MONEY);
-    }
-
     @DisplayName("수동 구매 개수 null 입력 시 예외 처리")
     @Test
     void test_수동_구매_개수_오류() {
-        //given
-        Money money = Money.from(1000);
-        //when & then
-        assertThatThrownBy(() -> LottoSeller.create().lottoTickets(money, null, null))
+        //given & when & then
+        assertThatThrownBy(() -> LottoSeller.create().lottoTickets(null, null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.LESS_THEN_MANUAL_COUNT);
     }
