@@ -1,11 +1,13 @@
 package lotto.game;
 
-import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Function;
 import lotto.rank.LottoRank;
 
 public class LottoGameResult {
@@ -22,10 +24,9 @@ public class LottoGameResult {
         return rankList.stream().mapToLong(rank -> rank.getPrize()).sum();
     }
 
-    public Map<LottoRank, Integer> statistics() {
-        Map<LottoRank, Integer> statistics = rankList.stream().collect(toMap(lottoRank -> lottoRank
-                ,(lottoRank)-> 1,Math::addExact, TreeMap::new));
-        statistics.remove(LottoRank.NO_PRIZE);
+    public Map<LottoRank, Long> statistics() {
+        Map<LottoRank, Long> statistics = rankList.stream().filter(rank -> rank != LottoRank.NO_PRIZE)
+                .collect(groupingBy(Function.identity(),TreeMap::new,counting()));
         return statistics;
     }
 }

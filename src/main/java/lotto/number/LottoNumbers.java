@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import lotto.rank.LottoRank;
 
 public class LottoNumbers {
     public static final int LOTTO_NUMBERS_SIZE = 6;
@@ -20,19 +19,8 @@ public class LottoNumbers {
         return Collections.unmodifiableList(lottoNumberList);
     }
 
-    public LottoRank matchWithWinNumbers(LottoNumbers winNumbers) {
-        int matchCount = 0;
-        for (LottoNumber number : winNumbers.getLottoNumberList()) {
-            matchCount += contains(number);
-        }
-        return LottoRank.getRank(matchCount);
-    }
-
-    private int contains(LottoNumber number) {
-        if (lottoNumberList.contains(number)) {
-            return 1;
-        }
-        return 0;
+    public boolean contains(LottoNumber number) {
+        return lottoNumberList.contains(number);
     }
 
     @Override

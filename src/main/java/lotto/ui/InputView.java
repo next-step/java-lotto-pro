@@ -5,5 +5,7 @@ import java.util.List;
 public interface InputView {
     int takeBudget();
 
-    List<Integer> takeWinNumbers();
+    List<Integer> takeWinMainNumbers();
+
+    int takeBonusNumbers();
 }
