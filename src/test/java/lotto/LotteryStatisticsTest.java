@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.vo.Money;
 import lotto.vo.Result;
-import lotto.vo.Winning;
+import lotto.vo.Summary;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
@@ -18,8 +18,8 @@ class LotteryStatisticsTest {
         List<Result> results = new LinkedList<>();
         results.add(result1);
         results.add(result2);
-        Winning winning = new Winning(results);
-        assertThat(winning.sum()).isEqualTo(55000);
+        Summary summary = new Summary(results);
+        assertThat(summary.sum()).isEqualTo(55000);
     }
 
     @Test
@@ -27,8 +27,8 @@ class LotteryStatisticsTest {
         Result result = new Result(3, 1, 5000);
         List<Result> results = new LinkedList<>();
         results.add(result);
-        Winning winning = new Winning(results);
+        Summary summary = new Summary(results);
         Money money = new Money(10000);
-        assertThat(LotteryStatistics.earningsRate(winning, money)).isEqualTo(0.50);
+        assertThat(LotteryStatistics.earningsRate(summary, money)).isEqualTo(0.50);
     }
 }

@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.constant.Reward;
 import lotto.vo.*;
 import lotto.vo.Number;
 
@@ -53,13 +54,13 @@ public class LotteryStatistics {
         matches.put(count, matches.getOrDefault(count, 0) + 1);
     }
 
-    public static Winning result() {
+    public static Summary result() {
         initRewards();
         results = new LinkedList<>();
         for (Map.Entry<Integer, Integer> entry : matches.entrySet()) {
             makeRewards(entry);
         }
-        return new Winning(results);
+        return new Summary(results);
     }
 
     private static void initRewards() {
@@ -72,11 +73,11 @@ public class LotteryStatistics {
 
     private static void makeRewards(Map.Entry<Integer, Integer> entry) {
         if (entry.getKey() >= MINIMUM_WIN_NUMBER) {
-            results.add(new Result(entry.getKey(), entry.getValue(), rewards.get(entry.getKey())));
+            results.add(new Result(entry.getKey(), entry.getValue(), Reward.find(entry.getKey())));
         }
     }
 
-    public static double earningsRate(Winning winning, Money money) {
-        return 1.0 * winning.sum() / money.value();
+    public static double earningsRate(Summary summary, Money money) {
+        return 1.0 * summary.sum() / money.value();
     }
 }
