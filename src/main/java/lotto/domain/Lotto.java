@@ -52,4 +52,8 @@ public class Lotto {
         }
         return result;
     }
+
+    public boolean match(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }

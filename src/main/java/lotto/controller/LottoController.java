@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.utils.CustomParseUtils;
 import lotto.generator.LottosGenerator;
 import lotto.view.InputView;
@@ -17,7 +14,8 @@ public class LottoController {
         OutputView.printPurchasedLottos(lottos);
 
         Lotto winningLotto = generateWinningLotto();
-        LottoResult result = new LottoResult(lottos, winningLotto);
+        LottoNumber bonusNumber = new LottoNumber(1);
+        LottoResult result = new LottoResult(lottos, winningLotto, bonusNumber);
         OutputView.printLottoResult(result, money.calculateProfit(result.winningPrice()));
     }
 

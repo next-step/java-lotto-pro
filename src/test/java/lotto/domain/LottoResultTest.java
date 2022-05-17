@@ -20,11 +20,12 @@ public class LottoResultTest {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 8, 9)));
-        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)));
         Lotto winningLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
         lottos = new Lottos(lottoList);
-        result = new LottoResult(lottos, winningLotto);
+        result = new LottoResult(lottos, winningLotto, new LottoNumber(7));
     }
 
     @Test
@@ -34,7 +35,8 @@ public class LottoResultTest {
                 () -> assertThat(result.winningCountByRank(LottoRank.FIRST)).isEqualTo(1),
                 () -> assertThat(result.winningCountByRank(LottoRank.SECOND)).isEqualTo(1),
                 () -> assertThat(result.winningCountByRank(LottoRank.THIRD)).isEqualTo(1),
-                () -> assertThat(result.winningCountByRank(LottoRank.FOURTH)).isEqualTo(1)
+                () -> assertThat(result.winningCountByRank(LottoRank.FOURTH)).isEqualTo(1),
+                () -> assertThat(result.winningCountByRank(LottoRank.FIFTH)).isEqualTo(1)
         );
     }
 }
