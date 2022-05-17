@@ -24,6 +24,7 @@ public class LottoController {
         insertMoney(game);
 
         inputWinnerNumbers(game);
+        inputBonusNumbers(game);
 
         printGameResult(game);
     }
@@ -35,7 +36,7 @@ public class LottoController {
         } while (!game.insertMoney(amount));
 
         int countOfLotto = game.buyLottoTicket(new RandomNumberGenerator());
-        resultView.printGameStart(countOfLotto, game.getUserLottery());
+        resultView.printGameStart(countOfLotto, game.getUserLotto());
     }
 
     private void inputWinnerNumbers(LottoGame game) {
@@ -43,6 +44,13 @@ public class LottoController {
         do {
             winnerNumbers = inputView.inputWinnerNumbers();
         } while (!game.winnersNumber(winnerNumbers));
+    }
+
+    private void inputBonusNumbers(LottoGame game) {
+        String bonusNumber;
+        do {
+            bonusNumber = inputView.inputBonusNumbers();
+        } while (!game.bonusNumber(bonusNumber));
     }
 
     private void printGameResult(LottoGame game) {
