@@ -34,7 +34,9 @@ public class LottoController {
 
         LottoStatistic lottoStatistic = new LottoStatistic(lottos, StringSplitter.split(winningNumbers));
 
-        view.outputStatistic(lottoStatistic);
+        view.outputWinningStatistic(lottoStatistic.winningMatchResultCount());
+
+        view.outputEarning(lottoStatistic.lottoEarning());
 
     }
 
