@@ -3,10 +3,12 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import lotto.constants.LottoConstants;
 
 public class Lotto {
 
     private static final String ERROR_MESSAGE_NUMBER_LIST_NULL_OR_EMPTY = "[ERROR] numberList is null or empty.";
+    private static final String ERROR_MESSAGE_NUMBER_LIST_SIZE_WRONG = "[ERROR] numberList size is wrong.";
 
     private final List<LottoNumber> numberList;
 
@@ -46,8 +48,19 @@ public class Lotto {
     }
 
     private void validate(List<LottoNumber> list) {
+        validateNullOrEmpty(list);
+        validateSize(list);
+    }
+
+    private void validateNullOrEmpty(List<LottoNumber> list) {
         if (list == null || list.isEmpty()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NUMBER_LIST_NULL_OR_EMPTY);
+        }
+    }
+
+    private void validateSize(List<LottoNumber> list) {
+        if (list.size() != LottoConstants.LOTTO_SIZE) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_NUMBER_LIST_SIZE_WRONG);
         }
     }
 }
