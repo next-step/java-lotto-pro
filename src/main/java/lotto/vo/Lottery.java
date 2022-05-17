@@ -8,48 +8,34 @@ public class Lottery {
     public final static int SIZE = 6;
 
     private final static String LOTTERY_NUMBERS_WERE_NOT_GENERATED = "로또 번호가 생성되지 않았습니다.";
-    private final static String LOTTERY_NUMBERS_WERE_OUT_OF_RANGE = "로또 번호 범위에 벗어난 숫자입니다.";
 
     private List<Number> numbers;
 
     public Lottery(List<Number> numbers) {
+        validate(numbers);
+        this.numbers = numbers;
+    }
+
+    private void validate(List<Number> numbers) {
         if (isNull(numbers)) {
             throw new NullPointerException(LOTTERY_NUMBERS_WERE_NOT_GENERATED);
         }
-        if (isInsufficientSize(numbers)) {
+        if (isCorrectSize(numbers)) {
             throw new IllegalArgumentException(LOTTERY_NUMBERS_WERE_NOT_GENERATED);
         }
-        if (isOutOfRange(numbers)) {
-            throw new IllegalArgumentException(LOTTERY_NUMBERS_WERE_OUT_OF_RANGE);
-        }
-        this.numbers = numbers;
     }
 
     private boolean isNull(List<Number> numbers) {
         return numbers == null;
     }
 
-    private boolean isInsufficientSize(List<Number> numbers) {
+    private boolean isCorrectSize(List<Number> numbers) {
         Set<Number> set = new HashSet<>(numbers);
         return set.size() < SIZE || set.size() > SIZE;
     }
 
-    private boolean isOutOfRange(List<Number> numbers) {
-        int idx = 0;
-        int size = numbers.size();
-        boolean result = false;
-        while (!result && idx < size) {
-            result = isUnderFlowOrOverFlow(numbers.get(idx++));
-        }
-        return result;
-    }
-
-    private boolean isUnderFlowOrOverFlow(Number number) {
-        return number.value() < MINIMUM_NUMBER || number.value() > MAXIMUM_NUMBER;
-    }
-
     public List<Number> list() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 
     public boolean contains(Number number) {
@@ -74,14 +60,5 @@ public class Lottery {
         return "Lottery{" +
                 "numbers=" + numbers +
                 '}';
-    }
-
-    public String customToString() {
-        int[] numbers = new int[this.numbers.size()];
-        int idx = 0;
-        for (Number number : this.numbers) {
-            numbers[idx++] = number.value();
-        }
-        return Arrays.toString(numbers);
     }
 }
