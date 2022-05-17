@@ -35,9 +35,13 @@ public enum LottoReward {
     }
 
     public static LottoReward valueOf(int matchCount, boolean matchBonus) {
+        if (matchBonus == true && matchCount == 5) {
+            return LottoReward.FIVE_BONUS;
+        }
+
         LottoReward[] lottoRewards = LottoReward.values();
         List<LottoReward> matchReward = Arrays.stream(lottoRewards).filter(
-            lottoReward -> lottoReward.getMatchCount() == matchCount && lottoReward.isBonus == matchBonus
+            lottoReward -> lottoReward.getMatchCount() == matchCount && lottoReward.isBonus == false
         ).collect(Collectors.toList());
         if (matchReward.size() == 0) {
             return LottoReward.MISS;
