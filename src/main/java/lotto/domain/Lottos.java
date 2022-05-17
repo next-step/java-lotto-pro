@@ -11,16 +11,6 @@ public class Lottos {
         this.elements = elements;
     }
 
-    public void makeWinningResult(Lotto winningLotto, WinningStatistics winningStatistics) {
-        for (Lotto lotto : elements) {
-            winningStatistics.addLottoRanking(LottoRanking.findLottoRaking(lotto, winningLotto));
-        }
-    }
-    
-    public List<Lotto> getElements() {
-        return elements;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

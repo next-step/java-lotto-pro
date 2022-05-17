@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import lotto.strategy.PickNumberStrategy;
 
 public class LottoNumbers {
@@ -20,4 +21,20 @@ public class LottoNumbers {
         return Collections.unmodifiableList(values);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(values, that.values);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(values);
+    }
 }

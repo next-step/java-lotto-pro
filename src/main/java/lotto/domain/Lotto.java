@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 import lotto.strategy.PickNumberStrategy;
 
@@ -9,8 +8,7 @@ public class Lotto {
     private LottoNumbers lottoNumbers;
 
     public Lotto(PickNumberStrategy pickNumberStrategy) {
-        List<LottoNumber> lottoNumbers = pickNumberStrategy.pickLottoNumbers();
-        this.lottoNumbers = new LottoNumbers(lottoNumbers);
+        this.lottoNumbers = new LottoNumbers(pickNumberStrategy);
     }
 
     public Lotto(LottoNumbers lottoNumbers) {

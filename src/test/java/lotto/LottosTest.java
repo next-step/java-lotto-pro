@@ -2,7 +2,7 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
@@ -12,15 +12,8 @@ public class LottosTest {
 
     @Test
     public void makeLottos() {
-        //given
-        Lottos expectedLottos = new Lottos(
-            Arrays.asList(new Lotto(() -> Arrays.asList(new LottoNumber(1)))));
-        //when
-        Lottos actualLottos = new Lottos(
-            Arrays.asList(new Lotto(() -> Arrays.asList(new LottoNumber(1)))));
-        //then
-        assertThat(actualLottos).isEqualTo(expectedLottos);
+        Lottos lottos = new Lottos(List.of(new Lotto(() -> List.of(new LottoNumber(1)))));
+        assertThat(lottos).isEqualTo(
+            new Lottos(List.of(new Lotto(() -> List.of(new LottoNumber(1))))));
     }
-
-
 }
