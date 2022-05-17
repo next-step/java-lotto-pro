@@ -5,20 +5,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class LottoStatisticTest {
 
     private int NUMBER_COUNT = 6;
-    private Money orderMoney;
 
     private LottoStatistic lottoStatistic;
 
     @BeforeEach
     void setUp() {
-
-        orderMoney = Money.from(10000);
 
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(createLotto(7, 8, 9, 19, 20, 21));
@@ -34,7 +32,6 @@ class LottoStatisticTest {
 
         Lottos lottos = Lottos.from(lottoList);
 
-        List<LottoNumber> prizeNumbers = new ArrayList<>();
         String[] winningNumbers = {"1", "2", "3", "4", "5", "6"};
 
         lottoStatistic = new LottoStatistic(lottos, winningNumbers);
@@ -42,16 +39,19 @@ class LottoStatisticTest {
 
 
     @Test
-    void 수익률() {
+    void 수익률_계산() {
         assertThat(lottoStatistic.lottoEarning()).isEqualTo(BigDecimal.valueOf(0.5));
     }
 
     @Test
-    void 담청_결과() {
-        assertThat(lottoStatistic.matchedCount(MatchResult.THREE)).isEqualTo(1);
-        assertThat(lottoStatistic.matchedCount(MatchResult.FOUR)).isEqualTo(0);
-        assertThat(lottoStatistic.matchedCount(MatchResult.FIVE)).isEqualTo(0);
-        assertThat(lottoStatistic.matchedCount(MatchResult.SIX)).isEqualTo(0);
+    void 담청_결과를_반환() {
+
+        Map<MatchResult, Integer> winingResult = lottoStatistic.winningMatchResultCount();
+
+        assertThat(winingResult.get(MatchResult.THREE)).isEqualTo(1);
+        assertThat(winingResult.get(MatchResult.FOUR)).isEqualTo(0);
+        assertThat(winingResult.get(MatchResult.FIVE)).isEqualTo(0);
+        assertThat(winingResult.get(MatchResult.SIX)).isEqualTo(0);
     }
 
 

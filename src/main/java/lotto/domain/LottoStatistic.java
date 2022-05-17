@@ -34,10 +34,6 @@ public class LottoStatistic {
         }
     }
 
-    public int matchedCount(MatchResult matchResult) {
-        return matchedLottos.get(matchResult).size();
-    }
-
     public BigDecimal lottoEarning() {
         Money totalLottoPrice = Money.from(0);
         for (Lottos lottos : matchedLottos.values()) {
@@ -46,7 +42,18 @@ public class LottoStatistic {
         return totalPrize().divide(totalLottoPrice);
     }
 
+    public Map<MatchResult, Integer> winningMatchResultCount() {
+        Map<MatchResult, Integer> result = new HashMap<>();
+        for (MatchResult matchResult : MatchResult.winningMatchResults()) {
+            result.put(matchResult, matchedCount(matchResult));
+        }
+        return result;
+    }
 
+    private int matchedCount(MatchResult matchResult) {
+        return matchedLottos.get(matchResult).size();
+    }
+    
     private Money totalPrize() {
         Money result = Money.from(0);
         for (Map.Entry<MatchResult, Lottos> entry : matchedLottos.entrySet()) {
