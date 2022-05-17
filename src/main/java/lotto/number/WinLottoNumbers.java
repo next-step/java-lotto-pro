@@ -35,13 +35,19 @@ public class WinLottoNumbers {
     public static class Builder{
         private LottoNumbers lottoNumbers;
         private LottoNumber bonusNumber;
-        public static Builder getInstance(){
-            return new Builder();
+
+        public static class RequiredLottoNumbersBuilder{
+            public Builder lottoNumbers(LottoNumbers lottoNumbers){
+                Builder builder = new Builder();
+                builder.lottoNumbers = lottoNumbers;
+                return builder;
+            }
         }
-        public Builder lottoNumbers(LottoNumbers lottoNumbers){
-            this.lottoNumbers=lottoNumbers;
-            return this;
+
+        public static RequiredLottoNumbersBuilder getInstance(){
+            return new RequiredLottoNumbersBuilder();
         }
+
         public Builder bonusNumber(LottoNumber bonusNumber){
             if(lottoNumbers.contains(bonusNumber)){
                 throw new IllegalArgumentException("보너스번호는 당첨번호와 중복될 수 없습니다.");

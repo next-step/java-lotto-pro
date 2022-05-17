@@ -53,3 +53,4 @@
 - [X] WinLottoNumbersTest로 테스트 이동
 - [X] ParameterizedTest 제거
 - [X] WinLottoNumbers.matchMainNumber 리팩토링
+- [X] WinLottoNumbers.Builder 리팩토링
