@@ -11,7 +11,7 @@ public class OutputView {
 
     public static void printLottos(Lottos lottos) {
         lottos.getLottos()
-                .forEach(lotto -> System.out.println(lotto.sortedLottoList()));
+                .forEach(lotto -> System.out.println(lotto.sortedLotto()));
         System.out.println();
     }
 
