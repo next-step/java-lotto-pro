@@ -15,16 +15,16 @@ public class Application {
 
     public static void main(String[] args) {
         Player player = new Player(PlayerMoney.of(InputView.userPriceInput()));
-        //ResultView.playerHasLotto(player);
         int manualLottoQty = manualLottoQtyInput(player);
-        List<Lotto> manualLottos = manualLottoInput(manualLottoQty);
-        
+        player.buyCustomLottos(manualLottoInput(manualLottoQty));
+        player.buyAutoLottos();
+
+        ResultView.printLottoAutoAndManualQty(manualLottoQty, player.lottoQty());
+        ResultView.playerHasLotto(player);
+
         WinnerLotto winnerLotto = bonusNumberInput(lastWeekWinnerLotto());
-
         LottoReport lottoReport = player.matchWinnerLotto(winnerLotto);
-
         ResultView.winnerReport(lottoReport);
-
     }
 
     private static int manualLottoQtyInput(Player player) {
@@ -55,15 +55,6 @@ public class Application {
         }
     }
 
-
-    private static int autoLottoDeposit() {
-        int despotMoney = InputView.userPriceInput();
-        if (despotMoney < Lotto.LOTTO_MONEY) {
-            return InputView.retryPriceInput();
-        }
-        return despotMoney;
-    }
-
     private static WinnerLotto bonusNumberInput(Lotto winnerLotto) {
         try {
             return new WinnerLotto(winnerLotto, LottoNumber.of(InputView.bonusNumberInput()));
@@ -81,7 +72,5 @@ public class Application {
             return lastWeekWinnerLotto();
         }
     }
-
-
 
 }

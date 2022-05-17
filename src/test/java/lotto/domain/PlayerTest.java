@@ -74,5 +74,14 @@ class PlayerTest {
 
     }
 
+    @Test
+    @DisplayName("플레이어가 가진 로또 갯수")
+    void lottQty() {
+        Player player = new Player(10000);
+        player.buyCustomLotto(Lotto.createCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        player.buyCustomLotto(Lotto.createCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
+
+        assertThat(player.lottoQty()).isEqualTo(2);
+    }
 
 }

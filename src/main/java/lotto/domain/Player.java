@@ -26,6 +26,10 @@ public class Player {
         return Collections.unmodifiableList(lottos);
     }
 
+    public int lottoQty() {
+        return lottos.size();
+    }
+
     public void buyCustomLottos(List<Lotto> customLottos) {
         customLottos.forEach(this::buyCustomLotto);
     }
