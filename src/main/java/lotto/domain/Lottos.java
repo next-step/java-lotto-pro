@@ -34,6 +34,10 @@ public class Lottos {
         return result;
     }
 
+    public int size() {
+        return this.lottoList.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
