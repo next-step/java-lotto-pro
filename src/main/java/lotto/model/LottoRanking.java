@@ -3,28 +3,31 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum LottoRanking {
-    FIFTH(3, "3개 일치", Money.valueOf(5000)),
-    FORTH(4, "4개 일치", Money.valueOf(50000)),
-    THIRD(5, "5개 일치", Money.valueOf(1500000)),
-    FIRST(6, "6개 일치", Money.valueOf(2000000000)),
-    MISS(0, "꽝", Money.valueOf(0));
+    FIFTH(3, "3개 일치", Money.valueOf(5000), false),
+    FORTH(4, "4개 일치", Money.valueOf(50000), false),
+    THIRD(5, "5개 일치", Money.valueOf(1500000), false),
+    SECOND(5, "5개 일치, 보너스 볼 일치", Money.valueOf(30000000), true),
+    FIRST(6, "6개 일치", Money.valueOf(2000000000), false),
+    MISS(0, "꽝", Money.valueOf(0), false);
 
     private static final int COUNT_OF_MATCH_MAX_NUM = 6;
     private static final int COUNT_OF_MATCH_MIN_NUM = 0;
     private final int countOfMatch;
     private final String text;
     private final Money money;
+    private final Boolean matchBonus;
 
-    LottoRanking(int countOfMatch, String text, Money money) {
+    LottoRanking(int countOfMatch, String text, Money money, boolean matchBonus) {
         this.countOfMatch = countOfMatch;
         this.text = text;
         this.money = money;
+        this.matchBonus = matchBonus;
     }
 
-    public static LottoRanking findLottoRankingByCountOfMatch(int countOfMatch) {
+    public static LottoRanking findLottoRankingByCountOfMatchAndMatchBonus(int countOfMatch, boolean matchBonus) {
         validateCountOfMatch(countOfMatch);
         return Arrays.stream(LottoRanking.values())
-                .filter(ranking -> ranking.countOfMatch() == countOfMatch)
+                .filter(ranking -> ranking.countOfMatch() == countOfMatch && ranking.matchBonus() == matchBonus)
                 .findFirst()
                 .orElse(LottoRanking.MISS);
     }
@@ -49,5 +52,9 @@ public enum LottoRanking {
 
     private int countOfMatch() {
         return this.countOfMatch;
+    }
+
+    private boolean matchBonus() {
+        return this.matchBonus;
     }
 }
