@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -26,5 +27,19 @@ public class MoneyTest {
     void ticketQuantity(int purchaseMoney, int expected) {
         Money money = new Money(purchaseMoney);
         assertThat(money.findPurchaseTicketQuantity()).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("금액 더 많은지 확인")
+    void moreMoney() {
+        Money money = new Money(1000);
+        assertThat(money.isMoreMoney(999)).isTrue();
+    }
+
+    @Test
+    @DisplayName("금액 더 적은지 확인")
+    void lessMoney() {
+        Money money = new Money(1000);
+        assertThat(money.isLessMoney(1001)).isTrue();
     }
 }

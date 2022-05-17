@@ -40,10 +40,10 @@ public class WinningResult {
 
     public String profitResultDescription(Money purchaseMoney) {
         int totalPrizeMoney = totalPrizeMoney();
-        if (purchaseMoney.getMoney() < totalPrizeMoney) {
+        if (purchaseMoney.isLessMoney(totalPrizeMoney)) {
             return TEXT_PROFIT;
         }
-        if (purchaseMoney.getMoney() > totalPrizeMoney) {
+        if (purchaseMoney.isMoreMoney(totalPrizeMoney)) {
             return TEXT_LOSS;
         }
         return TEXT_PRINCIPAL;

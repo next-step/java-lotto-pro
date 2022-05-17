@@ -19,8 +19,12 @@ public class Money {
         this.money = money;
     }
 
-    public int getMoney() {
-        return this.money;
+    public boolean isMoreMoney(int money) {
+        return this.money > money;
+    }
+
+    public boolean isLessMoney(int money) {
+        return this.money < money;
     }
 
     public int findPurchaseTicketQuantity() {
