@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.Scanner;
 import lotto.generator.InputLottoNumberGenerator;
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.LottoStatistics;
 import lotto.model.Lottos;
 import lotto.model.Money;
@@ -23,7 +24,9 @@ public class LottoController {
         ResultView.printPurchasedLottos(lottos);
         InputView.printWinningLottoInputGuide();
         Lotto winningLotto = Lotto.draw(new InputLottoNumberGenerator(scanner.nextLine()));
-        LottoStatistics lottoStatistics = lottos.lottoStatistics(winningLotto);
+        InputView.printBonusLottoNumberInputGuide();
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(StringToIntegerConverter.parseInt(scanner.nextLine()));
+        LottoStatistics lottoStatistics = lottos.lottoStatistics(winningLotto, bonusLottoNumber);
         ResultView.printWinningStatistics(lottoStatistics, lottos.totalPrice());
     }
 }
