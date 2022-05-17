@@ -27,16 +27,16 @@ public class Application {
         ResultView.printLottosView(lottos);
 
         WinningLotto winningLotto = createWinningLotto();
-        LottoGameResult lottoGameResult = LottoGame.resultWinningGame(winningLotto,lottos);
-        ResultView.printFinalResultView(lottoGameResult,lottos);
+        LottoGameResult lottoGameResult = LottoGame.resultWinningGame(winningLotto, lottos);
+        ResultView.printFinalResultView(lottoGameResult, lottos);
     }
 
     private Money inputMoney() throws IOException {
-        while (true){
+        while (true) {
             try {
                 String moneyWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.MONEY_MESSAGE);
                 return new Money(moneyWord);
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 ResultView.printConsole(e.getMessage());
             }
         }
@@ -45,27 +45,27 @@ public class Application {
     private WinningLotto createWinningLotto() throws IOException {
         LottoNumbers winningLottoNumbers = inputLottoNumbers(LottoInputMessage.WINNING_NUMBERS_MESSAGE);
         LottoNumber bonusNumber = inputLottoNumber(LottoInputMessage.BONUS_NUMBER_MESSAGE);
-        return new WinningLotto(winningLottoNumbers,bonusNumber);
+        return new WinningLotto(winningLottoNumbers, bonusNumber);
     }
 
     private LottoNumbers inputLottoNumbers(String message) throws IOException {
-        while (true){
+        while (true) {
             try {
                 String winningNumberWords = InputConsoleUtils.readLineForMessage(message);
                 List<String> winningNumbers = InputStringUtils.nonSpaceSplit(winningNumberWords, DELIMITER_COMMA);
                 return new LottoNumbers(winningNumbers);
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 ResultView.printConsole(e.getMessage());
             }
         }
     }
 
     private LottoNumber inputLottoNumber(String message) throws IOException {
-        while (true){
+        while (true) {
             try {
                 String numberWord = InputConsoleUtils.readLineForMessage(message);
                 return new LottoNumber(numberWord);
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 ResultView.printConsole(e.getMessage());
             }
         }

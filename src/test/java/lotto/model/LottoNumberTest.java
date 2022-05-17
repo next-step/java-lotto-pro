@@ -11,19 +11,19 @@ class LottoNumberTest {
 
     @DisplayName("로또 번호가 1~45 사이가 아닌 경우 검증")
     @ParameterizedTest
-    @ValueSource(strings = {"0","46"})
+    @ValueSource(strings = {"0", "46"})
     void not_lotto_number(String number) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() ->  new LottoNumber(number))
+                .isThrownBy(() -> new LottoNumber(number))
                 .withMessage("[ERROR] 로또 번호는 1~45 사이의 숫자여야합니다.");
     }
 
     @DisplayName("로또 번호가 숫자가 아닌 경우")
     @ParameterizedTest
-    @ValueSource(strings = {"%$","en"})
+    @ValueSource(strings = {"%$", "en"})
     void not_number(String number) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() ->  new LottoNumber(number))
+                .isThrownBy(() -> new LottoNumber(number))
                 .withMessage("[ERROR] 숫자가 아닙니다.");
     }
 

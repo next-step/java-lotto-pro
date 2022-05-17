@@ -14,7 +14,7 @@ class LottoNumbersTest {
     @Test
     void lottoNumbers_non_six_number() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() ->  new LottoNumbers(Arrays.asList("3", "7", "10", "35")))
+                .isThrownBy(() -> new LottoNumbers(Arrays.asList("3", "7", "10", "35")))
                 .withMessage("[ERROR] 로또 번호는 6개여야 합니다.");
     }
 
@@ -22,7 +22,7 @@ class LottoNumbersTest {
     @Test
     void lottoNumbers_duplication_number() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() ->  new LottoNumbers(Arrays.asList("3", "7", "10", "10", "25", "35")))
+                .isThrownBy(() -> new LottoNumbers(Arrays.asList("3", "7", "10", "10", "25", "35")))
                 .withMessage("[ERROR] 6개의 로또 번호에 중복이 있습니다.");
     }
 
@@ -31,9 +31,9 @@ class LottoNumbersTest {
     void contains() {
         LottoNumbers lottoNumbers = new LottoNumbers((Arrays.asList("3", "7", "10", "13", "25", "35")));
         assertAll(
-                ()-> assertThat(lottoNumbers.contains(new LottoNumber("7"))).isTrue(),
-                ()-> assertThat(lottoNumbers.contains(new LottoNumber("25"))).isTrue(),
-                ()-> assertThat(lottoNumbers.contains(new LottoNumber("35"))).isTrue()
+                () -> assertThat(lottoNumbers.contains(new LottoNumber("7"))).isTrue(),
+                () -> assertThat(lottoNumbers.contains(new LottoNumber("25"))).isTrue(),
+                () -> assertThat(lottoNumbers.contains(new LottoNumber("35"))).isTrue()
         );
     }
 
@@ -41,7 +41,7 @@ class LottoNumbersTest {
     @Test
     void numberToIntArray() {
         LottoNumbers lottoNumbers = new LottoNumbers((Arrays.asList("3", "7", "10", "13", "25", "35")));
-        assertThat(lottoNumbers.numberToIntArray()).isEqualTo(new int[]{3,7,10,13,25,35});
+        assertThat(lottoNumbers.numberToIntArray()).isEqualTo(new int[]{3, 7, 10, 13, 25, 35});
     }
 
     @DisplayName("당첨로또번호와 구매 로또 번호 일치 개수 확인")
@@ -53,10 +53,10 @@ class LottoNumbersTest {
         LottoNumbers winningNumbers5 = new LottoNumbers((Arrays.asList("3", "7", "10", "13", "25", "37")));
         LottoNumbers winningNumbers6 = new LottoNumbers((Arrays.asList("3", "7", "10", "13", "25", "35")));
         assertAll(
-                ()->assertThat(lottoNumbers.matchCount(winningNumbers3)).isEqualTo(3),
-                ()->assertThat(lottoNumbers.matchCount(winningNumbers4)).isEqualTo(4),
-                ()->assertThat(lottoNumbers.matchCount(winningNumbers5)).isEqualTo(5),
-                ()->assertThat(lottoNumbers.matchCount(winningNumbers6)).isEqualTo(6)
+                () -> assertThat(lottoNumbers.matchCount(winningNumbers3)).isEqualTo(3),
+                () -> assertThat(lottoNumbers.matchCount(winningNumbers4)).isEqualTo(4),
+                () -> assertThat(lottoNumbers.matchCount(winningNumbers5)).isEqualTo(5),
+                () -> assertThat(lottoNumbers.matchCount(winningNumbers6)).isEqualTo(6)
         );
     }
 }

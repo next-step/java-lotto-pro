@@ -22,7 +22,7 @@ class MoneyTest {
 
     @DisplayName("구매 금액이 10_000_000원 이상인 경우")
     @ParameterizedTest
-    @ValueSource(strings = {"10001000","100000000"})
+    @ValueSource(strings = {"10001000", "100000000"})
     void money_max(String moneyWord) {
 
         assertThatIllegalArgumentException()

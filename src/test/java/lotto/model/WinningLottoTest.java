@@ -29,7 +29,10 @@ class WinningLottoTest {
     void playLottoGame_duplication_bonus_number() {
         LottoNumber bonusNumber = new LottoNumber(7);
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningLotto(new LottoNumbers(Arrays.asList("3","7", "10", "15", "25", "35")), bonusNumber))
+                .isThrownBy(() -> new WinningLotto(
+                        new LottoNumbers(Arrays.asList("3", "7", "10", "15", "25", "35")),
+                        bonusNumber)
+                )
                 .withMessage("[ERROR] 보너스 번호가 이미 로또 번호에 존재합니다.");
     }
 
@@ -37,15 +40,17 @@ class WinningLottoTest {
     @Test
     void playLottoGame_bonus_number() {
         LottoNumber bonusNumber = new LottoNumber(20);
-        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(Arrays.asList("3", "7", "10", "35", "43", "45")), bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(
+                new LottoNumbers(Arrays.asList("3", "7", "10", "35", "43", "45")), bonusNumber
+        );
         LottoGameResult resultLottoGame = winningLotto.compareLottos(lottos);
         assertAll(
-                ()-> assertEquals(2, resultLottoGame.rankCount(LottoRank.FOURTH)),
-                ()-> assertEquals(0, resultLottoGame.rankCount(LottoRank.THIRD)),
-                ()-> assertEquals(0, resultLottoGame.rankCount(LottoRank.SECOND)),
-                ()-> assertEquals(1, resultLottoGame.rankCount(LottoRank.SECOND_BONUS)),
-                ()-> assertEquals(0, resultLottoGame.rankCount(LottoRank.FIRST)),
-                ()-> assertEquals(30_010_000,resultLottoGame.totalWinningAmount())
+                () -> assertEquals(2, resultLottoGame.rankCount(LottoRank.FOURTH)),
+                () -> assertEquals(0, resultLottoGame.rankCount(LottoRank.THIRD)),
+                () -> assertEquals(0, resultLottoGame.rankCount(LottoRank.SECOND)),
+                () -> assertEquals(1, resultLottoGame.rankCount(LottoRank.SECOND_BONUS)),
+                () -> assertEquals(0, resultLottoGame.rankCount(LottoRank.FIRST)),
+                () -> assertEquals(30_010_000, resultLottoGame.totalWinningAmount())
         );
     }
 }

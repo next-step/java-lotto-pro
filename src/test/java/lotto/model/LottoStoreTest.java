@@ -14,7 +14,7 @@ class LottoStoreTest {
     @CsvSource(value = {"10000:10", "5000:5", "3000:3"}, delimiter = ':')
     void issueLottoPaper(String moneyWord, int expectedPlayCount) {
         LottoStore lottoStore = new LottoStore(new Money(moneyWord));
-        assertEquals(new LottoPaper(expectedPlayCount),lottoStore.issueLottoPaper());
+        assertEquals(new LottoPaper(expectedPlayCount), lottoStore.issueLottoPaper());
     }
 
 }

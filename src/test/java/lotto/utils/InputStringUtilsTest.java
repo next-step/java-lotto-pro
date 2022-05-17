@@ -17,7 +17,7 @@ class InputStringUtilsTest {
     @CsvSource(value = {"1,2,3,4,5,6:,:6", "1-2-3:-:3"}, delimiter = ':')
     void splitToNumberListByDelimiter(String inputString, String delimiter, int expectedSize) {
         List<String> numberWords = InputStringUtils.nonSpaceSplit(inputString, delimiter);
-        for (String number : numberWords ){
+        for (String number : numberWords) {
             assertThat(number).doesNotMatch(BLANK_REGEX);
         }
         assertThat(numberWords).hasSize(expectedSize);

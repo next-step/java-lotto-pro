@@ -15,11 +15,21 @@ class LottoTest {
     void matchRank() {
         Lotto lotto = new Lotto(Arrays.asList(1, 3, 15, 25, 36, 45));
         assertAll(
-                () -> assertEquals(LottoRank.FOURTH, lotto.matchRank(new LottoNumbers(Arrays.asList("1", "10", "15", "40", "41", "45")),new LottoNumber(39))),
-                () -> assertEquals(LottoRank.THIRD, lotto.matchRank(new LottoNumbers(Arrays.asList("1", "3", "15", "25", "41", "43")),new LottoNumber(39))),
-                () -> assertEquals(LottoRank.SECOND, lotto.matchRank(new LottoNumbers(Arrays.asList("1", "10", "15", "25", "36", "45")),new LottoNumber(39))),
-                () -> assertEquals(LottoRank.SECOND_BONUS, lotto.matchRank(new LottoNumbers(Arrays.asList("1", "10", "15", "25", "36", "45")),new LottoNumber(3))),
-                () -> assertEquals(LottoRank.FIRST, lotto.matchRank(new LottoNumbers(Arrays.asList("1", "3", "15", "25", "36", "45")),new LottoNumber(39)))
+                () -> assertEquals(LottoRank.FOURTH,
+                        lotto.matchRank(new LottoNumbers(Arrays.asList("1", "10", "15", "40", "41", "45")),
+                                new LottoNumber(39))),
+                () -> assertEquals(LottoRank.THIRD,
+                        lotto.matchRank(new LottoNumbers(Arrays.asList("1", "3", "15", "25", "41", "43")),
+                                new LottoNumber(39))),
+                () -> assertEquals(LottoRank.SECOND,
+                        lotto.matchRank(new LottoNumbers(Arrays.asList("1", "10", "15", "25", "36", "45")),
+                                new LottoNumber(39))),
+                () -> assertEquals(LottoRank.SECOND_BONUS,
+                        lotto.matchRank(new LottoNumbers(Arrays.asList("1", "10", "15", "25", "36", "45")),
+                                new LottoNumber(3))),
+                () -> assertEquals(LottoRank.FIRST,
+                        lotto.matchRank(new LottoNumbers(Arrays.asList("1", "3", "15", "25", "36", "45")),
+                                new LottoNumber(39)))
         );
     }
 
@@ -27,7 +37,7 @@ class LottoTest {
     @Test
     void convertNumbers() {
         Lotto lotto = new Lotto(Arrays.asList(1, 3, 15, 25, 36, 45));
-        assertThat(lotto.convertNumbers()).isEqualTo(new int[]{1,3,15,25,36,45});
+        assertThat(lotto.convertNumbers()).isEqualTo(new int[]{1, 3, 15, 25, 36, 45});
     }
 
 }
