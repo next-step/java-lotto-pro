@@ -8,7 +8,7 @@ import study.lotto.dto.BonusBall;
 import study.lotto.dto.PurchasePrice;
 import study.lotto.dto.PurchasedLotto;
 import study.lotto.dto.PurchasedLottos;
-import study.lotto.dto.WinningLottoNumbers;
+import study.lotto.dto.WinningLotto;
 import study.lotto.dto.WinningStatistics;
 
 public class LottoView {
@@ -29,8 +29,8 @@ public class LottoView {
         userInterface.show("\n");
     }
 
-    public WinningLottoNumbers getWinningLottoNumbers() {
-        return new WinningLottoNumbers(userInterface.getUserInput("지난 주 당첨 번호를 입력해 주세요.\n"));
+    public WinningLotto getWinningLottoNumbers() {
+        return new WinningLotto(userInterface.getUserInput("지난 주 당첨 번호를 입력해 주세요.\n"));
     }
 
     public void showWinningStatictics(WinningStatistics winningStatistics) {

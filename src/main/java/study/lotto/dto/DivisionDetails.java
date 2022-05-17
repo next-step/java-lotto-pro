@@ -34,7 +34,9 @@ public class DivisionDetails {
         return matchCount;
     }
 
-    public boolean isBonusMatch() { return bonusMatch; }
+    public boolean isBonusMatch() {
+        return bonusMatch;
+    }
 
     public BigDecimal getPrize() {
         return prize;
