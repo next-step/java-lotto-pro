@@ -20,10 +20,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = Integer.parseInt(lottoNumber);
     }
 
-    public int getLottoNumber() {
-        return this.lottoNumber;
-    }
-
     private void validateRange(int lottoNumber) {
         if (lottoNumber < LOTTO_START_NUMBER || lottoNumber > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException(ERROR_MSG_NUMBER_RANGE);
@@ -38,9 +34,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
+    private int minus(int number) {
+        return this.lottoNumber - number;
+    }
+
     @Override
     public int compareTo(LottoNumber lottoNumber) {
-        return this.lottoNumber - lottoNumber.getLottoNumber();
+        return lottoNumber.minus(this.lottoNumber) * -1;
     }
 
     @Override
