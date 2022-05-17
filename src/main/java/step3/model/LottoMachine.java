@@ -6,6 +6,7 @@ import step3.domain.LottoElement;
 import step3.domain.LottoManager;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
+import step3.domain.Ticket;
 
 public class LottoMachine {
 
@@ -32,21 +33,20 @@ public class LottoMachine {
         }
     }
 
-    public int buyTicket(Money money) {
-        if(!validateTicketCount(money)){
-            System.out.println(CANT_BUY_LOTTO_EXCEPTION);
-            return 0;
-        }
-        int ticket = money.getMoney() / LOTTO_PRICE;
-        return lottoManager.buyRandomTicket(ticket);
+    public int buyLotto(Ticket ticket) {
+        return lottoManager.buyRandomTicket(ticket.getTicket());
     }
-    private boolean validateTicketCount(Money money){
+
+    public Ticket buyTicket(Money money) {
         try {
-            return money.getMoney() / LOTTO_PRICE >= 1;
-        }catch (NullPointerException e){
-            return false;
+            return new Ticket(money);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
+
     }
+
     public Money insertMoney(String money) {
         try {
             return new Money(money);
