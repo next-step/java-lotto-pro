@@ -6,7 +6,7 @@ public class Figures {
     private Map<LottoRank, Integer> figures;
     private static final int DEFAULT_RANK_COUNT = 0;
 
-    public Figures(Lottos lottos, Lotto winningsLotto) {
+    public Figures(Lottos lottos, WinningLotto winningsLotto) {
         init();
         for (Lotto lotto : lottos.getLottoList()) {
             LottoRank rank = lotto.matches(winningsLotto);
