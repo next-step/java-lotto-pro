@@ -12,9 +12,9 @@ public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(LottoNumber[] lottoNumbers) {
+        validateNumbersCount(lottoNumbers);
+        validateDuplicated(lottoNumbers);
         this.lottoNumbers = new HashSet<>(Arrays.asList(lottoNumbers));
-        validateNumbersCount();
-        validateDuplicated();
     }
 
     public Money price() {
@@ -31,20 +31,21 @@ public class Lotto {
         return MatchResult.from(matchCount);
     }
 
-    private void validateDuplicated() {
-        if (hasDuplicatedLottoNumber()) {
+    private void validateDuplicated(LottoNumber[] lottoNumbers) {
+        if (hasDuplicatedLottoNumber(lottoNumbers)) {
             throw new IllegalArgumentException("로또는 중복된 숫자를 가질 수 없습니다.");
         }
     }
 
-    private void validateNumbersCount() {
-        if (LOTTO_NUMBER_SIZE != this.lottoNumbers.size()) {
+    private void validateNumbersCount(LottoNumber[] lottoNumbers) {
+        if (LOTTO_NUMBER_SIZE != lottoNumbers.length) {
             throw new IllegalArgumentException(String.format("로또는 %d자리 숫자이어야 합니다.", LOTTO_NUMBER_SIZE));
         }
     }
 
-    private boolean hasDuplicatedLottoNumber() {
-        return this.lottoNumbers.size() != LOTTO_NUMBER_SIZE;
+    private boolean hasDuplicatedLottoNumber(LottoNumber[] lottoNumbers) {
+        Set<LottoNumber> nonDuplicatedNumbers = new HashSet<>(Arrays.asList(lottoNumbers));
+        return nonDuplicatedNumbers.size() != LOTTO_NUMBER_SIZE;
     }
 
     @Override
