@@ -3,9 +3,9 @@ package lotto.domain;
 import lotto.utils.DoubleSplit;
 
 public class Winnings {
-    private int winningsPrice;
+    private long winningsPrice;
 
-    public Winnings(int winningsPrice) {
+    public Winnings(long winningsPrice) {
         this.winningsPrice = winningsPrice;
     }
 
@@ -14,7 +14,7 @@ public class Winnings {
         return Math.floor(rate * DoubleSplit.TWO_DECIMAL_PLACES.getDigit()) / DoubleSplit.TWO_DECIMAL_PLACES.getDigit();
     }
 
-    public int getWinningsPrice() {
+    public long getWinningsPrice() {
         return winningsPrice;
     }
 }
