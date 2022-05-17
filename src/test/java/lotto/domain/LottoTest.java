@@ -71,8 +71,8 @@ public class LottoTest {
     void Lotto_포함_테스트(){
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertAll(
-                () -> assertThat(lotto.match(new LottoNumber(1))).isTrue(),
-                () -> assertThat(lotto.match(new LottoNumber(10))).isFalse()
+                () -> assertThat(lotto.hasNumber(new LottoNumber(1))).isTrue(),
+                () -> assertThat(lotto.hasNumber(new LottoNumber(10))).isFalse()
         );
     }
 }

@@ -14,7 +14,7 @@ public class LottoResult {
 
     private void updateWinningCount(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos.getLottosAsUnmodifiableList()) {
-            LottoRank rank = LottoRank.valueOf(lotto.countMatchedNumbers(winningLotto), lotto.match(bonusNumber));
+            LottoRank rank = LottoRank.valueOf(lotto.countMatchedNumbers(winningLotto), lotto.hasNumber(bonusNumber));
             winningCount.put(rank, winningCount.getOrDefault(rank, 0) + 1);
         }
     }
