@@ -3,28 +3,22 @@ package lottoauto.wrapper;
 import lottoauto.util.InputNumberValidator;
 import lottoauto.util.RandomNumberExtractor;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private List<Integer> numbers;
+    private List<Number> numbers;
 
     public Lotto(List<Integer> numbers) {
         checkEmpty(numbers);
         checkLength(numbers);
-        checkNumberRange(numbers);
 
-        this.numbers = numbers;
-        Collections.sort(this.numbers);
+        insertIntegerList(numbers);
     }
 
-    private void checkNumberRange(List<Integer> numbers) {
-        numbers.stream().filter(number -> number < 1 || number > 45).forEachOrdered(number -> {
-            throw new NumberFormatException("1~45만 입력 가능합니다.");
-        });
-    }
 
     private void checkLength(List<Integer> numbers) {
         if (numbers.size() != 6) {
@@ -40,27 +34,38 @@ public class Lotto {
 
     public Lotto() {
         RandomNumberExtractor randomNumberExtractor = new RandomNumberExtractor();
-        this.numbers = randomNumberExtractor.getRandomNumbers();
-        Collections.sort(this.numbers);
+        insertIntegerList(randomNumberExtractor.getRandomNumbers());
     }
 
-    public Lotto(String input) {
-        InputNumberValidator inputNumberValidator = new InputNumberValidator(input);
-        this.numbers = inputNumberValidator.getNumbers();
-        Collections.sort(this.numbers);
+    private void insertIntegerList(List<Integer> tempLottoList) {
+        this.numbers = new ArrayList<>();
+        for (int i = 0; i < tempLottoList.size(); i++) {
+            Integer integer = tempLottoList.get(i);
+            Number tempNumber = new Number(integer);
+            this.numbers.add(tempNumber);
+        }
+    }
+
+    private List<Integer> insertNumberList(List<Number> tempLottoList) {
+        List<Integer> tempIntegerList = new ArrayList<>();
+        for (Number number : tempLottoList) {
+            tempIntegerList.add(number.getNumber());
+        }
+        return tempIntegerList;
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return insertNumberList(numbers).toString();
     }
 
     public List<Integer> toList() {
-        return this.numbers;
+        return insertNumberList(this.numbers);
     }
 
     public int compare(List<Integer> compareLotto) {
         Collections.sort(compareLotto);
-        return (compareLotto.size() - numbers.stream().filter(win -> compareLotto.stream().noneMatch(Predicate.isEqual(win))).collect(Collectors.toList()).size());
+        List<Integer> tempLotto = insertNumberList(this.numbers);
+        return (compareLotto.size() - tempLotto.stream().filter(win -> compareLotto.stream().noneMatch(Predicate.isEqual(win))).collect(Collectors.toList()).size());
     }
 }

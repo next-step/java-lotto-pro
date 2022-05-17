@@ -3,6 +3,7 @@ package lottoauto.view;
 import lottoauto.service.LottoTicket;
 import lottoauto.util.InputNumberValidator;
 import lottoauto.util.WinnerChecker;
+import lottoauto.wrapper.LottoCount;
 import lottoauto.wrapper.Lotto;
 import lottoauto.wrapper.Price;
 
@@ -12,27 +13,22 @@ import java.util.Scanner;
 
 public class InputViewer {
 
-
-    private static final int FOURTH = 3;
-    private static final int THIRD = 4;
-    private static final int SECOND = 5;
-    private static final int FIRST = 6;
-    LottoTicket lottoTicket = new LottoTicket();
-    Map<Integer, Integer> winnerMap = new HashMap<>();
-    Price price;
+    private LottoTicket lottoTicket = new LottoTicket();
+    private Map<Integer, Integer> winnerMap = new HashMap<>();
+    private Price price;
 
     public Price getInputPrice() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        Price price = new Price(sc.nextLine());
+        Price price = new Price();
+        price.makeNewTryTimes(sc.nextLine());
         this.price = price;
         return price;
     }
 
-    public void inputLotto() {
-        for (int i = 0; i < price.getTryTimes(); i++) {
-            lottoTicket.add(new Lotto());
-        }
+    public void inputLotto(Price price) {
+        lottoTicket = new LottoTicket();
+        lottoTicket.addAll(price);
         lottoTicket.printAll();
     }
 
@@ -51,9 +47,9 @@ public class InputViewer {
     }
 
     private void makeDefaultWinnerMap(Map<Integer, Integer> winnerMap) {
-        winnerMap.put(FIRST, 0);
-        winnerMap.put(SECOND, 0);
-        winnerMap.put(THIRD, 0);
-        winnerMap.put(FOURTH, 0);
+        winnerMap.put(LottoCount.FIRST.getValue(), 0);
+        winnerMap.put(LottoCount.SECOND.getValue(), 0);
+        winnerMap.put(LottoCount.THIRD.getValue(), 0);
+        winnerMap.put(LottoCount.FOURTH.getValue(), 0);
     }
 }

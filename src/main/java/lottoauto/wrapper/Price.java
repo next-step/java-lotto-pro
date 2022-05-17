@@ -1,10 +1,13 @@
 package lottoauto.wrapper;
 
+import lottoauto.view.OutputViewer;
+
 public class Price {
     int price;
     int tryTimes;
 
-    public Price(String input) {
+
+    public void makeNewTryTimes(String input) {
         try {
             this.price = Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -16,8 +19,10 @@ public class Price {
         }
 
         this.tryTimes = this.price / 1000;
-        System.out.println(this.tryTimes + "개를 구매했습니다.");
+        OutputViewer.printTryTimes(this.tryTimes);
     }
+
+
 
     @Override
     public String toString() {

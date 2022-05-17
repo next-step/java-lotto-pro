@@ -1,16 +1,13 @@
 package lottoauto.util;
 
 import lottoauto.service.LottoTicket;
+import lottoauto.wrapper.LottoCount;
 import lottoauto.wrapper.Lotto;
 
 import java.util.Map;
 
 public class WinnerChecker {
     private Lotto winnerLotto;
-    private static final int FOURTH = 3;
-    private static final int THIRD = 4;
-    private static final int SECOND = 5;
-    private static final int FIRST = 6;
 
     public WinnerChecker(Lotto winnerLotto) {
         this.winnerLotto = winnerLotto;
@@ -26,26 +23,26 @@ public class WinnerChecker {
     }
 
     public void makeWinnerMap(LottoTicket lottoTicket, Map<Integer, Integer> winnerMap) {
-        for (int i = 0; i < lottoTicket.size(); i++) {
-            addWinnerMapValueByKey(lottoTicket, winnerMap, i);
+        for (int indexKey = 0; indexKey < lottoTicket.size(); indexKey++) {
+            addWinnerMapValueByKey(lottoTicket, winnerMap, indexKey);
         }
     }
 
-    private void addWinnerMapValueByKey(LottoTicket lottoTicket, Map<Integer, Integer> winnerMap, int i) {
-        if (compareTickets(lottoTicket.get(i)) == FIRST) {
-            winnerMap.put(FIRST, winnerMap.get(FIRST) + 1);
+    private void addWinnerMapValueByKey(LottoTicket lottoTicket, Map<Integer, Integer> winnerMap, int indexKey) {
+        if (compareTickets(lottoTicket.get(indexKey)) == LottoCount.FIRST.getValue()) {
+            winnerMap.put(LottoCount.FIRST.getValue(), winnerMap.get(LottoCount.FIRST.getValue()) + 1);
         }
 
-        if (compareTickets(lottoTicket.get(i)) == SECOND) {
-            winnerMap.put(SECOND, winnerMap.get(SECOND) + 1);
+        if (compareTickets(lottoTicket.get(indexKey)) == LottoCount.SECOND.getValue()) {
+            winnerMap.put(LottoCount.SECOND.getValue(), winnerMap.get(LottoCount.SECOND.getValue()) + 1);
         }
 
-        if (compareTickets(lottoTicket.get(i)) == THIRD) {
-            winnerMap.put(THIRD, winnerMap.get(THIRD) + 1);
+        if (compareTickets(lottoTicket.get(indexKey)) == LottoCount.THIRD.getValue()) {
+            winnerMap.put(LottoCount.THIRD.getValue(), winnerMap.get(LottoCount.THIRD.getValue()) + 1);
         }
 
-        if (compareTickets(lottoTicket.get(i)) == FOURTH) {
-            winnerMap.put(FOURTH, winnerMap.get(FOURTH) + 1);
+        if (compareTickets(lottoTicket.get(indexKey)) == LottoCount.FOURTH.getValue()) {
+            winnerMap.put(LottoCount.FOURTH.getValue(), winnerMap.get(LottoCount.FOURTH.getValue()) + 1);
         }
     }
 }
