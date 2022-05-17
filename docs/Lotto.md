@@ -52,3 +52,4 @@
 - [X] LottoGame.takeBudget 메서드 삭제 (inputview와 중복)
 - [X] WinLottoNumbersTest로 테스트 이동
 - [X] ParameterizedTest 제거
+- [X] WinLottoNumbers.matchMainNumber 리팩토링
