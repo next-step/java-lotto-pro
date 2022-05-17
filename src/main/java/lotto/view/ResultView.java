@@ -7,9 +7,11 @@ import lotto.enums.LottoRank;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static lotto.common.Messages.*;
 import static lotto.domain.LottoResult.isCriterionRate;
+import static lotto.enums.LottoRank.SECOND_BONUS;
 
 public class ResultView {
     private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
@@ -18,8 +20,8 @@ public class ResultView {
         System.out.printf((PURCHASES_COUNT_MESSAGE) + "%n", purchasesCount);
     }
 
-    public static void resultLottoNumbers(LottoNumbers lottoNumbers) {
-        System.out.println(lottoNumbers);
+    public static void resultLottoNumbers(List<LottoNumbers> lottoNumbers) {
+        lottoNumbers.forEach(System.out::println);
     }
 
     public static void lottoGameResultMessage(LottoRanks lottoRanks) {
@@ -28,7 +30,7 @@ public class ResultView {
 
         Arrays.stream(LottoRank.values()).forEach(
                 lottoRank -> System.out.printf(
-                        (GAME_RESULT_MESSAGE) + "%n",
+                        (lottoRank == SECOND_BONUS ? GAME_RESULT_BONUS_BALL_MESSAGE : GAME_RESULT_MESSAGE) + "%n",
                         lottoRank.getMatchingCount(),
                         lottoRank.getPrizeMoney(),
                         Collections.frequency(lottoRanks.getLottoRanks(), lottoRank)

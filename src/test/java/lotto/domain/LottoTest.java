@@ -71,9 +71,11 @@ class LottoTest {
                 new LottoNumber(6)
         ));
 
+        BonusBall bonusBall = new BonusBall("7");
+
         // when
         Lotto lotto = new Lotto(purchasedLotto);
-        List<LottoRank> ranks = lotto.gamePlay(lastWeekWinningNumber);
+        List<LottoRank> ranks = lotto.gamePlay(lastWeekWinningNumber, bonusBall);
 
         assertThat(ranks.stream()).size().isEqualTo(1);
         assertThat(ranks.stream().findFirst().get()).isEqualTo(LottoRank.FIRST);

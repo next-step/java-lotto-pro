@@ -1,10 +1,16 @@
 package lotto.domain;
 
+import lotto.enums.LottoRank;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.text.DecimalFormat;
+import java.util.Collections;
+
 import static lotto.common.Messages.MONEY_NOT_NUMBER;
 import static lotto.common.Messages.POSITIVE_MONEY;
+import static lotto.domain.LottoResult.isCriterionRate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
@@ -37,5 +43,60 @@ class MoneyTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Money(string))
                 .withMessageContaining(MONEY_NOT_NUMBER);
+    }
+
+    @Test
+    void 로또_수익률_계산() {
+        // given
+        Money money = new Money("10000");
+        LottoRanks lottoRanks = new LottoRanks(Collections.singletonList(
+                LottoRank.THIRD
+        ));
+
+        // when
+        double earningsRate = money.lottoGameEarningsRate(lottoRanks);
+
+        // then
+        assertThat(earningsRate).isEqualTo(5.0);
+    }
+
+    @Test
+    void 로또_수익률_계산2() {
+        // given
+        Money money = new Money("14000");
+        LottoRanks lottoRanks = new LottoRanks(Collections.singletonList(
+                LottoRank.FOURTH
+        ));
+
+        // when
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        double earningsRate = money.lottoGameEarningsRate(lottoRanks);
+
+        // then
+        assertThat(decimalFormat.format(earningsRate)).isEqualTo("0.36");
+    }
+
+    @Test
+    void 로또_수익률_기준을_초과() {
+        // given
+        Money money = new Money("14000");
+        LottoRanks lottoRanks = new LottoRanks(Collections.singletonList(
+                LottoRank.FOURTH
+        ));
+
+        double earningsRate = money.lottoGameEarningsRate(lottoRanks);
+        assertThat(isCriterionRate(earningsRate)).isFalse();
+    }
+
+    @Test
+    void 로또_수익률_기준에_미만() {
+        // given
+        Money money = new Money("1000");
+        LottoRanks lottoRanks = new LottoRanks(Collections.singletonList(
+                LottoRank.FOURTH
+        ));
+
+        double earningsRate = money.lottoGameEarningsRate(lottoRanks);
+        assertThat(isCriterionRate(earningsRate)).isTrue();
     }
 }

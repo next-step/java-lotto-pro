@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -25,15 +26,12 @@ public class LottoRandomNumbers {
         this.lottoNumbers = numList;
     }
 
-    public void LottoNumberShuffle() {
-        Collections.shuffle(lottoNumbers);
-    }
-
     public List<LottoNumber> generate() {
-        LottoNumberShuffle();
+        Collections.shuffle(lottoNumbers);
 
         return lottoNumbers.stream()
                 .limit(SIZE)
+                .sorted(Comparator.comparing(LottoNumber::getNumber))
                 .collect(Collectors.toList());
     }
 }

@@ -1,10 +1,6 @@
 package lotto.domain;
 
-import lotto.enums.LottoRank;
 import org.junit.jupiter.api.Test;
-
-import java.text.DecimalFormat;
-import java.util.Collections;
 
 import static lotto.domain.LottoResult.isCriterionRate;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,57 +8,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoResultTest {
 
     @Test
-    void 로또_수익률_계산() {
-        // given
-        Money money = new Money("10000");
-        LottoRanks lottoRanks = new LottoRanks(Collections.singletonList(
-                LottoRank.THIRD
-        ));
-
-        // when
-        double earningsRate = LottoResult.lottoGameEarningsRate(money.currentMoney(), lottoRanks);
-
-        // then
-        assertThat(earningsRate).isEqualTo(5.0);
+    void 수익률이_1을_초과() {
+        assertThat(isCriterionRate(5000)).isTrue();
     }
 
     @Test
-    void 로또_수익률_계산2() {
-        // given
-        Money money = new Money("14000");
-        LottoRanks lottoRanks = new LottoRanks(Collections.singletonList(
-                LottoRank.FOURTH
-        ));
-
-        // when
-        DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        double earningsRate = LottoResult.lottoGameEarningsRate(money.currentMoney(), lottoRanks);
-
-        // then
-        assertThat(decimalFormat.format(earningsRate)).isEqualTo("0.36");
-    }
-
-    @Test
-    void 로또_수익률_기준계산() {
-        // given
-        Money money = new Money("14000");
-        LottoRanks lottoRanks = new LottoRanks(Collections.singletonList(
-                LottoRank.FOURTH
-        ));
-
-        double earningsRate = LottoResult.lottoGameEarningsRate(money.currentMoney(), lottoRanks);
-        assertThat(isCriterionRate(earningsRate)).isFalse();
-    }
-
-    @Test
-    void 로또_수익률_기준계산2() {
-        // given
-        Money money = new Money("1000");
-        LottoRanks lottoRanks = new LottoRanks(Collections.singletonList(
-                LottoRank.FOURTH
-        ));
-
-        double earningsRate = LottoResult.lottoGameEarningsRate(money.currentMoney(), lottoRanks);
-        assertThat(isCriterionRate(earningsRate)).isTrue();
+    void 수익률이_1에_미만() {
+        assertThat(isCriterionRate(0.23)).isFalse();
     }
 }
