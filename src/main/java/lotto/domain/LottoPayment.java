@@ -1,14 +1,22 @@
 package lotto.domain;
 
+import static lotto.domain.LottoCondition.TICKET_COST;
+
 import java.util.Objects;
+import lotto.service.StringToPaymentConverter;
 
 public class LottoPayment {
     private final int money;
     private final int purchasableAmount;
 
-    LottoPayment(final int money, final int purchasableAmount) {
+    public LottoPayment(final int money) {
         this.money = money;
-        this.purchasableAmount = purchasableAmount;
+        purchasableAmount = money / TICKET_COST.getCondition();
+    }
+
+    public static LottoPayment convertAndCreate(final String moneyString) {
+        final int money = StringToPaymentConverter.convert(moneyString);
+        return new LottoPayment(money);
     }
 
     public int getMoney() {

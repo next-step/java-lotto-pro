@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Scanner;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPayment;
-import lotto.domain.LottoPaymentFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoTicketsFactory;
 import lotto.domain.Prize;
@@ -19,12 +18,9 @@ import lotto.service.PrizeCalculator;
 public class LottoPresenter {
     private static final int[] PRINTABLE_MATCH_COUNTS = {3, 4, 5, 6};
 
-    private final LottoPaymentFactory lottoPaymentFactory;
     private final LottoTicketsFactory lottoTicketsFactory;
 
-    public LottoPresenter(final LottoPaymentFactory lottoPaymentFactory,
-                          final LottoTicketsFactory lottoTicketsFactory) {
-        this.lottoPaymentFactory = lottoPaymentFactory;
+    public LottoPresenter(final LottoTicketsFactory lottoTicketsFactory) {
         this.lottoTicketsFactory = lottoTicketsFactory;
     }
 
@@ -41,7 +37,7 @@ public class LottoPresenter {
     private LottoPayment requestPayment(final Scanner scanner) {
         System.out.println(PAYMENT.getMessage());
         try {
-            final LottoPayment payment = lottoPaymentFactory.create(scanner.nextLine());
+            final LottoPayment payment = LottoPayment.convertAndCreate(scanner.nextLine());
             printPaymentResult(payment);
             return payment;
         } catch (IllegalArgumentException e) {

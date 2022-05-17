@@ -16,7 +16,7 @@ public class LottoNumbersTest {
 
     @Test
     @DisplayName("6개의 숫자 배열을 파라미터로 로또 번호가 생성되어야 한다")
-    void create_by_number_list() {
+    void create() {
         // given
         final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
@@ -30,7 +30,7 @@ public class LottoNumbersTest {
 
     @Test
     @DisplayName("컴마로 구분된 숫자 6개가 담긴 문자열을 파라미터로 로또 번호가 생성되야 한다")
-    void create_by_numbers_string() {
+    void convert_and_create() {
         // given
         final String numbersString = "1, 2, 3, 4, 5, 6";
 

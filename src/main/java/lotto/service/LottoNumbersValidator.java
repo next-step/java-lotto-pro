@@ -1,6 +1,6 @@
 package lotto.service;
 
-import static lotto.domain.LottoNumbersCondition.AMOUNT_OF_NUMBERS;
+import static lotto.domain.LottoCondition.AMOUNT_OF_NUMBERS;
 import static lotto.domain.message.ErrorMessage.INVALID_LOTTO_NUMBERS;
 
 import java.util.List;
