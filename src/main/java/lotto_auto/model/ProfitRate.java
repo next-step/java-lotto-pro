@@ -20,6 +20,10 @@ public class ProfitRate {
         return String.format("%.2f",rateFloor());
     }
 
+    public boolean isNegativeProfitRate() {
+        return !(rate > 1);
+    }
+
     private double rateFloor() {
         double forCutHundredths = 100.0;
         return Math.floor(rate* forCutHundredths)/ forCutHundredths;
