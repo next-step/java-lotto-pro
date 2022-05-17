@@ -62,7 +62,7 @@ public class LottoController {
     }
 
     private LottoResult lottoResult(Lottos lottos, Lotto lastWeekLotto) {
-        LottoResult lottoResult = new LottoResult(lottos, lastWeekLotto);
+        LottoResult lottoResult = new LottoResult(lottos.lottoWinningResult(lastWeekLotto));
         resultView.printLottoResult(lottoResult);
 
         return lottoResult;

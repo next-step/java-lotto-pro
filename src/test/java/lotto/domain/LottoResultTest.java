@@ -13,6 +13,6 @@ public class LottoResultTest {
     void 로또번호_정답_갯수_확인() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto answerLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
-        assertThat(LottoResult.countMatchedNumber(lotto, answerLotto)).isEqualTo(3);
+        assertThat(Lottos.countMatchedNumber(lotto, answerLotto)).isEqualTo(3);
     }
 }
