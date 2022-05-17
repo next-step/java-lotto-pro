@@ -5,26 +5,19 @@ import java.util.Objects;
 
 public class Money {
 
-    private int money;
-    private final String isLoss = "손해";
-    private final String isBenefit = "이득";
-    private final String CREATE_MONEY_EXCEPTION_MSG = "돈은 로또가격보다 큰 숫자여야합니다.(%s원)";
-    private final int LOTTO_PRICE = 1_000;
+    private final int money;
+    private final String MONEY_RANGE_EXCEPTION = "돈은 양수의 자연수여야 합니다";
 
     public Money(String money) {
-        if (!validateMoneyRange(money)) {
-            throw new IllegalArgumentException(String.format(CREATE_MONEY_EXCEPTION_MSG,LOTTO_PRICE));
+        if (!validateMoney(money)) {
+            throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION);
         }
         this.money = Integer.parseInt(money);
     }
 
-    public int purchaseTicket() {
-        return money / LOTTO_PRICE;
-    }
-
-    private boolean validateMoneyRange(String money) {
+    private boolean validateMoney(String money) {
         try {
-            return Integer.parseInt(money) >= LOTTO_PRICE;
+            return Integer.parseInt(money) >= 0;
         } catch (NumberFormatException e) {
             return false;
         }
