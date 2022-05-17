@@ -30,8 +30,13 @@ public class LottoGame {
         }
     }
 
-    public Match check(WinningNumbers winningNumbers) {
-        return new Match((int) numbers.stream().map(number -> winningNumbers.has(number)).filter(b -> b == true).count());
+    // TODO: check Rank.SECOND
+    public Rank check(WinningNumbers winningNumbers) {
+        Match match = new Match((int) numbers.stream()
+                .map(number -> winningNumbers.has(number))
+                .filter(b -> b == true)
+                .count());
+        return Rank.valueOf(match, false);
     }
 
     public boolean has(LottoNumber lottoNumber) {

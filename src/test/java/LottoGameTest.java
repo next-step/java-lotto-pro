@@ -1,7 +1,7 @@
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumberBounds;
-import lotto.domain.Match;
+import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -60,8 +60,8 @@ public class LottoGameTest {
     void 당첨_번호_일치_개수() {
         LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 10, 22, 40));
 
-        Match result = lottoGame.check(new WinningNumbers("1,2,3, 4,5, 6"));
+        Rank result = lottoGame.check(new WinningNumbers("1,2,3, 4,5, 6"));
 
-        assertThat(result).isEqualTo(new Match(3));
+        assertThat(result).isEqualTo(Rank.FIFTH);
     }
 }

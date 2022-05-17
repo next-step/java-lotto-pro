@@ -25,16 +25,14 @@ public class LottoTicket {
     }
 
     public TicketCheckResult check(final WinningNumbers winningNumbers) {
-        Map<Match, Integer> result = new HashMap<>();
-        for (int i = 0; i <= LottoGame.SIZE; i++) {
-            result.put(new Match(i), 0);
+        Map<Rank, Integer> result = new HashMap<>();
+        for (Rank value : Rank.values()) {
+            result.put(value, 0);
         }
 
-        List<Match> matches = lottoGames.stream()
+        lottoGames.stream()
                 .map(game -> game.check(winningNumbers))
-                .collect(Collectors.toList());
-
-        matches.forEach(match -> result.put(match, result.get(match) + 1));
+                .forEach(rank -> result.put(rank, result.get(rank) + 1));
 
         return new TicketCheckResult(result);
     }

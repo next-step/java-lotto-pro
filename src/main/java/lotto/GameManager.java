@@ -1,8 +1,6 @@
 package lotto;
 
 import lotto.domain.LottoTicket;
-import lotto.domain.Match;
-import lotto.domain.MatchPrizes;
 import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
 import lotto.dto.LottoResult;
@@ -10,18 +8,9 @@ import lotto.dto.LottoWin;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class GameManager {
-
+    
     public void run() {
-        Map<Match, Integer> matchPrizes = new HashMap<>();
-        matchPrizes.put(new Match(3), 5000);
-        matchPrizes.put(new Match(4), 50000);
-        matchPrizes.put(new Match(5), 1500000);
-        matchPrizes.put(new Match(6), 2000000000);
-
         LottoVendingMachine machine = new LottoVendingMachine(new LottoNumbersGeneratorKr());
 
         LottoTicket lottoTicket = machine.sellTicket(money());
@@ -29,7 +18,7 @@ public class GameManager {
 
         LottoResult result = machine.check(
                 lottoTicket,
-                new LottoWin(winningNumbers(), new MatchPrizes(matchPrizes)));
+                new LottoWin(winningNumbers()));
         ResultView.printStats(result);
     }
 

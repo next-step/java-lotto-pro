@@ -1,10 +1,10 @@
 import lotto.LottoNumbersGeneratorKr;
 import lotto.LottoVendingMachine;
-import lotto.domain.Match;
-import lotto.domain.MatchPrizes;
-import lotto.domain.Money;
-import lotto.domain.WinningNumbers;
 import lotto.domain.LottoTicket;
+import lotto.domain.Match;
+import lotto.domain.Money;
+import lotto.domain.Rank;
+import lotto.domain.WinningNumbers;
 import lotto.dto.LottoResult;
 import lotto.dto.LottoResultItem;
 import lotto.dto.LottoWin;
@@ -58,15 +58,17 @@ public class LottoVendingMachineTest {
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
 
         LottoVendingMachine machine = new LottoVendingMachine(new LottoNumbersGeneratorKr());
-        LottoResult result = machine.check(ticket, new LottoWin(winningNumbers, new MatchPrizes(matchingPrizes)));
+        LottoResult result = machine.check(ticket, new LottoWin(winningNumbers));
 
         assertThat(result).isEqualTo(
                 new LottoResult(
                         "0.36",
                         Arrays.asList(
-                                new LottoResultItem(new Match(3), 5000, 1),
-                                new LottoResultItem(new Match(4), 50000, 0),
-                                new LottoResultItem(new Match(5), 1500000, 0),
-                                new LottoResultItem(new Match(6), 2000000000, 0))));
+                                new LottoResultItem(Rank.MISS, 13),
+                                new LottoResultItem(Rank.FIFTH, 1),
+                                new LottoResultItem(Rank.FOURTH, 0),
+                                new LottoResultItem(Rank.THIRD, 0),
+                                new LottoResultItem(Rank.SECOND, 0),
+                                new LottoResultItem(Rank.FIRST, 0))));
     }
 }
