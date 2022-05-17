@@ -1,4 +1,4 @@
-package step3.lotto.domain;
+package step3.lotto.domain.lotto;
 
 import java.util.Objects;
 

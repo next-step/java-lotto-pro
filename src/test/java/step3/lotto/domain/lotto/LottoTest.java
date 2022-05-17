@@ -1,11 +1,11 @@
-package step3.lotto.domain;
+package step3.lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static step3.lotto.domain.Lotto.INVALID_LOTTO_NUMBER_COUNT_ERROR;
-import static step3.lotto.domain.Lotto.LOTTO_NUMBER_DUPLICATED_ERROR;
-import static step3.lotto.domain.LottoNumber.INVALID_LOTTO_NUMBER_RANGE_ERROR;
+import static step3.lotto.domain.lotto.Lotto.INVALID_LOTTO_NUMBER_COUNT_ERROR;
+import static step3.lotto.domain.lotto.Lotto.LOTTO_NUMBER_DUPLICATED_ERROR;
+import static step3.lotto.domain.lotto.LottoNumber.INVALID_LOTTO_NUMBER_RANGE_ERROR;
 
 import java.util.Arrays;
 import java.util.List;

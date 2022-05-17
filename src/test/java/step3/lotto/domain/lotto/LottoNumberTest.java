@@ -1,8 +1,8 @@
-package step3.lotto.domain;
+package step3.lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static step3.lotto.domain.LottoNumber.INVALID_LOTTO_NUMBER_RANGE_ERROR;
+import static step3.lotto.domain.lotto.LottoNumber.INVALID_LOTTO_NUMBER_RANGE_ERROR;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

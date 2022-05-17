@@ -1,4 +1,4 @@
-package step3.lotto.domain;
+package step3.lotto.domain.lotto;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
