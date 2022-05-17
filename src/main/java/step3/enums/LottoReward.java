@@ -1,37 +1,48 @@
 package step3.enums;
 
-import java.util.Collections;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum LottoReward {
-    ZERO(0, 0),
-    ONE(0, 1),
-    TWO(0, 2),
-    THREE(5_000, 3),
-    FOUR(50_000, 4),
-    FIVE(1_500_000, 5),
-    SIX(2_000_000_000, 6);
+    MISS(0, 0, false),
+    THREE(5_000, 3, false),
+    FOUR(50_000, 4, false),
+    FIVE(1_500_000, 5, false),
+    FIVE_BONUS(30_000_000, 5, true),
+    SIX(2_000_000_000, 6, false);
 
     private final int reward;
     private final int matchCount;
+    private final boolean isBonus;
 
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    LottoReward(int reward, int matchCount) {
+    LottoReward(int reward, int matchCount, boolean isBonus) {
         this.reward = reward;
         this.matchCount = matchCount;
+        this.isBonus = isBonus;
     }
 
     public int getReward() {
         return reward;
     }
 
-    public static final Map<Integer, String> numberToLottoReward =
-        Collections.unmodifiableMap(Stream.of(values())
-            .collect(Collectors.toMap(LottoReward::getMatchCount, LottoReward::name)));
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isBonus() {
+        return isBonus;
+    }
+
+    public static LottoReward valueOf(int matchCount, boolean matchBonus) {
+        LottoReward[] lottoRewards = LottoReward.values();
+        List<LottoReward> matchReward = Arrays.stream(lottoRewards).filter(
+            lottoReward -> lottoReward.getMatchCount() == matchCount && lottoReward.isBonus == matchBonus
+        ).collect(Collectors.toList());
+        if (matchReward.size() == 0) {
+            return LottoReward.MISS;
+        }
+        return matchReward.get(0);
+    }
 
 }
