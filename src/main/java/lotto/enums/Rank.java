@@ -54,4 +54,8 @@ public enum Rank {
     private boolean isSecondPrize(boolean bonusBall) {
         return this == THIRD && bonusBall;
     }
+
+    public boolean isSecondPrize() {
+        return this == SECOND;
+    }
 }

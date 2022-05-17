@@ -1,14 +1,12 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.WinningStatistic;
+import lotto.domain.*;
 import lotto.enums.Rank;
 import lotto.view.message.dto.MatchResultParameters;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static lotto.view.message.ResultMessage.*;
 
@@ -21,8 +19,9 @@ public class ResultView {
 
     public static void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
-            Collections.sort(lotto.getLotto());
-            System.out.println(lotto.getLotto());
+            List<LottoNumber> lottoNumbers = lotto.getLotto();
+            Collections.sort(lottoNumbers);
+            System.out.println(lottoNumbers);
         }
         System.out.println();
     }
@@ -41,6 +40,10 @@ public class ResultView {
 
     private static void printWinningStatistic(Rank rank, WinningStatistic statistic) {
         MatchResultParameters matchResultParameters = new MatchResultParameters(rank, statistic);
+        if (rank.isSecondPrize()) {
+            System.out.println(WINNER_MATCH_BONUS_RESULT.of(matchResultParameters));
+            return;
+        }
         System.out.println(WINNER_MATCH_RESULT.of(matchResultParameters));
     }
 
