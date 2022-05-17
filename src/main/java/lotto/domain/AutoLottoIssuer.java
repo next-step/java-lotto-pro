@@ -15,7 +15,7 @@ public class AutoLottoIssuer {
     public Lottos issue(Money orderPrice) {
         List<Lotto> lottoList = new ArrayList<>();
 
-        for (int index = 0; index < (int) orderPrice.divide(LOTTO_PRICE); index++) {
+        for (int index = 0; index < orderPrice.divide(LOTTO_PRICE).intValue(); index++) {
             lottoList.add(lottoRandomFactory.create());
         }
 

@@ -1,37 +1,42 @@
 package lotto.domain;
 
 import calculator.domain.StringSplitter;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money {
     private static final String DEFAULT_UNIT = "원";
-    private final double value;
+    private final BigDecimal value;
     private final String unit;
 
-    private Money(double value) {
+    private Money(BigDecimal value) {
         this.value = value;
         this.unit = DEFAULT_UNIT;
         validate();
     }
 
     public static Money from(double value) {
-        return new Money(value);
+        return new Money(new BigDecimal(Double.toString(value)));
     }
 
     public static Money from(String value) {
-        return new Money(Double.parseDouble(value));
+        return new Money(new BigDecimal(value));
     }
 
-    public double divide(Money target) {
-        return this.value / target.value;
+    public static Money from(BigDecimal value) {
+        return new Money(value);
+    }
+
+    public BigDecimal divide(Money target) {
+        return this.value.divide(target.value);
     }
 
     public Money add(Money target) {
-        return Money.from(this.value + target.value);
+        return Money.from(this.value.add(target.value));
     }
 
     private void validate() {
-        if (this.value < 0) {
+        if (this.value.compareTo(BigDecimal.ZERO) == -1) {
             throw new IllegalArgumentException("돈은 음수 일 수 없습니다.");
         }
     }
@@ -45,7 +50,7 @@ public class Money {
             return false;
         }
         Money that = (Money) o;
-        return value == that.value && Objects.equals(unit, that.unit);
+        return value.equals(that.value) && Objects.equals(unit, that.unit);
     }
 
     @Override
@@ -55,6 +60,6 @@ public class Money {
 
     @Override
     public String toString() {
-        return String.format("%d", (int) value) + unit;
+        return String.format("%d", value.intValue()) + unit;
     }
 }

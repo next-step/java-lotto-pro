@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,9 +41,7 @@ class LottoStatisticTest {
 
     @Test
     void 수익률() {
-
-        assertThat(lottoStatistic.lottoEarning()).isEqualTo(0.5);
-
+        assertThat(lottoStatistic.lottoEarning()).isEqualTo(BigDecimal.valueOf(0.5));
     }
 
     @Test

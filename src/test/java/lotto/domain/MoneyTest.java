@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ class MoneyTest {
 
     @Test
     void 나누기() {
-        assertThat(money1.divide(money2)).isEqualTo(10);
+        assertThat(money1.divide(money2)).isEqualTo(BigDecimal.valueOf(10));
     }
 
     @Test

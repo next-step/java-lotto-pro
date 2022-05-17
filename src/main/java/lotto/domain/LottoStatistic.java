@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +42,7 @@ public class LottoStatistic {
         return matchedCountMap.get(matchResult);
     }
 
-    public double lottoEarning() {
+    public BigDecimal lottoEarning() {
         return totalPrize().divide(this.lottos.totalPrice());
     }
 
@@ -91,9 +92,9 @@ public class LottoStatistic {
 
     private String toEarningString() {
         String result;
-        double totalEarning = lottoEarning();
+        BigDecimal totalEarning = lottoEarning();
         result = "총 수익률은 " + String.format("%.2f", totalEarning) + " 입니다.";
-        if (totalEarning > 1) {
+        if (totalEarning.compareTo(BigDecimal.ONE) > 1) {
             result = result + "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
         }
         result = result + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
