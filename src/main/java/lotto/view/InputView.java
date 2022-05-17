@@ -25,4 +25,9 @@ public class InputView {
         System.out.println(MessageConstants.INPUT_LAST_WEEK_WINNING_NUMBERS);
         return inputString();
     }
+
+    public static String inputBonusNumber() {
+        System.out.println(MessageConstants.INPUT_BONUS_NUMBERS);
+        return inputString();
+    }
 }

@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.LottoScore;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
@@ -16,8 +17,11 @@ public class LottoController {
         OutputView.printLottoNumbers(lottos.getLottos());
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.inputWinningNumbers());
+        BonusNumber bonusNumber = new BonusNumber(InputView.inputBonusNumber(), winningNumbers);
+        winningNumbers.addBonusNumber(bonusNumber);
+
         LottoScore lottoScore = lottos.calculateLottoScore(winningNumbers);
-        OutputView.printLottoStats(lottoScore.getLottoScoreMap());
+        OutputView.printLottoStats(lottoScore.getRankMap());
 
         Winnings winnings = lottoScore.getWinnings();
         OutputView.printProfitRate(winnings.profitRate(purchaseAmount));
