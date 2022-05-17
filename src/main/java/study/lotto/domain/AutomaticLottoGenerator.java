@@ -9,7 +9,6 @@ import study.lotto.domain.sorter.IntegerAscendingSorter;
 import study.lotto.domain.sorter.IntegerSorter;
 
 public class AutomaticLottoGenerator implements LottoGenerator {
-
     private final IntegerSorter integerSorter;
 
     public AutomaticLottoGenerator() {
@@ -21,14 +20,16 @@ public class AutomaticLottoGenerator implements LottoGenerator {
     }
 
     @Override
-    public LottoNumbers generate() {
-        return new LottoNumbers(generateRandomLottoNumbers());
+    public List<LottoNumber> generate() {
+        return generateRandomLottoNumbers();
     }
 
-    private List<Integer> generateRandomLottoNumbers() {
-        List<Integer> lottoNumbers = shuffledLottoNumbers().subList(0, LottoNumbers.LOTTO_NUMBER_SIZE);
+    private List<LottoNumber> generateRandomLottoNumbers() {
+        List<Integer> lottoNumbers = shuffledLottoNumbers().subList(0, Lotto.LOTTO_NUMBER_SIZE);
         sortLottoNumbers(lottoNumbers);
-        return lottoNumbers;
+        return lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private void sortLottoNumbers(List<Integer> lottoNumbers) {

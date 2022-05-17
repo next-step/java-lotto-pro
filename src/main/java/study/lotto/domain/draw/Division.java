@@ -36,6 +36,10 @@ public enum Division {
         return rule.check(matchCount, matchBonus);
     }
 
+    public boolean hasSameMatchCount(int matchCount) {
+        return this.matchCount == matchCount;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
@@ -46,9 +50,5 @@ public enum Division {
 
     public boolean getBonusMandatory() {
         return bonusMandatory;
-    }
-
-    public boolean hasSameMatchCount(int matchCount) {
-        return this.matchCount == matchCount;
     }
 }

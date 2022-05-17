@@ -12,7 +12,7 @@ public class PurchasePrice {
         this.value = validate(value);
     }
 
-    public BigDecimal value() {
+    public BigDecimal get() {
         return value;
     }
 

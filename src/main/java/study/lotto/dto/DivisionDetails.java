@@ -21,7 +21,7 @@ public class DivisionDetails {
     }
 
     public static List<DivisionDetails> from(DrawResult drawResult) {
-        return drawResult.get().stream()
+        return drawResult.getWinnings().stream()
                 .map(DivisionDetails::from)
                 .collect(Collectors.toList());
     }

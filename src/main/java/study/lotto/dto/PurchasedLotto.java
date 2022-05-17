@@ -1,8 +1,10 @@
 package study.lotto.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import study.lotto.domain.LottoNumbers;
+import study.lotto.domain.Lotto;
+import study.lotto.domain.LottoNumber;
 
 public class PurchasedLotto {
 
@@ -12,14 +14,14 @@ public class PurchasedLotto {
         this(purchasedLotto.value);
     }
 
-    public PurchasedLotto(LottoNumbers lottoNumbers) {
-        this(lottoNumbers.numbers());
+    public PurchasedLotto(Lotto lotto) {
+        this(lotto.get().stream()
+                .map(LottoNumber::get)
+                .collect(Collectors.toList()));
     }
 
-    public PurchasedLotto(List<Integer> lottoNumbers) {
-        this.value = lottoNumbers.stream()
-                .map(Integer::new)
-                .collect(Collectors.toList());
+    public PurchasedLotto(List<Integer> numbers) {
+        this.value = new ArrayList<>(numbers);
     }
 
     public List<Integer> get() {

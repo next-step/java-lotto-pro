@@ -14,8 +14,19 @@ class DrawResultTest {
 
     @BeforeEach
     void setUp() {
-        DivisionResults divisionResults = new DivisionResults(generateFeatures());
-        drawResult = new DrawResult(divisionResults);
+        this.drawResult = new DrawResult(generateFeatures());
+    }
+
+    @Test
+    @DisplayName("당첨 등수 동계만 반환한다.")
+    void 당첨_등수_통계_조회() {
+        List<DivisionResult> expected = Arrays.asList(
+                new DivisionResult(Division.DIVISION_FIVE, 1L),
+                new DivisionResult(Division.DIVISION_FOUR, 0L),
+                new DivisionResult(Division.DIVISION_THREE, 0L),
+                new DivisionResult(Division.DIVISION_TWO, 0L),
+                new DivisionResult(Division.DIVISION_ONE, 0L));
+        assertThat(drawResult.getWinnings()).containsExactlyElementsOf(expected);
     }
 
     @Test
@@ -26,10 +37,6 @@ class DrawResultTest {
 
     private List<DivisionResult> generateFeatures() {
         return Arrays.asList(
-                new DivisionResult(Division.DIVISION_FIVE, 1L),
-                new DivisionResult(Division.DIVISION_FOUR, 0L),
-                new DivisionResult(Division.DIVISION_THREE, 0L),
-                new DivisionResult(Division.DIVISION_TWO, 0L),
-                new DivisionResult(Division.DIVISION_ONE, 0L));
+                new DivisionResult(Division.DIVISION_FIVE, 1L));
     }
 }

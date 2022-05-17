@@ -15,8 +15,12 @@ public class LottoNumber {
         this.value = value;
     }
 
-    public boolean hasNumber(int number) {
-        return number == value;
+    public LottoNumber(LottoNumber lottoNumber) {
+        this.value = lottoNumber.value;
+    }
+
+    public int get() {
+        return value;
     }
 
     private boolean validate(int lottoNumber) {
@@ -24,8 +28,11 @@ public class LottoNumber {
     }
 
     @Override
-    public String toString() {
-        return String.valueOf(value);
+    public String
+    toString() {
+        return "LottoNumber{" +
+                "value=" + value +
+                '}';
     }
 
     @Override

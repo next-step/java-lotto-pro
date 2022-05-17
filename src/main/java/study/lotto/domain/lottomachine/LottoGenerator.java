@@ -1,7 +1,8 @@
 package study.lotto.domain.lottomachine;
 
-import study.lotto.domain.LottoNumbers;
+import java.util.List;
+import study.lotto.domain.LottoNumber;
 
 public interface LottoGenerator {
-    LottoNumbers generate();
+    List<LottoNumber> generate();
 }

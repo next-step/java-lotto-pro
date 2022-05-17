@@ -12,7 +12,7 @@ class PurchasePriceTest {
     @Test
     void 유효한_숫자() {
         PurchasePrice purchasePrice = new PurchasePrice("14000");
-        assertThat(purchasePrice.value()).isEqualTo(new BigDecimal(14000));
+        assertThat(purchasePrice.get()).isEqualTo(new BigDecimal(14000));
     }
 
     @Nested
