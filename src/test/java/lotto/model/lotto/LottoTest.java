@@ -27,7 +27,7 @@ public class LottoTest {
     @DisplayName("로또숫자 안에 당첨번호가 포함되는지 확인한다.")
     void 로또숫자를_포함하는지_확인한다() {
         Lotto lotto = Lotto.of(new String[]{"1", "2", "3", "4", "5", "6"});
-        WinningLotto winningLotto = new WinningLotto(new String[]{"1", "2", "3", "7", "8", "9"});
+        WinningLotto winningLotto = new WinningLotto(new String[]{"1", "2", "3", "7", "8", "9"}, 7);
 
         assertEquals(lotto.match(winningLotto), 3);
     }

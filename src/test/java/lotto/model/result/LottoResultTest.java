@@ -26,7 +26,7 @@ class LottoResultTest {
         List<Lotto> lottoList = new LottoTestFactory().generateAuto(2);
 
         PurchaseLotto purchaseLotto = new PurchaseLotto(lottoList);
-        WinningLotto winningLotto = new WinningLotto(new String[]{"1", "2", "3", "7", "8", "9"});
+        WinningLotto winningLotto = new WinningLotto(new String[]{"1", "2", "3", "7", "8", "9"}, 10);
 
         return purchaseLotto.rankMatch(winningLotto);
     }

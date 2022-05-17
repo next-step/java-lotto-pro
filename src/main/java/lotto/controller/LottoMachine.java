@@ -19,7 +19,8 @@ public class LottoMachine {
         OutputView.OutputPurchaseResult(purchasedMoney.possiblePurchaseLotto(), lottoList);
 
         PurchaseLotto purchaseLotto = new PurchaseLotto(lottoList);
-        WinningLotto winningLotto = new WinningLotto(inputLottoNumberArr(InputView.inputWinningNumber()));
+        int bonusNumber = 7;
+        WinningLotto winningLotto = new WinningLotto(inputLottoNumberArr(InputView.inputWinningNumber()), bonusNumber);
 
         LottoResult lottoResult = purchaseLotto.rankMatch(winningLotto);
         OutputView.OutputLottoResult(lottoResult, lottoResult.winningRate(purchasedMoney));

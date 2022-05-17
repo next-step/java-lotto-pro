@@ -7,9 +7,11 @@ import lotto.model.lotto.LottoNumber;
 public class WinningLotto {
 
     private final Lotto lotto;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(String[] lottoNumberArr) {
+    public WinningLotto(String[] lottoNumberArr, int bonusNumber) {
         this.lotto = Lotto.of(lottoNumberArr);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public boolean contains(LottoNumber lottoNumber) {
@@ -25,12 +27,12 @@ public class WinningLotto {
             return false;
         }
         WinningLotto that = (WinningLotto) o;
-        return Objects.equals(lotto, that.lotto);
+        return Objects.equals(lotto, that.lotto) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto);
+        return Objects.hash(lotto, bonusNumber);
     }
 
 }
