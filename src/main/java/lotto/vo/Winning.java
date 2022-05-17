@@ -13,8 +13,8 @@ public class Winning {
         return results;
     }
 
-    public int sum() {
-        int sum = 0;
+    public long sum() {
+        long sum = 0;
         for (Result result : results) {
             sum += result.sum();
         }
