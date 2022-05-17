@@ -1,55 +1,51 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lotto.dto.PrizeReport;
 
 public class RankResult {
-	private int firstCount = 0;
-	private int secondCount = 0;
-	private int thirdCount = 0;
-	private int fourthCount = 0;
+	private final int ZERO = 0;
+	private Map<Rank, Integer> resultMap;
+
+	public RankResult() {
+		resultMap = new HashMap<Rank, Integer>() {
+			{
+				put(Rank.FIRST, ZERO);
+				put(Rank.SECOND, ZERO);
+				put(Rank.THIRD, ZERO);
+				put(Rank.FOURTH, ZERO);
+				put(Rank.NONE, ZERO);
+			}
+		};
+	}
 
 	public void setUp(Rank rank) {
-		if(rank.isFirst()) {
-			firstCount += 1;
-			return;
-		}
-
-		if(rank.isSecond()) {
-			secondCount += 1;
-			return;
-		}
-
-		if(rank.isThird()) {
-			thirdCount += 1;
-			return;
-		}
-
-		if(rank.isFourth()) {
-			fourthCount += 1;
-			return;
-		}
+		resultMap.put(rank, resultMap.get(rank) + 1);
 	}
 
 	public List<PrizeReport> getReport() {
 		List<PrizeReport> prizes = new ArrayList<>();
 
-		prizes.add(new PrizeReport(Rank.FOURTH.getMatchCount(), Rank.FOURTH.getPrizeMoney(), fourthCount));
-		prizes.add(new PrizeReport(Rank.THIRD.getMatchCount(), Rank.THIRD.getPrizeMoney(), thirdCount));
-		prizes.add(new PrizeReport(Rank.SECOND.getMatchCount(), Rank.SECOND.getPrizeMoney(), secondCount));
-		prizes.add(new PrizeReport(Rank.FIRST.getMatchCount(), Rank.FIRST.getPrizeMoney(), firstCount));
+		prizes.add(new PrizeReport(Rank.FOURTH, resultMap.get(Rank.FOURTH)));
+		prizes.add(new PrizeReport(Rank.THIRD, resultMap.get(Rank.THIRD)));
+		prizes.add(new PrizeReport(Rank.SECOND, resultMap.get(Rank.SECOND)));
+		prizes.add(new PrizeReport(Rank.FIRST, resultMap.get(Rank.FIRST)));
 
+		Collections.sort(prizes);
 		return prizes;
 	}
 
 	public double compileStatistics(int cost) {
 		int divisionNumber = cost > 0 ? cost : 1;
-		int totalPrize = firstCount * Rank.FIRST.getPrizeMoney()
-			+ secondCount * Rank.SECOND.getPrizeMoney()
-			+ thirdCount * Rank.THIRD.getPrizeMoney()
-			+ fourthCount * Rank.FOURTH.getPrizeMoney();
+		int totalPrize = resultMap.get(Rank.FIRST) * Rank.FIRST.getPrizeMoney()
+							+ resultMap.get(Rank.SECOND) * Rank.SECOND.getPrizeMoney()
+							+ resultMap.get(Rank.THIRD) * Rank.THIRD.getPrizeMoney()
+							+ resultMap.get(Rank.FOURTH) * Rank.FOURTH.getPrizeMoney();
 
 		double rate = totalPrize / (double)divisionNumber;
 

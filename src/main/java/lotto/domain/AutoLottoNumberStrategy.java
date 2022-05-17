@@ -5,16 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoLottoMachine extends AbstractLottoMachine {
-	private static List<Number> numbers;
+public class AutoLottoNumberStrategy {
+	private static List<Number> numbers = IntStream.range(Number.MIN_NUMBER, Number.MAX_NUMBER)
+											.mapToObj(Number::new)
+											.collect(Collectors.toList());
 
-	static {
-		numbers = IntStream.range(Number.MIN_NUMBER, Number.MAX_NUMBER)
-						.mapToObj(Number::new)
-						.collect(Collectors.toList());
-	}
-
-	public Lotto generate() {
+	public static Lotto generate() {
 		Collections.shuffle(numbers);
 
 		return new Lotto(numbers.stream()

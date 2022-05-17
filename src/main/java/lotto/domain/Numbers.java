@@ -10,31 +10,29 @@ import lotto.dto.LottoNumber;
 public class Numbers {
 	private final String VALID_DUPLICATION = "중복된 숫자가 존재합니다.";
 
-	private List<Number> numbers;
+	private Set<Number> elements;
 
 	public Numbers(List<Number> numbers) {
+		this.elements = new HashSet<>(numbers);
 		validDuplication(numbers);
-		this.numbers = numbers;
 	}
 
 	public int match(Numbers comparisonNumbers) {
-		return (int)numbers.stream()
+		return (int)elements.stream()
 						.filter(comparisonNumbers::isContainNumber)
 						.count();
 	}
 
 	public LottoNumber getNumbers() {
-		return LottoNumber.convertTo(numbers);
+		return LottoNumber.convertTo(elements);
 	}
 
 	private boolean isContainNumber(Number number) {
-		return numbers.contains(number);
+		return elements.contains(number);
 	}
 
 	private void validDuplication(List<Number> numbers) {
-		Set<Number> numberSet = new HashSet<>(numbers);
-
-		if(numberSet.size() != numbers.size()) {
+		if(elements.size() != numbers.size()) {
 			throw new IllegalArgumentException(VALID_DUPLICATION);
 		}
 	}
@@ -45,12 +43,13 @@ public class Numbers {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		Numbers numbers1 = (Numbers)o;
-		return Objects.equals(numbers, numbers1.numbers);
+		Numbers numbers = (Numbers)o;
+		return Objects.equals(elements,
+					numbers.elements);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(numbers);
+		return Objects.hash(VALID_DUPLICATION, elements);
 	}
 }

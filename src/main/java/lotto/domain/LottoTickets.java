@@ -17,10 +17,6 @@ public class LottoTickets {
 		this.lottoTickets = new ArrayList<>();
 	}
 
-	public void addLotto(Lotto lotto) {
-		lottoTickets.add(lotto);
-	}
-
 	public RankResult getResult(Lotto winningLotto) {
 		RankResult rankResult = new RankResult();
 
@@ -31,6 +27,10 @@ public class LottoTickets {
 		}
 
 		return rankResult;
+	}
+
+	public void automaticallyGenerate() {
+		lottoTickets.add(AutoLottoNumberStrategy.generate());
 	}
 
 	public List<LottoNumber> getLottTickets() {

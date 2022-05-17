@@ -1,9 +1,17 @@
 package lotto.dto;
 
+import lotto.domain.Rank;
+
 public class PrizeReport implements Comparable<PrizeReport> {
 	int matchCount;
 	int money;
 	int result;
+
+	public PrizeReport(Rank rank, int result) {
+		this.matchCount = rank.getMatchCount();
+		this.money = rank.getPrizeMoney();
+		this.result = result;
+	}
 
 	public PrizeReport(int matchCount, int money, int result) {
 		this.matchCount = matchCount;
