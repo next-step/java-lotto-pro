@@ -11,12 +11,14 @@ import org.junit.jupiter.api.Test;
 class LottoStatisticTest {
 
     private int NUMBER_COUNT = 6;
-    private Money PRICE = Money.from(1000);
+    private Money orderMoney;
 
     private LottoStatistic lottoStatistic;
 
     @BeforeEach
     void setUp() {
+
+        orderMoney = Money.from(10000);
 
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(createLotto(7, 8, 9, 19, 20, 21));

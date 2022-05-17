@@ -8,56 +8,56 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class LottoStatistic {
-    private Lottos lottos;
-    private WinningNumbers winningNumbers;
-    private Map<MatchResult, Integer> matchedCountMap;
+
+    private Map<MatchResult, Lottos> matchedLottos;
 
     public LottoStatistic(Lottos lottos, WinningNumbers winningNumbers) {
-        this.lottos = lottos;
-        this.winningNumbers = winningNumbers;
-        initializePrizeLottoList();
+        initializePrizeLottoList(lottos, winningNumbers);
     }
 
     public LottoStatistic(Lottos lottos, String[] winningNumbers) {
-        this.lottos = lottos;
-
-        LottoNumber[] numbers = new LottoNumber[winningNumbers.length];
-
-        for (int index = 0; index < winningNumbers.length; index++) {
-            numbers[index] = LottoNumber.from(winningNumbers[index]);
-        }
-        this.winningNumbers = new WinningNumbers(numbers);
-        initializePrizeLottoList();
+        this(lottos, createWinningNumbers(winningNumbers));
     }
 
-    private void initializePrizeLottoList() {
-        matchedCountMap = new HashMap<>();
-        matchedCountMap.put(MatchResult.THREE, lottos.matchedLottoList(winningNumbers, MatchResult.THREE).size());
-        matchedCountMap.put(MatchResult.FOUR, lottos.matchedLottoList(winningNumbers, MatchResult.FOUR).size());
-        matchedCountMap.put(MatchResult.FIVE, lottos.matchedLottoList(winningNumbers, MatchResult.FIVE).size());
-        matchedCountMap.put(MatchResult.SIX, lottos.matchedLottoList(winningNumbers, MatchResult.SIX).size());
+    private static WinningNumbers createWinningNumbers(String[] numbers) {
+        LottoNumber[] winningNumbers = new LottoNumber[numbers.length];
+        for (int index = 0; index < winningNumbers.length; index++) {
+            winningNumbers[index] = LottoNumber.from(numbers[index]);
+        }
+        return new WinningNumbers(winningNumbers);
+    }
+
+    private void initializePrizeLottoList(Lottos lottos, WinningNumbers winningNumbers) {
+        matchedLottos = new HashMap<>();
+        for (MatchResult matchResult : MatchResult.values()) {
+            matchedLottos.put(matchResult, lottos.matchedLottoList(winningNumbers, matchResult));
+        }
     }
 
     public int matchedCount(MatchResult matchResult) {
-        return matchedCountMap.get(matchResult);
+        return matchedLottos.get(matchResult).size();
     }
 
     public BigDecimal lottoEarning() {
-        return totalPrize().divide(this.lottos.totalPrice());
+        Money totalLottoPrice = Money.from(0);
+        for (Lottos lottos : matchedLottos.values()) {
+            totalLottoPrice = totalLottoPrice.add(lottos.totalPrice());
+        }
+        return totalPrize().divide(totalLottoPrice);
     }
 
 
     private Money totalPrize() {
         Money result = Money.from(0);
-        for (Map.Entry<MatchResult, Integer> entry : matchedCountMap.entrySet()) {
+        for (Map.Entry<MatchResult, Lottos> entry : matchedLottos.entrySet()) {
             result = result.add(calculatePrize(entry));
         }
         return result;
     }
 
-    private Money calculatePrize(Entry<MatchResult, Integer> entry) {
+    private Money calculatePrize(Entry<MatchResult, Lottos> entry) {
         Money result = Money.from(0);
-        for (int index = entry.getValue(); index > 0; index--) {
+        for (int index = entry.getValue().size(); index > 0; index--) {
             result = result.add(entry.getKey().getCashPrize());
         }
         return result;
