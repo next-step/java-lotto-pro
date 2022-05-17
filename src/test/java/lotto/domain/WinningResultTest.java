@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,24 +8,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningResultTest {
     WinningResult winningResult;
-    LottoNumbers winningNumbers;
+    LottoTicket winningNumbers;
 
     @BeforeEach
     void init() {
         winningResult = new WinningResult();
-        winningNumbers = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)).getLottoNumbers();
+        winningNumbers = new LottoTicket("1, 2, 3, 4, 5, 6");
 
-        LottoNumbers firstLottoNumbers = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)).getLottoNumbers();
-        winningResult.addWinningRank(firstLottoNumbers.rank(winningNumbers));
+        LottoTicket firstLottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        winningResult.addWinningRank(firstLottoTicket.rank(winningNumbers));
 
-        LottoNumbers secondLottoNumbers = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 9)).getLottoNumbers();
-        winningResult.addWinningRank(secondLottoNumbers.rank(winningNumbers));
+        LottoTicket secondLottoTicket = new LottoTicket("1, 2, 3, 4, 5, 9");
+        winningResult.addWinningRank(secondLottoTicket.rank(winningNumbers));
 
-        LottoNumbers thirdLottoNumbers = new LottoTicket(Arrays.asList(1, 2, 3, 4, 8, 9)).getLottoNumbers();
-        winningResult.addWinningRank(thirdLottoNumbers.rank(winningNumbers));
+        LottoTicket thirdLottoTicket = new LottoTicket("1, 2, 3, 4, 8, 9");
+        winningResult.addWinningRank(thirdLottoTicket.rank(winningNumbers));
 
-        LottoNumbers fourthLottoNumbers = new LottoTicket(Arrays.asList(1, 2, 3, 7, 8, 9)).getLottoNumbers();
-        winningResult.addWinningRank(fourthLottoNumbers.rank(winningNumbers));
+        LottoTicket fourthLottoTicket = new LottoTicket("1, 2, 3, 7, 8, 9");
+        winningResult.addWinningRank(fourthLottoTicket.rank(winningNumbers));
     }
 
     @Test

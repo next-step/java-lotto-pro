@@ -5,21 +5,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
     LottoTickets lottoTickets;
-    LottoNumbers winningNumbers;
+    LottoTicket winningNumbers;
 
     @BeforeEach
     void init() {
-        winningNumbers = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)).getLottoNumbers();
+        winningNumbers = new LottoTicket("1, 2, 3, 4, 5, 6");
 
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        lottoTicketList.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoTicketList.add(new LottoTicket("1, 2, 3, 4, 5, 6"));
         lottoTickets = new LottoTickets(lottoTicketList);
     }
 

@@ -23,8 +23,7 @@ public class LottoMachine {
     private LottoTickets createLottoTickets(int ticketQuantity) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < ticketQuantity; i++) {
-            LottoNumbers lottoNumbers = new LottoNumbers(generateLottoNumbers());
-            lottoTickets.add(new LottoTicket(lottoNumbers));
+            lottoTickets.add(new LottoTicket(generateLottoNumbers()));
         }
         return new LottoTickets(lottoTickets);
     }

@@ -26,10 +26,10 @@ public class LottoGame {
         }
     }
 
-    private LottoNumbers inputWinningNumbers() {
+    private LottoTicket inputWinningNumbers() {
         String input = InputView.inputWinningNumbersView();
         try {
-            return new LottoNumbers(input);
+            return new LottoTicket(input);
         } catch (IllegalArgumentException e) {
             ResultView.printInputErrorMessage(e);
             return inputWinningNumbers();
@@ -37,7 +37,7 @@ public class LottoGame {
     }
 
     private void winningResult(LottoTickets lottoTickets, Money purchaseMoney) {
-        LottoNumbers winningNumbers = inputWinningNumbers();
+        LottoTicket winningNumbers = inputWinningNumbers();
         WinningResult winningResult = lottoTickets.match(winningNumbers);
         ResultView.printWinningReport(winningResult, purchaseMoney);
     }
