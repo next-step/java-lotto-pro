@@ -40,7 +40,6 @@ public class LottoTicket {
         return copyLottoTicket.size();
     }
 
-    // 일급컬렉션에 static 메소드가 있어도 되나?
     public static LottoTicket makeAuto() {
         List<LottoNumber> shuffledNumbers = shuffle();
         List<LottoNumber> autoNumbers = subList(shuffledNumbers);
