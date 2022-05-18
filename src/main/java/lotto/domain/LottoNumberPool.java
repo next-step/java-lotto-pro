@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.constants.LottoConstants;
 
 public class LottoNumberPool {
 
@@ -36,6 +35,6 @@ public class LottoNumberPool {
     }
 
     private List<LottoNumber> drawLottoNumbers() {
-        return numberList.subList(0, LottoConstants.LOTTO_SIZE);
+        return numberList.subList(0, Lotto.LOTTO_SIZE);
     }
 }

@@ -2,13 +2,14 @@ package lotto.domain;
 
 import java.util.HashSet;
 import java.util.List;
-import lotto.constants.LottoConstants;
 
 public class Lotto {
 
     private static final String ERROR_MESSAGE_NUMBER_LIST_NULL_OR_EMPTY = "[ERROR] numberList is null or empty.";
     private static final String ERROR_MESSAGE_NUMBER_LIST_SIZE_WRONG = "[ERROR] numberList size is wrong.";
     private static final String ERROR_MESSAGE_NUMBER_LIST_DUPLICATION = "[ERROR] numberList has duplicated number";
+
+    public static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> numberList;
 
@@ -52,7 +53,7 @@ public class Lotto {
     }
 
     private void validateSize(List<LottoNumber> list) {
-        if (list.size() != LottoConstants.LOTTO_SIZE) {
+        if (list.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NUMBER_LIST_SIZE_WRONG);
         }
     }
