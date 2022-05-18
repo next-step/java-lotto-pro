@@ -30,7 +30,7 @@ public class LottoVendingMachine {
     }
 
     public LottoResult check(LottoTicket ticket, LottoWin lottoWin) {
-        TicketCheckResult result = ticket.check(lottoWin.getWinningNumbers());
+        TicketCheckResult result = ticket.check(lottoWin.getWinningNumbers(), lottoWin.getBonusNumber());
         List<LottoResultItem> items = result.mapLottoResultItemList(lottoWin);
 
         return new LottoResult(

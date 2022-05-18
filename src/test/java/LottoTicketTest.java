@@ -1,3 +1,4 @@
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 import lotto.domain.TicketCheckResult;
@@ -33,7 +34,7 @@ public class LottoTicketTest {
                 Arrays.asList(10, 2, 12, 13, 5, 15)
         ));
 
-        TicketCheckResult result = lottoTicket.check(new WinningNumbers("1,2,3,4,5,6"));
+        TicketCheckResult result = lottoTicket.check(new WinningNumbers("1,2,3,4,5,6"), new LottoNumber(7));
 
         assertThat(result.getCount(rank)).isEqualTo(5);
     }
@@ -50,7 +51,7 @@ public class LottoTicketTest {
                 Arrays.asList(1, 11, 3, 4, 5, 6)
         ));
 
-        TicketCheckResult result = lottoTicket.check(new WinningNumbers("1,2,3,4,5,6"));
+        TicketCheckResult result = lottoTicket.check(new WinningNumbers("1,2,3,4,5,6"), new LottoNumber(7));
 
         assertThat(result.getCount(rank)).isEqualTo(2);
     }
@@ -60,7 +61,7 @@ public class LottoTicketTest {
     void 당첨_확인_3(Rank rank) {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        TicketCheckResult result = lottoTicket.check(new WinningNumbers("1,2,3,4,5,6"));
+        TicketCheckResult result = lottoTicket.check(new WinningNumbers("1,2,3,4,5,6"), new LottoNumber(7));
 
         assertThat(result.getCount(rank)).isEqualTo(1);
     }

@@ -21,7 +21,7 @@ public class GameManager {
         LottoNumber bonusLottoNumber = bonusLottoNumber(winningNumbers);
         LottoResult result = machine.check(
                 lottoTicket,
-                new LottoWin(winningNumbers));
+                new LottoWin(winningNumbers, bonusLottoNumber));
         ResultView.printStats(result);
     }
 

@@ -1,5 +1,6 @@
 import lotto.LottoNumbersGeneratorKr;
 import lotto.LottoVendingMachine;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Match;
 import lotto.domain.Money;
@@ -40,7 +41,7 @@ public class LottoVendingMachineTest {
 
         LottoTicket ticket = new LottoTicket(
                 Arrays.asList(
-                        Arrays.asList(1, 10, 11, 12, 13, 14),
+                        Arrays.asList(1, 2, 3, 5, 6, 7),
                         Arrays.asList(1, 10, 11, 12, 13, 14),
                         Arrays.asList(1, 2, 11, 12, 13, 14),
                         Arrays.asList(1, 2, 11, 12, 13, 14),
@@ -55,20 +56,18 @@ public class LottoVendingMachineTest {
                         Arrays.asList(1, 2, 11, 12, 13, 14),
                         Arrays.asList(1, 2, 3, 12, 13, 14)));
 
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
-
         LottoVendingMachine machine = new LottoVendingMachine(new LottoNumbersGeneratorKr());
-        LottoResult result = machine.check(ticket, new LottoWin(winningNumbers));
+        LottoResult result = machine.check(ticket, new LottoWin(new WinningNumbers("1,2,3,4,5,6"), new LottoNumber(7)));
 
         assertThat(result).isEqualTo(
                 new LottoResult(
-                        "0.36",
+                        String.format("%.2f", (double)(Rank.FIFTH.getPrize() + Rank.SECOND.getPrize()) / ticket.moneyValue()),
                         Arrays.asList(
-                                new LottoResultItem(Rank.MISS, 13),
+                                new LottoResultItem(Rank.MISS, 12),
                                 new LottoResultItem(Rank.FIFTH, 1),
                                 new LottoResultItem(Rank.FOURTH, 0),
                                 new LottoResultItem(Rank.THIRD, 0),
-                                new LottoResultItem(Rank.SECOND, 0),
+                                new LottoResultItem(Rank.SECOND, 1),
                                 new LottoResultItem(Rank.FIRST, 0))));
     }
 }

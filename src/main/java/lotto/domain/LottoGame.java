@@ -30,13 +30,13 @@ public class LottoGame {
         }
     }
 
-    // TODO: check Rank.SECOND
-    public Rank check(WinningNumbers winningNumbers) {
+    public Rank check(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         Match match = new Match((int) numbers.stream()
                 .map(number -> winningNumbers.has(number))
                 .filter(b -> b == true)
                 .count());
-        return Rank.valueOf(match, false);
+        boolean matchBonus = numbers.stream().anyMatch(n -> n.equals(bonusNumber));
+        return Rank.valueOf(match, matchBonus);
     }
 
     @Override
