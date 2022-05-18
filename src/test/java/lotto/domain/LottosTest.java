@@ -18,7 +18,7 @@ class LottosTest {
     @Test
     void sizeLottos() {
         List<Lotto> lottoList = new ArrayList<>();
-        LottoNumberPool pool = new LottoNumberPool();
+        LottoGenerator pool = new LottoGenerator();
 
         for (int i = 0; i < 5; i++) {
             lottoList.add(pool.generateLotto());
@@ -31,7 +31,7 @@ class LottosTest {
     @Test
     void getLotto() {
         List<Lotto> lottoList = new ArrayList<>();
-        LottoNumberPool pool = new LottoNumberPool();
+        LottoGenerator pool = new LottoGenerator();
 
         Lotto inputLotto = pool.generateLotto();
         lottoList.add(inputLotto);

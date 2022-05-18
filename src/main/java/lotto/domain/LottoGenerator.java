@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumberPool {
+public class LottoGenerator {
 
     private final List<LottoNumber> numberList;
 
-    public LottoNumberPool() {
+    public LottoGenerator() {
         numberList = new ArrayList<>();
 
         for (int number = LottoNumber.MIN_LOTTO_NUMBER; number <= LottoNumber.MAX_LOTTO_NUMBER; number++) {

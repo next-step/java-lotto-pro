@@ -9,17 +9,17 @@ import util.StringUtil;
 public class LottoPlay {
     private final InputView inputView;
     private final ResultView resultView;
-    private final LottoNumberPool lottoNumberPool;
+    private final LottoGenerator lottoGenerator;
 
     public LottoPlay() {
         inputView = new InputView();
         resultView = new ResultView();
-        lottoNumberPool = new LottoNumberPool();
+        lottoGenerator = new LottoGenerator();
     }
 
     public void play() {
         PurchaseMoney purchaseMoney = getPurchaseMoney();
-        Lottos lottos = lottoNumberPool.generateLottos(purchaseMoney.getAmountOfLotto());
+        Lottos lottos = lottoGenerator.generateLottos(purchaseMoney.getAmountOfLotto());
         resultView.printPurchasedLottos(lottos);
         Lotto referenceLotto = getReferenceLotto();
         LottosResults results = lottos.matchWithReference(referenceLotto);
