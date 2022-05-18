@@ -17,6 +17,10 @@ public class LottoStore {
         validateOverCount(gameCount,lottoPaper);
     }
 
+    public LottoStore(Money money, LottoSelfCount lottoSelfCount) {
+        this.money = money;
+    }
+
     private void validateOverCount(int gameCount, LottoPaper lottoPaper) {
         if (gameCount < lottoPaper.getSelfCount()){
             throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_MEONY);
