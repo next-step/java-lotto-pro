@@ -28,4 +28,8 @@ public enum LottoWinner {
     public long getWinnerMoney() {
         return winnerMoney;
     }
+
+    public int getRightCount() {
+        return rightCount;
+    }
 }

@@ -14,7 +14,7 @@ class LottoMachineTest {
     @ValueSource(ints = {1000, 1500, 2000, 2500, 3000})
     void purchaseTest01(int inputMoney) {
         int expectedGameCount = inputMoney / 1000;
-        Lottos lottos = lottoMachine.purchase(inputMoney);
+        Lottos lottos = lottoMachine.purchase(expectedGameCount);
 
         assertThat(lottos.gameCount())
                 .isEqualTo(expectedGameCount);

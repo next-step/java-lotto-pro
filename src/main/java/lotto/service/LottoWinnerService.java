@@ -2,6 +2,7 @@ package lotto.service;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoWinner;
+import lotto.domain.LottosWinnerCounts;
 import lotto.domain.WinnerIndexHelper;
 
 import java.util.Collections;
@@ -10,6 +11,14 @@ import java.util.List;
 import static lotto.config.LottoGameConfig.LOTTO_GAME_NUMBER_COUNT;
 
 public class LottoWinnerService {
+
+    public LottosWinnerCounts makeLottosResult(List<LottoWinner> winners) {
+        LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts();
+        for (LottoWinner winner : winners) {
+            lottosWinnerCounts.reflectResult(winner);
+        }
+        return lottosWinnerCounts;
+    }
 
     public LottoWinner judge(List<Integer> winnerNumbers, Lotto lotto) {
         Collections.sort(winnerNumbers);

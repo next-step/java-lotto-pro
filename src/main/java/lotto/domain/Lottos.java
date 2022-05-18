@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private List<Lotto> lottoList = new ArrayList<>();
+    private final List<Lotto> lottoList = new ArrayList<>();
 
     public int gameCount() {
         return lottoList.size();
