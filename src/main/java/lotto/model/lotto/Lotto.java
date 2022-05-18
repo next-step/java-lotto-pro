@@ -2,6 +2,7 @@ package lotto.model.lotto;
 
 import static lotto.constant.LottoSetting.LOTTO_SIZE;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -26,6 +27,10 @@ public class Lotto {
             .collect(Collectors.toSet());
 
         return of(lottoNumberSet);
+    }
+
+    public static Lotto of(String[] inputLottoNumberArr) {
+        return of(Arrays.asList(inputLottoNumberArr));
     }
 
     public int match(Lotto lotto) {

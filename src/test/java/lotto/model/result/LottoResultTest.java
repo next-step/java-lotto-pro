@@ -22,9 +22,10 @@ class LottoResultTest {
     }
 
     private LottoResult generateLottoResult() {
-        List<Lotto> lottoList = new LottoTestFactory().generateAuto(2);
+        List<Lotto> autoLottoList = new LottoTestFactory().generateAuto(1);
+        List<Lotto> manualLottoList = new LottoTestFactory().generateAuto(1);
 
-        PurchaseLotto purchaseLotto = new PurchaseLotto(lottoList);
+        PurchaseLotto purchaseLotto = new PurchaseLotto(autoLottoList, manualLottoList);
         WinningLotto winningLotto = new WinningLotto(Arrays.asList("1", "2", "3", "7", "8", "9"), "10");
 
         return purchaseLotto.rankMatch(winningLotto, new Money(20_000));

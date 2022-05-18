@@ -1,6 +1,8 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import lotto.model.factory.LottoFactory;
 import lotto.model.lotto.Lotto;
 import lotto.model.money.Money;
@@ -15,17 +17,32 @@ public class LottoMachine {
     public void start() {
         Money purchasedMoney = new Money(InputView.inputPurchasedMoney());
 
-        List<Lotto> lottoList = lottoAutoGenerate(purchasedMoney);
+        String inputPurchaseManualCount = InputView.inputPurchaseManualCount();
+        int purchaseManualCount = Integer.parseInt(inputPurchaseManualCount);
 
-        PurchaseLotto purchaseLotto = new PurchaseLotto(lottoList);
+        PurchaseLotto purchaseLotto = purchaseLotto(purchasedMoney, purchaseManualCount);
 
         WinningLotto winningLotto = inputWinningLotto();
         outputResult(purchasedMoney, purchaseLotto, winningLotto);
     }
 
-    private List<Lotto> lottoAutoGenerate(Money purchasedMoney) {
-        List<Lotto> lottoList = LottoFactory.create().generateAuto(purchasedMoney.possiblePurchaseLotto());
-        OutputView.OutputPurchaseResult(purchasedMoney.possiblePurchaseLotto(), lottoList);
+    private PurchaseLotto purchaseLotto(Money purchasedMoney, int purchaseManualCount) {
+        List<Lotto> manualLottoList = inputPurchaseManualLotto(purchaseManualCount);
+        List<Lotto> autoLottoList = LottoFactory.create().generateAuto(purchasedMoney.possiblePurchaseLotto());
+
+        PurchaseLotto purchaseLotto = new PurchaseLotto(autoLottoList, manualLottoList);
+        OutputView.OutputPurchaseResult(purchaseLotto);
+
+        return purchaseLotto;
+    }
+
+    private List<Lotto> inputPurchaseManualLotto(int inputPurchaseManualCount) {
+        List<Lotto> lottoList = new ArrayList<>();
+
+        InputView.inputPurchaseManualLotto();
+        IntStream.rangeClosed(1, inputPurchaseManualCount)
+            .forEach(value -> lottoList.add(Lotto.of(inputLottoNumberArr(InputView.inputEmptyAsk()))));
+
         return lottoList;
     }
 
