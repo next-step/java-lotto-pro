@@ -31,7 +31,7 @@ public class LottoTest {
         Lotto lotto = Lotto.of(Arrays.asList("1", "2", "3", "4", "5", "6"));
         WinningLotto winningLotto = new WinningLotto(Arrays.asList("1", "2", "3", "7", "8", "9"), "10");
 
-        assertEquals(winningLotto.match(lotto).get(), LottoRank.THREE);
+        assertEquals(winningLotto.match(lotto), LottoRank.THREE);
     }
 
 }

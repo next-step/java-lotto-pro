@@ -12,7 +12,7 @@ import lotto.type.LottoRank;
 
 public class PurchaseLotto {
 
-    private List<Lotto> lottoList;
+    private final List<Lotto> lottoList;
 
     public PurchaseLotto(List<Lotto> lottoList) {
         this.lottoList = lottoList;
@@ -24,8 +24,8 @@ public class PurchaseLotto {
             .forEach(lottoRank -> rankMap.put(lottoRank, 0));
 
         lottoList.forEach(lotto -> {
-            Optional<LottoRank> lottoRank =  winningLotto.match(lotto);
-            lottoRank.ifPresent(rank -> rankMap.put(rank, rankMap.get(rank) + 1));
+            LottoRank lottoRank =  winningLotto.match(lotto);
+            rankMap.put(lottoRank, rankMap.get(lottoRank) + 1);
         });
 
         return new LottoResult(rankMap);

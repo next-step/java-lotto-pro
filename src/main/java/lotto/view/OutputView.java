@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import lotto.model.lotto.Lotto;
 import lotto.model.result.LottoResult;
+import lotto.type.LottoRank;
 
 public class OutputView {
 
@@ -27,6 +28,7 @@ public class OutputView {
 
     private static void outputLottoResultMap(LottoResult lottoResult) {
         lottoResult.getLottoResultMap().entrySet().stream()
+            .filter(lottoRankIntegerEntry -> !lottoRankIntegerEntry.getKey().equals(LottoRank.NONE))
             .sorted(Comparator.comparingInt(o -> o.getKey().getCorrectCount())).forEach((entrySet) -> {
                 System.out.printf("%d개 일치 (%d원)- %d개%n",
                     entrySet.getKey().getCorrectCount(),

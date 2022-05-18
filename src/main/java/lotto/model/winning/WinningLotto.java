@@ -26,7 +26,7 @@ public class WinningLotto {
         this(Arrays.asList(lottoNumberArr), bonusNumber);
     }
 
-    public Optional<LottoRank> match(Lotto lotto) {
+    public LottoRank match(Lotto lotto) {
         int matchCount = this.winningLotto.match(lotto);
         boolean matchBonus = lotto.contains(bonusNumber);
         return LottoRank.rankMatch(matchCount, matchBonus);
