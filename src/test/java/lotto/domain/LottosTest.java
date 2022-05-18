@@ -33,6 +33,9 @@ class LottosTest {
             .thenReturn(5);
 
         로또_목록 = Arrays.asList(lotto, lotto_2, lotto_3);
+
+        when(정답_번호.isContainsBonusNumber(any()))
+            .thenReturn(false);
     }
 
     @Test
