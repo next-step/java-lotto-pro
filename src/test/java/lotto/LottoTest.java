@@ -32,7 +32,7 @@ class LottoTest {
 
     @Test
     void 당첨번호_변환() {
-        String winningNumbers = "1, 2, 3, 4, 5, 6";
+        int[] winningNumbers = {1, 2, 3, 4, 5, 6};
         Lotto winningLotto = new Lotto(winningNumbers);
 
         assertThat(winningLotto.getNumberValues()).contains(1, 2, 3, 4, 5, 6);

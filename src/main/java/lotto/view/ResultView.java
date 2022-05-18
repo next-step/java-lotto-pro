@@ -27,25 +27,25 @@ public class ResultView {
     public static void printStatistics(List<Rank> ranks) {
         System.out.println(STATISTICS_HEADER_MESSAGE);
         System.out.println(LINE);
-        printRank(ranks, Rank._4ST);
-        printRank(ranks, Rank._3ST);
-        printRank(ranks, Rank._2ST);
-        printRank(ranks, Rank._1ST);
+        printRank(ranks, Rank.FOURTH);
+        printRank(ranks, Rank.THIRD);
+        printRank(ranks, Rank.SECOND);
+        printRank(ranks, Rank.FIRST);
     }
 
     private static void printRank(List<Rank> ranks, Rank targetRank) {
         int count = 0;
         for (Rank rank : ranks) {
-            count = plusCount(count, targetRank, rank);
+            count += plusCount(targetRank, rank);
         }
         System.out.printf((STATISTICS_MESSAGE) + "%n", targetRank.getCount(), targetRank.getWinningMoney(), count);
     }
 
-    private static int plusCount(int count, Rank targetRank, Rank rank) {
+    private static int plusCount(Rank targetRank, Rank rank) {
         if (targetRank.equals(rank)) {
-            count++;
+            return 1;
         }
-        return count;
+        return 0;
     }
 
     public static void printProfitRate(double profitRate) {

@@ -8,18 +8,16 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int NUMBER_SIZE = 6;
-    private static final String DELIMITER = ", ";
+
     private final List<Number> numbers = new ArrayList<>();
 
     public Lotto(int[] numbers) {
-        if(!isEqualSize(numbers)) {
-            throw new IllegalArgumentException("숫자의 개수가 맞지 않습니다.");
-        }
+        checkSize(numbers);
         Arrays.stream(numbers).forEach(this::addNumber);
     }
 
-    public Lotto(String numbers) {
-        this(Arrays.stream(numbers.split(DELIMITER)).mapToInt(Integer::parseInt).toArray());
+    public Lotto(String[] numbers) {
+        this(Arrays.stream(numbers).mapToInt(Integer::parseInt).toArray());
     }
 
     public Lotto(List<Number> numbers) {
@@ -29,20 +27,22 @@ public class Lotto {
     public int getCount(Lotto winningLotto) {
         int count = 0;
         for (Number number : winningLotto.getNumber()) {
-            count = plusCount(count, number);
+            count += plusCount(number);
         }
         return count;
     }
 
-    private int plusCount(int count, Number number) {
+    private int plusCount(Number number) {
         if(this.numbers.contains(number)) {
-            count++;
+            return 1;
         }
-        return count;
+        return 0;
     }
 
-    private boolean isEqualSize(int[] numbers) {
-        return numbers.length == NUMBER_SIZE;
+    private void checkSize(int[] numbers) {
+        if (numbers.length != NUMBER_SIZE) {
+            throw new IllegalArgumentException("숫자의 개수가 맞지 않습니다.");
+        }
     }
 
     private void addNumber(int number) {

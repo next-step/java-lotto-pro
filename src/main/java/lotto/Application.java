@@ -16,7 +16,7 @@ public class Application {
         ResultView.printQuantity(lottos.getLottos().size());
         ResultView.printLottos(lottos);
 
-        String winningNumbers = InputView.inputWinningNumbers();
+        String[] winningNumbers = InputView.inputWinningNumbers();
         Lotto winningLotto = new Lotto(winningNumbers);
 
         List<Rank> ranks = lottos.getRanks(winningLotto);

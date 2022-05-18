@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public enum Rank {
 
-    _1ST(6, 2000000000),
-    _2ST(5, 1500000),
-    _3ST(4, 50000),
-    _4ST(3, 5000),
-    ZERO(0, 0);
+    FIRST(6, 2000000000),
+    SECOND(5, 1500000),
+    THIRD(4, 50000),
+    FOURTH(3, 5000),
+    LOSE(0, 0);
 
     private final int count;
     private final int winningMoney;
@@ -19,7 +19,7 @@ public enum Rank {
     }
 
     public static Rank from(int count) {
-        return Arrays.stream(values()).filter(value -> value.count == count).findFirst().orElse(ZERO);
+        return Arrays.stream(values()).filter(value -> value.count == count).findFirst().orElse(LOSE);
     }
 
     public int getCount() {

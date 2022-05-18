@@ -21,16 +21,17 @@ class LottosTest {
 
     @Test
     void 당첨_결과_확인() {
-        List<Lotto> input = Arrays.asList(
-                new Lotto("1, 2, 3, 4, 5, 6"),
-                new Lotto("2, 3, 4, 5, 6, 7"));
 
-        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        List<Lotto> input = Arrays.asList(
+                new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
+                new Lotto(new int[]{2, 3, 4, 5, 6, 7}));
+
+        Lotto winningLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
 
         Lottos lottos = new Lottos(input);
 
-        assertThat(lottos.getRanks(winningLotto)).contains(Rank._1ST);
-        assertThat(lottos.getRanks(winningLotto)).contains(Rank._2ST);
+        assertThat(lottos.getRanks(winningLotto)).contains(Rank.FIRST);
+        assertThat(lottos.getRanks(winningLotto)).contains(Rank.SECOND);
     }
 
 }
