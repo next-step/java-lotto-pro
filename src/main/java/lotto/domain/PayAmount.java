@@ -17,9 +17,10 @@ public class PayAmount {
     public PayAmount(String payAmount) {
         validateNullOrEmpty(payAmount);
         validatePositiveNumber(payAmount);
-        validateMinimumPayAmount(payAmount);
 
         this.payAmount = Integer.parseInt(payAmount);
+
+        validateMinimumPayAmount(this.payAmount);
     }
 
     public int calculateLottoCount() {
@@ -39,8 +40,8 @@ public class PayAmount {
         }
     }
 
-    private void validateMinimumPayAmount(final String payAmount) {
-        if (Integer.parseInt(payAmount) < MIN_PAY_AMOUNT) {
+    private void validateMinimumPayAmount(final Integer payAmount) {
+        if (payAmount < MIN_PAY_AMOUNT) {
             throw new IllegalArgumentException(
                     String.format(PayAmountErrorCode.ALLOW_MIN_PAY_AMOUNT.getMessage(), MIN_PAY_AMOUNT));
         }
