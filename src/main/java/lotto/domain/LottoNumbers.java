@@ -10,6 +10,9 @@ import static lotto.domain.LottoNumber.LOTTO_MIN_NUMBER;
 public class LottoNumbers {
     public static final List<LottoNumber> LOTTO_NUMBERS = Collections.unmodifiableList(initializeNumbers());
 
+    private LottoNumbers() {
+    }
+
     private static List<LottoNumber> initializeNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
