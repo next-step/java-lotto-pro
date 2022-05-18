@@ -1,0 +1,71 @@
+package lotto.view;
+
+import java.math.BigDecimal;
+import java.util.Map;
+import java.util.Scanner;
+import lotto.domain.LottoStatistic;
+import lotto.domain.Lottos;
+import lotto.domain.MatchResult;
+
+public class View {
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final String MONEY_UNIT = "원";
+
+    public View() {
+    }
+
+    public void outputOrderPrice() {
+        System.out.println("구입 금액을 입력해 주세요. (자연수만 가능하며, 1게임 가격에 따라 구입 개수가 정해짐)");
+    }
+
+    public void outputOrderLottoList(Lottos lottos) {
+        System.out.println(lottos.toString());
+    }
+
+    public void outputWinningNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요. (','로 구분)");
+    }
+
+    public void outputWinningStatistic(Map<MatchResult, Integer> winningResults) {
+
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("당첨 통계\n" + "---------\n");
+
+        for (MatchResult winningMatchResult : MatchResult.winningMatchResults()) {
+            builder.append(toMatchResultString(winningMatchResult, winningResults.get(winningMatchResult)));
+        }
+
+        System.out.println(builder);
+
+    }
+
+    public void outputEarning(BigDecimal totalEarning) {
+        System.out.println(toEarningString(totalEarning));
+    }
+
+    private String toMatchResultString(MatchResult matchResult, int matchCount) {
+        return matchResult.getMatchCount() + "개 일치" + "(" + matchResult.getCashPrize().toString()
+                + MONEY_UNIT + ")- " + matchCount + "개\n";
+    }
+
+    private String toEarningString(BigDecimal totalEarning) {
+        String result;
+        result = "총 수익률은 " + String.format("%.2f", totalEarning) + " 입니다.";
+        if (totalEarning.compareTo(BigDecimal.ONE) == 1) {
+            return result + "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+        }
+        return result + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    }
+
+
+    public String inputOrderPrice() {
+        return scanner.nextLine();
+    }
+
+    public String inputWinningNumbers() {
+        return scanner.nextLine();
+    }
+
+
+}

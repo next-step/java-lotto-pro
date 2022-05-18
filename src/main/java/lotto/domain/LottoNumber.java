@@ -1,0 +1,56 @@
+package lotto.domain;
+
+import java.util.Objects;
+
+public class LottoNumber implements Comparable<LottoNumber> {
+    private static final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
+
+    private final int lottoNumber;
+
+    private LottoNumber(int lottoNumber) {
+        validate(lottoNumber);
+        this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber from(int lottoNumber) {
+        return new LottoNumber(lottoNumber);
+    }
+
+    public static LottoNumber from(String lottoNumber) {
+        return new LottoNumber(Integer.parseInt(lottoNumber));
+    }
+
+    private void validate(int lottoNumber) {
+        if (lottoNumber < MIN_NUMBER || lottoNumber > MAX_NUMBER) {
+            throw new IllegalArgumentException("로또 숫자는 1 이상 45 이하 입니다.");
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(lottoNumber, o.lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(lottoNumber);
+    }
+}
