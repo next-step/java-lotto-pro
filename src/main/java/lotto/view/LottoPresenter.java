@@ -24,7 +24,7 @@ public class LottoPresenter {
         tickets.print();
         printLineSeparator();
         final LottoNumbers winningNumbers = requestWinningNumbers(scanner);
-        printResult(payment.getMoney(), tickets.prizeMap(winningNumbers));
+        printResult(payment.getMoney(), tickets.prizeMap(winningNumbers, null));
     }
 
     private LottoPayment requestPayment(final Scanner scanner) {
@@ -65,7 +65,7 @@ public class LottoPresenter {
 
     private void printPrizes(final Map<Prize, Integer> prizeMap) {
         for (final int matchCount : PRINTABLE_MATCH_COUNTS) {
-            final Prize prize = Prize.findPrizeByMatchCount(matchCount);
+            final Prize prize = Prize.checkPrize(matchCount, false);
             System.out.println(prize.resultMessage(prizeMap.get(prize)));
         }
     }

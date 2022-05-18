@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class LottoTicketsTest {
     private final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private static final BonusBall bonusBall = new BonusBall(7);
 
     @Test
     @DisplayName("LottoTicket 리스트를 파라미터로 LottoTickets 객체가 생성되어야 한다")
@@ -47,15 +48,16 @@ class LottoTicketsTest {
         final LottoTickets lottoTickets = new LottoTickets(lottoTicketList());
 
         // when
-        final Map<Prize, Integer> prizeMap = lottoTickets.prizeMap(lottoNumbers);
+        final Map<Prize, Integer> prizeMap = lottoTickets.prizeMap(lottoNumbers, bonusBall);
 
         // then
         assertThat(prizeMap.containsKey(Prize.NO_MATCHES)).isFalse();
         assertThat(prizeMap.containsKey(Prize.THREE_MATCHES)).isTrue();
         assertThat(prizeMap.containsKey(Prize.FOUR_MATCHES)).isTrue();
         assertThat(prizeMap.containsKey(Prize.FIVE_MATCHES)).isTrue();
+        assertThat(prizeMap.containsKey(Prize.FIVE_MATCHES_WITH_BONUS_BALL)).isTrue();
         assertThat(prizeMap.containsKey(Prize.SIX_MATCHES)).isTrue();
-        assertThat(prizeMap.keySet().size()).isEqualTo(4);
+        assertThat(prizeMap.keySet().size()).isEqualTo(5);
     }
 
     private List<LottoTicket> lottoTicketList() {

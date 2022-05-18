@@ -1,23 +1,13 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public enum Prize {
     NO_MATCHES(0, 0),
-    THREE_MATCHES(3, 5000),
-    FOUR_MATCHES(4, 50000),
-    FIVE_MATCHES(5, 1500000),
-    SIX_MATCHES(6, 2000000000),
+    THREE_MATCHES(3, 5_000),
+    FOUR_MATCHES(4, 50_000),
+    FIVE_MATCHES(5, 1_500_000),
+    FIVE_MATCHES_WITH_BONUS_BALL(5, 30_000_000),
+    SIX_MATCHES(6, 2_000_000_000),
     ;
-
-    private static final Map<Integer, Prize> prizeByMatchCount = new HashMap<>();
-
-    static {
-        for (Prize prize : values()){
-            prizeByMatchCount.put(prize.matchCount, prize);
-        }
-    }
 
     private final int matchCount;
     private final int prize;
@@ -27,8 +17,19 @@ public enum Prize {
         this.prize = prize;
     }
 
-    public static Prize findPrizeByMatchCount(final int matchCount) {
-        return prizeByMatchCount.get(matchCount);
+    public static Prize checkPrize(final int matchCount, final boolean bonusBallMatches) {
+        if (matchCount == 5 && bonusBallMatches) {
+            return FIVE_MATCHES_WITH_BONUS_BALL;
+        }
+        return findByMatchCount(0, matchCount);
+    }
+
+    private static Prize findByMatchCount(final int index, final int matchCount) {
+        final Prize current = values()[index];
+        if (!FIVE_MATCHES_WITH_BONUS_BALL.equals(current) && matchCount == current.matchCount) {
+            return current;
+        }
+        return findByMatchCount(index + 1, matchCount);
     }
 
     public int getPrize() {
