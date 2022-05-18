@@ -14,15 +14,6 @@ public enum LottoRank {
         this.prize = prize;
     }
 
-    public static LottoRank findByMatch(int match) {
-        for (LottoRank value : LottoRank.values()) {
-            if (value.match == match) {
-                return value;
-            }
-        }
-        return null;
-    }
-
     public int getMatch() {
         return match;
     }
