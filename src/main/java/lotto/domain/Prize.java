@@ -1,20 +1,29 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum Prize {
-    NO_MATCHES(0, 0),
-    THREE_MATCHES(3, 5_000),
-    FOUR_MATCHES(4, 50_000),
-    FIVE_MATCHES(5, 1_500_000),
-    FIVE_MATCHES_WITH_BONUS_BALL(5, 30_000_000),
-    SIX_MATCHES(6, 2_000_000_000),
+    NO_MATCHES(0, 0, ""),
+    THREE_MATCHES(3, 5_000, "3개 일치"),
+    FOUR_MATCHES(4, 50_000, "4개 일치"),
+    FIVE_MATCHES(5, 1_500_000, "5개 일치"),
+    FIVE_MATCHES_WITH_BONUS_BALL(5, 30_000_000, "5개 일치, 보너스 볼 일치"),
+    SIX_MATCHES(6, 2_000_000_000, "6개 일치"),
     ;
 
     private final int matchCount;
     private final int prize;
+    private final String resultPrefix;
 
-    Prize(final int matchCount, final int prize) {
+    Prize(final int matchCount, final int prize, final String resultPrefix) {
         this.matchCount = matchCount;
         this.prize = prize;
+        this.resultPrefix = resultPrefix;
+    }
+
+    public static List<Prize> printablePrizes() {
+        return Arrays.asList(THREE_MATCHES, FOUR_MATCHES, FIVE_MATCHES, FIVE_MATCHES_WITH_BONUS_BALL, SIX_MATCHES);
     }
 
     public static Prize checkPrize(final int matchCount, final boolean bonusBallMatches) {
@@ -37,6 +46,6 @@ public enum Prize {
     }
 
     public String resultMessage(final int matches) {
-        return String.format("%d개 일치 (%d원)- %d", matchCount, prize, matches);
+        return String.format("%s (%d원)- %d", resultPrefix, prize, matches);
     }
 }

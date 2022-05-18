@@ -17,8 +17,6 @@ import lotto.domain.Prize;
 import lotto.service.PrizeCalculator;
 
 public class LottoPresenter {
-    private static final int[] PRINTABLE_MATCH_COUNTS = {3, 4, 5, 6};
-
     public void present() {
         final Scanner scanner = new Scanner(System.in);
         final LottoPayment payment = requestPayment(scanner);
@@ -26,7 +24,8 @@ public class LottoPresenter {
         tickets.print();
         printLineSeparator();
         final LottoNumbers winningNumbers = requestWinningNumbers(scanner);
-        printResult(payment.getMoney(), tickets.prizeMap(winningNumbers, null));
+        final BonusBall bonusBall = requestBonusBall(scanner);
+        printResult(payment.getMoney(), tickets.prizeMap(winningNumbers, bonusBall));
     }
 
     private LottoPayment requestPayment(final Scanner scanner) {
@@ -61,7 +60,12 @@ public class LottoPresenter {
 
     private BonusBall requestBonusBall(final Scanner scanner) {
         System.out.println(BONUS_BALL.getMessage());
-        return null;
+        try {
+            return BonusBall.convertAndCreate(scanner.nextLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return requestBonusBall(scanner);
+        }
     }
 
     public void printResult(final int payment, final Map<Prize, Integer> prizeMap) {
@@ -71,8 +75,7 @@ public class LottoPresenter {
     }
 
     private void printPrizes(final Map<Prize, Integer> prizeMap) {
-        for (final int matchCount : PRINTABLE_MATCH_COUNTS) {
-            final Prize prize = Prize.checkPrize(matchCount, false);
+        for (final Prize prize : Prize.printablePrizes()) {
             System.out.println(prize.resultMessage(prizeMap.get(prize)));
         }
     }
