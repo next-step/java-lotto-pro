@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class PayAmount {
 
-    public final static int MIN_PAY_AMOUNT = 1000;
+    public final static int MIN_PAY_AMOUNT = 1_000;
     private final int payAmount;
 
     public PayAmount(String payAmount) {
