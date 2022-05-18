@@ -22,7 +22,11 @@ public class LottoTicket {
     }
 
     private void validateUnique(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> numbers = new HashSet<>(lottoNumbers);
+        Set<Integer> numbers = new HashSet<>();
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            numbers.add(lottoNumber.getLottoNumber());
+        }
+
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(InputMessage.INVALID_LOTTO_UNIQUE);
         }
