@@ -1,10 +1,9 @@
 package step3.controller;
 
-import step3.domain.LottoElement;
+import java.util.List;
 import step3.domain.LottoTicket;
-import step3.domain.Money;
-import step3.domain.Ticket;
 import step3.model.LottoMachine;
+import step3.model.LottoUser;
 import step3.view.InputView;
 import step3.view.OutputView;
 
@@ -21,41 +20,39 @@ public class LottoController {
     }
 
     public void startLotto() {
-        Money money = null;
-        Ticket ticket = null;
-        while (moneyAndTicketIsNotValid(money, ticket)) { //돈을 정상적으로 받아올때까지 반복한다
-            String moneySource = inputView.getMoney();
-            money = lottoMachine.insertMoney(moneySource);
-            ticket = lottoMachine.buyTicket(money);
-        }
+        LottoUser user = new LottoUser();
+        String money;
+        do {
+            money = inputView.getMoney();
+            user.setMoney(money);
+        } while (ticketIsNotValid(user));
 
-        lottoMachine.buyLotto(ticket);
-        outputView.printLottoInfo(lottoMachine.getLottoNumbers());
+        List<LottoTicket> lottoTickets = lottoMachine.makeRandomLottoTickets(user.getTicket());
+        user.buyLotto(lottoTickets);
+        outputView.printLottoInfo(user.getLottoNumbers());
 
-        LottoTicket winnerTicket = null;
-        while (winnerTicketIsNotValid(winnerTicket)) { //우승 티켓을 정상적으로 받아올때까지 반복한다
-            String manualLottoSource = inputView.getWinnerLotto();
-            winnerTicket = lottoMachine.makeManualLottoTicket(manualLottoSource);
-        }
+        String winnerLottoSource;
+        do {
+            winnerLottoSource = inputView.getWinnerLotto();
+        } while (winnerLottoIsNotValid(winnerLottoSource));
 
-        LottoElement bonusNumber = null;
-        while(bonusNumberIsNotValid(bonusNumber)){
-            String bonusLottoSource = inputView.getBonusLotto();
-            bonusNumber = lottoMachine.setBonusNumber(bonusLottoSource, winnerTicket);
-        }
+        String bonusNumberSource;
+        do {
+            bonusNumberSource = inputView.getBonusLotto();
+        } while (bonusNumberIsNotValid(bonusNumberSource));
 
-        outputView.printOutput(lottoMachine.checkWin(winnerTicket,bonusNumber), money);
+        outputView.printOutput(lottoMachine.checkWin(user.getLottoTickets()), user.getMoney());
     }
 
-    private boolean bonusNumberIsNotValid(LottoElement bonusNumber) {
-        return bonusNumber == null;
+    private boolean bonusNumberIsNotValid(String bonusNumberSource) {
+        return !lottoMachine.setBonusNumber(bonusNumberSource);
     }
 
-    private boolean moneyAndTicketIsNotValid(Money money, Ticket ticket) {
-        return money == null || ticket == null;
+    private boolean winnerLottoIsNotValid(String winnerLottoSource) {
+        return !lottoMachine.setWinnerLotto(winnerLottoSource);
     }
 
-    private boolean winnerTicketIsNotValid(LottoTicket winnerTicket) {
-        return winnerTicket == null;
+    private boolean ticketIsNotValid(LottoUser user) {
+        return !user.buyTicket();
     }
 }
