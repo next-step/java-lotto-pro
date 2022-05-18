@@ -89,7 +89,7 @@ public class LottoMachine {
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchNumber = lottoTicket.getMatchCountWith(winnerLotto.getLottoNumbers());
             int matchBonus = lottoTicket.getMatchCountWith(Arrays.asList(bonusNumber));
-            LottoReward lottoReward = LottoReward.valueOf(matchNumber + matchBonus, matchBonus == 1);
+            LottoReward lottoReward = LottoReward.valueOf(matchNumber, matchBonus == 1);
             statistics.replace(lottoReward, statistics.get(lottoReward) + 1);
         }
         return statistics;
