@@ -10,7 +10,7 @@ public class Application {
         Lotto lotto = retryIfThrowException(Application::getLotto);
         Lottery lottery = retryIfThrowException(Application::getLottery);
         Ranks ranks = lottery.aggregate(lotto);
-        consoleOutputView.view(ranks, vendor.yield(ranks));
+        consoleOutputView.view(ranks);
     }
 
     private static Lotto getLotto() {

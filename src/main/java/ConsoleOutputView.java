@@ -14,7 +14,7 @@ public class ConsoleOutputView {
         System.out.println();
     }
 
-    public void view(Ranks ranks, BigDecimal yield) {
+    public void view(Ranks ranks) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -22,6 +22,7 @@ public class ConsoleOutputView {
             System.out.println(rank + " - " + ranks.count(rank) + "개");
         });
 
+        BigDecimal yield = ranks.yield();
         BigDecimal scaledYield = yield.setScale(2, RoundingMode.DOWN);
         System.out.println("총 수익률은 " + scaledYield.doubleValue() + "입니다.");
     }

@@ -35,26 +35,4 @@ public class VendorTest {
     void 가격_미만이면_로또를_구매할_수_없다() {
         assertThatThrownBy(() -> new Vendor().buy(Vendor.LOTTO_PRICE - 1, new Lotto())).isInstanceOf(RuntimeException.class);
     }
-
-    @Test
-    void 수익률을_계산할_수_있다() {
-        Ranks ranks = new Ranks();
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.NONE);
-        ranks.add(Rank.FIFTH);
-
-        BigDecimal yield = new Vendor().yield(ranks);
-        assertThat(yield.setScale(2, RoundingMode.DOWN).doubleValue()).isEqualTo(0.35);
-    }
 }

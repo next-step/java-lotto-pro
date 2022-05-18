@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -27,6 +28,10 @@ public class Ranks implements Iterable<Rank> {
 
     public long totalMoney() {
         return this.ranks.stream().distinct().mapToLong(Rank::money).sum();
+    }
+
+    public BigDecimal yield() {
+        return BigDecimal.valueOf((double) totalMoney() / (double) (size() * Vendor.LOTTO_PRICE));
     }
 
     @Override

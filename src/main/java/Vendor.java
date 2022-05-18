@@ -1,4 +1,3 @@
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,9 +37,5 @@ public class Vendor {
 
         return new LottoNumbers(
                 ALL_AVAILABLE_LOTTO_NUMBER_LIST.stream().limit(LottoNumbers.SIZE).collect(Collectors.toList()));
-    }
-
-    public BigDecimal yield(Ranks ranks) {
-        return BigDecimal.valueOf((double) ranks.totalMoney() / (double) (ranks.size() * LOTTO_PRICE));
     }
 }
