@@ -15,19 +15,25 @@ public class Vendor {
                 .collect(Collectors.toList());
     }
 
-    public Lotto buy(long money) {
+    public Lotto buy(long money, Lotto manual) {
         final long maxCount = money / LOTTO_PRICE;
+
         if (maxCount < 1)
             throw new IllegalArgumentException("이 돈으로는 로또를 구매할 수 없습니다.");
 
-        Lotto lotto = new Lotto();
-        for (int count = 1; count <= maxCount; count++) {
-            lotto.add(get());
+        Lotto lotto = new Lotto(manual);
+
+        int manualCount = manual.size();
+        int autoCount = Math.toIntExact(maxCount - manualCount);
+
+        for (int count = 1; count <= autoCount; count++) {
+            lotto.add(auto());
         }
+
         return lotto;
     }
 
-    private LottoNumbers get() {
+    private LottoNumbers auto() {
         Collections.shuffle(ALL_AVAILABLE_LOTTO_NUMBER_LIST);
 
         return new LottoNumbers(
