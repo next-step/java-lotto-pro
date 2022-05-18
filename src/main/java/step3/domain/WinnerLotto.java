@@ -10,7 +10,7 @@ public class WinnerLotto {
     }
 
     public List<LottoNumber> lottoNumbers() {
-        return lotto.sortedLotto();
+        return lotto.sortedLottoNumbers();
     }
 
     @Override
