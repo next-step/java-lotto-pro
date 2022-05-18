@@ -4,8 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-
 import static lotto.view.InputView.*;
 
 public class LottoGame {
@@ -21,13 +19,8 @@ public class LottoGame {
         LottoNo bonusNumber = new LottoNo(readBonusNumber());
         OutputView.printLine();
 
-        LottoResult result = matchLottoNumbers(purchasedLotto, lastWinningLotto, bonusNumber);
+        LottoResult result = purchasedLotto.matchLottoNumbers(lastWinningLotto, bonusNumber);
         OutputView.showLottoResult(result, lottoMachine);
-    }
-
-    public LottoResult matchLottoNumbers(PurchasedLotto purchasedLotto, Lotto lastWinningLotto, LottoNo bonusNumber) {
-        List<Ranking> rankings = purchasedLotto.compareLottos(lastWinningLotto, bonusNumber);
-        return new LottoResult(rankings);
     }
 
     private LottoMachine readMoney() {

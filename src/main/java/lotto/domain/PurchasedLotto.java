@@ -27,6 +27,11 @@ public class PurchasedLotto {
         return sb.toString();
     }
 
+    public LottoResult matchLottoNumbers(Lotto lastWinningLotto, LottoNo bonusNumber) {
+        List<Ranking> rankings = compareLottos(lastWinningLotto, bonusNumber);
+        return new LottoResult(rankings);
+    }
+
     public List<Ranking> compareLottos(Lotto target, LottoNo bonusNumber) {
         List<Ranking> result = new ArrayList<>();
         for (Lotto lotto : lottoList) {

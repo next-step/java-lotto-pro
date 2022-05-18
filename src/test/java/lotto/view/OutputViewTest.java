@@ -22,9 +22,8 @@ class OutputViewTest {
                 new Lotto(1, 2, 3, 4, 5, 7),
                 new Lotto(1, 2, 3, 4, 7, 8),
                 new Lotto(1, 2, 3, 7, 8, 9));
-        LottoGame game = new LottoGame();
         PurchasedLotto purchasedLotto = new PurchasedLotto(lottoList);
-        LottoResult result = game.matchLottoNumbers(purchasedLotto, new Lotto("1, 2, 3, 4, 5, 6"), new LottoNo(8));
+        LottoResult result = purchasedLotto.matchLottoNumbers(new Lotto("1, 2, 3, 4, 5, 6"), new LottoNo(8));
         OutputView.showLottoStatistics(result);
     }
 }
