@@ -31,18 +31,6 @@ public class Lottos {
         return lottoRankMap;
     }
 
-    public int countMatchedNumber(Lotto lotto, Lotto answerLotto) {
-        List<Integer> answerLottoNumbers = answerLotto.getLottoNumbers();
-
-        int lastIndex = answerLotto.getLottoNumbers().size() - 1;
-        int bonusLottoNumber = lotto.getLottoNumbers().get(lastIndex);
-//        boolean matchedBonusBallNumber = answerLotto.getLottoNumbers().contains();
-
-        return (int) lotto.getLottoNumbers().stream()
-                .filter(answerLottoNumbers::contains)
-                .count();
-    }
-
     public boolean checkCorrectBonusBall() {
         return false;
     }

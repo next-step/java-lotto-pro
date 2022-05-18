@@ -32,6 +32,7 @@ public class LottoTest {
         assertThat(lotto.isOverlapBonusBallNumber(6)).isTrue();
     }
 
+    @Test
     @DisplayName("로또번호 정답 갯수를 확인한다.")
     void 로또번호_정답_갯수_확인() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));

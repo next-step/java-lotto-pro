@@ -2,7 +2,10 @@ package lotto.domain;
 
 import lotto.type.LottoRank;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final String ERROR_LOTTO_NUMBER_SIZE = "[ERROR] 6개의 숫자를 입력해주세요.";
@@ -37,7 +40,15 @@ public class Lotto {
     }
 
     public LottoRank checkLottoRank(Lotto answerLotto) {
-        return LottoRank.findLottoRankByMatchedCount(countMatchedNumber(answerLotto), false);
+        List<Integer> d = Arrays.stream(LottoRank.values())
+                .map(LottoRank::getMatchedCount)
+                .collect(Collectors.toList());
+
+        int lastIndex = answerLotto.getLottoNumbers().size() - 1;
+        int bonusLottoNumber = lottoNumbers.get(lastIndex);
+
+        LottoRank lottoRank = LottoRank.findLottoRankByMatchedCount(countMatchedNumber(answerLotto), false);
+        return lottoRank;
     }
 
     public int countMatchedNumber(Lotto answerLotto) {
