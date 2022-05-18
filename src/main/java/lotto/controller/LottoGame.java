@@ -16,19 +16,18 @@ public class LottoGame {
         LottoQuantity manualQuantity = readQuantity();
         LottoQuantity automaticQuantity = getAutomaticQuantity(machine, manualQuantity);
 
-        PurchasedLotto manualLotto = purchaseManualLotto(manualQuantity);
-        PurchasedLotto automaticLotto = machine.purchaseLotto();
+        PurchasedLotto lottos = purchaseManualLotto(manualQuantity);
+        PurchasedLotto automaticLottos = machine.purchaseLotto(automaticQuantity);
 
         printQuantityMessage(manualQuantity, automaticQuantity);
-
-        OutputView.printMyLotto(manualLotto);
-        OutputView.printMyLotto(automaticLotto);
+        lottos.append(automaticLottos);
+        OutputView.printMyLotto(lottos);
 
         Lotto lastWinningLotto = new Lotto(readLastWinningNumbers());
         LottoNo bonusNumber = new LottoNo(readBonusNumber());
         OutputView.printLine();
 
-        LottoResult result = automaticLotto.matchLottoNumbers(lastWinningLotto, bonusNumber);
+        LottoResult result = lottos.matchLottoNumbers(lastWinningLotto, bonusNumber);
         OutputView.showLottoResult(result, machine);
     }
 
@@ -49,7 +48,6 @@ public class LottoGame {
 
     public static LottoQuantity getAutomaticQuantity(LottoMachine machine, LottoQuantity manualQuantity) {
         LottoQuantity automaticQuantity = new LottoQuantity(machine.calculatePurchaseLottos() - manualQuantity.getQuantity());
-        machine.minusMoney(manualQuantity);
         return automaticQuantity;
     }
 

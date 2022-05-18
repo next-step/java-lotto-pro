@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,9 +67,10 @@ class PurchasedLottoTest {
     }
 
     private static List<Lotto> createSampleLottos() {
-        return Arrays.asList(
-                new Lotto("1, 2, 3, 4, 5, 6"),
-                new Lotto("1, 2, 3, 4, 5, 45"),
-                new Lotto("1, 2, 3, 4, 5, 40"));
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto("1, 2, 3, 4, 5, 6"));
+        lottos.add(new Lotto("1, 2, 3, 4, 5, 45"));
+        lottos.add(new Lotto("1, 2, 3, 4, 5, 40"));
+        return lottos;
     }
 }

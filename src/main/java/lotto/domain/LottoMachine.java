@@ -36,13 +36,17 @@ public class LottoMachine {
         this(String.valueOf(input));
     }
 
-    public PurchasedLotto purchaseLotto() {
-        long lottoQuantity = calculatePurchaseLottos();
+    public PurchasedLotto purchaseLotto(LottoQuantity automaticQuantity) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < lottoQuantity; i++) {
+        for (int i = 0; i < automaticQuantity.getQuantity(); i++) {
             lottoList.add(generateLotto());
         }
         return new PurchasedLotto(lottoList);
+    }
+
+    public PurchasedLotto purchaseLotto() {
+        int lottoQuantity = calculatePurchaseLottos();
+        return purchaseLotto(new LottoQuantity(lottoQuantity));
     }
 
     private Lotto generateLotto() {
