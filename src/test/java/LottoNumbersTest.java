@@ -7,6 +7,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class LottoNumbersTest {
+    @Test()
+    void LottoNumbers_는_문자열_포맷으로_생성할_수_있다() {
+        assertDoesNotThrow(() -> new LottoNumbers("1, 2, 3, 4, 5, 6", Application.NUMBER_DELEMETER));
+    }
+
+
     @Test
     void LottoNumbers_는_6개의_LottoNumber_를_포함할_수_있다() {
         assertDoesNotThrow(
@@ -34,6 +40,12 @@ public class LottoNumbersTest {
         ).isInstanceOf(RuntimeException.class);
 
         assertThatThrownBy(LottoNumbers::new)
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test()
+    void LottoNumbers_는_적절한_문자열_포맷이_아니면_생성할_수_없다() {
+        assertThatThrownBy(() -> new LottoNumbers("1, 2, 3, 4, 5: 6", Application.NUMBER_DELEMETER))
                 .isInstanceOf(RuntimeException.class);
     }
 
