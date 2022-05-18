@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.validator.WinningNumberValidatorGroup;
+import lotto.exception.ExceptionType;
 
 public class WinningNumbers {
 
-    private final List<Integer> winningNumbers;
+    private final Lotto winningNumbers;
     private BonusNumber bonusNumber;
     private static final WinningNumberValidatorGroup validatorGroup = WinningNumberValidatorGroup.getInstance();
 
@@ -20,28 +21,33 @@ public class WinningNumbers {
     }
 
     public void addBonusNumber(BonusNumber bonusNumber) {
-        this.winningNumbers.add(bonusNumber.getBonusNumber());
+        validateOverlapNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
+    private void validateOverlapNumber(BonusNumber bonusNumber) {
+        if (winningNumbers.contains(bonusNumber.getBonusNumber())) {
+            throw new IllegalArgumentException(ExceptionType.ALREADY_EXISTS_WINNINGS_NUMBER.getMessage());
+        }
+    }
+
     public List<Integer> getWinningNumbers() {
-        return winningNumbers;
+        return winningNumbers.getNumbers();
     }
 
     public boolean isContainsBonusNumber(Lotto lotto) {
         return lotto.getNumbers().contains(bonusNumber.getBonusNumber());
     }
 
-    public int[] getWinningNumbersToArray() {
-        return winningNumbers.stream().mapToInt(i -> i).toArray();
-    }
-
     private String replaceBlank(String winningNumbersInput) {
         return winningNumbersInput.replace(" ", "");
     }
 
-    private List<Integer> splitWinningNumbers(String winningNumbersInput) {
-        return Stream.of(winningNumbersInput.split(SPLIT_SYMBOL)).mapToInt(Integer::parseInt)
+    private Lotto splitWinningNumbers(String winningNumbersInput) {
+        List<Integer> numbers = Stream.of(winningNumbersInput.split(SPLIT_SYMBOL))
+            .mapToInt(Integer::parseInt)
             .boxed().collect(Collectors.toList());
+
+        return new Lotto(numbers);
     }
 }

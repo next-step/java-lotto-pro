@@ -23,7 +23,15 @@ public class Lotto {
     }
 
     public int getWinningOfNumbersCount(WinningNumbers winningNumbers) {
-        return (int) winningNumbers.getWinningNumbers().stream().filter(numbers::contains).count();
+        int countOfMatch = (int) winningNumbers.getWinningNumbers().stream()
+            .filter(numbers::contains).count();
+        int bonusCount = winningNumbers.isContainsBonusNumber(this) ? 1 : 0;
+
+        return countOfMatch + bonusCount;
+    }
+
+    public boolean contains(int number) {
+        return this.numbers.contains(number);
     }
 
     public List<Integer> getNumbers() {
