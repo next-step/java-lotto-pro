@@ -33,9 +33,9 @@ public class LottoMachine {
             purchaseManualCount = new PurchaseManualCount(inputPurchaseManualCount, purchasedMoney);
         } catch (IllegalArgumentException exception) {
             OutputView.OutputExceptionMessage(exception);
-            inputPurchaseManualCount(purchasedMoney);
-            return null;
+            purchaseManualCount = inputPurchaseManualCount(purchasedMoney);
         }
+
         return purchaseManualCount;
     }
 
@@ -45,8 +45,7 @@ public class LottoMachine {
             purchasedMoney = new Money(InputView.inputPurchasedMoney());
         } catch (IllegalArgumentException exception) {
             OutputView.OutputExceptionMessage(exception);
-            inputPurchasePrice();
-            return null;
+            purchasedMoney = inputPurchasePrice();
         }
         return purchasedMoney;
     }
@@ -85,8 +84,7 @@ public class LottoMachine {
             winningLotto = new WinningLotto(lottoNumberArr, inputBonusNumber);
         } catch (IllegalArgumentException exception) {
             OutputView.OutputExceptionMessage(exception);
-            inputWinningLotto();
-            return null;
+            winningLotto = inputWinningLotto();
         }
 
         return winningLotto;
