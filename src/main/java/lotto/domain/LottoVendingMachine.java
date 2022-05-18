@@ -13,9 +13,9 @@ public class LottoVendingMachine {
         this.strategy = new RandomLottoNumbersGenerateStrategy();
     }
 
-    public PurchasedLottoTickets purchase(Money money) {
-        int quantity = money.calculatePurchasableCount();
-        return generateLottoTickets(quantity);
+    public PurchasedLottoTickets purchase(InputLottoInformation lottoInformation) {
+        PurchasedLottoTickets autoLottoTickets = generateLottoTickets(lottoInformation.autoLottoCount());
+        return autoLottoTickets.merge(lottoInformation.getManualLottoNumbersList());
     }
 
     private PurchasedLottoTickets generateLottoTickets(int quantity) {

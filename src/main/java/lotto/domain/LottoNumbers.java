@@ -13,17 +13,21 @@ public class LottoNumbers {
     public static final String NUMBERS_DELIMITER = ",";
     private static final String NUMBERS_PREFIX = "[";
     private static final String NUMBERS_SUFFIX = "]";
-    private static final int MAX_LOTTO_NUMBER_SIZE = 6;
+    public static final int MAX_LOTTO_NUMBER_SIZE = 6;
 
-    private static final String LOTTO_NUMBERS_SIZE_ERROR =
-            String.format("[ERROR] 로또는 %s개의 숫자야 합니다.", MAX_LOTTO_NUMBER_SIZE);
+    public static final String LOTTO_NUMBERS_SIZE_ERROR =
+            String.format("[ERROR] 로또는 %s개의 중복 되지 않은 숫자야 합니다.", MAX_LOTTO_NUMBER_SIZE);
     private static final String LOTTO_NUMBERS_DUPLICATION_ERROR = "[ERROR] 중복된 숫자는 불가 합니다.";
 
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
-    private LottoNumbers(List<LottoNumber> numbers) {
+    private LottoNumbers(Set<LottoNumber> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
+    }
+
+    private LottoNumbers(List<LottoNumber> numbers) {
+        this(new HashSet<>(numbers));
     }
 
     public static LottoNumbers from(LottoNumbersGenerateStrategy strategy) {
@@ -34,21 +38,13 @@ public class LottoNumbers {
         return new LottoNumbers(convertToLottoNumber(numbers));
     }
 
-    private void validateNumbers(List<LottoNumber> numbers) {
-        validateSize(numbers);
-        validateDuplication(numbers);
+    public static LottoNumbers from(Set<LottoNumber> numbers) {
+        return new LottoNumbers(numbers);
     }
 
-    private void validateSize(List<LottoNumber> numbers) {
+    private void validateNumbers(Set<LottoNumber> numbers) {
         if (numbers.size() != MAX_LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_SIZE_ERROR);
-        }
-    }
-
-    private void validateDuplication(List<LottoNumber> numbers) {
-        Set<LottoNumber> numbersSet = new HashSet<>(numbers);
-        if (numbersSet.size() != MAX_LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(LOTTO_NUMBERS_DUPLICATION_ERROR);
         }
     }
 
@@ -69,8 +65,8 @@ public class LottoNumbers {
         return numbers.contains(bonusNumber);
     }
 
-    public List<LottoNumber> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public Set<LottoNumber> getNumbers() {
+        return Collections.unmodifiableSet(numbers);
     }
 
     @Override

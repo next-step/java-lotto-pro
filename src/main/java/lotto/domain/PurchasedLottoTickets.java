@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.enums.LottoRank;
@@ -21,9 +22,16 @@ public class PurchasedLottoTickets {
 
     public LottoWinningResults checkWinningLotto(WinningLotto winningLotto) {
         List<LottoRank> ranks = lottoNumbers.stream().
-                map(ln -> winningLotto.match(ln)).
+                map(winningLotto::match).
                 collect(Collectors.toList());
         return LottoWinningResults.from(ranks);
+    }
+
+    public PurchasedLottoTickets merge(List<LottoNumbers> manualLottoNumbersList) {
+        List<LottoNumbers> mergedList = new ArrayList<>();
+        mergedList.addAll(manualLottoNumbersList);
+        mergedList.addAll(this.lottoNumbers);
+        return PurchasedLottoTickets.from(mergedList);
     }
 
     @Override

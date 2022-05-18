@@ -2,11 +2,11 @@ package lotto.view;
 
 import java.util.Map;
 import lotto.controller.dto.LottoResultDTO;
+import lotto.domain.InputLottoInformation;
 import lotto.enums.LottoRank;
 
 public class OutputView {
 
-    private static final String PURCHASED_TICKETS_NUMBER = "%s개를 구매했습니다.";
     private static final String RESULT_PRIZED_RATE = "당첨 통계";
     private static final String LINE_STRING = "---------";
     private static final String TOTAL_WINNING_COUNT = "%s개 일치 (%s원)- %s개";
@@ -14,12 +14,14 @@ public class OutputView {
     private static final String TOTAL_PROFIT_RATE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
     private static final String BENEFIT = "이익이";
     private static final String LOSS = "손해";
+    private static final String MANUAL_AUTO_LOTTO_QUANTITY = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
+
 
 
     private static final int BENEFIT_STANDARD = 1;
 
-    public static void printPurchasedTicketsCount(int ticketCount) {
-        System.out.printf(PURCHASED_TICKETS_NUMBER, ticketCount);
+    public static void printPurchasedTicketsCount(InputLottoInformation inputLottoInformation) {
+        System.out.printf(MANUAL_AUTO_LOTTO_QUANTITY, inputLottoInformation.manualLottoCount(), inputLottoInformation.autoLottoCount());
         System.out.println();
     }
 
