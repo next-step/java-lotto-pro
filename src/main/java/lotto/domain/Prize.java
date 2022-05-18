@@ -14,27 +14,27 @@ public enum Prize {
     private final long prize;
     private final int count;
 
-    public long getPrize() {
-        return prize;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
     Prize(final int count, final long prize) {
         this.count = count;
         this.prize = prize;
     }
 
-    public static List<Prize> matchLotto(final List<Lotto> lottoes, final Lotto answer) {
-        return lottoes.stream()
+    public static Winners matchLotto(final List<Lotto> lottoes, final Lotto answer) {
+        return new Winners(lottoes.stream()
                 .map(v -> v.matchCount(answer))
                 .map(Prize::createPrize)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     private static Prize createPrize(final long count) {
         return prizes[Long.valueOf(count).intValue()];
+    }
+
+    public long calculatePrize(final long count) {
+        return prize * count;
+    }
+
+    public void print(final long count) {
+        System.out.println(this.count + "개 일치 (" + this.prize + ")- " + count + "개");
     }
 }
