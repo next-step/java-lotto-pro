@@ -7,7 +7,7 @@ import lotto.type.LottoRank;
 
 public class LottoResult {
 
-    private Map<LottoRank, Integer> lottoResultMap;
+    private final Map<LottoRank, Integer> lottoResultMap;
     private final double winningRate;
 
     public LottoResult(Map<LottoRank, Integer> lottoResultMap, Money purchasedMoney) {

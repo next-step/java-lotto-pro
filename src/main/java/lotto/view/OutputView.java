@@ -12,8 +12,19 @@ public class OutputView {
     private OutputView() {
     }
 
+    public static void OutputExceptionMessage(Exception exception) {
+        String message = exception.getMessage();
+        if (exception instanceof NumberFormatException) {
+            message = "숫자를 입력해주세요.";
+        }
+
+        System.out.println(message);
+    }
+
     public static void OutputPurchaseResult(PurchaseLotto purchaseLotto) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", purchaseLotto.manualLottoCount(), purchaseLotto.autoLottoCount());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+            purchaseLotto.manualLottoCount(),
+            purchaseLotto.autoLottoCount());
 
         for (Lotto lotto : purchaseLotto.concatLottoList()) {
             System.out.println(lotto.toString());
@@ -35,7 +46,7 @@ public class OutputView {
                     entrySet.getKey().getCorrectCount(),
                     entrySet.getKey().getWinningPrice(),
                     entrySet.getValue());
-        });
+            });
     }
 
 }

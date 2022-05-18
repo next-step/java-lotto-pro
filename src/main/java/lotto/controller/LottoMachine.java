@@ -16,15 +16,39 @@ import lotto.view.OutputView;
 public class LottoMachine {
 
     public void start() {
-        Money purchasedMoney = new Money(InputView.inputPurchasedMoney());
+        Money purchasedMoney = inputPurchasePrice();
 
-        String inputPurchaseManualCount = InputView.inputPurchaseManualCount();
-        PurchaseManualCount purchaseManualCount = new PurchaseManualCount(inputPurchaseManualCount, purchasedMoney);
+        PurchaseManualCount purchaseManualCount = inputPurchaseManualCount(purchasedMoney);
 
         PurchaseLotto purchaseLotto = purchaseLotto(purchasedMoney, purchaseManualCount);
 
         WinningLotto winningLotto = inputWinningLotto();
         outputResult(purchasedMoney, purchaseLotto, winningLotto);
+    }
+
+    private PurchaseManualCount inputPurchaseManualCount(Money purchasedMoney) {
+        PurchaseManualCount purchaseManualCount;
+        try {
+            String inputPurchaseManualCount = InputView.inputPurchaseManualCount();
+            purchaseManualCount = new PurchaseManualCount(inputPurchaseManualCount, purchasedMoney);
+        } catch (IllegalArgumentException exception) {
+            OutputView.OutputExceptionMessage(exception);
+            inputPurchaseManualCount(purchasedMoney);
+            return null;
+        }
+        return purchaseManualCount;
+    }
+
+    private Money inputPurchasePrice() {
+        Money purchasedMoney;
+        try {
+            purchasedMoney = new Money(InputView.inputPurchasedMoney());
+        } catch (IllegalArgumentException exception) {
+            OutputView.OutputExceptionMessage(exception);
+            inputPurchasePrice();
+            return null;
+        }
+        return purchasedMoney;
     }
 
     private PurchaseLotto purchaseLotto(Money purchasedMoney, PurchaseManualCount purchaseManualCount) {
@@ -40,17 +64,32 @@ public class LottoMachine {
     private List<Lotto> inputPurchaseManualLotto(PurchaseManualCount purchaseManualCount) {
         List<Lotto> lottoList = new ArrayList<>();
 
-        InputView.inputPurchaseManualLotto();
-        IntStream.rangeClosed(1, purchaseManualCount.getPurchaseManualCount())
-            .forEach(value -> lottoList.add(Lotto.of(inputLottoNumberArr(InputView.inputEmptyAsk()))));
+        try {
+            InputView.inputPurchaseManualLotto();
+            IntStream.rangeClosed(1, purchaseManualCount.getPurchaseManualCount())
+                .forEach(value -> lottoList.add(Lotto.of(inputLottoNumberArr(InputView.inputEmptyAsk()))));
+        } catch (IllegalArgumentException exception) {
+            OutputView.OutputExceptionMessage(exception);
+            inputPurchaseManualLotto(purchaseManualCount);
+            return null;
+        }
 
         return lottoList;
     }
 
     private WinningLotto inputWinningLotto() {
-        String[] lottoNumberArr = inputLottoNumberArr(InputView.inputWinningNumber());
-        String inputBonusNumber = InputView.inputBonusNumber();
-        return new WinningLotto(lottoNumberArr, inputBonusNumber);
+        WinningLotto winningLotto;
+        try {
+            String[] lottoNumberArr = inputLottoNumberArr(InputView.inputWinningNumber());
+            String inputBonusNumber = InputView.inputBonusNumber();
+            winningLotto = new WinningLotto(lottoNumberArr, inputBonusNumber);
+        } catch (IllegalArgumentException exception) {
+            OutputView.OutputExceptionMessage(exception);
+            inputWinningLotto();
+            return null;
+        }
+
+        return winningLotto;
     }
 
     private void outputResult(Money purchasedMoney, PurchaseLotto purchaseLotto, WinningLotto winningLotto) {
@@ -58,7 +97,7 @@ public class LottoMachine {
         OutputView.OutputLottoResult(lottoResult);
     }
 
-    private String[] inputLottoNumberArr(String inputLottoNumbers) {
+    private String[] inputLottoNumberArr(String inputLottoNumbers) {;
         return inputLottoNumbers.replace(" ", "").split(",");
     }
 
