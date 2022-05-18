@@ -5,6 +5,10 @@ public class WinningLotto {
     private final Lotto lotto;
     private final Number bonusNo;
 
+    public WinningLotto(String inputs, String bonusNo) {
+        this(new Lotto(new InputNumberGenerator(inputs)), new Number(bonusNo));
+    }
+
     public WinningLotto(Lotto lotto, Number bonusNo) {
         if (lotto.contains(bonusNo)) {
             throw new IllegalArgumentException("이미 존재하는 번호 입니다.");
