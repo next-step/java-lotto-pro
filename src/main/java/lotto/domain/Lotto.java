@@ -19,9 +19,14 @@ public class Lotto {
     }
 
     public static List<LottoNumbers> generateLottoGame(int gameCount) {
-        List<LottoNumbers> purchasedLotto = new ArrayList<>();
+        return generateLottoGame(gameCount, new ArrayList<>());
+    }
 
-        for (int i = 0; i < gameCount; i++) {
+    public static List<LottoNumbers> generateLottoGame(int gameCount, List<LottoNumbers> passiveLottoNumbers) {
+        List<LottoNumbers> purchasedLotto = new ArrayList<>(passiveLottoNumbers);
+        int lottoGameCount = gameCount - purchasedLotto.size();
+
+        for (int i = 0; i < lottoGameCount; i++) {
             LottoNumbers lottoNumbers = new LottoNumbers(LOTTO_RANDOM_NUMBERS.generate());
             purchasedLotto.add(lottoNumbers);
         }

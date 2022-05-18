@@ -5,34 +5,31 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static lotto.common.Messages.LOTTO_NUMBERS_SEPARATOR;
 import static lotto.common.Messages.LOTTO_NUMBERS_SIZE;
+import static lotto.domain.LottoPassive.splitPassiveNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-class LottoWiningNumbersTest {
+class LottoPassiveTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,6"})
-    void 지난주_당첨_번호_입력(String string) {
-        LottoWiningNumbers lottoWiningNumbers = new LottoWiningNumbers(string);
-
-        LottoNumbers generate = lottoWiningNumbers.generate();
-
-        assertThat(generate.getLottoNumbers()).size().isEqualTo(6);
+    void 수동_로또_번호_정상_입력_검증(String string) {
+        assertThat(splitPassiveNumber(string).length).isEqualTo(6);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"12345"})
-    void 지난주_당첨_번호_입력시_구분자_오류(String string) {
+    @ValueSource(strings = {"123456"})
+    void 수동_로또_번호_구분자_검증(String string) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoWiningNumbers(string))
+                .isThrownBy(() -> splitPassiveNumber(string))
                 .withMessageContaining(LOTTO_NUMBERS_SEPARATOR);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4"})
-    void 지난주_당첨_번호_입력시_당첨_번호_개수_오류(String string) {
+    @ValueSource(strings = {"1,2,3,4,5"})
+    void 수동_로또_번호_개수_검증(String string) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoWiningNumbers(string))
+                .isThrownBy(() -> splitPassiveNumber(string))
                 .withMessageContaining(LOTTO_NUMBERS_SIZE);
     }
 }

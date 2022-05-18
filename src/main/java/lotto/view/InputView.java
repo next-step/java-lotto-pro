@@ -21,4 +21,14 @@ public class InputView {
         System.out.println(BONUS_BALL_NUMBER);
         return scanner.nextLine();
     }
+
+    public static String passiveCountString() {
+        System.out.println(PASSIVE_BALL_NUMBER_COUNT);
+        return scanner.nextLine();
+    }
+
+    public static String inputPassiveNumbersString() {
+        System.out.println(PASSIVE_BALL_NUMBERS);
+        return scanner.nextLine();
+    }
 }

@@ -38,14 +38,34 @@ class LottoTest {
                 .withMessageContaining(LOTTO_MINIMUM_PRICE);
     }
 
-
     @Test
-    void 로또_게임_생성() {
+    void 로또_전부_자동_게임_생성() {
         // given()
         List<LottoNumbers> lottoNumbers = generateLottoGame(5);
 
         // when
         assertThat(lottoNumbers).size().isEqualTo(5);
+    }
+
+    @Test
+    void 로또_수동_게임_생성() {
+        // given
+        LottoNumbers passiveLottoNumbers = new LottoNumbers(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        ));
+        List<LottoNumbers> passiveLotto = new ArrayList<>();
+        passiveLotto.add(passiveLottoNumbers);
+
+        // when
+        List<LottoNumbers> lottoNumbers = generateLottoGame(4, passiveLotto);
+
+        // when
+        assertThat(lottoNumbers).size().isEqualTo(4);
     }
 
     @Test
