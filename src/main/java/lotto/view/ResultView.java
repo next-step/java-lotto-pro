@@ -69,8 +69,9 @@ public class ResultView {
     }
 
     private static double calculateProfitRate(List<Rank> matchResults, Money money) {
-        int totalWinningPrize = matchResults.stream()
-                .mapToInt(Rank::getWinningPrize).sum();
+        long totalWinningPrize = matchResults.stream()
+                .mapToLong(Rank::getWinningPrize)
+                .sum();
         return (totalWinningPrize * 1.0) / (money.getMoney() * 1.0);
     }
 }
