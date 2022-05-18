@@ -7,8 +7,12 @@ import java.util.Objects;
 
 public class PayAmount {
 
-    public final static int MIN_PAY_AMOUNT = 1_000;
+    private final static int MIN_PAY_AMOUNT = 1_000;
     private final int payAmount;
+
+    public static int calculate(int lottoCount) {
+        return lottoCount * MIN_PAY_AMOUNT;
+    }
 
     public PayAmount(String payAmount) {
         validateNullOrEmpty(payAmount);

@@ -33,7 +33,7 @@ public class LottoResult {
     public double calculateYield(final int lottoCount) {
         validateNatureNumber(lottoCount);
 
-        int payAmount = lottoCount * PayAmount.MIN_PAY_AMOUNT;
+        int payAmount = PayAmount.calculate(lottoCount);
         long totalWinningMoney = calculateTotalWinningMoney();
 
         return Math.floor(((double) totalWinningMoney / payAmount) * 100) / 100.0;
