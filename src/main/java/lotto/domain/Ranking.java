@@ -37,7 +37,7 @@ public enum Ranking implements Comparable<Ranking> {
         return ranking == Ranking.NONE && matchBonus;
     }
 
-    private static Predicate<Ranking> compareCountAndBonus(int count, boolean matchBonus) {
+    public static Predicate<Ranking> compareCountAndBonus(int count, boolean matchBonus) {
         return rank -> rank.matchingCount == count
                 && rank.matchBonus == matchBonus;
     }
