@@ -13,7 +13,7 @@ public enum Ranking {
     FIRST(6, 2_000_000_000);
 
     private final int hitCount;
-    private final int winningMoney;
+    private final long winningMoney;
 
     Ranking(int hitCount, int winningMoney) {
         this.hitCount = hitCount;
@@ -31,7 +31,7 @@ public enum Ranking {
         return hitCount;
     }
 
-    public double getWinningMoney() {
+    public long getWinningMoney() {
         return winningMoney;
     }
 

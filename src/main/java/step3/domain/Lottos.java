@@ -14,7 +14,7 @@ public class Lottos {
         lottos.forEach(lotto -> {
             int matchCount = lotto.match(new WinnerLotto(winnerNumbers));
             Ranking ranking = Ranking.findRanking(matchCount);
-            lottoResult.update(ranking);
+            lottoResult.updateHitRanking(ranking);
         });
         return lottoResult;
     }

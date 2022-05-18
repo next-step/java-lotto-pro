@@ -20,13 +20,13 @@ public class LottoResultTest {
 
     @Test
     void 로또_별_당첨결과_반영() {
-        lottoResult.update(Ranking.THIRD);
+        lottoResult.updateHitRanking(Ranking.THIRD);
         assertThat(lottoResult.rankingCount(Ranking.THIRD)).isEqualTo(1);
     }
 
     @Test
     void 수익률_계산() {
-        lottoResult.update(Ranking.FIFTH);
+        lottoResult.updateHitRanking(Ranking.FIFTH);
         double yield = lottoResult.calculateYield(10_000);
         assertThat(yield).isEqualTo(0.50);
     }
