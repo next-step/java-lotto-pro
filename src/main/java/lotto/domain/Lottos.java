@@ -17,6 +17,10 @@ public class Lottos {
             this.lottos.add(new Lotto(lottoIssuedService.issueLottoNumber()));
     }
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }
