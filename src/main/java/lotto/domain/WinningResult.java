@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningResult {
-    private static final String MESSAGE_MATCHED_COUNT = "%d개 일치";
-    private static final String MESSAGE_MATCHED_BONUS_NUBMER = ", 보너스 볼 일치";
-    private static final String MESSAGE_MATCHED_RANK_COUNT = "(%d원)- %d개\n";
     private static final String TEXT_PROFIT = "이득이";
     private static final String TEXT_PRINCIPAL = "본전이";
     private static final String TEXT_LOSS = "손해";
@@ -49,23 +46,5 @@ public class WinningResult {
             return TEXT_LOSS;
         }
         return TEXT_PRINCIPAL;
-    }
-
-    private String returnMessageBonusNumber(LottoRank rank) {
-        if (rank == LottoRank.SECOND) {
-            return MESSAGE_MATCHED_BONUS_NUBMER;
-        }
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (LottoRank rank : LottoRank.winningRanks()) {
-            sb.append(String.format(MESSAGE_MATCHED_COUNT, rank.getMatchCount()));
-            sb.append(returnMessageBonusNumber(rank));
-            sb.append(String.format(MESSAGE_MATCHED_RANK_COUNT, rank.getPrizeMoney(), countRank(rank)));
-        }
-        return sb.toString();
     }
 }
