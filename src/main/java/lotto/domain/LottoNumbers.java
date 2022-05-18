@@ -25,6 +25,10 @@ public class LottoNumbers {
         return matches < 3 ? 0 : matches;
     }
 
+    public boolean matchesBonusBall(final BonusBall bonusBall) {
+        return numbers.contains(bonusBall.getNumber());
+    }
+
     public void print() {
         System.out.println(numbers);
     }
