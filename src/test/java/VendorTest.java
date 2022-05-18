@@ -2,8 +2,6 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -11,11 +9,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class VendorTest {
     @Test
     void 다른_로또가_있으면_총_가격에_포함하여_구매할_수_있다() {
-        List<String> stringList = new ArrayList<>();
-        stringList.add("1, 2, 3, 4, 5, 6");
-        Lotto manualLotto = new ManualLotto(stringList, Application.NUMBER_DELEMETER);
+        Lotto manual = new Lotto();
+        manual.add(new LottoNumbers("1, 2, 3, 4, 5, 6", Application.NUMBER_DELEMETER));
+        Lotto lotto = new Vendor().buy(Vendor.LOTTO_PRICE, manual);
 
-        Lotto lotto = new Vendor().buy(Vendor.LOTTO_PRICE, manualLotto);
         assertThat(lotto).isInstanceOf(Lotto.class);
         assertThat(lotto).contains(
                 new LottoNumbers(
