@@ -10,6 +10,7 @@ import lotto.utils.ListUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class LottoController {
@@ -46,7 +47,7 @@ public class LottoController {
         String lastWeekLottoNumberText = InputView.inputLastWeekWinningNumber();
         List<Integer> lastWeekLottoNumbers = ListUtil.stringToArrayInteger(lastWeekLottoNumberText, LOTTO_NUMBER_TEXT_SPLIT_VALUE);
 
-        return new Lotto(lastWeekLottoNumbers);
+        return new Lotto(new HashSet<>(lastWeekLottoNumbers));
     }
 
     private LottoResult lottoResult(Lottos lottos, Lotto lastWeekLotto) {

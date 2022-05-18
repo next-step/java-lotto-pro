@@ -2,8 +2,7 @@ package lotto.service;
 
 import lotto.domain.LottoNumber;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoAutoIssuedServiceImpl implements LottoIssuedService{
     private final static int LOTTO_NUMBER_SIZE_VALUE = 6;
@@ -17,10 +16,10 @@ public class LottoAutoIssuedServiceImpl implements LottoIssuedService{
     }
 
     @Override
-    public List<Integer> issueLottoNumber() {
-        List<Integer> lottoTargetNumbers = new LottoNumber().getNumbers();
+    public Set<Integer> issueLottoNumber() {
+        List<Integer> lottoTargetNumbers = new ArrayList<>(LottoNumber.numbers);
         shuffleNumbers(lottoTargetNumbers);
 
-        return divideNumberList(lottoTargetNumbers);
+        return new HashSet<>(divideNumberList(lottoTargetNumbers));
     }
 }
