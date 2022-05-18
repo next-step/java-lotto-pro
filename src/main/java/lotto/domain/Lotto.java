@@ -25,6 +25,7 @@ public class Lotto {
         if (lotto.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBER_MUST_SIX);
         }
+    }
 
     public static Lotto create(List<Integer> numbers) {
         return new Lotto(numbers);
