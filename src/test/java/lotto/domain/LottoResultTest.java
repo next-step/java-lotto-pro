@@ -1,16 +1,10 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.LottoConstant.LOTTO_MINIMUM_MATCHING_COUNT;
-import static lotto.domain.LottoConstant.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {

@@ -2,11 +2,22 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static lotto.domain.LottoConstant.LOTTO_PRICE;
+import static lotto.domain.LottoConstant.*;
 
 public class LottoMachine {
+    private static final List<LottoNo> lottoNumbers = new ArrayList<>();
+
+    static {
+        for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
+            lottoNumbers.add(new LottoNo(number));
+        }
+    }
+
     private long money;
 
     public LottoMachine(String input) {
@@ -23,6 +34,23 @@ public class LottoMachine {
 
     public LottoMachine(long input) {
         this(String.valueOf(input));
+    }
+
+    public PurchasedLotto purchaseLotto() {
+        long lottoQuantity = calculatePurchaseLottos();
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < lottoQuantity; i++) {
+            lottoList.add(generateLotto());
+        }
+        return new PurchasedLotto(lottoList);
+    }
+
+    private Lotto generateLotto() {
+        Collections.shuffle(lottoNumbers);
+        List<LottoNo> lottoNoList = lottoNumbers.stream()
+                .limit(LottoConstant.LOTTO_SIZE)
+                .collect(Collectors.toList());
+        return new Lotto(lottoNoList);
     }
 
     public static BigDecimal calculateWinningMoney(LottoResult lottoResult) {

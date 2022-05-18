@@ -5,12 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.LottoConstant.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGameTest {
@@ -19,15 +17,6 @@ class LottoGameTest {
     @BeforeEach
     public void beforeEach() {
         game = new LottoGame();
-    }
-
-    @ParameterizedTest
-    @ValueSource(longs = {LOTTO_PRICE, 100 * LOTTO_PRICE, 1000 * LOTTO_PRICE})
-    public void 로또_구매하기(long price) {
-        LottoMachine lottoMachine = new LottoMachine(price);
-        PurchasedLotto lottos = game.purchaseLotto(lottoMachine);
-
-        assertThat(lottos.getLottoList()).hasSize((int) price / LOTTO_PRICE);
     }
 
     @ParameterizedTest

@@ -10,8 +10,8 @@ import java.util.List;
 class OutputViewTest {
     @Test
     public void 구매_로또_출력하기() {
-        LottoGame game = new LottoGame();
-        PurchasedLotto lottos = game.purchaseLotto(new LottoMachine(5000));
+        LottoMachine machine = new LottoMachine(5000);
+        PurchasedLotto lottos = machine.purchaseLotto();
         OutputView.printMyLotto(lottos);
     }
 

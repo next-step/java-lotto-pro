@@ -14,6 +14,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoMachineTest {
+
+    @ParameterizedTest
+    @ValueSource(longs = {LOTTO_PRICE, 100 * LOTTO_PRICE, 1000 * LOTTO_PRICE})
+    public void 로또_구매하기(long price) {
+        LottoMachine lottoMachine = new LottoMachine(price);
+        PurchasedLotto lottos = lottoMachine.purchaseLotto();
+
+        assertThat(lottos.getLottoList()).hasSize((int) price / LOTTO_PRICE);
+    }
+
     @ParameterizedTest
     @ValueSource(longs = { LOTTO_PRICE, 2 * LOTTO_PRICE, 100 * LOTTO_PRICE })
     void 구매_가능한_로또_개수(long price) {
