@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
+import static lotto.constants.ExceptionConstants.*;
+
 public class LottoNumber {
     private static final LottoNumber[] LOTTO_NUMBER;
     private static final int BEGIN_NUMBER = 1;
@@ -28,7 +30,7 @@ public class LottoNumber {
 
     private static void validate(int inputNumber) {
         if (inputNumber < BEGIN_NUMBER || inputNumber >= END_NUMBER) {
-            throw new IllegalArgumentException("범위 값오류");
+            throw new IllegalArgumentException(LOTTO_RANGE_EXCEPTION);
         }
     }
 

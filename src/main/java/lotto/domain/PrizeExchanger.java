@@ -3,6 +3,7 @@ package lotto.domain;
 public class PrizeExchanger {
     private static final PrizeExchanger INSTANCE = new PrizeExchanger();
     private static final Prize[] RANK = {Prize.FOURTH_PLACE, Prize.THIRD_PLACE, Prize.SECOND_PLACE, Prize.FIRST_PLACE};
+    private static final int ZERO = 0;
 
     private PrizeExchanger() {
     }
@@ -12,14 +13,12 @@ public class PrizeExchanger {
     }
 
     public long exchange(final Winners winners) {
-        long totalPrize = 0;
+        long totalPrize = ZERO;
         for (Prize rank : RANK) {
             long count = winners.countEachPrize(rank);
-            long prize = rank.calculatePrize(count);
-            totalPrize += prize;
-            rank.print(count);
+            rank.printMatch(count);
+            totalPrize += rank.calculatePrize(count);
         }
         return totalPrize;
     }
-
 }

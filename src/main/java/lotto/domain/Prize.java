@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.ResultView;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,10 +14,10 @@ public enum Prize {
 
     private static final Prize[] prizes = {FAIL, FAIL, FAIL, FOURTH_PLACE, THIRD_PLACE, SECOND_PLACE, FIRST_PLACE};
     private final long prize;
-    private final int count;
+    private final int matchCount;
 
-    Prize(final int count, final long prize) {
-        this.count = count;
+    Prize(final int matchCount, final long prize) {
+        this.matchCount = matchCount;
         this.prize = prize;
     }
 
@@ -34,7 +36,7 @@ public enum Prize {
         return prize * count;
     }
 
-    public void print(final long count) {
-        System.out.println(this.count + "개 일치 (" + this.prize + ")- " + count + "개");
+    public void printMatch(final long count) {
+        ResultView.resultLotto(matchCount, prize, count);
     }
 }

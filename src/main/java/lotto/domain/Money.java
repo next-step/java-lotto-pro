@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.constants.ExceptionConstants.*;
+
 public class Money {
     private static final int ZERO = 0;
     private final long money;
@@ -15,7 +17,7 @@ public class Money {
 
     private void validate(final long money) {
         if (money < ZERO) {
-            throw new IllegalArgumentException("마이너스 금액은 입력이 불가능 합니다.");
+            throw new IllegalArgumentException(LOTTO_MONEY_LEAK_EXCEPTION);
         }
     }
 }

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.ResultView;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -23,9 +25,12 @@ public class LottoMachine {
         return (int) (money.getMoney() / PRICE);
     }
 
-    public static List<Lotto> generateAuto(final int count) {
+    private static List<Lotto> generateAuto(final int count) {
+        ResultView.resultBuyCount(count);
         return IntStream.range(ZERO, count)
                 .mapToObj(i -> Lotto.auto())
                 .collect(Collectors.toList());
     }
+
+
 }
