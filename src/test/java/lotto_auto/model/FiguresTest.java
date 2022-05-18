@@ -21,7 +21,7 @@ public class FiguresTest {
                 .collect(Collectors.toList()));
 
         Lottos lottos = new Lottos(Arrays.asList(new Lotto(lottoNumbers)));
-        WinningLotto winning = new WinningLotto(lottoNumbers, new LottoNumber(7));
+        WinningLotto winning = new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(7));
         figures = new Figures(lottos, winning);
     }
     @Test

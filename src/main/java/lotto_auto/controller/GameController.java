@@ -61,7 +61,7 @@ public class GameController {
             bonusBall = getBonusLottoNumber();
             isValid = isValidWinningLotto(lottoNumbers, bonusBall);
         }while (!isValid);
-        return new WinningLotto(lottoNumbers, bonusBall);
+        return new WinningLotto(new Lotto(lottoNumbers), bonusBall);
     }
 
     private LottoNumbers getValidLottoNumber() {
@@ -80,7 +80,7 @@ public class GameController {
 
     private boolean isValidWinningLotto(LottoNumbers lottoNumbers, LottoNumber bonusBall) {
         try {
-            new WinningLotto(lottoNumbers, bonusBall);
+            new WinningLotto(new Lotto(lottoNumbers), bonusBall);
             return true;
         } catch (IllegalArgumentException e) {
             output.showError(e);
@@ -104,8 +104,7 @@ public class GameController {
 
     private Optional<LottoNumbers> getLottoNumbersByUserString(String lottoString) {
         try {
-            List<LottoNumber> numbers = getLottoNumberListByStr(lottoString);
-            return Optional.of(new LottoNumbers(numbers));
+            return Optional.of(getLottoNumberListByStr(lottoString));
         } catch (IllegalArgumentException e) {
             output.showError(e);
             return Optional.empty();
@@ -127,13 +126,13 @@ public class GameController {
         }
     }
 
-    private List<LottoNumber> getLottoNumberListByStr(String lottoStr) {
+    private LottoNumbers getLottoNumberListByStr(String lottoStr) {
         try {
             String delimiter = ", ";
-            return Arrays.stream(lottoStr.split(delimiter))
+            return new LottoNumbers(Arrays.stream(lottoStr.split(delimiter))
                     .map(Integer::parseInt)
                     .map(LottoNumber::new)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toList()));
         } catch (NumberFormatException e) {
             IllegalArgumentException error = new IllegalArgumentException(LottoNumber.NOT_NUMBER);
             output.showError(error);

@@ -23,7 +23,7 @@ public class WinningLottoTest {
     @Test
     void 보너스볼_중복_넘버_테스트() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningLotto(lottoNumbers, new LottoNumber(1)))
+                .isThrownBy(() -> new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(1)))
                 .withMessage(LottoNumbers.EXIST_DUPLICATE_VALUE);
     }
 }
