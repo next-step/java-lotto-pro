@@ -1,8 +1,8 @@
 package lotto.interfaces.controller;
 
 import lotto.application.service.LottoService;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
-import lotto.domain.LottoWinningResult;
 import lotto.dto.LottoRequest;
 import lotto.dto.LottoResponse;
 import lotto.view.InputView;
@@ -39,7 +39,7 @@ public class LottoController {
     private void confirmWinningLottoTicket(final LottoTickets lottoTickets) {
         LottoRequest.ResultRequest resultRequest = inputView.inputWinningNumbers();
 
-        LottoWinningResult lottoWinningResult = lottoService.getRankCount(resultRequest.getWinningNumbers(), lottoTickets);
+        LottoResult lottoWinningResult = lottoService.getRankCount(resultRequest.getWinningNumbers(), lottoTickets);
 
         resultView.outPutLottoResult(
                 new LottoResponse.LottoConfirmResult(lottoWinningResult.getRankCounter(), lottoWinningResult.calculateYield(lottoTickets.getLottoTicketsCount())));

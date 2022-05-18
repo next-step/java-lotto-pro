@@ -10,13 +10,13 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoWinningResultTest {
+class LottoResultTest {
 
-    private LottoWinningResult lottoWinningResult;
+    private LottoResult lottoResult;
 
     @BeforeEach
     public void beforeEach() {
-        lottoWinningResult = new LottoWinningResult();
+        lottoResult = new LottoResult();
     }
 
     @Test
@@ -25,7 +25,7 @@ class LottoWinningResultTest {
         LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThatThrownBy(() -> {
-            lottoWinningResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
+            lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
         })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(LottoWinningResultErrorCode.NOW_ALLOW_NULL.getMessage());
@@ -37,7 +37,7 @@ class LottoWinningResultTest {
         LottoTicket purchasedLottoTicket = null;
 
         assertThatThrownBy(() -> {
-            lottoWinningResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
+            lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
         })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(LottoWinningResultErrorCode.NOW_ALLOW_NULL.getMessage());
@@ -48,8 +48,8 @@ class LottoWinningResultTest {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6"));
         LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(1, 12, 13, 14, 15, 16));
 
-        lottoWinningResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
-        Map<LottoRank, Integer> countByRank = lottoWinningResult.getRankCounter();
+        lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
+        Map<LottoRank, Integer> countByRank = lottoResult.getRankCounter();
 
         countByRank.entrySet().stream()
                 .filter(e -> e.getValue() != 0)
@@ -61,9 +61,9 @@ class LottoWinningResultTest {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6"));
         LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 14, 15, 16));
 
-        lottoWinningResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
+        lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
 
-        assertThat(lottoWinningResult.calculateYield(14)).isEqualTo(0.35);
+        assertThat(lottoResult.calculateYield(14)).isEqualTo(0.35);
     }
 
     @Test
@@ -71,10 +71,10 @@ class LottoWinningResultTest {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6"));
         LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 14, 15, 16));
 
-        lottoWinningResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
+        lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
 
         assertThatThrownBy(() -> {
-            lottoWinningResult.calculateYield(0);
+            lottoResult.calculateYield(0);
         })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(LottoWinningResultErrorCode.LOTTO_COUNT_ALLOW_BIGGER_THAN_ZERO.getMessage());

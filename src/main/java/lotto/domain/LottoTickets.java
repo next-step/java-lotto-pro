@@ -23,14 +23,14 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public LottoWinningResult compareWinningLottoTicket(WinningLottoTicket winningLottoTicket) {
-        LottoWinningResult lottoWinningResult = new LottoWinningResult();
+    public LottoResult compareWinningLottoTicket(WinningLottoTicket winningLottoTicket) {
+        LottoResult lottoResult = new LottoResult();
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            lottoWinningResult.countLottoRank(winningLottoTicket, lottoTicket);
+            lottoResult.countLottoRank(winningLottoTicket, lottoTicket);
         }
 
-        return lottoWinningResult;
+        return lottoResult;
     }
 
     private void validateNullOrEmpty(List<LottoTicket> lottoTickets) {
