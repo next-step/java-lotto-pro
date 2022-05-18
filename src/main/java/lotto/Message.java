@@ -3,10 +3,12 @@ package lotto;
 public class Message {
 
     public static final String INPUT_PURCHASE_MESSAGE = "구입금액을 입력해 주세요.%n";
+    public static final String INPUT_MANUAL_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.%n";
+    public static final String INPUT_MANUAL_NUMBER_MESSAGE = "%n수동으로 구매할 번호를 입력해 주세요.%n";
     public static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.%n";
     public static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.%n";
 
-    public static final String PURCHASE_LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.%n";
+    public static final String PURCHASE_LOTTO_COUNT_MESSAGE = "%n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
     public static final String PRINT_LOTTO_NUMBERS = "[ %s ]%n";
     public static final String STATISTICS_START_MESSAGE = "%n당첨 통계%n---------%n";
     public static final String WIN_RESULT_SUMMARY_MESSAGE = "%d개 일치 (%s원)- %d개%n";

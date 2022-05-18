@@ -1,5 +1,7 @@
 package lotto;
 
+import static java.lang.Integer.parseInt;
+
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoWinStatistics;
 import lotto.domain.Lottos;
@@ -15,14 +17,16 @@ public class LottoMain {
     }
 
     private static Lottos purchase(final InputView inputView, final ResultView resultView) {
-        final Lottos lottos = LottoMachine.purchase(inputView.inputPurchase());
+        final Lottos lottos = LottoMachine.purchase(inputView.inputPurchase(),
+                inputView.inputManualNumbers(parseInt(inputView.inputManualCount())));
         resultView.purchase(lottos);
         return lottos;
     }
 
     private static void drawingOfLots(final Lottos lottos, final InputView inputView,
                                       final ResultView resultView) {
-        final WinningNumbers winningNumbers = LottoMachine.winningLottoNumbers(inputView.inputDrawingOfLots(), inputView.inputBonusNumber());
+        final WinningNumbers winningNumbers = LottoMachine.winningLottoNumbers(inputView.inputDrawingOfLots(),
+                inputView.inputBonusNumber());
         resultView.drawingOfLots(
                 new LottoWinStatistics(lottos.purchasePrice(), lottos.draw(winningNumbers)));
     }

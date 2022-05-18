@@ -21,7 +21,7 @@ public class ResultView {
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     public void purchase(final Lottos lottos) {
-        System.out.printf(PURCHASE_LOTTO_COUNT_MESSAGE, lottos.size());
+        System.out.printf(PURCHASE_LOTTO_COUNT_MESSAGE, lottos.manualSize(), lottos.autoSize());
         printLottos(lottos);
     }
 
