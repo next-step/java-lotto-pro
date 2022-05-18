@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
@@ -9,16 +10,18 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class GameManager {
-    
+
     public void run() {
         LottoVendingMachine machine = new LottoVendingMachine(new LottoNumbersGeneratorKr());
 
         LottoTicket lottoTicket = machine.sellTicket(money());
         ResultView.printTicket(lottoTicket);
 
+        WinningNumbers winningNumbers = winningNumbers();
+        LottoNumber bonusLottoNumber = bonusLottoNumber(winningNumbers);
         LottoResult result = machine.check(
                 lottoTicket,
-                new LottoWin(winningNumbers()));
+                new LottoWin(winningNumbers));
         ResultView.printStats(result);
     }
 
@@ -51,6 +54,24 @@ public class GameManager {
     private WinningNumbers getWinningNumbers() {
         try {
             return new WinningNumbers(InputView.readWinningNumbers());
+        } catch (IllegalArgumentException e) {
+            ResultView.printExceptionMessage(e.getMessage());
+            return null;
+        }
+    }
+
+    private LottoNumber bonusLottoNumber(WinningNumbers winningNumbers) {
+        LottoNumber bonusLottoNumber = getBonusLottoNumber(winningNumbers);
+        while (bonusLottoNumber == null) {
+            bonusLottoNumber = getBonusLottoNumber(winningNumbers);
+        }
+
+        return bonusLottoNumber;
+    }
+
+    private LottoNumber getBonusLottoNumber(WinningNumbers winningNumbers) {
+        try {
+            return new LottoNumber(InputView.readBonusNumber(), winningNumbers);
         } catch (IllegalArgumentException e) {
             ResultView.printExceptionMessage(e.getMessage());
             return null;
