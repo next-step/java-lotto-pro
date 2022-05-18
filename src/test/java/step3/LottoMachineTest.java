@@ -60,7 +60,7 @@ public class LottoMachineTest {
         lottoTickets.add(new LottoTicket("1,2,3,4,5,6")); //6
         lottoTickets.add(new LottoTicket("1,2,3,4,5,8")); //5
         lottoTickets.add(new LottoTicket("1,2,11,12,13,14")); //MISS
-        lottoTickets.add(new LottoTicket("1,2,3,4,7,8")); //5_bonus
+        lottoTickets.add(new LottoTicket("1,2,3,4,7,5")); //5_bonus
         lottoTickets.add(new LottoTicket("11,12,13,14,15,16")); // MISS
         assertThat(lottoMachine.checkWin(lottoTickets)).containsEntry(LottoReward.MISS, 2).containsEntry(LottoReward.FIVE_BONUS, 1)
             .containsEntry(LottoReward.FIVE, 1).containsEntry(LottoReward.SIX, 1);
