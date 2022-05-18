@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.infrastructure.error.PayAmountErrorCode;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -53,5 +54,20 @@ class PayAmountTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(
                         String.format(PayAmountErrorCode.ALLOW_MIN_PAY_AMOUNT.getMessage(), MIN_PAY_AMOUNT));
+    }
+
+    @Test
+    public void payAmount_최대값() throws Exception {
+        assertThatThrownBy(() -> {
+            new PayAmount(String.valueOf(Long.MAX_VALUE));
+        }).isInstanceOf(NumberFormatException.class);
+    }
+
+    @Test
+    public void calculate() throws Exception {
+        int lottoCount = 1;
+        int payAmount = PayAmount.calculate(new LottoCount(lottoCount));
+
+        Assertions.assertThat(payAmount).isEqualTo(lottoCount * MIN_PAY_AMOUNT);
     }
 }

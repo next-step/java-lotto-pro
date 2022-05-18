@@ -15,8 +15,8 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public int getLottoTicketsCount() {
-        return lottoTickets.size();
+    public LottoCount getLottoTicketsCount() {
+        return new LottoCount(lottoTickets.size());
     }
 
     public List<LottoTicket> getReadOnlyLottoTickets() {

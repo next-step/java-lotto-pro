@@ -19,7 +19,7 @@ public class LottoService {
     public LottoTickets purchaseLottoTicketsByAuto(final String payAmount) {
         PayAmount lottoPayAmount = new PayAmount(payAmount);
 
-        int lottoCount = lottoPayAmount.calculateLottoCount();
+        LottoCount lottoCount = lottoPayAmount.calculateLottoCount();
 
         return createLottoTickets(lottoCount);
     }
@@ -30,10 +30,10 @@ public class LottoService {
         return purchasedLottoTickets.compareWinningLottoTicket(winningLottoTicket);
     }
 
-    private LottoTickets createLottoTickets(int lottoCount) {
+    private LottoTickets createLottoTickets(LottoCount lottoCount) {
         List<LottoTicket> lottoTickets = Stream.generate(lottoNumberGenerator::generate)
                 .map(LottoTicket::new)
-                .limit(lottoCount)
+                .limit(lottoCount.getLottoCount())
                 .collect(Collectors.toList());
 
         return new LottoTickets(lottoTickets);

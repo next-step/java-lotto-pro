@@ -30,9 +30,7 @@ public class LottoResult {
         return Collections.unmodifiableMap(rankCounter);
     }
 
-    public double calculateYield(final int lottoCount) {
-        validateNatureNumber(lottoCount);
-
+    public double calculateYield(final LottoCount lottoCount) {
         int payAmount = PayAmount.calculate(lottoCount);
         long totalWinningMoney = calculateTotalWinningMoney();
 
@@ -61,11 +59,5 @@ public class LottoResult {
 
         int count = rankCounter.get(rank);
         rankCounter.put(rank, count + 1);
-    }
-
-    private void validateNatureNumber(int lottoCount) {
-        if (lottoCount <= 0) {
-            throw new IllegalArgumentException(LottoWinningResultErrorCode.LOTTO_COUNT_ALLOW_BIGGER_THAN_ZERO.getMessage());
-        }
     }
 }

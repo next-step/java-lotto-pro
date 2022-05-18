@@ -15,7 +15,7 @@ public class LottoResponse {
         private final List<LottoResponse.LottoDto> lottoDtos;
 
         public PurchasedLottoResultDto(final LottoTickets lottoTickets) {
-            this.lottoCount = lottoTickets.getLottoTicketsCount();
+            this.lottoCount = lottoTickets.getLottoTicketsCount().getLottoCount();
             this.lottoDtos = convertLottoDtos(lottoTickets.getReadOnlyLottoTickets());
         }
 

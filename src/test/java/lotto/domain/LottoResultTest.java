@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.infrastructure.error.LottoCountErrorCode;
 import lotto.infrastructure.error.LottoWinningResultErrorCode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -63,7 +64,7 @@ class LottoResultTest {
 
         lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
 
-        assertThat(lottoResult.calculateYield(14)).isEqualTo(0.35);
+        assertThat(lottoResult.calculateYield(new LottoCount(14))).isEqualTo(0.35);
     }
 
     @Test
@@ -74,9 +75,9 @@ class LottoResultTest {
         lottoResult.countLottoRank(winningLottoTicket, purchasedLottoTicket);
 
         assertThatThrownBy(() -> {
-            lottoResult.calculateYield(0);
+            lottoResult.calculateYield(new LottoCount(0));
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoWinningResultErrorCode.LOTTO_COUNT_ALLOW_BIGGER_THAN_ZERO.getMessage());
+                .hasMessageContaining(LottoCountErrorCode.NOT_ALLOW_SMALLER_THAN_ONE.getMessage());
     }
 }

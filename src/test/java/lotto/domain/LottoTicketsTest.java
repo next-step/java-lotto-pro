@@ -29,7 +29,7 @@ class LottoTicketsTest {
                 new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)));
 
-        assertThat(new LottoTickets(lottoTickets).getLottoTicketsCount()).isEqualTo(lottoTickets.size());
+        assertThat(new LottoTickets(lottoTickets).getLottoTicketsCount()).isEqualTo(new LottoCount(lottoTickets.size()));
     }
 
     @Test

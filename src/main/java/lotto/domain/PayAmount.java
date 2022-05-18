@@ -10,8 +10,8 @@ public class PayAmount {
     private final static int MIN_PAY_AMOUNT = 1_000;
     private final int payAmount;
 
-    public static int calculate(int lottoCount) {
-        return lottoCount * MIN_PAY_AMOUNT;
+    public static int calculate(LottoCount lottoCount) {
+        return lottoCount.getLottoCount() * MIN_PAY_AMOUNT;
     }
 
     public PayAmount(String payAmount) {
@@ -23,8 +23,9 @@ public class PayAmount {
         validateMinimumPayAmount(this.payAmount);
     }
 
-    public int calculateLottoCount() {
-        return payAmount / MIN_PAY_AMOUNT;
+    public LottoCount calculateLottoCount() {
+        int lottoCount = payAmount / MIN_PAY_AMOUNT;
+        return new LottoCount(lottoCount);
     }
 
     private void validateNullOrEmpty(final String payAmount) {
