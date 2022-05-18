@@ -42,4 +42,17 @@ class LottoTest {
                         winningNumbers(7, 8, 9, 10, 11, 12, 13), LottoWinResult.NO_WIN)
         );
     }
+
+    @Test
+    void 로또_자동_수동_확인() {
+        // given
+        final Lotto auto = Lotto.generate();
+        final Lotto manual = Lotto.generate(lottoNumbers(1, 2, 3, 4, 5, 6));
+
+        // when & then
+        assertThat(auto.isAuto()).isTrue();
+        assertThat(auto.isManual()).isFalse();
+        assertThat(manual.isAuto()).isFalse();
+        assertThat(manual.isManual()).isTrue();
+    }
 }
