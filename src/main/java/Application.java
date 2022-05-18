@@ -53,7 +53,7 @@ public class Application {
     private static <T> T consoleExceptionHandler(Supplier<T> supplier) {
         try {
             return supplier.get();
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             System.out.println("[ERROR] " + e.getMessage());
             return null;
         }
