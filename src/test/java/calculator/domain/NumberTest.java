@@ -4,19 +4,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class NumberTest {
-	@Test
+	@ParameterizedTest
+	@NullAndEmptySource
 	@DisplayName("splitAndSum_null_또는_빈문자")
-	void null_or_empty_parameter_return_0() {
-		Number number1 = new Number(null);
-		Number number2 = new Number("");
+	void null_or_empty_parameter_return_0(String strNumber) {
+		Number number = new Number(strNumber);
 
-		assertThat(number1.isEqualTo(0)).isTrue();
-		assertThat(number2.isEqualTo(0)).isTrue();
+		assertThat(number.equals(new Number(0))).isTrue();
 	}
 
 	@ParameterizedTest
@@ -24,6 +23,6 @@ class NumberTest {
 	@DisplayName("유효하지 않은 숫자 입력")
 	void valid_negative(String number) {
 		assertThatThrownBy(() -> new Number(number))
-			.isInstanceOf(RuntimeException.class);
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 }

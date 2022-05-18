@@ -1,10 +1,12 @@
 package calculator.domain;
 
+import java.util.Objects;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Number {
-	private final static String NUMBER_REGEX = "[0-9]+";
 	private final static String INVALID_NUMBER = "0 이상 숫자만 입력 가능합니다.";
+	private final static Pattern pattern = Pattern.compile("[0-9]+");
 
 	private int number;
 
@@ -26,17 +28,15 @@ public class Number {
 	}
 
 	private static void valid(String number) {
-		if(!Pattern.matches(NUMBER_REGEX, number)) {
-			throw new RuntimeException(INVALID_NUMBER);
+		Matcher matcher = pattern.matcher(number);
+
+		if(!matcher.find()) {
+			throw new IllegalArgumentException(INVALID_NUMBER);
 		}
 	}
 
 	private static boolean isNullOrEmpty(String strNumbers) {
 		return strNumbers == null || strNumbers.isEmpty();
-	}
-
-	public boolean isEqualTo(int number) {
-		return this.number == number;
 	}
 
 	public int getNumber() {
@@ -45,5 +45,20 @@ public class Number {
 
 	public static Number sum(Number a, Number b) {
 		return new Number(a.number + b.number);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Number number1 = (Number)o;
+		return number == number1.number;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(number);
 	}
 }
