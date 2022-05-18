@@ -18,6 +18,12 @@ public class WinningLotto {
         return lotto.contains(number);
     }
 
+    public int countOfMatchNumber(Lotto userLotto) {
+        return (int) userLotto.getNumbers().stream()
+                .filter(this.lotto::contains)
+                .count();
+    }
+
     public boolean containsBonusNumber(Lotto userLotto) {
         return userLotto.contains(bonusNo);
     }

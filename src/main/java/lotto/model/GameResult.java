@@ -10,10 +10,7 @@ public class GameResult {
     private final List<Rank> gameResult = new ArrayList<>();
 
     public void calculateRank(WinningLotto winningLotto, Lotto userLotto) {
-        int countOfMatch = (int) userLotto.getNumbers().stream()
-                .filter(winningLotto::contains)
-                .count();
-
+        int countOfMatch = winningLotto.countOfMatchNumber(userLotto);
         boolean matchBonus = winningLotto.containsBonusNumber(userLotto);
 
         gameResult.add(Rank.getRank(countOfMatch, matchBonus));
