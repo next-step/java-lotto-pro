@@ -12,7 +12,7 @@ public class LottoNumberPool {
     public LottoNumberPool() {
         numberList = new ArrayList<>();
 
-        for (int number = LottoConstants.MIN_LOTTO_NUMBER; number <= LottoConstants.MAX_LOTTO_NUMBER; number++) {
+        for (int number = LottoNumber.MIN_LOTTO_NUMBER; number <= LottoNumber.MAX_LOTTO_NUMBER; number++) {
             numberList.add(new LottoNumber(number));
         }
     }

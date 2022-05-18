@@ -1,11 +1,13 @@
 package lotto.domain;
 
 import java.util.Objects;
-import lotto.constants.LottoConstants;
 
 public class LottoNumber {
 
     private static final String ERROR_MESSAGE_NUMBER_OUT_OF_RANGE = "[ERROR] This number is out of range.";
+
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
 
     private final int number;
 
@@ -20,7 +22,7 @@ public class LottoNumber {
     }
 
     private void validateNumberRange(final int number) {
-        if (number < LottoConstants.MIN_LOTTO_NUMBER || number > LottoConstants.MAX_LOTTO_NUMBER) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NUMBER_OUT_OF_RANGE);
         }
     }
