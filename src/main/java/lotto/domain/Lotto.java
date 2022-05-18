@@ -5,14 +5,30 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static lotto.constants.ExceptionConstants.*;
 
 public class Lotto {
     private static final int BEGIN_NUMBER = 1;
     private static final int END_NUMBER = 46;
     private static final int LIMIT_LOTTO = 6;
     private static final Lotto INSTANCE = new Lotto();
+    private static final String PRINT_DELIMITER = ",";
+    private static final String PRINT_PREFIX = "[";
+    private static final String PRINT_SUFFIX = "]";
 
     private final List<LottoNumber> lotto;
+
+    public static Lotto ofAnswer(final String lottoNumbers) {
+        return new Lotto(
+                Stream.of(lottoNumbers.split(PRINT_DELIMITER))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList())
+        );
+    }
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
@@ -44,7 +60,7 @@ public class Lotto {
         return lotto.stream()
                 .map(LottoNumber::getLottoNumber)
                 .map(Objects::toString)
-                .collect(Collectors.joining(", ", "[", "]"));
+                .collect(Collectors.joining(PRINT_DELIMITER, PRINT_PREFIX, PRINT_SUFFIX));
     }
 
     public long matchCount(final Lotto answer) {
@@ -64,7 +80,7 @@ public class Lotto {
 
     private void validateLength(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LIMIT_LOTTO) {
-            throw new IllegalArgumentException("6자리의 번호를 입력 해야 합니다.");
+            throw new IllegalArgumentException(LOTTO_LENGTH_EXCEPTION);
         }
     }
 
@@ -72,7 +88,7 @@ public class Lotto {
         long count = lottoNumbers.stream().distinct().count();
 
         if (count != LIMIT_LOTTO) {
-            throw new IllegalArgumentException("중복된 숫자는 입력 불가능 합니다.");
+            throw new IllegalArgumentException(LOTTO_OVERLAP_EXCEPTION);
         }
     }
 
