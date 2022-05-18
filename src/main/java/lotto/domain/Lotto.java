@@ -35,7 +35,7 @@ public class Lotto {
     }
 
     public static Lotto auto() {
-        return new Lotto(new RandomNumbersGenerator().generate(LOTTO_SIZE));
+        return new Lotto(RandomNumbersGenerator.generate(LOTTO_SIZE));
     }
 
     private boolean isUnique(List<Number> numbers) {
