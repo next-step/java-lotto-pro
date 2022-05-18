@@ -25,7 +25,7 @@ public class Lottos {
         Map<Lotto, LottoRank> lottoRankMap = new HashMap<>();
         this.lottos.forEach(
                 lotto -> lottoRankMap.put(
-                        lotto, LottoRank.findLottoRankByMatchedCount(countMatchedNumber(lotto, answerLotto))
+                        lotto, LottoRank.findLottoRankByMatchedCount(countMatchedNumber(lotto, answerLotto), false)
                 )
         );
 
