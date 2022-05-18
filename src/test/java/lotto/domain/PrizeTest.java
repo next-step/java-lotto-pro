@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,51 +21,51 @@ public class PrizeTest {
     }
 
     @Test
-    @DisplayName("1등 당첨금 반환 테스트")
+    @DisplayName("1등 당첨 테스트")
     void get_first_prize_test() {
         Lotto lotto = new Lotto(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3)
                 , LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
-        List<Prize> prizes = Prize.matchLotto(Stream.of(lotto)
+        Winners winners = Prize.matchLotto(Stream.of(lotto)
                 .collect(Collectors.toList()), answerLotto);
 
-        assertThat(prizes.get(0).getPrize()).isEqualTo(2000000000);
+        assertThat(winners.getWinners().get(0)).isEqualTo(Prize.FIRST_PLACE);
     }
 
     @Test
-    @DisplayName("2등 당첨금 반환 테스트")
+    @DisplayName("2등 당첨 테스트")
     void get_second_prize_test() {
         Lotto lotto = new Lotto(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3)
                 , LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(7)));
-        List<Prize> prizes = Prize.matchLotto(Stream.of(lotto)
+        Winners winners = Prize.matchLotto(Stream.of(lotto)
                 .collect(Collectors.toList()), answerLotto);
 
-        assertThat(prizes.get(0).getPrize()).isEqualTo(1500000);
+        assertThat(winners.getWinners().get(0)).isEqualTo(Prize.SECOND_PLACE);
     }
 
     @Test
-    @DisplayName("3등 당첨금 반환 테스트")
+    @DisplayName("3등 당첨 테스트")
     void get_third_prize_test() {
         Lotto lotto = new Lotto(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3)
                 , LottoNumber.of(4), LottoNumber.of(7), LottoNumber.of(8)));
-        List<Prize> prizes = Prize.matchLotto(Stream.of(lotto)
+        Winners winners = Prize.matchLotto(Stream.of(lotto)
                 .collect(Collectors.toList()), answerLotto);
 
-        assertThat(prizes.get(0).getPrize()).isEqualTo(50000);
+        assertThat(winners.getWinners().get(0)).isEqualTo(Prize.THIRD_PLACE);
     }
 
     @Test
-    @DisplayName("4등 당첨금 반환 테스트")
+    @DisplayName("4등 당첨 테스트")
     void get_fourth_prize_test() {
         Lotto lotto = new Lotto(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3)
                 , LottoNumber.of(7), LottoNumber.of(8), LottoNumber.of(9)));
-        List<Prize> prizes = Prize.matchLotto(Stream.of(lotto)
+        Winners winners = Prize.matchLotto(Stream.of(lotto)
                 .collect(Collectors.toList()), answerLotto);
 
-        assertThat(prizes.get(0).getPrize()).isEqualTo(5000);
+        assertThat(winners.getWinners().get(0)).isEqualTo(Prize.FOURTH_PLACE);
     }
 
     @Test
-    @DisplayName("당첨 안됨 테스트")
+    @DisplayName("미 당첨 테스트")
     void get_none_prize_test() {
         Lotto lotto = new Lotto(Arrays.asList(LottoNumber.of(45), LottoNumber.of(44), LottoNumber.of(43)
                 , LottoNumber.of(42), LottoNumber.of(41), LottoNumber.of(40)));
@@ -76,12 +75,12 @@ public class PrizeTest {
                 , LottoNumber.of(42), LottoNumber.of(41), LottoNumber.of(40)));
 
 
-        List<Prize> prizes = Prize.matchLotto(Stream.of(lotto, lotto2, lotto3)
+        Winners winners = Prize.matchLotto(Stream.of(lotto, lotto2, lotto3)
                 .collect(Collectors.toList()), answerLotto);
 
-        assertThat(prizes.get(0).getPrize()).isEqualTo(0);
-        assertThat(prizes.get(1).getPrize()).isEqualTo(0);
-        assertThat(prizes.get(2).getPrize()).isEqualTo(0);
+        assertThat(winners.getWinners().get(0)).isEqualTo(Prize.FAIL);
+        assertThat(winners.getWinners().get(1)).isEqualTo(Prize.FAIL);
+        assertThat(winners.getWinners().get(2)).isEqualTo(Prize.FAIL);
     }
 
 }
