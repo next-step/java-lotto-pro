@@ -31,15 +31,6 @@ public class LottoMachine {
     }
 
 
-    private LottoTicket makeManualLottoTicket(String manualLottoSource) {
-        try {
-            return new LottoTicket(manualLottoSource);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
-
     public List<LottoTicket> makeRandomLottoTickets(Ticket ticket) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < ticket.getTicket(); i++) {
@@ -81,6 +72,15 @@ public class LottoMachine {
     public boolean setWinnerLotto(String winnerSource) {
         winnerLotto = makeManualLottoTicket(winnerSource);
         return winnerLotto != null;
+    }
+
+    private LottoTicket makeManualLottoTicket(String manualLottoSource) {
+        try {
+            return new LottoTicket(manualLottoSource);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     public HashMap<LottoReward, Integer> checkWin(List<LottoTicket> lottoTickets) {
