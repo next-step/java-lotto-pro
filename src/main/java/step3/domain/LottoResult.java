@@ -21,7 +21,7 @@ public class LottoResult {
         return (double) winningAmount() / inputMoney;
     }
 
-    public long winningAmount() {
+    private long winningAmount() {
         AtomicLong winningAmount = new AtomicLong(0L);
         rankingMap.forEach((ranking, hitCount) -> {
             winningAmount.addAndGet((long) (hitCount * ranking.getWinningMoney()));
