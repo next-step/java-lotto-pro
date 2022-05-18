@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import static lotto.LottoTestUtils.lotto;
+import static lotto.LottoTestUtils.lottos;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,14 +17,14 @@ class LottoMachineTest {
     @DisplayName("발급 성공 테스트")
     void 발급_테스트() {
         // when & then
-        Assertions.assertThat(LottoMachine.purchase("2000")).isInstanceOf(Lottos.class);
+        assertThat(LottoMachine.purchase("2000", new String[]{"1,2,3,4,5,6"})).isInstanceOf(Lottos.class);
     }
 
     @Test
     @DisplayName("숫자형식이 아닌 사용자 입력")
     void 발급_실패_숫자형식() {
         // when & then
-        assertThatThrownBy(() -> LottoMachine.purchase("test"))
+        assertThatThrownBy(() -> LottoMachine.purchase("test", new String[]{"1,2,3,4,5,6"}))
                 .isInstanceOf(NumberFormatException.class);
     }
 
@@ -31,7 +33,31 @@ class LottoMachineTest {
     @DisplayName("구매가 불가능한 금액 입력")
     void 발급_실패_구매불가(String price) {
         // when & then
-        assertThatThrownBy(() -> LottoMachine.purchase(price))
+        assertThatThrownBy(() -> LottoMachine.purchase(price, new String[]{"1,2,3,4,5,6"}))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("수동 구매 테스트")
+    void 수동으로_구매_테스트() {
+        // when & then
+        final Lottos lottos = LottoMachine.purchase("1000", new String[]{"1,2,3,4,5,6"});
+        assertThat(lottos).isEqualTo(lottos(lotto(1, 2, 3, 4, 5, 6)));
+    }
+
+    @Test
+    @DisplayName("수동을 0장 구매할떄 테스트")
+    void 수동으로_구매_0_테스트() {
+        // when & then
+        final Lottos lottos = LottoMachine.purchase("1000", new String[]{});
+        assertThat(lottos).isInstanceOf(Lottos.class);
+    }
+
+    @Test
+    @DisplayName("수동 구매 수량이 구입 금액을 넘었을때")
+    void 수동으로_구매_실패_테스트() {
+        // when & then
+        assertThatThrownBy(() -> LottoMachine.purchase("1000", new String[]{"1,2,3,4,5,6", "1,2,3,4,5,6,7"}))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -51,4 +77,5 @@ class LottoMachineTest {
         assertThatThrownBy(() -> LottoMachine.winningLottoNumbers(winningNumber, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
 }
