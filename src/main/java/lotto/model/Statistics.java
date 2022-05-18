@@ -29,9 +29,8 @@ public class Statistics {
 
     private void compareNumber(WinLotto winLotto, Lotto lotto) {
         long count = lotto.getLottoNumber().stream()
-                .filter(lottoNumber -> winLotto.getLotto().getLottoNumber().contains(lottoNumber))
+                .filter(lottoNumber -> winLotto.containNumber(lottoNumber))
                 .count();
-
         resultMap.computeIfPresent(Rank.valueOf(count, isMatchedBonus(winLotto, lotto)), (k, v) -> Math.toIntExact(v + 1));
     }
 
