@@ -8,13 +8,11 @@ import lotto.type.LottoRank;
 public class LottoResult {
 
     private Map<LottoRank, Integer> lottoResultMap;
+    private final double winningRate;
 
-    public LottoResult(Map<LottoRank, Integer> lottoResultMap) {
+    public LottoResult(Map<LottoRank, Integer> lottoResultMap, Money purchasedMoney) {
         this.lottoResultMap = lottoResultMap;
-    }
-
-    public double winningRate(Money purchasedMoney) {
-        return totalPrice() / purchasedMoney.getMoney();
+        this.winningRate = totalPrice() / purchasedMoney.getMoney();
     }
 
     private double totalPrice() {
@@ -26,6 +24,10 @@ public class LottoResult {
 
     public Map<LottoRank, Integer> getLottoResultMap() {
         return lottoResultMap;
+    }
+
+    public double getWinningRate() {
+        return winningRate;
     }
 
     @Override

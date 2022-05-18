@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import lotto.model.lotto.Lotto;
+import lotto.model.money.Money;
 import lotto.model.result.LottoResult;
 import lotto.model.winning.WinningLotto;
 import lotto.type.LottoRank;
@@ -18,7 +19,7 @@ public class PurchaseLotto {
         this.lottoList = lottoList;
     }
 
-    public LottoResult rankMatch(WinningLotto winningLotto) {
+    public LottoResult rankMatch(WinningLotto winningLotto, Money purchasedMoney) {
         Map<LottoRank, Integer> rankMap = new HashMap<>();
         Arrays.stream(LottoRank.values())
             .forEach(lottoRank -> rankMap.put(lottoRank, 0));
@@ -28,7 +29,7 @@ public class PurchaseLotto {
             rankMap.put(lottoRank, rankMap.get(lottoRank) + 1);
         });
 
-        return new LottoResult(rankMap);
+        return new LottoResult(rankMap, purchasedMoney);
     }
 
 }

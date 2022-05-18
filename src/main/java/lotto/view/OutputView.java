@@ -19,11 +19,11 @@ public class OutputView {
         }
     }
 
-    public static void OutputLottoResult(LottoResult lottoResult, double winningRate) {
+    public static void OutputLottoResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         outputLottoResultMap(lottoResult);
-        System.out.printf("총 수익률은 %.2f입니다.", winningRate);
+        System.out.printf("총 수익률은 %.2f입니다.", lottoResult.getWinningRate());
     }
 
     private static void outputLottoResultMap(LottoResult lottoResult) {

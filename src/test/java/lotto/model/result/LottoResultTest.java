@@ -18,9 +18,7 @@ class LottoResultTest {
     @DisplayName("구입한 로또의 수익률을 계산")
     void 구입한_로또의_수익률을_계산한다() {
         LottoResult lottoResult = generateLottoResult();
-        Money purchaseMoney = new Money(20_000);
-
-        assertEquals(lottoResult.winningRate(purchaseMoney), 0.5);
+        assertEquals(lottoResult.getWinningRate(), 0.5);
     }
 
     private LottoResult generateLottoResult() {
@@ -29,7 +27,7 @@ class LottoResultTest {
         PurchaseLotto purchaseLotto = new PurchaseLotto(lottoList);
         WinningLotto winningLotto = new WinningLotto(Arrays.asList("1", "2", "3", "7", "8", "9"), "10");
 
-        return purchaseLotto.rankMatch(winningLotto);
+        return purchaseLotto.rankMatch(winningLotto, new Money(20_000));
     }
 
 }

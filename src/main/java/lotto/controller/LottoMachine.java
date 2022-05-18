@@ -36,8 +36,8 @@ public class LottoMachine {
     }
 
     private void outputResult(Money purchasedMoney, PurchaseLotto purchaseLotto, WinningLotto winningLotto) {
-        LottoResult lottoResult = purchaseLotto.rankMatch(winningLotto);
-        OutputView.OutputLottoResult(lottoResult, lottoResult.winningRate(purchasedMoney));
+        LottoResult lottoResult = purchaseLotto.rankMatch(winningLotto, purchasedMoney);
+        OutputView.OutputLottoResult(lottoResult);
     }
 
     private String[] inputLottoNumberArr(String inputLottoNumbers) {
