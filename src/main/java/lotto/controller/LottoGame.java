@@ -49,7 +49,7 @@ public class LottoGame {
     private void winningResult(LottoTickets lottoTickets, Money purchaseMoney) {
         LottoTicket winningNumbers = inputWinningNumbers();
         LottoNumber bonusNumber = inputBonusNumber();
-        WinningResult winningResult = lottoTickets.match(winningNumbers);
+        WinningResult winningResult = lottoTickets.match(winningNumbers, bonusNumber);
         ResultView.printWinningReport(winningResult, purchaseMoney);
     }
 }

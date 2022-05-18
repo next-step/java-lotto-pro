@@ -13,10 +13,10 @@ public class LottoTickets {
         return this.lottoTickets.size();
     }
 
-    public WinningResult match(LottoTicket lottoNumbers) {
+    public WinningResult match(LottoTicket lottoNumbers, LottoNumber bonusNumber) {
         WinningResult winningResult = new WinningResult();
         lottoTickets.forEach(lottoTicket -> {
-            winningResult.addWinningRank(lottoTicket.rank(lottoNumbers));
+            winningResult.addWinningRank(lottoTicket.rank(lottoNumbers, bonusNumber));
         });
         return winningResult;
     }

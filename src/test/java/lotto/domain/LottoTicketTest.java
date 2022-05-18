@@ -13,11 +13,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTicketTest {
     LottoTicket lottoTicket;
     LottoTicket winningNumbers;
+    LottoNumber bonusNUmber;
 
     @BeforeEach
     void init() {
         lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         winningNumbers = new LottoTicket("6, 5, 4, 3, 2, 1");
+        bonusNUmber = new LottoNumber(7);
     }
 
     @ParameterizedTest
@@ -65,6 +67,6 @@ public class LottoTicketTest {
     @DisplayName("당첨 순위 확인")
     @Test
     void rank() {
-        assertThat(lottoTicket.rank(winningNumbers)).isEqualTo(LottoRank.FIRST);
+        assertThat(lottoTicket.rank(winningNumbers, bonusNUmber)).isEqualTo(LottoRank.FIRST);
     }
 }

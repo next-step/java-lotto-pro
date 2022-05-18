@@ -12,10 +12,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTicketsTest {
     LottoTickets lottoTickets;
     LottoTicket winningNumbers;
+    LottoNumber bonusNumber;
 
     @BeforeEach
     void init() {
         winningNumbers = new LottoTicket("1, 2, 3, 4, 5, 6");
+        bonusNumber = new LottoNumber(7);
 
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         lottoTicketList.add(new LottoTicket("1, 2, 3, 4, 5, 6"));
@@ -25,7 +27,7 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("로또 번호 매칭 결과 당첨 개수 확인")
     void match() {
-        WinningResult winningResult = lottoTickets.match(winningNumbers);
+        WinningResult winningResult = lottoTickets.match(winningNumbers, bonusNumber);
         assertThat(winningResult.size()).isEqualTo(1);
     }
 }

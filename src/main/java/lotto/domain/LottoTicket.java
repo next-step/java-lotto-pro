@@ -23,8 +23,8 @@ public class LottoTicket {
         this.lottoNumbers = mapLottoNumbers(lottoNumberList);
     }
 
-    public LottoRank rank(LottoTicket winningNumbers) {
-        return LottoRank.rank(matchCount(winningNumbers));
+    public LottoRank rank(LottoTicket winningNumbers, LottoNumber bonusNumber) {
+        return LottoRank.rank(matchCount(winningNumbers), contains(bonusNumber));
     }
 
     public int matchCount(LottoTicket winningNumbers) {
