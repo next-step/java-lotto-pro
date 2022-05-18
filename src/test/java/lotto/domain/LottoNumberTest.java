@@ -35,9 +35,4 @@ class LottoNumberTest {
         assertThatThrownBy(() -> new LottoNumber(50)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("로또 숫자 입력값으로 null 으로 들어올 시 Exception 발생 확인")
-    @Test
-    void lottoNumberWithNull() {
-        assertThatThrownBy(() -> new LottoNumber(null)).isInstanceOf(IllegalArgumentException.class);
-    }
 }
