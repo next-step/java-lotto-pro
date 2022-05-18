@@ -13,8 +13,11 @@ public class ResultView {
     private static final String TOTAL_RESULT_HEADER_MESSAGE = "당첨 통계";
     private static final String TOTAL_RESULT_UNDER_LINE = "---------";
     private static final String RESULT_MATCH_MESSAGE = "%d개 일치 (%d원)- %d개";
+    private static final String RESULT_MATCH_BONUS_MESSAGE = "%d개 일치, 보너스볼 일치 (%d원)- %d개";
     private static final String RESULT_PROFIT_MESSAGE = "총 수익률은 %.2f입니다.";
+    private static final String LOSS_PROFIT_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String ENTER = "\n";
+    private static final double BREAK_EVEN_POINT = 1;
 
     private ResultView() {
         throw new IllegalStateException(ErrorMessage.CONSTANT_CLASS);
@@ -28,8 +31,8 @@ public class ResultView {
         StringBuilder totalLottoNumberView = new StringBuilder();
         totalLottoNumberView.append(resultPurchaseView(lottos));
         totalLottoNumberView.append(ENTER);
-        for (Lotto lotto : lottos.getLottoList()) {
-            totalLottoNumberView.append(Arrays.toString(lotto.numberListToArray()));
+        for (Lotto lotto : lottos.getLottos()) {
+            totalLottoNumberView.append(Arrays.toString(lotto.convertNumbers()));
             totalLottoNumberView.append(ENTER);
         }
         printConsole(totalLottoNumberView.toString());
@@ -39,14 +42,23 @@ public class ResultView {
         StringBuilder resultView = new StringBuilder();
         setHeader(resultView);
         for (LottoRank lottoRank : LottoRank.valuesExcludeNone()) {
-            String matchMessage = String
-                    .format(RESULT_MATCH_MESSAGE, lottoRank.getMatchNumberCount(), lottoRank.getWinningAmount(),
-                            lottoGameResult.rankCount(lottoRank));
+            String matchMessage = formatMatchMassage(lottoGameResult, lottoRank);
             resultView.append(matchMessage);
             resultView.append(ENTER);
         }
         setProfitRateView(resultView, lottos.calcProfitRate(lottoGameResult.totalWinningAmount()));
         printConsole(resultView.toString());
+    }
+
+    private static String formatMatchMassage(LottoGameResult lottoGameResult, LottoRank lottoRank) {
+        if (LottoRank.SECOND_BONUS.equals(lottoRank)) {
+            return String
+                    .format(RESULT_MATCH_BONUS_MESSAGE, lottoRank.getMatchNumberCount(), lottoRank.getWinningAmount(),
+                            lottoGameResult.rankCount(lottoRank));
+        }
+        return String
+                .format(RESULT_MATCH_MESSAGE, lottoRank.getMatchNumberCount(), lottoRank.getWinningAmount(),
+                        lottoGameResult.rankCount(lottoRank));
     }
 
     private static void setHeader(StringBuilder resultView) {
@@ -63,5 +75,8 @@ public class ResultView {
 
     public static void setProfitRateView(StringBuilder resultView, double calcProfitRate) {
         resultView.append(String.format(RESULT_PROFIT_MESSAGE, calcProfitRate));
+        if (calcProfitRate < BREAK_EVEN_POINT) {
+            resultView.append(LOSS_PROFIT_MESSAGE);
+        }
     }
 }

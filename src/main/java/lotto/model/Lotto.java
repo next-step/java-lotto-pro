@@ -3,31 +3,27 @@ package lotto.model;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import lotto.constant.LottoRank;
 
 public class Lotto {
 
-    private final List<Integer> numberList;
+    private final LottoNumbers numbers;
 
-    public Lotto(List<Integer> numberList) {
-        Collections.sort(numberList);
-        this.numberList = numberList;
+    public Lotto(List<Integer> numbers) {
+        Collections.sort(numbers);
+        List<String> lottoNumberWords = numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.toList());
+        this.numbers = new LottoNumbers(lottoNumberWords);
     }
 
-    public int[] numberListToArray() {
-        return numberList.stream()
-                .mapToInt(Integer::intValue)
-                .toArray();
+    public int[] convertNumbers() {
+        return numbers.numberToIntArray();
     }
 
-    public LottoRank matchRank(List<Integer> winningNumberList) {
-        return LottoRank.of(matchNumberCount(winningNumberList));
-    }
-
-    private int matchNumberCount(List<Integer> winningNumberList) {
-        return Math.toIntExact(winningNumberList.stream()
-                .filter(numberList::contains)
-                .count());
+    public LottoRank matchRank(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        return LottoRank.of(winningNumbers.matchCount(numbers), numbers.contains(bonusNumber));
     }
 
     @Override
@@ -39,11 +35,11 @@ public class Lotto {
             return false;
         }
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numberList, lotto.numberList);
+        return Objects.equals(numbers, lotto.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberList);
+        return Objects.hash(numbers);
     }
 }

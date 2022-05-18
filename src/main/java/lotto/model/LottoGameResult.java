@@ -7,14 +7,14 @@ public class LottoGameResult {
 
     private static final int NONE = 0;
 
-    private final Map<LottoRank, Integer> resultCountMap;
+    private final Map<LottoRank, Integer> resultRankMatchCountCache;
 
-    public LottoGameResult(Map<LottoRank, Integer> resultCountMap) {
-        this.resultCountMap = resultCountMap;
+    public LottoGameResult(Map<LottoRank, Integer> resultRankMatchCountCache) {
+        this.resultRankMatchCountCache = resultRankMatchCountCache;
     }
 
     public int rankCount(LottoRank lottoRank) {
-        return resultCountMap.getOrDefault(lottoRank, NONE);
+        return resultRankMatchCountCache.getOrDefault(lottoRank, NONE);
     }
 
     public int totalWinningAmount() {

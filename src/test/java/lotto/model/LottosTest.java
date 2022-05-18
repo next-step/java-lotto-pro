@@ -27,7 +27,7 @@ class LottosTest {
     void playLottoGame() {
         int totalWinningMount = 200_000;
         int lottoPrice = 1000;
-        assertEquals((double) 200_000 / (lottoPrice * lottos.lottoCount()) , lottos.calcProfitRate(totalWinningMount));
+        assertEquals((double) 200_000 / (lottoPrice * lottos.lottoCount()), lottos.calcProfitRate(totalWinningMount));
     }
 
 }

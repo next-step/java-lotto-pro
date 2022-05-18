@@ -10,47 +10,46 @@ import lotto.constant.ErrorMessage;
 public class RandomNumberUtils {
 
     private static final String UNDER_SCORE = "_";
-    private static final Map<String, List<Integer>> numberListMap = new HashMap<>();
+    private static final Map<String, List<Integer>> numbersCache = new HashMap<>();
 
     private RandomNumberUtils() {
         throw new IllegalStateException(ErrorMessage.UTILITY_CLASS);
     }
 
-    public static List<Integer> generateRandomNumberToList(int low, int max, int count) {
-        List<Integer> numberList;
-        numberList = getNumberList(low, max);
-        Collections.shuffle(numberList);
-        return createRandomNumberList(count, numberList);
+    public static List<Integer> generateRandomNumbers(int low, int max, int count) {
+        List<Integer> numbers = getNumbers(low, max);
+        Collections.shuffle(numbers);
+        return createRandomNumbers(count, numbers);
     }
 
-    private static List<Integer> getNumberList(int low, int max) {
+    private static List<Integer> getNumbers(int low, int max) {
         String cacheKey = generateKey(low, max);
-        if (numberListMap.containsKey(cacheKey)) {
-            return numberListMap.get(cacheKey);
+        if (numbersCache.containsKey(cacheKey)) {
+            return numbersCache.get(cacheKey);
         }
-        List<Integer> numberList = createNumberList(low, max);
-        numberListMap.put(cacheKey, numberList);
-        return numberList;
+        List<Integer> numbers = createNumbers(low, max);
+        numbersCache.put(cacheKey, numbers);
+        return numbers;
     }
 
     private static String generateKey(int low, int max) {
         return low + UNDER_SCORE + max;
     }
 
-    private static List<Integer> createNumberList(int low, int max) {
-        List<Integer> numberList = new ArrayList<>();
+    private static List<Integer> createNumbers(int low, int max) {
+        List<Integer> numbers = new ArrayList<>();
         for (int number = low; number <= max; number++) {
-            numberList.add(number);
+            numbers.add(number);
         }
-        return numberList;
+        return numbers;
     }
 
-    private static List<Integer> createRandomNumberList(int count, List<Integer> shuffleNumberList) {
-        List<Integer> randomNumberList = new ArrayList<>();
+    private static List<Integer> createRandomNumbers(int count, List<Integer> shuffleNumbers) {
+        List<Integer> randomNumbers = new ArrayList<>();
         for (int index = 0; index < count; index++) {
-            randomNumberList.add(shuffleNumberList.get(index));
+            randomNumbers.add(shuffleNumbers.get(index));
         }
-        return randomNumberList;
+        return randomNumbers;
     }
 
 }
