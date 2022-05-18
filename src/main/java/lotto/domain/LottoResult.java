@@ -4,11 +4,11 @@ import lotto.infrastructure.error.LottoWinningResultErrorCode;
 
 import java.util.*;
 
-public class LottoWinningResult {
+public class LottoResult {
 
     private final Map<LottoRank, Integer> rankCounter;
 
-    public LottoWinningResult() {
+    public LottoResult() {
         this.rankCounter = new HashMap<>();
         init();
     }
@@ -39,8 +39,8 @@ public class LottoWinningResult {
         return Math.floor(((double) totalWinningMoney / payAmount) * 100) / 100.0;
     }
 
-    private void validateNull(WinningLottoTicket lottoWinningTicket, LottoTicket purchasedLottoTicket) {
-        if (Objects.isNull(lottoWinningTicket) || Objects.isNull(purchasedLottoTicket)) {
+    private void validateNull(WinningLottoTicket winningLottoTicket, LottoTicket purchasedLottoTicket) {
+        if (Objects.isNull(winningLottoTicket) || Objects.isNull(purchasedLottoTicket)) {
             throw new IllegalArgumentException(LottoWinningResultErrorCode.NOW_ALLOW_NULL.getMessage());
         }
     }
