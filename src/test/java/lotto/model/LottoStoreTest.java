@@ -23,9 +23,9 @@ class LottoStoreTest {
     @Test
     void lottoStroe_not_number() {
         Money money = new Money("3000");
-        LottoPaper lottoPaper = new LottoPaper("3");
+        LottoPaper lottoPaper = new LottoPaper("5");
 
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoStore(money, lottoPaper))
-                .withMessage("[ERROR] 숫자가 아닙니다.");
+                .withMessage("[ERROR] 구매 금액이 부족합니다.");
     }
 }

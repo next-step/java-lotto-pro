@@ -1,21 +1,26 @@
 package lotto.model;
 
 import java.util.Objects;
+import lotto.constant.ErrorMessage;
 
 public class LottoPaper {
 
-    private final int gameCount;
+    private final int selfCount;
 
-    public LottoPaper(int gameCount) {
-        this.gameCount = gameCount;
+    public LottoPaper(int selfCount) {
+        this.selfCount = selfCount;
     }
 
     public LottoPaper(String selfMoneyWord) {
-        this.gameCount = Integer.parseInt(selfMoneyWord);
+        try {
+            this.selfCount = Integer.parseInt(selfMoneyWord);
+        }catch (IllegalArgumentException e){
+            throw new IllegalArgumentException(ErrorMessage.NOT_NUMBER);
+        }
     }
 
-    public int getGameCount() {
-        return gameCount;
+    public int getSelfCount() {
+        return selfCount;
     }
 
     @Override
@@ -27,11 +32,11 @@ public class LottoPaper {
             return false;
         }
         LottoPaper that = (LottoPaper) o;
-        return gameCount == that.gameCount;
+        return selfCount == that.selfCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(gameCount);
+        return Objects.hash(selfCount);
     }
 }

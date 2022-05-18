@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.constant.ErrorMessage;
 import lotto.constant.LottoRoleConst;
 
 public class LottoStore {
@@ -12,6 +13,14 @@ public class LottoStore {
 
     public LottoStore(Money money, LottoPaper lottoPaper) {
         this.money = money;
+        int gameCount = money.getMoney() / LottoRoleConst.LOTTO_PRICE;
+        validateOverCount(gameCount,lottoPaper);
+    }
+
+    private void validateOverCount(int gameCount, LottoPaper lottoPaper) {
+        if (gameCount < lottoPaper.getSelfCount()){
+            throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_MEONY);
+        }
     }
 
     public LottoPaper issueLottoPaper() {
