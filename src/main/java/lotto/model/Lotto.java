@@ -1,19 +1,22 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Lottery {
+public class Lotto {
 
-    private List<Number> numbers = new ArrayList<>();
+    private List<Number> numbers;
 
-    public Lottery(NumberGenerator numberGenerator) {
+    public Lotto(NumberGenerator numberGenerator) {
         createNumbers(numberGenerator);
     }
 
     public List<Number> getNumbers() {
         return Collections.unmodifiableList(numbers);
+    }
+
+    public boolean contains(Number number) {
+        return this.numbers.contains(number);
     }
 
     @Override
