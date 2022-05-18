@@ -13,6 +13,7 @@
   - [x] UI 구현
   - [x] 숫자 3, 4, 5, 6 개 일치 개수 구현
   - [x] 수익률 계산 구현. 구입금액 1을 기준으로 퍼센테이지 0.## 형식
+  - [ ] 2등 구현. 5개를 맞추고 보너스 숫자를 맞췄을 경우.
 
 ### 힌트
 - 로또 자동 생성은 Collections.shuffle() 메소드 활용한다. 
@@ -73,3 +74,21 @@
 - 기능을 구현하기 전에 README.md 파일에 구현할 기능 목록을 정리해 추가한다.
 - git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다.
   - [AngularJS Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)
+
+## 피드백
+- 캐싱이 필요할 경우에 적절히 활용.
+  - 코드가 반복이 아니라도 자원은 반복되서 사용될 수도 있음
+- 필요할 땐 enum을 활용. 
+- 다소 모호한 data, info의 네이밍, 좀더 명확하게 인지할 수 있는 단어 사용하자
+- 클래스 구조 신경쓰기
+  - ``` 
+    class A {
+      상수(static final) 또는 클래스 변수
+      인스턴스 변수
+      생성자
+      팩토리 메소드
+      메소드
+      기본 메소드 (equals, hashCode, toString)
+    }
+    ```
+
