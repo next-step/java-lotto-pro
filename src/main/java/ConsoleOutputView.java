@@ -12,14 +12,15 @@ public class ConsoleOutputView {
         System.out.println();
     }
 
-    public void view(Aggregator aggregator) {
+    public void view(Ranks ranks, BigDecimal yield) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        Arrays.stream(Prize.values()).sorted(Collections.reverseOrder()).filter(Prize::win).forEach(prize -> {
-            System.out.println(prize + " - " + aggregator.countGroupBy(prize) + "개");
+        Arrays.stream(Rank.values()).sorted(Collections.reverseOrder()).filter(Rank::win).forEach(rank -> {
+            System.out.println(rank + " - " + ranks.count(rank) + "개");
         });
-        BigDecimal bd = aggregator.yield().setScale(2, RoundingMode.DOWN);
-        System.out.println("총 수익률은 " + bd.doubleValue() + "입니다.");
+
+        BigDecimal scaledYield = yield.setScale(2, RoundingMode.DOWN);
+        System.out.println("총 수익률은 " + scaledYield.doubleValue() + "입니다.");
     }
 }

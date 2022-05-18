@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class Vendor {
     public Lotto buy(long money) {
         final long maxCount = money / LOTTO_PRICE;
         if (maxCount < 1)
-            throw new RuntimeException("이 돈으로는 로또를 구매할 수 없습니다.");
+            throw new IllegalArgumentException("이 돈으로는 로또를 구매할 수 없습니다.");
 
         Lotto lotto = new Lotto();
         for (int count = 1; count <= maxCount; count++) {
@@ -28,11 +29,12 @@ public class Vendor {
 
     private LottoNumbers get() {
         Collections.shuffle(ALL_AVAILABLE_LOTTO_NUMBER_LIST);
+
         return new LottoNumbers(
                 ALL_AVAILABLE_LOTTO_NUMBER_LIST.stream().limit(LottoNumbers.SIZE).collect(Collectors.toList()));
     }
 
-    public Aggregator aggregate(ContainCounts containCounts) {
-        return new Aggregator(containCounts);
+    public BigDecimal yield(Ranks ranks) {
+        return BigDecimal.valueOf((double) ranks.totalMoney() / (double) (ranks.size() * LOTTO_PRICE));
     }
 }

@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -15,7 +18,24 @@ public class VendorTest {
     }
 
     @Test
-    void 집계할_수_있다() {
-        assertThat(new Vendor().aggregate(new ContainCounts())).isInstanceOf(Aggregator.class);
+    void 수익률을_계산할_수_있다() {
+        Ranks ranks = new Ranks();
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.NONE);
+        ranks.add(Rank.FIFTH);
+
+        BigDecimal yield = new Vendor().yield(ranks);
+        assertThat(yield.setScale(2, RoundingMode.DOWN).doubleValue()).isEqualTo(0.35);
     }
 }

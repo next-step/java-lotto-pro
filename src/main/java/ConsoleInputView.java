@@ -8,6 +8,12 @@ public class ConsoleInputView {
         return new Scanner(System.in).nextLong();
     }
 
+    public int inputInt(Supplier<String> supplier) {
+        System.out.println(supplier.get());
+
+        return new Scanner(System.in).nextInt();
+    }
+
     public String inputString(Supplier<String> supplier) {
         System.out.println(supplier.get());
 
