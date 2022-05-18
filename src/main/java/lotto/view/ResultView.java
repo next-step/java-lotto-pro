@@ -1,8 +1,16 @@
 package lotto.view;
 
+import static lotto.common.ViewMessage.BUY_MESSAGE;
+import static lotto.common.ViewMessage.LOSS_MESSAGE;
+import static lotto.common.ViewMessage.MATCH_RESULT_MESSAGE;
+import static lotto.common.ViewMessage.MATCH_RESULT_WITH_BONUS_MESSAGE;
+import static lotto.common.ViewMessage.PROFIT_RATE_MESSAGE;
+import static lotto.common.ViewMessage.STATISTICS_MESSAGE_HEADER;
+
 import java.util.List;
 
 import lotto.common.ViewMessage;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoGroups;
 import lotto.domain.Money;
 import lotto.domain.Rank;
@@ -10,8 +18,8 @@ import lotto.domain.Rank;
 public class ResultView {
     private static final int PROFIT_STANDARD_VALUE = 1;
 
-    public static void printCount(int count) {
-        System.out.printf(ViewMessage.BUY_MESSAGE.getMessage(), count);
+    public static void printCount(LottoCount manualLottoCount, Money money) {
+        System.out.printf(BUY_MESSAGE.getMessage(), manualLottoCount.getCount(), manualLottoCount.calculateAutoLottoCount(money));
     }
 
     public static void printLottoGroups(LottoGroups lottoGroups) {
@@ -31,18 +39,18 @@ public class ResultView {
 
     private static void printStatisticsHeader() {
         System.out.println();
-        System.out.println(ViewMessage.STATISTICS_MESSAGE_HEADER.getMessage());
+        System.out.println(STATISTICS_MESSAGE_HEADER.getMessage());
     }
 
     private static void printMatchResult(List<Rank> matchResults, Rank rank) {
         int count = calculateMatchCount(matchResults, rank);
-        String format = String.format(ViewMessage.MATCH_RESULT_MESSAGE.getMessage(), rank.getMatchCount(), rank.getWinningPrize(), count);
+        String format = String.format(MATCH_RESULT_MESSAGE.getMessage(), rank.getMatchCount(), rank.getWinningPrize(), count);
         System.out.println(format);
     }
 
     private static void printMatchResultWithBonus(List<Rank> matchResults) {
         int count = calculateMatchCount(matchResults, Rank.SECOND);
-        String format = String.format(ViewMessage.MATCH_RESULT_WITH_BONUS_MESSAGE.getMessage(), Rank.SECOND.getMatchCount(), Rank.SECOND.getWinningPrize(), count);
+        String format = String.format(MATCH_RESULT_WITH_BONUS_MESSAGE.getMessage(), Rank.SECOND.getMatchCount(), Rank.SECOND.getWinningPrize(), count);
         System.out.println(format);
     }
 
@@ -54,15 +62,16 @@ public class ResultView {
 
     private static void printProfitRate(List<Rank> matchResults, Money money) {
         double profitRate = calculateProfitRate(matchResults, money);
-        System.out.printf(ViewMessage.PROFIT_RATE_MESSAGE.getMessage(), profitRate);
+        System.out.printf(PROFIT_RATE_MESSAGE.getMessage(), profitRate);
         if (profitRate < PROFIT_STANDARD_VALUE) {
-            System.out.println(ViewMessage.LOSS_MESSAGE.getMessage());
+            System.out.println(LOSS_MESSAGE.getMessage());
         }
     }
 
     private static double calculateProfitRate(List<Rank> matchResults, Money money) {
-        int totalWinningPrize = matchResults.stream()
-                .mapToInt(Rank::getWinningPrize).sum();
+        long totalWinningPrize = matchResults.stream()
+                .mapToLong(Rank::getWinningPrize)
+                .sum();
         return (totalWinningPrize * 1.0) / (money.getMoney() * 1.0);
     }
 }

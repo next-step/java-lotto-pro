@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import static lotto.common.ErrorMessage.INVALID_MONEY_ERROR;
+import static lotto.common.ErrorMessage.MINIMUM_MONEY_ERROR;
+import static lotto.common.ErrorMessage.NULL_OR_EMPTY_ERROR;
+import static lotto.common.ErrorMessage.NUMBER_FORMAT_ERROR;
+
 import java.util.Objects;
 
 public class Money {
@@ -13,6 +18,7 @@ public class Money {
     }
 
     private int validateMoney(String money) {
+        validateNullOrEmpty(money);
         validateFormat(money);
         int parsedMoney = Integer.parseInt(money);
         validateMinimumSize(parsedMoney);
@@ -20,21 +26,27 @@ public class Money {
         return parsedMoney;
     }
 
+    private static void validateNullOrEmpty(String money) {
+        if (money == null || money.isEmpty()) {
+            throw new IllegalArgumentException(NULL_OR_EMPTY_ERROR.getErrorMessage());
+        }
+    }
+
     private void validateFormat(String money) {
         if (!money.matches(NUMBER_FORMAT_REGEX)) {
-            throw new IllegalArgumentException("금액은 숫자 형식으로 입력해야 합니다.");
+            throw new IllegalArgumentException(NUMBER_FORMAT_ERROR.getErrorMessage());
         }
     }
 
     private void validateSize(int parsedMoney) {
         if (parsedMoney % PRICE_PER_LOTTO != 0) {
-            throw new IllegalArgumentException("금액을 잘못 입력했습니다.");
+            throw new IllegalArgumentException(INVALID_MONEY_ERROR.getErrorMessage());
         }
     }
 
     private void validateMinimumSize(int parsedMoney) {
         if (parsedMoney < PRICE_PER_LOTTO) {
-            throw new IllegalArgumentException("금액이 부족합니다.");
+            throw new IllegalArgumentException(MINIMUM_MONEY_ERROR.getErrorMessage());
         }
     }
 

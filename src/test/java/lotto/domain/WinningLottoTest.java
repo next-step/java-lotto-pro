@@ -18,7 +18,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨 결과를 반환한다.")
     void match_test() {
-        Lotto lotto = new Lotto(LottoNumbers.from("1, 2, 3, 4, 5, 7"));
+        Lotto lotto = new Lotto(LottoNumberGenerator.from("1, 2, 3, 4, 5, 7"));
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 7);
         assertThat(winningLotto.match(lotto)).isEqualTo(Rank.SECOND);
     }

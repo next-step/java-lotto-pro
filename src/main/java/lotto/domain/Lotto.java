@@ -13,7 +13,7 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        this(LottoNumbers.generateLottoNumbers());
+        this(LottoNumberGenerator.generateLottoNumbers());
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -51,7 +51,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        Collections.sort(lottoNumbers);
         return String.valueOf(lottoNumbers);
     }
 }
