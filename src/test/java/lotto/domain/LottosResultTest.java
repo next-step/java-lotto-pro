@@ -19,12 +19,16 @@ class LottosResultTest {
         lottosResult.plusReturnMoney(winner);
         returnMoney += winner;
         assertThat(lottosResult.ratio())
-                .isEqualTo(1000/(float) returnMoney);
+                .isEqualTo(getExpectedRatio(purchase, returnMoney));
 
         winner = 2000;
         lottosResult.plusReturnMoney(winner);
         returnMoney += winner;
         assertThat(lottosResult.ratio())
-                .isEqualTo(1000/(float) returnMoney);
+                .isEqualTo(getExpectedRatio(purchase, returnMoney));
+    }
+
+    float getExpectedRatio(int purchase, int returnMoney) {
+        return (float) returnMoney / purchase;
     }
 }
