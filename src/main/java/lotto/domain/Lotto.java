@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.type.LottoRank;
+
 import java.util.List;
 
 public class Lotto {
@@ -12,6 +14,10 @@ public class Lotto {
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_SIZE);
 
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public LottoRank checkLottoRank(Lotto answerLotto) {
+        return LottoRank.findLottoRankByMatchedCount(countMatchedNumber(answerLotto));
     }
 
     public int countMatchedNumber(Lotto answerLotto) {
