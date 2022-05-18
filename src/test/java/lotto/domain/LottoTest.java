@@ -49,6 +49,12 @@ class LottoTest {
     }
 
     @Test
+    void 정렬된_로또_번호_반환() {
+        Lotto lotto = createLotto(new int[]{3, 4, 1, 2, 5, 6});
+        assertThat(lotto.sortedLottoNumbers()).containsExactly(getLottoNumbers(1, 2, 3, 4, 5, 6));
+    }
+
+    @Test
     void 중복_숫자_예외() {
         assertThatThrownBy(() -> createLotto(new int[]{1, 1, 2, 3, 4, 5})).isInstanceOf(
                 IllegalArgumentException.class);

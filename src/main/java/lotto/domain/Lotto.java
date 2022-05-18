@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -48,8 +50,10 @@ public class Lotto {
         return nonDuplicatedNumbers.size() != LOTTO_NUMBER_SIZE;
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
+    public List<LottoNumber> sortedLottoNumbers() {
+        List<LottoNumber> sortedNumbers = new ArrayList<>(this.lottoNumbers);
+        Collections.sort(sortedNumbers);
+        return sortedNumbers;
     }
+
 }
