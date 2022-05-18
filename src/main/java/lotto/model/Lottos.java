@@ -29,7 +29,7 @@ public class Lottos {
     }
 
     public void mergeLottos(Lottos lottos) {
-
+        this.lottos.addAll(lottos.getLottos());
     }
 
     @Override

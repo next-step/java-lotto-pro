@@ -35,7 +35,6 @@ class LottosTest {
     @Test
     void mergeLottos() {
         List<Lotto> targetLottos = new ArrayList<>();
-
         Lotto lotto1 = new Lotto(Arrays.asList(1, 3, 5, 7, 9, 10));
         Lotto lotto2 = new Lotto(Arrays.asList(7, 10, 15, 20, 25, 35));
         Lotto lotto3 = new Lotto(Arrays.asList(3, 7, 20, 35, 43, 45));
