@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.AutoGeneratePolicy;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoGame;
@@ -39,7 +41,9 @@ public class LottoGameController {
 
     private LottoGroups setLottoGroups() {
         LottoGroups lottoGroups = new LottoGroups();
-        lottoGroups.generateLottoGroupsByPolicy(new ManualGeneratePolicy(), manualLottoCount);
+        InputView.printInputManualLottoNumberHeader();
+        List<String> manualLottoGroups = InputView.inputManualLottoNumbers(manualLottoCount.getCount());
+        lottoGroups.generateLottoGroupsByPolicy(new ManualGeneratePolicy(manualLottoGroups), manualLottoCount);
         lottoGroups.generateLottoGroupsByPolicy(new AutoGeneratePolicy(), autoLottoCount);
         InputView.printLine();
         return lottoGroups;

@@ -1,14 +1,18 @@
 package lotto.domain;
 
 import java.util.List;
-import lotto.view.InputView;
 
 public class ManualGeneratePolicy implements GeneratePolicy {
+    private final List<String> manualLottoGroups;
+
+    public ManualGeneratePolicy(List<String> manualLottoGroups) {
+        this.manualLottoGroups = manualLottoGroups;
+    }
+
     @Override
     public void generate(List<Lotto> lottoGroups, LottoCount lottoCount) {
-        InputView.printInputManualLottoNumberHeader();
         for (int i = 0; i < lottoCount.getCount(); i++) {
-            String numbers = InputView.inputManualLottoNumber();
+            String numbers = manualLottoGroups.get(i);
             lottoGroups.add(new Lotto(LottoNumberGenerator.from(numbers)));
         }
     }

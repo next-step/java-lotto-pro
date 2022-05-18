@@ -6,6 +6,8 @@ import static lotto.common.ViewMessage.INPUT_MANUAL_LOTTO_NUMBER_MESSAGE;
 import static lotto.common.ViewMessage.INPUT_MONEY_MESSAGE;
 import static lotto.common.ViewMessage.INPUT_WIN_LOTTO_MESSAGE;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -35,8 +37,12 @@ public class InputView {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE.getMessage());
     }
 
-    public static String inputManualLottoNumber() {
-        return scanner.nextLine();
+    public static List<String> inputManualLottoNumbers(int count) {
+        List<String> inputNumbers = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            inputNumbers.add(scanner.nextLine());
+        }
+        return inputNumbers;
     }
 
     public static void printLine() {
