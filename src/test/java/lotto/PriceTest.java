@@ -1,11 +1,11 @@
-package step3;
+package lotto;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step3.domain.Price;
+import lotto.domain.Price;
 
 @DisplayName("Price 클래스")
 public class PriceTest {

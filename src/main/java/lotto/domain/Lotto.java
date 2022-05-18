@@ -1,23 +1,27 @@
-package step3.domain;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.constants.Matched;
 
 public class Lotto {
     public static final int LOTTO_MIN_NUMBER = 1;
     public static final int LOTTO_MAX_NUMBER = 45;
     public static final int LOTTO_FIRST_INDEX = 0;
     public static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_BONUS_NUMBER_INDEX = 6;
     public static final int LOTTO_FIXED_PRICE = 1_000;
     private static final int IS_MATCHES = 1;
     private static final int IS_NOT_MATCHES = 0;
     private static final List<Integer> candidates = createLottoNumbers();
 
     private final List<Integer> numbers;
+    private final Integer bonusNumber;
 
     public Lotto() {
         this.numbers = createSixRandomNumbers();
+        this.bonusNumber = createBonusNumber();
     }
 
     private List<Integer> createSixRandomNumbers() {
@@ -25,6 +29,10 @@ public class Lotto {
         final List<Integer> sixNumbers = new ArrayList<>(candidates.subList(LOTTO_FIRST_INDEX, LOTTO_SIZE));
         Collections.sort(sixNumbers);
         return sixNumbers;
+    }
+
+    private Integer createBonusNumber() {
+        return candidates.get(LOTTO_BONUS_NUMBER_INDEX);
     }
 
     private static List<Integer> createLottoNumbers() {
@@ -39,6 +47,10 @@ public class Lotto {
         return this.numbers;
     }
 
+    public Integer getBonusNumber() {
+        return this.bonusNumber;
+    }
+
     public int getNumbersCount() {
         return numbers.size();
     }
@@ -47,18 +59,23 @@ public class Lotto {
         return numbers.get(index);
     }
 
-    public int matches(final LottoWinningNumbers winningNumbers) {
+    public Matched matchesWinningNumber(final LottoWinningNumbers winningNumbers) {
         int matchesCount = 0;
-        for (int i = 0; i < winningNumbers.size(); i++) {
-            matchesCount += matchesThenOneElseZero(winningNumbers.get(i));
+        boolean bonusMatched = isEqualBonusNumber(winningNumbers.getBonusNumber());
+        for (int i = 0; i < winningNumbers.getWinningNumbersSize(); i++) {
+            matchesCount += matchesWinningNumberThenOneElseZero(winningNumbers.getWinningNumber(i));
         }
-        return matchesCount;
+        return Matched.getByCountAndBonusMatched(matchesCount, bonusMatched);
     }
 
-    private int matchesThenOneElseZero(final Integer winningNumber) {
-        if(this.numbers.contains(winningNumber)) {
+    private int matchesWinningNumberThenOneElseZero(final Integer winningNumber) {
+        if (this.numbers.contains(winningNumber)) {
             return IS_MATCHES;
         }
         return IS_NOT_MATCHES;
+    }
+
+    private boolean isEqualBonusNumber(final Integer bonusNumber) {
+        return this.bonusNumber.equals(bonusNumber);
     }
 }

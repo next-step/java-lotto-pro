@@ -1,13 +1,13 @@
-package step3;
+package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step3.domain.Lottos;
-import step3.domain.LottosGenerator;
-import step3.domain.Price;
+import lotto.domain.Lottos;
+import lotto.domain.LottosGenerator;
+import lotto.domain.Price;
 
 @DisplayName("LottosGenerator 클래스")
 public class LottosGeneratorTest {

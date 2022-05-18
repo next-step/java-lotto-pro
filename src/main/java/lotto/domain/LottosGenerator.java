@@ -1,4 +1,4 @@
-package step3.domain;
+package lotto.domain;
 
 public class LottosGenerator {
     public static Lottos generateLottos(final Price price) {

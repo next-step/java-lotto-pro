@@ -1,4 +1,4 @@
-package step3;
+package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import step3.domain.Lotto;
+import lotto.domain.Lotto;
 
 @DisplayName("Lotto 클래스")
 public class LottoTest {

@@ -1,4 +1,4 @@
-package step3.domain;
+package lotto.domain;
 
 public class Price {
     private static final String ZERO_OR_MINUS_PRICE_MESSAGE = "0 혹은 음수를 입력할 수 없습니다.";

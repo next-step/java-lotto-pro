@@ -1,8 +1,9 @@
-package step3.domain;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.constants.Matched;
 
 public class Lottos {
     private static final int DEFAULT_LOTTO_COUNT = 1;
@@ -32,10 +33,10 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Integer> match(final LottoWinningNumbers winningNumbers) {
+    public List<Matched> matchWinningNumber(final LottoWinningNumbers winningNumbers) {
         return lottos.stream()
                 .map(lotto ->
-                        lotto.matches(winningNumbers)
+                        lotto.matchesWinningNumber(winningNumbers)
                 )
                 .collect(
                         Collectors.toList()
