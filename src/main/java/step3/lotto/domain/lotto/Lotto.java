@@ -65,7 +65,7 @@ public class Lotto {
         return matchCount;
     }
 
-    private boolean contains(LottoNumber answerLottoNumber) {
+    public boolean contains(LottoNumber answerLottoNumber) {
         Set<Boolean> compareEqualsSet = new HashSet();
         for (LottoNumber lottoNumber : lottoNumbers) {
             compareEqualsSet.add(lottoNumber.equals(answerLottoNumber));
