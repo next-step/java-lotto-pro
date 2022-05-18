@@ -7,6 +7,7 @@ import lotto.model.factory.LottoFactory;
 import lotto.model.lotto.Lotto;
 import lotto.model.money.Money;
 import lotto.model.purchase.PurchaseLotto;
+import lotto.model.purchase.PurchaseManualCount;
 import lotto.model.result.LottoResult;
 import lotto.model.winning.WinningLotto;
 import lotto.view.InputView;
@@ -18,7 +19,7 @@ public class LottoMachine {
         Money purchasedMoney = new Money(InputView.inputPurchasedMoney());
 
         String inputPurchaseManualCount = InputView.inputPurchaseManualCount();
-        int purchaseManualCount = Integer.parseInt(inputPurchaseManualCount);
+        PurchaseManualCount purchaseManualCount = new PurchaseManualCount(inputPurchaseManualCount, purchasedMoney);
 
         PurchaseLotto purchaseLotto = purchaseLotto(purchasedMoney, purchaseManualCount);
 
@@ -26,7 +27,7 @@ public class LottoMachine {
         outputResult(purchasedMoney, purchaseLotto, winningLotto);
     }
 
-    private PurchaseLotto purchaseLotto(Money purchasedMoney, int purchaseManualCount) {
+    private PurchaseLotto purchaseLotto(Money purchasedMoney, PurchaseManualCount purchaseManualCount) {
         List<Lotto> manualLottoList = inputPurchaseManualLotto(purchaseManualCount);
         List<Lotto> autoLottoList = LottoFactory.create().generateAuto(purchasedMoney.possiblePurchaseLotto());
 
@@ -36,11 +37,11 @@ public class LottoMachine {
         return purchaseLotto;
     }
 
-    private List<Lotto> inputPurchaseManualLotto(int inputPurchaseManualCount) {
+    private List<Lotto> inputPurchaseManualLotto(PurchaseManualCount purchaseManualCount) {
         List<Lotto> lottoList = new ArrayList<>();
 
         InputView.inputPurchaseManualLotto();
-        IntStream.rangeClosed(1, inputPurchaseManualCount)
+        IntStream.rangeClosed(1, purchaseManualCount.getPurchaseManualCount())
             .forEach(value -> lottoList.add(Lotto.of(inputLottoNumberArr(InputView.inputEmptyAsk()))));
 
         return lottoList;
