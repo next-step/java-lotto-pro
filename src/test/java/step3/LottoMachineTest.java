@@ -26,8 +26,8 @@ public class LottoMachineTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:true", "1,2,3,4,5:false", "a,b,c,d,e,f:false"}, delimiter = ':')
-    public void makeManualLottoTicketTest(String manualLottoSource, boolean expected) {
-        assertThat(lottoMachine.makeManualLottoTicket(manualLottoSource) != null).isEqualTo(expected);
+    public void setWinnerTicket(String manualLottoSource, boolean expected) {
+        assertThat(lottoMachine.setWinnerLotto(manualLottoSource)).isEqualTo(expected);
     }
 
     @ParameterizedTest
