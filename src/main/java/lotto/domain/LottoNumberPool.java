@@ -35,6 +35,6 @@ public class LottoNumberPool {
     }
 
     private List<LottoNumber> drawLottoNumbers() {
-        return numberList.subList(0, Lotto.LOTTO_SIZE);
+        return new ArrayList<>(numberList.subList(0, Lotto.LOTTO_SIZE));
     }
 }
