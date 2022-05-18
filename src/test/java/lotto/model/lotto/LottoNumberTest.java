@@ -1,4 +1,4 @@
-package lotto.model.number;
+package lotto.model.lotto;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 

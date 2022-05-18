@@ -1,9 +1,10 @@
 package lotto.model.factory;
 
-import lotto.model.number.LottoNumbers;
+import java.util.List;
+import lotto.model.lotto.Lotto;
 
 public interface ILottoFactory {
 
-    LottoNumbers generate();
+    List<Lotto> generateAuto(int lottoCount);
 
 }

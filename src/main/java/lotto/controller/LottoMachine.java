@@ -1,14 +1,12 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.Map;
-import lotto.model.factory.LottoAutoFactory;
+import lotto.model.factory.LottoFactory;
+import lotto.model.lotto.Lotto;
 import lotto.model.money.Money;
-import lotto.model.number.LottoNumbers;
-import lotto.model.purchased.PurchasedInfo;
-import lotto.model.purchased.PurchasedLotto;
+import lotto.model.purchase.PurchaseLotto;
 import lotto.model.result.LottoResult;
-import lotto.type.LottoWinningPriceType;
+import lotto.model.winning.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,16 +15,33 @@ public class LottoMachine {
     public void start() {
         Money purchasedMoney = new Money(InputView.inputPurchasedMoney());
 
-        PurchasedInfo purchasedInfo = new PurchasedInfo(purchasedMoney, LottoAutoFactory.create());
-        OutputView.OutputPurchaseResult(purchasedInfo);
+        List<Lotto> lottoList = lottoAutoGenerate(purchasedMoney);
 
-        LottoNumbers winningNumbers = LottoNumbers.fromInputLottoNumbers(InputView.inputWinningNumber());
+        PurchaseLotto purchaseLotto = new PurchaseLotto(lottoList);
 
-        Map<LottoWinningPriceType, List<PurchasedLotto>> lottoWinningPriceTypeListMap =
-            purchasedInfo.winningLotto(winningNumbers);
+        WinningLotto winningLotto = inputWinningLotto();
+        outputResult(purchasedMoney, purchaseLotto, winningLotto);
+    }
 
-        LottoResult lottoStatistics = new LottoResult(lottoWinningPriceTypeListMap, purchasedMoney);
-        OutputView.OutputLottoResult(lottoStatistics);
+    private List<Lotto> lottoAutoGenerate(Money purchasedMoney) {
+        List<Lotto> lottoList = LottoFactory.create().generateAuto(purchasedMoney.possiblePurchaseLotto());
+        OutputView.OutputPurchaseResult(purchasedMoney.possiblePurchaseLotto(), lottoList);
+        return lottoList;
+    }
+
+    private WinningLotto inputWinningLotto() {
+        String[] lottoNumberArr = inputLottoNumberArr(InputView.inputWinningNumber());
+        String inputBonusNumber = InputView.inputBonusNumber();
+        return new WinningLotto(lottoNumberArr, inputBonusNumber);
+    }
+
+    private void outputResult(Money purchasedMoney, PurchaseLotto purchaseLotto, WinningLotto winningLotto) {
+        LottoResult lottoResult = purchaseLotto.rankMatch(winningLotto);
+        OutputView.OutputLottoResult(lottoResult, lottoResult.winningRate(purchasedMoney));
+    }
+
+    private String[] inputLottoNumberArr(String inputLottoNumbers) {
+        return inputLottoNumbers.replace(" ", "").split(",");
     }
 
 }
