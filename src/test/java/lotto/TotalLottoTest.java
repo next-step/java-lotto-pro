@@ -9,19 +9,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class TotalLottoTest {
     @Test
     public void 구매한_로또_개수_count() throws IllegalArgumentException {
-        TotalLotto totalLotto = new TotalLotto();
-        totalLotto.count(14000);
-        TotalLotto expectedTrue = new TotalLotto(14);
-        assertThat(totalLotto.equals(expectedTrue)).isEqualTo(true);
-
-        TotalLotto expectedFalse = new TotalLotto(20);
-        assertThat(totalLotto.equals(expectedFalse)).isEqualTo(false);
+        TotalLotto totalLotto = TotalLotto.from(14000);
+        assertThat(totalLotto.getCount()).isEqualTo(14);
     }
 
     @Test
     public void 구매금액_negative() throws IllegalArgumentException {
-        TotalLotto totalLotto = new TotalLotto();
-        assertThatThrownBy(() -> totalLotto.count(-14000))
+        assertThatThrownBy(() -> TotalLotto.from(-14000))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void 구매금액_잔액_존재() throws IllegalArgumentException {
+        assertThatThrownBy(() -> TotalLotto.from(14500))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

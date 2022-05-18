@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
 import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ public class LottoTest {
     @BeforeEach
     void setUp() {
         String input = "1, 2, 3, 4, 5, 6";
-        Lotto lotto = new Lotto(input);
+        Lotto lotto = LottoFactory.manualGenerator(input);
         stringToLotto = lotto;
     }
 
@@ -30,19 +31,19 @@ public class LottoTest {
 
     @Test
     public void 로또_생성_0보다_작은_수() {
-        assertThatThrownBy(() -> new Lotto("-1, 2, 3, 4, 5, 6"))
+        assertThatThrownBy(() -> LottoFactory.manualGenerator("-1, 2, 3, 4, 5, 6"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     public void 로또_생성_45보다_큰_수() {
-        assertThatThrownBy(() -> new Lotto("46, 2, 3, 4, 5, 6"))
+        assertThatThrownBy(() -> LottoFactory.manualGenerator("46, 2, 3, 4, 5, 6"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     public void 로또_생성_중복_수() {
-        assertThatThrownBy(() -> new Lotto("1, 1, 3, 4, 5, 6"))
+        assertThatThrownBy(() -> LottoFactory.manualGenerator("1, 1, 3, 4, 5, 6"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

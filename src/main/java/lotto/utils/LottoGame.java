@@ -1,6 +1,7 @@
 package lotto.utils;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
 import lotto.domain.LottoStatistic;
 import lotto.domain.TotalLotto;
 import lotto.view.InputView;
@@ -11,9 +12,8 @@ import java.util.Map;
 
 public class LottoGame {
     public void start() throws IOException {
-        TotalLotto totalLotto = new TotalLotto();
         int amount = inputAmount();
-        totalLotto.of(amount);
+        TotalLotto totalLotto = TotalLotto.from(amount);
         OutputView.printQuantity(totalLotto);
         Map<LottoStatistic, Integer> map = winningLotto(totalLotto);
         OutputView.printLottoStatistic(map);
@@ -23,13 +23,12 @@ public class LottoGame {
 
     private int inputAmount() {
         int amount = new InputView().printRequestAmount();
-        Validation.isValidCount(amount);
         return amount;
     }
 
     private Map<LottoStatistic, Integer> winningLotto(TotalLotto totalLotto) throws IOException {
         String inputWinning = new InputView().printRequestWinningLotto();
-        Lotto winningLotto = new Lotto(inputWinning);
+        Lotto winningLotto = LottoFactory.manualGenerator(inputWinning);
         Map<LottoStatistic, Integer> map = totalLotto.getLottoList().matchLottoStaticToString(winningLotto);
         return map;
     }

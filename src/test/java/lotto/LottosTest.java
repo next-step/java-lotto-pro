@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
 import lotto.domain.LottoStatistic;
 import lotto.domain.Lottos;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ public class LottosTest {
         input[0] = "1,2,3,4,5,6";
         input[1] = "1,2,3,7,8,9";
         lottos.manualGenerator(input);
-        Lotto winningLotto = new Lotto("1,2,3,4,5,6");
+        Lotto winningLotto = LottoFactory.manualGenerator(input[0]);
         List<LottoStatistic> list = lottos.matchLottoStatic(winningLotto);
         assertThat(list.get(0)).isEqualTo(LottoStatistic.valueOf(6));
         assertThat(list.get(1)).isEqualTo(LottoStatistic.valueOf(3));

@@ -11,7 +11,7 @@ public class Lottos {
     public void autoGenerator(int count) {
         List<Lotto> list = new ArrayList<>();
         for (int i=0; i<count; i++) {
-            list.add(new Lotto());
+            list.add(LottoFactory.autoGenerator());
         }
         this.lottoList = list;
     }
@@ -19,7 +19,7 @@ public class Lottos {
     public void manualGenerator(String[] input) {
         List<Lotto> list = new ArrayList<>();
         for (String s : input) {
-            list.add(new Lotto(s));
+            list.add(LottoFactory.manualGenerator(s));
         }
         this.lottoList = list;
     }
