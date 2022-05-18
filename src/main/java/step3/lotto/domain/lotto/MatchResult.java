@@ -5,10 +5,10 @@ package step3.lotto.domain.lotto;
  * @date : 2022/05/17 1:42 오후
  */
 public enum MatchResult {
-    FIRST_PLACE(6, 2000000000),
-    SECOND_PLACE(5, 1500000),
-    THIRD_PLACE(4, 50000),
-    FORTH_PLACE(3, 5000),
+    FIRST_PLACE(6, 2_000_000_000),
+    SECOND_PLACE(5, 1_500_000),
+    THIRD_PLACE(4, 50_000),
+    FORTH_PLACE(3, 5_000),
     NOTHING(0, 0);
 
     private final int matchCount;

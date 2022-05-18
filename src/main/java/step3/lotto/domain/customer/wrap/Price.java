@@ -6,7 +6,7 @@ package step3.lotto.domain.customer.wrap;
  */
 public class Price {
 
-    public static final int MINIMUM_LOTTO_PRICE = 1000;
+    public static final int MINIMUM_LOTTO_PRICE = 1_000;
     public static final String MINIMUM_LOTTO_PRICE_ERROR = "최소 1000원 이상의 금액을 입력하세요.";
     public static final String HAS_CHANGES_ERROR = "1000원 단위의 금액만 입력하세요.";
 

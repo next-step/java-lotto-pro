@@ -1,7 +1,6 @@
 package step3.lotto.domain.customer;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,15 +16,12 @@ class CustomerTest {
     @DisplayName("사용자 도메인 생성 여부 검증")
     public void createCustomerTest() {
         // Given
-        final int given = 1000;
+        final int given = 1_000;
 
         // When
         Customer actual = new Customer(given);
 
         // Then
-        assertAll(
-            () -> assertThat(actual.getTryCount()).isEqualTo(1),
-            () -> assertThat(actual.getLottosSize()).isEqualTo(actual.getTryCount())
-        );
+        assertThat(actual.getTryCount()).isEqualTo(1);
     }
 }

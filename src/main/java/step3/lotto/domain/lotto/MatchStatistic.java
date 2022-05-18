@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class MatchStatistic {
 
-    public static final int SINGLE_GAME_PRICE = 1000;
+    public static final int SINGLE_GAME_PRICE = 1_000;
     public static final int RATE_FORMAT_MULTIPLICATION = 100;
     public static final Double RATE_FORMAT_DIVISOR = 100.0;
 
@@ -52,16 +52,16 @@ public class MatchStatistic {
 
     private void addPlaceCount(MatchResult matchResult) {
         if (matchResult.isFirstPlace()) {
-            this.firstPlaceCount++;
+            firstPlaceCount++;
         }
         if (matchResult.isSecondPlace()) {
-            this.secondPlaceCount++;
+            secondPlaceCount++;
         }
         if (matchResult.isThirdPlace()) {
-            this.thirdPlaceCount++;
+            thirdPlaceCount++;
         }
         if (matchResult.isForthPlace()) {
-            this.forthPlaceCount++;
+            forthPlaceCount++;
         }
     }
 
