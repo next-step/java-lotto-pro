@@ -2,6 +2,7 @@ package step3.lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static step3.lotto.domain.lotto.Winnings.BONUS_NUMBER_ALREADY_EXIST_IN_WINNING_LOTTO_ERROR;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
@@ -37,6 +38,7 @@ public class WinningsTest {
 
         // When & Then
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> Winnings.of(winningsLotto, bonusNumber));
+            .isThrownBy(() -> Winnings.of(winningsLotto, bonusNumber))
+            .withMessageMatching(BONUS_NUMBER_ALREADY_EXIST_IN_WINNING_LOTTO_ERROR);
     }
 }

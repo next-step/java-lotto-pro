@@ -14,6 +14,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public MatchStatistic match(Winnings winnings) {
+        MatchStatistic matchStatistic = new MatchStatistic();
+        for (Lotto lotto : lottos) {
+            matchStatistic.add(lotto.match(winnings));
+        }
+        return matchStatistic;
+    }
+
     public MatchStatistic match(Lotto winningLotto) {
         MatchStatistic matchStatistic = new MatchStatistic();
         for (Lotto lotto : lottos) {

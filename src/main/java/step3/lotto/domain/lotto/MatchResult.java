@@ -1,14 +1,17 @@
 package step3.lotto.domain.lotto;
 
+import java.util.Arrays;
+
 /**
  * @author : choi-ys
  * @date : 2022/05/17 1:42 오후
  */
 public enum MatchResult {
     FIRST_PLACE(6, 2_000_000_000),
-    SECOND_PLACE(5, 1_500_000),
-    THIRD_PLACE(4, 50_000),
-    FORTH_PLACE(3, 5_000),
+    SECOND_PLACE(5, 3_000_000),
+    THIRD_PLACE(5, 1_500_000),
+    FORTH_PLACE(4, 50_000),
+    FIFTH_PLACE(3, 5_000),
     NOTHING(0, 0);
 
     private final int matchCount;
@@ -17,6 +20,36 @@ public enum MatchResult {
     MatchResult(int matchCount, int rewardPrice) {
         this.matchCount = matchCount;
         this.rewardPrice = rewardPrice;
+    }
+
+    public static MatchResult valueOf(int countOfMatch, boolean matchBonus) {
+        if (isNotReachedCount(countOfMatch)) {
+            return MatchResult.NOTHING;
+        }
+
+        if (isSecondPlaceCandidate(countOfMatch)) {
+            return choiceSecondPlaceOrThirdPlace(matchBonus);
+        }
+
+        return Arrays.stream(MatchResult.values())
+            .filter(matchResult -> matchResult.getMatchCount() == countOfMatch)
+            .findFirst()
+            .get();
+    }
+
+    private static MatchResult choiceSecondPlaceOrThirdPlace(boolean matchBonus) {
+        if (matchBonus) {
+            return MatchResult.SECOND_PLACE;
+        }
+        return MatchResult.THIRD_PLACE;
+    }
+
+    private static boolean isSecondPlaceCandidate(int countOfMatch) {
+        return countOfMatch == SECOND_PLACE.getMatchCount();
+    }
+
+    private static boolean isNotReachedCount(int countOfMatch) {
+        return countOfMatch < 3;
     }
 
     public int getMatchCount() {
@@ -41,5 +74,9 @@ public enum MatchResult {
 
     public boolean isForthPlace() {
         return this == FORTH_PLACE;
+    }
+
+    private boolean isNothing() {
+        return this == NOTHING;
     }
 }

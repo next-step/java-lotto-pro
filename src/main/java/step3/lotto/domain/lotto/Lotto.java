@@ -37,6 +37,10 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
+    public MatchResult match(Winnings winnings) {
+        return MatchResult.valueOf(matchCount(winnings.getWinningsLotto()), contains(winnings.getBonusNumber()));
+    }
+
     public MatchResult match(Lotto winningLotto) {
         return matchResult(matchCount(winningLotto));
     }

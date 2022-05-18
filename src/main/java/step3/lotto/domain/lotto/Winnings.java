@@ -26,4 +26,12 @@ public class Winnings {
             throw new IllegalArgumentException(BONUS_NUMBER_ALREADY_EXIST_IN_WINNING_LOTTO_ERROR);
         }
     }
+
+    public Lotto getWinningsLotto() {
+        return winningsLotto;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 }

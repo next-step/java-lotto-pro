@@ -3,7 +3,6 @@ package step3.lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static step3.lotto.view.ResultView.printWinningStatistics;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
@@ -23,16 +22,19 @@ public class LottosTest {
         Lottos lottos = new Lottos(Arrays.asList(
             Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
             Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7)),
+            Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 8)),
             Lotto.of(Arrays.asList(1, 2, 3, 4, 7, 8)),
             Lotto.of(Arrays.asList(1, 2, 3, 7, 8, 9)),
             Lotto.of(Arrays.asList(1, 2, 7, 8, 9, 10)),
             Lotto.of(Arrays.asList(1, 7, 8, 9, 10, 11)),
             Lotto.of(Arrays.asList(7, 8, 9, 10, 11, 12))
         ));
-        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningsLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber lottoNumber = LottoNumber.of(7);
+        Winnings winnings = Winnings.of(winningsLotto, lottoNumber);
 
         // When
-        MatchStatistic matchStatistic = lottos.match(winningLotto);
+        MatchStatistic matchStatistic = lottos.match(winnings);
 
         // Then
         assertAll(
@@ -40,7 +42,7 @@ public class LottosTest {
             () -> assertThat(matchStatistic.getSecondPlaceCount()).as("5개 일치 수").isEqualTo(1),
             () -> assertThat(matchStatistic.getThirdPlaceCount()).as("4개 일치 수").isEqualTo(1),
             () -> assertThat(matchStatistic.getForthPlaceCount()).as("3개 일치 수").isEqualTo(1),
-            () -> assertThat(matchStatistic.getRateOfProfit()).as("수익률").isEqualTo(285936.42)
+            () -> assertThat(matchStatistic.getRateOfProfit()).as("수익률").isEqualTo(250569.37)
         );
     }
 }
