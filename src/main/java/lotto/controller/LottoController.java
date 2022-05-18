@@ -9,6 +9,7 @@ public class LottoController {
 
     private final InputView inputView;
     private final ResultView resultView;
+    private static final int ZERO = 0;
 
     public LottoController(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
@@ -23,6 +24,8 @@ public class LottoController {
     private void play(LottoGame game) {
         insertMoney(game);
 
+        purchaseLotto(game);
+
         inputWinnerNumbers(game);
         inputBonusNumbers(game);
 
@@ -34,9 +37,27 @@ public class LottoController {
         do {
             amount = inputView.insertMoney();
         } while (!game.insertMoney(amount));
+    }
 
-        int countOfLotto = game.buyLottoTicket(new RandomNumberGenerator());
-        resultView.printGameStart(countOfLotto, game.getUserLotto());
+    private void purchaseLotto(LottoGame game) {
+        int countOfManualLotto = inputManualLottoCount(game);
+
+        while (countOfManualLotto != game.getUserLotto().size()) {
+            game.inputManualLottoNumber(inputView.inputManualLottoNumber(game.getUserLotto().size() == ZERO));
+        }
+
+        int countOfAutoLotto = game.purchaseAutoLotto(new RandomNumberGenerator());
+
+        resultView.printGameStart(countOfManualLotto, countOfAutoLotto, game.getUserLotto());
+    }
+
+    private int inputManualLottoCount(LottoGame game) {
+        String countOfManualLotto;
+        do {
+            countOfManualLotto = inputView.inputManualLottoCount();
+        } while (!game.purchaseManualLotto(countOfManualLotto));
+
+        return Integer.parseInt(countOfManualLotto);
     }
 
     private void inputWinnerNumbers(LottoGame game) {

@@ -9,6 +9,7 @@ public class LottoGame {
     private Lotto winnersLotto;
     private WinningLotto winningLotto;
     private Coin coin;
+    private LottoCount lottoCount;
     private final GameResult gameResult = new GameResult();
     private static final double BENEFIT_REFERENCE_VALUE = 1;
 
@@ -19,7 +20,7 @@ public class LottoGame {
     public boolean insertMoney(String money) {
         try {
             coin = new Coin(money);
-            Price.minimumPriceCheck(money);
+            lottoCount = new LottoCount(coin.maxCountOfLotto());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -27,8 +28,26 @@ public class LottoGame {
         return true;
     }
 
-    public int buyLottoTicket(NumberGenerator numberGenerator) {
-        int countOfLotto = coin.buyLottoTicket(Price.lottoPrice());
+    public boolean purchaseManualLotto(String countOfManualLotto) {
+        try {
+            lottoCount.purchaseManualLottoTicket(countOfManualLotto);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public void inputManualLottoNumber(String inputs) {
+        try {
+            userLotto.add(new Lotto(new InputNumberGenerator(inputs)));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public int purchaseAutoLotto(NumberGenerator numberGenerator) {
+        final int countOfLotto = lottoCount.purchaseAutoLottoTicket();
         for (int index = 0; index < countOfLotto; index++) {
             userLotto.add(new Lotto(numberGenerator));
         }
