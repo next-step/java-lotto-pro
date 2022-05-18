@@ -11,11 +11,8 @@ class LottoResultTest {
 
     @Test
     public void 로또_당첨_결과_조회_테스트() {
-        PurchasedLotto purchasedLotto = createSamplePurchasedLotto();
-        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        LottoNo bonusNumber = new LottoNo(7);
-
-        LottoResult result = new LottoResult(purchasedLotto.compareLottos(winningLotto, bonusNumber));
+        List<Ranking> rankings = Arrays.asList(Ranking.FIRST, Ranking.SECOND, Ranking.THIRD, Ranking.FOURTH);
+        LottoResult result = new LottoResult(rankings);
 
         assertThat(result.getRankingList())
                 .contains(Ranking.FIRST)
@@ -24,12 +21,14 @@ class LottoResultTest {
                 .contains(Ranking.FOURTH);
     }
 
-    private PurchasedLotto createSamplePurchasedLotto() {
-        List<Lotto> lottoList = Arrays.asList(
-                new Lotto(1, 2, 3, 4, 5, 6),
-                new Lotto(1, 2, 3, 4, 5, 7),
-                new Lotto(1, 2, 3, 4, 5, 8),
-                new Lotto(1, 2, 3, 4, 7, 8));
-        return new PurchasedLotto(lottoList);
+    @Test
+    public void 로또_결과_조회_테스트() {
+        List<Ranking> rankings = Arrays.asList(Ranking.FIRST, Ranking.SECOND, Ranking.THIRD, Ranking.FOURTH);
+        LottoResult result = new LottoResult(rankings);
+
+        assertThat(result.findRankings(6, false)).hasSize(1);
+        assertThat(result.findRankings(5, true)).hasSize(1);
+        assertThat(result.findRankings(5, false)).hasSize(1);
+        assertThat(result.findRankings(4, false)).hasSize(1);
     }
 }
