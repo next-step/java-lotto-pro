@@ -41,26 +41,6 @@ public class Lotto {
         return MatchResult.valueOf(matchCount(winnings.getWinningsLotto()), contains(winnings.getBonusNumber()));
     }
 
-    public MatchResult match(Lotto winningLotto) {
-        return matchResult(matchCount(winningLotto));
-    }
-
-    private MatchResult matchResult(int matchCount) {
-        if (matchCount == 3) {
-            return MatchResult.FORTH_PLACE;
-        }
-        if (matchCount == 4) {
-            return MatchResult.THIRD_PLACE;
-        }
-        if (matchCount == 5) {
-            return MatchResult.SECOND_PLACE;
-        }
-        if (matchCount == 6) {
-            return MatchResult.FIRST_PLACE;
-        }
-        return MatchResult.NOTHING;
-    }
-
     public int matchCount(Lotto winningsLotto) {
         int matchCount = 0;
         for (LottoNumber answerLottoNumber : winningsLotto.lottoNumbers) {

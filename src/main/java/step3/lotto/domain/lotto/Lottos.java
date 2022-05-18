@@ -22,13 +22,6 @@ public class Lottos {
         return matchStatistic;
     }
 
-    public MatchStatistic match(Lotto winningLotto) {
-        MatchStatistic matchStatistic = new MatchStatistic();
-        for (Lotto lotto : lottos) {
-            matchStatistic.add(lotto.match(winningLotto));
-        }
-        return matchStatistic;
-    }
 
     public List<Lotto> getLottos() {
         return lottos;
