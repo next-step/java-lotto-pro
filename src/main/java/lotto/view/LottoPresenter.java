@@ -3,11 +3,13 @@ package lotto.view;
 import static lotto.domain.message.InformationMessage.LOSE;
 import static lotto.domain.message.InformationMessage.RESULT;
 import static lotto.domain.message.InformationMessage.WIN;
+import static lotto.domain.message.RequestMessage.BONUS_BALL;
 import static lotto.domain.message.RequestMessage.PAYMENT;
 import static lotto.domain.message.RequestMessage.WINNING_NUMBERS;
 
 import java.util.Map;
 import java.util.Scanner;
+import lotto.domain.BonusBall;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPayment;
 import lotto.domain.LottoTickets;
@@ -55,6 +57,11 @@ public class LottoPresenter {
             System.out.println(e.getMessage());
             return requestWinningNumbers(scanner);
         }
+    }
+
+    private BonusBall requestBonusBall(final Scanner scanner) {
+        System.out.println(BONUS_BALL.getMessage());
+        return null;
     }
 
     public void printResult(final int payment, final Map<Prize, Integer> prizeMap) {

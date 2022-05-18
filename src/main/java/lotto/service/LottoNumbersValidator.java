@@ -9,7 +9,7 @@ public class LottoNumbersValidator {
     public static void validateNumbers(final List<Integer> numbers) {
         checkAmountOfNumbers(numbers);
         for (final int number : numbers) {
-            LottoNumberValidator.checkRangeOfNumber(number);
+            LottoNumberValidator.checkRangeOfNumber(number, INVALID_LOTTO_NUMBERS);
         }
     }
 

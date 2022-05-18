@@ -1,5 +1,7 @@
 package lotto.service;
 
+import static lotto.domain.message.ErrorMessage.INVALID_LOTTO_NUMBERS;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,7 +13,7 @@ class LottoNumberValidatorTest {
     @DisplayName("번호가 1보다 작거나 45보다 크면 IllegalrgumentException을 발생시킨다")
     void when_number_is_invalid_should_throw_IllegalArgumentException(final int number) {
         // when and then
-        Assertions.assertThatThrownBy(() -> LottoNumberValidator.checkRangeOfNumber(number))
+        Assertions.assertThatThrownBy(() -> LottoNumberValidator.checkRangeOfNumber(number, INVALID_LOTTO_NUMBERS))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

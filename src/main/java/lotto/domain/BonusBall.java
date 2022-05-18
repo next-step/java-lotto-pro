@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.domain.message.ErrorMessage.INVALID_BONUS_BALL;
+
 import java.util.Objects;
 import lotto.service.LottoNumberValidator;
 
@@ -7,8 +9,22 @@ public class BonusBall {
     private final int number;
 
     public BonusBall(final int number) {
-        LottoNumberValidator.checkRangeOfNumber(number);
+        LottoNumberValidator.checkRangeOfNumber(number, INVALID_BONUS_BALL);
         this.number = number;
+    }
+
+    public static BonusBall convertAndCreate(final String numberString) {
+        final int number = parseInt(numberString);
+        LottoNumberValidator.checkRangeOfNumber(number, INVALID_BONUS_BALL);
+        return new BonusBall(number);
+    }
+
+    private static int parseInt(final String numbersString) {
+        try {
+            return Integer.parseInt(numbersString);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_BONUS_BALL.getMessage());
+        }
     }
 
     public int getNumber() {
