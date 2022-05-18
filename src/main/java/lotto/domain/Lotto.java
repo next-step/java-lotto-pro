@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.type.LottoRank;
+
 import java.util.List;
 
 public class Lotto {
@@ -32,6 +34,10 @@ public class Lotto {
 
     public boolean isOverlapBonusBallNumber(int number) {
         return this.lottoNumbers.contains(number);
+    }
+
+    public LottoRank checkLottoRank(Lotto answerLotto) {
+        return LottoRank.findLottoRankByMatchedCount(countMatchedNumber(answerLotto), false);
     }
 
     public int countMatchedNumber(Lotto answerLotto) {
