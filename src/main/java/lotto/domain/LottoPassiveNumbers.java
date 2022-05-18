@@ -7,19 +7,19 @@ import java.util.stream.Collectors;
 
 public class LottoPassiveNumbers {
 
-    private final LottoPassiveCount lottoPassiveCount;
+    private final LottoGameCount lottoGameCount;
 
-    public LottoPassiveNumbers(LottoPassiveCount lottoPassiveCount) {
-        this.lottoPassiveCount = lottoPassiveCount;
+    public LottoPassiveNumbers(LottoGameCount lottoGameCount) {
+        this.lottoGameCount = lottoGameCount;
     }
 
     public List<LottoNumbers> generatePassiveNumbers(String[] splitPassiveNumber) {
-        if (lottoPassiveCount.getPassiveCount() < 0) {
+        if (lottoGameCount.getPassiveCount() < 0) {
             return new ArrayList<>();
         }
 
         List<LottoNumbers> passiveNumbers = new ArrayList<>();
-        for (int i = 0; i < lottoPassiveCount.getPassiveCount(); i++) {
+        for (int i = 0; i < lottoGameCount.getPassiveCount(); i++) {
             List<LottoNumber> passiveInputLottoNumbers = passiveInputLottoNumbers(splitPassiveNumber);
             passiveNumbers.add(new LottoNumbers(passiveInputLottoNumbers));
         }

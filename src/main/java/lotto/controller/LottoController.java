@@ -4,23 +4,29 @@ import lotto.domain.*;
 
 import java.util.List;
 
-import static lotto.view.InputView.bonusNumberString;
-import static lotto.view.InputView.lastWeekWinningNumberString;
+import static lotto.domain.LottoPassive.splitPassiveNumber;
+import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
 public class LottoController {
-    private final int gameCount;
-    private final List<LottoNumbers> passiveLottoNumbers;
+    private final LottoGameCount lottoGameCount;
 
-    public LottoController(int gameCount, List<LottoNumbers> passiveLottoNumbers) {
-        this.gameCount = gameCount;
-        this.passiveLottoNumbers = passiveLottoNumbers;
+    public LottoController(LottoGameCount lottoGameCount) {
+        this.lottoGameCount = lottoGameCount;
     }
 
-    public List<LottoNumbers> generateLottoGame() {
-        purchasesCountMessage(gameCount);
-        List<LottoNumbers> lottoNumbers = Lotto.generateLottoGame(gameCount, passiveLottoNumbers);
-        resultGameCount(gameCount, passiveLottoNumbers.size());
+    public List<LottoNumbers> generatePassiveNumbers() {
+        String[] lottoPassive = lottoGameCount.getPassiveCount() > 0
+                ? splitPassiveNumber(inputPassiveNumbersString())
+                : new String[0];
+
+        return new LottoPassiveNumbers(lottoGameCount).generatePassiveNumbers(lottoPassive);
+    }
+
+    public List<LottoNumbers> generateLottoGame(List<LottoNumbers> lottoPassiveNumbers) {
+        purchasesCountMessage(lottoGameCount.getGameCount());
+        List<LottoNumbers> lottoNumbers = Lotto.generateLottoGame(lottoGameCount.getGameCount(), lottoPassiveNumbers);
+        resultGameCount(lottoGameCount.getGameCount(), lottoPassiveNumbers.size());
         resultLottoNumbers(lottoNumbers);
 
         return lottoNumbers;

@@ -13,16 +13,16 @@ class LottoPassiveCountTest {
     @ParameterizedTest
     @ValueSource(strings = {"1"})
     void 로또_정상_수동_설정(String string) {
-        LottoPassiveCount lottoPassiveCount = new LottoPassiveCount(3, string);
+        LottoGameCount lottoGameCount = new LottoGameCount(3, string);
 
-        assertThat(lottoPassiveCount.getPassiveCount()).isEqualTo(1);
+        assertThat(lottoGameCount.getPassiveCount()).isEqualTo(1);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"4"})
     void 로또_게임_설정보다_수동이_번호가_많은_경우(String string) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoPassiveCount(3, string))
+                .isThrownBy(() -> new LottoGameCount(3, string))
                 .withMessageContaining(PASSIVE_COUNT_OUT);
     }
 
@@ -30,7 +30,7 @@ class LottoPassiveCountTest {
     @ValueSource(strings = {"a"})
     void 로또_게임_수동_게임_설정시_숫자가_아닌_경우(String string) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoPassiveCount(3, string))
+                .isThrownBy(() -> new LottoGameCount(3, string))
                 .withMessageContaining(PASSIVE_COUNT_NOT_NUMBER);
     }
 

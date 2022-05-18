@@ -10,9 +10,9 @@ class LottoPassiveNumbersTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,6"})
     void 수동_로또_설정(String string) {
-        LottoPassiveCount lottoPassiveCount = new LottoPassiveCount(3, "1");
+        LottoGameCount lottoGameCount = new LottoGameCount(3, "1");
 
-        LottoPassiveNumbers lottoPassiveNumbers = new LottoPassiveNumbers(lottoPassiveCount);
+        LottoPassiveNumbers lottoPassiveNumbers = new LottoPassiveNumbers(lottoGameCount);
 
         assertThat(lottoPassiveNumbers.generatePassiveNumbers(string.split(","))).size().isEqualTo(1);
     }

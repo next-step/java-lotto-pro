@@ -4,11 +4,11 @@ import static lotto.common.Messages.PASSIVE_COUNT_NOT_NUMBER;
 import static lotto.common.Messages.PASSIVE_COUNT_OUT;
 import static lotto.utils.NumberUtil.isNumber;
 
-public class LottoPassiveCount {
+public class LottoGameCount {
     private final int gameCount;
     private final int passiveCount;
 
-    public LottoPassiveCount(int gameCount, String passiveCountString) {
+    public LottoGameCount(int gameCount, String passiveCountString) {
         validateNumber(passiveCountString);
         this.gameCount = gameCount;
         this.passiveCount = Integer.parseInt(passiveCountString);
@@ -30,5 +30,9 @@ public class LottoPassiveCount {
 
     public int getPassiveCount() {
         return passiveCount;
+    }
+
+    public int getGameCount() {
+        return gameCount;
     }
 }
