@@ -38,8 +38,20 @@ public class LottoGame {
     }
 
     private List<LottoNumbers> buyLotto() {
-        int drawCount = budget / LOTTO_PRICE;
-        return IntStream.range(0,drawCount).mapToObj(i->lottoNumbersFactory.createRandomLottoNumbers()).collect(toList());
+        BuyLotto buyLotto = new BuyLotto(budget,lottoNumbersFactory);
+        int manualBuyCount = inputView.takeManualBuyCount();
+        manualBuyLotto(buyLotto, manualBuyCount);
+        int autoBuyCount = buyLotto.autoBuyRemainingBudget();
+        resultView.printBoughtCount(manualBuyCount,autoBuyCount);
+        return buyLotto.boughtLottos();
+    }
+
+    private void manualBuyLotto(BuyLotto buyLotto,int manualBuyCount){
+        inputView.printManualLottoNumbersHeader();
+        for(int i=0; i < manualBuyCount; i++){
+            List<Integer> numbers = inputView.takeManualLottoNumbers();
+            buyLotto.manual(numbers);
+        }
     }
 
     private WinLottoNumbers drawWinNumbers() {

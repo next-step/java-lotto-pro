@@ -5,7 +5,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import static java.util.stream.Collectors.*;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import lotto.game.LottoGame;
 import lotto.game.LottoGameResult;
