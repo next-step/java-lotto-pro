@@ -8,16 +8,13 @@ public class LottoGame {
     }
 
     public void calculation() {
-        Lottos lottos = purchaseLottos();
-        WinLotto winLotto = setUpWinLotto();
-        LottoResult result = lottos.calculation(winLotto);
-        ResultView.result(result);
-    }
+        Player player = new Player(InputView.inputMoney());
+        player.drawManualAndRemainAuto(InputView.inputManualLottoCount());
+        ResultView.printPurchaseLottos(player);
 
-    private Lottos purchaseLottos() {
-        Lottos lottos = new Lottos(InputView.inputMoney());
-        ResultView.printPurchaseLottos(lottos);
-        return lottos;
+        WinLotto winLotto = setUpWinLotto();
+        LottoResult result = player.getTotalLottos().calculation(winLotto);
+        ResultView.result(result);
     }
 
     private WinLotto setUpWinLotto(){

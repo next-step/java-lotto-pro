@@ -2,7 +2,12 @@ package Lotto;
 
 public class Player {
     private PurchaseMoney purchaseMoney;
+    private int manualPurchaseCount = 0;
     private Lottos TotalLottos;
+
+    public int getManualPurchaseCount() {
+        return manualPurchaseCount;
+    }
 
     public Lottos getTotalLottos() {
         return TotalLottos;
@@ -14,10 +19,14 @@ public class Player {
 
     public void drawManualAndRemainAuto(int manualCount) {
         purchaseMoney.manualValidation(manualCount);
-        int manualMoney = purchaseMoney.getMoney() - (manualCount * PurchaseMoney.LOTTO_PURCHASE_UNIT);
+        manualPurchaseCount = manualCount;
 
+        int manualMoney = manualCount * PurchaseMoney.LOTTO_PURCHASE_UNIT;
         Lottos manualLottos = new Lottos(manualMoney);
+        manualLottos.manualDraw();
         Lottos autoLottos = new Lottos(purchaseMoney.getMoney() - manualMoney);
+        autoLottos.draw();
+
         this.TotalLottos = Lottos.combine(manualLottos, autoLottos);
     }
 }

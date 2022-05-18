@@ -1,16 +1,29 @@
 package Lotto;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PlayerTest {
-    @ParameterizedTest
-    @CsvSource(value = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"})
-    void 금액10000원_수동10장_생성_총10장(int inputManualCount) {
+    @Test
+    void 금액10000원_수동0장_자동10장_생성_총10장() {
         Player player = new Player(10000);
-        player.drawManualAndRemainAuto(inputManualCount);
+        player.drawManualAndRemainAuto(0);
         assertThat(player.getTotalLottos().getLottos().size()).isEqualTo(10);
+    }
+
+    @Test
+    void 금액10000원_수동_금액초과시() {
+        Player player = new Player(10000);
+        assertThatThrownBy(() -> player.drawManualAndRemainAuto(11))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 금액10000원_수동_음수입력() {
+        Player player = new Player(10000);
+        assertThatThrownBy(() -> player.drawManualAndRemainAuto(-1))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

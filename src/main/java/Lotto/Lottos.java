@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Lottos {
     private PurchaseMoney purchaseMoney = new PurchaseMoney();
-    private PurchaseCount purchaseCount;
+    private PurchaseCount purchaseCount = new PurchaseCount();
     private List<Lotto> lottos = new ArrayList<Lotto>();
 
     public PurchaseMoney getPurchaseMoney() {
@@ -32,7 +32,6 @@ public class Lottos {
 
         purchaseMoney = new PurchaseMoney(money);
         purchaseCount = new PurchaseCount(purchaseMoney);
-        lottos = draw(purchaseCount);
     }
 
     public Lottos(int money, List<Lotto> lottos) {
@@ -41,7 +40,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    private List<Lotto> draw(PurchaseCount purchaseCount) {
+    public void draw() {
+        if(purchaseCount.getCount() == 0)
+            return;
+
         List<Lotto> drawLottos = new ArrayList<Lotto>();
         Lotto lotto;
         for(int i = 0; i < purchaseCount.getCount(); i++) {
@@ -49,7 +51,7 @@ public class Lottos {
             lotto.generate();
             drawLottos.add(lotto);
         }
-        return drawLottos;
+        lottos = drawLottos;
     }
 
     public LottoResult calculation(WinLotto winLotto) {
@@ -66,5 +68,15 @@ public class Lottos {
         lottos.addAll(manualLottos.getLottos());
         lottos.addAll(autoLottos.getLottos());
         return new Lottos(manualLottos.getPurchaseMoney().getMoney() + autoLottos.getPurchaseMoney().getMoney(), lottos);
+    }
+
+    public void manualDraw() {
+        if(purchaseCount.getCount() == 0)
+            return;
+
+        List<String> inputManualNumber = InputView.inputManualLottoNumber(purchaseCount.getCount());
+        for(int i = 0; i < inputManualNumber.size(); i++) {
+            lottos.add(new Lotto(inputManualNumber.get(i)));
+        }
     }
 }
