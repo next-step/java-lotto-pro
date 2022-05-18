@@ -100,4 +100,25 @@ public class LottoNumbersTest {
                 new LottoNumber(1)
         );
     }
+
+    @Test
+    void LottoNumbers는_사이즈가_동일하고_같은_원소를_순서_상관없이_모두_포함하고_있으면_같다고_생각한다() {
+        LottoNumbers lottoNumbers = new LottoNumbers(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        );
+
+        assertThat(lottoNumbers).isEqualTo(new LottoNumbers(
+                new LottoNumber(6),
+                new LottoNumber(5),
+                new LottoNumber(4),
+                new LottoNumber(3),
+                new LottoNumber(2),
+                new LottoNumber(1)
+        ));
+    }
 }

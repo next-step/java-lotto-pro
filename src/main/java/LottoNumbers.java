@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers implements Iterable<LottoNumber> {
@@ -33,6 +34,23 @@ public class LottoNumbers implements Iterable<LottoNumber> {
 
     public boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoNumbers)) {
+            return false;
+        }
+        LottoNumbers that = (LottoNumbers) o;
+        return this.lottoNumbers.size() == that.lottoNumbers.size() && this.lottoNumbers.containsAll(that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
