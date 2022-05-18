@@ -35,7 +35,7 @@ public class GameManager {
 
     private Money takeMoney() {
         try {
-            return new Money(InputView.readMoney(), LottoTicket.PRICE);
+            return new Money(InputView.readMoney());
         } catch (IllegalArgumentException e) {
             ResultView.printExceptionMessage(e.getMessage());
             return null;

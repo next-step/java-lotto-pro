@@ -1,19 +1,25 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    public static final int PRICE = 1000;
+    private static final int PRICE_PER_GAME = 1000;
     private final List<LottoGame> lottoGames;
 
-    public LottoTicket(List<List<Integer>> lottoGamesNumbers) {
-        this.lottoGames = lottoGamesNumbers.stream()
-                .map(gameNumbers -> new LottoGame(gameNumbers))
-                .collect(Collectors.toList());
+    public LottoTicket() {
+        this.lottoGames = new ArrayList<>();
+    }
+
+    public int numberOfGames(Money money) {
+        return money.numberOfGames(PRICE_PER_GAME);
+    }
+
+    public void addGame(LottoGame lottoGame) {
+        lottoGames.add(lottoGame);
     }
 
     public int size() {
@@ -21,7 +27,7 @@ public class LottoTicket {
     }
 
     public int moneyValue() {
-        return lottoGames.size() * PRICE;
+        return lottoGames.size() * PRICE_PER_GAME;
     }
 
     public TicketCheckResult check(WinningNumbers winningNumbers, LottoNumber bonusNumber) {

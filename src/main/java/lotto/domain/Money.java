@@ -2,22 +2,16 @@ package lotto.domain;
 
 public class Money {
 
-    private final int gamePrice;
     private final int value;
 
-    public Money(String money, int gamePrice) {
-        this.gamePrice = gamePrice;
-        validateBounds(money);
+    public Money(String money) {
+        validateUnsignedInt(money);
         int value = Integer.parseUnsignedInt(money);
-        validatePurchasable(value);
+        validateNotZero(value);
         this.value = value;
     }
 
-    public int numberOfGames() {
-        return value / gamePrice;
-    }
-
-    private void validateBounds(String money) {
+    private void validateUnsignedInt(String money) {
         try {
             Integer.parseUnsignedInt(money);
         } catch (NumberFormatException e) {
@@ -25,9 +19,13 @@ public class Money {
         }
     }
 
-    private void validatePurchasable(int money) {
-        if (money < gamePrice) {
-            throw new IllegalArgumentException("최소 구입 가능 금액보다 작습니다");
+    private void validateNotZero(int value) {
+        if (value == 0) {
+            throw new IllegalArgumentException("구입 금액은 0보다 커야 합니다.");
         }
+    }
+
+    public int numberOfGames(int gamePrice) {
+        return value / gamePrice;
     }
 }
