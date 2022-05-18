@@ -11,6 +11,10 @@ public class ResultView {
         System.out.printf((BUY_COUNT_MESSAGE) + "%n", count);
     }
 
+    public static void printLottoNumber(String lotto) {
+        System.out.println(lotto);
+    }
+
     public static void resultLotto(final long matchCount, final long prize, final long count) {
         System.out.printf((RESULT_LOTTO_MESSAGE) + "%n", matchCount, prize, count);
     }
