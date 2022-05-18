@@ -36,4 +36,10 @@ public class ListUtils {
                 .distinct()
                 .collect(Collectors.toList());
     }
+
+    public static <T> List<T> addAll(final List<T> firstList, final List<T> secondList) {
+        final ArrayList<T> copyList = new ArrayList<>(firstList);
+        copyList.addAll(secondList);
+        return copyList;
+    }
 }
