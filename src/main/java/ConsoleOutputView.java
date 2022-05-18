@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class ConsoleOutputView {
+    public void view(String string) {
+        System.out.println(string);
+    }
     public void view(Lotto lotto) {
-        System.out.println(lotto.size() + "개를 구매했습니다.");
         for (LottoNumbers lottoNumbers : lotto) {
             System.out.println(lottoNumbers);
         }
