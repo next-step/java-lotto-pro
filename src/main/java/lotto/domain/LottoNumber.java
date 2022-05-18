@@ -18,6 +18,13 @@ public class LottoNumber {
         this.value = lottoNumber;
     }
 
+    public LottoNumber(String bonusLottoNumber, WinningNumbers winningNumbers) {
+        validatePositive(bonusLottoNumber);
+        int value = Integer.parseUnsignedInt(bonusLottoNumber);
+        validateDuplicate(new LottoNumber(value), winningNumbers);
+        this.value = value;
+    }
+
     private void validatePositive(String lottoNumber) {
         try {
             Integer.parseUnsignedInt(lottoNumber);
@@ -29,6 +36,12 @@ public class LottoNumber {
     private void validateBounds(int lottoNumber) {
         if (lottoNumber < LottoNumberBounds.MIN.getValue() || lottoNumber > LottoNumberBounds.MAX.getValue()) {
             throw new IllegalArgumentException(LOTTO_NUMBER_OUT_OF_BOUNDS_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private void validateDuplicate(LottoNumber bonusLottoNumber, WinningNumbers winningNumbers) {
+        if (winningNumbers.has(bonusLottoNumber)) {
+            throw new IllegalArgumentException("보너스 번호가 당첨 번호와 중복됩니다.");
         }
     }
 
