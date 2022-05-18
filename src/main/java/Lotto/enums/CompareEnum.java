@@ -1,15 +1,14 @@
 package Lotto.enums;
 
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.*;
 
 public enum CompareEnum implements Comparator<CompareEnum> {
     First(6, 2_000_000_000, 1),
-    Second(5, 1_500_000, 2),
-    Third(4, 50_000, 3),
-    Fourth(3, 5_000, 4),
-    Fail(0, 0, 5);
+    Second(5, 30_000_000, 2),
+    Third(5, 1_500_000, 3),
+    Fourth(4, 50_000, 4),
+    Fifth(3, 5_000, 6),
+    Fail(0, 0, 6);
 
     private long hitCount;
     private int winningAmount;
@@ -31,24 +30,25 @@ public enum CompareEnum implements Comparator<CompareEnum> {
         return order;
     }
 
-    public static CompareEnum of(long hitCount) {
-        if(hitCount == 6)
-            return CompareEnum.First;
-
-        if(hitCount == 5)
-            return CompareEnum.Second;
-
-        if(hitCount == 4)
-            return CompareEnum.Third;
-
-        if(hitCount == 3)
-            return CompareEnum.Fourth;
-
-        return CompareEnum.Fail;
+    public static Set<CompareEnum> valuesExcludeNone() {
+        return EnumSet.of(First, Second, Third, Fourth, Fifth);
     }
 
-    public static Set<CompareEnum> valuesExcludeNone() {
-        return EnumSet.of(First, Second, Third, Fourth);
+    public static CompareEnum valueOf(long countOfMatch, boolean matchBonus) {
+        Optional<CompareEnum> result =  valuesExcludeNone()
+                                        .stream()
+                                        .sorted()
+                                        .filter(compareEnum -> compareEnum.hitCount == countOfMatch)
+                                        .findFirst();
+
+        if(!result.isPresent())
+            return CompareEnum.Fail;
+
+        if(result.get().hitCount == CompareEnum.Second.hitCount && !matchBonus) {
+            return CompareEnum.Third;
+        }
+
+        return result.get();
     }
 
     @Override

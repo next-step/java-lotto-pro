@@ -9,7 +9,7 @@ public class LottoGame {
 
     public void calculation() {
         Lottos lottos = purchaseLottos();
-        Lotto winLotto = setUpWinLotto();
+        WinLotto winLotto = setUpWinLotto();
         LottoResult result = lottos.calculation(winLotto);
         ResultView.result(result);
     }
@@ -20,8 +20,10 @@ public class LottoGame {
         return lottos;
     }
 
-    private Lotto setUpWinLotto(){
-        Lotto winLotto = new Lotto(InputView.inputLastWinNumber());
+    private WinLotto setUpWinLotto(){
+        WinLotto winLotto = new WinLotto();
+        winLotto.getLotto().generate(InputView.inputLastWinNumber());
+        winLotto.generateBonus(InputView.inputLastWinBonusNumber());
         return winLotto;
     }
 }
