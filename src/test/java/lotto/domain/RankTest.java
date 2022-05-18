@@ -12,8 +12,8 @@ class RankTest {
 
     @ParameterizedTest
     @MethodSource("result")
-    void 매치결과(int matchCount, Rank rank) {
-        assertThat(Rank.matchResult(matchCount)).isEqualTo(rank);
+    void 매치결과(int matchCount, boolean hasContainBonus, Rank expected) {
+        assertThat(Rank.matchResult(matchCount, hasContainBonus)).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -28,16 +28,13 @@ class RankTest {
         assertThat(rank.getWinningReward(matchCount)).isEqualTo(expected);
     }
 
-
     private static Stream<Arguments> result() {
         return Stream.of(
-                Arguments.of(6, Rank.FIRST),
-                Arguments.of(5, Rank.SECOND),
-                Arguments.of(4, Rank.THIRD),
-                Arguments.of(3, Rank.FOURTH),
-                Arguments.of(2, Rank.NONE),
-                Arguments.of(1, Rank.NONE),
-                Arguments.of(0, Rank.NONE)
+                Arguments.of(6, false, Rank.FIRST),
+                Arguments.of(5, true, Rank.SECOND),
+                Arguments.of(5, false, Rank.THIRD),
+                Arguments.of(3, true, Rank.FIFTH),
+                Arguments.of(2, false, Rank.NONE)
         );
     }
 
@@ -52,8 +49,9 @@ class RankTest {
     private static Stream<Arguments> getWinningReward() {
         return Stream.of(
                 Arguments.of(1, Rank.FIRST, Money.from(2_000_000_000)),
-                Arguments.of(2, Rank.SECOND, Money.from(3_000_000)),
-                Arguments.of(1, Rank.THIRD, Money.from(50_000))
+                Arguments.of(2, Rank.SECOND, Money.from(60_000_000)),
+                Arguments.of(1, Rank.THIRD, Money.from(1_500_000))
         );
     }
 }
+

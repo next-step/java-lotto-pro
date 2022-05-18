@@ -1,12 +1,10 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -16,6 +14,10 @@ public class Lotto {
     protected Lotto(List<LottoNumber> numbers) {
         validateLottoSize(numbers);
         this.numbers = numbers;
+    }
+
+    private boolean isContainsBonusNumber(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
     private void validateLottoSize(List<LottoNumber> numbers) {
@@ -32,22 +34,18 @@ public class Lotto {
         return new Lotto(lottoNumberStrategy.create());
     }
 
-    private static List<LottoNumber> lottoParser(String winningLotto) {
-        return Arrays.stream(winningLotto.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
-
-    public Rank match(Lotto winningLotto) {
-        Set<LottoNumber> collect = new HashSet<>(winningLotto.numbers);
+    public Rank match(WinningLotto winningLotto) {
+        Set<LottoNumber> collect = new HashSet<>(winningLotto.getLotto().numbers);
 
         int matchCount = (int) this.numbers.stream()
                 .filter(collect::contains)
                 .count();
 
-        return Rank.matchResult(matchCount);
+        return Rank.matchResult(matchCount, isContainsBonusNumber(winningLotto.getBonus()));
+    }
+
+    public boolean contains(LottoNumber number){
+        return numbers.contains(number);
     }
 
     @Override
@@ -69,3 +67,4 @@ public class Lotto {
         return numbers.toString();
     }
 }
+

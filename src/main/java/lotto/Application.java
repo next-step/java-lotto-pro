@@ -1,8 +1,8 @@
 package lotto;
 
 import lotto.domain.Lotties;
-import lotto.domain.Lotto;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.domain.WinningStatus;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -12,7 +12,9 @@ public class Application {
         Money purchaseAmount = Money.from(InputView.getPurchaseAmount());
         Lotties myLotties = LottoGame.purchase(purchaseAmount);
         ResultView.printPurchaseLotties(myLotties);
-        Lotto winningLotto = Lotto.from(InputView.getWinningLotto());
+        String winningLottoNumber = InputView.getWinningLottoNumber();
+        int bonusNumber = InputView.getBonusNumber();
+        WinningLotto winningLotto = WinningLotto.of(winningLottoNumber, bonusNumber);
         WinningStatus winningStatus = myLotties.getWinningStatus(winningLotto);
         ResultView.printWinningStatus(winningStatus);
         ResultView.printLottoYield(purchaseAmount, winningStatus);
