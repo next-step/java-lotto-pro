@@ -39,4 +39,8 @@ public class PurchasedLotto {
         }
         return result;
     }
+
+    public void append(PurchasedLotto automaticLottos) {
+        lottoList.addAll(automaticLottos.getLottoList());
+    }
 }
