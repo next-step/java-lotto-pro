@@ -1,8 +1,11 @@
 package lotto;
 
+import lotto.domain.GenerateLottoNumber;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
+import lotto.domain.WinningLottoNumber;
 import lotto.domain.WinningRank;
 
 import java.util.ArrayList;
@@ -11,27 +14,31 @@ import java.util.List;
 public class LottoApplication {
 
     private final List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    private final GenerateLottoNumber generateLottoNumber = new GenerateLottoNumber();
     private LottoPrice lottoPrice;
-    private List<Integer> winningNumbers;
-    private Integer winningBonusNumber;
+    private LottoCount lottoCount;
+    private WinningLottoNumber winningNumbers;
 
-    public LottoPrice purchase(Integer price) {
+    public LottoCount purchase(Integer price, Integer manualCount) {
         lottoPrice = new LottoPrice(price);
-        return lottoPrice;
+        lottoCount = new LottoCount(manualCount, lottoPrice);
+        return lottoCount;
     }
 
-    public List<LottoNumbers> generateLottoNumbers() {
-        Integer count = lottoPrice.getCount();
-        for (int i = 0; i < count; i++) {
-            LottoNumbers numbers = new LottoNumbers();
-            lottoNumbers.add(numbers);
+    public List<LottoNumbers> generateLottoNumbers(List<List<Integer>> manualLottoNumbers) {
+        Integer manualCount = lottoCount.getManualCount();
+        for (int i = 0; i < manualCount; i++) {
+            lottoNumbers.add(new LottoNumbers(manualLottoNumbers.get(i)));
+        }
+        Integer autoCount = lottoCount.getAutoCount();
+        for (int i = 0; i < autoCount; i++) {
+            lottoNumbers.add(new LottoNumbers(generateLottoNumber.initNumbers()));
         }
         return lottoNumbers;
     }
 
-    public void setWinningNumbers(List<Integer> winningNumbers, Integer winningBonusNumber) {
+    public void setWinningNumbers(WinningLottoNumber winningNumbers) {
         this.winningNumbers = winningNumbers;
-        this.winningBonusNumber = winningBonusNumber;
     }
 
     public LottoStatistics calculateStatistics() {
@@ -41,7 +48,7 @@ public class LottoApplication {
     private List<WinningRank> calculateWinningRanks() {
         List<WinningRank> winningRanks = new ArrayList<>();
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            winningRanks.add(lottoNumber.matchWinningNumbers(winningNumbers, winningBonusNumber));
+            winningRanks.add(lottoNumber.matchWinningNumbers(winningNumbers));
         }
         return winningRanks;
     }

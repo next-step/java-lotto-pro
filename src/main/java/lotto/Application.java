@@ -1,43 +1,44 @@
 package lotto;
 
+import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
+import lotto.domain.WinningLottoNumber;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 import java.util.List;
 
 public class Application {
+    private static final InputView inputView = new InputView();
+    private static final ResultView resultView = new ResultView();
+    private static final LottoApplication lottoApplication = new LottoApplication();
+
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
-        LottoApplication lottoApplication = new LottoApplication();
-
-        initLotto(inputView, resultView, lottoApplication);
-        generateLottoNumber(resultView, lottoApplication);
-        generateWinningNumber(inputView, lottoApplication);
-        statistics(resultView, lottoApplication);
+        initLotto();
+        generateWinningNumber();
+        statistics();
     }
 
-    private static void initLotto(InputView inputView, ResultView resultView, LottoApplication lottoApplication) {
+    private static void initLotto() {
         Integer price = inputView.inputPrice();
-        LottoPrice lottoPrice = lottoApplication.purchase(price);
-        resultView.printLottoCount(lottoPrice);
-    }
+        Integer manualCount = inputView.inputManualCount();
+        LottoCount lottoCount = lottoApplication.purchase(price, manualCount);
 
-    private static void generateLottoNumber(ResultView resultView, LottoApplication lottoApplication) {
-        List<LottoNumbers> lottoNumbers = lottoApplication.generateLottoNumbers();
+        List<List<Integer>> manualLottoNumbers = inputView.inputManualLottoNumbers(manualCount);
+        resultView.printLottoCount(lottoCount);
+        List<LottoNumbers> lottoNumbers = lottoApplication.generateLottoNumbers(manualLottoNumbers);
+
         resultView.printLottoNumbers(lottoNumbers);
     }
 
-    private static void generateWinningNumber(InputView inputView, LottoApplication lottoApplication) {
+    private static void generateWinningNumber() {
         List<Integer> winningNumbers = inputView.inputWinningNumbers();
-        Integer winningBonusNumbers = inputView.inputWinningBonusNumber();
-        lottoApplication.setWinningNumbers(winningNumbers, winningBonusNumbers);
+        Integer winningBonusNumber = inputView.inputWinningBonusNumber();
+        lottoApplication.setWinningNumbers(new WinningLottoNumber(winningNumbers, winningBonusNumber));
     }
 
-    private static void statistics(ResultView resultView, LottoApplication lottoApplication) {
+    private static void statistics() {
         LottoStatistics lottoStatistics = lottoApplication.calculateStatistics();
         resultView.printStatistics(lottoStatistics);
     }

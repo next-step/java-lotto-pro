@@ -1,22 +1,23 @@
 package lotto.ui;
 
+import lotto.domain.LottoCount;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
 import lotto.domain.WinningRank;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
 
-    public void printLottoCount(LottoPrice lottoPrice) {
-        System.out.println(lottoPrice.getCount() + "개를 구매했습니다.");
+    public void printLottoCount(LottoCount lottoCount) {
+        System.out.println("\n수동으로 " + lottoCount.getManualCount() + "장, 자동으로 " + lottoCount.getAutoCount() + "개를 구매했습니다.");
     }
 
     public void printLottoNumbers(List<LottoNumbers> lottoNumbers) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            System.out.print(lottoNumber.getNumbers());
+            System.out.println(convertToSortedList(lottoNumber));
         }
     }
 
@@ -26,9 +27,15 @@ public class ResultView {
         printLottoProfit(lottoStatistics);
     }
 
+    private ArrayList<Integer> convertToSortedList(LottoNumbers lottoNumber) {
+        ArrayList<Integer> arrayNumbers = new ArrayList<>(lottoNumber.getNumbers());
+        arrayNumbers.sort(Integer::compareTo);
+        return arrayNumbers;
+    }
+
     private void printStatisticsInit() {
         System.out.println();
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
     }
 
