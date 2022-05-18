@@ -41,7 +41,7 @@ public class LottoController {
             bonusNumberSource = inputView.getBonusLotto();
         } while (bonusNumberIsNotValid(bonusNumberSource));
 
-        outputView.printOutput(lottoMachine.checkWin(user.getLottoTickets()), user.getMoney());
+        outputView.printOutput(lottoMachine.checkWin(user.getLottoTickets()), user.getTicket());
     }
 
     private boolean bonusNumberIsNotValid(String bonusNumberSource) {

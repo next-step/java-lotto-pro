@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import step3.domain.LottoElement;
 import step3.domain.Money;
+import step3.domain.Ticket;
 import step3.enums.LottoReward;
 
 public class OutputView {
@@ -22,10 +23,10 @@ public class OutputView {
         initOverviewMap();
     }
 
-    public void printOutput(HashMap<LottoReward, Integer> statistics, Money money) {
+    public void printOutput(HashMap<LottoReward, Integer> statistics, Ticket ticket) {
         System.out.println(OVERVIEW_INIT_MESSAGE);
         long reward = printOverview(statistics);
-        printRewardRate(reward, money);
+        printRewardRate(reward, ticket.ticketToMoney());
     }
 
     private void printRewardRate(long reward, Money money) {
