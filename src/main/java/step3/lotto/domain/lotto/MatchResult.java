@@ -76,7 +76,7 @@ public enum MatchResult {
         return this == FORTH_PLACE;
     }
 
-    private boolean isNothing() {
-        return this == NOTHING;
+    public boolean isFifthPlace() {
+        return this == FIFTH_PLACE;
     }
 }

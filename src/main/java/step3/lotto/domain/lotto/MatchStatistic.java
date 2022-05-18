@@ -18,6 +18,7 @@ public class MatchStatistic {
     private int secondPlaceCount;
     private int thirdPlaceCount;
     private int forthPlaceCount;
+    private int fifthPlaceCount;
     private long totalReward;
 
     public MatchStatistic() {
@@ -38,6 +39,10 @@ public class MatchStatistic {
 
     public int getForthPlaceCount() {
         return forthPlaceCount;
+    }
+
+    public int getFifthPlaceCount() {
+        return fifthPlaceCount;
     }
 
     public void add(MatchResult matchResult) {
@@ -62,6 +67,9 @@ public class MatchStatistic {
         }
         if (matchResult.isForthPlace()) {
             forthPlaceCount++;
+        }
+        if (matchResult.isFifthPlace()) {
+            fifthPlaceCount++;
         }
     }
 
