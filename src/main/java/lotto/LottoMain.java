@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LottosManual;
+import lotto.domain.LottosManualCount;
 import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.LottosGenerator;
@@ -18,8 +20,16 @@ public class LottoMain {
 
     private static void startLotto() {
         final Price price = LottoViewer.inputPrice();
-        final Lottos lottos = LottosGenerator.generateLottos(price);
-        LottoViewer.printLottos(lottos);
+        final LottosManualCount lottosManualCount = LottoViewer.inputManualLottosCount(price);
+        final LottosManual lottosManual = LottoViewer.inputManualLottos(lottosManualCount);
+        final Lottos manualLottos = LottosGenerator.generateLottosManual(lottosManual);
+        final Lottos autoLottos = LottosGenerator.generateLottosAuto(lottosManualCount, price);
+        final Lottos lottos = LottosGenerator.mergeLottos(manualLottos, autoLottos);
+        LottoViewer.printLottos(
+                manualLottos.getLottosCount(),
+                autoLottos.getLottosCount(),
+                lottos
+        );
         final LottoWinningNumbers winningNumbers =
                 new LottoWinningNumbers(
                         LottoViewer.inputWinningNumbers(),

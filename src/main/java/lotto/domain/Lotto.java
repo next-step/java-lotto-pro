@@ -10,6 +10,7 @@ public class Lotto {
     public static final int LOTTO_MAX_NUMBER = 45;
     public static final int LOTTO_FIRST_INDEX = 0;
     public static final int LOTTO_SIZE = 6;
+    public static final int MANUAL_LOTTO_SIZE = 7;
     public static final int LOTTO_BONUS_NUMBER_INDEX = 6;
     public static final int LOTTO_FIXED_PRICE = 1_000;
     private static final int IS_MATCHES = 1;
@@ -18,6 +19,11 @@ public class Lotto {
 
     private final List<Integer> numbers;
     private final Integer bonusNumber;
+
+    public Lotto(final List<Integer> manualLotto) {
+        this.numbers = new ArrayList<>(manualLotto.subList(LOTTO_FIRST_INDEX, LOTTO_SIZE));
+        this.bonusNumber = manualLotto.get(LOTTO_BONUS_NUMBER_INDEX);
+    }
 
     public Lotto() {
         this.numbers = createSixRandomNumbers();

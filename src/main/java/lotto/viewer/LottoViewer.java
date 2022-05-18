@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.constants.Matched;
+import lotto.domain.LottosManual;
+import lotto.domain.LottosManualCount;
 import lotto.domain.LottoMatches;
 import lotto.domain.Lottos;
 import lotto.domain.LottosWinningStatistics;
@@ -11,10 +13,12 @@ import lotto.domain.Price;
 
 public class LottoViewer {
     private static final String INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String INPUT_PRICE_ERROR_MESSAGE = "오직 정수만 입력할 수 있습니다.";
+    private static final String INPUT_MANUAL_LOTTOS_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTOS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String INPUT_INTEGER_ERROR_MESSAGE = "오직 정수만 입력할 수 있습니다.";
     private static final String INPUT_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
-    private static final String PURCHASE_NOTICE_MESSAGE = "%d개를 구매했습니다.";
+    private static final String PURCHASE_NOTICE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String WINNING_STATISTICS_TITLE_MESSAGE = "당첨 통계";
     private static final String BOUNDARY_MESSAGE = "---------";
     private static final Scanner scanner = new Scanner(System.in);
@@ -28,9 +32,31 @@ public class LottoViewer {
         try {
             price = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(INPUT_PRICE_ERROR_MESSAGE);
+            throw new NumberFormatException(INPUT_INTEGER_ERROR_MESSAGE);
         }
         return new Price(price);
+    }
+
+    public static LottosManualCount inputManualLottosCount(final Price price) {
+        printMessage(INPUT_MANUAL_LOTTOS_COUNT_MESSAGE);
+        int manualLottosCount;
+        try {
+            manualLottosCount = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(INPUT_INTEGER_ERROR_MESSAGE);
+        }
+        return new LottosManualCount(price, manualLottosCount);
+    }
+
+    public static LottosManual inputManualLottos(final LottosManualCount lottosManualCount) {
+        if(lottosManualCount.isManualLottoCountNotZero()) {
+            printMessage(INPUT_MANUAL_LOTTOS_MESSAGE);
+        }
+        final List<String> manualLottos = new ArrayList<>();
+        for (int i = 0; i < lottosManualCount.getManualLottoCount(); i++) {
+            manualLottos.add(scanner.nextLine());
+        }
+        return new LottosManual(manualLottos);
     }
 
     public static String inputWinningNumbers() {
@@ -43,8 +69,8 @@ public class LottoViewer {
         return scanner.nextLine();
     }
 
-    public static void printLottos(final Lottos lottos) {
-        printFormatMessage(PURCHASE_NOTICE_MESSAGE, lottos.getLottosCount());
+    public static void printLottos(final int manualLottosCount, final int autoLottosCount, final Lottos lottos) {
+        printFormatMessage(PURCHASE_NOTICE_MESSAGE, manualLottosCount, autoLottosCount);
         final String[] lottosString = lottos.getLottos()
                 .stream()
                 .map(lotto -> makeLottoString(lotto.getNumbers(), lotto.getBonusNumber()))
@@ -96,7 +122,7 @@ public class LottoViewer {
         stringList.add("6개 일치 (2000000000원)- " + sixMatchedCount + "개");
         stringList.add("총 수익률은 " + String.format("%.2f", price.calculateYield(totalReward)) + "입니다.");
 
-        final String[] statisticsString =  stringList.toArray(new String[0]);
+        final String[] statisticsString = stringList.toArray(new String[0]);
 
         for (final String statisticString : statisticsString) {
             printMessage(statisticString);

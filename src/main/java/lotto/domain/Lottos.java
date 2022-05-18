@@ -6,18 +6,28 @@ import java.util.stream.Collectors;
 import lotto.constants.Matched;
 
 public class Lottos {
-    private static final int DEFAULT_LOTTO_COUNT = 1;
     private final List<Lotto> lottos;
 
-    public Lottos() {
-        this(DEFAULT_LOTTO_COUNT);
+    public Lottos(final List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public Lottos(final LottosManual lottosManual) {
+        this.lottos = createLottosManual(lottosManual);
     }
 
     public Lottos(final int lottoCount) {
-        this.lottos = createLottos(lottoCount);
+        this.lottos = createLottosAuto(lottoCount);
     }
 
-    private List<Lotto> createLottos(final int lottoCount) {
+    private List<Lotto> createLottosManual(final LottosManual lottosManual) {
+        final List<Lotto> lottos = new ArrayList<>();
+        final List<List<Integer>> manualLottos = lottosManual.getManualLottos();
+        manualLottos.forEach(manualLotto -> lottos.add(new Lotto(manualLotto)));
+        return lottos;
+    }
+
+    private List<Lotto> createLottosAuto(final int lottoCount) {
         final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto());
