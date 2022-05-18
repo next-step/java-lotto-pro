@@ -27,6 +27,6 @@ public class GameResult {
     }
 
     public double benefitResult(double deposit) {
-        return gameResult.stream().mapToInt(Rank::getWinningMoney).sum() / deposit;
+        return gameResult.stream().mapToLong(Rank::getWinningMoney).sum() / deposit;
     }
 }
