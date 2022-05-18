@@ -10,6 +10,10 @@ public class LottoPaper {
         this.gameCount = gameCount;
     }
 
+    public LottoPaper(String selfMoneyWord) {
+        this.gameCount = Integer.parseInt(selfMoneyWord);
+    }
+
     public int getGameCount() {
         return gameCount;
     }

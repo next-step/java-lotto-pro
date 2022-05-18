@@ -1,8 +1,10 @@
 package lotto.model;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -17,4 +19,13 @@ class LottoStoreTest {
         assertEquals(new LottoPaper(expectedPlayCount), lottoStore.issueLottoPaper());
     }
 
+    @DisplayName("수동 로또 수가 입력받은 금액보다 큰 경우 검증")
+    @Test
+    void lottoStroe_not_number() {
+        Money money = new Money("3000");
+        LottoPaper lottoPaper = new LottoPaper("3");
+
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoStore(money, lottoPaper))
+                .withMessage("[ERROR] 숫자가 아닙니다.");
+    }
 }
