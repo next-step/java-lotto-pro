@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,26 +14,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
-
-    private Lotto winLotto;
-    private LottoNumber bonusNumber;
-
-    @BeforeEach
-    void setUp() {
-        winLotto = Lotto.createCustomLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        bonusNumber = LottoNumber.createBonusNumber(winLotto, 7);
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideLottoResult")
-    @DisplayName("로또의 결과를 맞춰 본다")
-    void LottoMatch(List<Integer> lottoNumbers, LottoRank result) {
-        Lotto lotto = Lotto.createCustomLotto(lottoNumbers);
-        LottoRank lottoRank = lotto.match(winLotto, bonusNumber);
-
-        assertThat(lottoRank).isEqualTo(result);
-        assertThat(lottoRank.rewordMoney()).isEqualTo(result.rewordMoney());
-    }
 
     @ParameterizedTest
     @MethodSource("provideLottoSize")
@@ -72,8 +51,8 @@ class LottoTest {
     void isHas(){
         Lotto lottoNumbers = Lotto.createCustomLotto(Arrays.asList(1, 4, 3, 5, 6, 7));
 
-        assertThat(lottoNumbers.isContain(new LottoNumber(1))).isTrue();
-        assertThat(lottoNumbers.isContain(new LottoNumber(21))).isFalse();
+        assertThat(lottoNumbers.isContain(LottoNumber.of(1))).isTrue();
+        assertThat(lottoNumbers.isContain(LottoNumber.of(21))).isFalse();
     }
 
     private static Stream<Arguments> provideLottoSize() {
@@ -84,18 +63,5 @@ class LottoTest {
                 Arguments.of((Object) null)
         );
     }
-
-    private static Stream<Arguments> provideLottoResult() {
-        return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoRank.FIRST),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), LottoRank.SECOND),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 9), LottoRank.THIRD),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 9, 7), LottoRank.FOURTH),
-                Arguments.of(Arrays.asList(1, 2, 3, 11, 12, 7), LottoRank.FIFTH),
-                Arguments.of(Arrays.asList(1, 2, 42, 11, 12, 7), LottoRank.FAIL)
-
-        );
-    }
-
 
 }

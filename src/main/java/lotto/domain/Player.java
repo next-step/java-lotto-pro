@@ -7,47 +7,60 @@ import java.util.stream.Collectors;
 
 public class Player {
     private static final int ZERO = 0;
+    private final PlayerMoney playerMoney;
+
     private List<Lotto> lottos = new ArrayList<>();
 
-    private Player() {
-
+    public Player(int money) {
+        this(PlayerMoney.of(money));
+    }
+    public Player(PlayerMoney playerMoney) {
+        this.playerMoney = playerMoney;
     }
 
-    private Player(List<Lotto> lottos) {
-        this.lottos = lottos;
-    }
-
-    public static Player buyCustomLottos(List<Lotto> customLottos) {
-        return new Player(customLottos);
-    }
-
-    public static Player buyAutoLotto(int money) {
-         return new Player(autoLottos(money));
-    }
-
-    public LottoReport matchWinnerLotto(Lotto winnerLotto, LottoNumber bonusNumber) {
-        return new LottoReport(lottoResult(winnerLotto, bonusNumber));
+    public LottoReport matchWinnerLotto(WinnerLotto winnerLotto) {
+        return new LottoReport(lottoResult(winnerLotto));
     }
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
 
-    private static List<Lotto> autoLottos(int money) {
-        List<Lotto> lottos = new ArrayList<>();
-        int buyLottoQty = money / Lotto.LOTTO_MONEY;
-        for (int i = ZERO; i < buyLottoQty; i++) {
-            lottos.add(Lotto.createAutoLotto());
-        }
-        return lottos;
+    public int lottoQty() {
+        return lottos.size();
     }
 
-    private List<LottoRank> lottoResult(Lotto winnerLotto, LottoNumber bonusNumber) {
+    public void buyCustomLottos(List<Lotto> customLottos) {
+        customLottos.forEach(this::buyCustomLotto);
+    }
+
+    public void buyCustomLotto(Lotto customLotto) {
+        buyLotto(customLotto);
+    }
+
+    public void buyAutoLottos() {
+        int buyAbleMaxLottoQty = playerMoney.buyAbleMaxLottoQty();
+        for (int i = ZERO; i < buyAbleMaxLottoQty; i++) {
+            buyLotto(Lotto.createAutoLotto());
+        }
+    }
+
+    public boolean isBuyAble(int qty) {
+        return  playerMoney.buyAbleMaxLottoQty() >= qty;
+    }
+
+    private void buyLotto(Lotto lotto) {
+        playerMoney.deduction(Lotto.LOTTO_MONEY);
+        this.lottos.add(lotto);
+    }
+
+    private List<LottoRank> lottoResult(WinnerLotto winnerLotto) {
         return this.lottos
                 .stream()
-                .map((lotto -> lotto.match(winnerLotto, bonusNumber)))
+                .map((winnerLotto::match))
                 .collect(Collectors.toList());
     }
+
 
 
 }

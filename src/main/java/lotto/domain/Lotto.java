@@ -15,11 +15,6 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-
-    private Lotto() {
-        this(autoLottoNumbers());
-    }
-
     private Lotto(List<Integer> lottoNumbers) {
         valid(lottoNumbers);
         Collections.sort(lottoNumbers);
@@ -34,25 +29,21 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-
     public int matchCount(Lotto lotto) {
         return (int) this.lottoNumbers.stream()
                 .filter(lotto.lottoNumbers::contains)
                 .count();
     }
 
-    private static List<Integer> autoLottoNumbers() {
-        return CollectionsUtil
-                .shuffleSequentialNumbers(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
-                .subList(FIRST_INDEX, MAX_LOTTO_NUMBER_QTY);
-    }
-
     public boolean isContain(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public LottoRank match(Lotto winLotto, LottoNumber bonusBall) {
-        return LottoRank.reword(matchCount(winLotto), isContain(bonusBall));
+
+    private static List<Integer> autoLottoNumbers() {
+        return CollectionsUtil
+                .shuffleSequentialNumbers(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+                .subList(FIRST_INDEX, MAX_LOTTO_NUMBER_QTY);
     }
 
     private void valid(List<Integer> numbers) {
@@ -80,7 +71,7 @@ public class Lotto {
 
     private List<LottoNumber> mapToLottoNumber(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

@@ -15,10 +15,7 @@ public class ResultView {
     private static final String YILELD_LOSS_MESSAGE = "(기준이 1이기 때문에 손해이라는 의미)";
 
     public static void playerHasLotto(Player player) {
-        List<Lotto> lottos = player.getLottos();
-        System.out.println(lottos.size() + "를 구매했습니다.");
-
-        printLotto(lottos);
+        printLotto(player.getLottos());
     }
 
     public static void winnerReport(LottoReport lottoReport) {
@@ -27,10 +24,18 @@ public class ResultView {
 
         LottoRank.winnerRanks()
                 .forEach((lottoRank -> System.out.printf(WINNER_REPORT_PATTERN,
-                        lottoRank.message(),
+                        lottoRankMessage(lottoRank),
                         lottoReport.lottoResultCount(lottoRank))));
 
         lottoYieldReport(lottoReport);
+    }
+
+    public static String lottoRankMessage(LottoRank lottoRank) {
+        if (lottoRank.isSecond()) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원)",
+                    lottoRank.getMatchCount(), lottoRank.rewordMoney());
+        }
+        return String.format("%d개 일치 (%d원)", lottoRank.getMatchCount(), lottoRank.rewordMoney());
     }
 
     private static void lottoYieldReport(LottoReport lottoReport) {
@@ -46,5 +51,9 @@ public class ResultView {
         for (Lotto lotto : lottos) {
             System.out.println(lotto);
         }
+    }
+
+    public static void printLottoAutoAndManualQty(int manualQty, int totalQty) {
+        System.out.printf("수동으로 %d, 자동으로 %d개를 구매했습니다.", manualQty, (totalQty - manualQty));
     }
 }
