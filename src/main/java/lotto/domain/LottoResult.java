@@ -21,12 +21,6 @@ public class LottoResult {
                 .collect(Collectors.toList());
     }
 
-    private void addRankingWhenSame(List<Ranking> result, Ranking ranking, Ranking target) {
-        if (ranking.equals(target)) {
-            result.add(ranking);
-        }
-    }
-
     public List<Ranking> getRankingList() {
         return rankingList;
     }
