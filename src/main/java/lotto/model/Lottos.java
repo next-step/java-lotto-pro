@@ -28,6 +28,10 @@ public class Lottos {
         return (double) totalWinningMount / purchaseMoney();
     }
 
+    public void mergeLottos(Lottos lottos) {
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
