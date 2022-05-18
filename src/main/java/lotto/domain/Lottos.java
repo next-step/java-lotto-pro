@@ -17,22 +17,26 @@ public class Lottos {
             this.lottos.add(new Lotto(lottoIssuedService.issueLottoNumber()));
     }
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }
 
     public Map<Lotto, LottoRank> lottoWinningResult(Lotto answerLotto) {
         Map<Lotto, LottoRank> lottoRankMap = new HashMap<>();
-        this.lottos.forEach(
-                lotto -> lottoRankMap.put(
-                        lotto, LottoRank.findLottoRankByMatchedCount(countMatchedNumber(lotto, answerLotto), false)
-                )
-        );
 
+        this.lottos.forEach(lotto -> {
+            lottoRankMap.put(
+                    lotto, LottoRank.findLottoRankByMatchedCount(lotto.countMatchedNumber(answerLotto), false)
+            );
+        });
         return lottoRankMap;
     }
 
-    public static int countMatchedNumber(Lotto lotto, Lotto answerLotto) {
+    public int countMatchedNumber(Lotto lotto, Lotto answerLotto) {
         List<Integer> answerLottoNumbers = answerLotto.getLottoNumbers();
 
         int lastIndex = answerLotto.getLottoNumbers().size() - 1;

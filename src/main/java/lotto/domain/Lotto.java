@@ -34,6 +34,14 @@ public class Lotto {
         return this.lottoNumbers.contains(number);
     }
 
+    public int countMatchedNumber(Lotto answerLotto) {
+        List<Integer> answerLottoNumbers = answerLotto.getLottoNumbers();
+
+        return (int) lottoNumbers.stream()
+                .filter(answerLottoNumbers::contains)
+                .count();
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
