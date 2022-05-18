@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.infrastructure.error.LottoTicketErrorCode;
-import org.assertj.core.api.Assertions;
+import lotto.infrastructure.util.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -9,7 +9,9 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class WinningLottoTicketTest {
 
@@ -68,9 +70,32 @@ class WinningLottoTicketTest {
 
     @Test
     public void countMatchNumber() {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        
-        Assertions.assertThat(winningLottoTicket.countMatchNumber(lottoTicket)).isEqualTo(6);
+        List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(lottoNumbers);
+
+        assertAll(
+                () -> {
+                    assertThat(winningLottoTicket.countMatchNumber(new LottoTicket(Arrays.asList(11, 12, 13, 14, 15, 16)))).isZero();
+                },
+                () -> {
+                    assertThat(winningLottoTicket.countMatchNumber(new LottoTicket(Arrays.asList(1, 12, 13, 14, 15, 16)))).isEqualTo(1);
+                },
+                () -> {
+                    assertThat(winningLottoTicket.countMatchNumber(new LottoTicket(Arrays.asList(1, 2, 13, 14, 15, 16)))).isEqualTo(2);
+                },
+                () -> {
+                    assertThat(winningLottoTicket.countMatchNumber(new LottoTicket(Arrays.asList(1, 2, 3, 14, 15, 16)))).isEqualTo(3);
+                },
+                () -> {
+                    assertThat(winningLottoTicket.countMatchNumber(new LottoTicket(Arrays.asList(1, 2, 3, 4, 15, 16)))).isEqualTo(4);
+                },
+                () -> {
+                    assertThat(winningLottoTicket.countMatchNumber(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 16)))).isEqualTo(5);
+                },
+                () -> {
+                    assertThat(winningLottoTicket.countMatchNumber(new LottoTicket(StringUtils.convertIntegers(lottoNumbers))))
+                            .isEqualTo(lottoNumbers.size());
+                }
+        );
     }
 }
