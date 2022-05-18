@@ -1,3 +1,5 @@
+package study;
+
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.junit.jupiter.api.DisplayName;
@@ -48,11 +50,7 @@ public class StringTest {
                 () -> assertThatThrownBy(() -> {
                     "abc".charAt(index);
                 }).isInstanceOf(IndexOutOfBoundsException.class)
-                        .hasMessageContaining("String index out of range: %d", index),
-                () -> assertThatExceptionOfType(IndexOutOfBoundsException.class)
-                        .isThrownBy(() -> {
-                            "abc".charAt(index);
-                        }).withMessageContaining("String index out of range: %d", index)
+                        .hasMessageContaining("String index out of range: %d", index)
         );
     }
 }
