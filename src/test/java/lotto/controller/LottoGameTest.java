@@ -24,8 +24,8 @@ class LottoGameTest {
     @ParameterizedTest
     @ValueSource(longs = {LOTTO_PRICE, 100 * LOTTO_PRICE, 1000 * LOTTO_PRICE})
     public void 로또_구매하기(long price) {
-        Money money = new Money(price);
-        PurchasedLotto lottos = game.purchaseLotto(money);
+        LottoMachine lottoMachine = new LottoMachine(price);
+        PurchasedLotto lottos = game.purchaseLotto(lottoMachine);
 
         assertThat(lottos.getLottoList()).hasSize((int) price / LOTTO_PRICE);
     }

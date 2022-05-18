@@ -26,10 +26,10 @@ public class LottoGame {
     }
 
     public void play() {
-        Money money = readMoney();
-        OutputView.printMessage(money.getAvailableLottosForPurchase() + "개를 구매했습니다.");
+        LottoMachine lottoMachine = readMoney();
+        OutputView.printMessage(lottoMachine.calculatePurchaseLottos() + "개를 구매했습니다.");
 
-        PurchasedLotto purchasedLotto = purchaseLotto(money);
+        PurchasedLotto purchasedLotto = purchaseLotto(lottoMachine);
         OutputView.printMyLotto(purchasedLotto);
 
         Lotto lastWinningLotto = new Lotto(readLastWinningNumbers());
@@ -37,11 +37,11 @@ public class LottoGame {
         OutputView.printLine();
 
         LottoResult result = matchLottoNumbers(purchasedLotto, lastWinningLotto, bonusNumber);
-        OutputView.showLottoResult(result, money);
+        OutputView.showLottoResult(result, lottoMachine);
     }
 
-    public PurchasedLotto purchaseLotto(Money money) {
-        long lottoQuantity = money.getAvailableLottosForPurchase();
+    public PurchasedLotto purchaseLotto(LottoMachine lottoMachine) {
+        long lottoQuantity = lottoMachine.calculatePurchaseLottos();
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoQuantity; i++) {
             lottoList.add(generateLotto());
@@ -62,9 +62,9 @@ public class LottoGame {
         return new LottoResult(rankings);
     }
 
-    private Money readMoney() {
+    private LottoMachine readMoney() {
         String input = InputView.readUserInput(REQUEST_MONEY);
-        return new Money(input);
+        return new LottoMachine(input);
     }
 
     private String readLastWinningNumbers() {

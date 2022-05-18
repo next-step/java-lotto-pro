@@ -6,10 +6,10 @@ import java.util.List;
 
 import static lotto.domain.LottoConstant.LOTTO_PRICE;
 
-public class Money {
+public class LottoMachine {
     private long money;
 
-    public Money(String input) {
+    public LottoMachine(String input) {
         try {
             money = Long.parseLong(input);
         } catch (NumberFormatException e) {
@@ -21,7 +21,7 @@ public class Money {
         }
     }
 
-    public Money(long input) {
+    public LottoMachine(long input) {
         this(String.valueOf(input));
     }
 
@@ -47,7 +47,7 @@ public class Money {
         return money;
     }
 
-    public long getAvailableLottosForPurchase() {
+    public long calculatePurchaseLottos() {
         return money / LOTTO_PRICE;
     }
 }

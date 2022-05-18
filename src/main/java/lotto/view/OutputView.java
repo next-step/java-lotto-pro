@@ -18,9 +18,9 @@ public class OutputView {
         OutputView.printLine();
     }
 
-    public static void showLottoResult(LottoResult result, Money money) {
+    public static void showLottoResult(LottoResult result, LottoMachine lottoMachine) {
         showLottoStatistics(result);
-        showLottoProfit(result, money);
+        showLottoProfit(result, lottoMachine);
     }
 
     public static void showLottoStatistics(LottoResult result) {
@@ -43,8 +43,8 @@ public class OutputView {
         OutputView.printMessage("(%d원)- %d개\r\n", rank.getReward(), result.findRankings(matchCount, matchBonus).size());
     }
 
-    public static void showLottoProfit(LottoResult result, Money money) {
-        BigDecimal profit = money.calculateWinningProfit(result);
+    public static void showLottoProfit(LottoResult result, LottoMachine lottoMachine) {
+        BigDecimal profit = lottoMachine.calculateWinningProfit(result);
         OutputView.printMessage("총 수익률은 " + profit + "입니다.");
     }
 
