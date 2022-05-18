@@ -7,7 +7,8 @@ public enum ErrorMessage {
     LastPrizeNumberCount("지난 회차 로또 당첨 번호는 6개여야 합니다."),
     BonusNumberOutOfRange("입력한 보너스 번호가 1~45사이가 아닙니다."),
     BonusNumberDuplicate("입력한 보너스 번호는 이미 뽑힌 번호입니다."),
-    BonusNumberInputWrong("보너스 번호는 입력이 올바르지 않습니다.");
+    BonusNumberInputWrong("보너스 번호는 입력이 올바르지 않습니다."),
+    OverManualPrice("수동으로 구매할 수 있는 금액을 넘었습니다.");
 
     private final String errorMsg;
 

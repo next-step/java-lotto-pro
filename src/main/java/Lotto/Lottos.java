@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private PurchaseMoney purchaseMoney;
+    private PurchaseMoney purchaseMoney = new PurchaseMoney();
     private PurchaseCount purchaseCount;
-    private List<Lotto> lottos;
+    private List<Lotto> lottos = new ArrayList<Lotto>();
 
     public PurchaseMoney getPurchaseMoney() {
         return purchaseMoney;
@@ -23,10 +23,22 @@ public class Lottos {
         return lottos;
     }
 
+    public Lottos() {
+    }
+
     public Lottos(int money) {
+        if(money == 0)
+            return;
+
         purchaseMoney = new PurchaseMoney(money);
         purchaseCount = new PurchaseCount(purchaseMoney);
         lottos = draw(purchaseCount);
+    }
+
+    public Lottos(int money, List<Lotto> lottos) {
+        purchaseMoney = new PurchaseMoney(money);
+        purchaseCount = new PurchaseCount(purchaseMoney);
+        this.lottos = lottos;
     }
 
     private List<Lotto> draw(PurchaseCount purchaseCount) {
@@ -47,5 +59,12 @@ public class Lottos {
         }
         calcResult.calculationYield(purchaseMoney);
         return calcResult;
+    }
+
+    public static Lottos combine(Lottos manualLottos, Lottos autoLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(manualLottos.getLottos());
+        lottos.addAll(autoLottos.getLottos());
+        return new Lottos(manualLottos.getPurchaseMoney().getMoney() + autoLottos.getPurchaseMoney().getMoney(), lottos);
     }
 }
