@@ -15,13 +15,23 @@ public class Money {
         this.money = Integer.parseInt(money);
     }
 
+    public Money(int money) {
+        if (!validateMoney(money)) {
+            throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION);
+        }
+        this.money = money;
+    }
+
     private boolean validateMoney(String money) {
         try {
             return Integer.parseInt(money) >= 0;
         } catch (NumberFormatException e) {
             return false;
         }
+    }
 
+    private boolean validateMoney(int money) {
+        return money >= 0;
     }
 
     public int getMoney() {

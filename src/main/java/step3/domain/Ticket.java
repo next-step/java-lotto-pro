@@ -19,6 +19,10 @@ public class Ticket {
         return money == null || money.getMoney() / LOTTO_PRICE <= 0;
     }
 
+    public Money ticketToMoney() {
+        return new Money(ticket * LOTTO_PRICE);
+    }
+
     public int getTicket() {
         return ticket;
     }
