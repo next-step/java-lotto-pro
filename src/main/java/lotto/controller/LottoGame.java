@@ -10,7 +10,8 @@ public class LottoGame {
 
     public void play() {
         LottoMachine machine = readMoney();
-        LottoQuantity quantity = readQuantity();
+        LottoQuantity manualQuantity = readQuantity();
+        LottoQuantity automaticQuantity = getAutomaticQuantity(machine, manualQuantity);
 
         PurchasedLotto purchasedLotto = machine.purchaseLotto();
         OutputView.printMyLotto(purchasedLotto);
@@ -23,7 +24,13 @@ public class LottoGame {
         OutputView.showLottoResult(result, machine);
     }
 
-    private LottoMachine readMoney() {
+    public static LottoQuantity getAutomaticQuantity(LottoMachine machine, LottoQuantity manualQuantity) {
+        LottoQuantity automaticQuantity = new LottoQuantity(machine.calculatePurchaseLottos() - manualQuantity.getQuantity());
+        machine.minusMoney(automaticQuantity);
+        return automaticQuantity;
+    }
+
+    private static LottoMachine readMoney() {
         LottoMachine machine = new LottoMachine(InputView.readUserInput(REQUEST_MONEY));
         OutputView.printLine();
         return machine;

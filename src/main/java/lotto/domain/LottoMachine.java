@@ -18,11 +18,11 @@ public class LottoMachine {
         }
     }
 
-    private long money;
+    private int money;
 
     public LottoMachine(String input) {
         try {
-            money = Long.parseLong(input);
+            money = Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("유효하지 않은 액수입니다.");
         }
@@ -75,7 +75,11 @@ public class LottoMachine {
         return money;
     }
 
-    public long calculatePurchaseLottos() {
+    public int calculatePurchaseLottos() {
         return money / LOTTO_PRICE;
+    }
+
+    public void minusMoney(LottoQuantity automaticQuantity) {
+        money -= LOTTO_PRICE * automaticQuantity.getQuantity();
     }
 }
