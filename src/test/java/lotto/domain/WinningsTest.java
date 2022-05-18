@@ -11,11 +11,12 @@ class WinningsTest {
     void 당첨금의합() {
         Winnings winnings = new Winnings(Arrays.asList(
                 Winning.MATCH6,
+                Winning.MATCH5_BONUS,
                 Winning.MATCH5,
                 Winning.MATCH4,
                 Winning.MATCH3
         ));
-        assertThat(winnings.totalMoney()).isEqualTo(2000000000 + 1500000 + 50000 + 5000);
+        assertThat(winnings.totalMoney()).isEqualTo(2000000000 + 30000000 + 1500000 + 50000 + 5000);
     }
 
     @Test

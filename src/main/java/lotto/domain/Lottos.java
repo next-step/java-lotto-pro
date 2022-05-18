@@ -25,9 +25,9 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Winnings winnigs(Lotto answer) {
+    public Winnings winnigs(Answer answer) {
         return new Winnings(lottos.stream()
-                .map(lotto -> lotto.winning(answer))
+                .map(answer::winning)
                 .collect(Collectors.toList()));
     }
 

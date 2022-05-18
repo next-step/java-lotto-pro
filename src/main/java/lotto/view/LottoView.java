@@ -24,6 +24,11 @@ public class LottoView {
         return scanner.nextLine();
     }
 
+    public String inputBonus() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
     public void showStatistics(Statistics statistics) {
         System.out.println();
         System.out.println("당첨 통계");
