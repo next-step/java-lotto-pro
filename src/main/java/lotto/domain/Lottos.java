@@ -23,9 +23,12 @@ public class Lottos {
 
     public Map<Lotto, LottoRank> lottoWinningResult(Lotto answerLotto) {
         Map<Lotto, LottoRank> lottoRankMap = new HashMap<>();
-        this.lottos.forEach(lotto -> {
-            lottoRankMap.put(lotto, LottoRank.findLottoRankByMatchedCount(countMatchedNumber(lotto, answerLotto)));
-        });
+        this.lottos.forEach(
+                lotto -> lottoRankMap.put(
+                        lotto, LottoRank.findLottoRankByMatchedCount(countMatchedNumber(lotto, answerLotto))
+                )
+        );
+
         return lottoRankMap;
     }
 
@@ -35,5 +38,9 @@ public class Lottos {
         return (int) lotto.getLottoNumbers().stream()
                 .filter(answerLottoNumbers::contains)
                 .count();
+    }
+
+    public boolean checkCorrectBonusBall() {
+        return false;
     }
 }

@@ -14,6 +14,13 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public Lotto(List<Integer> lottoNumbers, Integer number) {
+        if (lottoNumbers.stream().distinct().count() != LOTTO_NUMBER_SIZE)
+            throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_SIZE);
+
+        this.lottoNumbers = lottoNumbers;
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
