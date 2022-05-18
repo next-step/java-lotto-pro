@@ -1,9 +1,10 @@
 package lotto_auto.model;
 
-public class WinningLotto extends Lotto {
+public class WinningLotto {
     private final LottoNumber bonusBall;
-    public WinningLotto(LottoNumbers numbers, LottoNumber bonusBall) {
-        super(numbers);
+    private final Lotto lotto;
+    public WinningLotto(Lotto lotto, LottoNumber bonusBall) {
+        this.lotto = lotto;
         this.bonusBall = bonusBall;
         checkDuplicateNumber();
     }
@@ -13,8 +14,12 @@ public class WinningLotto extends Lotto {
     }
 
     private void checkDuplicateNumber() {
-        if (this.getLottoNumbers().getLottoNumberSet().contains(bonusBall)) {
+        if (lotto.getLottoNumbers().isContain(bonusBall)) {
             throw new IllegalArgumentException(LottoNumbers.EXIST_DUPLICATE_VALUE);
         }
+    }
+
+    public Lotto getLotto() {
+        return lotto;
     }
 }
