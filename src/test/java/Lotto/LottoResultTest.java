@@ -13,7 +13,7 @@ public class LottoResultTest {
     void init() {
         lottoResult = new LottoResult();
         lottoResult.counting(CompareEnum.First);
-        lottoResult.counting(CompareEnum.Third);
+        lottoResult.counting(CompareEnum.Fourth);
     }
 
     @Test

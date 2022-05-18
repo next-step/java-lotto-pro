@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,6 +23,7 @@ public class LottoTest {
     @Test
     public void 로또_1과45사이_6개의_숫자_추출() {
         Lotto lotto = new Lotto();
+        lotto.generate();
         assertThat(Collections.max(lotto.getNumbers())).isBetween(1, 45);
         assertThat(Collections.min(lotto.getNumbers())).isBetween(1, 45);
         assertThat(lotto.getNumbers().size()).isEqualTo(6);
@@ -36,14 +38,20 @@ public class LottoTest {
     @Test
     @DisplayName("두 개의 로또를 비교해서 맞은 숫자 갯수에 따른 당첨 여부 확인")
     public void 두개_로또_비교() {
-        Lotto first = new Lotto("1, 2, 3, 4, 5, 6");
-        Lotto second = new Lotto("1, 2, 3, 4, 5, 7");
-        Lotto third = new Lotto("1, 2, 3, 4, 7, 8");
-        Lotto fail = new Lotto("3, 5, 12, 15, 20, 30");
+        int bonusNumber = 10;
+
+        WinLotto first = new WinLotto("1, 2, 3, 4, 5, 6", bonusNumber);
+        WinLotto second = new WinLotto("1, 2, 3, 4, 5, 7", 6);
+        WinLotto third = new WinLotto("1, 2, 3, 4, 5, 7", bonusNumber);
+        WinLotto fourth = new WinLotto("1, 2, 3, 4, 7, 8", bonusNumber);
+        WinLotto fifth = new WinLotto("1, 2, 3, 7, 8, 9", bonusNumber);
+        WinLotto fail = new WinLotto("3, 5, 12, 15, 20, 30", bonusNumber);
 
         assertThat(defaultLotto.compare(first)).isEqualTo(CompareEnum.First);
         assertThat(defaultLotto.compare(second)).isEqualTo(CompareEnum.Second);
         assertThat(defaultLotto.compare(third)).isEqualTo(CompareEnum.Third);
+        assertThat(defaultLotto.compare(fourth)).isEqualTo(CompareEnum.Fourth);
+        assertThat(defaultLotto.compare(fifth)).isEqualTo(CompareEnum.Fifth);
         assertThat(defaultLotto.compare(fail)).isEqualTo(CompareEnum.Fail);
     }
 }
