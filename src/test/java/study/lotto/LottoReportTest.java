@@ -15,7 +15,10 @@ class LottoReportTest {
     @DisplayName("잘못된 초기값 - 리스트 크기 0")
     void constructor_listSize0() {
         List<Lotto> emptyLottos = Collections.emptyList();
-        Lotto winningLotto = new Lotto("1,2,3,4,5,7");
+        WinningLotto winningLotto = new WinningLotto(
+                new Lotto("1,2,3,4,5,7"),
+                new LottoNumber(8)
+        );
 
         assertThatThrownBy(() -> new LottoReport(
                 emptyLottos,
@@ -27,7 +30,7 @@ class LottoReportTest {
     @DisplayName("잘못된 초기값 - 당첨번호 널")
     void constructor_winningLottoIsNull() {
         List<Lotto> emptyLottos = Collections.singletonList(new Lotto("1,2,3,4,5,7"));
-        Lotto winningLotto = null;
+        WinningLotto winningLotto = null;
 
         assertThatThrownBy(() -> new LottoReport(
                 emptyLottos,
@@ -45,12 +48,15 @@ class LottoReportTest {
                 new Lotto("1,2,3,4,7,8"),
                 new Lotto("1,2,3,7,8,9"),
                 new Lotto("1,2,3,7,8,9")
-        ), new Lotto("1,2,3,4,5,6"));
+        ), new WinningLotto(
+                new Lotto("1,2,3,4,5,6"),
+                new LottoNumber(33)
+        ));
 
         LottoResultMap lottoResultMap = lottoReport.analyze();
 
-        assertThat(lottoResultMap.matchCount(LottoWinningType.MATCH_COUNT_6)).isEqualTo(2);
-        assertThat(lottoResultMap.matchCount(LottoWinningType.MATCH_COUNT_5)).isEqualTo(1);
-        assertThat(lottoResultMap.matchCount(LottoWinningType.MATCH_NOT_COUNT)).isZero();
+        assertThat(lottoResultMap.matchCount(LottoWinningType.FIRST)).isEqualTo(2);
+        assertThat(lottoResultMap.matchCount(LottoWinningType.THIRD)).isEqualTo(1);
+        assertThat(lottoResultMap.matchCount(LottoWinningType.MISS)).isZero();
     }
 }

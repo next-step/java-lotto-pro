@@ -22,11 +22,8 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
-    public int matchCount(Lotto winningLotto) {
-        Set<Integer> lottoSet = new HashSet<>();
-        lottoSet.addAll(winningLotto.getNumbers());
-        lottoSet.addAll(this.getNumbers());
-        return LOTTO_NUMBER_SIZE * 2 - lottoSet.size();
+    public int numberSize() {
+        return numbers.size();
     }
 
     List<Integer> getNumbers() {
@@ -54,5 +51,9 @@ public class Lotto {
     @Override
     public String toString() {
         return numbers.toString();
+    }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return this.numbers.contains(bonusNumber.toInteger());
     }
 }

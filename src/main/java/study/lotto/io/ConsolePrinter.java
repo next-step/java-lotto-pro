@@ -6,6 +6,9 @@ import study.lotto.LottoResultMap;
 import study.lotto.enumtype.LottoWinningType;
 
 public class ConsolePrinter implements Printer {
+    private static final String SPACE_STRING = " ";
+    private static final String SECOND_ADDITIONAL_STRING = ", 보너스 볼 일치";
+
     @Override
     public void print(String text) {
         System.out.println(text);
@@ -22,17 +25,23 @@ public class ConsolePrinter implements Printer {
         System.out.println("당첨통계");
         System.out.println("---------");
 
-        print(lottoResultMap, LottoWinningType.MATCH_COUNT_3);
-        print(lottoResultMap, LottoWinningType.MATCH_COUNT_4);
-        print(lottoResultMap, LottoWinningType.MATCH_COUNT_5);
-        print(lottoResultMap, LottoWinningType.MATCH_COUNT_6);
+        print(lottoResultMap, LottoWinningType.FIFTH);
+        print(lottoResultMap, LottoWinningType.FOURTH);
+        print(lottoResultMap, LottoWinningType.THIRD);
+        print(lottoResultMap, LottoWinningType.SECOND, SECOND_ADDITIONAL_STRING);
+        print(lottoResultMap, LottoWinningType.FIRST);
 
         System.out.printf("총 수익률은 %.2f입니다.%n", lottoResultMap.calcLottoYield());
     }
 
-    private void print(LottoResultMap lottoResultMap, LottoWinningType winningType) {
-        System.out.printf("%d개 일치 (%d원)- %d개%n", winningType.getMatchCount(),
+    private void print(LottoResultMap lottoResultMap, LottoWinningType winningType, String additionalString) {
+        System.out.printf("%d개 일치%s(%d원)- %d개%n", winningType.getMatchCount(),
+                additionalString,
                 winningType.getWinnings(),
                 lottoResultMap.matchCount(winningType));
+    }
+
+    private void print(LottoResultMap lottoResultMap, LottoWinningType winningType) {
+        print(lottoResultMap, winningType, SPACE_STRING);
     }
 }

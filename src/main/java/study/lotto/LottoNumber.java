@@ -16,6 +16,10 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number.trim()));
+    }
+
     private void validate(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException(String.format("%d ~ %d 사이의 숫자만 생성할 수 있습니다.", MIN_NUMBER, MAX_NUMBER));

@@ -20,6 +20,6 @@ class LottoWinningTypeTest {
     @Test
     @DisplayName("enum 변환 테스트 - 범위 초과 예외")
     void valueOf_exceededRange() {
-        assertThat(LottoWinningType.valueOf(MATCH_COUNT_9999)).isEqualTo(LottoWinningType.MATCH_NOT_COUNT);
+        assertThat(LottoWinningType.valueOf(MATCH_COUNT_9999)).isEqualTo(LottoWinningType.MISS);
     }
 }
