@@ -1,5 +1,8 @@
 package lotto.ui;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.LottosResults;
@@ -38,13 +41,24 @@ public class ResultView {
     private void printLotto(Lotto lotto) {
         System.out.print(PREFIX_LOTTO_NUMBERS);
 
-        for (int i = 0; i < lotto.size() - 1; i++) {
-            System.out.print(lotto.get(i).getNumber());
+        List<Integer> lottoNumbers = getSortedLottoNumbers(lotto);
+        for (int i = 0; i < lottoNumbers.size() - 1; i++) {
+            System.out.print(lottoNumbers.get(i));
             System.out.print(DELIMITER_LOTTO_NUMBERS);
         }
 
-        System.out.print(lotto.get(lotto.size() - 1).getNumber());
+        System.out.print(lottoNumbers.get(lottoNumbers.size() - 1));
         System.out.println(SUFFIX_LOTTO_NUMBERS);
+    }
+
+    private List<Integer> getSortedLottoNumbers(Lotto lotto) {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < lotto.size(); i++) {
+            numbers.add(lotto.get(i).getNumber());
+        }
+        numbers.sort(null);
+
+        return numbers;
     }
 
     public void printLottoStatisticsResult(LottosResults results, PurchaseMoney purchaseMoney) {
