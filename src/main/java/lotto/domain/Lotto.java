@@ -30,19 +30,13 @@ public class Lotto {
     }
 
     public LottoMatchingResult match(Lotto lotto) {
-        LottoMatchingResult matchingResult = new LottoMatchingResult();
+        int countOfMatch = 0;
 
         for (int index = 0; index < lotto.size(); index++) {
-            addMatchingCount(matchingResult, lotto.get(index));
+            countOfMatch += hasNumber(lotto.get(index)) ? 1 : 0;
         }
 
-        return matchingResult;
-    }
-
-    private void addMatchingCount(LottoMatchingResult matchingResult, LottoNumber lottoNumber) {
-        if (hasNumber(lottoNumber)) {
-            matchingResult.addCountOfMatch();
-        }
+        return new LottoMatchingResult(countOfMatch, false);
     }
 
     public boolean hasNumber(LottoNumber lottoNumber) {
