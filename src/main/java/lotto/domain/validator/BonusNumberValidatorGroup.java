@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.domain.validator.impl.LottoNumberSizeValidator;
 import lotto.domain.validator.impl.NumberFormatValidator;
-import lotto.domain.validator.impl.OverlapBonusNumberValidator;
 
 public class BonusNumberValidatorGroup {
     private final List<NumberValidator> validators;
@@ -12,8 +11,7 @@ public class BonusNumberValidatorGroup {
     private BonusNumberValidatorGroup() {
         this.validators = Arrays.asList(
             new NumberFormatValidator(),
-            new LottoNumberSizeValidator(),
-            new OverlapBonusNumberValidator()
+            new LottoNumberSizeValidator()
         );
     }
 
@@ -25,7 +23,7 @@ public class BonusNumberValidatorGroup {
         return LazyHolder.instance;
     }
 
-    public void validate(String number, int... args) {
-        this.validators.forEach(validators -> validators.validate(number, args));;
+    public void validate(String number) {
+        this.validators.forEach(validators -> validators.validate(number));
     }
 }

@@ -7,8 +7,8 @@ public class BonusNumber {
     private static final BonusNumberValidatorGroup validatorGroup = BonusNumberValidatorGroup.getInstance();
     private final int bonusNumber;
 
-    public BonusNumber(String bonusNumber, WinningNumbers winningNumbers) {
-        validatorGroup.validate(bonusNumber, winningNumbers.getWinningNumbersToArray());
+    public BonusNumber(String bonusNumber) {
+        validatorGroup.validate(bonusNumber);
         this.bonusNumber = Integer.parseInt(bonusNumber);
     }
 

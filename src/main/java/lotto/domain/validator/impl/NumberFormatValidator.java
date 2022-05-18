@@ -6,7 +6,7 @@ import lotto.exception.ExceptionType;
 public class NumberFormatValidator implements NumberValidator {
 
     @Override
-    public void validate(String number, int... args) {
+    public void validate(String number) {
         try {
             Integer.parseInt(number);
         } catch (NumberFormatException e) {

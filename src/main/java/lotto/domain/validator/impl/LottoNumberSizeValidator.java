@@ -7,7 +7,7 @@ import lotto.utils.LottoUtils;
 public class LottoNumberSizeValidator implements NumberValidator {
 
     @Override
-    public void validate(String number, int... args) {
+    public void validate(String number) {
         int lottoNumber = Integer.parseInt(number);
         if (LottoUtils.isLottoNumberSize(lottoNumber)) {
             throw new IllegalArgumentException(ExceptionType.INVALID_NUMBER_SIZE.getMessage());
