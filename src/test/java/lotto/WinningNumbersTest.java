@@ -1,3 +1,5 @@
+package lotto;
+
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.Test;

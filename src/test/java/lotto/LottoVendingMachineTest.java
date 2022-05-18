@@ -1,3 +1,5 @@
+package lotto;
+
 import lotto.LottoNumbersGeneratorKr;
 import lotto.LottoVendingMachine;
 import lotto.domain.LottoGame;

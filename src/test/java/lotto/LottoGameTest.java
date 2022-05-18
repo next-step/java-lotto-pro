@@ -1,3 +1,5 @@
+package lotto;
+
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.Rank;

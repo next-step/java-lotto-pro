@@ -1,3 +1,5 @@
+package lotto;
+
 import lotto.domain.Match;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,3 +1,5 @@
+package lotto;
+
 import lotto.domain.Match;
 import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
