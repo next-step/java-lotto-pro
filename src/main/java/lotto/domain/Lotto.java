@@ -41,6 +41,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean hasNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     public List<Integer> lottoNumbers(){
         return lottoNumbersToIntegerList(lottoNumbers);
     }
