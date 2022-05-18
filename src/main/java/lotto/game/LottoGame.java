@@ -1,9 +1,8 @@
 package lotto.game;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-import java.util.stream.IntStream;
 import lotto.dto.LottoGameResultDTO;
 import lotto.factory.LottoNumbersFactory;
 import lotto.number.LottoNumber;
@@ -38,17 +37,17 @@ public class LottoGame {
     }
 
     private List<LottoNumbers> buyLotto() {
-        BuyLotto buyLotto = new BuyLotto(budget,lottoNumbersFactory);
+        BuyLotto buyLotto = new BuyLotto(budget, lottoNumbersFactory);
         int manualBuyCount = inputView.takeManualBuyCount();
         manualBuyLotto(buyLotto, manualBuyCount);
         int autoBuyCount = buyLotto.autoBuyRemainingBudget();
-        resultView.printBoughtCount(manualBuyCount,autoBuyCount);
+        resultView.printBoughtCount(manualBuyCount, autoBuyCount);
         return buyLotto.boughtLottos();
     }
 
-    private void manualBuyLotto(BuyLotto buyLotto,int manualBuyCount){
+    private void manualBuyLotto(BuyLotto buyLotto, int manualBuyCount) {
         inputView.printManualLottoNumbersHeader();
-        for(int i=0; i < manualBuyCount; i++){
+        for (int i = 0; i < manualBuyCount; i++) {
             List<Integer> numbers = inputView.takeManualLottoNumbers();
             buyLotto.manual(numbers);
         }
@@ -63,19 +62,19 @@ public class LottoGame {
                 .build();
     }
 
-    private LottoNumbers drawWinMainNumbers(){
+    private LottoNumbers drawWinMainNumbers() {
         List<Integer> numbers = inputView.takeWinMainNumbers();
         return lottoNumbersFactory.createLottoNumbers(numbers);
     }
 
-    private LottoNumber drawBonusNumber(){
+    private LottoNumber drawBonusNumber() {
         int number = inputView.takeBonusNumbers();
         return new LottoNumber(number);
     }
 
     private List<LottoRank> matchLottos(List<LottoNumbers> lottoNumbersList, WinLottoNumbers winNumbers) {
         return lottoNumbersList.stream()
-                .map(lottoNumbers-> winNumbers.match(lottoNumbers))
+                .map(lottoNumbers -> winNumbers.match(lottoNumbers))
                 .collect(toList());
     }
 

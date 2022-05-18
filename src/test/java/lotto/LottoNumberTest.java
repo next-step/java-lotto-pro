@@ -1,6 +1,7 @@
 package lotto;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.stream.IntStream;
 import lotto.number.LottoNumber;
@@ -11,23 +12,23 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
 
+    private static IntStream provideValidNumber() {
+        return IntStream.range(1, 46);
+    }
+
     @ParameterizedTest
-    @ValueSource(strings = {"0","-1","46"})
+    @ValueSource(strings = {"0", "-1", "46"})
     @NullAndEmptySource
-    void 로또번호_생성_예외_케이스(String input){
-        assertThatIllegalArgumentException().isThrownBy(()->{
-          new LottoNumber(input);
+    void 로또번호_생성_예외_케이스(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new LottoNumber(input);
         });
     }
 
     @ParameterizedTest
     @MethodSource("provideValidNumber")
-    void 로또번호_생성_성공_케이스(int input){
+    void 로또번호_생성_성공_케이스(int input) {
         LottoNumber lottoNumber = new LottoNumber(input);
         assertThat(lottoNumber).isEqualTo(new LottoNumber(input));
-    }
-
-    private static IntStream provideValidNumber(){
-        return IntStream.range(1,46);
     }
 }

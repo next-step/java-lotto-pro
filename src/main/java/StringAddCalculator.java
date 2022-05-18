@@ -1,4 +1,5 @@
 import java.util.List;
+
 public class StringAddCalculator {
 
     public static int splitAndSum(String expression) {
@@ -14,6 +15,6 @@ public class StringAddCalculator {
     }
 
     private static int sum(List<Integer> numbers) {
-        return numbers.stream().mapToInt(i->i).sum();
+        return numbers.stream().mapToInt(i -> i).sum();
     }
 }

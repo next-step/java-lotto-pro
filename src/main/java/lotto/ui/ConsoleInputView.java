@@ -51,8 +51,9 @@ public class ConsoleInputView implements InputView {
     public List<Integer> takeManualLottoNumbers() {
         return takeNumbers();
     }
+
     @Override
-    public void printManualLottoNumbersHeader(){
+    public void printManualLottoNumbersHeader() {
         System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }

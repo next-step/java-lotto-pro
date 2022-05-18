@@ -8,7 +8,7 @@ public enum LottoRank {
     , FIFTH_PLACE(5000, 3)
     , FOURTH_PLACE(50000, 4)
     , THIRD_PLACE(1500000, 5)
-    , SECOND_PLACE(30000000, 5)
+    , SECOND_PLACE(30000000,5)
     , FIRST_PLACE(2000000000, 6);
 
     public static final int MIN_MATCH_COUNT_FOR_PRIZE = 3;
@@ -25,7 +25,7 @@ public enum LottoRank {
         if (isNoPrize(matchNumberCount)) {
             return NO_PRIZE;
         }
-        if(isSecondPlace(matchNumberCount,containsBonusNumber)){
+        if (isSecondPlace(matchNumberCount, containsBonusNumber)) {
             return SECOND_PLACE;
         }
         return findRankByMatchNumberCount(matchNumberCount);
@@ -35,13 +35,13 @@ public enum LottoRank {
         return matchNumberCount < MIN_MATCH_COUNT_FOR_PRIZE;
     }
 
-    private static boolean isSecondPlace(int matchNumberCount, boolean containsBonusNumber){
+    private static boolean isSecondPlace(int matchNumberCount, boolean containsBonusNumber) {
         return matchNumberCount == SECOND_PLACE.matchNumberCount && containsBonusNumber;
     }
 
-    private static LottoRank findRankByMatchNumberCount(int matchNumberCount){
+    private static LottoRank findRankByMatchNumberCount(int matchNumberCount) {
         return Stream.of(LottoRank.values())
-                .filter(rank->rank.matchNumberCount == matchNumberCount)
+                .filter(rank -> rank.matchNumberCount == matchNumberCount)
                 .findFirst().orElse(NO_PRIZE);
     }
 

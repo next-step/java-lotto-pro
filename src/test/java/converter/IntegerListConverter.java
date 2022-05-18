@@ -16,7 +16,7 @@ public class IntegerListConverter extends SimpleArgumentConverter {
         throw new IllegalArgumentException("테스트 값이 올바르지 않습니다.");
     }
 
-    private List<Integer> stringsToIntegerList(String[] strs){
-        return Arrays.stream(strs).map((str)->Integer.parseInt(str)).collect(Collectors.toList());
+    private List<Integer> stringsToIntegerList(String[] strs) {
+        return Arrays.stream(strs).map((str) -> Integer.parseInt(str)).collect(Collectors.toList());
     }
 }
