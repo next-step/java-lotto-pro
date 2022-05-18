@@ -10,6 +10,8 @@ public class StringAddCalculator {
     private static final Pattern customSplitPattern = Pattern.compile("//(.)\n(.*)");
     private static final int ZERO = 0;
     private static final String DEFAULT_REGEX = ",|:";
+    private static final int STRING_GROUP = 2;
+    private static final int DELIMITER_GROUP = 1;
 
     public static int splitAndSum(String s) {
         if (isBlank(s)) {
@@ -18,7 +20,7 @@ public class StringAddCalculator {
 
         Matcher m = customSplitPattern.matcher(s);
         if (m.find()) {
-            return sum(split(m.group(2), m.group(1)));
+            return sum(split(m.group(STRING_GROUP), m.group(DELIMITER_GROUP)));
         }
 
         return sum(split(s, DEFAULT_REGEX));
