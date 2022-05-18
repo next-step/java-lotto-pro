@@ -32,10 +32,10 @@ public class LottoNumbers {
         }
     }
 
-    public int countSameLottoNumber(LottoNumbers numbers) {
+    public int countSameLottoNumber(WinningLotto winningLotto) {
         return (int) this.lottoNumberSet
                 .stream()
-                .filter(numbers::isContain).count();
+                .filter(winningLotto::isContain).count();
     }
 
     public boolean isContain(LottoNumber number) {

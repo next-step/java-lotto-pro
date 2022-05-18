@@ -7,11 +7,11 @@ public class Lotto {
     }
 
     public LottoRank matches(WinningLotto from) {
-        int count = this.lottoNumbers.countSameLottoNumber(from.getLotto().getLottoNumbers());
-        return LottoRank.getLottoRuleFromMatchedCount(count, this.isContain(from.getBonusBall()));
+        int count = this.lottoNumbers.countSameLottoNumber(from);
+        return LottoRank.getLottoRuleFromMatchedCount(count, isContain(from.getBonusBall()));
     }
 
-    private boolean isContain(LottoNumber number) {
+    public boolean isContain(LottoNumber number) {
         return lottoNumbers.isContain(number);
     }
 

@@ -14,12 +14,16 @@ public class WinningLotto {
     }
 
     private void checkDuplicateNumber() {
-        if (lotto.getLottoNumbers().isContain(bonusBall)) {
+        if (lotto.isContain(bonusBall)) {
             throw new IllegalArgumentException(LottoNumbers.EXIST_DUPLICATE_VALUE);
         }
     }
 
     public Lotto getLotto() {
         return lotto;
+    }
+
+    public boolean isContain(LottoNumber number) {
+        return lotto.isContain(number);
     }
 }
