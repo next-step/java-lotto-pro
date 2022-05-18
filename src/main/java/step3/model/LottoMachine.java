@@ -31,7 +31,7 @@ public class LottoMachine {
     }
 
 
-    public LottoTicket makeManualLottoTicket(String manualLottoSource) {
+    private LottoTicket makeManualLottoTicket(String manualLottoSource) {
         try {
             return new LottoTicket(manualLottoSource);
         } catch (IllegalArgumentException e) {
@@ -84,7 +84,6 @@ public class LottoMachine {
     }
 
     public HashMap<LottoReward, Integer> checkWin(List<LottoTicket> lottoTickets) {
-        //Lottouser로
         LinkedHashMap<LottoReward, Integer> statistics = new LinkedHashMap<>();
         initStatistics(statistics);
         for (LottoTicket lottoTicket : lottoTickets) {
