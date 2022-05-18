@@ -34,19 +34,6 @@ public class LottoResult {
         }
     }
 
-    public BigDecimal calculateWinningMoney() {
-        return rankingList.stream()
-                .mapToInt(Ranking::getReward)
-                .mapToObj(BigDecimal::new)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-    public BigDecimal calculateWinningProfit(Money money) {
-        BigDecimal winningMoney = calculateWinningMoney();
-        BigDecimal divisor = new BigDecimal(money.getMoney());
-        return winningMoney.divide(divisor).setScale(2, RoundingMode.HALF_UP);
-    }
-
     public List<Ranking> getRankingList() {
         return rankingList;
     }

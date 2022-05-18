@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
+
 import static lotto.domain.LottoConstant.LOTTO_PRICE;
 
 public class Money {
@@ -19,6 +23,20 @@ public class Money {
 
     public Money(long input) {
         this(String.valueOf(input));
+    }
+
+    public static BigDecimal calculateWinningMoney(LottoResult lottoResult) {
+        List<Ranking> rankingList = lottoResult.getRankingList();
+        return rankingList.stream()
+                .mapToInt(Ranking::getReward)
+                .mapToObj(BigDecimal::new)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public BigDecimal calculateWinningProfit(LottoResult lottoResult) {
+        BigDecimal winningMoney = calculateWinningMoney(lottoResult);
+        BigDecimal divisor = new BigDecimal(money);
+        return winningMoney.divide(divisor).setScale(2, RoundingMode.HALF_UP);
     }
 
     private boolean isInvalidMoney(long money) {

@@ -44,7 +44,7 @@ public class OutputView {
     }
 
     public static void showLottoProfit(LottoResult result, Money money) {
-        BigDecimal profit = result.calculateWinningProfit(money);
+        BigDecimal profit = money.calculateWinningProfit(result);
         OutputView.printMessage("총 수익률은 " + profit + "입니다.");
     }
 
