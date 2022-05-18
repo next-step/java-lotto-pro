@@ -35,7 +35,11 @@ public class LottoNumbers {
     public int countSameLottoNumber(LottoNumbers numbers) {
         return (int) this.lottoNumberSet
                 .stream()
-                .filter(lottoNumber -> numbers.getLottoNumberSet().contains(lottoNumber)).count();
+                .filter(numbers::isContain).count();
+    }
+
+    public boolean isContain(LottoNumber number) {
+        return lottoNumberSet.contains(number);
     }
 
 }

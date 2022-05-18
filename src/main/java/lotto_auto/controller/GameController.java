@@ -6,6 +6,7 @@ import lotto_auto.view.UserInputView;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class GameController {
@@ -16,7 +17,7 @@ public class GameController {
 
         Lottos purchasedLottos = buyLottos(money);
         output.showPurchasedLottos(purchasedLottos);
-        Lotto winingLotto = getWinningLotto();
+        WinningLotto winingLotto = getWinningLotto();
 
         Figures figures = new Figures(purchasedLottos, winingLotto);
         output.showFigures(figures);
@@ -51,26 +52,62 @@ public class GameController {
         }
     }
 
-    private Lotto getWinningLotto() {
+    private WinningLotto getWinningLotto() {
         boolean isValid;
-        String userinput;
-        do {
-            output.showWinningLottoNotice();
-            userinput = UserInputView.getUserInput();
-            isValid = isValidLottoNumbers(userinput);
-        } while (!isValid);
-        List<LottoNumber> numbers = getLottoNumberListFromStr(userinput);
-        return new Lotto(new LottoNumbers(numbers));
+        LottoNumbers lottoNumbers = getValidLottoNumber();
+        LottoNumber bonusBall;
+
+        do{
+            bonusBall = getBonusLottoNumber();
+            isValid = isValidWinningLotto(lottoNumbers, bonusBall);
+        }while (!isValid);
+        return new WinningLotto(new Lotto(lottoNumbers), bonusBall);
     }
 
-    private boolean isValidLottoNumbers(String lottoString) {
+    private LottoNumbers getValidLottoNumber() {
+        boolean isValid;
+        Optional<LottoNumbers> lottoNumbers;
+
+        do {
+            output.showWinningLottoNotice();
+            String userinput = UserInputView.getUserInput();
+            lottoNumbers = getLottoNumbersByUserString(userinput);
+            isValid = lottoNumbers.isPresent();
+        } while (!isValid);
+
+        return lottoNumbers.get();
+    }
+
+    private boolean isValidWinningLotto(LottoNumbers lottoNumbers, LottoNumber bonusBall) {
         try {
-            List<LottoNumber> numbers = getLottoNumberListFromStr(lottoString);
-            new LottoNumbers(numbers);
+            new WinningLotto(new Lotto(lottoNumbers), bonusBall);
             return true;
         } catch (IllegalArgumentException e) {
             output.showError(e);
             return false;
+        }
+    }
+
+    private LottoNumber getBonusLottoNumber() {
+        boolean isValid;
+
+        Optional<LottoNumber> bonusBall;
+        do {
+            output.showBonusBallInputNotice();
+            String userinput = UserInputView.getUserInput();
+            bonusBall = getLottoNumberByUserString(userinput);
+            isValid = bonusBall.isPresent();
+        } while (!isValid);
+
+        return bonusBall.get();
+    }
+
+    private Optional<LottoNumbers> getLottoNumbersByUserString(String lottoString) {
+        try {
+            return Optional.of(getLottoNumberListByStr(lottoString));
+        } catch (IllegalArgumentException e) {
+            output.showError(e);
+            return Optional.empty();
         }
     }
 
@@ -79,13 +116,23 @@ public class GameController {
         return LottoGenerator.createLottos(money.canBuyLottoCount());
     }
 
-    private List<LottoNumber> getLottoNumberListFromStr(String lottoStr) {
+    private Optional<LottoNumber> getLottoNumberByUserString(String userinput) {
+        try {
+            int number = Integer.parseInt(userinput);
+            return Optional.of(new LottoNumber(number));
+        } catch (IllegalArgumentException e) {
+            output.showError(e);
+            return Optional.empty();
+        }
+    }
+
+    private LottoNumbers getLottoNumberListByStr(String lottoStr) {
         try {
             String delimiter = ", ";
-            return Arrays.stream(lottoStr.split(delimiter))
+            return new LottoNumbers(Arrays.stream(lottoStr.split(delimiter))
                     .map(Integer::parseInt)
                     .map(LottoNumber::new)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toList()));
         } catch (NumberFormatException e) {
             IllegalArgumentException error = new IllegalArgumentException(LottoNumber.NOT_NUMBER);
             output.showError(error);
