@@ -1,5 +1,6 @@
 package step3.controller;
 
+import step3.domain.LottoElement;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
 import step3.domain.Ticket;
@@ -37,7 +38,17 @@ public class LottoController {
             winnerTicket = lottoMachine.makeManualLottoTicket(manualLottoSource);
         }
 
-        outputView.printOutput(lottoMachine.checkWin(winnerTicket), money);
+        LottoElement bonusNumber = null;
+        while(bonusNumberIsNotValid(bonusNumber)){
+            String bonusLottoSource = inputView.getBonusLotto();
+            bonusNumber = lottoMachine.setBonusNumber(bonusLottoSource, winnerTicket);
+        }
+
+        outputView.printOutput(lottoMachine.checkWin(winnerTicket,bonusNumber), money);
+    }
+
+    private boolean bonusNumberIsNotValid(LottoElement bonusNumber) {
+        return bonusNumber == null;
     }
 
     private boolean moneyAndTicketIsNotValid(Money money, Ticket ticket) {
