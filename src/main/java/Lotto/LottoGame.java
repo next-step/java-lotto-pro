@@ -22,7 +22,7 @@ public class LottoGame {
 
     private WinLotto setUpWinLotto(){
         WinLotto winLotto = new WinLotto();
-        winLotto.generate(InputView.inputLastWinNumber());
+        winLotto.getLotto().generate(InputView.inputLastWinNumber());
         winLotto.generateBonus(InputView.inputLastWinBonusNumber());
         return winLotto;
     }

@@ -2,15 +2,21 @@ package Lotto;
 
 import Lotto.error.ErrorMessage;
 
-public class WinLotto extends Lotto {
+public class WinLotto {
     private int bonusNumber;
+    private Lotto lotto;
 
     public WinLotto() {
+        this.lotto = new Lotto();
     }
 
     public WinLotto(String customNumbers, int bonusNumber) {
-        super(customNumbers);
+        this.lotto = new Lotto(customNumbers);
         this.bonusNumber = bonusNumber;
+    }
+
+    public Lotto getLotto() {
+        return lotto;
     }
 
     public int getBonusNumber() {
@@ -33,7 +39,7 @@ public class WinLotto extends Lotto {
             throw new IllegalArgumentException(ErrorMessage.BonusNumberOutOfRange.getErrorMsg());
         }
 
-        if(super.getNumbers().contains(bonus))
+        if(lotto.getNumbers().contains(bonus))
             throw new IllegalArgumentException(ErrorMessage.BonusNumberDuplicate.getErrorMsg());
     }
 

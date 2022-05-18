@@ -12,6 +12,7 @@ public class Lotto {
     private static final ArrayList<Integer> RANGE_NUMBERS = RangeNumbers.getRangeNumbers();
     private static int RANGE_NUMBERS_START_INDEX = 0;
     private static int RANGE_NUMBERS_END_INDEX = 6;
+    private static int LOTTO_STRING_MINIMUM_INDEX = 2;
     private List<Integer> numbers = new ArrayList<>();
 
     public List<Integer> getNumbers() {
@@ -43,7 +44,8 @@ public class Lotto {
     }
 
     public CompareEnum compare(WinLotto winLotto) {
-        long hitCount = winLotto.getNumbers()
+        long hitCount = winLotto.getLotto()
+                        .getNumbers()
                         .stream()
                         .filter(num -> this.numbers.contains(num))
                         .count();
@@ -67,10 +69,10 @@ public class Lotto {
             sb.append(number + ", ");
         }
 
-        if(sb.length() < 2)
+        if(sb.length() < LOTTO_STRING_MINIMUM_INDEX)
             return "";
 
-        sb.delete(sb.length() - 2, sb.length());
+        sb.delete(sb.length() - LOTTO_STRING_MINIMUM_INDEX, sb.length());
         return "[" + sb + "]";
     }
 }
