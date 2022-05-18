@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import static lotto.constants.LottoConstants.MAX;
+import static lotto.constants.LottoConstants.MIN;
+
 import java.util.Collections;
 import java.util.List;
 import lotto.exception.ExceptionType;
@@ -13,6 +16,10 @@ public class Lotto {
         validateLottoNumberSize(numbers);
         Collections.sort(numbers);
         this.numbers = numbers;
+    }
+
+    public static boolean isLottoNumberSize(int number) {
+        return number > MAX || number < MIN;
     }
 
     private void validateLottoNumberSize(List<Integer> numbers) {
