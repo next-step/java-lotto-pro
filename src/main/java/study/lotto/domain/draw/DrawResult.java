@@ -1,31 +1,56 @@
 package study.lotto.domain.draw;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class DrawResult {
-    private final DivisionResults divisionResult;
+    private final List<DivisionResult> value;
 
-    public DrawResult(DivisionResults divisionResult) {
-        this.divisionResult = divisionResult;
+    public DrawResult(List<DivisionResult> divisionResultList) {
+        this.value = createDivisionResultForAllDivision(divisionResultList);
     }
 
-    public BigDecimal earningsRate(BigDecimal lottoExpense) {
-        if (BigDecimal.ZERO.equals(lottoExpense)) {
+    public List<DivisionResult> getWinnings() {
+        return value.stream()
+                .map(DivisionResult::new)
+                .collect(Collectors.toList());
+    }
+
+    public BigDecimal earningsRate(BigDecimal purchaseCost) {
+        if (BigDecimal.ZERO.equals(purchaseCost)) {
             return BigDecimal.ONE;
         }
-        return divisionResult.totalPrize().divide(lottoExpense, 2, BigDecimal.ROUND_DOWN);
+        return totalPrize().divide(purchaseCost, 2, BigDecimal.ROUND_DOWN);
     }
 
-    public List<DivisionResult> get() {
-        return divisionResult.get();
+    private BigDecimal totalPrize() {
+        return value.stream()
+                .map(DivisionResult::calculatePrize)
+                .reduce(BigDecimal.ZERO, (prize1, prize2) -> prize1.add(prize2));
+    }
+
+    private List<DivisionResult> createDivisionResultForAllDivision(List<DivisionResult> divisionResultList) {
+        return Arrays.asList(Division.values()).stream()
+                .filter(division -> division != Division.DIVISION_NONE)
+                .map(division -> createDivisionResult(divisionResultList, division))
+                .collect(Collectors.toList());
+    }
+
+    private DivisionResult createDivisionResult(List<DivisionResult> divisionResultList, Division division) {
+        return divisionResultList.stream()
+                .filter(divisionResult -> divisionResult.hasDivisionSame(division))
+                .findFirst()
+                .map(DivisionResult::new)
+                .orElse(new DivisionResult(division));
     }
 
     @Override
     public String toString() {
         return "DrawResult{" +
-                "divisionResult=" + divisionResult +
+                "value=" + value +
                 '}';
     }
 
@@ -38,11 +63,11 @@ public class DrawResult {
             return false;
         }
         DrawResult that = (DrawResult) o;
-        return Objects.equals(divisionResult, that.divisionResult);
+        return Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(divisionResult);
+        return Objects.hash(value);
     }
 }

@@ -2,7 +2,7 @@ package study.lotto.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import study.lotto.domain.LottoNumbers;
+import study.lotto.domain.Lotto;
 
 public class PurchasedLottos {
 
@@ -14,8 +14,11 @@ public class PurchasedLottos {
                 .collect(Collectors.toList());
     }
 
-    public static PurchasedLottos from(List<LottoNumbers> lottoNumbers) {
-        return new PurchasedLottos(lottoNumbers.stream().map(PurchasedLotto::new).collect(Collectors.toList()));
+    public static PurchasedLottos from(List<Lotto> lottos) {
+        return new PurchasedLottos(
+                lottos.stream()
+                        .map(PurchasedLotto::new)
+                        .collect(Collectors.toList()));
     }
 
     public List<PurchasedLotto> get() {

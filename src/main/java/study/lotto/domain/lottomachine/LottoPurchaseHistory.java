@@ -1,28 +1,22 @@
 package study.lotto.domain.lottomachine;
 
 import java.math.BigDecimal;
-import java.util.List;
-import study.lotto.domain.Lotto;
 import study.lotto.domain.Lottos;
 
 public class LottoPurchaseHistory {
     private final Lottos lottos;
-    private final BigDecimal totalPrice;
+    private final BigDecimal totalCost;
 
-    public LottoPurchaseHistory(List<Lotto> lottoList, BigDecimal totalPrice) {
-        this(new Lottos(lottoList), totalPrice);
-    }
-
-    public LottoPurchaseHistory(Lottos lottos, BigDecimal totalPrice) {
+    public LottoPurchaseHistory(Lottos lottos, BigDecimal totalCost) {
         this.lottos = lottos;
-        this.totalPrice = totalPrice;
+        this.totalCost = totalCost;
     }
 
     public Lottos getLottos() {
         return lottos;
     }
 
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
+    public BigDecimal getTotalCost() {
+        return totalCost;
     }
 }

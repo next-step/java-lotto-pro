@@ -12,12 +12,20 @@ public class DivisionResult {
     }
 
     public DivisionResult(DivisionResult divisionResult) {
-        this(divisionResult.getDivision(), divisionResult.count);
+        this(divisionResult.division, divisionResult.count);
     }
 
     public DivisionResult(Division division, Long count) {
         this.division = division;
         this.count = count;
+    }
+
+    public BigDecimal calculatePrize() {
+        return division.getPrize().multiply(BigDecimal.valueOf(count));
+    }
+
+    public boolean hasDivisionSame(Division division) {
+        return this.division == division;
     }
 
     public Division getDivision() {
@@ -26,14 +34,6 @@ public class DivisionResult {
 
     public Long getCount() {
         return count;
-    }
-
-    public boolean hasDivisionSame(Division division) {
-        return this.division == division;
-    }
-
-    public BigDecimal calculatePrize() {
-        return division.getPrize().multiply(BigDecimal.valueOf(count));
     }
 
     @Override

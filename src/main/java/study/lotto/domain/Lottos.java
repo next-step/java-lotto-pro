@@ -2,35 +2,39 @@ package study.lotto.domain;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import study.lotto.domain.draw.Division;
 import study.lotto.domain.draw.DivisionResult;
-import study.lotto.domain.draw.DivisionResults;
+import study.lotto.domain.draw.DrawResult;
 
 public class Lottos {
     private final List<Lotto> value;
 
     public Lottos(List<Lotto> lottos) {
-        this.value = lottos.stream().map(Lotto::new).collect(Collectors.toList());
+        this.value = copy(lottos);
     }
 
-    public List<LottoNumbers> lottoNumbers() {
-        return value.stream().map(Lotto::numbers).map(LottoNumbers::new).collect(Collectors.toList());
+    public List<Lotto> get() {
+        return copy(value);
     }
 
-    public DivisionResults findWinnings(LottoNumbers winningNumber) {
-        return new DivisionResults(createDivisionResultList(winningNumber));
+    public DrawResult findWinnings(Lotto winningNumber, LottoNumber bonusNumber) {
+        return new DrawResult(createDivisionResultList(winningNumber, bonusNumber));
     }
 
-    private List<DivisionResult> createDivisionResultList(LottoNumbers winningNumber) {
+    private List<DivisionResult> createDivisionResultList(Lotto winningNumber, LottoNumber matchBonus) {
         Map<Division, Long> divisionResults = value.stream()
-                .map(lotto -> lotto.checkResult(winningNumber))
-                .filter(Objects::nonNull)
+                .map(lotto -> Division.valueOf(winningNumber.matchCount(lotto), lotto.has(matchBonus)))
                 .collect(Collectors.groupingBy(division -> division, Collectors.counting()));
 
         return divisionResults.entrySet().stream()
                 .map(entry -> new DivisionResult(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+    }
+
+    private List<Lotto> copy(List<Lotto> lottos) {
+        return lottos.stream()
+                .map(Lotto::new)
                 .collect(Collectors.toList());
     }
 }

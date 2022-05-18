@@ -1,30 +1,35 @@
 package study.lotto.domain.draw;
 
-import java.util.List;
 import java.util.Objects;
-import study.lotto.domain.LottoNumbers;
+import study.lotto.domain.Lotto;
+import study.lotto.domain.LottoNumber;
 import study.lotto.domain.Lottos;
 
 public class LottoDraw {
-    private final LottoNumbers winningNumber;
+    private final LottoNumber bonusNumber;
+    private final Lotto winningLotto;
 
-    public LottoDraw(List<Integer> lottoNubmers) {
-        this(new LottoNumbers(lottoNubmers));
-    }
-
-    public LottoDraw(LottoNumbers lottoNumbers) {
-        winningNumber = lottoNumbers;
+    public LottoDraw(Lotto winningLotto, int bonusNumber) {
+        this.bonusNumber = validateBonusDuplicates(winningLotto, new LottoNumber(bonusNumber));
+        this.winningLotto = winningLotto;
     }
 
     public DrawResult match(Lottos lottos) {
-        DivisionResults divisionResults = lottos.findWinnings(winningNumber);
-        return new DrawResult(divisionResults);
+        return lottos.findWinnings(winningLotto, bonusNumber);
+    }
+
+    private LottoNumber validateBonusDuplicates(Lotto winningNumber, LottoNumber bonusNumber) {
+        if (winningNumber.has(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+        }
+        return bonusNumber;
     }
 
     @Override
     public String toString() {
         return "LottoDraw{" +
-                "winningNumber=" + winningNumber +
+                "bonusNumber=" + bonusNumber +
+                ", winningLotto=" + winningLotto +
                 '}';
     }
 
@@ -37,11 +42,12 @@ public class LottoDraw {
             return false;
         }
         LottoDraw lottoDraw = (LottoDraw) o;
-        return Objects.equals(winningNumber, lottoDraw.winningNumber);
+        return Objects.equals(bonusNumber, lottoDraw.bonusNumber) && Objects.equals(winningLotto,
+                lottoDraw.winningLotto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winningNumber);
+        return Objects.hash(bonusNumber, winningLotto);
     }
 }

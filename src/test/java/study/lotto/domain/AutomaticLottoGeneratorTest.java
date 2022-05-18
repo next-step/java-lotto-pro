@@ -12,6 +12,6 @@ class AutomaticLottoGeneratorTest {
     @Test
     @DisplayName("로또 번호를 자동 생성한다.")
     void 로또번호를_자동으로_생성() {
-        assertThat(lottoGenerator.generate()).isNotNull();
+        assertThat(lottoGenerator.generate()).isNotEmpty();
     }
 }

@@ -25,14 +25,14 @@ class LottoMachineTest {
     @DisplayName("1000원으로 1장을 발급한다.")
     void 로또_1장_발급() {
         Lottos lottos = lottoMachine.issueLotto(new BigDecimal(1000)).getLottos();
-        assertThat(lottos.lottoNumbers()).hasSize(1);
+        assertThat(lottos.get()).hasSize(1);
     }
 
     @Test
     @DisplayName("1장에 1000원씩 돈이 가능한만큼 발급한다.")
     void 로또_5장_발급() {
         Lottos lottos = lottoMachine.issueLotto(new BigDecimal(5500)).getLottos();
-        assertThat(lottos.lottoNumbers()).hasSize(5);
+        assertThat(lottos.get()).hasSize(5);
     }
 
     @Test

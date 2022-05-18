@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import study.lotto.domain.Lotto;
+import study.lotto.domain.Lottos;
 
 public class LottoMachine {
     private final LottoGenerator lottoGenerator;
@@ -25,8 +26,11 @@ public class LottoMachine {
 
     private LottoPurchaseHistory issue(BigDecimal money) {
         int count = numberOfLottos(money);
-        List<Lotto> lottos = Stream.generate(this::generateLotto).limit(count).collect(Collectors.toList());
-        return new LottoPurchaseHistory(lottos, lottoPrice.totalPrice(count));
+
+        BigDecimal totalPrice = lottoPrice.totalPrice(count);
+        Lottos issuedLottos = new Lottos(generateLottos(count));
+
+        return new LottoPurchaseHistory(issuedLottos, totalPrice);
     }
 
     private int numberOfLottos(BigDecimal money) {
@@ -35,6 +39,12 @@ public class LottoMachine {
             throw new IllegalArgumentException("로또를 하나도 구입하지 못했습니다.");
         }
         return count;
+    }
+
+    private List<Lotto> generateLottos(int count) {
+        return Stream.generate(this::generateLotto)
+                .limit(count)
+                .collect(Collectors.toList());
     }
 
     private Lotto generateLotto() {

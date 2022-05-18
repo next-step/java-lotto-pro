@@ -15,13 +15,24 @@ public class LottoNumber {
         this.value = value;
     }
 
+    public LottoNumber(LottoNumber lottoNumber) {
+        this.value = lottoNumber.value;
+    }
+
+    public int get() {
+        return value;
+    }
+
     private boolean validate(int lottoNumber) {
         return lottoNumber < MINIMUM_NUMBER || lottoNumber > MAXIMUM_NUMBER;
     }
 
     @Override
-    public String toString() {
-        return String.valueOf(value);
+    public String
+    toString() {
+        return "LottoNumber{" +
+                "value=" + value +
+                '}';
     }
 
     @Override

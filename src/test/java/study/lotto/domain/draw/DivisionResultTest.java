@@ -12,7 +12,7 @@ class DivisionResultTest {
 
     @BeforeEach
     void setUp() {
-        divisionResult = new DivisionResult(Division.DIVISION_THREE, 3L);
+        divisionResult = new DivisionResult(Division.DIVISION_FOUR, 3L);
     }
 
     @Test
@@ -24,7 +24,7 @@ class DivisionResultTest {
     @Test
     @DisplayName("입력한 등수와 같은 등수인지 확인한다.")
     void 등수_확인_성공() {
-        assertThat(divisionResult.hasDivisionSame(Division.DIVISION_THREE)).isTrue();
+        assertThat(divisionResult.hasDivisionSame(Division.DIVISION_FOUR)).isTrue();
     }
 
     @Test
