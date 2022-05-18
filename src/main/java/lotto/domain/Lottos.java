@@ -24,16 +24,10 @@ public class Lottos {
     public Map<Lotto, LottoRank> lottoWinningResult(Lotto answerLotto) {
         Map<Lotto, LottoRank> lottoRankMap = new HashMap<>();
         this.lottos.forEach(lotto -> {
-            lottoRankMap.put(lotto, LottoRank.findLottoRankByMatchedCount(countMatchedNumber(lotto, answerLotto)));
+            lottoRankMap.put(
+                    lotto, LottoRank.findLottoRankByMatchedCount(lotto.countMatchedNumber(answerLotto))
+            );
         });
         return lottoRankMap;
-    }
-
-    public static int countMatchedNumber(Lotto lotto, Lotto answerLotto) {
-        List<Integer> answerLottoNumbers = new ArrayList<>(answerLotto.getLottoNumbers());
-
-        return (int) lotto.getLottoNumbers().stream()
-                .filter(answerLottoNumbers::contains)
-                .count();
     }
 }
