@@ -19,6 +19,10 @@ public class Money {
         return amount / LOTTO_PRICE;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     private static void checkAmountRange(int amount) {
         if (amount < 0) {
             String message = String.format("[ERROR] 구매금액은 음수일 수 없습니다! : 입력금액 [%d]", amount);
