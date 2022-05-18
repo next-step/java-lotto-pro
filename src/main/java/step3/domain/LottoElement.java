@@ -10,6 +10,7 @@ public class LottoElement implements Comparable<LottoElement>, Cloneable {
     private final String CREATE_ELEMENT_EXCEPTION_MSG = "로또 번호는 %s 이상 %s 이하의 숫자여야합니다";
     private final String COPY_ELEMENT_EXCEPTION_MSG = "LottoElement 복사중 에러가 발생하였습니다";
 
+
     public LottoElement(int element) {
         this.element = validElement(element);
     }
@@ -19,12 +20,12 @@ public class LottoElement implements Comparable<LottoElement>, Cloneable {
         return element;
     }
 
+
     private void validNumberRange(int parseElement) {
         if (parseElement < LOTTO_MIN || parseElement > LOTTO_MAX) {
             throw new IllegalArgumentException(String.format(CREATE_ELEMENT_EXCEPTION_MSG, LOTTO_MIN, LOTTO_MAX));
         }
     }
-
 
     public int getElement() {
         return element;

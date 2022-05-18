@@ -21,8 +21,8 @@ public class LottoMachine {
     }
 
 
-    public HashMap<LottoReward, Integer> checkWin(LottoTicket winnerLotto,LottoElement bonusNumber) {
-        return lottoManager.checkWin(winnerLotto,bonusNumber);
+    public HashMap<LottoReward, Integer> checkWin(LottoTicket winnerLotto, LottoElement bonusNumber) {
+        return lottoManager.checkWin(winnerLotto, bonusNumber);
     }
 
     public LottoTicket makeManualLottoTicket(String manualLottoSource) {
@@ -61,4 +61,12 @@ public class LottoMachine {
         return lottoManager.getLottoNumbers();
     }
 
+    public LottoElement setBonusNumber(String lottoElementSource, LottoTicket winnerTicket) {
+        try {
+            return lottoManager.setBonusNumber(lottoElementSource, winnerTicket);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }

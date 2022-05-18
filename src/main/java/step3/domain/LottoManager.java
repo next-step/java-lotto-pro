@@ -19,6 +19,7 @@ public class LottoManager {
     private final int LOTTO_MAX = 46;
     private final int LOTTO_ELEMENTS_SIZE = 6;
     private List<Integer> LOTTO_VALID_ELEMENTS = IntStream.rangeClosed(LOTTO_MIN, LOTTO_MAX).boxed().collect(Collectors.toList());
+    private final String SET_BONUS_NUMBER_EXCEPTION_MSG = "정답티켄과 다른 번호를 설정해야합니다";
 
     public LottoManager() {
     }
@@ -70,5 +71,22 @@ public class LottoManager {
 
     public List<List<LottoElement>> getLottoNumbers() {
         return lottoTickets.stream().map(LottoTicket::getLottoNumbers).collect(Collectors.toList());
+    }
+
+    public LottoElement setBonusNumber(String lottoElementSource, LottoTicket winnerTicket) {
+        if (!validBonusNumber(lottoElementSource, winnerTicket)) {
+            throw new IllegalArgumentException(SET_BONUS_NUMBER_EXCEPTION_MSG);
+        }
+        return new LottoElement(Integer.parseInt(lottoElementSource));
+    }
+
+    private boolean validBonusNumber(String lottoElementSource, LottoTicket winnerTicket) {
+        int isExist = 1;
+        try {
+            int bonusExistInWinnerTicket = winnerTicket.getMatchCountWith(Arrays.asList(new LottoElement(Integer.parseInt(lottoElementSource))));
+            return bonusExistInWinnerTicket != isExist;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
