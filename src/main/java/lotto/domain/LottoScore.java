@@ -1,47 +1,45 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class LottoScore {
 
     private static final Integer ZERO = 0;
-    private Map<LottoWinnings, Integer> lottoScoreMap;
+    private Map<Rank, Integer> rankMap;
 
     public LottoScore() {
-        lottoScoreMap = defaultLottoScoreMap();
+        rankMap = initRankMap();
     }
 
-    private Map<LottoWinnings, Integer> defaultLottoScoreMap() {
-        this.lottoScoreMap = new HashMap<>();
+    private Map<Rank, Integer> initRankMap() {
+        this.rankMap = new TreeMap<>((o1, o2) -> o2.getWinningsMoney() - o1.getWinningsMoney());
 
-        for (LottoWinnings lottoWinnings : LottoWinnings.scoreTypes()) {
-            lottoScoreMap.put(lottoWinnings, ZERO);
+        for (Rank rank : Rank.values()) {
+            rankMap.put(rank, ZERO);
         }
 
-        return lottoScoreMap;
+        rankMap.remove(Rank.MISS);
+        return rankMap;
     }
 
-    public Map<LottoWinnings, Integer> getLottoScoreMap() {
-        return Collections.unmodifiableMap(lottoScoreMap);
+    public Map<Rank, Integer> getRankMap() {
+        return Collections.unmodifiableMap(rankMap);
     }
 
-    public void addScore(LottoWinnings lottoWinnings) {
-        if (lottoScoreMap.get(lottoWinnings) != null) {
-            int count = lottoScoreMap.get(lottoWinnings);
-            lottoScoreMap.put(lottoWinnings, ++count);
-            return;
+    public void addScore(Rank rank) {
+        if (rank.isNotMiss()) {
+            int count = rankMap.get(rank);
+            rankMap.put(rank, ++count);
         }
-
-        lottoScoreMap.put(lottoWinnings, 1);
     }
 
     public Winnings getWinnings() {
         int winnings = 0;
 
-        for (Map.Entry<LottoWinnings, Integer> elem : lottoScoreMap.entrySet()) {
-            winnings += elem.getKey().getWinnings() * elem.getValue();
+        for (Map.Entry<Rank, Integer> elem : rankMap.entrySet()) {
+            winnings += elem.getKey().getWinningsMoney() * elem.getValue();
         }
 
         return new Winnings(winnings);

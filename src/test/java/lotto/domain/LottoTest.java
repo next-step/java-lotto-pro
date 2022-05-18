@@ -3,6 +3,8 @@ package lotto.domain;
 import static lotto.constants.LottoConstants.SPLIT_SYMBOL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,8 +26,12 @@ class LottoTest {
     void lotto_winning_number_test(String 당첨_번호, int 예상_당첨_개수) {
         List<Integer> 로또_번호 = Arrays.asList(4, 5, 6, 7, 8, 9);
 
+        WinningNumbers winningNumbers = mock(WinningNumbers.class);
+        when(winningNumbers.getWinningNumbers())
+            .thenReturn(convert(당첨_번호));
+
         Lotto lotto = new Lotto(로또_번호);
-        int 당첨_개수 = lotto.getWinningOfNumbersCount(convert(당첨_번호));
+        int 당첨_개수 = lotto.getWinningOfNumbersCount(winningNumbers);
 
         assertThat(당첨_개수).isEqualTo(예상_당첨_개수);
     }

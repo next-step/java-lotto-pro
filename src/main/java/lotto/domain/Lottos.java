@@ -18,17 +18,11 @@ public class Lottos {
         LottoScore lottoScore = new LottoScore();
 
         lottos.forEach(lotto -> {
-            int winningNumberCount = lotto.getWinningOfNumbersCount(winningNumbers.getWinningNumbers());
-            addLottoScore(lottoScore, winningNumberCount);
+            int countOfMatch = lotto.getWinningOfNumbersCount(winningNumbers);
+            Rank rank = Rank.valueOf(countOfMatch, winningNumbers.isContainsBonusNumber(lotto));
+            lottoScore.addScore(rank);
         });
 
         return lottoScore;
-    }
-
-    private void addLottoScore(LottoScore lottoScore, int winningNumberCount) {
-        LottoWinnings lottoWinnings = LottoWinnings.getWinningsByCount(winningNumberCount);
-        if (!lottoWinnings.isNone()) {
-            lottoScore.addScore(lottoWinnings);
-        }
     }
 }

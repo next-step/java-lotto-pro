@@ -33,6 +33,9 @@ class LottosTest {
             .thenReturn(5);
 
         로또_목록 = Arrays.asList(lotto, lotto_2, lotto_3);
+
+        when(정답_번호.isContainsBonusNumber(any()))
+            .thenReturn(false);
     }
 
     @Test
@@ -41,10 +44,10 @@ class LottosTest {
         Lottos lottos = new Lottos(로또_목록);
         LottoScore lottoScore = lottos.calculateLottoScore(정답_번호);
 
-        Map<LottoWinnings, Integer> lottoScoreMap = lottoScore.getLottoScoreMap();
-        assertThat(lottoScoreMap.get(LottoWinnings.THREE)).isEqualTo(1);
-        assertThat(lottoScoreMap.get(LottoWinnings.FOUR)).isEqualTo(1);
-        assertThat(lottoScoreMap.get(LottoWinnings.FIVE)).isEqualTo(1);
+        Map<Rank, Integer> rankMap = lottoScore.getRankMap();
+        assertThat(rankMap.get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(rankMap.get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(rankMap.get(Rank.THIRD)).isEqualTo(1);
     }
 
     @Test
@@ -54,7 +57,7 @@ class LottosTest {
         Lottos lottos = new Lottos(로또_목록);
         LottoScore lottoScore = lottos.calculateLottoScore(정답_번호);
 
-        int expected = LottoWinnings.THREE.getWinnings() + LottoWinnings.FOUR.getWinnings() + LottoWinnings.FIVE.getWinnings();
+        int expected = Rank.FIFTH.getWinningsMoney() + Rank.FOURTH.getWinningsMoney() + Rank.THIRD.getWinningsMoney();
         assertThat(lottoScore.getWinnings().getWinningsPrice()).isEqualTo(expected);
     }
 }
