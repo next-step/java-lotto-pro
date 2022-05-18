@@ -1,7 +1,6 @@
 package study.lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import study.lotto.enumtype.LottoWinningType;
@@ -20,7 +19,8 @@ public class LottoResultMap {
     }
 
     public int matchCount(LottoWinningType lottoWinningType) {
-        return resultMap.getOrDefault(lottoWinningType, Collections.emptyList()).size();
+        List<Lotto> lottos = resultMap.getOrDefault(lottoWinningType, new ArrayList<>());
+        return lottos.size();
     }
 
     public int allItemSize() {
