@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
+
 import lotto.domain.WinningStatistic;
 import lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,20 +38,20 @@ class LottosTest {
 
     @ParameterizedTest
     @MethodSource
-    void 구입한_로또를_입력받아_당첨금_통계를_낸다(Lottos lottos, Rank rank) {
+    void 당첨_로또를_입력받아_당첨금_통계를_낸다(Lottos lottos, Rank rank) {
         // given
-        Lotto winning = Lotto.createWithNumberLetter("1, 2, 3, 4, 5, 6");
+        WinningLotto winning = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
         // when
         WinningStatistic statistic = lottos.checkWinnings(winning);
         // then
         assertThat(statistic.count(rank)).isEqualTo(1);
     }
 
-    static Stream<Arguments> 구입한_로또를_입력받아_당첨금_통계를_낸다() {
+    static Stream<Arguments> 당첨_로또를_입력받아_당첨금_통계를_낸다() {
         // given
         Lotto one = Lotto.createWithNumberLetter("1, 2, 3, 4, 5, 6");
-        Lotto two = Lotto.createWithNumberLetter("1, 2, 3, 4, 5, 10");
-        Lotto three = Lotto.createWithNumberLetter("1, 2, 3, 4, 10, 11");
+        Lotto two = Lotto.createWithNumberLetter("1, 2, 3, 4, 5, 7");
+        Lotto three = Lotto.createWithNumberLetter("1, 2, 3, 4, 5, 11");
 
         Lottos first = new Lottos();
         first.add(one);

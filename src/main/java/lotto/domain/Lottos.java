@@ -17,14 +17,15 @@ public class Lottos {
         return lottos.size();
     }
 
-    public WinningStatistic checkWinnings(Lotto winning) {
+    public WinningStatistic checkWinnings(WinningLotto winning) {
         WinningStatistic statistic = new WinningStatistic();
 
         for (Lotto lotto : lottos) {
             int matchCount = lotto.match(winning);
             Rank rank = Rank.of(matchCount);
 
-            statistic.collect(rank);
+            boolean bonus = winning.matchBonus(lotto);
+            statistic.collect(rank.convertSecondPrize(bonus));
         }
         return statistic;
     }

@@ -1,13 +1,13 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.WinningStatistic;
+import lotto.domain.*;
 import lotto.enums.Rank;
+import lotto.view.message.dto.MatchResultParameters;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static lotto.view.message.ResultMessage.*;
 
@@ -20,8 +20,9 @@ public class ResultView {
 
     public static void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
-            Collections.sort(lotto.getLotto());
-            System.out.println(lotto.getLotto());
+            List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.getLotto());
+            Collections.sort(lottoNumbers);
+            System.out.println(lottoNumbers);
         }
         System.out.println();
     }
@@ -39,14 +40,16 @@ public class ResultView {
     }
 
     private static void printWinningStatistic(Rank rank, WinningStatistic statistic) {
-        String format = String.format(WINNER_MATCH_RESULT.message()
-                , rank.matchingCount(), rank.prize(), statistic.count(rank));
-        System.out.println(format);
+        MatchResultParameters matchResultParameters = new MatchResultParameters(rank, statistic);
+        if (rank.isSecondPrize()) {
+            System.out.println(WINNER_MATCH_BONUS_RESULT.of(matchResultParameters));
+            return;
+        }
+        System.out.println(WINNER_MATCH_RESULT.of(matchResultParameters));
     }
 
     public static void printRateOfReturn(WinningStatistic statistic, Money purchaseAmount) {
         double rate = statistic.calculateRateOfReturn(purchaseAmount);
-        String format = String.format(TOTAL_RATE_RESULT.message(), rate);
-        System.out.print(format);
+        System.out.print(TOTAL_RATE_RESULT.ofRateResult(rate));
     }
 }

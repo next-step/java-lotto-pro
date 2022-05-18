@@ -4,8 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static lotto.view.message.InputMessage.ENTER_PURCHASE_AMOUNT;
-import static lotto.view.message.InputMessage.ENTER_WINNING_NUMBER;
+import static lotto.view.message.InputMessage.*;
 
 public class InputView {
 
@@ -13,17 +12,20 @@ public class InputView {
     public static final String IO_EXCEPTION_OCCURRED = "I/O 예외가 발생했습니다.";
 
     public static String inputPurchaseAmount() {
-        try {
-            System.out.println(ENTER_PURCHASE_AMOUNT.message());
-            return br.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException(IO_EXCEPTION_OCCURRED);
-        }
+        return input(ENTER_PURCHASE_AMOUNT.message());
     }
 
     public static String inputWinningNumbers() {
+        return input(ENTER_WINNING_NUMBER.message());
+    }
+
+    public static String inputBonusBall() {
+        return input(ENTER_BONUS_BALL.message());
+    }
+
+    private static String input(String message) {
+        System.out.println(message);
         try {
-            System.out.println(ENTER_WINNING_NUMBER.message());
             return br.readLine();
         } catch (IOException e) {
             throw new RuntimeException(IO_EXCEPTION_OCCURRED);
