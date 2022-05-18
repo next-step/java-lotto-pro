@@ -12,7 +12,7 @@ import static lotto.config.LottoGameConfig.LOTTO_GAME_NUMBER_COUNT;
 
 public class LottoWinnerService {
 
-    public LottosWinnerCounts makeLottosResult(List<LottoWinner> winners) {
+    public LottosWinnerCounts makeLottosWinnerCounts(List<LottoWinner> winners) {
         LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts();
         for (LottoWinner winner : winners) {
             lottosWinnerCounts.reflectResult(winner);

@@ -1,14 +1,14 @@
 package lotto.view;
 
 import lotto.config.LottoGameConfig;
-import lotto.domain.Lotto;
-import lotto.domain.LottoWinner;
-import lotto.domain.Lottos;
-import lotto.domain.LottosWinnerCounts;
+import lotto.domain.*;
 
 public class ResultView {
     private static final String RESULT_PURCHASE = "%d개를 구매했습니다.";
     private static final String WINNER_RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
+    private static final String LOTTOS_RETURN_MONEY_RESULT = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+    private static final String LOSE = "손해";
+    private static final String WIN = "이득";
     private static final String RESULT_PREFIX = "당첨 통계" + System.lineSeparator() + "---------";
 
     private ResultView() {
@@ -18,12 +18,18 @@ public class ResultView {
         System.out.printf(RESULT_PURCHASE + System.lineSeparator(), count);
     }
 
-    public static void printLottoResults(LottosWinnerCounts lottosWinnerCounts) {
+    public static void printLottoResults(LottosWinnerCounts lottosWinnerCounts, LottosResult lottosResult) {
         ResultView.printResultPrefix();
         ResultView.printLottoWinnerResult(LottoWinner.FORTH, lottosWinnerCounts);
         ResultView.printLottoWinnerResult(LottoWinner.THIRD, lottosWinnerCounts);
         ResultView.printLottoWinnerResult(LottoWinner.SECOND, lottosWinnerCounts);
         ResultView.printLottoWinnerResult(LottoWinner.FIRST, lottosWinnerCounts);
+        ResultView.printLottosResult(lottosResult);
+    }
+
+    private static void printLottosResult(LottosResult lottosResult) {
+        System.out.printf(LOTTOS_RETURN_MONEY_RESULT,
+                lottosResult.ratio(), lottosResult.ratio() > 1 ? WIN : LOSE);
     }
 
     private static void printLottoWinnerResult(LottoWinner winner, LottosWinnerCounts result) {
