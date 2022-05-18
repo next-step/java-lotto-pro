@@ -1,8 +1,10 @@
 package lotto.view;
 
 import lotto.domain.LottoTicket;
-import lotto.dto.LottoResultItem;
+import lotto.domain.Match;
+import lotto.domain.Rank;
 import lotto.dto.LottoResult;
+import lotto.dto.LottoResultItem;
 
 public class ResultView {
 
@@ -19,9 +21,27 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (LottoResultItem item : result.getItems()) {
-            System.out.println(item.getMatch() + "개 일치 (" + item.getPrizeMoney() + "원)- " + item.getCount() + "개");
+            printRankPrizeCount(
+                    item.getRank(),
+                    item.getMatch(),
+                    item.getPrizeMoney(),
+                    item.getCount());
         }
         System.out.println("총 수익률은 " + result.getEarningRatio() + "입니다. (>1: 수익, <1: 손실)");
+    }
+
+    private static void printRankPrizeCount(Rank rank, Match match, int winningPrize, int count) {
+        if (rank == Rank.MISS) {
+            return;
+        }
+
+        if (rank == Rank.SECOND) {
+            System.out.println(match + "개 일치, 보너스 볼 일치 (" +
+                    winningPrize + "원)- " + count + "개");
+            return;
+        }
+
+        System.out.println(match + "개 일치 (" + winningPrize + "원)- " + count + "개");
     }
 
     public static void printExceptionMessage(String message) {
