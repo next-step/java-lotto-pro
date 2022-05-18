@@ -1,11 +1,8 @@
 import lotto.domain.LottoGame;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumberBounds;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -34,26 +31,6 @@ public class LottoGameTest {
             new LottoGame(Arrays.asList(1, 2, 25, 25, 30, 42));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LottoGame.NUMBER_DUPLICATE_EXCEPTION_MESSAGE);
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {1, 3, 22, 40})
-    void 번호_일치(int input) {
-        LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 10, 22, 40));
-
-        boolean result = lottoGame.has(new LottoNumber(input));
-
-        assertThat(result).isTrue();
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {4, 7, 20, 45})
-    void 번호_불일치(int input) {
-        LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 10, 22, 40));
-
-        boolean result = lottoGame.has(new LottoNumber(input));
-
-        assertThat(result).isFalse();
     }
 
     @Test

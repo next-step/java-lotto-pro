@@ -39,10 +39,6 @@ public class LottoGame {
         return Rank.valueOf(match, false);
     }
 
-    public boolean has(LottoNumber lottoNumber) {
-        return numbers.stream().anyMatch(n -> n.equals(lottoNumber));
-    }
-
     @Override
     public String toString() {
         return numbers.toString();
