@@ -79,7 +79,7 @@ public class LottoMachine {
         return money / LOTTO_PRICE;
     }
 
-    public void minusMoney(LottoQuantity automaticQuantity) {
-        money -= LOTTO_PRICE * automaticQuantity.getQuantity();
+    public void minusMoney(LottoQuantity manualQuantity) {
+        money -= LOTTO_PRICE * manualQuantity.getQuantity();
     }
 }
