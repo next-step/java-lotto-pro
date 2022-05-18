@@ -28,7 +28,7 @@ public class LottoTicket {
     public boolean contains(final int number) {
         return lottoNumbers.contains(number);
     }
-
+    
     private void validateNullOrEmpty(final List<Integer> lottoNumbers) {
         if (Objects.isNull(lottoNumbers) || lottoNumbers.isEmpty()) {
             throw new IllegalArgumentException(LottoTicketErrorCode.NOT_ALLOW_NULL_OR_EMPTY.getMessage());

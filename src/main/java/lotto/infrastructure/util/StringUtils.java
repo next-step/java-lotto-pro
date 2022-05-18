@@ -1,7 +1,9 @@
 package lotto.infrastructure.util;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class StringUtils {
 
@@ -23,5 +25,11 @@ public class StringUtils {
 
         return str.replaceAll("\\s", "")
                 .split(splitRegex);
+    }
+
+    public static List<Integer> convertIntegers(List<String> strings) {
+        return strings.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
