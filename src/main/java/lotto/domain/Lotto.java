@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import lotto.constants.LottoConstants;
@@ -16,9 +14,7 @@ public class Lotto {
 
     public Lotto(final List<LottoNumber> list) {
         validate(list);
-
-        numberList = new ArrayList<>(list);
-        numberList.sort(Comparator.comparing(LottoNumber::getNumber));
+        numberList = list;
     }
 
     public LottoNumber get(int index) {
