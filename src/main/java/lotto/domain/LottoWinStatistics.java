@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import generic.Money;
 import generic.Rate;
@@ -14,12 +14,6 @@ public class LottoWinStatistics {
     public LottoWinStatistics(final Money price, final LottoWinResultGroup winResultGroup) {
         this.price = price;
         this.winResultGroup = winResultGroup;
-        this.returnRate = calculate();
-    }
-
-    public LottoWinStatistics(final Lottos lottos, final LottoNumbers winningLottoNumbers) {
-        this.price = lottos.purchasePrice();
-        this.winResultGroup = lottos.end(winningLottoNumbers);
         this.returnRate = calculate();
     }
 

@@ -1,18 +1,21 @@
-package lotto;
+package lotto.domain;
 
 import static generic.Money.valueOf;
 import static java.util.Arrays.asList;
 import static lotto.LottoTestUtils.resultGroup;
-import static lotto.LottoWinResult.FIRST;
-import static lotto.LottoWinResult.FOURTH;
-import static lotto.LottoWinResult.NO_WIN;
-import static lotto.LottoWinResult.SECOND;
-import static lotto.LottoWinResult.THIRD;
+import static lotto.domain.LottoWinResult.FIFTH;
+import static lotto.domain.LottoWinResult.FIRST;
+import static lotto.domain.LottoWinResult.FOURTH;
+import static lotto.domain.LottoWinResult.NO_WIN;
+import static lotto.domain.LottoWinResult.SECOND;
+import static lotto.domain.LottoWinResult.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import generic.Money;
 import java.util.stream.Stream;
+import lotto.domain.LottoWinResult;
+import lotto.domain.LottoWinResultGroup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -39,8 +42,8 @@ class LottoWinResultGroupTest {
     static Stream<Arguments> totalWinningPriceArgs() {
         return Stream.of(
                 Arguments.of(resultGroup(FIRST, NO_WIN, NO_WIN, NO_WIN), Money.valueOf(2000000000)),
-                Arguments.of(resultGroup(FOURTH, FOURTH, FOURTH), Money.valueOf(5000 + 5000 + 5000)),
-                Arguments.of(resultGroup(FIRST, THIRD, SECOND, NO_WIN), Money.valueOf(2000000000 + 1500000 + 50000))
+                Arguments.of(resultGroup(FIFTH, FIFTH, FIFTH), Money.valueOf(5000 + 5000 + 5000)),
+                Arguments.of(resultGroup(FIRST, THIRD, SECOND, NO_WIN), Money.valueOf(2000000000 + 1_500_000 + 30_000_000))
         );
     }
 
