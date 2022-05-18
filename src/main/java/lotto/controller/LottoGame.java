@@ -9,10 +9,10 @@ import static lotto.view.InputView.*;
 public class LottoGame {
 
     public void play() {
-        LottoMachine lottoMachine = readMoney();
-        OutputView.printMessage(lottoMachine.calculatePurchaseLottos() + "개를 구매했습니다.");
+        LottoMachine machine = readMoney();
+        LottoQuantity quantity = readQuantity();
 
-        PurchasedLotto purchasedLotto = lottoMachine.purchaseLotto();
+        PurchasedLotto purchasedLotto = machine.purchaseLotto();
         OutputView.printMyLotto(purchasedLotto);
 
         Lotto lastWinningLotto = new Lotto(readLastWinningNumbers());
@@ -20,12 +20,19 @@ public class LottoGame {
         OutputView.printLine();
 
         LottoResult result = purchasedLotto.matchLottoNumbers(lastWinningLotto, bonusNumber);
-        OutputView.showLottoResult(result, lottoMachine);
+        OutputView.showLottoResult(result, machine);
     }
 
     private LottoMachine readMoney() {
-        String input = InputView.readUserInput(REQUEST_MONEY);
-        return new LottoMachine(input);
+        LottoMachine machine = new LottoMachine(InputView.readUserInput(REQUEST_MONEY));
+        OutputView.printLine();
+        return machine;
+    }
+
+    private LottoQuantity readQuantity() {
+        LottoQuantity quantity = new LottoQuantity(InputView.readUserInput(REQUEST_PASSIVE_LOTTO_QUANTITY));
+        OutputView.printLine();
+        return quantity;
     }
 
     private String readLastWinningNumbers() {
