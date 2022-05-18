@@ -1,22 +1,24 @@
 package lotto.domain;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LottoNumber {
     private final static int LOTTO_NUMBER_MIN_VALUE = 1;
     private final static int LOTTO_NUMBER_MAX_VALUE = 45;
 
-    private final List<Integer> numbers;
+    public final static Set<Integer> numbers = generateNumbers();
 
-    public LottoNumber() {
-        this.numbers = new ArrayList<>();
+    private static Set<Integer> generateNumbers() {
+        Set<Integer> numbers = new HashSet<>();
         for (int i = LOTTO_NUMBER_MIN_VALUE; i <= LOTTO_NUMBER_MAX_VALUE; i++)
-            this.numbers.add(i);
+            numbers.add(i);
+
+        return numbers;
     }
 
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return numbers;
     }
 
