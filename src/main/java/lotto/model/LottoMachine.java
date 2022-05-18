@@ -51,7 +51,9 @@ public class LottoMachine {
     public List<Lotto> purchaseManual(List<List<Integer>> manualLottos) {
         List<Lotto> lottos = new LinkedList<>();
 
-        manualLottos.forEach(lottoNumber -> lottos.add(new Lotto(lottoNumber)));
+        for (List<Integer> lottoNumber : manualLottos) {
+            lottos.add(new Lotto(lottoNumber));
+        }
 
         return lottos;
     }
