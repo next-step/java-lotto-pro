@@ -44,4 +44,12 @@ public class MoneyTest {
         Money money = new Money(initialMoney);
         assertThat(money.calculateProfit(winningPrice)).isEqualTo(profit);
     }
+
+    @Test
+    @DisplayName("Money Subtract 생성")
+    void Money_Subtract_생성(){
+        Money money = new Money(10000);
+        Money subtractMoney = money.subtract(1000);
+        assertThat(subtractMoney.getAmount()).isEqualTo(9000);
+    }
 }

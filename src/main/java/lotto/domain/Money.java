@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.constant.ErrorMessageConst;
 
 public class Money {
-    private int amount;
+    private final int amount;
 
     public static final int LOTTO_PRICE = 1000;
 
@@ -37,6 +37,10 @@ public class Money {
 
     public double calculateProfit(int changedAmount) {
         return (double) changedAmount / (lottoCountToBuy() * LOTTO_PRICE);
+    }
+
+    public Money subtract(int subtractAmount) {
+        return new Money(amount - subtractAmount);
     }
 
     public int getAmount() {

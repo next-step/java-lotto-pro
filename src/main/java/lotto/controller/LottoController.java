@@ -10,7 +10,7 @@ import java.util.List;
 public class LottoController {
     public static void simulateLotto(){
         Money money = new Money(CustomParseUtils.stringToInteger(InputView.readMoney()));
-        Lottos lottos = LottosGenerator.purchaseLottos(money);
+        Lottos lottos = LottosGenerator.purchaseAutoLottos(money);
         OutputView.printPurchasedLottos(lottos);
 
         Lotto winningLotto = generateWinningLotto();
