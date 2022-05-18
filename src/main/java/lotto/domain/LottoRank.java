@@ -10,10 +10,10 @@ public enum LottoRank {
     THIRD(4, 50_000),
     FOURTH(3, 5_000);
 
-    private int countOfMatch;
-    private int winningMoney;
+    private final int countOfMatch;
+    private final int winningMoney;
 
-    private LottoRank(int countOfMatch, int winningMoney) {
+    LottoRank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }
