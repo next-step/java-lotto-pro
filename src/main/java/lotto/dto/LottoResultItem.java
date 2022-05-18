@@ -1,26 +1,29 @@
 package lotto.dto;
 
 import lotto.domain.Match;
+import lotto.domain.Rank;
 
 import java.util.Objects;
 
 public class LottoResultItem {
-    private final Match match;
-    private final int prizeMoney;
+    private final Rank rank;
     private final int count;
 
-    public LottoResultItem(Match match, int prizeMoney, int count) {
-        this.match = match;
-        this.prizeMoney = prizeMoney;
+    public LottoResultItem(Rank rank, int count) {
+        this.rank = rank;
         this.count = count;
     }
 
+    public Rank getRank() {
+        return rank;
+    }
+
     public Match getMatch() {
-        return match;
+        return rank.getMatch();
     }
 
     public int getPrizeMoney() {
-        return prizeMoney;
+        return rank.getPrize();
     }
 
     public int getCount() {
@@ -32,11 +35,11 @@ public class LottoResultItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResultItem that = (LottoResultItem) o;
-        return prizeMoney == that.prizeMoney && count == that.count && match.equals(that.match);
+        return count == that.count && rank == that.rank;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(match, prizeMoney, count);
+        return Objects.hash(rank, count);
     }
 }

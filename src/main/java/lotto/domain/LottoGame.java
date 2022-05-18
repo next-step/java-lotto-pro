@@ -30,12 +30,13 @@ public class LottoGame {
         }
     }
 
-    public Match check(WinningNumbers winningNumbers) {
-        return new Match((int) numbers.stream().map(number -> winningNumbers.has(number)).filter(b -> b == true).count());
-    }
-
-    public boolean has(LottoNumber lottoNumber) {
-        return numbers.stream().anyMatch(n -> n.equals(lottoNumber));
+    public Rank check(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+        Match match = new Match((int) numbers.stream()
+                .map(number -> winningNumbers.has(number))
+                .filter(b -> b == true)
+                .count());
+        boolean matchBonus = numbers.stream().anyMatch(n -> n.equals(bonusNumber));
+        return Rank.valueOf(match, matchBonus);
     }
 
     @Override

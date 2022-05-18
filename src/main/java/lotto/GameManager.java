@@ -1,8 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.Match;
-import lotto.domain.MatchPrizes;
 import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
 import lotto.dto.LottoResult;
@@ -10,26 +9,19 @@ import lotto.dto.LottoWin;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class GameManager {
 
     public void run() {
-        Map<Match, Integer> matchPrizes = new HashMap<>();
-        matchPrizes.put(new Match(3), 5000);
-        matchPrizes.put(new Match(4), 50000);
-        matchPrizes.put(new Match(5), 1500000);
-        matchPrizes.put(new Match(6), 2000000000);
-
         LottoVendingMachine machine = new LottoVendingMachine(new LottoNumbersGeneratorKr());
 
         LottoTicket lottoTicket = machine.sellTicket(money());
         ResultView.printTicket(lottoTicket);
 
+        WinningNumbers winningNumbers = winningNumbers();
+        LottoNumber bonusLottoNumber = bonusLottoNumber(winningNumbers);
         LottoResult result = machine.check(
                 lottoTicket,
-                new LottoWin(winningNumbers(), new MatchPrizes(matchPrizes)));
+                new LottoWin(winningNumbers, bonusLottoNumber));
         ResultView.printStats(result);
     }
 
@@ -43,7 +35,7 @@ public class GameManager {
 
     private Money takeMoney() {
         try {
-            return new Money(InputView.readMoney(), LottoTicket.PRICE);
+            return new Money(InputView.readMoney());
         } catch (IllegalArgumentException e) {
             ResultView.printExceptionMessage(e.getMessage());
             return null;
@@ -62,6 +54,24 @@ public class GameManager {
     private WinningNumbers getWinningNumbers() {
         try {
             return new WinningNumbers(InputView.readWinningNumbers());
+        } catch (IllegalArgumentException e) {
+            ResultView.printExceptionMessage(e.getMessage());
+            return null;
+        }
+    }
+
+    private LottoNumber bonusLottoNumber(WinningNumbers winningNumbers) {
+        LottoNumber bonusLottoNumber = getBonusLottoNumber(winningNumbers);
+        while (bonusLottoNumber == null) {
+            bonusLottoNumber = getBonusLottoNumber(winningNumbers);
+        }
+
+        return bonusLottoNumber;
+    }
+
+    private LottoNumber getBonusLottoNumber(WinningNumbers winningNumbers) {
+        try {
+            return new LottoNumber(InputView.readBonusNumber(), winningNumbers);
         } catch (IllegalArgumentException e) {
             ResultView.printExceptionMessage(e.getMessage());
             return null;
