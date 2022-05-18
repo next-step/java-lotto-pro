@@ -31,23 +31,17 @@ public enum LottoRank {
     }
 
     public static LottoRank getLottoRuleFromMatchedCount(int count, boolean matchedBonusBall) {
-        Optional<LottoRank> rank = Arrays.stream(LottoRank.values())
+        LottoRank rank = Arrays.stream(LottoRank.values())
                 .filter(r -> r.matchedCount == count)
-                .findAny();
+                .findFirst()
+                .orElse(NOTHING);
 
-        LottoRank resultRank = rank.orElse(NOTHING);
-
-        if (resultRank.matchedCount != 5) {
-            return resultRank;
+        if (rank == SECOND && !matchedBonusBall) {
+            return THIRD;
         }
 
-        return resultRank.isSecondRank(matchedBonusBall) ? SECOND : THIRD;
+        return rank;
     }
-
-    private boolean isSecondRank(boolean matchedBonusBall) {
-        return this.matchedCount == 5 && matchedBonusBall;
-    }
-
 
     public static List<LottoRank> valuesTheLowestOrder() {
         return Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST);
