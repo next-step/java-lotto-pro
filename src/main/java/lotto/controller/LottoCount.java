@@ -11,4 +11,12 @@ public class LottoCount {
             throw new IllegalArgumentException("숫자만 입력 가능합니다.");
         }
     }
+
+    public LottoCount(int count) {
+        this.count = count;
+    }
+
+    public int count() {
+        return count;
+    }
 }

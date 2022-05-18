@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.controller.LottoCount;
+
 import java.util.List;
 
 public class LottoMachine {
@@ -11,13 +13,14 @@ public class LottoMachine {
     }
 
     public Lottos buy(Money money) {
-        int purchaseCount = LottoPrice.purchase(money);
+        LottoCount purchaseCount = LottoPrice.purchase(money);
 
         Lottos lottos = new Lottos();
-        for (int i = 0; i < purchaseCount; i++) {
+        for (int i = 0; i < purchaseCount.count(); i++) {
             List<Integer> numbers = lottoGenerator.generate();
             lottos.add(Lotto.create(numbers));
         }
         return lottos;
     }
+
 }
