@@ -4,6 +4,7 @@ import lotto.domain.*;
 import lotto.enums.Rank;
 import lotto.view.message.dto.MatchResultParameters;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +20,7 @@ public class ResultView {
 
     public static void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
-            List<LottoNumber> lottoNumbers = lotto.getLotto();
+            List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.getLotto());
             Collections.sort(lottoNumbers);
             System.out.println(lottoNumbers);
         }
