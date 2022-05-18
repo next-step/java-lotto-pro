@@ -1,7 +1,7 @@
 import java.util.function.Supplier;
 
 public class Application {
-    public static final String NUMBER_DELEMETER = ", ";
+    public static final String SEPARATOR = ", ";
     private static final ConsoleInputView consoleInputView = new ConsoleInputView();
     private static final ConsoleOutputView consoleOutputView = new ConsoleOutputView();
     private static final Vendor vendor = new Vendor();
@@ -18,7 +18,7 @@ public class Application {
         int manualCount = consoleInputView.inputInt(() -> "수동으로 구매할 로또 수를 입력해 주세요.");
         Lotto manual = new Lotto();
         for (String string: consoleInputView.inputStringList(() -> "수동으로 구매할 번호를 입력해 주세요.", manualCount)) {
-            manual.add(new LottoNumbers(string, NUMBER_DELEMETER));
+            manual.add(new LottoNumbers(string, SEPARATOR));
         }
         Lotto lotto = vendor.buy(inputLong, manual);
         consoleOutputView.view(
@@ -34,7 +34,7 @@ public class Application {
 
     private static LottoNumbers getTopRankLottoNumbers() {
         String inputString = consoleInputView.inputString(() -> "지난 주 당첨 번호를 입력해 주세요.");
-        return new LottoNumbers(inputString, NUMBER_DELEMETER);
+        return new LottoNumbers(inputString, SEPARATOR);
     }
 
     private static LottoNumber getBonusLottoNumber() {

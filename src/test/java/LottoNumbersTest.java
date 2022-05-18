@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 public class LottoNumbersTest {
     @Test()
     void LottoNumbers_는_문자열_포맷으로_생성할_수_있다() {
-        assertDoesNotThrow(() -> new LottoNumbers("1, 2, 3, 4, 5, 6", Application.NUMBER_DELEMETER));
+        assertDoesNotThrow(() -> new LottoNumbers("1, 2, 3, 4, 5, 6", Application.SEPARATOR));
     }
 
 
@@ -45,7 +45,7 @@ public class LottoNumbersTest {
 
     @Test()
     void LottoNumbers_는_적절한_문자열_포맷이_아니면_생성할_수_없다() {
-        assertThatThrownBy(() -> new LottoNumbers("1, 2, 3, 4, 5: 6", Application.NUMBER_DELEMETER))
+        assertThatThrownBy(() -> new LottoNumbers("1, 2, 3, 4, 5: 6", Application.SEPARATOR))
                 .isInstanceOf(RuntimeException.class);
     }
 
