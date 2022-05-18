@@ -1,18 +1,18 @@
 package lotto.model;
 
 public class Prize {
-    final int amount;
+    final long amount;
 
-    private Prize(int prize) {
+    private Prize(long prize) {
         this.amount = prize;
     }
 
-    public static Prize of(int amount) {
+    public static Prize of(long amount) {
         checkPrizeRange(amount);
         return new Prize(amount);
     }
 
-    private static void checkPrizeRange(int prize) {
+    private static void checkPrizeRange(long prize) {
         if (prize < 0) {
             throw new IllegalArgumentException("[ERROR] 당첨금액은 음수일 수 없습니다!");
         }
@@ -26,7 +26,7 @@ public class Prize {
         return Prize.of(this.amount * count);
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
 }
