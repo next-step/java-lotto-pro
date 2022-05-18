@@ -36,19 +36,21 @@ public class LottoGame {
         }
     }
 
-    private LottoNumber inputBonusNumber() {
+    private LottoNumber inputBonusNumber(LottoTicket winningNumbers) {
         String input = InputView.inputBonusNumber();
         try {
-            return new LottoNumber(input);
+            LottoNumber bonusNumber = new LottoNumber(input);
+            winningNumbers.validateUniqueBonusNumber(bonusNumber);
+            return bonusNumber;
         } catch (IllegalArgumentException e) {
             ResultView.printInputErrorMessage(e);
-            return inputBonusNumber();
+            return inputBonusNumber(winningNumbers);
         }
     }
 
     private void winningResult(LottoTickets lottoTickets, Money purchaseMoney) {
         LottoTicket winningNumbers = inputWinningNumbers();
-        LottoNumber bonusNumber = inputBonusNumber();
+        LottoNumber bonusNumber = inputBonusNumber(winningNumbers);
         WinningResult winningResult = lottoTickets.match(winningNumbers, bonusNumber);
         ResultView.printWinningReport(winningResult, purchaseMoney);
     }
