@@ -1,57 +1,81 @@
 package lotto.view;
 
-import lotto.constant.LottoWinningConstant;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoStore;
-import lotto.message.OutputMessage;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoTicket;
 
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import static lotto.domain.LottoStore.LOTTO_PRICE;
+
 public class OutputView {
-    public static void printLottoResult(LottoStore lottoStore, HashMap<Integer, Integer> lottoResult) {
-        System.out.println(OutputMessage.RESULT_TITLE);
-        System.out.println(String.format("%d개 일치(%d원)- %d개",
-            LottoWinningConstant.MATCH_THREE,
-            LottoWinningConstant.MATCH_THREE_CASH_PRIZE,
-            lottoResult.get(LottoWinningConstant.MATCH_THREE
-            )
-        ));
-        System.out.println(String.format("%d개 일치(%d원)- %d개",
-            LottoWinningConstant.MATCH_FOUR,
-            LottoWinningConstant.MATCH_FOUR_CASH_PRIZE,
-            lottoResult.get(LottoWinningConstant.MATCH_FOUR
-            )
-        ));
-        System.out.println(String.format("%d개 일치(%d원)- %d개",
-            LottoWinningConstant.MATCH_FIVE,
-            LottoWinningConstant.MATCH_FIVE_CASH_PRIZE,
-            lottoResult.get(LottoWinningConstant.MATCH_FIVE
-            )
-        ));
-        System.out.println(String.format("%d개 일치(%d원)- %d개",
-            LottoWinningConstant.MATCH_SIX,
-            LottoWinningConstant.MATCH_SIX_CASH_PRIZE,
-            lottoResult.get(LottoWinningConstant.MATCH_SIX
-            )
-        ));
+    public static void printLottoResult(LottoTicket winningTicket, List<LottoTicket> autoTickets) {
+        List<Integer> matchList = winningTicket.matchList(autoTickets);
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
+        Collections.reverse(lottoRanks);
 
-        float rateOfReturn = lottoStore.calculateRateOfReturn();
+        printLottoRank(matchList, lottoRanks);
+        printRateOfReturn(matchList, lottoRanks);
+    }
+
+    private static void printLottoRank(List<Integer> matchList, List<LottoRank> lottoRanks) {
+        System.out.println("\n당첨 통계\n---------");
+        for (LottoRank lottoRank : lottoRanks) {
+            int matchCount = matchCount(matchList, lottoRank);
+            printMatch(lottoRank.getMatch(), lottoRank.getPrize(), matchCount);
+        }
+    }
+
+    private static int matchCount(List<Integer> matchList, LottoRank lottoRank) {
+        int count = 0;
+        for (int match : matchList) {
+            count += lottoRank.isMatch(match) ? 1 : 0;
+        }
+        return count;
+    }
+
+    private static void printMatch(int match, long prize, int count) {
+        System.out.println(String.format("%d개 일치(%d원)- %d개",
+                match,
+                prize,
+                count
+            )
+        );
+    }
+
+    private static void printRateOfReturn(List<Integer> matchList, List<LottoRank> lottoRanks) {
+        int profit = lottoProfit(matchList, lottoRanks);
+        float rateOfReturn = profit / (matchList.size() * LOTTO_PRICE);
+
         System.out.print(String.format("총 수익률은 %.2f입니다.", rateOfReturn));
-
         if (rateOfReturn < 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }
 
-    public static void printLottoCount(int count) {
-        System.out.println(String.format("%d개를 구매했습니다.", count));
+    private static int lottoProfit(List<Integer> matchList, List<LottoRank> lottoRanks) {
+        int profit = 0;
+        for (LottoRank lottoRank : lottoRanks) {
+            int matchCount = matchCount(matchList, lottoRank);
+            profit += (matchCount * lottoRank.getPrize());
+        }
+        return profit;
     }
 
-    public static void printLottoAutoNumbers(List<LottoNumbers> lottoAutoNumbers) {
-        for (LottoNumbers lottoAutoNumber : lottoAutoNumbers) {
-            System.out.println(lottoAutoNumber.getLottoNumbers());
-        }
+    public static void printLottoAutoTickets(List<LottoTicket> tickets) {
+        printLottoCount(tickets);
+        printLottoNumbers(tickets);
         System.out.println();
+    }
+
+    private static void printLottoNumbers(List<LottoTicket> tickets) {
+        for (LottoTicket ticket : tickets) {
+            System.out.println(ticket.getLottoTicket());
+        }
+    }
+
+    private static void printLottoCount(List<LottoTicket> tickets) {
+        System.out.println(String.format("%d개를 구매했습니다.", tickets.size()));
     }
 }

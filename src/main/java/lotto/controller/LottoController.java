@@ -1,23 +1,21 @@
 package lotto.controller;
 
 
-import calculator.utils.Splitter;
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStore;
+import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoController {
     public void startSales() {
-        LottoStore lottoStore = new LottoStore(new Money(InputView.inputMoney()));
-        OutputView.printLottoCount(lottoStore.getLottoCount());
-        lottoStore.buy();
+        LottoStore lottoStore = new LottoStore();
+        List<LottoTicket> lottoAutoNumbers = lottoStore.buy(new Money(InputView.inputMoney()));
+        OutputView.printLottoAutoTickets(lottoAutoNumbers);
 
-        OutputView.printLottoAutoNumbers(lottoStore.getLottoAutoNumbers());
-        LottoNumbers winningNumbers = new LottoNumbers(Splitter.splitString(InputView.inputWinningNumbers()));
-        
-        lottoStore.calculateWinningResult(winningNumbers);
-        OutputView.printLottoResult(lottoStore, lottoStore.getLottoResult());
+        LottoTicket winningLottoTicket = new LottoTicket(InputView.inputWinningNumbers());
+        OutputView.printLottoResult(winningLottoTicket, lottoAutoNumbers);
     }
 }

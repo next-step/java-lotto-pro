@@ -2,22 +2,51 @@ package lotto.domain;
 
 import lotto.message.InputMessage;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
+
     private final int lottoNumber;
-    private final String LOTTO_NUMBER_REGEX = "^[1-9]{1}$|^[1-3]{1}[0-9]{1}$|^4{1}[0-5]{1}$";
 
     public LottoNumber(String lottoNumber) {
-        validateNumber(lottoNumber);
-        this.lottoNumber = Integer.parseInt(lottoNumber);
+        this(Integer.parseInt(lottoNumber));
     }
 
-    private void validateNumber(String lottoNumber) {
-        if (!lottoNumber.matches(LOTTO_NUMBER_REGEX)) {
+    public LottoNumber(int lottoNumber) {
+        validateNumber(lottoNumber);
+        this.lottoNumber = lottoNumber;
+    }
+
+    private void validateNumber(int lottoNumber) {
+        if (lottoNumber < LOTTO_MIN_NUMBER || lottoNumber > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException(InputMessage.INVALID_LOTTO_NUMBER);
         }
     }
 
     public int getLottoNumber() {
         return lottoNumber;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof LottoNumber)) {
+            return false;
+        }
+
+        return this.lottoNumber == ((LottoNumber) obj).getLottoNumber();
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(this.lottoNumber, o.getLottoNumber());
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(this.lottoNumber);
     }
 }

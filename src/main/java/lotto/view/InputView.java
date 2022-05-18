@@ -1,7 +1,11 @@
 package lotto.view;
 
+import calculator.utils.Splitter;
+import lotto.domain.LottoNumber;
 import lotto.message.InputMessage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -12,8 +16,14 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static String inputWinningNumbers() {
+    public static List<LottoNumber> inputWinningNumbers() {
         System.out.println(InputMessage.INPUT_WINNING_NUMBERS);
-        return scanner.next();
+        String[] stringNumbers = Splitter.splitString(scanner.next());
+
+        List<LottoNumber> numbers = new ArrayList<>();
+        for (String stringNumber : stringNumbers) {
+            numbers.add(new LottoNumber(stringNumber));
+        }
+        return numbers;
     }
 }
