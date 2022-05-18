@@ -4,21 +4,34 @@ import java.util.List;
 
 public class Lotto {
     public static final String ERROR_LOTTO_NUMBER_SIZE = "[ERROR] 6개의 숫자를 입력해주세요.";
+    public static final String ERROR_NON_UNIQUE_LOTTO_BONUS_BALL_BALL = "[ERROR] 2등 보너스볼 번호가 로또번호와 중복됩니다.";
     public static final int LOTTO_NUMBER_SIZE = 6;
     private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() != LOTTO_NUMBER_SIZE)
-            throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_SIZE);
-
+        this.checkMainLottoNumbersSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public Lotto(List<Integer> lottoNumbers, Integer number) {
+        this.checkMainLottoNumbersSize(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+        addBonusNumber(number);
+    }
+
+    private void checkMainLottoNumbersSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() != LOTTO_NUMBER_SIZE)
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_SIZE);
+    }
 
-        this.lottoNumbers = lottoNumbers;
+    private void addBonusNumber(Integer number) {
+        if (isOverlapBonusBallNumber(number))
+            throw new IllegalArgumentException(ERROR_NON_UNIQUE_LOTTO_BONUS_BALL_BALL);
+        this.lottoNumbers.add(number);
+    }
+
+    public boolean isOverlapBonusBallNumber(int number) {
+        return this.lottoNumbers.contains(number);
     }
 
     public List<Integer> getLottoNumbers() {

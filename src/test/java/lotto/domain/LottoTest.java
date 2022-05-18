@@ -20,10 +20,15 @@ public class LottoTest {
     @DisplayName("잘못된 갯수의 로또번호일 때 예외처리한다.")
     void 로또번호_갯수_오류_예외() {
         assertThatThrownBy(
-                () -> {
-                    new Lotto(Arrays.asList(1, 2, 3, 4, 5));
-                }
+                () -> new Lotto(Arrays.asList(1, 2, 3, 4, 5))
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
+    }
+
+    @Test
+    @DisplayName("보너스볼의 번호가 메인번호와 중복되는지 확인한다.")
+    void 보너스볼_중복_확인() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.isOverlapBonusBallNumber(6)).isTrue();
     }
 }
