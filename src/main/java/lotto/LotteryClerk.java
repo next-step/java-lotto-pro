@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.vo.Ticket;
-import lotto.vo.Money;
+import lotto.domain.Ticket;
+import lotto.domain.Money;
 
 public class LotteryClerk {
     private LotteryClerk() {

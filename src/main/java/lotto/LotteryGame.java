@@ -1,8 +1,8 @@
 package lotto;
 
+import lotto.domain.*;
 import lotto.view.Console;
 import lotto.view.Message;
-import lotto.vo.*;
 
 public class LotteryGame {
     public static void main(String[] args) {

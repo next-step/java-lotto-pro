@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.vo.Money;
-import lotto.vo.Result;
-import lotto.vo.Summary;
+import lotto.domain.Money;
+import lotto.domain.Result;
+import lotto.domain.Summary;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;

@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.vo.Lottery;
-import lotto.vo.Number;
+import lotto.domain.Lottery;
+import lotto.domain.Number;
 
 import java.util.Collections;
 import java.util.Comparator;

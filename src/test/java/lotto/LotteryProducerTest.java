@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.vo.Number;
+import lotto.domain.Number;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;

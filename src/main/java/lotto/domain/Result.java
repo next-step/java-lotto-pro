@@ -1,4 +1,4 @@
-package lotto.vo;
+package lotto.domain;
 
 public class Result {
     private int matches;

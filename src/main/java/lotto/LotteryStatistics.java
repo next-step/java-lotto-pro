@@ -1,10 +1,12 @@
 package lotto;
 
-import lotto.constant.Reward;
-import lotto.vo.*;
-import lotto.vo.Number;
+import lotto.domain.*;
+import lotto.domain.Number;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class LotteryStatistics {
     private static final int MINIMUM_WIN_NUMBER = 3;
