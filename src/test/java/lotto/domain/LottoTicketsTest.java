@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class LottoTicketsTest {
     private final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private static final BonusBall bonusBall = new BonusBall(7);
 
     @Test
     @DisplayName("LottoTicket 리스트를 파라미터로 LottoTickets 객체가 생성되어야 한다")
@@ -27,21 +28,36 @@ class LottoTicketsTest {
     }
 
     @Test
+    @DisplayName("주어진 숫자 만큼의 로또 티켓들이 자동으로 생성되어야 한다.")
+    void create_automatically() {
+        // given
+        final int count = 10;
+
+        // when
+        final LottoTickets lottoTickets = LottoTickets.createAutomatically(count);
+
+        // then
+        assertThat(lottoTickets).isNotNull();
+        assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
+    }
+
+    @Test
     @DisplayName("prizeMap 호출 시 올바른 구조의 당첨 결과 Map 객체가 반환되어야 한다")
     void prizeMap() {
         // given
         final LottoTickets lottoTickets = new LottoTickets(lottoTicketList());
 
         // when
-        final Map<Prize, Integer> prizeMap = lottoTickets.prizeMap(lottoNumbers);
+        final Map<Prize, Integer> prizeMap = lottoTickets.prizeMap(lottoNumbers, bonusBall);
 
         // then
         assertThat(prizeMap.containsKey(Prize.NO_MATCHES)).isFalse();
         assertThat(prizeMap.containsKey(Prize.THREE_MATCHES)).isTrue();
         assertThat(prizeMap.containsKey(Prize.FOUR_MATCHES)).isTrue();
         assertThat(prizeMap.containsKey(Prize.FIVE_MATCHES)).isTrue();
+        assertThat(prizeMap.containsKey(Prize.FIVE_MATCHES_WITH_BONUS_BALL)).isTrue();
         assertThat(prizeMap.containsKey(Prize.SIX_MATCHES)).isTrue();
-        assertThat(prizeMap.keySet().size()).isEqualTo(4);
+        assertThat(prizeMap.keySet().size()).isEqualTo(5);
     }
 
     private List<LottoTicket> lottoTicketList() {

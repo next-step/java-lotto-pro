@@ -3,49 +3,35 @@ package lotto.view;
 import static lotto.domain.message.InformationMessage.LOSE;
 import static lotto.domain.message.InformationMessage.RESULT;
 import static lotto.domain.message.InformationMessage.WIN;
+import static lotto.domain.message.RequestMessage.BONUS_BALL;
 import static lotto.domain.message.RequestMessage.PAYMENT;
 import static lotto.domain.message.RequestMessage.WINNING_NUMBERS;
 
 import java.util.Map;
 import java.util.Scanner;
+import lotto.domain.BonusBall;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoNumbersFactory;
 import lotto.domain.LottoPayment;
-import lotto.domain.LottoPaymentFactory;
 import lotto.domain.LottoTickets;
-import lotto.domain.LottoTicketsFactory;
 import lotto.domain.Prize;
 import lotto.service.PrizeCalculator;
 
 public class LottoPresenter {
-    private static final int[] PRINTABLE_MATCH_COUNTS = {3, 4, 5, 6};
-
-    private final LottoPaymentFactory lottoPaymentFactory;
-    private final LottoNumbersFactory lottoNumbersFactory;
-    private final LottoTicketsFactory lottoTicketsFactory;
-
-    public LottoPresenter(final LottoPaymentFactory lottoPaymentFactory,
-                          final LottoNumbersFactory lottoNumbersFactory,
-                          final LottoTicketsFactory lottoTicketsFactory) {
-        this.lottoPaymentFactory = lottoPaymentFactory;
-        this.lottoNumbersFactory = lottoNumbersFactory;
-        this.lottoTicketsFactory = lottoTicketsFactory;
-    }
-
     public void present() {
         final Scanner scanner = new Scanner(System.in);
         final LottoPayment payment = requestPayment(scanner);
-        final LottoTickets tickets = lottoTicketsFactory.createAutomatically(payment.getPurchasableAmount());
+        final LottoTickets tickets = LottoTickets.createAutomatically(payment.getPurchasableAmount());
         tickets.print();
         printLineSeparator();
         final LottoNumbers winningNumbers = requestWinningNumbers(scanner);
-        printResult(payment.getMoney(), tickets.prizeMap(winningNumbers));
+        final BonusBall bonusBall = requestBonusBall(scanner);
+        printResult(payment.getMoney(), tickets.prizeMap(winningNumbers, bonusBall));
     }
 
     private LottoPayment requestPayment(final Scanner scanner) {
         System.out.println(PAYMENT.getMessage());
         try {
-            final LottoPayment payment = lottoPaymentFactory.create(scanner.nextLine());
+            final LottoPayment payment = LottoPayment.convertAndCreate(scanner.nextLine());
             printPaymentResult(payment);
             return payment;
         } catch (IllegalArgumentException e) {
@@ -65,10 +51,20 @@ public class LottoPresenter {
     private LottoNumbers requestWinningNumbers(final Scanner scanner) {
         System.out.println(WINNING_NUMBERS.getMessage());
         try {
-            return lottoNumbersFactory.convertAndCreate(scanner.nextLine());
+            return LottoNumbers.convertAndCreate(scanner.nextLine());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return requestWinningNumbers(scanner);
+        }
+    }
+
+    private BonusBall requestBonusBall(final Scanner scanner) {
+        System.out.println(BONUS_BALL.getMessage());
+        try {
+            return BonusBall.convertAndCreate(scanner.nextLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return requestBonusBall(scanner);
         }
     }
 
@@ -79,8 +75,7 @@ public class LottoPresenter {
     }
 
     private void printPrizes(final Map<Prize, Integer> prizeMap) {
-        for (final int matchCount : PRINTABLE_MATCH_COUNTS) {
-            final Prize prize = Prize.findPrizeByMatchCount(matchCount);
+        for (final Prize prize : Prize.printablePrizes()) {
             System.out.println(prize.resultMessage(prizeMap.get(prize)));
         }
     }

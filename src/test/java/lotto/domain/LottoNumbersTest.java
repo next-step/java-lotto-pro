@@ -13,10 +13,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoNumbersTest {
     private static final LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private static final BonusBall bonusBall = new BonusBall(7);
 
     @Test
     @DisplayName("6개의 숫자 배열을 파라미터로 로또 번호가 생성되어야 한다")
-    void create_by_number_list() {
+    void create() {
         // given
         final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
@@ -26,6 +27,20 @@ public class LottoNumbersTest {
         // then
         assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
         assertThat(lottoNumbers).isEqualTo(new LottoNumbers(numbers));
+    }
+
+    @Test
+    @DisplayName("컴마로 구분된 숫자 6개가 담긴 문자열을 파라미터로 로또 번호가 생성되야 한다")
+    void convert_and_create() {
+        // given
+        final String numbersString = "1, 2, 3, 4, 5, 6";
+
+        // when
+        final LottoNumbers lottoNumbers = LottoNumbers.convertAndCreate(numbersString);
+
+        // then
+        assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
+        assertThat(lottoNumbers).isEqualTo(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @ParameterizedTest
@@ -74,6 +89,26 @@ public class LottoNumbersTest {
 
         // when and then
         assertThat(numbers.matches(winningNumbers)).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("보너스 번호가 일치하면 true가 반환되어야 한다")
+    void when_bonus_ball_matches() {
+        // given
+        final LottoNumbers numbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
+
+        // when and then
+        assertThat(numbers.matchesBonusBall(bonusBall)).isTrue();
+    }
+
+    @Test
+    @DisplayName("보너스 번호가 일치하지 않으면 false가 반환되어야 한다")
+    void when_bonus_ball_not_matches() {
+        // given
+        final LottoNumbers numbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        // when and then
+        assertThat(numbers.matchesBonusBall(bonusBall)).isFalse();
     }
 
     private static Stream<Arguments> lottoNumbersMatchingLessThanThreeNumbers() {

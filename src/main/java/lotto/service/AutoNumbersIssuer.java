@@ -1,8 +1,8 @@
 package lotto.service;
 
-import static lotto.domain.LottoNumbersCondition.AMOUNT_OF_NUMBERS;
-import static lotto.domain.LottoNumbersCondition.MAXIMUM_NUMBER;
-import static lotto.domain.LottoNumbersCondition.MINIMUM_NUMBER;
+import static lotto.domain.LottoCondition.AMOUNT_OF_NUMBERS;
+import static lotto.domain.LottoCondition.MAXIMUM_NUMBER;
+import static lotto.domain.LottoCondition.MINIMUM_NUMBER;
 
 import java.util.ArrayList;
 import java.util.Collections;
