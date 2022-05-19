@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Summary {
-    private List<Result> results;
+    private final List<Result> results;
 
     public Summary(List<Result> results) {
         this.results = new LinkedList<>(results);
