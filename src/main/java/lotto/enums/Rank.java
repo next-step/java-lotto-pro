@@ -29,4 +29,8 @@ public enum Rank {
     public Prize getPrize() {
         return prize;
     }
+
+    public Prize getPrizeWithCount(int count) {
+        return prize.multiply(count);
+    }
 }
