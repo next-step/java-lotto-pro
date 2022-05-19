@@ -11,14 +11,15 @@ public class Purchase {
     private final Money purchaseAmount;
     private final int count;
 
-    private Purchase(Money purchaseAmount) {
+    private Purchase(Money purchaseAmount, int count) {
         this.purchaseAmount = purchaseAmount;
-        this.count = purchaseAmount.purchaseCount();
+        this.count = count;
     }
 
-    public static Purchase createPurchase() {
-        Money money = Money.of(convertToInteger(readPurchaseAmount()));
-        return new Purchase(money);
+    public static Purchase createPurchase(int amount) {
+        Money purchaseAmount = Money.of(amount);
+        int count = purchaseAmount.purchaseCount();
+        return new Purchase(purchaseAmount, count);
     }
 
     public Lottos createLottos() {
