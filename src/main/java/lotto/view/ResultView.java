@@ -27,7 +27,10 @@ public class ResultView {
     public static void printIssuedLottoNumber(Lottos lottos) {
         lottos.getLottos().forEach(lotto -> {
             final List<Integer> lottoNumbers = lotto.getLottoNumbers().stream()
-                    .sorted()
+                    .sorted(Comparator.comparingInt(LottoNumber::getNumber))
+                    .collect(Collectors.toList())
+                    .stream()
+                    .map(LottoNumber::getNumber)
                     .collect(Collectors.toList());
             System.out.println(lottoNumbers);
         });

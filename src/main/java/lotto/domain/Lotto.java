@@ -2,64 +2,52 @@ package lotto.domain;
 
 import lotto.type.LottoRank;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
     public static final String ERROR_LOTTO_NUMBER_SIZE = "[ERROR] 6개의 숫자를 입력해주세요.";
-    public static final String ERROR_NON_UNIQUE_LOTTO_BONUS_BALL_BALL = "[ERROR] 2등 보너스볼 번호가 로또번호와 중복됩니다.";
     public static final int LOTTO_NUMBER_SIZE = 6;
-    private final Set<Integer> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<Integer> lottoNumbers) {
-        this.checkMainLottoNumbersSize(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    public Lotto(Set<Integer> lottoNumbers, Integer number) {
-        this.checkMainLottoNumbersSize(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-        addBonusNumber(number);
-    }
-
-    private void checkMainLottoNumbersSize(Set<Integer> lottoNumbers) {
-        if (lottoNumbers.stream().count() != LOTTO_NUMBER_SIZE)
+        if ((long) lottoNumbers.size() != LOTTO_NUMBER_SIZE)
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_SIZE);
-    }
 
-    private void addBonusNumber(Integer number) {
-        if (isOverlapBonusBallNumber(number))
-            throw new IllegalArgumentException(ERROR_NON_UNIQUE_LOTTO_BONUS_BALL_BALL);
-        this.lottoNumbers.add(number);
-    }
-
-    public boolean isOverlapBonusBallNumber(int number) {
-        return this.lottoNumbers.contains(number);
+        this.lottoNumbers = lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 
     public LottoRank checkLottoRank(Lotto answerLotto) {
-        List<Integer> d = Arrays.stream(LottoRank.values())
-                .map(LottoRank::getMatchedCount)
-                .collect(Collectors.toList());
-
-        int lastIndex = answerLotto.getLottoNumbers().size() - 1;
-//        int bonusLottoNumber = lottoNumbers.get(lastIndex);
-
-        LottoRank lottoRank = LottoRank.findLottoRankByMatchedCount(countMatchedNumber(answerLotto), false);
-        return lottoRank;
+        return LottoRank.findLottoRankByMatchedCount(countMatchedNumber(answerLotto), false);
     }
 
     public int countMatchedNumber(Lotto answerLotto) {
-        Set<Integer> answerLottoNumbers = answerLotto.getLottoNumbers();
+        Set<Integer> answerLottoNumbers = answerLotto.getLottoNumbers().stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toSet());
 
         return (int) lottoNumbers.stream()
-                .filter(answerLottoNumbers::contains)
+                .filter(number -> answerLottoNumbers.contains(number.getNumber()))
                 .count();
     }
 
-    public Set<Integer> getLottoNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }
