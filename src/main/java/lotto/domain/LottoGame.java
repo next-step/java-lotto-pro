@@ -6,20 +6,27 @@ import java.util.List;
 
 public class LottoGame {
     private final Lottos lottos;
-    private final Money money;
+    private final Money buyPrice;
 
     private Quantity quantity;
 
     public LottoGame(String money) {
         this.lottos = new Lottos();
-        this.money = new Money(money);
-        this.quantity = new Quantity(this.money.getQuantity());
+        this.buyPrice = new Money(money);
+        this.quantity = new Quantity(this.buyPrice.getQuantity());
     }
 
     public void buyLottos() {
+        validate();
         while (isPurchasable()) {
             this.lottos.add(LottoFactory.createAuto());
             this.quantity = this.quantity.increase();
+        }
+    }
+
+    private void validate() {
+        if (buyPrice.lessThenLottoPrice()) {
+            throw new IllegalArgumentException(String.format("금액이 부족합니다.(최소필요금액: %d)", Money.LOTTO_PRICE));
         }
     }
 
@@ -35,7 +42,7 @@ public class LottoGame {
         return this.lottos.getLottos();
     }
 
-    public LottoResult getLottoResult(String winningNumber) {
-        return lottos.getLottoResult(LottoFactory.create(winningNumber));
+    public LottoResult getLottoResult(String winningNumber, String bonusNumber) {
+        return lottos.getLottoResult(new WinningNumber(winningNumber, bonusNumber));
     }
 }
