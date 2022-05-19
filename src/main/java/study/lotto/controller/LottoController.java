@@ -38,7 +38,7 @@ public class LottoController {
     private LottoPurchaseHistory purchaseLotto() {
         LottoMachine machine = getLottoMachine();
         Price purchasePrice = view.getPurchasePrice();
-        view.getManualLottoCount();
+        Lottos manuals = view.getManualLottos();
         return machine.issueLotto(purchasePrice);
     }
 

@@ -7,6 +7,10 @@ public class LottoCount {
         value = validate(stringValue);
     }
 
+    public int get() {
+        return value;
+    }
+
     private int validate(String price) {
         int parsedValue = parseNumber(price);
         if (parsedValue < 0) {

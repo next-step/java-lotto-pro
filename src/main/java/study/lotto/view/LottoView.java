@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import study.lotto.domain.Lotto;
 import study.lotto.domain.LottoNumber;
 import study.lotto.domain.Lottos;
@@ -22,8 +23,9 @@ public class LottoView {
         return new Price(userInterface.getUserInput("구입금액을 입력해 주세요.\n"));
     }
 
-    public LottoCount getManualLottoCount() {
-        return new LottoCount(userInterface.getUserInput("수동으로 구매할 로또 수를 입력해 주세요.\n"));
+    public Lottos getManualLottos() {
+        LottoCount count = new LottoCount(userInterface.getUserInput("수동으로 구매할 로또 수를 입력해 주세요.\n"));
+        return new Lottos(getManualLottos(count));
     }
 
     public void showPurchaseResult(Lottos purchasedLottos) {
@@ -48,6 +50,17 @@ public class LottoView {
 
     public LottoNumber getBonusBall() {
         return new LottoNumber(userInterface.getUserInput("보너스 볼을 입력해 주세요.\n"));
+    }
+
+    private List<Lotto> getManualLottos(LottoCount count) {
+        userInterface.show("수동으로 구매할 번호를 입력해 주세요.\n");
+        return Stream.generate(this::getManualLotto)
+                .limit(count.get())
+                .collect(Collectors.toList());
+    }
+
+    private Lotto getManualLotto() {
+        return Lotto.from(userInterface.getUserInput(""));
     }
 
     private String getEarningResult(WinningStatistics winningStatistics) {
