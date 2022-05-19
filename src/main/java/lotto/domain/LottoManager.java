@@ -7,12 +7,15 @@ import lotto.strategy.AutoPickNumberStrategy;
 public class LottoManager {
 
     private Lottos lottos;
+    private WinningStatistics winningStatistics;
 
     public LottoManager(int autoLottoCount) {
+        winningStatistics = new WinningStatistics();
         makeLottos(autoLottoCount);
     }
 
     public LottoManager(Lottos lottos) {
+        winningStatistics = new WinningStatistics();
         this.lottos = lottos;
     }
 
@@ -25,11 +28,11 @@ public class LottoManager {
     }
 
     public void makeWinningLotto(Lotto winningLotto) {
-        lottos.makeWinningResult(winningLotto);
+        lottos.makeWinningResult(winningLotto, winningStatistics);
     }
 
     public double calculateRateOfReturn(int purchaseAmount) {
-        return lottos.calculateRateOfReturn(purchaseAmount);
+        return winningStatistics.calculateRateOfReturn(purchaseAmount);
     }
 
     public List<Lotto> getLottoElements() {
@@ -37,6 +40,6 @@ public class LottoManager {
     }
 
     public WinningStatistics getWinningStatistics() {
-        return lottos.getWinningStatistics();
+        return winningStatistics;
     }
 }
