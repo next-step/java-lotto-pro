@@ -17,7 +17,6 @@ public class LottoFactory {
     private static final Pattern lottoNumbersPattern = Pattern.compile(LOTTO_PATTERN_REGEX);
     private static final String SPACE_DELIMITER = "\\s+";
     private static final String EMPTY_STRING = "";
-    private static final String WRONG_INPUT_MESSAGE = "숫자, 공백 및 문자 , 만 사용 가능합니다.";
     private static final int LOTTO_COUNT = 6;
 
     private LottoFactory() {
@@ -30,7 +29,7 @@ public class LottoFactory {
 
     private static void validateInputString(String lottoNumbers) {
         if (!isLottoPattern(lottoNumbers)) {
-            throw new IllegalArgumentException(WRONG_INPUT_MESSAGE);
+            throw new IllegalArgumentException("숫자, 공백 및 문자 , 만 사용 가능합니다.");
         }
     }
 

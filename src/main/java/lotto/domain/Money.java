@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;
-    private static final String MONEY_LACK_ERROR_MESSAGE = String.format("금액이 부족합니다.(최소필요금액: %d)", LOTTO_PRICE);
 
     private final double money;
 
@@ -19,7 +18,7 @@ public class Money {
 
     private void validate(double money) {
         if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException(MONEY_LACK_ERROR_MESSAGE);
+            throw new IllegalArgumentException(String.format("금액이 부족합니다.(최소필요금액: %d)", LOTTO_PRICE));
         }
     }
 
