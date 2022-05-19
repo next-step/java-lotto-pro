@@ -26,12 +26,11 @@ class LottoTest {
     void lotto_winning_number_test(String 당첨_번호, int 예상_당첨_개수) {
         List<LottoNo> 로또_번호 = convert(Arrays.asList(4, 5, 6, 7, 8, 9));
 
-        WinningNumbers winningNumbers = mock(WinningNumbers.class);
-        when(winningNumbers.getWinningNumbers())
-            .thenReturn(convert(당첨_번호));
+        WinningNumbers winningNumbers = new WinningNumbers(당첨_번호);
+        winningNumbers.addBonusNumber(new LottoNo(42));
 
         Lotto lotto = new Lotto(로또_번호);
-        int 당첨_개수 = lotto.getWinningOfNumbersCount(winningNumbers);
+        int 당첨_개수 = winningNumbers.getMatchOfCount(lotto);
 
         assertThat(당첨_개수).isEqualTo(예상_당첨_개수);
     }

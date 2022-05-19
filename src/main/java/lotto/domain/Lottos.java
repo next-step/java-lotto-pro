@@ -19,7 +19,7 @@ public class Lottos {
         LottoScore lottoScore = new LottoScore();
 
         lottos.forEach(lotto -> {
-            int countOfMatch = lotto.getWinningOfNumbersCount(winningNumbers);
+            int countOfMatch = winningNumbers.getMatchOfCount(lotto);
             Rank rank = Rank.valueOf(countOfMatch, winningNumbers.isContainsBonusNumber(lotto));
             lottoScore.addScore(rank);
         });

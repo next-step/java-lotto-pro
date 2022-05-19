@@ -58,4 +58,13 @@ public class WinningNumbers {
 
         return new Lotto(lottoNumbers);
     }
+
+    public int getMatchOfCount(Lotto lotto) {
+        int countOfMatch = (int) lotto.getNumbers().stream()
+                .filter(winningNumbers::contains)
+                .count();
+        countOfMatch += bonusCount(lotto);
+
+        return countOfMatch;
+    }
 }

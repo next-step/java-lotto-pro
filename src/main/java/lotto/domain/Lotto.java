@@ -24,16 +24,12 @@ public class Lotto {
         }
     }
 
-    public int getWinningOfNumbersCount(WinningNumbers winningNumbers) {
-        int countOfMatch = (int) winningNumbers.getWinningNumbers().stream()
-            .filter(lottoNumbers::contains).count();
-        countOfMatch += winningNumbers.bonusCount(this);
-
-        return countOfMatch;
-    }
-
     public boolean contains(int number) {
         return this.lottoNumbers.contains(new LottoNo(number));
+    }
+
+    public boolean contains(LottoNo lottoNo) {
+        return this.lottoNumbers.contains(lottoNo);
     }
 
     public List<LottoNo> getNumbers() {
