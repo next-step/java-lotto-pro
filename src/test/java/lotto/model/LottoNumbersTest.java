@@ -68,6 +68,6 @@ class LottoNumbersTest {
     void create_sort() {
         LottoNumbers lottoNumbers = new LottoNumbers((Arrays.asList("7", "10", "35", "13", "25", "3")));
 
-        assertThat(lottoNumbers).isEqualTo(new LottoNumbers((Arrays.asList( "3","7", "10", "13", "25", "35"))));
+        assertThat(lottoNumbers).isEqualTo(new LottoNumbers((Arrays.asList("3", "7", "10", "13", "25", "35"))));
     }
 }

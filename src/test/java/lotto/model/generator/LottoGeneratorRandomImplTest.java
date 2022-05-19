@@ -29,7 +29,7 @@ class LottoGeneratorRandomImplTest {
         Lottos actual = lottoGenerator.generateLottos(new Lottos(selfLottos), new LottoPaper(10, 3));
 
         assertThat(actual.getLottos()).hasSize(10);
-        for (Lotto lotto : selfLottos){
+        for (Lotto lotto : selfLottos) {
             assertThat(actual.getLottos()).contains(lotto);
         }
     }

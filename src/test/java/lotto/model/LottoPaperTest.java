@@ -13,7 +13,7 @@ class LottoPaperTest {
     void randomCount() {
         LottoPaper lottoPaper = new LottoPaper(10, 3);
 
-        assertEquals(7,lottoPaper.randomCount());
+        assertEquals(7, lottoPaper.randomCount());
 
     }
 

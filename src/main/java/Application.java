@@ -38,6 +38,37 @@ public class Application {
         ResultView.printFinalResultView(lottoGameResult, lottos);
     }
 
+    private LottoStore createLottoStore() throws IOException {
+        try {
+            Money money = inputMoney();
+            LottoSelfCount lottoSelfCount = inputLottoCount();
+            return new LottoStore(money, lottoSelfCount);
+        } catch (IllegalArgumentException e) {
+            ResultView.printConsole(e.getMessage());
+            return createLottoStore();
+        }
+    }
+
+    private Money inputMoney() throws IOException {
+        try {
+            String moneyWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.MONEY_MESSAGE);
+            return new Money(moneyWord);
+        } catch (IllegalArgumentException e) {
+            ResultView.printConsole(e.getMessage());
+            return inputMoney();
+        }
+    }
+
+    private LottoSelfCount inputLottoCount() throws IOException {
+        try {
+            String selfCountWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.SELF_COUNT_MESSAGE);
+            return new LottoSelfCount(selfCountWord);
+        } catch (IllegalArgumentException e) {
+            ResultView.printConsole(e.getMessage());
+            return inputLottoCount();
+        }
+    }
+
     private Lottos createSelfLottos(LottoPaper lottoPaper) throws IOException {
         try {
             InputConsoleUtils.printMessage(LottoInputMessage.SELF_NUMBERS_MESSAGE, lottoPaper.isAllRandom());
@@ -58,36 +89,6 @@ public class Application {
         return new Lottos(lottos);
     }
 
-    private LottoStore createLottoStore() throws IOException {
-        try {
-            Money money = inputMoney();
-            LottoSelfCount lottoSelfCount = inputLottoCount();
-            return new LottoStore(money, lottoSelfCount);
-        } catch (IllegalArgumentException e) {
-            ResultView.printConsole(e.getMessage());
-            return createLottoStore();
-        }
-    }
-
-    private LottoSelfCount inputLottoCount() throws IOException {
-        try {
-            String selfCountWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.SELF_COUNT_MESSAGE);
-            return new LottoSelfCount(selfCountWord);
-        } catch (IllegalArgumentException e) {
-            ResultView.printConsole(e.getMessage());
-            return inputLottoCount();
-        }
-    }
-
-    private Money inputMoney() throws IOException {
-        try {
-            String moneyWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.MONEY_MESSAGE);
-            return new Money(moneyWord);
-        } catch (IllegalArgumentException e) {
-            ResultView.printConsole(e.getMessage());
-            return inputMoney();
-        }
-    }
 
     private WinningLotto createWinningLotto() throws IOException {
         try {

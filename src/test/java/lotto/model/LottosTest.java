@@ -45,7 +45,7 @@ class LottosTest {
 
         lottos.mergeLottos(new Lottos(targetLottos));
 
-        assertThat(lottos.getLottos()).contains(lotto1,lotto2,lotto3);
+        assertThat(lottos.getLottos()).contains(lotto1, lotto2, lotto3);
     }
 
 }
