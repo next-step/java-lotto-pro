@@ -40,6 +40,40 @@ public enum MatchResult {
         throw new IllegalArgumentException("당첨 번호와 일치하는 로또 숫자의 개수는 0과 6 범위이어야 합니다");
     }
 
+    public static MatchResult of(int matchCount, boolean isBonus) {
+
+        if (isSecond(matchCount, isBonus)) {
+            return MatchResult.SECOND;
+        }
+
+        if (isThird(matchCount, isBonus)) {
+            return MatchResult.THIRD;
+        }
+
+        return getMatchResult(matchCount);
+    }
+
+    private static MatchResult getMatchResult(int matchCount) {
+        Optional<MatchResult> result = Arrays.stream(MatchResult.values())
+                .filter(matchResult -> !matchResult.equals(MatchResult.SECOND))
+                .filter(matchResult -> !matchResult.equals(MatchResult.THIRD))
+                .filter(matchResult -> matchResult.matchCount == matchCount)
+                .findAny();
+
+        if (result.isPresent()) {
+            return result.get();
+        }
+        throw new IllegalArgumentException("당첨 번호와 일치하는 로또 숫자의 개수는 0과 6 범위이어야 합니다");
+    }
+
+    private static boolean isSecond(int matchCount, boolean isBonus) {
+        return MatchResult.SECOND.matchCount == matchCount && isBonus;
+    }
+
+    private static boolean isThird(int matchCount, boolean isBonus) {
+        return MatchResult.THIRD.matchCount == matchCount && !isBonus;
+    }
+
     public static MatchResult[] winningMatchResults() {
         return winningMatchResults;
     }
