@@ -39,6 +39,14 @@ public class WinningNumbers {
         return lotto.getNumbers().contains(bonusNumber.getBonusNumber());
     }
 
+    public int bonusCount(Lotto lotto) {
+        if (isContainsBonusNumber(lotto)) {
+            return 1;
+        }
+
+        return 0;
+    }
+
     private String replaceBlank(String winningNumbersInput) {
         return winningNumbersInput.replace(" ", "");
     }

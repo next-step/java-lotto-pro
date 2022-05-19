@@ -14,28 +14,21 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("로또 목록에 대한 테스트")
 class LottosTest {
+
     private List<Lotto> 로또_목록;
     private WinningNumbers 정답_번호;
 
     @BeforeEach
     void setUp() {
-        Lotto lotto = mock(Lotto.class);
-        Lotto lotto_2 = mock(Lotto.class);
-        Lotto lotto_3 = mock(Lotto.class);
+        정답_번호 = new WinningNumbers("1,2,3,4,5,6");
+        정답_번호.addBonusNumber(new BonusNumber("45"));
 
-        정답_번호 = mock(WinningNumbers.class);
+        Lotto FIFTH_LOTTO = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
+        Lotto FOURTH_LOTTO = new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8));
+        Lotto THIRD_LOTTO = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
 
-        when(lotto.getWinningOfNumbersCount(any()))
-            .thenReturn(3);
-        when(lotto_2.getWinningOfNumbersCount(any()))
-            .thenReturn(4);
-        when(lotto_3.getWinningOfNumbersCount(any()))
-            .thenReturn(5);
+        로또_목록 = Arrays.asList(FIFTH_LOTTO, FOURTH_LOTTO, THIRD_LOTTO);
 
-        로또_목록 = Arrays.asList(lotto, lotto_2, lotto_3);
-
-        when(정답_번호.isContainsBonusNumber(any()))
-            .thenReturn(false);
     }
 
     @Test
@@ -57,7 +50,8 @@ class LottosTest {
         Lottos lottos = new Lottos(로또_목록);
         LottoScore lottoScore = lottos.calculateLottoScore(정답_번호);
 
-        int expected = Rank.FIFTH.getWinningsMoney() + Rank.FOURTH.getWinningsMoney() + Rank.THIRD.getWinningsMoney();
+        int expected = Rank.FIFTH.getWinningsMoney() + Rank.FOURTH.getWinningsMoney()
+            + Rank.THIRD.getWinningsMoney();
         assertThat(lottoScore.getWinnings().getWinningsPrice()).isEqualTo(expected);
     }
 }
