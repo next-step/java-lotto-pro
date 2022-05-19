@@ -19,8 +19,8 @@ public class LottoManagerTest {
     public void calculateReturnRate() {
         //given
         Lottos lottos = new Lottos(Arrays.asList(lotto));
-        LottoManager lottoManager = new LottoManager(lottos);
-        lottoManager.makeWinningLotto(lotto);
+        LottoManager lottoManager = new LottoManager(1);
+        lottoManager.makeWinningLotto(lotto, lottos);
         double expectedReturnRate = 2_000_000;
 
         //when

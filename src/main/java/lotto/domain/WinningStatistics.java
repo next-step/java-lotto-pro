@@ -24,7 +24,7 @@ public class WinningStatistics {
         for (LottoRanking lottoRanking : lottoRankingCount.keySet()) {
             sumOfRankingAmount += lottoRanking.getWinAmount() * lottoRankingCount.get(lottoRanking);
         }
-        return Double.parseDouble(String.format("%.2f", sumOfRankingAmount / purchaseAmount));
+        return Math.floor(sumOfRankingAmount / purchaseAmount * 100) / 100.0;
     }
 
     public LinkedHashMap<LottoRanking, Integer> getLottoRankingCount() {
