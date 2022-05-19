@@ -14,7 +14,6 @@ public class LotteryStatistics {
 
     private static int count;
     private static Map<Integer, Integer> matches;
-    private static Map<Integer, Integer> rewards;
     private static List<Result> results;
 
     private LotteryStatistics() {
@@ -57,20 +56,11 @@ public class LotteryStatistics {
     }
 
     public static Summary result() {
-        initRewards();
         results = new LinkedList<>();
         for (Map.Entry<Integer, Integer> entry : matches.entrySet()) {
             makeRewards(entry);
         }
         return new Summary(results);
-    }
-
-    private static void initRewards() {
-        rewards = new HashMap<>();
-        rewards.put(3, 5000);
-        rewards.put(4, 50000);
-        rewards.put(5, 1500000);
-        rewards.put(6, 2000000000);
     }
 
     private static void makeRewards(Map.Entry<Integer, Integer> entry) {
