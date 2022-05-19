@@ -28,9 +28,13 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<List<Integer>> inputManualLottoNumbers() {
+    public static Integer inputManualLottoCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int count = validatetManualLottoCount(scanner.nextLine());
+
+        return scanner.nextInt();
+    }
+
+    public static List<List<Integer>> inputManualLottoNumbers(int count) {
 
         List<List<Integer>> lottoNumbers = new ArrayList<>();
         if (count == 0) {
@@ -43,22 +47,6 @@ public class InputView {
         }
 
         return lottoNumbers;
-    }
-
-    private static int validatetManualLottoCount(String input) {
-        int count;
-
-        try {
-            count = Integer.parseInt(input);
-        } catch (NumberFormatException error) {
-            throw new IllegalArgumentException("로또 수는 숫자이어야 합니다.");
-        }
-
-        if (count < 0) {
-            throw new IllegalArgumentException("로또 수는 음수 일수 없습니다.");
-        }
-
-        return count;
     }
 
     private static List<Integer> generateLottoNumber(String input) {

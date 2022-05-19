@@ -13,7 +13,8 @@ public class LottoApp {
     public static void main(String[] args) {
         LottoMachine lottoMachine = new LottoMachine();
 
-        List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers();
+        int count = InputView.inputManualLottoCount();
+        List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(count);
         List<Lotto> manualLottos = lottoMachine.purchaseManual(manualLottoNumbers);
 
         int money = InputView.inputMoney();
