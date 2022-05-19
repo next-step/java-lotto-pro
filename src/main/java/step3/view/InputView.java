@@ -12,12 +12,12 @@ public class InputView {
 
     public String getMoney() {
         System.out.println(GET_MONEY_MESSAGE);
-        return scanIn.nextLine().replace(" ", "");
+        return scanIn.nextLine().replace(" ", ""); /* 받아온 String내부에 공백을 제거하기 위해 replace사용 */
     }
 
     public String getWinnerLotto() {
         System.out.println(GET_LOTTO_MESSAGE);
-        return scanIn.nextLine().replace(" ", "");
+        return scanIn.nextLine().replace(" ", ""); /* 받아온 String내부에 공백을 제거하기 위해 replace사용 */
     }
 
     public String getBonusLotto() {
