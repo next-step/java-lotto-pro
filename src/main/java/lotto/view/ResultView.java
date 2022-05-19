@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.controller.LottoCount;
 import lotto.domain.*;
 import lotto.enums.Rank;
 import lotto.view.message.dto.MatchResultParameters;
@@ -13,8 +14,8 @@ import static lotto.view.message.ResultMessage.*;
 
 public class ResultView {
 
-    public static void printPurchaseCount(Lottos lottos) {
-        String format = String.format(BUY_LOTTO.message(), lottos.count());
+    public static void printPurchaseCount(LottoCount autoCount, LottoCount manualCount) {
+        String format = String.format(BUY_LOTTO.message(), manualCount.count(), autoCount.count());
         System.out.println(format);
     }
 
