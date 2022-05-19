@@ -8,6 +8,8 @@ import java.util.List;
 
 public class LottoCount {
 
+    private static final int ZERO = 0;
+
     private final int count;
 
     public LottoCount(String count) {
@@ -16,10 +18,18 @@ public class LottoCount {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자만 입력 가능합니다.");
         }
+        validatePositive();
     }
 
     public LottoCount(int count) {
         this.count = count;
+        validatePositive();
+    }
+
+    private void validatePositive() {
+        if (count < ZERO) {
+            throw new IllegalArgumentException("카운트는 0보다 큰 수여야 합니다.");
+        }
     }
 
     public int count() {

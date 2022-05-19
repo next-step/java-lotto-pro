@@ -26,4 +26,12 @@ class LottoCountTest {
         // then
         assertThat(result.count()).isEqualTo(3);
     }
+
+    @Test
+    void 로또_카운트가_음수일_경우_예외가_발생한다() {
+        // when and then
+        assertThatThrownBy(() ->
+                new LottoCount(-1)
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
 }
