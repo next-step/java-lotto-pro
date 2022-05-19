@@ -23,14 +23,14 @@ public class LottoController {
     public void startLotto() {
         LottoUser user = new LottoUser();
 
-        int ticket = getTicketByMoney();
+        int ticket = getTicketByMoney(); /*정상 값을 입력할때까지 반복입력*/
 
         List<LottoTicket> lottoTickets = lottoMachine.makeRandomLottoTickets(ticket);
         user.setUserLotto(lottoTickets);
         outputView.printLottoInfo(user.getLottoNumbers());
 
-        setWinnerLotto();
-        setBonusNumber();
+        setWinnerLotto(); /*정상 값을 입력할때까지 반복입력*/
+        setBonusNumber(); /*정상 값을 입력할때까지 반복입력*/
 
         outputView.printOutput(lottoMachine.checkWin(user.getLottoTickets()), lottoMachine.getUsingMoneyByTicket(ticket));
     }
