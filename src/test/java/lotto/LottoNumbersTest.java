@@ -14,10 +14,16 @@ public class LottoNumbersTest {
 
     @Test
     public void differentSixNumbers() {
+        //given
         List<LottoNumber> numberList = new AutoPickNumberStrategy().pickLottoNumbers();
         LottoNumbers lottoNumbers = new LottoNumbers(numberList);
-        List<LottoNumber> lottoNumberList = lottoNumbers.getValues();
-        Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumberList);
-        assertThat(lottoNumberSet).hasSize(6);
+        Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers.getValues());
+        int expectedSize = 6;
+
+        //when
+        int actualSize = lottoNumberSet.size();
+
+        //then
+        assertThat(actualSize).isEqualTo(expectedSize);
     }
 }
