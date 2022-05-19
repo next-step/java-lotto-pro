@@ -12,6 +12,18 @@ public class WinningNumbers {
         this.winningNumbers = new HashSet<>(Arrays.asList(winningNumbers));
     }
 
+    public WinningNumbers(String[] winningNumbers) {
+        this(createWinningLottoNumbers(winningNumbers));
+    }
+
+    private static LottoNumber[] createWinningLottoNumbers(String[] numbers) {
+        LottoNumber[] winningNumbers = new LottoNumber[numbers.length];
+        for (int index = 0; index < winningNumbers.length; index++) {
+            winningNumbers[index] = LottoNumber.from(numbers[index]);
+        }
+        return winningNumbers;
+    }
+
     public MatchResult matchWinningLotto(Lotto lotto) {
         return lotto.match(winningNumbers);
     }

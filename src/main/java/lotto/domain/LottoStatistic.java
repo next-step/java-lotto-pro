@@ -16,17 +16,9 @@ public class LottoStatistic {
     }
 
     public LottoStatistic(Lottos lottos, String[] winningNumbers) {
-        this(lottos, createWinningNumbers(winningNumbers));
+        this(lottos, new WinningNumbers(winningNumbers));
     }
-
-    private static WinningNumbers createWinningNumbers(String[] numbers) {
-        LottoNumber[] winningNumbers = new LottoNumber[numbers.length];
-        for (int index = 0; index < winningNumbers.length; index++) {
-            winningNumbers[index] = LottoNumber.from(numbers[index]);
-        }
-        return new WinningNumbers(winningNumbers);
-    }
-
+    
     private void initializePrizeLottoList(Lottos lottos, WinningNumbers winningNumbers) {
         matchedLottos = new HashMap<>();
         for (MatchResult matchResult : MatchResult.values()) {
@@ -53,7 +45,7 @@ public class LottoStatistic {
     private int matchedCount(MatchResult matchResult) {
         return matchedLottos.get(matchResult).size();
     }
-    
+
     private Money totalPrize() {
         Money result = Money.from(0);
         for (Map.Entry<MatchResult, Lottos> entry : matchedLottos.entrySet()) {
