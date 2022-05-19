@@ -18,6 +18,7 @@ public class LottoUser {
             this.money = new Money(money);
             return true;
         } catch (IllegalArgumentException e) {
+            this.money = new Money(0);
             System.out.println(e.getMessage());
             return false;
         }
