@@ -20,6 +20,10 @@ public class LottoPaper {
         return totalCount - selfCount;
     }
 
+    public boolean isAllRandom() {
+        return selfCount == 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
