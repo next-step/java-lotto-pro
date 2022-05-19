@@ -35,7 +35,7 @@ public class MoneyTest {
     @CsvSource(value = {"1000:1", "1001:1", "1999:1"}, delimiter = ':')
     void Money_구매가능_로또_개수(int amount, int count){
         Money money = new Money(amount);
-        assertThat(money.lottoCountToBuy()).isEqualTo(count);
+        assertThat(money.maxLottoCount()).isEqualTo(count);
     }
 
     @ParameterizedTest(name="수익률 계산: 초기금액 {0}원 - 상금 {1}원 - 수익률 {2}")

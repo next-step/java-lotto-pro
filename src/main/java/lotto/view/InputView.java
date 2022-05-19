@@ -1,7 +1,9 @@
 package lotto.view;
 
 import lotto.constant.ViewMessageConst;
+import lotto.domain.Lotto;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -19,6 +21,19 @@ public class InputView {
 
     public static String readBonusNumber() {
         System.out.println(ViewMessageConst.INPUT_MESSAGE_BONUS_NUMBER);
+        return scan.nextLine();
+    }
+
+    public static String readManualLottosCount() {
+        System.out.println(ViewMessageConst.INPUT_MESSAGE_MANUAL_LOTTOS_COUNT);
+        return scan.nextLine();
+    }
+
+    public static void guideMessageToReadManualLottoNumbers() {
+        System.out.println(ViewMessageConst.INPUT_MESSAGE_MANUAL_LOTTOS_NUMBER);
+    }
+
+    public static String readSimpleLottoNumbers(){
         return scan.nextLine();
     }
 }

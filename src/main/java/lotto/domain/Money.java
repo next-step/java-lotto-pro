@@ -31,12 +31,12 @@ public class Money {
         }
     }
 
-    public int lottoCountToBuy() {
+    public int maxLottoCount() {
         return amount / LOTTO_PRICE;
     }
 
     public double calculateProfit(int changedAmount) {
-        return (double) changedAmount / (lottoCountToBuy() * LOTTO_PRICE);
+        return (double) changedAmount / (maxLottoCount() * LOTTO_PRICE);
     }
 
     public Money subtract(int subtractAmount) {

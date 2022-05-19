@@ -20,7 +20,7 @@ public class LottosGenerator {
 
     public static Lottos purchaseAutoLottos(Money money) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < money.lottoCountToBuy(); i++) {
+        for (int i = 0; i < money.maxLottoCount(); i++) {
             lottoList.add(new Lotto(RandomLottoNumbersGenerator.generate()));
         }
         return new Lottos(lottoList);
