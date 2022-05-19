@@ -17,8 +17,7 @@ public class Quantity {
 
     private void validate(int quantity, int maxQuantity) {
         if (quantity > maxQuantity) {
-            throw new IllegalArgumentException(
-                    String.format("구매할 수 있는 수량을 초과하였습니다. 구매가능수량: %d, 구매수량:%d", maxQuantity, quantity));
+            throw new IllegalArgumentException(String.format("구매할 수 있는 수량을 초과하였습니다. 구매가능수량: %d, 구매수량:%d", maxQuantity, quantity));
         }
     }
 
