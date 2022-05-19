@@ -24,8 +24,15 @@ public class InputConsoleUtils {
         return BUFFERED_READER.readLine();
     }
 
-    public static void printMessage(String selfNumbersMessage) {
+    public static void printMessage(String message) {
         System.out.println(TAP);
-        System.out.println(selfNumbersMessage);
+        System.out.println(message);
     }
+
+    public static void printMessage(String message, boolean isSkip) {
+        if (!isSkip) {
+            printMessage(message);
+        }
+    }
+
 }

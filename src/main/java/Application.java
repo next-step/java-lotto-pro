@@ -40,7 +40,7 @@ public class Application {
 
     private Lottos createSelfLottos(LottoPaper lottoPaper) throws IOException {
         try {
-            InputConsoleUtils.printMessage(LottoInputMessage.SELF_NUMBERS_MESSAGE);
+            InputConsoleUtils.printMessage(LottoInputMessage.SELF_NUMBERS_MESSAGE, lottoPaper.isAllRandom());
             return inputSelfLottos(lottoPaper);
         } catch (IllegalArgumentException e) {
             ResultView.printConsole(e.getMessage());
