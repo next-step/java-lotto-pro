@@ -11,18 +11,6 @@ import lotto.utils.RandomNumberUtils;
 public class LottoGeneratorRandomImpl implements LottoGenerator {
 
     @Override
-    public Lottos generateLottos(LottoPaper lottoPaper) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int gameCount = 0; gameCount < lottoPaper.getSelfCount(); gameCount++) {
-            List<Integer> randomNumbers = RandomNumberUtils
-                    .generateRandomNumbers(LottoRoleConst.LOW_NUMBER, LottoRoleConst.MAX_NUMBER,
-                            LottoRoleConst.LOTTO_NUMBER_LIST_SIZE);
-            lottos.add(new Lotto(randomNumbers));
-        }
-        return new Lottos(lottos);
-    }
-
-    @Override
     public Lottos generateLottos(Lottos selfLottos, LottoPaper lottoPaper) {
         List<Lotto> lottos = new ArrayList<>(selfLottos.getLottos());
         for (int gameCount = 0; gameCount < lottoPaper.randomCount(); gameCount++) {
