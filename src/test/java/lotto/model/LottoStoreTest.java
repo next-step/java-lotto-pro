@@ -13,10 +13,11 @@ class LottoStoreTest {
 
     @DisplayName("입력받은 구매금액을 로또종이로 변환한다.")
     @ParameterizedTest(name = "[{0}]원 -> [{1}]게임")
-    @CsvSource(value = {"10000:10", "5000:5", "3000:3"}, delimiter = ':')
-    void issueLottoPaper(String moneyWord, int expectedPlayCount) {
-        LottoStore lottoStore = new LottoStore(new Money(moneyWord));
-        assertEquals(new LottoPaper(expectedPlayCount), lottoStore.issueLottoPaper());
+    @CsvSource(value = {"10000:10:3", "5000:5:2", "3000:3:0"}, delimiter = ':')
+    void issueLottoPaper(String moneyWord,int totalCount, int selfCount) {
+        LottoStore lottoStore = new LottoStore(new Money(moneyWord),new LottoSelfCount(selfCount));
+
+        assertEquals(new LottoPaper(totalCount,selfCount), lottoStore.issueLottoPaper());
     }
 
     @DisplayName("수동 로또 수가 입력받은 금액보다 큰 경우 검증")

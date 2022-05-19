@@ -6,29 +6,26 @@ import lotto.constant.LottoRoleConst;
 public class LottoStore {
 
     private final Money money;
+    private LottoPaper lottoPaper;
 
     public LottoStore(Money money) {
         this.money = money;
     }
 
-    public LottoStore(Money money, LottoPaper lottoPaper) {
-        this.money = money;
-        int gameCount = money.getMoney() / LottoRoleConst.LOTTO_PRICE;
-        validateOverCount(gameCount,lottoPaper);
-    }
-
     public LottoStore(Money money, LottoSelfCount lottoSelfCount) {
         this.money = money;
+        int totalCount = money.getMoney() / LottoRoleConst.LOTTO_PRICE;
+        this.lottoPaper = new LottoPaper(totalCount,lottoSelfCount.getSelfCount());
+        validateOverCount(totalCount,lottoPaper);
     }
 
-    private void validateOverCount(int gameCount, LottoPaper lottoPaper) {
-        if (gameCount < lottoPaper.getSelfCount()){
+    private void validateOverCount(int totalCount, LottoPaper lottoPaper) {
+        if (totalCount < lottoPaper.getSelfCount()){
             throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_MEONY);
         }
     }
 
     public LottoPaper issueLottoPaper() {
-        int gameCount = money.getMoney() / LottoRoleConst.LOTTO_PRICE;
-        return new LottoPaper(gameCount);
+        return lottoPaper;
     }
 }

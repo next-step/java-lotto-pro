@@ -5,6 +5,7 @@ import lotto.constant.ErrorMessage;
 
 public class LottoPaper {
 
+    private int totalCount;
     private final int selfCount;
 
     public LottoPaper(int selfCount) {
@@ -17,6 +18,11 @@ public class LottoPaper {
         }catch (IllegalArgumentException e){
             throw new IllegalArgumentException(ErrorMessage.NOT_NUMBER);
         }
+    }
+
+    public LottoPaper(int totalCount, int selfCount) {
+        this.totalCount = totalCount;
+        this.selfCount = selfCount;
     }
 
     public int getSelfCount() {

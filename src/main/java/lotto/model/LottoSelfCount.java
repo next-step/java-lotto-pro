@@ -13,4 +13,12 @@ public class LottoSelfCount {
             throw new IllegalArgumentException(ErrorMessage.NOT_NUMBER);
         }
     }
+
+    public LottoSelfCount(int selfCount) {
+        this.selfCount = selfCount;
+    }
+
+    public int getSelfCount() {
+        return selfCount;
+    }
 }
