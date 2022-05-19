@@ -9,18 +9,22 @@ public enum Ranking {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
-    //SECOND
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
     private final int hitCount;
-    private final long winningMoney;
+    private final int winningMoney;
 
     Ranking(int hitCount, int winningMoney) {
         this.hitCount = hitCount;
         this.winningMoney = winningMoney;
     }
 
-    public static Ranking findRanking(int hitCount) {
+    public static Ranking findRanking(int hitCount, boolean isMatchBounsNumber) {
+        if(hitCount == SECOND.getHitCount() && isMatchBounsNumber) {
+            return SECOND;
+        }
+
         return Arrays.stream(values())
                 .filter(ranking -> ranking.hitCount == hitCount)
                 .findFirst()
