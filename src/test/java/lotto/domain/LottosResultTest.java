@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.config.LottoGameConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,27 +9,35 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottosResultTest {
 
-    @DisplayName("plusReturnMoney 상금 추가시 반영이 잘 되는지 확인")
+    @DisplayName("5개 구입해서 4등이 한번 된 경우에 LottosResult 가 제대로 만들어지는지 확인 ")
     @Test
-    void plusReturnMoneyTest() {
-        int purchase = 1000;
-        int returnMoney = 0;
-        LottosResult lottosResult = new LottosResult(purchase);
+    void lottosResultTest01() {
+        int count = 5;
+        LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts();
+        lottosWinnerCounts.reflectResult(LottoWinner.FORTH);
 
-        int winner = 1000;
-        lottosResult.plusReturnMoney(winner);
-        returnMoney += winner;
+        LottosResult lottosResult = new LottosResult(count * LottoGameConfig.PURCHASE_MONEY, lottosWinnerCounts);
         assertThat(lottosResult.ratio())
-                .isEqualTo(getExpectedRatio(purchase, returnMoney));
-
-        winner = 2000;
-        lottosResult.plusReturnMoney(winner);
-        returnMoney += winner;
-        assertThat(lottosResult.ratio())
-                .isEqualTo(getExpectedRatio(purchase, returnMoney));
+                .isEqualTo(1.0f);
     }
 
-    float getExpectedRatio(int purchase, int returnMoney) {
-        return (float) returnMoney / purchase;
+    @DisplayName("4개 구입해서 1,2,3,4 등이 각각 한번씩 된 경우에 LottosResult 가 제대로 만들어지는지 확인 ")
+    @Test
+    void lottosResultTest02() {
+        int count = 4;
+        LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts();
+        lottosWinnerCounts.reflectResult(LottoWinner.FIRST);
+        lottosWinnerCounts.reflectResult(LottoWinner.SECOND);
+        lottosWinnerCounts.reflectResult(LottoWinner.THIRD);
+        lottosWinnerCounts.reflectResult(LottoWinner.FORTH);
+
+        float expectedRatio = (LottoWinner.FIRST.getWinnerMoney() +
+                LottoWinner.SECOND.getWinnerMoney() +
+                LottoWinner.THIRD.getWinnerMoney() +
+                LottoWinner.FORTH.getWinnerMoney()) / (float) (count * LottoGameConfig.PURCHASE_MONEY);
+
+        LottosResult lottosResult = new LottosResult(count * LottoGameConfig.PURCHASE_MONEY, lottosWinnerCounts);
+        assertThat(lottosResult.ratio())
+                .isEqualTo(expectedRatio);
     }
 }

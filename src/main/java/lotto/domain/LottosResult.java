@@ -4,13 +4,18 @@ public class LottosResult {
     private final int purchaseMoney;
     private long returnMoney;
 
-    public LottosResult(int purchaseMoney) {
+    public LottosResult(int purchaseMoney, LottosWinnerCounts lottosWinnerCounts) {
         this.purchaseMoney = purchaseMoney;
-        returnMoney = 0;
+        this.returnMoney = 0;
+        reflectLottosWinner(lottosWinnerCounts);
     }
 
-    public void plusReturnMoney(long winnerMoney) {
-        returnMoney += winnerMoney;
+    private void reflectLottosWinner(LottosWinnerCounts lottosWinnerCounts) {
+        for (LottoWinner winner : LottoWinner.values()) {
+            int count = lottosWinnerCounts.winnerCount(winner);
+            long winnerMoney = winner.getWinnerMoney() * count;
+            returnMoney += winnerMoney;
+        }
     }
 
     public float ratio() {

@@ -4,7 +4,6 @@ import lotto.domain.LottoWinner;
 import lotto.domain.Lottos;
 import lotto.domain.LottosResult;
 import lotto.domain.LottosWinnerCounts;
-import lotto.service.LottoMoneyService;
 import lotto.service.LottoWinnerService;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -16,17 +15,16 @@ public class LottoGameStarter {
 
     private final LottoMachine lottoMachine = new LottoMachine();
     private final LottoWinnerService lottoWinnerService = new LottoWinnerService();
-    private final LottoMoneyService lottoMoneyService = new LottoMoneyService();
+    private final LottoMoneyChecker lottoMoneyChecker = new LottoMoneyChecker();
 
     public void start() {
         InputView.printEnterGameMoney();
         int gameMoney = InputView.scanGameMoney();
-        int purchasingCount = lottoMoneyService.calculatePurchasingCount(gameMoney);
-        Lottos lottos = purchaseLottos(purchasingCount);
+        Lottos lottos = purchaseLottos(gameMoney);
         List<Integer> winnerNumber = inputWinnerNumbers();
         List<LottoWinner> lottoWinners = calculateLottoResults(lottos, winnerNumber);
         LottosWinnerCounts lottosWinnerCounts = lottoWinnerService.makeLottosWinnerCounts(lottoWinners);
-        LottosResult lottosResult = lottoMoneyService.makeLottosResult(purchasingCount, lottosWinnerCounts);
+        LottosResult lottosResult = new LottosResult(gameMoney, lottosWinnerCounts);
         ResultView.printLottoResults(lottosWinnerCounts, lottosResult);
     }
 
@@ -45,7 +43,8 @@ public class LottoGameStarter {
         return winnerNumber;
     }
 
-    private Lottos purchaseLottos(int purchasingCount) {
+    private Lottos purchaseLottos(int gameMoney) {
+        int purchasingCount = lottoMoneyChecker.calculatePurchasingCount(gameMoney);
         Lottos lottos = lottoMachine.purchase(purchasingCount);
         ResultView.printResultPurchase(purchasingCount);
         ResultView.printLottos(lottos);
