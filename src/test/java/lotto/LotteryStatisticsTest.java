@@ -5,7 +5,8 @@ import lotto.domain.Result;
 import lotto.domain.Summary;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,22 +14,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LotteryStatisticsTest {
     @Test
     void 로또_결과() {
-        Result result1 = new Result(3, 1, 5000);
-        Result result2 = new Result(4, 1, 50000);
-        List<Result> results = new LinkedList<>();
-        results.add(result1);
-        results.add(result2);
-        Summary summary = new Summary(results);
-        assertThat(summary.sum()).isEqualTo(55000);
+        Result result1 = new Result(3, 1);
+        Result result2 = new Result(4, 1);
+
+        List<Result> results = Arrays.asList(result1, result2);
+
+        assertThat(new Summary(results).sum()).isEqualTo(55000);
     }
 
     @Test
     void 로또_수익률() {
-        Result result = new Result(3, 1, 5000);
-        List<Result> results = new LinkedList<>();
-        results.add(result);
-        Summary summary = new Summary(results);
-        Money money = new Money(10000);
-        assertThat(LotteryStatistics.earningsRate(summary, money)).isEqualTo(0.50);
+        Result result = new Result(3, 1);
+
+        List<Result> results = Collections.singletonList(result);
+
+        assertThat(LotteryStatistics.earningsRate(new Summary(results), new Money(10000))).isEqualTo(0.50);
     }
 }

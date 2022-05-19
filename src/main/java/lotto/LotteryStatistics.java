@@ -65,7 +65,7 @@ public class LotteryStatistics {
 
     private static void makeRewards(Map.Entry<Integer, Integer> entry) {
         if (entry.getKey() >= MINIMUM_WIN_NUMBER) {
-            results.add(new Result(entry.getKey(), entry.getValue(), Reward.findAmount(entry.getKey())));
+            results.add(new Result(entry.getKey(), entry.getValue()));
         }
     }
 

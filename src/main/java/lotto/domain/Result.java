@@ -5,10 +5,10 @@ public class Result {
     private int count;
     private int reward;
 
-    public Result(int matches, int count, int reward) {
+    public Result(int matches, int count) {
         this.matches = matches;
         this.count = count;
-        this.reward = reward;
+        this.reward = Reward.findAmount(matches);
     }
 
     public int matches() {
