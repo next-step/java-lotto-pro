@@ -17,4 +17,8 @@ public class Lottos{
     public List<Lotto> getLottosAsUnmodifiableList(){
         return Collections.unmodifiableList(lottos);
     }
+
+    public int price(){
+        return size() * Money.LOTTO_PRICE;
+    }
 }

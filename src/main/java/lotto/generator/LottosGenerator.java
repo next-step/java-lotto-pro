@@ -1,6 +1,7 @@
 package lotto.generator;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public class LottosGenerator {
     public static Lottos purchaseManualAndAutoLottos(Money money, List<Lotto> fixedLottos){
         Lottos manualLottos = purchaseManualLottos(fixedLottos);
-        Lottos autoLottos = purchaseAutoLottos(money.subtract(fixedLottos.size() * Money.LOTTO_PRICE));
+        Lottos autoLottos = purchaseAutoLottos(money.subtract(manualLottos.price()));
         return mergeLottos(manualLottos, autoLottos);
     }
 
@@ -20,7 +21,8 @@ public class LottosGenerator {
 
     public static Lottos purchaseAutoLottos(Money money) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < money.maxLottoCount(); i++) {
+        LottoCount purchaseCount = money.maxLottoCount();
+        for (int i = 0; i < purchaseCount.getCount(); i++) {
             lottoList.add(new Lotto(RandomLottoNumbersGenerator.generate()));
         }
         return new Lottos(lottoList);

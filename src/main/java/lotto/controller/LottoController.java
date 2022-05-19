@@ -22,23 +22,23 @@ public class LottoController {
         OutputView.printLottoResult(result, money.calculateProfit(result.winningPrice()));
     }
 
-    private static List<Lotto> readManualLottos(int maxCount) {
-        int manualCount = readValidManualCount(maxCount);
+    private static List<Lotto> readManualLottos(LottoCount maxCount) {
+        LottoCount manualCount = readValidManualCount(maxCount);
         return readManualNumbers(manualCount);
     }
 
-    private static int readValidManualCount(int maxCount) {
-        int manualCount = CustomParseUtils.stringToInteger(InputView.readManualLottosCount());
-        if (manualCount > maxCount) {
+    private static LottoCount readValidManualCount(LottoCount maxCount) {
+        LottoCount manualCount = new LottoCount(CustomParseUtils.stringToInteger(InputView.readManualLottosCount()));
+        if (!manualCount.isLessThan(maxCount)) {
             throw new IllegalArgumentException(ErrorMessageConst.ERROR_INVALID_EXCEED_MAX_LOTTO_COUNT);
         }
         return manualCount;
     }
 
-    private static List<Lotto> readManualNumbers(int manualCount) {
+    private static List<Lotto> readManualNumbers(LottoCount manualCount) {
         List<Lotto> manualLottos = new ArrayList<>();
         InputView.guideMessageToReadManualLottoNumbers();
-        for (int i = 0; i < manualCount; i++) {
+        for (int i = 0; i < manualCount.getCount(); i++) {
             List<Integer> manualNumbers = CustomParseUtils.stringToIntegerList(InputView.readSimpleLottoNumbers());
             manualLottos.add(new Lotto(manualNumbers));
         }

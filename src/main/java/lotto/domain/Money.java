@@ -8,13 +8,13 @@ public class Money {
     public static final int LOTTO_PRICE = 1000;
 
     public Money(int amount){
-        this.amount = validateMoney(amount);
+        validateMoney(amount);
+        this.amount = amount;
     }
 
-    private int validateMoney(int amount) {
+    private void validateMoney(int amount) {
         validateMoneyPositive(amount);
         validateMoneyExceedLottoPrice(amount);
-        return amount;
     }
 
     private void validateMoneyPositive(int amount) {
@@ -31,12 +31,12 @@ public class Money {
         }
     }
 
-    public int maxLottoCount() {
-        return amount / LOTTO_PRICE;
+    public LottoCount maxLottoCount() {
+        return new LottoCount(amount / LOTTO_PRICE);
     }
 
     public double calculateProfit(int changedAmount) {
-        return (double) changedAmount / (maxLottoCount() * LOTTO_PRICE);
+        return (double) changedAmount / (maxLottoCount().getCount() * LOTTO_PRICE);
     }
 
     public Money subtract(int subtractAmount) {
