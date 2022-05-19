@@ -29,7 +29,7 @@ public class LottoResponse {
 
         private List<LottoResponse.LottoDto> convertLottoDtos(final List<LottoTicket> lottos) {
             return lottos.stream()
-                    .map(lotto -> new LottoDto(lotto.getReadOnlyLottoNumbers()))
+                    .map(lotto -> new LottoDto(lotto.getLottoNumbers()))
                     .collect(Collectors.toList());
         }
     }

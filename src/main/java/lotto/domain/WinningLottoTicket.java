@@ -18,7 +18,7 @@ public class WinningLottoTicket {
     }
 
     public int countMatchNumber(final LottoTicket lottoTicket) {
-        List<Integer> winningLottoNumbers = winningLottoTicket.getReadOnlyLottoNumbers();
+        List<Integer> winningLottoNumbers = winningLottoTicket.getLottoNumbers();
 
         return (int) winningLottoNumbers.stream()
                 .filter(lottoTicket::contains)

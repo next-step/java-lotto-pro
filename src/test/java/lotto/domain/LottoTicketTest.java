@@ -28,12 +28,12 @@ class LottoTicketTest {
 
     @Test
     public void getLottoNumbers_숫자갯수() {
-        assertThat(lottoTicket.getReadOnlyLottoNumbers().size()).isEqualTo(6);
+        assertThat(lottoTicket.getLottoNumbers().size()).isEqualTo(6);
     }
 
     @Test
     public void getLottoNumbers_정렬() {
-        List<Integer> lottoNumbers = lottoTicket.getReadOnlyLottoNumbers();
+        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
 
         for (int i = 0; i < lottoNumbers.size() - 1; i++) {
             assertThat(lottoNumbers.get(i) < lottoNumbers.get(i + 1)).isTrue();
@@ -42,7 +42,7 @@ class LottoTicketTest {
 
     @Test
     public void getLottoNumbers_중복검사() {
-        List<Integer> lottoNumbers = lottoTicket.getReadOnlyLottoNumbers();
+        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
         Set<Integer> nonDuplicatedInteger = new HashSet<>(lottoNumbers);
 
         assertThat(lottoNumbers.size()).isEqualTo(nonDuplicatedInteger.size());
@@ -50,7 +50,7 @@ class LottoTicketTest {
 
     @Test
     public void contains_true() {
-        List<Integer> lottoNumbers = lottoTicket.getReadOnlyLottoNumbers();
+        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
 
         for (Integer lottoNumber : lottoNumbers) {
             assertThat(lottoTicket.contains(lottoNumber)).isTrue();
@@ -60,7 +60,7 @@ class LottoTicketTest {
     @Test
     public void contains_false() {
         List<Integer> lottoTotalNumbers = lottoNumberGenerator.generate();
-        List<Integer> lottoNumbers = lottoTicket.getReadOnlyLottoNumbers();
+        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
 
         for (Integer lottoNumber : lottoNumbers) {
             lottoTotalNumbers.remove(lottoNumber);

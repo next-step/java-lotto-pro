@@ -21,7 +21,7 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getReadOnlyLottoNumbers() {
+    public List<Integer> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
