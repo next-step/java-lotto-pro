@@ -1,13 +1,13 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
-    Lotto answer123456 = new Lotto(1, 2, 3, 4, 5, 6);
-
     @Test
     void 로또_생성() {
         assertThat(new Lotto(6, 5, 4, 3, 2, 1)).isNotNull();
@@ -31,31 +31,21 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void 당첨금_6개_일치() {
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,4,5,7:5", "1,2,3,4,7,8:4", "1,2,3,7,8,9:3", "1,2,7,8,9,10:2", "1,7,8,9,10,11:1", "7,8,9,10,11,12:0"}, delimiter = ':')
+    void 로또_비교(String numbers, int expected) {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        Winning winning = lotto.winning(answer123456);
-        assertThat(winning.getMoney()).isEqualTo(2000000000);
+        Lotto target = new Lotto(numbers);
+        assertThat(lotto.matchCount(target)).isEqualTo(expected);
     }
 
     @Test
-    void 당첨금_5개_일치() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 7);
-        Winning winning = lotto.winning(answer123456);
-        assertThat(winning.getMoney()).isEqualTo(1500000);
+    void 로또_숫자_포함() {
+        assertThat(new Lotto(1, 2, 3, 4, 5, 6).contains(Number.from(4))).isTrue();
     }
 
     @Test
-    void 당첨금_4개_일치() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 7, 8);
-        Winning winning = lotto.winning(answer123456);
-        assertThat(winning.getMoney()).isEqualTo(50000);
-    }
-
-    @Test
-    void 당첨금_3개_일치() {
-        Lotto lotto = new Lotto(1, 2, 3, 7, 8, 9);
-        Winning winning = lotto.winning(answer123456);
-        assertThat(winning.getMoney()).isEqualTo(5000);
+    void 로또_숫자_미포함() {
+        assertThat(new Lotto(1, 2, 3, 4, 5, 6).contains(Number.from(7))).isFalse();
     }
 }

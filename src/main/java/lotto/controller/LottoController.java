@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.Number;
 import lotto.domain.*;
 import lotto.view.LottoView;
 
@@ -12,7 +13,8 @@ public class LottoController {
         view.showLottos(lottos);
 
         Lotto answer = new Lotto(view.inputAnswer());
-        Winnings winnings = lottos.winnigs(answer);
+        Number bonus = Number.from(view.inputBonus());
+        Winnings winnings = lottos.winnigs(new Answer(answer, bonus));
 
         view.showStatistics(Statistics.of(charge, winnings));
     }

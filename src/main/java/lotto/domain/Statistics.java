@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class Statistics {
     private final Winnings winnings;
     private final double revenueRate;
-    private static final List<Winning> TARGET_WINNINGS = Arrays.asList(Winning.MATCH3, Winning.MATCH4, Winning.MATCH5, Winning.MATCH6);
+    private static final List<Winning> TARGET_WINNINGS = Arrays.asList(Winning.MATCH3, Winning.MATCH4, Winning.MATCH5, Winning.MATCH5_BONUS, Winning.MATCH6);
 
     private Statistics(LottoCharge charge, Winnings winnings) {
         this.winnings = winnings;

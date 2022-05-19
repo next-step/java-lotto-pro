@@ -35,7 +35,7 @@ public class Lotto {
     }
 
     public static Lotto auto() {
-        return new Lotto(new RandomNumbersGenerator().generate(LOTTO_SIZE));
+        return new Lotto(RandomNumbersGenerator.generate(LOTTO_SIZE));
     }
 
     private boolean isUnique(List<Number> numbers) {
@@ -45,14 +45,14 @@ public class Lotto {
         return distinctNumbers.size() == numbers.size();
     }
 
-    public Winning winning(Lotto answer) {
-        return Winning.from(answer.match(numbers));
+    public int matchCount(Lotto target) {
+        return (int) target.numbers.stream()
+                .filter(this::contains)
+                .count();
     }
 
-    private int match(List<Number> numbers) {
-        return (int) numbers.stream()
-                .filter(this.numbers::contains)
-                .count();
+    public boolean contains(Number number) {
+        return numbers.contains(number);
     }
 
     @Override
