@@ -69,4 +69,21 @@ class LottosTest {
         );
     }
 
+    @Test
+    void lottos를_인자로_받아_머지한다() {
+        // given
+        Lotto one = Lotto.createWithNumberLetter("1, 2, 3, 4, 5, 6");
+        Lotto two = Lotto.createWithNumberLetter("1, 2, 3, 4, 5, 7");
+
+        Lottos first = new Lottos();
+        first.add(one);
+
+        Lottos second = new Lottos();
+        second.add(two);
+        // when
+        first.merge(second);
+        // then
+        assertThat(first.count()).isEqualTo(2);
+    }
+
 }
