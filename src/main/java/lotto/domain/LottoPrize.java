@@ -30,8 +30,13 @@ public enum LottoPrize {
         return this.prize;
     }
 
+    private boolean isNormalPrize(LottoPrize lottoPrize) {
+        return !lottoPrize.equals(LottoPrize.WIN_WITH_5_MATCHES_AND_BONUS);
+    }
+
     public static LottoPrize valueOf(int numberOfMatch) {
         return Arrays.stream(LottoPrize.values())
+                .filter(prize -> prize.isNormalPrize(prize))
                 .filter(prize -> prize.getNumberOfMatch() == numberOfMatch)
                 .findAny()
                 .orElse(NONE);

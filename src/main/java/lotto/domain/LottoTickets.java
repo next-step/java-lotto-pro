@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import lotto.view.ResultView;
-
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +10,7 @@ public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(int count) {
-        this.lottoTickets = Collections.unmodifiableList(generateLottoTickets(count));
+        this.lottoTickets = new ArrayList<>(generateLottoTickets(count));
     }
 
     private List<LottoTicket> generateLottoTickets(int count) {
@@ -24,19 +23,17 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public List<LottoPrize> matchResults(LottoTicket lastWinningLottoTicket, LottoNumber bonusLottoNumber) {
-        return lottoTickets.stream()
+    public LottoPrizes matchResults(LottoTicket lastWinningLottoTicket, LottoNumber bonusLottoNumber) {
+        return new LottoPrizes(lottoTickets.stream()
                 .map(ticket -> ticket.match(lastWinningLottoTicket, hasBonusBallNumber(ticket, bonusLottoNumber)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public boolean hasBonusBallNumber(LottoTicket generatedLottoTicket, LottoNumber bonusBallNumber) {
         return generatedLottoTicket.hasBonusBallNumber(bonusBallNumber);
     }
 
-    public void printLottoTickets() {
-        for (LottoTicket lotto : lottoTickets) {
-            ResultView.printLottoTicket(lotto);
-        }
+    public List<LottoTicket> getLottoTickets() {
+        return Collections.unmodifiableList(lottoTickets);
     }
 }

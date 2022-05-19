@@ -36,6 +36,6 @@ public class InputView {
     }
 
     private static boolean isValidBonusBall(LottoNumbers lastWinningLottoNumbers, LottoNumber bonusBall) {
-        return !lastWinningLottoNumbers.contains(bonusBall);
+        return lastWinningLottoNumbers.notContains(bonusBall);
     }
 }

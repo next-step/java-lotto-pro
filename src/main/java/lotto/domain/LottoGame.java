@@ -24,7 +24,7 @@ public class LottoGame {
 
         LottoNumber receivedBonusLottoNumber = InputView.inputBonusLottoNumber(lastWinningLottoNumbers);
 
-        List<LottoPrize> matchResults = lottoTickets.matchResults(
+        LottoPrizes matchResults = lottoTickets.matchResults(
                 new LottoTicket(lastWinningLottoNumbers.getReadOnlyLottoNumbers()),
                 receivedBonusLottoNumber
         );
