@@ -42,8 +42,6 @@ public class LottoTicketTest {
                         lottoNumbers.add(new LottoNumber(Integer.parseInt(strNumber)));
                     }
 
-                    System.out.println(lottoNumbers.toString());
-
                     new LottoTicket(lottoNumbers);
                 }
             ).isInstanceOf(IllegalArgumentException.class)
