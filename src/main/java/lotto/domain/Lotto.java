@@ -16,7 +16,7 @@ public class Lotto {
 
     protected Lotto(List<Integer> lottoNumbers) {
         for (Integer number : lottoNumbers) {
-            lotto.add(new LottoNumber(number));
+            lotto.add(LottoNumber.of(number));
         }
         validateSize();
     }

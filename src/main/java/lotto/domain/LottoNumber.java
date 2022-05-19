@@ -11,15 +11,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
-    public LottoNumber(String number) {
-        try {
-            number = number.trim();
-            this.number = Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("로또 번호는 숫자여야 합니다.");
-        }
-    }
-
     public LottoNumber(Integer number) {
         this.number = number;
     }
@@ -32,12 +23,29 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumber;
     }
 
+    public static LottoNumber of(String number) {
+        LottoNumber lottoNumber = LOTTO_NUMBER_CACHE.get(getLottoNumber(number));
+        if (lottoNumber == null) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45까지입니다.");
+        }
+        return lottoNumber;
+    }
+
     private static Map<Integer, LottoNumber> createLottoNumberCache() {
         Map<Integer, LottoNumber> cache = new HashMap<>();
         for (int i = MIN_NUMBER; i < MAX_NUMBER; i++) {
             cache.put(i, new LottoNumber(i));
         }
         return Collections.unmodifiableMap(cache);
+    }
+
+    private static int getLottoNumber(String number) {
+        try {
+            number = number.trim();
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("로또 번호는 숫자여야 합니다.");
+        }
     }
 
     @Override
