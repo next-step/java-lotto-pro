@@ -8,6 +8,10 @@ public class LottoNumber {
 
     private int value;
 
+    public LottoNumber(String stringValue) {
+        this(Integer.parseInt(stringValue));
+    }
+
     public LottoNumber(int value) {
         if (validate(value)) {
             throw new IllegalArgumentException("로또 번호는 1부터 45사이의 숫자만 허용합니다.");
