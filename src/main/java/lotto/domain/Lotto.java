@@ -36,10 +36,14 @@ public class Lotto {
     }
 
     protected static List<Integer> getLottoNumbers(String numbers) {
-        return Arrays.stream(numbers.split(COMMA))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        try {
+            return Arrays.stream(numbers.split(COMMA))
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자만 입력이 가능합니다.");
+        }
     }
 
     public int match(Lotto winningLotto) {
