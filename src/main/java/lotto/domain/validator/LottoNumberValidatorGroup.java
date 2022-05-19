@@ -11,8 +11,8 @@ public class LottoNumberValidatorGroup {
 
     private LottoNumberValidatorGroup() {
         this.validators = Arrays.asList(
-            new LottoNumberSizeValidator(),
-            new NumberFormatValidator()
+            new NumberFormatValidator(),
+            new LottoNumberSizeValidator()
         );
     }
 
@@ -28,4 +28,7 @@ public class LottoNumberValidatorGroup {
         this.validators.forEach(validator -> validator.validate(lottoNo));
     }
 
+    public void validate(int lottoNo) {
+        new LottoNumberSizeValidator().validate(String.valueOf(lottoNo));
+    }
 }

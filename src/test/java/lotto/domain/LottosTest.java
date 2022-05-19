@@ -19,7 +19,7 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         정답_번호 = new WinningNumbers("1,2,3,4,5,6");
-        정답_번호.addBonusNumber(new BonusNumber("45"));
+        정답_번호.addBonusNumber(new LottoNo("45"));
 
         Lotto FIFTH_LOTTO = new Lotto(convert(Arrays.asList(4, 5, 6, 7, 8, 9)));
         Lotto FOURTH_LOTTO = new Lotto(convert(Arrays.asList(3, 4, 5, 6, 7, 8)));
