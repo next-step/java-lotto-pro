@@ -4,7 +4,7 @@ import java.util.Objects;
 import lotto.constant.ErrorMessage;
 import lotto.constant.LottoRoleConst;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber>{
 
     private final int number;
 
@@ -36,6 +36,11 @@ public class LottoNumber {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(this.number,o.number);
     }
 
     @Override
