@@ -53,6 +53,7 @@ public class LottoFactory {
     }
 
     public static Lotto createAuto() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(LottoFactory.lottoNumbers);
         Collections.shuffle(lottoNumbers);
         return new Lotto(
                 lottoNumbers.stream().
