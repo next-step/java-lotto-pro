@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    public static final int LOTTO_MIN_NUMBER = 1;
-    public static final int LOTTO_MAX_NUMBER = 45;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
     private static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = initLottoNumberCache();
 
     private final int lottoNumber;
@@ -25,7 +25,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static Map<Integer, LottoNumber> initLottoNumberCache() {
         Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
-        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
+        for (int i = MIN; i <= MAX; i++) {
             lottoNumberCache.put(i, new LottoNumber(i));
         }
         return lottoNumberCache;
@@ -38,7 +38,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private boolean isNotLottoNumberRange(int lottoNumber) {
-        return lottoNumber < LOTTO_MIN_NUMBER || lottoNumber > LOTTO_MAX_NUMBER;
+        return lottoNumber < MIN || lottoNumber > MAX;
     }
 
     @Override

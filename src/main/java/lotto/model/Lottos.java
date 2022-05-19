@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import lotto.generator.InputLottoNumberGenerator;
 import lotto.generator.RandomLottoNumberGenerator;
 
 public class Lottos {
@@ -30,17 +29,17 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public LottoStatistics lottoStatistics(Lotto winningLotto) {
+    public LottoStatistics lottoStatistics(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         Map<LottoRanking, Integer> lottoStatistics = new EnumMap<>(LottoRanking.class);
         for (Lotto lotto : this.lottos) {
-            LottoRanking lottoRanking = lotto.lottoRanking(winningLotto);
+            LottoRanking lottoRanking = lotto.lottoRanking(winningLotto, bonusLottoNumber);
             lottoStatistics.put(lottoRanking, lottoStatistics.getOrDefault(lottoRanking, ZERO_NUM) + EXTRA_NUM);
         }
         return new LottoStatistics(lottoStatistics);
     }
 
     public Money totalPrice() {
-        return Money.valueOf(Math.multiplyExact(lottos.size(), Lotto.LOTTO_PRICE));
+        return Money.valueOf(Math.multiplyExact(lottos.size(), Lotto.PRICE));
     }
 
     public List<Lotto> readOnlyLottos() {
