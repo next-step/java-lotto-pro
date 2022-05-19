@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import study.lotto.dto.BonusBall;
-import study.lotto.dto.PurchasePrice;
+import study.lotto.domain.lottomachine.Price;
 import study.lotto.dto.PurchasedLotto;
 import study.lotto.dto.PurchasedLottos;
 import study.lotto.dto.WinningLotto;
@@ -18,8 +18,8 @@ public class LottoView {
         this.userInterface = userInterface;
     }
 
-    public PurchasePrice getPurchasePrice() {
-        return new PurchasePrice(userInterface.getUserInput("구입금액을 입력해 주세요.\n"));
+    public Price getPurchasePrice() {
+        return new Price(userInterface.getUserInput("구입금액을 입력해 주세요.\n"));
     }
 
     public void showPurchaseResult(PurchasedLottos purchasedLottos) {
