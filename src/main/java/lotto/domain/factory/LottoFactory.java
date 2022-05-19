@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class LottoFactory {
-    private static final List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.lottoNumbersCache.values());
     private static final String COMMA_DELIMITER = ",";
     private static final String LOTTO_PATTERN_REGEX = "^[\\d,\\s]*$";
     private static final Pattern lottoNumbersPattern = Pattern.compile(LOTTO_PATTERN_REGEX);
@@ -53,7 +52,7 @@ public class LottoFactory {
     }
 
     public static Lotto createAuto() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>(LottoFactory.lottoNumbers);
+        List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.lottoNumbersCache.values());
         Collections.shuffle(lottoNumbers);
         return new Lotto(
                 lottoNumbers.stream().
