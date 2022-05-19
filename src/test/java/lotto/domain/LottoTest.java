@@ -11,7 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoTest {
-
     @Test
     @DisplayName("객체 생성시 로또번호가 오름차순으로 정렬된다")
     void sort() {
@@ -42,4 +41,15 @@ class LottoTest {
                 .withMessage("로또번호가 6개가 아닙니다.");
     }
 
+    @Test
+    @DisplayName("로또번호 1,2,3,4,5,6 멤버변수에 6이 포함되어 있으면 true 를 반환한다")
+    void containsTrue() {
+        assertThat(LottoFactory.create("1,2,3,4,5,6").contains(LottoNumber.of("6"))).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또번호 1,2,3,4,5,6 멤버변수에 7이 없으면 false 를 반환한다")
+    void containsFalse() {
+        assertThat(LottoFactory.create("1,2,3,4,5,6").contains(LottoNumber.of("7"))).isFalse();
+    }
 }
