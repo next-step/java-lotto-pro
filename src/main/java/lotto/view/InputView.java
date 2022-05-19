@@ -1,9 +1,7 @@
 package lotto.view;
 
 import lotto.constant.ViewMessageConst;
-import lotto.domain.Lotto;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {

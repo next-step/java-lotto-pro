@@ -24,8 +24,8 @@ public class LottoCountTest {
     @Test
     @DisplayName("LottoCount 비교 테스트")
     void LottoCount_비교_테스트() {
-        LottoCount lottoCount1 = new LottoCount(10);
-        LottoCount lottoCount2 = new LottoCount(20);
-        assertThat(lottoCount1.isLessThan(lottoCount2)).isTrue();
+        LottoCount lottoCount1 = new LottoCount(20);
+        LottoCount lottoCount2 = new LottoCount(10);
+        assertThat(lottoCount1.isGreaterThan(lottoCount2)).isTrue();
     }
 }
