@@ -7,12 +7,20 @@ import java.util.stream.StreamSupport;
 public class Lotto implements Iterable<LottoNumbers> {
     private final List<LottoNumbers> lotto;
 
-    public Lotto() {
+    private Lotto() {
         this.lotto = new ArrayList<>();
     }
 
-    public Lotto(Lotto lotto) {
+    private Lotto(Lotto lotto) {
         this.lotto = StreamSupport.stream(lotto.spliterator(), false).collect(Collectors.toList());
+    }
+
+    public static Lotto empty() {
+        return new Lotto();
+    }
+
+    public static Lotto of(Lotto lotto) {
+        return new Lotto(lotto);
     }
 
     public void add(LottoNumbers lottoNumbers) {
