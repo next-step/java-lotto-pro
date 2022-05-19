@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    private static final int LOTTO_NUMBER_SIZE = 6;
+    public static final int SIZE = 6;
     private static final Money LOTTO_PRICE = Money.from(1000);
 
     private final Set<LottoNumber> lottoNumbers;
@@ -40,14 +40,14 @@ public class Lotto {
     }
 
     private void validateNumbersCount(LottoNumber[] lottoNumbers) {
-        if (LOTTO_NUMBER_SIZE != lottoNumbers.length) {
-            throw new IllegalArgumentException(String.format("로또는 %d자리 숫자이어야 합니다.", LOTTO_NUMBER_SIZE));
+        if (SIZE != lottoNumbers.length) {
+            throw new IllegalArgumentException(String.format("로또는 %d자리 숫자이어야 합니다.", SIZE));
         }
     }
 
     private boolean hasDuplicatedLottoNumber(LottoNumber[] lottoNumbers) {
         Set<LottoNumber> nonDuplicatedNumbers = new HashSet<>(Arrays.asList(lottoNumbers));
-        return nonDuplicatedNumbers.size() != LOTTO_NUMBER_SIZE;
+        return nonDuplicatedNumbers.size() != SIZE;
     }
 
     public List<LottoNumber> sortedLottoNumbers() {
