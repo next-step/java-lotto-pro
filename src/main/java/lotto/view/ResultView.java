@@ -29,6 +29,7 @@ public class ResultView {
 
     public static void printLottosView(Lottos lottos) {
         StringBuilder totalLottoNumberView = new StringBuilder();
+        totalLottoNumberView.append(ENTER);
         totalLottoNumberView.append(resultPurchaseView(lottos));
         totalLottoNumberView.append(ENTER);
         for (Lotto lotto : lottos.getLottos()) {

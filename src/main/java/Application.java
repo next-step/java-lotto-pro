@@ -50,7 +50,7 @@ public class Application {
     private Lottos inputSelfLottos(LottoPaper lottoPaper) throws IOException {
         List<Lotto> lottos = new ArrayList<>();
         for (int lottoCount = 0; lottoCount < lottoPaper.getSelfCount(); lottoCount++) {
-            String selfNumbersWord = InputConsoleUtils.BUFFERED_READER.readLine();
+            String selfNumbersWord = InputConsoleUtils.readLine();
             List<String> selfNumberWords  = InputStringUtils.nonSpaceSplit(selfNumbersWord, DELIMITER_COMMA);
             lottos.add(new Lotto(new LottoNumbers(selfNumberWords)));
         }
@@ -89,9 +89,13 @@ public class Application {
     }
 
     private WinningLotto createWinningLotto() throws IOException {
-        LottoNumbers winningLottoNumbers = inputLottoNumbers(LottoInputMessage.WINNING_NUMBERS_MESSAGE);
-        LottoNumber bonusNumber = inputLottoNumber(LottoInputMessage.BONUS_NUMBER_MESSAGE);
-        return new WinningLotto(winningLottoNumbers, bonusNumber);
+        try {
+            LottoNumbers winningLottoNumbers = inputLottoNumbers(LottoInputMessage.WINNING_NUMBERS_MESSAGE);
+            LottoNumber bonusNumber = inputLottoNumber(LottoInputMessage.BONUS_NUMBER_MESSAGE);
+            return new WinningLotto(winningLottoNumbers, bonusNumber);
+        }catch (IllegalArgumentException e){
+            return createWinningLotto();
+        }
     }
 
     private LottoNumbers inputLottoNumbers(String message) throws IOException {
