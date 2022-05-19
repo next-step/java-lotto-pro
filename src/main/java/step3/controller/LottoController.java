@@ -48,7 +48,7 @@ public class LottoController {
     private void setWinnerLotto() {
         try {
             String winnerLottoSource = inputView.getWinnerLotto();
-            lottoMachine.setWinnerLotto(winnerLottoSource);
+            lottoMachine.setWinnerLottoTicket(winnerLottoSource);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             setWinnerLotto();

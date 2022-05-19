@@ -29,9 +29,9 @@ public class LottoMachineTest {
     @CsvSource(value = {"1,2,3,4,5,6:false", "1,2,3,4,5:true", "a,b,c,d,e,f:true"}, delimiter = ':')
     public void setWinnerTicket(String manualLottoSource, boolean isThrowable) {
         if (isThrowable) {
-            assertThatThrownBy(() -> lottoMachine.setWinnerLotto(manualLottoSource)).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> lottoMachine.setWinnerLottoTicket(manualLottoSource)).isInstanceOf(IllegalArgumentException.class);
         } else {
-            assertDoesNotThrow(() -> lottoMachine.setWinnerLotto(manualLottoSource));
+            assertDoesNotThrow(() -> lottoMachine.setWinnerLottoTicket(manualLottoSource));
         }
     }
 
@@ -45,7 +45,7 @@ public class LottoMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"1:false", "2:false", "40:false", "3:true", "-a:true", "-1:true"}, delimiter = ':')
     public void setBonusTest(String bonusElement, boolean isThrowable) {
-        lottoMachine.setWinnerLotto("3,4,5,6,7,8");
+        lottoMachine.setWinnerLottoTicket("3,4,5,6,7,8");
         if (isThrowable) {
             assertThatThrownBy(() -> lottoMachine.setBonusNumber(bonusElement)).isInstanceOf(IllegalArgumentException.class);
         } else {
@@ -57,16 +57,16 @@ public class LottoMachineTest {
     @CsvSource(value = {"1,2,3,4,5,6:false", "-a:true", "1,2,3,4,5:true", "-1,2,3,4,5,6:true"}, delimiter = ':')
     public void setWinnerLottoTest(String winnerSource, boolean isThrowable) {
         if (isThrowable) {
-            assertThatThrownBy(() -> lottoMachine.setWinnerLotto(winnerSource)).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> lottoMachine.setWinnerLottoTicket(winnerSource)).isInstanceOf(IllegalArgumentException.class);
         } else {
-            assertDoesNotThrow(() -> lottoMachine.setWinnerLotto(winnerSource));
+            assertDoesNotThrow(() -> lottoMachine.setWinnerLottoTicket(winnerSource));
         }
     }
 
     @Test
     @DisplayName("각 로또별 매칭 갯수를 HashMap으로 반환한다")
     public void checkWinTest() {
-        lottoMachine.setWinnerLotto("1,2,3,4,5,6");
+        lottoMachine.setWinnerLottoTicket("1,2,3,4,5,6");
         lottoMachine.setBonusNumber("7");
         List<LottoTicket> lottoTickets = new ArrayList<>();
 

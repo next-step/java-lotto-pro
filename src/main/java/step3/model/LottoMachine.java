@@ -23,7 +23,7 @@ public class LottoMachine {
     private final int MATCH_COUNT_BASE = 0;
     private final int LOTTO_PRICE = 1_000;
     private LottoElement bonusNumber;
-    private LottoTicket winnerLotto;
+    private LottoTicket winnerLottoTicket;
     private final String SET_BONUS_NUMBER_EXCEPTION_MSG = "정답티켓과 다른 번호를 설정해야합니다";
     private final String CANT_BUY_LOTTO_EXCEPTION = "돈은 최소 " + LOTTO_PRICE + "이상 입력해야합니다";
 
@@ -58,7 +58,7 @@ public class LottoMachine {
         int isExist = 1;
         boolean validateResult = true;
         try {
-            int bonusExistInWinnerTicket = winnerLotto.getMatchCountWith(Arrays.asList(new LottoElement(Integer.parseInt(lottoElementSource))));
+            int bonusExistInWinnerTicket = winnerLottoTicket.getMatchCountWith(Arrays.asList(new LottoElement(Integer.parseInt(lottoElementSource))));
             validateResult = bonusExistInWinnerTicket != isExist;
         } catch (NumberFormatException e) {
             validateResult = false;
@@ -70,8 +70,8 @@ public class LottoMachine {
         }
     }
 
-    public void setWinnerLotto(String winnerSource) {
-        winnerLotto = makeManualLottoTicket(winnerSource);
+    public void setWinnerLottoTicket(String winnerSource) {
+        winnerLottoTicket = makeManualLottoTicket(winnerSource);
     }
 
     private LottoTicket makeManualLottoTicket(String manualLottoSource) {
@@ -80,14 +80,15 @@ public class LottoMachine {
 
     }
 
-    public HashMap<LottoReward, Integer> checkWin(List<LottoTicket> lottoTickets) {
+    public HashMap<LottoReward, Integer> checkWin(List<LottoTicket> userLottoTickets) {
+        int isMatch = 1;
         LinkedHashMap<LottoReward, Integer> statistics = new LinkedHashMap<>();
         initStatistics(statistics);
-        for (LottoTicket lottoTicket : lottoTickets) {
-            int matchNumber = lottoTicket.getMatchCountWith(winnerLotto.getLottoNumbers());
-            int matchBonus = lottoTicket.getMatchCountWith(Arrays.asList(bonusNumber));
-            LottoReward lottoReward = LottoReward.valueOf(matchNumber, matchBonus == 1);
-            statistics.replace(lottoReward, statistics.get(lottoReward) + 1);
+        for (LottoTicket lottoTicket : userLottoTickets) {
+            int matchCountLottoTicketWithUserAndWinner = lottoTicket.getMatchCountWith(winnerLottoTicket.getLottoNumbers());
+            boolean haveBonusNumberInUserLottoTicket = lottoTicket.getMatchCountWith(Arrays.asList(bonusNumber)) == isMatch;
+            LottoReward lottoReward = LottoReward.valueOf(matchCountLottoTicketWithUserAndWinner, haveBonusNumberInUserLottoTicket);
+            statistics.replace(lottoReward, statistics.get(lottoReward) + isMatch);
         }
         return statistics;
     }
