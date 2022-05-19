@@ -22,8 +22,8 @@ public class LottoApp {
         int bonus = InputView.inputBonusNumber();
         WinLotto winLotto = new WinLotto(numbers, bonus);
 
-        Statistics statistics = new Statistics(winLotto, autoLottos, manualLottos);
-        OutputView.outputResult(statistics.getResultMap());
+        Statistics statistics = new Statistics();
+        OutputView.outputResult(statistics.culculate(winLotto, autoLottos, manualLottos));
         OutputView.outputResultProfit(statistics.getProfit());
     }
 }

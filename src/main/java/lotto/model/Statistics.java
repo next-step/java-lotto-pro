@@ -14,16 +14,11 @@ public class Statistics {
         put(Rank.valueOf(0, false), 0);
     }};
 
-    public Statistics(WinLotto winLotto, List<Lotto> lottos) {
-        lottos.forEach(lotto -> compareNumber(winLotto, lotto));
-    }
+    public Statistics() {}
 
-    public Statistics(WinLotto winLotto, List<Lotto> autoLottos, List<Lotto> manualLottos) {
+    public Map<Rank, Integer> culculate(WinLotto winLotto, List<Lotto> autoLottos, List<Lotto> manualLottos) {
         manualLottos.forEach(lotto -> compareNumber(winLotto, lotto));
         autoLottos.forEach(lotto -> compareNumber(winLotto, lotto));
-    }
-
-    public Map<Rank, Integer> getResultMap() {
         return resultMap;
     }
 
