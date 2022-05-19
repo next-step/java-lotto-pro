@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import lotto.constants.MessageConstants;
 
@@ -12,13 +14,29 @@ public class InputView {
         return price;
     }
 
-    private static String inputString() {
+    public static String inputString() {
         return scanner.nextLine();
     }
 
     public static int inputPurchaseAmount() {
         System.out.println(MessageConstants.INPUT_PURCHASE_AMOUNT);
         return inputPrice();
+    }
+
+    public static String inputManualLottoCount() {
+        System.out.println(MessageConstants.INPUT_MANUAL_LOTTO_COUNT);
+        return inputString();
+    }
+
+    public static List<String> inputManualLottoNumber(int manualLottoCount) {
+        System.out.println(MessageConstants.INPUT_MANUAL_LOTTO_NUMBERS);
+
+        List<String> manualLottos = new ArrayList<>();
+        for (int i=0; i<manualLottoCount; i++) {
+            manualLottos.add(inputString());
+        }
+
+        return manualLottos;
     }
 
     public static String inputWinningNumbers() {

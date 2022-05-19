@@ -1,15 +1,24 @@
 package lotto.view;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.Map;
 import lotto.constants.MessageConstants;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
 import lotto.domain.Rank;
 
 public class OutputView {
 
     public static void printPurchaseCount(int count) {
         System.out.printf(MessageConstants.OUTPUT_PURCHASE_COUNT, count);
+    }
+
+    public static void printPurchaseCountByLottoType(int manualCount, int autoCount) {
+        System.out.printf(MessageConstants.OUTPUT_PURCHASE_COUNT_BY_LOTTO_TYPE, manualCount,
+            autoCount);
+        System.out.println();
     }
 
     public static void printLottoStats(Map<Rank, Integer> rankMap) {
@@ -32,7 +41,11 @@ public class OutputView {
     }
 
     public static void printLottoNumbers(List<Lotto> lottos) {
-        lottos.forEach(lotto -> System.out.println(lotto.getNumbers()));
+        lottos.forEach(lotto -> {
+            List<Integer> numbers = lotto.getNumbers().stream().map(LottoNo::getLottoNo)
+                .collect(toList());
+            System.out.println(numbers);
+        });
     }
 
     public static void printProfitRate(double rate) {
