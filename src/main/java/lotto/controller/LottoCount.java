@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
+import lotto.domain.LottoNumberGenerator;
 import lotto.domain.Lottos;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class LottoCount {
         return count;
     }
 
-    public Lottos generateLottos(LottoGenerator generator) {
+    public Lottos generateLottos(LottoNumberGenerator generator) {
         Lottos lottos = new Lottos();
         for (int i = 0; i < count; i++) {
             List<Integer> numbers = generator.generate();

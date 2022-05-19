@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoGenerator;
+import lotto.domain.LottoNumberGenerator;
 import lotto.domain.Lottos;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ class LottoCountTest {
         // given
         LottoCount lottoCount = new LottoCount(3);
         // when
-        Lottos result = lottoCount.generateLottos(new LottoGenerator());
+        Lottos result = lottoCount.generateLottos(new LottoNumberGenerator());
         // then
         assertThat(result.count()).isEqualTo(3);
     }

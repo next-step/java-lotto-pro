@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toList;
 import static lotto.domain.Lotto.LOTTO_NUMBER_SIZE;
 
-public class LottoGenerator {
+public class LottoNumberGenerator {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
@@ -18,7 +18,7 @@ public class LottoGenerator {
 
     private final List<Integer> lotto;
 
-    public LottoGenerator() {
+    public LottoNumberGenerator() {
         this.lotto = LOTTO_GENERATOR;
     }
 

@@ -4,11 +4,11 @@ import lotto.controller.LottoCount;
 
 public class AutoLottoGenerator {
 
-    private final LottoGenerator generator;
+    private final LottoNumberGenerator generator;
     private final LottoCount lottoCount;
 
     public AutoLottoGenerator(LottoCount lottoCount) {
-        this.generator = new LottoGenerator();
+        this.generator = new LottoNumberGenerator();
         this.lottoCount = lottoCount;
     }
 

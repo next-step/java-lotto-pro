@@ -6,10 +6,10 @@ import java.util.List;
 
 public class LottoMachine {
 
-    private final LottoGenerator lottoGenerator;
+    private final LottoNumberGenerator lottoNumberGenerator;
 
     public LottoMachine() {
-        lottoGenerator = new LottoGenerator();
+        lottoNumberGenerator = new LottoNumberGenerator();
     }
 
     public Lottos buy(Money money) {
@@ -17,7 +17,7 @@ public class LottoMachine {
 
         Lottos lottos = new Lottos();
         for (int i = 0; i < purchaseCount.count(); i++) {
-            List<Integer> numbers = lottoGenerator.generate();
+            List<Integer> numbers = lottoNumberGenerator.generate();
             lottos.add(Lotto.create(numbers));
         }
         return lottos;
