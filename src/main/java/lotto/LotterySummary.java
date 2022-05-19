@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LotterySummary {
-    private static final int MINIMUM_WIN_NUMBER = 3;
-    private static final int MAXIMUM_WIN_NUMBER = 6;
+    private static final int MINIMUM_WINNING_NUMBERS_MATCH = 3;
+    private static final int MAXIMUM_WINNING_NUMBERS_MATCH = 6;
 
     private static int count;
     private static Map<Integer, Integer> matches;
@@ -35,7 +35,7 @@ public class LotterySummary {
 
     private static void init() {
         matches = new HashMap<>();
-        for (int idx = MINIMUM_WIN_NUMBER; idx <= MAXIMUM_WIN_NUMBER; idx++) {
+        for (int idx = MINIMUM_WINNING_NUMBERS_MATCH; idx <= MAXIMUM_WINNING_NUMBERS_MATCH; idx++) {
             matches.put(idx, 0);
         }
         results = new LinkedList<>();
@@ -62,7 +62,7 @@ public class LotterySummary {
     }
 
     private static void summary(Map.Entry<Integer, Integer> entry) {
-        if (entry.getKey() >= MINIMUM_WIN_NUMBER) {
+        if (entry.getKey() >= MINIMUM_WINNING_NUMBERS_MATCH && entry.getKey() <= MAXIMUM_WINNING_NUMBERS_MATCH) {
             results.add(new Result(entry.getKey(), entry.getValue()));
         }
     }
