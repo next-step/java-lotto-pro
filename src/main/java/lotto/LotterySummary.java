@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class LotteryStatistics {
+public class LotterySummary {
     private static final int MINIMUM_WIN_NUMBER = 3;
     private static final int MAXIMUM_WIN_NUMBER = 6;
 
@@ -16,26 +16,32 @@ public class LotteryStatistics {
     private static Map<Integer, Integer> matches;
     private static List<Result> results;
 
-    private LotteryStatistics() {
+    private LotterySummary() {
     }
 
-    public static void countMatches(Lottery winning, Lotteries lotteries) {
-        initMatches();
+    public static Summary createWinningDetails(Lottery winning, Lotteries lotteries) {
+        init();
         for (Lottery lottery : lotteries.list()) {
-            initCount();
+            clear();
             compare(winning, lottery);
             count();
         }
+
+        for (Map.Entry<Integer, Integer> entry : matches.entrySet()) {
+            summary(entry);
+        }
+        return new Summary(results);
     }
 
-    private static void initMatches() {
+    private static void init() {
         matches = new HashMap<>();
         for (int idx = MINIMUM_WIN_NUMBER; idx <= MAXIMUM_WIN_NUMBER; idx++) {
             matches.put(idx, 0);
         }
+        results = new LinkedList<>();
     }
 
-    private static void initCount() {
+    private static void clear() {
         count = 0;
     }
 
@@ -55,21 +61,9 @@ public class LotteryStatistics {
         matches.put(count, matches.getOrDefault(count, 0) + 1);
     }
 
-    public static Summary result() {
-        results = new LinkedList<>();
-        for (Map.Entry<Integer, Integer> entry : matches.entrySet()) {
-            makeRewards(entry);
-        }
-        return new Summary(results);
-    }
-
-    private static void makeRewards(Map.Entry<Integer, Integer> entry) {
+    private static void summary(Map.Entry<Integer, Integer> entry) {
         if (entry.getKey() >= MINIMUM_WIN_NUMBER) {
             results.add(new Result(entry.getKey(), entry.getValue()));
         }
-    }
-
-    public static double earningsRate(Summary summary, Money money) {
-        return 1.0 * summary.sum() / money.value();
     }
 }

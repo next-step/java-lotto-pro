@@ -61,7 +61,7 @@ public class LotteryGame {
     private static void printSummary(Money money, Lottery winning, Lotteries lotteries) {
         printWinningStatistics();
         printDottedLine();
-        Summary summary = countMatches(winning, lotteries);
+        Summary summary = createWinningDetails(winning, lotteries);
         printLotteriesResult(summary);
         printLotteriesEarningsRate(summary, money);
     }
@@ -74,9 +74,8 @@ public class LotteryGame {
         Message.printDottedLine(9);
     }
 
-    private static Summary countMatches(Lottery winning, Lotteries lotteries) {
-        LotteryStatistics.countMatches(winning, lotteries);
-        return LotteryStatistics.result();
+    private static Summary createWinningDetails(Lottery winning, Lotteries lotteries) {
+        return LotterySummary.createWinningDetails(winning, lotteries);
     }
 
     private static void printLotteriesResult(Summary summary) {
@@ -86,6 +85,6 @@ public class LotteryGame {
     }
 
     private static void printLotteriesEarningsRate(Summary summary, Money money) {
-        Message.printLotteriesEarningsRate(LotteryStatistics.earningsRate(summary, money));
+        Message.printLotteriesEarningsRate(YieldCalculator.earningsRate(summary, money));
     }
 }

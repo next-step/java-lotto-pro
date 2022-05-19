@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LotteryStatisticsTest {
+class LotterySummaryTest {
     @Test
     void 로또_결과() {
         Result result1 = new Result(3, 1);
@@ -28,6 +28,6 @@ class LotteryStatisticsTest {
 
         List<Result> results = Collections.singletonList(result);
 
-        assertThat(LotteryStatistics.earningsRate(new Summary(results), new Money(10000))).isEqualTo(0.50);
+        assertThat(YieldCalculator.earningsRate(new Summary(results), new Money(10000))).isEqualTo(0.50);
     }
 }
