@@ -29,8 +29,8 @@ public class Lotto {
             countOfMatch += countIfContainLottoNumber(winningLotto, lottoNumber);
         }
         validateCountOfMatch(countOfMatch);
-        boolean isBonusMatched = containLottoNumber(bonusLottoNumber);
-        int finalCountOfMatch = countOfMatch;
+        final boolean isBonusMatched = containLottoNumber(bonusLottoNumber);
+        final int finalCountOfMatch = countOfMatch;
         return Arrays.stream(LottoRanking.values())
                 .filter(ranking -> ranking.predicateWithCountOfMatchAndIsBonusMatched()
                         .test(finalCountOfMatch, isBonusMatched))
