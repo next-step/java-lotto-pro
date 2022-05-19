@@ -6,7 +6,7 @@ public class LottoElement implements Comparable<LottoElement>, Cloneable {
 
     private final int element;
     private final int LOTTO_MIN = 1;
-    private final int LOTTO_MAX = 46;
+    private final int LOTTO_MAX = 45;
     private final String CREATE_ELEMENT_EXCEPTION_MSG = "로또 번호는 %s 이상 %s 이하의 숫자여야합니다";
     private final String COPY_ELEMENT_EXCEPTION_MSG = "LottoElement 복사중 에러가 발생하였습니다";
 

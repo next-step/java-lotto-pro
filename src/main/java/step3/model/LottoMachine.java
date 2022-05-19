@@ -17,7 +17,7 @@ import step3.enums.LottoReward;
 public class LottoMachine {
 
     private final int LOTTO_MIN = 1;
-    private final int LOTTO_MAX = 46;
+    private final int LOTTO_MAX = 45;
     private final int LOTTO_ELEMENTS_SIZE = 6;
     private List<Integer> LOTTO_VALID_ELEMENTS = IntStream.rangeClosed(LOTTO_MIN, LOTTO_MAX).boxed().collect(Collectors.toList());
     private final int MATCH_COUNT_BASE = 0;
