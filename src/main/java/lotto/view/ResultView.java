@@ -5,11 +5,12 @@ import lotto.constant.ErrorMessage;
 import lotto.constant.LottoRank;
 import lotto.model.Lotto;
 import lotto.model.LottoGameResult;
+import lotto.model.LottoPaper;
 import lotto.model.Lottos;
 
 public class ResultView {
 
-    private static final String PURCHASE_MESSAGE = "%d개를 구매했습니다.";
+    private static final String PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String TOTAL_RESULT_HEADER_MESSAGE = "당첨 통계";
     private static final String TOTAL_RESULT_UNDER_LINE = "---------";
     private static final String RESULT_MATCH_MESSAGE = "%d개 일치 (%d원)- %d개";
@@ -23,14 +24,14 @@ public class ResultView {
         throw new IllegalStateException(ErrorMessage.CONSTANT_CLASS);
     }
 
-    private static String resultPurchaseView(Lottos lottos) {
-        return String.format(PURCHASE_MESSAGE, lottos.lottoCount());
+    private static String resultPurchaseView(LottoPaper lottoPaper) {
+        return String.format(PURCHASE_MESSAGE,lottoPaper.getSelfCount(),lottoPaper.randomCount());
     }
 
-    public static void printLottosView(Lottos lottos) {
+    public static void printLottosView(Lottos lottos, LottoPaper lottoPaper) {
         StringBuilder totalLottoNumberView = new StringBuilder();
         totalLottoNumberView.append(ENTER);
-        totalLottoNumberView.append(resultPurchaseView(lottos));
+        totalLottoNumberView.append(resultPurchaseView(lottoPaper));
         totalLottoNumberView.append(ENTER);
         for (Lotto lotto : lottos.getLottos()) {
             totalLottoNumberView.append(Arrays.toString(lotto.convertNumbers()));

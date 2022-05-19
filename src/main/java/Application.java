@@ -31,7 +31,7 @@ public class Application {
         LottoPaper lottoPaper = lottoStore.issueLottoPaper();
         LottoGenerator lottoGenerator = new LottoGeneratorRandomImpl();
         Lottos lottos = lottoGenerator.generateLottos(createSelfLottos(lottoPaper), lottoPaper);
-        ResultView.printLottosView(lottos);
+        ResultView.printLottosView(lottos,lottoPaper);
 
         WinningLotto winningLotto = createWinningLotto();
         LottoGameResult lottoGameResult = winningLotto.compareLottos(lottos);
