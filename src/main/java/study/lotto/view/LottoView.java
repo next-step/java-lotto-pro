@@ -7,8 +7,9 @@ import java.util.stream.Collectors;
 import study.lotto.domain.Lotto;
 import study.lotto.domain.LottoNumber;
 import study.lotto.domain.Lottos;
-import study.lotto.domain.lottomachine.Price;
 import study.lotto.domain.draw.WinningStatistics;
+import study.lotto.domain.lottomachine.LottoCount;
+import study.lotto.domain.lottomachine.Price;
 
 public class LottoView {
     private final ConsoleUserInterface userInterface;
@@ -19,6 +20,10 @@ public class LottoView {
 
     public Price getPurchasePrice() {
         return new Price(userInterface.getUserInput("구입금액을 입력해 주세요.\n"));
+    }
+
+    public LottoCount getManualLottoCount() {
+        return new LottoCount(userInterface.getUserInput("수동으로 구매할 로또 수를 입력해 주세요.\n"));
     }
 
     public void showPurchaseResult(Lottos purchasedLottos) {

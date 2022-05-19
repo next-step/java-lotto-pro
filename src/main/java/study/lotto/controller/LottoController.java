@@ -7,6 +7,7 @@ import study.lotto.domain.draw.LottoDraw;
 import study.lotto.domain.lottomachine.LottoMachine;
 import study.lotto.domain.lottomachine.LottoPurchaseHistory;
 import study.lotto.domain.draw.WinningStatistics;
+import study.lotto.domain.lottomachine.Price;
 import study.lotto.view.LottoView;
 
 public class LottoController {
@@ -36,7 +37,9 @@ public class LottoController {
 
     private LottoPurchaseHistory purchaseLotto() {
         LottoMachine machine = getLottoMachine();
-        return machine.issueLotto(view.getPurchasePrice());
+        Price purchasePrice = view.getPurchasePrice();
+        view.getManualLottoCount();
+        return machine.issueLotto(purchasePrice);
     }
 
     private LottoMachine getLottoMachine() {
