@@ -25,7 +25,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(int number) {
-        return LOTTO_NUMBER_CACHE.get(number);
+        LottoNumber lottoNumber = LOTTO_NUMBER_CACHE.get(number);
+        if (lottoNumber == null) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45까지입니다.");
+        }
+        return lottoNumber;
     }
 
     private static Map<Integer, LottoNumber> createLottoNumberCache() {

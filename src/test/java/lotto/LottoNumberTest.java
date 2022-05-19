@@ -23,4 +23,13 @@ class LottoNumberTest {
         // then
         assertThat(number).isSameAs(same);
     }
+
+    @Test
+    void 로또넘버는_1부터_45까지의_숫자이다() {
+        // when and then
+        assertThatThrownBy(() ->
+                LottoNumber.of(46)
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
