@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class ManualLottoGenerator {
+public class ManualLottoGenerator implements LottoGenerator {
 
     private final ManualLottoNumbers lottoNumbers;
 
@@ -8,6 +8,7 @@ public class ManualLottoGenerator {
         this.lottoNumbers = lottoNumbers;
     }
 
+    @Override
     public Lottos generate() {
         return lottoNumbers.convertLottos();
     }
