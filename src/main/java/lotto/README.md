@@ -29,6 +29,7 @@
 
 ### 로또 step5 추가 요구사항
 - 원시값과 문자열을 포장하라
+  - Lotto 번호를 LottoNo 로 래핑한다
 - 예외처리를 통해 에러가 발생되지 않도록 하라
 - WinningNumbersValidator 의 이름을 재사용 가능한 이름으로 변경하라
   - 공통으로 쓰일수 있는 LottoNumberValidator 로 변경한다
