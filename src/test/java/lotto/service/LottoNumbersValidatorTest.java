@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -15,6 +16,17 @@ class LottoNumbersValidatorTest {
     @MethodSource("numbersNotHavingSixNumbers")
     @DisplayName("번호가 6개가 아니면 IllegalArgumentException을 발생시킨다")
     void when_amount_of_numbers_is_not_six_should_throw_IllegalArgumentException(final List<Integer> numbers) {
+        // when and then
+        Assertions.assertThatThrownBy(() -> LottoNumbersValidator.validateNumbers(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("중복되는 번호가 있으면 IllegalArgumentException을 발생시킨다")
+    void check_duplication() {
+        // given
+        final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
+
         // when and then
         Assertions.assertThatThrownBy(() -> LottoNumbersValidator.validateNumbers(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
