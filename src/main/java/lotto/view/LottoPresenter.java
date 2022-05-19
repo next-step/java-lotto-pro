@@ -5,9 +5,12 @@ import static lotto.domain.message.InformationMessage.RESULT;
 import static lotto.domain.message.InformationMessage.WIN;
 import static lotto.domain.message.RequestMessage.BONUS_BALL;
 import static lotto.domain.message.RequestMessage.MANUAL_AMOUNT;
+import static lotto.domain.message.RequestMessage.MANUAL_NUMBERS_LIST;
 import static lotto.domain.message.RequestMessage.PAYMENT;
 import static lotto.domain.message.RequestMessage.WINNING_NUMBERS;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import lotto.domain.BonusBall;
@@ -22,7 +25,9 @@ public class LottoPresenter {
         final Scanner scanner = new Scanner(System.in);
         final LottoPayment payment = requestPayment(scanner);
         requestManualAmount(scanner, payment);
-        final LottoTickets tickets = LottoTickets.createAutomatically(payment.getPurchasableAmount());
+        final LottoTickets tickets = LottoTickets.createManually(requestManualNumbersList(scanner, payment));
+        printPaymentResult(payment);
+        tickets.merge(LottoTickets.createAutomatically(payment.getPurchasableAmount() - payment.getManualAmount()));
         tickets.print();
         printLineSeparator();
         final LottoNumbers winningNumbers = requestWinningNumbers(scanner);
@@ -34,7 +39,6 @@ public class LottoPresenter {
         System.out.println(PAYMENT.getMessage());
         try {
             final LottoPayment payment = LottoPayment.convertAndCreate(scanner.nextLine());
-            printPaymentResult(payment);
             return payment;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -49,6 +53,25 @@ public class LottoPresenter {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             requestManualAmount(scanner, lottoPayment);
+        }
+    }
+
+    private List<LottoNumbers> requestManualNumbersList(final Scanner scanner, final LottoPayment lottoPayment) {
+        System.out.println(MANUAL_NUMBERS_LIST);
+        final List<LottoNumbers> manualNumbersList = new ArrayList<>();
+        for (int i = 0; i < lottoPayment.getManualAmount(); i++) {
+            addManualNumbers(scanner, manualNumbersList);
+        }
+        return manualNumbersList;
+    }
+
+    private void addManualNumbers(final Scanner scanner, List<LottoNumbers> manualNumbersList) {
+        try {
+            manualNumbersList.add(LottoNumbers.convertAndCreate(scanner.nextLine()));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            manualNumbersList.clear();
+            addManualNumbers(scanner, manualNumbersList);
         }
     }
 
