@@ -38,11 +38,14 @@ class LottoTest {
     void lottoLottoRanking() {
         Lotto winningLotto1 = Lotto.draw(new InputLottoNumberGenerator("1, 2, 3, 4, 5, 7"));
         Lotto winningLotto2 = Lotto.draw(new InputLottoNumberGenerator("1, 2, 3, 4, 5, 7"));
+        Lotto winningLotto3 = Lotto.draw(new InputLottoNumberGenerator("10, 12, 13, 14, 5, 6"));
         assertAll(
                 () -> assertThat(this.lotto.lottoRanking(winningLotto1, LottoNumber.valueOf(45)).money()).isEqualTo(
                         Money.valueOf(1500000)),
                 () -> assertThat(this.lotto.lottoRanking(winningLotto2, LottoNumber.valueOf(6)).money()).isEqualTo(
-                        Money.valueOf(30000000))
+                        Money.valueOf(30000000)),
+                () -> assertThat(this.lotto.lottoRanking(winningLotto3, LottoNumber.valueOf(7)).money()).isEqualTo(
+                        Money.valueOf(0))
         );
     }
 

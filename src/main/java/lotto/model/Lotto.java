@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -10,7 +11,6 @@ public class Lotto {
     private static final int COUNT_OF_MATCH_ZERO = 0;
     private static final int COUNT_OF_MATCH_ONE = 1;
     public static final int PRICE = 1000;
-    public static final int SECOND_AND_THIRD_COUNT_OF_MATCH = 5;
     private final Set<LottoNumber> lotto;
 
     private Lotto(Set<LottoNumber> lotto) {
@@ -23,19 +23,29 @@ public class Lotto {
     }
 
     public LottoRanking lottoRanking(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        winningLotto.validateNewLottoNumber(bonusLottoNumber);
         int countOfMatch = COUNT_OF_MATCH_ZERO;
         for (LottoNumber lottoNumber : this.lotto) {
             countOfMatch += countIfContainLottoNumber(winningLotto, lottoNumber);
         }
-        boolean isBonusMatched = false;
-        if (isSecondAndThirdCountOfMatch(countOfMatch)) {
-            isBonusMatched = containLottoNumber(bonusLottoNumber);
-        }
-        return LottoRanking.findLottoRankingByCountOfMatchAndBonusMatched(countOfMatch, isBonusMatched);
+        validateCountOfMatch(countOfMatch);
+        boolean isBonusMatched = containLottoNumber(bonusLottoNumber);
+        int finalCountOfMatch = countOfMatch;
+        return Arrays.stream(LottoRanking.values())
+                .filter(ranking -> ranking.predicateWithCountOfMatchAndIsBonusMatched()
+                        .test(finalCountOfMatch, isBonusMatched))
+                .findFirst()
+                .orElse(LottoRanking.MISS);
     }
 
-    private boolean isSecondAndThirdCountOfMatch(int countOfMatch) {
-        return countOfMatch == SECOND_AND_THIRD_COUNT_OF_MATCH;
+    public static void validateCountOfMatch(int countOfMatch) {
+        if (isNotLottoCountOfMatchRange(countOfMatch)) {
+            throw new IllegalArgumentException("로또번호 일치 갯수가 유효하지 않습니다.");
+        }
+    }
+
+    private static boolean isNotLottoCountOfMatchRange(int countOfMatch) {
+        return countOfMatch < LottoRanking.COUNT_OF_MATCH_MIN_NUM || countOfMatch > LottoRanking.COUNT_OF_MATCH_MAX_NUM;
     }
 
     private int countIfContainLottoNumber(Lotto winningLotto, LottoNumber lottoNumber) {
@@ -50,10 +60,11 @@ public class Lotto {
     }
 
     public void validateNewLottoNumber(LottoNumber lottoNumber) {
-        if(containLottoNumber(lottoNumber)) {
+        if (containLottoNumber(lottoNumber)) {
             throw new IllegalArgumentException("중복되는 로또 번호 입니다.");
         }
     }
+
     private void validateLotto(Set<LottoNumber> lotto) {
         validateLottoSize(lotto);
     }
