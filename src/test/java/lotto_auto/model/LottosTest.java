@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 public class LottosTest {
     @Test
@@ -25,5 +28,35 @@ public class LottosTest {
 
         assertThatExceptionOfType(UnsupportedOperationException.class)
                 .isThrownBy(() -> lottos.getLottoList().add(new Lotto(numbers)));
+    }
+
+    @Test
+    void 머지_매치() {
+        LottoNumbers lottoNumbers = new LottoNumbers(IntStream
+                .rangeClosed(1, 6)
+                .boxed()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+
+        LottoNumbers otherNumbers = new LottoNumbers(IntStream
+                .rangeClosed(7, 12)
+                .boxed()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+
+        Lottos lottos = new Lottos(Arrays.asList(new Lotto(lottoNumbers)));
+        Lottos otherLottos = new Lottos(Arrays.asList(new Lotto(otherNumbers)));
+
+        Lottos mergedLottos = lottos.merge(otherLottos);
+
+        assertThat(getLottoToString(mergedLottos.getLottoList().get(0))).isEqualTo("1, 2, 3, 4, 5, 6");
+        assertThat(getLottoToString(mergedLottos.getLottoList().get(1))).isEqualTo("7, 8, 9, 10, 11, 12");
+        assertThat(mergedLottos.getLottoList().size()).isEqualTo(2);
+    }
+
+    private String getLottoToString(Lotto lotto) {
+        return lotto.getLottoNumbers().getLottoNumberSet().stream()
+                .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
+                .collect(Collectors.joining(", "));
     }
 }
