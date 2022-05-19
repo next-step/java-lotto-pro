@@ -16,6 +16,10 @@ public class Price {
         return price / Lotto.LOTTO_FIXED_PRICE;
     }
 
+    public int calculateLottoAutoCount(final LottosManualCount lottosManualCount) {
+        return (price / Lotto.LOTTO_FIXED_PRICE) - lottosManualCount.getManualLottoCount();
+    }
+
     public double calculateYield(final int totalReward) {
         return totalReward / (double) price;
     }
