@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoManager;
 import lotto.domain.LottoPrice;
@@ -12,13 +13,16 @@ public class LottoController {
     public static void startLotto() {
         int purchaseAmount = InputView.enterNumber();
 
-        LottoManager lottoManager = new LottoManager(
-            LottoPrice.numberOfLottoCanBuy(purchaseAmount));
+        int autoLottoCount = LottoPrice.numberOfLottoCanBuy(purchaseAmount);
+        LottoManager lottoManager = new LottoManager(autoLottoCount);
 
-        ResultView.purchaseResult(LottoPrice.numberOfLottoCanBuy(purchaseAmount));
-        ResultView.lottoNumberResult(lottoManager.getLottoElements());
+        List<Lotto> lottoElements = lottoManager.getLottoElements();
 
-        lottoManager.makeWinningLotto(new Lotto(new ManualPickNumberStrategy()));
+        ResultView.purchaseLottoResult(autoLottoCount, lottoElements);
+
+        Lotto winningLotto = new Lotto(new ManualPickNumberStrategy());
+        lottoManager.makeWinningLotto(winningLotto);
+
         ResultView.winningResult(lottoManager.getWinningStatistics());
 
         ResultView.yieldResult(lottoManager.calculateRateOfReturn(purchaseAmount));

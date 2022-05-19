@@ -8,11 +8,12 @@ import lotto.domain.WinningStatistics;
 
 public class ResultView {
 
-    public static void purchaseResult(int autoLottoCount) {
+    public static void purchaseLottoResult(int autoLottoCount, List<Lotto> lottoList) {
         System.out.println(autoLottoCount + "개를 구매했습니다.");
+        lottoNumberResult(lottoList);
     }
 
-    public static void lottoNumberResult(List<Lotto> lottoList) {
+    private static void lottoNumberResult(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
             System.out.println(lotto.getNumbers().getValues());
         }
