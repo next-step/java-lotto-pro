@@ -1,9 +1,9 @@
-package study.step3;
+package study.lotto;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
-import study.step3.io.Printer;
-import study.step3.util.LottoGenerator;
+import study.lotto.io.Printer;
+import study.lotto.util.LottoGenerator;
 
 public class LottoMain {
     private final Printer printer;
@@ -27,9 +27,12 @@ public class LottoMain {
         printer.printMyLottos(lottos);
 
         printer.print("지난 주 당첨 번호를 입력해 주세요.");
-        Lotto winningLotto = new Lotto(Console.readLine());
+        Lotto lotto = new Lotto(Console.readLine());
 
-        LottoReport lottoReport = new LottoReport(lottos, winningLotto);
+        printer.print("보너스 볼을 입력해 주세요.");
+        LottoNumber bonusNumber = new LottoNumber(Console.readLine());
+
+        LottoReport lottoReport = new LottoReport(lottos, new WinningLotto(lotto, bonusNumber));
         LottoResultMap lottoResultMap = lottoReport.analyze();
 
         printer.printResult(lottoResultMap);

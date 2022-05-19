@@ -1,20 +1,13 @@
-package study.step3;
+package study.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.step3.enumtype.LottoWinningType;
 
 class LottoTest {
-    @Test
-    @DisplayName("로또 생성 테스트 - 수동생성")
-    void createLotto_manualNumber() {
-        Lotto lotto = new Lotto("1,2,22,30,35,45");
-        Lotto winningLotto = new Lotto("1,2,22,30,35,45");
-        assertThat(lotto.matchCount(winningLotto)).isSameAs(LottoWinningType.MATCH_COUNT_6.getMatchCount());
-    }
+    private static final int LOTTO_NUMBER_SIZE = 6;
 
     @Test
     @DisplayName("로또 생성 테스트 - 수동생성 - 중복 숫자")
@@ -26,7 +19,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 생성 테스트 - 수동생성 - 범위 초과")
     void createLotto_manualNumber_rangeExceeded() {
-        assertThatThrownBy(() -> new Lotto("1,2,3,4, 9999"))
+        assertThatThrownBy(() -> new Lotto("1,2,3,4, 46"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -38,9 +31,16 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("번호 일치 개수")
-    void matchCount() {
-        Lotto lotto = new Lotto("1,2,22,30,35,45");
-        assertThat(lotto.matchCount(new Lotto("1,2,22,30,35,44"))).isEqualTo(5);
+    @DisplayName("번호 포함 여부")
+    void contains() {
+        Lotto lotto = new Lotto("1,2,3,4,5,6");
+        assertThat(lotto.contains(new LottoNumber(1))).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또 번호 개수 반환")
+    void size() {
+        Lotto lotto = new Lotto("1,2,3,4,5,6");
+        assertThat(lotto.numberSize()).isSameAs(LOTTO_NUMBER_SIZE);
     }
 }

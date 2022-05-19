@@ -1,11 +1,11 @@
-package study.step3;
+package study.lotto;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
-    private final int number;
+    private final Integer number;
 
     public LottoNumber() {
         this.number = Randoms.pickNumberInRange(1, 45);
@@ -16,14 +16,23 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number.trim()));
+    }
+
     private void validate(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException(String.format("%d ~ %d 사이의 숫자만 생성할 수 있습니다.", MIN_NUMBER, MAX_NUMBER));
         }
     }
 
-    public Integer toInteger() {
+    public Integer getNumber() {
         return this.number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        return this.number - lottoNumber.getNumber();
     }
 
     @Override
@@ -33,7 +42,7 @@ public class LottoNumber {
 
     @Override
     public int hashCode() {
-        return number;
+        return number.hashCode();
     }
 
     @Override
@@ -47,6 +56,6 @@ public class LottoNumber {
 
         LottoNumber that = (LottoNumber) o;
 
-        return number == that.number;
+        return number.equals(that.number);
     }
 }

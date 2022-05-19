@@ -1,10 +1,9 @@
-package study.step3.util;
+package study.lotto.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import study.step3.Lotto;
-import study.step3.LottoNumber;
+import study.lotto.Lotto;
+import study.lotto.LottoNumber;
 
 public class LottoGenerator {
     private static final int LOTTO_NUMBER_SIZE = 6;
@@ -28,10 +27,7 @@ public class LottoGenerator {
     }
 
     private static Lotto newAutoLotto() {
-        return new Lotto(
-                getRandomLottoNumbers().stream().map(LottoNumber::toInteger)
-                        .collect(Collectors.toList())
-        );
+        return new Lotto(getRandomLottoNumbers());
     }
 
     private static List<LottoNumber> getRandomLottoNumbers() {

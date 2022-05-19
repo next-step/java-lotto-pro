@@ -1,4 +1,4 @@
-package study.step3;
+package study.lotto;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 
@@ -11,6 +11,13 @@ class LottoNumberTest {
     @DisplayName("로또넘버 생성")
     void createLottoNumber() {
         assertThatCode(() -> new LottoNumber(5))
+                .doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("로또넘버 생성 - 문자열")
+    void createLottoNumber_string() {
+        assertThatCode(() -> new LottoNumber("5"))
                 .doesNotThrowAnyException();
     }
 

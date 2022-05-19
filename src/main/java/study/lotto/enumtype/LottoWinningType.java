@@ -1,13 +1,14 @@
-package study.step3.enumtype;
+package study.lotto.enumtype;
 
 import java.util.stream.Stream;
 
 public enum LottoWinningType {
-    MATCH_COUNT_6(6, 2000000000),
-    MATCH_COUNT_5(5, 1500000),
-    MATCH_COUNT_4(4, 50000),
-    MATCH_COUNT_3(3, 5000),
-    MATCH_NOT_COUNT(0, 0),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0),
     ;
 
     private final int matchCount;
@@ -30,6 +31,6 @@ public enum LottoWinningType {
         return Stream.of(values())
                 .filter(lottoWinningType -> lottoWinningType.getMatchCount() == matchCount)
                 .findFirst()
-                .orElse(MATCH_NOT_COUNT);
+                .orElse(MISS);
     }
 }

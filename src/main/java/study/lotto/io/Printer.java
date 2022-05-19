@@ -1,8 +1,8 @@
-package study.step3.io;
+package study.lotto.io;
 
 import java.util.List;
-import study.step3.Lotto;
-import study.step3.LottoResultMap;
+import study.lotto.Lotto;
+import study.lotto.LottoResultMap;
 
 public interface Printer {
     void print(String text);
