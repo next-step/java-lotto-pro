@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum MatchResult {
 
     ZERO(0, Money.from(0)),
@@ -26,10 +29,11 @@ public enum MatchResult {
     }
 
     public static MatchResult from(int matchCount) {
-        for (MatchResult matchResult : MatchResult.values()) {
-            if (matchResult.matchCount == matchCount) {
-                return matchResult;
-            }
+        Optional<MatchResult> result = Arrays.stream(MatchResult.values())
+                .filter(matchResult -> matchResult.matchCount == matchCount)
+                .findAny();
+        if (result.isPresent()) {
+            return result.get();
         }
         throw new IllegalArgumentException("당첨 번호와 일치하는 로또 숫자의 개수는 0과 6 범위이어야 합니다");
     }
