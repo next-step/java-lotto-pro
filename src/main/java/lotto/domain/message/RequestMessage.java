@@ -2,9 +2,9 @@ package lotto.domain.message;
 
 public enum RequestMessage {
     PAYMENT("구입금액을 입력해 주세요."),
+    MANUAL_AMOUNT("수동으로 구매할 로또 수를 입력해 주세요."),
     WINNING_NUMBERS("지난 주 당첨 번호를 입력해 주세요."),
-    BONUS_BALL("보너스 볼을 입력해 주세요.")
-    ;
+    BONUS_BALL("보너스 볼을 입력해 주세요.");
 
     private final String message;
 

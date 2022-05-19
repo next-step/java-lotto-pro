@@ -8,7 +8,7 @@ import lotto.service.StringToNumbersConverter;
 public class LottoNumbers {
     private final List<Integer> numbers;
 
-    public LottoNumbers(final List<Integer> numbers) {
+    LottoNumbers(final List<Integer> numbers) {
         LottoNumbersValidator.validateNumbers(numbers);
         this.numbers = numbers;
     }

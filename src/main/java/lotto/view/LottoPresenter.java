@@ -4,6 +4,7 @@ import static lotto.domain.message.InformationMessage.LOSE;
 import static lotto.domain.message.InformationMessage.RESULT;
 import static lotto.domain.message.InformationMessage.WIN;
 import static lotto.domain.message.RequestMessage.BONUS_BALL;
+import static lotto.domain.message.RequestMessage.MANUAL_AMOUNT;
 import static lotto.domain.message.RequestMessage.PAYMENT;
 import static lotto.domain.message.RequestMessage.WINNING_NUMBERS;
 
@@ -20,6 +21,7 @@ public class LottoPresenter {
     public void present() {
         final Scanner scanner = new Scanner(System.in);
         final LottoPayment payment = requestPayment(scanner);
+        requestManualAmount(scanner, payment);
         final LottoTickets tickets = LottoTickets.createAutomatically(payment.getPurchasableAmount());
         tickets.print();
         printLineSeparator();
@@ -37,6 +39,16 @@ public class LottoPresenter {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return requestPayment(scanner);
+        }
+    }
+
+    private void requestManualAmount(final Scanner scanner, final LottoPayment lottoPayment) {
+        System.out.println(MANUAL_AMOUNT.getMessage());
+        try {
+            lottoPayment.setManualAmount(scanner.nextLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            requestManualAmount(scanner, lottoPayment);
         }
     }
 
