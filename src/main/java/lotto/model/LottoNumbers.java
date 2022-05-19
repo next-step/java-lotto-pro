@@ -47,7 +47,12 @@ public class LottoNumbers {
 
     public int matchCount(LottoNumbers winningNumbers) {
         List<LottoNumber> copiedWinningNumbers = new ArrayList<>(winningNumbers.lottoNumbers);
+        System.out.println();
+        System.out.println(copiedWinningNumbers);
+        System.out.println(lottoNumbers);
+        System.out.println();
         copiedWinningNumbers.retainAll(lottoNumbers);
+        System.out.println(">> " + copiedWinningNumbers);
         return copiedWinningNumbers.size();
     }
 

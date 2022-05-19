@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 public enum Rank {
     LOSE(0, Prize.of(0)),
+    SIXTH(1, Prize.of(0)),
+    FIFTH(2, Prize.of(0)),
     FOURTH(3, Prize.of(5_000)),
     THIRD(4, Prize.of(50_000)),
     SECOND(5, Prize.of(1_500_000)),
@@ -24,6 +26,10 @@ public enum Rank {
                 .filter(rank -> rank.matchingCount == numberOfMatch)
                 .findAny()
                 .orElse(LOSE);
+    }
+
+    public int getMatchingCount() {
+        return matchingCount;
     }
 
     public Prize getPrize() {
