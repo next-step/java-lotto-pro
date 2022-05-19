@@ -11,11 +11,7 @@ import lotto.model.UserMoney;
 
 public class LottoMachine {
 	private static final int LOTTO_PRICE = 1000;
-	private Random random;
-
-	public LottoMachine() {
-		random = new Random();
-	}
+	private static final Random random = new Random();
 
 	public Lottos buyAutoLottos(UserMoney userMoney) {
 		List<LottoNumbers> lottos = new ArrayList<>();
