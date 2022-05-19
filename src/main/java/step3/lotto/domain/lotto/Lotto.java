@@ -37,56 +37,40 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    public MatchResult match(Lotto winningLotto) {
-        return matchResult(matchCount(winningLotto));
+    public MatchResult match(Winnings winnings) {
+        return MatchResult.valueOf(matchCount(winnings.getWinningsLotto()), contains(winnings.getBonusNumber()));
     }
 
-    private MatchResult matchResult(int matchCount) {
-        if (matchCount == 3) {
-            return MatchResult.FORTH_PLACE;
-        }
-        if (matchCount == 4) {
-            return MatchResult.THIRD_PLACE;
-        }
-        if (matchCount == 5) {
-            return MatchResult.SECOND_PLACE;
-        }
-        if (matchCount == 6) {
-            return MatchResult.FIRST_PLACE;
-        }
-        return MatchResult.NOTHING;
-    }
-
-    public int matchCount(Lotto answer) {
+    public int matchCount(Lotto winningsLotto) {
         int matchCount = 0;
-        for (LottoNumber answerLottoNumber : answer.lottoNumbers) {
+        for (LottoNumber answerLottoNumber : winningsLotto.lottoNumbers) {
             matchCount = contains(answerLottoNumber) ? matchCount + 1 : matchCount;
         }
         return matchCount;
     }
 
-    private boolean contains(LottoNumber answerLottoNumber) {
+    public boolean contains(LottoNumber answerLottoNumber) {
         Set<Boolean> compareEqualsSet = new HashSet();
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
             compareEqualsSet.add(lottoNumber.equals(answerLottoNumber));
         }
         return compareEqualsSet.contains(true);
     }
 
     private static void validateLottoNumberCount(int size) {
-        if (!isValidLottoCount(size)) {
+        if (isInValidLottoCount(size)) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_COUNT_ERROR);
         }
     }
 
     private static void validateLottoNumberDuplication(int size) {
-        if (!isValidLottoCount(size)) {
+        if (isInValidLottoCount(size)) {
             throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATED_ERROR);
         }
     }
 
-    private static boolean isValidLottoCount(int size) {
-        return size == LOTTO_NUMBER_COUNT;
+    private static boolean isInValidLottoCount(int size) {
+        return size != LOTTO_NUMBER_COUNT;
     }
 
     @Override

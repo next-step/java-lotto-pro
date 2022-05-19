@@ -24,13 +24,13 @@ public class LottoNumber {
     }
 
     private static void validateLottoNumberRange(int number) {
-        if (!isLottoNumberRangeBetween(number)) {
+        if (isNotBetweenLottoNumberRange(number)) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE_ERROR);
         }
     }
 
-    private static boolean isLottoNumberRangeBetween(int number) {
-        return number >= LOTTO_NUMBER_START_RANGE && number <= LOTTO_NUMBER_END_RANGE;
+    private static boolean isNotBetweenLottoNumberRange(int number) {
+        return number < LOTTO_NUMBER_START_RANGE || number > LOTTO_NUMBER_END_RANGE;
     }
 
     public int getLottoNumber() {

@@ -30,14 +30,10 @@ public class Customer {
     }
 
     public int getTryCount() {
-        return this.price.calculateTryCount();
-    }
-
-    public int getLottosSize() {
-        return lottos.size();
+        return price.calculateTryCount();
     }
 
     public Lottos getLottos() {
-        return this.lottos;
+        return lottos;
     }
 }

@@ -11,9 +11,13 @@ public class ResultView {
 
     private static final String WINNING_STATISTICS_TITLE_GUIDE_MESSAGE = "당첨 통계";
     private static final String RESULT_MESSAGE_SEPARATOR_LINE = "---------\n";
-    private static final String WINNING_STATISTICS_TITLE_GUIDE_MESSAGE_FORMAT = String
-        .format("%s\n%s", WINNING_STATISTICS_TITLE_GUIDE_MESSAGE, RESULT_MESSAGE_SEPARATOR_LINE);
+    private static final String WINNING_STATISTICS_TITLE_GUIDE_MESSAGE_FORMAT = String.format(
+        "%s\n%s",
+        WINNING_STATISTICS_TITLE_GUIDE_MESSAGE,
+        RESULT_MESSAGE_SEPARATOR_LINE
+    );
     private static final String STATISTICS_GUIDE_MESSAGE = "%s개 일치 (%d원)- %d개\n";
+    private static final String SECOND_PLACE_STATISTICS_GUIDE_MESSAGE = "%s개 일치, 보너스볼 일치 (%d원)- %d개\n";
     private static final String RATE_OF_PROFIT_GUIDE_MESSAGE = "총 수익률은 %.2f입니다.";
 
     private static final StringBuffer stringBuffer = new StringBuffer();
@@ -26,16 +30,29 @@ public class ResultView {
         System.out.println(stringBuffer.toString());
     }
 
-    private static String addStatisticsContent(MatchStatistic matchStatistic) {
+    private static void addStatisticsContent(MatchStatistic matchStatistic) {
+        stringBuffer.append(statisticsFormat(MatchResult.FIFTH_PLACE, matchStatistic.getFifthPlaceCount()));
         stringBuffer.append(statisticsFormat(MatchResult.FORTH_PLACE, matchStatistic.getForthPlaceCount()));
         stringBuffer.append(statisticsFormat(MatchResult.THIRD_PLACE, matchStatistic.getThirdPlaceCount()));
-        stringBuffer.append(statisticsFormat(MatchResult.SECOND_PLACE, matchStatistic.getSecondPlaceCount()));
+        stringBuffer.append(secondPlaceStatisticFormat(MatchResult.SECOND_PLACE, matchStatistic.getSecondPlaceCount()));
         stringBuffer.append(statisticsFormat(MatchResult.FIRST_PLACE, matchStatistic.getFirstPlaceCount()));
-        return stringBuffer.toString();
     }
 
     private static String statisticsFormat(MatchResult matchResult, int winningCount) {
-        return String
-            .format(STATISTICS_GUIDE_MESSAGE, matchResult.getMatchCount(), matchResult.getRewardPrice(), winningCount);
+        return String.format(
+            STATISTICS_GUIDE_MESSAGE,
+            matchResult.getMatchCount(),
+            matchResult.getRewardPrice(),
+            winningCount
+        );
+    }
+
+    private static String secondPlaceStatisticFormat(MatchResult matchResult, int winningCount) {
+        return String.format(
+            SECOND_PLACE_STATISTICS_GUIDE_MESSAGE,
+            matchResult.getMatchCount(),
+            matchResult.getRewardPrice(),
+            winningCount
+        );
     }
 }

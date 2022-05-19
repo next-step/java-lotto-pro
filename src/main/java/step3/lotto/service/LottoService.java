@@ -1,9 +1,9 @@
 package step3.lotto.service;
 
 import step3.lotto.domain.customer.Customer;
-import step3.lotto.domain.lotto.Lotto;
 import step3.lotto.domain.lotto.Lottos;
 import step3.lotto.domain.lotto.MatchStatistic;
+import step3.lotto.domain.lotto.Winnings;
 
 /**
  * @author : choi-ys
@@ -11,8 +11,8 @@ import step3.lotto.domain.lotto.MatchStatistic;
  */
 public class LottoService {
 
-    public MatchStatistic play(Customer customer, Lotto lastWinningLotto) {
+    public MatchStatistic play(Customer customer, Winnings winnings) {
         Lottos lottos = customer.getLottos();
-        return lottos.match(lastWinningLotto);
+        return lottos.match(winnings);
     }
 }

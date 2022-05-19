@@ -77,21 +77,24 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource
     @DisplayName("지난 주 로또 번호와 비교하여 반환된 당첨 여부 판별 객체 검증")
-    public void matchTest(Lotto lotto, Lotto winningLotto, MatchResult expected) {
+    public void matchTest(Winnings given, Lotto lotto, String givenDescription, MatchResult expected) {
         // When & Then
-        assertThat(lotto.match(winningLotto)).isEqualTo(expected);
+        assertThat(lotto.match(given)).as(givenDescription).isEqualTo(expected);
     }
 
     private static Stream matchTest() {
-        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Lotto winningsLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoNumber bonusNumber = LottoNumber.of(7);
+        Winnings winnings = Winnings.of(winningsLotto, bonusNumber);
         return Stream.of(
-            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), MatchResult.FIRST_PLACE),
-            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7)), MatchResult.SECOND_PLACE),
-            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 3, 4, 7, 8)), MatchResult.THIRD_PLACE),
-            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 3, 7, 8, 9)), MatchResult.FORTH_PLACE),
-            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 2, 7, 8, 9, 10)), MatchResult.NOTHING),
-            Arguments.of(lotto, Lotto.of(Arrays.asList(1, 7, 8, 9, 10, 11)), MatchResult.NOTHING),
-            Arguments.of(lotto, Lotto.of(Arrays.asList(7, 8, 9, 10, 11, 12)), MatchResult.NOTHING)
+            Arguments.of(winnings, Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), "6개 번호가 일치하는 1등 검증", MatchResult.FIRST_PLACE),
+            Arguments.of(winnings, Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7)), "5개 번호와 보너스 번호가 일치하는 2등 검증", MatchResult.SECOND_PLACE),
+            Arguments.of(winnings, Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 8)), "5개 번호가 일치하는 3등 검증", MatchResult.THIRD_PLACE),
+            Arguments.of(winnings, Lotto.of(Arrays.asList(1, 2, 3, 4, 7, 8)), "4개 번호가 일치하는 4등 검증", MatchResult.FORTH_PLACE),
+            Arguments.of(winnings, Lotto.of(Arrays.asList(1, 2, 3, 7, 8, 9)), "3개 번호가 일치하는 5등 검증", MatchResult.FIFTH_PLACE),
+            Arguments.of(winnings, Lotto.of(Arrays.asList(1, 2, 7, 8, 9, 10)), "2개 번호가 일치하는 당첨 없음 검증", MatchResult.NOTHING),
+            Arguments.of(winnings, Lotto.of(Arrays.asList(1, 7, 8, 9, 10, 11)), "1개 번호가 일치하는 당첨 없음 검증", MatchResult.NOTHING),
+            Arguments.of(winnings, Lotto.of(Arrays.asList(7, 8, 9, 10, 11, 12)), "0개 번호가 일치하는 당첨 없음 검증", MatchResult.NOTHING)
         );
     }
 }
