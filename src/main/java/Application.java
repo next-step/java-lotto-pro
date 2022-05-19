@@ -1,9 +1,14 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import lotto.constant.LottoInputMessage;
 import lotto.controller.LottoGame;
+import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
+import lotto.model.LottoPaper;
+import lotto.model.LottoSelfCount;
+import lotto.model.LottoStore;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
 import lotto.model.generator.LottoGeneratorRandomImpl;
@@ -22,13 +27,54 @@ public class Application {
     }
 
     public void startLottoGame() throws IOException {
-        Money money = inputMoney();
-        Lottos lottos = LottoGame.generateLottosByGenerator(money, new LottoGeneratorRandomImpl());
+        LottoStore lottoStore = createLottoStore();
+        LottoPaper lottoPaper = lottoStore.issueLottoPaper();
+        Lottos lottos = LottoGame.generateLottosByGenerator(lottoPaper,createSelfLottos(lottoPaper),new LottoGeneratorRandomImpl());
         ResultView.printLottosView(lottos);
 
         WinningLotto winningLotto = createWinningLotto();
         LottoGameResult lottoGameResult = LottoGame.resultWinningGame(winningLotto, lottos);
         ResultView.printFinalResultView(lottoGameResult, lottos);
+    }
+
+    private Lottos createSelfLottos(LottoPaper LottoPaper) throws IOException {
+        try {
+            InputConsoleUtils.printMessage(LottoInputMessage.SELF_NUMBERS_MESSAGE);
+            return inputSelfLottos(LottoPaper);
+        }catch (IllegalArgumentException e){
+            ResultView.printConsole(e.getMessage());
+            return createSelfLottos(LottoPaper);
+        }
+    }
+    private Lottos inputSelfLottos(LottoPaper lottoPaper) throws IOException {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int lottoCount = 0; lottoCount < lottoPaper.getSelfCount(); lottoCount++) {
+            String selfNumbersWord = InputConsoleUtils.BUFFERED_READER.readLine();
+            List<String> selfNumberWords  = InputStringUtils.nonSpaceSplit(selfNumbersWord, DELIMITER_COMMA);
+            lottos.add(new Lotto(new LottoNumbers(selfNumberWords)));
+        }
+        return new Lottos(lottos);
+    }
+
+    private LottoStore createLottoStore() throws IOException {
+        try {
+            Money money = inputMoney();
+            LottoSelfCount lottoSelfCount = inputLottoCount();
+            return new LottoStore(money,lottoSelfCount);
+        } catch (IllegalArgumentException e){
+            ResultView.printConsole(e.getMessage());
+            return createLottoStore();
+        }
+    }
+
+    private LottoSelfCount inputLottoCount() throws IOException {
+        try {
+            String selfCountWord = InputConsoleUtils.readLineForMessage(LottoInputMessage.SELF_COUNT_MESSAGE);
+            return new LottoSelfCount(selfCountWord);
+        }catch (IllegalArgumentException e){
+            ResultView.printConsole(e.getMessage());
+            return inputLottoCount();
+        }
     }
 
     private Money inputMoney() throws IOException {

@@ -18,4 +18,7 @@ public class InputConsoleUtils {
         return BUFFERED_READER.readLine();
     }
 
+    public static void printMessage(String selfNumbersMessage) {
+        System.out.println(selfNumbersMessage);
+    }
 }
