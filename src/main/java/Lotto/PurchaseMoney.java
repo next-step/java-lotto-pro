@@ -3,7 +3,7 @@ package Lotto;
 import Lotto.error.ErrorMessage;
 
 public class PurchaseMoney {
-    public static int LOTTO_PURCHASE_UNIT = 1000;
+    public final static int LOTTO_PURCHASE_UNIT = 1000;
 
     private int money = 0;
 

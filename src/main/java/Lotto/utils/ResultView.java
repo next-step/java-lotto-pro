@@ -33,7 +33,7 @@ public class ResultView {
 
     public static void printPurchaseLottos(Player player) {
         System.out.println("수동으로 " + player.getManualPurchaseCount() + "장" + "자동으로 " +
-                            (player.getTotalLottos().getPurchaseCount().getCount() - player.getManualPurchaseCount()) + "장을 구매했습니다.");
+                            (player.getTotalLottos().getPurchaseCount() - player.getManualPurchaseCount()) + "장을 구매했습니다.");
         for(Lotto lotto : player.getTotalLottos().getLottos())
             System.out.println(lotto.toString());
     }

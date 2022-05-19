@@ -11,7 +11,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(1000);
         lottos.draw();
         assertThat(lottos.getLottos().size()).isEqualTo(1);
-        assertThat(lottos.getPurchaseCount().getCount()).isEqualTo(1);
+        assertThat(lottos.getPurchaseCount()).isEqualTo(1);
     }
 
     @Test
@@ -19,7 +19,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(10000);
         lottos.draw();
         assertThat(lottos.getLottos().size()).isEqualTo(10);
-        assertThat(lottos.getPurchaseCount().getCount()).isEqualTo(10);
+        assertThat(lottos.getPurchaseCount()).isEqualTo(10);
     }
 
     @Test

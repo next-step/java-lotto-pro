@@ -11,16 +11,20 @@ public class Lottos {
     private PurchaseCount purchaseCount = new PurchaseCount();
     private List<Lotto> lottos = new ArrayList<Lotto>();
 
-    public PurchaseMoney getPurchaseMoney() {
-        return purchaseMoney;
+    public int getPurchaseMoney() {
+        return purchaseMoney.getMoney();
     }
 
-    public PurchaseCount getPurchaseCount() {
-        return purchaseCount;
+    public int getPurchaseCount() {
+        return purchaseCount.getCount();
     }
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public void addLottos(List<Lotto> lottos) {
+        lottos.addAll(this.lottos);
     }
 
     public Lottos() {
@@ -65,18 +69,14 @@ public class Lottos {
 
     public static Lottos combine(Lottos manualLottos, Lottos autoLottos) {
         List<Lotto> lottos = new ArrayList<>();
-        lottos.addAll(manualLottos.getLottos());
-        lottos.addAll(autoLottos.getLottos());
-        return new Lottos(manualLottos.getPurchaseMoney().getMoney() + autoLottos.getPurchaseMoney().getMoney(), lottos);
+        manualLottos.addLottos(lottos);
+        autoLottos.addLottos(lottos);
+        return new Lottos(manualLottos.getPurchaseMoney() + autoLottos.getPurchaseMoney(), lottos);
     }
 
-    public void manualDraw() {
-        if(purchaseCount.getCount() == 0)
-            return;
-
-        List<String> inputManualNumber = InputView.inputManualLottoNumber(purchaseCount.getCount());
-        for(int i = 0; i < inputManualNumber.size(); i++) {
-            lottos.add(new Lotto(inputManualNumber.get(i)));
+    public void manualDraw(List<String> manualNumbersList) {
+        for(int i = 0; i < manualNumbersList.size(); i++) {
+            lottos.add(new Lotto(manualNumbersList.get(i)));
         }
     }
 }

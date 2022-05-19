@@ -1,6 +1,7 @@
 package Lotto.utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,8 +14,14 @@ public class InputView {
     }
 
     public static List<String> inputManualLottoNumber(int count) {
-        System.out.println("수동으로 구매 할 번호를 번호를 입력해 주세요.");
         List<String> result = new ArrayList<>();
+
+        if(count == 0) {
+            scanner.nextLine();
+            return result;
+        }
+
+        System.out.println("수동으로 구매 할 번호를 번호를 입력해 주세요.");
         scanner.nextLine();
         for(int i = 0; i < count; i++)
             result.add(scanner.nextLine());
