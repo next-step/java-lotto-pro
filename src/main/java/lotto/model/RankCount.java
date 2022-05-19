@@ -4,8 +4,6 @@ import lotto.enums.Rank;
 
 import java.util.*;
 
-import static java.lang.String.format;
-
 public class RankCount {
     private final Map<Rank, Integer> rankCount;
 
