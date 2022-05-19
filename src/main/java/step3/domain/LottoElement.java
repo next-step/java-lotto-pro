@@ -12,17 +12,12 @@ public class LottoElement implements Comparable<LottoElement>, Cloneable {
 
 
     public LottoElement(int element) {
-        this.element = validElement(element);
+        validElement(element);
+        this.element = element;
     }
 
-    private int validElement(int element) {
-        validNumberRange(element);
-        return element;
-    }
-
-
-    private void validNumberRange(int parseElement) {
-        if (parseElement < LOTTO_MIN || parseElement > LOTTO_MAX) {
+    private void validElement(int element) {
+        if (element < LOTTO_MIN || element > LOTTO_MAX) {
             throw new IllegalArgumentException(String.format(CREATE_ELEMENT_EXCEPTION_MSG, LOTTO_MIN, LOTTO_MAX));
         }
     }
