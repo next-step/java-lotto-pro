@@ -3,6 +3,7 @@ package lotto.domain;
 import static lotto.domain.message.ErrorMessage.INVALID_BONUS_BALL;
 
 import java.util.Objects;
+import lotto.service.BonusBallValidator;
 import lotto.service.LottoNumberValidator;
 import lotto.util.StringToIntegerConverter;
 
@@ -14,10 +15,12 @@ public class BonusBall {
         this.number = number;
     }
 
-    public static BonusBall convertAndCreate(final String numberString) {
+    public static BonusBall convertAndCreate(final String numberString, final LottoNumbers winningNumbers) {
         final int number = StringToIntegerConverter.parseInt(numberString, INVALID_BONUS_BALL);
         LottoNumberValidator.checkRangeOfNumber(number, INVALID_BONUS_BALL);
-        return new BonusBall(number);
+        final BonusBall bonusBall = new BonusBall(number);
+        BonusBallValidator.validate(bonusBall, winningNumbers);
+        return bonusBall;
     }
 
     public int getNumber() {

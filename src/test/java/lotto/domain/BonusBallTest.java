@@ -21,13 +21,14 @@ class BonusBallTest {
     }
 
     @Test
-    @DisplayName("보너스볼 번호 문자열을 파라미터로 BonusBall 객체가 생성되어야 한다")
+    @DisplayName("보너스볼 번호 문자열과 당첨번호를 파라미터로 BonusBall 객체가 생성되어야 한다")
     void convert_and_create() {
         // given
         final String number = "10";
+        final LottoNumbers winningNumbers = LottoNumbers.convertAndCreate("1,2,3,4,5,6");
 
         // when
-        final BonusBall bonusBall = BonusBall.convertAndCreate(number);
+        final BonusBall bonusBall = BonusBall.convertAndCreate(number, winningNumbers);
 
         // when and then
         assertThat(bonusBall).isInstanceOf(BonusBall.class);

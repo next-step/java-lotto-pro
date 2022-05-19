@@ -32,7 +32,7 @@ public class LottoPresenter {
         tickets.print();
         printLineSeparator();
         final LottoNumbers winningNumbers = requestWinningNumbers(scanner);
-        final BonusBall bonusBall = requestBonusBall(scanner);
+        final BonusBall bonusBall = requestBonusBall(scanner, winningNumbers);
         printResult(payment.getMoney(), tickets.prizeMap(winningNumbers, bonusBall));
     }
 
@@ -95,13 +95,13 @@ public class LottoPresenter {
         }
     }
 
-    private BonusBall requestBonusBall(final Scanner scanner) {
+    private BonusBall requestBonusBall(final Scanner scanner, final LottoNumbers winningNumbers) {
         System.out.println(BONUS_BALL.getMessage());
         try {
-            return BonusBall.convertAndCreate(scanner.nextLine());
+            return BonusBall.convertAndCreate(scanner.nextLine(), winningNumbers);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return requestBonusBall(scanner);
+            return requestBonusBall(scanner, winningNumbers);
         }
     }
 

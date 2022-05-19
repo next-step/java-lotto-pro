@@ -65,7 +65,7 @@ class LottoTicketsTest {
         final List<LottoNumbers> lottoNumbersList = Arrays.asList(winningNumbers, winningNumbers, winningNumbers);
         final LottoTickets lottoTickets = LottoTickets.createManually(lottoNumbersList);
         final LottoTickets target = LottoTickets.createManually(lottoNumbersList);
-        final BonusBall bonusBall = BonusBall.convertAndCreate("7");
+        final BonusBall bonusBall = BonusBall.convertAndCreate("7", winningNumbers);
 
         // when
         lottoTickets.merge(target);
