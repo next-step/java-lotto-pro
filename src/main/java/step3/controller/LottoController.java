@@ -30,7 +30,7 @@ public class LottoController {
         } while (ticketIsNotValid(user, ticket));
 
         List<LottoTicket> lottoTickets = lottoMachine.makeRandomLottoTickets(user.getTicket());
-        user.buyLotto(lottoTickets);
+        user.setUserLotto(lottoTickets);
         outputView.printLottoInfo(user.getLottoNumbers());
 
         String winnerLottoSource;

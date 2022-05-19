@@ -31,7 +31,7 @@ public class LottoUser {
     }
 
 
-    public void buyLotto(List<LottoTicket> lottoTickets) {
+    public void setUserLotto(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
