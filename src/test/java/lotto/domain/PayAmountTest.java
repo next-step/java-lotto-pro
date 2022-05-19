@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.infrastructure.error.PayAmountErrorCode;
+import lotto.domain.error.PayAmountErrorCode;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

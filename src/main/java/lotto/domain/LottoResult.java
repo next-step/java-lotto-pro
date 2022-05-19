@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import lotto.infrastructure.error.LottoWinningResultErrorCode;
+import lotto.domain.error.LottoRank;
+import lotto.domain.error.LottoWinningResultErrorCode;
 
 import java.util.*;
 

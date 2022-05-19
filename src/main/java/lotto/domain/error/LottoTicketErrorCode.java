@@ -1,4 +1,4 @@
-package lotto.infrastructure.error;
+package lotto.domain.error;
 
 public enum LottoTicketErrorCode {
 

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.infrastructure.error.LottoCountErrorCode;
+import lotto.domain.error.LottoCountErrorCode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -30,7 +30,7 @@ class LottoCountTest {
     public void equals(int lottoCount) throws Exception {
         LottoCount lottoCount1 = new LottoCount(lottoCount);
         LottoCount lottoCount2 = new LottoCount(lottoCount);
-        
+
         assertThat(lottoCount1.equals(lottoCount2)).isTrue();
     }
 }

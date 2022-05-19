@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.infrastructure.error.LottoTicketErrorCode;
+import lotto.domain.error.LottoTicketErrorCode;
 import lotto.infrastructure.generator.LottoNumberGenerator;
 import lotto.infrastructure.generator.NumberGenerator;
 import org.junit.jupiter.api.BeforeEach;

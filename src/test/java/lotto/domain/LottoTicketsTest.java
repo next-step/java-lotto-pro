@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.infrastructure.error.LottoTicketsErrorCode;
+import lotto.domain.error.LottoTicketsErrorCode;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;

@@ -1,8 +1,8 @@
 package lotto.dto;
 
-import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.error.LottoRank;
 
 import java.util.List;
 import java.util.Map;

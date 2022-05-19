@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.infrastructure.error.LottoCountErrorCode;
+import lotto.domain.error.LottoCountErrorCode;
 
 public class LottoCount {
 

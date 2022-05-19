@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.infrastructure.error.PayAmountErrorCode;
+import lotto.domain.error.PayAmountErrorCode;
 import lotto.infrastructure.util.StringUtils;
 
 import java.util.Objects;
