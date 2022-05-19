@@ -2,9 +2,10 @@ package lotto.domain;
 
 import lotto.message.InputMessage;
 
-import java.util.*;
-
-import static lotto.domain.LottoNumbers.LOTTO_NUMBERS;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class LottoTicket {
     public static final int LOTTO_SIZE = 6;
@@ -42,24 +43,6 @@ public class LottoTicket {
         List<LottoNumber> copyLottoTicket = new ArrayList<>(lottoTicket);
         copyLottoTicket.retainAll(target.lottoTicket);
         return copyLottoTicket.size();
-    }
-
-    public static LottoTicket makeAuto() {
-        List<LottoNumber> shuffledNumbers = shuffle();
-        List<LottoNumber> autoNumbers = subList(shuffledNumbers);
-        Collections.sort(autoNumbers);
-
-        return new LottoTicket(autoNumbers);
-    }
-
-    private static List<LottoNumber> shuffle() {
-        List<LottoNumber> copyNumbers = new ArrayList<>(LOTTO_NUMBERS);
-        Collections.shuffle(copyNumbers);
-        return copyNumbers;
-    }
-
-    private static List<LottoNumber> subList(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.subList(0, LOTTO_SIZE);
     }
 
     public List<Integer> matchList(List<LottoTicket> tickets) {
