@@ -19,6 +19,7 @@ public class InputConsoleUtils {
         System.out.println(printMessage);
         return BUFFERED_READER.readLine();
     }
+
     public static String readLine() throws IOException {
         return BUFFERED_READER.readLine();
     }

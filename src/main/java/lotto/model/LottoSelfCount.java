@@ -9,7 +9,7 @@ public class LottoSelfCount {
     public LottoSelfCount(String selfMoneyWord) {
         try {
             this.selfCount = Integer.parseInt(selfMoneyWord);
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(ErrorMessage.NOT_NUMBER);
         }
     }

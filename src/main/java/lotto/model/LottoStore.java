@@ -9,12 +9,12 @@ public class LottoStore {
 
     public LottoStore(Money money, LottoSelfCount lottoSelfCount) {
         int totalCount = money.getMoney() / LottoRoleConst.LOTTO_PRICE;
-        this.lottoPaper = new LottoPaper(totalCount,lottoSelfCount.getSelfCount());
-        validateOverCount(totalCount,lottoPaper);
+        this.lottoPaper = new LottoPaper(totalCount, lottoSelfCount.getSelfCount());
+        validateOverCount(totalCount, lottoPaper);
     }
 
     private void validateOverCount(int totalCount, LottoPaper lottoPaper) {
-        if (totalCount < lottoPaper.getSelfCount()){
+        if (totalCount < lottoPaper.getSelfCount()) {
             throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_MEONY);
         }
     }

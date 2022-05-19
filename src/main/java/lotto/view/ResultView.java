@@ -25,7 +25,7 @@ public class ResultView {
     }
 
     private static String resultPurchaseView(LottoPaper lottoPaper) {
-        return String.format(PURCHASE_MESSAGE,lottoPaper.getSelfCount(),lottoPaper.randomCount());
+        return String.format(PURCHASE_MESSAGE, lottoPaper.getSelfCount(), lottoPaper.randomCount());
     }
 
     public static void printLottosView(Lottos lottos, LottoPaper lottoPaper) {
