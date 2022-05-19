@@ -57,8 +57,8 @@
   * 로또 일치수 & 당첨금액 관리하는 enum 클래스를 만든다
 
 
-*  구현클래스 리스트
-  *[X] domain
+* 반영목록
+  * [X] domain
     * [X] LottoNumber - 로또번호 1~45 캐싱 및 유효성 체크
     * [X] Lotto - 로또번호 6개를 저장
     * [X] LottoFactory - Lotto 객체를 생산하는 클래스
@@ -67,13 +67,57 @@
     * [X] Lottos - 구매한 로또 번호들을 가지는 클래스
     * [X] Money - 구매금액 관련 클래스
       * [X] 1000원 이하면 예외발생
+      * [X] krw 변환 문자열 반환
     * [X] Quantity - 구매수량
       * [X] 구매가능 수량 초과시 예외발생
     * [X] LottoGame - 로또 상태를 가지는 클래스
     * [X] LottoResult - 당첨결과 클래스
+      * [X] 수익률 반환
     * [X] LottoRank - 금액, 등수별 매칭개수를 관리하는 enum 클래스
-  *[X] controller
+  * [X] controller
     *[X] App - 입력 및 결과를 제어
-  *[X] view
-    *[X] InputView - 구매관련 값을 입력 받는 클래스
-    *[X] ResultView - 결과를 화면에 출력하는 클래스
+  * [X] view
+    * [X] InputView - 구매관련 값을 입력 받는 클래스
+    * [X] ResultView - 결과를 화면에 출력하는 클래스
+
+
+* 리뷰어(김재연 님) 코드리뷰
+  * 컬렉션 방어적 복사
+    * [X] 외부에서 객체 조작방지
+  * 쓸데없는 예외처리 메시지 상수화 의문제기
+    * [X] 코드만 늘어나고 특별히 이득이 없으므로 상수화된 변수들 제거
+  * 정적 팩토리 메서드는 생성자 아래 위치하는 것이 관례
+    * [X] 반영완료
+  * LottoResult 멤버변수명 변경 제안
+    * [x] LottoResult.lottoResult -> LottoResult.winningRank
+  * Optional Null 체크 대신 if문 제안
+    * [x] if 문 변경 완료
+  * 캐싱된 LottoNumbers 객체 Thread-safe 제안
+    * [X] 방어적 복사 적용
+  * 캐싱 객체 테스트 검증필요
+    * [X] equals&hashCode 오버라이딩 삭제
+    * [X] 테스트 코드 반영
+
+# 4단계 - 로또(2등)
+* 요구사항
+  * 보너스 번호를 추가로 입력 받음
+  * 당첨 통계에 2등 추가
+
+
+* 반영목록
+  * [X] View
+    * [X] InputView
+      * [X] 보너스번호 입력
+    * [X] ResultView
+      * [X] 2등 출력
+  * [X] Domain
+    * [x] WinningNumber
+      * [X] 우승로또번호와 보너스 번호를 감싼 객체
+    * [X] LottoRank
+      * [X] 2등 매치, 상금 정보 
+      * [X] winningMoney int 형을 Money 객체로 변경
+      * [X] 상금 합계 기능
+    * [X] LottoResult
+      * [X] 생성자 인자 WinningNumber 객체로 변경
+  * [X] Controller
+    * [X] 보너스 번호
