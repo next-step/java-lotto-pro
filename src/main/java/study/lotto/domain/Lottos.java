@@ -6,16 +6,32 @@ import java.util.stream.Collectors;
 import study.lotto.domain.draw.Division;
 import study.lotto.domain.draw.DivisionResult;
 import study.lotto.domain.draw.DrawResult;
+import study.lotto.domain.lottomachine.LottoCount;
 
 public class Lottos {
-    private final List<Lotto> value;
+    private final LottoCount manualCount;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.value = copy(lottos);
+        this(new LottoCount(0), lottos);
+    }
+
+    public Lottos(LottoCount manualCount, List<Lotto> lottos) {
+        this.manualCount = manualCount;
+        this.lottos = copy(lottos);
     }
 
     public List<Lotto> get() {
-        return copy(value);
+        return copy(lottos);
+    }
+
+    public LottoCount getManualCount() {
+        return manualCount;
+    }
+
+    public LottoCount getAutomaticLottoCount() {
+        LottoCount count = new LottoCount(lottos.size());
+        return new LottoCount(count.subtract(manualCount));
     }
 
     public DrawResult findWinnings(Lotto winningNumber, LottoNumber bonusNumber) {
@@ -23,7 +39,7 @@ public class Lottos {
     }
 
     private List<DivisionResult> createDivisionResultList(Lotto winningNumber, LottoNumber matchBonus) {
-        Map<Division, Long> divisionResults = value.stream()
+        Map<Division, Long> divisionResults = lottos.stream()
                 .map(lotto -> Division.valueOf(winningNumber.matchCount(lotto), lotto.has(matchBonus)))
                 .collect(Collectors.groupingBy(division -> division, Collectors.counting()));
 

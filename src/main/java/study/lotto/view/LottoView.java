@@ -25,13 +25,14 @@ public class LottoView {
 
     public Lottos getManualLottos() {
         LottoCount count = new LottoCount(userInterface.getUserInput("수동으로 구매할 로또 수를 입력해 주세요.\n"));
-        return new Lottos(getManualLottos(count));
+        return new Lottos(count, getManualLottos(count));
     }
 
     public void showPurchaseResult(Lottos purchasedLottos) {
-        List<Lotto> lottoList = purchasedLottos.get();
-        userInterface.show(String.format("%d개 구매했습니다.\n", lottoList.size()));
-        userInterface.show(lottoListString(lottoList));
+        userInterface.show(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.\n",
+                purchasedLottos.getManualCount(),
+                purchasedLottos.getAutomaticLottoCount()));
+        userInterface.show(lottoListString(purchasedLottos.get()));
         userInterface.show("\n");
     }
 

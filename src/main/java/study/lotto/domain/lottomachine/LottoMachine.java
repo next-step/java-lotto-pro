@@ -1,6 +1,8 @@
 package study.lotto.domain.lottomachine;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,27 +29,56 @@ public class LottoMachine {
         if (Objects.isNull(purchasePrice)) {
             throw new IllegalArgumentException("구매 금액이 null이 될 수 없습니다.");
         }
-        return issue(purchasePrice);
+        return issue(purchasePrice, new Lottos(new ArrayList<>()));
     }
 
-    private LottoPurchaseHistory issue(Price purchasePrice) {
-        int count = numberOfLottos(purchasePrice);
-
-        BigDecimal totalPrice = lottoPrice.multiply(count);
-        Lottos issuedLottos = new Lottos(generateLottos(count));
-
-        return new LottoPurchaseHistory(issuedLottos, totalPrice);
+    public LottoPurchaseHistory issueLotto(Price purchasePrice, Lottos lotto) {
+        if (Objects.isNull(purchasePrice)) {
+            throw new IllegalArgumentException("구매 금액이 null이 될 수 없습니다.");
+        }
+        return issue(purchasePrice, lotto);
     }
 
-    private int numberOfLottos(Price money) {
+    private LottoPurchaseHistory issue(Price purchasePrice, Lottos manualLottos) {
+        LottoCount totalCount = numberOfLottos(purchasePrice);
+
+        LottoCount manualCount = manualLottos.getManualCount();
+        if (manualCount.isGreaterThan(totalCount)) {
+            throw new IllegalArgumentException(String.format("입력한 금액으로는 최대 %s개의 로또를 구매할 수 있습니다.", totalCount));
+        }
+
+        int automaticLottoCount = totalCount.subtract(manualCount);
+        Lottos issuedLotto = generateLottos(manualLottos, automaticLottoCount);
+        BigDecimal totalPrice = lottoPrice.multiply(totalCount.get());
+
+        return new LottoPurchaseHistory(issuedLotto, totalPrice);
+    }
+
+    private LottoCount numberOfLottos(Price money) {
         int count = money.divide(lottoPrice);
         if (count <= 0) {
             throw new IllegalArgumentException("로또를 하나도 구입하지 못했습니다.");
         }
-        return count;
+        return new LottoCount(count);
     }
 
-    private List<Lotto> generateLottos(int count) {
+    private Lottos generateLottos(Lottos manualLottos, int automaticLottoCount) {
+        List<Lotto> sortedManualLottos = manualLottos.get().stream()
+                .map(lottoGenerator::sort)
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+        return new Lottos(
+                manualLottos.getManualCount(),
+                mergeLottos(sortedManualLottos, generateAutomaticLottos(automaticLottoCount)));
+    }
+
+    private List<Lotto> mergeLottos(List<Lotto> manualLotto, List<Lotto> automaticLottos) {
+        return Stream.of(manualLotto, automaticLottos)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+    }
+
+    private List<Lotto> generateAutomaticLottos(int count) {
         return Stream.generate(this::generateLotto)
                 .limit(count)
                 .collect(Collectors.toList());
