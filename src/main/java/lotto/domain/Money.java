@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.constant.ErrorMessageConst;
+import lotto.utils.CustomParseUtils;
 
 public class Money {
     private final int amount;
@@ -10,6 +11,10 @@ public class Money {
     public Money(int amount){
         validateMoney(amount);
         this.amount = amount;
+    }
+
+    public static Money from(String readMoney) {
+        return new Money(CustomParseUtils.stringToInteger(readMoney));
     }
 
     private void validateMoney(int amount) {

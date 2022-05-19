@@ -21,6 +21,10 @@ public class Lotto {
         Collections.sort(lottoNumbers);
     }
 
+    public static Lotto from(List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
     private void validateNumberSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(

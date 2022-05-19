@@ -10,6 +10,10 @@ public class Lottos{
         this.lottos = lottoList;
     }
 
+    public static Lottos from(List<Lotto> inputLotto) {
+        return new Lottos(inputLotto);
+    }
+
     public int size() {
         return lottos.size();
     }

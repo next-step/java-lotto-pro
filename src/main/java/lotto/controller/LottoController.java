@@ -18,13 +18,13 @@ public class LottoController {
         OutputView.printPurchasedLottos(lottos, manualCount);
 
         Lotto winningLotto = readWinningNumbers();
-        LottoNumber bonusNumber = new LottoNumber(CustomParseUtils.stringToInteger(InputView.readBonusNumber()));
-        LottoResult result = new LottoResult(lottos, winningLotto, bonusNumber);
-        OutputView.printLottoResult(result, money.calculateProfit(result.winningPrice()));
+        LottoNumber bonusNumber = LottoNumber.from(InputView.readBonusNumber());
+        LottoResult result = LottoResult.of(lottos, winningLotto, bonusNumber);
+        OutputView.printLottoResult(result, money.calculateProfit(result.winningPrize()));
     }
 
     private static Money readMoney() {
-        Money money = new Money(CustomParseUtils.stringToInteger(InputView.readMoney()));
+        Money money = Money.from(InputView.readMoney());
         if (money.maxLottoCount().isLessThan(LottoCount.from(0))) {
             throw new IllegalArgumentException(
                     String.format(ErrorMessageConst.ERROR_INVALID_MONEY_MINIMUM_VALUE, Money.LOTTO_PRICE)
@@ -46,13 +46,13 @@ public class LottoController {
         InputView.guideMessageToReadManualLottoNumbers();
         for (int i = 0; i < manualCount.getCount(); i++) {
             List<Integer> manualNumbers = CustomParseUtils.stringToIntegerList(InputView.readSimpleLottoNumbers());
-            manualLottos.add(new Lotto(manualNumbers));
+            manualLottos.add(Lotto.from(manualNumbers));
         }
         return manualLottos;
     }
 
     private static Lotto readWinningNumbers(){
         List<Integer> winningNumbers = CustomParseUtils.stringToIntegerList(InputView.readLottoWinningNumber());
-        return new Lotto(winningNumbers);
+        return Lotto.from(winningNumbers);
     }
 }

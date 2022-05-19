@@ -32,9 +32,9 @@ public class MoneyTest {
 
     @ParameterizedTest(name="수익률 계산: 초기금액 {0}원 - 상금 {1}원 - 수익률 {2}")
     @CsvSource(value = {"100000:5000:0.05", "100500:5000:0.05"}, delimiter = ':')
-    void Money_수익률_계산(int initialMoney, int winningPrice, double profit){
+    void Money_수익률_계산(int initialMoney, int winningPrize, double profit){
         Money money = new Money(initialMoney);
-        assertThat(money.calculateProfit(winningPrice)).isEqualTo(profit);
+        assertThat(money.calculateProfit(winningPrize)).isEqualTo(profit);
     }
 
     @Test

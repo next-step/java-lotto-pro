@@ -29,7 +29,7 @@ public class OutputView {
     private static void printWinningCount(LottoResult result) {
         for(LottoRank rank : LottoRank.rankListWithReverseOrder()){
             System.out.println(String.format(ViewMessageConst.OUTPUT_MESSAGE_WINNING_COUNT_RESULT,
-                    rank.getMatchedCount(), printBonusBallMatched(rank.bonusBallMatched()), rank.getPrice(),
+                    rank.getMatchedCount(), printBonusBallMatched(rank.bonusBallMatched()), rank.getPrize(),
                     result.winningCountByRank(rank)));
         }
     }

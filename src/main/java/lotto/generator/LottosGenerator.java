@@ -16,22 +16,22 @@ public class LottosGenerator {
     }
 
     public static Lottos purchaseManualLottos(List<Lotto> manualLottos){
-        return new Lottos(manualLottos);
+        return Lottos.from(manualLottos);
     }
 
     public static Lottos purchaseAutoLottos(Money money) {
         List<Lotto> lottoList = new ArrayList<>();
         LottoCount purchaseCount = money.maxLottoCount();
         for (int i = 0; i < purchaseCount.getCount(); i++) {
-            lottoList.add(new Lotto(RandomLottoNumbersGenerator.generate()));
+            lottoList.add(Lotto.from(RandomLottoNumbersGenerator.generate()));
         }
-        return new Lottos(lottoList);
+        return Lottos.from(lottoList);
     }
 
     private static Lottos mergeLottos(Lottos manualLottos, Lottos autoLottos) {
         List<Lotto> merged = new ArrayList<>();
         merged.addAll(manualLottos.getLottosAsUnmodifiableList());
         merged.addAll(autoLottos.getLottosAsUnmodifiableList());
-        return new Lottos(merged);
+        return Lottos.from(merged);
     }
 }
