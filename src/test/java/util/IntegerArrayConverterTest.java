@@ -15,7 +15,7 @@ public class IntegerArrayConverterTest {
         Object convert = converter.convert("1#2", int[].class);
 
         assertThat(convert)
-                .isInstanceOf(String[].class);
+                .isInstanceOf(int[].class);
         int[] ints = (int[]) convert;
 
         assertThat(ints)
