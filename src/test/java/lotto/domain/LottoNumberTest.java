@@ -9,10 +9,11 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumberTest {
     @Test
-    @DisplayName("1~45의 캐싱된 로또 번호를 가져온다")
+    @DisplayName("캐싱된 1~45 로또번호 객체를 가져와 비교한다")
     void caching() {
         for (int i = 1; i <= 45; i++) {
-            assertThat(LottoNumber.of(i).getLottoNumber()).isEqualTo(i);
+            assertThat(LottoNumber.of(i)).isEqualTo(LottoNumber.of(i));
+
         }
     }
 
