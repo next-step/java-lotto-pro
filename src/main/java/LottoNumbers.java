@@ -66,10 +66,6 @@ public class LottoNumbers implements Iterable<LottoNumber> {
 
     @Override
     public String toString() {
-        return "[" +
-                this.lottoNumbers.stream()
-                        .map(LottoNumber::toString)
-                        .collect(Collectors.joining(", ")) +
-                "]";
+        return "[" + this.lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(", ")) + "]";
     }
 }

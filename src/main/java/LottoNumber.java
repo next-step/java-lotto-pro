@@ -7,8 +7,9 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        if (number < LOWER_BOUND || number > UPPER_BOUND)
+        if (number < LOWER_BOUND || number > UPPER_BOUND) {
             throw new IllegalArgumentException("로또 번호 숫자의 범위는 " + LOWER_BOUND + "과 " + UPPER_BOUND + " 사이여야 합니다.");
+        }
 
         this.number = number;
     }
@@ -19,10 +20,12 @@ public class LottoNumber {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof LottoNumber))
+        }
+        if (!(o instanceof LottoNumber)) {
             return false;
+        }
         LottoNumber that = (LottoNumber) o;
         return number == that.number;
     }

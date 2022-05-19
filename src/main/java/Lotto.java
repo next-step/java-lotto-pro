@@ -16,7 +16,7 @@ public class Lotto implements Iterable<LottoNumbers> {
     public static Lotto addAll(Lotto lotto) {
         Lotto newLotto = new Lotto();
 
-        for(LottoNumbers lottoNumbers: lotto) {
+        for (LottoNumbers lottoNumbers : lotto) {
             newLotto.add(lottoNumbers);
         }
 
