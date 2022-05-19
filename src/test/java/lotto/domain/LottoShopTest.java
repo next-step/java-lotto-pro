@@ -33,7 +33,7 @@ public class LottoShopTest {
         assertThatThrownBy(() -> {
             LottoShop.buyManualLottos(수동_번호, price);
         }).isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(ExceptionType.IS_LACK_OF_PRICE_.getMessage());
+            .hasMessageContaining(ExceptionType.IS_LACK_OF_PRICE.getMessage());
     }
 
     @DisplayName("천원단위로 로또를 자동으로 구매하면 천원단위의 갯수만큼 로또가 구매되어야 한다")

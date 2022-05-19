@@ -63,7 +63,7 @@ public class LottoShop {
 
     private static void validateBuyManual(List<String> lottos, Price price) {
         if (lottos.size() > (price.getPrice() / LottoConstants.LOTTO_PRICE)) {
-            throw new IllegalArgumentException(ExceptionType.IS_LACK_OF_PRICE_.getMessage());
+            throw new IllegalArgumentException(ExceptionType.IS_LACK_OF_PRICE.getMessage());
         }
     }
 }

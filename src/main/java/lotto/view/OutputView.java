@@ -11,10 +11,6 @@ import lotto.domain.Rank;
 
 public class OutputView {
 
-    public static void printPurchaseCount(int count) {
-        System.out.printf(MessageConstants.OUTPUT_PURCHASE_COUNT, count);
-    }
-
     public static void printPurchaseCountByLottoType(int manualCount, int autoCount) {
         System.out.printf(MessageConstants.OUTPUT_PURCHASE_COUNT_BY_LOTTO_TYPE, manualCount,
             autoCount);

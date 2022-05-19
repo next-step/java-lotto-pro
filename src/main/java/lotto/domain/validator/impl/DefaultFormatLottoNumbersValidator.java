@@ -12,7 +12,7 @@ public class DefaultFormatLottoNumbersValidator implements LottoNumbersValidator
     public void validate(String winningNumbers) {
         if (!DEFAULT_REGEX.matcher(winningNumbers).matches()) {
             throw new IllegalArgumentException(
-                ExceptionType.INVALID_WINNING_NUMBER_FORMAT.getMessage());
+                ExceptionType.INVALID_LOTTO_NUMBER_FORMAT.getMessage());
         }
     }
 }

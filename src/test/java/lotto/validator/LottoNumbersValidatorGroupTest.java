@@ -32,7 +32,7 @@ class LottoNumbersValidatorGroupTest {
         assertThatThrownBy(() -> {
             lottoNumbersValidatorGroup.validate(given);
         }).isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(ExceptionType.INVALID_WINNING_NUMBER_FORMAT.getMessage());
+            .hasMessageContaining(ExceptionType.INVALID_LOTTO_NUMBER_FORMAT.getMessage());
     }
 
     @DisplayName("1-45 이외의 데이터를 전달하면 당첨번호 크기에 대한 에러메시지가 나와야 한다")

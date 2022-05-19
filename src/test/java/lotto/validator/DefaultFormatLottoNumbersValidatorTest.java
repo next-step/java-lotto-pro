@@ -20,6 +20,6 @@ class DefaultFormatLottoNumbersValidatorTest {
         assertThatThrownBy(() -> {
             validator.validate(input);
         }).isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(ExceptionType.INVALID_WINNING_NUMBER_FORMAT.getMessage());
+            .hasMessageContaining(ExceptionType.INVALID_LOTTO_NUMBER_FORMAT.getMessage());
     }
 }
