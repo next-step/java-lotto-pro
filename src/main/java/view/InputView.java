@@ -25,6 +25,10 @@ public class InputView {
 
 	private static String inputView(String message) {
 		System.out.println(message);
-		return CustomScanner.readLine();
+		String readMessage = CustomScanner.readLine().trim();
+		if(readMessage.isEmpty()) {
+			throw new IllegalArgumentException("값이 입력되지 않았습니다.");
+		}
+		return readMessage;
 	}
 }
