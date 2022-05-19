@@ -59,4 +59,12 @@ class LottoNumbersTest {
                 () -> assertThat(lottoNumbers.matchCount(winningNumbers6)).isEqualTo(6)
         );
     }
+
+    @DisplayName("로또넘버는 정렬된 로또 번호를 생성")
+    @Test
+    void create_sort() {
+        LottoNumbers lottoNumbers = new LottoNumbers((Arrays.asList("7", "10", "35", "13", "25", "3")));
+
+        assertThat(lottoNumbers).isEqualTo(new LottoNumbers((Arrays.asList( "3","7", "10", "13", "25", "35"))));
+    }
 }
