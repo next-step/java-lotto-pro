@@ -1,12 +1,11 @@
 package lotto;
 
 import lotto.domain.Lottos;
-import lotto.service.LottoNumberService;
 
 import java.util.List;
 
 public class LottoMachine {
-    private final LottoNumberService numberService = new LottoNumberService();
+    private final LottoNumberGenerator numberService = new LottoNumberGenerator();
 
     public Lottos purchase(int purchasingCount) {
         Lottos lottos = new Lottos();

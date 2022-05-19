@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -6,10 +6,10 @@ import java.util.stream.IntStream;
 
 import static lotto.config.LottoGameConfig.*;
 
-public class LottoNumberService {
+public class LottoNumberGenerator {
     private final List<Integer> allLottoNumbers;
 
-    public LottoNumberService() {
+    public LottoNumberGenerator() {
         allLottoNumbers = makeAllLottoNumbers();
     }
 
