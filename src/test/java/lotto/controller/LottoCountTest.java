@@ -34,4 +34,15 @@ class LottoCountTest {
                 new LottoCount(-1)
         ).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 로또_카운트를_인자로_받아_마이너스를_한다() {
+        // given
+        LottoCount lottoCount = new LottoCount(5);
+        LottoCount minus = new LottoCount(2);
+        // when
+        LottoCount result = lottoCount.minus(minus);
+        // then
+        assertThat(result.count()).isEqualTo(3);
+    }
 }

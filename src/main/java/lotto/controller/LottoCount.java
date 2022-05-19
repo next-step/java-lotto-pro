@@ -44,4 +44,8 @@ public class LottoCount {
         }
         return lottos;
     }
+
+    public LottoCount minus(LottoCount minus) {
+        return new LottoCount(this.count - minus.count);
+    }
 }
