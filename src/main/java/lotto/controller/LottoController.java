@@ -35,6 +35,9 @@ public class LottoController {
     }
 
     private Lottos buyManualLottos(LottoCount manualCount) {
+        if (manualCount.isZero()) {
+            return new Lottos();
+        }
         ManualLottoNumbers manualLottoNumbers = new ManualLottoNumbers(InputView.inputManualLotto(manualCount));
         return lottoMachine.buy(new ManualLottoGenerator(manualLottoNumbers));
     }

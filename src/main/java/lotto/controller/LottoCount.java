@@ -48,4 +48,8 @@ public class LottoCount {
     public LottoCount minus(LottoCount minus) {
         return new LottoCount(this.count - minus.count);
     }
+
+    public boolean isZero() {
+        return count == ZERO;
+    }
 }
