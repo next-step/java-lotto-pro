@@ -2,9 +2,9 @@ package lotto.validator;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.domain.validator.WinningNumbersValidator;
+import lotto.domain.validator.LottoNumbersValidator;
 import lotto.exception.ExceptionType;
-import lotto.domain.validator.impl.InvalidWinningNumberSizeValidator;
+import lotto.domain.validator.impl.InvalidLottoNumberSizeValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,7 +16,7 @@ class InvalidWinningNumberSizeValidatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,51", "5,1,12,13,44,60", "0,45,23,18,11,7"})
     void invalid_number_test(String input) {
-        WinningNumbersValidator validator = new InvalidWinningNumberSizeValidator();
+        LottoNumbersValidator validator = new InvalidLottoNumberSizeValidator();
         assertThatThrownBy(() -> {
             validator.validate(input);
         }).isInstanceOf(IllegalArgumentException.class)

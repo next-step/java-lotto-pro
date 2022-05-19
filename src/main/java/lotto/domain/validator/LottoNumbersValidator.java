@@ -1,6 +1,6 @@
 package lotto.domain.validator;
 
-public interface WinningNumbersValidator {
+public interface LottoNumbersValidator {
 
     void validate(String winningNumbers);
 }

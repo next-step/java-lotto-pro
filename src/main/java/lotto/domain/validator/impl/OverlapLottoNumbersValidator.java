@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.exception.ExceptionType;
-import lotto.domain.validator.WinningNumbersValidator;
+import lotto.domain.validator.LottoNumbersValidator;
 
-public class OverlapWinningNumbersValidator implements WinningNumbersValidator {
+public class OverlapLottoNumbersValidator implements LottoNumbersValidator {
 
     @Override
     public void validate(String winningNumbers) {

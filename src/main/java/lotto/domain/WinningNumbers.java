@@ -5,14 +5,14 @@ import static lotto.constants.LottoConstants.SPLIT_SYMBOL;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.domain.validator.WinningNumberValidatorGroup;
+import lotto.domain.validator.LottoNumbersValidatorGroup;
 import lotto.exception.ExceptionType;
 
 public class WinningNumbers {
 
     private final Lotto winningNumbers;
     private BonusNumber bonusNumber;
-    private static final WinningNumberValidatorGroup validatorGroup = WinningNumberValidatorGroup.getInstance();
+    private static final LottoNumbersValidatorGroup validatorGroup = LottoNumbersValidatorGroup.getInstance();
 
     public WinningNumbers(String winningNumbersInput) {
         winningNumbersInput = replaceBlank(winningNumbersInput);

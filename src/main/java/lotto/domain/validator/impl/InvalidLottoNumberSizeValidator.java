@@ -5,10 +5,10 @@ import static lotto.constants.LottoConstants.SPLIT_SYMBOL;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.validator.WinningNumbersValidator;
+import lotto.domain.validator.LottoNumbersValidator;
 import lotto.exception.ExceptionType;
 
-public class InvalidWinningNumberSizeValidator implements WinningNumbersValidator {
+public class InvalidLottoNumberSizeValidator implements LottoNumbersValidator {
 
     @Override
     public void validate(String winningNumbers) {

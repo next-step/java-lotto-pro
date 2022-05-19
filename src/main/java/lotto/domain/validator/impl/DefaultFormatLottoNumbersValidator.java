@@ -2,9 +2,9 @@ package lotto.domain.validator.impl;
 
 import java.util.regex.Pattern;
 import lotto.exception.ExceptionType;
-import lotto.domain.validator.WinningNumbersValidator;
+import lotto.domain.validator.LottoNumbersValidator;
 
-public class DefaultFormatWinningNumbersValidator implements WinningNumbersValidator {
+public class DefaultFormatLottoNumbersValidator implements LottoNumbersValidator {
 
     private static final Pattern DEFAULT_REGEX = Pattern.compile("^(((\\d{1,2})(\\,))+\\d{1,2}$)");
 
