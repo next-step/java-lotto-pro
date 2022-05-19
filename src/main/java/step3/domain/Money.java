@@ -9,29 +9,32 @@ public class Money {
     private final String MONEY_RANGE_EXCEPTION = "돈은 양수의 자연수여야 합니다";
 
     public Money(String money) {
-        if (!validateMoney(money)) {
-            throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION);
-        }
+        validateMoney(money);
         this.money = Integer.parseInt(money);
     }
 
     public Money(int money) {
-        if (!validateMoney(money)) {
-            throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION);
-        }
+        validateMoney(money);
         this.money = money;
     }
 
-    private boolean validateMoney(String money) {
+    private void validateMoney(String money) {
+        boolean validateResult = true;
         try {
-            return Integer.parseInt(money) >= 0;
+            validateResult = Integer.parseInt(money) >= 0;
         } catch (NumberFormatException e) {
-            return false;
+            validateResult = false;
+        }
+
+        if (validateResult == false) {
+            throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION);
         }
     }
 
-    private boolean validateMoney(int money) {
-        return money >= 0;
+    private void validateMoney(int money) {
+        if(money < 0){
+            throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION);
+        }
     }
 
     public int getMoney() {

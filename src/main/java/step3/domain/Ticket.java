@@ -9,14 +9,13 @@ public class Ticket {
     private final String CANT_BUY_LOTTO_EXCEPTION = "돈은 최소 " + LOTTO_PRICE + "이상 입력해야합니다";
 
     public Ticket(Money money) {
-        if (validateTicket(money)) {
-            throw new IllegalArgumentException(CANT_BUY_LOTTO_EXCEPTION);
-        }
+        validateTicket(money);
         this.ticket = money.getMoney() / LOTTO_PRICE;
     }
 
-    private boolean validateTicket(Money money) {
-        return money == null || money.getMoney() / LOTTO_PRICE <= 0;
+    private void validateTicket(Money money) {
+        if(money == null || money.getMoney() / LOTTO_PRICE <= 0)
+            throw new IllegalArgumentException(CANT_BUY_LOTTO_EXCEPTION);
     }
 
     public Money ticketToMoney() {
