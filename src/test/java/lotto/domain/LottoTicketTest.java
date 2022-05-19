@@ -2,6 +2,7 @@ package lotto.domain;
 
 import calculator.utils.Splitter;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -61,5 +62,18 @@ public class LottoTicketTest {
                 assertThat(new LottoTicket(lottoNumbers).getLottoTicket().size()).isEqualTo(size);
             }
         );
+    }
+
+    @Test
+    @DisplayName("로또 당첨번호와 일치하는 개수를 응답한다.")
+    void checkMatch() {
+        List<LottoNumber> userLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            userLottoNumbers.add(new LottoNumber(i + 1));
+        }
+        List<LottoNumber> rankLottoTicket = new ArrayList<>(userLottoNumbers);
+
+        LottoTicket ticket = new LottoTicket(userLottoNumbers);
+        assertThat(ticket.match(new LottoTicket(rankLottoTicket))).isEqualTo(6);
     }
 }
