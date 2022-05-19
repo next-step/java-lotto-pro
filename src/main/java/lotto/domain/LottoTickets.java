@@ -19,7 +19,7 @@ public class LottoTickets {
         return new LottoCount(lottoTickets.size());
     }
 
-    public List<LottoTicket> getReadOnlyLottoTickets() {
+    public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
 

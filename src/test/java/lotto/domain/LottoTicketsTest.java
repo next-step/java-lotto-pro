@@ -38,6 +38,6 @@ class LottoTicketsTest {
         LottoTicket lottoTicket1 = new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12));
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(lottoTicket, lottoTicket1));
 
-        assertThat(lottoTickets.getReadOnlyLottoTickets()).containsOnly(lottoTicket, lottoTicket1);
+        assertThat(lottoTickets.getLottoTickets()).containsOnly(lottoTicket, lottoTicket1);
     }
 }
