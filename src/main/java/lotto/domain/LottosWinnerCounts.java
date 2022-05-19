@@ -1,13 +1,15 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottosWinnerCounts {
     private final Map<LottoWinner, Integer> results = new HashMap<>();
 
-    public LottosWinnerCounts() {
+    public LottosWinnerCounts(List<LottoWinner> winners) {
         initResults();
+        reflectLottoWinner(winners);
     }
 
     private void initResults() {
@@ -16,9 +18,11 @@ public class LottosWinnerCounts {
         }
     }
 
-    public void reflectResult(LottoWinner lottoWinner) {
-        Integer winnerCount = results.get(lottoWinner);
-        results.put(lottoWinner, winnerCount + 1);
+    private void reflectLottoWinner(List<LottoWinner> lottoWinners) {
+        for (LottoWinner winner : lottoWinners) {
+            Integer winnerCount = results.get(winner);
+            results.put(winner, winnerCount + 1);
+        }
     }
 
     public int winnerCount(LottoWinner lottoWinner) {

@@ -23,7 +23,7 @@ public class LottoGameStarter {
         Lottos lottos = purchaseLottos(gameMoney);
         List<Integer> winnerNumber = inputWinnerNumbers();
         List<LottoWinner> lottoWinners = calculateLottoResults(lottos, winnerNumber);
-        LottosWinnerCounts lottosWinnerCounts = lottoWinnerService.makeLottosWinnerCounts(lottoWinners);
+        LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts(lottoWinners);
         LottosResult lottosResult = new LottosResult(gameMoney, lottosWinnerCounts);
         ResultView.printLottoResults(lottosWinnerCounts, lottosResult);
     }

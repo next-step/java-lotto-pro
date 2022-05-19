@@ -4,6 +4,9 @@ import lotto.config.LottoGameConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,8 +16,8 @@ class LottosResultTest {
     @Test
     void lottosResultTest01() {
         int count = 5;
-        LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts();
-        lottosWinnerCounts.reflectResult(LottoWinner.FORTH);
+        List<LottoWinner> winnerList = Arrays.asList(LottoWinner.FORTH);
+        LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts(winnerList);
 
         LottosResult lottosResult = new LottosResult(count * LottoGameConfig.PURCHASE_MONEY, lottosWinnerCounts);
         assertThat(lottosResult.ratio())
@@ -25,11 +28,8 @@ class LottosResultTest {
     @Test
     void lottosResultTest02() {
         int count = 4;
-        LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts();
-        lottosWinnerCounts.reflectResult(LottoWinner.FIRST);
-        lottosWinnerCounts.reflectResult(LottoWinner.SECOND);
-        lottosWinnerCounts.reflectResult(LottoWinner.THIRD);
-        lottosWinnerCounts.reflectResult(LottoWinner.FORTH);
+        List<LottoWinner> winnerList = Arrays.asList(LottoWinner.FIRST, LottoWinner.SECOND, LottoWinner.THIRD, LottoWinner.FORTH);
+        LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts(winnerList);
 
         float expectedRatio = (LottoWinner.FIRST.getWinnerMoney() +
                 LottoWinner.SECOND.getWinnerMoney() +
