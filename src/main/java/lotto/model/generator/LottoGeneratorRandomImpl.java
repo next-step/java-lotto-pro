@@ -21,4 +21,9 @@ public class LottoGeneratorRandomImpl implements LottoGenerator {
         }
         return new Lottos(lottos);
     }
+
+    @Override
+    public Lottos generateLottos(Lottos selfLottos, LottoPaper lottoPaper) {
+        return null;
+    }
 }
