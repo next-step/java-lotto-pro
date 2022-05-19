@@ -1,29 +1,24 @@
 package lotto.domain;
 
-import static lotto.constants.LottoConstants.MAX;
-import static lotto.constants.LottoConstants.MIN;
-
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.exception.ExceptionType;
 
 public class Lotto {
 
     private static final int LOTTO_NUMBER_SIZE = 6;
-    private final List<Integer> numbers;
+    private final List<LottoNo> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
-        validateLottoNumberSize(numbers);
-        Collections.sort(numbers);
-        this.numbers = numbers;
+    public Lotto(List<LottoNo> lottoNumbers) {
+        validateLottoNumberSize(lottoNumbers);
+        lottoNumbers = lottoNumbers.stream().sorted(Comparator.comparing(LottoNo::getLottoNo))
+            .collect(Collectors.toList());
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public static boolean isLottoNumberSize(int number) {
-        return number > MAX || number < MIN;
-    }
-
-    private void validateLottoNumberSize(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_SIZE) {
+    private void validateLottoNumberSize(List<LottoNo> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(
                 ExceptionType.INVALID_LOTTO_NUMBER_SIZE.getMessage());
         }
@@ -31,17 +26,17 @@ public class Lotto {
 
     public int getWinningOfNumbersCount(WinningNumbers winningNumbers) {
         int countOfMatch = (int) winningNumbers.getWinningNumbers().stream()
-            .filter(numbers::contains).count();
-        int bonusCount = winningNumbers.isContainsBonusNumber(this) ? 1 : 0;
+            .filter(lottoNumbers::contains).count();
+        countOfMatch += winningNumbers.bonusCount(this);
 
-        return countOfMatch + bonusCount;
+        return countOfMatch;
     }
 
     public boolean contains(int number) {
-        return this.numbers.contains(number);
+        return this.lottoNumbers.contains(new LottoNo(number));
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<LottoNo> getNumbers() {
+        return lottoNumbers;
     }
 }
