@@ -49,39 +49,35 @@ public class LottoMachine {
         return new LottoTicket(lottoElements.stream().map(String::valueOf).collect(Collectors.toList()));
     }
 
-    public boolean setBonusNumber(String lottoElementSource) {
-        if (!validBonusNumber(lottoElementSource)) {
-            System.out.println(SET_BONUS_NUMBER_EXCEPTION_MSG);
-            return false;
-        }
+    public void setBonusNumber(String lottoElementSource) {
+        validBonusNumber(lottoElementSource);
         bonusNumber = new LottoElement(Integer.parseInt(lottoElementSource));
-        return true;
     }
 
-    private boolean validBonusNumber(String lottoElementSource) {
+    private void validBonusNumber(String lottoElementSource) {
         int isExist = 1;
+        boolean validateResult = true;
         try {
             int bonusExistInWinnerTicket = winnerLotto.getMatchCountWith(Arrays.asList(new LottoElement(Integer.parseInt(lottoElementSource))));
-            return bonusExistInWinnerTicket != isExist;
+            validateResult = bonusExistInWinnerTicket != isExist;
         } catch (NumberFormatException e) {
-            return false;
+            validateResult = false;
         } catch (IllegalArgumentException e) {
-            return false;
+            validateResult = false;
+        }
+        if (!validateResult) {
+            throw new IllegalArgumentException(SET_BONUS_NUMBER_EXCEPTION_MSG);
         }
     }
 
-    public boolean setWinnerLotto(String winnerSource) {
+    public void setWinnerLotto(String winnerSource) {
         winnerLotto = makeManualLottoTicket(winnerSource);
-        return winnerLotto != null;
     }
 
     private LottoTicket makeManualLottoTicket(String manualLottoSource) {
-        try {
-            return new LottoTicket(manualLottoSource);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
+
+        return new LottoTicket(manualLottoSource);
+
     }
 
     public HashMap<LottoReward, Integer> checkWin(List<LottoTicket> lottoTickets) {
@@ -102,15 +98,15 @@ public class LottoMachine {
         }
     }
 
-    public int getLottoTicketCount(Money money){
+    public int getLottoTicketCount(Money money) {
         int ticket = money.getMoney() / LOTTO_PRICE;
-        if(ticket == 0){
-            System.out.println(CANT_BUY_LOTTO_EXCEPTION);
+        if (ticket == 0) {
+            throw new IllegalArgumentException(CANT_BUY_LOTTO_EXCEPTION);
         }
         return ticket;
     }
 
-    public int getUsingMoneyByTicket(int ticket){
+    public int getUsingMoneyByTicket(int ticket) {
         return ticket * LOTTO_PRICE;
     }
 }
