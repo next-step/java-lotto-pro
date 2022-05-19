@@ -9,8 +9,15 @@ public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static int[] enterManualLotto() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return LottoUtil.convertToIntArray(enterString().split(","));
+        while (true) {
+            try {
+                System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+                int[] intArray = LottoUtil.convertLottoStringToIntArray(enterString().split(","));
+                return intArray;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public static String enterString() {
