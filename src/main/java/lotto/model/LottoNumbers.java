@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import static lotto.constants.LottoConstant.*;
-import static lotto.utils.InputUtils.convertToIntegerList;
-import static lotto.utils.InputUtils.splitWithDelimiter;
 import static lotto.utils.RandomUtils.createRandomNumbers;
-import static lotto.view.InputView.readWinningNumbers;
 
 public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
@@ -28,6 +25,7 @@ public class LottoNumbers {
 
     public static LottoNumbers createWinningNumbers(List<Integer> numbers) {
         checkNumberDuplicate(numbers);
+        checkNumberSize(numbers);
         return new LottoNumbers(numbers);
     }
 
@@ -36,6 +34,14 @@ public class LottoNumbers {
         boolean hasDuplicate = numberSet.size() <  LOTTO_PICK_COUNT;
         if (hasDuplicate) {
             throw new IllegalArgumentException("[ERROR] 로또 번호에 중복 값이 존재합니다!");
+        }
+    }
+
+    private static void checkNumberSize(List<Integer> numbers) {
+        boolean isOverSize = numbers.size() > LOTTO_PICK_COUNT;
+        if (isOverSize) {
+            String message = String.format("[ERROR] 로또 번호는 %d개 입력해 주세요!", LOTTO_PICK_COUNT);
+            throw new IllegalArgumentException(message);
         }
     }
 
