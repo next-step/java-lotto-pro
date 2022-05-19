@@ -33,8 +33,8 @@ public class Money {
         }
     }
 
-    public int calculateLottoTicketCount() {
-        return this.money / LOTTO_TICKET_PRICE;
+    public LottoCount calculateLottoTicketCount() {
+        return LottoCount.from(this.money / LOTTO_TICKET_PRICE);
     }
 
     public int getMoney() {

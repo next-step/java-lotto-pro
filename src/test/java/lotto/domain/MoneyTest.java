@@ -73,6 +73,6 @@ class MoneyTest {
     void returns_available_ticket_count() {
         String string = "12000";
         Money money = new Money(string);
-        assertThat(money.calculateLottoTicketCount()).isEqualTo(12);
+        assertThat(money.calculateLottoTicketCount().getCount()).isEqualTo(12);
     }
 }

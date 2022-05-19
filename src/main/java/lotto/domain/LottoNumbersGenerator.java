@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.utils.StringSplitter;
-import lotto.view.InputView;
 
 import java.util.*;
 import java.util.stream.Collectors;

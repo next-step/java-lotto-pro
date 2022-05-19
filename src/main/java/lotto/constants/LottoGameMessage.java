@@ -4,7 +4,9 @@ public class LottoGameMessage {
     private LottoGameMessage() {}
 
     public static final String WAIT_FOR_USER_MONEY_INPUT = "구입금액을 입력해 주세요.";
-    public static final String PURCHASED_LOTTO_COUNT_INFORMATION = "%s개를 구매했습니다.";
+    public static final String PURCHASED_LOTTO_COUNT_INFORMATION = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
+    public static final String WAIT_FOR_MANUAL_LOTTO_PURCHASE_COUNT_INPUT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String WAIT_FOR_MANUAL_LOTTO_NUMBERS_INPUT = "수동으로 구매할 번호를 입력해 주세요.";
     public static final String WAIT_FOR_LATEST_LOTTO_RESULT_INPUT = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String WAIT_FOR_BONUS_LOTTO_NUMBER_INPUT = "보너스 볼을 입력해 주세요.";
     public static final String LOTTO_STATISTICS_INFORMATION_TITLE = "당첨 통계";

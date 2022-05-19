@@ -28,6 +28,10 @@ public class LottoNumbers {
         return new LottoNumbers(parsedLottoNumbers);
     }
 
+    public static LottoNumbers from(List<LottoNumber> lottoNumbers) {
+        return new LottoNumbers(lottoNumbers);
+    }
+
     public List<LottoNumber> getReadOnlyLottoNumbers() {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
