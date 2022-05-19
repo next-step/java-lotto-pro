@@ -1,13 +1,11 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,12 +21,11 @@ class LottosTest {
         정답_번호 = new WinningNumbers("1,2,3,4,5,6");
         정답_번호.addBonusNumber(new BonusNumber("45"));
 
-        Lotto FIFTH_LOTTO = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
-        Lotto FOURTH_LOTTO = new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8));
-        Lotto THIRD_LOTTO = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
+        Lotto FIFTH_LOTTO = new Lotto(convert(Arrays.asList(4, 5, 6, 7, 8, 9)));
+        Lotto FOURTH_LOTTO = new Lotto(convert(Arrays.asList(3, 4, 5, 6, 7, 8)));
+        Lotto THIRD_LOTTO = new Lotto(convert(Arrays.asList(2, 3, 4, 5, 6, 7)));
 
         로또_목록 = Arrays.asList(FIFTH_LOTTO, FOURTH_LOTTO, THIRD_LOTTO);
-
     }
 
     @Test
@@ -53,5 +50,10 @@ class LottosTest {
         int expected = Rank.FIFTH.getWinningsMoney() + Rank.FOURTH.getWinningsMoney()
             + Rank.THIRD.getWinningsMoney();
         assertThat(lottoScore.getWinnings().getWinningsPrice()).isEqualTo(expected);
+    }
+
+    private List<LottoNo> convert(List<Integer> numbers) {
+        return numbers.stream().map(LottoNo::new)
+            .collect(Collectors.toList());
     }
 }
