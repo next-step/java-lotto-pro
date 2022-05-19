@@ -20,19 +20,11 @@ public class Lottos {
 
     public Lottos(List<String> lottos, Price price) {
         lottos.forEach(validatorGroup::validate);
-        price.minusPrice(LottoConstants.LOTTO_PRICE * lottos.size());
+        price.spend(LottoConstants.LOTTO_PRICE * lottos.size());
 
         this.lottos = lottos.stream()
             .map(Lottos::splitLottoNumbers)
             .collect(Collectors.toList());
-    }
-
-    public static Lottos of(List<String> lottosStr) {
-        lottosStr.forEach(validatorGroup::validate);
-
-        return new Lottos(lottosStr.stream()
-            .map(Lottos::splitLottoNumbers)
-            .collect(Collectors.toList()));
     }
 
     public List<Lotto> getLottos() {
