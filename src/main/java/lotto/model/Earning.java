@@ -19,4 +19,9 @@ public class Earning {
     public BigDecimal getEarningRate() {
         return earningRate;
     }
+
+    @Override
+    public String toString() {
+        return earningRate.toString();
+    }
 }
