@@ -26,6 +26,7 @@ public class LottoPresenter {
         final LottoPayment payment = requestPayment(scanner);
         requestManualAmount(scanner, payment);
         final LottoTickets tickets = LottoTickets.createManually(requestManualNumbersList(scanner, payment));
+        printLineSeparator();
         printPaymentResult(payment);
         tickets.merge(LottoTickets.createAutomatically(payment.getPurchasableAmount() - payment.getManualAmount()));
         tickets.print();
@@ -57,7 +58,7 @@ public class LottoPresenter {
     }
 
     private List<LottoNumbers> requestManualNumbersList(final Scanner scanner, final LottoPayment lottoPayment) {
-        System.out.println(MANUAL_NUMBERS_LIST);
+        System.out.println(MANUAL_NUMBERS_LIST.getMessage());
         final List<LottoNumbers> manualNumbersList = new ArrayList<>();
         for (int i = 0; i < lottoPayment.getManualAmount(); i++) {
             addManualNumbers(scanner, manualNumbersList);
@@ -70,13 +71,14 @@ public class LottoPresenter {
             manualNumbersList.add(LottoNumbers.convertAndCreate(scanner.nextLine()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            manualNumbersList.clear();
             addManualNumbers(scanner, manualNumbersList);
         }
     }
 
     private void printPaymentResult(final LottoPayment payment) {
-        System.out.println(String.format("%d개를 구매했습니다.", payment.getPurchasableAmount()));
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+                payment.getManualAmount(),
+                payment.getPurchasableAmount() - payment.getManualAmount()));
     }
 
     private void printLineSeparator() {
@@ -116,7 +118,7 @@ public class LottoPresenter {
     }
 
     private void printReturnOfRatio(final double returnOfRatio) {
-        String message = "총 수익률은 " + String.format("%.2f", returnOfRatio) + "입니다.";
+        final String message = "총 수익률은 " + String.format("%.2f", returnOfRatio) + "입니다.";
         System.out.println(message + (returnOfRatio > 1 ? WIN.getMessage() : LOSE.getMessage()));
     }
 }
