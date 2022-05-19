@@ -37,11 +37,11 @@ public class LottoMachine {
 
 
     public void setBonusNumber(String lottoElementSource) {
-        validBonusNumber(lottoElementSource);
+        validateBonusNumber(lottoElementSource);
         bonusNumber = new LottoElement(Integer.parseInt(lottoElementSource));
     }
 
-    private void validBonusNumber(String lottoElementSource) {
+    private void validateBonusNumber(String lottoElementSource) {
         int isExist = 1;
         boolean validateResult = true;
         try {
