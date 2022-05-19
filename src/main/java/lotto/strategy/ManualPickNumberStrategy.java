@@ -3,13 +3,18 @@ package lotto.strategy;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoNumber;
-import lotto.view.InputView;
 
 public class ManualPickNumberStrategy implements PickNumberStrategy {
 
+    private final List<LottoNumber> lottoNumbers;
+
+    public ManualPickNumberStrategy(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     @Override
     public List<LottoNumber> pickLottoNumbers() {
-        return convertToLottoNumber(InputView.enterManualLotto());
+        return lottoNumbers;
     }
 
     private List<LottoNumber> convertToLottoNumber(int[] lottoNumberArray) {

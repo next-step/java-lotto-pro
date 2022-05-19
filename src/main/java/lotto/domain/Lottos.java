@@ -16,12 +16,10 @@ public class Lottos {
             winningStatistics.addLottoRanking(LottoRanking.findLottoRaking(lotto, winningLotto));
         }
     }
-
-
+    
     public List<Lotto> getElements() {
         return elements;
     }
-
 
     @Override
     public boolean equals(Object o) {
