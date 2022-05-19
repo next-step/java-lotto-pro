@@ -38,10 +38,10 @@ class LottoStatisticTest {
 
         Map<MatchResult, Integer> winingResult = lottoStatistic.winningMatchResultCount();
 
-        assertThat(winingResult.get(MatchResult.THREE)).isEqualTo(1);
-        assertThat(winingResult.get(MatchResult.FOUR)).isEqualTo(0);
-        assertThat(winingResult.get(MatchResult.FIVE)).isEqualTo(0);
-        assertThat(winingResult.get(MatchResult.SIX)).isEqualTo(0);
+        assertThat(winingResult.get(MatchResult.FIFTH)).isEqualTo(1);
+        assertThat(winingResult.get(MatchResult.SIXTH)).isEqualTo(0);
+        assertThat(winingResult.get(MatchResult.SEVENTH)).isEqualTo(0);
+        assertThat(winingResult.get(MatchResult.EIGHTH)).isEqualTo(0);
     }
 
     private List<Lotto> createNotWinningLottos(int[] notWinningNumbers, int size) {

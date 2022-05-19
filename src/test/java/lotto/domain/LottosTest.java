@@ -42,10 +42,10 @@ class LottosTest {
     void 셋업에_맞는_당첨_로또_리스트_반환() {
 
         assertAll(
-                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.THREE).size()).isEqualTo(1),
-                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.FOUR).size()).isEqualTo(1),
-                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.FIVE).size()).isEqualTo(1),
-                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.SIX).size()).isEqualTo(1)
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.FIFTH).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.SIXTH).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.SEVENTH).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.EIGHTH).size()).isEqualTo(1)
         );
     }
 

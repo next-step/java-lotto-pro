@@ -5,19 +5,21 @@ import java.util.Optional;
 
 public enum MatchResult {
 
-    ZERO(0, Money.from(0)),
-    ONE(1, Money.from(0)),
-    TWO(2, Money.from(0)),
-    THREE(3, Money.from(5000)),
-    FOUR(4, Money.from(50000)),
-    FIVE(5, Money.from(1500000)),
-    SIX(6, Money.from(2000000000));
+    FIRST(6, Money.from(2000000000)),
+    SECOND(5, Money.from(30000000)),
+    THIRD(5, Money.from(1500000)),
+    FOURTH(4, Money.from(50000)),
+    FIFTH(3, Money.from(5000)),
+    SIXTH(2, Money.from(0)),
+    SEVENTH(1, Money.from(0)),
+    EIGHTH(0, Money.from(0));
 
     private static final MatchResult[] winningMatchResults = {
-            MatchResult.THREE,
-            MatchResult.FOUR,
-            MatchResult.FIVE,
-            MatchResult.SIX
+            MatchResult.FIRST,
+            MatchResult.SECOND,
+            MatchResult.THIRD,
+            MatchResult.FOURTH,
+            MatchResult.FIFTH
     };
 
     private final int matchCount;
