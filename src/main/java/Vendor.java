@@ -14,18 +14,16 @@ public class Vendor {
                 .collect(Collectors.toList());
     }
 
-    public Lotto buy(long money, Lotto manual) {
-        final long maxCount = money / LOTTO_PRICE;
+    public Lotto buyAutoContainsManual(LottoMoney lottoMoney, Lotto manual) {
+        lottoMoney.buy(manual);
+        return buyAuto(lottoMoney, manual);
+    }
 
-        if (maxCount < 1)
-            throw new IllegalArgumentException("이 돈으로는 로또를 구매할 수 없습니다.");
+    private Lotto buyAuto(LottoMoney lottoMoney, Lotto manual) {
+        Lotto lotto = Lotto.of(manual);
 
-        Lotto lotto = new Lotto(manual);
-
-        int manualCount = manual.size();
-        int autoCount = Math.toIntExact(maxCount - manualCount);
-
-        for (int count = 1; count <= autoCount; count++) {
+        while (lottoMoney.canBuy()) {
+            lottoMoney.buyOne();
             lotto.add(auto());
         }
 

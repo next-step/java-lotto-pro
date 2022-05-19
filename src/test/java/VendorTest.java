@@ -5,10 +5,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class VendorTest {
     @Test
-    void 다른_로또가_있으면_총_가격에_포함하여_구매할_수_있다() {
-        Lotto manual = new Lotto();
+    void 수동_로또가_있으면_포함하여_구매할_수_있다() {
+        Lotto manual = Lotto.empty();
         manual.add(new LottoNumbers("1, 2, 3, 4, 5, 6", Application.SEPARATOR));
-        Lotto lotto = new Vendor().buy(Vendor.LOTTO_PRICE, manual);
+        Lotto lotto = new Vendor().buyAutoContainsManual(LottoMoney.of(Vendor.LOTTO_PRICE), manual);
 
         assertThat(lotto).isInstanceOf(Lotto.class);
         assertThat(lotto).contains(
@@ -25,11 +25,14 @@ public class VendorTest {
 
     @Test
     void 로또를_구매할_수_있다() {
-        assertThat(new Vendor().buy(Vendor.LOTTO_PRICE, new Lotto())).isInstanceOf(Lotto.class);
+        assertThat(new Vendor().buyAutoContainsManual(LottoMoney.empty(), Lotto.empty())).isInstanceOf(Lotto.class);
     }
 
     @Test
-    void 가격_미만이면_로또를_구매할_수_없다() {
-        assertThatThrownBy(() -> new Vendor().buy(Vendor.LOTTO_PRICE - 1, new Lotto())).isInstanceOf(RuntimeException.class);
+    void 로또를_구매할_수_없다() {
+        Lotto manual = Lotto.empty();
+        manual.add(new LottoNumbers("1, 2, 3, 4, 5, 6", Application.SEPARATOR));
+        manual.add(new LottoNumbers("1, 2, 3, 4, 5, 6", Application.SEPARATOR));
+        assertThatThrownBy(() -> new Vendor().buyAutoContainsManual(LottoMoney.empty(), manual)).isInstanceOf(RuntimeException.class);
     }
 }

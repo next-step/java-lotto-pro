@@ -40,7 +40,7 @@ class LotteryTest {
                 new LottoNumber(45)
         );
 
-        Lotto lotto = new Lotto();
+        Lotto lotto = Lotto.empty();
         lotto.add(lottoNumbers1);
         lotto.add(lottoNumbers2);
 
