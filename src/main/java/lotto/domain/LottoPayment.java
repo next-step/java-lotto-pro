@@ -9,14 +9,14 @@ public class LottoPayment {
     private final int money;
     private final int purchasableAmount;
 
-    public LottoPayment(final int money) {
+    LottoPayment(final int money, final int purchasableAmount) {
         this.money = money;
-        purchasableAmount = money / TICKET_COST.getCondition();
+        this.purchasableAmount = purchasableAmount;
     }
 
     public static LottoPayment convertAndCreate(final String moneyString) {
         final int money = StringToPaymentConverter.convert(moneyString);
-        return new LottoPayment(money);
+        return new LottoPayment(money, money / TICKET_COST.getCondition());
     }
 
     public int getMoney() {
