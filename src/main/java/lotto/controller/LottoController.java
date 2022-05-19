@@ -17,13 +17,17 @@ public class LottoController {
         LottoCount purchaseCount = LottoPrice.purchase(purchaseAmount);
         LottoCount manualCount = new LottoCount(InputView.inputManualLottoCount());
 
-        ManualLottoNumbers manualLottoNumbers = new ManualLottoNumbers(InputView.inputManualLotto(manualCount));
-        Lottos buy = lottoMachine.buy(new ManualLottoGenerator(manualLottoNumbers));
+        Lottos buy = buyManualLottos(manualCount);
 
         ResultView.printPurchaseCount(buy);
         ResultView.printLottos(buy);
 
         return buy;
+    }
+
+    private Lottos buyManualLottos(LottoCount manualCount) {
+        ManualLottoNumbers manualLottoNumbers = new ManualLottoNumbers(InputView.inputManualLotto(manualCount));
+        return lottoMachine.buy(new ManualLottoGenerator(manualLottoNumbers));
     }
 
     public WinningStatistic checkWinning(Lottos buy) {
