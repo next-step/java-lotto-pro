@@ -5,8 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import step3.domain.LottoElement;
-import step3.domain.Money;
-import step3.domain.Ticket;
 import step3.enums.LottoReward;
 
 public class OutputView {
@@ -23,26 +21,26 @@ public class OutputView {
         initOverviewMap();
     }
 
-    public void printOutput(HashMap<LottoReward, Integer> statistics, Ticket ticket) {
+    public void printOutput(HashMap<LottoReward, Integer> statistics,int usingMoney) {
         System.out.println(OVERVIEW_INIT_MESSAGE);
         long reward = printOverview(statistics);
-        printRewardRate(reward, ticket.ticketToMoney());
+        printRewardRate(reward, usingMoney);
     }
 
-    private void printRewardRate(long reward, Money money) {
-        System.out.println(String.format(REWARD_RATE_FORMAT, getProfitRate(reward, money), isBenefit(reward, money)));
+    private void printRewardRate(long reward, int usingMoney) {
+        System.out.println(String.format(REWARD_RATE_FORMAT, getProfitRate(reward, usingMoney), isBenefit(reward, usingMoney)));
     }
 
-    private String isBenefit(long reward, Money money) {
+    private String isBenefit(long reward, int usingMoney) {
 
-        if (money.getMoney() > reward) {
+        if (usingMoney > reward) {
             return IS_LOSS;
         }
         return IS_BENEFIT;
     }
 
-    private double getProfitRate(long reward, Money money) {
-        return reward * 1.0 / money.getMoney();
+    private double getProfitRate(long reward, int usingMoney) {
+        return reward * 1.0 / usingMoney;
     }
 
     private long printOverview(HashMap<LottoReward, Integer> statistics) {
