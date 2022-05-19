@@ -12,7 +12,7 @@ public class Lotto {
 
     private final Set<LottoNumber> lotto;
 
-    Lotto(List<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
         Set<LottoNumber> numberSet = numbers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet());
