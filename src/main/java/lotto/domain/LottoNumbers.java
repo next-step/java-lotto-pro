@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.domain.LottoNumber.LOTTO_MAX_NUMBER;
-import static lotto.domain.LottoNumber.LOTTO_MIN_NUMBER;
+import static lotto.domain.LottoNumber.MAX_NUMBER;
+import static lotto.domain.LottoNumber.MIN_NUMBER;
 
 public class LottoNumbers {
     public static final List<LottoNumber> LOTTO_NUMBERS = Collections.unmodifiableList(initializeNumbers());
@@ -15,7 +15,7 @@ public class LottoNumbers {
 
     private static List<LottoNumber> initializeNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
         return lottoNumbers;

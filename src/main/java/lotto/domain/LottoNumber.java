@@ -3,8 +3,8 @@ package lotto.domain;
 import lotto.message.InputMessage;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    public static final int LOTTO_MIN_NUMBER = 1;
-    public static final int LOTTO_MAX_NUMBER = 45;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
 
     private final int lottoNumber;
 
@@ -18,7 +18,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateNumber(int lottoNumber) {
-        if (lottoNumber < LOTTO_MIN_NUMBER || lottoNumber > LOTTO_MAX_NUMBER) {
+        if (lottoNumber < MIN_NUMBER || lottoNumber > MAX_NUMBER) {
             throw new IllegalArgumentException(InputMessage.INVALID_LOTTO_NUMBER);
         }
     }
