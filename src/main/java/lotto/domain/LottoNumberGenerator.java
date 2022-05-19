@@ -9,8 +9,8 @@ import static lotto.domain.Lotto.LOTTO_NUMBER_SIZE;
 
 public class LottoNumberGenerator {
 
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
     private static final List<Integer> LOTTO_GENERATOR = IntStream
             .rangeClosed(MIN_NUMBER, MAX_NUMBER)
             .boxed()

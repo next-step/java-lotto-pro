@@ -1,8 +1,13 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.*;
+
+import static lotto.domain.LottoNumberGenerator.MAX_NUMBER;
+import static lotto.domain.LottoNumberGenerator.MIN_NUMBER;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = createLottoNumberCache();
 
     private final int number;
 
@@ -17,6 +22,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public LottoNumber(Integer number) {
         this.number = number;
+    }
+
+    public static LottoNumber of(int number) {
+        return LOTTO_NUMBER_CACHE.get(number);
+    }
+
+    private static Map<Integer, LottoNumber> createLottoNumberCache() {
+        Map<Integer, LottoNumber> cache = new HashMap<>();
+        for (int i = MIN_NUMBER; i < MAX_NUMBER; i++) {
+            cache.put(i, new LottoNumber(i));
+        }
+        return Collections.unmodifiableMap(cache);
     }
 
     @Override
