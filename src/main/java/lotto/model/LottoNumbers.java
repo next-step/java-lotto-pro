@@ -26,8 +26,7 @@ public class LottoNumbers {
         return new LottoNumbers(randomNumbers);
     }
 
-    public static LottoNumbers createWinningNumbers() {
-        List<Integer> numbers = convertToIntegerList(splitWithDelimiter(readWinningNumbers()));
+    public static LottoNumbers createWinningNumbers(List<Integer> numbers) {
         checkNumberDuplicate(numbers);
         return new LottoNumbers(numbers);
     }
