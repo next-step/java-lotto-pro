@@ -25,6 +25,7 @@ public class InputView {
     }
 
     public static int enterNumber() throws InputMismatchException {
+        System.out.println("구입금액을 입력해주세요");
         int number;
         while (true) {
             try {
