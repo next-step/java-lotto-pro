@@ -11,7 +11,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
-import step3.domain.Ticket;
 import step3.enums.LottoReward;
 import step3.model.LottoMachine;
 
@@ -33,7 +32,7 @@ public class LottoMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "2000:2", "10000:10"}, delimiter = ':')
     public void makeRandomTicketsTest(String money, int expected) {
-        Ticket ticket = new Ticket(new Money(money));
+        int ticket = lottoMachine.getLottoTicketCount(new Money(money));
         assertThat(lottoMachine.makeRandomLottoTickets(ticket)).hasSize(expected);
     }
 
@@ -64,6 +63,18 @@ public class LottoMachineTest {
         lottoTickets.add(new LottoTicket("11,12,13,14,15,16")); // MISS
         assertThat(lottoMachine.checkWin(lottoTickets)).containsEntry(LottoReward.MISS, 2).containsEntry(LottoReward.FIVE_BONUS, 1)
             .containsEntry(LottoReward.FIVE, 1).containsEntry(LottoReward.SIX, 1);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1000:1", "1002:1", "13333:13", "0:0"}, delimiter = ':')
+    public void getLottoTicketCountTest(String money, int expect) {
+        assertThat(lottoMachine.getLottoTicketCount(new Money(money))).isEqualTo(expect);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:1000", "3:3000", "4:4000", "11:11000"}, delimiter = ':')
+    public void getUsingMoneyByTicketTest(int ticket, int expect) {
+        assertThat(lottoMachine.getUsingMoneyByTicket(ticket)).isEqualTo(expect);
     }
 }
 
