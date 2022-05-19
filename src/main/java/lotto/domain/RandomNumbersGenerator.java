@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 import static java.util.Collections.shuffle;
 
-public class RandomNumbersGenerator {
+public final class RandomNumbersGenerator {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static final List<Number> ENTIRE_LOTTO_NUMBERS = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
