@@ -9,13 +9,6 @@ import org.junit.jupiter.api.Test;
 
 class LottoMoneyTest {
     @Test
-    @DisplayName("로또구매금액 생성 테스트 - 문자열")
-    void create_string() {
-        assertThatCode(() -> new LottoMoney("1000"))
-                .doesNotThrowAnyException();
-    }
-
-    @Test
     @DisplayName("로또구매금액 생성 - 숫자")
     void create_int() {
         assertThatCode(() -> new LottoMoney(1000))
@@ -26,13 +19,6 @@ class LottoMoneyTest {
     @DisplayName("로또구매금액 생성 - 로또 티켓보다 작은 값")
     void create_lessThanTicketPrice() {
         assertThatThrownBy(() -> new LottoMoney(LottoMoney.LOTTO_TICKET_PRICE - 10))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    @DisplayName("로또구매금액 생성 - 숫자가 아닌 값 문자열")
-    void create_nonNumberString() {
-        assertThatThrownBy(() -> new LottoMoney("만원"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

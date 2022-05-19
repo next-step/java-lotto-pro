@@ -1,6 +1,6 @@
 package study.lotto;
 
-import study.lotto.enumtype.LottoWinningType;
+import study.lotto.enumtype.LottoRank;
 
 public class WinningLotto {
     private static final int LOTTO_BONUS_MATCH_COUNT = 5;
@@ -13,18 +13,18 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoWinningType matchLotto(Lotto lotto) {
+    public LottoRank matchLotto(Lotto lotto) {
         int matchCount = matchCount(lotto);
         boolean bonusMatch = matchBonus(lotto);
 
         if (matchCount == LOTTO_BONUS_MATCH_COUNT && bonusMatch) {
-            return LottoWinningType.SECOND;
+            return LottoRank.SECOND;
         }
         if (matchCount == LOTTO_BONUS_MATCH_COUNT) {
-            return LottoWinningType.THIRD;
+            return LottoRank.THIRD;
         }
 
-        return LottoWinningType.valueOf(matchCount);
+        return LottoRank.valueOf(matchCount);
     }
 
     private void validate(Lotto winningNumber, LottoNumber bonusNumber) {

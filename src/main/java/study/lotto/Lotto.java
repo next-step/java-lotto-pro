@@ -4,20 +4,13 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import study.lotto.util.StringUtil;
 
 public class Lotto {
-    private static final String NUMBER_DELIMITER = ",";
     private static final int LOTTO_NUMBER_SIZE = 6;
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
         this.numbers = numbers;
-        validateAndSort();
-    }
-
-    public Lotto(String numbersString) {
-        numbers = StringUtil.splitAndParseLottoNumber(numbersString, NUMBER_DELIMITER);
         validateAndSort();
     }
 
@@ -53,8 +46,8 @@ public class Lotto {
         return numbers.toString();
     }
 
-    public boolean contains(LottoNumber bonusNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return this.numbers.stream()
-                .anyMatch(number -> number.getNumber().equals(bonusNumber.getNumber()));
+                .anyMatch(number -> number.getNumber().equals(lottoNumber.getNumber()));
     }
 }

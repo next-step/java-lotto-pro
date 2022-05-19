@@ -6,6 +6,7 @@ import study.lotto.io.Printer;
 import study.lotto.util.LottoGenerator;
 
 public class LottoMain {
+    private static final String NUMBER_DELIMITER = ",";
     private final Printer printer;
 
     public LottoMain(Printer printer) {
@@ -20,18 +21,39 @@ public class LottoMain {
     }
 
     public void start() {
-        printer.print("구매 금액을 입력해 주세요.");
-        LottoMoney lottoMoney = new LottoMoney(Console.readLine());
+        LottoMoney myLottoMoney = getLottoMoney();
+        List<Lotto> myLottos = generateLottos(myLottoMoney);
+        Lotto winningLotto = getWinningLotto();
+        LottoNumber bonusNumber = getBonusNumber();
 
+        printResult(myLottos, winningLotto, bonusNumber);
+    }
+
+    private LottoMoney getLottoMoney() {
+        printer.print("구매 금액을 입력해 주세요.");
+        return new LottoMoney(Integer.parseInt(Console.readLine()));
+    }
+
+    private List<Lotto> generateLottos(LottoMoney lottoMoney) {
         List<Lotto> lottos = LottoGenerator.generate(lottoMoney.maxLottoTicketCount());
         printer.printMyLottos(lottos);
+        return lottos;
+    }
 
+    private Lotto getWinningLotto() {
         printer.print("지난 주 당첨 번호를 입력해 주세요.");
-        Lotto lotto = new Lotto(Console.readLine());
+        return new Lotto(LottoGenerator.splitAndParseLottoNumber(
+                Console.readLine(),
+                NUMBER_DELIMITER
+        ));
+    }
 
+    private LottoNumber getBonusNumber() {
         printer.print("보너스 볼을 입력해 주세요.");
-        LottoNumber bonusNumber = new LottoNumber(Console.readLine());
+        return new LottoNumber(Integer.parseInt(Console.readLine()));
+    }
 
+    private void printResult(List<Lotto> lottos, Lotto lotto, LottoNumber bonusNumber) {
         LottoReport lottoReport = new LottoReport(lottos, new WinningLotto(lotto, bonusNumber));
         LottoResultMap lottoResultMap = lottoReport.analyze();
 

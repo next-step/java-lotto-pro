@@ -1,7 +1,9 @@
 package study.lotto.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import study.lotto.Lotto;
 import study.lotto.LottoNumber;
 
@@ -18,6 +20,14 @@ public class LottoGenerator {
             lottos.add(newAutoLotto());
         }
         return lottos;
+    }
+
+    public static List<LottoNumber> splitAndParseLottoNumber(String text, String delimiter) {
+        return Arrays.stream(text.split(delimiter))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private static void validate(int genSize) {
