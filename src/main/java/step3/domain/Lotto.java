@@ -26,12 +26,6 @@ public class Lotto {
         }
     }
 
-    public int match(WinnerLotto winnerLotto) {
-        return (int) winnerLotto.lottoNumbers().stream()
-                .filter(lotto::contains)
-                .count();
-    }
-
     public List<LottoNumber> sortedLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>(lotto);
         Collections.sort(lottoNumbers);
