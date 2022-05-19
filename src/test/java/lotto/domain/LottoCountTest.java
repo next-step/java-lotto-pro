@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoCountTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "lottoCount는 0이하의 숫자를 허용하지 않는다.")
     @ValueSource(ints = {0, -1})
     public void LottoCount_경계값(int lottoCount) throws Exception {
         assertThatThrownBy(() -> {
@@ -19,18 +19,18 @@ class LottoCountTest {
                 .hasMessageContaining(LottoCountErrorCode.NOT_ALLOW_SMALLER_THAN_ONE.getMessage());
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "lottoCount가 0 이상인 경우 정상적으로 값이 들어갔는지 확인")
     @ValueSource(ints = {1, 2, 3, 4})
     public void getLottoCount(int lottoCount) throws Exception {
         assertThat(new LottoCount(lottoCount).getLottoCount()).isEqualTo(lottoCount);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "lottoCount 가 같으면 동등하다")
     @ValueSource(ints = {1, 2, 3, 4})
     public void equals(int lottoCount) throws Exception {
         LottoCount lottoCount1 = new LottoCount(lottoCount);
         LottoCount lottoCount2 = new LottoCount(lottoCount);
 
-        assertThat(lottoCount1.equals(lottoCount2)).isTrue();
+        assertThat(lottoCount1).isEqualTo(lottoCount2);
     }
 }

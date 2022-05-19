@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.error.LottoTicketErrorCode;
 import lotto.infrastructure.util.StringUtils;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class WinningLottoTicketTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "inputWinningLottoNumbers가 null 또는 empty 인 경우 에러발생")
     @NullAndEmptySource
     public void inputWinningLottoNumbers_null_or_empty(List<String> inputWinningLottoNumbers) {
         assertThatThrownBy(() -> {
@@ -26,6 +27,7 @@ class WinningLottoTicketTest {
     }
 
     @Test
+    @DisplayName("중복된 로또번호가 있을 시 에러발생")
     public void inputWinningLottoNumbers_duplicate_number() {
         assertThatThrownBy(() -> {
             new WinningLottoTicket(Arrays.asList("1", "1", "1", "1", "1", "1"));
@@ -35,6 +37,7 @@ class WinningLottoTicketTest {
     }
 
     @Test
+    @DisplayName("로또번호가 6개를 초과한 경우 에러발생")
     public void inputWinningLottoNumbers_size_bigger() {
         assertThatThrownBy(() -> {
             new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6", "7"));
@@ -45,6 +48,7 @@ class WinningLottoTicketTest {
     }
 
     @Test
+    @DisplayName("로또번호가 6개보다 작은 경우 에러발생")
     public void inputWinningLottoNumbers_size_smaller() {
         assertThatThrownBy(() -> {
             new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5"));
@@ -55,6 +59,7 @@ class WinningLottoTicketTest {
     }
 
     @Test
+    @DisplayName("로또번호가 아닌 숫자가 존재하면 에러발생")
     public void inputWinningLottoNumbers_로또번호가_아닌_숫자() {
         assertThatThrownBy(() -> {
             new WinningLottoTicket(Arrays.asList("100", "200", "300", "400", "500", "600"));
@@ -69,6 +74,7 @@ class WinningLottoTicketTest {
     }
 
     @Test
+    @DisplayName("당첨번호와 구매한 로또번호를 비교하여 일치하는 번호 갯수를 반환한다.")
     public void countMatchNumber() {
         List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(lottoNumbers);

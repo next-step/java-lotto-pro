@@ -4,6 +4,7 @@ import lotto.domain.error.LottoTicketErrorCode;
 import lotto.infrastructure.generator.LottoNumberGenerator;
 import lotto.infrastructure.generator.NumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -27,11 +28,13 @@ class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("로또 번호가 6개인지 테스트")
     public void getLottoNumbers_숫자갯수() {
-        assertThat(lottoTicket.getLottoNumbers().size()).isEqualTo(6);
+        assertThat(lottoTicket.getLottoNumbers()).hasSize(6);
     }
 
     @Test
+    @DisplayName("로또 번호가 정렬된 순서인지 테스트")
     public void getLottoNumbers_정렬() {
         List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
 
@@ -41,6 +44,7 @@ class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("로로 번호에 중복된 숫자가 있는지 테스트")
     public void getLottoNumbers_중복검사() {
         List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
         Set<Integer> nonDuplicatedInteger = new HashSet<>(lottoNumbers);
@@ -49,6 +53,7 @@ class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("해당 로또번호를 포함하고 있다면 true 반환")
     public void contains_true() {
         List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
 
@@ -58,6 +63,7 @@ class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("해당 로또번호를 포함하고 있지 않다면 false 반환")
     public void contains_false() {
         List<Integer> lottoTotalNumbers = lottoNumberGenerator.generate();
         List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
@@ -71,7 +77,7 @@ class LottoTicketTest {
         }
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "lottoNumbers가 null 또는 empty 이면 에러발생")
     @NullAndEmptySource
     public void lottoNumbers_주입_null_or_empty(List<Integer> lottoNumbers) {
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
@@ -80,6 +86,7 @@ class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("lottoNumber의 size가 6이 아닌 경우 에러발생")
     public void lottoNumbers_주입_size() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5);
 
@@ -89,6 +96,7 @@ class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("lottoNumber에 중복되 숫자가 있다면 에러발생")
     public void lottoNumbers_주입_중복검사() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 5);
 
@@ -98,7 +106,8 @@ class LottoTicketTest {
     }
 
     @Test
-    public void lottoNumbers_주입_로또숫자() {
+    @DisplayName("lottoNumber에 로또번호가 아닌 숫자가 존재한다면 에러발생")
+    public void lottoNumbers_주입_로또숫자가_아닌_숫자() {
         List<Integer> lottoNumbers = Arrays.asList(100, 200, 300, 400, 500, 600);
 
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
