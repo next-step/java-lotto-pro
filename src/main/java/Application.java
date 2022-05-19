@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.constant.LottoInputMessage;
-import lotto.controller.LottoGame;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
@@ -11,6 +10,7 @@ import lotto.model.LottoSelfCount;
 import lotto.model.LottoStore;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
+import lotto.model.generator.LottoGenerator;
 import lotto.model.generator.LottoGeneratorRandomImpl;
 import lotto.utils.InputStringUtils;
 import lotto.model.LottoGameResult;
@@ -29,11 +29,12 @@ public class Application {
     public void startLottoGame() throws IOException {
         LottoStore lottoStore = createLottoStore();
         LottoPaper lottoPaper = lottoStore.issueLottoPaper();
-        Lottos lottos = LottoGame.generateLottosByGenerator(lottoPaper,createSelfLottos(lottoPaper),new LottoGeneratorRandomImpl());
+        LottoGenerator lottoGenerator = new LottoGeneratorRandomImpl();
+        Lottos lottos = lottoGenerator.generateLottos(createSelfLottos(lottoPaper), lottoPaper);
         ResultView.printLottosView(lottos);
 
         WinningLotto winningLotto = createWinningLotto();
-        LottoGameResult lottoGameResult = LottoGame.resultWinningGame(winningLotto, lottos);
+        LottoGameResult lottoGameResult = winningLotto.compareLottos(lottos);
         ResultView.printFinalResultView(lottoGameResult, lottos);
     }
 
