@@ -4,7 +4,6 @@ import lotto.constant.ErrorMessageConst;
 import lotto.utils.CustomParseUtils;
 
 public class LottoCount {
-    public static final int COUNT_ZERO = 0;
     private int count;
 
     public LottoCount(int count){
