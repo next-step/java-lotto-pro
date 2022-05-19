@@ -29,6 +29,10 @@ public class LottoPaper {
         return selfCount;
     }
 
+    public int randomCount() {
+        return totalCount - selfCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -45,4 +49,5 @@ public class LottoPaper {
     public int hashCode() {
         return Objects.hash(selfCount);
     }
+
 }
