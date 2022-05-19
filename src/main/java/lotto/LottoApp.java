@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.model.Lotto;
-import lotto.model.LottoMachine;
-import lotto.model.Statistics;
-import lotto.model.WinLotto;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -14,7 +11,7 @@ public class LottoApp {
         LottoMachine lottoMachine = new LottoMachine();
 
         int count = InputView.inputManualLottoCount();
-        List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(count);
+        List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(new LottoCount(count));
         List<Lotto> manualLottos = lottoMachine.purchaseManual(manualLottoNumbers);
 
         int money = InputView.inputMoney();

@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.model.LottoCount;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,15 +36,15 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<List<Integer>> inputManualLottoNumbers(int count) {
+    public static List<List<Integer>> inputManualLottoNumbers(LottoCount count) {
 
         List<List<Integer>> lottoNumbers = new ArrayList<>();
-        if (count == 0) {
+        if (count.valueOf() == 0) {
             return lottoNumbers;
         }
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count.valueOf(); i++) {
             lottoNumbers.add(generateLottoNumber(scanner.nextLine()));
         }
 
