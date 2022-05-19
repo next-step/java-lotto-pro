@@ -14,7 +14,10 @@ public class LottoController {
 
     public Lottos buy() {
         Money purchaseAmount = Money.of(InputView.inputPurchaseAmount());
-        Lottos buy = lottoMachine.buy(purchaseAmount);
+        LottoCount purchaseCount = LottoPrice.purchase(purchaseAmount);
+        LottoCount manualCount = new LottoCount(InputView.inputManualLottoCount());
+
+        Lottos buy = lottoMachine.buy(null);
 
         ResultView.printPurchaseCount(buy);
         ResultView.printLottos(buy);

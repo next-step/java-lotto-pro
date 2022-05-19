@@ -23,6 +23,10 @@ public class InputView {
         return input(ENTER_BONUS_BALL.message());
     }
 
+    public static String inputManualLottoCount() {
+        return input(ENTER_MANUAL_LOTTO_COUNT.message());
+    }
+
     private static String input(String message) {
         System.out.println(message);
         try {
