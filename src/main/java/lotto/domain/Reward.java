@@ -16,7 +16,7 @@ public enum Reward {
         this.reward = reward;
     }
 
-    public static int find(int match) {
+    public static int findAmount(int match) {
         return stream().filter(reward -> reward.match == match)
                        .findFirst()
                        .get().reward;
