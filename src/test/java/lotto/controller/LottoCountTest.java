@@ -1,7 +1,10 @@
 package lotto.controller;
 
+import lotto.domain.LottoGenerator;
+import lotto.domain.Lottos;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoCountTest {
@@ -12,5 +15,15 @@ class LottoCountTest {
         assertThatThrownBy(() ->
             new LottoCount("A")
         ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void count만큼_로또를_생성한다() {
+        // given
+        LottoCount lottoCount = new LottoCount(3);
+        // when
+        Lottos result = lottoCount.generateLottos(new LottoGenerator());
+        // then
+        assertThat(result.count()).isEqualTo(3);
     }
 }

@@ -1,5 +1,11 @@
 package lotto.controller;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
+import lotto.domain.Lottos;
+
+import java.util.List;
+
 public class LottoCount {
 
     private final int count;
@@ -18,5 +24,14 @@ public class LottoCount {
 
     public int count() {
         return count;
+    }
+
+    public Lottos generateLottos(LottoGenerator generator) {
+        Lottos lottos = new Lottos();
+        for (int i = 0; i < count; i++) {
+            List<Integer> numbers = generator.generate();
+            lottos.add(Lotto.create(numbers));
+        }
+        return lottos;
     }
 }
