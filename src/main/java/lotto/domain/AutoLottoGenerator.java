@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.controller.LottoCount;
 
-public class AutoLottoGenerator {
+public class AutoLottoGenerator implements LottoGenerator {
 
     private final LottoNumberGenerator generator;
     private final LottoCount lottoCount;
@@ -12,6 +12,7 @@ public class AutoLottoGenerator {
         this.lottoCount = lottoCount;
     }
 
+    @Override
     public Lottos generate() {
         return lottoCount.generateLottos(generator);
     }

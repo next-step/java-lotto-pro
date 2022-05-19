@@ -1,8 +1,7 @@
 package lotto;
 
-import lotto.domain.LottoMachine;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
+import lotto.controller.LottoCount;
+import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,12 +9,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoMachineTest {
 
     @Test
-    void 로또_개수에_맞게_로또를_발급한다() {
+    void 자동_로또_generator를_인자로_받아_로또를_산다() {
         // given
         LottoMachine lottoMachine = new LottoMachine();
+        LottoGenerator autoLottoGenerator = new AutoLottoGenerator(new LottoCount(3));
         // when
-        Lottos buy = lottoMachine.buy(Money.of(3000));
+        Lottos result = lottoMachine.buy(autoLottoGenerator);
         // then
-        assertThat(buy.count()).isEqualTo(3);
+        assertThat(result.count()).isEqualTo(3);
     }
 }
