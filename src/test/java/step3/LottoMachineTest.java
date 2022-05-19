@@ -14,6 +14,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
 import step3.enums.LottoReward;
+import step3.model.LottoGenerator;
 import step3.model.LottoMachine;
 
 public class LottoMachineTest {
@@ -22,7 +23,7 @@ public class LottoMachineTest {
 
     @BeforeEach
     public void init() {
-        lottoMachine = new LottoMachine();
+        lottoMachine = new LottoMachine(new LottoGenerator());
     }
 
     @ParameterizedTest

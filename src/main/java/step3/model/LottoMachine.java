@@ -1,14 +1,10 @@
 package step3.model;
 
-import static java.util.Collections.shuffle;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import step3.domain.LottoElement;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
@@ -16,10 +12,7 @@ import step3.enums.LottoReward;
 
 public class LottoMachine {
 
-    private final int LOTTO_MIN = 1;
-    private final int LOTTO_MAX = 45;
-    private final int LOTTO_ELEMENTS_SIZE = 6;
-    private List<Integer> LOTTO_VALID_ELEMENTS = IntStream.rangeClosed(LOTTO_MIN, LOTTO_MAX).boxed().collect(Collectors.toList());
+    private final LottoGenerator lottoGenerator;
     private final int MATCH_COUNT_BASE = 0;
     private final int LOTTO_PRICE = 1_000;
     private LottoElement bonusNumber;
@@ -29,27 +22,19 @@ public class LottoMachine {
     private final String SET_BONUS_NUMBER_EXCEPTION_MSG = "정답티켓과 다른 번호를 설정해야합니다";
     private final String CANT_BUY_LOTTO_EXCEPTION = "돈은 최소 " + LOTTO_PRICE + "이상 입력해야합니다";
 
-    public LottoMachine() {
-
+    public LottoMachine(LottoGenerator lottoGenerator) {
+        this.lottoGenerator = lottoGenerator;
     }
 
 
     public List<LottoTicket> makeRandomLottoTickets(int ticket) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < ticket; i++) {
-            lottoTickets.add(makeRandomLottoTicket());
+            lottoTickets.add(lottoGenerator.makeRandomLottoTicket());
         }
         return lottoTickets;
     }
 
-    private LottoTicket makeRandomLottoTicket() {
-        List<Integer> lottoElements = new ArrayList<>();
-        shuffle(LOTTO_VALID_ELEMENTS);
-        for (int i = 0; i < LOTTO_ELEMENTS_SIZE; i++) {
-            lottoElements.add(LOTTO_VALID_ELEMENTS.get(i));
-        }
-        return new LottoTicket(lottoElements.stream().map(String::valueOf).collect(Collectors.toList()));
-    }
 
     public void setBonusNumber(String lottoElementSource) {
         validBonusNumber(lottoElementSource);
@@ -73,11 +58,7 @@ public class LottoMachine {
     }
 
     public void setWinnerLottoTicket(String winnerSource) {
-        winnerLottoTicket = makeManualLottoTicket(winnerSource);
-    }
-
-    private LottoTicket makeManualLottoTicket(String manualLottoSource) {
-        return new LottoTicket(manualLottoSource);
+        winnerLottoTicket = lottoGenerator.makeManualLottoTicket(winnerSource);
     }
 
     public Map<LottoReward, Integer> checkWin(List<LottoTicket> userLottoTickets) {
