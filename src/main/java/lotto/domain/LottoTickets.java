@@ -9,7 +9,7 @@ import lotto.service.AutoNumbersIssuer;
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(final List<LottoTicket> lottoTickets) {
+    LottoTickets(final List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
@@ -19,6 +19,18 @@ public class LottoTickets {
             lottoTickets.add(new LottoTicket(new LottoNumbers(AutoNumbersIssuer.issueNumbers())));
         }
         return new LottoTickets(lottoTickets);
+    }
+
+    public static LottoTickets createManually(final List<LottoNumbers> manualLottoNumbersList) {
+        final List<LottoTicket> manualLottoTickets = new ArrayList<>();
+        for (final LottoNumbers manualLottoNumbers : manualLottoNumbersList) {
+            manualLottoTickets.add(new LottoTicket(manualLottoNumbers));
+        }
+        return new LottoTickets(manualLottoTickets);
+    }
+
+    public void merge(final LottoTickets target) {
+        lottoTickets.addAll(target.lottoTickets);
     }
 
     public Map<Prize, Integer> prizeMap(final LottoNumbers winningNumbers, final BonusBall bonusBall) {
