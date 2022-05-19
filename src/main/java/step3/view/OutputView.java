@@ -19,11 +19,19 @@ public class OutputView {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         for (Ranking ranking : Ranking.winners()) {
-            System.out.printf("%d개 일치 (%d원)- %d개%n"
+            System.out.printf("%d개 일치%s(%d원)- %d개%n"
                     , ranking.getHitCount()
+                    , printBonusHitMessage(ranking)
                     , (int) ranking.getWinningMoney()
                     , lottoResult.rankingCount(ranking));
         }
         System.out.printf("총 수익률은 %.02f입니다.%n", yield);
+    }
+
+    private static String printBonusHitMessage(Ranking ranking) {
+        if(ranking == Ranking.SECOND) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
     }
 }
