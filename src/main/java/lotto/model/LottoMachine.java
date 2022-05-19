@@ -49,12 +49,7 @@ public class LottoMachine {
     }
 
     public List<Lotto> purchaseManual(List<List<Integer>> manualLottos) {
-        List<Lotto> lottos = new LinkedList<>();
-
-        for (List<Integer> lottoNumber : manualLottos) {
-            lottos.add(new Lotto(lottoNumber));
-        }
-
-        return lottos;
+        return manualLottos.stream().map(lottoNumber -> new Lotto(lottoNumber))
+                .collect(Collectors.toList());
     }
 }
