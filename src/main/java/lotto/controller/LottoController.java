@@ -26,6 +26,7 @@ public class LottoController {
         Lotto winningLotto = Lotto.draw(new InputLottoNumberGenerator(scanner.nextLine()));
         InputView.printBonusLottoNumberInputGuide();
         LottoNumber bonusLottoNumber = LottoNumber.valueOf(StringToIntegerConverter.parseInt(scanner.nextLine()));
+        winningLotto.validateNewLottoNumber(bonusLottoNumber);
         LottoStatistics lottoStatistics = lottos.lottoStatistics(winningLotto, bonusLottoNumber);
         ResultView.printWinningStatistics(lottoStatistics, lottos.totalPrice());
     }

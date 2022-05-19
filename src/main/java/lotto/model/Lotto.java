@@ -49,6 +49,11 @@ public class Lotto {
         return this.lotto.contains(lottoNumber);
     }
 
+    public void validateNewLottoNumber(LottoNumber lottoNumber) {
+        if(containLottoNumber(lottoNumber)) {
+            throw new IllegalArgumentException("중복되는 로또 번호 입니다.");
+        }
+    }
     private void validateLotto(Set<LottoNumber> lotto) {
         validateLottoSize(lotto);
     }
