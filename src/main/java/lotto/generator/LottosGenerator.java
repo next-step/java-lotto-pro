@@ -1,7 +1,6 @@
 package lotto.generator;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 
@@ -21,8 +20,7 @@ public class LottosGenerator {
 
     public static Lottos purchaseAutoLottos(Money money) {
         List<Lotto> lottoList = new ArrayList<>();
-        LottoCount purchaseCount = money.maxLottoCount();
-        for (int i = 0; i < purchaseCount.getCount(); i++) {
+        for (int i = 0; i < money.maxLottoCount().getCount(); i++) {
             lottoList.add(Lotto.from(RandomLottoNumbersGenerator.generate()));
         }
         return Lottos.from(lottoList);

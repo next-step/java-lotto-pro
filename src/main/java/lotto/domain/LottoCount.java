@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.constant.ErrorMessageConst;
+import lotto.utils.CustomParseUtils;
 
 public class LottoCount {
     public static final int COUNT_ZERO = 0;
@@ -13,6 +14,10 @@ public class LottoCount {
 
     public static LottoCount from(int count) {
         return new LottoCount(count);
+    }
+
+    public static LottoCount from(String count) {
+        return new LottoCount(CustomParseUtils.stringToInteger(count));
     }
 
     private void validateLottoCount(int count) {
