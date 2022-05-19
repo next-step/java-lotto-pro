@@ -29,7 +29,7 @@ public class OutputView {
     }
 
     private static String printBonusHitMessage(Ranking ranking) {
-        if(ranking == Ranking.SECOND) {
+        if (ranking == Ranking.SECOND) {
             return ", 보너스 볼 일치";
         }
         return " ";

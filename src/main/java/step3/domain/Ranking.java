@@ -21,7 +21,7 @@ public enum Ranking {
     }
 
     public static Ranking findRanking(int hitCount, boolean isMatchBounsNumber) {
-        if(hitCount == SECOND.getHitCount() && isMatchBounsNumber) {
+        if (hitCount == SECOND.getHitCount() && isMatchBounsNumber) {
             return SECOND;
         }
 
