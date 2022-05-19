@@ -5,40 +5,39 @@ import java.util.Objects;
 
 public class Money {
 
-    private int money;
-    private final String isLoss = "손해";
-    private final String isBenefit = "이득";
-    private final String CREATE_MONEY_EXCEPTION_MSG = "돈은 로또가격보다 큰 숫자여야합니다.(%s원)";
-    private final int LOTTO_PRICE = 1_000;
-
+    private final int money;
+    private final String MONEY_RANGE_EXCEPTION = "돈은 양수의 자연수여야 합니다";
+    private final int MONEY_BOTTOM_BOUNDARY = 0;
     public Money(String money) {
-        if (!validateMoneyRange(money)) {
-            throw new IllegalArgumentException(String.format(CREATE_MONEY_EXCEPTION_MSG,LOTTO_PRICE));
-        }
+        validateMoney(money);
         this.money = Integer.parseInt(money);
     }
 
-    public int purchaseTicket() {
-        return money / LOTTO_PRICE;
+    public Money(int money) {
+        validateMoney(money);
+        this.money = money;
     }
 
-    private boolean validateMoneyRange(String money) {
+    private void validateMoney(String money) {
+        boolean validateResult = true;
         try {
-            return Integer.parseInt(money) >= LOTTO_PRICE;
+            validateResult = Integer.parseInt(money) >= MONEY_BOTTOM_BOUNDARY;
         } catch (NumberFormatException e) {
-            return false;
+            validateResult = false;
+        }
+        if (!validateResult) {
+            throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION);
         }
     }
 
-    public String isBenefit(long reward) {
-        if (money > reward) {
-            return isLoss;
+    private void validateMoney(int money) {
+        if (money < MONEY_BOTTOM_BOUNDARY) {
+            throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION);
         }
-        return isBenefit;
     }
 
-    public double getProfitRate(long reward) {
-        return reward * 1.0 / money;
+    public int getMoney() {
+        return money;
     }
 
     @Override

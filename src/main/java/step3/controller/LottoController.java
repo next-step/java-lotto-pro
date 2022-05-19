@@ -1,8 +1,10 @@
 package step3.controller;
 
+import java.util.List;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
 import step3.model.LottoMachine;
+import step3.model.LottoUser;
 import step3.view.InputView;
 import step3.view.OutputView;
 
@@ -19,23 +21,49 @@ public class LottoController {
     }
 
     public void startLotto() {
-        Money money = null;
-        while (money == null) { //돈을 정상적으로 받아올때까지 반복한다
-            String moneySource = inputView.getMoney();
-            money = lottoMachine.createMoney(moneySource);
-        }
+        LottoUser user = new LottoUser();
 
-        lottoMachine.buyTicket(money);
-        outputView.printLottoInfo(lottoMachine.getLottoNumbers());
+        int ticket = getTicketByMoney(); /*정상 값을 입력할때까지 반복입력*/
 
-        LottoTicket winnerTicket = null;
-        while (winnerTicket == null) { //우승 티켓을 정상적으로 받아올때까지 반복한다
-            String manualLottoSource = inputView.getWinnerLotto();
-            winnerTicket = lottoMachine.makeManualLottoTicket(manualLottoSource);
-        }
+        List<LottoTicket> lottoTickets = lottoMachine.makeRandomLottoTickets(ticket);
+        user.setUserLotto(lottoTickets);
+        outputView.printLottoInfo(user.getLottoNumbers());
 
-        outputView.printOutput(lottoMachine.checkWin(winnerTicket), money);
+        setWinnerLotto(); /*정상 값을 입력할때까지 반복입력*/
+        setBonusNumber(); /*정상 값을 입력할때까지 반복입력*/
+
+        outputView.printOutput(lottoMachine.checkWin(user.getLottoTickets()), lottoMachine.getUsingMoneyByTicket(ticket));
     }
 
+    private int getTicketByMoney() {
+        String money = inputView.getMoney();
+        try {
+            return lottoMachine.getLottoTicketCount(new Money(money));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getTicketByMoney();
+        }
+    }
+
+    private void setWinnerLotto() {
+        try {
+            String winnerLottoSource = inputView.getWinnerLotto();
+            lottoMachine.setWinnerLottoTicket(winnerLottoSource);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            setWinnerLotto();
+        }
+    }
+
+    private void setBonusNumber() {
+        try {
+            String bonusNumberSource = inputView.getBonusLotto();
+            lottoMachine.setBonusNumber(bonusNumberSource);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            setBonusNumber();
+        }
+
+    }
 
 }
