@@ -24,8 +24,8 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult getLottoResult(Lotto winningLotto) {
-        return new LottoResult(lottos, winningLotto);
+    public LottoResult getLottoResult(WinningNumber winningNumber) {
+        return new LottoResult(lottos, winningNumber);
     }
 
     @Override
