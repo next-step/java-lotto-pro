@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Lotteries {
     private final static String LOTTERIES_WERE_NOT_GENERATED = "로또가 생성되지 않았습니다.";
 
-    private List<Lottery> lotteries;
+    private final List<Lottery> lotteries;
 
     public Lotteries(List<Lottery> lotteries) {
         if (isNull(lotteries)) {
