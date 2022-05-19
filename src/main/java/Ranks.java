@@ -31,7 +31,11 @@ public class Ranks implements Iterable<Rank> {
     }
 
     public BigDecimal yield() {
-        return BigDecimal.valueOf((double) totalMoney() / (double) (size() * Vendor.LOTTO_PRICE));
+        int priceMoney = size() * Vendor.LOTTO_PRICE;
+        if (priceMoney == 0)
+            return BigDecimal.ZERO;
+
+        return BigDecimal.valueOf((double) totalMoney() / (double) priceMoney);
     }
 
     @Override
