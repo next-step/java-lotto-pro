@@ -11,15 +11,26 @@ public class WinningStatisticsTest {
 
     @Test
     public void addLottoRanking() {
+        //given
         WinningStatistics winningStatistics = new WinningStatistics();
-        assertThat(winningStatistics.addLottoRanking(LottoRanking.FIRST_PRIZE)).isEqualTo(1);
+        int expectedCount = 1;
+
+        //when
+        int actualCount = winningStatistics.addLottoRanking(LottoRanking.FIRST_PRIZE);
+
+        //then
+        assertThat(actualCount).isEqualTo(expectedCount);
     }
 
     @Test
     public void calculateReturnRate() {
+        //given
         WinningStatistics winningStatistics = new WinningStatistics();
         winningStatistics.addLottoRanking(LottoRanking.FOURTH_PRIZE);
-        assertThat(winningStatistics.calculateRateOfReturn(14_000)).isEqualTo(0.35,
-            withPrecision(0.01d));
+        double expectedReturnRate = 0.35;
+        //when
+        double actualReturnRate = winningStatistics.calculateRateOfReturn(14_000);
+        //then
+        assertThat(actualReturnRate).isEqualTo(expectedReturnRate, withPrecision(0.01d));
     }
 }

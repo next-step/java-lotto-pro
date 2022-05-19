@@ -9,13 +9,17 @@ import lotto.domain.Lottos;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {
-    
+
     @Test
     public void makeLottos() {
-        Lottos lottos = new Lottos(
+        //given
+        Lottos expectedLottos = new Lottos(
             Arrays.asList(new Lotto(() -> Arrays.asList(new LottoNumber(1)))));
-        assertThat(lottos).isEqualTo(
-            new Lottos(Arrays.asList(new Lotto(() -> Arrays.asList(new LottoNumber(1))))));
+        //when
+        Lottos actualLottos = new Lottos(
+            Arrays.asList(new Lotto(() -> Arrays.asList(new LottoNumber(1)))));
+        //then
+        assertThat(actualLottos).isEqualTo(expectedLottos);
     }
 
 

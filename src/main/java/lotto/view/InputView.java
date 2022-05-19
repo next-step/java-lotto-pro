@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import lotto.domain.LottoUtil;
 
 public class InputView {
 
@@ -9,20 +10,13 @@ public class InputView {
 
     public static int[] enterManualLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return convertToIntArray(enterString().split(","));
+        return LottoUtil.convertToIntArray(enterString().split(","));
     }
 
     public static String enterString() {
         return SCANNER.next();
     }
 
-    private static int[] convertToIntArray(String[] lottoString) {
-        int[] lottoNumbers = new int[lottoString.length];
-        for (int i = 0; i < lottoString.length; i++) {
-            lottoNumbers[i] = Integer.parseInt(lottoString[i]);
-        }
-        return lottoNumbers;
-    }
 
     public static int enterNumber() throws InputMismatchException {
         System.out.println("구입금액을 입력해주세요");

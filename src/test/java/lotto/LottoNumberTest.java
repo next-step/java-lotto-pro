@@ -12,8 +12,12 @@ public class LottoNumberTest {
 
     @Test
     public void make_lottoNumber() {
-        LottoNumber lottoNumber = new LottoNumber(1);
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(1));
+        //given
+        LottoNumber expectedLottoNumber = new LottoNumber(1);
+        //when
+        LottoNumber actualLottoNumber = new LottoNumber(1);
+        //then
+        assertThat(actualLottoNumber).isEqualTo(expectedLottoNumber);
     }
 
     @ParameterizedTest
