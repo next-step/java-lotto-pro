@@ -16,6 +16,18 @@ public class Lotto {
         return numbers.get(index);
     }
 
+    public LottoWinner judge(List<Integer> winnerNumbers) {
+        int rightCount = 0;
+        for (Integer winnerNumber : winnerNumbers) {
+            rightCount += returnOneIfContains(winnerNumber);
+        }
+        return LottoWinner.findLottoWinnerByRightCount(rightCount);
+    }
+
+    private int returnOneIfContains(Integer winnerNumber) {
+        return numbers.contains(winnerNumber) ? 1 : 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
