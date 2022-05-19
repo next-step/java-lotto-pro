@@ -53,7 +53,7 @@ public class Lotto {
     public List<LottoNumber> sortedLottoNumbers() {
         List<LottoNumber> sortedNumbers = new ArrayList<>(this.lottoNumbers);
         Collections.sort(sortedNumbers);
-        return sortedNumbers;
+        return Collections.unmodifiableList(sortedNumbers);
     }
 
 }
