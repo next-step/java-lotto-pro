@@ -2,7 +2,7 @@ package study.lotto;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     private final Integer number;
@@ -28,6 +28,11 @@ public class LottoNumber {
 
     public Integer getNumber() {
         return this.number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        return this.number - lottoNumber.getNumber();
     }
 
     @Override
