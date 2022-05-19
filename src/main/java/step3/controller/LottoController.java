@@ -22,10 +22,12 @@ public class LottoController {
     public void startLotto() {
         LottoUser user = new LottoUser();
         String money;
+        int ticket;
         do {
             money = inputView.getMoney();
             user.setMoney(money);
-        } while (ticketIsNotValid(user));
+            ticket = lottoMachine.getLottoTicketCount(user.getMoney());
+        } while (ticketIsNotValid(user, ticket));
 
         List<LottoTicket> lottoTickets = lottoMachine.makeRandomLottoTickets(user.getTicket());
         user.buyLotto(lottoTickets);
@@ -52,7 +54,7 @@ public class LottoController {
         return !lottoMachine.setWinnerLotto(winnerLottoSource);
     }
 
-    private boolean ticketIsNotValid(LottoUser user) {
-        return !user.buyTicket();
+    private boolean ticketIsNotValid(LottoUser user, int ticket) {
+        return !user.setTicket(ticket);
     }
 }

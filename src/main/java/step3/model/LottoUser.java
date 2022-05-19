@@ -6,12 +6,11 @@ import java.util.stream.Collectors;
 import step3.domain.LottoElement;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
-import step3.domain.Ticket;
 
 public class LottoUser {
 
     private Money money = null;
-    private Ticket ticket = null;
+    private int ticket = 0;
     private List<LottoTicket> lottoTickets = new ArrayList<>();
 
     public boolean setMoney(String money) {
@@ -24,14 +23,10 @@ public class LottoUser {
         }
     }
 
-    public boolean buyTicket() {
-        try {
-            this.ticket = new Ticket(money);
-            return true;
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
+    public boolean setTicket(int ticket) {
+        int noTicket = 0;
+        this.ticket = ticket;
+        return ticket != noTicket;
     }
 
 
@@ -47,11 +42,12 @@ public class LottoUser {
         return money;
     }
 
-    public Ticket getTicket() {
+    public int getTicket() {
         return ticket;
     }
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
+
 }
