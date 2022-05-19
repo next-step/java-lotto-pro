@@ -4,7 +4,6 @@ import lotto.domain.LottoWinner;
 import lotto.domain.Lottos;
 import lotto.domain.LottosResult;
 import lotto.domain.LottosWinnerCounts;
-import lotto.service.LottoWinnerService;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -14,7 +13,6 @@ import java.util.List;
 public class LottoGameStarter {
 
     private final LottoMachine lottoMachine = new LottoMachine();
-    private final LottoWinnerService lottoWinnerService = new LottoWinnerService();
     private final LottoMoneyChecker lottoMoneyChecker = new LottoMoneyChecker();
 
     public void start() {
@@ -31,7 +29,7 @@ public class LottoGameStarter {
     private List<LottoWinner> calculateLottoResults(Lottos lottos, List<Integer> winnerNumber) {
         List<LottoWinner> lottoResults = new ArrayList<>();
         for (int i = 0; i < lottos.gameCount(); i++) {
-            LottoWinner judge = lottoWinnerService.judge(winnerNumber, lottos.getLotto(i));
+            LottoWinner judge = lottos.getLotto(i).judge(winnerNumber);
             lottoResults.add(judge);
         }
         return lottoResults;
