@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,12 +38,16 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public LottoPrize match(LottoTicket lottoTicket) {
+    public boolean hasBonusBallNumber(LottoNumber bonusBallNumber) {
+        return this.lottoNumbers.contains(bonusBallNumber);
+    }
+
+    public LottoPrize match(LottoTicket lastWinningLottoTicket, boolean hasBonusBallNumber) {
         int numberOfMatch = (int) lottoNumbers.stream()
-                .filter(number -> lottoTicket.getLottoNumbers().contains(number))
+                .filter(number -> lastWinningLottoTicket.getLottoNumbers().contains(number))
                 .count();
 
-        return LottoPrize.valueOf(numberOfMatch);
+        return LottoPrize.valueOf(numberOfMatch, hasBonusBallNumber);
     }
 
     @Override

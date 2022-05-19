@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import lotto.view.InputView;
-
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +10,7 @@ public class LottoNumbers {
     private List<LottoNumber> lottoNumbers;
 
     private LottoNumbers(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     public static LottoNumbers generateLottoNumbers(NumbersGenerator numbersGenerator) {
@@ -33,10 +32,12 @@ public class LottoNumbers {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
 
-    public static List<Integer> getLottoNumbersFromInput() {
-        String lottoNumbers = InputView.inputLatestLottoResult();
+    public boolean notContains(LottoNumber lottoNumber) {
+        return !this.lottoNumbers.contains(lottoNumber);
+    }
 
-        return LottoNumbersGenerator.generate(lottoNumbers);
+    public static List<Integer> getLottoNumbersFromInput(String receivedLottoNumbers) {
+        return LottoNumbersGenerator.generate(receivedLottoNumbers);
     }
 
     private static List<LottoNumber> parseIntegerToLottoNumber(List<Integer> generateNumbers) {
