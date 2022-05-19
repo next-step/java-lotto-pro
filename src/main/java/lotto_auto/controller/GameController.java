@@ -4,6 +4,7 @@ import lotto_auto.model.*;
 import lotto_auto.view.Output;
 import lotto_auto.view.UserInputView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -14,8 +15,9 @@ public class GameController {
 
     public void run() {
         Money money = getMoney();
+        PurchaseInfo purchaseInfo = getPurchasedInfo(money);
 
-        Lottos purchasedLottos = buyLottos(money);
+        Lottos purchasedLottos = buyLottos(purchaseInfo);
         output.showPurchasedLottos(purchasedLottos);
         WinningLotto winingLotto = getWinningLotto();
 
@@ -54,7 +56,8 @@ public class GameController {
 
     private WinningLotto getWinningLotto() {
         boolean isValid;
-        LottoNumbers lottoNumbers = getValidLottoNumber();
+        output.showWinningLottoNotice();
+        LottoNumbers lottoNumbers = getValidLottoNumbers();
         LottoNumber bonusBall;
 
         do{
@@ -64,12 +67,11 @@ public class GameController {
         return new WinningLotto(new Lotto(lottoNumbers), bonusBall);
     }
 
-    private LottoNumbers getValidLottoNumber() {
+    private LottoNumbers getValidLottoNumbers() {
         boolean isValid;
         Optional<LottoNumbers> lottoNumbers;
 
         do {
-            output.showWinningLottoNotice();
             String userinput = UserInputView.getUserInput();
             lottoNumbers = getLottoNumbersByUserString(userinput);
             isValid = lottoNumbers.isPresent();
@@ -103,6 +105,10 @@ public class GameController {
     }
 
     private Optional<LottoNumbers> getLottoNumbersByUserString(String lottoString) {
+        if (lottoString.isEmpty()) {
+            return Optional.empty();
+        }
+
         try {
             return Optional.of(getLottoNumberListByStr(lottoString));
         } catch (IllegalArgumentException e) {
@@ -111,9 +117,12 @@ public class GameController {
         }
     }
 
-    private Lottos buyLottos(Money money) {
-        output.showPurchaseLottoCountNotice(money.canBuyLottoCount());
-        return LottoGenerator.createLottos(money.canBuyLottoCount());
+    private Lottos buyLottos(PurchaseInfo info) {
+        output.showPurchasedLottoCountNotice(info);
+        Lottos manualLottos = getManualLottos(info.getManualLottoCount());
+        Lottos autoLottos = LottoGenerator.createLottos(info.getAutoLottoCount());
+
+        return manualLottos.merge(autoLottos);
     }
 
     private Optional<LottoNumber> getLottoNumberByUserString(String userinput) {
@@ -128,16 +137,70 @@ public class GameController {
 
     private LottoNumbers getLottoNumberListByStr(String lottoStr) {
         try {
-            String delimiter = ", ";
-            return new LottoNumbers(Arrays.stream(lottoStr.split(delimiter))
+            String delimiter = ",";
+            String blank = " ";
+            return new LottoNumbers(Arrays.stream(lottoStr.replaceAll(blank , "").split(delimiter))
                     .map(Integer::parseInt)
                     .map(LottoNumber::new)
                     .collect(Collectors.toList()));
         } catch (NumberFormatException e) {
-            IllegalArgumentException error = new IllegalArgumentException(LottoNumber.NOT_NUMBER);
-            output.showError(error);
-            throw error;
+            throw new IllegalArgumentException(LottoNumber.NOT_NUMBER);
         }
+    }
+
+    private LottoCount getManualLottoCount() {
+        boolean isValid;
+        String userInput;
+
+        do {
+            output.showManualLottoCountNotice();
+            userInput = UserInputView.getUserInput();
+            isValid = isValidLottoCount(userInput);
+        } while (!isValid);
+
+        return new LottoCount(userInput);
+    }
+
+    private boolean isValidLottoCount(String count) {
+        try {
+            new LottoCount(count);
+            return true;
+        } catch (IllegalArgumentException e) {
+            output.showError(e);
+            return false;
+        }
+    }
+
+    private boolean isAvailableForPurchase(Money money, LottoCount manualLottoCount) {
+        try {
+            new PurchaseInfo(money, manualLottoCount);
+            return true;
+        } catch (Exception e) {
+            output.showError(e);
+            return false;
+        }
+    }
+
+    private PurchaseInfo getPurchasedInfo(Money money) {
+        boolean isValid;
+        LottoCount lottoCount;
+        do {
+            lottoCount = getManualLottoCount();
+            isValid = isAvailableForPurchase(money, lottoCount);
+        } while (!isValid);
+
+        return new PurchaseInfo(money, lottoCount);
+    }
+
+    private Lottos getManualLottos(int manualLottoCount) {
+        output.showPurchaseManualLottoNotice();
+
+        List<LottoNumbers> manualLottoNumbersList = new ArrayList<>();
+        for (int i=0; i < manualLottoCount; i++) {
+            manualLottoNumbersList.add(getValidLottoNumbers());
+        }
+
+        return new Lottos(manualLottoNumbersList.stream().map(Lotto::new).collect(Collectors.toList()));
     }
 
 }
