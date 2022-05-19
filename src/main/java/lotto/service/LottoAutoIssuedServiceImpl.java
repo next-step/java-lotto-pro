@@ -1,25 +1,29 @@
 package lotto.service;
 
-import lotto.domain.LottoNumber;
-
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoAutoIssuedServiceImpl implements LottoIssuedService{
     private final static int LOTTO_NUMBER_SIZE_VALUE = 6;
+    private final static int LOTTO_NUMBER_MIN_VALUE = 1;
+    private final static int LOTTO_NUMBER_MAX_VALUE = 45;
 
-    private static void shuffleNumbers(List<Integer> numbers) {
-        Collections.shuffle(numbers);
+    private final static List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE)
+            .boxed()
+            .collect(Collectors.toList());
+
+    private static void shuffleNumbers() {
+        Collections.shuffle(LOTTO_NUMBERS);
     }
 
-    private static List<Integer> divideNumberList(List<Integer> lottoNumbers) {
-        return lottoNumbers.subList(0, LOTTO_NUMBER_SIZE_VALUE);
+    private static List<Integer> divideNumberList() {
+        return LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE_VALUE);
     }
 
     @Override
     public Set<Integer> issueLottoNumber() {
-        List<Integer> lottoTargetNumbers = new ArrayList<>(LottoNumber.numbers);
-        shuffleNumbers(lottoTargetNumbers);
-
-        return new HashSet<>(divideNumberList(lottoTargetNumbers));
+        shuffleNumbers();
+        return new HashSet<>(divideNumberList());
     }
 }
