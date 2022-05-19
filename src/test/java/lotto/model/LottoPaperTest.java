@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class LottoPaperTest {
 
-    @DisplayName("랜덤횟수를 가져온다(전체횟수 - 수동횟수)")
+    @DisplayName("랜덤횟수 조회 (전체횟수 - 수동횟수)")
     @Test
     void randomCount() {
         LottoPaper lottoPaper = new LottoPaper(10, 3);

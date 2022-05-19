@@ -16,22 +16,23 @@ class LottosTest {
 
     @BeforeEach
     void setUp() {
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(Arrays.asList(1, 3, 5, 7, 9, 10)));
-        lottoList.add(new Lotto(Arrays.asList(7, 10, 15, 20, 25, 35)));
-        lottoList.add(new Lotto(Arrays.asList(3, 7, 20, 35, 43, 45)));
-        lottos = new Lottos(lottoList);
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(Arrays.asList(1, 3, 5, 7, 9, 10)));
+        lottos.add(new Lotto(Arrays.asList(7, 10, 15, 20, 25, 35)));
+        lottos.add(new Lotto(Arrays.asList(3, 7, 20, 35, 43, 45)));
+        this.lottos = new Lottos(lottos);
     }
 
-    @DisplayName("로또 게임 수익률을 계산한다.")
+    @DisplayName("로또 게임 수익률을 계산")
     @Test
     void playLottoGame() {
         int totalWinningMount = 200_000;
         int lottoPrice = 1000;
+
         assertEquals((double) 200_000 / (lottoPrice * lottos.lottoCount()), lottos.calcProfitRate(totalWinningMount));
     }
 
-    @DisplayName("수동로또와 자동로또 병합한다.")
+    @DisplayName("수동로또와 자동로또를 병합")
     @Test
     void mergeLottos() {
         List<Lotto> targetLottos = new ArrayList<>();

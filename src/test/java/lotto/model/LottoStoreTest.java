@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 class LottoStoreTest {
 
 
-    @DisplayName("입력받은 구매금액을 로또종이로 변환한다.")
+    @DisplayName("입력받은 구매금액을 로또종이로 반환")
     @ParameterizedTest(name = "[{0}]원 -> [{1}]게임")
     @CsvSource(value = {"10000:10:3", "5000:5:2", "3000:3:0"}, delimiter = ':')
     void issueLottoPaper(String moneyWord,int totalCount, int selfCount) {
@@ -25,6 +25,7 @@ class LottoStoreTest {
     void lottoStroe_not_number() {
         Money money = new Money("3000");
         LottoSelfCount lottoSelfCount = new LottoSelfCount("5");
+
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoStore(money, lottoSelfCount))
                 .withMessage("[ERROR] 구매 금액이 부족합니다.");
     }

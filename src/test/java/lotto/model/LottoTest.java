@@ -10,10 +10,11 @@ import org.junit.jupiter.api.Test;
 
 class LottoTest {
 
-    @DisplayName("로또 등수 구하기")
+    @DisplayName("로또 등수 확인")
     @Test
     void matchRank() {
         Lotto lotto = new Lotto(Arrays.asList(1, 3, 15, 25, 36, 45));
+
         assertAll(
                 () -> assertEquals(LottoRank.FOURTH,
                         lotto.matchRank(new LottoNumbers(Arrays.asList("1", "10", "15", "40", "41", "45")),
@@ -37,6 +38,7 @@ class LottoTest {
     @Test
     void convertNumbers() {
         Lotto lotto = new Lotto(Arrays.asList(1, 3, 15, 25, 36, 45));
+
         assertThat(lotto.convertNumbers()).isEqualTo(new int[]{1, 3, 15, 25, 36, 45});
     }
 

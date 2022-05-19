@@ -17,7 +17,7 @@ class LottoGeneratorRandomImplTest {
 
     private LottoGenerator lottoGenerator;
 
-    @DisplayName("랜덤 로또를 생성하며 수동로또와 통합하여 로또 목록을 생성한다.")
+    @DisplayName("랜덤 로또를 생성하며 수동로또와 통합하여 로또 목록을 생성")
     @Test
     void generateLottos() {
         lottoGenerator = new LottoGeneratorRandomImpl();
