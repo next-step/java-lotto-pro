@@ -5,66 +5,62 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static lotto.domain.LottoConstant.LOTTO_END_NUMBER;
-import static lotto.domain.LottoConstant.LOTTO_START_NUMBER;
 import static lotto.view.InputView.*;
 
 public class LottoGame {
-    private static final List<LottoNo> lottoNumbers = new ArrayList<>();
-
-    static {
-        for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
-            lottoNumbers.add(new LottoNo(number));
-        }
-    }
-
-    public LottoGame() {
-    }
 
     public void play() {
-        Money money = readMoney();
-        OutputView.printMessage(money.getAvailableLottosForPurchase() + "개를 구매했습니다.");
+        LottoMachine machine = readMoney();
+        LottoQuantity manualQuantity = readQuantity();
+        LottoQuantity automaticQuantity = getAutomaticQuantity(machine, manualQuantity);
 
-        PurchasedLotto purchasedLotto = purchaseLotto(money);
-        OutputView.printMyLotto(purchasedLotto);
+        PurchasedLotto lottos = purchaseManualLotto(manualQuantity);
+        PurchasedLotto automaticLottos = machine.purchaseLotto(automaticQuantity);
+
+        printQuantityMessage(manualQuantity, automaticQuantity);
+        lottos.append(automaticLottos);
+        OutputView.printMyLotto(lottos);
 
         Lotto lastWinningLotto = new Lotto(readLastWinningNumbers());
         LottoNo bonusNumber = new LottoNo(readBonusNumber());
         OutputView.printLine();
 
-        LottoResult result = matchLottoNumbers(purchasedLotto, lastWinningLotto, bonusNumber);
-        OutputView.showLottoResult(result, money);
+        LottoResult result = lottos.matchLottoNumbers(lastWinningLotto, bonusNumber);
+        OutputView.showLottoResult(result, machine);
     }
 
-    public PurchasedLotto purchaseLotto(Money money) {
-        long lottoQuantity = money.getAvailableLottosForPurchase();
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < lottoQuantity; i++) {
-            lottoList.add(generateLotto());
+    private static void printQuantityMessage(LottoQuantity manualQuantity, LottoQuantity automaticQuantity) {
+        OutputView.printMessage("수동으로 %d장, 자동으로 %d장 구매했습니다.\r\n",
+                manualQuantity.getQuantity(), automaticQuantity.getQuantity());
+    }
+
+    private static PurchasedLotto purchaseManualLotto(LottoQuantity manualQuantity) {
+        OutputView.printMessage("수동으로 구매할 번호를 입력해 주세요.");
+        List<Lotto> manualLottoList = new ArrayList<>();
+        for (int i = 0; i < manualQuantity.getQuantity(); i++) {
+            manualLottoList.add(new Lotto(InputView.readUserInput()));
         }
-        return new PurchasedLotto(lottoList);
+        OutputView.printLine();
+        return new PurchasedLotto(manualLottoList);
     }
 
-    private Lotto generateLotto() {
-        Collections.shuffle(lottoNumbers);
-        List<LottoNo> lottoNoList = lottoNumbers.stream()
-                .limit(LottoConstant.LOTTO_SIZE)
-                .collect(Collectors.toList());
-        return new Lotto(lottoNoList);
+    public static LottoQuantity getAutomaticQuantity(LottoMachine machine, LottoQuantity manualQuantity) {
+        LottoQuantity automaticQuantity = new LottoQuantity(machine.calculatePurchaseLottos() - manualQuantity.getQuantity());
+        return automaticQuantity;
     }
 
-    public LottoResult matchLottoNumbers(PurchasedLotto purchasedLotto, Lotto lastWinningLotto, LottoNo bonusNumber) {
-        List<Ranking> rankings = purchasedLotto.compareLottos(lastWinningLotto, bonusNumber);
-        return new LottoResult(rankings);
+    private static LottoMachine readMoney() {
+        LottoMachine machine = new LottoMachine(InputView.readUserInput(REQUEST_MONEY));
+        OutputView.printLine();
+        return machine;
     }
 
-    private Money readMoney() {
-        String input = InputView.readUserInput(REQUEST_MONEY);
-        return new Money(input);
+    private LottoQuantity readQuantity() {
+        LottoQuantity quantity = new LottoQuantity(InputView.readUserInput(REQUEST_PASSIVE_LOTTO_QUANTITY));
+        OutputView.printLine();
+        return quantity;
     }
 
     private String readLastWinningNumbers() {

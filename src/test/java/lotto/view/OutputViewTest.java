@@ -10,8 +10,8 @@ import java.util.List;
 class OutputViewTest {
     @Test
     public void 구매_로또_출력하기() {
-        LottoGame game = new LottoGame();
-        PurchasedLotto lottos = game.purchaseLotto(new Money(5000));
+        LottoMachine machine = new LottoMachine(5000);
+        PurchasedLotto lottos = machine.purchaseLotto();
         OutputView.printMyLotto(lottos);
     }
 
@@ -22,9 +22,8 @@ class OutputViewTest {
                 new Lotto(1, 2, 3, 4, 5, 7),
                 new Lotto(1, 2, 3, 4, 7, 8),
                 new Lotto(1, 2, 3, 7, 8, 9));
-        LottoGame game = new LottoGame();
         PurchasedLotto purchasedLotto = new PurchasedLotto(lottoList);
-        LottoResult result = game.matchLottoNumbers(purchasedLotto, new Lotto("1, 2, 3, 4, 5, 6"), new LottoNo(8));
+        LottoResult result = purchasedLotto.matchLottoNumbers(new Lotto("1, 2, 3, 4, 5, 6"), new LottoNo(8));
         OutputView.showLottoStatistics(result);
     }
 }
