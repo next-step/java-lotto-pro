@@ -7,9 +7,9 @@ public enum ExceptionType {
     INVALID_NUMBER_SIZE("당첨 번호는 1 부터 45 사이의 값만 올 수 있습니다."),
     IS_NOT_OVERLAP_WINNING_NUMBER("당첨 번호는 중복이 존재할 수 없습니다."),
     INVALID_LOTTO_NUMBER_SIZE("로또의 번호 갯수가 6개가 아닙니다."),
-    INVALID_NUMBER_FORMAT("보너스 번호의 형식이 숫자가 아닙니다."),
-    ALREADY_EXISTS_WINNINGS_NUMBER("보너스 번호가 당첨번호에 이미 존재합니다.");
-
+    INVALID_NUMBER_FORMAT("번호의 형식이 숫자가 아닙니다."),
+    ALREADY_EXISTS_WINNINGS_NUMBER("보너스 번호가 당첨번호에 이미 존재합니다."),
+    IS_LACK_OF_PRICE_("로또를 구매할 금액이 부족합니다.");
     private final String message;
 
     ExceptionType(String message) {
