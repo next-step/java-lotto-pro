@@ -24,6 +24,8 @@ public class LottoMachine {
     private final int LOTTO_PRICE = 1_000;
     private LottoElement bonusNumber;
     private LottoTicket winnerLottoTicket;
+    private final int EMPTY = 0;
+    private final int MATCH = 1;
     private final String SET_BONUS_NUMBER_EXCEPTION_MSG = "정답티켓과 다른 번호를 설정해야합니다";
     private final String CANT_BUY_LOTTO_EXCEPTION = "돈은 최소 " + LOTTO_PRICE + "이상 입력해야합니다";
 
@@ -81,14 +83,13 @@ public class LottoMachine {
     }
 
     public Map<LottoReward, Integer> checkWin(List<LottoTicket> userLottoTickets) {
-        int isMatch = 1;
         LinkedHashMap<LottoReward, Integer> statistics = new LinkedHashMap<>();
         initStatistics(statistics);
         for (LottoTicket lottoTicket : userLottoTickets) {
             int matchCountLottoTicketWithUserAndWinner = lottoTicket.getMatchCountWith(winnerLottoTicket.getLottoNumbers());
-            boolean haveBonusNumberInUserLottoTicket = lottoTicket.getMatchCountWith(Arrays.asList(bonusNumber)) == isMatch;
+            boolean haveBonusNumberInUserLottoTicket = lottoTicket.getMatchCountWith(Arrays.asList(bonusNumber)) == MATCH;
             LottoReward lottoReward = LottoReward.valueOf(matchCountLottoTicketWithUserAndWinner, haveBonusNumberInUserLottoTicket);
-            statistics.replace(lottoReward, statistics.get(lottoReward) + isMatch);
+            statistics.replace(lottoReward, statistics.get(lottoReward) + MATCH);
         }
         return statistics;
     }
@@ -101,7 +102,7 @@ public class LottoMachine {
 
     public int getLottoTicketCount(Money money) {
         int ticket = money.getMoney() / LOTTO_PRICE;
-        if (ticket == 0) {
+        if (ticket == EMPTY) {
             throw new IllegalArgumentException(CANT_BUY_LOTTO_EXCEPTION);
         }
         return ticket;

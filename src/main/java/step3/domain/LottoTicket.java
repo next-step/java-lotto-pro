@@ -12,6 +12,8 @@ public class LottoTicket {
 
     private final List<LottoElement> lottoElements = new ArrayList();
     private final int LOTTO_ELEMENTS_SIZE = 6;
+    private final int MATCH = 1;
+    private final int NOT_MATCH = 0;
     private static final String LOTTO_DELIMITER = ",";
     private final String CREATE_TICKET_EXCEPTION_MSG = "로또는 중복되지 않은 %s 개의 숫자로 이루어져있습니다";
     private final String PARSE_INT_EXCEPTION_MSG = "로또는 숫자로 이루어져 있어야 합니다";
@@ -53,9 +55,9 @@ public class LottoTicket {
 
     private int isMatch(LottoElement lottoElement) {
         if (lottoElements.contains(lottoElement)) {
-            return 1;
+            return MATCH;
         }
-        return 0;
+        return NOT_MATCH;
     }
 
     public List<LottoElement> getLottoNumbers() {
