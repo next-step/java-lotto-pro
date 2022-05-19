@@ -6,37 +6,26 @@ import lotto.strategy.AutoPickNumberStrategy;
 
 public class LottoManager {
 
-    private Lottos lottos;
     private WinningStatistics winningStatistics;
 
     public LottoManager(int autoLottoCount) {
         winningStatistics = new WinningStatistics();
-        makeLottos(autoLottoCount);
     }
 
-    public LottoManager(Lottos lottos) {
-        winningStatistics = new WinningStatistics();
-        this.lottos = lottos;
-    }
-
-    private void makeLottos(int autoLottoCount) {
+    public Lottos makeLottos(int autoLottoCount) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < autoLottoCount; i++) {
             lottoList.add(new Lotto(new AutoPickNumberStrategy()));
         }
-        this.lottos = new Lottos(lottoList);
+        return new Lottos(lottoList);
     }
 
-    public void makeWinningLotto(Lotto winningLotto) {
+    public void makeWinningLotto(Lotto winningLotto, Lottos lottos) {
         lottos.makeWinningResult(winningLotto, winningStatistics);
     }
 
     public double calculateRateOfReturn(int purchaseAmount) {
         return winningStatistics.calculateRateOfReturn(purchaseAmount);
-    }
-
-    public List<Lotto> getLottoElements() {
-        return lottos.getElements();
     }
 
     public WinningStatistics getWinningStatistics() {
