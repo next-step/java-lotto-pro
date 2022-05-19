@@ -25,14 +25,13 @@ public class Money {
         } catch (NumberFormatException e) {
             validateResult = false;
         }
-
-        if (validateResult == false) {
+        if (!validateResult) {
             throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION);
         }
     }
 
     private void validateMoney(int money) {
-        if(money < 0){
+        if (money < 0) {
             throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION);
         }
     }
