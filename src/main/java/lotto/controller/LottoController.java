@@ -10,7 +10,6 @@ import lotto.view.ResultView;
 public class LottoController {
 
     public static void startLotto() {
-        System.out.println("구입금액을 입력해주세요");
         int purchaseAmount = InputView.enterNumber();
 
         LottoManager lottoManager = new LottoManager(
