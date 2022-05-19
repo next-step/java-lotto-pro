@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoRank;
+import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 
 import java.util.Arrays;
@@ -22,17 +23,9 @@ public class OutputView {
     private static void printLottoRank(List<Integer> matchList, List<LottoRank> lottoRanks) {
         System.out.println("\n당첨 통계\n---------");
         for (LottoRank lottoRank : lottoRanks) {
-            int matchCount = matchCount(matchList, lottoRank);
+            int matchCount = LottoStatistics.matchCount(matchList, lottoRank);
             printMatch(lottoRank.getMatch(), lottoRank.getPrize(), matchCount);
         }
-    }
-
-    private static int matchCount(List<Integer> matchList, LottoRank lottoRank) {
-        int count = 0;
-        for (int match : matchList) {
-            count += lottoRank.isMatch(match) ? 1 : 0;
-        }
-        return count;
     }
 
     private static void printMatch(int match, long prize, int count) {
@@ -45,22 +38,13 @@ public class OutputView {
     }
 
     private static void printRateOfReturn(List<Integer> matchList, List<LottoRank> lottoRanks) {
-        int profit = lottoProfit(matchList, lottoRanks);
+        int profit = LottoStatistics.lottoProfit(matchList, lottoRanks);
         float rateOfReturn = profit / (matchList.size() * LOTTO_PRICE);
 
         System.out.print(String.format("총 수익률은 %.2f입니다.", rateOfReturn));
         if (rateOfReturn < 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
-    }
-
-    private static int lottoProfit(List<Integer> matchList, List<LottoRank> lottoRanks) {
-        int profit = 0;
-        for (LottoRank lottoRank : lottoRanks) {
-            int matchCount = matchCount(matchList, lottoRank);
-            profit += (matchCount * lottoRank.getPrize());
-        }
-        return profit;
     }
 
     public static void printLottoAutoTickets(List<LottoTicket> tickets) {
