@@ -38,13 +38,13 @@ public class Application {
         ResultView.printFinalResultView(lottoGameResult, lottos);
     }
 
-    private Lottos createSelfLottos(LottoPaper LottoPaper) throws IOException {
+    private Lottos createSelfLottos(LottoPaper lottoPaper) throws IOException {
         try {
             InputConsoleUtils.printMessage(LottoInputMessage.SELF_NUMBERS_MESSAGE);
-            return inputSelfLottos(LottoPaper);
+            return inputSelfLottos(lottoPaper);
         } catch (IllegalArgumentException e) {
             ResultView.printConsole(e.getMessage());
-            return createSelfLottos(LottoPaper);
+            return createSelfLottos(lottoPaper);
         }
     }
 
