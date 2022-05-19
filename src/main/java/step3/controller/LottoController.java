@@ -2,6 +2,7 @@ package step3.controller;
 
 import java.util.List;
 import step3.domain.LottoTicket;
+import step3.domain.Money;
 import step3.model.LottoMachine;
 import step3.model.LottoUser;
 import step3.view.InputView;
@@ -21,40 +22,48 @@ public class LottoController {
 
     public void startLotto() {
         LottoUser user = new LottoUser();
-        String money;
-        int ticket;
-        do {
-            money = inputView.getMoney();
-            user.setMoney(money);
-            ticket = lottoMachine.getLottoTicketCount(user.getMoney());
-        } while (ticketIsNotValid(user, ticket));
 
-        List<LottoTicket> lottoTickets = lottoMachine.makeRandomLottoTickets(user.getTicket());
+        int ticket = getTicketByMoney();
+
+        List<LottoTicket> lottoTickets = lottoMachine.makeRandomLottoTickets(ticket);
         user.setUserLotto(lottoTickets);
         outputView.printLottoInfo(user.getLottoNumbers());
 
-        String winnerLottoSource;
-        do {
-            winnerLottoSource = inputView.getWinnerLotto();
-        } while (winnerLottoIsNotValid(winnerLottoSource));
+        setWinnerLotto();
+        setBonusNumber();
 
-        String bonusNumberSource;
-        do {
-            bonusNumberSource = inputView.getBonusLotto();
-        } while (bonusNumberIsNotValid(bonusNumberSource));
-
-        outputView.printOutput(lottoMachine.checkWin(user.getLottoTickets()), lottoMachine.getUsingMoneyByTicket(user.getTicket()));
+        outputView.printOutput(lottoMachine.checkWin(user.getLottoTickets()), lottoMachine.getUsingMoneyByTicket(ticket));
     }
 
-    private boolean bonusNumberIsNotValid(String bonusNumberSource) {
-        return !lottoMachine.setBonusNumber(bonusNumberSource);
+    private int getTicketByMoney() {
+        String money = inputView.getMoney();
+        try {
+            return lottoMachine.getLottoTicketCount(new Money(money));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getTicketByMoney();
+        }
     }
 
-    private boolean winnerLottoIsNotValid(String winnerLottoSource) {
-        return !lottoMachine.setWinnerLotto(winnerLottoSource);
+    private void setWinnerLotto() {
+        try {
+            String winnerLottoSource = inputView.getWinnerLotto();
+            lottoMachine.setWinnerLotto(winnerLottoSource);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            setWinnerLotto();
+        }
     }
 
-    private boolean ticketIsNotValid(LottoUser user, int ticket) {
-        return !user.setTicket(ticket);
+    private void setBonusNumber() {
+        try {
+            String bonusNumberSource = inputView.getBonusLotto();
+            lottoMachine.setBonusNumber(bonusNumberSource);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            setBonusNumber();
+        }
+
     }
+
 }
