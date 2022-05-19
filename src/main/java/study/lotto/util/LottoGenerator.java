@@ -3,9 +3,8 @@ package study.lotto.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import study.lotto.LottoNumber;
 import study.lotto.Lotto;
+import study.lotto.LottoNumber;
 
 public class LottoGenerator {
     private static final int LOTTO_NUMBER_SIZE = 6;
@@ -30,7 +29,7 @@ public class LottoGenerator {
 
     private static Lotto newAutoLotto() {
         return new Lotto(
-                getRandomLottoNumbers().stream().map(LottoNumber::toInteger)
+                getRandomLottoNumbers().stream().map(LottoNumber::getNumber)
                         .collect(Collectors.toList())
         );
     }

@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class LottoNumber {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
-    private final int number;
+    private final Integer number;
 
     public LottoNumber() {
         this.number = Randoms.pickNumberInRange(1, 45);
@@ -26,7 +26,7 @@ public class LottoNumber {
         }
     }
 
-    public Integer toInteger() {
+    public Integer getNumber() {
         return this.number;
     }
 
@@ -37,7 +37,7 @@ public class LottoNumber {
 
     @Override
     public int hashCode() {
-        return number;
+        return number.hashCode();
     }
 
     @Override
@@ -51,6 +51,6 @@ public class LottoNumber {
 
         LottoNumber that = (LottoNumber) o;
 
-        return number == that.number;
+        return number.equals(that.number);
     }
 }

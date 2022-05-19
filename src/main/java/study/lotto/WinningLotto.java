@@ -1,10 +1,9 @@
 package study.lotto;
 
-import java.util.HashSet;
-import java.util.Set;
 import study.lotto.enumtype.LottoWinningType;
 
 public class WinningLotto {
+    private static final int LOTTO_BONUS_MATCH_COUNT = 5;
     private final Lotto winningNumber;
     private final LottoNumber bonusNumber;
 
@@ -18,10 +17,10 @@ public class WinningLotto {
         int matchCount = matchCount(lotto);
         boolean bonusMatch = matchBonus(lotto);
 
-        if (matchCount == 5 && bonusMatch) {
+        if (matchCount == LOTTO_BONUS_MATCH_COUNT && bonusMatch) {
             return LottoWinningType.SECOND;
         }
-        if (matchCount == 5) {
+        if (matchCount == LOTTO_BONUS_MATCH_COUNT) {
             return LottoWinningType.THIRD;
         }
 
@@ -35,10 +34,9 @@ public class WinningLotto {
     }
 
     private int matchCount(Lotto lotto) {
-        Set<Integer> lottoSet = new HashSet<>();
-        lottoSet.addAll(lotto.getNumbers());
-        lottoSet.addAll(this.winningNumber.getNumbers());
-        return lotto.numberSize() * 2 - lottoSet.size();
+        return (int) winningNumber.getNumbers().stream()
+                .filter(num -> lotto.getNumbers().contains(num))
+                .count();
     }
 
     private boolean matchBonus(Lotto lotto) {

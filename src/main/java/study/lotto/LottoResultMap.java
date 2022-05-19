@@ -19,8 +19,7 @@ public class LottoResultMap {
     }
 
     public int matchCount(LottoWinningType lottoWinningType) {
-        List<Lotto> lottos = resultMap.getOrDefault(lottoWinningType, new ArrayList<>());
-        return lottos.size();
+        return resultMap.getOrDefault(lottoWinningType, new ArrayList<>()).size();
     }
 
     public int allItemSize() {

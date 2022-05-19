@@ -13,26 +13,26 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
-        Collections.sort(numbers);
+        validateAndSort();
     }
 
     public Lotto(String numbersString) {
         numbers = StringUtil.splitAndParseInt(numbersString, NUMBER_DELIMITER);
-        validate(numbers);
-        Collections.sort(numbers);
+        validateAndSort();
     }
 
     public int numberSize() {
         return numbers.size();
     }
 
-    List<Integer> getNumbers() {
+    public List<Integer> getNumbers() {
         return numbers;
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validateAndSort() {
         validateSize(numbers);
         validateDuplicate(numbers);
+        Collections.sort(numbers);
     }
 
     private void validateSize(List<Integer> numbers) {
@@ -54,6 +54,6 @@ public class Lotto {
     }
 
     public boolean contains(LottoNumber bonusNumber) {
-        return this.numbers.contains(bonusNumber.toInteger());
+        return this.numbers.contains(bonusNumber.getNumber());
     }
 }

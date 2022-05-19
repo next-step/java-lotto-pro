@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class LottoWinningTypeTest {
     private static final int MATCH_COUNT_1 = 1;
-    private static final int MATCH_COUNT_9999 = 9999;
+    private static final int MATCH_COUNT_7 = 7;
 
     @Test
     @DisplayName("enum 변환 테스트")
@@ -20,6 +20,6 @@ class LottoWinningTypeTest {
     @Test
     @DisplayName("enum 변환 테스트 - 범위 초과 예외")
     void valueOf_exceededRange() {
-        assertThat(LottoWinningType.valueOf(MATCH_COUNT_9999)).isEqualTo(LottoWinningType.MISS);
+        assertThat(LottoWinningType.valueOf(MATCH_COUNT_7)).isEqualTo(LottoWinningType.MISS);
     }
 }

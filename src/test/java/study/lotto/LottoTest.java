@@ -19,7 +19,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 생성 테스트 - 수동생성 - 범위 초과")
     void createLotto_manualNumber_rangeExceeded() {
-        assertThatThrownBy(() -> new Lotto("1,2,3,4, 9999"))
+        assertThatThrownBy(() -> new Lotto("1,2,3,4, 46"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
