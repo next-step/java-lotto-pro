@@ -38,7 +38,7 @@ public class LottoNumbers {
     }
 
     private static void checkNumberSize(List<Integer> numbers) {
-        boolean isOverSize = numbers.size() > LOTTO_PICK_COUNT;
+        boolean isOverSize = numbers.size() != LOTTO_PICK_COUNT;
         if (isOverSize) {
             String message = String.format("[ERROR] 로또 번호는 %d개 입력해 주세요!", LOTTO_PICK_COUNT);
             throw new IllegalArgumentException(message);
