@@ -77,9 +77,7 @@ public class LottoMachine {
     }
 
     private LottoTicket makeManualLottoTicket(String manualLottoSource) {
-
         return new LottoTicket(manualLottoSource);
-
     }
 
     public Map<LottoReward, Integer> checkWin(List<LottoTicket> userLottoTickets) {

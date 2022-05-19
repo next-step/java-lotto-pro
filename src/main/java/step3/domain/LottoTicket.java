@@ -19,7 +19,7 @@ public class LottoTicket {
     private final String PARSE_INT_EXCEPTION_MSG = "로또는 숫자로 이루어져 있어야 합니다";
 
     public LottoTicket(List<String> lottoNumbers) {
-        validateSourceSize(lottoNumbers);
+        validateLottoNumbers(lottoNumbers);
         List<Integer> lottoSource = elementsSourceToInt(lottoNumbers);
         for (Integer lottoElement : lottoSource) {
             lottoElements.add(new LottoElement(lottoElement));
@@ -31,7 +31,7 @@ public class LottoTicket {
         this(Arrays.asList(lottoElementsSource.split(LOTTO_DELIMITER)));
     }
 
-    private void validateSourceSize(List<String> lottoElementsSource) {
+    private void validateLottoNumbers(List<String> lottoElementsSource) {
         if (new HashSet<>(lottoElementsSource).size() != LOTTO_ELEMENTS_SIZE) {
             throw new IllegalArgumentException(String.format(CREATE_TICKET_EXCEPTION_MSG, LOTTO_ELEMENTS_SIZE));
         }
