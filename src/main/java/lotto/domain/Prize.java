@@ -2,7 +2,10 @@ package lotto.domain;
 
 import lotto.view.ResultView;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public enum Prize {
@@ -12,9 +15,14 @@ public enum Prize {
     FOURTH_PLACE(3, 5_000),
     FAIL(0, 0);
 
-    private static final Prize[] prizes = {FAIL, FAIL, FAIL, FOURTH_PLACE, THIRD_PLACE, SECOND_PLACE, FIRST_PLACE};
-    private final long prize;
+    private static final Map<Integer, Prize> prizeMap = new ConcurrentHashMap<>();
+
+    static {
+        Arrays.stream(values()).forEach(v -> prizeMap.put(v.matchCount, v));
+    }
+
     private final int matchCount;
+    private final long prize;
 
     Prize(final int matchCount, final long prize) {
         this.matchCount = matchCount;
@@ -29,7 +37,7 @@ public enum Prize {
     }
 
     private static Prize createPrize(final long count) {
-        return prizes[Long.valueOf(count).intValue()];
+        return prizeMap.getOrDefault(Long.valueOf(count).intValue(), FAIL);
     }
 
     public long calculatePrize(final long count) {
