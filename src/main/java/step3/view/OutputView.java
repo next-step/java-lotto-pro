@@ -21,7 +21,7 @@ public class OutputView {
         initOverviewMap();
     }
 
-    public void printOutput(HashMap<LottoReward, Integer> statistics,int usingMoney) {
+    public void printOutput(Map<LottoReward, Integer> statistics,int usingMoney) {
         System.out.println(OVERVIEW_INIT_MESSAGE);
         long reward = printOverview(statistics);
         printRewardRate(reward, usingMoney);
@@ -43,7 +43,7 @@ public class OutputView {
         return reward * 1.0 / usingMoney;
     }
 
-    private long printOverview(HashMap<LottoReward, Integer> statistics) {
+    private long printOverview(Map<LottoReward, Integer> statistics) {
         long reward = 0;
         for (LottoReward printRewardTarget : LOTTO_OVERVIEW_FORMAT.keySet()) {
             reward += printOverViewPerEntry(printRewardTarget, statistics.get(printRewardTarget));

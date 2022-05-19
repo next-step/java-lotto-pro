@@ -4,9 +4,9 @@ import static java.util.Collections.shuffle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import step3.domain.LottoElement;
@@ -80,7 +80,7 @@ public class LottoMachine {
 
     }
 
-    public HashMap<LottoReward, Integer> checkWin(List<LottoTicket> userLottoTickets) {
+    public Map<LottoReward, Integer> checkWin(List<LottoTicket> userLottoTickets) {
         int isMatch = 1;
         LinkedHashMap<LottoReward, Integer> statistics = new LinkedHashMap<>();
         initStatistics(statistics);
