@@ -36,7 +36,7 @@ class LottoTest {
                 new LottoNumber(5),
                 new LottoNumber(6)
         ));
-        Lotto lotto = Lotto.of(addedLotto);
+        Lotto lotto = Lotto.addAll(addedLotto);
 
         assertThat(lotto).isNotEqualTo(addedLotto);
         assertThat(lotto.size()).isPositive();

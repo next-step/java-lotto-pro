@@ -20,7 +20,7 @@ public class Vendor {
     }
 
     private Lotto buyAuto(LottoMoney lottoMoney, Lotto manual) {
-        Lotto lotto = Lotto.of(manual);
+        Lotto lotto = Lotto.addAll(manual);
 
         while (lottoMoney.canBuy()) {
             lottoMoney.buyOne();
