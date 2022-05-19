@@ -1,4 +1,4 @@
-package lotto;
+package study;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,28 +15,28 @@ public class SumTest {
     @CsvSource(value = {"''|0"}, delimiter = '|')
     void testNumbersSplitAndSum_null_또는_빈문자(String input, String expected) {
         Sum sum = new Sum(Sum.sumValue(input));
-        assertThat(sum).isEqualTo(new Sum(StringParsing.stringToIntValue(expected)));
+        assertThat(sum).isEqualTo(new Sum(StringParser.stringToIntValue(expected)));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1|1"}, delimiter = '|')
     public void testNumbersSplitAndSum_숫자하나(String input, String expected) {
         Sum sum = new Sum(Sum.sumValue(input));
-        assertThat(sum).isEqualTo(new Sum(StringParsing.stringToIntValue(expected)));
+        assertThat(sum).isEqualTo(new Sum(StringParser.stringToIntValue(expected)));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1,2,3|6"}, delimiter = '|')
     public void testNumbersSplitAndSum_쉼표구분자(String input, String expected) {
         Sum sum = new Sum(Sum.sumValue(input));
-        assertThat(sum).isEqualTo(new Sum(StringParsing.stringToIntValue(expected)));
+        assertThat(sum).isEqualTo(new Sum(StringParser.stringToIntValue(expected)));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1,2:4|7"}, delimiter = '|')
     public void testNumbersSplitAndSum_쉼표_또는_콜론_구분자(String input, String expected) {
         Sum sum = new Sum(Sum.sumValue(input));
-        assertThat(sum).isEqualTo(new Sum(StringParsing.stringToIntValue(expected)));
+        assertThat(sum).isEqualTo(new Sum(StringParser.stringToIntValue(expected)));
     }
 
     @Test

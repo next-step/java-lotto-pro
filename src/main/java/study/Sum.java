@@ -1,4 +1,4 @@
-package lotto;
+package study;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -11,8 +11,8 @@ public class Sum {
     private int sum;
 
     public static int splitSumValue(String text) {
-        return Arrays.asList(StringSplit.splitText(text)).stream()
-                .mapToInt(StringParsing::stringToIntValue)
+        return Arrays.asList(StringSplitter.splitText(text)).stream()
+                .mapToInt(StringParser::stringToIntValue)
                 .sum();
     }
 
@@ -22,7 +22,7 @@ public class Sum {
         }
 
         if (isDirectReturn(text)) {
-            return StringParsing.stringToIntValue(text);
+            return StringParser.stringToIntValue(text);
         }
 
         return splitSumValue(text);

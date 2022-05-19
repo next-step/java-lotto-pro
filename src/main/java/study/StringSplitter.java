@@ -1,11 +1,11 @@
-package lotto;
+package study;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringSplit {
+public class StringSplitter {
     private static final String PIPE_VALUE = "|";
     private static final String[] SPLIT_DELIMITER_LIST_VALUE = {",", ":"};
     private static final String CUSTOM_SPLIT_DELIMITER_REGEX_VALUE = "//(.)\n(.*)";
