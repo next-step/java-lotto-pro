@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -15,7 +14,7 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public Lottos matchedLottoList(WinningNumbers winningNumbers, MatchResult matchResult) {
+    public Lottos matchedLottoList(WinningLotto winningNumbers, MatchResult matchResult) {
         List<Lotto> matchedLottos = new ArrayList<>();
         for (Lotto lotto : lottos) {
             if (winningNumbers.isMatched(lotto, matchResult)) {

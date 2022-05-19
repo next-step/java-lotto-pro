@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -11,15 +9,15 @@ public class LottoStatistic {
 
     private Map<MatchResult, Lottos> matchedLottos;
 
-    public LottoStatistic(Lottos lottos, WinningNumbers winningNumbers) {
+    public LottoStatistic(Lottos lottos, WinningLotto winningNumbers) {
         initializePrizeLottoList(lottos, winningNumbers);
     }
 
     public LottoStatistic(Lottos lottos, String[] winningNumbers) {
-        this(lottos, new WinningNumbers(winningNumbers));
+        this(lottos, new WinningLotto(winningNumbers));
     }
-    
-    private void initializePrizeLottoList(Lottos lottos, WinningNumbers winningNumbers) {
+
+    private void initializePrizeLottoList(Lottos lottos, WinningLotto winningNumbers) {
         matchedLottos = new HashMap<>();
         for (MatchResult matchResult : MatchResult.values()) {
             matchedLottos.put(matchResult, lottos.matchedLottoList(winningNumbers, matchResult));

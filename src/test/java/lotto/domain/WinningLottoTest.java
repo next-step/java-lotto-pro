@@ -3,13 +3,12 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class WinningNumbersTest {
+class WinningLottoTest {
 
     private Lotto lotto;
 
@@ -32,14 +31,14 @@ class WinningNumbersTest {
     void 로또번호와_당첨번호에_따른_매치결과_반환(int input0, int input1, int input2, int input3, int input4, int input5,
                                 int matchCount) {
         LottoNumber[] inputs = createNumbers(new int[]{input0, input1, input2, input3, input4, input5});
-        WinningNumbers winningNumbers = new WinningNumbers(inputs);
+        WinningLotto winningNumbers = new WinningLotto(inputs);
         MatchResult matchResult = MatchResult.from(matchCount);
         assertThat(winningNumbers.isMatched(lotto, matchResult)).isEqualTo(true);
     }
 
     @Test
     void 중복_숫자_예외() {
-        assertThatThrownBy(() -> new WinningNumbers(createNumbers(new int[]{1, 1, 2, 3, 4, 5}))).isInstanceOf(
+        assertThatThrownBy(() -> new WinningLotto(createNumbers(new int[]{1, 1, 2, 3, 4, 5}))).isInstanceOf(
                 IllegalArgumentException.class);
     }
 

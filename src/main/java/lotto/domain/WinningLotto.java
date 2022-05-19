@@ -4,15 +4,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WinningNumbers {
+public class WinningLotto {
     private final Set<LottoNumber> winningNumbers;
 
-    public WinningNumbers(LottoNumber[] winningNumbers) {
+    public WinningLotto(LottoNumber[] winningNumbers) {
         validateDuplicated(winningNumbers);
         this.winningNumbers = new HashSet<>(Arrays.asList(winningNumbers));
     }
 
-    public WinningNumbers(String[] winningNumbers) {
+    public WinningLotto(String[] winningNumbers) {
         this(createWinningLottoNumbers(winningNumbers));
     }
 

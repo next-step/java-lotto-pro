@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.ArrayList;
@@ -11,13 +10,13 @@ import org.junit.jupiter.api.Test;
 
 class LottosTest {
 
-    private WinningNumbers winningNumbers;
+    private WinningLotto winningNumbers;
     private Lottos lottos;
 
     @BeforeEach
     void setUp() {
         int[] winningInputs = {1, 2, 3, 4, 5, 6};
-        winningNumbers = new WinningNumbers(createLottoNumbers(winningInputs));
+        winningNumbers = new WinningLotto(createLottoNumbers(winningInputs));
 
         List<Lotto> lottoList = new ArrayList<>();
 
