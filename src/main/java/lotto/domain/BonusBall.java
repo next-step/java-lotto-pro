@@ -4,6 +4,7 @@ import static lotto.domain.message.ErrorMessage.INVALID_BONUS_BALL;
 
 import java.util.Objects;
 import lotto.service.LottoNumberValidator;
+import lotto.util.StringToIntegerConverter;
 
 public class BonusBall {
     private final int number;
@@ -14,17 +15,9 @@ public class BonusBall {
     }
 
     public static BonusBall convertAndCreate(final String numberString) {
-        final int number = parseInt(numberString);
+        final int number = StringToIntegerConverter.parseInt(numberString, INVALID_BONUS_BALL);
         LottoNumberValidator.checkRangeOfNumber(number, INVALID_BONUS_BALL);
         return new BonusBall(number);
-    }
-
-    private static int parseInt(final String numbersString) {
-        try {
-            return Integer.parseInt(numbersString);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_BONUS_BALL.getMessage());
-        }
     }
 
     public int getNumber() {

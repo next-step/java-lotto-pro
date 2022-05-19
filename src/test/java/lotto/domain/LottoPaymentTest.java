@@ -44,4 +44,18 @@ public class LottoPaymentTest {
         // when and then
         assertThat(LottoPayment.convertAndCreate(String.valueOf(money)).getPurchasableAmount()).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("수동 구매 수량을 문자열 파라미터로 설정할 수 있어야 한다")
+    void can_set_manual_amount() {
+        // given
+        final LottoPayment lottoPayment = LottoPayment.convertAndCreate("14000");
+        final String manualAmountString = "3";
+
+        // when
+        lottoPayment.setManualAmount(manualAmountString);
+
+        // then
+        assertThat(lottoPayment.getManualAmount()).isEqualTo(3);
+    }
 }
