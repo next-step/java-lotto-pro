@@ -13,8 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 class LotteryProducerTest {
     @Test
     void 일부터_사십오사이_숫자_여섯개_생성() {
-        LotteryProducer lotteryProducer = new LotteryProducer();
-        List<Number> numbers = lotteryProducer.issue();
+        List<Number> numbers = LotteryProducer.issue();
         Set<Number> set = new HashSet<>(numbers);
 
         assertThat(set).hasSize(6);

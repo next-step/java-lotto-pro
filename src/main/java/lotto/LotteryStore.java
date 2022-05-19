@@ -12,11 +12,10 @@ public class LotteryStore {
     }
 
     public static Lotteries exchangeTicketToLotteries(Ticket ticket) {
-        LotteryProducer lotteryProducer = new LotteryProducer();
         List<Lottery> lotteries = new LinkedList<>();
         int size = ticket.size();
         while (size-- > 0) {
-            lotteries.add(new Lottery(lotteryProducer.issue()));
+            lotteries.add(new Lottery(LotteryProducer.issue()));
         }
         return new Lotteries(lotteries);
     }

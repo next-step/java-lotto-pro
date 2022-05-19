@@ -9,7 +9,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class LotteryProducer {
-    private final List<Number> numbers = new LinkedList<>();
+    private static final List<Number> numbers;
+
+    static {
+        numbers = new LinkedList<>();
+        for (int idx = Lottery.MINIMUM_NUMBER; idx < Lottery.MAXIMUM_NUMBER; idx ++) {
+            numbers.add(new Number(idx));
+        }
+    }
 
     public LotteryProducer() {
         for (int idx = Lottery.MINIMUM_NUMBER; idx < Lottery.MAXIMUM_NUMBER; idx ++) {
@@ -17,18 +24,18 @@ public class LotteryProducer {
         }
     }
 
-    public List<Number> issue() {
-        Collections.shuffle(this.numbers);
-        List<Number> numbers = new LinkedList<>(this.numbers.subList(0, Lottery.SIZE));
-        return readOnly(sort(numbers));
+    public static List<Number> issue() {
+        Collections.shuffle(numbers);
+        List<Number> subset = new LinkedList<>(numbers.subList(0, Lottery.SIZE));
+        return readOnly(sort(subset));
     }
 
-    private List<Number> sort(List<Number> numbers) {
+    private static List<Number> sort(List<Number> numbers) {
         numbers.sort(Comparator.comparingInt(Number::value));
         return numbers;
     }
 
-    private List<Number> readOnly(List<Number> numbers) {
+    private static List<Number> readOnly(List<Number> numbers) {
         return Collections.unmodifiableList(new LinkedList<>(numbers));
     }
 }
