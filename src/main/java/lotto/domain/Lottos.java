@@ -18,7 +18,7 @@ public class Lottos {
     public Lottos matchedLottoList(WinningNumbers winningNumbers, MatchResult matchResult) {
         List<Lotto> matchedLottos = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            if (winningNumbers.matchWinningLotto(lotto).equals(matchResult)) {
+            if (winningNumbers.isMatched(lotto, matchResult)) {
                 matchedLottos.add(lotto);
             }
         }

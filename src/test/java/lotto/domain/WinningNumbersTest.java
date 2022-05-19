@@ -33,9 +33,8 @@ class WinningNumbersTest {
                                 int matchCount) {
         LottoNumber[] inputs = createNumbers(new int[]{input0, input1, input2, input3, input4, input5});
         WinningNumbers winningNumbers = new WinningNumbers(inputs);
-
-        MatchResult matchResult = winningNumbers.matchWinningLotto(lotto);
-        assertThat(matchResult).isEqualTo(MatchResult.from(matchCount));
+        MatchResult matchResult = MatchResult.from(matchCount);
+        assertThat(winningNumbers.isMatched(lotto, matchResult)).isEqualTo(true);
     }
 
     @Test

@@ -24,7 +24,11 @@ public class WinningNumbers {
         return winningNumbers;
     }
 
-    public MatchResult matchWinningLotto(Lotto lotto) {
+    public boolean isMatched(Lotto lotto, MatchResult matchResult) {
+        return matchWinningLotto(lotto).equals(matchResult);
+    }
+
+    private MatchResult matchWinningLotto(Lotto lotto) {
         return lotto.match(winningNumbers);
     }
 
@@ -38,4 +42,6 @@ public class WinningNumbers {
         Set<LottoNumber> nonDuplicatedNumbers = new HashSet<>(Arrays.asList(numbers));
         return nonDuplicatedNumbers.size() != numbers.length;
     }
+
+
 }
