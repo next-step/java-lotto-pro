@@ -62,9 +62,9 @@ class LottoMachineTest {
 
     static Stream<Arguments> profitTestParameter() {
         return Stream.of(
-                arguments(1000, Arrays.asList(Rank.FOURTH), 5.00),
-                arguments(2000, Arrays.asList(Rank.FOURTH, Rank.LOSE), 2.50),
-                arguments(5000, Arrays.asList(Rank.FOURTH, Rank.LOSE, Rank.LOSE, Rank.LOSE, Rank.LOSE), 1.00));
+                arguments(1000, Arrays.asList(Rank.FIFTH), 5.00),
+                arguments(2000, Arrays.asList(Rank.FIFTH, Rank.LOSE), 2.50),
+                arguments(5000, Arrays.asList(Rank.FIFTH, Rank.LOSE, Rank.LOSE, Rank.LOSE, Rank.LOSE), 1.00));
     }
 
 }

@@ -1,11 +1,7 @@
 package lotto;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,21 +13,6 @@ class LottosTest {
         Lottos lottos = new Lottos(quantity);
 
         assertThat(lottos.getLottos()).hasSize(quantity);
-    }
-
-    @Test
-    void 당첨_결과_확인() {
-
-        List<Lotto> input = Arrays.asList(
-                new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
-                new Lotto(new int[]{2, 3, 4, 5, 6, 7}));
-
-        Lotto winningLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-
-        Lottos lottos = new Lottos(input);
-
-        assertThat(lottos.getRanks(winningLotto)).contains(Rank.FIRST);
-        assertThat(lottos.getRanks(winningLotto)).contains(Rank.SECOND);
     }
 
 }

@@ -25,18 +25,7 @@ public class Lotto {
     }
 
     public int getCount(Lotto winningLotto) {
-        int count = 0;
-        for (Number number : winningLotto.getNumber()) {
-            count += plusCount(number);
-        }
-        return count;
-    }
-
-    private int plusCount(Number number) {
-        if(this.numbers.contains(number)) {
-            return 1;
-        }
-        return 0;
+        return (int) winningLotto.getNumber().stream().filter(numbers::contains).count();
     }
 
     private void checkSize(int[] numbers) {
@@ -46,14 +35,21 @@ public class Lotto {
     }
 
     private void addNumber(int number) {
-        if(isContains(number)) {
+        if (isContains(new Number(number))) {
             throw new IllegalArgumentException("중복된 숫자는 사용할 수 없습니다.");
         }
         this.numbers.add(new Number(number));
     }
 
-    private boolean isContains(int number) {
-        return numbers.contains(new Number(number));
+    public boolean isContains(Number number) {
+        return numbers.contains(number);
+    }
+
+    public Rank getRank(WinningLotto winningLotto) {
+        int count = (int) this.numbers.stream()
+                .filter(number -> winningLotto.getLotto().isContains(number))
+                .count();
+        return Rank.fromCountAndIsBonusMatch(count, numbers.contains(winningLotto.getBonus()));
     }
 
     public List<Integer> getNumberValues() {

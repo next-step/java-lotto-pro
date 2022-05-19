@@ -14,16 +14,12 @@ public class Lottos {
         }
     }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos.addAll(lottos);
-    }
-
     public List<Lotto> getLottos() {
         return lottos;
     }
 
-    public List<Rank> getRanks(Lotto winningLotto) {
-        return this.lottos.stream().map(lotto -> Rank.from(lotto.getCount(winningLotto))).collect(Collectors.toList());
+    public List<Rank> getRanks(WinningLotto winningLotto) {
+        return this.lottos.stream().map(lotto -> lotto.getRank(winningLotto)).collect(Collectors.toList());
     }
 
 }

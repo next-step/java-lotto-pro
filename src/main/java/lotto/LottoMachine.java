@@ -1,7 +1,9 @@
 package lotto;
 
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -26,7 +28,7 @@ public class LottoMachine {
         if (!isCorrect(price)) {
             throw new IllegalArgumentException("금액이 올바르지 않습니다.");
         }
-        return price/SALE_PRICE;
+        return price / SALE_PRICE;
     }
 
     private boolean isCorrect(int price) {
@@ -34,12 +36,20 @@ public class LottoMachine {
     }
 
     public double getProfitRate(int price, List<Rank> ranks) {
-        double profitRate = (double) getSum(ranks) / price;
+        double profitRate = (double) getMoneySum(ranks) / price;
         return Math.floor(profitRate * DECIMAL_PLACES) / DECIMAL_PLACES;
     }
 
-    private int getSum(List<Rank> ranks) {
+    private int getMoneySum(List<Rank> ranks) {
         return ranks.stream().mapToInt(Rank::getWinningMoney).sum();
+    }
+
+    public Map<Rank, Integer> getGameResult(List<Rank> ranks) {
+        Map<Rank, Integer> gameResult = new LinkedHashMap<>();
+        for (Rank value : Rank.values()) {
+            gameResult.put(value, (int) ranks.stream().filter(rank -> rank.equals(value)).count());
+        }
+        return gameResult;
     }
 
 }
