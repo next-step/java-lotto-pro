@@ -21,10 +21,4 @@ public class LottoUserTest {
         Assertions.assertThat(user.setMoney(money)).isEqualTo(expected);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"1000:true", "999:false", "20000:true", "0:false"}, delimiter = ':')
-    public void buyTicketTest(String money, boolean expected) {
-        user.setMoney(money);
-        Assertions.assertThat(user.buyTicket()).isEqualTo(expected);
-    }
 }
