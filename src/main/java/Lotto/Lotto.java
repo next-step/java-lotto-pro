@@ -13,10 +13,10 @@ public class Lotto {
     private static int RANGE_NUMBERS_START_INDEX = 0;
     private static int RANGE_NUMBERS_END_INDEX = 6;
     private static int LOTTO_STRING_MINIMUM_INDEX = 2;
-    private LottoNumbers numbers = new LottoNumbers();
+    private List<Integer> numbers = new ArrayList<>();
 
     public List<Integer> getNumbers() {
-        return numbers.getNumbers();
+        return numbers;
     }
 
     public Lotto() { }
@@ -31,8 +31,8 @@ public class Lotto {
 
     public void generate() {
         Collections.shuffle(RANGE_NUMBERS);
-        this.numbers = new LottoNumbers(drawNumbers());
-        numbers.sort();
+        this.numbers = drawNumbers();
+        Collections.sort(numbers);
     }
 
     public void generate(String customNumbers) {
@@ -40,17 +40,17 @@ public class Lotto {
         if(!validCustomNumbers(customNumbersToInt))
             throw new IllegalArgumentException(ErrorMessage.LastPrizeNumberGenerate.getErrorMsg());
         Collections.sort(customNumbersToInt);
-        this.numbers = new LottoNumbers(customNumbersToInt);
+        this.numbers = customNumbersToInt;
     }
 
     public CompareEnum compare(WinLotto winLotto) {
         long hitCount = winLotto.getLotto()
                         .getNumbers()
                         .stream()
-                        .filter(num -> getNumbers().contains(num))
+                        .filter(num -> this.numbers.contains(num))
                         .count();
 
-        boolean isBonus = getNumbers().contains(winLotto.getBonusNumber());
+        boolean isBonus = this.numbers.contains(winLotto.getBonusNumber());
 
         return CompareEnum.valueOf(hitCount, isBonus);
     }
@@ -65,7 +65,7 @@ public class Lotto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(int number : getNumbers()) {
+        for(int number : numbers) {
             sb.append(number + ", ");
         }
 
