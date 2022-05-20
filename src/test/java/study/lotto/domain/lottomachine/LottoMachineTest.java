@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import study.lotto.domain.AutomaticLottoGenerator;
 import study.lotto.domain.Lotto;
 import study.lotto.domain.Lottos;
+import study.lotto.domain.lottomachine.sorter.LottoAscendingSorter;
 
 class LottoMachineTest {
     private LottoMachine lottoMachine;
@@ -19,7 +20,7 @@ class LottoMachineTest {
     @BeforeEach
     void setUp() {
         Price lottoPrice = LottoMachine.DEFAULT_LOTTO_PRICE;
-        lottoMachine = new LottoMachine(new AutomaticLottoGenerator(), lottoPrice);
+        lottoMachine = new LottoMachine(new AutomaticLottoGenerator(), new LottoAscendingSorter(), lottoPrice);
     }
 
     @Test

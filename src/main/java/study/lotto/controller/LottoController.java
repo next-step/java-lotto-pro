@@ -7,6 +7,7 @@ import study.lotto.domain.draw.LottoDraw;
 import study.lotto.domain.draw.WinningStatistics;
 import study.lotto.domain.lottomachine.LottoMachine;
 import study.lotto.domain.lottomachine.LottoPurchaseHistory;
+import study.lotto.domain.lottomachine.sorter.LottoAscendingSorter;
 import study.lotto.view.LottoView;
 
 public class LottoController {
@@ -39,7 +40,7 @@ public class LottoController {
     }
 
     private LottoMachine getLottoMachine() {
-        return new LottoMachine(new AutomaticLottoGenerator());
+        return new LottoMachine(new AutomaticLottoGenerator(), new LottoAscendingSorter());
     }
 
     private void showPurchaseResult(LottoPurchaseHistory lottoPurchaseHistory) {

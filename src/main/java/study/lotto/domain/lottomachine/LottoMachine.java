@@ -8,19 +8,22 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import study.lotto.domain.Lotto;
 import study.lotto.domain.Lottos;
+import study.lotto.domain.lottomachine.sorter.LottoSorter;
 
 public class LottoMachine {
     static final Price DEFAULT_LOTTO_PRICE = new Price(BigDecimal.valueOf(1000));
 
     private final LottoGenerator lottoGenerator;
+    private final LottoSorter sorter;
     private final Price lottoPrice;
 
-    public LottoMachine(LottoGenerator lottoGenerator) {
-        this(lottoGenerator, DEFAULT_LOTTO_PRICE);
+    public LottoMachine(LottoGenerator lottoGenerator, LottoSorter lottoSorter) {
+        this(lottoGenerator, lottoSorter, DEFAULT_LOTTO_PRICE);
     }
 
-    public LottoMachine(LottoGenerator lottoGenerator, Price lottoPrice) {
+    public LottoMachine(LottoGenerator lottoGenerator, LottoSorter lottoSorter, Price lottoPrice) {
         this.lottoGenerator = lottoGenerator;
+        this.sorter = lottoSorter;
         this.lottoPrice = lottoPrice;
     }
 
@@ -59,16 +62,13 @@ public class LottoMachine {
     }
 
     private Lottos generateLottos(Lottos manualLottos, LottoCount automaticLottoCount) {
-        List<Lotto> sortedManualLottos = manualLottos.get().stream()
-                .map(lottoGenerator::sort)
-                .map(Lotto::new)
-                .collect(Collectors.toList());
-        return new Lottos(mergeLottos(sortedManualLottos, generateAutomaticLottos(automaticLottoCount)));
+        return new Lottos(mergeLottos(manualLottos.get(), generateAutomaticLottos(automaticLottoCount)));
     }
 
     private List<Lotto> mergeLottos(List<Lotto> manualLotto, List<Lotto> automaticLottos) {
         return Stream.of(manualLotto, automaticLottos)
                 .flatMap(Collection::stream)
+                .map(sorter::sort)
                 .collect(Collectors.toList());
     }
 
