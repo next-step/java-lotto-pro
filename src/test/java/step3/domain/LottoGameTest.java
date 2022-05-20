@@ -16,15 +16,15 @@ class LottoGameTest {
         lottoGame = new LottoGame();
     }
 
-    @ParameterizedTest(name = "입력된 금액에 따른 구입가능개수를 반환한다. ({0} : {1})")
-    @CsvSource(value = {"1000:1", "5000:5", "100:0"}, delimiter = ':')
-    void 구입가능개수_반환(int money, int expected) {
-        assertThat(LottoGame.buyCount(money)).isEqualTo(expected);
+    @ParameterizedTest(name = "입력된 금액에 따른 구입가능한 자동로또 개수를 반환한다. ({0} : {1})")
+    @CsvSource(value = {"2000:1", "5000:4", "100:0"}, delimiter = ':')
+    void 구입가능한_자동로또_개수_반환(int money, int expected) {
+        assertThat(LottoGame.autoLottoCount(money, 1)).isEqualTo(expected);
     }
 
     @DisplayName("실제 로또를 구입하는데 투자된 금액을 계산한다.")
     @Test
     void 투자금액_계산() {
-        assertThat(lottoGame.investmentAmount(5)).isEqualTo(5_000);
+        assertThat(lottoGame.investmentAmount(4, 1)).isEqualTo(5_000);
     }
 }

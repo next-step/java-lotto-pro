@@ -10,32 +10,38 @@ public class LottoGame {
 
     public void play() {
         int inputMoney = InputView.inputMoney();
-        int buyCount = buyCount(inputMoney);
+        int manualLottoCount = InputView.inputManualLottoCount();
+        int autoLottoCount = autoLottoCount(inputMoney, manualLottoCount);
 
-        Lottos lottos = new Lottos(buy(buyCount));
+        Lottos lottos = new Lottos(buy(manualLottoCount, autoLottoCount));
         OutputView.printLottos(lottos);
 
         List<Integer> winnerNumbers = InputView.inputWinnerNumbers();
         int bonusNumber = InputView.inputBonusNumber();
         LottoResult lottoResult = lottos.allMatch(winnerNumbers, bonusNumber);
-        double yield = lottoResult.calculateYield(investmentAmount(buyCount));
+        double yield = lottoResult.calculateYield(investmentAmount(manualLottoCount, autoLottoCount));
         OutputView.printResult(lottoResult, yield);
     }
 
-    public static int buyCount(int money) {
-        return money / PRICE_LOTTO;
+    public static int autoLottoCount(int money, int manualLottoCount) {
+        int autoLottoCount = money / PRICE_LOTTO - manualLottoCount;
+        return Math.max(autoLottoCount, 0);
     }
 
-    private List<Lotto> buy(int buyCount) {
-        OutputView.printBuyCount(buyCount);
+    private List<Lotto> buy(int manualLottoCount, int autoLottoCount) {
+        List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount);
+        OutputView.printBuyCount(manualLottoCount, autoLottoCount);
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < buyCount; i++) {
+        for (List<Integer> manualLottoNumber : manualLottoNumbers) {
+            lottos.add(LottoFactory.createManualLotto(manualLottoNumber));
+        }
+        for (int i = 0; i < autoLottoCount; i++) {
             lottos.add(LottoFactory.createAutoLotto());
         }
         return lottos;
     }
 
-    int investmentAmount(int buyCount) {
-        return buyCount * PRICE_LOTTO;
+    int investmentAmount(int manualLottoCount, int autoLottoCount) {
+        return (manualLottoCount + autoLottoCount) * PRICE_LOTTO;
     }
 }
