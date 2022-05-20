@@ -4,7 +4,6 @@ import study.lotto.domain.AutomaticLottoGenerator;
 import study.lotto.domain.Lottos;
 import study.lotto.domain.draw.DrawResult;
 import study.lotto.domain.draw.LottoDraw;
-import study.lotto.domain.draw.WinningStatistics;
 import study.lotto.domain.lottomachine.LottoMachine;
 import study.lotto.domain.lottomachine.LottoPurchaseHistory;
 import study.lotto.domain.lottomachine.sorter.LottoAscendingSorter;
@@ -26,7 +25,7 @@ public class LottoController {
     }
 
     private void showResult(DrawResult drawResult, LottoPurchaseHistory lottoPurchaseHistory) {
-        view.showWinningStatictics(new WinningStatistics(drawResult, lottoPurchaseHistory));
+        view.showWinningStatictics(drawResult, lottoPurchaseHistory);
     }
 
     private DrawResult draw(Lottos purchasedLotto) {
