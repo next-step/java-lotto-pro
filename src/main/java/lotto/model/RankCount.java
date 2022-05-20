@@ -4,8 +4,6 @@ import lotto.enums.Rank;
 
 import java.util.*;
 
-import static lotto.constants.LottoConstant.MIN_WINNING_RANK;
-
 public class RankCount {
     private final Map<Rank, Integer> rankCount;
 
@@ -49,7 +47,7 @@ public class RankCount {
     }
 
     private String rankCountStr(Rank rank) {
-        if  (rank.getMatchingCount() < MIN_WINNING_RANK) {
+        if (!rank.isOverMinWinningRank()) {
             return "";
         }
         return String.format(rank + "- %d개\n", rankCount.get(rank));

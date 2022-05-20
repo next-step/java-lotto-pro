@@ -4,6 +4,8 @@ import lotto.model.Prize;
 
 import java.util.Arrays;
 
+import static lotto.constants.LottoConstant.MIN_WINNING_RANK;
+
 public enum Rank {
     LOSE(0, Prize.of(0)),
     SIXTH(1, Prize.of(0)),
@@ -28,10 +30,6 @@ public enum Rank {
                 .orElse(LOSE);
     }
 
-    public int getMatchingCount() {
-        return matchingCount;
-    }
-
     public Prize getPrize() {
         return prize;
     }
@@ -42,6 +40,10 @@ public enum Rank {
 
     @Override
     public String toString() {
-        return String.format("%d개 일치 (%s)", matchingCount, prize);
+        return String.format("%d개 일치 (%s)원", matchingCount, prize);
+    }
+
+    public boolean isOverMinWinningRank() {
+        return matchingCount >= MIN_WINNING_RANK;
     }
 }
