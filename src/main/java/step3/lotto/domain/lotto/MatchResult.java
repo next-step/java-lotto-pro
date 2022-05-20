@@ -14,7 +14,6 @@ public enum MatchResult {
     FIFTH_PLACE(3, 5_000),
     NOTHING(0, 0);
 
-    private static final int MINIMUM_WINNINGS_COUNT = 3;
     private final int matchCount;
     private final int rewardPrice;
 
@@ -23,19 +22,23 @@ public enum MatchResult {
         this.rewardPrice = rewardPrice;
     }
 
-    public static MatchResult valueOf(int countOfMatch, boolean matchBonus) {
-        if (isLittleMinimumWinningsCount(countOfMatch)) {
+    public static MatchResult valueOf(int matchCount, boolean matchBonus) {
+        if (isLittleThanFifthPlaceCount(matchCount)) {
             return MatchResult.NOTHING;
         }
 
-        if (isSecondPlaceCandidate(countOfMatch)) {
+        if (isSecondPlaceCandidate(matchCount)) {
             return choiceSecondPlaceOrThirdPlace(matchBonus);
         }
 
         return Arrays.stream(MatchResult.values())
-            .filter(matchResult -> matchResult.getMatchCount() == countOfMatch)
+            .filter(matchResult -> matchResult.isMatchCount(matchCount))
             .findFirst()
-            .get();
+            .orElseThrow(IllegalArgumentException::new);
+    }
+
+    private boolean isMatchCount(int countOfMatch) {
+        return this.matchCount == countOfMatch;
     }
 
     private static MatchResult choiceSecondPlaceOrThirdPlace(boolean matchBonus) {
@@ -49,8 +52,8 @@ public enum MatchResult {
         return countOfMatch == SECOND_PLACE.getMatchCount();
     }
 
-    private static boolean isLittleMinimumWinningsCount(int countOfMatch) {
-        return countOfMatch < MINIMUM_WINNINGS_COUNT;
+    private static boolean isLittleThanFifthPlaceCount(int countOfMatch) {
+        return countOfMatch < FIFTH_PLACE.getMatchCount();
     }
 
     public int getMatchCount() {
