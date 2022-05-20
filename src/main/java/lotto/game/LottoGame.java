@@ -18,7 +18,6 @@ public class LottoGame {
     private final LottoNumbersFactory lottoNumbersFactory;
     private final InputView inputView;
     private final ResultView resultView;
-    private int budget;
 
     public LottoGame(LottoNumbersFactory lottoNumbersFactory, InputView inputView, ResultView resultView) {
         this.lottoNumbersFactory = lottoNumbersFactory;
@@ -27,8 +26,7 @@ public class LottoGame {
     }
 
     public void start() {
-        budget = inputView.takeBudget();
-        List<LottoNumbers> lottoNumbersList = buyLotto();
+        List<LottoNumbers> lottoNumbersList = buyLotto(inputView.takeBudget());
         resultView.printBoughtLottos(lottoNumbersList);
         WinLottoNumbers winNumbers = drawWinNumbers();
         List<LottoRank> lottoRanks = matchLottos(lottoNumbersList, winNumbers);
@@ -36,7 +34,7 @@ public class LottoGame {
         resultView.printGameResult(gameResult);
     }
 
-    private List<LottoNumbers> buyLotto() {
+    private List<LottoNumbers> buyLotto(int budget) {
         BuyLotto buyLotto = new BuyLotto(budget, lottoNumbersFactory);
         int manualBuyCount = inputView.takeManualBuyCount();
         manualBuyLotto(buyLotto, manualBuyCount);

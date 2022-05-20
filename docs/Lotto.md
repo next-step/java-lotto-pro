@@ -54,3 +54,6 @@
 - [X] ParameterizedTest 제거
 - [X] WinLottoNumbers.matchMainNumber 리팩토링
 - [X] WinLottoNumbers.Builder 리팩토링
+
+# 5단계 리뷰 반영
+- [X] 특정 메서드에만 쓰이는 멤버변수를 메서드 파라미터로 리팩토링
