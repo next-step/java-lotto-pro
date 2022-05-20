@@ -6,9 +6,6 @@ import java.util.List;
 import lotto.factory.LottoNumbersFactory;
 import lotto.number.LottoNumbers;
 
-/**
- *
- */
 public class BuyLotto {
     private static final int NO_MORE_AVAILABLE_DRAW = 0;
     private final LottoNumbersFactory lottoNumbersFactory;
@@ -24,28 +21,40 @@ public class BuyLotto {
     }
 
     public void manual(List<Integer> numbers) {
-        minusAvailableDrawCount();
-        manuals.add(lottoNumbersFactory.createLottoNumbers(numbers));
+        if(isAvailableBuy()){
+            manuals.add(lottoNumbersFactory.createLottoNumbers(numbers));
+        }
+    }
+
+    private boolean isAvailableBuy(){
+        if(calculateAvailableDrawCount() <= NO_MORE_AVAILABLE_DRAW){
+            throw new IllegalStateException("예산이 부족하여 더 이상 구매할 수 없습니다.");
+        }
+        return true;
+    }
+
+    private int calculateAvailableDrawCount(){
+        return availableDrawCount - manuals.size();
     }
 
     public int autoBuyRemainingBudget() {
-        int remainingDrawCount = availableDrawCount;
-        for (int i = 0; i < remainingDrawCount; i++) {
+        int autoDrawCount = calculateAvailableDrawCount();
+        for (int i = 0; i < autoDrawCount; i++) {
             this.auto();
         }
-        return remainingDrawCount;
+        return autoDrawCount;
     }
 
     private void auto() {
-        minusAvailableDrawCount();
-        autos.add(lottoNumbersFactory.createRandomLottoNumbers());
+        if(isAvailableBuy()){
+            autos.add(lottoNumbersFactory.createRandomLottoNumbers());
+        }
     }
 
-    private void minusAvailableDrawCount() {
-        if (availableDrawCount == NO_MORE_AVAILABLE_DRAW) {
+    public void checkBudget(int manualBuyCount) {
+        if (manualBuyCount > availableDrawCount) {
             throw new IllegalStateException("예산이 부족하여 더 이상 구매할 수 없습니다.");
         }
-        availableDrawCount--;
     }
 
     public List<LottoNumbers> boughtLottos() {

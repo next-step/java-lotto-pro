@@ -44,7 +44,9 @@ public class LottoGame {
     }
 
     private void manualBuyLotto(BuyLotto buyLotto, int manualBuyCount) {
+        buyLotto.checkBudget(manualBuyCount);
         inputView.printManualLottoNumbersHeader();
+
         for (int i = 0; i < manualBuyCount; i++) {
             List<Integer> numbers = inputView.takeManualLottoNumbers();
             buyLotto.manual(numbers);
