@@ -16,10 +16,10 @@ public class GameResult {
         this.rankList = calculateRank(lottoGame.getUserLotto(), winningLotto);
     }
 
-    public Map<Rank, Integer> gameResult() {
-        Map<Rank, Integer> mappedByRank = new LinkedHashMap<>();
+    public Map<Rank, Long> gameResult() {
+        Map<Rank, Long> mappedByRank = new LinkedHashMap<>();
         for (Rank value : Rank.values()) {
-            mappedByRank.put(value, (int) rankList.stream().filter(result -> result == value).count());
+            mappedByRank.put(value, rankList.stream().filter(result -> result == value).count());
         }
 
         mappedByRank.remove(Rank.MISS);

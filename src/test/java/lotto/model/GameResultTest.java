@@ -27,7 +27,7 @@ class GameResultTest {
         GameResult gameResult = new GameResult(lottoGame, winningLotto);
 
         // when
-        Map<Rank, Integer> rankIntegerMap = gameResult.gameResult();
+        Map<Rank, Long> rankIntegerMap = gameResult.gameResult();
         long actual = rankIntegerMap.get(rank);
 
         // then

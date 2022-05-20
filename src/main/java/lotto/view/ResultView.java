@@ -20,7 +20,7 @@ public class ResultView {
         }
     }
 
-    public void printGameResult(final Map<Rank, Integer> gameResult) {
+    public void printGameResult(final Map<Rank, Long> gameResult) {
         System.out.println(GAME_RESULT_MESSAGE);
         for (Rank result : gameResult.keySet()) {
             printStatisticResult(result, gameResult.get(result));
@@ -39,7 +39,7 @@ public class ResultView {
         System.out.println(message);
     }
 
-    private void printStatisticResult(final Rank result, final int matchResult) {
+    private void printStatisticResult(final Rank result, final long matchResult) {
         if (result == Rank.SECOND) {
             System.out.printf(GAME_BONUS_STATISTICS_MESSAGE,
                     result.getCountOfMatch(), result.getWinningMoney(), matchResult);
