@@ -1,10 +1,9 @@
 package step3.lotto.domain.lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author : choi-ys
@@ -13,20 +12,19 @@ import java.util.Objects;
 public class Lotto {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final String INVALID_LOTTO_NUMBER_COUNT_ERROR = "6개의 로또 번호를 입력하세요.";
-    public static final String LOTTO_NUMBER_DUPLICATED_ERROR = "로또 번호는 중복될 수 없습니다.";
+    public static final String INVALID_LOTTO_NUMBER_ERROR = "중복 없는 6개의 로또 번호를 입력하세요.";
 
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
-    private Lotto(List<LottoNumber> lottoNumbers) {
+    private Lotto(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public static Lotto of(List<Integer> numbers) {
-        validateLottoNumberCount(numbers.size());
-        validateLottoNumberDuplication(new HashSet<>(numbers).size());
-        Collections.sort(numbers);
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        HashSet<Integer> integers = new HashSet<>(numbers);
+        validateLottoNumber(integers.size());
+
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int number : numbers) {
             lottoNumbers.add(LottoNumber.of(number));
         }
@@ -49,15 +47,9 @@ public class Lotto {
         return lottoNumbers.contains(winningsLottoNumber);
     }
 
-    private static void validateLottoNumberCount(int size) {
+    private static void validateLottoNumber(int size) {
         if (isInValidLottoCount(size)) {
-            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_COUNT_ERROR);
-        }
-    }
-
-    private static void validateLottoNumberDuplication(int size) {
-        if (isInValidLottoCount(size)) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATED_ERROR);
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_ERROR);
         }
     }
 
@@ -87,5 +79,3 @@ public class Lotto {
         return "" + lottoNumbers;
     }
 }
-
-

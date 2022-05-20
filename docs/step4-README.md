@@ -220,4 +220,19 @@ public enum Rank {
             return lottoNumbers.contains(winningsLottoNumber);
         }
       ```
+  - [x] Lotto 객체 필드의 자료구조 변경
+    - 변경 내용 :
+      - AS-IS : List<Integer> lotto
+      - TO-BE : Set<Integer> lotto
+    - 변경 사유 : List로 이루어진 6개의 로또 번호의 중복 여부 확인을 위해 Set으로 변경 후 size를 체크 후, 
+      다시 List로 구성된 필드에 값을 할당하는 비효율적인 작업 개선
+    - 변경 효과 : 자료구조 변경에 따른 예외 처리 로직 통합
+      - AI-IS
+        - List 타입 인자의 size가 6인지 여부 검증
+        - List 타입 인자를 Set으로 변경하여 중복 포함 여부 검증
+      - TO-BE
+        - Set 타입 인자의 size가 6인지 여부 검증
+    - 리팩토링에 따른 코드 변경 :
+      - 자료구조 변경에 따른 Lotto 객체 생성 시 예외 처리 TC 통합
+      - UI를 위한 정렬 로직 제거
 ---
