@@ -12,13 +12,13 @@ public class LottoController {
     public static void main(String[] args) {
         LottoCharge charge = LottoCharge.from(view.inputCharge());
         Count manualCount = Count.from(view.inputManualCount());
-        LottoCharge restCharge = charge.spend(manualCount);
+        LottoCharge autoCharge = charge.spend(manualCount);
 
         view.inputManualNumbersMessage();
         List<Lotto> manualLottos = manualCount.toList(() -> Lotto.manual(view.inputManualNumbers()));
 
-        Lottos lottos = Lottos.buy(manualLottos, restCharge);
-        view.showLottos(manualCount, restCharge, lottos);
+        Lottos lottos = Lottos.buy(manualLottos, autoCharge);
+        view.showLottos(manualCount, autoCharge.count(), lottos);
 
         Lotto answer = new Lotto(view.inputAnswer());
         Number bonus = Number.from(view.inputBonus());

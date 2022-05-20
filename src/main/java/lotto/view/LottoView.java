@@ -30,9 +30,9 @@ public class LottoView {
         return scanner.nextLine();
     }
 
-    public void showLottos(Count count, LottoCharge restCharge, Lottos lottos) {
+    public void showLottos(Count manualCount, Count autoCount, Lottos lottos) {
         System.out.println();
-        System.out.printf("수동으로 %s장, 자동으로 %s개를 구매했습니다.%n", count, restCharge.count());
+        System.out.printf("수동으로 %s장, 자동으로 %s개를 구매했습니다.%n", manualCount, autoCount);
         System.out.println(lottos);
     }
 
