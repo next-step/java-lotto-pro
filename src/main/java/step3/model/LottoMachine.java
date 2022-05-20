@@ -1,28 +1,24 @@
 package step3.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import step3.domain.LottoElement;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
 import step3.enums.LottoReward;
-import step3.utls.NumberUtil;
 
 public class LottoMachine {
 
     private final LottoGenerator lottoGenerator;
     private final LottoWinChecker lottoWinChecker;
-    private final int LOTTO_PRICE = 1_000;
 
+    private final int LOTTO_PRICE = 1_000;
     private final int EMPTY = 0;
 
     private final String CANT_BUY_LOTTO_EXCEPTION = "돈은 최소 " + LOTTO_PRICE + "이상 입력해야합니다";
     private final String MANUAL_LOTTO_COUNT_OVER_TICKET_EXCEPTION_MSG = "입금한 돈을 초과할수 없습니다.";
 
-    public LottoMachine(LottoGenerator lottoGenerator,LottoWinChecker lottoWinChecker) {
+    public LottoMachine(LottoGenerator lottoGenerator, LottoWinChecker lottoWinChecker) {
         this.lottoGenerator = lottoGenerator;
         this.lottoWinChecker = lottoWinChecker;
     }
@@ -67,6 +63,7 @@ public class LottoMachine {
     public int getUsingMoneyByTicket(int ticket) {
         return ticket * LOTTO_PRICE;
     }
+
     public void validateManualLottoCount(int ticket, int manualLottoCount) {
         if (ticket < manualLottoCount) {
             throw new IllegalArgumentException(MANUAL_LOTTO_COUNT_OVER_TICKET_EXCEPTION_MSG);
