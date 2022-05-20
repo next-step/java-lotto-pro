@@ -3,6 +3,7 @@ package Lotto.utils;
 import Lotto.Lotto;
 import Lotto.Lottos;
 import Lotto.LottoResult;
+import Lotto.Player;
 import Lotto.enums.CompareEnum;
 
 import java.util.Map;
@@ -30,9 +31,10 @@ public class ResultView {
         System.out.println("총 수익률은 " + result.getYield().getYield() + "입니다.");
     }
 
-    public static void printPurchaseLottos(Lottos lottos) {
-        System.out.println(lottos.getPurchaseCount().getCount() + "개를 구매했습니다.");
-        for(Lotto lotto : lottos.getLottos())
+    public static void printPurchaseLottos(Player player) {
+        System.out.println("수동으로 " + player.getManualPurchaseCount() + "장" + "자동으로 " +
+                            (player.getTotalLottos().getPurchaseCount() - player.getManualPurchaseCount()) + "장을 구매했습니다.");
+        for(Lotto lotto : player.getTotalLottos().getLottos())
             System.out.println(lotto.toString());
     }
 

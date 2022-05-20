@@ -7,29 +7,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private PurchaseMoney purchaseMoney;
-    private PurchaseCount purchaseCount;
-    private List<Lotto> lottos;
+    private PurchaseMoney purchaseMoney = new PurchaseMoney();
+    private PurchaseCount purchaseCount = new PurchaseCount();
+    private List<Lotto> lottos = new ArrayList<Lotto>();
 
-    public PurchaseMoney getPurchaseMoney() {
-        return purchaseMoney;
+    public int getPurchaseMoney() {
+        return purchaseMoney.getMoney();
     }
 
-    public PurchaseCount getPurchaseCount() {
-        return purchaseCount;
+    public int getPurchaseCount() {
+        return purchaseCount.getCount();
     }
 
     public List<Lotto> getLottos() {
         return lottos;
     }
 
-    public Lottos(int money) {
-        purchaseMoney = new PurchaseMoney(money);
-        purchaseCount = new PurchaseCount(purchaseMoney);
-        lottos = draw(purchaseCount);
+    public void addLottos(List<Lotto> lottos) {
+        lottos.addAll(this.lottos);
     }
 
-    private List<Lotto> draw(PurchaseCount purchaseCount) {
+    public Lottos() {
+    }
+
+    public Lottos(int money) {
+        if(money == 0)
+            return;
+
+        purchaseMoney = new PurchaseMoney(money);
+        purchaseCount = new PurchaseCount(purchaseMoney);
+    }
+
+    public Lottos(int money, List<Lotto> lottos) {
+        purchaseMoney = new PurchaseMoney(money);
+        purchaseCount = new PurchaseCount(purchaseMoney);
+        this.lottos = lottos;
+    }
+
+    public void draw() {
+        if(purchaseCount.getCount() == 0)
+            return;
+
         List<Lotto> drawLottos = new ArrayList<Lotto>();
         Lotto lotto;
         for(int i = 0; i < purchaseCount.getCount(); i++) {
@@ -37,7 +55,7 @@ public class Lottos {
             lotto.generate();
             drawLottos.add(lotto);
         }
-        return drawLottos;
+        lottos = drawLottos;
     }
 
     public LottoResult calculation(WinLotto winLotto) {
@@ -47,5 +65,18 @@ public class Lottos {
         }
         calcResult.calculationYield(purchaseMoney);
         return calcResult;
+    }
+
+    public static Lottos combine(Lottos manualLottos, Lottos autoLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        manualLottos.addLottos(lottos);
+        autoLottos.addLottos(lottos);
+        return new Lottos(manualLottos.getPurchaseMoney() + autoLottos.getPurchaseMoney(), lottos);
+    }
+
+    public void manualDraw(List<String> manualNumbersList) {
+        for(int i = 0; i < manualNumbersList.size(); i++) {
+            lottos.add(new Lotto(manualNumbersList.get(i)));
+        }
     }
 }

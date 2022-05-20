@@ -1,10 +1,13 @@
 package Lotto;
 
 public class PurchaseCount {
-    private int count;
+    private int count = 0;
 
     public int getCount() {
         return count;
+    }
+
+    public PurchaseCount() {
     }
 
     public PurchaseCount(PurchaseMoney money) {
