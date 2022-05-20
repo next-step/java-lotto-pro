@@ -30,7 +30,7 @@ public class LottoController {
     }
 
     private DrawResult draw(Lottos purchasedLotto) {
-        LottoDraw lottoDraw = new LottoDraw(view.getWinningLotto(), view.getBonusBall().get());
+        LottoDraw lottoDraw = new LottoDraw(view.getWinningLotto(), view.getBonusBall());
         return lottoDraw.match(purchasedLotto);
     }
 
