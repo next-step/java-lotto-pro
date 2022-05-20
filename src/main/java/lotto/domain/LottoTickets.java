@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.dto.LottoNumber;
@@ -18,15 +19,15 @@ public class LottoTickets {
 	}
 
 	public RankResult getResult(Lotto winningLotto, Number number) {
-		RankResult rankResult = new RankResult();
-
+		List<Rank> rankList = new ArrayList<>();
 		for(Lotto lotto: lottoTickets) {
-			Rank rank = lotto.match(winningLotto, number);
-
-			rankResult.setUp(rank);
+			rankList.add(lotto.match(winningLotto, number));
 		}
 
-		return rankResult;
+		Map<Rank, Long> countingResult = rankList.stream()
+			.collect(Collectors.groupingBy(Rank::winnings, Collectors.counting()));
+
+		return new RankResult(countingResult);
 	}
 
 	public void generate(LottoNumberStrategy lottoNumberStrategy) {

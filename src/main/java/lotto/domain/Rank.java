@@ -28,6 +28,10 @@ public enum Rank {
 		return prizeMoney;
 	}
 
+	public Rank winnings() {
+		return this;
+	}
+
 	public static Rank matchPrize(int matchCount) {
 		return matchPrize(matchCount, false);
 	}

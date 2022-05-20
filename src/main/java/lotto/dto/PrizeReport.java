@@ -7,10 +7,10 @@ import lotto.domain.Rank;
 public class PrizeReport implements Comparable<PrizeReport> {
 	int matchCount;
 	int money;
-	int result;
+	long result;
 	boolean containBonusNumber;
 
-	public PrizeReport(Rank rank, int result, boolean containBonusNumber) {
+	public PrizeReport(Rank rank, long result, boolean containBonusNumber) {
 		this.matchCount = rank.getMatchCount();
 		this.money = rank.getPrizeMoney();
 		this.result = result;
@@ -25,7 +25,7 @@ public class PrizeReport implements Comparable<PrizeReport> {
 		return money;
 	}
 
-	public int getResult() {
+	public long getResult() {
 		return result;
 	}
 
