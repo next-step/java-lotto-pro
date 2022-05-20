@@ -14,9 +14,8 @@ public class Organizer {
     private long totalWinningMoney;
 
     public Organizer(String number, int bonus) {
-        winnerNumbers = Arrays.stream(number.split(","))
-                .map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
-        bonusNumber = bonus;
+        winnerNumbers = checkWinningNumber(number);
+        bonusNumber = checkBonusNumber(winnerNumbers, bonus);
     }
 
     public int userNumberSameCount(Lotto lotto) {
@@ -41,6 +40,29 @@ public class Organizer {
 
     public String winningRate(int buyAmount) {
         return String.format("%.2f", Math.floor((double) this.totalWinningMoney / buyAmount * 100) / 100);
+    }
+
+    private List<Integer> checkWinningNumber(String numbersText) {
+        String[] numbers = numbersText.split(",");
+        if (numbers.length != 6) {
+            throw new IllegalArgumentException("당첨 번호는 6개 입력해야합니다.");
+        }
+
+        if (Arrays.stream(numbers).anyMatch(number -> number.matches("[^0-9]+"))) {
+            throw new IllegalArgumentException("당첨 번호는 슷자만 입력가능합니다.");
+        }
+
+        if (Arrays.stream(numbers).distinct().count() != numbers.length) {
+            throw new IllegalArgumentException("중복된 숫자는 입력 불가합니다.");
+        }
+        return Arrays.stream(numbers).map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
+    }
+
+    private int checkBonusNumber(List<Integer> winnerNumbers, int bonusNumber) {
+        if (winnerNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨번호와 달라야합니다.");
+        }
+        return bonusNumber;
     }
 
     private void initWinningResult() {

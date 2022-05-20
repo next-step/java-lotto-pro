@@ -5,11 +5,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class OrganizerTest {
     Lotto lotto;
@@ -48,12 +50,22 @@ public class OrganizerTest {
 
     @Test
     @DisplayName("로또 수익률 계산 정상 동작 확인")
-    public void checkRateOfReturn () {
+    public void checkRateOfReturn() {
         Lottos lottos = new Lottos(
                 new Lotto[]{new Lotto(1, 12, 21, 3, 4, 5)}
         );
         organizer.winningResults(lottos);
         assertThat(organizer.winningRate(15000)).isEqualTo("0.33");
+    }
+
+    @ParameterizedTest
+    @DisplayName("비정상 값 검증")
+    @CsvSource(
+            value = {"1, 2, 2, 3, 4, 5:7", "a, 2, 3, 4, 5, 6:7", "1, 2, 3, 4, 5:7", "1, 2, 3, 4, 5, 6:2"}
+            , delimiter = ':'
+    )
+    public void checkNotValid(String winningNumbers, int bonus) {
+        assertThatThrownBy(() -> {new Organizer(winningNumbers, bonus);}).isInstanceOf(IllegalArgumentException.class);
     }
 }
 
