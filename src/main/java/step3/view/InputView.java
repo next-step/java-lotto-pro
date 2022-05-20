@@ -1,5 +1,7 @@
 package step3.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -8,7 +10,8 @@ public class InputView {
     private final String GET_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private final String GET_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private final String GET_BONUS_LOTTO = "보너스 볼을 입력해 주세요.";
-
+    private final String GET_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private final String GET_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
     public String getMoney() {
         System.out.println(GET_MONEY_MESSAGE);
@@ -18,6 +21,20 @@ public class InputView {
     public String getWinnerLotto() {
         System.out.println(GET_LOTTO_MESSAGE);
         return scanIn.nextLine().replace(" ", ""); /* 받아온 String내부에 공백을 제거하기 위해 replace사용 */
+    }
+
+    public String getManualLottoCount() {
+        System.out.println(GET_MANUAL_LOTTO_COUNT);
+        return scanIn.nextLine().replace(" ", "");
+    }
+
+    public List<String> getManualLotto(int manualTicket) {
+        List<String> manualLottoTicketsSource = new ArrayList<>();
+        System.out.println(GET_MANUAL_LOTTO_MESSAGE);
+        for (int i = 0; i < manualTicket; i++) {
+            manualLottoTicketsSource.add(scanIn.nextLine().replace(" ", ""));
+        }
+        return manualLottoTicketsSource;
     }
 
     public String getBonusLotto() {
