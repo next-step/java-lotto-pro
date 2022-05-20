@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -23,6 +24,6 @@ public final class RandomNumbersGenerator {
             throw new IllegalArgumentException("0개 이상 45개 이하만 선택할 수 있습니다");
         }
         shuffle(ENTIRE_LOTTO_NUMBERS);
-        return ENTIRE_LOTTO_NUMBERS.subList(0, size);
+        return new ArrayList<>(ENTIRE_LOTTO_NUMBERS.subList(0, size));
     }
 }
