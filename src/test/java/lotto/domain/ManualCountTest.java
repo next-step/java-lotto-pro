@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,5 +19,11 @@ class ManualCountTest {
     void 양수만_생성가능(String value) {
         assertThatThrownBy(() -> ManualCount.from(value))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"5,1000,5000", "10,25,250"})
+    void 곱하기(String a, int b, int expected) {
+        assertThat(ManualCount.from(a).multiply(b)).isEqualTo(expected);
     }
 }

@@ -19,6 +19,10 @@ public class ManualCount {
                 .allMatch(Character::isDigit);
     }
 
+    public int multiply(int value) {
+        return this.value * value;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(value);

@@ -8,8 +8,8 @@ public class LottoCharge {
     private final int value;
 
     private LottoCharge(int value) {
-        if (value < 0) {
-            throw new IllegalArgumentException("구입금액은 0보다 커야합니다");
+        if (value <= 0) {
+            throw new IllegalArgumentException("구입금액은 0보다 크거나 같아야 합니다");
         }
         if (value % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("구입금액은 1000의 배수여야 합니다");
@@ -41,5 +41,13 @@ public class LottoCharge {
         return BigDecimal.valueOf(revenue / value)
                 .setScale(2, RoundingMode.FLOOR)
                 .doubleValue();
+    }
+
+    public LottoCharge spend(ManualCount count) {
+        int spendCharge = count.multiply(LOTTO_PRICE);
+        if (value < spendCharge) {
+            throw new IllegalArgumentException("구입금액보다 많은 수를 살 수 없습니다.");
+        }
+        return LottoCharge.from(value - spendCharge);
     }
 }
