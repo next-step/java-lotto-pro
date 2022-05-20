@@ -37,6 +37,13 @@ public class LottoMachine {
         return lottoTickets;
     }
 
+    public List<LottoTicket> makeManualLottoTickets(List<String> manualLottoTicketsSource) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (String manualLottoElements : manualLottoTicketsSource) {
+            lottoTickets.add(lottoGenerator.makeManualLottoTicket(manualLottoElements));
+        }
+        return lottoTickets;
+    }
 
     public void setBonusNumber(String lottoElementSource) {
         validateBonusNumber(lottoElementSource);

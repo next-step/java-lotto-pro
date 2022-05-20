@@ -91,6 +91,40 @@ public class LottoMachineTest {
     public void getUsingMoneyByTicketTest(int ticket, int expect) {
         assertThat(lottoMachine.getUsingMoneyByTicket(ticket)).isEqualTo(expect);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:2:true", "2:1:false", "3:1:false", "2:2:false"}, delimiter = ':')
+    public void validateManualLottoCountTest(int ticket, int manualLottoCount, boolean isThrowable) {
+        if (isThrowable) {
+            assertThatThrownBy(() -> lottoMachine.validateManualLottoCount(ticket, manualLottoCount)).isInstanceOf(IllegalArgumentException.class);
+        } else {
+            assertDoesNotThrow(() -> lottoMachine.validateManualLottoCount(ticket, manualLottoCount));
+        }
+    }
+
+    @Test
+    @DisplayName("정상적인 수동 로또 생성")
+    public void makeManualLottoTicketOK() {
+        List<String> manualLottoTicketSources = new ArrayList();
+        manualLottoTicketSources.add("1,2,3,4,5,6");
+        manualLottoTicketSources.add("2,3,4,5,6,7");
+        manualLottoTicketSources.add("4,5,6,7,8,9");
+
+        assertThat(lottoMachine.makeManualLottoTickets(manualLottoTicketSources))
+            .hasSize(3);
+    }
+
+    @Test
+    @DisplayName("비정상적 수동 로또 생성")
+    public void makeManualLottoTicketThrow() {
+        List<String> manualLottoTicketSources = new ArrayList();
+        manualLottoTicketSources.add("a,2,3,4,5,6");
+        manualLottoTicketSources.add("2,3,5,6,7");
+        manualLottoTicketSources.add("4,5,6,7,,8");
+        manualLottoTicketSources.add("4,5,6,7,,46");
+
+        assertThatThrownBy(() -> lottoMachine.makeManualLottoTickets(manualLottoTicketSources)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
 
 
