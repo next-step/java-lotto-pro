@@ -8,6 +8,7 @@ import lotto.dto.LottoResult;
 import lotto.dto.LottoResultItem;
 import lotto.dto.LottoWin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoVendingMachine {
@@ -19,8 +20,15 @@ public class LottoVendingMachine {
     }
 
     public LottoTicket sellTicket(Money money) {
+        return sellTicket(money, new ArrayList<>());
+    }
+
+    public LottoTicket sellTicket(Money money, List<LottoGame> manualLottoGames) {
         LottoTicket lottoTicket = new LottoTicket();
-        for (int i = 0; i < lottoTicket.numberOfGames(money); i++) {
+        lottoTicket.addAllGames(manualLottoGames);
+
+        int autoNumberOfGames = lottoTicket.numberOfGames(money) - manualLottoGames.size();
+        for (int i = 0; i < autoNumberOfGames; i++) {
             lottoTicket.addGame(new LottoGame(lottoNumbersGenerator.generate()));
         }
 

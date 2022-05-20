@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoTicket {
 
@@ -20,6 +21,10 @@ public class LottoTicket {
 
     public void addGame(LottoGame lottoGame) {
         lottoGames.add(lottoGame);
+    }
+
+    public void addAllGames(List<LottoGame> lottoGames) {
+        lottoGames.forEach(game -> this.lottoGames.add(game));
     }
 
     public int size() {
@@ -48,5 +53,18 @@ public class LottoTicket {
         StringBuilder builder = new StringBuilder();
         lottoGames.forEach(g -> builder.append(g.toString() + "\n"));
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoGames, that.lottoGames);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoGames);
     }
 }

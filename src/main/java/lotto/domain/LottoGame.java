@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static lotto.domain.ExceptionMessage.ILLEGAL_SIZE;
@@ -13,19 +15,32 @@ public class LottoGame {
     private final List<LottoNumber> numbers;
 
     public LottoGame(List<Integer> numbers) {
-        validateSize(numbers);
-        validateDuplicate(numbers);
-        this.numbers = numbers.stream().map(n -> new LottoNumber(n)).collect(Collectors.toList());
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(n -> new LottoNumber(n))
+                .collect(Collectors.toList());
+        validateSize(lottoNumbers);
+        validateDuplicate(lottoNumbers);
+        this.numbers = lottoNumbers;
     }
 
-    private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != SIZE) {
+    public LottoGame(String numbers) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers.split(","))
+                .map(String::trim)
+                .map(n -> new LottoNumber(n))
+                .collect(Collectors.toList());
+        validateSize(lottoNumbers);
+        validateDuplicate(lottoNumbers);
+        this.numbers = lottoNumbers;
+    }
+
+    private void validateSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException(ILLEGAL_SIZE.getMessage());
         }
     }
 
-    private void validateDuplicate(List<Integer> numbers) {
-        HashSet<Integer> distinctNumbers = new HashSet<>(numbers);
+    private void validateDuplicate(List<LottoNumber> numbers) {
+        HashSet<LottoNumber> distinctNumbers = new HashSet<>(numbers);
         if (distinctNumbers.size() != SIZE) {
             throw new IllegalArgumentException(NUMBER_DUPLICATE.getMessage());
         }
@@ -43,5 +58,18 @@ public class LottoGame {
     @Override
     public String toString() {
         return numbers.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoGame lottoGame = (LottoGame) o;
+        return Objects.equals(numbers, lottoGame.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
