@@ -27,7 +27,7 @@ public class LottoTicketsTest {
         lottoTickets.add(new LottoTicket("8,2,3,4,5,6"));
         lottoTickets.add(new LottoTicket("9,2,3,4,5,6"));
 
-        user.setUserLotto(lottoTickets);
+        user.addLottoTickets(lottoTickets);
 
         assertThat(user.getLottoNumbers())
             .hasSize(4)
