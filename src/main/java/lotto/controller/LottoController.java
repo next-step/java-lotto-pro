@@ -1,7 +1,9 @@
 package lotto.controller;
 
+import lotto.model.GameResult;
 import lotto.model.LottoGame;
 import lotto.model.RandomNumberGenerator;
+import lotto.model.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -17,65 +19,30 @@ public class LottoController {
     }
 
     public void startGame() {
-        LottoGame game = new LottoGame();
-        play(game);
+        try {
+            LottoGame game = new LottoGame();
+            play(game);
+        } catch (Exception e) {
+            resultView.printErrorMessage(e.getMessage());
+        }
     }
 
     private void play(LottoGame game) {
-        insertMoney(game);
+        game.insertMoney(inputView.insertMoney());
 
-        purchaseLotto(game);
-
-        inputWinnerNumbers(game);
-        inputBonusNumbers(game);
-
-        printGameResult(game);
-    }
-
-    private void insertMoney(LottoGame game) {
-        String amount;
-        do {
-            amount = inputView.insertMoney();
-        } while (!game.insertMoney(amount));
-    }
-
-    private void purchaseLotto(LottoGame game) {
-        int countOfManualLotto = inputManualLottoCount(game);
-
-        while (countOfManualLotto != game.getUserLotto().size()) {
-            game.inputManualLottoNumber(inputView.inputManualLottoNumber(game.getUserLotto().size() == ZERO));
+        int countOfManualLotto = game.purchaseManualLotto(inputView.inputManualLottoCount());
+        while (!game.isSameSizeOfUserLotto(countOfManualLotto)) {
+            game.inputManualLottoNumber(inputView.inputManualLottoNumber(game.isSameSizeOfUserLotto(ZERO)));
         }
 
         int countOfAutoLotto = game.purchaseAutoLotto(new RandomNumberGenerator());
 
         resultView.printGameStart(countOfManualLotto, countOfAutoLotto, game.getUserLotto());
-    }
 
-    private int inputManualLottoCount(LottoGame game) {
-        String countOfManualLotto;
-        do {
-            countOfManualLotto = inputView.inputManualLottoCount();
-        } while (!game.purchaseManualLotto(countOfManualLotto));
+        WinningLotto winningLotto = WinningLotto.of(inputView.inputWinnerNumbers(), inputView.inputBonusNumbers());
+        GameResult gameResult = new GameResult(game, winningLotto);
 
-        return Integer.parseInt(countOfManualLotto);
-    }
-
-    private void inputWinnerNumbers(LottoGame game) {
-        String winnerNumbers;
-        do {
-            winnerNumbers = inputView.inputWinnerNumbers();
-        } while (!game.winnersNumber(winnerNumbers));
-    }
-
-    private void inputBonusNumbers(LottoGame game) {
-        String bonusNumber;
-        do {
-            bonusNumber = inputView.inputBonusNumbers();
-        } while (!game.bonusNumber(bonusNumber));
-    }
-
-    private void printGameResult(LottoGame game) {
-        resultView.printGameResult(game.gameResult());
-        resultView.printBenefitResult(game.benefitResult(), game.referenceValue());
+        resultView.printGameResult(gameResult.gameResult());
+        resultView.printBenefitResult(gameResult.calculateBenefit(), gameResult.referenceValue());
     }
 }

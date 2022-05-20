@@ -9,9 +9,10 @@ public class LottoCount {
         this.maxLottoCount = maxLottoCount;
     }
 
-    public void purchaseManualLottoTicket(final String countOfManualLotto) {
+    public int purchaseManualLottoTicket(final String countOfManualLotto) {
         this.countOfManualLotto = invalidInputCheck(countOfManualLotto);
         invalidCountCheck();
+        return this.countOfManualLotto;
     }
 
     public int purchaseAutoLottoTicket() {

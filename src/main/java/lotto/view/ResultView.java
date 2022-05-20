@@ -35,6 +35,10 @@ public class ResultView {
         System.out.printf(DIS_BENEFIT_MESSAGE, benefit);
     }
 
+    public void printErrorMessage(final String message) {
+        System.out.println(message);
+    }
+
     private void printStatisticResult(final Rank result, final int matchResult) {
         if (result == Rank.SECOND) {
             System.out.printf(GAME_BONUS_STATISTICS_MESSAGE,
