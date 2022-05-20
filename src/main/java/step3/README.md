@@ -21,9 +21,8 @@
   - 돈에 대한 검증(양수이며 숫자)
 - Ticket : 로또 Ticket에 대한 Value object
   - Ticket에 대한 검증(최소 1개는 있어야함)
-- LottoUser : 로또 구매자
-  - Money와 Ticket으로 로또를 구매한다
-  - 내가가진 로또들의 번호들을 반환한다
+- LottoTickets : 로또티켓을 관리하는 일급콜렉션
+  
 - LottoMachine : 로또 자판기
   - 수동 로또를 만들수 있어야 한다.
   - 자동 로또를 만들수 있어야 한다. 
