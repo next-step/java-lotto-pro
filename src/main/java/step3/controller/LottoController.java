@@ -6,6 +6,7 @@ import step3.domain.Lotto;
 import step3.domain.LottoFactory;
 import step3.domain.LottoResult;
 import step3.domain.Lottos;
+import step3.domain.ManualLottoCount;
 import step3.domain.Money;
 import step3.view.InputView;
 import step3.view.OutputView;
@@ -14,7 +15,7 @@ public class LottoController {
 
     public void play() {
         Money money = inputMoney();
-        int manualLottoCount = inputManualLottoCount();
+        ManualLottoCount manualLottoCount = inputManualLottoCount();
         int autoLottoCount = money.autoLottoCount(manualLottoCount);
 
         Lottos lottos = buyLottos(manualLottoCount, autoLottoCount);
@@ -35,16 +36,16 @@ public class LottoController {
         }
     }
 
-    private int inputManualLottoCount() {
+    private ManualLottoCount inputManualLottoCount() {
         try {
-            return InputView.inputManualLottoCount();
+            return new ManualLottoCount(InputView.inputManualLottoCount());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputManualLottoCount();
         }
     }
 
-    private Lottos buyLottos(int manualLottoCount, int autoLottoCount) {
+    private Lottos buyLottos(ManualLottoCount manualLottoCount, int autoLottoCount) {
         try {
             List<Lotto> lottos = buy(manualLottoCount, autoLottoCount);
             return new Lottos(lottos);
@@ -72,7 +73,7 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> buy(int manualLottoCount, int autoLottoCount) {
+    private List<Lotto> buy(ManualLottoCount manualLottoCount, int autoLottoCount) {
         List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount);
         List<Lotto> lottos = new ArrayList<>();
         for (List<Integer> manualLottoNumber : manualLottoNumbers) {

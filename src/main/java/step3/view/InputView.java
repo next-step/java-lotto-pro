@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import step3.domain.ManualLottoCount;
 
 public class InputView {
 
@@ -23,10 +24,10 @@ public class InputView {
         return inputNumber();
     }
 
-    public static List<List<Integer>> inputManualLottoNumbers(int manualLottoCount) {
+    public static List<List<Integer>> inputManualLottoNumbers(ManualLottoCount manualLottoCount) {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         List<List<Integer>> manualLottoNumbers = new ArrayList<>();
-        for(int i = 0; i < manualLottoCount; i++) {
+        for(int i = 0; i < manualLottoCount.get(); i++) {
             manualLottoNumbers.add(inputNumbers());
         }
         return manualLottoNumbers;
