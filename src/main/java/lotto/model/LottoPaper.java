@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class LottoPaper {
 
+    private static final int NONE_SELF = 0;
+
     private final int totalCount;
     private final int selfCount;
 
@@ -21,7 +23,7 @@ public class LottoPaper {
     }
 
     public boolean isAllRandom() {
-        return selfCount == 0;
+        return selfCount == NONE_SELF;
     }
 
     @Override
