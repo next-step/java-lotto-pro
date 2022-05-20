@@ -18,7 +18,7 @@ public class RankTest {
 	@Test
 	@DisplayName("보너스 번호 당첨 확인")
 	void bonus_winning() {
-		assertThat(Rank.matchPrize(5, true)).isEqualTo(Rank.SECOND);
+		assertThat(Rank.matchPrize(4, true)).isEqualTo(Rank.SECOND);
 		assertThat(Rank.matchPrize(5, false)).isEqualTo(Rank.THIRD);
 	}
 }

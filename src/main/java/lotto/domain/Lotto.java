@@ -37,6 +37,10 @@ public class Lotto {
 		int matchCount = numbers.match(winningLotto.numbers);
 		boolean containNumber = numbers.isContainNumber(number);
 
+		if(containNumber) {
+			matchCount += 1;
+		}
+
 		return Rank.matchPrize(matchCount, containNumber);
 	}
 
