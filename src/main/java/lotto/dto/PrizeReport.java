@@ -8,17 +8,13 @@ public class PrizeReport implements Comparable<PrizeReport> {
 	int matchCount;
 	int money;
 	int result;
+	boolean containBonusNumber;
 
-	public PrizeReport(Rank rank, int result) {
+	public PrizeReport(Rank rank, int result, boolean containBonusNumber) {
 		this.matchCount = rank.getMatchCount();
 		this.money = rank.getPrizeMoney();
 		this.result = result;
-	}
-
-	public PrizeReport(int matchCount, int money, int result) {
-		this.matchCount = matchCount;
-		this.money = money;
-		this.result = result;
+		this.containBonusNumber = containBonusNumber;
 	}
 
 	public int getMatchCount() {
@@ -31,6 +27,10 @@ public class PrizeReport implements Comparable<PrizeReport> {
 
 	public int getResult() {
 		return result;
+	}
+
+	public boolean isContainBonusNumber() {
+		return containBonusNumber;
 	}
 
 	@Override

@@ -19,9 +19,9 @@ class RankResultTest {
 		rankResult.setUp(Rank.FOURTH);
 
 		assertThat(rankResult.getReport()).contains(
-			new PrizeReport(Rank.FIRST, 1),
-			new PrizeReport(Rank.SECOND, 1),
-			new PrizeReport(Rank.FOURTH, 2));
+			new PrizeReport(Rank.FIRST, 1, false),
+			new PrizeReport(Rank.SECOND, 1, true),
+			new PrizeReport(Rank.FOURTH, 2, false));
 	}
 
 	@Test

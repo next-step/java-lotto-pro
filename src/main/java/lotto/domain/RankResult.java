@@ -32,11 +32,11 @@ public class RankResult {
 	public List<PrizeReport> getReport() {
 		List<PrizeReport> prizes = new ArrayList<>();
 
-		prizes.add(new PrizeReport(Rank.FIFTH, resultMap.get(Rank.FIFTH)));
-		prizes.add(new PrizeReport(Rank.FOURTH, resultMap.get(Rank.FOURTH)));
-		prizes.add(new PrizeReport(Rank.THIRD, resultMap.get(Rank.THIRD)));
-		prizes.add(new PrizeReport(Rank.SECOND, resultMap.get(Rank.SECOND)));
-		prizes.add(new PrizeReport(Rank.FIRST, resultMap.get(Rank.FIRST)));
+		prizes.add(new PrizeReport(Rank.FIFTH, resultMap.get(Rank.FIFTH), false));
+		prizes.add(new PrizeReport(Rank.FOURTH, resultMap.get(Rank.FOURTH), false));
+		prizes.add(new PrizeReport(Rank.THIRD, resultMap.get(Rank.THIRD), false));
+		prizes.add(new PrizeReport(Rank.SECOND, resultMap.get(Rank.SECOND), true));
+		prizes.add(new PrizeReport(Rank.FIRST, resultMap.get(Rank.FIRST), false));
 
 		Collections.sort(prizes);
 		return prizes;
