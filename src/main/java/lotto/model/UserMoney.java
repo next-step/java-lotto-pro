@@ -4,7 +4,7 @@ import util.NumberUtil;
 
 public class UserMoney {
 	private static final int MIN_MONEY = 0;
-	private final int money;
+	private int money;
 
 	public UserMoney(String money) {
 		validation(money);
@@ -13,6 +13,10 @@ public class UserMoney {
 
 	public int getMoney() {
 		return this.money;
+	}
+	
+	public void buyLotto(int lottoPrice) {
+		this.money -= lottoPrice;
 	}
 
 	private void validation(String money) {

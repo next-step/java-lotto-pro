@@ -13,13 +13,30 @@ public class LottoMachine {
 	private static final int LOTTO_PRICE = 1000;
 	private static final Random random = new Random();
 
+	public Lottos buyManualLottos(UserMoney userMoney, Lottos lottos) {
+		validationCanNotBuyLotto(userMoney, lottos.size());
+		userMoney.buyLotto(lottos.size() * LOTTO_PRICE);
+		return lottos;
+	}
+
 	public Lottos buyAutoLottos(UserMoney userMoney) {
 		List<LottoNumbers> lottos = new ArrayList<>();
 		for (int i = 0; i < canBuyLottoCount(userMoney); ++i) {
 			lottos.add(randomLottoNumbers());
 		}
 
+		userMoney.buyLotto(lottos.size() * LOTTO_PRICE);
 		return new Lottos(lottos);
+	}
+
+	private void validationCanNotBuyLotto(UserMoney userMoney, int pieceCount) {
+		if (!isCanBuyLotto(userMoney, pieceCount)) {
+			throw new IllegalArgumentException("로또를 구매할 수 있는 수량을 초과했습니다. 구입가능 로또의 갯수 : " + canBuyLottoCount(userMoney));
+		}
+	}
+
+	public boolean isCanBuyLotto(UserMoney userMoney, int pieceCount) {
+		return canBuyLottoCount(userMoney) >= pieceCount;
 	}
 
 	public int lottoPrice() {
