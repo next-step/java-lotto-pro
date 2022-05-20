@@ -8,6 +8,20 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class MoneyTest {
+    @DisplayName("Money는 0이상이어야 한다.")
+    @Test
+    void 금액_생성() {
+        Money actual = new Money(1000);
+        assertThat(actual).isEqualTo(new Money(1000));
+    }
+
+    @DisplayName("Money는 0이상이어야 한다.")
+    @Test
+    void invalid_금액_생성() {
+        assertThatThrownBy(() -> {
+            new Money(-10000);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 
     @DisplayName("실제 로또를 구입하는데 투자된 금액을 계산한다.")
     @Test
