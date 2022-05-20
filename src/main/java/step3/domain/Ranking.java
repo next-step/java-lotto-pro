@@ -22,9 +22,10 @@ public enum Ranking {
         this.matchedBonusNumber = matchedBonusNumber;
     }
 
-    public static Ranking findRanking(int hitCount, boolean isMatchBonusNumber) {
+    public static Ranking findRanking(int hitCount, boolean matchedBonusNumber) {
         return Arrays.stream(values())
-                .filter(ranking -> ranking.hitCount == hitCount && ranking.matchedBonusNumber == isMatchBonusNumber)
+                .filter(ranking -> ranking.hitCount == hitCount)
+                .filter(ranking -> ranking.matchedBonusNumber == matchedBonusNumber)
                 .findFirst()
                 .orElse(Ranking.NONE);
     }
