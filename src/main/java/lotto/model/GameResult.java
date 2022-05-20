@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 public class GameResult {
-    private final LottoGame lottoGame;
     private final List<Rank> rankList;
+    private final double userDeposit;
     private static final double BENEFIT_REFERENCE_VALUE = 1;
 
     public GameResult(LottoGame lottoGame, WinningLotto winningLotto) {
-        this.lottoGame = lottoGame;
         this.rankList = calculateRank(lottoGame.getUserLotto(), winningLotto);
+        this.userDeposit = lottoGame.getDeposit();
     }
 
     public Map<Rank, Long> gameResult() {
@@ -27,7 +27,7 @@ public class GameResult {
     }
 
     public double calculateBenefit() {
-        return rankList.stream().mapToLong(Rank::getWinningMoney).sum() / lottoGame.getDeposit();
+        return rankList.stream().mapToLong(Rank::getWinningMoney).sum() / userDeposit;
     }
 
     public double referenceValue() {
