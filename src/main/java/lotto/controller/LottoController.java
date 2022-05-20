@@ -6,6 +6,7 @@ import lotto.domain.AutoNumbers;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoPrice;
+import lotto.domain.Number;
 import lotto.domain.RankResult;
 import lotto.dto.PrizeReport;
 import lotto.view.InputView;
@@ -21,7 +22,9 @@ public class LottoController {
 		OutputView.printLottoTickets(lottoTickets.getLottTickets());
 
 		Lotto winningLotto = Lotto.getInstanceByString(InputView.inputNumbers());
-		RankResult result = lottoTickets.getResult(winningLotto);
+		Number number = new Number(InputView.inputBonusNumber());
+
+		RankResult result = lottoTickets.getResult(winningLotto, number);
 		List<PrizeReport> report = result.getReport();
 		OutputView.printPrizeResult(report);
 		OutputView.printRate(result.compileStatistics(lottoPrice.expenses()));
