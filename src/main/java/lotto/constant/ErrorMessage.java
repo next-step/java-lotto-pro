@@ -12,6 +12,7 @@ public class ErrorMessage {
     public static final String NON_SIX_NUMBERS = ERROR_HEAD + "로또 번호는 6개여야 합니다.";
     public static final String DUPLICATION = ERROR_HEAD + "6개의 로또 번호에 중복이 있습니다.";
     public static final String DUPLICATION_BONUS = ERROR_HEAD + "보너스 번호가 이미 로또 번호에 존재합니다.";
+    public static final String NOT_ENOUGH_MEONY = ERROR_HEAD + "구매 금액이 부족합니다.";
     public static final String CONSTANT_CLASS = "Constant class";
     public static final String UTILITY_CLASS = "Utility class";
 

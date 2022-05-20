@@ -30,6 +30,7 @@ class LottoNumbersTest {
     @Test
     void contains() {
         LottoNumbers lottoNumbers = new LottoNumbers((Arrays.asList("3", "7", "10", "13", "25", "35")));
+
         assertAll(
                 () -> assertThat(lottoNumbers.contains(new LottoNumber("7"))).isTrue(),
                 () -> assertThat(lottoNumbers.contains(new LottoNumber("25"))).isTrue(),
@@ -41,6 +42,7 @@ class LottoNumbersTest {
     @Test
     void numberToIntArray() {
         LottoNumbers lottoNumbers = new LottoNumbers((Arrays.asList("3", "7", "10", "13", "25", "35")));
+
         assertThat(lottoNumbers.numberToIntArray()).isEqualTo(new int[]{3, 7, 10, 13, 25, 35});
     }
 
@@ -52,11 +54,20 @@ class LottoNumbersTest {
         LottoNumbers winningNumbers4 = new LottoNumbers((Arrays.asList("3", "7", "10", "13", "20", "37")));
         LottoNumbers winningNumbers5 = new LottoNumbers((Arrays.asList("3", "7", "10", "13", "25", "37")));
         LottoNumbers winningNumbers6 = new LottoNumbers((Arrays.asList("3", "7", "10", "13", "25", "35")));
+
         assertAll(
                 () -> assertThat(lottoNumbers.matchCount(winningNumbers3)).isEqualTo(3),
                 () -> assertThat(lottoNumbers.matchCount(winningNumbers4)).isEqualTo(4),
                 () -> assertThat(lottoNumbers.matchCount(winningNumbers5)).isEqualTo(5),
                 () -> assertThat(lottoNumbers.matchCount(winningNumbers6)).isEqualTo(6)
         );
+    }
+
+    @DisplayName("로또넘버는 정렬된 로또 번호를 생성")
+    @Test
+    void create_sort() {
+        LottoNumbers lottoNumbers = new LottoNumbers((Arrays.asList("7", "10", "35", "13", "25", "3")));
+
+        assertThat(lottoNumbers).isEqualTo(new LottoNumbers((Arrays.asList("3", "7", "10", "13", "25", "35"))));
     }
 }

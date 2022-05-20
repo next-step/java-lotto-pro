@@ -1,8 +1,10 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import lotto.constant.ErrorMessage;
 import lotto.constant.LottoRoleConst;
@@ -22,6 +24,7 @@ public class LottoNumbers {
         for (String winningNumberWord : lottoNumberWords) {
             lottoNumbers.add(new LottoNumber(winningNumberWord));
         }
+        Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
 
@@ -57,5 +60,22 @@ public class LottoNumbers {
         return Math.toIntExact(lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumbers that = (LottoNumbers) o;
+        return lottoNumbers.equals(that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

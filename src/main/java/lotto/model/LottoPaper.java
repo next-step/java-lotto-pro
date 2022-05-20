@@ -4,14 +4,26 @@ import java.util.Objects;
 
 public class LottoPaper {
 
-    private final int gameCount;
+    private static final int NONE_SELF = 0;
 
-    public LottoPaper(int gameCount) {
-        this.gameCount = gameCount;
+    private final int totalCount;
+    private final int selfCount;
+
+    public LottoPaper(int totalCount, int selfCount) {
+        this.totalCount = totalCount;
+        this.selfCount = selfCount;
     }
 
-    public int getGameCount() {
-        return gameCount;
+    public int getSelfCount() {
+        return selfCount;
+    }
+
+    public int randomCount() {
+        return totalCount - selfCount;
+    }
+
+    public boolean isAllRandom() {
+        return selfCount == NONE_SELF;
     }
 
     @Override
@@ -23,11 +35,12 @@ public class LottoPaper {
             return false;
         }
         LottoPaper that = (LottoPaper) o;
-        return gameCount == that.gameCount;
+        return selfCount == that.selfCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(gameCount);
+        return Objects.hash(selfCount);
     }
+
 }

@@ -18,6 +18,10 @@ public class Lotto {
         this.numbers = new LottoNumbers(lottoNumberWords);
     }
 
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.numbers = lottoNumbers;
+    }
+
     public int[] convertNumbers() {
         return numbers.numberToIntArray();
     }

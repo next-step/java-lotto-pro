@@ -12,11 +12,12 @@ class InputStringUtilsTest {
 
     private static final String BLANK_REGEX = ".*\\s.*";
 
-    @DisplayName("입력된 문자열에 공백을 제거하고 split 해서 반환한다.")
+    @DisplayName("입력된 문자열에 공백을 제거하고 split 해서 반환")
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:,:6", "1-2-3:-:3"}, delimiter = ':')
     void splitToNumberListByDelimiter(String inputString, String delimiter, int expectedSize) {
         List<String> numberWords = InputStringUtils.nonSpaceSplit(inputString, delimiter);
+
         for (String number : numberWords) {
             assertThat(number).doesNotMatch(BLANK_REGEX);
         }

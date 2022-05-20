@@ -28,6 +28,10 @@ public class Lottos {
         return (double) totalWinningMount / purchaseMoney();
     }
 
+    public void mergeLottos(Lottos lottos) {
+        this.lottos.addAll(lottos.getLottos());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

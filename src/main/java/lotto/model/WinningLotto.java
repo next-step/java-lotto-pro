@@ -6,6 +6,9 @@ import lotto.constant.LottoRank;
 
 public class WinningLotto {
 
+    private static final int NONE = 0;
+    private static final int MATCH = 1;
+
     private final LottoNumbers winningNumbers;
     private final LottoNumber bonusNumber;
 
@@ -25,7 +28,7 @@ public class WinningLotto {
         EnumMap<LottoRank, Integer> resultRank = new EnumMap<>(LottoRank.class);
         for (Lotto lotto : lottos.getLottos()) {
             LottoRank lottoRank = lotto.matchRank(winningNumbers, bonusNumber);
-            resultRank.put(lottoRank, resultRank.getOrDefault(lottoRank, 0) + 1);
+            resultRank.put(lottoRank, resultRank.getOrDefault(lottoRank, NONE) + MATCH);
         }
         return new LottoGameResult(resultRank);
     }
