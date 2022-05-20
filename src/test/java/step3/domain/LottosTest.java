@@ -22,7 +22,7 @@ class LottosTest {
         ));
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "모든 로또의 당첨내역을 확인한다.")
     @EnumSource(value = Ranking.class, names = {"FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "NONE"})
     void 전체_로또_매칭_결과(Ranking ranking) {
         LottoResult lottoResult = lottos.allMatch(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
