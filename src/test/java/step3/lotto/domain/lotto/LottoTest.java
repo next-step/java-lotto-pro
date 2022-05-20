@@ -2,7 +2,6 @@ package step3.lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static step3.lotto.domain.lotto.Lotto.INVALID_LOTTO_NUMBER_COUNT_ERROR;
 import static step3.lotto.domain.lotto.Lotto.LOTTO_NUMBER_DUPLICATED_ERROR;
 import static step3.lotto.domain.lotto.LottoNumber.INVALID_LOTTO_NUMBER_RANGE_ERROR;
@@ -33,9 +32,7 @@ class LottoTest {
         Lotto lotto = Lotto.of(given);
 
         // Then
-        assertAll(
-            () -> assertThat(lotto.size()).isEqualTo(given.size())
-        );
+        assertThat(lotto).as("객체 동등성 비교").isEqualTo(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
