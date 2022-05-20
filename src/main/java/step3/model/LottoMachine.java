@@ -9,6 +9,7 @@ import step3.domain.LottoElement;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
 import step3.enums.LottoReward;
+import step3.utls.NumberUtil;
 
 public class LottoMachine {
 
@@ -38,17 +39,16 @@ public class LottoMachine {
 
     public void setBonusNumber(String lottoElementSource) {
         validateBonusNumber(lottoElementSource);
-        bonusNumber = new LottoElement(Integer.parseInt(lottoElementSource));
+        bonusNumber = new LottoElement(NumberUtil.parseInt(lottoElementSource));
     }
 
     private void validateBonusNumber(String lottoElementSource) {
         int isExist = 1;
         boolean validateResult = true;
         try {
-            int bonusExistInWinnerTicket = winnerLottoTicket.getMatchCountWith(Arrays.asList(new LottoElement(Integer.parseInt(lottoElementSource))));
+            int bonusExistInWinnerTicket = winnerLottoTicket.getMatchCountWith(
+                Arrays.asList(new LottoElement(NumberUtil.parseInt(lottoElementSource))));
             validateResult = bonusExistInWinnerTicket != isExist;
-        } catch (NumberFormatException e) {
-            validateResult = false;
         } catch (IllegalArgumentException e) {
             validateResult = false;
         }
