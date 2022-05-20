@@ -16,6 +16,18 @@ public class Winnings {
         this.bonusNumber = bonusNumber;
     }
 
+    public MatchStatistic match(Lottos lottos) {
+        MatchStatistic matchStatistic = new MatchStatistic();
+        for (Lotto lotto : lottos.getLottos()) {
+            matchStatistic.add(match(lotto));
+        }
+        return matchStatistic;
+    }
+
+    private MatchResult match(Lotto lotto) {
+        return MatchResult.valueOf(lotto.matchCount(winningsLotto), lotto.contains(bonusNumber));
+    }
+
     public static Winnings of(Lotto winningsLotto, LottoNumber bonusNumber) {
         validateBonusNumberAlreadyExistInWinningsLotto(winningsLotto, bonusNumber);
         return new Winnings(winningsLotto, bonusNumber);

@@ -199,11 +199,11 @@ public enum Rank {
 ```
 리팩토링 내용
 - Lotto 객체 리펙토링
-  - [x] Lotto 객체 생성 TC의 검증 방식 변경
+  - Lotto 객체 생성 TC의 검증 방식 변경
     - Lotto 객체 생성 Test를 위해 구현한 실 코드에서 참조가 없는 size 메서드 삭제
     - Lotto 객체 생성 시 검증 항목을 size를 이용한 검증에서 equasl(), hashcode() 구현 후, 객체 동등성을 이용한 검증으로 변경
 
-  - [x] 비효율적으로 구현된 contains 메소드 개선
+  - 비효율적으로 구현된 contains 메소드 개선
     - AS-IS
       ```
         public boolean contains(LottoNumber winningsLottoNumber) {
@@ -220,12 +220,12 @@ public enum Rank {
             return lottoNumbers.contains(winningsLottoNumber);
         }
       ```
-  - [x] Lotto 객체 필드의 자료구조 변경
+      
+  - Lotto 객체 필드의 자료구조 변경
     - 변경 내용 :
       - AS-IS : List<Integer> lotto
       - TO-BE : Set<Integer> lotto
-    - 변경 사유 : List로 이루어진 6개의 로또 번호의 중복 여부 확인을 위해 Set으로 변경 후 size를 체크 후, 
-      다시 List로 구성된 필드에 값을 할당하는 비효율적인 작업 개선
+    - 변경 사유 : List로 이루어진 6개의 로또 번호의 중복 여부 확인을 위해 Set으로 변경 후 size를 체크 후, 다시 List로 구성된 필드에 값을 할당하는 비효율적인 작업 개선
     - 변경 효과 : 자료구조 변경에 따른 예외 처리 로직 통합
       - AI-IS
         - List 타입 인자의 size가 6인지 여부 검증
@@ -236,7 +236,7 @@ public enum Rank {
       - 자료구조 변경에 따른 Lotto 객체 생성 시 예외 처리 TC 통합
       - UI를 위한 정렬 로직 제거
       
-  - [x] UI를 위한 로또 번호 정렬 로직 수정
+  - UI를 위한 로또 번호 정렬 로직 수정
     - Lotto 객체 필드의 자료구조 변경에 따른 정렬 처리 추가
       - Lotto 객체의 List<LottoNumber> 반환 시, Comparable을 이용하여 정렬 후 반환
       - 정렬 처리 추가에 따른 Test Case 추가
@@ -244,5 +244,22 @@ public enum Rank {
     - 로또 번호 정렬 로직 위치 변경
       - AS-IS : Lotto 객체 생성 시점
       - TO-BE : 정렬 후 반환하는 별도의 메소드 제공
-                
+
+### 강의 : private method에 대한 테스트 및 리팩토링
+```
+private 메서드에 대한 Test 여부를 고민하는 경우 아래 사항을 먼저 고민
+- 해당 위치에서 private 하게 구성하는게 올바른 설계인지 먼저 고민
+- private 메소드에 대한 접근제한자를 변경하는 방법 등을 통해 Test 여부를 고민
+
+메서드 오버라이딩을 통해 안전한 리팩토링을 진행
+- 리팩토링 대상 메서드에 대한 참조가 많은 경우, 한번에 진행 하기보다는 일정 과도기를 가지고 점진적으로(안정적으로) 진행
+```    
+리팩토링 내용
+- 당첨 여부를 판별하는 메서드의 위치 변경
+   - 변경 사유 : Lottos 객체에서 당첨 여부 판별을 위해, 인자로 받은 WinningsLotto 객체의 필드 접근을 위한 get 메서드 제거
+   - 변경 내용 : Lottos 객체의 match 메서드를 WinningsLotto 객체로 이동
+   - 변경 효과 : 
+     - get 메서드 사용 없이 변경 전과 동일한 기능 제공
+     - WinningsLotto 객체 필드 접근을 위해 구현한 get 메서드 삭제
+   - 리팩토링에 따른 코드 변경 : Lottos 객체의 match 메서드에 대한 TC를 WinningsLotto 객체의 Test Class로 이동
 ---
