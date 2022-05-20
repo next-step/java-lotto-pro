@@ -32,6 +32,6 @@ public class Prize {
 
     @Override
     public String toString() {
-        return amount + "원";
+        return String.valueOf(amount);
     }
 }
