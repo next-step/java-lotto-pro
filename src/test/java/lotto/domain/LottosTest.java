@@ -17,7 +17,7 @@ class LottosTest {
     @CsvSource(value = {"5000,5", "14000,14"})
     void 여러장_구입(int charge, int expected) {
         Lottos lottos = Lottos.buy(Collections.EMPTY_LIST, LottoCharge.from(charge));
-        assertThat(lottos.count()).isEqualTo(expected);
+        assertThat(lottos.size()).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -28,7 +28,7 @@ class LottosTest {
                 new Lotto(1, 2, 3, 4, 5, 45)
         );
         Lottos lottos = Lottos.buy(manualLottos, LottoCharge.from(charge));
-        assertThat(lottos.count()).isEqualTo(expected);
+        assertThat(lottos.size()).isEqualTo(expected);
     }
 
     @Test

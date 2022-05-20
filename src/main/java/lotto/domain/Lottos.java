@@ -22,7 +22,7 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public int count() {
+    public int size() {
         return lottos.size();
     }
 
