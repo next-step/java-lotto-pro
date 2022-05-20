@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import step3.domain.LottoElement;
 import step3.domain.LottoTicket;
 
-public class LottoUser {
+public class LottoTickets {
     private List<LottoTicket> lottoTickets = new ArrayList<>();
 
 

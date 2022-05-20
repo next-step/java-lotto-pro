@@ -3,6 +3,8 @@ package study;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+
+import java.util.Scanner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,5 +44,15 @@ public class StringTest {
         assertThatThrownBy(() -> source.substring(0, 6))
             .isInstanceOf(StringIndexOutOfBoundsException.class)
             .hasMessage("begin 0, end 6, length 5");
+    }
+    @Test
+    public void asdfasdf (){
+        //given
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        System.out.println(a);
+        //when
+
+        //then
     }
 }

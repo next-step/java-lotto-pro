@@ -7,15 +7,15 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.model.LottoUser;
+import step3.model.LottoTickets;
 
-public class LottoUserTest {
+public class LottoTicketsTest {
 
-    LottoUser user;
+    LottoTickets user;
 
     @BeforeEach
     public void init() {
-        user = new LottoUser();
+        user = new LottoTickets();
     }
 
     @Test

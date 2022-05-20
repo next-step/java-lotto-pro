@@ -4,7 +4,7 @@ import java.util.List;
 import step3.domain.LottoTicket;
 import step3.domain.Money;
 import step3.model.LottoMachine;
-import step3.model.LottoUser;
+import step3.model.LottoTickets;
 import step3.view.InputView;
 import step3.view.OutputView;
 
@@ -21,7 +21,7 @@ public class LottoController {
     }
 
     public void startLotto() {
-        LottoUser user = new LottoUser();
+        LottoTickets user = new LottoTickets();
 
         int ticket = getTicketByMoney(); /*정상 값을 입력할때까지 반복입력*/
 
