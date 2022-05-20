@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import step3.utls.NumberUtil;
 
 public class LottoTicket {
 
@@ -38,11 +39,7 @@ public class LottoTicket {
     }
 
     private List<Integer> elementsSourceToInt(List<String> lottoElementsSource) {
-        try {
-            return lottoElementsSource.stream().map(Integer::parseInt).collect(Collectors.toList());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(PARSE_INT_EXCEPTION_MSG);
-        }
+        return lottoElementsSource.stream().map(NumberUtil::parseInt).collect(Collectors.toList());
     }
 
     public int getMatchCountWith(List<LottoElement> winnerLottoElements) {
