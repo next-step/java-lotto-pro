@@ -40,4 +40,16 @@ public class NumbersTest {
 			)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@Test
+	@DisplayName("숫자 포함 여부 확인")
+	void contain_number() {
+		Numbers numbers = new Numbers(Arrays.asList(
+			new Number(1), new Number(2), new Number(3),
+			new Number(4), new Number(5), new Number(6)
+		));
+
+		assertThat(numbers.isContainNumber(new Number(1))).isTrue();
+		assertThat(numbers.isContainNumber(new Number(40))).isFalse();
+	}
 }
