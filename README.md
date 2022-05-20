@@ -121,3 +121,12 @@
       * [X] 생성자 인자 WinningNumber 객체로 변경
   * [X] Controller
     * [X] 보너스 번호
+
+* 리뷰어(김재연 님) 코드리뷰
+  * [X] Map<Integer, LottoNumber> lottoNumbersCache 변수명 변경
+    * -> cachedLottoNumberGroup
+  * [X] Map 컬렉션 get() -> getOrDefault() 활용
+  * [X] for 문 조건식에 계산 메서드 사용 금지
+    ![img.png](img.png)
+  * [X] LottoRank.of 메서드 2등 구하는 로직 개선
+    * bonus 멤버변수 추가
