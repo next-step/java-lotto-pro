@@ -5,7 +5,7 @@ import java.util.List;
 
 public class StringUtil {
 
-    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String DEFAULT_DELIMITER = ",";
     private static final String ERROR_MESSAGE_NOT_NUMBER_FORMAT = "[ERROR] %s is not a number";
 
     private StringUtil() {
@@ -13,10 +13,6 @@ public class StringUtil {
 
     public static boolean isEmpty(final String text) {
         return text == null || text.isEmpty();
-    }
-
-    public static List<Integer> splitNumbersString(final String numbers) {
-        return splitNumbersString(numbers, DEFAULT_DELIMITER);
     }
 
     public static List<Integer> splitNumbersString(final String numbers, final String delimiter) {
@@ -36,7 +32,7 @@ public class StringUtil {
 
         String[] numberStrings = numbers.split(delimiter);
         for (String numberString : numberStrings) {
-            addNumberToList(numberList, numberString);
+            addNumberToList(numberList, numberString.trim());
         }
 
         return numberList;
