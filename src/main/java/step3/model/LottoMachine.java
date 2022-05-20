@@ -14,20 +14,18 @@ import step3.utls.NumberUtil;
 public class LottoMachine {
 
     private final LottoGenerator lottoGenerator;
-    private final int MATCH_COUNT_BASE = 0;
+    private final LottoWinChecker lottoWinChecker;
     private final int LOTTO_PRICE = 1_000;
-    private LottoElement bonusNumber;
-    private LottoTicket winnerLottoTicket;
+
     private final int EMPTY = 0;
-    private final int MATCH = 1;
-    private final String SET_BONUS_NUMBER_EXCEPTION_MSG = "정답티켓과 다른 번호를 설정해야합니다";
+
     private final String CANT_BUY_LOTTO_EXCEPTION = "돈은 최소 " + LOTTO_PRICE + "이상 입력해야합니다";
     private final String MANUAL_LOTTO_COUNT_OVER_TICKET_EXCEPTION_MSG = "입금한 돈을 초과할수 없습니다.";
 
-    public LottoMachine(LottoGenerator lottoGenerator) {
+    public LottoMachine(LottoGenerator lottoGenerator,LottoWinChecker lottoWinChecker) {
         this.lottoGenerator = lottoGenerator;
+        this.lottoWinChecker = lottoWinChecker;
     }
-
 
     public List<LottoTicket> makeRandomLottoTickets(int ticket) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
@@ -45,46 +43,13 @@ public class LottoMachine {
         return lottoTickets;
     }
 
-    public void setBonusNumber(String lottoElementSource) {
-        validateBonusNumber(lottoElementSource);
-        bonusNumber = new LottoElement(NumberUtil.parseInt(lottoElementSource));
-    }
-
-    private void validateBonusNumber(String lottoElementSource) {
-        int isExist = 1;
-        boolean validateResult = true;
-        try {
-            int bonusExistInWinnerTicket = winnerLottoTicket.getMatchCountWith(
-                Arrays.asList(new LottoElement(NumberUtil.parseInt(lottoElementSource))));
-            validateResult = bonusExistInWinnerTicket != isExist;
-        } catch (IllegalArgumentException e) {
-            validateResult = false;
-        }
-        if (!validateResult) {
-            throw new IllegalArgumentException(SET_BONUS_NUMBER_EXCEPTION_MSG);
-        }
-    }
-
     public void setWinnerLottoTicket(String winnerSource) {
-        winnerLottoTicket = lottoGenerator.makeManualLottoTicket(winnerSource);
+        LottoTicket winnerTicket = lottoGenerator.makeManualLottoTicket(winnerSource);
+        lottoWinChecker.setWinnerLottoTicket(winnerTicket);
     }
 
-    public Map<LottoReward, Integer> checkWin(List<LottoTicket> userLottoTickets) {
-        LinkedHashMap<LottoReward, Integer> statistics = new LinkedHashMap<>();
-        initStatistics(statistics);
-        for (LottoTicket lottoTicket : userLottoTickets) {
-            int matchCountLottoTicketWithUserAndWinner = lottoTicket.getMatchCountWith(winnerLottoTicket.getLottoNumbers());
-            boolean haveBonusNumberInUserLottoTicket = lottoTicket.getMatchCountWith(Arrays.asList(bonusNumber)) == MATCH;
-            LottoReward lottoReward = LottoReward.valueOf(matchCountLottoTicketWithUserAndWinner, haveBonusNumberInUserLottoTicket);
-            statistics.replace(lottoReward, statistics.get(lottoReward) + MATCH);
-        }
-        return statistics;
-    }
-
-    private void initStatistics(LinkedHashMap<LottoReward, Integer> statistics) {
-        for (LottoReward lottoReward : LottoReward.values()) {
-            statistics.put(lottoReward, MATCH_COUNT_BASE);
-        }
+    public void setBonusNumber(String lottoElementSource) {
+        lottoWinChecker.setBonusNumber(lottoElementSource);
     }
 
     public int getLottoTicketCount(Money money) {
@@ -95,10 +60,13 @@ public class LottoMachine {
         return ticket;
     }
 
+    public Map<LottoReward, Integer> checkWin(List<LottoTicket> userLottoTickets) {
+        return lottoWinChecker.checkWin(userLottoTickets);
+    }
+
     public int getUsingMoneyByTicket(int ticket) {
         return ticket * LOTTO_PRICE;
     }
-
     public void validateManualLottoCount(int ticket, int manualLottoCount) {
         if (ticket < manualLottoCount) {
             throw new IllegalArgumentException(MANUAL_LOTTO_COUNT_OVER_TICKET_EXCEPTION_MSG);

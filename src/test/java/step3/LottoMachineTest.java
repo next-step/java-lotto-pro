@@ -16,6 +16,7 @@ import step3.domain.Money;
 import step3.enums.LottoReward;
 import step3.model.LottoGenerator;
 import step3.model.LottoMachine;
+import step3.model.LottoWinChecker;
 
 public class LottoMachineTest {
 
@@ -23,7 +24,7 @@ public class LottoMachineTest {
 
     @BeforeEach
     public void init() {
-        lottoMachine = new LottoMachine(new LottoGenerator());
+        lottoMachine = new LottoMachine(new LottoGenerator(), new LottoWinChecker());
     }
 
     @ParameterizedTest
