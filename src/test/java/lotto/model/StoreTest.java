@@ -7,14 +7,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class StoreTest {
     Store store;
-    Cashier cashier;
+    Cashier cashier = new Cashier(14000);
 
     @Test
-    @DisplayName("받은 금액 만큼 로또 반환")
-    public void prepareLottos() {
-        cashier = new Cashier(14000);
+    @DisplayName("받은 금액과 로또 개수 일치 검증")
+    public void countLottos() {
         store = new Store(cashier.buyCount());
         assertThat(store.giveCount()).isEqualTo(14);
+    }
+
+    @Test
+    @DisplayName("받은 금액과 로또 객체수 일치 검증")
+    public void countClassLottos() {
+        store = new Store(cashier.buyCount());
+        assertThat(store.giveLotto().allGames().size()).isEqualTo(14);
     }
 
 }

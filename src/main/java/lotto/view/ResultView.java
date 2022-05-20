@@ -14,14 +14,18 @@ public class ResultView {
         }
     }
 
-    public static void printWinningResult(Map<Integer, Integer> winningResults) {
+    public static void printWinningResult(Map<Rank, Integer> winningResults) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         winningResults.forEach((k, v) -> {
-            System.out.printf("%d개 일치 (%d)- %d개%n",
-                    k,
-                    Rank.matchCountOf(k).orElseThrow(RuntimeException::new).winningMoney(),
-                    v);
+            if (k.equals(Rank.MISS)) {
+                return;
+            }
+            String secondText = "";
+            if (k.equals(Rank.SECOND)) {
+                secondText = ", 보너스 볼 일치";
+            }
+            System.out.printf("%d개 일치%s (%d)- %d개%n", k.sameCount(), secondText, k.winningMoney(), v);
         });
     }
 

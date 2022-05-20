@@ -9,12 +9,14 @@ public class Organizer {
     private static final int INIT_RESULT_COUNT = 0;
 
     private final List<Integer> winnerNumbers;
-    private Map<Integer, Integer> winningResults;
+    private final int bonusNumber;
+    private Map<Rank, Integer> winningResults;
     private long totalWinningMoney;
 
-    public Organizer(String number) {
+    public Organizer(String number, int bonus) {
         winnerNumbers = Arrays.stream(number.split(","))
                 .map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
+        bonusNumber = bonus;
     }
 
     public int userNumberSameCount(Lotto lotto) {
@@ -25,10 +27,14 @@ public class Organizer {
         return sameCount;
     }
 
-    public Map<Integer, Integer> winningResults(Lottos lottos) {
+    public boolean sameBonusNumber(Lotto lotto) {
+        return lotto.seeNumbers().contains(this.bonusNumber);
+    }
+
+    public Map<Rank, Integer> winningResults(Lottos lottos) {
         initWinningResult();
         for (Lotto lotto : lottos.allGames()) {
-            countWinning(userNumberSameCount(lotto));
+            countWinning(userNumberSameCount(lotto), sameBonusNumber(lotto));
         }
         return winningResults;
     }
@@ -38,22 +44,19 @@ public class Organizer {
     }
 
     private void initWinningResult() {
-        this.winningResults = new HashMap<>();
+        this.winningResults = new LinkedHashMap<>();
         for (Rank rank : Rank.values()) {
-            winningResults.put(rank.sameCount(), INIT_RESULT_COUNT);
+            winningResults.put(rank, INIT_RESULT_COUNT);
         }
     }
 
-    private void countWinning(int sameCount) {
+    private void countWinning(int sameCount, boolean sameBonusNumber) {
         if (sameCount < Rank.FIFTH.sameCount()) {
             return;
         }
-        Optional<Rank> winningRank = Rank.matchCountOf(sameCount);
-        if (winningRank.isPresent()) {
-            this.totalWinningMoney += winningRank.get().winningMoney();
-            this.winningResults.put(sameCount, this.winningResults.get(sameCount) + 1);
-        }
-
+        Rank winningRank = Rank.matchCountOf(sameCount, sameBonusNumber);
+        this.totalWinningMoney += winningRank.winningMoney();
+        this.winningResults.put(winningRank, this.winningResults.get(winningRank) + 1);
     }
 
     private int compare(int number) {

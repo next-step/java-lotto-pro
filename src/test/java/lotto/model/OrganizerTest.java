@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -18,7 +17,7 @@ public class OrganizerTest {
 
     @BeforeEach
     private void setup() {
-        organizer = new Organizer("1, 12, 21, 33, 41, 45");
+        organizer = new Organizer("1, 12, 21, 33, 41, 45", 7);
     }
 
     @ParameterizedTest
@@ -44,7 +43,7 @@ public class OrganizerTest {
         Lottos lottos = new Lottos(
                 new Lotto[]{new Lotto(1, 12, 21, 3, 4, 5)}
         );
-        assertThat(organizer.winningResults(lottos).get(3)).isEqualTo(1);
+        assertThat(organizer.winningResults(lottos).get(Rank.FIFTH)).isEqualTo(1);
     }
 
     @Test

@@ -14,7 +14,7 @@ public class LottoController {
         Lottos lottos = store.giveLotto();
         ResultView.printLottoNumbers(lottos);
 
-        Organizer organizer = new Organizer(InputView.inputWinningNumbers());
+        Organizer organizer = new Organizer(InputView.inputWinningNumbers(), InputView.inputBonusNumbers());
         ResultView.printWinningResult(organizer.winningResults(lottos));
         ResultView.printRateOfReturn(organizer.winningRate(cashier.receiveAmount()));
     }
