@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.LottoGame;
+
 import java.util.Objects;
 
 public class LottoCount {
@@ -14,12 +16,12 @@ public class LottoCount {
         this.manual = manual;
     }
 
-    public LottoCount(double autoNumber, int manualNumber) {
-        this((int) autoNumber, manualNumber);
-    }
+    public static LottoCount of(Money purchaseAmount, int manualLottoCount) {
+        if (purchaseAmount.divide(LottoGame.LOTTO_PRICE) < manualLottoCount) {
+            throw new IllegalArgumentException("구입금액보다 많은 로또를 수동으로 구매할 수 없습니다.");
+        }
 
-    public static LottoCount of(double autoNumber, int manualNumber) {
-        return new LottoCount(autoNumber, manualNumber);
+        return new LottoCount((int) purchaseAmount.divide(LottoGame.LOTTO_PRICE) - manualLottoCount, manualLottoCount);
     }
 
     public int getAuto() {
