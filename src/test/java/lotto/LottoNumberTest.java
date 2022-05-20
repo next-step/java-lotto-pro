@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static lotto.domain.ExceptionMessage.OUT_OF_BOUNDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -22,7 +23,7 @@ public class LottoNumberTest {
     @ValueSource(ints = {-1, 0, 46, 77})
     void 로또_번호_클래스_생성_예외(Integer input) {
         assertThatThrownBy(() -> new LottoNumber(input)).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoNumber.LOTTO_NUMBER_OUT_OF_BOUNDS_EXCEPTION_MESSAGE);
+                .hasMessage(OUT_OF_BOUNDS.getMessage());
     }
 
     @Test

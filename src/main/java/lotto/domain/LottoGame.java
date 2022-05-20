@@ -4,11 +4,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.domain.ExceptionMessage.ILLEGAL_SIZE;
+import static lotto.domain.ExceptionMessage.NUMBER_DUPLICATE;
+
 public class LottoGame {
 
     public static final int SIZE = 6;
-    public static final String ILLEGAL_SIZE_EXCEPTION_MESSAGE = "로또 번호는 " + SIZE + "개여야 합니다.";
-    public static final String NUMBER_DUPLICATE_EXCEPTION_MESSAGE = "번호는 중복되면 안 됩니다.";
     private final List<LottoNumber> numbers;
 
     public LottoGame(List<Integer> numbers) {
@@ -19,14 +20,14 @@ public class LottoGame {
 
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != SIZE) {
-            throw new IllegalArgumentException(ILLEGAL_SIZE_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(ILLEGAL_SIZE.getMessage());
         }
     }
 
     private void validateDuplicate(List<Integer> numbers) {
         HashSet<Integer> distinctNumbers = new HashSet<>(numbers);
         if (distinctNumbers.size() != SIZE) {
-            throw new IllegalArgumentException(NUMBER_DUPLICATE_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(NUMBER_DUPLICATE.getMessage());
         }
     }
 

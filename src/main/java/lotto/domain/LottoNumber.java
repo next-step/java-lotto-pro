@@ -2,12 +2,15 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import static lotto.domain.ExceptionMessage.NOT_UNSIGNED_INT;
+import static lotto.domain.ExceptionMessage.NUMBER_DUPLICATE;
+import static lotto.domain.ExceptionMessage.OUT_OF_BOUNDS;
+
 public class LottoNumber {
-    public static final String LOTTO_NUMBER_OUT_OF_BOUNDS_EXCEPTION_MESSAGE = "숫자가 정상적인 범위를 벗어납니다.";
     private final int value;
 
     public LottoNumber(String lottoNumber) {
-        validatePositive(lottoNumber);
+        validateUnsignedInt(lottoNumber);
         int value = Integer.parseUnsignedInt(lottoNumber);
         validateBounds(value);
         this.value = value;
@@ -19,29 +22,29 @@ public class LottoNumber {
     }
 
     public LottoNumber(String bonusLottoNumber, WinningNumbers winningNumbers) {
-        validatePositive(bonusLottoNumber);
+        validateUnsignedInt(bonusLottoNumber);
         int value = Integer.parseUnsignedInt(bonusLottoNumber);
         validateDuplicate(new LottoNumber(value), winningNumbers);
         this.value = value;
     }
 
-    private void validatePositive(String lottoNumber) {
+    private void validateUnsignedInt(String lottoNumber) {
         try {
             Integer.parseUnsignedInt(lottoNumber);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("당첨 번호는 자연수여야 합니다.");
+            throw new IllegalArgumentException(NOT_UNSIGNED_INT.getMessage());
         }
     }
 
     private void validateBounds(int lottoNumber) {
         if (lottoNumber < LottoNumberBounds.MIN.getValue() || lottoNumber > LottoNumberBounds.MAX.getValue()) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_OUT_OF_BOUNDS_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(OUT_OF_BOUNDS.getMessage());
         }
     }
 
     private void validateDuplicate(LottoNumber bonusLottoNumber, WinningNumbers winningNumbers) {
         if (winningNumbers.has(bonusLottoNumber)) {
-            throw new IllegalArgumentException("보너스 번호가 당첨 번호와 중복됩니다.");
+            throw new IllegalArgumentException(NUMBER_DUPLICATE.getMessage());
         }
     }
 
