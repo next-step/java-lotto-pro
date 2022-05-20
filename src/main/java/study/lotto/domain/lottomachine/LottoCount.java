@@ -6,11 +6,11 @@ public class LottoCount {
     private final int value;
 
     public LottoCount(String stringValue) {
-        this.value = validate(stringValue);
+        this(Integer.parseInt(stringValue));
     }
 
     public LottoCount(int value) {
-        this.value = value;
+        this.value = validate(value);
     }
 
     public int get() {
@@ -25,16 +25,11 @@ public class LottoCount {
         return new LottoCount(value - number.value);
     }
 
-    private int validate(String price) {
-        int parsedValue = parseNumber(price);
-        if (parsedValue < 0) {
+    private int validate(int price) {
+        if (price < 0) {
             throw new IllegalArgumentException("로또 수는 0보다 크거나 같아야 합니다.");
         }
-        return parsedValue;
-    }
-
-    private int parseNumber(String priceString) {
-        return Integer.parseInt(priceString);
+        return price;
     }
 
     @Override

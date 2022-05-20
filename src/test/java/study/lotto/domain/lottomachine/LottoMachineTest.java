@@ -18,7 +18,7 @@ class LottoMachineTest {
 
     @BeforeEach
     void setUp() {
-        Price lottoPrice = new Price(LottoMachine.DEFAULT_LOTTO_PRICE);
+        Price lottoPrice = LottoMachine.DEFAULT_LOTTO_PRICE;
         lottoMachine = new LottoMachine(new AutomaticLottoGenerator(), lottoPrice);
     }
 

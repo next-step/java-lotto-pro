@@ -9,7 +9,6 @@ public class WinningStatistics {
     private final List<DivisionResult> divisionResults;
     private final BigDecimal earningsRate;
 
-
     public WinningStatistics(DrawResult drawResult, LottoPurchaseHistory lottoPurchaseHistory) {
         this.divisionResults = drawResult.getWinnings();
         this.earningsRate = drawResult.earningsRate(lottoPurchaseHistory.getTotalCost());

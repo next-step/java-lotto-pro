@@ -10,13 +10,13 @@ import study.lotto.domain.Lotto;
 import study.lotto.domain.Lottos;
 
 public class LottoMachine {
-    static final BigDecimal DEFAULT_LOTTO_PRICE = BigDecimal.valueOf(1000);
+    static final Price DEFAULT_LOTTO_PRICE = new Price(BigDecimal.valueOf(1000));
 
     private final LottoGenerator lottoGenerator;
     private final Price lottoPrice;
 
     public LottoMachine(LottoGenerator lottoGenerator) {
-        this(lottoGenerator, new Price(DEFAULT_LOTTO_PRICE));
+        this(lottoGenerator, DEFAULT_LOTTO_PRICE);
     }
 
     public LottoMachine(LottoGenerator lottoGenerator, Price lottoPrice) {
