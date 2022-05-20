@@ -10,6 +10,7 @@ public class LottoTicket {
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final String ERROR_MESSAGE_NUMBER_SIZE = LOTTO_NUMBER_SIZE + "개의 번호를 입력해주세요.";
     private static final String ERROR_MESSAGE_NOT_UNIQUE = "중복되는 번호가 존재합니다.";
+    private static final String ERROR_MESSAGE_NOT_UNIQUE_BONUS_NUMBER = "보너스볼은 당첨 번호와 중복될 수 없습니다.";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -23,8 +24,8 @@ public class LottoTicket {
         this.lottoNumbers = mapLottoNumbers(lottoNumberList);
     }
 
-    public LottoRank rank(LottoTicket winningNumbers) {
-        return LottoRank.rank(matchCount(winningNumbers));
+    public LottoRank rank(LottoTicket winningNumbers, LottoNumber bonusNumber) {
+        return LottoRank.rank(matchCount(winningNumbers), contains(bonusNumber));
     }
 
     public int matchCount(LottoTicket winningNumbers) {
@@ -69,6 +70,12 @@ public class LottoTicket {
         HashSet<String> distinctLottoNumberList = new HashSet<>(lottoNumberList);
         if (lottoNumberList.size() != distinctLottoNumberList.size()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_UNIQUE);
+        }
+    }
+
+    public void validateUniqueBonusNumber(LottoNumber bonusNumber) {
+        if (contains(bonusNumber)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_NOT_UNIQUE_BONUS_NUMBER);
         }
     }
 

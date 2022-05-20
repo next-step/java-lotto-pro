@@ -13,11 +13,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTicketTest {
     LottoTicket lottoTicket;
     LottoTicket winningNumbers;
+    LottoNumber bonusNumber;
 
     @BeforeEach
     void init() {
         lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
         winningNumbers = new LottoTicket("6, 5, 4, 3, 2, 1");
+        bonusNumber = new LottoNumber(7);
     }
 
     @ParameterizedTest
@@ -62,9 +64,17 @@ public class LottoTicketTest {
         assertThat(lottoTicket.matchCount(winningNumbers)).isEqualTo(6);
     }
 
-    @DisplayName("당첨 순위 확인")
     @Test
+    @DisplayName("당첨 순위 확인")
     void rank() {
-        assertThat(lottoTicket.rank(winningNumbers)).isEqualTo(LottoRank.FIRST);
+        assertThat(lottoTicket.rank(winningNumbers, bonusNumber)).isEqualTo(LottoRank.FIRST);
+    }
+
+    @Test
+    @DisplayName("보너스 번호와 당첨 번호 중복 확인")
+    void validateUniqueBonusNumber() {
+        assertThatThrownBy(() -> {
+            winningNumbers.validateUniqueBonusNumber(new LottoNumber(6));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

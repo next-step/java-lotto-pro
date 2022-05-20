@@ -36,9 +36,22 @@ public class LottoGame {
         }
     }
 
+    private LottoNumber inputBonusNumber(LottoTicket winningNumbers) {
+        String input = InputView.inputBonusNumber();
+        try {
+            LottoNumber bonusNumber = new LottoNumber(input);
+            winningNumbers.validateUniqueBonusNumber(bonusNumber);
+            return bonusNumber;
+        } catch (IllegalArgumentException e) {
+            ResultView.printInputErrorMessage(e);
+            return inputBonusNumber(winningNumbers);
+        }
+    }
+
     private void winningResult(LottoTickets lottoTickets, Money purchaseMoney) {
         LottoTicket winningNumbers = inputWinningNumbers();
-        WinningResult winningResult = lottoTickets.match(winningNumbers);
+        LottoNumber bonusNumber = inputBonusNumber(winningNumbers);
+        WinningResult winningResult = lottoTickets.match(winningNumbers, bonusNumber);
         ResultView.printWinningReport(winningResult, purchaseMoney);
     }
 }
