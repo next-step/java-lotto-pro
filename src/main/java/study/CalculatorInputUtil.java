@@ -11,14 +11,12 @@ public class CalculatorInputUtil {
     public static final String DELIMITER = ",|:";
     public static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
-    public static boolean hasCustomDelimiter(String text) {
-        return CUSTOM_DELIMITER_PATTERN.matcher(text).find();
-    }
-
-    public static String[] splitTextWithCustomDelimiter(String text) {
+    public static String[] splitTextWithDelimiter(String text) {
         Matcher matcher = makePatterFindMatcher(text);
-        String customDelimiter = findCustomDelimiter(matcher);
-        return StringUtil.splitText(findInputText(matcher), customDelimiter);
+        if (matcher.find()) {
+            return StringUtil.splitText(findInputText(matcher), findCustomDelimiter(matcher));
+        }
+        return StringUtil.splitText(text, CalculatorInputUtil.DELIMITER);
     }
 
     private static String findInputText(Matcher matcher) {
@@ -26,9 +24,7 @@ public class CalculatorInputUtil {
     }
 
     private static Matcher makePatterFindMatcher(String text) {
-        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
-        matcher.find();
-        return matcher;
+        return CUSTOM_DELIMITER_PATTERN.matcher(text);
     }
 
     private static String findCustomDelimiter(Matcher matcher) {
