@@ -3,10 +3,10 @@ package step3.controller;
 import java.util.ArrayList;
 import java.util.List;
 import step3.domain.Lotto;
+import step3.domain.LottoCount;
 import step3.domain.LottoFactory;
 import step3.domain.LottoResult;
 import step3.domain.Lottos;
-import step3.domain.ManualLottoCount;
 import step3.domain.Money;
 import step3.view.InputView;
 import step3.view.OutputView;
@@ -15,8 +15,8 @@ public class LottoController {
 
     public void play() {
         Money money = inputMoney();
-        ManualLottoCount manualLottoCount = inputManualLottoCount();
-        int autoLottoCount = money.autoLottoCount(manualLottoCount);
+        LottoCount manualLottoCount = inputManualLottoCount();
+        LottoCount autoLottoCount = money.autoLottoCount(manualLottoCount);
 
         Lottos lottos = buyLottos(manualLottoCount, autoLottoCount);
         OutputView.printBuyCount(manualLottoCount, autoLottoCount);
@@ -36,16 +36,16 @@ public class LottoController {
         }
     }
 
-    private ManualLottoCount inputManualLottoCount() {
+    private LottoCount inputManualLottoCount() {
         try {
-            return new ManualLottoCount(InputView.inputManualLottoCount());
+            return new LottoCount(InputView.inputManualLottoCount());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputManualLottoCount();
         }
     }
 
-    private Lottos buyLottos(ManualLottoCount manualLottoCount, int autoLottoCount) {
+    private Lottos buyLottos(LottoCount manualLottoCount, LottoCount autoLottoCount) {
         try {
             List<Lotto> lottos = buy(manualLottoCount, autoLottoCount);
             return new Lottos(lottos);
@@ -73,13 +73,13 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> buy(ManualLottoCount manualLottoCount, int autoLottoCount) {
+    private List<Lotto> buy(LottoCount manualLottoCount, LottoCount autoLottoCount) {
         List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount);
         List<Lotto> lottos = new ArrayList<>();
         for (List<Integer> manualLottoNumber : manualLottoNumbers) {
             lottos.add(LottoFactory.createManualLotto(manualLottoNumber));
         }
-        for (int i = 0; i < autoLottoCount; i++) {
+        for (int i = 0; i < autoLottoCount.get(); i++) {
             lottos.add(LottoFactory.createAutoLotto());
         }
         return lottos;

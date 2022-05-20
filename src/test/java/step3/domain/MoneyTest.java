@@ -26,7 +26,7 @@ class MoneyTest {
     @DisplayName("실제 로또를 구입하는데 투자된 금액을 계산한다.")
     @Test
     void 투자금액_계산() {
-        assertThat(Money.investmentAmount(new ManualLottoCount(4), 1)).isEqualTo(5_000);
+        assertThat(Money.investmentAmount(new LottoCount(4), new LottoCount(1))).isEqualTo(5_000);
     }
 
     @DisplayName("입력된 금액으로 구매가능한 로또 개수를 반환한다.")
@@ -40,6 +40,6 @@ class MoneyTest {
     @CsvSource(value = {"2000:1", "5000:4", "100:0"}, delimiter = ':')
     void 구입가능한_자동로또_개수_반환(int money, int expected) {
         Money actual = new Money(money);
-        assertThat(actual.autoLottoCount(new ManualLottoCount(1))).isEqualTo(expected);
+        assertThat(actual.autoLottoCount(new LottoCount(1)).get()).isEqualTo(expected);
     }
 }

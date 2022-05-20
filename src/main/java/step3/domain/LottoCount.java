@@ -1,16 +1,16 @@
 package step3.domain;
 
-public class ManualLottoCount {
+public class LottoCount {
     private final int element;
 
-    public ManualLottoCount(int element) {
+    public LottoCount(int element) {
         validate(element);
         this.element = element;
     }
 
-    private void validate(int manualLottoCount) {
-        if(manualLottoCount < 0) {
-            throw new IllegalArgumentException("수동로또 구매 개수는 0 이상으로 입력해주세요.");
+    private void validate(int lottoCount) {
+        if(lottoCount < 0) {
+            throw new IllegalArgumentException("로또 구매 개수는 0 이상으로 입력해주세요.");
         }
     }
 
@@ -27,7 +27,7 @@ public class ManualLottoCount {
             return false;
         }
 
-        ManualLottoCount that = (ManualLottoCount) o;
+        LottoCount that = (LottoCount) o;
 
         return element == that.element;
     }
@@ -39,7 +39,7 @@ public class ManualLottoCount {
 
     @Override
     public String toString() {
-        return "manualLottoCount{" +
+        return "LottoCount{" +
                 "element=" + element +
                 '}';
     }

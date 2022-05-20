@@ -1,13 +1,13 @@
 package step3.view;
 
+import step3.domain.LottoCount;
 import step3.domain.LottoResult;
 import step3.domain.Lottos;
-import step3.domain.ManualLottoCount;
 import step3.domain.Ranking;
 
 public class OutputView {
-    public static void printBuyCount(ManualLottoCount manualLottoCount, int autoLottoCount) {
-        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottoCount.get(), autoLottoCount);
+    public static void printBuyCount(LottoCount manualLottoCount, LottoCount autoLottoCount) {
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottoCount.get(), autoLottoCount.get());
     }
 
     public static void printLottos(Lottos lottos) {

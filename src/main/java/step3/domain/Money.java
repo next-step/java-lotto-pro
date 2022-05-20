@@ -16,16 +16,16 @@ public class Money {
         }
     }
 
-    public static int investmentAmount(ManualLottoCount manualLottoCount, int autoLottoCount) {
-        return (manualLottoCount.get() + autoLottoCount) * PRICE_LOTTO;
+    public static int investmentAmount(LottoCount manualLottoCount, LottoCount autoLottoCount) {
+        return (manualLottoCount.get() + autoLottoCount.get()) * PRICE_LOTTO;
     }
 
     public int lottoCount() {
         return element / PRICE_LOTTO;
     }
 
-    public int autoLottoCount(ManualLottoCount manualLottoCount) {
-        return Math.max(lottoCount() - manualLottoCount.get(), 0);
+    public LottoCount autoLottoCount(LottoCount manualLottoCount) {
+        return new LottoCount(Math.max(lottoCount() - manualLottoCount.get(), 0));
     }
 
     @Override
