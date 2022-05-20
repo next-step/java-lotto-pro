@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,13 +28,9 @@ public class Lottos {
     }
 
     public Figures matchedLottos(WinningLotto winningLotto) {
-        Map<LottoRank, Integer> figure = new EnumMap<>(LottoRank.class);
-
-        for (Lotto lotto : lottoList) {
-            LottoRank rank = winningLotto.matches(lotto);
-            int count = figure.getOrDefault(rank, Figures.DEFAULT_RANK_COUNT);
-            figure.put(rank, count+1);
-        }
+        Map<LottoRank, Integer> figure = lottoList.stream()
+                .map(winningLotto::matches)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.collectingAndThen(Collectors.counting(), Long::intValue)));
 
         return new Figures(figure);
     }
