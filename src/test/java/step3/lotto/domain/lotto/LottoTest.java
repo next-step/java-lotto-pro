@@ -6,6 +6,7 @@ import static step3.lotto.domain.lotto.Lotto.INVALID_LOTTO_NUMBER_ERROR;
 import static step3.lotto.domain.lotto.LottoNumber.INVALID_LOTTO_NUMBER_RANGE_ERROR;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -32,6 +33,18 @@ class LottoTest {
 
         // Then
         assertThat(lotto).as("객체 동등성 비교").isEqualTo(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    }
+
+    @Test
+    @DisplayName("Set으로 저장된 6자리 로또 번호 반환시 정렬 여부 검증")
+    public void getLottoNumbersTest() {
+        // Given
+        final List<Integer> given = Arrays.asList(6, 5, 4, 3, 2, 1);
+        Lotto actual = Lotto.of(given);
+
+        // When & Then
+        Collections.sort(given);
+        assertThat(actual).isEqualTo(Lotto.of(given));
     }
 
     @ParameterizedTest

@@ -13,7 +13,7 @@ public class InputView {
     private static final String INPUT_PRICE_GUIDE_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String PURCHASE_COMPLETION_GUIDE_MESSAGE = "%s개를 구매했습니다.";
     private static final String INPUT_LAST_WINNINGS_LOTTO_GUIDE_MESSAGE = "지난 주 당첨 번호를 입력해주세요.";
-    private static final String INPUT_BONUS_NUMBER_GUIDE_MESSAGE = "지난 주 당첨 번호를 입력해주세요.";
+    private static final String INPUT_BONUS_NUMBER_GUIDE_MESSAGE = "보너스 번호를 입력해주세요.";
 
     public static void printInputPriceGuideMessage() {
         System.out.println(INPUT_PRICE_GUIDE_MESSAGE);
@@ -30,7 +30,7 @@ public class InputView {
 
     private static void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(lotto);
+            System.out.println(lotto.getSortedLottoNumbers());
         }
         System.out.println();
     }

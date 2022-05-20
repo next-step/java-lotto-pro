@@ -235,4 +235,14 @@ public enum Rank {
     - 리팩토링에 따른 코드 변경 :
       - 자료구조 변경에 따른 Lotto 객체 생성 시 예외 처리 TC 통합
       - UI를 위한 정렬 로직 제거
+      
+  - [x] UI를 위한 로또 번호 정렬 로직 수정
+    - Lotto 객체 필드의 자료구조 변경에 따른 정렬 처리 추가
+      - Lotto 객체의 List<LottoNumber> 반환 시, Comparable을 이용하여 정렬 후 반환
+      - 정렬 처리 추가에 따른 Test Case 추가
+      
+    - 로또 번호 정렬 로직 위치 변경
+      - AS-IS : Lotto 객체 생성 시점
+      - TO-BE : 정렬 후 반환하는 별도의 메소드 제공
+                
 ---

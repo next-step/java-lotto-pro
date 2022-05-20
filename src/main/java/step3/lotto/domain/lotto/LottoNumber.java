@@ -6,7 +6,7 @@ import java.util.Objects;
  * @author : choi-ys
  * @date : 2022/05/15 8:12 오후
  */
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int LOTTO_NUMBER_START_RANGE = 1;
     public static final int LOTTO_NUMBER_END_RANGE = 45;
@@ -57,5 +57,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return "" + lottoNumber;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(this.getLottoNumber(), o.getLottoNumber());
     }
 }

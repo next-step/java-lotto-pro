@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author : choi-ys
@@ -47,6 +48,10 @@ public class Lotto {
         return lottoNumbers.contains(winningsLottoNumber);
     }
 
+    public List<LottoNumber> getSortedLottoNumbers() {
+        return toSortedList();
+    }
+
     private static void validateLottoNumber(int size) {
         if (isInValidLottoCount(size)) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_ERROR);
@@ -57,6 +62,10 @@ public class Lotto {
         return size != LOTTO_NUMBER_COUNT;
     }
 
+    private List<LottoNumber> toSortedList() {
+        return lottoNumbers.stream().sorted().collect(Collectors.toList());
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {
