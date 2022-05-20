@@ -14,19 +14,19 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoWinResult;
 import lotto.domain.LottoWinStatistics;
-import lotto.domain.Lottos;
+import lotto.domain.PurchaseLottos;
 
 public class ResultView {
 
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    public void purchase(final Lottos lottos) {
-        System.out.printf(PURCHASE_LOTTO_COUNT_MESSAGE, lottos.manualSize(), lottos.autoSize());
-        printLottos(lottos);
+    public void purchase(final PurchaseLottos purchaseLottos) {
+        System.out.printf(PURCHASE_LOTTO_COUNT_MESSAGE, purchaseLottos.manualSize(), purchaseLottos.autoSize());
+        printLottos(purchaseLottos);
     }
 
-    private void printLottos(final Lottos lottos) {
-        lottos.each(this::printLotto);
+    private void printLottos(final PurchaseLottos purchaseLottos) {
+        purchaseLottos.totalLottos().each(this::printLotto);
         System.out.println();
     }
 

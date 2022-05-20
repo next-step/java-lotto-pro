@@ -60,18 +60,6 @@ public class Lottos {
                 .toArray(new Lotto[0]));
     }
 
-    public int manualSize() {
-        return (int) lottoList.stream()
-                .filter(Lotto::isManual)
-                .count();
-    }
-
-    public int autoSize() {
-        return (int) lottoList.stream()
-                .filter(Lotto::isAuto)
-                .count();
-    }
-
     @Override
     public boolean equals(final Object o) {
         if (this == o) {

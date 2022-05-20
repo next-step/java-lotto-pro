@@ -90,14 +90,4 @@ class LottosTest {
                 lottos(lotto(1, 2, 3, 4, 5, 6), lotto(7, 8, 9, 10, 11, 12)));
     }
 
-    @Test
-    void 로또_타입별_갯수확인() {
-        // given
-        final Lottos lottos = lottos(lotto(1, 2, 3, 4, 5, 6), Lotto.generate(), Lotto.generate());
-
-        // when & then
-        assertThat(lottos.autoSize()).isEqualTo(2);
-        assertThat(lottos.manualSize()).isEqualTo(1);
-
-    }
 }

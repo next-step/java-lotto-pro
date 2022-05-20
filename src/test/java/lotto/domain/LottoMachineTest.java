@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.LottoTestUtils.lotto;
 import static lotto.LottoTestUtils.lottos;
+import static lotto.LottoTestUtils.purchaseLottos;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -17,7 +18,7 @@ class LottoMachineTest {
     @DisplayName("발급 성공 테스트")
     void 발급_테스트() {
         // when & then
-        assertThat(LottoMachine.purchase("2000", new String[]{"1,2,3,4,5,6"})).isInstanceOf(Lottos.class);
+        assertThat(LottoMachine.purchase("2000", new String[]{"1,2,3,4,5,6"})).isInstanceOf(PurchaseLottos.class);
     }
 
     @Test
@@ -41,16 +42,16 @@ class LottoMachineTest {
     @DisplayName("수동 구매 테스트")
     void 수동으로_구매_테스트() {
         // when & then
-        final Lottos lottos = LottoMachine.purchase("1000", new String[]{"1,2,3,4,5,6"});
-        assertThat(lottos).isEqualTo(lottos(lotto(1, 2, 3, 4, 5, 6)));
+        final PurchaseLottos actual = LottoMachine.purchase("1000", new String[]{"1,2,3,4,5,6"});
+        assertThat(actual).isEqualTo(purchaseLottos(lottos(lotto(1, 2, 3, 4, 5, 6)), lottos()));
     }
 
     @Test
     @DisplayName("수동을 0장 구매할떄 테스트")
     void 수동으로_구매_0_테스트() {
         // when & then
-        final Lottos lottos = LottoMachine.purchase("1000", new String[]{});
-        assertThat(lottos).isInstanceOf(Lottos.class);
+        final PurchaseLottos purchaseLottos = LottoMachine.purchase("1000", new String[]{});
+        assertThat(purchaseLottos).isInstanceOf(PurchaseLottos.class);
     }
 
     @Test

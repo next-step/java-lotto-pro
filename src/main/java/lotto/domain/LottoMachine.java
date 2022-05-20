@@ -12,10 +12,10 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static Lottos purchase(final String purchaseMoneyString, final String[] manualNumbersStrings) {
+    public static PurchaseLottos purchase(final String purchaseMoneyString, final String[] manualNumbersStrings) {
         final Money calculateAutoMoney = calculateAutoMoney(Money.valueOf(purchaseMoneyString), manualNumbersStrings.length);
         validatePurchaseMoney(calculateAutoMoney, manualNumbersStrings.length);
-        return purchaseManual(manualNumbersStrings).addAll(purchase(calculateAutoMoney));
+        return PurchaseLottos.of(purchaseManual(manualNumbersStrings), purchase(calculateAutoMoney));
     }
 
     private static Lottos purchaseManual(final String[] manualNumbersString) {

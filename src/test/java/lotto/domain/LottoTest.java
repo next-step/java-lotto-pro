@@ -5,10 +5,6 @@ import static lotto.LottoTestUtils.winningNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
-import lotto.LottoTestUtils;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoWinResult;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -43,16 +39,4 @@ class LottoTest {
         );
     }
 
-    @Test
-    void 로또_자동_수동_확인() {
-        // given
-        final Lotto auto = Lotto.generate();
-        final Lotto manual = Lotto.generate(lottoNumbers(1, 2, 3, 4, 5, 6));
-
-        // when & then
-        assertThat(auto.isAuto()).isTrue();
-        assertThat(auto.isManual()).isFalse();
-        assertThat(manual.isAuto()).isFalse();
-        assertThat(manual.isManual()).isTrue();
-    }
 }
