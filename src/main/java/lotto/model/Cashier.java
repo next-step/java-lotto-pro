@@ -13,6 +13,10 @@ public class Cashier {
         return this.receiveAmount;
     }
 
+    public int buyCount () {
+        return this.receiveAmount / Config.LOTTO_ONE_GAME_PRICE;
+    }
+
     private int checkAmount(int amount) {
         if (amount < Config.LOTTO_ONE_GAME_PRICE) {
             throw new IllegalArgumentException(String.format("최소 금액은 %d원 이상입니다.", Config.LOTTO_ONE_GAME_PRICE));

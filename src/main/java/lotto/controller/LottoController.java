@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.*;
 import lotto.model.Cashier;
 import lotto.model.Lottos;
 import lotto.model.Organizer;
@@ -9,11 +8,10 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
-    private static final Store store = new Store(Config.LOTTO_ONE_GAME_PRICE);
-
     public static void buy() {
         Cashier cashier = new Cashier(InputView.inputBuyAmount());
-        Lottos lottos = store.giveLotto(cashier.receiveAmount());
+        Store store = new Store(cashier.buyCount());
+        Lottos lottos = store.giveLotto();
         ResultView.printLottoNumbers(lottos);
 
         Organizer organizer = new Organizer(InputView.inputWinningNumbers());

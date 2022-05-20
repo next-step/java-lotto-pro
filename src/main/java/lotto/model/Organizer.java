@@ -1,9 +1,6 @@
 package lotto.model;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Organizer {
@@ -37,26 +34,26 @@ public class Organizer {
     }
 
     public String winningRate(int buyAmount) {
-        return String.format("%.2f", this.totalWinningMoney / (double) buyAmount);
+        return String.format("%.2f", Math.floor((double) this.totalWinningMoney / buyAmount * 100) / 100);
     }
 
     private void initWinningResult() {
         this.winningResults = new HashMap<>();
-        for (WinningInfo winningInfo : WinningInfo.values()) {
-            winningResults.put(winningInfo.sameCount(), INIT_RESULT_COUNT);
+        for (Rank rank : Rank.values()) {
+            winningResults.put(rank.sameCount(), INIT_RESULT_COUNT);
         }
     }
 
     private void countWinning(int sameCount) {
-        if (sameCount < WinningInfo.SAME_COUNT_3.sameCount()) {
+        if (sameCount < Rank.FIFTH.sameCount()) {
             return;
         }
-        this.totalWinningMoney += winningMoney(sameCount);
-        this.winningResults.put(sameCount, this.winningResults.get(sameCount) + 1);
-    }
+        Optional<Rank> winningRank = Rank.matchCountOf(sameCount);
+        if (winningRank.isPresent()) {
+            this.totalWinningMoney += winningRank.get().winningMoney();
+            this.winningResults.put(sameCount, this.winningResults.get(sameCount) + 1);
+        }
 
-    private int winningMoney(int sameCount) {
-        return WinningInfo.valueOfSameCount(sameCount).winningMoney();
     }
 
     private int compare(int number) {

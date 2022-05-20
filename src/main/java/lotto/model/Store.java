@@ -1,13 +1,17 @@
 package lotto.model;
 
 public class Store {
-    private final int lottoOneGamePrice;
+    private final int createCount;
 
-    public Store(int lottoPrice) {
-        this.lottoOneGamePrice = lottoPrice;
+    public Store(int count) {
+        this.createCount = count;
     }
 
-    public Lottos giveLotto(int receiveMoney) {
-        return new Lottos(receiveMoney / lottoOneGamePrice);
+    public int giveCount() {
+        return this.createCount;
+    }
+
+    public Lottos giveLotto() {
+        return new Lottos(this.createCount);
     }
 }
