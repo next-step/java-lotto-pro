@@ -5,18 +5,18 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class ManualCount {
+public class Count {
     private final int value;
 
-    public ManualCount(int value) {
+    public Count(int value) {
         this.value = value;
     }
 
-    public static ManualCount from(String value) {
+    public static Count from(String value) {
         if (!isNumber(value)) {
             throw new IllegalArgumentException("양수만 입력 가능합니다");
         }
-        return new ManualCount(Integer.parseInt(value));
+        return new Count(Integer.parseInt(value));
     }
 
     private static boolean isNumber(String value) {

@@ -11,14 +11,14 @@ public class LottoController {
 
     public static void main(String[] args) {
         LottoCharge charge = LottoCharge.from(view.inputCharge());
-        ManualCount count = ManualCount.from(view.inputManualCount());
-        LottoCharge restCharge = charge.spend(count);
+        Count manualCount = Count.from(view.inputManualCount());
+        LottoCharge restCharge = charge.spend(manualCount);
 
         view.inputManualNumbersMessage();
-        List<Lotto> manualLottos = count.toList(() -> Lotto.manual(view.inputManualNumbers()));
+        List<Lotto> manualLottos = manualCount.toList(() -> Lotto.manual(view.inputManualNumbers()));
 
         Lottos lottos = Lottos.buy(manualLottos, restCharge);
-        view.showLottos(count, restCharge, lottos);
+        view.showLottos(manualCount, restCharge, lottos);
 
         Lotto answer = new Lotto(view.inputAnswer());
         Number bonus = Number.from(view.inputBonus());

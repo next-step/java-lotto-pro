@@ -43,8 +43,8 @@ public class LottoCharge {
                 .doubleValue();
     }
 
-    public LottoCharge spend(ManualCount count) {
-        int spendCharge = count.multiply(LOTTO_PRICE);
+    public LottoCharge spend(Count manualCount) {
+        int spendCharge = manualCount.multiply(LOTTO_PRICE);
         if (value < spendCharge) {
             throw new IllegalArgumentException("구입금액보다 많은 수를 살 수 없습니다.");
         }
