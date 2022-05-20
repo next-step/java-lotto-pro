@@ -19,6 +19,7 @@ public class RankResult {
 				put(Rank.SECOND, ZERO);
 				put(Rank.THIRD, ZERO);
 				put(Rank.FOURTH, ZERO);
+				put(Rank.FIFTH, ZERO);
 				put(Rank.NONE, ZERO);
 			}
 		};
@@ -31,6 +32,7 @@ public class RankResult {
 	public List<PrizeReport> getReport() {
 		List<PrizeReport> prizes = new ArrayList<>();
 
+		prizes.add(new PrizeReport(Rank.FIFTH, resultMap.get(Rank.FIFTH)));
 		prizes.add(new PrizeReport(Rank.FOURTH, resultMap.get(Rank.FOURTH)));
 		prizes.add(new PrizeReport(Rank.THIRD, resultMap.get(Rank.THIRD)));
 		prizes.add(new PrizeReport(Rank.SECOND, resultMap.get(Rank.SECOND)));
@@ -43,9 +45,10 @@ public class RankResult {
 	public double compileStatistics(int cost) {
 		int divisionNumber = cost > 0 ? cost : 1;
 		int totalPrize = resultMap.get(Rank.FIRST) * Rank.FIRST.getPrizeMoney()
-							+ resultMap.get(Rank.SECOND) * Rank.SECOND.getPrizeMoney()
-							+ resultMap.get(Rank.THIRD) * Rank.THIRD.getPrizeMoney()
-							+ resultMap.get(Rank.FOURTH) * Rank.FOURTH.getPrizeMoney();
+			+ resultMap.get(Rank.SECOND) * Rank.SECOND.getPrizeMoney()
+			+ resultMap.get(Rank.THIRD) * Rank.THIRD.getPrizeMoney()
+			+ resultMap.get(Rank.FOURTH) * Rank.FOURTH.getPrizeMoney()
+			+ resultMap.get(Rank.FIFTH) * Rank.FIFTH.getPrizeMoney();
 
 		double rate = totalPrize / (double)divisionNumber;
 
