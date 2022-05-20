@@ -30,8 +30,8 @@ public class InputView {
 
     public List<String> getManualLotto(int manualTicket) {
         List<String> manualLottoTicketsSource = new ArrayList<>();
-        System.out.println(GET_MANUAL_LOTTO_MESSAGE);
         for (int i = 0; i < manualTicket; i++) {
+            System.out.println(GET_MANUAL_LOTTO_MESSAGE);
             manualLottoTicketsSource.add(customTrim(scanIn.nextLine()));
         }
         return manualLottoTicketsSource;
