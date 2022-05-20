@@ -10,7 +10,7 @@ import step3.enums.LottoReward;
 public class OutputView {
 
     private final String REWARD_RATE_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
-    private final String LOTTOS_INFO_FORMAT = "%s개를 구매했습니다.";
+    private final String LOTTOS_INFO_FORMAT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     private final String OVERVIEW_INIT_MESSAGE = "\n당첨 통계\n---------";
     private final String IS_LOSS = "손해";
     private final String IS_BENEFIT = "이득";
@@ -21,7 +21,7 @@ public class OutputView {
         initOverviewMap();
     }
 
-    public void printOutput(Map<LottoReward, Integer> statistics,int usingMoney) {
+    public void printOutput(Map<LottoReward, Integer> statistics, int usingMoney) {
         System.out.println(OVERVIEW_INIT_MESSAGE);
         long reward = printOverview(statistics);
         printRewardRate(reward, usingMoney);
@@ -60,8 +60,8 @@ public class OutputView {
         return lottoReward.getReward() * matchCount;
     }
 
-    public void printLottoInfo(List<List<LottoElement>> lottoNumbers) {
-        System.out.println(String.format(LOTTOS_INFO_FORMAT, lottoNumbers.size()));
+    public void printLottoInfo(List<List<LottoElement>> lottoNumbers, int manualTicket, int randomTicket) {
+        System.out.println(String.format(LOTTOS_INFO_FORMAT, manualTicket, randomTicket));
         for (List<LottoElement> lottoNumber : lottoNumbers) {
             System.out.println(lottoNumber.toString());
         }

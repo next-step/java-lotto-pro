@@ -32,7 +32,7 @@ public class LottoController {
         List<LottoTicket> randomLottoTickets = lottoMachine.makeRandomLottoTickets(ticket);
         user.addLottoTickets(manualLottoTickets);
         user.addLottoTickets(randomLottoTickets);
-        outputView.printLottoInfo(user.getLottoNumbers());
+        outputView.printLottoInfo(user.getLottoNumbers(), manualTicket, randomTicket);
 
         setWinnerLotto(); /*정상 값을 입력할때까지 반복입력*/
         setBonusNumber(); /*정상 값을 입력할때까지 반복입력*/
