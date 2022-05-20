@@ -20,8 +20,12 @@ public class GameManager {
     public void run() {
         LottoVendingMachine machine = new LottoVendingMachine(new LottoNumbersGeneratorKr());
 
-        LottoTicket lottoTicket = machine.sellTicket(money(), manualLottoGames(numberOfManualLottoGames().getValue()));
-        ResultView.printTicket(lottoTicket);
+        Money money = money();
+        int numberOfManual = numberOfManualLottoGames().getValue();
+        LottoTicket lottoTicket = machine.sellTicket(money, manualLottoGames(numberOfManual));
+        int numberOfGames = lottoTicket.numberOfGames(money);
+        int numberOfAuto = numberOfGames - numberOfManual;
+        ResultView.printTicket(numberOfAuto, numberOfManual, lottoTicket);
 
         WinningNumbers winningNumbers = winningNumbers();
         LottoNumber bonusLottoNumber = bonusLottoNumber(winningNumbers);

@@ -11,9 +11,9 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printTicket(LottoTicket lottoTicket) {
+    public static void printTicket(int auto, int manual, LottoTicket lottoTicket) {
         System.out.println();
-        System.out.println(lottoTicket.size() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + manual + "개, 자동으로 " + auto + "개를 구매했습니다.");
         System.out.println(lottoTicket);
     }
 
