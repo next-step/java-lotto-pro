@@ -14,12 +14,36 @@ public class LottoController {
 
     public Lottos buy() {
         Money purchaseAmount = Money.of(InputView.inputPurchaseAmount());
-        Lottos buy = lottoMachine.buy(purchaseAmount);
+        LottoCount purchaseCount = LottoPrice.purchase(purchaseAmount);
+        LottoCount manualCount = new LottoCount(InputView.inputManualLottoCount());
 
-        ResultView.printPurchaseCount(buy);
+        LottoCount autoCount = purchaseCount.minus(manualCount);
+        Lottos buy = buyLottos(autoCount, manualCount);
+
+        ResultView.printPurchaseCount(autoCount, manualCount);
         ResultView.printLottos(buy);
 
         return buy;
+    }
+
+    private Lottos buyLottos(LottoCount autoCount, LottoCount manualCount) {
+        Lottos manualLottos = buyManualLottos(manualCount);
+        Lottos autoLottos = buyAutoLottos(autoCount);
+
+        manualLottos.merge(autoLottos);
+        return manualLottos;
+    }
+
+    private Lottos buyManualLottos(LottoCount manualCount) {
+        if (manualCount.isZero()) {
+            return new Lottos();
+        }
+        ManualLottoNumbers manualLottoNumbers = new ManualLottoNumbers(InputView.inputManualLotto(manualCount));
+        return lottoMachine.buy(new ManualLottoGenerator(manualLottoNumbers));
+    }
+
+    private Lottos buyAutoLottos(LottoCount autoCount) {
+        return lottoMachine.buy(new AutoLottoGenerator(autoCount));
     }
 
     public WinningStatistic checkWinning(Lottos buy) {

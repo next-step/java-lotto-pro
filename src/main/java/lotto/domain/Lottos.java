@@ -9,6 +9,12 @@ public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
+    public Lottos() {}
+
+    public Lottos(List<Lotto> input) {
+        lottos.addAll(input);
+    }
+
     public void add(Lotto lotto) {
         lottos.add(lotto);
     }
@@ -32,5 +38,9 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public void merge(Lottos autoLottos) {
+        lottos.addAll(autoLottos.lottos);
     }
 }

@@ -4,7 +4,7 @@ import lotto.view.message.dto.MatchResultParameters;
 
 public enum ResultMessage {
 
-    BUY_LOTTO("%d개를 구매했습니다.")
+    BUY_LOTTO("수동으로 %d장, 자동으로 %d장을 구매했습니다.")
     , WINNER_STATISTICS("당첨 통계")
     , WINNER_MATCH_RESULT("%d개 일치 (%s원) - %d개")
     , WINNER_MATCH_BONUS_RESULT("%d개 일치, 보너스 볼 일치 (%s원) - %d개")

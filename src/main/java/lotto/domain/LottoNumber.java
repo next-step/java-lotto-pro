@@ -1,22 +1,48 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.*;
+
+import static lotto.domain.LottoNumberGenerator.MAX_NUMBER;
+import static lotto.domain.LottoNumberGenerator.MIN_NUMBER;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private final int number;
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = createLottoNumberCache();
 
-    public LottoNumber(String number) {
-        try {
-            number = number.trim();
-            this.number = Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("로또 번호는 숫자여야 합니다.");
-        }
-    }
+    private final int number;
 
     public LottoNumber(Integer number) {
         this.number = number;
+    }
+
+    public static LottoNumber of(int number) {
+        LottoNumber lottoNumber = LOTTO_NUMBER_CACHE.get(number);
+        if (lottoNumber == null) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45까지입니다.");
+        }
+        return lottoNumber;
+    }
+
+    public static LottoNumber of(String number) {
+        int lottoNumber = getLottoNumber(number);
+        return of(lottoNumber);
+    }
+
+    private static Map<Integer, LottoNumber> createLottoNumberCache() {
+        Map<Integer, LottoNumber> cache = new HashMap<>();
+        for (int i = MIN_NUMBER; i < MAX_NUMBER; i++) {
+            cache.put(i, new LottoNumber(i));
+        }
+        return Collections.unmodifiableMap(cache);
+    }
+
+    private static int getLottoNumber(String number) {
+        try {
+            number = number.trim();
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("로또 번호는 숫자여야 합니다.");
+        }
     }
 
     @Override

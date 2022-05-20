@@ -6,7 +6,7 @@ public class WinningLotto extends Lotto {
 
     public WinningLotto(String numbers, String bonusBall) {
         super(getLottoNumbers(numbers));
-        this.bonusBall = new LottoNumber(bonusBall);
+        this.bonusBall = LottoNumber.of(bonusBall);
         validateDuplicate();
     }
 

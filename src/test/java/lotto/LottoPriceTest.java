@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.controller.LottoCount;
 import lotto.domain.LottoPrice;
 import lotto.domain.Money;
 import org.junit.jupiter.api.Test;
@@ -14,9 +15,9 @@ class LottoPriceTest {
     @Test
     void 로또금액을_입력받으면_구매_가능한_로또_개수를_반환한다() {
         // when
-        int count = LottoPrice.purchase(Money.of(5000));
+        LottoCount count = LottoPrice.purchase(Money.of(5000));
         // then
-        assertThat(count).isEqualTo(5);
+        assertThat(count.count()).isEqualTo(5);
     }
 
     @ValueSource(ints = {-1000, 0, 999})

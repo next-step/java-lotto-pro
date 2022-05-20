@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.controller.LottoCount;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,6 +23,28 @@ public class InputView {
 
     public static String inputBonusBall() {
         return input(ENTER_BONUS_BALL.message());
+    }
+
+    public static String inputManualLottoCount() {
+        return input(ENTER_MANUAL_LOTTO_COUNT.message());
+    }
+
+    public static String[] inputManualLotto(LottoCount lottoCount) {
+        try {
+            System.out.println(ENTER_MANUAL_LOTTO_NUMBERS.message());
+            int count = lottoCount.count();
+            return inputNumbers(count);
+        } catch (IOException e) {
+            throw new RuntimeException(IO_EXCEPTION_OCCURRED);
+        }
+    }
+
+    private static String[] inputNumbers(int count) throws IOException {
+        String[] numbers = new String[count];
+        for (int i = 0; i < count; i++) {
+            numbers[i] = br.readLine();
+        }
+        return numbers;
     }
 
     private static String input(String message) {

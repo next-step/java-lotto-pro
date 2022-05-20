@@ -1,14 +1,16 @@
 package lotto.domain;
 
+import lotto.controller.LottoCount;
+
 public class LottoPrice {
 
     private static final Money PRICE = Money.of(1000);
 
-    public static int purchase(Money money) {
+    public static LottoCount purchase(Money money) {
         if (money.isLessThan(PRICE)) {
             throw new IllegalArgumentException("로또 1개 가격은 1000원입니다.");
         }
-        return money.divide(PRICE);
+        return new LottoCount(money.divide(PRICE));
     }
 
     public static Money calculatePurchaseAmount(int count) {
