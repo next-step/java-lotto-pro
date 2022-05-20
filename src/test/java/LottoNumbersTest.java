@@ -7,6 +7,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class LottoNumbersTest {
+    @Test()
+    void LottoNumbers_는_문자열_포맷으로_생성할_수_있다() {
+        assertDoesNotThrow(() -> new LottoNumbers("1, 2, 3, 4, 5, 6", Application.SEPARATOR));
+    }
+
+
     @Test
     void LottoNumbers_는_6개의_LottoNumber_를_포함할_수_있다() {
         assertDoesNotThrow(
@@ -34,6 +40,12 @@ public class LottoNumbersTest {
         ).isInstanceOf(RuntimeException.class);
 
         assertThatThrownBy(LottoNumbers::new)
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test()
+    void LottoNumbers_는_적절한_문자열_포맷이_아니면_생성할_수_없다() {
+        assertThatThrownBy(() -> new LottoNumbers("1, 2, 3, 4, 5: 6", Application.SEPARATOR))
                 .isInstanceOf(RuntimeException.class);
     }
 
@@ -99,5 +111,26 @@ public class LottoNumbersTest {
                 new LottoNumber(2),
                 new LottoNumber(1)
         );
+    }
+
+    @Test
+    void LottoNumbers는_사이즈가_동일하고_같은_원소를_순서_상관없이_모두_포함하고_있으면_같다고_생각한다() {
+        LottoNumbers lottoNumbers = new LottoNumbers(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        );
+
+        assertThat(lottoNumbers).isEqualTo(new LottoNumbers(
+                new LottoNumber(6),
+                new LottoNumber(5),
+                new LottoNumber(4),
+                new LottoNumber(3),
+                new LottoNumber(2),
+                new LottoNumber(1)
+        ));
     }
 }

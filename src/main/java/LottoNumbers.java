@@ -1,11 +1,18 @@
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers implements Iterable<LottoNumber> {
     public static final int SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
+
+    public LottoNumbers(String lottoNumbers, String separator) {
+        this(Arrays.stream(lottoNumbers.split(separator))
+                .map(splitLottoNumber -> new LottoNumber(Integer.parseInt(splitLottoNumber)))
+                .collect(Collectors.toList()));
+    }
 
     public LottoNumbers(LottoNumber... lottoNumbers) {
         check(Arrays.asList(lottoNumbers));
@@ -36,16 +43,29 @@ public class LottoNumbers implements Iterable<LottoNumber> {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoNumbers)) {
+            return false;
+        }
+        LottoNumbers that = (LottoNumbers) o;
+        return this.lottoNumbers.size() == that.lottoNumbers.size() && this.lottoNumbers.containsAll(that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
+
+    @Override
     public Iterator<LottoNumber> iterator() {
         return this.lottoNumbers.iterator();
     }
 
     @Override
     public String toString() {
-        return "[" +
-                this.lottoNumbers.stream()
-                        .map(LottoNumber::toString)
-                        .collect(Collectors.joining(", ")) +
-                "]";
+        return "[" + this.lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(", ")) + "]";
     }
 }

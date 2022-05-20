@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,5 +52,11 @@ class RanksTest {
     @Test
     void 당첨_되면_받을_상금을_계산할_수_있다() {
         assertThat(ranks.totalMoney()).isEqualTo(Arrays.stream(Rank.values()).mapToLong(Rank::money).sum());
+    }
+
+    @Test
+    void 수익률을_계산할_수_있다() {
+        BigDecimal yield = ranks.yield();
+        assertThat(yield.setScale(2, RoundingMode.DOWN).doubleValue()).isEqualTo(169296.25);
     }
 }
