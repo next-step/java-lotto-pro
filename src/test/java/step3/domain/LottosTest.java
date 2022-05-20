@@ -14,6 +14,7 @@ class LottosTest {
     void beforeEach() {
         lottos = new Lottos(Arrays.asList(
                 LottoFactory.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                LottoFactory.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 10)),
                 LottoFactory.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 16)),
                 LottoFactory.createManualLotto(Arrays.asList(1, 2, 3, 4, 15, 16)),
                 LottoFactory.createManualLotto(Arrays.asList(1, 2, 3, 14, 15, 16)),
@@ -21,10 +22,10 @@ class LottosTest {
         ));
     }
 
-    @ParameterizedTest
-    @EnumSource(value = Ranking.class, names = {"FIRST", "THIRD", "FOURTH", "FIFTH", "NONE"})
+    @ParameterizedTest(name = "모든 로또의 당첨내역을 확인한다.")
+    @EnumSource(value = Ranking.class, names = {"FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "NONE"})
     void 전체_로또_매칭_결과(Ranking ranking) {
-        LottoResult lottoResult = lottos.allMatch(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoResult lottoResult = lottos.allMatch(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
         assertThat(lottoResult.rankingCount(ranking)).isEqualTo(1);
     }
 }

@@ -3,14 +3,34 @@ package step3.domain;
 import java.util.List;
 
 public class WinnerLotto {
-    private final Lotto lotto;
+    private final Lotto winnerLotto;
+    private final LottoNumber bonusNumber;
 
-    public WinnerLotto(List<Integer> winnerNumbers) {
-        this.lotto = LottoFactory.createManualLotto(winnerNumbers);
+    public WinnerLotto(List<Integer> winnerNumbers, int bonusNumber) {
+        this.winnerLotto = LottoFactory.createManualLotto(winnerNumbers);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
-    public List<LottoNumber> lottoNumbers() {
-        return lotto.sortedLottoNumbers();
+    public List<LottoNumber> winnerLottoNumbers() {
+        return winnerLotto.sortedLottoNumbers();
+    }
+
+    public Ranking matchRanking(Lotto lotto) {
+        List<LottoNumber> lottoNumbers = lotto.sortedLottoNumbers();
+        int hitCount = hitCount(lottoNumbers);
+        boolean isMatchBonusNumber = matchBonusNumber(lottoNumbers);
+        return Ranking.findRanking(hitCount, isMatchBonusNumber);
+    }
+
+    private int hitCount(List<LottoNumber> lottoNumbers) {
+        return (int) winnerLottoNumbers().stream()
+                .filter(lottoNumbers::contains)
+                .count();
+    }
+
+    private boolean matchBonusNumber(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .anyMatch(bonusNumber::equals);
     }
 
     @Override
@@ -22,11 +42,11 @@ public class WinnerLotto {
             return false;
         }
         WinnerLotto that = (WinnerLotto) o;
-        return lotto.equals(that.lotto);
+        return winnerLotto.equals(that.winnerLotto);
     }
 
     @Override
     public int hashCode() {
-        return lotto.hashCode();
+        return winnerLotto.hashCode();
     }
 }

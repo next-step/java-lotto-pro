@@ -5,15 +5,15 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    Lottos(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public LottoResult allMatch(List<Integer> winnerNumbers) {
+    public LottoResult allMatch(List<Integer> winnerNumbers, int bonusNumber) {
+        WinnerLotto winnerLotto = new WinnerLotto(winnerNumbers, bonusNumber);
         LottoResult lottoResult = new LottoResult();
         lottos.forEach(lotto -> {
-            int matchCount = lotto.match(new WinnerLotto(winnerNumbers));
-            Ranking ranking = Ranking.findRanking(matchCount);
+            Ranking ranking = winnerLotto.matchRanking(lotto);
             lottoResult.updateHitRanking(ranking);
         });
         return lottoResult;
