@@ -31,7 +31,8 @@ class LottoNumberTest {
         LottoNumber given = LottoNumber.of(1);
 
         // When
-        assertThat(given.equals(LottoNumber.of(1))).isTrue();
+        assertThat(given).as("객체 동등성 비교").isEqualTo(LottoNumber.of(1));
+        assertThat(given).as("객체 동일성 비교").isSameAs(LottoNumber.of(1));
     }
 
     @ParameterizedTest

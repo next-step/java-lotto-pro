@@ -1,5 +1,7 @@
 package step3.lotto.domain.lotto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -11,6 +13,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOTTO_NUMBER_START_RANGE = 1;
     public static final int LOTTO_NUMBER_END_RANGE = 45;
     public static final String INVALID_LOTTO_NUMBER_RANGE_ERROR = "1~45 범위의 값만 입력하세요.";
+    private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+
+    static {
+        for (int i = LOTTO_NUMBER_START_RANGE; i <= LOTTO_NUMBER_END_RANGE; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
 
     private int lottoNumber;
 
@@ -20,7 +29,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber of(int number) {
         validateLottoNumberRange(number);
-        return new LottoNumber(number);
+        return lottoNumbers.get(number);
     }
 
     private static void validateLottoNumberRange(int number) {
