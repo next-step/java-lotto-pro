@@ -23,4 +23,8 @@ public class Money {
     public int lottoCount() {
         return element / PRICE_LOTTO;
     }
+
+    public int autoLottoCount(int manualLottoCount) {
+        return Math.max(lottoCount() - manualLottoCount, 0);
+    }
 }
