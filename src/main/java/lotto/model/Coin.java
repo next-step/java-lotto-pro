@@ -5,7 +5,8 @@ public class Coin {
     private static final int LOTTO_PRICE = 1000;
 
     public Coin(String money) {
-        this.deposit = invalidMoneyCheck(money);
+        invalidMoneyCheck(money);
+        this.deposit = Integer.parseInt(money) / LOTTO_PRICE * LOTTO_PRICE;
         minimumPriceCheck();
     }
 
@@ -17,9 +18,9 @@ public class Coin {
         return deposit / LOTTO_PRICE;
     }
 
-    private int invalidMoneyCheck(String money) {
+    private void invalidMoneyCheck(String money) {
         try {
-            return Integer.parseInt(money);
+            Integer.parseInt(money);
         } catch (Exception e) {
             throw new IllegalArgumentException("유효하지 않은 값입니다.");
         }
