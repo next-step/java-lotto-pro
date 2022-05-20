@@ -61,4 +61,4 @@
 - [X] 사용하지 않는 소스 제거 - LottoBuyStrategy
 - [X] WinLottoNumbers 생성자에서 유효성 검사하도록 리팩토링
 - [X] WinLottoNumbers Builder 필수 파라미터 받도록 리팩토링
-- 
+- [X] 테스트 메서드가 먼저 나오도록 수정

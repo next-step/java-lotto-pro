@@ -11,11 +11,6 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
-
-    private static IntStream provideValidNumber() {
-        return IntStream.range(1, 46);
-    }
-
     @ParameterizedTest
     @ValueSource(strings = {"0", "-1", "46"})
     @NullAndEmptySource
@@ -31,4 +26,9 @@ public class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber(input);
         assertThat(lottoNumber).isEqualTo(new LottoNumber(input));
     }
+
+    private static IntStream provideValidNumber() {
+        return IntStream.range(1, 46);
+    }
+
 }

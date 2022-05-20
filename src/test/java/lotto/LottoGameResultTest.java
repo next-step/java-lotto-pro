@@ -22,6 +22,36 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoGameResultTest {
 
+    @ParameterizedTest
+    @MethodSource("provideLottoGameResultWithTotalPrize")
+    void 당첨총액_계산(List<LottoRank> rankList, Long expected) {
+        LottoGameResult lottoGameResult = new LottoGameResult(rankList);
+        assertThat(lottoGameResult.totalPrize()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideLottoGameResultWithYield")
+    void 수익률_계산(List<LottoRank> rankList, Double yield) {
+        LottoGameResult lottoGameResult = new LottoGameResult(rankList);
+        assertThat(lottoGameResult.yield()).isEqualTo(yield);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideLottoRankList")
+    void 당첨통계_계산(List<LottoRank> rankList) {
+        LottoGameResult lottoGameResult = new LottoGameResult(rankList);
+        Map<LottoRank, Long> statistics = lottoGameResult.statistics();
+        assertThat(statistics.get(NO_PRIZE) == null).isTrue();
+        for (LottoRank rank : EnumSet.of(FOURTH_PLACE, THIRD_PLACE, SECOND_PLACE, FIRST_PLACE)) {
+            long count = rankList.stream().filter(item -> item == rank).collect(counting());
+            assertLottoRankCount(statistics, rank, count);
+        }
+    }
+
+    private void assertLottoRankCount(Map<LottoRank, Long> statistics, LottoRank rank, long count) {
+        assertThat(statistics.getOrDefault(rank, 0L)).isEqualTo(count);
+    }
+
     private static Stream<Arguments> provideLottoGameResultWithTotalPrize() {
         LottoRank[] ranks = {NO_PRIZE, THIRD_PLACE, THIRD_PLACE};
         List<LottoRank> testRankList1 = Arrays.asList(ranks);
@@ -65,35 +95,5 @@ public class LottoGameResultTest {
                 FOURTH_PLACE, SECOND_PLACE, FOURTH_PLACE};
         List<LottoRank> testRankList2 = Arrays.asList(ranks);
         return Stream.of(testRankList1, testRankList2);
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideLottoGameResultWithTotalPrize")
-    void 당첨총액_계산(List<LottoRank> rankList, Long expected) {
-        LottoGameResult lottoGameResult = new LottoGameResult(rankList);
-        assertThat(lottoGameResult.totalPrize()).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideLottoGameResultWithYield")
-    void 수익률_계산(List<LottoRank> rankList, Double yield) {
-        LottoGameResult lottoGameResult = new LottoGameResult(rankList);
-        assertThat(lottoGameResult.yield()).isEqualTo(yield);
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideLottoRankList")
-    void 당첨통계_계산(List<LottoRank> rankList) {
-        LottoGameResult lottoGameResult = new LottoGameResult(rankList);
-        Map<LottoRank, Long> statistics = lottoGameResult.statistics();
-        assertThat(statistics.get(NO_PRIZE) == null).isTrue();
-        for (LottoRank rank : EnumSet.of(FOURTH_PLACE, THIRD_PLACE, SECOND_PLACE, FIRST_PLACE)) {
-            long count = rankList.stream().filter(item -> item == rank).collect(counting());
-            assertLottoRankCount(statistics, rank, count);
-        }
-    }
-
-    private void assertLottoRankCount(Map<LottoRank, Long> statistics, LottoRank rank, long count) {
-        assertThat(statistics.getOrDefault(rank, 0L)).isEqualTo(count);
     }
 }

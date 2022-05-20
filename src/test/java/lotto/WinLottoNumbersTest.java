@@ -97,6 +97,4 @@ public class WinLottoNumbersTest {
         LottoRank rank = winLottoNumbers.match(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.NO_PRIZE);
     }
-
-
 }
