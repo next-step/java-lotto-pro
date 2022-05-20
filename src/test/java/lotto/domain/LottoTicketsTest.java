@@ -28,7 +28,7 @@ class LottoTicketsTest {
     }
 
     @Test
-    @DisplayName("주어진 숫자 만큼의 로또 티켓들이 자동으로 생성되어야 한다.")
+    @DisplayName("주어진 숫자 만큼의 로또 티켓들이 자동으로 생성되어야 한다")
     void create_automatically() {
         // given
         final int count = 10;
@@ -39,6 +39,40 @@ class LottoTicketsTest {
         // then
         assertThat(lottoTickets).isNotNull();
         assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
+    }
+
+    @Test
+    @DisplayName("LottoNumbers 리스트를 파라미터로 로또 티켓들이 생성되어야 한다")
+    void create_manually() {
+        // given
+        final List<LottoNumbers> lottoNumbersList = Arrays.asList(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new LottoNumbers(Arrays.asList(7, 8, 9, 10, 11, 12)),
+                new LottoNumbers(Arrays.asList(13, 14, 15, 16, 17, 18)));
+
+        // when
+        final LottoTickets lottoTickets = LottoTickets.createManually(lottoNumbersList);
+
+        // then
+        assertThat(lottoTickets).isNotNull();
+        assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
+    }
+
+    @Test
+    @DisplayName("LottoTickets 객체들이 서로 병합될 수 있어야 한다")
+    void merge() {
+        // given
+        final LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final List<LottoNumbers> lottoNumbersList = Arrays.asList(winningNumbers, winningNumbers, winningNumbers);
+        final LottoTickets lottoTickets = LottoTickets.createManually(lottoNumbersList);
+        final LottoTickets target = LottoTickets.createManually(lottoNumbersList);
+        final BonusBall bonusBall = BonusBall.convertAndCreate("7", winningNumbers);
+
+        // when
+        lottoTickets.merge(target);
+
+        // then
+        assertThat(lottoTickets.prizeMap(winningNumbers, bonusBall).get(Prize.SIX_MATCHES)).isEqualTo(6);
+        assertThat(target.prizeMap(winningNumbers, bonusBall).get(Prize.SIX_MATCHES)).isEqualTo(3);
     }
 
     @Test

@@ -1,22 +1,28 @@
 package lotto.domain;
 
 import static lotto.domain.LottoCondition.TICKET_COST;
+import static lotto.domain.message.ErrorMessage.INVALID_MANUAL_AMOUNT;
+import static lotto.domain.message.ErrorMessage.INVALID_PAYMENT;
 
 import java.util.Objects;
-import lotto.service.StringToPaymentConverter;
+import lotto.service.ManualAmountValidator;
+import lotto.service.MoneyValidator;
+import lotto.util.StringToIntegerConverter;
 
 public class LottoPayment {
     private final int money;
     private final int purchasableAmount;
+    private int manualAmount = 0;
 
-    public LottoPayment(final int money) {
+    LottoPayment(final int money, final int purchasableAmount) {
         this.money = money;
-        purchasableAmount = money / TICKET_COST.getCondition();
+        this.purchasableAmount = purchasableAmount;
     }
 
     public static LottoPayment convertAndCreate(final String moneyString) {
-        final int money = StringToPaymentConverter.convert(moneyString);
-        return new LottoPayment(money);
+        final int money = StringToIntegerConverter.parseInt(moneyString, INVALID_PAYMENT);
+        MoneyValidator.validate(money);
+        return new LottoPayment(money, money / TICKET_COST.getCondition());
     }
 
     public int getMoney() {
@@ -25,6 +31,16 @@ public class LottoPayment {
 
     public int getPurchasableAmount() {
         return purchasableAmount;
+    }
+
+    public int getManualAmount() {
+        return manualAmount;
+    }
+
+    public void setManualAmount(final String manualAmountString) {
+        final int manualAmount = StringToIntegerConverter.parseInt(manualAmountString, INVALID_MANUAL_AMOUNT);
+        ManualAmountValidator.validate(manualAmount, purchasableAmount);
+        this.manualAmount = manualAmount;
     }
 
     @Override
