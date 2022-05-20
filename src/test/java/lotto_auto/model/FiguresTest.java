@@ -3,9 +3,8 @@ package lotto_auto.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -14,15 +13,9 @@ public class FiguresTest {
     private Figures figures;
     @BeforeEach
     void setUp() {
-        LottoNumbers lottoNumbers = new LottoNumbers(IntStream
-                .rangeClosed(1, 6)
-                .boxed()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList()));
-
-        Lottos lottos = new Lottos(Arrays.asList(new Lotto(lottoNumbers)));
-        WinningLotto winning = new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(7));
-        figures = new Figures(lottos, winning);
+        Map<LottoRank, Integer> tmp = new HashMap<>();
+        tmp.put(LottoRank.FIRST, 1);
+        figures = new Figures(tmp);
     }
     @Test
     void 당첨_통계_결과_테스트() {
