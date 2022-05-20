@@ -58,3 +58,4 @@
 # 5단계 리뷰 반영
 - [X] 특정 메서드에만 쓰이는 멤버변수를 메서드 파라미터로 리팩토링
 - [X] BuyLotto 리팩토링 (availableDrawCount를 직접변경하지 않도록 변경 등)
+- [X] 사용하지 않는 소스 제거 - LottoBuyStrategy
