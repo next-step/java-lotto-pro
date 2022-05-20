@@ -5,6 +5,7 @@ import step3.domain.LottoTicket;
 import step3.domain.Money;
 import step3.model.LottoMachine;
 import step3.model.LottoTickets;
+import step3.utls.NumberUtil;
 import step3.view.InputView;
 import step3.view.OutputView;
 
@@ -24,9 +25,13 @@ public class LottoController {
         LottoTickets user = new LottoTickets();
 
         int ticket = getTicketByMoney(); /*정상 값을 입력할때까지 반복입력*/
+        int manualTicket = getManualLottoCount(ticket);
+        int randomTicket = ticket - manualTicket;
 
-        List<LottoTicket> lottoTickets = lottoMachine.makeRandomLottoTickets(ticket);
-        user.setUserLotto(lottoTickets);
+        List<LottoTicket> manualLottoTickets = getManualLottoTickets(randomTicket);
+        List<LottoTicket> randomLottoTickets = lottoMachine.makeRandomLottoTickets(ticket);
+        user.addLottoTickets(manualLottoTickets);
+        user.addLottoTickets(randomLottoTickets);
         outputView.printLottoInfo(user.getLottoNumbers());
 
         setWinnerLotto(); /*정상 값을 입력할때까지 반복입력*/
@@ -63,7 +68,26 @@ public class LottoController {
             System.out.println(e.getMessage());
             setBonusNumber();
         }
-
     }
 
+    private int getManualLottoCount(int ticket) {
+        try {
+            int manualLottoCount = NumberUtil.parseInt(inputView.getManualLottoCount());
+            lottoMachine.validateManualLottoCount(ticket, manualLottoCount);
+            return manualLottoCount;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getManualLottoCount(ticket);
+        }
+    }
+
+    private List<LottoTicket> getManualLottoTickets(int ticket) {
+        try {
+            List<String> manualLottoSources = inputView.getManualLotto(ticket);
+            return lottoMachine.makeManualLottoTickets(manualLottoSources);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getManualLottoTickets(ticket);
+        }
+    }
 }
