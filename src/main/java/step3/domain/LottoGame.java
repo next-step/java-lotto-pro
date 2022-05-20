@@ -9,18 +9,62 @@ public class LottoGame {
     private static final int PRICE_LOTTO = 1_000;
 
     public void play() {
-        int inputMoney = InputView.inputMoney();
-        int manualLottoCount = InputView.inputManualLottoCount();
-        int autoLottoCount = autoLottoCount(inputMoney, manualLottoCount);
+        try {
+            int inputMoney = inputMoney();
+            int manualLottoCount = inputManualLottoCount();
+            int autoLottoCount = autoLottoCount(inputMoney, manualLottoCount);
 
-        Lottos lottos = new Lottos(buy(manualLottoCount, autoLottoCount));
-        OutputView.printLottos(lottos);
+            Lottos lottos = buyLottos(manualLottoCount, autoLottoCount);
+            OutputView.printLottos(lottos);
 
-        List<Integer> winnerNumbers = InputView.inputWinnerNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
-        LottoResult lottoResult = lottos.allMatch(winnerNumbers, bonusNumber);
-        double yield = lottoResult.calculateYield(investmentAmount(manualLottoCount, autoLottoCount));
-        OutputView.printResult(lottoResult, yield);
+            LottoResult lottoResult = lottos.allMatch(inputWinnerNumbers(), inputBonusNumber());
+            double yield = lottoResult.calculateYield(investmentAmount(manualLottoCount, autoLottoCount));
+            OutputView.printResult(lottoResult, yield);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            play();
+        }
+    }
+
+    private int inputMoney() {
+        try {
+            return InputView.inputMoney();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputMoney();
+        }
+    }
+
+    private int inputManualLottoCount() {
+        try {
+            return InputView.inputManualLottoCount();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputManualLottoCount();
+        }
+    }
+
+    private Lottos buyLottos(int manualLottoCount, int autoLottoCount) {
+        List<Lotto> lottos = buy(manualLottoCount, autoLottoCount);
+        return new Lottos(lottos);
+    }
+
+    private List<Integer> inputWinnerNumbers() {
+        try {
+            return InputView.inputWinnerNumbers();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputWinnerNumbers();
+        }
+    }
+
+    private int inputBonusNumber() {
+        try {
+            return InputView.inputBonusNumber();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputBonusNumber();
+        }
     }
 
     public static int autoLottoCount(int money, int manualLottoCount) {
