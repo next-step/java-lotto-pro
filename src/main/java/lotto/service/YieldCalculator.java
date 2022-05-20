@@ -1,7 +1,7 @@
-package lotto;
+package lotto.service;
 
-import lotto.domain.Money;
-import lotto.domain.Summary;
+import lotto.model.Money;
+import lotto.model.Summary;
 
 public class YieldCalculator {
     private YieldCalculator() {

@@ -1,7 +1,7 @@
-package lotto;
+package lotto.service;
 
-import lotto.domain.Lotteries;
-import lotto.domain.Money;
+import lotto.model.Lotteries;
+import lotto.model.Money;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

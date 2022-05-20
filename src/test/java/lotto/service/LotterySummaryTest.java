@@ -1,8 +1,8 @@
-package lotto;
+package lotto.service;
 
-import lotto.domain.Money;
-import lotto.domain.Result;
-import lotto.domain.Summary;
+import lotto.model.Money;
+import lotto.model.Result;
+import lotto.model.Summary;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

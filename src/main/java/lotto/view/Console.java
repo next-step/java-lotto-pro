@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.Lottery;
-import lotto.domain.Money;
-import lotto.domain.Number;
+import lotto.model.Lottery;
+import lotto.model.Money;
+import lotto.model.Number;
 
 import java.lang.reflect.Field;
 import java.util.LinkedList;

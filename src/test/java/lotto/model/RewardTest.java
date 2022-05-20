@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.model;
 
+import lotto.model.Reward;
 import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;

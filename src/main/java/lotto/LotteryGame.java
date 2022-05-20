@@ -1,6 +1,10 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.model.*;
+import lotto.service.LotteryClerk;
+import lotto.service.LotteryStore;
+import lotto.service.LotterySummary;
+import lotto.service.YieldCalculator;
 import lotto.view.Console;
 import lotto.view.Message;
 

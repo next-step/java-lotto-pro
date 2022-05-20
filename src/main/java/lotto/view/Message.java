@@ -1,9 +1,9 @@
 package lotto.view;
 
-import lotto.domain.Lotteries;
-import lotto.domain.Lottery;
-import lotto.domain.Number;
-import lotto.domain.Result;
+import lotto.model.Lotteries;
+import lotto.model.Lottery;
+import lotto.model.Number;
+import lotto.model.Result;
 
 import java.util.Arrays;
 import java.util.List;

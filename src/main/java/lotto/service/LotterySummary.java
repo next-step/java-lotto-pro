@@ -1,7 +1,7 @@
-package lotto;
+package lotto.service;
 
-import lotto.domain.*;
-import lotto.domain.Number;
+import lotto.model.*;
+import lotto.model.Number;
 
 import java.util.HashMap;
 import java.util.LinkedList;

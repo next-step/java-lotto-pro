@@ -1,8 +1,8 @@
-package lotto;
+package lotto.service;
 
-import lotto.domain.Ticket;
-import lotto.domain.Lotteries;
-import lotto.domain.Lottery;
+import lotto.model.Ticket;
+import lotto.model.Lotteries;
+import lotto.model.Lottery;
 
 import java.util.LinkedList;
 import java.util.List;
