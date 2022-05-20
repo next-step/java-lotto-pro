@@ -14,15 +14,18 @@ public class LottoController {
     private static final LottoController INSTANCE = new LottoController();
     private static final int YIELD_SCALE = 2;
 
+    private LottoMachine lottoMachine;
+
     private LottoController() {
+        lottoMachine = LottoMachine.getInstance();
     }
 
     public static LottoController getInstance() {
         return INSTANCE;
     }
 
-    public List<Lotto> buyLotto(final long money) {
-        return LottoMachine.purchase(money);
+    public int buyLotto(final long money) {
+        return lottoMachine.purchase(money);
     }
 
     public long exchangePrize(final List<Lotto> lottoes, final Lotto answer) {

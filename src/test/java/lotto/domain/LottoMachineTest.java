@@ -17,6 +17,7 @@ class LottoMachineTest {
     @Test
     @DisplayName("금액에 맞는 로또 갯수 구입 테스트")
     void lotto_buy_test() {
+        LottoMachine.purchase(5000);
         assertThat(LottoMachine.purchase(5000).size())
                 .isEqualTo(5);
     }

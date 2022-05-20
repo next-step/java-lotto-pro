@@ -67,12 +67,9 @@ public class PrizeTest {
     @Test
     @DisplayName("미 당첨 테스트")
     void get_none_prize_test() {
-        Lotto lotto = new Lotto(Arrays.asList(LottoNumber.of(45), LottoNumber.of(44), LottoNumber.of(43)
-                , LottoNumber.of(42), LottoNumber.of(41), LottoNumber.of(40)));
-        Lotto lotto2 = new Lotto(Arrays.asList(LottoNumber.of(1), LottoNumber.of(44), LottoNumber.of(43)
-                , LottoNumber.of(42), LottoNumber.of(41), LottoNumber.of(40)));
-        Lotto lotto3 = new Lotto(Arrays.asList(LottoNumber.of(45), LottoNumber.of(2), LottoNumber.of(43)
-                , LottoNumber.of(42), LottoNumber.of(41), LottoNumber.of(40)));
+        Lotto lotto = new Lotto("45, 44, 43, 42, 41, 40");
+        Lotto lotto2 = new Lotto("1, 44, 43, 42, 41, 40");
+        Lotto lotto3 = new Lotto("1, 2, 43, 42, 41, 40");
 
 
         Winners winners = Prize.matchLotto(Stream.of(lotto, lotto2, lotto3)

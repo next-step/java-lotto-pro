@@ -22,7 +22,7 @@ class LottoControllerTest {
     @Test
     @DisplayName("입력 금액 로또 구입 수 테스트")
     void buy_Lotto_count_test() {
-        assertThat(lottoController.buyLotto(5000L).size()).isEqualTo(5);
+        assertThat(lottoController.buyLotto(5000L)).isEqualTo(5);
     }
 
     @Test
