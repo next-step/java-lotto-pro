@@ -26,7 +26,7 @@ public class LottoNumbersTest {
                 new LottoNumber(1),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6)));
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoNumbers(lottoNumberSet))
-                .withMessage(LottoNumbers.EXIST_DUPLICATE_VALUE);
+                .withMessage(LottoNumbers.NOT_MATCHED_NUMBER_SIZE);
     }
 
 
