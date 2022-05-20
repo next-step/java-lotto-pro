@@ -41,10 +41,10 @@ public class LottoTest {
 
 		Lotto lotto2 = new Lotto(Arrays.asList(
 			new Number(1), new Number(2), new Number(3),
-			new Number(4), new Number(32), new Number(33)
+			new Number(4), new Number(5), new Number(33)
 		));
 
-		assertThat(lotto1.match(lotto2, new Number(5))).isEqualTo(Rank.SECOND);
-		assertThat(lotto1.match(lotto2, new Number(45))).isEqualTo(Rank.FOURTH);
+		assertThat(lotto1.match(lotto2, new Number(6))).isEqualTo(Rank.SECOND);
+		assertThat(lotto1.match(lotto2, new Number(45))).isEqualTo(Rank.THIRD);
 	}
 }
