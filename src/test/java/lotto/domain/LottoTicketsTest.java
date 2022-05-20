@@ -36,11 +36,11 @@ class LottoTicketsTest {
 
     @Test
     @DisplayName("입력한 lottoTicket과 getLottoTickets 으로 반환한 lottoTicket 이 일치하는지 테스트")
-    public void getLottoTickets() {
+    public void getValue() {
         LottoTicket lottoTicket1 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTicket lottoTicket2 = new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12));
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(lottoTicket1, lottoTicket2));
 
-        assertThat(lottoTickets.getLottoTickets()).containsOnly(lottoTicket1, lottoTicket2);
+        assertThat(lottoTickets.getValue()).containsOnly(lottoTicket1, lottoTicket2);
     }
 }

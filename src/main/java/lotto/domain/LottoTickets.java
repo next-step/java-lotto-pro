@@ -8,25 +8,25 @@ import java.util.Objects;
 
 public class LottoTickets {
 
-    private final List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> value;
 
     public LottoTickets(final List<LottoTicket> lottoTickets) {
         validateNullOrEmpty(lottoTickets);
-        this.lottoTickets = lottoTickets;
+        this.value = lottoTickets;
     }
 
     public LottoCount getLottoTicketsCount() {
-        return new LottoCount(lottoTickets.size());
+        return new LottoCount(value.size());
     }
 
-    public List<LottoTicket> getLottoTickets() {
-        return Collections.unmodifiableList(lottoTickets);
+    public List<LottoTicket> getValue() {
+        return Collections.unmodifiableList(value);
     }
 
     public LottoResult compareWinningLottoTicket(WinningLottoTicket winningLottoTicket) {
         LottoResult lottoResult = new LottoResult();
 
-        for (LottoTicket lottoTicket : lottoTickets) {
+        for (LottoTicket lottoTicket : value) {
             lottoResult.countLottoRank(winningLottoTicket, lottoTicket);
         }
 

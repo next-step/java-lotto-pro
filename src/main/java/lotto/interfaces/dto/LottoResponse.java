@@ -16,7 +16,7 @@ public class LottoResponse {
 
         public PurchasedLottoResultDto(final LottoTickets lottoTickets) {
             this.lottoCount = lottoTickets.getLottoTicketsCount().getLottoCount();
-            this.lottoDtos = convertLottoDtos(lottoTickets.getLottoTickets());
+            this.lottoDtos = convertLottoDtos(lottoTickets.getValue());
         }
 
         public int getLottoCount() {
