@@ -29,8 +29,8 @@ public class LottoTickets {
 		return rankResult;
 	}
 
-	public void automaticallyGenerate() {
-		lottoTickets.add(AutoLottoNumberStrategy.generate());
+	public void generate(LottoNumberStrategy lottoNumberStrategy) {
+		lottoTickets.add(lottoNumberStrategy.generate());
 	}
 
 	public List<LottoNumber> getLottTickets() {

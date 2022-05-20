@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 
+import lotto.domain.AutoNumbers;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoPrice;
@@ -29,7 +30,7 @@ public class LottoController {
 	private LottoTickets getLottoTickets(int count) {
 		LottoTickets lottoTickets = new LottoTickets();
 		for(int index = 0; index < count; index +=1 ) {
-			lottoTickets.automaticallyGenerate();
+			lottoTickets.generate(new AutoNumbers());
 		}
 
 		return lottoTickets;
