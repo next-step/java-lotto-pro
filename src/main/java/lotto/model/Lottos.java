@@ -29,13 +29,8 @@ public class Lottos {
         Map<Rank, Integer> rankCount = initRankCount();
         lottos.forEach(lottoNumbers -> {
             int matchCount = lottoNumbers.matchCount(winningNumbers);
-            System.out.println("일치횟수 : " + matchCount);
-
             Rank rank = Rank.getRank(matchCount);
-            System.out.println("랭킹 : " + rank);
-
             rankCount.put(rank, rankCount.get(rank) + 1);
-            System.out.println("rankCount : "+ rankCount);
         });
         return RankCount.from(rankCount);
     }
@@ -43,7 +38,6 @@ public class Lottos {
     private Map<Rank, Integer> initRankCount() {
         Map<Rank, Integer> rankCount = new LinkedHashMap<>();
         for (Rank rank : Rank.values()) {
-            System.out.println("초기화 : " + rank);
             rankCount.put(rank, 0);
         }
         return rankCount;
