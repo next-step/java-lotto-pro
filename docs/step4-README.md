@@ -187,3 +187,37 @@ public enum Rank {
 - 무의식적으로 IDE에서 지원하는 자동완성을 이용하여 코드 통일성을 해치지는 않는지
 - Test 코드 작성 시 검증해야 하는 부분이 실 코드에서 사용되는 꼭 필요한 아웃풋인지
 ```
+
+# 영상 피드백
+### 강의 : 로또 TDD 강의 및 일급 콜렉션 적용 리팩토링
+```
+- 리팩토링 시 객체지향 생활 체조 원칙, 클린코드 원칙을 참고해 리팩토링
+  - 문자열과 원시타입 포장 객체의 활용
+  - 일급 컬렉션의 활용
+  - 메서드 인자 수 관련 리팩토링에 대한 클린 코드 내용 중 정량적인 참고 사항
+    - 메서드 인자 수는 없는 것이 가장 좋음, 다음으로는 1개, 그 다음은 2개인 경우, 3개인 경우는 지양, 그 이상은 절대 불가
+```
+리팩토링 내용
+- Lotto 객체 리펙토링
+  - [x] Lotto 객체 생성 TC의 검증 방식 변경
+    - Lotto 객체 생성 Test를 위해 구현한 실 코드에서 참조가 없는 size 메서드 삭제
+    - Lotto 객체 생성 시 검증 항목을 size를 이용한 검증에서 equasl(), hashcode() 구현 후, 객체 동등성을 이용한 검증으로 변경
+
+  - [x] 비효율적으로 구현된 contains 메소드 개선
+    - AS-IS
+      ```
+        public boolean contains(LottoNumber winningsLottoNumber) {
+            Set<Boolean> compareEqualsSet = new HashSet();
+            for (LottoNumber lottoNumber : lottoNumbers) {
+                compareEqualsSet.add(lottoNumber.equals(winningsLottoNumber));
+            }
+            return compareEqualsSet.contains(true);
+        }
+      ```
+    - TO-BE
+      ```
+        public boolean contains(LottoNumber winningsLottoNumber) {
+            return lottoNumbers.contains(winningsLottoNumber);
+        }
+      ```
+---

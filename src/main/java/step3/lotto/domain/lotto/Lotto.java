@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * @author : choi-ys
@@ -46,12 +45,8 @@ public class Lotto {
         return matchCount;
     }
 
-    public boolean contains(LottoNumber answerLottoNumber) {
-        Set<Boolean> compareEqualsSet = new HashSet();
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            compareEqualsSet.add(lottoNumber.equals(answerLottoNumber));
-        }
-        return compareEqualsSet.contains(true);
+    public boolean contains(LottoNumber winningsLottoNumber) {
+        return lottoNumbers.contains(winningsLottoNumber);
     }
 
     private static void validateLottoNumberCount(int size) {
