@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class ManualCount {
     private final int value;
 
@@ -21,6 +26,12 @@ public class ManualCount {
 
     public int multiply(int value) {
         return this.value * value;
+    }
+
+    public <T> List<T> toList(Supplier<T> supplier) {
+        return IntStream.range(0, value)
+                .mapToObj(value -> supplier.get())
+                .collect(Collectors.toList());
     }
 
     @Override

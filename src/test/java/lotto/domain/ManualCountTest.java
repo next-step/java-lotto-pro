@@ -26,4 +26,10 @@ class ManualCountTest {
     void 곱하기(String a, int b, int expected) {
         assertThat(ManualCount.from(a).multiply(b)).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7})
+    void 횟수만큼_리스트_변환(int size) {
+        assertThat(ManualCount.from(String.valueOf(size)).toList(Object::new)).hasSize(size);
+    }
 }
