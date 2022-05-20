@@ -4,7 +4,7 @@ import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoTickets;
-import lotto.domain.Money;
+import lotto.domain.LottoPrice;
 import lotto.domain.RankResult;
 import lotto.dto.PrizeReport;
 import lotto.view.InputView;
@@ -12,8 +12,8 @@ import lotto.view.OutputView;
 
 public class LottoController {
 	public void start() {
-		Money money = new Money(InputView.inputMoney());
-		int count = money.availableQuantity();
+		LottoPrice lottoPrice = new LottoPrice(InputView.inputMoney());
+		int count = lottoPrice.availableQuantity();
 		OutputView.printPurchaseCount(count);
 
 		LottoTickets lottoTickets = getLottoTickets(count);
@@ -23,7 +23,7 @@ public class LottoController {
 		RankResult result = lottoTickets.getResult(winningLotto);
 		List<PrizeReport> report = result.getReport();
 		OutputView.printPrizeResult(report);
-		OutputView.printRate(result.compileStatistics(money.expenses()));
+		OutputView.printRate(result.compileStatistics(lottoPrice.expenses()));
 	}
 
 	private LottoTickets getLottoTickets(int count) {
