@@ -23,11 +23,6 @@ public class PayAmount {
         validateMinimumPayAmount(this.payAmount);
     }
 
-    public LottoCount calculateLottoCount() {
-        int lottoCount = payAmount / MIN_PAY_AMOUNT;
-        return new LottoCount(lottoCount);
-    }
-
     private void validateNullOrEmpty(final String payAmount) {
         if (Objects.isNull(payAmount) || StringUtils.isBlank(payAmount)) {
             throw new IllegalArgumentException(PayAmountErrorCode.NOT_ALLOW_NULL_OR_EMPTY.getMessage());
@@ -46,5 +41,10 @@ public class PayAmount {
             throw new IllegalArgumentException(
                     String.format(PayAmountErrorCode.ALLOW_MIN_PAY_AMOUNT.getMessage(), MIN_PAY_AMOUNT));
         }
+    }
+
+    public LottoCount calculateLottoCount() {
+        int lottoCount = payAmount / MIN_PAY_AMOUNT;
+        return new LottoCount(lottoCount);
     }
 }

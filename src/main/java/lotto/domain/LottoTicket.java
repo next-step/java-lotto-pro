@@ -21,14 +21,6 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
-    }
-
-    public boolean contains(final int number) {
-        return lottoNumbers.contains(number);
-    }
-
     private void validateNullOrEmpty(final List<Integer> lottoNumbers) {
         if (Objects.isNull(lottoNumbers) || lottoNumbers.isEmpty()) {
             throw new IllegalArgumentException(LottoTicketErrorCode.NOT_ALLOW_NULL_OR_EMPTY.getMessage());
@@ -66,5 +58,13 @@ public class LottoTicket {
 
     private boolean isLottoNumberInRange(final Integer lottoNumber) {
         return lottoNumber >= LOTTO_MIN_NUMBER && lottoNumber <= LOTTO_MAX_NUMBER;
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public boolean contains(final int number) {
+        return lottoNumbers.contains(number);
     }
 }

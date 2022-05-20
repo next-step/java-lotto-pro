@@ -15,6 +15,12 @@ public class LottoTickets {
         this.value = lottoTickets;
     }
 
+    private void validateNullOrEmpty(List<LottoTicket> lottoTickets) {
+        if (Objects.isNull(lottoTickets) || lottoTickets.isEmpty()) {
+            throw new IllegalArgumentException(LottoTicketsErrorCode.NOT_ALLOW_NULL_OR_EMPTY.getMessage());
+        }
+    }
+
     public LottoCount getLottoTicketsCount() {
         return new LottoCount(value.size());
     }
@@ -31,11 +37,5 @@ public class LottoTickets {
         }
 
         return lottoResult;
-    }
-
-    private void validateNullOrEmpty(List<LottoTicket> lottoTickets) {
-        if (Objects.isNull(lottoTickets) || lottoTickets.isEmpty()) {
-            throw new IllegalArgumentException(LottoTicketsErrorCode.NOT_ALLOW_NULL_OR_EMPTY.getMessage());
-        }
     }
 }
