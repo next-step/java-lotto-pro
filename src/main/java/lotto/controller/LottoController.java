@@ -1,9 +1,11 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.AutoNumbers;
 import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoPrice;
 import lotto.domain.Number;
@@ -31,11 +33,13 @@ public class LottoController {
 	}
 
 	private LottoTickets getLottoTickets(int count) {
-		LottoTickets lottoTickets = new LottoTickets();
+		LottoMachine lottoMachine = new LottoMachine(new AutoNumbers());
+
+		List<Lotto> lottoTickets = new ArrayList<>();
 		for(int index = 0; index < count; index +=1 ) {
-			lottoTickets.generate(new AutoNumbers());
+			lottoTickets.add(lottoMachine.generate());
 		}
 
-		return lottoTickets;
+		return new LottoTickets(lottoTickets);
 	}
 }

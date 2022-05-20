@@ -10,11 +10,11 @@ public class AutoNumbers implements LottoNumberStrategy {
 											.mapToObj(Number::new)
 											.collect(Collectors.toList());
 
-	public Lotto generate() {
+	public List<Number> generate(int limit) {
 		Collections.shuffle(numbers);
 
-		return new Lotto(numbers.stream()
-			.limit(Lotto.LOTTO_SIZE)
-			.collect(Collectors.toList()));
+		return numbers.stream()
+			.limit(limit)
+			.collect(Collectors.toList());
 	}
 }

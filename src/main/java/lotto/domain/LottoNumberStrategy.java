@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public interface LottoNumberStrategy {
-	Lotto generate();
+	List<Number> generate(int limit);
 }
