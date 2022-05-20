@@ -1,5 +1,7 @@
 package lotto_auto.model;
 
+import java.util.Set;
+
 public class WinningLotto {
     private final LottoNumber bonusBall;
     private final Lotto lotto;
@@ -9,21 +11,15 @@ public class WinningLotto {
         checkDuplicateNumber();
     }
 
-    public LottoNumber getBonusBall() {
-        return bonusBall;
-    }
-
     private void checkDuplicateNumber() {
         if (lotto.isContain(bonusBall)) {
             throw new IllegalArgumentException(LottoNumbers.EXIST_DUPLICATE_VALUE);
         }
     }
 
-    public Lotto getLotto() {
-        return lotto;
+    public LottoRank matches(Lotto from) {
+        int count = lotto.countSameLottoNumber(from);
+        return LottoRank.getLottoRuleFromMatchedCount(count,  from.isContain(bonusBall));
     }
 
-    public boolean isContain(LottoNumber number) {
-        return lotto.isContain(number);
-    }
 }
