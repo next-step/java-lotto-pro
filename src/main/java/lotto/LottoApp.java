@@ -10,16 +10,20 @@ public class LottoApp {
     public static void main(String[] args) {
         LottoMachine lottoMachine = new LottoMachine();
 
+        int count = InputView.inputManualLottoCount();
+        List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(new LottoCount(count));
+        List<Lotto> manualLottos = lottoMachine.purchaseManual(manualLottoNumbers);
+
         int money = InputView.inputMoney();
-        List<Lotto> lottos = lottoMachine.purchase(money);
-        OutputView.outputLottos(lottos);
+        List<Lotto> autoLottos = lottoMachine.purchaseAuto(money);
+        OutputView.outputLottos(manualLottos, autoLottos);
 
         List<Integer> numbers = InputView.inputWinningLotto();
         int bonus = InputView.inputBonusNumber();
         WinLotto winLotto = new WinLotto(numbers, bonus);
 
-        Statistics statistics = new Statistics(winLotto, lottos);
-        OutputView.outputResult(statistics.getResultMap());
+        Statistics statistics = new Statistics();
+        OutputView.outputResult(statistics.culculate(winLotto, autoLottos, manualLottos));
         OutputView.outputResultProfit(statistics.getProfit());
     }
 }

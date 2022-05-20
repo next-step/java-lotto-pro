@@ -13,9 +13,10 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static void outputLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구했습니다.");
-        lottos.forEach(OutputView::outputLotts);
+    public static void outputLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + autoLottos.size() + "개를 구매했습니다.");
+        autoLottos.forEach(OutputView::outputLotts);
+        manualLottos.forEach(OutputView::outputLotts);
     }
 
     private static void outputLotts(Lotto lotto) {

@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int LOTTO_SIZE = 6;
+    private static final int SIZE = 6;
+
     private final List<LottoNumber> lottoNumber;
 
     public Lotto(List<Integer> numbers) {
@@ -20,11 +21,21 @@ public class Lotto {
     }
 
     private void validateLotto(List<Integer> numbers) {
-        if (numbers.stream().distinct().count() != LOTTO_SIZE) {
+        if (numbers.stream().distinct().count() != SIZE) {
             throw new IllegalArgumentException("로또 각 번호는 중복될수 없습니다.");
         }
-        if (numbers.size() != LOTTO_SIZE) {
+        if (numbers.size() != SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개로 구성되어 있어야합니다.");
         }
+    }
+
+    public int getMatchCount(WinLotto winLotto) {
+        return (int) lottoNumber.stream()
+                .filter(winLotto.getLotto().lottoNumber::contains)
+                .count();
+    }
+
+    public boolean isMatchedBonus(WinLotto winLotto) {
+        return lottoNumber.contains(winLotto.getBonus());
     }
 }

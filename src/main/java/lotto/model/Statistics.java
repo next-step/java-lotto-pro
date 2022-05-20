@@ -14,24 +14,18 @@ public class Statistics {
         put(Rank.valueOf(0, false), 0);
     }};
 
-    public Map<Rank, Integer> getResultMap() {
+    public Statistics() {}
+
+    public Map<Rank, Integer> culculate(WinLotto winLotto, List<Lotto> autoLottos, List<Lotto> manualLottos) {
+        manualLottos.forEach(lotto -> compareNumber(winLotto, lotto));
+        autoLottos.forEach(lotto -> compareNumber(winLotto, lotto));
         return resultMap;
     }
 
-    public Statistics(WinLotto winLotto, List<Lotto> lottos) {
-        lottos.forEach(lotto -> compareNumber(winLotto, lotto));
-    }
-
     private void compareNumber(WinLotto winLotto, Lotto lotto) {
-        long count = lotto.getLottoNumber().stream()
-                .filter(lottoNumber -> winLotto.getLottoNumber().contains(lottoNumber))
-                .count();
-
-        resultMap.computeIfPresent(Rank.valueOf(count, isMatchedBonus(winLotto, lotto)), (k, v) -> Math.toIntExact(v + 1));
-    }
-
-    private boolean isMatchedBonus(WinLotto winLotto, Lotto lotto) {
-        return lotto.getLottoNumber().contains(winLotto.getBonus());
+        resultMap.computeIfPresent(
+                Rank.valueOf(lotto.getMatchCount(winLotto), lotto.isMatchedBonus(winLotto)), (k, v) ->
+                        Math.toIntExact(v + 1));
     }
 
     public long getTotalPrize() {
