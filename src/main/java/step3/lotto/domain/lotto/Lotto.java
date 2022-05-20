@@ -18,7 +18,7 @@ public class Lotto {
 
     private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 

@@ -14,6 +14,7 @@ public enum MatchResult {
     FIFTH_PLACE(3, 5_000),
     NOTHING(0, 0);
 
+    private static final int MINIMUM_WINNINGS_COUNT = 3;
     private final int matchCount;
     private final int rewardPrice;
 
@@ -23,7 +24,7 @@ public enum MatchResult {
     }
 
     public static MatchResult valueOf(int countOfMatch, boolean matchBonus) {
-        if (isNotReachedCount(countOfMatch)) {
+        if (isLittleMinimumWinningsCount(countOfMatch)) {
             return MatchResult.NOTHING;
         }
 
@@ -48,8 +49,8 @@ public enum MatchResult {
         return countOfMatch == SECOND_PLACE.getMatchCount();
     }
 
-    private static boolean isNotReachedCount(int countOfMatch) {
-        return countOfMatch < 3;
+    private static boolean isLittleMinimumWinningsCount(int countOfMatch) {
+        return countOfMatch < MINIMUM_WINNINGS_COUNT;
     }
 
     public int getMatchCount() {

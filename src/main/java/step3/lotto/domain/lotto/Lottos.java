@@ -22,7 +22,6 @@ public class Lottos {
         return matchStatistic;
     }
 
-
     public List<Lotto> getLottos() {
         return lottos;
     }

@@ -11,7 +11,7 @@ public class Winnings {
     private Lotto winningsLotto;
     private LottoNumber bonusNumber;
 
-    public Winnings(Lotto winningsLotto, LottoNumber bonusNumber) {
+    private Winnings(Lotto winningsLotto, LottoNumber bonusNumber) {
         this.winningsLotto = winningsLotto;
         this.bonusNumber = bonusNumber;
     }
