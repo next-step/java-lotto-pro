@@ -22,6 +22,7 @@ public class LottoMachine {
     private final int MATCH = 1;
     private final String SET_BONUS_NUMBER_EXCEPTION_MSG = "정답티켓과 다른 번호를 설정해야합니다";
     private final String CANT_BUY_LOTTO_EXCEPTION = "돈은 최소 " + LOTTO_PRICE + "이상 입력해야합니다";
+    private final String MANUAL_LOTTO_COUNT_OVER_TICKET_EXCEPTION_MSG = "입금한 돈을 초과할수 없습니다.";
 
     public LottoMachine(LottoGenerator lottoGenerator) {
         this.lottoGenerator = lottoGenerator;
@@ -89,5 +90,11 @@ public class LottoMachine {
 
     public int getUsingMoneyByTicket(int ticket) {
         return ticket * LOTTO_PRICE;
+    }
+
+    public void validateManualLottoCount(int ticket, int manualLottoCount) {
+        if (ticket < manualLottoCount) {
+            throw new IllegalArgumentException(MANUAL_LOTTO_COUNT_OVER_TICKET_EXCEPTION_MSG);
+        }
     }
 }
