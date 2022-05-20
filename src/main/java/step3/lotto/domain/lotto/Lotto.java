@@ -22,13 +22,11 @@ public class Lotto {
     }
 
     public static Lotto of(List<Integer> numbers) {
-        HashSet<Integer> integers = new HashSet<>(numbers);
-        validateLottoNumber(integers.size());
-
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int number : numbers) {
             lottoNumbers.add(LottoNumber.of(number));
         }
+        validateLottoNumber(lottoNumbers.size());
         return new Lotto(lottoNumbers);
     }
 
@@ -65,7 +63,7 @@ public class Lotto {
     private List<LottoNumber> toSortedList() {
         return lottoNumbers.stream().sorted().collect(Collectors.toList());
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
