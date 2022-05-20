@@ -8,8 +8,10 @@ import static lotto.constants.LottoGameMessage.*;
 public class ResultView {
     private ResultView() {}
 
-    public static void printCount(int count) {
-        System.out.printf(PURCHASED_LOTTO_COUNT_INFORMATION, count);
+    public static void printCount(LottoCount availableLottoCount, LottoCount manualPurchasedLottoCount) {
+        int manualPurchasedLottoCountValue = manualPurchasedLottoCount.getCount();
+        int autoPurchasedLottoCountValue = availableLottoCount.minus(manualPurchasedLottoCount).getCount();
+        System.out.printf(PURCHASED_LOTTO_COUNT_INFORMATION, manualPurchasedLottoCountValue, autoPurchasedLottoCountValue);
         System.out.println();
     }
 

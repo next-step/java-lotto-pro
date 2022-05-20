@@ -9,8 +9,12 @@ import java.util.stream.IntStream;
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int count) {
-        this.lottoTickets = new ArrayList<>(generateLottoTickets(count));
+    public LottoTickets(LottoCount count) {
+        this.lottoTickets = new ArrayList<>(generateLottoTickets(count.getCount()));
+    }
+
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
     }
 
     private List<LottoTicket> generateLottoTickets(int count) {
@@ -23,6 +27,9 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
+    public List<LottoTicket> getReadOnlyLottoTickets() {
+        return Collections.unmodifiableList(this.lottoTickets);
+    }
     public LottoPrizes matchResults(LottoTicket lastWinningLottoTicket, LottoNumber bonusLottoNumber) {
         return new LottoPrizes(lottoTickets.stream()
                 .map(ticket -> ticket.match(lastWinningLottoTicket, hasBonusBallNumber(ticket, bonusLottoNumber)))
@@ -35,5 +42,9 @@ public class LottoTickets {
 
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
+    }
+
+    public void merge(LottoTickets lottoTickets) {
+        this.lottoTickets.addAll(lottoTickets.getReadOnlyLottoTickets());
     }
 }

@@ -10,4 +10,5 @@ public class LottoGameErrorMessage {
     public static final String INVALID_LOTTO_NUMBERS_SIZE = "[ERROR] 로또 숫자는 6개로 이루어져야 합니다.";
     public static final String INSUFFICIENT_MONEY = "[ERROR] 받은 금액으로 로또를 구매하기에 부족합니다.";
     public static final String INVALID_MONEY_LEFT = "[ERROR] 1000원 단위의 금액을 지불해주세요.";
+    public static final String INVALID_MANUAL_LOTTO_PURCHASE_COUNT = "[ERROR] 수동 구매횟수 값은 0보다 커야하며, 구매가능한 전체 횟수를 넘을 수 없습니다.";
 }
