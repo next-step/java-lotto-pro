@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TicketTest {
     @ParameterizedTest
@@ -26,33 +25,18 @@ class TicketTest {
         );
     }
 
-    @ParameterizedTest(name = "{index}: {2}")
-    @MethodSource("천원_단위가_아닌_금액")
-    void 쿠폰_교환_천원_단위_예외(Money money, String exceptionMessage) {
-        IllegalArgumentException e = assertThrows(
-                IllegalArgumentException.class, () -> new Ticket(money));
-        assertThat(e.getMessage()).isEqualTo(exceptionMessage);
-    }
-
-    static Stream<Arguments> 천원_단위가_아닌_금액() {
-        return Stream.of(
-                Arguments.of(new Money(1100), "로또 구입 금액은 1,000원 단위입니다."),
-                Arguments.of(new Money(1111), "로또 구입 금액은 1,000원 단위입니다."),
-                Arguments.of(new Money(10001), "로또 구입 금액은 1,000원 단위입니다.")
-        );
-    }
-
     @ParameterizedTest()
-    @MethodSource("천원_단위_금액")
+    @MethodSource("천원_이상_금액")
     void 쿠폰_교환(Money money, int size) {
         assertThat(new Ticket(money).size()).isEqualTo(size);
     }
 
-    static Stream<Arguments> 천원_단위_금액() {
+    static Stream<Arguments> 천원_이상_금액() {
         return Stream.of(
                 Arguments.of(new Money(1000), 1),
                 Arguments.of(new Money(10000), 10),
-                Arguments.of(new Money(100000), 100)
+                Arguments.of(new Money(100000), 100),
+                Arguments.of(new Money(5500), 5)
         );
     }
 }
