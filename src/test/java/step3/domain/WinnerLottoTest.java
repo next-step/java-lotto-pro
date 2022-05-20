@@ -1,9 +1,15 @@
 package step3.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class WinnerLottoTest {
 
@@ -21,17 +27,21 @@ class WinnerLottoTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void 당첨순위확인_1등() {
-        Lotto lotto = LottoFactory.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Ranking ranking = winnerLotto.matchRanking(lotto);
-        assertThat(ranking).isEqualTo(Ranking.FIRST);
+    @ParameterizedTest(name = "당첨순위확인")
+    @MethodSource("listAndRankingProvider")
+    void 당첨순위확인(List<Integer> numbers, Ranking exoected) {
+        Lotto lotto = LottoFactory.createManualLotto(numbers);
+        Ranking actual = winnerLotto.matchRanking(lotto);
+        assertThat(actual).isEqualTo(exoected);
     }
 
-    @Test
-    void 당첨순위확인_2등() {
-        Lotto lotto = LottoFactory.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 10));
-        Ranking ranking = winnerLotto.matchRanking(lotto);
-        assertThat(ranking).isEqualTo(Ranking.SECOND);
+    static Stream<Arguments> listAndRankingProvider() {
+        return Stream.of(
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Ranking.FIRST),
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 10), Ranking.SECOND),
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 16), Ranking.THIRD),
+                arguments(Arrays.asList(1, 2, 3, 4, 15, 16), Ranking.FOURTH),
+                arguments(Arrays.asList(1, 2, 3, 14, 15, 16), Ranking.FIFTH)
+        );
     }
 }
