@@ -8,6 +8,7 @@ import step3.domain.LottoFactory;
 import step3.domain.LottoResult;
 import step3.domain.Lottos;
 import step3.domain.Money;
+import step3.domain.Yield;
 import step3.view.InputView;
 import step3.view.OutputView;
 
@@ -23,7 +24,7 @@ public class LottoController {
         OutputView.printLottos(lottos);
 
         LottoResult lottoResult = lottos.allMatch(inputWinnerNumbers(), inputBonusNumber());
-        double yield = lottoResult.calculateYield(Money.investmentAmount(manualLottoCount, autoLottoCount));
+        Yield yield = lottoResult.calculateYield(Money.investmentAmount(manualLottoCount, autoLottoCount));
         OutputView.printResult(lottoResult, yield);
     }
 

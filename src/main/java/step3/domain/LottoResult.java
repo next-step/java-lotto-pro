@@ -17,15 +17,13 @@ public class LottoResult {
         rankingMap.put(ranking, rankingMap.get(ranking) + 1);
     }
 
-    public double calculateYield(int inputMoney) {
-        return (double) winningAmount() / inputMoney;
+    public Yield calculateYield(int inputMoney) {
+        return new Yield((double) winningAmount() / inputMoney);
     }
 
     private long winningAmount() {
         AtomicLong winningAmount = new AtomicLong(0L);
-        rankingMap.forEach((ranking, hitCount) -> {
-            winningAmount.addAndGet((long) (hitCount * ranking.getWinningMoney()));
-        });
+        rankingMap.forEach((ranking, hitCount) -> winningAmount.addAndGet(hitCount * ranking.getWinningMoney()));
         return winningAmount.get();
     }
 
