@@ -28,8 +28,8 @@ public class LottoController {
         int manualTicket = getManualLottoCount(ticket);
         int randomTicket = ticket - manualTicket;
 
-        List<LottoTicket> manualLottoTickets = getManualLottoTickets(randomTicket);
-        List<LottoTicket> randomLottoTickets = lottoMachine.makeRandomLottoTickets(ticket);
+        List<LottoTicket> manualLottoTickets = getManualLottoTickets(manualTicket);
+        List<LottoTicket> randomLottoTickets = lottoMachine.makeRandomLottoTickets(randomTicket);
         user.addLottoTickets(manualLottoTickets);
         user.addLottoTickets(randomLottoTickets);
         outputView.printLottoInfo(user.getLottoNumbers(), manualTicket, randomTicket);
