@@ -11,7 +11,7 @@ class LottoChargeTest {
     @ParameterizedTest
     @CsvSource(value = {"5000,5", "14000,14"})
     void 구입금액_개수(int charge, int expected) {
-        assertThat(LottoCharge.from(charge).count()).isEqualTo(expected);
+        assertThat(LottoCharge.from(charge).count()).isEqualTo(Count.from(expected));
     }
 
     @Test

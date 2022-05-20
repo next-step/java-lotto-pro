@@ -33,8 +33,8 @@ public class LottoCharge {
                 .allMatch(Character::isDigit);
     }
 
-    public int count() {
-        return value / LOTTO_PRICE;
+    public Count count() {
+        return Count.from(value / LOTTO_PRICE);
     }
 
     public double revenueRate(double revenue) {

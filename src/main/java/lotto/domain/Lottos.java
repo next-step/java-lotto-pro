@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -12,10 +11,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    private static List<Lotto> auto(int count) {
-        return IntStream.range(0, count)
-                .mapToObj(value -> Lotto.auto())
-                .collect(Collectors.toList());
+    private static List<Lotto> auto(Count count) {
+        return count.toList(Lotto::auto);
     }
 
     public static Lottos buy(LottoCharge charge) {

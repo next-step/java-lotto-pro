@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -8,8 +9,12 @@ import java.util.stream.IntStream;
 public class Count {
     private final int value;
 
-    public Count(int value) {
+    private Count(int value) {
         this.value = value;
+    }
+
+    public static Count from(int value) {
+        return new Count(value);
     }
 
     public static Count from(String value) {
@@ -32,6 +37,19 @@ public class Count {
         return IntStream.range(0, value)
                 .mapToObj(value -> supplier.get())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Count count = (Count) o;
+        return value == count.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 
     @Override
