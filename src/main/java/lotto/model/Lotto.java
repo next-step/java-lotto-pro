@@ -28,4 +28,14 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호는 6개로 구성되어 있어야합니다.");
         }
     }
+
+    public int getMatchCount(WinLotto winLotto) {
+        return (int) lottoNumber.stream()
+                .filter(winLotto.getLotto().lottoNumber::contains)
+                .count();
+    }
+
+    public boolean isMatchedBonus(WinLotto winLotto) {
+        return lottoNumber.contains(winLotto.getBonus());
+    }
 }
