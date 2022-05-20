@@ -21,7 +21,7 @@ class WinnerLottoTest {
         assertThat(winnerLotto).isEqualTo(new WinnerLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10));
     }
 
-    @DisplayName("당첨로또 생성 시, 입력된 숫자가 6개를 초과하면 IllegalArgumentException을 발생시킨다.")
+    @DisplayName("당첨로또 생성 시, 입력된 숫자가 6개를 초과할 수 없다.")
     @Test
     void invalid_당첨로또생성_숫자개수초과() {
         assertThatThrownBy(() -> {
