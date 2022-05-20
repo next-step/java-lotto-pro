@@ -1,16 +1,21 @@
-package step3.domain;
+package step3.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import step3.domain.Lotto;
+import step3.domain.LottoFactory;
+import step3.domain.LottoResult;
+import step3.domain.Lottos;
+import step3.domain.Money;
 import step3.view.InputView;
 import step3.view.OutputView;
 
-public class LottoGame {
+public class LottoController {
 
     public void play() {
         Money money = inputMoney();
         int manualLottoCount = inputManualLottoCount();
-        int autoLottoCount = autoLottoCount(money, manualLottoCount);
+        int autoLottoCount = money.autoLottoCount(manualLottoCount);
 
         Lottos lottos = buyLottos(manualLottoCount, autoLottoCount);
         OutputView.printBuyCount(manualLottoCount, autoLottoCount);
@@ -65,11 +70,6 @@ public class LottoGame {
             System.out.println(e.getMessage());
             return inputBonusNumber();
         }
-    }
-
-    public static int autoLottoCount(Money money, int manualLottoCount) {
-        int autoLottoCount = money.lottoCount() - manualLottoCount;
-        return Math.max(autoLottoCount, 0);
     }
 
     private List<Lotto> buy(int manualLottoCount, int autoLottoCount) {
