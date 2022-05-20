@@ -1,8 +1,14 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -23,5 +29,37 @@ class WinningNumbersTest {
     void winning_number_success_test2(String input) {
         WinningNumbers winningNumbers = new WinningNumbers(input);
         assertThat(winningNumbers.getWinningNumbers().size()).isEqualTo(6);
+    }
+
+    @DisplayName("보너스 번호가 존재하면 1을 반환받고 아니라면 0을 반환해야 한다")
+    @Test
+    void bonus_count_test() {
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+        winningNumbers.addBonusNumber(new LottoNo("7"));
+
+        Lotto 보너스번호_있는_로또 = new Lotto(convertToLottoByIntType(Arrays.asList(4, 5, 6, 7, 8, 9)));
+        Lotto 보너스번호_없는_로또 = new Lotto(convertToLottoByIntType(Arrays.asList(10, 11, 12, 13, 14, 15)));
+
+        assertThat(winningNumbers.bonusCount(보너스번호_있는_로또)).isEqualTo(1);
+        assertThat(winningNumbers.bonusCount(보너스번호_없는_로또)).isEqualTo(0);
+    }
+
+    @DisplayName("보너스 번호가 존재하면 true 를 반환받고 아니라면 false 를 반환해야 한다")
+    @Test
+    void is_contains_test() {
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+        winningNumbers.addBonusNumber(new LottoNo("7"));
+
+        Lotto 보너스번호_있는_로또 = new Lotto(convertToLottoByIntType(Arrays.asList(4, 5, 6, 7, 8, 9)));
+        Lotto 보너스번호_없는_로또 = new Lotto(convertToLottoByIntType(Arrays.asList(10, 11, 12, 13, 14, 15)));
+
+        assertTrue(winningNumbers.isContainsBonusNumber(보너스번호_있는_로또));
+        assertFalse(winningNumbers.isContainsBonusNumber(보너스번호_없는_로또));
+    }
+
+    private List<LottoNo> convertToLottoByIntType(List<Integer> numbers) {
+        return numbers.stream()
+            .map(LottoNo::new)
+            .collect(Collectors.toList());
     }
 }

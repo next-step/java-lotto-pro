@@ -5,10 +5,11 @@ import java.util.List;
 import lotto.domain.validator.impl.LottoNumberSizeValidator;
 import lotto.domain.validator.impl.NumberFormatValidator;
 
-public class BonusNumberValidatorGroup {
+public class LottoNumberValidatorGroup {
+
     private final List<NumberValidator> validators;
 
-    private BonusNumberValidatorGroup() {
+    private LottoNumberValidatorGroup() {
         this.validators = Arrays.asList(
             new NumberFormatValidator(),
             new LottoNumberSizeValidator()
@@ -16,14 +17,18 @@ public class BonusNumberValidatorGroup {
     }
 
     private static class LazyHolder {
-        private static BonusNumberValidatorGroup instance = new BonusNumberValidatorGroup();
+        private static LottoNumberValidatorGroup instance = new LottoNumberValidatorGroup();
     }
 
-    public static BonusNumberValidatorGroup getInstance() {
+    public static LottoNumberValidatorGroup getInstance() {
         return LazyHolder.instance;
     }
 
-    public void validate(String number) {
-        this.validators.forEach(validators -> validators.validate(number));
+    public void validate(String lottoNo) {
+        this.validators.forEach(validator -> validator.validate(lottoNo));
+    }
+
+    public void validate(int lottoNo) {
+        new LottoNumberSizeValidator().validate(String.valueOf(lottoNo));
     }
 }
