@@ -6,17 +6,18 @@ public class Lotto {
         this.lottoNumbers = numbers;
     }
 
-    public LottoRank matches(WinningLotto from) {
-        int count = this.lottoNumbers.countSameLottoNumber(from);
-        return LottoRank.getLottoRuleFromMatchedCount(count, isContain(from.getBonusBall()));
-    }
-
     public boolean isContain(LottoNumber number) {
         return lottoNumbers.isContain(number);
     }
 
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int countSameLottoNumber(Lotto other) {
+        return (int) this.lottoNumbers.getLottoNumberSet()
+                .stream()
+                .filter(other::isContain).count();
     }
 
 }
