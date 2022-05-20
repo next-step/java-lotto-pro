@@ -17,17 +17,25 @@ public class LottoMain {
     }
 
     private static PurchaseLottos purchase(final InputView inputView, final ResultView resultView) {
-        final PurchaseLottos purchaseLottos = LottoMachine.purchase(inputView.inputPurchase(),
-                inputView.inputManualNumbers(parseInt(inputView.inputManualCount())));
+        final PurchaseLottos purchaseLottos = LottoMachine.purchase(mapToInputPurchase(inputView));
         resultView.purchase(purchaseLottos);
         return purchaseLottos;
     }
 
+    private static InputPurchaseDto mapToInputPurchase(final InputView inputView) {
+        return InputPurchaseDto.of(inputView.inputPurchase(),
+                inputView.inputManualNumbers(parseInt(inputView.inputManualCount())));
+    }
+
     private static void drawingOfLots(final PurchaseLottos purchaseLottos, final InputView inputView,
                                       final ResultView resultView) {
-        final WinningNumbers winningNumbers = LottoMachine.winningLottoNumbers(inputView.inputDrawingOfLots(),
-                inputView.inputBonusNumber());
+        final WinningNumbers winningNumbers = LottoMachine.winningLottoNumbers(mapToInputWinningNumbers(inputView));
         resultView.drawingOfLots(
                 new LottoWinStatistics(purchaseLottos.purchasePrice(), purchaseLottos.draw(winningNumbers)));
+    }
+
+    private static InputWinningNumbersDto mapToInputWinningNumbers(final InputView inputView) {
+        return InputWinningNumbersDto.of(inputView.inputDrawingOfLots(),
+                inputView.inputBonusNumber());
     }
 }
