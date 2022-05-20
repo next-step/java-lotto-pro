@@ -15,10 +15,6 @@ public class Lottos {
         return count.toList(Lotto::auto);
     }
 
-    public static Lottos buy(LottoCharge charge) {
-        return new Lottos(auto(charge.count()));
-    }
-
     public static Lottos buy(List<Lotto> manualLottos, LottoCharge restCharge) {
         List<Lotto> lottos = new ArrayList<>();
         lottos.addAll(manualLottos);
