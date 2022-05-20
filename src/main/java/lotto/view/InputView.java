@@ -31,7 +31,7 @@ public class InputView {
         System.out.println(ViewMessageConst.INPUT_MESSAGE_MANUAL_LOTTOS_NUMBER);
     }
 
-    public static String readSimpleLottoNumbers(){
+    public static String readSimpleInput(){
         return scan.nextLine();
     }
 }

@@ -18,8 +18,8 @@ public class LottoController {
         Lottos lottos = LottosGenerator.purchaseManualAndAutoLottos(money, readManualNumbers(manualCount));
         OutputView.printPurchasedLottos(lottos, manualCount);
 
-        Lotto winningLotto = readWinningNumbers();
-        LottoNumber bonusNumber = LottoNumber.from(InputView.readBonusNumber());
+        Lotto winningLotto = Lotto.from(InputView.readLottoWinningNumber());
+        LottoNumber bonusNumber = readBonusNumber(winningLotto);
         LottoResult result = LottoResult.of(lottos, winningLotto, bonusNumber);
         OutputView.printLottoResult(result, money.calculateProfit(result.winningPrize()));
     }
@@ -46,12 +46,16 @@ public class LottoController {
         List<Lotto> manualLottos = new ArrayList<>();
         InputView.guideMessageToReadManualLottoNumbers();
         for (int i = 0; i < manualCount.getCount(); i++) {
-            manualLottos.add(Lotto.from(InputView.readSimpleLottoNumbers()));
+            manualLottos.add(Lotto.from(InputView.readSimpleInput()));
         }
         return manualLottos;
     }
 
-    private static Lotto readWinningNumbers(){
-        return Lotto.from(InputView.readLottoWinningNumber());
+    private static LottoNumber readBonusNumber(Lotto winningLotto) {
+        LottoNumber bonusNumber = LottoNumber.from(InputView.readBonusNumber());
+        if (winningLotto.hasNumber(bonusNumber)) {
+            throw new IllegalArgumentException(ErrorMessageConst.ERROR_INVALID_BONUSNUMBER_DUPLICATED);
+        }
+        return bonusNumber;
     }
 }
