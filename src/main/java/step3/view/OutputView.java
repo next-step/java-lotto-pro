@@ -5,8 +5,8 @@ import step3.domain.Lottos;
 import step3.domain.Ranking;
 
 public class OutputView {
-    public static void printBuyCount(int buyCount) {
-        System.out.printf("%d개를 구매했습니다.%n", buyCount);
+    public static void printBuyCount(int manualLottoCount, int autoLottoCount) {
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottoCount, autoLottoCount);
     }
 
     public static void printLottos(Lottos lottos) {
