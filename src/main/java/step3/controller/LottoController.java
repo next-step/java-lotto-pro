@@ -52,8 +52,8 @@ public class LottoController {
 
     private void setWinnerLotto() {
         try {
-            String winnerLottoSource = inputView.getWinnerLotto();
-            lottoMachine.setWinnerLottoTicket(winnerLottoSource);
+            String winnerLottoTicketElements = inputView.getWinnerLotto();
+            lottoMachine.setWinnerLottoTicket(winnerLottoTicketElements);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             setWinnerLotto();
@@ -62,8 +62,8 @@ public class LottoController {
 
     private void setBonusNumber() {
         try {
-            String bonusNumberSource = inputView.getBonusLotto();
-            lottoMachine.setBonusNumber(bonusNumberSource);
+            String bonusNumberElement = inputView.getBonusLotto();
+            lottoMachine.setBonusNumber(bonusNumberElement);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             setBonusNumber();
@@ -83,8 +83,8 @@ public class LottoController {
 
     private List<LottoTicket> getManualLottoTickets(int ticket) {
         try {
-            List<String> manualLottoSources = inputView.getManualLotto(ticket);
-            return lottoMachine.makeManualLottoTickets(manualLottoSources);
+            List<String> manualLottoTicketsSource = inputView.getManualLotto(ticket);
+            return lottoMachine.makeManualLottoTickets(manualLottoTicketsSource);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getManualLottoTickets(ticket);

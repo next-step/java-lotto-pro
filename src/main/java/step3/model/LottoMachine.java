@@ -33,19 +33,19 @@ public class LottoMachine {
 
     public List<LottoTicket> makeManualLottoTickets(List<String> manualLottoTicketsSource) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (String manualLottoElements : manualLottoTicketsSource) {
-            lottoTickets.add(lottoGenerator.makeManualLottoTicket(manualLottoElements));
+        for (String manualLottoTicketElements : manualLottoTicketsSource) {
+            lottoTickets.add(lottoGenerator.makeManualLottoTicket(manualLottoTicketElements));
         }
         return lottoTickets;
     }
 
-    public void setWinnerLottoTicket(String winnerSource) {
-        LottoTicket winnerTicket = lottoGenerator.makeManualLottoTicket(winnerSource);
+    public void setWinnerLottoTicket(String winnerLottoTicketElements) {
+        LottoTicket winnerTicket = lottoGenerator.makeManualLottoTicket(winnerLottoTicketElements);
         lottoWinChecker.setWinnerLottoTicket(winnerTicket);
     }
 
-    public void setBonusNumber(String lottoElementSource) {
-        lottoWinChecker.setBonusNumber(lottoElementSource);
+    public void setBonusNumber(String lottoNumberElement) {
+        lottoWinChecker.setBonusNumber(lottoNumberElement);
     }
 
     public int getLottoTicketCount(Money money) {
