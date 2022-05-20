@@ -10,7 +10,7 @@ public class LottoCount {
         this.count = count;
     }
 
-    public int valueOf() {
+    public int of() {
         return count;
     }
 }
