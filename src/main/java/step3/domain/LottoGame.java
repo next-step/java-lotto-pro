@@ -6,29 +6,24 @@ import step3.view.InputView;
 import step3.view.OutputView;
 
 public class LottoGame {
-    private static final int PRICE_LOTTO = 1_000;
 
     public void play() {
-        try {
-            int inputMoney = inputMoney();
-            int manualLottoCount = inputManualLottoCount();
-            int autoLottoCount = autoLottoCount(inputMoney, manualLottoCount);
+        Money money = inputMoney();
+        int manualLottoCount = inputManualLottoCount();
+        int autoLottoCount = autoLottoCount(money, manualLottoCount);
 
-            Lottos lottos = buyLottos(manualLottoCount, autoLottoCount);
-            OutputView.printLottos(lottos);
+        Lottos lottos = buyLottos(manualLottoCount, autoLottoCount);
+        OutputView.printBuyCount(manualLottoCount, autoLottoCount);
+        OutputView.printLottos(lottos);
 
-            LottoResult lottoResult = lottos.allMatch(inputWinnerNumbers(), inputBonusNumber());
-            double yield = lottoResult.calculateYield(investmentAmount(manualLottoCount, autoLottoCount));
-            OutputView.printResult(lottoResult, yield);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            play();
-        }
+        LottoResult lottoResult = lottos.allMatch(inputWinnerNumbers(), inputBonusNumber());
+        double yield = lottoResult.calculateYield(Money.investmentAmount(manualLottoCount, autoLottoCount));
+        OutputView.printResult(lottoResult, yield);
     }
 
-    private int inputMoney() {
+    private Money inputMoney() {
         try {
-            return InputView.inputMoney();
+            return new Money(InputView.inputMoney());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputMoney();
@@ -45,8 +40,13 @@ public class LottoGame {
     }
 
     private Lottos buyLottos(int manualLottoCount, int autoLottoCount) {
-        List<Lotto> lottos = buy(manualLottoCount, autoLottoCount);
-        return new Lottos(lottos);
+        try {
+            List<Lotto> lottos = buy(manualLottoCount, autoLottoCount);
+            return new Lottos(lottos);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return buyLottos(manualLottoCount, autoLottoCount);
+        }
     }
 
     private List<Integer> inputWinnerNumbers() {
@@ -67,14 +67,13 @@ public class LottoGame {
         }
     }
 
-    public static int autoLottoCount(int money, int manualLottoCount) {
-        int autoLottoCount = money / PRICE_LOTTO - manualLottoCount;
+    public static int autoLottoCount(Money money, int manualLottoCount) {
+        int autoLottoCount = money.lottoCount() - manualLottoCount;
         return Math.max(autoLottoCount, 0);
     }
 
     private List<Lotto> buy(int manualLottoCount, int autoLottoCount) {
         List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount);
-        OutputView.printBuyCount(manualLottoCount, autoLottoCount);
         List<Lotto> lottos = new ArrayList<>();
         for (List<Integer> manualLottoNumber : manualLottoNumbers) {
             lottos.add(LottoFactory.createManualLotto(manualLottoNumber));
@@ -83,9 +82,5 @@ public class LottoGame {
             lottos.add(LottoFactory.createAutoLotto());
         }
         return lottos;
-    }
-
-    int investmentAmount(int manualLottoCount, int autoLottoCount) {
-        return (manualLottoCount + autoLottoCount) * PRICE_LOTTO;
     }
 }
