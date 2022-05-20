@@ -11,11 +11,11 @@ class CoinTest {
 
     private static final int LOTTO_PRICE = 1000;
 
-    @ParameterizedTest(name = "금액을 {0}원 입력하여 가진다.")
-    @ValueSource(strings = {"1000", "10000", "50000"})
-    void insertMoneyTest(String expected) {
+    @ParameterizedTest(name = "금액을 {0}원 입력하면 유저의 구매금액은 {1}원으로 계산한다.")
+    @CsvSource(value = {"1000:1000", "10000:10000", "50000:50000", "1500:1000", "1999:1000"}, delimiter = ':')
+    void insertMoneyTest(String input, String expected) {
         // given & when
-        Coin coin = new Coin(expected);
+        Coin coin = new Coin(input);
         int actual = coin.getDeposit();
 
         // then
