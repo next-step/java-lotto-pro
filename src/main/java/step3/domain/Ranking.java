@@ -20,8 +20,8 @@ public enum Ranking {
         this.winningMoney = winningMoney;
     }
 
-    public static Ranking findRanking(int hitCount, boolean isMatchBounsNumber) {
-        if (hitCount == SECOND.getHitCount() && isMatchBounsNumber) {
+    public static Ranking findRanking(int hitCount, boolean isMatchBonusNumber) {
+        if (hitCount == SECOND.getHitCount() && isMatchBonusNumber) {
             return SECOND;
         }
 
