@@ -11,8 +11,8 @@ class LottoTest extends LottoCommonTest {
     private static final int LOTTO_NUMBER_SIZE = 6;
 
     @Test
-    @DisplayName("로또 생성 테스트 - 수동생성 - 중복 숫자")
-    void createLotto_manualNumber_duplicateNumber() {
+    @DisplayName("로또 생성 테스트 - 자동생성 - 중복 숫자")
+    void createLotto_autoNumber_duplicateNumber() {
         List<LottoNumber> lottoNumbers = getLottoNumbers("1,1,1,1,1,1");
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -20,11 +20,18 @@ class LottoTest extends LottoCommonTest {
 
 
     @Test
-    @DisplayName("로또 생성 테스트 - 수동생성 - 개수 초과")
-    void createLotto_manualNumber_countExceeded() {
+    @DisplayName("로또 생성 테스트 - 자동생성 - 개수 초과")
+    void createLotto_autoNumber_countExceeded() {
         List<LottoNumber> lottoNumbers = getLottoNumbers("1,2,3,4,5,6,7,8");
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또 생성 테스트 - 수동생성")
+    void createLotto_manualNumber() {
+        Lotto actual = new Lotto(getLottoNumbers("1,2,3,4,5,6"), false);
+        assertThat(actual.isAuto()).isFalse();
     }
 
     @Test

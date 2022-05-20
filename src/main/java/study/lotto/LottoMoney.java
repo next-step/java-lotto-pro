@@ -22,4 +22,16 @@ public class LottoMoney {
     public static int countAmount(int ticketCount) {
         return ticketCount * LOTTO_TICKET_PRICE;
     }
+
+    public boolean canBuyLottos(int ticketAmount) {
+        if (ticketAmount < 0) {
+            return false;
+        }
+
+        if (ticketAmount == 0) {
+            return true;
+        }
+
+        return LOTTO_TICKET_PRICE * ticketAmount <= amount;
+    }
 }

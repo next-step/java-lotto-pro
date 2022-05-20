@@ -8,10 +8,17 @@ import java.util.Set;
 public class Lotto {
     private static final int LOTTO_NUMBER_SIZE = 6;
     private final List<LottoNumber> numbers;
+    private final boolean auto;
+
+    public Lotto(List<LottoNumber> numbers, boolean auto) {
+        validate(numbers);
+        this.numbers = numbers;
+        this.auto = auto;
+        Collections.sort(this.numbers);
+    }
 
     public Lotto(List<LottoNumber> numbers) {
-        this.numbers = numbers;
-        validateAndSort();
+        this(numbers, false);
     }
 
     public int numberSize() {
@@ -22,10 +29,22 @@ public class Lotto {
         return numbers;
     }
 
-    private void validateAndSort() {
+    public String toNumberString() {
+        return this.numbers.toString();
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.numbers.stream()
+                .anyMatch(number -> number.getNumber().equals(lottoNumber.getNumber()));
+    }
+
+    public boolean isAuto() {
+        return auto;
+    }
+
+    private void validate(List<LottoNumber> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
-        Collections.sort(numbers);
     }
 
     private void validateSize(List<LottoNumber> numbers) {
@@ -43,11 +62,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return numbers.toString();
-    }
-
-    public boolean contains(LottoNumber lottoNumber) {
-        return this.numbers.stream()
-                .anyMatch(number -> number.getNumber().equals(lottoNumber.getNumber()));
+        return String.format("%s, auto: %s", numbers.toString(), auto);
     }
 }

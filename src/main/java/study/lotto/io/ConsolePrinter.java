@@ -16,8 +16,11 @@ public class ConsolePrinter implements Printer {
 
     @Override
     public void printMyLottos(List<Lotto> lottos) {
-        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
-        lottos.forEach(System.out::println);
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+                lottos.stream().filter(lotto -> !lotto.isAuto()).count(),
+                lottos.stream().filter(Lotto::isAuto).count()
+        );
+        lottos.stream().map(Lotto::toNumberString).forEach(System.out::println);
     }
 
     @Override

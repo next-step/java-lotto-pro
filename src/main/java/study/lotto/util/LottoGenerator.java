@@ -6,20 +6,39 @@ import java.util.List;
 import java.util.stream.Collectors;
 import study.lotto.Lotto;
 import study.lotto.LottoNumber;
+import study.lotto.io.ConsoleInput;
 
 public class LottoGenerator {
+    private static final String NUMBER_DELIMITER = ",";
     private static final int LOTTO_NUMBER_SIZE = 6;
 
     private LottoGenerator() {
     }
 
-    public static List<Lotto> generate(int genSize) {
-        validate(genSize);
+    public static List<Lotto> generate(int gentAutoSize) {
+        validate(gentAutoSize);
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < genSize; i++) {
-            lottos.add(newAutoLotto());
+        for (int i = 0; i < gentAutoSize; i++) {
+            lottos.add(new Lotto(getRandomLottoNumbers(), true));
         }
         return lottos;
+    }
+
+    public static List<Lotto> generateManual(int genManualSize) {
+        validate(genManualSize);
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < genManualSize; i++) {
+            lottos.add(newManualLotto());
+        }
+        return lottos;
+    }
+
+    public static Lotto newManualLotto() {
+        String inputString = ConsoleInput.read();
+        return new Lotto(LottoGenerator.splitAndParseLottoNumber(
+                inputString,
+                NUMBER_DELIMITER
+        ));
     }
 
     public static List<LottoNumber> splitAndParseLottoNumber(String text, String delimiter) {
@@ -31,13 +50,9 @@ public class LottoGenerator {
     }
 
     private static void validate(int genSize) {
-        if (genSize < 1) {
-            throw new IllegalArgumentException("한 개 이상의 숫자를 입력해주세요.");
+        if (genSize < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
-    }
-
-    private static Lotto newAutoLotto() {
-        return new Lotto(getRandomLottoNumbers());
     }
 
     private static List<LottoNumber> getRandomLottoNumbers() {

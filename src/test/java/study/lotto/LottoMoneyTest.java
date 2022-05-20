@@ -36,4 +36,37 @@ class LottoMoneyTest {
         int amount = LottoMoney.countAmount(1);
         assertThat(amount).isEqualTo(1000);
     }
+
+    @Test
+    @DisplayName("구매 가능한 로또 개수 확인")
+    void canBuyLottos() {
+        final int ticketAmount = 10;
+        LottoMoney lottoMoney = new LottoMoney(LottoMoney.LOTTO_TICKET_PRICE * ticketAmount);
+        assertThat(lottoMoney.canBuyLottos(ticketAmount)).isTrue();
+    }
+
+    @Test
+    @DisplayName("구매 가능한 로또 개수 확인 - 0개")
+    void canBuyLottos_0() {
+        final int ticketAmount = 10;
+        LottoMoney lottoMoney = new LottoMoney(LottoMoney.LOTTO_TICKET_PRICE * ticketAmount);
+        assertThat(lottoMoney.canBuyLottos(0)).isTrue();
+    }
+
+    @Test
+    @DisplayName("구매 가능한 로또 개수 확인 -  금액 초과")
+    void canBuyLottos_금액초과() {
+        final int ticketAmount = 10;
+        LottoMoney lottoMoney = new LottoMoney(LottoMoney.LOTTO_TICKET_PRICE * ticketAmount);
+        assertThat(lottoMoney.canBuyLottos(11)).isFalse();
+    }
+
+    @Test
+    @DisplayName("구매 가능한 로또 개수 확인 -  개수에 음수 입력")
+    void canBuyLottos_음수입력() {
+        final int ticketAmount = 10;
+        LottoMoney lottoMoney = new LottoMoney(LottoMoney.LOTTO_TICKET_PRICE * ticketAmount);
+        boolean actual = lottoMoney.canBuyLottos(-1);
+        assertThat(actual).isFalse();
+    }
 }

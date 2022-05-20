@@ -21,13 +21,6 @@ class LottoGeneratorTest {
     }
 
     @Test
-    @DisplayName("여러개의 로또 생성 - 잘못된 숫자 - 0")
-    void generate_exception_zero() {
-        assertThatThrownBy(() -> LottoGenerator.generate(0))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     @DisplayName("여러개의 로또 생성 - 잘못된 숫자 - -1")
     void generate_exception_negative() {
         assertThatThrownBy(() -> LottoGenerator.generate(-1))
