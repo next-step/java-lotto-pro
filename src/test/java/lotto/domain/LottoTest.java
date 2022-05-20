@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -32,8 +33,8 @@ public class LottoTest {
     @DisplayName("로또번호 정답 갯수를 확인한다.")
     void 로또번호_정답_갯수_확인() {
         Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        Lotto answerLotto = new Lotto(new HashSet<>(Arrays.asList(4, 5, 6, 7, 8, 9)));
-        assertThat(lotto.countMatchedNumber(answerLotto)).isEqualTo(3);
+        Set<Integer> answerNumbers = new HashSet<>(Arrays.asList(4, 5, 6, 7, 8, 9));
+        assertThat(lotto.countMatchedNumber(answerNumbers)).isEqualTo(3);
     }
 
     @Test
@@ -41,7 +42,7 @@ public class LottoTest {
     void 보너스볼_중복_예외() {
         Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThatThrownBy(() -> {
-            lotto.addBonusBallNumber(6);
+            lotto.addBonusBallNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 6);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("[ERROR]");
     }
 }
