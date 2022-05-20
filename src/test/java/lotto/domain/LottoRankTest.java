@@ -10,12 +10,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoRankTest {
-
     @ParameterizedTest
     @DisplayName("매치수량으로 LottoRank 를 반환한다")
-    @CsvSource({"-1, MISS", "0, MISS", "1, MISS", "2, MISS", "3, FIFTH","4, FOURTH", "5, THIRD", "6, FIRST"})
-    void of(int matchCount, LottoRank expected) {
-        assertThat(LottoRank.of(matchCount)).isEqualTo(expected);
+    @CsvSource({
+            "-1, false, MISS",
+            "0, false, MISS",
+            "1, false, MISS",
+            "2, false, MISS",
+            "3, false, FIFTH",
+            "4, false, FOURTH",
+            "5, false, THIRD",
+            "5, true, SECOND",
+            "6, false, FIRST"})
+    void of(int matchCount, boolean bonus, LottoRank expected) {
+        assertThat(LottoRank.of(matchCount, bonus)).isEqualTo(expected);
     }
-
 }

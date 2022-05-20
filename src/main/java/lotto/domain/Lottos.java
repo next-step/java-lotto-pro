@@ -13,7 +13,7 @@ public class Lottos {
     }
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public void add(Lotto lotto) {
@@ -24,8 +24,8 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult getLottoResult(Lotto winningLotto) {
-        return new LottoResult(lottos, winningLotto);
+    public LottoResult getLottoResult(WinningNumber winningNumber) {
+        return new LottoResult(lottos, winningNumber);
     }
 
     @Override
@@ -42,8 +42,7 @@ public class Lottos {
     }
 
     @Override
-    public String
-    toString() {
+    public String toString() {
         return "Lottos{" +
                 "lottos=" + lottos +
                 '}';

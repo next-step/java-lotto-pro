@@ -4,20 +4,19 @@ import java.util.*;
 
 public class Lotto {
     private static final int LOTTO_COUNT = 6;
-    private static final String WRONG_LOTTO_COUNT_ERROR_MESSAGE = "로또번호가 6개가 아닙니다.";
 
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
         sort();
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> lottoSet = new HashSet<>(lottoNumbers);
         if (lottoSet.size() != LOTTO_COUNT) {
-            throw new IllegalArgumentException(WRONG_LOTTO_COUNT_ERROR_MESSAGE);
+            throw new IllegalArgumentException("로또번호가 6개가 아닙니다.");
         }
     }
 
@@ -34,6 +33,10 @@ public class Lotto {
         return (int) lottoNumbers.stream()
                 .filter(winningLotto.lottoNumbers::contains)
                 .count();
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override

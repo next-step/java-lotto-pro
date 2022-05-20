@@ -1,30 +1,44 @@
 package lotto.domain;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Money {
-    private static final int LOTTO_PRICE = 1000;
-    private static final String MONEY_LACK_ERROR_MESSAGE = String.format("금액이 부족합니다.(최소필요금액: %d)", LOTTO_PRICE);
+    public static final int LOTTO_PRICE = 1000;
+    private static final String NUMBER_DIGITS = "###,###";
 
     private final double money;
+
+    public Money() {
+        this(0);
+    }
 
     public Money(String money) {
         this(Double.parseDouble(money));
     }
 
     public Money(double money) {
-        validate(money);
         this.money = money;
     }
 
-    private void validate(double money) {
-        if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException(MONEY_LACK_ERROR_MESSAGE);
-        }
+    public boolean lessThenLottoPrice() {
+        return money < LOTTO_PRICE;
     }
 
     public int getQuantity() {
         return (int) (this.money / LOTTO_PRICE);
+    }
+
+    public Money sumMoney(Money money) {
+        return new Money(money.money + this.money);
+    }
+
+    public double calculateRateOfReturn(Money winningMoneySum) {
+        return winningMoneySum.money / this.money;
+    }
+
+    public String krw() {
+        return String.format("₩ %s", new DecimalFormat(NUMBER_DIGITS).format(this.money));
     }
 
     @Override

@@ -3,17 +3,39 @@ package lotto.domain;
 import java.util.*;
 
 public class LottoResult {
-    private final Map<LottoRank, Integer> lottoResult = new EnumMap<>(LottoRank.class);
+    private final Map<LottoRank, Integer> winningRanks = new EnumMap<>(LottoRank.class);
 
-    public LottoResult(List<Lotto> lottos, Lotto winningLotto) {
-        for (Lotto lotto : lottos) {
-            LottoRank lottoRank = LottoRank.of(lotto.matchCount(winningLotto));
-            lottoResult.put(lottoRank, getWinningCount(lottoRank) + 1);
+    public LottoResult(List<Lotto> buyLottos, WinningNumber winningLotto) {
+        for (Lotto lotto : new ArrayList<>(buyLottos)) {
+            LottoRank lottoRank = LottoRank.of(winningLotto.matchCount(lotto), winningLotto.bonus(lotto));
+            winningRanks.put(lottoRank, winningCount(lottoRank) + 1);
         }
     }
 
-    public int getWinningCount(LottoRank lottoRank) {
-        return Optional.ofNullable(lottoResult.get(lottoRank))
-                .orElse(0);
+    public int winningCount(LottoRank lottoRank) {
+        Integer winningCount = winningRanks.get(lottoRank);
+        if (winningCount == null) {
+            return 0;
+        }
+        return winningCount;
+    }
+
+    public double rateOfReturn(Money buyPrice) {
+        return buyPrice.calculateRateOfReturn(winningMoney());
+    }
+
+    private Money winningMoney() {
+        Money moneySum = new Money();
+        for (LottoRank lottoRank : winningRanks.keySet()) {
+            moneySum = sumRankMoney(moneySum, lottoRank);
+        }
+        return moneySum;
+    }
+
+    private Money sumRankMoney(Money moneySum, LottoRank lottoRank) {
+        for (int i = 0; i < winningCount(lottoRank); i++) {
+            moneySum = lottoRank.sumWinningMoney(moneySum);
+        }
+        return moneySum;
     }
 }

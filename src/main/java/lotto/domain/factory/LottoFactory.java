@@ -11,13 +11,11 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class LottoFactory {
-    private static final List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.lottoNumbersCache.values());
     private static final String COMMA_DELIMITER = ",";
     private static final String LOTTO_PATTERN_REGEX = "^[\\d,\\s]*$";
     private static final Pattern lottoNumbersPattern = Pattern.compile(LOTTO_PATTERN_REGEX);
     private static final String SPACE_DELIMITER = "\\s+";
     private static final String EMPTY_STRING = "";
-    private static final String WRONG_INPUT_MESSAGE = "숫자, 공백 및 문자 , 만 사용 가능합니다.";
     private static final int LOTTO_COUNT = 6;
 
     private LottoFactory() {
@@ -30,7 +28,7 @@ public class LottoFactory {
 
     private static void validateInputString(String lottoNumbers) {
         if (!isLottoPattern(lottoNumbers)) {
-            throw new IllegalArgumentException(WRONG_INPUT_MESSAGE);
+            throw new IllegalArgumentException("숫자, 공백 및 문자 , 만 사용 가능합니다.");
         }
     }
 
@@ -54,6 +52,7 @@ public class LottoFactory {
     }
 
     public static Lotto createAuto() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.lottoNumbersCache.values());
         Collections.shuffle(lottoNumbers);
         return new Lotto(
                 lottoNumbers.stream().

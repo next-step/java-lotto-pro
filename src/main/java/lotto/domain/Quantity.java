@@ -1,7 +1,6 @@
 package lotto.domain;
 
 public class Quantity {
-    private static final String EXCEED_QUANTITY_ERROR_MESSAGE = "구매할 수 있는 수량을 초과하였습니다. 구매가능수량: %d, 구매수량:%d";
 
     private final int quantity;
     private final int maxQuantity;
@@ -18,7 +17,7 @@ public class Quantity {
 
     private void validate(int quantity, int maxQuantity) {
         if (quantity > maxQuantity) {
-            throw new IllegalArgumentException(String.format(EXCEED_QUANTITY_ERROR_MESSAGE, maxQuantity, quantity));
+            throw new IllegalArgumentException(String.format("구매할 수 있는 수량을 초과하였습니다. 구매가능수량: %d, 구매수량:%d", maxQuantity, quantity));
         }
     }
 
