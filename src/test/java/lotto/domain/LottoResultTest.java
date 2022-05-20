@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.error.LottoCountErrorCode;
-import lotto.domain.error.LottoRank;
 import lotto.domain.error.LottoWinningResultErrorCode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

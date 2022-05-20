@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.error.LottoRank;
+import lotto.domain.LottoRank;
 import lotto.dto.LottoResponse;
 
 import java.util.Map;
