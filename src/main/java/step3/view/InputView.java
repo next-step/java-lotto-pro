@@ -15,30 +15,34 @@ public class InputView {
 
     public String getMoney() {
         System.out.println(GET_MONEY_MESSAGE);
-        return scanIn.nextLine().replace(" ", ""); /* 받아온 String내부에 공백을 제거하기 위해 replace사용 */
+        return customTrim(scanIn.nextLine());
     }
 
     public String getWinnerLotto() {
         System.out.println(GET_LOTTO_MESSAGE);
-        return scanIn.nextLine().replace(" ", ""); /* 받아온 String내부에 공백을 제거하기 위해 replace사용 */
+        return customTrim(scanIn.nextLine());
     }
 
     public String getManualLottoCount() {
         System.out.println(GET_MANUAL_LOTTO_COUNT);
-        return scanIn.nextLine().replace(" ", "");
+        return customTrim(scanIn.nextLine());
     }
 
     public List<String> getManualLotto(int manualTicket) {
         List<String> manualLottoTicketsSource = new ArrayList<>();
         System.out.println(GET_MANUAL_LOTTO_MESSAGE);
         for (int i = 0; i < manualTicket; i++) {
-            manualLottoTicketsSource.add(scanIn.nextLine().replace(" ", ""));
+            manualLottoTicketsSource.add(customTrim(scanIn.nextLine()));
         }
         return manualLottoTicketsSource;
     }
 
     public String getBonusLotto() {
         System.out.println(GET_BONUS_LOTTO);
-        return scanIn.nextLine().replace(" ", "");
+        return customTrim(scanIn.nextLine());
+    }
+
+    private String customTrim(String source) {
+        return source.replace(" ", "");
     }
 }
