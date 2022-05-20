@@ -15,20 +15,4 @@ public class MoneyTest {
 		assertThatThrownBy(() -> new Money(number))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
-
-	@ParameterizedTest
-	@NullAndEmptySource
-	@DisplayName("공백 혹은 빈값 검증")
-	void valid_empty_or_null(String number) {
-		assertThatThrownBy(() -> new Money(number))
-			.isInstanceOf(IllegalArgumentException.class);
-	}
-
-	@ParameterizedTest
-	@ValueSource(strings = {"abc", "!@#23", "sa0909", "21-233"})
-	@DisplayName("숫자 이외의 문자 입력 검증")
-	void valid_characters(String number) {
-		assertThatThrownBy(() -> new Money(number))
-			.isInstanceOf(IllegalArgumentException.class);
-	}
 }
