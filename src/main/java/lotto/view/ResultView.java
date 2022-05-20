@@ -12,6 +12,7 @@ public class ResultView {
     }
 
     public static void printTicket(LottoTicket lottoTicket) {
+        System.out.println();
         System.out.println(lottoTicket.size() + "개를 구매했습니다.");
         System.out.println(lottoTicket);
     }
