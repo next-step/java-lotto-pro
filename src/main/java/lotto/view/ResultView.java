@@ -3,14 +3,15 @@ package lotto.view;
 import lotto.Lottos;
 import lotto.Rank;
 
-import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
     private static final String PRINT_QUANTITY_MESSAGE = "%d개를 구매했습니다.";
     private static final String STATISTICS_HEADER_MESSAGE = "당첨 통계";
     private static final String LINE = "---------";
-    private static final String STATISTICS_MESSAGE = "%d개 일치 (%d원)- %d개";
+    private static final String STATISTICS_MESSAGE = "%d개 일치 (%d원) - %d개";
+    private static final String STATISTICS_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
     private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final int LOSS_MINIMUM_SCORE = 1;
@@ -24,28 +25,23 @@ public class ResultView {
         System.out.printf((PRINT_QUANTITY_MESSAGE) + "%n", quantity);
     };
 
-    public static void printStatistics(List<Rank> ranks) {
+    public static void printStatistics(final Map<Rank, Integer> gameResult) {
         System.out.println(STATISTICS_HEADER_MESSAGE);
         System.out.println(LINE);
-        printRank(ranks, Rank._4ST);
-        printRank(ranks, Rank._3ST);
-        printRank(ranks, Rank._2ST);
-        printRank(ranks, Rank._1ST);
+        for (Rank rank : gameResult.keySet()) {
+            printRank(rank, gameResult.get(rank));
+        }
     }
 
-    private static void printRank(List<Rank> ranks, Rank targetRank) {
-        int count = 0;
-        for (Rank rank : ranks) {
-            count = plusCount(count, targetRank, rank);
+    private static void printRank(final Rank rank, final int count) {
+        if(rank.equals(Rank.LOSE)) {
+            return;
         }
-        System.out.printf((STATISTICS_MESSAGE) + "%n", targetRank.getCount(), targetRank.getWinningMoney(), count);
-    }
-
-    private static int plusCount(int count, Rank targetRank, Rank rank) {
-        if (targetRank.equals(rank)) {
-            count++;
+        if (rank.equals(Rank.SECOND)) {
+            System.out.printf((STATISTICS_BONUS_MESSAGE) + "%n", rank.getCount(), rank.getWinningMoney(), count);
+            return;
         }
-        return count;
+        System.out.printf((STATISTICS_MESSAGE) + "%n", rank.getCount(), rank.getWinningMoney(), count);
     }
 
     public static void printProfitRate(double profitRate) {
