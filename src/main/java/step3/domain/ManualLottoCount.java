@@ -4,7 +4,14 @@ public class ManualLottoCount {
     private final int element;
 
     public ManualLottoCount(int element) {
+        validate(element);
         this.element = element;
+    }
+
+    private void validate(int manualLottoCount) {
+        if(manualLottoCount < 0) {
+            throw new IllegalArgumentException("수동로또 구매 개수는 0 이상으로 입력해주세요.");
+        }
     }
 
     public int get() {
