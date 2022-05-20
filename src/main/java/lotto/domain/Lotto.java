@@ -33,10 +33,11 @@ public class Lotto {
 		return new Lotto(numbers);
 	}
 
-	public Rank match(Lotto winningLotto) {
+	public Rank match(Lotto winningLotto, Number number) {
 		int matchCount = numbers.match(winningLotto.numbers);
+		boolean containNumber = numbers.isContainNumber(number);
 
-		return Rank.matchPrize(matchCount);
+		return Rank.matchPrize(matchCount, containNumber);
 	}
 
 	public LottoNumber getLotto() {

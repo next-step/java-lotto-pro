@@ -17,11 +17,11 @@ public class LottoTickets {
 		this.lottoTickets = new ArrayList<>();
 	}
 
-	public RankResult getResult(Lotto winningLotto) {
+	public RankResult getResult(Lotto winningLotto, Number number) {
 		RankResult rankResult = new RankResult();
 
 		for(Lotto lotto: lottoTickets) {
-			Rank rank = lotto.match(winningLotto);
+			Rank rank = lotto.match(winningLotto, number);
 
 			rankResult.setUp(rank);
 		}
