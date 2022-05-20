@@ -1,13 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoShop;
-import lotto.domain.LottoNo;
-import lotto.domain.LottoScore;
-import lotto.domain.Lottos;
-import lotto.domain.ManualLottoCount;
-import lotto.domain.Price;
-import lotto.domain.WinningNumbers;
-import lotto.domain.Winnings;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,9 +10,9 @@ public class LottoController {
         int purchaseAmount = InputView.inputPurchaseAmount();
         Price price = new Price(purchaseAmount);
 
-        ManualLottoCount manualLottoCount = new ManualLottoCount(InputView.inputManualLottoCount());
+        Quantity manualLottoQuantity = new Quantity(InputView.inputManualLottoQuantity());
         Lottos manualLottos = LottoShop.buyManualLottos(InputView.inputManualLottoNumber(
-            manualLottoCount.getManualLottoCount()), price);
+            manualLottoQuantity.getQuantity()), price);
         Lottos autoLottos = LottoShop.buyAutoLottos(price);
 
         OutputView.printPurchaseCountByLottoType(manualLottos.size(), autoLottos.size());

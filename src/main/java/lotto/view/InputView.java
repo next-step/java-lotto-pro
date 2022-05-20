@@ -8,7 +8,7 @@ import lotto.constants.MessageConstants;
 public class InputView {
     private static Scanner scanner = new Scanner(System.in);
 
-    private static int inputPrice() {
+    private static int inputNumber() {
         int price = scanner.nextInt();
         scanner.nextLine();
         return price;
@@ -20,11 +20,11 @@ public class InputView {
 
     public static int inputPurchaseAmount() {
         System.out.println(MessageConstants.INPUT_PURCHASE_AMOUNT);
-        return inputPrice();
+        return inputNumber();
     }
 
-    public static String inputManualLottoCount() {
-        System.out.println(MessageConstants.INPUT_MANUAL_LOTTO_COUNT);
+    public static String inputManualLottoQuantity() {
+        System.out.println(MessageConstants.INPUT_MANUAL_LOTTO_QUANTITY);
         return inputString();
     }
 
