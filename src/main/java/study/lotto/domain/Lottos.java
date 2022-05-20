@@ -1,5 +1,6 @@
 package study.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,15 +10,13 @@ import study.lotto.domain.draw.DrawResult;
 import study.lotto.domain.lottomachine.LottoCount;
 
 public class Lottos {
-    private final LottoCount manualCount;
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
-        this(new LottoCount(0), lottos);
+    public Lottos() {
+        this(new ArrayList<>());
     }
 
-    public Lottos(LottoCount manualCount, List<Lotto> lottos) {
-        this.manualCount = manualCount;
+    public Lottos(List<Lotto> lottos) {
         this.lottos = copy(lottos);
     }
 
@@ -25,13 +24,8 @@ public class Lottos {
         return copy(lottos);
     }
 
-    public LottoCount getManualCount() {
-        return manualCount;
-    }
-
-    public LottoCount getAutomaticLottoCount() {
-        LottoCount count = new LottoCount(lottos.size());
-        return new LottoCount(count.subtract(manualCount));
+    public LottoCount count() {
+        return new LottoCount(lottos.size());
     }
 
     public DrawResult findWinnings(Lotto winningNumber, LottoNumber bonusNumber) {

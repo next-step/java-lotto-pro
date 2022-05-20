@@ -9,16 +9,8 @@ import org.junit.jupiter.api.Test;
 import study.lotto.domain.draw.Division;
 import study.lotto.domain.draw.DivisionResult;
 import study.lotto.domain.draw.DrawResult;
-import study.lotto.domain.lottomachine.LottoCount;
 
 class LottosTest {
-    @Test
-    @DisplayName("수동 로또 개수를 반환할 수 있다.")
-    void 수동_로또_개수() {
-        Lottos manualLottos = new Lottos(new LottoCount("5"), fixturesLotto());
-        assertThat(manualLottos.getManualCount()).isEqualTo(new LottoCount("5"));
-    }
-
     @Test
     @DisplayName("당첨번호를 입력하면 당첨 결과를 받을 수 있다.")
     void 당첨결과_확인() {

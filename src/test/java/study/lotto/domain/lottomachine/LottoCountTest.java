@@ -38,6 +38,6 @@ class LottoCountTest {
     @DisplayName("입력 받은 값과의 차를 구한다.")
     void 차_구하기() {
         LottoCount lottoCount = new LottoCount(5);
-        assertThat(lottoCount.subtract(new LottoCount(3))).isEqualTo(2);
+        assertThat(lottoCount.subtract(new LottoCount(3))).isEqualTo(new LottoCount(2));
     }
 }

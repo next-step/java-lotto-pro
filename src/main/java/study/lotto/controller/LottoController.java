@@ -18,10 +18,9 @@ public class LottoController {
 
     public void start() {
         LottoPurchaseHistory lottoPurchaseHistory = purchaseLotto();
-        Lottos purchasedLotto = lottoPurchaseHistory.getLottos();
-        showPurchaseResult(purchasedLotto);
+        showPurchaseResult(lottoPurchaseHistory);
 
-        DrawResult drawResult = draw(purchasedLotto);
+        DrawResult drawResult = draw(lottoPurchaseHistory.getLottos());
         showResult(drawResult, lottoPurchaseHistory);
     }
 
@@ -43,7 +42,7 @@ public class LottoController {
         return new LottoMachine(new AutomaticLottoGenerator());
     }
 
-    private void showPurchaseResult(Lottos purchasedLottos) {
-        view.showPurchaseResult(purchasedLottos);
+    private void showPurchaseResult(LottoPurchaseHistory lottoPurchaseHistory) {
+        view.showPurchaseResult(lottoPurchaseHistory);
     }
 }

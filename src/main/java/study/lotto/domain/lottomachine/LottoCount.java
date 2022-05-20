@@ -21,8 +21,8 @@ public class LottoCount {
         return value > number.value;
     }
 
-    public int subtract(LottoCount number) {
-        return value - number.value;
+    public LottoCount subtract(LottoCount number) {
+        return new LottoCount(value - number.value);
     }
 
     private int validate(String price) {

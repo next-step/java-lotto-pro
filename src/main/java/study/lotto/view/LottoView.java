@@ -10,6 +10,7 @@ import study.lotto.domain.LottoNumber;
 import study.lotto.domain.Lottos;
 import study.lotto.domain.draw.WinningStatistics;
 import study.lotto.domain.lottomachine.LottoCount;
+import study.lotto.domain.lottomachine.LottoPurchaseHistory;
 import study.lotto.domain.lottomachine.Price;
 
 public class LottoView {
@@ -25,14 +26,14 @@ public class LottoView {
 
     public Lottos getManualLottos() {
         LottoCount count = new LottoCount(userInterface.getUserInput("수동으로 구매할 로또 수를 입력해 주세요.\n"));
-        return new Lottos(count, getManualLottos(count));
+        return new Lottos(getManualLottos(count));
     }
 
-    public void showPurchaseResult(Lottos purchasedLottos) {
+    public void showPurchaseResult(LottoPurchaseHistory lottoPurchaseHistory) {
         userInterface.show(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.\n",
-                purchasedLottos.getManualCount(),
-                purchasedLottos.getAutomaticLottoCount()));
-        userInterface.show(lottoListString(purchasedLottos.get()));
+                lottoPurchaseHistory.getManualCount(),
+                lottoPurchaseHistory.getAutomaticLottoCount()));
+        userInterface.show(lottoListString(lottoPurchaseHistory.getLottos()));
         userInterface.show("\n");
     }
 
@@ -82,8 +83,8 @@ public class LottoView {
                 .forEach(userInterface::show);
     }
 
-    private String lottoListString(List<Lotto> lottoList) {
-        return lottoList.stream()
+    private String lottoListString(Lottos lottos) {
+        return lottos.get().stream()
                 .map(this::lottoString)
                 .reduce("", (str1, str2) -> str1 + str2);
     }

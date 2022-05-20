@@ -68,7 +68,7 @@ class LottoMachineTest {
                     Lotto.from("7,8,9,10,11,12"),
                     Lotto.from("13,14,15,16,17,18")
             );
-            Lottos manualLottos = new Lottos(new LottoCount("3"), lottoList);
+            Lottos manualLottos = new Lottos(lottoList);
             assertThatThrownBy(() -> lottoMachine.issueLotto(purchasePrice, manualLottos))
                     .isInstanceOf(IllegalArgumentException.class);
         }
@@ -80,9 +80,8 @@ class LottoMachineTest {
                     Lotto.from("1,2,3,4,5,6"),
                     Lotto.from("7,8,9,10,11,12")
             );
-            Lottos manualLottos = new Lottos(new LottoCount("3"), lottoList);
-            assertThatThrownBy(() -> lottoMachine.issueLotto(purchasePrice, manualLottos))
-                    .isInstanceOf(IllegalArgumentException.class);
+            Lottos manualLottos = new Lottos(lottoList);
+            assertThat(lottoMachine.issueLotto(purchasePrice, manualLottos)).isNotNull();
         }
 
         @Test
@@ -91,7 +90,7 @@ class LottoMachineTest {
             List<Lotto> lottoList = Arrays.asList(
                     Lotto.from("1,2,3,4,5,6")
             );
-            Lottos manualLottos = new Lottos(new LottoCount("1"), lottoList);
+            Lottos manualLottos = new Lottos(lottoList);
 
             LottoPurchaseHistory lottoPurchaseHistory = lottoMachine.issueLotto(purchasePrice, manualLottos);
             assertThat(lottoPurchaseHistory.getLottos().get()).hasSize(2);
