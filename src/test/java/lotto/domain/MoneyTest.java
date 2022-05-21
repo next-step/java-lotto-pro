@@ -23,25 +23,25 @@ public class MoneyTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    @DisplayName("Money 비정상 생성: 1000원 미만")
-    void Money_비정상_생성_1000원_미만(){
-        assertThatThrownBy(() -> {
-            Money money = new Money(100);
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
     @ParameterizedTest(name="금액으로 구매 가능한 로또 개수 반환: {0}원 - {1}개")
     @CsvSource(value = {"1000:1", "1001:1", "1999:1"}, delimiter = ':')
     void Money_구매가능_로또_개수(int amount, int count){
         Money money = new Money(amount);
-        assertThat(money.lottoCountToBuy()).isEqualTo(count);
+        assertThat(money.maxLottoCount()).isEqualTo(new LottoCount(count));
     }
 
     @ParameterizedTest(name="수익률 계산: 초기금액 {0}원 - 상금 {1}원 - 수익률 {2}")
     @CsvSource(value = {"100000:5000:0.05", "100500:5000:0.05"}, delimiter = ':')
-    void Money_수익률_계산(int initialMoney, int winningPrice, double profit){
+    void Money_수익률_계산(int initialMoney, int winningPrize, double profit){
         Money money = new Money(initialMoney);
-        assertThat(money.calculateProfit(winningPrice)).isEqualTo(profit);
+        assertThat(money.calculateProfit(winningPrize)).isEqualTo(profit);
+    }
+
+    @Test
+    @DisplayName("Money Subtract 생성")
+    void Money_Subtract_생성(){
+        Money money = new Money(10000);
+        Money subtractMoney = money.subtract(1000);
+        assertThat(subtractMoney.getAmount()).isEqualTo(9000);
     }
 }

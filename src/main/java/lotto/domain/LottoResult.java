@@ -12,6 +12,10 @@ public class LottoResult {
         updateWinningCount(lottos, winningLotto, bonusNumber);
     }
 
+    public static LottoResult of(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
+        return new LottoResult(lottos, winningLotto, bonusNumber);
+    }
+
     private void updateWinningCount(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos.getLottosAsUnmodifiableList()) {
             LottoRank rank = LottoRank.valueOf(lotto.countMatchedNumbers(winningLotto), lotto.hasNumber(bonusNumber));
@@ -19,12 +23,12 @@ public class LottoResult {
         }
     }
 
-    public int winningPrice() {
-        int winningPrice = 0;
+    public int winningPrize() {
+        int winningPrize = 0;
         for (LottoRank rank : LottoRank.values()) {
-            winningPrice += winningCount.getOrDefault(rank, 0) * rank.getPrice();
+            winningPrize += winningCount.getOrDefault(rank, 0) * rank.getPrize();
         }
-        return winningPrice;
+        return winningPrize;
     }
 
     public int winningCountByRank(LottoRank rank) {

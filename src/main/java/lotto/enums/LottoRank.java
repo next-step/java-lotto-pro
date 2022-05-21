@@ -13,13 +13,13 @@ public enum LottoRank {
     LOSE(-1,0);
 
     private int matchedCount;
-    private int price;
+    private int prize;
 
     public static final int RANK_SECOND_MATCHED_COUNT = 5;
 
-    LottoRank(int matchedCount, int price) {
+    LottoRank(int matchedCount, int prize) {
         this.matchedCount = matchedCount;
-        this.price = price;
+        this.prize = prize;
     }
 
     public static LottoRank valueOf(int matchedCount, boolean bonusMatched) {
@@ -56,7 +56,7 @@ public enum LottoRank {
         return matchedCount;
     }
 
-    public int getPrice() {
-        return price;
+    public int getPrize() {
+        return prize;
     }
 }

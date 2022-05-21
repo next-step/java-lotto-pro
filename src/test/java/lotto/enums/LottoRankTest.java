@@ -17,11 +17,11 @@ class LottoRankTest {
     @DisplayName("등수별 상금 검증")
     void LottoRank_등수별_상금_검증(){
         assertAll(
-                () -> assertThat(LottoRank.FIRST.getPrice()).isEqualTo(2_000_000_000),
-                () -> assertThat(LottoRank.SECOND.getPrice()).isEqualTo(30_000_000),
-                () -> assertThat(LottoRank.THIRD.getPrice()).isEqualTo(1_500_000),
-                () -> assertThat(LottoRank.FOURTH.getPrice()).isEqualTo(50_000),
-                () -> assertThat(LottoRank.FIFTH.getPrice()).isEqualTo(5_000)
+                () -> assertThat(LottoRank.FIRST.getPrize()).isEqualTo(2_000_000_000),
+                () -> assertThat(LottoRank.SECOND.getPrize()).isEqualTo(30_000_000),
+                () -> assertThat(LottoRank.THIRD.getPrize()).isEqualTo(1_500_000),
+                () -> assertThat(LottoRank.FOURTH.getPrize()).isEqualTo(50_000),
+                () -> assertThat(LottoRank.FIFTH.getPrize()).isEqualTo(5_000)
         );
     }
 

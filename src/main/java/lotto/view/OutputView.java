@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.constant.ViewMessageConst;
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.enums.LottoRank;
@@ -10,8 +11,9 @@ public class OutputView {
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER_COMMA = ", ";
 
-    public static void printPurchasedLottos(Lottos lottos) {
-        System.out.println(String.format(ViewMessageConst.OUTPUT_MESSAGE_PURCHASED_SIZE, lottos.size()));
+    public static void printPurchasedLottos(Lottos lottos, LottoCount manualCount) {
+        System.out.println(String.format(ViewMessageConst.OUTPUT_MESSAGE_PURCHASED_SIZE,
+                manualCount.getCount(), lottos.size() - manualCount.getCount()));
         for (Lotto lotto : lottos.getLottosAsUnmodifiableList()) {
             System.out.println(lotto.lottoNumbers());
         }
@@ -27,7 +29,7 @@ public class OutputView {
     private static void printWinningCount(LottoResult result) {
         for(LottoRank rank : LottoRank.rankListWithReverseOrder()){
             System.out.println(String.format(ViewMessageConst.OUTPUT_MESSAGE_WINNING_COUNT_RESULT,
-                    rank.getMatchedCount(), printBonusBallMatched(rank.bonusBallMatched()), rank.getPrice(),
+                    rank.getMatchedCount(), printBonusBallMatched(rank.bonusBallMatched()), rank.getPrize(),
                     result.winningCountByRank(rank)));
         }
     }

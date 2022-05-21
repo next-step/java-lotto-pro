@@ -8,11 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottosGenerator {
-    public static Lottos purchaseLottos(Money money) {
+    public static Lottos purchaseManualAndAutoLottos(Money money, List<Lotto> fixedLottos){
+        Lottos manualLottos = purchaseManualLottos(fixedLottos);
+        Lottos autoLottos = purchaseAutoLottos(money.subtract(manualLottos.price()));
+        return mergeLottos(manualLottos, autoLottos);
+    }
+
+    public static Lottos purchaseManualLottos(List<Lotto> manualLottos){
+        return Lottos.from(manualLottos);
+    }
+
+    public static Lottos purchaseAutoLottos(Money money) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < money.lottoCountToBuy(); i++) {
-            lottoList.add(new Lotto(RandomLottoNumbersGenerator.generate()));
+        for (int i = 0; i < money.maxLottoCount().getCount(); i++) {
+            lottoList.add(Lotto.from(RandomLottoNumbersGenerator.generate()));
         }
-        return new Lottos(lottoList);
+        return Lottos.from(lottoList);
+    }
+
+    private static Lottos mergeLottos(Lottos manualLottos, Lottos autoLottos) {
+        List<Lotto> merged = new ArrayList<>();
+        merged.addAll(manualLottos.getLottosAsUnmodifiableList());
+        merged.addAll(autoLottos.getLottosAsUnmodifiableList());
+        return Lottos.from(merged);
     }
 }

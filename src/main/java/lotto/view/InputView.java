@@ -21,4 +21,17 @@ public class InputView {
         System.out.println(ViewMessageConst.INPUT_MESSAGE_BONUS_NUMBER);
         return scan.nextLine();
     }
+
+    public static String readManualLottosCount() {
+        System.out.println(ViewMessageConst.INPUT_MESSAGE_MANUAL_LOTTOS_COUNT);
+        return scan.nextLine();
+    }
+
+    public static void guideMessageToReadManualLottoNumbers() {
+        System.out.println(ViewMessageConst.INPUT_MESSAGE_MANUAL_LOTTOS_NUMBER);
+    }
+
+    public static String readSimpleInput(){
+        return scan.nextLine();
+    }
 }

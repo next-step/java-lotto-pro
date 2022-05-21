@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.constant.ErrorMessageConst;
+import lotto.utils.CustomParseUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +20,14 @@ public class Lotto {
             lottoNumbers.add(lottoNumber);
         }
         Collections.sort(lottoNumbers);
+    }
+
+    public static Lotto from(List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
+    public static Lotto from(String numbers) {
+        return new Lotto(CustomParseUtils.stringToIntegerList(numbers));
     }
 
     private void validateNumberSize(List<Integer> numbers) {

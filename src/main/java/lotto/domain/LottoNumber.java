@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.constant.ErrorMessageConst;
+import lotto.utils.CustomParseUtils;
 
 import java.util.Objects;
 
@@ -17,6 +18,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
                             LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE));
         }
         this.number = number;
+    }
+
+    public static LottoNumber from(String number) {
+        return new LottoNumber(CustomParseUtils.stringToInteger(number));
     }
 
     public int getNumber() {
