@@ -1,5 +1,8 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
@@ -9,10 +12,16 @@ public class LottoResult {
 	private final Lottos lottos;
 	private final WinningList winningList;
 
-	public LottoResult(Lottos lottos, LottoNumbers lastWinningLotto, String bonusLottoNumber) {
+	public LottoResult(LottoNumbers lastWinningLotto, String bonusLottoNumber, Lottos... lottosList) {
 		validationBonus(lastWinningLotto, bonusLottoNumber);
-		this.lottos = lottos;
-		this.winningList = new WinningList(lottos, lastWinningLotto, bonusLottoNumber);
+
+		List<LottoNumbers> lottos = new ArrayList<>();
+		for(Lottos lottosData: lottosList) {
+			lottos.addAll(lottosData.getLottos());
+		}
+		
+		this.lottos = new Lottos(lottos);
+		this.winningList = new WinningList(this.lottos, lastWinningLotto, bonusLottoNumber);
 	}
 
 	private void validationBonus(LottoNumbers lastWinningLotto, String bonusLottoNumber) {

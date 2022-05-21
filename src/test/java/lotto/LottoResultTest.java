@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,16 +16,22 @@ import lotto.model.WinningMoney;
 
 public class LottoResultTest {
 
-	@Test
-	@DisplayName("수익률 구하기")
-	void buy_lotto_auto() {
+	private Lottos lottos;
+
+	@BeforeEach
+	void setup() {
 		List<LottoNumbers> lottos = new ArrayList<>();
 		lottos.add(new LottoNumbers("1,2,3,4,5,6"));
 		lottos.add(new LottoNumbers("1,2,3,4,5,7"));
+		this.lottos = new Lottos(lottos);
+	}
 
-		LottoResult lottoResult = new LottoResult(new Lottos(lottos), new LottoNumbers("1,2,3,4,5,6"), "8");
+	@Test
+	@DisplayName("수익률 구하기")
+	void buy_lotto_auto() {
+		LottoResult lottoResult = new LottoResult(new LottoNumbers("1,2,3,4,5,7"), "6", this.lottos);
 		assertEquals(lottoResult.profitRate(1000),
-				(WinningMoney.FIRST.getWinningMoney() + WinningMoney.THIRD.getWinningMoney()) / 2000);
+				(WinningMoney.FIRST.getWinningMoney() + WinningMoney.SECOND.getWinningMoney()) / 2000);
 	}
 
 	@Test
@@ -34,7 +41,7 @@ public class LottoResultTest {
 		lottos.add(new LottoNumbers("1,2,3,4,5,6"));
 		lottos.add(new LottoNumbers("1,2,3,4,5,7"));
 
-		LottoResult lottoResult = new LottoResult(new Lottos(lottos), new LottoNumbers("1,2,3,4,5,8"), "7");
+		LottoResult lottoResult = new LottoResult(new LottoNumbers("1,2,3,4,5,8"), "7", this.lottos);
 		assertEquals(lottoResult.profitRate(1000),
 				(WinningMoney.THIRD.getWinningMoney() + WinningMoney.SECOND.getWinningMoney()) / 2000);
 	}
@@ -46,6 +53,6 @@ public class LottoResultTest {
 		lottos.add(new LottoNumbers("1,2,3,4,5,6"));
 
 		assertThrows(IllegalArgumentException.class,
-				() -> new LottoResult(new Lottos(lottos), new LottoNumbers("1,2,3,4,5,8"), "8"));
+				() -> new LottoResult(new LottoNumbers("1,2,3,4,5,8"), "8", new Lottos(lottos)));
 	}
 }
