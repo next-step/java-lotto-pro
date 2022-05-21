@@ -11,9 +11,13 @@ public class LottoGame {
     private Quantity quantity;
 
     public LottoGame(String money) {
-        this.lottos = new Lottos();
+        this(money, new Lottos());
+    }
+
+    public LottoGame(String money, Lottos manualLottos) {
+        this.lottos = manualLottos;
         this.buyPrice = new Money(money);
-        this.quantity = new Quantity(this.buyPrice.getQuantity());
+        this.quantity = new Quantity(this.buyPrice.getQuantity(), manualLottos.size());
     }
 
     public void buyLottos() {
@@ -34,15 +38,23 @@ public class LottoGame {
         return this.quantity.isPurchasable();
     }
 
-    public int getMaxQuantity() {
-        return this.quantity.getMaxQuantity();
-    }
-
     public List<Lotto> getLottos() {
         return this.lottos.getLottos();
     }
 
     public LottoResult getLottoResult(String winningNumber, String bonusNumber) {
         return lottos.getLottoResult(new WinningNumber(winningNumber, bonusNumber));
+    }
+
+    public int autoQuantity() {
+        return getMaxQuantity() - manualQuantity();
+    }
+
+    private int getMaxQuantity() {
+        return this.quantity.getMaxQuantity();
+    }
+
+    public int manualQuantity() {
+        return this.quantity.getManualQuantity();
     }
 }
