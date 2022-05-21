@@ -24,8 +24,7 @@ public enum Division {
 
     public static Division valueOf(int matchCount, boolean matchBonus) {
         return Arrays.stream(values())
-                .filter(division -> division.hasSameMatchCount(matchCount))
-                .filter(division -> division.checkBonusMatch(matchBonus))
+                .filter(division -> division.hasSameMatchCount(matchCount) && division.checkBonusMatch(matchBonus))
                 .findFirst()
                 .orElse(DIVISION_NONE);
     }
