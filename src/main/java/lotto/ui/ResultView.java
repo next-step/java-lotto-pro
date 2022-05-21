@@ -60,17 +60,15 @@ public class ResultView {
     }
 
     private static void printRanks(WinRanks winRanks) {
-        Map<Integer, Rank> winMap = winRanks.getWinMap();
-        for (int i = 3; i < 7; i++) {
-            Rank rank = winMap.get(i);
-            printRank(rank);
+        Map<Rank, Integer> winMap = winRanks.getWinMap();
+        for (Rank key : winMap.keySet()) {
+            printRank(key, winMap.get(key));
         }
     }
 
-    public static void printRank(Rank rank) {
-        int key = rank.getKey();
-        int price = rank.getPrice();
-        int count = rank.getCount();
+    public static void printRank(Rank rank, int count) {
+        int key = rank.getCountOfMatch();
+        int price = rank.getWinningMoney();
         System.out.println(key + "개 일치 (" + price + "원)- " + count + "개");
     }
 }

@@ -1,52 +1,34 @@
 package lotto;
 
-import java.util.Objects;
+public enum Rank {
+    FIRST(6, 2_000_000_000), THIRD(5, 1_500_000), FOURTH(4, 50_000), FIFTH(3, 5_000);
 
-public class Rank {
-    private final int key;
-    private final int price;
-    private int count;
+    private final int countOfMatch;
+    private final int winningMoney;
 
-    public Rank(int key, int price, int count) {
-        this.key = key;
-        this.price = price;
-        this.count = count;
+    Rank(int countOfMatch, int winningMoney) {
+        this.countOfMatch = countOfMatch;
+        this.winningMoney = winningMoney;
     }
 
-    public void addCount() {
-        count++;
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
-    public int calculateTotalPrice() {
-        return price * count;
+    public int getWinningMoney() {
+        return winningMoney;
     }
 
-    public int getKey() {
-        return key;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
+    public static Rank valueOf(int countOfMatch) {
+        Rank[] values = Rank.values();
+        Rank rank = null;
+        for (Rank value : values) {
+            if (value.getCountOfMatch() == countOfMatch) {
+                rank = value;
+            }
         }
-        if (!(o instanceof Rank)) {
-            return false;
-        }
-        Rank rank = (Rank) o;
-        return key == rank.key && price == rank.price && count == rank.count;
+
+        return rank;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(key, price, count);
-    }
 }

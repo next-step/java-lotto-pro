@@ -4,26 +4,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WinRanks {
-    private final Map<Integer, Rank> winMap;
+    private final Map<Rank, Integer> winMap;
 
     public WinRanks() {
         winMap = new HashMap<>();
-        winMap.put(3, new Rank(3, 5_000, 0));
-        winMap.put(4, new Rank(4, 50_000, 0));
-        winMap.put(5, new Rank(5, 1_500_000, 0));
-        winMap.put(6, new Rank(6, 2_000_000_000, 0));
+        winMap.put(Rank.FIRST, 0);
+        winMap.put(Rank.THIRD, 0);
+        winMap.put(Rank.FOURTH, 0);
+        winMap.put(Rank.FIFTH, 0);
     }
 
-    public Map<Integer, Rank> getWinMap() {
+    public Map<Rank, Integer> getWinMap() {
         return winMap;
     }
 
     public int winningPrice(Lotto winningLotto, Lottos lottos) {
         int totalPrice = 0;
         calculateWinPriceMap(winningLotto, lottos);
-        for (Integer key : winMap.keySet()) {
-            Rank rank = winMap.get(key);
-            totalPrice += rank.calculateTotalPrice();
+        for (Rank rankEnum : winMap.keySet()) {
+            totalPrice += winMap.get(rankEnum) * rankEnum.getWinningMoney();
         }
         return totalPrice;
     }
@@ -35,10 +34,10 @@ public class WinRanks {
         }
     }
 
-    private void addRankCount(Map<Integer, Rank> winMap, int checkMatchCount) {
-        if (winMap.containsKey(checkMatchCount)) {
-            Rank rank = winMap.get(checkMatchCount);
-            rank.addCount();
+    private void addRankCount(Map<Rank, Integer> winMap, int checkMatchCount) {
+        Rank key = Rank.valueOf(checkMatchCount);
+        if (winMap.containsKey(key)) {
+            winMap.put(key, winMap.get(key) + 1);
         }
     }
 }

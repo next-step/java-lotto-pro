@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    private List<Integer> lottoNumbers =  new ArrayList<>();
+    private List<Integer> lottoNumbers = new ArrayList<>();
 
     public Lotto() {
     }
@@ -25,7 +25,7 @@ public class Lotto {
         return countMatch;
     }
 
-    public void addLottoNumber(String lottoNumber){
+    public void addLottoNumber(String lottoNumber) {
         int number;
         try {
             number = Integer.parseInt(lottoNumber);
