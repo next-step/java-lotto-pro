@@ -11,7 +11,8 @@ public class Application {
     public static void main(String[] args) {
         LottoController lottoController = LottoController.getInstance();
         long money = InputView.inputMoney();
-        int lottoController.buyLotto(money);
+
+        List<Lotto> lottoes = lottoController.buyLotto(money);
         ResultView.printLottoNumber(lottoes);
 
         Lotto answer = new Lotto(InputView.inputAnswer());

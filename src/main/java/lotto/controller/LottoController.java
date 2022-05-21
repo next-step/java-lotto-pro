@@ -24,8 +24,15 @@ public class LottoController {
         return INSTANCE;
     }
 
-    public int buyLotto(final long money) {
-        return lottoMachine.purchase(money);
+    public List<Lotto> buyLotto(final long money) {
+        int buyCount = lottoMachine.purchase(money);
+        printBuyCount(buyCount);
+
+        return lottoMachine.generateAutos(buyCount);
+    }
+
+    private void printBuyCount(final int buyCount) {
+        ResultView.resultBuyCount(buyCount);
     }
 
     public long exchangePrize(final List<Lotto> lottoes, final Lotto answer) {

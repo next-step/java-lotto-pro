@@ -1,13 +1,13 @@
 package lotto.domain;
 
+import lotto.exception.LottoException;
+import lotto.exception.LottoExceptionType;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import static lotto.constants.ExceptionConstants.*;
 
 public class LottoMachine {
     public static final LottoMachine INSTANCE = new LottoMachine();
@@ -16,10 +16,7 @@ public class LottoMachine {
     private static final List<Integer> NUMBERS = IntStream.range(NUMBER_START, NUMBER_END).boxed().collect(Collectors.toList());
     private static final int LOTTO_SIZE_LIMIT = 6;
     private static final int PRICE = 1_000;
-    private static final int ZERO = 0;
-
-
-
+    private static final int MIN_RANGE = 0;
 
     private LottoMachine() {}
 
@@ -38,26 +35,27 @@ public class LottoMachine {
 
     private void validate(final long money) {
         if (money < PRICE) {
-            throw new IllegalArgumentException(LOTTO_MONEY_LEAK_EXCEPTION);
+            throw new LottoException(LottoExceptionType.LOTTO_MONEY_LEAK);
         }
+    }
+
+    public List<Lotto> generateAutos(final int count) {
+        return IntStream.range(MIN_RANGE, count)
+                .mapToObj(v -> this.generateAuto())
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private Lotto generateAuto() {
         shuffle();
-        ArrayList<LottoNumber> collect = NUMBERS.stream()
+        List<LottoNumber> lottoNumbers = NUMBERS.stream()
                 .limit(LOTTO_SIZE_LIMIT)
                 .map(LottoNumber::of)
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        new Lotto(collect);
-
+        return new Lotto(lottoNumbers);
     }
 
     private void shuffle() {
         Collections.shuffle(NUMBERS);
-    }
-
-    public List<Lotto> generateAuto(final int count) {
-        return null;
     }
 }
