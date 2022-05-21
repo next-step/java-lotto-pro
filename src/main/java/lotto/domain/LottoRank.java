@@ -56,11 +56,20 @@ public enum LottoRank {
     public int matchRank(LottoRanks lottoRanks) {
         int count = 0;
         for (LottoRank rankResult : lottoRanks.getLottoRanks()) {
-            if (isMatch(rankResult.match) && matchBonus(rankResult.hasBonus)) {
-                count++;
-            }
+            count += isMatchRank(rankResult.match, rankResult.hasBonus) ? 1 : 0;
         }
         return count;
+    }
+
+    private boolean isMatchRank(int match, boolean hasBonus) {
+        if (!isMatch(match)) {
+            return false;
+        }
+        if (!matchBonus(hasBonus)) {
+            return false;
+        }
+
+        return true;
     }
 }
 
