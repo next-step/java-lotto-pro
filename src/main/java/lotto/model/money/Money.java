@@ -15,10 +15,6 @@ public class Money {
         this.money = money;
     }
 
-    public Money(String money) {
-        this(Integer.parseInt(money));
-    }
-
     public int possiblePurchaseLotto() {
         return money / LOTTO_UNIT_PRICE;
     }

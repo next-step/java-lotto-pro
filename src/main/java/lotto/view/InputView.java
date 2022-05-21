@@ -11,9 +11,9 @@ public class InputView {
     private InputView() {
     }
 
-    public static String inputPurchasedMoney() {
+    public static int inputPurchasedMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextLine();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static String inputWinningNumber() {
