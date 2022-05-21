@@ -136,11 +136,21 @@
   * 입력받은 수량만큼 로또번호를 입력받음
     * 로또번호는 문자 , 로 구분
     > ![img_1.png](img_1.png)
+  * 수동, 자동 구매수량 출력
+
 
 * 반영목록
   * Domain
-    * 
+    * LottoGame.java
+      * 수동로또 생성자 인자로 추가 
+    * Quantity.java
+      * 수동번호 멤버변 및 생성자 인자에 추가
   * Controller
-    * 
+    * App.java
+      * 로또 수동 구매 입력 view 추가
   * View
-    * 
+    * InputView.java
+      * 수동 구매수량 입력 
+      * 수동 구매수량 만큼 로또번호 입력
+    * ResultView.java
+      * 수동 / 자동 구매 수량 출략 
