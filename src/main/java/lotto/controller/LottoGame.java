@@ -4,12 +4,15 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoGame {
 
     public void start() {
         Money money = inputMoney();
         int maxQuantity = money.findPurchaseTicketQuantity();
-        TicketQuantity manualQuantity = inputManualQuantity(maxQuantity);
+        LottoTickets manualTickets = inputManualTickets(inputManualQuantity(maxQuantity));
         LottoMachine lottoMachine = new LottoMachine();
         LottoTickets lottoTickets = lottoMachine.buyLottoTicket(money);
         ResultView.printPurchaseTicketQuantity(lottoTickets.size());
@@ -36,6 +39,24 @@ public class LottoGame {
             ResultView.printInputErrorMessage(e);
             return inputManualQuantity(maxQuantity);
         }
+    }
+
+    private LottoTickets inputManualTickets(TicketQuantity manualQuantity) {
+        InputView.printInputManualTicketView();
+        try {
+            return createManualLottoTickets(manualQuantity);
+        } catch (IllegalArgumentException e) {
+            ResultView.printInputErrorMessage(e);
+            return inputManualTickets(manualQuantity);
+        }
+    }
+
+    private LottoTickets createManualLottoTickets(TicketQuantity manualQuantity) {
+        List<LottoTicket> lottoTicketList = new ArrayList<>();
+        for (int i = 0; i < manualQuantity.getTicketQuantity(); i++) {
+            lottoTicketList.add(new LottoTicket(InputView.inputNextLine()));
+        }
+        return new LottoTickets(lottoTicketList, manualQuantity.getTicketQuantity());
     }
 
     private LottoTicket inputWinningNumbers() {
