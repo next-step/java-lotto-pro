@@ -90,7 +90,7 @@ public class LottoMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"1:1000", "3:3000", "4:4000", "11:11000"}, delimiter = ':')
     public void getUsingMoneyByTicketTest(int ticket, int expect) {
-        assertThat(lottoMachine.getUsingMoneyByTicket(ticket)).isEqualTo(expect);
+        assertThat(lottoMachine.getUsingMoneyByTicketCount(ticket)).isEqualTo(expect);
     }
 
     @ParameterizedTest

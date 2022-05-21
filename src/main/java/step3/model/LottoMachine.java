@@ -15,7 +15,7 @@ public class LottoMachine {
     private final int LOTTO_PRICE = 1_000;
     private final int EMPTY = 0;
 
-    private final String CANT_BUY_LOTTO_EXCEPTION = "돈은 최소 " + LOTTO_PRICE + "이상 입력해야합니다";
+    private final String CANT_BUY_LOTTO_EXCEPTION_MSG = "돈은 최소 " + LOTTO_PRICE + "이상 입력해야합니다";
     private final String MANUAL_LOTTO_COUNT_OVER_TICKET_EXCEPTION_MSG = "입금한 돈을 초과할수 없습니다.";
 
     public LottoMachine(LottoGenerator lottoGenerator, LottoWinChecker lottoWinChecker) {
@@ -49,23 +49,23 @@ public class LottoMachine {
     }
 
     public int getLottoTicketCount(Money money) {
-        int ticket = money.getMoney() / LOTTO_PRICE;
-        if (ticket == EMPTY) {
-            throw new IllegalArgumentException(CANT_BUY_LOTTO_EXCEPTION);
+        int ticketCount = money.getMoney() / LOTTO_PRICE;
+        if (ticketCount == EMPTY) {
+            throw new IllegalArgumentException(CANT_BUY_LOTTO_EXCEPTION_MSG);
         }
-        return ticket;
+        return ticketCount;
     }
 
     public Map<LottoReward, Integer> checkWin(List<LottoTicket> userLottoTickets) {
         return lottoWinChecker.checkWin(userLottoTickets);
     }
 
-    public int getUsingMoneyByTicket(int ticket) {
-        return ticket * LOTTO_PRICE;
+    public int getUsingMoneyByTicketCount(int ticketCount) {
+        return ticketCount * LOTTO_PRICE;
     }
 
-    public void validateManualLottoCount(int ticket, int manualLottoCount) {
-        if (ticket < manualLottoCount) {
+    public void validateManualLottoCount(int ticketCount, int manualLottoCount) {
+        if (ticketCount < manualLottoCount) {
             throw new IllegalArgumentException(MANUAL_LOTTO_COUNT_OVER_TICKET_EXCEPTION_MSG);
         }
     }

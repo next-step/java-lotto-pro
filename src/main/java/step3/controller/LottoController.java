@@ -42,7 +42,7 @@ public class LottoController {
         setBonusNumber(); /*정상 값을 입력할때까지 반복입력*/
 
         outputView.printOutput(lottoMachine.checkWin(lottoTickets.getLottoTickets()),
-            lottoMachine.getUsingMoneyByTicket(ticketCount));
+            lottoMachine.getUsingMoneyByTicketCount(ticketCount));
     }
 
     private int getTicketCountByMoney() {
@@ -75,14 +75,14 @@ public class LottoController {
         }
     }
 
-    private int getManualLottoCount(int ticket) {
+    private int getManualLottoCount(int ticketCount) {
         try {
             int manualLottoCount = NumberUtil.parseInt(inputView.getManualLottoCount());
-            lottoMachine.validateManualLottoCount(ticket, manualLottoCount);
+            lottoMachine.validateManualLottoCount(ticketCount, manualLottoCount);
             return manualLottoCount;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getManualLottoCount(ticket);
+            return getManualLottoCount(ticketCount);
         }
     }
 

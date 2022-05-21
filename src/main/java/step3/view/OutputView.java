@@ -61,11 +61,11 @@ public class OutputView {
         return lottoReward.getReward() * matchCount;
     }
 
-    public void printLottoInfo(List<List<LottoElement>> lottoNumbers, int manualTicket,
-        int randomTicket) {
-        System.out.println(String.format(LOTTOS_INFO_FORMAT, manualTicket, randomTicket));
-        for (List<LottoElement> lottoNumber : lottoNumbers) {
-            System.out.println(lottoNumber.toString());
+    public void printLottoInfo(List<List<LottoElement>> lottoTickets, int manualTicketCount,
+        int randomTicketCount) {
+        System.out.println(String.format(LOTTOS_INFO_FORMAT, manualTicketCount, randomTicketCount));
+        for (List<LottoElement> lottoTicketNumbers : lottoTickets) {
+            System.out.println(lottoTicketNumbers.toString());
         }
     }
 
