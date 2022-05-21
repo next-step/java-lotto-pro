@@ -15,11 +15,10 @@ public class ResultView {
 	private ResultView() {
 	}
 
-	public static void printLottos(Lottos lottos) {
-		System.out.println(lottoNumbersTitleStringFormat(lottos.getLottos()));
-		for (int i = 0; i < lottos.getLottos().size(); ++i) {
-			System.out.println(lottoNumbersStringFormat(lottos.getLottos().get(i)));
-		}
+	public static void printLottos(Lottos manualLottos, Lottos autoLottos) {
+		System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottos.size(), autoLottos.size());
+		lottosPrint(manualLottos.getLottos());
+		lottosPrint(autoLottos.getLottos());
 	}
 
 	public static void printWinStatistics(WinningList winningList) {
@@ -39,7 +38,7 @@ public class ResultView {
 	}
 
 	private static String winLottoCountStringFormat(WinningMoney winningMoney, int matchCount) {
-		if(winningMoney.isSecondPlace()) {
+		if (winningMoney.isSecondPlace()) {
 			return String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개", winningMoney.getMatchCount(),
 					winningMoney.getWinningMoney(), matchCount);
 		}
@@ -47,10 +46,12 @@ public class ResultView {
 				matchCount);
 	}
 
-	private static String lottoNumbersTitleStringFormat(List<LottoNumbers> lottos) {
-		return String.format("%d개를 구매했습니다.", lottos.size());
+	private static void lottosPrint(List<LottoNumbers> lottos) {
+		for(LottoNumbers lottoNumbers: lottos) {
+			System.out.println(lottoNumbersStringFormat(lottoNumbers));
+		}
 	}
-
+	
 	private static String lottoNumbersStringFormat(LottoNumbers lottoNumbers) {
 		StringBuffer lottoNumbersMessage = new StringBuffer();
 		lottoNumbersMessage.append(LEFT_SQUARE_BRACKET);
