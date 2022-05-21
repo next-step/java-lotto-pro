@@ -47,11 +47,11 @@ public class ResultView {
 	}
 
 	private static void lottosPrint(List<LottoNumbers> lottos) {
-		for(LottoNumbers lottoNumbers: lottos) {
+		for (LottoNumbers lottoNumbers : lottos) {
 			System.out.println(lottoNumbersStringFormat(lottoNumbers));
 		}
 	}
-	
+
 	private static String lottoNumbersStringFormat(LottoNumbers lottoNumbers) {
 		StringBuffer lottoNumbersMessage = new StringBuffer();
 		lottoNumbersMessage.append(LEFT_SQUARE_BRACKET);

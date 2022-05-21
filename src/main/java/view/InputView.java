@@ -3,6 +3,8 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.LottoMachine;
+import lotto.User;
 import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
 import lotto.model.UserMoney;
@@ -16,14 +18,20 @@ public class InputView {
 		return new UserMoney(readMessage());
 	}
 
-	public static String inputManualLottoCount() {
+	public static String inputManualLottoCount(User user, LottoMachine lottoMachine) {
 		System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
-		return readMessage();
+		String buyCount = readMessage();
+		user.isCanBuyLotto(lottoMachine, buyCount);
+		return buyCount;
 	}
 
 	public static Lottos inputManualLotto(String manualLottoCount) {
-		System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
 		List<LottoNumbers> lottos = new ArrayList<>();
+		if(Integer.parseInt(manualLottoCount) == 0) {
+			return new Lottos(lottos);
+		}
+		
+		System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
 		for(int i=0; i<Integer.parseInt(manualLottoCount); i++) {
 			lottos.add(inputLottoNumbers());
 		}
@@ -34,7 +42,7 @@ public class InputView {
 		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
 		return inputLottoNumbers();
 	}
-	
+
 	private static LottoNumbers inputLottoNumbers() {
 		return new LottoNumbers(readMessage());
 	}
