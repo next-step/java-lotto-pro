@@ -42,7 +42,7 @@ public class LottoTest {
     void 보너스볼_중복_예외() {
         Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThatThrownBy(() -> {
-            lotto.addBonusBallNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 6);
+            lotto.addBonusBallNumber(6);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("[ERROR]");
     }
 }

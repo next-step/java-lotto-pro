@@ -27,7 +27,9 @@ public class Lottos {
 
     public Map<Lotto, LottoRank> lottoWinningResult(Lotto answerLotto) {
         Map<Lotto, LottoRank> lottoRankMap = new HashMap<>();
-        this.lottos.forEach(lotto -> lottoRankMap.put(lotto, lotto.checkLottoRank(answerLotto)));
+        this.lottos.forEach(
+                lotto -> lottoRankMap.put(lotto, lotto.checkLottoRank(answerLotto))
+        );
         return lottoRankMap;
     }
 

@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.type.LottoRank;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -26,49 +27,54 @@ public class Lotto {
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_SIZE);
     }
 
-    public Set<Integer> addBonusBallNumber(Set<Integer> answerLottoNumbers, int bonusBallNumber) {
-        answerLottoNumbers.add(bonusBallNumber);
-
-        if (answerLottoNumbers.size() != 7)
+    public void addBonusBallNumber(int bonusBallNumber) {
+        if (lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.getNumber() == bonusBallNumber))
             throw new IllegalArgumentException(ERROR_BONUS_NUMBER);
 
-        return answerLottoNumbers;
+        lottoNumbers.add(new LottoNumber(bonusBallNumber));
     }
 
     public LottoRank checkLottoRank(Lotto answerLotto) {
-        final Set<Integer> numbers = answerLotto.getLottoNumbers().stream()
+        final Set<Integer> numbers = lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toSet());
 
         final Set<Integer> answerNumbers = answerLotto.getLottoNumbers().stream()
-                .limit(LOTTO_NUMBER_SIZE)
+                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toSet());
 
         final int ballLottoNumberMatchedCount = countMatchedNumber(numbers, answerNumbers);
-        final boolean isCheckedBonusBall = ballLottoNumberMatchedCount == 5;
 
-        boolean isMatchedBonusBall = false;
-        if (isCheckedBonusBall) {
-            LottoNumber lastAnswerLottoNumber = new ArrayList<>(answerLotto.getLottoNumbers()).get(LOTTO_NUMBER_SIZE);
-            isMatchedBonusBall = isCheck(lastAnswerLottoNumber.getNumber(), numbers);
-        }
+        boolean isMatchedBonusBall = isMatchedBonusBall(answerNumbers, numbers, ballLottoNumberMatchedCount == 5);
 
         return LottoRank.findLottoRankByMatchedCount(ballLottoNumberMatchedCount, isMatchedBonusBall);
     }
 
     public static int countMatchedNumber(Set<Integer> numbers, Set<Integer> answerNumbers) {
         return (int) answerNumbers.stream()
-                .filter(answerNumber -> isCheck(answerNumber, numbers))
+                .limit(LOTTO_NUMBER_SIZE)
+                .filter(answerNumber -> isContainNumber(answerNumber, numbers))
                 .count();
     }
 
-    private static boolean isCheck(Integer answerNumber, Set<Integer> numbers) {
+    private static boolean isContainNumber(Integer answerNumber, Set<Integer> numbers) {
         return numbers.contains(answerNumber);
     }
 
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    private boolean isMatchedBonusBall(Set<Integer> answerNumbers, Set<Integer> numbers, boolean isCheckedBonusBall) {
+        boolean isMatchedBonusBall = false;
+
+        if (isCheckedBonusBall) {
+            Integer lastAnswerNumber = new ArrayList<>(answerNumbers).get(LOTTO_NUMBER_SIZE);
+            isMatchedBonusBall = isContainNumber(lastAnswerNumber, numbers);
+        }
+
+        return isMatchedBonusBall;
     }
 
     @Override

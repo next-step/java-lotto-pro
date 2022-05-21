@@ -25,6 +25,10 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public static String inputLastWeekBonusNumber() {
+        return scanner.nextLine();
+    }
+
     public static void printInputBonusBall() {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
     }

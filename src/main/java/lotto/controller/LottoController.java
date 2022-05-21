@@ -1,17 +1,16 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoPurchase;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.service.LottoAutoIssuedServiceImpl;
 import lotto.service.LottoIssuedService;
 import lotto.utils.ListUtil;
+import lotto.utils.NumberUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoController {
     private final static String LOTTO_NUMBER_TEXT_SPLIT_VALUE = ", ";
@@ -47,7 +46,14 @@ public class LottoController {
         String lastWeekLottoNumberText = InputView.inputLastWeekWinningNumber();
         List<Integer> lastWeekLottoNumbers = ListUtil.stringToArrayInteger(lastWeekLottoNumberText, LOTTO_NUMBER_TEXT_SPLIT_VALUE);
 
-        return new Lotto(new HashSet<>(lastWeekLottoNumbers));
+        Lotto answerLotto = new Lotto(new HashSet<>(lastWeekLottoNumbers));
+
+        InputView.printInputBonusBall();
+        String lastWeekLottoBonusBallText = InputView.inputLastWeekBonusNumber();
+
+        answerLotto.addBonusBallNumber(NumberUtil.parseStringToInt(lastWeekLottoBonusBallText));
+
+        return answerLotto;
     }
 
     private LottoResult lottoResult(Lottos lottos, Lotto lastWeekLotto) {
