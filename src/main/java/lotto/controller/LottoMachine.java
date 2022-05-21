@@ -29,8 +29,7 @@ public class LottoMachine {
     private PurchaseManualCount inputPurchaseManualCount(Money purchasedMoney) {
         PurchaseManualCount purchaseManualCount;
         try {
-            String inputPurchaseManualCount = InputView.inputPurchaseManualCount();
-            purchaseManualCount = new PurchaseManualCount(inputPurchaseManualCount, purchasedMoney);
+            purchaseManualCount = new PurchaseManualCount(InputView.inputPurchaseManualCount(), purchasedMoney);
         } catch (IllegalArgumentException exception) {
             OutputView.OutputExceptionMessage(exception);
             purchaseManualCount = inputPurchaseManualCount(purchasedMoney);

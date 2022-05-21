@@ -9,10 +9,12 @@ import org.junit.jupiter.api.Test;
 class PurchaseManualCountTest {
 
     @Test
-    @DisplayName("구입 금액을 초과하여 구입한 경우 예외처리")
-    void 구입금액_초과_테스트() {
+    @DisplayName("구입 금액이 잘못된 경우 예외처리")
+    void 구입금액_예외_테스트() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new PurchaseManualCount("4", new Money(3000)));
+            .isThrownBy(() -> new PurchaseManualCount(4, new Money(3000)));
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> new PurchaseManualCount(-1, new Money(3000)));
     }
 
 }
