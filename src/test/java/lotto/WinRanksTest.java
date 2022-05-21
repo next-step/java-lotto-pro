@@ -28,13 +28,19 @@ public class WinRanksTest {
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         WinRanks winRanks = new WinRanks();
+<<<<<<< HEAD
         winRanks.calculateWinPriceTotals(winningLotto, lottos, 30);
         Map<Rank, Integer> winPriceMap = winRanks.getWinTotals();
+=======
+        winRanks.calculateWinPriceMap(winningLotto, lottos);
+        Map<Rank, Integer> winPriceMap = winRanks.getWinMap();
+>>>>>>> 119371d (refactor : Rank enum으로 변경)
 
         assertThat(winPriceMap.get(Rank.FIFTH)).isEqualTo(1);
         assertThat(winPriceMap.get(Rank.FOURTH)).isEqualTo(1);
         assertThat(winPriceMap.get(Rank.THIRD)).isEqualTo(1);
         assertThat(winPriceMap.get(Rank.FIRST)).isEqualTo(1);
+<<<<<<< HEAD
     }
 
     @Test
@@ -94,12 +100,15 @@ public class WinRanksTest {
         Map<Rank, Integer> winPriceTotals = winRanks.getWinTotals();
 
         assertThat(winPriceTotals.get(Rank.THIRD)).isEqualTo(1);
+=======
+>>>>>>> 119371d (refactor : Rank enum으로 변경)
     }
 
     @Test
     public void 전체로또_당첨금액_확인() {
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinRanks winRanks = new WinRanks();
+<<<<<<< HEAD
         int winningPrice = winRanks.winningPrice(winningLotto, lottos, 40);
         assertThat(winningPrice).isEqualTo(2_000_000_000 + 1_500_000 + 50_000 + 5_000);
     }
@@ -112,6 +121,10 @@ public class WinRanksTest {
         assertThat(winningPrice).isEqualTo(
                 Rank.FIRST.getWinningMoney() + Rank.SECOND.getWinningMoney() + Rank.FOURTH.getWinningMoney()
                         + Rank.FIFTH.getWinningMoney());
+=======
+        int winningPrice = winRanks.winningPrice(winningLotto, lottos);
+        assertThat(winningPrice).isEqualTo(2_000_000_000 + 1_500_000 + 50_000 + 5_000);
+>>>>>>> 119371d (refactor : Rank enum으로 변경)
     }
 
     @Test

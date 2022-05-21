@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WinRanks {
+<<<<<<< HEAD
     private final Map<Rank, Integer> winTotals;
 
     public WinRanks() {
@@ -17,13 +18,33 @@ public class WinRanks {
 
     public Map<Rank, Integer> getWinTotals() {
         return winTotals;
+=======
+    private final Map<Rank, Integer> winMap;
+
+    public WinRanks() {
+        winMap = new HashMap<>();
+        winMap.put(Rank.FIRST, 0);
+        winMap.put(Rank.THIRD, 0);
+        winMap.put(Rank.FOURTH, 0);
+        winMap.put(Rank.FIFTH, 0);
+    }
+
+    public Map<Rank, Integer> getWinMap() {
+        return winMap;
+>>>>>>> 119371d (refactor : Rank enum으로 변경)
     }
 
     public int winningPrice(Lotto winningLotto, Lottos lottos, int bonusNumber) {
         int totalPrice = 0;
+<<<<<<< HEAD
         calculateWinPriceTotals(winningLotto, lottos, bonusNumber);
         for (Rank rankEnum : winTotals.keySet()) {
             totalPrice += winTotals.get(rankEnum) * rankEnum.getWinningMoney();
+=======
+        calculateWinPriceMap(winningLotto, lottos);
+        for (Rank rankEnum : winMap.keySet()) {
+            totalPrice += winMap.get(rankEnum) * rankEnum.getWinningMoney();
+>>>>>>> 119371d (refactor : Rank enum으로 변경)
         }
         return totalPrice;
     }
@@ -36,10 +57,17 @@ public class WinRanks {
         }
     }
 
+<<<<<<< HEAD
     private void addRankCount(Map<Rank, Integer> winTotals, int checkMatchCount, boolean bonusMatch) {
         Rank key = Rank.matchedRank(checkMatchCount, bonusMatch);
         if (winTotals.containsKey(key)) {
             winTotals.put(key, winTotals.get(key) + 1);
+=======
+    private void addRankCount(Map<Rank, Integer> winMap, int checkMatchCount) {
+        Rank key = Rank.valueOf(checkMatchCount);
+        if (winMap.containsKey(key)) {
+            winMap.put(key, winMap.get(key) + 1);
+>>>>>>> 119371d (refactor : Rank enum으로 변경)
         }
     }
 
