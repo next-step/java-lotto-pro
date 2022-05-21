@@ -24,29 +24,29 @@ public class LottoController {
     public void startLotto() {
         LottoTickets lottoTickets = new LottoTickets();
 
-        int ticket = getTicketByMoney(); /*정상 값을 입력할때까지 반복입력*/
-        int manualTicket = getManualLottoCount(ticket);
-        int randomTicket = ticket - manualTicket;
+        int ticketCount = getTicketCountByMoney(); /*정상 값을 입력할때까지 반복입력*/
+        int manualTicketCount = getManualLottoCount(ticketCount);
+        int randomTicketCount = ticketCount - manualTicketCount;
 
-        List<LottoTicket> manualLottoTickets = getManualLottoTickets(manualTicket);
-        List<LottoTicket> randomLottoTickets = lottoMachine.makeRandomLottoTickets(randomTicket);
+        List<LottoTicket> manualLottoTickets = getManualLottoTickets(manualTicketCount);
+        List<LottoTicket> randomLottoTickets = lottoMachine.makeRandomLottoTickets(randomTicketCount);
         lottoTickets.addLottoTickets(manualLottoTickets);
         lottoTickets.addLottoTickets(randomLottoTickets);
-        outputView.printLottoInfo(lottoTickets.getLottoNumbers(), manualTicket, randomTicket);
+        outputView.printLottoInfo(lottoTickets.getLottoNumbers(), manualTicketCount, randomTicketCount);
 
         setWinnerLotto(); /*정상 값을 입력할때까지 반복입력*/
         setBonusNumber(); /*정상 값을 입력할때까지 반복입력*/
 
-        outputView.printOutput(lottoMachine.checkWin(lottoTickets.getLottoTickets()), lottoMachine.getUsingMoneyByTicket(ticket));
+        outputView.printOutput(lottoMachine.checkWin(lottoTickets.getLottoTickets()), lottoMachine.getUsingMoneyByTicket(ticketCount));
     }
 
-    private int getTicketByMoney() {
+    private int getTicketCountByMoney() {
         String money = inputView.getMoney();
         try {
             return lottoMachine.getLottoTicketCount(new Money(money));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getTicketByMoney();
+            return getTicketCountByMoney();
         }
     }
 
