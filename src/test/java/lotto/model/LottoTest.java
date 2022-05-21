@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import lotto.generator.InputLottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
     final Lotto lotto = Lotto.draw(new InputLottoNumberGenerator("1, 2, 3, 4, 5, 6"));
@@ -40,21 +38,15 @@ class LottoTest {
         Lotto winningLotto2 = Lotto.draw(new InputLottoNumberGenerator("1, 2, 3, 4, 5, 7"));
         Lotto winningLotto3 = Lotto.draw(new InputLottoNumberGenerator("10, 12, 13, 14, 5, 6"));
         assertAll(
-                () -> assertThat(this.lotto.lottoRanking(winningLotto1, LottoNumber.valueOf(45)).money()).isEqualTo(
+                () -> assertThat(this.lotto.lottoRanking(WinningLotto.of(winningLotto1, LottoNumber.valueOf(45)))
+                        .money()).isEqualTo(
                         Money.valueOf(1500000)),
-                () -> assertThat(this.lotto.lottoRanking(winningLotto2, LottoNumber.valueOf(6)).money()).isEqualTo(
+                () -> assertThat(this.lotto.lottoRanking(WinningLotto.of(winningLotto2, LottoNumber.valueOf(6)))
+                        .money()).isEqualTo(
                         Money.valueOf(30000000)),
-                () -> assertThat(this.lotto.lottoRanking(winningLotto3, LottoNumber.valueOf(7)).money()).isEqualTo(
+                () -> assertThat(this.lotto.lottoRanking(WinningLotto.of(winningLotto3, LottoNumber.valueOf(7)))
+                        .money()).isEqualTo(
                         Money.valueOf(0))
         );
-    }
-
-    @DisplayName("로또 번호와 중복된 로또 번호인지 체크")
-    @ParameterizedTest(name = "로또 번호와 중복된 로또 번호 {0}가 입력되면 IllegalArgumentException 예외")
-    @ValueSource(strings = {"1", "3", "6"})
-    void validateNewLottoNumber(int input) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotto.validateNewLottoNumber(LottoNumber.valueOf(input)))
-                .withMessage("중복되는 로또 번호 입니다.");
     }
 }
