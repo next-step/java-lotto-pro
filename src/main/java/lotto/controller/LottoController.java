@@ -16,10 +16,8 @@ public class LottoController {
         lottos.printLottos();
 
         LottoNumbers winningNumbers = LottoNumbers.createWinningNumbers(convertToIntegerList(splitWithDelimiter(readWinningNumbers())));
-        System.out.println(winningNumbers);
 
         RankCount rankCount = lottos.rankCount(winningNumbers);
-        System.out.println(rankCount);
         Earning earningRate = rankCount.earningRate(purchaseInfo);
 
         Statistics statistics = Statistics.of(rankCount, earningRate);
