@@ -1,6 +1,9 @@
 package step3.domain;
 
 public class LottoCount {
+
+    public static final int MIN_LOTTO_COUNT = 0;
+
     private final int element;
 
     public LottoCount(int element) {
@@ -9,7 +12,7 @@ public class LottoCount {
     }
 
     private void validate(int lottoCount) {
-        if(lottoCount < 0) {
+        if(lottoCount < MIN_LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 구매 개수는 0 이상으로 입력해주세요.");
         }
     }

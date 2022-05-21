@@ -5,12 +5,15 @@ import java.util.EnumMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class LottoResult {
+
+    private static final int MIN_RANKING_COUNT = 0;
+
     private final EnumMap<Ranking, Integer> rankingMap;
 
     public LottoResult() {
         this.rankingMap = new EnumMap<>(Ranking.class);
         Arrays.stream(Ranking.values())
-                .forEach(ranking -> rankingMap.put(ranking, 0));
+                .forEach(ranking -> rankingMap.put(ranking, MIN_RANKING_COUNT));
     }
 
     public void updateHitRanking(Ranking ranking) {
@@ -22,7 +25,7 @@ public class LottoResult {
     }
 
     private long winningAmount() {
-        AtomicLong winningAmount = new AtomicLong(0L);
+        AtomicLong winningAmount = new AtomicLong();
         rankingMap.forEach((ranking, hitCount) -> winningAmount.addAndGet(hitCount * ranking.getWinningMoney()));
         return winningAmount.get();
     }

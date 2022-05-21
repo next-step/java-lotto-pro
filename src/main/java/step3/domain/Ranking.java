@@ -40,7 +40,7 @@ public enum Ranking {
 
     public static List<Ranking> winners() {
         return Arrays.stream(Ranking.values())
-                .filter(ranking -> ranking.getWinningMoney() > 0)
+                .filter(ranking -> ranking.getWinningMoney() > Ranking.NONE.getWinningMoney())
                 .collect(Collectors.toList());
     }
 
