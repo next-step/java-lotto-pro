@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import static lotto.message.InputMessage.INPUT_BONUS_NUMBER;
-import static lotto.message.InputMessage.INPUT_LOTTO_TICKET;
+import static lotto.message.InputMessage.INVALID_BONUS_NUMBER;
+import static lotto.message.InputMessage.INVALID_LOTTO_TICKET;
 
 public class LottoWinningTicket {
     private final LottoTicket lottoWinningTicket;
@@ -15,10 +15,10 @@ public class LottoWinningTicket {
 
     private void validateNotNull(LottoTicket lottoTicket, LottoNumber bonusNumber) {
         if (lottoTicket == null) {
-            throw new IllegalArgumentException(INPUT_LOTTO_TICKET);
+            throw new IllegalArgumentException(INVALID_LOTTO_TICKET);
         }
         if (bonusNumber == null) {
-            throw new IllegalArgumentException(INPUT_BONUS_NUMBER);
+            throw new IllegalArgumentException(INVALID_BONUS_NUMBER);
         }
     }
 }
