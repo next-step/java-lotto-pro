@@ -65,4 +65,17 @@ class LottoNumbersTest {
                 .isEqualTo("[10, 4, 1, 23, 25, 45]");
     }
 
+    @Test
+    @DisplayName("보너스 번호 포함여부를 확인한다.")
+    void hasBonusNumber_보너스번호_포함여부() {
+        LottoNumbers firstLottoNumbers = new LottoNumbers(Arrays.asList(10, 4, 1, 33, 23, 45));
+        LottoNumbers secondLottoNumbers = new LottoNumbers(Arrays.asList(10, 4, 1, 33, 23, 40));
+        LottoNumber bonusNumber = LottoNumber.of(45);
+
+        assertThat(firstLottoNumbers.hasBonusNumber(bonusNumber))
+                .isTrue();
+        assertThat(secondLottoNumbers.hasBonusNumber(bonusNumber))
+                .isFalse();
+    }
+
 }
