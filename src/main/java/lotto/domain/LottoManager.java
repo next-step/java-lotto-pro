@@ -2,13 +2,14 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.WinningLotto;
 import lotto.strategy.AutoPickNumberStrategy;
 
 public class LottoManager {
 
     private WinningStatistics winningStatistics;
 
-    public LottoManager(int autoLottoCount) {
+    public LottoManager() {
         winningStatistics = new WinningStatistics();
     }
 
@@ -20,7 +21,7 @@ public class LottoManager {
         return new Lottos(lottoList);
     }
 
-    public void makeWinningLotto(Lotto winningLotto, Lottos lottos) {
+    public void makeWinningLotto(WinningLotto winningLotto, Lottos lottos) {
         lottos.makeWinningResult(winningLotto, winningStatistics);
     }
 

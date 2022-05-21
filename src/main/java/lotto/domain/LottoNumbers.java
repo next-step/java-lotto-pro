@@ -12,6 +12,10 @@ public class LottoNumbers {
         this.values = lottoNumbers;
     }
 
+    public boolean existLottoNumber(LottoNumber lottoNumber) {
+        return values.contains(lottoNumber);
+    }
+
     public List<LottoNumber> getValues() {
         return Collections.unmodifiableList(values);
     }

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import lotto.WinningLotto;
 
 public class Lottos {
 
@@ -11,12 +12,12 @@ public class Lottos {
         this.elements = elements;
     }
 
-    public void makeWinningResult(Lotto winningLotto, WinningStatistics winningStatistics) {
+    public void makeWinningResult(WinningLotto winningLotto, WinningStatistics winningStatistics) {
         for (Lotto lotto : elements) {
             winningStatistics.addLottoRanking(LottoRanking.findLottoRaking(lotto, winningLotto));
         }
     }
-    
+
     public List<Lotto> getElements() {
         return elements;
     }
