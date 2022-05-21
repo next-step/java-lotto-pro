@@ -8,6 +8,8 @@ import lotto.enums.LottoRank;
 public class Lottos {
 
     private static final String ERROR_MESSAGE_LOTTO_LIST_NULL_OR_EMPTY = "[ERROR] lottoList is null or empty.";
+    private static final String ERROR_MESSAGE_REFERENCE_LOTTO_NULL = "[ERROR] referenceLotto is null.";
+    private static final String ERROR_MESSAGE_BONUS_NUMBER_NULL = "[ERROR] bonusNumber is null.";
     private final List<Lotto> lottoList;
 
     public Lottos(List<Lotto> lottoList) {
@@ -16,7 +18,7 @@ public class Lottos {
     }
 
     private void validate(List<Lotto> lottoList) {
-        if(lottoList == null || lottoList.isEmpty()) {
+        if (lottoList == null || lottoList.isEmpty()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_LOTTO_LIST_NULL_OR_EMPTY);
         }
     }
@@ -30,9 +32,11 @@ public class Lottos {
     }
 
     public LottosResults matchWithReference(Lotto referenceLotto, LottoNumber bonusNumber) {
+        validateReferenceArguments(referenceLotto, bonusNumber);
+
         Map<LottoRank, Integer> rankCountMap = new HashMap<>();
 
-        for(Lotto lotto : lottoList) {
+        for (Lotto lotto : lottoList) {
             LottoRank lottoRank = matchLottoWithReference(referenceLotto, bonusNumber, lotto);
             countRank(rankCountMap, lottoRank);
         }
@@ -45,11 +49,21 @@ public class Lottos {
     }
 
     private void countRank(Map<LottoRank, Integer> rankCountMap, LottoRank lottoRank) {
-        if(rankCountMap.containsKey(lottoRank)) {
+        if (rankCountMap.containsKey(lottoRank)) {
             rankCountMap.put(lottoRank, rankCountMap.get(lottoRank) + 1);
             return;
         }
 
         rankCountMap.put(lottoRank, 1);
+    }
+
+    private void validateReferenceArguments(Lotto referenceLotto, LottoNumber bonusNumber) {
+        if (referenceLotto == null) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_REFERENCE_LOTTO_NULL);
+        }
+
+        if (bonusNumber == null) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_BONUS_NUMBER_NULL);
+        }
     }
 }
