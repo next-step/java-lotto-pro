@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public class LottoTicket {
 
     private LottoNumbers numbers;
@@ -18,6 +20,6 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return this.numbers.toString();
+        return Arrays.toString(getNumbersAsArray());
     }
 }
