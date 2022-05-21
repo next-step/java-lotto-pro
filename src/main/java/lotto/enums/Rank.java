@@ -44,6 +44,6 @@ public enum Rank {
 
     @Override
     public String toString() {
-        return String.format("%d개 일치 (%s)원", matchingCount, prize);
+        return String.format("%d개 일치 (%s원)", matchingCount, prize);
     }
 }
