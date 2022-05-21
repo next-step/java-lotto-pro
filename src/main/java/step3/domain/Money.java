@@ -3,7 +3,6 @@ package step3.domain;
 public class Money {
 
     private static final int MIN_MONEY = 0;
-    private static final int PRICE_LOTTO = 1_000;
 
     private final int element;
 
@@ -18,16 +17,8 @@ public class Money {
         }
     }
 
-    public static int investmentAmount(LottoCount manualLottoCount, LottoCount autoLottoCount) {
-        return (manualLottoCount.get() + autoLottoCount.get()) * PRICE_LOTTO;
-    }
-
-    public int lottoCount() {
-        return element / PRICE_LOTTO;
-    }
-
-    public LottoCount autoLottoCount(LottoCount manualLottoCount) {
-        return new LottoCount(Math.max(lottoCount() - manualLottoCount.get(), LottoCount.MIN_LOTTO_COUNT));
+    public int lottoCount(int lottoPrice) {
+        return element / lottoPrice;
     }
 
     @Override

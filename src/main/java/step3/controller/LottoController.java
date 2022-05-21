@@ -14,21 +14,21 @@ import step3.view.OutputView;
 
 public class LottoController {
 
-    public void play() {
+    public static void play() {
         Money money = inputMoney();
         LottoCount manualLottoCount = inputManualLottoCount();
-        LottoCount autoLottoCount = money.autoLottoCount(manualLottoCount);
+        LottoCount autoLottoCount = autoLottoCount(money, manualLottoCount);
 
         Lottos lottos = buyLottos(manualLottoCount, autoLottoCount);
         OutputView.printBuyCount(manualLottoCount, autoLottoCount);
         OutputView.printLottos(lottos);
 
         LottoResult lottoResult = lottos.allMatch(inputWinnerNumbers(), inputBonusNumber());
-        Yield yield = lottoResult.calculateYield(Money.investmentAmount(manualLottoCount, autoLottoCount));
+        Yield yield = lottoResult.calculateYield(totalInvestmentAmount(manualLottoCount, autoLottoCount));
         OutputView.printResult(lottoResult, yield);
     }
 
-    private Money inputMoney() {
+    private static Money inputMoney() {
         try {
             return new Money(InputView.inputMoney());
         } catch (IllegalArgumentException e) {
@@ -37,7 +37,7 @@ public class LottoController {
         }
     }
 
-    private LottoCount inputManualLottoCount() {
+    private static LottoCount inputManualLottoCount() {
         try {
             return new LottoCount(InputView.inputManualLottoCount());
         } catch (IllegalArgumentException e) {
@@ -46,7 +46,7 @@ public class LottoController {
         }
     }
 
-    private Lottos buyLottos(LottoCount manualLottoCount, LottoCount autoLottoCount) {
+    private static Lottos buyLottos(LottoCount manualLottoCount, LottoCount autoLottoCount) {
         try {
             List<Lotto> lottos = buy(manualLottoCount, autoLottoCount);
             return new Lottos(lottos);
@@ -56,7 +56,14 @@ public class LottoController {
         }
     }
 
-    private List<Integer> inputWinnerNumbers() {
+    static LottoCount autoLottoCount(Money money, LottoCount manualLottoCount) {
+        return new LottoCount(Math.max(
+                money.lottoCount(Lotto.PRICE_LOTTO) - manualLottoCount.get(),
+                LottoCount.MIN_LOTTO_COUNT
+        ));
+    }
+
+    private static List<Integer> inputWinnerNumbers() {
         try {
             return InputView.inputWinnerNumbers();
         } catch (IllegalArgumentException e) {
@@ -65,7 +72,7 @@ public class LottoController {
         }
     }
 
-    private int inputBonusNumber() {
+    private static int inputBonusNumber() {
         try {
             return InputView.inputBonusNumber();
         } catch (IllegalArgumentException e) {
@@ -74,7 +81,7 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> buy(LottoCount manualLottoCount, LottoCount autoLottoCount) {
+    private static List<Lotto> buy(LottoCount manualLottoCount, LottoCount autoLottoCount) {
         List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount);
         List<Lotto> lottos = new ArrayList<>();
         for (List<Integer> manualLottoNumber : manualLottoNumbers) {
@@ -84,5 +91,9 @@ public class LottoController {
             lottos.add(LottoFactory.createAutoLotto());
         }
         return lottos;
+    }
+
+    static int totalInvestmentAmount(LottoCount manualLottoCount, LottoCount autoLottoCount) {
+        return (manualLottoCount.get() + autoLottoCount.get()) * Lotto.PRICE_LOTTO;
     }
 }
