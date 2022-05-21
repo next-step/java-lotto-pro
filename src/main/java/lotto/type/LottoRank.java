@@ -20,7 +20,7 @@ public enum LottoRank {
     }
 
     public static LottoRank rankMatch(int matchCount, boolean bonusMatch) {
-        if(matchCount == 4 && bonusMatch) {
+        if(matchCount == 5 && bonusMatch) {
             return LottoRank.FIVE_BONUS;
         }
 

@@ -24,7 +24,7 @@ public class LottoRankTest {
             Arguments.of(3, true, LottoRank.THREE),
             Arguments.of(4, false, LottoRank.FOUR),
             Arguments.of(5, false, LottoRank.FIVE),
-            Arguments.of(4, true, LottoRank.FIVE_BONUS),
+            Arguments.of(5, true, LottoRank.FIVE_BONUS),
             Arguments.of(6, true, LottoRank.SIX)
         );
     }
