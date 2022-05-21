@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.dto.LottoRequest;
 import lotto.infrastructure.util.StringUtils;
+import lotto.interfaces.dto.LottoRequest;
 
 import java.util.Scanner;
 

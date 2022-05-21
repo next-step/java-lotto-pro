@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.interfaces.dto;
 
 public class LottoRequest {
 
