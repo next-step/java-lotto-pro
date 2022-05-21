@@ -21,6 +21,15 @@ class RankTest {
     }
 
     @Test
+    @DisplayName("보너스 번호 당첨 여부에 따라 해당 등수를 리턴한다.")
+    void getRank_보너스() {
+        assertThat(getRank(5, false))
+                .isEqualTo(THIRD);
+        assertThat(getRank(5, true))
+                .isEqualTo(SECOND);
+    }
+
+    @Test
     @DisplayName("해당 등수의 총 당첨금액을 계산하여 리턴한다.")
     void getPrizeWithCount_총_당첨금액() {
         assertThat(THIRD.getPrizeWithCount(3))
