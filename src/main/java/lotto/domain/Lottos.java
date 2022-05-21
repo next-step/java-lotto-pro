@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lotto.enums.LottoRank;
 
 public class Lottos {
@@ -28,17 +30,26 @@ public class Lottos {
     }
 
     public LottosResults matchWithReference(Lotto referenceLotto) {
-        LottosResults results = new LottosResults();
+        Map<LottoRank, Integer> rankCountMap = new HashMap<>();
 
         for(Lotto lotto : lottoList) {
-            matchLottoWithReference(results, referenceLotto, lotto);
+            LottoRank lottoRank = matchLottoWithReference(referenceLotto, lotto);
+            countRank(rankCountMap, lottoRank);
         }
 
-        return results;
+        return new LottosResults(rankCountMap);
     }
 
-    private void matchLottoWithReference(LottosResults results, Lotto referenceLotto, Lotto targetLotto) {
-        LottoRank matchedRank = referenceLotto.match(targetLotto).convertToLottoRank();
-        results.increaseRankCount(matchedRank);
+    private LottoRank matchLottoWithReference(Lotto referenceLotto, Lotto targetLotto) {
+        return referenceLotto.match(targetLotto).convertToLottoRank();
+    }
+
+    private void countRank(Map<LottoRank, Integer> rankCountMap, LottoRank lottoRank) {
+        if(rankCountMap.containsKey(lottoRank)) {
+            rankCountMap.put(lottoRank, rankCountMap.get(lottoRank) + 1);
+            return;
+        }
+
+        rankCountMap.put(lottoRank, 1);
     }
 }
