@@ -27,7 +27,7 @@ public class InputView {
     public static List<List<Integer>> inputManualLottoNumbers(LottoCount manualLottoCount) {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         List<List<Integer>> manualLottoNumbers = new ArrayList<>();
-        for(int i = 0; i < manualLottoCount.get(); i++) {
+        for (int i = 0; i < manualLottoCount.get(); i++) {
             manualLottoNumbers.add(inputNumbers());
         }
         return manualLottoNumbers;

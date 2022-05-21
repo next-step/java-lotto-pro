@@ -12,7 +12,7 @@ public class LottoCount {
     }
 
     private void validate(int lottoCount) {
-        if(lottoCount < MIN_LOTTO_COUNT) {
+        if (lottoCount < MIN_LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 구매 개수는 0 이상으로 입력해주세요.");
         }
     }
