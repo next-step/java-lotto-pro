@@ -37,6 +37,7 @@ class LottoNumbersTest {
     @DisplayName("입력 값에 중복 번호가 존재하면 예외를 발생시킨다.")
     void createWinningNumbers_중복예외() {
         List<Integer> numbers = Arrays.asList(10, 4, 1, 23, 23, 45);
+
         assertThatThrownBy(() -> createWinningNumbers(numbers))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 로또 번호에 중복 값이 존재합니다!");
@@ -46,6 +47,7 @@ class LottoNumbersTest {
     @DisplayName("입력 값이 사이즈를 초과하면 예외를 발생시킨다.")
     void createWinningNumbers_사이즈예외() {
         List<Integer> numbers = Arrays.asList(10, 4, 1, 23, 23, 45, 2);
+
         assertThatThrownBy(() -> createWinningNumbers(numbers))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 로또 번호는 %d개 입력해 주세요!", LOTTO_PICK_COUNT);
