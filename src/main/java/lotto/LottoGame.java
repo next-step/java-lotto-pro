@@ -20,8 +20,6 @@ public class LottoGame {
 
     private Map<Integer, Integer> earningMap;
 
-//    private WinnerTicket winnerTicket;
-
     private List<LottoTicket> tickets;
 
     LottoGame() {
@@ -52,16 +50,10 @@ public class LottoGame {
         }
     }
 
-//    LottoGame(List<LottoTicket> tickets, WinnerTicket winnerTicket) {
     LottoGame(List<LottoTicket> tickets) {
         this();
-
         this.purchasePrice = tickets.size() * TICKET_UNIT_PRICE;
-
         this.tickets = tickets;
-
-//        this.winnerTicket = winnerTicket;
-//        generateGameResult();
     }
 
     public double getEarningRate() {
@@ -89,11 +81,6 @@ public class LottoGame {
     public Map<Integer, Integer> getScore() {
         return new HashMap<>(this.scoreMap);
     }
-
-
-//    public void initWinnerTicket(String winnerNumbers) {
-//        this.winnerTicket = new WinnerTicket(winnerNumbers);
-//    }
 
     public void printGameResult() {
         ResultView.printGameResult(this.getScore(), this.earningRate);
