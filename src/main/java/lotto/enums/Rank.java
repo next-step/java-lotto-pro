@@ -38,12 +38,12 @@ public enum Rank {
         return prize.multiply(count);
     }
 
+    public boolean isOverMinWinningRank() {
+        return matchingCount >= MIN_WINNING_RANK;
+    }
+
     @Override
     public String toString() {
         return String.format("%d개 일치 (%s)원", matchingCount, prize);
-    }
-
-    public boolean isOverMinWinningRank() {
-        return matchingCount >= MIN_WINNING_RANK;
     }
 }
