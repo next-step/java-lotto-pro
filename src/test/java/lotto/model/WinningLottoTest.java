@@ -14,22 +14,15 @@ class WinningLottoTest {
 
     @BeforeEach
     void winningLotto() {
-        Lotto winnersLotto = new Lotto(new InputNumberGenerator("1,2,3,4,5,6"));
-        Number bonusNumber = new Number("7");
-
-        winningLotto = new WinningLotto(winnersLotto, bonusNumber);
+        winningLotto = WinningLotto.of("1,2,3,4,5,6", "7");
     }
 
     @ParameterizedTest(name = "당첨 번호 중 하나라도 보너스 번호와 중복되는 경우 오류를 반환한다")
     @CsvSource(value = {"1,2,3,4,5,6:1", "1,2,3,4,5,6:6"}, delimiter = ':')
     void winningLottoDuplicateTest(String winnersNumber, String bonusInput) {
-        // given
-        Lotto winnersLotto = new Lotto(new InputNumberGenerator(winnersNumber));
-        Number bonusNumber = new Number(bonusInput);
-
-        // when & then
+        // given & when & then
         assertThatIllegalArgumentException().isThrownBy(
-                        () -> new WinningLotto(winnersLotto, bonusNumber))
+                        () -> WinningLotto.of(winnersNumber, bonusInput))
                 .withMessageContaining("이미 존재하는 번호 입니다.");
     }
 
