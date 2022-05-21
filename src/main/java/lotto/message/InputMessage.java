@@ -10,4 +10,6 @@ public class InputMessage {
     public static final String INVALID_LOTTO_UNIQUE = "로또 번호는 중복될 수 없습니다.";
     public static final String INPUT_MONEY = "구매금액을 입력해 주세요.";
     public static final String INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String INPUT_LOTTO_TICKET = "로또 번호 6자리를 입력해주세요.";
+    public static final String INPUT_BONUS_NUMBER = "보너스 번호를 입력해주세요.";
 }
