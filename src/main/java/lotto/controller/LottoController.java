@@ -3,8 +3,7 @@ package lotto.controller;
 import lotto.model.*;
 
 import static lotto.utils.InputUtils.*;
-import static lotto.view.InputView.readPurchaseAmount;
-import static lotto.view.InputView.readWinningNumbers;
+import static lotto.view.InputView.*;
 
 public class LottoController {
 
@@ -16,8 +15,9 @@ public class LottoController {
         lottos.printLottos();
 
         LottoNumbers winningNumbers = LottoNumbers.createWinningNumbers(convertToIntegerList(splitWithDelimiter(readWinningNumbers())));
+        LottoNumber bonusNumber = LottoNumber.of(convertToInteger(readBonusNumber()));
 
-        RankCount rankCount = lottos.rankCount(winningNumbers);
+        RankCount rankCount = lottos.rankCount(winningNumbers, bonusNumber);
         Earning earningRate = rankCount.earningRate(purchaseInfo);
 
         Statistics statistics = Statistics.of(rankCount, earningRate);
