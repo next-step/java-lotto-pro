@@ -15,7 +15,7 @@ public class LottoController {
         int purchaseAmount = InputView.enterPurchaseAmount();
         int autoLottoCount = LottoPrice.numberOfLottoCanBuy(purchaseAmount);
 
-        LottoManager lottoManager = new LottoManager(autoLottoCount);
+        LottoManager lottoManager = new LottoManager();
         Lottos lottos = lottoManager.makeLottos(autoLottoCount);
         List<Lotto> lottoElements = lottos.getElements();
 

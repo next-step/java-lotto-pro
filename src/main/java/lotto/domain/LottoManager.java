@@ -9,7 +9,7 @@ public class LottoManager {
 
     private WinningStatistics winningStatistics;
 
-    public LottoManager(int autoLottoCount) {
+    public LottoManager() {
         winningStatistics = new WinningStatistics();
     }
 

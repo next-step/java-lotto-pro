@@ -17,8 +17,7 @@ public class InputView {
         while (true) {
             try {
                 System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-                int[] intArray = LottoUtil.convertLottoStringToIntArray(enterString().split(","));
-                return intArray;
+                return LottoUtil.convertLottoStringToIntArray(enterString().split(","));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -32,8 +31,7 @@ public class InputView {
                 List<LottoNumber> lottoNumbers = LottoUtil.convertToLottoNumber(lottoNumber);
                 Lotto lotto = new Lotto(new ManualPickNumberStrategy(lottoNumbers));
                 LottoNumber bonusLottoNumber = new LottoNumber(enterBonusNumber());
-                WinningLotto winningLotto = new WinningLotto(lotto, bonusLottoNumber);
-                return winningLotto;
+                return new WinningLotto(lotto, bonusLottoNumber);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -58,8 +56,7 @@ public class InputView {
     private static int enterNumber() throws InputMismatchException {
         while (true) {
             try {
-                int number = SCANNER.nextInt();
-                return number;
+                return SCANNER.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("숫자가 아닌 값을 입력하였습니다");
                 SCANNER.next();
