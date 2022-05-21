@@ -19,14 +19,18 @@ class LottoRankTest {
         LottoRank[] lottoRanks = LottoRank.values();
 
         for (LottoRank lottoRank : lottoRanks) {
-            assertThat(LottoRank.valueOf(lottoRank.getCountOfMatch())).isEqualTo(lottoRank);
+            assertThat(LottoRank.valueOf(lottoRank.getCountOfMatch(), lottoRank.isMatchBonus()))
+                    .isEqualTo(lottoRank);
         }
     }
 
     @ParameterizedTest(name = "valueOf 테스트 null 반환")
     @ValueSource(ints = {2, 7})
     public void valueOf_null(int countOfMatch) throws Exception {
-        assertThat(LottoRank.valueOf(countOfMatch)).isNull();
+        org.junit.jupiter.api.Assertions.assertAll(
+                () -> assertThat(LottoRank.valueOf(countOfMatch, false)).isNull(),
+                () -> assertThat(LottoRank.valueOf(countOfMatch, true)).isNull()
+        );
     }
 
     @Test
