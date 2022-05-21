@@ -3,7 +3,7 @@ package study.lotto.io;
 import java.util.List;
 import study.lotto.Lotto;
 import study.lotto.LottoResultMap;
-import study.lotto.enumtype.LottoWinningType;
+import study.lotto.enumtype.LottoRank;
 
 public class ConsolePrinter implements Printer {
     private static final String SPACE_STRING = " ";
@@ -16,8 +16,11 @@ public class ConsolePrinter implements Printer {
 
     @Override
     public void printMyLottos(List<Lotto> lottos) {
-        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
-        lottos.forEach(System.out::println);
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+                lottos.stream().filter(lotto -> !lotto.isAuto()).count(),
+                lottos.stream().filter(Lotto::isAuto).count()
+        );
+        lottos.stream().map(Lotto::toNumberString).forEach(System.out::println);
     }
 
     @Override
@@ -25,23 +28,23 @@ public class ConsolePrinter implements Printer {
         System.out.println("당첨통계");
         System.out.println("---------");
 
-        print(lottoResultMap, LottoWinningType.FIFTH);
-        print(lottoResultMap, LottoWinningType.FOURTH);
-        print(lottoResultMap, LottoWinningType.THIRD);
-        print(lottoResultMap, LottoWinningType.SECOND, SECOND_ADDITIONAL_STRING);
-        print(lottoResultMap, LottoWinningType.FIRST);
+        print(lottoResultMap, LottoRank.FIFTH);
+        print(lottoResultMap, LottoRank.FOURTH);
+        print(lottoResultMap, LottoRank.THIRD);
+        print(lottoResultMap, LottoRank.SECOND, SECOND_ADDITIONAL_STRING);
+        print(lottoResultMap, LottoRank.FIRST);
 
         System.out.printf("총 수익률은 %.2f입니다.%n", lottoResultMap.calcLottoYield());
     }
 
-    private void print(LottoResultMap lottoResultMap, LottoWinningType winningType, String additionalString) {
+    private void print(LottoResultMap lottoResultMap, LottoRank winningType, String additionalString) {
         System.out.printf("%d개 일치%s(%d원)- %d개%n", winningType.getMatchCount(),
                 additionalString,
                 winningType.getWinnings(),
                 lottoResultMap.matchCount(winningType));
     }
 
-    private void print(LottoResultMap lottoResultMap, LottoWinningType winningType) {
+    private void print(LottoResultMap lottoResultMap, LottoRank winningType) {
         print(lottoResultMap, winningType, SPACE_STRING);
     }
 }
