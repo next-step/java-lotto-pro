@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -15,12 +16,9 @@ public class Lottos {
     }
 
     public Lottos matchedLottoList(WinningLotto winningNumbers, MatchResult matchResult) {
-        List<Lotto> matchedLottos = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            if (winningNumbers.isMatched(lotto, matchResult)) {
-                matchedLottos.add(lotto);
-            }
-        }
+        List<Lotto> matchedLottos = lottos.stream()
+                .filter(lotto -> winningNumbers.isMatched(lotto, matchResult))
+                .collect(Collectors.toList());
         return Lottos.from(matchedLottos);
     }
 
