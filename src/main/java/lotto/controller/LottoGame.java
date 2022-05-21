@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-
     public void start() {
         Money money = inputMoney();
         int maxQuantity = money.findPurchaseTicketQuantity();

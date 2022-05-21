@@ -77,22 +77,22 @@ public class WinningResultTest {
         assertThat(winningResult.totalPrizeMoney()).isEqualTo(2031555000);
     }
 
-    @DisplayName("수익률 손해")
     @Test
+    @DisplayName("수익률 손해")
     void loss() {
         Money money = new Money("2031556000");
         assertThat(winningResult.profitResultDescription(money)).contains("손해");
     }
 
-    @DisplayName("수익률 본전")
     @Test
+    @DisplayName("수익률 본전")
     void principal() {
         Money money = new Money("2031555000");
         assertThat(winningResult.profitResultDescription(money)).contains("본전이");
     }
 
-    @DisplayName("수익률 이득")
     @Test
+    @DisplayName("수익률 이득")
     void profit() {
         Money money = new Money("10000");
         assertThat(winningResult.profitResultDescription(money)).contains("이득이");

@@ -10,16 +10,6 @@ public class WinningResult {
 
     private final List<LottoRank> winningRanks = new ArrayList<>();
 
-    public int size() {
-        return this.winningRanks.size();
-    }
-
-    public void addWinningRank(LottoRank lottoRank) {
-        if (LottoRank.isWinning(lottoRank)) {
-            this.winningRanks.add(lottoRank);
-        }
-    }
-
     public int countRank(LottoRank findRank) {
         return (int) this.winningRanks.stream()
                 .filter(rank -> rank.name().equals(findRank.name()))
@@ -46,5 +36,15 @@ public class WinningResult {
             return TEXT_LOSS;
         }
         return TEXT_PRINCIPAL;
+    }
+
+    public void addWinningRank(LottoRank lottoRank) {
+        if (LottoRank.isWinning(lottoRank)) {
+            this.winningRanks.add(lottoRank);
+        }
+    }
+
+    public int size() {
+        return this.winningRanks.size();
     }
 }

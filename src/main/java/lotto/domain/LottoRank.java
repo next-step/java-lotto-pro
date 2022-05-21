@@ -33,14 +33,14 @@ public enum LottoRank {
                 .findFirst()
                 .orElse(LottoRank.MISS);
 
-        if(lottoRank == SECOND){
+        if (lottoRank == SECOND) {
             lottoRank = rankByBonusNumber(isMatchBonusNumber);
         }
         return lottoRank;
     }
 
-    private static LottoRank rankByBonusNumber(boolean isMatchBonusNumber){
-        if(isMatchBonusNumber){
+    private static LottoRank rankByBonusNumber(boolean isMatchBonusNumber) {
+        if (isMatchBonusNumber) {
             return SECOND;
         }
         return THIRD;

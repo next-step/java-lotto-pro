@@ -24,6 +24,15 @@ public class LottoTicket {
         this.lottoNumbers = mapLottoNumbers(lottoNumberList);
     }
 
+    private List<LottoNumber> mapLottoNumbers(List<String> lottoNumberList) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (String number : lottoNumberList) {
+            LottoNumber lottoNumber = new LottoNumber(number);
+            lottoNumbers.add(lottoNumber);
+        }
+        return lottoNumbers;
+    }
+
     public LottoRank rank(LottoTicket winningNumbers, LottoNumber bonusNumber) {
         return LottoRank.rank(matchCount(winningNumbers), contains(bonusNumber));
     }
@@ -38,14 +47,6 @@ public class LottoTicket {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    private List<LottoNumber> mapLottoNumbers(List<String> lottoNumberList) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number : lottoNumberList) {
-            LottoNumber lottoNumber = new LottoNumber(number);
-            lottoNumbers.add(lottoNumber);
-        }
-        return lottoNumbers;
-    }
 
     private void validate(String input) {
         validateNullOrEmpty(input);
