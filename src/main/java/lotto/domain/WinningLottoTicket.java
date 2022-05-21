@@ -9,12 +9,14 @@ import java.util.Objects;
 public class WinningLottoTicket {
 
     private final LottoTicket winningLottoTicket;
+    private final LottoNumber bonusBall;
 
-    public WinningLottoTicket(final List<String> inputWinningLottoNumbers) {
+    public WinningLottoTicket(final List<String> inputWinningLottoNumbers, final String bonusBall) {
         validateNullOrEmpty(inputWinningLottoNumbers);
         List<Integer> winningLottoNumbers = StringUtils.convertIntegers(inputWinningLottoNumbers);
 
         this.winningLottoTicket = new LottoTicket(winningLottoNumbers);
+        this.bonusBall = new LottoNumber(bonusBall);
     }
 
     private void validateNullOrEmpty(final List<String> lottoNumbers) {
@@ -24,10 +26,14 @@ public class WinningLottoTicket {
     }
 
     public int countMatchNumber(final LottoTicket lottoTicket) {
-        List<Integer> winningLottoNumbers = winningLottoTicket.getLottoNumbers();
+        List<LottoNumber> winningLottoNumbers = winningLottoTicket.getLottoNumbers();
 
         return (int) winningLottoNumbers.stream()
                 .filter(lottoTicket::contains)
                 .count();
+    }
+
+    public boolean matchBonus(final LottoTicket purchasedLottoTicket) {
+        return purchasedLottoTicket.contains(bonusBall);
     }
 }

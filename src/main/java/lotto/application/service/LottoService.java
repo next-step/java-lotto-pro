@@ -24,8 +24,8 @@ public class LottoService {
         return createLottoTickets(lottoCount);
     }
 
-    public LottoResult getRankCount(final String[] winningLottoNumbers, final LottoTickets purchasedLottoTickets) {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList(winningLottoNumbers));
+    public LottoResult getRankCount(final String[] winningLottoNumbers, final String bonusBall, final LottoTickets purchasedLottoTickets) {
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList(winningLottoNumbers), bonusBall);
 
         return purchasedLottoTickets.compareWinningLottoTicket(winningLottoTicket);
     }

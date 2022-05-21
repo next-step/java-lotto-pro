@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.error.LottoNumberErrorCode;
 import lotto.domain.error.LottoTicketErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,12 +18,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningLottoTicketTest {
 
+    private final String bonusBall = "45";
+
     @ParameterizedTest(name = "inputWinningLottoNumbers가 null 또는 empty 인 경우 에러발생")
     @NullAndEmptySource
     public void inputWinningLottoNumbers_null_or_empty(List<String> inputWinningLottoNumbers) {
-        assertThatThrownBy(() -> {
-            new WinningLottoTicket(inputWinningLottoNumbers);
-        })
+        assertThatThrownBy(() -> new WinningLottoTicket(inputWinningLottoNumbers, "1"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(LottoTicketErrorCode.NOT_ALLOW_NULL_OR_EMPTY.getMessage());
     }
@@ -30,9 +31,7 @@ class WinningLottoTicketTest {
     @Test
     @DisplayName("중복된 로또번호가 있을 시 에러발생")
     public void inputWinningLottoNumbers_duplicate_number() {
-        assertThatThrownBy(() -> {
-            new WinningLottoTicket(Arrays.asList("1", "1", "1", "1", "1", "1"));
-        })
+        assertThatThrownBy(() -> new WinningLottoTicket(Arrays.asList("1", "1", "1", "1", "1", "1"), bonusBall))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(LottoTicketErrorCode.NOT_ALLOW_DUPLICATE.getMessage());
     }
@@ -40,9 +39,7 @@ class WinningLottoTicketTest {
     @Test
     @DisplayName("로또번호가 6개를 초과한 경우 에러발생")
     public void inputWinningLottoNumbers_size_bigger() {
-        assertThatThrownBy(() -> {
-            new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6", "7"));
-        })
+        assertThatThrownBy(() -> new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6", "7"), bonusBall))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(String.format(LottoTicketErrorCode.INVALID_LOTTO_NUMBER_SIZE.getMessage(),
                         LottoTicket.LOTTO_SIZE));
@@ -51,9 +48,7 @@ class WinningLottoTicketTest {
     @Test
     @DisplayName("로또번호가 6개보다 작은 경우 에러발생")
     public void inputWinningLottoNumbers_size_smaller() {
-        assertThatThrownBy(() -> {
-            new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5"));
-        })
+        assertThatThrownBy(() -> new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5"), bonusBall))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(String.format(LottoTicketErrorCode.INVALID_LOTTO_NUMBER_SIZE.getMessage(),
                         LottoTicket.LOTTO_SIZE));
@@ -62,15 +57,13 @@ class WinningLottoTicketTest {
     @Test
     @DisplayName("로또번호가 아닌 숫자가 존재하면 에러발생")
     public void inputWinningLottoNumbers_로또번호가_아닌_숫자() {
-        assertThatThrownBy(() -> {
-            new WinningLottoTicket(Arrays.asList("100", "200", "300", "400", "500", "600"));
-        })
+        assertThatThrownBy(() -> new WinningLottoTicket(Arrays.asList("100", "200", "300", "400", "500", "600"), bonusBall))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(
                         String.format(
-                                LottoTicketErrorCode.INVALID_LOTTO_NUMBER.getMessage(),
-                                LottoTicket.LOTTO_MIN_NUMBER,
-                                LottoTicket.LOTTO_MAX_NUMBER)
+                                LottoNumberErrorCode.INVALID_LOTTO_NUMBER.getMessage(),
+                                LottoNumber.LOTTO_MIN_NUMBER,
+                                LottoNumber.LOTTO_MAX_NUMBER)
                 );
     }
 
@@ -78,7 +71,7 @@ class WinningLottoTicketTest {
     @MethodSource("provideLottoTicketForMatchCount")
     public void countMatchNumber(LottoTicket lottoTicket, int countOfMatch) {
         List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(lottoNumbers);
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(lottoNumbers, bonusBall);
 
         assertThat(winningLottoTicket.countMatchNumber(lottoTicket)).isEqualTo(countOfMatch);
     }
