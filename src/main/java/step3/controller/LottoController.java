@@ -25,7 +25,7 @@ public class LottoController {
         LottoTickets lottoTickets = new LottoTickets();
 
         int ticketCount = getTicketCountByMoney(); /*정상 값을 입력할때까지 반복입력*/
-        int manualTicketCount = getManualLottoCount(ticketCount);
+        int manualTicketCount = getManualTicketCount(ticketCount);
         int randomTicketCount = ticketCount - manualTicketCount;
 
         List<LottoTicket> manualLottoTickets = getManualLottoTickets(manualTicketCount);
@@ -75,14 +75,14 @@ public class LottoController {
         }
     }
 
-    private int getManualLottoCount(int ticketCount) {
+    private int getManualTicketCount(int ticketCount) {
         try {
-            int manualLottoCount = NumberUtil.parseInt(inputView.getManualLottoCount());
-            lottoMachine.validateManualLottoCount(ticketCount, manualLottoCount);
-            return manualLottoCount;
+            int manualTicketCount = NumberUtil.parseInt(inputView.getManualTicketCount());
+            lottoMachine.validateManualLottoCount(ticketCount, manualTicketCount);
+            return manualTicketCount;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getManualLottoCount(ticketCount);
+            return getManualTicketCount(ticketCount);
         }
     }
 

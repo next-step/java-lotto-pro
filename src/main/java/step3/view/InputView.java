@@ -24,17 +24,17 @@ public class InputView {
         return customTrim(scanIn.nextLine());
     }
 
-    public String getManualLottoCount() {
+    public String getManualTicketCount() {
         System.out.println(GET_MANUAL_LOTTO_COUNT);
         return customTrim(scanIn.nextLine());
     }
 
-    public List<String> getManualLotto(int manualTicket) {
+    public List<String> getManualLotto(int manualTicketCount) {
         List<String> manualLottoTicketsSource = new ArrayList<>();
-        if (manualTicket >= TICKET_EXIST_BOUNDARY) {
+        if (manualTicketCount >= TICKET_EXIST_BOUNDARY) {
             System.out.println(GET_MANUAL_LOTTO_MESSAGE);
         }
-        for (int i = 0; i < manualTicket; i++) {
+        for (int i = 0; i < manualTicketCount; i++) {
             manualLottoTicketsSource.add(customTrim(scanIn.nextLine()));
         }
         return manualLottoTicketsSource;
