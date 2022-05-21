@@ -12,4 +12,16 @@ public class LottoRanks {
     public List<LottoRank> getLottoRanks() {
         return lottoRanks;
     }
+
+    public int prize() {
+        int prize = 0;
+        for (LottoRank lottoRank : lottoRanks) {
+            prize += lottoRank.getPrize();
+        }
+        return prize;
+    }
+
+    public int size() {
+        return lottoRanks.size();
+    }
 }

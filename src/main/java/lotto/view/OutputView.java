@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.LottoRank;
 import lotto.domain.LottoRanks;
-import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 
 import java.util.Arrays;
@@ -17,6 +16,7 @@ public class OutputView {
         Collections.reverse(lottoRanks);
 
         printLottoRank(lottoRanks, lottoResult);
+        printRateOfReturn(lottoResult);
     }
 
     private static void printLottoRank(List<LottoRank> lottoRanks, LottoRanks lottoResult) {
@@ -37,9 +37,9 @@ public class OutputView {
         System.out.println(String.format(" (%d원)- %d개", lottoRank.getPrize(), count));
     }
 
-    private static void printRateOfReturn(List<Integer> matchList, List<LottoRank> lottoRanks) {
-        int profit = LottoStatistics.lottoProfit(matchList, lottoRanks);
-        float rateOfReturn = profit / (matchList.size() * LOTTO_PRICE);
+    private static void printRateOfReturn(LottoRanks lottoResult) {
+        int prize = lottoResult.prize();
+        float rateOfReturn = prize / (lottoResult.size() * LOTTO_PRICE);
 
         System.out.print(String.format("총 수익률은 %.2f입니다.", rateOfReturn));
         if (rateOfReturn < 1) {
