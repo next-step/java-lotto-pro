@@ -26,20 +26,20 @@ public class LottoController {
         int manualLottoCount = getManualPurchaseLottoCount();
         final Lottos lottos = purchaseLottos(totalMoney, manualLottoCount);
         ResultView.printPurchasedLottos(lottos, manualLottoCount);
-        final WinningLotto winningLotto = decideWinngLotto();
+        final WinningLotto winningLotto = decideWinningLotto();
         LottoStatistics lottoStatistics = lottos.lottoStatistics(winningLotto);
         ResultView.printWinningStatistics(lottoStatistics, lottos.totalPrice());
     }
 
-    private WinningLotto decideWinngLotto() {
+    private WinningLotto decideWinningLotto() {
         final Lotto lotto = getWinningLotto();
         InputView.printBonusLottoNumberInputGuide();
         WinningLotto winningLotto = null;
         try {
             winningLotto = WinningLotto.of(lotto,
                     LottoNumber.valueOf(StringToIntegerConverter.parseInt(scanner.nextLine())));
-        } catch (IllegalArgumentException e) {
-            decideWinngLotto();
+        } catch (Exception e) {
+            decideWinningLotto();
         }
         return winningLotto;
     }
@@ -49,18 +49,18 @@ public class LottoController {
         Lotto lotto = null;
         try {
             lotto = Lotto.draw(new InputLottoNumberGenerator(scanner.nextLine()));
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             getWinningLotto();
         }
         return lotto;
     }
 
     private Lottos purchaseLottos(Money totalMoney, int manualLottoCount) {
+        InputView.printManualPurchaseLottoNumberGuide();
         Lottos lottos = null;
         try {
-            InputView.printManualPurchaseLottoNumberGuide();
             lottos = Lottos.purchase(totalMoney, pickManualLottos(manualLottoCount));
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             purchaseLottos(totalMoney, manualLottoCount);
         }
         return lottos;
@@ -68,13 +68,13 @@ public class LottoController {
 
     private int getManualPurchaseLottoCount() {
         InputView.printManualPurchaseLottoCountGuide();
-        int manualPurcasedLottoCount = 0;
+        int manualPurchasedLottoCount = 0;
         try {
-            manualPurcasedLottoCount = StringToIntegerConverter.parseInt(scanner.nextLine());
-        } catch (IllegalArgumentException e) {
+            manualPurchasedLottoCount = StringToIntegerConverter.parseInt(scanner.nextLine());
+        } catch (Exception e) {
             getManualPurchaseLottoCount();
         }
-        return manualPurcasedLottoCount;
+        return manualPurchasedLottoCount;
     }
 
     private Money openWallet() {

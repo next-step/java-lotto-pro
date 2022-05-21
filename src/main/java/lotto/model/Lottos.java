@@ -17,10 +17,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos valueOf(List<Lotto> lottos) {
-        return new Lottos(lottos);
-    }
-
     public static Lottos purchase(Money money) {
         List<Lotto> lottos = randomLottos(money);
         return new Lottos(lottos);
@@ -34,9 +30,9 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    private static List<Lotto> randomLottos(Money leftMoney) {
+    private static List<Lotto> randomLottos(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        int count = leftMoney.maxLottoCount();
+        int count = money.maxLottoCount();
         for (int i = ZERO_NUM; i < count; i++) {
             lottos.add(Lotto.draw(new RandomLottoNumberGenerator()));
         }
