@@ -28,6 +28,10 @@ public class Lottos {
         return new LottoResult(lottos, winningNumber);
     }
 
+    public int size() {
+        return lottos.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
