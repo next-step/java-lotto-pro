@@ -18,10 +18,6 @@ public class LottoNumber {
         this.lottoNumber = number;
     }
 
-    public LottoNumber(String stringNumber) {
-        this(Integer.parseInt(stringNumber));
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

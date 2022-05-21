@@ -1,9 +1,11 @@
 package lotto.model.winning;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoNumber;
 import lotto.type.LottoRank;
@@ -13,17 +15,17 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<String> lottoNumberList, String bonusNumber) {
-        if(lottoNumberList.contains(bonusNumber)) {
+    public WinningLotto(Set<Integer> lottoNumberSet, int bonusNumber) {
+        if(lottoNumberSet.contains(bonusNumber)) {
             throw new IllegalArgumentException("당첨번호와 중복된 보너스 볼은 사용할 수 없습니다.");
         }
 
-        this.winningLotto = Lotto.of(lottoNumberList);
+        this.winningLotto = Lotto.fromInteger(lottoNumberSet);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public WinningLotto(String[] lottoNumberArr, String bonusNumber) {
-        this(Arrays.asList(lottoNumberArr), bonusNumber);
+    public WinningLotto(List<Integer> lottoNumberList, int bonusNumber) {
+        this(new HashSet<>(lottoNumberList), bonusNumber);
     }
 
     public LottoRank match(Lotto lotto) {

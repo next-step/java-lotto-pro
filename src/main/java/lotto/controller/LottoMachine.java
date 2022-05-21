@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 import lotto.model.factory.LottoFactory;
 import lotto.model.lotto.Lotto;
@@ -65,7 +66,7 @@ public class LottoMachine {
         try {
             InputView.inputPurchaseManualLotto();
             IntStream.rangeClosed(1, purchaseManualCount.getPurchaseManualCount())
-                .forEach(value -> lottoList.add(Lotto.of(inputLottoNumberArr(InputView.inputEmptyAsk()))));
+                .forEach(value -> lottoList.add(Lotto.fromInteger(InputView.inputEmptyAsk())));
         } catch (IllegalArgumentException exception) {
             OutputView.OutputExceptionMessage(exception);
             inputPurchaseManualLotto(purchaseManualCount);
@@ -78,9 +79,9 @@ public class LottoMachine {
     private WinningLotto inputWinningLotto() {
         WinningLotto winningLotto;
         try {
-            String[] lottoNumberArr = inputLottoNumberArr(InputView.inputWinningNumber());
-            String inputBonusNumber = InputView.inputBonusNumber();
-            winningLotto = new WinningLotto(lottoNumberArr, inputBonusNumber);
+            Set<Integer> lottoNumberSet = InputView.inputWinningNumber();
+            int inputBonusNumber = InputView.inputBonusNumber();
+            winningLotto = new WinningLotto(lottoNumberSet, inputBonusNumber);
         } catch (IllegalArgumentException exception) {
             OutputView.OutputExceptionMessage(exception);
             winningLotto = inputWinningLotto();
@@ -92,10 +93,6 @@ public class LottoMachine {
     private void outputResult(Money purchasedMoney, PurchaseLotto purchaseLotto, WinningLotto winningLotto) {
         LottoResult lottoResult = purchaseLotto.rankMatch(winningLotto, purchasedMoney);
         OutputView.OutputLottoResult(lottoResult);
-    }
-
-    private String[] inputLottoNumberArr(String inputLottoNumbers) {;
-        return inputLottoNumbers.replace(" ", "").split(",");
     }
 
 }
