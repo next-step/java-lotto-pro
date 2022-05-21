@@ -10,6 +10,7 @@ public class InputView {
     private static final String WINNING_NUMBER_SPLIT_REGEX = ",";
     private static final String INPUT_PAY_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_BEFORE_WEEK_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     private final Scanner scanner;
 
@@ -26,6 +27,9 @@ public class InputView {
     public LottoRequest.ResultRequest inputWinningNumbers() {
         System.out.println(INPUT_BEFORE_WEEK_WINNING_NUMBER_MESSAGE);
         String[] winningNumbers = StringUtils.splitAndTrim(scanner.nextLine(), WINNING_NUMBER_SPLIT_REGEX);
-        return new LottoRequest.ResultRequest(winningNumbers);
+
+        System.out.println(INPUT_BONUS_BALL_MESSAGE);
+        String bonusBall = scanner.nextLine();
+        return new LottoRequest.ResultRequest(winningNumbers, bonusBall);
     }
 }

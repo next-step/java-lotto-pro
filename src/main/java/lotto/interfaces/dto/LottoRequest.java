@@ -16,13 +16,19 @@ public class LottoRequest {
 
     public static class ResultRequest {
         private final String[] winningNumbers;
+        private final String bonusBall;
 
-        public ResultRequest(String[] winningNumbers) {
+        public ResultRequest(String[] winningNumbers, String bonusBall) {
             this.winningNumbers = winningNumbers;
+            this.bonusBall = bonusBall;
         }
 
         public String[] getWinningNumbers() {
             return winningNumbers;
+        }
+
+        public String getBonusBall() {
+            return bonusBall;
         }
     }
 }
