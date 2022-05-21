@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
-    public static final Map<Integer, LottoNumber> lottoNumbersCache = new HashMap();
+    public static final Map<Integer, LottoNumber> cachedLottoNumberGroup = new HashMap();
     private static final int FIRST_LOTTO_NUMBER = 1;
     private static final int LAST_LOTTO_NUMBER = 45;
 
@@ -13,7 +13,7 @@ public class LottoNumber {
 
     static {
         IntStream.rangeClosed(FIRST_LOTTO_NUMBER, LAST_LOTTO_NUMBER)
-                .forEach(lottoNumber -> lottoNumbersCache.put(lottoNumber, new LottoNumber(lottoNumber)));
+                .forEach(lottoNumber -> cachedLottoNumberGroup.put(lottoNumber, new LottoNumber(lottoNumber)));
     }
 
     private LottoNumber(int lottoNumber) {
@@ -25,7 +25,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int lottoNumber) {
-        LottoNumber cachedLottoNumber = lottoNumbersCache.get(lottoNumber);
+        LottoNumber cachedLottoNumber = cachedLottoNumberGroup.get(lottoNumber);
         validateLottoNumber(cachedLottoNumber);
         return cachedLottoNumber;
     }

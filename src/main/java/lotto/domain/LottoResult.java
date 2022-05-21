@@ -13,11 +13,7 @@ public class LottoResult {
     }
 
     public int winningCount(LottoRank lottoRank) {
-        Integer winningCount = winningRanks.get(lottoRank);
-        if (winningCount == null) {
-            return 0;
-        }
-        return winningCount;
+        return winningRanks.getOrDefault(lottoRank, 0);
     }
 
     public double rateOfReturn(Money buyPrice) {
@@ -33,7 +29,7 @@ public class LottoResult {
     }
 
     private Money sumRankMoney(Money moneySum, LottoRank lottoRank) {
-        for (int i = 0; i < winningCount(lottoRank); i++) {
+        for (int i = 0, end = winningCount(lottoRank); i < end; i++) {
             moneySum = lottoRank.sumWinningMoney(moneySum);
         }
         return moneySum;
