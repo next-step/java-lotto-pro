@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class QuantityTest {
     @Test
-    @DisplayName("구매가능3, 구매수량2 이라면 True 를 반환한다")
+    @DisplayName("구매가능3, 수동 구매수량2 라면 True 를 반환한다")
     void isPurchasableTrue() {
-        assertThat(new Quantity(2, 3).isPurchasable()).isTrue();
+        assertThat(new Quantity(3, 2).isPurchasable()).isTrue();
     }
 
     @Test
-    @DisplayName("구매가능3, 구매수량3 이라면 False 를 반환한다")
+    @DisplayName("구매가능3, 수동 구매수량3 이라면 False 를 반환한다")
     void isPurchasableFalse() {
         assertThat(new Quantity(3, 3).isPurchasable()).isFalse();
     }

@@ -4,15 +4,17 @@ public class Quantity {
 
     private final int quantity;
     private final int maxQuantity;
+    private final int manualQuantity;
 
-    public Quantity(int maxQuantity) {
-        this(0, maxQuantity);
+    public Quantity(int maxQuantity, int manualQuantity) {
+        this(manualQuantity, maxQuantity, manualQuantity);
     }
 
-    public Quantity(int quantity, int maxQuantity) {
+    private Quantity(int quantity, int maxQuantity, int manualQuantity) {
         validate(quantity, maxQuantity);
         this.quantity = quantity;
         this.maxQuantity = maxQuantity;
+        this.manualQuantity = manualQuantity;
     }
 
     private void validate(int quantity, int maxQuantity) {
@@ -22,7 +24,7 @@ public class Quantity {
     }
 
     public Quantity increase() {
-         return new Quantity(this.quantity + 1, maxQuantity);
+         return new Quantity(this.quantity + 1, maxQuantity, manualQuantity);
     }
 
     public boolean isPurchasable() {
@@ -31,5 +33,9 @@ public class Quantity {
 
     public int getMaxQuantity() {
         return maxQuantity;
+    }
+
+    public int getManualQuantity() {
+        return manualQuantity;
     }
 }
