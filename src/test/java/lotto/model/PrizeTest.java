@@ -28,7 +28,7 @@ class PrizeTest {
 
         Prize testPrize = secondPrize.add(thirdPrize);
         assertThat(testPrize.getAmount())
-                .isEqualTo(31_500_000);
+                .isEqualTo(1_550_000);
     }
 
     @Test
@@ -38,7 +38,7 @@ class PrizeTest {
 
         Prize testPrize = secondPrize.multiply(2);
         assertThat(testPrize.getAmount())
-                .isEqualTo(60_000_000);
+                .isEqualTo(3_000_000);
     }
 
 }
