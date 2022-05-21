@@ -8,6 +8,8 @@ public class LottoGame {
 
     public void start() {
         Money money = inputMoney();
+        int maxQuantity = money.findPurchaseTicketQuantity();
+        TicketQuantity manualQuantity = inputManualQuantity(maxQuantity);
         LottoMachine lottoMachine = new LottoMachine();
         LottoTickets lottoTickets = lottoMachine.buyLottoTicket(money);
         ResultView.printPurchaseTicketQuantity(lottoTickets.size());
@@ -26,6 +28,16 @@ public class LottoGame {
         }
     }
 
+    private TicketQuantity inputManualQuantity(int maxQuantity) {
+        String input = InputView.inputManualQuantityView();
+        try {
+            return new TicketQuantity(input, maxQuantity);
+        } catch (IllegalArgumentException e) {
+            ResultView.printInputErrorMessage(e);
+            return inputManualQuantity(maxQuantity);
+        }
+    }
+
     private LottoTicket inputWinningNumbers() {
         String input = InputView.inputWinningNumbersView();
         try {
@@ -37,7 +49,7 @@ public class LottoGame {
     }
 
     private LottoNumber inputBonusNumber(LottoTicket winningNumbers) {
-        String input = InputView.inputBonusNumber();
+        String input = InputView.inputBonusNumberView();
         try {
             LottoNumber bonusNumber = new LottoNumber(input);
             winningNumbers.validateUniqueBonusNumber(bonusNumber);
