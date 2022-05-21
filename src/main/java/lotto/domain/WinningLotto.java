@@ -6,14 +6,16 @@ import java.util.Set;
 
 public class WinningLotto {
     private final Set<LottoNumber> winningNumbers;
+    private LottoNumber bonusNumber;
 
-    public WinningLotto(LottoNumber[] winningNumbers) {
-        validateDuplicated(winningNumbers);
+    public WinningLotto(LottoNumber[] winningNumbers, LottoNumber bonusNumber) {
+        validateDuplicated(winningNumbers, bonusNumber);
         this.winningNumbers = new HashSet<>(Arrays.asList(winningNumbers));
+        this.bonusNumber = bonusNumber;
     }
 
-    public WinningLotto(String[] winningNumbers) {
-        this(createWinningLottoNumbers(winningNumbers));
+    public WinningLotto(String[] winningNumbers, String bonusNumber) {
+        this(createWinningLottoNumbers(winningNumbers), LottoNumber.from(bonusNumber));
     }
 
     private static LottoNumber[] createWinningLottoNumbers(String[] numbers) {
@@ -29,18 +31,20 @@ public class WinningLotto {
     }
 
     private MatchResult matchWinningLotto(Lotto lotto) {
-        return lotto.match(winningNumbers);
+        return lotto.match(winningNumbers, bonusNumber);
     }
 
-    private void validateDuplicated(LottoNumber[] winningNumbers) {
-        if (hasDuplicatedLottoNumber(winningNumbers)) {
+    private void validateDuplicated(LottoNumber[] winningNumbers, LottoNumber bonusNumber) {
+        if (hasDuplicatedLottoNumber(winningNumbers, bonusNumber)) {
             throw new IllegalArgumentException("당첨번호는 중복된 숫자를 가질 수 없습니다.");
         }
     }
 
-    private boolean hasDuplicatedLottoNumber(LottoNumber[] numbers) {
+    private boolean hasDuplicatedLottoNumber(LottoNumber[] numbers, LottoNumber bonusNumber) {
         Set<LottoNumber> nonDuplicatedNumbers = new HashSet<>(Arrays.asList(numbers));
-        return nonDuplicatedNumbers.size() != numbers.length;
+        nonDuplicatedNumbers.add(bonusNumber);
+
+        return nonDuplicatedNumbers.size() != numbers.length + 1;
     }
 
 
