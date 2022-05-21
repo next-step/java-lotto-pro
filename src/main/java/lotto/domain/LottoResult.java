@@ -13,7 +13,7 @@ public class LottoResult {
         init();
     }
 
-    public void init() {
+    private void init() {
         Arrays.stream(LottoRank.values())
                 .forEach(rank -> rankCounter.put(rank, 0));
     }
