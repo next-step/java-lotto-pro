@@ -27,6 +27,7 @@ public class InputView {
     }
 
     private static LottoNumber inputBonusNumber() {
+        System.out.println(InputMessage.INPUT_BONUS_NUMBER);
         return new LottoNumber(scanner.nextInt());
     }
 
