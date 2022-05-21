@@ -34,58 +34,53 @@ public class LottoController {
     private WinningLotto decideWinningLotto() {
         final Lotto lotto = getWinningLotto();
         InputView.printBonusLottoNumberInputGuide();
-        WinningLotto winningLotto = null;
         try {
-            winningLotto = WinningLotto.of(lotto,
+            return WinningLotto.of(lotto,
                     LottoNumber.valueOf(StringToIntegerConverter.parseInt(scanner.nextLine())));
         } catch (Exception e) {
-            decideWinningLotto();
+            ResultView.printException(e.getMessage());
+            return decideWinningLotto();
         }
-        return winningLotto;
     }
 
     private Lotto getWinningLotto() {
         InputView.printWinningLottoInputGuide();
-        Lotto lotto = null;
         try {
-            lotto = Lotto.draw(new InputLottoNumberGenerator(scanner.nextLine()));
+            return Lotto.draw(new InputLottoNumberGenerator(scanner.nextLine()));
         } catch (Exception e) {
-            getWinningLotto();
+            ResultView.printException(e.getMessage());
+            return getWinningLotto();
         }
-        return lotto;
     }
 
     private Lottos purchaseLottos(Money totalMoney, int manualLottoCount) {
         InputView.printManualPurchaseLottoNumberGuide();
-        Lottos lottos = null;
         try {
-            lottos = Lottos.purchase(totalMoney, pickManualLottos(manualLottoCount));
+            return Lottos.purchase(totalMoney, pickManualLottos(manualLottoCount));
         } catch (Exception e) {
-            purchaseLottos(totalMoney, manualLottoCount);
+            ResultView.printException(e.getMessage());
+            return purchaseLottos(totalMoney, manualLottoCount);
         }
-        return lottos;
     }
 
     private int getManualPurchaseLottoCount() {
         InputView.printManualPurchaseLottoCountGuide();
-        int manualPurchasedLottoCount = 0;
         try {
-            manualPurchasedLottoCount = StringToIntegerConverter.parseInt(scanner.nextLine());
+            return StringToIntegerConverter.parseInt(scanner.nextLine());
         } catch (Exception e) {
-            getManualPurchaseLottoCount();
+            ResultView.printException(e.getMessage());
+            return getManualPurchaseLottoCount();
         }
-        return manualPurchasedLottoCount;
     }
 
     private Money openWallet() {
         InputView.printPurchaseGuide();
-        Money totalMoney = null;
         try {
-            totalMoney = Money.valueOf(StringToIntegerConverter.parseInt(scanner.nextLine()));
+            return Money.valueOf(StringToIntegerConverter.parseInt(scanner.nextLine()));
         } catch (Exception e) {
-            openWallet();
+            ResultView.printException(e.getMessage());
+            return openWallet();
         }
-        return totalMoney;
     }
 
     private List<Lotto> pickManualLottos(int manualLottoCount) {

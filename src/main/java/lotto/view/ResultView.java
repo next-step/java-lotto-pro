@@ -14,6 +14,7 @@ public class ResultView {
     private static final String WINNING_STATISTICS_LINE = "---------";
     private static final String WINNING_STATISTICS_DETAIL = "%s (%s원)- %s개";
     private static final String WINNING_STATISTICS_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String EXCEPTION_MESSAGE = "예외가 발생했습니다. : %s";
 
     public static void printPurchasedLottos(Lottos lottos, int manualLottoCount) {
         printLottosCount(manualLottoCount, lottos.size() - manualLottoCount);
@@ -66,5 +67,9 @@ public class ResultView {
 
     private static boolean isNotMiss(LottoRanking lottoRanking) {
         return !LottoRanking.MISS.equals(lottoRanking);
+    }
+
+    public static void printException(String message) {
+        System.out.printf((EXCEPTION_MESSAGE) + "%n", message);
     }
 }
