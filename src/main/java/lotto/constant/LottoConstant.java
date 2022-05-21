@@ -9,6 +9,5 @@ public class LottoConstant {
     public static final int DEFAULT_MATCH_COUNT = 0;
     public static final int EARNING_RATE_STANDARD = 1;
     public static final String SEPARATOR = ", ";
-    public static final String WINNING_NUMBER_REGEX = "\\s*,\\s*";
     public static final String LINE_BREAK = "\n";
 }
