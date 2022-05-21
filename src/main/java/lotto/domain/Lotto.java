@@ -36,31 +36,35 @@ public class Lotto {
     }
 
     public LottoRank checkLottoRank(Lotto answerLotto) {
-        final Set<Integer> answerLottoNumbers = answerLotto.getLottoNumbers().stream()
+        final Set<Integer> numbers = answerLotto.getLottoNumbers().stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toSet());
 
-        final int ballLottoNumberMatchedCount = countMatchedNumber(answerLottoNumbers);
+        final Set<Integer> answerNumbers = answerLotto.getLottoNumbers().stream()
+                .limit(LOTTO_NUMBER_SIZE)
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toSet());
+
+        final int ballLottoNumberMatchedCount = countMatchedNumber(numbers, answerNumbers);
         final boolean isCheckedBonusBall = ballLottoNumberMatchedCount == 5;
 
         boolean isMatchedBonusBall = false;
         if (isCheckedBonusBall) {
-            LottoNumber lastAnswerLottoNumber = new ArrayList<>(lottoNumbers).get(LOTTO_NUMBER_SIZE);
-            isMatchedBonusBall = isCheck(lastAnswerLottoNumber, answerLottoNumbers);
+            LottoNumber lastAnswerLottoNumber = new ArrayList<>(answerLotto.getLottoNumbers()).get(LOTTO_NUMBER_SIZE);
+            isMatchedBonusBall = isCheck(lastAnswerLottoNumber.getNumber(), numbers);
         }
 
         return LottoRank.findLottoRankByMatchedCount(ballLottoNumberMatchedCount, isMatchedBonusBall);
     }
 
-    public int countMatchedNumber(Set<Integer> answerLottoNumbers) {
-        return (int) lottoNumbers.stream()
-                .limit(LOTTO_NUMBER_SIZE)
-                .filter(lottoNumber -> isCheck(lottoNumber, answerLottoNumbers))
+    public static int countMatchedNumber(Set<Integer> numbers, Set<Integer> answerNumbers) {
+        return (int) answerNumbers.stream()
+                .filter(answerNumber -> isCheck(answerNumber, numbers))
                 .count();
     }
 
-    private boolean isCheck(LottoNumber lottoNumber, Set<Integer> answerLottoNumbers) {
-        return answerLottoNumbers.contains(lottoNumber.getNumber());
+    private static boolean isCheck(Integer answerNumber, Set<Integer> numbers) {
+        return numbers.contains(answerNumber);
     }
 
     public Set<LottoNumber> getLottoNumbers() {
