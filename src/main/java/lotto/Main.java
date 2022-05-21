@@ -13,7 +13,7 @@ public class Main {
 
         System.out.println();
         String winnerNumbers = InputView.getWinnerNumbers();
-        game.setWinnerTicket(winnerNumbers);
+        game.initWinnerTicket(winnerNumbers);
         game.generateGameResult();
 
         System.out.println();

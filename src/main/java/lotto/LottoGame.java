@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.ui.ResultView;
+import lotto.util.RandomNumberUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class LottoGame {
 
     private Map<Integer, Integer> earningMap;
 
-    private LottoTicket winnerTicket;
+    private WinnerTicket winnerTicket;
 
     private List<LottoTicket> tickets;
 
@@ -46,11 +47,12 @@ public class LottoGame {
         this.tickets = new ArrayList<>();
         int ticketCount = this.getTicketCount();
         for (int i = 1; i <= ticketCount; i++) {
-            this.tickets.add(new LottoTicket());
+            LottoNumbers numbers = RandomNumberUtils.generateRandomNumber();
+            this.tickets.add(new LottoTicket(numbers));
         }
     }
 
-    LottoGame(List<LottoTicket> tickets, LottoTicket winnerTicket) {
+    LottoGame(List<LottoTicket> tickets, WinnerTicket winnerTicket) {
         this();
 
         this.purchasePrice = tickets.size() * TICKET_UNIT_PRICE;
@@ -88,8 +90,8 @@ public class LottoGame {
     }
 
 
-    public void setWinnerTicket(String winnerNumbers) {
-        this.winnerTicket = new LottoTicket(winnerNumbers);
+    public void initWinnerTicket(String winnerNumbers) {
+        this.winnerTicket = new WinnerTicket(winnerNumbers);
     }
 
     public void printGameResult() {
@@ -128,7 +130,7 @@ public class LottoGame {
         int[] winnerNumbers = this.winnerTicket.getNumbersAsArray();
 
         for (int winnerNumber : winnerNumbers) {
-            equalNumberCount = ticket.contains(winnerNumber) ? (equalNumberCount + 1) : equalNumberCount;
+            equalNumberCount = ticket.contains(new LottoNumber(winnerNumber)) ? (equalNumberCount + 1) : equalNumberCount;
         }
 
         return equalNumberCount;

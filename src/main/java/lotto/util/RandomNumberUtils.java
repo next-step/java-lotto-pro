@@ -1,10 +1,13 @@
-package lotto;
+package lotto.util;
+
+import lotto.LottoNumber;
+import lotto.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RandomNumberGenerator {
+public class RandomNumberUtils {
 
     public static final int MAX_COUNT = 6;
 
@@ -21,18 +24,19 @@ public class RandomNumberGenerator {
         }
     }
 
-    private RandomNumberGenerator() { }
+    private RandomNumberUtils() { }
 
-    public static List<Integer> generateRandomNumber() {
+    public static LottoNumbers generateRandomNumber() {
         List<Integer> lottoNumberPool = new ArrayList<>(numberPool);
         Collections.shuffle(lottoNumberPool);
 
-        ArrayList<Integer> result = new ArrayList<>();
+        ArrayList<LottoNumber> numbers = new ArrayList<>();
         for (int i = 1; i <= MAX_COUNT; i++) {
-            result.add(lottoNumberPool.get(i));
+            numbers.add(new LottoNumber(lottoNumberPool.get(i)));
         }
 
-        Collections.sort(result);
+        Collections.sort(numbers);
+        LottoNumbers result = new LottoNumbers(numbers);
         return result;
     }
 }
