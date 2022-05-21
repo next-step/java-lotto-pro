@@ -24,7 +24,9 @@ class LottoStatisticTest {
         List<Lotto> lottoList = createNotWinningLottos(notWinningNumbers, 9);
         lottoList.add(createLotto(threeWinningNumbers));
 
-        lottoStatistic = new LottoStatistic(Lottos.from(lottoList), winningNumbers);
+        String bonusNumber = "45";
+
+        lottoStatistic = new LottoStatistic(Lottos.from(lottoList), winningNumbers, bonusNumber);
     }
 
 
@@ -39,9 +41,10 @@ class LottoStatisticTest {
         Map<MatchResult, Integer> winingResult = lottoStatistic.winningMatchResultCount();
 
         assertThat(winingResult.get(MatchResult.FIFTH)).isEqualTo(1);
-        assertThat(winingResult.get(MatchResult.SIXTH)).isEqualTo(0);
-        assertThat(winingResult.get(MatchResult.SEVENTH)).isEqualTo(0);
-        assertThat(winingResult.get(MatchResult.EIGHTH)).isEqualTo(0);
+        assertThat(winingResult.get(MatchResult.FIRST)).isEqualTo(0);
+        assertThat(winingResult.get(MatchResult.SECOND)).isEqualTo(0);
+        assertThat(winingResult.get(MatchResult.THIRD)).isEqualTo(0);
+        assertThat(winingResult.get(MatchResult.FOURTH)).isEqualTo(0);
     }
 
     private List<Lotto> createNotWinningLottos(int[] notWinningNumbers, int size) {

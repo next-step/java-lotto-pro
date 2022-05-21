@@ -9,12 +9,12 @@ public class LottoStatistic {
 
     private Map<MatchResult, Lottos> matchedLottos;
 
-    public LottoStatistic(Lottos lottos, WinningLotto winningNumbers) {
-        initializePrizeLottoList(lottos, winningNumbers);
+    public LottoStatistic(Lottos lottos, WinningLotto winningLotto) {
+        initializePrizeLottoList(lottos, winningLotto);
     }
 
-    public LottoStatistic(Lottos lottos, String[] winningNumbers) {
-        this(lottos, new WinningLotto(winningNumbers));
+    public LottoStatistic(Lottos lottos, String[] winningNumbers, String bonusNumber) {
+        this(lottos, new WinningLotto(winningNumbers, bonusNumber));
     }
 
     private void initializePrizeLottoList(Lottos lottos, WinningLotto winningNumbers) {

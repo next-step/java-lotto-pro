@@ -1,6 +1,9 @@
 package lotto.controller;
 
 import calculator.domain.StringSplitter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import lotto.domain.AutoLottoIssuer;
 import lotto.domain.LottoRandomFactory;
 import lotto.domain.LottoStatistic;
@@ -21,7 +24,7 @@ public class LottoController {
 
     public void start() {
 
-        LottoStatistic lottoStatistic = new LottoStatistic(issueLottos(), pickWinningNumbers());
+        LottoStatistic lottoStatistic = new LottoStatistic(issueLottos(), pickWinningNumbers(), pickBonusNumber());
 
         printStatistic(lottoStatistic);
     }
@@ -33,10 +36,12 @@ public class LottoController {
 
     private String[] pickWinningNumbers() {
         view.outputWinningNumbers();
+        return view.inputWinningNumbers();
+    }
 
-        String winningNumbers = view.inputWinningNumbers();
-
-        return StringSplitter.split(winningNumbers);
+    private String pickBonusNumber() {
+        view.outputBonusNumber();
+        return view.inputBonusNumber();
     }
 
     private Lottos issueLottos() {

@@ -1,5 +1,6 @@
 package lotto.view;
 
+import calculator.domain.StringSplitter;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Scanner;
@@ -26,6 +27,10 @@ public class View {
         System.out.println("지난 주 당첨 번호를 입력해 주세요. (','로 구분)");
     }
 
+    public void outputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
     public void outputWinningStatistic(Map<MatchResult, Integer> winningResults) {
 
         StringBuilder builder = new StringBuilder();
@@ -45,8 +50,17 @@ public class View {
     }
 
     private String toMatchResultString(MatchResult matchResult, int matchCount) {
-        return matchResult.getMatchCount() + "개 일치" + "(" + matchResult.getCashPrize().toString()
+        return matchResult.getMatchCount() + "개 일치" + toBonusNumberOutputString(matchResult) + "("
+                + matchResult.getCashPrize()
+                .toString()
                 + MONEY_UNIT + ")- " + matchCount + "개\n";
+    }
+
+    private String toBonusNumberOutputString(MatchResult matchResult) {
+        if (matchResult.equals(MatchResult.SECOND)) {
+            return ", 보너스 번호 일치";
+        }
+        return "";
     }
 
     private String toEarningString(BigDecimal totalEarning) {
@@ -63,7 +77,12 @@ public class View {
         return scanner.nextLine();
     }
 
-    public String inputWinningNumbers() {
+    public String[] inputWinningNumbers() {
+        String winingNumbers = scanner.nextLine();
+        return StringSplitter.split(winingNumbers);
+    }
+
+    public String inputBonusNumber() {
         return scanner.nextLine();
     }
 
