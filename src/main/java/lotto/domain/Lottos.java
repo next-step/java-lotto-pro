@@ -5,8 +5,10 @@ import static java.util.stream.IntStream.range;
 import generic.Money;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import util.ListUtils;
 
 public class Lottos {
 
@@ -51,5 +53,34 @@ public class Lottos {
 
     public void each(final Consumer<Lotto> consumer) {
         this.lottoList.forEach(consumer);
+    }
+
+    public Lottos addAll(final Lottos lottos) {
+        return Lottos.of(ListUtils.addAll(this.lottoList, lottos.lottoList)
+                .toArray(new Lotto[0]));
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Lottos)) {
+            return false;
+        }
+        final Lottos lottos = (Lottos) o;
+        return Objects.equals(lottoList, lottos.lottoList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoList);
+    }
+
+    @Override
+    public String toString() {
+        return "Lottos{" +
+                "lottoList=" + lottoList +
+                '}';
     }
 }

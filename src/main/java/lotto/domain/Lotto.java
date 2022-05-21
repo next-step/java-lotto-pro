@@ -4,15 +4,12 @@ import static util.ListUtils.randomPickCount;
 
 import generic.Money;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Objects;
 
 public class Lotto {
-
     public static final Money PURCHASE_PRICE = Money.valueOf(1000);
-
     private static final int PICK_COUNT_NUMBER = 6;
     private final LottoNumbers pickLottoNumbers;
-
     private Lotto() {
         this(pickNumbersRandom());
     }
@@ -41,5 +38,29 @@ public class Lotto {
 
     public LottoNumbers numbers() {
         return this.pickLottoNumbers;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Lotto)) {
+            return false;
+        }
+        final Lotto lotto = (Lotto) o;
+        return Objects.equals(pickLottoNumbers, lotto.pickLottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pickLottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "pickLottoNumbers=" + pickLottoNumbers +
+                '}';
     }
 }

@@ -78,4 +78,16 @@ class LottosTest {
         // then
         assertThat(atomicInteger.get()).isEqualTo(4);
     }
+
+    @Test
+    void 로또_병합_확인() {
+        // given
+        final Lottos firstLottos = lottos(lotto(1, 2, 3, 4, 5, 6));
+        final Lottos secondLottos = lottos(lotto(7, 8, 9, 10, 11, 12));
+
+        // when & then
+        assertThat(firstLottos.addAll(secondLottos)).isEqualTo(
+                lottos(lotto(1, 2, 3, 4, 5, 6), lotto(7, 8, 9, 10, 11, 12)));
+    }
+
 }

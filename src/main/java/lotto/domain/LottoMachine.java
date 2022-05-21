@@ -1,9 +1,12 @@
 package lotto.domain;
 
+import static java.util.Arrays.stream;
+
 import generic.Money;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.InputPurchaseDto;
+import lotto.InputWinningNumbersDto;
 
 public class LottoMachine {
     private static final String SPLITTER = ",";
@@ -11,28 +14,20 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static Lottos purchase(final String purchaseMoneyString) {
-        return purchase(Money.valueOf(purchaseMoneyString));
+    public static PurchaseLottos purchase(final InputPurchaseDto inputPurchaseDto) {
+        return PurchaseLottos.of(purchase(inputPurchaseDto.mapToLottoArray()), purchase(inputPurchaseDto.calculateAutoMoney()));
     }
 
-    public static Lottos purchase(final Money purchaseMoney) {
-        validatePurchaseMoney(purchaseMoney);
+    private static Lottos purchase(final Money purchaseMoney) {
         return Lottos.purchaseAuto(purchaseMoney);
     }
 
-    private static void validatePurchaseMoney(final Money purchaseMoney) {
-        if (purchaseMoney.isLessThan(Lotto.PURCHASE_PRICE)) {
-            throw new IllegalArgumentException("로또를 구매 할 수 없습니다.");
-        }
+    private static Lottos purchase(final Lotto[] lottoArray) {
+        return Lottos.of(lottoArray);
     }
 
-    public static WinningNumbers winningLottoNumbers(final String winningNumber, final String bonusNumber) {
-        return WinningNumbers.of(LottoNumbers.pickNumbers(splitLottoNumbers(winningNumber)), LottoNumber.valueOf(bonusNumber)) ;
+    public static WinningNumbers winningLottoNumbers(final InputWinningNumbersDto inputWinningNumbersDto) {
+        return WinningNumbers.of(inputWinningNumbersDto.mapToLottoNumbers(), inputWinningNumbersDto.mapToBonusNumber());
     }
 
-    private static List<LottoNumber> splitLottoNumbers(final String winningNumber) {
-        return Arrays.stream(winningNumber.trim().split(SPLITTER))
-                .map(numberString -> LottoNumber.valueOf(numberString.trim()))
-                .collect(Collectors.toList());
-    }
 }

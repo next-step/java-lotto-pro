@@ -10,6 +10,7 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.LottoWinResult;
 import lotto.domain.LottoWinResultGroup;
 import lotto.domain.Lottos;
+import lotto.domain.PurchaseLottos;
 import lotto.domain.WinningNumbers;
 
 public class LottoTestUtils {
@@ -26,6 +27,10 @@ public class LottoTestUtils {
 
     public static Lottos lottos(Lotto... lottos) {
         return Lottos.of(lottos);
+    }
+
+    public static PurchaseLottos purchaseLottos(Lottos manuals, Lottos autos) {
+        return PurchaseLottos.of(manuals, autos);
     }
 
     public static LottoWinResultGroup resultGroup(LottoWinResult... lottoWinResults) {
