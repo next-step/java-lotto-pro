@@ -2,8 +2,11 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Prize;
+import lotto.domain.Winners;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -16,6 +19,7 @@ public class ResultView {
     private static final String PRINT_DELIMITER = ",";
     private static final String PRINT_PREFIX = "[";
     private static final String PRINT_SUFFIX = "]";
+    private static final String EACH_PRIZE_MESSAGE = "%s개 일치 (%s원)- %s개";
 
 
     public static void resultBuyCount(final int count) {
@@ -31,6 +35,15 @@ public class ResultView {
 
             System.out.println(printLotto);
         }
+    }
+
+    public static void printEachPrize(final Map<Prize, Long> rankCount) {
+        rankCount.forEach((key, value) ->
+                System.out.printf((EACH_PRIZE_MESSAGE) + "%n",
+                        key.getMatchCount(),
+                        key.getPrize(),
+                        value)
+        );
     }
 
     public static void resultLotto(final long matchCount, final long prize, final long count) {

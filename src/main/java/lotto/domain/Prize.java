@@ -36,15 +36,16 @@ public enum Prize {
                 .collect(Collectors.toList()));
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public long getPrize() {
+        return prize;
+    }
+
     private static Prize createPrize(final long count) {
         return prizeMap.getOrDefault(Long.valueOf(count).intValue(), FAIL);
     }
 
-    public long calculatePrize(final long count) {
-        return prize * count;
-    }
-
-    public void printMatch(final long count) {
-        ResultView.resultLotto(matchCount, prize, count);
-    }
 }

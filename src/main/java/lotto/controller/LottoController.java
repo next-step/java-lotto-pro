@@ -3,18 +3,19 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.Prize;
-import lotto.domain.PrizeExchanger;
+import lotto.domain.Winners;
 import lotto.view.ResultView;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Map;
 
 public class LottoController {
     private static final LottoController INSTANCE = new LottoController();
     private static final int YIELD_SCALE = 2;
 
-    private LottoMachine lottoMachine;
+    private final LottoMachine lottoMachine;
 
     private LottoController() {
         lottoMachine = LottoMachine.getInstance();
@@ -36,9 +37,10 @@ public class LottoController {
     }
 
     public long exchangePrize(final List<Lotto> lottoes, final Lotto answer) {
-        PrizeExchanger prizeExchanger = PrizeExchanger.getInstance();
-        ResultView.statisticMessage();
-        return prizeExchanger.exchange(Prize.matchLotto(lottoes, answer));
+        Winners winners = Prize.matchLotto(lottoes, answer);
+        Map<Prize, Long> rankCount = winners.getRankCount();
+        ResultView.printEachPrize(rankCount);
+        return winners.totalPrize(rankCount);
     }
 
     public void printYield(final long totalPrize, final long money) {
