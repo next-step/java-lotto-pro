@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class MoneyTest {
-    @DisplayName("Money는 0이상이어야 한다.")
+    @DisplayName("Money를 생성한다.")
     @Test
     void 금액_생성() {
         Money actual = new Money(1000);
@@ -19,7 +19,7 @@ class MoneyTest {
     @Test
     void invalid_금액_생성() {
         assertThatThrownBy(() -> {
-            new Money(-10000);
+            new Money(-1);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
