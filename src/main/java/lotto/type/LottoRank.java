@@ -32,6 +32,7 @@ public enum LottoRank {
         return isBonusBallCheck;
     }
 
+    // TODO: BiPredicate
     public static LottoRank findLottoRankByMatchedCount(int matchedCount, boolean isMatchedBonusBall) {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.getMatchedCount() == matchedCount && lottoRank.isBonusBallCheck == isMatchedBonusBall)

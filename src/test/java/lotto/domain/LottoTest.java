@@ -40,9 +40,10 @@ public class LottoTest {
     @Test
     @DisplayName("로또번호, 보너스볼 번호 중복 예외 테스트")
     void 보너스볼_중복_예외() {
-        Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Set<Integer> answerNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int bouusNumber = 6;
         assertThatThrownBy(() -> {
-            lotto.addBonusBallNumber(6);
+            new LottoNumber(answerNumbers, bouusNumber);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("[ERROR]");
     }
 }

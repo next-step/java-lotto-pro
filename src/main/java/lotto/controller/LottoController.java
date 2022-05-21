@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoPurchase;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.service.LottoAutoIssuedServiceImpl;
 import lotto.service.LottoIssuedService;
 import lotto.utils.ListUtil;
@@ -23,9 +20,10 @@ public class LottoController {
         int purchaseCount = purchaseLotto(purchasePriceText);
 
         Lottos lottos = issueLottos(new LottoAutoIssuedServiceImpl(), purchaseCount);
-        Lotto lastWeekLotto = lastWeekLotto();
+        Lotto answerLotto = answerLotto();
+        LottoNumber lottoNumber = bonusLottoNumber();
 
-        lottoResult(lottos, lastWeekLotto);
+        lottoResult(lottos, answerLotto, lottoNumber);
     }
 
     private int purchaseLotto(String purchasePriceText) {
@@ -43,23 +41,23 @@ public class LottoController {
         return lottos;
     }
 
-    private Lotto lastWeekLotto() {
+    private Lotto answerLotto() {
         InputView.printInputLastWeekWinningNumber();
         String lastWeekLottoNumberText = InputView.inputLastWeekWinningNumber();
         List<Integer> lastWeekLottoNumbers = ListUtil.stringToArrayInteger(lastWeekLottoNumberText, LOTTO_NUMBER_TEXT_SPLIT_VALUE);
 
-        Lotto answerLotto = new Lotto(new HashSet<>(lastWeekLottoNumbers));
+        return  new Lotto(new HashSet<>(lastWeekLottoNumbers));
+    }
 
+    public LottoNumber bonusLottoNumber() {
         InputView.printInputBonusBall();
         String lastWeekLottoBonusBallText = InputView.inputLastWeekBonusNumber();
 
-        answerLotto.addBonusBallNumber(NumberUtil.parseStringToInt(lastWeekLottoBonusBallText));
-
-        return answerLotto;
+        return new LottoNumber(NumberUtil.parseStringToInt(lastWeekLottoBonusBallText));
     }
 
-    private LottoResult lottoResult(Lottos lottos, Lotto lastWeekLotto) {
-        LottoResult lottoResult = new LottoResult(lottos.lottoWinningResult(lastWeekLotto));
+    private LottoResult lottoResult(Lottos lottos, Lotto answerLotto, LottoNumber bonusLottoNumber) {
+        LottoResult lottoResult = new LottoResult(lottos.lottoWinningResult(answerLotto, bonusLottoNumber));
         ResultView.printLottoResult(lottoResult);
 
         return lottoResult;
