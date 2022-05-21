@@ -16,6 +16,10 @@ public class TicketQuantity {
         return this.ticketQuantity;
     }
 
+    public boolean isEmpty() {
+        return this.ticketQuantity > MIN_TICKET_QUANTITY;
+    }
+
     private void validateNumber(String ticketQuantity) {
         try {
             Integer.parseInt(ticketQuantity);

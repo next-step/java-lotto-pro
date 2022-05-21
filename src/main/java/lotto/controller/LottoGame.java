@@ -11,10 +11,9 @@ public class LottoGame {
     public void start() {
         Money money = inputMoney();
         int maxQuantity = money.findPurchaseTicketQuantity();
-        LottoTickets manualTickets = inputManualTickets(inputManualQuantity(maxQuantity));
-        LottoMachine lottoMachine = new LottoMachine();
-        LottoTickets lottoTickets = lottoMachine.buyLottoTicketWithManual(money, manualTickets);
-        ResultView.printPurchaseTicketQuantity(manualTickets.size(), maxQuantity - manualTickets.size());
+        TicketQuantity manualQuantity = inputManualQuantity(maxQuantity);
+        LottoTickets lottoTickets = buyLottoTickets(money, manualQuantity);
+        ResultView.printPurchaseTicketQuantity(manualQuantity.getTicketQuantity(), maxQuantity - manualQuantity.getTicketQuantity());
         ResultView.printLottoTickets(lottoTickets);
 
         winningResult(lottoTickets, money);
@@ -38,6 +37,15 @@ public class LottoGame {
             ResultView.printInputErrorMessage(e);
             return inputManualQuantity(maxQuantity);
         }
+    }
+
+    private LottoTickets buyLottoTickets(Money money, TicketQuantity manualQuantity) {
+        LottoMachine lottoMachine = new LottoMachine();
+        if (manualQuantity.isEmpty()) {
+            LottoTickets manualTickets = inputManualTickets(manualQuantity);
+            return lottoMachine.buyLottoTicketWithManual(money, manualTickets);
+        }
+        return lottoMachine.buyLottoTicket(money);
     }
 
     private LottoTickets inputManualTickets(TicketQuantity manualQuantity) {
