@@ -38,16 +38,13 @@ public class ResultView {
     }
 
     public static void printEachPrize(final Map<Prize, Long> rankCount) {
+        statisticMessage();
         rankCount.forEach((key, value) ->
                 System.out.printf((EACH_PRIZE_MESSAGE) + "%n",
                         key.getMatchCount(),
                         key.getPrize(),
                         value)
         );
-    }
-
-    public static void resultLotto(final long matchCount, final long prize, final long count) {
-        System.out.printf((RESULT_LOTTO_MESSAGE) + "%n", matchCount, prize, count);
     }
 
     public static void statisticMessage() {

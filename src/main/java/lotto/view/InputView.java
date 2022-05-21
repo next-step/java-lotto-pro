@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 public class InputView {
     private static final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
     public static final String INPUT_MONEY_MESSAGE = "구입 금액을 입력해 주세요.";
-    public static final String INPUT_ANSWER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String INPUT_ANSWER_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
 
     public static long inputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
