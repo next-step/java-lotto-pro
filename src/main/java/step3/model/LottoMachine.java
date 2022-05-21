@@ -23,9 +23,9 @@ public class LottoMachine {
         this.lottoWinChecker = lottoWinChecker;
     }
 
-    public List<LottoTicket> makeRandomLottoTickets(int ticket) {
+    public List<LottoTicket> makeRandomLottoTickets(int randomTicketCount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < ticket; i++) {
+        for (int i = 0; i < randomTicketCount; i++) {
             lottoTickets.add(lottoGenerator.makeRandomLottoTicket());
         }
         return lottoTickets;
