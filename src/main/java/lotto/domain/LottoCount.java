@@ -5,11 +5,12 @@ import lotto.LottoGame;
 import java.util.Objects;
 
 public class LottoCount {
+    private static final int MIN = 0;
     private final int auto;
     private final int manual;
 
-    public LottoCount(int auto, int manual) {
-        if (auto < 0 || manual < 0) {
+    private LottoCount(int auto, int manual) {
+        if (auto < MIN || manual < MIN) {
             throw new IllegalArgumentException("구매횟수 음수가 될 수 없습니다.");
         }
         this.auto = auto;
