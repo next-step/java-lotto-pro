@@ -39,9 +39,9 @@ class RankCountTest {
         }});
 
         assertThat(rankCount.toString())
-                .contains("3개 일치 (5000원)- 1개")
-                .contains("4개 일치 (50000원)- 2개")
-                .contains("5개 일치 (1500000원)- 3개")
+                .contains("4개 일치 (50000원)- 1개")
+                .contains("5개 일치 (1500000원)- 2개")
+                .contains("5개 일치, 보너스 볼 일치 (30000000원)- 3개")
                 .contains("6개 일치 (2000000000원)- 1개");
     }
 }
