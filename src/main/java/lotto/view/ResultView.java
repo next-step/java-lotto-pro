@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.*;
 
 public class ResultView {
-    private static final String MESSAGE_PURCHASE_LOTTO_QUANTITY = "%d개를 구매했습니다.\n";
+    private static final String MESSAGE_PURCHASE_LOTTO_QUANTITY = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String MESSAGE_WIN_REPORT = "\n당첨 통계\n---------";
     private static final String MESSAGE_MATCHED_COUNT = "%d개 일치";
     private static final String MESSAGE_MATCHED_BONUS_NUBMER = ", 보너스 볼 일치";
@@ -14,8 +14,8 @@ public class ResultView {
         System.out.println(e);
     }
 
-    public static void printPurchaseTicketQuantity(int ticketQuantity) {
-        System.out.printf(MESSAGE_PURCHASE_LOTTO_QUANTITY, ticketQuantity);
+    public static void printPurchaseTicketQuantity(int manualQuantity, int autoQuantity) {
+        System.out.printf(MESSAGE_PURCHASE_LOTTO_QUANTITY, manualQuantity, autoQuantity);
     }
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
