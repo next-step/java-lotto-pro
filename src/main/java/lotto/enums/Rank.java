@@ -51,8 +51,12 @@ public enum Rank {
         return matchingCount >= MIN_WINNING_RANK;
     }
 
+
     @Override
     public String toString() {
+        if (this == SECOND) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%s원)", matchingCount, prize);
+        }
         return String.format("%d개 일치 (%s원)", matchingCount, prize);
     }
 }
