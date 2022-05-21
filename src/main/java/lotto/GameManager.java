@@ -20,7 +20,7 @@ public class GameManager {
     public void run() {
         LottoVendingMachine machine = new LottoVendingMachine(new LottoNumbersGeneratorKr());
 
-        Money money = money();
+        Money money = money(machine);
         int numberOfManual = numberOfManualLottoGames().getValue();
         LottoTicket lottoTicket = machine.sellTicket(money, manualLottoGames(numberOfManual));
         int numberOfGames = lottoTicket.numberOfGames(money);
@@ -35,17 +35,19 @@ public class GameManager {
         ResultView.printStats(result);
     }
 
-    private Money money() {
-        Money money = takeMoney();
+    private Money money(LottoVendingMachine machine) {
+        Money money = takeMoney(machine);
         while (money == null) {
-            money = takeMoney();
+            money = takeMoney(machine);
         }
         return money;
     }
 
-    private Money takeMoney() {
+    private Money takeMoney(LottoVendingMachine machine) {
         try {
-            return new Money(InputView.readMoney());
+            Money money = new Money(InputView.readMoney());
+            machine.validateMoneyAmount(money);
+            return money;
         } catch (IllegalArgumentException e) {
             ResultView.printExceptionMessage(e.getMessage());
             return null;

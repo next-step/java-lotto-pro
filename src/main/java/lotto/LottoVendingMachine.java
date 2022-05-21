@@ -11,6 +11,8 @@ import lotto.dto.LottoWin;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.domain.ExceptionMessage.NOT_ENOUGH_AMOUNT;
+
 public class LottoVendingMachine {
 
     private final LottoNumbersGenerator lottoNumbersGenerator;
@@ -50,5 +52,12 @@ public class LottoVendingMachine {
                 .reduce(0, (acc, profit) -> acc + profit);
 
         return String.format("%.2f", totalProfit / investment);
+    }
+
+    public void validateMoneyAmount(Money money) {
+        LottoTicket lottoTicket = new LottoTicket();
+        if (lottoTicket.numberOfGames(money) < 1) {
+            throw new IllegalArgumentException(NOT_ENOUGH_AMOUNT.getMessage());
+        }
     }
 }
