@@ -21,16 +21,15 @@ class DivisionTest {
                 Arguments.arguments(3, false, Division.DIVISION_FIVE));
     }
 
-    @ParameterizedTest(name = "{0}개 일치시 {1}")
+    @Test
+    void test() {
+        assertThat(Division.valueOf(5, true)).isEqualTo(Division.DIVISION_TWO);
+    }
+
+    @ParameterizedTest(name = "{0}개 일치, 보너스볼 매치 {1}, 결과 {2}")
     @MethodSource("parameters")
     @DisplayName("매치 카운트 수와 보너스 번호 포함 여부에 따른 등수를 반환한다.")
     void 매치_카운트_수에_따른_등수_반환(int matchCount, boolean hasBonus, Division result) {
         assertThat(Division.valueOf(matchCount, hasBonus)).isEqualTo(result);
-    }
-
-    @Test
-    @DisplayName("입력된 매치 카운트 수가 해당 등수의 매치 카운트와 일치하는지 여부를 반환한다.")
-    void 매치_카운트_수가_같은지_확인() {
-        assertThat(Division.DIVISION_ONE.hasSameMatchCount(6)).isTrue();
     }
 }

@@ -1,47 +1,33 @@
 package study.lotto.domain.draw;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Objects;
 
 public enum Division {
-    DIVISION_NONE(0, BigDecimal.ZERO, false),
-    DIVISION_FIVE(3, new BigDecimal(5_000), false),
-    DIVISION_FOUR(4, new BigDecimal(5_0000), false),
+    DIVISION_NONE(0, BigDecimal.ZERO, null),
+    DIVISION_FIVE(3, new BigDecimal(5_000), null),
+    DIVISION_FOUR(4, new BigDecimal(5_0000), null),
     DIVISION_THREE(5, new BigDecimal(1_500_000), false),
     DIVISION_TWO(5, new BigDecimal(30_000_000), true),
-    DIVISION_ONE(6, new BigDecimal(2_000_000_000), false);
-
-    private static final DivisionRule rule = new DivisionRule();
-
-    static {
-        rule.add(Division.DIVISION_ONE, false);
-        rule.add(Division.DIVISION_TWO, true);
-        rule.add(Division.DIVISION_THREE, false);
-        rule.add(Division.DIVISION_FOUR, true);
-        rule.add(Division.DIVISION_FOUR, false);
-        rule.add(Division.DIVISION_FIVE, true);
-        rule.add(Division.DIVISION_FIVE, false);
-    }
+    DIVISION_ONE(6, new BigDecimal(2_000_000_000), null);
 
     private final int matchCount;
     private final BigDecimal prize;
-    private final boolean bonusMandatory;
+    private final Boolean bonusMatch;
 
-    Division(int matchCount, BigDecimal prize, boolean bonusMandatory) {
+    Division(int matchCount, BigDecimal prize, Boolean bonusMatch) {
         this.matchCount = matchCount;
         this.prize = prize;
-        this.bonusMandatory = bonusMandatory;
+        this.bonusMatch = bonusMatch;
     }
 
     public static Division valueOf(int matchCount, boolean matchBonus) {
-        return rule.check(matchCount, matchBonus);
-    }
-
-    public boolean hasSameMatchCount(int matchCount) {
-        return this.matchCount == matchCount;
+        return Arrays.stream(values())
+                .filter(division -> division.hasSameMatchCount(matchCount))
+                .filter(division -> division.checkBonusMatch(matchBonus))
+                .findFirst()
+                .orElse(DIVISION_NONE);
     }
 
     public int getMatchCount() {
@@ -53,33 +39,17 @@ public enum Division {
     }
 
     public boolean getBonusMandatory() {
-        return bonusMandatory;
+        return Boolean.TRUE.equals(bonusMatch);
     }
 
-    private static class DivisionRule {
-        private final Map<Boolean, List<Division>> values;
+    private boolean hasSameMatchCount(int matchCount) {
+        return this.matchCount == matchCount;
+    }
 
-        DivisionRule() {
-            this.values = new HashMap<>();
+    private boolean checkBonusMatch(boolean bonusMatch) {
+        if (Objects.isNull(this.bonusMatch)) {
+            return true;
         }
-
-        void add(Division division, Boolean matchBonus) {
-            if (!values.containsKey(matchBonus)) {
-                values.put(matchBonus, new ArrayList<>());
-            }
-            addElement(division, matchBonus);
-        }
-
-        Division check(int matchCount, boolean matchBonus) {
-            return values.get(matchBonus).stream()
-                    .filter(division -> division.hasSameMatchCount(matchCount))
-                    .findFirst()
-                    .orElse(DIVISION_NONE);
-        }
-
-        void addElement(Division division, Boolean matchBonus) {
-            List<Division> divisions = values.get(matchBonus);
-            divisions.add(division);
-        }
+        return this.bonusMatch == bonusMatch;
     }
 }
