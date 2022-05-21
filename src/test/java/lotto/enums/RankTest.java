@@ -53,5 +53,13 @@ class RankTest {
                 .isFalse();
     }
 
+    @Test
+    @DisplayName("등수에 따른 toString을 확인한다.")
+    void toString_등수별() {
+        assertThat(SECOND.toString())
+                .isEqualTo("%d개 일치, 보너스 볼 일치 (%s원)", 5, 30_000_000);
+        assertThat(THIRD.toString())
+                .isEqualTo("%d개 일치 (%s원)", 5, 1_500_000);
+    }
 
 }
