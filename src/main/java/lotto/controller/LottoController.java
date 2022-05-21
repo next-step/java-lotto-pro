@@ -1,6 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoPurchase;
+import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
 import lotto.service.LottoAutoIssuedServiceImpl;
 import lotto.service.LottoIssuedService;
 import lotto.utils.ListUtil;
@@ -10,7 +13,6 @@ import lotto.view.ResultView;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class LottoController {
     private final static String LOTTO_NUMBER_TEXT_SPLIT_VALUE = ", ";

@@ -32,8 +32,4 @@ public class Lottos {
         );
         return lottoRankMap;
     }
-
-    public boolean checkCorrectBonusBall() {
-        return false;
-    }
 }
