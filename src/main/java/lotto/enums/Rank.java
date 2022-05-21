@@ -8,11 +8,12 @@ import static lotto.constants.LottoConstant.MIN_WINNING_RANK;
 
 public enum Rank {
     LOSE(0, Prize.of(0)),
-    SIXTH(1, Prize.of(0)),
-    FIFTH(2, Prize.of(0)),
-    FOURTH(3, Prize.of(5_000)),
-    THIRD(4, Prize.of(50_000)),
-    SECOND(5, Prize.of(1_500_000)),
+    SEVENTH(1, Prize.of(0)),
+    SIXTH(2, Prize.of(0)),
+    FIFTH(3, Prize.of(5_000)),
+    FOURTH(4, Prize.of(50_000)),
+    THIRD(5, Prize.of(1_500_000)),
+    SECOND(5, Prize.of(30_000_000)),
     FIRST(6, Prize.of(2_000_000_000));
 
     private final int matchingCount;
