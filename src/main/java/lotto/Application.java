@@ -3,9 +3,13 @@ package lotto;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
-public class Main {
+public class Application {
 
     public static void main(String[] args) {
+        new Application().startGame();
+    }
+
+    private void startGame() {
         int purchasePrice = InputView.getPurchasePrice();
         LottoGame game = new LottoGame(purchasePrice);
         ResultView.printTicketCount(game.getTicketCount());
@@ -13,8 +17,7 @@ public class Main {
 
         System.out.println();
         String winnerNumbers = InputView.getWinnerNumbers();
-        game.initWinnerTicket(winnerNumbers);
-        game.generateGameResult();
+        game.generateGameResult(new WinnerTicket(winnerNumbers));
 
         System.out.println();
         game.printGameResult();
