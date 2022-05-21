@@ -10,10 +10,6 @@ public class LottoGame {
 
     private Quantity quantity;
 
-    public LottoGame(String money) {
-        this(money, new Lottos());
-    }
-
     public LottoGame(String money, Lottos manualLottos) {
         this.lottos = manualLottos;
         this.buyPrice = new Money(money);
