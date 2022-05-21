@@ -76,4 +76,26 @@ public class LottoTicketTest {
         LottoTicket ticket = new LottoTicket(userLottoNumbers);
         assertThat(ticket.match(new LottoTicket(rankLottoTicket))).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("구매한 로또 번호에 당첨번호가 포함되어 있다.")
+    void checkContainsTrue() {
+        List<LottoNumber> userLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            userLottoNumbers.add(new LottoNumber(i + 1));
+        }
+        LottoTicket ticket = new LottoTicket(userLottoNumbers);
+        assertThat(ticket.contains(new LottoNumber(3))).isTrue();
+    }
+
+    @Test
+    @DisplayName("구매한 로또 번호에 당첨번호가 포함되어있지 않다.")
+    void checkContainsFalse() {
+        List<LottoNumber> userLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            userLottoNumbers.add(new LottoNumber(i + 1));
+        }
+        LottoTicket ticket = new LottoTicket(userLottoNumbers);
+        assertThat(ticket.contains(new LottoNumber(45))).isFalse();
+    }
 }

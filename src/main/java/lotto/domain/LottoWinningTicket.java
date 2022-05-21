@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static lotto.message.InputMessage.INVALID_BONUS_NUMBER;
 import static lotto.message.InputMessage.INVALID_LOTTO_TICKET;
 
@@ -21,4 +24,16 @@ public class LottoWinningTicket {
             throw new IllegalArgumentException(INVALID_BONUS_NUMBER);
         }
     }
+
+    public LottoResult analyzeResult(List<LottoTicket> tickets) {
+        List<LottoRank> lottoRanks = new ArrayList<>();
+
+        for (LottoTicket ticket : tickets) {
+            int match = ticket.match(lottoWinningTicket);
+            boolean hasBonus = ticket.contains(bonusNumber);
+            lottoRanks.add(LottoRank.find(match, hasBonus));
+        }
+        return new LottoResult(lottoRanks);
+    }
 }
+

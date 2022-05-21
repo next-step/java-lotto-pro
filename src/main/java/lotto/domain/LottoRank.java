@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public enum LottoRank {
     FIRST(6, 2000000000, false),
     SECOND(5, 30000000, true),
@@ -18,6 +22,17 @@ public enum LottoRank {
         this.hasBonus = hasBonus;
     }
 
+    public static LottoRank find(int match, boolean hasBonus) {
+        List<LottoRank> ranks = new ArrayList<>(Arrays.asList(LottoRank.values()));
+        for (LottoRank rank : ranks) {
+            if (rank.isMatch(match) && rank.matchBonus(hasBonus)) {
+                return rank;
+            }
+        }
+
+        return LottoRank.NONE;
+    }
+
     private boolean matchBonus(boolean hasBonus) {
         return this.hasBonus == hasBonus;
     }
@@ -33,4 +48,9 @@ public enum LottoRank {
     public long getPrize() {
         return prize;
     }
+
+    public boolean hasBonus() {
+        return this.hasBonus;
+    }
 }
+
