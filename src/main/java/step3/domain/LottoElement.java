@@ -18,7 +18,8 @@ public class LottoElement implements Comparable<LottoElement>, Cloneable {
 
     private void validateElement(int element) {
         if (element < LOTTO_MIN || element > LOTTO_MAX) {
-            throw new IllegalArgumentException(String.format(CREATE_ELEMENT_EXCEPTION_MSG, LOTTO_MIN, LOTTO_MAX));
+            throw new IllegalArgumentException(
+                String.format(CREATE_ELEMENT_EXCEPTION_MSG, LOTTO_MIN, LOTTO_MAX));
         }
     }
 

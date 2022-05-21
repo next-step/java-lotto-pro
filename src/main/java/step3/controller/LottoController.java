@@ -29,15 +29,20 @@ public class LottoController {
         int randomTicketCount = ticketCount - manualTicketCount;
 
         List<LottoTicket> manualLottoTickets = getManualLottoTickets(manualTicketCount);
-        List<LottoTicket> randomLottoTickets = lottoMachine.makeRandomLottoTickets(randomTicketCount);
+        List<LottoTicket> randomLottoTickets = lottoMachine.makeRandomLottoTickets(
+            randomTicketCount);
+
         lottoTickets.addLottoTickets(manualLottoTickets);
         lottoTickets.addLottoTickets(randomLottoTickets);
-        outputView.printLottoInfo(lottoTickets.getLottoNumbers(), manualTicketCount, randomTicketCount);
+
+        outputView.printLottoInfo(lottoTickets.getLottoNumbers(), manualTicketCount,
+            randomTicketCount);
 
         setWinnerLotto(); /*정상 값을 입력할때까지 반복입력*/
         setBonusNumber(); /*정상 값을 입력할때까지 반복입력*/
 
-        outputView.printOutput(lottoMachine.checkWin(lottoTickets.getLottoTickets()), lottoMachine.getUsingMoneyByTicket(ticketCount));
+        outputView.printOutput(lottoMachine.checkWin(lottoTickets.getLottoTickets()),
+            lottoMachine.getUsingMoneyByTicket(ticketCount));
     }
 
     private int getTicketCountByMoney() {

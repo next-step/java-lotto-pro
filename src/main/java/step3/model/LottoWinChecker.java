@@ -45,9 +45,15 @@ public class LottoWinChecker {
         LinkedHashMap<LottoReward, Integer> statistics = new LinkedHashMap<>();
         initStatistics(statistics);
         for (LottoTicket lottoTicket : userLottoTickets) {
-            int matchCountLottoTicketWithUserAndWinner = lottoTicket.getMatchCountWith(winnerLottoTicket.getLottoNumbers());
-            boolean haveBonusNumberInUserLottoTicket = lottoTicket.getMatchCountWith(Arrays.asList(bonusNumber)) == MATCH;
-            LottoReward lottoReward = LottoReward.valueOf(matchCountLottoTicketWithUserAndWinner, haveBonusNumberInUserLottoTicket);
+            int matchCountLottoTicketWithUserAndWinner = lottoTicket.getMatchCountWith(
+                winnerLottoTicket.getLottoNumbers());
+
+            boolean haveBonusNumberInUserLottoTicket =
+                lottoTicket.getMatchCountWith(Arrays.asList(bonusNumber)) == MATCH;
+
+            LottoReward lottoReward = LottoReward.valueOf(matchCountLottoTicketWithUserAndWinner,
+                haveBonusNumberInUserLottoTicket);
+
             statistics.replace(lottoReward, statistics.get(lottoReward) + MATCH);
         }
         return statistics;

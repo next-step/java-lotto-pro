@@ -13,7 +13,8 @@ public class LottoGenerator {
     private final int LOTTO_MIN = 1;
     private final int LOTTO_MAX = 45;
     private final int LOTTO_ELEMENTS_SIZE = 6;
-    private List<Integer> LOTTO_VALID_ELEMENTS = IntStream.rangeClosed(LOTTO_MIN, LOTTO_MAX).boxed().collect(Collectors.toList());
+    private List<Integer> LOTTO_VALID_ELEMENTS = IntStream.rangeClosed(LOTTO_MIN, LOTTO_MAX).boxed()
+        .collect(Collectors.toList());
 
     public LottoTicket makeRandomLottoTicket() {
         List<Integer> lottoElements = new ArrayList<>();
@@ -21,7 +22,8 @@ public class LottoGenerator {
         for (int i = 0; i < LOTTO_ELEMENTS_SIZE; i++) {
             lottoElements.add(LOTTO_VALID_ELEMENTS.get(i));
         }
-        return new LottoTicket(lottoElements.stream().map(String::valueOf).collect(Collectors.toList()));
+        return new LottoTicket(
+            lottoElements.stream().map(String::valueOf).collect(Collectors.toList()));
     }
 
     public LottoTicket makeManualLottoTicket(String manualLottoSource) {

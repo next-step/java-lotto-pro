@@ -28,7 +28,8 @@ public class OutputView {
     }
 
     private void printRewardRate(long reward, int usingMoney) {
-        System.out.println(String.format(REWARD_RATE_FORMAT, getProfitRate(reward, usingMoney), isBenefit(reward, usingMoney)));
+        System.out.println(String.format(REWARD_RATE_FORMAT, getProfitRate(reward, usingMoney),
+            isBenefit(reward, usingMoney)));
     }
 
     private String isBenefit(long reward, int usingMoney) {
@@ -60,7 +61,8 @@ public class OutputView {
         return lottoReward.getReward() * matchCount;
     }
 
-    public void printLottoInfo(List<List<LottoElement>> lottoNumbers, int manualTicket, int randomTicket) {
+    public void printLottoInfo(List<List<LottoElement>> lottoNumbers, int manualTicket,
+        int randomTicket) {
         System.out.println(String.format(LOTTOS_INFO_FORMAT, manualTicket, randomTicket));
         for (List<LottoElement> lottoNumber : lottoNumbers) {
             System.out.println(lottoNumber.toString());

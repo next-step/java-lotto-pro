@@ -34,7 +34,8 @@ public class LottoTicket {
 
     private void validateLottoNumbers(List<String> lottoElementsSource) {
         if (new HashSet<>(lottoElementsSource).size() != LOTTO_ELEMENTS_SIZE) {
-            throw new IllegalArgumentException(String.format(CREATE_TICKET_EXCEPTION_MSG, LOTTO_ELEMENTS_SIZE));
+            throw new IllegalArgumentException(
+                String.format(CREATE_TICKET_EXCEPTION_MSG, LOTTO_ELEMENTS_SIZE));
         }
     }
 
