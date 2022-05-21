@@ -25,15 +25,11 @@ public class LottoWinChecker {
 
     private void validateBonusNumber(LottoElement bonusLottoElement) {
         int isExist = 1;
-        boolean validateResult = true;
-        try {
-            int bonusExistInWinnerTicket = winnerLottoTicket.getMatchCountWith(
-                Arrays.asList(bonusLottoElement));
-            validateResult = bonusExistInWinnerTicket != isExist;
-        } catch (IllegalArgumentException e) {
-            validateResult = false;
-        }
-        if (!validateResult) {
+
+        int bonusExistInWinnerTicket = winnerLottoTicket.getMatchCountWith(
+            Arrays.asList(bonusLottoElement));
+
+        if (bonusExistInWinnerTicket == isExist) {
             throw new IllegalArgumentException(SET_BONUS_NUMBER_EXCEPTION_MSG);
         }
     }
