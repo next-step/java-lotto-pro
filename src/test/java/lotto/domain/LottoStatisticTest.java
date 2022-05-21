@@ -32,7 +32,7 @@ class LottoStatisticTest {
 
     @Test
     void 수익률_계산() {
-        assertThat(lottoStatistic.lottoEarning()).isEqualTo(BigDecimal.valueOf(0.5));
+        assertThat(lottoStatistic.calculateLottoEarning()).isEqualTo(BigDecimal.valueOf(0.5));
     }
 
     @Test

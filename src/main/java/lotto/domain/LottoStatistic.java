@@ -24,7 +24,7 @@ public class LottoStatistic {
         }
     }
 
-    public BigDecimal lottoEarning() {
+    public BigDecimal calculateLottoEarning() {
         Money totalLottoPrice = Money.from(0);
         for (Lottos lottos : matchedLottos.values()) {
             totalLottoPrice = totalLottoPrice.add(lottos.totalPrice());
