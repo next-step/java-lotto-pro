@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.ui.ResultView;
 import lotto.util.RandomNumberUtils;
@@ -18,8 +18,6 @@ public class LottoGame {
 
     private Map<Integer, Integer> scoreMap;
 
-    private Map<Integer, Integer> earningMap;
-
     private List<LottoTicket> tickets;
 
     LottoGame() {
@@ -28,15 +26,9 @@ public class LottoGame {
         this.scoreMap.put(4, 0);
         this.scoreMap.put(5, 0);
         this.scoreMap.put(6, 0);
-
-        this.earningMap = new HashMap<>();
-        this.earningMap.put(3, 5000);
-        this.earningMap.put(4, 50000);
-        this.earningMap.put(5, 1500000);
-        this.earningMap.put(6, 2000000000);
     }
 
-    LottoGame(int purchasePrice) {
+    public LottoGame(int purchasePrice) {
         this();
 
         isValidPurchasePrice(purchasePrice);
@@ -50,7 +42,7 @@ public class LottoGame {
         }
     }
 
-    LottoGame(List<LottoTicket> tickets) {
+    public LottoGame(List<LottoTicket> tickets) {
         this();
         this.purchasePrice = tickets.size() * TICKET_UNIT_PRICE;
         this.tickets = tickets;
@@ -89,7 +81,7 @@ public class LottoGame {
     private void calculateEarningRate() {
         long totalEarning = 0;
         for (Map.Entry<Integer, Integer> entry : scoreMap.entrySet()) {
-            totalEarning += (long) this.earningMap.get(entry.getKey()) * entry.getValue();
+            totalEarning += (long) Score.getPrizeBySameNumberCount(entry.getKey()) * entry.getValue();
         }
 
         if (totalEarning == 0) {

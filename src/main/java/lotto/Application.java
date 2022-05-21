@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoGame;
+import lotto.domain.WinnerTicket;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 

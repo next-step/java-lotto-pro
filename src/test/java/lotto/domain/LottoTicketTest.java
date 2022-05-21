@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.util.RandomNumberUtils;
 import org.junit.jupiter.api.Test;
