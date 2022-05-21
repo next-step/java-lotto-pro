@@ -31,6 +31,14 @@ public enum Rank {
                 .orElse(LOSE);
     }
 
+    public static Rank getRank(int numberOfMatch, boolean hasBonusNumber) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.matchingCount == numberOfMatch)
+                .map(rank -> rank == THIRD && hasBonusNumber ? SECOND : rank)
+                .findAny()
+                .orElse(LOSE);
+    }
+
     public Prize getPrize() {
         return prize;
     }
