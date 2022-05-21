@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import lotto.generator.InputLottoNumberGenerator;
 import lotto.model.Lotto;
@@ -7,6 +9,7 @@ import lotto.model.LottoNumber;
 import lotto.model.LottoStatistics;
 import lotto.model.Lottos;
 import lotto.model.Money;
+import lotto.model.WinningLotto;
 import lotto.util.StringToIntegerConverter;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -19,15 +22,77 @@ public class LottoController {
     }
 
     public void start() {
-        InputView.printPurchaseGuide();
-        Lottos lottos = Lottos.buy(Money.valueOf(StringToIntegerConverter.parseInt(scanner.nextLine())));
-        ResultView.printPurchasedLottos(lottos);
-        InputView.printWinningLottoInputGuide();
-        Lotto winningLotto = Lotto.draw(new InputLottoNumberGenerator(scanner.nextLine()));
-        InputView.printBonusLottoNumberInputGuide();
-        LottoNumber bonusLottoNumber = LottoNumber.valueOf(StringToIntegerConverter.parseInt(scanner.nextLine()));
-        winningLotto.validateNewLottoNumber(bonusLottoNumber);
-        LottoStatistics lottoStatistics = lottos.lottoStatistics(winningLotto, bonusLottoNumber);
+        Money totalMoney = openWallet();
+        int manualLottoCount = getManualPurchaseLottoCount();
+        final Lottos lottos = purchaseLottos(totalMoney, manualLottoCount);
+        ResultView.printPurchasedLottos(lottos, manualLottoCount);
+        final WinningLotto winningLotto = decideWinngLotto();
+        LottoStatistics lottoStatistics = lottos.lottoStatistics(winningLotto);
         ResultView.printWinningStatistics(lottoStatistics, lottos.totalPrice());
+    }
+
+    private WinningLotto decideWinngLotto() {
+        final Lotto lotto = getWinningLotto();
+        InputView.printBonusLottoNumberInputGuide();
+        WinningLotto winningLotto = null;
+        try {
+            winningLotto = WinningLotto.of(lotto,
+                    LottoNumber.valueOf(StringToIntegerConverter.parseInt(scanner.nextLine())));
+        } catch (IllegalArgumentException e) {
+            decideWinngLotto();
+        }
+        return winningLotto;
+    }
+
+    private Lotto getWinningLotto() {
+        InputView.printWinningLottoInputGuide();
+        Lotto lotto = null;
+        try {
+            lotto = Lotto.draw(new InputLottoNumberGenerator(scanner.nextLine()));
+        } catch (IllegalArgumentException e) {
+            getWinningLotto();
+        }
+        return lotto;
+    }
+
+    private Lottos purchaseLottos(Money totalMoney, int manualLottoCount) {
+        Lottos lottos = null;
+        try {
+            InputView.printManualPurchaseLottoNumberGuide();
+            lottos = Lottos.purchase(totalMoney, pickManualLottos(manualLottoCount));
+        } catch (IllegalArgumentException e) {
+            purchaseLottos(totalMoney, manualLottoCount);
+        }
+        return lottos;
+    }
+
+    private int getManualPurchaseLottoCount() {
+        InputView.printManualPurchaseLottoCountGuide();
+        int manualPurcasedLottoCount = 0;
+        try {
+            manualPurcasedLottoCount = StringToIntegerConverter.parseInt(scanner.nextLine());
+        } catch (IllegalArgumentException e) {
+            getManualPurchaseLottoCount();
+        }
+        return manualPurcasedLottoCount;
+    }
+
+    private Money openWallet() {
+        InputView.printPurchaseGuide();
+        Money totalMoney = null;
+        try {
+            totalMoney = Money.valueOf(StringToIntegerConverter.parseInt(scanner.nextLine()));
+        } catch (Exception e) {
+            openWallet();
+        }
+        return totalMoney;
+    }
+
+    private List<Lotto> pickManualLottos(int manualLottoCount) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            manualLottos.add(Lotto.draw(new InputLottoNumberGenerator(scanner.nextLine())));
+        }
+        return manualLottos;
     }
 }
