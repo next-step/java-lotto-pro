@@ -28,12 +28,13 @@ class LottosTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"LOSE:2", "FOURTH:1", "THIRD:1", "SECOND:2", "FIRST:1"}, delimiter = ':')
+    @CsvSource(value = {"LOSE:1", "SIXTH:1", "FIFTH:1", "FOURTH:1", "THIRD:1", "SECOND:2", "FIRST:1"}, delimiter = ':')
     @DisplayName("당첨번호와 비교하여 등수별로 카운트 한다.")
     void rankCount_등수별_카운트(Rank rank, int expected) {
         List<LottoNumbers> lottoNumbersList = Arrays.asList(
                 new LottoNumbers(Arrays.asList(2, 4, 20, 27, 43, 45)),  // LOSE
-                new LottoNumbers(Arrays.asList(1, 3, 5, 27, 40, 45)),   // LOSE
+                new LottoNumbers(Arrays.asList(1, 3, 6, 27, 40, 45)),   // SIXTH
+                new LottoNumbers(Arrays.asList(1, 2, 5, 27, 40, 45)),   // FIFTH
                 new LottoNumbers(Arrays.asList(1, 5, 25, 30, 40, 41)),  // FOURTH
                 new LottoNumbers(Arrays.asList(3, 5, 18, 37, 42, 45)),  // THIRD
                 new LottoNumbers(Arrays.asList(1, 5, 18, 25, 37, 43)),  // SECOND
