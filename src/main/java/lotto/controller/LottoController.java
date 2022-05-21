@@ -1,10 +1,14 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import lotto.domain.AutoNumbers;
 import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
 import lotto.domain.LottoTickets;
-import lotto.domain.Money;
+import lotto.domain.LottoPrice;
+import lotto.domain.Number;
 import lotto.domain.RankResult;
 import lotto.dto.PrizeReport;
 import lotto.view.InputView;
@@ -12,26 +16,30 @@ import lotto.view.OutputView;
 
 public class LottoController {
 	public void start() {
-		Money money = new Money(InputView.inputMoney());
-		int count = money.availableQuantity();
+		LottoPrice lottoPrice = new LottoPrice(InputView.inputMoney());
+		int count = lottoPrice.availableQuantity();
 		OutputView.printPurchaseCount(count);
 
 		LottoTickets lottoTickets = getLottoTickets(count);
 		OutputView.printLottoTickets(lottoTickets.getLottTickets());
 
 		Lotto winningLotto = Lotto.getInstanceByString(InputView.inputNumbers());
-		RankResult result = lottoTickets.getResult(winningLotto);
+		Number number = new Number(InputView.inputBonusNumber());
+
+		RankResult result = lottoTickets.getResult(winningLotto, number);
 		List<PrizeReport> report = result.getReport();
 		OutputView.printPrizeResult(report);
-		OutputView.printRate(result.compileStatistics(money.expenses()));
+		OutputView.printRate(result.compileStatistics(lottoPrice.expenses()));
 	}
 
 	private LottoTickets getLottoTickets(int count) {
-		LottoTickets lottoTickets = new LottoTickets();
+		LottoMachine lottoMachine = new LottoMachine(new AutoNumbers());
+
+		List<Lotto> lottoTickets = new ArrayList<>();
 		for(int index = 0; index < count; index +=1 ) {
-			lottoTickets.automaticallyGenerate();
+			lottoTickets.add(lottoMachine.generate());
 		}
 
-		return lottoTickets;
+		return new LottoTickets(lottoTickets);
 	}
 }

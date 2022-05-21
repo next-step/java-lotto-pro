@@ -1,13 +1,13 @@
 package lotto.domain;
 
-public class Money {
+public class LottoPrice {
 	private final String INVALID_NUMBER = "0 이상의 수를 입력해주세요.";
 	private final int LOTTO_PRICE = 1000;
 	private final int ZERO = 0;
 
 	private int money;
 
-	public Money(int money) {
+	public LottoPrice(int money) {
 		validatePositiveNumber(money);
 		this.money = money;
 	}

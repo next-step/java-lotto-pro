@@ -11,7 +11,9 @@ public class OutputView {
 	private static final String UNDER_LINE = "---------";
 	private static final String PURCHASE_MESSAGE = "%d개를 구매했습니다.\n";
 	private static final String RATIO_MESSAGE = "총 수익률은 %5.2f입니다.\n";
-	private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+	private static final String MATCH_COUNT_MESSAGE = "%d개 일치";
+	private static final String BONUS_MATCH_MESSAGE = ", 보너스 볼 일치";
+	private static final String WINNING_MESSAGE = " (%d원)- %d개";
 
 	public static void printPurchaseCount(int count) {
 		System.out.printf(PURCHASE_MESSAGE, count);
@@ -28,7 +30,7 @@ public class OutputView {
 		System.out.println(UNDER_LINE);
 
 		for(PrizeReport prizeResult: report) {
-			System.out.printf(WINNING_RESULT_MESSAGE, prizeResult.getMatchCount(), prizeResult.getMoney(), prizeResult.getResult());
+			System.out.println(resultMessage(prizeResult));
 		}
 	}
 
@@ -43,5 +45,19 @@ public class OutputView {
 								.collect(Collectors.joining(","));
 
 		System.out.printf("[%s]\n", printNumbers);
+	}
+
+	private static String resultMessage(PrizeReport prizeReport) {
+		StringBuilder builder = new StringBuilder();
+
+		builder.append(String.format(MATCH_COUNT_MESSAGE, prizeReport.getMatchCount()));
+
+		if(prizeReport.isContainBonusNumber()) {
+			builder.append(BONUS_MATCH_MESSAGE);
+		}
+
+		builder.append(String.format(WINNING_MESSAGE, prizeReport.getMoney(), prizeReport.getResult()));
+
+		return builder.toString();
 	}
 }

@@ -27,7 +27,7 @@ public class Numbers {
 		return LottoNumber.convertTo(elements);
 	}
 
-	private boolean isContainNumber(Number number) {
+	public boolean isContainNumber(Number number) {
 		return elements.contains(number);
 	}
 

@@ -30,4 +30,21 @@ public class LottoTest {
 
 		assertThat(lotto1.equals(lotto2)).isTrue();
 	}
+
+	@Test
+	@DisplayName("로또 번호 일치 결과")
+	void match_lotto() {
+		Lotto lotto1 = new Lotto(Arrays.asList(
+			new Number(1), new Number(2), new Number(3),
+			new Number(4), new Number(5), new Number(6)
+		));
+
+		Lotto lotto2 = new Lotto(Arrays.asList(
+			new Number(1), new Number(2), new Number(3),
+			new Number(4), new Number(5), new Number(33)
+		));
+
+		assertThat(lotto1.match(lotto2, new Number(6))).isEqualTo(Rank.SECOND);
+		assertThat(lotto1.match(lotto2, new Number(45))).isEqualTo(Rank.THIRD);
+	}
 }
