@@ -25,29 +25,16 @@ public class Lotto {
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_SIZE);
     }
 
-    public LottoRank checkLottoRank(Lotto answerLotto, LottoNumber bonusLottoNumber) {
-        final Set<Integer> numbers = lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toSet());
+    public LottoRank checkLottoRank(LottoWinning lottoWinning) {
+        final int ballLottoNumberMatchedCount = countMatchedLottoNumber(lottoWinning.getAnswerLotto());
 
-        final Set<Integer> answerNumbers = answerLotto.getLottoNumbers().stream()
-                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toSet());
-
-        final int ballLottoNumberMatchedCount = countMatchedNumber(numbers, answerNumbers);
-
-        return LottoRank.findLottoRankByMatchedCount(ballLottoNumberMatchedCount, numbers.contains(bonusLottoNumber.getNumber()));
+        return LottoRank.findLottoRankByMatchedCount(ballLottoNumberMatchedCount, lottoNumbers.contains(lottoWinning.getBonusLottoNumber()));
     }
 
-    public static int countMatchedNumber(Set<Integer> numbers, Set<Integer> answerNumbers) {
-        return (int) answerNumbers.stream()
-                .filter(answerNumber -> isContainNumber(answerNumber, numbers))
+    public int countMatchedLottoNumber(Lotto answerLotto) {
+        return (int) answerLotto.getLottoNumbers().stream()
+                .filter(lottoNumbers::contains)
                 .count();
-    }
-
-    private static boolean isContainNumber(Integer answerNumber, Set<Integer> numbers) {
-        return numbers.contains(answerNumber);
     }
 
     public Set<LottoNumber> getLottoNumbers() {

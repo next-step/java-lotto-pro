@@ -21,14 +21,14 @@ public class LottoResultTest {
                 Lotto lotto4 = new Lotto(new HashSet<>(Arrays.asList(4, 5, 6, 7, 12, 13)));
                 Lotto lotto5 = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-                Set<Integer> answerNumbers = new HashSet<>(Arrays.asList(4, 5, 6, 7, 8, 9));
                 Lotto answerLotto = new Lotto(new HashSet<>(Arrays.asList(4, 5, 6, 7, 8, 9)));
-                LottoNumber lottoBonusNumber = new LottoNumber(answerNumbers, 10);
+
+                LottoWinning lottoWinning = new LottoWinning(answerLotto, new LottoNumber(10));
 
                 Lottos lottos = new Lottos(
                         Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5)
                 );
-                Map<Lotto, LottoRank> lottoLottoRankResult = lottos.lottoWinningResult(answerLotto, lottoBonusNumber);
+                Map<Lotto, LottoRank> lottoLottoRankResult = lottos.lottoWinningResult(lottoWinning);
 
                 LottoRank lottoRank1 = lottoLottoRankResult.get(lotto1);
                 assertThat(lottoRank1).isEqualTo(LottoRank.FIRST);
@@ -49,16 +49,16 @@ public class LottoResultTest {
         @Test
         @DisplayName("로또등수를 확인한다.")
         void 로또_등수_확인2() {
-                Lotto lotto1 = new Lotto(new HashSet<>(Arrays.asList(4, 5, 6, 10, 11, 12))); // 1등이어야 하나 2등이 됨
-                Lotto lotto2 = new Lotto(new HashSet<>(Arrays.asList(4, 5, 6, 10, 11, 9))); // 2등이어야 하나 1등이 됨
+                Lotto lotto1 = new Lotto(new HashSet<>(Arrays.asList(4, 5, 6, 10, 11, 12)));
+                Lotto lotto2 = new Lotto(new HashSet<>(Arrays.asList(4, 5, 6, 10, 11, 9)));
 
-                Set<Integer> answerNumbers = new HashSet<>(Arrays.asList(4, 5, 6, 10, 11, 12));
                 Lotto answerLotto = new Lotto(new HashSet<>(Arrays.asList(4, 5, 6, 10, 11, 12)));
-                LottoNumber lottoBonusNumber = new LottoNumber(answerNumbers, 9);
+
+                LottoWinning lottoWinning = new LottoWinning(answerLotto, new LottoNumber(9));
 
                 Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
-                Map<Lotto, LottoRank> lottoLottoRankResult = lottos.lottoWinningResult(answerLotto, lottoBonusNumber);
+                Map<Lotto, LottoRank> lottoLottoRankResult = lottos.lottoWinningResult(lottoWinning);
 
                 LottoRank lottoRank1 = lottoLottoRankResult.get(lotto1);
                 assertThat(lottoRank1).isEqualTo(LottoRank.FIRST);

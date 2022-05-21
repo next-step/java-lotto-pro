@@ -32,18 +32,8 @@ public class LottoTest {
     @Test
     @DisplayName("로또번호 정답 갯수를 확인한다.")
     void 로또번호_정답_갯수_확인() {
-        assertThat(
-                Lotto.countMatchedNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), new HashSet<>(Arrays.asList(4, 5, 6, 7, 8, 9)))
-        );
-    }
-
-    @Test
-    @DisplayName("로또번호, 보너스볼 번호 중복 예외 테스트")
-    void 보너스볼_중복_예외() {
-        Set<Integer> answerNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int bouusNumber = 6;
-        assertThatThrownBy(() -> {
-            new LottoNumber(answerNumbers, bouusNumber);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("[ERROR]");
+        Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto answerLotto = new Lotto(new HashSet<>(Arrays.asList(4, 5, 6, 7, 8, 9)));
+        assertThat(lotto.countMatchedLottoNumber(answerLotto)).isEqualTo(3);
     }
 }

@@ -21,9 +21,10 @@ public class LottoController {
 
         Lottos lottos = issueLottos(new LottoAutoIssuedServiceImpl(), purchaseCount);
         Lotto answerLotto = answerLotto();
-        LottoNumber lottoNumber = bonusLottoNumber();
+        LottoNumber bonusLottoNumber = bonusLottoNumber();
 
-        lottoResult(lottos, answerLotto, lottoNumber);
+        LottoWinning lottoWinning = new LottoWinning(answerLotto, bonusLottoNumber);
+        lottoResult(lottos, lottoWinning);
     }
 
     private int purchaseLotto(String purchasePriceText) {
@@ -56,8 +57,8 @@ public class LottoController {
         return new LottoNumber(NumberUtil.parseStringToInt(lastWeekLottoBonusBallText));
     }
 
-    private LottoResult lottoResult(Lottos lottos, Lotto answerLotto, LottoNumber bonusLottoNumber) {
-        LottoResult lottoResult = new LottoResult(lottos.lottoWinningResult(answerLotto, bonusLottoNumber));
+    private LottoResult lottoResult(Lottos lottos, LottoWinning lottoWinning) {
+        LottoResult lottoResult = new LottoResult(lottos.lottoWinningResult(lottoWinning));
         ResultView.printLottoResult(lottoResult);
 
         return lottoResult;
