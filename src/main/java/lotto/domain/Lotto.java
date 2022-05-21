@@ -23,14 +23,15 @@ public class Lotto {
         return LOTTO_PRICE;
     }
 
-    public MatchResult match(Set<LottoNumber> prizeNumbers) {
+    public MatchResult match(Set<LottoNumber> prizeNumbers, LottoNumber bonusNumber) {
+
         int matchCount = 0;
         for (LottoNumber prizeNumber : prizeNumbers) {
             if (lottoNumbers.contains(prizeNumber)) {
                 matchCount++;
             }
         }
-        return MatchResult.from(matchCount);
+        return MatchResult.of(matchCount, lottoNumbers.contains(bonusNumber));
     }
 
     private void validateDuplicated(LottoNumber[] lottoNumbers) {

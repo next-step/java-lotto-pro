@@ -16,6 +16,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
     private Set<LottoNumber> prizeNumbers;
+    private LottoNumber bonusNumber;
     private int NUMBER_COUNT;
 
     @BeforeEach
@@ -28,24 +29,27 @@ class LottoTest {
         prizeNumbers.add(LottoNumber.from(4));
         prizeNumbers.add(LottoNumber.from(5));
         prizeNumbers.add(LottoNumber.from(6));
+
+        bonusNumber = LottoNumber.from(45);
     }
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1:2:3:4:5:6:6",
-            "1:2:3:4:5:7:5",
-            "1:2:3:4:7:8:4",
-            "1:2:3:7:8:9:3",
-            "1:2:7:8:9:10:2",
-            "1:7:8:9:10:11:1",
-            "7:8:9:10:11:12:0"},
+            "1:2:3:4:5:6:true:6",
+            "1:2:3:4:5:45:true:5",
+            "1:2:3:4:5:7:false:5",
+            "1:2:3:4:7:8:true:4",
+            "1:2:3:7:8:9:true:3",
+            "1:2:7:8:9:10:true:2",
+            "1:7:8:9:10:11:true:1",
+            "7:8:9:10:11:12:true:0"},
             delimiter = ':')
     void 로또번호와_당첨번호에_따른_매치결과_반환(int input0, int input1, int input2, int input3, int input4, int input5,
-                                int matchCount) {
+                                boolean isBonus, int matchCount) {
 
         Lotto lotto = createLotto(new int[]{input0, input1, input2, input3, input4, input5});
-        MatchResult matchResult = lotto.match(prizeNumbers);
-        assertThat(matchResult).isEqualTo(MatchResult.from(matchCount));
+        MatchResult matchResult = lotto.match(prizeNumbers, bonusNumber);
+        assertThat(matchResult).isEqualTo(MatchResult.of(matchCount, isBonus));
     }
 
     @Test

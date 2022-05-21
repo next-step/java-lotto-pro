@@ -16,12 +16,14 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         int[] winningInputs = {1, 2, 3, 4, 5, 6};
-        winningNumbers = new WinningLotto(createLottoNumbers(winningInputs));
+        LottoNumber bonusNumber = LottoNumber.from(7);
+        winningNumbers = new WinningLotto(createLottoNumbers(winningInputs), bonusNumber);
 
         List<Lotto> lottoList = new ArrayList<>();
 
         lottoList.add(createLotto(new int[]{1, 2, 3, 4, 5, 6}));
         lottoList.add(createLotto(new int[]{1, 2, 3, 4, 5, 7}));
+        lottoList.add(createLotto(new int[]{1, 2, 3, 4, 5, 8}));
         lottoList.add(createLotto(new int[]{1, 2, 3, 4, 7, 8}));
         lottoList.add(createLotto(new int[]{1, 2, 3, 7, 8, 9}));
 
@@ -42,16 +44,17 @@ class LottosTest {
     void 셋업에_맞는_당첨_로또_리스트_반환() {
 
         assertAll(
-                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.FIFTH).size()).isEqualTo(1),
-                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.SIXTH).size()).isEqualTo(1),
-                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.SEVENTH).size()).isEqualTo(1),
-                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.EIGHTH).size()).isEqualTo(1)
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.FIRST).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.SECOND).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.THIRD).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.FOURTH).size()).isEqualTo(1),
+                () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.FIFTH).size()).isEqualTo(1)
         );
     }
 
     @Test
     void 로또_총_금액() {
-        assertThat(lottos.totalPrice()).isEqualTo(Money.from(4000));
+        assertThat(lottos.totalPrice()).isEqualTo(Money.from(5000));
 
     }
 
