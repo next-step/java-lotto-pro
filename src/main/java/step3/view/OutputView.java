@@ -23,7 +23,12 @@ public class OutputView {
 
     public void printOutput(Map<LottoReward, Integer> statistics, int usingMoney) {
         System.out.println(OVERVIEW_INIT_MESSAGE);
-        long reward = printOverview(statistics);
+        long reward = 0L;
+        for (LottoReward lottoReward : LOTTO_OVERVIEW_FORMAT.keySet()) {
+            int matchCount = statistics.get(lottoReward);
+            printOverViewPerEntry(lottoReward, matchCount);
+            reward += calcRewardPerEntry(lottoReward, matchCount);
+        }
         printRewardRate(reward, usingMoney);
     }
 
@@ -44,20 +49,13 @@ public class OutputView {
         return reward * 1.0 / usingMoney;
     }
 
-    private long printOverview(Map<LottoReward, Integer> statistics) {
-        long reward = 0;
-        for (LottoReward printRewardTarget : LOTTO_OVERVIEW_FORMAT.keySet()) {
-            reward += printOverViewPerEntry(printRewardTarget, statistics.get(printRewardTarget));
-        }
-        return reward;
+    private void printOverViewPerEntry(LottoReward lottoReward, int matchCount) {
+        System.out.println(
+            String.format(LOTTO_OVERVIEW_FORMAT.get(lottoReward), lottoReward.getMatchCount(),
+                lottoReward.getReward(), matchCount));
     }
 
-    private long printOverViewPerEntry(LottoReward lottoReward, int matchCount) {
-        System.out.println(String.format(
-            LOTTO_OVERVIEW_FORMAT.get(lottoReward),
-            lottoReward.getMatchCount(),
-            lottoReward.getReward(),
-            matchCount));
+    private long calcRewardPerEntry(LottoReward lottoReward, int matchCount) {
         return lottoReward.getReward() * matchCount;
     }
 
