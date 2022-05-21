@@ -14,7 +14,7 @@ import lotto.view.ResultView;
 public class LottoController {
 
     public static void startLotto() {
-        int purchaseAmount = InputView.enterNumber();
+        int purchaseAmount = InputView.enterPurchaseAmount();
         int autoLottoCount = LottoPrice.numberOfLottoCanBuy(purchaseAmount);
 
         LottoManager lottoManager = new LottoManager(autoLottoCount);
@@ -26,7 +26,6 @@ public class LottoController {
         int[] numberArray = InputView.enterManualLotto();
         List<LottoNumber> lottoNumbers = LottoUtil.convertToLottoNumber(numberArray);
         Lotto winningLotto = new Lotto(new ManualPickNumberStrategy(lottoNumbers));
-
         lottoManager.makeWinningLotto(winningLotto, lottos);
 
         ResultView.winningResult(lottoManager.getWinningStatistics());
