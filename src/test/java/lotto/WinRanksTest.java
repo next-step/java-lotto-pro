@@ -24,7 +24,6 @@ public class WinRanksTest {
         lottos = new Lottos(lottoList);
     }
 
-
     @Test
     public void 전체로또_당첨순위_확인() {
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -32,12 +31,11 @@ public class WinRanksTest {
         WinRanks winRanks = new WinRanks();
         winRanks.calculateWinPriceMap(winningLotto, lottos);
         Map<Integer, Rank> winPriceMap = winRanks.getWinMap();
-        assertThat(winPriceMap.get(3).count).isEqualTo(1);
-        assertThat(winPriceMap.get(4).count).isEqualTo(1);
-        assertThat(winPriceMap.get(5).count).isEqualTo(1);
-        assertThat(winPriceMap.get(6).count).isEqualTo(1);
 
-        ResultView.printLottoResult(lottos, winningLotto);
+        assertThat(winPriceMap.get(3)).isEqualTo(new Rank(3, 5_000, 1));
+        assertThat(winPriceMap.get(4)).isEqualTo(new Rank(4, 50_000, 1));
+        assertThat(winPriceMap.get(5)).isEqualTo(new Rank(5, 1_500_000, 1));
+        assertThat(winPriceMap.get(6)).isEqualTo(new Rank(6, 2_000_000_000, 1));
     }
 
     @Test

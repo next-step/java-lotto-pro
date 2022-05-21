@@ -63,7 +63,14 @@ public class ResultView {
         Map<Integer, Rank> winMap = winRanks.getWinMap();
         for (int i = 3; i < 7; i++) {
             Rank rank = winMap.get(i);
-            rank.printRank();
+            printRank(rank);
         }
+    }
+
+    public static void printRank(Rank rank) {
+        int key = rank.getKey();
+        int price = rank.getPrice();
+        int count = rank.getCount();
+        System.out.println(key + "개 일치 (" + price + "원)- " + count + "개");
     }
 }

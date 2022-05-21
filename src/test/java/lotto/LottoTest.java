@@ -10,7 +10,7 @@ public class LottoTest {
 
     @Test
     public void 로또_생성_리스트() {
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(RandomUtils.createRandomLottoNumber());
         List<Integer> lottoNumbers = lotto.getLottoNumbers();
 
         assertThat(lottoNumbers).isSorted();

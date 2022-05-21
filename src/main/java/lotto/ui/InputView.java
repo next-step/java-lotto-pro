@@ -1,7 +1,5 @@
 package lotto.ui;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import lotto.Lotto;
 
@@ -36,32 +34,19 @@ public class InputView {
         String winningLottoString = scanner.nextLine();
 
         String[] splitWinningLottoString = winningLottoString.split(WINNING_LOTTO_DELIMITER);
-        List<Integer> lottoNumbers = new ArrayList<>();
+        Lotto lotto = new Lotto();
 
         validateWinningLottoNumberLength(splitWinningLottoString);
 
         for (String s : splitWinningLottoString) {
-            lottoNumbers.add(validateWinningLottoNumber(s.trim()));
+            lotto.addLottoNumber(s.trim());
         }
-        return new Lotto(lottoNumbers);
+        return lotto;
     }
 
-    private static void validateWinningLottoNumberLength(String[] splitWinnigLottoString) {
-        if (splitWinnigLottoString == null || splitWinnigLottoString.length != 6) {
+    private static void validateWinningLottoNumberLength(String[] splitWinningLottoString) {
+        if (splitWinningLottoString == null || splitWinningLottoString.length != 6) {
             throw new IllegalArgumentException("로또는 6개의 숫자입니다.");
         }
-    }
-
-    private static int validateWinningLottoNumber(String lottoNumber) {
-        int number;
-        try {
-            number = Integer.parseInt(lottoNumber);
-        } catch (NumberFormatException numberFormatException) {
-            throw new IllegalArgumentException("당첨번호는 숫자입니다.");
-        }
-        if (number < 0 || number > 45) {
-            throw new IllegalArgumentException("당첨번호은 1~45 사이 숫자입니다.");
-        }
-        return number;
     }
 }

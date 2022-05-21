@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WinRanks {
-    Map<Integer, Rank> winMap;
+    private final Map<Integer, Rank> winMap;
 
     public WinRanks() {
         winMap = new HashMap<>();
-        winMap.put(3, new Rank(3, 5000, 0));
-        winMap.put(4, new Rank(4, 50000, 0));
-        winMap.put(5, new Rank(5, 1500000, 0));
-        winMap.put(6, new Rank(6, 2000000000, 0));
+        winMap.put(3, new Rank(3, 5_000, 0));
+        winMap.put(4, new Rank(4, 50_000, 0));
+        winMap.put(5, new Rank(5, 1_500_000, 0));
+        winMap.put(6, new Rank(6, 2_000_000_000, 0));
     }
 
     public Map<Integer, Rank> getWinMap() {
