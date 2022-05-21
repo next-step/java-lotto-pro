@@ -6,9 +6,10 @@ import java.util.List;
 public enum LottoRank {
 
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000);
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000);
 
     private final int countOfMatch;
     private final int winningMoney;
@@ -27,7 +28,7 @@ public enum LottoRank {
     }
 
     public static List<LottoRank> reverse() {
-        return Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
+        return Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST);
     }
 
     public static LottoRank valueOf(int countOfMatch) {
@@ -35,5 +36,9 @@ public enum LottoRank {
                 .filter(rank -> countOfMatch == rank.countOfMatch)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public static boolean isSecond(LottoRank rank) {
+        return SECOND == rank;
     }
 }
