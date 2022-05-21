@@ -30,16 +30,6 @@ public enum MatchResult {
         this.cashPrize = cashPrize;
     }
 
-    public static MatchResult from(int matchCount) {
-        Optional<MatchResult> result = Arrays.stream(MatchResult.values())
-                .filter(matchResult -> matchResult.matchCount == matchCount)
-                .findAny();
-        if (result.isPresent()) {
-            return result.get();
-        }
-        throw new IllegalArgumentException("당첨 번호와 일치하는 로또 숫자의 개수는 0과 6 범위이어야 합니다");
-    }
-
     public static MatchResult of(int matchCount, boolean isBonus) {
 
         if (isSecond(matchCount, isBonus)) {
