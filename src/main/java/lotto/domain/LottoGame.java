@@ -4,7 +4,6 @@ import lotto.ui.ResultView;
 import lotto.util.RandomNumberUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,16 +15,12 @@ public class LottoGame {
 
     private double earningRate;
 
-    private Map<Integer, Integer> scoreMap;
+    private LottoResult lottoResult;
 
     private List<LottoTicket> tickets;
 
     LottoGame() {
-        this.scoreMap = new HashMap<>();
-        this.scoreMap.put(3, 0);
-        this.scoreMap.put(4, 0);
-        this.scoreMap.put(5, 0);
-        this.scoreMap.put(6, 0);
+        this.lottoResult = new LottoResult();
     }
 
     public LottoGame(int purchasePrice) {
@@ -71,7 +66,7 @@ public class LottoGame {
     }
 
     public Map<Integer, Integer> getScore() {
-        return new HashMap<>(this.scoreMap);
+        return lottoResult.getScore();
     }
 
     public void printGameResult() {
@@ -80,6 +75,7 @@ public class LottoGame {
 
     private void calculateEarningRate() {
         long totalEarning = 0;
+        Map<Integer, Integer> scoreMap = lottoResult.getScore();
         for (Map.Entry<Integer, Integer> entry : scoreMap.entrySet()) {
             totalEarning += (long) Score.getPrizeBySameNumberCount(entry.getKey()) * entry.getValue();
         }
@@ -94,9 +90,7 @@ public class LottoGame {
 
     private void calculateGameScore(LottoTicket ticket, WinnerTicket winnerTicket) {
         int score = equalNumberCount(ticket, winnerTicket);
-        if (this.scoreMap.containsKey(score)) {
-            this.scoreMap.replace(score, this.scoreMap.get(score) + 1);
-        }
+        lottoResult.add(score);
     }
 
     private static void isValidPurchasePrice(int purchasePrice) {
