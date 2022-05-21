@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoRank;
-import lotto.domain.LottoResult;
+import lotto.domain.LottoRanks;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 
@@ -12,14 +12,14 @@ import java.util.List;
 import static lotto.domain.LottoStore.LOTTO_PRICE;
 
 public class OutputView {
-    public static void printLottoResult(LottoResult lottoResult) {
+    public static void printLottoResult(LottoRanks lottoResult) {
         List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
         Collections.reverse(lottoRanks);
 
         printLottoRank(lottoRanks, lottoResult);
     }
 
-    private static void printLottoRank(List<LottoRank> lottoRanks, LottoResult lottoResult) {
+    private static void printLottoRank(List<LottoRank> lottoRanks, LottoRanks lottoResult) {
         System.out.println("\n당첨 통계\n---------");
 
         for (LottoRank lottoRank : lottoRanks) {

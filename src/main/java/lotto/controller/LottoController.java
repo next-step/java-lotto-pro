@@ -14,7 +14,7 @@ public class LottoController {
         OutputView.printLottoAutoTickets(lottoAutoNumbers);
 
         LottoWinningTicket lottoWinningNumbers = InputView.inputWinningNumbers();
-        LottoResult lottoResult = lottoWinningNumbers.analyzeResult(lottoAutoNumbers);
-        OutputView.printLottoResult(lottoResult);
+        LottoRanks lottoRanks = lottoWinningNumbers.analyzeResult(lottoAutoNumbers);
+        OutputView.printLottoResult(lottoRanks);
     }
 }

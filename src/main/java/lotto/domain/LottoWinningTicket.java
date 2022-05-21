@@ -25,7 +25,7 @@ public class LottoWinningTicket {
         }
     }
 
-    public LottoResult analyzeResult(List<LottoTicket> tickets) {
+    public LottoRanks analyzeResult(List<LottoTicket> tickets) {
         List<LottoRank> lottoRanks = new ArrayList<>();
 
         for (LottoTicket ticket : tickets) {
@@ -33,7 +33,7 @@ public class LottoWinningTicket {
             boolean hasBonus = ticket.contains(bonusNumber);
             lottoRanks.add(LottoRank.find(match, hasBonus));
         }
-        return new LottoResult(lottoRanks);
+        return new LottoRanks(lottoRanks);
     }
 }
 
