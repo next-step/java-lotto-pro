@@ -18,16 +18,17 @@ public class LottoWinChecker {
     private final int MATCH_COUNT_BASE = 0;
 
     public void setBonusNumber(String lottoElementSource) {
-        validateBonusNumber(lottoElementSource);
-        bonusNumber = new LottoElement(NumberUtil.parseInt(lottoElementSource));
+        LottoElement bonusLottoElement = new LottoElement(NumberUtil.parseInt(lottoElementSource));
+        validateBonusNumber(bonusLottoElement);
+        bonusNumber = bonusLottoElement;
     }
 
-    private void validateBonusNumber(String lottoElementSource) {
+    private void validateBonusNumber(LottoElement bonusLottoElement) {
         int isExist = 1;
         boolean validateResult = true;
         try {
             int bonusExistInWinnerTicket = winnerLottoTicket.getMatchCountWith(
-                Arrays.asList(new LottoElement(NumberUtil.parseInt(lottoElementSource))));
+                Arrays.asList(bonusLottoElement));
             validateResult = bonusExistInWinnerTicket != isExist;
         } catch (IllegalArgumentException e) {
             validateResult = false;
