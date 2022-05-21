@@ -1,27 +1,28 @@
 package lotto.view;
 
+import lotto.exception.LottoException;
+import lotto.exception.LottoExceptionType;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static lotto.constants.ExceptionConstants.*;
-
 public class InputView {
     private static final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
-    public static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
-    public static final String INPUT_ANSWR_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String INPUT_MONEY_MESSAGE = "구입 금액을 입력해 주세요.";
+    public static final String INPUT_ANSWER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
     public static long inputMoney() {
+        System.out.println(INPUT_MONEY_MESSAGE);
         try {
-            System.out.println(INPUT_MONEY_MESSAGE);
             return Long.parseLong(input());
         } catch (NumberFormatException ioe) {
-            throw new IllegalArgumentException(INPUT_NUMBER_FORMAT_EXCEPTION);
+            throw new LottoException(LottoExceptionType.INPUT_NUMBER_FORMAT);
         }
     }
 
     public static String inputAnswer() {
-        System.out.println(INPUT_ANSWR_MESSAGE);
+        System.out.println(INPUT_ANSWER_MESSAGE);
         return input();
     }
 
@@ -29,7 +30,7 @@ public class InputView {
         try {
             return READER.readLine();
         } catch (IOException ioeException) {
-            throw new IllegalArgumentException(INPUT_IO_EXCEPTION);
+            throw new LottoException(LottoExceptionType.INPUT_IO);
         }
     }
 }

@@ -1,9 +1,10 @@
 package lotto.domain;
 
-import static lotto.constants.ExceptionConstants.*;
+import lotto.exception.LottoException;
+import lotto.exception.LottoExceptionType;
 
 public class Money {
-    private static final int ZERO = 0;
+    private static final int MONEY_MIN = 0;
     private final long value;
 
     public Money(final long money) {
@@ -16,8 +17,8 @@ public class Money {
     }
 
     private void validate(final long money) {
-        if (money < ZERO) {
-            throw new IllegalArgumentException(MINUS_MONEY__EXCEPTION);
+        if (money < MONEY_MIN) {
+            throw new LottoException(LottoExceptionType.MINUS_MONEY);
         }
     }
 }

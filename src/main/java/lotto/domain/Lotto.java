@@ -1,13 +1,13 @@
 package lotto.domain;
 
+import lotto.exception.LottoException;
+import lotto.exception.LottoExceptionType;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static lotto.constants.ExceptionConstants.LOTTO_LENGTH_EXCEPTION;
-import static lotto.constants.ExceptionConstants.LOTTO_OVERLAP_EXCEPTION;
 
 public class Lotto {
     private static final int LIMIT_LOTTO = 6;
@@ -36,7 +36,7 @@ public class Lotto {
 
     private void validateLength(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LIMIT_LOTTO) {
-            throw new IllegalArgumentException(LOTTO_LENGTH_EXCEPTION);
+            throw new LottoException(LottoExceptionType.LOTTO_LENGTH);
         }
     }
 
@@ -44,7 +44,7 @@ public class Lotto {
         long count = lottoNumbers.stream().distinct().count();
 
         if (count != LIMIT_LOTTO) {
-            throw new IllegalArgumentException(LOTTO_OVERLAP_EXCEPTION);
+            throw new LottoException(LottoExceptionType.LOTTO_OVERLAP);
         }
     }
 

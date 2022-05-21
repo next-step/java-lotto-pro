@@ -1,9 +1,10 @@
 package lotto.domain;
 
+import lotto.exception.LottoException;
+import lotto.exception.LottoExceptionType;
+
 import java.util.Objects;
 import java.util.stream.IntStream;
-
-import static lotto.constants.ExceptionConstants.*;
 
 public class LottoNumber {
     private static final LottoNumber[] COLLECTION;
@@ -30,7 +31,7 @@ public class LottoNumber {
 
     private static void validate(int inputNumber) {
         if (inputNumber < BEGIN_NUMBER || inputNumber >= END_NUMBER) {
-            throw new IllegalArgumentException(LOTTO_RANGE_EXCEPTION);
+            throw new LottoException(LottoExceptionType.LOTTO_RANGE);
         }
     }
 

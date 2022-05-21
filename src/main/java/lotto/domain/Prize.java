@@ -29,9 +29,9 @@ public enum Prize {
         this.prize = prize;
     }
 
-    public static Winners matchLotto(final List<Lotto> lottoes, final Lotto answer) {
+    public static Winners matchLotto(final List<Lotto> lottoes, final Lotto winnigNumber) {
         return new Winners(lottoes.stream()
-                .map(v -> v.matchCount(answer))
+                .map(v -> v.matchCount(winnigNumber))
                 .map(Prize::createPrize)
                 .collect(Collectors.toList()));
     }

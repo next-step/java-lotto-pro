@@ -18,7 +18,7 @@ public class ResultView {
     private static final String PRINT_SUFFIX = "]";
 
 
-    public static void resultBuyCount(final long count) {
+    public static void resultBuyCount(final int count) {
         System.out.printf((BUY_COUNT_MESSAGE) + "%n", count);
     }
 
