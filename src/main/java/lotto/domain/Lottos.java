@@ -1,8 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -11,17 +11,18 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    private static Lottos auto(int count) {
-        return new Lottos(IntStream.range(0, count)
-                .mapToObj(value -> Lotto.auto())
-                .collect(Collectors.toList()));
+    private static List<Lotto> auto(Count count) {
+        return count.toList(Lotto::auto);
     }
 
-    public static Lottos buy(LottoCharge charge) {
-        return auto(charge.count());
+    public static Lottos buy(List<Lotto> manualLottos, LottoCharge restCharge) {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(manualLottos);
+        lottos.addAll(auto(restCharge.count()));
+        return new Lottos(lottos);
     }
 
-    public int count() {
+    public int size() {
         return lottos.size();
     }
 

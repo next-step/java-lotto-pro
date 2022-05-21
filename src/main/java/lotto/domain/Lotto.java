@@ -38,6 +38,10 @@ public class Lotto {
         return new Lotto(RandomNumbersGenerator.generate(LOTTO_SIZE));
     }
 
+    public static Lotto manual(String numbers) {
+        return new Lotto(numbers);
+    }
+
     private boolean isUnique(List<Number> numbers) {
         List<Number> distinctNumbers = numbers.stream()
                 .distinct()

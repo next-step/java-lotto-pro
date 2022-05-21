@@ -48,4 +48,9 @@ class LottoTest {
     void 로또_숫자_미포함() {
         assertThat(new Lotto(1, 2, 3, 4, 5, 6).contains(Number.from(7))).isFalse();
     }
+
+    @Test
+    void 로또_수동_생성() {
+        assertThat(Lotto.manual("1,2,3,4,5,45")).isNotNull();
+    }
 }

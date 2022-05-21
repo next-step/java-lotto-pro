@@ -5,6 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,8 +16,19 @@ class LottosTest {
     @ParameterizedTest
     @CsvSource(value = {"5000,5", "14000,14"})
     void 여러장_구입(int charge, int expected) {
-        Lottos lottos = Lottos.buy(LottoCharge.from(charge));
-        assertThat(lottos.count()).isEqualTo(expected);
+        Lottos lottos = Lottos.buy(Collections.EMPTY_LIST, LottoCharge.from(charge));
+        assertThat(lottos.size()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"5000,7", "14000,16"})
+    void 수동_2개_자동_구입(int charge, int expected) {
+        List<Lotto> manualLottos = Arrays.asList(
+                new Lotto(1, 2, 3, 4, 5, 6),
+                new Lotto(1, 2, 3, 4, 5, 45)
+        );
+        Lottos lottos = Lottos.buy(manualLottos, LottoCharge.from(charge));
+        assertThat(lottos.size()).isEqualTo(expected);
     }
 
     @Test
