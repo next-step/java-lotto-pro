@@ -18,38 +18,34 @@ public class Lottos {
     }
 
     public static Lottos purchase(Money money) {
-        List<Lotto> lottos = randomLottos(money);
+        List<Lotto> lottos = generateRandomLottos(money.maxLottoCount());
         return new Lottos(lottos);
     }
 
     public static Lottos purchase(Money totalMoney, List<Lotto> manualLottos) {
-        validateManualLottosNotNUll(manualLottos);
-        Money leftMoney = leftMoney(totalMoney, manualLottos);
-        List<Lotto> lottos = randomLottos(leftMoney);
+        validateManualLottosNotNull(manualLottos);
+        int randomLottoCount = totalMoney.maxLottoCount() - manualLottos.size();
+        validateRandomLottoCountNotNegativeNumber(randomLottoCount);
+        List<Lotto> lottos = generateRandomLottos(randomLottoCount);
         lottos.addAll(manualLottos);
         return new Lottos(lottos);
     }
 
-    private static List<Lotto> randomLottos(Money money) {
+    private static void validateRandomLottoCountNotNegativeNumber(int randomLottoCount) {
+        if(randomLottoCount < ZERO_NUM) {
+            throw new IllegalArgumentException("수동 로또 구매에 필요한 돈이 부족합니다.");
+        }
+    }
+
+    private static List<Lotto> generateRandomLottos(int randomLottoCount) {
         List<Lotto> lottos = new ArrayList<>();
-        int count = money.maxLottoCount();
-        for (int i = ZERO_NUM; i < count; i++) {
+        for (int i = ZERO_NUM; i < randomLottoCount; i++) {
             lottos.add(Lotto.draw(new RandomLottoNumberGenerator()));
         }
         return lottos;
     }
 
-    private static Money leftMoney(Money totalMoney, List<Lotto> manualLottos) {
-        Money leftMoney;
-        try {
-            leftMoney = totalMoney.subtract(Money.valueOf(Lotto.PRICE).multiply(manualLottos.size()));
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("수동 로또 구매에 필요한 돈이 부족합니다.");
-        }
-        return leftMoney;
-    }
-
-    private static void validateManualLottosNotNUll(List<Lotto> manualLottos) {
+    private static void validateManualLottosNotNull(List<Lotto> manualLottos) {
         if (Objects.isNull(manualLottos)) {
             throw new IllegalArgumentException("로또 번호 갯수가 올바르지 않습니다.");
         }

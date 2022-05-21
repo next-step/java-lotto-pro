@@ -30,10 +30,6 @@ public class Money {
         return Money.valueOf(Math.addExact(this.money, money.money));
     }
 
-    public Money subtract(Money money) {
-        return Money.valueOf(Math.subtractExact(this.money, money.money));
-    }
-
     public BigDecimal divideBy(Money money) {
         if (isZero(money)) {
             throw new IllegalArgumentException("0원으로 나눌 수 없습니다.");
