@@ -14,7 +14,7 @@ public class LottoGame {
         int maxQuantity = money.findPurchaseTicketQuantity();
         LottoTickets manualTickets = inputManualTickets(inputManualQuantity(maxQuantity));
         LottoMachine lottoMachine = new LottoMachine();
-        LottoTickets lottoTickets = lottoMachine.buyLottoTicket(money);
+        LottoTickets lottoTickets = lottoMachine.buyLottoTicketWithManual(money, manualTickets);
         ResultView.printPurchaseTicketQuantity(lottoTickets.size());
         ResultView.printLottoTickets(lottoTickets);
 

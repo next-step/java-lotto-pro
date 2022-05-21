@@ -40,4 +40,13 @@ public class LottoTicketsTest {
             new LottoTickets(lottoTicketList, 4);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("로또 티켓 합친 후 수량 확인")
+    void add() {
+        List<LottoTicket> addTicketList = new ArrayList<>();
+        addTicketList.add(new LottoTicket("1, 2, 3, 4, 5, 6"));
+        addTicketList.add(new LottoTicket("2, 3, 4, 5, 6, 7"));
+        assertThat(lottoTickets.add(new LottoTickets(addTicketList)).size()).isEqualTo(3);
+    }
 }
