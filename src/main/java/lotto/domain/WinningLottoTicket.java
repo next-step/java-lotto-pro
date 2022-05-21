@@ -17,11 +17,19 @@ public class WinningLottoTicket {
 
         this.winningLottoTicket = new LottoTicket(winningLottoNumbers);
         this.bonusBall = new LottoNumber(bonusBall);
+
+        validateDuplicate(this.winningLottoTicket, this.bonusBall);
     }
 
     private void validateNullOrEmpty(final List<String> lottoNumbers) {
         if (Objects.isNull(lottoNumbers) || lottoNumbers.isEmpty()) {
             throw new IllegalArgumentException(LottoTicketErrorCode.NOT_ALLOW_NULL_OR_EMPTY.getMessage());
+        }
+    }
+
+    private void validateDuplicate(LottoTicket winningLottoTicket, LottoNumber bonusBall) {
+        if (winningLottoTicket.contains(bonusBall)) {
+            throw new IllegalArgumentException(LottoTicketErrorCode.NOT_ALLOW_DUPLICATE.getMessage());
         }
     }
 

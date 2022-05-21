@@ -67,6 +67,14 @@ class WinningLottoTicketTest {
                 );
     }
 
+    @Test
+    @DisplayName("보너스볼이 로또번호와 중복될 경우 에러발생")
+    public void bonusBall_duplicate_lotto_numbers() {
+        assertThatThrownBy(() -> new WinningLottoTicket(Arrays.asList("1", "2", "3", "4", "5", bonusBall), bonusBall))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(LottoTicketErrorCode.NOT_ALLOW_DUPLICATE.getMessage());
+    }
+
     @ParameterizedTest(name = "당첨번호와 구매한 로또번호를 비교하여 일치하는 번호 갯수를 반환한다.")
     @MethodSource("provideLottoTicketForMatchCount")
     public void countMatchNumber(LottoTicket lottoTicket, int countOfMatch) {
