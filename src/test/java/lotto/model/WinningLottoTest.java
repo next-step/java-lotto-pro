@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class WinningLottoTest {
+class WinningLottoTest {
     final Lotto lotto = Lotto.draw(new InputLottoNumberGenerator("1, 2, 3, 4, 5, 6"));
 
     @DisplayName("로또 번호와 중복된 로또 번호인지 체크")
