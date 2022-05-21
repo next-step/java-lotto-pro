@@ -52,5 +52,15 @@ public enum LottoRank {
     public boolean hasBonus() {
         return this.hasBonus;
     }
+
+    public int matchRank(LottoResult lottoResult) {
+        int count = 0;
+        for (LottoRank rankResult : lottoResult.getLottoResult()) {
+            if (isMatch(rankResult.match) && matchBonus(rankResult.hasBonus)) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
 
