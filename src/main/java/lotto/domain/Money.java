@@ -4,20 +4,20 @@ import java.util.Objects;
 
 public class Money {
     private static final int MIN = 0;
-    private final int value;
+    private final long value;
 
-    private Money(int value) {
+    private Money(long value) {
         validate(value);
         this.value = value;
     }
 
-    private void validate(int value) {
+    private void validate(long value) {
         if (value < MIN) {
             throw new IllegalArgumentException(String.format("돈은 %d보다 작을 수 없습니다.", MIN));
         }
     }
 
-    public static Money from(int money) {
+    public static Money from(long money) {
         return new Money(money);
     }
 

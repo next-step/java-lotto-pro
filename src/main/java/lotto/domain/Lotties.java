@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotties {
@@ -31,5 +32,18 @@ public class Lotties {
                 .map(lotto -> lotto.match(winningLotto))
                 .collect(Collectors.toList());
         return WinningStatus.from(ranks);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotties lotties1 = (Lotties) o;
+        return Objects.equals(getLotties(), lotties1.getLotties());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getLotties());
     }
 }
