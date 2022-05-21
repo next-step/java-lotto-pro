@@ -18,7 +18,7 @@
 - 기존의 LottoNumbers와 다르게 보너스번호를 가지고 있는 WinLottoNumbers를 정의
   - WinLotto쪽으로 당첨 여부 판단 기능을 넘기는게 좋을 것 같음.
 
-# 기능 구현 목록
+# 1단계 기능 구현 목록(자동)
 - [X] 로또번호 한세트 자동생성
 - [X] 로또 당첨 등수 판단
 - [X] 주어진 예산만큼의 로또 구매
@@ -29,9 +29,16 @@
 - [X] 당첨 통계 및 수익률 계산
   - 당첨 통계 출력
   - 수익률 출력
+
+# 2단계 기능 구현 목록(2등)
 - [X] 보너스 번호 추가
 - [X] 로또 당첨 등수 판단 기능 변경
 - [X] 당첨통계 출력기능 변경
+
+# 3단계 기능 구현 목록(수동)
+- [X] 수동 구매 단계 추가 
+  - 관련 입출력 추가
+
 
 # 3단계 리뷰 반영
 - [X] 오타 및 줄바꿈 수정
@@ -39,4 +46,20 @@
 - [X] 당첨 통계 및 수익률 계산을 위한 클래스 분리
 - [X] buyLotto 메서드 개선
 - [X] LottoGameResult 내 통계 기능 리팩토링 
-- [X] LottoRank 리팩토링 
+- [X] LottoRank 리팩토링
+
+# 4단계 리뷰 반영
+- [X] LottoGame.takeBudget 메서드 삭제 (inputview와 중복)
+- [X] WinLottoNumbersTest로 테스트 이동
+- [X] ParameterizedTest 제거
+- [X] WinLottoNumbers.matchMainNumber 리팩토링
+- [X] WinLottoNumbers.Builder 리팩토링
+
+# 5단계 리뷰 반영
+- [X] 특정 메서드에만 쓰이는 멤버변수를 메서드 파라미터로 리팩토링
+- [X] BuyLotto 리팩토링 (availableDrawCount를 직접변경하지 않도록 변경 등)
+- [X] 사용하지 않는 소스 제거 - LottoBuyStrategy
+- [X] WinLottoNumbers 생성자에서 유효성 검사하도록 리팩토링
+- [X] WinLottoNumbers Builder 필수 파라미터 받도록 리팩토링
+- [X] 테스트 메서드가 먼저 나오도록 수정
+- [X] LottoRank 순위결정 메서드 리팩토링(오버라이딩 활용)

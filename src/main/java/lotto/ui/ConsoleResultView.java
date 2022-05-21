@@ -7,10 +7,14 @@ import lotto.number.LottoNumbers;
 import lotto.rank.LottoRank;
 
 public class ConsoleResultView implements ResultView {
+    @Override
+    public void printBoughtCount(int manualBuyCount, int autoBuyCount) {
+        printBlankLine();
+        System.out.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualBuyCount, autoBuyCount);
+    }
 
     @Override
     public void printBoughtLottos(List<LottoNumbers> lottoNumbersList) {
-        System.out.println(lottoNumbersList.size() + "개를 구매했습니다.");
         for (LottoNumbers LottoNumbers : lottoNumbersList) {
             System.out.println(LottoNumbers);
         }
@@ -41,8 +45,9 @@ public class ConsoleResultView implements ResultView {
             printRankResult(rank, statistics.get(rank));
         }
     }
+
     private void printRankResult(LottoRank rank, long matchCount) {
-        if(rank == LottoRank.SECOND_PLACE){
+        if (rank == LottoRank.SECOND_PLACE) {
             System.out.format("%d개 일치, 보너스 볼 일치(%d원)- %d개\n"
                     , rank.getMatchNumberCount()
                     , rank.calculatePrize(1),
@@ -54,6 +59,7 @@ public class ConsoleResultView implements ResultView {
                 , rank.calculatePrize(1),
                 matchCount);
     }
+
     private void printYield(LottoGameResultDTO gameResult) {
         System.out.format("총 수익률은 %.2f입니다.\n", gameResult.getYield());
     }

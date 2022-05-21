@@ -1,9 +1,8 @@
 package lotto.game;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-import java.util.stream.IntStream;
 import lotto.dto.LottoGameResultDTO;
 import lotto.factory.LottoNumbersFactory;
 import lotto.number.LottoNumber;
@@ -19,7 +18,6 @@ public class LottoGame {
     private final LottoNumbersFactory lottoNumbersFactory;
     private final InputView inputView;
     private final ResultView resultView;
-    private int budget;
 
     public LottoGame(LottoNumbersFactory lottoNumbersFactory, InputView inputView, ResultView resultView) {
         this.lottoNumbersFactory = lottoNumbersFactory;
@@ -28,8 +26,7 @@ public class LottoGame {
     }
 
     public void start() {
-        takeBudget();
-        List<LottoNumbers> lottoNumbersList = buyLotto();
+        List<LottoNumbers> lottoNumbersList = buyLotto(inputView.takeBudget());
         resultView.printBoughtLottos(lottoNumbersList);
         WinLottoNumbers winNumbers = drawWinNumbers();
         List<LottoRank> lottoRanks = matchLottos(lottoNumbersList, winNumbers);
@@ -37,13 +34,23 @@ public class LottoGame {
         resultView.printGameResult(gameResult);
     }
 
-    private void takeBudget() {
-        budget = inputView.takeBudget();
+    private List<LottoNumbers> buyLotto(int budget) {
+        BuyLotto buyLotto = new BuyLotto(budget, lottoNumbersFactory);
+        int manualBuyCount = inputView.takeManualBuyCount();
+        manualBuyLotto(buyLotto, manualBuyCount);
+        int autoBuyCount = buyLotto.autoBuyRemainingBudget();
+        resultView.printBoughtCount(manualBuyCount, autoBuyCount);
+        return buyLotto.boughtLottos();
     }
 
-    private List<LottoNumbers> buyLotto() {
-        int drawCount = budget / LOTTO_PRICE;
-        return IntStream.range(0,drawCount).mapToObj(i->lottoNumbersFactory.createRandomLottoNumbers()).collect(toList());
+    private void manualBuyLotto(BuyLotto buyLotto, int manualBuyCount) {
+        buyLotto.checkBudget(manualBuyCount);
+        inputView.printManualLottoNumbersHeader();
+
+        for (int i = 0; i < manualBuyCount; i++) {
+            List<Integer> numbers = inputView.takeManualLottoNumbers();
+            buyLotto.manual(numbers);
+        }
     }
 
     private WinLottoNumbers drawWinNumbers() {
@@ -55,19 +62,19 @@ public class LottoGame {
                 .build();
     }
 
-    private LottoNumbers drawWinMainNumbers(){
+    private LottoNumbers drawWinMainNumbers() {
         List<Integer> numbers = inputView.takeWinMainNumbers();
         return lottoNumbersFactory.createLottoNumbers(numbers);
     }
 
-    private LottoNumber drawBonusNumber(){
+    private LottoNumber drawBonusNumber() {
         int number = inputView.takeBonusNumbers();
         return new LottoNumber(number);
     }
 
     private List<LottoRank> matchLottos(List<LottoNumbers> lottoNumbersList, WinLottoNumbers winNumbers) {
         return lottoNumbersList.stream()
-                .map(lottoNumbers-> winNumbers.match(lottoNumbers))
+                .map(lottoNumbers -> winNumbers.match(lottoNumbers))
                 .collect(toList());
     }
 

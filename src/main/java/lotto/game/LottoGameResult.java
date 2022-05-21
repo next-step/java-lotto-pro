@@ -12,6 +12,7 @@ import lotto.rank.LottoRank;
 
 public class LottoGameResult {
     private List<LottoRank> rankList;
+
     public LottoGameResult(List<LottoRank> rankList) {
         this.rankList = Collections.unmodifiableList(rankList);
     }
@@ -26,7 +27,7 @@ public class LottoGameResult {
 
     public Map<LottoRank, Long> statistics() {
         Map<LottoRank, Long> statistics = rankList.stream().filter(rank -> rank != LottoRank.NO_PRIZE)
-                .collect(groupingBy(Function.identity(),TreeMap::new,counting()));
+                .collect(groupingBy(Function.identity(), TreeMap::new, counting()));
         return statistics;
     }
 }

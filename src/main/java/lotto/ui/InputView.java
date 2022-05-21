@@ -8,4 +8,10 @@ public interface InputView {
     List<Integer> takeWinMainNumbers();
 
     int takeBonusNumbers();
+
+    int takeManualBuyCount();
+
+    List<Integer> takeManualLottoNumbers();
+
+    void printManualLottoNumbersHeader();
 }

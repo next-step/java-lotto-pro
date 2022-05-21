@@ -8,7 +8,7 @@ import org.junit.jupiter.params.converter.SimpleArgumentConverter;
 
 public class IntegerListConverter extends SimpleArgumentConverter {
     @Override
-    protected Object convert(Object source, Class<?> targetType) throws ArgumentConversionException {
+    public Object convert(Object source, Class<?> targetType) throws ArgumentConversionException {
         if (source instanceof String && List.class.isAssignableFrom(targetType)) {
             String[] numberStrings = ((String) source).split(",");
             return stringsToIntegerList(numberStrings);
@@ -16,7 +16,7 @@ public class IntegerListConverter extends SimpleArgumentConverter {
         throw new IllegalArgumentException("테스트 값이 올바르지 않습니다.");
     }
 
-    private List<Integer> stringsToIntegerList(String[] strs){
-        return Arrays.stream(strs).map((str)->Integer.parseInt(str)).collect(Collectors.toList());
+    private List<Integer> stringsToIntegerList(String[] strs) {
+        return Arrays.stream(strs).map((str) -> Integer.parseInt(str)).collect(Collectors.toList());
     }
 }
