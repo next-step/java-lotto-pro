@@ -29,19 +29,19 @@ public class Lottos {
         return lottoList.size();
     }
 
-    public LottosResults matchWithReference(Lotto referenceLotto) {
+    public LottosResults matchWithReference(Lotto referenceLotto, LottoNumber bonusNumber) {
         Map<LottoRank, Integer> rankCountMap = new HashMap<>();
 
         for(Lotto lotto : lottoList) {
-            LottoRank lottoRank = matchLottoWithReference(referenceLotto, lotto);
+            LottoRank lottoRank = matchLottoWithReference(referenceLotto, bonusNumber, lotto);
             countRank(rankCountMap, lottoRank);
         }
 
         return new LottosResults(rankCountMap);
     }
 
-    private LottoRank matchLottoWithReference(Lotto referenceLotto, Lotto targetLotto) {
-        return referenceLotto.match(targetLotto).convertToLottoRank();
+    private LottoRank matchLottoWithReference(Lotto referenceLotto, LottoNumber bonusNumber, Lotto targetLotto) {
+        return targetLotto.match(referenceLotto, bonusNumber).convertToLottoRank();
     }
 
     private void countRank(Map<LottoRank, Integer> rankCountMap, LottoRank lottoRank) {

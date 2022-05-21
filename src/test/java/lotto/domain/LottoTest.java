@@ -49,7 +49,7 @@ class LottoTest {
         List<Integer> lottoList = Arrays.asList(1, 5, 7, 8, 23, 41);
         Lotto lotto = new Lotto(lottoList.stream().map(LottoNumber::new).collect(Collectors.toList()));
 
-        assertThat(reference.match(lotto).convertToLottoRank()).isEqualTo(LottoRank.FIFTH);
+        assertThat(reference.match(lotto, new LottoNumber(45)).convertToLottoRank()).isEqualTo(LottoRank.FIFTH);
     }
 
     @DisplayName("로또 숫자 6개 매칭시 1등")
@@ -61,6 +61,6 @@ class LottoTest {
         List<Integer> lottoList = Arrays.asList(23, 5, 1, 42, 3, 10);
         Lotto lotto = new Lotto(lottoList.stream().map(LottoNumber::new).collect(Collectors.toList()));
 
-        assertThat(reference.match(lotto).convertToLottoRank()).isEqualTo(LottoRank.FIRST);
+        assertThat(reference.match(lotto, new LottoNumber(45)).convertToLottoRank()).isEqualTo(LottoRank.FIRST);
     }
 }

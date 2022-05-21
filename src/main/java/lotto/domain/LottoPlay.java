@@ -22,12 +22,13 @@ public class LottoPlay {
         Lottos lottos = lottoGenerator.generateLottos(purchaseMoney.getAmountOfLotto());
         resultView.printPurchasedLottos(lottos);
         Lotto referenceLotto = getReferenceLotto();
-        LottosResults results = lottos.matchWithReference(referenceLotto);
+        LottoNumber bonusLottoNumber = getBonusLottoNumber();
+        LottosResults results = lottos.matchWithReference(referenceLotto, bonusLottoNumber);
         resultView.printLottoStatisticsResult(results, purchaseMoney);
     }
 
     private PurchaseMoney getPurchaseMoney() {
-        Integer money = inputView.inputMoneyForPurchase();
+        int money = inputView.inputMoneyForPurchase();
         return new PurchaseMoney(money);
     }
 
@@ -35,5 +36,10 @@ public class LottoPlay {
         String lottoNumberString = inputView.inputReferenceLottoNumbers();
         List<Integer> numberList = StringUtil.splitNumbersString(lottoNumberString, ",");
         return new Lotto(numberList.stream().map(LottoNumber::new).collect(Collectors.toList()));
+    }
+
+    private LottoNumber getBonusLottoNumber() {
+        int bonusNumber = inputView.inputBonusLottoNumber();
+        return new LottoNumber(bonusNumber);
     }
 }

@@ -26,18 +26,26 @@ public class Lotto {
         return numberList.size();
     }
 
-    public LottoMatchingResult match(Lotto lotto) {
+    public LottoMatchingResult match(Lotto referenceLotto, LottoNumber bonusNumber) {
         int countOfMatch = 0;
 
-        for (int index = 0; index < lotto.size(); index++) {
-            countOfMatch += hasNumber(lotto.get(index)) ? 1 : 0;
+        for (int index = 0; index < referenceLotto.size(); index++) {
+            countOfMatch += countOneHasNumber(referenceLotto.get(index));
         }
 
-        return new LottoMatchingResult(countOfMatch, false);
+        return new LottoMatchingResult(countOfMatch, hasNumber(bonusNumber));
     }
 
     public boolean hasNumber(LottoNumber lottoNumber) {
         return numberList.contains(lottoNumber);
+    }
+
+    private int countOneHasNumber(LottoNumber lottoNumber) {
+        if(numberList.contains(lottoNumber)) {
+            return 1;
+        }
+
+        return 0;
     }
 
     private void validate(List<LottoNumber> list) {
