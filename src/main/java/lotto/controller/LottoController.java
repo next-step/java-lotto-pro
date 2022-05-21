@@ -1,10 +1,7 @@
 package lotto.controller;
 
 
-import lotto.domain.LottoStore;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoWinningTicket;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,7 +14,7 @@ public class LottoController {
         OutputView.printLottoAutoTickets(lottoAutoNumbers);
 
         LottoWinningTicket lottoWinningNumbers = InputView.inputWinningNumbers();
-//        LottoTicket winningLottoTicket = new LottoTicket(InputView.inputWinningNumbers());
-//        OutputView.printLottoResult(winningLottoTicket, lottoAutoNumbers);
+        LottoResult lottoResult = lottoWinningNumbers.analyzeResult(lottoAutoNumbers);
+        OutputView.printLottoResult(lottoResult);
     }
 }

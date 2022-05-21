@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 
@@ -11,30 +12,29 @@ import java.util.List;
 import static lotto.domain.LottoStore.LOTTO_PRICE;
 
 public class OutputView {
-    public static void printLottoResult(LottoTicket winningTicket, List<LottoTicket> autoTickets) {
-        List<Integer> matchList = winningTicket.matchList(autoTickets);
+    public static void printLottoResult(LottoResult lottoResult) {
         List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
         Collections.reverse(lottoRanks);
 
-        printLottoRank(matchList, lottoRanks);
-        printRateOfReturn(matchList, lottoRanks);
+        printLottoRank(lottoRanks, lottoResult);
     }
 
-    private static void printLottoRank(List<Integer> matchList, List<LottoRank> lottoRanks) {
+    private static void printLottoRank(List<LottoRank> lottoRanks, LottoResult lottoResult) {
         System.out.println("\n당첨 통계\n---------");
+
         for (LottoRank lottoRank : lottoRanks) {
-            int matchCount = LottoStatistics.matchCount(matchList, lottoRank);
-            printMatch(lottoRank.getMatch(), lottoRank.getPrize(), matchCount);
+            int matchRank = lottoRank.matchRank(lottoResult);
+            printMatch(lottoRank, matchRank);
         }
     }
 
-    private static void printMatch(int match, long prize, int count) {
-        System.out.println(String.format("%d개 일치(%d원)- %d개",
-                match,
-                prize,
-                count
-            )
-        );
+    private static void printMatch(LottoRank lottoRank, int count) {
+        System.out.print(String.format("%d개 일치", lottoRank.getMatch()));
+
+        if (lottoRank.hasBonus()) {
+            System.out.print(", 보너스 볼 일치");
+        }
+        System.out.println(String.format(" (%d원)- %d개", lottoRank.getPrize(), count));
     }
 
     private static void printRateOfReturn(List<Integer> matchList, List<LottoRank> lottoRanks) {
