@@ -1,6 +1,9 @@
 package lotto.type;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.BiPredicate;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
 
@@ -28,14 +31,11 @@ public enum LottoRank {
         return price;
     }
 
-    public boolean isBonusBallCheck() {
-        return isBonusBallCheck;
-    }
-
-    // TODO: BiPredicate
     public static LottoRank findLottoRankByMatchedCount(int matchedCount, boolean isMatchedBonusBall) {
+        BiPredicate<Integer, Boolean> lottoRankBiPredicate = (count, isCheck) -> count == matchedCount && isCheck == isMatchedBonusBall;
+
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.getMatchedCount() == matchedCount && lottoRank.isBonusBallCheck == isMatchedBonusBall)
+                .filter(lottoRank -> lottoRankBiPredicate.test(lottoRank.getMatchedCount(), lottoRank.isBonusBallCheck))
                 .findFirst()
                 .orElse(NONE);
     }
