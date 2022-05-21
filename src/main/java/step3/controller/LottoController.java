@@ -28,7 +28,7 @@ public class LottoController {
         int manualTicketCount = getManualTicketCount(ticketCount);
         int randomTicketCount = ticketCount - manualTicketCount;
 
-        List<LottoTicket> manualLottoTickets = getManualLottoTickets(manualTicketCount);
+        List<LottoTicket> manualLottoTickets = makeManualLottoTickets(manualTicketCount);
         List<LottoTicket> randomLottoTickets = lottoMachine.makeRandomLottoTickets(
             randomTicketCount);
 
@@ -86,13 +86,13 @@ public class LottoController {
         }
     }
 
-    private List<LottoTicket> getManualLottoTickets(int ticket) {
+    private List<LottoTicket> makeManualLottoTickets(int ticket) {
         try {
             List<String> manualLottoTicketsSource = inputView.getManualLotto(ticket);
             return lottoMachine.makeManualLottoTickets(manualLottoTicketsSource);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getManualLottoTickets(ticket);
+            return makeManualLottoTickets(ticket);
         }
     }
 }
