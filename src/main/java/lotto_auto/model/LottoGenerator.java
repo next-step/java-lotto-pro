@@ -1,8 +1,6 @@
 package lotto_auto.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -21,15 +19,20 @@ public class LottoGenerator {
 
     private static Lotto createLotto() {
         Collections.shuffle(LOTTO_ALL_NUMBERS);
-        return new Lotto(new LottoNumbers(LOTTO_ALL_NUMBERS.subList(0, VALID_SIZE)));
+        return new Lotto(new LottoNumbers(new HashSet<>(LOTTO_ALL_NUMBERS.subList(0, VALID_SIZE))));
     }
 
-    public static Lottos createLottos(int count) {
+    private static Lottos createLottos(int count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i=0; i < count; i++) {
             lottos.add(createLotto());
         }
 
         return new Lottos(lottos);
+    }
+
+    public static Lottos buyLottos(PurchaseInfo info, Lottos manualLottos) {
+        Lottos autoLottos = LottoGenerator.createLottos(info.getAutoLottoCount());
+        return manualLottos.merge(autoLottos);
     }
 }

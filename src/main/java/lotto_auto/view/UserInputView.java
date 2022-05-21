@@ -1,14 +1,26 @@
 package lotto_auto.view;
 
-import java.util.Scanner;
+import lotto_auto.model.*;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class UserInputView {
     private static final Scanner scan = new Scanner(System.in);
-    public static String getUserInput() {
+    public String getUserInput() {
         return scan.nextLine();
     }
-
-    public static void closeUserInput() {
+    public void closeUserInput() {
         scan.close();
+    }
+
+    public String getUserInputMoney() {
+        Output.showMoneyInputNotice();
+        return getUserInput();
+    }
+
+    public String getManualLottoCountUserInput() {
+        Output.showManualLottoCountNotice();
+        return getUserInput();
     }
 }

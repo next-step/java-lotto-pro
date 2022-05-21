@@ -10,9 +10,8 @@ public class LottoNumbers {
     public static final String NOT_MATCHED_NUMBER_SIZE = "[ERROR] 로또 번호는 6개의 숫자가 필요합니다.";
     public static final String EXIST_DUPLICATE_VALUE = "[ERROR] 로또 번호는 중복 숫자가 존재할 수 없습니다.";
 
-    public LottoNumbers(List<LottoNumber> numberList) {
+    public LottoNumbers(Set<LottoNumber> numberList) {
         this.lottoNumberSet = Collections.unmodifiableSet(new HashSet<>(numberList));
-        checkDuplicateNumber(numberList);
         checkNumbersSize();
     }
 
@@ -24,18 +23,6 @@ public class LottoNumbers {
 
     public Set<LottoNumber> getLottoNumberSet() {
         return lottoNumberSet;
-    }
-
-    private void checkDuplicateNumber(List<LottoNumber> numberList) {
-        if (numberList.size() > this.lottoNumberSet.size()) {
-            throw new IllegalArgumentException(EXIST_DUPLICATE_VALUE);
-        }
-    }
-
-    public int countSameLottoNumber(LottoNumbers numbers) {
-        return (int) this.lottoNumberSet
-                .stream()
-                .filter(numbers::isContain).count();
     }
 
     public boolean isContain(LottoNumber number) {
