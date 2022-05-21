@@ -10,8 +10,11 @@ import step3.view.OutputView;
 public class Step3Main {
 
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController(new LottoMachine(new LottoGenerator(), new LottoWinChecker()), new InputView(),
-            new OutputView());
+        LottoController lottoController = new LottoController(
+            new LottoMachine(new LottoGenerator(), new LottoWinChecker()),
+            new InputView(),
+            new OutputView()
+        );
         lottoController.startLotto();
     }
 
