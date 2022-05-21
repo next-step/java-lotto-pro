@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class LottoCountTest {
 
-    @DisplayName("LottoCount는 0 이상이어야 한다.")
+    @DisplayName("LottoCount를 생성한다.")
     @Test
     void create() {
         assertThat(new LottoCount(1)).isEqualTo(new LottoCount(1));
