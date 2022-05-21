@@ -45,14 +45,6 @@ public class LottoTicket {
         return copyLottoTicket.size();
     }
 
-    public List<Integer> matchList(List<LottoTicket> tickets) {
-        List<Integer> matchList = new ArrayList<>();
-        for (LottoTicket ticket : tickets) {
-            matchList.add(match(ticket));
-        }
-        return matchList;
-    }
-
     public List<LottoNumber> getLottoTicket() {
         return new ArrayList<>(lottoTicket);
     }
