@@ -4,18 +4,14 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private static Scanner scanner;
-
-    public InputView() {
-        this.scanner = new Scanner(System.in);
-    }
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public static int getPurchasePrice() {
         System.out.println("구입금액을 입력해 주세요.");
 
         int purchasePrice;
         try {
-            purchasePrice = scanner.nextInt();
+            purchasePrice = Integer.parseInt(SCANNER.nextLine());
         } catch (Exception e) {
             throw new IllegalArgumentException("The purchase price should contain only numbers.");
         }
@@ -25,6 +21,7 @@ public class InputView {
 
     public static String getWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        String result = SCANNER.nextLine();
+        return result;
     }
 }
