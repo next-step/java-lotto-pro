@@ -24,13 +24,7 @@ public class Lotto {
     }
 
     public MatchResult match(Set<LottoNumber> prizeNumbers, LottoNumber bonusNumber) {
-
-        int matchCount = 0;
-        for (LottoNumber prizeNumber : prizeNumbers) {
-            if (lottoNumbers.contains(prizeNumber)) {
-                matchCount++;
-            }
-        }
+        int matchCount = (int) prizeNumbers.stream().filter(prizeNumber -> lottoNumbers.contains(prizeNumber)).count();
         return MatchResult.of(matchCount, lottoNumbers.contains(bonusNumber));
     }
 
