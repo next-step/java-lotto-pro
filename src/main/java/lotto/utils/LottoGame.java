@@ -1,34 +1,27 @@
 package lotto.utils;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
-import lotto.domain.Rank;
-import lotto.domain.TotalLotto;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class LottoGame {
-    public void start() throws IOException {
-        int amount = inputAmount();
+    public void start() {
+        int amount = InputView.printRequestAmount();
         TotalLotto totalLotto = TotalLotto.from(amount);
         OutputView.printQuantity(totalLotto);
-        Map<Rank, Integer> map = winningLotto(totalLotto);
+
+        Map<Rank, Integer> map = calculatorLottoScore(totalLotto);
         OutputView.printLottoStatistic(map);
         double profit = calculatorProfit(map, amount);
         OutputView.printProfit(profit);
     }
 
-    private int inputAmount() {
-        int amount = new InputView().printRequestAmount();
-        return amount;
-    }
-
-    private Map<Rank, Integer> winningLotto(TotalLotto totalLotto) throws IOException {
-        String inputWinning = new InputView().printRequestWinningLotto();
-        Lotto winningLotto = LottoFactory.manualGenerator(inputWinning);
+    private Map<Rank, Integer> calculatorLottoScore(TotalLotto totalLotto) {
+        Lotto lotto = LottoFactory.manualGenerator(InputView.printRequestWinningLotto());
+        LottoNumber lottoNumber = new LottoNumber(InputView.printRequestBonusNumber());
+        WinningLotto winningLotto = new WinningLotto(lotto, lottoNumber);
         Map<Rank, Integer> map = totalLotto.getLottoList().matchLottoStaticToString(winningLotto);
         return map;
     }

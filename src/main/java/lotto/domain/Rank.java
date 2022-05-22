@@ -26,7 +26,11 @@ public enum Rank {
         return this.winningAmount;
     }
 
-    public static Rank valueOf(int matchCount) {
+    public static Rank valueOf(int matchCount, boolean bonusNumber) {
+        if (matchCount==5 && bonusNumber) {
+            return SECOND;
+        }
+
         return Arrays.stream(values())
                 .filter(lottoStatistic -> lottoStatistic.matchCount == matchCount)
                 .findFirst()
@@ -39,6 +43,9 @@ public enum Rank {
 
     public String toString(Integer n) {
         if (n == null) n = 0;
+        if (this.winningAmount == SECOND.winningAmount) {
+            return this.matchCount + "개 일치, 보너스 볼 일치("+ this.winningAmount + ")- " + n +"개";
+        }
         return this.matchCount + "개 일치 (" + this.winningAmount + ")- " + n +"개";
     }
 }

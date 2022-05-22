@@ -19,6 +19,7 @@ public class OutputView {
         System.out.println(FIFTH.toString(map.get(Rank.FIFTH)));
         System.out.println(FOURTH.toString(map.get(Rank.FOURTH)));
         System.out.println(THIRD.toString(map.get(Rank.THIRD)));
+        System.out.println(SECOND.toString(map.get(Rank.SECOND)));
         System.out.println(FIRST.toString(map.get(Rank.FIRST)));
     }
 
