@@ -8,6 +8,6 @@ public class YieldCalculator {
     }
 
     public static double earningsRate(Summary summary, Money money) {
-        return 1.0 * summary.sum() / money.value();
+        return 1.0 * summary.totalPrizeMoney() / money.value();
     }
 }
