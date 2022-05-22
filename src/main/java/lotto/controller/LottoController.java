@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.utils.ExceptionRetryUtil;
 import lotto.utils.ListUtil;
 import lotto.utils.NumberUtil;
 import lotto.view.InputView;
@@ -26,7 +27,7 @@ public class LottoController {
     }
 
     private int purchaseLotto() {
-        return retryThrowInput(() -> {
+        return ExceptionRetryUtil.retryThrowInput(() -> {
             InputView.printInputPurchasePrice();
             String purchasePriceText = InputView.inputPurchasePrice();
 
@@ -53,7 +54,7 @@ public class LottoController {
     private List<Lotto> issueManualLottos() {
         int manualIssueCount = inputManualIssueCount();
 
-        return retryThrowInput(() -> {
+        return ExceptionRetryUtil.retryThrowInput(() -> {
             InputView.printInputManualNumberCount();
             List<Lotto> manualIssueLottos = new ArrayList<>();
             for (int i = 0; i < manualIssueCount; i++) {
@@ -69,7 +70,7 @@ public class LottoController {
     }
 
     private int inputManualIssueCount() {
-        return retryThrowInput(() -> {
+        return ExceptionRetryUtil.retryThrowInput(() -> {
             InputView.printInputManualIssueCount();
 
             return NumberUtil.parseStringToInt(InputView.inputNumber());
@@ -96,18 +97,5 @@ public class LottoController {
         ResultView.printLottoResult(lottoResult);
 
         return lottoResult;
-    }
-
-    private <T> T retryThrowInput(Supplier<T> supplier) {
-        T t = null;
-        do {
-            try {
-                t = supplier.get();
-            } catch (IllegalArgumentException illegalArgumentException) {
-                ResultView.printMessage(illegalArgumentException.getMessage());
-            }
-        } while (t == null);
-
-        return t;
     }
 }
