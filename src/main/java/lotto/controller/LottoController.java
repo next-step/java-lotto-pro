@@ -9,6 +9,7 @@ import lotto.view.ResultView;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoController {
     private final static String LOTTO_NUMBER_TEXT_SPLIT_VALUE = ", ";
@@ -18,7 +19,7 @@ public class LottoController {
         String purchasePriceText = InputView.inputPurchasePrice();
         int purchaseCount = purchaseLotto(purchasePriceText);
 
-        Lottos lottos = issueLottos(new LottoMachine(), purchaseCount);
+        Lottos lottos = issueLottos(purchaseCount);
         Lotto answerLotto = answerLotto();
         LottoNumber bonusLottoNumber = bonusLottoNumber();
 
@@ -34,8 +35,8 @@ public class LottoController {
         return purchaseCount;
     }
 
-    private Lottos issueLottos(LottoMachine LottoMachine, int purchaseCount) {
-        Lottos lottos = new Lottos(LottoMachine, purchaseCount);
+    private Lottos issueLottos(int purchaseCount) {
+        Lottos lottos = LottoMachine.issueAutoLottos(purchaseCount);
         ResultView.printIssuedLottoNumber(lottos);
 
         return lottos;

@@ -21,8 +21,16 @@ public class LottoMachine {
         return LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE_VALUE);
     }
 
-    public Set<Integer> autoIssueLotto() {
+    public static Set<Integer> issueAutoNumber() {
         shuffleNumbers();
         return new HashSet<>(divideNumberList());
+    }
+
+    public static Lottos issueAutoLottos(int purchaseCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < purchaseCount; i++)
+            lottos.add(new Lotto(issueAutoNumber()));
+
+        return new Lottos(lottos);
     }
 }
