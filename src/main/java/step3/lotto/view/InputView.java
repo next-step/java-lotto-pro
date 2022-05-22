@@ -20,7 +20,7 @@ public class InputView {
     }
 
     public static void printPurchaseCompletionAndPublishedLottosGuidMessage(Customer customer) {
-        printPurchaseCompletionGuideMessage(customer.getTryCount());
+        printPurchaseCompletionGuideMessage(customer.getTotalAttemptsCount());
         printLottos(customer.getLottos());
     }
 

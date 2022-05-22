@@ -27,6 +27,10 @@ public class ManualAttemptsCount {
         }
     }
 
+    public int getManualAttemptsCount() {
+        return manualAttemptsCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
