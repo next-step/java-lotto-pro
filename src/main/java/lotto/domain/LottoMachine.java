@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoMachine {
     private final static int LOTTO_NUMBER_SIZE_VALUE = 6;
@@ -26,18 +27,21 @@ public class LottoMachine {
         return new HashSet<>(divideNumberList());
     }
 
-    public static List<Lotto> issueAutoLottos(int purchaseCount) {
+    public static List<Lotto> issueAutoLottos(int autoIssueCount) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < purchaseCount; i++)
+        for (int i = 0; i < autoIssueCount; i++)
             lottos.add(new Lotto(issueAutoNumber()));
 
         return lottos;
     }
 
     public static Lottos issueLottos(List<Lotto> manualLottos, int purchaseCount) {
-        List<Lotto> issueLottos = manualLottos;
-        List<Lotto> autoIssueLottos = issueAutoLottos(purchaseCount);
-        manualLottos.addAll(autoIssueLottos);
+        int autoIssueCount = purchaseCount - manualLottos.size();
+        List<Lotto> autoIssueLottos = issueAutoLottos(autoIssueCount);
+
+        List<Lotto> issueLottos = Stream.of(manualLottos, autoIssueLottos)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
 
         return new Lottos(issueLottos);
     }
