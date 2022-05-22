@@ -6,7 +6,6 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-        Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 

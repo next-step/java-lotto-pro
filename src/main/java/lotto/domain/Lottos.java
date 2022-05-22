@@ -3,25 +3,11 @@ package lotto.domain;
 import java.util.*;
 
 public class Lottos {
+
     private List<Lotto> lottoList;
 
-    public Lottos() {
-    }
-
-    public void autoGenerator(int count) {
-        List<Lotto> list = new ArrayList<>();
-        for (int i=0; i<count; i++) {
-            list.add(LottoFactory.autoGenerator());
-        }
-        this.lottoList = list;
-    }
-
-    public void manualGenerator(String[] input) {
-        List<Lotto> list = new ArrayList<>();
-        for (String s : input) {
-            list.add(LottoFactory.manualGenerator(s));
-        }
-        this.lottoList = list;
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
     }
 
     public List<Lotto> getLottoList() {

@@ -13,4 +13,5 @@ public class Message {
 
     // Error Message
     public static final String INPUT_AMOUNT_ERROR = "잘못된 금액을 입력하였습니다.";
+    public static final String INPUT_LOTTO_ERROR = "잘못된 로또 번호를 입력하였습니다.";
 }

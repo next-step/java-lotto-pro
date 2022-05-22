@@ -1,11 +1,10 @@
 package lotto.domain;
 
-import lotto.view.OutputView;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.constants.Message.INPUT_LOTTO_ERROR;
 import static lotto.domain.LottoNumber.LOTTO_MAX_NUMBER;
 import static lotto.domain.LottoNumber.LOTTO_MIN_NUMBER;
 
@@ -15,13 +14,15 @@ public class LottoFactory {
             .collect(Collectors.toList());
     private static final int LOTTO_NUMBERS_COUNT = 6;
 
-    private static List<LottoNumber> lottoNumberList;
+    private LottoFactory() {
+    }
 
     public static Lotto autoGenerator() {
         Collections.shuffle(LOTTO_NUMBERS);
         return new Lotto(
                 LOTTO_NUMBERS.stream()
                 .limit(LOTTO_NUMBERS_COUNT)
+                .sorted()
                 .collect(Collectors.toList())
         );
     }
@@ -33,6 +34,7 @@ public class LottoFactory {
         for (String s : inputArr) {
             list.add(new LottoNumber(s));
         }
+        Collections.sort(list);
         return new Lotto(list);
     }
 
@@ -42,8 +44,7 @@ public class LottoFactory {
             set.add(s);
         }
         if (set.size() != 6) {
-            OutputView.printErrorMessage();
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INPUT_LOTTO_ERROR);
         }
     }
 }

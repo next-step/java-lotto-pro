@@ -9,9 +9,7 @@ public class TotalLotto {
     public static TotalLotto from(int amount) {
         TotalLotto totalLotto = new TotalLotto();
         totalLotto.money = Money.from(amount);
-
-        totalLotto.lottoList = new Lottos();
-        totalLotto.lottoList.autoGenerator(totalLotto.money.getCount());
+        totalLotto.lottoList = LottoShop.generateLottos(totalLotto.money.getCount());
         return totalLotto;
     }
 
