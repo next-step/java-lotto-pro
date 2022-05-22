@@ -20,26 +20,25 @@ import step3.lotto.view.InputView;
 public class InputReader {
 
     public static final String WINNING_LOTTO_NUMBERS_DELIMITER = ", ";
-    private BufferedReader br;
+    private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public int inputPrice() throws IOException {
+    public static int inputPrice() throws IOException {
         InputView.printInputPriceGuideMessage();
-        br = new BufferedReader(new InputStreamReader(System.in));
         return Integer.parseInt(br.readLine());
     }
 
-    public Winnings inputWinnings() throws IOException {
+    public static Winnings inputWinnings() throws IOException {
         Lotto winningsLotto = inputLastWinningsLotto();
         LottoNumber bonusNumber = inputBonusNumber();
         return Winnings.of(winningsLotto, bonusNumber);
     }
 
-    private LottoNumber inputBonusNumber() throws IOException {
+    private static LottoNumber inputBonusNumber() throws IOException {
         printInputBonusNumberGuideMessage();
         return LottoNumber.of(Integer.parseInt(br.readLine()));
     }
 
-    public Lotto inputLastWinningsLotto() throws IOException {
+    public static Lotto inputLastWinningsLotto() throws IOException {
         InputView.printInputLastWinningLottoGuideMessage();
 
         StringTokenizer st = new StringTokenizer(br.readLine());

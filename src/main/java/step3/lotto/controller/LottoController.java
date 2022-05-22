@@ -16,10 +16,9 @@ import step3.lotto.view.reader.InputReader;
 public class LottoController {
 
     public void run() throws IOException {
-        InputReader inputReader = new InputReader();
-        Customer customer = new Customer(inputReader.inputPrice());
+        Customer customer = new Customer(InputReader.inputPrice());
         InputView.printPurchaseCompletionAndPublishedLottosGuidMessage(customer);
-        Winnings winnings = inputReader.inputWinnings();
+        Winnings winnings = InputReader.inputWinnings();
 
         LottoService lottoService = new LottoService();
         MatchStatistic matchStatistic = lottoService.play(customer, winnings);
