@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {
-    Rank rank;
 
     @ParameterizedTest
     @DisplayName("로또 등수별 당첨금액 확인")

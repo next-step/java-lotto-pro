@@ -1,39 +1,51 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final String PRINT_FORM = "[%s]";
+    private static final String PRINT_DELIMITER = ", ";
     private static final int START_INDEX = 0;
     private static final int END_INDEX = 6;
-    private static final String PRINT_FORM = "%s";
-    private static final String PRINT_DELIMITER = ", ";
 
-    private final List<Integer> numbers;
+    private final List<LottoNo> pickNumbers;
 
     public Lotto() {
-        numbers = createNumbers();
+        pickNumbers = createNumbers();
     }
 
     public Lotto(Integer... customNumbers) {
-        numbers = Arrays.asList(customNumbers);
+        pickNumbers = LottoNo.toLottoNoList(Arrays.asList(customNumbers));
     }
 
-    public List<Integer> seeNumbers() {
-        return this.numbers;
+    public Lotto(String customNumbers) {
+        pickNumbers = Arrays.stream(customNumbers.split(","))
+                .map(String::trim)
+                .map(v -> new LottoNo(Integer.parseInt(v))).collect(Collectors.toList());
+    }
+
+    public List<LottoNo> seeNumbers() {
+        return this.pickNumbers;
+    }
+
+    public boolean contain(int number) {
+        return this.pickNumbers.stream().anyMatch(lottoNo -> lottoNo.value() == number);
     }
 
     public String printText() {
-        return String.format(PRINT_FORM, String.join(PRINT_DELIMITER, this.numbers.toString()));
+        String joinNumber = this.pickNumbers.stream()
+                .map(LottoNo::value)
+                .map(Object::toString)
+                .collect(Collectors.joining(PRINT_DELIMITER));
+        return String.format(PRINT_FORM, joinNumber);
     }
 
-    private List<Integer> createNumbers() {
+    private List<LottoNo> createNumbers() {
         List<Integer> preparedNumbers = LottoNumbers.PREPARED_NUMBERS;
         Collections.shuffle(preparedNumbers);
-        List<Integer> resultNumbers = new ArrayList<>(preparedNumbers.subList(START_INDEX, END_INDEX));
-        Collections.sort(resultNumbers);
-        return resultNumbers;
+        return LottoNo.toLottoNoList(preparedNumbers.subList(START_INDEX, END_INDEX));
     }
 }

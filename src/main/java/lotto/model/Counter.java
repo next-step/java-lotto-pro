@@ -2,10 +2,10 @@ package lotto.model;
 
 import lotto.Config;
 
-public class Cashier {
+public class Counter {
     private final int receiveAmount;
 
-    public Cashier(int money) {
+    public Counter(int money) {
         this.receiveAmount = checkAmount(money);
     }
 

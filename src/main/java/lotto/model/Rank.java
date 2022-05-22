@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum Rank {
     FIFTH(3, 5000),
