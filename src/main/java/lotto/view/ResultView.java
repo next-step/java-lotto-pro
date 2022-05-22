@@ -9,22 +9,23 @@ import lotto.model.Money;
 
 public class ResultView {
     private static final String WINNING_STATISTICS_YIELD = "총 수익률은 %s입니다.";
-    private static final String LOTTO_PURCHASE_SIZE_RESULT = "%s개를 구매했습니다.";
+    private static final String LOTTO_PURCHASE_COUNT_RESULT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     private static final String WINNING_STATISTICS_SUBJECT = "당첨 통계";
     private static final String WINNING_STATISTICS_LINE = "---------";
     private static final String WINNING_STATISTICS_DETAIL = "%s (%s원)- %s개";
     private static final String WINNING_STATISTICS_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String EXCEPTION_MESSAGE = "예외가 발생했습니다. : %s";
 
-    public static void printPurchasedLottos(Lottos lottos) {
-        printLottosSize(lottos.size());
+    public static void printPurchasedLottos(Lottos lottos, int manualLottoCount) {
+        printLottosCount(manualLottoCount, lottos.size() - manualLottoCount);
         for (Lotto lotto : lottos.readOnlyLottos()) {
             System.out.println(lotto);
         }
         printNewLine();
     }
 
-    private static void printLottosSize(int size) {
-        System.out.printf((LOTTO_PURCHASE_SIZE_RESULT) + "%n", size);
+    private static void printLottosCount(int manualLottoCount, int randomLottoCount) {
+        System.out.printf((LOTTO_PURCHASE_COUNT_RESULT) + "%n", manualLottoCount, randomLottoCount);
     }
 
     private static void printNewLine() {
@@ -66,5 +67,9 @@ public class ResultView {
 
     private static boolean isNotMiss(LottoRanking lottoRanking) {
         return !LottoRanking.MISS.equals(lottoRanking);
+    }
+
+    public static void printException(String message) {
+        System.out.printf((EXCEPTION_MESSAGE) + "%n", message);
     }
 }

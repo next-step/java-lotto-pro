@@ -65,7 +65,7 @@ class MoneyTest {
     @DisplayName("금액을 0으로 나누면 IllegalArgumentException 발생.")
     @ParameterizedTest(name = "금액{0}을 0으로 나누면 IllegalArgumentException 발생.")
     @CsvSource(value = {"1000:0", "0:0"}, delimiter = ':')
-    void divideBy(int input, int other) {
+    void divideByZero(int input, int other) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Money.valueOf(input).divideBy(Money.valueOf(other)))
                 .withMessage("0원으로 나눌 수 없습니다.");

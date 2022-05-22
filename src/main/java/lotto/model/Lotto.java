@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -22,23 +21,18 @@ public class Lotto {
         return new Lotto(new HashSet<>(lottoNumberGenerator.generate()));
     }
 
-    public LottoRanking lottoRanking(Lotto winningLotto, LottoNumber bonusLottoNumber) {
-        winningLotto.validateNewLottoNumber(bonusLottoNumber);
+    public LottoRanking lottoRanking(WinningLotto lotto) {
         int countOfMatch = COUNT_OF_MATCH_ZERO;
         for (LottoNumber lottoNumber : this.lotto) {
-            countOfMatch += countIfContainLottoNumber(winningLotto, lottoNumber);
+            countOfMatch += countIfContainLottoNumber(lotto.winningLotto(), lottoNumber);
         }
         validateCountOfMatch(countOfMatch);
-        final boolean isBonusMatched = containLottoNumber(bonusLottoNumber);
+        final boolean isBonusMatched = containLottoNumber(lotto.bonusLottoNumber());
         final int finalCountOfMatch = countOfMatch;
-        return Arrays.stream(LottoRanking.values())
-                .filter(ranking -> ranking.predicateWithCountOfMatchAndIsBonusMatched()
-                        .test(finalCountOfMatch, isBonusMatched))
-                .findFirst()
-                .orElse(LottoRanking.MISS);
+        return LottoRanking.findLottoRankingByCountOfMatchAndBonusMatched(finalCountOfMatch, isBonusMatched);
     }
 
-    public static void validateCountOfMatch(int countOfMatch) {
+    private static void validateCountOfMatch(int countOfMatch) {
         if (isNotLottoCountOfMatchRange(countOfMatch)) {
             throw new IllegalArgumentException("로또번호 일치 갯수가 유효하지 않습니다.");
         }
@@ -55,14 +49,8 @@ public class Lotto {
         return COUNT_OF_MATCH_ZERO;
     }
 
-    private boolean containLottoNumber(LottoNumber lottoNumber) {
+    public boolean containLottoNumber(LottoNumber lottoNumber) {
         return this.lotto.contains(lottoNumber);
-    }
-
-    public void validateNewLottoNumber(LottoNumber lottoNumber) {
-        if (containLottoNumber(lottoNumber)) {
-            throw new IllegalArgumentException("중복되는 로또 번호 입니다.");
-        }
     }
 
     private void validateLotto(Set<LottoNumber> lotto) {

@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.function.BiPredicate;
 
 public enum LottoRanking {
@@ -24,9 +25,19 @@ public enum LottoRanking {
         this.predicateWithCountOfMatchAndIsBonusMatched = predicateWithCountOfMatchAndIsBonusMatched;
     }
 
+    public static LottoRanking findLottoRankingByCountOfMatchAndBonusMatched(int countOfMatch, boolean isBonusMatched) {
+        return Arrays.stream(LottoRanking.values())
+                .filter(ranking -> ranking.predicateWithCountOfMatchAndIsBonusMatched()
+                        .test(countOfMatch, isBonusMatched))
+                .findFirst()
+                .orElse(LottoRanking.MISS);
+    }
+
     public BiPredicate<Integer, Boolean> predicateWithCountOfMatchAndIsBonusMatched() {
         return predicateWithCountOfMatchAndIsBonusMatched;
     }
+
+
 
     public Money money() {
         return this.money;
