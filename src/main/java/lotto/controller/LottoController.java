@@ -9,14 +9,13 @@ import lotto.view.ResultView;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class LottoController {
     private final static String LOTTO_NUMBER_TEXT_SPLIT_VALUE = ", ";
 
     public void play() {
-        InputView.printInputPurchasePrice();
-        String purchasePriceText = InputView.inputPurchasePrice();
-        int purchaseCount = purchaseLotto(purchasePriceText);
+        int purchaseCount = purchaseLotto();
 
         Lottos lottos = issueLottos(purchaseCount);
         Lotto answerLotto = answerLotto();
@@ -26,12 +25,17 @@ public class LottoController {
         showLottoResult(lottos, lottoWinning);
     }
 
-    private int purchaseLotto(String purchasePriceText) {
-        LottoPurchase lottoPurchase = new LottoPurchase(purchasePriceText);
-        int purchaseCount = lottoPurchase.purchaseCount();
-        ResultView.printPurchaseLottoCount(purchaseCount);
+    private int purchaseLotto() {
+        return retryThrowInput(() -> {
+            InputView.printInputPurchasePrice();
+            String purchasePriceText = InputView.inputPurchasePrice();
 
-        return purchaseCount;
+            LottoPurchase lottoPurchase = new LottoPurchase(purchasePriceText);
+            int purchaseCount = lottoPurchase.purchaseCount();
+            ResultView.printPurchaseLottoCount(purchaseCount);
+
+            return purchaseCount;
+        });
     }
 
     private Lottos issueLottos(int purchaseCount) {
@@ -45,19 +49,29 @@ public class LottoController {
     }
 
     private List<Lotto> issueManualLottos() {
-        InputView.printInputManualIssueCount();
-        int manualIssueCount = NumberUtil.parseStringToInt(InputView.inputNumber());
+        int manualIssueCount = inputManualIssueCount();
 
-        InputView.printInputManualNumberCount();
-        List<Lotto> manualIssueLottos = new ArrayList<>();
-        for (int i = 0; i < manualIssueCount; i++) {
-            String lottoNumbersText = InputView.inputLottoNumber();
+        return retryThrowInput(() -> {
+            InputView.printInputManualNumberCount();
+            List<Lotto> manualIssueLottos = new ArrayList<>();
+            for (int i = 0; i < manualIssueCount; i++) {
+                String lottoNumbersText = InputView.inputLottoNumber();
 
-            List<Integer> lastWeekLottoNumbers = ListUtil.stringToArrayInteger(lottoNumbersText, LOTTO_NUMBER_TEXT_SPLIT_VALUE);
-            manualIssueLottos.add(new Lotto(new HashSet<>(lastWeekLottoNumbers)));
-        }
+                List<Integer> lastWeekLottoNumbers = ListUtil.stringToArrayInteger(lottoNumbersText, LOTTO_NUMBER_TEXT_SPLIT_VALUE);
+                manualIssueLottos.add(new Lotto(new HashSet<>(lastWeekLottoNumbers)));
+            }
 
-        return manualIssueLottos;
+            return manualIssueLottos;
+        });
+
+    }
+
+    private int inputManualIssueCount() {
+        return retryThrowInput(() -> {
+            InputView.printInputManualIssueCount();
+
+            return NumberUtil.parseStringToInt(InputView.inputNumber());
+        });
     }
 
     private Lotto answerLotto() {
@@ -80,5 +94,18 @@ public class LottoController {
         ResultView.printLottoResult(lottoResult);
 
         return lottoResult;
+    }
+
+    private <T> T retryThrowInput(Supplier<T> supplier) {
+        T t = null;
+        do {
+            try {
+                t = supplier.get();
+            } catch (IllegalArgumentException illegalArgumentException) {
+                ResultView.printMessage(illegalArgumentException.getMessage());
+            }
+        } while (t == null);
+
+        return t;
     }
 }

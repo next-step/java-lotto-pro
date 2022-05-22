@@ -88,4 +88,8 @@ public class ResultView {
     public static void printLottoPurchaseComplete(int manualIssuedCount, int autoIssuedCount) {
         System.out.printf(LOTTO_PURCHASE_COMPLETE_MESSAGE, manualIssuedCount, autoIssuedCount);
     }
+
+    public static void printMessage(String message) {
+        System.out.println(message);
+    }
 }
