@@ -15,6 +15,7 @@ public class Application {
 
     private void startGame() {
         int purchasePrice = InputView.getPurchasePrice();
+        int bonusBallNumber = InputView.getBonusBallNumber();
         NumberGenerator numberGenerator = new LottoNumberGenerator();
         LottoGame game = new LottoGame(purchasePrice, numberGenerator);
         ResultView.printTicketCount(game.getTicketCount());

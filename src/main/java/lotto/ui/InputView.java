@@ -24,4 +24,17 @@ public class InputView {
         String result = SCANNER.nextLine();
         return result;
     }
+
+    public static int getBonusBallNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        int bonusBallNumber;
+        try {
+            bonusBallNumber = Integer.parseInt(SCANNER.nextLine());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Bonus ball number should be a number.");
+        }
+
+        return bonusBallNumber;
+    }
 }
