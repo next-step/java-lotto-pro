@@ -26,9 +26,9 @@ public class RankCount {
     private Prize totalPrize() {
         Prize totalPrize = Prize.of(0);
         for (Rank rank : rankCount.keySet()) {
+            Prize prizeOfRank = rank.getPrize();
             int count = rankCount.get(rank);
-            Prize prizeOfRank = rank.getPrizeWithCount(count);
-            totalPrize = totalPrize.add(prizeOfRank);
+            totalPrize = totalPrize.add(prizeOfRank.multiply(count));
         }
         return totalPrize;
     }
