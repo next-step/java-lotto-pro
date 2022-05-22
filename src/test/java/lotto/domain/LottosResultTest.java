@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottosResultTest {
 
@@ -16,7 +15,7 @@ class LottosResultTest {
     @Test
     void lottosResultTest01() {
         int count = 5;
-        List<LottoWinner> winnerList = Arrays.asList(LottoWinner.FORTH);
+        List<LottoWinner> winnerList = Arrays.asList(LottoWinner.FIFTH);
         LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts(winnerList);
 
         LottosResult lottosResult = new LottosResult(count * LottoGameConfig.PURCHASE_MONEY, lottosWinnerCounts);
@@ -28,13 +27,13 @@ class LottosResultTest {
     @Test
     void lottosResultTest02() {
         int count = 4;
-        List<LottoWinner> winnerList = Arrays.asList(LottoWinner.FIRST, LottoWinner.SECOND, LottoWinner.THIRD, LottoWinner.FORTH);
+        List<LottoWinner> winnerList = Arrays.asList(LottoWinner.FIRST, LottoWinner.THIRD, LottoWinner.FOURTH, LottoWinner.FIFTH);
         LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts(winnerList);
 
         float expectedRatio = (LottoWinner.FIRST.getWinnerMoney() +
-                LottoWinner.SECOND.getWinnerMoney() +
                 LottoWinner.THIRD.getWinnerMoney() +
-                LottoWinner.FORTH.getWinnerMoney()) / (float) (count * LottoGameConfig.PURCHASE_MONEY);
+                LottoWinner.FOURTH.getWinnerMoney() +
+                LottoWinner.FIFTH.getWinnerMoney()) / (float) (count * LottoGameConfig.PURCHASE_MONEY);
 
         LottosResult lottosResult = new LottosResult(count * LottoGameConfig.PURCHASE_MONEY, lottosWinnerCounts);
         assertThat(lottosResult.ratio())

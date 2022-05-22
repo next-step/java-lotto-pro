@@ -23,14 +23,16 @@ class LottoTest {
     @Test
     void judgeTest() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoWinner first = lotto.judge(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoWinner second = lotto.judge(Arrays.asList(1, 2, 3, 4, 5, 16));
-        LottoWinner third = lotto.judge(Arrays.asList(1, 2, 3, 4, 15, 16));
-        LottoWinner forth = lotto.judge(Arrays.asList(1, 2, 3, 14, 15, 16));
+        LottoWinner first = lotto.judge(new LottoWinnerNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 0));
+        LottoWinner second = lotto.judge(new LottoWinnerNumbers(Arrays.asList(1, 2, 3, 4, 5, 16), 6));
+        LottoWinner third = lotto.judge(new LottoWinnerNumbers(Arrays.asList(1, 2, 3, 4, 5, 16), 0));
+        LottoWinner forth = lotto.judge(new LottoWinnerNumbers(Arrays.asList(1, 2, 3, 4, 15, 16), 0));
+        LottoWinner fifth = lotto.judge(new LottoWinnerNumbers(Arrays.asList(1, 2, 3, 14, 15, 16), 0));
 
         assertThat(first).isEqualTo(LottoWinner.FIRST);
         assertThat(second).isEqualTo(LottoWinner.SECOND);
         assertThat(third).isEqualTo(LottoWinner.THIRD);
-        assertThat(forth).isEqualTo(LottoWinner.FORTH);
+        assertThat(forth).isEqualTo(LottoWinner.FOURTH);
+        assertThat(fifth).isEqualTo(LottoWinner.FIFTH);
     }
 }

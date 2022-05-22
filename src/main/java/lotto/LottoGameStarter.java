@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoWinner;
-import lotto.domain.Lottos;
-import lotto.domain.LottosResult;
-import lotto.domain.LottosWinnerCounts;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -21,16 +18,16 @@ public class LottoGameStarter {
         Lottos lottos = purchaseLottos(gameMoney);
         List<Integer> winnerNumber = inputWinnerNumbers();
         Integer bonusNumber = inputBonusNumber();
-        List<LottoWinner> lottoWinners = calculateLottoResults(lottos, winnerNumber);
+        List<LottoWinner> lottoWinners = calculateLottoResults(lottos, new LottoWinnerNumbers(winnerNumber, bonusNumber));
         LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts(lottoWinners);
         LottosResult lottosResult = new LottosResult(gameMoney, lottosWinnerCounts);
         ResultView.printLottoResults(lottosWinnerCounts, lottosResult);
     }
 
-    private List<LottoWinner> calculateLottoResults(Lottos lottos, List<Integer> winnerNumber) {
+    private List<LottoWinner> calculateLottoResults(Lottos lottos, LottoWinnerNumbers lottoWinnerNumbers) {
         List<LottoWinner> lottoResults = new ArrayList<>();
         for (int i = 0; i < lottos.gameCount(); i++) {
-            LottoWinner judge = lottos.getLotto(i).judge(winnerNumber);
+            LottoWinner judge = lottos.getLotto(i).judge(lottoWinnerNumbers);
             lottoResults.add(judge);
         }
         return lottoResults;

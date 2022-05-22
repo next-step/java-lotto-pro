@@ -20,7 +20,8 @@ public class ResultView {
 
     public static void printLottoResults(LottosWinnerCounts lottosWinnerCounts, LottosResult lottosResult) {
         ResultView.printResultPrefix();
-        ResultView.printLottoWinnerResult(LottoWinner.FORTH, lottosWinnerCounts);
+        ResultView.printLottoWinnerResult(LottoWinner.FIFTH, lottosWinnerCounts);
+        ResultView.printLottoWinnerResult(LottoWinner.FOURTH, lottosWinnerCounts);
         ResultView.printLottoWinnerResult(LottoWinner.THIRD, lottosWinnerCounts);
         ResultView.printLottoWinnerResult(LottoWinner.SECOND, lottosWinnerCounts);
         ResultView.printLottoWinnerResult(LottoWinner.FIRST, lottosWinnerCounts);

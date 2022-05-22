@@ -16,12 +16,18 @@ public class Lotto {
         return numbers.get(index);
     }
 
-    public LottoWinner judge(List<Integer> winnerNumbers) {
+    public LottoWinner judge(LottoWinnerNumbers lottoWinnerNumbers) {
         int rightCount = 0;
-        for (Integer winnerNumber : winnerNumbers) {
+        for (Integer winnerNumber : lottoWinnerNumbers.getWinnerNumbers()) {
             rightCount += returnOneIfContains(winnerNumber);
         }
-        return LottoWinner.findLottoWinnerByRightCount(rightCount);
+
+        boolean matchBonus = isMatchBonusBall(lottoWinnerNumbers.getBonusBall());
+        return LottoWinner.findLottoWinnerByRightCount(rightCount, matchBonus);
+    }
+
+    private boolean isMatchBonusBall(Integer bonusBall) {
+        return numbers.contains(bonusBall);
     }
 
     private int returnOneIfContains(Integer winnerNumber) {
