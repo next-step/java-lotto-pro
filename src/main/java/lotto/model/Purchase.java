@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.generator.AutoLottoNumbersGenerator;
+import lotto.generator.LottoNumbersGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +20,10 @@ public class Purchase {
         return new Purchase(purchaseAmount, count);
     }
 
-    public Lottos createLottos() {
+    public Lottos createLottos(LottoNumbersGenerator lottoNumbersGenerator) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoNumbers.add(LottoNumbers.createLottoNumbers(new AutoLottoNumbersGenerator()));
+            lottoNumbers.add(LottoNumbers.createLottoNumbers(lottoNumbersGenerator));
         }
         return Lottos.from(lottoNumbers);
     }
