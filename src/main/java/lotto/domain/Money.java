@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.view.OutputView;
+import static lotto.constants.Message.INPUT_AMOUNT_ERROR;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;
@@ -9,24 +9,26 @@ public class Money {
     private int count;
 
     public Money(int amount) {
+        validAmount(amount);
+        validCount(amount);
         this.amount = amount;
-        this.count = isValidCount(amount);
+        this.count = amount/LOTTO_PRICE;
     }
 
     public static Money from(int amount) {
         return new Money(amount);
     }
 
-    private int isValidCount(int amount) {
+    private void validAmount(int amount) {
         if (amount < 0) {
-            OutputView.printErrorMessage();
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INPUT_AMOUNT_ERROR);
         }
+    }
+
+    private void validCount(int amount) {
         if (amount % LOTTO_PRICE > 0) {
-            OutputView.printErrorMessage();
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INPUT_AMOUNT_ERROR);
         }
-        return amount/LOTTO_PRICE;
     }
 
     public int getCount() {
