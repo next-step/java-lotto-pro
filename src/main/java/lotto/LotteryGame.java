@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.*;
+import lotto.model.Number;
 import lotto.service.LotteryClerk;
 import lotto.service.LotteryStore;
 import lotto.service.LotterySummary;
@@ -11,9 +12,10 @@ import lotto.view.Message;
 public class LotteryGame {
     public static void main(String[] args) {
         Money money = readMoney();
-        Lotteries lotteries = buyLotteries(money);
-        Lottery winning = readLastWeeksWinningNumbers();
-        printSummary(money, winning, lotteries);
+        Lotteries purchase = buyLotteries(money);
+        Lottery numbers = readLastWeeksWinningNumbers();
+        Winning details = readWinningDetails(numbers);
+        printSummary(money, details, purchase);
     }
 
     private static Lotteries buyLotteries(Money money) {
@@ -62,10 +64,28 @@ public class LotteryGame {
         }
     }
 
-    private static void printSummary(Money money, Lottery winning, Lotteries lotteries) {
+    private static Winning readWinningDetails(Lottery numbers) {
+        Number bonus = readBonusBallNumber();
+        try {
+            return new Winning(numbers, bonus);
+        } catch (IllegalArgumentException ignored) {
+            return readWinningDetails(numbers);
+        }
+    }
+
+    private static Number readBonusBallNumber() {
+        try {
+            Message.printEnterBonusBallNumber();
+            return Console.readBonusBallNumber();
+        } catch (IllegalArgumentException ignored) {
+            return readBonusBallNumber();
+        }
+    }
+
+    private static void printSummary(Money money, Winning details, Lotteries purchase) {
         printWinningStatistics();
         printDottedLine();
-        Summary summary = createWinningDetails(winning, lotteries);
+        Summary summary = createDetails(details, purchase);
         printLotteriesResult(summary);
         printLotteriesEarningsRate(summary, money);
     }
@@ -78,14 +98,12 @@ public class LotteryGame {
         Message.printDottedLine(9);
     }
 
-    private static Summary createWinningDetails(Lottery winning, Lotteries lotteries) {
-        return LotterySummary.createWinningDetails(winning, lotteries);
+    private static Summary createDetails(Winning details, Lotteries purchase) {
+        return LotterySummary.createDetails(details, purchase);
     }
 
     private static void printLotteriesResult(Summary summary) {
-        for (Result result : summary.list()) {
-            Message.printLotteriesResult(result);
-        }
+        Message.printLotteriesResult(summary);
     }
 
     private static void printLotteriesEarningsRate(Summary summary, Money money) {
