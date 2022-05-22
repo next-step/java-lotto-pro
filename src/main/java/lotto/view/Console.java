@@ -53,4 +53,8 @@ public class Console {
     private static String[] split(String input) {
         return input.split(",");
     }
+
+    public static Number readBonusBallNumber() {
+        return new Number(readLine());
+    }
 }
