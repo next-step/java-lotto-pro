@@ -71,5 +71,12 @@ public enum LottoRank {
 
         return true;
     }
+
+    public boolean hasPrize() {
+        if (prize > NONE.prize) {
+            return true;
+        }
+        return false;
+    }
 }
 
