@@ -40,7 +40,7 @@ public class Lottos {
         StringBuilder builder = new StringBuilder();
 
         for (Lotto lotto : lottos) {
-            builder.append(lotto.sortedLottoNumbers().toString() + "\n");
+            builder.append(lotto.sortLottoNumbers().toString() + "\n");
         }
         return builder.toString();
     }

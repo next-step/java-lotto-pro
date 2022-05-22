@@ -45,7 +45,7 @@ public class Lotto {
         return nonDuplicatedNumbers.size() != SIZE;
     }
 
-    public List<LottoNumber> sortedLottoNumbers() {
+    public List<LottoNumber> sortLottoNumbers() {
         List<LottoNumber> sortedNumbers = new ArrayList<>(this.lottoNumbers);
         Collections.sort(sortedNumbers);
         return Collections.unmodifiableList(sortedNumbers);

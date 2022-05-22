@@ -4,15 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
     private Set<LottoNumber> prizeNumbers;
@@ -55,7 +52,7 @@ class LottoTest {
     @Test
     void 정렬된_로또_번호_반환() {
         Lotto lotto = createLotto(new int[]{3, 4, 1, 2, 5, 6});
-        assertThat(lotto.sortedLottoNumbers()).containsExactly(getLottoNumbers(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.sortLottoNumbers()).containsExactly(getLottoNumbers(1, 2, 3, 4, 5, 6));
     }
 
     @Test
