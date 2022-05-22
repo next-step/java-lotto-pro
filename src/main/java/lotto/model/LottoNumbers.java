@@ -3,6 +3,7 @@ package lotto.model;
 import lotto.generator.LottoNumbersGenerator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
@@ -13,7 +14,8 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers createLottoNumbers(LottoNumbersGenerator lottoNumbersGenerator) {
-        return new LottoNumbers(lottoNumbersGenerator.drawNumbers());
+        List<LottoNumber> lottoNumbers = Collections.unmodifiableList(lottoNumbersGenerator.drawNumbers());
+        return new LottoNumbers(lottoNumbers);
     }
 
     public int matchCount(LottoNumbers winningNumbers) {
