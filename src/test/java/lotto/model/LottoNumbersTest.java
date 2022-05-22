@@ -9,6 +9,7 @@ import static lotto.model.LottoNumbers.createLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoNumbersTest {
+
     @Test
     @DisplayName("당첨 번호와 일치하는 개수를 카운트 한다.")
     void matchCount_일치_카운트() {
@@ -29,4 +30,5 @@ class LottoNumbersTest {
         assertThat(winningNumbers.toString())
                 .isEqualTo("[10, 4, 1, 23, 25, 45]");
     }
+
 }

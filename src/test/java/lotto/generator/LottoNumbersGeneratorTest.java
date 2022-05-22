@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumbersGeneratorTest {
+
     @ParameterizedTest
     @DisplayName("로또 번호 생성을 확인한다.")
     @ValueSource(strings = {"10,4,1,23,20,45", "13,4,1,33,23,15"})
@@ -37,4 +38,5 @@ class LottoNumbersGeneratorTest {
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 로또 번호는 %d개 입력해 주세요!", LOTTO_PICK_COUNT);
     }
+
 }

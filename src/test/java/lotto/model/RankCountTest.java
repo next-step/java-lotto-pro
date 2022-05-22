@@ -44,4 +44,5 @@ class RankCountTest {
                 .contains("5개 일치 (1500000원)- 3개")
                 .contains("6개 일치 (2000000000원)- 1개");
     }
+
 }

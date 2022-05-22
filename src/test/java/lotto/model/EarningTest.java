@@ -20,4 +20,5 @@ class EarningTest {
         assertThat(earningRate.getEarningRate())
                 .isCloseTo(BigDecimal.valueOf(0.35), Percentage.withPercentage(100));
     }
+
 }

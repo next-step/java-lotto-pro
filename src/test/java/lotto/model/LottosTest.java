@@ -53,4 +53,5 @@ class LottosTest {
         assertThat(rankCount.getCount(rank))
                 .isEqualTo(expected);
     }
+
 }
