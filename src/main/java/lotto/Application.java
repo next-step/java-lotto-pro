@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoNumberGenerator;
-import lotto.domain.NumberGenerator;
-import lotto.domain.WinnerTicket;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -15,7 +12,6 @@ public class Application {
 
     private void startGame() {
         int purchasePrice = InputView.getPurchasePrice();
-        int bonusBallNumber = InputView.getBonusBallNumber();
         NumberGenerator numberGenerator = new LottoNumberGenerator();
         LottoGame game = new LottoGame(purchasePrice, numberGenerator);
         ResultView.printTicketCount(game.getTicketCount());
@@ -23,7 +19,8 @@ public class Application {
 
         System.out.println();
         String winnerNumbers = InputView.getWinnerNumbers();
-        game.generateGameResult(new WinnerTicket(winnerNumbers));
+        int bonusBallNumber = InputView.getBonusBallNumber();
+        game.generateGameResult(new WinnerTicket(winnerNumbers, new LottoNumber(bonusBallNumber)));
 
         System.out.println();
         game.printGameResult();

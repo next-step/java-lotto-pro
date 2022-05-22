@@ -63,7 +63,7 @@ public class LottoGame {
         return this.purchasePrice / TICKET_UNIT_PRICE;
     }
 
-    public Map<Integer, Integer> getScore() {
+    public Map<Rank, Integer> getScore() {
         return lottoResult.getScore();
     }
 
@@ -73,9 +73,9 @@ public class LottoGame {
 
     private void calculateEarningRate() {
         long totalEarning = 0;
-        Map<Integer, Integer> scoreMap = lottoResult.getScore();
-        for (Map.Entry<Integer, Integer> entry : scoreMap.entrySet()) {
-            totalEarning += (long) Score.getPrizeBySameNumberCount(entry.getKey()) * entry.getValue();
+        Map<Rank, Integer> scoreMap = lottoResult.getScore();
+        for (Map.Entry<Rank, Integer> entry : scoreMap.entrySet()) {
+            totalEarning += (long) entry.getKey().getWinningMoney() * entry.getValue();
         }
 
         if (totalEarning == 0) {
@@ -88,7 +88,8 @@ public class LottoGame {
 
     private void calculateGameScore(LottoTicket ticket, WinnerTicket winnerTicket) {
         int score = equalNumberCount(ticket, winnerTicket);
-        lottoResult.add(score);
+        boolean matchBonus = winnerTicket.matchBonus(ticket);
+        lottoResult.add(score, matchBonus);
     }
 
     private static void isValidPurchasePrice(int purchasePrice) {
