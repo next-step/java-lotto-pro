@@ -26,7 +26,7 @@ public class WinningStatisticsTest {
     public void calculateReturnRate() {
         //given
         WinningStatistics winningStatistics = new WinningStatistics();
-        winningStatistics.addLottoRanking(LottoRanking.FOURTH_PRIZE);
+        winningStatistics.addLottoRanking(LottoRanking.FIFTH_PRIZE);
         double expectedReturnRate = 0.35;
         //when
         double actualReturnRate = winningStatistics.calculateRateOfReturn(14_000);
