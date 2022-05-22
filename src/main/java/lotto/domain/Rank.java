@@ -2,17 +2,18 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum LottoStatistic {
-    SIX_WINNING_AMOUNT(6, 2_000_000_000),
-    FIVE_WINNING_AMOUNT(5, 1_500_000),
-    FOUR_WINNING_AMOUNT(4, 50_000),
-    THREE_WINNING_AMOUNT(3, 5_000),
-    NOTHING(0, 0);
+public enum Rank {
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
     private int matchCount;
     private int winningAmount;
 
-    LottoStatistic(int matchCount, int winningAmount) {
+    Rank(int matchCount, int winningAmount) {
         this.matchCount = matchCount;
         this.winningAmount = winningAmount;
     }
@@ -25,11 +26,11 @@ public enum LottoStatistic {
         return this.winningAmount;
     }
 
-    public static LottoStatistic valueOf(int matchCount) {
+    public static Rank valueOf(int matchCount) {
         return Arrays.stream(values())
                 .filter(lottoStatistic -> lottoStatistic.matchCount == matchCount)
                 .findFirst()
-                .orElse(LottoStatistic.NOTHING);
+                .orElse(Rank.MISS);
     }
 
     public double calculatorProfit(int n) {

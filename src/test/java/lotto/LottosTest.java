@@ -25,8 +25,8 @@ public class LottosTest {
         lottoList.add(LottoFactory.manualGenerator(input[1]));
         Lottos lottos = new Lottos(lottoList);
         Lotto winningLotto = LottoFactory.manualGenerator(input[0]);
-        List<LottoStatistic> list = lottos.matchLottoStatic(winningLotto);
-        assertThat(list.get(0)).isEqualTo(LottoStatistic.valueOf(6));
-        assertThat(list.get(1)).isEqualTo(LottoStatistic.valueOf(3));
+        List<Rank> list = lottos.matchLottoStatic(winningLotto);
+        assertThat(list.get(0)).isEqualTo(Rank.valueOf(6));
+        assertThat(list.get(1)).isEqualTo(Rank.valueOf(3));
     }
 }
