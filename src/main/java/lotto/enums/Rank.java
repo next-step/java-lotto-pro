@@ -2,7 +2,12 @@ package lotto.enums;
 
 import lotto.model.Prize;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static lotto.constants.LottoConstant.MIN_WINNING_RANK;
 
@@ -17,6 +22,8 @@ public enum Rank {
 
     private final int matchingCount;
     private final Prize prize;
+    private final static Map<Integer, Rank> ranks = Collections.unmodifiableMap(Stream.of(values())
+            .collect(Collectors.toMap(Rank::getMatchingCount, Function.identity())));
 
     Rank(int matchingCount, Prize prize) {
         this.matchingCount = matchingCount;
@@ -24,14 +31,16 @@ public enum Rank {
     }
 
     public static Rank getRank(int numberOfMatch) {
-        return Arrays.stream(values())
-                .filter(rank -> rank.matchingCount == numberOfMatch)
-                .findAny()
+        return Optional.ofNullable(ranks.get(numberOfMatch))
                 .orElse(LOSE);
     }
 
     public Prize getPrize() {
         return prize;
+    }
+
+    public int getMatchingCount() {
+        return matchingCount;
     }
 
     public Prize getPrizeWithCount(int count) {
