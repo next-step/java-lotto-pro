@@ -24,8 +24,8 @@ class LottosTest {
         lottoList.add(createLotto(new int[]{1, 2, 3, 4, 5, 6}));
         lottoList.add(createLotto(new int[]{1, 2, 3, 4, 5, 7}));
         lottoList.add(createLotto(new int[]{1, 2, 3, 4, 5, 8}));
-        lottoList.add(createLotto(new int[]{1, 2, 3, 4, 7, 8}));
-        lottoList.add(createLotto(new int[]{1, 2, 3, 7, 8, 9}));
+        lottoList.add(createLotto(new int[]{1, 2, 3, 4, 8, 9}));
+        lottoList.add(createLotto(new int[]{1, 2, 3, 8, 9, 10}));
 
         lottos = Lottos.from(lottoList);
     }
@@ -42,7 +42,6 @@ class LottosTest {
 
     @Test
     void 셋업에_맞는_당첨_로또_리스트_반환() {
-
         assertAll(
                 () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.FIRST).size()).isEqualTo(1),
                 () -> assertThat(lottos.matchedLottoList(winningNumbers, MatchResult.SECOND).size()).isEqualTo(1),

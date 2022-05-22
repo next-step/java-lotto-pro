@@ -35,14 +35,14 @@ class LottoTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1:2:3:4:5:6:true:6",
+            "1:2:3:4:5:6:false:6",
             "1:2:3:4:5:45:true:5",
             "1:2:3:4:5:7:false:5",
-            "1:2:3:4:7:8:true:4",
-            "1:2:3:7:8:9:true:3",
-            "1:2:7:8:9:10:true:2",
-            "1:7:8:9:10:11:true:1",
-            "7:8:9:10:11:12:true:0"},
+            "1:2:3:4:7:8:false:4",
+            "1:2:3:7:8:9:false:3",
+            "1:2:7:8:9:10:false:2",
+            "1:7:8:9:10:11:false:1",
+            "7:8:9:10:11:12:false:0"},
             delimiter = ':')
     void 로또번호와_당첨번호에_따른_매치결과_반환(int input0, int input1, int input2, int input3, int input4, int input5,
                                 boolean isBonus, int matchCount) {
