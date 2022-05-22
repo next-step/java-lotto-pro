@@ -12,7 +12,7 @@ public class LottoStore {
 
     public List<LottoTicket> buy(Money money) {
         List<LottoTicket> lottoAutoNumbers = new ArrayList<>();
-        for (int i = 0; i < ticketCount(money.getMoney()); i++) {
+        for (int i = 0; i < money.ticketCount(); i++) {
             lottoAutoNumbers.add(makeAuto());
         }
         return lottoAutoNumbers;
@@ -34,9 +34,5 @@ public class LottoStore {
 
     private static List<LottoNumber> subList(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.subList(0, LOTTO_SIZE);
-    }
-
-    private int ticketCount(int money) {
-        return money / LOTTO_PRICE;
     }
 }
