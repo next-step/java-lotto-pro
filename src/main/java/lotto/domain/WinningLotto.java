@@ -42,9 +42,7 @@ public class WinningLotto {
 
     private boolean hasDuplicatedLottoNumber(LottoNumber[] numbers, LottoNumber bonusNumber) {
         Set<LottoNumber> nonDuplicatedNumbers = new HashSet<>(Arrays.asList(numbers));
-        nonDuplicatedNumbers.add(bonusNumber);
-
-        return nonDuplicatedNumbers.size() != numbers.length + 1;
+        return nonDuplicatedNumbers.size() != numbers.length || nonDuplicatedNumbers.contains(bonusNumber);
     }
 
 
