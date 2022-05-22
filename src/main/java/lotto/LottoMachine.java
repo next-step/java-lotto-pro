@@ -17,12 +17,14 @@ public class LottoMachine {
         return NUMBERS.subList(0, 6);
     }
 
-    public Lottos buy(int price) {
-        int quantity = getQuantity(price);
-        return new Lottos(quantity);
+    public Lottos buy(int autoQuantity, List<String[]> numbersArray) {
+        Lottos lottos = new Lottos(autoQuantity);
+        List<Lotto> passiveLottos = numbersArray.stream().map(Lotto::new).collect(Collectors.toList());
+        lottos.addLottos(passiveLottos);
+        return lottos;
     }
 
-    private int getQuantity(int price) {
+    public int getQuantity(int price) {
         if (!isCorrect(price)) {
             throw new IllegalArgumentException("금액이 올바르지 않습니다.");
         }

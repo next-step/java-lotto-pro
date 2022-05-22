@@ -6,11 +6,10 @@ import lotto.Rank;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class ResultView {
 
-    private static final String PRINT_QUANTITY_MESSAGE = "%d개를 구매했습니다.";
+    private static final String PRINT_QUANTITY_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String STATISTICS_HEADER_MESSAGE = "당첨 통계";
     private static final String LINE = "---------";
     private static final String STATISTICS_MESSAGE = "%d개 일치 (%d원) - %d개";
@@ -24,8 +23,8 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printQuantity(int quantity) {
-        System.out.printf((PRINT_QUANTITY_MESSAGE) + "%n", quantity);
+    public static void printQuantity(int passiveQuantity, int autoQuantity) {
+        System.out.printf((PRINT_QUANTITY_MESSAGE) + "%n", passiveQuantity, autoQuantity);
     }
 
     ;

@@ -14,6 +14,10 @@ public class Lottos {
         }
     }
 
+    public void addLottos(List<Lotto> passiveLottos) {
+        this.lottos.addAll(passiveLottos);
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }
