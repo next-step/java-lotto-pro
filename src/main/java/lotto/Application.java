@@ -4,7 +4,6 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.Map;
 
 public class Application {
 
@@ -22,9 +21,8 @@ public class Application {
         WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), new Number(bonusNumber));
 
         List<Rank> ranks = lottos.getRanks(winningLotto);
-        Map<Rank, Integer> gameResult = lottoMachine.getGameResult(ranks);
 
-        ResultView.printStatistics(gameResult);
+        ResultView.printStatistics(ranks);
         ResultView.printProfitRate(lottoMachine.getProfitRate(price, ranks));
     }
 

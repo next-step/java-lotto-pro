@@ -13,7 +13,7 @@ public class Lotto {
 
     public Lotto(int[] numbers) {
         checkSize(numbers);
-        Arrays.stream(numbers).forEach(this::addNumber);
+        Arrays.stream(numbers).forEach(number -> this.addNumber(new Number(number)));
     }
 
     public Lotto(String[] numbers) {
@@ -25,20 +25,22 @@ public class Lotto {
     }
 
     public int getCount(Lotto winningLotto) {
-        return (int) winningLotto.getNumber().stream().filter(numbers::contains).count();
+        return (int) winningLotto.getNumber().stream()
+                .filter(numbers::contains)
+                .count();
     }
 
     private void checkSize(int[] numbers) {
         if (numbers.length != NUMBER_SIZE) {
-            throw new IllegalArgumentException("숫자의 개수가 맞지 않습니다.");
+            throw new IllegalArgumentException("로또의 번호는 6개만 가능합니다.");
         }
     }
 
-    private void addNumber(int number) {
-        if (isContains(new Number(number))) {
+    private void addNumber(Number number) {
+        if (isContains(number)) {
             throw new IllegalArgumentException("중복된 숫자는 사용할 수 없습니다.");
         }
-        this.numbers.add(new Number(number));
+        this.numbers.add(number);
     }
 
     public boolean isContains(Number number) {
@@ -49,7 +51,8 @@ public class Lotto {
         int count = (int) this.numbers.stream()
                 .filter(number -> winningLotto.getLotto().isContains(number))
                 .count();
-        return Rank.fromCountAndIsBonusMatch(count, numbers.contains(winningLotto.getBonus()));
+        boolean isBonusMatch = numbers.contains(winningLotto.getBonus());
+        return Rank.fromCountAndIsBonusMatch(count, isBonusMatch);
     }
 
     public List<Integer> getNumberValues() {

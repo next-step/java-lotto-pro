@@ -61,7 +61,6 @@ class LottoTest {
     void 당첨_결과_확인_2등_포함(Lotto lotto, WinningLotto winningLotto, Rank rank) {
 
         assertThat(lotto.getRank(winningLotto)).isEqualTo(rank);
-        assertThat(lotto.getRank(winningLotto)).isEqualTo(rank);
     }
 
     static Stream<Arguments> getRankTestParameter() {

@@ -1,9 +1,7 @@
 package lotto;
 
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -42,14 +40,6 @@ public class LottoMachine {
 
     private int getMoneySum(List<Rank> ranks) {
         return ranks.stream().mapToInt(Rank::getWinningMoney).sum();
-    }
-
-    public Map<Rank, Integer> getGameResult(List<Rank> ranks) {
-        Map<Rank, Integer> gameResult = new LinkedHashMap<>();
-        for (Rank value : Rank.values()) {
-            gameResult.put(value, (int) ranks.stream().filter(rank -> rank.equals(value)).count());
-        }
-        return gameResult;
     }
 
 }
