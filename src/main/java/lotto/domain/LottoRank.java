@@ -1,6 +1,12 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum LottoRank {
     LOSE(0, 0),
@@ -17,11 +23,12 @@ public enum LottoRank {
         this.prize = prize;
     }
 
+    private static final Map<Integer, LottoRank> LOTTO_RANK_MAP =
+        Collections.unmodifiableMap(Stream.of(values())
+            .collect(Collectors.toMap(LottoRank::getMatchCount, Function.identity())));
+
     public static LottoRank findMatch(int matchCount) {
-        return Arrays.stream(values())
-            .filter(rank -> rank.matchCount == matchCount)
-            .findFirst()
-            .orElse(LOSE);
+        return Optional.ofNullable(LOTTO_RANK_MAP.get(matchCount)).orElse(LOSE);
     }
 
     public int getMatchCount() {
