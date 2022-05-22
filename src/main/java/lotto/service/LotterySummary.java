@@ -1,69 +1,62 @@
 package lotto.service;
 
-import lotto.model.*;
 import lotto.model.Number;
+import lotto.model.*;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LotterySummary {
-    private static final int MINIMUM_WINNING_NUMBERS_MATCH = 3;
-    private static final int MAXIMUM_WINNING_NUMBERS_MATCH = 6;
-
+    private static boolean bonus;
     private static int count;
-    private static Map<Integer, Integer> matches;
-    private static List<Result> results;
+    private static Map<Rank, Integer> ranks;
 
     private LotterySummary() {
     }
 
-    public static Summary createWinningDetails(Lottery winning, Lotteries lotteries) {
+    public static Summary createDetails(Winning details, Lotteries purchase) {
         init();
-        for (Lottery lottery : lotteries.list()) {
+        for (Lottery lottery : purchase.getLotteries()) {
             clear();
-            compare(winning, lottery);
+            compare(lottery, details);
             count();
         }
 
-        for (Map.Entry<Integer, Integer> entry : matches.entrySet()) {
-            summary(entry);
-        }
-        return new Summary(results);
+        return new Summary(ranks);
     }
 
     private static void init() {
-        matches = new HashMap<>();
-        for (int idx = MINIMUM_WINNING_NUMBERS_MATCH; idx <= MAXIMUM_WINNING_NUMBERS_MATCH; idx++) {
-            matches.put(idx, 0);
+        ranks = new LinkedHashMap<>();
+        for (Rank rank : Rank.reverseValues()) {
+            ranks.put(rank, 0);
         }
-        results = new LinkedList<>();
     }
 
     private static void clear() {
+        bonus = false;
         count = 0;
     }
 
-    private static void compare(Lottery winning, Lottery lottery) {
-        for (Number number : lottery.list()) {
-            match(winning, number);
+    private static void compare(Lottery purchase, Winning details) {
+        for (Number number : purchase.getNumbers()) {
+            match(details, number);
+            bonus(details, number);
         }
     }
 
-    private static void match(Lottery winning, Number number) {
-        if (winning.contains(number)) {
+    private static void match(Winning details, Number number) {
+        if (details.getLottery().contains(number)) {
             count++;
         }
     }
 
-    private static void count() {
-        matches.put(count, matches.getOrDefault(count, 0) + 1);
+    private static void bonus(Winning details, Number number) {
+        if (details.getBonusNumber().equals(number)) {
+            bonus = true;
+        }
     }
 
-    private static void summary(Map.Entry<Integer, Integer> entry) {
-        if (entry.getKey() >= MINIMUM_WINNING_NUMBERS_MATCH && entry.getKey() <= MAXIMUM_WINNING_NUMBERS_MATCH) {
-            results.add(new Result(entry.getKey(), entry.getValue()));
-        }
+    private static void count() {
+        ranks.put(Rank.valueOf(count, bonus), ranks.get(Rank.valueOf(count, bonus)) + 1);
     }
 }
