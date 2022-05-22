@@ -21,8 +21,4 @@ public class LottoRanks {
         }
         return prize;
     }
-
-    public int size() {
-        return lottoRanks.size();
-    }
 }
