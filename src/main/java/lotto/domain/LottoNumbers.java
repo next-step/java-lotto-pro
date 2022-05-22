@@ -9,12 +9,6 @@ public class LottoNumbers {
 
     private int SIZE = 6;
 
-//    public LottoNumbers(List<LottoNumber> numbers) {
-//        validateLottoNumbers(numbers);
-//        Collections.sort(numbers);
-//        this.numbers = new ArrayList<>(numbers);
-//    }
-
     public LottoNumbers(List<Integer> numbers) {
         List<LottoNumber> result = convertToLottoNumbers(numbers);
         validateLottoNumbers(result);
