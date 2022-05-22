@@ -12,12 +12,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbersGenerator {
-    private static final List<Integer> LOTTO_NUMBERS_CANDIDATE = generateLottoNumbersCandidate();
+    private static final List<Integer> LOTTO_NUMBERS_CANDIDATE;
 
-    public static List<Integer> generateLottoNumbersCandidate() {
-        return IntStream.rangeClosed(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND)
-                .boxed()
-                .collect(Collectors.toList());
+    static {
+        LOTTO_NUMBERS_CANDIDATE = IntStream.rangeClosed(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND)
+            .boxed()
+            .collect(Collectors.toList());
     }
 
     public static List<Integer> generateLottoNumbers() {
