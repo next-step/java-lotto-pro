@@ -3,8 +3,6 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.view.ResultView.printPurchaseCountView;
-
 public class Purchase {
     private final Money purchaseAmount;
     private final int count;
@@ -32,7 +30,7 @@ public class Purchase {
         return purchaseAmount;
     }
 
-    public void printPurchaseCount() {
-        printPurchaseCountView(count);
+    public int getCount() {
+        return count;
     }
 }

@@ -1,7 +1,5 @@
 package lotto.model;
 
-import static lotto.view.ResultView.*;
-
 public class Statistics {
     private final RankCount rankCount;
     private final Earning earning;
@@ -15,9 +13,11 @@ public class Statistics {
         return new Statistics(rankCount, earning);
     }
 
-    public void printStatistics() {
-        printStatisticsHeader();
-        printRankCount(rankCount);
-        printEarning(earning);
+    public RankCount getRankCount() {
+        return rankCount;
+    }
+
+    public Earning getEarning() {
+        return earning;
     }
 }
