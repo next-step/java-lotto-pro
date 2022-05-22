@@ -20,6 +20,7 @@ public class LottoGameStarter {
         int gameMoney = InputView.scanGameMoney();
         Lottos lottos = purchaseLottos(gameMoney);
         List<Integer> winnerNumber = inputWinnerNumbers();
+        Integer bonusNumber = inputBonusNumber();
         List<LottoWinner> lottoWinners = calculateLottoResults(lottos, winnerNumber);
         LottosWinnerCounts lottosWinnerCounts = new LottosWinnerCounts(lottoWinners);
         LottosResult lottosResult = new LottosResult(gameMoney, lottosWinnerCounts);
@@ -39,6 +40,11 @@ public class LottoGameStarter {
         InputView.printEnterWinnerNumber();
         List<Integer> winnerNumber = InputView.scanWinnerNumber();
         return winnerNumber;
+    }
+
+    private Integer inputBonusNumber() {
+        InputView.printEnterBonusBall();
+        return InputView.scanBonusBall();
     }
 
     private Lottos purchaseLottos(int gameMoney) {
