@@ -11,12 +11,10 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    private final InputView inputView;
     private final OutputView outputView;
     private final LottoService lottoService;
 
-    public LottoController(InputView inputView, OutputView outputView) {
-        this.inputView = inputView;
+    public LottoController(OutputView outputView) {
         this.outputView = outputView;
         this.lottoService = new LottoService();
     }
@@ -29,7 +27,7 @@ public class LottoController {
     }
 
     private LottoPayment inputLottoPayment(){
-        return new LottoPayment(inputView.inputTotalPayment());
+        return new LottoPayment(InputView.inputTotalPayment());
     }
 
     private LottoGame buyLotto(LottoPayment lottoPayment){
@@ -39,7 +37,7 @@ public class LottoController {
     }
 
     private LottoLine inputWinInformation(){
-        return LottoStringGenerator.toWinLottoLine(inputView.inputLastWeekWinningLottoLine());
+        return LottoStringGenerator.toWinLottoLine(InputView.inputLastWeekWinningLottoLine());
     }
 
     private void printResult(LottoGame lottoGame, LottoLine winLottoLine, LottoPayment lottoPayment){
