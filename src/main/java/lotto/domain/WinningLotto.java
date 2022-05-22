@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 import static lotto.constants.Message.INPUT_BONUS_ERROR;
 
 public class WinningLotto {
@@ -20,5 +22,17 @@ public class WinningLotto {
         if (count > 0) {
             throw new IllegalArgumentException(INPUT_BONUS_ERROR);
         }
+    }
+
+    public int match(Lotto target) {
+        int count = (int) target.getLottoNumbers().stream()
+                .filter(lottoNumber -> this.winningNumbers.getLottoNumbers().contains(lottoNumber))
+                .count();
+
+        return count;
+    }
+
+    public boolean isContainsBonus(Lotto target) {
+        return target.getLottoNumbers().contains(this.bonusNumber);
     }
 }

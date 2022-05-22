@@ -14,15 +14,15 @@ public class Lottos {
         return this.lottoList;
     }
 
-    public List<Rank> matchLottoStatic(Lotto winningLotto) {
+    public List<Rank> matchLottoStatic(WinningLotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : this.lottoList) {
-            ranks.add(Rank.valueOf(winningLotto.match(lotto)));
+            ranks.add(Rank.valueOf(winningLotto.match(lotto), winningLotto.isContainsBonus(lotto)));
         }
         return ranks;
     }
 
-    public Map<Rank, Integer> matchLottoStaticToString(Lotto winningLotto) {
+    public Map<Rank, Integer> matchLottoStaticToString(WinningLotto winningLotto) {
         Map<Rank, Integer> map = new HashMap<>();
         List<Rank> ranks = matchLottoStatic(winningLotto);
         ranks.stream()
