@@ -1,5 +1,6 @@
 package lottoauto.util;
 
+import lottoauto.service.InputNumberValidator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

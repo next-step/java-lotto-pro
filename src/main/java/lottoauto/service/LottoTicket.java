@@ -1,6 +1,7 @@
 package lottoauto.service;
 
 import lottoauto.wrapper.Lotto;
+import lottoauto.wrapper.Number;
 import lottoauto.wrapper.Price;
 
 import java.util.ArrayList;
@@ -8,7 +9,6 @@ import java.util.List;
 
 public class LottoTicket {
     List<Lotto> listLotto;
-
     public LottoTicket() {
         this.listLotto = new ArrayList<>();
     }

@@ -1,6 +1,5 @@
 package lottoauto.wrapper;
 
-import lottoauto.util.InputNumberValidator;
 import lottoauto.util.RandomNumberExtractor;
 
 import java.util.ArrayList;
@@ -21,8 +20,8 @@ public class Lotto {
 
 
     private void checkLength(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new ArrayIndexOutOfBoundsException("6개의 숫자가 필요합니다.");
+        if (numbers.size() != 7) {
+            throw new ArrayIndexOutOfBoundsException("6개의 숫자+보너스 숫자가 필요합니다.");
         }
     }
 

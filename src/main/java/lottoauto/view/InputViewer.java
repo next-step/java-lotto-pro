@@ -1,10 +1,11 @@
 package lottoauto.view;
 
 import lottoauto.service.LottoTicket;
-import lottoauto.util.InputNumberValidator;
+import lottoauto.service.InputNumberValidator;
 import lottoauto.util.WinnerChecker;
-import lottoauto.wrapper.LottoCount;
+import lottoauto.util.Rank;
 import lottoauto.wrapper.Lotto;
+import lottoauto.wrapper.Number;
 import lottoauto.wrapper.Price;
 
 import java.util.HashMap;
@@ -36,6 +37,9 @@ public class InputViewer {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
         InputNumberValidator inputNumberValidator = new InputNumberValidator(sc.nextLine());
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Number bonusBall = new Number(sc.nextLine());
+        inputNumberValidator.addBonusNumber(bonusBall.getNumber());
         Lotto winNumbers = new Lotto(inputNumberValidator.getNumbers());
 
         makeDefaultWinnerMap(winnerMap);
@@ -47,9 +51,9 @@ public class InputViewer {
     }
 
     private void makeDefaultWinnerMap(Map<Integer, Integer> winnerMap) {
-        winnerMap.put(LottoCount.FIRST.getValue(), 0);
-        winnerMap.put(LottoCount.SECOND.getValue(), 0);
-        winnerMap.put(LottoCount.THIRD.getValue(), 0);
-        winnerMap.put(LottoCount.FOURTH.getValue(), 0);
+        winnerMap.put(Rank.FIRST.getLottoRank(), 0);
+        winnerMap.put(Rank.SECOND.getLottoRank(), 0);
+        winnerMap.put(Rank.THIRD.getLottoRank(), 0);
+        winnerMap.put(Rank.FOURTH.getLottoRank(), 0);
     }
 }

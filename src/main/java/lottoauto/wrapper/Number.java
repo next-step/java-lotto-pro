@@ -16,6 +16,14 @@ public class Number {
         this.number = number;
     }
 
+    public Number(String bonusNumber) {
+        try {
+            this.number = Integer.parseInt(bonusNumber);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(INVALID_VALUE);
+        }
+    }
+
 
     public int getNumber() {
         return this.number;

@@ -1,4 +1,4 @@
-package lottoauto.util;
+package lottoauto.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +26,10 @@ public class InputNumberValidator {
         return "InputNumberValidator{" +
                 "numbers=" + numbers +
                 '}';
+    }
+
+    public void addBonusNumber(int bonusNumber) {
+        this.numbers.add(bonusNumber);
     }
 
     public List<Integer> getNumbers() {
