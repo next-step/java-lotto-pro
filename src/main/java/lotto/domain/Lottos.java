@@ -25,11 +25,12 @@ public class Lottos {
         return lottos;
     }
 
-    public Map<Lotto, LottoRank> lottoWinningResult(Lotto answerLotto) {
+    public Map<Lotto, LottoRank> lottoWinningResult(LottoWinning lottoWinning) {
         Map<Lotto, LottoRank> lottoRankMap = new HashMap<>();
-        this.lottos.forEach(lotto ->
-            lottoRankMap.put(lotto, lotto.checkLottoRank(answerLotto))
+        this.lottos.forEach(
+                lotto -> lottoRankMap.put(lotto, lotto.checkLottoRank(lottoWinning))
         );
+
         return lottoRankMap;
     }
 }

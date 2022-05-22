@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.type.LottoRank;
 
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,25 +13,27 @@ public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<Integer> lottoNumbers) {
-        if ((long) lottoNumbers.size() != LOTTO_NUMBER_SIZE)
-            throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_SIZE);
+        checkValidationLottoNumberSize(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 
-    public LottoRank checkLottoRank(Lotto answerLotto) {
-        return LottoRank.findLottoRankByMatchedCount(countMatchedNumber(answerLotto));
+    private void checkValidationLottoNumberSize(Set<Integer> lottoNumbers) {
+        if ((long) lottoNumbers.size() != LOTTO_NUMBER_SIZE)
+            throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_SIZE);
     }
 
-    public int countMatchedNumber(Lotto answerLotto) {
-        Set<Integer> answerLottoNumbers = answerLotto.getLottoNumbers().stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toSet());
+    public LottoRank checkLottoRank(LottoWinning lottoWinning) {
+        final int ballLottoNumberMatchedCount = countMatchedLottoNumber(lottoWinning.getAnswerLotto());
 
-        return (int) lottoNumbers.stream()
-                .filter(number -> answerLottoNumbers.contains(number.getNumber()))
+        return LottoRank.findLottoRankByMatchedCount(ballLottoNumberMatchedCount, lottoNumbers.contains(lottoWinning.getBonusLottoNumber()));
+    }
+
+    public int countMatchedLottoNumber(Lotto answerLotto) {
+        return (int) answerLotto.getLottoNumbers().stream()
+                .filter(lottoNumbers::contains)
                 .count();
     }
 

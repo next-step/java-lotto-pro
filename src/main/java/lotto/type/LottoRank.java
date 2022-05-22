@@ -1,20 +1,26 @@
 package lotto.type;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.BiPredicate;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
 
-    FIST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
-    NONE(0, 0);
+    FIRST(6, 2000000000, false),
+    SECOND(5, 30000000, true),
+    THIRD(5, 1500000, false),
+    FOURTH(4, 50000, false),
+    FIFTH(3, 5000, false),
+    NONE(0, 0, false);
     private final int matchedCount;
     private final int price;
+    private final boolean isBonusBallCheck;
 
-    LottoRank(int matchedCount, int price) {
+    LottoRank(int matchedCount, int price, boolean isBonusBallCheck) {
         this.matchedCount = matchedCount;
         this.price = price;
+        this.isBonusBallCheck = isBonusBallCheck;
     }
 
     public int getMatchedCount() {
@@ -25,9 +31,11 @@ public enum LottoRank {
         return price;
     }
 
-    public static LottoRank findLottoRankByMatchedCount(int matchedCount) {
+    public static LottoRank findLottoRankByMatchedCount(int matchedCount, boolean isMatchedBonusBall) {
+        BiPredicate<Integer, Boolean> lottoRankBiPredicate = (count, isCheck) -> count == matchedCount && isCheck == isMatchedBonusBall;
+
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.getMatchedCount() == matchedCount)
+                .filter(lottoRank -> lottoRankBiPredicate.test(lottoRank.getMatchedCount(), lottoRank.isBonusBallCheck))
                 .findFirst()
                 .orElse(NONE);
     }
