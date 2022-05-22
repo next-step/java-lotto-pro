@@ -55,7 +55,7 @@ public class ManualAttemptsCountTest {
         final Price price = Price.of(15000);
         return Stream.of(
             Arguments.of(-1, price, "수동 로또 구매 횟수가 음수인 경우"),
-            Arguments.of(price.calculateTryCount() + 1, price, "수동 로또 구매 횟수가 구매 금액을 벗어나는 경우")
+            Arguments.of(price.calculateAttemptsCount() + 1, price, "수동 로또 구매 횟수가 구매 금액을 벗어나는 경우")
         );
     }
 }

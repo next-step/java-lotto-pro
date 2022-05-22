@@ -46,7 +46,7 @@ class PriceTest {
         final int expected = given / MINIMUM_LOTTO_PRICE;
 
         // When & Then
-        assertThat(Price.of(given).calculateTryCount()).isEqualTo(expected);
+        assertThat(Price.of(given).calculateAttemptsCount()).isEqualTo(expected);
     }
 }
 

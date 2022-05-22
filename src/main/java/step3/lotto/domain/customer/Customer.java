@@ -30,7 +30,7 @@ public class Customer {
     }
 
     public int getTryCount() {
-        return price.calculateTryCount();
+        return price.calculateAttemptsCount();
     }
 
     public Lottos getLottos() {

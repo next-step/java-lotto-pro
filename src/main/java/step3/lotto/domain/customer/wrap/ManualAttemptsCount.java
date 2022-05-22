@@ -22,7 +22,7 @@ public class ManualAttemptsCount {
     }
 
     private static void validateManualAttemptsCount(int manualAttemptsCount, Price price) {
-        if (manualAttemptsCount < 0 || manualAttemptsCount > price.calculateTryCount()) {
+        if (manualAttemptsCount < 0 || manualAttemptsCount > price.calculateAttemptsCount()) {
             throw new IllegalArgumentException(INVALID_MANUAL_ATTEMPTS_COUNT_RANGE_ERROR);
         }
     }
