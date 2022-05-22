@@ -1,11 +1,11 @@
 package lotto.controller;
 
+import lotto.generator.WinningLottoNumbersGenerator;
 import lotto.model.*;
 import lotto.view.ResultView;
 
 import static lotto.utils.InputUtils.*;
 import static lotto.view.InputView.readPurchaseAmount;
-import static lotto.view.InputView.readWinningNumbers;
 
 public class LottoController {
 
@@ -16,7 +16,7 @@ public class LottoController {
         Lottos lottos = purchaseInfo.createLottos();
         lottos.printLottos();
 
-        LottoNumbers winningNumbers = LottoNumbers.createWinningNumbers(convertToIntegerList(splitWithDelimiter(readWinningNumbers())));
+        LottoNumbers winningNumbers = LottoNumbers.createLottoNumbers(new WinningLottoNumbersGenerator());
 
         RankCount rankCount = lottos.rankCount(winningNumbers);
         Earning earningRate = rankCount.earningRate(purchaseInfo);

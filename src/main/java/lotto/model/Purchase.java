@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.generator.AutoLottoNumbersGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class Purchase {
     public Lottos createLottos() {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoNumbers.add(LottoNumbers.createLottoNumbers());
+            lottoNumbers.add(LottoNumbers.createLottoNumbers(new AutoLottoNumbersGenerator()));
         }
         return Lottos.from(lottoNumbers);
     }
