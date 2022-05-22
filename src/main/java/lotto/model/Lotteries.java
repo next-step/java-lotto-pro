@@ -21,7 +21,7 @@ public class Lotteries {
         return lotteries == null;
     }
 
-    public List<Lottery> list() {
+    public List<Lottery> getLotteries() {
         return Collections.unmodifiableList(lotteries);
     }
 
